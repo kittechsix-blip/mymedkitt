@@ -1906,7 +1906,7 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'psych-triage',
                 title: 'Psych Triage',
-                subtitle: 'Symptom-Based Entry → Agitation → Suicidal → Psychosis → Withdrawal → Medical Clearance',
+                subtitle: 'Symptom-Based Entry → Medical Stability → Agitation → Suicidal → Psychosis → Withdrawal',
                 categoryId: 'psychiatry',
                 version: '1.0',
                 nodeCount: 12,
@@ -1932,8 +1932,8 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'medical-clearance-psych',
-                title: 'Medical Clearance - Psych',
-                subtitle: 'Organic vs Psychiatric → Red Flags → Labs → Delirium vs Psychosis → Documentation',
+                title: 'Psych Medical Stability',
+                subtitle: 'Medical Assessment → Red Flags → Targeted Labs → Delirium vs Psychosis → Documentation',
                 categoryId: 'psychiatry',
                 version: '1.0',
                 nodeCount: 22,
@@ -1978,7 +1978,7 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'capacity-assessment',
                 title: 'Capacity Assessment',
-                subtitle: 'Aid4 Framework → Appreciate • Infer • Decide • Understand → Documentation',
+                subtitle: 'Four Abilities → Understanding • Appreciation • Reasoning • Communication → Documentation',
                 categoryId: 'psychiatry',
                 version: '1.0',
                 nodeCount: 14,

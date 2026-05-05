@@ -7,7 +7,7 @@ import type { Citation } from './neurosyphilis.js';
 
 export const ACUTE_PSYCHOSIS_CRITICAL_ACTIONS = [
   { text: 'New-onset psychosis age >45 = medical cause until proven otherwise', nodeId: 'ap-start' },
-  { text: '20% of first-break psychosis has organic etiology - always workup', nodeId: 'ap-workup' },
+  { text: 'First-break psychosis needs targeted medical assessment - red flags drive expanded workup', nodeId: 'ap-workup' },
   { text: 'Anti-NMDA receptor encephalitis: young women, prodrome, movement disorders', nodeId: 'ap-nmda' },
   { text: 'Rule out delirium: acute onset, fluctuating, inattention, visual hallucinations', nodeId: 'ap-delirium' },
 ];
@@ -30,7 +30,7 @@ export const ACUTE_PSYCHOSIS_NODES: DecisionNode[] = [
       { label: 'Currently Agitated', description: 'Safety first - de-escalate before workup', next: 'ap-agitated', urgency: 'critical' },
     ],
     citation: [1],
-    summary: 'Assess first-break vs known psychiatric patient. Organic cause in 20%.',
+    summary: 'Assess first-break vs known psychiatric patient. Red flags drive medical workup intensity.',
   },
 
   {
@@ -78,10 +78,10 @@ export const ACUTE_PSYCHOSIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'First-Break Psychosis Workup',
-    body: '**20% of first-break psychosis has organic etiology:**\n\n**Standard workup:**\n* CBC, CMP, glucose\n* TSH (hyper/hypothyroid)\n* Urinalysis (UTI in elderly)\n* Urine drug screen\n* B12, folate\n* RPR/VDRL (syphilis)\n* HIV (if risk factors)\n* ECG (baseline before antipsychotics)\n\n**Consider if indicated:**\n* Ammonia (hepatic encephalopathy)\n* Blood alcohol level\n* Heavy metals (lead, mercury)\n* Ceruloplasmin (Wilson\'s disease if <40)\n* ANA, ESR (autoimmune)',
+    body: '**Targeted first-break psychosis workup:**\n\nMedical/neurologic causes are uncommon in low-risk young adults but high-impact when missed. Use red flags to decide how broad to go.\n\n**Core ED assessment:**\n* Full vitals, glucose, medication/substance history\n* CBC, CMP, glucose\n* TSH when thyroid symptoms, mood syndrome, or unclear cause\n* Urinalysis if urinary symptoms, pregnancy concern, elderly, or delirium concern\n* Urine drug screen when substance-induced symptoms are plausible\n* ECG before QT-prolonging antipsychotics or if overdose/cardiac risk\n\n**Consider when risk factors or red flags:**\n* B12, folate\n* RPR/VDRL and HIV based on risk, local protocol, or atypical presentation\n* Ammonia (hepatic encephalopathy)\n* Blood alcohol level\n* Heavy metals (lead, mercury)\n* Ceruloplasmin (Wilson\'s disease if <40)\n* ANA, ESR (autoimmune)',
     citation: [4],
     next: 'ap-imaging',
-    summary: 'First-break psychosis: CBC, CMP, TSH, B12, RPR, HIV, UDS, ECG.',
+    summary: 'First-break psychosis: vitals/glucose plus targeted labs; broaden with age, red flags, substance, or neurologic features.',
   },
 
   {
@@ -100,14 +100,14 @@ export const ACUTE_PSYCHOSIS_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Neuroimaging',
-    body: '**When to image:**\n\n**CT head indicated if:**\n* First episode psychosis (controversial but often done)\n* Age >45\n* Focal neurological deficits\n* Headache\n* Recent head trauma\n* Papilledema\n* Atypical presentation\n\n**MRI preferred if:**\n* Concern for encephalitis\n* Demyelinating disease\n* Small lesions missed on CT\n\n**Yield of routine imaging:**\n* Abnormalities in 5-15% of first-break psychosis\n* Clinically significant findings in 2-5%\n* Higher yield with focal neuro signs, late onset',
+    body: '**When to image:**\n\n**CT head indicated in the ED if:**\n* Age >45 with first psychiatric symptoms\n* Focal neurological deficits\n* Headache, seizure, or decreased consciousness\n* Recent head trauma\n* Papilledema\n* Anticoagulation or immunosuppression\n* Atypical presentation or delirium features\n\n**MRI preferred if:**\n* Concern for encephalitis\n* Demyelinating disease\n* Subacute neurologic symptoms\n* Small lesions missed on CT\n* Stable first-episode psychosis needing non-emergent structural evaluation\n\n**Yield of routine imaging:**\n* Clinically relevant findings are low without neurologic or atypical features\n* Yield rises with focal neuro signs, late onset, delirium, trauma, headache, or seizures',
     options: [
       { label: 'Imaging Normal', description: 'No structural cause identified', next: 'ap-delirium' },
       { label: 'Abnormality Found', description: 'Structural lesion, stroke, or other finding', next: 'ap-organic-cause' },
       { label: 'Deferring Imaging', description: 'Clinical judgment: low suspicion', next: 'ap-delirium' },
     ],
     citation: [4, 5],
-    summary: 'CT head for first-break psychosis if >45, focal deficits, or atypical features.',
+    summary: 'Image first-break psychosis based on risk factors: age >45, focal deficits, headache/seizure, trauma, delirium, atypical features.',
   },
 
   {
@@ -130,7 +130,7 @@ export const ACUTE_PSYCHOSIS_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Delirium vs Primary Psychosis',
-    body: '**Critical distinction - treatment differs:**\n\n| Feature | Delirium | Primary Psychosis |\n|---------|----------|------------------|\n| **Onset** | Hours-days | Weeks-months |\n| **Course** | Fluctuating | Stable |\n| **Attention** | Impaired | Intact |\n| **Hallucinations** | Visual | Auditory |\n| **Orientation** | Disoriented | Oriented |\n| **Sleep-wake** | Disrupted | Variable |\n| **Vital signs** | Often abnormal | Usually normal |\n| **Medical cause** | Present | Absent |\n\n**If delirium suspected:**\n-> [Medical Clearance - Psych](#/tree/medical-clearance-psych)',
+    body: '**Critical distinction - treatment differs:**\n\n| Feature | Delirium | Primary Psychosis |\n|---------|----------|------------------|\n| **Onset** | Hours-days | Weeks-months |\n| **Course** | Fluctuating | Stable |\n| **Attention** | Impaired | Intact |\n| **Hallucinations** | Visual | Auditory |\n| **Orientation** | Disoriented | Oriented |\n| **Sleep-wake** | Disrupted | Variable |\n| **Vital signs** | Often abnormal | Usually normal |\n| **Medical cause** | Present | Absent |\n\n**If delirium suspected:**\n-> [Psych Medical Stability](#/tree/medical-clearance-psych)',
     options: [
       { label: 'Delirium Features Present', description: 'Fluctuating, inattentive, visual hallucinations', next: 'ap-delirium-yes', urgency: 'urgent' },
       { label: 'Primary Psychosis Likely', description: 'Stable, auditory hallucinations, intact attention', next: 'ap-nmda-screen' },
@@ -144,7 +144,7 @@ export const ACUTE_PSYCHOSIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Delirium Identified',
-    body: '**Delirium is a medical emergency:**\n\n**-> [Medical Clearance - Psych](#/tree/medical-clearance-psych)**\n\n**This is NOT a psychiatric admission.**\n\n**Search for cause:**\n* Infection (UTI, pneumonia, meningitis)\n* Metabolic (glucose, sodium, calcium)\n* Drugs (anticholinergics, benzos, opioids, withdrawal)\n* Hypoxia, hypercapnia\n* Urinary retention, fecal impaction\n* Pain\n\n**Avoid:**\n* Antipsychotics as first-line (unless severe agitation)\n* Benzodiazepines (worsen delirium, except in withdrawal)\n* Physical restraints (increase mortality)',
+    body: '**Delirium is a medical emergency:**\n\n**-> [Psych Medical Stability](#/tree/medical-clearance-psych)**\n\n**This is NOT a psychiatric admission.**\n\n**Search for cause:**\n* Infection (UTI, pneumonia, meningitis)\n* Metabolic (glucose, sodium, calcium)\n* Drugs (anticholinergics, benzos, opioids, withdrawal)\n* Hypoxia, hypercapnia\n* Urinary retention, fecal impaction\n* Pain\n\n**Avoid:**\n* Antipsychotics as first-line (unless severe agitation)\n* Benzodiazepines (worsen delirium, except in withdrawal)\n* Physical restraints (increase mortality)',
     citation: [6],
     next: 'ap-disposition',
     summary: 'Delirium identified - NOT psych admission. Treat underlying cause.',
@@ -215,10 +215,10 @@ export const ACUTE_PSYCHOSIS_NODES: DecisionNode[] = [
     type: 'result',
     module: 5,
     title: 'Psychosis Disposition',
-    body: '**Disposition depends on etiology and safety:**\n\n**Psychiatric admission if:**\n* Danger to self or others\n* Unable to care for self\n* First-break psychosis (for stabilization, family education)\n* Needs medication titration\n* Involuntary hold criteria met\n\n**Medical admission if:**\n* Organic cause identified\n* Delirium\n* Anti-NMDA encephalitis or other autoimmune\n* Abnormal vital signs\n\n**Discharge (rare for first-break):**\n* Mild symptoms, good insight\n* Strong support system\n* Outpatient follow-up arranged within 7 days\n* No safety concerns\n\n**Follow-up:** First-episode psychosis clinic, early intervention program if available.',
-    recommendation: 'Admit most first-break psychosis. Psychiatric if primary, medical if organic cause. Early intervention improves outcomes.',
+    body: '**Disposition depends on etiology, safety, function, and follow-up reliability:**\n\n**Psychiatric admission if:**\n* Danger to self or others\n* Unable to care for self / grave disability\n* Severe disorganization, agitation, or command hallucinations\n* Needs medication initiation/titration with monitoring\n* Involuntary hold criteria met\n* First-break psychosis without reliable support or rapid follow-up\n\n**Medical admission if:**\n* Organic cause identified\n* Delirium\n* Anti-NMDA encephalitis or other autoimmune concern\n* Abnormal vital signs\n* Neurologic findings, seizure, intoxication/withdrawal, or unstable medical issue\n\n**Discharge can be appropriate if ALL are true:**\n* Mild symptoms, good insight, no acute safety concern\n* Strong support system and safe environment\n* Reliable early follow-up arranged (ideally first-episode psychosis program)\n* Clear return precautions and medication plan if started\n\n**Follow-up:** First-episode psychosis clinic / coordinated specialty care program when available.',
+    recommendation: 'Psychiatric consultation and early intervention are recommended for first-break psychosis. Admit for safety, grave disability, severe symptoms, medical instability, or unreliable support/follow-up.',
     confidence: 'recommended',
-    summary: 'Admit most first-break psychosis. Psychiatric vs medical based on etiology.',
+    summary: 'Disposition: admit for safety/medical instability/grave disability; discharge only with low risk, support, and rapid follow-up.',
   },
 
 ];
@@ -236,7 +236,7 @@ export const ACUTE_PSYCHOSIS_CITATIONS: Citation[] = [
   { num: 2, text: 'Howard R, et al. Late-onset schizophrenia and very-late-onset schizophrenia-like psychosis: an international consensus. Am J Psychiatry 2000;157:172-8.' },
   { num: 3, text: 'ACEP Clinical Policy: Severe Agitation in ED Patients. Annals of Emergency Medicine 2024.' },
   { num: 4, text: 'Freudenreich O, et al. The evaluation of patients with first-episode psychosis. Psychiatric Clin North Am 2012;35:715-29.' },
-  { num: 5, text: 'Keshavan MS, et al. Second-generation antipsychotic drugs in first-episode psychosis: a review. CNS Drugs 2003;17:1033-45.' },
+  { num: 5, text: 'Blackman G, et al. Diagnostic yield of MRI in first-episode psychosis: systematic review and meta-analysis. JAMA Psychiatry. 2023.' },
   { num: 6, text: 'Inouye SK, et al. Delirium in elderly people. Lancet 2014;383:911-22.' },
   { num: 7, text: 'Dalmau J, et al. Anti-NMDA-receptor encephalitis: case series and analysis of effects of antibodies. Lancet Neurol 2008;7:1091-8.' },
   { num: 8, text: 'Titulaer MJ, et al. Treatment and prognostic factors for long-term outcome in patients with anti-NMDA receptor encephalitis. Lancet Neurol 2013;12:157-65.' },

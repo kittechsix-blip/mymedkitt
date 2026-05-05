@@ -95,6 +95,10 @@ export interface NodeInput {
 export interface InputOption {
   label: string;
   value: string;
+  /** Options sharing a group behave like radio choices within that checkbox input. */
+  exclusiveGroup?: string;
+  /** Option values to deselect when this option is selected. */
+  conflictsWith?: string[];
 }
 
 // -------------------------------------------------------------------

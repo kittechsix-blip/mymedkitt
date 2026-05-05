@@ -1,9 +1,21 @@
 // myMedKitt — Specialty View (replaces category-view.ts)
-// Header in specialty color, 3D consult buttons, alphabetical order.
+// Header in specialty color, 3D consult buttons, specialty-aware order.
 import { getAllCategories, getCategoryColors } from '../services/category-service.js';
 import { isSharedMode, getSharedTreeIds } from '../services/shared-mode.js';
 import { create3DButton, getSpecialtyGradient } from './button-3d.js';
 import { router } from '../services/router.js';
+const PINNED_TREE_ORDER = {
+    psychiatry: [
+        'psych-triage',
+        'medical-clearance-psych',
+        'acute-agitation',
+        'acute-psychosis',
+        'capacity-assessment',
+        'catatonia',
+        'psych-assessment',
+        'psychiatry-assessment',
+    ],
+};
 /** Render the specialty view into the given container */
 export function renderSpecialtyView(container, categoryId) {
     container.innerHTML = '';
@@ -52,8 +64,20 @@ export function renderSpecialtyView(container, categoryId) {
         container.appendChild(wrapper);
         return;
     }
-    // Sort alphabetically
-    const sorted = [...trees].sort((a, b) => a.title.localeCompare(b.title));
+    // Keep high-frequency psychiatry consults in clinical workflow order, then sort the rest alphabetically.
+    const pinned = new Map((PINNED_TREE_ORDER[categoryId] ?? []).map((id, index) => [id, index]));
+    const sorted = [...trees].sort((a, b) => {
+        const aPinned = pinned.get(a.id);
+        const bPinned = pinned.get(b.id);
+        if (aPinned !== undefined || bPinned !== undefined) {
+            if (aPinned === undefined)
+                return 1;
+            if (bPinned === undefined)
+                return -1;
+            return aPinned - bPinned;
+        }
+        return a.title.localeCompare(b.title);
+    });
     // Search filter (3+ consults)
     if (sorted.length >= 3) {
         const searchWrap = document.createElement('div');
@@ -66,7 +90,7 @@ export function renderSpecialtyView(container, categoryId) {
             const q = searchInput.value.trim().toLowerCase();
             const buttons = list.querySelectorAll('.btn-3d');
             if (!q) {
-                // Reset to default alphabetical order
+                // Reset to default specialty order
                 buttons.forEach((btn, i) => { btn.style.display = ''; btn.style.order = String(i); });
                 return;
             }
@@ -75,7 +99,7 @@ export function renderSpecialtyView(container, categoryId) {
                 const t = sorted[i].title.toLowerCase();
                 const matches = t.startsWith(q);
                 btn.style.display = matches ? '' : 'none';
-                // Keep alphabetical order (sorted array index)
+                // Keep default specialty order (sorted array index)
                 btn.style.order = matches ? String(i) : '';
             });
         });

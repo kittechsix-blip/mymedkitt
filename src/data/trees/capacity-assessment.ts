@@ -1,5 +1,5 @@
 // MedKitt - Capacity Assessment Consult
-// Aid4, MacCAT, documentation framework
+// Four abilities, MacCAT, documentation framework
 // ~14 nodes
 
 import type { DecisionNode } from '../../models/types.js';
@@ -8,7 +8,7 @@ import type { Citation } from './neurosyphilis.js';
 export const CAPACITY_ASSESSMENT_CRITICAL_ACTIONS = [
   { text: 'Capacity is decision-specific - assess for THIS decision', nodeId: 'cap-start' },
   { text: 'Capacity != competency (competency is legal, capacity is clinical)', nodeId: 'cap-definitions' },
-  { text: 'Aid4 framework: Appreciate, Infer, Decide, Communicate', nodeId: 'cap-aid4' },
+  { text: 'Four abilities: understand, appreciate, reason, communicate a choice', nodeId: 'cap-aid4' },
   { text: 'Document the specific decision, the process, and your reasoning', nodeId: 'cap-documentation' },
 ];
 
@@ -53,11 +53,11 @@ export const CAPACITY_ASSESSMENT_NODES: DecisionNode[] = [
     id: 'cap-aid4',
     type: 'info',
     module: 2,
-    title: 'Aid4 Framework',
-    body: '**Four abilities required for capacity:**\n\n**A - Appreciate**\n* Does the patient understand they have a medical condition?\n* Do they appreciate how it affects them personally?\n* *"What do you think is wrong with you?"*\n* *"How do you think this will affect your life?"*\n\n**I - Infer (Reason)**\n* Can they weigh options and consequences?\n* Can they engage in comparative reasoning?\n* *"What are the pros and cons of treatment?"*\n* *"Why are you choosing this option?"*\n\n**D - Decide**\n* Can they make and communicate a choice?\n* Is the choice consistent over time?\n* *"What have you decided to do?"*\n\n**4 - understand the 4 elements of informed consent**\n* Nature of illness\n* Proposed treatment\n* Risks and benefits\n* Alternatives (including no treatment)',
+    title: 'Four-Abilities Framework',
+    body: '**Four abilities required for capacity:**\n\n**1. Understanding**\n* Can the patient describe the condition, recommended treatment, risks/benefits, and alternatives in their own words?\n* *"Can you tell me what we are worried about and what treatment we recommend?"*\n\n**2. Appreciation**\n* Can they apply the information to their own situation?\n* Do they believe the condition and consequences are personally relevant?\n* *"What do you think will happen to you if you leave or decline treatment?"*\n\n**3. Reasoning**\n* Can they compare options and consequences using a coherent process?\n* The decision may be risky or against advice and still have capacity if the reasoning is intact.\n* *"What are the pros and cons of treatment?"*\n* *"Why are you choosing this option?"*\n\n**4. Communication of a choice**\n* Can they state a clear, stable choice?\n* *"What have you decided to do?"*\n\n**Aid4 mapping:** Appreciate = appreciation, Infer = reasoning, Decide = communication, and the "4" informed-consent elements belong under understanding.',
     citation: [2, 3],
     next: 'cap-questions',
-    summary: 'Aid4: Appreciate, Infer, Decide, understand informed consent elements.',
+    summary: 'Capacity uses four abilities: understanding, appreciation, reasoning, and communication of a stable choice.',
   },
 
   {
@@ -76,14 +76,14 @@ export const CAPACITY_ASSESSMENT_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Capacity Determination',
-    body: '**Assess each Aid4 domain:**\n\n| Domain | Intact? | Notes |\n|--------|---------|-------|\n| **Appreciate** illness/situation | [ ] Yes [ ] No | |\n| **Infer** consequences, reasoning | [ ] Yes [ ] No | |\n| **Decide** and communicate choice | [ ] Yes [ ] No | |\n| **Understand** informed consent elements | [ ] Yes [ ] No | |\n\n**Capacity present if:** All four domains intact\n\n**Lack of capacity if:** Significant deficit in any domain\n\n**Gray zone?** Consider psychiatry consult, ethics consult, or more time to reassess.',
+    body: '**Assess each four-abilities domain:**\n\n| Domain | Intact? | Notes |\n|--------|---------|-------|\n| **Understanding** of condition/options/risks | [ ] Yes [ ] No | |\n| **Appreciation** of personal relevance | [ ] Yes [ ] No | |\n| **Reasoning** about consequences/alternatives | [ ] Yes [ ] No | |\n| **Communication** of a stable choice | [ ] Yes [ ] No | |\n\n**Capacity present if:** All four abilities are sufficiently intact for this decision\n\n**Lack of capacity if:** A significant, decision-relevant deficit prevents informed decision-making\n\n**Gray zone?** Consider psychiatry consult, ethics consult, or more time to reassess.',
     options: [
       { label: 'Has Capacity', description: 'All four domains intact', next: 'cap-has-capacity' },
-      { label: 'Lacks Capacity', description: 'Deficit in one or more domains', next: 'cap-lacks-capacity' },
+      { label: 'Lacks Capacity', description: 'Significant decision-relevant deficit in one or more domains', next: 'cap-lacks-capacity' },
       { label: 'Unclear / Borderline', description: 'Need more assessment', next: 'cap-unclear' },
     ],
     citation: [2, 3],
-    summary: 'All four Aid4 domains must be intact for capacity. Deficit in any = lacks capacity.',
+    summary: 'All four abilities must be sufficiently intact; lack of capacity requires a significant decision-relevant deficit.',
   },
 
   // =====================================================================
@@ -106,7 +106,7 @@ export const CAPACITY_ASSESSMENT_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Leaving AMA',
-    body: '**Patient leaving against medical advice:**\n\n**Capacity assessment is REQUIRED before AMA:**\n* Intoxicated patients cannot sign AMA until sober\n* Delirious patients cannot leave AMA\n* Psychiatric patients may require hold\n\n**If patient HAS capacity:**\n* They can leave, even if unsafe\n* Document: capacity present, risks explained, offered alternatives\n* Provide discharge instructions, prescriptions, follow-up\n* **AMA does NOT mean "punishment"** - give standard care info\n\n**If patient LACKS capacity:**\n* Cannot leave AMA - they cannot consent to departure\n* May need 1:1 sitter, security\n* Consider medical hold, psych evaluation\n* Restraints only if immediate safety risk',
+    body: '**Patient leaving against medical advice:**\n\n**Capacity assessment is REQUIRED before AMA:**\n* Intoxication raises concern but does not automatically remove capacity - assess clinically and reassess when the decision can safely wait\n* Delirious patients generally cannot leave AMA until delirium is addressed\n* Psychiatric patients may require hold if they lack capacity or meet danger/grave disability criteria\n\n**If patient HAS capacity:**\n* They can leave, even if unsafe\n* Document: capacity present, risks explained, offered alternatives\n* Provide discharge instructions, prescriptions, follow-up\n* **AMA does NOT mean "punishment"** - give standard care info\n\n**If patient LACKS capacity:**\n* Cannot leave AMA - they cannot consent to departure\n* May need 1:1 sitter, security\n* Consider medical hold, psych evaluation\n* Restraints only if immediate safety risk',
     citation: [4],
     next: 'cap-definitions',
     summary: 'AMA requires capacity assessment. If lacks capacity, patient cannot leave.',
@@ -117,7 +117,7 @@ export const CAPACITY_ASSESSMENT_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Consenting to Procedure',
-    body: '**Ensuring valid informed consent:**\n\n**Elements of informed consent:**\n1. **Disclosure** - nature, risks, benefits, alternatives\n2. **Capacity** - patient can understand and decide\n3. **Voluntariness** - no coercion\n\n**Capacity for consent requires:**\n* Understanding the procedure\n* Appreciating personal relevance\n* Weighing risks vs benefits\n* Communicating a choice\n\n**Special situations:**\n* Minors: parent/guardian consent (except emancipated, emergencies)\n* Non-English speakers: professional interpreter required\n* Intoxicated: delay elective procedures until sober\n* Emergency: implied consent if cannot wait',
+    body: '**Ensuring valid informed consent:**\n\n**Elements of informed consent:**\n1. **Disclosure** - nature, risks, benefits, alternatives\n2. **Capacity** - patient can understand and decide\n3. **Voluntariness** - no coercion\n\n**Capacity for consent requires:**\n* Understanding the procedure\n* Appreciating personal relevance\n* Weighing risks vs benefits\n* Communicating a choice\n\n**Special situations:**\n* Minors: parent/guardian consent (except emancipated, emergencies)\n* Non-English speakers: professional interpreter required\n* Intoxicated: delay elective procedures until the patient can clinically demonstrate the four abilities\n* Emergency: implied consent if cannot wait',
     citation: [1, 5],
     next: 'cap-definitions',
     summary: 'Valid consent: disclosure + capacity + voluntariness. Interpreter if needed.',
@@ -143,7 +143,7 @@ export const CAPACITY_ASSESSMENT_NODES: DecisionNode[] = [
     type: 'result',
     module: 4,
     title: 'Patient Has Capacity',
-    body: '**Patient has decision-making capacity:**\n\n**Next steps:**\n* Respect their autonomous choice\n* Ensure informed decision (risks, benefits, alternatives)\n* Document your assessment\n\n**Documentation should include:**\n* The specific decision being assessed\n* How you assessed each domain (Aid4)\n* Patient\'s responses demonstrating capacity\n* That you believe patient has capacity\n* Risks were discussed and understood\n\n**Even if you disagree with the decision:**\n* Respect patient autonomy\n* Offer alternatives, follow-up\n* Keep the door open for changing their mind',
+    body: '**Patient has decision-making capacity:**\n\n**Next steps:**\n* Respect their autonomous choice\n* Ensure informed decision (risks, benefits, alternatives)\n* Document your assessment\n\n**Documentation should include:**\n* The specific decision being assessed\n* How you assessed understanding, appreciation, reasoning, and communication of a choice\n* Patient\'s responses demonstrating capacity\n* That you believe patient has capacity\n* Risks were discussed and understood\n\n**Even if you disagree with the decision:**\n* Respect patient autonomy\n* Offer alternatives, follow-up\n* Keep the door open for changing their mind',
     recommendation: 'Patient has capacity. Respect autonomous decision. Document assessment thoroughly.',
     confidence: 'recommended',
     summary: 'Patient has capacity - respect decision, document assessment.',
@@ -176,10 +176,10 @@ export const CAPACITY_ASSESSMENT_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Documentation',
-    body: '**Document your capacity assessment:**\n\n**Include:**\n\n1. **The specific decision** being assessed\n2. **Clinical context** (why capacity was questioned)\n3. **Mental status exam** findings\n4. **Assessment of each Aid4 domain:**\n   * Understand: *"Patient stated [X] when asked about condition"*\n   * Appreciate: *"Patient expressed [Y] about personal impact"*\n   * Reason: *"Patient weighed options by considering [Z]"*\n   * Choice: *"Patient consistently chose [decision]"*\n5. **Your conclusion** and reasoning\n6. **What information was provided** to patient\n7. **Signature, date, time**\n\n**Example phrasing:**\n*"In my clinical judgment, this patient [has/lacks] capacity to [specific decision] because [reasoning]."*',
+    body: '**Document your capacity assessment:**\n\n**Include:**\n\n1. **The specific decision** being assessed\n2. **Clinical context** (why capacity was questioned)\n3. **Mental status exam** findings\n4. **Assessment of each ability:**\n   * Understanding: *"Patient stated [X] when asked about condition/treatment/risks"*\n   * Appreciation: *"Patient expressed [Y] about personal impact"*\n   * Reasoning: *"Patient weighed options by considering [Z]"*\n   * Communication: *"Patient consistently chose [decision]"*\n5. **Your conclusion** and reasoning\n6. **What information was provided** to patient\n7. **Signature, date, time**\n\n**Example phrasing:**\n*"In my clinical judgment, this patient [has/lacks] capacity to [specific decision] because [reasoning]."*',
     citation: [1, 2],
     next: 'cap-has-capacity',
-    summary: 'Document: specific decision, Aid4 assessment, conclusion with reasoning.',
+    summary: 'Document: specific decision, four-abilities assessment, conclusion with reasoning.',
   },
 
 ];

@@ -23,6 +23,17 @@ let delegatedContainer: HTMLElement | null = null;
 let jumpNodeListenerRegistered = false;
 let searchOpen = false;
 
+const CONSULT_TITLE_OVERRIDES: Record<string, string> = {
+  'acute-agitation': 'Acute Agitation',
+  'acute-psychosis': 'Acute Psychosis / First Break',
+  'capacity-assessment': 'Capacity Assessment',
+  catatonia: 'Catatonia',
+  'medical-clearance-psych': 'Psych Medical Stability',
+  'psych-assessment': 'Psychiatric Evaluation',
+  'psychiatry-assessment': 'MSE Dictation Guide',
+  'psych-triage': 'Psych Triage',
+};
+
 /**
  * Scroll the active card into view so its top sits just below the sticky
  * consult header. scrollIntoView({block:'center'}) was clipping the question
@@ -553,6 +564,10 @@ function findCategoryId(treeId: string): string {
 
 /** Get consult title from category metadata */
 function getConsultTitle(treeId: string): string {
+  if (CONSULT_TITLE_OVERRIDES[treeId]) {
+    return CONSULT_TITLE_OVERRIDES[treeId];
+  }
+
   const categories = getAllCategories();
   for (const cat of categories) {
     const tree = cat.decisionTrees.find(t => t.id === treeId);

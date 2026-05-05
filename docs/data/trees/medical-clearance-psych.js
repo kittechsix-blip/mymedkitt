@@ -1,12 +1,12 @@
-// MedKitt — Medical Clearance - Psych
+// MedKitt — Psych Medical Stability
 // Organic vs Psychiatric → Red Flags → Labs → Delirium vs Psychosis → Documentation
-// Evidence: AAEP Task Force 2017, ACEP 2024
+// Evidence: AAEP Task Force 2017, ACEP psychiatric patient policy
 // ~22 nodes
 export const MEDICAL_CLEARANCE_PSYCH_CRITICAL_ACTIONS = [
-    { text: '20% of acute psychosis has a medical etiology', nodeId: 'mcp-start' },
+    { text: 'Medical assessment is clinical - history, vitals, exam, mentation, and red flags drive testing', nodeId: 'mcp-start' },
     { text: 'New-onset psychosis age >45 = medical until proven otherwise', nodeId: 'mcp-red-flags' },
     { text: 'Delirium = inattention + fluctuating course. Psychosis = fixed delusions + intact attention', nodeId: 'mcp-delirium-vs-psychosis' },
-    { text: 'Normal vitals + normal exam + known psych history = labs usually unnecessary', nodeId: 'mcp-labs' },
+    { text: 'Normal vitals + normal exam + known psych history = labs usually unnecessary', nodeId: 'mcp-minimal-workup' },
     { text: 'ALWAYS check glucose, O2 sat, temperature', nodeId: 'mcp-vitals' },
 ];
 export const MEDICAL_CLEARANCE_PSYCH_NODES = [
@@ -17,11 +17,11 @@ export const MEDICAL_CLEARANCE_PSYCH_NODES = [
         id: 'mcp-start',
         type: 'info',
         module: 1,
-        title: 'Medical Clearance - Psych',
-        body: '[Steps Summary](#/info/mcp-steps)\n\n**Why this matters:**\n• 20% of acute psychosis has organic etiology\n• Missed medical diagnoses in psych patients: 8-48%\n• Psych patients have higher rates of comorbid medical illness\n\n**AAEP Task Force 2017:**\nMedical evaluation based on clinical assessment, NOT routine testing.',
+        title: 'Psych Medical Stability',
+        body: '[Steps Summary](#/info/mcp-steps)\n\n**Use "medical assessment/stability," not a blanket clearance mindset.**\n\n**Why this matters:**\n• Medical mimics are uncommon in low-risk known psychiatric presentations, but high-impact when red flags are present\n• Missed medical diagnoses in psychiatric patients are reported across a wide range because risk depends heavily on age, vitals, exam, delirium, intoxication, and baseline history\n• Psychiatric patients have higher rates of comorbid medical illness\n\n**AAEP Task Force 2017:**\nMedical evaluation is based on clinical assessment, not routine testing.',
         citation: [1, 2],
         next: 'mcp-vitals',
-        summary: '20% of psychosis is organic. 8-48% missed medical diagnoses. Clinical assessment over routine labs.',
+        summary: 'Psych medical assessment: history, vitals, exam, mentation, and red flags drive testing; routine labs are not automatic.',
     },
     {
         id: 'mcp-vitals',
@@ -141,10 +141,10 @@ export const MEDICAL_CLEARANCE_PSYCH_NODES = [
         type: 'info',
         module: 4,
         title: 'Psychosis Workup',
-        body: '**Primary psychosis (CAM negative):**\n\n**Still consider organic causes:**\n• Anti-NMDA receptor encephalitis (young women, ovarian teratoma)\n• Stimulant intoxication (especially meth, cocaine)\n• Medication toxicity (steroids, anticholinergics)\n• Thyroid storm\n• Autoimmune encephalitis\n\n**First psychotic break workup:**\n• CBC, BMP, glucose\n• TSH\n• Toxicology screen\n• UA (rule out UTI in elderly)\n• Consider: HIV, syphilis (RPR), B12\n\n**Known psychosis, similar presentation:**\n→ Labs often unnecessary if normal vitals/exam',
+        body: '**Primary psychosis (CAM negative):**\n\n**Still consider organic causes:**\n• Anti-NMDA receptor encephalitis (young women, ovarian teratoma)\n• Stimulant intoxication (especially meth, cocaine)\n• Medication toxicity (steroids, anticholinergics)\n• Thyroid storm\n• Autoimmune encephalitis\n\n**First psychotic break workup:**\n• Vitals, glucose, CBC, BMP\n• TSH when thyroid symptoms, mood syndrome, or unclear cause\n• Toxicology screen when substance-induced symptoms are plausible\n• UA if urinary symptoms, pregnancy concern, elderly, or delirium concern\n• Consider HIV, syphilis (RPR), B12 based on risk factors, local protocol, or atypical presentation\n\n**Known psychosis, similar presentation:**\n→ Labs often unnecessary if normal vitals/exam',
         citation: [1, 5],
         next: 'mcp-labs-psychosis',
-        summary: 'First psychotic break: CBC, BMP, TSH, tox, UA. Consider anti-NMDA, stimulants.',
+        summary: 'First psychotic break: targeted labs based on risk; known typical psychosis with normal assessment often needs no routine labs.',
     },
     {
         id: 'mcp-labs-psychosis',
@@ -164,10 +164,10 @@ export const MEDICAL_CLEARANCE_PSYCH_NODES = [
         type: 'info',
         module: 4,
         title: 'First Psychotic Episode',
-        body: '**First episode requires thorough workup:**\n\n**Labs:**\n• CBC, BMP\n• TSH\n• Toxicology screen\n• UA\n• RPR (syphilis)\n• HIV\n• B12, folate\n\n**Imaging:**\n• MRI brain preferred (vs CT) if available\n• Can wait for outpatient if patient stable\n\n**Consider:**\n• EEG if seizure concern\n• LP if encephalitis concern\n• Anti-NMDA antibodies (young women)',
+        body: '**First episode requires targeted medical assessment:**\n\n**Labs:**\n• CBC, BMP, glucose\n• TSH when clinically indicated\n• Toxicology screen when substance-induced symptoms are plausible\n• UA if urinary symptoms, pregnancy concern, elderly, or delirium concern\n• RPR/HIV/B12/folate based on risk factors, atypical features, or local protocol\n\n**Imaging:**\n• ED CT for focal deficits, headache/seizure, trauma, delirium features, anticoagulation/immunosuppression, or age >45\n• MRI brain is preferred for stable non-emergent structural evaluation when available\n\n**Consider:**\n• EEG if seizure concern\n• LP if encephalitis concern\n• Anti-NMDA antibodies when young patient has prodrome, seizures, dyskinesias, autonomic instability, or decreased consciousness',
         citation: [1, 5],
         next: 'mcp-disposition',
-        summary: 'First episode: CBC, BMP, TSH, tox, RPR, HIV, B12. MRI if available.',
+        summary: 'First episode: targeted labs; image for neurologic/atypical features or age >45; MRI can be non-emergent if stable.',
     },
     {
         id: 'mcp-minimal-workup',
@@ -239,12 +239,12 @@ export const MEDICAL_CLEARANCE_PSYCH_NODES = [
         id: 'mcp-psych-cleared',
         type: 'result',
         module: 5,
-        title: 'Medically Cleared for Psychiatry',
-        body: '**"Medical clearance" documentation:**\n\n✓ Vital signs reviewed and stable\n✓ Physical exam performed\n✓ Mental status exam documented\n✓ Labs reviewed (if obtained)\n✓ No acute medical condition requiring admission\n✓ Patient stable for psychiatric evaluation\n\n**Communicate to psychiatry:**\n• Pertinent medical findings\n• Medications given in ED\n• Labs and imaging results\n• Ongoing medical issues (stable)',
-        recommendation: 'Patient medically cleared for psychiatric evaluation/admission.',
+        title: 'Medically Stable for Psychiatry',
+        body: '**Medical stability documentation:**\n\n✓ Vital signs reviewed and stable\n✓ Physical exam performed\n✓ Mental status exam documented\n✓ Labs reviewed (if obtained)\n✓ No acute medical condition requiring admission\n✓ Patient stable for psychiatric evaluation\n\n**Communicate to psychiatry:**\n• Pertinent medical findings\n• Medications given in ED\n• Labs and imaging results\n• Ongoing medical issues (stable)',
+        recommendation: 'Patient is medically stable for psychiatric evaluation/admission.',
         confidence: 'definitive',
         citation: [1],
-        summary: 'Medically cleared — document vitals, exam, labs, stability for psych eval.',
+        summary: 'Medically stable — document vitals, exam, labs if obtained, and stability for psych eval.',
     },
     {
         id: 'mcp-discharge',
@@ -265,7 +265,7 @@ export const MEDICAL_CLEARANCE_PSYCH_MODULE_LABELS = [
     'Disposition',
 ];
 export const MEDICAL_CLEARANCE_PSYCH_CITATIONS = [
-    { num: 1, text: 'Wilson MP, et al. AAEP Task Force on Medical Clearance of Adult Psychiatric Patients. Part I: Introduction, Review and Evidence-Based Guidelines. West J Emerg Med 2017;18:235-42.' },
+    { num: 1, text: 'Wilson MP, Nordstrom K, Anderson EL, et al. AAEP Task Force on Medical Clearance of Adult Psychiatric Patients. Part II: Controversies over Medical Assessment, and Consensus Recommendations. West J Emerg Med. 2017;18(4):640-646.' },
     { num: 2, text: 'Henneman PL, et al. Prospective Study of the Incidence of an Abnormal Serum Sodium Level in Patients Evaluated for a Psychiatric Disorder. Ann Emerg Med 1994;24:203-7.' },
     { num: 3, text: 'Inouye SK, et al. Clarifying Confusion: The Confusion Assessment Method. Ann Intern Med 1990;113:941-8.' },
     { num: 4, text: 'Han JH, et al. Delirium in the Emergency Department: An Independent Predictor of Death Within 6 Months. Ann Emerg Med 2010;56:244-52.' },

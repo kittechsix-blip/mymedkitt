@@ -230,6 +230,7 @@ function renderInputField(card, input, selected) {
     }
     const group = document.createElement('div');
     group.className = 'checkbox-group-input';
+    const rowsByValue = new Map();
     if (input.label) {
         const label = document.createElement('div');
         label.className = 'checkbox-group-input__label';
@@ -249,16 +250,39 @@ function renderInputField(card, input, selected) {
         labelText.textContent = opt.label;
         row.appendChild(indicator);
         row.appendChild(labelText);
-        row.addEventListener('click', () => {
-            if (selected.has(opt.value)) {
-                selected.delete(opt.value);
-                row.classList.remove('checkbox-option--selected');
-                row.setAttribute('aria-pressed', 'false');
+        rowsByValue.set(opt.value, row);
+        const setSelected = (value, button, isSelected) => {
+            if (isSelected) {
+                selected.add(value);
+                button.classList.add('checkbox-option--selected');
+                button.setAttribute('aria-pressed', 'true');
             }
             else {
-                selected.add(opt.value);
-                row.classList.add('checkbox-option--selected');
-                row.setAttribute('aria-pressed', 'true');
+                selected.delete(value);
+                button.classList.remove('checkbox-option--selected');
+                button.setAttribute('aria-pressed', 'false');
+            }
+        };
+        row.addEventListener('click', () => {
+            if (selected.has(opt.value)) {
+                setSelected(opt.value, row, false);
+            }
+            else {
+                if (opt.exclusiveGroup) {
+                    for (const peer of input.options ?? []) {
+                        if (peer.value !== opt.value && peer.exclusiveGroup === opt.exclusiveGroup) {
+                            const peerRow = rowsByValue.get(peer.value);
+                            if (peerRow)
+                                setSelected(peer.value, peerRow, false);
+                        }
+                    }
+                }
+                for (const conflictValue of opt.conflictsWith ?? []) {
+                    const conflictRow = rowsByValue.get(conflictValue);
+                    if (conflictRow)
+                        setSelected(conflictValue, conflictRow, false);
+                }
+                setSelected(opt.value, row, true);
             }
         });
         group.appendChild(row);

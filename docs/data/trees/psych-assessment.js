@@ -150,7 +150,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         module: 4,
         title: '8. Safety — SI/HI Screening',
         body: '**Suicidal Ideation — ask directly:**\n• "Do you feel that life is not worth living?"\n• "Have you had thoughts of hurting yourself?"\n• "Have you thought about killing yourself?"\n• "Do you have a plan? Do you have the means?"\n• "Have you ever attempted suicide before?"\n\nConsider using the **Columbia Suicide Severity Rating Scale (C-SSRS)** for structured screening.\n\n**Homicidal Ideation — ask directly:**\n• "Have you had thoughts of hurting anyone else?"\n• "Is there anyone you feel angry enough to harm?"\n• "Do you have a plan or access to weapons?"\n\n**Risk Factors for Suicide:**\n• Previous attempts (strongest predictor)\n• Access to lethal means — **ask specifically about firearms**\n• Recent losses, social isolation\n• Substance use, chronic pain\n• Male sex, older age, psychiatric diagnosis\n• Recent ED visits, recent discharge from psychiatric facility\n\n**Protective Factors:**\n• Social support, children at home\n• Future orientation, religious beliefs\n• Therapeutic alliance, treatment engagement\n\n**Descriptors:** Not suicidal, passive ideation, active ideation with/without plan, intent reported, homicidal intent reported.',
-        citation: [1, 5, 7],
+        citation: [1, 5, 11],
         summary: 'Ask directly about SI/HI — previous attempts strongest predictor, ask specifically about firearms access',
         safetyLevel: 'critical',
         options: [
@@ -184,8 +184,8 @@ export const PSYCH_ASSESSMENT_NODES = [
         type: 'info',
         module: 4,
         title: 'Passive Suicidal Ideation',
-        body: '**Passive SI** — patient expresses desire to be dead or not alive but denies active plan or intent.\n\n**Further Assessment:**\n• Frequency and duration of thoughts\n• Any preparatory behaviors (giving away possessions, writing notes)\n• Access to means — **ask specifically about firearms**\n• Substance use (acutely increases risk)\n• Recent changes in behavior or functioning\n\n**Safety Planning (Stanley-Brown Model):**\n1. Warning signs that a crisis is developing\n2. Internal coping strategies\n3. People and social settings that provide distraction\n4. People to contact for help\n5. Professionals and agencies to contact\n6. Making the environment safe (lethal means counseling)\n\n**Disposition Considerations:**\n• Means restriction counseling (document specifically)\n• Outpatient psychiatric follow-up within 48-72 hours\n• Crisis resources: **988 Suicide & Crisis Lifeline**\n• Consider social work consult\n• Discharge may be appropriate if patient is **not intoxicated, has support system, agrees to safety plan, and can contract for safety**\n\n**Document:** risk factors, protective factors, safety plan, and clinical reasoning for disposition.',
-        citation: [1, 5, 7],
+        body: '**Passive SI** — patient expresses desire to be dead or not alive but denies active plan or intent.\n\n**Further Assessment:**\n• Frequency and duration of thoughts\n• Any preparatory behaviors (giving away possessions, writing notes)\n• Access to means — **ask specifically about firearms**\n• Substance use (acutely increases risk)\n• Recent changes in behavior or functioning\n\n**Safety Planning (Stanley-Brown Model):**\n1. Warning signs that a crisis is developing\n2. Internal coping strategies\n3. People and social settings that provide distraction\n4. People to contact for help\n5. Professionals and agencies to contact\n6. Making the environment safe (lethal means counseling)\n\n**Disposition Considerations:**\n• Means restriction counseling (document specifically)\n• Outpatient psychiatric follow-up within 48-72 hours\n• Crisis resources: **988 Suicide & Crisis Lifeline**\n• Consider social work consult\n• Discharge may be appropriate if patient is **not intoxicated, has a support system, completes a collaborative safety plan, has lethal means addressed, and has reliable follow-up**\n\n**Document:** risk factors, protective factors, safety plan, lethal means counseling, and clinical reasoning for disposition.',
+        citation: [1, 5, 11],
         next: 'psych-insight',
         summary: 'Safety planning (Stanley-Brown), means restriction counseling, 988 Lifeline, outpatient follow-up 48-72h',
     },
@@ -225,10 +225,10 @@ export const PSYCH_ASSESSMENT_NODES = [
         type: 'info',
         module: 5,
         title: 'Laboratory Considerations',
-        body: '**Consider labs to rule out medical contributors to psychiatric symptoms:**\n\n**Routine:**\n• CBC — infection, anemia\n• BMP — electrolytes, glucose, renal function\n• TSH — hypothyroidism / hyperthyroidism\n• Urinalysis — UTI (especially elderly with altered mental status)\n\n**As Clinically Indicated:**\n• Urine drug screen — substance-induced symptoms\n• Blood alcohol level\n• B12 and folate — deficiency causes cognitive/mood changes\n• LFTs — hepatic encephalopathy\n• HIV testing\n• RPR/VDRL — neurosyphilis\n• Lyme titer (endemic areas)\n• Ammonia level\n• Acetaminophen and salicylate levels (if overdose suspected)\n\n**Imaging:**\n• CT head — first psychotic break, focal neuro findings, trauma, elderly new-onset symptoms\n\n**Abnormal findings should prompt medical workup before attributing symptoms to primary psychiatric illness.**\n\n**Environmental Assessment:**\nWhen conducting MSE in the patient\'s home or residential setting, physical surroundings offer clues about cognitive functioning, reality testing, and self-care capacity (hoarding, safety hazards, food availability).',
+        body: '**Consider labs to rule out medical contributors to psychiatric symptoms:**\n\n**Low-risk known psychiatric presentation:**\n• Normal vitals, normal exam, similar prior episodes → routine labs are often unnecessary\n• Check glucose and pregnancy test when applicable\n\n**Targeted testing when clinically indicated:**\n• CBC — infection, anemia\n• BMP — electrolytes, glucose, renal function\n• TSH — thyroid symptoms, mood syndrome, unclear cause\n• Urinalysis — urinary symptoms, pregnancy concern, elderly, or delirium concern\n• Urine drug screen / blood alcohol — substance-induced symptoms or intoxication concern\n• B12 and folate — cognitive/mood changes or malnutrition risk\n• LFTs/ammonia — hepatic encephalopathy concern\n• HIV and RPR/VDRL — risk factors, atypical presentation, or local protocol\n• Acetaminophen and salicylate levels — if overdose suspected\n\n**Imaging:**\n• CT head — focal neuro findings, headache/seizure, trauma, delirium features, anticoagulation/immunosuppression, or elderly/late-onset new psychiatric symptoms\n• MRI brain — stable first-break psychosis when structural evaluation is needed and can be non-emergent\n\n**Abnormal findings should prompt medical workup before attributing symptoms to primary psychiatric illness.**\n\n**Environmental Assessment:**\nWhen conducting MSE in the patient\'s home or residential setting, physical surroundings offer clues about cognitive functioning, reality testing, and self-care capacity (hoarding, safety hazards, food availability).',
         citation: [1, 4, 9],
         next: 'psych-disposition',
-        summary: 'CBC, BMP, TSH, UA baseline — UDS/BAL, CT head for first psychotic break or new focal findings',
+        summary: 'Labs are targeted by risk; low-risk known psych with normal vitals/exam often does not need routine testing.',
     },
     {
         id: 'psych-disposition',
@@ -240,7 +240,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         options: [
             {
                 label: 'Discharge with outpatient follow-up',
-                description: 'No acute safety concern, adequate support, able to contract for safety',
+                description: 'No acute safety concern, adequate support, safety plan completed',
                 next: 'psych-discharge',
             },
             {
@@ -265,7 +265,7 @@ export const PSYCH_ASSESSMENT_NODES = [
         title: 'Discharge — Outpatient Follow-Up',
         body: '**Discharge Criteria Met:**\n• No active suicidal or homicidal ideation\n• Patient is not acutely intoxicated\n• Adequate support system identified\n• Patient agrees to safety plan\n• Outpatient follow-up arranged\n\n**Discharge Plan:**\n• Safety plan completed and reviewed with patient\n• Means restriction counseling documented\n• Crisis resources provided (**988 Suicide & Crisis Lifeline**)\n• Outpatient psychiatry appointment within 48-72 hours\n• Medication reconciliation if applicable\n• Return precautions reviewed\n\n**Return to ED if:**\n• Worsening suicidal or homicidal thoughts\n• Inability to maintain safety\n• New or worsening psychotic symptoms\n• Medication side effects or adverse reactions',
         recommendation: 'Discharge with safety plan, means restriction counseling, crisis resources, and outpatient psychiatry follow-up within 48-72 hours.',
-        citation: [5, 7],
+        citation: [5, 11],
     },
     {
         id: 'psych-admit',
@@ -303,4 +303,5 @@ export const PSYCH_ASSESSMENT_CITATIONS = [
     { num: 8, text: 'American Psychiatric Association. Diagnostic and Statistical Manual of Mental Disorders. 5th ed, Text Revision. 2022.' },
     { num: 9, text: 'Boyles O. Mental Status Exam Cheat Sheet + Examples and Templates. ICANotes Behavioral Health EHR. 2024.' },
     { num: 10, text: 'Hufton F. The Mental Status Examination Visual Guide. PsychSceneHub. 2023.' },
+    { num: 11, text: 'Stanley B, Brown GK, Brenner LA, et al. Comparison of the Safety Planning Intervention With Follow-up vs Usual Care of Suicidal Patients Treated in the Emergency Department. JAMA Psychiatry. 2018;75(9):894-900.' },
 ];

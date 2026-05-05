@@ -6,7 +6,7 @@ import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
 export const CATATONIA_CRITICAL_ACTIONS = [
-  { text: 'Lorazepam challenge: 2 mg IV - response within 10 min confirms diagnosis', nodeId: 'cat-challenge' },
+  { text: 'Lorazepam challenge: 2 mg IV - response within 10-15 min strongly supports diagnosis', nodeId: 'cat-challenge' },
   { text: 'AVOID antipsychotics initially - risk of malignant catatonia/NMS', nodeId: 'cat-avoid-ap' },
   { text: 'Check for underlying cause: medical, psychiatric, or drug-induced', nodeId: 'cat-etiology' },
   { text: 'ECT is highly effective if benzodiazepines fail', nodeId: 'cat-ect' },
@@ -23,14 +23,14 @@ export const CATATONIA_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Catatonia Suspected',
-    body: '**Is catatonia present?**\n\nScreen with Bush-Francis Catatonia Rating Scale (BFCRS):\n\n| Sign | Present? |\n|------|----------|\n| Immobility / stupor | [ ] |\n| Mutism | [ ] |\n| Staring / fixed gaze | [ ] |\n| Posturing | [ ] |\n| Negativism | [ ] |\n| Waxy flexibility | [ ] |\n| Echolalia / echopraxia | [ ] |\n| Stereotypy | [ ] |\n| Mannerisms | [ ] |\n| Verbigeration | [ ] |\n| Rigidity | [ ] |\n| Withdrawal | [ ] |\n\n**>=2 signs present = catatonia likely**',
+    body: '**Is catatonia present?**\n\nScreen with Bush-Francis Catatonia Screening Instrument (BFCSI) / BFCRS items:\n\n| Sign | Present? |\n|------|----------|\n| Immobility / stupor | [ ] |\n| Mutism | [ ] |\n| Staring / fixed gaze | [ ] |\n| Posturing | [ ] |\n| Negativism | [ ] |\n| Waxy flexibility | [ ] |\n| Echolalia / echopraxia | [ ] |\n| Stereotypy | [ ] |\n| Mannerisms | [ ] |\n| Verbigeration | [ ] |\n| Rigidity | [ ] |\n| Withdrawal | [ ] |\n\n**>=2 BFCSI signs = positive screen.** DSM-5-TR diagnosis generally requires >=3 signs or a strong clinical syndrome.\n\n**Catatonia can coexist with delirium or medical illness** - do not dismiss catatonia solely because CAM is positive.',
     options: [
-      { label: '>=2 Signs Present', description: 'Catatonia likely - proceed to lorazepam challenge', next: 'cat-challenge' },
+      { label: '>=2 Signs Present', description: 'Positive catatonia screen - proceed to lorazepam challenge', next: 'cat-challenge' },
       { label: '0-1 Signs', description: 'Catatonia unlikely - consider other diagnoses', next: 'cat-unlikely' },
       { label: 'Patient Agitated/Excited', description: 'Excited catatonia variant', next: 'cat-excited', urgency: 'urgent' },
     ],
     citation: [1],
-    summary: 'Screen for catatonia using Bush-Francis Rating Scale. >=2 signs = likely catatonia.',
+    summary: 'BFCSI >=2 = positive screen; DSM-5-TR diagnosis generally needs >=3 signs or strong clinical syndrome.',
   },
 
   {
@@ -64,14 +64,14 @@ export const CATATONIA_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Lorazepam Challenge',
-    body: '**Diagnostic & therapeutic test:**\n\n**[Lorazepam](#/drug/lorazepam/catatonia-challenge) 2 mg IV push**\n\nObserve for 10-15 minutes.\n\n**Positive response (confirms catatonia):**\n* Increased speech\n* Decreased rigidity\n* Improved eye contact\n* Spontaneous movement\n* More interactive\n\n**Any improvement within 10 minutes is significant.**\n\n*No IV access? Lorazepam 2 mg IM or sublingual acceptable.*',
+    body: '**Diagnostic & therapeutic test:**\n\n**[Lorazepam](#/drug/lorazepam/catatonia-challenge) 2 mg IV push**\n\nScore symptoms before and after if possible (BFCRS or focused sign count). Observe for 10-15 minutes.\n\n**Positive response (strongly supports catatonia):**\n* Increased speech\n* Decreased rigidity\n* Improved eye contact\n* Spontaneous movement\n* More interactive\n* Often defined as ~50% reduction in catatonia signs/severity\n\n**Any meaningful improvement within 10-15 minutes is significant.**\n\n*No IV access? Lorazepam 2 mg IM or sublingual acceptable.*',
     options: [
-      { label: 'Positive Response', description: 'Improvement within 10 min - catatonia confirmed', next: 'cat-positive' },
+      { label: 'Positive Response', description: 'Improvement within 10-15 min - catatonia strongly supported', next: 'cat-positive' },
       { label: 'No Response', description: 'No change after 10-15 min', next: 'cat-no-response' },
       { label: 'Partial Response', description: 'Some improvement but incomplete', next: 'cat-partial' },
     ],
     citation: [3],
-    summary: 'Lorazepam 2 mg IV challenge - response within 10 min confirms catatonia.',
+    summary: 'Lorazepam 2 mg IV challenge - response within 10-15 min strongly supports catatonia.',
   },
 
   {
@@ -79,10 +79,10 @@ export const CATATONIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Positive Lorazepam Response',
-    body: '**Catatonia confirmed - continue benzodiazepines:**\n\n**Maintenance regimen:**\n* **Lorazepam 2 mg IV/PO q4-6h** scheduled\n* Titrate to effect (some patients need 10-20+ mg/day)\n* Monitor for over-sedation, respiratory depression\n\n**Duration:**\n* Continue until underlying cause treated\n* Taper slowly over days-weeks once stable\n* Rapid taper -> relapse risk\n\n**Next step:** Investigate underlying etiology',
+    body: '**Catatonia strongly supported - continue benzodiazepines:**\n\n**Maintenance regimen:**\n* **Lorazepam 2 mg IV/PO q4-6h** scheduled\n* Titrate to effect (some patients need 10-20+ mg/day)\n* Monitor for over-sedation, respiratory depression\n\n**Duration:**\n* Continue until underlying cause treated\n* Taper slowly over days-weeks once stable\n* Rapid taper -> relapse risk\n\n**Next step:** Investigate underlying etiology',
     citation: [3, 4],
     next: 'cat-etiology',
-    summary: 'Catatonia confirmed. Lorazepam 2 mg q4-6h maintenance. Investigate etiology.',
+    summary: 'Catatonia strongly supported. Lorazepam 2 mg q4-6h maintenance. Investigate etiology.',
   },
 
   {
@@ -214,7 +214,7 @@ export const CATATONIA_CITATIONS: Citation[] = [
   { num: 1, text: 'Bush G, et al. Catatonia I: Rating scale and standardized examination. Acta Psychiatr Scand 1996;93:129-36.' },
   { num: 2, text: 'Fink M, Taylor MA. Catatonia: A Clinician\'s Guide to Diagnosis and Treatment. Cambridge University Press, 2003.' },
   { num: 3, text: 'Rosebush PI, Mazurek MF. Catatonia and its treatment. Schizophr Bull 2010;36:239-42.' },
-  { num: 4, text: 'Sienaert P, et al. A Clinical Review of the Treatment of Catatonia. Front Psychiatry 2014;5:181.' },
+  { num: 4, text: 'Rogers JP, et al. Evidence-based consensus guidelines for the management of catatonia: British Association for Psychopharmacology. J Psychopharmacol. 2023;37:327-369.' },
   { num: 5, text: 'Luchini F, et al. Electroconvulsive therapy in catatonic patients: efficacy and predictors of response. World J Psychiatry 2015;5:182-92.' },
   { num: 6, text: 'Rogers JP, et al. Catatonia: demographic, clinical and laboratory associations. Psychol Med 2023;53:2492-2502.' },
   { num: 7, text: 'Dalmau J, et al. Anti-NMDA-receptor encephalitis: case series and analysis. Lancet Neurol 2008;7:1091-8.' },

@@ -6,6 +6,16 @@ import { cacheGetFiltered, cachePutMany, setLastSync, getLastSync } from './cach
 // In-memory cache keyed by tree ID
 const treeCache = new Map();
 const STALE_MS = 60 * 60 * 1000;
+const LOCAL_TREE_OVERRIDES = new Set([
+    'acute-agitation',
+    'acute-psychosis',
+    'capacity-assessment',
+    'catatonia',
+    'medical-clearance-psych',
+    'psych-assessment',
+    'psych-triage',
+    'psychiatry-assessment',
+]);
 // Re-attach summaryHook flags that aren't stored in Supabase. Keyed by node ID
 // so it survives DB round-trips. Add new entries here when a node needs to
 // trigger a custom summary modal (currently only the MSE Dictation builder).
@@ -289,7 +299,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'psych-assessment': async () => {
             const m = await import('../data/trees/psych-assessment.js');
-            return { nodes: m.PSYCH_ASSESSMENT_NODES, entryNodeId: 'psych-start', categoryId: 'emergency-medicine', moduleLabels: m.PSYCH_ASSESSMENT_MODULE_LABELS, citations: m.PSYCH_ASSESSMENT_CITATIONS, criticalActions: m.PSYCH_ASSESSMENT_CRITICAL_ACTIONS };
+            return { nodes: m.PSYCH_ASSESSMENT_NODES, entryNodeId: 'psych-start', categoryId: 'psychiatry', moduleLabels: m.PSYCH_ASSESSMENT_MODULE_LABELS, citations: m.PSYCH_ASSESSMENT_CITATIONS, criticalActions: m.PSYCH_ASSESSMENT_CRITICAL_ACTIONS };
         },
         'ich': async () => {
             const m = await import('../data/trees/ich.js');
@@ -549,7 +559,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'psychiatry-assessment': async () => {
             const m = await import('../data/trees/psychiatry-assessment.js');
-            return { nodes: m.PSYCHIATRY_ASSESSMENT_NODES, entryNodeId: 'mse-start', categoryId: 'emergency-medicine', moduleLabels: m.PSYCHIATRY_ASSESSMENT_MODULE_LABELS, citations: m.PSYCHIATRY_ASSESSMENT_CITATIONS, criticalActions: m.PSYCHIATRY_ASSESSMENT_CRITICAL_ACTIONS };
+            return { nodes: m.PSYCHIATRY_ASSESSMENT_NODES, entryNodeId: 'mse-start', categoryId: 'psychiatry', moduleLabels: m.PSYCHIATRY_ASSESSMENT_MODULE_LABELS, citations: m.PSYCHIATRY_ASSESSMENT_CITATIONS, criticalActions: m.PSYCHIATRY_ASSESSMENT_CRITICAL_ACTIONS };
         },
         'massive-transfusion': async () => {
             const m = await import('../data/trees/massive-transfusion.js');
@@ -1082,6 +1092,14 @@ export async function getTreeConfig(treeId) {
     const cached = treeCache.get(treeId);
     if (cached)
         return cached;
+    // Local overrides are intentionally loaded from bundled modules first so
+    // deployed content fixes are not masked by older Supabase/IndexedDB rows.
+    if (LOCAL_TREE_OVERRIDES.has(treeId)) {
+        const local = await loadHardcodedFallback(treeId);
+        if (local)
+            treeCache.set(treeId, local);
+        return local;
+    }
     // 2. IndexedDB
     const fromCache = await loadFromCache(treeId);
     if (fromCache) {

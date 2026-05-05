@@ -1,6 +1,6 @@
 // MedKitt — Psych Triage (Gateway Consult)
 // Symptom-based entry point for psychiatric emergencies
-// Routes to: Agitation, Suicidal Patient, Medical Clearance, Psychosis, Withdrawal
+// Routes to: Agitation, Suicidal Patient, Psych Medical Stability, Psychosis, Withdrawal
 // ~12 nodes
 export const PSYCH_TRIAGE_CRITICAL_ACTIONS = [
     { text: 'Safety first — secure environment before assessment', nodeId: 'pst-start' },
@@ -61,20 +61,20 @@ export const PSYCH_TRIAGE_NODES = [
         type: 'info',
         module: 2,
         title: 'Altered Mental Status Pathway',
-        body: '**→ [Medical Clearance - Psych](#/tree/medical-clearance-psych)**\n\n**Critical question:** Is this DELIRIUM or PRIMARY PSYCHOSIS?\n\n**Delirium red flags:**\n• Acute onset (hours-days)\n• Fluctuating course\n• Inattention (cannot focus on interview)\n• Visual hallucinations\n• Abnormal vital signs\n• Age >45 with first psychiatric symptoms\n\n**20% of acute psychosis has a medical etiology.** Always rule out organic causes first.',
+        body: '**→ [Psych Medical Stability](#/tree/medical-clearance-psych)**\n\n**Critical question:** Is this DELIRIUM or PRIMARY PSYCHOSIS?\n\n**Delirium red flags:**\n• Acute onset (hours-days)\n• Fluctuating course\n• Inattention (cannot focus on interview)\n• Visual hallucinations\n• Abnormal vital signs\n• Age >45 with first psychiatric symptoms\n\nUse history, vitals, exam, mentation, and red flags to decide the medical workup intensity.',
         citation: [4],
         next: 'pst-end',
-        summary: 'Altered mental status — route to Medical Clearance for organic workup.',
+        summary: 'Altered mental status — route to Psych Medical Stability for organic workup.',
     },
     {
         id: 'pst-psychotic',
         type: 'info',
         module: 2,
         title: 'Psychosis Pathway',
-        body: '**Start with:** [Medical Clearance - Psych](#/tree/medical-clearance-psych)\n\n**Rule out organic causes FIRST:**\n• Anti-NMDA receptor encephalitis\n• Stimulant intoxication\n• Medication toxicity\n• Encephalitis/meningitis\n• Metabolic derangement\n\n**New-onset psychosis in patient >45:** Medical cause until proven otherwise.\n\n**If agitated:** [Acute Agitation](#/tree/acute-agitation) for chemical restraint options.',
+        body: '**Start with:** [Psych Medical Stability](#/tree/medical-clearance-psych)\n\n**Then continue:** [Acute Psychosis / First Break](#/tree/acute-psychosis)\n\n**Rule out organic causes FIRST when red flags are present:**\n• Anti-NMDA receptor encephalitis\n• Stimulant intoxication\n• Medication toxicity\n• Encephalitis/meningitis\n• Metabolic derangement\n\n**New-onset psychosis in patient >45:** Medical cause until proven otherwise.\n\n**If agitated:** [Acute Agitation](#/tree/acute-agitation) for chemical restraint options.',
         citation: [4, 5],
         next: 'pst-end',
-        summary: 'Psychosis — start with medical clearance to rule out organic causes.',
+        summary: 'Psychosis — start with medical stability assessment, then use Acute Psychosis / First Break for workup and disposition.',
     },
     {
         id: 'pst-anxiety',
@@ -101,7 +101,7 @@ export const PSYCH_TRIAGE_NODES = [
         type: 'info',
         module: 2,
         title: 'Catatonia Pathway',
-        body: '**Recognize catatonia early — it\'s treatable!**\n\n**Bush-Francis Catatonia Rating Scale:**\n• Immobility / stupor\n• Mutism\n• Staring / fixed gaze\n• Posturing / waxy flexibility\n• Negativism (resistance to movement)\n\n**Treatment:**\n• **Lorazepam challenge:** 2 mg IV — improvement within 10 min confirms diagnosis\n• If response: Continue lorazepam 2 mg q4-6h\n• If no response: Consider ECT\n\n⚠️ **AVOID antipsychotics initially** — can trigger malignant catatonia or NMS',
+        body: '**→ [Catatonia Consult](#/tree/catatonia)**\n\n**Recognize catatonia early — it is treatable.**\n\n**Bush-Francis catatonia signs:**\n• Immobility / stupor\n• Mutism\n• Staring / fixed gaze\n• Posturing / waxy flexibility\n• Negativism (resistance to movement)\n\n**Treatment:**\n• **Lorazepam challenge:** 2 mg IV — improvement within 10-15 min strongly supports diagnosis\n• If response: Continue lorazepam 2 mg q4-6h\n• If no response: Consider ECT\n\n⚠️ **AVOID antipsychotics initially** — can trigger malignant catatonia or NMS',
         citation: [7],
         next: 'pst-end',
         summary: 'Catatonia — lorazepam challenge 2 mg IV. Avoid antipsychotics initially.',

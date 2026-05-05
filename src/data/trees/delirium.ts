@@ -146,12 +146,12 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     id: 'del-exds',
     type: 'info',
     module: 2,
-    title: 'Excited Delirium Syndrome',
-    body: '[Excited Delirium Syndrome](#/info/del-exds-info) — full recognition criteria, pathophysiology, and management.\n\n**Medical emergency** — ~10% case fatality rate. Most deaths from cardiac arrhythmia (PEA, asystole). **6 of 10 criteria = probable ExDS.**\n\nTemperature >104°F is the **single best predictor of death.**\n\n**IMMEDIATE:** Remove from prone position → aggressive cooling → IV access → proceed to ExDS management.',
+    title: 'Hyperactive Delirium With Hyperthermia',
+    body: '[Hyperactive Delirium With Hyperthermia](#/info/del-exds-info) — recognition, physiology, and emergency management.\n\n**Medical emergency** — severe agitation plus hyperthermia, acidosis, or prolonged physical struggle can rapidly progress to dysrhythmia, rhabdomyolysis, AKI, or arrest.\n\nTemperature >104°F is a major danger sign.\n\n**IMMEDIATE:** Remove from prone position → aggressive cooling → IV access → rapid sedation and monitoring.',
     citation: [1, 12],
     next: 'del-exds-mgmt',
   
-    summary: 'Excited Delirium Syndrome — review key clinical information before proceeding',
+    summary: 'Hyperactive delirium with hyperthermia — cooling, rapid sedation, IV fluids, and close monitoring.',
   },
 
   {
@@ -245,7 +245,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Directed Diagnostic Workup',
-    body: '**Directed by history, physical, and differential** — not a shotgun approach. Clinical judgment and common sense are the consensus recommendation.\n\n**For ALL patients with suspected delirium:**\n• Fingerstick glucose (already done)\n• BMP: Na, K, Ca, Mg, glucose, BUN/Cr\n• CBC with differential\n• Urinalysis with culture\n• VBG or ABG with lactate\n• **ECG** — arrhythmia, MI (delirium is the ONLY symptom in up to 5% of elderly STEMI), QTc baseline (needed before antipsychotics)\n\n**Consider based on clinical suspicion:**\n• LFTs, lipase, ammonia — hepatic/abdominal causes\n• TSH — thyroid disorders\n• Blood cultures — if febrile or suspected bacteremia\n• Troponin — if cardiac cause suspected\n• CK — if rhabdomyolysis risk (prolonged agitation, restraints, ExDS)\n• Urine drug screen — co-ingestions, atypical presentations (interpret with caution)\n• Blood gas — if hypercarbia suspected (COPD, hypoventilation)\n\n**Imaging:**\n• CT head non-contrast: if focal neuro deficits, anticoagulated, trauma, new seizure. Yield ~5% in undifferentiated delirium without focal findings, but subacute/chronic findings (hydrocephalus, old infarcts, SDH) may guide care.\n• CXR: if respiratory symptoms or fever\n\n**Lower threshold for LP:** Undifferentiated elderly with fever, immunocompromised, suspected NCSE, or encephalitis.',
+    body: '**Directed by history, physical, and differential** — not a shotgun approach. Clinical judgment and common sense are the consensus recommendation.\n\n**For ALL patients with suspected delirium:**\n• Fingerstick glucose (already done)\n• BMP: Na, K, Ca, Mg, glucose, BUN/Cr\n• CBC with differential\n• Urinalysis with culture\n• VBG or ABG with lactate\n• **ECG** — arrhythmia, MI (delirium is the ONLY symptom in up to 5% of elderly STEMI), QTc baseline (needed before antipsychotics)\n\n**Consider based on clinical suspicion:**\n• LFTs, lipase, ammonia — hepatic/abdominal causes\n• TSH — thyroid disorders\n• Blood cultures — if febrile or suspected bacteremia\n• Troponin — if cardiac cause suspected\n• CK — if rhabdomyolysis risk (prolonged agitation, restraints, hyperthermia)\n• Urine drug screen — co-ingestions, atypical presentations (interpret with caution)\n• Blood gas — if hypercarbia suspected (COPD, hypoventilation)\n\n**Imaging:**\n• CT head non-contrast: if focal neuro deficits, anticoagulated, trauma, new seizure. Yield ~5% in undifferentiated delirium without focal findings, but subacute/chronic findings (hydrocephalus, old infarcts, SDH) may guide care.\n• CXR: if respiratory symptoms or fever\n\n**Lower threshold for LP:** Undifferentiated elderly with fever, immunocompromised, suspected NCSE, or encephalitis.',
     citation: [1, 4, 5],
     next: 'del-med-review',
   
@@ -489,8 +489,8 @@ export const DELIRIUM_NODES: DecisionNode[] = [
     id: 'del-exds-mgmt',
     type: 'info',
     module: 4,
-    title: 'Excited Delirium Syndrome — Management',
-    body: '**Sedation:**\n• [Midazolam](#/drug/midazolam/agitation) 5 mg IM — first-line. Repeat q5-10 min as needed.\n• **Refractory:** [Ketamine](#/drug/ketamine/agitation) 4 mg/kg IM. Prepare for intubation (29% rate in one study).\n\n**Concurrent management:**\n• Aggressive cooling → target <101°F\n• Large-bore IV × 2, aggressive NS\n• Continuous telemetry — anticipate PEA/asystole\n\n**Labs:** CK, K+, VBG/lactate, creatinine. Core temp q15 min.\n\n**Disposition:** ICU mandatory. See [Excited Delirium Syndrome](#/info/del-exds-info) for full protocol.',
+    title: 'Hyperactive Delirium With Severe Agitation — Management',
+    body: '**Sedation:**\n• [Midazolam](#/drug/midazolam/agitation) 5 mg IM when feasible. Repeat q5-10 min as needed.\n• **Immediate violent threat or failed benzodiazepines:** [Ketamine](#/drug/ketamine/agitation) 4 mg/kg IM. Prepare for airway support.\n\n**Concurrent management:**\n• Aggressive cooling → target <101°F\n• Large-bore IV × 2, aggressive NS\n• Continuous telemetry — anticipate PEA/asystole\n• Avoid prone restraint and minimize prolonged struggle.\n\n**Labs:** CK, K+, VBG/lactate, creatinine. Core temp q15 min.\n\n**Disposition:** ICU for hyperthermia, severe acidosis, rhabdomyolysis, organ injury, or ongoing sedation/airway risk. See [Hyperactive Delirium With Hyperthermia](#/info/del-exds-info) for full protocol.',
     citation: [1, 2, 12],
     treatment: {
       firstLine: {
@@ -499,7 +499,7 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         route: 'IM',
         frequency: 'q5-10 min PRN',
         duration: 'Until adequate sedation',
-        notes: 'First-line for excited delirium. Prepare for intubation. Concurrent aggressive cooling required.',
+        notes: 'Use when feasible for hyperactive delirium with severe agitation. Concurrent aggressive cooling required.',
       },
       alternative: {
         drug: 'Ketamine',
@@ -507,13 +507,13 @@ export const DELIRIUM_NODES: DecisionNode[] = [
         route: 'IM',
         frequency: 'Once, may repeat',
         duration: 'Single dose',
-        notes: 'For refractory cases. 29% intubation rate. Prepare airway equipment before administration.',
+        notes: 'For immediate violent threat or failed benzodiazepines. Prepare airway equipment before administration.',
       },
       monitoring: 'Continuous telemetry (anticipate PEA/asystole). Core temp q15 min, target <101F. Large-bore IV x2, aggressive NS. Labs: CK, K+, VBG/lactate, creatinine. ICU mandatory.',
     },
     next: 'del-response',
   
-    summary: 'Excited Delirium Syndrome — Management — review key clinical information before proceeding',
+    summary: 'Hyperactive delirium with severe agitation — cooling, sedation, monitoring, ICU-risk screen',
   },
 
   {
@@ -680,7 +680,7 @@ export const DELIRIUM_CITATIONS: Citation[] = [
   { num: 9, text: 'Chase PB, Biros MH. A Retrospective Review of the Use and Safety of Droperidol in a Large, High-Risk, Inner-City Emergency Department Patient Population. Acad Emerg Med. 2002;9(12):1402-1410.' },
   { num: 10, text: 'Chan EW, Taylor DM, Knott JC, et al. Intravenous Droperidol or Olanzapine as an Adjunct to Midazolam for the Acutely Agitated Patient: A Multicenter, Randomized, Double-Blind, Placebo-Controlled Clinical Trial. Ann Emerg Med. 2013;61(1):72-81.' },
   { num: 11, text: 'Girard TD, Exline MC, Carson SS, et al. Haloperidol and Ziprasidone for Treatment of Delirium in Critical Illness (MIND-USA). N Engl J Med. 2018;379(26):2506-2516.' },
-  { num: 12, text: 'Vilke GM, DeBard ML, Chan TC, et al. Excited Delirium Syndrome (ExDS): Defining Based on a Review of the Literature. J Emerg Med. 2012;43(5):897-905.' },
+  { num: 12, text: 'ACEP. ACEP Reaffirms Positions on Hyperactive Delirium. 2023; ACMT. Position Statement: End the Use of the Term "Excited Delirium." J Med Toxicol. 2023;19(3):310-312.' },
 ];
 
 // -------------------------------------------------------------------

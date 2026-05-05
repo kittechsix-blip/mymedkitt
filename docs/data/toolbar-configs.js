@@ -1515,7 +1515,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'droperidol', label: 'Droperidol', icon: '💉', action: 'jump', target: 'agit-droperidol' },
         { id: 'ketamine', label: 'Ketamine', icon: '⚡', action: 'jump', target: 'agit-ketamine' },
         { id: 'benzo', label: 'Benzos', icon: '💊', action: 'jump', target: 'agit-benzo-protocol' },
-        { id: 'exds', label: 'ExDS', icon: '🔥', action: 'jump', target: 'agit-excited-delirium' },
+        { id: 'hyperactive-delirium', label: 'Hyperactive', icon: '🔥', action: 'jump', target: 'agit-excited-delirium' },
     ],
     'suicidal-patient': [
         { id: 'safety', label: 'Safety', icon: '🔒', action: 'jump', target: 'sui-safety' },

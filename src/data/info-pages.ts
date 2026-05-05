@@ -5756,20 +5756,20 @@ const DEL_DEESCALATION: InfoPage = {
 
 const DEL_EXDS_INFO: InfoPage = {
   id: 'del-exds-info',
-  title: 'Excited Delirium Syndrome',
-  subtitle: 'Recognition, Pathophysiology, and Emergency Management',
+  title: 'Hyperactive Delirium With Hyperthermia',
+  subtitle: 'Recognition, Physiology, and Emergency Management',
   sections: [
     {
-      heading: 'Recognition — 6 of 10 Criteria = Probable ExDS',
-      body: '1. **Pain tolerance** — unresponsive to painful stimuli\n2. **Tachypnea** — rapid, labored breathing\n3. **Sweating / tactile hyperthermia** — temperature >104°F (40°C) is the **single best predictor of death**\n4. **Agitation** with **unusual strength**\n5. **Noncompliance** with police / first responders\n6. **Lack of tiring** despite prolonged physical struggle\n7. **Inappropriate clothing** — often undressing or naked\n8. **Mirror / glass attraction** — drawn to reflective surfaces\n9. **Bizarre behavior**\n10. **Male sex**\n\nCase fatality rate: **~10%**. Most deaths are from cardiac arrhythmia (PEA, asystole). [1]',
+      heading: 'Recognition — Hyperactive Delirium Pattern',
+      body: 'Avoid using "excited delirium" as a diagnostic label when documenting. Describe the clinical syndrome and treat the immediately reversible threats.\n\n**High-risk findings:**\n1. **Severe agitation or combativeness** with altered mental status\n2. **Tachypnea** — rapid, labored breathing\n3. **Sweating / tactile hyperthermia** — temperature >104°F (40°C) is a major danger sign\n4. **Adrenergic overdrive** — tachycardia, hypertension, diaphoresis\n5. **Prolonged physical struggle** or inability to tire\n6. **Disorientation, bizarre behavior, or stimulant toxidrome**\n\nDeaths are usually related to hyperthermia, acidosis, dysrhythmia, restraint-associated asphyxia, or underlying intoxication/medical illness. [1]',
     },
     {
       heading: 'Pathophysiology',
-      body: '• Proposed mechanism: **excess dopamine** in the central nervous system\n• Associated with sympathomimetic intoxication (cocaine, methamphetamine) and/or underlying psychiatric illness with medication noncompliance\n• Results in dangerous hyperthermia, severe metabolic acidosis, and autonomic instability\n• Rhabdomyolysis and hyperkalemia are common complications\n• Sudden unexpected death can occur even AFTER apparent clinical stabilization [1]',
+      body: '• Often associated with sympathomimetic intoxication (cocaine, methamphetamine), delirium, severe psychiatric agitation, or mixed medical causes\n• Results in dangerous hyperthermia, severe metabolic acidosis, and autonomic instability\n• Rhabdomyolysis and hyperkalemia are common complications\n• Sudden unexpected death can occur even after apparent clinical stabilization [1]',
     },
     {
       heading: 'Immediate Management',
-      body: '**1. Remove from prone position** — positional asphyxia is a major cause of death during restraint\n\n**2. Aggressive cooling** — target temperature <101°F (38.3°C)\n   • Ice packs to axillae, groin, neck\n   • Cold IV fluids\n   • Mist and fan evaporative cooling\n   • Consider cold water immersion if available\n\n**3. IV access and fluids**\n   • Large-bore IV × 2\n   • Aggressive normal saline (goal: prevent renal failure from rhabdomyolysis)\n\n**4. Sedation**\n   • First-line: [Midazolam](#/drug/midazolam/agitation) 5 mg IM, repeat as needed\n   • Refractory: [Ketamine](#/drug/ketamine/agitation) 4 mg/kg IM\n   • Avoid prolonged physical struggle — it worsens hyperthermia and acidosis\n\n**5. Cardiac monitoring** — continuous telemetry. Anticipate PEA/asystole arrest.',
+      body: '**1. Remove from prone position** — positional asphyxia is a major cause of death during restraint\n\n**2. Aggressive cooling** — target temperature <101°F (38.3°C)\n   • Ice packs to axillae, groin, neck\n   • Cold IV fluids\n   • Mist and fan evaporative cooling\n   • Consider cold water immersion if available\n\n**3. IV access and fluids**\n   • Large-bore IV × 2\n   • Aggressive normal saline (goal: prevent renal failure from rhabdomyolysis)\n\n**4. Sedation**\n   • Benzodiazepines when feasible: [Midazolam](#/drug/midazolam/agitation) 5 mg IM, repeat as needed\n   • [Ketamine](#/drug/ketamine/agitation) 4-5 mg/kg IM if immediate safety threat or failed benzodiazepines\n   • Avoid prolonged physical struggle — it worsens hyperthermia and acidosis\n\n**5. Cardiac monitoring** — continuous telemetry. Anticipate PEA/asystole arrest.',
     },
     {
       heading: 'Monitoring & Workup',
@@ -5777,11 +5777,11 @@ const DEL_EXDS_INFO: InfoPage = {
     },
     {
       heading: 'Disposition',
-      body: '**ICU admission is MANDATORY** — ExDS carries risk of sudden death even after apparent stabilization.\n\n• Cardiac monitoring minimum 24 hours\n• Continue aggressive IV hydration for rhabdomyolysis\n• Serial CK, electrolytes, creatinine\n• Temperature management\n• Psychiatric evaluation when medically stable',
+      body: '**ICU admission is recommended for severe hyperactive delirium with hyperthermia, acidosis, rhabdomyolysis, organ injury, or ongoing sedation/airway risk.**\n\n• Cardiac monitoring minimum 24 hours for severe cases\n• Continue aggressive IV hydration for rhabdomyolysis\n• Serial CK, electrolytes, creatinine\n• Temperature management\n• Psychiatric evaluation when medically stable',
     },
   ],
   citations: [
-    { num: 1, text: 'Vilke GM, DeBard ML, Chan TC, et al. Excited Delirium Syndrome (ExDS): Defining Based on a Review of the Literature. J Emerg Med. 2012;43(5):897-905.' },
+    { num: 1, text: 'ACEP. ACEP Reaffirms Positions on Hyperactive Delirium. 2023; ACMT. Position Statement: End the Use of the Term "Excited Delirium." J Med Toxicol. 2023;19(3):310-312.' },
     { num: 2, text: 'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).' },
   ],
 };

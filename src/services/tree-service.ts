@@ -30,6 +30,17 @@ const treeCache = new Map<string, TreeConfig>();
 
 const STALE_MS = 60 * 60 * 1000;
 
+const LOCAL_TREE_OVERRIDES = new Set([
+  'acute-agitation',
+  'acute-psychosis',
+  'capacity-assessment',
+  'catatonia',
+  'medical-clearance-psych',
+  'psych-assessment',
+  'psych-triage',
+  'psychiatry-assessment',
+]);
+
 // Supabase row types
 interface NodeRow {
   id: string;
@@ -353,7 +364,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'psych-assessment': async () => {
       const m = await import('../data/trees/psych-assessment.js');
-      return { nodes: m.PSYCH_ASSESSMENT_NODES, entryNodeId: 'psych-start', categoryId: 'emergency-medicine', moduleLabels: m.PSYCH_ASSESSMENT_MODULE_LABELS, citations: m.PSYCH_ASSESSMENT_CITATIONS, criticalActions: m.PSYCH_ASSESSMENT_CRITICAL_ACTIONS };
+      return { nodes: m.PSYCH_ASSESSMENT_NODES, entryNodeId: 'psych-start', categoryId: 'psychiatry', moduleLabels: m.PSYCH_ASSESSMENT_MODULE_LABELS, citations: m.PSYCH_ASSESSMENT_CITATIONS, criticalActions: m.PSYCH_ASSESSMENT_CRITICAL_ACTIONS };
     },
     'ich': async () => {
       const m = await import('../data/trees/ich.js');
@@ -613,7 +624,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'psychiatry-assessment': async () => {
       const m = await import('../data/trees/psychiatry-assessment.js');
-      return { nodes: m.PSYCHIATRY_ASSESSMENT_NODES, entryNodeId: 'mse-start', categoryId: 'emergency-medicine', moduleLabels: m.PSYCHIATRY_ASSESSMENT_MODULE_LABELS, citations: m.PSYCHIATRY_ASSESSMENT_CITATIONS, criticalActions: m.PSYCHIATRY_ASSESSMENT_CRITICAL_ACTIONS };
+      return { nodes: m.PSYCHIATRY_ASSESSMENT_NODES, entryNodeId: 'mse-start', categoryId: 'psychiatry', moduleLabels: m.PSYCHIATRY_ASSESSMENT_MODULE_LABELS, citations: m.PSYCHIATRY_ASSESSMENT_CITATIONS, criticalActions: m.PSYCHIATRY_ASSESSMENT_CRITICAL_ACTIONS };
     },
     'massive-transfusion': async () => {
       const m = await import('../data/trees/massive-transfusion.js');
@@ -1146,6 +1157,14 @@ export async function getTreeConfig(treeId: string): Promise<TreeConfig | null> 
   // 1. In-memory
   const cached = treeCache.get(treeId);
   if (cached) return cached;
+
+  // Local overrides are intentionally loaded from bundled modules first so
+  // deployed content fixes are not masked by older Supabase/IndexedDB rows.
+  if (LOCAL_TREE_OVERRIDES.has(treeId)) {
+    const local = await loadHardcodedFallback(treeId);
+    if (local) treeCache.set(treeId, local);
+    return local;
+  }
 
   // 2. IndexedDB
   const fromCache = await loadFromCache(treeId);
