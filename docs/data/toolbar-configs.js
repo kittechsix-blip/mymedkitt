@@ -1510,6 +1510,26 @@ const TOOLBAR_CONFIGS = {
         { id: 'nomi', label: 'NOMI', icon: '🫀', action: 'jump', target: 'ami-nomi' },
         { id: 'surgery', label: 'Surgery', icon: '🔪', action: 'jump', target: 'ami-surgery' },
     ],
+    'acute-agitation': [
+        { id: 'deescalate', label: 'BETA', icon: '🗣️', action: 'jump', target: 'agit-deescalate' },
+        { id: 'droperidol', label: 'Droperidol', icon: '💉', action: 'jump', target: 'agit-droperidol' },
+        { id: 'ketamine', label: 'Ketamine', icon: '⚡', action: 'jump', target: 'agit-ketamine' },
+        { id: 'benzo', label: 'Benzos', icon: '💊', action: 'jump', target: 'agit-benzo-protocol' },
+        { id: 'exds', label: 'ExDS', icon: '🔥', action: 'jump', target: 'agit-excited-delirium' },
+    ],
+    'suicidal-patient': [
+        { id: 'safety', label: 'Safety', icon: '🔒', action: 'jump', target: 'sui-safety' },
+        { id: 'cssrs', label: 'C-SSRS', icon: '📋', action: 'jump', target: 'sui-cssrs' },
+        { id: 'means', label: 'Means', icon: '🔫', action: 'jump', target: 'sui-means' },
+        { id: 'safetyplan', label: 'Safety Plan', icon: '📝', action: 'jump', target: 'sui-safety-plan' },
+        { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'sui-disposition' },
+    ],
+    'medical-clearance-psych': [
+        { id: 'redflags', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'mcp-red-flags' },
+        { id: 'delirium', label: 'Delirium?', icon: '🧠', action: 'jump', target: 'mcp-delirium-vs-psychosis' },
+        { id: 'cam', label: 'CAM', icon: '📊', action: 'jump', target: 'mcp-delirium-check' },
+        { id: 'workup', label: 'Workup', icon: '🧪', action: 'jump', target: 'mcp-delirium-workup' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };

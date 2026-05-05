@@ -1,0 +1,476 @@
+// MedKitt — Acute Agitation
+// BETA Protocol → De-escalation → Chemical Restraint → Physical Restraint → Organic Causes
+// Evidence: ACEP 2024, Project BETA (AAEP), EMCrit
+// ~28 nodes
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const ACUTE_AGITATION_CRITICAL_ACTIONS = [
+  { text: 'Verbal de-escalation FIRST — BETA protocol', nodeId: 'agit-deescalate' },
+  { text: 'Check glucose, O2 sat, temp before sedation', nodeId: 'agit-organic-screen' },
+  { text: 'Droperidol 5-10 mg IM/IV — fastest single-agent sedation', nodeId: 'agit-droperidol' },
+  { text: 'Ketamine 5 mg/kg IM — for high-threat situations only', nodeId: 'agit-ketamine' },
+  { text: 'Never prone restraint — highest mortality risk', nodeId: 'agit-physical' },
+  { text: 'Hyperactive delirium = aggressive cooling + rapid sedation', nodeId: 'agit-excited-delirium' },
+];
+
+export const ACUTE_AGITATION_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: ASSESSMENT & SAFETY
+  // =====================================================================
+
+  {
+    id: 'agit-start',
+    type: 'question',
+    module: 1,
+    title: 'Acute Agitation',
+    body: '[Steps Summary](#/info/agit-steps)\n\n**Is patient an IMMEDIATE DANGER to self, staff, or others?**\n\nAssess: Combative? Threatening? Attempting to leave AMA? Unable to cooperate with any care?',
+    options: [
+      { label: 'Yes — immediate danger', description: 'Combative, violent, cannot de-escalate', next: 'agit-immediate-danger', urgency: 'critical' },
+      { label: 'No — agitated but not violent', description: 'Pacing, yelling, but not attacking', next: 'agit-deescalate' },
+    ],
+    citation: [1],
+    summary: 'Assess immediate danger level to determine de-escalation vs rapid sedation pathway.',
+  },
+
+  {
+    id: 'agit-immediate-danger',
+    type: 'info',
+    module: 1,
+    title: 'Immediate Danger Protocol',
+    body: '**Parallel actions:**\n\n1. **Activate security** — multiple trained personnel\n2. **Prepare medications** — draw up sedation agents\n3. **Clear the area** — remove other patients/visitors\n4. **Brief verbal attempt** (10-15 seconds max)\n\n**If ANY verbal de-escalation possible:**\nUse single calm staff member, offer choices, maintain distance.\n\n**If patient actively attacking:**\nProceed directly to chemical restraint → do not delay.',
+    citation: [1, 2],
+    next: 'agit-organic-screen',
+    summary: 'Activate security, prepare meds, attempt brief verbal de-escalation.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'agit-deescalate',
+    type: 'info',
+    module: 1,
+    title: 'Verbal De-escalation (BETA)',
+    body: '**Project BETA — 10 Domains:**\n\n1. **Respect personal space** — 2+ arm lengths\n2. **Do not be provocative** — no direct eye contact, hands visible\n3. **Establish verbal contact** — calm, low voice, slow speech\n4. **Be concise** — simple sentences, one instruction at a time\n5. **Identify wants and feelings** — "I can see you\'re frustrated"\n6. **Listen actively** — nod, reflect back\n7. **Agree or agree to disagree** — find common ground\n8. **Set clear limits** — "I want to help, but I can\'t if you\'re threatening"\n9. **Offer choices** — "Would you prefer to sit here or over there?"\n10. **Debrief** — after de-escalation, process what happened\n\n**Time limit:** 5-10 minutes. If not improving → chemical restraint.',
+    citation: [2],
+    next: 'agit-deescalation-response',
+    summary: 'BETA protocol: respect space, concise speech, identify feelings, offer choices. 5-10 min limit.',
+  },
+
+  {
+    id: 'agit-deescalation-response',
+    type: 'question',
+    module: 1,
+    title: 'De-escalation Response',
+    body: 'After 5-10 minutes of verbal de-escalation:',
+    options: [
+      { label: 'Improving — cooperating', description: 'Able to sit, talk, engage', next: 'agit-organic-screen' },
+      { label: 'Unchanged or worsening', description: 'Still agitated, escalating', next: 'agit-organic-screen' },
+      { label: 'Became violent', description: 'Now attacking, spitting, throwing', next: 'agit-immediate-danger', urgency: 'critical' },
+    ],
+    summary: 'Assess response to de-escalation to determine next steps.',
+  },
+
+  {
+    id: 'agit-organic-screen',
+    type: 'info',
+    module: 1,
+    title: 'Rapid Organic Screening',
+    body: '**Check BEFORE sedation if possible:**\n\n• **Glucose** — hypoglycemia mimics psych\n• **O2 sat** — hypoxia causes agitation\n• **Temperature** — fever = infection, hyperthermia = hyperactive delirium\n• **Pupils** — toxidrome clues\n• **Diaphoresis** — sympathomimetic, withdrawal\n\n**CANNOT delay sedation** if patient is immediate threat.\nObtain these during/after sedation if needed.',
+    citation: [3],
+    next: 'agit-etiology',
+    summary: 'Check glucose, O2, temp, pupils before sedation. Cannot delay if immediate threat.',
+  },
+
+  // =====================================================================
+  // MODULE 2: ETIOLOGY STRATIFICATION
+  // =====================================================================
+
+  {
+    id: 'agit-etiology',
+    type: 'question',
+    module: 2,
+    title: 'Likely Etiology',
+    body: '**What is the most likely cause?**\n\nThis guides medication selection.',
+    options: [
+      { label: 'Delirium / Medical cause', description: 'Altered, inattentive, abnormal vitals, elderly', next: 'agit-delirium-path' },
+      { label: 'Intoxication / Withdrawal', description: 'Substance use history, toxidrome', next: 'agit-intox-path' },
+      { label: 'Primary psychiatric', description: 'Known psych history, normal exam/vitals', next: 'agit-psych-path' },
+      { label: 'Undifferentiated', description: 'Cannot determine, need rapid control', next: 'agit-undiff-path' },
+    ],
+    citation: [1, 3],
+    summary: 'Etiology guides medication choice: delirium, intoxication, psychiatric, or undifferentiated.',
+  },
+
+  {
+    id: 'agit-delirium-path',
+    type: 'info',
+    module: 2,
+    title: 'Delirium Pathway',
+    body: '**Delirium = medical emergency**\n\n**Find and treat the cause:**\n• Infection (UTI, pneumonia, meningitis)\n• Metabolic (glucose, Na+, Ca2+, uremia)\n• Hypoxia\n• Medication toxicity\n• Withdrawal (alcohol, benzos)\n• Structural (stroke, bleed, mass)\n\n**Sedation for delirium:**\n• **Haloperidol preferred** in elderly — less sedating\n• **Avoid benzodiazepines alone** — worsen delirium (except in withdrawal)\n\n**Labs:** CBC, BMP, UA, glucose, lactate, troponin, toxicology',
+    citation: [3, 4],
+    next: 'agit-med-choice',
+    summary: 'Delirium — find and treat cause. Haloperidol preferred. Avoid benzos alone.',
+  },
+
+  {
+    id: 'agit-intox-path',
+    type: 'question',
+    module: 2,
+    title: 'Intoxication / Withdrawal',
+    body: '**Which substance?**',
+    options: [
+      { label: 'Stimulants (cocaine, meth, PCP)', description: 'Sympathomimetic, high-threat', next: 'agit-stimulant', urgency: 'urgent' },
+      { label: 'Alcohol / Benzo withdrawal', description: 'Tremor, diaphoresis, tachycardia', next: 'agit-withdrawal' },
+      { label: 'Unknown intoxication', description: 'Unclear substance', next: 'agit-unknown-intox' },
+      { label: 'Hallucinogens (LSD, shrooms)', description: 'Perceptual disturbances, not usually violent', next: 'agit-hallucinogen' },
+    ],
+    summary: 'Substance type guides treatment approach.',
+  },
+
+  {
+    id: 'agit-stimulant',
+    type: 'info',
+    module: 2,
+    title: 'Stimulant Intoxication',
+    body: '**High-threat situation — rapid control essential**\n\n**Physiology:** Hyperdopaminergic + hyperthermia + rhabdomyolysis risk\n\n**Treatment priorities:**\n1. **Aggressive cooling** if hyperthermic (>38.5°C)\n2. **Ketamine** — best choice for rapid control\n3. **Benzos** — lorazepam/midazolam if ketamine unavailable\n4. **Avoid antipsychotics alone** — can worsen hyperthermia\n\n**Monitor for:**\n• Rhabdomyolysis (CK, dark urine)\n• Cardiac arrhythmias\n• Acute kidney injury',
+    citation: [1, 5],
+    next: 'agit-ketamine',
+    summary: 'Stimulant intoxication — aggressive cooling, ketamine preferred, avoid antipsychotics alone.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'agit-withdrawal',
+    type: 'info',
+    module: 2,
+    title: 'Withdrawal Agitation',
+    body: '**→ [Alcohol Withdrawal Consult](#/tree/alcohol-withdrawal) for detailed protocol**\n\n**Quick reference:**\n• **Benzodiazepines are first-line**\n• Lorazepam 2-4 mg IV/IM q5-15 min PRN\n• Diazepam 10-20 mg IV q5-10 min PRN (if no liver disease)\n\n**Do NOT use antipsychotics alone** — lower seizure threshold.\n\n**High-risk features:**\n• Prior seizures or DTs\n• PAWSS ≥4\n• Consider phenobarbital loading',
+    citation: [6],
+    next: 'agit-end',
+    summary: 'Withdrawal — benzos first-line. Avoid antipsychotics alone. See Alcohol Withdrawal consult.',
+  },
+
+  {
+    id: 'agit-unknown-intox',
+    type: 'info',
+    module: 2,
+    title: 'Unknown Intoxication',
+    body: '**When substance is unclear:**\n\n**Safest single agent: Lorazepam**\n• Works for most toxidromes\n• Safe in withdrawal\n• Minimal cardiovascular effects\n\n**Dosing:**\n• Lorazepam 2 mg IV/IM, repeat q5-10 min as needed\n• Max: 10-20 mg for severe agitation\n\n**Avoid:** Antipsychotics if stimulant possible (worsen hyperthermia)',
+    citation: [1],
+    next: 'agit-benzo-protocol',
+    summary: 'Unknown intoxication — lorazepam safest single agent.',
+  },
+
+  {
+    id: 'agit-hallucinogen',
+    type: 'info',
+    module: 2,
+    title: 'Hallucinogen Intoxication',
+    body: '**Usually not violent — reassurance often works**\n\n**Management:**\n• Quiet, dark environment\n• Calm verbal reassurance\n• Benzodiazepine if needed (lorazepam 1-2 mg)\n\n**Avoid:** Antipsychotics — can worsen "bad trip"\n\n**Duration:** LSD effects 8-12 hours; patient will return to baseline',
+    citation: [1],
+    next: 'agit-end',
+    summary: 'Hallucinogens — reassurance first, benzos if needed. Avoid antipsychotics.',
+  },
+
+  {
+    id: 'agit-psych-path',
+    type: 'info',
+    module: 2,
+    title: 'Primary Psychiatric',
+    body: '**Primary psychosis / mania:**\n\n**Preferred agents:**\n• Antipsychotic + benzodiazepine (fastest)\n• Antipsychotic alone if milder\n\n**Options:**\n• Olanzapine 10 mg IM + midazolam 5 mg IM\n• Ziprasidone 20 mg IM + midazolam 5 mg IM\n• Droperidol 5 mg IM/IV (excellent single agent)\n\n**Avoid:** IM olanzapine + IM lorazepam within 1 hour (aspiration risk)',
+    citation: [1, 7],
+    next: 'agit-med-choice',
+    summary: 'Primary psychiatric — antipsychotic + benzo fastest. Avoid olanzapine + lorazepam within 1h.',
+  },
+
+  {
+    id: 'agit-undiff-path',
+    type: 'info',
+    module: 2,
+    title: 'Undifferentiated Agitation',
+    body: '**When etiology unclear:**\n\n**ACEP Level B recommendation:**\n• **Droperidol + midazolam** — fastest, most effective\n• Alternative: Atypical antipsychotic + midazolam\n\n**Continue workup in parallel:**\n• Labs, glucose, toxicology\n• Imaging if indicated\n• Reassess once sedation achieved',
+    citation: [1],
+    next: 'agit-med-choice',
+    summary: 'Undifferentiated — droperidol + midazolam (ACEP Level B). Continue workup.',
+  },
+
+  // =====================================================================
+  // MODULE 3: MEDICATION PROTOCOLS
+  // =====================================================================
+
+  {
+    id: 'agit-med-choice',
+    type: 'question',
+    module: 3,
+    title: 'Medication Selection',
+    body: '**Choose sedation approach:**',
+    options: [
+      { label: 'Droperidol protocol', description: 'Fastest single agent; preferred', next: 'agit-droperidol' },
+      { label: 'Ketamine protocol', description: 'High-threat situations only', next: 'agit-ketamine', urgency: 'critical' },
+      { label: 'Benzodiazepine protocol', description: 'Withdrawal, unknown intox, liver disease', next: 'agit-benzo-protocol' },
+      { label: 'Antipsychotic + Benzo combo', description: 'Primary psychiatric', next: 'agit-combo-protocol' },
+      { label: 'Elderly / Special populations', description: 'Reduced doses, specific considerations', next: 'agit-elderly' },
+    ],
+    summary: 'Select medication protocol based on etiology and patient factors.',
+  },
+
+  {
+    id: 'agit-droperidol',
+    type: 'info',
+    module: 3,
+    title: 'Droperidol Protocol',
+    body: '**ACEP Level B — Fastest single-agent sedation**\n\n**Dosing:**\n• [Droperidol](#/drug/droperidol/agitation) 5-10 mg IM/IV\n• IV onset: 3-5 min | IM onset: 10-15 min\n• Duration: 4-6 hours\n\n**Add midazolam for faster control:**\n• Midazolam 5 mg IM/IV\n\n**Reassess at 15 min:**\n• Adequate? → Monitor\n• Inadequate? → Repeat dose OR add benzo\n\n**Side effects:** QTc prolongation (rare at these doses), EPS, hypotension',
+    citation: [1, 7],
+    next: 'agit-reassess',
+    summary: 'Droperidol 5-10 mg IM/IV — fastest single agent. Add midazolam for faster control.',
+  },
+
+  {
+    id: 'agit-ketamine',
+    type: 'info',
+    module: 3,
+    title: 'Ketamine Protocol',
+    body: '**ACEP Level C — High-threat situations only**\n\n**Indications:**\n• Patient actively attacking staff\n• Stimulant intoxication with hyperthermia\n• Failed other agents\n\n**Dosing:**\n• [Ketamine](#/drug/ketamine/agitation) 5 mg/kg IM (max 400 mg)\n• OR 1-2 mg/kg IV\n• Onset: IM 3-5 min | IV 1-2 min\n• Duration: 15-30 min\n\n**REQUIRES:**\n• Continuous cardiac monitoring\n• Pulse oximetry + capnography\n• Airway equipment at bedside\n\n**Adverse effects:**\n• Laryngospasm (1-4%)\n• Hypersalivation (20%)\n• Respiratory depression (2-20%)\n• Emergence reactions',
+    citation: [1, 5],
+    next: 'agit-reassess',
+    summary: 'Ketamine 5 mg/kg IM — high-threat only. Requires airway monitoring.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'agit-benzo-protocol',
+    type: 'info',
+    module: 3,
+    title: 'Benzodiazepine Protocol',
+    body: '**Best for withdrawal, unknown intox, liver disease**\n\n**Lorazepam** (preferred if liver disease):\n• [Lorazepam](#/drug/lorazepam/agitation) 2-4 mg IM/IV\n• IM onset: 15-30 min | IV onset: 1-3 min\n• Can repeat q5-10 min\n• Max: 10-20 mg for severe agitation\n\n**Midazolam** (faster IM onset):\n• [Midazolam](#/drug/midazolam/agitation) 5 mg IM/IV\n• IM onset: 12-15 min (fastest IM benzo)\n• Can repeat at 10 min\n\n**Cautions:**\n• Respiratory depression (especially + alcohol)\n• Elderly: reduce dose 50%',
+    citation: [1, 7],
+    next: 'agit-reassess',
+    summary: 'Lorazepam 2-4 mg or midazolam 5 mg. Midazolam = faster IM onset.',
+  },
+
+  {
+    id: 'agit-combo-protocol',
+    type: 'info',
+    module: 3,
+    title: 'Antipsychotic + Benzo Combo',
+    body: '**For primary psychiatric agitation:**\n\n**Option 1 — Olanzapine + Midazolam:**\n• Olanzapine 10 mg IM + Midazolam 5 mg IM\n• Onset: 15-20 min\n• ⚠️ Do NOT give IM olanzapine + IM lorazepam within 1 hour\n\n**Option 2 — Ziprasidone + Midazolam:**\n• Ziprasidone 20 mg IM + Midazolam 5 mg IM\n• Onset: 15-20 min\n\n**Option 3 — Haloperidol + Lorazepam (B52 variant):**\n• Haloperidol 5 mg IM + Lorazepam 2 mg IM\n• Onset: 30-45 min (slower)\n• Add diphenhydramine 50 mg to prevent EPS',
+    citation: [1, 7],
+    next: 'agit-reassess',
+    summary: 'Olanzapine/ziprasidone + midazolam. Avoid olanzapine + lorazepam within 1h.',
+  },
+
+  {
+    id: 'agit-elderly',
+    type: 'info',
+    module: 3,
+    title: 'Elderly / Special Populations',
+    body: '**Age >65 — Reduce ALL doses 30-50%**\n\n**Preferred:** Haloperidol 2.5 mg IV/IM\n• Less sedating, safer in delirium\n• Avoid benzos if possible (worsen delirium)\n\n**Lorazepam max:** 1-2 mg (not 4 mg)\n\n**Higher risk of:**\n• Falls\n• Oversedation\n• Respiratory depression\n• Orthostatic hypotension\n\n**ADEPT Framework:** Assess baseline → Diagnose delirium → Evaluate triggers → Prevent complications → Treat medically\n\n**Pregnancy:** Lorazepam/midazolam relatively safer. Involve OB. Avoid physical restraints if possible (IVC compression).',
+    citation: [4],
+    next: 'agit-reassess',
+    summary: 'Elderly — reduce doses 30-50%. Haloperidol preferred. Avoid benzos alone.',
+  },
+
+  {
+    id: 'agit-reassess',
+    type: 'question',
+    module: 3,
+    title: 'Reassess at 15-20 min',
+    body: '**Goal:** Calm but arousable (RASS 0 to -1)\n\nHow is the patient responding?',
+    options: [
+      { label: 'Adequate — calm, cooperative', description: 'RASS 0 to -1', next: 'agit-workup' },
+      { label: 'Partial — still agitated', description: 'Needs additional dose', next: 'agit-rescue' },
+      { label: 'Oversedated', description: 'RASS -3 or lower, airway concern', next: 'agit-oversedation', urgency: 'urgent' },
+    ],
+    summary: 'Target RASS 0 to -1 (calm but arousable). Reassess response.',
+  },
+
+  {
+    id: 'agit-rescue',
+    type: 'info',
+    module: 3,
+    title: 'Rescue Sedation',
+    body: '**Inadequate response at 15-20 min:**\n\n**If gave antipsychotic alone:**\n→ Add benzodiazepine (midazolam 5 mg or lorazepam 2 mg)\n\n**If gave benzodiazepine alone:**\n→ Consider antipsychotic (olanzapine 10 mg or ziprasidone 20 mg)\n\n**If gave antipsychotic + benzo:**\n→ Reassess for organic cause\n→ Consider ketamine if safety risk escalates\n\n**Refractory agitation (>10 mg lorazepam/hr or >40 mg/4h):**\n→ Consider phenobarbital loading\n→ Consider propofol infusion (requires intubation)\n→ ICU admission',
+    citation: [1, 5],
+    next: 'agit-reassess',
+    summary: 'Add complementary agent. If refractory (>40 mg lorazepam/4h), consider phenobarbital or ICU.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'agit-oversedation',
+    type: 'info',
+    module: 3,
+    title: 'Oversedation Management',
+    body: '**Airway first:**\n\n1. **Head positioning** — chin lift, jaw thrust\n2. **Suction** if secretions\n3. **Supplemental O2** — nasal cannula or BVM\n4. **Capnography** — monitor for hypoventilation\n\n**Reversal agents:**\n• **Flumazenil** — benzodiazepine reversal\n  - 0.2 mg IV, repeat q1 min to max 1 mg\n  - ⚠️ Seizure risk if chronic benzo use\n• **Naloxone** — if opioid co-ingestion suspected\n\n**If airway compromise:**\n→ Intubation',
+    citation: [1],
+    next: 'agit-workup',
+    summary: 'Airway management first. Flumazenil for benzo reversal (seizure risk if chronic use).',
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 4: PHYSICAL RESTRAINT
+  // =====================================================================
+
+  {
+    id: 'agit-physical',
+    type: 'info',
+    module: 4,
+    title: 'Physical Restraint',
+    body: '**Use as BRIDGE to chemical restraint — not standalone treatment**\n\n**Indications:**\n• Immediate danger while awaiting medication effect\n• Brief restraint during medication administration\n\n**Safe technique:**\n• **NEVER prone position** — highest mortality\n• Supine with head elevated 30°\n• 5-point restraint minimum (wrists, ankles, chest)\n• Minimum 5 trained personnel\n• Ensure no tight clothing around neck\n\n**Monitoring (Joint Commission):**\n• q15 min minimum\n• Check distal pulses, skin color\n• Reposition every 15-30 min\n• Document time of application\n\n**Goal:** Discontinue restraints as soon as chemical sedation effective.',
+    citation: [1, 8],
+    next: 'agit-rhabdo',
+    summary: 'NEVER prone. Supine with head elevated. Bridge to chemical restraint only.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'agit-rhabdo',
+    type: 'info',
+    module: 4,
+    title: 'Rhabdomyolysis Risk',
+    body: '**High risk in:**\n• Prolonged struggling against restraints\n• Stimulant intoxication\n• Hyperthermia\n• Severe agitation\n\n**Monitor for:**\n• Dark (cola-colored) urine\n• Muscle tenderness\n• Weakness\n\n**Labs:** CK, BMP (K+), creatinine\n\n**Treatment:**\n• Aggressive IV hydration (target UOP 200-300 mL/hr)\n• Monitor K+ (hyperkalemia risk)\n• Avoid restraints if possible\n• Rapid sedation to stop struggling',
+    citation: [8],
+    next: 'agit-workup',
+    summary: 'Rhabdo risk with restraints + stimulants. Check CK, hydrate aggressively.',
+  },
+
+  // =====================================================================
+  // MODULE 5: HYPERACTIVE DELIRIUM
+  // =====================================================================
+
+  {
+    id: 'agit-excited-delirium',
+    type: 'info',
+    module: 5,
+    title: 'Hyperactive Delirium',
+    body: '**Formerly "Excited Delirium" — HIGH MORTALITY**\n\n**Recognition:**\n• Disoriented + combative + altered\n• Adrenergic overdrive (tachycardia, hypertension)\n• Hyperthermia (>40°C)\n• Often: stimulant use (cocaine, meth)\n\n**Immediate management:**\n1. **Aggressive cooling** — ice packs, cold fluids, evaporative\n2. **Ketamine** for rapid sedation (5 mg/kg IM)\n3. **Large-bore IV × 2** — prepare for massive hydration\n4. **Continuous monitoring** — cardiac, pulse ox, capnography\n5. **Minimal physical restraint** — prioritize chemical\n\n**Complications:**\n• Sudden cardiac arrest\n• Rhabdomyolysis → AKI\n• Extreme hyperthermia',
+    citation: [1, 5, 9],
+    next: 'agit-workup',
+    summary: 'Hyperactive delirium = HIGH MORTALITY. Aggressive cooling + ketamine + hydration.',
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 6: WORKUP & DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'agit-workup',
+    type: 'info',
+    module: 6,
+    title: 'Complete Evaluation',
+    body: '**Once sedation achieved:**\n\n**Labs:**\n• CBC, BMP, glucose, lactate\n• Troponin (if tachycardia, hypertension)\n• UA, toxicology\n• CK if rhabdo concern\n\n**Imaging:**\n• CT head if: trauma, focal neuro findings, first psychosis\n• CXR if: hypoxia, aspiration concern\n\n**ECG:**\n• QTc (if antipsychotics given)\n• Arrhythmia assessment\n\n**Assess for:**\n• Underlying medical cause (infection, metabolic)\n• Psychiatric history\n• Suicide/homicide risk (once able to participate)',
+    citation: [3],
+    next: 'agit-disposition',
+    summary: 'Labs, imaging, ECG once sedated. Assess for underlying cause and safety risk.',
+  },
+
+  {
+    id: 'agit-disposition',
+    type: 'question',
+    module: 6,
+    title: 'Disposition',
+    body: '**Where does this patient need to go?**',
+    options: [
+      { label: 'ICU', description: 'Ongoing sedation, airway concern, organ failure risk', next: 'agit-icu' },
+      { label: 'Inpatient Psychiatry', description: 'Primary psychiatric, safety risk', next: 'agit-psych-admit' },
+      { label: 'Medical Admission', description: 'Underlying medical condition', next: 'agit-med-admit' },
+      { label: 'ED Observation', description: 'Mild intoxication, expected to resolve', next: 'agit-observe' },
+      { label: 'Discharge', description: 'Clear benign etiology, safe environment', next: 'agit-discharge' },
+    ],
+    summary: 'Disposition based on etiology, ongoing sedation needs, and safety assessment.',
+  },
+
+  {
+    id: 'agit-icu',
+    type: 'result',
+    module: 6,
+    title: 'ICU Admission',
+    body: '**ICU criteria:**\n• Ongoing sedation requirements\n• Airway concern / intubated\n• Rhabdomyolysis with renal injury\n• Cardiac arrhythmias\n• Hyperactive delirium with hyperthermia\n• Refractory agitation (phenobarbital/propofol infusion)',
+    recommendation: 'Admit to ICU for ongoing monitoring and management.',
+    confidence: 'definitive',
+    summary: 'ICU for ongoing sedation, airway, rhabdo, arrhythmia, or refractory agitation.',
+  },
+
+  {
+    id: 'agit-psych-admit',
+    type: 'result',
+    module: 6,
+    title: 'Psychiatric Admission',
+    body: '**Psychiatric admission if:**\n• Primary psychiatric etiology confirmed\n• Ongoing safety risk (suicidal, homicidal)\n• Unable to care for self\n\n**Requires medical clearance first:**\n→ [Medical Clearance - Psych](#/tree/medical-clearance-psych)',
+    recommendation: 'Admit to inpatient psychiatry after medical clearance.',
+    confidence: 'definitive',
+    summary: 'Psychiatric admission for primary psych with ongoing safety risk.',
+  },
+
+  {
+    id: 'agit-med-admit',
+    type: 'result',
+    module: 6,
+    title: 'Medical Admission',
+    body: '**Medical admission if:**\n• Underlying medical condition requiring treatment\n  - Sepsis, DKA, stroke, etc.\n• Delirium requiring ongoing workup\n• Withdrawal requiring monitored taper',
+    recommendation: 'Admit to medicine or appropriate specialty service.',
+    confidence: 'definitive',
+    summary: 'Medical admission for underlying condition (sepsis, metabolic, withdrawal).',
+  },
+
+  {
+    id: 'agit-observe',
+    type: 'result',
+    module: 6,
+    title: 'ED Observation',
+    body: '**Observation if:**\n• Mild intoxication expected to resolve\n• Awaiting sobriety for complete assessment\n• Unclear etiology, low acuity\n\n**Reassess when sober:**\n• Complete psychiatric assessment\n• Safety evaluation\n• Disposition planning',
+    recommendation: 'Observe in ED until sober, then reassess.',
+    confidence: 'recommended',
+    summary: 'Observe until sober, then complete assessment and disposition.',
+  },
+
+  {
+    id: 'agit-discharge',
+    type: 'result',
+    module: 6,
+    title: 'Discharge',
+    body: '**Discharge if:**\n• Clear benign etiology (mild intoxication, resolved)\n• No safety concerns\n• Safe environment\n• Reliable follow-up available\n\n**Provide:**\n• Follow-up appointment\n• Crisis resources (988 Suicide & Crisis Lifeline)\n• Return precautions',
+    recommendation: 'Discharge with follow-up and crisis resources.',
+    confidence: 'recommended',
+    summary: 'Discharge if benign etiology, safe, with follow-up arranged.',
+  },
+
+  {
+    id: 'agit-end',
+    type: 'result',
+    module: 6,
+    title: 'Management Complete',
+    body: 'Patient managed per protocol.\n\n**Key reminders:**\n• Document all interventions\n• Debrief with team\n• Review for quality improvement',
+    recommendation: 'Document interventions and debrief with team.',
+    confidence: 'recommended',
+    summary: 'Document interventions, debrief, review for QI.',
+  },
+
+];
+
+export const ACUTE_AGITATION_MODULE_LABELS = [
+  'Assessment & Safety',
+  'Etiology',
+  'Medications',
+  'Physical Restraint',
+  'Hyperactive Delirium',
+  'Workup & Disposition',
+];
+
+export const ACUTE_AGITATION_CITATIONS: Citation[] = [
+  { num: 1, text: 'ACEP Clinical Policy: Critical Issues in the Diagnosis and Management of the Adult Psychiatric Patient in the Emergency Department. Annals of Emergency Medicine 2024.' },
+  { num: 2, text: 'Richmond JS, et al. Verbal De-escalation of the Agitated Patient: Consensus Statement of the American Association for Emergency Psychiatry Project BETA De-escalation Workgroup. West J Emerg Med 2012;13:17-25.' },
+  { num: 3, text: 'Wilson MP, et al. The Psychopharmacology of Agitation: Consensus Statement of the American Association for Emergency Psychiatry Project BETA. West J Emerg Med 2012;13:26-34.' },
+  { num: 4, text: 'Shenvi C, et al. Managing Delirium and Agitation in the Older ED Patient: The ADEPT Tool. Ann Emerg Med 2020;75:136-45.' },
+  { num: 5, text: 'ACEP Task Force Report on Hyperactive Delirium with Severe Agitation in Emergency Settings. 2021.' },
+  { num: 6, text: 'ASAM Clinical Practice Guideline on Alcohol Withdrawal Management. 2020.' },
+  { num: 7, text: 'Martel M, et al. A Randomized Double-Blind Trial of Intramuscular Midazolam, Olanzapine, Ziprasidone, or Haloperidol for Acute Undifferentiated Agitation in the ED. Ann Emerg Med 2019;74:e57.' },
+  { num: 8, text: 'Strote J, et al. Rhabdomyolysis and Prehospital Use of Physical Restraint. Prehosp Emerg Care 2013;17:508-13.' },
+  { num: 9, text: 'Vilke GM, et al. Excited Delirium Syndrome: A Review. J Emerg Med 2012;43:897-905.' },
+];
+
+export const ACUTE_AGITATION_NODE_COUNT = ACUTE_AGITATION_NODES.length;

@@ -341,7 +341,39 @@ async function loadHardcodedFallback(treeId) {
         },
         'alcohol-withdrawal': async () => {
             const m = await import('../data/trees/alcohol-withdrawal.js');
-            return { nodes: m.ALCOHOL_WITHDRAWAL_NODES, entryNodeId: 'aw-start', categoryId: 'emergency-medicine', moduleLabels: m.ALCOHOL_WITHDRAWAL_MODULE_LABELS, citations: m.ALCOHOL_WITHDRAWAL_CITATIONS, criticalActions: m.ALCOHOL_WITHDRAWAL_CRITICAL_ACTIONS };
+            return { nodes: m.ALCOHOL_WITHDRAWAL_NODES, entryNodeId: 'aw-start', categoryId: 'psychiatry', moduleLabels: m.ALCOHOL_WITHDRAWAL_MODULE_LABELS, citations: m.ALCOHOL_WITHDRAWAL_CITATIONS, criticalActions: m.ALCOHOL_WITHDRAWAL_CRITICAL_ACTIONS };
+        },
+        'psych-triage': async () => {
+            const m = await import('../data/trees/psych-triage.js');
+            return { nodes: m.PSYCH_TRIAGE_NODES, entryNodeId: 'pst-start', categoryId: 'psychiatry', moduleLabels: m.PSYCH_TRIAGE_MODULE_LABELS, citations: m.PSYCH_TRIAGE_CITATIONS, criticalActions: m.PSYCH_TRIAGE_CRITICAL_ACTIONS };
+        },
+        'acute-agitation': async () => {
+            const m = await import('../data/trees/acute-agitation.js');
+            return { nodes: m.ACUTE_AGITATION_NODES, entryNodeId: 'agit-start', categoryId: 'psychiatry', moduleLabels: m.ACUTE_AGITATION_MODULE_LABELS, citations: m.ACUTE_AGITATION_CITATIONS, criticalActions: m.ACUTE_AGITATION_CRITICAL_ACTIONS };
+        },
+        'suicidal-patient': async () => {
+            const m = await import('../data/trees/suicidal-patient.js');
+            return { nodes: m.SUICIDAL_PATIENT_NODES, entryNodeId: 'sui-start', categoryId: 'psychiatry', moduleLabels: m.SUICIDAL_PATIENT_MODULE_LABELS, citations: m.SUICIDAL_PATIENT_CITATIONS, criticalActions: m.SUICIDAL_PATIENT_CRITICAL_ACTIONS };
+        },
+        'medical-clearance-psych': async () => {
+            const m = await import('../data/trees/medical-clearance-psych.js');
+            return { nodes: m.MEDICAL_CLEARANCE_PSYCH_NODES, entryNodeId: 'mcp-start', categoryId: 'psychiatry', moduleLabels: m.MEDICAL_CLEARANCE_PSYCH_MODULE_LABELS, citations: m.MEDICAL_CLEARANCE_PSYCH_CITATIONS, criticalActions: m.MEDICAL_CLEARANCE_PSYCH_CRITICAL_ACTIONS };
+        },
+        'nms': async () => {
+            const m = await import('../data/trees/nms.js');
+            return { nodes: m.NMS_NODES, entryNodeId: 'nms-start', categoryId: 'psychiatry', moduleLabels: m.NMS_MODULE_LABELS, citations: m.NMS_CITATIONS, criticalActions: m.NMS_CRITICAL_ACTIONS };
+        },
+        'catatonia': async () => {
+            const m = await import('../data/trees/catatonia.js');
+            return { nodes: m.CATATONIA_NODES, entryNodeId: 'cat-start', categoryId: 'psychiatry', moduleLabels: m.CATATONIA_MODULE_LABELS, citations: m.CATATONIA_CITATIONS, criticalActions: m.CATATONIA_CRITICAL_ACTIONS };
+        },
+        'acute-psychosis': async () => {
+            const m = await import('../data/trees/acute-psychosis.js');
+            return { nodes: m.ACUTE_PSYCHOSIS_NODES, entryNodeId: 'ap-start', categoryId: 'psychiatry', moduleLabels: m.ACUTE_PSYCHOSIS_MODULE_LABELS, citations: m.ACUTE_PSYCHOSIS_CITATIONS, criticalActions: m.ACUTE_PSYCHOSIS_CRITICAL_ACTIONS };
+        },
+        'capacity-assessment': async () => {
+            const m = await import('../data/trees/capacity-assessment.js');
+            return { nodes: m.CAPACITY_ASSESSMENT_NODES, entryNodeId: 'cap-start', categoryId: 'psychiatry', moduleLabels: m.CAPACITY_ASSESSMENT_MODULE_LABELS, citations: m.CAPACITY_ASSESSMENT_CITATIONS, criticalActions: m.CAPACITY_ASSESSMENT_CRITICAL_ACTIONS };
         },
         'first-trimester': async () => {
             const m = await import('../data/trees/first-trimester.js');

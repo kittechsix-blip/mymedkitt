@@ -1,0 +1,331 @@
+// MedKitt — Suicidal Patient
+// Screening → C-SSRS → Risk Stratification → Safety Planning → Disposition
+// Evidence: Joint Commission NPSG, Columbia Protocol, ED-SAFE, Zero Suicide Initiative
+// ~24 nodes
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const SUICIDAL_PATIENT_CRITICAL_ACTIONS = [
+  { text: '1:1 constant observation — visual contact at all times', nodeId: 'sui-safety' },
+  { text: 'Remove all ligatures, sharps, medications from room', nodeId: 'sui-safety' },
+  { text: 'Screen ALL patients — 50% of suicide decedents seen in ED within 30 days', nodeId: 'sui-start' },
+  { text: 'Means restriction counseling reduces suicide deaths', nodeId: 'sui-means' },
+  { text: 'Lethal means = firearms, medications, heights — address directly', nodeId: 'sui-means' },
+];
+
+export const SUICIDAL_PATIENT_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: SCREENING & INITIAL ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'sui-start',
+    type: 'info',
+    module: 1,
+    title: 'Suicidal Patient',
+    body: '[Steps Summary](#/info/sui-steps)\n\n**Why screening matters:**\n• 50% of suicide decedents seen in healthcare within 30 days of death\n• 80% deny suicidal ideation at last visit\n• Universal screening detects at-risk patients\n\n**Joint Commission NPSG 15.01.01:**\nScreen ALL patients using validated tool.',
+    citation: [1, 2],
+    next: 'sui-safety',
+    summary: '50% of suicide decedents seen in healthcare within 30 days. Universal screening required.',
+  },
+
+  {
+    id: 'sui-safety',
+    type: 'info',
+    module: 1,
+    title: 'Immediate Safety',
+    body: '**Environmental safety — do FIRST:**\n\n✓ **1:1 constant visual observation**\n✓ **Remove from room:**\n  • Ligatures (clothing, sheets, cords)\n  • Sharps (needles, razors, glass)\n  • Medications (all — including patient\'s own)\n  • Plastic bags\n✓ **Secure windows and exits**\n✓ **Patient in gown** (remove belt, shoelaces)\n✓ **Metal detector wand** if available\n\n**Do NOT leave patient alone** — even for tests/imaging.',
+    citation: [1],
+    next: 'sui-screening-tool',
+    summary: '1:1 observation, remove ligatures/sharps/meds, patient in gown, never leave alone.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'sui-screening-tool',
+    type: 'question',
+    module: 1,
+    title: 'Screening Tool',
+    body: '**Which screening tool to use?**\n\nBoth are Joint Commission-validated.',
+    options: [
+      { label: 'ASQ (Ask Suicide-Screening Questions)', description: '4 questions, <2 min, ages 10+', next: 'sui-asq' },
+      { label: 'C-SSRS (Columbia Protocol)', description: '6 questions, more detailed', next: 'sui-cssrs' },
+      { label: 'PHQ-9 Item 9 positive', description: 'Already screened via PHQ-9', next: 'sui-cssrs' },
+    ],
+    citation: [2, 3],
+    summary: 'ASQ = quick screening. C-SSRS = detailed assessment.',
+  },
+
+  {
+    id: 'sui-asq',
+    type: 'question',
+    module: 1,
+    title: 'ASQ Screening',
+    body: '**Ask Suicide-Screening Questions (ASQ):**\n\n1. In the past few weeks, have you wished you were dead?\n2. In the past few weeks, have you felt that you or your family would be better off if you were dead?\n3. In the past week, have you been having thoughts about killing yourself?\n4. Have you ever tried to kill yourself?\n\n**If YES to any:** → Positive screen\n\n**If ALL NO:** Ask acuity question:\n"Are you having thoughts of killing yourself right now?"',
+    options: [
+      { label: 'Positive screen (YES to any)', description: 'Needs full assessment', next: 'sui-cssrs', urgency: 'urgent' },
+      { label: 'Negative screen (all NO)', description: 'Low acute risk', next: 'sui-low-risk' },
+    ],
+    citation: [3],
+    summary: 'ASQ: 4 questions. Any YES = positive screen, needs full C-SSRS assessment.',
+  },
+
+  // =====================================================================
+  // MODULE 2: C-SSRS ASSESSMENT
+  // =====================================================================
+
+  {
+    id: 'sui-cssrs',
+    type: 'info',
+    module: 2,
+    title: 'C-SSRS Assessment',
+    body: '**Columbia Suicide Severity Rating Scale**\n\n**Assess in order — stop at first NO:**\n\n1. **Wish to be dead?** (passive ideation)\n2. **Non-specific active thoughts?** ("wanting to end my life")\n3. **Active ideation with method?** (thinking about how)\n4. **Active ideation with intent?** (intending to act)\n5. **Active ideation with plan?** (specific plan formed)\n\n**Also assess:**\n• Preparatory behaviors (giving away possessions, writing notes)\n• Lifetime history of attempts\n• Recent attempt (within past 3 months)',
+    citation: [4],
+    next: 'sui-cssrs-result',
+    summary: 'C-SSRS: 5 levels of ideation severity. Stop at first NO.',
+  },
+
+  {
+    id: 'sui-cssrs-result',
+    type: 'question',
+    module: 2,
+    title: 'C-SSRS Result',
+    body: '**What is the highest level endorsed?**',
+    options: [
+      { label: 'Level 1-2: Passive ideation', description: 'Wishes dead, non-specific thoughts', next: 'sui-moderate-risk' },
+      { label: 'Level 3: Active ideation with method', description: 'Thinking about how', next: 'sui-high-risk', urgency: 'urgent' },
+      { label: 'Level 4-5: Intent or plan', description: 'Intending to act or specific plan', next: 'sui-imminent-risk', urgency: 'critical' },
+      { label: 'Recent attempt', description: 'Attempt within past 3 months', next: 'sui-imminent-risk', urgency: 'critical' },
+      { label: 'No ideation', description: 'Negative C-SSRS', next: 'sui-low-risk' },
+    ],
+    citation: [4],
+    summary: 'C-SSRS level determines risk category and disposition pathway.',
+  },
+
+  // =====================================================================
+  // MODULE 3: RISK STRATIFICATION
+  // =====================================================================
+
+  {
+    id: 'sui-low-risk',
+    type: 'info',
+    module: 3,
+    title: 'Low Acute Risk',
+    body: '**Low risk does NOT mean no risk.**\n\n**Protective factors:**\n• Strong social support\n• Engaged in treatment\n• Problem-solving skills\n• Reasons for living\n• Children at home\n• Religious/spiritual beliefs\n\n**Still required:**\n• Brief counseling on warning signs\n• Crisis resources (988 Lifeline)\n• Follow-up appointment scheduled',
+    citation: [2],
+    next: 'sui-disposition',
+    summary: 'Low risk — provide crisis resources, schedule follow-up, brief counseling.',
+  },
+
+  {
+    id: 'sui-moderate-risk',
+    type: 'info',
+    module: 3,
+    title: 'Moderate Risk',
+    body: '**Passive ideation or non-specific active thoughts**\n\n**Assess modifying factors:**\n\n**Elevating risk:**\n• Recent loss (relationship, job, health)\n• Social isolation\n• Substance use\n• Prior attempts (strongest predictor)\n• Family history of suicide\n• Access to lethal means\n• Hopelessness\n• Impulsivity\n\n**Protective factors:**\n• Engaged in treatment\n• Future orientation\n• Social support\n• Reasons for living',
+    citation: [2, 5],
+    next: 'sui-means',
+    summary: 'Moderate risk — assess modifying factors (prior attempts, means access, support).',
+  },
+
+  {
+    id: 'sui-high-risk',
+    type: 'info',
+    module: 3,
+    title: 'High Risk',
+    body: '**Active ideation WITH method**\n\n**This patient has thought about HOW.**\n\n**Required:**\n• Continue 1:1 observation\n• Psychiatric consultation\n• Means restriction counseling\n• Safety planning\n• Consider voluntary or involuntary admission\n\n**Do NOT discharge without:**\n• Psychiatry evaluation\n• Documented safety plan\n• Means restriction addressed\n• Follow-up within 24-72 hours',
+    citation: [2, 4],
+    next: 'sui-means',
+    summary: 'High risk — psych consult, means restriction, safety plan, no discharge without eval.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'sui-imminent-risk',
+    type: 'info',
+    module: 3,
+    title: 'Imminent Risk',
+    body: '**Intent, plan, or recent attempt**\n\n⚠️ **HIGHEST RISK — requires admission**\n\n**Immediate actions:**\n• Continuous 1:1 observation\n• STAT psychiatry consult\n• Search for concealed means (wand, pockets)\n• Medical stabilization if post-attempt\n• Notify family (if appropriate)\n\n**Disposition:**\n• Voluntary psychiatric admission preferred\n• Involuntary hold if refuses AND meets criteria\n• Do NOT discharge',
+    citation: [2, 4],
+    next: 'sui-means',
+    summary: 'Imminent risk — STAT psych, 1:1, no discharge. Voluntary or involuntary admission.',
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 4: MEANS RESTRICTION
+  // =====================================================================
+
+  {
+    id: 'sui-means',
+    type: 'info',
+    module: 4,
+    title: 'Means Restriction Counseling',
+    body: '**Lethal means restriction SAVES LIVES**\n\n**Most lethal methods:**\n• Firearms (85% case fatality)\n• Hanging/suffocation (61%)\n• Jumping (31%)\n• Poisoning/overdose (2%)\n\n**Key point:** 90% who survive an attempt do NOT die by suicide later.\nReducing access to lethal means prevents impulsive deaths.\n\n**CALM approach:**\n• **C**larify if means are accessible\n• **A**sk about willingness to secure\n• **L**isten to barriers\n• **M**ake a plan together',
+    citation: [6],
+    next: 'sui-means-firearms',
+    summary: 'Means restriction saves lives. Firearms = 85% case fatality. Use CALM approach.',
+  },
+
+  {
+    id: 'sui-means-firearms',
+    type: 'info',
+    module: 4,
+    title: 'Firearms Counseling',
+    body: '**Firearms account for 50% of US suicide deaths**\n\n**Ask directly:**\n"Do you have access to any guns?"\n\n**Counseling (non-judgmental):**\n"Many people in crisis find it helpful to temporarily store firearms outside the home."\n\n**Options for temporary storage:**\n• Trusted friend/family member\n• Gun shop or shooting range\n• Law enforcement (some jurisdictions)\n• Gun safe with trusted keyholder\n\n**Document:** Counseling provided, patient response',
+    citation: [6],
+    next: 'sui-means-meds',
+    summary: 'Firearms = 50% of suicide deaths. Counsel on temporary storage outside home.',
+  },
+
+  {
+    id: 'sui-means-meds',
+    type: 'info',
+    module: 4,
+    title: 'Medication Safety',
+    body: '**Medication overdose — most common attempt method**\n\n**High-risk medications:**\n• Opioids\n• Benzodiazepines\n• TCAs (10-day supply can be lethal)\n• Tylenol (hepatotoxic)\n• Insulin\n• Beta-blockers, calcium channel blockers\n\n**Counseling:**\n• Limit quantities prescribed\n• Lock up or store with trusted person\n• Consider dispensing weekly\n• Naloxone for opioid-prescribed patients\n\n**If discharging a patient at risk:**\n• Prescribe minimal quantities (7-day supply)\n• Avoid high-lethality medications if alternatives exist',
+    citation: [6],
+    next: 'sui-safety-plan',
+    summary: 'Limit med quantities, lock up pills, consider weekly dispensing for at-risk patients.',
+  },
+
+  // =====================================================================
+  // MODULE 5: SAFETY PLANNING
+  // =====================================================================
+
+  {
+    id: 'sui-safety-plan',
+    type: 'info',
+    module: 5,
+    title: 'Safety Planning Intervention',
+    body: '**Stanley-Brown Safety Plan — 6 steps:**\n\n1. **Warning signs** — What tells you crisis is building?\n2. **Internal coping** — What can you do alone? (walk, music, breathing)\n3. **Social contacts** — Who can distract you? (friends, places)\n4. **Family/friends to contact** — Who can you call for help?\n5. **Professionals to contact** — Therapist, doctor, crisis line\n6. **Making environment safe** — Means restriction plan\n\n**Write it down.** Patient keeps a copy.\nReview with patient before discharge.',
+    citation: [7],
+    next: 'sui-safety-plan-create',
+    summary: 'Stanley-Brown Safety Plan: warning signs, coping, contacts, professionals, means safety.',
+  },
+
+  {
+    id: 'sui-safety-plan-create',
+    type: 'info',
+    module: 5,
+    title: 'Creating the Plan',
+    body: '**Collaborative process:**\n\n**Step 1: Warning signs**\n"What thoughts, feelings, or situations tell you that a crisis may be developing?"\n\n**Step 2: Internal coping**\n"What are things you can do on your own to take your mind off problems?"\n\n**Step 3: Social settings/people**\n"What places can you go or people you can be around that provide distraction?"\n\n**Step 4: People to contact**\n"Who are family or friends you can contact when you need help?"\n\n**Step 5: Professionals**\n• Therapist/counselor: ___\n• Prescriber: ___\n• 988 Suicide & Crisis Lifeline\n• Local crisis line: ___\n\n**Step 6: Means safety**\n"How will we make your environment safer?"',
+    citation: [7],
+    next: 'sui-disposition',
+    summary: 'Collaborative safety planning — patient completes with provider, keeps copy.',
+  },
+
+  // =====================================================================
+  // MODULE 6: DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'sui-disposition',
+    type: 'question',
+    module: 6,
+    title: 'Disposition Decision',
+    body: '**Based on risk level and clinical judgment:**',
+    options: [
+      { label: 'Discharge with safety plan', description: 'Low-moderate risk, protective factors, means addressed', next: 'sui-discharge' },
+      { label: 'Voluntary psychiatric admission', description: 'High risk, patient agrees', next: 'sui-voluntary' },
+      { label: 'Involuntary hold', description: 'Imminent risk, patient refuses, meets criteria', next: 'sui-involuntary' },
+      { label: 'Medical admission first', description: 'Post-attempt requiring medical care', next: 'sui-medical' },
+      { label: 'Crisis stabilization unit', description: 'If available, alternative to inpatient', next: 'sui-csu' },
+    ],
+    summary: 'Disposition based on risk level, patient agreement, and available resources.',
+  },
+
+  {
+    id: 'sui-discharge',
+    type: 'result',
+    module: 6,
+    title: 'Discharge with Safety Plan',
+    body: '**Before discharge, ensure:**\n\n✓ Safety plan completed and reviewed\n✓ Means restriction addressed and documented\n✓ Follow-up appointment within 24-72 hours\n✓ Crisis resources provided:\n  • **988** — Suicide & Crisis Lifeline\n  • **741741** — Crisis Text Line (text HOME)\n  • Local crisis number\n✓ Family/support notified (with patient consent)\n✓ Prescriptions limited to safe quantities\n\n**Caring Contacts:**\nBrief follow-up call/text within 24-48 hours reduces suicide attempts.',
+    recommendation: 'Discharge with safety plan, means restriction, and follow-up within 24-72h.',
+    confidence: 'recommended',
+    citation: [8],
+    summary: 'Discharge: safety plan, means restriction, 24-72h follow-up, crisis resources, caring contact.',
+  },
+
+  {
+    id: 'sui-voluntary',
+    type: 'result',
+    module: 6,
+    title: 'Voluntary Psychiatric Admission',
+    body: '**Patient agrees to admission:**\n\n• Explain treatment plan and expected duration\n• Complete medical clearance per facility requirements\n• Transfer to psychiatric facility or unit\n• Document patient\'s voluntary agreement\n• Notify family (with consent)\n\n**Preferred over involuntary** when patient willing — better therapeutic alliance.',
+    recommendation: 'Voluntary psychiatric admission for high-risk patient who agrees to treatment.',
+    confidence: 'definitive',
+    summary: 'Voluntary admission — preferred when patient agrees. Better therapeutic alliance.',
+  },
+
+  {
+    id: 'sui-involuntary',
+    type: 'result',
+    module: 6,
+    title: 'Involuntary Hold',
+    body: '**State-specific criteria — generally:**\n\n• Danger to self due to mental illness\n• Unable to care for self\n• Refuses voluntary treatment\n\n**Documentation required:**\n• Specific behaviors/statements demonstrating risk\n• Mental illness diagnosed or suspected\n• Less restrictive alternatives considered\n• Time-limited hold (typically 72 hours)\n\n**Patient rights:**\n• Right to hearing/review\n• Right to legal representation\n• Right to communicate with attorney\n\n**Complete state-specific form** (e.g., 5150, M-1, Baker Act).',
+    recommendation: 'Involuntary hold for imminent risk when patient refuses voluntary admission.',
+    confidence: 'definitive',
+    citation: [1],
+    summary: 'Involuntary hold — state-specific criteria. Document specific risk behaviors.',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'sui-medical',
+    type: 'result',
+    module: 6,
+    title: 'Medical Admission',
+    body: '**Post-attempt requiring medical care:**\n\n• Stabilize medical condition first\n• Continue 1:1 sitter observation\n• Psychiatry consult for ongoing assessment\n• Transfer to psychiatry when medically clear\n\n**Common post-attempt presentations:**\n• Overdose requiring monitoring/treatment\n• Self-inflicted wounds requiring surgery\n• Aspiration pneumonia\n• Rhabdomyolysis',
+    recommendation: 'Medical admission with 1:1 sitter, psych consult, transfer when medically stable.',
+    confidence: 'definitive',
+    summary: 'Post-attempt — medical admission with 1:1, psych consult, transfer when stable.',
+  },
+
+  {
+    id: 'sui-csu',
+    type: 'result',
+    module: 6,
+    title: 'Crisis Stabilization Unit',
+    body: '**Alternative to inpatient admission:**\n\n**Criteria for CSU (if available):**\n• Moderate-high risk but not imminent\n• Voluntary participation\n• No acute medical needs\n• Benefit from brief stabilization (24-72h)\n\n**CSU provides:**\n• Crisis intervention\n• Safety monitoring\n• Brief therapy\n• Connection to outpatient resources\n\n**Advantages:** Less restrictive, shorter stay, maintains community connections.',
+    recommendation: 'Crisis stabilization unit as alternative to inpatient for moderate-high risk.',
+    confidence: 'recommended',
+    summary: 'CSU — voluntary, 24-72h, less restrictive alternative to inpatient.',
+  },
+
+  {
+    id: 'sui-end',
+    type: 'result',
+    module: 6,
+    title: 'Assessment Complete',
+    body: '**Documentation reminders:**\n\n• Screening tool used and results\n• Risk level determination\n• Means restriction counseling provided\n• Safety plan (attach copy)\n• Disposition and rationale\n• Follow-up arranged\n• Crisis resources provided',
+    recommendation: 'Document screening, risk level, means counseling, safety plan, and follow-up.',
+    confidence: 'recommended',
+    summary: 'Document all screening, risk assessment, safety plan, and disposition.',
+  },
+
+];
+
+export const SUICIDAL_PATIENT_MODULE_LABELS = [
+  'Screening',
+  'C-SSRS Assessment',
+  'Risk Stratification',
+  'Means Restriction',
+  'Safety Planning',
+  'Disposition',
+];
+
+export const SUICIDAL_PATIENT_CITATIONS: Citation[] = [
+  { num: 1, text: 'The Joint Commission. National Patient Safety Goal NPSG 15.01.01: Suicide Prevention. 2024.' },
+  { num: 2, text: 'Betz ME, Boudreaux ED. Managing Suicidal Patients in the Emergency Department. Ann Emerg Med 2016;67:276-82.' },
+  { num: 3, text: 'Horowitz LM, et al. Ask Suicide-Screening Questions (ASQ): A Brief Instrument for the Pediatric Emergency Department. Arch Pediatr Adolesc Med 2012;166:1170-6.' },
+  { num: 4, text: 'Posner K, et al. The Columbia-Suicide Severity Rating Scale: Initial Validity and Internal Consistency Findings From Three Multisite Studies With Adolescents and Adults. Am J Psychiatry 2011;168:1266-77.' },
+  { num: 5, text: 'Franklin JC, et al. Risk Factors for Suicidal Thoughts and Behaviors: A Meta-Analysis of 50 Years of Research. Psychol Bull 2017;143:187-232.' },
+  { num: 6, text: 'Barber CW, Miller MJ. Reducing a Suicidal Person\'s Access to Lethal Means of Suicide: A Research Agenda. Am J Prev Med 2014;47:S264-72.' },
+  { num: 7, text: 'Stanley B, Brown GK. Safety Planning Intervention: A Brief Intervention to Mitigate Suicide Risk. Cogn Behav Pract 2012;19:256-64.' },
+  { num: 8, text: 'Motto JA, Bostrom AG. A Randomized Controlled Trial of Postcrisis Suicide Prevention. Psychiatr Serv 2001;52:828-33.' },
+];
+
+export const SUICIDAL_PATIENT_NODE_COUNT = SUICIDAL_PATIENT_NODES.length;
