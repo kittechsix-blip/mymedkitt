@@ -13088,6 +13088,45 @@ const VERTIGO_BPPV_VARIANTS: InfoPage = {
   ],
 };
 
+const VERTIGO_BPPV_NUANCE: InfoPage = {
+  id: 'vertigo-bppv-nuance',
+  title: 'BPPV Nuance',
+  subtitle: 'Canalithiasis, cupulolithiasis, and otolith dysfunction',
+  image: {
+    src: 'images/vertigo/ampulla-cupula.svg',
+    alt: 'Cupula of the human semicircular canal ampulla',
+    caption: 'Cupula of the human semicircular canal ampulla. Thomas Haslwanter, CC BY-SA 3.0, Wikimedia Commons.',
+  },
+  sections: [
+    {
+      heading: 'Plain-English Model',
+      body: '**Canalithiasis** = loose crystals rolling in a canal.\n\n**Cupulolithiasis** = crystals stuck to the cupula sensor.\n\n**Otolith dysfunction** = the utricle/saccule level sensor is still giving imperfect balance signals after the canal problem is gone.\n\nAnalogy:\n• Canalithiasis = gravel rolling in a hose\n• Cupulolithiasis = gravel stuck to a hinge\n• Otolith dysfunction = a wall level that still reads crooked',
+    },
+    {
+      heading: 'Canalithiasis',
+      body: 'Free-floating otoconia move through a semicircular canal with gravity.\n\nTypical pattern:\n• Brief triggered vertigo\n• Positional nystagmus usually <1 minute\n• Latency before nystagmus starts\n• Fatigues with repeated testing\n• Responds well to canalith repositioning maneuvers',
+    },
+    {
+      heading: 'Cupulolithiasis',
+      body: 'Otoconia adhere to the cupula, making the cupula gravity-sensitive.\n\nTypical pattern:\n• Positional nystagmus may start quickly\n• Nystagmus can persist >1 minute\n• Less fatigable\n• More refractory to standard maneuvers\n• Horizontal canal apogeotropic nystagmus often suggests cupulolithiasis\n\nFor horizontal canal BPPV, apogeotropic nystagmus means the affected side is usually the side with LESS intense nystagmus.',
+    },
+    {
+      heading: 'Otolith Dysfunction',
+      body: 'The utricle and saccule detect gravity and linear acceleration. Dysfunction can leave the patient feeling off-balance even when the canalith problem is fixed.\n\nClues:\n• Repeat Dix-Hallpike or supine roll test is negative\n• No positional nystagmus remains\n• Patient reports residual imbalance, rocking, veering, tilt, or motion sensitivity\n• Epley no longer reproduces the original BPPV pattern\n\nDo not keep repeating Epley without positional nystagmus. Consider vestibular PT or ENT/audiology follow-up.',
+    },
+    {
+      heading: 'Quick Differentiator',
+      body: '**Still positional nystagmus:** think persistent BPPV, canal conversion, or cupulolithiasis.\n\n**No positional nystagmus but still feels off:** think residual dizziness or otolith dysfunction.\n\n**Central red flags:** pure downbeat nystagmus, direction-changing nystagmus, focal neuro findings, new severe headache/neck pain, inability to walk, or new hearing loss. These are not explained by BPPV nuance.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bhattacharyya N, et al. Clinical practice guideline: benign paroxysmal positional vertigo (update). Otolaryngol Head Neck Surg. 2017;156(3_suppl):S1-S47.' },
+    { num: 2, text: 'von Brevern M, Bertholon P, Brandt T, et al. Benign paroxysmal positional vertigo: Diagnostic criteria. J Vestib Res. 2015;25(3-4):105-117. doi:10.3233/VES-150553.' },
+    { num: 3, text: 'Purves D, Augustine GJ, Fitzpatrick D, et al., editors. Neuroscience. 2nd edition. The Otolith Organs: The Utricle and Sacculus. NCBI Bookshelf; 2001.' },
+  ],
+  shareable: true,
+};
+
 const VERTIGO_CENTRAL_PERIPHERAL: InfoPage = {
   id: 'vertigo-central-peripheral',
   title: 'Central vs Peripheral — Quick Reference',
@@ -19892,6 +19931,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'vertigo-dix-hallpike': VERTIGO_DIX_HALLPIKE,
   'vertigo-nystagmus-guide': VERTIGO_NYSTAGMUS_GUIDE,
   'vertigo-bppv-variants': VERTIGO_BPPV_VARIANTS,
+  'vertigo-bppv-nuance': VERTIGO_BPPV_NUANCE,
   'vertigo-central-peripheral': VERTIGO_CENTRAL_PERIPHERAL,
   'vertigo-migraine-criteria': VERTIGO_MIGRAINE_CRITERIA,
   'vertigo-imaging-guide': VERTIGO_IMAGING_GUIDE,

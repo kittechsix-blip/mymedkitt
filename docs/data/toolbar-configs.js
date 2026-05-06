@@ -426,6 +426,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'hints', label: 'HINTS', icon: '👁️', action: 'overlay', target: 'vertigo-hints-guide' },
         { id: 'epley', label: 'Epley', icon: '🔄', action: 'overlay', target: 'vertigo-dix-hallpike' },
         { id: 'bppv', label: 'BPPV', icon: '💫', action: 'jump', target: 'vert-bppv-history' },
+        { id: 'bppv-nuance', label: 'Nuance', icon: '🧭', action: 'overlay', target: 'vertigo-bppv-nuance' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'vertigo-stop' },
     ],
     'snake-envenomation': [
