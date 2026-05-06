@@ -19174,6 +19174,207 @@ const RHF_DISPOSITION_PERT_PAGE = {
         { num: 4, text: 'Konstam MA, et al. Evaluation and Management of Right-Sided Heart Failure: A Scientific Statement From the AHA. Circulation. 2018;137(20):e578-e622.' },
     ],
 };
+// =====================================================================
+// OCULAR TRAUMA INFO PAGES
+// =====================================================================
+const OCT_LATERAL_CANTHOTOMY_PAGE = {
+    id: 'oct-cantholysis',
+    title: 'Lateral Canthotomy + Inferior Cantholysis',
+    subtitle: 'Bedside ED procedure for orbital compartment syndrome',
+    sections: [
+        {
+            heading: 'When',
+            body: '**Two or more findings + plausible mechanism = CUT.**\n\n• Proptosis\n• IOP > 40 (or rock-hard globe)\n• Vision loss / RAPD\n• Limited or absent EOM\n• Severe orbital pain\n• Resistance to retropulsion\n\n**90-120 min vision-loss window. Do NOT wait for CT, ophthalmology, or transfer.** This is an ED procedure. The downside of cutting an unindicated lid is small (heals well). The downside of waiting on an indicated cut is permanent blindness. [1][2]',
+        },
+        {
+            heading: 'Equipment',
+            body: '• 1-2% lidocaine with epi + 27G needle (or skip if catastrophic)\n• Hemostat (mosquito)\n• Straight iris/Stevens scissors\n• Toothed forceps\n• Saline + gauze\n• Gloves, eye shield for after\n• Topical antibiotic ointment for after',
+        },
+        {
+            heading: '4-step technique',
+            body: '**Step 1 — Anesthetize**\nInject 1-2 cc lido + epi SC into the lateral canthus. If patient is unstable or vision is collapsing in real time, do the procedure dry — local anesthetic loss of time is not worth waiting.\n\n**Step 2 — Hemostat crush**\nClamp the lateral canthus horizontally with the hemostat for 60-90 seconds. This crushes tissue, reduces bleeding, and marks the cutting line. Tip of hemostat to orbital rim — about 1-1.5 cm.\n\n**Step 3 — Canthotomy**\nRelease the hemostat. With straight scissors, cut horizontally along the crushed line from the lateral canthus to the orbital rim. This alone is **not enough** — must proceed to cantholysis.\n\n**Step 4 — INFERIOR CANTHOLYSIS (the actual decompression)**\nGrasp the cut lower lid laterally with toothed forceps. Pull lid laterally and away from globe. Palpate the inferior crus of the lateral canthal tendon — a taut band you can strum with the scissors. **Strum-and-cut.** When the tendon releases, you will feel the lid free up and proptosis will decrease.\n\nIf IOP not adequately relieved → repeat with **superior cantholysis** (same technique, superior crus).',
+        },
+        {
+            heading: 'After',
+            body: '• Recheck IOP — should drop to < 30 mmHg\n• Apply topical antibiotic ointment to wound\n• Place rigid Fox shield over globe (NOT pressure patch)\n• Ice to forehead (reduces ongoing bleeding/swelling)\n• Reverse anticoagulation if applicable (PCC, vit K, andexanet alfa, idarucizumab)\n• CT orbits without contrast to confirm/characterize cause\n• Urgent ophthalmology and oculoplastics consult\n• Lid heals well; oculoplastics will close the wound when stable',
+        },
+        {
+            heading: 'Pearls and pitfalls',
+            body: '**Pearls:**\n• The actual decompression is the **tendon**, not the skin. Canthotomy alone is insufficient.\n• Inferior crus first — most ED OCS is from retrobulbar hemorrhage in the inferior orbit.\n• Stabilize your hand on the patient\'s head/cheek for control.\n• Speak the procedure out loud — this calms patient and team.\n\n**Pitfalls:**\n• Cutting too superficial (skin only) — must go through tarsus + tendon.\n• Trying to use forceps without good lid traction — pull lid laterally first.\n• Not rechecking IOP after — if still > 30, do superior cantholysis or call oculoplastics for orbital decompression.\n• Cutting straight up/down (vertical) — cut should be HORIZONTAL from canthus to rim.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ballard SR, Enzenauer RW, et al. Emergency lateral canthotomy and cantholysis: a simple procedure to preserve vision from sight threatening orbital hemorrhage. J Spec Oper Med. 2009;9(3):26-32.' },
+        { num: 2, text: 'EyeWiki. Orbital Compartment Syndrome. American Academy of Ophthalmology. Updated 2024.' },
+        { num: 3, text: 'Rowh AD, Ufberg JW, Chan TC, Vilke GM, Harrigan RA. Lateral canthotomy and cantholysis: emergency management of orbital compartment syndrome. J Emerg Med. 2015;48(3):325-330.' },
+    ],
+    shareable: true,
+};
+const OCT_CHEMICAL_IRRIGATION_PAGE = {
+    id: 'oct-chemical-irrigation',
+    title: 'Chemical Burn Irrigation Protocol',
+    subtitle: 'Irrigate at triage — before exam, before history, before VA',
+    sections: [
+        {
+            heading: 'Why irrigation comes first',
+            body: 'Time-to-irrigation is the strongest modifiable predictor of outcome. Alkali in particular saponifies cell membranes and can reach intraocular structures within minutes. Every minute spent on history, VA, or exam is a minute the chemical is still working. [1][2]',
+        },
+        {
+            heading: 'Standard protocol',
+            body: '**1. Topical anesthetic** (proparacaine 0.5%, 1-2 drops) — single use, allows tolerance.\n\n**2. Set up irrigation:**\n• Morgan lens preferred (allows hands-free continuous flow)\n• OR wide-bore IV tubing taped to lid speculum\n• Both eyes if bilateral exposure\n• 1-2 L LR or NS minimum (alkali burns may need 4-6 L+)\n• Body-temperature fluid more comfortable\n\n**3. Sweep fornices:** evert upper lid (Desmarres or cotton-swab eversion) and sweep with moistened cotton-tip applicator to remove particulate (cement, lime, magnesium fragments, drain cleaner crystals).\n\n**4. Continue until pH 7.0-7.4:**\n• Check pH with litmus paper at lower fornix\n• Wait **5 min after stopping irrigation** before checking — running fluid normalizes the surface but trapped chemical re-leaches\n• Confirm sustained pH 7.0-7.4 for 5 min off irrigation\n• Recheck at 30 min — alkali rebound is real\n\n**5. After irrigation:**\n• Document VA each eye\n• Slit lamp with fluorescein — corneal epithelial defect mapping\n• Assess limbal ischemia (white "porcelain" limbus = limbal stem cell loss)\n• Stage with Roper-Hall or Dua\n• Treatment per stage',
+        },
+        {
+            heading: 'Acid vs alkali — why alkali is worse',
+            body: '**Acid burns:** acid coagulates proteins, forming a barrier that limits deeper penetration. Less intraocular spread.\n• Common: hydrochloric acid, sulfuric (battery), nitric, acetic\n• **Exception:** hydrofluoric acid (HF) acts like alkali — small amount can perforate; needs calcium gluconate added\n\n**Alkali burns:** alkali saponifies cell membranes → tracks deep into AC, damages limbal stem cells, can reach iris, lens, ciliary body. Worse outcomes.\n• Common: lye/sodium hydroxide (drain cleaner), ammonia (cleaning), calcium hydroxide (cement, plaster, lime), magnesium hydroxide (fireworks, sparklers)\n• Cement and lime continue to release base when wet — sweep particulate aggressively',
+        },
+        {
+            heading: 'Special situations',
+            body: '• **Hydrofluoric acid:** add calcium gluconate (10% solution) topically + IV — fluoride chelation prevents systemic toxicity (hypocalcemia, hypomagnesemia, arrhythmia)\n• **Pepper spray (OC) / mace:** primarily inflammatory; copious irrigation, no specific antidote\n• **Super glue:** lid stuck shut — do NOT force open; mineral oil + erythromycin ointment, peel as it loosens, ophtho if cornea involved\n• **Particulate (cement, fireworks):** thorough lid eversion + sweeping is critical; particles trapped in fornix continue to react\n• **Pediatric:** don\'t skip irrigation because of crying — sedation/papoose if needed; outcomes depend on time-to-irrigation, not patient cooperation',
+        },
+        {
+            heading: 'Tip: irrigate during history',
+            body: 'Set up irrigation while you take history about the chemical, time of injury, eye protection, force/pressure (high-pressure spray vs splash), prior eye disease, and tetanus status. The team can run irrigation while you write the orders for slit lamp, antibiotics, and ophthalmology consult. **Do not stop irrigation to do exam — exam happens after pH is normal.**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Singh P, Tyagi M, Kumar Y, et al. Ocular chemical injuries and their management. Oman J Ophthalmol. 2013;6(2):83-86.' },
+        { num: 2, text: 'Wagoner MD. Chemical injuries of the eye: current concepts in pathophysiology and therapy. Surv Ophthalmol. 1997;41(4):275-313.' },
+        { num: 3, text: 'Dua HS, King AJ, Joseph A. A new classification of ocular surface burns. Br J Ophthalmol. 2001;85(11):1379-1383.' },
+    ],
+    shareable: true,
+};
+const OCT_HYPHEMA_MANAGEMENT_PAGE = {
+    id: 'oct-hyphema-management',
+    title: 'Hyphema Management',
+    subtitle: 'Grading, sickle screen, treatment, and re-bleed prevention',
+    sections: [
+        {
+            heading: 'Grading',
+            body: '| Grade | Layered blood | Notes |\n|-------|--------------|-------|\n| Microhyphema | RBCs only, no layered blood | Slit lamp diagnosis |\n| Grade I | <1/3 AC | Most common |\n| Grade II | 1/3-1/2 AC | |\n| Grade III | >1/2 AC, not full | |\n| Grade IV | Full AC ("eight-ball") | Worst prognosis, often surgical |\n\n**Grade IV / eight-ball** = thick clotted blood obscuring iris; high IOP, often needs OR washout.',
+        },
+        {
+            heading: 'Sickle screening — mandatory',
+            body: '**Screen every Black, Mediterranean, Middle Eastern, Indian patient with hyphema.** Even sickle trait (HbAS) carriers can decompensate.\n\n**Why:** AC has low pH and low pO2 → sickled RBCs → trabecular meshwork blockade → IOP spike → optic nerve ischemia. Sickled RBCs in AC also resist clearance.\n\n**Workup:** sickle prep + Hb electrophoresis (don\'t rely on prep alone — false negatives in trait).\n\n**If sickle:**\n• ❌ AVOID acetazolamide, methazolamide, dorzolamide (CAIs acidify AC, worsen sickling)\n• ❌ AVOID mannitol (raises AC osmolarity)\n• ❌ AVOID hyperventilation in intubated patients (alkalosis OK; respiratory acidosis bad)\n• ✅ For IOP: timolol 0.5% BID + brimonidine 0.2% TID + latanoprost qHS\n• Surgical AC washout threshold lower: IOP > 24 × 24 hr (vs > 50 × 5 d non-sickle)',
+        },
+        {
+            heading: 'Standard medical management (non-sickle)',
+            body: '• **Bedrest** with HOB 30-45° (lets blood layer inferior, clears visual axis, reduces re-bleed risk)\n• **Rigid Fox shield** at all times\n• **Topical cycloplegic** — atropine 1% BID (prevents synechiae, comfort)\n• **Topical steroid** — prednisolone acetate 1% q2-4h (reduces inflammation, may reduce re-bleed)\n• **Antifibrinolytic** — tranexamic acid 25 mg/kg PO TID **OR** aminocaproic acid (Amicar) 50 mg/kg q4h × 5 days (reduces re-bleed ~30% incidence on day 2-5)\n• **Avoid ASA, NSAIDs** (re-bleed risk)\n• **Daily ophthalmology follow-up** for IOP, visual axis, re-bleed surveillance\n• **IOP target:** < 24 mmHg (non-sickle), < 20 mmHg (sickle)',
+        },
+        {
+            heading: 'Re-bleed (the day-2-5 spike)',
+            body: 'Re-bleed occurs in ~30% of traumatic hyphemas, most often **day 2-5**. Risk factors: large initial hyphema, sickle trait/disease, anticoagulation, child < 6 yo, delay in care.\n\n**Re-bleed signs:** sudden visual axis darkening, increased pain, IOP spike, fresh blood layer above clotted darker blood ("cap and gown" appearance).\n\n**Prevention:** antifibrinolytic + bedrest + shield + activity restriction + sleep upright × 5-7 days.\n\n**If re-bleed:** call ophtho. Often needs admission and possible OR washout.',
+        },
+        {
+            heading: 'Surgical AC washout indications',
+            body: '**Non-sickle:**\n• IOP > 50 mmHg × 5 days\n• IOP > 35 mmHg × 7 days\n• Total ("eight-ball") hyphema not resolving by day 6-9\n• Corneal blood staining (early sign: rust hue at endothelium)\n\n**Sickle:** IOP > 24 mmHg × 24 hr OR optic nerve compromise\n\n**Pediatric:** lower threshold for OR — amblyopia risk if visual axis blocked > 7-10 d.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AAO. Hyphema and Microhyphema Preferred Practice Pattern. AAO; 2022.' },
+        { num: 2, text: 'Walton W, Von Hagen S, Grigorian R, Zarbin M. Management of traumatic hyphema. Surv Ophthalmol. 2002;47(4):297-334.' },
+        { num: 3, text: 'Recchia FM, Saluja RK, Hammel K, Jeffers JB. Outpatient management of traumatic microhyphema. Ophthalmology. 2002;109(8):1465-1470.' },
+    ],
+    shareable: true,
+};
+const OCT_SLIT_LAMP_REFERENCE_PAGE = {
+    id: 'oct-slit-lamp-reference',
+    title: 'Slit Lamp + Fluorescein Quick Reference',
+    subtitle: 'ED-focused exam techniques for ocular trauma',
+    sections: [
+        {
+            heading: 'Setup',
+            body: '• Patient seated, chin on rest, forehead against bar\n• Adjust eyepieces to your IPD\n• Light at 45° to right (default)\n• Start with low magnification (10×) and broad beam\n• Use cobalt blue filter for fluorescein',
+        },
+        {
+            heading: 'Standardized exam sequence',
+            body: '**1. Lids and lashes** — broad diffuse light\n• Lacerations, FB, ecchymosis, ptosis, lash misdirection\n• Evert upper lid (cotton swab + outward roll) — look for subtarsal FB\n\n**2. Conjunctiva and sclera** — broad light\n• SCH, chemosis, FB, lacerations, ciliary injection (perilimbal flush = uveitis)\n\n**3. Cornea** — narrow slit beam at 45°\n• Look for: epithelial defect, FB, infiltrate, ulcer, edema, abrasion striations ("ice rink sign" = subtarsal FB)\n• **Fluorescein 1 drop** → cobalt blue → diffuse uptake = abrasion; pooling at wound + streaming = Seidel positive (open globe)\n\n**4. Anterior chamber** — narrow tall slit at 45°\n• Cell + flare (uveitis) — count cells in 1 × 1 mm beam\n• Hyphema (layered blood) or microhyphema (RBCs floating)\n• Hypopyon (layered WBCs — endophthalmitis, severe uveitis)\n\n**5. Iris and pupil** — diffuse light + tangential beam\n• Peaked, teardrop, eccentric pupil → open globe until proven otherwise\n• RAPD (swinging flashlight) — afferent defect\n• Iris transillumination defects (radiation, prior trauma)\n\n**6. Lens** — narrow slit, magnify\n• Cataract (post-traumatic), subluxation (lens edge visible at pupil)\n\n**7. Vitreous + posterior segment** — undilated red reflex first; if abnormal call ophtho for dilated exam',
+        },
+        {
+            heading: 'Fluorescein techniques',
+            body: '**Standard fluorescein strip:**\n• Wet strip with sterile saline (1 drop)\n• Touch to lower fornix\n• Patient blinks — distribution\n• Cobalt blue light at slit lamp\n• Yellow-green uptake = epithelial defect\n\n**Seidel test (do NOT do if open globe is OBVIOUS):**\n• Apply concentrated fluorescein to suspected wound (touch strip directly)\n• Cobalt blue light\n• If aqueous leaks, the dye dilutes and streams away from wound = SEIDEL POSITIVE = open globe\n• If positive → STOP further exam, shield, NPO, IV abx, ophtho\n\n**Pitfalls:**\n• Old fluorescein → less sensitive\n• Patient squeezing eyes → false-positive Seidel from tears displacing dye\n• Open globe with prolapsed iris → DO NOT do Seidel — the visual exam is enough',
+        },
+        {
+            heading: 'IOP measurement (Tono-Pen / iCare)',
+            body: '**❌ DO NOT measure IOP if open globe suspected** — even gentle pressure extrudes intraocular contents.\n\n**Tono-Pen technique:**\n• Topical anesthetic (proparacaine)\n• Calibrate per device manual\n• 4-5 light taps on cornea, perpendicular\n• Use 95% confidence reading only\n\n**iCare (rebound tonometer):** no anesthetic, light tap, more pediatric-friendly.\n\n**Normal:** 10-21 mmHg.\n**Elevated:** > 21; > 30 = urgent ophtho; > 40 = emergency, consider OCS.',
+        },
+        {
+            heading: 'Common findings cheat-sheet',
+            body: '| Finding | Diagnosis to consider |\n|---------|----------------------|\n| Peaked/teardrop pupil | Open globe |\n| Seidel positive | Open globe (corneal/scleral lac) |\n| 360° SCH + chemosis | Posterior rupture |\n| Hyphema | Blunt trauma, sickle screen |\n| Hypopyon | Endophthalmitis, severe uveitis |\n| Cell + flare | Iritis (traumatic, post-op) |\n| Diffuse fluorescein uptake | Abrasion |\n| "Ice rink" striations | Subtarsal FB — evert lid |\n| Limbal blanching | Chemical burn (limbal ischemia) |\n| Ciliary flush + photophobia | Iritis or keratitis |',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ehlers JP, Shah CP (eds). The Wills Eye Manual. 8th ed. Wolters Kluwer; 2022.' },
+        { num: 2, text: 'AAO BCSC Section 7 (Trauma). 2023-2024.' },
+        { num: 3, text: 'EyeRounds.org. University of Iowa Department of Ophthalmology. Slit lamp exam tutorial.' },
+    ],
+    shareable: true,
+};
+const OCT_PEDS_NAT_PAGE = {
+    id: 'oct-peds-nat',
+    title: 'Pediatric Eye Findings in Abusive Head Trauma',
+    subtitle: 'When the eye exam reveals what the history doesn\'t',
+    sections: [
+        {
+            heading: 'The picture',
+            body: '**Multilayered, multiquadrant retinal hemorrhages extending to the ora serrata** in a child without a credible accidental mechanism is highly specific for abusive head trauma (AHT) — formerly "shaken baby syndrome."\n\nThe combination of acceleration-deceleration forces, vitreous traction at the vitreoretinal interface, and direct trauma produces a pattern not seen in typical accidental injury (falls, MVCs at usual force, normal birth). [1]',
+        },
+        {
+            heading: 'Findings',
+            body: '**Retinal hemorrhages:**\n• Bilateral (~85%)\n• Multilayered (preretinal + intraretinal + subretinal)\n• Multiquadrant\n• Extending to the **ora serrata** (peripheral retina) — distinguishes AHT from accidental\n• Too numerous to count in severe cases\n\n**Other AHT eye findings:**\n• Macular schisis (traumatic retinoschisis) — highly specific for shaking\n• Vitreous hemorrhage\n• Retinal folds (perimacular)\n• Optic nerve sheath hemorrhage on imaging\n• Papilledema (later, from elevated ICP)\n\n**Findings that DON\'T fit AHT (ddx):**\n• Few flame-shaped hemorrhages at posterior pole only — usually accidental or birth-related\n• Linear pattern → consider chronic anemia, leukemia\n• Retinal hemorrhage from CPR alone is rare and usually mild',
+        },
+        {
+            heading: 'Mandatory workup',
+            body: '• **Dilated fundus exam by ophthalmology** (peds preferred) — RetCam imaging if available for documentation\n• **CT brain** — subdural hemorrhage (often interhemispheric), parenchymal injury, edema\n• **MRI brain** — better for parenchymal/diffusion injury, dating bleeds\n• **Skeletal survey** if < 2 yo (multiple bones, looking for healing fractures)\n• **Coagulation studies** — rule out bleeding diathesis (PT, PTT, INR, fibrinogen, vWF, platelets, factor activity if indicated)\n• **Liver enzymes** — abdominal injury surrogate\n• **Toxicology** as appropriate\n• **Child Protection Team / SCAN team consult** + DCFS report (mandatory in US)',
+        },
+        {
+            heading: 'Documentation and communication',
+            body: '• Document the **mechanism** as told by caregivers verbatim — words may change later\n• Document who was present at the time of injury and who brought the child in\n• Document developmental milestones — does the stated mechanism match the child\'s capability? (3-mo cannot roll off couch by themselves)\n• Document **all** injuries (skin, mouth, ears, genitalia, fontanelles)\n• Photo-document with consent and chain of custody if available\n• Be specific in language: "concerning for AHT" rather than diagnostic; let CPT make the call\n• Maintain therapeutic alliance with family — don\'t accuse, don\'t minimize\n• Brief other staff so caregivers don\'t accidentally have unsupervised access to the child until investigation is complete',
+        },
+        {
+            heading: 'Pitfalls',
+            body: '• Missing AHT because the child is non-acutely ill ("she\'s just sleepy") — fundoscopy on every infant with unexplained AMS, vomiting, or seizure\n• Accepting a vague history without probing\n• Discharging without ophthalmology dilated exam\n• Not reporting because "it\'s probably not abuse" — your job is to report concern; investigators determine\n• Not consulting child neurology for non-accidental seizure workup',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Levin AV. Retinal hemorrhage in abusive head trauma. Pediatrics. 2010;126(5):961-970.' },
+        { num: 2, text: 'AAP Section on Ophthalmology. Eye examination in infants, children, and young adults by pediatricians. Pediatrics. 2003;111(4):902-907.' },
+        { num: 3, text: 'Christian CW, Block R; Committee on Child Abuse and Neglect; American Academy of Pediatrics. Abusive head trauma in infants and children. Pediatrics. 2009;123(5):1409-1411.' },
+    ],
+    shareable: true,
+};
+const OCT_OTS_REFERENCE_PAGE = {
+    id: 'oct-ots-reference',
+    title: 'OTS — Ocular Trauma Score Reference',
+    subtitle: 'Prognostic counseling tool, not a triage tool',
+    sections: [
+        {
+            heading: 'What OTS does',
+            body: 'The Ocular Trauma Score (Kuhn et al, 2002) predicts 6-month visual acuity outcome from initial presentation variables. It was derived and validated on the United States Eye Injury Registry (USEIR) cohort.\n\n**Use:** counseling patients and families about likely outcomes; risk-stratification for research.\n**DO NOT use to:** decide whether to OR, whether to shield, whether to give antibiotics. Those decisions are independent of OTS. [1]',
+        },
+        {
+            heading: 'Variables',
+            body: '**Initial visual acuity (VA) — sum of points:**\n| VA | Points |\n|----|--------|\n| NLP (no light perception) | 60 |\n| LP to HM | 70 |\n| 1/200 to 19/200 | 80 |\n| 20/200 to 20/50 | 90 |\n| ≥ 20/40 | 100 |\n\n**Modifier variables (subtracted):**\n| Variable | Points |\n|----------|--------|\n| Globe rupture | -23 |\n| Endophthalmitis | -17 |\n| Perforating injury | -14 |\n| Retinal detachment | -11 |\n| Afferent pupillary defect (RAPD) | -10 |',
+        },
+        {
+            heading: 'Categories and outcomes',
+            body: '| Sum | Cat | NLP | LP-HM | 1/200-19/200 | 20/200-20/50 | ≥20/40 |\n|-----|-----|-----|-------|--------------|--------------|--------|\n| ≤ 44 | 1 | **74%** | 15% | 7% | 3% | 1% |\n| 45-65 | 2 | 28% | 26% | 18% | 13% | **15%** |\n| 66-80 | 3 | 2% | 11% | 15% | 28% | **44%** |\n| 81-91 | 4 | 1% | 2% | 2% | 21% | **74%** |\n| 92-100 | 5 | 0% | 1% | 2% | 5% | **92%** |',
+        },
+        {
+            heading: 'Counseling examples',
+            body: '**Example 1:** Worker with hammer-on-metal injury, NLP, globe rupture, RAPD\n• 60 (NLP) - 23 (rupture) - 10 (RAPD) = 27 → Category 1\n• "About 3 in 4 patients with similar injuries do not recover useful vision; 1 in 4 retain at least light perception. We are still going to surgery to give the eye every chance, but we want you to know what to expect."\n\n**Example 2:** Tennis ball to eye, hyphema, VA 20/100, no RAPD\n• 80 (VA 20/200-20/50 — actually 20/100 falls here) + 0 modifiers = 80 → Category 3\n• "Most patients with this kind of injury recover useful vision; about 4 in 10 return to 20/40 or better. We will manage closely with daily ophthalmology follow-up."\n\n**Example 3:** Severe orbital cellulitis with endophthalmitis, LP only\n• 70 - 17 (endophthalmitis) = 53 → Category 2\n• "Outcomes vary widely. About 1 in 7 patients with similar presentations achieve 20/40 vision; about 1 in 4 lose all light perception. We are giving aggressive antibiotics and surgical drainage to maximize chances."',
+        },
+        {
+            heading: 'Pitfalls',
+            body: '• Using OTS to deny treatment — don\'t. Even Cat 1 patients deserve repair attempt; Cat 1 outcomes assume best surgical care.\n• Calculating before pediatric VA assessment is reliable — VA in pre-verbal children is approximate (CSM, fix-and-follow); OTS less validated.\n• Using initial VA when patient is too uncomfortable for accurate assessment — note this caveat in the chart.\n• Not recording OTS at all — this is medicolegally helpful documentation (you considered prognosis).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kuhn F, Maisiak R, Mann L, Mester V, Morris R, Witherspoon CD. The Ocular Trauma Score (OTS). Ophthalmol Clin North Am. 2002;15(2):163-165.' },
+        { num: 2, text: 'Knyazer B, Bilenko N, Levy J, et al. Validation of the Ocular Trauma Score in patients with severe ocular trauma. Eur J Ophthalmol. 2016;26(1):42-48.' },
+        { num: 3, text: 'Pieramici DJ, Sternberg P Jr, Aaberg TM Sr, et al. A system for classifying mechanical injuries of the eye (globe). Am J Ophthalmol. 1997;123(6):820-831.' },
+    ],
+    shareable: true,
+};
 export const INFO_PAGES = {
     // Right Heart Failure
     'rhf-pocus-criteria': RHF_POCUS_CRITERIA_PAGE,
@@ -19181,6 +19382,13 @@ export const INFO_PAGES = {
     'rhf-pressors': RHF_PRESSORS_PAGE,
     'rhf-inhaled-vasodilators': RHF_INHALED_VASODILATORS_PAGE,
     'rhf-disposition-pert': RHF_DISPOSITION_PERT_PAGE,
+    // Ocular Trauma
+    'oct-cantholysis': OCT_LATERAL_CANTHOTOMY_PAGE,
+    'oct-chemical-irrigation': OCT_CHEMICAL_IRRIGATION_PAGE,
+    'oct-hyphema-management': OCT_HYPHEMA_MANAGEMENT_PAGE,
+    'oct-slit-lamp-reference': OCT_SLIT_LAMP_REFERENCE_PAGE,
+    'oct-peds-nat': OCT_PEDS_NAT_PAGE,
+    'oct-ots-reference': OCT_OTS_REFERENCE_PAGE,
     // Oncological Emergencies
     'onc-emergency-summary': ONC_EMERGENCY_SUMMARY,
     'chemo-regimens': CHEMO_REGIMENS_PAGE,

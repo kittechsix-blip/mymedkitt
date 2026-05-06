@@ -243,6 +243,18 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pressors', label: 'Pressors', icon: '💊', action: 'overlay', target: 'rhf-pressors' },
     { id: 'dispo', label: 'PERT/Dispo', icon: '🏥', action: 'overlay', target: 'rhf-disposition-pert' },
   ],
+  'ocular-trauma': [
+    { id: 'ots', label: 'OTS', icon: '👁️', action: 'calculator', target: 'ots' },
+    { id: 'hyphema-calc', label: 'Hyphema', icon: '🩸', action: 'calculator', target: 'hyphema-calc' },
+    { id: 'bett', label: 'BETT', icon: '🔍', action: 'calculator', target: 'bett-classifier' },
+    { id: 'roper-hall', label: 'Chem Grade', icon: '⚗️', action: 'calculator', target: 'roper-hall-dua' },
+    { id: 'cantholysis', label: 'OCS Cut?', icon: '⚠️', action: 'calculator', target: 'cantholysis-decision' },
+    { id: 'cantholysis-steps', label: 'Cantholysis', icon: '🔪', action: 'overlay', target: 'oct-cantholysis' },
+    { id: 'irrigation', label: 'Irrigate', icon: '💧', action: 'overlay', target: 'oct-chemical-irrigation' },
+    { id: 'hyphema-mgmt', label: 'Hyphema Mgmt', icon: '🛏️', action: 'overlay', target: 'oct-hyphema-management' },
+    { id: 'slit-lamp', label: 'Slit Lamp', icon: '🔬', action: 'overlay', target: 'oct-slit-lamp-reference' },
+    { id: 'peds-nat', label: 'Peds NAT', icon: '👶', action: 'overlay', target: 'oct-peds-nat' },
+  ],
   'potassium': [
     { id: 'hyperk-rx', label: 'HyperK Rx', icon: '\u26A1', action: 'jump', target: 'k-hyper-step1' },
     { id: 'hypok-rx', label: 'HypoK Rx', icon: '\uD83D\uDC8A', action: 'jump', target: 'k-hypo-assess' },

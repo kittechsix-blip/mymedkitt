@@ -155,6 +155,7 @@ export const TREE_REGISTRY = {
   'suicide-risk-assessment': { prefix: 'SUICIDE_RISK',         entryNodeId: 'sra-start', categoryId: 'em' },
   'ptsd-screening':   { prefix: 'PTSD_SCREENING',      entryNodeId: 'ptsd-start',         categoryId: 'emergency-medicine' },
   'right-heart-failure': { prefix: 'RHF',              entryNodeId: 'rhf-start',          categoryId: 'cardiology' },
+  'ocular-trauma':    { prefix: 'OCULAR_TRAUMA',      entryNodeId: 'oct-start',          categoryId: 'ophthalmology' },
   'ct-decision-support': { prefix: 'CT_DECISION_SUPPORT', entryNodeId: 'ctds-start',    categoryId: 'em' },
   'dfsa-workup':      { prefix: 'DFSA_WORKUP',         entryNodeId: 'dfsa-start',         categoryId: 'em' },
   'hypothermia':      { prefix: 'HYPOTHERMIA',         entryNodeId: 'hypo-start',         categoryId: 'em' },

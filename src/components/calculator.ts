@@ -34548,6 +34548,422 @@ const PCL_5_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// =====================================================================
+// OCULAR TRAUMA CALCULATORS
+// =====================================================================
+
+const OTS_CALCULATOR: CalculatorDefinition = {
+  id: 'ots',
+  title: 'OTS — Ocular Trauma Score',
+  subtitle: 'Prognostic VA at 6 months (Kuhn 2002)',
+  description: 'Sum the initial VA score plus any negative-modifier variables to predict 6-month visual acuity outcome. Use for counseling, NOT for triage decisions. Shield + OR are still indicated regardless of OTS.',
+  fields: [
+    {
+      name: 'initialVA',
+      label: 'Initial visual acuity',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'NLP (no light perception)', points: 60 },
+        { label: 'LP to HM (light perception to hand motion)', points: 70 },
+        { label: '1/200 to 19/200', points: 80 },
+        { label: '20/200 to 20/50', points: 90 },
+        { label: '20/40 or better', points: 100 },
+      ],
+    },
+    { name: 'rupture', label: 'Globe rupture', type: 'toggle', points: -23 },
+    { name: 'endophthalmitis', label: 'Endophthalmitis', type: 'toggle', points: -17 },
+    { name: 'perforating', label: 'Perforating injury', type: 'toggle', points: -14 },
+    { name: 'rd', label: 'Retinal detachment', type: 'toggle', points: -11 },
+    { name: 'apd', label: 'Afferent pupillary defect (RAPD)', type: 'toggle', points: -10 },
+  ],
+  results: [],
+  thresholdNote: 'Counseling tool only. Outcome categories from Kuhn 2002 USEIR cohort.',
+  citations: [
+    'Kuhn F, Maisiak R, Mann L, Mester V, Morris R, Witherspoon CD. The Ocular Trauma Score (OTS). Ophthalmol Clin North Am. 2002;15(2):163-165.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const initialVA = Number(values.initialVA) || 0;
+    if (!initialVA) {
+      return {
+        value: '—',
+        label: 'Select initial visual acuity',
+        description: '**Initial VA required** to compute OTS.',
+        colorVar: '--color-text-muted',
+      };
+    }
+    const rupture = Number(values.rupture) || 0;
+    const endo = Number(values.endophthalmitis) || 0;
+    const perf = Number(values.perforating) || 0;
+    const rd = Number(values.rd) || 0;
+    const apd = Number(values.apd) || 0;
+    const total = initialVA + rupture + endo + perf + rd + apd;
+
+    let category: number, label: string, outcome: string, color: string;
+    if (total <= 44) {
+      category = 1; label = 'Category 1 (≤44)';
+      outcome = '**6-mo VA distribution:**\n• NLP: **74%**\n• LP-HM: 15%\n• 1/200-19/200: 7%\n• 20/200-20/50: 3%\n• ≥20/40: 1%';
+      color = '--color-danger';
+    } else if (total <= 65) {
+      category = 2; label = 'Category 2 (45-65)';
+      outcome = '**6-mo VA distribution:**\n• NLP: 28%\n• LP-HM: 26%\n• 1/200-19/200: 18%\n• 20/200-20/50: 13%\n• **≥20/40: 15%**';
+      color = '--color-danger';
+    } else if (total <= 80) {
+      category = 3; label = 'Category 3 (66-80)';
+      outcome = '**6-mo VA distribution:**\n• NLP: 2%\n• LP-HM: 11%\n• 1/200-19/200: 15%\n• 20/200-20/50: 28%\n• **≥20/40: 44%**';
+      color = '--color-warning';
+    } else if (total <= 91) {
+      category = 4; label = 'Category 4 (81-91)';
+      outcome = '**6-mo VA distribution:**\n• NLP: 1%\n• LP-HM: 2%\n• 1/200-19/200: 2%\n• 20/200-20/50: 21%\n• **≥20/40: 74%**';
+      color = '--color-primary';
+    } else {
+      category = 5; label = 'Category 5 (92-100)';
+      outcome = '**6-mo VA distribution:**\n• NLP: 0%\n• LP-HM: 1%\n• 1/200-19/200: 2%\n• 20/200-20/50: 5%\n• **≥20/40: 92%**';
+      color = '--color-primary';
+    }
+
+    return {
+      value: `${total} → Cat ${category}`,
+      label,
+      description: `**OTS total: ${total}** (Category ${category})\n\n${outcome}\n\n*Use for counseling. Continue surgical management regardless of OTS — this score does not change the need for OR.*`,
+      colorVar: color,
+    };
+  },
+};
+
+const HYPHEMA_CALCULATOR: CalculatorDefinition = {
+  id: 'hyphema-calc',
+  title: 'Hyphema Grader',
+  subtitle: 'AC blood-layer staging + sickle considerations',
+  description: 'Grade traumatic hyphema by amount of layered blood. Sickle screen drives separate IOP-control and surgical thresholds — Black, Mediterranean, Middle Eastern, Indian patients should be screened.',
+  fields: [
+    {
+      name: 'grade',
+      label: 'Hyphema grade',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Microhyphema (RBCs visible, no layered blood)', points: 1 },
+        { label: 'Grade I (<1/3 AC layered)', points: 2 },
+        { label: 'Grade II (1/3-1/2 AC layered)', points: 3 },
+        { label: 'Grade III (>1/2 AC, not full)', points: 4 },
+        { label: 'Grade IV (full AC, "eight-ball")', points: 5 },
+      ],
+    },
+    { name: 'sickle', label: 'Sickle trait/disease (or unknown in at-risk patient)', type: 'toggle', points: 10 },
+    { name: 'iopHigh', label: 'IOP >24 mmHg', type: 'toggle', points: 5 },
+    { name: 'rebleed', label: 'Re-bleed (day 2-5 spike)', type: 'toggle', points: 3 },
+  ],
+  results: [],
+  thresholdNote: 'Use to drive disposition (admit threshold, surgical washout threshold differ by sickle status).',
+  citations: [
+    'AAO Hyphema and Microhyphema Preferred Practice Pattern. 2022.',
+    'Walton W, Von Hagen S, Grigorian R, Zarbin M. Management of traumatic hyphema. Surv Ophthalmol. 2002;47(4):297-334.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const grade = Number(values.grade) || 0;
+    if (!grade) {
+      return {
+        value: '—',
+        label: 'Select hyphema grade',
+        description: '**Grade required.**',
+        colorVar: '--color-text-muted',
+      };
+    }
+    const gradeLabels = ['', 'Microhyphema', 'Grade I (<1/3)', 'Grade II (1/3-1/2)', 'Grade III (>1/2)', 'Grade IV (8-ball)'];
+    const sickle = Number(values.sickle) >= 10;
+    const iopHigh = Number(values.iopHigh) >= 5;
+    const rebleed = Number(values.rebleed) >= 3;
+
+    let bullets: string[] = [];
+    let dispo = 'Outpatient with daily ophtho';
+    let color = '--color-primary';
+
+    bullets.push(`• Bedrest with HOB 30-45°`);
+    bullets.push(`• Rigid Fox shield`);
+    bullets.push(`• Atropine 1% BID (cycloplegic)`);
+    bullets.push(`• Prednisolone acetate 1% q2-4h`);
+    bullets.push(`• Tranexamic acid 25 mg/kg PO TID OR aminocaproic acid 50 mg/kg q4h × 5d`);
+    bullets.push(`• AVOID ASA, NSAID, contact sports`);
+
+    if (sickle) {
+      color = '--color-danger';
+      bullets.push(`• ❌ AVOID acetazolamide, methazolamide, dorzolamide (CAIs acidify AC, worsen sickling)`);
+      bullets.push(`• ❌ AVOID mannitol`);
+      bullets.push(`• ✅ For IOP: timolol 0.5% BID + brimonidine 0.2% TID + latanoprost qHS`);
+      bullets.push(`• Surgical AC washout threshold: IOP >24 ×24h (vs >50 ×5d non-sickle)`);
+      dispo = 'ADMIT (sickle + hyphema)';
+    } else if (grade >= 4 || iopHigh || rebleed) {
+      color = '--color-warning';
+      bullets.push(`• Consider admit for IOP monitoring (grade III-IV, elevated IOP, or re-bleed)`);
+      dispo = 'Consider admit';
+    }
+
+    return {
+      value: gradeLabels[grade],
+      label: dispo,
+      description: `**${gradeLabels[grade]}**${sickle ? ' + SICKLE' : ''}${iopHigh ? ' + IOP >24' : ''}${rebleed ? ' + re-bleed' : ''}\n\n**Management:**\n${bullets.join('\n')}`,
+      colorVar: color,
+    };
+  },
+};
+
+const BETT_CALCULATOR: CalculatorDefinition = {
+  id: 'bett-classifier',
+  title: 'BETT Classifier',
+  subtitle: 'Birmingham Eye Trauma Terminology (Kuhn 2002)',
+  description: 'Standardized injury type for accurate ophthalmology communication and outcome studies. Open globe = full-thickness wound of eye wall (sclera + cornea).',
+  fields: [
+    {
+      name: 'wallStatus',
+      label: 'Eye wall status',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Full-thickness wound (open globe)', points: 1 },
+        { label: 'Wall intact (closed globe)', points: 2 },
+      ],
+    },
+    {
+      name: 'mechanism',
+      label: 'Mechanism',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Blunt (no sharp edge, inside-out)', points: 1 },
+        { label: 'Sharp (laceration, outside-in)', points: 2 },
+      ],
+    },
+    {
+      name: 'lacerationType',
+      label: 'If laceration: type',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'N/A (rupture or closed globe)', points: 0 },
+        { label: 'Penetrating (entry only)', points: 1 },
+        { label: 'Perforating (entry + exit)', points: 2 },
+        { label: 'IOFB (laceration + retained body)', points: 3 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Use BETT terminology in ophtho consult and chart documentation for accurate communication.',
+  citations: [
+    'Kuhn F, Morris R, Witherspoon CD, Mester V. The Birmingham Eye Trauma Terminology system (BETT). J Fr Ophtalmol. 2004;27(2):206-210.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const wall = Number(values.wallStatus) || 0;
+    const mech = Number(values.mechanism) || 0;
+    const lac = Number(values.lacerationType) || 0;
+
+    if (!wall || !mech) {
+      return {
+        value: '—',
+        label: 'Select wall status and mechanism',
+        description: '**Wall status and mechanism required.**',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    let dx = '', detail = '', color = '--color-warning';
+
+    if (wall === 2) {
+      // Closed globe
+      color = '--color-primary';
+      if (mech === 1) {
+        dx = 'Closed-globe Contusion';
+        detail = '**Definition:** blunt injury, no full-thickness wound.\n\n**Common findings:** hyphema, traumatic iritis, commotio retinae, vitreous hemorrhage, retinal tear/detachment, orbital fracture.\n\n**Management:** mechanism-driven (see closed-globe pathway).';
+      } else {
+        dx = 'Closed-globe Lamellar Laceration';
+        detail = '**Definition:** partial-thickness wound, eye wall intact.\n\n**Management:** clean, abx ointment, ophtho follow-up.';
+      }
+    } else {
+      // Open globe
+      color = '--color-danger';
+      if (mech === 1) {
+        dx = 'Open-globe Rupture';
+        detail = '**Definition:** blunt mechanism, inside-out wall failure (often equator/posterior, hardest to see).\n\n**Management:** Fox shield, NPO, IV vanc + ceftaz, antiemetic, CT 1mm cuts, OR <24h. Worst OTS prognosis (-23 modifier).';
+      } else if (lac === 1) {
+        dx = 'Open-globe Penetrating Laceration';
+        detail = '**Definition:** sharp mechanism, entry wound only, no exit.\n\n**Management:** Fox shield, NPO, IV vanc + ceftaz, CT, OR <24h.';
+      } else if (lac === 2) {
+        dx = 'Open-globe Perforating Laceration';
+        detail = '**Definition:** sharp mechanism, entry + exit wound (-14 OTS modifier).\n\n**Management:** Fox shield, NPO, IV vanc + ceftaz, CT, OR <24h.';
+      } else if (lac === 3) {
+        dx = 'Open-globe with IOFB';
+        detail = '**Definition:** laceration with retained intraocular foreign body.\n\n**Management:** Fox shield, NPO, IV vanc + ceftaz, CT 1mm cuts (NOT MRI until metal excluded), urgent OR. Organic IOFB = highest endophthalmitis risk.';
+      } else {
+        dx = 'Open-globe Laceration (specify type)';
+        detail = '**Specify:** penetrating, perforating, or IOFB.';
+      }
+    }
+
+    return {
+      value: dx,
+      label: dx,
+      description: detail,
+      colorVar: color,
+    };
+  },
+};
+
+const ROPER_HALL_DUA_CALCULATOR: CalculatorDefinition = {
+  id: 'roper-hall-dua',
+  title: 'Chemical Burn Stager',
+  subtitle: 'Roper-Hall + Dua classifications',
+  description: 'Stages chemical injury severity by limbal ischemia (clock hours) and conjunctival involvement. Limbal stem cell loss = chronic non-healing, pannus, scarring. Most prognostic single finding.',
+  fields: [
+    {
+      name: 'limbalIschemia',
+      label: 'Limbal ischemia (clock hours of "white" / blanched limbus)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'None (0 cl-hr)', points: 1 },
+        { label: '<3 clock hours', points: 2 },
+        { label: '3-6 clock hours', points: 3 },
+        { label: '6-9 clock hours', points: 4 },
+        { label: '9-12 clock hours', points: 5 },
+        { label: 'Total (12 cl-hr)', points: 6 },
+      ],
+    },
+    {
+      name: 'conjInvolvement',
+      label: 'Conjunctival involvement (% surface)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '0%', points: 1 },
+        { label: '<30%', points: 2 },
+        { label: '30-50%', points: 3 },
+        { label: '50-75%', points: 4 },
+        { label: '75-100%', points: 5 },
+        { label: 'Total', points: 6 },
+      ],
+    },
+    {
+      name: 'corneaHaze',
+      label: 'Corneal clarity',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Clear / epithelial defect only', points: 1 },
+        { label: 'Hazy but iris details visible', points: 2 },
+        { label: 'Hazy, iris obscured', points: 3 },
+        { label: 'Opaque, no view', points: 4 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Stage drives treatment intensity. Limbal ischemia is the strongest single prognostic finding.',
+  citations: [
+    'Roper-Hall MJ. Thermal and chemical burns. Trans Ophthalmol Soc UK. 1965;85:631-653.',
+    'Dua HS, King AJ, Joseph A. A new classification of ocular surface burns. Br J Ophthalmol. 2001;85(11):1379-1383.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const limbal = Number(values.limbalIschemia) || 0;
+    const conj = Number(values.conjInvolvement) || 0;
+    const haze = Number(values.corneaHaze) || 0;
+
+    if (!limbal || !conj || !haze) {
+      return {
+        value: '—',
+        label: 'Complete all fields',
+        description: '**Limbal ischemia + conjunctival involvement + corneal clarity all required.**',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Roper-Hall (1-4)
+    let rhGrade = 1, rhPrognosis = '';
+    if (haze >= 4 || limbal >= 5) {
+      rhGrade = 4; rhPrognosis = 'very poor';
+    } else if (haze >= 3 || limbal >= 4) {
+      rhGrade = 3; rhPrognosis = 'guarded';
+    } else if (haze >= 2 || limbal >= 2) {
+      rhGrade = 2; rhPrognosis = 'good';
+    } else {
+      rhGrade = 1; rhPrognosis = 'excellent';
+    }
+
+    // Dua (1-6) — driven primarily by limbal + conj
+    const duaGrade = Math.max(limbal, conj);
+    const duaLabels = ['', 'I', 'II', 'III', 'IV', 'V', 'VI'];
+
+    // Severity bucket
+    let severity: string, color: string, mgmt: string;
+    if (rhGrade === 1) {
+      severity = 'Mild'; color = '--color-primary';
+      mgmt = '**Mild burn pathway:**\n• Topical abx (erythro QID or moxi QID)\n• Cycloplegic (cyclopentolate 1% TID)\n• Preservative-free tears q1-2h\n• Oral analgesic\n• Ophtho follow-up 24-48h';
+    } else if (rhGrade === 2) {
+      severity = 'Moderate'; color = '--color-warning';
+      mgmt = '**Moderate burn pathway:**\n• Topical abx q2h (moxi or cipro)\n• Cycloplegic (cyclopentolate or atropine)\n• Topical steroid (prednisolone 1% q1-2h, ophtho input)\n• Topical citrate 10% QID\n• Topical ascorbate 10% QID\n• Doxy 100 mg PO BID (anti-MMP)\n• Vit C 1-2 g/day PO\n• Same-day ophtho';
+    } else {
+      severity = rhGrade === 3 ? 'Severe' : 'Very Severe / Vision-threatening';
+      color = '--color-danger';
+      mgmt = '**Severe burn pathway:**\n• ADMIT — multi-spec (ophtho + oculoplastics)\n• Continue irrigation if pH unstable\n• All moderate meds intensified\n• AMG / PROKERA per ophtho\n• AC paracentesis if alkali in AC + IOP refractory\n• Plan limbal stem cell transplant / tarsorrhaphy\n• Counsel poor visual prognosis';
+    }
+
+    return {
+      value: `RH ${rhGrade} / Dua ${duaLabels[duaGrade]}`,
+      label: `${severity} (RH ${rhGrade}, Dua ${duaLabels[duaGrade]})`,
+      description: `**Roper-Hall: Grade ${rhGrade}** (prognosis: ${rhPrognosis})\n**Dua: Grade ${duaLabels[duaGrade]}** (limbal ${limbal-1 < 0 ? 0 : (limbal === 1 ? 0 : (limbal === 2 ? '<3' : (limbal === 3 ? '3-6' : (limbal === 4 ? '6-9' : (limbal === 5 ? '9-12' : 'total')))))} cl-hr, conj ${conj === 1 ? '0' : (conj === 2 ? '<30' : (conj === 3 ? '30-50' : (conj === 4 ? '50-75' : (conj === 5 ? '75-100' : 'total'))))}%)\n\n${mgmt}`,
+      colorVar: color,
+    };
+  },
+};
+
+const CANTHOLYSIS_CALCULATOR: CalculatorDefinition = {
+  id: 'cantholysis-decision',
+  title: 'Cantholysis Decision',
+  subtitle: 'Should I cut NOW?',
+  description: 'Bedside decision aid for orbital compartment syndrome. 90-120 min vision-loss window. Do NOT wait for CT, ophthalmology, or transfer if YES — cantholysis is the definitive ED procedure.',
+  fields: [
+    { name: 'proptosis', label: 'Proptosis (eye protrudes beyond orbital rim)', type: 'toggle', points: 1 },
+    { name: 'iopHigh', label: 'IOP >40 mmHg (or "rock-hard" globe on palpation)', type: 'toggle', points: 1 },
+    { name: 'visionLoss', label: 'Vision loss / decreased VA', type: 'toggle', points: 1 },
+    { name: 'apd', label: 'RAPD (afferent pupillary defect)', type: 'toggle', points: 1 },
+    { name: 'eomLimited', label: 'Limited or absent EOM', type: 'toggle', points: 1 },
+    { name: 'painSevere', label: 'Severe orbital pain', type: 'toggle', points: 1 },
+    { name: 'retropulsion', label: 'Resistance to retropulsion', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Two or more findings + plausible mechanism = cut. Do not delay for CT or ophthalmology.',
+  citations: [
+    'Ballard SR, Enzenauer RW, et al. Emergency lateral canthotomy and cantholysis. J Spec Oper Med. 2009;9(3):26-32.',
+    'EyeWiki. Orbital Compartment Syndrome. AAO. 2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const total = Object.values(values).reduce((a, b) => a + (Number(b) || 0), 0);
+
+    if (total === 0) {
+      return {
+        value: '—',
+        label: 'Select findings',
+        description: '**Mark findings present.**',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    if (total >= 2) {
+      return {
+        value: 'CUT NOW',
+        label: 'Lateral canthotomy + INFERIOR CANTHOLYSIS at bedside',
+        description: `**${total}/7 findings present — Orbital Compartment Syndrome.**\n\n**Procedure (4 steps):**\n1. Anesthetize lateral canthus with 1-2% lido + epi (or do dry if catastrophic)\n2. Hemostat crush lateral canthus 60-90 sec\n3. Straight scissors — horizontal cut from canthus to orbital rim (~1-1.5 cm)\n4. **INFERIOR CANTHOLYSIS** — pull lower lid laterally, palpate taut inferior crus of lateral canthal tendon, strum-and-cut\n\n**Tendon cut = actual decompression. Canthotomy alone is inadequate.**\n\nAdd superior cantholysis if IOP not relieved. Recheck IOP after — should drop <30.\n\n**90-120 min vision-loss window. Do NOT wait for CT, ophtho, or transfer.**`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    return {
+      value: 'Not yet',
+      label: 'Insufficient findings — re-examine',
+      description: `**${total}/7 findings.** Continue serial exam, image (CT orbits no contrast), call ophtho. If proptosis/IOP/RAPD/vision loss develop together → cut.\n\n**Don't anchor on a "negative" — OCS can declare itself rapidly post-trauma or post-op.**`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Weight-Based Dosing
   'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -35073,6 +35489,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Right Heart Failure (spesi already registered above with PE calculators)
   'bova': BOVA_CALCULATOR,
   'half-dose-alteplase': HALF_DOSE_ALTEPLASE_CALCULATOR,
+  // Ocular Trauma
+  'ots': OTS_CALCULATOR,
+  'hyphema-calc': HYPHEMA_CALCULATOR,
+  'bett-classifier': BETT_CALCULATOR,
+  'roper-hall-dua': ROPER_HALL_DUA_CALCULATOR,
+  'cantholysis-decision': CANTHOLYSIS_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

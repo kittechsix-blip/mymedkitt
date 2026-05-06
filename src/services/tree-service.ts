@@ -930,6 +930,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/right-heart-failure.js');
       return { nodes: m.RHF_NODES, entryNodeId: 'rhf-start', categoryId: 'cardiology', moduleLabels: m.RHF_MODULE_LABELS, citations: m.RHF_CITATIONS, criticalActions: m.RHF_CRITICAL_ACTIONS };
     },
+    'ocular-trauma': async () => {
+      const m = await import('../data/trees/ocular-trauma.js');
+      return { nodes: m.OCULAR_TRAUMA_NODES, entryNodeId: 'oct-start', categoryId: 'ophthalmology', moduleLabels: m.OCULAR_TRAUMA_MODULE_LABELS, citations: m.OCULAR_TRAUMA_CITATIONS, criticalActions: m.OCULAR_TRAUMA_CRITICAL_ACTIONS };
+    },
     'ct-decision-support': async () => {
       const m = await import('../data/trees/ct-decision-support.js');
       return { nodes: m.CT_DECISION_SUPPORT_NODES, entryNodeId: 'ct-start', categoryId: 'us-rads', moduleLabels: m.CT_DECISION_SUPPORT_MODULE_LABELS, citations: m.CT_DECISION_SUPPORT_CITATIONS, criticalActions: m.CT_DECISION_SUPPORT_CRITICAL_ACTIONS };
