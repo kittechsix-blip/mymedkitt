@@ -220,6 +220,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'rate-control', label: 'Rate Ctrl', icon: '💓', action: 'jump', target: 'afib-stable-drugs' },
         { id: 'chadsvasc', label: 'CHA₂DS₂', icon: '❤️', action: 'calculator', target: 'cha2ds2vasc' },
     ],
+    'right-heart-failure': [
+        { id: 'spesi', label: 'sPESI', icon: '📋', action: 'calculator', target: 'spesi' },
+        { id: 'bova', label: 'BOVA', icon: '📊', action: 'calculator', target: 'bova' },
+        { id: 'alteplase', label: '½ Alteplase', icon: '💉', action: 'calculator', target: 'half-dose-alteplase' },
+        { id: 'pocus', label: 'POCUS RV', icon: '🫀', action: 'overlay', target: 'rhf-pocus-criteria' },
+        { id: 'rsi', label: 'RV-RSI', icon: '🫁', action: 'overlay', target: 'rhf-farkas-rsi' },
+        { id: 'pressors', label: 'Pressors', icon: '💊', action: 'overlay', target: 'rhf-pressors' },
+        { id: 'dispo', label: 'PERT/Dispo', icon: '🏥', action: 'overlay', target: 'rhf-disposition-pert' },
+    ],
     'potassium': [
         { id: 'hyperk-rx', label: 'HyperK Rx', icon: '\u26A1', action: 'jump', target: 'k-hyper-step1' },
         { id: 'hypok-rx', label: 'HypoK Rx', icon: '\uD83D\uDC8A', action: 'jump', target: 'k-hypo-assess' },

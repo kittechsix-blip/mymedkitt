@@ -19861,7 +19861,176 @@ const PTSD_TRAUMA_RESOURCES_PAGE: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Right Heart Failure
+// -------------------------------------------------------------------
+
+const RHF_POCUS_CRITERIA_PAGE: InfoPage = {
+  id: 'rhf-pocus-criteria',
+  title: 'POCUS for RV Failure',
+  subtitle: 'Bedside echo to identify acute RV strain',
+  sections: [
+    {
+      heading: 'Why POCUS first',
+      body: 'In acutely hypotensive patients, bedside echo distinguishes RV failure (volume-overloaded, underfilled LV, may need pressors + inotropes ± reperfusion) from LV failure, tamponade, hypovolemia, and distributive shock. Treating undifferentiated shock with empiric fluids in RV failure worsens cardiac output. [1][2]',
+    },
+    {
+      heading: 'Five-view RV protocol',
+      body: '**Apical 4-chamber (A4C):**\n• RV:LV ratio ≥ 1.0 → acute RV dilation\n• McConnell sign: free-wall akinesis with preserved apical contraction → 77% specific for acute PE\n• TAPSE < 17 mm by M-mode at lateral tricuspid annulus → systolic dysfunction (1)\n\n**Parasternal long (PLAX):**\n• RV outflow tract dilation; "D-sign" not seen here (use PSAX)\n\n**Parasternal short (PSAX):**\n• Septal flattening in systole (pressure overload, e.g. acute PE) or diastole (volume overload) → "D-sign" (3)\n• 60-T-AcT < 60 ms with mid-systolic notching of RVOT pulsed Doppler → acute pulmonary hypertension\n\n**Subcostal:**\n• IVC > 2.1 cm with < 50% inspiratory collapse → elevated CVP (RAP ~ 15 mmHg)\n• Look for pericardial effusion (RV strain mimic)\n\n**Lung windows:**\n• Bilateral A-lines → suggests dry lungs; supports RV failure over LV failure\n• B-lines bilaterally → favor LV failure / ARDS instead',
+    },
+    {
+      heading: 'Diagnostic thresholds',
+      body: '| Parameter | Cutoff | Interpretation |\n|-----------|--------|----------------|\n| RV:LV ratio (A4C) | ≥ 1.0 | Acute RV dilation |\n| TAPSE | < 17 mm | RV systolic dysfunction |\n| RV S\' (TDI tricuspid annulus) | < 9.5 cm/s | RV systolic dysfunction |\n| FAC (fractional area change) | < 35% | RV systolic dysfunction |\n| 60-T-AcT (RVOT pulsed Doppler) | < 60 ms | Acute pulmonary HTN |\n| McConnell sign | Free-wall akinesis + apical sparing | 77% specific PE |\n| IVC | > 2.1 cm, < 50% collapse | Elevated CVP |',
+    },
+    {
+      heading: 'Pearls',
+      body: '• **Acute vs chronic:** RV wall thickness > 5 mm at end-diastole suggests chronicity (cor pulmonale, PAH). Thin-walled, dilated RV with new strain = acute insult (PE, RVMI, ARDS, sepsis).\n• **TAPSE in chronic PAH:** can be preserved early; use TAPSE/PASP ratio (< 0.36 → poor RV-PA coupling).\n• **Pseudo-McConnell:** RV infarction can mimic — get a 12-lead and right-sided V4R.\n• **Image placeholders:** [TAPSE M-mode reference](#/image/rhf/tapse-mmode.jpg) · [McConnell A4C example](#/image/rhf/mcconnell-a4c.jpg) · [D-sign PSAX](#/image/rhf/d-sign-psax.jpg) · [Plethoric IVC subcostal](#/image/rhf/plethoric-ivc.jpg)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Rudski LG, et al. Guidelines for the Echocardiographic Assessment of the Right Heart in Adults. J Am Soc Echocardiogr. 2010;23(7):685-713.' },
+    { num: 2, text: 'Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603.' },
+    { num: 3, text: 'McConnell MV, et al. Regional right ventricular dysfunction detected by echocardiography in acute pulmonary embolism. Am J Cardiol. 1996;78(4):469-73.' },
+    { num: 4, text: 'Farkas JD. The Internet Book of Critical Care: Right Ventricular Failure. emcrit.org/ibcc/rvf' },
+  ],
+};
+
+const RHF_FARKAS_RSI_PAGE: InfoPage = {
+  id: 'rhf-farkas-rsi',
+  title: 'RV-Protective Intubation',
+  subtitle: 'Farkas-style RSI for the failing right heart',
+  sections: [
+    {
+      heading: 'Why intubation kills the RV',
+      body: 'Three mechanisms turn routine RSI into RV arrest in pre-existing RV failure:\n1. **Loss of catecholamine drive** from sedatives → systemic hypotension → coronary perfusion gradient to the RV collapses → ischemia → further RV dilation.\n2. **Positive-pressure ventilation** raises RV afterload by compressing pulmonary vasculature.\n3. **Hypoxemia, hypercapnia, acidosis** during apnea → pulmonary vasoconstriction → acute RV afterload spike.\n\nMortality of peri-intubation arrest in RV failure is reported as high as 19% — every second of hypotension matters. [1][2]',
+    },
+    {
+      heading: 'Pre-RSI optimization (the most important step)',
+      body: '• **Get the BP up FIRST.** Target MAP ≥ 65–70 before drugs go in.\n  • Norepinephrine + vasopressin running before induction.\n  • If RVMI: phenylephrine alone is dangerous (pure α can drop CO).\n• **Inotrope if RV is failing on echo:** dobutamine 2–5 mcg/kg/min OR milrinone (caution if hypotensive). Epinephrine 0.02–0.05 mcg/kg/min is a reasonable single-agent rescue.\n• **Inhaled pulmonary vasodilator if available:** epoprostenol 50 ng/kg/min or inhaled NO 20–40 ppm via mask before induction.\n• **Do NOT bolus large-volume fluids** in volume-overloaded RV (most acute RV failure is fluid-overloaded). Small 250 mL crystalloid challenge only if IVC is small.\n• **Pre-oxygenate aggressively:** NIV/HFNC, head-up 30°, apneic oxygenation. Avoid bag-mask hyperventilation — large breaths spike RV afterload.',
+    },
+    {
+      heading: 'Induction agent choice',
+      body: '| Agent | Dose | Notes |\n|-------|------|-------|\n| **Etomidate** | 0.15-0.3 mg/kg | Most hemodynamically neutral; reasonable first-line. Half-dose (0.15) if shocky. |\n| **Ketamine** | 0.5-1 mg/kg (reduced) | Preserves catecholamine drive; theoretical pulmonary vasoconstriction in adults is overstated. Reasonable. |\n| **Propofol** | AVOID bolus | Drops SVR + direct myocardial depression — high risk of arrest. |\n| **Midazolam** | AVOID as sole induction | Slow onset, unpredictable hemodynamics. |\n\nParalytic: rocuronium 1.2 mg/kg or succinylcholine 1.5 mg/kg if no contraindications.',
+    },
+    {
+      heading: 'Post-tube ventilator strategy',
+      body: '• **Tidal volume 6 mL/kg ideal body weight** (lung-protective).\n• **PEEP titrated to lowest workable** — high PEEP kills the RV. Start at 5, raise only if clearly needed.\n• **Plateau pressure < 30** cm H₂O.\n• **Permissive hypercapnia is dangerous** in RV failure — pCO₂ rise → pulmonary vasoconstriction → RV afterload. Target near-normal pH 7.30-7.45.\n• **RR 14-20** to avoid breath-stacking and dynamic hyperinflation.\n• **Sedation light** — propofol drip is OK once on pressors; fentanyl + dexmedetomidine combo well tolerated.',
+    },
+    {
+      heading: 'If they crash post-tube',
+      body: '1. **Disconnect from vent** — rule out auto-PEEP / breath-stacking. Allow full passive exhalation 15-20 sec.\n2. **Push-dose epi** 10-20 mcg IV q1-2 min while the team troubleshoots.\n3. **Bedside echo** — check tube position, RV size, pericardial effusion, septal motion.\n4. **Inhaled vasodilator** if not already running.\n5. **Consider ECMO activation** (V-A) if refractory — call early.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Farkas JD. The Internet Book of Critical Care: Intubating the Patient with RV Failure. emcrit.org/ibcc/rvf-intubation' },
+    { num: 2, text: 'Wilcox SR, et al. Mechanical ventilation in pulmonary hypertension: practical considerations. Pulm Circ. 2015;5(2):319-23.' },
+    { num: 3, text: 'Mekontso Dessap A, et al. Acute cor pulmonale during ARDS: incidence, clinical implications, and prognosis. Crit Care Med. 2016;44(10):1876-85.' },
+  ],
+};
+
+const RHF_PRESSORS_PAGE: InfoPage = {
+  id: 'rhf-pressors',
+  title: 'Pressors & Inotropes for RV Failure',
+  subtitle: 'Hemodynamic ladder for the failing right ventricle',
+  sections: [
+    {
+      heading: 'Goals of hemodynamic support',
+      body: '1. **Restore coronary perfusion to the RV** by raising systemic MAP above PA pressure (RV perfuses in systole AND diastole only when this gradient is preserved).\n2. **Augment RV contractility** without increasing pulmonary vascular resistance.\n3. **Reduce RV afterload** with selective pulmonary vasodilators when available.\n4. **Avoid further RV distension** — minimize crystalloid in volume-overloaded patients.\n\nTarget: MAP ≥ 65 (≥ 70 if RVMI), CVP no higher than necessary (typically 8-12), urine output > 0.5 mL/kg/hr, lactate trending down. [1][2]',
+    },
+    {
+      heading: 'First-line agents',
+      body: '| Agent | Dose | Mechanism | Notes |\n|-------|------|-----------|-------|\n| **Norepinephrine** | 0.05-0.5 mcg/kg/min | α₁ + β₁ | First-line. Raises MAP without big rise in PVR. |\n| **Vasopressin** | 0.03-0.04 U/min fixed | V1 receptor | Add-on at norepi 0.3+; selective systemic vasoconstrictor, mild pulmonary vasodilation. |\n| **Epinephrine** | 0.02-0.2 mcg/kg/min | α₁ + β₁ + β₂ | Single-agent rescue; useful when both pressor + inotrope needed. Tachycardia/lactate at higher doses. |',
+    },
+    {
+      heading: 'Inotropes',
+      body: '| Agent | Dose | Notes |\n|-------|------|-------|\n| **Dobutamine** | 2-5 mcg/kg/min (start low) | β₁ inotrope + mild β₂ vasodilation; lowers PVR. Watch for hypotension — pair with norepi. |\n| **Milrinone** | 0.125-0.5 mcg/kg/min | PDE-3 inhibitor; potent pulmonary vasodilation. Caution: causes systemic hypotension; AVOID if SBP < 90. Renal-adjusted. |\n| **Levosimendan** | 0.05-0.2 mcg/kg/min × 24h | Calcium sensitizer; not FDA-approved in US but available in EU; useful in cardiogenic shock. |',
+    },
+    {
+      heading: 'Avoid these',
+      body: '• **Phenylephrine alone** — pure α; can drop CO in pure RV failure (especially RVMI). OK as bridge while titrating norepi.\n• **Large-volume crystalloid bolus** — most acute RV failure is volume-overloaded.\n• **High-dose epinephrine** — tachycardia worsens RV ischemia.\n• **Beta-blockers** — kills RV inotropy in acute setting.',
+    },
+    {
+      heading: 'Etiology-specific tweaks',
+      body: '• **Acute PE (intermediate-risk):** norepi → add dobutamine if low CO, monitor for arrhythmia.\n• **RV infarction:** maintain RV preload (cautious 250 mL bolus if IVC small), avoid nitrates/morphine, dobutamine first-line inotrope, consider PCI emergently.\n• **PAH crisis:** norepi + vasopressin + inhaled vasodilator (epoprostenol or NO); never stop home prostacyclin infusion.\n• **Sepsis with RV strain:** norepi titrated to MAP, add vasopressin early, inotrope only if echo confirms RV/LV dysfunction.\n• **Post-LVAD RV failure:** call CT surgery — may need RVAD; epinephrine + milrinone + iNO as bridge.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Konstam MA, et al. Evaluation and Management of Right-Sided Heart Failure: A Scientific Statement From the AHA. Circulation. 2018;137(20):e578-e622.' },
+    { num: 2, text: 'Humbert M, et al. 2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension. Eur Heart J. 2022;43(38):3618-3731.' },
+    { num: 3, text: 'Ventetuolo CE, Klinger JR. Management of acute right ventricular failure in the intensive care unit. Ann Am Thorac Soc. 2014;11(5):811-22.' },
+  ],
+};
+
+const RHF_INHALED_VASODILATORS_PAGE: InfoPage = {
+  id: 'rhf-inhaled-vasodilators',
+  title: 'Inhaled Pulmonary Vasodilators',
+  subtitle: 'Selective afterload reduction for the failing RV',
+  sections: [
+    {
+      heading: 'Why inhaled (not IV)',
+      body: 'Inhaled vasodilators reach only well-ventilated alveoli, so they reduce pulmonary vascular resistance precisely where gas exchange occurs — which improves V/Q matching and oxygenation. IV pulmonary vasodilators (sildenafil, prostacyclin) cause systemic hypotension and worsen V/Q mismatch. [1]',
+    },
+    {
+      heading: 'Inhaled epoprostenol (Flolan)',
+      body: '**Most ED-friendly option.** Rapid onset, short half-life (~3-5 min), no systemic accumulation.\n\n**Dose:** 50 ng/kg/min nebulized continuously (typical adult dose 30-50 ng/kg/min via in-line nebulizer with vent or mask).\n\n**Wean:** Step down by 10 ng/kg/min q4-6h once hemodynamics improve. **Never stop abruptly** — rebound pulmonary vasoconstriction is common.\n\n**Monitoring:** SpO₂, MAP, RR. Side effects rare given short half-life.',
+    },
+    {
+      heading: 'Inhaled nitric oxide (iNO)',
+      body: '**Dose:** 20-40 ppm via specialized delivery system.\n\n**Pros:** Fastest onset (seconds), most selective.\n**Cons:** Expensive ($3000-5000/day), requires specialized equipment, methemoglobinemia risk, abrupt discontinuation → rebound PH crisis.\n\n**Use:** Severe acute PH crisis, post-cardiac surgery RV failure, when epoprostenol unavailable.',
+    },
+    {
+      heading: 'Inhaled iloprost / treprostinil',
+      body: 'Longer half-life prostacyclins, less commonly used acutely. More relevant for chronic PAH on home therapy.\n\n**Critical:** If a patient is on home **subcutaneous treprostinil or IV epoprostenol**, NEVER stop the infusion. Abrupt cessation causes life-threatening rebound PH crisis. Continue the home pump and add ED therapy on top.',
+    },
+    {
+      heading: 'When to start in the ED',
+      body: '• **PAH crisis** with hemodynamic compromise (MAP < 65 despite pressors, refractory hypoxemia)\n• **Bridge before high-risk RSI** in known RV failure\n• **Massive PE** with refractory hypoxemia/shock as bridge to thrombolysis or thrombectomy\n• **Post-cardiac surgery** acute RV failure (rare in ED)\n\n**Don\'t use as first-line** — pressors/inotropes come first; vasodilators are layered on when available.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Humbert M, et al. 2022 ESC/ERS Guidelines for the diagnosis and treatment of pulmonary hypertension. Eur Heart J. 2022;43(38):3618-3731.' },
+    { num: 2, text: 'Granton J, Mercier O, De Perrot M. Management of severe pulmonary arterial hypertension. Semin Respir Crit Care Med. 2017;38(5):611-26.' },
+    { num: 3, text: 'Hill NS, et al. Inhaled therapies for pulmonary hypertension. Respir Care. 2015;60(6):794-805.' },
+  ],
+};
+
+const RHF_DISPOSITION_PERT_PAGE: InfoPage = {
+  id: 'rhf-disposition-pert',
+  title: 'Disposition & PERT Activation',
+  subtitle: 'Where to send them and who to call',
+  sections: [
+    {
+      heading: 'Disposition by acuity',
+      body: '| Presentation | Disposition |\n|--------------|-------------|\n| Massive PE / cardiac arrest / refractory shock | ICU + activate PERT + cath lab + CT surgery |\n| Intermediate-high PE (positive troponin + RV dysfunction + hemodynamic strain) | ICU; consider catheter-directed thrombolysis or half-dose alteplase |\n| Intermediate-low PE (RV strain OR positive trop, hemodynamically stable) | Step-down or telemetry; PERT consult |\n| Low-risk PE (sPESI 0, no RV strain, normal trop) | Floor or outpatient (HESTIA criteria) on DOAC |\n| RVMI with shock | Cath lab activation, ICU |\n| Acute on chronic PAH crisis | ICU with pulmonary HTN team |\n| ARDS with acute cor pulmonale | ICU; lung-protective vent + RV-protective strategy (Mekontso Dessap) |\n| Post-LVAD RV failure | ICU + CT surgery (may need RVAD) |',
+    },
+    {
+      heading: 'When to activate PERT (Pulmonary Embolism Response Team)',
+      body: 'PERT is a multidisciplinary team — typically interventional cardiology, pulmonology/CC, vascular surgery, CT surgery — that meets emergently to decide on advanced therapies.\n\n**Activate for:**\n• Massive PE (sustained SBP < 90, vasopressor requirement, cardiac arrest)\n• Intermediate-high PE (RV dysfunction + positive troponin + clinical deterioration)\n• Contraindications to systemic thrombolysis where catheter-directed therapy may be option\n• Patients failing initial therapy\n\n**Don\'t wait for the patient to crash.** Early PERT activation in intermediate-high PE shortens time to decision and improves outcomes. [1][2]',
+    },
+    {
+      heading: 'Outpatient PE — HESTIA criteria',
+      body: 'Patients meeting ALL of the following may be safely discharged on a DOAC after ED workup:\n• Hemodynamically stable (HR < 110, SBP > 100, no vasopressors)\n• No thrombolysis or embolectomy required\n• No active bleeding or high bleeding risk\n• SpO₂ > 92% on room air\n• No severe pain requiring IV analgesia\n• No medical/social reason for admission > 24h\n• No CrCl < 30 (apixaban OK to 25)\n• No severe liver dysfunction\n• No pregnancy\n• No HIT history\n• Reliable follow-up in 24-72 hours\n\n**Pair with:** apixaban 10 mg BID × 7d → 5 mg BID, or rivaroxaban 15 mg BID × 21d → 20 mg daily. PCP or hematology follow-up.',
+    },
+    {
+      heading: 'Special transfers',
+      body: '• **No on-site PERT or interventional capability:** transfer to tertiary center with extracorporeal life support if patient is sick enough to need advanced therapy.\n• **PAH on home prostacyclin infusion:** never stop pump during transfer; ensure infusion meds and backup pump travel with patient; alert receiving pulmonary HTN team.\n• **RVMI:** door-to-balloon for cath; do not delay for further imaging.\n• **ECMO consideration:** call early — cardiogenic shock from massive PE or RV failure may need V-A ECMO as bridge to recovery or thrombectomy.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603.' },
+    { num: 2, text: 'Rivera-Lebron B, et al. Diagnosis, Treatment and Follow Up of Acute Pulmonary Embolism: Consensus Practice from the National PERT Consortium. Clin Appl Thromb Hemost. 2019;25:1076029619853037.' },
+    { num: 3, text: 'Zondag W, et al. Outpatient treatment in patients with acute pulmonary embolism: the Hestia Study. J Thromb Haemost. 2011;9(8):1500-7.' },
+    { num: 4, text: 'Konstam MA, et al. Evaluation and Management of Right-Sided Heart Failure: A Scientific Statement From the AHA. Circulation. 2018;137(20):e578-e622.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // Right Heart Failure
+  'rhf-pocus-criteria': RHF_POCUS_CRITERIA_PAGE,
+  'rhf-farkas-rsi': RHF_FARKAS_RSI_PAGE,
+  'rhf-pressors': RHF_PRESSORS_PAGE,
+  'rhf-inhaled-vasodilators': RHF_INHALED_VASODILATORS_PAGE,
+  'rhf-disposition-pert': RHF_DISPOSITION_PERT_PAGE,
   // Oncological Emergencies
   'onc-emergency-summary': ONC_EMERGENCY_SUMMARY,
   'chemo-regimens': CHEMO_REGIMENS_PAGE,

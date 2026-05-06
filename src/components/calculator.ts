@@ -34269,6 +34269,91 @@ const ECOG_PERFORMANCE_CALCULATOR: CalculatorDefinition = {
 };
 
 // =====================================================================
+// RIGHT HEART FAILURE CALCULATORS (sPESI defined earlier above)
+// =====================================================================
+
+const BOVA_CALCULATOR: CalculatorDefinition = {
+  id: 'bova',
+  title: 'BOVA Score',
+  subtitle: 'Risk Stratification for Intermediate-Risk PE',
+  description: 'Bova score (2014) stratifies normotensive PE patients into 3 stages by 30-day risk of PE-related complications (death, hemodynamic collapse, or recurrence). Use only in hemodynamically stable PE.',
+  fields: [
+    { name: 'sbp', label: 'Systolic BP 90-100 mmHg', type: 'select', points: 0, selectOptions: [{ label: 'No', points: 0 }, { label: 'Yes (+2)', points: 2 }] },
+    { name: 'troponin', label: 'Elevated cardiac troponin', type: 'select', points: 0, selectOptions: [{ label: 'No', points: 0 }, { label: 'Yes (+2)', points: 2 }] },
+    { name: 'rv', label: 'RV dysfunction on echo or CT (RV/LV ≥1.0)', type: 'select', points: 0, selectOptions: [{ label: 'No', points: 0 }, { label: 'Yes (+2)', points: 2 }] },
+    { name: 'hr', label: 'Heart rate ≥110 bpm', type: 'select', points: 0, selectOptions: [{ label: 'No', points: 0 }, { label: 'Yes (+1)', points: 1 }] },
+  ],
+  results: [],
+  thresholdNote: 'Stage I = 0-2 pts (4.4% complications). Stage II = 3-4 pts (18%). Stage III = >4 pts (42%).',
+  citations: [
+    'Bova C, Sanchez O, Prandoni P, et al. Identification of intermediate-risk patients with acute symptomatic pulmonary embolism. Eur Respir J. 2014;44(3):694-703.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const total = ['sbp', 'troponin', 'rv', 'hr']
+      .reduce((sum, k) => sum + (Number(values[k]) || 0), 0);
+    if (total <= 2) {
+      return {
+        value: `${total}`,
+        label: 'Stage I — Low risk (4.4% complications)',
+        description: `**BOVA = ${total} (Stage I)**\n\nStandard anticoagulation + telemetry. No advanced therapy unless decompensation.`,
+        colorVar: '--color-primary',
+      };
+    }
+    if (total <= 4) {
+      return {
+        value: `${total}`,
+        label: 'Stage II — Intermediate risk (18% complications)',
+        description: `**BOVA = ${total} (Stage II)**\n\n**Consider PERT activation.** Discuss CDT vs continued anticoag based on local resources, patient trajectory, and bleed risk.`,
+        colorVar: '--color-warning',
+      };
+    }
+    return {
+      value: `${total}`,
+      label: 'Stage III — High risk (42% complications)',
+      description: `**BOVA = ${total} (Stage III)**\n\n**Activate PERT now.** Strong consideration for catheter-directed therapy (CDT/EKOS) or mechanical thrombectomy (FlowTriever). Heparin while awaiting decision.`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+const HALF_DOSE_ALTEPLASE_CALCULATOR: CalculatorDefinition = {
+  id: 'half-dose-alteplase',
+  title: 'Half-Dose Alteplase (MOPETT)',
+  subtitle: 'Weight-Based Dosing for Submassive PE',
+  description: 'MOPETT protocol (Sharifi 2013): half-dose alteplase 0.5 mg/kg (max 50 mg) for submassive PE. Reduced pulmonary hypertension and recurrent PE at 28 mo without bleed signal in 121-pt single-center RCT. Not yet societal standard but used at many centers when systemic full-dose deemed too risky.',
+  fields: [
+    { name: 'weight', label: 'Patient weight (kg)', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote: 'Hold UFH during infusion; restart when aPTT <80 post-lytic. Escalate to full-dose 100 mg/2hr if decompensating.',
+  citations: [
+    'Sharifi M, Bay C, Skrocki L, et al. Moderate Pulmonary Embolism Treated With Thrombolysis (MOPETT). Am J Cardiol. 2013;111(2):273-277.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = Number(values.weight) || 0;
+    if (weight < 30) {
+      return {
+        value: '—',
+        label: 'Enter patient weight',
+        description: '**Weight required** (≥30 kg).',
+        colorVar: '--color-text-muted',
+      };
+    }
+    const weightDose = Math.round(weight * 0.5 * 10) / 10;
+    const totalDose = Math.min(weightDose, 50);
+    const bolus = Math.round(totalDose * 0.2 * 10) / 10;
+    const infusion = Math.round((totalDose - bolus) * 10) / 10;
+    const cap = weightDose > 50 ? ' (capped at 50 mg max)' : '';
+    return {
+      value: `${totalDose} mg`,
+      label: `Half-dose alteplase ${totalDose} mg total${cap}`,
+      description: `**MOPETT half-dose for ${weight} kg patient:**\n\n• **Bolus ${bolus} mg IV over 1 min**\n• **Then ${infusion} mg IV over 2 hours**\n\n• Hold UFH during infusion\n• Restart UFH (no bolus) when aPTT <80\n• If decompensation → escalate to full-dose 100 mg/2hr or push 50 mg`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// =====================================================================
 // PTSD SCREENING CALCULATORS
 // =====================================================================
 
@@ -34985,6 +35070,9 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // PTSD Screening
   'pc-ptsd-5': PC_PTSD_5_CALCULATOR,
   'pcl-5': PCL_5_CALCULATOR,
+  // Right Heart Failure (spesi already registered above with PE calculators)
+  'bova': BOVA_CALCULATOR,
+  'half-dose-alteplase': HALF_DOSE_ALTEPLASE_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

@@ -118,6 +118,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'afib-start',
       },
       {
+        id: 'right-heart-failure',
+        title: 'Right Heart Failure',
+        subtitle: 'POCUS → Trigger ID → Etiology Algorithm → Hemodynamic Ladder → RV-Protective Intubation → Disposition',
+        categoryId: 'cardiology',
+        version: '1.0',
+        nodeCount: 22,
+        entryNodeId: 'rhf-start',
+      },
+      {
         id: 'nstemi',
         title: 'NSTEMI Management',
         subtitle: 'Diagnosis → Risk Stratification → Revascularization → DAPT → Prevention',
