@@ -42,12 +42,14 @@ export function renderBodyText(container: HTMLElement, text: string): void {
 
 /** Parse a single line for markdown links [text](url), citation refs [N], and weight-dose patterns (e.g. 0.5 mg/kg/hr). */
 function renderLineWithLinksAndCitations(container: HTMLElement, line: string): void {
-  // Three-way combined pattern:
-  //   1) Markdown links: [text](url)                          → groups 1,2
-  //   2) Citation refs: [N]                                   → groups 3,4
-  //   3) Weight-dose: optional ** + number unit/kg/time + **  → groups 5,6,7,8,9
-  // Markdown links match first (leftmost) so [Drug 0.5 mg/kg](#/drug/...) stays a drug link.
-  const combinedPattern = /\[([^\]]+)\]\(([^)]+)\)|(\[(\d+)\])|(\*\*)?(\d+\.?\d*(?:\s*[-–]\s*\d+\.?\d*)?)\s*(mg|mcg|units?|U|mL|mEq|g)\/kg(?:\/(day|hr?|min|dose))?(\*\*)?/g;
+  // Four-way combined pattern (in priority order — leftmost-longest wins per JS regex semantics):
+  //   1) Bold span:        **inner**                                → groups 1
+  //   2) Markdown links:   [text](url)                              → groups 2,3
+  //   3) Citation refs:    [N]                                      → groups 4,5
+  //   4) Weight-dose:      optional ** + number unit/kg/time + **   → groups 6,7,8,9,10
+  // Bold span comes first so **[Drug](#/drug/x)** is captured as a single bold token,
+  // then its inner content is recursively rendered (preserving inline links/citations).
+  const combinedPattern = /\*\*([\s\S]+?)\*\*|\[([^\]]+)\]\(([^)]+)\)|(\[(\d+)\])|(\*\*)?(\d+\.?\d*(?:\s*[-–]\s*\d+\.?\d*)?)\s*(mg|mcg|units?|U|mL|mEq|g)\/kg(?:\/(day|hr?|min|dose))?(\*\*)?/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   while ((match = combinedPattern.exec(line)) !== null) {
@@ -56,10 +58,22 @@ function renderLineWithLinksAndCitations(container: HTMLElement, line: string): 
       appendBoldAware(container, line.slice(lastIndex, match.index));
     }
 
-    if (match[1] !== undefined && match[2] !== undefined) {
+    if (match[1] !== undefined) {
+      // Bold span: **inner** — render inner recursively into a <strong> so any
+      // markdown links, citation refs, or dose patterns inside still work.
+      const inner = match[1];
+      const strong = document.createElement('strong');
+      // Guard: only recurse if inner contains tokens we'd parse. Otherwise just set text.
+      if (/\[|\*\*|\d/.test(inner)) {
+        renderLineWithLinksAndCitations(strong, inner);
+      } else {
+        strong.textContent = inner;
+      }
+      container.appendChild(strong);
+    } else if (match[2] !== undefined && match[3] !== undefined) {
       // Markdown link: [text](url)
-      const linkLabel = match[1];
-      const linkUrl = match[2];
+      const linkLabel = match[2];
+      const linkUrl = match[3];
       if (linkUrl.startsWith('http://') || linkUrl.startsWith('https://')) {
         const link = document.createElement('a');
         link.className = 'body-inline-link';
@@ -79,24 +93,24 @@ function renderLineWithLinksAndCitations(container: HTMLElement, line: string): 
         link.setAttribute('data-link-id', linkId);
         container.appendChild(link);
       }
-    } else if (match[4] !== undefined) {
+    } else if (match[5] !== undefined) {
       // Citation ref: [N]
-      const num = match[4];
+      const num = match[5];
       const btn = document.createElement('button');
       btn.className = 'cite-link';
       btn.textContent = `[${num}]`;
       btn.addEventListener('click', () => scrollToCardCitation(num));
       container.appendChild(btn);
-    } else if (match[6] !== undefined) {
+    } else if (match[7] !== undefined) {
       // Weight-dose pattern: e.g. "0.5 mg/kg/hr", "**0.1 U/kg/hr**"
       const doseText = match[0].replace(/\*\*/g, '');
-      const boldOpen = match[5];
-      const boldClose = match[9];
+      const boldOpen = match[6];
+      const boldClose = match[10];
 
       // Parse dose value and unit from the match for pre-filling the calculator
-      const dosePerKg = parseFloat(match[6]);
-      const unit = match[7] === 'U' ? 'units' : match[7]; // normalize U → units
-      const timeSuffix = match[8]; // day, hr, h, min, dose — or undefined
+      const dosePerKg = parseFloat(match[7]);
+      const unit = match[8] === 'U' ? 'units' : match[8]; // normalize U → units
+      const timeSuffix = match[9]; // day, hr, h, min, dose — or undefined
 
       const btn = document.createElement('button');
       btn.className = 'dose-calc-link';
