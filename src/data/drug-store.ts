@@ -210,6 +210,40 @@ const ALBUTEROL_NEB: DrugEntry = {
   ],
 };
 
+const ALLOPURINOL: DrugEntry = {
+  id: 'allopurinol',
+  name: 'Allopurinol',
+  genericName: 'Allopurinol',
+  drugClass: 'Xanthine oxidase inhibitor',
+  route: 'PO/IV',
+  indications: ['Tumor lysis syndrome prevention', 'Hyperuricemia (chronic gout)', 'Recurrent uric acid stones'],
+  dosing: [
+    {
+      indication: 'TLS prevention',
+      regimen: '300 mg PO daily (up to 600-800 mg/day in divided doses for high-risk). Start 24-48h before chemotherapy and continue 3-7 days post. Renal dosing: GFR 10-50 \u2192 200 mg/day; GFR <10 \u2192 100 mg/day or every other day.',
+    },
+    {
+      indication: 'Chronic gout',
+      regimen: '100 mg PO daily, titrate by 100 mg every 2-5 weeks to target serum urate <6 mg/dL. Max 800 mg/day.',
+    },
+  ],
+  contraindications: [
+    'Severe hypersensitivity (SJS/TEN history)',
+    'Pregnancy (relative)',
+  ],
+  cautions: [
+    'HLA-B*5801 carriers (Han Chinese, Thai, Korean) at high SJS risk \u2014 screen first when feasible',
+    'Lowers existing urate slowly \u2014 xanthine oxidase block does not clear pre-formed urate (prevents new urate formation only)',
+    'Azathioprine / 6-mercaptopurine interaction \u2014 reduce dose of those agents by ~75%',
+  ],
+  monitoring: 'Serum uric acid, renal function, LFTs. Watch for rash (any rash \u2192 stop drug, evaluate for SJS/TEN).',
+  notes: 'Standard TLS prophylaxis for low-to-intermediate risk. For high-risk (Burkitt, ALL with WBC >100k, bulky lymphoma, AML with WBC >50k) use rasburicase instead because it lowers EXISTING urate. Allopurinol works upstream \u2014 prevents new urate but does not clear urate already in serum.',
+  citations: [
+    'Coiffier B, et al. Guidelines for Management of Pediatric and Adult Tumor Lysis Syndrome: An Evidence-Based Review. J Clin Oncol. 2008;26(16):2767-2778.',
+    'Cairo MS, et al. Recommendations for the evaluation of risk and prophylaxis of tumour lysis syndrome. Br J Haematol. 2010;149(4):578-586.',
+  ],
+};
+
 const AMOXICILLIN: DrugEntry = {
   id: 'amoxicillin',
   name: 'Amoxicillin',
@@ -533,6 +567,37 @@ const ATORVASTATIN: DrugEntry = {
   citations: [
     'Cannon CP, et al. Intensive versus Moderate Lipid Lowering with Statins after Acute Coronary Syndromes (PROVE IT-TIMI 22). N Engl J Med. 2004;350(15):1495-1504.',
     'Grundy SM, et al. 2018 AHA/ACC Guideline on the Management of Blood Cholesterol. J Am Coll Cardiol. 2019;73(24):e285-e350.',
+  ],
+};
+
+const ATRA: DrugEntry = {
+  id: 'atra',
+  name: 'ATRA (Tretinoin)',
+  genericName: 'All-trans retinoic acid',
+  drugClass: 'Retinoid (differentiating agent)',
+  route: 'PO',
+  indications: ['Acute promyelocytic leukemia (APL/AML M3) \u2014 induction', 'APL with hyperleukocytosis (instead of leukapheresis)'],
+  dosing: [
+    {
+      indication: 'APL induction',
+      regimen: '45 mg/m\u00b2/day PO divided BID until complete remission (typically 30-90 days). Start IMMEDIATELY when APL is suspected \u2014 do not wait for genetic confirmation.',
+    },
+  ],
+  contraindications: [
+    'Pregnancy (Category D \u2014 highly teratogenic)',
+    'Known hypersensitivity to retinoids or parabens',
+  ],
+  cautions: [
+    'Differentiation Syndrome (DS) \u2014 fever, dyspnea, hypoxia, weight gain, infiltrates, hypotension; occurs days 2-21. Treat with dexamethasone 10 mg IV q12h IMMEDIATELY when suspected; ATRA may be continued through mild-moderate DS.',
+    'Pseudotumor cerebri (especially pediatrics)',
+    'Teratogenic \u2014 strict contraception; pregnancy test before starting',
+    'Hyperleukocytosis can develop on therapy \u2014 monitor WBC',
+  ],
+  monitoring: 'CBC with diff, coagulation panel (DIC), LFTs, triglycerides. Clinical surveillance for DS daily during induction.',
+  notes: 'APL is the ONE leukemia where leukapheresis is CONTRAINDICATED \u2014 mechanical manipulation worsens DIC. Start ATRA the moment APL is suspected. Combine with arsenic trioxide (ATO) or anthracycline per protocol. Survival improved from <30% to >90% with ATRA-based regimens.',
+  citations: [
+    'Sanz MA, et al. Management of acute promyelocytic leukemia: updated recommendations from an expert panel of the European LeukemiaNet. Blood. 2009;113(9):1875-1891.',
+    'Lo-Coco F, et al. Retinoic acid and arsenic trioxide for acute promyelocytic leukemia. N Engl J Med. 2013;369(2):111-121.',
   ],
 };
 
@@ -919,6 +984,36 @@ const BENZATHINE_PENICILLIN: DrugEntry = {
   ],
 };
 
+const CALCITONIN: DrugEntry = {
+  id: 'calcitonin',
+  name: 'Calcitonin (Salmon)',
+  genericName: 'Calcitonin salmon',
+  drugClass: 'Hormone (calcium-lowering)',
+  route: 'SC/IM',
+  indications: ['Hypercalcemia of malignancy (rapid onset)', 'Paget disease (rare)'],
+  dosing: [
+    {
+      indication: 'Hypercalcemia of malignancy',
+      regimen: '4 IU/kg SC or IM q12h. May escalate to 8 IU/kg q6h if response inadequate. Onset 2-6h, peak ~24h. Use as a BRIDGE while awaiting bisphosphonate or denosumab effect.',
+    },
+  ],
+  contraindications: [
+    'Hypersensitivity to salmon calcitonin',
+  ],
+  cautions: [
+    'Tachyphylaxis develops at 48-72 h \u2014 bridge to bisphosphonate or denosumab for durable effect',
+    'Flushing, nausea common',
+    'Small theoretical malignancy signal with long-term use \u2014 NOT relevant for short acute hypercalcemia courses',
+  ],
+  monitoring: 'Serum calcium q6-12h initially, ionized calcium when available, renal function.',
+  notes: 'Fastest-onset agent for severe hypercalcemia. Use as bridge while waiting for zoledronic acid (peaks 4-7 days) or denosumab to take effect. Do NOT rely on calcitonin alone \u2014 tachyphylaxis kills durability.',
+  citations: [
+    'Stewart AF. Hypercalcemia Associated with Cancer. N Engl J Med. 2005;352(4):373-379.',
+    'Goldner W. Cancer-Related Hypercalcemia. J Oncol Pract. 2016;12(5):426-432.',
+    'NCCN Clinical Practice Guidelines: Adult Cancer Pain. v2.2024.',
+  ],
+};
+
 const CALCIUM_CHLORIDE: DrugEntry = {
   id: 'calcium-chloride',
   name: 'Calcium Chloride',
@@ -1281,6 +1376,45 @@ const DEXTROSE: DrugEntry = {
   citations: [
     'Farkas J. Salicylate Intoxication. Internet Book of Critical Care (IBCC). EMCrit. 2025.',
     'Thurston JH, et al. Reduced brain glucose with normal plasma glucose in salicylate poisoning. J Clin Invest. 1970;49(11):2139-45.',
+  ],
+};
+
+const DENOSUMAB: DrugEntry = {
+  id: 'denosumab',
+  name: 'Denosumab (Xgeva/Prolia)',
+  genericName: 'Denosumab',
+  drugClass: 'RANKL inhibitor (monoclonal antibody)',
+  route: 'SC',
+  indications: ['Hypercalcemia of malignancy refractory to bisphosphonates', 'Hypercalcemia with renal failure (CrCl <30)', 'Skeletal-related events from bone metastases', 'Osteoporosis (Prolia formulation)'],
+  dosing: [
+    {
+      indication: 'Refractory hypercalcemia of malignancy (Hu protocol)',
+      regimen: '120 mg SC \u00d7 1; may repeat day 8, 15, and 29, then monthly.',
+    },
+    {
+      indication: 'Skeletal-related event prevention (bone metastases)',
+      regimen: '120 mg SC every 4 weeks.',
+    },
+    {
+      indication: 'Osteoporosis (Prolia)',
+      regimen: '60 mg SC every 6 months.',
+    },
+  ],
+  contraindications: [
+    'Hypocalcemia (must correct first)',
+    'Pregnancy (Category X)',
+  ],
+  cautions: [
+    'HYPOCALCEMIA \u2014 check Ca/Mg/PO4/vit D before dosing; supplement Ca and vit D unless hypercalcemic',
+    'Osteonecrosis of the jaw (especially with dental procedures)',
+    'Atypical femur fracture (long-term)',
+    'REBOUND vertebral fractures if discontinued without bisphosphonate transition',
+  ],
+  monitoring: 'Serum calcium (within 14 days of dose, especially if renal impairment), magnesium, phosphate, 25-OH vitamin D.',
+  notes: 'First-line alternative to zoledronic acid when CrCl <30 (no renal dose adjustment needed). Onset slower than calcitonin but longer-lasting. Does NOT clear from circulation when stopped (unlike bisphosphonates) \u2014 rebound osteoclast activity \u2192 vertebral fractures.',
+  citations: [
+    'Hu MI, et al. Denosumab for treatment of hypercalcemia of malignancy. J Clin Endocrinol Metab. 2014;99(9):3144-3152.',
+    'Stopeck AT, et al. Denosumab compared with zoledronic acid for the treatment of bone metastases in patients with advanced breast cancer. J Clin Oncol. 2010;28(35):5132-5139.',
   ],
 };
 
@@ -3033,6 +3167,47 @@ const GLUCAGON: DrugEntry = {
   citations: [
     'Farkas J. Anaphylaxis. Internet Book of Critical Care (IBCC). 2025.',
     'Nunez J, Santillanes G. Anaphylaxis in Pediatric Patients. Pediatric Emergency Medicine Practice (EB Medicine). 2019;16(6):1-24.',
+  ],
+};
+
+const HYDROXYUREA: DrugEntry = {
+  id: 'hydroxyurea',
+  name: 'Hydroxyurea',
+  genericName: 'Hydroxyurea',
+  drugClass: 'Antimetabolite (ribonucleotide reductase inhibitor)',
+  route: 'PO',
+  indications: ['Leukostasis cytoreduction (AML, CML, ALL with hyperleukocytosis)', 'Sickle cell disease (HbF induction)', 'Polycythemia vera', 'Essential thrombocythemia'],
+  dosing: [
+    {
+      indication: 'Leukostasis cytoreduction',
+      regimen: '50-100 mg/kg/day PO divided BID-TID until WBC <50k (typically 2-7 days). Combine with IVF + allopurinol or rasburicase for TLS prophylaxis.',
+    },
+    {
+      indication: 'Sickle cell disease',
+      regimen: '15-35 mg/kg/day PO daily; titrate to ANC and reticulocyte response.',
+    },
+    {
+      indication: 'Polycythemia vera / Essential thrombocythemia',
+      regimen: '15-20 mg/kg/day PO daily initially.',
+    },
+  ],
+  contraindications: [
+    'Pregnancy (Category D \u2014 teratogenic)',
+    'Severe bone marrow suppression',
+    'Severe renal failure (relative)',
+  ],
+  cautions: [
+    'Cytopenias',
+    'Oral ulcers, hyperpigmentation, leg ulcers (long-term)',
+    'TLS risk \u2014 give with allopurinol/IVF prophylaxis',
+    'Secondary malignancy risk (long-term)',
+    'CONTRAINDICATED in suspected APL \u2014 use ATRA + dexamethasone instead',
+  ],
+  monitoring: 'CBC with diff every 1-2 days during cytoreduction, then weekly. Uric acid, LDH, K, PO4, Ca, renal function. Pregnancy test before initiation in females of reproductive age.',
+  notes: 'First-line cytoreduction for symptomatic leukostasis. Drops WBC 50-80% in 24-48 hours. Combine with leukapheresis for severely symptomatic patients. CONTRAINDICATED in suspected APL (no apheresis, no hydroxyurea \u2014 use ATRA + dex).',
+  citations: [
+    'Ganzel C, et al. Hyperleukocytosis, leukostasis and leukapheresis: practice management. Blood Rev. 2012;26(3):117-122.',
+    'R\u00f6llig C, Ehninger G. How I treat hyperleukocytosis in acute myeloid leukemia. Blood. 2015;125(21):3246-3252.',
   ],
 };
 
@@ -5205,6 +5380,39 @@ const SEMAGLUTIDE: DrugEntry = {
   ],
 };
 
+const RASBURICASE: DrugEntry = {
+  id: 'rasburicase',
+  name: 'Rasburicase (Elitek)',
+  genericName: 'Rasburicase (recombinant urate oxidase)',
+  drugClass: 'Recombinant urate oxidase enzyme',
+  route: 'IV',
+  indications: ['Tumor lysis syndrome \u2014 high risk or established', 'Severe hyperuricemia not responsive to allopurinol'],
+  dosing: [
+    {
+      indication: 'Tumor lysis syndrome',
+      regimen: '0.2 mg/kg IV over 30 min \u00d7 1 dose typically sufficient (single-dose strategy). May repeat daily up to 5 days based on uric acid trend. High-risk groups: Burkitt lymphoma, ALL with WBC >100k, bulky lymphoma, AML with WBC >50k.',
+    },
+  ],
+  contraindications: [
+    'G6PD DEFICIENCY (causes hemolytic anemia and methemoglobinemia) \u2014 screen first IF time allows; in true emergency do not delay',
+    'Pregnancy / lactation (Category C)',
+    'Known hypersensitivity to rasburicase',
+  ],
+  cautions: [
+    'Methemoglobinemia (rare, severe)',
+    'Hemolysis',
+    'Hypersensitivity / anaphylaxis',
+    'SAMPLE HANDLING: serum uric acid samples drawn after rasburicase MUST be on ICE and processed within 4 hours \u2014 at room temp the enzyme continues to degrade urate ex vivo, falsely lowering result',
+  ],
+  monitoring: 'Uric acid (chilled sample, processed within 4h), K, PO4, Ca, LDH, Cr q4-6h initially. CBC for hemolysis. SpO2 with co-oximetry if methemoglobinemia suspected.',
+  notes: 'Converts urate \u2192 allantoin (water-soluble, easily excreted). Unlike allopurinol, RASBURICASE LOWERS EXISTING URATE \u2014 drops uric acid 4-fold within 4 hours. First-line for high-risk TLS. Single dose strategy is supported by Vadhan-Raj 2012 and is now standard. G6PD screen recommended in African, Mediterranean, SE Asian populations but should not delay treatment in life-threatening TLS.',
+  citations: [
+    'Goldman SC, et al. A randomized comparison between rasburicase and allopurinol in children with lymphoma or leukemia at high risk for tumor lysis. Blood. 2001;97(10):2998-3003.',
+    'Howard SC, et al. The Tumor Lysis Syndrome. N Engl J Med. 2011;364(19):1844-1854.',
+    'Cairo MS, et al. Recommendations for the evaluation of risk and prophylaxis of tumour lysis syndrome. Br J Haematol. 2010;149(4):578-586.',
+  ],
+};
+
 const RETEPLASE: DrugEntry = {
   id: 'reteplase',
   name: 'Reteplase',
@@ -6610,6 +6818,35 @@ const SODIUM_BICARBONATE: DrugEntry = {
   ],
 };
 
+const SEVELAMER: DrugEntry = {
+  id: 'sevelamer',
+  name: 'Sevelamer (Renvela/Renagel)',
+  genericName: 'Sevelamer carbonate or hydrochloride',
+  drugClass: 'Phosphate binder (non-calcium)',
+  route: 'PO',
+  indications: ['Hyperphosphatemia in TLS', 'Hyperphosphatemia in CKD/dialysis'],
+  dosing: [
+    {
+      indication: 'Hyperphosphatemia (TLS or CKD)',
+      regimen: '800-1600 mg PO TID with meals; titrate to phos <5.5 mg/dL.',
+    },
+  ],
+  contraindications: [
+    'Bowel obstruction',
+    'Hypophosphatemia',
+  ],
+  cautions: [
+    'GI side effects (nausea, dyspepsia, constipation)',
+    'Reduces absorption of fat-soluble vitamins, levothyroxine, ciprofloxacin \u2014 separate by 1-2 hours',
+  ],
+  monitoring: 'Serum phosphate, calcium, bicarbonate.',
+  notes: 'Preferred over calcium-based binders in hypercalcemic states (TLS often coexists with secondary hypocalcemia from PO4 chelation). Does not contribute to vascular calcification (unlike calcium acetate). Take with meals \u2014 works in the GI tract by binding dietary phosphate.',
+  citations: [
+    'Howard SC, et al. The Tumor Lysis Syndrome. N Engl J Med. 2011;364(19):1844-1854.',
+    'KDIGO Clinical Practice Guideline for the Diagnosis, Evaluation, Prevention, and Treatment of CKD-MBD. Kidney Int Suppl. 2017;7(1):1-59.',
+  ],
+};
+
 const SILVER_SULFADIAZINE: DrugEntry = {
   id: 'silver-sulfadiazine',
   name: 'Silver Sulfadiazine 1% (Silvadene)',
@@ -6944,6 +7181,39 @@ const VITAMIN_A_MEASLES: DrugEntry = {
     'Bello S, et al. Vitamin A for preventing acute lower respiratory tract infections in children. Cochrane Database Syst Rev. 2023.',
     'AAP Red Book: Report of the Committee on Infectious Diseases. 32nd ed. 2021.',
     'Huiming Y, et al. Vitamin A for treating measles in children. Cochrane Database Syst Rev. 2005;(4):CD001479.',
+  ],
+};
+
+const VORICONAZOLE: DrugEntry = {
+  id: 'voriconazole',
+  name: 'Voriconazole (Vfend)',
+  genericName: 'Voriconazole',
+  drugClass: 'Triazole antifungal',
+  route: 'IV/PO',
+  indications: ['Invasive aspergillosis (first-line)', 'Empiric antifungal in persistent neutropenic fever >4-7 days', 'Candidemia (alternative)', 'Scedosporiosis, fusariosis'],
+  dosing: [
+    {
+      indication: 'Invasive aspergillosis / empiric antifungal',
+      regimen: 'Loading 6 mg/kg IV q12h \u00d7 2 doses, then 4 mg/kg IV q12h. PO 200 mg q12h (>40 kg) or 100 mg q12h (<40 kg). Trough goal 1-5.5 mcg/mL.',
+    },
+  ],
+  contraindications: [
+    'Co-administration with sirolimus, ergot alkaloids, pimozide, quinidine, rifampin, high-dose efavirenz, high-dose ritonavir, carbamazepine, long-acting barbiturates, St. John\'s wort',
+  ],
+  cautions: [
+    'VISUAL DISTURBANCES (~30%) \u2014 photophobia, color vision changes, blurry vision',
+    'QT prolongation',
+    'Hepatotoxicity',
+    'Phototoxicity (cumulative \u2192 squamous cell carcinoma long-term)',
+    'CYP2C19 polymorphism affects levels (slow metabolizers \u2192 high troughs)',
+    'Hallucinations, encephalopathy at high troughs',
+  ],
+  monitoring: 'Trough levels (1-5.5 mcg/mL: too low \u2192 failure, too high \u2192 toxicity), LFTs weekly, visual symptoms, QTc on ECG.',
+  notes: 'First-line for invasive aspergillosis per IDSA. In neutropenic fever, add when fever persists \u22654-7 days on broad-spectrum antibiotics (per IDSA 2010 and NCCN). Echinocandin (caspofungin, micafungin, anidulafungin) is the alternative empiric agent \u2014 covers Candida well but is weaker for Aspergillus.',
+  citations: [
+    'Patterson TF, et al. Practice Guidelines for the Diagnosis and Management of Aspergillosis: 2016 Update by IDSA. Clin Infect Dis. 2016;63(4):e1-e60.',
+    'Freifeld AG, et al. Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer: 2010 Update by IDSA. Clin Infect Dis. 2011;52(4):e56-e93.',
+    'Pappas PG, et al. Clinical Practice Guideline for the Management of Candidiasis: 2016 Update by IDSA. Clin Infect Dis. 2016;62(4):e1-e50.',
   ],
 };
 
@@ -9304,6 +9574,44 @@ const ZIPRASIDONE: DrugEntry = {
   citations: [
     'Wilson MP, et al. The Psychopharmacology of Agitation: Consensus Statement of the AAEP Project BETA. West J Emerg Med. 2012;13(1):26-34.',
     'Klein LR, Driver BE, et al. Intramuscular Midazolam, Olanzapine, Ziprasidone, or Haloperidol for Treating Acute Agitation in the ED. Ann Emerg Med. 2018;72(4):374-385.',
+  ],
+};
+
+const ZOLEDRONIC_ACID: DrugEntry = {
+  id: 'zoledronic-acid',
+  name: 'Zoledronic Acid (Zometa/Reclast)',
+  genericName: 'Zoledronic acid',
+  drugClass: 'Bisphosphonate (third-generation)',
+  route: 'IV',
+  indications: ['Hypercalcemia of malignancy (first-line)', 'Skeletal-related events from bone metastases', 'Multiple myeloma bone disease', 'Paget disease, osteoporosis (Reclast)'],
+  dosing: [
+    {
+      indication: 'Hypercalcemia of malignancy',
+      regimen: '4 mg IV over 15-30 minutes (NOT faster \u2014 nephrotoxic). May repeat after 7 days if persistent hypercalcemia. Reduce/avoid if CrCl <30 \u2014 use denosumab instead.',
+    },
+    {
+      indication: 'Skeletal-related event prevention (bone mets, multiple myeloma)',
+      regimen: '4 mg IV every 3-4 weeks.',
+    },
+  ],
+  contraindications: [
+    'CrCl <30 (relative \u2014 use denosumab)',
+    'Severe hypocalcemia (correct first)',
+    'Pregnancy (Category D)',
+  ],
+  cautions: [
+    'NEPHROTOXICITY \u2014 infuse over \u226515 minutes, hydrate well, hold if Cr rising',
+    'Acute phase reaction (fever, myalgia within 24-48 h of first dose) \u2014 pretreat with acetaminophen',
+    'Osteonecrosis of the jaw (especially with dental procedures; multiple myeloma at higher risk)',
+    'Atypical femur fracture (long-term use)',
+    'Hypocalcemia \u2014 give Ca and vit D unless hypercalcemic',
+  ],
+  monitoring: 'Serum Ca, Mg, PO4, renal function before and after dosing. 25-OH vitamin D.',
+  notes: 'First-line bisphosphonate for hypercalcemia of malignancy. Onset 24-48 h, peak effect 4-7 days, durable for ~4 weeks. The 15-min minimum infusion is critical \u2014 faster infusion causes acute tubular necrosis. Use denosumab when CrCl <30 (no renal dose adjustment).',
+  citations: [
+    'Major P, et al. Zoledronic acid is superior to pamidronate in the treatment of hypercalcemia of malignancy. J Clin Oncol. 2001;19(2):558-567.',
+    'NCCN Clinical Practice Guidelines: Multiple Myeloma. v2.2024.',
+    'Anastasilakis AD, et al. Bisphosphonates and acute kidney injury. Curr Med Res Opin. 2019;35(5):797-803.',
   ],
 };
 
@@ -11753,6 +12061,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   ACTIVATED_CHARCOAL,
   ACYCLOVIR,
   ALBUTEROL_NEB,
+  ALLOPURINOL,
   ALTEPLASE,
   AMIODARONE,
   AMINOCAPROIC_ACID,
@@ -11767,6 +12076,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   ATAZANAVIR,
   ATOVAQUONE_PROGUANIL,
   ATORVASTATIN,
+  ATRA,
   ATROPINE,
   AZITHROMYCIN,
   BACITRACIN,
@@ -11781,6 +12091,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   BUDESONIDE_NEB,
   BUMETANIDE,
   BUPRENORPHINE,
+  CALCITONIN,
   CALCIUM_CHLORIDE,
   CALCIUM_GLUCONATE,
   CALCIUM_GLUCONATE_GEL,
@@ -11806,6 +12117,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   DABIGATRAN,
   DARUNAVIR,
   DAPTOMYCIN,
+  DENOSUMAB,
   DESMOPRESSIN,
   DEXAMETHASONE,
   DEXMEDETOMIDINE,
@@ -11850,6 +12162,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   HYDRALAZINE,
   HYDROCORTISONE,
   HYDROMORPHONE,
+  HYDROXYUREA,
   HYPERTONIC_SALINE,
   HYDROXOCOBALAMIN,
   IBUPROFEN,
@@ -11948,6 +12261,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   RABIES_IMMUNE_GLOBULIN,
   RABIES_VACCINE,
   RACEMIC_EPINEPHRINE,
+  RASBURICASE,
   REGULAR_INSULIN,
   INSULIN_GLARGINE,
   INSULIN_LISPRO,
@@ -11966,6 +12280,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   RUCONEST,
   RH_IMMUNE_GLOBULIN,
   SCOPOLAMINE,
+  SEVELAMER,
   SILVER_SULFADIAZINE,
   SODIUM_BICARBONATE,
   SSKI,
@@ -11988,9 +12303,11 @@ export const ALL_DRUGS: DrugEntry[] = [
   VERAPAMIL,
   VITAMIN_K,
   VITAMIN_A_MEASLES,
+  VORICONAZOLE,
   VWF_CONCENTRATE,
   WHOLE_BLOOD,
   ZIPRASIDONE,
+  ZOLEDRONIC_ACID,
   ADENOSINE,
   ANDEXANET_ALFA,
   MANNITOL,

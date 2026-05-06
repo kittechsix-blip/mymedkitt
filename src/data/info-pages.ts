@@ -19389,7 +19389,7 @@ const CHEMO_REGIMENS_PAGE: InfoPage = {
     },
     {
       heading: 'GU / GYN',
-      body: '**ABV/EP/BEP:** Bleomycin + Etoposide + Cisplatin — testicular germ cell\n• ED toxicities: pulmonary fibrosis (bleomycin — limit FiO2, no PEEP if avoidable), nephrotoxicity, ototoxicity\n\n**Carbo/Paclitaxel:** ovarian\n• ED toxicities: hypersensitivity (carboplatin re-exposure especially), neutropenia\n\n**Enzalutamide / Abiraterone:** prostate\n• ED toxicities: hypertension, hypokalemia, fatigue, falls (enzalutamide — seizure risk)',
+      body: '**BEP / EP:** Bleomycin + Etoposide + Cisplatin (BEP) or Etoposide + Cisplatin (EP) — testicular germ cell\n• ED toxicities: pulmonary fibrosis (bleomycin — limit FiO2, no PEEP if avoidable), nephrotoxicity, ototoxicity\n\n**Carbo/Paclitaxel:** ovarian\n• ED toxicities: hypersensitivity (carboplatin re-exposure especially), neutropenia\n\n**Enzalutamide / Abiraterone:** prostate\n• ED toxicities: hypertension, hypokalemia, fatigue, falls (enzalutamide — seizure risk)',
     },
     {
       heading: 'HEAD & NECK / SARCOMA',

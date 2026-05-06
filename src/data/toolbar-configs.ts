@@ -24,6 +24,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'fn', label: 'Fever/Neutro', icon: '🚨', action: 'jump', target: 'onc-fn-recognize' },
     { id: 'mscc', label: 'Cord Comp', icon: '🦴', action: 'jump', target: 'onc-mscc-treat' },
     { id: 'tls', label: 'TLS', icon: '⚗️', action: 'jump', target: 'onc-tls-treat' },
+    { id: 'chemo-tox', label: 'Chemo Tox', icon: '☣️', action: 'jump', target: 'onc-chemo-reference' },
   ],
   'delayed-sequence-intubation': [
     { id: 'summary', label: 'DSI Steps', icon: '📋', action: 'overlay', target: 'dsi-summary' },

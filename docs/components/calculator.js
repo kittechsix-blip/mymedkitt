@@ -32658,6 +32658,167 @@ const PEF_PREDICTED_CALCULATOR = {
         'Cloutier MM et al. 2020 Focused Updates to the Asthma Management Guidelines. JACI. 2020;146(6):1217-1270.',
     ],
 };
+// -------------------------------------------------------------------
+// Oncological Emergencies — MASCC, Corrected Calcium, ECOG
+// -------------------------------------------------------------------
+const MASCC_SCORE_CALCULATOR = {
+    id: 'mascc-score',
+    title: 'MASCC Risk Index',
+    subtitle: 'Febrile Neutropenia Risk Stratification',
+    description: 'Multinational Association of Supportive Care in Cancer (MASCC) risk index for febrile neutropenia. Score \u226521 identifies low-risk patients eligible for outpatient oral antibiotic therapy. Validated in adults with chemo-induced FN.',
+    fields: [
+        { name: 'burden', label: 'Burden of Illness', type: 'select', points: 0, description: 'Symptom severity at presentation', selectOptions: [
+                { label: 'No or mild symptoms', points: 5 },
+                { label: 'Moderate symptoms', points: 3 },
+                { label: 'Severe / moribund', points: 0 },
+            ] },
+        { name: 'no-hypotension', label: 'No Hypotension (SBP >90)', type: 'toggle', points: 5 },
+        { name: 'no-copd', label: 'No Active COPD', type: 'toggle', points: 4 },
+        { name: 'solid-tumor', label: 'Solid Tumor OR Heme with No Prior Fungal Infection', type: 'toggle', points: 4 },
+        { name: 'no-dehydration', label: 'No Dehydration Requiring Parenteral Fluids', type: 'toggle', points: 3 },
+        { name: 'outpatient-onset', label: 'Outpatient Status at Fever Onset', type: 'toggle', points: 3 },
+        { name: 'age-under-60', label: 'Age <60 years', type: 'toggle', points: 2 },
+    ],
+    results: [
+        { min: 0, max: 21, label: 'High Risk', risk: 'Hospital admission, IV broad-spectrum antibiotics within 60 minutes', mortality: 'Higher complication rate (~36%) without inpatient management', colorVar: '--color-danger' },
+        { min: 21, max: 27, label: 'Low Risk', risk: 'Eligible for outpatient oral therapy if reliable, no high-risk features, close follow-up available', mortality: 'Complication rate ~6%, mortality <1% with oral abx', colorVar: '--color-primary' },
+    ],
+    thresholdNote: 'Score \u226521 = LOW risk \u2192 consider outpatient oral cipro 750 mg PO BID + amox-clav 875/125 PO BID (or cipro + clinda for PCN allergy). Score <21 = HIGH risk \u2192 admit, IV antibiotics. Always overrides to high risk regardless of MASCC: ANC <100 expected >7 days, hemodynamic instability, mucositis grade 3-4, GI symptoms, pulmonary infiltrate, hepatic/renal dysfunction.',
+    citations: [
+        'Klastersky J, et al. The Multinational Association for Supportive Care in Cancer Risk Index. J Clin Oncol. 2000;18(16):3038-3051.',
+        'Freifeld AG, et al. Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer: 2010 Update by IDSA. Clin Infect Dis. 2011;52(4):e56-e93.',
+        'NCCN Clinical Practice Guidelines: Prevention and Treatment of Cancer-Related Infections. v2.2024.',
+    ],
+};
+const CORRECTED_CALCIUM_CALCULATOR = {
+    id: 'corrected-calcium',
+    title: 'Corrected Calcium',
+    subtitle: 'Albumin-Adjusted Calcium',
+    description: 'Corrects measured total calcium for hypoalbuminemia. Formula: Corrected Ca = Measured Ca + 0.8 \u00d7 (4.0 \u2212 Albumin). Ionized calcium is the gold standard but corrected calcium is a useful estimate when ionized is unavailable.',
+    fields: [
+        { name: 'measured-ca', label: 'Measured Total Calcium', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'Lab-reported serum calcium' },
+        { name: 'albumin', label: 'Serum Albumin', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL', description: 'Lab-reported serum albumin (normal 4.0)' },
+    ],
+    results: [],
+    thresholdNote: 'Corrected Ca >10.5 = hypercalcemia. >12 = moderate (symptoms typical: polyuria, constipation, AMS). >14 = severe (hypercalcemic crisis \u2014 IVF + calcitonin + bisphosphonate). Ionized Ca >5.6 mg/dL is the gold standard threshold for severe hypercalcemia. The 0.8 correction underestimates true ionized Ca in critical illness \u2014 order ionized Ca when available.',
+    citations: [
+        'Payne RB, et al. Interpretation of serum calcium in patients with abnormal serum proteins. BMJ. 1973;4(5893):643-646.',
+        'Stewart AF. Hypercalcemia Associated with Cancer. N Engl J Med. 2005;352(4):373-379.',
+        'Goldner W. Cancer-Related Hypercalcemia. J Oncol Pract. 2016;12(5):426-432.',
+    ],
+    computeResult: (values) => {
+        const ca = values['measured-ca'] || 0;
+        const alb = values['albumin'] || 0;
+        if (ca <= 0 || alb <= 0) {
+            return { value: '--', label: 'Enter values', description: 'Enter measured calcium and albumin to calculate corrected calcium.', colorVar: '--color-text-muted' };
+        }
+        const correction = 0.8 * (4.0 - alb);
+        const corrected = Math.round((ca + correction) * 10) / 10;
+        let label;
+        let colorVar;
+        let interp;
+        if (corrected < 8.5) {
+            label = 'Hypocalcemia';
+            colorVar = '--color-warning';
+            interp = 'Workup hypocalcemia (vit D, PTH, Mg, phos).';
+        }
+        else if (corrected <= 10.5) {
+            label = 'Normal';
+            colorVar = '--color-primary';
+            interp = 'No hypercalcemia. Reassess clinical context.';
+        }
+        else if (corrected <= 12) {
+            label = 'Mild Hypercalcemia';
+            colorVar = '--color-warning';
+            interp = 'IVF NS 200-300 mL/hr if symptomatic. Workup malignancy/hyperPTH.';
+        }
+        else if (corrected <= 14) {
+            label = 'Moderate Hypercalcemia';
+            colorVar = '--color-warning';
+            interp = 'IVF aggressively. Add calcitonin 4 IU/kg SC q12h + zoledronic acid 4 mg IV. Admit.';
+        }
+        else {
+            label = 'Severe Hypercalcemia (Crisis)';
+            colorVar = '--color-danger';
+            interp = 'EMERGENCY: IVF NS 200-300 mL/hr + calcitonin 4 IU/kg SC q12h + zoledronic acid 4 mg IV over 15 min (or denosumab 120 mg SC if CrCl <30). Cardiac monitor, ICU.';
+        }
+        return {
+            value: `${corrected} mg/dL`,
+            label,
+            description: `**MEASURED CA:** ${ca} mg/dL\n\n**ALBUMIN:** ${alb} g/dL\n\n**CORRECTION:** ${correction >= 0 ? '+' : ''}${Math.round(correction * 10) / 10} mg/dL (0.8 \u00d7 [4.0 \u2212 ${alb}])\n\n**CORRECTED CA:** **${corrected} mg/dL**\n\n**INTERPRETATION:** ${interp}\n\n**Pearl:** When available, ionized Ca is the gold standard. The 0.8 formula underestimates true ionized Ca in critical illness (ICU, sepsis, acid-base disorders).`,
+            colorVar,
+        };
+    },
+};
+const ECOG_PERFORMANCE_CALCULATOR = {
+    id: 'ecog-performance',
+    title: 'ECOG Performance Status',
+    subtitle: 'Functional Status (Oncology)',
+    description: 'Eastern Cooperative Oncology Group (ECOG) performance status grades a patient\'s functional capacity. Used for chemotherapy decisions, prognosis, MSCC management, and determining goals of care. ECOG 0-2 generally indicates suitability for active therapy; ECOG 3-4 typically favors palliation.',
+    fields: [
+        { name: 'ecog', label: 'Functional Status', type: 'select', points: 0, description: 'Choose the description that best matches', selectOptions: [
+                { label: 'Fully active, no restrictions (ECOG 0)', points: 0 },
+                { label: 'Restricted in strenuous activity, ambulatory, light work OK (ECOG 1)', points: 1 },
+                { label: 'Ambulatory, self-care, up >50% of waking hours, unable to work (ECOG 2)', points: 2 },
+                { label: 'Limited self-care, in bed/chair >50% of waking hours (ECOG 3)', points: 3 },
+                { label: 'Completely disabled, no self-care, totally bed/chair-bound (ECOG 4)', points: 4 },
+                { label: 'Dead (ECOG 5)', points: 5 },
+            ] },
+    ],
+    results: [],
+    thresholdNote: 'ECOG 0-1: candidate for full-intensity therapy and trials. ECOG 2: dose-reduced therapy or palliative chemo, weigh risk-benefit carefully. ECOG 3-4: typically palliative care; chemotherapy unlikely to extend survival and often worsens QOL. For MSCC: Patchell criteria require \u22653 month life expectancy \u2014 ECOG 3-4 with progressive disease often falls outside this window.',
+    citations: [
+        'Oken MM, et al. Toxicity and response criteria of the Eastern Cooperative Oncology Group. Am J Clin Oncol. 1982;5(6):649-655.',
+        'NCCN Clinical Practice Guidelines: Older Adult Oncology. v2.2024.',
+        'Patchell RA, et al. Direct decompressive surgical resection in the treatment of spinal cord compression caused by metastatic cancer. Lancet. 2005;366(9486):643-648.',
+    ],
+    computeResult: (values) => {
+        const grade = values['ecog'];
+        if (grade === undefined || grade === null || (typeof grade === 'number' && isNaN(grade))) {
+            return { value: '--', label: 'Select status', description: 'Choose the functional status description that best matches the patient.', colorVar: '--color-text-muted' };
+        }
+        const g = Number(grade);
+        let label;
+        let colorVar;
+        let interp;
+        if (g === 0) {
+            label = 'ECOG 0 \u2014 Fully Active';
+            colorVar = '--color-primary';
+            interp = 'Excellent functional status. Candidate for full-intensity chemotherapy, surgery, clinical trials.';
+        }
+        else if (g === 1) {
+            label = 'ECOG 1 \u2014 Light Work OK';
+            colorVar = '--color-primary';
+            interp = 'Good functional status. Candidate for active therapy and most clinical trials. Median survival in advanced disease typically 6-12 months better than ECOG \u22652.';
+        }
+        else if (g === 2) {
+            label = 'ECOG 2 \u2014 Up >50% Waking Hours';
+            colorVar = '--color-warning';
+            interp = 'Marginal functional status. Dose-reduced or palliative chemo may be considered. Many trials exclude. Weigh risks carefully \u2014 toxicity often outweighs benefit.';
+        }
+        else if (g === 3) {
+            label = 'ECOG 3 \u2014 Limited Self-Care';
+            colorVar = '--color-warning';
+            interp = 'Poor functional status. Active chemotherapy rarely beneficial; often worsens QOL. Focus on palliation, symptom control, advance care planning. For MSCC: usually outside Patchell surgical criteria.';
+        }
+        else if (g === 4) {
+            label = 'ECOG 4 \u2014 Bedbound';
+            colorVar = '--color-danger';
+            interp = 'End-of-life functional status. Hospice/comfort care typically indicated. No chemotherapy. Focus on symptom relief, family support, dignified care.';
+        }
+        else {
+            label = 'ECOG 5 \u2014 Dead';
+            colorVar = '--color-danger';
+            interp = 'Documentation only.';
+        }
+        return {
+            value: `ECOG ${g}`,
+            label,
+            description: `**ECOG GRADE:** ${g}\n\n**INTERPRETATION:** ${interp}\n\n**Decision implications:**\n\u2022 ECOG 0-1: full-intensity treatment and trials\n\u2022 ECOG 2: weigh risks carefully, often dose-reduced\n\u2022 ECOG 3-4: palliation typically favored over disease-directed therapy`,
+            colorVar,
+        };
+    },
+};
 const CALCULATORS = {
     // Weight-Based Dosing
     'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -33168,6 +33329,10 @@ const CALCULATORS = {
     'shapiro': SHAPIRO_CALCULATOR,
     // Asthma
     'pef-predicted': PEF_PREDICTED_CALCULATOR,
+    // Oncological Emergencies
+    'mascc-score': MASCC_SCORE_CALCULATOR,
+    'corrected-calcium': CORRECTED_CALCIUM_CALCULATOR,
+    'ecog-performance': ECOG_PERFORMANCE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
