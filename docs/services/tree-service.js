@@ -857,6 +857,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/suicide-risk-assessment.js');
             return { nodes: m.SUICIDE_RISK_NODES, entryNodeId: 'sui-start', categoryId: 'emergency-medicine', moduleLabels: m.SUICIDE_RISK_MODULE_LABELS, citations: m.SUICIDE_RISK_CITATIONS, criticalActions: m.SUICIDE_RISK_CRITICAL_ACTIONS };
         },
+        'ptsd-screening': async () => {
+            const m = await import('../data/trees/ptsd-screening.js');
+            return { nodes: m.PTSD_SCREENING_NODES, entryNodeId: 'ptsd-start', categoryId: 'psychiatry', moduleLabels: m.PTSD_SCREENING_MODULE_LABELS, citations: m.PTSD_SCREENING_CITATIONS, criticalActions: m.PTSD_SCREENING_CRITICAL_ACTIONS };
+        },
         'ct-decision-support': async () => {
             const m = await import('../data/trees/ct-decision-support.js');
             return { nodes: m.CT_DECISION_SUPPORT_NODES, entryNodeId: 'ct-start', categoryId: 'us-rads', moduleLabels: m.CT_DECISION_SUPPORT_MODULE_LABELS, citations: m.CT_DECISION_SUPPORT_CITATIONS, criticalActions: m.CT_DECISION_SUPPORT_CRITICAL_ACTIONS };

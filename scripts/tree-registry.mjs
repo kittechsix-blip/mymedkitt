@@ -153,6 +153,7 @@ export const TREE_REGISTRY = {
   'human-trafficking': { prefix: 'HUMAN_TRAFFICKING', entryNodeId: 'ht-start',           categoryId: 'em' },
   'dental-avulsion':  { prefix: 'DENTAL_AVULSION',     entryNodeId: 'da-start',           categoryId: 'em' },
   'suicide-risk-assessment': { prefix: 'SUICIDE_RISK',         entryNodeId: 'sra-start', categoryId: 'em' },
+  'ptsd-screening':   { prefix: 'PTSD_SCREENING',      entryNodeId: 'ptsd-start',         categoryId: 'emergency-medicine' },
   'ct-decision-support': { prefix: 'CT_DECISION_SUPPORT', entryNodeId: 'ctds-start',    categoryId: 'em' },
   'dfsa-workup':      { prefix: 'DFSA_WORKUP',         entryNodeId: 'dfsa-start',         categoryId: 'em' },
   'hypothermia':      { prefix: 'HYPOTHERMIA',         entryNodeId: 'hypo-start',         categoryId: 'em' },

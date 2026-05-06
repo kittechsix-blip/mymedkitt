@@ -34268,6 +34268,201 @@ const ECOG_PERFORMANCE_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// =====================================================================
+// PTSD SCREENING CALCULATORS
+// =====================================================================
+
+const PC_PTSD_5_CALCULATOR: CalculatorDefinition = {
+  id: 'pc-ptsd-5',
+  title: 'PC-PTSD-5',
+  subtitle: 'Primary Care PTSD Screen for DSM-5',
+  description: 'JCAHO/VA-endorsed 5-item primary care PTSD screen. Validated in primary care and ED. Cutoff ≥3 = optimally sensitive (94.8%); cutoff ≥4 = optimally balanced. Stem question first — if no Criterion A trauma, do not score symptom items.',
+  fields: [
+    {
+      name: 'stem',
+      label: 'Stem: Has the patient ever experienced a Criterion A trauma?',
+      type: 'select',
+      points: 0,
+      description: 'Direct/witness/learn-of/repeated exposure to actual or threatened death, serious injury, or sexual violence.',
+      selectOptions: [
+        { label: 'Yes — proceed to symptom items', points: 1 },
+        { label: 'No — do not score symptom items', points: 0 },
+      ],
+    },
+    {
+      name: 'q1-nightmares',
+      label: 'Q1. Nightmares or unwanted thoughts about the trauma?',
+      type: 'select',
+      points: 0,
+      description: '"Had nightmares about the event(s) or thought about the event(s) when you did not want to?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+    {
+      name: 'q2-avoidance',
+      label: 'Q2. Avoid thinking or being reminded of the trauma?',
+      type: 'select',
+      points: 0,
+      description: '"Tried hard not to think about the event(s) or went out of your way to avoid situations that reminded you?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+    {
+      name: 'q3-hyperarousal',
+      label: 'Q3. Constantly on guard, watchful, or easily startled?',
+      type: 'select',
+      points: 0,
+      description: '"Been constantly on guard, watchful, or easily startled?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+    {
+      name: 'q4-numbness',
+      label: 'Q4. Felt numb or detached from people / activities / surroundings?',
+      type: 'select',
+      points: 0,
+      description: '"Felt numb or detached from people, activities, or your surroundings?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+    {
+      name: 'q5-guilt',
+      label: 'Q5. Felt guilty or unable to stop blaming yourself / others?',
+      type: 'select',
+      points: 0,
+      description: '"Felt guilty or unable to stop blaming yourself or others for the event(s) or any problems the event(s) may have caused?"',
+      selectOptions: [
+        { label: 'No', points: 0 },
+        { label: 'Yes', points: 1 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Cutoff ≥3 (sensitive): proceed to PCL-5 for full DSM-5-TR characterization. Cutoff ≥4 (balanced) for confirmatory use. Avoid scoring during acute crisis (transient elevations cause false positives).',
+  citations: [
+    'Prins A, Bovin MJ, Smolenski DJ, et al. The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5). J Gen Intern Med. 2016;31(10):1206-1211.',
+    'VA/DoD Clinical Practice Guideline for the Management of PTSD/ASD. Version 4.0. 2023.',
+    'The Joint Commission. Trauma Screening Standards. 2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const stem = values['stem'] || 0;
+    if (stem === 0) {
+      return {
+        value: 'Stem Negative',
+        label: 'No Criterion A trauma reported',
+        description: '**Do not score the symptom items.**\n\nIf clinical concern remains, ask again at follow-up — patients sometimes disclose only after rapport is established.\n\n**Document:** trauma history negative on this visit.',
+        colorVar: '--color-text-muted',
+      };
+    }
+    const score = (values['q1-nightmares'] || 0)
+      + (values['q2-avoidance'] || 0)
+      + (values['q3-hyperarousal'] || 0)
+      + (values['q4-numbness'] || 0)
+      + (values['q5-guilt'] || 0);
+    if (score >= 4) {
+      return {
+        value: `${score} / 5`,
+        label: 'Positive (cutoff ≥4 — balanced)',
+        description: `**PC-PTSD-5: ${score}/5**\n\nPositive at the BALANCED cutoff (≥4).\n\n**Next steps:**\n• Proceed to **PCL-5** for full DSM-5-TR characterization\n• **C-SSRS** suicide screen (mandatory)\n• Consider warm handoff to trauma-focused therapy (CPT/PE/EMDR)\n• AVOID benzodiazepines\n• Document index trauma + screen result`,
+        colorVar: '--color-danger',
+      };
+    }
+    if (score >= 3) {
+      return {
+        value: `${score} / 5`,
+        label: 'Positive (cutoff ≥3 — sensitive)',
+        description: `**PC-PTSD-5: ${score}/5**\n\nPositive at the SENSITIVE cutoff (≥3, 94.8% sensitivity).\n\n**Next steps:**\n• Proceed to **PCL-5** for full DSM-5-TR characterization\n• **C-SSRS** suicide screen (mandatory)\n• Consider warm handoff to trauma-focused therapy\n• AVOID benzodiazepines`,
+        colorVar: '--color-warning',
+      };
+    }
+    return {
+      value: `${score} / 5`,
+      label: 'Negative screen',
+      description: `**PC-PTSD-5: ${score}/5**\n\nBelow cutoff — PTSD unlikely on this screen.\n\n**Document:** negative screen.\n\n**Re-screen if:**\n• New traumatic event\n• Symptoms emerge later (delayed expression possible)\n• Patient endorses concern at follow-up`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const PCL_5_CALCULATOR: CalculatorDefinition = {
+  id: 'pcl-5',
+  title: 'PCL-5',
+  subtitle: 'PTSD Checklist for DSM-5 (20 items)',
+  description: '20-item self-report aligned with DSM-5-TR. Total score 0-80. Cutoff 31-33 = probable PTSD. NOT a diagnostic instrument — gold standard remains CAPS-5. Useful for screening severity and tracking treatment response (~10-point reduction = clinically meaningful).',
+  fields: [
+    { name: 'q1', label: 'B1. Repeated, disturbing memories of the event?', type: 'select', points: 0, selectOptions: [{label:'0 Not at all',points:0},{label:'1 A little bit',points:1},{label:'2 Moderately',points:2},{label:'3 Quite a bit',points:3},{label:'4 Extremely',points:4}] },
+    { name: 'q2', label: 'B2. Repeated, disturbing dreams of the event?', type: 'select', points: 0, selectOptions: [{label:'0 Not at all',points:0},{label:'1 A little bit',points:1},{label:'2 Moderately',points:2},{label:'3 Quite a bit',points:3},{label:'4 Extremely',points:4}] },
+    { name: 'q3', label: 'B3. Suddenly feeling/acting as if event were happening again (flashback)?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q4', label: 'B4. Feeling very upset when reminded of the event?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q5', label: 'B5. Strong physical reactions when reminded (heart pounding, sweating)?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q6', label: 'C1. Avoiding memories, thoughts, feelings about the event?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q7', label: 'C2. Avoiding external reminders (people, places, conversations)?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q8', label: 'D1. Trouble remembering important parts of the event?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q9', label: 'D2. Strong negative beliefs about self / others / world?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q10', label: 'D3. Blaming self or others for the event or its consequences?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q11', label: 'D4. Strong negative feelings (fear, horror, anger, guilt, shame)?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q12', label: 'D5. Loss of interest in activities you used to enjoy?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q13', label: 'D6. Feeling distant or cut off from other people?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q14', label: 'D7. Trouble experiencing positive feelings?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q15', label: 'E1. Irritable behavior, angry outbursts, aggression?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q16', label: 'E2. Reckless or self-destructive behavior?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q17', label: 'E3. Being super-alert, watchful, on guard?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q18', label: 'E4. Feeling jumpy or easily startled?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q19', label: 'E5. Difficulty concentrating?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+    { name: 'q20', label: 'E6. Trouble falling or staying asleep?', type: 'select', points: 0, selectOptions: [{label:'0',points:0},{label:'1',points:1},{label:'2',points:2},{label:'3',points:3},{label:'4',points:4}] },
+  ],
+  results: [],
+  thresholdNote: 'Probable PTSD: total ≥31-33 (Bovin 2016 / NCPTSD). DSM-5-TR cluster rule: ≥1 B (1-5), ≥1 C (6-7), ≥2 D (8-14), ≥2 E (15-20) with items rated ≥2 ("Moderately"). PCL-5 is screening only — confirm with CAPS-5 structured interview.',
+  citations: [
+    'Weathers FW, Litz BT, Keane TM, et al. The PTSD Checklist for DSM-5 (PCL-5). National Center for PTSD; 2013.',
+    'Bovin MJ, Marx BP, Weathers FW, et al. Psychometric Properties of the PCL-5 in Veterans. Psychol Assess. 2016;28(11):1379-1391.',
+    'Marx BP, et al. Reliable and clinically significant change in the PCL-5 among veterans. Psychol Assess. 2022.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const items = Array.from({ length: 20 }, (_, i) => Number(values[`q${i+1}`]) || 0);
+    const total = items.reduce((a, b) => a + b, 0);
+    // DSM-5-TR cluster rule: items rated >=2 count as endorsed
+    const endorsed = items.map(v => v >= 2);
+    const B = endorsed.slice(0, 5).filter(Boolean).length;   // q1-5
+    const C = endorsed.slice(5, 7).filter(Boolean).length;   // q6-7
+    const D = endorsed.slice(7, 14).filter(Boolean).length;  // q8-14
+    const E = endorsed.slice(14, 20).filter(Boolean).length; // q15-20
+    const meetsCluster = B >= 1 && C >= 1 && D >= 2 && E >= 2;
+    const clusterDescription = `**Cluster endorsement (items rated ≥2):**\n• B (intrusion, items 1-5): ${B} ≥1 ${B>=1?'✓':'✗'}\n• C (avoidance, items 6-7): ${C} ≥1 ${C>=1?'✓':'✗'}\n• D (cognitions/mood, items 8-14): ${D} ≥2 ${D>=2?'✓':'✗'}\n• E (arousal, items 15-20): ${E} ≥2 ${E>=2?'✓':'✗'}\n\n**DSM-5-TR cluster rule met:** ${meetsCluster ? 'YES' : 'NO'}`;
+
+    if (total >= 33 || meetsCluster) {
+      return {
+        value: `${total} / 80`,
+        label: 'Probable PTSD',
+        description: `**PCL-5 total: ${total}/80** ${total >= 33 ? '(≥33 cutoff met)' : '(below 33 but cluster rule met)'}\n\n${clusterDescription}\n\n**Next steps:**\n• **C-SSRS** suicide screen (mandatory)\n• Warm-handoff referral to trauma-focused therapy: CPT, PE, or EMDR (VA/DoD 2023 first-line)\n• Consider sertraline/paroxetine/venlafaxine XR if outpatient FU established\n• AVOID benzodiazepines\n• Document DSM-5-TR criteria mapping`,
+        colorVar: '--color-danger',
+      };
+    }
+    if (total >= 23) {
+      return {
+        value: `${total} / 80`,
+        label: 'Subthreshold PTSD',
+        description: `**PCL-5 total: ${total}/80** (subthreshold)\n\n${clusterDescription}\n\n**Next steps:**\n• **C-SSRS** suicide screen (mandatory)\n• Symptom-targeted treatment if functional impairment\n• Outpatient follow-up + repeat PCL-5 in 4-6 weeks\n• Consider trauma-focused therapy referral`,
+        colorVar: '--color-warning',
+      };
+    }
+    return {
+      value: `${total} / 80`,
+      label: 'Below threshold',
+      description: `**PCL-5 total: ${total}/80** (below threshold)\n\n${clusterDescription}\n\n**Next steps:**\n• Document\n• Patient education (PTSD Coach app, 988)\n• Optional follow-up — repeat if symptoms emerge\n• Re-screen in 1 month if recent trauma`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Weight-Based Dosing
   'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -34787,6 +34982,9 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'crs-grade': CRS_GRADE_CALCULATOR,
   'ice-icans': ICE_ICANS_CALCULATOR,
   'mscc-decision': MSCC_DECISION_CALCULATOR,
+  // PTSD Screening
+  'pc-ptsd-5': PC_PTSD_5_CALCULATOR,
+  'pcl-5': PCL_5_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

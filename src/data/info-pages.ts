@@ -19639,6 +19639,189 @@ const TLS_MANAGEMENT_BUNDLE_PAGE: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// PTSD Screening — ASD vs PTSD timeline reference
+// -------------------------------------------------------------------
+
+const PTSD_TIMELINE_PAGE: InfoPage = {
+  id: 'ptsd-asd-vs-ptsd-timeline',
+  title: 'ASR / ASD / PTSD Timeline',
+  subtitle: 'DSM-5-TR time-window reference',
+  shareable: true,
+  sections: [
+    {
+      heading: 'Why Time Matters',
+      body: 'Three distinct stress diagnoses are gated entirely by **time since the index trauma**. Misdiagnosis at the wrong time window leads to wrong treatment.\n\n**Never diagnose PTSD before 1 month post-trauma.** A patient with severe symptoms 2 weeks post-trauma is NOT PTSD — they may meet ASD criteria, or they may be in normal acute reaction.',
+    },
+    {
+      heading: 'Time Windows',
+      body: '| Window | Diagnosis | Source | ED Action |\n|--------|-----------|--------|-----------|\n| 0-3 days | Acute Stress Reaction (ASR) | ICD term — NOT in DSM-5-TR | PFA + reassurance + 2-4 wk FU |\n| 3 days - 1 month | Acute Stress Disorder (ASD) | DSM-5-TR | PFA + early TF-CBT referral + sleep support if needed |\n| > 1 month | PTSD | DSM-5-TR | PCL-5 cluster scoring + warm handoff to TF-CBT (CPT/PE/EMDR) |\n| Full criteria not met until ≥6 months | PTSD with delayed expression | DSM-5-TR specifier | Same as PTSD pathway once criteria met |',
+    },
+    {
+      heading: 'ASR (0-3 days)',
+      body: '**Not a DSM-5-TR diagnosis.** ICD-11 6B40.\n\n**Normal acute response** — sleep disturbance, intrusions, hypervigilance, irritability are EXPECTED in the first month and do not require pharmacotherapy.\n\n**Management:** Psychological First Aid + reassurance + written discharge materials. Follow-up at 2-4 weeks for re-screen.',
+    },
+    {
+      heading: 'ASD (3 days - 1 month)',
+      body: '**DSM-5-TR criteria:**\n• Same Criterion A (qualifying trauma) as PTSD\n• **≥9 of 14 symptoms** required across five categories\n• Functional impairment required\n\n**Categories:**\n| Category | # Items | Examples |\n|----------|---------|----------|\n| Intrusion | 5 | Memories, dreams, flashbacks, distress at cues, physiological reactivity |\n| Negative mood | 1 | Persistent inability to experience positive emotions |\n| Dissociative | 2 | Altered sense of reality, dissociative amnesia |\n| Avoidance | 2 | Avoid memories/thoughts, avoid external reminders |\n| Arousal | 5 | Sleep, irritability, hypervigilance, concentration, startle |\n\n**Critical:** ASD is a **TOTAL count** (any combination across categories), NOT cluster-by-cluster like PTSD.\n\n**Predictive value for PTSD is LIMITED:**\n• Bryant systematic review of 22 studies: ASD prevalence 7-28%; subsyndromal 10-32%\n• ASD identifies SOME who later develop PTSD but **MISSES the majority**\n• A negative ASD screen does NOT rule out future PTSD',
+    },
+    {
+      heading: 'PTSD (>1 month)',
+      body: '**DSM-5-TR criteria** require symptoms in EACH of four clusters:\n\n• **B (Intrusion):** ≥1 of 5 symptoms\n• **C (Avoidance):** ≥1 of 2 symptoms\n• **D (Negative cognitions/mood):** ≥2 of 7 symptoms\n• **E (Arousal):** ≥2 of 6 symptoms\n• **Duration:** >1 month\n• **Functional impairment**\n• **Not attributable to substance/medical condition**\n\n**Specifiers:**\n• With dissociative symptoms (depersonalization or derealization)\n• With delayed expression (full criteria not met until ≥6 months post-event)\n\n**Subtypes recognized in clinical practice (not DSM):**\n• Complex PTSD (ICD-11) — interpersonal/repeated trauma + disturbances in self-organization\n• Moral injury — distress from acts/witnessing acts that violate moral beliefs',
+    },
+    {
+      heading: 'PCL-5 vs PC-PTSD-5',
+      body: '| Tool | Items | Purpose | Cutoff | Time |\n|------|-------|---------|--------|------|\n| **PC-PTSD-5** | 5 | Primary care/ED screen | ≥3 sensitive (94.8%) / ≥4 balanced | 2-3 min |\n| **PCL-5** | 20 | Full DSM-5-TR characterization + tracking | 31-33 = probable PTSD | 5-10 min |\n| **CAPS-5** | Structured interview | Gold-standard diagnosis | Clinician-rated | 45-60 min |\n\n**Workflow:** PC-PTSD-5 positive (≥3 or ≥4) → PCL-5 → if positive → CAPS-5 by trained clinician.\n\n**ED reality:** Most ED clinicians stop at PC-PTSD-5/PCL-5 and refer for CAPS-5 in outpatient setting.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American Psychiatric Association. Diagnostic and Statistical Manual of Mental Disorders, 5th Edition, Text Revision (DSM-5-TR). 2022.' },
+    { num: 2, text: 'Bryant RA. Acute Stress Disorder as a Predictor of Posttraumatic Stress Disorder: A Systematic Review. J Clin Psychiatry. 2011;72(2):233-239.' },
+    { num: 3, text: 'Bovin MJ, et al. Psychometric Properties of the PCL-5 in Veterans. Psychol Assess. 2016;28(11):1379-1391.' },
+    { num: 4, text: 'Prins A, et al. The Primary Care PTSD Screen for DSM-5 (PC-PTSD-5). J Gen Intern Med. 2016;31(10):1206-1211.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// PTSD Screening — Brief Intervention & PFA Protocol
+// -------------------------------------------------------------------
+
+const PTSD_PFA_PROTOCOL_PAGE: InfoPage = {
+  id: 'ptsd-pfa-protocol',
+  title: 'Brief ED Intervention — PFA Protocol',
+  subtitle: 'Psychological First Aid + Stepped Care + What NOT to do',
+  shareable: true,
+  sections: [
+    {
+      heading: 'Psychological First Aid (PFA) — WHO/IASC/NICE-Recommended',
+      body: 'PFA is the **default early intervention** for trauma in the ED. It is brief, evidence-based, and operationalized in NICE NG116, WHO guidance, and the NCTSN Field Operations Guide.\n\n**Hobfoll 5 elements:**\n1. **Safety** — physical and psychological\n2. **Calming** — reduce arousal\n3. **Self / community efficacy** — restore agency\n4. **Connectedness** — link to support\n5. **Hope** — orient to recovery\n\n**Evidence (Wang 2024 integrative review):**\n• Reduces anxiety in immediate/intermediate term\n• Mixed evidence for PTSD prevention specifically\n• PFA > psychoeducation at 1 month in one trial; equivalent to EMDR/SMT in another\n• WHO, IASC, NICE NG116 all recommend',
+    },
+    {
+      heading: 'ED PFA in 5 Minutes',
+      body: '**1. Listen and Validate**\n• Open with: "I am sorry this happened. Take your time."\n• NO forced disclosure — patient leads, you follow\n• Reflect: "That sounds terrifying"\n• Tolerate silence\n\n**2. Provide Accurate Information**\n• Normalize stress reactions: "Sleep disturbance, intrusions, avoidance, irritability are EXPECTED in the first month — they do not mean something is wrong with you."\n• Explain the time-window logic if PTSD comes up: "We do not diagnose PTSD before 1 month."\n• Written discharge materials ([PTSD Coach app](https://www.ptsd.va.gov/appvid/mobile/ptsdcoach_app.asp), free, NCPTSD)\n\n**3. Practical Assistance**\n• Transportation home\n• Food / contacts / shelter\n• Phone calls to family\n• Coordinate childcare if needed\n\n**4. Connect to Social Support**\n• Identify a trusted person\n• Encourage them to be with patient first 24-72h\n• Offer to call together with patient\n\n**5. Refer**\n• Warm handoff to mental health (NOT paper referral)\n• Provide hotline numbers and PTSD Coach\n• Schedule follow-up appointment ≤2 weeks',
+    },
+    {
+      heading: 'STRONG WARN: NEVER Do CISD / Single-Session Debriefing',
+      body: '**Critical Incident Stress Debriefing (CISD) and similar single-session psychological debriefings are HARMFUL.** Multiple international guidelines strongly recommend AGAINST.\n\n**Cochrane review (Rose et al. 2002) — current standard:**\n• Single-session debriefing does NOT prevent PTSD\n• One trial showed **OR 2.51 (95% CI 1.24-5.09) for PTSD at 1 year** in those who received debriefing\n• **Conclusion: "Compulsory debriefing of victims of trauma should cease."**\n\n**WHO, NICE, ISTSS, APA, VA/DoD 2023 CPG** all reaffirm: debriefing may worsen outcomes; PFA is the alternative.\n\n**Why it harms:**\n• Forces re-exposure before patient is ready\n• Disrupts natural recovery trajectory\n• May consolidate trauma memory in maladaptive ways\n\n**For first responders / ED staff:** Peer support and confidential clinician resources, NOT CISD. Critical Incident Stress Management (CISM) — the broader peer-support framework — has different evidence and may be acceptable when debriefing is one OPTIONAL component, not mandatory.',
+    },
+    {
+      heading: 'Stepped Care Model — ACS-Endorsed',
+      body: 'Developed at Harborview Level I Trauma Center; validated across 25 US trauma centers (Zatzick 2021). The American College of Surgeons Committee on Trauma now mandates PTSD screening + referral as a best-practice standard.\n\n**Step 1: Universal Screening + Post-Injury Case Management**\n• PC-PTSD-5 at index visit and at follow-up\n• Care coordinator follows patient through transitions\n\n**Step 2: Motivational Interviewing for Substance Use**\n• Co-screen for AUD/SUD (high comorbidity)\n• Brief motivational intervention\n• SBIRT framework (Screening, Brief Intervention, Referral to Treatment)\n\n**Step 3: Evidence-Based Pharmacotherapy / Trauma-Focused CBT**\n• For patients with persistent symptoms at 3 months\n• CPT, PE, or EMDR are first-line (VA/DoD 2023)\n• SSRIs (sertraline/paroxetine) or venlafaxine XR if pharm preferred or adjunctive\n\n**Effect size:** Significant 6-month PTSD symptom reduction. **Greater benefit in racial/ethnic minority populations** (Abu et al. 2024).',
+    },
+    {
+      heading: 'Cultural & Interpreter Considerations',
+      body: '**Trauma narratives, somatic presentations, and symptom expression vary across cultures.**\n\n• **Use trained medical interpreters** for any patient with limited English proficiency. Family members should NOT interpret trauma content (re-traumatization, confidentiality, family dynamics).\n\n• **Refugee / asylum seekers:** Validated screening tools include the **Harvard Trauma Questionnaire (HTQ)** and the Hopkins Symptom Checklist-25 (HSCL-25). Multiple, repeated, and culturally complex traumas common.\n\n• **IPV screening MUST occur in private** — separate the patient from accompanying partner before any IPV question is asked. Use a clinical reason ("I need to do a confidential exam").\n\n• **Sexual assault disclosure** is highly culturally mediated. Provide a SANE if available, female clinician option, and minimize re-questioning.\n\n• **Veterans / military:** Different stigma profile. Connect to Vet Center walk-in (1-877-WAR-VETS) or 988→1.\n\n• **First responders / ED staff:** Peer support networks; confidential EAP/clinician resources. Avoid mandatory debriefing.',
+    },
+    {
+      heading: 'Patient Education Take-Home Points',
+      body: '**Print or text these to every PTSD/ASD/SA/IPV patient before discharge:**\n\n• Stress reactions in the first month are EXPECTED and do not mean something is wrong with you.\n• If symptoms persist >1 month or worsen, contact your primary care or mental health provider.\n• AVOID alcohol and drugs to cope — they make recovery harder.\n• Connect with a trusted person in the next 24-72 hours.\n• Free resources: **988** (call/text/chat), **PTSD Coach app** (free, NCPTSD).\n• **Sexual assault:** RAINN 1-800-656-HOPE\n• **IPV:** NDV 1-800-799-SAFE\n• **Veterans:** 988 → press 1\n• **In an emergency or if thinking of suicide:** call 988 or come back to the ED immediately.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'World Health Organization, War Trauma Foundation, World Vision International. Psychological First Aid: Guide for Field Workers. WHO; 2011.' },
+    { num: 2, text: 'NCTSN/NCPTSD. Psychological First Aid: Field Operations Guide. 2nd Ed. 2006.' },
+    { num: 3, text: 'Wang L, et al. Evaluating the Implementation and Effectiveness of Psychological First Aid: An Integrative Review. Trauma Violence Abuse. 2024;25(2):1450-1466.' },
+    { num: 4, text: 'Rose S, Bisson J, Churchill R, Wessely S. Psychological debriefing for preventing PTSD. Cochrane Database Syst Rev. 2002;(2):CD000560.' },
+    { num: 5, text: 'Zatzick D, et al. Stepped Collaborative Care for PTSD in US Trauma Care Systems. JAMA Surg. 2021;156(5):430-470.' },
+    { num: 6, text: 'NICE. Post-traumatic stress disorder. NICE guideline NG116. 2018, updated 2024.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// PTSD Screening — Pharmacology Reference
+// -------------------------------------------------------------------
+
+const PTSD_PHARMACOLOGY_PAGE: InfoPage = {
+  id: 'ptsd-pharmacology-reference',
+  title: 'PTSD Pharmacology Reference',
+  subtitle: 'First-line, sleep, prazosin, and what to AVOID',
+  shareable: true,
+  sections: [
+    {
+      heading: 'When to Initiate vs Defer',
+      body: '**Most ED clinicians do NOT initiate chronic PTSD pharmacotherapy** — defer to psychiatry or PCP follow-up. ED-relevant prescribing scenarios:\n\n• Established PTSD >1 month + reliable outpatient follow-up + patient willing to start\n• Trauma-related nightmares dominant — prazosin can be initiated\n• Sleep impairment without nightmares — short non-benzo bridge\n• AVOID benzodiazepines under any circumstance for PTSD/recent trauma',
+    },
+    {
+      heading: 'First-Line Pharmacotherapy (chronic PTSD >1 month)',
+      body: '**2023 VA/DoD CPG Recommendation 15** — three agents recommended (Hamblen 2024):\n\n| Drug | FDA | Start | Target | Notes |\n|------|-----|-------|--------|-------|\n| **Sertraline (Zoloft)** | ✓ PTSD | 25 mg PO daily x 1 wk | 50-200 mg/day | Best-tolerated of the three |\n| **Paroxetine (Paxil)** | ✓ PTSD | 10 mg PO daily | 20-50 mg/day | Watch discontinuation syndrome |\n| **Venlafaxine XR (Effexor XR)** | Off-label | 37.5 mg PO daily | 75-300 mg/day | BP monitoring (HTN at higher doses) |\n\n**Notable change:** Fluoxetine REMOVED from recommended list in 2023 CPG (no benefit in newer clinician-rated trial).\n\n**Counseling points:**\n• 4-6 weeks to full effect\n• Transient activation/anxiety/insomnia in first 1-2 weeks (warn explicitly)\n• Black box: suicidality in young adults — pair with safety plan\n• Sexual dysfunction common — anticipate and discuss\n• Discontinuation syndrome with paroxetine — taper slowly\n• Drug interactions: SSRI + tramadol/triptans → serotonin syndrome risk',
+    },
+    {
+      heading: 'Prazosin for Trauma Nightmares (Raskind Protocol)',
+      body: '**Indication:** Trauma-related nightmares + sleep disruption.\n\n**Evidence picture (2025):**\n• PACT trial (Raskind NEJM 2018): NEGATIVE in stable veterans (likely underpowered, over-selected)\n• 2025 meta-analysis (10 RCTs, n=648): improves insomnia (SMD -0.654) and nightmares (SMD -0.641); does NOT improve overall PTSD\n• 2023 VA/DoD CPG: SUGGESTS prazosin for PTSD nightmares specifically\n• Harvard South Shore 2024-2025 algorithm: remains first-line for PTSD-related sleep impairment\n\n**Raskind dosing protocol:**\n| Step | Day | Dose |\n|------|-----|------|\n| 1 | 1-2 | 1 mg PO qhs |\n| 2 | 3-7 | 2 mg PO qhs |\n| 3 | Week 2+ | Titrate weekly until nightmares absent or max dose |\n\n**Maximum doses:**\n• **Men:** 5 mg mid-morning + 20 mg qhs\n• **Women:** 2 mg mid-morning + 10 mg qhs\n• **Older adults:** mean effective dose ~5 mg qhs\n\n**Counsel:**\n• First-dose orthostasis — take qhs only at start\n• Hold next dose if dizziness\n• AVOID in symptomatic hypotension\n• Check BP before initiating (avoid if SBP <100)\n• Caution with PDE5 inhibitors (additive hypotension)',
+    },
+    {
+      heading: 'Sleep Bridges (non-benzo, off-label)',
+      body: 'Reasonable bridge therapy when sleep is dominant complaint and nightmares are NOT prominent.\n\n| Agent | Dose | Notes |\n|-------|------|-------|\n| **Hydroxyzine** | 25-100 mg qhs | First-line PTSD sleep-onset (Harvard South Shore). Non-habit-forming. Anticholinergic — caution in elderly. |\n| **Trazodone** | 25-200 mg qhs (most 50-150) | PTSD-specific data: 72% reduction nightmares, 92% sleep onset (Palo Alto VA). **WARN: 12% priapism rate** — counsel and ask directly at FU. |\n| **Mirtazapine** | 7.5-30 mg qhs | Effective hypnotic. **2024 NMA: NO PTSD-specific benefit.** Best when comorbid depression, weight loss. |\n\n**AVOID for sleep in PTSD:**\n• Z-drugs (zolpidem, eszopiclone, zaleplon) — NMA found ineffective + dependence risk\n• Benzodiazepines (see avoid section)\n• Diphenhydramine — anticholinergic burden, tolerance',
+    },
+    {
+      heading: 'STRONG: AVOID Benzodiazepines',
+      body: '**Critical safety teaching point — never give a BZD to a PTSD or recent-trauma patient.**\n\n**Evidence:**\n• Guina 2015 meta-analysis (18 trials, 5236 participants)\n• 2023 VA/DoD CPG\n• APA, ISTSS, NICE all in agreement\n\n**Findings:**\n• BZDs are **INEFFECTIVE** for PTSD treatment AND prevention\n• Associated with:\n  - **WORSE overall PTSD severity**\n  - **INCREASED risk of developing PTSD when given after trauma**\n  - Worse psychotherapy outcomes\n  - Aggression, depression, substance use disorder\n  - Cognitive impairment\n  - Falls in elderly\n\n**Mechanism of harm:**\n• Interfere with extinction learning (Makkar 2010) — PTSD therapy DEPENDS on extinction learning\n• Reduce REM sleep (de Mendonca 2023) — REM is critical for trauma memory consolidation\n\n**Position statements:**\n• "BZDs should be considered relatively contraindicated in PTSD or recent trauma" (Guina 2015)\n• VA prescribing for PTSD has dropped from 30% (FY12) to 7% (FY22) reflecting this evidence\n\n**ED action:**\n• Do NOT prescribe alprazolam/lorazepam/clonazepam for "anxiety" or "sleep" in patient with recent trauma or established PTSD\n• Active deprescribing is appropriate when feasible\n• If a patient is already on a BZD: do NOT abruptly stop — taper coordinated with PCP/psych\n• If absolutely necessary for acute medical management (e.g., alcohol withdrawal, status epilepticus), use the lowest effective dose for the shortest duration and document the indication',
+    },
+    {
+      heading: 'Other Things to AVOID',
+      body: '**WARN: Routine Acute Propranolol for PTSD Prevention**\n• Failed in pooled meta-analyses (Argolo 2015, Steenen 2016, CADTH 2020, Raut 2022)\n• Attenuates HR without changing PTSD incidence\n• Neither ISTSS nor APA recommends\n\n**WARN: Single-Session Debriefing (CISD)**\n• Cochrane: OR 2.51 for PTSD at 1y in those who received debriefing\n• WHO and 2023 VA/DoD strongly against\n• See [PFA Protocol page](#/info/ptsd-pfa-protocol)\n\n**Currently NOT available outside research:**\n• **MDMA-assisted therapy:** FDA REJECTED Lykos NDA Aug 9, 2024. Cited: functional unblinding, expectancy effects, ethical violations at one site, CV safety concerns.\n• **Cannabis:** Insufficient quality evidence. Risk of cannabis use disorder. Not recommended by VA/DoD or APA.\n\n**Emerging — NOT routine ED practice:**\n• **Hydrocortisone in critical illness:** Strongest evidence in ICU/septic shock/cardiac surgery (Schelling, Kothgassner 2021 meta). Not a routine PTSD-prevention drug; but stress-dose corticosteroids in CIRCI/septic shock have favorable PTSD secondary outcome.',
+    },
+    {
+      heading: 'Quick Decision Card',
+      body: '| Scenario | Action |\n|----------|--------|\n| Trauma 0-3 days | NO pharm except medical stabilization |\n| Trauma 3 days - 1 month, sleep impairment | Hydroxyzine 25-50 mg qhs OR trazodone 25-50 mg qhs |\n| PTSD >1 month, willing to start | Sertraline 25 mg → 50-200 mg with outpatient FU |\n| Nightmares dominant | Prazosin 1 mg qhs → titrate (Raskind protocol) |\n| Anxiety / agitation in PTSD pt | NEVER give a BZD. Use hydroxyzine 25-50 mg PRN. Connect to crisis support. |\n| Comorbid depression | Sertraline (covers both) OR mirtazapine if weight loss / sleep dominant |\n| IPV survivor + sleep complaint | Hydroxyzine. NEVER BZD (impairs safety judgment). |\n| Veteran on existing BZD chronic | Do NOT abruptly stop. Coordinate VA taper. |',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'VA/DoD Clinical Practice Guideline for the Management of PTSD/ASD. Version 4.0. 2023.' },
+    { num: 2, text: 'Hamblen JL, et al. The 2023 VA/DoD CPG for PTSD/ASD: A Synopsis. Ann Intern Med. 2024;177(3):363-374.' },
+    { num: 3, text: 'Raskind MA, et al. Trial of Prazosin for PTSD in Military Veterans (PACT). N Engl J Med. 2018;378(6):507-517.' },
+    { num: 4, text: 'Reist C, et al. Prazosin for PTSD: a systematic review and meta-analysis. CNS Spectrums. 2025;30(1):e3.' },
+    { num: 5, text: 'Guina J, et al. Benzodiazepines for PTSD: A Systematic Review and Meta-Analysis. J Psychiatr Pract. 2015;21(4):281-303.' },
+    { num: 6, text: 'De Berardis D, et al. Pharmacological Treatments for PTSD-Related Sleep Disturbances: A Network Meta-Analysis. Sleep Med Rev. 2024;76:101952.' },
+    { num: 7, text: 'Kothgassner OD, et al. Hydrocortisone administration for reducing PTSD symptoms: A meta-analysis. Psychoneuroendocrinology. 2021;126:105168.' },
+  ],
+};
+
+// -------------------------------------------------------------------
+// PTSD Screening — Trauma Resources & Hotlines
+// -------------------------------------------------------------------
+
+const PTSD_TRAUMA_RESOURCES_PAGE: InfoPage = {
+  id: 'ptsd-trauma-resources',
+  title: 'Trauma Resources & Hotlines',
+  subtitle: 'Warm-handoff numbers and patient-facing apps',
+  shareable: true,
+  sections: [
+    {
+      heading: 'Crisis Hotlines (24/7)',
+      body: '| Resource | Number / Method | Population |\n|----------|-----------------|------------|\n| **988 Suicide & Crisis Lifeline** | Call / Text / Chat: 988 | All — first-line crisis line |\n| **Veterans Crisis Line** | 988 → Press 1 (or text 838255) | Veterans, service members, families |\n| **Vet Center walk-in services** | 1-877-WAR-VETS (1-877-927-8387) | Combat veterans + sexual trauma military survivors |\n| **National Sexual Assault Hotline (RAINN)** | 1-800-656-HOPE (4673) | Sexual assault survivors |\n| **National Domestic Violence Hotline (NDV)** | 1-800-799-SAFE (7233) | IPV / DV survivors |\n| **SAMHSA Disaster Distress Helpline** | 1-800-985-5990 | Disaster-related distress |\n| **Trans Lifeline** | 1-877-565-8860 | Transgender community |\n| **The Trevor Project (LGBTQ+ youth)** | 1-866-488-7386 | LGBTQ+ youth crisis |\n| **National Child Abuse Hotline** | 1-800-422-4453 | Child abuse + adult survivors |\n| **National Human Trafficking Hotline** | 1-888-373-7888 (text 233733) | Trafficking survivors |',
+    },
+    {
+      heading: 'Patient-Facing Apps (free)',
+      body: '**PTSD Coach** (NCPTSD, free, iOS/Android) — symptom tracking, coping skills, professional care connection. Evidence-based.\n\n**PTSD Family Coach** (NCPTSD, free) — for family members of PTSD patients.\n\n**PE Coach** (NCPTSD, free) — adjunct to Prolonged Exposure therapy.\n\n**CPT Coach** (NCPTSD, free) — adjunct to Cognitive Processing Therapy.\n\n**Mindfulness Coach** (NCPTSD, free) — mindfulness practice.\n\n**Insomnia Coach** (NCPTSD, free) — CBT-I support.\n\n**Safety Plan** apps (multiple) — Stanley-Brown Safety Plan format.',
+    },
+    {
+      heading: 'Trauma-Focused Therapy Modalities (refer warm)',
+      body: '**First-line per VA/DoD 2023 CPG (preferred OVER pharmacotherapy):**\n\n• **Cognitive Processing Therapy (CPT)** — 12 sessions; addresses stuck points and trauma cognitions. Manualized.\n\n• **Prolonged Exposure (PE)** — 8-15 sessions; graded imaginal + in-vivo exposure. Strong evidence.\n\n• **Eye Movement Desensitization and Reprocessing (EMDR)** — 8 phases; bilateral stimulation during trauma processing. WHO + APA endorsed.\n\n**Second-line:**\n• Brief Eclectic Psychotherapy (BEP)\n• Narrative Exposure Therapy (NET) — for refugee/multiply-traumatized populations\n• Written Exposure Therapy (WET)\n\n**Group format** — available for CPT and other modalities; may help with stigma and isolation.',
+    },
+    {
+      heading: 'Therapist Locators',
+      body: '**Find a CPT-certified provider:**\n• https://cptforptsd.com — find-a-clinician directory\n\n**Find an EMDR therapist:**\n• https://emdria.org — EMDR International Association directory\n\n**Find a PE therapist:**\n• Penn CTSA (Center for Treatment and Study of Anxiety) directory\n\n**VA & Vet Center locator:**\n• https://www.va.gov/find-locations\n\n**ISTSS Find-a-Clinician:**\n• https://istss.org/clinical-resources/find-a-clinician\n\n**SAMHSA treatment locator:**\n• https://findtreatment.samhsa.gov OR call 1-800-662-HELP (4357)',
+    },
+    {
+      heading: 'Documentation Checklist for ED PTSD/ASD/SA/IPV Encounter',
+      body: '☐ DSM-5-TR criteria mapping (if Dx made)\n☐ Index trauma description (HIPAA-minimum-necessary; do NOT detail more than needed)\n☐ Screening tool result (PC-PTSD-5 / PCL-5 / ASD)\n☐ **C-SSRS suicide screen result** (mandatory)\n☐ Safety plan if any IPV/SI/SUD\n☐ Mandatory reporting compliance:\n  - Child abuse (all states, mandatory)\n  - Elder abuse (most states)\n  - Vulnerable adult abuse (varies)\n  - IPV: NOT mandatory in most states for competent adult; do NOT report without consent unless mandatory in your state\n  - Sexual assault: chain of custody for forensic evidence; reporting to LE is patient choice in most states\n☐ Disposition rationale\n☐ Follow-up appointment time + warm-handoff documentation\n☐ Hotline numbers provided (988 minimum)\n☐ PTSD Coach app or written materials provided\n☐ Lethal means counseling if any SI risk',
+    },
+    {
+      heading: 'High-Risk Population Quick-Reference',
+      body: '| Population | Lifetime PTSD Risk | ED-Specific Action |\n|------------|--------------------|--------------------|\n| Sexual assault survivors | 30-50% | SANE within 72-120h; RAINN 1-800-656-HOPE; CBT/CPT/PE/EMDR all effective |\n| IPV / DV survivors | 30-60% | PRIVATE screen (HARK/HITS); NDV 1-800-799-SAFE; lethality assess; safety plan never shared |\n| Veterans / military | 10-30% | 988→1; Vet Center walk-in; assess for TBI overlap |\n| Pediatric post-injury | 15-25% | Parent psychoeducation per NICE NG116; screen at 1-mo FU; TF-CBT for kids |\n| Refugees / asylum | 30-60% | HTQ; trained interpreter; cultural adaptation; multiple traumas common |\n| First responders / ED staff (Crit A4) | Higher than general | Peer support; confidential EAP; AVOID mandatory CISD |\n| Post-ICU / cardiac arrest | 15-30% | Underrecognized "ICU PTSD"; screen at FU; emerging hydrocortisone evidence |',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'National Center for PTSD. PTSD Coach mobile application. https://www.ptsd.va.gov/appvid/mobile/ptsdcoach_app.asp' },
+    { num: 2, text: 'VA/DoD Clinical Practice Guideline for the Management of PTSD/ASD. Version 4.0. 2023.' },
+    { num: 3, text: '988 Suicide & Crisis Lifeline. https://988lifeline.org' },
+    { num: 4, text: 'RAINN — Rape, Abuse & Incest National Network. https://rainn.org' },
+    { num: 5, text: 'National Domestic Violence Hotline. https://thehotline.org' },
+    { num: 6, text: 'EMDR International Association. https://emdria.org' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   // Oncological Emergencies
   'onc-emergency-summary': ONC_EMERGENCY_SUMMARY,
@@ -19647,6 +19830,11 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'ici-toxicity-algorithm': ICI_TOXICITY_ALGORITHM_PAGE,
   'pericardial-effusion-pocus': PERICARDIAL_EFFUSION_POCUS_PAGE,
   'tls-management-bundle': TLS_MANAGEMENT_BUNDLE_PAGE,
+  // PTSD Screening
+  'ptsd-asd-vs-ptsd-timeline': PTSD_TIMELINE_PAGE,
+  'ptsd-pfa-protocol': PTSD_PFA_PROTOCOL_PAGE,
+  'ptsd-pharmacology-reference': PTSD_PHARMACOLOGY_PAGE,
+  'ptsd-trauma-resources': PTSD_TRAUMA_RESOURCES_PAGE,
   // Delayed Sequence Intubation
   'dsi-summary': DSI_SUMMARY,
   'dsi-ketamine': DSI_KETAMINE,

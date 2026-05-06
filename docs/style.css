@@ -513,6 +513,23 @@ body {
   margin-top: 2px;
 }
 
+/* FlowRider 2026-05-06: triage buttons w/ title+desc must stack vertically
+   on all viewports. Default .btn-3d is inline-flex row, which collapses
+   .option-label and .decision-card__option-desc onto the same line at >=768px.
+   Force column layout when the button contains a description span. */
+.btn-3d:has(.decision-card__option-desc) {
+  flex-direction: column;
+  align-items: stretch;
+  text-align: center;
+  gap: 2px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.btn-3d:has(.decision-card__option-desc) .option-label {
+  display: block;
+  width: 100%;
+}
+
 /* ---- Feature 2: Progressive Disclosure Tabs ---- */
 .decision-card__tabs {
   margin-top: 16px;

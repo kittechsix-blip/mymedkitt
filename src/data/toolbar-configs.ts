@@ -220,6 +220,15 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'risk-strat', label: 'Risk Strat', icon: '⚠️', action: 'jump', target: 'sui-high-risk' },
     { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'sui-discharge-criteria' },
   ],
+  'ptsd-screening': [
+    { id: 'pc-ptsd-5', label: 'PC-PTSD-5', icon: '📋', action: 'calculator', target: 'pc-ptsd-5' },
+    { id: 'pcl-5', label: 'PCL-5', icon: '📊', action: 'calculator', target: 'pcl-5' },
+    { id: 'cssrs', label: 'C-SSRS', icon: '⚠️', action: 'calculator', target: 'cssrs-screen' },
+    { id: 'pfa', label: 'PFA Protocol', icon: '🤝', action: 'overlay', target: 'ptsd-pfa-protocol' },
+    { id: 'pharm', label: 'Pharm Pearls', icon: '💊', action: 'overlay', target: 'ptsd-pharmacology-reference' },
+    { id: 'resources', label: 'Resources', icon: '📞', action: 'overlay', target: 'ptsd-trauma-resources' },
+    { id: 'timeline', label: 'ASD vs PTSD', icon: '⏱️', action: 'overlay', target: 'ptsd-asd-vs-ptsd-timeline' },
+  ],
   'afib-rvr': [
     { id: 'cardioversion', label: 'Cardiovert', icon: '⚡', action: 'jump', target: 'afib-cardioversion-protocol' },
     { id: 'rate-control', label: 'Rate Ctrl', icon: '💓', action: 'jump', target: 'afib-stable-drugs' },
