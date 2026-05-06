@@ -1,6 +1,16 @@
 // myMedKitt — Per-Consult Toolbar Configurations
 // Maps consult IDs to their contextual toolbar items.
 const TOOLBAR_CONFIGS = {
+    'oncological-emergencies': [
+        { id: 'summary', label: 'Onc Steps', icon: '📋', action: 'overlay', target: 'onc-emergency-summary' },
+        { id: 'chemo', label: 'Chemo Ref', icon: '💊', action: 'overlay', target: 'chemo-regimens' },
+        { id: 'mascc', label: 'MASCC', icon: '🌡️', action: 'calculator', target: 'mascc-score' },
+        { id: 'corr-ca', label: 'Corr Ca', icon: '🧮', action: 'calculator', target: 'corrected-calcium' },
+        { id: 'ecog', label: 'ECOG', icon: '📊', action: 'calculator', target: 'ecog-performance' },
+        { id: 'fn', label: 'Fever/Neutro', icon: '🚨', action: 'jump', target: 'onc-fn-recognize' },
+        { id: 'mscc', label: 'Cord Comp', icon: '🦴', action: 'jump', target: 'onc-mscc-treat' },
+        { id: 'tls', label: 'TLS', icon: '⚗️', action: 'jump', target: 'onc-tls-treat' },
+    ],
     'delayed-sequence-intubation': [
         { id: 'summary', label: 'DSI Steps', icon: '📋', action: 'overlay', target: 'dsi-summary' },
         { id: 'ketamine', label: 'Ketamine', icon: '💉', action: 'overlay', target: 'dsi-ketamine' },

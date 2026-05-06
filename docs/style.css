@@ -2449,6 +2449,15 @@ body.critical-actions-open {
   display: block;
 }
 
+/* Desktop: cap consult figures so they don't push controls below the fold */
+@media (min-width: 768px) {
+  .wizard-image-figure {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 .wizard-image-caption {
   font-size: 13px;
   color: var(--color-text-secondary);

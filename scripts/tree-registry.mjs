@@ -171,6 +171,7 @@ export const TREE_REGISTRY = {
   'sti-comprehensive': { prefix: 'STI_COMPREHENSIVE', entryNodeId: 'sti-start',          categoryId: 'infectious-disease' },
   'approach-to-arthritis': { prefix: 'APPROACH_TO_ARTHRITIS', entryNodeId: 'ata-start', categoryId: 'orthopedics' },
   'diabetic-foot-wounds': { prefix: 'DIABETIC_FOOT_WOUNDS', entryNodeId: 'dfw-start',  categoryId: 'orthopedics' },
+  'oncological-emergencies': { prefix: 'ONCOLOGICAL_EMERGENCIES', entryNodeId: 'onc-start', categoryId: 'heme-onc' },
   'pediatric-arthritis': { prefix: 'PEDIATRIC_ARTHRITIS', entryNodeId: 'pa-arth-start', categoryId: 'pediatrics' },
   'gout':             { prefix: 'GOUT',                entryNodeId: 'gout-start',         categoryId: 'orthopedics' },
   'hop-killers':      { prefix: 'HOP_KILLERS',         entryNodeId: 'hop-start',          categoryId: 'critical-care' },

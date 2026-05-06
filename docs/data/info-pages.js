@@ -18494,7 +18494,115 @@ const MB_STEPS_SUMMARY = {
         { num: 2, text: 'CDC. Rabies Post-Exposure Prophylaxis. 2022.' },
     ],
 };
+// -------------------------------------------------------------------
+// Oncological Emergencies — Steps Summary
+// -------------------------------------------------------------------
+const ONC_EMERGENCY_SUMMARY = {
+    id: 'onc-emergency-summary',
+    title: 'Oncological Emergencies — Steps',
+    subtitle: 'Six Must-Not-Miss Cancer Emergencies',
+    sections: [
+        {
+            heading: 'Step 1: Triage by Chief Complaint',
+            body: '**Fever** → [Febrile Neutropenia](#/node/onc-fn-recognize) — antibiotics within 60 min if ANC <500\n\n**Lab abnormalities (K↑, PO4↑, urate↑, Ca↓)** → [TLS](#/node/onc-tls-recognize) — IVF + rasburicase\n\n**AMS / weakness / polyuria** → [Hypercalcemia](#/node/onc-hyperca-recognize) — IVF + calcitonin + bisphosphonate\n\n**Back pain / neuro deficit** → [Cord Compression](#/node/onc-mscc-recognize) — dex 10 mg IV stat + MRI\n\n**Facial/UE swelling, dyspnea** → [SVC Syndrome](#/node/onc-svc-recognize) — HOB up, dex if airway/CNS\n\n**WBC >100k + symptoms** → [Leukostasis](#/node/onc-leuko-recognize) — hydration + hydroxyurea ± leukapheresis (NOT in APL)',
+        },
+        {
+            heading: 'Step 2: Universal Workup',
+            body: '• CBC with differential and peripheral smear\n• BMP, Mg, PO4, Ca, ionized Ca, uric acid, LDH\n• LFTs, lactate\n• Coags + DIC panel if any high-risk\n• Type and screen\n• Cultures × 2 + UA if febrile\n• ECOG performance status\n• Confirm cancer type, stage, last chemo cycle, current regimen',
+        },
+        {
+            heading: 'Step 3: Time-Critical Actions',
+            body: '**Within 60 minutes:**\n• Febrile neutropenia → empiric antibiotics ([cefepime](#/drug/cefepime/febrile-neutropenia) 2g IV q8h)\n• Suspected MSCC → [dexamethasone](#/drug/dexamethasone/mscc) 10 mg IV (BEFORE imaging)\n• Suspected APL → [ATRA](#/drug/atra/apl) 45 mg/m²/day\n\n**Within 6 hours:**\n• MSCC → MRI whole spine\n• Severe HCM → calcitonin + zoledronic acid\n• Lab TLS → rasburicase if uric acid >8 (check G6PD)\n• Severe SVC → IR consult for stent',
+        },
+        {
+            heading: 'Step 4: Always Involve',
+            body: '• Oncology (always — primary team knows the patient)\n• Specialty consults: neurosurgery (MSCC), IR (SVC stent, leukapheresis), radiation oncology, hematology (apheresis)\n• Goals of care discussion\n• Document ECOG performance status',
+        },
+        {
+            heading: 'Avoid Common Pitfalls',
+            body: '• Don\'t alkalinize urine in TLS (causes Ca-PO4 precipitation)\n• Don\'t routinely add vancomycin in FN (no benefit if not indicated)\n• Don\'t use loop diuretics for HCM unless volume overload develops\n• Don\'t leukapheresis in APL (causes DIC)\n• Don\'t transfuse pRBCs before plasmapheresis in hyperviscosity\n• Don\'t give empiric chemo for SVC mass before tissue diagnosis (destroys histology)\n• Don\'t miss cord compression in cancer + back pain — image even without neuro signs',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Higdon ML, Atkinson CJ, Lawrence KV. Oncologic Emergencies: Recognition and Initial Management. Am Fam Physician. 2018;97(11):741-748.' },
+        { num: 2, text: 'Lewis MA, Hendrickson AW, Moynihan TJ. Oncologic Emergencies. CA Cancer J Clin. 2011;61(5):287-314.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Chemotherapy Regimens & Toxicities Reference
+// -------------------------------------------------------------------
+const CHEMO_REGIMENS_PAGE = {
+    id: 'chemo-regimens',
+    title: 'Chemotherapy Regimens & Side Effects',
+    subtitle: 'ED Reference for Common Cancer Treatments',
+    shareable: true,
+    sections: [
+        {
+            heading: 'How To Use This Reference',
+            body: 'When a cancer patient presents to the ED, knowing **what regimen they are on**, **when their last cycle was**, and **typical toxicity patterns** dramatically narrows your differential.\n\n**Always ask:**\n1. What is the cancer type?\n2. What is the chemotherapy regimen (acronym)?\n3. When was the last cycle?\n4. Are they between cycles or on continuous therapy?\n5. Any new immunotherapy?\n\n**Typical nadir for most cytotoxics:** day 7-14 post-cycle (lowest counts), recovery day 21-28. Plan ED workup accordingly.',
+        },
+        {
+            heading: 'BREAST CANCER',
+            body: '**AC-T (or ddAC-T):** Doxorubicin + Cyclophosphamide → Paclitaxel\n• ED toxicities: cardiotoxicity (anthracycline), neutropenia (nadir d10-14), neuropathy (taxane), hemorrhagic cystitis (cyclophosphamide)\n\n**TCH(P):** Docetaxel + Carboplatin + Trastuzumab (± Pertuzumab) — HER2+\n• ED toxicities: cardiomyopathy (trastuzumab — get echo), diarrhea (sometimes severe), neutropenia, infusion reactions\n\n**CMF:** Cyclophosphamide + Methotrexate + 5-FU\n• ED toxicities: mucositis, mild neutropenia, nausea\n\n**Capecitabine** (oral 5-FU prodrug): adjuvant or metastatic\n• ED toxicities: hand-foot syndrome, diarrhea, coronary vasospasm (chest pain → ECG, treat as ACS until ruled out)\n\n**CDK4/6 inhibitors** (palbociclib, ribociclib, abemaciclib): hormone-positive\n• ED toxicities: neutropenia (often profound), QT prolongation (ribociclib), diarrhea (abemaciclib)',
+        },
+        {
+            heading: 'LUNG CANCER',
+            body: '**Carbo/Pem (± pembrolizumab):** non-squamous NSCLC\n• ED toxicities: thrombocytopenia (carbo), nephrotox (pem), pneumonitis (pembrolizumab — irAE)\n\n**Carbo/Paclitaxel:** squamous NSCLC\n• ED toxicities: peripheral neuropathy (paclitaxel), allergic reaction, neutropenia\n\n**Cisplatin/Etoposide:** small cell lung cancer\n• ED toxicities: nephrotoxicity (forced diuresis required), ototoxicity, profound nausea, neutropenia\n\n**Immune checkpoint inhibitors** (pembrolizumab, nivolumab, atezolizumab, durvalumab):\n• ED-relevant irAEs (often weeks-months after dose):\n  - Pneumonitis (steroids; severe → infliximab)\n  - Colitis (steroids + infliximab if refractory)\n  - Hepatitis (LFT trend, steroids)\n  - Hypophysitis / adrenal insufficiency (treat as adrenal crisis)\n  - Thyroiditis\n  - **Myocarditis (rare but lethal — troponin, ECG, urgent cards consult)**\n  - Type 1 diabetes (DKA presentation)',
+        },
+        {
+            heading: 'COLORECTAL CANCER',
+            body: '**FOLFOX:** 5-FU + Leucovorin + Oxaliplatin\n• ED toxicities: cold-triggered laryngeal/peripheral dysesthesia (oxaliplatin — limit cold, can be severe), neuropathy (cumulative), neutropenia, mucositis\n\n**FOLFIRI:** 5-FU + Leucovorin + Irinotecan\n• ED toxicities: severe diarrhea (early or late onset — atropine for early; loperamide + octreotide for late), cholinergic syndrome, neutropenia\n\n**FOLFOXIRI:** combination of all three — high toxicity\n\n**Bevacizumab:** add-on to chemo\n• ED toxicities: hypertension (often severe), proteinuria, GI perforation (5%), bleeding, wound dehiscence, thrombosis, RPLS\n\n**Cetuximab/Panitumumab** (EGFR inhibitors):\n• ED toxicities: severe acneiform rash, hypomagnesemia (check Mg), infusion reaction',
+        },
+        {
+            heading: 'LYMPHOMA / LEUKEMIA',
+            body: '**R-CHOP:** Rituximab + Cyclophosphamide + Doxorubicin (Hydroxydaunorubicin) + Vincristine (Oncovin) + Prednisone — DLBCL\n• ED toxicities: cardiotoxicity (anthracycline), peripheral neuropathy (vincristine — NEVER intrathecal, fatal), hyperglycemia (prednisone), hepatitis B reactivation (rituximab), tumor lysis syndrome (esp. if bulky)\n\n**ABVD:** Adriamycin (doxorubicin) + Bleomycin + Vinblastine + Dacarbazine — Hodgkin\n• ED toxicities: pulmonary fibrosis (bleomycin — AVOID HIGH FiO2 lifelong), cardiotoxicity, neutropenia, infusion reactions\n\n**Hyper-CVAD:** ALL induction\n• ED toxicities: profound and prolonged pancytopenia, mucositis, TLS\n\n**7+3 induction (cytarabine + daunorubicin):** AML\n• ED toxicities: prolonged pancytopenia, mucositis, TLS, cytarabine syndrome (fever, rash, conjunctivitis)\n\n**ATRA + Arsenic Trioxide:** APL (M3 AML)\n• **Differentiation syndrome:** fever, dyspnea, weight gain, edema, infiltrates — give dexamethasone immediately\n• QT prolongation (arsenic — daily ECG, replete K and Mg)\n\n**Venetoclax:** CLL/AML\n• Tumor lysis (especially during ramp-up)\n• Neutropenia\n\n**BTK inhibitors** (ibrutinib, acalabrutinib): CLL, mantle cell, Waldenström\n• ED toxicities: atrial fibrillation, bleeding (HOLD before procedures), hypertension',
+        },
+        {
+            heading: 'GI / PANCREATIC',
+            body: '**FOLFIRINOX:** 5-FU + Leucovorin + Irinotecan + Oxaliplatin — pancreatic\n• ED toxicities: severe — diarrhea, neutropenia, neuropathy, mucositis\n\n**Gemcitabine ± nab-paclitaxel:** pancreatic, biliary\n• ED toxicities: hemolytic uremic syndrome (rare but documented), pneumonitis, capillary leak, cytopenias',
+        },
+        {
+            heading: 'GU / GYN',
+            body: '**ABV/EP/BEP:** Bleomycin + Etoposide + Cisplatin — testicular germ cell\n• ED toxicities: pulmonary fibrosis (bleomycin — limit FiO2, no PEEP if avoidable), nephrotoxicity, ototoxicity\n\n**Carbo/Paclitaxel:** ovarian\n• ED toxicities: hypersensitivity (carboplatin re-exposure especially), neutropenia\n\n**Enzalutamide / Abiraterone:** prostate\n• ED toxicities: hypertension, hypokalemia, fatigue, falls (enzalutamide — seizure risk)',
+        },
+        {
+            heading: 'HEAD & NECK / SARCOMA',
+            body: '**Cisplatin + 5-FU ± Cetuximab:** H&N\n• Same toxicities as above for each agent\n\n**Doxorubicin + Ifosfamide:** sarcoma\n• Hemorrhagic cystitis (give MESNA), encephalopathy (ifosfamide — methylene blue rescue)',
+        },
+        {
+            heading: 'TARGETED THERAPY / HORMONAL',
+            body: '**Imatinib / Dasatinib / Nilotinib (TKIs):** CML, GIST\n• ED toxicities: pleural effusion (dasatinib), QT prolongation (nilotinib), cytopenias, edema\n\n**Trastuzumab / Pertuzumab:** HER2+ breast, gastric\n• Cardiomyopathy (reversible — get echo, hold drug, consult cards)\n• Infusion reaction\n\n**Bevacizumab:** see colorectal section\n\n**EGFR inhibitors** (osimertinib, erlotinib, gefitinib): EGFR+ NSCLC\n• Pneumonitis, diarrhea, rash, cardiomyopathy (osimertinib)\n\n**ALK inhibitors** (crizotinib, alectinib, brigatinib): ALK+ NSCLC\n• QT prolongation, pneumonitis, transaminitis, vision changes\n\n**Tamoxifen / Letrozole / Anastrozole:** breast hormone therapy\n• ED toxicities: hot flashes, VTE (tamoxifen — VTE workup if any new symptom), endometrial cancer (tamoxifen)',
+        },
+        {
+            heading: 'CAR-T CELL THERAPY',
+            body: '**Tisagenlecleucel, Axicabtagene, Brexucabtagene** — refractory ALL, lymphoma, myeloma\n\n**Cytokine Release Syndrome (CRS):**\n• Fever, hypotension, hypoxia, AMS\n• Onset: hours to days post-infusion\n• Tx: tocilizumab 8 mg/kg IV (max 800 mg) ± steroids; ICU for grade 3-4\n\n**ICANS (Immune Effector Cell-Associated Neurotoxicity):**\n• Confusion, aphasia, seizure, cerebral edema\n• Dexamethasone 10 mg IV q6h, escalate per grade\n• Tocilizumab does NOT cross BBB — steroids preferred for ICANS\n• Anti-seizure prophylaxis (levetiracetam) commonly used',
+        },
+        {
+            heading: 'EXTRAVASATION EMERGENCIES',
+            body: '**Vesicants (cause severe tissue necrosis):**\n• Anthracyclines (doxorubicin, daunorubicin, epirubicin)\n• Vinca alkaloids (vincristine, vinblastine)\n• Mitomycin\n• Mechlorethamine\n• Plant alkaloids\n\n**Acute management:**\n1. STOP infusion immediately (do not flush)\n2. Aspirate residual drug from cannula\n3. Mark area, photograph\n4. Cool or warm compress depending on agent\n5. Antidote per agent:\n   - **Anthracyclines:** Dexrazoxane IV within 6 hours (decreases necrosis 90%)\n   - **Vinca alkaloids:** Hyaluronidase 150-900 units SC + warm compress\n   - **Mitomycin:** DMSO 50-99% topical + cold compress\n   - **Mechlorethamine:** Sodium thiosulfate SC + cold compress\n6. Plastic surgery consult for blistering or necrosis',
+        },
+        {
+            heading: 'NEUTROPENIA NADIR — QUICK REFERENCE',
+            body: '| Agent | Nadir | Recovery |\n|-------|-------|----------|\n| Most cytotoxics | Day 7-14 | Day 21-28 |\n| Carboplatin | Day 14-21 | Day 28-35 |\n| Cisplatin | Day 14-21 | Day 28-35 |\n| Mitomycin | Day 28-42 | Day 42-56 |\n| Nitrosoureas (BCNU) | Day 28-42 | Day 42-56 |\n| Gemcitabine | Day 7 | Day 14 |\n| Capecitabine | Continuous | N/A |\n\n**Always confirm nadir date from current cycle when assessing fever risk.**',
+        },
+        {
+            heading: 'IMMUNE-RELATED ADVERSE EVENTS — TIMING',
+            body: '| irAE | Typical Onset Post-Therapy |\n|------|---------------------------|\n| Skin (rash, pruritus) | 2-3 weeks |\n| Colitis | 5-10 weeks |\n| Hepatitis | 8-12 weeks |\n| Pneumonitis | 9-12 weeks |\n| Endocrinopathy | 7-20 weeks |\n| Renal | 12-15 weeks |\n| Myocarditis | Variable; can be fulminant within first 2 cycles |\n\n**Treatment principles:**\n• Grade 1: continue ICI, symptomatic care\n• Grade 2: hold ICI, oral steroids 1 mg/kg/day prednisone\n• Grade 3: hold ICI, IV methylprednisolone 1-2 mg/kg/day, escalate to infliximab/MMF if no response in 48-72h\n• Grade 4: discontinue permanently, ICU, IV steroids + biologic',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'NCCN Clinical Practice Guidelines in Oncology (multiple disease-specific volumes). v2.2024.' },
+        { num: 2, text: 'Postow MA, Sidlow R, Hellmann MD. Immune-Related Adverse Events Associated with Immune Checkpoint Blockade. N Engl J Med. 2018;378(2):158-168.' },
+        { num: 3, text: 'Lee DW, et al. ASTCT Consensus Grading for Cytokine Release Syndrome and Neurologic Toxicity. Biol Blood Marrow Transplant. 2019;25(4):625-638.' },
+        { num: 4, text: 'Brahmer JR, et al. Management of Immune-Related Adverse Events in Patients Treated With Immune Checkpoint Inhibitor Therapy: ASCO Clinical Practice Guideline. J Clin Oncol. 2018;36(17):1714-1768.' },
+        { num: 5, text: 'Pérez-Soler R, Saltz L. Cutaneous Adverse Effects with HER1/EGFR-Targeted Agents. J Clin Oncol. 2005;23(22):5235-5246.' },
+        { num: 6, text: 'Schwartz CL, et al. A Risk-Adapted, Response-Based Approach Using ABVE-PC for Children and Adolescents With Intermediate- and High-Risk Hodgkin Lymphoma. J Clin Oncol. 2009;27(18):2980-2986.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Oncological Emergencies
+    'onc-emergency-summary': ONC_EMERGENCY_SUMMARY,
+    'chemo-regimens': CHEMO_REGIMENS_PAGE,
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
     'dsi-ketamine': DSI_KETAMINE,

@@ -905,6 +905,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/diabetic-foot-wounds.js');
             return { nodes: m.DIABETIC_FOOT_WOUNDS_NODES, entryNodeId: 'dfw-start', categoryId: 'trauma-surg', moduleLabels: m.DIABETIC_FOOT_WOUNDS_MODULE_LABELS, citations: m.DIABETIC_FOOT_WOUNDS_CITATIONS, criticalActions: m.DIABETIC_FOOT_WOUNDS_CRITICAL_ACTIONS };
         },
+        'oncological-emergencies': async () => {
+            const m = await import('../data/trees/oncological-emergencies.js');
+            return { nodes: m.ONCOLOGICAL_EMERGENCIES_NODES, entryNodeId: 'onc-start', categoryId: 'heme-onc', moduleLabels: m.ONCOLOGICAL_EMERGENCIES_MODULE_LABELS, citations: m.ONCOLOGICAL_EMERGENCIES_CITATIONS, criticalActions: m.ONCOLOGICAL_EMERGENCIES_CRITICAL_ACTIONS };
+        },
         'pediatric-arthritis': async () => {
             const m = await import('../data/trees/pediatric-arthritis.js');
             return { nodes: m.PEDIATRIC_ARTHRITIS_NODES, entryNodeId: 'peds-arth-start', categoryId: 'pediatrics', moduleLabels: m.MODULE_LABELS, citations: m.CITATIONS, criticalActions: m.PEDIATRIC_ARTHRITIS_CRITICAL_ACTIONS };
