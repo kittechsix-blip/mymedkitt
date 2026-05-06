@@ -33883,8 +33883,273 @@ const PEF_PREDICTED_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
-// Oncological Emergencies — MASCC, Corrected Calcium, ECOG
+// Oncological Emergencies — MASCC, Corrected Calcium, ECOG, TLS Cairo-Bishop, CRS, ICE/ICANS, MSCC, HyperCa Severity
 // -------------------------------------------------------------------
+
+const TLS_CAIRO_BISHOP_CALCULATOR: CalculatorDefinition = {
+  id: 'tls-cairo-bishop',
+  title: 'TLS Risk — Cairo-Bishop',
+  subtitle: 'Tumor Lysis Syndrome Classification',
+  description: 'Cairo-Bishop classification of laboratory and clinical tumor lysis syndrome (TLS). Lab TLS = \u22652 metabolic abnormalities within 3 days before to 7 days after cytotoxic therapy. Clinical TLS = lab TLS + at least one organ involvement (renal, cardiac, neuro). Drives IVF + rasburicase decisions and ICU triage.',
+  fields: [
+    { name: 'urate', label: 'Uric Acid \u22658 mg/dL OR \u226525% rise from baseline', type: 'toggle', points: 1 },
+    { name: 'k', label: 'Potassium \u22656 mEq/L OR \u226525% rise from baseline', type: 'toggle', points: 1 },
+    { name: 'phos', label: 'Phosphate \u22654.5 mg/dL (adult) / \u22656.5 (peds) OR \u226525% rise', type: 'toggle', points: 1 },
+    { name: 'ca', label: 'Calcium \u22647 mg/dL (corrected) OR \u226525% drop from baseline', type: 'toggle', points: 1 },
+    { name: 'cr', label: 'Creatinine \u22651.5\u00d7 ULN (clinical TLS criterion)', type: 'toggle', points: 0 },
+    { name: 'arrhythmia', label: 'Cardiac arrhythmia or sudden death (clinical TLS)', type: 'toggle', points: 0 },
+    { name: 'seizure', label: 'Seizure (clinical TLS)', type: 'toggle', points: 0 },
+    { name: 'highrisk-tumor', label: 'High-risk tumor (Burkitt, T-ALL >100k, bulky NHL, AML >50k, CLL on venetoclax)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Lab TLS = \u22652 metabolic criteria. Clinical TLS = lab TLS + \u22651 organ criterion (Cr/arrhythmia/seizure). Treatment: NS 2-3 L/m\u00b2/day (UOP >100 mL/hr), rasburicase 0.2 mg/kg if urate >8 (CHECK G6PD first, contraindicated in G6PD def + pregnancy), allopurinol 300 mg PO daily for low-risk prophylaxis. AVOID urine alkalinization (causes Ca-phos precipitation). RRT for K >6.5 refractory, PO4 >10, volume overload, uremia. Disposition: clinical TLS \u2192 ICU; high-risk lab TLS \u2192 ICU; stable lab TLS \u2192 telemetry.',
+  citations: [
+    'Cairo MS, Bishop M. Tumour lysis syndrome: new therapeutic strategies and classification. Br J Haematol. 2004;127(1):3-11.',
+    'Coiffier B, et al. Guidelines for the Management of Pediatric and Adult Tumor Lysis Syndrome. J Clin Oncol. 2008;26(16):2767-2778.',
+    'Howard SC, Jones DP, Pui CH. The Tumor Lysis Syndrome. N Engl J Med. 2011;364(19):1844-1854.',
+    'NCCN Clinical Practice Guidelines: Hematopoietic Growth Factors / Supportive Care. v2.2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const urate = !!values['urate'];
+    const k = !!values['k'];
+    const phos = !!values['phos'];
+    const ca = !!values['ca'];
+    const cr = !!values['cr'];
+    const arr = !!values['arrhythmia'];
+    const sz = !!values['seizure'];
+    const hr = !!values['highrisk-tumor'];
+    const labCount = [urate, k, phos, ca].filter(Boolean).length;
+    const clinical = cr || arr || sz;
+    let label: string; let colorVar: string; let interp: string; let value: string;
+    if (labCount >= 2 && clinical) {
+      label = 'Clinical TLS'; colorVar = '--color-danger'; value = `${labCount} lab + organ`;
+      interp = '**ICU admission.** Aggressive NS 2-3 L/m\u00b2/day (UOP >100 mL/hr) + rasburicase 0.2 mg/kg IV (check G6PD if time allows). Treat hyperK per protocol. Nephrology consult for RRT decision. Continuous cardiac monitoring. q4-6h electrolytes.';
+    } else if (labCount >= 2) {
+      label = 'Laboratory TLS'; colorVar = hr ? '--color-danger' : '--color-warning'; value = `${labCount} lab criteria`;
+      interp = `**${hr ? 'ICU' : 'Telemetry'} admission.** Aggressive NS 2-3 L/m\u00b2/day (UOP >100 mL/hr). Rasburicase 0.2 mg/kg IV if urate >8 OR allopurinol 300 mg PO daily if low-risk. q4-6h electrolytes. Strict I/O. Nephrology if Cr trending up.${hr ? ' High-risk tumor \u2192 ICU level monitoring.' : ''}`;
+    } else if (labCount === 1 || hr) {
+      label = 'TLS Risk \u2014 Prophylaxis Indicated'; colorVar = '--color-warning'; value = `${labCount} lab + ${hr ? 'high-risk tumor' : 'no high-risk tumor'}`;
+      interp = 'Does not meet Cairo-Bishop lab TLS yet. Start prophylaxis: IV hydration NS 2-3 L/m\u00b2/day, allopurinol 300 mg PO daily (or rasburicase if very high risk like Burkitt with bulk). q6-12h electrolytes. Telemetry monitoring.';
+    } else {
+      label = 'No TLS'; colorVar = '--color-primary'; value = '0 criteria';
+      interp = 'No Cairo-Bishop criteria met. Reassess if cytotoxic therapy planned within 7 days, especially for high-risk hematologic malignancy.';
+    }
+    return { value, label, description: `**Lab criteria met:** ${labCount}/4 (urate / K / PO4 / Ca)\n\n**Organ involvement:** ${clinical ? 'YES (' + [cr&&'Cr',arr&&'arrhythmia',sz&&'seizure'].filter(Boolean).join(', ') + ')' : 'No'}\n\n**High-risk tumor:** ${hr ? 'YES' : 'No'}\n\n**INTERPRETATION:** ${interp}`, colorVar };
+  },
+};
+
+const HYPERCA_SEVERITY_CALCULATOR: CalculatorDefinition = {
+  id: 'hyperca-severity',
+  title: 'Hypercalcemia Severity \u2014 Onc',
+  subtitle: 'Severity Grading + Treatment Trigger',
+  description: 'Combines corrected calcium (or ionized Ca if available), symptom burden, and ECG findings to grade hypercalcemia of malignancy and trigger the appropriate treatment bundle (IVF + calcitonin + bisphosphonate vs denosumab vs HD).',
+  fields: [
+    { name: 'use-ionized', label: 'Use Ionized Ca (gold standard)', type: 'toggle', points: 0, description: 'If checked, enter ionized Ca below; otherwise enter total Ca + albumin' },
+    { name: 'ionized-ca', label: 'Ionized Calcium (mg/dL)', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL', description: 'Normal 4.5\u20135.3' },
+    { name: 'total-ca', label: 'Total Calcium (mg/dL)', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL' },
+    { name: 'albumin', label: 'Serum Albumin (g/dL)', type: 'number', points: 0, valueIsPoints: true, unit: 'g/dL' },
+    { name: 'symptoms', label: 'Symptomatic (AMS, lethargy, severe N/V, dehydration, arrhythmia)', type: 'toggle', points: 0 },
+    { name: 'ecg-changes', label: 'ECG changes (short QT, J wave, AV block)', type: 'toggle', points: 0 },
+    { name: 'crcl-low', label: 'CrCl <30 mL/min', type: 'toggle', points: 0, description: 'Affects bisphosphonate vs denosumab choice' },
+  ],
+  results: [],
+  thresholdNote: 'Mild (<12, asymp): PO hydration, treat cause. Moderate (12-14): NS 200-300 mL/hr + calcitonin + zoledronic acid. Severe (>14 OR symptomatic OR ECG changes): same bundle + ICU/tele. CrCl <30: denosumab 120 mg SC instead of bisphosphonate. Refractory or Ca >18: hemodialysis. Vit-D mediated (lymphoma/myeloma/granulomatous): add prednisone 40-60 mg PO. AVOID loop diuretics unless volume overload develops.',
+  citations: [
+    'Stewart AF. Hypercalcemia Associated with Cancer. N Engl J Med. 2005;352(4):373-379.',
+    'Goldner W. Cancer-Related Hypercalcemia. J Oncol Pract. 2016;12(5):426-432.',
+    'NCCN Clinical Practice Guidelines: Hypercalcemia of Malignancy. v2.2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const useIonized = !!values['use-ionized'];
+    const symptoms = !!values['symptoms'];
+    const ecg = !!values['ecg-changes'];
+    const renal = !!values['crcl-low'];
+    let effectiveCa: number; let basis: string;
+    if (useIonized) {
+      const ica = values['ionized-ca'] || 0;
+      if (ica <= 0) return { value: '--', label: 'Enter ionized Ca', description: 'Enter ionized calcium value.', colorVar: '--color-text-muted' };
+      // Approximate total-Ca equivalent: ionized * 2 (rough mapping for severity grading)
+      effectiveCa = Math.round(ica * 2 * 10) / 10;
+      basis = `Ionized Ca ${ica} mg/dL (approx total-equivalent ${effectiveCa})`;
+    } else {
+      const ca = values['total-ca'] || 0;
+      const alb = values['albumin'] || 4.0;
+      if (ca <= 0) return { value: '--', label: 'Enter Ca + albumin', description: 'Enter total calcium and albumin.', colorVar: '--color-text-muted' };
+      effectiveCa = Math.round((ca + 0.8 * (4.0 - alb)) * 10) / 10;
+      basis = `Total ${ca} + albumin ${alb} \u2192 corrected ${effectiveCa} mg/dL`;
+    }
+    let severity: string; let colorVar: string; let action: string;
+    const sevByLab = effectiveCa > 14 ? 'Severe' : effectiveCa > 12 ? 'Moderate' : effectiveCa > 10.5 ? 'Mild' : 'Normal';
+    severity = (sevByLab === 'Mild' && (symptoms || ecg)) ? 'Moderate-Severe' : (sevByLab === 'Moderate' && (symptoms || ecg)) ? 'Severe' : sevByLab;
+    if (severity === 'Normal') { colorVar = '--color-primary'; action = 'No hypercalcemia. Reassess clinical context.'; }
+    else if (severity === 'Mild') { colorVar = '--color-warning'; action = 'PO hydration 3-4 L/day. Stop thiazides, Ca, vit-D supplements. Mobilize. Outpatient onc + endo follow-up within 1 week. Repeat Ca in 24-48h.'; }
+    else if (severity === 'Moderate' || severity === 'Moderate-Severe') { colorVar = '--color-warning'; action = `**Admit telemetry/stepdown.** NS 200-300 mL/hr (goal UOP >100). Calcitonin 4 IU/kg SC q12h (rapid bridge). ${renal ? 'Denosumab 120 mg SC (CrCl <30)' : 'Zoledronic acid 4 mg IV over 15-30 min'}. Recheck Ca q6-12h. Avoid loop diuretics unless overload.`; }
+    else { colorVar = '--color-danger'; action = `**ICU admission.** NS 200-300 mL/hr aggressive. Calcitonin 4 IU/kg SC q12h. ${renal ? 'Denosumab 120 mg SC' : 'Zoledronic acid 4 mg IV'}. Continuous cardiac monitor. ${effectiveCa > 18 ? 'Hemodialysis indicated.' : ''} Add prednisone 40-60 mg PO if vit-D-mediated (lymphoma, myeloma, granulomatous). Endo + onc consult.`; }
+    return { value: `${effectiveCa} mg/dL`, label: severity, description: `**Basis:** ${basis}\n\n**Symptoms:** ${symptoms ? 'YES' : 'No'} | **ECG changes:** ${ecg ? 'YES' : 'No'} | **CrCl <30:** ${renal ? 'YES' : 'No'}\n\n**SEVERITY:** ${severity}\n\n**ACTION:** ${action}`, colorVar };
+  },
+};
+
+const CRS_GRADE_CALCULATOR: CalculatorDefinition = {
+  id: 'crs-grade',
+  title: 'CRS Grading \u2014 ASTCT 2019',
+  subtitle: 'Cytokine Release Syndrome (CAR-T / Bispecific)',
+  description: 'ASTCT consensus grading for cytokine release syndrome (CRS) following CAR-T cells, bispecific antibodies (blinatumomab, mosunetuzumab, teclistamab, talquetamab), or other immune-effector therapies. Grade drives tocilizumab and steroid escalation. Fever \u226538.0\u00b0C is required for any CRS grade.',
+  fields: [
+    { name: 'fever', label: 'Fever \u226538.0\u00b0C (required for any CRS grade)', type: 'toggle', points: 0 },
+    { name: 'hypotension', label: 'Hypotension', type: 'select', points: 0, description: 'Severity of BP support', selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Responsive to IV fluids alone', points: 1 },
+      { label: 'Requires single low-dose vasopressor', points: 2 },
+      { label: 'Requires multiple OR high-dose vasopressors', points: 3 },
+    ]},
+    { name: 'hypoxia', label: 'Hypoxia', type: 'select', points: 0, description: 'O2 requirement', selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Low-flow nasal cannula (\u22646 L/min) or blow-by', points: 1 },
+      { label: 'High-flow NC, face mask, NRB, or Venturi mask', points: 2 },
+      { label: 'Positive pressure (CPAP/BiPAP/intubation)', points: 3 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'ASTCT 2019: Grade 1 = fever only. Grade 2 = fever + (low-flow O2 OR fluid-responsive hypotension). Grade 3 = fever + (high-flow/NRB OR single-pressor hypotension). Grade 4 = fever + (positive pressure OR multiple pressors). Tocilizumab 8 mg/kg IV (max 800 mg) for Grade 2+. Add dexamethasone 10 mg IV q6h (or methylpred 1 mg/kg q12h) for Grade 3+. ICU for Grade 3+. Always rule out concurrent infection (cultures, broad-spectrum abx empiric).',
+  citations: [
+    'Lee DW, et al. ASTCT Consensus Grading for Cytokine Release Syndrome and Neurologic Toxicity Associated with Immune Effector Cells. Biol Blood Marrow Transplant. 2019;25(4):625-638.',
+    'NCCN Clinical Practice Guidelines: Management of Immunotherapy-Related Toxicities. v1.2024.',
+    'Santomasso BD, et al. Management of Immune-Related Adverse Events in Patients Treated With Chimeric Antigen Receptor T-Cell Therapy: ASCO Guideline. J Clin Oncol. 2021;39(35):3978-3992.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const fever = !!values['fever'];
+    const bp = Number(values['hypotension'] || 0);
+    const o2 = Number(values['hypoxia'] || 0);
+    if (!fever) return { value: 'No CRS', label: 'Fever required', description: 'CRS by definition requires fever \u226538.0\u00b0C. Without fever the grading does not apply. If patient was previously febrile but defervesced on antipyretics or tocilizumab, use the highest preceding grade.', colorVar: '--color-text-muted' };
+    const grade = Math.max(1, bp, o2);
+    let label: string; let colorVar: string; let mgmt: string;
+    if (grade === 1) { label = 'CRS Grade 1'; colorVar = '--color-warning'; mgmt = 'Supportive care: antipyretics (acetaminophen), IV fluids PRN. Pan-culture (blood, urine, CXR), broad-spectrum antibiotics empirically (febrile + immunosuppressed). Telemetry. Consider tocilizumab if fever persists >3 days or recurs.'; }
+    else if (grade === 2) { label = 'CRS Grade 2'; colorVar = '--color-warning'; mgmt = '**Tocilizumab 8 mg/kg IV (max 800 mg)**, may repeat q8h up to 3 doses in 24h. IVF for hypotension; supplemental O2 PRN. Pan-culture + empiric broad-spectrum abx. Step-down or ICU level care. Consider dexamethasone 10 mg IV if no response to tocilizumab in 24h.'; }
+    else if (grade === 3) { label = 'CRS Grade 3'; colorVar = '--color-danger'; mgmt = '**ICU admission.** Tocilizumab 8 mg/kg IV + **Dexamethasone 10 mg IV q6h** (or methylprednisolone 1 mg/kg IV q12h). Vasopressor for hypotension. High-flow O2/NRB. Pan-culture + broad-spectrum abx. Echocardiogram, troponin, BNP. Cardiology consult for new dysfunction.'; }
+    else { label = 'CRS Grade 4 \u2014 Life-Threatening'; colorVar = '--color-danger'; mgmt = '**ICU.** Tocilizumab 8 mg/kg IV + **Methylprednisolone 1000 mg IV daily** (high-dose pulse) \u00d7 3 days, then taper. Multiple vasopressors, mechanical ventilation as needed. Anakinra 100 mg SC daily as add-on if refractory (off-label for tocilizumab-refractory CRS). Pan-culture + abx. ECMO consult if cardiogenic shock.'; }
+    return { value: `Grade ${grade}`, label, description: `**Fever:** YES (\u226538.0\u00b0C)\n**Hypotension:** ${['None','Fluid-responsive','Single low-dose pressor','Multiple/high-dose pressors'][bp]}\n**Hypoxia:** ${['None','Low-flow O2','High-flow/NRB','Positive pressure'][o2]}\n\n**ASTCT GRADE: ${grade}**\n\n**MANAGEMENT:** ${mgmt}\n\n**Always:** Rule out concurrent sepsis (CRS and infection look identical \u2014 treat both).`, colorVar };
+  },
+};
+
+const ICE_ICANS_CALCULATOR: CalculatorDefinition = {
+  id: 'ice-icans',
+  title: 'ICE Score \u2014 ICANS Grading',
+  subtitle: 'Immune Effector Cell Encephalopathy',
+  description: 'ICE (Immune Effector Cell-associated Encephalopathy) score plus ASTCT 2019 ICANS grade. The 10-point ICE score replaced CARTOX-10 in adults. Drives steroid escalation (dexamethasone vs high-dose methylpred) and seizure prophylaxis (levetiracetam). Tocilizumab does NOT cross the BBB and does NOT treat ICANS.',
+  fields: [
+    { name: 'orient-year', label: 'Orientation: Year (1 pt)', type: 'toggle', points: 1 },
+    { name: 'orient-month', label: 'Orientation: Month (1 pt)', type: 'toggle', points: 1 },
+    { name: 'orient-city', label: 'Orientation: City (1 pt)', type: 'toggle', points: 1 },
+    { name: 'orient-hospital', label: 'Orientation: Hospital (1 pt)', type: 'toggle', points: 1 },
+    { name: 'name-objects', label: 'Naming: 3 objects (e.g., point to clock, pen, button) \u2014 1 pt each (3 pts)', type: 'select', points: 0, selectOptions: [
+      { label: '0 of 3', points: 0 }, { label: '1 of 3', points: 1 }, { label: '2 of 3', points: 2 }, { label: '3 of 3', points: 3 },
+    ]},
+    { name: 'follow-commands', label: 'Following commands (e.g., "show me 2 fingers", "close eyes & stick out tongue") (1 pt)', type: 'toggle', points: 1 },
+    { name: 'writing', label: 'Writing: ability to write a standard sentence (1 pt)', type: 'toggle', points: 1 },
+    { name: 'attention', label: 'Attention: count backward from 100 by 10 (1 pt)', type: 'toggle', points: 1 },
+    { name: 'depressed-loc', label: 'Depressed level of consciousness (awakens to voice / tactile / unarousable)', type: 'select', points: 0, description: 'Adds to grading regardless of ICE score', selectOptions: [
+      { label: 'Awake spontaneously', points: 0 },
+      { label: 'Awakens to voice', points: 1 },
+      { label: 'Awakens to tactile only', points: 2 },
+      { label: 'Unarousable', points: 3 },
+    ]},
+    { name: 'seizure', label: 'Seizure (clinical or EEG)', type: 'toggle', points: 0 },
+    { name: 'motor-weakness', label: 'Motor weakness (focal or generalized)', type: 'toggle', points: 0 },
+    { name: 'cerebral-edema', label: 'Cerebral edema on imaging or papilledema', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'ICE 10 = no ICANS. ICE 7-9 = Grade 1. ICE 3-6 = Grade 2. ICE 0-2 OR awakens-to-voice OR non-life-threatening seizure = Grade 3. ICE 0 unarousable / refractory seizure / motor weakness / cerebral edema = Grade 4. Treatment: Grade 1 = supportive + EEG + MRI brain. Grade 2+ = dexamethasone 10 mg IV q6h. Grade 3+ = ICU + dexamethasone (or methylpred). Grade 4 = ICU + methylprednisolone 1g IV daily \u00d7 3 + neurosurgery if edema. Levetiracetam 750 mg IV BID for prophylaxis once Grade 2+. Tocilizumab does NOT cross BBB \u2014 use steroids for ICANS (use tocilizumab only if concurrent CRS).',
+  citations: [
+    'Lee DW, et al. ASTCT Consensus Grading for Cytokine Release Syndrome and Neurologic Toxicity. Biol Blood Marrow Transplant. 2019;25(4):625-638.',
+    'Neelapu SS, et al. Chimeric antigen receptor T-cell therapy \u2014 assessment and management of toxicities. Nat Rev Clin Oncol. 2018;15(1):47-62.',
+    'Santomasso BD, et al. ASCO Guideline: Management of Immune-Related Adverse Events in CAR-T. J Clin Oncol. 2021;39(35):3978-3992.',
+    'NCCN Guidelines: Management of Immunotherapy-Related Toxicities. v1.2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const ice =
+      Number(values['orient-year'] || 0) +
+      Number(values['orient-month'] || 0) +
+      Number(values['orient-city'] || 0) +
+      Number(values['orient-hospital'] || 0) +
+      Number(values['name-objects'] || 0) +
+      Number(values['follow-commands'] || 0) +
+      Number(values['writing'] || 0) +
+      Number(values['attention'] || 0);
+    const loc = Number(values['depressed-loc'] || 0);
+    const sz = !!values['seizure'];
+    const motor = !!values['motor-weakness'];
+    const edema = !!values['cerebral-edema'];
+    let grade: number;
+    if (edema || (loc === 3) || motor) grade = 4;
+    else if (ice <= 2 || loc === 2 || sz) grade = 3;
+    else if (ice <= 6 || loc === 1) grade = 2;
+    else if (ice <= 9) grade = 1;
+    else grade = 0;
+    let label: string; let colorVar: string; let mgmt: string;
+    if (grade === 0) { label = 'No ICANS'; colorVar = '--color-primary'; mgmt = 'No neurotoxicity. Continue routine post-CAR-T monitoring (q8h ICE during high-risk window, days 0-30).'; }
+    else if (grade === 1) { label = 'ICANS Grade 1'; colorVar = '--color-warning'; mgmt = 'Supportive: aspiration precautions, IV fluids. Baseline EEG + MRI brain. Hold driving/sharp objects. Monitor q4h ICE. Consider dexamethasone if no improvement in 24h.'; }
+    else if (grade === 2) { label = 'ICANS Grade 2'; colorVar = '--color-warning'; mgmt = '**Dexamethasone 10 mg IV q6h** (or methylprednisolone 1 mg/kg IV q12h). EEG + MRI brain. Levetiracetam 750 mg IV BID for seizure prophylaxis. Step-down or ICU monitoring. NPO. Daily ICE q4h. Treat concurrent CRS with tocilizumab (does not treat ICANS itself).'; }
+    else if (grade === 3) { label = 'ICANS Grade 3'; colorVar = '--color-danger'; mgmt = '**ICU admission.** Dexamethasone 10 mg IV q6h (or methylpred 1 mg/kg IV q12h). MRI brain + EEG. Levetiracetam 750 mg IV BID. Anti-seizure escalation if seizure: lorazepam \u2192 levetiracetam load \u2192 phenobarbital. Neurology consult. NPO. Airway monitoring.'; }
+    else { label = 'ICANS Grade 4 \u2014 Life-Threatening'; colorVar = '--color-danger'; mgmt = '**ICU.** **Methylprednisolone 1000 mg IV daily \u00d7 3 days**, then 250 mg q12h \u00d7 2 days, then taper. Intubate for airway protection if obtunded. STAT MRI brain + neurosurgery consult if cerebral edema (consider hyperventilation, hypertonic saline, mannitol). Continuous EEG. Status epilepticus protocol if refractory seizures. Anakinra 100 mg SC q6h as add-on for refractory ICANS.'; }
+    return { value: `ICE ${ice}/10 \u2192 Grade ${grade}`, label, description: `**ICE Score:** ${ice}/10\n**LOC:** ${['Awake','To voice','To tactile','Unarousable'][loc]}\n**Seizure:** ${sz ? 'YES' : 'No'} | **Motor weakness:** ${motor ? 'YES' : 'No'} | **Cerebral edema:** ${edema ? 'YES' : 'No'}\n\n**ASTCT GRADE: ${grade}**\n\n**MANAGEMENT:** ${mgmt}\n\n**Pearl:** Tocilizumab does NOT cross BBB \u2014 treat ICANS with steroids. Use tocilizumab only for concurrent CRS.`, colorVar };
+  },
+};
+
+const MSCC_DECISION_CALCULATOR: CalculatorDefinition = {
+  id: 'mscc-decision',
+  title: 'MSCC Decision Aid',
+  subtitle: 'Steroid Dose + Surgery vs RT (Patchell)',
+  description: 'Decision aid for malignant spinal cord compression: triggers immediate dexamethasone dose, MRI urgency, and surgery-vs-radiation pathway based on Patchell criteria + tumor radiosensitivity.',
+  fields: [
+    { name: 'neuro-deficit', label: 'Neurologic deficit (motor weakness, sensory level, bowel/bladder)', type: 'select', points: 0, selectOptions: [
+      { label: 'None (back pain only)', points: 0 },
+      { label: 'Mild (minimal weakness, ambulating)', points: 1 },
+      { label: 'Moderate (weakness, but ambulatory with assistance)', points: 2 },
+      { label: 'Severe (non-ambulatory, paraparesis/plegia)', points: 3 },
+    ]},
+    { name: 'time-to-paraplegia', label: 'Hours since loss of ambulation (if any)', type: 'select', points: 0, selectOptions: [
+      { label: 'Still ambulatory', points: 0 },
+      { label: '<24 hours', points: 1 },
+      { label: '24-48 hours', points: 2 },
+      { label: '>48 hours', points: 3 },
+    ]},
+    { name: 'levels', label: 'Number of compressed levels on imaging', type: 'select', points: 0, selectOptions: [
+      { label: 'Unknown / not yet imaged', points: 0 },
+      { label: 'Single level', points: 1 },
+      { label: 'Multi-level', points: 2 },
+    ]},
+    { name: 'radiosensitive', label: 'Radiosensitive tumor (lymphoma, myeloma, SCLC, germ cell, seminoma)', type: 'toggle', points: 0 },
+    { name: 'life-expectancy', label: 'Life expectancy \u22653 months (Patchell criterion)', type: 'toggle', points: 0 },
+    { name: 'spine-stable', label: 'Spine mechanically stable (no vertebral collapse, no kyphotic deformity)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Steroid dosing: Standard = dexamethasone 10 mg IV bolus then 4 mg q6h. High-dose (96 mg loading then 24 mg q6h \u00d7 3 days) for severe deficit \u2014 efficacy similar but more side effects. Patchell 2005 surgical criteria: ambulatory or recently non-ambulatory (<48h), \u22653 month life expectancy, single-level compression, stable spine, non-radiosensitive tumor \u2192 surgery + RT improves ambulation 84% vs 57% RT alone. RT alone: multi-level, radiosensitive, life expectancy <3 months, surgical contraindication. Image whole spine (multi-level disease in 30%).',
+  citations: [
+    'Patchell RA, et al. Direct decompressive surgical resection in the treatment of spinal cord compression. Lancet. 2005;366(9486):643-648.',
+    'Loblaw DA, et al. 2011 Updated Systematic Review and Practice Guideline for MSCC. Int J Radiat Oncol Biol Phys. 2012;84(2):312-317.',
+    'Cole JS, Patchell RA. Metastatic Epidural Spinal Cord Compression. Lancet Neurol. 2008;7(5):459-466.',
+    'NCCN Clinical Practice Guidelines: Central Nervous System Cancers. v2.2024.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const def = Number(values['neuro-deficit'] || 0);
+    const t = Number(values['time-to-paraplegia'] || 0);
+    const lv = Number(values['levels'] || 0);
+    const radio = !!values['radiosensitive'];
+    const life = !!values['life-expectancy'];
+    const stable = !!values['spine-stable'];
+    let steroid: string; let imaging: string; let pathway: string; let colorVar: string; let urgency: string;
+    if (def >= 3) { steroid = '**Dexamethasone 96 mg IV loading dose**, then 24 mg IV q6h \u00d7 3 days then taper (high-dose protocol for severe deficit \u2014 use only with severe rapidly progressive paraplegia).'; }
+    else { steroid = '**Dexamethasone 10 mg IV bolus immediately**, then 4 mg IV q6h. Do NOT delay for imaging.'; }
+    if (def >= 1 || t >= 1) { imaging = '**Emergent MRI WHOLE spine with gadolinium within 6 hours.** If MRI unavailable, CT myelogram. CT alone insufficient.'; urgency = 'EMERGENT'; colorVar = '--color-danger'; }
+    else { imaging = '**Urgent MRI whole spine within 24 hours.** Cancer + new back pain warrants imaging even without neuro signs (pain precedes deficit by weeks).'; urgency = 'URGENT'; colorVar = '--color-warning'; }
+    const surgicalCandidate = life && stable && (lv === 1) && (t <= 2) && !radio && def < 3;
+    if (surgicalCandidate) { pathway = '**SURGERY + RT** (Patchell standard): single-level, stable spine, ambulatory or recently non-ambulatory (<48h), \u22653 month life expectancy. Surgery + RT improves ambulation preservation (84% vs 57% RT alone). Neurosurgery consult immediately.'; }
+    else if (radio) { pathway = '**RADIATION \u00b1 CHEMOTHERAPY**: radiosensitive tumor (lymphoma, myeloma, SCLC, germ cell). Chemo first if very chemo-sensitive. Radiation oncology + medical oncology consults.'; }
+    else if (!life || def === 3) { pathway = '**RADIATION ALONE**: life expectancy <3 months, severe established deficit (>48h paraplegia), or surgical contraindication. Goals of care discussion essential. Radiation oncology consult.'; }
+    else { pathway = '**MULTIDISCIPLINARY**: neurosurgery + radiation oncology + medical oncology to choose optimal approach (multi-level, complex anatomy, or borderline criteria).'; }
+    return { value: urgency, label: `MSCC \u2014 ${urgency} workup`, description: `**STEROID:** ${steroid}\n\n**IMAGING:** ${imaging}\n\n**TREATMENT PATHWAY:** ${pathway}\n\n**SUPPORTIVE:** Foley if retention. Bowel regimen. DVT prophylaxis (mechanical pre-op, chemical otherwise). Logroll precautions until spine cleared. Pain control + gabapentin for neuropathic component.`, colorVar };
+  },
+};
 
 const MASCC_SCORE_CALCULATOR: CalculatorDefinition = {
   id: 'mascc-score',
@@ -34517,6 +34782,11 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'mascc-score': MASCC_SCORE_CALCULATOR,
   'corrected-calcium': CORRECTED_CALCIUM_CALCULATOR,
   'ecog-performance': ECOG_PERFORMANCE_CALCULATOR,
+  'tls-cairo-bishop': TLS_CAIRO_BISHOP_CALCULATOR,
+  'hyperca-severity': HYPERCA_SEVERITY_CALCULATOR,
+  'crs-grade': CRS_GRADE_CALCULATOR,
+  'ice-icans': ICE_ICANS_CALCULATOR,
+  'mscc-decision': MSCC_DECISION_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

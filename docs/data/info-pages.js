@@ -18574,8 +18574,20 @@ const CHEMO_REGIMENS_PAGE = {
             body: '**Imatinib / Dasatinib / Nilotinib (TKIs):** CML, GIST\n• ED toxicities: pleural effusion (dasatinib), QT prolongation (nilotinib), cytopenias, edema\n\n**Trastuzumab / Pertuzumab:** HER2+ breast, gastric\n• Cardiomyopathy (reversible — get echo, hold drug, consult cards)\n• Infusion reaction\n\n**Bevacizumab:** see colorectal section\n\n**EGFR inhibitors** (osimertinib, erlotinib, gefitinib): EGFR+ NSCLC\n• Pneumonitis, diarrhea, rash, cardiomyopathy (osimertinib)\n\n**ALK inhibitors** (crizotinib, alectinib, brigatinib): ALK+ NSCLC\n• QT prolongation, pneumonitis, transaminitis, vision changes\n\n**Tamoxifen / Letrozole / Anastrozole:** breast hormone therapy\n• ED toxicities: hot flashes, VTE (tamoxifen — VTE workup if any new symptom), endometrial cancer (tamoxifen)',
         },
         {
-            heading: 'CAR-T CELL THERAPY',
-            body: '**Tisagenlecleucel, Axicabtagene, Brexucabtagene** — refractory ALL, lymphoma, myeloma\n\n**Cytokine Release Syndrome (CRS):**\n• Fever, hypotension, hypoxia, AMS\n• Onset: hours to days post-infusion\n• Tx: tocilizumab 8 mg/kg IV (max 800 mg) ± steroids; ICU for grade 3-4\n\n**ICANS (Immune Effector Cell-Associated Neurotoxicity):**\n• Confusion, aphasia, seizure, cerebral edema\n• Dexamethasone 10 mg IV q6h, escalate per grade\n• Tocilizumab does NOT cross BBB — steroids preferred for ICANS\n• Anti-seizure prophylaxis (levetiracetam) commonly used',
+            heading: 'CAR-T CELL THERAPY (FDA-Approved 2017-2024)',
+            body: '| Agent | Target | Indication | First-dose CRS Rate | ICANS Rate |\n|-------|--------|-----------|---------------------|------------|\n| **Tisagenlecleucel (Kymriah)** | CD19 | r/r B-ALL <26y, DLBCL, FL | 77% | 39% |\n| **Axicabtagene ciloleucel (Yescarta)** | CD19 | r/r DLBCL, FL, HGBL | 92% | 67% |\n| **Brexucabtagene autoleucel (Tecartus)** | CD19 | r/r MCL, B-ALL adult | 91% | 81% |\n| **Lisocabtagene maraleucel (Breyanzi)** | CD19 | r/r DLBCL, CLL/SLL | 42% (lower) | 30% |\n| **Idecabtagene vicleucel (Abecma)** | BCMA | r/r MM (\u22654 prior lines) | 85% | 18% |\n| **Ciltacabtagene autoleucel (Carvykti)** | BCMA | r/r MM | 95% | 17%, but prolonged |\n\n**Pearls for the ED:**\n\u2022 [CRS Grading Tool](#/calculator/crs-grade) and [ICE/ICANS Tool](#/calculator/ice-icans) at bedside.\n\u2022 [Full CRS / ICANS Protocol](#/info/crs-icans-protocol) for treatment ladder.\n\u2022 CAR-T patients are often profoundly cytopenic for weeks-months post-infusion \u2014 fever \u2192 always pan-culture + broad-spectrum antibiotics + heme/onc consult.\n\u2022 BCMA-targeted (ide-cel, cilta-cel) has higher rate of delayed neurotoxicity and parkinsonism (months out).\n\u2022 Hypogammaglobulinemia is universal \u2014 IVIG replacement common.',
+        },
+        {
+            heading: 'BISPECIFIC T-CELL ENGAGERS (BiTEs)',
+            body: '| Agent | Target | Indication | Notable Toxicities |\n|-------|--------|-----------|---------------------|\n| **Blinatumomab (Blincyto)** | CD19 \u00d7 CD3 | B-ALL | CRS (15%), neurotoxicity (50%), continuous infusion device |\n| **Mosunetuzumab (Lunsumio)** | CD20 \u00d7 CD3 | r/r FL | CRS (44%), step-up dosing |\n| **Glofitamab (Columvi)** | CD20 \u00d7 CD3 | r/r DLBCL | CRS (63%, mostly G1-2), obinutuzumab pre-treatment |\n| **Epcoritamab (Epkinly)** | CD20 \u00d7 CD3 | r/r DLBCL | CRS (50%), SubQ administration |\n| **Teclistamab (Tecvayli)** | BCMA \u00d7 CD3 | r/r MM | CRS (72%), infections (76%), hypogammaglobulinemia |\n| **Talquetamab (Talvey)** | GPRC5D \u00d7 CD3 | r/r MM | Dysgeusia (72%), nail/skin toxicity, dry mouth |\n| **Elranatamab (Elrexfio)** | BCMA \u00d7 CD3 | r/r MM | CRS (58%), infections |\n\n**ED notes:** CRS is most common during step-up dosing (days 1-3). Always confirm where in dosing schedule. Same CRS/ICANS management as CAR-T.',
+        },
+        {
+            heading: 'ANTIBODY-DRUG CONJUGATES (ADCs)',
+            body: '| Agent | Target / Payload | Indication | Watch For |\n|-------|------------------|-----------|-----------|\n| **Trastuzumab deruxtecan (Enhertu, T-DXd)** | HER2 / topo-I inhibitor | HER2+ breast, HER2-low, gastric, NSCLC | **Pneumonitis** (10-15%, can be fatal \u2014 hold drug, IV steroids), nausea, neutropenia |\n| **Sacituzumab govitecan (Trodelvy)** | Trop-2 / SN-38 | TNBC, urothelial | **Severe diarrhea, neutropenia**, UGT1A1*28 homozygotes at higher risk |\n| **Brentuximab vedotin (Adcetris)** | CD30 / MMAE | Hodgkin, ALCL | **Peripheral neuropathy, neutropenia, PML** (rare), pancreatitis |\n| **Polatuzumab vedotin (Polivy)** | CD79b / MMAE | r/r DLBCL | Cytopenias, neuropathy, infections |\n| **Inotuzumab ozogamicin (Besponsa)** | CD22 / calicheamicin | r/r B-ALL | **Veno-occlusive disease (VOD/SOS)** \u2014 hyperbili + RUQ pain + weight gain post-SCT |\n| **Gemtuzumab ozogamicin (Mylotarg)** | CD33 / calicheamicin | CD33+ AML | **VOD**, hemorrhagic events, infusion reactions |\n| **Mirvetuximab soravtansine (Elahere)** | FR\u03b1 / DM4 | FR\u03b1+ ovarian | **Keratopathy** (>50% \u2014 ophtho monitoring), neuropathy |\n| **Enfortumab vedotin (Padcev)** | Nectin-4 / MMAE | Urothelial | **Severe skin reactions (SJS/TEN)**, hyperglycemia, neuropathy |\n\n**Universal ADC pearl:** Despite being "targeted," the cytotoxic payload still produces classic chemo toxicities (neutropenia, neuropathy, mucositis) plus organ-specific signals.',
+        },
+        {
+            heading: 'CAR-T \u2014 Older Section Retained for Reference',
+            body: '**CRS quick-reference:**\n\u2022 Fever, hypotension, hypoxia, AMS\n\u2022 Onset: hours to days post-infusion (peak day 1-7)\n\u2022 Tx: [tocilizumab](#/drug/tocilizumab/crs) 8 mg/kg IV (max 800 mg) \u00b1 steroids; ICU for grade 3-4\n\n**ICANS quick-reference:**\n\u2022 Confusion, aphasia, seizure, cerebral edema\n\u2022 Dexamethasone 10 mg IV q6h, escalate per grade\n\u2022 **Tocilizumab does NOT cross BBB** \u2014 steroids preferred for ICANS\n\u2022 Anti-seizure prophylaxis ([levetiracetam](#/drug/levetiracetam/seizure-prophylaxis)) commonly used\n\nSee dedicated [CRS / ICANS Protocol](#/info/crs-icans-protocol) page for full management ladder.',
         },
         {
             heading: 'EXTRAVASATION EMERGENCIES',
@@ -18584,6 +18596,14 @@ const CHEMO_REGIMENS_PAGE = {
         {
             heading: 'NEUTROPENIA NADIR — QUICK REFERENCE',
             body: '| Agent | Nadir | Recovery |\n|-------|-------|----------|\n| Most cytotoxics | Day 7-14 | Day 21-28 |\n| Carboplatin | Day 14-21 | Day 28-35 |\n| Cisplatin | Day 14-21 | Day 28-35 |\n| Mitomycin | Day 28-42 | Day 42-56 |\n| Nitrosoureas (BCNU) | Day 28-42 | Day 42-56 |\n| Gemcitabine | Day 7 | Day 14 |\n| Capecitabine | Continuous | N/A |\n\n**Always confirm nadir date from current cycle when assessing fever risk.**',
+        },
+        {
+            heading: 'TARGETED INHIBITORS \u2014 ED PEARLS',
+            body: '**BTK Inhibitors** (ibrutinib, acalabrutinib, zanubrutinib, pirtobrutinib): CLL, MCL, Waldenstr\u00f6m, MZL\n\u2022 **Atrial fibrillation** (3-10% with ibrutinib; less with newer agents) \u2014 anticoagulation tricky given concurrent bleeding risk\n\u2022 **Bleeding** (HOLD before any procedure 3-7 days); platelet dysfunction even at normal counts\n\u2022 **Hypertension** (sustained, often new-onset)\n\u2022 **Infections** including invasive fungal (Aspergillus, PJP) \u2014 maintain prophylaxis\n\u2022 Cytopenias\n\n**CDK4/6 Inhibitors** (palbociclib, ribociclib, abemaciclib): HR+/HER2- breast cancer\n\u2022 **Profound neutropenia** (especially palbociclib)\n\u2022 **QT prolongation** (ribociclib \u2014 baseline ECG, repeat day 14, monitor electrolytes)\n\u2022 **Diarrhea** (abemaciclib \u2014 often severe, dose-limiting)\n\u2022 **Hepatotoxicity** (LFT monitoring required)\n\u2022 **Pneumonitis** (<1% but reported)\n\u2022 **VTE** increased \u2014 low threshold to image\n\n**Venetoclax** (BCL-2 inhibitor): CLL, AML, MDS\n\u2022 **TLS** during ramp-up phase (especially CLL with bulky disease) \u2014 mandatory ramp-up schedule + IVF + allopurinol/rasburicase prophylaxis\n\u2022 Profound neutropenia\n\u2022 Drug interactions with CYP3A inhibitors (azoles \u2192 dose adjust)\n\n**FLT3 Inhibitors** (midostaurin, gilteritinib, quizartinib): FLT3+ AML\n\u2022 Differentiation syndrome (similar to ATRA syndrome) \u2014 dexamethasone\n\u2022 QT prolongation (quizartinib)\n\n**IDH1/2 Inhibitors** (ivosidenib, enasidenib, olutasidenib): IDH-mutated AML\n\u2022 **Differentiation syndrome** (10-20%) \u2014 fever, dyspnea, infiltrates, edema, weight gain \u2192 stop drug, dexamethasone 10 mg IV q12h, supportive care\n\u2022 QT prolongation (ivosidenib)\n\n**JAK Inhibitors** (ruxolitinib, fedratinib, pacritinib): myelofibrosis, PV\n\u2022 Cytopenias\n\u2022 Reactivation of zoster, hepatitis B, TB \u2014 screen and prophylaxis\n\u2022 **Withdrawal syndrome** if abruptly stopped \u2014 cytokine rebound (taper if stopping for ED admit)',
+        },
+        {
+            heading: 'PER-REGIMEN MONITORING LAB TABLE',
+            body: '| Regimen | Critical Monitoring | Most Common Cause Of ED Visit |\n|---------|-------------------|------------------------------|\n| Anthracycline-containing (AC, R-CHOP, ABVD, 7+3) | Echo at baseline + cumulative dose limits, CBC d7-14 | Febrile neutropenia, cardiomyopathy |\n| Trastuzumab \u00b1 Pertuzumab | Echo q3 mo | Cardiomyopathy (often reversible), infusion rxn |\n| Bleomycin (ABVD, BEP) | PFTs q3 mo, lifelong avoid high FiO2 | Pneumonitis, pulmonary fibrosis |\n| Cisplatin | BMP + Mg before each cycle, audiometry | AKI, ototoxicity, severe nausea |\n| Methotrexate (high-dose) | MTX level q24h until <0.1, urine pH >7, leucovorin rescue | Crystalluria, AKI, mucositis |\n| Ifosfamide | Mental status checks, MESNA prophylaxis | Encephalopathy (methylene blue rescue), hemorrhagic cystitis |\n| 5-FU / Capecitabine | DPYD genotyping pre-cycle 1 | Coronary vasospasm, diarrhea, hand-foot |\n| Bevacizumab | BP, urine protein | HTN, proteinuria, GI perf, bleeding, RPLS |\n| Immune Checkpoint Inhibitors | LFTs, TSH, glucose, cortisol q cycle | Any organ irAE \u2014 see [ICI Algorithm](#/info/ici-toxicity-algorithm) |\n| CAR-T / Bispecifics | Daily ICE + CRS grade x 14d | CRS, ICANS, prolonged cytopenia, infection |\n| BTK inhibitors | ECG, BP, CBC | A-fib, bleeding, infection |\n| CDK4/6 inhibitors | CBC d14, ECG (ribociclib) | Neutropenia, diarrhea (abemaciclib) |\n| Venetoclax (ramp-up) | BMP + urate q6-12h during ramp-up, IVF | TLS |\n| ATRA / Arsenic (APL) | ECG daily, K + Mg, daily exam | Differentiation syndrome, QT prolongation |',
         },
         {
             heading: 'IMMUNE-RELATED ADVERSE EVENTS — TIMING',
@@ -18599,10 +18619,199 @@ const CHEMO_REGIMENS_PAGE = {
         { num: 6, text: 'Schwartz CL, et al. A Risk-Adapted, Response-Based Approach Using ABVE-PC for Children and Adolescents With Intermediate- and High-Risk Hodgkin Lymphoma. J Clin Oncol. 2009;27(18):2980-2986.' },
     ],
 };
+// -------------------------------------------------------------------
+// CRS / ICANS Management Protocol (CAR-T, Bispecifics)
+// -------------------------------------------------------------------
+const CRS_ICANS_PROTOCOL_PAGE = {
+    id: 'crs-icans-protocol',
+    title: 'CRS & ICANS Protocol',
+    subtitle: 'CAR-T / Bispecific Toxicity Management',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Background — When To Suspect',
+            body: '**Cytokine Release Syndrome (CRS)** and **Immune Effector Cell-Associated Neurotoxicity (ICANS)** are the dominant acute toxicities of CAR-T cell therapy and increasingly seen with bispecific T-cell engagers (blinatumomab, mosunetuzumab, teclistamab, talquetamab, glofitamab, epcoritamab).\n\n**Time course:**\n• CRS typically begins within hours to 14 days after CAR-T infusion (peak day 1-7).\n• ICANS typically follows CRS (median onset day 5, range 1-21).\n• Bispecifics: CRS is most common with the first dose / step-up dosing.\n\n**Key principle:** CRS and concurrent infection are clinically indistinguishable. Always pan-culture and start broad-spectrum antibiotics empirically with any febrile presentation in this population.',
+        },
+        {
+            heading: 'CRS — ASTCT 2019 Grading',
+            body: '**All grades require fever \u226538.0\u00b0C** (or recent fever before antipyretics).\n\n| Grade | Hypotension | Hypoxia |\n|-------|-------------|---------|\n| 1 | None | None |\n| 2 | Responsive to fluids | Low-flow O2 (\u22646 L/min) |\n| 3 | Single low-dose pressor | High-flow / NRB / Venturi |\n| 4 | Multiple OR high-dose pressors | Positive pressure (CPAP/BiPAP/intubation) |\n\nGrade = highest of any single column. Use the [CRS Grading Calculator](#/calculator/crs-grade) to walk through systematically.',
+        },
+        {
+            heading: 'CRS — Treatment Ladder',
+            body: '**Grade 1:** Antipyretics ([acetaminophen](#/drug/acetaminophen/fever)), IV fluids PRN. Pan-culture (blood, urine, CXR), empiric broad-spectrum antibiotics ([cefepime](#/drug/cefepime/febrile-neutropenia) 2g IV q8h \u00b1 vancomycin if catheter/MRSA risk). Telemetry. Tocilizumab if persistent >3 days.\n\n**Grade 2:** Add **[Tocilizumab](#/drug/tocilizumab/crs)** 8 mg/kg IV (max 800 mg), may repeat q8h up to 3 doses in 24h. IVF for hypotension. Step-down or ICU. Add dexamethasone 10 mg IV if no response in 24h.\n\n**Grade 3:** **ICU.** Tocilizumab 8 mg/kg IV + **[Dexamethasone](#/drug/dexamethasone/crs)** 10 mg IV q6h (or methylprednisolone 1 mg/kg IV q12h). Vasopressor for hypotension, high-flow O2/NRB. Echo + troponin + BNP. Cardiology consult.\n\n**Grade 4 (life-threatening):** **ICU.** Tocilizumab + **Methylprednisolone 1000 mg IV daily** \u00d7 3 days then taper. Multiple pressors, mechanical ventilation as needed. **Anakinra** 100 mg SC daily as add-on for tocilizumab-refractory CRS (off-label). ECMO consult if cardiogenic shock.',
+        },
+        {
+            heading: 'ICANS — ICE Score (10 points)',
+            body: '| Domain | Points |\n|--------|--------|\n| Orientation: year, month, city, hospital | 4 (1 each) |\n| Naming: 3 objects | 3 |\n| Following commands | 1 |\n| Writing standard sentence | 1 |\n| Attention: count backward from 100 by 10 | 1 |\n\n**Use the [ICE/ICANS Calculator](#/calculator/ice-icans) at bedside q4-8h during high-risk window (days 0-30 post-CAR-T).**\n\n**ASTCT ICANS Grade:**\n• Grade 1: ICE 7-9, awakens spontaneously\n• Grade 2: ICE 3-6 OR awakens to voice\n• Grade 3: ICE 0-2 OR awakens to tactile only OR clinical/EEG seizure (non-life-threatening)\n• Grade 4: Unarousable, refractory seizure, motor weakness, OR cerebral edema',
+        },
+        {
+            heading: 'ICANS — Treatment Ladder',
+            body: '**Critical pearl:** Tocilizumab does NOT cross the blood-brain barrier and does NOT treat ICANS. Use steroids. Use tocilizumab only for concurrent CRS.\n\n**Grade 1:** Supportive: aspiration precautions, IV fluids. Baseline EEG + MRI brain. Hold driving / sharp objects. Monitor q4h ICE. Consider dexamethasone if no improvement in 24h.\n\n**Grade 2:** **Dexamethasone 10 mg IV q6h** (or methylprednisolone 1 mg/kg IV q12h). EEG + MRI brain. **[Levetiracetam](#/drug/levetiracetam/seizure-prophylaxis)** 750 mg IV BID for seizure prophylaxis. Step-down or ICU. NPO. Daily ICE q4h.\n\n**Grade 3:** **ICU.** Dexamethasone 10 mg IV q6h. MRI brain + EEG. Levetiracetam prophylaxis. Anti-seizure escalation if seizure: lorazepam \u2192 levetiracetam load \u2192 phenobarbital. Neurology consult. Airway monitoring.\n\n**Grade 4 (life-threatening):** **ICU.** **Methylprednisolone 1000 mg IV daily \u00d7 3 days**, then 250 mg q12h \u00d7 2 days, then taper. Intubate for airway protection. STAT MRI brain + neurosurgery for cerebral edema (hyperventilation, hypertonic saline 3%, mannitol). Continuous EEG. Status epilepticus protocol. **Anakinra** 100 mg SC q6h as add-on for refractory ICANS.',
+        },
+        {
+            heading: 'Pre-Emptive & Adjunctive Measures',
+            body: '\u2022 **Always:** pan-culture + empiric broad-spectrum antibiotics with any febrile presentation (CRS and sepsis are indistinguishable).\n\u2022 Tumor lysis prophylaxis if high disease burden (allopurinol, IV hydration; rasburicase if urate >8). See [TLS Bundle](#/info/tls-management-bundle).\n\u2022 Echo + troponin + BNP for any hypotension or new dyspnea \u2014 myocarditis and tachyarrhythmia are increasingly recognized.\n\u2022 Coagulopathy: monitor D-dimer, fibrinogen \u2014 cytokine-driven DIC reported.\n\u2022 HLH/MAS overlap: ferritin >10,000, hypertriglyceridemia, splenomegaly \u2014 escalate to anakinra + high-dose steroids.\n\u2022 Goals of care: many patients are post-multiple-line failure with limited reserve \u2014 confirm code status and surrogate decision-maker on arrival.',
+        },
+        {
+            heading: 'When To Loop In',
+            body: '\u2022 **Treating oncology team** \u2014 always, on arrival. They have the protocol-specific roadmap.\n\u2022 **ICU** \u2014 Grade 3+ CRS or ICANS.\n\u2022 **Cardiology** \u2014 hypotension/dyspnea unresponsive to standard CRS management; suspected myocarditis.\n\u2022 **Neurology** \u2014 Grade 2+ ICANS, seizure, focal deficit.\n\u2022 **Neurosurgery** \u2014 cerebral edema on imaging.\n\u2022 **Infectious disease** \u2014 prolonged neutropenia + fever, atypical or fungal infection suspicion.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lee DW, et al. ASTCT Consensus Grading for Cytokine Release Syndrome and Neurologic Toxicity. Biol Blood Marrow Transplant. 2019;25(4):625-638.' },
+        { num: 2, text: 'Santomasso BD, et al. Management of Immune-Related Adverse Events in Patients Treated With CAR-T Therapy: ASCO Guideline. J Clin Oncol. 2021;39(35):3978-3992.' },
+        { num: 3, text: 'NCCN Clinical Practice Guidelines: Management of Immunotherapy-Related Toxicities. v1.2024.' },
+        { num: 4, text: 'Neelapu SS, et al. Chimeric antigen receptor T-cell therapy \u2014 assessment and management of toxicities. Nat Rev Clin Oncol. 2018;15(1):47-62.' },
+        { num: 5, text: 'Schuster SJ, et al. Tisagenlecleucel in Adult Relapsed or Refractory Diffuse Large B-Cell Lymphoma. N Engl J Med. 2019;380(1):45-56.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Immune Checkpoint Inhibitor (ICI) Toxicity Algorithm
+// -------------------------------------------------------------------
+const ICI_TOXICITY_ALGORITHM_PAGE = {
+    id: 'ici-toxicity-algorithm',
+    title: 'ICI irAE Algorithm',
+    subtitle: 'Immune Checkpoint Inhibitor Toxicity \u2014 Graded Steroid Ladder',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Drug Class & Onset',
+            body: '**Targets:** PD-1 (pembrolizumab, nivolumab, cemiplimab, dostarlimab), PD-L1 (atezolizumab, durvalumab, avelumab), CTLA-4 (ipilimumab, tremelimumab), LAG-3 (relatlimab).\n\n**Combinations** (ipi/nivo, durva/treme) carry **2-3\u00d7 the irAE rate** of monotherapy.\n\n**Onset of irAE post-dose:**\n| irAE | Typical Onset |\n|------|--------------|\n| Skin (rash, pruritus, vitiligo) | 2-3 weeks |\n| Colitis | 5-10 weeks |\n| Hepatitis | 8-12 weeks |\n| Pneumonitis | 9-12 weeks |\n| Endocrinopathy (thyroid, hypophysitis, adrenal) | 7-20 weeks |\n| Renal (interstitial nephritis) | 12-15 weeks |\n| Myocarditis | Variable; can be fulminant within first 2 cycles |\n\n**Critical:** irAEs can occur weeks to months after the last dose. Always ask about ICI exposure in the past 6-12 months.',
+        },
+        {
+            heading: 'Universal CTCAE Grading + Treatment Principles',
+            body: '| Grade | Severity | Treatment Principle |\n|-------|----------|---------------------|\n| 1 | Mild, asymptomatic / labs only | Continue ICI, supportive care |\n| 2 | Moderate, limits ADLs | Hold ICI, oral prednisone 0.5-1 mg/kg/day |\n| 3 | Severe, limits self-care | Hold ICI, IV methylprednisolone 1-2 mg/kg/day, infliximab/MMF if no response in 48-72h |\n| 4 | Life-threatening | Discontinue ICI permanently, ICU, IV steroids 2 mg/kg/day + biologic |\n\n**Steroid taper:** Once Grade \u22641, taper over **at least 4-6 weeks** (premature taper \u2192 rebound). Add **PJP prophylaxis ([sulfamethoxazole-trimethoprim](#/drug/sulfamethoxazole-trimethoprim/pjp-prophylaxis))** if steroids \u226520 mg prednisone-equivalent for >4 weeks.',
+        },
+        {
+            heading: 'Pneumonitis (most lethal pulmonary irAE)',
+            body: '**Presentation:** new dyspnea, dry cough, hypoxia. CT: ground-glass opacities, consolidation, NSIP/COP/AIP patterns.\n\n**Workup:** CT chest, infectious workup (sputum, blood cultures, viral PCR, PJP PCR), trend O2 sat.\n\n**Management:**\n\u2022 Grade 1 (radiographic only): hold ICI, repeat imaging 3-4 wk\n\u2022 Grade 2: prednisone 1 mg/kg/day, hold ICI\n\u2022 Grade 3-4: **methylprednisolone 1-2 mg/kg/day IV**, ICU if hypoxic; if no improvement in 48h \u2192 add infliximab 5 mg/kg IV OR mycophenolate 1g BID OR IVIG. **Pulmonology consult.**\n\u2022 Permanent ICI discontinuation for Grade 3-4',
+        },
+        {
+            heading: 'Colitis',
+            body: '**Presentation:** \u22653 stools/day above baseline, abdominal pain, blood/mucus.\n\n**Workup:** stool studies (C. diff PCR + cultures + ova/parasites), CBC, BMP, lactate, CRP. Sigmoidoscopy/colonoscopy if Grade 2+. Imaging if peritoneal signs (CT for perforation).\n\n**Management:**\n\u2022 Grade 1: loperamide, hydration, hold ICI if persistent\n\u2022 Grade 2: hold ICI, prednisone 1 mg/kg/day; if no improvement in 48-72h, **infliximab 5 mg/kg IV** or vedolizumab 300 mg IV\n\u2022 Grade 3-4: hospitalize, IV methylprednisolone 1-2 mg/kg/day, **infliximab 5 mg/kg IV** (avoid in perforation \u2014 use vedolizumab); GI + ID consult; permanent ICI discontinuation\n\u2022 Bowel perforation = surgical emergency \u2014 surgery consult, broad antibiotics',
+        },
+        {
+            heading: 'Hepatitis',
+            body: '**Presentation:** asymptomatic LFT elevation \u2192 fulminant failure.\n\n**Workup:** AST/ALT/Alk Phos/T.bili/INR; viral hepatitis panel (HAV, HBV, HCV, HEV, EBV, CMV); autoimmune workup (ANA, ASMA, AMA); RUQ US to exclude obstruction/mets.\n\n**Management:**\n\u2022 Grade 1 (AST/ALT \u2264 3\u00d7 ULN): monitor, continue ICI cautiously\n\u2022 Grade 2 (3-5\u00d7 ULN): hold ICI, prednisone 0.5-1 mg/kg/day\n\u2022 Grade 3 (5-20\u00d7 ULN): hold ICI, methylprednisolone 1-2 mg/kg/day IV, hepatology consult\n\u2022 Grade 4 (>20\u00d7 ULN OR INR >1.5): ICU, MMF 1g BID added (avoid infliximab \u2014 hepatotoxic), transplant evaluation if fulminant',
+        },
+        {
+            heading: 'Endocrinopathy',
+            body: '**Hypophysitis (often ipi):** headache, vision changes, fatigue, hypotension. MRI pituitary (enlarged stalk). Replace deficient hormones (cortisol FIRST then thyroid \u2014 reverse order can precipitate adrenal crisis). Steroids only for mass effect.\n\n**Adrenal insufficiency:** treat as adrenal crisis \u2014 [hydrocortisone](#/drug/hydrocortisone/adrenal-crisis) 100 mg IV bolus then 50 mg q6h. See [Adrenal Insufficiency consult](#/tree/adrenal-insufficiency).\n\n**Thyroiditis:** thyrotoxic phase (transient) \u2192 hypothyroid (often permanent). [Levothyroxine](#/drug/levothyroxine/hypothyroidism) replacement. Beta-blocker for symptomatic thyrotoxicosis.\n\n**Type 1 DM:** new DKA presentation. ICU, [insulin](#/drug/insulin-regular/dka) drip, fluids, K replacement. Permanent insulin therapy after recovery.',
+        },
+        {
+            heading: 'Myocarditis (rare but lethal)',
+            body: '**Mortality 25-50%.** Suspect with any new chest pain, dyspnea, arrhythmia, or troponin elevation in ICI-treated patient.\n\n**Workup:** troponin (high-sensitivity), BNP, ECG, echocardiogram, cardiac MRI, **endomyocardial biopsy** (definitive), ID workup to rule out viral myocarditis.\n\n**Management:**\n\u2022 ICU admission immediately\n\u2022 **Methylprednisolone 1000 mg IV daily \u00d7 3-5 days** (high-dose pulse), then taper\n\u2022 Add second-line if no response in 24h: **mycophenolate** 1g BID, **infliximab** 5 mg/kg (caution: increases mortality in CHF), **abatacept** 10 mg/kg, OR **JAK inhibitors (tofacitinib)**\n\u2022 Anti-arrhythmics, mechanical support (IABP, ECMO) as needed\n\u2022 Permanent ICI discontinuation\n\u2022 **Cardiology consult immediately**',
+        },
+        {
+            heading: 'Other Notable irAEs',
+            body: '\u2022 **Renal (interstitial nephritis):** rising Cr, sterile pyuria, eosinophiluria. Hold ICI, prednisone 1 mg/kg/day. Renal biopsy if Grade 3+.\n\u2022 **Neuro (Guillain-Barr\u00e9, myasthenia, encephalitis):** ICU, IVIG, plasmapheresis, steroids. Neurology consult. Permanent ICI hold.\n\u2022 **Skin (toxic epidermal necrolysis, SJS):** burn unit, supportive care, IVIG; rare but life-threatening.\n\u2022 **Hematologic:** ITP, AIHA, aplastic anemia, HLH \u2014 hematology consult, steroids \u00b1 IVIG/rituximab.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Brahmer JR, et al. Management of Immune-Related Adverse Events: ASCO Clinical Practice Guideline. J Clin Oncol. 2018;36(17):1714-1768.' },
+        { num: 2, text: 'Schneider BJ, et al. Management of Immune-Related Adverse Events in Patients Treated with ICI: ASCO Guideline Update. J Clin Oncol. 2021;39(36):4073-4126.' },
+        { num: 3, text: 'NCCN Clinical Practice Guidelines: Management of Immunotherapy-Related Toxicities. v1.2024.' },
+        { num: 4, text: 'Postow MA, Sidlow R, Hellmann MD. Immune-Related Adverse Events Associated with Immune Checkpoint Blockade. N Engl J Med. 2018;378(2):158-168.' },
+        { num: 5, text: 'Mahmood SS, et al. Myocarditis in Patients Treated with Immune Checkpoint Inhibitors. J Am Coll Cardiol. 2018;71(16):1755-1764.' },
+        { num: 6, text: 'Haanen JBAG, et al. Management of toxicities from immunotherapy: ESMO Clinical Practice Guideline. Ann Oncol. 2022;33(12):1217-1238.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Pericardial Effusion / Tamponade — POCUS Reference
+// -------------------------------------------------------------------
+const PERICARDIAL_EFFUSION_POCUS_PAGE = {
+    id: 'pericardial-effusion-pocus',
+    title: 'Malignant Pericardial Effusion / Tamponade',
+    subtitle: 'POCUS + Pericardiocentesis Reference',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Clinical Recognition',
+            body: '**Beck\'s Triad** (full classic <30%): hypotension, distended neck veins, muffled heart sounds.\n\n**Pulsus paradoxus:** SBP drop >10 mmHg with inspiration \u2014 sensitive (>80%) for tamponade physiology in non-COPD patients.\n\n**Other findings:** dyspnea, tachycardia, low-voltage QRS, **electrical alternans** (specific but uncommon), water-bottle heart on CXR (chronic).\n\n**Most common malignant causes:**\n\u2022 Lung cancer (#1, ~33%)\n\u2022 Breast cancer (~25%)\n\u2022 Lymphoma\n\u2022 Leukemia\n\u2022 Melanoma\n\u2022 Mesothelioma\n\nMalignant effusions are typically **chronic, accumulate slowly**, and can reach >1 L before tamponade physiology develops (vs trauma where 100-200 mL causes acute tamponade).',
+        },
+        {
+            heading: 'POCUS \u2014 Diagnostic Findings',
+            body: '**Effusion size (parasternal long axis, end-diastole):**\n\u2022 Small: <1 cm\n\u2022 Moderate: 1-2 cm\n\u2022 Large: >2 cm\n\u2022 Circumferential vs loculated\n\n**Tamponade physiology (any of these = tamponade):**\n1. **Right atrial systolic collapse** \u2014 most sensitive (50-100%)\n2. **Right ventricular diastolic collapse** \u2014 most specific (75-90%)\n3. **IVC plethora** \u2014 IVC >2.1 cm with <50% inspiratory collapse\n4. **Septal bounce / D-shaped LV** during inspiration (ventricular interdependence)\n5. **Mitral inflow respiratory variation** >25% (tricuspid >40%)\n\n**Pearl:** Size doesn\'t equal tamponade. A small rapidly-accumulating effusion (post-procedure, type-A dissection) can tamponade; a slowly-growing 2-3 cm effusion may be hemodynamically tolerated.',
+        },
+        {
+            heading: 'Acute Stabilization (Pre-Drainage)',
+            body: '**Avoid intubation** if possible \u2014 positive pressure ventilation drops preload and can precipitate PEA arrest in tamponade. If intubation unavoidable: ketamine induction, no PEEP initially, gentle hand-bagging.\n\n**Permissive hypertension** \u2014 maintain MAP with [norepinephrine](#/drug/norepinephrine/shock) (preserves contractility) or [epinephrine](#/drug/epinephrine/cardiogenic-shock) (inotropy + chronotropy).\n\n**Cautious IV fluids** \u2014 250-500 mL bolus may temporize by augmenting preload, but do not over-resuscitate (rises filling pressures further compress chambers).\n\n**AVOID:**\n\u2022 Beta-blockers (lose compensatory tachycardia)\n\u2022 Vasodilators / nitrates (drop preload)\n\u2022 Diuretics (drop preload)\n\u2022 PEEP / high tidal volumes',
+        },
+        {
+            heading: 'Pericardiocentesis \u2014 Bedside',
+            body: '**Indications (emergent in ED):**\n\u2022 Tamponade physiology with hemodynamic instability\n\u2022 PEA arrest with known/suspected tamponade\n\u2022 Cannot wait for cards/CT-surgery\n\n**Approach \u2014 Subxiphoid (most common in ED, no US):**\n1. Sterile prep, drape, lidocaine\n2. Long 18-gauge needle attached to 10-mL syringe\n3. Insert at angle of xiphoid + costal margin, 45\u00b0 to skin, aim toward LEFT shoulder\n4. Aspirate continuously while advancing\n5. Stop when fluid returns; advance guidewire (Seldinger), upsize to drain\n\n**US-guided (preferred when time allows):**\n1. Identify largest fluid pocket on subxiphoid OR parasternal OR apical view\n2. Choose route avoiding lung, liver, internal mammary, LV apex\n3. Apical or parasternal often preferred (subxiphoid traverses liver)\n4. Out-of-plane or in-plane technique; advance under direct visualization\n\n**Confirm intra-pericardial position:**\n\u2022 Fluid does NOT clot (vs intracardiac blood, which clots within minutes)\n\u2022 Agitated saline injection \u2014 bubbles seen in pericardial space, NOT chamber\n\u2022 If unsure: stop, reassess with US\n\n**Drain:** Pull off 50-100 mL initially \u2014 even small volumes dramatically improve hemodynamics. Leave catheter in place 24-72h for re-accumulation.',
+        },
+        {
+            heading: 'Send Fluid For',
+            body: '\u2022 Cell count and differential\n\u2022 Cytology (3 separate sends increase yield to >90%)\n\u2022 Gram stain + culture (bacterial, AFB, fungal)\n\u2022 Cholesterol, triglycerides, glucose, LDH, protein\n\u2022 Light\'s criteria (exudate vs transudate)\n\u2022 ADA if TB suspected\n\u2022 Flow cytometry if lymphoma suspected\n\u2022 Hematocrit (if grossly bloody)',
+        },
+        {
+            heading: 'Definitive Treatment by Etiology',
+            body: '\u2022 **Malignant effusion:** pericardial drain + pericardial window (OR vs balloon pericardiotomy); intrapericardial chemotherapy (cisplatin, bleomycin, thiotepa) for sclerosis\n\u2022 **Recurrent malignant:** pericardial window or pericardiectomy\n\u2022 **Bacterial:** drainage + IV antibiotics + ID consult\n\u2022 **Tuberculous:** drainage + 4-drug RIPE; corticosteroids reduce constrictive pericarditis\n\u2022 **Uremic:** dialysis intensification\n\u2022 **Post-MI / Dressler\u2019s:** NSAIDs + colchicine; avoid anticoagulation\n\u2022 **Aortic dissection:** **DO NOT drain** \u2014 increases shear, worsens dissection. Emergent CT-surgery for repair.',
+        },
+        {
+            heading: 'Disposition',
+            body: '\u2022 ICU after pericardiocentesis (post-drainage pulmonary edema, recurrent effusion, dysrhythmia)\n\u2022 Cardiothoracic surgery consult for window\n\u2022 Oncology consult for primary cancer therapy\n\u2022 Repeat echo within 24h to assess re-accumulation\n\u2022 Goals of care discussion \u2014 malignant pericardial effusion median survival 2-4 months',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Adler Y, et al. 2015 ESC Guidelines for the diagnosis and management of pericardial diseases. Eur Heart J. 2015;36(42):2921-2964.' },
+        { num: 2, text: 'Spodick DH. Acute Cardiac Tamponade. N Engl J Med. 2003;349(7):684-690.' },
+        { num: 3, text: 'Imazio M, Adler Y. Management of pericardial effusion. Eur Heart J. 2013;34(16):1186-1197.' },
+        { num: 4, text: 'Maisch B, et al. Intrapericardial treatment of inflammatory and neoplastic pericarditis. Heart Fail Rev. 2013;18(3):317-328.' },
+        { num: 5, text: 'EMCrit/IBCC Pericardial Effusion & Tamponade chapter (2024 update).' },
+    ],
+};
+// -------------------------------------------------------------------
+// TLS Management Bundle
+// -------------------------------------------------------------------
+const TLS_MANAGEMENT_BUNDLE_PAGE = {
+    id: 'tls-management-bundle',
+    title: 'TLS Management Bundle',
+    subtitle: 'IVF Rates, Rasburicase, G6PD, Phos/Ca/K Pearls',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Risk Stratification',
+            body: '**High-risk tumors / situations** (TLS prophylaxis indicated):\n\u2022 Burkitt lymphoma\n\u2022 T-cell ALL with WBC >100k\n\u2022 Bulky non-Hodgkin lymphoma\n\u2022 AML with WBC >50k\n\u2022 CLL starting venetoclax (especially during ramp-up)\n\u2022 Hepatocellular carcinoma during TACE\n\u2022 Spontaneous TLS in highly proliferative tumors (rare)\n\n**Patient risk factors that worsen TLS risk:**\n\u2022 Baseline elevated uric acid (>7.5)\n\u2022 Baseline renal dysfunction (Cr >1.5)\n\u2022 Dehydration / oliguria\n\u2022 Low urine output despite fluids\n\nUse the [TLS Cairo-Bishop Calculator](#/calculator/tls-cairo-bishop) to classify lab vs clinical TLS.',
+        },
+        {
+            heading: 'Step 1 \u2014 Aggressive IV Hydration',
+            body: '**Adults:** **Normal saline 2-3 L/m\u00b2/day** \u2192 ~200-250 mL/hr in average adult.\n**Pediatrics:** 200 mL/m\u00b2/hr (max 3000 mL/m\u00b2/day).\n\n**Goal urine output:** **>100 mL/hr** in adults (or 3-5 mL/kg/hr in peds). Maintain even if oliguric \u2014 push fluids unless clear volume overload (then add diuretic + consider RRT).\n\n**Avoid:**\n\u2022 **LR / Plasma-Lyte** \u2014 contains potassium\n\u2022 **Urine alkalinization (bicarbonate)** \u2014 OBSOLETE. Promotes calcium phosphate precipitation. Was historical practice with allopurinol; abandoned with rasburicase era.\n\u2022 **Dextrose-containing fluids** \u2014 drives K intracellularly (masks hyperK), increases insulin requirement.',
+        },
+        {
+            heading: 'Step 2 \u2014 Hypouricemic Therapy',
+            body: '**[Allopurinol](#/drug/allopurinol/tls)** \u2014 prophylaxis (low-intermediate risk):\n\u2022 300 mg PO daily, start 2-3 days **before** chemo\n\u2022 Xanthine oxidase inhibitor \u2192 prevents NEW urate formation\n\u2022 Does NOT lower existing urate\n\u2022 Renally adjusted (50% dose if CrCl <30)\n\n**[Rasburicase](#/drug/rasburicase/tls)** \u2014 high-risk OR established TLS:\n\u2022 **0.2 mg/kg IV \u00d7 1 dose** (single dose effective in most cases)\n\u2022 Recombinant urate oxidase \u2192 converts urate \u2192 allantoin (water-soluble)\n\u2022 Drops urate within HOURS\n\u2022 **CHECK G6PD** if time allows \u2014 contraindicated in G6PD deficiency (causes severe hemolytic anemia)\n\u2022 **Contraindicated** in pregnancy and breastfeeding\n\u2022 Higher prevalence of G6PD deficiency in African, Mediterranean, Middle Eastern, South Asian populations \u2014 lower threshold to test\n\u2022 **Sample handling pearl:** post-rasburicase uric acid samples must be **on ice** and processed quickly \u2014 rasburicase continues to lyse urate ex vivo, giving falsely low results otherwise',
+        },
+        {
+            heading: 'Step 3 \u2014 Manage Electrolyte Derangements',
+            body: '**Hyperkalemia:**\n\u2022 [Calcium gluconate](#/drug/calcium-gluconate/hyperkalemia) 1-2g IV (membrane stabilization, no effect on K)\n\u2022 [Insulin regular](#/drug/insulin-regular/hyperkalemia) 10 units IV + D50 25g (or D10 250 mL drip if glucose <250)\n\u2022 [Albuterol](#/drug/albuterol/hyperkalemia) 10-20 mg nebulized (additive)\n\u2022 [Sodium polystyrene sulfonate](#/drug/sodium-polystyrene-sulfonate/hyperkalemia) or [patiromer](#/drug/patiromer/hyperkalemia) for elimination\n\u2022 RRT if K >6.5 refractory\n\n**Hyperphosphatemia:**\n\u2022 [Sevelamer](#/drug/sevelamer/hyperphosphatemia) 800-1600 mg PO TID with meals (preferred; doesn\'t add Ca)\n\u2022 Aluminum hydroxide acutely (short-term only)\n\u2022 RRT for PO4 >10 or rapidly rising with symptoms\n\n**Hypocalcemia:**\n\u2022 Treat ONLY if symptomatic (paresthesias, tetany, seizure, QT prolongation, arrhythmia)\n\u2022 [Calcium gluconate](#/drug/calcium-gluconate/hypocalcemia) 1-2g IV slowly\n\u2022 **CAUTION:** if Ca \u00d7 PO4 product >60 \u2192 calcium phosphate crystal precipitation worsens. Lower phos first if possible.\n\n**Hyperuricemia:** rasburicase as above',
+        },
+        {
+            heading: 'Step 4 \u2014 RRT Indications',
+            body: '\u2022 K >6.5 refractory to medical therapy\n\u2022 PO4 >10 or rapidly rising with symptomatic hypocalcemia\n\u2022 Symptomatic hypocalcemia with high Ca\u00d7PO4 product\n\u2022 Volume overload preventing adequate hydration\n\u2022 Uremia symptoms\n\u2022 Refractory metabolic acidosis\n\u2022 AKI with worsening despite optimal medical management\n\nNephrology consult for any clinical TLS. Continuous renal replacement therapy (CRRT) often preferred over intermittent HD for ongoing electrolyte clearance.',
+        },
+        {
+            heading: 'Monitoring & Disposition',
+            body: '**Labs q4-6h initially:**\n\u2022 BMP (Na, K, Cl, HCO3, BUN, Cr)\n\u2022 Phosphate, calcium (corrected), magnesium\n\u2022 Uric acid (on ice if post-rasburicase)\n\u2022 LDH (tumor burden marker)\n\n**Strict I/O.** Continuous cardiac monitoring.\n\n**Disposition:**\n\u2022 **Clinical TLS** (Cr/arrhythmia/seizure) \u2192 **ICU**\n\u2022 **Lab TLS, high-risk tumor or worsening** \u2192 **ICU**\n\u2022 **Lab TLS, stable** \u2192 **Telemetry** with q4-6h electrolytes\n\u2022 Transfer to oncology center if tertiary care unavailable',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cairo MS, Bishop M. Tumour lysis syndrome: new therapeutic strategies and classification. Br J Haematol. 2004;127(1):3-11.' },
+        { num: 2, text: 'Coiffier B, et al. Guidelines for the Management of Pediatric and Adult Tumor Lysis Syndrome. J Clin Oncol. 2008;26(16):2767-2778.' },
+        { num: 3, text: 'Howard SC, Jones DP, Pui CH. The Tumor Lysis Syndrome. N Engl J Med. 2011;364(19):1844-1854.' },
+        { num: 4, text: 'Cairo MS, et al. Recommendations for the Evaluation of Risk and Prophylaxis of TLS. Br J Haematol. 2010;149(4):578-586.' },
+        { num: 5, text: 'NCCN Clinical Practice Guidelines: Hematopoietic Growth Factors / Supportive Care. v2.2024.' },
+    ],
+};
 export const INFO_PAGES = {
     // Oncological Emergencies
     'onc-emergency-summary': ONC_EMERGENCY_SUMMARY,
     'chemo-regimens': CHEMO_REGIMENS_PAGE,
+    'crs-icans-protocol': CRS_ICANS_PROTOCOL_PAGE,
+    'ici-toxicity-algorithm': ICI_TOXICITY_ALGORITHM_PAGE,
+    'pericardial-effusion-pocus': PERICARDIAL_EFFUSION_POCUS_PAGE,
+    'tls-management-bundle': TLS_MANAGEMENT_BUNDLE_PAGE,
     // Delayed Sequence Intubation
     'dsi-summary': DSI_SUMMARY,
     'dsi-ketamine': DSI_KETAMINE,
