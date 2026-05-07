@@ -101,7 +101,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'Anti-NMDA receptor encephalitis: young woman + viral prodrome + psychosis → movement disorder → seizures.',
     ],
     pimpPrep: [
-      { question: 'What is the CAM, and what does a positive screen require?', answer: 'Confusion Assessment Method: (1) acute onset + fluctuation AND (2) inattention, PLUS either (3) altered LOC OR (4) disorganized thinking.', tag: 'criteria' },
+      { question: 'What is the CAM, and what does a positive screen require?', answer: 'Confusion Assessment Method: (1) acute onset + fluctuating course AND (2) inattention, PLUS either (3) disorganized thinking OR (4) altered LOC.', tag: 'criteria' },
       { question: 'Why avoid benzos in routine delirium?', answer: 'They worsen confusion and disinhibit. Exception: alcohol or benzodiazepine withdrawal.', tag: 'mechanism' },
       { question: 'First-line pharm for severe delirium agitation?', answer: 'Low-dose haloperidol (0.5–1 mg IV/IM) or olanzapine (2.5–5 mg). Monitor QTc.', tag: 'next-step' },
     ],
@@ -125,7 +125,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'Have you actually had thoughts of killing yourself?',
       'Have you thought about how you might do it, and do you have access to those means?',
     ],
-    oneBreathReframe: 'A 5-step ladder from passive death wish → active ideation → method → intent → plan; severity 4–5 OR any recent self-injurious behavior = high risk regardless of stated intent.',
+    oneBreathReframe: 'A 5-step ladder from passive death wish → active ideation → method → intent → plan; ideation 4–5 in the past month OR any suicidal behavior (attempt, interrupted, aborted, preparatory) in the past 3 months = high risk per Columbia triage.',
     sayOnRounds: '[Age]-y/o presenting with [CC]. C-SSRS severity **[1–5]** with [no / passive / active] ideation. [Has / has not] disclosed plan, intent, means access. Prior attempts: [yes/no, when]. Protective factors: [list]. Risk: [low/moderate/high]. Plan: [outpatient with follow-up / psychiatric admission / 1:1 sitter / means restriction counseling].',
     doNotMiss: [
       'Severity 4–5 OR recent behavior = HIGH risk → psychiatric admission with 1:1.',
@@ -141,8 +141,8 @@ const PSYCH_CARDS: StudentCard[] = [
     ],
     shelfHighYield: [
       'Demographics: middle-aged white men have highest completion rate; women attempt more often.',
-      'Method matters: firearms = highest lethality (50% of US completions).',
-      'SSRIs in adolescents: **black-box warning** for increased suicidal ideation in first weeks — monitor closely, do not avoid the drug.',
+      'Method matters: firearms account for **>50% of US suicide deaths** (CDC WISQARS, ~55% in 2022–2023); case-fatality ~85–90% per attempt.',
+      'SSRIs in patients **≤24 yo**: black-box warning for increased suicidal ideation in first weeks — monitor closely, do not avoid the drug.',
       'Lithium decreases suicide risk in bipolar (independent of mood stabilization).',
       'Discharge documentation: ideation, plan, intent, means, prior attempts, protective factors, safety plan, follow-up.',
     ],
@@ -172,14 +172,15 @@ const PSYCH_CARDS: StudentCard[] = [
     ],
     pimpPrep: [
       { question: 'BETA stands for?', answer: 'Best practices in Evaluation and Treatment of Agitation — the APA project guideline emphasizing verbal de-escalation first.', tag: 'mechanism' },
-      { question: 'IM agent for severe agitation when you cannot get an IV?', answer: 'Ketamine 4–5 mg/kg IM (fastest), or droperidol 5 mg + midazolam 5 mg IM ("B-52" replacement).', tag: 'next-step' },
-      { question: 'Why not give haloperidol to a patient with hyperthermia and rigidity?', answer: 'Risk of NMS. Use benzodiazepines + cooling instead until NMS/SS ruled out.', tag: 'adverse-effect' },
+      { question: 'IM agent for severe agitation when you cannot get an IV?', answer: 'Droperidol 5 mg ± midazolam 5 mg IM ("DMX"), or olanzapine 10 mg IM (do NOT combine IM olanzapine with parenteral benzo). For excited/agitated delirium with no IV, ketamine 4–5 mg/kg IM is fastest — EM/EMS practice, not BETA-endorsed.', tag: 'next-step' },
+      { question: 'What is the classic "B-52"?', answer: 'Benadryl 50 mg + Haldol 5 mg + Ativan 2 mg IM. Modern alternatives: "5-and-2" (haloperidol 5 + lorazepam 2) or DMX (droperidol + midazolam).', tag: 'pearl' },
     ],
     shelfHighYield: [
       'De-escalation order: verbal → environmental → PO offer → IM.',
       'Antipsychotic options: haloperidol 5–10 mg IM, olanzapine 5–10 mg IM, droperidol 5 mg IM.',
+      '**Elderly/frail: start haloperidol 0.5–1 mg IM** (Beers high-risk drug — full dose risks oversedation, falls, QT, NMS).',
       'Avoid IM olanzapine + parenteral benzo together (respiratory depression).',
-      'Ketamine 4–5 mg/kg IM = onset in 2–5 min for excited delirium.',
+      'Ketamine 4–5 mg/kg IM = onset in 2–5 min for excited delirium (EM practice; not BETA-endorsed for psych emergency).',
       'Document: indication, less restrictive alternatives tried, time-limited orders, monitoring plan.',
     ],
     linkedTreeId: 'acute-agitation',
@@ -202,7 +203,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'PAWSS ≥4 = high risk for severe withdrawal → consider phenobarbital prophylaxis.',
       'DTs (hallucinations + autonomic instability + altered mentation) → ICU, mortality 5–15%.',
       'Withdrawal seizures = phenobarbital 15–20 mg/kg IV (not just benzos).',
-      'Hepatic encephalopathy contraindicates phenobarbital (use benzos only).',
+      'In severe hepatic disease/encephalopathy, prefer **lorazepam** (no active metabolites) over diazepam; use phenobarbital cautiously with reduced load — discuss with attending.',
     ],
     pimpPrep: [
       { question: 'What does CIWA-Ar measure, and what score triggers treatment?', answer: '10 items (tremor, sweating, anxiety, agitation, etc.). Score ≥8–10 → benzo dose; score ≥15 → severe.', tag: 'criteria' },
@@ -229,7 +230,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'Any tramadol, fentanyl, MDMA, linezolid, methylene blue, or new antibiotics?',
       'When did the fever, rigidity, or muscle jerks start — hours or days?',
     ],
-    oneBreathReframe: 'Two life-threatening medication reactions that look similar but split on temporal pattern (SS = hours, NMS = days), neuromuscular signature (SS = clonus/hyperreflexia, NMS = lead-pipe rigidity), and offending agent (SS = serotonergic, NMS = dopamine antagonist).',
+    oneBreathReframe: 'Two life-threatening medication reactions that look similar but split on temporal pattern (SS = hours, NMS = days), neuromuscular signature (SS = clonus + hyperreflexia, NMS = lead-pipe rigidity with hypo-/normoreflexia and NO clonus), and offending agent (SS = serotonergic, NMS = dopamine antagonist).',
     sayOnRounds: '[Age]-y/o on [serotonergic / dopamine-blocker] medications presenting with [fever, rigidity/clonus, AMS, autonomic instability]. **Hunter Criteria** [met/not met] for serotonin syndrome / **Levenson Criteria** [met/not met] for NMS. Plan: STOP offending agent, [benzodiazepines + cyproheptadine for SS / dantrolene + bromocriptine for NMS], ICU, aggressive cooling.',
     doNotMiss: [
       'STOP the offending drug **first** — supportive care comes second.',
@@ -239,7 +240,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'Do not give cyproheptadine for NMS (no benefit, delays correct treatment).',
     ],
     pimpPrep: [
-      { question: 'How do you tell NMS from serotonin syndrome at the bedside?', answer: 'SS = clonus + hyperreflexia (hyperkinetic), onset hours, after serotonergic drug. NMS = lead-pipe rigidity + bradyreflexia, onset days, after dopamine blocker.', tag: 'criteria' },
+      { question: 'How do you tell NMS from serotonin syndrome at the bedside?', answer: 'SS = clonus + hyperreflexia (hyperkinetic, lower extremities > upper), onset hours, after serotonergic drug. NMS = lead-pipe rigidity, hypo-/normoreflexia, NO clonus, onset days, after dopamine blocker.', tag: 'criteria' },
       { question: 'First-line treatment for serotonin syndrome (besides stopping the drug)?', answer: 'Benzodiazepines for agitation + cyproheptadine 12 mg PO load, then 2 mg q2h.', tag: 'next-step' },
       { question: 'Why does dantrolene work for NMS?', answer: 'Direct skeletal muscle relaxant — blocks calcium release from sarcoplasmic reticulum, reducing rigidity-driven hyperthermia.', tag: 'mechanism' },
     ],
@@ -248,7 +249,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'SS triad: mental status change, autonomic hyperactivity, neuromuscular abnormalities (clonus).',
       'Both can elevate CK and cause renal failure from rhabdomyolysis.',
       'Malignant hyperthermia: post-anesthesia (succinylcholine, halothanes) — same dantrolene treatment, different trigger.',
-      'After NMS resolves, atypical antipsychotic can be re-trialed cautiously after 2-week washout.',
+      'After NMS fully resolves, rechallenge with a low-potency or atypical antipsychotic after **at least 2 weeks of full recovery** (longer if depot agent caused it). Many experts wait ≥4 weeks from episode onset.',
     ],
     linkedTreeId: 'nms',
   },
@@ -284,7 +285,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'Pressured speech + flight of ideas + grandiosity = mania.',
       'Poverty of speech + flat affect + alogia = negative symptoms of schizophrenia.',
       'Word salad = severe formal thought disorder, often schizophrenia.',
-      'Folie à deux = shared delusional disorder between two close people.',
+      'Folie à deux (shared psychotic disorder) — **removed as distinct diagnosis in DSM-5**; now coded under "Other Specified Schizophrenia Spectrum…" Still a high-yield historical term.',
     ],
     linkedTreeId: 'psychiatry-assessment',
   },
@@ -338,7 +339,7 @@ const PSYCH_CARDS: StudentCard[] = [
     oneBreathReframe: 'A new psychotic syndrome that is medical until proven otherwise — particularly in patients over 45, with focal exam, fever, or atypical features — before primary psychiatric diagnosis is even considered.',
     sayOnRounds: '[Age]-y/o with no prior psychiatric history presenting with [duration] of [hallucinations / delusions / disorganized thought]. No fever, focal deficits, [drug use]. Workup: tox screen, glucose, TSH, B12, RPR, HIV, MRI [if focal/atypical], LP [if fever/encephalopathy]. Differential: organic (delirium, encephalitis, anti-NMDA, neurosyphilis), substance-induced, primary psychiatric.',
     doNotMiss: [
-      '**Age >45 with new psychosis = 70% have organic cause** — full medical workup.',
+      '**Age >40 with new psychosis** — overwhelmingly medical or substance-induced; full workup mandatory before any primary psychiatric label.',
       'Anti-NMDA receptor encephalitis: young woman + viral prodrome + psychosis → movement disorder → seizures. Check ovaries (teratoma).',
       'Visual > auditory hallucinations suggests organic, not primary psychiatric.',
       'Fever + AMS + psychosis → LP, empiric antibiotics + acyclovir until ruled out.',
@@ -352,7 +353,7 @@ const PSYCH_CARDS: StudentCard[] = [
     shelfHighYield: [
       'MR. FISC — Mood swings, Reduced reality, Flat affect, Inattention, Speech disturbance, Cognitive deficits (schizophrenia features).',
       'Positive symptoms: hallucinations, delusions, disorganization. Negative: flat affect, alogia, avolition, anhedonia.',
-      'Schizoaffective: psychosis + mood episode (≥2 weeks of psychosis WITHOUT mood symptoms).',
+      'Schizoaffective: ≥2 weeks of psychosis WITHOUT mood symptoms AND mood symptoms present for the **majority (≥50%) of total illness duration**. Without that 50% rule, it is a mood disorder with psychotic features.',
       'Brief psychotic: <1 month, full return to baseline.',
       'Atypicals → metabolic syndrome (clozapine, olanzapine worst). Monitor weight, lipids, glucose.',
     ],
@@ -370,7 +371,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'Any recent antipsychotic exposure (risk of malignant catatonia/NMS overlap)?',
     ],
     oneBreathReframe: 'A treatable neuropsychiatric syndrome of motor and behavioral abnormalities — recognizable by Bush-Francis screen, confirmed by lorazepam challenge, and reversed by benzodiazepines or ECT in most patients.',
-    sayOnRounds: '[Age]-y/o with [psychiatric / medical history] presenting with [duration] of [immobility / mutism / posturing / waxy flexibility]. **Bush-Francis** [≥2 features positive]. **Lorazepam 2 mg IV challenge** [response in 10–15 min / no response]. Plan: lorazepam 2–4 mg IV q4–6h; if benzo-resistant, ECT consult. Avoid antipsychotics until catatonia resolves (NMS risk).',
+    sayOnRounds: '[Age]-y/o with [psychiatric / medical history] presenting with [duration] of [immobility / mutism / posturing / waxy flexibility]. **BFCSI screen** ≥2 of first 14 items positive → full **BFCRS** rating scale. **Lorazepam 2 mg IV challenge** [response in 10–15 min / no response]. Plan: lorazepam 2–4 mg IV q4–6h; if benzo-resistant, ECT consult. Avoid antipsychotics until catatonia resolves (NMS risk).',
     doNotMiss: [
       '**Lorazepam 2 mg IV is both diagnostic AND therapeutic** — response within 10–15 min confirms.',
       'Avoid antipsychotics in active catatonia — risk of malignant catatonia / NMS.',
@@ -384,7 +385,7 @@ const PSYCH_CARDS: StudentCard[] = [
       { question: 'Patient with catatonia from schizophrenia — when can you give an antipsychotic?', answer: 'AFTER catatonia resolves with benzos — premature antipsychotic risks NMS / malignant catatonia.', tag: 'pearl' },
     ],
     shelfHighYield: [
-      'Bush-Francis Catatonia Rating Scale: 23 items, ≥2 = catatonia.',
+      'Bush-Francis Catatonia Screening Instrument (BFCSI): ≥2 of the first 14 items → positive screen → proceed to full 23-item BFCRS rating scale.',
       'Lorazepam 1–2 mg IV → reassess in 10–15 minutes.',
       'Most catatonia is mood-related (depression > mania > schizophrenia).',
       'Anti-NMDA encephalitis presents with catatonia + psychosis + dyskinesias in young women.',
