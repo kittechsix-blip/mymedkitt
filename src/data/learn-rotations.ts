@@ -318,7 +318,7 @@ const PSYCH_CARDS: StudentCard[] = [
       'EDO (Emergency Detention Order) terminology varies by state — know yours.',
       'Voluntary admission: patient can request discharge (usually with 72-hour notice).',
       'Involuntary criteria (most states): danger to self, danger to others, OR grave disability.',
-      'Tarasoff duty: warn identified third party of credible homicidal threat.',
+      'Tarasoff duty (**majority rule**): warn identified third party of credible homicidal threat. **Texas exception:** no duty-to-warn per Thapar v. Zezulka (1999) — TX limits the duty to reasonable clinical steps. Always know your state.',
       'HIPAA exceptions in psychiatry: imminent danger, court order, child abuse reporting, mandatory reporting.',
     ],
     linkedTreeId: 'psych-assessment',
