@@ -12,6 +12,7 @@ import { renderLearnRotation } from './components/learn-rotation.js';
 import { renderLearnCard } from './components/learn-card.js';
 import { renderLearnPreRound } from './components/learn-pre-round.js';
 import { renderLearnShelfSummary } from './components/learn-shelf-summary.js';
+import { renderLearnDrill } from './components/learn-drill.js';
 import { renderReferencePanel } from './components/reference-table.js';
 import { renderCalculator, renderCalculatorList } from './components/calculator.js';
 import { renderDrugList } from './components/drug-store.js';
@@ -245,6 +246,15 @@ function handleLearnShelf(params: RouteParams): void {
   renderLearnShelfSummary(main, rotationId);
 }
 
+function handleLearnDrill(params: RouteParams): void {
+  removeContextualToolbar();
+  hideGlobalTabBar();
+  const rotationId = params['rotationId'] ?? 'unknown';
+  const drillId = params['drillId'] ?? 'unknown';
+  const main = clearMain();
+  renderLearnDrill(main, rotationId, drillId);
+}
+
 function handleNotFound(): void {
   removeContextualToolbar();
   showGlobalTabBar('');
@@ -305,6 +315,7 @@ async function init(): Promise<void> {
   router.on('/learn/:rotationId/card/:cardId', handleLearnCard);
   router.on('/learn/:rotationId/pre-round', handleLearnPreRound);
   router.on('/learn/:rotationId/shelf', handleLearnShelf);
+  router.on('/learn/:rotationId/drill/:drillId', handleLearnDrill);
   router.onNotFound(handleNotFound);
 
   // Start routing

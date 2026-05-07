@@ -1,6 +1,24 @@
 // myMedKitt — MedKitt Learn rotation + student card data
 // Phase 1 pilot: Psychiatry only. Hand-curated 7-field cards that wrap
 // existing consult trees with MS3/MS4-facing context and prep.
+// Domain display order + human-readable labels for Domain-mode headers.
+export const ADMSEP_DOMAINS = [
+    { id: 'emergencies', label: 'Emergencies & Safety' },
+    { id: 'mood', label: 'Mood Disorders' },
+    { id: 'anxiety-trauma', label: 'Anxiety & Trauma' },
+    { id: 'psychotic', label: 'Psychotic Disorders' },
+    { id: 'substance', label: 'Substance Use' },
+    { id: 'cognitive', label: 'Cognitive & Delirium' },
+    { id: 'eating', label: 'Eating Disorders' },
+    { id: 'personality', label: 'Personality Disorders' },
+    { id: 'pediatric', label: 'Child & Adolescent' },
+    { id: 'geriatric', label: 'Geriatric' },
+    { id: 'skills', label: 'Interview & Documentation Skills' },
+    { id: 'pharmacology', label: 'Pharmacology' },
+];
+export function getDomainLabel(id) {
+    return ADMSEP_DOMAINS.find(d => d.id === id)?.label ?? id;
+}
 // ===================================================================
 // Psychiatry — 10 hand-curated student cards
 // ===================================================================
@@ -37,6 +55,10 @@ const PSYCH_CARDS = [
             'Document the four abilities, the specific decision, and your reasoning — not just "has/lacks capacity."',
         ],
         linkedTreeId: 'capacity-assessment',
+        pillar: 'survival',
+        domain: 'skills',
+        tier: 1,
+        shelfPriority: 'high',
     },
     {
         id: 'psych-delirium-vs-psychosis',
@@ -71,6 +93,10 @@ const PSYCH_CARDS = [
             'Treat the cause, then non-pharm (reorient, family, lights, sleep) before meds.',
         ],
         linkedTreeId: 'delirium',
+        pillar: 'survival',
+        domain: 'cognitive',
+        tier: 1,
+        shelfPriority: 'high',
     },
     {
         id: 'psych-suicide-cssrs',
@@ -105,6 +131,10 @@ const PSYCH_CARDS = [
             'Discharge documentation: ideation, plan, intent, means, prior attempts, protective factors, safety plan, follow-up.',
         ],
         linkedTreeId: 'suicide-risk-assessment',
+        pillar: 'survival',
+        domain: 'emergencies',
+        tier: 1,
+        shelfPriority: 'high',
     },
     // ---- Section 2: Patient Is Unsafe Or Agitated ----
     {
@@ -141,6 +171,10 @@ const PSYCH_CARDS = [
             'Document: indication, less restrictive alternatives tried, time-limited orders, monitoring plan.',
         ],
         linkedTreeId: 'acute-agitation',
+        pillar: 'survival',
+        domain: 'emergencies',
+        tier: 1,
+        shelfPriority: 'high',
     },
     {
         id: 'psych-alcohol-withdrawal',
@@ -175,6 +209,10 @@ const PSYCH_CARDS = [
             'AUD pharmacology: naltrexone (cravings), acamprosate (anxiety/sleep), disulfiram (aversion).',
         ],
         linkedTreeId: 'alcohol-withdrawal',
+        pillar: 'survival',
+        domain: 'substance',
+        tier: 1,
+        shelfPriority: 'high',
     },
     {
         id: 'psych-nms-vs-ss',
@@ -209,6 +247,10 @@ const PSYCH_CARDS = [
             'After NMS fully resolves, rechallenge with a low-potency or atypical antipsychotic after **at least 2 weeks of full recovery** (longer if depot agent caused it). Many experts wait ≥4 weeks from episode onset.',
         ],
         linkedTreeId: 'nms',
+        pillar: 'survival',
+        domain: 'emergencies',
+        tier: 1,
+        shelfPriority: 'high',
     },
     // ---- Section 3: I Need To Present This Patient ----
     {
@@ -244,6 +286,10 @@ const PSYCH_CARDS = [
             'Folie à deux (shared psychotic disorder) — **removed as distinct diagnosis in DSM-5**; now coded under "Other Specified Schizophrenia Spectrum…" Still a high-yield historical term.',
         ],
         linkedTreeId: 'psychiatry-assessment',
+        pillar: 'survival',
+        domain: 'skills',
+        tier: 1,
+        shelfPriority: 'high',
     },
     {
         id: 'psych-presentation',
@@ -278,6 +324,10 @@ const PSYCH_CARDS = [
             'HIPAA exceptions in psychiatry: imminent danger, court order, child abuse reporting, mandatory reporting.',
         ],
         linkedTreeId: 'psych-assessment',
+        pillar: 'survival',
+        domain: 'skills',
+        tier: 1,
+        shelfPriority: 'med',
     },
     // ---- Section 4: I Need To Understand The Diagnosis ----
     {
@@ -313,6 +363,10 @@ const PSYCH_CARDS = [
             'Atypicals → metabolic syndrome (clozapine, olanzapine worst). Monitor weight, lipids, glucose.',
         ],
         linkedTreeId: 'acute-psychosis',
+        pillar: 'survival',
+        domain: 'psychotic',
+        tier: 1,
+        shelfPriority: 'high',
     },
     {
         id: 'psych-catatonia',
@@ -347,6 +401,205 @@ const PSYCH_CARDS = [
             'Malignant catatonia and NMS are clinically and pathophysiologically overlapping; treatment is the same.',
         ],
         linkedTreeId: 'catatonia',
+        pillar: 'survival',
+        domain: 'emergencies',
+        tier: 1,
+        shelfPriority: 'med',
+    },
+    // ===================================================================
+    // Phase 2 — Survival Kit expansion (5 new cards)
+    // ===================================================================
+    {
+        id: 'psych-opioid-od',
+        rotationId: 'psychiatry',
+        sectionId: 'unsafe',
+        title: 'Opioid OD & Withdrawal: Naloxone, Buprenorphine, COWS',
+        trigger: 'Patient with depressed respirations and pinpoint pupils — or someone in opioid withdrawal asking for "help with the dope sickness."',
+        askThree: [
+            'What did you use, when, and how — IV, smoked, snorted? Any fentanyl analogues or test strips used?',
+            'When was your last opioid dose, and what is your usual daily amount in morphine equivalents?',
+            'Any benzo, alcohol, or stimulant co-use, and any prior overdoses or naloxone reversals?',
+        ],
+        oneBreathReframe: 'Two opposite poles of the same axis — overdose (mu agonism → respiratory depression, miosis, depressed mentation) reverses with naloxone titrated to respirations, not consciousness; withdrawal (autonomic surge, mydriasis, GI distress) is treated with buprenorphine after COWS ≥8 with mu-agonist-free interval to avoid precipitated withdrawal.',
+        sayOnRounds: '[Age]-y/o with [opioid use history] presenting [overdose: pinpoint pupils, RR <12, depressed mentation / withdrawal: piloerection, mydriasis, yawning, abdominal cramping]. **COWS** [score] / **Glasgow** [score]. Plan: [overdose: naloxone 0.04–0.4 mg IV titrated to RR ≥12, supportive ventilation, fentanyl re-dosing risk] vs [withdrawal: buprenorphine 4–8 mg SL after COWS ≥8 (low-dose initiation possible if mu agonist active), clonidine, ondansetron, loperamide]. Outpatient buprenorphine bridge + harm reduction (naloxone Rx, fentanyl test strips, never-use-alone counseling).',
+        doNotMiss: [
+            'Naloxone titrate to **respirations**, not mentation — full reversal precipitates withdrawal and re-use.',
+            'Fentanyl: longer duration than naloxone — patients re-sedate after initial reversal. Observe ≥2 hours minimum.',
+            'Precipitated withdrawal with **buprenorphine**: avoid by waiting for COWS ≥8 with last full mu agonist >12–16h (heroin) / >24–72h (methadone). For chronic fentanyl, consider low-dose initiation (microdosing) protocols.',
+            'Co-ingestion with **benzos or alcohol** — naloxone does NOT reverse those; respiratory depression may persist.',
+            'Always offer a take-home naloxone kit and connect to MAT clinic on discharge — every encounter is a touchpoint.',
+        ],
+        pimpPrep: [
+            { question: 'How much naloxone for an opioid OD?', answer: '0.04–0.4 mg IV/IM/IN, titrated to respirations ≥12. Higher doses for synthetic opioids; redose q2–3 min until effective.', tag: 'next-step' },
+            { question: 'Why does buprenorphine precipitate withdrawal?', answer: 'High mu-receptor affinity but partial agonism — displaces full agonists and produces less mu activation, causing withdrawal in patients with active full-agonist occupancy.', tag: 'mechanism' },
+            { question: 'COWS ≥8 means what for buprenorphine induction?', answer: 'Patient is sufficiently in withdrawal that a buprenorphine dose will provide net-positive mu activity rather than displace residual agonist into more withdrawal.', tag: 'criteria' },
+        ],
+        shelfHighYield: [
+            'Opioid toxidrome: pinpoint pupils, depressed RR, depressed mentation, decreased GI motility.',
+            'Opioid withdrawal: yawning, lacrimation, rhinorrhea, piloerection, mydriasis, abdominal cramps, diarrhea, anxiety. **NOT life-threatening in adults** — but is in neonates (NAS).',
+            'Naltrexone (oral or extended-release IM): blocks relapse but **requires 7-day opioid-free interval** before initiation.',
+            'Methadone: full mu agonist — outpatient only via licensed OTP for OUD; ED can give a single 24h dose under "3-day rule" exception.',
+            'Buprenorphine prescribing: **DEA X-waiver no longer required** since the MAT Act (2023) — any DEA-registered clinician can prescribe.',
+        ],
+        linkedTreeId: 'opioid-withdrawal',
+        pillar: 'survival',
+        domain: 'substance',
+        tier: 1,
+        shelfPriority: 'high',
+    },
+    {
+        id: 'psych-tx-573',
+        rotationId: 'psychiatry',
+        sectionId: 'seeing',
+        title: 'Texas Emergency Detention (Chapter 573)',
+        trigger: 'Patient meets danger-to-self / danger-to-others / grave-disability criteria and refuses voluntary admission — anywhere in Texas.',
+        askThree: [
+            'Is the patient an imminent danger to self or others, OR experiencing such severe deterioration of psychosocial functioning that they cannot make rational decisions about treatment?',
+            'Has a peace officer or physician-completed application been initiated, AND is there a physician\'s certificate of medical examination ready?',
+            'Where will the 48-hour clock be served — local psychiatric facility, JPS, Austin State Hospital, or Integral Care?',
+        ],
+        oneBreathReframe: 'A 48-hour involuntary hold under Texas Health & Safety Code Chapter 573 — initiated by police on probable cause OR by a physician via written application — that buys time for a court-ordered Chapter 574 commitment if needed.',
+        sayOnRounds: '[Age]-y/o presenting with [SI / HI / grave disability] and refusing voluntary admission. **EDO under Texas HSC §573** initiated by [peace officer / physician]. Probable cause: [danger to self / others / inability to provide for basic needs]. Plan: complete physician\'s certificate of medical examination, transport to [facility] within 48 hours. Court hearing for Chapter 574 commitment if continued involuntary care needed.',
+        doNotMiss: [
+            '**48-hour clock starts at detention**, not arrival at facility — document time of EDO initiation.',
+            'Peace officer detention requires **probable cause that the person is mentally ill AND there is a substantial risk of serious harm to self or others if not immediately restrained**.',
+            'Physician\'s certificate of medical examination must include: clinical findings, opinion that detention criteria are met, and reasons for that opinion.',
+            '**SB 1164 (effective 9/1/2025)** broadened officer detention authority — know what your jurisdiction follows.',
+            'EDO is NOT a finding of incapacity — capacity assessment is separate. A patient on EDO can still refuse a non-emergent procedure.',
+        ],
+        pimpPrep: [
+            { question: 'What are the three criteria for an EDO in Texas?', answer: 'Mental illness AND (1) substantial risk of serious harm to self, (2) substantial risk of serious harm to others, OR (3) deterioration so severe that the person cannot provide for their basic needs.', tag: 'criteria' },
+            { question: 'Difference between Chapter 573 and Chapter 574?', answer: '573 = 48-hour emergency detention initiated by police or physician. 574 = court-ordered commitment after a hearing — 90 days (temporary) or 12 months (extended).', tag: 'pearl' },
+            { question: 'Does Texas have a Tarasoff duty-to-warn?', answer: 'NO — Thapar v. Zezulka (1999) limited the duty. Texas requires reasonable clinical steps but no specific duty-to-warn third parties.', tag: 'pearl' },
+        ],
+        shelfHighYield: [
+            'TX HSC §573 — Emergency Detention (48 hours).',
+            'TX HSC §574 — Court-Ordered Mental Health Services (90d or 12mo).',
+            'Local resources: Austin State Hospital, Integral Care (Travis County MHMR), JPS Behavioral Health.',
+            'Capacity (clinical) is decision-specific. Commitment (legal) is a different question.',
+            '**Tarasoff duty in TX: NONE per Thapar v. Zezulka** — but reasonable clinical steps still expected.',
+        ],
+        linkedTreeId: 'learn-tx-mh-code',
+        pillar: 'survival',
+        domain: 'emergencies',
+        tier: 1,
+        shelfPriority: 'high',
+        linkType: 'info',
+    },
+    {
+        id: 'psych-signout',
+        rotationId: 'psychiatry',
+        sectionId: 'present',
+        title: 'The 30-Second Psych Signout',
+        trigger: 'End of shift, change of service, or handing off to night float — every patient gets one of these whether you write it or not.',
+        askThree: [
+            'What is the legal status, and is anything pending today (clinic team meeting, court hearing, expected discharge)?',
+            'What is the active risk assessment — SI/HI/elopement — and what monitoring is in place (1:1 sitter, q15, line-of-sight)?',
+            'What is the disposition barrier RIGHT NOW — placement? insurance? medical clearance? family contact?',
+        ],
+        oneBreathReframe: 'A surgical 4-line bedside packet — Identifier · Legal · Risk · Disposition — that hands the next clinician everything they need to act safely without re-interviewing the chart.',
+        sayOnRounds: '"Bed [N], [age]-y/o with [primary dx]. **Legal:** [voluntary / EDO at hour X / certified through date]. **Risk:** [SI/HI/elopement status + monitoring level]. **Plan:** [today\'s active todo — meds, labs, family meeting, dispo barrier]. **Watch for:** [acute concern, e.g., escalating agitation, COWS rising, pending tox screen]." Done in 30 seconds. Anything else lives in the chart.',
+        doNotMiss: [
+            'NEVER include patient identifiers in handwritten or texted signouts — verbal at the bedside or formal EHR I-PASS only.',
+            'Always state legal status — voluntary patients can leave; EDO patients have a clock.',
+            '**Updated** suicide / homicide risk — yesterday\'s assessment is stale by morning.',
+            'Disposition barrier is the most useful single field — names what is preventing discharge today.',
+            'Closed-loop: receiver reads back the plan or the signout did not happen.',
+        ],
+        pimpPrep: [
+            { question: 'What does I-PASS stand for?', answer: 'Illness severity, Patient summary, Action list, Situation awareness/contingency planning, Synthesis by receiver.', tag: 'criteria' },
+            { question: 'What single field do you NEVER skip on a psych signout?', answer: 'Legal status. A voluntary patient ≠ an EDO patient ≠ a certified patient — the next person needs to know.', tag: 'pearl' },
+            { question: 'Closed-loop signout means what?', answer: 'The receiver verbalizes the plan back so both sides confirm understanding. If you talked AT them, you did not hand off.', tag: 'mechanism' },
+        ],
+        shelfHighYield: [
+            'I-PASS reduces preventable adverse events ~30% in published studies.',
+            'Most-missed signout fields: pending tasks, contingency plans, code status changes.',
+            'Texas EDO clock: 48 hours from time of detention, not arrival.',
+            'Voluntary admission discharge: usually 72-hour written notice to leave AMA.',
+            'Never sign out a SI/HI patient without naming current monitoring level (1:1, q15, line-of-sight).',
+        ],
+        linkedTreeId: '',
+        pillar: 'survival',
+        domain: 'skills',
+        tier: 1,
+        shelfPriority: 'med',
+    },
+    {
+        id: 'psych-lithium-tox',
+        rotationId: 'psychiatry',
+        sectionId: 'unsafe',
+        title: 'Lithium Toxicity at the Bedside',
+        trigger: 'Patient on lithium with new tremor, GI symptoms, ataxia, confusion, or any acute illness — narrow therapeutic index strikes again.',
+        askThree: [
+            'Is this acute (overdose), acute-on-chronic, or chronic toxicity — and what is the lithium level + when was it drawn relative to the last dose?',
+            'Any volume contraction (vomiting, diarrhea, fever), new NSAID, ACEi/ARB, thiazide, or recent dose increase?',
+            'Renal function, sodium, and any neurologic findings — tremor, ataxia, dysarthria, confusion, seizures, or myoclonus?',
+        ],
+        oneBreathReframe: 'A renally-cleared mood stabilizer with a therapeutic window of 0.6–1.2 mEq/L where toxicity scales with chronicity — acute overdose tolerates higher peaks transiently while chronic toxicity at 1.5–2.5 mEq/L can produce permanent neuro sequelae (SILENT syndrome).',
+        sayOnRounds: '[Age]-y/o on lithium [dose, indication] presenting with [tremor / GI / neuro symptoms]. **Lithium level [value]** drawn [timing]. Renal: Cr [value], urinary output [adequate/poor]. Volume status: [euvolemic / contracted]. Plan: stop lithium, IV NS at maintenance + replacement, monitor q4–6h levels, **hemodialysis** if level >4.0 (acute) or >2.5 (chronic) with neuro symptoms / renal failure / level not falling. Consult nephrology and psychiatry.',
+        doNotMiss: [
+            '**Chronic toxicity is more dangerous than acute** — chronic at 1.5 can outdo acute at 4.0. Treat by chronicity, not absolute level.',
+            'NEVER give thiazides, ACEi/ARBs, or NSAIDs to a lithium-toxic patient — all decrease lithium clearance.',
+            'Hemodialysis indications: level >4.0 (acute) or >2.5 (chronic) with sx, renal failure, or level not declining at 0.5 mEq/L per 12h.',
+            'After HD, levels REBOUND — recheck 4–6h after session as tissue lithium re-equilibrates.',
+            '**SILENT syndrome:** persistent neurologic sequelae (cerebellar, EPS, cognitive) after lithium toxicity — even after level normalizes.',
+        ],
+        pimpPrep: [
+            { question: 'Why does volume contraction worsen lithium toxicity?', answer: 'Lithium reabsorption parallels sodium in the proximal tubule. Volume contraction → enhanced Na (and Li) reabsorption → rising levels even at unchanged dose.', tag: 'mechanism' },
+            { question: 'Therapeutic range for lithium?', answer: '0.6–1.2 mEq/L (acute mania) and 0.4–0.8 mEq/L (maintenance). Levels >1.5 = toxic, >2.5 = severe.', tag: 'criteria' },
+            { question: 'When do you dialyze for lithium toxicity?', answer: 'Level >4.0 (acute) or >2.5 (chronic) with neuro symptoms, renal failure, or level not falling. Continuous renal replacement also acceptable.', tag: 'next-step' },
+        ],
+        shelfHighYield: [
+            'Lithium side effects: tremor, polyuria/nephrogenic DI, hypothyroidism, weight gain, acne, cognitive slowing.',
+            'Lithium TI: 0.6–1.2 mEq/L. Toxic >1.5. Severe >2.5. Trough drawn 12 hours after last dose.',
+            'Drug interactions: thiazides ↑ Li (↓ clearance), NSAIDs ↑ Li, ACEi ↑ Li, caffeine ↓ Li slightly.',
+            'Pregnancy: Ebstein anomaly risk in 1st trimester (~0.05–0.1%, far lower than older estimates) — discuss risk/benefit, do not auto-discontinue.',
+            'Lithium **decreases suicide risk in bipolar** — independent of mood stabilization.',
+        ],
+        linkedTreeId: 'learn-lithium-toxicity',
+        pillar: 'survival',
+        domain: 'emergencies',
+        tier: 1,
+        shelfPriority: 'high',
+        linkType: 'info',
+    },
+    {
+        id: 'psych-anticholinergic',
+        rotationId: 'psychiatry',
+        sectionId: 'unsafe',
+        title: 'Anticholinergic Delirium',
+        trigger: 'Patient with new confusion + hot/dry/red skin + urinary retention + mydriasis — especially the elderly on poly-pharmacy or after antihistamine/TCA exposure.',
+        askThree: [
+            'What new medication or dose change in the last 24–72 hours — especially diphenhydramine, hydroxyzine, TCAs, low-potency antipsychotics, or scopolamine?',
+            'Vitals: temperature, HR, BP, urinary output, bowel sounds — looking for dry skin, mydriasis, ileus, retention?',
+            'Anything ingested intentionally — Jimson weed (datura), benztropine bingeing, or "TCA cocktail"?',
+        ],
+        oneBreathReframe: '"**Hot as a hare, dry as a bone, red as a beet, blind as a bat, mad as a hatter, full as a flask**" — a muscarinic-blockade toxidrome from antihistamines, TCAs, antipsychotics, or plant alkaloids that crosses the blood-brain barrier and causes delirium with hyperthermia.',
+        sayOnRounds: '[Age]-y/o presenting with [duration] of confusion in setting of [agent + dose]. Exam: [tachycardia, hyperthermia, mydriasis, dry mucous membranes, flushed skin, urinary retention, ileus, agitation]. Differential: anticholinergic vs sympathomimetic vs serotonergic. Plan: stop offending agent, supportive (IV fluids, cooling, benzodiazepines for agitation), consider physostigmine 1–2 mg IV slow over 5 min for severe central toxicity (NOT in TCA OD — risk of asystole). Monitor for prolonged QT and seizures.',
+        doNotMiss: [
+            '**Physostigmine is contraindicated in TCA overdose** — risk of asystole, seizures, and prolonged QRS. Sodium bicarbonate is the answer for TCA-related cardiotoxicity.',
+            'Hyperthermia + agitation → dantrolene or active cooling, not phenothiazines (worsen anticholinergic burden).',
+            'Elderly are exquisitely sensitive — single diphenhydramine dose can precipitate delirium per Beers Criteria.',
+            'Tricyclic OD: wide QRS >100 ms = give bicarb. >160 ms = high risk of seizure / arrhythmia.',
+            'Differential: sympathomimetic = wet (sweating). Serotonergic = clonus + hyperreflexia. Anticholinergic = dry + mydriasis + ileus.',
+        ],
+        pimpPrep: [
+            { question: 'Six classic features of anticholinergic toxidrome?', answer: 'Hot (hyperthermia), Dry (anhidrosis), Red (flushed), Blind (mydriasis, blurred vision), Mad (delirium), Full (urinary retention).', tag: 'criteria' },
+            { question: 'When do you give physostigmine?', answer: 'Severe central anticholinergic delirium with hemodynamic stability and **NO TCA exposure**. Dose: 1–2 mg IV slowly. Have atropine at bedside for bradycardia.', tag: 'next-step' },
+            { question: 'Why is sodium bicarbonate the answer for TCA-induced wide QRS?', answer: 'TCAs block fast sodium channels in cardiac myocytes — bicarbonate raises serum sodium and pH, displacing TCA from the channel and narrowing QRS.', tag: 'mechanism' },
+        ],
+        shelfHighYield: [
+            'Anticholinergic burden score (ACB): higher score = worse cognition in elderly. Common offenders: diphenhydramine, hydroxyzine, TCAs, oxybutynin, paroxetine.',
+            'Beers Criteria flags first-gen antihistamines and TCAs for elderly — consider second-gen alternatives.',
+            'Physostigmine half-life is short (~30 min) — toxin half-life often longer → re-dose or supportive care.',
+            'Datura/Jimson weed ingestion: classic college-age presentation with severe central anticholinergic syndrome.',
+            'Coma cocktail in undifferentiated AMS: thiamine, glucose, naloxone — physostigmine is NOT routine.',
+        ],
+        linkedTreeId: 'delirium',
+        pillar: 'survival',
+        domain: 'cognitive',
+        tier: 1,
+        shelfPriority: 'med',
     },
 ];
 // ===================================================================
@@ -364,19 +617,19 @@ const PSYCHIATRY_ROTATION = {
             id: 'seeing',
             title: "I'm Seeing A Psych Patient",
             blurb: 'First moves when a patient hits your service — orient, screen, decide who is sick.',
-            cardIds: ['psych-capacity', 'psych-delirium-vs-psychosis', 'psych-suicide-cssrs'],
+            cardIds: ['psych-capacity', 'psych-delirium-vs-psychosis', 'psych-suicide-cssrs', 'psych-tx-573'],
         },
         {
             id: 'unsafe',
             title: 'Patient Is Unsafe Or Agitated',
             blurb: 'Acute behavioral or medication emergencies — recognize, de-escalate, escalate.',
-            cardIds: ['psych-agitation-beta', 'psych-alcohol-withdrawal', 'psych-nms-vs-ss'],
+            cardIds: ['psych-agitation-beta', 'psych-alcohol-withdrawal', 'psych-opioid-od', 'psych-nms-vs-ss', 'psych-lithium-tox', 'psych-anticholinergic'],
         },
         {
             id: 'present',
             title: 'I Need To Present This Patient',
-            blurb: 'MSE language and the one-liner that earns you the rest of the morning.',
-            cardIds: ['psych-mse', 'psych-presentation'],
+            blurb: 'MSE language, the one-liner that earns you the rest of the morning, and a 30-second signout.',
+            cardIds: ['psych-mse', 'psych-presentation', 'psych-signout'],
         },
         {
             id: 'understand',
@@ -385,6 +638,11 @@ const PSYCHIATRY_ROTATION = {
             cardIds: ['psych-first-break', 'psych-catatonia'],
         },
     ],
+    texasModule: {
+        infoPageId: 'learn-tx-mh-code',
+        title: 'Texas Mental Health Code',
+        subtitle: 'Chapter 573 EDO · Chapter 574 commitment · Tarasoff in TX',
+    },
 };
 export const ALL_LEARN_ROTATIONS = [PSYCHIATRY_ROTATION];
 const ALL_CARDS = [...PSYCH_CARDS];
@@ -413,4 +671,38 @@ export function getCardsForSection(rotationId, sectionId) {
 }
 export function getAllCardsForRotation(rotationId) {
     return ALL_CARDS.filter(c => c.rotationId === rotationId);
+}
+export function getCardsForPillar(rotationId, pillar) {
+    return ALL_CARDS.filter(c => c.rotationId === rotationId && c.pillar === pillar);
+}
+export function getCardsForDomain(rotationId, domain) {
+    return ALL_CARDS.filter(c => c.rotationId === rotationId && c.domain === domain);
+}
+// Internal helper used by future content files (conditions, pharmacology) to
+// register additional cards into the global registry.
+export function _registerCards(cards) {
+    for (const c of cards) {
+        if (!ALL_CARDS.find(x => x.id === c.id))
+            ALL_CARDS.push(c);
+    }
+}
+export function _registerDrills(rotationId, drills) {
+    const r = ALL_LEARN_ROTATIONS.find(x => x.id === rotationId);
+    if (!r)
+        return;
+    if (!r.drills)
+        r.drills = [];
+    for (const d of drills) {
+        if (!r.drills.find(x => x.id === d.id))
+            r.drills.push(d);
+    }
+}
+export function _setTexasModule(rotationId, ref) {
+    const r = ALL_LEARN_ROTATIONS.find(x => x.id === rotationId);
+    if (r)
+        r.texasModule = ref;
+}
+export function getDrill(rotationId, drillId) {
+    const r = getLearnRotation(rotationId);
+    return r?.drills?.find(d => d.id === drillId);
 }

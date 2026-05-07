@@ -1,8 +1,9 @@
 // myMedKitt — MedKitt Learn student card
 // Renders the 7-field Student Card and links to the underlying consult tree.
-import { getCard, getRotation } from '../services/learn-service.js';
+import { getCard, getRotation, isCardReviewed, setCardReviewed } from '../services/learn-service.js';
 import { router } from '../services/router.js';
 import { appendBoldAware } from './text-renderer.js';
+import { showInfoModal } from './info-page.js';
 export function renderLearnCard(container, rotationId, cardId) {
     container.innerHTML = '';
     const card = getCard(cardId);
@@ -41,21 +42,61 @@ export function renderLearnCard(container, rotationId, cardId) {
     page.appendChild(renderPimpField('They might pimp you on', card.pimpPrep));
     // Field 7: Shelf high-yield
     page.appendChild(renderListField('Shelf high-yield', card.shelfHighYield, 'shelf'));
-    // Open Consult button
+    // Open Consult / Open Info / Open Drill button (link target depends on linkType)
     const cta = document.createElement('div');
     cta.className = 'learn-card__cta';
-    const openBtn = document.createElement('button');
-    openBtn.className = 'learn-open-consult-btn';
-    openBtn.type = 'button';
-    openBtn.textContent = `Open Consult → ${card.title}`;
-    openBtn.addEventListener('click', () => {
-        router.navigate(`/tree/${card.linkedTreeId}`);
+    const linkType = card.linkType ?? 'tree';
+    const linkId = card.linkedTreeId;
+    const hasLink = linkId.trim().length > 0;
+    if (hasLink) {
+        const openBtn = document.createElement('button');
+        openBtn.className = 'learn-open-consult-btn';
+        openBtn.type = 'button';
+        let buttonLabel = `Open Consult → ${card.title}`;
+        let hint = 'Opens the full clinician decision tree. Browser back returns here.';
+        if (linkType === 'info') {
+            buttonLabel = `Open Reference → ${card.title}`;
+            hint = 'Opens the reference page. Browser back returns here.';
+        }
+        else if (linkType === 'drill') {
+            buttonLabel = `Start Drill → ${card.title}`;
+            hint = 'Launches an interactive OSCE drill. Browser back returns here.';
+        }
+        openBtn.textContent = buttonLabel;
+        openBtn.addEventListener('click', () => {
+            if (linkType === 'info')
+                showInfoModal(linkId);
+            else if (linkType === 'drill')
+                router.navigate(`/learn/${rotationId}/drill/${linkId}`);
+            else
+                router.navigate(`/tree/${linkId}`);
+        });
+        cta.appendChild(openBtn);
+        const ctaHint = document.createElement('div');
+        ctaHint.className = 'learn-card__cta-hint';
+        ctaHint.textContent = hint;
+        cta.appendChild(ctaHint);
+    }
+    // Mark Reviewed toggle — localStorage-backed
+    const reviewWrap = document.createElement('div');
+    reviewWrap.className = 'learn-card__review';
+    const reviewBtn = document.createElement('button');
+    reviewBtn.className = 'learn-card__review-btn';
+    reviewBtn.type = 'button';
+    let reviewed = isCardReviewed(card.id);
+    const renderReviewBtn = () => {
+        reviewBtn.classList.toggle('selected', reviewed);
+        reviewBtn.textContent = reviewed ? '✓ Reviewed' : 'Mark Reviewed';
+        reviewBtn.setAttribute('aria-pressed', reviewed ? 'true' : 'false');
+    };
+    renderReviewBtn();
+    reviewBtn.addEventListener('click', () => {
+        reviewed = !reviewed;
+        setCardReviewed(card.id, reviewed);
+        renderReviewBtn();
     });
-    cta.appendChild(openBtn);
-    const ctaHint = document.createElement('div');
-    ctaHint.className = 'learn-card__cta-hint';
-    ctaHint.textContent = 'Opens the full clinician decision tree. Browser back returns here.';
-    cta.appendChild(ctaHint);
+    reviewWrap.appendChild(reviewBtn);
+    cta.appendChild(reviewWrap);
     page.appendChild(cta);
     container.appendChild(page);
 }

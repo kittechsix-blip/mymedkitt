@@ -40,13 +40,15 @@ async function refreshFromSupabase() {
 async function loadHardcodedFallback() {
     const mod = await import('../data/info-pages.js');
     const stopMod = await import('../data/stop-pages.js');
-    setCache([...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages()]);
+    const learnMod = await import('../data/info-pages-learn.js');
+    setCache([...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages(), ...learnMod.getAllLearnInfoPages()]);
 }
 /** Merge hardcoded info pages missing from cached data */
 async function mergeHardcodedInfoPages() {
     const mod = await import('../data/info-pages.js');
     const stopMod = await import('../data/stop-pages.js');
-    const hardcoded = [...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages()];
+    const learnMod = await import('../data/info-pages-learn.js');
+    const hardcoded = [...mod.getAllInfoPagesFallback(), ...stopMod.getAllStopPages(), ...learnMod.getAllLearnInfoPages()];
     for (const page of hardcoded) {
         const existing = infoPageMap.get(page.id);
         if (!existing) {
