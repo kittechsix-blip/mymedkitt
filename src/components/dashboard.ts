@@ -260,6 +260,38 @@ export function renderDashboard(container: HTMLElement): void {
     dashboard.appendChild(recentsSection);
   }
 
+  // ---- MedKitt Learn hero card (full-access only) ----
+  if (!isSharedMode()) {
+    const learnCard = document.createElement('button');
+    learnCard.className = 'dashboard-learn-card';
+    learnCard.type = 'button';
+    learnCard.setAttribute('aria-label', 'Open MedKitt Learn — student rotation mode');
+
+    const learnBadge = document.createElement('div');
+    learnBadge.className = 'dashboard-learn-card__badge';
+    learnBadge.textContent = 'NEW';
+    learnCard.appendChild(learnBadge);
+
+    const learnTitle = document.createElement('div');
+    learnTitle.className = 'dashboard-learn-card__title';
+    learnTitle.textContent = 'MedKitt Learn';
+    learnCard.appendChild(learnTitle);
+
+    const learnSub = document.createElement('div');
+    learnSub.className = 'dashboard-learn-card__sub';
+    learnSub.textContent = 'Clinical rotation mode for medical students — Psychiatry available now.';
+    learnCard.appendChild(learnSub);
+
+    const learnArrow = document.createElement('div');
+    learnArrow.className = 'dashboard-learn-card__arrow';
+    learnArrow.textContent = '→';
+    learnArrow.setAttribute('aria-hidden', 'true');
+    learnCard.appendChild(learnArrow);
+
+    learnCard.addEventListener('click', () => router.navigate('/learn'));
+    dashboard.appendChild(learnCard);
+  }
+
   // ---- Categories ----
   const categoriesSection = document.createElement('div');
   categoriesSection.className = 'dashboard-categories';
