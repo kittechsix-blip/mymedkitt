@@ -818,4 +818,5 @@ export const ALCOHOL_WITHDRAWAL_CITATIONS: Citation[] = [
   { num: 15, text: 'Borgundvaag B, Bellolio F, Miles I, et al. Guidelines for Reasonable and Appropriate Care in the Emergency Department (GRACE-4): Alcohol use disorder and cannabinoid hyperemesis syndrome management in the emergency department. Acad Emerg Med. 2024;31(5):425-455. doi:10.1111/acem.14911' },
   { num: 16, text: 'Wood E, Bright J, Hsu K, et al. Canadian guideline for the clinical management of high-risk drinking and alcohol use disorder. CMAJ. 2023;195(40):E1364-E1379. doi:10.1503/cmaj.230715' },
   { num: 17, text: 'Fairbanks J, Umbreit A, Kolla BP, et al. Evidence-Based Pharmacotherapies for Alcohol Use Disorder: Clinical Pearls. Mayo Clin Proc. 2020;95(9):1964-1977. doi:10.1016/j.mayocp.2020.01.030' },
+  { num: 18, text: 'Briggs et al. Fewer Admissions, Shorter Stays: Phenobarbital Use for Alcohol Withdrawal in the Emergency Department. Acad Emerg Med. 2026. — Phenobarb-only admission rate 52.1% vs 74.0% benzo-only (OR 0.44, p<0.0001); ED LOS 5.8h vs 7.6h.' },
 ];

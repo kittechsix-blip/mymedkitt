@@ -436,4 +436,7 @@ export const CARDIOGENIC_SHOCK_CITATIONS: Citation[] = [
   { num: 5, text: 'Harjola VP et al. Contemporary management of cardiogenic shock. Eur Heart J. 2020;41(11):1179-1188.' },
   { num: 6, text: 'UpToDate - Inotropic agents in heart failure with reduced ejection fraction. 2024.' },
   { num: 7, text: 'Basir MB et al. Improved outcomes with early initiation of mechanical circulatory support. J Am Coll Cardiol. 2021;77(9):1125-1136.' },
+  { num: 8, text: '2025 Concise Clinical Guidance: An ACC Expert Consensus Statement on the Evaluation and Management of Cardiogenic Shock. JACC. 2025. doi:10.1016/j.jacc.2025.02.018' },
+  { num: 9, text: 'Møller JE et al. Microaxial flow pump or standard care in infarct-related cardiogenic shock (DanGer Shock). N Engl J Med. 2024;390(15):1382-1393. — 26% relative reduction in 180-day mortality (46% vs 59%) in selected STEMI-CS.' },
+  { num: 10, text: 'Thiele H et al. Extracorporeal life support in infarct-related cardiogenic shock (ECLS-SHOCK). N Engl J Med. 2023;389:1286-1297. — No 30-day mortality benefit from routine VA-ECMO.' },
 ];

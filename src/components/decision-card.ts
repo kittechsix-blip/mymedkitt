@@ -232,7 +232,33 @@ function renderActiveInfo(card: HTMLElement, node: DecisionNode, opts: CardOptio
     renderInlineCitations(card, node.citation, opts.config.citations);
   }
 
-  if (node.next) {
+  // Branching options (Flow Rider FLAG fix 2026-05-06):
+  // type: 'info' nodes can carry an options[] array for branching decisions
+  // (e.g. RHF rhf-start: Unstable / Stable / Intubated / PAH crisis).
+  // Previously renderActiveInfo only rendered node.next, dead-ending any
+  // info node with options[].
+  if (node.options && node.options.length > 0) {
+    const optionsContainer = document.createElement('div');
+    optionsContainer.className = 'decision-card__options';
+
+    for (let i = 0; i < node.options.length; i++) {
+      const opt = node.options[i];
+
+      let variant: 'charcoal' | 'critical' | 'urgent' = 'charcoal';
+      if (opt.urgency === 'critical') variant = 'critical';
+      else if (opt.urgency === 'urgent') variant = 'urgent';
+
+      const btn = create3DButton(opt.label, {
+        variant,
+        description: opt.description,
+        onClick: () => opts.onOptionSelect?.(i),
+      });
+
+      optionsContainer.appendChild(btn);
+    }
+
+    card.appendChild(optionsContainer);
+  } else if (node.next) {
     const continueBtn = create3DButton('Continue \u2192', {
       variant: 'charcoal',
       onClick: () => opts.onContinue?.(),
