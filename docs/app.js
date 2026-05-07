@@ -5,6 +5,11 @@ import { router } from './services/router.js';
 import { renderDashboard } from './components/dashboard.js';
 import { renderSpecialtyView } from './components/specialty-view.js';
 import { renderConsultFlow } from './components/consult-flow.js';
+import { renderLearnHome } from './components/learn-home.js';
+import { renderLearnRotation } from './components/learn-rotation.js';
+import { renderLearnCard } from './components/learn-card.js';
+import { renderLearnPreRound } from './components/learn-pre-round.js';
+import { renderLearnShelfSummary } from './components/learn-shelf-summary.js';
 import { renderReferencePanel } from './components/reference-table.js';
 import { renderCalculator, renderCalculatorList } from './components/calculator.js';
 import { renderDrugList } from './components/drug-store.js';
@@ -180,6 +185,41 @@ function handleShare(params) {
     }
     window.location.replace('#/tree/' + treeId);
 }
+function handleLearnHome(_params) {
+    removeContextualToolbar();
+    hideGlobalTabBar();
+    const main = clearMain();
+    renderLearnHome(main);
+}
+function handleLearnRotation(params) {
+    removeContextualToolbar();
+    hideGlobalTabBar();
+    const rotationId = params['rotationId'] ?? 'unknown';
+    const main = clearMain();
+    renderLearnRotation(main, rotationId);
+}
+function handleLearnCard(params) {
+    removeContextualToolbar();
+    hideGlobalTabBar();
+    const rotationId = params['rotationId'] ?? 'unknown';
+    const cardId = params['cardId'] ?? 'unknown';
+    const main = clearMain();
+    renderLearnCard(main, rotationId, cardId);
+}
+function handleLearnPreRound(params) {
+    removeContextualToolbar();
+    hideGlobalTabBar();
+    const rotationId = params['rotationId'] ?? 'unknown';
+    const main = clearMain();
+    renderLearnPreRound(main, rotationId);
+}
+function handleLearnShelf(params) {
+    removeContextualToolbar();
+    hideGlobalTabBar();
+    const rotationId = params['rotationId'] ?? 'unknown';
+    const main = clearMain();
+    renderLearnShelfSummary(main, rotationId);
+}
 function handleNotFound() {
     removeContextualToolbar();
     showGlobalTabBar('');
@@ -229,6 +269,11 @@ async function init() {
     router.on('/drugs', handleDrugList);
     router.on('/calculators', handleCalculatorList);
     router.on('/calculator/:id', handleCalculator);
+    router.on('/learn', handleLearnHome);
+    router.on('/learn/:rotationId', handleLearnRotation);
+    router.on('/learn/:rotationId/card/:cardId', handleLearnCard);
+    router.on('/learn/:rotationId/pre-round', handleLearnPreRound);
+    router.on('/learn/:rotationId/shelf', handleLearnShelf);
     router.onNotFound(handleNotFound);
     // Start routing
     router.start();
