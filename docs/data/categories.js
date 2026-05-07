@@ -120,7 +120,7 @@ export const DEFAULT_CATEGORIES = [
                 subtitle: 'POCUS → Trigger ID → Etiology Algorithm → Hemodynamic Ladder → RV-Protective Intubation → Disposition',
                 categoryId: 'cardiology',
                 version: '1.0',
-                nodeCount: 22,
+                nodeCount: 19,
                 entryNodeId: 'rhf-start',
             },
             {
@@ -1669,7 +1669,7 @@ export const DEFAULT_CATEGORIES = [
                 subtitle: 'Triage → Open Globe/IOFB → Chemical Burn → Closed Globe/Hyphema/OCS → Lid/Cornea/FB → Disposition',
                 categoryId: 'ophthalmology',
                 version: '1.0',
-                nodeCount: 32,
+                nodeCount: 33,
                 entryNodeId: 'oct-start',
             },
         ],

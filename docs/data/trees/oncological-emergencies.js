@@ -4,14 +4,14 @@
 export const ONCOLOGICAL_EMERGENCIES_CRITICAL_ACTIONS = [
     { text: 'Febrile neutropenia: ANC <500 + Temp ≥38.3°C (single) or ≥38.0°C sustained 1h — empiric antibiotics within 60 minutes', nodeId: 'onc-fn-recognize' },
     { text: 'TLS: aggressive IVF (NS 2-3 L/m²/day) FIRST; rasburicase if uric acid >8 or rapid rise — check G6PD if time allows', nodeId: 'onc-tls-treat' },
-    { text: 'Hypercalcemia >14 mg/dL or symptomatic: NS 200-300 mL/hr + calcitonin 4 IU/kg SC q12h + zoledronic acid 4 mg IV', nodeId: 'onc-hyperca-treat' },
+    { text: 'Hypercalcemia >14 mg/dL or symptomatic: NS 200-300 mL/hr + calcitonin 4 IU/kg SC q12h + denosumab 120 mg SC (Endo Society 2022 first-line) OR zoledronic acid 4 mg IV', nodeId: 'onc-hyperca-treat' },
     { text: 'MSCC: dexamethasone 10 mg IV stat BEFORE imaging if high suspicion; emergent MRI whole spine within 24h', nodeId: 'onc-mscc-treat' },
     { text: 'SVC syndrome with cerebral edema or airway compromise: head elevation, dexamethasone, urgent stent or RT', nodeId: 'onc-svc-emergency' },
     { text: 'Leukostasis (WBC >100k with symptoms): hydration + cytoreduction (hydroxyurea or leukapheresis); HOLD transfusions if possible', nodeId: 'onc-leuko-treat' },
     { text: 'Malignant pericardial tamponade: avoid intubation/PEEP, vasopressors + cautious IVF, emergent US-guided pericardiocentesis', nodeId: 'onc-pericardial-treat' },
     { text: 'CRS Grade 2+: tocilizumab 8 mg/kg IV (max 800 mg); add dexamethasone 10 mg IV q6h for Grade 3+; ICU for Grade 3-4', nodeId: 'onc-crs-treat' },
     { text: 'ICANS Grade 2+: dexamethasone 10 mg IV q6h + levetiracetam prophylaxis; methylpred 1g IV daily for Grade 4', nodeId: 'onc-icans-treat' },
-    { text: 'ICI myocarditis: methylprednisolone 1g IV daily x 3 days, ICU, cards consult — 25-50% mortality if missed', nodeId: 'onc-ici-myocarditis' },
+    { text: 'ICI myocarditis: methylprednisolone 500-1000 mg IV daily x 3-5 days (start <24h), ICU, cards consult; abatacept 10 mg/kg if steroid-refractory (avoid infliximab in CHF) — 25-50% mortality if missed', nodeId: 'onc-ici-myocarditis' },
 ];
 export const ONCOLOGICAL_EMERGENCIES_NODES = [
     // =====================================================================
