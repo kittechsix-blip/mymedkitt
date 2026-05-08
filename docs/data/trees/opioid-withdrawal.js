@@ -3,16 +3,17 @@
 // opioid agonist therapy (buprenorphine/methadone), non-opioid adjuncts,
 // precipitated withdrawal, and disposition with MOUD referral.
 // 6 modules: Recognition → DDx/Workup → Agonist Therapy → Adjuncts → Precipitated WD → Disposition
-// 27 nodes total.
+// 26 nodes total.
 export const OPIOID_WITHDRAWAL_CRITICAL_ACTIONS = [
     { text: 'Calculate COWS score to objectively assess withdrawal severity', nodeId: 'ow-recognize' },
-    { text: 'Initiate buprenorphine when COWS ≥8 (moderate withdrawal)', nodeId: 'ow-bup-dosing' },
-    { text: 'Give buprenorphine 4mg SL, reassess in 60-90min, repeat up to 16-24mg day 1', nodeId: 'ow-bup-dosing' },
-    { text: 'Avoid precipitated withdrawal: wait for withdrawal signs before first dose', nodeId: 'ow-precipitated' },
+    { text: 'Initiate buprenorphine when objective withdrawal is present', nodeId: 'ow-bup-protocol' },
+    { text: 'Give buprenorphine 4mg SL, reassess in 60-90min, repeat up to 16-24mg day 1', nodeId: 'ow-bup-standard' },
+    { text: 'Fentanyl: do not use clock time alone. Wait for objective withdrawal or use low-dose overlap', nodeId: 'ow-fentanyl-nuance' },
+    { text: 'Avoid precipitated withdrawal: wait for withdrawal signs before first dose', nodeId: 'ow-precip-entry' },
     { text: 'Provide non-opioid adjuncts: ondansetron, loperamide, clonidine, NSAIDs', nodeId: 'ow-adjuncts' },
-    { text: 'Arrange MOUD follow-up within 72 hours before discharge', nodeId: 'ow-dispo' },
-    { text: 'Prescribe 3-day buprenorphine bridge prescription to outpatient provider', nodeId: 'ow-dispo' },
-    { text: 'Provide naloxone kit and overdose prevention education', nodeId: 'ow-dispo' },
+    { text: 'Arrange MOUD follow-up within 72 hours before discharge', nodeId: 'ow-disposition' },
+    { text: 'Prescribe 3-day buprenorphine bridge prescription to outpatient provider', nodeId: 'ow-disposition' },
+    { text: 'Provide naloxone kit and overdose prevention education', nodeId: 'ow-disposition' },
 ];
 export const OPIOID_WITHDRAWAL_NODES = [
     // ===================================================================
@@ -222,36 +223,49 @@ export const OPIOID_WITHDRAWAL_NODES = [
         type: 'question',
         module: 3,
         title: 'Buprenorphine Initiation',
-        body: 'Choose the induction strategy based on the clinical scenario.\n\n[Buprenorphine Initiation Guide](#/info/ow-bup-guide)',
-        citation: [8, 9, 10],
-        summary: 'Choose induction strategy: standard (COWS≥8, 8mg SL), microdosing (fentanyl/methadone patients, avoids precipitated WD), or wait if COWS<8',
+        body: 'Choose the induction strategy based on the clinical scenario.\n\n**Fentanyl changes the first-dose decision.** Do not dose by clock time alone. Use objective withdrawal signs or choose low-dose overlap if the patient has heavy fentanyl exposure, prior precipitated withdrawal, or cannot tolerate abstinence.\n\n[Buprenorphine Initiation Guide](#/info/ow-bup-guide)\n\n[Fentanyl-Specific Withdrawal Nuance](#/node/ow-fentanyl-nuance)',
+        citation: [8, 9, 10, 18, 19, 20],
+        summary: 'Choose induction strategy: standard/high-dose when objective withdrawal is clear, low-dose overlap for fentanyl/methadone or prior PW risk, or wait if COWS is too low',
         options: [
             {
-                label: 'COWS ≥ 8 — Standard induction',
-                description: '8 mg SL → reassess → max 32 mg',
+                label: 'Objective moderate withdrawal - Standard or high-dose',
+                description: 'Start 2-8 mg if borderline, 8-16 mg if clear',
                 next: 'ow-bup-standard',
             },
             {
-                label: 'On full agonist / fentanyl — Microdosing',
-                description: '0.5–2 mg SL, avoid precipitated WD',
+                label: 'Heavy fentanyl / prior PW - Low-dose overlap',
+                description: '0.5-2 mg SL while full agonist continues',
                 next: 'ow-bup-micro',
             },
             {
-                label: 'COWS < 8 — Wait and reassess',
+                label: 'COWS < 8 - Wait and reassess',
                 description: 'Too early for standard induction',
                 next: 'ow-bup-wait',
             },
         ],
     },
     {
+        id: 'ow-fentanyl-nuance',
+        type: 'info',
+        module: 3,
+        title: 'Fentanyl-Specific Withdrawal',
+        body: '**Plain English:** fentanyl can keep leaking out of body tissues after the patient stops using, so "last use was yesterday" is not enough to know if buprenorphine is safe.\n\n**Analogy:** heroin is like a puddle drying on concrete. Fentanyl is like oil soaked into a sponge. The surface may look dry, but the sponge can keep releasing more.\n\n**Why fentanyl is different:**\n• Fentanyl is highly lipophilic, meaning it likes body fat and tissue\n• With repeated use, it can redistribute out of tissue after the last dose\n• Urine studies in people with OUD found mean fentanyl clearance around **7.3 days** and norfentanyl around **13.3 days**, with some patients longer [18]\n• Urine positivity does not prove active intoxication, but it explains why clock time alone is unreliable\n\n**Why precipitated withdrawal happens:**\n• Buprenorphine binds the mu opioid receptor very tightly\n• If enough fentanyl or another full agonist is still sitting on those receptors, buprenorphine can displace it\n• Because buprenorphine is only a partial agonist, the net opioid effect suddenly drops and the patient feels abruptly worse [19][20]\n\n**How to avoid it:**\n1. Do not dose by clock time alone\n2. Do not start standard induction if sedated, intoxicated, or only having subjective craving/anxiety\n3. For fentanyl exposure, wait for clear objective withdrawal when using standard induction. SAMHSA advises adequate withdrawal, COWS >12, and notes fentanyl may need a higher COWS score with lower initial dosing [19]\n4. Objective signs matter more than the number: mydriasis, piloerection, yawning, rhinorrhea, diarrhea, tachycardia, restlessness\n5. If borderline, start lower, such as 2-4 mg SL, and reassess in 30-60 minutes\n6. If prior precipitated withdrawal, heavy daily fentanyl, inability to tolerate abstinence, or repeated COWS 5-12, use low-dose overlap/microinduction instead [20]\n7. If severe withdrawal is already present and the patient wants rapid relief, ED high-dose buprenorphine is still reasonable with monitoring. ED studies show low precipitated-withdrawal rates overall, but risk varies by setting [9][21][22]\n8. Consider methadone when buprenorphine induction repeatedly fails, the patient prefers methadone, or very high tolerance makes partial agonist therapy difficult\n\n**If precipitated withdrawal occurs:**\n• Treat it actively and stay with the patient\n• Give additional buprenorphine when clinically appropriate, often 8-16 mg increments up to 24-32 mg total\n• Add symptom control, such as clonidine, antiemetic, NSAID, fluids, and careful sedation only when needed\n• Reassure the patient: this is a receptor transition problem, not an allergy\n\n**Bottom line:** fentanyl does not prohibit buprenorphine. It makes the first dose more careful.',
+        citation: [9, 18, 19, 20, 21, 22],
+        calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
+        next: 'ow-bup-protocol',
+        summary: 'Fentanyl can persist in tissue; avoid clock-based buprenorphine starts, use objective withdrawal or low-dose overlap.',
+        safetyLevel: 'warning',
+        skippable: true,
+    },
+    {
         id: 'ow-bup-standard',
         type: 'result',
         module: 3,
         title: 'Standard Buprenorphine Induction',
-        body: '[Buprenorphine](#/drug/buprenorphine/opioid withdrawal standard) **8 mg SL** initially\n\n1. Reassess COWS in **30–60 minutes**\n2. If symptoms persist: give additional **4–8 mg SL**\n3. Repeat until symptom control or COWS < 8\n4. Maximum Day 1 total: **32 mg**\n\n**High-dose induction** (starting at 12–16 mg) is safe and increasingly preferred in the fentanyl era — 579-patient case series showed no respiratory depression. [8][9]\n\n**If buprenorphine precipitates withdrawal:** Give **more buprenorphine** (not less) — up to 16–32 mg total. This overcomes the partial agonist displacement and transitions the patient to buprenorphine maintenance. [11]\n\n**IV alternative** for severe GI distress: 0.3–0.9 mg IV over 20–30 min. [4]',
+        body: '[Buprenorphine](#/drug/buprenorphine/opioid withdrawal standard) **8 mg SL** initially when objective withdrawal is clear\n\n1. Reassess COWS in **30–60 minutes**\n2. If symptoms persist: give additional **4–8 mg SL**\n3. Repeat until symptom control or COWS < 8\n4. Maximum Day 1 total: **32 mg**\n\n**Fentanyl nuance:** do not start by clock time alone. If the patient has heavy fentanyl exposure and is borderline, consider **2–4 mg SL first** and reassess, or choose low-dose overlap instead. [18][19][20]\n\n**High-dose induction** (starting at 12–16 mg) is reasonable when withdrawal is clearly moderate/severe. ED studies in the fentanyl era show low overall precipitated-withdrawal rates, but risk varies by setting. [8][9][21][22]\n\n**If buprenorphine precipitates withdrawal:** Give **more buprenorphine** (not less) when clinically appropriate, up to 16–32 mg total. This overcomes the partial agonist displacement and transitions the patient to buprenorphine maintenance. [11]\n\n**IV alternative** for severe GI distress: 0.3–0.9 mg IV over 20–30 min. [4]',
         recommendation: 'Buprenorphine 8 mg SL → reassess 30–60 min → repeat 4–8 mg PRN → max 32 mg Day 1. Discharge with bridge Rx + MOUD referral.',
         confidence: 'definitive',
-        citation: [4, 8, 9, 11],
+        citation: [4, 8, 9, 11, 18, 19, 20, 21, 22],
         treatment: {
             firstLine: {
                 drug: 'Buprenorphine',
@@ -277,10 +291,10 @@ export const OPIOID_WITHDRAWAL_NODES = [
         type: 'result',
         module: 3,
         title: 'Buprenorphine Microdosing',
-        body: '[Buprenorphine](#/drug/buprenorphine/opioid withdrawal microdose) **0.5–2 mg SL**\n\nCan administer while patient is **still on a full agonist** (methadone, heroin, fentanyl).\n\n• Gradually increase buprenorphine dose over hours to days\n• Frequency guided by COWS score\n• Avoids precipitated withdrawal entirely\n• Feasibility confirmed in ED setting [10]\n\n**Best candidates:**\n• Fentanyl-dependent (lipophilic, slow clearance makes traditional induction risky)\n• Currently on methadone maintenance\n• Early or mild withdrawal (COWS < 8)\n• Cannot abstain long enough for standard induction',
-        recommendation: 'Buprenorphine 0.5–2 mg SL while patient continues opioid use. Increase gradually. Avoids precipitated withdrawal.',
+        body: '[Buprenorphine](#/drug/buprenorphine/opioid withdrawal microdose) **0.5–2 mg SL**\n\nCan administer while patient is **still on a full agonist** (methadone, heroin, fentanyl).\n\n• Gradually increase buprenorphine dose over hours to days\n• Frequency guided by COWS score\n• Lowers precipitated-withdrawal risk by slowly replacing full agonist effect\n• Feasibility confirmed in ED setting [10]\n\n**Best candidates:**\n• Fentanyl-dependent (lipophilic, slow clearance makes traditional induction risky)\n• Prior precipitated withdrawal or major fear of it\n• Currently on methadone maintenance\n• Early or mild withdrawal (COWS < 8)\n• Cannot abstain long enough for standard induction',
+        recommendation: 'Buprenorphine 0.5–2 mg SL while patient continues opioid use. Increase gradually to lower precipitated-withdrawal risk.',
         confidence: 'recommended',
-        citation: [10, 12],
+        citation: [10, 12, 18, 19, 20],
         treatment: {
             firstLine: {
                 drug: 'Buprenorphine',
@@ -290,7 +304,7 @@ export const OPIOID_WITHDRAWAL_NODES = [
                 duration: 'Over hours to days',
                 notes: 'Can give while patient still on full agonist (Bernese method)',
             },
-            monitoring: 'Monitor COWS. Gradually increase dose as tolerated. Avoids precipitated withdrawal. Arrange MOUD follow-up.',
+            monitoring: 'Monitor COWS. Gradually increase dose as tolerated. Arrange MOUD follow-up.',
         },
     },
     {
@@ -298,8 +312,8 @@ export const OPIOID_WITHDRAWAL_NODES = [
         type: 'info',
         module: 3,
         title: 'Wait for Adequate Withdrawal',
-        body: 'COWS < 8 — starting buprenorphine too early risks **precipitated withdrawal**, especially with fentanyl (highly lipophilic, slow tissue clearance).\n\n• Reassess COWS every 1–2 hours\n• Many experts now recommend **COWS ≥ 13** for fentanyl-dependent patients [13]\n• Consider **microdosing** as an alternative that avoids this waiting period\n• Supportive care (IV fluids, antiemetics) while waiting\n\n**Signs withdrawal is progressing:** increasing mydriasis, onset of piloerection, worsening GI symptoms, rising pulse.',
-        citation: [13],
+        body: 'COWS < 8 - starting buprenorphine too early risks **precipitated withdrawal**, especially with fentanyl exposure.\n\n• Reassess COWS every 1–2 hours\n• SAMHSA recommends adequate withdrawal, generally COWS >12, and notes fentanyl may need a higher COWS score with lower initial dosing [19]\n• Many experts use **COWS ≥ 13 plus objective signs** for fentanyl-dependent patients [13]\n• Consider **low-dose overlap/microdosing** as an alternative that avoids the waiting period\n• Supportive care with IV fluids, antiemetics, clonidine, loperamide, and NSAIDs while waiting\n\n**Signs withdrawal is progressing:** increasing mydriasis, onset of piloerection, worsening GI symptoms, rising pulse.\n\n[Fentanyl-Specific Withdrawal Nuance](#/node/ow-fentanyl-nuance)',
+        citation: [13, 18, 19, 20],
         calculatorLinks: [{ id: 'cows', label: 'COWS Score' }],
         next: 'ow-bup-protocol',
         summary: 'COWS <8 too early for standard induction — reassess q1-2h, many experts recommend COWS≥13 for fentanyl-dependent; consider microdosing as alternative',
@@ -543,4 +557,9 @@ export const OPIOID_WITHDRAWAL_CITATIONS = [
     { num: 15, text: 'Krantz MJ, Martin J, Stimmel B, et al. QTc Interval Screening in Methadone Treatment. Ann Intern Med. 2009;150(6):387-395.' },
     { num: 16, text: 'Gowing L, Farrell MF, Ali R, White JM. Alpha-2 Adrenergic Agonists for the Management of Opioid Withdrawal. Cochrane Database Syst Rev. 2016;(5):CD002024.' },
     { num: 17, text: 'Yu E, Miotto K, Akerele E, et al. A Phase 3 Placebo-Controlled, Double-Blind, Multi-Site Trial of the Alpha-2-Adrenergic Agonist Lofexidine for Opioid Withdrawal. Drug Alcohol Depend. 2008;97(1-2):158-168.' },
+    { num: 18, text: 'Huhn AS, Hobelmann JG, Oyler GA, Strain EC. Protracted Renal Clearance of Fentanyl in Persons with Opioid Use Disorder. Drug Alcohol Depend. 2020;214:108147.' },
+    { num: 19, text: 'Substance Abuse and Mental Health Services Administration. Buprenorphine Quick Start Guide. SAMHSA.' },
+    { num: 20, text: 'Weimer MB, Herring AA, Kawasaki SS, Meyer M, Kleykamp BA, Ramsey KS. ASAM Clinical Considerations: Buprenorphine Treatment of Opioid Use Disorder for Individuals Using High-potency Synthetic Opioids. J Addict Med. 2023.' },
+    { num: 21, text: 'D\'Onofrio G, Hawk KF, Perrone J, et al. Incidence of Precipitated Withdrawal During a Multisite Emergency Department-Initiated Buprenorphine Clinical Trial in the Era of Fentanyl. JAMA Netw Open. 2023;6(3):e236108.' },
+    { num: 22, text: 'Thakrar AP, Christine PJ, Siaw-Asamoah A, et al. Buprenorphine-Precipitated Withdrawal Among Hospitalized Patients Using Fentanyl. JAMA Netw Open. 2024;7(9):e2435895.' },
 ];

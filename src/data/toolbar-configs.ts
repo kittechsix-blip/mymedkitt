@@ -408,6 +408,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   ],
   'opioid-withdrawal': [
     { id: 'cows', label: 'COWS', icon: '\uD83D\uDCCB', action: 'calculator', target: 'cows' },
+    { id: 'fentanyl', label: 'Fentanyl', icon: '\uD83E\uDDEC', action: 'jump', target: 'ow-fentanyl-nuance' },
     { id: 'bup-guide', label: 'Bup Guide', icon: '\uD83D\uDC8A', action: 'overlay', target: 'ow-bup-guide' },
     { id: 'precip-wd', label: 'Precip WD', icon: '\u26A0\uFE0F', action: 'jump', target: 'ow-precip-entry' },
   ],

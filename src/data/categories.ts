@@ -472,7 +472,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         subtitle: 'Recognition → COWS → Agonist Therapy → Adjuncts → Precipitated WD → Disposition',
         categoryId: 'emergency-medicine',
         version: '1.0',
-        nodeCount: 25,
+        nodeCount: 26,
         entryNodeId: 'ow-start',
       },
       {
@@ -2110,7 +2110,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         subtitle: 'Recognition → COWS → Agonist Therapy → Adjuncts → Precipitated WD → Disposition',
         categoryId: 'psychiatry',
         version: '1.0',
-        nodeCount: 25,
+        nodeCount: 26,
         entryNodeId: 'ow-start',
       },
       {
@@ -2332,7 +2332,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         subtitle: 'Recognition → COWS → Agonist Therapy → Adjuncts → Precipitated WD → Disposition',
         categoryId: 'toxicology',
         version: '1.0',
-        nodeCount: 25,
+        nodeCount: 26,
         entryNodeId: 'ow-start',
       },
       {
