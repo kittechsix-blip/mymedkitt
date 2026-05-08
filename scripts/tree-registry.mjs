@@ -131,7 +131,7 @@ export const TREE_REGISTRY = {
   'rhabdomyolysis':   { prefix: 'RHABDOMYOLYSIS',      entryNodeId: 'rhabdo-start',       categoryId: 'critical-care' },
   'viral-myositis':   { prefix: 'VIRAL_MYOSITIS',      entryNodeId: 'vm-start',           categoryId: 'pediatrics' },
   'ed-methadone':     { prefix: 'ED_METHADONE',        entryNodeId: 'ed-meth-start',      categoryId: 'toxicology' },
-  'cvst':             { prefix: 'CVST',                entryNodeId: 'cvst-start',         categoryId: 'neurology' },
+  'cvst':             { prefix: 'CVST',                entryNodeId: 'cvst-start',         categoryId: 'emergency-medicine' },
   'shoulder-dislocation': { prefix: 'SHOULDER_DISLOCATION', entryNodeId: 'sd-start',     categoryId: 'orthopedics' },
   'wrist-injuries':   { prefix: 'WRIST_INJURIES',      entryNodeId: 'wi-start',           categoryId: 'orthopedics' },
   'fingertip-infections': { prefix: 'FTI',              entryNodeId: 'fti-start',          categoryId: 'orthopedics' },

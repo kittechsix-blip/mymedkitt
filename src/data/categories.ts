@@ -598,7 +598,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         subtitle: 'Presentation → Diagnosis → Risk Stratification → Treatment → Special Populations → Disposition',
         categoryId: 'emergency-medicine',
         version: '1.0',
-        nodeCount: 24,
+        nodeCount: 19,
         entryNodeId: 'cvst-start',
       },
       {
@@ -1269,7 +1269,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
   },
   {
     id: 'neurology',
-    name: 'Neurology',
+    name: 'Neurology/Neurosurgery',
     icon: 'neurology.png',
     decisionTrees: [
       {
