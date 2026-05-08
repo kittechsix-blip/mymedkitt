@@ -112,6 +112,7 @@ const CROSS_LISTINGS = {
   'torsades-de-pointes': [{ categoryId: 'emergency-medicine' }],
   'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
   'pph':                 [{ categoryId: 'emergency-medicine' }],
+  'coagulation-cascade': [{ categoryId: 'critical-care' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

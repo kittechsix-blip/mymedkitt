@@ -32020,6 +32020,152 @@ const DIC_SIC_SCORE_CALCULATOR: CalculatorDefinition = {
 };
 
 // =====================================================================
+// COAGULATION CASCADE CALCULATORS
+// =====================================================================
+
+const COAG_PATTERN_DECODER_CALCULATOR: CalculatorDefinition = {
+  id: 'coag-pattern-decoder',
+  title: 'Coag Pattern Decoder',
+  subtitle: 'PT / PTT / platelets / fibrinogen \u2192 differential',
+  description: 'Decodes a coagulation panel into a likely pattern by combining PT, PTT, platelet count, and fibrinogen flags. Use as a starting differential, not a final diagnosis. Always interpret in clinical context.',
+  fields: [
+    {
+      name: 'pt-prolonged',
+      label: 'PT prolonged',
+      type: 'toggle',
+      points: 1,
+      description: 'INR > 1.2 or PT above lab reference',
+    },
+    {
+      name: 'ptt-prolonged',
+      label: 'PTT prolonged',
+      type: 'toggle',
+      points: 2,
+      description: 'aPTT above lab reference',
+    },
+    {
+      name: 'plt-low',
+      label: 'Platelets <100 \u00D7 10\u2079/L',
+      type: 'toggle',
+      points: 4,
+    },
+    {
+      name: 'fibrinogen-low',
+      label: 'Fibrinogen <200 mg/dL',
+      type: 'toggle',
+      points: 8,
+      description: 'In pregnancy use <300 mg/dL threshold',
+    },
+  ],
+  results: [
+    { min: 0, max: 1, label: 'Normal panel', risk: 'No abnormality flagged', mortality: 'No coagulopathy by panel \u2014 if bleeding, consider VWD, qualitative platelet defect, or vascular lesion (lab insensitive)', colorVar: '--color-success' },
+    { min: 1, max: 2, label: 'Isolated PT', risk: 'PT only', mortality: 'Suspect early warfarin / vitamin K deficiency / mild liver disease / FVII deficiency', colorVar: '--color-warning' },
+    { min: 2, max: 3, label: 'Isolated PTT', risk: 'PTT only', mortality: 'Suspect heparin, lupus AC, FVIII/IX/XI/XII deficiency or inhibitor \u2014 mixing study next', colorVar: '--color-warning' },
+    { min: 3, max: 4, label: 'PT + PTT prolonged', risk: 'Both extrinsic & intrinsic', mortality: 'Suspect liver disease, vitamin K deficiency (advanced), DIC, supratherapeutic warfarin, common-pathway factor deficiency', colorVar: '--color-warning' },
+    { min: 4, max: 5, label: 'Isolated thrombocytopenia', risk: 'Platelets only', mortality: 'Suspect ITP, drug-induced, sepsis, HIT, or splenic sequestration', colorVar: '--color-warning' },
+    { min: 5, max: 8, label: 'Thrombocytopenia + coagulopathy', risk: 'PLT low + PT and/or PTT up', mortality: 'Suspect DIC, TTP/HUS, severe liver disease, or massive bleeding \u2014 check D-dimer, schistocytes, fibrinogen', colorVar: '--color-danger' },
+    { min: 8, max: Infinity, label: 'Pan-coagulopathy with low fibrinogen', risk: 'Fibrinogen consumption pattern', mortality: 'Suspect overt DIC, severe liver failure, or hyperfibrinolysis \u2014 ISTH/SIC scoring + fibrinogen replacement', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Pattern is suggestive only. Mixing study, factor levels, D-dimer, and viscoelastic testing refine the diagnosis. Pregnancy and pediatrics use age-specific reference ranges.',
+  citations: [
+    'Hoffman M, Monroe DM. A cell-based model of hemostasis. Thromb Haemost. 2001;85(6):958-965.',
+    'Levi M, Toh CH, Thachil J, Watson HG. Guidelines for the diagnosis and management of disseminated intravascular coagulation. Br J Haematol. 2009;145(1):24-33.',
+  ],
+};
+
+const COAG_MIXING_STUDY_CALCULATOR: CalculatorDefinition = {
+  id: 'coag-mixing-study',
+  title: 'Mixing Study Interpreter',
+  subtitle: 'Factor deficiency vs inhibitor',
+  description: 'A 1:1 mix of patient plasma with normal plasma should correct a factor deficiency to within ~10% of normal range. Failure to correct (or correction that fails after 1-2 hour incubation) suggests an inhibitor. Use this tool to interpret immediate and incubated mixing study results.',
+  fields: [
+    {
+      name: 'immediate-correction',
+      label: 'Immediate mix corrects PTT',
+      type: 'toggle',
+      points: 4,
+      description: 'PTT after immediate 1:1 mix falls into normal range or within ~10% of normal',
+    },
+    {
+      name: 'incubated-correction',
+      label: 'After 1-2h incubation: still corrected',
+      type: 'toggle',
+      points: 2,
+      description: 'Stays corrected after 37\u00B0C incubation (no time-dependent inhibitor)',
+    },
+    {
+      name: 'lupus-screen-positive',
+      label: 'Lupus AC screen positive (DRVVT or hex-phase)',
+      type: 'toggle',
+      points: 1,
+    },
+  ],
+  results: [
+    { min: 0, max: 1, label: 'Inhibitor pattern', risk: 'No correction at any step', mortality: 'Specific factor inhibitor (acquired hemophilia A) or strong lupus anticoagulant \u2014 send factor levels and Bethesda titer; hematology consult', colorVar: '--color-danger' },
+    { min: 1, max: 2, label: 'Lupus anticoagulant', risk: 'Phospholipid-dependent inhibitor', mortality: 'Lupus AC pattern \u2014 confirm with DRVVT mix and confirmatory phospholipid; thrombosis (not bleeding) risk; APS workup if persistent', colorVar: '--color-warning' },
+    { min: 2, max: 4, label: 'Time-dependent inhibitor', risk: 'Corrects immediate, fails after incubation', mortality: 'Classic for FVIII inhibitor / acquired hemophilia A \u2014 send FVIII level and Bethesda; bleeding risk high', colorVar: '--color-danger' },
+    { min: 4, max: 6, label: 'Factor deficiency', risk: 'Corrects immediate and after incubation', mortality: 'Factor deficiency pattern \u2014 send specific factor levels (VIII, IX, XI, XII)', colorVar: '--color-success' },
+    { min: 6, max: Infinity, label: 'Factor deficiency (LAC excluded)', risk: 'Corrects fully, lupus AC negative', mortality: 'Factor deficiency confirmed; lupus anticoagulant excluded \u2014 proceed to specific factor assays', colorVar: '--color-success' },
+  ],
+  thresholdNote: 'Always pair with specific factor levels and Bethesda titer when an inhibitor is suspected. A factor that "looks low" by activity can reflect either deficiency or inhibitor presence \u2014 the mixing study tells you which.',
+  citations: [
+    'Kershaw G, Orellana D. Mixing tests: diagnostic aides in the investigation of prolonged prothrombin and activated partial thromboplastin times. Semin Thromb Hemost. 2013;39(3):283-290.',
+    'Tripodi A, Chantarangkul V. The clinical importance of measurements of prothrombin time, activated partial thromboplastin time, and platelet count. Best Pract Res Clin Haematol. 2009;22(1):21-30.',
+  ],
+};
+
+const COAG_DOAC_REVERSAL_CALCULATOR: CalculatorDefinition = {
+  id: 'coag-doac-reversal',
+  title: 'DOAC Reversal Selector',
+  subtitle: 'Agent + bleed severity \u2192 reversal plan',
+  description: 'Selects the indicated reversal strategy for a patient on a direct oral anticoagulant based on agent class, time since last dose, bleed severity, and product availability. Always confirm dose and contraindications before administration; this tool is decision support only.',
+  fields: [
+    {
+      name: 'agent-class',
+      label: 'DOAC class',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Dabigatran (direct thrombin)', points: 4 },
+        { label: 'Apixaban / rivaroxaban / edoxaban (anti-Xa)', points: 2 },
+        { label: 'Unknown / mixed', points: 1 },
+      ],
+    },
+    {
+      name: 'last-dose-recent',
+      label: 'Last dose within prior 24 hours',
+      type: 'toggle',
+      points: 1,
+      description: 'Drug level likely clinically significant',
+    },
+    {
+      name: 'bleed-severity',
+      label: 'Bleed severity',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Minor / moderate \u2014 no transfusion', points: 0 },
+        { label: 'Major \u2014 transfusion / hemodynamic concern', points: 2 },
+        { label: 'Life-threatening \u2014 critical site (ICH, retroperitoneal, airway)', points: 4 },
+      ],
+    },
+  ],
+  results: [
+    { min: 0, max: 2, label: 'Hold drug + supportive care', risk: 'Minor bleed, agent unknown or remote dose', mortality: 'Hold DOAC, mechanical hemostasis, monitor; specific reversal not indicated', colorVar: '--color-success' },
+    { min: 2, max: 4, label: 'Hold + targeted hemostasis', risk: 'Apixaban/Xa class, minor-moderate bleed', mortality: 'Hold DOAC, supportive measures, charcoal if <2h ingestion; reserve specific reversal for major bleed', colorVar: '--color-warning' },
+    { min: 4, max: 6, label: 'Andexanet OR 4F-PCC for Xa inhibitor', risk: 'Apixaban / rivaroxaban / edoxaban with major bleed', mortality: 'First-line: andexanet alfa (low or high dose by drug + timing). Alternative: 4F-PCC 50 U/kg if andexanet unavailable. ANNEXA-I 2024 supports andexanet for ICH.', colorVar: '--color-danger' },
+    { min: 6, max: 8, label: 'Idarucizumab for dabigatran', risk: 'Dabigatran with major or life-threatening bleed', mortality: 'Idarucizumab 5 g IV (two 2.5 g vials, no more than 15 min apart). Confirms reversal within minutes; redose if bleeding recurs and dabigatran detectable.', colorVar: '--color-danger' },
+    { min: 8, max: Infinity, label: 'Specific antidote + multimodal hemostasis', risk: 'Life-threatening bleed, recent DOAC dose', mortality: 'Specific antidote (idarucizumab or andexanet) + TXA + targeted blood product replacement + source control. Hematology + surgical consultation.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Andexanet shortens anti-Xa activity but has not consistently reduced mortality and increases thrombotic events \u2014 weigh risk in non-ICH bleeds. Idarucizumab is dabigatran-specific. 4F-PCC is a reasonable alternative when antidote unavailable.',
+  citations: [
+    'Connolly SJ, Sharma M, Cohen AT, et al. Andexanet for factor Xa inhibitor-associated acute intracerebral hemorrhage (ANNEXA-I). N Engl J Med. 2024;390:1745-1755.',
+    'Pollack CV Jr, Reilly PA, Eikelboom J, et al. Idarucizumab for dabigatran reversal (RE-VERSE AD). N Engl J Med. 2017;377(5):431-441.',
+    'Cuker A, Burnett A, Triller D, et al. Reversal of direct oral anticoagulants: guidance from the Anticoagulation Forum. Am J Hematol. 2019;94(6):697-709.',
+  ],
+};
+
+// =====================================================================
 // OCULAR POCUS CALCULATORS
 // =====================================================================
 
@@ -35577,6 +35723,10 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'dic-isth-score': DIC_ISTH_SCORE_CALCULATOR,
   'dic-jaam-score': DIC_JAAM_SCORE_CALCULATOR,
   'dic-sic-score': DIC_SIC_SCORE_CALCULATOR,
+  // Coagulation Cascade
+  'coag-pattern-decoder': COAG_PATTERN_DECODER_CALCULATOR,
+  'coag-mixing-study': COAG_MIXING_STUDY_CALCULATOR,
+  'coag-doac-reversal': COAG_DOAC_REVERSAL_CALCULATOR,
   // Upper GI Bleed
   'gbs': GBS_CALCULATOR,
   'aims65': AIMS65_CALCULATOR,

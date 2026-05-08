@@ -977,6 +977,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/dic.js');
             return { nodes: m.DIC_NODES, entryNodeId: 'dic-start', categoryId: 'heme-onc', moduleLabels: m.DIC_MODULE_LABELS, citations: m.DIC_CITATIONS, criticalActions: m.DIC_CRITICAL_ACTIONS };
         },
+        'coagulation-cascade': async () => {
+            const m = await import('../data/trees/coagulation-cascade.js');
+            return { nodes: m.COAG_CASCADE_NODES, entryNodeId: 'coag-start', categoryId: 'heme-onc', moduleLabels: m.COAG_CASCADE_MODULE_LABELS, citations: m.COAG_CASCADE_CITATIONS, criticalActions: m.COAG_CASCADE_CRITICAL_ACTIONS };
+        },
         'tracheo-innominate-fistula': async () => {
             const m = await import('../data/trees/tracheo-innominate-fistula.js');
             return { nodes: m.TRACHEO_INNOMINATE_FISTULA_NODES, entryNodeId: 'tif-start', categoryId: 'anesthesia-airway', moduleLabels: m.TRACHEO_INNOMINATE_FISTULA_MODULE_LABELS, citations: m.TRACHEO_INNOMINATE_FISTULA_CITATIONS, criticalActions: m.TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS };

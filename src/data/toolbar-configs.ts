@@ -1198,6 +1198,17 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'apl', label: 'APL', icon: '⚠️', action: 'overlay', target: 'dic-apl-emergency' },
   ],
   // ---------------------------------------------------------------
+  // Coagulation Cascade
+  // ---------------------------------------------------------------
+  'coagulation-cascade': [
+    { id: 'pattern', label: 'Pattern', icon: '🧮', action: 'calculator', target: 'coag-pattern-decoder' },
+    { id: 'mixing', label: 'Mixing', icon: '🧪', action: 'calculator', target: 'coag-mixing-study' },
+    { id: 'doac', label: 'DOAC Rev', icon: '💉', action: 'calculator', target: 'coag-doac-reversal' },
+    { id: 'cascade', label: 'Cascade', icon: '🩸', action: 'overlay', target: 'coag-steps' },
+    { id: 'vitk', label: 'Vit K', icon: '🥬', action: 'overlay', target: 'coag-vitk-pathway' },
+    { id: 'thromb', label: 'Throm Wkup', icon: '🔬', action: 'overlay', target: 'coag-thrombophilia-panel' },
+  ],
+  // ---------------------------------------------------------------
   // Tracheostomy Emergencies
   // ---------------------------------------------------------------
   'trach-emergency': [

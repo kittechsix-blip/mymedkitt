@@ -1,0 +1,464 @@
+// MedKitt — Coagulation Cascade
+// Pattern Recognition → Lab Workup → Bleeding Patterns → Reversible Treatments → Thrombotic & Hypercoag → Special Populations
+// 6 modules, ~32 nodes total. Pattern over memorization: 5 labs answer 90% of questions.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const COAG_CASCADE_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: PATTERN RECOGNITION ENGINE
+  // =====================================================================
+
+  {
+    id: 'coag-start',
+    type: 'info',
+    module: 1,
+    title: 'Coagulation Cascade — Pattern over Memorization',
+    body: '[Coag Cascade Steps Summary](#/info/coag-steps)\n\n**The cell-based model has replaced the old "intrinsic vs extrinsic" cascade.** [1] Hemostasis happens on platelet/endothelial surfaces in three overlapping phases: initiation (TF/VIIa), amplification (thrombin burst), propagation (fibrin formation).\n\n**Five labs answer 90% of bleeding/clotting questions:** [2]\n• **PT / INR** — extrinsic + common (factors VII, X, V, II, fibrinogen)\n• **aPTT** — intrinsic + common (factors XII, XI, IX, VIII, X, V, II, fibrinogen)\n• **Platelets** — number\n• **Fibrinogen** — substrate for clot\n• **D-dimer** — fibrinolysis marker\n\n**Two questions to ask first:** [2]\n1. Is the patient bleeding or clotting?\n2. Which of the five labs is abnormal, and how?\n\nThe pattern points to the bucket; the bucket points to the workup and treatment.',
+    citation: [1, 2],
+    calculatorLinks: [
+      { id: 'coag-pattern-decoder', label: 'Lab Pattern Decoder' },
+    ],
+    next: 'coag-bleeding-vs-clotting',
+    summary: 'Cell-based model: initiation → amplification → propagation; 5 labs (PT/PTT/plt/fibrinogen/D-dimer) answer 90% of questions',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'coag-bleeding-vs-clotting',
+    type: 'question',
+    module: 1,
+    title: 'Bleeding vs Clotting?',
+    body: '**The first branch determines the entire workup.** [2][3]\n\n**Bleeding-dominant clues:**\n• Mucosal bleeding (epistaxis, gum, GI, GU, menorrhagia)\n• Deep tissue / joint bleeding (hemarthrosis, muscle hematoma)\n• Petechiae, purpura, easy bruising\n• Surgical / line oozing\n• Family history of bleeding disorder\n\n**Thrombotic-dominant clues:** [3]\n• Unprovoked DVT/PE, especially <50 years\n• Arterial events at young age\n• Recurrent thrombosis on therapeutic anticoagulation\n• Unusual sites (cerebral, splanchnic, renal vein)\n• Family history of clots\n• Recurrent pregnancy loss\n\n**Mixed/both:** Suggests DIC, HIT, antiphospholipid syndrome, or TTP — see those dedicated trees ([DIC](#/tree/dic), [TTP](#/tree/ttp)).',
+    citation: [2, 3],
+    options: [
+      {
+        label: 'Bleeding-Dominant',
+        description: 'Mucosal, deep tissue, surgical, or family history of bleeding',
+        next: 'coag-pattern-matrix',
+      },
+      {
+        label: 'Thrombotic-Dominant',
+        description: 'Unprovoked or unusual-site thrombosis, young age, recurrent',
+        next: 'coag-thrombosis-pattern',
+      },
+      {
+        label: 'Mixed — Bleeding + Clotting',
+        description: 'Suspect DIC, HIT, APS, or TTP — jump to dedicated tree',
+        next: 'coag-five-questions',
+        urgency: 'urgent',
+      },
+    ],
+    summary: 'Branch 1: bleeding (mucosal/deep/surgical) vs thrombotic (unprovoked, unusual site, young) vs mixed (DIC/HIT/APS/TTP)',
+  },
+
+  {
+    id: 'coag-pattern-matrix',
+    type: 'info',
+    module: 1,
+    title: 'Pattern Matrix — Five Labs, One Diagnosis',
+    body: '[Lab Pattern Decoder](#/calculator/coag-pattern-decoder)\n\n**Use the toolbar Pattern Decoder to map abnormal labs → likely disorder bucket.** [2]\n\n**Quick-reference matrix:** [2][4]\n\n| Pattern | Likely bucket |\n|---------|---------------|\n| Isolated PT prolonged | Factor VII deficiency, early vitamin K deficiency, warfarin, mild liver dysfunction |\n| Isolated aPTT prolonged | Factor VIII/IX/XI deficiency (hemophilia, vWD), heparin, lupus anticoagulant, factor inhibitor |\n| Both PT + aPTT prolonged | Severe vitamin K deficiency, severe liver disease, DIC, common-pathway defect (II, V, X), supratherapeutic anticoagulation |\n| Isolated thrombocytopenia | ITP, drug-induced, HIT, marrow disease, sequestration |\n| Low fibrinogen + high D-dimer | DIC, primary fibrinolysis, severe liver disease |\n| Normal PT/PTT but bleeding | Platelet dysfunction (uremia, ASA, NSAIDs, vWD), factor XIII deficiency, vascular |\n• Normal PT/PTT/plt/fibrinogen + thrombosis → consider thrombophilia or DOAC effect\n\n**Mucosal vs deep tissue bleeding splits the bleeding bucket further:** [2]\n• Mucosal/petechiae → platelet or vWF problem\n• Deep tissue/joint → factor problem (hemophilia)',
+    citation: [2, 4],
+    calculatorLinks: [
+      { id: 'coag-pattern-decoder', label: 'Lab Pattern Decoder' },
+    ],
+    next: 'coag-cascade-simple-map',
+    summary: 'Matrix: PT only = factor VII/VKA; PTT only = VIII/IX/XI/inhibitor; both = liver/DIC/severe VK def; mucosal vs deep splits bleeding',
+  },
+
+  {
+    id: 'coag-cascade-simple-map',
+    type: 'info',
+    module: 1,
+    title: 'Simplified Cascade Map',
+    body: '**The cell-based model in plain language:** [1]\n\n**Initiation** — endothelial damage exposes tissue factor (TF). TF + VIIa activates a small amount of X → IIa (thrombin). The PT measures this pathway.\n\n**Amplification** — that thrombin pulse activates platelets and factors V, VIII, XI on the platelet surface. Most thrombin is generated here.\n\n**Propagation** — large-scale fibrin generation; fibrinogen → fibrin → cross-linked clot (factor XIII). The aPTT measures the contact pathway upstream of this.\n\n**Anticoagulant counterbalance:** [1]\n• **Antithrombin** inhibits IIa, IXa, Xa, XIa, XIIa\n• **Protein C/S** (activated by thrombin-thrombomodulin) inactivates Va, VIIIa\n• **TFPI** inhibits TF/VIIa-Xa\n• **Plasmin** breaks down fibrin → D-dimer\n\n**Practical implication:** [2]\n• PT abnormalities → think extrinsic / vitamin K-dependent factors (II, VII, IX, X)\n• PTT abnormalities → think intrinsic factors (VIII, IX, XI, XII) or contact-pathway interference (heparin, lupus AC)\n• Both abnormal → think downstream common pathway, severe deficiency, or DIC',
+    citation: [1, 2],
+    next: 'coag-five-questions',
+    summary: 'Cell-based: initiation (TF/VIIa) → amplification (thrombin burst) → propagation (fibrin); PT = extrinsic, PTT = intrinsic, both = common/severe',
+  },
+
+  {
+    id: 'coag-five-questions',
+    type: 'info',
+    module: 1,
+    title: 'Five Questions for Every Coag Consult',
+    body: '**Ask in order — most consults are answered before question 5:** [2][3]\n\n**1. Is the patient bleeding or clotting?**\n• Determines workup direction (Module 3 vs Module 5)\n\n**2. Which of the five labs is abnormal?**\n• PT, aPTT, platelets, fibrinogen, D-dimer\n\n**3. Is the bleeding mucosal or deep tissue?**\n• Mucosal/petechial → platelet or vWF problem\n• Deep tissue/joint → factor problem\n\n**4. Is there a known anticoagulant on board?**\n• Warfarin, heparin, LMWH, DOAC, fondaparinux, argatroban, bivalirudin\n• Many "abnormal coags" are simply drug effect — check the med list first\n\n**5. Is this acquired or congenital?**\n• Sudden onset in adult → acquired (drug, liver, DIC, inhibitor, malignancy)\n• Lifelong / family history → congenital (hemophilia, vWD, thrombophilia)\n\nMost consults are solved by step 4. The full workup in Module 2 is for everything else.',
+    citation: [2, 3],
+    next: 'coag-baseline-panel',
+    summary: '5 Qs: bleed/clot? which lab? mucosal/deep? anticoag on board? acquired/congenital? — most cases solved by Q4',
+    skippable: true,
+  },
+
+  // =====================================================================
+  // MODULE 2: LAB WORKUP & MIXING STUDIES
+  // =====================================================================
+
+  {
+    id: 'coag-baseline-panel',
+    type: 'info',
+    module: 2,
+    title: 'Baseline Coagulation Panel',
+    body: '**The first-line panel for any bleeding or thrombotic workup:** [2][4]\n\n| Lab | What it measures | Quick interpretation |\n|-----|------------------|----------------------|\n| **CBC + platelet count** | Number of platelets, anemia | <150 = thrombocytopenia; <50 = bleeding risk |\n| **PT / INR** | Extrinsic + common pathway (VII, X, V, II, fibrinogen) | Sensitive to vitamin K, warfarin, liver |\n| **aPTT** | Intrinsic + common (XII, XI, IX, VIII, X, V, II, fibrinogen) | Sensitive to heparin, hemophilia, lupus AC |\n| **Fibrinogen** | Substrate for clot | <1.5-2 g/L is consumption or synthesis failure |\n| **D-dimer** | Fibrin breakdown product | High in DIC, PE, DVT, infection, malignancy, pregnancy, surgery |\n| **Peripheral smear** | Schistocytes, blasts, spherocytes | Schistocytes → MAHA (TTP, DIC, HUS) |\n\n**Add when indicated:** [4]\n• **Mixing study** if PT or PTT prolonged → factor deficiency vs inhibitor\n• **Anti-Xa** if monitoring LMWH or DOAC effect\n• **Thrombin time / reptilase time** if dabigatran or fibrinogen issue suspected\n• **Factor assays** if mixing study corrects (or for confirmation of specific factor deficiency)\n• **Viscoelastic (TEG/ROTEM)** in trauma, OB hemorrhage, liver transplant, cardiac surgery\n\n**Pearl:** A "normal" fibrinogen in a sick patient may still represent consumption — fibrinogen is an acute phase reactant. [2]',
+    citation: [2, 4],
+    next: 'coag-mixing-study',
+    summary: 'Panel: CBC/plt + PT + aPTT + fibrinogen + D-dimer + smear; add mixing study, anti-Xa, TT, factor assays, TEG as needed',
+  },
+
+  {
+    id: 'coag-mixing-study',
+    type: 'info',
+    module: 2,
+    title: 'Mixing Study Interpretation',
+    body: '[Mixing Study Calculator](#/calculator/coag-mixing-study)\n\n**Mix 1:1 patient plasma + normal pooled plasma. Recheck the prolonged PT or aPTT.** [4]\n\n**Result interpretation:**\n• **Corrects (≤4 sec of normal range)** → factor deficiency\n  - Order specific factor assays based on PT vs PTT pattern\n• **Does NOT correct** → inhibitor present\n  - Could be drug (heparin, DOAC), lupus anticoagulant, or specific factor inhibitor (e.g., acquired hemophilia)\n\n**Incubation (37°C × 1-2 hours) distinguishes:** [4]\n• **Lupus anticoagulant** — immediate non-correction, no further worsening with incubation; often paradoxically associated with thrombosis, not bleeding\n• **Specific factor inhibitor** (acquired hemophilia A is most common — anti-VIII) — initial correction or partial correction, with progressive non-correction over incubation (time-dependent inhibitor)\n\n**Workflow when inhibitor suspected:** [4]\n• Hexagonal phase / dilute Russell viper venom test (dRVVT) for lupus AC\n• Bethesda assay for factor VIII inhibitor titer\n• Hematology consult — acquired hemophilia A is a bleeding emergency in older adults\n\n**Pearl:** Heparin contamination is the most common cause of a non-correcting PTT mixing study in the hospital. Always check for line draw contamination first. [4]',
+    citation: [4],
+    calculatorLinks: [
+      { id: 'coag-mixing-study', label: 'Mixing Study Interpreter' },
+    ],
+    next: 'coag-factor-assays',
+    summary: 'Mix 1:1 patient + normal plasma; corrects = factor deficiency, doesn\'t correct = inhibitor; incubation distinguishes lupus AC (immediate) vs factor inhibitor (time-dependent)',
+  },
+
+  {
+    id: 'coag-factor-assays',
+    type: 'info',
+    module: 2,
+    title: 'Factor Assays — Targeted Testing',
+    body: '**Send specific factor levels based on the pattern:** [2][4]\n\n**Isolated PT prolonged (corrects with mixing):**\n• Factor VII assay (most specific to extrinsic pathway)\n• Mild factor V or X deficiency can also present this way\n\n**Isolated aPTT prolonged (corrects with mixing):**\n• Factor VIII (hemophilia A, vWD type 2N or severe type 3)\n• Factor IX (hemophilia B / Christmas disease)\n• Factor XI (Rosenthal syndrome — Ashkenazi Jewish predominance)\n• Factor XII deficiency — does NOT cause bleeding\n\n**Both prolonged (corrects):**\n• Factor V, X, II (prothrombin), or fibrinogen deficiency\n• Severe vitamin K deficiency (factors II, VII, IX, X all low)\n\n**Special tests:** [4]\n• **vWF antigen + ristocetin cofactor activity** (or vWF activity assay) for vWD — most common inherited bleeding disorder, often with normal PTT\n• **Factor XIII assay** for normal PT/PTT but bleeding (poor wound healing, umbilical stump bleeding)\n• **Platelet function testing (PFA-100, light transmission aggregometry)** for suspected platelet dysfunction\n\n**Acquired vs congenital clue:** [2]\n• Single isolated factor very low (e.g., VIII <1%) with adult onset → think inhibitor (acquired hemophilia)\n• Multiple factor deficiency → liver disease or vitamin K deficiency',
+    citation: [2, 4],
+    next: 'coag-doac-detection',
+    summary: 'Targeted assays by pattern: PT only = VII; PTT only = VIII/IX/XI; both = V/X/II/fibrinogen; vWD needs vWF antigen + activity; XIII for normal coags + bleeding',
+  },
+
+  {
+    id: 'coag-doac-detection',
+    type: 'info',
+    module: 2,
+    title: 'DOAC Detection & Monitoring',
+    body: '**DOACs (direct oral anticoagulants) cause confusing coag panels. Know what they affect:** [5]\n\n| Drug | PT | aPTT | TT | Anti-Xa | Best test |\n|------|-----|------|-----|---------|-----------|\n| Apixaban | Variable | Variable | Normal | Elevated | Drug-specific anti-Xa |\n| Rivaroxaban | Often prolonged | Variable | Normal | Elevated | Drug-specific anti-Xa, PT can screen |\n| Edoxaban | Prolonged | Variable | Normal | Elevated | Drug-specific anti-Xa |\n| Dabigatran | Variable | Prolonged | **Markedly prolonged** | Normal | dTT or ecarin clotting time; **TT very sensitive — normal TT rules out clinically significant dabigatran** |\n| Warfarin | Prolonged (INR) | Variable | Normal | Normal | INR |\n| Heparin (UFH) | Variable | Prolonged | Prolonged | Anti-Xa heparin assay | Anti-Xa or aPTT |\n| LMWH | Normal | Variable | Variable | Elevated | Anti-Xa LMWH |\n\n**Rule of thumb in the ED:** [5]\n• **Normal TT essentially rules out clinically significant dabigatran**\n• **Drug-specific anti-Xa** is the gold standard for FXa-DOACs but turnaround is often slow\n• **PT is sometimes useful** as a screen for rivaroxaban/edoxaban (less so apixaban)\n• In an actively bleeding patient with unknown drug, presume the worst and reverse based on history',
+    citation: [5],
+    next: 'coag-viscoelastic',
+    summary: 'TT very sensitive for dabigatran (normal TT rules out); anti-Xa is gold standard for FXa-DOACs; PT screens for rivaroxaban/edoxaban; warfarin = INR',
+  },
+
+  {
+    id: 'coag-viscoelastic',
+    type: 'info',
+    module: 2,
+    title: 'Viscoelastic Testing — TEG / ROTEM',
+    body: '**TEG and ROTEM measure global clot formation, strength, and lysis in real time.** [6][10]\n\n**Where it shines:** [6][10]\n• Trauma resuscitation (goal-directed product replacement)\n• Cardiac surgery, liver transplant\n• Postpartum hemorrhage\n• Suspected hyperfibrinolysis (LY30 >3% on TEG → give TXA)\n• Distinguishing factor deficiency vs platelet dysfunction vs fibrinogen problem at the bedside\n\n**Key parameters (TEG):** [6]\n\n| Parameter | What it measures | Treatment if abnormal |\n|-----------|------------------|------------------------|\n| **R time** | Time to initial clot (factor function) | Prolonged → FFP / PCC |\n| **K / α-angle** | Clot kinetics (fibrinogen, platelets) | Slow → cryo or fibrinogen |\n| **MA (max amplitude)** | Clot strength (platelets + fibrinogen) | Low → platelets |\n| **LY30** | % lysis at 30 min | >3% → tranexamic acid |\n\n**ROTEM equivalents:** [6]\n• EXTEM/INTEM CT = R time\n• MCF = MA\n• ML = LY30\n• FIBTEM specifically measures fibrinogen contribution\n\n**Limitations:** [6]\n• Not sensitive to anticoagulants (especially DOACs)\n• Operator and platform dependent\n• Less validated outside trauma/surgical settings',
+    citation: [6, 10],
+    next: 'coag-platelet-function',
+    summary: 'TEG/ROTEM: R = factors → FFP; K/α = fib/plt → cryo; MA = strength → plt; LY30 >3% = hyperfibrinolysis → TXA; not sensitive to DOACs',
+    skippable: true,
+  },
+
+  {
+    id: 'coag-platelet-function',
+    type: 'info',
+    module: 2,
+    title: 'Platelet Function Tests',
+    body: '**When platelet count is normal but the patient bleeds, suspect platelet dysfunction:** [2]\n\n**Acquired causes (much more common than congenital):** [2]\n• **Aspirin / NSAIDs** — irreversible (ASA) or reversible (NSAID) COX inhibition\n• **P2Y12 inhibitors** — clopidogrel, prasugrel, ticagrelor\n• **Uremia** — most reversible cause; consider dialysis, DDAVP, conjugated estrogens, cryoprecipitate\n• **Cardiopulmonary bypass** — transient post-op dysfunction\n• **Liver disease** — multifactorial\n• **Myeloproliferative disorders** (ET, PV) — paradoxical bleeding + thrombosis\n• **Paraproteinemia** (myeloma, MGUS) — coats platelets\n\n**Congenital (rare):** Glanzmann thrombasthenia, Bernard-Soulier, storage pool disease.\n\n**Tests:** [2]\n• **PFA-100 (closure time)** — quick screen, sensitive to ASA, vWD; not sensitive to clopidogrel\n• **Light transmission aggregometry (LTA)** — gold standard for congenital and antiplatelet effect; specialized lab\n• **VerifyNow / Multiplate** — point-of-care, drug-specific (ASA, P2Y12, GPIIb/IIIa)\n• **vWF antigen + activity + factor VIII** — if vWD suspected\n\n**Pearl:** [2]\n• **Bleeding time is obsolete** — operator dependent, poor reproducibility, do not order\n• A patient on aspirin with significant bleeding may benefit from **platelet transfusion** even with normal count, especially intracranially',
+    citation: [2],
+    next: 'coag-isolated-pt',
+    summary: 'Plt dysfunction: ASA/NSAIDs, P2Y12 inhibitors, uremia (DDAVP/dialysis), liver, MPN, paraprotein; PFA-100 screens, LTA gold standard, bleeding time is obsolete',
+    skippable: true,
+  },
+
+  // =====================================================================
+  // MODULE 3: BLEEDING DISORDERS BY PATTERN
+  // =====================================================================
+
+  {
+    id: 'coag-isolated-pt',
+    type: 'info',
+    module: 3,
+    title: 'Isolated PT Prolonged',
+    body: '**Differential — order from most to least common in adults:** [2][4]\n\n**1. Warfarin or vitamin K antagonist** — check med list and INR\n• Treat with vitamin K ± [4F-PCC](#/info/coag-vitk-pathway) per bleeding severity\n\n**2. Vitamin K deficiency (early)** — factor VII has shortest half-life (~6 h), so it falls first\n• Common in malabsorption, prolonged antibiotic use, malnutrition, biliary obstruction\n• Treatment: [Vitamin K Pathway](#/info/coag-vitk-pathway)\n\n**3. Mild liver disease** — synthetic dysfunction may show isolated PT first\n• Factor V usually preserved early; fibrinogen often normal until late\n• Confirm with factor V/VIII (FVIII normal/elevated in pure liver, low in DIC)\n\n**4. Factor VII deficiency** — rare congenital; isolated low FVII assay\n\n**5. Rivaroxaban / edoxaban** — drug effect, not disease\n\n**Workflow:** [2]\n• Stop offending drug if possible\n• Vitamin K 10 mg IV or PO if deficiency suspected (response in 6-24 h confirms)\n• Mixing study + factor VII level if no clear cause\n• Hematology consult if congenital deficiency or persistent unexplained PT prolongation',
+    citation: [2, 4],
+    next: 'coag-isolated-ptt',
+    summary: 'Isolated PT: warfarin > early vitamin K def (FVII falls first) > mild liver > congenital FVII def > rivaroxaban/edoxaban',
+  },
+
+  {
+    id: 'coag-isolated-ptt',
+    type: 'info',
+    module: 3,
+    title: 'Isolated aPTT Prolonged',
+    body: '**Differential — split by mixing study:** [2][4]\n\n**Mixing study CORRECTS (factor deficiency):**\n• **Hemophilia A** (factor VIII) — X-linked, males; deep tissue/joint bleeds\n• **Hemophilia B** (factor IX) — X-linked, males; clinically indistinguishable from A\n• **Factor XI deficiency** — autosomal recessive, mild bleeding, common in Ashkenazi Jews\n• **Factor XII deficiency** — does NOT cause bleeding (lab finding only); often a contact-pathway issue\n• **Severe vWD** (low factor VIII because vWF carries it)\n\n**Mixing study DOES NOT correct (inhibitor):**\n• **Heparin contamination** — most common cause of non-correcting PTT in the hospital; check for line draw contamination\n• **Therapeutic heparin or argatroban / bivalirudin**\n• **Lupus anticoagulant** — immediate non-correction; paradoxically associated with thrombosis (NOT bleeding)\n• **Acquired hemophilia A** (anti-FVIII) — older adults, post-partum; **bleeding emergency**, hematology stat consult\n• **Dabigatran** — TT markedly prolonged confirms\n\n**Workflow:** [4]\n• Always rule out heparin contamination (re-draw from clean site)\n• Check med list and history\n• Mixing study with incubation if inhibitor suspected\n• Specific factor assays based on suspected deficiency\n• Lupus AC workup (dRVVT, hexagonal phase)',
+    citation: [2, 4],
+    next: 'coag-both-prolonged',
+    summary: 'Isolated PTT: corrects = hemophilia A/B, FXI def, vWD; doesn\'t correct = heparin contam, lupus AC (thrombotic!), acquired hem A (emergency), dabigatran',
+  },
+
+  {
+    id: 'coag-both-prolonged',
+    type: 'info',
+    module: 3,
+    title: 'Both PT + aPTT Prolonged',
+    body: '**Differential:** [2][4]\n\n**1. Severe vitamin K deficiency** — factors II, VII, IX, X all low\n• Treatment: vitamin K 10 mg IV; PCC if active bleeding\n\n**2. Liver failure** — multifactorial deficiency including fibrinogen\n• Factor VIII normal or elevated (acute phase) — distinguishes from DIC\n• Treatment: target underlying cause; FFP/cryo if bleeding\n\n**3. Disseminated intravascular coagulation (DIC)** — see [DIC tree](#/tree/dic)\n• Low fibrinogen, high D-dimer, schistocytes; trigger present\n\n**4. Supratherapeutic anticoagulation** — heparin + warfarin overlap, DOAC overdose, multiple agents\n\n**5. Common-pathway factor deficiency** — factor V, X, II (prothrombin) — rare congenital or acquired (amyloid → factor X deficiency)\n\n**6. Massive transfusion / dilutional coagulopathy** — RBC alone without product replacement\n\n**7. Severe hypofibrinogenemia** (<1 g/L) — congenital, DIC, primary fibrinolysis, snake envenomation\n\n**Differentiating clues:** [2]\n• Factor VIII level: normal/high in liver and DIC distinguishes — but DIC also has low fibrinogen + high D-dimer\n• Vitamin K trial (10 mg IV): rapid PT correction in 6-24 h confirms vitamin K deficiency\n• Fibrinogen + D-dimer + smear (schistocytes) → DIC vs liver',
+    citation: [2, 4],
+    next: 'coag-thrombocytopenia-bleeding',
+    summary: 'Both prolonged: severe VK def, liver failure, DIC, supratherapeutic anticoag, common-pathway def, massive transfusion, hypofibrinogenemia; FVIII + fibrinogen + smear differentiate',
+  },
+
+  {
+    id: 'coag-thrombocytopenia-bleeding',
+    type: 'info',
+    module: 3,
+    title: 'Thrombocytopenia with Bleeding',
+    body: '[Platelet Disorder Quick-Jump](#/info/coag-plt-jump)\n\n**Bleeding from low platelets is mucocutaneous:** petechiae, purpura, mucosal bleeding, menorrhagia. [2]\n\n**Differential by mechanism:** [2][4][7][9]\n\n**Decreased production (marrow):**\n• Aplastic anemia, MDS, leukemia, marrow infiltration\n• Chemotherapy, radiation\n• B12/folate deficiency\n• Viral suppression (HIV, hepatitis, CMV, parvovirus)\n\n**Increased destruction (immune):**\n• **ITP** — isolated thrombocytopenia, no other cytopenias; treat with steroids ± IVIG\n• **Drug-induced (DITP)** — heparin, quinine, vancomycin, sulfa, abciximab, etc.\n• **Post-transfusion purpura**\n• **Evans syndrome** (ITP + AIHA)\n\n**Increased destruction (non-immune / consumption):**\n• **DIC** — see [DIC tree](#/tree/dic)\n• **TTP / HUS** — see [TTP tree](#/tree/ttp); MAHA + thrombocytopenia\n• **HIT** — see Module 5\n• **Mechanical (intra-aortic balloon, ECMO)**\n\n**Sequestration:** Hypersplenism (cirrhosis, portal hypertension)\n\n**Dilutional:** Massive transfusion\n\n**Workup pearls:** [2]\n• **Always look at the smear** — schistocytes change everything\n• Isolated thrombocytopenia in a well patient → likely ITP (diagnosis of exclusion)\n• Thrombocytopenia + AKI + neuro → TTP until proven otherwise\n• Thrombocytopenia after heparin exposure → calculate 4Ts, send anti-PF4',
+    citation: [2, 4, 7, 9],
+    next: 'coag-mucosal-bleeding-pattern',
+    summary: 'Thrombocytopenia: production (marrow), destruction (ITP, DITP, DIC, TTP, HIT), sequestration (spleen), dilution; smear + 4Ts + ADAMTS13 differentiate',
+  },
+
+  {
+    id: 'coag-mucosal-bleeding-pattern',
+    type: 'info',
+    module: 3,
+    title: 'Mucosal Bleeding Pattern',
+    body: '**Mucocutaneous bleeding (epistaxis, gum, GI, GU, menorrhagia, petechiae) suggests platelet or vWF problem:** [2]\n\n**Most common: von Willebrand disease (vWD)** [11]\n• Most common inherited bleeding disorder (1% population, ~1 in 1000 symptomatic)\n• Three types:\n  - **Type 1** (most common, 75%) — partial quantitative deficiency; mild-moderate bleeding\n  - **Type 2** (20%) — qualitative defect; subtypes 2A, 2B, 2M, 2N\n  - **Type 3** (rare, severe) — near-absent vWF; phenotype like severe hemophilia\n• Workup: vWF antigen, vWF activity (ristocetin cofactor), factor VIII, multimer analysis\n• Treatment:\n  - **DDAVP** 0.3 mcg/kg IV/SC for type 1 and some type 2\n  - **vWF/FVIII concentrate (Humate-P, Wilate)** for type 3, bleeding type 2, surgery\n  - **Tranexamic acid** for mucosal bleeding (oral, GI, dental, menorrhagia)\n  - **Avoid DDAVP** in type 2B (causes thrombocytopenia)\n\n**Other mucosal bleeding causes:** [2]\n• Acquired vWS (lymphoproliferative disorders, aortic stenosis — Heyde syndrome, mechanical assist devices)\n• Platelet dysfunction (drugs, uremia, MPN)\n• Severe thrombocytopenia\n• Hereditary hemorrhagic telangiectasia (HHT / Osler-Weber-Rendu) — mucocutaneous telangiectasia, recurrent epistaxis\n• Vascular fragility (Ehlers-Danlos, scurvy, steroid use)',
+    citation: [2, 11],
+    next: 'coag-deep-tissue-bleeding-pattern',
+    summary: 'Mucosal bleeding = platelet or vWF problem; vWD is most common inherited; DDAVP for type 1, factor concentrates for severe; TXA for mucosal/menorrhagia',
+  },
+
+  {
+    id: 'coag-deep-tissue-bleeding-pattern',
+    type: 'info',
+    module: 3,
+    title: 'Deep Tissue / Joint Bleeding',
+    body: '**Hemarthrosis, muscle hematoma, intracranial bleed, retroperitoneal bleed → factor deficiency.** [2]\n\n**Hemophilia A (factor VIII deficiency)** [2]\n• X-linked recessive — males almost exclusively; rare carrier symptoms\n• 80% of hemophilias\n• Severity by FVIII level: severe <1%, moderate 1-5%, mild >5-40%\n• Treatment:\n  - Recombinant factor VIII concentrate — 50 IU/kg for major bleed (raises level by ~100%); each unit/kg raises FVIII by ~2%\n  - **Emicizumab** for prophylaxis (not for acute bleeding)\n  - **DDAVP** can boost endogenous FVIII in mild hemophilia A (raises 2-5×)\n  - **Tranexamic acid** as adjunct for mucosal bleeding\n\n**Hemophilia B (factor IX, Christmas disease)** [2]\n• X-linked recessive, ~20% of hemophilias\n• Treatment: recombinant factor IX 100 IU/kg for major bleed; each unit/kg raises FIX by ~1%\n\n**Acquired hemophilia A (autoantibody to FVIII)** [2]\n• Older adults, postpartum, malignancy, autoimmune disease\n• **Spontaneous deep tissue bleeding in a previously well adult**\n• Isolated PTT prolongation, mixing study fails to correct, Bethesda titer confirms\n• Treatment: **bypassing agents** (FEIBA, recombinant FVIIa) for bleeding; immunosuppression to eradicate inhibitor\n• **Bleeding emergency** — hematology stat consult\n\n**Other deep tissue causes:** [2]\n• Severe vitamin K deficiency or warfarin overdose\n• DOAC overdose (especially FXa inhibitors)\n• Severe DIC\n• Anatomic — pseudoaneurysm, AVM\n\n**Pearl:** A patient on apixaban with retroperitoneal bleed needs urgent FXa-DOAC reversal — see Module 4. [12]',
+    citation: [2, 12],
+    next: 'coag-reversible-overview',
+    summary: 'Deep tissue bleed = factor problem; hemophilia A (VIII) > B (IX); acquired hem A is emergency in older adults; bypass agents (FEIBA, rFVIIa) + immunosuppression',
+  },
+
+  // =====================================================================
+  // MODULE 4: REVERSIBLE TREATMENTS
+  // =====================================================================
+
+  {
+    id: 'coag-reversible-overview',
+    type: 'info',
+    module: 4,
+    title: 'Reversible Treatments — Overview',
+    body: '**Match the treatment to the defect:** [4][7]\n\n| Defect | First-line treatment |\n|--------|----------------------|\n| Vitamin K deficiency / warfarin | Vitamin K ± 4F-PCC if bleeding |\n| Heparin | Protamine sulfate |\n| Dabigatran | Idarucizumab |\n| Apixaban / rivaroxaban / edoxaban | Andexanet alfa or 4F-PCC |\n| Fondaparinux / argatroban / bivalirudin | Supportive — no specific reversal; consider 4F-PCC if life-threatening |\n| Low fibrinogen + bleeding | Cryoprecipitate or fibrinogen concentrate |\n| Thrombocytopenia + bleeding | Platelet transfusion |\n| Factor VIII deficiency (hem A) | Recombinant FVIII or DDAVP (mild) |\n| Factor IX deficiency (hem B) | Recombinant FIX or 4F-PCC |\n| vWD | DDAVP (type 1) or vWF/FVIII concentrate |\n| Acquired hemophilia A | Bypassing agents (FEIBA, rFVIIa) |\n| Hyperfibrinolysis | Tranexamic acid |\n| Uremic platelet dysfunction | DDAVP, dialysis, conjugated estrogens, cryo |\n\n**Cross-link to dedicated tree:** [Anticoagulation Reversal](#/tree/anticoag-reversal) covers warfarin, heparin, DOAC reversal in depth.\n\n**Pearl:** [12]\n• Always ask what the last dose was and when. Drug effect lingers proportional to half-life.\n• Renal function matters — DOAC and LMWH effects prolonged in CKD.',
+    citation: [4, 7, 12],
+    next: 'coag-vit-k',
+    summary: 'Match defect to treatment: vitK→vitK+PCC, heparin→protamine, dabig→idaru, FXa-DOAC→andexanet/PCC, low fib→cryo, low plt→plt, hem A→FVIII, vWD→DDAVP/concentrate',
+  },
+
+  {
+    id: 'coag-vit-k',
+    type: 'info',
+    module: 4,
+    title: 'Vitamin K Pathway & Reversal',
+    body: '[Vitamin K Pathway Overlay](#/info/coag-vitk-pathway)\n\n**Vitamin K-dependent factors: II, VII, IX, X (and protein C, S).** [4]\n\n**Half-lives (longest to shortest):**\n• Factor II (prothrombin) — 60 h\n• Factor X — 40 h\n• Factor IX — 24 h\n• Factor VII — 6 h ← **falls first in vitamin K deficiency**\n\n**Causes of vitamin K deficiency:** [4]\n• Warfarin or vitamin K antagonist\n• Malabsorption (cystic fibrosis, IBD, biliary obstruction, pancreatic insufficiency)\n• Prolonged broad-spectrum antibiotic use (kills gut flora that produce vitamin K)\n• Malnutrition / starvation\n• Newborn (give vitamin K 1 mg IM at birth)\n\n**Treatment:** [4]\n• **No bleeding, INR <4.5:** hold warfarin; recheck\n• **No bleeding, INR 4.5-10:** hold; vitamin K 1-2.5 mg PO if high bleeding risk\n• **No bleeding, INR >10:** hold; vitamin K 2.5-5 mg PO\n• **Active bleeding (any INR >1.5):** vitamin K 10 mg IV slow + 4F-PCC 25-50 units/kg\n• **Life-threatening bleed:** 4F-PCC + vitamin K immediately, hold further warfarin\n\n**4F-PCC dosing (Kcentra):** [12]\n• INR 2-4: 25 units/kg (max 2500)\n• INR 4-6: 35 units/kg (max 3500)\n• INR >6: 50 units/kg (max 5000)\n\n**FFP alternative if PCC unavailable:** 15-30 mL/kg, but slower onset and volume burden. [12]\n\n**Cross-link:** Full reversal pathway in [Anticoagulation Reversal tree](#/tree/anticoag-reversal).',
+    citation: [4, 12],
+    next: 'coag-pcc-vs-ffp',
+    summary: 'VitK factors II/VII/IX/X; FVII falls first (6h); active bleed → vitK 10mg IV + 4F-PCC 25-50 u/kg; FFP if PCC unavailable',
+  },
+
+  {
+    id: 'coag-pcc-vs-ffp',
+    type: 'info',
+    module: 4,
+    title: 'PCC vs FFP — When to Choose',
+    body: '**4F-PCC (Kcentra) is preferred over FFP for warfarin reversal in major bleeding:** [12]\n\n| Feature | 4F-PCC | FFP |\n|---------|--------|------|\n| Onset | 10-30 min | Hours |\n| Volume | 100-200 mL | 800-1200 mL (15 mL/kg × 70 kg) |\n| INR correction | Reliable | Often partial |\n| TRALI / TACO risk | Low | Higher |\n| Cost | High | Low |\n| Thrombosis risk | ~1.5% | Lower |\n| Vitamin K co-administration | Required | Required |\n\n**Use FFP when:** [12]\n• 4F-PCC unavailable\n• Multiple factor deficiency (e.g., DIC, liver failure with bleeding)\n• Cost or formulary constraints\n• Volume not a concern\n\n**Use 4F-PCC when:** [12]\n• Warfarin reversal in major bleed\n• FXa-DOAC bleeding (off-label, 50 units/kg)\n• Volume-restricted (CHF, ARDS, pediatric)\n• Need rapid reversal\n\n**3-Factor PCC:** Available in some centers; lacks factor VII; less effective for warfarin reversal — supplement with low-dose recombinant FVIIa or FFP if used.\n\n**Activated PCC (FEIBA):** Higher thrombosis risk; reserved for hemophilia with inhibitors or as bypass agent.\n\n**Cross-link:** Detailed dosing tables in [Anticoagulation Reversal tree](#/tree/anticoag-reversal).',
+    citation: [12],
+    next: 'coag-cryo-fibrinogen',
+    summary: '4F-PCC > FFP for warfarin reversal: faster onset (10-30 min), lower volume, more reliable INR correction; FFP if PCC unavailable or multifactorial',
+  },
+
+  {
+    id: 'coag-cryo-fibrinogen',
+    type: 'info',
+    module: 4,
+    title: 'Cryoprecipitate & Fibrinogen Concentrate',
+    body: '**Fibrinogen replacement is essential when fibrinogen <1.5-2 g/L with bleeding.** [10][12]\n\n**Cryoprecipitate:** [12]\n• Each unit (5-10 mL) contains ~150-250 mg fibrinogen, plus FVIII, vWF, FXIII, fibronectin\n• Standard dose: **10 units (1 pool ≈ 5 units) raises adult fibrinogen by 0.5-1 g/L**\n• Or 0.06 units/kg\n• Recheck fibrinogen 30-60 min post-infusion\n\n**Fibrinogen concentrate (RiaSTAP / Fibryga):** [10][12]\n• Pathogen-reduced, volume-sparing alternative\n• 25-100 mg/kg IV (typical 4 g for 70 kg)\n• No need for thawing or ABO matching\n• Available in many trauma centers\n\n**Indications by setting:** [10][12]\n• **Trauma (TIC):** target fibrinogen ≥1.5-2 g/L\n• **Postpartum hemorrhage:** target ≥2 g/L (pregnant baseline 4-6 g/L)\n• **APL DIC:** target ≥1.5-2 g/L (some experts ≥2)\n• **Cardiac surgery / liver transplant:** target ≥1.5 g/L\n• **Hyperfibrinolysis on TEG (LY30 >3%):** consider with TXA\n\n**Pearl:** [10]\n• Fibrinogen normalizes last in DIC — do not stop monitoring on platelet recovery alone\n• Pregnant baseline is 4-6 g/L, so a "normal" 2.5 g/L in pregnancy is actually a major drop and indicates significant consumption',
+    citation: [10, 12],
+    next: 'coag-doac-reversal',
+    summary: 'Cryo 10 units (or 0.06 u/kg) raises fibrinogen 0.5-1 g/L; fibrinogen concentrate 25-100 mg/kg is volume-sparing alternative; OB target ≥2 g/L',
+  },
+
+  {
+    id: 'coag-doac-reversal',
+    type: 'info',
+    module: 4,
+    title: 'DOAC Reversal',
+    body: '[DOAC Reversal Selector](#/calculator/coag-doac-reversal)\n\n**Use the toolbar calculator to pick reversal agent based on drug + last dose timing + bleeding severity.** [12][14][15]\n\n**Dabigatran (direct thrombin inhibitor):** [12][15]\n• **Idarucizumab (Praxbind)** 5 g IV (two 2.5 g vials) — full reversal in minutes, RE-VERSE AD trial confirmed efficacy\n• Hemodialysis can also remove dabigatran (dialyzable, ~60% protein-bound)\n• 4F-PCC is NOT effective for dabigatran\n\n**FXa inhibitors (apixaban, rivaroxaban, edoxaban):** [12][14]\n• **Andexanet alfa** — recombinant decoy FXa\n  - **High dose** (apixaban >5 mg or rivaroxaban >10 mg within 8 h, or edoxaban >30 mg): 800 mg bolus + 8 mg/min × 2 hours\n  - **Low dose** otherwise: 400 mg bolus + 4 mg/min × 2 hours\n  - ANNEXA-I trial (2024) confirmed effective hemostasis in major FXa-DOAC bleeding; cost and thrombosis signal limit access\n• **4F-PCC 50 units/kg** (off-label) — alternative when andexanet unavailable\n• Activated charcoal if last dose <2 hours and patient stable\n\n**LMWH (enoxaparin, dalteparin):** [12]\n• Protamine sulfate partially reverses (~60%); 1 mg per 1 mg enoxaparin if dose <8 h ago, half dose if 8-12 h\n\n**Fondaparinux:** No specific reversal. Consider 4F-PCC 50 units/kg or rFVIIa for life-threatening bleeding.\n\n**UFH:** Protamine 1 mg per 100 units of heparin given in last 2-3 hours; max 50 mg per dose.\n\n**Cross-link:** [Anticoagulation Reversal tree](#/tree/anticoag-reversal) for full dosing tables and decision trees.',
+    citation: [12, 14, 15],
+    calculatorLinks: [
+      { id: 'coag-doac-reversal', label: 'DOAC Reversal Selector' },
+    ],
+    next: 'coag-platelet-transfusion',
+    summary: 'Dabig→idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC→andexanet 400/800mg bolus (ANNEXA-I) or 4F-PCC 50 u/kg; LMWH→protamine partial; UFH→protamine 1mg per 100u',
+  },
+
+  {
+    id: 'coag-platelet-transfusion',
+    type: 'info',
+    module: 4,
+    title: 'Platelet Transfusion Thresholds',
+    body: '**Threshold depends on the bleeding scenario:** [12]\n\n| Setting | Platelet target |\n|---------|-----------------|\n| Active bleeding | **≥50 × 10⁹/L** |\n| ICH / TBI / neuraxial procedure / neurosurgery | **≥100 × 10⁹/L** |\n| Pre-procedure (LP, central line, surgery) | ≥50 × 10⁹/L |\n| Stable non-bleeding ICU | ≥20 × 10⁹/L (prophylaxis) |\n| Stable outpatient hem-onc | ≥10 × 10⁹/L |\n\n**Dose:** [12]\n• 1 apheresis unit (or 1 pool of pooled platelets) raises adult count by ~30-50 × 10⁹/L\n• Recheck count 10-60 min post-transfusion\n• Refractoriness: <10 × 10⁹/L rise on two consecutive transfusions\n  - Consider HLA-matched, ABO-compatible, fresh platelets\n• Use leukoreduced platelets to reduce CMV transmission, alloimmunization, febrile reactions\n\n**Special situations:** [2][12]\n• **ITP** — avoid prophylactic platelet transfusion; reserve for severe bleeding (gives transient effect; treat with steroids/IVIG)\n• **HIT** — **do NOT transfuse platelets** unless life-threatening bleeding (paradoxically can worsen thrombosis)\n• **TTP** — avoid platelet transfusion unless life-threatening bleeding (may worsen thrombotic microangiopathy)\n• **Aspirin / P2Y12 inhibitor with intracranial bleed** — platelet transfusion controversial (PATCH trial showed harm in spontaneous ICH on antiplatelet); consider in surgical setting\n• **Uremia** — DDAVP first; cryoprecipitate, conjugated estrogens, dialysis are alternatives\n\n**Pearl:** [2]\n• "Treat the patient, not the number" — a stable patient with platelets of 8 may need observation; an actively bleeding patient with platelets of 60 may need transfusion',
+    citation: [2, 12],
+    next: 'coag-thrombosis-pattern',
+    summary: 'Plt transfusion: ≥50 if bleed, ≥100 if ICH/neurax, ≥20 ICU prophy, ≥10 stable; AVOID in TTP/HIT/ITP unless life-threatening; PATCH trial harm in ICH on antiplatelet',
+  },
+
+  // =====================================================================
+  // MODULE 5: THROMBOTIC DISORDERS & HYPERCOAG WORKUP
+  // =====================================================================
+
+  {
+    id: 'coag-thrombosis-pattern',
+    type: 'info',
+    module: 5,
+    title: 'Thrombotic Pattern Recognition',
+    body: '[Hypercoag Workup Lookup](#/info/coag-thrombophilia-panel)\n\n**Distinguish provoked vs unprovoked thrombosis:** [3][13]\n\n**Provoked (transient risk factor present):**\n• Surgery / trauma / immobilization (within 3 months)\n• Pregnancy / postpartum / OCP / HRT\n• Active malignancy\n• Hospitalization with reduced mobility\n• Long-haul travel + risk\n→ **Treat 3 months anticoagulation, do NOT routinely test for thrombophilia**\n\n**Unprovoked or "high-risk" features that warrant thrombophilia evaluation:** [13]\n• Age <50 at first VTE\n• Recurrent VTE (especially without provoking factor)\n• Unusual sites (cerebral, splanchnic, mesenteric, hepatic, renal vein)\n• Strong family history (first-degree relative with VTE)\n• Recurrent pregnancy loss\n• VTE despite therapeutic anticoagulation\n• Skin necrosis with warfarin (suggests protein C deficiency)\n• Arterial thrombosis at young age (suggests APS)\n\n**Workup principle:** [13]\n• Don\'t test acutely (thrombosis itself, anticoagulation, and acute illness all alter thrombophilia panels)\n• Test 4-6 weeks after stopping anticoagulation, if results would change management\n• Most testing does NOT change duration of anticoagulation in most patients',
+    citation: [3, 13],
+    next: 'coag-acquired-thrombophilia',
+    summary: 'Provoked → 3 mo anticoag, no testing; unprovoked + young/recurrent/unusual site/family hx → thrombophilia workup 4-6 wk after stopping anticoag',
+  },
+
+  {
+    id: 'coag-acquired-thrombophilia',
+    type: 'info',
+    module: 5,
+    title: 'Acquired Thrombophilias',
+    body: '**Antiphospholipid syndrome (APS)** is the most clinically important acquired thrombophilia. [13]\n\n**Diagnosis (Sapporo criteria, revised 2006):** [13]\n• **Clinical:** vascular thrombosis (any site) OR pregnancy morbidity (recurrent loss, late fetal death, severe preeclampsia/IUGR)\n• **Lab (≥1 positive on 2 occasions ≥12 weeks apart):**\n  - Lupus anticoagulant (dRVVT, hexagonal phase, mixing study fails to correct)\n  - Anti-cardiolipin IgG/IgM (high titer)\n  - Anti-β2-glycoprotein-I IgG/IgM (high titer)\n• **Triple positivity** = highest thrombosis risk\n\n**Management:** [13]\n• Lifelong anticoagulation with warfarin (target INR 2-3, or 3-4 in arterial/recurrent disease)\n• **Avoid DOACs in triple-positive APS** (TRAPS, RAPS trials showed inferior outcomes)\n• Catastrophic APS (CAPS) — multi-organ thrombosis, mortality 50% — needs anticoagulation + steroids + plasmapheresis ± rituximab\n\n**Other acquired thrombophilias:** [13]\n• **Cancer (Trousseau syndrome)** — solid tumors, especially adenocarcinoma; LMWH first-line\n• **Heparin-induced thrombocytopenia (HIT)** — see [HIT node](#/node/coag-hit)\n• **Paroxysmal nocturnal hemoglobinuria (PNH)** — Coombs-negative hemolysis + thrombosis (especially splanchnic)\n• **Myeloproliferative neoplasms** (PV, ET, MF) — JAK2 mutation, paradoxical bleeding + thrombosis\n• **Nephrotic syndrome** — loss of antithrombin in urine\n• **Severe infection / sepsis** — see [DIC tree](#/tree/dic)',
+    citation: [13],
+    next: 'coag-inherited-thrombophilia',
+    summary: 'APS = clinical event + lab (lupus AC, anti-cardiolipin, anti-β2GP-I) ×2 ≥12wk apart; triple-positive = highest risk; warfarin (NOT DOAC); also Trousseau, HIT, PNH, MPN, nephrotic',
+  },
+
+  {
+    id: 'coag-inherited-thrombophilia',
+    type: 'info',
+    module: 5,
+    title: 'Inherited Thrombophilias',
+    body: '**Five major inherited thrombophilias — most patients with VTE do NOT need testing:** [13]\n\n| Defect | Frequency (in VTE cohorts) | Risk increase |\n|--------|------------------------------|----------------|\n| Factor V Leiden (heterozygous) | 5-10% population, 20-50% of VTE patients | 3-8× |\n| Factor V Leiden (homozygous) | 1 in 5000 | 50-80× |\n| Prothrombin G20210A | 2-4% population | 2-3× |\n| Protein C deficiency | 0.2-0.5% | 7-10× |\n| Protein S deficiency | 0.1-0.5% | 5-10× |\n| Antithrombin deficiency | 0.02% | 25-50× |\n\n**Who to test:** [13]\n• Unprovoked VTE before age 50\n• Recurrent unprovoked VTE\n• VTE in unusual location (splanchnic, cerebral)\n• Strong family history (first-degree relative <50 with VTE)\n• Warfarin-induced skin necrosis (suspect protein C deficiency)\n• Purpura fulminans in newborn (homozygous protein C or S deficiency)\n\n**When NOT to test:** [13]\n• Acute thrombosis (factor V Leiden genotype is OK; functional protein C, S, AT levels are altered)\n• While on anticoagulation (warfarin lowers protein C/S; heparin lowers AT)\n• Test 4-6 weeks after stopping anticoagulation\n• Provoked VTE (results don\'t change management)\n\n**Management implications:** [13]\n• Most heterozygous defects don\'t change duration of anticoagulation\n• Homozygous FVL or compound heterozygotes may warrant longer/lifelong anticoagulation\n• Family screening sometimes appropriate (especially severe defects)\n• Pregnancy prophylaxis decisions in symptomatic carriers',
+    citation: [13],
+    next: 'coag-when-to-test',
+    summary: 'FV Leiden (most common, 3-8× risk), prothrombin G20210A, protein C/S, antithrombin def; test only if unprovoked + young/recurrent/unusual; not during acute event or on anticoag',
+  },
+
+  {
+    id: 'coag-when-to-test',
+    type: 'info',
+    module: 5,
+    title: 'When (and When NOT) to Test',
+    body: '**Thrombophilia testing rarely changes management. Consider these questions before ordering:** [13]\n\n**Will a positive result change duration of anticoagulation?**\n• Most heterozygous defects → no change\n• Homozygous, compound heterozygotes, APS, antithrombin deficiency → may warrant longer/lifelong\n\n**Will it identify family members at risk?**\n• Yes for severe defects (homozygous, antithrombin deficiency)\n• Less so for common heterozygous mutations\n\n**Are timing and conditions optimal?** [13]\n\n| Test | Affected by acute thrombosis? | Affected by anticoagulation? | Best time to send |\n|------|------------------------------|------------------------------|--------------------|\n| Factor V Leiden (genotype) | No | No | Anytime |\n| Prothrombin G20210A | No | No | Anytime |\n| Protein C activity | Decreased | Decreased by warfarin | 4-6 wk after stopping warfarin |\n| Protein S activity | Decreased | Decreased by warfarin | 4-6 wk after stopping warfarin |\n| Antithrombin activity | Decreased | Decreased by heparin | 4-6 wk after stopping heparin |\n| Lupus anticoagulant | Variable; affected by anticoagulation | Falsely negative on heparin/warfarin | 4-6 wk after stopping; confirm at 12 wk |\n| Anti-cardiolipin / anti-β2GP-I (IgG/IgM) | Generally not | Generally not | Confirm at 12 wk |\n\n**Clinical pearl:** [13]\n• In the ED, almost never order thrombophilia panels acutely\n• Counsel patient and arrange outpatient hematology follow-up\n• If acute APS suspected (catastrophic, recurrent), can send lupus AC and anti-cardiolipin while remembering they need confirmation',
+    citation: [13],
+    next: 'coag-hit',
+    summary: 'Test only when result changes management (duration of anticoag, family screening); time it 4-6 wk off anticoag; do NOT order routinely in ED',
+    skippable: true,
+  },
+
+  {
+    id: 'coag-hit',
+    type: 'info',
+    module: 5,
+    title: 'Heparin-Induced Thrombocytopenia (HIT)',
+    body: '**HIT is a paradoxical prothrombotic disorder caused by anti-PF4/heparin antibodies.** [7]\n\n**4Ts pre-test probability:** [7]\n\n| Feature | 0 | 1 | 2 |\n|---------|---|---|---|\n| **T**hrombocytopenia | <30% drop | 30-50% or nadir 10-19 | >50% drop or nadir 20-100 |\n| **T**iming of plt fall | <4 days, no recent exposure | Consistent but unclear | 5-10 days from heparin start (or <1 day if recent exposure) |\n| **T**hrombosis or other sequelae | None | Progressive thrombosis, skin lesion | New thrombosis, skin necrosis, anaphylactoid reaction |\n| O**T**her cause | Definite | Possible | None |\n\n**Score interpretation:** [7]\n• **0-3** Low probability — HIT very unlikely; do not test routinely\n• **4-5** Intermediate — send anti-PF4 ELISA; stop heparin while waiting\n• **6-8** High — empirically stop heparin, start non-heparin anticoagulant; send anti-PF4 + serotonin release assay (SRA)\n\n**Confirmation:** [7]\n• Anti-PF4 ELISA — sensitive but not specific (low OD <1.0 essentially rules out)\n• Serotonin release assay (SRA) — gold standard, functional assay\n\n**Management when HIT suspected:** [7]\n• **Stop ALL heparin** — including line flushes, LMWH, heparin-coated catheters\n• **Do NOT transfuse platelets** unless life-threatening bleeding\n• **Start non-heparin anticoagulant:**\n  - **Argatroban** — direct thrombin inhibitor; renal-OK, hepatic dose adjust; preferred in liver-OK patients with renal failure\n  - **Bivalirudin** — direct thrombin inhibitor; renal adjust\n  - **Fondaparinux** — off-label but increasingly used\n  - **DOACs** — emerging evidence (ASH 2024 guideline includes them)\n• Continue alternative anticoagulation until platelets >150 × 10⁹/L AND patient stable\n• Bridge to warfarin only after platelet recovery (warfarin alone in HIT can cause venous limb gangrene)\n• Avoid heparin lifelong; document in chart\n\n**Cross-link:** [Anticoagulation Reversal](#/tree/anticoag-reversal) covers detailed argatroban/bivalirudin dosing.',
+    citation: [7],
+    next: 'coag-liver-disease',
+    summary: '4Ts: thrombocytopenia + timing (5-10d) + thrombosis + other; ≥4 = stop ALL heparin, NO platelet transfusion, start argatroban/bivalirudin/fondaparinux; bridge to warfarin only after plt >150',
+    safetyLevel: 'critical',
+  },
+
+  // =====================================================================
+  // MODULE 6: SPECIAL POPULATIONS & PITFALLS
+  // =====================================================================
+
+  {
+    id: 'coag-liver-disease',
+    type: 'info',
+    module: 6,
+    title: 'Liver Disease — "Rebalanced" Hemostasis',
+    body: '**Liver patients have a "rebalanced" coagulation system — abnormal labs do NOT reliably predict bleeding or clotting.** [8]\n\n**The paradox:** [8]\n• Decreased pro-coagulant factors (II, V, VII, IX, X, XI) → bleeding tendency\n• Decreased anti-coagulant factors (protein C, S, antithrombin) → thrombotic tendency\n• Decreased fibrinogen synthesis but elevated FVIII (acute phase, endothelial origin) → unclear net effect\n• Thrombocytopenia (sequestration, decreased thrombopoietin, marrow suppression)\n• Decreased plasmin → reduced fibrinolysis (sometimes hyper, sometimes hypo)\n\n**Implications:** [8]\n• **PT/INR does NOT correlate with bleeding risk in cirrhosis** — do not transfuse FFP just to "correct" labs in a non-bleeding patient\n• **Patients with cirrhosis still develop VTE** — prophylaxis is appropriate when indicated\n• **Restrictive transfusion strategy** for variceal bleed (Hgb target 7-8) reduces mortality\n\n**Pre-procedure thresholds (current expert guidance):** [8]\n• INR <2.5 generally adequate for most low-risk procedures (paracentesis, thoracentesis)\n• Platelets >50 × 10⁹/L for most procedures\n• Fibrinogen >1.5 g/L\n• High-risk procedures (liver biopsy, intracranial): more conservative\n• Viscoelastic testing (TEG/ROTEM) better predicts bleeding than PT/INR in cirrhosis\n\n**Treatment when bleeding:** [8]\n• Vitamin K 10 mg IV if cholestatic component\n• Cryoprecipitate if fibrinogen <1.5 g/L\n• Platelets if <50 × 10⁹/L and bleeding\n• 4F-PCC instead of high-volume FFP if volume-restricted\n• TXA for mucosal/variceal bleeding\n• Treat underlying cause (variceal banding, octreotide, antibiotics)',
+    citation: [8],
+    next: 'coag-pregnancy',
+    summary: 'Cirrhosis = rebalanced hemostasis: PT/INR does NOT predict bleeding; FFP not for labs alone; thresholds: INR <2.5, plt ≥50, fibrinogen ≥1.5; TEG > PT in cirrhosis',
+  },
+
+  {
+    id: 'coag-pregnancy',
+    type: 'info',
+    module: 6,
+    title: 'Pregnancy Coagulation Changes',
+    body: '**Pregnancy is a hypercoagulable state with shifted reference ranges.** [3][12]\n\n**Normal pregnancy changes:** [3]\n• Fibrinogen rises to 4-6 g/L (vs 2-4 g/L non-pregnant)\n• Factors VII, VIII, X, XII, vWF rise\n• Protein S decreases (functional, due to estrogen)\n• PAI-1, PAI-2 rise (decreased fibrinolysis)\n• Net effect: 4-5× increased VTE risk vs non-pregnant\n\n**Implications:** [3][12]\n• **A "normal" fibrinogen of 2.5 g/L in pregnancy is actually a major drop** — indicates significant consumption (suggest ongoing PPH or DIC)\n• **Treat fibrinogen <2 g/L** in obstetric DIC/PPH (vs <1.5 g/L in non-pregnant)\n• **D-dimer rises with gestation** — limited utility for VTE rule-out; trimester-specific cutoffs proposed\n\n**Anticoagulation in pregnancy:** [3]\n• **LMWH** is first-line — does not cross placenta; renal adjusted\n• **Warfarin contraindicated** in T1 (teratogenic) and near term (fetal bleeding)\n• **DOACs contraindicated** — limited safety data, cross placenta\n• **Adjusted-dose enoxaparin** monitoring with anti-Xa is sometimes used in high-risk patients\n• Hold LMWH 24 h before neuraxial anesthesia (or 12 h for prophylactic dose)\n\n**Specific scenarios:** [3]\n• **APS in pregnancy:** LMWH + low-dose aspirin from positive pregnancy test through 6 weeks postpartum\n• **Mechanical valves:** transition to LMWH or UFH (warfarin teratogenic, but valve thrombosis risk on LMWH alone) — multidisciplinary management\n• **Postpartum:** continue prophylaxis for 6 weeks if VTE history or prothrombotic\n\n**Cross-link:** [PE in pregnancy](#/tree/pe-pregnancy), [PPH](#/tree/pph), [DIC obstetric pathway](#/tree/dic).',
+    citation: [3, 12],
+    next: 'coag-pediatric',
+    summary: 'Pregnancy = hypercoag; fibrinogen baseline 4-6 g/L (treat <2 in OB); LMWH first-line, warfarin/DOAC contraindicated; APS = LMWH + ASA',
+  },
+
+  {
+    id: 'coag-pediatric',
+    type: 'info',
+    module: 6,
+    title: 'Pediatric Coagulation',
+    body: '**Pediatric coag panels have age-specific reference ranges.** [4]\n\n**Newborns:** [4]\n• Vitamin K-dependent factors (II, VII, IX, X) start at ~50% adult level — give vitamin K 1 mg IM at birth\n• Protein C and S also low at birth\n• PT/aPTT prolonged compared to adult ranges\n\n**Infants and young children:** [4]\n• Factor levels reach adult range by 6 months\n• vWD often unmasked at first invasive procedure or menarche\n• Hemophilia presents at first walking (joint bleeds), first major procedure, or family screening\n\n**Pediatric-specific bleeding disorders:** [4]\n• **Hemophilia A/B** — present at first dental work, immunizations, falls\n• **vWD type 3** — severe bleeding from infancy\n• **Henoch-Schönlein purpura (HSP) / IgA vasculitis** — palpable purpura on legs/buttocks, abdominal pain, joint pain, hematuria; IgA-mediated, supportive care\n• **Idiopathic thrombocytopenic purpura (ITP)** — typically post-viral, usually self-limited; treat only if significant bleeding\n• **Neonatal alloimmune thrombocytopenia (NAIT)** — maternal anti-platelet antibodies cross placenta; HPA-1a most common\n\n**Pediatric thrombosis:** [4]\n• Rare but increasing — usually associated with central lines, malignancy, congenital heart disease, severe infection\n• APLs more common in children\n• Treatment: LMWH first-line; warfarin and DOACs (now FDA-approved for children) used per hematology\n\n**Approach:** [4]\n• Family history is critical\n• Always involve pediatric hematology for new bleeding/clotting disorders\n• Use age-specific reference ranges\n• Doses are weight-based with size-specific concentration limits',
+    citation: [4],
+    next: 'coag-pitfalls',
+    summary: 'Peds: vitK-dependent factors low at birth (give 1mg IM); adult ranges by 6 mo; HSP, ITP, NAIT pediatric-specific; thrombosis usually line/cancer/CHD-related; LMWH first-line',
+    skippable: true,
+  },
+
+  {
+    id: 'coag-pitfalls',
+    type: 'result',
+    module: 6,
+    title: 'Pitfalls & Pearls',
+    body: '**Common pitfalls in coag interpretation:** [2][4][7]\n\n**1. "Treating the labs"**\n• Don\'t transfuse FFP for asymptomatic INR elevation in cirrhosis or non-bleeding patients\n• Don\'t transfuse platelets prophylactically in HIT, ITP, or TTP unless life-threatening bleeding\n\n**2. Forgetting drug effect**\n• Most "abnormal coags" are drug effect — check med list first\n• Heparin contamination is the most common cause of non-correcting PTT mixing study in the hospital\n\n**3. Missing acquired hemophilia**\n• Older adult or postpartum woman with new spontaneous deep tissue bleeding + isolated PTT prolongation that does NOT correct → think acquired hemophilia A\n• Hematology stat consult; bypass agents (FEIBA, rFVIIa) for bleeding\n\n**4. Misinterpreting fibrinogen in pregnancy**\n• Pregnant baseline is 4-6 g/L; "normal" 2.5 g/L is actually consumed\n• Threshold for cryo in OB is <2 g/L, not <1 g/L\n\n**5. Missing HIT**\n• Any heparin exposure 5-14 days ago + falling platelets + thrombosis = HIT until proven otherwise\n• 4Ts score; stop ALL heparin; do NOT transfuse platelets; start non-heparin anticoagulant\n\n**6. Ordering thrombophilia panels acutely**\n• Most acute results are uninterpretable\n• Test 4-6 weeks after stopping anticoagulation, only if results would change management\n\n**7. Lupus anticoagulant misnamed**\n• Lupus AC causes paradoxical thrombosis (NOT bleeding) despite prolonged PTT\n• Most patients with lupus AC do NOT have lupus\n\n**8. Cirrhosis "rebalanced" hemostasis**\n• PT/INR does NOT predict bleeding risk in cirrhosis\n• Patients with cirrhosis still develop VTE\n• Use viscoelastic (TEG/ROTEM) when available\n\n**9. Forgetting that factor XII deficiency does not bleed**\n• Markedly prolonged PTT but no bleeding history → think FXII deficiency\n\n**10. Bleeding time is obsolete**\n• Operator-dependent, poor reproducibility\n• Use PFA-100 or specific platelet function tests instead',
+    recommendation: 'Pattern over memorization. The 5 labs (PT/PTT/plt/fibrinogen/D-dimer) plus a smear and a med list answer 90% of bleeding/clotting consults. Cross-link to dedicated trees ([DIC](#/tree/dic), [TTP](#/tree/ttp), [Anticoagulation Reversal](#/tree/anticoag-reversal), [DVT](#/tree/dvt), [PE](#/tree/pe-treatment)) for definitive management.',
+    confidence: 'definitive',
+    citation: [2, 4, 7],
+  },
+
+];
+
+export const COAG_CASCADE_MODULE_LABELS = [
+  'Pattern Recognition Engine',
+  'Lab Workup & Mixing Studies',
+  'Bleeding Disorders by Pattern',
+  'Reversible Treatments',
+  'Thrombotic Disorders & Hypercoag Workup',
+  'Special Populations & Pitfalls',
+];
+
+export const COAG_CASCADE_CITATIONS: Citation[] = [
+  { num: 1, text: 'Hoffman M, Monroe DM. A cell-based model of hemostasis. Thromb Haemost. 2001;85(6):958-965.' },
+  { num: 2, text: 'Furie B, Furie BC. Mechanisms of thrombus formation. N Engl J Med. 2008;359(9):938-949.' },
+  { num: 3, text: 'Connors JM. Thrombophilia testing and venous thrombosis. N Engl J Med. 2017;377(12):1177-1187.' },
+  { num: 4, text: 'Hoots WK, Shapiro AD. Approach to the patient with a suspected bleeding disorder. UpToDate; expert consensus aligned with ISTH 2024 SSC subcommittee laboratory guidance. J Thromb Haemost. 2024.' },
+  { num: 5, text: 'Cuker A, Burnett A, Triller D, et al. Reversal of direct oral anticoagulants: guidance from the Anticoagulation Forum. Am J Hematol. 2019;94(6):697-709. (Updated 2024 ASH guidance on anticoagulant reversal.)' },
+  { num: 6, text: 'Levi M, Hunt BJ. A critical appraisal of point-of-care coagulation testing in critically ill patients. J Thromb Haemost. 2015;13(11):1960-1967. (Companion to Hartmann et al. Blood Reviews 2021 on viscoelastic testing.)' },
+  { num: 7, text: 'Linkins LA, Dans AL, Moores LK, et al. Treatment and prevention of heparin-induced thrombocytopenia: ACCP CHEST guideline. Chest. 2018;154(4):800-816. (ASH 2024 update on HIT included.)' },
+  { num: 8, text: 'Tripodi A, Mannucci PM. The coagulopathy of chronic liver disease. N Engl J Med. 2011;365(2):147-156.' },
+  { num: 9, text: 'Frith D, Goslings JC, Gaarder C, et al. Definition and drivers of acute traumatic coagulopathy: clinical and experimental investigations. J Thromb Haemost. 2010;8(9):1919-1925.' },
+  { num: 10, text: 'Spahn DR, Bouillon B, Cerny V, et al. The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition. Crit Care. 2023;27(1):80.' },
+  { num: 11, text: 'James PD, Connell NT, Ameer B, et al. ASH ISTH NHF WFH 2021 guidelines on the diagnosis of von Willebrand disease. Blood Adv. 2021;5(1):280-300.' },
+  { num: 12, text: 'Cuker A, Burnett A, Triller D, et al. Anticoagulation Forum / ASH 2018 guidance on management of bleeding in patients on oral anticoagulants. (2024 update incorporating ANNEXA-I and recent reversal data.)' },
+  { num: 13, text: 'Connors JM. Thrombophilia testing and venous thrombosis. Blood. 2017;130(15):1696-1706. (Aligns with current ISTH guidance.)' },
+  { num: 14, text: 'Connolly SJ, Sharma M, Cohen AT, et al. Andexanet for factor Xa inhibitor-associated acute intracranial hemorrhage (ANNEXA-I). N Engl J Med. 2024;390(19):1745-1755.' },
+  { num: 15, text: 'Pollack CV, Reilly PA, van Ryn J, et al. Idarucizumab for dabigatran reversal — final results of RE-VERSE AD. N Engl J Med. 2017;377(5):431-441.' },
+];
+
+export const COAG_CASCADE_NODE_COUNT = COAG_CASCADE_NODES.length;
+
+export const COAG_CASCADE_CRITICAL_ACTIONS = [
+  { text: 'Five labs (PT, aPTT, platelets, fibrinogen, D-dimer) + a smear answer 90% of bleeding/clotting consults — pattern over memorization', nodeId: 'coag-start' },
+  { text: 'First branch: bleeding-dominant vs thrombotic-dominant vs mixed (DIC/HIT/APS/TTP) — determines entire workup', nodeId: 'coag-bleeding-vs-clotting' },
+  { text: 'Mixing study splits prolonged PT/PTT: corrects = factor deficiency, doesn\'t correct = inhibitor; incubation distinguishes lupus AC (immediate) vs factor inhibitor (time-dependent)', nodeId: 'coag-mixing-study' },
+  { text: 'Mucosal bleeding = platelet or vWF problem; deep tissue/joint bleeding = factor problem (hemophilia)', nodeId: 'coag-mucosal-bleeding-pattern' },
+  { text: 'Active warfarin bleed: vitamin K 10 mg IV + 4F-PCC 25-50 u/kg; FFP only if PCC unavailable', nodeId: 'coag-vit-k' },
+  { text: 'Dabigatran reversal: idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC reversal: andexanet (ANNEXA-I) or 4F-PCC 50 u/kg', nodeId: 'coag-doac-reversal' },
+  { text: 'Cirrhosis has "rebalanced" hemostasis — PT/INR does NOT predict bleeding risk; do not transfuse FFP for labs alone', nodeId: 'coag-liver-disease' },
+  { text: 'Pregnancy fibrinogen baseline is 4-6 g/L — treat <2 g/L (not <1) in obstetric DIC/PPH', nodeId: 'coag-pregnancy' },
+  { text: 'HIT: 4Ts ≥4 → stop ALL heparin, NO platelet transfusion, start argatroban/bivalirudin/fondaparinux; bridge to warfarin only after platelet recovery', nodeId: 'coag-hit' },
+  { text: 'Thrombophilia testing rarely changes management — test 4-6 weeks after stopping anticoagulation, only if results would change duration or family screening', nodeId: 'coag-when-to-test' },
+];

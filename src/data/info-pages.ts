@@ -12956,6 +12956,161 @@ const DIC_APL_EMERGENCY: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Coagulation Cascade
+// -------------------------------------------------------------------
+
+const COAG_STEPS_SUMMARY: InfoPage = {
+  id: 'coag-steps',
+  title: 'Coagulation Cascade',
+  subtitle: 'Pattern over Memorization — Key Steps',
+  sections: [
+    {
+      heading: '1. Five Labs Answer 90% of Questions',
+      body: '\u2022 **PT/INR** \u2014 extrinsic + common (factors VII, X, V, II, fibrinogen)\n\u2022 **aPTT** \u2014 intrinsic + common (XII, XI, IX, VIII, X, V, II, fibrinogen)\n\u2022 **Platelets** \u2014 number\n\u2022 **Fibrinogen** \u2014 substrate for clot\n\u2022 **D-dimer** \u2014 fibrinolysis marker\nAdd peripheral smear; mixing study, anti-Xa, factor assays, TEG/ROTEM as needed.',
+    },
+    {
+      heading: '2. First Branch: Bleeding vs Clotting',
+      body: '\u2022 **Bleeding-dominant** \u2014 mucosal (platelet/vWF) vs deep tissue (factor)\n\u2022 **Thrombotic-dominant** \u2014 unprovoked, unusual site, young age, recurrent\n\u2022 **Mixed** \u2014 DIC, HIT, APS, TTP \u2014 jump to dedicated tree',
+    },
+    {
+      heading: '3. Lab Pattern Matrix',
+      body: '\u2022 **Isolated PT** \u2014 warfarin, early vitamin K deficiency, mild liver, FVII def\n\u2022 **Isolated PTT** \u2014 hemophilia A/B, FXI, vWD, lupus AC, heparin, dabigatran, acquired hem A\n\u2022 **Both prolonged** \u2014 severe vitamin K def, liver failure, DIC, supratherapeutic anticoag\n\u2022 **Low platelets + bleeding** \u2014 ITP, DITP, HIT, DIC, TTP, marrow disease\n\u2022 **Low fibrinogen + high D-dimer** \u2014 DIC, primary fibrinolysis, severe liver',
+    },
+    {
+      heading: '4. Mixing Study Logic',
+      body: '\u2022 **Corrects (\u22644 sec of normal)** \u2192 factor deficiency \u2192 specific assays\n\u2022 **Does NOT correct** \u2192 inhibitor (heparin contamination, lupus AC, factor inhibitor, dabigatran)\n\u2022 **Incubation 37\u00B0C \u00D71-2 h** \u2192 lupus AC (immediate non-correction) vs factor inhibitor (time-dependent)\n\u2022 Always rule out heparin contamination first',
+    },
+    {
+      heading: '5. Reversible Treatments',
+      body: '\u2022 **Vitamin K / warfarin** \u2014 vitamin K 10 mg IV + 4F-PCC 25-50 u/kg if bleeding\n\u2022 **Dabigatran** \u2014 idarucizumab 5 g IV (RE-VERSE AD)\n\u2022 **FXa-DOAC** \u2014 andexanet (ANNEXA-I) or 4F-PCC 50 u/kg\n\u2022 **Heparin** \u2014 protamine 1 mg per 100 units\n\u2022 **Low fibrinogen** \u2014 cryo 10 units (or 0.06 u/kg) raises 0.5-1 g/L\n\u2022 **Hemophilia A/B** \u2014 recombinant factor concentrate; DDAVP for mild hem A\n\u2022 **vWD** \u2014 DDAVP (type 1) or vWF/FVIII concentrate\n\u2022 **Hyperfibrinolysis** \u2014 tranexamic acid 1 g IV',
+    },
+    {
+      heading: '6. Special Populations',
+      body: '\u2022 **Cirrhosis** \u2014 "rebalanced" hemostasis; PT/INR does NOT predict bleeding\n\u2022 **Pregnancy** \u2014 fibrinogen baseline 4-6 g/L; treat <2 g/L (not <1)\n\u2022 **HIT** \u2014 4Ts \u22654: stop ALL heparin, NO platelet transfusion, start argatroban/bivalirudin\n\u2022 **APS triple-positive** \u2014 warfarin (NOT DOACs)\n\u2022 **Thrombophilia testing** \u2014 4-6 wk after stopping anticoag, only if would change management',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Hoffman M, Monroe DM. A cell-based model of hemostasis. Thromb Haemost. 2001;85(6):958-965.' },
+    { num: 2, text: 'Furie B, Furie BC. Mechanisms of thrombus formation. N Engl J Med. 2008;359(9):938-949.' },
+    { num: 3, text: 'Connors JM. Anticoagulation reversal updates. Hematology Am Soc Hematol Educ Program. 2023.' },
+  ],
+};
+
+const COAG_VITK_PATHWAY: InfoPage = {
+  id: 'coag-vitk-pathway',
+  title: 'Vitamin K Pathway',
+  subtitle: 'Vitamin K-dependent factors and warfarin reversal',
+  sections: [
+    {
+      heading: 'Vitamin K-Dependent Factors',
+      body: '\u2022 **Pro-coagulant:** II (prothrombin), VII, IX, X\n\u2022 **Anti-coagulant:** Protein C, Protein S\n\u2022 Vitamin K is required for \u03B3-carboxylation of glutamic acid residues, enabling factor binding to phospholipid surfaces',
+    },
+    {
+      heading: 'Half-Lives (Falls in Order)',
+      body: '\u2022 **Factor VII** \u2014 6 hours (falls FIRST in vitamin K deficiency \u2192 isolated PT prolongation initially)\n\u2022 **Factor IX** \u2014 24 hours\n\u2022 **Factor X** \u2014 40 hours\n\u2022 **Factor II (prothrombin)** \u2014 60 hours (falls last)\n\u2022 Protein C falls fast (6-8 h) \u2014 important when starting warfarin (transient hypercoagulable state)',
+    },
+    {
+      heading: 'Causes of Vitamin K Deficiency',
+      body: '\u2022 **Warfarin or vitamin K antagonist** \u2014 most common\n\u2022 **Malabsorption** \u2014 cystic fibrosis, IBD, biliary obstruction, pancreatic insufficiency\n\u2022 **Prolonged broad-spectrum antibiotics** \u2014 kills gut flora that produce vitamin K\n\u2022 **Malnutrition / starvation**\n\u2022 **Newborn** \u2014 give vitamin K 1 mg IM at birth (prevents hemorrhagic disease of the newborn)\n\u2022 **Cholestyramine and other bile-acid binders**',
+    },
+    {
+      heading: 'Vitamin K Dosing',
+      body: '\u2022 **Oral:** 1-10 mg PO; effect in 6-24 hours\n\u2022 **IV (slow infusion over \u226520 min):** 10 mg IV; effect in 6-12 hours; risk of anaphylactoid reaction with rapid IV (rare)\n\u2022 **SC absorption is unreliable** \u2014 not preferred\n\u2022 **Avoid IM** in anticoagulated patients (hematoma risk)',
+    },
+    {
+      heading: 'Warfarin Reversal Algorithm',
+      body: '| Scenario | Management |\n|---|---|\n| INR <4.5, no bleed | Hold warfarin; recheck |\n| INR 4.5-10, no bleed | Hold; vitamin K 1-2.5 mg PO if high risk |\n| INR >10, no bleed | Hold; vitamin K 2.5-5 mg PO |\n| Active bleeding (any INR >1.5) | Vitamin K 10 mg IV + 4F-PCC 25-50 u/kg |\n| Life-threatening bleed | 4F-PCC + vitamin K immediately, hold warfarin |\n\n**4F-PCC dosing (Kcentra):**\n\u2022 INR 2-4: 25 units/kg (max 2500)\n\u2022 INR 4-6: 35 units/kg (max 3500)\n\u2022 INR >6: 50 units/kg (max 5000)',
+    },
+    {
+      heading: 'PCC vs FFP',
+      body: '\u2022 **4F-PCC preferred** \u2014 onset 10-30 min, low volume (~100-200 mL), reliable INR correction, low TRALI/TACO risk\n\u2022 **FFP** \u2014 onset hours, high volume (15 mL/kg \u2248 1 L for 70 kg), often partial correction; use only if PCC unavailable or multifactorial deficiency\n\u2022 **Always co-administer vitamin K** \u2014 PCC effect fades in 6-24 hours; vitamin K provides durable reversal',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Cuker A, Burnett A, Triller D, et al. Anticoagulation Forum / ASH 2018 guidance on management of bleeding in patients on oral anticoagulants.' },
+    { num: 2, text: 'Frontera JA, et al. Guideline for reversal of antithrombotics in intracranial hemorrhage. Neurocrit Care. 2016;24(1):6-46.' },
+  ],
+};
+
+const COAG_PLT_JUMP: InfoPage = {
+  id: 'coag-plt-jump',
+  title: 'Platelet Disorder Quick-Jump',
+  subtitle: 'Differential and pathway routing',
+  sections: [
+    {
+      heading: 'How to Use',
+      body: 'Use this overlay to identify the platelet disorder and jump to the right consult or workup pathway.',
+    },
+    {
+      heading: 'ITP (Immune Thrombocytopenia)',
+      body: '\u2022 **Diagnosis of exclusion** \u2014 isolated thrombocytopenia, no other cytopenias, well-appearing patient\n\u2022 Often post-viral in children; chronic autoimmune in adults\n\u2022 **Treatment:** observe if plt >30 \u00D7 10\u2079/L and no bleeding; steroids \u00B1 IVIG if bleeding or plt <30\n\u2022 **Avoid platelet transfusion** unless life-threatening bleeding (transient effect)',
+    },
+    {
+      heading: 'HIT (Heparin-Induced Thrombocytopenia)',
+      body: '\u2022 **4Ts score** \u2014 Thrombocytopenia, Timing (5-10 days from heparin start), Thrombosis, Other cause\n\u2022 Score \u22654 \u2192 stop ALL heparin, anti-PF4 ELISA, start argatroban/bivalirudin/fondaparinux\n\u2022 **Do NOT transfuse platelets** unless life-threatening bleeding\n\u2022 Bridge to warfarin only after platelet recovery (warfarin alone in HIT \u2192 venous limb gangrene)\n\u2022 Lifelong heparin avoidance; document in chart\n\n\u2192 See: **coag-hit** node',
+    },
+    {
+      heading: 'TTP (Thrombotic Thrombocytopenic Purpura)',
+      body: '\u2022 **MAHA + thrombocytopenia** with normal coags (PT/PTT/fibrinogen)\n\u2022 ADAMTS13 <10% confirms\n\u2022 **Pentad rarely complete:** MAHA, thrombocytopenia, AKI, neuro, fever\n\u2022 **Emergency \u2192 plasma exchange** + steroids + caplacizumab\n\u2022 **Avoid platelet transfusion** unless life-threatening bleeding\n\n\u2192 See: [TTP tree](#/tree/ttp)',
+    },
+    {
+      heading: 'Drug-Induced Thrombocytopenia (DITP)',
+      body: '\u2022 **Common offenders:** quinine, vancomycin, sulfa drugs, heparin (HIT), abciximab, linezolid, beta-lactams, NSAIDs\n\u2022 Onset days-weeks after exposure; resolves with drug discontinuation\n\u2022 **Treatment:** stop offending drug; supportive\n\u2022 Specific antibody testing rarely needed; clinical correlation',
+    },
+    {
+      heading: 'Marrow Causes',
+      body: '\u2022 **Aplastic anemia, MDS, leukemia, marrow infiltration**\n\u2022 Other cytopenias usually present (anemia, leukopenia)\n\u2022 Smear: blasts, dysplastic features, pancytopenia\n\u2022 Workup: peripheral smear, retic count, B12, folate, viral studies (HIV, hepatitis), bone marrow biopsy',
+    },
+    {
+      heading: 'Sequestration / Dilutional',
+      body: '\u2022 **Hypersplenism** \u2014 cirrhosis, portal hypertension; usually plt 50-100\n\u2022 **Massive transfusion** \u2014 dilutional thrombocytopenia after 10-15 RBC units\n\u2022 No specific treatment for sequestration; product replacement for dilutional',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Linkins LA, et al. Treatment and prevention of HIT: ACCP CHEST guideline 2018, ASH 2024 update.' },
+    { num: 2, text: 'Neunert C, et al. American Society of Hematology 2019 guidelines for ITP. Blood Adv. 2019;3(23):3829-3866.' },
+    { num: 3, text: 'Zheng XL, et al. ISTH guidelines for the diagnosis and management of TTP. J Thromb Haemost. 2020;18(10):2486-2495.' },
+  ],
+};
+
+const COAG_THROMBOPHILIA_PANEL: InfoPage = {
+  id: 'coag-thrombophilia-panel',
+  title: 'Hypercoag Workup',
+  subtitle: 'Thrombophilia panel — what, when, why',
+  sections: [
+    {
+      heading: 'Decision Rule',
+      body: '**Most thrombophilia testing does NOT change management.** Only test if the result would alter duration of anticoagulation or guide family screening.',
+    },
+    {
+      heading: 'Who to Test',
+      body: '\u2022 Unprovoked VTE before age 50\n\u2022 Recurrent unprovoked VTE\n\u2022 VTE in unusual location (cerebral, splanchnic, mesenteric, hepatic, renal vein)\n\u2022 Strong family history (first-degree relative <50 with VTE)\n\u2022 Warfarin-induced skin necrosis (suspect protein C deficiency)\n\u2022 Recurrent pregnancy loss\n\u2022 Arterial thrombosis at young age (suspect APS)\n\u2022 VTE despite therapeutic anticoagulation',
+    },
+    {
+      heading: 'When to Test',
+      body: '\u2022 **NOT during acute thrombosis** \u2014 alters protein C, S, antithrombin, lupus AC results\n\u2022 **NOT on anticoagulation** \u2014 warfarin lowers protein C/S; heparin lowers antithrombin\n\u2022 **4-6 weeks after stopping anticoagulation** is optimal\n\u2022 Genotype tests (FV Leiden, prothrombin G20210A) can be sent anytime',
+    },
+    {
+      heading: 'What to Test',
+      body: '| Test | Method |\n|---|---|\n| Factor V Leiden | Genotype (no timing constraint) |\n| Prothrombin G20210A | Genotype (no timing constraint) |\n| Protein C activity | Functional assay (time off warfarin) |\n| Protein S activity | Functional assay (time off warfarin) |\n| Antithrombin activity | Functional assay (time off heparin) |\n| Lupus anticoagulant | dRVVT, hexagonal phase (time off anticoag; confirm at 12 wk) |\n| Anti-cardiolipin IgG/IgM | ELISA (confirm at 12 wk) |\n| Anti-\u03B22-glycoprotein-I IgG/IgM | ELISA (confirm at 12 wk) |\n| Homocysteine | Less commonly tested |',
+    },
+    {
+      heading: 'Inherited Thrombophilias',
+      body: '\u2022 **Factor V Leiden (heterozygous)** \u2014 5-10% population, 3-8\u00D7 risk\n\u2022 **Factor V Leiden (homozygous)** \u2014 1 in 5000, 50-80\u00D7 risk\n\u2022 **Prothrombin G20210A** \u2014 2-4% population, 2-3\u00D7 risk\n\u2022 **Protein C deficiency** \u2014 7-10\u00D7 risk; warfarin-induced skin necrosis\n\u2022 **Protein S deficiency** \u2014 5-10\u00D7 risk\n\u2022 **Antithrombin deficiency** \u2014 25-50\u00D7 risk; rare; severe phenotype',
+    },
+    {
+      heading: 'Antiphospholipid Syndrome (APS)',
+      body: '\u2022 **Sapporo criteria:** clinical event (thrombosis or pregnancy morbidity) + lab (lupus AC, anti-cardiolipin, anti-\u03B22GP-I) on 2 occasions \u226512 weeks apart\n\u2022 **Triple positive** = highest thrombosis risk\n\u2022 **Treatment:** lifelong warfarin (target INR 2-3, or 3-4 in arterial/recurrent)\n\u2022 **Avoid DOACs in triple-positive APS** (TRAPS, RAPS trials)\n\u2022 Catastrophic APS (CAPS): anticoagulation + steroids + plasmapheresis \u00B1 rituximab',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Connors JM. Thrombophilia testing and venous thrombosis. N Engl J Med. 2017;377(12):1177-1187.' },
+    { num: 2, text: 'Stevens SM, et al. Guidance for the evaluation and treatment of hereditary and acquired thrombophilia. J Thromb Thrombolysis. 2016;41(1):154-164.' },
+    { num: 3, text: 'Garcia D, Erkan D. Diagnosis and management of the antiphospholipid syndrome. N Engl J Med. 2018;378(21):2010-2021.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Tracheo-Innominate Fistula (TIF)
 // -------------------------------------------------------------------
 
@@ -20488,6 +20643,11 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'dic-product-thresholds': DIC_PRODUCT_THRESHOLDS,
   'dic-etiology-jump': DIC_ETIOLOGY_JUMP,
   'dic-apl-emergency': DIC_APL_EMERGENCY,
+  // Coagulation Cascade
+  'coag-steps': COAG_STEPS_SUMMARY,
+  'coag-vitk-pathway': COAG_VITK_PATHWAY,
+  'coag-plt-jump': COAG_PLT_JUMP,
+  'coag-thrombophilia-panel': COAG_THROMBOPHILIA_PANEL,
   // Asthma
   'asthma-steps': ASTHMA_STEPS_SUMMARY,
   'asthma-severity-table': ASTHMA_SEVERITY_TABLE,
