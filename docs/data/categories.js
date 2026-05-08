@@ -1414,6 +1414,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'ms-start',
             },
             {
+                id: 'cauda-equina',
+                title: 'Cauda Equina Syndrome',
+                subtitle: 'Recognition → Red Flags → Exam → Imaging → Neurosurgery → Disposition',
+                categoryId: 'neurology',
+                version: '1.0',
+                nodeCount: 16,
+                entryNodeId: 'ces-start',
+            },
+            {
                 id: 'amaurosis-fugax',
                 title: 'Amaurosis Fugax (TMVL)',
                 subtitle: 'Recognition → GCA Screen → Stroke Workup → Carotid Evaluation → Treatment → Disposition',
@@ -2591,15 +2600,6 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 18,
                 entryNodeId: 'neuro-shock-start',
-            },
-            {
-                id: 'cauda-equina',
-                title: 'Cauda Equina Syndrome',
-                subtitle: 'Recognition → Red Flags → Exam → Imaging → Neurosurgery → Disposition',
-                categoryId: 'trauma-surg',
-                version: '1.0',
-                nodeCount: 16,
-                entryNodeId: 'ces-start',
             },
             {
                 id: 'brain-herniation',

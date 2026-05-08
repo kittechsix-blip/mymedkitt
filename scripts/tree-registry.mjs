@@ -205,7 +205,7 @@ export const TREE_REGISTRY = {
   'rv-assessment':    { prefix: 'RV_ASSESSMENT',       entryNodeId: 'rv-assess-start',    categoryId: 'us-rads' },
   'cervical-spine':   { prefix: 'CERVICAL_SPINE',      entryNodeId: 'cs-spine-start',     categoryId: 'em' },
   'neurogenic-shock': { prefix: 'NEUROGENIC_SHOCK',    entryNodeId: 'ns-shock-start',     categoryId: 'critical-care' },
-  'cauda-equina':     { prefix: 'CAUDA_EQUINA',        entryNodeId: 'ce-start',           categoryId: 'neurology' },
+  'cauda-equina':     { prefix: 'CAUDA_EQUINA',        entryNodeId: 'ces-start',          categoryId: 'neurology' },
   'brain-herniation': { prefix: 'BRAIN_HERNIATION',    entryNodeId: 'bh-hern-start',      categoryId: 'neurology' },
   'necrotizing-fasciitis': { prefix: 'NECROTIZING_FASCIITIS', entryNodeId: 'nf-start',  categoryId: 'infectious-disease' },
   'fishhook-removal': { prefix: 'FISHHOOK_REMOVAL',    entryNodeId: 'fh-start',           categoryId: 'em' },
