@@ -1205,6 +1205,17 @@ const TOOLBAR_CONFIGS = {
         { id: 'atypical', label: 'Atypical', icon: '🔀', action: 'jump', target: 'tt-atypical-entry' },
     ],
     // ---------------------------------------------------------------
+    // Sports Injuries
+    // ---------------------------------------------------------------
+    'sports-injuries': [
+        { id: 'ottawa-knee', label: 'Knee Rule', icon: '📊', action: 'calculator', target: 'sports-ottawa-knee' },
+        { id: 'ottawa-ankle', label: 'Ankle Rule', icon: '📊', action: 'calculator', target: 'sports-ottawa-ankle' },
+        { id: 'concussion', label: 'Concussion', icon: '🧠', action: 'overlay', target: 'sports-concussion-checklist' },
+        { id: 'redflags', label: 'Red Flags', icon: '⚠️', action: 'overlay', target: 'sports-head-redflags' },
+        { id: 'rtp', label: 'RTP', icon: '🏃', action: 'jump', target: 'sports-rtp-checklist' },
+        { id: 'peds', label: 'Pediatric', icon: '🧒', action: 'jump', target: 'sports-peds-entry' },
+    ],
+    // ---------------------------------------------------------------
     // Tracheostomy Emergencies
     // ---------------------------------------------------------------
     'trach-emergency': [

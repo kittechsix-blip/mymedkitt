@@ -13174,6 +13174,74 @@ const TT_OPEN_BOOK: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Sports Injuries
+// -------------------------------------------------------------------
+
+const SPORTS_HEAD_REDFLAGS: InfoPage = {
+  id: 'sports-head-redflags',
+  title: 'Head Injury Red Flags',
+  subtitle: 'On-field neurologic emergency triggers',
+  sections: [
+    {
+      heading: 'Immediate transport criteria (any of)',
+      body: '\u2022 Loss of consciousness more than ~30 seconds\n\u2022 Worsening headache, repeated vomiting\n\u2022 Seizure or seizure-like activity\n\u2022 Persistent confusion, agitation, or unequal pupils\n\u2022 Focal neurologic deficit (weakness, numbness, vision change)\n\u2022 Neck pain or midline c-spine tenderness\n\u2022 Suspected skull fracture (Battle sign, raccoon eyes, otorrhea, rhinorrhea)\n\u2022 GCS < 15 at any point or trending down',
+    },
+    {
+      heading: 'C-spine clearance on field',
+      body: '\u2022 Maintain inline immobilization until cleared\n\u2022 Apply NEXUS or Canadian C-Spine Rule once awake and cooperative\n\u2022 Any midline tenderness, neuro deficit, intoxication, distracting injury, or dangerous mechanism = full immobilization and CT cervical spine\n\u2022 If helmet on and properly fitted: do not remove unless airway compromised \u2014 transport with helmet in place',
+    },
+    {
+      heading: 'Imaging triggers in the ED',
+      body: '\u2022 Apply Canadian CT Head Rule or New Orleans Criteria to all minor head injuries\n\u2022 Anticoagulation (warfarin, DOACs, antiplatelets) lowers threshold dramatically \u2014 most experts CT all anticoagulated patients with any head trauma\n\u2022 Children: PECARN rules\n\u2022 Suspected skull base fracture, depressed skull fracture, or focal deficit = CT now',
+    },
+    {
+      heading: 'Second impact syndrome',
+      body: '\u2022 Catastrophic cerebral edema after a second concussion sustained before symptoms of the first have resolved\n\u2022 Mortality up to 50%; survivors often severely disabled\n\u2022 Largely a pediatric and adolescent phenomenon\n\u2022 Hard rule: no athlete returns to contact same day, ever, after suspected concussion',
+    },
+    {
+      heading: 'Disposition pearls',
+      body: '\u2022 All concussions need same-day removal from play and a structured graded RTP protocol\n\u2022 Provide written discharge instructions, observer for 24 h, return precautions (worsening headache, vomiting, confusion, weakness, seizure)\n\u2022 Outpatient concussion clinic or sports medicine follow-up within 1\u20132 weeks if symptoms persist',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Patricios JS, Schneider KJ, Dvorak J, et al. Consensus statement on concussion in sport: the 6th International Conference on Concussion in Sport-Amsterdam, October 2022. Br J Sports Med. 2023;57(11):695-711.' },
+    { num: 2, text: 'Stiell IG, Wells GA, Vandemheen K, et al. The Canadian CT Head Rule for patients with minor head injury. Lancet. 2001;357(9266):1391-1396.' },
+  ],
+};
+
+const SPORTS_CONCUSSION_CHECKLIST: InfoPage = {
+  id: 'sports-concussion-checklist',
+  title: 'Concussion Sideline Checklist',
+  subtitle: 'SCAT6 / CRT6 quick reference',
+  sections: [
+    {
+      heading: 'Recognize',
+      body: '\u2022 Any blow to head, face, neck, or body with force transmitted to head\n\u2022 Visible signs: dazed, vacant stare, balance issues, clutching head, slow to get up\n\u2022 Reported symptoms: headache, dizziness, fogginess, nausea, photophobia, sensitivity to noise\n\u2022 If suspected \u2014 remove from play immediately. "When in doubt, sit them out."',
+    },
+    {
+      heading: 'Maddocks questions (orientation)',
+      body: '\u2022 What venue are we at today?\n\u2022 Which half is it now?\n\u2022 Who scored last in this match?\n\u2022 What team did you play last week?\n\u2022 Did your team win the last game?\n\nAny incorrect answer suggests concussion until proven otherwise.',
+    },
+    {
+      heading: 'Quick neuro assessment',
+      body: '\u2022 GCS\n\u2022 Pupils equal and reactive\n\u2022 Cranial nerves\n\u2022 Strength symmetric in 4 limbs\n\u2022 Tandem gait, finger-to-nose\n\u2022 Cervical exam: tenderness, range of motion (only if no red flags)',
+    },
+    {
+      heading: 'Graduated return-to-play (mCRT6 / Amsterdam 2022)',
+      body: '\u2022 Step 1: Symptom-limited daily activity (24\u201348 h relative rest, then light cognitive activity)\n\u2022 Step 2: Light aerobic exercise (walking, stationary bike) \u2014 no impact\n\u2022 Step 3: Sport-specific exercise (running drills, no head impact)\n\u2022 Step 4: Non-contact training drills (more complex; resistance training)\n\u2022 Step 5: Full contact practice (after medical clearance)\n\u2022 Step 6: Return to play\n\nMinimum 24 h per stage. If symptoms recur, drop back one stage. Total minimum 6 days, often 1\u20134 weeks. Pediatric athletes return slower than adults.',
+    },
+    {
+      heading: 'Discharge counseling',
+      body: '\u2022 Cognitive rest first 24\u201348 h: reduce screens, schoolwork, video games\n\u2022 Sleep is therapeutic \u2014 normal sleep patterns\n\u2022 No alcohol, no driving until symptom-free at rest\n\u2022 Avoid NSAIDs and aspirin first 24\u201348 h (bleeding risk)\n\u2022 Acetaminophen okay for headache\n\u2022 Return precautions: worsening headache, repeated vomiting, weakness, seizure, confusion',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Patricios JS, Schneider KJ, Dvorak J, et al. Consensus statement on concussion in sport: 6th International Conference on Concussion in Sport-Amsterdam 2022. Br J Sports Med. 2023;57(11):695-711.' },
+    { num: 2, text: 'McCrory P, Meeuwisse W, Dvo\u0159ak J, et al. Consensus statement on concussion in sport \u2014 the 5th international conference. Br J Sports Med. 2017;51(11):838-847.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Tracheo-Innominate Fistula (TIF)
 // -------------------------------------------------------------------
 
@@ -20714,6 +20782,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   // Testicular Torsion
   'tt-imaging-delay': TT_IMAGING_DELAY,
   'tt-open-book': TT_OPEN_BOOK,
+  'sports-head-redflags': SPORTS_HEAD_REDFLAGS,
+  'sports-concussion-checklist': SPORTS_CONCUSSION_CHECKLIST,
   // Asthma
   'asthma-steps': ASTHMA_STEPS_SUMMARY,
   'asthma-severity-table': ASTHMA_SEVERITY_TABLE,

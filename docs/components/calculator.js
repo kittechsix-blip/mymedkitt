@@ -31070,6 +31070,53 @@ const TT_TWIST_SCORE_CALCULATOR = {
     ],
 };
 // =====================================================================
+// SPORTS INJURIES CALCULATORS
+// =====================================================================
+const SPORTS_OTTAWA_KNEE_CALCULATOR = {
+    id: 'sports-ottawa-knee',
+    title: 'Ottawa Knee Rule',
+    subtitle: 'X-ray indicated if any criterion present',
+    description: 'The Ottawa Knee Rule (Stiell 1995) identifies acute knee injury patients who can safely skip imaging. Sensitivity ~98-100% for clinically significant fracture. Validated for adults and children >2 years.',
+    fields: [
+        { name: 'age-55', label: 'Age 55 or older', type: 'toggle', points: 1 },
+        { name: 'fibular-tender', label: 'Tenderness at fibular head', type: 'toggle', points: 1 },
+        { name: 'patella-tender', label: 'Isolated tenderness at patella', type: 'toggle', points: 1 },
+        { name: 'flexion-90', label: 'Inability to flex knee to 90 degrees', type: 'toggle', points: 1 },
+        { name: 'weight-bear', label: 'Inability to bear weight 4 steps now and in ED', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 0, max: 1, label: 'No X-ray Needed', risk: '0 criteria present', mortality: 'Clinically significant fracture extremely unlikely. Discharge home with conservative care, weight-bearing as tolerated, RICE, and follow-up.', colorVar: '--color-success' },
+        { min: 1, max: Infinity, label: 'X-ray Indicated', risk: '1 or more criteria present', mortality: 'Obtain knee radiograph series (AP, lateral, +/- skyline/sunrise). Rule does not require imaging if zero criteria are met.', colorVar: '--color-warning' },
+    ],
+    thresholdNote: 'Any single positive finding triggers imaging. Validated in adults and children over 2 years. Does not address ligamentous or meniscal injury - clinical exam still drives ortho follow-up.',
+    citations: [
+        'Stiell IG, Greenberg GH, Wells GA, et al. Derivation of a decision rule for the use of radiography in acute knee injuries. Ann Emerg Med. 1995;26(4):405-413.',
+        'Bachmann LM, Haberzeth S, Steurer J, ter Riet G. The accuracy of the Ottawa knee rule to rule out knee fractures: a systematic review. Ann Intern Med. 2004;140(2):121-124.',
+    ],
+};
+const SPORTS_OTTAWA_ANKLE_CALCULATOR = {
+    id: 'sports-ottawa-ankle',
+    title: 'Ottawa Ankle Rule',
+    subtitle: 'Ankle / midfoot X-ray decision support',
+    description: 'The Ottawa Ankle Rule (Stiell 1992) decides who needs ankle vs. foot radiographs after acute injury. Sensitivity ~96-99% for clinically significant fracture. Validated in adults and children over 5.',
+    fields: [
+        { name: 'lat-mall', label: 'Bone tenderness at posterior edge or tip of lateral malleolus (distal 6 cm)', type: 'toggle', points: 1 },
+        { name: 'med-mall', label: 'Bone tenderness at posterior edge or tip of medial malleolus (distal 6 cm)', type: 'toggle', points: 1 },
+        { name: '5th-mt', label: 'Bone tenderness at base of 5th metatarsal', type: 'toggle', points: 1 },
+        { name: 'navicular', label: 'Bone tenderness at navicular', type: 'toggle', points: 1 },
+        { name: 'weight-bear', label: 'Inability to bear weight 4 steps both immediately and in ED', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 0, max: 1, label: 'No X-ray Needed', risk: '0 criteria present', mortality: 'Clinically significant fracture unlikely. Treat as soft-tissue injury - RICE, supportive bracing, weight-bear as tolerated, follow-up if not improving in 5-7 days.', colorVar: '--color-success' },
+        { min: 1, max: Infinity, label: 'X-ray Indicated', risk: '1 or more criteria present', mortality: 'Obtain ankle series if malleolar tenderness or weight-bearing failure; obtain foot series if midfoot tenderness or weight-bearing failure. Rule applies to malleolar zone (ankle) and midfoot zone (foot) separately.', colorVar: '--color-warning' },
+    ],
+    thresholdNote: 'Apply ankle and midfoot zones independently. Less reliable in patients with intoxication, distracting injury, or sensory deficit. Consider imaging anyway in high-risk mechanism.',
+    citations: [
+        'Stiell IG, Greenberg GH, McKnight RD, et al. A study to develop clinical decision rules for the use of radiography in acute ankle injuries. Ann Emerg Med. 1992;21(4):384-390.',
+        'Bachmann LM, Kolb E, Koller MT, Steurer J, ter Riet G. Accuracy of Ottawa ankle rules to exclude fractures of the ankle and mid-foot: systematic review. BMJ. 2003;326(7386):417.',
+    ],
+};
+// =====================================================================
 // OCULAR POCUS CALCULATORS
 // =====================================================================
 const OPOCUS_RUPTURE_SCREEN_CALCULATOR = {
@@ -34655,6 +34702,9 @@ const CALCULATORS = {
     'coag-doac-reversal': COAG_DOAC_REVERSAL_CALCULATOR,
     // Testicular Torsion
     'tt-twist-score': TT_TWIST_SCORE_CALCULATOR,
+    // Sports Injuries
+    'sports-ottawa-knee': SPORTS_OTTAWA_KNEE_CALCULATOR,
+    'sports-ottawa-ankle': SPORTS_OTTAWA_ANKLE_CALCULATOR,
     // Upper GI Bleed
     'gbs': GBS_CALCULATOR,
     'aims65': AIMS65_CALCULATOR,

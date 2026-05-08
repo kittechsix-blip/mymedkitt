@@ -197,6 +197,7 @@ export const TREE_REGISTRY = {
   'dic':              { prefix: 'DIC',                 entryNodeId: 'dic-start',          categoryId: 'heme-onc' },
   'coagulation-cascade': { prefix: 'COAG_CASCADE',     entryNodeId: 'coag-start',         categoryId: 'heme-onc' },
   'testicular-torsion': { prefix: 'TESTICULAR_TORSION', entryNodeId: 'tt-start',          categoryId: 'urology' },
+  'sports-injuries':  { prefix: 'SPORTS_INJURIES',     entryNodeId: 'sports-start',       categoryId: 'orthopedics' },
   'tracheo-innominate-fistula': { prefix: 'TRACHEO_INNOMINATE_FISTULA', entryNodeId: 'tif-start', categoryId: 'em' },
   'dental-trauma':    { prefix: 'DENTAL_TRAUMA',       entryNodeId: 'dt-start',           categoryId: 'em' },
   'pta-drainage':     { prefix: 'PTA_DRAINAGE',        entryNodeId: 'pta-start',          categoryId: 'procedures' },

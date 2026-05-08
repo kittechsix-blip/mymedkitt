@@ -114,6 +114,7 @@ const CROSS_LISTINGS = {
   'pph':                 [{ categoryId: 'emergency-medicine' }],
   'coagulation-cascade': [{ categoryId: 'critical-care' }],
   'testicular-torsion':  [{ categoryId: 'pediatrics' }],
+  'sports-injuries':     [{ categoryId: 'pediatrics' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

@@ -1050,6 +1050,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/testicular-torsion.js');
       return { nodes: m.TESTICULAR_TORSION_NODES, entryNodeId: 'tt-start', categoryId: 'urology', moduleLabels: m.TESTICULAR_TORSION_MODULE_LABELS, citations: m.TESTICULAR_TORSION_CITATIONS, criticalActions: m.TESTICULAR_TORSION_CRITICAL_ACTIONS };
     },
+    'sports-injuries': async () => {
+      const m = await import('../data/trees/sports-injuries.js');
+      return { nodes: m.SPORTS_INJURIES_NODES, entryNodeId: 'sports-start', categoryId: 'orthopedics', moduleLabels: m.SPORTS_INJURIES_MODULE_LABELS, citations: m.SPORTS_INJURIES_CITATIONS, criticalActions: m.SPORTS_INJURIES_CRITICAL_ACTIONS };
+    },
     'tracheo-innominate-fistula': async () => {
       const m = await import('../data/trees/tracheo-innominate-fistula.js');
       return { nodes: m.TRACHEO_INNOMINATE_FISTULA_NODES, entryNodeId: 'tif-start', categoryId: 'anesthesia-airway', moduleLabels: m.TRACHEO_INNOMINATE_FISTULA_MODULE_LABELS, citations: m.TRACHEO_INNOMINATE_FISTULA_CITATIONS, criticalActions: m.TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS };
