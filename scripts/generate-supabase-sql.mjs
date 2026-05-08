@@ -113,6 +113,7 @@ const CROSS_LISTINGS = {
   'asthma-exacerbation': [{ categoryId: 'emergency-medicine' }],
   'pph':                 [{ categoryId: 'emergency-medicine' }],
   'coagulation-cascade': [{ categoryId: 'critical-care' }],
+  'testicular-torsion':  [{ categoryId: 'pediatrics' }],
 };
 
 const reg = TREE_REGISTRY[consultId];

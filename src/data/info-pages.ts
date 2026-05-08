@@ -13111,6 +13111,69 @@ const COAG_THROMBOPHILIA_PANEL: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Testicular Torsion
+// -------------------------------------------------------------------
+
+const TT_IMAGING_DELAY: InfoPage = {
+  id: 'tt-imaging-delay',
+  title: 'Imaging Should Not Delay OR',
+  subtitle: 'High TWIST and clinical torsion bypass ultrasound',
+  sections: [
+    {
+      heading: 'Time is testicle',
+      body: '\u2022 <6 hours \u2192 salvage >90%\n\u2022 6\u201312 hours \u2192 salvage ~50%\n\u2022 12\u201324 hours \u2192 salvage ~20%\n\u2022 >24 hours \u2192 salvage near 0%\n\nEvery additional 30 minutes of imaging delay measurably reduces testicular survival.',
+    },
+    {
+      heading: 'When to bypass imaging',
+      body: '\u2022 **TWIST 5\u20137** with cooperative urologist \u2192 OR direct\n\u2022 Classic clinical presentation in adolescent (sudden severe pain, vomiting, high-riding testis, absent cremasteric) \u2192 OR direct\n\u2022 OR available within 30 minutes\n\nReady-room the OR while you call urology \u2014 do not wait for the call back to start the process.',
+    },
+    {
+      heading: 'When imaging is needed',
+      body: '\u2022 **TWIST 3\u20134** \u2192 Doppler ultrasound, but call urology in parallel\n\u2022 Ambiguous presentation in adult\n\u2022 Trauma history that could explain findings\n\u2022 Pediatric atypical presentation\n\nDo NOT serially repeat imaging \u2014 if Doppler is equivocal in a clinically suspicious patient, that\'s a surgical exploration indication.',
+    },
+    {
+      heading: 'Documentation that protects you',
+      body: 'Time-stamp these in the chart:\n\u2022 Pain onset (per patient)\n\u2022 Triage / arrival\n\u2022 First MD eval\n\u2022 TWIST score\n\u2022 Urology contact time\n\u2022 Imaging order \u2192 imaging complete\n\u2022 OR time\n\nTorsion is the #1 urological malpractice diagnosis. The chart wins or loses the case.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Mellick LB, Sinex JE, Gibson RW, Mears K. Testicular survival times: implications for timing. Pediatr Emerg Care. 2019;35(12):821-825.' },
+    { num: 2, text: 'Gaither TW, Copp HL. Appellant cases for testicular torsion. J Pediatr Urol. 2016;12(5):291.e1-291.e5.' },
+  ],
+};
+
+const TT_OPEN_BOOK: InfoPage = {
+  id: 'tt-open-book',
+  title: 'Open Book Manual Detorsion',
+  subtitle: 'Step-by-step technique',
+  sections: [
+    {
+      heading: 'Setup',
+      body: '\u2022 Patient supine, examiner at the foot of the bed\n\u2022 Adequate analgesia: opioid + spermatic cord block at the external ring (10 mL of 1% lidocaine without epinephrine)\n\u2022 Reassure the patient \u2014 procedure is brief but uncomfortable',
+    },
+    {
+      heading: 'The maneuver',
+      body: '\u2022 Visualize as if reading a book \u2014 testicles are the pages\n\u2022 Rotate the affected testicle **outward (lateral)** from the midline\n  - **Right testis** \u2192 counterclockwise from your view at the foot of the bed\n  - **Left testis** \u2192 clockwise from your view\n\u2022 Torsion is typically 360\u2013720\u00B0 \u2014 plan for **1\u20133 full rotations**\n\u2022 Reassess pain after each rotation',
+    },
+    {
+      heading: 'Endpoints of success',
+      body: '\u2022 **Sudden pain relief** \u2014 most reliable sign\n\u2022 Testicle drops to a lower / more horizontal position\n\u2022 Doppler shows return of intratesticular flow\n\u2022 Testicle softens on palpation',
+    },
+    {
+      heading: 'If pain worsens',
+      body: '\u2022 You may be detorsing in the **wrong direction**\n\u2022 Reverse direction (medial rotation) for the same number of turns\n\u2022 If still worse, stop and proceed to OR\n\u2022 Document direction tried, response, and time',
+    },
+    {
+      heading: 'Critical reminders',
+      body: '\u2022 **Even successful detorsion still requires bilateral orchidopexy** \u2014 ~30% retort\n\u2022 Manual detorsion is a **bridge**, not a definitive treatment\n\u2022 Do not delay surgical consult to attempt the maneuver \u2014 attempt while the OR is being readied\n\u2022 Document direction, turns, pain before/after, Doppler before/after',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Sharp VJ, Kieran K, Arlen AM. Testicular torsion: diagnosis, evaluation, and management. Am Fam Physician. 2013;88(12):835-840.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Tracheo-Innominate Fistula (TIF)
 // -------------------------------------------------------------------
 
@@ -20648,6 +20711,9 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'coag-vitk-pathway': COAG_VITK_PATHWAY,
   'coag-plt-jump': COAG_PLT_JUMP,
   'coag-thrombophilia-panel': COAG_THROMBOPHILIA_PANEL,
+  // Testicular Torsion
+  'tt-imaging-delay': TT_IMAGING_DELAY,
+  'tt-open-book': TT_OPEN_BOOK,
   // Asthma
   'asthma-steps': ASTHMA_STEPS_SUMMARY,
   'asthma-severity-table': ASTHMA_SEVERITY_TABLE,

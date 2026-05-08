@@ -31044,6 +31044,32 @@ const COAG_DOAC_REVERSAL_CALCULATOR = {
     ],
 };
 // =====================================================================
+// TESTICULAR TORSION CALCULATORS
+// =====================================================================
+const TT_TWIST_SCORE_CALCULATOR = {
+    id: 'tt-twist-score',
+    title: 'TWIST Score',
+    subtitle: 'Testicular Workup for Ischemia and Suspected Torsion',
+    description: 'The TWIST score (Barbosa 2013) stratifies acute scrotal pain into low / intermediate / high risk for testicular torsion using five clinical findings. Validated for pediatric and adolescent populations; performance varies in adults but the framework is broadly used.',
+    fields: [
+        { name: 'hard-testis', label: 'Hard testis on palpation', type: 'toggle', points: 2 },
+        { name: 'swelling', label: 'Testicular swelling', type: 'toggle', points: 2 },
+        { name: 'nv', label: 'Nausea or vomiting', type: 'toggle', points: 1 },
+        { name: 'cremasteric', label: 'Absent cremasteric reflex', type: 'toggle', points: 1 },
+        { name: 'high-riding', label: 'High-riding testis', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 0, max: 3, label: 'Low Risk', risk: '0\u20132 points', mortality: 'NPV ~96% \u2014 torsion unlikely; consider epididymitis, orchitis, appendix testis, hernia. Clinical judgment still wins if exam is highly concerning.', colorVar: '--color-success' },
+        { min: 3, max: 5, label: 'Intermediate Risk', risk: '3\u20134 points', mortality: 'Imaging zone \u2014 obtain Doppler ultrasound and call urology in parallel. Do not let imaging delay surgical consult.', colorVar: '--color-warning' },
+        { min: 5, max: Infinity, label: 'High Risk', risk: '5\u20137 points', mortality: 'PPV ~93\u2013100% \u2014 straight to OR. Imaging may delay salvage. Page urology now.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'High TWIST (5\u20137) supports proceeding to OR without imaging. Intermediate (3\u20134) supports Doppler. Low (0\u20132) supports searching for alternative diagnoses, but a clinically classic torsion still goes to OR regardless of TWIST.',
+    citations: [
+        'Barbosa JA, Tiseo BC, Barayan GA, et al. Development and initial validation of a scoring system to diagnose testicular torsion in children (TWIST). J Urol. 2013;189(5):1859-1864.',
+        'Sheth KR, Keays M, Grimsby GM, et al. Diagnosing testicular torsion before urological consultation and imaging: validation of the TWIST score. J Urol. 2016;195(6):1870-1875.',
+    ],
+};
+// =====================================================================
 // OCULAR POCUS CALCULATORS
 // =====================================================================
 const OPOCUS_RUPTURE_SCREEN_CALCULATOR = {
@@ -34627,6 +34653,8 @@ const CALCULATORS = {
     'coag-pattern-decoder': COAG_PATTERN_DECODER_CALCULATOR,
     'coag-mixing-study': COAG_MIXING_STUDY_CALCULATOR,
     'coag-doac-reversal': COAG_DOAC_REVERSAL_CALCULATOR,
+    // Testicular Torsion
+    'tt-twist-score': TT_TWIST_SCORE_CALCULATOR,
     // Upper GI Bleed
     'gbs': GBS_CALCULATOR,
     'aims65': AIMS65_CALCULATOR,

@@ -1209,6 +1209,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'thromb', label: 'Throm Wkup', icon: '🔬', action: 'overlay', target: 'coag-thrombophilia-panel' },
   ],
   // ---------------------------------------------------------------
+  // Testicular Torsion
+  // ---------------------------------------------------------------
+  'testicular-torsion': [
+    { id: 'twist', label: 'TWIST', icon: '📊', action: 'calculator', target: 'tt-twist-score' },
+    { id: 'open-book', label: 'Open Book', icon: '📖', action: 'overlay', target: 'tt-open-book' },
+    { id: 'imaging', label: 'Imaging', icon: '⏱️', action: 'overlay', target: 'tt-imaging-delay' },
+    { id: 'manual', label: 'Detorsion', icon: '🔄', action: 'jump', target: 'tt-manual-decision' },
+    { id: 'atypical', label: 'Atypical', icon: '🔀', action: 'jump', target: 'tt-atypical-entry' },
+  ],
+  // ---------------------------------------------------------------
   // Tracheostomy Emergencies
   // ---------------------------------------------------------------
   'trach-emergency': [
