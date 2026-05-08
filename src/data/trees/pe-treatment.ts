@@ -88,7 +88,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Reperfusion Strategy',
-    body: '**Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) — no bolus if thrombolysis imminent; low-dose infusion ≤500 U/hr\n• UFH preferred (can be stopped if hemorrhage)\n\n**Systemic thrombolysis** — only intervention with mortality benefit data.\n\n**Dosing options:**\n• Standard: [Alteplase](#/drug/alteplase/pulmonary) **100 mg IV over 2h**\n• Reduced-dose: **50 mg IV bolus** (emerging evidence — less bleeding, equivalent efficacy)\n• Cardiac arrest: **50 mg IV bolus** + sustained CPR\n\n**2026 update:** Mechanical thrombectomy now preferred over CDT for stable-enough patients (PEERLESS trial).',
+    body: '**Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) — no bolus if thrombolysis imminent; low-dose infusion ≤500 U/hr\n• UFH preferred (can be stopped if hemorrhage)\n\n**Systemic thrombolysis** — only intervention with mortality benefit data.\n\n**Dosing options:**\n• Standard: [Alteplase](#/drug/alteplase/pulmonary) **100 mg IV over 2h** (10–20 mg bolus, remainder over 2h)\n• Reduced-dose: **50 mg IV** over 2h (emerging — less bleeding, equivalent efficacy; HI-PEITHO 2026)\n• Cardiac arrest: **50 mg IV bolus** + sustained CPR\n• **Tenecteplase (alternative, off-label):** weight-based single bolus — 30 mg (<60 kg), 35 mg (60–69), 40 mg (70–79), 45 mg (80–89), 50 mg (≥90 kg). Single bolus advantage; mortality similar to alteplase.\n\n**2026 update:** Mechanical thrombectomy now preferred over CDT for stable-enough patients (PEERLESS-I trial). STRATIFY (2026) shows peripheral 20 mg tPA over 6h equivalent to CDT.',
     citation: [1, 6, 7, 8],
     calculatorLinks: [
       { id: 'alteplase-pe-dosing', label: 'Alteplase Dosing' },
@@ -96,11 +96,11 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     treatment: {
       firstLine: {
         drug: 'Alteplase',
-        dose: '100 mg (or 50 mg reduced-dose)',
+        dose: '100 mg (or 50 mg reduced-dose; 0.6 mg/kg max 50 mg in arrest)',
         route: 'IV',
-        frequency: 'Over 2 hours (or bolus if cardiac arrest)',
+        frequency: 'Over 2 hours (10–20 mg bolus, remainder over 2h); bolus if cardiac arrest',
         duration: 'Single dose',
-        notes: 'Cardiac arrest: 50 mg IV bolus + CPR; avoid concurrent heparin bolus',
+        notes: 'Cardiac arrest: 50 mg IV bolus + CPR; avoid concurrent heparin bolus. Tenecteplase alternative: weight-based 30–50 mg single bolus.',
       },
       alternative: {
         drug: 'UFH (low-dose)',
@@ -213,7 +213,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Low-Risk Category C',
-    body: 'Only 1-2 risk factors present (RV dysfunction OR elevated biomarkers, not all three).\n\n**Anticoagulation alone** — advanced therapy not routinely indicated:\n• [Enoxaparin](#/drug/enoxaparin/pe) 1 mg/kg SC q12h, OR\n• [UFH](#/drug/ufh/pe) if CrCl <30 or concern for escalation\n\n**Telemetry admission** for monitoring (step-down unit appropriate).\n\nReassess if clinical deterioration → escalate to high-risk Category C pathway.',
+    body: 'Only 1-2 risk factors present (RV dysfunction OR elevated biomarkers, not all three).\n\n**Anticoagulation alone** — advanced therapy not routinely indicated. Per 2026 AHA/ACC, LMWH is preferred over UFH for initial parenteral therapy in stable patients:\n• [Enoxaparin](#/drug/enoxaparin/pe) 1 mg/kg SC q12h (preferred, Class I 2026)\n• [UFH](#/drug/ufh/pe) reserved for CrCl <30 or concern for rapid escalation\n\n**Telemetry admission** for monitoring (step-down unit appropriate).\n\nReassess if clinical deterioration → escalate to high-risk Category C pathway.',
     citation: [1, 6],
     treatment: {
       firstLine: {
@@ -440,7 +440,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     type: 'question',
     module: 6,
     title: 'Anticoagulation Selection',
-    body: 'Choice depends on renal function, bleeding risk, patient preference, and cost.\n\n**Key decision points:**\n• CrCl <30 mL/min → UFH preferred\n• Cancer-associated VTE → DOAC (apixaban/rivaroxaban) or LMWH\n• Pregnancy → LMWH only (DOACs contraindicated)\n• HIT → argatroban or fondaparinux',
+    body: 'Choice depends on renal function, bleeding risk, patient preference, and cost.\n\n**2026 AHA/ACC update:** LMWH is recommended **over UFH** for initial parenteral anticoagulation in most patients with acute PE (Class I). Reserve UFH for patients with anticipated thrombolysis, severe renal impairment, or hemodynamic instability where rapid escalation may be needed.\n\n**Key decision points:**\n• CrCl <30 mL/min → UFH preferred\n• Anticipated reperfusion (Cat D-E or unstable Cat C) → UFH\n• Cancer-associated VTE → DOAC (apixaban/rivaroxaban) or LMWH\n• Pregnancy → LMWH only (DOACs contraindicated)\n• HIT → argatroban or fondaparinux',
     citation: [4],
     options: [
       {
@@ -599,9 +599,11 @@ export const PE_TREATMENT_CITATIONS: Citation[] = [
   { num: 3, text: 'Jaff MR, McMurtry MS, Archer SL, et al. Management of Massive and Submassive Pulmonary Embolism. Circulation. 2011;123(16):1788-830.' },
   { num: 4, text: 'Stevens SM, Woller SC, Kreuziger LB, et al. Antithrombotic Therapy for VTE Disease: Second Update of the CHEST Guideline. CHEST. 2021;160(6):e545-e608.' },
   { num: 5, text: 'Warkentin TE, Greinacher A, Gruel Y, et al. Heparin-Induced Thrombocytopenia in the Cardiovascular Patient. Circulation. 2021;144(5):e1-e22.' },
-  { num: 6, text: '2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for Acute Pulmonary Embolism. Circulation. 2026.' },
+  { num: 6, text: 'Creager MA, Barnes GD, Giri J, et al. 2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults. Circulation. 2026 Feb 19. doi:10.1161/CIR.0000000000001415.' },
   { num: 7, text: 'Weingart S. EMCrit Episode 424 — Crashing PE Update. EMCrit.org. 2026.' },
   { num: 8, text: 'Toma C, Jaber WA, Engelman Z, et al. PEERLESS Trial: Mechanical Thrombectomy vs Catheter-Directed Lysis for Intermediate-Risk PE. JACC. 2024.' },
   { num: 9, text: 'Piazza G, Hohlfelder B, Jaff MR, et al. OPTALYSE PE: Ultrasound-Assisted Catheter-Directed Thrombolysis. JACC Cardiovasc Interv. 2015;8(11):1382-92.' },
   { num: 10, text: 'Corsi F, Lebreton G, Aubert S, et al. ECMO for Massive Pulmonary Embolism. Ann Thorac Surg. 2017;103(1):188-194.' },
+  { num: 11, text: 'HI-PEITHO Investigators. Reduced-Dose Tissue Plasminogen Activator with Ultrasound-Facilitated Catheter-Directed Thrombolysis vs Anticoagulation Alone for Intermediate-High Risk PE. 2026.' },
+  { num: 12, text: 'STRATIFY Investigators. Peripheral Slow-Infusion Alteplase vs Catheter-Directed Thrombolysis for Intermediate-Risk Pulmonary Embolism. 2026.' },
 ];
