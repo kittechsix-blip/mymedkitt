@@ -136,6 +136,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'nstemi-start',
       },
       {
+        id: 'wellens-syndrome',
+        title: 'Wellens Syndrome',
+        subtitle: 'Recognition -> ECG Patterns -> No Stress Test -> ACS Therapy -> Cath Strategy',
+        categoryId: 'cardiology',
+        version: '1.0',
+        nodeCount: 18,
+        entryNodeId: 'wellens-start',
+      },
+      {
         id: 'stemi',
         title: 'STEMI Management',
         subtitle: 'Recognition → ECG Pattern → Reperfusion → Complications → Disposition',

@@ -323,6 +323,39 @@ export const STOP_PAGES_06 = {
         ],
         citations: [],
     },
+    // ─── Wellens Syndrome ────────────────────────────────────────────────────────
+    'wellens-syndrome-stop': {
+        id: 'wellens-syndrome-stop',
+        title: 'Wellens Syndrome — Do NOT',
+        subtitle: 'Critical pitfalls to avoid',
+        sections: [
+            {
+                heading: '🛑 Do NOT stress test suspected Wellens',
+                body: 'Wellens is a critical LAD warning pattern, not a low-risk chest pain pattern. Exercise or pharmacologic stress testing can provoke anterior MI, malignant arrhythmia, or death. Remove stress-test orders and call cardiology. [See no-stress node](#/node/wellens-no-stress).',
+            },
+            {
+                heading: '🛑 Do NOT dismiss it because the pain is gone',
+                body: 'The classic pattern often appears after angina improves. Pain-free does not mean safe. It may mean the LAD transiently reopened after near-occlusion. [See start node](#/node/wellens-start).',
+            },
+            {
+                heading: '🛑 Do NOT let a low troponin overrule the ECG',
+                body: 'Troponin can be normal or only mildly elevated in Wellens. Use troponin for trend and risk, but do not use a negative first value to send a classic Wellens pattern home. [See troponin node](#/node/wellens-troponin).',
+            },
+            {
+                heading: '🛑 Do NOT put classic Wellens in a routine chest pain pathway',
+                body: 'Classic Wellens is high-risk NSTE-ACS physiology. The patient needs monitored admission, serial ECGs/troponins, ACS medical therapy, and cardiology-directed invasive evaluation. [See admission node](#/node/wellens-admit).',
+            },
+            {
+                heading: '🛑 Do NOT ignore recurrent pain or dynamic ECG change',
+                body: 'Recurrent ischemic pain, instability, VT/VF, heart failure, or evolving ST changes should trigger urgent cardiology/cath discussion. Do not wait for the next troponin. [See urgent cath node](#/node/wellens-urgent-cath).',
+            },
+            {
+                heading: '🛑 Do NOT forget pseudo-Wellens mimics',
+                body: 'Anterior T-wave inversion can occur with LVH/strain, PE, CNS catastrophe, Takotsubo, myocarditis, cocaine/stimulant vasospasm, electrolytes, or memory T waves. If the story is ischemic or the ECG is dynamic, keep ACS/cardiology involved. [See mimics node](#/node/wellens-mimics).',
+            },
+        ],
+        citations: [],
+    },
     // ─── Button Battery ──────────────────────────────────────────────────────────
     'button-battery-stop': {
         id: 'button-battery-stop',

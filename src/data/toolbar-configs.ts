@@ -636,8 +636,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'shanghai', label: 'Shanghai', icon: '📊', action: 'calculator', target: 'brugada-shanghai' },
     { id: 'drugs-avoid', label: 'Drug List', icon: '⛔', action: 'calculator', target: 'brugada-drugs-avoid' },
     { id: 'ecg', label: 'ECG Types', icon: '📈', action: 'jump', target: 'brugada-ecg-patterns' },
+    { id: 'phenocopy', label: 'Mimics', icon: '🔍', action: 'jump', target: 'brugada-phenocopy-check' },
     { id: 'storm', label: 'VF Storm', icon: '⚡', action: 'jump', target: 'brugada-storm' },
     { id: 'fever', label: 'Fever', icon: '🌡️', action: 'jump', target: 'brugada-fever' },
+  ],
+  'wellens-syndrome': [
+    { id: 'pattern', label: 'Pattern', icon: '📈', action: 'jump', target: 'wellens-ecg-patterns' },
+    { id: 'no-stress', label: 'No Stress', icon: '⛔', action: 'jump', target: 'wellens-no-stress' },
+    { id: 'acs-rx', label: 'ACS Rx', icon: '💊', action: 'jump', target: 'wellens-initial-management' },
+    { id: 'cath', label: 'Cath', icon: '🫀', action: 'jump', target: 'wellens-cath-strategy' },
+    { id: 'mimics', label: 'Mimics', icon: '🔍', action: 'jump', target: 'wellens-mimics' },
   ],
   'button-battery': [
     { id: 'risk', label: 'Risk', icon: '📊', action: 'calculator', target: 'battery-risk-stratification' },

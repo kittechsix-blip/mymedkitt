@@ -258,6 +258,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/nstemi.js');
       return { nodes: m.NSTEMI_NODES, entryNodeId: 'nstemi-start', categoryId: 'cardiology', moduleLabels: m.NSTEMI_MODULE_LABELS, citations: m.NSTEMI_CITATIONS, criticalActions: m.NSTEMI_CRITICAL_ACTIONS };
     },
+    'wellens-syndrome': async () => {
+      const m = await import('../data/trees/wellens-syndrome.js');
+      return { nodes: m.WELLENS_SYNDROME_NODES, entryNodeId: 'wellens-start', categoryId: 'cardiology', moduleLabels: m.WELLENS_SYNDROME_MODULE_LABELS, citations: m.WELLENS_SYNDROME_CITATIONS, criticalActions: m.WELLENS_SYNDROME_CRITICAL_ACTIONS };
+    },
     'stemi': async () => {
       const m = await import('../data/trees/stemi.js');
       return { nodes: m.STEMI_NODES, entryNodeId: 'stemi-start', categoryId: 'cardiology', moduleLabels: m.STEMI_MODULE_LABELS, citations: m.STEMI_CITATIONS, criticalActions: m.STEMI_CRITICAL_ACTIONS };
