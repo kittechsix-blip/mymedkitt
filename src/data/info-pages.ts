@@ -12802,6 +12802,160 @@ const TTP_TREATMENT_SUMMARY: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Disseminated Intravascular Coagulation (DIC)
+// -------------------------------------------------------------------
+
+const DIC_STEPS_SUMMARY: InfoPage = {
+  id: 'dic-steps',
+  title: 'DIC',
+  subtitle: 'Key Steps Overview',
+  sections: [
+    {
+      heading: '1. Recognition',
+      body: '\u2022 DIC is **always secondary** \u2014 find and treat the trigger\n\u2022 Most common: sepsis, malignancy (incl. APL), trauma, obstetric, severe organ injury\n\u2022 Two phenotypes: bleeding-dominant (obstetric, trauma, APL) vs thrombotic-dominant (sepsis, Trousseau)\n\u2022 Bleeding from multiple sites + microvascular thrombosis + known trigger = suspect DIC',
+    },
+    {
+      heading: '2. Scoring',
+      body: '\u2022 **ISTH score** (\u22655 = overt DIC): platelets, fibrin marker (D-dimer/FDP), PT prolongation, fibrinogen \u2014 sens 91%, spec 97%\n\u2022 **JAAM score** (\u22654 = sepsis-DIC): adds SIRS criteria, more sensitive in early sepsis-DIC than ISTH\n\u2022 **SIC score** (\u22654 with plt+INR \u22653): identifies progression risk in sepsis before overt DIC\n\u2022 ISTH 2024: trends matter \u2014 repeat scores every 6-12 hours during active disease',
+    },
+    {
+      heading: '3. Etiology Pathway',
+      body: '\u2022 **Sepsis** \u2192 source control + abx in 1h, goal-directed resus, SIC scoring\n\u2022 **Malignancy** \u2192 LMWH for Trousseau, treat cancer; APL is bleeding emergency\n\u2022 **APL** \u2192 ATRA 45 mg/m\u00B2/day immediately, fibrinogen >150-200, NO heparin or TXA\n\u2022 **Obstetric** \u2192 deliver/evacuate, MTP 1:1:1, cryo to keep fibrinogen \u22652 g/L, TXA 1g IV <3h\n\u2022 **Trauma (TIC)** \u2192 TXA 1g <3h, MTP 1:1:1, fibrinogen \u22651.5-2 g/L, calcium, normothermia',
+    },
+    {
+      heading: '4. Treat the Trigger',
+      body: '\u2022 Source control trumps every other intervention\n\u2022 Antibiotics within 1 hour for sepsis; surgical/IR/OB intervention as indicated\n\u2022 Definitive obstetric management; oncologic therapy; antivenom for snake bite\n\u2022 Most non-overt DIC resolves with trigger control alone \u2014 resist "treating the labs"',
+    },
+    {
+      heading: '5. Hemostatic Resuscitation',
+      body: '\u2022 **Bleeding-dominant** \u2192 aggressive replacement to thresholds\n\u2022 **Platelets** \u22650.05 \u00D7 10\u00B9\u00B2/L if bleeding (\u22650.1 if ICH/neuraxial); 1 apheresis unit raises by 30-50\n\u2022 **FFP** 15 mL/kg if PT/PTT >1.5\u00D7 ULN and bleeding (do NOT for labs alone)\n\u2022 **Cryoprecipitate** 10 units (or 0.06 u/kg) if fibrinogen <1.5 g/L (<2 g/L in obstetric); raises by 0.5-1 g/L\n\u2022 **4F-PCC** 25-50 u/kg if volume-restricted or VKA reversal (selective use, discuss with heme)\n\u2022 **Adjuncts**: TXA in trauma/PPH/TBI; heparin only for thrombotic-dominant without bleeding',
+    },
+    {
+      heading: '6. Disposition & Monitoring',
+      body: '\u2022 ICU admission for nearly all DIC patients\n\u2022 Emergent hematology consult; source-specific consults (OB, oncology, surgery, IR)\n\u2022 Repeat CBC/PT/PTT/fibrinogen/D-dimer q4-6h during resuscitation, q12h stabilization, daily recovery\n\u2022 Resolution: ISTH <5 sustained \u226548h + trigger controlled + plt >100 + fibrinogen \u22652 g/L\n\u2022 Fibrinogen normalizes last \u2014 do not declare resolved on platelet count alone',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Iba T, Levi M, Thachil J, et al. ISTH 2024 update on disseminated intravascular coagulation. J Thromb Haemost. 2024;22(7):1849-1860.' },
+    { num: 2, text: 'Levi M, Scully M. How I treat disseminated intravascular coagulation. Blood. 2018;131(8):845-854.' },
+    { num: 3, text: 'British Society for Haematology guideline on DIC in haematological malignancy. Br J Haematol. 2022;199(1):29-40.' },
+  ],
+};
+
+const DIC_PRODUCT_THRESHOLDS: InfoPage = {
+  id: 'dic-product-thresholds',
+  title: 'DIC Blood Product Thresholds',
+  subtitle: 'Order sheet for hemostatic resuscitation',
+  sections: [
+    {
+      heading: 'Decision Rule',
+      body: '**Transfuse for active bleeding or pre-procedure \u2014 not for abnormal labs alone.** Prophylactic product transfusion in non-bleeding DIC has not shown benefit and may worsen thrombosis.',
+    },
+    {
+      heading: 'Platelets',
+      body: '\u2022 **Bleeding:** \u226550 \u00D7 10\u2079/L\n\u2022 **ICH / TBI / neuraxial procedure:** \u2265100 \u00D7 10\u2079/L\n\u2022 **Pre-procedure (LP, central line, surgery):** \u226550 \u00D7 10\u2079/L\n\u2022 **Non-bleeding ICU prophylaxis:** \u226520 \u00D7 10\u2079/L\n\u2022 **APL:** \u226530-50 \u00D7 10\u2079/L\n\u2022 **Dose:** 1 apheresis unit raises platelet count by ~30-50 \u00D7 10\u2079/L; recheck 10-60 min post-transfusion',
+    },
+    {
+      heading: 'Fresh Frozen Plasma (FFP)',
+      body: '\u2022 **Indication:** PT or aPTT >1.5\u00D7 ULN AND active bleeding (or pre-procedure)\n\u2022 **Dose:** 15 mL/kg IV (typically 4 units for 70 kg adult)\n\u2022 **Each unit:** ~250 mL\n\u2022 **Recheck PT/PTT** 30 min post-infusion\n\u2022 **Volume burden:** caution in CHF, ARDS, pediatrics \u2014 consider 4F-PCC alternative\n\u2022 **ABO-compatible plasma**; AB plasma is universal donor',
+    },
+    {
+      heading: 'Cryoprecipitate',
+      body: '\u2022 **Non-pregnant DIC with bleeding:** fibrinogen \u22651.5 g/L\n\u2022 **Obstetric DIC / PPH:** fibrinogen \u22652 g/L (higher because pregnant baseline is 4-6 g/L)\n\u2022 **APL / leukemia DIC:** fibrinogen \u22651.5-2 g/L\n\u2022 **Massive transfusion / TIC:** fibrinogen \u22651.5-2 g/L\n\u2022 **Dose:** 10 units (or 0.06 units/kg) raises fibrinogen by ~0.5-1 g/L in adult; each unit \u22485-10 mL\n\u2022 **Contains:** fibrinogen, factor VIII, vWF, factor XIII, fibronectin\n\u2022 **Fibrinogen concentrate (RiaSTAP):** 25-100 mg/kg IV; pathogen-reduced and volume-sparing',
+    },
+    {
+      heading: '4-Factor Prothrombin Complex Concentrate (4F-PCC)',
+      body: '\u2022 **Indication:** volume-restricted patient with severe coagulopathy + bleeding, or VKA reversal on top of DIC\n\u2022 **Dose:** 25-50 units/kg IV (Kcentra, Beriplex, Octaplex)\n  - 25 units/kg if INR 2-4\n  - 35 units/kg if INR 4-6\n  - 50 units/kg if INR >6 or major bleed\n  - Max 5000 units regardless of weight\n\u2022 **Caution in DIC:** procoagulant factors (II, VII, IX, X) carry theoretic thrombosis risk in already-procoagulant state \u2014 discuss with hematology\n\u2022 **Vitamin K co-administration:** 10 mg IV if VKA reversal (PCC effect fades in 6-24h)',
+    },
+    {
+      heading: 'Massive Transfusion Protocol',
+      body: '\u2022 **Activate early** for major hemorrhage (trauma, OB, GI bleed)\n\u2022 **Ratio:** 1:1:1 (RBC:FFP:platelets) until viscoelastic-guided\n\u2022 **Calcium replacement:** citrate from products chelates ionized Ca \u2014 maintain iCa \u22651.1 mmol/L\n\u2022 **Avoid hypothermia:** warm fluids, blankets, forced-air warmers (<35\u00B0C impairs platelet function and enzyme kinetics)\n\u2022 **Correct acidosis:** pH <7.2 impairs coagulation enzyme function\n\u2022 **Notify blood bank early**',
+    },
+    {
+      heading: 'Reassessment',
+      body: '\u2022 Recheck CBC, PT/PTT, fibrinogen 30-60 min after each round\n\u2022 Repeat scoring (ISTH) every 6-12 hours during active resuscitation\n\u2022 Adjust products based on viscoelastic testing (TEG/ROTEM) when available\n\u2022 De-escalate as trigger is controlled and trends improve',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Levi M, Scully M. How I treat disseminated intravascular coagulation. Blood. 2018;131(8):845-854.' },
+    { num: 2, text: 'Sankar A, Bhatti S, Olutoye OA, et al. DIC in obstetrics: a contemporary clinical review. Am J Obstet Gynecol MFM. 2024;6(2):101230.' },
+    { num: 3, text: 'Spahn DR, Bouillon B, Cerny V, et al. The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition. Crit Care. 2023;27(1):80.' },
+    { num: 4, text: 'Thachil J, Adelborg K, Connors JM, et al. ISTH SSC subcommittee guidance on prothrombin complex concentrate use in the bleeding patient. J Thromb Haemost. 2023;21(5):1238-1247.' },
+  ],
+};
+
+const DIC_ETIOLOGY_JUMP: InfoPage = {
+  id: 'dic-etiology-jump',
+  title: 'DIC Etiology Quick-Jump',
+  subtitle: 'Direct navigation by underlying trigger',
+  sections: [
+    {
+      heading: 'How to Use',
+      body: 'DIC is always secondary. Identify the trigger and jump directly to the etiology-specific pathway. All four converge on the hemostatic resuscitation principles in Module 4.',
+    },
+    {
+      heading: '1. Sepsis-Induced DIC',
+      body: '\u2022 **Most common etiology** \u2014 gram-negative > gram-positive\n\u2022 **Phenotype:** thrombotic / microvascular dominant\n\u2022 **Priorities:** source control + appropriate antibiotics within 1 hour, goal-directed resuscitation, SIC scoring\n\u2022 **Hemostatic support** only if bleeding or pre-procedure\n\u2022 **Anticoagulation** controversial \u2014 SIC-positive without bleeding may benefit\n\n\u2192 Jump to: **dic-sepsis**',
+    },
+    {
+      heading: '2. Malignancy-Associated DIC',
+      body: '\u2022 **Solid tumor (Trousseau):** chronic, thrombotic-dominant; LMWH first-line\n\u2022 **Hematologic (APL):** bleeding emergency \u2014 5-10% early death from hemorrhage\n\u2022 **Other AML/ALL** with high blast counts can also cause DIC\n\u2022 Treat the cancer; LMWH > warfarin for Trousseau\n\u2022 Avoid prophylactic platelet transfusion in stable thrombotic-dominant cases\n\n\u2192 Jump to: **dic-malignancy** \u2192 **dic-apl** if APL suspected',
+    },
+    {
+      heading: '3. Obstetric DIC',
+      body: '\u2022 **Triggers:** placental abruption (most common), AFE, retained products, severe preeclampsia/HELLP, PPH, sepsis (chorioamnionitis, septic abortion)\n\u2022 **Phenotype:** rapid-onset, bleeding-dominant\n\u2022 **Key threshold:** fibrinogen \u22652 g/L (pregnant baseline is 4-6 g/L \u2014 not <1)\n\u2022 **Priorities:** definitive obstetric management, MTP 1:1:1, cryo early, TXA 1g IV within 3 hours (WOMAN trial), avoid heparin\n\n\u2192 Jump to: **dic-obstetric**',
+    },
+    {
+      heading: '4. Trauma-Induced Coagulopathy (TIC)',
+      body: '\u2022 **Mechanism:** tissue injury + shock + acidosis + hypothermia + hemodilution; activated protein C-mediated hyperfibrinolysis\n\u2022 **Recognition:** major trauma, massive transfusion need, lactate >4, abnormal TEG/ROTEM\n\u2022 **Priorities:** damage control resuscitation, TXA 1g IV bolus + 1g over 8h within 3 hours (CRASH-2), MTP 1:1:1, fibrinogen \u22651.5-2 g/L, calcium replacement, normothermia\n\u2022 **TBI exception:** permissive hypotension contraindicated \u2014 keep MAP \u226580, SBP \u2265110; TXA within 3h (CRASH-3)\n\n\u2192 Jump to: **dic-trauma**',
+    },
+    {
+      heading: 'No Clear Trigger?',
+      body: 'Reconsider differential: TTP, HIT, primary fibrinolysis, severe liver failure, vitamin K deficiency, transfusion reaction, snake envenomation, heat stroke, Kasabach-Merritt syndrome.\n\n\u2192 See: **dic-ddx** and **dic-rare**',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Iba T, Levi M, Thachil J, et al. ISTH 2024 update on DIC. J Thromb Haemost. 2024;22(7):1849-1860.' },
+    { num: 2, text: 'Levi M, Scully M. How I treat DIC. Blood. 2018;131(8):845-854.' },
+    { num: 3, text: 'Sankar A, et al. DIC in obstetrics. Am J Obstet Gynecol MFM. 2024;6(2):101230.' },
+    { num: 4, text: 'Spahn DR, et al. European trauma guideline 6th edition. Crit Care. 2023;27(1):80.' },
+  ],
+};
+
+const DIC_APL_EMERGENCY: InfoPage = {
+  id: 'dic-apl-emergency',
+  title: 'APL-DIC ATRA Emergency',
+  subtitle: 'Acute Promyelocytic Leukemia bleeding crisis',
+  sections: [
+    {
+      heading: 'The Stakes',
+      body: '**5-10% of APL patients die from hemorrhage in the first days of presentation \u2014 usually intracranial.** Early death is the leading cause of treatment failure. Suspicion alone is enough to start ATRA. Do NOT wait for cytogenetic confirmation.',
+    },
+    {
+      heading: 'Recognition',
+      body: '\u2022 Pancytopenia + circulating promyelocytes\n\u2022 Auer rods, faggot cells on smear\n\u2022 Severe bleeding diathesis at presentation (epistaxis, gum bleeding, mucosal bleeding, ICH)\n\u2022 Markedly elevated D-dimer, low fibrinogen, prolonged PT/PTT\n\u2022 PML-RAR\u03B1 fusion (t(15;17)) \u2014 confirmed by FISH/PCR (results in hours-days)\n\u2022 Hyperfibrinolysis pattern in addition to consumption',
+    },
+    {
+      heading: 'Emergency Treatment',
+      body: '\u2022 **ATRA (all-trans retinoic acid) 45 mg/m\u00B2/day in 2 divided doses** \u2014 start IMMEDIATELY on suspicion, do NOT wait for cytogenetics\n\u2022 **Aggressive cryoprecipitate** to keep fibrinogen **>150-200 mg/dL (1.5-2.0 g/L)** \u2014 much higher than non-APL DIC\n\u2022 **Platelets** to keep \u226530-50 \u00D7 10\u2079/L; higher if active bleeding or ICH\n\u2022 **FFP** to correct PT/PTT prolongation\n\u2022 **AVOID heparin** \u2014 historical use abandoned, increases bleeding mortality\n\u2022 **AVOID tranexamic acid** \u2014 controversial, may increase thrombosis (not part of standard APL bundle)\n\u2022 **Arsenic trioxide (ATO)** is added per oncology protocol once stabilized',
+    },
+    {
+      heading: 'ATRA Differentiation Syndrome',
+      body: '\u2022 Occurs in **5-25%** of patients within 2-21 days of ATRA initiation\n\u2022 **Symptoms:** fever, weight gain, dyspnea, pulmonary infiltrates, pleural/pericardial effusions, hypotension, AKI\n\u2022 **Treatment:** dexamethasone 10 mg IV q12h \u00D7 3+ days; continue ATRA unless severe\n\u2022 Without prompt treatment, can be fatal',
+    },
+    {
+      heading: 'Disposition',
+      body: '\u2022 **Emergent heme/onc consult** \u2014 transfer to tertiary center capable of managing APL after stabilization\n\u2022 **ICU admission**\n\u2022 **Blood bank notification** \u2014 anticipate massive product needs\n\u2022 **Neurology** if any neurologic symptoms \u2014 low threshold for head CT (ICH most common cause of early death)\n\u2022 **Outcomes:** with prompt ATRA + arsenic, modern APL has cure rate >90% in patients who survive the first weeks',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Lo-Coco F, Avvisati G, Vignetti M, et al. Retinoic acid and arsenic trioxide for acute promyelocytic leukemia. N Engl J Med. 2013;369(2):111-121.' },
+    { num: 2, text: 'Sanz MA, Fenaux P, Tallman MS, et al. Management of acute promyelocytic leukemia: updated recommendations from an expert panel of the European LeukemiaNet. Blood. 2019;133(15):1630-1643.' },
+    { num: 3, text: 'British Society for Haematology guideline on DIC in haematological malignancy. Br J Haematol. 2022;199(1):29-40.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Tracheo-Innominate Fistula (TIF)
 // -------------------------------------------------------------------
 
@@ -20329,6 +20483,11 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'ttp-steps': TTP_STEPS_SUMMARY,
   'ttp-tma-ddx': TTP_TMA_DDX,
   'ttp-treatment': TTP_TREATMENT_SUMMARY,
+  // DIC
+  'dic-steps': DIC_STEPS_SUMMARY,
+  'dic-product-thresholds': DIC_PRODUCT_THRESHOLDS,
+  'dic-etiology-jump': DIC_ETIOLOGY_JUMP,
+  'dic-apl-emergency': DIC_APL_EMERGENCY,
   // Asthma
   'asthma-steps': ASTHMA_STEPS_SUMMARY,
   'asthma-severity-table': ASTHMA_SEVERITY_TABLE,

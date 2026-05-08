@@ -194,6 +194,7 @@ export const TREE_REGISTRY = {
   'asthma-exacerbation': { prefix: 'ASTHMA_EXACERBATION', entryNodeId: 'asthma-start', categoryId: 'critical-care' },
   'adult-uti':        { prefix: 'ADULT_UTI',           entryNodeId: 'au-start',           categoryId: 'em' },
   'ttp':              { prefix: 'TTP',                 entryNodeId: 'ttp-start',          categoryId: 'heme-onc' },
+  'dic':              { prefix: 'DIC',                 entryNodeId: 'dic-start',          categoryId: 'heme-onc' },
   'tracheo-innominate-fistula': { prefix: 'TRACHEO_INNOMINATE_FISTULA', entryNodeId: 'tif-start', categoryId: 'em' },
   'dental-trauma':    { prefix: 'DENTAL_TRAUMA',       entryNodeId: 'dt-start',           categoryId: 'em' },
   'pta-drainage':     { prefix: 'PTA_DRAINAGE',        entryNodeId: 'pta-start',          categoryId: 'procedures' },

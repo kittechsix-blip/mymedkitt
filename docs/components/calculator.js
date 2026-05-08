@@ -30730,6 +30730,178 @@ const TTP_TMA_DDX_CALCULATOR = {
     },
 };
 // =====================================================================
+// DIC CALCULATORS
+// =====================================================================
+const DIC_ISTH_SCORE_CALCULATOR = {
+    id: 'dic-isth-score',
+    title: 'ISTH Overt DIC Score',
+    subtitle: 'Disseminated Intravascular Coagulation',
+    description: 'The ISTH overt DIC score (Taylor 2001, ISTH 2024 update) stratifies patients with a known DIC trigger using platelet count, fibrin marker (D-dimer / FDP), PT prolongation, and fibrinogen. A score \u22655 is compatible with overt DIC.',
+    fields: [
+        {
+            name: 'plt',
+            label: 'Platelet count (\u00D7 10\u2079/L)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '>100', points: 0 },
+                { label: '50-100', points: 1 },
+                { label: '<50', points: 2 },
+            ],
+        },
+        {
+            name: 'fibrin-marker',
+            label: 'Fibrin marker (D-dimer / FDP)',
+            type: 'select',
+            points: 0,
+            description: 'Compared to upper limit of normal',
+            selectOptions: [
+                { label: 'No rise', points: 0 },
+                { label: 'Moderate rise', points: 2 },
+                { label: 'Strong rise', points: 3 },
+            ],
+        },
+        {
+            name: 'pt',
+            label: 'PT prolongation',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<3 seconds', points: 0 },
+                { label: '3-6 seconds', points: 1 },
+                { label: '>6 seconds', points: 2 },
+            ],
+        },
+        {
+            name: 'fibrinogen',
+            label: 'Fibrinogen (g/L)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '\u22651 g/L', points: 0 },
+                { label: '<1 g/L', points: 1 },
+            ],
+        },
+    ],
+    results: [
+        { min: -Infinity, max: 5, label: 'Not Overt DIC', risk: 'Score <5', mortality: 'Suggests non-overt DIC \u2014 repeat scoring in 1-2 days; treat trigger', colorVar: '--color-primary' },
+        { min: 5, max: Infinity, label: 'Overt DIC', risk: 'Score \u22655', mortality: 'Compatible with overt DIC \u2014 repeat daily for trend; sens 91%, spec 97%', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Score \u22655 = compatible with overt DIC. Each 1-point increase associated with 25% mortality increment. ISTH 2024 emphasizes serial scoring \u2014 trends matter more than single values.',
+    citations: [
+        'Taylor FB, Toh CH, Hoots WK, Wada H, Levi M; ISTH SSC. Towards definition, clinical and laboratory criteria, and a scoring system for disseminated intravascular coagulation. Thromb Haemost. 2001;86(5):1327-1330.',
+        'Iba T, Levi M, Thachil J, et al. ISTH 2024 update on the diagnosis and management of disseminated intravascular coagulation. J Thromb Haemost. 2024;22(7):1849-1860.',
+    ],
+};
+const DIC_JAAM_SCORE_CALCULATOR = {
+    id: 'dic-jaam-score',
+    title: 'JAAM DIC Score',
+    subtitle: 'Japanese Association for Acute Medicine criteria',
+    description: 'The JAAM DIC score is more sensitive than the ISTH score for sepsis-associated DIC, especially early in the course. A score \u22654 is diagnostic of JAAM-DIC and correlates with 28-day mortality.',
+    fields: [
+        {
+            name: 'sirs',
+            label: 'SIRS criteria \u22653',
+            type: 'toggle',
+            points: 1,
+            description: 'Temperature, heart rate, respiratory rate, WBC count abnormalities',
+        },
+        {
+            name: 'plt',
+            label: 'Platelet count',
+            type: 'select',
+            points: 0,
+            description: 'Choose by absolute value or percent decrease',
+            selectOptions: [
+                { label: '\u2265120 \u00D7 10\u2079/L (no significant drop)', points: 0 },
+                { label: '80-120 \u00D7 10\u2079/L OR >30% decrease in 24h', points: 1 },
+                { label: '<80 \u00D7 10\u2079/L OR >50% decrease in 24h', points: 3 },
+            ],
+        },
+        {
+            name: 'pt-ratio',
+            label: 'PT ratio',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<1.2', points: 0 },
+                { label: '\u22651.2', points: 1 },
+            ],
+        },
+        {
+            name: 'fdp',
+            label: 'FDP (\u00B5g/mL)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<10', points: 0 },
+                { label: '10-25', points: 1 },
+                { label: '\u226525', points: 3 },
+            ],
+        },
+    ],
+    results: [
+        { min: -Infinity, max: 4, label: 'Not JAAM-DIC', risk: 'Score <4', mortality: 'Below JAAM-DIC threshold \u2014 monitor trends, repeat in 12-24h', colorVar: '--color-primary' },
+        { min: 4, max: Infinity, label: 'JAAM-DIC', risk: 'Score \u22654', mortality: 'JAAM-DIC \u2014 strong correlation with 28-day mortality in septic shock', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Score \u22654 = JAAM-DIC. More sensitive than ISTH for early sepsis-associated DIC. Best used alongside SIC scoring in critical care.',
+    citations: [
+        'Gando S, Iba T, Eguchi Y, et al. A multicenter, prospective validation of disseminated intravascular coagulation diagnostic criteria for critically ill patients: comparing current criteria. Crit Care Med. 2006;34(3):625-631.',
+        'Iba T, Levi M, Thachil J, et al. ISTH 2024 update on DIC. J Thromb Haemost. 2024;22(7):1849-1860.',
+    ],
+};
+const DIC_SIC_SCORE_CALCULATOR = {
+    id: 'dic-sic-score',
+    title: 'SIC Score',
+    subtitle: 'Sepsis-Induced Coagulopathy (Iba 2017)',
+    description: 'The Sepsis-Induced Coagulopathy (SIC) score is a simpler, earlier predictor than ISTH or JAAM. It identifies septic patients at risk of progressing to overt DIC and may identify candidates for anticoagulation trials. A score \u22654 with platelet+INR subscore \u22653 defines SIC.',
+    fields: [
+        {
+            name: 'plt',
+            label: 'Platelet count (\u00D7 10\u2079/L)',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '\u2265150', points: 0 },
+                { label: '100-150', points: 1 },
+                { label: '<100', points: 2 },
+            ],
+        },
+        {
+            name: 'inr',
+            label: 'INR',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '\u22641.2', points: 0 },
+                { label: '1.2-1.4', points: 1 },
+                { label: '>1.4', points: 2 },
+            ],
+        },
+        {
+            name: 'sofa',
+            label: 'Total SOFA (resp + CV + hep + renal, max 12)',
+            type: 'select',
+            points: 0,
+            description: 'Sum of respiratory, cardiovascular, hepatic, and renal SOFA components only',
+            selectOptions: [
+                { label: '0', points: 0 },
+                { label: '1', points: 1 },
+                { label: '\u22652', points: 2 },
+            ],
+        },
+    ],
+    results: [
+        { min: -Infinity, max: 4, label: 'Not SIC', risk: 'Score <4', mortality: 'Below SIC threshold \u2014 monitor sepsis closely; repeat in 12-24h', colorVar: '--color-primary' },
+        { min: 4, max: Infinity, label: 'SIC', risk: 'Score \u22654', mortality: 'Sepsis-induced coagulopathy \u2014 predicts progression to overt DIC; candidate for anticoagulation trials', colorVar: '--color-warning' },
+    ],
+    thresholdNote: 'SIC = score \u22654 with platelet + INR subscore \u22653. ISTH 2024 endorses two-step approach: SIC first \u2192 if positive, ISTH score next.',
+    citations: [
+        'Iba T, Nisio MD, Levy JH, Kitamura N, Thachil J. New criteria for sepsis-induced coagulopathy following the revised sepsis definition. J Thromb Haemost. 2017;15(3):518-526.',
+        'Iba T, Levi M, Thachil J, et al. ISTH 2024 update on DIC. J Thromb Haemost. 2024;22(7):1849-1860.',
+    ],
+};
+// =====================================================================
 // OCULAR POCUS CALCULATORS
 // =====================================================================
 const OPOCUS_RUPTURE_SCREEN_CALCULATOR = {
@@ -34305,6 +34477,10 @@ const CALCULATORS = {
     'ttp-plasmic': TTP_PLASMIC_CALCULATOR,
     'ttp-tpe-volume': TTP_TPE_VOLUME_CALCULATOR,
     'ttp-tma-ddx': TTP_TMA_DDX_CALCULATOR,
+    // DIC
+    'dic-isth-score': DIC_ISTH_SCORE_CALCULATOR,
+    'dic-jaam-score': DIC_JAAM_SCORE_CALCULATOR,
+    'dic-sic-score': DIC_SIC_SCORE_CALCULATOR,
     // Upper GI Bleed
     'gbs': GBS_CALCULATOR,
     'aims65': AIMS65_CALCULATOR,

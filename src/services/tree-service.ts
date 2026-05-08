@@ -1038,6 +1038,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/ttp.js');
       return { nodes: m.TTP_NODES, entryNodeId: 'ttp-start', categoryId: 'heme-onc', moduleLabels: m.TTP_MODULE_LABELS, citations: m.TTP_CITATIONS, criticalActions: m.TTP_CRITICAL_ACTIONS };
     },
+    'dic': async () => {
+      const m = await import('../data/trees/dic.js');
+      return { nodes: m.DIC_NODES, entryNodeId: 'dic-start', categoryId: 'heme-onc', moduleLabels: m.DIC_MODULE_LABELS, citations: m.DIC_CITATIONS, criticalActions: m.DIC_CRITICAL_ACTIONS };
+    },
     'tracheo-innominate-fistula': async () => {
       const m = await import('../data/trees/tracheo-innominate-fistula.js');
       return { nodes: m.TRACHEO_INNOMINATE_FISTULA_NODES, entryNodeId: 'tif-start', categoryId: 'anesthesia-airway', moduleLabels: m.TRACHEO_INNOMINATE_FISTULA_MODULE_LABELS, citations: m.TRACHEO_INNOMINATE_FISTULA_CITATIONS, criticalActions: m.TRACHEO_INNOMINATE_FISTULA_CRITICAL_ACTIONS };

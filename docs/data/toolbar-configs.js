@@ -1173,6 +1173,17 @@ const TOOLBAR_CONFIGS = {
         { id: 'treatment', label: 'Treatment', icon: '💉', action: 'overlay', target: 'ttp-treatment' },
     ],
     // ---------------------------------------------------------------
+    // DIC
+    // ---------------------------------------------------------------
+    'dic': [
+        { id: 'isth', label: 'ISTH', icon: '📊', action: 'calculator', target: 'dic-isth-score' },
+        { id: 'jaam', label: 'JAAM', icon: '📈', action: 'calculator', target: 'dic-jaam-score' },
+        { id: 'sic', label: 'SIC', icon: '🧪', action: 'calculator', target: 'dic-sic-score' },
+        { id: 'products', label: 'Products', icon: '🩸', action: 'overlay', target: 'dic-product-thresholds' },
+        { id: 'etiology', label: 'Etiology', icon: '🔀', action: 'overlay', target: 'dic-etiology-jump' },
+        { id: 'apl', label: 'APL', icon: '⚠️', action: 'overlay', target: 'dic-apl-emergency' },
+    ],
+    // ---------------------------------------------------------------
     // Tracheostomy Emergencies
     // ---------------------------------------------------------------
     'trach-emergency': [
