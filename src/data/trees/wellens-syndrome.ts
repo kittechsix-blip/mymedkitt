@@ -17,9 +17,9 @@ export const WELLENS_SYNDROME_NODES: DecisionNode[] = [
     body: "**Wellens syndrome = a pre-infarction LAD warning pattern.**\n\nPlain English: the ECG can look \"not that bad\" because the pain has improved, but the LAD is often critically narrowed and can close again.\n\n**Classic context:**\n- Recent anginal chest pain, now pain-free or improved\n- Little or no ST elevation\n- Normal or only mildly elevated troponin\n- Characteristic anterior T-wave changes in V2-V3, often extending V1-V6\n\n**Immediate mindset:**\n- Treat as high-risk NSTE-ACS\n- Do NOT send to stress test\n- Cardiology consultation for early invasive evaluation\n- Admit to monitored setting",
     images: [
       {
-        src: 'images/wellens-syndrome/wellens1.jpg',
-        alt: "12-lead ECG showing Wellens syndrome with anterior T-wave abnormalities",
-        caption: "Wellens syndrome ECG. Deep anterior T-wave inversion suggests critical LAD disease. James Heilman, MD, CC BY-SA 3.0, Wikimedia Commons.",
+        src: 'images/wellens-syndrome/wellens-warning.png',
+        alt: "12-lead ECG showing Wellens warning pattern with anterior biphasic and inverted T-wave abnormalities",
+        caption: "Wellens warning ECG with anterior biphasic and inverted T-wave changes. Jer5150, CC BY-SA 3.0/GFDL, Wikimedia Commons.",
       },
     ],
     citation: [1, 2, 3],
@@ -81,9 +81,9 @@ export const WELLENS_SYNDROME_NODES: DecisionNode[] = [
         caption: "Wellens ECG example. Gabriel Delgado, CC BY-SA 3.0/GFDL, Wikimedia Commons.",
       },
       {
-        src: 'images/wellens-syndrome/wellens1.jpg',
-        alt: "Wellens syndrome ECG with deep symmetric anterior T-wave inversion",
-        caption: "Wellens Type B pattern: deep anterior T-wave inversion. James Heilman, MD, CC BY-SA 3.0, Wikimedia Commons.",
+        src: 'images/wellens-syndrome/wellens-warning.png',
+        alt: "Wellens warning ECG with anterior biphasic and inverted T waves",
+        caption: "Wellens warning ECG. Jer5150, CC BY-SA 3.0/GFDL, Wikimedia Commons.",
       },
     ],
     citation: [1, 2, 3],
