@@ -274,7 +274,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES: DecisionNode[] = [
     module: 4,
     title: 'HCM Treatment — IVF + Calcitonin + Bisphosphonate',
     body: '**Step 1 — Aggressive IV Hydration (cornerstone):** [9][10]\n* **Normal saline 200-300 mL/hr** until euvolemic, then 100-150 mL/hr\n* Goal urine output >100 mL/hr\n* Most patients are profoundly volume depleted from hypercalcemia-induced nephrogenic DI\n* Avoid LR (contains calcium)\n* AVOID loop diuretics in routine cases — only use if volume overload develops; prior dogma of forced calciuresis with furosemide is not supported by evidence and can worsen depletion [10]\n\n**Step 2 — Calcitonin (rapid onset, short duration):**\n* **[Calcitonin](#/drug/calcitonin/hypercalcemia)** 4 IU/kg SC or IM q12h\n* Drops Ca by 1-2 mg/dL within 4-6 hours\n* Tachyphylaxis develops within 48-72 hours\n* Bridge while bisphosphonate takes effect\n\n**Step 3 — Antiresorptive Therapy (sustained effect):**\n\n**2022 Endocrine Society Guideline now SUGGESTS denosumab in preference to IV bisphosphonates as first-line** — more potent suppression of bone turnover, fewer infusion reactions, fewer renal adverse events, usable in CKD stage 4-5. [10] Either agent is acceptable; many centers still default to zoledronic acid based on cost and availability.\n\n**[Denosumab](#/drug/denosumab/hypercalcemia)** 120 mg SC (first-line per 2022 Endo Society):\n* RANKL inhibitor — no renal clearance required\n* Onset 24-48 hours; max effect 14-23 days; duration 4-8 weeks\n* Use in CrCl <30, bisphosphonate-refractory, or as primary first-line\n* Risk: severe hypocalcemia (monitor; replete vit D when feasible — do not delay treatment)\n\n**[Zoledronic acid](#/drug/zoledronic-acid/hypercalcemia)** 4 mg IV over 15-30 minutes (alternative first-line):\n* More potent than pamidronate\n* Onset 24-48 hours; peak effect 4-7 days; duration 4 weeks\n* Adjust dose for renal function (avoid if CrCl <30)\n* Risks: osteonecrosis of jaw (long-term), atypical femur fracture, acute kidney injury\n\n**Step 5 — Steroids (if vit-D mediated):**\n* Lymphoma, myeloma, granulomatous disease\n* [Prednisone](#/drug/prednisone/hypercalcemia) 40-60 mg PO daily\n\n**Step 6 — Hemodialysis if:**\n* Ca >18 with neuro/cardiac sx\n* Renal failure preventing IVF\n* Refractory to medical therapy',
-    citation: [9, 10],
+    citation: [9, 10, 32],
     calculatorLinks: [
       { id: 'corrected-calcium', label: 'Corrected Calcium' },
       { id: 'hyperca-severity', label: 'Hypercalcemia Severity' },
@@ -291,7 +291,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Mild asymptomatic hypercalcemia (Ca 10.5-12):**\n\n* Generous oral hydration (3-4 L/day)\n* Avoid thiazides, lithium, calcium/vit D supplements\n* Mobilization (immobility worsens calcium release)\n* Treat underlying malignancy — most effective long-term strategy\n* Outpatient endocrine + oncology follow-up within 1 week\n* Repeat Ca in 24-48h to confirm stable\n\n**Admit if:**\n* Rising despite hydration\n* New symptoms develop\n* Concomitant illness',
     recommendation: '**Mild HCM: oral hydration, avoid thiazides/Ca/vit-D, mobilize, oncology f/u 1 week. Admit if rising.**',
     confidence: 'recommended',
-    citation: [9],
+    citation: [9, 10, 32],
     summary: 'Mild HCM: PO fluids, stop thiazides/Ca/vit-D, mobilize, treat underlying cancer, 1-wk f/u',
   },
 
@@ -303,7 +303,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES: DecisionNode[] = [
     body: '**Disposition:**\n* **Severe (Ca >14) or symptomatic** → ICU or telemetry depending on AMS/arrhythmia\n* **Moderate (12-14)** → telemetry or stepdown\n* Repeat Ca q6-12h\n* Endocrinology + oncology consult\n* Ca usually drops 1-2 mg/dL/day with treatment\n* Calcitonin tachyphylaxis after 48-72h — bisphosphonate carries the long-term load',
     recommendation: '**Admit. ICU/telemetry. Continue NS + calcitonin + antiresorptive (denosumab 120 SC first-line per 2022 Endo Society, or zoledronic acid 4 mg IV). Recheck Ca q6-12h. Endo + onc consult.**',
     confidence: 'definitive',
-    citation: [9, 10],
+    citation: [9, 10, 32],
     summary: 'HCM admit: ICU if severe/AMS, tele if moderate, q6-12h Ca, expect 1-2 mg/dL/day decline',
   },
 
@@ -913,6 +913,7 @@ export const ONCOLOGICAL_EMERGENCIES_CITATIONS: Citation[] = [
   { num: 29, text: 'Mahmood SS, et al. Myocarditis in Patients Treated With Immune Checkpoint Inhibitors. J Am Coll Cardiol. 2018;71(16):1755-1764.' },
   { num: 30, text: 'Haanen J, et al. Management of toxicities from immunotherapy: ESMO Clinical Practice Guideline. Ann Oncol. 2022;33(12):1217-1238.' },
   { num: 31, text: 'Thompson JA, et al. Management of Immunotherapy-Related Toxicities, Version 1.2022, NCCN Clinical Practice Guidelines in Oncology. J Natl Compr Canc Netw. 2022;20(4):387-405.' },
+  { num: 32, text: 'El-Hajj Fuleihan G, Clines GA, Hu MI, et al. Treatment of Hypercalcemia of Malignancy in Adults: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab. 2022;108(3):507-528.' },
 ];
 
 export const ONCOLOGICAL_EMERGENCIES_NODE_COUNT = ONCOLOGICAL_EMERGENCIES_NODES.length;
