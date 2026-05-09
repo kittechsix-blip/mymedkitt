@@ -392,6 +392,7 @@ export const ACUTE_AGITATION_NODES: DecisionNode[] = [
     body: '**ICU criteria:**\n• Ongoing sedation requirements\n• Airway concern / intubated\n• Rhabdomyolysis with renal injury\n• Cardiac arrhythmias\n• Hyperactive delirium with hyperthermia\n• Refractory agitation (phenobarbital/propofol infusion)',
     recommendation: 'Admit to ICU for ongoing monitoring and management.',
     confidence: 'definitive',
+    citation: [1],
     summary: 'ICU for ongoing sedation, airway, rhabdo, arrhythmia, or refractory agitation.',
   },
 
@@ -403,6 +404,7 @@ export const ACUTE_AGITATION_NODES: DecisionNode[] = [
     body: '**Psychiatric admission if:**\n• Primary psychiatric etiology confirmed\n• Ongoing safety risk (suicidal, homicidal)\n• Unable to care for self\n\n**Requires medical stability assessment first:**\n→ [Psych Medical Stability](#/tree/medical-clearance-psych)',
     recommendation: 'Admit to inpatient psychiatry after medical clearance.',
     confidence: 'definitive',
+    citation: [1],
     summary: 'Psychiatric admission for primary psych with ongoing safety risk.',
   },
 
@@ -414,6 +416,7 @@ export const ACUTE_AGITATION_NODES: DecisionNode[] = [
     body: '**Medical admission if:**\n• Underlying medical condition requiring treatment\n  - Sepsis, DKA, stroke, etc.\n• Delirium requiring ongoing workup\n• Withdrawal requiring monitored taper',
     recommendation: 'Admit to medicine or appropriate specialty service.',
     confidence: 'definitive',
+    citation: [1],
     summary: 'Medical admission for underlying condition (sepsis, metabolic, withdrawal).',
   },
 
@@ -425,6 +428,7 @@ export const ACUTE_AGITATION_NODES: DecisionNode[] = [
     body: '**Observation if:**\n• Mild intoxication expected to resolve\n• Awaiting sobriety for complete assessment\n• Unclear etiology, low acuity\n\n**Reassess when sober:**\n• Complete psychiatric assessment\n• Safety evaluation\n• Disposition planning',
     recommendation: 'Observe in ED until sober, then reassess.',
     confidence: 'recommended',
+    citation: [1],
     summary: 'Observe until sober, then complete assessment and disposition.',
   },
 
@@ -436,6 +440,7 @@ export const ACUTE_AGITATION_NODES: DecisionNode[] = [
     body: '**Discharge if:**\n• Clear benign etiology (mild intoxication, resolved)\n• No safety concerns\n• Safe environment\n• Reliable follow-up available\n\n**Provide:**\n• Follow-up appointment\n• Crisis resources (988 Suicide & Crisis Lifeline)\n• Return precautions',
     recommendation: 'Discharge with follow-up and crisis resources.',
     confidence: 'recommended',
+    citation: [1],
     summary: 'Discharge if benign etiology, safe, with follow-up arranged.',
   },
 
@@ -447,6 +452,7 @@ export const ACUTE_AGITATION_NODES: DecisionNode[] = [
     body: 'Patient managed per protocol.\n\n**Key reminders:**\n• Document all interventions\n• Debrief with team\n• Review for quality improvement',
     recommendation: 'Document interventions and debrief with team.',
     confidence: 'recommended',
+    citation: [1],
     summary: 'Document interventions, debrief, review for QI.',
   },
 

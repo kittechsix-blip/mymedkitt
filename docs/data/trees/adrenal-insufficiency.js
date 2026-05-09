@@ -9,7 +9,7 @@ export const ADRENAL_INSUFFICIENCY_CRITICAL_ACTIONS = [
     { text: 'Random cortisol <18 mcg/dL during stress suggests AI', nodeId: 'ai-crisis-fluids' },
     { text: 'Stress dosing: 2-3x maintenance dose for illness', nodeId: 'ai-stress-dose' },
     { text: 'Cosyntropin 250 mcg for diagnostic testing', nodeId: 'ai-cosyntropin' },
-    { text: 'Admit all adrenal crises to ICU', nodeId: 'ai-crisis-admit' },
+    { text: 'Admit all adrenal crises to ICU', nodeId: 'ai-dispo-icu' },
 ];
 export const ADRENAL_INSUFFICIENCY_NODES = [
     // =====================================================================

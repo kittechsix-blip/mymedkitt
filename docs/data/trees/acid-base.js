@@ -572,16 +572,16 @@ export const ACID_BASE_MODULE_LABELS = [
 // Critical Actions
 // -------------------------------------------------------------------
 export const ACID_BASE_CRITICAL_ACTIONS = [
-    { text: 'Stepwise approach: pH → PCO2 compensation → Anion gap → Delta-delta → Osmolar gap', nodeId: 'ab-traditional' },
-    { text: 'Anion gap = Na - (Cl + HCO3), normal 8-12. Elevated AG >12 = GOLDMARK mnemonic', nodeId: 'ab-ag' },
-    { text: 'Delta-delta ratio = ΔAG / ΔHCO3. Ratio <1 = non-AG acidosis, 1-2 = pure AG acidosis, >2 = concurrent metabolic alkalosis', nodeId: 'ab-delta-delta' },
-    { text: 'Winter formula for respiratory compensation: Expected PCO2 = 1.5(HCO3) + 8 ± 2', nodeId: 'ab-primary' },
-    { text: 'Osmolar gap >10 suggests toxic alcohol (methanol, ethylene glycol, isopropanol)', nodeId: 'ab-osmolar-gap' },
-    { text: 'Urine anion gap for non-AG metabolic acidosis: UAG = (Na + K) - Cl. Positive = RTA, Negative = GI losses', nodeId: 'ab-uag' },
-    { text: 'Stewart approach: SID, A- tot (weak acids), PCO2. SID <40 = acidosis, >40 = alkalosis', nodeId: 'ab-stewart' },
+    { text: 'Stepwise approach: pH → PCO2 compensation → Anion gap → Delta-delta → Osmolar gap', nodeId: 'ab-trad-ph' },
+    { text: 'Anion gap = Na - (Cl + HCO3), normal 8-12. Elevated AG >12 = GOLDMARK mnemonic', nodeId: 'ab-met-acid' },
+    { text: 'Delta-delta ratio = ΔAG / ΔHCO3. Ratio <1 = non-AG acidosis, 1-2 = pure AG acidosis, >2 = concurrent metabolic alkalosis', nodeId: 'ab-delta' },
+    { text: 'Winter formula for respiratory compensation: Expected PCO2 = 1.5(HCO3) + 8 ± 2', nodeId: 'ab-winters' },
+    { text: 'Osmolar gap >10 suggests toxic alcohol (methanol, ethylene glycol, isopropanol)', nodeId: 'ab-stew-osm' },
+    { text: 'Urine anion gap for non-AG metabolic acidosis: UAG = (Na + K) - Cl. Positive = RTA, Negative = GI losses', nodeId: 'ab-nagma' },
+    { text: 'Stewart approach: SID, A- tot (weak acids), PCO2. SID <40 = acidosis, >40 = alkalosis', nodeId: 'ab-stew-assess' },
     { text: 'Treat underlying cause, NOT the pH (bicarbonate indicated if pH ≤7.20 + AKI per BICAR-ICU, or pH <6.9 in DKA)', nodeId: 'ab-treatment' },
     { text: 'VBG sufficient for most ED acid-base assessment (pH 0.04 lower than ABG)', nodeId: 'ab-start' },
-    { text: 'Mixed disorders common: check for compensation, delta-delta, and clinical picture', nodeId: 'ab-mixed' },
+    { text: 'Mixed disorders common: check for compensation, delta-delta, and clinical picture', nodeId: 'ab-mixed-result' },
 ];
 // Citations (evidence base)
 // -------------------------------------------------------------------

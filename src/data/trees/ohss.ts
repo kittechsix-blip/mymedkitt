@@ -18,8 +18,6 @@ export const OHSS_CRITICAL_ACTIONS = [
   { text: 'Therapeutic paracentesis if respiratory compromise or tense ascites', nodeId: 'ohss-paracentesis' },
   { text: 'Ovarian torsion risk 6-16% in severe OHSS - high suspicion for unilateral pain', nodeId: 'ohss-torsion' },
   { text: 'Albumin 25% 50-100g IV for severe hemoconcentration or with large-volume paracentesis', nodeId: 'ohss-fluid-management' },
-  { text: 'Tranexamic acid 1g IV for acute hemorrhage stabilization', nodeId: 'ohss-unstable' },
-  { text: 'Monitor pH - rising pH after stopping irrigation means chemical still present', nodeId: 'chemburn-ph-check' },
 ] as const;
 
 export const OHSS_NODES: DecisionNode[] = [
