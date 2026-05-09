@@ -34259,6 +34259,204 @@ const CANTHOLYSIS_CALCULATOR = {
         };
     },
 };
+// =====================================================================
+// FEBRILE SEIZURE CALCULATORS
+// =====================================================================
+const FEBSZ_CLASSIFIER_CALCULATOR = {
+    id: 'febsz-classifier',
+    title: 'Febrile Seizure Classifier',
+    subtitle: 'Simple vs Complex vs Febrile Status',
+    description: 'Classifies a febrile seizure as simple, complex, or febrile status epilepticus per AAP 2011/2025 definitions. Drives the workup decision \u2014 simple seizures need no routine LP/labs/EEG/imaging; complex events warrant targeted workup; febrile status mandates the full status protocol.',
+    fields: [
+        { name: 'focal', label: 'Focal features (focal motor, gaze deviation, post-ictal Todd\'s paralysis)', type: 'toggle', points: 1 },
+        { name: 'duration15', label: 'Duration \u226515 minutes', type: 'toggle', points: 1 },
+        { name: 'recurrent24', label: '\u22651 episode in 24 hours (recurrent)', type: 'toggle', points: 1 },
+        { name: 'age-out-of-window', label: 'Age outside 6 months to 5 years', type: 'toggle', points: 1, description: 'Outside this window, the working diagnosis must be revisited' },
+        { name: 'persistent-deficit', label: 'Persistent post-ictal deficit >1 hour', type: 'toggle', points: 1 },
+        { name: 'neurodev-concern', label: 'Neurodevelopmental concern or abnormal interictal exam', type: 'toggle', points: 1 },
+        { name: 'status', label: 'Duration \u226530 min OR recurrent without recovery (febrile status)', type: 'toggle', points: 10, description: 'Triggers the full status epilepticus protocol' },
+    ],
+    results: [],
+    thresholdNote: 'AAP 2011/2025: simple FS needs no routine LP, labs, EEG, or imaging. Complex requires targeted workup. Febrile status warrants full status protocol + mimic evaluation (HSV, bacterial meningitis).',
+    citations: [
+        'AAP Subcommittee on Febrile Seizures. Clinical Practice Guideline: Febrile Seizures. Pediatrics. 2011;127(2):389-394 (reaffirmed 2025).',
+        'Shinnar S, et al. (FEBSTAT). Phenomenology of Prolonged Febrile Seizures. Epilepsia. 2008;49(6):1025-1037.',
+    ],
+    computeResult: (values) => {
+        const status = (values['status'] || 0) > 0;
+        const ageOut = (values['age-out-of-window'] || 0) > 0;
+        const features = ['focal', 'duration15', 'recurrent24', 'persistent-deficit', 'neurodev-concern']
+            .reduce((sum, key) => sum + ((values[key] || 0) > 0 ? 1 : 0), 0);
+        if (status) {
+            return {
+                value: 'FEBRILE STATUS',
+                label: 'Febrile Status Epilepticus',
+                description: '**Treat as status epilepticus** (full protocol). High mimic risk \u2014 strongly consider HSV encephalitis, bacterial meningitis, electrolyte derangement.\n\n\u2022 Full weight-based benzodiazepine, redose at 5 minutes\n\u2022 Second-line agent (ESETT-era: levetiracetam 60 mg/kg, fosphenytoin 20 PE/kg, or valproate 40 mg/kg)\n\u2022 Empiric acyclovir + ceftriaxone + vancomycin if any concern for CNS infection\n\u2022 Imaging (CT first if focal deficit / \u2191ICP signs; MRI when stable)\n\u2022 LP after stabilization unless contraindicated\n\u2022 EEG monitoring \u2014 non-convulsive seizures common\n\u2022 Admit to PICU',
+                colorVar: '--color-danger',
+            };
+        }
+        if (ageOut) {
+            return {
+                value: 'OUTSIDE WINDOW',
+                label: 'Age Outside 6mo-5yr \u2014 Revisit Diagnosis',
+                description: 'A seizure with fever outside the 6 months to 5 years window is NOT a febrile seizure by definition. Broaden the differential: CNS infection, electrolyte / glucose, intoxication, structural lesion, first unprovoked seizure with coincidental fever, NAT.\n\nProceed with a full first-seizure workup appropriate for age.',
+                colorVar: '--color-warning',
+            };
+        }
+        if (features === 0) {
+            return {
+                value: 'SIMPLE',
+                label: 'Simple Febrile Seizure',
+                description: '**No routine LP, labs, EEG, or imaging** (AAP 2011/2025).\n\n\u2022 Reassurance + return precautions\n\u2022 Antipyretics for COMFORT only \u2014 they do NOT prevent recurrence\n\u2022 No anticonvulsant prophylaxis\n\u2022 Continue routine vaccines on schedule\n\u2022 PCP follow-up\n\u2022 ED return for: another seizure, stiff neck, persistent AMS, petechiae, breathing difficulty, fever >5 days',
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: 'COMPLEX',
+            label: `Complex Febrile Seizure (${features} feature${features > 1 ? 's' : ''})`,
+            description: '**Targeted workup driven by features + clinical exam** \u2014 not a universal full workup.\n\n\u2022 Reassess for meningitis mimic (LP if meningeal signs, persistent AMS, petechiae, recent abx, ill, under-vaccinated <12mo)\n\u2022 Imaging only for focal deficit, signs of \u2191ICP, suspected NAT, or HSV concern\n\u2022 Outpatient MRI for recurrent / persistent abnormal exam\n\u2022 Most go home with reassurance once recovered\n\u2022 Outpatient neurology referral reasonable',
+            colorVar: '--color-warning',
+        };
+    },
+};
+const FEBSZ_MENINGITIS_RISK_CALCULATOR = {
+    id: 'febsz-meningitis-risk',
+    title: 'FS Meningitis Risk',
+    subtitle: 'LP and empiric antibiotic decision',
+    description: 'Estimates risk of bacterial meningitis in a child presenting with febrile seizure. The post-Hib/PCV era rate is <0.2% in fully vaccinated, well-appearing children, but specific clinical features should prompt LP and empiric antibiotics.',
+    fields: [
+        {
+            name: 'age',
+            label: 'Age',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '>18 months', points: 0 },
+                { label: '12-18 months', points: 1 },
+                { label: '<12 months', points: 2 },
+            ],
+        },
+        { name: 'incomplete-vax', label: 'Incomplete Hib + PCV vaccination', type: 'toggle', points: 2 },
+        { name: 'recent-abx', label: 'Antibiotic exposure within prior 5-7 days', type: 'toggle', points: 2, description: 'Could partially treat / mask meningitis' },
+        { name: 'ill-toxic', label: 'Ill / toxic appearance', type: 'toggle', points: 3 },
+        { name: 'focal-features', label: 'Focal seizure features', type: 'toggle', points: 1 },
+        { name: 'persistent-ams', label: 'Persistent altered mentation >1 hour', type: 'toggle', points: 3 },
+        { name: 'meningeal', label: 'Meningeal signs (neck stiffness, Kernig, Brudzinski)', type: 'toggle', points: 3, description: 'Less reliable under 18 months' },
+        { name: 'fontanelle', label: 'Bulging fontanelle', type: 'toggle', points: 3 },
+        { name: 'petechiae', label: 'Petechiae or purpura', type: 'toggle', points: 4, description: 'Non-blanching = meningococcemia until proven otherwise' },
+    ],
+    results: [],
+    thresholdNote: 'Decision driven by clinical features more than score alone. Any single high-weight feature (petechiae, ill appearance, persistent AMS, meningeal signs, bulging fontanelle, recent antibiotics) should prompt LP and empiric antibiotics.',
+    citations: [
+        'AAP Subcommittee on Febrile Seizures. Clinical Practice Guideline: Febrile Seizures. Pediatrics. 2011;127(2):389-394.',
+        'ACEP Clinical Policy: Critical Issues in the Evaluation and Management of Pediatric Patients Presenting With Seizures. Ann Emerg Med. 2014;63(4):437-447.',
+    ],
+    computeResult: (values) => {
+        const total = Object.entries(values).reduce((sum, [_k, v]) => sum + (v || 0), 0);
+        const highFlags = ['ill-toxic', 'persistent-ams', 'meningeal', 'fontanelle', 'petechiae', 'recent-abx']
+            .some(k => (values[k] || 0) > 0);
+        if (highFlags || total >= 6) {
+            return {
+                value: 'HIGH',
+                label: 'High Concern \u2014 LP + Empiric Antibiotics',
+                description: '**LP indicated. Do NOT delay empiric antibiotics for the LP if there will be any delay.**\n\n\u2022 **Ceftriaxone 100 mg/kg IV** (covers S. pneumoniae, N. meningitidis, H. influenzae)\n\u2022 **Vancomycin 15 mg/kg IV** (covers resistant pneumococcus)\n\u2022 Add **ampicillin 50 mg/kg IV** if age <1 month (Listeria coverage)\n\u2022 Add **acyclovir 20 mg/kg IV** if HSV encephalitis is on the differential\n\u2022 **Dexamethasone 0.15 mg/kg IV** before/with first abx dose if bacterial meningitis suspected\n\u2022 If signs of \u2191ICP, papilledema, or focal deficit \u2192 CT BEFORE LP\n\u2022 Activate sepsis bundle and admit',
+                colorVar: '--color-danger',
+            };
+        }
+        if (total >= 2) {
+            return {
+                value: 'MODERATE',
+                label: 'Moderate Concern \u2014 Consider LP, Observe',
+                description: '**Discuss LP based on full clinical picture.** Reasonable to:\n\n\u2022 Observe with serial neuro checks (q15-30 min initially)\n\u2022 Reassess in 1-2 hours after recovery\n\u2022 Consider LP if:\n  \u2022 Age <12 months with incomplete vaccination\n  \u2022 Persistent abnormal exam after recovery\n  \u2022 Cannot identify a benign source of fever\n  \u2022 Family unable to return reliably for re-evaluation\n\u2022 Have antibiotics ready to give if exam evolves',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'LOW',
+            label: 'Low Concern \u2014 LP Not Indicated',
+            description: '**Routine LP not indicated** in a well-appearing, fully vaccinated child without meningeal signs or other red flags.\n\n\u2022 Standard fever workup based on age and clinical context (see Pediatric Fever consult)\n\u2022 Reassuring exam + identified benign source of fever \u2192 home with reassurance and return precautions\n\u2022 Document the absence of meningeal signs, the vaccination status, and the return-baseline neurologic exam',
+            colorVar: '--color-primary',
+        };
+    },
+};
+const FEBSZ_RECURRENCE_CALCULATOR = {
+    id: 'febsz-recurrence',
+    title: 'FS Recurrence & Epilepsy Risk',
+    subtitle: 'Counseling-grade probability estimates',
+    description: 'Estimates recurrence risk and lifetime epilepsy risk after a first febrile seizure. Useful for parental counseling. Based on Hesdorffer 2012, Vestergaard 2002, Annegers 1987, Shinnar FEBSTAT 2008.',
+    fields: [
+        {
+            name: 'age-first',
+            label: 'Age at first febrile seizure',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '<12 months', points: 50 },
+                { label: '12-18 months', points: 30 },
+                { label: '>18 months', points: 20 },
+            ],
+        },
+        { name: 'fhx-fs', label: 'Family history of febrile seizures', type: 'toggle', points: 10, description: 'First-degree relative' },
+        { name: 'fhx-epilepsy', label: 'Family history of epilepsy', type: 'toggle', points: 10, description: 'First-degree relative \u2014 epilepsy, not febrile seizures alone' },
+        { name: 'complex', label: 'Complex features at presentation', type: 'toggle', points: 10, description: 'Focal, prolonged \u226515 min, recurrent in 24h, post-ictal deficit' },
+        { name: 'neurodev', label: 'Neurodevelopmental concern or abnormal interictal exam', type: 'toggle', points: 10 },
+    ],
+    results: [],
+    thresholdNote: 'Recurrence ~30% overall (~50% if first event <12 months). Lifetime epilepsy risk after simple FS is 1-2% (vs 0.5-1% baseline). Antipyretics do NOT prevent recurrence; AED prophylaxis does NOT lower epilepsy risk.',
+    citations: [
+        'Hesdorffer DC, Shinnar S, Lewis DV, et al. Risk Factors for Subsequent Febrile Seizures in the FEBSTAT Study. Pediatrics. 2012;130(3):488-493.',
+        'Vestergaard M, Pedersen CB, Sidenius P, et al. The Long-term Risk of Epilepsy after Febrile Seizures. JAMA. 2002;287:2933-2938.',
+        'Annegers JF, Hauser WA, Shirts SB, Kurland LT. Factors Prognostic of Unprovoked Seizures After Febrile Convulsions. NEJM. 1987;316:493-498.',
+        'Shinnar S, et al. (FEBSTAT). Phenomenology of Prolonged Febrile Seizures. Epilepsia. 2008;49(6):1025-1037.',
+    ],
+    computeResult: (values) => {
+        const ageRecurrence = values['age-first'] || 20; // 50/30/20
+        const fhxFs = (values['fhx-fs'] || 0) > 0 ? 1 : 0;
+        const fhxEp = (values['fhx-epilepsy'] || 0) > 0 ? 1 : 0;
+        const complex = (values['complex'] || 0) > 0 ? 1 : 0;
+        const neurodev = (values['neurodev'] || 0) > 0 ? 1 : 0;
+        // Recurrence: age band sets baseline, family hx of FS adds 10%
+        let recurrence = ageRecurrence;
+        if (fhxFs)
+            recurrence += 10;
+        if (recurrence > 75)
+            recurrence = 75;
+        // Epilepsy risk: simple FS no factors = 1.5%; ladder up by factor count.
+        const epilepsyFactors = fhxEp + complex + neurodev;
+        let epilepsy;
+        if (epilepsyFactors === 0)
+            epilepsy = '1-2%';
+        else if (epilepsyFactors === 1)
+            epilepsy = '~2.5%';
+        else if (epilepsyFactors === 2)
+            epilepsy = '~5-7%';
+        else
+            epilepsy = '~10%';
+        let band;
+        let colorVar;
+        if (epilepsyFactors >= 2 || recurrence >= 50) {
+            band = 'Higher Risk';
+            colorVar = '--color-warning';
+        }
+        else if (epilepsyFactors === 1 || recurrence >= 30) {
+            band = 'Modest Risk';
+            colorVar = '--color-primary';
+        }
+        else {
+            band = 'Reassuring';
+            colorVar = '--color-primary';
+        }
+        const counseling = epilepsyFactors >= 2
+            ? 'Most children with febrile seizures \u2014 even with multiple risk factors \u2014 still do NOT develop epilepsy. Recurrence is more common but does not change the long-term outlook. Outpatient neurology referral is reasonable.'
+            : 'Most kids grow out of these by age 5. Recurrence is common but each event is usually similar to the first \u2014 brief, generalized, self-limited. Antipyretics for comfort only; they do NOT prevent recurrence. No anticonvulsant prophylaxis is needed.';
+        return {
+            value: `~${recurrence}% / ${epilepsy}`,
+            label: `${band}`,
+            description: `**Recurrence risk:** ~${recurrence}% in the next 12-24 months\n\n**Lifetime epilepsy risk:** ${epilepsy}\n\n**Counseling:** ${counseling}\n\n**Reminders:**\n\u2022 Antipyretics do NOT prevent recurrence (AAP 2008/reaffirmed)\n\u2022 No routine anticonvulsant prophylaxis\n\u2022 Continue routine vaccines on schedule\n\u2022 Return precautions: another seizure, stiff neck, persistent AMS, petechiae, breathing difficulty`,
+            colorVar,
+        };
+    },
+};
 const CALCULATORS = {
     // Weight-Based Dosing
     'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -34803,6 +35001,10 @@ const CALCULATORS = {
     'bett-classifier': BETT_CALCULATOR,
     'roper-hall-dua': ROPER_HALL_DUA_CALCULATOR,
     'cantholysis-decision': CANTHOLYSIS_CALCULATOR,
+    // Febrile Seizure
+    'febsz-classifier': FEBSZ_CLASSIFIER_CALCULATOR,
+    'febsz-meningitis-risk': FEBSZ_MENINGITIS_RISK_CALCULATOR,
+    'febsz-recurrence': FEBSZ_RECURRENCE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

@@ -19799,6 +19799,119 @@ const OCT_OTS_REFERENCE_PAGE = {
     ],
     shareable: true,
 };
+// -------------------------------------------------------------------
+// Febrile Seizure
+// -------------------------------------------------------------------
+const FEBSZ_STEPS_SUMMARY = {
+    id: 'febsz-steps',
+    title: 'Febrile Seizure',
+    subtitle: 'Key Steps Overview',
+    sections: [
+        {
+            heading: '1. Recognition',
+            body: '\u2022 Seizure + fever \u226538\u00B0C, age 6 months to 5 years, **without CNS infection or other cause**\n\u2022 Brief generalized event in a previously well child is the classic story\n\u2022 Always reconfirm the absence of CNS infection or other identified cause before assigning the diagnosis',
+        },
+        {
+            heading: '2. Simple vs Complex',
+            body: '\u2022 **Simple:** generalized + <15 min + ONE in 24h + age 6mo-5yr + previously well child\n\u2022 **Complex:** any focal feature, \u226515 min, recurrent in 24h, post-ictal deficit, or abnormal interictal exam\n\u2022 **Febrile status:** \u226530 min OR recurrent without recovery between events',
+        },
+        {
+            heading: '3. Workup Decisions',
+            body: '\u2022 Simple FS: **no routine** LP, labs, EEG, or imaging (AAP 2011/2025)\n\u2022 LP indicated for: meningeal signs, persistent AMS, petechiae, recent antibiotics, ill appearance, under-vaccinated <12mo\n\u2022 Imaging only for: focal deficit, signs of \u2191ICP, suspected NAT, suspected HSV / abscess / bleed\n\u2022 EEG only for: non-convulsive status concern, prolonged AMS in febrile status, recurrent complex events',
+        },
+        {
+            heading: '4. Active Seizure Management',
+            body: '\u2022 Status definition triggering treatment: \u22655 minutes OR recurrent without recovery\n\u2022 First-line benzodiazepine, full weight-based dose, redose once at 5 min if still seizing\n\u2022 Second-line: levetiracetam 60 mg/kg, fosphenytoin 20 PE/kg, or valproate 40 mg/kg (ESETT 2019)\n\u2022 Refractory \u226540 min: anesthetic infusion + intubation + EEG monitoring',
+        },
+        {
+            heading: '5. Disposition',
+            body: '\u2022 Simple FS: home with reassurance + return precautions; no labs, LP, EEG, or AED prescription\n\u2022 Complex FS: most go home; admit for febrile status, persistent AMS, recurrent in 24h, no fever source, social barriers, or pending workup\n\u2022 Outpatient neurology referral for any complex febrile seizure',
+        },
+        {
+            heading: '6. Counseling',
+            body: '\u2022 Three messages: prognosis is excellent, ~30% recurrence does NOT change long-term outlook, here are return precautions\n\u2022 Antipyretics for COMFORT only \u2014 they do NOT prevent recurrence\n\u2022 No routine anticonvulsant prophylaxis\n\u2022 Continue routine vaccinations on schedule \u2014 vaccine-triggered FS is benign and timing is reassuring',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AAP Subcommittee on Febrile Seizures. Clinical Practice Guideline: Febrile Seizures. Pediatrics. 2011;127(2):389-394 (reaffirmed 2025).' },
+        { num: 2, text: 'AAP Steering Committee on Quality Improvement. Treatment of the Child With a Simple Febrile Seizure. Pediatrics. 2008;121(6):1281-1286.' },
+        { num: 3, text: 'Kapur J, et al. (ESETT). Randomized Trial of Three Anticonvulsant Medications for Status Epilepticus. N Engl J Med. 2019;381:2103-2113.' },
+        { num: 4, text: 'ACEP Clinical Policy: Critical Issues in the Evaluation and Management of Pediatric Patients Presenting With Seizures. Ann Emerg Med. 2014;63(4):437-447.' },
+    ],
+};
+const FEBSZ_IMAGING_DECISION = {
+    id: 'febsz-imaging-decision',
+    title: 'Febrile Seizure Imaging Decision',
+    subtitle: 'When to image, when to skip, when CT vs MRI',
+    sections: [
+        {
+            heading: 'When NOT to Image',
+            body: '\u2022 **Simple febrile seizure with normal exam** \u2014 NEVER routine\n\u2022 Returns to baseline, no focal deficit, identifiable benign source of fever\n\u2022 AAP 2011 (reaffirmed 2025): no role for routine CT or MRI\n\u2022 Counseling families that imaging is unnecessary is part of good care \u2014 imaging exposes the child to radiation, sedation risk, and incidental findings without benefit',
+        },
+        {
+            heading: 'When to Consider CT First',
+            body: '\u2022 Focal seizure with persistent neurologic deficit (Todd\'s paralysis lasting >1h)\n\u2022 Signs of increased ICP: papilledema, posturing, Cushing\'s response\n\u2022 Suspected non-accidental trauma (NAT) \u2014 also obtain skeletal survey + retinal exam\n\u2022 Suspected HSV encephalitis with stable child (start acyclovir BEFORE imaging if HSV suspected)\n\u2022 Suspected intracranial bleed, abscess, or mass\n\u2022 Papilledema or other concern for raised ICP requiring confirmation BEFORE LP',
+        },
+        {
+            heading: 'When to Prefer MRI',
+            body: '\u2022 Complex / recurrent febrile seizures with concern for an underlying epileptic syndrome or developmental disorder\n\u2022 Prolonged febrile status epilepticus (FEBSTAT-style) \u2014 hippocampal injury risk; MRI sensitivity > CT\n\u2022 Persistent abnormal neurologic exam after recovery\n\u2022 Higher resolution for posterior fossa, brainstem, hippocampi\n\u2022 No radiation \u2014 preferred when child is stable\n\u2022 Often arranged outpatient \u2014 does not need to happen in the ED in a stable child',
+        },
+        {
+            heading: 'When NOT to Delay LP for Imaging',
+            body: '\u2022 Stable child without focal exam findings does NOT need pre-LP imaging\n\u2022 Routine pre-LP CT delays diagnosis and treatment of bacterial meningitis\n\u2022 Pre-LP imaging is for clinical concerns (papilledema, focal deficit, posturing) \u2014 not for "every kid with a seizure"\n\u2022 If empiric antibiotics are warranted, give them BEFORE imaging or LP if there will be any delay',
+        },
+        {
+            heading: 'Practical Approach',
+            body: '\u2022 Reassuring exam + simple FS = no imaging\n\u2022 Concerning focal deficit or \u2191ICP = CT now\n\u2022 Stable but recurrent or prolonged complex events = outpatient MRI\n\u2022 Suspected NAT = head CT in the ED + skeletal survey + ophtho consult + child protection workflow\n\u2022 Suspected HSV = empiric acyclovir + LP/CSF studies + MRI when stable',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AAP Subcommittee on Febrile Seizures. Clinical Practice Guideline: Febrile Seizures. Pediatrics. 2011;127(2):389-394.' },
+        { num: 2, text: 'Shinnar S, et al. (FEBSTAT). Phenomenology of Prolonged Febrile Seizures. Epilepsia. 2008;49(6):1025-1037.' },
+        { num: 3, text: 'ACEP Clinical Policy: Critical Issues in the Evaluation and Management of Pediatric Patients Presenting With Seizures. Ann Emerg Med. 2014;63(4):437-447.' },
+    ],
+};
+const FEBSZ_VACCINE_TRIGGERS = {
+    id: 'febsz-vaccine-triggers',
+    title: 'Vaccine-Triggered Febrile Seizures',
+    subtitle: 'Recognition, counseling, and the MMRV vs MMR+V decision',
+    sections: [
+        {
+            heading: 'Why This Comes Up',
+            body: 'Routine childhood vaccines cause fever in some children, and fever can trigger a febrile seizure. The seizure itself is benign \u2014 but parents are scared, and many feel guilty for "making this happen" by vaccinating. Counseling is half the visit.',
+        },
+        {
+            heading: 'MMR / MMRV',
+            body: '\u2022 **Peak window: 8-14 days post-vaccination** \u2014 corresponds to the peak fever response from live attenuated viral vaccines\n\u2022 Most events are simple febrile seizures with classic features\n\u2022 Same prognosis as any other simple febrile seizure: \u226530% recurrence with future febrile illnesses, ~1-2% lifetime epilepsy risk',
+        },
+        {
+            heading: 'MMRV vs MMR + V (Klein 2010 + ACIP 2024)',
+            body: '\u2022 At dose 1 (12-15 months), MMRV combination causes **~1 extra febrile seizure per 2,300 doses** compared with MMR + Varicella given separately\n\u2022 No significant difference at dose 2 (4-6 years)\n\u2022 **CDC ACIP recommendation:** for the first dose at 12-15 months, share the data and let the family decide between MMRV and MMR + V given separately. For subsequent doses, MMRV is preferred for fewer injections.\n\u2022 Reasonable to give MMR + V separately at the first dose if family has strong family history of febrile seizures or prior febrile seizure',
+        },
+        {
+            heading: 'DTaP and Other Vaccines',
+            body: '\u2022 **DTaP peak window: 0-2 days post-vaccination**\n\u2022 Inactivated vaccines (DTaP, Hib, PCV, hepatitis B, IPV) cause fever quickly when they cause it at all\n\u2022 Live vaccines (MMR, MMRV, rotavirus) cause delayed fever (5-14 days)\n\u2022 Influenza vaccine: rare fever response, can rarely trigger febrile seizure',
+        },
+        {
+            heading: 'Reassuring History',
+            body: '\u2022 Classic timing matching the vaccine fever window\n\u2022 Simple febrile seizure features (generalized, <15 min, single)\n\u2022 Benign post-event course, child returns to baseline\n\u2022 No focal features, no persistent altered mentation, no concerning rash or systemic signs\n\u2022 If all of the above: treat as any other simple febrile seizure \u2014 no extra workup, home with reassurance',
+        },
+        {
+            heading: 'Do NOT Skip Subsequent Vaccines',
+            body: 'Prior febrile seizure (vaccine-triggered or otherwise) is NOT a contraindication to any routine vaccine. The diseases prevented \u2014 measles encephalitis, Hib meningitis, pertussis, varicella complications \u2014 are far worse than another brief, self-limited febrile seizure. Document the event in the immunization record so the next clinician understands the context, but continue the schedule.',
+        },
+        {
+            heading: 'Counseling Script for Parents',
+            body: '"This was a febrile seizure caused by the fever response to the vaccine. The seizure itself looked terrifying, but it was brief, the brain is fine, and your child has the same excellent prognosis as any other child with a febrile seizure. Most kids never have another \u2014 those that do still grow out of them by age 5. The diseases the vaccine prevents are much worse than what just happened. We will keep going on schedule, and at the next dose we can talk about giving MMR and varicella separately if that feels safer for your family. For comfort during the next fever, you can use acetaminophen or ibuprofen \u2014 not to prevent another seizure, but because it makes them feel better."',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Klein NP, Fireman B, Yih WK, et al. Measles-Mumps-Rubella-Varicella Combination Vaccine and the Risk of Febrile Seizures. Pediatrics. 2010;126(1):e1-e8.' },
+        { num: 2, text: 'Centers for Disease Control and Prevention. ACIP recommendations for measles, mumps, rubella, and varicella vaccines (2024 update).' },
+        { num: 3, text: 'AAP Subcommittee on Febrile Seizures. Clinical Practice Guideline: Febrile Seizures. Pediatrics. 2011;127(2):389-394.' },
+    ],
+    shareable: true,
+};
 export const INFO_PAGES = {
     // Right Heart Failure
     'rhf-pocus-criteria': RHF_POCUS_CRITERIA_PAGE,
@@ -20443,6 +20556,10 @@ export const INFO_PAGES = {
     'fti-steps': FTI_STEPS,
     'fti-photo-atlas': FTI_PHOTO_ATLAS,
     'fti-kanavel': FTI_KANAVEL,
+    // Febrile Seizure
+    'febsz-steps': FEBSZ_STEPS_SUMMARY,
+    'febsz-imaging-decision': FEBSZ_IMAGING_DECISION,
+    'febsz-vaccine-triggers': FEBSZ_VACCINE_TRIGGERS,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

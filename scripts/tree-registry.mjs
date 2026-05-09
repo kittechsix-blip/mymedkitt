@@ -248,4 +248,5 @@ export const TREE_REGISTRY = {
   'ibd-flare': { prefix: 'IBD_FLARE', entryNodeId: 'ibd-start', categoryId: 'gastroenterology' },
   'transient-global-amnesia': { prefix: 'TRANSIENT_GLOBAL_AMNESIA', entryNodeId: 'tga-start', categoryId: 'neurology' },
   'mammalian-bite': { prefix: 'MAMMALIAN_BITE', entryNodeId: 'mb-start', categoryId: 'emergency-medicine' },
+  'febrile-seizure': { prefix: 'FEBSZ', entryNodeId: 'febsz-start', categoryId: 'pediatrics' },
 };

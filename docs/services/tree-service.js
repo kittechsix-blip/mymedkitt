@@ -1121,6 +1121,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/mammalian-bite.js');
             return { nodes: m.MAMMALIAN_BITE_NODES, entryNodeId: 'mb-start', categoryId: 'em', moduleLabels: m.MAMMALIAN_BITE_MODULE_LABELS, citations: m.MAMMALIAN_BITE_CITATIONS };
         },
+        'febrile-seizure': async () => {
+            const m = await import('../data/trees/febrile-seizure.js');
+            return { nodes: m.FEBSZ_NODES, entryNodeId: 'febsz-start', categoryId: 'pediatrics', moduleLabels: m.FEBSZ_MODULE_LABELS, citations: m.FEBSZ_CITATIONS, criticalActions: m.FEBSZ_CRITICAL_ACTIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

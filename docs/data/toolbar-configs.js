@@ -1620,6 +1620,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'rabies', label: 'Rabies', icon: '🦇', action: 'jump', target: 'mb-rabies-assessment' },
         { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'jump', target: 'mb-antibiotics' },
     ],
+    'febrile-seizure': [
+        { id: 'classifier', label: 'Classifier', icon: '🧮', action: 'calculator', target: 'febsz-classifier' },
+        { id: 'meningitis', label: 'Meningitis', icon: '🦠', action: 'calculator', target: 'febsz-meningitis-risk' },
+        { id: 'imaging', label: 'Imaging', icon: '📷', action: 'overlay', target: 'febsz-imaging-decision' },
+        { id: 'vaccine', label: 'Vaccine', icon: '💉', action: 'overlay', target: 'febsz-vaccine-triggers' },
+        { id: 'recurrence', label: 'Recurrence', icon: '📊', action: 'calculator', target: 'febsz-recurrence' },
+    ],
     'mesenteric-ischemia': [
         { id: 'types', label: '4 Types', icon: '🩺', action: 'jump', target: 'ami-types' },
         { id: 'imaging', label: 'CTA', icon: '📷', action: 'jump', target: 'ami-imaging' },
