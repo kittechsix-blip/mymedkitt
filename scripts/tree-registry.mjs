@@ -12,6 +12,8 @@ export const TREE_REGISTRY = {
   'priapism':         { prefix: 'PRIAPISM',            entryNodeId: 'priapism-start',     categoryId: 'procedures' },
   'afib-rvr':         { prefix: 'AFIB_RVR',            entryNodeId: 'afib-start',         categoryId: 'cardiology' },
   'chest-tube':       { prefix: 'CHEST_TUBE',          entryNodeId: 'ctube-start',        categoryId: 'trauma-surg' },
+  'traumatic-arrest': { prefix: 'TRAUMATIC_ARREST',    entryNodeId: 'ta-start',           categoryId: 'trauma-surg' },
+  'thoracotomy-procedure': { prefix: 'THORACOTOMY_PROCEDURE', entryNodeId: 'thorac-start', categoryId: 'procedures' },
   'chs':              { prefix: 'CHS',                 entryNodeId: 'chs-start',          categoryId: 'gastroenterology' },
   'pep':              { prefix: 'PEP',                 entryNodeId: 'pep-start',          categoryId: 'infectious-disease' },
   'stroke':           { prefix: 'STROKE',              entryNodeId: 'stroke-start',       categoryId: 'neurology' },

@@ -19912,7 +19912,230 @@ const FEBSZ_VACCINE_TRIGGERS = {
     ],
     shareable: true,
 };
+// -------------------------------------------------------------------
+// Traumatic Arrest / Resuscitative Thoracotomy
+// -------------------------------------------------------------------
+const TA_STEPS_PAGE = {
+    id: 'ta-steps',
+    title: 'Traumatic Arrest Steps',
+    subtitle: 'First 5 minutes',
+    sections: [
+        {
+            heading: 'Immediate sequence',
+            body: '1. Announce traumatic arrest and assign airway, chest, blood, ultrasound, and procedure leads.\n2. Activate trauma surgery, MTP, OR/IR, and massive hemorrhage resources.\n3. Treat HOTT causes in parallel: hypovolemia, oxygenation, tension pneumothorax, tamponade.\n4. Perform bilateral finger thoracostomies/chest tubes when chest trauma or obstructive physiology is possible.\n5. Decide early if resuscitative thoracotomy is indicated.\n6. Move to definitive source control after ROSC or transient response.',
+        },
+        {
+            heading: 'Key principle',
+            body: 'Chest compressions and epinephrine should not delay hemorrhage control, oxygenation, bilateral decompression, thoracotomy, or operative source control in a true traumatic arrest.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lott C, Truhlar A, Alfonzo A, et al. European Resuscitation Council Guidelines 2021: Cardiac arrest in special circumstances. Resuscitation. 2021;161:152-219.' },
+        { num: 2, text: 'American College of Surgeons Committee on Trauma. ATLS: Advanced Trauma Life Support Student Course Manual. 10th ed. 2018.' },
+    ],
+};
+const TA_HOTT_PAGE = {
+    id: 'ta-hott',
+    title: 'HOTT Bundle',
+    subtitle: 'Traumatic arrest reversible causes',
+    sections: [
+        {
+            heading: 'H - Hypovolemia',
+            body: 'Control external bleeding, apply tourniquets/packing, place pelvic binder when indicated, activate MTP, minimize crystalloid, replace calcium during high-volume transfusion, and move toward OR/IR/REBOA-capable source control when appropriate.',
+        },
+        {
+            heading: 'O - Oxygenation',
+            body: 'BVM with high-flow oxygen immediately. Intubate when it can be done without delaying hemorrhage control or chest decompression. Confirm with waveform capnography and reassess ventilation after thoracostomy.',
+        },
+        {
+            heading: 'T - Tension pneumothorax',
+            body: 'Use bilateral finger thoracostomies or chest tubes early in traumatic arrest with chest trauma, positive pressure ventilation, or suspected obstructive physiology.',
+        },
+        {
+            heading: 'T - Tamponade',
+            body: 'Use cardiac ultrasound only if it does not delay intervention. In selected penetrating arrest or selected blunt arrest with signs of life, resuscitative thoracotomy is the definitive tamponade intervention.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lott C, Truhlar A, Alfonzo A, et al. European Resuscitation Council Guidelines 2021: Cardiac arrest in special circumstances. Resuscitation. 2021;161:152-219.' },
+        { num: 2, text: 'Seamon MJ, Haut ER, Van Arendonk K, et al. EAST emergency department thoracotomy practice management guideline. J Trauma Acute Care Surg. 2015;79(1):159-173.' },
+    ],
+};
+const TA_THORACOTOMY_PAGE = {
+    id: 'ta-thoracotomy',
+    title: 'Thoracotomy Selection',
+    subtitle: 'Who may benefit',
+    sections: [
+        {
+            heading: 'Best indication',
+            body: 'Penetrating thoracic trauma with signs of life, witnessed arrest, or very short CPR interval. This is the scenario with the strongest evidence for neurologically intact survival benefit.',
+        },
+        {
+            heading: 'Consider selectively',
+            body: 'Penetrating extrathoracic trauma with signs of life or short CPR; selected blunt traumatic arrest with witnessed arrest, signs of life/cardiac motion, short CPR interval, and a potentially correctable thoracic cause.',
+        },
+        {
+            heading: 'Generally avoid',
+            body: 'Blunt traumatic arrest without signs of life, prolonged downtime, devastating nonsurvivable injury, or no cardiac activity after HOTT interventions.',
+        },
+        {
+            heading: 'Procedure link',
+            body: '[Open Thoracotomy Procedure](#/tree/thoracotomy-procedure)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Seamon MJ, Haut ER, Van Arendonk K, et al. EAST emergency department thoracotomy practice management guideline. J Trauma Acute Care Surg. 2015;79(1):159-173.' },
+        { num: 2, text: 'Burlew CC, Moore EE, Moore FA, et al. Western Trauma Association Critical Decisions in Trauma: Resuscitative thoracotomy. J Trauma Acute Care Surg. 2012;73(6):1359-1363.' },
+    ],
+};
+const TA_MTP_PAGE = {
+    id: 'ta-mtp',
+    title: 'Blood / Source Control',
+    subtitle: 'Hemorrhage priorities',
+    sections: [
+        {
+            heading: 'Do now',
+            body: '- Activate MTP early\n- Tourniquet compressible extremity hemorrhage\n- Pack junctional wounds and apply direct pressure\n- Place pelvic binder at greater trochanters when pelvic injury is possible\n- Use balanced blood products per local protocol\n- Replace calcium during high-volume transfusion\n- Use TXA when indicated by local protocol and timing\n- Move early to OR/IR/REBOA-capable source control',
+        },
+        {
+            heading: 'Avoid',
+            body: '- Crystalloid-heavy resuscitation\n- Waiting for CT before source control in an unstable or arresting patient\n- Repeated low-yield peripheral IV attempts when IO/central access is faster\n- Delaying blood to complete noncritical diagnostics',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American College of Surgeons Committee on Trauma. ATLS: Advanced Trauma Life Support Student Course Manual. 10th ed. 2018.' },
+        { num: 2, text: 'Lott C, Truhlar A, Alfonzo A, et al. European Resuscitation Council Guidelines 2021: Cardiac arrest in special circumstances. Resuscitation. 2021;161:152-219.' },
+    ],
+};
+const TA_TOR_PAGE = {
+    id: 'ta-tor',
+    title: 'Termination / Withholding',
+    subtitle: 'Objective documentation points',
+    sections: [
+        {
+            heading: 'Consider termination when',
+            body: '- Injuries are incompatible with life\n- No signs of life and prolonged downtime\n- Asystole with no cardiac motion after reversible causes are addressed\n- Blunt traumatic arrest without signs of life\n- No response after hemorrhage control, oxygenation, bilateral decompression, and tamponade assessment/intervention',
+        },
+        {
+            heading: 'Document',
+            body: 'Mechanism, arrest timing, CPR duration, signs of life, rhythm, cardiac ultrasound findings, airway/oxygenation, bilateral thoracostomy/chest decompression, hemorrhage interventions, blood products, thoracotomy decision, and final response.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Millin MG, Galvagno SM, Khandker SR, et al. Withholding and termination of resuscitation of adult cardiopulmonary arrest secondary to trauma. J Trauma Acute Care Surg. 2013;75(3):459-467.' },
+        { num: 2, text: 'Seamon MJ, Haut ER, Van Arendonk K, et al. EAST emergency department thoracotomy practice management guideline. J Trauma Acute Care Surg. 2015;79(1):159-173.' },
+    ],
+};
+const THORAC_STEPS_PAGE = {
+    id: 'thorac-steps',
+    title: 'Thoracotomy: 2-Minute Steps',
+    subtitle: 'Read immediately before or during setup',
+    image: {
+        src: 'images/thoracotomy/incisions-of-torso.svg',
+        alt: 'Thoracic incision diagram',
+        caption: 'Thoracic incision reference. Wikimedia Commons.',
+    },
+    sections: [
+        {
+            heading: 'Procedure sequence',
+            body: '1. Confirm indication and call trauma surgery/OR.\n2. Supine, left arm up if feasible, wide prep.\n3. Large left anterolateral incision at 4th/5th intercostal space from sternum toward posterior axillary line.\n4. Enter pleura over superior rib; finger sweep; spread ribs.\n5. Evacuate hemothorax and suction.\n6. Open pericardium anterior to phrenic nerve from apex toward aortic root.\n7. Relieve tamponade, control cardiac wound, perform open massage.\n8. Cross-clamp descending thoracic aorta above diaphragm if exsanguinating below diaphragm or empty heart.\n9. Continue blood resuscitation and move to OR for definitive control.',
+        },
+        {
+            heading: 'Critical reminders',
+            body: '- Large incision saves time\n- Stay anterior to phrenic nerve\n- Cardiac wound control is temporary\n- Aortic clamp time must be announced\n- Thoracotomy is a bridge to OR or a stop decision',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Burlew CC, Moore EE, Moore FA, et al. Western Trauma Association Critical Decisions in Trauma: Resuscitative thoracotomy. J Trauma Acute Care Surg. 2012;73(6):1359-1363.' },
+        { num: 2, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
+    ],
+};
+const THORAC_INDICATIONS_PAGE = {
+    id: 'thorac-indications',
+    title: 'Thoracotomy Indications',
+    subtitle: 'Rapid selection',
+    sections: [
+        {
+            heading: 'Proceed / strongly consider',
+            body: '- Penetrating thoracic traumatic arrest with signs of life or short CPR interval\n- Penetrating torso trauma with profound refractory shock\n- Penetrating non-thoracic traumatic arrest with short CPR where aortic control may bridge to source control\n- Selected blunt arrest with witnessed arrest, signs of life/cardiac motion, short CPR, and potentially correctable thoracic cause',
+        },
+        {
+            heading: 'Avoid',
+            body: '- Blunt arrest without signs of life\n- Prolonged CPR/downtime without cardiac motion\n- Devastating nonsurvivable injury\n- No pathway to definitive source control',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Seamon MJ, Haut ER, Van Arendonk K, et al. EAST emergency department thoracotomy practice management guideline. J Trauma Acute Care Surg. 2015;79(1):159-173.' },
+        { num: 2, text: 'Burlew CC, Moore EE, Moore FA, et al. Western Trauma Association Critical Decisions in Trauma: Resuscitative thoracotomy. J Trauma Acute Care Surg. 2012;73(6):1359-1363.' },
+    ],
+};
+const THORAC_INCISION_PAGE = {
+    id: 'thorac-incision',
+    title: 'Incision / Entry',
+    subtitle: 'Left anterolateral thoracotomy',
+    image: {
+        src: 'images/thoracotomy/surface-anatomy-heart.svg',
+        alt: 'Anterior chest surface anatomy of the heart',
+        caption: 'Surface anatomy of the heart. Wikimedia Commons.',
+    },
+    sections: [
+        {
+            body: 'Use the left 4th or 5th intercostal space. Make a large incision from sternum toward the posterior axillary line, enter pleura over the superior rib edge, finger sweep, evacuate hemothorax, and open with rib spreader if available. Extend to clamshell when exposure is inadequate or right chest/mediastinal access is needed.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
+    ],
+};
+const THORAC_PERICARDIUM_PAGE = {
+    id: 'thorac-pericardium',
+    title: 'Pericardium',
+    subtitle: 'Avoid phrenic nerve',
+    image: {
+        src: 'images/thoracotomy/chest-heart-cross-section.svg',
+        alt: 'Thoracic cross-section with heart',
+        caption: 'Thoracic cross-section reference. Wikimedia Commons.',
+    },
+    sections: [
+        {
+            body: 'Identify the phrenic nerve on the lateral pericardium. Grasp/tent the pericardium anterior to the nerve, make a small opening, then extend longitudinally from apex toward aortic root. Evacuate clot and relieve tamponade. Avoid phrenic nerve and myocardium.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
+    ],
+};
+const THORAC_AORTA_PAGE = {
+    id: 'thorac-aorta',
+    title: 'Aortic Cross-Clamp',
+    subtitle: 'Bridge to source control',
+    sections: [
+        {
+            heading: 'When',
+            body: 'Exsanguinating subdiaphragmatic hemorrhage, empty heart despite blood resuscitation, or need to prioritize coronary/cerebral perfusion during open resuscitation.',
+        },
+        {
+            heading: 'How',
+            body: 'Retract left lung, identify descending thoracic aorta just anterior/lateral to spine and above diaphragm, open pleura over the aorta, place vascular clamp across aorta while avoiding esophagus, announce clamp time, and move to definitive hemorrhage control.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Burlew CC, Moore EE, Moore FA, et al. Western Trauma Association Critical Decisions in Trauma: Resuscitative thoracotomy. J Trauma Acute Care Surg. 2012;73(6):1359-1363.' },
+        { num: 2, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Traumatic Arrest / Resuscitative Thoracotomy
+    'ta-steps': TA_STEPS_PAGE,
+    'ta-hott': TA_HOTT_PAGE,
+    'ta-thoracotomy': TA_THORACOTOMY_PAGE,
+    'ta-mtp': TA_MTP_PAGE,
+    'ta-tor': TA_TOR_PAGE,
+    'thorac-steps': THORAC_STEPS_PAGE,
+    'thorac-indications': THORAC_INDICATIONS_PAGE,
+    'thorac-incision': THORAC_INCISION_PAGE,
+    'thorac-pericardium': THORAC_PERICARDIUM_PAGE,
+    'thorac-aorta': THORAC_AORTA_PAGE,
     // Right Heart Failure
     'rhf-pocus-criteria': RHF_POCUS_CRITERIA_PAGE,
     'rhf-farkas-rsi': RHF_FARKAS_RSI_PAGE,

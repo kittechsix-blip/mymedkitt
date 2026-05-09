@@ -297,6 +297,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'insert', label: 'Insert', icon: '\uD83E\uDE7A', action: 'jump', target: 'ctube-cut' },
     { id: 'tube-size', label: 'Tube Size', icon: '\uD83D\uDCCF', action: 'jump', target: 'ctube-tube-size' },
   ],
+  'traumatic-arrest': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ta-steps' },
+    { id: 'hott', label: 'HOTT', icon: '🚨', action: 'overlay', target: 'ta-hott' },
+    { id: 'thoracotomy', label: 'Thorac', icon: '🫀', action: 'overlay', target: 'ta-thoracotomy' },
+    { id: 'blood', label: 'Blood', icon: '🩸', action: 'overlay', target: 'ta-mtp' },
+    { id: 'tor', label: 'Stop', icon: '🛑', action: 'overlay', target: 'ta-tor' },
+  ],
+  'thoracotomy-procedure': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'thorac-steps' },
+    { id: 'indications', label: 'Indicate', icon: '⚠️', action: 'overlay', target: 'thorac-indications' },
+    { id: 'incision', label: 'Incision', icon: '🔪', action: 'overlay', target: 'thorac-incision' },
+    { id: 'pericardium', label: 'Pericard', icon: '🫀', action: 'overlay', target: 'thorac-pericardium' },
+    { id: 'aorta', label: 'Aorta', icon: '🩸', action: 'overlay', target: 'thorac-aorta' },
+  ],
   'chs': [
     { id: 'antiemetic', label: 'Antiemetic', icon: '💊', action: 'jump', target: 'chs-first-line' },
     { id: 'capsaicin', label: 'Capsaicin', icon: '🌶️', action: 'jump', target: 'chs-capsaicin' },

@@ -242,6 +242,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/chest-tube.js');
       return { nodes: m.CHEST_TUBE_NODES, entryNodeId: 'ctube-start', categoryId: 'trauma-surg', moduleLabels: m.CHEST_TUBE_MODULE_LABELS, citations: m.CHEST_TUBE_CITATIONS, criticalActions: m.CHEST_TUBE_CRITICAL_ACTIONS };
     },
+    'traumatic-arrest': async () => {
+      const m = await import('../data/trees/traumatic-arrest.js');
+      return { nodes: m.TRAUMATIC_ARREST_NODES, entryNodeId: 'ta-start', categoryId: 'trauma-surg', moduleLabels: m.TRAUMATIC_ARREST_MODULE_LABELS, citations: m.TRAUMATIC_ARREST_CITATIONS, criticalActions: m.TRAUMATIC_ARREST_CRITICAL_ACTIONS };
+    },
+    'thoracotomy-procedure': async () => {
+      const m = await import('../data/trees/thoracotomy-procedure.js');
+      return { nodes: m.THORACOTOMY_PROCEDURE_NODES, entryNodeId: 'thorac-start', categoryId: 'procedures', moduleLabels: m.THORACOTOMY_PROCEDURE_MODULE_LABELS, citations: m.THORACOTOMY_PROCEDURE_CITATIONS, criticalActions: m.THORACOTOMY_PROCEDURE_CRITICAL_ACTIONS };
+    },
     'chs': async () => {
       const m = await import('../data/trees/chs.js');
       return { nodes: m.CHS_NODES, entryNodeId: 'chs-start', categoryId: 'gastroenterology', moduleLabels: m.CHS_MODULE_LABELS, citations: m.CHS_CITATIONS, criticalActions: m.CHS_CRITICAL_ACTIONS };

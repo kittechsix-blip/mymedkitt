@@ -2319,6 +2319,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'ctube-anatomy',
       },
       {
+        id: 'thoracotomy-procedure',
+        title: 'Thoracotomy Procedure',
+        subtitle: '2-Minute Review: Indication \u2192 Incision \u2192 Pericardium \u2192 Control \u2192 OR',
+        categoryId: 'procedures',
+        version: '1.0',
+        nodeCount: 15,
+        entryNodeId: 'thorac-start',
+      },
+      {
         id: 'extensor-tendon',
         title: 'Extensor Tendon Repair',
         subtitle: 'Zone Classification \u2192 Assessment \u2192 Repair Techniques \u2192 Splinting',
@@ -2594,6 +2603,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 40,
         entryNodeId: 'ctube-start',
+      },
+      {
+        id: 'traumatic-arrest',
+        title: 'Traumatic Arrest',
+        subtitle: 'Recognize \u2192 HOTT \u2192 Thoracotomy Decision \u2192 Source Control \u2192 ROSC/TOR',
+        categoryId: 'trauma-surg',
+        version: '1.0',
+        nodeCount: 18,
+        entryNodeId: 'ta-start',
       },
       {
         id: 'burns',
