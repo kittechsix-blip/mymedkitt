@@ -585,15 +585,16 @@ body {
   color: var(--color-text-secondary);
 }
 
-/* Result badge */
+/* Result badge — rendered as <h2> for a11y; reset UA heading defaults */
 .decision-card__result-badge {
   display: inline-block;
   padding: 6px 16px;
   border-radius: var(--radius-pill);
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin: 0 0 12px;
   color: #fff;
+  line-height: 1.4;
 }
 
 .decision-card__result-badge--definitive {

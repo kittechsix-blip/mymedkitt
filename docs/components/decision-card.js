@@ -319,9 +319,9 @@ function renderInputField(card, input, selected) {
 function renderActiveResult(card, node, opts) {
     // Add result-specific class for confidence pulse animation
     card.classList.add('decision-card--result');
-    // Confidence badge
+    // Confidence badge — rendered as <h2> for a11y (screen readers retain heading nav at terminal nodes)
     if (node.confidence) {
-        const badge = document.createElement('div');
+        const badge = document.createElement('h2');
         badge.className = 'decision-card__result-badge';
         if (node.confidence === 'definitive')
             badge.classList.add('decision-card__result-badge--definitive');
