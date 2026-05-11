@@ -3129,6 +3129,19 @@ body.critical-actions-open {
    CALCULATOR STYLES
    =================================================================== */
 
+/* Center calculator views on tablet/desktop — phone keeps edge-to-edge.
+   The `:has()` targets both the calculator list (with .calculator-search-wrap)
+   and individual calculator views (with .calculator-header). On viewports
+   wider than ~768px, padding distributes extra space evenly on each side,
+   visually centering the card within .main-content. */
+@media (min-width: 640px) {
+  .main-content:has(> .calculator-header),
+  .main-content:has(> .calculator-search-wrap) {
+    padding-left: max(24px, calc((100% - 720px) / 2));
+    padding-right: max(24px, calc((100% - 720px) / 2));
+  }
+}
+
 /* ---- Calculator Search ---- */
 
 .calculator-search-wrap {
