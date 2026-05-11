@@ -311,6 +311,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pericardium', label: 'Pericard', icon: '🫀', action: 'overlay', target: 'thorac-pericardium' },
     { id: 'aorta', label: 'Aorta', icon: '🩸', action: 'overlay', target: 'thorac-aorta' },
   ],
+  'vasopressor-extravasation': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vex-steps' },
+    { id: 'phentolamine', label: 'Phento', icon: '💉', action: 'overlay', target: 'vex-phentolamine-tool' },
+    { id: 'alternatives', label: 'Alt Rx', icon: '💊', action: 'overlay', target: 'vex-alt-rescue' },
+    { id: 'vasopressin', label: 'Vaso', icon: '⚠️', action: 'overlay', target: 'vex-vasopressin-tool' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'vex-stop' },
+  ],
+  'high-dose-insulin': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hdi-steps' },
+    { id: 'indications', label: 'Indicate', icon: '⚠️', action: 'overlay', target: 'hdi-indications-tool' },
+    { id: 'dose', label: 'Dose', icon: '💉', action: 'overlay', target: 'hdi-dose-tool' },
+    { id: 'dextrose-k', label: 'Dext/K', icon: '🧪', action: 'overlay', target: 'hdi-dextrose-k-tool' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hdi-stop' },
+  ],
   'chs': [
     { id: 'antiemetic', label: 'Antiemetic', icon: '💊', action: 'jump', target: 'chs-first-line' },
     { id: 'capsaicin', label: 'Capsaicin', icon: '🌶️', action: 'jump', target: 'chs-capsaicin' },

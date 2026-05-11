@@ -185,6 +185,14 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/thoracotomy-procedure.js');
             return { nodes: m.THORACOTOMY_PROCEDURE_NODES, entryNodeId: 'thorac-start', categoryId: 'procedures', moduleLabels: m.THORACOTOMY_PROCEDURE_MODULE_LABELS, citations: m.THORACOTOMY_PROCEDURE_CITATIONS, criticalActions: m.THORACOTOMY_PROCEDURE_CRITICAL_ACTIONS };
         },
+        'vasopressor-extravasation': async () => {
+            const m = await import('../data/trees/vasopressor-extravasation.js');
+            return { nodes: m.VASOPRESSOR_EXTRAVASATION_NODES, entryNodeId: 'vex-start', categoryId: 'pharmacist', moduleLabels: m.VASOPRESSOR_EXTRAVASATION_MODULE_LABELS, citations: m.VASOPRESSOR_EXTRAVASATION_CITATIONS, criticalActions: m.VASOPRESSOR_EXTRAVASATION_CRITICAL_ACTIONS };
+        },
+        'high-dose-insulin': async () => {
+            const m = await import('../data/trees/high-dose-insulin.js');
+            return { nodes: m.HIGH_DOSE_INSULIN_NODES, entryNodeId: 'hdi-start', categoryId: 'pharmacist', moduleLabels: m.HIGH_DOSE_INSULIN_MODULE_LABELS, citations: m.HIGH_DOSE_INSULIN_CITATIONS, criticalActions: m.HIGH_DOSE_INSULIN_CRITICAL_ACTIONS };
+        },
         'chs': async () => {
             const m = await import('../data/trees/chs.js');
             return { nodes: m.CHS_NODES, entryNodeId: 'chs-start', categoryId: 'gastroenterology', moduleLabels: m.CHS_MODULE_LABELS, citations: m.CHS_CITATIONS, criticalActions: m.CHS_CRITICAL_ACTIONS };

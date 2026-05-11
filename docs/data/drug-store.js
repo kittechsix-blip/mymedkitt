@@ -1273,7 +1273,7 @@ const DEXTROSE = {
     genericName: 'Dextrose',
     drugClass: 'Glucose supplement',
     route: 'IV',
-    indications: ['Neuroglycopenia — salicylate toxicity', 'Hypoglycemia — adult', 'Hypoglycemia — pediatric', 'Hyperkalemia — with insulin'],
+    indications: ['Neuroglycopenia — salicylate toxicity', 'Hypoglycemia — adult', 'Hypoglycemia — pediatric', 'Hyperkalemia — with insulin', 'High-dose insulin euglycemia therapy'],
     dosing: [
         {
             indication: 'Neuroglycopenia — Salicylate Toxicity',
@@ -1294,6 +1294,10 @@ const DEXTROSE = {
         {
             indication: 'Hyperkalemia — With Insulin',
             regimen: 'D50W 50 mL (25g) IV with 10 units regular insulin IV. Dextrose prevents insulin-induced hypoglycemia. Monitor glucose q30min for 4 hours. Some protocols give D50W first, then insulin.',
+        },
+        {
+            indication: 'High-dose insulin euglycemia therapy',
+            regimen: 'If glucose <200 mg/dL before HDI: D50W 50 mL (25 g) IV before or with the insulin bolus. Then start dextrose infusion (commonly D10W 1/2NS at 100 mL/hr in adults) and titrate to euglycemia per poison center/local protocol. Concentrated dextrose (D20/D25/D50) may be required to avoid fluid overload and typically requires central access by local policy. Continue supplemental dextrose after insulin discontinuation if hypoglycemia risk persists.',
         },
     ],
     cautions: [
@@ -4099,8 +4103,8 @@ const NITROGLYCERIN = {
     name: 'Nitroglycerin',
     genericName: 'Nitroglycerin (glyceryl trinitrate)',
     drugClass: 'Organic nitrate (vasodilator)',
-    route: 'SL / IV',
-    indications: ['Acute coronary syndrome', 'Angina pectoris', 'Acute pulmonary edema', 'Hypertensive emergency', 'Tocolysis (uterine relaxation)'],
+    route: 'SL / IV / Topical',
+    indications: ['Acute coronary syndrome', 'Angina pectoris', 'Acute pulmonary edema', 'Hypertensive emergency', 'Tocolysis (uterine relaxation)', 'Vasopressor extravasation alternative'],
     dosing: [
         {
             indication: 'ACS / NSTEMI (initial)',
@@ -4109,6 +4113,10 @@ const NITROGLYCERIN = {
         {
             indication: 'Tocolysis (Cord Prolapse / Shoulder Dystocia / Zavanelli)',
             regimen: 'IV: 50-100 mcg IV push for acute cord compression emergencies; may repeat q2min up to 400 mcg total. Onset 1-2 minutes IV — fastest-onset tocolytic. SL: 0.4 mg (1 spray or tablet) × 1 dose — alternative when IV access limited. Have phenylephrine and IV fluids ready — maternal hypotension is the main adverse effect. Alternative to terbutaline SQ.',
+        },
+        {
+            indication: 'Vasopressor extravasation alternative',
+            regimen: 'Topical nitroglycerin 2% ointment applied thinly over the ischemic/extravasated area per local protocol when phentolamine is unavailable or ineffective. Evidence is limited to case reports/reviews. Monitor systemic BP closely. Avoid with hypotension, severe anemia/raised ICP concerns, or recent PDE-5 inhibitor exposure.',
         },
     ],
     contraindications: [
@@ -4824,6 +4832,40 @@ const PHENYLEPHRINE = {
         'Graham BA, et al. Emergency Pharmacotherapy for Priapism. Expert Opin Pharmacother. 2022;23(12):1371-80.',
     ],
 };
+const PHENTOLAMINE = {
+    id: 'phentolamine',
+    name: 'Phentolamine',
+    genericName: 'Phentolamine mesylate',
+    drugClass: 'Nonselective alpha-adrenergic antagonist',
+    route: 'Local infiltration / IV / IM',
+    indications: ['Vasopressor extravasation', 'Pheochromocytoma hypertensive episodes'],
+    dosing: [
+        {
+            indication: 'Vasopressor extravasation',
+            regimen: '5-10 mg diluted in 10 mL normal saline, infiltrated locally into the area of extravasation as soon as possible. DailyMed labeling specifies treatment within 12 hours for norepinephrine extravasation. Use small aliquots around the margins and through the ischemic field. Monitor local perfusion and systemic BP/HR.',
+        },
+        {
+            indication: 'Pheochromocytoma hypertensive episode',
+            regimen: '5 mg IV or IM for adults; pediatric dosing requires specialist guidance. This is not the extravasation rescue dose.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity',
+        'Myocardial infarction or coronary insufficiency (relative; risk-benefit in emergencies)',
+    ],
+    cautions: [
+        'Hypotension and reflex tachycardia can occur from systemic absorption',
+        'Do not delay surgical/plastics/hand consultation for progressive ischemia',
+        'Phentolamine reverses alpha-mediated vasoconstriction; it is not a direct reversal agent for isolated vasopressin extravasation',
+    ],
+    monitoring: 'Local color, temperature, capillary refill, pain, sensation, motor function, pulses/Doppler when relevant. Systemic BP and HR after infiltration.',
+    notes: 'Primary pharmacologic rescue for alpha-adrenergic vasopressor extravasation. Labeled indication is prevention/treatment of dermal necrosis and sloughing following norepinephrine extravasation. Use with immediate local measures: stop infusion, leave catheter initially, aspirate residual drug, do not flush, elevate, warm compresses, and serial neurovascular exams.',
+    citations: [
+        'DailyMed. Phentolamine Mesylate for Injection prescribing information. Hikma Pharmaceuticals USA Inc. Revised May 2022.',
+        'Wang Y, et al. Summary of best evidence for safe management of vasopressors through peripheral intravenous catheters. BMC Nurs. 2025;24:1050.',
+        'Plum M, Moukhachen O. Alternative Pharmacological Management of Vasopressor Extravasation in the Absence of Phentolamine. P T. 2017;42(9):581-592.',
+    ],
+};
 const RITONAVIR = {
     id: 'ritonavir',
     name: 'Ritonavir (Norvir)',
@@ -4968,7 +5010,7 @@ const REGULAR_INSULIN = {
     genericName: 'Insulin regular (human)',
     drugClass: 'Hormone / potassium-shifting agent',
     route: 'IV',
-    indications: ['Hyperkalemia (potassium shift)', 'Diabetic ketoacidosis (DKA)'],
+    indications: ['Hyperkalemia (potassium shift)', 'Diabetic ketoacidosis (DKA)', 'High-dose insulin euglycemia therapy'],
     dosing: [
         {
             indication: 'DKA — IV infusion',
@@ -4978,6 +5020,15 @@ const REGULAR_INSULIN = {
         {
             indication: 'DKA — optional IV bolus',
             regimen: '10 units IV bolus. Consider if: severe hyperkalemia (K >6.5), severe acidosis (pH <6.9, BOHB >15), or significant delay to drip. Not required if drip starting immediately.',
+        },
+        {
+            indication: 'High-dose insulin euglycemia therapy',
+            regimen: 'For beta-blocker/calcium channel blocker poison-induced shock: 1 unit/kg IV bolus, then 1 unit/kg/hr continuous infusion. If no hemodynamic improvement, increase by 1 unit/kg/hr every 20-30 minutes, commonly up to 10 units/kg/hr with poison center/toxicology guidance. Give dextrose before/with bolus if glucose <200 mg/dL and run dextrose infusion to maintain euglycemia. Monitor glucose q15-20 min during initiation/titration and potassium at least hourly during titration.',
+            weightCalc: [
+                { dosePerKg: 1, unit: 'units', label: 'HDI bolus' },
+                { dosePerKg: 1, unit: 'units/hr', label: 'HDI starting infusion' },
+                { dosePerKg: 10, unit: 'units/hr', label: 'HDI common upper target' },
+            ],
         },
         {
             indication: 'Hyperkalemia',
@@ -5435,7 +5486,7 @@ const TERBUTALINE = {
     genericName: 'Terbutaline sulfate',
     drugClass: 'Beta-2 adrenergic agonist',
     route: 'SQ',
-    indications: ['Hyperkalemia (potassium shift)', 'Acute asthma/bronchospasm', 'Tocolysis (uterine relaxation)', 'Anaphylaxis bronchospasm'],
+    indications: ['Hyperkalemia (potassium shift)', 'Acute asthma/bronchospasm', 'Tocolysis (uterine relaxation)', 'Anaphylaxis bronchospasm', 'Vasopressor extravasation alternative'],
     dosing: [
         {
             indication: 'Hyperkalemia',
@@ -5452,6 +5503,10 @@ const TERBUTALINE = {
         {
             indication: 'Anaphylaxis bronchospasm',
             regimen: '0.25 mg SQ × 1. Systemic beta-2 agonist for persistent bronchospasm despite adequate epinephrine. Provides systemic mast cell stabilization via beta-2 stimulation. Consider in beta-blocked patients for additional beta-2 effect.',
+        },
+        {
+            indication: 'Vasopressor extravasation alternative',
+            regimen: '1 mg diluted in 10 mL normal saline and infiltrated subcutaneously around the affected area when phentolamine is unavailable, per pharmacy/toxicology or local protocol. Evidence is limited. Monitor HR, BP, tremor, and potassium/glucose when clinically relevant.',
         },
     ],
     contraindications: [
@@ -11970,6 +12025,7 @@ export const ALL_DRUGS = [
     OXYTOCIN,
     PANTOPRAZOLE,
     PENICILLIN_G_IV,
+    PHENTOLAMINE,
     PHENYLEPHRINE,
     PACKED_RBCS,
     PLATELETS,
@@ -12237,6 +12293,7 @@ const NAME_TO_ID = [
     [/4.factor.*pcc|pcc.*4.factor|kcentra|prothrombin.*complex/i, 'pcc-4factor'],
     [/pentobarbital|nembutal/i, 'pentobarbital'],
     [/phenobarbital|luminal/i, 'phenobarbital'],
+    [/phentolamine/i, 'phentolamine'],
     [/phenylephrine/i, 'phenylephrine'],
     [/physostigmine|antilirium/i, 'physostigmine'],
     [/kcl\s*iv|potassium\s*chloride.*iv|iv\s*potassium/i, 'potassium-chloride-iv'],

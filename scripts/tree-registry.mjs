@@ -14,6 +14,8 @@ export const TREE_REGISTRY = {
   'chest-tube':       { prefix: 'CHEST_TUBE',          entryNodeId: 'ctube-start',        categoryId: 'trauma-surg' },
   'traumatic-arrest': { prefix: 'TRAUMATIC_ARREST',    entryNodeId: 'ta-start',           categoryId: 'trauma-surg' },
   'thoracotomy-procedure': { prefix: 'THORACOTOMY_PROCEDURE', entryNodeId: 'thorac-start', categoryId: 'procedures' },
+  'vasopressor-extravasation': { prefix: 'VASOPRESSOR_EXTRAVASATION', entryNodeId: 'vex-start', categoryId: 'pharmacist' },
+  'high-dose-insulin': { prefix: 'HIGH_DOSE_INSULIN', entryNodeId: 'hdi-start', categoryId: 'pharmacist' },
   'chs':              { prefix: 'CHS',                 entryNodeId: 'chs-start',          categoryId: 'gastroenterology' },
   'pep':              { prefix: 'PEP',                 entryNodeId: 'pep-start',          categoryId: 'infectious-disease' },
   'stroke':           { prefix: 'STROKE',              entryNodeId: 'stroke-start',       categoryId: 'neurology' },

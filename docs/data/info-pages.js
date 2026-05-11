@@ -18581,6 +18581,211 @@ const INTRALIPID_SUMMARY = {
     ],
 };
 // -------------------------------------------------------------------
+// Peripheral Vasopressor Extravasation Rescue
+// -------------------------------------------------------------------
+const VEX_STEPS_PAGE = {
+    id: 'vex-steps',
+    title: 'Extravasation Rescue Steps',
+    subtitle: 'Peripheral vasopressor/vasopressin infiltration',
+    sections: [
+        {
+            heading: 'Immediate sequence',
+            body: '1. Stop vasopressor infusion immediately.\n2. Leave catheter in place initially.\n3. Disconnect tubing and aspirate residual drug through the catheter.\n4. Do not flush.\n5. Remove catheter after aspiration unless pharmacy/toxicology directs otherwise.\n6. Elevate the extremity and apply dry warm compresses.\n7. Mark borders, document neurovascular exam, and photograph per policy.\n8. Restart vasopressor through reliable alternate access.\n9. If alpha-adrenergic pressor injury: infiltrate phentolamine 5-10 mg in 10 mL NS locally.\n10. Escalate early for hand/foot, ischemia, blistering, necrosis, delayed recognition, or neurovascular deficit.',
+        },
+        {
+            heading: 'Key medication rule',
+            body: 'Phentolamine is appropriate for alpha-adrenergic vasopressor injury. Isolated vasopressin injury is not alpha-mediated; use rescue steps, pharmacy/toxicology input, and early specialist escalation if ischemic.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'DailyMed. Phentolamine Mesylate for Injection prescribing information. Revised May 2022.' },
+        { num: 2, text: 'Wang Y, et al. Summary of best evidence for safe management of vasopressors through peripheral intravenous catheters. BMC Nurs. 2025;24:1050.' },
+    ],
+};
+const VEX_PHENTOLAMINE_TOOL = {
+    id: 'vex-phentolamine-tool',
+    title: 'Phentolamine',
+    subtitle: 'Local alpha-blockade rescue',
+    sections: [
+        {
+            heading: 'Dose',
+            body: '[Phentolamine](#/drug/phentolamine/vasopressor extravasation) 5-10 mg diluted in 10 mL normal saline, infiltrated locally throughout the affected area using small aliquots.',
+        },
+        {
+            heading: 'Use when',
+            body: 'Norepinephrine, epinephrine, phenylephrine, dopamine, metaraminol, or unknown/mixed alpha-adrenergic vasopressor extravasation with ischemic risk.',
+        },
+        {
+            heading: 'Critical details',
+            body: '- Use as soon as possible; labeling for norepinephrine specifies treatment within 12 hours.\n- Infiltrate around the margins and into the ischemic field.\n- Continue serial neurovascular exams.\n- Do not delay surgery/plastics/hand consultation for progressive ischemia.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'DailyMed. Phentolamine Mesylate for Injection prescribing information. Revised May 2022.' },
+    ],
+};
+const VEX_ALT_RESCUE = {
+    id: 'vex-alt-rescue',
+    title: 'Alternative Rescue',
+    subtitle: 'When phentolamine is unavailable',
+    sections: [
+        {
+            heading: 'Adult alternatives reported',
+            body: '- [Terbutaline](#/drug/terbutaline/vasopressor extravasation) 1 mg diluted in 10 mL normal saline and infiltrated subcutaneously around the affected area.\n- [Nitroglycerin](#/drug/nitroglycerin/vasopressor extravasation) 2% ointment topically over the ischemic field.\n- Continue warm compresses, elevation, and serial neurovascular checks.',
+        },
+        {
+            heading: 'Cautions',
+            body: 'Evidence is limited and largely case-based. Use local policy and pharmacy/toxicology guidance. Avoid topical nitroglycerin when hypotension, recent PDE-5 inhibitor use, or nitroglycerin contraindication is present.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Plum M, Moukhachen O. Alternative Pharmacological Management of Vasopressor Extravasation in the Absence of Phentolamine. P T. 2017;42(9):581-592.' },
+        { num: 2, text: 'Wijesinghe N, et al. Topical nitroglycerin for management of peripheral extravasation of vasopressors. Oxf Med Case Reports. 2020;2020(8):omaa066.' },
+    ],
+};
+const VEX_VASOPRESSIN_TOOL = {
+    id: 'vex-vasopressin-tool',
+    title: 'Vasopressin Nuance',
+    subtitle: 'Non-alpha vasoconstrictor injury',
+    sections: [
+        {
+            heading: 'Clinical point',
+            body: 'Vasopressin causes V1-mediated vasoconstriction. Phentolamine is an alpha-blocker, so it is not a direct mechanistic reversal agent for isolated vasopressin extravasation.',
+        },
+        {
+            heading: 'Approach',
+            body: '- Stop infusion, aspirate, do not flush.\n- Elevate and apply dry warm compresses.\n- Restart pressor support through reliable alternate access.\n- Consult pharmacy/toxicology for local vasodilator strategy if ischemia is present.\n- Escalate to surgery/plastics/hand surgery for progressive ischemia, high-risk sites, blistering, necrosis, or neurovascular deficit.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Wang Y, et al. Summary of best evidence for safe management of vasopressors through peripheral intravenous catheters. BMC Nurs. 2025;24:1050.' },
+        { num: 2, text: 'Plum M, Moukhachen O. Alternative Pharmacological Management of Vasopressor Extravasation in the Absence of Phentolamine. P T. 2017;42(9):581-592.' },
+    ],
+};
+const VEX_STOP_TOOL = {
+    id: 'vex-stop',
+    title: 'STOP: High-Risk Extravasation',
+    subtitle: 'Escalate immediately',
+    sections: [
+        {
+            heading: 'Stop and escalate if any are present',
+            body: '- Hand, foot, genital/perineal, or large-volume extravasation\n- Blanching/coolness with poor capillary refill\n- Numbness, weakness, severe pain, or tense compartments\n- Blistering, necrosis, or rapidly expanding skin changes\n- Delayed recognition with ongoing ischemia\n- Persistent shock requiring ongoing high-dose peripheral vasopressors without reliable access',
+        },
+        {
+            heading: 'Escalation',
+            body: 'Call pharmacy/toxicology and surgery/plastics/hand surgery. Continue antidote/local measures when appropriate, but do not rely on antidote alone for progressive ischemia.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Wang Y, et al. Summary of best evidence for safe management of vasopressors through peripheral intravenous catheters. BMC Nurs. 2025;24:1050.' },
+    ],
+};
+// -------------------------------------------------------------------
+// High Dose Insulin Protocol
+// -------------------------------------------------------------------
+const HDI_STEPS_PAGE = {
+    id: 'hdi-steps',
+    title: 'High Dose Insulin Steps',
+    subtitle: 'BB/CCB poison-induced cardiogenic shock',
+    sections: [
+        {
+            heading: 'Immediate sequence',
+            body: '1. Call poison center/toxicology and pharmacy.\n2. Establish reliable IV access; central access preferred for concentrated dextrose but do not delay insulin in shock.\n3. Baseline glucose, potassium, magnesium, phosphate, lactate, VBG/ABG, ECG.\n4. If glucose <200 mg/dL: give dextrose 25 g IV.\n5. If K <3.0 mEq/L: start potassium replacement immediately.\n6. Give regular insulin 1 unit/kg IV bolus.\n7. Start regular insulin infusion 1 unit/kg/hr.\n8. Start/titrate dextrose infusion to maintain euglycemia.\n9. If no hemodynamic improvement, increase insulin by 1 unit/kg/hr q20-30 min, commonly up to 10 units/kg/hr with toxicology guidance.\n10. Monitor glucose q15-20 min during initiation/titration and potassium at least hourly during titration.',
+        },
+        {
+            heading: 'Targets',
+            body: 'SBP >90 mmHg or MAP >65 mmHg, HR >50/min when relevant, improving perfusion, lactate, mentation, urine output, and cardiac function.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ontario Poison Centre. High-Dose Insulin Euglycemia Therapy. Revised February 2024.' },
+        { num: 2, text: 'Woodward C, Pourmand A, Mazer-Amirshahi M. High dose insulin therapy. DARU J Pharm Sci. 2014;22:36.' },
+    ],
+};
+const HDI_INDICATIONS_TOOL = {
+    id: 'hdi-indications-tool',
+    title: 'HDI Indications',
+    subtitle: 'When to start',
+    sections: [
+        {
+            heading: 'Start HDI for',
+            body: '- Calcium channel blocker toxicity with hypotension, bradycardia, cardiogenic shock, or mixed shock\n- Beta-blocker toxicity with persistent hypotension/bradycardia or cardiogenic shock\n- Suspected BB/CCB mixed ingestion with poison-induced cardiogenic shock\n- Refractory or escalating vasopressor requirement when myocardial dysfunction is present',
+        },
+        {
+            heading: 'Do not wait for',
+            body: 'Failure of prolonged low-yield therapy. Glucagon and calcium may be useful bridges, but HDI should be started early in severe cardiotoxic shock.',
+        },
+        {
+            heading: 'Linked consults',
+            body: '[Calcium Channel Blocker Overdose](#/tree/ccb-od)\n[Beta-Blocker Overdose](#/tree/beta-blocker-od)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'St-Onge M, et al. Experts Consensus Recommendations for the Management of Calcium Channel Blocker Poisoning in Adults. Crit Care Med. 2017;45(3):e306-e315.' },
+        { num: 2, text: 'Engebretsen KM, et al. High-Dose Insulin Therapy in Beta-Blocker and Calcium Channel-Blocker Poisoning. Clin Toxicol. 2011;49(4):277-283.' },
+    ],
+};
+const HDI_DOSE_TOOL = {
+    id: 'hdi-dose-tool',
+    title: 'Insulin Dose',
+    subtitle: 'Bolus, infusion, titration',
+    sections: [
+        {
+            heading: 'Initial dose',
+            body: '[Regular insulin](#/drug/regular-insulin/high dose insulin) 1 unit/kg IV bolus, then 1 unit/kg/hr continuous infusion.',
+        },
+        {
+            heading: 'Titration',
+            body: 'If no hemodynamic improvement, increase infusion by 1 unit/kg/hr every 20-30 minutes, commonly up to 10 units/kg/hr with poison center/toxicology guidance.',
+        },
+        {
+            heading: 'Hemodynamic endpoints',
+            body: 'Target SBP >90 mmHg or MAP >65 mmHg, HR >50/min when relevant, improving perfusion, lactate, urine output, mentation, and echo/hemodynamic markers.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ontario Poison Centre. High-Dose Insulin Euglycemia Therapy. Revised February 2024.' },
+        { num: 2, text: 'Woodward C, et al. High dose insulin therapy. DARU J Pharm Sci. 2014;22:36.' },
+    ],
+};
+const HDI_DEXTROSE_K_TOOL = {
+    id: 'hdi-dextrose-k-tool',
+    title: 'Dextrose / Potassium',
+    subtitle: 'Prevent hypoglycemia and dangerous hypokalemia',
+    sections: [
+        {
+            heading: 'Dextrose',
+            body: '- If glucose <200 mg/dL: [Dextrose](#/drug/dextrose/high dose insulin) 25 g IV before or with insulin.\n- Start D10W 1/2NS at 100 mL/hr in adults, then titrate.\n- Use concentrated dextrose through central access when fluid load becomes excessive.\n- Target glucose 100-200 mg/dL per Ontario Poison Centre; follow local poison center protocol.',
+        },
+        {
+            heading: 'Potassium',
+            body: '- Check baseline potassium before/at initiation.\n- If K <3.0 mEq/L, start IV potassium replacement immediately.\n- Check K at least hourly during titration, then q2h if stable.\n- Hypokalemia is usually redistribution from insulin; avoid overcorrection and watch for rebound hyperkalemia during wean.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ontario Poison Centre. High-Dose Insulin Euglycemia Therapy. Revised February 2024.' },
+        { num: 2, text: 'Woodward C, et al. High dose insulin therapy. DARU J Pharm Sci. 2014;22:36.' },
+    ],
+};
+const HDI_STOP_TOOL = {
+    id: 'hdi-stop',
+    title: 'STOP: HDI Safety Checks',
+    subtitle: 'Prevent high-risk dosing errors',
+    sections: [
+        {
+            heading: 'Stop and verify',
+            body: '- Insulin concentration and pump programming\n- Dose entered as units/kg/hr, not DKA rate\n- Dextrose bolus/infusion plan active\n- Glucose checks q15-20 min during start/titration\n- Potassium monitoring and replacement plan active\n- Poison center/toxicology/pharmacy involved\n- Escalation plan for refractory shock',
+        },
+        {
+            heading: 'Do not run HDI without',
+            body: 'Dextrose availability, glucose monitoring, potassium monitoring, telemetry/BP monitoring, and a clear titration endpoint.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ontario Poison Centre. High-Dose Insulin Euglycemia Therapy. Revised February 2024.' },
+    ],
+};
+// -------------------------------------------------------------------
 // ECMO — Steps Summary
 // -------------------------------------------------------------------
 const ECMO_SUMMARY = {
@@ -20899,6 +21104,17 @@ export const INFO_PAGES = {
     'ccb-steps-summary': CCB_OD_SUMMARY,
     'dig-steps-summary': DIGOXIN_TOXICITY_SUMMARY,
     'ile-summary': INTRALIPID_SUMMARY,
+    // Pharmacist protocols
+    'vex-steps': VEX_STEPS_PAGE,
+    'vex-phentolamine-tool': VEX_PHENTOLAMINE_TOOL,
+    'vex-alt-rescue': VEX_ALT_RESCUE,
+    'vex-vasopressin-tool': VEX_VASOPRESSIN_TOOL,
+    'vex-stop': VEX_STOP_TOOL,
+    'hdi-steps': HDI_STEPS_PAGE,
+    'hdi-indications-tool': HDI_INDICATIONS_TOOL,
+    'hdi-dose-tool': HDI_DOSE_TOOL,
+    'hdi-dextrose-k-tool': HDI_DEXTROSE_K_TOOL,
+    'hdi-stop': HDI_STOP_TOOL,
     // Steps Summaries — Other
     'ap-summary': ACUTE_PANCREATITIS_SUMMARY,
     // Mesenteric Ischemia
