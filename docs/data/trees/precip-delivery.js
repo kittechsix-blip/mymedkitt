@@ -2,15 +2,15 @@
 // Stepwise walkthrough of assessing active labor and delivering a baby in the ED.
 // 5 modules: Initial Assessment → Preparation → Stage 1 (Labor) → Stage 2 (Delivery) → Stage 3 (Placenta & Postpartum)
 // 20 nodes total.
-// Source: Pope & Tibbles (ACEP 2012), VanRooyen & Scott (Tintinalli's 7e), McFarlin (EMR 2019), NRP 8e (AAP 2021)
+// Source: Pope & Tibbles (ACEP 2012), VanRooyen & Scott (Tintinalli's 7e), McFarlin (EMR 2019), NRP 9e (AAP 2025)
 export const PRECIP_DELIVERY_CRITICAL_ACTIONS = [
     { text: 'Page OB and Pediatrics STAT', nodeId: 'precip-callhelp' },
     { text: 'Assign minimum 4 people: mom, baby, delivery, resus', nodeId: 'precip-callhelp' },
     { text: 'Turn on neonatal warmer now', nodeId: 'precip-callhelp' },
-    { text: 'Support head, check for nuchal cord', nodeId: 'precip-head-delivery' },
-    { text: 'Deferred cord clamping (at least 60 sec) unless resuscitation needed', nodeId: 'precip-cord-clamp' },
-    { text: 'Dry, warm, stimulate newborn', nodeId: 'precip-neonate-assess' },
-    { text: 'Controlled cord traction for placenta', nodeId: 'precip-placenta-delivery' },
+    { text: 'Support head, check for nuchal cord', nodeId: 'precip-head' },
+    { text: 'Deferred cord clamping (at least 60 sec) unless resuscitation needed', nodeId: 'precip-cord' },
+    { text: 'Dry, warm, stimulate newborn', nodeId: 'precip-baby' },
+    { text: 'Controlled cord traction for placenta', nodeId: 'precip-placenta' },
     { text: 'Oxytocin 10 units IM after placenta delivers', nodeId: 'precip-oxytocin' },
 ];
 export const PRECIP_DELIVERY_NODES = [
@@ -167,7 +167,7 @@ export const PRECIP_DELIVERY_NODES = [
         type: 'info',
         module: 4,
         title: 'Delivering the Head',
-        body: 'DELIVERING THE HEAD\n\n**Perineal support technique:**\n• Place one hand on the perineum with a towel — apply gentle **upward pressure** on the fetal chin through the perineum\n• Other hand on the fetal occiput — apply gentle **counter-pressure** to control the speed of delivery\n• Goal: **slow, controlled delivery** of the head to minimize perineal tearing\n\n**Key points:**\n• Let the uterus do the work — do NOT pull on the head\n• Between contractions, maintain gentle pressure to prevent rapid expulsion\n• The head will naturally extend as it delivers over the perineum\n\n**Routine suctioning of the nose and mouth is NO LONGER recommended** (NRP 8th edition). Only suction if the airway is visibly obstructed. [5]\n\nOnce the head is delivered, proceed immediately to check for nuchal cord. [1][2]',
+        body: 'DELIVERING THE HEAD\n\n**Perineal support technique:**\n• Place one hand on the perineum with a towel — apply gentle **upward pressure** on the fetal chin through the perineum\n• Other hand on the fetal occiput — apply gentle **counter-pressure** to control the speed of delivery\n• Goal: **slow, controlled delivery** of the head to minimize perineal tearing\n\n**Key points:**\n• Let the uterus do the work — do NOT pull on the head\n• Between contractions, maintain gentle pressure to prevent rapid expulsion\n• The head will naturally extend as it delivers over the perineum\n\n**Routine suctioning of the nose and mouth is NO LONGER recommended** (NRP 9th edition). Only suction if the airway is visibly obstructed. [5]\n\nOnce the head is delivered, proceed immediately to check for nuchal cord. [1][2]',
         citation: [1, 2, 5],
         summary: 'Perineal support: upward pressure on chin + counter-pressure on occiput for slow controlled delivery',
         images: [
@@ -365,7 +365,7 @@ export const PRECIP_DELIVERY_CITATIONS = [
     { num: 2, text: 'VanRooyen MJ, Scott JA. Ch 105: Emergency Delivery. Tintinalli\'s Emergency Medicine. 7th ed. McGraw-Hill; 2011.' },
     { num: 3, text: 'McFarlin A. ED Management of Precipitous Delivery and Neonatal Resuscitation. Emergency Medicine Reports. 2019;40(11).' },
     { num: 4, text: 'Martin JA, et al. Births: Final Data for 2015. Natl Vital Stat Rep. 2017;66(1):1-70.' },
-    { num: 5, text: 'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 8th ed. AAP; 2021.' },
+    { num: 5, text: 'Weiner GM, Zaichkin J, eds. Textbook of Neonatal Resuscitation (NRP). 9th ed. American Academy of Pediatrics; October 2025.' },
     { num: 6, text: 'Kerrigan K. Emergency Delivery: Are You Prepared? Baystate Medical Center. (Video lecture).' },
     { num: 7, text: '42 U.S.C. § 1395dd. EMTALA.' },
     { num: 8, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186.' },

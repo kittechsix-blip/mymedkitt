@@ -290,7 +290,7 @@ export const AACG_NODES = [
         type: 'info',
         module: 3,
         title: 'Phase 4: Pilocarpine',
-        body: '**⚠️ TIMING CRITICAL — Wait until IOP <40 mmHg**\n\n**Why wait?**\n- Ischemic iris sphincter muscle won\'t respond at high IOP\n- Giving early is ineffective and wastes time\n\n**Pilocarpine 2% (or 4%):**\n- 1 drop to affected eye\n- Repeat in 15 minutes × 2 doses total\n\n**Mechanism:**\n- Constricts pupil (miosis)\n- Pulls iris away from trabecular meshwork\n- Opens drainage angle\n\n**Also treat FELLOW EYE:**\n- Pilocarpine 2% 1 drop × 1\n- Prophylaxis (40-80% will develop AACG)\n\n**Pilocarpine Caution:**\n- Some experts avoid if mechanism unclear\n- NOT effective for drug-induced (sulfa) angle closure\n- Can confound subsequent exam [1][2][4]',
+        body: '**⚠️ TIMING CRITICAL — Wait until IOP <40 mmHg**\n\n**Why wait?**\n- Ischemic iris sphincter muscle won\'t respond at high IOP\n- Giving early is ineffective and wastes time\n\n**Pilocarpine 2% (or 4%):**\n- 1 drop to affected eye\n- Repeat in 15 minutes × 2 doses total\n\n**Mechanism:**\n- Constricts pupil (miosis)\n- Pulls iris away from trabecular meshwork\n- Opens drainage angle\n\n**Also treat FELLOW EYE:**\n- Pilocarpine 2% 1 drop QID\n- Continue until LPI performed\n- Prophylaxis (40-80% will develop AACG within 5-10 years)\n\n**Pilocarpine Caution:**\n- Some experts avoid if mechanism unclear\n- NOT effective for drug-induced (sulfa) angle closure\n- Can confound subsequent exam [1][2][4]',
         citation: [1, 2, 4],
         treatment: {
             firstLine: {
@@ -313,9 +313,9 @@ export const AACG_NODES = [
                 drug: 'Pilocarpine 2%',
                 dose: '1 drop',
                 route: 'Topical to fellow eye',
-                frequency: 'Once',
-                duration: 'Single dose',
-                notes: 'Prophylaxis for fellow eye (40-80% will develop AACG)',
+                frequency: 'QID (4 times daily)',
+                duration: 'Until laser peripheral iridotomy (LPI) performed',
+                notes: 'Prophylaxis for fellow eye (40-80% will develop AACG within 5-10 years). Continue QID until definitive LPI per Royal College of Ophthalmologists and AAO guidance.',
             },
             monitoring: 'Observe for pupil constriction (miosis). Continue to recheck IOP. Proceed to supportive care.',
         },
