@@ -6,7 +6,7 @@ export const VAFEI_MODULE_LABELS = [
     'Indications & Contraindications',
     'Preparation & Equipment',
     'Topicalization & Sedation',
-    'VAFEI Procedure',
+    'Procedure',
     'Troubleshooting & Confirmation',
 ];
 export const VAFEI_CITATIONS = [
@@ -21,7 +21,7 @@ export const VAFEI_CITATIONS = [
     { num: 9, text: 'Higgs A, et al. Guidelines for the management of tracheal intubation in critically ill adults. Br J Anaesth. 2018;120(2):323-352.' },
 ];
 export const VAFEI_CRITICAL_ACTIONS = [
-    { text: 'VAFEI preserves spontaneous breathing - ideal for "can\'t paralyze" airways', nodeId: 'vafei-start' },
+    { text: 'Video-Assisted Flexible Endoscopic Intubation preserves spontaneous breathing - ideal for "can\'t paralyze" airways', nodeId: 'vafei-start' },
     { text: 'Maximum lidocaine dose 7 mg/kg - calculate before topicalization', nodeId: 'vafei-topical' },
     { text: 'Always have paralytic drawn and ready - laryngospasm can occur', nodeId: 'vafei-ketamine' },
     { text: 'VL operator suctions aggressively - soiled airway obscures both views', nodeId: 'vafei-procedure' },
@@ -36,17 +36,17 @@ export const VAFEI_NODES = [
         id: 'vafei-start',
         type: 'info',
         module: 1,
-        title: 'VAFEI — Overview',
-        body: '**Video-Assisted Flexible Endoscopic Intubation (VAFEI)** combines video laryngoscopy to expose the airway with flexible endoscopy to guide tube delivery. Pronounced "vaffy." [1]\n\n**WHY VAFEI?**\nCombines the best of both techniques:\n• VL clears path through mouth, lifts epiglottis\n• FE provides continuous visualization through cords\n• No nasal route needed (avoids epistaxis)\n• Allows awake/breathing approach\n\n**KEY ADVANTAGES:**\n• Maintains spontaneous ventilation\n• Continuous visualization during tube passage\n• Two operators = two sets of eyes\n• Works when VL alone fails to pass tube\n\n**SUCCESS RATES:**\n• Awake FE intubation: 92% first-pass (nasal), 57% (oral) [3]\n• VAFEI addresses oral route challenges by using VL to guide scope',
+        title: 'Video-Assisted Flexible Endoscopic Intubation — Overview',
+        body: '**Video-Assisted Flexible Endoscopic Intubation** combines video laryngoscopy to expose the airway with flexible endoscopy to guide tube delivery. [1]\n\n**WHY THIS TECHNIQUE?**\nCombines the best of both:\n• VL clears path through mouth, lifts epiglottis\n• FE provides continuous visualization through cords\n• No nasal route needed (avoids epistaxis)\n• Allows awake/breathing approach\n\n**KEY ADVANTAGES:**\n• Maintains spontaneous ventilation\n• Continuous visualization during tube passage\n• Two operators = two sets of eyes\n• Works when VL alone fails to pass tube\n\n**SUCCESS RATES:**\n• Awake flexible endoscopic intubation: 92% first-pass (nasal), 57% (oral) [3]\n• Combined video + flexible endoscopic technique addresses oral route challenges by using VL to guide the scope',
         citation: [1, 2, 3],
         next: 'vafei-indications',
-        summary: 'VAFEI combines VL + flexible endoscope; VL clears path, FE guides tube through cords; maintains breathing',
+        summary: 'Video laryngoscopy + flexible endoscope combined; VL clears path, FE guides tube through cords; maintains breathing',
     },
     {
         id: 'vafei-indications',
         type: 'info',
         module: 1,
-        title: 'Indications for VAFEI',
+        title: 'Indications',
         body: '**PRIMARY INDICATIONS:** [2,6,7]\n\n**Anatomically Difficult/Distorted Airways:**\n• Angioedema (most common indication)\n• Ludwig angina / deep neck infection\n• Oropharyngeal abscess / hematoma\n• Laryngeal or orofacial trauma\n• Airway tumors / masses\n• Prior surgery or radiation to head/neck\n\n**Intrinsic Difficult Airway Features:**\n• Micrognathia / retrognathia\n• Limited mouth opening (trismus)\n• Morbid obesity\n• Failed 3-3-2 rule\n• Mallampati IV\n• History of difficult intubation\n\n**Clinical Scenarios:**\n• "Scared to paralyze" - anticipated CICO risk\n• Failed VL intubation (can oxygenate)\n• Cervical spine immobility + predicted difficult airway\n• Need for continuous visualization (laryngeal trauma)',
         citation: [2, 6, 7],
         next: 'vafei-contraindications',
@@ -70,13 +70,13 @@ export const VAFEI_NODES = [
         body: 'Choose intubation approach based on patient status and airway assessment.',
         options: [
             {
-                label: 'Awake/Breathing VAFEI',
+                label: 'Awake/Breathing approach',
                 description: 'Patient maintains spontaneous ventilation throughout',
                 next: 'vafei-prep-awake',
             },
             {
-                label: 'RSI then VAFEI',
-                description: 'Standard RSI, use VAFEI as rescue when VL fails',
+                label: 'RSI then flexible endoscopic rescue',
+                description: 'Standard RSI, use flexible endoscope as rescue when VL fails',
                 next: 'vafei-prep-rsi',
             },
             {
@@ -85,7 +85,7 @@ export const VAFEI_NODES = [
                 next: 'vafei-kobi',
             },
         ],
-        summary: 'Awake = safest for distorted airways; RSI-then-VAFEI for rescue; KOBI = ketamine-only breathing',
+        summary: 'Awake = safest for distorted airways; RSI-then-flexible-endoscope for rescue; KOBI = ketamine-only breathing',
     },
     // =====================================================================
     // MODULE 2: PREPARATION & EQUIPMENT
@@ -95,7 +95,7 @@ export const VAFEI_NODES = [
         type: 'info',
         module: 2,
         title: 'Preparation — Awake Approach',
-        body: '**AWAKE VAFEI PREPARATION:** [1,3,7]\n\n**Equipment Setup:**\n• Video laryngoscope (hyperangulated preferred)\n• Flexible endoscope with ETT preloaded\n• Suction x2 (VL operator + backup)\n• Topical anesthetics (4% lidocaine)\n• Antisialagogue (glycopyrrolate)\n• Low-dose ketamine + midazolam drawn\n• Standard airway backup + cricothyrotomy kit\n\n**Operator Positioning:**\n• **VL Operator:** Behind patient\'s LEFT shoulder\n• **FE Operator:** Behind patient\'s HEAD\n• **Patient:** Semi-Fowler position (30-45°)\n• **Monitor:** Single split-screen over patient\'s bed\n\n**Patient Preparation:**\n• Explain procedure, set expectations\n• Preoxygenate (HFNC ideal if available)\n• Hemodynamic optimization\n• IV access confirmed',
+        body: '**AWAKE PREPARATION:** [1,3,7]\n\n**Equipment Setup:**\n• Video laryngoscope (hyperangulated preferred)\n• Flexible endoscope with ETT preloaded\n• Suction x2 (VL operator + backup)\n• Topical anesthetics (4% lidocaine)\n• Antisialagogue (glycopyrrolate)\n• Low-dose ketamine + midazolam drawn\n• Standard airway backup + cricothyrotomy kit\n\n**Operator Positioning:**\n• **VL Operator:** Behind patient\'s LEFT shoulder\n• **FE Operator:** Behind patient\'s HEAD\n• **Patient:** Semi-Fowler position (30-45°)\n• **Monitor:** Single split-screen over patient\'s bed\n\n**Patient Preparation:**\n• Explain procedure, set expectations\n• Preoxygenate (HFNC ideal if available)\n• Hemodynamic optimization\n• IV access confirmed',
         citation: [1, 3, 7],
         next: 'vafei-antisialagogue',
         summary: 'VL operator at left shoulder, FE operator at head; patient semi-Fowler; split-screen monitor',
@@ -104,8 +104,8 @@ export const VAFEI_NODES = [
         id: 'vafei-prep-rsi',
         type: 'info',
         module: 2,
-        title: 'Preparation — RSI Rescue VAFEI',
-        body: '**RSI-THEN-VAFEI (RESCUE SCENARIO):** [1]\n\nWhen standard VL intubation fails but patient is oxygenating:\n\n**Setup (should already be ready):**\n• VL in place with view obtained\n• Flexible endoscope preloaded with ETT\n• Second operator available\n\n**Transition to VAFEI:**\n1. VL operator maintains laryngeal view\n2. FE operator brings scope to bedside\n3. No additional meds needed (already paralyzed)\n4. Proceed directly to scope insertion\n\n**KEY POINT:**\nHaving FE available and preloaded BEFORE RSI allows immediate rescue if VL alone fails.\n\n**Time Considerations:**\n• Apnea time limited\n• May need BVM ventilation between attempts\n• Consider supraglottic rescue if prolonged',
+        title: 'Preparation — RSI Rescue',
+        body: '**RSI-THEN-FLEXIBLE-ENDOSCOPE (RESCUE SCENARIO):** [1]\n\nWhen standard VL intubation fails but patient is oxygenating:\n\n**Setup (should already be ready):**\n• VL in place with view obtained\n• Flexible endoscope preloaded with ETT\n• Second operator available\n\n**Transition to combined technique:**\n1. VL operator maintains laryngeal view\n2. FE operator brings scope to bedside\n3. No additional meds needed (already paralyzed)\n4. Proceed directly to scope insertion\n\n**KEY POINT:**\nHaving FE available and preloaded BEFORE RSI allows immediate rescue if VL alone fails.\n\n**Time Considerations:**\n• Apnea time limited\n• May need BVM ventilation between attempts\n• Consider supraglottic rescue if prolonged',
         citation: [1],
         next: 'vafei-procedure',
         summary: 'For RSI rescue: VL maintains view, FE operator brings scope, proceed directly; have FE ready pre-RSI',
@@ -115,7 +115,7 @@ export const VAFEI_NODES = [
         type: 'info',
         module: 2,
         title: 'Ketamine-Only Breathing Intubation (KOBI)',
-        body: '**KOBI APPROACH:** [4,5]\n\nDissociative-dose ketamine WITHOUT paralytic. Patient breathes throughout.\n\n**INDICATIONS:**\n• Distorted airway where paralysis is dangerous\n• Need to maintain spontaneous ventilation\n• Alternative to awake approach in uncooperative patient\n\n**KETAMINE DOSING:**\n• **Dissociative:** 1-2 mg/kg IV\n• **Titration method:** 25 mg aliquots q15 seconds until dissociated\n• Have RSI backup ready\n\n**CRITICAL SAFETY:**\n• **ALWAYS have paralytic drawn and ready**\n• Laryngospasm can occur\n• Increased muscle tone may impair laryngoscopy\n• Patient may gag, cough, adduct cords\n\n**PROCEED TO VAFEI:**\nOnce dissociated, perform VAFEI as described.\nTopical lidocaine still helpful to reduce cord reactivity.',
+        body: '**KOBI APPROACH:** [4,5]\n\nDissociative-dose ketamine WITHOUT paralytic. Patient breathes throughout.\n\n**INDICATIONS:**\n• Distorted airway where paralysis is dangerous\n• Need to maintain spontaneous ventilation\n• Alternative to awake approach in uncooperative patient\n\n**KETAMINE DOSING:**\n• **Dissociative:** 1-2 mg/kg IV\n• **Titration method:** 25 mg aliquots q15 seconds until dissociated\n• Have RSI backup ready\n\n**CRITICAL SAFETY:**\n• **ALWAYS have paralytic drawn and ready**\n• Laryngospasm can occur\n• Increased muscle tone may impair laryngoscopy\n• Patient may gag, cough, adduct cords\n\n**PROCEED TO PROCEDURE:**\nOnce dissociated, perform video-assisted flexible endoscopic intubation as described.\nTopical lidocaine still helpful to reduce cord reactivity.',
         citation: [4, 5],
         next: 'vafei-procedure',
         summary: 'Ketamine 1-2 mg/kg or 25mg aliquots; maintains breathing; MUST have paralytic ready for laryngospasm',
@@ -174,19 +174,19 @@ export const VAFEI_NODES = [
         summary: 'Low-dose 20-30mg titrated; KOBI 1-2 mg/kg; ALWAYS have paralytic ready for laryngospasm',
     },
     // =====================================================================
-    // MODULE 4: VAFEI PROCEDURE
+    // MODULE 4: PROCEDURE
     // =====================================================================
     {
         id: 'vafei-procedure',
         type: 'info',
         module: 4,
-        title: 'VAFEI Procedure — Step by Step',
-        body: '**THE VAFEI TECHNIQUE:** [1]\n\n**STEP 1: VL INSERTION**\n• VL operator inserts blade, obtains laryngeal view\n• Maintains position with LEFT hand\n• Keeps suction ready in RIGHT hand\n• "Sets the table" for FE operator\n\n**STEP 2: FE INSERTION**\n• FE operator looks INTO patient\'s mouth (direct vision)\n• Advances scope to tip of VL blade under direct view\n• Then looks at VL SCREEN to guide scope to cords\n\n**STEP 3: CORD PASSAGE**\n• Spray lidocaine on cords via FE channel (if awake)\n• Advance FE through vocal cords\n• Use VL screen OR FE screen (whichever view is better)\n• Continue until CARINA is visualized\n\n**STEP 4: TUBE DELIVERY**\n• FE operator holds scope steady\n• Assistant (or VL operator) railroads ETT over scope\n• Advance until ETT tip visible on FE screen\n• Position just proximal to carina\n\n**KEY PEARL:**\n"The right speed is SLOWER than your instincts." [1]',
+        title: 'Procedure — Step by Step',
+        body: '**THE TECHNIQUE:** [1]\n\n**STEP 1: VL INSERTION**\n• VL operator inserts blade, obtains laryngeal view\n• Maintains position with LEFT hand\n• Keeps suction ready in RIGHT hand\n• "Sets the table" for FE operator\n\n**STEP 2: FE INSERTION**\n• FE operator looks INTO patient\'s mouth (direct vision)\n• Advances scope to tip of VL blade under direct view\n• Then looks at VL SCREEN to guide scope to cords\n\n**STEP 3: CORD PASSAGE**\n• Spray lidocaine on cords via FE channel (if awake)\n• Advance FE through vocal cords\n• Use VL screen OR FE screen (whichever view is better)\n• Continue until CARINA is visualized\n\n**STEP 4: TUBE DELIVERY**\n• FE operator holds scope steady\n• Assistant (or VL operator) railroads ETT over scope\n• Advance until ETT tip visible on FE screen\n• Position just proximal to carina\n\n**KEY PEARL:**\n"The right speed is SLOWER than your instincts." [1]',
         images: [
             {
                 src: 'images/vafei/vafei-positioning.png',
-                alt: 'VAFEI operator positioning: VL operator at left shoulder, FE operator at head, patient semi-Fowler',
-                caption: 'VAFEI positioning: VL operator at left shoulder, FE operator behind head, patient semi-Fowler, split-screen monitor above.',
+                alt: 'Operator positioning: VL operator at left shoulder, FE operator at head, patient semi-Fowler',
+                caption: 'Positioning: VL operator at left shoulder, FE operator behind head, patient semi-Fowler, split-screen monitor above.',
             },
         ],
         citation: [1],
@@ -294,8 +294,8 @@ export const VAFEI_NODES = [
         id: 'vafei-success',
         type: 'result',
         module: 5,
-        title: 'VAFEI Successful',
-        body: 'VAFEI completed successfully.',
+        title: 'Intubation Successful',
+        body: 'Video-assisted flexible endoscopic intubation completed successfully.',
         recommendation: '**POST-INTUBATION CHECKLIST:**\n\n**CONFIRMATION:**\n☐ Waveform capnography confirmed\n☐ Bilateral breath sounds\n☐ ETT depth appropriate (21-25 cm)\n☐ ETT secured\n\n**IMMEDIATE CARE:**\n☐ Sedation/analgesia initiated\n☐ Ventilator settings adjusted\n☐ OG/NG tube placed if indicated\n☐ CXR ordered for position confirmation\n\n**DOCUMENTATION:**\n☐ Intubation details (technique, attempts, view)\n☐ ETT size and depth\n☐ Medications used\n☐ Complications (if any)\n\n**DISPOSITION:**\n☐ ICU admission for ongoing ventilation\n☐ Notify receiving team of intubation details\n☐ Consider early extubation planning if appropriate',
         citation: [1, 9],
         summary: 'Confirm with capnography, bilateral breath sounds; secure tube; sedate; CXR; document',

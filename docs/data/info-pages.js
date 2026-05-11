@@ -13672,8 +13672,8 @@ const INTUSS_POST_REDUCTION = {
 // -------------------------------------------------------------------
 const VAFEI_STEPS_SUMMARY = {
     id: 'vafei-steps-summary',
-    title: 'VAFEI Quick Steps',
-    subtitle: 'Video-Assisted Flexible Endoscopic Intubation',
+    title: 'Video-Assisted Flexible Endoscopic Intubation — Quick Steps',
+    subtitle: 'Equipment, positioning, sequence',
     sections: [
         {
             heading: 'Equipment Setup',
@@ -13684,7 +13684,7 @@ const VAFEI_STEPS_SUMMARY = {
             body: '**VL Operator:** Behind patient\'s LEFT shoulder\n**FE Operator:** Behind patient\'s HEAD\n**Patient:** Semi-Fowler (30-45 degrees)\n**Monitor:** Split-screen over bed',
         },
         {
-            heading: 'The VAFEI Sequence',
+            heading: 'The Sequence',
             body: '1. **VL insertion** - Obtain laryngeal view, hold with left hand, suction in right\n2. **FE insertion** - Look in mouth, advance to blade tip, then use VL screen\n3. **Cord passage** - Spray lidocaine, advance through cords to carina\n4. **Railroad ETT** - Advance pre-loaded tube until visible on FE screen\n5. **Withdraw scope** - Confirm ETT 2-3cm above carina\n6. **Confirm** - Waveform capnography mandatory',
         },
         {
@@ -13756,7 +13756,7 @@ const VAFEI_KETAMINE_GUIDE = {
 };
 const VAFEI_TROUBLESHOOTING_GUIDE = {
     id: 'vafei-troubleshooting-guide',
-    title: 'VAFEI Troubleshooting',
+    title: 'Video-Assisted Flexible Endoscopic Intubation — Troubleshooting',
     subtitle: 'Common Problems and Solutions',
     sections: [
         {
@@ -13777,12 +13777,12 @@ const VAFEI_TROUBLESHOOTING_GUIDE = {
         },
     ],
     citations: [
-        { num: 1, text: 'Strayer RJ, Caputo N. VAFEI. ACEP Now. 2022.' },
+        { num: 1, text: 'Strayer RJ, Caputo N. How to Use Video-Assisted Flexible Endoscopic Intubation. ACEP Now. 2022.' },
     ],
 };
 const VAFEI_INDICATIONS_GUIDE = {
     id: 'vafei-indications-guide',
-    title: 'VAFEI Indications',
+    title: 'Video-Assisted Flexible Endoscopic Intubation — Indications',
     subtitle: 'When to Consider This Technique',
     sections: [
         {

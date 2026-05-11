@@ -75,8 +75,8 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'vafei',
-        title: 'VAFEI (Video-Assisted Flexible Endoscopic)',
-        subtitle: 'Indications → Topicalization → VAFEI Procedure → Troubleshooting → Confirmation',
+        title: 'Video-Assisted Flexible Endoscopic Intubation',
+        subtitle: 'Indications → Topicalization → Procedure → Troubleshooting → Confirmation',
         categoryId: 'anesthesia-airway',
         version: '1.0',
         nodeCount: 22,
