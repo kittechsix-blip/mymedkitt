@@ -761,6 +761,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/button-battery.js');
             return { nodes: m.BUTTON_BATTERY_NODES, entryNodeId: 'battery-start', categoryId: 'pediatrics', moduleLabels: m.BUTTON_BATTERY_MODULE_LABELS, citations: m.BUTTON_BATTERY_CITATIONS, criticalActions: m.BUTTON_BATTERY_CRITICAL_ACTIONS };
         },
+        'peds-foreign-body': async () => {
+            const m = await import('../data/trees/peds-foreign-body.js');
+            return { nodes: m.PEDS_FB_NODES, entryNodeId: 'peds-fb-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_FB_MODULE_LABELS, citations: m.PEDS_FB_CITATIONS, criticalActions: m.PEDS_FB_CRITICAL_ACTIONS };
+        },
         'nat-screening': async () => {
             const m = await import('../data/trees/nat-screening.js');
             return { nodes: m.NAT_SCREENING_NODES, entryNodeId: 'nat-start', categoryId: 'pediatrics', moduleLabels: m.NAT_SCREENING_MODULE_LABELS, citations: m.NAT_SCREENING_CITATIONS, criticalActions: m.NAT_SCREENING_CRITICAL_ACTIONS };

@@ -1423,6 +1423,17 @@ const TOOLBAR_CONFIGS = {
         { id: 'trouble', label: 'Trouble', icon: '🔧', action: 'overlay', target: 'vafei-troubleshooting-guide' },
         { id: 'indications', label: 'Indications', icon: '🎯', action: 'overlay', target: 'vafei-indications-guide' },
     ],
+    // ---------------------------------------------------------------
+    // Pediatric Foreign Body (Aspiration + Esophageal)
+    // ---------------------------------------------------------------
+    'peds-foreign-body': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'peds-fb-steps-summary' },
+        { id: 'timing', label: 'Timing', icon: '⏱️', action: 'overlay', target: 'peds-fb-timing-table' },
+        { id: 'honey', label: 'BB Honey', icon: '🍯', action: 'overlay', target: 'peds-fb-honey-protocol' },
+        { id: 'choking', label: 'PALS Choke', icon: '🫁', action: 'overlay', target: 'peds-fb-pals-choking' },
+        { id: 'bb-cross', label: 'BB Consult', icon: '🔋', action: 'jump', target: 'battery-start' },
+        { id: 'pals-wt', label: 'PALS Wt', icon: '⚖️', action: 'calculator', target: 'pals-weight' },
+    ],
     'blood-culture-stewardship': [
         { id: 'indications', label: 'Indications', icon: '✅', action: 'overlay', target: 'bcs-indications' },
         { id: 'contam', label: 'Contam', icon: '🦠', action: 'overlay', target: 'bcs-contamination' },

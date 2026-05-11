@@ -20790,6 +20790,161 @@ const FEBSZ_VACCINE_TRIGGERS: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Pediatric Foreign Body (Aspiration + Esophageal)
+// -------------------------------------------------------------------
+
+const PEDS_FB_STEPS_SUMMARY: InfoPage = {
+  id: 'peds-fb-steps-summary',
+  title: 'Pediatric Foreign Body — Quick Steps',
+  subtitle: 'Recognition → BLS → Imaging → Endoscopy/Bronchoscopy',
+  sections: [
+    {
+      heading: 'Recognize',
+      body: '- Highest risk age **6 mo – 5 yr**\n- Witnessed choking event = best single feature (95% specific) [8,14]\n- Classic triad (cough + wheeze + focal ↓ BS) ~50% sensitive — absence does NOT rule out\n- **Normal CXR does NOT exclude airway FB** — most FBs radiolucent\n- Esophageal: drooling, refusing PO, dysphagia, may be silent',
+    },
+    {
+      heading: 'BLS Choking (PALS)',
+      body: '- **Effective cough** → encourage cough, watch, transport\n- **Ineffective cough <1 yr** → 5 back blows + 5 chest thrusts\n- **Ineffective cough ≥1 yr** → Heimlich (abdominal thrusts)\n- **Unconscious** → CPR (compressions first), look + remove visible object, NEVER blind finger sweep',
+    },
+    {
+      heading: 'Airway FB Workup',
+      body: '- PA + lateral CXR (insp + exp or decubitus to find air trapping)\n- High suspicion → ENT/pulm + **rigid bronchoscopy** (gold standard) regardless of imaging [4,9]\n- Mod suspicion + neg imaging → inpatient observation\n- Post-bronch: [Dexamethasone](#/drug/dexamethasone/airway-edema) 0.6 mg/kg, racemic [epi](#/drug/epinephrine/stridor) for stridor',
+    },
+    {
+      heading: 'Esophageal FB Triage',
+      body: '- **STAT AP + lateral** (BB has halo on AP, step-off on lateral)\n- Button battery → OR <2 hr regardless of symptoms [2,3]\n- Multiple magnets or magnet + metal → urgent removal or surgery [13]\n- Sx coin/sharp → <2 hr; asx → <24 hr (or 16-24 hr trial for distal coin in older child) [10]',
+    },
+    {
+      heading: 'BB Pre-Removal Mitigation',
+      body: '- [Honey](#/drug/honey/button-battery) 10 mL PO q10min × up to 6 doses\n- Eligibility: age ≥12 mo, awake, <12 hr since ingestion, no perforation\n- NEVER honey <12 mo (infant botulism) — use [Sucralfate](#/drug/sucralfate/button-battery) instead\n- **NEVER delay OR for mitigation**',
+    },
+    {
+      heading: 'Post-Op + Discharge',
+      body: '- Admit any post-procedure × 24 hr\n- BB → ICU; esophagram at 4 wk if circumferential injury; **28-day AEF vigilance**\n- Discharge requires asymptomatic + normal exam + clear return precautions\n- Counsel: food cutoffs <4 yr, household BB/magnet safety, [Reese\'s Law](https://www.cpsc.gov) compliance',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kramer RE, et al. NASPGHAN. J Pediatr Gastroenterol Nutr. 2015;60(4):562-574.' },
+    { num: 2, text: 'Mubarak A, et al. ESPGHAN Position Paper. J Pediatr Gastroenterol Nutr. 2021;73(1):129-136.' },
+    { num: 3, text: 'National Capital Poison Center. Button Battery Triage Guideline. 2024.' },
+    { num: 4, text: 'Powers K, et al. Otolaryngol Clin North Am. 2024;57(4):623-633.' },
+    { num: 12, text: 'Topjian AA, et al. PALS. Circulation. 2020;142(suppl 2):S469.' },
+  ],
+  shareable: true,
+};
+
+const PEDS_FB_TIMING_TABLE: InfoPage = {
+  id: 'peds-fb-timing-table',
+  title: 'Esophageal FB — Timing Table',
+  subtitle: 'Removal urgency by object + symptoms',
+  sections: [
+    {
+      heading: 'Button Battery',
+      body: '| Location | Timing |\n|---|---|\n| **Esophagus** (any size, any age, sx or asx) | **OR within 2 hours** |\n| Stomach, ≥20 mm, age <5 yr | Within 24-48 hr (NASPGHAN); some recommend <24 hr |\n| Stomach, <20 mm, asx, age ≥5 yr, <2 hr ingestion | Observation acceptable |\n| Beyond stomach, asymptomatic | Serial X-rays; observe for passage |',
+    },
+    {
+      heading: 'Coin',
+      body: '| Scenario | Timing |\n|---|---|\n| Esophageal, symptomatic | Endoscopic removal **<2 hours** |\n| Esophageal, asymptomatic | **<24 hours**, OR observation trial with repeat XR at 16-24 hr (Waltzman 2005) |\n| Stomach | Discharge, expectant passage, repeat XR in 2-4 wk if no documented passage |',
+    },
+    {
+      heading: 'Magnet',
+      body: '| Scenario | Timing |\n|---|---|\n| Single, esophageal, sx | <2 hr |\n| Single, esophageal, asx | <24 hr |\n| Single, beyond esophagus, asx | Observe + serial XR + magnet/metal isolation |\n| **Multiple** OR **magnet + metallic co-ingestion** (any location) | Urgent removal; surgical consult if beyond stomach |',
+    },
+    {
+      heading: 'Sharp Object',
+      body: '| Scenario | Timing |\n|---|---|\n| Esophageal, symptomatic | **<2 hours** |\n| Esophageal, asymptomatic | **<24 hours** |\n| Gastric | Endoscopic removal if feasible (point-trailing) |\n| Long object >5 cm (<1 yr) or >6 cm (older) | Endoscopic removal — won\'t round duodenal sweep |\n| Beyond duodenum | Serial daily XR; surgical consult if no progression × 3 days |',
+    },
+    {
+      heading: 'Food Bolus',
+      body: '| Scenario | Timing |\n|---|---|\n| Cannot handle secretions | Endoscopic removal **<2 hours** |\n| Handling secretions | Endoscopic removal **<24 hours** |\n| Trial of [Glucagon](#/drug/glucagon/food-bolus) | Modest data; ALL peds food bolus → GI for EoE workup |',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kramer RE, et al. NASPGHAN. J Pediatr Gastroenterol Nutr. 2015;60(4):562-574.' },
+    { num: 2, text: 'Mubarak A, et al. ESPGHAN Position Paper. J Pediatr Gastroenterol Nutr. 2021;73(1):129-136.' },
+    { num: 3, text: 'National Capital Poison Center. BB Triage Guideline. 2024.' },
+    { num: 10, text: 'Waltzman ML, et al. Pediatrics. 2005;116(3):614-619.' },
+    { num: 13, text: 'Hussain SZ, et al. J Pediatr Gastroenterol Nutr. 2012;55(3):239-242.' },
+  ],
+  shareable: true,
+};
+
+const PEDS_FB_HONEY_PROTOCOL: InfoPage = {
+  id: 'peds-fb-honey-protocol',
+  title: 'Button Battery — Honey / Sucralfate Protocol',
+  subtitle: 'Pre-removal pH-neutralizing mitigation',
+  sections: [
+    {
+      heading: 'Mechanism',
+      body: 'Lithium coin batteries lodged in the esophagus generate hydroxide at the **negative pole** within minutes. Local tissue pH exceeds 12, causing **liquefactive necrosis**. Viscous, mildly acidic / pH-neutralizing fluids form a protective coating and slow injury. [5,6]',
+    },
+    {
+      heading: 'Honey — First-Line',
+      body: '**Eligibility (ALL must be true):**\n- Age **≥12 months** (NEVER under 12 mo — infant botulism risk)\n- Awake and able to swallow safely\n- **<12 hours** since ingestion\n- No signs of perforation, mediastinitis, hematemesis\n- Battery confirmed in esophagus on imaging\n\n**Dose:** 10 mL PO **every 10 minutes, up to 6 doses**.\n\n**Continue while** mobilizing ENT/GI/anesthesia/OR. Do NOT delay OR for honey administration.',
+    },
+    {
+      heading: 'Sucralfate — Alternative or Adjunct',
+      body: 'Use when honey unavailable, or in **infants <12 months** (honey contraindicated).\n\n**Dose:** 10 mL of 1 g / 10 mL oral suspension PO **every 10 minutes, up to 3 doses**.\n\nMay be given in addition to honey if both available.',
+    },
+    {
+      heading: 'Contraindications (do NOT give either)',
+      body: '- Suspected esophageal perforation or mediastinitis\n- Hematemesis\n- Inability to swallow safely / depressed consciousness\n- Honey only: age <12 months\n- Honey only: >12 hours since ingestion',
+    },
+    {
+      heading: 'Documentation',
+      body: 'Record each dose time and volume — hand-off to OR / endoscopy team. The time the battery was ingested, time of imaging, and time of each mitigation dose all matter for prognosis and post-op surveillance planning.',
+    },
+    {
+      heading: 'Key Point',
+      body: 'Honey and sucralfate are **bridge therapy**. They reduce injury severity but **do not replace emergent endoscopic removal**. The goal is OR within 2 hours of presentation.',
+    },
+  ],
+  citations: [
+    { num: 3, text: 'National Capital Poison Center. BB Triage Guideline. 2024.' },
+    { num: 5, text: 'Anfang RR, Jatana KR, Linn RL, et al. Laryngoscope. 2019;129(1):49-57.' },
+    { num: 6, text: 'Jatana KR, et al. Laryngoscope. 2020;130(3):730-738.' },
+  ],
+  shareable: true,
+};
+
+const PEDS_FB_PALS_CHOKING: InfoPage = {
+  id: 'peds-fb-pals-choking',
+  title: 'PALS Choking Algorithm — by Age',
+  subtitle: 'BLS for pediatric foreign body airway obstruction',
+  sections: [
+    {
+      heading: 'Step 1 — Assess Cough',
+      body: '- **Effective cough** (can cry/speak, color normal): **Watch, do NOT intervene**. Encourage cough. Position for comfort. Transport.\n- **Ineffective cough** (no sound, cyanotic, decreasing LOC): **Act now** (Step 2).',
+    },
+    {
+      heading: 'Step 2 — Infant <1 Year (Conscious)',
+      body: '1. Position infant face-down on forearm, head lower than trunk, supporting head with hand\n2. **5 back blows** with heel of hand between scapulae\n3. Turn infant face-up, supporting head\n4. **5 chest thrusts** (2 fingers on lower sternum, same location as CPR — depth ~1/3 chest diameter)\n5. Repeat sequence until object out OR infant becomes unresponsive',
+    },
+    {
+      heading: 'Step 2 — Child ≥1 Year (Conscious)',
+      body: '1. Stand or kneel behind child\n2. Fist above umbilicus, below xiphoid (thumb side against abdomen)\n3. **5 quick abdominal thrusts (Heimlich)** — inward and upward\n4. Repeat until object out OR child becomes unresponsive',
+    },
+    {
+      heading: 'Step 2 — Any Age, UNCONSCIOUS',
+      body: '1. **Start CPR** — chest compressions first (may dislodge FB)\n2. Open airway: look in mouth before each breath cycle\n3. **Remove only visible objects** — no blind finger sweeps (risk of pushing FB deeper)\n4. Continue cycles; activate EMS / code\n5. If still cannot ventilate: prepare for **direct laryngoscopy + Magill forceps**, then advanced airway interventions (push FB distal, surgical airway)',
+    },
+    {
+      heading: 'Bystander Outcome Data',
+      body: 'MOCHI registry (Norii 2024) demonstrated that **early effective bystander relief before EMS arrival is associated with better neurological outcomes**. Community education in CPR + choking maneuvers matters. [11]',
+    },
+    {
+      heading: 'Do NOT',
+      body: '- Blind finger sweeps in any patient\n- Abdominal thrusts in infants <1 yr (liver injury risk)\n- Delay CPR for futile back-blow / Heimlich attempts in an unresponsive child',
+    },
+  ],
+  citations: [
+    { num: 11, text: 'Norii T, et al. MOCHI Registry. Resuscitation. 2024;199:110198.' },
+    { num: 12, text: 'Topjian AA, et al. PALS. Circulation. 2020;142(suppl 2):S469-S523.' },
+  ],
+  shareable: true,
+};
+
+// -------------------------------------------------------------------
 // Traumatic Arrest / Resuscitative Thoracotomy
 // -------------------------------------------------------------------
 
@@ -21671,6 +21826,11 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'febsz-steps': FEBSZ_STEPS_SUMMARY,
   'febsz-imaging-decision': FEBSZ_IMAGING_DECISION,
   'febsz-vaccine-triggers': FEBSZ_VACCINE_TRIGGERS,
+  // Pediatric Foreign Body
+  'peds-fb-steps-summary': PEDS_FB_STEPS_SUMMARY,
+  'peds-fb-timing-table': PEDS_FB_TIMING_TABLE,
+  'peds-fb-honey-protocol': PEDS_FB_HONEY_PROTOCOL,
+  'peds-fb-pals-choking': PEDS_FB_PALS_CHOKING,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */

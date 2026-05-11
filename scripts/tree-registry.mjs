@@ -251,4 +251,5 @@ export const TREE_REGISTRY = {
   'transient-global-amnesia': { prefix: 'TRANSIENT_GLOBAL_AMNESIA', entryNodeId: 'tga-start', categoryId: 'neurology' },
   'mammalian-bite': { prefix: 'MAMMALIAN_BITE', entryNodeId: 'mb-start', categoryId: 'emergency-medicine' },
   'febrile-seizure': { prefix: 'FEBSZ', entryNodeId: 'febsz-start', categoryId: 'pediatrics' },
+  'peds-foreign-body': { prefix: 'PEDS_FB', entryNodeId: 'peds-fb-start', categoryId: 'pediatrics' },
 };

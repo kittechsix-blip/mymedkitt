@@ -1855,7 +1855,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'peds-constipation',
-        title: 'Pediatric Constipation & Disimpaction',
+        title: 'Constipation & Disimpaction',
         subtitle: 'Assessment → Red Flags → PEG/Enemas → Maintenance → Disposition',
         categoryId: 'pediatrics',
         version: '1.0',
@@ -1909,7 +1909,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'peds-osteomyelitis',
-        title: 'Pediatric Osteomyelitis',
+        title: 'Osteomyelitis',
         subtitle: 'Recognition \u2192 Workup \u2192 Empiric Abx \u2192 Surgical \u2192 Oral Transition',
         categoryId: 'pediatrics',
         version: '1.0',
@@ -1918,7 +1918,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'peds-stec-hus',
-        title: 'Pediatric STEC/HUS',
+        title: 'STEC/HUS',
         subtitle: 'Recognition → Workup → STEC Management → HUS Treatment → Disposition',
         categoryId: 'pediatrics',
         version: '1.0',
@@ -1936,7 +1936,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'peds-submersion',
-        title: 'Pediatric Submersion Injuries',
+        title: 'Submersion Injuries',
         subtitle: 'Scene/Rescue → Resuscitation → Post-Arrest → AMS/Respiratory → Asymptomatic → Disposition',
         categoryId: 'pediatrics',
         version: '1.0',
@@ -1953,6 +1953,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'battery-start',
       },
       {
+        id: 'peds-foreign-body',
+        title: 'Foreign Body (Airway + Esophageal)',
+        subtitle: 'Recognition → BLS → Rigid Bronch → Esoph Triage → Button Battery → Disposition',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 20,
+        entryNodeId: 'peds-fb-start',
+      },
+      {
         id: 'nat-screening',
         title: 'Non-Accidental Trauma Screening',
         subtitle: 'Recognition → TEN-4-FACESp → Imaging → Labs → Documentation → Reporting',
@@ -1963,7 +1972,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'pediatric-arthritis',
-        title: 'Pediatric Arthritis',
+        title: 'Arthritis',
         subtitle: 'Assessment → Septic vs Transient → JIA → Reactive → Red Flags → Treatment',
         categoryId: 'pediatrics',
         version: '1.0',

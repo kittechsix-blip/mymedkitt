@@ -3037,6 +3037,11 @@ const GLUCAGON = {
             indication: 'Hypoglycemia',
             regimen: '1 mg IM/SQ/IV. If no response in 15 min, may repeat × 1.',
         },
+        {
+            indication: 'Esophageal food bolus impaction',
+            regimen: 'Adolescent/adult: 1 mg IV push.\nPediatric: 0.5 mg IV in children (sparse data).\n\nRelaxes lower esophageal sphincter; may allow distal passage. Modest success in adults (~30-50% in case series), limited pediatric data. ALL pediatric food bolus impactions warrant GI referral for EoE workup regardless of resolution.',
+            weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 1, label: 'Pediatric (20 mcg/kg)' },
+        },
     ],
     contraindications: [
         'Pheochromocytoma (may provoke catecholamine surge)',
@@ -11718,6 +11723,77 @@ const TERLIPRESSIN = {
         'Allegretti AS, et al. Terlipressin versus placebo or no intervention for people with cirrhosis and hepatorenal syndrome. Cochrane Database Syst Rev. 2017;6(6):CD005162.',
     ],
 };
+const HONEY = {
+    id: 'honey',
+    name: 'Honey',
+    genericName: 'Honey (commercial/medical-grade)',
+    drugClass: 'Esophageal pH-neutralizing mitigant (button battery)',
+    route: 'PO',
+    indications: ['Pre-removal mitigation for esophageal button battery (≥12 months of age)'],
+    dosing: [
+        {
+            indication: 'Esophageal button battery mitigation',
+            regimen: '**10 mL PO every 10 minutes, up to 6 doses** total before OR removal.\n\n**Eligibility (ALL must be true):**\n- Age **≥12 months** (NEVER under 12 months — infant botulism risk)\n- Awake and able to swallow safely\n- **<12 hours** since battery ingestion\n- No signs of perforation, mediastinitis, or hematemesis\n- Battery confirmed in esophagus on imaging\n\nViscous coating + mild acidity neutralizes hydroxide generated at battery negative pole, reducing liquefactive necrosis. **Bridge therapy only — DO NOT delay OR for honey administration.** Continue while mobilizing ENT/GI/anesthesia/OR.',
+        },
+    ],
+    contraindications: [
+        'Age <12 months (infant botulism risk from Clostridium botulinum spores)',
+        'Suspected perforation or mediastinitis',
+        'Hematemesis',
+        'Inability to swallow safely / depressed consciousness',
+        '>12 hours since ingestion',
+    ],
+    cautions: [
+        'Bridge therapy only — never delay definitive endoscopic removal',
+        'Confirm esophageal location on AP + lateral X-ray before administration',
+        'Document time of each dose for hand-off to OR/endoscopy team',
+    ],
+    monitoring: 'Airway patency, mental status, ability to handle secretions.',
+    notes: 'Recommended by National Capital Poison Center BB Triage Guideline (2024) and supported by Anfang/Jatana piglet model studies (Laryngoscope 2019, 2020). Sucralfate is an acceptable alternative when available and may be used in addition. The intervention only buys time — definitive treatment is emergent endoscopic removal within 2 hours of ingestion.',
+    citations: [
+        'National Capital Poison Center. Button Battery Ingestion Triage and Treatment Guideline. Updated 2024.',
+        'Anfang RR, Jatana KR, Linn RL, et al. pH-neutralizing esophageal irrigations as a novel mitigation strategy for button battery injury. Laryngoscope. 2019;129(1):49-57.',
+        'Jatana KR, et al. Basic science and clinical research supporting honey as a treatment for button battery ingestion. Laryngoscope. 2020;130(3):730-738.',
+    ],
+};
+const SUCRALFATE = {
+    id: 'sucralfate',
+    name: 'Sucralfate',
+    genericName: 'Sucralfate (Carafate)',
+    drugClass: 'Mucosal protectant / aluminum-sucrose sulfate complex',
+    route: 'PO',
+    indications: ['Pre-removal mitigation for esophageal button battery (alternative/adjunct to honey)', 'Stress ulcer prophylaxis', 'Duodenal ulcer (historical)'],
+    dosing: [
+        {
+            indication: 'Esophageal button battery mitigation',
+            regimen: '**10 mL of 1 g / 10 mL oral suspension every 10 minutes, up to 3 doses** before OR removal.\n\nUse when honey unavailable or as adjunct. Acceptable for **age <12 months** when honey is contraindicated. Forms viscous protective coating + mild buffering effect at injury site.',
+        },
+        {
+            indication: 'Stress ulcer prophylaxis',
+            regimen: '1 g PO/NG q6h.',
+        },
+        {
+            indication: 'Duodenal ulcer (historical)',
+            regimen: '1 g PO QID × 4-8 weeks (largely supplanted by PPIs).',
+        },
+    ],
+    contraindications: [
+        'Suspected esophageal perforation or mediastinitis',
+        'Inability to swallow safely',
+        'Severe renal impairment (aluminum accumulation with chronic use)',
+    ],
+    cautions: [
+        'Bridge therapy only for BB — never delay endoscopic removal',
+        'Reduces absorption of co-administered drugs (separate by ≥2h)',
+        'Aluminum content — caution in renal failure',
+    ],
+    monitoring: 'Airway patency, mental status, ability to handle secretions.',
+    notes: 'Sucralfate is an option recommended by the National Capital Poison Center alongside honey for pre-removal button battery mitigation. Useful when patient is <12 months (honey contraindicated) or honey is unavailable. Hospital pharmacies typically stock the 1 g / 10 mL oral suspension.',
+    citations: [
+        'National Capital Poison Center. Button Battery Ingestion Triage and Treatment Guideline. Updated 2024.',
+        'Anfang RR, et al. pH-neutralizing esophageal irrigations as a novel mitigation strategy for button battery injury. Laryngoscope. 2019;129(1):49-57.',
+    ],
+};
 export const ALL_DRUGS = [
     ACAMPROSATE,
     ACETAMINOPHEN,
@@ -11823,6 +11899,7 @@ export const ALL_DRUGS = [
     GENTAMICIN,
     GLUCAGON,
     HALOPERIDOL,
+    HONEY,
     HYDRALAZINE,
     HYDROCORTISONE,
     HYDROMORPHONE,
@@ -11949,6 +12026,7 @@ export const ALL_DRUGS = [
     SODIUM_BICARBONATE,
     SSKI,
     SUCCINYLCHOLINE,
+    SUCRALFATE,
     TAMSULOSIN,
     TENECTEPLASE,
     TDF_FTC,
