@@ -3491,7 +3491,7 @@ body.critical-actions-open {
   /* position: sticky disabled - overlapped toggle fields when scrolling */
   /* top: 56px; */
   /* z-index: 90; */
-  margin: 0 0 16px 0;
+  margin: 0 auto 16px auto;
   border-radius: 16px;
 }
 
