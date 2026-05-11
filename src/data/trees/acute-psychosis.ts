@@ -219,6 +219,7 @@ export const ACUTE_PSYCHOSIS_NODES: DecisionNode[] = [
     recommendation: 'Psychiatric consultation and early intervention are recommended for first-break psychosis. Admit for safety, grave disability, severe symptoms, medical instability, or unreliable support/follow-up.',
     confidence: 'recommended',
     summary: 'Disposition: admit for safety/medical instability/grave disability; discharge only with low risk, support, and rapid follow-up.',
+    citation: [1, 4, 9],
   },
 
 ];

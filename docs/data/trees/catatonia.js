@@ -174,6 +174,7 @@ export const CATATONIA_NODES = [
         recommendation: 'Admit all catatonia patients. ICU if malignant features. Continue scheduled lorazepam, DVT prophylaxis, consider ECT if benzo-resistant.',
         confidence: 'recommended',
         summary: 'Admit for lorazepam titration, etiology workup. ICU if malignant/excited.',
+        citation: [3, 4, 5],
     },
 ];
 export const CATATONIA_MODULE_LABELS = [

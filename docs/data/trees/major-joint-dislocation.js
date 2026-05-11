@@ -3,6 +3,13 @@
 // Sources: AAOS, EAST Guidelines, Roberts & Hedges
 // 6 modules: Assessment → Vascular Check → Hip → Knee → Ankle → Post-Reduction
 // ~22 nodes
+export const MAJOR_JOINT_DISLOCATION_CRITICAL_ACTIONS = [
+    { text: 'Document neurovascular exam BEFORE reduction: pulses, sensation, motor, skin', nodeId: 'mjd-vascular' },
+    { text: 'Knee dislocation = popliteal artery injury until proven otherwise (ABI + vascular surgery)', nodeId: 'mjd-knee-vascular' },
+    { text: 'Hip reduction within 6 hours to minimize AVN risk', nodeId: 'mjd-hip-posterior' },
+    { text: 'Reassess neurovascular status AFTER every reduction attempt', nodeId: 'mjd-post-reduction' },
+    { text: 'Vascular surgery emergency consult for any pulse deficit or ABI <0.9', nodeId: 'mjd-vascular-emergency' },
+];
 export const MAJOR_JOINT_DISLOCATION_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT

@@ -282,5 +282,6 @@ export const PEDS_FB_NODES = [
         recommendation: 'Discharge or admit per disposition criteria with appropriate follow-up.',
         confidence: 'definitive',
         summary: 'Document everything — witness, object, time, mitigation, education',
+        citation: [1, 2, 16],
     },
 ];

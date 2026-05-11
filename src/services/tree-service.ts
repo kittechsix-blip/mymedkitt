@@ -1188,7 +1188,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'major-joint-dislocation': async () => {
       const m = await import('../data/trees/major-joint-dislocation.js');
-      return { nodes: m.MAJOR_JOINT_DISLOCATION_NODES, entryNodeId: 'mjd-start', categoryId: 'orthopedics', moduleLabels: m.MAJOR_JOINT_DISLOCATION_MODULE_LABELS, citations: m.MAJOR_JOINT_DISLOCATION_CITATIONS };
+      return { nodes: m.MAJOR_JOINT_DISLOCATION_NODES, entryNodeId: 'mjd-start', categoryId: 'orthopedics', moduleLabels: m.MAJOR_JOINT_DISLOCATION_MODULE_LABELS, citations: m.MAJOR_JOINT_DISLOCATION_CITATIONS, criticalActions: m.MAJOR_JOINT_DISLOCATION_CRITICAL_ACTIONS };
     },
     'altitude-sickness': async () => {
       const m = await import('../data/trees/altitude-sickness.js');
