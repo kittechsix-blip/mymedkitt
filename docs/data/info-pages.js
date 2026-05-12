@@ -20447,9 +20447,9 @@ const THORAC_PERICARDIUM_PAGE = {
     title: 'Pericardium',
     subtitle: 'Avoid phrenic nerve',
     image: {
-        src: 'images/thoracotomy/chest-heart-cross-section.svg',
-        alt: 'Thoracic cross-section with heart',
-        caption: 'Thoracic cross-section reference. Wikimedia Commons.',
+        src: 'images/thoracotomy/pericardium-phrenic-avoid.svg',
+        alt: 'Pericardial incision landmark showing the phrenic nerve and safe incision line',
+        caption: 'Pericardiotomy landmark: identify the phrenic nerve and incise anterior/medial to it.',
     },
     sections: [
         {

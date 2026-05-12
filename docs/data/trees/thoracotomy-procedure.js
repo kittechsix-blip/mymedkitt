@@ -107,9 +107,9 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         citation: [3, 4],
         images: [
             {
-                src: 'images/thoracotomy/chest-heart-cross-section.svg',
-                alt: 'Cross-sectional thoracic anatomy showing heart position',
-                caption: 'Heart/pericardium orientation during thoracic exposure. Wikimedia Commons.',
+                src: 'images/thoracotomy/pericardium-phrenic-avoid.svg',
+                alt: 'Pericardial incision landmark showing the phrenic nerve and safe incision line',
+                caption: 'Pericardiotomy landmark: identify the phrenic nerve and incise anterior/medial to it.',
             },
         ],
         next: 'thorac-cardiac-control',
