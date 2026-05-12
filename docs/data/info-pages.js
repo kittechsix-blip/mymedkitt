@@ -21108,12 +21108,48 @@ const PD_BRIDGE_DECISION_PAGE = {
         { num: 2, text: 'Szeto CC et al. ISPD Catheter-Related Infection Recommendations: 2017 Update. Perit Dial Int. 2017;37(2):141-154.' },
     ],
 };
+const PD_DRAIN_PROCEDURE_PAGE = {
+    id: 'pd-drain-procedure',
+    title: 'ED Procedure: Drain PD Fluid Safely',
+    subtitle: 'Using the existing PD catheter — diagnostic + therapeutic',
+    sections: [
+        {
+            heading: 'When to Drain in the ED',
+            body: '• **Suspected peritonitis** — need effluent for cell count + culture (ISPD 2-of-3 criteria).\n• **Volume overload / dyspnea** — therapeutic decompression while arranging HD bridge.\n• **Suspected hemoperitoneum** — diagnostic drain (note color).\n• **Suspected dialysate leak / hydrothorax** — drain dry before imaging.\n• **Pre-imaging** — most radiologists prefer dry abdomen for CT.\n\n**Do NOT drain emergently** if the patient is actively exchanging at home with no symptoms and you do not need the fluid for diagnosis. Talk to nephrology first.',
+        },
+        {
+            heading: 'Equipment Checklist',
+            body: '• PD transfer set already attached to patient (or sterile new transfer set if disconnected)\n• Empty drain bag (5 L preferred) — gravity drainage\n• Two pairs sterile gloves + surgical mask + cap (for you and the patient)\n• Chlorhexidine 2% swabs\n• Sterile drape\n• 4×4 gauze\n• 3 sterile specimen containers (cell count + Gram stain + culture)\n• 2 blood culture bottles (aerobic + anaerobic) for the **direct inoculation** technique [1]\n• 10 mL syringe + 18 g needle for sampling\n• Heparinized green-top tube if hemoperitoneum suspected (rules out clotting bias)\n\n**Sterile-to-sterile rule:** any time the transfer set is opened, double-mask + sterile gloves. PD peritonitis is overwhelmingly touch contamination.',
+        },
+        {
+            heading: 'Step-by-Step',
+            body: '1. **Position** — patient supine or semi-recumbent. Bag below the level of the abdomen (gravity drainage).\n2. **Mask + cap on patient and operator.** Wash hands. Open sterile field.\n3. **Inspect transfer set** for cracks, soiling. Wipe the connection port with chlorhexidine ×30 s, allow to dry.\n4. **Connect** the empty drain bag to the patient outflow port using the existing twist-clamp / spike per the patient\'s system (Baxter HomeChoice, Fresenius Liberty, etc.).\n5. **Open the drain clamp.** Effluent should flow 200–300 mL/min. Total drain volume is typically 1.5–2.5 L over 10–20 min.\n6. **Sample effluent at mid-stream** — not first 10 mL (catheter contaminants) and not last 50 mL (sediment).\n   • 3 mL into purple-top EDTA tube → cell count + differential (must be dwelled ≥2 h to be valid)\n   • 3 mL into clean tube → Gram stain\n   • **≥5 mL directly into each blood culture bottle** (aerobic + anaerobic) — increases yield from 50% to 80–90% [1]\n   • 3 mL into clean tube → AFB / fungal if indicated\n7. **Close the clamp** when bag stops filling. Document drain volume, color, clarity.\n8. **Cap the transfer set** with a fresh povidone-iodine MiniCap or equivalent (do not leave open).\n9. **Disposition decision:** Do NOT refill if peritonitis suspected — empiric IP antibiotics will be added at the next instill (see [pd-empiric-abx](#/calculator/pd-empiric-abx)). If just diagnostic and patient is stable, nephrology may instruct you to instill a fresh bag.',
+        },
+        {
+            heading: 'Effluent Inspection — What You See',
+            body: '• **Clear / straw yellow** → normal effluent. Cell count <100/µL. Look elsewhere.\n• **Cloudy / hazy** → peritonitis until proven otherwise. WBC >100/µL with >50% PMN confirms.\n• **Frankly bloody** → hemoperitoneum. Send hematocrit, type/screen. Most causes benign (menses, ovarian cyst, exercise) but assess for visceral rupture if hemodynamic change.\n• **Brown / fecaloid** → bowel perforation. Surgical emergency. CT abd/pelvis + broad-spectrum IV abx (NOT just IP) + general surgery now.\n• **Chylous / milky** → triglyceride-rich. Consider lymphatic leak, EPS, calcium channel blocker effect.\n• **Bilious** → cholecystitis with rupture or biliary-peritoneal fistula. Surgical consult.',
+        },
+        {
+            heading: 'Pitfalls + Safety',
+            body: '• **Never re-use a drain bag.** Single-use only.\n• **Never disconnect the transfer set without masking.** ~30% of peritonitis is touch contamination.\n• **Cell count requires ≥2 h dwell** — if patient is on rapid APD cycles (1 h dwells), the WBC will be falsely low. Note dwell time on the lab requisition.\n• **Direct inoculation into blood culture bottles is mandatory** for adequate yield — do NOT just send effluent in a urine cup [1].\n• **If the patient came in mid-exchange:** drain what is in, do not abort an instill in progress (risk of overfill leak + pain).\n• **Hypotension on drain:** rare but possible in volume-depleted patients. Slow the drain by partially clamping; check BP.\n• **Catheter dysfunction during the drain:** if outflow stops at <50% of expected, see [pd-outflow](#/info/pd-outflow) — most likely constipation or fibrin plug.',
+        },
+        {
+            heading: 'Hand-Off Note Template',
+            body: '"PD effluent drained at [time]. Volume [mL]. Appearance [color/clarity]. Effluent cell count + diff sent, ≥5 mL inoculated into aerobic + anaerobic blood culture bottles, Gram stain pending. Empiric IP [cefazolin/vancomycin + ceftazidime/gentamicin OR cefepime monotherapy] [dose] administered at [time] via [bag/syringe technique]. Heparin 500 U/L added. Next dwell ≥6 h. Nephrology aware."',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Li PK et al. ISPD peritonitis guideline recommendations: 2022 update. Perit Dial Int. 2022;42(2):110-153.' },
+        { num: 2, text: 'Szeto CC et al. ISPD Catheter-Related Infection Recommendations: 2017 Update. Perit Dial Int. 2017;37(2):141-154.' },
+    ],
+};
 export const INFO_PAGES = {
     // Peritoneal Dialysis
     'pd-summary': PD_SUMMARY_PAGE,
     'pd-diff': PD_DIFF_PAGE,
     'pd-ip-abx-table': PD_IP_ABX_TABLE_PAGE,
     'pd-bridge-decision': PD_BRIDGE_DECISION_PAGE,
+    'pd-drain-procedure': PD_DRAIN_PROCEDURE_PAGE,
     // Traumatic Arrest / Resuscitative Thoracotomy
     'ta-steps': TA_STEPS_PAGE,
     'ta-hott': TA_HOTT_PAGE,

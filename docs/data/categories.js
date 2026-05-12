@@ -1300,10 +1300,10 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'peritoneal-dialysis',
                 title: 'Peritoneal Dialysis Complications',
-                subtitle: 'Peritonitis \u2192 Catheter \u2192 Mechanical \u2192 Metabolic \u2192 Severe/Late \u2192 Disposition',
+                subtitle: 'Drain Procedure \u2192 Peritonitis \u2192 Catheter \u2192 Mechanical \u2192 Metabolic \u2192 Severe/Late \u2192 Disposition',
                 categoryId: 'nephro-rheum-endo',
-                version: '1.0',
-                nodeCount: 28,
+                version: '1.1',
+                nodeCount: 29,
                 entryNodeId: 'pd-start',
             }
         ],

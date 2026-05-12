@@ -1780,6 +1780,16 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'bromocriptine', label: 'Bromo', icon: '💊', action: 'jump', target: 'nms-bromocriptine' },
     { id: 'vs-ss', label: 'vs SS', icon: '🔀', action: 'jump', target: 'nms-vs-ss' },
   ],
+  'peritoneal-dialysis': [
+    { id: 'drain', label: 'Drain', icon: '💧', action: 'overlay', target: 'pd-drain-procedure' },
+    { id: 'dx', label: 'Dx', icon: '🧪', action: 'calculator', target: 'pd-peritonitis-dx' },
+    { id: 'empiric', label: 'Empiric Abx', icon: '💉', action: 'calculator', target: 'pd-empiric-abx' },
+    { id: 'ip-table', label: 'IP Abx Table', icon: '📋', action: 'overlay', target: 'pd-ip-abx-table' },
+    { id: 'diff', label: 'Cloudy Ddx', icon: '☁️', action: 'overlay', target: 'pd-diff' },
+    { id: 'bridge', label: 'HD Bridge', icon: '🔀', action: 'calculator', target: 'pd-hd-bridge' },
+    { id: 'bridge-info', label: 'Bridge Info', icon: '🏥', action: 'overlay', target: 'pd-bridge-decision' },
+    { id: 'summary', label: 'Summary', icon: '📖', action: 'overlay', target: 'pd-summary' },
+  ],
 };
 
 // Stop button appended automatically to every consult

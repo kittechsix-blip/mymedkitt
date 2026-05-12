@@ -51,8 +51,22 @@ export const PERITONEAL_DIALYSIS_NODES = [
                 description: 'Hemoperitoneum, EPS, surgical abdomen, or PD failure.',
                 next: 'pd-severe',
             },
+            {
+                label: 'How Do I Safely Drain PD Fluid in the ED?',
+                description: 'Step-by-step procedure for diagnostic + therapeutic drainage using the existing catheter.',
+                next: 'pd-drain',
+            },
         ],
         summary: 'Always drain a fresh exchange on arrival — the effluent is the diagnostic specimen.',
+    },
+    {
+        id: 'pd-drain',
+        type: 'info',
+        module: 1,
+        title: 'ED Procedure: Drain PD Fluid Safely',
+        body: '**The PD catheter is already in place — your job is to use it correctly, sterilely, and capture the right specimens.**\n\nQuick steps:\n1. **Mask + cap on you AND the patient.** Sterile gloves.\n2. Wipe transfer-set connection with chlorhexidine ×30 s.\n3. Connect an empty drain bag to the outflow port. Bag below abdomen.\n4. Open clamp → drain by gravity (200–300 mL/min, total 1.5–2.5 L over 10–20 min).\n5. **Sample mid-stream effluent:**\n   • 3 mL purple-top EDTA → cell count + diff (dwell must be ≥2 h)\n   • Gram stain tube\n   • **≥5 mL into BOTH aerobic + anaerobic blood culture bottles directly at bedside** — culture yield 80–90% vs 50% with cup sampling [1]\n6. Close clamp. Cap transfer set with fresh povidone-iodine MiniCap.\n7. **Do not refill** if peritonitis suspected — next instill should include empiric IP antibiotics + heparin 500 U/L.\n\n**Full procedural reference, equipment list, and pitfalls:** [Drain Procedure Details](#/info/pd-drain-procedure)\n\n**Effluent color tells you a lot:**\n• Clear → look elsewhere\n• Cloudy → peritonitis until proven otherwise\n• Bloody → hemoperitoneum workup\n• Brown/fecaloid → bowel perforation → surgical emergency\n• Chylous → lymphatic / EPS / CCB effect',
+        citation: [1, 2],
+        next: 'pd-peritonitis-dx',
     },
     // =====================================================================
     // MODULE 2: PD-ASSOCIATED PERITONITIS
@@ -62,7 +76,7 @@ export const PERITONEAL_DIALYSIS_NODES = [
         type: 'question',
         module: 2,
         title: 'Diagnose PD-Associated Peritonitis',
-        body: '**ISPD diagnostic criteria — need 2 of 3:**\n1. Clinical features (abdominal pain ± fever)\n2. Cloudy effluent with **WBC >100/µL** after ≥2 h dwell, **>50% PMN**\n3. Positive effluent culture\n\n**Specimen handling matters.** Inoculate **5–10 mL of effluent directly into two blood culture bottles** at the bedside — this raises culture yield from <50% to >80%. Send a separate sample for cell count + Gram stain. [1][2]\n\n[Cloudy Effluent Differential](#/info/pd-diff)',
+        body: '**ISPD diagnostic criteria — need 2 of 3:**\n1. Clinical features (abdominal pain ± fever)\n2. Cloudy effluent with **WBC >100/µL** after ≥2 h dwell, **>50% PMN**\n3. Positive effluent culture\n\n**Specimen handling matters.** Inoculate **5–10 mL of effluent directly into two blood culture bottles** at the bedside — this raises culture yield from <50% to >80%. Send a separate sample for cell count + Gram stain. [1][2]\n\n[Cloudy Effluent Differential](#/info/pd-diff)\n\n[How to Safely Drain PD Fluid in the ED](#/info/pd-drain-procedure)',
         citation: [1, 2, 7],
         calculatorLinks: [
             { id: 'pd-peritonitis-dx', label: 'Dx Criteria Tool' },
