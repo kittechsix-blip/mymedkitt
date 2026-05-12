@@ -36,6 +36,40 @@ const SUPRAGLOTTIC_AIRWAY_STOP: InfoPage = {
   citations: [],
 };
 
+const THORACOTOMY_PROCEDURE_STOP: InfoPage = {
+  id: 'thoracotomy-procedure-stop',
+  title: 'Thoracotomy Procedure - Do NOT',
+  subtitle: 'Critical pitfalls during resuscitative thoracotomy',
+  sections: [
+    {
+      heading: 'Do NOT perform thoracotomy outside survivable criteria',
+      body: 'Confirm mechanism, signs of life, CPR duration, rhythm, and cardiac motion when available. Avoid nonbeneficial thoracotomy when there is no realistic path to reversible physiology or definitive source control. [See indications](#/info/thorac-indications).',
+    },
+    {
+      heading: 'Do NOT let procedure setup delay HOTT treatment',
+      body: 'Airway/oxygenation, bilateral chest decompression, hemorrhage control/MTP, and tamponade decision-making should run in parallel. Thoracotomy is not a replacement for correcting the other traumatic arrest causes. [Open traumatic arrest HOTT tool](#/info/ta-hott).',
+    },
+    {
+      heading: 'Do NOT make a small incision',
+      body: 'A limited incision slows exposure and delays the lifesaving steps. Make a large left anterolateral incision at the 4th/5th intercostal space and extend to clamshell when exposure is inadequate or right chest/mediastinal access is needed. [See incision](#/info/thorac-incision).',
+    },
+    {
+      heading: 'Do NOT injure the phrenic nerve during pericardiotomy',
+      body: 'Identify the phrenic nerve on the lateral pericardium. Tent the pericardium anterior to the nerve, make a controlled opening, then extend longitudinally from apex toward aortic root while staying anterior to the nerve. [See pericardium](#/info/thorac-pericardium).',
+    },
+    {
+      heading: 'Do NOT forget this is a bridge to source control',
+      body: 'Relieving tamponade, temporary cardiac wound control, open massage, and aortic cross-clamping are temporizing maneuvers. Move immediately to OR/trauma surgery for definitive repair when there is ROSC or physiologic response.',
+    },
+    {
+      heading: 'Do NOT continue indefinitely without response',
+      body: 'If thoracotomy does not reveal or correct a survivable cause, cardiac motion remains absent, and there is no physiologic response after reversible causes are addressed, transition to termination per local traumatic arrest policy.',
+    },
+  ],
+  citations: [],
+};
+
 export const STOP_PAGES_15: Record<string, InfoPage> = {
   'supraglottic-airway-stop': SUPRAGLOTTIC_AIRWAY_STOP,
+  'thoracotomy-procedure-stop': THORACOTOMY_PROCEDURE_STOP,
 };
