@@ -5833,3 +5833,188 @@ body.critical-actions-open {
   line-height: 1.5;
 }
 .learn-shelf__love-list li { margin-bottom: 4px; }
+
+/* ============================================================
+   Share & Install Card (dashboard) + Modal
+   ============================================================ */
+.dashboard-share-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: calc(100% - 32px);
+  margin: 8px 16px 16px;
+  padding: 14px 56px 14px 16px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #EEF4FF 100%);
+  border: 2px solid #4a90d9;
+  border-radius: 16px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(74, 144, 217, 0.18);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.dashboard-share-card:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(74, 144, 217, 0.18);
+}
+.dashboard-share-card__icon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #4a90d9;
+  color: #FFFFFF;
+}
+.dashboard-share-card__body { flex: 1 1 auto; min-width: 0; }
+.dashboard-share-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+.dashboard-share-card__sub {
+  font-size: 12px;
+  color: var(--color-text-primary);
+  opacity: 0.75;
+  line-height: 1.4;
+}
+.dashboard-share-card__arrow {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #4a90d9;
+  font-weight: 700;
+}
+
+/* ---- Modal ---- */
+.share-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 26, 0.7);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+.share-modal {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 24px 20px 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  color: var(--color-text-primary);
+}
+.share-modal__close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  font-size: 26px;
+  line-height: 1;
+  color: #6b7280;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.share-modal__close:active { background: #f3f4f6; }
+.share-modal__title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+.share-modal__subtitle {
+  margin: 0 0 16px;
+  font-size: 13px;
+  text-align: center;
+  color: #4b5563;
+  line-height: 1.4;
+}
+.share-modal__qr-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  background: #FFFFFF;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+.share-modal__qr {
+  width: 240px;
+  height: 240px;
+  display: block;
+}
+.share-modal__url-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3f4f6;
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 14px;
+}
+.share-modal__url {
+  flex: 1 1 auto;
+  font-size: 12px;
+  color: #111827;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.share-modal__copy {
+  flex: 0 0 auto;
+  background: #4a90d9;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.share-modal__copy:active { transform: translateY(1px); }
+.share-modal__instructions {
+  background: #F9FAFB;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.share-modal__instructions-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.share-modal__steps {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #374151;
+}
+.share-modal__steps li { margin-bottom: 4px; }
+.share-modal__native-share {
+  width: 100%;
+  background: #111827;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.share-modal__native-share:active { transform: translateY(1px); }

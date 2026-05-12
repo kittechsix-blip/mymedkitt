@@ -10,6 +10,7 @@ import { getAllDrugs } from '../services/drug-service.js';
 import { getAllCalculators } from './calculator.js';
 import { buildSearchIndex, search, type SearchResult } from '../services/search-service.js';
 import { showDrugModal } from './drug-store.js';
+import { showShareModal } from './share-modal.js';
 
 /** Tool categories route to special pages instead of category view */
 const TOOL_ROUTES: Record<string, { route: string; getCount: () => number; unit: string }> = {
@@ -370,6 +371,48 @@ export function renderDashboard(container: HTMLElement): void {
     });
     dashboard.appendChild(unlockBtn);
   }
+
+  // ---- Share & Install card ----
+  const shareCard = document.createElement('button');
+  shareCard.className = 'dashboard-share-card';
+  shareCard.type = 'button';
+  shareCard.setAttribute('aria-label', 'Share myMedKitt — show QR code to install on another device');
+
+  const shareIcon = document.createElement('div');
+  shareIcon.className = 'dashboard-share-card__icon';
+  shareIcon.innerHTML = `
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="3" width="7" height="7" rx="1"/>
+      <rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/>
+      <path d="M14 14h3v3h-3zM18 18h3M14 21h3M21 14v3M21 21h0"/>
+    </svg>
+  `;
+  shareCard.appendChild(shareIcon);
+
+  const shareBody = document.createElement('div');
+  shareBody.className = 'dashboard-share-card__body';
+
+  const shareTitle = document.createElement('div');
+  shareTitle.className = 'dashboard-share-card__title';
+  shareTitle.textContent = 'Share & Install';
+  shareBody.appendChild(shareTitle);
+
+  const shareSub = document.createElement('div');
+  shareSub.className = 'dashboard-share-card__sub';
+  shareSub.textContent = 'Show the QR code so anyone can scan to install myMedKitt on their phone.';
+  shareBody.appendChild(shareSub);
+
+  shareCard.appendChild(shareBody);
+
+  const shareArrow = document.createElement('div');
+  shareArrow.className = 'dashboard-share-card__arrow';
+  shareArrow.textContent = '→';
+  shareArrow.setAttribute('aria-hidden', 'true');
+  shareCard.appendChild(shareArrow);
+
+  shareCard.addEventListener('click', () => showShareModal());
+  dashboard.appendChild(shareCard);
 
   // ---- Disclaimer ----
   const disclaimer = document.createElement('p');
