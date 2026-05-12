@@ -515,10 +515,11 @@ const CONSULT_STOP: InfoPage = {
 **Image sourcing during consult builds:**
 - Delegate image search to a subagent with explicit instruction: "CC0, Public Domain, or US Federal Government Work ONLY — no CC BY, no CC BY-SA, no NC, no ND."
 - Subagent must return direct URL + explicit license tag + verification evidence (curl HEAD + Commons page inspection) for every image
+- **Before build/deploy:** Show Andy the actual image or a clear preview for every new or changed consult image. Include source/license, exact planned placement, and why it improves clinical decision-making. Wait for explicit approval before committing/deploying.
 - Download to `docs/images/<tree-id>/`
 - Add `images` arrays to appropriate nodes with descriptive alt text and clinical captions
 - **Best-practice attribution in caption** even when not legally required (e.g., "NIH BioArt #421, NIAID — Public Domain"; "Gray's Anatomy, 1858 — Public Domain") — good hygiene, shows provenance
-- **At end of build, before deploy:** Present Andy with a summary of all images chosen — source, description, license, which node — for approval before committing
+- **Audit requirement:** Dr. Kitlowski must inspect images for anatomical correctness, laterality, labeling, clinical appropriateness, source/license, and whether they could mislead. Flow Rider must inspect loading, mobile readability, cropping, caption clarity, and whether the image helps at the exact decision point.
 
 **Image path:** ALL consult images go in `docs/images/<tree-id>/`. **NEVER use `docs/assets/images/`** — that directory is for app icons only. Node `images` arrays use `src: 'images/<tree-id>/filename.png'` which resolves relative to `docs/`. Existing consults (chest-tube, echo-epss, etc.) all follow this pattern.
 

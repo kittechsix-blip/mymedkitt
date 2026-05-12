@@ -10,7 +10,7 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         citation: [1, 2, 3],
         images: [
             {
-                src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+                src: 'images/thoracotomy/anterolateral-thoracotomy-incision.jpg',
                 alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
                 caption: 'Left anterolateral thoracotomy landmark: 4th/5th intercostal space toward the axilla.',
             },
@@ -72,7 +72,7 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         citation: [3, 4],
         images: [
             {
-                src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+                src: 'images/thoracotomy/anterolateral-thoracotomy-incision.jpg',
                 alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
                 caption: 'Left anterolateral thoracotomy landmark: 4th/5th intercostal space toward the axilla.',
             },
@@ -89,7 +89,7 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         citation: [3, 4],
         images: [
             {
-                src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+                src: 'images/thoracotomy/anterolateral-thoracotomy-incision.jpg',
                 alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
                 caption: 'Make a large left anterolateral incision; extend to clamshell if exposure is inadequate.',
             },
@@ -107,9 +107,9 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         citation: [3, 4],
         images: [
             {
-                src: 'images/thoracotomy/pericardium-phrenic-avoid.svg',
-                alt: 'Pericardial incision landmark showing the phrenic nerve and safe incision line',
-                caption: 'Pericardiotomy landmark: identify the phrenic nerve and incise anterior/medial to it.',
+                src: 'images/thoracotomy/pericardium-phrenic-nerve-photo.jpg',
+                alt: 'Pericardium opened parallel to the left phrenic nerve',
+                caption: 'Open the pericardium parallel/anterior to the left phrenic nerve.',
             },
         ],
         next: 'thorac-cardiac-control',

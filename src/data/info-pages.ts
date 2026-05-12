@@ -21286,7 +21286,7 @@ const THORAC_STEPS_PAGE: InfoPage = {
   title: 'Thoracotomy: 2-Minute Steps',
   subtitle: 'Read immediately before or during setup',
   image: {
-    src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+    src: 'images/thoracotomy/anterolateral-thoracotomy-incision.jpg',
     alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
     caption: 'Left anterolateral thoracotomy landmark: 4th/5th intercostal space toward the axilla.',
   },
@@ -21331,7 +21331,7 @@ const THORAC_INCISION_PAGE: InfoPage = {
   title: 'Incision / Entry',
   subtitle: 'Left anterolateral thoracotomy',
   image: {
-    src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+    src: 'images/thoracotomy/anterolateral-thoracotomy-incision.jpg',
     alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
     caption: 'Large left anterolateral incision along the 4th/5th intercostal space toward the axilla.',
   },
@@ -21350,9 +21350,9 @@ const THORAC_PERICARDIUM_PAGE: InfoPage = {
   title: 'Pericardium',
   subtitle: 'Avoid phrenic nerve',
   image: {
-    src: 'images/thoracotomy/pericardium-phrenic-avoid.svg',
-    alt: 'Pericardial incision landmark showing the phrenic nerve and safe incision line',
-    caption: 'Pericardiotomy landmark: identify the phrenic nerve and incise anterior/medial to it.',
+    src: 'images/thoracotomy/pericardium-phrenic-nerve-photo.jpg',
+    alt: 'Pericardium opened parallel to the left phrenic nerve',
+    caption: 'Open the pericardium parallel/anterior to the left phrenic nerve.',
   },
   sections: [
     {

@@ -115,6 +115,13 @@ Every clinical claim must be backed by `citation: [N]` pointing to real bibliogr
 ### 4. Info Pages for Reference Depth
 Move detailed lists, comparison tables, diagnostic criteria, and background material to info pages. Nodes should link to them, not duplicate their content.
 
+### 5. Image Approval Gate
+Any new or changed consult image, including open-source, public-domain, government, AI-generated, or user-provided images, must be shown to Andy before build/deploy. Provide the preview, source/license, exact planned placement, and why the image improves clinical decision-making. Do not silently add or swap clinical images. If an image is present without explicit Andy approval, stop and ask.
+
+Post-build audits must inspect every image:
+- Dr. Kitlowski: anatomical correctness, laterality, labeling, clinical appropriateness, source/license, and whether the image could mislead.
+- Flow Rider: image loading, mobile readability, cropping, caption clarity, and whether the image helps at that exact decision point.
+
 ## Registration Steps (after creating the tree file)
 
 1. **`src/data/trees/index.ts`** — add export line
