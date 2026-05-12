@@ -21286,9 +21286,9 @@ const THORAC_STEPS_PAGE: InfoPage = {
   title: 'Thoracotomy: 2-Minute Steps',
   subtitle: 'Read immediately before or during setup',
   image: {
-    src: 'images/thoracotomy/incisions-of-torso.svg',
-    alt: 'Thoracic incision diagram',
-    caption: 'Thoracic incision reference. Wikimedia Commons.',
+    src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+    alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
+    caption: 'Left anterolateral thoracotomy landmark: 4th/5th intercostal space toward the axilla.',
   },
   sections: [
     {
@@ -21331,9 +21331,9 @@ const THORAC_INCISION_PAGE: InfoPage = {
   title: 'Incision / Entry',
   subtitle: 'Left anterolateral thoracotomy',
   image: {
-    src: 'images/thoracotomy/surface-anatomy-heart.svg',
-    alt: 'Anterior chest surface anatomy of the heart',
-    caption: 'Surface anatomy of the heart. Wikimedia Commons.',
+    src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+    alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
+    caption: 'Large left anterolateral incision along the 4th/5th intercostal space toward the axilla.',
   },
   sections: [
     {

@@ -10,9 +10,9 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         citation: [1, 2, 3],
         images: [
             {
-                src: 'images/thoracotomy/incisions-of-torso.svg',
-                alt: 'Torso incision diagram showing thoracic incision options',
-                caption: 'Thoracic incision reference. Wikimedia Commons.',
+                src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+                alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
+                caption: 'Left anterolateral thoracotomy landmark: 4th/5th intercostal space toward the axilla.',
             },
         ],
         next: 'thorac-indications-check',
@@ -72,9 +72,9 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         citation: [3, 4],
         images: [
             {
-                src: 'images/thoracotomy/surface-anatomy-heart.svg',
-                alt: 'Surface anatomy of the heart on the anterior chest',
-                caption: 'Surface anatomy of the heart for thoracic orientation. Wikimedia Commons.',
+                src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+                alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
+                caption: 'Left anterolateral thoracotomy landmark: 4th/5th intercostal space toward the axilla.',
             },
         ],
         next: 'thorac-incision',
@@ -89,9 +89,9 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         citation: [3, 4],
         images: [
             {
-                src: 'images/thoracotomy/incisions-of-torso.svg',
-                alt: 'Thoracic incision diagram',
-                caption: 'Left anterolateral thoracotomy can be extended to clamshell for wider exposure. Wikimedia Commons.',
+                src: 'images/thoracotomy/left-anterolateral-thoracotomy.jpg',
+                alt: 'Left anterolateral thoracotomy incision landmark on the anterior chest',
+                caption: 'Make a large left anterolateral incision; extend to clamshell if exposure is inadequate.',
             },
         ],
         next: 'thorac-pericardium',
