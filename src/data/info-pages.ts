@@ -12903,7 +12903,7 @@ const DIC_ETIOLOGY_JUMP: InfoPage = {
     },
     {
       heading: '3. Obstetric DIC',
-      body: '\u2022 **Triggers:** placental abruption (most common), AFE, retained products, severe preeclampsia/HELLP, PPH, sepsis (chorioamnionitis, septic abortion)\n\u2022 **Phenotype:** rapid-onset, bleeding-dominant\n\u2022 **Key threshold:** fibrinogen \u22652 g/L (pregnant baseline is 4-6 g/L \u2014 not <1)\n\u2022 **Priorities:** definitive obstetric management, MTP 1:1:1, cryo early, TXA 1g IV within 3 hours (WOMAN trial), avoid heparin\n\n\u2192 Jump to: **dic-obstetric**',
+      body: '\u2022 **Triggers:** placental abruption (most common), Amniotic Fluid Embolism, retained products, severe preeclampsia/HELLP, PPH, sepsis (chorioamnionitis, septic abortion)\n\u2022 **Phenotype:** rapid-onset, bleeding-dominant\n\u2022 **Key threshold:** fibrinogen \u22652 g/L (pregnant baseline is 4-6 g/L \u2014 not <1)\n\u2022 **Priorities:** definitive obstetric management, MTP 1:1:1, cryo early, TXA 1g IV within 3 hours (WOMAN trial), avoid heparin\n\n\u2192 Jump to: **dic-obstetric**',
     },
     {
       heading: '4. Trauma-Induced Coagulopathy (TIC)',
@@ -15527,7 +15527,7 @@ const RH_ACLS_MODS: InfoPage = {
     },
     {
       heading: 'Reversible Causes — BEAU-CHOPS',
-      body: 'In addition to standard H\'s and T\'s, seek pregnancy-specific causes:\n• **B**leeding / DIC (placenta, atony, rupture, AFE-DIC)\n• **E**mbolism (PE, amniotic fluid embolism, air, fat)\n• **A**nesthetic complications (high spinal, LAST)\n• **U**terine atony\n• **C**ardiac disease (MI, PPCM, aortic dissection)\n• **H**ypertension (eclampsia, HELLP, ICH)\n• **O**ther standard H\'s and T\'s + Mg toxicity\n• **P**lacenta previa / abruption\n• **S**epsis\n\n[Full BEAU-CHOPS with treatments](#/info/rh-beauchops-details)',
+      body: 'In addition to standard H\'s and T\'s, seek pregnancy-specific causes:\n• **B**leeding / DIC (placenta, atony, rupture, Amniotic Fluid Embolism-DIC)\n• **E**mbolism (PE, amniotic fluid embolism, air, fat)\n• **A**nesthetic complications (high spinal, LAST)\n• **U**terine atony\n• **C**ardiac disease (MI, PPCM, aortic dissection)\n• **H**ypertension (eclampsia, HELLP, ICH)\n• **O**ther standard H\'s and T\'s + Mg toxicity\n• **P**lacenta previa / abruption\n• **S**epsis\n\n[Full BEAU-CHOPS with treatments](#/info/rh-beauchops-details)',
     },
   ],
   citations: [
@@ -15544,11 +15544,11 @@ const RH_BEAUCHOPS_DETAILS: InfoPage = {
   sections: [
     {
       heading: 'B — Bleeding / DIC',
-      body: '**CAUSES:**\n• Placental abruption, placenta previa, accreta\n• Uterine rupture (especially prior C-section)\n• Vaginal/cervical laceration\n• Postpartum atony hemorrhage\n• AFE-associated DIC\n\n**MANAGEMENT:**\n• Activate [Massive Transfusion Protocol](#/tree/massive-transfusion) — 1:1:1 pRBC:FFP:platelets\n• [TXA](#/drug/tranexamic-acid/postpartum hemorrhage) 1g IV over 10 min (within 3h of bleeding)\n• Fibrinogen replacement (cryoprecipitate) — goal >200 mg/dL\n• Surgical source control — OR emergent laparotomy',
+      body: '**CAUSES:**\n• Placental abruption, placenta previa, accreta\n• Uterine rupture (especially prior C-section)\n• Vaginal/cervical laceration\n• Postpartum atony hemorrhage\n• Amniotic Fluid Embolism-associated DIC\n\n**MANAGEMENT:**\n• Activate [Massive Transfusion Protocol](#/tree/massive-transfusion) — 1:1:1 pRBC:FFP:platelets\n• [TXA](#/drug/tranexamic-acid/postpartum hemorrhage) 1g IV over 10 min (within 3h of bleeding)\n• Fibrinogen replacement (cryoprecipitate) — goal >200 mg/dL\n• Surgical source control — OR emergent laparotomy',
     },
     {
       heading: 'E — Embolism',
-      body: '**PULMONARY EMBOLISM:**\n• 5-10x higher risk in pregnancy\n• [PE in Pregnancy](#/tree/pe-pregnancy)\n• Consider systemic thrombolysis if confirmed and arrested\n\n**AMNIOTIC FLUID EMBOLISM (AFE):**\n• Uniquely pregnancy-related\n• Sudden cardiovascular collapse + DIC + respiratory failure during labor/delivery or immediate postpartum\n• Mortality 40-60%\n• Treatment: supportive, MTP, consider ECMO if available\n• Case reports of atropine + ondansetron + ketorolac ("A-OK") with anecdotal benefit',
+      body: '**PULMONARY EMBOLISM:**\n• 5-10x higher risk in pregnancy\n• [PE in Pregnancy](#/tree/pe-pregnancy)\n• Consider systemic thrombolysis if confirmed and arrested\n\n**AMNIOTIC FLUID EMBOLISM:**\n• Uniquely pregnancy-related\n• Sudden cardiovascular collapse + DIC + respiratory failure during labor/delivery or immediate postpartum\n• Mortality 40-60%\n• Treatment: supportive, MTP, consider ECMO if available\n• Case reports of atropine + ondansetron + ketorolac ("A-OK") with anecdotal benefit',
     },
     {
       heading: 'A — Anesthetic Complications',
@@ -16321,7 +16321,7 @@ const PPH_FOUR_TS_INFO: InfoPage = {
     },
     {
       heading: 'Thrombin — Coagulopathy (<1% primary; common secondary)',
-      body: '**Clinical clue:** Oozing from IV sites, mucosal bleeding, petechiae, non-clotting blood.\n\n**Causes:**\n• Dilutional coagulopathy (large crystalloid or unbalanced resuscitation)\n• [DIC](#/node/pph-thrombin) — severe PPH, sepsis, abruption, IUFD\n• Amniotic fluid embolism (AFE) — cardiopulmonary collapse + DIC + respiratory failure\n• HELLP / severe preeclampsia\n• Pre-existing — vWD, hemophilia carrier, anticoagulation\n\n**Management:**\n• Balanced transfusion 1:1:1 (pRBC:FFP:platelets) — [MTP](#/node/pph-mtp)\n• Cryoprecipitate if fibrinogen <200 mg/dL\n• Calcium gluconate 1-2 g per 4 units blood\n• Keep warm, correct acidosis, treat the lethal triad',
+      body: '**Clinical clue:** Oozing from IV sites, mucosal bleeding, petechiae, non-clotting blood.\n\n**Causes:**\n• Dilutional coagulopathy (large crystalloid or unbalanced resuscitation)\n• [DIC](#/node/pph-thrombin) — severe PPH, sepsis, abruption, IUFD\n• Amniotic Fluid Embolism — cardiopulmonary collapse + DIC + respiratory failure\n• HELLP / severe preeclampsia\n• Pre-existing — vWD, hemophilia carrier, anticoagulation\n\n**Management:**\n• Balanced transfusion 1:1:1 (pRBC:FFP:platelets) — [MTP](#/node/pph-mtp)\n• Cryoprecipitate if fibrinogen <200 mg/dL\n• Calcium gluconate 1-2 g per 4 units blood\n• Keep warm, correct acidosis, treat the lethal triad',
     },
     {
       heading: 'Key Teaching Point',
@@ -16621,7 +16621,7 @@ const PPH_STOP: InfoPage = {
 
 const AFE_STEPS_SUMMARY: InfoPage = {
   id: 'afe-steps-summary',
-  title: 'AFE Steps Summary',
+  title: 'Amniotic Fluid Embolism Steps Summary',
   subtitle: 'First-2-minute resuscitation checklist',
   sections: [
     {
@@ -16646,11 +16646,11 @@ const AFE_STEPS_SUMMARY: InfoPage = {
     },
     {
       heading: 'Parallel — DIC / MTP',
-      body: '• [Activate MTP — do not wait for labs; 1:1:1 PRBC:FFP:platelets](#/node/afe-mtp)\n• [Fibrinogen target ≥150–200 mg/dL — cryoprecipitate 10 U or fibrinogen concentrate 2–4 g](#/node/afe-mtp)\n• [TXA 1 g IV over 10 min × 2 doses (second at 30 min if bleeding) — <3 h window](#/node/afe-txa)\n• [Avoid rFVIIa — thrombotic death in AFE series](#/node/afe-txa)',
+      body: '• [Activate MTP — do not wait for labs; 1:1:1 PRBC:FFP:platelets](#/node/afe-mtp)\n• [Fibrinogen target ≥150–200 mg/dL — cryoprecipitate 10 U or fibrinogen concentrate 2–4 g](#/node/afe-mtp)\n• [TXA 1 g IV over 10 min × 2 doses (second at 30 min if bleeding) — <3 h window](#/node/afe-txa)\n• [Avoid rFVIIa — thrombotic death in Amniotic Fluid Embolism series](#/node/afe-txa)',
     },
     {
       heading: 'Refractory — ECMO',
-      body: '• [Call ECMO team DURING resus, not after — survival 60–80% with vs ~30% without](#/node/afe-ecmo)\n• [Impella RP / RVAD if ECMO delayed](#/node/afe-ecmo)\n• [Extended CPR in AFE has produced neurologically intact survivors — do not terminate early](#/node/afe-refractory)',
+      body: '• [Call ECMO team DURING resus, not after — survival 60–80% with vs ~30% without](#/node/afe-ecmo)\n• [Impella RP / RVAD if ECMO delayed](#/node/afe-ecmo)\n• [Extended CPR in Amniotic Fluid Embolism has produced neurologically intact survivors — do not terminate early](#/node/afe-refractory)',
     },
     {
       heading: 'Post-ROSC',
@@ -16670,7 +16670,7 @@ const AFE_CRITERIA: InfoPage = {
   sections: [
     {
       heading: 'All 4 criteria required (Clark 2016 / SMFM)',
-      body: '**1. Sudden cardiorespiratory arrest OR hypotension (SBP <90) + respiratory compromise** (dyspnea, cyanosis, SpO₂ <90%)\n\n**2. Documented DIC** (ISTH obstetric score ≥3) after the initial event — BEFORE significant hemorrhage-related dilution\n\n**3. Clinical onset during labor, C-section, D&E, or within 30 minutes postpartum**\n\n**4. No other clinical explanation** for findings\n\n**AFE is a clinical diagnosis of exclusion** — treat empirically, meet criteria retrospectively. Do NOT delay resuscitation to establish the diagnosis.',
+      body: '**1. Sudden cardiorespiratory arrest OR hypotension (SBP <90) + respiratory compromise** (dyspnea, cyanosis, SpO₂ <90%)\n\n**2. Documented DIC** (ISTH obstetric score ≥3) after the initial event — BEFORE significant hemorrhage-related dilution\n\n**3. Clinical onset during labor, C-section, D&E, or within 30 minutes postpartum**\n\n**4. No other clinical explanation** for findings\n\n**Amniotic Fluid Embolism is a clinical diagnosis of exclusion** — treat empirically, meet criteria retrospectively. Do NOT delay resuscitation to establish the diagnosis.',
     },
     {
       heading: 'Classic triad',
@@ -16735,7 +16735,7 @@ const AFE_ACLS_PREGNANCY: InfoPage = {
 const AFE_AOK: InfoPage = {
   id: 'afe-aok',
   title: 'A-O-K + Anaphylactoid Therapy',
-  subtitle: 'Pharmacologic adjuncts for AFE — not a substitute for ACLS',
+  subtitle: 'Pharmacologic adjuncts for Amniotic Fluid Embolism — not a substitute for ACLS',
   sections: [
     {
       heading: 'A-O-K Protocol (Rezai 2017)',
@@ -16743,7 +16743,7 @@ const AFE_AOK: InfoPage = {
     },
     {
       heading: 'Alternative: 50-50-500 Anaphylactoid Protocol',
-      body: '**Based on the older anaphylactoid hypothesis** for AFE pathophysiology (complement activation + mast cell degranulation). Still reasonable if A-O-K drugs unavailable or as an addition.\n\n• **[Diphenhydramine](#/drug/diphenhydramine/amniotic fluid embolism) 50 mg IV** — H1 antihistamine\n• **[Famotidine](#/drug/famotidine/amniotic fluid embolism) 50 mg IV** (or 20 mg per hospital formulary) — H2 antihistamine\n• **[Hydrocortisone](#/drug/hydrocortisone/amniotic fluid embolism) 500 mg IV** — stress-dose corticosteroid',
+      body: '**Based on the older anaphylactoid hypothesis** for Amniotic Fluid Embolism pathophysiology (complement activation + mast cell degranulation). Still reasonable if A-O-K drugs unavailable or as an addition.\n\n• **[Diphenhydramine](#/drug/diphenhydramine/amniotic fluid embolism) 50 mg IV** — H1 antihistamine\n• **[Famotidine](#/drug/famotidine/amniotic fluid embolism) 50 mg IV** (or 20 mg per hospital formulary) — H2 antihistamine\n• **[Hydrocortisone](#/drug/hydrocortisone/amniotic fluid embolism) 500 mg IV** — stress-dose corticosteroid',
     },
     {
       heading: 'What these drugs DO NOT replace',
@@ -16751,7 +16751,7 @@ const AFE_AOK: InfoPage = {
     },
     {
       heading: 'Evidence quality',
-      body: 'Both protocols are based on **case reports and small case series**. No RCTs exist — AFE is too rare (~1:50,000 deliveries) for randomization. The mechanistic rationale is plausible, the drugs are cheap and available, and the risk profile in the peri-arrest setting is favorable.\n\n**Rezai 2017** reports maternal and neonatal survival in an atypical AFE case using A-O-K. Subsequent case reports have shown varying outcomes.',
+      body: 'Both protocols are based on **case reports and small case series**. No RCTs exist — Amniotic Fluid Embolism is too rare (~1:50,000 deliveries) for randomization. The mechanistic rationale is plausible, the drugs are cheap and available, and the risk profile in the peri-arrest setting is favorable.\n\n**Rezai 2017** reports maternal and neonatal survival in an atypical Amniotic Fluid Embolism case using A-O-K. Subsequent case reports have shown varying outcomes.',
     },
   ],
   citations: [
@@ -16767,7 +16767,7 @@ const AFE_MTP_INFO: InfoPage = {
   sections: [
     {
       heading: 'Activate MTP at diagnosis',
-      body: '**Do NOT wait for labs.** AFE coagulopathy is fibrinolytic PLUS consumptive — it will develop rapidly.\n\n**Initial order set:**\n• **PRBC : FFP : Platelets = 1:1:1** (standard MTP pack)\n• **[Cryoprecipitate](#/drug/cryoprecipitate/amniotic fluid embolism) 10 units** (or 2 pooled bags)\n• **Fibrinogen concentrate 2–4 g IV** if available (faster, volume-sparing)\n• **[Tranexamic acid (TXA)](#/drug/tranexamic-acid/amniotic fluid embolism) 1 g IV over 10 min**\n• **Type and crossmatch 6 U PRBC** if not already',
+      body: '**Do NOT wait for labs.** Amniotic Fluid Embolism coagulopathy is fibrinolytic PLUS consumptive — it will develop rapidly.\n\n**Initial order set:**\n• **PRBC : FFP : Platelets = 1:1:1** (standard MTP pack)\n• **[Cryoprecipitate](#/drug/cryoprecipitate/amniotic fluid embolism) 10 units** (or 2 pooled bags)\n• **Fibrinogen concentrate 2–4 g IV** if available (faster, volume-sparing)\n• **[Tranexamic acid (TXA)](#/drug/tranexamic-acid/amniotic fluid embolism) 1 g IV over 10 min**\n• **Type and crossmatch 6 U PRBC** if not already',
     },
     {
       heading: 'Targets (obstetric thresholds)',
@@ -16775,7 +16775,7 @@ const AFE_MTP_INFO: InfoPage = {
     },
     {
       heading: 'TXA dosing',
-      body: '**[Tranexamic acid (TXA)](#/drug/tranexamic-acid/amniotic fluid embolism):**\n• **1 g IV over 10 min** → **repeat 1 g IV over 10 min at 30 minutes** if bleeding continues\n• Must be given <3 h from onset of hemorrhage/AFE — effect diminishes after\n• WOMAN trial (Lancet 2017): NNT 267 for death from bleeding in PPH; no increase in thromboembolic events\n• Do NOT rapid-push — causes hypotension',
+      body: '**[Tranexamic acid (TXA)](#/drug/tranexamic-acid/amniotic fluid embolism):**\n• **1 g IV over 10 min** → **repeat 1 g IV over 10 min at 30 minutes** if bleeding continues\n• Must be given <3 h from onset of hemorrhage/Amniotic Fluid Embolism — effect diminishes after\n• WOMAN trial (Lancet 2017): NNT 267 for death from bleeding in PPH; no increase in thromboembolic events\n• Do NOT rapid-push — causes hypotension',
     },
     {
       heading: 'TEG/ROTEM-guided resuscitation',
@@ -16783,7 +16783,7 @@ const AFE_MTP_INFO: InfoPage = {
     },
     {
       heading: 'Drugs to AVOID',
-      body: '**Avoid recombinant factor VIIa (rFVIIa)** — Leighton 2011 systematic review showed increased thrombotic death in AFE patients receiving rFVIIa. Reserve only for refractory bleeding AFTER maximal standard MTP has failed AND surgical bleeding is controlled.\n\n**Avoid prothrombin complex concentrate (PCC) routinely** in AFE — unlike in anticoagulation reversal, it adds procoagulant load to an already prothrombotic complication. TEG-guided use only.\n\n**Avoid crystalloid overload** — dilutes remaining factors, worsens RV distension, and triggers abdominal compartment syndrome if >3 L given.',
+      body: '**Avoid recombinant factor VIIa (rFVIIa)** — Leighton 2011 systematic review showed increased thrombotic death in Amniotic Fluid Embolism patients receiving rFVIIa. Reserve only for refractory bleeding AFTER maximal standard MTP has failed AND surgical bleeding is controlled.\n\n**Avoid prothrombin complex concentrate (PCC) routinely** in Amniotic Fluid Embolism — unlike in anticoagulation reversal, it adds procoagulant load to an already prothrombotic complication. TEG-guided use only.\n\n**Avoid crystalloid overload** — dilutes remaining factors, worsens RV distension, and triggers abdominal compartment syndrome if >3 L given.',
     },
     {
       heading: 'Mechanical hemostasis (uterine source)',
@@ -16799,8 +16799,8 @@ const AFE_MTP_INFO: InfoPage = {
 
 const AFE_STOP: InfoPage = {
   id: 'afe-stop',
-  title: 'AFE — Do NOT',
-  subtitle: 'Critical pitfalls that kill AFE patients',
+  title: 'Amniotic Fluid Embolism — Do NOT',
+  subtitle: 'Critical pitfalls that kill Amniotic Fluid Embolism patients',
   sections: [
     {
       heading: '🛑 Do NOT transport to OR for perimortem C/S',
@@ -16812,19 +16812,19 @@ const AFE_STOP: InfoPage = {
     },
     {
       heading: '🛑 Do NOT IV-push oxytocin',
-      body: 'IV push causes profound hypotension and can re-arrest a post-ROSC AFE patient. Always dilute 20 units in 1 L NS at 250 mL/hr or give 10 U IM. [Uterine atony management](#/info/afe-mtp).',
+      body: 'IV push causes profound hypotension and can re-arrest a post-ROSC Amniotic Fluid Embolism patient. Always dilute 20 units in 1 L NS at 250 mL/hr or give 10 U IM. [Uterine atony management](#/info/afe-mtp).',
     },
     {
       heading: '🛑 Do NOT load milrinone',
-      body: 'The 50 mcg/kg bolus drops SBP by 10–20 mmHg — catastrophic in AFE shock. Start infusion at 0.25 mcg/kg/min without a bolus. [Hemodynamic support](#/node/afe-hemo).',
+      body: 'The 50 mcg/kg bolus drops SBP by 10–20 mmHg — catastrophic in Amniotic Fluid Embolism shock. Start infusion at 0.25 mcg/kg/min without a bolus. [Hemodynamic support](#/node/afe-hemo).',
     },
     {
       heading: '🛑 Do NOT give rFVIIa routinely',
-      body: 'Leighton 2011: recombinant Factor VIIa was associated with increased thrombotic death in AFE. Reserve only for refractory bleeding after maximal standard MTP has failed. [MTP targets](#/info/afe-mtp).',
+      body: 'Leighton 2011: recombinant Factor VIIa was associated with increased thrombotic death in Amniotic Fluid Embolism. Reserve only for refractory bleeding after maximal standard MTP has failed. [MTP targets](#/info/afe-mtp).',
     },
     {
       heading: '🛑 Do NOT over-resuscitate with crystalloid',
-      body: 'AFE shock is RV failure physiology. Fluid worsens RV distension and septal shift. Limit crystalloid to 500 mL during initial resuscitation; use blood products after. [RV-first strategy](#/node/afe-hemo).',
+      body: 'Amniotic Fluid Embolism shock is RV failure physiology. Fluid worsens RV distension and septal shift. Limit crystalloid to 500 mL during initial resuscitation; use blood products after. [RV-first strategy](#/node/afe-hemo).',
     },
     {
       heading: '🛑 Do NOT place chest compressions higher than normal',
@@ -16836,7 +16836,7 @@ const AFE_STOP: InfoPage = {
     },
     {
       heading: '🛑 Do NOT terminate resuscitation early',
-      body: 'AFE is one of the few arrest scenarios where prolonged, "futile-appearing" CPR has produced neurologically intact survivors. Reversible physiology + ECMO eligibility = extended resuscitation is appropriate. [Extended resuscitation](#/node/afe-refractory).',
+      body: 'Amniotic Fluid Embolism is one of the few arrest scenarios where prolonged, "futile-appearing" CPR has produced neurologically intact survivors. Reversible physiology + ECMO eligibility = extended resuscitation is appropriate. [Extended resuscitation](#/node/afe-refractory).',
     },
     {
       heading: '🛑 Do NOT forget the neonate',

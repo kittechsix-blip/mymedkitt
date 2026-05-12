@@ -1528,7 +1528,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         title: 'Amniotic Fluid Embolism',
         subtitle: 'Recognition → Resuscitation → Perimortem C/S → A-O-K → DIC/MTP → Post-ROSC',
         categoryId: 'ob-gyn',
-        version: '1.0',
+        version: '1.1',
         nodeCount: 17,
         entryNodeId: 'afe-start',
       },

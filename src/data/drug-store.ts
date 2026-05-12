@@ -4531,7 +4531,7 @@ const OXYTOCIN: DrugEntry = {
     },
     {
       indication: 'Amniotic fluid embolism — uterine atony',
-      regimen: '20 units in 1 L NS at 250 mL/hr IV infusion after placental delivery or resuscitative hysterotomy. **NEVER IV push** — profound hypotension can re-arrest a post-ROSC AFE patient. Combine with bimanual uterine massage. Add methylergonovine 0.2 mg IM (if no HTN/preeclampsia) or carboprost 250 mcg IM (if no asthma) as second-line if atony persists.',
+      regimen: '20 units in 1 L NS at 250 mL/hr IV infusion after placental delivery or resuscitative hysterotomy. **NEVER IV push** — profound hypotension can re-arrest a post-ROSC Amniotic Fluid Embolism patient. Combine with bimanual uterine massage. Add methylergonovine 0.2 mg IM (if no HTN/preeclampsia) or carboprost 250 mcg IM (if no asthma) as second-line if atony persists.',
     },
   ],
   contraindications: [
@@ -5960,7 +5960,7 @@ const VASOPRESSIN: DrugEntry = {
     },
     {
       indication: 'Amniotic fluid embolism \u2014 pulmonary-sparing vasopressor',
-      regimen: '0.04 units/min IV infusion (fixed dose, non-titratable). **Preferred second vasopressor in AFE** \u2014 V1 receptor agonist spares the pulmonary vasculature while raising systemic BP for RV coronary perfusion. Add to norepinephrine early rather than escalating NE to high doses. Synergistic effect.',
+      regimen: '0.04 units/min IV infusion (fixed dose, non-titratable). **Preferred second vasopressor in Amniotic Fluid Embolism** \u2014 V1 receptor agonist spares the pulmonary vasculature while raising systemic BP for RV coronary perfusion. Add to norepinephrine early rather than escalating NE to high doses. Synergistic effect.',
     },
   ],
   contraindications: [
@@ -6823,8 +6823,8 @@ const MILRINONE: DrugEntry = {
     },
     {
       indication: 'Amniotic fluid embolism — RV inodilator',
-      regimen: '**NO loading dose** (drops SBP — never bolus in AFE shock). Start 0.25 mcg/kg/min IV infusion, titrate to 0.75 mcg/kg/min. Reduces PVR while augmenting RV contractility. Pair with norepinephrine or vasopressin to counter systemic vasodilation. Inhaled milrinone 5 mg nebulized is a selective pulmonary vasodilator alternative.',
-      weightCalc: { dosePerKg: 0.375, unit: 'mcg/min', label: 'AFE RV inodilator (no bolus)' },
+      regimen: '**NO loading dose** (drops SBP — never bolus in Amniotic Fluid Embolism shock). Start 0.25 mcg/kg/min IV infusion, titrate to 0.75 mcg/kg/min. Reduces PVR while augmenting RV contractility. Pair with norepinephrine or vasopressin to counter systemic vasodilation. Inhaled milrinone 5 mg nebulized is a selective pulmonary vasodilator alternative.',
+      weightCalc: { dosePerKg: 0.375, unit: 'mcg/min', label: 'Amniotic Fluid Embolism RV inodilator (no bolus)' },
     },
   ],
   contraindications: [
@@ -7163,7 +7163,7 @@ const TRANEXAMIC_ACID: DrugEntry = {
     },
     {
       indication: 'Amniotic fluid embolism — antifibrinolytic',
-      regimen: '1 g IV over 10 min. **Repeat 1 g IV over 10 min at 30 minutes if bleeding continues.** Must be given <3 hours from onset of hemorrhage/AFE — effect diminishes after. AFE coagulopathy has a fibrinolytic component that TXA targets. Do NOT rapid-push — hypotension. WOMAN trial evidence (NNT 267, no thromboembolic increase).',
+      regimen: '1 g IV over 10 min. **Repeat 1 g IV over 10 min at 30 minutes if bleeding continues.** Must be given <3 hours from onset of hemorrhage/Amniotic Fluid Embolism — effect diminishes after. Amniotic Fluid Embolism coagulopathy has a fibrinolytic component that TXA targets. Do NOT rapid-push — hypotension. WOMAN trial evidence (NNT 267, no thromboembolic increase).',
     },
   ],
   contraindications: [
@@ -9174,8 +9174,8 @@ const NOREPINEPHRINE: DrugEntry = {
     },
     {
       indication: 'Amniotic fluid embolism — first-line pressor',
-      regimen: '0.05-0.5 mcg/kg/min IV infusion. **First-choice vasopressor in AFE shock.** Alpha > beta activity supports RV coronary perfusion without excessive pulmonary vasoconstriction. Titrate to MAP ≥65. Add vasopressin 0.04 units/min early rather than escalating to high NE doses. Limit crystalloid — RV failure physiology.',
-      weightCalc: { dosePerKg: 0.1, unit: 'mcg/min', label: 'AFE shock (0.1 mcg/kg/min)' },
+      regimen: '0.05-0.5 mcg/kg/min IV infusion. **First-choice vasopressor in Amniotic Fluid Embolism shock.** Alpha > beta activity supports RV coronary perfusion without excessive pulmonary vasoconstriction. Titrate to MAP ≥65. Add vasopressin 0.04 units/min early rather than escalating to high NE doses. Limit crystalloid — RV failure physiology.',
+      weightCalc: { dosePerKg: 0.1, unit: 'mcg/min', label: 'Amniotic Fluid Embolism shock (0.1 mcg/kg/min)' },
     },
   ],
   contraindications: [
