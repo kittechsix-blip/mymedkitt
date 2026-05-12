@@ -259,4 +259,5 @@ export const TREE_REGISTRY = {
   'mammalian-bite': { prefix: 'MAMMALIAN_BITE', entryNodeId: 'mb-start', categoryId: 'emergency-medicine' },
   'febrile-seizure': { prefix: 'FEBSZ', entryNodeId: 'febsz-start', categoryId: 'pediatrics' },
   'peds-foreign-body': { prefix: 'PEDS_FB', entryNodeId: 'peds-fb-start', categoryId: 'pediatrics' },
+  'peritoneal-dialysis': { prefix: 'PERITONEAL_DIALYSIS', entryNodeId: 'pd-start', categoryId: 'nephro-rheum-endo' },
 };

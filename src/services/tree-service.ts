@@ -1230,6 +1230,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/febrile-seizure.js');
       return { nodes: m.FEBSZ_NODES, entryNodeId: 'febsz-start', categoryId: 'pediatrics', moduleLabels: m.FEBSZ_MODULE_LABELS, citations: m.FEBSZ_CITATIONS, criticalActions: m.FEBSZ_CRITICAL_ACTIONS };
     },
+    'peritoneal-dialysis': async () => {
+      const m = await import('../data/trees/peritoneal-dialysis.js');
+      return { nodes: m.PERITONEAL_DIALYSIS_NODES, entryNodeId: 'pd-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.PERITONEAL_DIALYSIS_MODULE_LABELS, citations: m.PERITONEAL_DIALYSIS_CITATIONS, criticalActions: m.PERITONEAL_DIALYSIS_CRITICAL_ACTIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

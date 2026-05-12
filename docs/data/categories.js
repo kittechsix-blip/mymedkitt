@@ -1296,6 +1296,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 28,
                 entryNodeId: 'rhabdo-start',
+            },
+            {
+                id: 'peritoneal-dialysis',
+                title: 'Peritoneal Dialysis Complications',
+                subtitle: 'Peritonitis \u2192 Catheter \u2192 Mechanical \u2192 Metabolic \u2192 Severe/Late \u2192 Disposition',
+                categoryId: 'nephro-rheum-endo',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'pd-start',
             }
         ],
         isCustom: false,

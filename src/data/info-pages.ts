@@ -21818,7 +21818,145 @@ const THORAC_AORTA_PAGE: InfoPage = {
   ],
 };
 
+// ====================================================================
+// Peritoneal Dialysis Info Pages
+// ====================================================================
+
+const PD_SUMMARY_PAGE: InfoPage = {
+  id: 'pd-summary',
+  title: 'Peritoneal Dialysis Steps Summary',
+  subtitle: 'Branch-based workup for the PD patient in the ED',
+  sections: [
+    {
+      heading: '1. Triage by Dominant Complaint',
+      body: '• [Cloudy effluent ± abdominal pain](#/node/pd-peritonitis-dx)\n• [Exit-site / tunnel signs](#/node/pd-exit-site)\n• [Drain or fill problem, abdominal bulge](#/node/pd-mechanical)\n• [Volume / hyper-K / hyperglycemia](#/node/pd-metabolic)\n• [Bloody effluent or refractory pain](#/node/pd-severe)',
+    },
+    {
+      heading: '2. Peritonitis',
+      body: '• [Apply ISPD diagnostic criteria — 2 of 3](#/node/pd-peritonitis-dx)\n• [Start empiric IP antibiotics within 6 h](#/node/pd-peritonitis-empiric)\n• [Reassess at day 3](#/node/pd-peritonitis-flow)\n• [Refractory / fungal = pull catheter](#/node/pd-refractory)',
+    },
+    {
+      heading: '3. Catheter Infections',
+      body: '• [Exit-site vs tunnel](#/node/pd-exit-site)\n• [Exit-site treatment](#/node/pd-exit-treat)\n• [Tunnel infection — high peritonitis risk](#/node/pd-tunnel)',
+    },
+    {
+      heading: '4. Mechanical Complications',
+      body: '• [Outflow failure — start with constipation](#/node/pd-outflow)\n• [Dialysate leak](#/node/pd-leak)\n• [Abdominal wall hernia](#/node/pd-hernia)\n• [PD-related hydrothorax](#/node/pd-hydrothorax)',
+    },
+    {
+      heading: '5. Metabolic Emergencies',
+      body: '• [Hyperkalemia in a PD patient](#/node/pd-hyperK)\n• [Volume overload / UF failure](#/node/pd-volume)\n• [Hyperglycemia from dialysate](#/node/pd-hyperglycemia)',
+    },
+    {
+      heading: '6. Severe / Late Complications',
+      body: '• [Hemoperitoneum](#/node/pd-hemoperit)\n• [Encapsulating peritoneal sclerosis](#/node/pd-eps)\n• [PD failure → HD bridge](#/node/pd-failure)',
+    },
+    {
+      heading: '7. Disposition',
+      body: '• [Admit — medicine](#/node/pd-dispo-admit)\n• [Admit — ICU](#/node/pd-dispo-icu)\n• [Home with PD nurse follow-up](#/node/pd-dispo-home)',
+    },
+  ],
+  citations: [],
+};
+
+const PD_DIFF_PAGE: InfoPage = {
+  id: 'pd-diff',
+  title: 'Cloudy PD Effluent — Differential',
+  subtitle: 'Not every cloudy bag is infection',
+  sections: [
+    {
+      heading: 'Infectious (most common)',
+      body: '• Bacterial peritonitis — WBC >100/µL, >50% PMN, positive culture\n• Fungal peritonitis — chronic abx exposure, immunocompromised, refractory bacterial peritonitis\n• Mycobacterial peritonitis — endemic regions, prior TB, sterile pyuria of the effluent',
+    },
+    {
+      heading: 'Non-Infectious — Inflammatory',
+      body: '• Eosinophilic peritonitis — eos >10% on differential, recent dialysate change, self-limited\n• Chemical peritonitis — disinfectant, hypertonic dialysate, drug additive\n• Sclerosing / encapsulating peritoneal sclerosis — long PD duration, bowel obstruction',
+    },
+    {
+      heading: 'Non-Infectious — Mechanical / Vascular',
+      body: '• Hemoperitoneum — menstrual reflux, ovarian cyst, viscus rupture, anticoagulation\n• Chylous effluent — triglycerides >100 mg/dL, milky white, lymphatic injury or malignancy\n• Fibrin / debris — high in 1st bag after dwell, clears with heparin 500 U/L',
+    },
+    {
+      heading: 'Red Flags Requiring Imaging',
+      body: '• Polymicrobial enteric organisms → ruptured viscus / diverticulitis\n• Bloody effluent in postmenopausal patient → malignancy / cyst rupture / trauma\n• Persistent cloudy effluent + obstipation → encapsulating peritoneal sclerosis',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Li PK et al. ISPD peritonitis guideline recommendations: 2022 update. Perit Dial Int. 2022;42(2):110-153.' },
+    { num: 2, text: 'Salzer WL. Peritoneal Dialysis-Related Peritonitis. Int J Nephrol Renovasc Dis. 2018;11:173-186.' },
+  ],
+};
+
+const PD_IP_ABX_TABLE_PAGE: InfoPage = {
+  id: 'pd-ip-abx-table',
+  title: 'IP Antibiotic Dosing — Quick Reference',
+  subtitle: 'Per ISPD 2022 — intermittent IP dosing for adult CAPD',
+  sections: [
+    {
+      heading: 'Empiric Gram-Positive',
+      body: '• **Cefazolin** 15–20 mg/kg IP once daily (single bag, ≥6 h dwell)\n• **Vancomycin** 15–30 mg/kg IP every 5–7 days (re-dose by trough <15 µg/mL)',
+    },
+    {
+      heading: 'Empiric Gram-Negative',
+      body: '• **Ceftazidime** 1000–1500 mg IP once daily\n• **Gentamicin** 0.6 mg/kg IP once daily (preferred in high ESBL areas per PDOPPS)\n• **Tobramycin** 0.6 mg/kg IP once daily — equivalent to gentamicin',
+    },
+    {
+      heading: 'Empiric Monotherapy',
+      body: '• **Cefepime** 1 g IP once daily — non-inferior to dual therapy in 2 RCTs\n• Increase load + maintenance by 25% if residual urine >100 mL/day',
+    },
+    {
+      heading: 'APD-Specific Adjustments',
+      body: '• APD has shorter dwells than CAPD — use a daytime full-fill dwell to deliver the antibiotic dose\n• Vancomycin needs ≥4 h dwell (target ≥6 h) to exceed MIC for 50% of the cycle\n• Cefazolin and ceftazidime have been validated for short-dwell cycling',
+    },
+    {
+      heading: 'Critical Safety',
+      body: '• Vancomycin + ceftazidime are compatible in the same 1 L bag — **NEVER mix in the same syringe** (precipitates)\n• Use separate syringes for each antibiotic when injecting into the bag\n• Add **heparin 500 U/L** to dialysate while effluent is cloudy — prevents catheter fibrin obstruction\n• Avoid IV ceftriaxone when IP option exists — better tissue levels with IP',
+    },
+    {
+      heading: 'Duration',
+      body: '• Coag-negative Staph, culture-negative, streptococcus: 2 weeks\n• S. aureus, Pseudomonas, Enterococcus, polymicrobial: 3 weeks\n• Fungal: ≥2 weeks after catheter removal',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Li PK et al. ISPD peritonitis guideline recommendations: 2022 update. Perit Dial Int. 2022;42(2):110-153.' },
+  ],
+};
+
+const PD_BRIDGE_DECISION_PAGE: InfoPage = {
+  id: 'pd-bridge-decision',
+  title: 'PD → HD Bridge Decision',
+  subtitle: 'When to abandon PD and how to bridge',
+  sections: [
+    {
+      heading: 'Acute Indications to Pull the Catheter',
+      body: '• Refractory peritonitis (still cloudy at day 5 of appropriate IP abx)\n• Fungal peritonitis — within 24–48 h of diagnosis\n• Tunnel infection with deep-cuff involvement on ultrasound\n• Hemodynamic instability from peritoneal sepsis\n• Catheter perforation / extrusion',
+    },
+    {
+      heading: 'Sub-Acute / Outpatient Indications',
+      body: '• Relapsing peritonitis (≥2 episodes within 4 weeks)\n• Encapsulating peritoneal sclerosis\n• Refractory ultrafiltration failure with hypertensive heart failure\n• Hydrothorax not amenable to pleurodesis\n• Patient choice / inability to perform exchanges safely',
+    },
+    {
+      heading: 'Bridge Access Plan',
+      body: '1. **Temporary HD access** — internal jugular tunneled catheter. AVOID subclavian (preserves future fistula sites).\n2. **Remove PD catheter** within 24–48 h for fungal/refractory peritonitis; can defer for stable patients.\n3. **Permanent HD access** — AV fistula preferred. Refer to vascular surgery from the ED.\n4. **Transplant referral** if not already listed.',
+    },
+    {
+      heading: 'Returning to PD',
+      body: '• Bacterial peritonitis with catheter removal: PD return possible after 2–3 weeks if peritoneal membrane recovers\n• Fungal peritonitis: PD return possible after ≥6 weeks with negative effluent cultures\n• EPS, hydrothorax with failed pleurodesis: PD usually NOT resumable',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Li PK et al. ISPD peritonitis guideline recommendations: 2022 update. Perit Dial Int. 2022;42(2):110-153.' },
+    { num: 2, text: 'Szeto CC et al. ISPD Catheter-Related Infection Recommendations: 2017 Update. Perit Dial Int. 2017;37(2):141-154.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // Peritoneal Dialysis
+  'pd-summary': PD_SUMMARY_PAGE,
+  'pd-diff': PD_DIFF_PAGE,
+  'pd-ip-abx-table': PD_IP_ABX_TABLE_PAGE,
+  'pd-bridge-decision': PD_BRIDGE_DECISION_PAGE,
+
   // Traumatic Arrest / Resuscitative Thoracotomy
   'ta-steps': TA_STEPS_PAGE,
   'ta-hott': TA_HOTT_PAGE,

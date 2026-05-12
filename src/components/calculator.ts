@@ -35570,6 +35570,101 @@ const FEBSZ_RECURRENCE_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Peritoneal Dialysis Tools
+// -------------------------------------------------------------------
+
+const PD_PERITONITIS_DX_CALCULATOR: CalculatorDefinition = {
+  id: 'pd-peritonitis-dx',
+  title: 'PD Peritonitis Diagnosis',
+  subtitle: 'ISPD 2-of-3 Criteria',
+  description: 'Apply ISPD 2022 criteria for PD-associated peritonitis. Need 2 of 3 to diagnose.',
+  fields: [
+    { name: 'symptoms', label: 'Clinical features (cloudy effluent, abdominal pain, or fever)', type: 'toggle', points: 1 },
+    { name: 'wbc', label: 'Effluent WBC >100/µL with >50% PMNs (after ≥2h dwell)', type: 'toggle', points: 1 },
+    { name: 'culture', label: 'Positive effluent culture', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: 2, max: Infinity, label: 'Peritonitis confirmed', risk: 'Treat now', mortality: 'Start empiric IP antibiotics within 6 h. Cover gram-positive + gram-negative. Inoculate ≥5 mL effluent into blood culture bottles.', colorVar: '--color-danger' },
+    { min: 1, max: 2, label: 'Indeterminate', risk: 'High suspicion', mortality: 'Single criterion is not enough but do not delay. If WBC pending or culture pending and patient looks sick — start empiric therapy.', colorVar: '--color-warning' },
+    { min: 0, max: 1, label: 'No peritonitis', risk: 'Reassess', mortality: 'Look for non-infectious causes (eosinophilic peritonitis, chemical peritonitis, intra-abdominal pathology).', colorVar: '--color-primary' },
+  ],
+  thresholdNote: 'ISPD 2022: peritonitis diagnosed when 2 of 3 criteria are met. Effluent dwell must be ≥2 h for valid cell count.',
+  citations: [
+    'Li PK, et al. ISPD peritonitis guideline recommendations: 2022 update. Perit Dial Int. 2022;42(2):110-153.',
+  ],
+};
+
+const PD_EMPIRIC_ABX_CALCULATOR: CalculatorDefinition = {
+  id: 'pd-empiric-abx',
+  title: 'PD Empiric IP Antibiotics',
+  subtitle: 'ISPD 2022 dosing reference',
+  description: 'IP antibiotic regimen for empiric PD peritonitis. Pick gram-positive + gram-negative coverage.',
+  fields: [
+    { name: 'mrsa', label: 'High MRSA prevalence center (>10% MRSA isolates)', type: 'toggle', points: 0 },
+    { name: 'esbl', label: 'High ESBL prevalence center', type: 'toggle', points: 0 },
+    { name: 'mono', label: 'Prefer monotherapy (cefepime)', type: 'toggle', points: 0 },
+    { name: 'residual', label: 'Residual urine >100 mL/day', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'Start within 6 h of diagnosis. Dwell ≥6 h for antibiotic-containing bag (CAPD) or daytime full-fill (APD).',
+  citations: [
+    'Li PK, et al. ISPD peritonitis guideline recommendations: 2022 update. Perit Dial Int. 2022;42(2):110-153.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const mrsa = values['mrsa'] || 0;
+    const esbl = values['esbl'] || 0;
+    const mono = values['mono'] || 0;
+    const residual = values['residual'] || 0;
+
+    if (mono) {
+      const dose = residual ? '1.25 g IP once daily (loading + maintenance increased 25%)' : '1 g IP once daily';
+      return {
+        value: 'Cefepime mono',
+        label: 'Cefepime Monotherapy',
+        description: `**Cefepime ${dose}**\n\nNon-inferior to dual therapy in 2 RCTs. Add heparin 500 U/L to dialysate while effluent is cloudy. Dwell ≥6 h.`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    const gp = mrsa ? 'Vancomycin IP 15-30 mg/kg every 5-7 days (load); trough 15-20 mg/L' : 'Cefazolin IP 15-20 mg/kg once daily';
+    const gn = esbl ? 'Gentamicin IP 0.6 mg/kg once daily (avoid >3 weeks)' : 'Ceftazidime IP 1000-1500 mg once daily';
+    const residualNote = residual ? '\n\n**Residual urine >100 mL/d:** increase loading + maintenance dose by 25%.' : '';
+
+    return {
+      value: 'Dual cover',
+      label: 'Gram-positive + Gram-negative',
+      description: `**Gram-positive:** ${gp}\n\n**Gram-negative:** ${gn}\n\nAdd heparin 500 U/L to dialysate while effluent is cloudy. Vancomycin + ceftazidime compatible in same 1 L bag but NEVER mix in same syringe.${residualNote}`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const PD_HD_BRIDGE_CALCULATOR: CalculatorDefinition = {
+  id: 'pd-hd-bridge',
+  title: 'PD-to-HD Bridge Decision',
+  subtitle: 'When to interrupt PD',
+  description: 'Decide whether the patient needs to be bridged to hemodialysis now, or whether PD can continue with modifications.',
+  fields: [
+    { name: 'k', label: 'Severe hyperkalemia (K >6.5 + ECG changes)', type: 'toggle', points: 2 },
+    { name: 'fluid', label: 'Refractory volume overload despite icodextrin/hypertonic exchanges', type: 'toggle', points: 2 },
+    { name: 'refractory', label: 'Refractory peritonitis (no response after 5 days of appropriate IP abx)', type: 'toggle', points: 2 },
+    { name: 'fungal', label: 'Fungal peritonitis confirmed', type: 'toggle', points: 2 },
+    { name: 'leak', label: 'Symptomatic dialysate leak / large hydrothorax', type: 'toggle', points: 1 },
+    { name: 'mechanical', label: 'Catheter failure not correctable in ED', type: 'toggle', points: 1 },
+  ],
+  results: [
+    { min: 2, max: Infinity, label: 'Bridge to HD now', risk: 'Urgent', mortality: 'Place tunneled HD catheter or temporary internal jugular line. Continue treating the underlying cause; PD catheter removal indication if fungal or refractory peritonitis.', colorVar: '--color-danger' },
+    { min: 1, max: 2, label: 'Consider HD bridge', risk: 'Likely', mortality: 'Discuss with nephrology. Most leak / mechanical issues can be temporized but if symptomatic, plan HD bridge while problem is corrected surgically.', colorVar: '--color-warning' },
+    { min: 0, max: 1, label: 'Continue PD with modifications', risk: 'Low', mortality: 'Optimize current PD prescription. Add icodextrin, increase exchange frequency, treat underlying issue. No HD bridge required.', colorVar: '--color-primary' },
+  ],
+  thresholdNote: 'PD clears K+ at ~10-15 mEq/h vs HD 50-80 mEq/h. For life-threatening hyperkalemia, do not wait on PD.',
+  citations: [
+    'Li PK, et al. ISPD peritonitis guideline recommendations: 2022 update. Perit Dial Int. 2022;42(2):110-153.',
+    'Mehrotra R, et al. The current state of peritoneal dialysis. J Am Soc Nephrol. 2016;27(11):3238-3252.',
+  ],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Weight-Based Dosing
   'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -36118,6 +36213,10 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'febsz-classifier': FEBSZ_CLASSIFIER_CALCULATOR,
   'febsz-meningitis-risk': FEBSZ_MENINGITIS_RISK_CALCULATOR,
   'febsz-recurrence': FEBSZ_RECURRENCE_CALCULATOR,
+  // Peritoneal Dialysis
+  'pd-peritonitis-dx': PD_PERITONITIS_DX_CALCULATOR,
+  'pd-empiric-abx': PD_EMPIRIC_ABX_CALCULATOR,
+  'pd-hd-bridge': PD_HD_BRIDGE_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
