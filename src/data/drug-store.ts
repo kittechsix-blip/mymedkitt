@@ -6852,15 +6852,19 @@ const SODIUM_BICARBONATE: DrugEntry = {
   genericName: 'Sodium bicarbonate',
   drugClass: 'Alkalinizing agent',
   route: 'IV',
-  indications: ['Severe metabolic acidosis (pH < 6.9)', 'Hyperkalemia', 'TCA overdose', 'Salicylate toxicity', 'Urinary alkalinization'],
+  indications: ['Isotonic bicarbonate infusion', 'Severe metabolic acidosis / AKI', 'Hyperkalemia with metabolic acidosis', 'TCA overdose', 'Salicylate toxicity', 'Urinary alkalinization'],
   dosing: [
     {
-      indication: 'Severe Metabolic Acidosis (pH < 6.9)',
-      regimen: '8.4% solution: 100 mEq (100 mL) in 400 mL sterile water IV over 2 hours. Alternatively, isotonic 4.2%: 500 mL IV over 4 hours. Recheck ABG after infusion. Repeat if pH remains < 6.9. BICAR-ICU trial: NNT 6 for survival benefit in patients with severe acidemia AND acute kidney injury.',
+      indication: 'Isotonic bicarbonate infusion',
+      regimen: '150 mEq sodium bicarbonate (three 50 mEq ampules of 8.4%) in 1 L D5W or sterile water per local pharmacy policy. Typical rate 100-250 mL/hr for severe metabolic acidosis/AKI; 500-1000 mL/hr if being used as resuscitative fluid for acidotic hyperkalemia/hypovolemia; 150-250 mL/hr for salicylate or sodium-channel blocker targets. Monitor pH, Na, K, ionized Ca, volume status, and ventilation.',
     },
     {
-      indication: 'Hyperkalemia',
-      regimen: '50 mEq (50 mL of 8.4%) IV over 5 minutes. Temporizing measure — drives K+ intracellularly via raising pH. Most effective when patient is acidotic (pH < 7.2). Limited benefit in non-acidotic hyperkalemia.',
+      indication: 'Severe metabolic acidosis / AKI',
+      regimen: 'Consider when pH ≤7.20 with low bicarbonate and moderate-severe AKI or bicarbonate-loss physiology. Infusion: 150 mEq in 1 L D5W/sterile water at 100-250 mL/hr; titrate to pH >7.20 initially and often >7.30 when using BICAR-ICU-style endpoints. Recheck VBG/ABG and BMP q2-4h. BICAR-ICU showed no overall mortality benefit but benefit in the prespecified AKI subgroup.',
+    },
+    {
+      indication: 'Hyperkalemia with metabolic acidosis',
+      regimen: '50 mEq IV bolus may be used as temporizing adjunct when acidotic. For ongoing therapy/resuscitation: 150 mEq in 1 L D5W/sterile water, often 500-1000 mL/hr if hypovolemic and acidotic; slower if euvolemic/overload risk. Not a substitute for calcium, insulin/dextrose, albuterol, potassium removal, or dialysis.',
     },
     {
       indication: 'TCA Overdose — Sodium Channel Blockade',
@@ -6876,14 +6880,15 @@ const SODIUM_BICARBONATE: DrugEntry = {
       regimen: '150 mEq (3 amps) in 1L D5W IV. Target urine pH > 6.5. Used for rhabdomyolysis (prevents myoglobin precipitation in renal tubules) and methotrexate toxicity.',
     },
   ],
-  contraindications: ['Metabolic alkalosis', 'Severe pulmonary edema / volume overload (significant sodium load)', 'Hypochloremia'],
+  contraindications: ['Metabolic alkalosis', 'Severe pulmonary edema / uncontrolled volume overload (significant sodium load)', 'Severe hypernatremia without overriding benefit', 'Primary respiratory acidosis without ventilation correction', 'Hypochloremia'],
   cautions: [
     'NOT recommended for routine cardiac arrest or CPR (AHA/ERC guidelines) — unless confirmed hyperkalemia or TCA overdose',
     'NOT recommended for routine DKA — insulin and fluids are definitive therapy. Use only if pH < 6.9',
     'Causes acute hypokalemia — K+ shifts intracellularly with alkalinization. Monitor K+ closely',
     'Ionized calcium drops with alkalinization — can precipitate tetany or seizures in hypocalcemic patients',
     'Paradoxical CNS acidosis possible with rapid bolus — CO2 crosses the blood-brain barrier faster than HCO3',
-    '8.4% solution (1 mEq/mL) = 1000 mOsm/L — extremely hypertonic. Preferably via central line for large volumes',
+    '8.4% solution (1 mEq/mL) = 1000 mOsm/L — extremely hypertonic. Prefer central line for repeated boluses/concentrated preparations',
+    'Bicarbonate generates CO2 — inadequate ventilation can worsen respiratory/intracellular acidosis',
     'May increase lactatemia and shift hemoglobin-oxygen dissociation curve leftward (decreased O2 delivery)',
   ],
   monitoring: 'Serial ABGs q1-2h during infusion. Serum K+ and ionized Ca2+ before and during treatment. Urine pH hourly if alkalinization is the goal. QRS width q15-30 min in TCA overdose.',
@@ -6892,6 +6897,7 @@ const SODIUM_BICARBONATE: DrugEntry = {
     'Jaber S et al. Sodium Bicarbonate Therapy for Patients with Severe Metabolic Acidaemia (BICAR-ICU). Lancet. 2018;392(10141):31-40.',
     'Forsythe SM, Schmidt GA. Sodium Bicarbonate for the Treatment of Lactic Acidosis. Chest. 2000;117(1):260-267.',
     'Soar J et al. ERC Guidelines 2015: Adult Advanced Life Support. Resuscitation. 2015;95:100-147.',
+    'EMCrit/IBCC. Hyperkalemia, salicylate intoxication, and fluid selection chapters. Accessed 2026.',
   ],
 };
 

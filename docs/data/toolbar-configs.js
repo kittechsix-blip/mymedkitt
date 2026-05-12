@@ -346,6 +346,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'pe', label: 'PE', icon: '🫁', action: 'overlay', target: 'lytics-pe-tool' },
         { id: 'stop', label: 'Bleed', icon: '🩸', action: 'overlay', target: 'lytics-bleed-tool' },
     ],
+    'sodium-bicarbonate-drip': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'bicarbdrip-steps' },
+        { id: 'indications', label: 'Indicate', icon: '⚠️', action: 'overlay', target: 'bicarbdrip-indications-tool' },
+        { id: 'recipe', label: 'Recipe', icon: '🧪', action: 'overlay', target: 'bicarbdrip-recipe-tool' },
+        { id: 'tox', label: 'Tox', icon: '💊', action: 'overlay', target: 'bicarbdrip-tox-tool' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'bicarbdrip-stop-tool' },
+    ],
     'chs': [
         { id: 'antiemetic', label: 'Antiemetic', icon: '💊', action: 'jump', target: 'chs-first-line' },
         { id: 'capsaicin', label: 'Capsaicin', icon: '🌶️', action: 'jump', target: 'chs-capsaicin' },

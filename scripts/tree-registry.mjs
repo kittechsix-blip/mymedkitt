@@ -21,6 +21,7 @@ export const TREE_REGISTRY = {
   'hypertonic-saline-protocol': { prefix: 'HYPERTONIC_SALINE_PROTOCOL', entryNodeId: 'hts-start', categoryId: 'pharmacist' },
   'scape-nitroglycerin': { prefix: 'SCAPE_NITROGLYCERIN', entryNodeId: 'scape-start', categoryId: 'pharmacist' },
   'thrombolytic-protocols': { prefix: 'THROMBOLYTIC_PROTOCOLS', entryNodeId: 'lytics-start', categoryId: 'pharmacist' },
+  'sodium-bicarbonate-drip': { prefix: 'SODIUM_BICARBONATE_DRIP', entryNodeId: 'bicarbdrip-start', categoryId: 'pharmacist' },
   'chs':              { prefix: 'CHS',                 entryNodeId: 'chs-start',          categoryId: 'gastroenterology' },
   'pep':              { prefix: 'PEP',                 entryNodeId: 'pep-start',          categoryId: 'infectious-disease' },
   'stroke':           { prefix: 'STROKE',              entryNodeId: 'stroke-start',       categoryId: 'neurology' },

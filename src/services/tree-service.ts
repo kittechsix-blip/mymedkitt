@@ -278,6 +278,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/thrombolytic-protocols.js');
       return { nodes: m.THROMBOLYTIC_PROTOCOLS_NODES, entryNodeId: 'lytics-start', categoryId: 'pharmacist', moduleLabels: m.THROMBOLYTIC_PROTOCOLS_MODULE_LABELS, citations: m.THROMBOLYTIC_PROTOCOLS_CITATIONS, criticalActions: m.THROMBOLYTIC_PROTOCOLS_CRITICAL_ACTIONS };
     },
+    'sodium-bicarbonate-drip': async () => {
+      const m = await import('../data/trees/sodium-bicarbonate-drip.js');
+      return { nodes: m.SODIUM_BICARBONATE_DRIP_NODES, entryNodeId: 'bicarbdrip-start', categoryId: 'pharmacist', moduleLabels: m.SODIUM_BICARBONATE_DRIP_MODULE_LABELS, citations: m.SODIUM_BICARBONATE_DRIP_CITATIONS, criticalActions: m.SODIUM_BICARBONATE_DRIP_CRITICAL_ACTIONS };
+    },
     'chs': async () => {
       const m = await import('../data/trees/chs.js');
       return { nodes: m.CHS_NODES, entryNodeId: 'chs-start', categoryId: 'gastroenterology', moduleLabels: m.CHS_MODULE_LABELS, citations: m.CHS_CITATIONS, criticalActions: m.CHS_CRITICAL_ACTIONS };
