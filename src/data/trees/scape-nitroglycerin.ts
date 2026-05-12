@@ -1,0 +1,164 @@
+// MedKitt - SCAPE High-Dose Nitroglycerin
+// Recognition -> NIV -> high-dose nitroglycerin -> monitoring -> nitroprusside nuance
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const SCAPE_NITROGLYCERIN_NODES: DecisionNode[] = [
+  {
+    id: 'scape-start',
+    type: 'info',
+    module: 1,
+    title: 'SCAPE High-Dose Nitroglycerin',
+    body: '[SCAPE Steps](#/info/scape-steps)\n\nSCAPE is sympathetic crashing acute pulmonary edema: abrupt respiratory distress, severe hypertension, pulmonary edema, and high catecholamine tone.\n\nED first-line therapy is noninvasive ventilation plus rapidly titrated high-dose [Nitroglycerin](#/drug/nitroglycerin/SCAPE high-dose). Nitroprusside is not the usual ED first-line pathway; see the Nitroprusside? tool for cautions.',
+    citation: [1, 2, 3],
+    next: 'scape-recognize',
+    summary: 'SCAPE requires immediate NIV plus high-dose nitroglycerin to rapidly reduce afterload/preload.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'scape-recognize',
+    type: 'question',
+    module: 1,
+    title: 'SCAPE Pattern?',
+    body: 'Does the patient fit SCAPE physiology?',
+    options: [
+      { label: 'Severe HTN + flash pulmonary edema', description: 'Diaphoretic, crashing, rales, high work of breathing, SBP often >180', next: 'scape-contra', urgency: 'critical' },
+      { label: 'Hypotensive pulmonary edema', description: 'Cardiogenic shock pathway, not high-dose nitrate SCAPE', next: 'scape-shock', urgency: 'critical' },
+      { label: 'COPD/asthma/pneumonia more likely', description: 'Treat alternative cause; avoid reflex high-dose nitrate', next: 'scape-alt' },
+    ],
+    citation: [1, 2],
+    summary: 'High-dose nitrates are for hypertensive flash pulmonary edema, not hypotensive shock.',
+  },
+  {
+    id: 'scape-shock',
+    type: 'result',
+    module: 1,
+    title: 'Not SCAPE: Shock Pathway',
+    body: 'If pulmonary edema is accompanied by hypotension, cold shock, RV infarct, or cardiogenic shock, do not use high-dose nitrate strategy.\n\nActions:\n- Oxygenation/ventilation support\n- Bedside echo and ECG\n- Vasopressors/inotropes as indicated\n- Treat MI, dysrhythmia, mechanical valve/papillary muscle rupture, PE, tamponade, or sepsis as appropriate\n- Early ICU/cardiology involvement',
+    recommendation: 'Use cardiogenic shock pathway rather than high-dose nitrate SCAPE protocol.',
+    confidence: 'recommended',
+    citation: [3, 4],
+    summary: 'Hypotensive pulmonary edema is not a high-dose nitrate indication.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'scape-alt',
+    type: 'result',
+    module: 1,
+    title: 'Alternative Diagnosis',
+    body: 'If SCAPE physiology is not present, target the likely cause:\n- COPD/asthma: bronchodilators, steroids, ventilation strategy\n- Pneumonia/ARDS: antibiotics, sepsis/ARDS care\n- PE: PE risk stratification\n- ACS without severe HTN: ACS pathway\n\nNitrates may still be appropriate for ACS/HTN/pulmonary edema, but not high-dose SCAPE dosing unless the hypertensive crashing phenotype is present.',
+    recommendation: 'Treat the primary respiratory/cardiac diagnosis rather than applying high-dose SCAPE dosing.',
+    confidence: 'recommended',
+    citation: [1, 3],
+    summary: 'Use high-dose SCAPE dosing only for the appropriate hypertensive phenotype.',
+  },
+  {
+    id: 'scape-contra',
+    type: 'question',
+    module: 2,
+    title: 'Contraindication Check',
+    body: 'Any high-risk nitrate contraindication?',
+    options: [
+      { label: 'Recent PDE-5 inhibitor / severe AS / RV infarct / hypotension', description: 'Avoid or use extreme caution', next: 'scape-stop', urgency: 'critical' },
+      { label: 'No major contraindication', description: 'Proceed with NIV + high-dose nitroglycerin', next: 'scape-niv', urgency: 'critical' },
+    ],
+    citation: [2, 3],
+    summary: 'Contraindications must be checked before high-dose nitrate escalation.',
+  },
+  {
+    id: 'scape-stop',
+    type: 'result',
+    module: 2,
+    title: 'Nitrate Safety Stop',
+    body: 'Avoid high-dose nitroglycerin when:\n- SBP is low or rapidly falling\n- RV infarct/preload-dependent state is likely\n- Recent PDE-5 inhibitor exposure: sildenafil/vardenafil within 24 hr, tadalafil within 48 hr\n- Severe aortic stenosis or obstructive HCM with instability\n- Marked anemia/raised ICP concern where nitrate is unsafe\n\nUse NIV/oxygenation, bedside echo/ECG, and shock/ACS-specific management.',
+    recommendation: 'Hold high-dose nitrate protocol and manage with alternative pathway.',
+    confidence: 'recommended',
+    citation: [2, 3],
+    summary: 'Contraindications should stop high-dose nitrate use.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'scape-niv',
+    type: 'info',
+    module: 2,
+    title: 'NIV First Minutes',
+    body: 'Immediate actions:\n- Sit upright\n- Apply noninvasive ventilation immediately, typically CPAP/BiPAP with high EPAP/PEEP\n- Start high-dose [Nitroglycerin](#/drug/nitroglycerin/SCAPE high-dose) concurrently; do not wait for diuretics\n- Obtain ECG, CXR/POCUS, troponin/BNP/BMP as stabilization allows\n\nNIV and nitroglycerin should improve work of breathing and BP within minutes when SCAPE is the correct physiology.',
+    citation: [1, 2, 3],
+    next: 'scape-dose',
+    summary: 'NIV plus nitrate should start immediately and concurrently.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'scape-dose',
+    type: 'info',
+    module: 3,
+    title: 'High-Dose Nitroglycerin',
+    body: 'Common ED approach for severe hypertensive SCAPE:\n- While preparing infusion: SL nitroglycerin 0.4 mg q5 min if able\n- IV push strategy by protocol: nitroglycerin 400-800 mcg IV every 2-5 min for severe distress and SBP usually >180\n- Infusion strategy: start 100-200 mcg/min and rapidly titrate every 3-5 min; severe SCAPE may require 300-800 mcg/min initially\n- Reduce once work of breathing improves and SBP approaches safer range, often 140-160\n\nUse close BP monitoring. Arterial line is helpful but should not delay initial treatment in crashing SCAPE.',
+    citation: [1, 2, 5],
+    next: 'scape-monitor',
+    summary: 'SCAPE often needs rapid high-dose nitroglycerin titration rather than slow standard CHF dosing.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'scape-monitor',
+    type: 'info',
+    module: 3,
+    title: 'Monitoring / Response',
+    body: 'Expected response:\n- Reduced dyspnea and diaphoresis\n- Falling BP without hypotension\n- Improved oxygenation and ventilator synchrony\n- Decreased rales/work of breathing\n\nIf not improving:\n- Reconfirm diagnosis\n- Check mask seal/NIV settings\n- Escalate nitrate if BP remains very high and no contraindication\n- Evaluate ACS, valve catastrophe, dysrhythmia, renal failure, PE, aortic syndrome, sepsis\n- Prepare intubation only if NIV/medical therapy fails or mental status/airway protection deteriorates',
+    citation: [1, 2, 3],
+    next: 'scape-diuretics',
+    summary: 'Response should be rapid; failure should trigger reassessment and escalation.',
+  },
+  {
+    id: 'scape-diuretics',
+    type: 'info',
+    module: 4,
+    title: 'Diuretics / After Stabilization',
+    body: 'Furosemide is not the first-minute treatment for SCAPE physiology.\n\nUse diuretics after initial stabilization when volume overload is likely:\n- Chronic CHF with congestion\n- Renal failure/volume overload\n- Clear volume excess after BP/WOB improve\n\nAvoid delaying NIV and nitrates while waiting for diuretic effect. In SCAPE, the immediate problem is often afterload/sympathetic redistribution rather than total body fluid excess alone.',
+    citation: [1, 2, 3],
+    next: 'scape-nitroprusside',
+    summary: 'Diuretics may be needed, but NIV/high-dose nitrate are the immediate SCAPE priorities.',
+  },
+  {
+    id: 'scape-nitroprusside',
+    type: 'info',
+    module: 4,
+    title: 'Nitroprusside?',
+    body: 'Nitroprusside is not the usual ED first-line SCAPE medication.\n\nWhy nitroglycerin is preferred in the ED:\n- Familiar ACS/pulmonary edema medication\n- Rapid titration\n- Venous and arterial dilation at high dose\n- No cyanide/thiocyanate toxicity concern\n- Easier transition as patient stabilizes\n\nNitroprusside may be considered in ICU-level hypertensive emergency with invasive monitoring and expert oversight, but avoid/caution in renal/hepatic failure, raised ICP, pregnancy, and settings where cyanide/thiocyanate toxicity monitoring is not feasible.',
+    citation: [1, 3, 4],
+    next: 'scape-dispo',
+    summary: 'Nitroprusside is an ICU hypertensive emergency tool, not routine first-line ED SCAPE care.',
+  },
+  {
+    id: 'scape-dispo',
+    type: 'result',
+    module: 4,
+    title: 'Disposition',
+    body: 'Disposition:\n- ICU/stepdown while on high-dose nitrate infusion or NIV\n- Cardiology/ICU if ACS, valve emergency, persistent respiratory failure, renal failure, or recurrent SCAPE\n- Wean nitrate only after sustained work-of-breathing and BP improvement\n- Transition to oral antihypertensives/diuresis after cause is clarified\n\nDocument peak nitroglycerin dose, response time, BP nadir, NIV settings, ECG/troponin findings, and trigger assessment.',
+    recommendation: 'Continue monitored care until BP, oxygenation, and precipitating cause are controlled.',
+    confidence: 'recommended',
+    citation: [1, 3],
+    summary: 'SCAPE patients need monitored disposition and cause-directed therapy after rescue.',
+  },
+];
+
+export const SCAPE_NITROGLYCERIN_MODULE_LABELS = ['Recognize', 'NIV', 'Nitro', 'Aftercare'];
+
+export const SCAPE_NITROGLYCERIN_CITATIONS: Citation[] = [
+  { num: 1, text: 'EMCrit/IBCC. Sympathetic Crashing Acute Pulmonary Edema (SCAPE). Accessed 2026.' },
+  { num: 2, text: 'Levy P, et al. Treatment of Severe Decompensated Heart Failure With High-Dose Intravenous Nitroglycerin. Ann Emerg Med. 2007;50(2):144-152.' },
+  { num: 3, text: 'Heidenreich PA, et al. 2022 AHA/ACC/HFSA Guideline for Management of Heart Failure. Circulation. 2022;145:e895-e1032.' },
+  { num: 4, text: 'Peacock WF, et al. Hypertensive Heart Failure and Acute Pulmonary Edema Reviews. Emerg Med Clin North Am. 2005;23(4):1105-1125.' },
+  { num: 5, text: 'Wilson SS, et al. High-dose nitroglycerin infusion for SCAPE: case series. Am J Emerg Med. 2018;36(8):1526.e5-1526.e7.' },
+];
+
+export const SCAPE_NITROGLYCERIN_CRITICAL_ACTIONS = [
+  { text: 'Recognize hypertensive flash pulmonary edema phenotype.', nodeId: 'scape-recognize' },
+  { text: 'Start NIV immediately.', nodeId: 'scape-niv' },
+  { text: 'Use high-dose nitroglycerin when no contraindication is present.', nodeId: 'scape-dose' },
+  { text: 'Do not delay rescue for diuretics.', nodeId: 'scape-diuretics' },
+  { text: 'Avoid high-dose nitrates in hypotension/RV infarct/PDE-5 exposure.', nodeId: 'scape-stop' },
+];
+
+export const SCAPE_NITROGLYCERIN_NODE_COUNT = SCAPE_NITROGLYCERIN_NODES.length;

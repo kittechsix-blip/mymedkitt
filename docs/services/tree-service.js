@@ -193,6 +193,26 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/high-dose-insulin.js');
             return { nodes: m.HIGH_DOSE_INSULIN_NODES, entryNodeId: 'hdi-start', categoryId: 'pharmacist', moduleLabels: m.HIGH_DOSE_INSULIN_MODULE_LABELS, citations: m.HIGH_DOSE_INSULIN_CITATIONS, criticalActions: m.HIGH_DOSE_INSULIN_CRITICAL_ACTIONS };
         },
+        'potassium-infusion': async () => {
+            const m = await import('../data/trees/potassium-infusion.js');
+            return { nodes: m.POTASSIUM_INFUSION_NODES, entryNodeId: 'kclinf-start', categoryId: 'pharmacist', moduleLabels: m.POTASSIUM_INFUSION_MODULE_LABELS, citations: m.POTASSIUM_INFUSION_CITATIONS, criticalActions: m.POTASSIUM_INFUSION_CRITICAL_ACTIONS };
+        },
+        'heparin-infusion': async () => {
+            const m = await import('../data/trees/heparin-infusion.js');
+            return { nodes: m.HEPARIN_INFUSION_NODES, entryNodeId: 'ufhinf-start', categoryId: 'pharmacist', moduleLabels: m.HEPARIN_INFUSION_MODULE_LABELS, citations: m.HEPARIN_INFUSION_CITATIONS, criticalActions: m.HEPARIN_INFUSION_CRITICAL_ACTIONS };
+        },
+        'hypertonic-saline-protocol': async () => {
+            const m = await import('../data/trees/hypertonic-saline-protocol.js');
+            return { nodes: m.HYPERTONIC_SALINE_PROTOCOL_NODES, entryNodeId: 'hts-start', categoryId: 'pharmacist', moduleLabels: m.HYPERTONIC_SALINE_PROTOCOL_MODULE_LABELS, citations: m.HYPERTONIC_SALINE_PROTOCOL_CITATIONS, criticalActions: m.HYPERTONIC_SALINE_PROTOCOL_CRITICAL_ACTIONS };
+        },
+        'scape-nitroglycerin': async () => {
+            const m = await import('../data/trees/scape-nitroglycerin.js');
+            return { nodes: m.SCAPE_NITROGLYCERIN_NODES, entryNodeId: 'scape-start', categoryId: 'pharmacist', moduleLabels: m.SCAPE_NITROGLYCERIN_MODULE_LABELS, citations: m.SCAPE_NITROGLYCERIN_CITATIONS, criticalActions: m.SCAPE_NITROGLYCERIN_CRITICAL_ACTIONS };
+        },
+        'thrombolytic-protocols': async () => {
+            const m = await import('../data/trees/thrombolytic-protocols.js');
+            return { nodes: m.THROMBOLYTIC_PROTOCOLS_NODES, entryNodeId: 'lytics-start', categoryId: 'pharmacist', moduleLabels: m.THROMBOLYTIC_PROTOCOLS_MODULE_LABELS, citations: m.THROMBOLYTIC_PROTOCOLS_CITATIONS, criticalActions: m.THROMBOLYTIC_PROTOCOLS_CRITICAL_ACTIONS };
+        },
         'chs': async () => {
             const m = await import('../data/trees/chs.js');
             return { nodes: m.CHS_NODES, entryNodeId: 'chs-start', categoryId: 'gastroenterology', moduleLabels: m.CHS_MODULE_LABELS, citations: m.CHS_CITATIONS, criticalActions: m.CHS_CRITICAL_ACTIONS };

@@ -18786,6 +18786,414 @@ const HDI_STOP_TOOL = {
     ],
 };
 // -------------------------------------------------------------------
+// High-Stakes Pharmacy Protocols
+// -------------------------------------------------------------------
+const KCLINF_STEPS_PAGE = {
+    id: 'kclinf-steps',
+    title: 'Potassium Infusion Steps',
+    subtitle: 'High-alert IV replacement',
+    sections: [
+        {
+            heading: 'Immediate sequence',
+            body: '1. Confirm current potassium, renal function, and urine output.\n2. Identify severity: ECG changes, arrhythmia, paralysis, respiratory weakness, K <=2.5, DKA/HHS.\n3. Stop if hyperkalemia, anuria, or indication is unclear.\n4. Select access: peripheral usually max 10 mEq/hr per line; central monitored commonly 20 mEq/hr.\n5. Use infusion pump and line tracing; never IV push.\n6. Correct magnesium if low/unknown with arrhythmia risk or refractory hypokalemia.\n7. Recheck K q2-4 hr during aggressive replacement and track total K from all sources.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kim MJ, Valerio C, Knobloch GK. Potassium Disorders. Am Fam Physician. 2023;107(1):59-70.' },
+        { num: 2, text: 'DailyMed. Potassium Chloride Injection prescribing information. Accessed 2026.' },
+    ],
+};
+const KCLINF_RATES_TOOL = {
+    id: 'kclinf-rates',
+    title: 'Potassium Rates',
+    subtitle: 'Peripheral versus central',
+    sections: [
+        {
+            heading: 'Peripheral',
+            body: '- Typical max: 10 mEq/hr per peripheral line\n- Common concentration: 10 mEq/100 mL over 1 hr\n- Burning/phlebitis: dilute, slow, or split across lines\n- Use pump; never IV push',
+        },
+        {
+            heading: 'Central monitored',
+            body: '- Common severe replacement: 20 mEq/hr\n- Higher rates require institutional protocol, senior clinician/pharmacy involvement, continuous ECG, and frequent K checks\n- Use for arrhythmia, paralysis, severe symptoms, or need for rapid replacement',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'DailyMed. Potassium Chloride Injection prescribing information. Accessed 2026.' },
+    ],
+};
+const KCLINF_CONTRA_TOOL = {
+    id: 'kclinf-contra-tool',
+    title: 'Potassium Contraindications',
+    subtitle: 'Stop before infusion',
+    sections: [
+        {
+            heading: 'Do not start routine IV K if',
+            body: '- Hyperkalemia or rapidly rising K\n- Anuria or severe renal failure without specialist-directed replacement\n- No current K/renal function in a high-risk patient\n- Pump, dose, rate, concentration, or line cannot be verified\n- Concern for pseudohypokalemia or invalid lab',
+        },
+        {
+            heading: 'High-risk caveat',
+            body: 'Life-threatening hypokalemia in renal failure may still require treatment, but it should be managed with senior/pharmacy/nephrology input, small reassessed doses, and continuous ECG monitoring.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kim MJ, Valerio C, Knobloch GK. Potassium Disorders. Am Fam Physician. 2023;107(1):59-70.' },
+    ],
+};
+const KCLINF_DKA_TOOL = {
+    id: 'kclinf-dka-tool',
+    title: 'DKA Potassium Rules',
+    subtitle: 'Potassium determines insulin safety',
+    sections: [
+        {
+            heading: 'DKA/HHS',
+            body: '- K <3.3 mEq/L: hold insulin; give K 20-30 mEq/hr until K >=3.3\n- K 3.3-5.2: add 20-30 mEq K per liter IV fluid while insulin runs\n- K >5.2: hold K initially; recheck q2h and start when K falls\n- Consider chloride/phosphate/acetate mix based on phosphate and acid-base status',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Kitabchi AE, et al. Hyperglycemic Crises in Adult Patients With Diabetes. Diabetes Care. 2009;32(7):1335-1343.' },
+    ],
+};
+const KCLINF_STOP_TOOL = {
+    id: 'kclinf-stop-tool',
+    title: 'STOP: Potassium Infusion',
+    subtitle: 'High-alert medication check',
+    sections: [
+        {
+            heading: 'Hard stops',
+            body: '- No pump\n- No line tracing\n- IV push order\n- Rate/concentration cannot be verified\n- Hyperkalemia or anuria without specialist plan\n- Insulin in DKA/HHS when K <3.3 before replacement is running',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'DailyMed. Potassium Chloride Injection prescribing information. Accessed 2026.' },
+    ],
+};
+const UFHINF_STEPS_PAGE = {
+    id: 'ufhinf-steps',
+    title: 'Heparin Infusion Steps',
+    subtitle: 'Indication, bolus, monitoring, reversal',
+    sections: [
+        {
+            heading: 'Immediate sequence',
+            body: '1. Confirm indication: VTE/PE, ACS/STEMI adjunct, procedural bridge, or specialist-directed use.\n2. Screen for active bleeding, HIT, platelet collapse, recent surgery/procedure, ICH risk, and duplicate anticoagulants.\n3. Decide bolus: standard VTE, ACS capped dose, or no-bolus/high-bleed-risk strategy.\n4. Obtain baseline CBC/platelets, PT/INR, aPTT, creatinine, and anti-Xa/aPTT monitoring plan.\n5. Start infusion by institutional nomogram.\n6. Recheck anti-Xa/aPTT at protocol interval, commonly 6 hr after start/dose change.\n7. Handoff target range, current units/hr, next lab time, and bolus/no-bolus rationale.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Garcia DA, et al. Parenteral Anticoagulants. Chest. 2012;141(2 Suppl):e24S-e43S.' },
+    ],
+};
+const UFHINF_VTE_TOOL = {
+    id: 'ufhinf-vte-tool',
+    title: 'UFH for VTE / PE',
+    subtitle: 'Standard therapeutic start',
+    sections: [
+        {
+            heading: 'Common regimen',
+            body: '[Unfractionated heparin](#/drug/ufh/PE/DVT treatment) 80 units/kg IV bolus, then 18 units/kg/hr infusion. Titrate by institutional anti-Xa or aPTT nomogram.',
+        },
+        {
+            heading: 'Massive PE thrombolysis',
+            body: 'Coordinate UFH timing with lytic protocol. Many protocols hold UFH during systemic alteplase and restart without bolus when aPTT/anti-Xa permits.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Konstantinides SV, et al. 2019 ESC Pulmonary Embolism Guidelines. Eur Heart J. 2020;41:543-603.' },
+    ],
+};
+const UFHINF_ACS_TOOL = {
+    id: 'ufhinf-acs-tool',
+    title: 'UFH for ACS / STEMI',
+    subtitle: 'Capped bolus and infusion',
+    sections: [
+        {
+            heading: 'Common ACS regimen',
+            body: '[Unfractionated heparin](#/drug/ufh/ACS/STEMI adjunct) 60 units/kg IV bolus, max 4,000 units; then 12 units/kg/hr infusion, initial max 1,000 units/hr. Titrate by local nomogram.',
+        },
+        {
+            heading: 'Safety',
+            body: 'Coordinate with antiplatelet plan, cath lab timing, lytic use, and residual LMWH/DOAC effect. Avoid duplicate anticoagulation.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Amsterdam EA, et al. 2014 AHA/ACC NSTE-ACS Guideline. J Am Coll Cardiol. 2014;64:e139-e228.' },
+    ],
+};
+const UFHINF_MONITOR_TOOL = {
+    id: 'ufhinf-monitor-tool',
+    title: 'Heparin Monitoring',
+    subtitle: 'anti-Xa/aPTT, platelets, bleeding',
+    sections: [
+        {
+            heading: 'Monitoring',
+            body: '- Anti-Xa or aPTT by institutional nomogram\n- First level commonly 6 hr after start and 6 hr after dose change\n- CBC/platelets daily or per protocol\n- Bleeding exam at every handoff\n- Consider anti-Xa when aPTT is unreliable or discordant',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Garcia DA, et al. Parenteral Anticoagulants. Chest. 2012;141(2 Suppl):e24S-e43S.' },
+    ],
+};
+const UFHINF_REVERSAL_TOOL = {
+    id: 'ufhinf-reversal-tool',
+    title: 'Heparin Reversal',
+    subtitle: 'Protamine when major bleeding or urgent procedure',
+    sections: [
+        {
+            heading: 'Major bleeding',
+            body: 'Stop UFH. Use [Protamine Calculator](#/calc/protamine-dosing). Typical dose is 1 mg protamine per 100 units UFH received in the prior 2-3 hr, max 50 mg, given slow IV over 10 min.',
+        },
+        {
+            heading: 'Caution',
+            body: 'Avoid excess protamine; it can worsen anticoagulation/bleeding. High aPTT/anti-Xa without bleeding is usually managed by holding/reducing UFH per nomogram.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Frontera JA, et al. Reversal of Antithrombotics in Intracranial Hemorrhage. Neurocrit Care. 2016;24:6-46.' },
+    ],
+};
+const HTS_STEPS_PAGE = {
+    id: 'hts-steps',
+    title: 'Hypertonic Saline Steps',
+    subtitle: 'Herniation or severe symptomatic hyponatremia',
+    sections: [
+        {
+            heading: 'Immediate sequence',
+            body: '1. Identify indication: impending herniation/elevated ICP or severe symptomatic hyponatremia.\n2. Do not use HTS to correct routine hypernatremia.\n3. Herniation: call neurosurgery/neurocritical care; give 3% NaCl 2-5 mL/kg, often 150-250 mL over 10-20 min, or 23.4% NaCl 30 mL central if appropriate.\n4. Severe symptomatic hyponatremia: 3% NaCl 100-150 mL over 10-20 min, repeat up to 2 times for persistent severe symptoms.\n5. Check sodium q2h during active correction.\n6. Prevent overcorrection; consider DDAVP/D5W if sodium is rising too fast.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cook AM, et al. Acute Treatment of Cerebral Edema Guidelines. Neurocrit Care. 2020;32:647-666.' },
+        { num: 2, text: 'Baek SH, et al. SALSA Trial. JAMA Intern Med. 2021;181:81-92.' },
+    ],
+};
+const HTS_HERNIATION_TOOL = {
+    id: 'hts-herniation-tool',
+    title: 'HTS for Herniation',
+    subtitle: 'Hyperosmolar rescue',
+    sections: [
+        {
+            heading: 'Dose',
+            body: '[Hypertonic saline](#/drug/hypertonic-saline/intracranial hypertension) 3% NaCl 2-5 mL/kg IV bolus, often 150-250 mL over 10-20 min. Use [HTS Herniation Dose Calculator](#/calc/hern-hts-dose). 23.4% NaCl 30 mL IV over 10-20 min via central line may be used by protocol.',
+        },
+        {
+            heading: 'Parallel care',
+            body: 'Avoid hypotension, hypoxia, fever, hypoglycemia. Elevate head, keep neck midline, treat seizures, reverse anticoagulation when indicated, and arrange definitive neurosurgical care.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cook AM, et al. Acute Treatment of Cerebral Edema Guidelines. Neurocrit Care. 2020;32:647-666.' },
+    ],
+};
+const HTS_SODIUM_TOOL = {
+    id: 'hts-sodium-tool',
+    title: 'Sodium Goals',
+    subtitle: 'Symptom relief without overcorrection',
+    sections: [
+        {
+            heading: 'Hyponatremia',
+            body: '- Initial severe symptom target: Na rise 4-6 mEq/L\n- Avoid >10 mEq/L in 24 hr for most patients\n- Avoid >8 mEq/L in 24 hr in high-risk patients: alcohol use disorder, malnutrition, liver disease, hypokalemia, very low starting Na\n- Use DDAVP/D5W relowering strategy with nephrology/ICU guidance if overcorrection occurs or is likely',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Spasovski G, et al. Clinical Practice Guideline on Hyponatraemia. Eur J Endocrinol. 2014;170:G1-G47.' },
+        { num: 2, text: 'Sterns RH. Disorders of Plasma Sodium. N Engl J Med. 2015;372:55-65.' },
+    ],
+};
+const HTS_HYPERNA_TOOL = {
+    id: 'hts-hyperna-tool',
+    title: 'Hypernatremia Caution',
+    subtitle: 'HTS is not routine hypernatremia treatment',
+    sections: [
+        {
+            heading: 'Rule',
+            body: 'Do not give HTS to correct hypernatremia. Routine hypernatremia is treated with controlled free-water replacement based on chronicity and volume status.',
+        },
+        {
+            heading: 'If herniating and hypernatremic',
+            body: 'Treat as competing life threats. Call neurocritical care/neurosurgery immediately. Hyperosmolar rescue may still be justified for impending herniation, but sodium/osmolality must be tracked closely and the decision should be specialist-directed when possible.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cook AM, et al. Acute Treatment of Cerebral Edema Guidelines. Neurocrit Care. 2020;32:647-666.' },
+    ],
+};
+const HTS_STOP_TOOL = {
+    id: 'hts-stop-tool',
+    title: 'STOP: HTS Safety',
+    subtitle: 'Wrong indication and overcorrection checks',
+    sections: [
+        {
+            heading: 'Stop and verify',
+            body: '- Is this herniation/elevated ICP or severe symptomatic hyponatremia?\n- Is this actually routine hypernatremia correction? If yes, do not give HTS.\n- Is sodium correction already too rapid?\n- Is next sodium check ordered?\n- Is 23.4% NaCl being given via appropriate access/policy?',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Baek SH, et al. SALSA Trial. JAMA Intern Med. 2021;181:81-92.' },
+    ],
+};
+const SCAPE_STEPS_PAGE = {
+    id: 'scape-steps',
+    title: 'SCAPE Steps',
+    subtitle: 'NIV plus high-dose nitroglycerin',
+    sections: [
+        {
+            heading: 'Immediate sequence',
+            body: '1. Recognize hypertensive flash pulmonary edema: severe distress, diaphoresis, rales, SBP often >180.\n2. Sit upright and apply NIV immediately.\n3. Check nitrate contraindications: hypotension, RV infarct, recent PDE-5 inhibitor, severe AS/HOCM.\n4. Start high-dose [Nitroglycerin](#/drug/nitroglycerin/SCAPE high-dose): IV push 400-800 mcg q2-5 min by protocol and/or infusion 100-200 mcg/min rapidly titrated.\n5. Reassess BP, work of breathing, oxygenation every few minutes.\n6. Add diuretics after stabilization when volume overload is likely.\n7. Evaluate trigger: ACS, renal failure, valve catastrophe, dysrhythmia, medication nonadherence, severe hypertension.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit/IBCC. Sympathetic Crashing Acute Pulmonary Edema. Accessed 2026.' },
+        { num: 2, text: 'Levy P, et al. High-Dose Intravenous Nitroglycerin. Ann Emerg Med. 2007;50:144-152.' },
+    ],
+};
+const SCAPE_DOSE_TOOL = {
+    id: 'scape-dose-tool',
+    title: 'Nitroglycerin Dose',
+    subtitle: 'High-dose SCAPE range',
+    sections: [
+        {
+            heading: 'Common ED dosing',
+            body: '- SL nitroglycerin 0.4 mg q5 min while IV is prepared if patient can tolerate\n- IV push by protocol: 400-800 mcg every 2-5 min in severe hypertensive SCAPE\n- Infusion: start 100-200 mcg/min and rapidly titrate every 3-5 min; severe cases may need 300-800 mcg/min initially\n- Reduce once work of breathing improves and SBP approaches 140-160',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Levy P, et al. Ann Emerg Med. 2007;50:144-152.' },
+    ],
+};
+const SCAPE_CONTRA_TOOL = {
+    id: 'scape-contra-tool',
+    title: 'Nitrate Contraindications',
+    subtitle: 'Before high-dose nitroglycerin',
+    sections: [
+        {
+            heading: 'Avoid high-dose nitrate when',
+            body: '- SBP low or rapidly falling\n- RV infarct/preload-dependent shock likely\n- Sildenafil/vardenafil within 24 hr or tadalafil within 48 hr\n- Severe aortic stenosis or obstructive HCM with instability\n- Raised ICP concern where nitrate is unsafe',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Heidenreich PA, et al. 2022 AHA/ACC/HFSA Heart Failure Guideline. Circulation. 2022;145:e895-e1032.' },
+    ],
+};
+const SCAPE_NIV_TOOL = {
+    id: 'scape-niv-tool',
+    title: 'NIV in SCAPE',
+    subtitle: 'Start immediately',
+    sections: [
+        {
+            heading: 'Practical goals',
+            body: '- Apply CPAP/BiPAP immediately with high EPAP/PEEP as tolerated\n- Improve oxygenation and reduce preload/afterload through positive pressure\n- Do not delay NIV for IV access, labs, or imaging\n- Prepare intubation only if NIV/medical therapy fails or airway/mental status deteriorates',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit/IBCC. Sympathetic Crashing Acute Pulmonary Edema. Accessed 2026.' },
+    ],
+};
+const SCAPE_NIPRIDE_TOOL = {
+    id: 'scape-nipride-tool',
+    title: 'Nitroprusside?',
+    subtitle: 'Why not routine first-line ED SCAPE',
+    sections: [
+        {
+            heading: 'Recommendation',
+            body: 'Nitroprusside is not the usual ED first-line SCAPE medication. Use NIV plus high-dose nitroglycerin for the classic hypertensive crashing phenotype.',
+        },
+        {
+            heading: 'Why caution',
+            body: 'Nitroprusside usually requires ICU-level monitoring and has cyanide/thiocyanate toxicity concerns. Avoid/caution in renal or hepatic failure, raised ICP, pregnancy, and settings without close invasive BP/toxicity monitoring.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Peacock WF, et al. Hypertensive Heart Failure Reviews. Emerg Med Clin North Am. 2005;23:1105-1125.' },
+    ],
+};
+const LYTICS_STEPS_PAGE = {
+    id: 'lytics-steps',
+    title: 'Thrombolytic Steps',
+    subtitle: 'Indication-specific lytic safety',
+    sections: [
+        {
+            heading: 'Immediate sequence',
+            body: '1. Choose indication first: stroke, STEMI, massive PE/PE arrest, or specialist-directed reduced-dose/catheter strategy.\n2. Screen contraindications using the indication-specific framework.\n3. Confirm drug, exact dose, weight, time window, BP target, and antithrombotic plan.\n4. Treat BP before stroke lytic if >185/110.\n5. Coordinate heparin hold/restart for PE/STEMI protocols.\n6. Monitor in ICU/stroke/cath-capable setting.\n7. Have bleeding plan: stop lytic/anticoagulants, check fibrinogen, replace fibrinogen, consider antifibrinolytic with specialist input.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Powers WJ, et al. 2019 AHA/ASA Acute Ischemic Stroke Guideline Update. Stroke. 2019;50:e344-e418.' },
+        { num: 2, text: 'Konstantinides SV, et al. 2019 ESC PE Guidelines. Eur Heart J. 2020;41:543-603.' },
+    ],
+};
+const LYTICS_STROKE_TOOL = {
+    id: 'lytics-stroke-tool',
+    title: 'Stroke Lytics',
+    subtitle: 'TNK or alteplase by stroke protocol',
+    sections: [
+        {
+            heading: 'Requirements',
+            body: '- Disabling deficit within treatment window\n- CT excludes hemorrhage\n- BP <185/110 before treatment and <180/105 for 24 hr after\n- No antithrombotics for 24 hr after IV lytic unless specialist-directed',
+        },
+        {
+            heading: 'Common regimens',
+            body: '[Tenecteplase](#/drug/tenecteplase/acute ischemic stroke) 0.25 mg/kg IV bolus, max 25 mg, where adopted by protocol. [Alteplase](#/drug/alteplase/acute ischemic stroke) 0.9 mg/kg IV, max 90 mg; 10% bolus over 1 min, remainder over 60 min.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Powers WJ, et al. Stroke. 2019;50:e344-e418.' },
+        { num: 2, text: 'Menon BK, et al. AcT Trial. Lancet. 2022;400:161-169.' },
+    ],
+};
+const LYTICS_STEMI_TOOL = {
+    id: 'lytics-stemi-tool',
+    title: 'STEMI Lytics',
+    subtitle: 'When PCI delay is unacceptable',
+    sections: [
+        {
+            heading: 'Use when',
+            body: 'Eligible STEMI/STEMI-equivalent, symptoms generally <=12 hr, and timely PCI cannot be achieved, commonly FMC-to-device >120 min.',
+        },
+        {
+            heading: 'Regimen',
+            body: '[Tenecteplase](#/drug/tenecteplase/STEMI fibrinolysis) weight-based IV bolus; reduce by 50% if age >=75 per many protocols. Arrange transfer for rescue PCI if failed reperfusion or pharmaco-invasive PCI even if reperfusion succeeds.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'O\'Gara PT, et al. 2013 ACCF/AHA STEMI Guideline. Circulation. 2013;127:e362-e425.' },
+    ],
+};
+const LYTICS_PE_TOOL = {
+    id: 'lytics-pe-tool',
+    title: 'PE Lytics',
+    subtitle: 'Massive PE and PE arrest',
+    sections: [
+        {
+            heading: 'Massive PE with shock',
+            body: '[Alteplase](#/drug/alteplase/massive PE) 100 mg IV over 2 hr. Hold/restart UFH per protocol; many protocols restart without bolus when aPTT/anti-Xa permits.',
+        },
+        {
+            heading: 'PE arrest/peri-arrest',
+            body: '[Alteplase](#/drug/alteplase/PE arrest) 50 mg IV push during arrest; consider repeat 50 mg if no ROSC and PE remains likely per local protocol. Continue prolonged CPR when feasible and activate ECMO/PERT/thrombectomy pathway.',
+        },
+        {
+            heading: 'Intermediate-risk PE',
+            body: 'Not automatic systemic lysis. Use anticoagulation unless deterioration or specialist-directed catheter/reduced-dose strategy. [Half-Dose Alteplase Calculator](#/calc/half-dose-alteplase) supports intentional reduced-dose protocols.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Konstantinides SV, et al. 2019 ESC PE Guidelines. Eur Heart J. 2020;41:543-603.' },
+        { num: 2, text: 'Panchal AR, et al. 2020 AHA Guidelines for CPR and ECC. Circulation. 2020;142:S366-S468.' },
+    ],
+};
+const LYTICS_BLEED_TOOL = {
+    id: 'lytics-bleed-tool',
+    title: 'Bleeding After Lytics',
+    subtitle: 'Stop, resuscitate, replace fibrinogen',
+    sections: [
+        {
+            heading: 'Major bleeding sequence',
+            body: '1. Stop thrombolytic and anticoagulants.\n2. Activate critical bleeding/MTP if unstable.\n3. Check CBC, PT/INR, aPTT, fibrinogen, type/cross.\n4. Replace fibrinogen with cryoprecipitate or fibrinogen concentrate per protocol.\n5. Consider TXA or aminocaproic acid with specialist input.\n6. Repeat neuroimaging for neurologic deterioration after stroke lytic.\n7. Involve pharmacy, hematology, and indication-specific team.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Frontera JA, et al. Reversal of Antithrombotics in Intracranial Hemorrhage. Neurocrit Care. 2016;24:6-46.' },
+    ],
+};
+// -------------------------------------------------------------------
 // ECMO — Steps Summary
 // -------------------------------------------------------------------
 const ECMO_SUMMARY = {
@@ -21115,6 +21523,31 @@ export const INFO_PAGES = {
     'hdi-dose-tool': HDI_DOSE_TOOL,
     'hdi-dextrose-k-tool': HDI_DEXTROSE_K_TOOL,
     'hdi-stop': HDI_STOP_TOOL,
+    'kclinf-steps': KCLINF_STEPS_PAGE,
+    'kclinf-rates': KCLINF_RATES_TOOL,
+    'kclinf-contra-tool': KCLINF_CONTRA_TOOL,
+    'kclinf-dka-tool': KCLINF_DKA_TOOL,
+    'kclinf-stop-tool': KCLINF_STOP_TOOL,
+    'ufhinf-steps': UFHINF_STEPS_PAGE,
+    'ufhinf-vte-tool': UFHINF_VTE_TOOL,
+    'ufhinf-acs-tool': UFHINF_ACS_TOOL,
+    'ufhinf-monitor-tool': UFHINF_MONITOR_TOOL,
+    'ufhinf-reversal-tool': UFHINF_REVERSAL_TOOL,
+    'hts-steps': HTS_STEPS_PAGE,
+    'hts-herniation-tool': HTS_HERNIATION_TOOL,
+    'hts-sodium-tool': HTS_SODIUM_TOOL,
+    'hts-hyperna-tool': HTS_HYPERNA_TOOL,
+    'hts-stop-tool': HTS_STOP_TOOL,
+    'scape-steps': SCAPE_STEPS_PAGE,
+    'scape-dose-tool': SCAPE_DOSE_TOOL,
+    'scape-contra-tool': SCAPE_CONTRA_TOOL,
+    'scape-niv-tool': SCAPE_NIV_TOOL,
+    'scape-nipride-tool': SCAPE_NIPRIDE_TOOL,
+    'lytics-steps': LYTICS_STEPS_PAGE,
+    'lytics-stroke-tool': LYTICS_STROKE_TOOL,
+    'lytics-stemi-tool': LYTICS_STEMI_TOOL,
+    'lytics-pe-tool': LYTICS_PE_TOOL,
+    'lytics-bleed-tool': LYTICS_BLEED_TOOL,
     // Steps Summaries — Other
     'ap-summary': ACUTE_PANCREATITIS_SUMMARY,
     // Mesenteric Ischemia

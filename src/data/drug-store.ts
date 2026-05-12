@@ -374,12 +374,16 @@ const ALTEPLASE: DrugEntry = {
   genericName: 'Alteplase',
   drugClass: 'Thrombolytic (tissue plasminogen activator)',
   route: 'IV',
-  indications: ['Massive (high-risk) pulmonary embolism', 'Acute ischemic stroke', 'Acute STEMI', 'VAD pump thrombosis'],
+  indications: ['Massive (high-risk) pulmonary embolism', 'PE arrest/peri-arrest', 'Acute ischemic stroke', 'Acute STEMI', 'VAD pump thrombosis'],
   dosing: [
     {
       indication: 'High-risk PE',
       regimen: '100 mg IV over 2 hours: 0.6 mg/kg (max 50 mg) over first 15 min, remainder over next 1 hr 45 min. Stop UFH drip before infusion. Post-infusion: check PTT \u2014 if \u226475 restart UFH without bolus; if >75 repeat PTT q2hr until \u226475.',
       weightCalc: { dosePerKg: 0.6, unit: 'mg', maxDose: 50, label: 'Bolus (first 15 min)' },
+    },
+    {
+      indication: 'PE arrest/peri-arrest',
+      regimen: '50 mg IV push during cardiac arrest or peri-arrest when PE is strongly suspected/confirmed. Consider repeat 50 mg if no ROSC and PE remains likely per local protocol. Continue prolonged CPR when feasible and activate PERT/ECMO/thrombectomy pathway.',
     },
     {
       indication: 'Acute ischemic stroke (0\u20134.5h)',
@@ -3222,11 +3226,11 @@ const HYDROXYUREA: DrugEntry = {
 
 const HYPERTONIC_SALINE: DrugEntry = {
   id: 'hypertonic-saline',
-  name: 'Hypertonic Saline (3% NaCl)',
-  genericName: 'Sodium chloride 3%',
+  name: 'Hypertonic Saline',
+  genericName: 'Sodium chloride 3% / 23.4%',
   drugClass: 'Hypertonic crystalloid',
   route: 'IV',
-  indications: ['Severe symptomatic hyponatremia', 'DDAVP clamp bolus correction'],
+  indications: ['Severe symptomatic hyponatremia', 'DDAVP clamp bolus correction', 'Intracranial hypertension / impending herniation'],
   dosing: [
     {
       indication: 'Severe symptomatic hyponatremia',
@@ -3236,20 +3240,27 @@ const HYPERTONIC_SALINE: DrugEntry = {
       indication: 'DDAVP clamp bolus correction',
       regimen: '100 mL IV bolus. Each bolus raises Na ~2 mEq/L in a 70 kg adult. Administer during DDAVP clamp to achieve controlled, predictable Na rise. Check Na q2h.',
     },
+    {
+      indication: 'Intracranial hypertension / impending herniation',
+      regimen: '3% NaCl 2-5 mL/kg IV bolus, often 150-250 mL over 10-20 minutes; may repeat based on neurologic response and sodium/osmolality. 23.4% NaCl 30 mL IV over 10-20 minutes via central line may be used for impending herniation by protocol.',
+      weightCalc: { dosePerKg: 3, unit: 'mL', label: '3% NaCl bolus (3 mL/kg midpoint)' },
+    },
   ],
   contraindications: [
-    'Hypernatremia',
+    'Routine correction of hypernatremia',
     'Volume overload without severe symptomatic hyponatremia',
   ],
   cautions: [
     'Check Na q2h during administration — overcorrection causes osmotic demyelination syndrome (ODS)',
-    'Central line preferred for continuous infusions; peripheral access OK for boluses',
+    'Central line preferred for continuous infusions and required by many protocols for 23.4% NaCl; peripheral access OK for 3% boluses',
     'Max correction: 10 mEq/L in 24h (8 mEq/L for high-risk patients: alcoholics, malnourished, hypokalemia)',
+    'If hypernatremic and herniating, use only as specialist-directed neurocritical rescue with close sodium/osmolality monitoring',
     'SALSA trial showed bolus therapy achieves faster symptom relief than continuous infusion',
   ],
   monitoring: 'Serum sodium q2h during treatment, neurological status, fluid balance.',
-  notes: '3% NaCl contains 513 mEq/L of sodium. The bolus approach (100-150 mL over 10-20 min, repeat PRN) is now preferred over continuous infusion based on the SALSA trial. Each 100 mL bolus raises Na ~2 mEq/L in a 70 kg adult. The goal is to raise Na enough to reverse acute cerebral edema symptoms (usually 4-6 mEq/L), NOT to normalize Na. Subsequent correction should be slow and controlled.',
+  notes: '3% NaCl contains 513 mEq/L of sodium. For severe symptomatic hyponatremia, the bolus approach (100-150 mL over 10-20 min, repeat PRN) is preferred over continuous infusion. The goal is to raise Na enough to reverse acute cerebral edema symptoms (usually 4-6 mEq/L), NOT to normalize Na. For elevated ICP/herniation, dosing is based on hyperosmolar rescue and neurologic response, not hyponatremia correction targets.',
   citations: [
+    'Cook AM, et al. Guidelines for the Acute Treatment of Cerebral Edema in Neurocritical Care Patients. Neurocrit Care. 2020;32(3):647-666.',
     'Baek SH et al. SALSA Trial: Bolus vs Continuous 3% Saline. JAMA Intern Med. 2021;181(1):81-92.',
     'Spasovski G et al. Clinical Practice Guideline on Hyponatraemia. Eur J Endocrinol. 2014;170(3):G1-G47.',
   ],
@@ -4244,11 +4255,15 @@ const NITROGLYCERIN: DrugEntry = {
   genericName: 'Nitroglycerin (glyceryl trinitrate)',
   drugClass: 'Organic nitrate (vasodilator)',
   route: 'SL / IV / Topical',
-  indications: ['Acute coronary syndrome', 'Angina pectoris', 'Acute pulmonary edema', 'Hypertensive emergency', 'Tocolysis (uterine relaxation)', 'Vasopressor extravasation alternative'],
+  indications: ['Acute coronary syndrome', 'Angina pectoris', 'SCAPE high-dose', 'Acute pulmonary edema', 'Hypertensive emergency', 'Tocolysis (uterine relaxation)', 'Vasopressor extravasation alternative'],
   dosing: [
     {
       indication: 'ACS / NSTEMI (initial)',
       regimen: 'SL: 0.4 mg (1 tablet or spray) every 5 min × 3 doses. IV: Start 5-10 mcg/min, titrate by 5-10 mcg/min every 3-5 min. Target: symptom relief and SBP >100. Max typically 200 mcg/min.',
+    },
+    {
+      indication: 'SCAPE high-dose',
+      regimen: 'For hypertensive SCAPE with no nitrate contraindication: apply NIV immediately. IV push by protocol: 400-800 mcg IV every 2-5 min for severe distress and SBP usually >180, and/or start infusion 100-200 mcg/min with rapid titration every 3-5 min. Severe cases may transiently require 300-800 mcg/min. Reduce once work of breathing improves and SBP approaches 140-160.',
     },
     {
       indication: 'Tocolysis (Cord Prolapse / Shoulder Dystocia / Zavanelli)',
@@ -4277,6 +4292,7 @@ const NITROGLYCERIN: DrugEntry = {
   notes: 'Nitroglycerin provides symptomatic relief in ACS through coronary vasodilation, preload reduction, and afterload reduction. No proven mortality benefit in ACS (ISIS-4, GISSI-3), but effective for symptom management. Always rule out RV infarction (right-sided ECG, V4R) before administration — nitrates can cause catastrophic hypotension in RV failure. SL nitroglycerin that relieves chest pain does NOT differentiate cardiac from non-cardiac causes.',
   citations: [
     'Amsterdam EA, et al. 2014 AHA/ACC Guideline for Management of NSTE-ACS. J Am Coll Cardiol. 2014;64(24):e189-e228.',
+    'Levy P, et al. Treatment of Severe Decompensated Heart Failure With High-Dose Intravenous Nitroglycerin. Ann Emerg Med. 2007;50(2):144-152.',
     'Thadani U. Nitrate Therapy and Nitrate Tolerance in Patients with Coronary Artery Disease. Curr Pharm Des. 2014;20(25):3966-79.',
   ],
 };

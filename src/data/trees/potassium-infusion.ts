@@ -1,0 +1,166 @@
+// MedKitt - Potassium Infusion Protocol
+// Indication -> contraindications -> access/rate -> monitoring -> escalation
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const POTASSIUM_INFUSION_NODES: DecisionNode[] = [
+  {
+    id: 'kclinf-start',
+    type: 'info',
+    module: 1,
+    title: 'Potassium Infusion Protocol',
+    body: '[Potassium Infusion Steps](#/info/kclinf-steps)\n\nUse IV potassium when hypokalemia is severe, symptomatic, associated with ECG changes/arrhythmia, ongoing losses are significant, or the patient cannot take oral replacement.\n\nCore safety rule: IV potassium is a high-alert medication. Confirm indication, renal function/urine output, infusion concentration, access, pump programming, and monitoring before administration.',
+    citation: [1, 2, 3],
+    next: 'kclinf-indication',
+    summary: 'IV potassium is high-alert therapy for severe or clinically significant hypokalemia.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'kclinf-indication',
+    type: 'question',
+    module: 1,
+    title: 'Clinical Scenario',
+    body: 'Which potassium replacement scenario fits best?',
+    options: [
+      { label: 'Severe/symptomatic hypokalemia', description: 'K <=2.5, weakness/paralysis, arrhythmia, ECG changes, digoxin risk', next: 'kclinf-severe', urgency: 'critical' },
+      { label: 'DKA/HHS protocol', description: 'Insulin-dependent potassium management', next: 'kclinf-dka', urgency: 'critical' },
+      { label: 'Moderate hypokalemia unable PO', description: 'Needs IV replacement but not immediately life-threatening', next: 'kclinf-access' },
+      { label: 'Renal failure/anuria or hyperkalemia risk', description: 'Contraindication or specialist-directed dosing required', next: 'kclinf-contra', urgency: 'critical' },
+    ],
+    citation: [1, 3, 4],
+    summary: 'Route and rate depend on severity, ECG risk, renal function, and DKA status.',
+  },
+  {
+    id: 'kclinf-contra',
+    type: 'result',
+    module: 1,
+    title: 'Contraindication / Do Not Reflexively Infuse',
+    body: 'Do not give routine IV potassium when any are present:\n\n- Hyperkalemia or rapidly rising K\n- Anuria or severe renal failure without specialist-directed replacement\n- Unknown current potassium in an unstable renal patient\n- Potassium-containing IV fluid running without a clear indication\n- Concern for pseudohypokalemia or hemolyzed/invalid lab driving treatment\n\nIf life-threatening hypokalemia coexists with renal failure, use senior/pharmacy/nephrology guidance, continuous ECG monitoring, and very small reassessed doses.',
+    recommendation: 'Hold routine potassium infusion and reassess indication, renal function, urine output, and current K.',
+    confidence: 'recommended',
+    citation: [1, 3],
+    summary: 'Renal failure, anuria, or hyperkalemia risk should stop automatic potassium infusion.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'kclinf-severe',
+    type: 'info',
+    module: 2,
+    title: 'Severe / Symptomatic Hypokalemia',
+    body: 'Severe hypokalemia with arrhythmia, ECG changes, paralysis, respiratory weakness, or K <=2.5 requires monitored IV replacement.\n\nInitial approach:\n- Continuous ECG monitoring\n- Replace magnesium concurrently if low or unknown and torsades/arrhythmia risk is present\n- Prefer central access for rates >10 mEq/hr\n- Typical severe replacement: [Potassium chloride IV](#/drug/potassium-chloride-iv/severe hypokalemia) 20 mEq/hr via central line with continuous monitoring\n- In immediately life-threatening arrhythmia/paralysis, higher rates may be used only by institutional protocol with senior/pharmacy involvement\n\nRecheck K every 2-4 hr, or more frequently during aggressive replacement.',
+    citation: [1, 2, 3],
+    next: 'kclinf-mag',
+    summary: 'Severe symptomatic hypokalemia needs monitored IV K, magnesium correction, and frequent reassessment.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'kclinf-dka',
+    type: 'info',
+    module: 2,
+    title: 'DKA / HHS Potassium Rules',
+    body: 'Potassium determines whether insulin can safely start.\n\nDKA/HHS rules:\n- K <3.3 mEq/L: hold insulin; give [Potassium chloride IV](#/drug/potassium-chloride-iv/DKA severe hypokalemia) 20-30 mEq/hr until K >=3.3\n- K 3.3-5.2 mEq/L: give 20-30 mEq potassium per liter of IV fluid while insulin runs\n- K >5.2 mEq/L: do not give potassium initially; recheck q2h and start replacement when K falls into range\n\nUse a mix of potassium chloride and potassium phosphate/acetate when phosphate deficit or hyperchloremia is relevant per protocol.',
+    citation: [4, 5],
+    next: 'kclinf-monitor',
+    summary: 'In DKA/HHS, hold insulin when K <3.3 and replace before insulin.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'kclinf-access',
+    type: 'question',
+    module: 2,
+    title: 'Access / Monitoring',
+    body: 'What access and monitoring are available?',
+    options: [
+      { label: 'Peripheral IV only', description: 'Routine ED replacement pathway', next: 'kclinf-peripheral' },
+      { label: 'Central line + telemetry', description: 'Allows higher monitored rates when clinically necessary', next: 'kclinf-central', urgency: 'urgent' },
+      { label: 'No pump/monitoring', description: 'Unsafe for IV potassium infusion', next: 'kclinf-stop', urgency: 'critical' },
+    ],
+    citation: [1, 3],
+    summary: 'Access and monitoring determine safe potassium infusion rate.',
+  },
+  {
+    id: 'kclinf-peripheral',
+    type: 'info',
+    module: 3,
+    title: 'Peripheral Infusion',
+    body: 'Peripheral route:\n- Typical maximum: 10 mEq/hr per peripheral line\n- Common concentration: 10 mEq in 100 mL, infused over 1 hr\n- Use infusion pump; never IV push\n- Burning/phlebitis is common; slow rate, dilute, or use a second line when needed\n- If larger hourly replacement is required, use multiple peripheral lines or central access per local policy\n\nFor moderate hypokalemia, oral replacement is preferred when gut function and urgency allow.',
+    citation: [1, 3],
+    next: 'kclinf-mag',
+    summary: 'Peripheral KCl is generally limited to 10 mEq/hr per line with a pump.',
+  },
+  {
+    id: 'kclinf-central',
+    type: 'info',
+    module: 3,
+    title: 'Central Monitored Infusion',
+    body: 'Central line + continuous ECG monitoring:\n- Common severe replacement: 20 mEq/hr\n- Higher rates require institutional protocol, pharmacist/senior clinician involvement, and frequent serum K checks\n- Avoid routine concentrated potassium through peripheral lines\n- Verify pump channel, bag concentration, and line tracing before starting\n\nIf arrhythmia or paralysis is present, treat as a resuscitation medication with continuous reassessment.',
+    citation: [1, 2, 3],
+    next: 'kclinf-mag',
+    summary: 'Central monitored potassium allows higher rates but still needs strict safeguards.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'kclinf-mag',
+    type: 'info',
+    module: 3,
+    title: 'Magnesium Co-Repletion',
+    body: 'Hypomagnesemia causes renal potassium wasting and makes hypokalemia difficult to correct.\n\nActions:\n- Check magnesium early\n- Replete magnesium when low, unknown with arrhythmia, torsades risk, alcoholism/malnutrition, diuretic use, or refractory hypokalemia\n- Treat torsades or marked QT prolongation with IV magnesium while correcting potassium\n\nFailure to correct magnesium is a common reason potassium replacement appears ineffective.',
+    citation: [1, 2],
+    next: 'kclinf-monitor',
+    summary: 'Correct magnesium to make potassium repletion effective and reduce arrhythmia risk.',
+  },
+  {
+    id: 'kclinf-monitor',
+    type: 'info',
+    module: 4,
+    title: 'Monitoring / Endpoints',
+    body: 'Monitoring:\n- Continuous ECG for severe hypokalemia, rates >10 mEq/hr, arrhythmia, digoxin use, or high-risk cardiac disease\n- Recheck K q2-4 hr during aggressive IV replacement\n- Check Mg, phosphate, creatinine, glucose/acid-base when relevant\n- Track total potassium administered from all sources\n\nEndpoints:\n- Resolve symptoms/ECG changes\n- K generally >3.0 for immediate safety, then target 3.5-4.5 based on clinical context\n- Avoid overshoot in renal impairment or when acidosis/insulin shifts reverse.',
+    citation: [1, 3, 4],
+    next: 'kclinf-dispo',
+    summary: 'Monitor ECG, serial K, renal function, magnesium, and total administered potassium.',
+  },
+  {
+    id: 'kclinf-dispo',
+    type: 'result',
+    module: 4,
+    title: 'Disposition',
+    body: 'Admit/ICU when:\n- Severe symptoms, arrhythmia, ECG changes, paralysis, respiratory weakness\n- Need for central/high-rate replacement\n- DKA/HHS requiring insulin infusion\n- Ongoing GI/renal losses or unclear cause\n- Renal failure or high overshoot risk\n\nDischarge only when the cause is addressed, patient is asymptomatic, ECG is safe, potassium has stabilized, oral replacement/follow-up is arranged, and repeat labs are planned.',
+    recommendation: 'Disposition depends on arrhythmia risk, replacement rate, renal function, and cause control.',
+    confidence: 'recommended',
+    citation: [1, 3],
+    summary: 'Severe or high-rate potassium replacement generally needs admission and monitoring.',
+  },
+  {
+    id: 'kclinf-stop',
+    type: 'result',
+    module: 4,
+    title: 'Stop / Safety Check',
+    body: 'Stop before potassium infusion if:\n- No infusion pump\n- Dose/rate/concentration cannot be verified\n- No current potassium or renal function in a high-risk patient\n- Hyperkalemia, anuria, or rapidly worsening renal failure\n- The line cannot be traced to the patient\n\nPotassium must never be given IV push.',
+    recommendation: 'Do not start IV potassium until indication, rate, access, pump, and monitoring are verified.',
+    confidence: 'recommended',
+    citation: [1, 3],
+    summary: 'Potassium IV push or unverified infusion setup is unsafe.',
+    safetyLevel: 'critical',
+  },
+];
+
+export const POTASSIUM_INFUSION_MODULE_LABELS = ['Indication', 'Scenario', 'Rate / Access', 'Monitor / Dispo'];
+
+export const POTASSIUM_INFUSION_CITATIONS: Citation[] = [
+  { num: 1, text: 'Kim MJ, Valerio C, Knobloch GK. Potassium Disorders: Hypokalemia and Hyperkalemia. Am Fam Physician. 2023;107(1):59-70.' },
+  { num: 2, text: 'Gennari FJ. Hypokalemia. N Engl J Med. 1998;339(7):451-458.' },
+  { num: 3, text: 'DailyMed. Potassium Chloride Injection prescribing information. Accessed 2026.' },
+  { num: 4, text: 'Kitabchi AE, et al. Hyperglycemic Crises in Adult Patients With Diabetes. Diabetes Care. 2009;32(7):1335-1343.' },
+  { num: 5, text: 'EMCrit/IBCC. Diabetic Ketoacidosis and Hypokalemia management chapters. Accessed 2026.' },
+];
+
+export const POTASSIUM_INFUSION_CRITICAL_ACTIONS = [
+  { text: 'Never give IV potassium push.', nodeId: 'kclinf-stop' },
+  { text: 'Confirm renal function/urine output and current K before routine infusion.', nodeId: 'kclinf-contra' },
+  { text: 'Use pump and line tracing for every infusion.', nodeId: 'kclinf-access' },
+  { text: 'Hold insulin in DKA/HHS when K <3.3 mEq/L.', nodeId: 'kclinf-dka' },
+  { text: 'Correct magnesium when low or hypokalemia is refractory.', nodeId: 'kclinf-mag' },
+];
+
+export const POTASSIUM_INFUSION_NODE_COUNT = POTASSIUM_INFUSION_NODES.length;

@@ -1,0 +1,131 @@
+// MedKitt - Hypertonic Saline Protocol
+// Severe hyponatremia vs elevated ICP/herniation vs hypernatremia safety
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const HYPERTONIC_SALINE_PROTOCOL_NODES: DecisionNode[] = [
+  {
+    id: 'hts-start',
+    type: 'info',
+    module: 1,
+    title: 'Hypertonic Saline Protocol',
+    body: '[Hypertonic Saline Steps](#/info/hts-steps)\n\nHypertonic saline is used for two distinct emergencies:\n\n1. Severe symptomatic hyponatremia with cerebral edema/seizure/coma\n2. Elevated ICP or impending herniation from acute neurologic injury\n\nIt is not a treatment for routine hypernatremia. If a hypernatremic patient is herniating, manage as a neurocritical emergency with specialist input; hyperosmolar rescue may still be used when benefits outweigh sodium/osmolality risk.',
+    citation: [1, 2, 3],
+    next: 'hts-scenario',
+    summary: 'HTS treats severe symptomatic hyponatremia and elevated ICP/herniation, not routine hypernatremia.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'hts-scenario',
+    type: 'question',
+    module: 1,
+    title: 'Which Emergency?',
+    body: 'Select the indication.',
+    options: [
+      { label: 'Impending herniation / elevated ICP', description: 'Acute neurologic injury, blown pupil, posturing, declining GCS', next: 'hts-herniation', urgency: 'critical' },
+      { label: 'Severe symptomatic hyponatremia', description: 'Seizure, coma, severe confusion from low sodium', next: 'hts-hyponatremia', urgency: 'critical' },
+      { label: 'Chronic/mild hyponatremia', description: 'No severe neurologic symptoms', next: 'hts-not-routine' },
+      { label: 'Hypernatremia without herniation', description: 'Do not give HTS for sodium correction', next: 'hts-hypernatremia-stop', urgency: 'critical' },
+    ],
+    citation: [1, 2, 3],
+    summary: 'The dose and endpoint differ for herniation versus hyponatremic encephalopathy.',
+  },
+  {
+    id: 'hts-herniation',
+    type: 'info',
+    module: 2,
+    title: 'Herniation / Elevated ICP Rescue',
+    body: 'Immediate actions:\n- Call neurosurgery/neurocritical care\n- Head of bed elevated, neck midline, avoid hypotension/hypoxia/fever\n- Treat seizures and reverse anticoagulation when indicated\n- Temporize ventilation only for acute herniation while definitive therapy is arranged\n\nHyperosmolar options:\n- [Hypertonic saline](#/drug/hypertonic-saline/intracranial hypertension) 3% NaCl 2-5 mL/kg IV bolus, often 150-250 mL over 10-20 min\n- 23.4% NaCl 30 mL IV over 10-20 min via central line when available/appropriate\n- Mannitol is an alternative when hemodynamics and renal status allow\n\nUse [HTS Herniation Dose Calculator](#/calc/hern-hts-dose) for weight-based bolus support.',
+    citation: [1, 4],
+    next: 'hts-sodium-limits',
+    summary: 'Herniation rescue uses hyperosmolar bolus therapy while definitive neurosurgical management is arranged.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'hts-hyponatremia',
+    type: 'info',
+    module: 2,
+    title: 'Severe Symptomatic Hyponatremia',
+    body: 'Indications: seizure, coma, severe encephalopathy, or signs of cerebral edema from hyponatremia.\n\nBolus approach:\n- [Hypertonic saline](#/drug/hypertonic-saline/severe symptomatic hyponatremia) 100-150 mL of 3% NaCl IV over 10-20 min\n- Repeat up to 2 additional boluses for persistent severe symptoms\n- Initial target: raise serum sodium by 4-6 mEq/L to reverse severe symptoms\n- Do not aim to normalize sodium in the ED\n\nCheck serum sodium q2h during active correction.',
+    citation: [2, 3, 5],
+    next: 'hts-sodium-limits',
+    summary: 'Severe symptomatic hyponatremia uses repeated 3% boluses to raise Na 4-6 mEq/L.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'hts-not-routine',
+    type: 'result',
+    module: 2,
+    title: 'Not Routine HTS',
+    body: 'Do not use 3% saline for mild, chronic, or asymptomatic hyponatremia.\n\nInstead:\n- Identify cause and chronicity\n- Stop offending fluids/medications when appropriate\n- Use fluid restriction, salt/loop strategy, or other cause-specific therapy\n- Consider DDAVP clamp only when overcorrection risk or controlled correction strategy requires expert management\n\nHypertonic saline is reserved for severe symptoms or specialist-directed protocols.',
+    recommendation: 'Use non-emergent hyponatremia management unless severe neurologic symptoms are present.',
+    confidence: 'recommended',
+    citation: [2, 3],
+    summary: 'Mild/chronic hyponatremia generally should not receive 3% saline boluses.',
+  },
+  {
+    id: 'hts-hypernatremia-stop',
+    type: 'result',
+    module: 2,
+    title: 'Hypernatremia Safety Stop',
+    body: 'Do not give hypertonic saline to correct hypernatremia.\n\nIf hypernatremia plus herniation/elevated ICP is present:\n- Treat as competing life threats\n- Call neurocritical care/neurosurgery immediately\n- Avoid hypotonic fluid boluses in acute cerebral edema\n- Consider hyperosmolar rescue only if impending herniation benefit outweighs sodium/osmolality risk\n- Track serum sodium and osmolality closely\n\nFor routine hypernatremia, use controlled free-water replacement based on chronicity and volume status.',
+    recommendation: 'Hold HTS for routine hypernatremia; use only specialist-directed ICP rescue if herniating.',
+    confidence: 'recommended',
+    citation: [1, 4],
+    summary: 'Hypernatremia is not an indication for HTS unless specialist-directed herniation rescue is needed.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'hts-sodium-limits',
+    type: 'info',
+    module: 3,
+    title: 'Sodium Targets / ODS Prevention',
+    body: 'Hyponatremia correction limits:\n- Initial severe symptom target: +4 to +6 mEq/L\n- Avoid >8 mEq/L in 24 hr in high-risk patients\n- Avoid >10 mEq/L in 24 hr in most patients\n- High ODS risk: alcoholism, malnutrition, liver disease, hypokalemia, very low starting Na\n\nIf overcorrection occurs or is likely, consider DDAVP and D5W relowering strategy with nephrology/ICU guidance.',
+    citation: [2, 3, 5],
+    next: 'hts-access',
+    summary: 'Treat symptoms first, then prevent overcorrection and ODS.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'hts-access',
+    type: 'info',
+    module: 3,
+    title: 'Access / Monitoring',
+    body: 'Access:\n- 3% NaCl bolus can generally be given peripherally through a reliable IV\n- Continuous 3% infusion and 23.4% NaCl should follow local central-line policy\n- Use infusion pump and label line clearly\n\nMonitoring:\n- Neuro exam and vital signs during bolus\n- Serum sodium/osmolality q2h during active correction\n- Strict I/O and volume status\n- Avoid hypotension, hypoxia, fever, and hypoglycemia in neurocritical patients',
+    citation: [1, 2, 4],
+    next: 'hts-dispo',
+    summary: '3% bolus may be peripheral, but concentrated/continuous therapy needs policy-driven access and monitoring.',
+  },
+  {
+    id: 'hts-dispo',
+    type: 'result',
+    module: 4,
+    title: 'Disposition',
+    body: 'Disposition:\n- Herniation/elevated ICP: ICU/neurosurgery/neurocritical care\n- Severe symptomatic hyponatremia: ICU or closely monitored setting until sodium trajectory is controlled\n- Need for DDAVP clamp: ICU/stepdown per local capability\n- Overcorrection or high ODS risk: nephrology/ICU involvement\n\nDocument indication, dose, sodium before/after, neurologic response, and next sodium check time.',
+    recommendation: 'HTS use requires monitored disposition and explicit sodium follow-up plan.',
+    confidence: 'recommended',
+    citation: [1, 2, 3],
+    summary: 'HTS patients need monitored disposition and sodium trajectory planning.',
+  },
+];
+
+export const HYPERTONIC_SALINE_PROTOCOL_MODULE_LABELS = ['Indication', 'Dose', 'Safety', 'Disposition'];
+
+export const HYPERTONIC_SALINE_PROTOCOL_CITATIONS: Citation[] = [
+  { num: 1, text: 'Cook AM, et al. Guidelines for the Acute Treatment of Cerebral Edema in Neurocritical Care Patients. Neurocrit Care. 2020;32(3):647-666.' },
+  { num: 2, text: 'Spasovski G, et al. Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia. Eur J Endocrinol. 2014;170(3):G1-G47.' },
+  { num: 3, text: 'Baek SH, et al. SALSA Trial: Bolus vs Continuous Hypertonic Saline for Symptomatic Hyponatremia. JAMA Intern Med. 2021;181(1):81-92.' },
+  { num: 4, text: 'EMCrit/IBCC. Elevated intracranial pressure and hypertonic saline chapters. Accessed 2026.' },
+  { num: 5, text: 'Sterns RH. Disorders of Plasma Sodium - Causes, Consequences, and Correction. N Engl J Med. 2015;372:55-65.' },
+];
+
+export const HYPERTONIC_SALINE_PROTOCOL_CRITICAL_ACTIONS = [
+  { text: 'Use HTS for herniation/elevated ICP or severe symptomatic hyponatremia.', nodeId: 'hts-scenario' },
+  { text: 'Do not use HTS to correct routine hypernatremia.', nodeId: 'hts-hypernatremia-stop' },
+  { text: 'Target 4-6 mEq/L initial sodium rise in severe symptomatic hyponatremia.', nodeId: 'hts-hyponatremia' },
+  { text: 'Avoid overcorrection and use DDAVP/D5W rescue when needed.', nodeId: 'hts-sodium-limits' },
+  { text: 'Escalate herniation immediately to neurosurgery/neurocritical care.', nodeId: 'hts-herniation' },
+];
+
+export const HYPERTONIC_SALINE_PROTOCOL_NODE_COUNT = HYPERTONIC_SALINE_PROTOCOL_NODES.length;

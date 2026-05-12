@@ -1,0 +1,167 @@
+// MedKitt - Unfractionated Heparin Infusion Protocol
+// Indication -> bolus strategy -> monitoring -> adjustment -> bleeding/reversal
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const HEPARIN_INFUSION_NODES: DecisionNode[] = [
+  {
+    id: 'ufhinf-start',
+    type: 'info',
+    module: 1,
+    title: 'Unfractionated Heparin Infusion Protocol',
+    body: '[Heparin Infusion Steps](#/info/ufhinf-steps)\n\nUse unfractionated heparin when rapid titration, short half-life, procedural flexibility, renal failure, or planned thrombolysis/procedure makes it preferable to LMWH or DOAC therapy.\n\nBefore starting: confirm indication, bleeding risk, platelet count, baseline aPTT/anti-Xa availability, recent anticoagulants, and whether a bolus is appropriate.',
+    citation: [1, 2, 3],
+    next: 'ufhinf-indication',
+    summary: 'UFH is preferred when titratability, reversibility, or renal/procedural flexibility matters.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'ufhinf-indication',
+    type: 'question',
+    module: 1,
+    title: 'Indication / Pathway',
+    body: 'Which heparin pathway is needed?',
+    options: [
+      { label: 'VTE / PE treatment', description: 'DVT, PE, high-risk VTE pathway', next: 'ufhinf-vte', urgency: 'urgent' },
+      { label: 'ACS / STEMI adjunct', description: 'NSTEMI/UA, STEMI PCI or lytic adjunct', next: 'ufhinf-acs', urgency: 'urgent' },
+      { label: 'No bolus / high bleed risk', description: 'Post-procedure, post-thrombolytic, intracranial risk, frailty, active bleeding concern', next: 'ufhinf-no-bolus', urgency: 'critical' },
+      { label: 'Contraindication / HIT concern', description: 'Do not start UFH until clarified', next: 'ufhinf-contra', urgency: 'critical' },
+    ],
+    citation: [1, 2, 3],
+    summary: 'Heparin dosing depends on indication and bolus safety.',
+  },
+  {
+    id: 'ufhinf-contra',
+    type: 'result',
+    module: 1,
+    title: 'Contraindications / Stop',
+    body: 'Do not start routine UFH infusion when any are present:\n\n- Active major bleeding\n- Suspected/confirmed heparin-induced thrombocytopenia (HIT)\n- Severe uncontrolled hypertension with bleeding risk\n- Recent high-risk surgery/procedure where anticoagulation is not cleared\n- Intracranial hemorrhage or unsecured high-risk lesion unless specialist-directed\n- Platelets critically low or rapidly falling without explanation\n\nIf anticoagulation is still required, discuss non-heparin anticoagulant options with pharmacy/hematology.',
+    recommendation: 'Hold UFH and escalate when bleeding, HIT, or high-risk contraindication is present.',
+    confidence: 'recommended',
+    citation: [1, 4],
+    summary: 'Active bleeding or HIT concern should stop routine UFH infusion.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'ufhinf-vte',
+    type: 'info',
+    module: 2,
+    title: 'VTE / PE Standard Dosing',
+    body: 'Common therapeutic VTE regimen:\n- [Unfractionated heparin](#/drug/ufh/PE/DVT treatment) 80 units/kg IV bolus, then 18 units/kg/hr infusion\n- Use actual body weight unless local protocol specifies adjusted weight\n- Obtain baseline CBC, platelets, PT/INR, aPTT, creatinine, and anti-Xa/aPTT monitoring plan\n- First anti-Xa/aPTT commonly 6 hr after start or dose change\n\nMassive PE with thrombolysis planned: coordinate timing with the thrombolytic protocol. Many protocols hold UFH during systemic alteplase and restart without bolus when aPTT/anti-Xa permits.',
+    citation: [1, 2, 5],
+    next: 'ufhinf-monitor',
+    summary: 'Standard VTE UFH is 80 U/kg bolus then 18 U/kg/hr, adjusted by protocol.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'ufhinf-acs',
+    type: 'info',
+    module: 2,
+    title: 'ACS / STEMI Adjunct',
+    body: 'Common ACS regimen:\n- [Unfractionated heparin](#/drug/ufh/ACS/STEMI adjunct) 60 units/kg IV bolus, max 4,000 units\n- Infusion 12 units/kg/hr, initial max 1,000 units/hr\n- Titrate by institutional aPTT or anti-Xa nomogram\n\nCoordinate with antiplatelet therapy, cath lab strategy, lytic therapy if used, and bleeding risk. Avoid duplicate anticoagulants when the patient has already received LMWH/DOAC.',
+    citation: [1, 3, 6],
+    next: 'ufhinf-monitor',
+    summary: 'ACS UFH uses lower bolus/infusion caps than VTE protocols.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'ufhinf-no-bolus',
+    type: 'info',
+    module: 2,
+    title: 'No-Bolus / Modified Start',
+    body: 'Use a no-bolus or reduced-intensity UFH start when full bolus bleeding risk is unacceptable but anticoagulation is still indicated.\n\nExamples:\n- Post-thrombolysis restart\n- Recent procedure/surgery after specialist clearance\n- Intracranial or spinal pathology after specialist clearance\n- Very high bleeding risk or frailty\n- Transition from another anticoagulant with residual effect\n\nDocument the reason for no bolus and the target monitoring range. Pharmacy should help select the institutional low-intensity or no-bolus nomogram.',
+    citation: [1, 2, 4],
+    next: 'ufhinf-monitor',
+    summary: 'No-bolus UFH is appropriate when therapeutic anticoagulation is needed but bolus risk is too high.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'ufhinf-monitor',
+    type: 'info',
+    module: 3,
+    title: 'Monitoring',
+    body: 'Monitoring essentials:\n- Baseline CBC/platelets, PT/INR, aPTT, creatinine, pregnancy status when relevant\n- Anti-Xa or aPTT per institutional nomogram\n- First level commonly 6 hr after start and 6 hr after dose changes\n- Platelets daily or per protocol to screen for HIT\n- Assess for bleeding every handoff\n\nAnti-Xa is often preferred when aPTT is unreliable: lupus anticoagulant, high factor VIII, liver disease, inflammation, or discordant values.',
+    citation: [1, 4, 7],
+    next: 'ufhinf-adjust',
+    summary: 'Use a protocolized anti-Xa or aPTT nomogram and monitor platelets/bleeding.',
+  },
+  {
+    id: 'ufhinf-adjust',
+    type: 'info',
+    module: 3,
+    title: 'Adjustment / Handoff',
+    body: 'Dose adjustment should follow the local nomogram, not ad hoc bedside changes.\n\nHandoff must include:\n- Indication and target range\n- Actual weight used for dosing\n- Bolus given or intentionally omitted\n- Current infusion rate in units/hr and units/kg/hr\n- Last level, next level due, and trend\n- Bleeding checks and platelet trend\n- Planned procedure, thrombolytic timing, or transition plan',
+    citation: [1, 4],
+    next: 'ufhinf-bleeding',
+    summary: 'Heparin changes should follow local nomogram and clear handoff.',
+  },
+  {
+    id: 'ufhinf-bleeding',
+    type: 'question',
+    module: 4,
+    title: 'Bleeding / Over-Anticoagulation',
+    body: 'Is there major bleeding or urgent reversal need?',
+    options: [
+      { label: 'Major bleeding / emergent procedure', description: 'Stop UFH and reverse as needed', next: 'ufhinf-protamine', urgency: 'critical' },
+      { label: 'Supratherapeutic level, no bleeding', description: 'Hold/decrease per nomogram', next: 'ufhinf-hold' },
+      { label: 'No bleeding', description: 'Continue protocolized monitoring', next: 'ufhinf-dispo' },
+    ],
+    citation: [4, 7],
+    summary: 'Major bleeding requires stopping UFH and considering protamine.',
+  },
+  {
+    id: 'ufhinf-protamine',
+    type: 'info',
+    module: 4,
+    title: 'Protamine Reversal',
+    body: 'For major bleeding or urgent procedure:\n- Stop UFH\n- Use [Protamine Calculator](#/calc/protamine-dosing)\n- Typical dose: 1 mg protamine per 100 units UFH received in the prior 2-3 hr, max 50 mg\n- Give slow IV over 10 min to reduce hypotension/anaphylactoid reaction risk\n- Recheck coagulation and clinical hemostasis after reversal\n\nDo not give excess protamine; it can worsen anticoagulation/bleeding.',
+    citation: [4, 7],
+    next: 'ufhinf-dispo',
+    summary: 'Protamine reverses recent UFH exposure; dose by recent heparin amount.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'ufhinf-hold',
+    type: 'info',
+    module: 4,
+    title: 'High Level Without Bleeding',
+    body: 'If aPTT/anti-Xa is supratherapeutic without bleeding:\n- Hold or reduce UFH per institutional nomogram\n- Recheck level at the protocol interval\n- Reassess renal/liver disease, lab interference, line draw contamination, and duplicate anticoagulants\n- Document bleeding exam and next level due\n\nDo not reverse with protamine solely for a high lab value without bleeding unless urgent procedure or local policy requires it.',
+    citation: [1, 4],
+    next: 'ufhinf-dispo',
+    summary: 'Supratherapeutic UFH without bleeding is usually managed by holding/reducing per nomogram.',
+  },
+  {
+    id: 'ufhinf-dispo',
+    type: 'result',
+    module: 4,
+    title: 'Disposition / Transition',
+    body: 'Admit/ICU based on indication and instability.\n\nTransition planning:\n- VTE: transition to DOAC, LMWH, warfarin bridge, or procedural plan when safe\n- ACS/STEMI: coordinate with cardiology/cath lab and antiplatelets\n- PE thrombolysis: restart anticoagulation per protocol once safe\n- HIT concern: stop all heparin products and use non-heparin anticoagulant strategy\n\nEvery handoff should state the target range, next lab time, and bolus/no-bolus rationale.',
+    recommendation: 'Continue UFH only with clear indication, target range, monitoring, and transition plan.',
+    confidence: 'recommended',
+    citation: [1, 2, 3],
+    summary: 'UFH requires a clear transition and monitoring plan.',
+  },
+];
+
+export const HEPARIN_INFUSION_MODULE_LABELS = ['Indication', 'Dose', 'Monitor', 'Bleeding'];
+
+export const HEPARIN_INFUSION_CITATIONS: Citation[] = [
+  { num: 1, text: 'Garcia DA, Baglin TP, Weitz JI, Samama MM. Parenteral Anticoagulants: ACCP Evidence-Based Clinical Practice Guidelines. Chest. 2012;141(2 Suppl):e24S-e43S.' },
+  { num: 2, text: 'Konstantinides SV, et al. 2019 ESC Guidelines for Diagnosis and Management of Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603.' },
+  { num: 3, text: 'Amsterdam EA, et al. 2014 AHA/ACC Guideline for Management of NSTE-ACS. J Am Coll Cardiol. 2014;64(24):e139-e228.' },
+  { num: 4, text: 'EMCrit/IBCC. Anticoagulant reversal and heparin management chapters. Accessed 2026.' },
+  { num: 5, text: 'DailyMed. Heparin Sodium Injection prescribing information. Accessed 2026.' },
+  { num: 6, text: 'O\'Gara PT, et al. 2013 ACCF/AHA Guideline for STEMI. Circulation. 2013;127:e362-e425.' },
+  { num: 7, text: 'Frontera JA, et al. Guideline for Reversal of Antithrombotics in Intracranial Hemorrhage. Neurocrit Care. 2016;24(1):6-46.' },
+];
+
+export const HEPARIN_INFUSION_CRITICAL_ACTIONS = [
+  { text: 'Confirm indication and bolus safety before starting UFH.', nodeId: 'ufhinf-indication' },
+  { text: 'Do not start UFH with active major bleeding or HIT concern.', nodeId: 'ufhinf-contra' },
+  { text: 'Use institutional aPTT/anti-Xa nomogram.', nodeId: 'ufhinf-monitor' },
+  { text: 'Track platelet trend and bleeding checks.', nodeId: 'ufhinf-monitor' },
+  { text: 'Use protamine for major bleeding or urgent reversal.', nodeId: 'ufhinf-protamine' },
+];
+
+export const HEPARIN_INFUSION_NODE_COUNT = HEPARIN_INFUSION_NODES.length;
