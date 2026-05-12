@@ -22,6 +22,7 @@ export const TREE_REGISTRY = {
   'scape-nitroglycerin': { prefix: 'SCAPE_NITROGLYCERIN', entryNodeId: 'scape-start', categoryId: 'pharmacist' },
   'thrombolytic-protocols': { prefix: 'THROMBOLYTIC_PROTOCOLS', entryNodeId: 'lytics-start', categoryId: 'pharmacist' },
   'sodium-bicarbonate-drip': { prefix: 'SODIUM_BICARBONATE_DRIP', entryNodeId: 'bicarbdrip-start', categoryId: 'pharmacist' },
+  'bleeding-av-fistula': { prefix: 'BLEEDING_AV_FISTULA', entryNodeId: 'avfb-start', categoryId: 'nephro-rheum-endo' },
   'chs':              { prefix: 'CHS',                 entryNodeId: 'chs-start',          categoryId: 'gastroenterology' },
   'pep':              { prefix: 'PEP',                 entryNodeId: 'pep-start',          categoryId: 'infectious-disease' },
   'stroke':           { prefix: 'STROKE',              entryNodeId: 'stroke-start',       categoryId: 'neurology' },

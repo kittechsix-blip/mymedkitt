@@ -1308,6 +1308,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.1',
         nodeCount: 29,
         entryNodeId: 'pd-start',
+      },
+      {
+        id: 'bleeding-av-fistula',
+        title: 'Bleeding AV Fistula / Graft',
+        subtitle: 'Pressure \u2192 Tourniquet Criteria \u2192 Drugs/Reversal \u2192 Vascular Control \u2192 Disposition',
+        categoryId: 'nephro-rheum-endo',
+        version: '1.0',
+        nodeCount: 13,
+        entryNodeId: 'avfb-start',
       }
     ],
     isCustom: false,

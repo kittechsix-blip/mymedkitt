@@ -1533,7 +1533,7 @@ const DESMOPRESSIN: DrugEntry = {
   genericName: 'Desmopressin acetate',
   drugClass: 'Synthetic vasopressin analog (V2 agonist)',
   route: 'IV / Intranasal',
-  indications: ['Hyponatremia (DDAVP clamp)', 'Overcorrection rescue', 'Central diabetes insipidus', 'DI diagnostic trial', 'Mild hemophilia A — factor VIII mobilization', 'von Willebrand disease (Type 1) — vWF release', 'Antiplatelet reversal', 'VAD bleeding (acquired von Willebrand disease)'],
+  indications: ['Hyponatremia (DDAVP clamp)', 'Overcorrection rescue', 'Central diabetes insipidus', 'DI diagnostic trial', 'Mild hemophilia A — factor VIII mobilization', 'von Willebrand disease (Type 1) — vWF release', 'Antiplatelet reversal', 'Uremic bleeding / platelet dysfunction', 'VAD bleeding (acquired von Willebrand disease)'],
   dosing: [
     {
       indication: 'DDAVP clamp (hyponatremia)',
@@ -1565,6 +1565,11 @@ const DESMOPRESSIN: DrugEntry = {
       indication: 'Antiplatelet reversal — ICH or major bleeding',
       regimen: '0.3-0.4 mcg/kg IV over 20-30 min. Front-line agent to improve platelet function in patients on antiplatelet agents (including P2Y12 inhibitors). AHA 2022: level 2B recommendation for ICH on antiplatelets. Stimulates vWF and factor VIII release from endothelium. Usually single dose — tachyphylaxis occurs (vWF stores deplete). Restrict fluids × 24h. Uremic platelet dysfunction: use 0.4 mcg/kg.',
       weightCalc: { dosePerKg: 0.4, unit: 'mcg', label: 'Antiplatelet reversal' },
+    },
+    {
+      indication: 'Uremic bleeding / platelet dysfunction',
+      regimen: '0.3-0.4 mcg/kg IV over 20-30 min. Consider for major bleeding or refractory diffuse oozing in ESRD/uremia, including dialysis access bleeding after mechanical hemostasis is underway. Onset ~30-60 min; duration ~4-8 hr. Usually one dose due to tachyphylaxis. Restrict free water and monitor serum sodium.',
+      weightCalc: { dosePerKg: 0.4, unit: 'mcg', label: 'Uremic bleeding' },
     },
     {
       indication: 'VAD bleeding',
@@ -7121,11 +7126,15 @@ const TRANEXAMIC_ACID: DrugEntry = {
   genericName: 'Tranexamic acid',
   drugClass: 'Antifibrinolytic (lysine analog)',
   route: 'IV / Topical',
-  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema', 'Hemophilia/vWD — mucosal bleeding adjunct', 'tPA reversal', 'Antiplatelet reversal (adjunct)', 'Epistaxis (topical)'],
+  indications: ['ICH hemostasis (adjunct)', 'Abnormal uterine bleeding (AUB)', 'Trauma hemorrhage', 'Postpartum hemorrhage', 'Thrombolysis reversal (adjunct)', 'Bradykinin-mediated angioedema', 'Hemophilia/vWD — mucosal bleeding adjunct', 'tPA reversal', 'Antiplatelet reversal (adjunct)', 'Epistaxis (topical)', 'Topical access bleeding'],
   dosing: [
     {
       indication: 'Epistaxis (topical)',
       regimen: '500 mg in 5 mL solution applied via cotton pledget/dental roll to bleeding nostril for 10-20 minutes. One RCT (124 patients on antiplatelets): faster hemostasis vs anterior packing, less rebleeding, shorter ED stay, higher patient satisfaction. NoPAC trial (larger, unselected) showed no difference vs placebo. Most useful in anticoagulated/antiplatelet patients or as adjunct to packing.',
+    },
+    {
+      indication: 'Topical access bleeding',
+      regimen: '500-1000 mg topical TXA applied to gauze/pledget directly over the bleeding AV fistula/graft puncture site with focal pressure for 10-20 minutes. Evidence is limited to case-level and extrapolated topical hemostasis data; use as an adjunct after direct pressure is underway and do not delay vascular control for uncontrolled, aneurysmal, infected, or structural access bleeding.',
     },
     {
       indication: 'ICH hemostasis (adjunct — within 3h of onset)',

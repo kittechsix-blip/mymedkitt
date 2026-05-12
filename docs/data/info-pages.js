@@ -19287,6 +19287,116 @@ const BICARBDRIP_STOP_TOOL = {
         { num: 2, text: 'Panchal AR, et al. 2020 AHA Adult BLS/ALS Guidelines. Circulation. 2020;142:S366-S468.' },
     ],
 };
+const AVFB_STEPS_PAGE = {
+    id: 'avfb-steps',
+    title: 'Bleeding AV Fistula Steps',
+    subtitle: 'Dialysis access hemorrhage control',
+    sections: [
+        {
+            heading: 'First 2 minutes',
+            body: '1. PPE, expose the access, identify exact bleeding point.\n2. Apply one-finger/thumb focal pressure directly over the hole with folded gauze or hemostatic gauze.\n3. Hold uninterrupted pressure for 10-20 min; do not repeatedly peek.\n4. If brisk bleeding, shock, syncope, or recurrent spontaneous bleed: call vascular surgery/IR, nephrology, and blood bank early.\n5. IV/IO access away from fistula/graft arm; type/cross, CBC, BMP/K, PT/INR, aPTT, fibrinogen.\n6. Activate MTP if shock or ongoing major hemorrhage.\n7. If pressure fails or cannot be maintained: tourniquet/BP cuff bridge to definitive vascular control.',
+        },
+        {
+            heading: 'After temporary hemostasis',
+            body: '- Confirm thrill/bruit and distal perfusion\n- Look for scab, ulcer, shiny/non-pinchable skin, aneurysm/pseudoaneurysm, exposed graft, infection, or expanding hematoma\n- Review last dialysis, dialysis heparin, antiplatelets, anticoagulants, missed dialysis, and hyperkalemia risk\n- Do not discharge spontaneous, recurrent, aneurysmal, infected, ulcerated, or tourniquet-controlled bleeding without urgent access evaluation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'KDOQI Vascular Access 2019 and NKF implementation tools.' },
+        { num: 2, text: 'Kidney Care UK. Controlling bleeds from a fistula or graft. Accessed 2026.' },
+    ],
+};
+const AVFB_PRESSURE_TOOL = {
+    id: 'avfb-pressure-tool',
+    title: 'Focal Pressure Technique',
+    subtitle: 'Do not hide ongoing bleeding',
+    sections: [
+        {
+            heading: 'Technique',
+            body: '- Use a single finger/thumb, folded gauze, hemostatic gauze, or hard focal pressure device directly over the bleeding hole\n- Pressure must be narrow and precise; broad bulky wraps often fail by distributing pressure away from the defect\n- Hold 10-20 min without interruption\n- Elevate the arm if feasible\n- Avoid circumferential tight wraps that obscure rebleeding or thrombose the access\n- Recheck thrill/bruit and hand perfusion after control',
+        },
+        {
+            heading: 'If pressure only partially works',
+            body: '- Add chitosan/kaolin/oxidized cellulose/gelatin-thrombin dressing per local stock\n- Consider topical tranexamic acid 500-1000 mg on gauze with focal pressure\n- If a single superficial puncture hole persists and vascular support is not immediately available, consider superficial figure-of-eight or purse-string suture around the skin puncture only\n- Avoid deep bites into the fistula or graft',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Eberle ML, et al. Topical TXA for bleeding arteriovenous fistula. Am J Emerg Med. 2020.' },
+        { num: 2, text: 'A simple technique to control a bleeding arteriovenous fistula. Ann R Coll Surg Engl. 2007.' },
+    ],
+};
+const AVFB_TOURNIQUET_TOOL = {
+    id: 'avfb-tourniquet-tool',
+    title: 'Tourniquet Criteria',
+    subtitle: 'Life-saving bridge, not routine access care',
+    sections: [
+        {
+            heading: 'Use tourniquet/BP cuff when',
+            body: '- Brisk hemorrhage with shock or impending shock\n- Spurting/pulsatile bleeding not immediately controlled by focal pressure\n- Bleeding cannot be controlled while moving the patient, placing access, activating MTP, or preparing definitive control\n- Focal pressure requires hands that must be freed for airway/resuscitation\n\nThis is a bridge to vascular surgery/IR/OR. Document application time.',
+        },
+        {
+            heading: 'How',
+            body: '- Commercial tourniquet: place proximal enough to stop inflow when bleeding is life-threatening\n- BP cuff: inflate above systolic pressure and titrate to hemostasis\n- Reassess every few minutes and transition to focal pressure/vascular control as soon as feasible\n- If loosened and bleeding remains controlled, check thrill/bruit, distal pulse/capillary refill, motor/sensation\n\nDo not use for routine post-dialysis oozing. Risks include access thrombosis/loss, limb ischemia, nerve injury, and rebleeding when released.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Lai Q, et al. Tourniquet technique after hemodialysis fistula/graft interventions. BMC Nephrol. 2020.' },
+        { num: 2, text: 'Kidney Care UK. Life-threatening fistula/graft bleed guidance. Accessed 2026.' },
+    ],
+};
+const AVFB_DRUGS_TOOL = {
+    id: 'avfb-drugs-tool',
+    title: 'Drug Adjuncts',
+    subtitle: 'After mechanical control starts',
+    sections: [
+        {
+            heading: 'Local hemostatic options',
+            body: '- [Tranexamic Acid](#/drug/tranexamic-acid/topical access bleeding) topical 500-1000 mg on gauze/pledget with focal pressure 10-20 min\n- Hemostatic dressing if available: chitosan, kaolin, oxidized cellulose, gelatin/thrombin, or local protocol product\n- IV TXA 1 g over 10 min only for major hemorrhage after weighing thrombosis/seizure risk and renal failure dosing issues',
+        },
+        {
+            heading: 'Platelet dysfunction / heparin / anticoagulants',
+            body: '- [Desmopressin](#/drug/desmopressin/uremic bleeding) 0.3-0.4 mcg/kg IV over 20-30 min for suspected uremic platelet dysfunction, antiplatelet-associated major bleeding, or refractory diffuse oozing; monitor sodium and restrict free water\n- [Protamine](#/drug/protamine/heparin reversal) if recent UFH/dialysis heparin is contributing to major bleeding: 1 mg per 100 units UFH in prior 2-3 hr, max 50 mg, slow IV\n- Warfarin life-threatening bleed: [4F-PCC](#/drug/pcc-4factor/warfarin reversal) + [Vitamin K](#/drug/vitamin-k/warfarin reversal)\n- Dabigatran: [Idarucizumab](#/drug/idarucizumab/dabigatran reversal); dialysis can remove dabigatran if needed\n- Xa inhibitors: [Andexanet alfa](#/drug/andexanet/reversal) or 4F-PCC per local protocol',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit/IBCC. Anticoagulant reversal. Accessed 2026.' },
+        { num: 2, text: 'Desborough MJ, et al. Desmopressin for platelet dysfunction and antiplatelet reversal. J Thromb Haemost. 2017.' },
+    ],
+};
+const AVFB_DISPO_TOOL = {
+    id: 'avfb-dispo-tool',
+    title: 'Disposition Rules',
+    subtitle: 'Temporary hemostasis is not always safe',
+    sections: [
+        {
+            heading: 'Admit, transfer, or urgent vascular/IR evaluation',
+            body: '- Any spontaneous bleeding between dialysis sessions\n- Recurrent or prolonged bleeding after dialysis\n- Tourniquet/BP cuff used\n- Shock, syncope, transfusion, MTP, significant hemoglobin drop\n- Scab, ulcer, necrosis, shiny/non-pinchable skin, aneurysm/pseudoaneurysm\n- Infection, drainage, exposed graft, expanding hematoma\n- Anticoagulant reversal required or supratherapeutic anticoagulation\n- No reliable urgent dialysis access follow-up',
+        },
+        {
+            heading: 'Discharge only if all low-risk features are met',
+            body: '- Simple needle puncture bleed\n- Hemostasis durable after observation\n- Stable vitals and acceptable hemoglobin context\n- Thrill/bruit present, hand perfusion intact\n- No high-risk skin/access lesion, infection, expanding hematoma, or recurrent bleeding\n- Dialysis unit/nephrology follow-up arranged and access restrictions communicated',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'KDOQI Vascular Access 2019 and NKF implementation tools.' },
+        { num: 2, text: 'Kidney Care UK. Controlling bleeds from a fistula or graft. Accessed 2026.' },
+    ],
+};
+const AVFB_STOP_TOOL = {
+    id: 'avfb-stop-tool',
+    title: 'STOP: Bleeding AV Access',
+    subtitle: 'Critical misses',
+    sections: [
+        {
+            heading: 'Do not miss these',
+            body: '- Do not place broad bulky wraps that hide ongoing hemorrhage\n- Do not delay vascular/IR activation for spontaneous, recurrent, aneurysmal, infected, or uncontrolled access bleeding\n- Do not preserve the fistula at the expense of patient survival; use tourniquet/BP cuff for life-threatening uncontrolled bleeding\n- Do not discharge a scab, ulcer, shiny/non-pinchable skin, exposed graft, or pseudoaneurysm after temporary hemostasis\n- Do not use the access arm for routine BP, venipuncture, or IV access\n- Do not deeply suture into the fistula/graft; superficial skin closure only if localized puncture bleeding and access remains patent',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'KDOQI Vascular Access 2019 and NKF implementation tools.' },
+        { num: 2, text: 'Kidney Care UK. Controlling bleeds from a fistula or graft. Accessed 2026.' },
+    ],
+};
 // -------------------------------------------------------------------
 // ECMO — Steps Summary
 // -------------------------------------------------------------------
@@ -21815,6 +21925,12 @@ export const INFO_PAGES = {
     'bicarbdrip-recipe-tool': BICARBDRIP_RECIPE_TOOL,
     'bicarbdrip-tox-tool': BICARBDRIP_TOX_TOOL,
     'bicarbdrip-stop-tool': BICARBDRIP_STOP_TOOL,
+    'avfb-steps': AVFB_STEPS_PAGE,
+    'avfb-pressure-tool': AVFB_PRESSURE_TOOL,
+    'avfb-tourniquet-tool': AVFB_TOURNIQUET_TOOL,
+    'avfb-drugs-tool': AVFB_DRUGS_TOOL,
+    'avfb-dispo-tool': AVFB_DISPO_TOOL,
+    'avfb-stop-tool': AVFB_STOP_TOOL,
     // Steps Summaries — Other
     'ap-summary': ACUTE_PANCREATITIS_SUMMARY,
     // Mesenteric Ischemia

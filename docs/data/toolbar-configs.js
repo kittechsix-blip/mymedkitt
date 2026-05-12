@@ -353,6 +353,14 @@ const TOOLBAR_CONFIGS = {
         { id: 'tox', label: 'Tox', icon: '💊', action: 'overlay', target: 'bicarbdrip-tox-tool' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'bicarbdrip-stop-tool' },
     ],
+    'bleeding-av-fistula': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'avfb-steps' },
+        { id: 'pressure', label: 'Pressure', icon: '🩸', action: 'overlay', target: 'avfb-pressure-tool' },
+        { id: 'tourniquet', label: 'TQ', icon: '⛑️', action: 'overlay', target: 'avfb-tourniquet-tool' },
+        { id: 'drugs', label: 'Drugs', icon: '💊', action: 'overlay', target: 'avfb-drugs-tool' },
+        { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'overlay', target: 'avfb-dispo-tool' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'avfb-stop-tool' },
+    ],
     'chs': [
         { id: 'antiemetic', label: 'Antiemetic', icon: '💊', action: 'jump', target: 'chs-first-line' },
         { id: 'capsaicin', label: 'Capsaicin', icon: '🌶️', action: 'jump', target: 'chs-capsaicin' },
