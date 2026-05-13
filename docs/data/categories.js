@@ -1082,6 +1082,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'sepsis-start',
             },
             {
+                id: 'infectious-endocarditis',
+                title: 'Infectious Endocarditis',
+                subtitle: 'Suspicion → Blood Cultures → Duke-ISCVID → Echo/POCUS → Antibiotics → Surgery/Complications',
+                categoryId: 'infectious-disease',
+                version: '1.0',
+                nodeCount: 23,
+                entryNodeId: 'ie-start',
+            },
+            {
                 id: 'tuberculosis',
                 title: 'Tuberculosis',
                 subtitle: 'ED Evaluation ⇒ Diagnosis ⇒ Treatment ⇒ Latent TB ⇒ Drug-Resistant ⇒ HIV-TB',

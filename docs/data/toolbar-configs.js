@@ -460,6 +460,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'vp-rx', label: 'VP Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'sepsis-vp-init' },
         { id: 'abx', label: 'Abx Table', icon: '\uD83D\uDC8A', action: 'overlay', target: 'sepsis-abx-table' },
     ],
+    'infectious-endocarditis': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ie-steps' },
+        { id: 'duke', label: 'Duke', icon: '🧮', action: 'calculator', target: 'duke-iscvid' },
+        { id: 'bcx', label: 'Cultures', icon: '🩸', action: 'overlay', target: 'ie-blood-culture-tool' },
+        { id: 'echo', label: 'Echo', icon: '🫀', action: 'overlay', target: 'ie-echo-tool' },
+        { id: 'abx', label: 'Abx', icon: '💊', action: 'overlay', target: 'ie-abx-tool' },
+        { id: 'surg', label: 'Surgery', icon: '🔪', action: 'overlay', target: 'ie-surgery-tool' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'ie-stop' },
+    ],
     'necrotizing-fasciitis': [
         { id: 'lrinec', label: 'LRINEC', icon: '\uD83E\uDDEA', action: 'calculator', target: 'lrinec' },
         { id: 'surgery', label: 'Surgery', icon: '\uD83D\uDD2A', action: 'jump', target: 'nf-surgery' },

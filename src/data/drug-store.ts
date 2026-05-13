@@ -322,7 +322,7 @@ const AMPICILLIN: DrugEntry = {
   genericName: 'Ampicillin sodium',
   drugClass: 'Aminopenicillin',
   route: 'IV',
-  indications: ['Neonatal sepsis (empiric)', 'Meningitis (GBS, Listeria, Enterococcus coverage)'],
+  indications: ['Neonatal sepsis (empiric)', 'Meningitis (GBS, Listeria, Enterococcus coverage)', 'Enterococcal infective endocarditis'],
   dosing: [
     {
       indication: 'Non-meningitic (0-7 days)',
@@ -352,6 +352,10 @@ const AMPICILLIN: DrugEntry = {
     {
       indication: 'Adult Meningitis (Listeria coverage)',
       regimen: '2 g IV q4h. Add to ceftriaxone + vancomycin for patients age ≥50, pregnant, or immunocompromised. Active against L. monocytogenes, which is not covered by cephalosporins. Mortality from listerial meningitis: 17-30%.',
+    },
+    {
+      indication: 'Enterococcal endocarditis',
+      regimen: '2 g IV q4h plus ceftriaxone 2 g IV q12h for susceptible Enterococcus faecalis endocarditis when ID-directed. Ampicillin + gentamicin is an alternative only when susceptibility, renal function, and drug-level monitoring support it.',
     },
   ],
   contraindications: [
@@ -1147,7 +1151,7 @@ const CEFEPIME: DrugEntry = {
   genericName: 'Cefepime hydrochloride',
   drugClass: '4th-Generation Cephalosporin',
   route: 'IV',
-  indications: ['Neonatal sepsis/meningitis (alternative when Ceftriaxone contraindicated)', 'Sepsis empiric coverage (antipseudomonal)'],
+  indications: ['Neonatal sepsis/meningitis (alternative when Ceftriaxone contraindicated)', 'Sepsis empiric coverage (antipseudomonal)', 'Infective endocarditis empiric gram-negative coverage'],
   dosing: [
     {
       indication: 'Sepsis/meningitis (0-28 days)',
@@ -1166,6 +1170,10 @@ const CEFEPIME: DrugEntry = {
     {
       indication: 'Sepsis empiric coverage',
       regimen: 'Adult: 2g IV q8h (consider extended infusion over 3-4 hours for maintenance doses). Antipseudomonal cephalosporin — less anaerobic coverage than piperacillin-tazobactam. ACORN trial: comparable to pip-tazo but slightly more neurologic dysfunction (small absolute difference). Adjust for renal impairment.',
+    },
+    {
+      indication: 'Infective endocarditis empiric gram-negative coverage',
+      regimen: '2 g IV q8h, adjusted for renal function. Use with vancomycin as an ED empiric bridge for unstable, healthcare-associated, prosthetic/device, or gram-negative-risk IE while cultures are pending and ID input is obtained.',
     },
   ],
   contraindications: [
@@ -1189,7 +1197,7 @@ const CEFTRIAXONE: DrugEntry = {
   genericName: 'Ceftriaxone',
   drugClass: 'Third-generation cephalosporin',
   route: 'IV',
-  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)', 'Sexual assault STI prophylaxis', 'Acute otitis media (treatment failure)'],
+  indications: ['Neurosyphilis (PCN allergy alternative)', 'Bacterial meningitis', 'Various serious infections', 'Pediatric sepsis / neonatal fever', 'Pediatric meningitis', 'Pediatric UTI', 'Pyelonephritis in pregnancy', 'SCD febrile illness', 'SCD meningitis', 'Community sepsis (empiric coverage)', 'Sexual assault STI prophylaxis', 'Acute otitis media (treatment failure)', 'Endocarditis - streptococci / HACEK / enterococcal synergy'],
   dosing: [
     {
       indication: 'Neurosyphilis (if desensitization not feasible)',
@@ -1250,6 +1258,14 @@ const CEFTRIAXONE: DrugEntry = {
         { dosePerKg: 50, unit: 'mg', maxDose: 1000, label: 'Single dose (vomiting)' },
         { dosePerKg: 50, unit: 'mg', maxDose: 1000, label: 'Treatment failure (\u00D7 3 days)' },
       ],
+    },
+    {
+      indication: 'Endocarditis strep HACEK',
+      regimen: '2 g IV q24h for viridans streptococci, S. gallolyticus, or HACEK endocarditis when organism/susceptibility and valve context support ceftriaxone. Duration and need for combination therapy are ID-directed.',
+    },
+    {
+      indication: 'Enterococcal endocarditis synergy',
+      regimen: '2 g IV q12h with ampicillin 2 g IV q4h for susceptible Enterococcus faecalis endocarditis when ID-directed. Used to provide beta-lactam synergy while avoiding aminoglycoside nephrotoxicity.',
     },
   ],
   contraindications: [
@@ -3113,7 +3129,7 @@ const GENTAMICIN: DrugEntry = {
   genericName: 'Gentamicin sulfate',
   drugClass: 'Aminoglycoside',
   route: 'IV',
-  indications: ['Neonatal sepsis (0-7 days, synergy with Ampicillin)'],
+  indications: ['Neonatal sepsis (0-7 days, synergy with Ampicillin)', 'Endocarditis synergy - selected cases only'],
   dosing: [
     {
       indication: 'Neonatal sepsis (0-7 days)',
@@ -3124,6 +3140,10 @@ const GENTAMICIN: DrugEntry = {
       indication: 'Neonatal sepsis (8-28 days, if extended use)',
       regimen: '5 mg/kg IV q24h.',
       weightCalc: { dosePerKg: 5, unit: 'mg' },
+    },
+    {
+      indication: 'Endocarditis synergy',
+      regimen: 'Selected ID-directed synergy only. Common adult historical dosing: 3 mg/kg/day IV divided q8h or once daily per institutional protocol, with peak/trough monitoring and renal adjustment. Avoid reflex use in renal failure or when dual beta-lactam therapy is appropriate.',
     },
   ],
   contraindications: [
@@ -5991,7 +6011,7 @@ const VANCOMYCIN: DrugEntry = {
   genericName: 'Vancomycin hydrochloride',
   drugClass: 'Glycopeptide',
   route: 'IV/PO',
-  indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis', 'Sepsis / MRSA coverage'],
+  indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis', 'Sepsis / MRSA coverage', 'Infective endocarditis empiric / MRSA'],
   dosing: [
     {
       indication: 'Meningitic',
@@ -6019,6 +6039,14 @@ const VANCOMYCIN: DrugEntry = {
         { dosePerKg: 25, unit: 'mg', label: 'Loading dose (25 mg/kg)' },
         { dosePerKg: 30, unit: 'mg', label: 'Loading dose (30 mg/kg)' },
         { dosePerKg: 15, unit: 'mg', label: 'Maintenance (15 mg/kg/dose)' },
+      ],
+    },
+    {
+      indication: 'Infective endocarditis empiric',
+      regimen: 'Loading dose 20-25 mg/kg IV once when critically ill or high MRSA concern, then AUC-guided dosing targeting AUC/MIC 400-600; if trough-based locally, serious MRSA infections historically targeted 15-20 mcg/mL. Combine with cefepime for unstable/healthcare-associated IE while cultures are pending. Adjust for renal function.',
+      weightCalc: [
+        { dosePerKg: 20, unit: 'mg', label: 'IE loading dose (20 mg/kg)' },
+        { dosePerKg: 25, unit: 'mg', label: 'IE loading dose (25 mg/kg)' },
       ],
     },
   ],

@@ -19397,6 +19397,124 @@ const AVFB_STOP_TOOL = {
         { num: 2, text: 'Kidney Care UK. Controlling bleeds from a fistula or graft. Accessed 2026.' },
     ],
 };
+const IE_STEPS_PAGE = {
+    id: 'ie-steps',
+    title: 'Infectious Endocarditis Steps',
+    subtitle: 'Recognition, cultures, echo, treatment, escalation',
+    sections: [
+        {
+            heading: 'First pass',
+            body: '1. Identify high-risk substrate: prosthetic valve, prior IE, CIED/VAD, hemodialysis, IVDU, indwelling catheter, congenital heart disease, immunocompromise.\n2. Look for IE syndrome: fever/bacteremia, new murmur, heart failure, stroke/ICH, septic pulmonary emboli, splenic/renal infarct, back pain, GN, persistent S. aureus bacteremia.\n3. Draw 2-3 blood culture sets before antibiotics if feasible; do not delay antibiotics in shock.\n4. Order TTE and plan TEE when high suspicion, prosthetic/device disease, S. aureus bacteremia, poor TTE, or complication concern.\n5. Start empiric therapy immediately if unstable; narrow after organism/susceptibility.\n6. Call ID + cardiology early; add CT surgery for heart failure, abscess, prosthetic complications, persistent bacteremia, fungal/resistant infection, or embolic vegetation.',
+        },
+        {
+            heading: 'Disposition frame',
+            body: 'Most suspected IE patients require admission. ICU/transfer when shock, acute valve failure, new conduction disease, neuro complication, prosthetic/device infection, persistent bacteremia, dialysis/IVDU with septic emboli, or need for urgent surgery.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Delgado V, et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J. 2023.' },
+        { num: 2, text: 'Baddour LM, et al. AHA Scientific Statement: Infective Endocarditis in Adults. Circulation. 2015.' },
+    ],
+};
+const IE_BLOOD_CULTURE_TOOL = {
+    id: 'ie-blood-culture-tool',
+    title: 'IE Blood Culture Strategy',
+    subtitle: 'Yield, timing, and repeat cultures',
+    sections: [
+        {
+            heading: 'Before antibiotics',
+            body: '- Draw at least 2 sets, preferably 3 sets when IE is suspected\n- Separate peripheral venipunctures when feasible\n- Do not wait for fever spikes\n- Do not underfill bottles; volume is a major yield driver\n- If unstable, draw cultures immediately but start antibiotics without waiting for ideal timing',
+        },
+        {
+            heading: 'After initial therapy',
+            body: '- Repeat cultures q24-48h until clearance\n- Persistent positive cultures should trigger source-control reassessment, TEE/advanced imaging, and CT surgery/device team consideration\n- S. aureus, enterococcus, Candida, prosthetic/device infection, and dialysis/IVDU presentations deserve a high threshold for persistent-source evaluation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Fowler VG Jr, et al. 2023 Duke-ISCVID IE Criteria. Clin Infect Dis. 2023.' },
+        { num: 2, text: 'Baddour LM, et al. AHA Scientific Statement. Circulation. 2015.' },
+    ],
+};
+const IE_ECHO_TOOL = {
+    id: 'ie-echo-tool',
+    title: 'Echo / U/S Identification',
+    subtitle: 'POCUS recognition and TEE escalation',
+    sections: [
+        {
+            heading: 'What POCUS can help identify',
+            body: '- Large mobile valve-attached mass\n- New severe regurgitation or gross valve destruction\n- Tricuspid vegetation with septic pulmonary emboli pattern\n- Pericardial effusion, RV strain, or heart-failure physiology\n- Clues to periannular abscess: new conduction abnormality, periannular thickening/cavity/dehiscence on formal imaging',
+        },
+        {
+            heading: 'Views to target',
+            body: '- PLAX and PSAX: aortic and mitral valve assessment\n- Apical 4/5 chamber: mitral, tricuspid, aortic outflow; add color Doppler\n- Subxiphoid: alternative window and pericardial effusion\n- Compare against prior echo when available',
+        },
+        {
+            heading: 'Hard limits',
+            body: 'POCUS/TTE cannot rule out IE. Small vegetations, prosthetic valves, aortic root abscess, and CIED infection often require TEE and/or cardiac CT/PET. Do not delay cultures, antibiotics for unstable patients, or formal echo because bedside ultrasound is pending.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Delgado V, et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J. 2023.' },
+        { num: 2, text: 'Liu YW, et al. Diagnostic value of harmonic TTE in native valve IE. Cardiovasc Ultrasound. 2007.' },
+    ],
+};
+const IE_ABX_TOOL = {
+    id: 'ie-abx-tool',
+    title: 'IE Antibiotic Guide',
+    subtitle: 'Empiric bridge and organism-directed patterns',
+    sections: [
+        {
+            heading: 'Empiric ED bridge',
+            body: '- Stable suspected IE: cultures first; discuss antibiotic timing with ID when feasible\n- Unstable/septic or healthcare-associated native-valve concern: [Vancomycin](#/drug/vancomycin/infective endocarditis empiric) + [Cefepime](#/drug/cefepime/infective endocarditis empiric gram-negative coverage) pending cultures and local antibiogram\n- Prosthetic/device disease: broader specialist-driven coverage; involve ID/cardiology early\n- Adjust for renal function, allergy, local resistance, and previous cultures',
+        },
+        {
+            heading: 'Common directed patterns',
+            body: '- MSSA: [Nafcillin](#/drug/nafcillin/MSSA bacteremia) or cefazolin when appropriate\n- MRSA: vancomycin AUC-guided or [Daptomycin](#/drug/daptomycin/MRSA bacteremia) when appropriate\n- Viridans strep / HACEK: [Ceftriaxone](#/drug/ceftriaxone/endocarditis strep HACEK) or penicillin-based therapy depending on susceptibility\n- E. faecalis: [Ampicillin](#/drug/ampicillin/enterococcal endocarditis) + [Ceftriaxone](#/drug/ceftriaxone/enterococcal endocarditis synergy) when susceptible and appropriate\n- Culture-negative: ID/microbiology-directed testing before indefinite broadening',
+        },
+        {
+            heading: 'Avoid reflex toxicity',
+            body: '- Do not add gentamicin automatically; synergy has nephrotoxicity and narrow indications\n- Do not start rifampin indiscriminately; in prosthetic staphylococcal IE it is an adjunct after bacteremia is controlled and organism is known\n- Do not use oral outpatient plans for unstable, complicated, uncontrolled, or early-phase IE without specialist plan',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Delgado V, et al. 2023 ESC Guidelines for endocarditis. Eur Heart J. 2023.' },
+        { num: 2, text: 'Baddour LM, et al. AHA Scientific Statement. Circulation. 2015.' },
+    ],
+};
+const IE_SURGERY_TOOL = {
+    id: 'ie-surgery-tool',
+    title: 'IE Surgery Triggers',
+    subtitle: 'When to call CT surgery early',
+    sections: [
+        {
+            heading: 'Call early for',
+            body: '- Acute heart failure from severe valve regurgitation or obstruction\n- Periannular abscess, pseudoaneurysm, fistula, prosthetic dehiscence, or new AV block\n- Persistent bacteremia/fever despite appropriate therapy and source control\n- Fungal IE, Candida IE, resistant organisms, or uncontrolled infection\n- Recurrent emboli or large mobile vegetation, especially after embolic event\n- Prosthetic valve IE with complication\n- CIED endocarditis: device/lead extraction planning is usually required',
+        },
+        {
+            heading: 'Right-sided IE',
+            body: 'Consult for persistent bacteremia, large vegetations with recurrent septic pulmonary emboli, severe TR/right-heart failure, fungal infection, or failure of medical therapy. Coordinate catheter/access source control in hemodialysis and IVDU presentations.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Delgado V, et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J. 2023.' },
+        { num: 2, text: 'Baddour LM, et al. AHA Scientific Statement. Circulation. 2015.' },
+    ],
+};
+const IE_STOP_TOOL = {
+    id: 'ie-stop',
+    title: 'STOP: Endocarditis Misses',
+    subtitle: 'High-risk errors to avoid',
+    sections: [
+        {
+            heading: 'Do not miss these',
+            body: '- Do not dismiss S. aureus bacteremia as contamination\n- Do not discharge high-suspicion IE after a negative TTE; obtain TEE/repeat imaging plan\n- Do not delay antibiotics in shock for ideal culture timing\n- Do not give thrombolytics for presumed ischemic stroke when IE is suspected\n- Do not anticoagulate solely for IE; evaluate separate indications and neuro bleeding risk\n- Do not ignore new AV block/PR prolongation; suspect periannular abscess\n- Do not treat prosthetic/device IE without source-control planning\n- Do not use POCUS as a rule-out test',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Delgado V, et al. 2023 ESC Guidelines for endocarditis. Eur Heart J. 2023.' },
+        { num: 2, text: 'Fowler VG Jr, et al. 2023 Duke-ISCVID IE Criteria. Clin Infect Dis. 2023.' },
+    ],
+};
 const DEMAGIT_STEPS_PAGE = {
     id: 'demagit-steps',
     title: 'Dementia Agitation Steps',
@@ -22072,6 +22190,12 @@ export const INFO_PAGES = {
     'avfb-drugs-tool': AVFB_DRUGS_TOOL,
     'avfb-dispo-tool': AVFB_DISPO_TOOL,
     'avfb-stop-tool': AVFB_STOP_TOOL,
+    'ie-steps': IE_STEPS_PAGE,
+    'ie-blood-culture-tool': IE_BLOOD_CULTURE_TOOL,
+    'ie-echo-tool': IE_ECHO_TOOL,
+    'ie-abx-tool': IE_ABX_TOOL,
+    'ie-surgery-tool': IE_SURGERY_TOOL,
+    'ie-stop': IE_STOP_TOOL,
     'demagit-steps': DEMAGIT_STEPS_PAGE,
     'demagit-triggers': DEMAGIT_TRIGGERS_PAGE,
     'demagit-med-guide': DEMAGIT_MED_GUIDE_PAGE,

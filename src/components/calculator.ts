@@ -34242,6 +34242,71 @@ const SHAPIRO_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// 2023 Duke-ISCVID Criteria for Infective Endocarditis
+// -------------------------------------------------------------------
+
+const DUKE_ISCVID_CALCULATOR: CalculatorDefinition = {
+  id: 'duke-iscvid',
+  title: 'Duke-ISCVID IE Criteria',
+  subtitle: '2023 diagnostic classification',
+  description: 'Classifies suspected infective endocarditis as definite, possible, or insufficient/rejected using 2023 Duke-ISCVID clinical criteria. This supports diagnosis and documentation; it must not delay cultures, antibiotics for unstable patients, echocardiography, or surgical escalation.',
+  fields: [
+    { name: 'major-micro', label: 'Major microbiology: typical IE organism from qualifying blood cultures or qualifying serology/PCR', type: 'toggle', points: 0 },
+    { name: 'major-imaging', label: 'Major imaging/surgical evidence: vegetation, abscess, pseudoaneurysm, fistula, perforation, dehiscence, new regurgitation, PET/CT/CTA evidence, or operative evidence', type: 'toggle', points: 0 },
+    { name: 'minor-predisposition', label: 'Predisposition: prior IE, prosthetic/transcatheter valve or repair, CIED/VAD, congenital heart disease, IVDU, or other high-risk substrate', type: 'toggle', points: 0 },
+    { name: 'minor-fever', label: 'Fever >=38.0 C', type: 'toggle', points: 0 },
+    { name: 'minor-vascular', label: 'Vascular/embolic phenomenon: arterial embolus, septic pulmonary infarct, mycotic aneurysm, ICH, conjunctival hemorrhage, Janeway lesions, cerebral/splenic abscess', type: 'toggle', points: 0 },
+    { name: 'minor-immunologic', label: 'Immunologic phenomenon: glomerulonephritis, Osler nodes, Roth spots, rheumatoid factor', type: 'toggle', points: 0 },
+    { name: 'minor-micro', label: 'Microbiologic evidence not meeting major criterion', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  computeResult: (values) => {
+    const major = [
+      values['major-micro'],
+      values['major-imaging'],
+    ].filter(Boolean).length;
+
+    const minor = [
+      values['minor-predisposition'],
+      values['minor-fever'],
+      values['minor-vascular'],
+      values['minor-immunologic'],
+      values['minor-micro'],
+    ].filter(Boolean).length;
+
+    if (major >= 2 || (major >= 1 && minor >= 3) || minor >= 5) {
+      return {
+        value: `${major} major / ${minor} minor`,
+        label: 'Definite IE by clinical criteria',
+        description: '**CLASSIFICATION:** Definite clinical infective endocarditis by 2023 Duke-ISCVID criteria.\n\n**NEXT STEPS:**\n- Admit; involve ID and cardiology\n- Define valve/device involvement with TTE/TEE and advanced imaging as needed\n- Repeat cultures until clearance\n- Narrow antimicrobial therapy to organism/susceptibility\n- Screen for surgical triggers: heart failure, abscess/conduction disease, persistent bacteremia, prosthetic complication, fungal/resistant organism, recurrent emboli, or large mobile vegetation',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if ((major >= 1 && minor >= 1) || minor >= 3) {
+      return {
+        value: `${major} major / ${minor} minor`,
+        label: 'Possible IE',
+        description: '**CLASSIFICATION:** Possible infective endocarditis by 2023 Duke-ISCVID criteria.\n\n**NEXT STEPS:**\n- Do not dismiss if clinical suspicion is high\n- Obtain/confirm blood cultures and repeat if bacteremic\n- TTE followed by TEE when risk is high, TTE is negative/limited, or prosthetic/device disease is possible\n- Consult ID/cardiology for antibiotic timing and further microbiology/imaging\n- Reassess for alternate sources and IE mimics',
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: `${major} major / ${minor} minor`,
+      label: 'Insufficient criteria',
+      description: '**CLASSIFICATION:** Does not meet possible/definite clinical IE criteria at this moment.\n\n**CAUTION:** Early IE, prior antibiotics, poor imaging windows, prosthetic/device disease, and incomplete cultures can produce false reassurance. If suspicion remains high, pursue TEE/repeat imaging and ID/cardiology input rather than using this as a rule-out tool.',
+      colorVar: '--color-text-secondary',
+    };
+  },
+  thresholdNote: '2023 Duke-ISCVID clinical criteria: definite IE = 2 major OR 1 major + 3 minor OR 5 minor. Possible IE = 1 major + 1 minor OR 3 minor. Criteria support classification; they do not replace bedside judgment in unstable, culture-positive, prosthetic/device, or surgically complicated disease.',
+  citations: [
+    'Fowler VG Jr, Durack DT, Selton-Suty C, et al. The 2023 Duke-International Society for Cardiovascular Infectious Diseases Criteria for Infective Endocarditis. Clin Infect Dis. 2023;77(4):518-526.',
+    'Delgado V, Ajmone Marsan N, de Waha S, et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J. 2023;44(39):3948-4042.',
+  ],
+};
+
+// -------------------------------------------------------------------
 // PEF Predicted (Peak Expiratory Flow) — Asthma severity
 // -------------------------------------------------------------------
 
@@ -36216,6 +36281,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'wells-dvt': WELLS_DVT_CALCULATOR,
   // Blood Culture Stewardship
   'shapiro': SHAPIRO_CALCULATOR,
+  // Infectious Endocarditis
+  'duke-iscvid': DUKE_ISCVID_CALCULATOR,
   // Asthma
   'pef-predicted': PEF_PREDICTED_CALCULATOR,
   // Oncological Emergencies
