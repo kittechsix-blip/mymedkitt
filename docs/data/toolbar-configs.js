@@ -361,6 +361,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'overlay', target: 'avfb-dispo-tool' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'avfb-stop-tool' },
     ],
+    'dementia-agitation': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'demagit-steps' },
+        { id: 'triggers', label: 'Triggers', icon: '🔎', action: 'overlay', target: 'demagit-triggers' },
+        { id: 'meds', label: 'Meds', icon: '💊', action: 'overlay', target: 'demagit-med-guide' },
+        { id: 'law', label: 'TX Law', icon: '⚖️', action: 'overlay', target: 'demagit-texas-law' },
+        { id: 'capacity', label: 'Capacity', icon: '🧠', action: 'overlay', target: 'demagit-capacity' },
+        { id: 'ethics', label: 'Ethics', icon: '🛡️', action: 'overlay', target: 'demagit-ethics' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'demagit-stop' },
+    ],
     'chs': [
         { id: 'antiemetic', label: 'Antiemetic', icon: '💊', action: 'jump', target: 'chs-first-line' },
         { id: 'capsaicin', label: 'Capsaicin', icon: '🌶️', action: 'jump', target: 'chs-capsaicin' },

@@ -286,6 +286,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/bleeding-av-fistula.js');
       return { nodes: m.BLEEDING_AV_FISTULA_NODES, entryNodeId: 'avfb-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.BLEEDING_AV_FISTULA_MODULE_LABELS, citations: m.BLEEDING_AV_FISTULA_CITATIONS, criticalActions: m.BLEEDING_AV_FISTULA_CRITICAL_ACTIONS };
     },
+    'dementia-agitation': async () => {
+      const m = await import('../data/trees/dementia-agitation.js');
+      return { nodes: m.DEMENTIA_AGITATION_NODES, entryNodeId: 'demagit-start', categoryId: 'neurology', moduleLabels: m.DEMENTIA_AGITATION_MODULE_LABELS, citations: m.DEMENTIA_AGITATION_CITATIONS, criticalActions: m.DEMENTIA_AGITATION_CRITICAL_ACTIONS };
+    },
     'chs': async () => {
       const m = await import('../data/trees/chs.js');
       return { nodes: m.CHS_NODES, entryNodeId: 'chs-start', categoryId: 'gastroenterology', moduleLabels: m.CHS_MODULE_LABELS, citations: m.CHS_CITATIONS, criticalActions: m.CHS_CRITICAL_ACTIONS };

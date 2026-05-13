@@ -23,6 +23,7 @@ export const TREE_REGISTRY = {
   'thrombolytic-protocols': { prefix: 'THROMBOLYTIC_PROTOCOLS', entryNodeId: 'lytics-start', categoryId: 'pharmacist' },
   'sodium-bicarbonate-drip': { prefix: 'SODIUM_BICARBONATE_DRIP', entryNodeId: 'bicarbdrip-start', categoryId: 'pharmacist' },
   'bleeding-av-fistula': { prefix: 'BLEEDING_AV_FISTULA', entryNodeId: 'avfb-start', categoryId: 'nephro-rheum-endo' },
+  'dementia-agitation': { prefix: 'DEMENTIA_AGITATION', entryNodeId: 'demagit-start', categoryId: 'neurology' },
   'chs':              { prefix: 'CHS',                 entryNodeId: 'chs-start',          categoryId: 'gastroenterology' },
   'pep':              { prefix: 'PEP',                 entryNodeId: 'pep-start',          categoryId: 'infectious-disease' },
   'stroke':           { prefix: 'STROKE',              entryNodeId: 'stroke-start',       categoryId: 'neurology' },

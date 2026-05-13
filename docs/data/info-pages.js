@@ -19397,6 +19397,147 @@ const AVFB_STOP_TOOL = {
         { num: 2, text: 'Kidney Care UK. Controlling bleeds from a fistula or graft. Accessed 2026.' },
     ],
 };
+const DEMAGIT_STEPS_PAGE = {
+    id: 'demagit-steps',
+    title: 'Dementia Agitation Steps',
+    subtitle: 'Safety, medical triggers, capacity, law',
+    sections: [
+        {
+            heading: 'First 5 minutes',
+            body: '1. Safety: remove hazards, call adequate staff/security, one calm lead communicator.\n2. Rapid medical checks: glucose, SpO2, temperature, vitals, obvious trauma/pain, medication exposure.\n3. De-escalate/environment: quiet room, family/caregiver, hearing aids/glasses, food/water/toileting.\n4. If immediate danger blocks care: use the lowest effective rescue medication and/or restraint per policy.\n5. Obtain collateral baseline; acute/fluctuating change is delirium until proven otherwise.',
+        },
+        {
+            heading: 'Decision pathway',
+            body: '1. Treat reversible drivers: pain, urinary retention, constipation, infection, metabolic disorder, intoxication/withdrawal, trauma/subdural, hypoxia.\n2. Assess decision-specific capacity for the current decision.\n3. If lacks capacity: use emergency consent for immediate threats or Texas surrogate pathway for ongoing medical care.\n4. Use Texas Chapter 573 emergency detention only when qualifying mental illness plus danger criteria are met; dementia alone is excluded from the statutory mental illness definition.\n5. Choose disposition based on medical trigger, capacity, surrogate/caregiver reliability, restraint/medication needs, and safe supervision.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Shenvi C, et al. ADEPT tool. Ann Emerg Med. 2020.' },
+        { num: 2, text: 'Texas Health & Safety Code Sec. 571.003, Sec. 573.001, and Chapter 313.' },
+    ],
+};
+const DEMAGIT_TRIGGERS_PAGE = {
+    id: 'demagit-triggers',
+    title: 'Reversible Trigger Checklist',
+    subtitle: 'Do not treat behavior before looking for the driver',
+    sections: [
+        {
+            heading: 'High-yield causes',
+            body: '- Pain: fall/fracture, wound, dental, arthritis, abdominal pathology, pressure injury\n- Urinary retention: bladder scan early; decompression can resolve agitation\n- Constipation/fecal impaction\n- Hypoxia, hypercarbia, hypoglycemia, fever, dehydration\n- Infection: pneumonia, UTI with symptoms/systemic illness, cellulitis, sepsis\n- Metabolic: sodium, calcium, renal/uremic, hepatic, thyroid, glucose\n- Medication: anticholinergics, benzodiazepines/Z-drugs, opioids, steroids, fluoroquinolones, dopamine agonists, polypharmacy\n- Withdrawal: alcohol, benzodiazepines, sedatives\n- Neurologic: fall/subdural, seizure/NCSE, stroke/ICH, meningitis/encephalitis',
+        },
+        {
+            heading: 'Collateral questions',
+            body: '- What is baseline cognition, mobility, speech, sleep, and behavior?\n- When did this start, and is it fluctuating?\n- What calms the patient normally?\n- Any new meds, missed meds, alcohol/sedative exposure, missed dialysis, fall, poor intake, urinary symptoms, constipation, or caregiver stress?\n- Is the home/facility still safe?',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ADEPT tool. Ann Emerg Med. 2020.' },
+        { num: 2, text: 'AGS Beers Criteria 2023.' },
+    ],
+};
+const DEMAGIT_MED_GUIDE_PAGE = {
+    id: 'demagit-med-guide',
+    title: 'Medication Guide',
+    subtitle: 'Use only when needed for danger, distress, or essential care',
+    sections: [
+        {
+            heading: 'Principles',
+            body: '- Nonpharmacologic management first when safe\n- Medication is justified when the patient is dangerous, severely distressed, or agitation blocks urgent evaluation/treatment\n- Use the lowest effective dose; reassess before repeating\n- Antipsychotics carry increased mortality warnings in elderly patients with dementia-related psychosis\n- Avoid routine benzodiazepines in dementia/delirium unless withdrawal, seizure, catatonia, severe stimulant toxicity, or a specific severe anxiety indication is present',
+        },
+        {
+            heading: 'Common ED choices',
+            body: '- [Quetiapine](#/drug/quetiapine/dementia agitation): 12.5-25 mg PO; useful when Parkinson/Lewy body concern or mild-moderate agitation and patient can take PO\n- [Risperidone](#/drug/risperidone/dementia agitation): 0.25-0.5 mg PO/ODT; avoid Parkinson/Lewy body concern\n- [Olanzapine](#/drug/olanzapine/dementia agitation): 2.5-5 mg PO/ODT/IM; do not combine closely with parenteral benzodiazepines\n- [Haloperidol](#/drug/haloperidol/dementia agitation): 0.5-1 mg IM/IV; avoid or use extreme caution with Parkinson/Lewy body dementia, prolonged QTc, severe EPS history',
+        },
+        {
+            heading: 'Chronic Alzheimer agitation agents',
+            body: 'Brexpiprazole and dextromethorphan/bupropion have FDA approvals for agitation associated with dementia due to Alzheimer disease. These are outpatient/chronic-management options, not ED rescue sedatives, and require medication reconciliation, adverse-effect screening, and follow-up planning.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'APA antipsychotic guideline for agitation/psychosis in dementia. Am J Psychiatry. 2016.' },
+        { num: 2, text: 'AGS Beers Criteria 2023.' },
+        { num: 3, text: 'FDA brexpiprazole approval 2023; FDA dextromethorphan/bupropion approval 2026.' },
+    ],
+};
+const DEMAGIT_TEXAS_LAW_PAGE = {
+    id: 'demagit-texas-law',
+    title: 'Texas Law: Dementia vs Mental Health Detention',
+    subtitle: 'Practical ED distinction',
+    sections: [
+        {
+            heading: 'Key distinction',
+            body: 'Texas Health & Safety Code Sec. 571.003 defines mental illness as a condition other than epilepsy, dementia, substance abuse, or intellectual disability that substantially impairs thought/perception/emotional process/judgment or grossly impairs behavior.\n\nImplication: dementia or neurodegenerative disease alone generally does not satisfy the Texas mental-health emergency detention definition.',
+        },
+        {
+            heading: 'Chapter 573 emergency detention',
+            body: 'A peace officer may apprehend without warrant when there is reason to believe the person has mental illness, because of that mental illness there is substantial risk of serious harm to self or others unless immediately restrained, and there is not sufficient time to obtain a warrant.\n\nUse this pathway only when the patient has a qualifying mental illness plus danger because of that illness. Dementia plus separate psychosis/mania/severe depression may qualify if criteria are met; dementia/delirium/medical incapacity alone belongs on the medical pathway.',
+        },
+        {
+            heading: 'Medical incapacity / surrogate pathway',
+            body: 'If the patient lacks capacity for medical decisions and there is no guardian or available medical POA, Texas Chapter 313 allows adult surrogate consent for hospital patients in priority order: spouse, adult children, parents, nearest living relative. If no listed surrogate is reasonably available, another physician not involved in treatment may concur with treatment.\n\nChapter 313 surrogate consent does not authorize voluntary inpatient mental health services or ECT.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Texas Health & Safety Code Sec. 571.003.' },
+        { num: 2, text: 'Texas Health & Safety Code Sec. 573.001.' },
+        { num: 3, text: 'Texas Health & Safety Code Sec. 313.004.' },
+    ],
+};
+const DEMAGIT_CAPACITY_PAGE = {
+    id: 'demagit-capacity',
+    title: 'Capacity in Dementia Agitation',
+    subtitle: 'Decision-specific, not diagnosis-specific',
+    sections: [
+        {
+            heading: 'Four abilities',
+            body: '- Understanding: can the patient explain condition, recommendation, risks, benefits, alternatives?\n- Appreciation: can the patient apply consequences to self?\n- Reasoning: can the patient compare options in a coherent way?\n- Communication: can the patient state a stable choice?\n\nDementia, agitation, poor judgment, or disagreement with the physician does not automatically remove capacity. Acute delirium, psychosis, intoxication, severe pain, or inability to appreciate consequences may remove capacity for a specific decision.',
+        },
+        {
+            heading: 'ED documentation phrases',
+            body: '- Specific decision assessed: leaving, refusing CT/admission, accepting medication, transfer, discharge plan\n- Patient responses for each ability\n- Why the deficit is decision-relevant, if capacity is absent\n- Whether the decision can wait for reversible causes to improve\n- Surrogate/guardian/POA contacted and their decision\n- Emergency consent rationale if treatment cannot wait',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Appelbaum PS. N Engl J Med. 2007.' },
+        { num: 2, text: 'Grisso T, Appelbaum PS. Assessing Competence to Consent to Treatment. 1998.' },
+    ],
+};
+const DEMAGIT_ETHICS_PAGE = {
+    id: 'demagit-ethics',
+    title: 'Ethics / Disposition',
+    subtitle: 'Least restrictive safe plan',
+    sections: [
+        {
+            heading: 'Ethical frame',
+            body: '- Autonomy: respect capable refusal, even if high risk\n- Beneficence/nonmaleficence: treat reversible suffering and prevent foreseeable harm when capacity is absent\n- Least restrictive care: family, sitter, environmental control, and redirection before restraint when safe\n- Proportionality: higher-risk coercion requires higher-risk clinical threat and better documentation\n- Justice: do not offload medical dementia/delirium patients to psychiatric detention when legal criteria are not met',
+        },
+        {
+            heading: 'When discharge is not safe',
+            body: '- No valid decision-maker and patient lacks capacity\n- Unsafe home/facility, caregiver exhaustion, abandonment, suspected abuse/neglect/exploitation\n- Recurrent violent/elopement behavior without supervision\n- Medication/restraint required and needs monitoring\n- Delirium or medical trigger not resolved\n\nUse social work/case management, APS when indicated, ethics consult, legal/risk, and guardianship pathway when ongoing incapacity blocks safe care.',
+        },
+    ],
+    citations: [
+        { num: 1, text: '42 CFR 482.13 restraint/seclusion requirements.' },
+        { num: 2, text: 'Texas Health & Safety Code Chapter 313 and Chapter 573.' },
+        { num: 3, text: 'ADEPT tool. Ann Emerg Med. 2020.' },
+    ],
+};
+const DEMAGIT_STOP_PAGE = {
+    id: 'demagit-stop',
+    title: 'STOP: Dementia Agitation',
+    subtitle: 'Critical legal and clinical misses',
+    sections: [
+        {
+            heading: 'Do not miss',
+            body: '- Do not default dementia agitation to psychiatric detention; Texas mental illness definition excludes dementia\n- Do not ignore delirium/medical triggers: pain, retention, constipation, hypoxia, hypoglycemia, infection, medication toxicity, withdrawal, trauma/subdural\n- Do not assume dementia removes capacity; assess the specific decision now\n- Do not discharge an incapacitated patient to an unsafe environment without surrogate/safe supervision plan\n- Do not use antipsychotics as convenience sedation; reserve for danger, severe distress, or blocked essential care\n- Do not use benzodiazepines routinely in dementia/delirium unless withdrawal, seizure, catatonia, stimulant toxicity, or specific severe anxiety indication exists\n- Do not restrain without immediate safety indication, alternatives attempted, monitoring, reassessment, and earliest discontinuation',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Texas Health & Safety Code Sec. 571.003 and Sec. 573.001.' },
+        { num: 2, text: 'ADEPT tool. Ann Emerg Med. 2020.' },
+        { num: 3, text: '42 CFR 482.13 restraint/seclusion requirements.' },
+    ],
+};
 // -------------------------------------------------------------------
 // ECMO — Steps Summary
 // -------------------------------------------------------------------
@@ -21931,6 +22072,13 @@ export const INFO_PAGES = {
     'avfb-drugs-tool': AVFB_DRUGS_TOOL,
     'avfb-dispo-tool': AVFB_DISPO_TOOL,
     'avfb-stop-tool': AVFB_STOP_TOOL,
+    'demagit-steps': DEMAGIT_STEPS_PAGE,
+    'demagit-triggers': DEMAGIT_TRIGGERS_PAGE,
+    'demagit-med-guide': DEMAGIT_MED_GUIDE_PAGE,
+    'demagit-texas-law': DEMAGIT_TEXAS_LAW_PAGE,
+    'demagit-capacity': DEMAGIT_CAPACITY_PAGE,
+    'demagit-ethics': DEMAGIT_ETHICS_PAGE,
+    'demagit-stop': DEMAGIT_STOP_PAGE,
     // Steps Summaries — Other
     'ap-summary': ACUTE_PANCREATITIS_SUMMARY,
     // Mesenteric Ischemia

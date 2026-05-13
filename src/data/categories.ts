@@ -1381,6 +1381,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'delirium-start',
       },
       {
+        id: 'dementia-agitation',
+        title: 'Dementia & Agitation',
+        subtitle: 'Safety → Medical Triggers → Capacity → Texas Law → Meds → Disposition',
+        categoryId: 'neurology',
+        version: '1.0',
+        nodeCount: 26,
+        entryNodeId: 'demagit-start',
+      },
+      {
         id: 'organic-vs-psych',
         title: 'Organic vs Psychiatric Emergency',
         subtitle: 'Medical Clearance → Red Flags → Organic Mimics → Workup → Risk Assessment → Disposition',
