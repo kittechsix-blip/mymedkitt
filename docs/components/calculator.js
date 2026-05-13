@@ -18059,122 +18059,149 @@ const LP_CT_CRITERIA_CALCULATOR = {
 };
 const LP_OP_INTERPRETER_CALCULATOR = {
     id: 'lp-op-interpreter',
-    title: 'Opening Pressure Interpreter',
-    subtitle: 'CSF Pressure Analysis',
-    description: 'Interpret lumbar puncture opening pressure measurements. Normal range 10-25 cm H₂O (adults). Opening pressure MUST be measured in lateral decubitus position with legs extended for accuracy.',
+    title: 'Opening Pressure Quality + Interpretation',
+    subtitle: 'Validate technique before interpreting the number',
+    description: 'Interprets lumbar puncture opening pressure only after checking measurement quality. A non-lateral, strained, or unleveled measurement should not be used to diagnose or exclude elevated intracranial pressure.',
     fields: [
         {
             name: 'op',
             label: 'Opening Pressure',
-            type: 'select',
+            type: 'number',
             points: 0,
-            description: 'Measured in lateral decubitus with legs extended',
-            selectOptions: [
-                { label: '<6 cm H₂O (Very low)', points: 1 },
-                { label: '6-10 cm H₂O (Low-normal)', points: 2 },
-                { label: '10-20 cm H₂O (Normal)', points: 3 },
-                { label: '20-25 cm H₂O (Upper normal)', points: 4 },
-                { label: '25-30 cm H₂O (Borderline elevated)', points: 5 },
-                { label: '30-40 cm H₂O (Elevated)', points: 6 },
-                { label: '>40 cm H₂O (Markedly elevated)', points: 7 },
-            ],
+            valueIsPoints: true,
+            unit: 'cm H₂O',
+            description: 'Enter the measured manometer value',
         },
         {
-            name: 'position',
-            label: 'Measured in lateral decubitus',
+            name: 'valid-technique',
+            label: 'Valid OP technique confirmed',
             type: 'toggle',
             points: 0,
-            description: 'OP is only accurate in lateral decubitus — sitting position overestimates',
+            description: 'Lateral decubitus, relaxed, flat bed, legs neutral/extended, before CSF removal',
         },
         {
             name: 'obesity',
             label: 'Patient is obese (BMI >30)',
             type: 'toggle',
             points: 0,
-            description: 'Obesity increases OP without pathology',
+            description: 'Context for gray-zone values; not a mathematical correction',
+        },
+        {
+            name: 'pediatric',
+            label: 'Pediatric patient',
+            type: 'toggle',
+            points: 0,
+            description: 'Pediatric elevated threshold is commonly ≥28 cm H₂O',
+        },
+        {
+            name: 'iih-concern',
+            label: 'Papilledema / visual symptoms / IIH concern',
+            type: 'toggle',
+            points: 0,
+            description: 'Makes gray-zone or elevated OP more clinically important',
         },
     ],
     results: [],
-    thresholdNote: 'Normal OP: 10-25 cm H₂O (adults), up to 28 cm H₂O (children/obese). IIH criteria: ≥25 cm H₂O adults, ≥28 cm H₂O children. Must be measured in lateral decubitus with legs extended.',
+    thresholdNote: 'Adult OP is generally normal up to 25 cm H₂O when measured correctly. Pediatric threshold is commonly ≥28 cm H₂O. Obesity modifies pretest context but should not be used as a simple correction factor.',
     citations: [
         'Lee SCM, et al. Opening pressure measurement in lumbar puncture: systematic review. J Neurol. 2019;266(12):3095-3106.',
         'Friedman DI, et al. Revised diagnostic criteria for idiopathic intracranial hypertension (IIH). Neurology. 2013;81(13):1159-1165.',
+        'Avery RA, et al. Reference range for cerebrospinal fluid opening pressure in children. N Engl J Med. 2010;363(9):891-893.',
         'Roberts JR, et al. Roberts and Hedges\' Clinical Procedures in Emergency Medicine. 7th ed. 2019.',
     ],
     computeResult: (values) => {
-        const op = values['op'] || 3;
-        const lateral = values['position'] || 0;
-        const obese = values['obesity'] || 0;
-        // Position warning
-        const positionWarning = !lateral ? '\n\n⚠️ **Position not confirmed** — Opening pressure is ONLY accurate in lateral decubitus with legs extended. Sitting position overestimates OP by ~10-15 cm H₂O.' : '';
-        // Very low
-        if (op === 1) {
+        const op = values['op'] || 0;
+        const validTechnique = values['valid-technique'] === 1;
+        const obese = values['obesity'] === 1;
+        const pediatric = values['pediatric'] === 1;
+        const iihConcern = values['iih-concern'] === 1;
+        const elevatedThreshold = pediatric ? 28 : 25;
+        const markedThreshold = 40;
+        if (op <= 0) {
             return {
-                value: '<6 cm H₂O',
+                value: '—',
+                label: 'Enter Opening Pressure',
+                description: 'Enter the measured opening pressure, then confirm whether the measurement technique was valid.',
+                colorVar: '--color-text-secondary',
+            };
+        }
+        const contextNotes = [];
+        if (obese) {
+            contextNotes.push('Obesity can shift OP distribution upward, especially in the gray zone, but it does not create a validated adult correction formula.');
+        }
+        if (pediatric) {
+            contextNotes.push('Pediatric interpretation commonly uses ≥28 cm H₂O as the elevated threshold.');
+        }
+        if (iihConcern) {
+            contextNotes.push('Papilledema, transient visual obscurations, diplopia, pulsatile tinnitus, or classic IIH phenotype increases the importance of a gray-zone/elevated OP.');
+        }
+        const contextBlock = contextNotes.length > 0
+            ? `\n\n**CONTEXT:**\n${contextNotes.map(note => `• ${note}`).join('\n')}`
+            : '';
+        const invalidTechniqueBlock = !validTechnique
+            ? '\n\n⚠️ **MEASUREMENT QUALITY PROBLEM:** This OP was not confirmed as lateral decubitus, relaxed, flat-bed, legs neutral/extended, and measured before CSF removal. Do **not** use this number alone to diagnose or exclude IIH/elevated ICP. Repeat/remeasure if the diagnosis depends on OP.'
+            : '\n\n**MEASUREMENT QUALITY:** Valid technique confirmed.';
+        const techniqueLabel = validTechnique ? 'Valid Measurement' : 'Technique Unconfirmed';
+        const techniqueColor = validTechnique ? '--color-primary' : '--color-warning';
+        if (!validTechnique) {
+            return {
+                value: `${op} cm H₂O`,
+                label: 'Measurement Not Reliable',
+                description: `**Recorded OP:** ${op} cm H₂O\n\n**Interpretation:** Technique is not confirmed, so the number is diagnostically unreliable.\n\n**Action:** Reposition/remeasure in lateral decubitus if OP will affect management. Treat the patient’s syndrome first: meningitis, SAH, CVST, mass effect, or threatened vision should not wait on a questionable manometer value.${contextBlock}${invalidTechniqueBlock}`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (op < 6) {
+            return {
+                value: `${op} cm H₂O`,
                 label: 'Low Opening Pressure',
-                description: `**Opening pressure is LOW**\n\n**Possible causes:**\n• CSF leak (post-traumatic, iatrogenic, spontaneous)\n• Post-LP (recent LP with ongoing leak)\n• Dehydration (severe)\n• Diabetic coma\n• Circulatory collapse\n\n**Spontaneous Intracranial Hypotension (SIH):**\n• Positional headache (worse upright)\n• MRI: Diffuse pachymeningeal enhancement\n• May require epidural blood patch${positionWarning}`,
+                description: `**Opening pressure is LOW.**\n\n**Possible causes:**\n• CSF leak: post-traumatic, iatrogenic, or spontaneous\n• Recent LP or ongoing leak\n• Severe dehydration/hypovolemia\n• Intracranial hypotension syndrome\n\n**Spontaneous intracranial hypotension clues:**\n• Orthostatic headache\n• MRI: diffuse pachymeningeal enhancement / brain sag\n• May require epidural blood patch\n\n**Technique:** ${techniqueLabel}.${contextBlock}${invalidTechniqueBlock}`,
                 colorVar: '--color-warning',
             };
         }
-        // Low-normal
-        if (op === 2) {
+        if (op < 20) {
             return {
-                value: '6-10 cm H₂O',
-                label: 'Low-Normal Opening Pressure',
-                description: `**Opening pressure is at the lower end of normal**\n\n**Normal range:** 10-20 cm H₂O (some sources 6-25)\n\n**Consider:**\n• Normal variant\n• Dehydration\n• Recent CSF removal\n\nGenerally does not require intervention if patient is asymptomatic.${positionWarning}`,
+                value: `${op} cm H₂O`,
+                label: op < 10 ? 'Low-Normal Opening Pressure' : 'Normal Opening Pressure',
+                description: `**Opening pressure is within the normal adult range.**\n\n**Interpretation:**\n• Adults: often cited as 6-25 cm H₂O, with 10-20 cm H₂O as a common central range\n• Children: values below 28 cm H₂O are generally not elevated\n\n**Action:** No OP-specific intervention. Continue interpreting CSF composition and the clinical syndrome.${contextBlock}${invalidTechniqueBlock}`,
+                colorVar: techniqueColor,
+            };
+        }
+        if (op < elevatedThreshold) {
+            const concernAction = iihConcern
+                ? 'Because IIH features are present, do not dismiss the case. Confirm technique, assess papilledema formally, and consider MRI/MRV if not already done.'
+                : 'If no papilledema or elevated-ICP syndrome is present, this is usually not an OP-driven emergency.';
+            return {
+                value: `${op} cm H₂O`,
+                label: 'Upper Normal / Gray Zone',
+                description: `**Opening pressure is in the upper-normal / gray-zone range.**\n\n**Interpretation:**\n• Adult elevated threshold: ≥25 cm H₂O\n• Pediatric elevated threshold: ≥28 cm H₂O\n• This range requires clinical correlation rather than automatic diagnosis\n\n**Action:** ${concernAction}${contextBlock}${invalidTechniqueBlock}`,
                 colorVar: '--color-primary',
             };
         }
-        // Normal
-        if (op === 3) {
+        if (op < 30) {
+            const thresholdText = pediatric
+                ? 'This meets/exceeds the pediatric elevated threshold if ≥28 cm H₂O.'
+                : 'This meets the adult pressure threshold used in IIH criteria.';
             return {
-                value: '10-20 cm H₂O',
-                label: 'Normal Opening Pressure',
-                description: `**Opening pressure is NORMAL**\n\n**Normal range:**\n• Adults: 10-20 cm H₂O (some sources 6-25)\n• Children: 10-28 cm H₂O\n• Obese adults: up to 25 cm H₂O may be normal\n\nNo intervention needed for the OP itself. Interpret in context of clinical presentation and CSF analysis.${positionWarning}`,
-                colorVar: '--color-primary',
-            };
-        }
-        // Upper normal
-        if (op === 4) {
-            return {
-                value: '20-25 cm H₂O',
-                label: 'Upper Normal Opening Pressure',
-                description: `**Opening pressure is at upper limit of normal**\n\n**Interpretation:**\n• 20-25 cm H₂O = upper limit of normal in adults\n• Up to 25-28 cm H₂O may be normal in:\n  - Obese patients (BMI >30)\n  - Children\n${obese ? '\n✓ Patient is obese — this value is likely normal for them' : ''}\n\n**If symptomatic (headache, papilledema, visual changes):**\n• Consider borderline IIH\n• Ophthalmology evaluation for papilledema\n• MRI/MRV to exclude venous thrombosis${positionWarning}`,
-                colorVar: '--color-primary',
-            };
-        }
-        // Borderline elevated
-        if (op === 5) {
-            return {
-                value: '25-30 cm H₂O',
-                label: 'Borderline Elevated Pressure',
-                description: `**Opening pressure is BORDERLINE ELEVATED**\n\n**IIH Diagnostic Criteria (Modified Dandy):**\n• OP ≥25 cm H₂O (adults), ≥28 cm H₂O (children)\n• Symptoms of elevated ICP\n• Normal neuroimaging (except for IIH signs)\n• Normal CSF composition\n• No other cause identified\n${obese ? '\n**Note:** Patient is obese — OP up to 25-28 may be normal in obesity. Clinical correlation essential.' : ''}\n\n**If IIH suspected:**\n• High-volume therapeutic tap (30-50 mL)\n• Acetazolamide 250mg BID, titrate up\n• Weight loss counseling\n• Neurology/neuro-ophthalmology referral${positionWarning}`,
+                value: `${op} cm H₂O`,
+                label: pediatric && op < 28 ? 'Borderline / Gray Zone' : 'Elevated Opening Pressure',
+                description: `**Opening pressure is borderline to elevated.**\n\n**Interpretation:** ${thresholdText}\n\n**Do not diagnose IIH by OP alone. Required context:**\n• Compatible symptoms/signs, especially papilledema or VI palsy\n• Normal CSF composition\n• Neuroimaging without mass/hydrocephalus\n• MRV/CTV consideration to exclude cerebral venous sinus thrombosis\n\n**Action:** If IIH/CVST/infection is clinically plausible, continue full evaluation rather than dismissing this as normal.${contextBlock}${invalidTechniqueBlock}`,
                 colorVar: '--color-warning',
             };
         }
-        // Elevated
-        if (op === 6) {
+        if (op < markedThreshold) {
             return {
-                value: '30-40 cm H₂O',
+                value: `${op} cm H₂O`,
                 label: 'Elevated Opening Pressure',
-                description: `**Opening pressure is ELEVATED**\n\n**Causes of elevated OP:**\n• **IIH/Pseudotumor cerebri** — young, obese, female\n• **Cerebral venous thrombosis** — check MRV\n• **Meningitis** — especially TB/fungal\n• **Mass lesion** — should have been excluded by CT\n• **Hydrocephalus**\n• **Medications** — tetracyclines, vitamin A, steroids (withdrawal)\n\n**Immediate actions:**\n1. **Therapeutic tap:** Remove 30-50 mL CSF\n2. Target closing pressure: 10-15 cm H₂O\n3. Patient will likely have immediate symptom relief\n\n**Workup if not done:**\n• MRI brain + MRV (exclude venous thrombosis)\n• Full CSF analysis\n• Ophthalmology (papilledema assessment)\n\n**Treatment (IIH):**\n• Acetazolamide 250-500mg BID, titrate\n• Weight loss (if obese)\n• Serial LP may be needed${positionWarning}`,
-                colorVar: '--color-danger',
-            };
-        }
-        // Markedly elevated
-        if (op === 7) {
-            return {
-                value: '>40 cm H₂O',
-                label: 'Markedly Elevated Pressure',
-                description: `**Opening pressure is MARKEDLY ELEVATED**\n\n⚠️ **Urgent evaluation required**\n\n**Immediate concerns:**\n• Risk of visual loss from papilledema\n• Need to exclude secondary causes\n\n**Actions:**\n1. **Therapeutic high-volume tap:** Remove 40-50 mL CSF\n2. Target closing pressure: 10-15 cm H₂O\n3. Monitor during removal — stop if severe headache develops\n\n**Urgent workup:**\n• MRI brain + MRV (venous sinus thrombosis?)\n• Complete CSF analysis\n• Emergent ophthalmology consult\n\n**If severe papilledema with vision threat:**\n• Neurosurgery consult for possible shunt\n• May need serial urgent LPs\n• Consider IV acetazolamide\n\n**IIH treatment:**\n• Acetazolamide 500mg BID, titrate to effect\n• Weight loss program\n• Close neuro-ophthalmology follow-up${positionWarning}`,
+                description: `**Opening pressure is elevated.**\n\n**Major ED differential:**\n• IIH / pseudotumor cerebri\n• Cerebral venous sinus thrombosis\n• Bacterial, TB, fungal, or cryptococcal meningitis\n• SAH, hydrocephalus, mass lesion, cerebral edema\n• Medication-associated intracranial hypertension: tetracyclines, vitamin A derivatives, steroid withdrawal\n\n**Action:**\n1. Correlate with CSF profile and syndrome.\n2. If IIH phenotype or papilledema: MRI/MRV and neuro-ophthalmology/neurology follow-up.\n3. If infection possible: do not delay empiric antimicrobials.\n4. If severe symptoms/vision threat: urgent specialty involvement.\n\nTherapeutic CSF removal may be appropriate for IIH or markedly symptomatic elevated ICP after secondary causes are considered.${contextBlock}${invalidTechniqueBlock}`,
                 colorVar: '--color-danger',
             };
         }
         return {
-            value: '--',
-            label: 'Select Pressure',
-            description: 'Select the opening pressure to interpret results.',
-            colorVar: '--color-text-muted',
+            value: `${op} cm H₂O`,
+            label: 'Markedly Elevated Pressure',
+            description: `**Opening pressure is markedly elevated.**\n\n⚠️ **Urgent evaluation required.**\n\n**Immediate concerns:**\n• Threatened vision from papilledema\n• Cryptococcal/fungal/TB meningitis or other infectious elevated ICP\n• Cerebral venous sinus thrombosis\n• Hydrocephalus, cerebral edema, or mass-effect pathology\n\n**Actions:**\n1. Confirm neuroimaging safety and secondary-cause workup.\n2. Send complete CSF studies guided by syndrome.\n3. Involve neurology/neuro-ophthalmology; neurosurgery if hydrocephalus, mass effect, or vision-threatening ICP.\n4. Consider therapeutic CSF removal when clinically indicated and safe.\n\nDo not treat this as simple IIH until secondary causes are addressed.${contextBlock}${invalidTechniqueBlock}`,
+            colorVar: '--color-danger',
         };
     },
 };
@@ -35379,7 +35406,7 @@ export function renderCalculator(container, calculatorId) {
             renderSelectField(fieldEl, field, fieldValues, () => updateScore(calc, fieldValues, scoreDisplay));
         }
         else {
-            renderToggleField(fieldEl, field, fieldValues, () => updateScore(calc, fieldValues, scoreDisplay));
+            renderToggleField(fieldEl, field, fieldValues, () => updateScore(calc, fieldValues, scoreDisplay), Boolean(calc.computeResult));
         }
         form.appendChild(fieldEl);
     }
@@ -35481,7 +35508,7 @@ function renderNumberField(container, field, values, onChange) {
         container.appendChild(points);
     }
 }
-function renderToggleField(container, field, values, onChange) {
+function renderToggleField(container, field, values, onChange, formulaMode = false) {
     const row = document.createElement('div');
     row.className = 'calculator-toggle-row';
     const labelWrap = document.createElement('div');
@@ -35497,11 +35524,15 @@ function renderToggleField(container, field, values, onChange) {
         labelWrap.appendChild(desc);
     }
     row.appendChild(labelWrap);
-    // Points badge
-    const pointsBadge = document.createElement('span');
-    pointsBadge.className = 'calculator-field-points';
-    pointsBadge.textContent = `+${field.points}`;
-    row.appendChild(pointsBadge);
+    // Points badge. Formula-based calculators often use toggles as clinical
+    // context flags rather than additive score variables, so showing "+0" or
+    // "+1" is misleading there.
+    if (!formulaMode) {
+        const pointsBadge = document.createElement('span');
+        pointsBadge.className = 'calculator-field-points';
+        pointsBadge.textContent = `+${field.points}`;
+        row.appendChild(pointsBadge);
+    }
     // Toggle switch
     const toggleLabel = document.createElement('label');
     toggleLabel.className = 'calculator-toggle';
@@ -35515,7 +35546,7 @@ function renderToggleField(container, field, values, onChange) {
     toggleLabel.appendChild(slider);
     row.appendChild(toggleLabel);
     checkbox.addEventListener('change', () => {
-        values[field.name] = checkbox.checked ? field.points : 0;
+        values[field.name] = checkbox.checked ? (formulaMode && field.points === 0 ? 1 : field.points) : 0;
         onChange();
     });
     container.appendChild(row);
