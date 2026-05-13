@@ -611,14 +611,14 @@ export const AACG_MODULE_LABELS = [
 export const AACG_CRITICAL_ACTIONS = [
   { text: 'Ophthalmology consult FIRST - do NOT delay for treatment (they need to assess for laser iridotomy)', nodeId: 'aacg-start' },
   { text: 'Tonometry to measure IOP (normal 10-21 mmHg; AACG usually 50-80+ mmHg)', nodeId: 'aacg-iop' },
-  { text: 'Acetazolamide 500 mg IV/PO + timolol 0.5% 1 drop + apraclonidine 1% 1 drop immediately', nodeId: 'aacg-triple-therapy' },
-  { text: 'Mannitol 1-2 g/kg IV over 30-45 min if IOP >40 despite initial therapy', nodeId: 'aacg-mannitol' },
+  { text: 'Acetazolamide 500 mg IV/PO + timolol 0.5% 1 drop + apraclonidine 1% 1 drop immediately', nodeId: 'aacg-reduce-production' },
+  { text: 'Mannitol 1-2 g/kg IV over 30-45 min if IOP >40 despite initial therapy', nodeId: 'aacg-osmotic' },
   { text: 'Pilocarpine 1-2% AFTER IOP <40 (ineffective when IOP very high)', nodeId: 'aacg-pilocarpine' },
-  { text: 'Recheck IOP q1h until <30 mmHg, then q2-4h until ophthalmology evaluation', nodeId: 'aacg-monitoring' },
-  { text: 'Avoid anticholinergics, antihistamines, and sympathomimetics (worsen AACG)', nodeId: 'aacg-avoid-meds' },
-  { text: 'Definitive treatment is laser peripheral iridotomy (LPI) - ophthalmology performs', nodeId: 'aacg-disposition' },
-  { text: 'Treat both eyes prophylactically (fellow eye has 40-80% risk within 5-10 years)', nodeId: 'aacg-disposition' },
-  { text: 'Admit if IOP remains >30 despite maximal therapy or significant optic nerve damage', nodeId: 'aacg-admit' },
+  { text: 'Recheck IOP q1h until <30 mmHg, then q2-4h until ophthalmology evaluation', nodeId: 'aacg-response-check2' },
+  { text: 'Avoid anticholinergics, antihistamines, and sympathomimetics (worsen AACG)', nodeId: 'aacg-meds-list' },
+  { text: 'Definitive treatment is laser peripheral iridotomy (LPI) - ophthalmology performs', nodeId: 'aacg-definitive' },
+  { text: 'Treat both eyes prophylactically (fellow eye has 40-80% risk within 5-10 years)', nodeId: 'aacg-definitive' },
+  { text: 'Admit if IOP remains >30 despite maximal therapy or significant optic nerve damage', nodeId: 'aacg-dispo' },
 ];
 
 export const AACG_CITATIONS: Citation[] = [

@@ -6,6 +6,19 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
 
 ## Steps
 
+0. **MANDATORY — Lint CRITICAL_ACTIONS linkage:**
+   ```bash
+   node scripts/lint-critical-actions.mjs --strict
+   ```
+   This asserts every `nodeId` referenced in `*_CRITICAL_ACTIONS` arrays resolves to an actual node in the same tree's `*_NODES` array. Broken linkage = dead clinical guidance link = FDA Prong-4 risk (clinician cannot review the basis for the recommendation).
+
+   **If this step fails, the deploy ABORTS.** Fix the broken nodeIds before continuing. Either:
+   - Rename the CRITICAL_ACTIONS `nodeId` to match an existing node id (most common — usually a node was renamed without updating the reference), OR
+   - Add the missing node to the NODES array if the critical action references content that should exist, OR
+   - Remove the dead reference from CRITICAL_ACTIONS if it's no longer clinically relevant
+
+   Carried recommendation across 6 Louis Litt audits. Closed 2026-05-12 — initial enforcement caught 266 broken nodeIds across 54 files.
+
 1. **Compile TypeScript:**
    ```bash
    bunx tsc --skipLibCheck --noUnusedLocals false

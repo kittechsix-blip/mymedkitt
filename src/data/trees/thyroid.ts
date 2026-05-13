@@ -7,12 +7,12 @@ import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
 export const THYROID_CRITICAL_ACTIONS = [
-  { text: 'Levothyroxine 200-400 mcg IV load for decompensated hypothyroidism - do NOT delay for lab confirmation', nodeId: 'thyroid-hypo-tx' },
+  { text: 'Levothyroxine 200-400 mcg IV load for decompensated hypothyroidism - do NOT delay for lab confirmation', nodeId: 'thyroid-hypo-t4' },
   { text: 'Hydrocortisone 100 mg IV q8h BEFORE levothyroxine (prevent adrenal crisis)', nodeId: 'thyroid-hypo-steroids' },
-  { text: 'Propylthiouracil 600-1000 mg loading, then 200-250 mg q4h for thyroid storm', nodeId: 'thyroid-storm-ptu' },
-  { text: 'Propranolol 60-80 mg PO q4h (or 1-2 mg IV q10-15 min) to block peripheral conversion', nodeId: 'thyroid-storm-betablock' },
+  { text: 'Propylthiouracil 600-1000 mg loading, then 200-250 mg q4h for thyroid storm', nodeId: 'thyroid-storm-thionamide' },
+  { text: 'Propranolol 60-80 mg PO q4h (or 1-2 mg IV q10-15 min) to block peripheral conversion', nodeId: 'thyroid-storm-bb' },
   { text: 'Iodine therapy MUST wait 1 hour after PTU/methimazole - given too early worsens storm', nodeId: 'thyroid-storm-iodine' },
-  { text: 'Aggressive cooling for thyroid storm hyperthermia - acetaminophen preferred (NOT aspirin)', nodeId: 'thyroid-storm-cooling' },
+  { text: 'Aggressive cooling for thyroid storm hyperthermia - acetaminophen preferred (NOT aspirin)', nodeId: 'thyroid-storm-hyperthermia' },
   { text: 'Decompensated hypothyroidism mortality 25-50% - treat empirically if suspected', nodeId: 'thyroid-hypo-confirm' },
   { text: 'Thyroid storm mortality 8-25% despite treatment - ICU admission required', nodeId: 'thyroid-storm-confirm' },
 ];

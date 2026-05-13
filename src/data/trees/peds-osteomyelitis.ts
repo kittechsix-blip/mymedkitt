@@ -496,15 +496,15 @@ export const PEDS_OSTEOMYELITIS_MODULE_LABELS = [
 
 export const PEDS_OSTEOMYELITIS_CRITICAL_ACTIONS = [
   { text: 'MRI gold standard for diagnosis (sensitivity 90-100%), get within 24-48h', nodeId: 'osteo-imaging' },
-  { text: 'Blood cultures before antibiotics (positive in 30-60%)', nodeId: 'osteo-labs' },
-  { text: 'Empiric antibiotics: Vancomycin + ceftriaxone (covers MRSA + typical organisms)', nodeId: 'osteo-empiric-abx' },
-  { text: 'CRP and ESR for baseline (CRP >2 mg/dL or ESR >20 mm/hr suggestive)', nodeId: 'osteo-labs' },
-  { text: 'Orthopedic surgery consult for abscess, septic arthritis, or vertebral osteomyelitis', nodeId: 'osteo-ortho-consult' },
-  { text: 'IV to PO transition when afebrile 24-48h, CRP improving, clinically better', nodeId: 'osteo-iv-to-po' },
-  { text: 'Total antibiotic duration 3-4 weeks minimum (longer for complications)', nodeId: 'osteo-duration' },
-  { text: 'Avoid NSAIDs until infection controlled (may mask fever and delay diagnosis)', nodeId: 'osteo-pain' },
-  { text: 'S. aureus most common (50-70%), increasing MRSA prevalence', nodeId: 'osteo-organisms' },
-  { text: 'Weight-bearing as tolerated - immobilization NOT required', nodeId: 'osteo-activity' },
+  { text: 'Blood cultures before antibiotics (positive in 30-60%)', nodeId: 'osteo-workup' },
+  { text: 'Empiric antibiotics: Vancomycin + ceftriaxone (covers MRSA + typical organisms)', nodeId: 'osteo-abx-mrsa' },
+  { text: 'CRP and ESR for baseline (CRP >2 mg/dL or ESR >20 mm/hr suggestive)', nodeId: 'osteo-workup' },
+  { text: 'Orthopedic surgery consult for abscess, septic arthritis, or vertebral osteomyelitis', nodeId: 'osteo-surgical-consult' },
+  { text: 'IV to PO transition when afebrile 24-48h, CRP improving, clinically better', nodeId: 'osteo-oral-transition' },
+  { text: 'Total antibiotic duration 3-4 weeks minimum (longer for complications)', nodeId: 'osteo-disposition' },
+  { text: 'Avoid NSAIDs until infection controlled (may mask fever and delay diagnosis)', nodeId: 'osteo-clinical' },
+  { text: 'S. aureus most common (50-70%), increasing MRSA prevalence', nodeId: 'osteo-pathogens' },
+  { text: 'Weight-bearing as tolerated - immobilization NOT required', nodeId: 'osteo-clinical' },
 ];
 
 export const PEDS_OSTEOMYELITIS_CITATIONS: Citation[] = [

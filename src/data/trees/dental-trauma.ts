@@ -10,11 +10,11 @@ export const DENTAL_TRAUMA_CRITICAL_ACTIONS = [
   { text: 'Ellis III = EMERGENCY - exposed pulp viable only 3-6 hours, apply calcium hydroxide + same-day dental', nodeId: 'dental-ellis3' },
   { text: 'Permanent tooth avulsion: TIME IS TOOTH - reimplant within 60 min, store in milk or HBSS', nodeId: 'dental-avulsion-permanent' },
   { text: 'NEVER reimplant primary (baby) teeth - risk of damaging permanent tooth bud', nodeId: 'dental-avulsion-primary' },
-  { text: 'Handle avulsed tooth by CROWN only - never touch or scrub the root', nodeId: 'dental-avulsion-handling' },
+  { text: 'Handle avulsed tooth by CROWN only - never touch or scrub the root', nodeId: 'dental-avulsion-reimplant' },
   { text: 'Intrusion >3mm needs surgical repositioning - do not force eruption', nodeId: 'dental-intrusion' },
   { text: 'Alveolar fracture = open fracture - requires antibiotics and rigid splinting 4 weeks', nodeId: 'dental-alveolar' },
   { text: 'Flexible splint 7-14 days for most luxations - rigid splints cause ankylosis', nodeId: 'dental-splinting' },
-  { text: 'Account for all tooth fragments - CXR if aspiration suspected', nodeId: 'dental-fragments' },
+  { text: 'Account for all tooth fragments - CXR if aspiration suspected', nodeId: 'dental-ellis-assess' },
 ];
 
 export const DENTAL_TRAUMA_NODES: DecisionNode[] = [

@@ -14,8 +14,8 @@ export const VAD_CRITICAL_ACTIONS = [
   { text: 'Target MAP 70-90 mmHg - higher increases stroke risk, lower risks hypoperfusion', nodeId: 'vad-map-check' },
   { text: 'Low flow (<3 L/min): check for hypovolemia, RV failure, or obstruction', nodeId: 'vad-low-flow' },
   { text: 'High power (>9-10 W) or power spikes: suspect pump thrombosis - activate VAD team immediately', nodeId: 'vad-pump-thrombosis' },
-  { text: 'CPR in VAD arrest: use standard CPR - pump may or may not work, compressions provide flow even if pump off', nodeId: 'vad-arrest-cpr' },
-  { text: 'Defibrillation safe - use standard ACLS, shock VAD patients in VF/pVT', nodeId: 'vad-arrest-cpr' },
+  { text: 'CPR in VAD arrest: use standard CPR - pump may or may not work, compressions provide flow even if pump off', nodeId: 'vad-arrest-start' },
+  { text: 'Defibrillation safe - use standard ACLS, shock VAD patients in VF/pVT', nodeId: 'vad-arrest-start' },
 ];
 
 export const VAD_NODES: DecisionNode[] = [

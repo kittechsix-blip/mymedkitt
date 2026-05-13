@@ -9,7 +9,7 @@ export const VP_SHUNT_CRITICAL_ACTIONS = [
     { text: 'Emergent ICP reduction if herniation signs present', nodeId: 'vps-emergent-icp' },
     { text: 'Neurosurgery consult for all suspected malfunctions', nodeId: 'vps-nsgy-consult' },
     { text: 'Blood cultures before antibiotics for suspected infection', nodeId: 'vps-infection-workup' },
-    { text: 'Shunt tap only by neurosurgery', nodeId: 'vps-shunt-tap' },
+    { text: 'Shunt tap only by neurosurgery', nodeId: 'vps-shunt-tap-technique' },
 ];
 export const VP_SHUNT_NODES = [
     // =====================================================================

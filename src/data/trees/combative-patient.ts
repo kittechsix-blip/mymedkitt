@@ -849,16 +849,16 @@ export const COMBATIVE_PATIENT_MODULE_LABELS = [
 ];
 
 export const COMBATIVE_PATIENT_CRITICAL_ACTIONS = [
-  { text: 'De-escalation FIRST: calm voice, maintain distance, remove triggers, involve family', nodeId: 'comb-deesc' },
-  { text: 'Mild-moderate agitation: PO preferred - lorazepam 1-2 mg OR olanzapine 5-10 mg', nodeId: 'comb-po' },
-  { text: 'Severe agitation: IM ketamine 4-5 mg/kg OR droperidol 5 mg + midazolam 5 mg', nodeId: 'comb-im-severe' },
-  { text: 'Ketamine preferred for undifferentiated agitation (rapid onset, safe profile)', nodeId: 'comb-ketamine' },
-  { text: 'Physical restraints ONLY when verbal/chemical fail AND imminent danger', nodeId: 'comb-restraints' },
-  { text: 'Monitor Q15min after chemical sedation (vitals, pulse ox, airway)', nodeId: 'comb-post-sedation' },
-  { text: 'Avoid haloperidol monotherapy (QTc prolongation, less effective than combinations)', nodeId: 'comb-avoid-haldol' },
-  { text: 'Reverse search: glucose, vitals, ECG, toxicology screen for reversible causes', nodeId: 'comb-workup' },
-  { text: 'Capacity assessment after agitation resolves - psychiatric clearance if intentional ingestion', nodeId: 'comb-capacity' },
-  { text: 'Document: initial presentation, de-escalation attempts, medication doses/times, response, restraint justification', nodeId: 'comb-documentation' },
+  { text: 'De-escalation FIRST: calm voice, maintain distance, remove triggers, involve family', nodeId: 'comb-redirectable' },
+  { text: 'Mild-moderate agitation: PO preferred - lorazepam 1-2 mg OR olanzapine 5-10 mg', nodeId: 'comb-oral-willing' },
+  { text: 'Severe agitation: IM ketamine 4-5 mg/kg OR droperidol 5 mg + midazolam 5 mg', nodeId: 'comb-severe-combo' },
+  { text: 'Ketamine preferred for undifferentiated agitation (rapid onset, safe profile)', nodeId: 'comb-severe-combo' },
+  { text: 'Physical restraints ONLY when verbal/chemical fail AND imminent danger', nodeId: 'comb-restraint-needed' },
+  { text: 'Monitor Q15min after chemical sedation (vitals, pulse ox, airway)', nodeId: 'comb-post-monitoring' },
+  { text: 'Avoid haloperidol monotherapy (QTc prolongation, less effective than combinations)', nodeId: 'comb-severe-combo' },
+  { text: 'Reverse search: glucose, vitals, ECG, toxicology screen for reversible causes', nodeId: 'comb-eval-workup' },
+  { text: 'Capacity assessment after agitation resolves - psychiatric clearance if intentional ingestion', nodeId: 'comb-eval-workup' },
+  { text: 'Document: initial presentation, de-escalation attempts, medication doses/times, response, restraint justification', nodeId: 'comb-restraint-monitoring' },
 ];
 
 export const COMBATIVE_PATIENT_CITATIONS: Citation[] = [

@@ -20,8 +20,8 @@ export const CIGUATERA_CITATIONS = [
 export const CIGUATERA_CRITICAL_ACTIONS = [
     { text: 'Confirm reef fish ingestion within 72 hours', nodeId: 'cig-history' },
     { text: 'Screen for pathognomonic hot-cold reversal', nodeId: 'cig-symptoms' },
-    { text: 'Mannitol 1 g/kg IV over 45 min for severe symptoms', nodeId: 'cig-severe-treatment' },
-    { text: 'Admit for cardiovascular monitoring if bradycardia/hypotension', nodeId: 'cig-cardiovascular' },
+    { text: 'Mannitol 1 g/kg IV over 45 min for severe symptoms', nodeId: 'cig-mannitol' },
+    { text: 'Admit for cardiovascular monitoring if bradycardia/hypotension', nodeId: 'cig-cardiac-assess' },
     { text: 'Avoid ciguatoxic fish for 6 months after poisoning', nodeId: 'cig-discharge' },
 ];
 export const CIGUATERA_NODES = [

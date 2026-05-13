@@ -8,7 +8,7 @@ export const ECHO_EPSS_CRITICAL_ACTIONS = [
     { text: 'Activate M-mode through mitral valve leaflet tips', nodeId: 'epss-mmode' },
     { text: 'Measure gap between E-point and septum', nodeId: 'epss-measure' },
     { text: 'EPSS >7 mm suggests LVEF <50%', nodeId: 'epss-interpret' },
-    { text: 'EPSS >10 mm indicates severe dysfunction', nodeId: 'epss-high' },
+    { text: 'EPSS >10 mm indicates severe dysfunction', nodeId: 'epss-hf' },
     { text: 'Invalid in AR, MS, HCM, non-sinus rhythms', nodeId: 'epss-start' },
 ];
 export const ECHO_EPSS_NODES = [

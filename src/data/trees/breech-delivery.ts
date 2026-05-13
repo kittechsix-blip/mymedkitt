@@ -8,7 +8,7 @@ import type { Citation } from './neurosyphilis.js';
 
 export const BREECH_DELIVERY_CRITICAL_ACTIONS = [
   { text: 'Call OB and Pediatrics/NICU STAT — breech is an obstetric emergency in the ED', nodeId: 'breech-callhelp' },
-  { text: 'Transfer to OR if any chance of C-section — do NOT commit to vaginal if alternative exists', nodeId: 'breech-decision' },
+  { text: 'Transfer to OR if any chance of C-section — do NOT commit to vaginal if alternative exists', nodeId: 'breech-csection' },
   { text: 'Check for cord prolapse immediately (footling breech = 20% risk)', nodeId: 'breech-cord-check' },
   { text: 'HANDS OFF THE BREECH — no traction until scapulae visible', nodeId: 'breech-hands-off' },
   { text: 'Let body deliver spontaneously to umbilicus via maternal pushing only', nodeId: 'breech-body-spontaneous' },

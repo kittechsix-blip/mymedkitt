@@ -51,12 +51,12 @@ export const TRAVELER_INFECTIONS_CITATIONS = [
 export const TRAVELER_INFECTIONS_CRITICAL_ACTIONS = [
     { text: 'STAT malaria testing for all fevers from endemic areas (thick/thin smears + RDT)', nodeId: 'ti-malaria-screen' },
     { text: 'Isolate immediately if respiratory symptoms, hemorrhage, or rash + fever', nodeId: 'ti-start' },
-    { text: 'Start doxycycline 100mg BID immediately if eschar present (rickettsial infection)', nodeId: 'ti-fever-eschar' },
-    { text: 'Calculate incubation period (days since return + symptom onset) to narrow DDx', nodeId: 'ti-fever-incubation' },
-    { text: 'Check for thrombocytopenia - suggests dengue, malaria, or hemorrhagic fever', nodeId: 'ti-fever-labs' },
-    { text: 'Blood cultures before antibiotics for suspected typhoid or enteric fever', nodeId: 'ti-fever-enteric' },
-    { text: 'Admit any P. falciparum malaria to ICU - call CDC Malaria Hotline', nodeId: 'ti-disposition-admit' },
-    { text: 'Stool studies for all persistent diarrhea (culture, O&P, C. diff if recent travel)', nodeId: 'ti-gi-persistent' },
+    { text: 'Start doxycycline 100mg BID immediately if eschar present (rickettsial infection)', nodeId: 'ti-rickettsial' },
+    { text: 'Calculate incubation period (days since return + symptom onset) to narrow DDx', nodeId: 'ti-fever-initial' },
+    { text: 'Check for thrombocytopenia - suggests dengue, malaria, or hemorrhagic fever', nodeId: 'ti-fever-workup' },
+    { text: 'Blood cultures before antibiotics for suspected typhoid or enteric fever', nodeId: 'ti-typhoid' },
+    { text: 'Admit any P. falciparum malaria to ICU - call CDC Malaria Hotline', nodeId: 'ti-disposition' },
+    { text: 'Stool studies for all persistent diarrhea (culture, O&P, C. diff if recent travel)', nodeId: 'ti-persistent-diarrhea' },
 ];
 export const TRAVELER_INFECTIONS_NODES = [
     {

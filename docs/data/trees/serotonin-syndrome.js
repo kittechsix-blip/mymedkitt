@@ -295,13 +295,13 @@ export const SEROTONIN_SYNDROME_MODULE_LABELS = [
     'Disposition',
 ];
 export const SEROTONIN_SYNDROME_CRITICAL_ACTIONS = [
-    { text: 'Stop all serotonergic agents immediately (SSRIs, SNRIs, MAOIs, tramadol, linezolid, etc)', nodeId: 'sero-stop-agents' },
-    { text: 'Benzodiazepines for agitation: lorazepam 1-2 mg IV q5-10min to control myoclonus/rigidity', nodeId: 'sero-benzos' },
-    { text: 'Cyproheptadine 12 mg PO initial, then 2 mg q2h (max 32 mg/day) for moderate-severe cases', nodeId: 'sero-cyprohep' },
-    { text: 'Aggressive cooling for hyperthermia >41°C (evaporative + cold IV fluids)', nodeId: 'sero-cooling' },
-    { text: 'Intubate with paralysis (rocuronium/vecuronium) if severe rigidity or temp >41°C', nodeId: 'sero-intubate' },
-    { text: 'Avoid antipyretics (ineffective), avoid succinylcholine (rhabdo risk with rigidity)', nodeId: 'sero-avoid' },
-    { text: 'Hunter criteria for diagnosis: serotonergic agent + (myoclonus + agitation) OR (tremor + hyperreflexia + temp >38)', nodeId: 'sero-hunter' },
+    { text: 'Stop all serotonergic agents immediately (SSRIs, SNRIs, MAOIs, tramadol, linezolid, etc)', nodeId: 'ss-investigate-drugs' },
+    { text: 'Benzodiazepines for agitation: lorazepam 1-2 mg IV q5-10min to control myoclonus/rigidity', nodeId: 'ss-moderate-tx' },
+    { text: 'Cyproheptadine 12 mg PO initial, then 2 mg q2h (max 32 mg/day) for moderate-severe cases', nodeId: 'ss-moderate-tx' },
+    { text: 'Aggressive cooling for hyperthermia >41°C (evaporative + cold IV fluids)', nodeId: 'ss-severe-tx' },
+    { text: 'Intubate with paralysis (rocuronium/vecuronium) if severe rigidity or temp >41°C', nodeId: 'ss-severe-tx' },
+    { text: 'Avoid antipyretics (ineffective), avoid succinylcholine (rhabdo risk with rigidity)', nodeId: 'ss-severe-tx' },
+    { text: 'Hunter criteria for diagnosis: serotonergic agent + (myoclonus + agitation) OR (tremor + hyperreflexia + temp >38)', nodeId: 'ss-hunter' },
 ];
 export const SEROTONIN_SYNDROME_CITATIONS = [
     { num: 1, text: 'Boyer EW, Shannon M. The Serotonin Syndrome. N Engl J Med. 2005;352(11):1112-1120.' },

@@ -416,15 +416,15 @@ export const PE_PREGNANCY_MODULE_LABELS = [
 
 export const PE_PREGNANCY_CRITICAL_ACTIONS = [
   { text: 'Missing PE is more dangerous than diagnostic radiation (fetal radiation risk overstated)', nodeId: 'pep-start' },
-  { text: 'D-dimer normally elevated in pregnancy - use pregnancy-adjusted thresholds (>1000 in 3rd trimester)', nodeId: 'pep-ddimer' },
-  { text: 'CTA chest preferred imaging (lower breast radiation than V/Q, higher diagnostic yield)', nodeId: 'pep-imaging' },
-  { text: 'Pregnancy-adapted YEARS algorithm: CTA if ≥1 clinical criterion + D-dimer >1000', nodeId: 'pep-years' },
-  { text: 'Anticoagulation: LMWH preferred (enoxaparin 1 mg/kg SC q12h). Avoid warfarin (teratogenic).', nodeId: 'pep-anticoag' },
+  { text: 'D-dimer normally elevated in pregnancy - use pregnancy-adjusted thresholds (>1000 in 3rd trimester)', nodeId: 'pep-clinical-prob' },
+  { text: 'CTA chest preferred imaging (lower breast radiation than V/Q, higher diagnostic yield)', nodeId: 'pep-workup' },
+  { text: 'Pregnancy-adapted YEARS algorithm: CTA if ≥1 clinical criterion + D-dimer >1000', nodeId: 'pep-clinical-prob' },
+  { text: 'Anticoagulation: LMWH preferred (enoxaparin 1 mg/kg SC q12h). Avoid warfarin (teratogenic).', nodeId: 'pep-treatment' },
   { text: 'Thrombolysis indications: massive PE with hemodynamic instability (alteplase 100 mg IV over 2h)', nodeId: 'pep-thrombolysis' },
   { text: 'Pregnancy is 5-10x increased VTE risk (highest risk in 3rd trimester and postpartum)', nodeId: 'pep-start' },
-  { text: 'Continue LMWH until delivery, switch to UFH at 36 weeks (shorter half-life for neuraxial anesthesia)', nodeId: 'pep-delivery-planning' },
-  { text: 'Postpartum anticoagulation for 6 weeks minimum (can use warfarin postpartum)', nodeId: 'pep-postpartum' },
-  { text: 'Fetal radiation exposure: CTA chest ~0.01-0.66 mGy (safe, <50 mGy threshold)', nodeId: 'pep-fetal-radiation' },
+  { text: 'Continue LMWH until delivery, switch to UFH at 36 weeks (shorter half-life for neuraxial anesthesia)', nodeId: 'pep-disposition' },
+  { text: 'Postpartum anticoagulation for 6 weeks minimum (can use warfarin postpartum)', nodeId: 'pep-disposition' },
+  { text: 'Fetal radiation exposure: CTA chest ~0.01-0.66 mGy (safe, <50 mGy threshold)', nodeId: 'pep-start' },
 ];
 
 export const PE_PREGNANCY_CITATIONS: Citation[] = [

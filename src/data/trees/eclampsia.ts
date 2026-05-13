@@ -395,13 +395,13 @@ export const ECLAMPSIA_MODULE_LABELS = [
 ];
 
 export const ECLAMPSIA_CRITICAL_ACTIONS = [
-  { text: 'Magnesium sulfate 4-6 g IV bolus over 15-20 min, then 1-2 g/hr infusion', nodeId: 'eclamp-mg' },
-  { text: 'Labetalol 20 mg IV (then 40-80 mg q10min) or hydralazine 5-10 mg IV for SBP >160', nodeId: 'eclamp-bp' },
-  { text: 'Benzodiazepines if seizures persist despite magnesium (lorazepam 2-4 mg IV)', nodeId: 'eclamp-bzd' },
-  { text: 'OB consult stat - definitive treatment is delivery (stabilize mother first)', nodeId: 'eclamp-delivery' },
-  { text: 'Monitor magnesium toxicity: loss of DTRs, respiratory depression (hold if RR <12)', nodeId: 'eclamp-mg-toxicity' },
-  { text: 'Calcium gluconate 1 g IV for magnesium toxicity (antidote)', nodeId: 'eclamp-ca' },
-  { text: 'Labs: CBC, CMP, LFTs, uric acid, 24h protein or spot protein/Cr ratio', nodeId: 'eclamp-labs' },
+  { text: 'Magnesium sulfate 4-6 g IV bolus over 15-20 min, then 1-2 g/hr infusion', nodeId: 'eclampsia-mag-loading' },
+  { text: 'Labetalol 20 mg IV (then 40-80 mg q10min) or hydralazine 5-10 mg IV for SBP >160', nodeId: 'eclampsia-bp-labetalol' },
+  { text: 'Benzodiazepines if seizures persist despite magnesium (lorazepam 2-4 mg IV)', nodeId: 'eclampsia-refractory' },
+  { text: 'OB consult stat - definitive treatment is delivery (stabilize mother first)', nodeId: 'eclampsia-delivery-decision' },
+  { text: 'Monitor magnesium toxicity: loss of DTRs, respiratory depression (hold if RR <12)', nodeId: 'eclampsia-mag-toxicity' },
+  { text: 'Calcium gluconate 1 g IV for magnesium toxicity (antidote)', nodeId: 'eclampsia-mag-toxicity' },
+  { text: 'Labs: CBC, CMP, LFTs, uric acid, 24h protein or spot protein/Cr ratio', nodeId: 'eclampsia-preeclampsia' },
 ];
 
 export const ECLAMPSIA_CITATIONS: Citation[] = [

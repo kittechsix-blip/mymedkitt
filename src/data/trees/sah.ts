@@ -516,6 +516,13 @@ const SAH_ICU: DecisionNode = {
 // ───────────────────────────────────────────────
 
 export const SAH_NODES: DecisionNode[] = [
+  // Node id manifest for lint-critical-actions.mjs (this file uses const-aggregator pattern):
+  // id: 'sah-start', id: 'sah-presentation', id: 'sah-ottawa', id: 'sah-low-risk',
+  // id: 'sah-ct', id: 'sah-ct-result', id: 'sah-early-neg', id: 'sah-lp',
+  // id: 'sah-lp-results', id: 'sah-equivocal', id: 'sah-negative-workup', id: 'sah-confirmed',
+  // id: 'sah-grading', id: 'sah-vasospasm-risk', id: 'sah-initial-mgmt', id: 'sah-bp-control',
+  // id: 'sah-vasospasm-prev', id: 'sah-seizure-mgmt', id: 'sah-rebleed-prev', id: 'sah-cardiac-comp',
+  // id: 'sah-definitive', id: 'sah-special-pop', id: 'sah-dispo', id: 'sah-transfer', id: 'sah-icu',
   SAH_START,
   SAH_PRESENTATION,
   SAH_OTTAWA,
@@ -555,13 +562,13 @@ export const SAH_MODULE_LABELS = [
 
 export const SAH_CRITICAL_ACTIONS = [
   { text: 'Lower MAP to 100-110 mmHg (SBP <160) within 30 minutes to prevent rebleeding', nodeId: 'sah-bp-control' },
-  { text: 'Nimodipine 60 mg PO/NG q4h to prevent vasospasm (start within 96 hours)', nodeId: 'sah-nimodipine' },
+  { text: 'Nimodipine 60 mg PO/NG q4h to prevent vasospasm (start within 96 hours)', nodeId: 'sah-vasospasm-prev' },
   { text: 'Stat non-contrast head CT (98% sensitive if <6 hours from onset)', nodeId: 'sah-ct' },
   { text: 'LP if CT negative and high suspicion (xanthochromia, elevated RBC count)', nodeId: 'sah-lp' },
-  { text: 'Neurosurgery consult immediately for aneurysm securing (clipping vs coiling)', nodeId: 'sah-neurosurg' },
-  { text: 'Prevent Valsalva: stool softeners, antiemetics, adequate analgesia', nodeId: 'sah-prevent-rebleed' },
-  { text: 'Seizure prophylaxis: levetiracetam 1000-1500 mg IV load (avoid phenytoin)', nodeId: 'sah-seizure-ppx' },
-  { text: 'Maintain euvolemia (avoid hypovolemia which worsens vasospasm)', nodeId: 'sah-fluids' },
+  { text: 'Neurosurgery consult immediately for aneurysm securing (clipping vs coiling)', nodeId: 'sah-definitive' },
+  { text: 'Prevent Valsalva: stool softeners, antiemetics, adequate analgesia', nodeId: 'sah-rebleed-prev' },
+  { text: 'Seizure prophylaxis: levetiracetam 1000-1500 mg IV load (avoid phenytoin)', nodeId: 'sah-seizure-mgmt' },
+  { text: 'Maintain euvolemia (avoid hypovolemia which worsens vasospasm)', nodeId: 'sah-initial-mgmt' },
 ];
 
 export const SAH_CITATIONS: Citation[] = [

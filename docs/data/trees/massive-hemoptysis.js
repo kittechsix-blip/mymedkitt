@@ -396,14 +396,14 @@ export const MASSIVE_HEMOPTYSIS_MODULE_LABELS = [
     'Disposition',
 ];
 export const MASSIVE_HEMOPTYSIS_CRITICAL_ACTIONS = [
-    { text: 'Position patient bleeding-side down (protect good lung from blood)', nodeId: 'hemopty-position' },
-    { text: 'Intubate with largest ETT possible (≥8.0) for bronchoscopy and isolation', nodeId: 'hemopty-intubate' },
-    { text: 'Double-lumen tube or bronchial blocker for lung isolation if available', nodeId: 'hemopty-isolation' },
-    { text: 'TXA 1 g IV over 10 min (may reduce bleeding)', nodeId: 'hemopty-txa' },
-    { text: 'Reverse anticoagulation urgently (4-factor PCC, protamine, idarucizumab as indicated)', nodeId: 'hemopty-reverse' },
-    { text: 'IR consult for emergent bronchial artery embolization (definitive treatment)', nodeId: 'hemopty-ir' },
-    { text: 'Rigid bronchoscopy for massive bleeding (better suction/hemostasis than flexible)', nodeId: 'hemopty-rigid-bronch' },
-    { text: 'Avoid cough suppressants (retained blood → airway obstruction)', nodeId: 'hemopty-avoid-suppress' },
+    { text: 'Position patient bleeding-side down (protect good lung from blood)', nodeId: 'hemo-positioning' },
+    { text: 'Intubate with largest ETT possible (≥8.0) for bronchoscopy and isolation', nodeId: 'hemo-ett-selection' },
+    { text: 'Double-lumen tube or bronchial blocker for lung isolation if available', nodeId: 'hemo-lung-isolation' },
+    { text: 'TXA 1 g IV over 10 min (may reduce bleeding)', nodeId: 'hemo-txa' },
+    { text: 'Reverse anticoagulation urgently (4-factor PCC, protamine, idarucizumab as indicated)', nodeId: 'hemo-coag-reversal' },
+    { text: 'IR consult for emergent bronchial artery embolization (definitive treatment)', nodeId: 'hemo-bae' },
+    { text: 'Rigid bronchoscopy for massive bleeding (better suction/hemostasis than flexible)', nodeId: 'hemo-bronchoscopy' },
+    { text: 'Avoid cough suppressants (retained blood → airway obstruction)', nodeId: 'hemo-extras' },
 ];
 export const MASSIVE_HEMOPTYSIS_CITATIONS = [
     { num: 1, text: 'Farkas J. Severe Hemoptysis. Internet Book of Critical Care (IBCC). December 2024.' },

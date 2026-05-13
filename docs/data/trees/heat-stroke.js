@@ -492,14 +492,14 @@ export const HEAT_STROKE_MODULE_LABELS = [
     'Disposition',
 ];
 export const HEAT_STROKE_CRITICAL_ACTIONS = [
-    { text: 'Aggressive cooling: target core temp <39°C within 30 min (prevents end-organ damage)', nodeId: 'heat-cool-target' },
-    { text: 'Evaporative cooling: mist + fans (fastest non-invasive method, 0.3°C/min)', nodeId: 'heat-evap' },
-    { text: 'Ice water immersion if available (0.15-0.35°C/min) - stop at 38.5-39°C', nodeId: 'heat-immersion' },
-    { text: 'Cold IV saline 1-2L (4°C) + ice packs to groin/axillae/neck', nodeId: 'heat-cold-fluids' },
-    { text: 'Benzodiazepines for agitation/shivering (lorazepam 2-4 mg IV)', nodeId: 'heat-benzos' },
-    { text: 'Avoid antipyretics (aspirin/acetaminophen) - ineffective and may worsen coagulopathy', nodeId: 'heat-avoid-antipyretics' },
-    { text: 'Monitor for rhabdomyolysis: CK, myoglobin, aggressive IVF if CK >5000', nodeId: 'heat-rhabdo' },
-    { text: 'Check DIC labs: PT/INR, fibrinogen, platelets (common complication)', nodeId: 'heat-dic' },
+    { text: 'Aggressive cooling: target core temp <39°C within 30 min (prevents end-organ damage)', nodeId: 'hs-cooling-endpoint' },
+    { text: 'Evaporative cooling: mist + fans (fastest non-invasive method, 0.3°C/min)', nodeId: 'hs-evaporative' },
+    { text: 'Ice water immersion if available (0.15-0.35°C/min) - stop at 38.5-39°C', nodeId: 'hs-immersion' },
+    { text: 'Cold IV saline 1-2L (4°C) + ice packs to groin/axillae/neck', nodeId: 'hs-ice-packs' },
+    { text: 'Benzodiazepines for agitation/shivering (lorazepam 2-4 mg IV)', nodeId: 'hs-seizure-rx' },
+    { text: 'Avoid antipyretics (aspirin/acetaminophen) - ineffective and may worsen coagulopathy', nodeId: 'hs-cooling-method' },
+    { text: 'Monitor for rhabdomyolysis: CK, myoglobin, aggressive IVF if CK >5000', nodeId: 'hs-rhabdo' },
+    { text: 'Check DIC labs: PT/INR, fibrinogen, platelets (common complication)', nodeId: 'hs-coags' },
 ];
 export const HEAT_STROKE_CITATIONS = [
     { num: 1, text: 'Farkas J. Heat stroke. Internet Book of Critical Care (EMCrit/IBCC). September 2024.' },

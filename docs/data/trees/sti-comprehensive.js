@@ -974,16 +974,16 @@ export const STI_COMPREHENSIVE_MODULE_LABELS = [
     'Partner Management & Follow-up',
 ];
 export const STI_COMPREHENSIVE_CRITICAL_ACTIONS = [
-    { text: 'Gonorrhea + Chlamydia co-treatment always: ceftriaxone 500 mg IM + doxycycline 100 mg PO BID x 7 days', nodeId: 'sti-gc-ctx' },
+    { text: 'Gonorrhea + Chlamydia co-treatment always: ceftriaxone 500 mg IM + doxycycline 100 mg PO BID x 7 days', nodeId: 'sti-urethritis-rx' },
     { text: 'DoxyPEP 200 mg within 72h post-exposure reduces STI risk 60-80% (MSM, transgender women)', nodeId: 'sti-doxypep' },
-    { text: 'Syphilis treatment: benzathine PCN 2.4 million units IM (primary/secondary/early latent)', nodeId: 'sti-syphilis-treatment' },
-    { text: 'Disseminated GC: ceftriaxone 1-2g IV q24h x 7 days (endocarditis/meningitis = 4 weeks)', nodeId: 'sti-dgc' },
-    { text: 'BV treatment: metronidazole 500 mg PO BID x 7 days (avoid alcohol)', nodeId: 'sti-bv-treatment' },
-    { text: 'Pelvic Inflammatory Disease (PID): ceftriaxone 500 mg IM + doxycycline 100 mg BID x 14 days + metronidazole 500 mg BID x 14 days', nodeId: 'sti-pid' },
-    { text: 'Expedited Partner Therapy (EPT) legal in most states - give patient meds for partner(s)', nodeId: 'sti-ept' },
-    { text: 'Test of cure for pharyngeal GC at 2 weeks, rectal GC at 3 months, syphilis at 6 months', nodeId: 'sti-test-cure' },
-    { text: 'HIV/Hep B/C screening with all STI diagnoses', nodeId: 'sti-additional-testing' },
-    { text: 'Pregnancy test mandatory before treatment (doxycycline teratogenic)', nodeId: 'sti-pregnancy' },
+    { text: 'Syphilis treatment: benzathine PCN 2.4 million units IM (primary/secondary/early latent)', nodeId: 'sti-syphilis-rx' },
+    { text: 'Disseminated GC: ceftriaxone 1-2g IV q24h x 7 days (endocarditis/meningitis = 4 weeks)', nodeId: 'sti-cdc-regimens' },
+    { text: 'BV treatment: metronidazole 500 mg PO BID x 7 days (avoid alcohol)', nodeId: 'sti-bv-info' },
+    { text: 'Pelvic Inflammatory Disease (PID): ceftriaxone 500 mg IM + doxycycline 100 mg BID x 14 days + metronidazole 500 mg BID x 14 days', nodeId: 'sti-pid-outpatient' },
+    { text: 'Expedited Partner Therapy (EPT) legal in most states - give patient meds for partner(s)', nodeId: 'sti-ept-generator' },
+    { text: 'Test of cure for pharyngeal GC at 2 weeks, rectal GC at 3 months, syphilis at 6 months', nodeId: 'sti-toc-indications' },
+    { text: 'HIV/Hep B/C screening with all STI diagnoses', nodeId: 'sti-testing-overview' },
+    { text: 'Pregnancy test mandatory before treatment (doxycycline teratogenic)', nodeId: 'sti-pregnancy-screen' },
 ];
 export const STI_COMPREHENSIVE_CITATIONS = [
     { num: 1, text: 'Workowski KA, Bachmann LH, Chan PA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187.' },

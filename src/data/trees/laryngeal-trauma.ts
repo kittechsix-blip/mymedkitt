@@ -11,7 +11,7 @@ export const LARYNGEAL_TRAUMA_CRITICAL_ACTIONS = [
   { text: 'Awake tracheostomy preferred over intubation', nodeId: 'larynx-unstable-airway' },
   { text: 'ENT/surgery consult immediately for hard signs', nodeId: 'larynx-unstable-airway' },
   { text: 'CT neck with contrast for stable patients', nodeId: 'larynx-imaging' },
-  { text: 'Flexible laryngoscopy by ENT for all suspected injuries', nodeId: 'larynx-stable-management' },
+  { text: 'Flexible laryngoscopy by ENT for all suspected injuries', nodeId: 'larynx-flex-laryngoscopy' },
   { text: 'Schaefer-Fuhrman grading guides surgical timing', nodeId: 'larynx-classification' },
 ];
 

@@ -16,7 +16,7 @@ export const VIRAL_MYOSITIS_CRITICAL_ACTIONS = [
   { text: 'DO NOT use diuretics for rhabdomyolysis - worsens hemoconcentration and VTE risk', nodeId: 'vm-rhabdo-treatment' },
   { text: 'Oseltamivir within 48h if influenza confirmed (most common viral cause)', nodeId: 'vm-influenza' },
   { text: 'Pediatric BACM rarely causes AKI even with massive CK elevation - less aggressive than adults', nodeId: 'vm-peds-high' },
-  { text: 'AVOID NSAIDs in viral myositis - risk of worsening renal function', nodeId: 'vm-pain-antiemetics' },
+  { text: 'AVOID NSAIDs in viral myositis - risk of worsening renal function', nodeId: 'vm-rhabdo-treatment' },
   { text: 'Exclude Guillain-Barre (ascending weakness, areflexia) before diagnosing benign myositis', nodeId: 'vm-peds-exclude' },
   { text: 'Influenza B more commonly associated with BACM than Influenza A', nodeId: 'vm-influenza' },
 ];

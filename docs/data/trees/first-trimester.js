@@ -8,9 +8,9 @@ export const FIRST_TRIMESTER_CRITICAL_ACTIONS = [
     { text: 'Unstable patient: assume ruptured ectopic until proven otherwise', nodeId: 'ft-unstable-ectopic' },
     { text: 'Type and screen, activate MTP if hemorrhage', nodeId: 'ft-unstable-ectopic' },
     { text: 'STAT transvaginal ultrasound for all pregnant patients with bleeding', nodeId: 'ft-stable-branch' },
-    { text: 'Quantitative hCG + ultrasound to localize pregnancy', nodeId: 'ft-ectopic-workup' },
-    { text: 'Methotrexate for stable ectopic (no free fluid, hCG <5000)', nodeId: 'ft-ectopic-mtx' },
-    { text: 'Rho(D) immune globulin for all Rh-negative patients with bleeding', nodeId: 'ft-miscarriage-complete' },
+    { text: 'Quantitative hCG + ultrasound to localize pregnancy', nodeId: 'ft-us-eval' },
+    { text: 'Methotrexate for stable ectopic (no free fluid, hCG <5000)', nodeId: 'ft-ectopic-medical' },
+    { text: 'Rho(D) immune globulin for all Rh-negative patients with bleeding', nodeId: 'ft-rh-rhogam' },
 ];
 export const FIRST_TRIMESTER_NODES = [
     // =====================================================================

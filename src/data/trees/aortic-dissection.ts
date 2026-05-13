@@ -403,12 +403,12 @@ export const AORTIC_DISSECTION_MODULE_LABELS = [
 ];
 
 export const AORTIC_DISSECTION_CRITICAL_ACTIONS = [
-  { text: 'Lower HR to <60 bpm with beta-blocker (esmolol 500 mcg/kg bolus, then 50-300 mcg/kg/min)', nodeId: 'dissect-hr-control' },
-  { text: 'Target SBP 100-120 mmHg (MAP 60-75) after adequate beta-blockade', nodeId: 'dissect-bp-control' },
+  { text: 'Lower HR to <60 bpm with beta-blocker (esmolol 500 mcg/kg bolus, then 50-300 mcg/kg/min)', nodeId: 'dissect-beta-blocker' },
+  { text: 'Target SBP 100-120 mmHg (MAP 60-75) after adequate beta-blockade', nodeId: 'dissect-vasodilator' },
   { text: 'Stat CTA chest/abdomen/pelvis (or TEE if unstable) to confirm diagnosis and classify type', nodeId: 'dissect-imaging' },
   { text: 'Cardiothoracic surgery consult immediately for Type A dissection (surgical emergency)', nodeId: 'dissect-type-a' },
-  { text: 'Pain control with opioids (fentanyl 50-100 mcg IV) to reduce catecholamine surge', nodeId: 'dissect-pain' },
-  { text: 'Avoid beta-blockers if severe AI, bradycardia, or cocaine use (use diltiazem instead)', nodeId: 'dissect-hr-control' },
+  { text: 'Pain control with opioids (fentanyl 50-100 mcg IV) to reduce catecholamine surge', nodeId: 'dissect-management' },
+  { text: 'Avoid beta-blockers if severe AI, bradycardia, or cocaine use (use diltiazem instead)', nodeId: 'dissect-beta-blocker' },
   { text: 'ADD-RS score ≥2: proceed directly to CTA without D-dimer', nodeId: 'dissect-add-rs' },
 ];
 

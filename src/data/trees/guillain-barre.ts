@@ -8,12 +8,12 @@ import type { Citation } from './neurosyphilis.js';
 
 export const GUILLAIN_BARRE_CRITICAL_ACTIONS = [
   { text: 'Serial respiratory monitoring: NIF, FVC, O2 sat', nodeId: 'gbs-respiratory-monitoring' },
-  { text: 'Intubate if NIF >-20, FVC <20 mL/kg, or impending failure', nodeId: 'gbs-intubation-criteria' },
-  { text: 'LP for CSF: albuminocytologic dissociation confirms GBS', nodeId: 'gbs-csf' },
-  { text: 'IVIG 0.4 g/kg/day x 5 days (preferred)', nodeId: 'gbs-treatment' },
-  { text: 'Plasmapheresis if IVIG unavailable or contraindicated', nodeId: 'gbs-treatment' },
+  { text: 'Intubate if NIF >-20, FVC <20 mL/kg, or impending failure', nodeId: 'gbs-intubation' },
+  { text: 'LP for CSF: albuminocytologic dissociation confirms GBS', nodeId: 'gbs-lp-interp' },
+  { text: 'IVIG 0.4 g/kg/day x 5 days (preferred)', nodeId: 'gbs-treatment-choice' },
+  { text: 'Plasmapheresis if IVIG unavailable or contraindicated', nodeId: 'gbs-treatment-choice' },
   { text: 'Admit all GBS patients for monitoring', nodeId: 'gbs-disposition' },
-  { text: 'Neurology consult for all suspected GBS', nodeId: 'gbs-neuro-consult' },
+  { text: 'Neurology consult for all suspected GBS', nodeId: 'gbs-treatment-decision' },
   { text: 'DVT prophylaxis for all admitted GBS patients', nodeId: 'gbs-supportive' },
 ];
 

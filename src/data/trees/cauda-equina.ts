@@ -17,7 +17,7 @@ export const CAUDA_EQUINA_CRITICAL_ACTIONS = [
   { text: 'Bulbocavernosus reflex INTACT = CES excluded (100% sensitivity) — if absent, workup required', nodeId: 'ces-exam' },
   { text: 'MRI within 4 hours of suspected CES — call neurosurgery PARALLEL with imaging, not sequential', nodeId: 'ces-imaging' },
   { text: 'CES-Incomplete (still voiding) = true emergency — surgery <24h prevents progression to CES-Retention', nodeId: 'ces-incomplete' },
-  { text: 'Normal post-void residual does NOT exclude CES — 50% of CES-Incomplete have PVR <200 mL', nodeId: 'ces-pvr-caveat' },
+  { text: 'Normal post-void residual does NOT exclude CES — 50% of CES-Incomplete have PVR <200 mL', nodeId: 'ces-pvr' },
 ] as const;
 
 export const CAUDA_EQUINA_NODES: DecisionNode[] = [
