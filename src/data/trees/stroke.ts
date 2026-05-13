@@ -605,7 +605,7 @@ export const STROKE_CRITICAL_ACTIONS = [
   { text: 'Tenecteplase 0.25 mg/kg single bolus preferred over alteplase 60-min infusion', nodeId: 'stroke-ivt-treat' },
   { text: 'Activate cath lab for LVO on CTA - EVT within 24h for select patients', nodeId: 'stroke-evt-eligible' },
   { text: 'DAPT x21 days only for minor stroke (NIHSS 0-5) with high risk features', nodeId: 'stroke-dapt' },
-  { text: 'Check right-sided leads (V4R) for all inferior STEMIs - avoid nitrates if RV involvement', nodeId: 'stroke-start' },
+  { text: 'Avoid aggressive BP lowering to <140 systolic post-EVT — may worsen outcomes (2026 AHA/ASA)', nodeId: 'stroke-post-treatment' },
   { text: 'Do NOT bridge with heparin when starting DOAC for cardioembolic stroke', nodeId: 'stroke-afib' },
   { text: 'Post-tPA: BP <180/105 x24h, neuro checks q15min x2h, no antiplatelets x24h', nodeId: 'stroke-post-treatment' },
 ];

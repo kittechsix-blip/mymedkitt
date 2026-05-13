@@ -334,6 +334,23 @@ export const LUMBAR_PUNCTURE_NODES: DecisionNode[] = [
   },
 
   {
+    id: 'lp-paramedian-steps',
+    type: 'info',
+    module: 5,
+    title: 'Paramedian LP — Step-by-Step Guide',
+    body: '**Three steps, based on Dr. Hadzic\'s paramedian technique.** [12]\n\n---\n\n**STEP 1 — LOCATE THE L5-S1 INTERSPACE**\n• **Palpate the iliac crests** — the line connecting them typically crosses at L4-L5\n• **Target L5-S1** (just caudal) — often the largest, most accessible interspace, especially in older patients with calcified upper interspaces\n\n---\n\n**STEP 2 — MARK THE ENTRY POINT**\nFrom the center of L5-S1 interspace:\n• **2 cm lateral** to midline\n• **2 cm caudal** from interspace\n• Bypasses calcified midline ligaments\n\n---\n\n**STEP 3 — TRAJECTORY & CONFIRM**\n• **Angle 30-45° cephalad and toward midline**\n• **Tactile feel:** Soft tissue only — no ligament resistance until dura\n• Confirm loss of resistance at ligamentum flavum, then dural pop → CSF',
+    citation: [12],
+    images: [
+      { src: 'images/lumbar-puncture/lp-paramedian-step1-locate.jpg', alt: 'Step 1 — Locate the L5-S1 interspace by palpating iliac crests', caption: 'Step 1: Locate the L5-S1 interspace. Iliac crest line crosses at L4-L5; target one level caudal at L5-S1.' },
+      { src: 'images/lumbar-puncture/lp-paramedian-step2-entry.jpg', alt: 'Step 2 — Mark entry point 2 cm lateral and 2 cm caudal from L5-S1', caption: 'Step 2: Mark entry point — 2 cm lateral to midline, 2 cm caudal from the interspace center.' },
+      { src: 'images/lumbar-puncture/lp-paramedian-step3-trajectory.jpg', alt: 'Step 3 — Trajectory 30-45 degrees cephalad and toward midline', caption: 'Step 3: Trajectory 30-45° cephalad and toward midline. Soft tissue only until dura — no ligamentous resistance. Based on Dr. Hadzic\'s paramedian technique.' },
+    ],
+    next: 'lp-paramedian-insertion',
+    summary: 'Paramedian 3-step: locate L5-S1 → mark 2cm lateral + 2cm caudal → angle 30-45° cephalad/medial',
+    skippable: true,
+  },
+
+  {
     id: 'lp-paramedian-insertion',
     type: 'info',
     module: 5,

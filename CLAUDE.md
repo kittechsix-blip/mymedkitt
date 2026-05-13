@@ -606,6 +606,19 @@ Service role key in `.env` (gitignored). Tables: `decision_trees`, `category_tre
 New consults must be added to `TREE_REGISTRY` in both `generate-supabase-sql.mjs` AND `supabase-push.mjs`.
 **This replaces the manual TextEdit → Cmd+A → Cmd+C → Supabase paste workflow.**
 
+### Supabase Data API Grants
+Any migration that creates a new `public` table exposed through Supabase Data API (`/rest/v1`) must include explicit SQL grants in addition to RLS policies.
+
+Required pattern:
+```sql
+GRANT USAGE ON SCHEMA public TO anon, service_role;
+GRANT SELECT ON TABLE public.new_table TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.new_table TO service_role;
+ALTER TABLE public.new_table ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "anon_read_new_table" ON public.new_table FOR SELECT TO anon USING (true);
+```
+Do not rely on default public-schema privileges. Supabase is enforcing explicit grants for Data API access starting 2026-05-30 for new projects/tables and 2026-10-30 for existing projects.
+
 ### Medical Source Research
 Two paths depending on context:
 
