@@ -273,6 +273,13 @@ async function init() {
     router.on('/category/:id', handleCategory);
     router.on('/tree/:id', handleTree);
     router.on('/tree/:id/node/:nodeId', handleTreeNode);
+    // Legacy URL compatibility: /consult/:id used by old QR codes/links → redirect to /tree/:id
+    router.on('/consult/:id', (params) => {
+        router.navigate('/tree/' + params.id);
+    });
+    router.on('/consult/:id/node/:nodeId', (params) => {
+        router.navigate('/tree/' + params.id + '/node/' + params.nodeId);
+    });
     router.on('/reference/:treeId', handleReference);
     router.on('/reference', handleReference);
     router.on('/drugs', handleDrugList);

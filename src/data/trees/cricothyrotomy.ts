@@ -92,11 +92,11 @@ export const CRICOTHYROTOMY_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Patient Positioning',
-    body: '**Optimal positioning:** [1][2]\n\n**Standard:**\n• Supine with **neck extended** (unless C-spine precautions)\n• Shoulder roll to extend neck and elevate larynx\n• Operator standing at patient\'s **side** (not at head)\n\n**C-spine precautions:**\n• Maintain neutral alignment\n• Do NOT hyperextend\n• May need assistant for manual in-line stabilization\n• Collar should be opened or removed anteriorly\n\n**Obese patients:**\n• May need "ramped" position (head elevated)\n• Palpate landmarks carefully — fat obscures anatomy\n• Consider vertical incision to expose more tissue\n\n**Operator positioning:**\n• **Right-handed:** Stand on patient\'s right side\n• **Left-handed:** Stand on patient\'s left side\n• Non-dominant hand stabilizes larynx throughout procedure\n\n**Pre-procedure landmarks:**\n• Identify CTM with laryngeal handshake BEFORE patient decompensates\n• Mark with pen or fingernail if time permits',
-    citation: [1, 2],
+    body: '**Optimal positioning:** [1][2]\n\n**Standard:**\n• Supine with **neck extended** (unless C-spine precautions)\n• Shoulder roll to extend neck and elevate larynx\n• Operator standing at patient\'s **side** (not at head)\n\n**C-spine precautions:**\n• Maintain neutral alignment\n• Do NOT hyperextend\n• May need assistant for manual in-line stabilization\n• Collar should be opened or removed anteriorly\n\n**Obese patients:**\n• May need "ramped" position (head elevated)\n• Palpate landmarks carefully — fat obscures anatomy\n• Consider vertical incision to expose more tissue\n\n**Operator positioning:**\n• **Right-handed:** Stand on patient\'s right side\n• **Left-handed:** Stand on patient\'s left side\n• Non-dominant hand stabilizes larynx throughout procedure\n\n**Pre-procedure landmarks:**\n• Identify CTM with laryngeal handshake BEFORE patient decompensates\n• Mark with pen or fingernail if time permits\n• **Ultrasound** can localize CTM when palpation is difficult (obese, edema, anatomic distortion) — DAS 2025 explicitly endorses [6]',
+    citation: [1, 2, 6],
     next: 'cric-technique-vertical',
 
-    summary: 'Neck extended (unless C-spine), operator at side, non-dominant hand stabilizes larynx throughout',
+    summary: 'Neck extended (unless C-spine), operator at side, non-dominant hand stabilizes larynx throughout; US for difficult CTM (DAS 2025)',
   },
 
   // =====================================================================
@@ -300,7 +300,7 @@ export const CRICOTHYROTOMY_CITATIONS: Citation[] = [
   },
   {
     num: 6,
-    text: 'Difficult Airway Society. DAS Guidelines for Management of Unanticipated Difficult Intubation in Adults. 2015.',
+    text: 'Ahmad I, El-Boghdadly K, Iliff H, et al. Difficult Airway Society 2025 guidelines for management of unanticipated difficult tracheal intubation in adults. Br J Anaesth. 2026 Jan;136(1):283-307. (Updates DAS 2015; reaffirms scalpel-bougie-tube as first-line eFONA; adds ultrasound for difficult CTM landmarks.)',
   },
   {
     num: 7,
