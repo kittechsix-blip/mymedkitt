@@ -100,6 +100,7 @@ const CROSS_LISTINGS = {
   'sah':              [{ categoryId: 'emergency-medicine' }],
   'delirium':         [{ categoryId: 'emergency-medicine' }],
   'sickle-cell':      [{ categoryId: 'pediatrics' }],
+  'vp-shunt':         [{ categoryId: 'pediatrics', displayTitle: 'VP Shunt Complications', displaySubtitle: 'Recognition → Malfunction vs Infection → Imaging/U/S → ICP Rescue → Shunt Tap → Disposition', entryNodeId: 'vps-start' }],
   'sepsis':           [{ categoryId: 'critical-care' }],
   'rhabdomyolysis':   [{ categoryId: 'emergency-medicine' }],
   'ed-methadone':     [{ categoryId: 'toxicology' }],

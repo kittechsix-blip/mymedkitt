@@ -1085,7 +1085,7 @@ const CEFEPIME = {
     genericName: 'Cefepime hydrochloride',
     drugClass: '4th-Generation Cephalosporin',
     route: 'IV',
-    indications: ['Neonatal sepsis/meningitis (alternative when Ceftriaxone contraindicated)', 'Sepsis empiric coverage (antipseudomonal)', 'Infective endocarditis empiric gram-negative coverage'],
+    indications: ['Neonatal sepsis/meningitis (alternative when Ceftriaxone contraindicated)', 'Sepsis empiric coverage (antipseudomonal)', 'Infective endocarditis empiric gram-negative coverage', 'VP shunt infection / healthcare-associated ventriculitis'],
     dosing: [
         {
             indication: 'Sepsis/meningitis (0-28 days)',
@@ -1109,6 +1109,10 @@ const CEFEPIME = {
             indication: 'Infective endocarditis empiric gram-negative coverage',
             regimen: '2 g IV q8h, adjusted for renal function. Use with vancomycin as an ED empiric bridge for unstable, healthcare-associated, prosthetic/device, or gram-negative-risk IE while cultures are pending and ID input is obtained.',
         },
+        {
+            indication: 'VP shunt infection / healthcare-associated ventriculitis',
+            regimen: 'Adult: 2 g IV q8h, adjusted for renal function. Pediatric serious CNS infection dosing should follow local pediatric ID/pharmacy protocol. Use with vancomycin as empiric therapy for suspected CSF shunt infection or healthcare-associated ventriculitis when cefepime is selected for antipseudomonal gram-negative coverage.',
+        },
     ],
     contraindications: [
         'Severe cephalosporin allergy',
@@ -1122,6 +1126,7 @@ const CEFEPIME = {
     citations: [
         'Puopolo KM, et al. Management of Neonates Born at ≥35 0/7 Weeks\' Gestation With Suspected or Proven Early-Onset Bacterial Sepsis. Pediatrics. 2018;142(6):e20182894.',
         'Bradley JS, et al. Nelson\'s Pediatric Antimicrobial Therapy. 29th ed. American Academy of Pediatrics; 2023.',
+        'Tunkel AR, et al. IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.',
     ],
 };
 const CEFTRIAXONE = {
@@ -5826,7 +5831,7 @@ const VANCOMYCIN = {
     genericName: 'Vancomycin hydrochloride',
     drugClass: 'Glycopeptide',
     route: 'IV/PO',
-    indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis', 'Sepsis / MRSA coverage', 'Infective endocarditis empiric / MRSA'],
+    indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis', 'Sepsis / MRSA coverage', 'Infective endocarditis empiric / MRSA', 'VP shunt infection / healthcare-associated ventriculitis'],
     dosing: [
         {
             indication: 'Meningitic',
@@ -5864,6 +5869,14 @@ const VANCOMYCIN = {
                 { dosePerKg: 25, unit: 'mg', label: 'IE loading dose (25 mg/kg)' },
             ],
         },
+        {
+            indication: 'VP shunt infection / healthcare-associated ventriculitis',
+            regimen: 'Weight-based IV dosing with pharmacy/ID monitoring. Adult serious healthcare-associated ventriculitis/meningitis target trough 15-20 mcg/mL if trough-based monitoring is used; AUC-guided monitoring preferred when locally available. Combine with cefepime, ceftazidime, or meropenem pending cultures and local susceptibility.',
+            weightCalc: [
+                { dosePerKg: 15, unit: 'mg', label: 'Typical serious infection dose (15 mg/kg)' },
+                { dosePerKg: 20, unit: 'mg', label: 'Higher initial dose (20 mg/kg)' },
+            ],
+        },
     ],
     contraindications: [
         'Known hypersensitivity to vancomycin',
@@ -5878,6 +5891,7 @@ const VANCOMYCIN = {
     citations: [
         'Tunkel AR, et al. Practice Guidelines for the Management of Bacterial Meningitis. Clin Infect Dis. 2004;39(9):1267-1284.',
         'Red Book: 2021-2024 Report of the Committee on Infectious Diseases. American Academy of Pediatrics.',
+        'Tunkel AR, et al. IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.',
     ],
 };
 const VERAPAMIL = {
@@ -7886,7 +7900,7 @@ const MEROPENEM = {
     genericName: 'Meropenem',
     drugClass: 'Carbapenem',
     route: 'IV',
-    indications: ['Bacterial meningitis (cephalosporin allergy or multidrug-resistant organisms)', 'Healthcare-associated meningitis', 'Sepsis empiric / MDR coverage'],
+    indications: ['Bacterial meningitis (cephalosporin allergy or multidrug-resistant organisms)', 'Healthcare-associated meningitis', 'Sepsis empiric / MDR coverage', 'VP shunt infection / healthcare-associated ventriculitis'],
     dosing: [
         {
             indication: 'Bacterial Meningitis',
@@ -7895,6 +7909,10 @@ const MEROPENEM = {
         {
             indication: 'Healthcare-Associated/Nosocomial Meningitis',
             regimen: '2 g IV q8h. Covers Pseudomonas aeruginosa, Acinetobacter, and other resistant gram-negative organisms. Combine with vancomycin for MRSA coverage. Use for post-neurosurgical, shunt-related, or basilar skull fracture-associated infections.',
+        },
+        {
+            indication: 'VP shunt infection / healthcare-associated ventriculitis',
+            regimen: 'Adult: 2 g IV q8h, adjusted for renal function; consider extended infusion for resistant gram-negative organisms per local protocol. Use with vancomycin when meropenem is selected for MDR/ESBL risk, Pseudomonas concern, or severe healthcare-associated ventriculitis/shunt infection.',
         },
         {
             indication: 'Sepsis empiric / MDR',
@@ -7915,6 +7933,7 @@ const MEROPENEM = {
     citations: [
         'van de Beek D, et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22:S37-S62.',
         'Bardak-Ozcem S, Sipahi OR. An updated approach to healthcare-associated meningitis. Expert Rev Anti Infect Ther. 2014;12(3):333-342.',
+        'Tunkel AR, et al. IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.',
     ],
 };
 const RIFAMPIN = {

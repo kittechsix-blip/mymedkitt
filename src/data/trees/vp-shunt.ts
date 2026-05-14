@@ -1,6 +1,6 @@
-// MedKitt - VP Shunt Malfunction Management
-// Recognition -> Imaging Strategy -> Malfunction vs Infection -> ICP Management -> Shunt Tap -> Neurosurgery -> Disposition
-// 7 modules: Recognition -> Imaging -> Differentiation -> ICP Management -> Shunt Tap -> Neurosurgery Consultation -> Disposition
+// MedKitt - VP Shunt Complications
+// Recognition -> Imaging/U/S Strategy -> Malfunction vs Infection -> ICP Management -> Shunt Tap -> Neurosurgery -> Disposition
+// 7 modules: Recognition -> Imaging/U/S -> Differentiation -> ICP Management -> Shunt Tap -> Neurosurgery Consultation -> Disposition
 // 24 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
@@ -8,7 +8,7 @@ import type { Citation } from './neurosyphilis.js';
 
 export const VP_SHUNT_CRITICAL_ACTIONS = [
   { text: 'Normal imaging does NOT exclude shunt malfunction', nodeId: 'vps-imaging' },
-  { text: 'CT head + shunt series for suspected malfunction', nodeId: 'vps-imaging' },
+  { text: 'Stable child: quick brain MRI if available; unstable child: CT now', nodeId: 'vps-imaging' },
   { text: 'Compare ventricular size to prior imaging', nodeId: 'vps-imaging-interpretation' },
   { text: 'Emergent ICP reduction if herniation signs present', nodeId: 'vps-emergent-icp' },
   { text: 'Neurosurgery consult for all suspected malfunctions', nodeId: 'vps-nsgy-consult' },
@@ -26,12 +26,12 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     id: 'vps-start',
     type: 'info',
     module: 1,
-    title: 'VP Shunt Malfunction',
-    body: '**VP Shunt Overview** - recognize shunt malfunction early to prevent catastrophic outcomes.\n\n**VP Shunt Basics:**\n- ~30,000 VP shunt procedures performed annually in the US\n- **98% failure rate over 10 years**\n- Revision required 1-2 times every 10 years on average\n- ~50% of pediatric shunts fail within 2 years\n\n**Mortality from malfunction: 1-2.7%**\n\n**Three categories of shunt failure:**\n1. **Mechanical failure** (most common): obstruction, disconnection, migration, fracture\n2. **Infection** (5-12% annually): usually within 6 months of placement\n3. **Functional failure**: over-drainage (slit ventricles) or under-drainage\n\n**Most common obstruction site:** Proximal (ventricular) catheter\n\n**Key principle:** Normal imaging does NOT exclude shunt malfunction. Ventricular size may remain unchanged despite obstruction, especially in chronically shunted patients.',
-    citation: [1, 2, 3],
+    title: 'VP Shunt Complications',
+    body: '[Steps Summary](#/info/vps-steps)\n\n**Scope:** ED recognition and stabilization of pediatric and adult patients with VP shunt complications.\n\n**Major ED threats:**\n1. **Mechanical malfunction:** proximal catheter obstruction, distal obstruction, valve failure, disconnection, fracture, kinking, migration\n2. **Infection / ventriculitis:** especially early after placement or revision, but can occur later\n3. **Overdrainage:** slit ventricles, postural headache, subdural hygroma/hematoma\n4. **Distal catheter complications:** abdominal pseudocyst, peritonitis, bowel perforation, migration, pleural complications\n5. **Skin/hardware problems:** erosion, exposure, CSF leak, tract cellulitis\n\n**Pediatric principles:**\n- Symptoms are often nonspecific: headache, vomiting, lethargy, irritability, seizure, poor feeding, or caregiver concern that the child is behaving like prior malfunction.\n- Infants may show bulging fontanelle, increasing head circumference, poor feeding, sunset eyes, or irritability.\n- Stable children should preferentially get rapid/limited brain MRI when available in a useful time frame; unstable children need immediate CT and resuscitation.\n\n**Key principle:** Normal CT, MRI, shunt series, or ONSD ultrasound does **not** exclude shunt malfunction. If the clinical pattern is concerning, involve neurosurgery even when imaging is unchanged.',
+    citation: [1, 3, 12, 13, 14],
     next: 'vps-presentation',
 
-    summary: '98% shunt failure over 10 years; normal imaging does NOT exclude malfunction — high index of suspicion required',
+    summary: 'High-risk complication screen; normal imaging does NOT exclude malfunction; take caregiver concern seriously',
     skippable: true,
   },
 
@@ -93,12 +93,12 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Imaging Strategy',
-    body: '**Shunt Series Guide** - comprehensive imaging approach for suspected malfunction.\n\n**Two-pronged imaging approach:**\n\n**1. CT Head (non-contrast):**\n- Compare to previous imaging (CRITICAL)\n- Look for ventricular enlargement\n- Periventricular edema suggests acute obstruction\n- Catheter position\n\n**CAUTION: Normal ventricular size does NOT exclude malfunction**\n- Chronically shunted patients may have "stiff" ventricles\n- Ventricles may not dilate despite rising ICP\n- This is a common cause of missed diagnosis\n\n**2. Shunt Series (plain radiographs):**\n- AP and lateral skull\n- Chest (AP)\n- Abdomen (AP)\n\n**Shunt series findings:**\n| Finding | Interpretation |\n|---------|----------------|\n| Discontinuity | Fracture or disconnection |\n| Migration | Catheter has moved from original position |\n| Kinking | Mechanical obstruction |\n| Coiling in peritoneum | May be normal or indicate migration |\n\n**Shunt series sensitivity: 88.6% (adults), only 11% (pediatric)**\n**Shunt series specificity: 62.5% (adults), 98% (pediatric)**\n\nCombined CT + shunt series provides best diagnostic yield.',
-    images: [{ src: 'images/vp-shunt/vp-shunt-xray.jpg', alt: 'Full-body projectional radiograph (shunt series) showing a ventriculoperitoneal shunt catheter running from the skull through the neck and chest to the peritoneal cavity', caption: 'VP shunt series X-ray — skull + chest + abdomen views reveal disconnection, kinking, fracture, or catheter migration. Sensitivity 88.6% in adults but only 11% in pediatric patients. CT head (non-contrast) is first-line. (CC BY 3.0)' }],
-    citation: [1, 2, 3],
+    body: '**Goal:** identify ventricular change, catheter position, and mechanical hardware failure while minimizing pediatric radiation when safe.\n\n**1. Cross-sectional brain imaging:**\n- **Stable child:** rapid/limited brain MRI without sedation when available in a clinically useful time frame.\n- **Unstable child, altered mental status, herniation concern, or MRI delay:** non-contrast head CT now.\n- Compare to prior imaging whenever possible; baseline ventricular size is more useful than a single scan.\n- Look for ventricular enlargement, transependymal CSF/periventricular edema, catheter tip position, slit ventricles, subdural collections, hemorrhage, or alternate diagnosis.\n\n**CAUTION: normal ventricular size does NOT exclude malfunction.** Chronically shunted patients may have small or stiff ventricles and can remain symptomatic with unchanged imaging.\n\n**2. Shunt series:**\n- AP/lateral skull, neck/chest, abdomen/pelvis.\n- Best for discontinuity, fracture, kinking, disconnection, migration, programmable valve setting, and preoperative mapping.\n- Low sensitivity when used alone; a positive shunt series is highly actionable.\n\n**3. Abdomen when symptoms point distal:**\n- Abdominal pain, tenderness, distension, fever, or unexplained malfunction -> consider abdominal ultrasound or CT for pseudocyst, loculated CSF, abscess, or distal catheter complication.\n\n**Bottom line:** No imaging test reliably rules out shunt malfunction. Persistent clinical concern requires neurosurgery involvement.',
+    images: [{ src: 'images/vp-shunt/vp-shunt-xray.jpg', alt: 'Full-body projectional radiograph (shunt series) showing a ventriculoperitoneal shunt catheter running from the skull through the neck and chest to the peritoneal cavity', caption: 'VP shunt series X-ray — skull + chest + abdomen views can reveal disconnection, kinking, fracture, catheter migration, and valve setting. Cross-sectional brain imaging is still required when malfunction is suspected. (CC BY 3.0)' }],
+    citation: [1, 2, 3, 12, 13, 14, 15],
     next: 'vps-imaging-interpretation',
 
-    summary: 'CT head + shunt series; CAUTION: normal ventricular size does NOT exclude malfunction in chronically shunted patients',
+    summary: 'Stable child: quick MRI if available; unstable child: CT now; shunt series complements imaging but cannot rule out malfunction',
     safetyLevel: 'warning',
   },
 
@@ -135,12 +135,12 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     id: 'vps-additional-testing',
     type: 'info',
     module: 2,
-    title: 'Additional Diagnostic Testing',
-    body: '**When imaging is normal but suspicion remains high:**\n\n**Optic Nerve Sheath Diameter (ONSD) Ultrasound:**\n- Non-invasive bedside assessment of ICP\n- ONSD >5mm suggests elevated ICP\n- Correlates with ICP >20 mmHg\n- Quick, repeatable, no radiation\n\n**MRI Brain (if available):**\n- More sensitive for subtle changes\n- Periventricular edema/transependymal CSF flow\n- Better visualization of catheter position\n- Limited by availability and time\n\n**Shunt tap (diagnostic):**\n- Measures opening pressure directly\n- Normal: 8-12 mmHg (lateral decubitus)\n- Elevated pressure suggests obstruction\n- Also provides CSF for infection workup\n- Should generally be performed by neurosurgery\n\n**Radionuclide shuntogram:**\n- Injection of tracer into reservoir\n- Evaluates flow through entire system\n- Can identify site of obstruction\n- Not emergently available at most centers\n\n**If clinical concern persists despite normal testing, consult neurosurgery.**',
-    citation: [1, 2, 6],
+    title: 'U/S and Additional Diagnostic Testing',
+    body: '**When imaging is normal but suspicion remains high:**\n\n**Optic nerve sheath diameter (ONSD) ultrasound:**\n- Bedside adjunct for raised ICP; useful when the child is unstable or imaging is delayed.\n- A dilated ONSD supports elevated ICP, but ONSD performance varies and cannot rule out malfunction.\n- Measure 3 mm posterior to the globe in both eyes; compare with institutional pediatric thresholds if available.\n\n**Abdominal ultrasound:**\n- Use when abdominal pain, tenderness, distension, fever, or distal catheter concern is present.\n- Can identify CSF pseudocyst, loculated fluid, abscess, ascites, or distal catheter malposition.\n- IDSA specifically recommends abdominal US or CT for VP shunt infection with abdominal symptoms.\n\n**MRI brain:**\n- More sensitive for subtle transependymal flow, posterior fossa findings, subdural collections, and radiation-sparing pediatric follow-up.\n- Limited by availability, need for motion control/sedation, and urgency.\n\n**Shunt tap:**\n- Measures opening pressure and obtains CSF for infection workup.\n- Generally performed by neurosurgery; ED tap is reserved for peri-arrest/impending herniation when neurosurgery is unavailable and local policy supports it.\n\n**If clinical concern persists despite normal testing, consult neurosurgery.**',
+    citation: [1, 2, 6, 12, 14, 15],
     next: 'vps-nsgy-consult',
 
-    summary: 'ONSD ultrasound >5mm suggests elevated ICP; MRI for subtle changes; shunt tap measures opening pressure directly',
+    summary: 'ONSD and abdominal US are adjuncts only; abdominal US/CT is important for distal catheter infection or pseudocyst',
   },
 
   // =====================================================================
@@ -176,8 +176,8 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Shunt Infection Treatment',
-    body: '**Empiric antibiotic selection:**\nMust cover S. epidermidis, S. aureus, and gram-negatives.\n\n**Empiric regimen:**\n- [Vancomycin](#/drug/vancomycin/shunt infection) 15-20 mg/kg IV (target trough 15-20)\n- PLUS [Cefepime](#/drug/cefepime/shunt infection) 2g IV q8h\n- OR [Meropenem](#/drug/meropenem/shunt infection) 2g IV q8h (if Pseudomonas concern)\n\n**Alternative for beta-lactam allergy:**\n- Vancomycin PLUS Aztreonam 2g IV q8h\n\n**Definitive management requires neurosurgery:**\n1. Shunt externalization or removal\n2. Placement of external ventricular drain (EVD) for temporary CSF drainage\n3. IV antibiotics (typically 10-14 days, longer for certain organisms)\n4. New shunt placement after CSF sterilization\n\n**Do NOT simply treat with antibiotics alone**\n- Biofilm on hardware prevents antibiotic penetration\n- Hardware removal is essential for cure\n- Mortality approaches 60% with untreated infection\n\n**Intrathecal antibiotics:**\n- May be used in select cases\n- Vancomycin 10-20 mg IT daily\n- Gentamicin 4-8 mg IT daily\n- Decision made by neurosurgery/ID',
-    citation: [7, 8, 9],
+    body: '**Empiric antibiotic selection:** cover coagulase-negative staphylococci, S. aureus, and gram-negative bacilli including Pseudomonas when healthcare-associated risk is present.\n\n**IDSA empiric regimen:**\n- [Vancomycin](#/drug/vancomycin/shunt infection) IV, dosed by weight/renal function; adult serious infection target trough 15-20 mcg/mL if trough-based monitoring is used\n- PLUS an anti-pseudomonal beta-lactam:\n  - [Cefepime](#/drug/cefepime/shunt infection) IV\n  - OR ceftazidime IV\n  - OR [Meropenem](#/drug/meropenem/shunt infection) IV when MDR/ESBL risk or local practice supports it\n\n**If anaphylactic beta-lactam allergy and meropenem contraindicated:** vancomycin plus aztreonam or ciprofloxacin per IDSA/local susceptibility.\n\n**Definitive management requires neurosurgery + ID:**\n1. Shunt externalization or removal\n2. External ventricular drain (EVD) or alternate temporary CSF drainage when needed\n3. Culture-directed IV antibiotics\n4. Reimplantation after organism-specific treatment interval and CSF sterilization\n\n**Do not rely on antibiotics alone** when hardware infection is suspected. Biofilm and retained hardware make source control central to cure.\n\n**Intraventricular antibiotics:** specialist-directed for poor response to systemic therapy or resistant organisms; dose/interval depends on ventricular size, MIC, and CSF drainage output.',
+    citation: [7, 9, 12, 14],
     treatment: {
       firstLine: {
         drug: 'Vancomycin + Cefepime',
@@ -191,7 +191,7 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     },
     next: 'vps-icp-overview',
 
-    summary: 'Vancomycin + cefepime empiric; hardware removal is essential — antibiotics alone fail against biofilm',
+    summary: 'IDSA empiric: vancomycin + cefepime/ceftazidime/meropenem; source control is central when hardware infection is suspected',
     safetyLevel: 'critical',
   },
 
@@ -449,8 +449,8 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     id: 'vps-summary',
     type: 'result',
     module: 7,
-    title: 'VP Shunt Malfunction Summary',
-    body: '**Key Takeaways:**\n\n**1. High index of suspicion:**\n- 98% shunt failure rate over 10 years\n- Symptoms may be subtle or intermittent\n- Caregiver concern for "acting like previous malfunction" is valuable\n\n**2. Normal imaging does NOT exclude malfunction:**\n- Chronically shunted ventricles may not dilate\n- Clinical assessment may be more reliable than imaging\n- Consult neurosurgery if suspicion remains high\n\n**3. Differentiate malfunction from infection:**\n- Infection may present as malfunction alone\n- Fever, recent surgery, elevated inflammatory markers suggest infection\n- Hardware removal required for infected shunts\n\n**4. ICP management is a bridge:**\n- Hypertonic saline preferred over mannitol\n- Definitive treatment requires neurosurgery\n- Early consultation is essential\n\n**5. Shunt tap:**\n- Ideally performed by neurosurgery\n- EP may perform if patient peri-coding and neurosurgery unavailable\n- Provides pressure measurement and CSF for analysis\n\n**6. All suspected malfunction requires neurosurgery consultation.**',
+    title: 'VP Shunt Complications Summary',
+    body: '**Key Takeaways:**\n\n**1. High index of suspicion:**\n- Pediatric shunts have high early complication and revision burden\n- Symptoms may be subtle or intermittent\n- Caregiver concern for "acting like previous malfunction" is valuable\n\n**2. Normal imaging does NOT exclude malfunction:**\n- Chronically shunted ventricles may not dilate\n- Clinical assessment may be more reliable than imaging\n- Consult neurosurgery if suspicion remains high\n\n**3. Differentiate malfunction from infection:**\n- Infection may present as malfunction alone\n- Fever, recent surgery, elevated inflammatory markers, abdominal tenderness, wound change, or CSF leak suggest infection\n- Hardware source control is usually required for infected shunts\n\n**4. ICP management is a bridge:**\n- Hypertonic saline is commonly preferred for herniation physiology, especially when hypotension or volume depletion is a concern\n- Definitive treatment requires neurosurgery\n- Early consultation is essential\n\n**5. Shunt tap:**\n- Ideally performed by neurosurgery\n- ED tap is reserved for peri-arrest/impending herniation when neurosurgery is unavailable and local policy supports it\n- Provides pressure measurement and CSF for analysis\n\n**6. All suspected malfunction requires neurosurgery consultation.**',
     recommendation: 'Maintain high suspicion for shunt malfunction in any patient with VP shunt presenting with headache, vomiting, or altered mental status. Normal imaging does not exclude obstruction. Consult neurosurgery early. Use hypertonic saline for ICP management. Differentiate malfunction from infection. All patients require admission unless cleared by neurosurgery.',
     confidence: 'recommended',
     citation: [1, 2, 3, 4],
@@ -466,7 +466,7 @@ export const VP_SHUNT_NODE_COUNT = VP_SHUNT_NODES.length;
 
 export const VP_SHUNT_MODULE_LABELS = [
   'Recognition',
-  'Imaging',
+  'Imaging/U/S',
   'Infection vs Malfunction',
   'ICP Management',
   'Shunt Tap',
@@ -490,4 +490,8 @@ export const VP_SHUNT_CITATIONS: Citation[] = [
   { num: 9, text: 'van de Beek D, et al. Ventricular Shunt Infections: Immunopathogenesis and Clinical Management. Brain Pathol. 2014;24(6):584-96.' },
   { num: 10, text: 'Farrokh S, et al. EMCrit IBCC: Intracranial Pressure Management. Internet Book of Critical Care. 2024.' },
   { num: 11, text: 'Brain Trauma Foundation. Guidelines for Management of Severe Traumatic Brain Injury. 4th Ed. 2016.' },
+  { num: 12, text: 'Tunkel AR, et al. IDSA Clinical Practice Guidelines for Healthcare-Associated Ventriculitis and Meningitis. Clin Infect Dis. 2017;64(6):e34-e65.' },
+  { num: 13, text: 'Jaimes C, et al. ACR Appropriateness Criteria: Hydrocephalus-Child. J Am Coll Radiol. 2026. doi:10.1016/j.jacr.2026.03.007.' },
+  { num: 14, text: 'Children\'s Minnesota. Suspected Shunt Malfunction or Infection ED Guideline. Revised 2025; expires 2028.' },
+  { num: 15, text: 'Jayanth A, Benabbas R, Chao J, Sinert R. Diagnostic modalities to determine ventriculoperitoneal shunt malfunction: systematic review and meta-analysis. Am J Emerg Med. 2021;39:180-189.' },
 ];

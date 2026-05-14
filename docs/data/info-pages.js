@@ -19515,6 +19515,195 @@ const IE_STOP_TOOL = {
         { num: 2, text: 'Fowler VG Jr, et al. 2023 Duke-ISCVID IE Criteria. Clin Infect Dis. 2023.' },
     ],
 };
+const VPS_STEPS_PAGE = {
+    id: 'vps-steps',
+    title: 'VP Shunt Complications Steps',
+    subtitle: 'Pediatric ED recognition, imaging, infection, and ICP rescue',
+    sections: [
+        {
+            heading: 'First 5 minutes',
+            body: '1. Identify instability: altered mental status, Cushing response, irregular respirations, acute neurologic deficit, status epilepticus, severe dehydration from emesis, or unstable vitals.\n2. Move unstable patient to resuscitation space, place monitors, obtain IV access, keep NPO, elevate HOB 30 degrees, keep head midline.\n3. Call neurosurgery early for suspected malfunction, infection, or high-risk symptoms; do not wait for imaging if herniation physiology is present.\n4. Treat impending herniation with airway support and hyperosmolar therapy per local protocol.\n5. Obtain focused history: shunt type/date/revisions, last surgery, baseline neuro status, prior malfunction symptoms, fever, abdominal pain, seizure, and caregiver concern.',
+        },
+        {
+            heading: 'Diagnostic path',
+            body: '1. Stable child: rapid/limited brain MRI without sedation if available in a useful time frame.\n2. Unstable child or MRI delay: noncontrast head CT now.\n3. Compare ventricular size and catheter position with prior imaging whenever possible.\n4. Shunt series complements CT/MRI for fracture, disconnection, kinking, migration, and valve setting; it is not a stand-alone rule-out test.\n5. Abdominal symptoms or suspected infection: evaluate for distal catheter complication, pseudocyst, loculated CSF, abscess, or peritonitis.',
+        },
+        {
+            heading: 'Disposition frame',
+            body: 'Admission or transfer is typical when malfunction, infection, neurologic abnormality, persistent symptoms, abnormal imaging, concerning caregiver history, or need for neurosurgery evaluation persists. Discharge should be rare and generally requires neurosurgery agreement, reassuring serial exam, clear alternative diagnosis, and reliable return precautions.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Children\'s Minnesota. Suspected Shunt Malfunction or Infection ED Guideline. Revised 2025; expires 2028.' },
+        { num: 2, text: 'Tunkel R, et al. Ventriculoperitoneal Shunts in the Emergency Department: A Review. Cureus. 2020;12(2):e7054.' },
+        { num: 3, text: 'Jayanth A, et al. Diagnostic modalities to determine VP shunt malfunction. Am J Emerg Med. 2021;39:180-189.' },
+    ],
+    shareable: true,
+};
+const VPS_COMPLICATIONS_TOOL = {
+    id: 'vps-complications-tool',
+    title: 'VP Shunt Complication Map',
+    subtitle: 'What can go wrong and what clues point there',
+    sections: [
+        {
+            heading: 'Mechanical malfunction',
+            body: '- Proximal catheter obstruction: headache, vomiting, lethargy, papilledema, rising ICP; shunt may refill slowly or appear normal.\n- Distal obstruction: abdominal pain/distension, catheter tip problem, pseudocyst, poor drainage.\n- Valve failure or programmable valve issue: recurrent underdrainage or overdrainage symptoms; check valve setting on shunt series when relevant.\n- Fracture/disconnection/kinking/migration: best seen on shunt series, but normal series does not rule out malfunction.',
+        },
+        {
+            heading: 'Infection / ventriculitis',
+            body: '- Highest concern after recent placement or revision, but late infection occurs.\n- Fever may be absent; infection may present as malfunction alone.\n- Look for wound erythema, swelling, drainage, CSF leak, skin breakdown, abdominal tenderness, meningismus, or altered mental status.\n- Workup: CBC, CRP, blood cultures, source search, and neurosurgery discussion of shunt tap/CSF studies and antibiotics.',
+        },
+        {
+            heading: 'Overdrainage',
+            body: '- Orthostatic headache, nausea, lethargy, slit ventricles, subdural hygroma/hematoma, or cranial nerve symptoms.\n- CT/MRI may show small ventricles rather than enlarged ventricles.\n- Requires neurosurgery; avoid assuming small ventricles means "no shunt problem."',
+        },
+        {
+            heading: 'Distal catheter and abdominal complications',
+            body: '- Abdominal pseudocyst, peritonitis, abscess, bowel perforation, catheter migration, hydrocele/scrotal migration, pleural migration/hydrothorax.\n- Use abdominal ultrasound or CT when abdominal pain, distension, fever, tenderness, or unexplained malfunction is present.\n- Distal complications can coexist with CNS symptoms from impaired drainage.',
+        },
+        {
+            heading: 'Skin/hardware exposure',
+            body: '- Any exposed tubing, skin erosion, wound breakdown, cellulitis over the tract, or CSF leak is high-risk.\n- Cover sterile, do not manipulate aggressively, keep NPO, obtain cultures as indicated, and call neurosurgery urgently.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tunkel R, et al. Ventriculoperitoneal Shunts in the Emergency Department: A Review. Cureus. 2020;12(2):e7054.' },
+        { num: 2, text: 'IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.' },
+        { num: 3, text: 'ACR Appropriateness Criteria: Hydrocephalus-Child. J Am Coll Radiol. 2026.' },
+    ],
+    shareable: true,
+};
+const VPS_IMAGING_TOOL = {
+    id: 'vps-imaging-tool',
+    title: 'VP Shunt Imaging / U/S',
+    subtitle: 'Quick MRI vs CT, shunt series, ONSD, abdominal ultrasound',
+    sections: [
+        {
+            heading: 'Brain imaging choice',
+            body: '- Stable child: rapid/limited brain MRI without sedation when available promptly.\n- Unstable child, altered mental status, herniation signs, status epilepticus, or MRI delay: noncontrast head CT.\n- Always compare to prior imaging if available; baseline ventricular caliber matters.\n- Do not rule out malfunction solely because ventricles are unchanged.',
+        },
+        {
+            heading: 'Shunt series',
+            body: '- Skull/neck/chest/abdomen radiographs can show discontinuity, fracture, disconnection, kinking, migration, and valve setting.\n- A positive shunt series is highly actionable.\n- A negative shunt series is not reassuring enough to stop evaluation when symptoms fit malfunction.',
+        },
+        {
+            heading: 'ONSD ultrasound',
+            body: '- Adjunct for elevated ICP, not a rule-out test for shunt malfunction.\n- Measure both eyes, 3 mm posterior to the globe, using a high-frequency linear probe.\n- Interpretation is age/protocol dependent; use local thresholds when available.\n- Abnormal ONSD should increase urgency, but normal ONSD does not clear the shunt.',
+        },
+        {
+            heading: 'Abdominal ultrasound',
+            body: '- Use when abdominal pain, tenderness, distension, fever, distal catheter concern, or unexplained malfunction is present.\n- Looks for pseudocyst, loculated CSF, abscess, ascites, catheter tip collection, or other abdominal source.\n- IDSA recommends abdominal ultrasound or CT for infected VP shunts with abdominal symptoms.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACR Appropriateness Criteria: Hydrocephalus-Child. J Am Coll Radiol. 2026.' },
+        { num: 2, text: 'Jayanth A, et al. Diagnostic modalities to determine VP shunt malfunction. Am J Emerg Med. 2021;39:180-189.' },
+        { num: 3, text: 'IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.' },
+    ],
+    shareable: true,
+};
+const VPS_INFECTION_TOOL = {
+    id: 'vps-infection-tool',
+    title: 'VP Shunt Infection',
+    subtitle: 'Workup, empiric therapy, and source control',
+    sections: [
+        {
+            heading: 'When to suspect',
+            body: '- Fever within months of placement/revision, or fever plus shunt symptoms\n- Redness, swelling, drainage, CSF leak, skin breakdown, or tenderness over shunt tract\n- Abdominal pain/tenderness with VP shunt\n- Meningismus, altered mental status, seizure, or persistent vomiting\n- Malfunction symptoms without a clear mechanical cause',
+        },
+        {
+            heading: 'ED workup',
+            body: '- CBC, BMP, CRP, blood cultures, and focused source evaluation\n- UA/urine culture, CXR, viral testing, or other testing only when clinically indicated\n- Neurosurgery discussion for imaging, shunt tap, and timing of antibiotics\n- If septic/unstable: draw cultures immediately and start empiric therapy without delay',
+        },
+        {
+            heading: 'Empiric therapy',
+            body: 'IDSA empiric regimen for healthcare-associated ventriculitis/meningitis: [Vancomycin](#/drug/vancomycin/shunt infection) plus an anti-pseudomonal beta-lactam: [Cefepime](#/drug/cefepime/shunt infection), ceftazidime, or [Meropenem](#/drug/meropenem/shunt infection). Adjust to local antibiogram, renal function, allergy, prior cultures, and severity.',
+        },
+        {
+            heading: 'Source control',
+            body: 'Suspected shunt hardware infection usually requires neurosurgery-directed externalization/removal, temporary CSF diversion, culture-directed antibiotics, and delayed reimplantation after CSF sterilization. Antibiotics alone are often inadequate when biofilm/hardware infection is present.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.' },
+        { num: 2, text: 'Children\'s Minnesota. Suspected Shunt Malfunction or Infection ED Guideline. Revised 2025; expires 2028.' },
+    ],
+    shareable: true,
+};
+const VPS_ICP_TOOL = {
+    id: 'vps-icp-tool',
+    title: 'VP Shunt ICP Rescue',
+    subtitle: 'Bridge to neurosurgical source control',
+    sections: [
+        {
+            heading: 'Recognize impending herniation',
+            body: '- Depressed or rapidly declining mental status\n- Bradycardia + hypertension + irregular respirations\n- Pupillary asymmetry/dilation, posturing, seizure, or acute focal deficit\n- Persistent vomiting with severe headache/lethargy in a shunted child\n- Any concerning trajectory despite unchanged imaging',
+        },
+        {
+            heading: 'Immediate actions',
+            body: '- Call neurosurgery stat\n- HOB 30 degrees, head midline, loosen tight collar/tape around neck\n- Oxygenate; avoid hypoxia and hypotension\n- Intubate if GCS <8, airway failure, or unsafe transport/imaging\n- Brief hyperventilation only as a temporizing bridge for active herniation physiology',
+        },
+        {
+            heading: 'Hyperosmolar therapy',
+            body: '- [Hypertonic saline 3%](#/drug/hypertonic-saline/icp): 2-5 mL/kg IV bolus over 10-20 min per local neurocritical protocol\n- 23.4% NaCl: specialist/protocol-directed rescue, typically central line preferred\n- [Mannitol](#/drug/mannitol/icp): 0.25-1 g/kg IV when appropriate and hemodynamics/renal status allow\n- Monitor sodium, osmolality, renal function, hemodynamics, and neuro response',
+        },
+        {
+            heading: 'Definitive treatment',
+            body: 'ICP treatment is a bridge. Definitive management is neurosurgery: shunt revision, shunt tap/externalization, EVD, or operative source control depending on malfunction/infection and local capability.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Neurocritical Care Society. Guidelines for the Acute Treatment of Cerebral Edema. Neurocrit Care. 2020;32(3):647-666.' },
+        { num: 2, text: 'Children\'s Minnesota. Suspected Shunt Malfunction or Infection ED Guideline. Revised 2025; expires 2028.' },
+        { num: 3, text: 'EMCrit IBCC. Intracranial Pressure Management. Updated 2024.' },
+    ],
+    shareable: true,
+};
+const VPS_TAP_TOOL = {
+    id: 'vps-tap-tool',
+    title: 'VP Shunt Tap',
+    subtitle: 'When, who, and what to send',
+    sections: [
+        {
+            heading: 'Indications',
+            body: '- Suspected infection when CSF is needed and neurosurgery agrees\n- Suspected obstruction requiring direct pressure assessment\n- Peri-arrest/impending herniation when neurosurgery is unavailable and ED shunt tap is within local scope/policy\n- Need for emergent decompression in a crashing shunted patient without immediate operative/EVD access',
+        },
+        {
+            heading: 'Who should perform',
+            body: 'Prefer neurosurgery. ED clinician-performed shunt tap should be rare, reserved for immediate life threat or institutional protocol, and done with sterile technique after reviewing shunt anatomy/location.',
+        },
+        {
+            heading: 'Technique priorities',
+            body: '- Sterile prep, mask, sterile gloves, chlorhexidine if appropriate for age/site\n- Use small-gauge needle into reservoir only; avoid tubing puncture\n- Do not repeatedly needle or aggressively pump the reservoir\n- Measure pressure if setup allows, withdraw only needed volume unless decompression is explicitly intended\n- Stop for resistance, unexpected bleeding, or inability to identify reservoir',
+        },
+        {
+            heading: 'Send CSF',
+            body: '- Cell count/differential\n- Glucose and protein\n- Gram stain and bacterial culture; hold culture long enough for slow-growing organisms when suspected\n- Consider PCR/meningitis panel only as adjunct based on local lab and ID/neurosurgery input\n- Interpret CSF with caution; negative reservoir CSF does not fully exclude hardware infection',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.' },
+        { num: 2, text: 'Tunkel R, et al. VP Shunts in the Emergency Department: A Review. Cureus. 2020;12(2):e7054.' },
+    ],
+    shareable: true,
+};
+const VPS_STOP_TOOL = {
+    id: 'vps-stop',
+    title: 'STOP: VP Shunt Misses',
+    subtitle: 'High-risk errors in shunted children',
+    sections: [
+        {
+            heading: 'Do not do these',
+            body: '- Do not discharge a concerning shunted child solely because CT/MRI/shunt series/ONSD is normal\n- Do not ignore caregiver report that symptoms match prior malfunction\n- Do not delay neurosurgery consultation for herniation physiology, persistent vomiting/lethargy, new seizure, focal deficit, or abnormal vital signs\n- Do not use shunt reservoir pumping as a rule-out test\n- Do not treat suspected shunt infection with antibiotics alone without source-control discussion\n- Do not forget abdominal ultrasound/CT when abdominal pain, tenderness, fever, or distal catheter concern is present\n- Do not perform shunt tap casually; reserve for neurosurgery or true emergency/local protocol\n- Do not send an unstable child to MRI when CT/resuscitation is needed now',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jayanth A, et al. Diagnostic modalities to determine VP shunt malfunction. Am J Emerg Med. 2021;39:180-189.' },
+        { num: 2, text: 'Children\'s Minnesota. Suspected Shunt Malfunction or Infection ED Guideline. Revised 2025; expires 2028.' },
+        { num: 3, text: 'IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.' },
+    ],
+    shareable: true,
+};
 const DEMAGIT_STEPS_PAGE = {
     id: 'demagit-steps',
     title: 'Dementia Agitation Steps',
@@ -22196,6 +22385,13 @@ export const INFO_PAGES = {
     'ie-abx-tool': IE_ABX_TOOL,
     'ie-surgery-tool': IE_SURGERY_TOOL,
     'ie-stop': IE_STOP_TOOL,
+    'vps-steps': VPS_STEPS_PAGE,
+    'vps-complications-tool': VPS_COMPLICATIONS_TOOL,
+    'vps-imaging-tool': VPS_IMAGING_TOOL,
+    'vps-infection-tool': VPS_INFECTION_TOOL,
+    'vps-icp-tool': VPS_ICP_TOOL,
+    'vps-tap-tool': VPS_TAP_TOOL,
+    'vps-stop': VPS_STOP_TOOL,
     'demagit-steps': DEMAGIT_STEPS_PAGE,
     'demagit-triggers': DEMAGIT_TRIGGERS_PAGE,
     'demagit-med-guide': DEMAGIT_MED_GUIDE_PAGE,

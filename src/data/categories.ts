@@ -1454,8 +1454,8 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'vp-shunt',
-        title: 'VP Shunt Malfunction',
-        subtitle: 'Recognition → Imaging → Infection vs Malfunction → ICP Management → Shunt Tap → Disposition',
+        title: 'VP Shunt Complications',
+        subtitle: 'Recognition → Malfunction vs Infection → Imaging/U/S → ICP Rescue → Shunt Tap → Disposition',
         categoryId: 'neurology',
         version: '1.0',
         nodeCount: 24,
@@ -1924,6 +1924,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 20,
         entryNodeId: 'brue-start',
+      },
+      {
+        id: 'vp-shunt',
+        title: 'VP Shunt Complications',
+        subtitle: 'Recognition → Malfunction vs Infection → Imaging/U/S → ICP Rescue → Shunt Tap → Disposition',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 24,
+        entryNodeId: 'vps-start',
       },
       {
         id: 'neonatal-resus',
