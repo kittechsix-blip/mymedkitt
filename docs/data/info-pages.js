@@ -19580,6 +19580,11 @@ const VPS_IMAGING_TOOL = {
     sections: [
         {
             heading: 'Brain imaging choice',
+            image: {
+                src: 'images/vp-shunt/vp-shunt-ct.png',
+                alt: 'Axial head CT showing a ventriculoperitoneal shunt catheter traversing the lateral ventricle with visible ventricular enlargement',
+                caption: 'Head CT with VP shunt catheter and ventricular enlargement. Wikimedia Commons, James Heilman MD. CC BY-SA 4.0.',
+            },
             body: '- Stable child: rapid/limited brain MRI without sedation when available promptly.\n- Unstable child, altered mental status, herniation signs, status epilepticus, or MRI delay: noncontrast head CT.\n- Always compare to prior imaging if available; baseline ventricular caliber matters.\n- Do not rule out malfunction solely because ventricles are unchanged.',
         },
         {
@@ -19592,6 +19597,11 @@ const VPS_IMAGING_TOOL = {
         },
         {
             heading: 'Abdominal ultrasound',
+            image: {
+                src: 'images/vp-shunt/vp-shunt-pseudocyst-ultrasound.jpg',
+                alt: 'Abdominal ultrasound showing a large intra-abdominal CSF pseudocyst around the distal ventriculoperitoneal shunt catheter',
+                caption: 'Ultrasonography showing large intra-abdominal pseudocyst around a VP shunt. Meyer et al. CC BY 4.0.',
+            },
             body: '- Use when abdominal pain, tenderness, distension, fever, distal catheter concern, or unexplained malfunction is present.\n- Looks for pseudocyst, loculated CSF, abscess, ascites, catheter tip collection, or other abdominal source.\n- IDSA recommends abdominal ultrasound or CT for infected VP shunts with abdominal symptoms.',
         },
     ],
@@ -19599,6 +19609,7 @@ const VPS_IMAGING_TOOL = {
         { num: 1, text: 'ACR Appropriateness Criteria: Hydrocephalus-Child. J Am Coll Radiol. 2026.' },
         { num: 2, text: 'Jayanth A, et al. Diagnostic modalities to determine VP shunt malfunction. Am J Emerg Med. 2021;39:180-189.' },
         { num: 3, text: 'IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.' },
+        { num: 4, text: 'Meyer A, et al. Distended abdomen due to a pseudocyst around a ventriculoperitoneal shunt. Wien Klin Wochenschr. 2022;134:822-823. Open access CC BY 4.0.' },
     ],
     shareable: true,
 };
