@@ -50,6 +50,10 @@ export const TRAVELER_INFECTIONS_CITATIONS: { num: number; text: string }[] = [
     num: 10,
     text: 'CDC. Measles Cases and Outbreaks 2026. https://www.cdc.gov/measles/data-research/index.html',
   },
+  {
+    num: 11,
+    text: 'Wyler B, Avrith N. Emergency Department Evaluation and Management of Serious and High-Risk Infections in the Febrile Returning Traveler. Emergency Medicine Practice. 2026;28(5):1-36. PMID: 42024815.',
+  },
 ];
 
 export const TRAVELER_INFECTIONS_CRITICAL_ACTIONS = [
@@ -88,7 +92,10 @@ export const TRAVELER_INFECTIONS_NODES: DecisionNode[] = [
 - Rickettsial infections
 - Meningococcal disease
 - Dengue (severe)
-- Viral hemorrhagic fever (rare)`,
+- Viral hemorrhagic fever (rare)
+
+**2026 EB Medicine ED Focus:**
+For fever after recent international travel, prioritize rapid exclusion or treatment of the high-risk ED bundle: **malaria, dengue, enteric fever, and leptospirosis**.`,
     options: [
       {
         label: 'Fever / Systemic Symptoms',
@@ -111,7 +118,13 @@ export const TRAVELER_INFECTIONS_NODES: DecisionNode[] = [
         next: 'ti-neuro-initial',
       },
     ],
-    citation: [1, 2],
+    calculatorLinks: [
+      { id: 'ti-geographic-risk', label: 'Geographic Risk' },
+      { id: 'ti-incubation', label: 'Incubation Interpreter' },
+      { id: 'ti-syndrome-ddx', label: 'Syndrome DDx' },
+      { id: 'ti-isolation', label: 'Isolation Precautions' },
+    ],
+    citation: [1, 2, 11],
 
     summary: 'Isolate if respiratory/hemorrhage/rash; calculate incubation period; determine presenting syndrome',
   },
@@ -134,7 +147,7 @@ export const TRAVELER_INFECTIONS_NODES: DecisionNode[] = [
 - **Incubation period** (symptom onset vs return date)
   - <10 days: dengue, chikungunya, plague, COVID
   - 10-14 days: malaria, typhoid, leptospirosis
-  - >2 weeks: hepatitis, parasites, TB
+  - >2 weeks: malaria, hepatitis, parasites, TB
 - Malaria prophylaxis (drug, compliance, post-travel continuation)
 - Exposures: mosquitoes, ticks, animals, freshwater, flood water, unpasteurized dairy
 - Vaccines received
@@ -154,7 +167,12 @@ export const TRAVELER_INFECTIONS_NODES: DecisionNode[] = [
         next: 'ti-fever-syndrome',
       },
     ],
-    citation: [1, 2],
+    calculatorLinks: [
+      { id: 'ti-geographic-risk', label: 'Geographic Risk' },
+      { id: 'ti-incubation', label: 'Incubation Interpreter' },
+      { id: 'ti-admission', label: 'Admission Criteria' },
+    ],
+    citation: [1, 2, 11],
 
     summary: 'Incubation period narrows DDx; eschar = start doxycycline immediately; hepatosplenomegaly = malaria/typhoid',
   },
@@ -224,7 +242,10 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
 **Common Non-Exotic Causes:**
 - Respiratory infections (COVID, influenza, pneumonia)
 - UTI/pyelonephritis
-- Skin/soft tissue infections`,
+- Skin/soft tissue infections
+
+**High-Risk ED Bundle:**
+Even with nonspecific findings, actively evaluate for **malaria, dengue, enteric fever, and leptospirosis** when timing and geography fit.`,
     options: [
       {
         label: 'Dengue / Arboviral Syndrome',
@@ -247,7 +268,12 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
         next: 'ti-fever-workup',
       },
     ],
-    citation: [2, 7, 8],
+    calculatorLinks: [
+      { id: 'ti-geographic-risk', label: 'Geographic Risk' },
+      { id: 'ti-incubation', label: 'Incubation Interpreter' },
+      { id: 'ti-empiric-tx', label: 'Empiric Treatment' },
+    ],
+    citation: [2, 7, 8, 11],
 
     summary: 'Classify by syndrome pattern — thrombocytopenia, hepatosplenomegaly, jaundice, eschar, relative bradycardia',
   },
@@ -477,6 +503,7 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
 - **Don't start antibiotics blindly** unless septic/unstable
 - **Get blood cultures first**
 - If empiric treatment needed → broad-spectrum (ceftriaxone + doxycycline covers typhoid + rickettsial)
+- If freshwater/flood exposure with compatible illness → consider early leptospirosis treatment while confirmatory testing is pending
 
 **Admission Criteria:**
 - Hemodynamic instability
@@ -501,7 +528,13 @@ See separate comprehensive malaria consult for detailed diagnosis & treatment.`,
 **Common Non-Exotic Diagnoses:**
 - Don't overlook: pneumonia, UTI, influenza, COVID-19
 - >25% of cases: no specific cause found (reasonable to suspend workup if symptoms resolve)`,
-    citation: [1, 2, 7, 8],
+    calculatorLinks: [
+      { id: 'ti-incubation', label: 'Incubation Interpreter' },
+      { id: 'ti-admission', label: 'Admission Criteria' },
+      { id: 'ti-empiric-tx', label: 'Empiric Treatment' },
+      { id: 'ti-cdc-resources', label: 'CDC Resources' },
+    ],
+    citation: [1, 2, 7, 8, 11],
   },
 
   // ==================== GI MODULE ====================

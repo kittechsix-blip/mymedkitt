@@ -30040,6 +30040,235 @@ const CIG_DISPOSITION_CALCULATOR: CalculatorDefinition = {
 
 // ==================== TRAVELER INFECTIONS ====================
 
+const TI_GEOGRAPHIC_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'ti-geographic-risk',
+  title: 'Geographic Risk',
+  subtitle: 'Region + exposure risk stratification',
+  description: 'Prioritize high-risk imported infections by travel region, exposure type, and syndrome.',
+  fields: [
+    {
+      name: 'region',
+      label: 'Primary Travel Region',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Sub-Saharan Africa', points: 0 },
+        { label: 'South / Southeast Asia', points: 1 },
+        { label: 'Latin America / Caribbean', points: 2 },
+        { label: 'Middle East / North Africa', points: 3 },
+        { label: 'Oceania / Pacific Islands', points: 4 },
+        { label: 'Europe / North America', points: 5 },
+      ],
+    },
+    {
+      name: 'exposure',
+      label: 'Highest-Risk Exposure',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Visiting friends/relatives, rural, or long-stay travel', points: 0 },
+        { label: 'Urban short-stay / hotel travel', points: 1 },
+        { label: 'Freshwater, flood water, adventure race, or farm exposure', points: 2 },
+        { label: 'Tick, animal, forest, cave, or safari exposure', points: 3 },
+        { label: 'Healthcare abroad / medical tourism / antibiotics abroad', points: 4 },
+        { label: 'Funeral, outbreak area, refugee camp, or mass gathering', points: 5 },
+      ],
+    },
+    {
+      name: 'syndrome',
+      label: 'Current ED Syndrome',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Undifferentiated fever', points: 0 },
+        { label: 'Fever + thrombocytopenia', points: 1 },
+        { label: 'Fever + jaundice, renal injury, or calf myalgia', points: 2 },
+        { label: 'Fever + abdominal pain / diarrhea / constipation', points: 3 },
+        { label: 'Fever + rash, petechiae, purpura, or eschar', points: 4 },
+        { label: 'Respiratory distress or neurologic findings', points: 5 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Use this to prioritize testing and isolation. It does not exclude malaria, dengue, enteric fever, leptospirosis, or outbreak pathogens when the clinical picture is concerning.',
+  citations: [
+    'Wyler B, Avrith N. Emergency Department Evaluation and Management of Serious and High-Risk Infections in the Febrile Returning Traveler. Emergency Medicine Practice. 2026;28(5):1-36. PMID: 42024815.',
+    'CDC Yellow Book 2026. Post-Travel Evaluation of the Ill Traveler.',
+  ],
+  computeResult: ({ region, exposure, syndrome }) => {
+    const regionMap: Record<number, { label: string; priorities: string; firstTests: string }> = {
+      0: {
+        label: 'Sub-Saharan Africa',
+        priorities: 'P. falciparum malaria, enteric fever, African tick bite fever/rickettsial infection, dengue or other arbovirus, meningococcal disease in the meningitis belt. Viral hemorrhagic fever is rare but must be considered with compatible outbreak/funeral/exposure history.',
+        firstTests: 'STAT thick/thin smears + malaria RDT, CBC with platelets, CMP/bilirubin/creatinine, blood cultures before antibiotics, dengue testing if compatible, and immediate isolation if hemorrhage, rash, respiratory symptoms, or outbreak exposure.',
+      },
+      1: {
+        label: 'South / Southeast Asia',
+        priorities: 'Dengue, enteric fever including resistant/XDR typhoid risk, malaria depending subregion, leptospirosis, scrub typhus, chikungunya, and avian influenza with poultry exposure.',
+        firstTests: 'CBC with platelets, CMP, blood cultures, malaria testing if endemic exposure, dengue PCR/NS1/serology by illness day, and targeted leptospirosis or rickettsial testing based on exposure.',
+      },
+      2: {
+        label: 'Latin America / Caribbean',
+        priorities: 'Dengue, chikungunya, Zika, leptospirosis, malaria with Amazon/rural exposure, enteric fever, and measles if under-immunized with compatible rash syndrome.',
+        firstTests: 'CBC with platelets, CMP, dengue PCR/NS1/IgM by timing, malaria testing if Amazon/rural exposure, blood cultures if enteric fever suspected, and leptospirosis testing with freshwater/flood exposure.',
+      },
+      3: {
+        label: 'Middle East / North Africa',
+        priorities: 'MERS-CoV with camel or healthcare exposure, brucellosis, enteric fever, leishmaniasis, rickettsial disease, dengue in affected areas, and common respiratory pathogens.',
+        firstTests: 'Respiratory isolation and testing if MERS exposure, blood cultures, CBC/CMP, brucella testing when compatible, and malaria testing if travel included endemic subregions.',
+      },
+      4: {
+        label: 'Oceania / Pacific Islands',
+        priorities: 'Dengue, chikungunya, Zika, leptospirosis, enteric fever, influenza, measles, and malaria in Papua New Guinea/Solomon Islands/Vanuatu exposure.',
+        firstTests: 'CBC with platelets, CMP, dengue/arboviral testing by timing, leptospirosis testing if freshwater/flood exposure, blood cultures if enteric fever suspected, and malaria testing where endemic.',
+      },
+      5: {
+        label: 'Europe / North America',
+        priorities: 'Common infections remain most likely: influenza/COVID/pneumonia/UTI. Travel still raises concern for measles, meningococcal disease, TB, tick-borne infections, and pathogens from any earlier linked itinerary.',
+        firstTests: 'Do not anchor on travel alone. Test for common ED causes while escalating isolation/testing for rash, meningismus, TB risk, or outbreak-linked exposures.',
+      },
+    };
+
+    const exposureMap: Record<number, string> = {
+      0: 'VFR, rural, or long-stay travel increases risk for malaria, enteric fever, parasitic infection, TB, and delayed presentation after limited pre-travel prophylaxis.',
+      1: 'Urban short-stay travel lowers some vector/food-water risks but does not exclude dengue, respiratory infections, measles, or foodborne illness.',
+      2: 'Freshwater, flood water, adventure race, or farm exposure raises leptospirosis and schistosomiasis risk; ask specifically about conjunctival suffusion, calf myalgia, jaundice, and renal injury.',
+      3: 'Tick/animal/forest/cave/safari exposure raises rickettsial disease, rabies exposure, histoplasmosis, African tick bite fever, and other zoonoses.',
+      4: 'Healthcare abroad, medical tourism, or antibiotics abroad raises risk for multidrug-resistant organisms and may change empiric antibiotic choices.',
+      5: 'Funeral, outbreak area, refugee camp, or mass gathering exposure should trigger early infection-control and public-health notification when symptoms fit a transmissible high-consequence infection.',
+    };
+
+    const syndromeMap: Record<number, string> = {
+      0: 'Undifferentiated fever: malaria must be excluded after endemic travel; also consider dengue, enteric fever, leptospirosis, rickettsial infection, acute HIV, and common infections.',
+      1: 'Thrombocytopenia: prioritize dengue, malaria, rickettsial disease, severe sepsis, and viral hemorrhagic fever if compatible exposure.',
+      2: 'Jaundice/renal injury/calf myalgia: prioritize leptospirosis, malaria, hepatitis A/E, severe dengue, and sepsis.',
+      3: 'Abdominal pain/diarrhea/constipation: consider enteric fever, malaria with GI symptoms, invasive bacterial diarrhea, amebiasis, and common intra-abdominal disease.',
+      4: 'Rash/petechiae/purpura/eschar: isolate when needed; consider dengue, measles, meningococcemia, rickettsial infection, and VHF with compatible outbreak exposure.',
+      5: 'Respiratory distress or neurologic findings: escalate isolation/resuscitation; consider severe malaria, meningitis/encephalitis, MERS/avian influenza/TB, and severe sepsis.',
+    };
+
+    const profile = regionMap[region as number] || regionMap[0];
+    const exposureNote = exposureMap[exposure as number] || exposureMap[0];
+    const syndromeNote = syndromeMap[syndrome as number] || syndromeMap[0];
+
+    return {
+      value: profile.label,
+      label: `${profile.label}: Risk Priorities`,
+      description: `**HIGH-RISK DIFFERENTIAL:**\n${profile.priorities}\n\n**FIRST ED TESTS/ACTIONS:**\n${profile.firstTests}\n\n**EXPOSURE MODIFIER:**\n${exposureNote}\n\n**SYNDROME MODIFIER:**\n${syndromeNote}`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const TI_INCUBATION_CALCULATOR: CalculatorDefinition = {
+  id: 'ti-incubation',
+  title: 'Incubation Interpreter',
+  subtitle: 'Symptom onset timing after travel/exposure',
+  description: 'Use symptom onset timing to prioritize diagnoses in the febrile returning traveler.',
+  fields: [
+    {
+      name: 'timing',
+      label: 'Symptom Onset Timing',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: '0-7 days after exposure/return', points: 0 },
+        { label: '8-14 days', points: 1 },
+        { label: '15-30 days', points: 2 },
+        { label: '31-60 days', points: 3 },
+        { label: '>60 days', points: 4 },
+      ],
+    },
+    {
+      name: 'syndrome',
+      label: 'Dominant Syndrome',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Undifferentiated fever', points: 0 },
+        { label: 'Diarrhea / abdominal symptoms', points: 1 },
+        { label: 'Rash / arthralgia', points: 2 },
+        { label: 'Jaundice / renal injury', points: 3 },
+        { label: 'Respiratory / neurologic symptoms', points: 4 },
+        { label: 'Eosinophilia or chronic symptoms', points: 5 },
+      ],
+    },
+    {
+      name: 'malariaExposure',
+      label: 'Any malaria-endemic travel within 1 year?',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Yes', points: 0 },
+        { label: 'No', points: 1 },
+        { label: 'Unknown', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Incubation timing narrows the differential but should not override severity, local outbreak alerts, or malaria testing after endemic travel.',
+  citations: [
+    'CDC Yellow Book 2026. Post-Travel Evaluation of the Ill Traveler.',
+    'Wyler B, Avrith N. Emergency Department Evaluation and Management of Serious and High-Risk Infections in the Febrile Returning Traveler. Emergency Medicine Practice. 2026;28(5):1-36. PMID: 42024815.',
+  ],
+  computeResult: ({ timing, syndrome, malariaExposure }) => {
+    const timingMap: Record<number, { label: string; likely: string; lessLikely: string; action: string }> = {
+      0: {
+        label: '0-7 days',
+        likely: 'Dengue, chikungunya, Zika, influenza/COVID, traveler diarrhea, rickettsial infection, early leptospirosis, plague where epidemiologically plausible.',
+        lessLikely: 'Viral hepatitis, tuberculosis, most helminthic syndromes, and many chronic parasitic infections.',
+        action: 'If fever after malaria-endemic travel, malaria testing is still required even when timing seems early.',
+      },
+      1: {
+        label: '8-14 days',
+        likely: 'P. falciparum malaria, dengue, enteric fever, leptospirosis, rickettsial infection, acute HIV, and common viral/bacterial infections.',
+        lessLikely: 'Most chronic parasitic infections and tuberculosis unless symptoms began later or exposure was remote.',
+        action: 'This is the highest-yield ED window for the EB Medicine serious-four frame: malaria, dengue, enteric fever, and leptospirosis.',
+      },
+      2: {
+        label: '15-30 days',
+        likely: 'Malaria, enteric fever, leptospirosis, viral hepatitis A/E, acute HIV, amoebic liver abscess, and rickettsial infection with delayed presentation.',
+        lessLikely: 'Dengue becomes less likely if onset is >14 days after leaving the exposure region, unless dates are uncertain.',
+        action: 'Do blood cultures before antibiotics when enteric fever is plausible, and test for malaria if any endemic exposure.',
+      },
+      3: {
+        label: '31-60 days',
+        likely: 'P. vivax/ovale malaria, hepatitis A/E, amoebic liver abscess, tuberculosis, brucellosis, Q fever, schistosomiasis/Katayama fever, and leishmaniasis.',
+        lessLikely: 'Viral hemorrhagic fever is generally unlikely when symptoms begin >21 days after leaving an endemic/outbreak region.',
+        action: 'Broaden beyond the acute febrile-traveler bundle and involve ID when fever remains unexplained.',
+      },
+      4: {
+        label: '>60 days',
+        likely: 'Relapsing malaria, tuberculosis, leishmaniasis, schistosomiasis, strongyloidiasis, filariasis, brucellosis, Q fever, and noninfectious causes.',
+        lessLikely: 'Dengue, chikungunya, Zika, and most viral hemorrhagic fevers as the primary cause of new fever.',
+        action: 'If malaria-endemic travel occurred within 1 year, malaria remains on the differential; otherwise shift toward chronic infections and common diagnoses.',
+      },
+    };
+
+    const syndromeMap: Record<number, string> = {
+      0: 'Undifferentiated fever: use the serious-four ED frame first, then expand by geography/exposure.',
+      1: 'GI symptoms: enteric fever can present with abdominal pain, diarrhea, or constipation; malaria can also present with GI symptoms.',
+      2: 'Rash/arthralgia: prioritize dengue/chikungunya/Zika when timing is short; eschar should trigger empiric doxycycline for rickettsial disease.',
+      3: 'Jaundice/renal injury: prioritize leptospirosis, malaria, hepatitis A/E, severe dengue, and sepsis.',
+      4: 'Respiratory/neurologic symptoms: escalate isolation and resuscitation; consider severe malaria, meningitis/encephalitis, MERS/avian influenza/TB when exposure fits.',
+      5: 'Eosinophilia/chronic symptoms: consider helminths, schistosomiasis, strongyloidiasis, filariasis, and medication/allergic causes.',
+    };
+
+    const t = timingMap[timing as number] || timingMap[1];
+    const syndromeNote = syndromeMap[syndrome as number] || syndromeMap[0];
+    const malariaNote = malariaExposure === 0 || malariaExposure === 2
+      ? '**MALARIA SAFETY:** malaria must be ruled out after endemic travel regardless of prophylaxis history; repeat smears/RDT strategy if initial tests are negative and suspicion persists.'
+      : '**MALARIA SAFETY:** no known endemic exposure lowers malaria probability, but verify the itinerary at sub-national level before excluding it.';
+
+    return {
+      value: t.label,
+      label: `Incubation ${t.label}`,
+      description: `**LIKELY / PRIORITIZE:**\n${t.likely}\n\n**LESS LIKELY BY TIMING:**\n${t.lessLikely}\n\n**SYNDROME MODIFIER:**\n${syndromeNote}\n\n${malariaNote}\n\n**NEXT STEP:**\n${t.action}`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
 const TI_SYNDROME_DDX_CALCULATOR: CalculatorDefinition = {
   id: 'ti-syndrome-ddx',
   title: 'Syndrome-Based DDx',
@@ -36179,6 +36408,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cig-mannitol-protocol': CIG_MANNITOL_CALCULATOR,
   'cig-disposition': CIG_DISPOSITION_CALCULATOR,
   // Traveler Infections
+  'ti-geographic-risk': TI_GEOGRAPHIC_RISK_CALCULATOR,
+  'ti-incubation': TI_INCUBATION_CALCULATOR,
   'ti-syndrome-ddx': TI_SYNDROME_DDX_CALCULATOR,
   'ti-malaria-ppx': TI_MALARIA_PROPHYLAXIS_CALCULATOR,
   'ti-empiric-tx': TI_EMPIRIC_TREATMENT_CALCULATOR,
