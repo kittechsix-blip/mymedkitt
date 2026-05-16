@@ -971,7 +971,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'approach-to-arthritis': async () => {
             const m = await import('../data/trees/approach-to-arthritis.js');
-            return { nodes: m.APPROACH_TO_ARTHRITIS_NODES, entryNodeId: 'arth-start', categoryId: 'rheumatology', moduleLabels: m.APPROACH_TO_ARTHRITIS_MODULE_LABELS, citations: m.APPROACH_TO_ARTHRITIS_CITATIONS, criticalActions: m.APPROACH_TO_ARTHRITIS_CRITICAL_ACTIONS };
+            return { nodes: m.APPROACH_TO_ARTHRITIS_NODES, entryNodeId: 'arth-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.APPROACH_TO_ARTHRITIS_MODULE_LABELS, citations: m.APPROACH_TO_ARTHRITIS_CITATIONS, criticalActions: m.APPROACH_TO_ARTHRITIS_CRITICAL_ACTIONS };
         },
         'diabetic-foot-wounds': async () => {
             const m = await import('../data/trees/diabetic-foot-wounds.js');
@@ -987,7 +987,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'gout': async () => {
             const m = await import('../data/trees/gout.js');
-            return { nodes: m.GOUT_NODES, entryNodeId: 'gout-start', categoryId: 'rheumatology', moduleLabels: m.GOUT_MODULE_LABELS, citations: m.GOUT_CITATIONS, criticalActions: m.GOUT_CRITICAL_ACTIONS };
+            return { nodes: m.GOUT_NODES, entryNodeId: 'gout-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.GOUT_MODULE_LABELS, citations: m.GOUT_CITATIONS, criticalActions: m.GOUT_CRITICAL_ACTIONS };
         },
         'hop-killers': async () => {
             const m = await import('../data/trees/hop-killers.js');

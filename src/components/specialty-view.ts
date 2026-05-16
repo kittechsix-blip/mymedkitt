@@ -23,6 +23,11 @@ const PINNED_TREE_ORDER: Record<string, string[]> = {
 export function renderSpecialtyView(container: HTMLElement, categoryId: string): void {
   container.innerHTML = '';
 
+  // Alias: old 'rheumatology' category merged into 'nephro-rheum-endo' (2026-05-16)
+  if (categoryId === 'rheumatology') {
+    categoryId = 'nephro-rheum-endo';
+  }
+
   const categories = getAllCategories();
   const category = categories.find(c => c.id === categoryId);
 

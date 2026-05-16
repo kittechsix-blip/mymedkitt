@@ -1231,7 +1231,7 @@ export const DEFAULT_CATEGORIES = [
     { id: 'med-calc', name: 'Med-Calc', icon: 'med-calc.png', decisionTrees: [], isCustom: false },
     {
         id: 'nephro-rheum-endo',
-        name: 'Nephrology/Endocrinology',
+        name: 'Nephrology / Rheumatology / Endocrinology',
         icon: 'nephro-rheum-endo.png',
         decisionTrees: [
             {
@@ -1323,6 +1323,24 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 13,
                 entryNodeId: 'avfb-start',
+            },
+            {
+                id: 'approach-to-arthritis',
+                title: 'Approach to Arthritis',
+                subtitle: 'Initial Assessment → Inflammatory vs Mechanical → Septic Arthritis → Crystal Arthropathies → Systemic Rheumatic → Disposition',
+                categoryId: 'nephro-rheum-endo',
+                version: '1.0',
+                nodeCount: 48,
+                entryNodeId: 'arth-start',
+            },
+            {
+                id: 'gout',
+                title: 'Gout & Pseudogout',
+                subtitle: 'Presentation → Diagnosis → Gout vs Pseudogout → Acute Treatment → Disposition',
+                categoryId: 'nephro-rheum-endo',
+                version: '1.0',
+                nodeCount: 26,
+                entryNodeId: 'gout-start',
             }
         ],
         isCustom: false,
@@ -2384,32 +2402,6 @@ export const DEFAULT_CATEGORIES = [
         isCustom: false,
     },
     {
-        id: 'rheumatology',
-        name: 'Rheumatology',
-        icon: 'rheumatology.png',
-        decisionTrees: [
-            {
-                id: 'approach-to-arthritis',
-                title: 'Approach to Arthritis',
-                subtitle: 'Initial Assessment → Inflammatory vs Mechanical → Septic Arthritis → Crystal Arthropathies → Systemic Rheumatic → Disposition',
-                categoryId: 'rheumatology',
-                version: '1.0',
-                nodeCount: 48,
-                entryNodeId: 'arth-start',
-            },
-            {
-                id: 'gout',
-                title: 'Gout & Pseudogout',
-                subtitle: 'Presentation → Diagnosis → Gout vs Pseudogout → Acute Treatment → Disposition',
-                categoryId: 'rheumatology',
-                version: '1.0',
-                nodeCount: 26,
-                entryNodeId: 'gout-start',
-            },
-        ],
-        isCustom: false,
-    },
-    {
         id: 'procedures',
         name: 'Procedures',
         icon: 'procedures.png',
@@ -2976,7 +2968,6 @@ export const CATEGORY_COLORS = {
     'trauma-surg': { card: '#E65100', iconBg: '#E65100' },
     'us-rads': { card: '#1A237E', iconBg: '#1A237E' },
     'urology': { card: '#F57F17', iconBg: '#F57F17', textColor: '#1A1A2E' },
-    'rheumatology': { card: '#C75050', iconBg: '#C75050' },
 };
 const STORAGE_KEY = 'em-custom-categories';
 /** Load custom categories from LocalStorage */
