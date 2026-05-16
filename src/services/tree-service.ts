@@ -1266,6 +1266,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/peritoneal-dialysis.js');
       return { nodes: m.PERITONEAL_DIALYSIS_NODES, entryNodeId: 'pd-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.PERITONEAL_DIALYSIS_MODULE_LABELS, citations: m.PERITONEAL_DIALYSIS_CITATIONS, criticalActions: m.PERITONEAL_DIALYSIS_CRITICAL_ACTIONS };
     },
+    'adult-pharyngitis': async () => {
+      const m = await import('../data/trees/adult-pharyngitis.js');
+      return { nodes: m.ADULT_PHARYNGITIS_NODES, entryNodeId: 'ap-start', categoryId: 'infectious-disease', moduleLabels: m.ADULT_PHARYNGITIS_MODULE_LABELS, citations: m.ADULT_PHARYNGITIS_CITATIONS, criticalActions: m.ADULT_PHARYNGITIS_CRITICAL_ACTIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

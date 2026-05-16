@@ -268,4 +268,5 @@ export const TREE_REGISTRY = {
   'febrile-seizure': { prefix: 'FEBSZ', entryNodeId: 'febsz-start', categoryId: 'pediatrics' },
   'peds-foreign-body': { prefix: 'PEDS_FB', entryNodeId: 'peds-fb-start', categoryId: 'pediatrics' },
   'peritoneal-dialysis': { prefix: 'PERITONEAL_DIALYSIS', entryNodeId: 'pd-start', categoryId: 'nephro-rheum-endo' },
+  'adult-pharyngitis': { prefix: 'ADULT_PHARYNGITIS', entryNodeId: 'ap-start', categoryId: 'infectious-disease' },
 };

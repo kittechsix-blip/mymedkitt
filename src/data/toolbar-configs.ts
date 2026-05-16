@@ -1006,6 +1006,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'pa-dispo' },
     { id: 'pitfalls', label: 'Pitfalls', icon: '⚠️', action: 'jump', target: 'pa-pitfalls' },
   ],
+  'adult-pharyngitis': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ap-steps-summary' },
+    { id: 'centor', label: 'Centor/McIsaac', icon: '🧮', action: 'calculator', target: 'centor-mcisaac-score' },
+    { id: 'abx', label: 'Abx', icon: '💊', action: 'jump', target: 'ap-abx-first-line' },
+    { id: 'pcn-alt', label: 'PCN Alt', icon: '🚫', action: 'jump', target: 'ap-abx-pcn-allergy' },
+    { id: 'mimics', label: 'Mimics', icon: '⚠️', action: 'jump', target: 'ap-mimics-screen' },
+  ],
   'peds-electrolyte-emergencies': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'pee-steps-summary' },
     { id: 'corr-na', label: 'Corr Na', icon: '🧮', action: 'calculator', target: 'corrected-na' },

@@ -36022,6 +36022,46 @@ const PEDS_APPENDICITIS_SCORE_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Centor / McIsaac Score — Adult Pharyngitis (Strep Throat)
+// -------------------------------------------------------------------
+
+const CENTOR_MCISAAC_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'centor-mcisaac-score',
+  title: 'Centor / McIsaac Score',
+  subtitle: 'Adult pharyngitis — GAS likelihood and testing/treatment decision',
+  description: 'Modified McIsaac 5-point score adapted from Centor 4-point criteria. Risk-stratifies adult sore throat for Group A Strep (GAS) and guides rapid antigen testing and empiric treatment per IDSA 2012 and AHA 2009. Does not replace clinical judgment; always screen separately for airway threats and dangerous mimics (peritonsillar abscess, Lemierre, epiglottitis, Ludwig).',
+  fields: [
+    { name: 'fever', label: 'Fever > 38°C (100.4°F)', type: 'toggle', points: 1 },
+    { name: 'no-cough', label: 'Absence of cough', type: 'toggle', points: 1 },
+    { name: 'tender-lad', label: 'Tender anterior cervical lymphadenopathy', type: 'toggle', points: 1 },
+    { name: 'exudate', label: 'Tonsillar exudate or swelling', type: 'toggle', points: 1 },
+    {
+      name: 'age',
+      label: 'Age band',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Age 3-14', points: 1 },
+        { label: 'Age 15-44', points: 0 },
+        { label: 'Age ≥45', points: -1 },
+      ],
+    },
+  ],
+  results: [
+    { min: -Infinity, max: 2, label: 'Score ≤1', risk: 'Low Risk', mortality: '~1-10% GAS likelihood. No rapid antigen test, no antibiotics. Symptomatic care (NSAID + APAP, salt-water gargle, ± single-dose dexamethasone for severe odynophagia). Always screen separately for dangerous mimics. Return precautions for drool, trismus, neck swelling, voice change, persistent fever >72h.', colorVar: '--color-primary' },
+    { min: 2, max: 4, label: 'Score 2-3', risk: 'Intermediate', mortality: '~10-35% GAS likelihood. Obtain rapid GAS antigen (or NAAT). Treat only if positive — first-line pen V 500 mg PO BID-TID × 10 days, or amoxicillin 1 g PO daily × 10 days. IDSA does not require back-up culture in adults with negative rapid antigen.', colorVar: '--color-warning' },
+    { min: 4, max: Infinity, label: 'Score ≥4', risk: 'High Risk', mortality: '~50-65% GAS likelihood. Obtain rapid GAS antigen; many protocols accept empiric treatment per local resistance pattern and follow-up reliability. Pen V 500 mg PO BID-TID × 10 days (first-line); amoxicillin 1 g PO daily × 10 days; benzathine PCN G 1.2 MU IM × 1 if adherence concern. PCN-allergic: cephalexin 500 mg PO BID × 10 days; severe allergy: clindamycin 300 mg PO TID × 10 days.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'McIsaac 5-point: fever +1, no cough +1, tender anterior cervical LAD +1, tonsillar exudate +1, age 3-14 +1 / 15-44 0 / ≥45 −1. Score ≤1 no test/no abx, 2-3 rapid antigen and treat if positive, ≥4 rapid antigen with empiric treatment per local protocol. Does not exclude dangerous mimics — screen separately.',
+  citations: [
+    'Shulman ST, et al. Clinical practice guideline for GAS pharyngitis: 2012 IDSA update. Clin Infect Dis. 2012;55(10):e86-e102.',
+    'McIsaac WJ, et al. Empirical validation of guidelines for the management of pharyngitis in children and adults. JAMA. 2004;291(13):1587-1595.',
+    'Centor RM, et al. The diagnosis of strep throat in adults in the emergency room. Med Decis Making. 1981;1(3):239-246.',
+    'Gerber MA, et al. Prevention of rheumatic fever and diagnosis and treatment of acute streptococcal pharyngitis: AHA scientific statement. Circulation. 2009;119(11):1541-1551.',
+  ],
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Weight-Based Dosing
   'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -36580,6 +36620,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'pd-hd-bridge': PD_HD_BRIDGE_CALCULATOR,
   // Pediatric Appendicitis
   'peds-appendicitis-score': PEDS_APPENDICITIS_SCORE_CALCULATOR,
+  // Adult Pharyngitis (Strep Throat)
+  'centor-mcisaac-score': CENTOR_MCISAAC_SCORE_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
