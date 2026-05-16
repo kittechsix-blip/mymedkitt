@@ -271,4 +271,5 @@ export const TREE_REGISTRY = {
   'peds-foreign-body': { prefix: 'PEDS_FB', entryNodeId: 'peds-fb-start', categoryId: 'pediatrics' },
   'peritoneal-dialysis': { prefix: 'PERITONEAL_DIALYSIS', entryNodeId: 'pd-start', categoryId: 'nephro-rheum-endo' },
   'adult-pharyngitis': { prefix: 'ADULT_PHARYNGITIS', entryNodeId: 'ap-start', categoryId: 'infectious-disease' },
+  'peds-ssti': { prefix: 'PEDS_SSTI', entryNodeId: 'pssti-start', categoryId: 'pediatrics' },
 };

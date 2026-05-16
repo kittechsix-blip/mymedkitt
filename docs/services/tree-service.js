@@ -717,6 +717,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/peds-osteomyelitis.js');
             return { nodes: m.PEDS_OSTEOMYELITIS_NODES, entryNodeId: 'osteo-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_OSTEOMYELITIS_MODULE_LABELS, citations: m.PEDS_OSTEOMYELITIS_CITATIONS, criticalActions: m.PEDS_OSTEOMYELITIS_CRITICAL_ACTIONS };
         },
+        'peds-ssti': async () => {
+            const m = await import('../data/trees/peds-ssti.js');
+            return { nodes: m.PEDS_SSTI_NODES, entryNodeId: 'pssti-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_SSTI_MODULE_LABELS, citations: m.PEDS_SSTI_CITATIONS, criticalActions: m.PEDS_SSTI_CRITICAL_ACTIONS };
+        },
         'copd-exacerbation': async () => {
             const m = await import('../data/trees/copd-exacerbation.js');
             return { nodes: m.COPD_EXACERBATION_NODES, entryNodeId: 'copd-start', categoryId: 'emergency-medicine', moduleLabels: m.COPD_EXACERBATION_MODULE_LABELS, citations: m.COPD_EXACERBATION_CITATIONS, criticalActions: m.COPD_EXACERBATION_CRITICAL_ACTIONS };

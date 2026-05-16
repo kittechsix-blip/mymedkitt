@@ -1989,6 +1989,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'osteo-start',
       },
       {
+        id: 'peds-ssti',
+        title: 'Skin and Soft Tissue Infections',
+        subtitle: 'Recognition \u2192 Purulent I&D \u2192 Cellulitis \u2192 Severe IV \u2192 Nec Fasc \u2192 Special Sites',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 19,
+        entryNodeId: 'pssti-start',
+      },
+      {
         id: 'peds-stec-hus',
         title: 'STEC/HUS',
         subtitle: 'Recognition → Workup → STEC Management → HUS Treatment → Disposition',
