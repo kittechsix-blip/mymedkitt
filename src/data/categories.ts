@@ -1989,6 +1989,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'stec-start',
       },
       {
+        id: 'peds-hypertensive-emergency',
+        title: 'Hypertensive Emergency (Peds)',
+        subtitle: 'Definitions → Workup → Secondary Causes → IV/PO Treatment → Disposition',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 15,
+        entryNodeId: 'phe-start',
+      },
+      {
         id: 'viral-myositis',
         title: 'Viral Myositis (BACM)',
         subtitle: 'Assessment → Presentation → Workup → Risk Stratification → Treatment',

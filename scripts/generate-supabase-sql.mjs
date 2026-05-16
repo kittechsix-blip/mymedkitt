@@ -84,6 +84,7 @@ const CROSS_LISTINGS = {
   'uti-peds':         [{ categoryId: 'emergency-medicine' }],
   'bronchiolitis':    [{ categoryId: 'emergency-medicine' }],
   'peds-fever':       [{ categoryId: 'emergency-medicine' }],
+  'peds-hypertensive-emergency': [{ categoryId: 'emergency-medicine' }],
   'neonatal-resus':   [{ categoryId: 'emergency-medicine' }],
   'chest-tube':       [{ categoryId: 'procedures', displayTitle: 'Tube Thoracostomy', displaySubtitle: 'Preparation → Insertion → Management', entryNodeId: 'ctube-anatomy' }],
   'priapism':         [{ categoryId: 'urology' }],

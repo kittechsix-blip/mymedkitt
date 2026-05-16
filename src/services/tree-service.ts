@@ -794,6 +794,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/peds-stec-hus.js');
       return { nodes: m.PEDS_STEC_HUS_NODES, entryNodeId: 'stec-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_STEC_HUS_MODULE_LABELS, citations: m.PEDS_STEC_HUS_CITATIONS, criticalActions: m.PEDS_STEC_HUS_CRITICAL_ACTIONS };
     },
+    'peds-hypertensive-emergency': async () => {
+      const m = await import('../data/trees/peds-hypertensive-emergency.js');
+      return { nodes: m.PEDS_HTN_EMERG_NODES, entryNodeId: 'phe-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_HTN_EMERG_MODULE_LABELS, citations: m.PEDS_HTN_EMERG_CITATIONS, criticalActions: m.PEDS_HTN_EMERG_CRITICAL_ACTIONS };
+    },
     'nail-bed-injuries': async () => {
       const m = await import('../data/trees/nail-bed-injuries.js');
       return { nodes: m.NAIL_BED_INJURIES_NODES, entryNodeId: 'nail-start', categoryId: 'procedures', moduleLabels: m.NAIL_BED_INJURIES_MODULE_LABELS, citations: m.NAIL_BED_INJURIES_CITATIONS, criticalActions: m.NAIL_BED_INJURIES_CRITICAL_ACTIONS };

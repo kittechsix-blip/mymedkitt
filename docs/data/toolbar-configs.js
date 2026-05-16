@@ -968,6 +968,14 @@ const TOOLBAR_CONFIGS = {
         { id: 'dialysis', label: 'Dialysis', icon: '💧', action: 'jump', target: 'hus-dialysis' },
         { id: 'abx-debate', label: 'Abx Debate', icon: '⚖️', action: 'jump', target: 'stec-abx-controversy' },
     ],
+    'peds-hypertensive-emergency': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'phe-steps-summary' },
+        { id: 'map', label: 'MAP Calc', icon: '🧮', action: 'calculator', target: 'map-calculator' },
+        { id: '25-rule', label: '25% Rule', icon: '📉', action: 'jump', target: 'phe-bp-reduction-rule' },
+        { id: 'iv-tx', label: 'IV Rx', icon: '💉', action: 'jump', target: 'phe-tx-emergency' },
+        { id: 'po-tx', label: 'PO Rx', icon: '💊', action: 'jump', target: 'phe-tx-urgency' },
+        { id: 'secondary', label: 'Secondary', icon: '🔍', action: 'jump', target: 'phe-secondary-causes' },
+    ],
     'peds-submersion': [
         { id: 'severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'peds-submersion-severity' },
         { id: 'prognosis', label: 'Prognosis', icon: '📋', action: 'calculator', target: 'peds-drowning-prognosis' },

@@ -137,6 +137,7 @@ export const TREE_REGISTRY = {
   'copd-exacerbation': { prefix: 'COPD_EXACERBATION', entryNodeId: 'copd-start',         categoryId: 'critical-care' },
   'septic-arthritis': { prefix: 'SEPTIC_ARTHRITIS',    entryNodeId: 'sa-start',           categoryId: 'orthopedics' },
   'peds-stec-hus':    { prefix: 'PEDS_STEC_HUS',       entryNodeId: 'stec-start',         categoryId: 'pediatrics' },
+  'peds-hypertensive-emergency': { prefix: 'PEDS_HTN_EMERG', entryNodeId: 'phe-start',     categoryId: 'pediatrics' },
   'nail-bed-injuries': { prefix: 'NAIL_BED_INJURIES', entryNodeId: 'nbi-start',          categoryId: 'orthopedics' },
   'eclampsia':        { prefix: 'ECLAMPSIA',           entryNodeId: 'ecl-start',          categoryId: 'ob-gyn' },
   'aortic-dissection': { prefix: 'AORTIC_DISSECTION', entryNodeId: 'ad-start',           categoryId: 'critical-care' },
