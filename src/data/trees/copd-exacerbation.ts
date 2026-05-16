@@ -1,5 +1,5 @@
 // MedKitt - COPD Exacerbation (Acute Exacerbation of COPD)
-// Sources: GOLD 2024, EMCrit IBCC AECOPD, UpToDate, EBMedicine, Cochrane Reviews
+// Sources: GOLD 2026 (Nov 2025), EMCrit IBCC AECOPD, UpToDate, EBMedicine, Cochrane Reviews, ACIP MMWR 2025
 // 6 modules: Initial Assessment -> Severity -> Bronchodilators/Steroids -> Antibiotics -> NIV/Intubation -> Disposition
 // ~28 nodes total
 
@@ -468,23 +468,23 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     id: 'copd-hfnc',
     type: 'info',
     module: 5,
-    title: 'HFNC as Alternative',
-    body: '**High-Flow Nasal Cannula (HFNC):**\n\n**Use when:**\n- BiPAP contraindicated (vomiting, facial issues)\n- BiPAP not tolerated\n- Not sick enough for BiPAP, but needs more than NC\n- Weaning from BiPAP\n\n**Settings:**\n- Flow: Start 40-50 L/min, maximize to 60 L/min as tolerated\n- FiO2: Titrate to SpO2 88-92%\n\n**Benefits:**\n- Better tolerated than BiPAP\n- Allows eating, speaking\n- Some PEEP effect (2-5 cm H2O)\n- Washes out dead space\n\n**Limitations:**\n- Less pressure support than BiPAP\n- Less effective for severe hypercapnia\n- Consider as bridge, not replacement for BiPAP in severe cases [1][2]',
-    citation: [1, 2],
+    title: 'HFNC: Now Formally Endorsed (GOLD 2026)',
+    body: '**High-Flow Nasal Cannula (HFNC):**\n\n**GOLD 2026 update:** HFNC is now formally endorsed as a salvage or comfort option for hypercapnic AECOPD patients who fail or cannot tolerate NIV (BiPAP). Previously HFNC was off-label/adjunctive; GOLD 2026 elevates it into the official escalation pathway. [13]\n\n**Use when:**\n- BiPAP contraindicated (vomiting, facial issues)\n- BiPAP failed or not tolerated (GOLD 2026 Level B)\n- Hypercapnic AECOPD as salvage or comfort option (GOLD 2026)\n- Not sick enough for BiPAP, but needs more than NC\n- Weaning from BiPAP\n\n**Settings (GOLD 2026):**\n- Flow: 30-60 L/min\n- FiO2: Titrate to SpO2 88-92%\n- Start 40-50 L/min, maximize as tolerated\n\n**Benefits:**\n- Better tolerated than BiPAP\n- Allows eating, speaking\n- Some PEEP effect (2-5 cm H2O)\n- Washes out dead space (reduces CO2 rebreathing)\n\n**Limitations:**\n- Less pressure support than BiPAP\n- Less effective for severe hypercapnia than BiPAP\n- Consider as bridge or salvage, not first-line in severe respiratory acidosis [1][2][13]',
+    citation: [1, 2, 13],
     treatment: {
       firstLine: {
         drug: 'HFNC',
-        dose: 'Flow 40-60 L/min, FiO2 to SpO2 88-92%',
+        dose: 'Flow 30-60 L/min, FiO2 to SpO2 88-92%',
         route: 'High-flow nasal cannula',
         frequency: 'Continuous',
         duration: 'Until ready to wean to NC',
-        notes: 'Maximize flow first for CO2 washout. Better tolerated than BiPAP. Second-line to BiPAP in severe AECOPD.',
+        notes: 'GOLD 2026 formally endorsed for hypercapnic AECOPD failing or intolerant of NIV. Maximize flow first for CO2 washout. Better tolerated than BiPAP.',
       },
       monitoring: 'Continuous SpO2, RR, work of breathing. Escalate to BiPAP if worsening or no improvement.',
     },
     next: 'copd-niv-response',
-  
-    summary: 'HFNC as bridge or when BiPAP contraindicated — flow 40-60 L/min, better tolerated but less pressure support',
+
+    summary: 'GOLD 2026 endorses HFNC for hypercapnic AECOPD failing/intolerant of NIV — flow 30-60 L/min, FiO2 to SpO2 88-92%',
   },
 
   {
@@ -583,25 +583,25 @@ export const COPD_EXACERBATION_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'Telemetry/Floor Admission',
-    body: '**Floor admission for moderate AECOPD:**\n\n**Orders:**\n- Supplemental O2 to SpO2 88-92%\n- [Albuterol](#/drug/albuterol-neb/copd) + [Ipratropium](#/drug/ipratropium-neb/copd) neb q4-6h scheduled, albuterol q2h PRN\n- [Prednisone](#/drug/prednisone/copd) 40 mg PO daily (5-day total course)\n- Antibiotics if indicated\n- Continue home maintenance inhalers\n\n**Monitoring:**\n- SpO2 checks q4h\n- RR assessment\n- Escalate to BiPAP if worsening\n\n**Before discharge:**\n- Inhaler technique education\n- Smoking cessation counseling\n- Action plan for future exacerbations\n- PCP follow-up within 7 days\n- Pulmonology referral if frequent exacerbations\n\n**Average length of stay:** 3-5 days',
-    recommendation: 'Telemetry/floor admission. Complete steroid course, bronchodilators, antibiotics if indicated. Discharge when stable on room air or baseline O2.',
+    body: '**Floor admission for moderate AECOPD:**\n\n**Orders:**\n- Supplemental O2 to SpO2 88-92%\n- [Albuterol](#/drug/albuterol-neb/copd) + [Ipratropium](#/drug/ipratropium-neb/copd) neb q4-6h scheduled, albuterol q2h PRN\n- [Prednisone](#/drug/prednisone/copd) 40 mg PO daily (5-day total course)\n- Antibiotics if indicated\n- Continue home maintenance inhalers\n- **Check blood eosinophil count** on admission (GOLD 2026 — guides discharge maintenance therapy)\n\n**Monitoring:**\n- SpO2 checks q4h\n- RR assessment\n- Escalate to BiPAP if worsening (or HFNC if NIV intolerant — GOLD 2026)\n\n**Before discharge (GOLD 2026 maintenance escalation):**\n- Inhaler technique education\n- Smoking cessation counseling\n- Action plan for future exacerbations\n- **Initiate or escalate to LABA/LAMA** after this single moderate/severe exacerbation (GOLD 2026 lowered threshold from ≥2 to 1) [13]\n- **If blood eos ≥300 cells/µL → escalate to LABA/LAMA/ICS triple therapy** (GOLD 2026 Level A) [13]\n- **If on triple therapy + eos ≥300 + ≥2 exac/yr → pulmonology referral for dupilumab/mepolizumab** (GOLD 2026 Level A) [13]\n- **RSV vaccine** if age ≥50 (GOLD 2026 + ACIP 2025 lowered from ≥60) [14]\n- Influenza + pneumococcal vaccination per ACIP\n- PCP follow-up within 7 days\n- Pulmonology referral if frequent exacerbations\n\n**Average length of stay:** 3-5 days',
+    recommendation: 'Telemetry/floor admission. Complete steroid course, bronchodilators, antibiotics if indicated. Check blood eos to guide GOLD 2026 maintenance escalation: LABA/LAMA after this single exacerbation; triple therapy if eos ≥300; biologics referral if still exacerbating. RSV vaccine if ≥50. Discharge when stable on room air or baseline O2.',
     confidence: 'recommended',
-    citation: [1, 2, 11],
-  
-    summary: 'Nebs q4-6h, prednisone 40mg PO daily x 5d total, escalate to BiPAP if worsening',
+    citation: [1, 2, 11, 13, 14],
+
+    summary: 'Nebs q4-6h, prednisone 5d, check eos — GOLD 2026: LABA/LAMA + triple if eos ≥300, RSV vax ≥50',
   },
 
   {
     id: 'copd-discharge',
     type: 'result',
     module: 6,
-    title: 'ED Discharge - Mild AECOPD',
-    body: '**Discharge criteria:**\n- Mild exacerbation\n- Returned to baseline or near-baseline\n- SpO2 >90% on room air (or baseline O2)\n- Able to take oral medications\n- Reliable follow-up\n- Adequate home support\n\n**Discharge medications:**\n- [Prednisone](#/drug/prednisone/copd) 40 mg PO daily x 5 days\n- Increase SABA frequency as needed\n- Antibiotics if criteria met (azithromycin 500 mg x 3d OR doxycycline 100 mg BID x 5d)\n- Continue home maintenance inhalers\n\n**Discharge instructions:**\n- Smoking cessation (most important intervention!)\n- Return if worsening dyspnea, fever, confusion\n- Flu + pneumococcal vaccination if due\n- PCP follow-up within 7 days\n\n**Red flags for return:**\n- Cannot speak in full sentences\n- Persistent dyspnea despite rescue inhaler\n- Fever >101F\n- New confusion or drowsiness [1][2][11][12]',
-    recommendation: 'ED discharge with 5-day prednisone, increased bronchodilators, antibiotics if indicated. PCP follow-up within 7 days. Smoking cessation counseling.',
+    title: 'ED Discharge - Mild AECOPD (GOLD 2026 Updated)',
+    body: '**Discharge criteria:**\n- Mild exacerbation\n- Returned to baseline or near-baseline\n- SpO2 >90% on room air (or baseline O2)\n- Able to take oral medications\n- Reliable follow-up\n- Adequate home support\n\n**Discharge medications:**\n- [Prednisone](#/drug/prednisone/copd) 40 mg PO daily x 5 days\n- Increase SABA frequency as needed\n- Antibiotics if criteria met (azithromycin 500 mg x 3d OR doxycycline 100 mg BID x 5d)\n- Continue home maintenance inhalers\n\n**GOLD 2026 — Maintenance Therapy Escalation (NEW):**\n\n**1. LABA/LAMA after a single moderate/severe exacerbation:**\nInitiate or escalate to LABA/LAMA combination inhaler after a **single** moderate/severe exacerbation requiring systemic steroids, antibiotics, an ED visit, or hospitalization. GOLD 2026 lowered this threshold from ≥2 exacerbations/year to 1. [13]\n\n**2. Blood eosinophils ≥300 cells/µL → add ICS (Level A):**\nCheck blood eosinophil count on this admission/visit. If **≥300 cells/µL**, escalate to LABA/LAMA/ICS **triple therapy** at discharge. GOLD 2026 Level A. [13]\n\n**3. Advanced biologics referral (eosinophilic COPD):**\n- **Dupilumab** and **mepolizumab** are now GOLD 2026 Level A recommendations for patients with eosinophilic COPD (≥300 eos), already on triple therapy, with ≥2 exacerbations/year. [13]\n- Refer to pulmonology for biologic consideration in this phenotype.\n\n**Discharge vaccine checklist (GOLD 2026 + ACIP 2025):**\n- Influenza vaccine (annual)\n- Pneumococcal vaccination per ACIP\n- **RSV vaccine** (Arexvy, Abrysvo, or mResvia) recommended for all COPD patients **age ≥50** per GOLD 2026 + ACIP 2025. Prior threshold was ≥60; lowered to 50 for adults with chronic lung disease. [14]\n- Tdap, COVID-19 per current ACIP schedule\n\n**Discharge instructions:**\n- Smoking cessation (most important intervention!)\n- Return if worsening dyspnea, fever, confusion\n- PCP follow-up within 7 days\n- Pulmonology referral if frequent exacerbations or eos ≥300\n\n**Red flags for return:**\n- Cannot speak in full sentences\n- Persistent dyspnea despite rescue inhaler\n- Fever >101F\n- New confusion or drowsiness [1][2][11][12][13][14]',
+    recommendation: 'ED discharge with 5-day prednisone, increased bronchodilators, antibiotics if indicated. GOLD 2026: initiate/escalate LABA/LAMA after this single exacerbation; if blood eos ≥300 → LABA/LAMA/ICS triple therapy and consider biologics referral. RSV vaccine if age ≥50. PCP follow-up within 7 days. Smoking cessation counseling.',
     confidence: 'recommended',
-    citation: [1, 2, 11, 12],
-  
-    summary: 'Prednisone 40mg x 5d, increase SABA, antibiotics if criteria met — PCP within 7d, smoking cessation',
+    citation: [1, 2, 11, 12, 13, 14],
+
+    summary: 'GOLD 2026: LABA/LAMA after 1 exacerbation; eos ≥300 → triple therapy; dupi/mepo Level A; RSV vaccine ≥50',
   },
 ];
 
@@ -629,4 +629,6 @@ export const COPD_EXACERBATION_CITATIONS: Citation[] = [
   { num: 10, text: 'Lightowler JV, et al. Non-invasive Positive Pressure Ventilation to Treat Respiratory Failure Resulting from Exacerbations of COPD. BMJ. 2003;326(7382):185.' },
   { num: 11, text: 'Wedzicha JA, et al. Management of COPD Exacerbations: A European Respiratory Society/American Thoracic Society Guideline. Eur Respir J. 2017;49(3):1600791.' },
   { num: 12, text: 'Criner GJ, et al. Prevention of Acute Exacerbations of COPD: American College of Chest Physicians and Canadian Thoracic Society Guideline. Chest. 2015;147(4):894-942.' },
+  { num: 13, text: 'Global Initiative for Chronic Obstructive Lung Disease (GOLD). 2026 Report: Global Strategy for Prevention, Diagnosis and Management of COPD. Released November 2025. https://goldcopd.org/2026-gold-report/' },
+  { num: 14, text: 'Britton CL, et al. ACIP Recommendations for Use of Respiratory Syncytial Virus Vaccine in Adults Aged 50-59 Years at Increased Risk for Severe RSV Disease — United States, 2025. MMWR Morb Mortal Wkly Rep. 2025;74. https://www.cdc.gov/mmwr/volumes/74/rr/rr7402a1.htm' },
 ];
