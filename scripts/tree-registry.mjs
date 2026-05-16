@@ -36,6 +36,7 @@ export const TREE_REGISTRY = {
   'uti-peds':         { prefix: 'UTI_PEDS',            entryNodeId: 'uti-start',          categoryId: 'pediatrics' },
   'peds-fever':       { prefix: 'PEDS_FEVER',          entryNodeId: 'pf-start',           categoryId: 'pediatrics' },
   'bronchiolitis':    { prefix: 'BRONCHIOLITIS',       entryNodeId: 'bronch-start',       categoryId: 'pediatrics' },
+  'peds-asthma-exacerbation': { prefix: 'PEDS_ASTHMA_EXACERBATION', entryNodeId: 'paa-start', categoryId: 'pediatrics' },
   'peds-constipation': { prefix: 'PEDS_CONSTIPATION', entryNodeId: 'peds-const-start',   categoryId: 'pediatrics' },
   'echo-epss':        { prefix: 'ECHO_EPSS',           entryNodeId: 'epss-start',         categoryId: 'us-rads' },
   'shoulder-dystocia':{ prefix: 'SHOULDER_DYSTOCIA',   entryNodeId: 'shoulder-start',     categoryId: 'ob-gyn' },

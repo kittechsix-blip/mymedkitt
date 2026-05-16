@@ -34920,6 +34920,84 @@ const CENTOR_MCISAAC_SCORE_CALCULATOR = {
         'Gerber MA, et al. Prevention of rheumatic fever and diagnosis and treatment of acute streptococcal pharyngitis: AHA scientific statement. Circulation. 2009;119(11):1541-1551.',
     ],
 };
+// -------------------------------------------------------------------
+// PRAM (Preschool Respiratory Assessment Measure) — Chalut 2000 / Ducharme 2008
+// -------------------------------------------------------------------
+const PRAM_SCORE_CALCULATOR = {
+    id: 'pram-score',
+    title: 'PRAM Score',
+    subtitle: 'Pediatric Respiratory Assessment Measure (Chalut/Ducharme)',
+    description: 'Validated 5-component, 0-12 point pediatric asthma severity score for children 2-17 years old. Use to risk-stratify treatment intensity and disposition. Sensitivity/specificity >85% for moderate-severe exacerbation. Recalculate at 60 minutes after initial treatment — trajectory matters more than absolute score. A silent chest or AMS overrides the score regardless of total points.',
+    fields: [
+        {
+            name: 'suprasternal',
+            label: 'Suprasternal retractions',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent', points: 0 },
+                { label: 'Present', points: 2 },
+            ],
+        },
+        {
+            name: 'scalene',
+            label: 'Scalene muscle contraction',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent', points: 0 },
+                { label: 'Present', points: 2 },
+            ],
+        },
+        {
+            name: 'air-entry',
+            label: 'Air entry',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Normal', points: 0 },
+                { label: 'Decreased at bases', points: 1 },
+                { label: 'Widespread decrease', points: 2 },
+                { label: 'Absent / minimal', points: 3 },
+            ],
+        },
+        {
+            name: 'wheezing',
+            label: 'Wheezing',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Absent', points: 0 },
+                { label: 'Expiratory only', points: 1 },
+                { label: 'Inspiratory + expiratory', points: 2 },
+                { label: 'Audible without stethoscope OR silent chest', points: 3 },
+            ],
+        },
+        {
+            name: 'spo2',
+            label: 'O\u2082 saturation on room air',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '\u226595%', points: 0 },
+                { label: '92-94%', points: 1 },
+                { label: '<92%', points: 2 },
+            ],
+        },
+    ],
+    results: [
+        { min: -Infinity, max: 4, label: 'PRAM 0-3', risk: 'Mild', mortality: 'Mild exacerbation. Albuterol MDI+spacer 4-8 puffs OR nebulized 0.15 mg/kg q20min x 3; oral dexamethasone 0.6 mg/kg (max 16 mg) x 1 dose (or prednisolone 1-2 mg/kg/d x 5d). O2 to keep SpO2 \u226592%. Reassess at 60 min. Most discharge home with action plan + PCP follow-up in 2-7 days.', colorVar: '--color-primary' },
+        { min: 4, max: 8, label: 'PRAM 4-7', risk: 'Moderate', mortality: 'Moderate exacerbation. Add ipratropium (<20 kg: 250 mcg / \u226520 kg: 500 mcg) nebulized with each of first 3 albuterol doses. IV or PO corticosteroid. O2 to SpO2 \u226592%. Reassess at 60 min — if PRAM remains 4-7 after maximal ED therapy, admit to floor for q2-4h albuterol, IV/PO steroid, monitoring.', colorVar: '--color-warning' },
+        { min: 8, max: Infinity, label: 'PRAM 8-12', risk: 'Severe / Life-Threatening', mortality: 'Severe or life-threatening exacerbation. Continuous nebulized albuterol 0.5 mg/kg/hr (10-20 mg/hr) + IV methylprednisolone 1-2 mg/kg + IV magnesium sulfate 25-75 mg/kg (max 2 g) over 20 min. IM epinephrine 0.01 mg/kg if SABA failing or anaphylaxis suspected. If refractory: IV terbutaline 10 mcg/kg load \u2192 0.1-10 mcg/kg/min infusion, heliox 70/30, NIV with ketamine sedation. Intubate with ketamine 1-2 mg/kg + roc 1.2 mg/kg only as last resort. Admit PICU.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'PRAM 0-3 mild / 4-7 moderate / 8-12 severe. Validated 2-17 years. A silent chest, AMS, or SpO2 <90% is life-threatening regardless of total score \u2014 clinical gestalt overrides. Recalculate at 60 min; trajectory > absolute score.',
+    citations: [
+        'Chalut DS, Ducharme FM, Davis GM. The Preschool Respiratory Assessment Measure (PRAM): a responsive index of acute asthma severity. J Pediatr. 2000;137(6):762-768.',
+        'Ducharme FM, Chalut D, Plotnick L, et al. The Pediatric Respiratory Assessment Measure: a valid clinical score for assessing acute asthma severity from toddlers to teenagers. J Pediatr. 2008;152(4):476-480.',
+        'Gouin S, Robidas I, Gravel J, Guimont C, Chalut D, Amre D. Prospective evaluation of two clinical scores for acute asthma in children 18 months to 7 years of age. Acad Emerg Med. 2010;17(6):598-603.',
+        'EB Medicine. Pediatric Acute Asthma Exacerbation: Evidence-Based Management in the Emergency Department. Pediatric Emergency Medicine Practice. Updated 2024.',
+    ],
+};
 const CALCULATORS = {
     // Weight-Based Dosing
     'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -35478,6 +35556,8 @@ const CALCULATORS = {
     'pd-hd-bridge': PD_HD_BRIDGE_CALCULATOR,
     // Pediatric Appendicitis
     'peds-appendicitis-score': PEDS_APPENDICITIS_SCORE_CALCULATOR,
+    // Pediatric Acute Asthma
+    'pram-score': PRAM_SCORE_CALCULATOR,
     // Adult Pharyngitis (Strep Throat)
     'centor-mcisaac-score': CENTOR_MCISAAC_SCORE_CALCULATOR,
 };
