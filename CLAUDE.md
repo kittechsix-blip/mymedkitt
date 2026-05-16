@@ -727,3 +727,17 @@ Implementation phases:
 - [ ] Phase 3: Dashboard & navigation (dashboard, specialty-view, contextual-toolbar, search)
 - [ ] Phase 4: Integration & wiring (app.ts routes, reused component adaptation)
 - [ ] Phase 5: Polish & cleanup (remove dead code, CSS cleanup, SW update, deploy)
+
+---
+
+## Multi-consult build queues: sequential dispatch only
+
+For any queue of 2+ consult builds, deploys, or audits in this repo:
+
+- Dispatch agents **strictly sequentially** (`Task` with `run_in_background: true`, then `TaskOutput` block before next)
+- Targeted `git add <files>` only — never `git add -A` / `git add .`
+- Verify Pages build for commit N succeeded (`gh run list`) before dispatching commit N+1
+- Known shared-state files (`src/services/cache-db.ts` DATA_VERSION, `docs/service-worker.js` CACHE_VERSION, `src/data/categories.ts`, `src/services/tree-service.ts`, `src/data/index.ts`, `supabase-hotfix-update.sql`) cannot tolerate parallel writers — they auto-bump or auto-regenerate and concurrent agents clobber each other
+- Known dead-agent dirty files frequently present: `myasthenia-gravis.ts`, `oncological-emergencies.ts`, `info-pages.ts` and their `docs/` compiled twins. Inspect via `git status --short` first; only stage when they're the explicit deploy target
+
+Full rationale: `~/Desktop/claude-brain/agent-instructions/agent-rules.md` (2026-05-16 entry). Reference clean run: c68ce8c → 6381d10 → badaf0e → e46c9d3 → 054274f → 620f2136 → fb5b155, 0 EDEADLK.

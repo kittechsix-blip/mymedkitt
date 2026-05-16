@@ -2893,6 +2893,17 @@ export const DEFAULT_CATEGORIES: Category[] = [
         nodeCount: 25,
         entryNodeId: 'ami-start',
       },
+      // Cross-listed from Pediatrics — canonical owner is 'pediatrics' (header/back-nav resolve there).
+      // Surgical disposition relevant to general/peds surgery teams; listed here for surgeon discoverability.
+      {
+        id: 'peds-appendicitis',
+        title: 'Pediatric Appendicitis (PAS Pathway)',
+        subtitle: 'Recognition → PAS Scoring → Workup → Imaging → Antibiotics → Disposition',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 16,
+        entryNodeId: 'pa-start',
+      },
     ],
     isCustom: false,
   },
