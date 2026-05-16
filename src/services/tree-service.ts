@@ -362,6 +362,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/peds-asthma-exacerbation.js');
       return { nodes: m.PEDS_ASTHMA_EXACERBATION_NODES, entryNodeId: 'paa-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_ASTHMA_EXACERBATION_MODULE_LABELS, citations: m.PEDS_ASTHMA_EXACERBATION_CITATIONS, criticalActions: m.PEDS_ASTHMA_EXACERBATION_CRITICAL_ACTIONS };
     },
+    'peds-dka': async () => {
+      const m = await import('../data/trees/peds-dka.js');
+      return { nodes: m.PEDS_DKA_NODES, entryNodeId: 'peds-dka-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_DKA_MODULE_LABELS, citations: m.PEDS_DKA_CITATIONS, criticalActions: m.PEDS_DKA_CRITICAL_ACTIONS };
+    },
     'peds-constipation': async () => {
       const m = await import('../data/trees/peds-constipation.js');
       return { nodes: m.PEDS_CONSTIPATION_NODES, entryNodeId: 'peds-const-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_CONSTIPATION_MODULE_LABELS, citations: m.PEDS_CONSTIPATION_CITATIONS, criticalActions: m.PEDS_CONSTIPATION_CRITICAL_ACTIONS };

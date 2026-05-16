@@ -36142,10 +36142,187 @@ const PRAM_SCORE_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Pediatric DKA Fluid Calculator (Formula-Based)
+// -------------------------------------------------------------------
+
+const PEDS_DKA_FLUID_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-dka-fluid-calc',
+  title: 'Pediatric DKA Fluid Calculator',
+  subtitle: 'Holliday-Segar maintenance + 5/7/10% deficit over 24-48h (PECARN-aligned)',
+  description: 'Computes maintenance (4-2-1 rule) + deficit by severity, subtracts initial boluses, and outputs hourly drip rate over 24h or 48h. ISPAD 2022 / PECARN FLUID Trial (NEJM 2018).',
+  fields: [
+    { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Weight in kg' },
+    {
+      name: 'severity',
+      label: 'DKA Severity (deficit %)',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Mild (5% deficit)', points: 5 },
+        { label: 'Moderate (7% deficit)', points: 7 },
+        { label: 'Severe (10% deficit)', points: 10 },
+      ],
+    },
+    {
+      name: 'replacement-window',
+      label: 'Replacement window',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Over 24 hours (PECARN fast arm)', points: 24 },
+        { label: 'Over 48 hours (PECARN slow arm / ISPAD)', points: 48 },
+      ],
+    },
+    { name: 'bolus-given', label: 'Initial bolus already given', type: 'number', points: 0, valueIsPoints: true, unit: 'mL', description: 'Total mL of resuscitation boluses already given' },
+  ],
+  results: [],
+  thresholdNote: 'PECARN FLUID Trial (NEJM 2018) showed fluid rate and NaCl content do NOT change neurologic outcomes. ISPAD 2022 endorses replacement over 24-48h. Reassess hourly; trend corrected Na (should rise as glucose falls).',
+  citations: [
+    'Glaser N et al. ISPAD Clinical Practice Consensus Guidelines 2022: DKA and HHS. Pediatr Diabetes. 2022;23(7):835-856.',
+    'Kuppermann N et al. Clinical Trial of Fluid Infusion Rates for Pediatric DKA (PECARN FLUID). N Engl J Med. 2018;378:2275-2287.',
+    'Holliday MA, Segar WE. Maintenance need for water in parenteral fluid therapy. Pediatrics. 1957;19(5):823-832.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const deficitPct = values['severity'] || 0;
+    const hours = values['replacement-window'] || 0;
+    const bolus = values['bolus-given'] || 0;
+
+    if (weight <= 0 || deficitPct <= 0 || hours <= 0) {
+      return {
+        value: '--',
+        label: 'Enter values',
+        description: 'Enter weight, severity, and replacement window to calculate fluid plan.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Holliday-Segar maintenance (mL/hr)
+    let maintHr = 0;
+    if (weight <= 10) {
+      maintHr = 4 * weight;
+    } else if (weight <= 20) {
+      maintHr = 40 + 2 * (weight - 10);
+    } else {
+      maintHr = 60 + 1 * (weight - 20);
+    }
+    const maint24 = maintHr * 24;
+    const maintTotal = maintHr * hours;
+
+    // Deficit (mL)
+    const deficitMl = weight * deficitPct * 10;
+
+    // Net replacement after subtracting bolus
+    const netDeficit = Math.max(0, deficitMl - bolus);
+    const totalVolume = maintTotal + netDeficit;
+    const dripRate = Math.round(totalVolume / hours);
+
+    const description = `**MAINTENANCE (Holliday-Segar 4-2-1):**\n- Hourly rate: **${maintHr} mL/hr**\n- 24h volume: ${maint24} mL\n\n**DEFICIT (${deficitPct}% of body weight):**\n- ${weight} kg × ${deficitPct}% × 10 = **${deficitMl} mL**\n- Less bolus given (${bolus} mL): **${netDeficit} mL** to replace\n\n**REPLACEMENT (${hours}h window):**\n- Maintenance over ${hours}h: ${maintTotal} mL\n- + Net deficit: ${netDeficit} mL\n- **Total: ${totalVolume} mL → drip rate ${dripRate} mL/hr**\n\n**FLUID:** 0.9% NS for first 4-6h (ISPAD), then 0.45% NS + 20-40 mEq/L KCl + dextrose per protocol. Add KCl once K <5.5 with UOP. PECARN: rate and Na content do NOT change neuro outcomes.`;
+
+    return {
+      value: `${dripRate} mL/hr`,
+      label: 'Drip Rate',
+      description,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Muir Cerebral Edema Criteria Calculator (Weighted Sum)
+// -------------------------------------------------------------------
+
+const MUIR_CEREBRAL_EDEMA_CALCULATOR: CalculatorDefinition = {
+  id: 'muir-cerebral-edema',
+  title: 'Muir Cerebral Edema Criteria',
+  subtitle: 'Bedside diagnosis of cerebral edema in pediatric DKA (92% sens, 96% spec)',
+  description: 'Toggle each criterion present. Diagnose if ANY 1 diagnostic OR ANY 2 major OR 1 major + 2 minor are met. Muir AB et al. Diabetes Care 2004;27(7):1541-6.',
+  fields: [
+    // Diagnostic criteria (each worth 100 points — any one alone = diagnosis)
+    { name: 'd-motor-verbal', label: 'Abnormal motor or verbal response to pain', type: 'toggle', points: 100, description: 'DIAGNOSTIC criterion' },
+    { name: 'd-posturing', label: 'Decorticate or decerebrate posturing', type: 'toggle', points: 100, description: 'DIAGNOSTIC criterion' },
+    { name: 'd-cranial-nerve', label: 'Cranial nerve palsy (especially III, IV, VI)', type: 'toggle', points: 100, description: 'DIAGNOSTIC criterion' },
+    { name: 'd-respiratory', label: 'Abnormal neurogenic respiratory pattern (grunting, Cheyne-Stokes, apneusis)', type: 'toggle', points: 100, description: 'DIAGNOSTIC criterion' },
+    // Major criteria (each 10 points — any 2 = diagnosis)
+    { name: 'm-altered', label: 'Altered mentation / fluctuating LOC', type: 'toggle', points: 10, description: 'MAJOR criterion' },
+    { name: 'm-bradycardia', label: 'Sustained HR deceleration >20 bpm (not from volume/sleep)', type: 'toggle', points: 10, description: 'MAJOR criterion' },
+    { name: 'm-incontinence', label: 'Age-inappropriate incontinence', type: 'toggle', points: 10, description: 'MAJOR criterion' },
+    // Minor criteria (each 1 point — 1 major + 2 minor = diagnosis)
+    { name: 'mi-vomiting', label: 'Vomiting (recurrence after initial improvement)', type: 'toggle', points: 1, description: 'MINOR criterion' },
+    { name: 'mi-headache', label: 'Headache', type: 'toggle', points: 1, description: 'MINOR criterion' },
+    { name: 'mi-lethargy', label: 'Lethargy / difficult to arouse', type: 'toggle', points: 1, description: 'MINOR criterion' },
+    { name: 'mi-dbp', label: 'Diastolic BP >90 mmHg', type: 'toggle', points: 1, description: 'MINOR criterion' },
+    { name: 'mi-age', label: 'Age <5 years', type: 'toggle', points: 1, description: 'MINOR criterion' },
+  ],
+  results: [],
+  thresholdNote: 'Diagnose cerebral edema if: ANY 1 diagnostic OR ANY 2 major OR 1 major + 2 minor. Sensitivity 92%, specificity 96% (Muir 2004). Treat IMMEDIATELY — do not wait for imaging (~40% of initial CTs are normal in CE).',
+  citations: [
+    'Muir AB, Quisling RG, Yang MC, Rosenbloom AL. Cerebral edema in childhood diabetic ketoacidosis: natural history, radiographic findings, and early identification. Diabetes Care. 2004;27(7):1541-1546.',
+    'Glaser N et al. Risk factors for cerebral edema in children with DKA. NEJM. 2001;344(4):264-269.',
+    'Glaser N et al. ISPAD Clinical Practice Consensus Guidelines 2022: DKA and HHS. Pediatr Diabetes. 2022;23(7):835-856.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    // Each toggle field: values[name] returns the points if ON (100/10/1), 0 if OFF
+    const diagnosticPts = (values['d-motor-verbal'] || 0) + (values['d-posturing'] || 0)
+      + (values['d-cranial-nerve'] || 0) + (values['d-respiratory'] || 0);
+    const majorPts = (values['m-altered'] || 0) + (values['m-bradycardia'] || 0) + (values['m-incontinence'] || 0);
+    const minorPts = (values['mi-vomiting'] || 0) + (values['mi-headache'] || 0) + (values['mi-lethargy'] || 0)
+      + (values['mi-dbp'] || 0) + (values['mi-age'] || 0);
+
+    const diagnosticCount = diagnosticPts / 100;
+    const majorCount = majorPts / 10;
+    const minorCount = minorPts; // 1 pt each
+
+    let diagnosed = false;
+    let triggerLabel = '';
+
+    if (diagnosticCount >= 1) {
+      diagnosed = true;
+      triggerLabel = `${diagnosticCount} diagnostic criterion${diagnosticCount > 1 ? 's' : ''}`;
+    } else if (majorCount >= 2) {
+      diagnosed = true;
+      triggerLabel = `${majorCount} major criteria`;
+    } else if (majorCount >= 1 && minorCount >= 2) {
+      diagnosed = true;
+      triggerLabel = `1 major + ${minorCount} minor criteria`;
+    }
+
+    if (diagnosed) {
+      return {
+        value: 'CEREBRAL EDEMA',
+        label: 'Treat Immediately',
+        description: `**CRITERIA MET (${triggerLabel}):**\n${diagnosticCount} diagnostic / ${majorCount} major / ${minorCount} minor.\n\n**ACT NOW — do not wait for imaging:**\n1. Elevate head of bed to 30°\n2. Mannitol 0.5-1 g/kg IV over 10-15 min **OR** 3% NaCl 5-10 mL/kg IV over 30 min\n3. Intubate if GCS <8 or rapidly declining\n4. Reduce IV fluid rate by 1/3 (do NOT stop insulin)\n5. Head CT after stabilization\n6. PICU transfer + neurosurgery consult\n\n**Sens 92% / Spec 96% (Muir 2004).** ~40% of initial CTs are normal in CE — diagnosis is clinical.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    const total = diagnosticCount + majorCount + minorCount;
+    if (total === 0) {
+      return {
+        value: '0',
+        label: 'No Criteria',
+        description: 'No Muir criteria currently met. Continue routine q1-2h neuro checks; recheck after any change in mental status, vomiting, headache, or sustained vital sign trend.',
+        colorVar: '--color-primary',
+      };
+    }
+
+    return {
+      value: `${diagnosticCount}D / ${majorCount}M / ${minorCount}m`,
+      label: 'Sub-threshold — Watch Closely',
+      description: `**Criteria present but below diagnostic threshold:**\n${diagnosticCount} diagnostic / ${majorCount} major / ${minorCount} minor.\n\n**NOT YET DIAGNOSTIC — but lower threshold to treat:**\n- Recheck q30-60 min while symptoms present\n- Document trend; deterioration → treat as cerebral edema\n- Consider PICU even without full criteria if 1 major + 1 minor + age <5 + new-onset + pH <7.10\n- Bedside mannitol and 3% NaCl should be drawn up and ready`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Weight-Based Dosing
   'weight-dose': WEIGHT_DOSE_CALCULATOR,
   'peds-dose': PEDS_DOSE_CALCULATOR,
+  // Pediatric DKA
+  'peds-dka-fluid-calc': PEDS_DKA_FLUID_CALCULATOR,
+  'muir-cerebral-edema': MUIR_CEREBRAL_EDEMA_CALCULATOR,
   // Pacemaker / ICD
   'pm-device-id': PM_DEVICE_ID_CALCULATOR,
   'pm-nbg-decoder': PM_NBG_DECODER_CALCULATOR,
