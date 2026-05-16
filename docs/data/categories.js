@@ -1996,7 +1996,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'peds-hypertensive-emergency',
-                title: 'Hypertensive Emergency (Peds)',
+                title: 'Hypertensive Emergency',
                 subtitle: 'Definitions → Workup → Secondary Causes → IV/PO Treatment → Disposition',
                 categoryId: 'pediatrics',
                 version: '1.0',
@@ -2005,7 +2005,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'peds-appendicitis',
-                title: 'Pediatric Appendicitis (PAS Pathway)',
+                title: 'Appendicitis (PAS Pathway)',
                 subtitle: 'Recognition → PAS Scoring → Workup → Imaging → Antibiotics → Disposition',
                 categoryId: 'pediatrics',
                 version: '1.0',
@@ -2014,7 +2014,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'peds-electrolyte-emergencies',
-                title: 'Electrolyte Emergencies (Peds)',
+                title: 'Electrolyte Emergencies',
                 subtitle: 'Triage → Identify → Na/K/Ca/Glucose Pathways → Disposition',
                 categoryId: 'pediatrics',
                 version: '1.0',
