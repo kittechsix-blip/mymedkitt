@@ -1995,6 +1995,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'phe-start',
             },
             {
+                id: 'peds-appendicitis',
+                title: 'Pediatric Appendicitis (PAS Pathway)',
+                subtitle: 'Recognition → PAS Scoring → Workup → Imaging → Antibiotics → Disposition',
+                categoryId: 'pediatrics',
+                version: '1.0',
+                nodeCount: 16,
+                entryNodeId: 'pa-start',
+            },
+            {
                 id: 'viral-myositis',
                 title: 'Viral Myositis (BACM)',
                 subtitle: 'Assessment → Presentation → Workup → Risk Stratification → Treatment',

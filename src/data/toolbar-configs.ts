@@ -990,6 +990,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'po-tx', label: 'PO Rx', icon: '💊', action: 'jump', target: 'phe-tx-urgency' },
     { id: 'secondary', label: 'Secondary', icon: '🔍', action: 'jump', target: 'phe-secondary-causes' },
   ],
+  'peds-appendicitis': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'pa-steps-summary' },
+    { id: 'pas', label: 'PAS Calc', icon: '🧮', action: 'calculator', target: 'peds-appendicitis-score' },
+    { id: 'imaging', label: 'Imaging', icon: '🩻', action: 'jump', target: 'pa-imaging-strategy' },
+    { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'jump', target: 'pa-antibiotics' },
+    { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'pa-dispo' },
+    { id: 'pitfalls', label: 'Pitfalls', icon: '⚠️', action: 'jump', target: 'pa-pitfalls' },
+  ],
   'peds-submersion': [
     { id: 'severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'peds-submersion-severity' },
     { id: 'prognosis', label: 'Prognosis', icon: '📋', action: 'calculator', target: 'peds-drowning-prognosis' },

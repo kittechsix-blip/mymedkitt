@@ -34851,6 +34851,37 @@ const PD_HD_BRIDGE_CALCULATOR = {
         'Mehrotra R, et al. The current state of peritoneal dialysis. J Am Soc Nephrol. 2016;27(11):3238-3252.',
     ],
 };
+// -------------------------------------------------------------------
+// Pediatric Appendicitis Score (PAS) — Samuel 2002
+// -------------------------------------------------------------------
+const PEDS_APPENDICITIS_SCORE_CALCULATOR = {
+    id: 'peds-appendicitis-score',
+    title: 'Pediatric Appendicitis Score (PAS)',
+    subtitle: 'Samuel 2002 — 10-point pediatric appendicitis risk',
+    description: 'Validated 10-point clinical score to risk-stratify children 4-15 years old with suspected appendicitis. Sensitivity ~88%, specificity ~50%. Use to guide imaging and disposition; does NOT replace clinical judgment. Limited validation in children <5 years old.',
+    fields: [
+        { name: 'rlq-tender', label: 'RLQ tenderness', type: 'toggle', points: 2 },
+        { name: 'cough-pain', label: 'Pain with cough, percussion, or hopping', type: 'toggle', points: 2 },
+        { name: 'migration', label: 'Migration of pain to RLQ', type: 'toggle', points: 1 },
+        { name: 'anorexia', label: 'Anorexia', type: 'toggle', points: 1 },
+        { name: 'nausea-vomit', label: 'Nausea or vomiting', type: 'toggle', points: 1 },
+        { name: 'fever', label: 'Fever ≥38°C (100.4°F)', type: 'toggle', points: 1 },
+        { name: 'leukocytosis', label: 'WBC ≥10,000/μL', type: 'toggle', points: 1 },
+        { name: 'neutrophilia', label: 'PMN >7,500/μL', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: -Infinity, max: 4, label: 'PAS ≤3', risk: 'Low Risk', mortality: '~2% appendicitis rate. Consider discharge with return precautions and 12-24h recheck if exam reassuring. Imaging usually NOT needed. Low PAS does NOT exclude appendicitis — keep clinical suspicion.', colorVar: '--color-primary' },
+        { min: 4, max: 7, label: 'PAS 4-6', risk: 'Intermediate', mortality: '~30% appendicitis rate. Imaging indicated — graded compression US first. MRI if equivocal. Serial exams + repeat imaging if non-diagnostic. Admit for observation if symptoms persist.', colorVar: '--color-warning' },
+        { min: 7, max: Infinity, label: 'PAS ≥7', risk: 'High Risk', mortality: '~80% appendicitis rate. Surgical consult + confirmatory imaging (US first). Preop antibiotics within 1 hour if confirmed. NPO, IVF, antiemetic, pain control.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'PAS ≤3 low (~2%) / 4-6 equivocal (~30%) / ≥7 high (~80%). Poor sensitivity in <5yo — have a lower threshold to image regardless of score. Reassess in 4-6h if observing; PAS can move categories.',
+    citations: [
+        'Samuel M. Pediatric appendicitis score. J Pediatr Surg. 2002;37(6):877-881.',
+        'Goldman RD, et al. Prospective validation of the pediatric appendicitis score. J Pediatr. 2008;153(2):278-282.',
+        'Saucier A, et al. Prospective evaluation of a clinical pathway for suspected appendicitis. Pediatrics. 2014;133(1):e88-95.',
+        'Di Saverio S, et al. Diagnosis and treatment of acute appendicitis: 2020 update of the WSES Jerusalem guidelines. World J Emerg Surg. 2020;15(1):27.',
+    ],
+};
 const CALCULATORS = {
     // Weight-Based Dosing
     'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -35407,6 +35438,8 @@ const CALCULATORS = {
     'pd-peritonitis-dx': PD_PERITONITIS_DX_CALCULATOR,
     'pd-empiric-abx': PD_EMPIRIC_ABX_CALCULATOR,
     'pd-hd-bridge': PD_HD_BRIDGE_CALCULATOR,
+    // Pediatric Appendicitis
+    'peds-appendicitis-score': PEDS_APPENDICITIS_SCORE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
