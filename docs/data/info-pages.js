@@ -17571,6 +17571,37 @@ const MG_IVIG_PLEX = {
         { num: 2, text: 'Farmakidis C, et al. Treatment of Myasthenia Gravis. Neurol Clin. 2018;36(2):311-337.' },
     ],
 };
+const MG_NEWER_MAINTENANCE = {
+    id: 'mg-newer-maintenance-therapies',
+    title: 'Newer MG Maintenance Therapies',
+    subtitle: 'What ED Clinicians Should Know About FcRn and Complement Inhibitors',
+    sections: [
+        {
+            heading: 'Why This Matters in the ED',
+            body: 'A growing number of MG patients are on **newer outpatient maintenance drugs** (FcRn inhibitors, complement inhibitors). These are NOT crisis therapies — **IVIG, PLEX, and corticosteroids remain first-line for myasthenic crisis**.\n\n**ED relevance:**\n• Recognize what these drugs do, when they were last given, and what side-effect risks they carry\n• Complement inhibitors carry a **CRITICAL meningococcal sepsis risk** — must consider in any febrile patient on these agents\n• FcRn inhibitors transiently lower IgG — patients may be more susceptible to certain infections in the days after infusion\n• These drugs do NOT replace acute crisis management — escalate as usual',
+        },
+        {
+            heading: 'FcRn Inhibitors (Efgartigimod, Rozanolixizumab)',
+            body: '**Mechanism:** Block the neonatal Fc receptor (FcRn), which normally recycles IgG. Blocking it accelerates IgG catabolism, lowering circulating IgG — including **pathogenic anti-AChR autoantibodies** (≈60-70% reduction). Effect is transient and reversible.\n\n**Typical schedule:**\n• **Efgartigimod (Vyvgart):** Weekly IV infusion × 4 weeks per cycle, then cycle repeated based on response (typically every 4-8 weeks). SC formulation (efgartigimod alfa/hyaluronidase, "Vyvgart Hytrulo") also available, weekly × 4.\n• **Rozanolixizumab (Rystiggo):** Weekly SC × 6 weeks per cycle.\n\n**ED considerations:**\n• Last infusion timing matters — nadir IgG occurs ~1-2 weeks after start of cycle\n• Generally **lower infection risk** than complement inhibitors or broad immunosuppression\n• Mild headache, URI, UTI most common adverse events\n• Immunogenicity (anti-drug antibodies) possible but rarely changes acute ED management\n• Live vaccines should be avoided during therapy — relevant for travel/exposure questions\n• No specific empiric antibiotic mandate based on this drug alone',
+        },
+        {
+            heading: 'Complement Inhibitors (Eculizumab, Ravulizumab, Zilucoplan)',
+            body: '**Mechanism:** Block terminal complement at C5, preventing C5b-9 membrane attack complex formation at the NMJ.\n• **Eculizumab (Soliris):** IV every 2 weeks\n• **Ravulizumab (Ultomiris):** IV every 8 weeks (long-acting C5 inhibitor)\n• **Zilucoplan (Zilbrysq):** Daily SC (small-molecule C5 inhibitor)\n\n**⚠️ CRITICAL ED PEARL — MENINGOCOCCAL SEPSIS RISK:**\n• Terminal complement is the primary defense against **encapsulated organisms, especially Neisseria meningitidis**\n• These drugs carry a **black-box warning** for meningococcal infection\n• Patients must be vaccinated against meningococcus (MenACWY + MenB) at least 2 weeks before starting, and many take prophylactic penicillin/macrolide\n• **Any febrile patient on a complement inhibitor must be presumed to have N. meningitidis sepsis until proven otherwise**\n• Other encapsulated organism risk (gonococcus, H. influenzae) is also elevated\n\n**ED action if suspected infection in patient on eculizumab/ravulizumab/zilucoplan:**\n• Empiric **[Ceftriaxone](#/drug/ceftriaxone) 2 g IV** immediately — do NOT wait for cultures\n• Blood cultures, LP if any meningeal/CNS concern\n• Low threshold for ICU admission and aggressive resuscitation — these patients can decompensate fast',
+        },
+        {
+            heading: 'What to Ask in the ED',
+            body: '**Quick history checklist for any MG patient on newer therapies:**\n\n• **Which drug, last dose, and date of last cycle?** (Efgartigimod cycles, ravulizumab q8w infusion, etc.)\n• **Meningococcal vaccination status?** (MenACWY + MenB — both required for complement inhibitors)\n• **On prophylactic antibiotic?** (Penicillin VK or macrolide — common with complement inhibitors)\n• **Current signs of infection?** Fever, headache, neck stiffness, sore throat, dysuria, rash\n• **Recent infusion reactions or new neurologic symptoms?**\n\n**Bottom line:** These are MAINTENANCE drugs. They do not change the acute approach to crisis (IVIG/PLEX/airway/steroids per main consult). They DO change your infection workup and antibiotic threshold — especially for complement inhibitors.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Howard JF Jr, Bril V, Vu T, et al. Safety, efficacy, and tolerability of efgartigimod in patients with generalised myasthenia gravis (ADAPT): a multicentre, randomised, placebo-controlled, phase 3 trial. Lancet Neurol. 2021;20(7):526-536.' },
+        { num: 2, text: 'Howard JF Jr, Utsugisawa K, Benatar M, et al. Safety and efficacy of eculizumab in anti-acetylcholine receptor antibody-positive refractory generalised myasthenia gravis (REGAIN): a phase 3, randomised, double-blind, placebo-controlled, multicentre study. Lancet Neurol. 2017;16(12):976-986.' },
+        { num: 3, text: 'Bril V, Drużdż A, Grosskreutz J, et al. Safety and efficacy of rozanolixizumab in patients with generalised myasthenia gravis (MycarinG): a randomised, double-blind, placebo-controlled, adaptive phase 3 study. Lancet Neurol. 2023;22(5):383-394.' },
+        { num: 4, text: 'Howard JF Jr, Bresch S, Genge A, et al. Safety and efficacy of zilucoplan in adults with generalised myasthenia gravis (RAISE): a randomised, double-blind, placebo-controlled, phase 3 study. Lancet Neurol. 2023;22(5):395-406.' },
+        { num: 5, text: 'McNamara LA, Topaz N, Wang X, et al. High Risk for Invasive Meningococcal Disease Among Patients Receiving Eculizumab (Soliris) Despite Receipt of Meningococcal Vaccine. MMWR Morb Mortal Wkly Rep. 2017;66(27):734-737.' },
+        { num: 6, text: 'Wolfe GI, Kaminski HJ, Aban IB, et al. Randomized Trial of Thymectomy in Myasthenia Gravis (MGTX). N Engl J Med. 2016;375(6):511-522.' },
+    ],
+};
 // -------------------------------------------------------------------
 // Kratom Withdrawal Reference Pages
 // -------------------------------------------------------------------
@@ -22310,6 +22341,7 @@ export const INFO_PAGES = {
     'mg-drugs-avoid': MG_DRUGS_AVOID,
     'mg-pyridostigmine': MG_PYRIDOSTIGMINE,
     'mg-ivig-plex': MG_IVIG_PLEX,
+    'mg-newer-maintenance-therapies': MG_NEWER_MAINTENANCE,
     // Kratom Withdrawal
     'kw-pharmacology': KW_PHARMACOLOGY,
     'kw-timeline-chart': KW_TIMELINE_CHART,

@@ -428,8 +428,8 @@ export const MYASTHENIA_GRAVIS_NODES: DecisionNode[] = [
     type: 'question',
     module: 9,
     title: 'Disposition',
-    body: 'Disposition depends on presentation severity and response to treatment.\n\n**Consider:**\n• Respiratory status (FVC, NIF)\n• Bulbar function (swallowing, secretion management)\n• Response to initial treatment\n• Ability to manage at home (medication compliance, follow-up)\n• Social support',
-    citation: [1, 2],
+    body: '[Newer MG Maintenance Therapies (FcRn & Complement Inhibitors)](#/info/mg-newer-maintenance-therapies) — clinician reference: what to ask, complement-inhibitor meningococcal sepsis risk.\n\nDisposition depends on presentation severity and response to treatment.\n\n**Consider:**\n• Respiratory status (FVC, NIF)\n• Bulbar function (swallowing, secretion management)\n• Response to initial treatment\n• Ability to manage at home (medication compliance, follow-up)\n• Social support',
+    citation: [1, 2, 6, 7],
     options: [
       {
         label: 'ICU — myasthenic crisis',
@@ -516,4 +516,7 @@ export const MYASTHENIA_GRAVIS_CITATIONS: Citation[] = [
   { num: 3, text: 'Farmakidis C, Pasnoor M, Dimachkie MM, Barohn RJ. Treatment of Myasthenia Gravis. Neurol Clin. 2018;36(2):311-337.' },
   { num: 4, text: 'Gilhus NE. Myasthenia Gravis. N Engl J Med. 2016;375(26):2570-2581.' },
   { num: 5, text: 'Wolfe GI, Kaminski HJ, Aban IB, et al. Randomized Trial of Thymectomy in Myasthenia Gravis (MGTX). N Engl J Med. 2016;375(6):511-522.' },
+  { num: 6, text: 'Howard JF Jr, Bril V, Vu T, et al. Safety, efficacy, and tolerability of efgartigimod in patients with generalised myasthenia gravis (ADAPT): a multicentre, randomised, placebo-controlled, phase 3 trial. Lancet Neurol. 2021;20(7):526-536.' },
+  { num: 7, text: 'Howard JF Jr, Utsugisawa K, Benatar M, et al. Safety and efficacy of eculizumab in anti-acetylcholine receptor antibody-positive refractory generalised myasthenia gravis (REGAIN): a phase 3, randomised, double-blind, placebo-controlled, multicentre study. Lancet Neurol. 2017;16(12):976-986.' },
+  { num: 8, text: 'McNamara LA, Topaz N, Wang X, et al. High Risk for Invasive Meningococcal Disease Among Patients Receiving Eculizumab (Soliris) Despite Receipt of Meningococcal Vaccine. MMWR Morb Mortal Wkly Rep. 2017;66(27):734-737.' },
 ];

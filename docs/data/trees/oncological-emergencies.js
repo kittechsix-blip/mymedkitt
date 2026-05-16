@@ -51,6 +51,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
                 label: 'AMS / weakness / polyuria / nausea',
                 description: 'Breast/lung/myeloma → suspect hypercalcemia of malignancy',
                 next: 'onc-hyperca-recognize',
+                urgency: 'critical',
             },
             {
                 label: 'Back pain ± neuro deficit',
@@ -62,6 +63,7 @@ export const ONCOLOGICAL_EMERGENCIES_NODES = [
                 label: 'Facial/upper extremity swelling, dyspnea',
                 description: 'Lung cancer/lymphoma — suspect SVC syndrome',
                 next: 'onc-svc-recognize',
+                urgency: 'critical',
             },
             {
                 label: 'Markedly elevated WBC + symptoms',
