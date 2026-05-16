@@ -2004,6 +2004,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'pa-start',
             },
             {
+                id: 'peds-electrolyte-emergencies',
+                title: 'Electrolyte Emergencies (Peds)',
+                subtitle: 'Triage → Identify → Na/K/Ca/Glucose Pathways → Disposition',
+                categoryId: 'pediatrics',
+                version: '1.0',
+                nodeCount: 22,
+                entryNodeId: 'pee-start',
+            },
+            {
                 id: 'viral-myositis',
                 title: 'Viral Myositis (BACM)',
                 subtitle: 'Assessment → Presentation → Workup → Risk Stratification → Treatment',

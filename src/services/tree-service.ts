@@ -802,6 +802,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/peds-appendicitis.js');
       return { nodes: m.PEDS_APPENDICITIS_NODES, entryNodeId: 'pa-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_APPENDICITIS_MODULE_LABELS, citations: m.PEDS_APPENDICITIS_CITATIONS, criticalActions: m.PEDS_APPENDICITIS_CRITICAL_ACTIONS };
     },
+    'peds-electrolyte-emergencies': async () => {
+      const m = await import('../data/trees/peds-electrolyte-emergencies.js');
+      return { nodes: m.PEDS_ELECTROLYTE_NODES, entryNodeId: 'pee-start', categoryId: 'pediatrics', moduleLabels: m.PEDS_ELECTROLYTE_MODULE_LABELS, citations: m.PEDS_ELECTROLYTE_CITATIONS, criticalActions: m.PEDS_ELECTROLYTE_CRITICAL_ACTIONS };
+    },
     'nail-bed-injuries': async () => {
       const m = await import('../data/trees/nail-bed-injuries.js');
       return { nodes: m.NAIL_BED_INJURIES_NODES, entryNodeId: 'nail-start', categoryId: 'procedures', moduleLabels: m.NAIL_BED_INJURIES_MODULE_LABELS, citations: m.NAIL_BED_INJURIES_CITATIONS, criticalActions: m.NAIL_BED_INJURIES_CRITICAL_ACTIONS };

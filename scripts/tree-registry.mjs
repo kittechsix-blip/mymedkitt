@@ -139,6 +139,7 @@ export const TREE_REGISTRY = {
   'peds-stec-hus':    { prefix: 'PEDS_STEC_HUS',       entryNodeId: 'stec-start',         categoryId: 'pediatrics' },
   'peds-hypertensive-emergency': { prefix: 'PEDS_HTN_EMERG', entryNodeId: 'phe-start',     categoryId: 'pediatrics' },
   'peds-appendicitis': { prefix: 'PEDS_APPENDICITIS',  entryNodeId: 'pa-start',           categoryId: 'pediatrics' },
+  'peds-electrolyte-emergencies': { prefix: 'PEDS_ELECTROLYTE', entryNodeId: 'pee-start', categoryId: 'pediatrics' },
   'nail-bed-injuries': { prefix: 'NAIL_BED_INJURIES', entryNodeId: 'nbi-start',          categoryId: 'orthopedics' },
   'eclampsia':        { prefix: 'ECLAMPSIA',           entryNodeId: 'ecl-start',          categoryId: 'ob-gyn' },
   'aortic-dissection': { prefix: 'AORTIC_DISSECTION', entryNodeId: 'ad-start',           categoryId: 'critical-care' },

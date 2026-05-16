@@ -992,6 +992,15 @@ const TOOLBAR_CONFIGS = {
         { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'pa-dispo' },
         { id: 'pitfalls', label: 'Pitfalls', icon: '⚠️', action: 'jump', target: 'pa-pitfalls' },
     ],
+    'peds-electrolyte-emergencies': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'pee-steps-summary' },
+        { id: 'corr-na', label: 'Corr Na', icon: '🧮', action: 'calculator', target: 'corrected-na' },
+        { id: 'fwd', label: 'FW Deficit', icon: '💧', action: 'calculator', target: 'fwd' },
+        { id: 'corr-ca', label: 'Corr Ca', icon: '🦴', action: 'calculator', target: 'corrected-calcium' },
+        { id: 'hyper-k', label: 'HyperK Rx', icon: '⚡', action: 'jump', target: 'pee-hyper-k-treatment' },
+        { id: 'hypo-na', label: '3% Saline', icon: '🧂', action: 'jump', target: 'pee-hypo-na-symptomatic' },
+        { id: 'hypoglyc', label: 'D10/D25', icon: '🍬', action: 'jump', target: 'pee-hypoglycemia' },
+    ],
     'peds-submersion': [
         { id: 'severity', label: 'Severity', icon: '📊', action: 'calculator', target: 'peds-submersion-severity' },
         { id: 'prognosis', label: 'Prognosis', icon: '📋', action: 'calculator', target: 'peds-drowning-prognosis' },
