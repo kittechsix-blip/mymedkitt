@@ -86,6 +86,7 @@ const CROSS_LISTINGS = {
   'peds-fever':       [{ categoryId: 'emergency-medicine' }],
   'peds-hypertensive-emergency': [{ categoryId: 'emergency-medicine' }],
   'peds-appendicitis': [{ categoryId: 'pediatrics' }],
+  'terrestrial-envenomation': [{ categoryId: 'toxicology' }],
   'neonatal-resus':   [{ categoryId: 'emergency-medicine' }],
   'chest-tube':       [{ categoryId: 'procedures', displayTitle: 'Tube Thoracostomy', displaySubtitle: 'Preparation → Insertion → Management', entryNodeId: 'ctube-anatomy' }],
   'priapism':         [{ categoryId: 'urology' }],

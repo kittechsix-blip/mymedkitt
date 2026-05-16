@@ -929,6 +929,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'other', label: 'Other', icon: '🐙', action: 'jump', target: 'marine-other' },
     { id: 'systemic', label: 'Systemic', icon: '💉', action: 'jump', target: 'marine-systemic' },
   ],
+  'terrestrial-envenomation': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'te-steps-summary' },
+    { id: 'spider', label: 'Spider', icon: '🕷️', action: 'jump', target: 'te-spider-which' },
+    { id: 'scorpion', label: 'Scorpion', icon: '🦂', action: 'jump', target: 'te-scorpion-grade' },
+    { id: 'anascorp', label: 'Anascorp', icon: '💉', action: 'jump', target: 'te-scorpion-tx' },
+    { id: 'anaphylaxis', label: 'Anaphylaxis', icon: '🚨', action: 'jump', target: 'te-hymenoptera-anaphylaxis' },
+    { id: 'massive', label: 'Massive', icon: '⚠️', action: 'jump', target: 'te-massive' },
+  ],
   'massive-hemoptysis': [
     { id: 'position', label: 'Position', icon: '🛏️', action: 'jump', target: 'hemo-positioning' },
     { id: 'txa', label: 'TXA', icon: '💉', action: 'jump', target: 'hemo-txa' },

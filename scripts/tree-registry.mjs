@@ -154,6 +154,7 @@ export const TREE_REGISTRY = {
   'brugada-syndrome': { prefix: 'BRUGADA_SYNDROME',    entryNodeId: 'brugada-start',      categoryId: 'cardiology' },
   'hd-emergencies':   { prefix: 'HD_EMERGENCIES',      entryNodeId: 'hde-start',          categoryId: 'nephro-rheum-endo' },
   'marine-envenomation': { prefix: 'MARINE_ENVENOMATION', entryNodeId: 'me-start',       categoryId: 'toxicology' },
+  'terrestrial-envenomation': { prefix: 'TERRESTRIAL_ENVENOMATION', entryNodeId: 'te-start', categoryId: 'toxicology' },
   'button-battery':   { prefix: 'BUTTON_BATTERY',      entryNodeId: 'bb-batt-start',      categoryId: 'pediatrics' },
   'nat-screening':    { prefix: 'NAT_SCREENING',       entryNodeId: 'nat-start',          categoryId: 'pediatrics' },
   'massive-hemoptysis': { prefix: 'MASSIVE_HEMOPTYSIS', entryNodeId: 'mh-start',         categoryId: 'critical-care' },
