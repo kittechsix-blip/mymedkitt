@@ -322,7 +322,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'ecmo',
-                title: 'ECMO',
+                title: 'Extracorporeal Membrane Oxygenation (ECMO)',
                 subtitle: 'VV vs VA → Indications → Cannulation → Complications → Scores → Communication',
                 categoryId: 'critical-care',
                 version: '1.0',
@@ -412,7 +412,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'dic',
-                title: 'DIC',
+                title: 'Disseminated Intravascular Coagulation (DIC)',
                 subtitle: 'Recognition \u2192 ISTH/JAAM/SIC \u2192 Etiology \u2192 Hemostatic Resus \u2192 Anticoag \u2192 Disposition',
                 categoryId: 'critical-care',
                 version: '1.0',
@@ -967,8 +967,8 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'ttp',
-                title: 'TTP',
-                subtitle: 'Thrombotic Thrombocytopenic Purpura',
+                title: 'Thrombotic Thrombocytopenic Purpura (TTP)',
+                subtitle: 'Recognition → PLASMIC Score → ADAMTS13 → Plasma Exchange → Caplacizumab → Disposition',
                 categoryId: 'heme-onc',
                 version: '1.0',
                 nodeCount: 30,
@@ -976,7 +976,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'dic',
-                title: 'DIC',
+                title: 'Disseminated Intravascular Coagulation (DIC)',
                 subtitle: 'Recognition \u2192 ISTH/JAAM/SIC \u2192 Etiology \u2192 Hemostatic Resus \u2192 Anticoag \u2192 Disposition',
                 categoryId: 'heme-onc',
                 version: '1.0',
@@ -2023,7 +2023,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'peds-stec-hus',
-                title: 'STEC/HUS',
+                title: 'Shiga Toxin E. coli / Hemolytic Uremic Syndrome (STEC/HUS)',
                 subtitle: 'Recognition → Workup → STEC Management → HUS Treatment → Disposition',
                 categoryId: 'pediatrics',
                 version: '1.0',

@@ -98,6 +98,25 @@ async function mergeHardcodedConsults() {
         if (missing.length > 0) {
             cached.decisionTrees.push(...missing);
         }
+        // Update stale rows from hardcoded source of truth. Stale =
+        // title equals id (slug never replaced), missing subtitle, or
+        // mismatched nodeCount. Fixes FlowRider 2026-05-17 finding where
+        // post-tonsillectomy-bleed rendered as raw slug.
+        for (const hTree of hCat.decisionTrees) {
+            const idx = cached.decisionTrees.findIndex(t => t.id === hTree.id);
+            if (idx === -1)
+                continue;
+            const cTree = cached.decisionTrees[idx];
+            const stale = cTree.title === cTree.id ||
+                !cTree.title ||
+                (!!hTree.subtitle && !cTree.subtitle) ||
+                (typeof hTree.nodeCount === 'number' &&
+                    typeof cTree.nodeCount === 'number' &&
+                    hTree.nodeCount !== cTree.nodeCount);
+            if (stale) {
+                cached.decisionTrees[idx] = { ...cTree, ...hTree };
+            }
+        }
     }
 }
 /** Initialize category data. Called once at app boot. */

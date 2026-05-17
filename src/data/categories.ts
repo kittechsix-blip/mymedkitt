@@ -2026,7 +2026,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'peds-stec-hus',
-        title: 'STEC/HUS',
+        title: 'Shiga Toxin E. coli / Hemolytic Uremic Syndrome (STEC/HUS)',
         subtitle: 'Recognition → Workup → STEC Management → HUS Treatment → Disposition',
         categoryId: 'pediatrics',
         version: '1.0',
