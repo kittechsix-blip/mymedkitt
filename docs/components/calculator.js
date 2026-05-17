@@ -35160,6 +35160,146 @@ const MUIR_CEREBRAL_EDEMA_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// PE RISK CATEGORY A-E (2026 AHA/ACC)
+// -------------------------------------------------------------------
+const PE_RISK_CATEGORY_CALCULATOR = {
+    id: 'pe-risk-category',
+    title: 'PE Risk Category (A-E)',
+    subtitle: '2026 AHA/ACC Pulmonary Embolism Severity Classification',
+    description: 'The 2026 AHA/ACC framework replaces old massive/submassive terminology with a 5-category system (A-E) based on hemodynamics, RV strain, biomarkers, and clinical severity. Category determines reperfusion strategy.',
+    fields: [
+        { name: 'sbp90', label: 'SBP < 90 mmHg (sustained > 15 min) or vasopressor required', type: 'toggle', points: 100, description: 'Category E criterion — overrules all others' },
+        { name: 'arrest', label: 'Cardiac arrest from PE', type: 'toggle', points: 100, description: 'Category E criterion' },
+        { name: 'preArrest', label: 'Pre-arrest: HR < 40, transient hypotension, or rapid deterioration', type: 'toggle', points: 50, description: 'Category D criterion — bradycardia is most ominous' },
+        { name: 'lactate', label: 'Lactate > 2 mmol/L', type: 'toggle', points: 10, description: '10% absolute mortality increase, HR 12 for death' },
+        { name: 'rvDysfunction', label: 'RV dysfunction on echo or CT (RV/LV > 1.0)', type: 'toggle', points: 5 },
+        { name: 'troponin', label: 'Elevated troponin', type: 'toggle', points: 4 },
+        { name: 'bnp', label: 'Elevated BNP/NT-proBNP', type: 'toggle', points: 3 },
+        { name: 'pesi', label: 'PESI > 85 (Class III+) or sPESI ≥ 1', type: 'toggle', points: 2 },
+    ],
+    results: [
+        { min: -Infinity, max: 2, label: 'Category A', risk: 'Very Low Risk', mortality: '30-day mortality < 1%', colorVar: '--color-primary' },
+        { min: 2, max: 5, label: 'Category B', risk: 'Low Risk', mortality: '30-day mortality 1-3%', colorVar: '--color-primary' },
+        { min: 5, max: 50, label: 'Category C', risk: 'Intermediate Risk', mortality: '30-day mortality 3-15% — Activate PERT', colorVar: '--color-warning' },
+        { min: 50, max: 100, label: 'Category D', risk: 'Pre-Failure (high-risk)', mortality: '30-day mortality > 15% — Reperfusion candidate', colorVar: '--color-danger' },
+        { min: 100, max: Infinity, label: 'Category E', risk: 'Cardiopulmonary Failure', mortality: '30-day mortality 25-50% — Immediate reperfusion', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Category D-E → activate PERT, prepare reperfusion (thrombolysis / mechanical thrombectomy / ECMO). Category C → PERT + ICU monitoring. Category A-B → anticoagulation alone.',
+    citations: [
+        '2026 AHA/ACC Guideline for Management of Acute Pulmonary Embolism. Circulation. 2026.',
+        'Konstantinides SV, et al. 2019 ESC Guidelines for Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603.',
+        'Vanni S, et al. Prognostic Value of Plasma Lactate Levels Among Patients With Acute Pulmonary Embolism. Am J Med. 2013;126(11):1015.e1-1015.e7.',
+    ],
+    computeResult: (v) => {
+        if (v['sbp90'] || v['arrest']) {
+            return { value: 'E', label: 'Category E — Cardiopulmonary Failure', description: '**Immediate reperfusion indicated.** Mortality > 25%. Thrombolysis (alteplase 100 mg over 2h, or 50 mg IV bolus if arrest) OR mechanical thrombectomy / ECMO if available. Activate PERT NOW. Avoid intubation and fluid loading.', colorVar: '--color-danger' };
+        }
+        if (v['preArrest']) {
+            return { value: 'D', label: 'Category D — Pre-Failure', description: '**Reperfusion candidate.** Mortality > 15%. HR < 40 is the most ominous sign. Strongly consider thrombolysis or mechanical thrombectomy. Activate PERT immediately. Norepinephrine for any BP drop.', colorVar: '--color-danger' };
+        }
+        const intermediatePoints = (v['lactate'] || 0) + (v['rvDysfunction'] || 0) + (v['troponin'] || 0) + (v['bnp'] || 0) + (v['pesi'] || 0);
+        if (intermediatePoints >= 5) {
+            return { value: 'C', label: 'Category C — Intermediate Risk', description: '**Activate PERT.** RV dysfunction + biomarkers. UFH preferred (allows rapid escalation). Mechanical thrombectomy now preferred over CDT (PEERLESS 2026) if intervention needed. ICU monitoring for deterioration.', colorVar: '--color-warning' };
+        }
+        if (intermediatePoints >= 2) {
+            return { value: 'B', label: 'Category B — Low Risk', description: 'Normotensive, no RV strain. Standard anticoagulation. Consider DOAC. Outpatient management possible if HESTIA criteria met.', colorVar: '--color-primary' };
+        }
+        return { value: 'A', label: 'Category A — Very Low Risk', description: 'No risk markers. Outpatient anticoagulation (apixaban or rivaroxaban). Consider HESTIA / Geneva for outpatient eligibility.', colorVar: '--color-primary' };
+    },
+};
+// -------------------------------------------------------------------
+// ALTEPLASE PE DOSING (LYSIS TOOL)
+// -------------------------------------------------------------------
+const ALTEPLASE_PE_DOSING_CALCULATOR = {
+    id: 'alteplase-pe-dosing',
+    title: 'Alteplase / Tenecteplase Lysis Dosing',
+    subtitle: 'Systemic Thrombolysis for Acute PE (2026 AHA/ACC)',
+    description: 'Selects optimal lytic dose for acute PE based on clinical scenario and weight. Includes alteplase standard, reduced-dose, cardiac arrest bolus, and tenecteplase weight-based single bolus options.',
+    fields: [
+        { name: 'scenario', label: 'Clinical scenario', type: 'select', points: 0, selectOptions: [
+                { label: 'Standard massive PE (Category D-E, stable enough for 2h infusion)', points: 1 },
+                { label: 'Reduced-dose (intermediate-high risk, bleeding concern)', points: 2 },
+                { label: 'Cardiac arrest / peri-arrest', points: 3 },
+                { label: 'Tenecteplase single bolus (alternative)', points: 4 },
+            ] },
+        { name: 'weight', label: 'Patient weight', type: 'number', points: 0, unit: 'kg', description: 'Used for tenecteplase weight-based dosing' },
+        { name: 'priorHemorrhage', label: 'Prior intracranial hemorrhage or AVM', type: 'toggle', points: 100, description: 'Absolute contraindication' },
+        { name: 'recentStroke', label: 'Ischemic stroke within 3 months', type: 'toggle', points: 100, description: 'Absolute contraindication' },
+        { name: 'activeBleed', label: 'Active major bleeding', type: 'toggle', points: 100, description: 'Absolute contraindication' },
+        { name: 'recentSurgery', label: 'Major surgery within 3 weeks', type: 'toggle', points: 50, description: 'Relative contraindication' },
+        { name: 'age75', label: 'Age > 75 years', type: 'toggle', points: 10, description: 'Higher bleeding risk — consider reduced-dose' },
+    ],
+    results: [
+        { min: 0, max: 100, label: 'Eligible', risk: 'Proceed per dose protocol', mortality: '', colorVar: '--color-primary' },
+        { min: 100, max: Infinity, label: 'CONTRAINDICATED', risk: 'Use mechanical thrombectomy or ECMO instead', mortality: '', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'UFH WITHOUT bolus if lysis imminent. Give lytic BEFORE heparin to reduce bleeding risk.',
+    citations: [
+        '2026 AHA/ACC Guideline for Management of Acute Pulmonary Embolism. Circulation. 2026.',
+        'HI-PEITHO Investigators. Reduced-Dose tPA with Ultrasound-Facilitated CDT vs Anticoagulation Alone for Intermediate-High Risk PE. 2026.',
+        'Sharifi M, et al. MOPETT Trial: Moderate Pulmonary Embolism Treated With Thrombolysis. Am J Cardiol. 2013;111(2):273-7.',
+        'Meyer G, et al. PEITHO: Fibrinolysis for Patients with Intermediate-Risk PE. N Engl J Med. 2014;370(15):1402-1411.',
+    ],
+    computeResult: (v) => {
+        const contraindicated = (v['priorHemorrhage'] || 0) + (v['recentStroke'] || 0) + (v['activeBleed'] || 0);
+        if (contraindicated >= 100) {
+            return { value: 'STOP', label: 'Thrombolysis Contraindicated', description: '**Absolute contraindication present.** Do NOT give systemic lytic. Options:\n- Mechanical thrombectomy (FlowTriever/Inari — preferred per PEERLESS 2026)\n- Catheter-directed thrombolysis (lower bleeding risk than systemic)\n- ECMO as bridge\n- Surgical embolectomy if center capable', colorVar: '--color-danger' };
+        }
+        const relativeRisk = (v['recentSurgery'] || 0) + (v['age75'] || 0);
+        const scenario = v['scenario'] || 0;
+        const wt = v['weight'] || 0;
+        if (scenario === 3) {
+            return { value: '50 mg IV bolus', label: 'Cardiac Arrest Dose', description: '**Alteplase 50 mg IV BOLUS** + sustained CPR for ≥ 60 min after bolus.\n\n• Push over 1-2 minutes through peripheral or central line\n• Continue CPR 60-90 min minimum (lytic needs circulation time)\n• Consider second 50 mg bolus at 15 min if no ROSC\n• Activate ECMO team in parallel if available\n• Heparin AFTER lytic if ROSC achieved', colorVar: '--color-danger' };
+        }
+        if (scenario === 4) {
+            let dose = '50 mg';
+            if (wt < 60)
+                dose = '30 mg';
+            else if (wt < 70)
+                dose = '35 mg';
+            else if (wt < 80)
+                dose = '40 mg';
+            else if (wt < 90)
+                dose = '45 mg';
+            return { value: dose, label: 'Tenecteplase Single Bolus', description: `**Tenecteplase ${dose} IV bolus over 5-10 seconds** (off-label for PE).\n\nWeight-based dosing:\n• < 60 kg → 30 mg\n• 60-69 kg → 35 mg\n• 70-79 kg → 40 mg\n• 80-89 kg → 45 mg\n• ≥ 90 kg → 50 mg\n\nAdvantages: single bolus, no infusion, similar mortality to alteplase. Higher major bleeding signal in some studies — use with caution. Heparin AFTER bolus.`, colorVar: '--color-warning' };
+        }
+        if (scenario === 2 || relativeRisk >= 10) {
+            return { value: '50 mg over 2h', label: 'Reduced-Dose Alteplase', description: '**Alteplase 50 mg IV over 2 hours** (10 mg bolus, then 40 mg infusion).\n\nIndications:\n• Intermediate-high risk PE (Category C with decompensation)\n• Age > 75 or relative bleeding risk\n• HI-PEITHO 2026 supports reduced-dose for intermediate-high risk\n• MOPETT showed mortality benefit at this dose\n\nHold heparin during infusion; resume after when aPTT < 2× control.', colorVar: '--color-warning' };
+        }
+        return { value: '100 mg over 2h', label: 'Standard Alteplase', description: '**Alteplase 100 mg IV over 2 hours**\n\n• 10-20 mg bolus over 1-2 min\n• Remaining 80-90 mg over 2 hours\n• UFH WITHOUT bolus during infusion; low-dose ≤ 500 U/hr OK\n• Give alteplase BEFORE heparin to reduce bleeding\n• Resume full heparin when aPTT < 2× control after infusion\n• Monitor for hemorrhage q15 min × 2h, then q30 min × 6h', colorVar: '--color-primary' };
+    },
+};
+// -------------------------------------------------------------------
+// PE RESUSCITATION CHECKLIST
+// -------------------------------------------------------------------
+const PE_RESUS_CHECKLIST_CALCULATOR = {
+    id: 'pe-resus-checklist',
+    title: 'Crashing PE Resus Checklist',
+    subtitle: 'Bedside Action List for Category D-E PE',
+    description: 'Real-time checklist for the crashing PE patient. Each item earns 1 point — aim for all 8 in the first 15 minutes. AVOID standard shock resuscitation (intubation worsens RV, fluids worsen RV failure).',
+    fields: [
+        { name: 'highFlowO2', label: 'High-flow O₂ (NRB 15 L/min or HFNC) applied', type: 'toggle', points: 1, description: '100% O₂ is a pulmonary vasodilator — first move' },
+        { name: 'avoidIntubation', label: 'Intubation deferred or limited to refractory hypoxia', type: 'toggle', points: 1, description: 'Positive pressure ↓ RV preload + ↑ RV afterload' },
+        { name: 'norepi', label: 'Norepinephrine started early (target MAP > 65)', type: 'toggle', points: 1, description: 'Push-dose phenylephrine 100-200 mcg as bridge' },
+        { name: 'noFluids', label: 'Fluids limited to ≤ 500 mL (or stopped)', type: 'toggle', points: 1, description: 'Volume worsens RV failure unless clearly hypovolemic' },
+        { name: 'pertActivated', label: 'PERT activated (cardiology / IR / CT surgery / ECMO)', type: 'toggle', points: 1, description: 'Class 1 recommendation 2026 AHA/ACC' },
+        { name: 'lyticReady', label: 'Alteplase or tenecteplase at bedside / drawn up', type: 'toggle', points: 1, description: 'Even if not yet given — ready for deterioration' },
+        { name: 'ufhStarted', label: 'UFH started without bolus (if no lytic given yet)', type: 'toggle', points: 1, description: '≤ 500 U/hr if lytic imminent — full dose otherwise' },
+        { name: 'echoDone', label: 'Bedside echo done (RV strain, McConnell, D-sign)', type: 'toggle', points: 1, description: 'Confirms RV dysfunction + rules out other shock' },
+    ],
+    results: [
+        { min: -Infinity, max: 4, label: '< 4/8', risk: 'Incomplete resuscitation', mortality: 'Reassess and complete missing items', colorVar: '--color-danger' },
+        { min: 4, max: 7, label: '4-6/8', risk: 'Partial resuscitation', mortality: 'Complete remaining items', colorVar: '--color-warning' },
+        { min: 7, max: Infinity, label: '7-8/8', risk: 'Full Bundle Complete', mortality: 'Reassess every 5-10 min until reperfusion', colorVar: '--color-primary' },
+    ],
+    thresholdNote: 'Bundle target: all 8 items within the first 15 min for Category D-E PE. Re-check after every intervention.',
+    citations: [
+        '2026 AHA/ACC Guideline for Management of Acute Pulmonary Embolism. Circulation. 2026.',
+        'Weingart S, EMCrit Crashing PE protocol.',
+        'Konstantinides SV, et al. 2019 ESC Guidelines for Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603.',
+    ],
+};
 const CALCULATORS = {
     // Weight-Based Dosing
     'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -35381,6 +35521,9 @@ const CALCULATORS = {
     '4at': FOUR_AT_CALCULATOR,
     'pesi': PESI_CALCULATOR,
     'spesi': SPESI_CALCULATOR,
+    'pe-risk-category': PE_RISK_CATEGORY_CALCULATOR,
+    'alteplase-pe-dosing': ALTEPLASE_PE_DOSING_CALCULATOR,
+    'pe-resus-checklist': PE_RESUS_CHECKLIST_CALCULATOR,
     'cha2ds2vasc': CHA2DS2VASC_CALCULATOR,
     'nihss': NIHSS_CALCULATOR,
     'timi': TIMI_CALCULATOR,
