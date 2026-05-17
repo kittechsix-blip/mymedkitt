@@ -35213,61 +35213,133 @@ const PE_RISK_CATEGORY_CALCULATOR = {
 // -------------------------------------------------------------------
 const ALTEPLASE_PE_DOSING_CALCULATOR = {
     id: 'alteplase-pe-dosing',
-    title: 'Alteplase / Tenecteplase Lysis Dosing',
-    subtitle: 'Systemic Thrombolysis for Acute PE (2026 AHA/ACC)',
-    description: 'Selects optimal lytic dose for acute PE based on clinical scenario and weight. Includes alteplase standard, reduced-dose, cardiac arrest bolus, and tenecteplase weight-based single bolus options.',
+    title: 'PE Lysis & Reperfusion by Category',
+    subtitle: 'Rapid Treatment Guideline per PE Category A–E (2026 AHA/ACC)',
+    description: 'Pick the PE category (A → E) — get the rapid treatment protocol for that severity. Covers anticoagulation, systemic lysis (full / reduced / cardiac-arrest bolus), tenecteplase weight-based dosing, catheter-directed therapy, mechanical thrombectomy, and ECMO. Contraindication gates flip the recommendation to mechanical reperfusion.',
     fields: [
-        { name: 'scenario', label: 'Clinical scenario', type: 'select', points: 0, selectOptions: [
-                { label: 'Standard massive PE (Category D-E, stable enough for 2h infusion)', points: 1 },
-                { label: 'Reduced-dose (intermediate-high risk, bleeding concern)', points: 2 },
-                { label: 'Cardiac arrest / peri-arrest', points: 3 },
-                { label: 'Tenecteplase single bolus (alternative)', points: 4 },
+        { name: 'category', label: 'PE Category (from Risk Category A–E)', type: 'select', points: 0, selectOptions: [
+                { label: 'A — Low risk (PESI I–II, normal RV, normal troponin)', points: 1 },
+                { label: 'B — Intermediate-low (RV strain OR + troponin, hemodynamically stable)', points: 2 },
+                { label: 'C — Intermediate-high (RV strain AND + troponin, ± lactate, stable BP)', points: 3 },
+                { label: 'D — Pre-arrest / decompensating (SBP < 90, lactate > 4, rising HR, mottled)', points: 4 },
+                { label: 'E — Cardiac arrest / peri-arrest', points: 5 },
             ] },
-        { name: 'weight', label: 'Patient weight', type: 'number', points: 0, unit: 'kg', description: 'Used for tenecteplase weight-based dosing' },
-        { name: 'priorHemorrhage', label: 'Prior intracranial hemorrhage or AVM', type: 'toggle', points: 100, description: 'Absolute contraindication' },
-        { name: 'recentStroke', label: 'Ischemic stroke within 3 months', type: 'toggle', points: 100, description: 'Absolute contraindication' },
-        { name: 'activeBleed', label: 'Active major bleeding', type: 'toggle', points: 100, description: 'Absolute contraindication' },
-        { name: 'recentSurgery', label: 'Major surgery within 3 weeks', type: 'toggle', points: 50, description: 'Relative contraindication' },
-        { name: 'age75', label: 'Age > 75 years', type: 'toggle', points: 10, description: 'Higher bleeding risk — consider reduced-dose' },
+        { name: 'weight', label: 'Patient weight (kg)', type: 'number', points: 0, unit: 'kg', description: 'Used for tenecteplase weight-based ladder (Cat C/D alt)' },
+        { name: 'priorHemorrhage', label: 'Prior ICH or known AVM', type: 'toggle', points: 100, description: 'Absolute contraindication to systemic lysis' },
+        { name: 'recentStroke', label: 'Ischemic stroke within 3 months', type: 'toggle', points: 100, description: 'Absolute contraindication to systemic lysis' },
+        { name: 'activeBleed', label: 'Active major bleeding', type: 'toggle', points: 100, description: 'Absolute contraindication to systemic lysis' },
+        { name: 'recentSurgery', label: 'Major surgery within 3 weeks', type: 'toggle', points: 50, description: 'Relative — prefer CDT or mechanical' },
+        { name: 'age75', label: 'Age > 75 years', type: 'toggle', points: 10, description: 'Higher bleeding risk — prefer reduced-dose' },
     ],
     results: [
-        { min: 0, max: 100, label: 'Eligible', risk: 'Proceed per dose protocol', mortality: '', colorVar: '--color-primary' },
-        { min: 100, max: Infinity, label: 'CONTRAINDICATED', risk: 'Use mechanical thrombectomy or ECMO instead', mortality: '', colorVar: '--color-danger' },
+        { min: 0, max: 100, label: 'Protocol Ready', risk: 'Follow category-specific plan below', mortality: '', colorVar: '--color-primary' },
+        { min: 100, max: Infinity, label: 'Systemic Lysis Contraindicated', risk: 'Route to mechanical reperfusion', mortality: '', colorVar: '--color-danger' },
     ],
-    thresholdNote: 'UFH WITHOUT bolus if lysis imminent. Give lytic BEFORE heparin to reduce bleeding risk.',
+    thresholdNote: 'UFH WITHOUT bolus once lysis is imminent. Give lytic BEFORE full heparin. Activate PERT for Category C and above.',
     citations: [
         '2026 AHA/ACC Guideline for Management of Acute Pulmonary Embolism. Circulation. 2026.',
-        'HI-PEITHO Investigators. Reduced-Dose tPA with Ultrasound-Facilitated CDT vs Anticoagulation Alone for Intermediate-High Risk PE. 2026.',
-        'Sharifi M, et al. MOPETT Trial: Moderate Pulmonary Embolism Treated With Thrombolysis. Am J Cardiol. 2013;111(2):273-7.',
-        'Meyer G, et al. PEITHO: Fibrinolysis for Patients with Intermediate-Risk PE. N Engl J Med. 2014;370(15):1402-1411.',
+        'Konstantinides SV, et al. 2019 ESC Guidelines for Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603.',
+        'PEERLESS Investigators. Mechanical Thrombectomy vs Catheter-Directed Thrombolysis for Intermediate-High Risk PE. 2026.',
+        'HI-PEITHO Investigators. Reduced-Dose tPA with USAT vs Anticoagulation Alone for Intermediate-High Risk PE. 2026.',
+        'Sharifi M, et al. MOPETT Trial: Moderate PE Treated With Thrombolysis. Am J Cardiol. 2013;111(2):273-7.',
+        'Meyer G, et al. PEITHO: Fibrinolysis for Intermediate-Risk PE. N Engl J Med. 2014;370(15):1402-1411.',
     ],
     computeResult: (v) => {
-        const contraindicated = (v['priorHemorrhage'] || 0) + (v['recentStroke'] || 0) + (v['activeBleed'] || 0);
-        if (contraindicated >= 100) {
-            return { value: 'STOP', label: 'Thrombolysis Contraindicated', description: '**Absolute contraindication present.** Do NOT give systemic lytic. Options:\n- Mechanical thrombectomy (FlowTriever/Inari — preferred per PEERLESS 2026)\n- Catheter-directed thrombolysis (lower bleeding risk than systemic)\n- ECMO as bridge\n- Surgical embolectomy if center capable', colorVar: '--color-danger' };
-        }
-        const relativeRisk = (v['recentSurgery'] || 0) + (v['age75'] || 0);
-        const scenario = v['scenario'] || 0;
+        const cat = v['category'] || 0;
         const wt = v['weight'] || 0;
-        if (scenario === 3) {
-            return { value: '50 mg IV bolus', label: 'Cardiac Arrest Dose', description: '**Alteplase 50 mg IV BOLUS** + sustained CPR for ≥ 60 min after bolus.\n\n• Push over 1-2 minutes through peripheral or central line\n• Continue CPR 60-90 min minimum (lytic needs circulation time)\n• Consider second 50 mg bolus at 15 min if no ROSC\n• Activate ECMO team in parallel if available\n• Heparin AFTER lytic if ROSC achieved', colorVar: '--color-danger' };
+        const absoluteCI = (v['priorHemorrhage'] || 0) + (v['recentStroke'] || 0) + (v['activeBleed'] || 0) >= 100;
+        const relativeRisk = (v['recentSurgery'] || 0) + (v['age75'] || 0);
+        const reducedPreferred = (v['age75'] || 0) >= 10;
+        // Tenecteplase weight ladder
+        let tnk = '50 mg';
+        if (wt > 0 && wt < 60)
+            tnk = '30 mg';
+        else if (wt < 70)
+            tnk = '35 mg';
+        else if (wt < 80)
+            tnk = '40 mg';
+        else if (wt < 90)
+            tnk = '45 mg';
+        const tnkLine = wt > 0 ? `Tenecteplase ${tnk} IV bolus over 5–10 sec (off-label for PE)` : `Tenecteplase weight-based: <60kg 30mg • 60–69 35mg • 70–79 40mg • 80–89 45mg • ≥90 50mg, IV bolus over 5–10 sec`;
+        if (cat === 0) {
+            return { value: 'Select Category', label: 'Pick a PE Category to See Protocol', description: 'Choose **Category A through E** above to load the rapid treatment guideline for that severity. Use the **PE Risk Category** tool if you have not yet assigned a category.', colorVar: '--color-muted' };
         }
-        if (scenario === 4) {
-            let dose = '50 mg';
-            if (wt < 60)
-                dose = '30 mg';
-            else if (wt < 70)
-                dose = '35 mg';
-            else if (wt < 80)
-                dose = '40 mg';
-            else if (wt < 90)
-                dose = '45 mg';
-            return { value: dose, label: 'Tenecteplase Single Bolus', description: `**Tenecteplase ${dose} IV bolus over 5-10 seconds** (off-label for PE).\n\nWeight-based dosing:\n• < 60 kg → 30 mg\n• 60-69 kg → 35 mg\n• 70-79 kg → 40 mg\n• 80-89 kg → 45 mg\n• ≥ 90 kg → 50 mg\n\nAdvantages: single bolus, no infusion, similar mortality to alteplase. Higher major bleeding signal in some studies — use with caution. Heparin AFTER bolus.`, colorVar: '--color-warning' };
+        // -------- CATEGORY A: Low risk --------
+        if (cat === 1) {
+            return {
+                value: 'Anticoagulate + outpatient consideration',
+                label: 'Category A — Low Risk',
+                description: '**Anticoagulation only. NO lysis. NO catheter therapy.**\n\n**First-line (preferred, oral):**\n• Apixaban 10 mg PO BID × 7 days → 5 mg BID\n• OR Rivaroxaban 15 mg PO BID × 21 days → 20 mg daily\n\n**Parenteral alternative:**\n• Enoxaparin 1 mg/kg SC q12h (CrCl ≥ 30) bridge to warfarin if DOAC contraindicated\n\n**Disposition:**\n• Consider outpatient management per HESTIA / sPESI = 0\n• Confirm follow-up within 72 h, return precautions for chest pain / syncope / hypoxia\n• No PERT activation needed',
+                colorVar: '--color-primary'
+            };
         }
-        if (scenario === 2 || relativeRisk >= 10) {
-            return { value: '50 mg over 2h', label: 'Reduced-Dose Alteplase', description: '**Alteplase 50 mg IV over 2 hours** (10 mg bolus, then 40 mg infusion).\n\nIndications:\n• Intermediate-high risk PE (Category C with decompensation)\n• Age > 75 or relative bleeding risk\n• HI-PEITHO 2026 supports reduced-dose for intermediate-high risk\n• MOPETT showed mortality benefit at this dose\n\nHold heparin during infusion; resume after when aPTT < 2× control.', colorVar: '--color-warning' };
+        // -------- CATEGORY B: Intermediate-low --------
+        if (cat === 2) {
+            return {
+                value: 'Anticoagulate + monitored bed',
+                label: 'Category B — Intermediate-Low',
+                description: '**Therapeutic anticoagulation. NO routine lysis. Watch for escalation to Cat C.**\n\n**First-line (parenteral, allows quick switch to lysis if deteriorates):**\n• UFH 80 U/kg bolus → 18 U/kg/hr titrated to aPTT 1.5–2.3× control (skip bolus if any chance of lysis in next hour)\n• OR Enoxaparin 1 mg/kg SC q12h\n\n**Or DOAC if stable course expected:**\n• Apixaban 10 mg PO BID × 7d → 5 mg BID\n• Rivaroxaban 15 mg PO BID × 21d → 20 mg daily\n\n**Monitoring:**\n• Telemetry / stepdown\n• Serial troponin q6h × 2, lactate, bedside echo if not already done\n• Reassess for Category C upgrade (HR ↑, BP ↓, RV worsening, lactate ↑)\n\n**Disposition:** Admit medicine/step-down. No PERT unless escalating.',
+                colorVar: '--color-primary'
+            };
         }
-        return { value: '100 mg over 2h', label: 'Standard Alteplase', description: '**Alteplase 100 mg IV over 2 hours**\n\n• 10-20 mg bolus over 1-2 min\n• Remaining 80-90 mg over 2 hours\n• UFH WITHOUT bolus during infusion; low-dose ≤ 500 U/hr OK\n• Give alteplase BEFORE heparin to reduce bleeding\n• Resume full heparin when aPTT < 2× control after infusion\n• Monitor for hemorrhage q15 min × 2h, then q30 min × 6h', colorVar: '--color-primary' };
+        // -------- CATEGORY C: Intermediate-high --------
+        if (cat === 3) {
+            if (absoluteCI) {
+                return {
+                    value: 'Mechanical reperfusion (lysis contraindicated)',
+                    label: 'Category C — Intermediate-High, CI to Lysis',
+                    description: '**Absolute contraindication to systemic lysis. Route to mechanical reperfusion.**\n\n**Anticoagulation:**\n• UFH WITHOUT bolus, 18 U/kg/hr, target aPTT 1.5–2.3× (no bolus to keep mechanical options open)\n\n**Activate PERT NOW** (cardiology + IR + CT surgery + ECMO).\n\n**Reperfusion options (PEERLESS 2026 prefers mechanical over CDT for intermediate-high):**\n1. **Mechanical thrombectomy** (FlowTriever / Inari) — first-line if available\n2. **Catheter-directed thrombolysis** (USAT / EKOS) — alternative\n3. **Surgical embolectomy** if center capable\n\n**Avoid:** systemic alteplase, systemic tenecteplase.',
+                    colorVar: '--color-danger'
+                };
+            }
+            return {
+                value: 'PERT activate + USAT/mechanical, reduced-dose lytic standby',
+                label: 'Category C — Intermediate-High',
+                description: '**PERT activation. Reperfusion candidate. Reduced-dose lytic is the lytic of choice if needed.**\n\n**Anticoagulation:**\n• UFH WITHOUT bolus if lysis in next hour, 18 U/kg/hr, target aPTT 1.5–2.3×\n\n**Reperfusion (first-line per PEERLESS 2026):**\n1. **Mechanical thrombectomy** (FlowTriever / Inari) — preferred\n2. **Catheter-directed therapy** (USAT / EKOS) — alternative\n\n**Reduced-dose systemic lysis (if no cath option, escalation imminent, or HI-PEITHO 2026 path):**\n• **Alteplase 50 mg IV over 2 hours** (10 mg bolus then 40 mg infusion)\n• MOPETT regimen — mortality + RV recovery benefit at this dose\n• Hold heparin during infusion; resume when aPTT < 2× control\n\n**Tenecteplase alternative (single bolus):**\n• ' + tnkLine + '\n\n**Bedside resus:** see Crashing PE Resus Checklist tool.\n\n**Disposition:** ICU.',
+                colorVar: '--color-warning'
+            };
+        }
+        // -------- CATEGORY D: Pre-arrest / decompensating --------
+        if (cat === 4) {
+            if (absoluteCI) {
+                return {
+                    value: 'Mechanical thrombectomy + ECMO bridge',
+                    label: 'Category D — Decompensating, CI to Lysis',
+                    description: '**Pre-arrest with absolute CI to lysis. Mechanical reperfusion + ECMO bridge.**\n\n**Resus first (every minute counts):**\n• High-flow O₂ (NRB 15 L or HFNC) — 100% O₂ is a pulmonary vasodilator\n• AVOID intubation if at all possible (positive pressure ↓ RV preload, ↑ afterload — crashes patient)\n• Norepinephrine early, target MAP > 65; push-dose phenylephrine 100–200 mcg as bridge\n• Fluids ≤ 500 mL or stopped (volume worsens RV failure unless clearly hypovolemic)\n• Bedside echo: confirm RV strain, McConnell, D-sign\n\n**Anticoagulation:**\n• UFH WITHOUT bolus, 500–800 U/hr until reperfusion plan locked\n\n**PERT NOW. ECMO team activation in parallel.**\n\n**Reperfusion (lysis contraindicated):**\n1. **Mechanical thrombectomy** — first choice (FlowTriever / Inari)\n2. **VA-ECMO bridge** if cath delayed or ongoing decompensation\n3. **Surgical embolectomy** if center capable',
+                    colorVar: '--color-danger'
+                };
+            }
+            const lyticChoice = (reducedPreferred || relativeRisk >= 50)
+                ? '**Reduced-dose alteplase 50 mg IV over 2 hours** (10 mg bolus + 40 mg infusion) — age/bleeding risk gates the dose. HI-PEITHO 2026 supports this dose for intermediate-high to decompensating.'
+                : '**Alteplase 100 mg IV over 2 hours** (10–20 mg bolus over 1–2 min, then 80–90 mg over 2 h). Standard adult lytic dose.';
+            return {
+                value: 'Systemic lysis NOW + PERT + mechanical backup',
+                label: 'Category D — Pre-arrest / Decompensating',
+                description: '**Reperfusion within minutes. Systemic lysis is the fastest option — give it.**\n\n**Resus bundle (parallel to drawing up lytic):**\n• High-flow O₂ (NRB 15 L or HFNC)\n• AVOID intubation — push-dose norepi / phenylephrine first\n• Norepinephrine infusion, MAP > 65\n• Fluids ≤ 500 mL or stopped\n• Bedside echo confirming RV strain\n\n**Lysis (choose one):**\n• ' + lyticChoice + '\n• **Tenecteplase alternative:** ' + tnkLine + '\n\n**Heparin:** UFH WITHOUT bolus, ≤ 500 U/hr during lytic infusion. Give lytic BEFORE full heparin. Resume full heparin when aPTT < 2× control after infusion.\n\n**Mechanical backup (parallel activation):** PERT for cath lab / FlowTriever, ECMO team standby.\n\n**Monitoring:** hemorrhage check q15 min × 2h then q30 min × 6h. Watch for ROSC of RV (HR ↓, BP ↑, lactate ↓, urine output return).',
+                colorVar: '--color-warning'
+            };
+        }
+        // -------- CATEGORY E: Cardiac arrest / peri-arrest --------
+        if (cat === 5) {
+            const tnkArrestLine = wt > 0
+                ? `Tenecteplase ${tnk} IV bolus (weight-based) as alternative single-bolus option`
+                : `Tenecteplase weight-based bolus (<60kg 30mg • 60–69 35mg • 70–79 40mg • 80–89 45mg • ≥90 50mg) as alternative`;
+            if (absoluteCI) {
+                return {
+                    value: 'ECMO + emergent thrombectomy (lysis contraindicated, no good options)',
+                    label: 'Category E — Arrest, CI to Lysis',
+                    description: '**Cardiac arrest with absolute contraindication to systemic lysis. Mechanical only.**\n\n**During CPR:**\n• High-quality compressions, do NOT stop for procedure\n• Continue ACLS (epi q3–5 min, etc.)\n• AVOID intubation if pre-arrest still has pulses — bag-mask preferred\n\n**Reperfusion (limited options):**\n1. **VA-ECMO during CPR (eCPR)** — activate immediately, only realistic option for survival\n2. **Mechanical thrombectomy** if ECMO bridge achieved or witnessed arrest with rapid ROSC\n3. **Surgical embolectomy** rarely feasible in arrest\n\n**Reality check:** survival without lysis in arrested PE is very low. Document CI clearly. Family discussion.',
+                    colorVar: '--color-danger'
+                };
+            }
+            return {
+                value: 'Alteplase 50 mg IV PUSH + continue CPR ≥ 60 min',
+                label: 'Category E — Cardiac Arrest',
+                description: '**Push lytic during CPR. Time is myocardium and brain.**\n\n**Lytic (push, do NOT stop CPR):**\n• **Alteplase 50 mg IV BOLUS** over 1–2 min through peripheral or central line\n• Continue CPR ≥ 60 min after bolus (lytic needs circulation to reach clot)\n• Consider **second 50 mg bolus at 15 min** if no ROSC\n• ' + tnkArrestLine + '\n\n**Parallel actions:**\n• ACLS unchanged (epi q3–5 min, etc.)\n• AVOID over-ventilation — 8–10 breaths/min, low PEEP\n• **Activate ECMO / eCPR team NOW**\n• Norepi / vasopressin ready for ROSC\n\n**Post-ROSC:**\n• Heparin AFTER lytic when stable\n• Targeted temp management per local protocol\n• Bedside echo to confirm RV recovery\n• Cath / IR consult for adjunctive mechanical clearance if residual\n\n**Resus checklist:** use Crashing PE Resus Checklist tool to confirm bundle.',
+                colorVar: '--color-danger'
+            };
+        }
+        return { value: '—', label: 'Select Category', description: 'Choose Category A–E above to load the rapid treatment protocol.', colorVar: '--color-muted' };
     },
 };
 // -------------------------------------------------------------------
