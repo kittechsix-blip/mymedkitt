@@ -421,9 +421,11 @@ const TOOLBAR_CONFIGS = {
         { id: 'ecg', label: 'ECG', icon: '📈', action: 'overlay', target: 'syncope-ecg' },
     ],
     'pe-treatment': [
-        { id: 'pe-treatment', label: 'Treatment', icon: '\uD83D\uDC8A', action: 'calculator', target: 'pe-treatment' },
-        { id: 'thrombolysis', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'pe-massive-tx' },
+        { id: 'pe-risk-category', label: 'Risk A-E', icon: '\uD83D\uDCCA', action: 'calculator', target: 'pe-risk-category' },
+        { id: 'lysis-rx', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'calculator', target: 'alteplase-pe-dosing' },
+        { id: 'pe-resus', label: 'Resus Bundle', icon: '\uD83D\uDEA8', action: 'calculator', target: 'pe-resus-checklist' },
         { id: 'pesi', label: 'PESI', icon: '\uD83E\uDEC1', action: 'calculator', target: 'pesi' },
+        { id: 'spesi', label: 'sPESI', icon: '\uD83E\uDEC1', action: 'calculator', target: 'spesi' },
     ],
     'acid-base': [
         { id: 'anion-gap', label: 'AG', icon: '\uD83E\uDDEA', action: 'calculator', target: 'anion-gap' },
