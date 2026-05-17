@@ -266,6 +266,27 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'labs', label: 'Labs', icon: '\uD83E\uDDEA', action: 'jump', target: 'na-hypo-initial' },
     { id: 'discharge', label: 'Discharge', icon: '\uD83C\uDFE0', action: 'overlay', target: 'na-discharge-criteria' },
   ],
+  'calcium-disorders': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'ca-steps' },
+    { id: 'low-ca', label: 'Low Ca', icon: '🧪', action: 'jump', target: 'ca-hypo-triage' },
+    { id: 'high-ca', label: 'High Ca', icon: '🦴', action: 'jump', target: 'ca-hyper-triage' },
+    { id: 'renal-phos', label: 'Renal', icon: '🩺', action: 'jump', target: 'ca-renal-phos' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'jump', target: 'ca-stop' },
+  ],
+  'phosphorus-disorders': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'phos-steps' },
+    { id: 'low-phos', label: 'Low Phos', icon: '🧪', action: 'jump', target: 'phos-hypo-triage' },
+    { id: 'high-phos', label: 'High Phos', icon: '⚗️', action: 'jump', target: 'phos-hyper-triage' },
+    { id: 'refeeding', label: 'Refeed', icon: '🍽️', action: 'jump', target: 'phos-refeeding' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'jump', target: 'phos-stop' },
+  ],
+  'magnesium-disorders': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'mg-steps' },
+    { id: 'low-mg', label: 'Low Mg', icon: '🧪', action: 'jump', target: 'mg-hypo-triage' },
+    { id: 'torsades', label: 'TdP', icon: '⚡', action: 'jump', target: 'mg-torsades' },
+    { id: 'high-mg', label: 'High Mg', icon: '☣️', action: 'jump', target: 'mg-hyper-triage' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'jump', target: 'mg-stop' },
+  ],
   'neurosyphilis': [
     { id: 'iv-pcn', label: 'IV PCN Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'ns-confirmed' },
     { id: 'csf-vdrl', label: 'CSF-VDRL', icon: '\uD83E\uDDEA', action: 'jump', target: 'ns-csf-result' },

@@ -265,6 +265,18 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/sodium.js');
             return { nodes: m.SODIUM_NODES, entryNodeId: 'na-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.SODIUM_MODULE_LABELS, citations: m.SODIUM_CITATIONS, criticalActions: m.SODIUM_CRITICAL_ACTIONS };
         },
+        'calcium-disorders': async () => {
+            const m = await import('../data/trees/calcium-disorders.js');
+            return { nodes: m.CALCIUM_DISORDERS_NODES, entryNodeId: 'ca-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.CALCIUM_DISORDERS_MODULE_LABELS, citations: m.CALCIUM_DISORDERS_CITATIONS, criticalActions: m.CALCIUM_DISORDERS_CRITICAL_ACTIONS };
+        },
+        'phosphorus-disorders': async () => {
+            const m = await import('../data/trees/phosphorus-disorders.js');
+            return { nodes: m.PHOSPHORUS_DISORDERS_NODES, entryNodeId: 'phos-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.PHOSPHORUS_DISORDERS_MODULE_LABELS, citations: m.PHOSPHORUS_DISORDERS_CITATIONS, criticalActions: m.PHOSPHORUS_DISORDERS_CRITICAL_ACTIONS };
+        },
+        'magnesium-disorders': async () => {
+            const m = await import('../data/trees/magnesium-disorders.js');
+            return { nodes: m.MAGNESIUM_DISORDERS_NODES, entryNodeId: 'mg-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.MAGNESIUM_DISORDERS_MODULE_LABELS, citations: m.MAGNESIUM_DISORDERS_CITATIONS, criticalActions: m.MAGNESIUM_DISORDERS_CRITICAL_ACTIONS };
+        },
         'acid-base': async () => {
             const m = await import('../data/trees/acid-base.js');
             return { nodes: m.ACID_BASE_NODES, entryNodeId: 'ab-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.ACID_BASE_MODULE_LABELS, citations: m.ACID_BASE_CITATIONS, criticalActions: m.ACID_BASE_CRITICAL_ACTIONS };

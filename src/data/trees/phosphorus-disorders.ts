@@ -1,0 +1,162 @@
+// MedKitt - Phosphorous Disorders
+// Hypophosphatemia and hyperphosphatemia: replacement, elimination, TLS/refeeding, CKD/dialysis caveats.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const PHOSPHORUS_DISORDERS_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Phos <1 mg/dL or symptomatic hypophosphatemia: use monitored IV phosphate replacement.', nodeId: 'phos-hypo-severe' },
+  { text: 'Choose sodium phosphate if K is high or renal function is impaired; choose potassium phosphate only when K is low/normal.', nodeId: 'phos-hypo-severe' },
+  { text: 'Severe hyperphosphatemia with renal failure, symptomatic hypocalcemia, or TLS may require urgent dialysis.', nodeId: 'phos-hyper-acute' },
+  { text: 'Do not reflexively give calcium for asymptomatic TLS-related hypocalcemia; treat phosphate and clinical instability.', nodeId: 'phos-stop' },
+  { text: 'Refeeding/DKA/alcohol use: monitor phosphate, K, and Mg together; phosphate can crash quickly after insulin or nutrition.', nodeId: 'phos-refeeding' },
+];
+
+export const PHOSPHORUS_DISORDERS_NODES: DecisionNode[] = [
+  {
+    id: 'phos-start',
+    type: 'question',
+    module: 1,
+    title: 'Phosphate Disorder',
+    body: 'Serum phosphorus reflects phosphate concentration. Interpret with calcium, magnesium, potassium, renal function, acid-base status, insulin/nutrition exposure, and cell-lysis risk.\n\nWhich pathway fits?',
+    citation: [1, 2, 3],
+    options: [
+      { label: 'Hypophosphatemia', description: 'Phos <2.5 mg/dL', next: 'phos-hypo-triage' },
+      { label: 'Hyperphosphatemia', description: 'Elevated phosphate or Ca-phosphate problem', next: 'phos-hyper-triage' },
+      { label: 'DKA / refeeding / TLS context', description: 'Dynamic phosphate shifts expected', next: 'phos-refeeding', urgency: 'urgent' },
+    ],
+    summary: 'Route to hypoPhos, hyperPhos, or dynamic shift context; always interpret with Ca/Mg/K/renal function.',
+  },
+  {
+    id: 'phos-steps',
+    type: 'info',
+    module: 1,
+    title: 'Phosphate Steps',
+    body: '1. Confirm severity and symptoms.\n2. Check Ca, Mg, K, creatinine, glucose/insulin exposure, acid-base status, CK, uric acid, and nutrition/refeeding risk.\n3. Low phosphate: replace orally unless severe, symptomatic, unable to take PO, or critical illness requires IV.\n4. High phosphate: stop phosphate load, treat cell lysis/renal failure, avoid unnecessary calcium, and consider binders or dialysis.\n5. Recheck labs after therapy because phosphate treatment can move Ca, Mg, K, and renal risk in the wrong direction.',
+    citation: [1, 2, 3],
+    next: 'phos-start',
+    summary: 'Confirm severity, check paired electrolytes and renal/cell-lysis context, replace or eliminate with close rechecks.',
+    skippable: true,
+  },
+  {
+    id: 'phos-hypo-triage',
+    type: 'question',
+    module: 2,
+    title: 'Hypophosphatemia Severity',
+    body: 'Symptoms usually emerge when phosphate is <1 mg/dL, but ICU, DKA, alcoholism, malnutrition, refeeding, sepsis, respiratory failure, rhabdomyolysis, hemolysis, or myocardial dysfunction lowers the treatment threshold.',
+    citation: [1, 2],
+    options: [
+      { label: 'Severe / symptomatic', description: 'Phos <1, respiratory/cardiac/neuromuscular symptoms, rhabdo, hemolysis', next: 'phos-hypo-severe', urgency: 'critical' },
+      { label: 'Mild-moderate / stable', description: 'Phos 1-2.5 and able to take PO', next: 'phos-hypo-stable' },
+      { label: 'Refeeding or DKA', description: 'High-risk shift state; monitor K/Mg together', next: 'phos-refeeding', urgency: 'urgent' },
+    ],
+    summary: 'Severe or symptomatic hypophosphatemia needs monitored IV replacement; stable patients usually get oral replacement.',
+  },
+  {
+    id: 'phos-hypo-severe',
+    type: 'info',
+    module: 2,
+    title: 'Severe Hypophosphatemia',
+    body: 'Use IV phosphate when phos <1 mg/dL, severe symptoms, inability to take PO, respiratory failure, myocardial dysfunction, rhabdomyolysis, hemolysis, or critical illness.\n\nTypical adult IV strategy: 0.2-0.6 mmol/kg over about 6 hours, with the higher end for phos <1 mg/dL and normal renal function. Reduce dose by about 50% in renal dysfunction.\n\nUse potassium phosphate only if potassium is low/normal and renal function allows. Use sodium phosphate when K is high, renal function is impaired, or potassium load is unsafe.',
+    citation: [1, 2],
+    next: 'phos-monitoring',
+    summary: 'IV phosphate for phos <1 or symptomatic; choose NaPhos vs KPhos by potassium and renal function.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'phos-hypo-stable',
+    type: 'result',
+    module: 2,
+    title: 'Stable Hypophosphatemia',
+    body: 'Use oral phosphate replacement when stable, asymptomatic/mildly symptomatic, and able to take PO. Treat the cause: refeeding, DKA/insulin shift, respiratory alkalosis, alcohol use, poor intake, antacids/binders, vitamin D deficiency, hyperparathyroidism, renal wasting/Fanconi, or iron infusion-related FGF23 effect.\n\nRecheck phosphate and paired electrolytes within the clinical timeframe of the trigger.',
+    recommendation: 'Oral replacement is preferred for stable mild-moderate hypophosphatemia; admit when severe, symptomatic, recurrent, renal-risk, or shift-state physiology is active.',
+    citation: [1, 2, 6],
+    confidence: 'recommended',
+  },
+  {
+    id: 'phos-monitoring',
+    type: 'info',
+    module: 2,
+    title: 'IV Phosphate Monitoring',
+    body: 'Monitor during and after IV replacement:\n- Phosphate, calcium/ionized calcium, magnesium, potassium, creatinine\n- ECG/telemetry for severe deficiency, K-containing replacement, or cardiac disease\n- Symptoms: weakness, respiratory failure, paresthesias/tetany, arrhythmia, rhabdo\n\nComplications of aggressive IV phosphate: hypocalcemia, hyperphosphatemia, hypomagnesemia, hyperkalemia with KPhos, soft-tissue precipitation, AKI, and hypotension with rapid infusion.',
+    citation: [1, 2],
+    next: 'phos-stop',
+    summary: 'IV phosphate requires Ca/Mg/K/Cr monitoring and attention to hypocalcemia, hyperkalemia, precipitation, and AKI.',
+    safetyLevel: 'warning',
+  },
+  {
+    id: 'phos-hyper-triage',
+    type: 'question',
+    module: 3,
+    title: 'Hyperphosphatemia Context',
+    body: 'High phosphate is usually renal failure, cell lysis, phosphate load, or pseudohyperphosphatemia. Severity depends on trajectory, calcium symptoms, renal function, and TLS/rhabdo context.',
+    citation: [3, 4, 5],
+    options: [
+      { label: 'Acute severe / TLS / rhabdo', description: 'Rapidly rising phosphate, AKI, hypocalcemia symptoms, cell lysis', next: 'phos-hyper-acute', urgency: 'critical' },
+      { label: 'CKD / dialysis chronic pattern', description: 'Persistent hyperphosphatemia in CKD-MBD', next: 'phos-hyper-ckd' },
+      { label: 'Medication or phosphate load', description: 'Phosphate enema/laxative, supplement, bowel prep, vitamin D toxicity', next: 'phos-hyper-acute', urgency: 'urgent' },
+    ],
+    summary: 'Hyperphosphatemia management depends on acute cell lysis/load versus chronic CKD-MBD.',
+  },
+  {
+    id: 'phos-hyper-acute',
+    type: 'info',
+    module: 3,
+    title: 'Acute Hyperphosphatemia',
+    body: 'Immediate actions:\n1. Stop phosphate intake/load and offending bowel prep/enemas/supplements.\n2. Treat the driver: TLS, rhabdomyolysis, AKI, phosphate ingestion, vitamin D excess.\n3. Hydrate and promote renal excretion if kidney function and volume status permit.\n4. Use non-calcium phosphate binder such as [Sevelamer](#/drug/sevelamer/Hyperphosphatemia) when enteral therapy is appropriate.\n5. Call nephrology early for severe AKI, anuria, symptomatic hypocalcemia, Ca-phosphate precipitation concern, or rapidly rising phosphate; dialysis may be definitive.',
+    citation: [3, 4, 5],
+    next: 'phos-stop',
+    summary: 'Stop phosphate load, treat cell lysis/AKI, use binder if enteral, and dialyze severe renal or symptomatic cases.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'phos-hyper-ckd',
+    type: 'result',
+    module: 3,
+    title: 'CKD-MBD Hyperphosphatemia',
+    body: 'In CKD, do not manage phosphate as an isolated number. Review serial phosphate, calcium, PTH, alkaline phosphatase, diet, binder adherence, vitamin D/calcimimetic therapy, and dialysis adequacy.\n\nKDIGO recommends lowering persistently elevated phosphate toward normal, avoiding hypercalcemia, limiting calcium-based binders in adults receiving phosphate-lowering therapy, and using serial trends rather than one isolated value.',
+    recommendation: 'Coordinate chronic CKD-MBD changes with nephrology; ED management focuses on severe symptoms, acute loads, missed dialysis, and dangerous Ca-phosphate physiology.',
+    citation: [4],
+    confidence: 'recommended',
+  },
+  {
+    id: 'phos-refeeding',
+    type: 'info',
+    module: 4,
+    title: 'Refeeding / DKA / Shift States',
+    body: 'High-risk settings: malnutrition, alcohol use disorder, eating disorder, bariatric surgery, prolonged poor intake, DKA after insulin, respiratory alkalosis, sepsis, major burns, and post-operative critical illness.\n\nMonitor phosphate with potassium and magnesium. Replace before and during nutrition/insulin escalation when severe or falling rapidly. Consider thiamine and controlled calorie advancement in refeeding-risk patients.',
+    citation: [1, 6],
+    next: 'phos-hypo-triage',
+    summary: 'Refeeding/DKA states can rapidly shift phosphate intracellularly; monitor and replace phos/K/Mg together.',
+    safetyLevel: 'warning',
+  },
+  {
+    id: 'phos-stop',
+    type: 'result',
+    module: 4,
+    title: 'STOP: Phosphate Pitfalls',
+    body: '- Do not give IV phosphate without checking potassium and renal function.\n- Do not use potassium phosphate when hyperkalemic, anuric, or high-risk for potassium accumulation.\n- Do not give repeated IV calcium for asymptomatic hypocalcemia from severe hyperphosphatemia/TLS; treat phosphate and clinical instability.\n- Do not ignore magnesium; phosphate depletion and phosphate replacement can both worsen Mg problems.\n- Do not discharge severe, symptomatic, recurrent, renal-failure, TLS, rhabdo, DKA, or refeeding-risk phosphate disorders without a monitoring plan.',
+    recommendation: 'Phosphate therapy is paired-electrolyte therapy: recheck Ca/Mg/K/Cr and treat the driver.',
+    citation: [1, 2, 3, 5],
+    confidence: 'recommended',
+  },
+];
+
+export const PHOSPHORUS_DISORDERS_MODULE_LABELS = [
+  'Start',
+  'Low Phosphate',
+  'High Phosphate',
+  'Shift / Stop',
+];
+
+export const PHOSPHORUS_DISORDERS_CITATIONS: Citation[] = [
+  { num: 1, text: 'Farkas J. Hypophosphatemia. Internet Book of Critical Care (IBCC). EMCrit. Updated 2025. https://emcrit.org/ibcc/hypophos/' },
+  { num: 2, text: 'Bansal VK, Khammash AJ, Hanoon AH. Hypophosphatemia. StatPearls. Updated 2024. NCBI Bookshelf.' },
+  { num: 3, text: 'Reddy P, Mooradian AD. Hyperphosphatemia. StatPearls. Updated 2024. NCBI Bookshelf.' },
+  { num: 4, text: 'KDIGO CKD-MBD Update Work Group. KDIGO 2017 Clinical Practice Guideline Update for CKD-MBD. Kidney Int Suppl. 2017;7:1-59.' },
+  { num: 5, text: 'Howard SC, Jones DP, Pui CH. The Tumor Lysis Syndrome. N Engl J Med. 2011;364:1844-1854. doi:10.1056/NEJMra0904569.' },
+  { num: 6, text: 'Farkas J. Refeeding syndrome. Internet Book of Critical Care (IBCC). EMCrit. Updated 2024. https://emcrit.org/ibcc/refeeding/' },
+];
+
+export const PHOSPHORUS_DISORDERS_NODE_COUNT = PHOSPHORUS_DISORDERS_NODES.length;
