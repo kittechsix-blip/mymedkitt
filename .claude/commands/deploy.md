@@ -6,6 +6,15 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
 
 ## Steps
 
+00. **MANDATORY — Spotlight Preflight (do before anything else):**
+    ```bash
+    # If any of these fail, abort the deploy and surface the EDEADLK playbook
+    ls ~/Desktop/myMedKitt >/dev/null 2>&1 || { echo "EDEADLK: project dir dataless. See ~/Desktop/claude-brain/operations/edeadlk-playbook.md"; exit 1; }
+    cd ~/Desktop/myMedKitt && git status >/dev/null 2>&1 || { echo "EDEADLK: git index dataless. Reboot required."; exit 1; }
+    ```
+
+    **If preflight fails:** Do NOT attempt the deploy. Tell Andy plainly: "Spotlight has the project files locked. Only a Mac reboot clears this. See `~/Desktop/claude-brain/operations/edeadlk-playbook.md` for the 3 fix options." Do NOT loop on `killall`, `xattr`, `touch`, or retries — verified non-effective 2026-05-18.
+
 0. **MANDATORY — Lint CRITICAL_ACTIONS linkage:**
    ```bash
    node scripts/lint-critical-actions.mjs --strict

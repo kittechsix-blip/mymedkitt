@@ -18535,6 +18535,175 @@ const AIMS65_CALCULATOR: CalculatorDefinition = {
 };
 
 // =====================================================================
+// LOWER GI BLEED — OAKLAND SCORE
+// =====================================================================
+// Oakland K, et al. Lancet Gastroenterol Hepatol. 2017;2(9):635-643.
+// Externally validated 2020; ACG 2023 endorses Oakland ≤8 for safe outpatient.
+
+const OAKLAND_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'oakland-score',
+  title: 'Oakland Score',
+  subtitle: 'Lower GI Bleed — Safe Discharge Prediction',
+  description: 'Predicts safe outpatient management in acute lower GI bleeding. Score ≤8 = 95% probability of safe discharge (no transfusion, intervention, rebleed, or 28-day mortality). 7 variables, externally validated, endorsed by ACG 2023.',
+  fields: [
+    { name: 'age', label: 'Age', type: 'select', points: 0, description: 'Patient age category', selectOptions: [
+      { label: '<40 years', points: 0 },
+      { label: '40-69 years', points: 1 },
+      { label: '≥70 years', points: 2 },
+    ]},
+    { name: 'sex', label: 'Sex', type: 'select', points: 0, description: 'Biological sex', selectOptions: [
+      { label: 'Female', points: 0 },
+      { label: 'Male', points: 1 },
+    ]},
+    { name: 'prior-lgib', label: 'Previous LGIB admission', type: 'toggle', points: 1, description: 'Prior hospital admission for lower GI bleed' },
+    { name: 'dre-blood', label: 'DRE findings: blood', type: 'toggle', points: 1, description: 'Blood on digital rectal exam (not just hemoccult positive)' },
+    { name: 'hr', label: 'Heart rate', type: 'select', points: 0, description: 'Highest HR at presentation', selectOptions: [
+      { label: '<70 bpm', points: 0 },
+      { label: '70-89 bpm', points: 1 },
+      { label: '90-109 bpm', points: 2 },
+      { label: '≥110 bpm', points: 3 },
+    ]},
+    { name: 'sbp', label: 'Systolic BP', type: 'select', points: 0, description: 'Lowest SBP at presentation', selectOptions: [
+      { label: '≥131 mmHg', points: 0 },
+      { label: '121-130 mmHg', points: 2 },
+      { label: '101-120 mmHg', points: 3 },
+      { label: '91-100 mmHg', points: 4 },
+      { label: '≤90 mmHg', points: 5 },
+    ]},
+    { name: 'hgb', label: 'Hemoglobin (g/dL)', type: 'select', points: 0, description: 'Admission hemoglobin', selectOptions: [
+      { label: '≥16.0', points: 0 },
+      { label: '14.0-15.9', points: 4 },
+      { label: '13.0-13.9', points: 8 },
+      { label: '12.0-12.9', points: 12 },
+      { label: '10.0-11.9', points: 17 },
+      { label: '7.0-9.9', points: 20 },
+      { label: '<7.0', points: 22 },
+    ]},
+  ],
+  results: [
+    { min: -Infinity, max: 9, label: 'Score ≤8', risk: 'Safe for Outpatient Management', mortality: '95% probability of safe discharge (no transfusion, intervention, rebleed, or 28-day mortality). ACG 2023 endorses outpatient management.', colorVar: '--color-primary' },
+    { min: 9, max: 16, label: 'Score 9-15', risk: 'Low-Moderate Risk', mortality: 'Admission recommended. Risk of adverse outcomes 15-30%. Monitor, type & screen, GI consult in AM.', colorVar: '--color-primary' },
+    { min: 16, max: 25, label: 'Score 16-24', risk: 'Moderate-High Risk', mortality: 'Admission required. Risk of adverse outcomes 40-60%. Active resuscitation, type & cross, urgent GI consult.', colorVar: '--color-warning' },
+    { min: 25, max: 31, label: 'Score 25-30', risk: 'High Risk', mortality: 'ICU/monitored bed. Risk of adverse outcomes 60-80%. Massive transfusion protocol considerations, urgent endoscopy/CT angiography.', colorVar: '--color-danger' },
+    { min: 31, max: Infinity, label: 'Score ≥31', risk: 'Critical Risk', mortality: 'ICU mandatory. Risk of adverse outcomes >80%. Consider IR/surgery early; goals of care discussion appropriate.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Oakland ≤8 → safe outpatient management (ACG 2023). Score 9-15 typically admit but stable. Validated in >38,000 patients across multiple cohorts. Use AFTER initial resuscitation when vitals/labs are available.',
+  citations: [
+    'Oakland K, et al. Derivation and validation of a novel risk score for safe discharge after acute lower gastrointestinal bleeding: a modelling study. Lancet Gastroenterol Hepatol. 2017;2(9):635-643.',
+    'Oakland K, et al. External validation of the Oakland score to assess safe hospital discharge among adult patients with acute lower GI bleeding. JAMA Netw Open. 2020;3(7):e209630.',
+    'Sengupta N, et al. ACG Clinical Guideline: Management of Patients With Acute Lower Gastrointestinal Bleeding. Am J Gastroenterol. 2023;118(2):208-231.',
+  ],
+};
+
+// =====================================================================
+// COMMUNITY-ACQUIRED PNEUMONIA SEVERITY
+// =====================================================================
+// IDSA/ATS 2019 Guideline endorses both CURB-65 and PSI; SMART-COP for ICU prediction.
+// Metlay JP, et al. Diagnosis and Treatment of Adults with CAP. Am J Respir Crit Care Med. 2019;200(7):e45-e67.
+
+const CURB_65_CALCULATOR: CalculatorDefinition = {
+  id: 'curb-65',
+  title: 'CURB-65',
+  subtitle: 'CAP Severity & Disposition (BTS/IDSA)',
+  description: 'Predicts 30-day mortality in community-acquired pneumonia using 5 simple variables. Score 0-1 = outpatient candidate; ≥2 = admit; ≥3 = ICU consideration. Derived from BTS 2003, endorsed by ATS/IDSA 2019.',
+  fields: [
+    { name: 'confusion', label: 'C — Confusion (new disorientation to person/place/time, or AMTS ≤8)', type: 'toggle', points: 1, description: 'New-onset confusion' },
+    { name: 'urea', label: 'U — Urea >7 mmol/L (BUN >19 mg/dL)', type: 'toggle', points: 1, description: 'Elevated blood urea nitrogen' },
+    { name: 'rr', label: 'R — Respiratory rate ≥30/min', type: 'toggle', points: 1, description: 'Tachypnea' },
+    { name: 'bp', label: 'B — Blood pressure (SBP <90 OR DBP ≤60)', type: 'toggle', points: 1, description: 'Hypotension (either systolic or diastolic)' },
+    { name: 'age65', label: '65 — Age ≥65 years', type: 'toggle', points: 1, description: 'Older age threshold' },
+  ],
+  results: [
+    { min: -Infinity, max: 1, label: 'CURB-65 = 0', risk: 'Low Risk', mortality: '30-day mortality: 0.6%. Outpatient management appropriate (assuming able to tolerate PO, no hypoxia, social support).', colorVar: '--color-primary' },
+    { min: 1, max: 2, label: 'CURB-65 = 1', risk: 'Low Risk', mortality: '30-day mortality: 2.7%. Outpatient management usually appropriate; consider short observation if any concerns.', colorVar: '--color-primary' },
+    { min: 2, max: 3, label: 'CURB-65 = 2', risk: 'Moderate Risk', mortality: '30-day mortality: 6.8%. Admit to general ward; consider short stay if rapid clinical improvement.', colorVar: '--color-warning' },
+    { min: 3, max: 4, label: 'CURB-65 = 3', risk: 'High Risk (Severe CAP)', mortality: '30-day mortality: 14.0%. Admit; consider ICU evaluation, especially if multiple physiologic derangements.', colorVar: '--color-danger' },
+    { min: 4, max: 5, label: 'CURB-65 = 4', risk: 'Very High Risk', mortality: '30-day mortality: 27.8%. ICU admission strongly recommended.', colorVar: '--color-danger' },
+    { min: 5, max: Infinity, label: 'CURB-65 = 5', risk: 'Critical Risk', mortality: '30-day mortality: 27.8% (combined ≥4 cohort up to 40%). ICU mandatory; goals of care discussion appropriate.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Simpler than PSI but less granular. Does NOT account for comorbidities or hypoxia — assess SpO2 and chronic disease burden independently. CRB-65 (without urea) usable in primary care. For ICU prediction, prefer SMART-COP.',
+  citations: [
+    'Lim WS, et al. Defining community acquired pneumonia severity on presentation to hospital: an international derivation and validation study. Thorax. 2003;58(5):377-382.',
+    'Metlay JP, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. Official Clinical Practice Guideline of the ATS and IDSA. Am J Respir Crit Care Med. 2019;200(7):e45-e67.',
+  ],
+};
+
+const PSI_PORT_CALCULATOR: CalculatorDefinition = {
+  id: 'psi-port',
+  title: 'PSI / PORT Score',
+  subtitle: 'Pneumonia Severity Index (Fine Score)',
+  description: 'Stratifies CAP patients into 5 risk classes for 30-day mortality. More granular than CURB-65; accounts for age, comorbidities, exam, labs, and imaging. ATS/IDSA 2019 preferred severity tool. Class I-II = outpatient; Class III = brief observation; Class IV-V = admit.',
+  fields: [
+    { name: 'age', label: 'Age (years) — adds 1 point per year for men; subtract 10 for women', type: 'number', points: 0, valueIsPoints: true, unit: 'pts', description: 'Use raw age for men; (age - 10) for women' },
+    { name: 'nursing-home', label: 'Nursing home resident', type: 'toggle', points: 10 },
+    { name: 'neoplastic', label: 'Neoplastic disease (active cancer or within 1 year)', type: 'toggle', points: 30 },
+    { name: 'liver', label: 'Liver disease (cirrhosis or chronic active hepatitis)', type: 'toggle', points: 20 },
+    { name: 'chf', label: 'Congestive heart failure (clinical or echo evidence)', type: 'toggle', points: 10 },
+    { name: 'cvd', label: 'Cerebrovascular disease (clinical stroke or TIA history)', type: 'toggle', points: 10 },
+    { name: 'renal', label: 'Renal disease (chronic kidney disease or abnormal BUN/Cr)', type: 'toggle', points: 10 },
+    { name: 'altered', label: 'Altered mental status', type: 'toggle', points: 20 },
+    { name: 'rr30', label: 'Respiratory rate ≥30/min', type: 'toggle', points: 20 },
+    { name: 'sbp90', label: 'Systolic BP <90 mmHg', type: 'toggle', points: 20 },
+    { name: 'temp', label: 'Temperature <35°C or ≥40°C', type: 'toggle', points: 15 },
+    { name: 'hr125', label: 'Heart rate ≥125/min', type: 'toggle', points: 10 },
+    { name: 'ph', label: 'Arterial pH <7.35', type: 'toggle', points: 30 },
+    { name: 'bun', label: 'BUN ≥30 mg/dL (10.7 mmol/L)', type: 'toggle', points: 20 },
+    { name: 'na', label: 'Sodium <130 mmol/L', type: 'toggle', points: 20 },
+    { name: 'glucose', label: 'Glucose ≥250 mg/dL (14 mmol/L)', type: 'toggle', points: 10 },
+    { name: 'hct', label: 'Hematocrit <30%', type: 'toggle', points: 10 },
+    { name: 'pao2', label: 'PaO2 <60 mmHg or SpO2 <90%', type: 'toggle', points: 10 },
+    { name: 'effusion', label: 'Pleural effusion on imaging', type: 'toggle', points: 10 },
+  ],
+  results: [
+    { min: -Infinity, max: 51, label: 'Class I (age <50, no comorbidities, normal exam)', risk: 'Very Low Risk', mortality: '30-day mortality: 0.1%. Outpatient management. Class I assignment requires manual screen: age <50, no listed comorbidity, no exam abnormalities — algorithmic score may misclassify.', colorVar: '--color-primary' },
+    { min: 51, max: 71, label: 'Class II (≤70 points)', risk: 'Low Risk', mortality: '30-day mortality: 0.6%. Outpatient management.', colorVar: '--color-primary' },
+    { min: 71, max: 91, label: 'Class III (71-90 points)', risk: 'Low-Moderate Risk', mortality: '30-day mortality: 2.8%. Brief observation or short admission. Outpatient acceptable if social support adequate.', colorVar: '--color-primary' },
+    { min: 91, max: 131, label: 'Class IV (91-130 points)', risk: 'Moderate-High Risk', mortality: '30-day mortality: 8.2%. Admission recommended.', colorVar: '--color-warning' },
+    { min: 131, max: Infinity, label: 'Class V (>130 points)', risk: 'High Risk', mortality: '30-day mortality: 29.2%. Admission; ICU evaluation strongly indicated.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'PSI is more granular and validated than CURB-65 — preferred by ATS/IDSA 2019 for disposition. NOTE: Class I requires manual screening (age <50, no comorbidities, no exam abnormalities); this calculator computes score-based class only. For severe-CAP/ICU decisions, prefer SMART-COP or IDSA major criteria.',
+  citations: [
+    'Fine MJ, et al. A prediction rule to identify low-risk patients with community-acquired pneumonia. N Engl J Med. 1997;336(4):243-250.',
+    'Metlay JP, et al. ATS/IDSA Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67.',
+  ],
+};
+
+const SMART_COP_CALCULATOR: CalculatorDefinition = {
+  id: 'smart-cop',
+  title: 'SMART-COP',
+  subtitle: 'Severe CAP — ICU/IRVS Prediction',
+  description: 'Predicts need for intensive respiratory or vasopressor support (IRVS) in CAP. Better discriminates ICU need than CURB-65 or PSI. Score ≥3 = consider ICU; ≥5 = high IRVS risk.',
+  fields: [
+    { name: 'sbp', label: 'S — Systolic BP <90 mmHg', type: 'toggle', points: 2, description: 'Hypotension' },
+    { name: 'multilobar', label: 'M — Multilobar infiltrates on CXR', type: 'toggle', points: 1, description: 'More than one lobe involved' },
+    { name: 'albumin', label: 'A — Albumin <3.5 g/dL', type: 'toggle', points: 1, description: 'Hypoalbuminemia' },
+    { name: 'rr', label: 'R — Respiratory rate (age-adjusted)', type: 'select', points: 0, description: '≤50 years: ≥25/min  |  >50 years: ≥30/min', selectOptions: [
+      { label: 'Below age-threshold', points: 0 },
+      { label: 'At/above age-threshold (≥25 if ≤50y; ≥30 if >50y)', points: 1 },
+    ]},
+    { name: 'tachy', label: 'T — Tachycardia ≥125/min', type: 'toggle', points: 1, description: 'Heart rate ≥125' },
+    { name: 'confusion', label: 'C — Confusion (new-onset)', type: 'toggle', points: 1, description: 'New altered mental status' },
+    { name: 'oxygen', label: 'O — Oxygenation (age-adjusted)', type: 'select', points: 0, description: '≤50 years: PaO2 <70 or SpO2 ≤93% or PaO2/FiO2 <333  |  >50 years: PaO2 <60 or SpO2 ≤90% or PaO2/FiO2 <250', selectOptions: [
+      { label: 'Normal oxygenation', points: 0 },
+      { label: 'Low oxygenation (age-adjusted threshold)', points: 2 },
+    ]},
+    { name: 'ph', label: 'P — Arterial pH <7.35', type: 'toggle', points: 2, description: 'Acidemia' },
+  ],
+  results: [
+    { min: -Infinity, max: 1, label: 'SMART-COP 0', risk: 'Very Low Risk', mortality: 'IRVS risk: <1%. Standard ward care.', colorVar: '--color-primary' },
+    { min: 1, max: 3, label: 'SMART-COP 1-2', risk: 'Low Risk', mortality: 'IRVS risk: ~3%. Standard ward care; monitor for progression.', colorVar: '--color-primary' },
+    { min: 3, max: 5, label: 'SMART-COP 3-4', risk: 'Moderate Risk', mortality: 'IRVS risk: ~13%. Consider step-down/monitored bed; ICU consultation reasonable.', colorVar: '--color-warning' },
+    { min: 5, max: 7, label: 'SMART-COP 5-6', risk: 'High Risk', mortality: 'IRVS risk: ~33%. ICU admission strongly recommended.', colorVar: '--color-danger' },
+    { min: 7, max: Infinity, label: 'SMART-COP ≥7', risk: 'Very High Risk', mortality: 'IRVS risk: >65%. ICU mandatory; aggressive resuscitation; consider early intubation.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'SMART-COP ≥3 → consider ICU. Predicts INTENSIVE RESPIRATORY OR VASOPRESSOR SUPPORT (IRVS), not mortality directly. Use alongside CURB-65/PSI for disposition: CURB-65/PSI for admission, SMART-COP for ICU triage. SMRT-CO (without ABG variables) acceptable when blood gas unavailable.',
+  citations: [
+    'Charles PG, et al. SMART-COP: a tool for predicting the need for intensive respiratory or vasopressor support in community-acquired pneumonia. Clin Infect Dis. 2008;47(3):375-384.',
+    'Metlay JP, et al. ATS/IDSA Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67.',
+  ],
+};
+
+// =====================================================================
 // LUMBAR PUNCTURE CALCULATORS
 // =====================================================================
 
@@ -36995,6 +37164,12 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Upper GI Bleed
   'gbs': GBS_CALCULATOR,
   'aims65': AIMS65_CALCULATOR,
+  // Lower GI Bleed
+  'oakland-score': OAKLAND_SCORE_CALCULATOR,
+  // Community-Acquired Pneumonia Severity
+  'curb-65': CURB_65_CALCULATOR,
+  'psi-port': PSI_PORT_CALCULATOR,
+  'smart-cop': SMART_COP_CALCULATOR,
   // Lumbar Puncture
   'lp-lab-interpreter': LP_LAB_INTERPRETER_CALCULATOR,
   'lp-ct-criteria-calc': LP_CT_CRITERIA_CALCULATOR,

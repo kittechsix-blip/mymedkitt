@@ -3486,19 +3486,79 @@ body.critical-actions-open {
   line-height: 1.6;
 }
 
-/* ---- Feature 1: Score Display (sticky disabled - was covering toggles) ---- */
+/* ---- Feature 1: Sticky Score Display (Phase A 2026-05-18) ----
+   MDCalc-style: full panel scrolls naturally until it hits the top,
+   then it sticks AND collapses to a thin score bar so it doesn't
+   overlap the toggle fields underneath. Tap the stuck bar to scroll
+   back to the original position (handled in JS if needed; default
+   behavior is informational-only collapsed mode). */
+
 .calculator-score-display--sticky {
-  /* position: sticky disabled - overlapped toggle fields when scrolling */
-  /* top: 56px; */
-  /* z-index: 90; */
+  position: sticky;
+  top: 56px;            /* below app top-nav */
+  z-index: 90;
   margin: 0 auto 16px auto;
   border-radius: 16px;
+  transition:
+    padding 0.18s ease,
+    max-width 0.18s ease,
+    box-shadow 0.18s ease,
+    border-radius 0.18s ease;
 }
 
+/* Stuck state — compact horizontal bar. Hides everything except the
+   score number + risk class label. Avoids overlap with toggles. */
 .calculator-score-display--stuck {
+  padding: 8px 16px;
+  max-width: 100%;
+  border-radius: 10px;
   box-shadow:
     0 8px 24px rgba(184, 115, 51, 0.25),
     0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Compact-mode children: score + class label on a single line.
+   Description, copy button, mortality, full badge are hidden. */
+.calculator-score-display--stuck .calculator-score-number {
+  display: inline-block;
+  font-size: 22px;
+  line-height: 1.1;
+  margin-right: 12px;
+  text-shadow: none;
+  letter-spacing: 0;
+}
+
+.calculator-score-display--stuck .calculator-result-label {
+  display: inline-block;
+  font-size: 13px;
+  margin-top: 0;
+  vertical-align: middle;
+}
+
+.calculator-score-display--stuck .calculator-risk-badge {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 8px;
+  padding: 4px 10px;
+  margin-top: 0;
+  vertical-align: middle;
+  border-width: 1.5px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.calculator-score-display--stuck .calculator-risk-class {
+  font-size: 13px;
+}
+
+.calculator-score-display--stuck .calculator-risk-level {
+  font-size: 11px;
+}
+
+/* Hidden in compact mode — they re-appear when user scrolls back up */
+.calculator-score-display--stuck .calculator-result-risk,
+.calculator-score-display--stuck .calculator-mortality,
+.calculator-score-display--stuck .calculator-copy-btn {
+  display: none;
 }
 
 .calculator-scroll-sentinel {
