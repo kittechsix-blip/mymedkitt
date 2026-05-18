@@ -1580,7 +1580,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'honey', label: 'BB Honey', icon: '🍯', action: 'overlay', target: 'peds-fb-honey-protocol' },
         { id: 'choking', label: 'PALS Choke', icon: '🫁', action: 'overlay', target: 'peds-fb-pals-choking' },
         { id: 'bb-cross', label: 'BB Consult', icon: '🔋', action: 'jump', target: 'battery-start' },
-        { id: 'pals-wt', label: 'PALS Wt', icon: '⚖️', action: 'calculator', target: 'pals-weight' },
+        { id: 'pals-wt', label: 'PALS Wt', icon: '⚖️', action: 'calculator', target: 'broselow-weight' },
     ],
     'blood-culture-stewardship': [
         { id: 'indications', label: 'Indications', icon: '✅', action: 'overlay', target: 'bcs-indications' },

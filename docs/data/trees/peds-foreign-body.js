@@ -152,7 +152,7 @@ export const PEDS_FB_NODES = [
         body: '**Rigid bronchoscopy under GA** — diagnostic AND therapeutic for tracheobronchial FB. [4,9]\n\n**Indication threshold:** Any one of:\n- Witnessed aspiration event with persistent symptoms\n- Radiologic findings (hyperinflation, atelectasis)\n- Recurrent same-lobe pneumonia\n- Persistent focal wheeze unresponsive to bronchodilator\n\n**Pre-op:**\n- NPO\n- IV access\n- Anesthesia + ENT/pediatric surgery\n- Discuss with family (consent, risks: airway edema, pneumothorax, mucosal injury)\n\n**Post-op management** [4]\n- ICU/inpatient observation 24h minimum\n- [Dexamethasone](#/drug/dexamethasone/airway-edema) 0.6 mg/kg IV/PO × 1 (max 16 mg) for post-procedure airway edema\n- Racemic [epinephrine](#/drug/epinephrine/stridor) 0.5 mL of 2.25% nebulized if post-op stridor\n- CXR post-procedure\n- Antibiotics if obstructive pneumonia present',
         citation: [4, 9],
         calculatorLinks: [
-            { id: 'pals-weight', label: 'PALS Weight' },
+            { id: 'broselow-weight', label: 'PALS Weight (Broselow)' },
         ],
         next: 'peds-fb-discharge',
         summary: 'Rigid bronch under GA = gold standard; dexamethasone + racemic epi prn post-op edema; 24h obs',
