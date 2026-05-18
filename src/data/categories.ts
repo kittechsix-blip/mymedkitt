@@ -2204,6 +2204,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'pdp-start',
       },
       {
+        id: 'dexmedetomidine',
+        title: 'Dexmedetomidine (Precedex)',
+        subtitle: 'Indications -> Loading -> Maintenance -> Adverse Events -> Wean',
+        categoryId: 'pharmacist',
+        version: '1.0',
+        nodeCount: 18,
+        entryNodeId: 'dex-start',
+      },
+      {
         id: 'intralipid',
         title: 'Intralipid / Lipid Emulsion Therapy',
         subtitle: 'LAST -> Indications -> Dosing Protocol -> Monitoring -> Complications',

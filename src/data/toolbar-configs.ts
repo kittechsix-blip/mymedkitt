@@ -1071,6 +1071,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'epi-prep', label: 'Epi Prep', icon: '🧪', action: 'jump', target: 'pdp-epi-prep' },
     { id: 'phenyl-prep', label: 'Phenyl Prep', icon: '🔬', action: 'jump', target: 'pdp-phenyl-prep' },
   ],
+  'dexmedetomidine': [
+    { id: 'loading', label: 'Loading', icon: '💉', action: 'jump', target: 'dex-loading' },
+    { id: 'maint', label: 'Maintenance', icon: '💊', action: 'jump', target: 'dex-maintenance' },
+    { id: 'brady', label: 'Brady', icon: '💓', action: 'jump', target: 'dex-bradycardia' },
+    { id: 'hotn', label: 'HoTN', icon: '📉', action: 'jump', target: 'dex-hypotension' },
+    { id: 'wean', label: 'Wean', icon: '📊', action: 'jump', target: 'dex-wean' },
+  ],
   'pta-drainage': [
     { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'pta-steps' },
     { id: 'pocus', label: 'POCUS', icon: '🔊', action: 'jump', target: 'pta-pocus' },

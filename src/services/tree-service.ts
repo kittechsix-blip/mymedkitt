@@ -762,6 +762,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/push-dose-pressors.js');
       return { nodes: m.PUSH_DOSE_PRESSORS_NODES, entryNodeId: 'pdp-start', categoryId: 'pharmacist', moduleLabels: m.PUSH_DOSE_PRESSORS_MODULE_LABELS, citations: m.PUSH_DOSE_PRESSORS_CITATIONS, criticalActions: m.PUSH_DOSE_PRESSORS_CRITICAL_ACTIONS };
     },
+    'dexmedetomidine': async () => {
+      const m = await import('../data/trees/dexmedetomidine.js');
+      return { nodes: m.DEXMEDETOMIDINE_NODES, entryNodeId: 'dex-start', categoryId: 'pharmacist', moduleLabels: m.DEXMEDETOMIDINE_MODULE_LABELS, citations: m.DEXMEDETOMIDINE_CITATIONS, criticalActions: m.DEXMEDETOMIDINE_CRITICAL_ACTIONS };
+    },
     'aortic-aneurysm': async () => {
       const m = await import('../data/trees/aortic-aneurysm.js');
       return { nodes: m.AORTIC_ANEURYSM_NODES, entryNodeId: 'aortic-start', categoryId: 'cardiology', moduleLabels: m.AORTIC_ANEURYSM_MODULE_LABELS, citations: m.AORTIC_ANEURYSM_CITATIONS, criticalActions: m.AORTIC_ANEURYSM_CRITICAL_ACTIONS };
