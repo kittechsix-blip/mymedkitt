@@ -2834,21 +2834,31 @@ const COMP_RULE_5_CALCULATOR: CalculatorDefinition = {
   id: 'comp-rule-5',
   title: "Rule 5: Winter's Formula",
   subtitle: 'Expected pCO2 for Metabolic Acidosis',
-  description: "Expected pCO2 = 1.5 × [HCO3] + 8 ± 2. Checks if respiratory compensation is appropriate for a primary metabolic acidosis.",
+  description: "Expected pCO2 = 1.5 × [HCO3] + 8 ± 2. Enter HCO3 alone to see expected pCO2 range, or add measured pCO2 to check if respiratory compensation is appropriate.",
   fields: [
     { name: 'hco3', label: 'Measured HCO3', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
-    { name: 'pco2', label: 'Measured pCO2', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
+    { name: 'pco2', label: 'Measured pCO2 (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg' },
   ],
   results: [],
-  thresholdNote: "If actual pCO2 is within expected range → appropriate compensation. Higher → concurrent resp acidosis. Lower → concurrent resp alkalosis.",
+  thresholdNote: "Enter HCO3 to get expected pCO2 range. Add actual pCO2 to check compensation: within range → appropriate; higher → concurrent resp acidosis; lower → concurrent resp alkalosis.",
   citations: ['Schwartz WB, Relman AS. A critique of the parameters used in evaluation of acid-base disorders. NEJM. 1963;268:1382-1388.'],
   computeResult: (values: Record<string, number>) => {
     const hco3 = values['hco3'] || 0;
     const pco2 = values['pco2'] || 0;
-    if (hco3 <= 0 || pco2 <= 0) return { value: '--', label: 'Enter values', description: 'Enter HCO3 and pCO2.', colorVar: '--color-text-muted' };
+    // HCO3 alone is enough to predict expected pCO2 — pCO2 is optional for comparison
+    if (hco3 <= 0) return { value: '--', label: 'Enter HCO3', description: 'Enter bicarbonate to calculate expected pCO2.', colorVar: '--color-text-muted' };
     const expected = 1.5 * hco3 + 8;
     const low = Math.round((expected - 2) * 10) / 10;
     const high = Math.round((expected + 2) * 10) / 10;
+    // No actual pCO2 entered — show predicted range only
+    if (pco2 <= 0) {
+      return {
+        value: `${low}–${high} mmHg`,
+        label: 'Expected pCO2 Range',
+        description: `Expected pCO2 = 1.5×${hco3} + 8 = ${Math.round(expected * 10) / 10}\nExpected range: ${low}–${high} mmHg\n\n*Enter actual pCO2 to check for concurrent respiratory disturbance.*`,
+        colorVar: '--color-primary',
+      };
+    }
     let label: string; let colorVar: string; let interp: string;
     if (pco2 >= low && pco2 <= high) {
       label = 'Appropriate Compensation'; colorVar = '--color-primary';
