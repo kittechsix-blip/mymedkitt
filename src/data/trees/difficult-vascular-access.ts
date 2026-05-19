@@ -1,0 +1,226 @@
+// MedKitt - Difficult Vascular Access: US-Guided PIV + IO
+// ED access escalation: ultrasound PIV, intraosseous access, confirmation, complications.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const DIFFICULT_VASCULAR_ACCESS_NODES: DecisionNode[] = [
+  {
+    id: 'dva-start',
+    type: 'info',
+    module: 1,
+    title: 'Difficult Vascular Access: US-PIV + IO',
+    body: 'Use this when peripheral access is delayed, repeated blind attempts are failing, or immediate resuscitation access is needed.\n\nOpen first:\n- [Access Steps](#/info/dva-steps)\n- [US-PIV Technique](#/info/dva-us-piv)\n- [IO Sites](#/info/dva-io-sites)\n- [Confirm / Use](#/info/dva-confirm)\n- [Stop / Complications](#/info/dva-stop)',
+    citation: [1, 2, 3],
+    images: [
+      {
+        src: 'images/difficult-vascular-access/intraosseous-infusion.png',
+        alt: 'Intraosseous humeral head infusion contrast image',
+        caption: 'Intraosseous access provides rapid noncollapsible vascular access when IV access fails. Wikimedia Commons, CC BY-SA 4.0.',
+      },
+    ],
+    next: 'dva-urgency',
+    summary: 'Escalate from failed blind IV to US-PIV or IO based on urgency.',
+    safetyLevel: 'warning',
+  },
+  {
+    id: 'dva-urgency',
+    type: 'question',
+    module: 1,
+    title: 'How Urgent Is Access?',
+    body: 'Access choice depends on whether the patient can tolerate more attempts.',
+    options: [
+      {
+        label: 'Immediate resuscitation access needed',
+        description: 'Arrest, peri-arrest, shock, status epilepticus, severe trauma, or time-critical medication',
+        next: 'dva-io-sites',
+        urgency: 'critical',
+      },
+      {
+        label: 'Urgent but can tolerate US attempt',
+        description: 'Difficult IV access with enough time for an ultrasound-guided attempt',
+        next: 'dva-us-piv-scan',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Stable / nonurgent access',
+        description: 'Use fewer attempts, better setup, vascular access team, or oral/IM route when appropriate',
+        next: 'dva-stable',
+      },
+    ],
+    citation: [1, 2, 3],
+    summary: 'Peri-arrest patients need IO; stable patients can get a controlled US-PIV attempt.',
+  },
+  {
+    id: 'dva-us-piv-scan',
+    type: 'info',
+    module: 2,
+    title: 'US-PIV: Choose The Vessel',
+    body: 'Scan before puncture.\n\nTarget:\n- Compressible vein\n- Straight segment\n- Not directly adjacent to artery/nerve\n- Depth ideally within catheter length reserve\n- Diameter large enough for catheter and flow need\n\nAvoid tiny/deep/tortuous veins where most of the catheter will not sit inside the vessel.',
+    citation: [1, 2],
+    next: 'dva-us-piv-technique',
+    summary: 'Pick a straight, compressible, adequately sized vein that matches catheter length.',
+  },
+  {
+    id: 'dva-us-piv-technique',
+    type: 'info',
+    module: 2,
+    title: 'US-PIV: Technique',
+    body: 'Technique:\n1. Sterile gel/cover per local practice.\n2. Optimize probe, depth, gain, and needle visualization.\n3. Use long-axis or short-axis with dynamic needle tip tracking.\n4. Enter shallow enough to keep the catheter in vessel.\n5. Confirm wire/catheter tip in lumen before flushing.\n6. Secure well; deep US-PIVs fail from dislodgement.\n\nVideo reference: [US-guided long-axis antecubital IV cannulation](https://commons.wikimedia.org/wiki/File:Emergency-department-ultrasonography-guided-long-axis-antecubital-intravenous-cannulation-How-to-do-2036-7902-4-3-S3.ogv).',
+    citation: [1, 2],
+    next: 'dva-us-piv-result',
+    summary: 'Dynamic needle tip tracking and catheter length in vein are the key steps.',
+  },
+  {
+    id: 'dva-us-piv-result',
+    type: 'question',
+    module: 2,
+    title: 'Did US-PIV Work?',
+    body: 'Confirm before relying on the line for resuscitation.',
+    options: [
+      {
+        label: 'Confirmed usable IV',
+        description: 'Flushes easily, no swelling/pain, tip/lumen confirmed when possible',
+        next: 'dva-confirm-use',
+      },
+      {
+        label: 'Failed or access cannot wait',
+        description: 'No line after controlled attempt or patient now unstable',
+        next: 'dva-io-sites',
+        urgency: 'critical',
+      },
+    ],
+    citation: [1, 2, 3],
+    summary: 'Failed US-PIV should not delay IO in unstable patients.',
+  },
+  {
+    id: 'dva-io-sites',
+    type: 'info',
+    module: 3,
+    title: 'IO Access: Site Selection',
+    body: 'Common ED sites:\n- Proximal tibia\n- Distal tibia\n- Proximal humerus\n- Distal femur in children when appropriate\n\nAvoid fractured bone, infected/burned insertion site, prior IO attempt in same bone, prosthetic limb/joint at target site, or inability to identify landmarks.',
+    citation: [3, 4],
+    images: [
+      {
+        src: 'images/difficult-vascular-access/intraosseous-infusion.png',
+        alt: 'Intraosseous humeral head infusion contrast image',
+        caption: 'Contrast demonstrates humeral IO infusion entering central venous circulation. Wikimedia Commons, CC BY-SA 4.0.',
+      },
+    ],
+    next: 'dva-io-technique',
+    summary: 'Choose tibial, humeral, or pediatric distal femur site and avoid fractured/infected bones.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'dva-io-technique',
+    type: 'info',
+    module: 3,
+    title: 'IO Insertion / First Use',
+    body: 'Technique:\n1. Identify landmarks and stabilize limb.\n2. Prep skin; use device per manufacturer/local protocol.\n3. Confirm loss of resistance and stable needle hub.\n4. Aspirate marrow if possible, but absence does not exclude correct placement.\n5. Flush forcefully to open marrow space.\n6. Use pressure bag/pump for flow.\n7. For awake patients, consider [Lidocaine](#/drug/lidocaine/io-pain) before flush/infusion per local protocol.',
+    citation: [3, 4],
+    next: 'dva-confirm-use',
+    summary: 'Correct IO use requires secure placement, forceful flush, and pressure-assisted infusion.',
+  },
+  {
+    id: 'dva-confirm-use',
+    type: 'info',
+    module: 4,
+    title: 'Confirm / Use The Line',
+    body: 'Confirm usability:\n- Flushes without extravasation\n- No rapidly increasing swelling or pain\n- Stable catheter/needle\n- Expected clinical response to medication/fluids\n\nIO and US-PIV are bridges. Replace with durable peripheral/central access when resuscitation stabilizes.',
+    citation: [1, 3, 4],
+    next: 'dva-complication-check',
+    summary: 'Use only after confirming flush, stability, and no extravasation.',
+  },
+  {
+    id: 'dva-complication-check',
+    type: 'question',
+    module: 4,
+    title: 'Any Access Complication?',
+    body: 'Access complications become limb-threatening when missed during high-pressure infusion.',
+    options: [
+      {
+        label: 'Line functioning safely',
+        description: 'Continue resuscitation and plan durable access',
+        next: 'dva-success',
+      },
+      {
+        label: 'Extravasation / compartment concern',
+        description: 'Swelling, tense compartment, severe pain, poor flow, distal neurovascular change',
+        next: 'dva-stop-complication',
+        urgency: 'critical',
+      },
+      {
+        label: 'Repeated failure',
+        description: 'US-PIV and IO not achievable or access inadequate',
+        next: 'dva-escalate',
+        urgency: 'critical',
+      },
+    ],
+    citation: [1, 3, 4],
+    summary: 'Monitor for extravasation, compartment syndrome, dislodgement, and inadequate flow.',
+  },
+  {
+    id: 'dva-success',
+    type: 'result',
+    module: 5,
+    title: 'Access Achieved',
+    body: 'Secure the line, label access type/site/time, reassess frequently, and transition to durable IV/central access when feasible.\n\nDocument number of attempts, ultrasound use, IO site, confirmation, complications, and patient response.',
+    recommendation: 'Use the line for urgent therapy, but continue planning durable access.',
+    confidence: 'recommended',
+    citation: [1, 3],
+    summary: 'Secure, reassess, document, and replace with durable access when stable.',
+  },
+  {
+    id: 'dva-escalate',
+    type: 'result',
+    module: 5,
+    title: 'Escalate Access',
+    body: 'Escalate when US-PIV/IO fails or does not meet resuscitation needs.\n\nOptions: central venous catheter, external jugular access, surgical/trauma access pathway, vascular access team, or alternate medication route when clinically acceptable.',
+    recommendation: 'Do not let access attempts delay airway, hemorrhage control, seizure control, or shock treatment.',
+    confidence: 'recommended',
+    citation: [1, 3, 4],
+    summary: 'Escalate to central/specialist/alternate route when access still fails.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'dva-stop-complication',
+    type: 'result',
+    module: 5,
+    title: 'Stop / Complication',
+    body: 'Stop infusion through suspected infiltrated IV or IO immediately.\n\nActions:\n- Disconnect infusion\n- Leave catheter/needle in place briefly if antidote or aspiration is needed\n- Assess distal pulses, motor/sensory status, compartment firmness\n- Elevate limb when appropriate\n- Call surgery/orthopedics for compartment concern\n- Re-site access elsewhere',
+    recommendation: 'Treat suspected IO/IV extravasation as a high-risk access complication until proven otherwise.',
+    confidence: 'recommended',
+    citation: [3, 4],
+    summary: 'Stop infusion and reassess limb when extravasation or compartment syndrome is possible.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'dva-stable',
+    type: 'result',
+    module: 5,
+    title: 'Stable Difficult Access',
+    body: 'Limit blind attempts and improve the next attempt: ultrasound, warmed extremity, lower probe pressure, longer catheter, experienced operator, or vascular access team.\n\nIf therapy is nonurgent, choose oral/IM/subcutaneous route when safe.',
+    recommendation: 'Use the least harmful route that reliably delivers the needed therapy.',
+    confidence: 'consider',
+    citation: [1, 2],
+    summary: 'Stable patients benefit from fewer attempts and better setup.',
+  },
+];
+
+export const DIFFICULT_VASCULAR_ACCESS_CRITICAL_ACTIONS = [
+  { text: 'Use IO immediately when access cannot wait.', nodeId: 'dva-urgency' },
+  { text: 'US-PIV success depends on vein depth, catheter length, and needle tip tracking.', nodeId: 'dva-us-piv-technique' },
+  { text: 'Avoid IO through fracture, infection/burn, or same-bone prior IO attempt.', nodeId: 'dva-io-sites' },
+  { text: 'Flush forcefully and use pressure infusion for IO flow.', nodeId: 'dva-io-technique' },
+  { text: 'Stop infusion immediately for extravasation or compartment concern.', nodeId: 'dva-stop-complication' },
+];
+
+export const DIFFICULT_VASCULAR_ACCESS_CITATIONS: Citation[] = [
+  { num: 1, text: 'Egan G, Healy D, ONeill H, Clarke-Moloney M, Grace PA, Walsh SR. Ultrasound guidance for difficult peripheral venous access: systematic review and meta-analysis. Emerg Med J. 2013;30(7):521-526.' },
+  { num: 2, text: 'Stolz LA, Cappa AR, Minckler MR, et al. Prospective evaluation of ultrasound-guided peripheral intravenous catheter survival. Am J Emerg Med. 2016;34(6):947-950.' },
+  { num: 3, text: 'Petitpas F, Guenezan J, Vendeuvre T, Scepi M, Oriot D, Mimoz O. Use of intra-osseous access in adults: a systematic review. Crit Care. 2016;20:102.' },
+  { num: 4, text: 'American Heart Association. 2020 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2020;142(16_suppl_2):S366-S468.' },
+];
+
+export const DIFFICULT_VASCULAR_ACCESS_NODE_COUNT = DIFFICULT_VASCULAR_ACCESS_NODES.length;
+export const DIFFICULT_VASCULAR_ACCESS_MODULE_LABELS = ['Urgency', 'US-PIV', 'IO', 'Confirm', 'Complications'];

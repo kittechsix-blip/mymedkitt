@@ -185,6 +185,22 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/thoracotomy-procedure.js');
             return { nodes: m.THORACOTOMY_PROCEDURE_NODES, entryNodeId: 'thorac-start', categoryId: 'procedures', moduleLabels: m.THORACOTOMY_PROCEDURE_MODULE_LABELS, citations: m.THORACOTOMY_PROCEDURE_CITATIONS, criticalActions: m.THORACOTOMY_PROCEDURE_CRITICAL_ACTIONS };
         },
+        'procedural-sedation': async () => {
+            const m = await import('../data/trees/procedural-sedation.js');
+            return { nodes: m.PROCEDURAL_SEDATION_NODES, entryNodeId: 'ps-start', categoryId: 'procedures', moduleLabels: m.PROCEDURAL_SEDATION_MODULE_LABELS, citations: m.PROCEDURAL_SEDATION_CITATIONS, criticalActions: m.PROCEDURAL_SEDATION_CRITICAL_ACTIONS };
+        },
+        'joint-arthrocentesis': async () => {
+            const m = await import('../data/trees/joint-arthrocentesis.js');
+            return { nodes: m.JOINT_ARTHROCENTESIS_NODES, entryNodeId: 'arth-start', categoryId: 'procedures', moduleLabels: m.JOINT_ARTHROCENTESIS_MODULE_LABELS, citations: m.JOINT_ARTHROCENTESIS_CITATIONS, criticalActions: m.JOINT_ARTHROCENTESIS_CRITICAL_ACTIONS };
+        },
+        'difficult-vascular-access': async () => {
+            const m = await import('../data/trees/difficult-vascular-access.js');
+            return { nodes: m.DIFFICULT_VASCULAR_ACCESS_NODES, entryNodeId: 'dva-start', categoryId: 'procedures', moduleLabels: m.DIFFICULT_VASCULAR_ACCESS_MODULE_LABELS, citations: m.DIFFICULT_VASCULAR_ACCESS_CITATIONS, criticalActions: m.DIFFICULT_VASCULAR_ACCESS_CRITICAL_ACTIONS };
+        },
+        'paracentesis': async () => {
+            const m = await import('../data/trees/paracentesis.js');
+            return { nodes: m.PARACENTESIS_NODES, entryNodeId: 'para-start', categoryId: 'procedures', moduleLabels: m.PARACENTESIS_MODULE_LABELS, citations: m.PARACENTESIS_CITATIONS, criticalActions: m.PARACENTESIS_CRITICAL_ACTIONS };
+        },
         'vasopressor-extravasation': async () => {
             const m = await import('../data/trees/vasopressor-extravasation.js');
             return { nodes: m.VASOPRESSOR_EXTRAVASATION_NODES, entryNodeId: 'vex-start', categoryId: 'pharmacist', moduleLabels: m.VASOPRESSOR_EXTRAVASATION_MODULE_LABELS, citations: m.VASOPRESSOR_EXTRAVASATION_CITATIONS, criticalActions: m.VASOPRESSOR_EXTRAVASATION_CRITICAL_ACTIONS };

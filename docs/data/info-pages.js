@@ -21743,6 +21743,304 @@ const PD_DRAIN_PROCEDURE_PAGE = {
         { num: 2, text: 'Szeto CC et al. ISPD Catheter-Related Infection Recommendations: 2017 Update. Perit Dial Int. 2017;37(2):141-154.' },
     ],
 };
+// -------------------------------------------------------------------
+// Procedure Scout Batch: Sedation, Arthrocentesis, Vascular Access, Paracentesis
+// -------------------------------------------------------------------
+const PS_STEPS_PAGE = {
+    id: 'ps-steps',
+    title: 'Procedural Sedation: Steps',
+    subtitle: 'Read before medication',
+    sections: [
+        {
+            body: '1. Confirm indication, procedure plan, and sedation depth target.\n2. Risk screen: airway, aspiration, cardiopulmonary reserve, frailty, pregnancy, intoxication, prior sedation complication.\n3. Assign roles: proceduralist, dedicated monitor, airway/rescue lead.\n4. Set up oxygen, suction, BVM, airways, monitor, capnography when available, and resuscitation meds.\n5. Choose agent based on pain, duration, hemodynamics, and airway risk.\n6. Dose intentionally and titrate only after reassessment.\n7. Pause procedure for apnea, obstruction, desaturation, hypotension, vomiting, or laryngospasm.\n8. Recover until airway, perfusion, mentation, pain control, and disposition are safe.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Godwin SA, Burton JH, Gerardo CJ, et al. Clinical policy: procedural sedation and analgesia in the emergency department. Ann Emerg Med. 2014;63(2):247-258.e18.' },
+    ],
+};
+const PS_AIRWAY_PAGE = {
+    id: 'ps-airway',
+    title: 'Sedation Airway Setup',
+    subtitle: 'Rescue must be ready before the drug',
+    image: {
+        src: 'images/procedural-sedation/ambu-bag-valve-mask.jpg',
+        alt: 'Bag-valve-mask airway rescue equipment',
+        caption: 'Airway rescue equipment must be immediately available before sedation. Wikimedia Commons, CC BY-SA/GFDL.',
+    },
+    sections: [
+        {
+            body: '- Preoxygenate when feasible.\n- Suction on and reachable.\n- BVM connected to oxygen.\n- Oral/nasal airways available.\n- Intubation backup available.\n- Dedicated monitor watches patient ventilation, not the procedure.\n- Stop procedure and rescue ventilation early for apnea/obstruction.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American College of Emergency Physicians. Unscheduled procedural sedation: patient care policy statement.' },
+    ],
+};
+const PS_AGENTS_PAGE = {
+    id: 'ps-agents',
+    title: 'Sedation Agent Selection',
+    subtitle: 'Match drug to physiology and procedure',
+    sections: [
+        {
+            body: '- Need dissociation/preserved respiratory drive: ketamine.\n- Need very brief deep sedation: propofol, etomidate, or ketofol per local protocol.\n- Need analgesia/anxiolysis but not deep sedation: opioid plus cautious benzodiazepine titration.\n- Hemodynamic fragility: avoid casual propofol boluses; consider alternative strategy.\n- Painful procedure: do not use a pure hypnotic without analgesia.\n- Elderly/frail/intoxicated patients: use lower starting doses and longer reassessment intervals.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Green SM, Roback MG, Kennedy RM, Krauss B. Clinical practice guideline for emergency department ketamine dissociative sedation. Ann Emerg Med. 2011;57(5):449-461.' },
+    ],
+};
+const PS_MONITOR_PAGE = {
+    id: 'ps-monitor',
+    title: 'Sedation Monitoring',
+    subtitle: 'Recognize ventilation failure early',
+    image: {
+        src: 'images/procedural-sedation/capnography-co2-mixing.png',
+        alt: 'Capnography waveform diagram',
+        caption: 'Capnography can detect hypoventilation before pulse oximetry falls. Wikimedia Commons, CC BY-SA 4.0.',
+    },
+    sections: [
+        {
+            body: 'Monitor continuously:\n- Airway patency and chest rise\n- SpO2\n- Capnography waveform/ETCO2 when available\n- Blood pressure and perfusion\n- Sedation depth\n- Procedure progress\n\nAct on apnea, obstructive waveform loss, rising/falling ETCO2 with poor ventilation, desaturation, hypotension, vomiting, or laryngospasm.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Practice Guidelines for Moderate Procedural Sedation and Analgesia 2018. Anesthesiology. 2018;128(3):437-479.' },
+    ],
+};
+const PS_STOP_PAGE = {
+    id: 'ps-stop',
+    title: 'Sedation Stop / Escalate',
+    subtitle: 'When routine ED sedation is not the right path',
+    sections: [
+        {
+            body: 'Stop or escalate for:\n- Anticipated impossible ventilation or intubation rescue\n- Unstable physiology not explained by procedure pain alone\n- Procedure too long/complex for ED recovery\n- No dedicated monitor or inadequate equipment\n- No recovery space/disposition plan\n- Persistent apnea, laryngospasm, aspiration concern, hypotension, or prolonged sedation\n\nUse anesthesia, OR, ICU, or specialist pathway when the risk exceeds ED resources.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Godwin SA, Burton JH, Gerardo CJ, et al. Ann Emerg Med. 2014;63(2):247-258.e18.' },
+    ],
+};
+const ARTH_STEPS_PAGE = {
+    id: 'arth-steps',
+    title: 'Arthrocentesis: Steps',
+    subtitle: 'Diagnostic joint aspiration',
+    image: {
+        src: 'images/joint-arthrocentesis/knee-effusion-annotated.jpg',
+        alt: 'Annotated knee effusion radiograph',
+        caption: 'Knee effusion supports aspiration when septic arthritis is possible. Wikimedia Commons, CC0.',
+    },
+    sections: [
+        {
+            body: '1. Confirm indication: acute effusion/monoarthritis where septic arthritis or crystals matter.\n2. Inspect skin and select route that avoids infection, vessels, and nerves.\n3. Prep sterile field; anesthetize skin/tract.\n4. Enter joint with steady aspiration.\n5. Send culture, cell count with differential, and crystals.\n6. Obtain blood cultures if septic arthritis is possible.\n7. Start antibiotics after cultures/aspiration when this does not dangerously delay care.\n8. Consult orthopedics/admit if septic arthritis remains possible.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Margaretten ME, Kohlwes J, Moore D, Bent S. Does this adult patient have septic arthritis? JAMA. 2007;297(13):1478-1488.' },
+    ],
+};
+const ARTH_CONTRA_PAGE = {
+    id: 'arth-contra',
+    title: 'Arthrocentesis Contraindications',
+    subtitle: 'Route and risk screen',
+    sections: [
+        {
+            body: 'Avoid or escalate:\n- Overlying cellulitis/abscess blocking the route\n- Prosthetic joint unless orthopedic/local policy supports ED tap\n- Hip or deep joint needing image guidance\n- Unclear anatomy or no effusion\n- Patient cannot cooperate safely\n- Severe coagulopathy/anticoagulation when risk outweighs diagnostic urgency\n\nSeptic arthritis risk may justify aspiration despite relative cautions.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Horowitz DL, Katzap E, Horowitz S, Barilla-LaBarca ML. Approach to septic arthritis. Am Fam Physician. 2011;84(6):653-660.' },
+    ],
+};
+const ARTH_TAP_PAGE = {
+    id: 'arth-tap',
+    title: 'Knee Tap Technique',
+    subtitle: 'Simple ED approach',
+    sections: [
+        {
+            body: '- Position knee supported, slightly flexed or extended.\n- Prep widely and maintain sterile field.\n- Use local anesthetic down the tract.\n- Common route: lateral/superolateral into suprapatellar recess.\n- Aspirate gently while advancing.\n- Withdraw before redirecting.\n- Stop for severe pain, paresthesia, or unsafe trajectory.\n- Use ultrasound when effusion is small or landmarks are poor.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Sibbitt WL Jr, Band PA, Kettwich LG, et al. Ultrasound-guided arthrocentesis. J Rheumatol. 2009;36(8):1891-1900.' },
+    ],
+};
+const ARTH_FLUID_PAGE = {
+    id: 'arth-fluid',
+    title: 'Synovial Fluid Interpretation',
+    subtitle: 'Do not let crystals falsely reassure',
+    image: {
+        src: 'images/joint-arthrocentesis/septic-joint-fluid.jpg',
+        alt: 'Purulent synovial fluid',
+        caption: 'Purulent synovial fluid is concerning for septic arthritis. Wikimedia Commons, CC BY-SA 4.0.',
+    },
+    sections: [
+        {
+            body: '- Purulent fluid, positive Gram stain, positive culture, or very inflammatory fluid: septic arthritis pathway.\n- Crystals: gout/CPPD supported, but infection can coexist.\n- Bloody fluid: traumatic tap, hemarthrosis, fracture, anticoagulation, internal derangement.\n- Low-inflammatory fluid: reassess OA, trauma, bursitis, cellulitis, referred pain.\n- Culture results and clinical course override a single borderline cell count.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ross JJ. Septic arthritis of native joints. Infect Dis Clin North Am. 2017;31(2):203-218.' },
+    ],
+};
+const ARTH_STOP_PAGE = {
+    id: 'arth-stop',
+    title: 'Arthrocentesis Stop / Escalate',
+    subtitle: 'Unsafe tap or high-risk result',
+    sections: [
+        {
+            body: 'Stop blind ED tap and escalate for:\n- No safe route\n- Deep/prosthetic/small joint needing specialty pathway\n- Overlying infection blocking access\n- Failed attempt with severe pain or paresthesia\n- Patient cannot cooperate safely\n\nDo not delay antibiotics for dangerous suspected septic arthritis while waiting for an impossible aspiration.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Shirtliff ME, Mader JT. Acute septic arthritis. Clin Microbiol Rev. 2002;15(4):527-544.' },
+    ],
+};
+const DVA_STEPS_PAGE = {
+    id: 'dva-steps',
+    title: 'Difficult Access: Steps',
+    subtitle: 'US-PIV vs IO',
+    sections: [
+        {
+            body: '1. Decide urgency.\n2. If arrest/peri-arrest/shock/time-critical drug: place IO now.\n3. If stable enough: use controlled ultrasound-guided PIV attempt.\n4. Pick compressible straight vein with catheter-length reserve.\n5. Track needle tip dynamically and confirm catheter in lumen.\n6. If US-PIV fails or access cannot wait: IO.\n7. Confirm flush/no swelling before relying on the line.\n8. Transition to durable IV/central access after stabilization.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Egan G, Healy D, ONeill H, Clarke-Moloney M, Grace PA, Walsh SR. Ultrasound guidance for difficult peripheral venous access. Emerg Med J. 2013;30(7):521-526.' },
+    ],
+};
+const DVA_US_PIV_PAGE = {
+    id: 'dva-us-piv',
+    title: 'US-PIV Technique',
+    subtitle: 'Make the first guided attempt count',
+    sections: [
+        {
+            body: '- Scan before puncture.\n- Target compressible vein, straight segment, adequate diameter, and depth compatible with catheter length.\n- Avoid artery/nerve-adjacent targets.\n- Use long-axis or short-axis with dynamic needle tip tracking.\n- Confirm catheter tip/lumen before flush.\n- Secure well; deep US-PIVs fail from dislodgement.\n\nVideo reference: https://commons.wikimedia.org/wiki/File:Emergency-department-ultrasonography-guided-long-axis-antecubital-intravenous-cannulation-How-to-do-2036-7902-4-3-S3.ogv',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Stolz LA, Cappa AR, Minckler MR, et al. Prospective evaluation of ultrasound-guided peripheral intravenous catheter survival. Am J Emerg Med. 2016;34(6):947-950.' },
+    ],
+};
+const DVA_IO_SITES_PAGE = {
+    id: 'dva-io-sites',
+    title: 'IO Sites',
+    subtitle: 'Fast access when IV cannot wait',
+    image: {
+        src: 'images/difficult-vascular-access/intraosseous-infusion.png',
+        alt: 'Humeral intraosseous infusion contrast image',
+        caption: 'Humeral IO contrast enters central venous circulation. Wikimedia Commons, CC BY-SA 4.0.',
+    },
+    sections: [
+        {
+            body: 'Common ED sites:\n- Proximal tibia\n- Distal tibia\n- Proximal humerus\n- Distal femur in children when appropriate\n\nAvoid:\n- Fractured target bone\n- Infection/burn at site\n- Prior IO attempt in same bone\n- Prosthetic limb/joint at target\n- Landmarks not identifiable',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Petitpas F, Guenezan J, Vendeuvre T, Scepi M, Oriot D, Mimoz O. Use of intra-osseous access in adults: a systematic review. Crit Care. 2016;20:102.' },
+    ],
+};
+const DVA_CONFIRM_PAGE = {
+    id: 'dva-confirm',
+    title: 'Confirm / Use Access',
+    subtitle: 'Do not trust a line you have not checked',
+    sections: [
+        {
+            body: 'Confirm before using:\n- Flushes without swelling or severe pain\n- Catheter/needle stable\n- Expected flow with pressure when needed\n- Medication effect makes clinical sense\n\nIO pearls:\n- Marrow aspiration helps but is not required.\n- Forceful flush opens the marrow space.\n- Pressure bag/pump is usually required for flow.\n- Awake patients may need intraosseous lidocaine per protocol.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American Heart Association. 2020 Guidelines for CPR and Emergency Cardiovascular Care. Circulation. 2020;142(16_suppl_2):S366-S468.' },
+    ],
+};
+const DVA_STOP_PAGE = {
+    id: 'dva-stop',
+    title: 'Access Stop / Complications',
+    subtitle: 'Extravasation is the dangerous miss',
+    sections: [
+        {
+            body: 'Stop infusion and reassess for:\n- Swelling or tense compartment\n- Severe pain with infusion\n- Poor flow despite pressure\n- Distal neurovascular change\n- Dislodged catheter/IO needle\n- Suspected compartment syndrome\n\nActions: stop infusion, assess limb, call surgery/orthopedics for compartment concern, and establish alternate access.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Petitpas F, Guenezan J, Vendeuvre T, Scepi M, Oriot D, Mimoz O. Crit Care. 2016;20:102.' },
+    ],
+};
+const PARA_STEPS_PAGE = {
+    id: 'para-steps',
+    title: 'Paracentesis: Steps',
+    subtitle: 'Diagnostic or therapeutic',
+    image: {
+        src: 'images/paracentesis/ascites-ultrasound.jpg',
+        alt: 'Ultrasound image of ascites',
+        caption: 'Confirm a bowel-free ascites pocket before puncture. Wikimedia Commons, CC BY 3.0.',
+    },
+    sections: [
+        {
+            body: '1. Confirm indication: SBP/decompensation evaluation or symptomatic tense ascites.\n2. Ultrasound for fluid pocket, depth, and bowel-free path.\n3. Avoid infected skin, vessels, scars, distended bowel, and unsafe pockets.\n4. Prep sterile field and anesthetize to peritoneum.\n5. Diagnostic tap: collect cell count/diff, culture bottles, albumin, protein.\n6. Therapeutic tap: place catheter and drain while monitoring symptoms/vitals.\n7. Treat PMN >=250 cells/mm3 as SBP.\n8. Give albumin after large-volume paracentesis per guideline/local protocol.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Biggins SW, Angeli P, Garcia-Tsao G, et al. AASLD practice guidance: ascites, SBP and hepatorenal syndrome. Hepatology. 2021;74(2):1014-1048.' },
+    ],
+};
+const PARA_US_SITE_PAGE = {
+    id: 'para-us-site',
+    title: 'Paracentesis Ultrasound Site',
+    subtitle: 'No safe pocket, no blind tap',
+    image: {
+        src: 'images/paracentesis/ascites-ultrasound.jpg',
+        alt: 'Ultrasound image of ascites',
+        caption: 'Ultrasound identifies fluid depth and bowel-free trajectory. Wikimedia Commons, CC BY 3.0.',
+    },
+    sections: [
+        {
+            body: 'Confirm:\n- Adequate pocket\n- Bowel-free path\n- Safe skin site\n- Depth from skin to fluid\n- No abdominal wall vessel when Doppler available\n\nCommon sites: left or right lower quadrant lateral to rectus. Avoid scars, distended bowel, infected skin, and superficial vessels.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Mercaldi CJ, Lanes SF. Ultrasound guidance decreases complications among patients undergoing thoracentesis and paracentesis. Chest. 2013;143(2):532-538.' },
+    ],
+};
+const PARA_LABS_PAGE = {
+    id: 'para-labs',
+    title: 'Ascites Fluid Labs',
+    subtitle: 'What to send and how to read it',
+    sections: [
+        {
+            body: 'Core labs:\n- Cell count with differential\n- Culture inoculated into blood culture bottles at bedside when possible\n- Albumin\n- Total protein\n\nInterpretation:\n- PMN >=250 cells/mm3: SBP until proven otherwise.\n- SAAG >=1.1 g/dL supports portal hypertension.\n- Low SAAG, high protein, bloody, chylous, pancreatic, or polymicrobial pattern needs broader workup.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Runyon BA. Management of adult patients with ascites due to cirrhosis: an update. Hepatology. 2009;49(6):2087-2107.' },
+    ],
+};
+const PARA_ALBUMIN_PAGE = {
+    id: 'para-albumin',
+    title: 'Albumin After Paracentesis',
+    subtitle: 'Large-volume and SBP indications',
+    sections: [
+        {
+            body: '- Large-volume paracentesis: give albumin per guideline/local protocol, commonly when >5 L removed.\n- SBP: albumin is recommended in selected high-risk patients, especially renal dysfunction, high bilirubin, or severe disease criteria.\n- Albumin does not replace antibiotics or source evaluation.\n- Reassess blood pressure, renal function, sodium, and ongoing drainage/leak.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Biggins SW, Angeli P, Garcia-Tsao G, et al. Hepatology. 2021;74(2):1014-1048.' },
+    ],
+};
+const PARA_STOP_PAGE = {
+    id: 'para-stop',
+    title: 'Paracentesis Stop / Complications',
+    subtitle: 'When to stop and escalate',
+    sections: [
+        {
+            body: 'Stop and reassess for:\n- No safe ultrasound pocket\n- Severe pain\n- Bowel contents, bilious, feculent, or unexpected bloody return\n- Hypotension\n- Persistent bleeding or expanding hematoma\n- Catheter malfunction or unsafe position\n\nEscalate to experienced proceduralist, IR, surgery, or GI when the procedure cannot be completed safely.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Moore KP, Aithal GP. Guidelines on the management of ascites in cirrhosis. Gut. 2006;55 Suppl 6:vi1-vi12.' },
+    ],
+};
 export const INFO_PAGES = {
     // Peritoneal Dialysis
     'pd-summary': PD_SUMMARY_PAGE,
@@ -21750,6 +22048,27 @@ export const INFO_PAGES = {
     'pd-ip-abx-table': PD_IP_ABX_TABLE_PAGE,
     'pd-bridge-decision': PD_BRIDGE_DECISION_PAGE,
     'pd-drain-procedure': PD_DRAIN_PROCEDURE_PAGE,
+    // Procedure Scout Batch
+    'ps-steps': PS_STEPS_PAGE,
+    'ps-airway': PS_AIRWAY_PAGE,
+    'ps-agents': PS_AGENTS_PAGE,
+    'ps-monitor': PS_MONITOR_PAGE,
+    'ps-stop': PS_STOP_PAGE,
+    'arth-steps': ARTH_STEPS_PAGE,
+    'arth-contra': ARTH_CONTRA_PAGE,
+    'arth-tap': ARTH_TAP_PAGE,
+    'arth-fluid': ARTH_FLUID_PAGE,
+    'arth-stop': ARTH_STOP_PAGE,
+    'dva-steps': DVA_STEPS_PAGE,
+    'dva-us-piv': DVA_US_PIV_PAGE,
+    'dva-io-sites': DVA_IO_SITES_PAGE,
+    'dva-confirm': DVA_CONFIRM_PAGE,
+    'dva-stop': DVA_STOP_PAGE,
+    'para-steps': PARA_STEPS_PAGE,
+    'para-us-site': PARA_US_SITE_PAGE,
+    'para-labs': PARA_LABS_PAGE,
+    'para-albumin': PARA_ALBUMIN_PAGE,
+    'para-stop': PARA_STOP_PAGE,
     // Traumatic Arrest / Resuscitative Thoracotomy
     'ta-steps': TA_STEPS_PAGE,
     'ta-hott': TA_HOTT_PAGE,

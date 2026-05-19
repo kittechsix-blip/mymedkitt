@@ -12266,6 +12266,38 @@ const SUCRALFATE: DrugEntry = {
   ],
 };
 
+const ALBUMIN: DrugEntry = {
+  id: 'albumin',
+  name: 'Albumin',
+  genericName: 'Human albumin',
+  drugClass: 'Plasma protein / volume expander',
+  route: 'IV',
+  indications: ['Large-volume paracentesis', 'Spontaneous bacterial peritonitis adjunct'],
+  dosing: [
+    {
+      indication: 'Large-volume paracentesis',
+      regimen: 'Give albumin after large-volume paracentesis per guideline/local protocol, commonly 6-8 g per liter of ascites removed when >5 L removed.',
+    },
+    {
+      indication: 'SBP',
+      regimen: 'Adjunct for selected high-risk SBP patients per guideline/local protocol, especially renal dysfunction, high bilirubin, or severe disease criteria. Common regimen: 1.5 g/kg day 1 and 1 g/kg day 3.',
+      weightCalc: { dosePerKg: 1.5, unit: 'g' },
+    },
+  ],
+  contraindications: ['Known hypersensitivity to albumin products'],
+  cautions: [
+    'Use caution with pulmonary edema or severe heart failure',
+    'Do not delay antibiotics for SBP while arranging albumin',
+    'Institutional concentration/product availability varies',
+  ],
+  monitoring: 'Blood pressure, respiratory status, volume status, renal function, sodium, and clinical response.',
+  notes: 'Used after large-volume paracentesis to reduce post-paracentesis circulatory dysfunction and as adjunct in selected high-risk SBP.',
+  citations: [
+    'Biggins SW, Angeli P, Garcia-Tsao G, et al. AASLD practice guidance: ascites, SBP and hepatorenal syndrome. Hepatology. 2021;74(2):1014-1048.',
+    'Runyon BA. Management of adult patients with ascites due to cirrhosis: an update. Hepatology. 2009;49(6):2087-2107.',
+  ],
+};
+
 export const ALL_DRUGS: DrugEntry[] = [
   ACAMPROSATE,
   ACETAMINOPHEN,
@@ -12274,6 +12306,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   ACYCLOVIR,
   ALBUTEROL_NEB,
   ALLOPURINOL,
+  ALBUMIN,
   ALTEPLASE,
   AMIODARONE,
   AMINOCAPROIC_ACID,
