@@ -701,6 +701,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/myasthenia-gravis.js');
             return { nodes: m.MYASTHENIA_GRAVIS_NODES, entryNodeId: 'mg-start', categoryId: 'neurology', moduleLabels: m.MYASTHENIA_GRAVIS_MODULE_LABELS, citations: m.MYASTHENIA_GRAVIS_CITATIONS, criticalActions: m.MYASTHENIA_GRAVIS_CRITICAL_ACTIONS };
         },
+        'parkinson-ed': async () => {
+            const m = await import('../data/trees/parkinson-ed.js');
+            return { nodes: m.PARKINSON_ED_NODES, entryNodeId: 'pd-start', categoryId: 'neurology', moduleLabels: m.PARKINSON_ED_MODULE_LABELS, citations: m.PARKINSON_ED_CITATIONS, criticalActions: m.PARKINSON_ED_CRITICAL_ACTIONS };
+        },
         'botulism': async () => {
             const m = await import('../data/trees/botulism.js');
             return { nodes: m.BOTULISM_NODES, entryNodeId: 'bot-start', categoryId: 'neurology', moduleLabels: m.BOTULISM_MODULE_LABELS, citations: m.BOTULISM_CITATIONS, criticalActions: m.BOTULISM_CRITICAL_ACTIONS };

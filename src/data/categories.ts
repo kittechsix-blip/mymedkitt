@@ -1543,6 +1543,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'ms-start',
       },
       {
+        id: 'parkinson-ed',
+        title: 'Parkinson Disease ED Management',
+        subtitle: 'Med Rec → Off-State vs PDH → Aspiration → Avoid Dopamine Blockers → Levodopa Restart → Disposition',
+        categoryId: 'neurology',
+        version: '1.0',
+        nodeCount: 20,
+        entryNodeId: 'pd-start',
+      },
+      {
         id: 'cauda-equina',
         title: 'Cauda Equina Syndrome',
         subtitle: 'Recognition → Red Flags → Exam → Imaging → Neurosurgery → Disposition',

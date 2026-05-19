@@ -739,6 +739,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'mg-pyridostigmine', label: 'Mestinon', icon: '💊', action: 'calculator', target: 'mg-pyridostigmine' },
         { id: 'mg-ivig', label: 'IVIG/PLEX', icon: '💉', action: 'calculator', target: 'mg-ivig-plex' },
     ],
+    'parkinson-ed': [
+        { id: 'pd-avoid', label: 'Drug Avoid', icon: '⛔', action: 'jump', target: 'pd-avoid-blockers' },
+        { id: 'pd-pdh', label: 'PDH Crisis', icon: '🚨', action: 'jump', target: 'pd-pdh' },
+        { id: 'pd-bridge', label: 'NPO Bridge', icon: '💊', action: 'jump', target: 'pd-npo-bridge' },
+        { id: 'pd-safe', label: 'Safe Subs', icon: '✅', action: 'jump', target: 'pd-safe-alternatives' },
+        { id: 'pd-restart', label: 'Restart', icon: '🔄', action: 'jump', target: 'pd-levodopa-restart' },
+    ],
     'botulism': [
         { id: 'bot-types', label: 'Types', icon: '🔀', action: 'calculator', target: 'bot-types' },
         { id: 'bot-ddx', label: 'DDx', icon: '📋', action: 'calculator', target: 'bot-ddx' },
