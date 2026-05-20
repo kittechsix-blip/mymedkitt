@@ -246,30 +246,35 @@ const HBV_SEROLOGY_PAGE = {
 // -------------------------------------------------------------------
 const STROKE_CONTRAINDICATIONS_PAGE = {
     id: 'stroke-contraindications',
-    title: 'Thrombolysis Contraindications',
-    subtitle: 'IV Thrombolysis Eligibility \u2014 Acute Ischemic Stroke',
+    title: 'Thrombolysis Contraindication Checklist',
+    subtitle: 'IV thrombolysis screen \u2014 acute ischemic stroke',
     sections: [
         {
-            heading: 'Absolute Contraindications',
-            body: '\u2022 Active internal bleeding (excluding menses)\n\u2022 History of hemorrhagic stroke or stroke of unknown origin\n\u2022 Ischemic stroke within 3 months\n\u2022 Significant head trauma or intracranial/spinal surgery within 3 months\n\u2022 Intracranial neoplasm, AVM, or aneurysm\n\u2022 Known bleeding diathesis (platelets <100,000, INR >1.7, aPTT >40s, PT >15s)\n\u2022 Current anticoagulant use with INR >1.7 or PT >15s\n\u2022 Low-molecular-weight heparin at therapeutic dose within 24 hours\n\u2022 Direct thrombin inhibitor or factor Xa inhibitor within 48 hours (unless lab testing shows normal levels)\n\u2022 Blood glucose <50 mg/dL',
+            heading: 'Before You Say No',
+            body: '\u2022 Confirm disabling deficit, last-known-well/time window, and no hemorrhage on initial imaging.\n\u2022 Do **not** delay IV thrombolysis for CBC/coags/chemistry if there is no anticoagulant use, bleeding history, thrombocytopenia concern, or other reason to suspect an abnormal result. [1]\n\u2022 If IV thrombolysis is contraindicated, keep the stroke pathway moving: CTA/CTP or MRI/MRA for LVO/EVT selection.\n\u2022 Use local stroke protocol for agent choice and dose. Tenecteplase and alteplase eligibility rules overlap but are not identical by institution. [1]',
         },
         {
-            heading: 'Relative Contraindications',
-            body: '**Time-Based:**\n\u2022 Rapidly improving or minor symptoms (but disabling deficits still warrant treatment)\n\u2022 Pregnancy (weigh risk-benefit; not an absolute contraindication)\n\u2022 Seizure at stroke onset (if residual deficits are due to stroke, not postictal)\n\u2022 Major surgery or serious trauma within 14 days\n\n**Lab/Medication-Based:**\n\u2022 Arterial puncture at non-compressible site within 7 days\n\u2022 Lumbar puncture within 7 days\n\u2022 GI or urinary tract hemorrhage within 21 days\n\u2022 Myocardial infarction within 3 months\n\n**Imaging-Based:**\n\u2022 Large hypodensity on NCCT (>1/3 MCA territory) \u2014 suggests extensive infarction, higher hemorrhagic conversion risk\n\u2022 Intracranial hemorrhage on baseline imaging',
+            heading: 'Hard Stop / Do Not Give IV Thrombolysis',
+            body: '\u2022 Any intracranial hemorrhage on baseline imaging.\n\u2022 Suspected subarachnoid hemorrhage, even if initial CT is normal.\n\u2022 Active internal bleeding or known major bleeding diathesis.\n\u2022 Platelets <100,000, INR >1.7, PT >15 sec, or aPTT elevated from heparin/direct thrombin inhibitor effect.\n\u2022 Therapeutic LMWH within 24 hours.\n\u2022 DOAC use within ~48 hours unless sensitive testing and renal function show no clinically relevant anticoagulant effect.\n\u2022 Persistent BP >185/110 despite treatment.\n\u2022 Blood glucose <50 mg/dL until corrected and stroke mimic excluded.\n\u2022 Significant head trauma, intracranial/spinal surgery, or ischemic stroke within 3 months.\n\u2022 Intracranial neoplasm, AVM, aneurysm, or other high-risk structural lesion.\n\u2022 Suspected aortic dissection or infective endocarditis with embolic stroke: treat as high-risk; involve stroke/neuro urgently.',
         },
         {
-            heading: 'Blood Pressure Requirements',
-            body: '**Before thrombolysis:** BP must be <185/110 mmHg\n\u2022 [Labetalol](#/drug/labetalol) 10\u201320 mg IV bolus (first-line)\n\u2022 [Nicardipine](#/drug/nicardipine) 5 mg/hr IV infusion (if labetalol insufficient)\n\u2022 [Clevidipine](#/drug/clevidipine) 1\u20132 mg/hr IV (alternative)\n\nIf BP cannot be reduced to <185/110: **do NOT give thrombolysis**\n\n**After thrombolysis:** Maintain BP <180/105 \u00D7 24 hours\n\u2022 Same agents as above; neuro checks every 15 min',
+            heading: 'Relative / Discuss, Do Not Auto-Stop',
+            body: '\u2022 Rapidly improving but still disabling deficit: consider treatment if disabling symptoms persist.\n\u2022 Minor **non-disabling** deficit: usually no IV thrombolysis; use DAPT pathway when appropriate.\n\u2022 Seizure at onset: treat if persistent deficit is believed to be stroke, not postictal paralysis.\n\u2022 Pregnancy/postpartum: individualized risk-benefit; not an automatic exclusion.\n\u2022 Recent major surgery, serious trauma, GI/GU bleed, arterial puncture at noncompressible site, or lumbar puncture: discuss urgently with stroke team.\n\u2022 Large early infarct/hypodensity or large core: higher hemorrhage risk; neuro/stroke team decision.',
         },
         {
-            heading: 'Extended Window Considerations (4.5\u20139h)',
-            body: 'Patients in the 4.5\u20139 hour window may still be eligible for IVT if:\n\u2022 Perfusion imaging shows salvageable tissue (DWI-FLAIR mismatch on MRI, or CT perfusion with favorable penumbra)\n\u2022 No additional contraindications beyond standard list\n\u2022 Based on EXTEND trial evidence [3]',
+            heading: 'BP + Lab Gates',
+            body: '**Before thrombolysis:** BP must be <185/110 mmHg\n\u2022 [Labetalol](#/drug/labetalol) 10\u201320 mg IV bolus\n\u2022 [Nicardipine](#/drug/nicardipine) 5 mg/hr IV infusion if repeated boluses are not enough\n\u2022 [Clevidipine](#/drug/clevidipine) 1\u20132 mg/hr IV alternative\n\nIf BP cannot be lowered and maintained <185/110: **do not give IV thrombolysis.**\n\n**After thrombolysis:** maintain BP <180/105 for 24 hours and avoid antithrombotics for the first 24 hours unless a stroke specialist directs otherwise. [1]\n\n**Required now:** fingerstick glucose. CBC/coags/chemistry are targeted when history, medication list, or exam suggests they matter.',
+        },
+        {
+            heading: 'If IVT Is Contraindicated',
+            body: '\u2022 Do not end the stroke alert.\n\u2022 Get CTA/CTP or MRI/MRA if not already done and the patient may have LVO.\n\u2022 Mechanical thrombectomy may still be indicated even when IV thrombolysis is unsafe.\n\u2022 Start antiplatelet/anticoagulant decisions only after hemorrhage is excluded and timing is clear. If thrombolysis was given, hold antithrombotics for 24 hours pending repeat imaging/protocol.\n\u2022 Document the exact exclusion: medication, lab, BP, bleeding risk, imaging finding, or time/imaging mismatch.',
         },
     ],
     citations: [
-        { num: 1, text: 'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.' },
+        { num: 1, text: 'Prabhakaran S, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. Published/corrected proof 2025.' },
         { num: 2, text: 'Mendelson SJ, Prabhakaran S. Diagnosis and Management of TIA and Acute Ischemic Stroke: A Review. JAMA. 2021;325(11):1088-1098.' },
-        { num: 3, text: 'Ma H, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke (EXTEND). N Engl J Med. 2019;380(19):1795-1803.' },
+        { num: 3, text: 'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.' },
+        { num: 4, text: 'Ma H, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke (EXTEND). N Engl J Med. 2019;380(19):1795-1803.' },
     ],
 };
 // -------------------------------------------------------------------
