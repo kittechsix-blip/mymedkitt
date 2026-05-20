@@ -1653,6 +1653,18 @@ const TOOLBAR_CONFIGS = {
         { id: 'yield', label: 'Yield', icon: '📊', action: 'overlay', target: 'bcs-yield-table' },
         { id: 'high-yield', label: 'High Yield', icon: '🎯', action: 'overlay', target: 'bcs-high-yield' },
     ],
+    'culture-positive-results-ed': [
+        { id: 'sab', label: 'S. aureus', icon: '🩸', action: 'overlay', target: 'cpr-sab' },
+        { id: 'candidemia', label: 'Candidemia', icon: '🍄', action: 'overlay', target: 'cpr-candidemia' },
+        { id: 'esbl', label: 'ESBL', icon: '⚠️', action: 'overlay', target: 'cpr-esbl' },
+        { id: 'asb', label: 'No-Treat ASB', icon: '🚫', action: 'overlay', target: 'cpr-asb-noT' },
+        { id: 'cauti', label: 'CAUTI', icon: '🩻', action: 'overlay', target: 'cpr-cauti' },
+        { id: 'stec', label: 'STEC/HUS', icon: '🚨', action: 'overlay', target: 'cpr-stec' },
+        { id: 'cdiff', label: 'C. diff', icon: '💩', action: 'overlay', target: 'cpr-cdiff-severity' },
+        { id: 'gas', label: 'GAS', icon: '🧫', action: 'overlay', target: 'cpr-throat-treat' },
+        { id: 'dfi', label: 'DFI Stage', icon: '🦶', action: 'overlay', target: 'cpr-dfi' },
+        { id: 'csf', label: 'CSF', icon: '🧠', action: 'overlay', target: 'cpr-csf-admit' },
+    ],
     'low-back-pain': [
         { id: 'red-flags', label: 'Red Flags', icon: '🚩', action: 'overlay', target: 'lbp-red-flags' },
         { id: 'ces-exam', label: 'CES Exam', icon: '🦴', action: 'overlay', target: 'lbp-ces-exam' },

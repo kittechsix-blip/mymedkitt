@@ -81,6 +81,7 @@ const infoPageIds = getArgList('--info-pages');
 
 
 const CROSS_LISTINGS = {
+  'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],
   'pe-treatment':     [{ categoryId: 'emergency-medicine' }],
   'pep':              [{ categoryId: 'emergency-medicine' }],
   'stroke':           [{ categoryId: 'emergency-medicine' }],

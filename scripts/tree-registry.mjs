@@ -243,6 +243,7 @@ export const TREE_REGISTRY = {
   'fishhook-removal': { prefix: 'FISHHOOK_REMOVAL',    entryNodeId: 'fh-start',           categoryId: 'em' },
   'vafei':            { prefix: 'VAFEI',               entryNodeId: 'vafei-start',        categoryId: 'em' },
   'blood-culture-stewardship': { prefix: 'BLOOD_CULTURE_STEWARDSHIP', entryNodeId: 'bcs-start', categoryId: 'infectious-disease' },
+  'culture-positive-results-ed': { prefix: 'CULTURE_POSITIVE_RESULTS_ED', entryNodeId: 'cpr-start', categoryId: 'infectious-disease' },
   'low-back-pain':    { prefix: 'LOW_BACK_PAIN',       entryNodeId: 'lbp-start',          categoryId: 'orthopedics' },
   'cricothyrotomy':   { prefix: 'CRICOTHYROTOMY',      entryNodeId: 'crico-start',        categoryId: 'procedures' },
   'ear-infection':    { prefix: 'EAR_INFECTION',       entryNodeId: 'ei-start',           categoryId: 'em' },

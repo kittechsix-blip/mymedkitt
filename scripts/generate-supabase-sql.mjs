@@ -75,6 +75,7 @@ function jsonbValOrNull(obj) {
 // Cross-listing: which consults appear in multiple categories
 // Map of treeId → array of { categoryId, displayTitle?, displaySubtitle?, entryNodeId? }
 const CROSS_LISTINGS = {
+  'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],
   'pe-treatment':     [{ categoryId: 'emergency-medicine' }],
   'pep':              [{ categoryId: 'emergency-medicine' }],
   'stroke':           [{ categoryId: 'emergency-medicine' }],

@@ -467,6 +467,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'angio-start',
       },
       {
+        id: 'culture-positive-results-ed',
+        title: 'Culture Positive Results in ED',
+        subtitle: 'Blood → Urine → Foley → Wound → Sputum → Stool/C.diff → CSF → Throat: treat, change, recall, or admit',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 69,
+        entryNodeId: 'cpr-start',
+      },
+      {
         id: 'pe-treatment',
         title: 'PE Treatment',
         subtitle: 'Risk Stratification → Management',
@@ -1200,6 +1209,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 22,
         entryNodeId: 'bcs-start',
+      },
+      {
+        id: 'culture-positive-results-ed',
+        title: 'Culture Positive Results in ED',
+        subtitle: 'Blood → Urine → Foley → Wound → Sputum → Stool/C.diff → CSF → Throat: treat, change, recall, or admit',
+        categoryId: 'infectious-disease',
+        version: '1.0',
+        nodeCount: 69,
+        entryNodeId: 'cpr-start',
       },
       {
         id: 'fuo',

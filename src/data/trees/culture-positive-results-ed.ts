@@ -1,0 +1,943 @@
+// MedKitt — Culture Positive Results in ED
+// ED workflow for managing positive culture callbacks (blood/urine/Foley/wound/sputum/stool/CSF/throat)
+// 8 modules: Source Triage • Blood • Urine • Foley • Wound • Sputum • Stool/CDiff • CSF/Throat
+// Companion to: blood-culture-stewardship (pre-draw decisions)
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const CULTURE_POSITIVE_RESULTS_ED_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: SOURCE TRIAGE
+  // =====================================================================
+
+  {
+    id: 'cpr-start',
+    type: 'question',
+    module: 1,
+    title: 'Positive Culture Callback — Source Triage',
+    body: 'Lab called with a positive culture on a patient previously seen in the ED. Determine source to drive the decision pathway.\n\n**Universal first questions:** [1][2]\n• What is the source?\n• Is the organism a likely pathogen or contaminant?\n• Is the patient symptomatic now?\n• Are they on adequate antibiotic coverage?\n• Special host factors (pregnant, immunocompromised, indwelling device)?\n\n[Resistance Patterns](#/info/cpr-resistance-2026)\n[Never-Miss Pathogens](#/info/cpr-never-miss)\n\n**Select the culture source:**',
+    citation: [1, 2],
+    options: [
+      { label: 'Blood Culture', description: 'Bacteremia workup — most time-sensitive', next: 'cpr-blood-org', urgency: 'critical' },
+      { label: 'Urine Culture (clean catch)', description: 'Symptomatic vs asymptomatic bacteriuria', next: 'cpr-urine-symptoms' },
+      { label: 'Foley / Indwelling Catheter Urine', description: 'CAUTI rules differ from clean catch', next: 'cpr-foley-symptoms' },
+      { label: 'Wound Culture', description: 'SSTI, abscess, diabetic foot, bite', next: 'cpr-wound-context' },
+      { label: 'Sputum Culture', description: 'Pneumonia, treatment-failure, structural lung dz', next: 'cpr-sputum-context' },
+      { label: 'Stool Culture or C. difficile', description: 'Bacterial diarrhea or CDI', next: 'cpr-stool-type' },
+      { label: 'CSF Culture', description: 'Meningitis — always admit', next: 'cpr-csf-admit', urgency: 'critical' },
+      { label: 'Throat Culture (GAS)', description: 'Strep pharyngitis confirmation', next: 'cpr-throat-treat' },
+    ],
+    summary: 'Source determines pathway. Always ask: pathogen vs contaminant, symptomatic, on coverage, special host',
+  },
+
+  // =====================================================================
+  // MODULE 2: BLOOD CULTURES
+  // =====================================================================
+
+  {
+    id: 'cpr-blood-org',
+    type: 'question',
+    module: 2,
+    title: 'Blood Culture — Organism Identified',
+    body: '**Almost always TRUE pathogen (>90%):** [3][4]\nS. aureus, S. pneumoniae, GAS, E. coli, Klebsiella, Pseudomonas, Candida, Listeria, N. meningitidis, Salmonella\n\n**Usually contaminant (<10% unless context):** [3][5]\nCoNS, Corynebacterium, Bacillus, Cutibacterium (P. acnes), Micrococcus, single-bottle viridans strep\n\n[Contaminant vs Pathogen Guide](#/info/cpr-blood-contam)\n[ID Consult Triggers](#/info/cpr-id-consult)\n\n**Which organism?**',
+    citation: [3, 4, 5],
+    options: [
+      { label: 'S. aureus (MSSA or MRSA)', description: 'Never a contaminant — recall + admit + TTE', next: 'cpr-sab', urgency: 'critical' },
+      { label: 'Candida', description: 'Recall + admit + echinocandin + ophtho', next: 'cpr-candidemia', urgency: 'critical' },
+      { label: 'Gram-negative (E. coli, Klebsiella, etc.)', description: 'Pathway driven by coverage + ESBL status', next: 'cpr-gnb' },
+      { label: 'Streptococcus (pneumo, GAS, GBS)', description: 'Source-directed treatment', next: 'cpr-strep-blood' },
+      { label: 'CoNS / likely contaminant', description: 'Single-bottle, stable patient, no device', next: 'cpr-contam-blood' },
+      { label: 'Other / unfamiliar organism', description: 'Pseudomonas, Listeria, anaerobes, etc.', next: 'cpr-blood-other' },
+    ],
+    summary: 'S. aureus + Candida + GNB sepsis = always recall + admit. CoNS single bottle + stable = likely contaminant.',
+  },
+
+  {
+    id: 'cpr-sab',
+    type: 'info',
+    module: 2,
+    title: 'S. aureus Bacteremia — Mandatory Workflow',
+    body: '**S. aureus bacteremia is a NEVER-MISS diagnosis. Mortality 20-30% untreated.** [6]\n\n**Recall to ED immediately** — do NOT defer to PCP.\n\n**Admission mandatory.** All SAB requires inpatient management.\n\n**Workup:** [6][7]\n• Repeat blood cultures q48h until clear (define duration of bacteremia)\n• TTE within 5-7 days; TEE if: persistent bacteremia, prosthetic valve, IVDU, suspicious lesions\n• ID consult is **standard of care** — meta-analysis: ~50% mortality reduction [7]\n• Source hunt: line removal if catheter-related, drain abscess, image spine if back pain\n\n**Empiric:** [6]\n• MSSA confirmed: cefazolin 2g IV q8h (or nafcillin/oxacillin 2g IV q4h)\n• MRSA or pending: vancomycin 15-20 mg/kg IV load then weight-based, target trough 15-20\n• Add daptomycin 6-10 mg/kg if persistent on vanco\n\n**Duration:** 14 days uncomplicated; 4-6 weeks complicated (endocarditis, metastatic foci, prosthesis).',
+    citation: [6, 7],
+    next: 'cpr-sab-action',
+    safetyLevel: 'critical',
+    summary: 'SAB = recall + admit + TTE + ID consult + cefazolin (MSSA) or vanco (MRSA). 14d uncomplicated, 4-6wk complicated.',
+  },
+
+  {
+    id: 'cpr-sab-action',
+    type: 'result',
+    module: 2,
+    title: 'SAB — Disposition',
+    body: '**Action plan:**\n✓ Call patient — return to ED now\n✓ ED admission orders + ID consult on arrival\n✓ Blood cultures (repeat set) drawn immediately\n✓ Vanco load if pending speciation, cefazolin if MSSA\n✓ TTE within 5-7 days\n✓ Search for source (lines, skin, spine, joints)',
+    recommendation: 'Admit. Empiric vanco or cefazolin per speciation. ID consult mandatory. TTE within 5-7d. Repeat blood cultures q48h until clear.',
+    confidence: 'definitive',
+    citation: [6, 7],
+  },
+
+  {
+    id: 'cpr-candidemia',
+    type: 'info',
+    module: 2,
+    title: 'Candidemia — Mandatory Workflow',
+    body: '**Candidemia mortality: 30-40%.** Always recall, always admit. [8]\n\n**Empiric:** [8]\n• Echinocandin first-line: micafungin 100 mg IV qd, anidulafungin 200 mg load then 100 mg qd, or caspofungin 70 mg load then 50 mg qd\n• Fluconazole 800 mg load only if non-critical + no azole exposure + susceptible species likely\n\n**Mandatory adjuncts:** [8]\n• Ophthalmology consult — endophthalmitis screen within 1 week\n• ID consult — every case\n• Remove central lines if present\n• Source hunt: TPN, abdominal sepsis, prior abdominal surgery\n\n**Duration:** 14 days from first NEGATIVE blood culture (not 14d from diagnosis).',
+    citation: [8],
+    next: 'cpr-candidemia-action',
+    safetyLevel: 'critical',
+    summary: 'Candidemia = recall + admit + echinocandin + ophtho + ID + line removal. 14d from first negative.',
+  },
+
+  {
+    id: 'cpr-candidemia-action',
+    type: 'result',
+    module: 2,
+    title: 'Candidemia — Disposition',
+    body: '**Action plan:**\n✓ Call patient — return to ED now\n✓ Admit, ID + ophthalmology consults\n✓ Empiric echinocandin (micafungin 100 mg IV qd)\n✓ Remove central line if present\n✓ Repeat cultures daily until negative',
+    recommendation: 'Admit. Echinocandin. Ophtho + ID consults. Line removal. Treat 14d from first negative culture.',
+    confidence: 'definitive',
+    citation: [8],
+  },
+
+  {
+    id: 'cpr-gnb',
+    type: 'question',
+    module: 2,
+    title: 'Gram-Negative Bacteremia — Coverage Assessment',
+    body: '**GNB workup:** [9][10]\nMost common sources: UTI/pyelo (60%), intra-abdominal, biliary, line, pneumonia.\n\n**Key question:** is patient already on adequate empiric coverage AND clinically improving?',
+    citation: [9, 10],
+    options: [
+      { label: 'Not on coverage / discharged without abx', description: 'Recall + admit + empiric IV', next: 'cpr-gnb-recall', urgency: 'critical' },
+      { label: 'On oral cipro/cefpodoxime, doing well, susceptible', description: 'Continue, close PCP follow-up', next: 'cpr-gnb-continue' },
+      { label: 'ESBL on susceptibilities', description: 'Pip-tazo or PO cipro will likely fail', next: 'cpr-esbl', urgency: 'critical' },
+      { label: 'Resistant to current Rx', description: 'Recall + change Rx', next: 'cpr-gnb-change' },
+    ],
+    summary: 'GNB pathway: recall if untreated, continue if improving on susceptible, escalate if ESBL or resistant',
+  },
+
+  {
+    id: 'cpr-gnb-recall',
+    type: 'info',
+    module: 2,
+    title: 'GNB Untreated — Recall and Admit',
+    body: '**GNB without coverage = sepsis risk. Recall, admit.** [9]\n\n**Empiric:** [9][10]\n• Community-acquired stable: ceftriaxone 2g IV q24h\n• Sepsis or healthcare exposure: pip-tazo 4.5g IV q6h\n• ESBL risk or prior ESBL history: meropenem 1g IV q8h\n• Severe PCN allergy: aztreonam + vanco (if any gram-positive concern)\n\n**Local antibiogram drives empiric choice.**\n\n**Duration:** 7 days uncomplicated GNB (Yahav 2019 — non-inferior to 14d). [11] Source-directed beyond that.',
+    citation: [9, 10, 11],
+    next: 'cpr-gnb-admit-action',
+    safetyLevel: 'warning',
+    summary: 'Untreated GNB = recall + admit + ceftriaxone or pip-tazo. 7d non-inferior to 14d (Yahav 2019).',
+  },
+
+  {
+    id: 'cpr-gnb-admit-action',
+    type: 'result',
+    module: 2,
+    title: 'GNB Untreated — Disposition',
+    body: '**Action:**\n✓ Recall patient to ED\n✓ Admit\n✓ Empiric ceftriaxone (CAB) or pip-tazo (HCAB/sepsis)\n✓ Repeat blood culture\n✓ Hunt source: UA, imaging if abdominal/biliary',
+    recommendation: 'Admit. Empiric ceftriaxone or pip-tazo per context. Repeat cultures. Source-direct. 7d total duration if uncomplicated.',
+    confidence: 'definitive',
+    citation: [9, 11],
+  },
+
+  {
+    id: 'cpr-gnb-continue',
+    type: 'result',
+    module: 2,
+    title: 'GNB on Coverage and Improving — Continue',
+    body: '**Patient improving on susceptible PO therapy. Continue.** [11]\n\n**Action:**\n✓ Confirm susceptibility covers organism\n✓ Confirm clinical improvement (call patient)\n✓ Document plan, notify PCP\n✓ Complete 7d total duration (Yahav 2019)\n✓ Return precautions: worsening symptoms, fever',
+    recommendation: 'Continue current oral therapy. 7d total. Document phone contact. Return if worsening.',
+    confidence: 'definitive',
+    citation: [11],
+  },
+
+  {
+    id: 'cpr-esbl',
+    type: 'info',
+    module: 2,
+    title: 'ESBL Bacteremia — Carbapenem Required',
+    body: '**ESBL bacteremia: pip-tazo failed in MERINO trial — use carbapenem.** [12]\n\n**Recall and admit.**\n\n**Treatment:** [12]\n• Meropenem 1g IV q8h is standard\n• Ertapenem 1g IV qd acceptable for non-critical, no Pseudomonas concern\n• Avoid pip-tazo even if "S" — MERINO trial showed inferior outcomes\n• ID consult\n\n**Source hunt:** ESBL more common in UTI/pyelo from healthcare exposure, prior antibiotic use, foreign travel.',
+    citation: [12],
+    next: 'cpr-esbl-action',
+    safetyLevel: 'critical',
+    summary: 'ESBL bacteremia = carbapenem + admit + ID. Avoid pip-tazo even if labeled susceptible (MERINO).',
+  },
+
+  {
+    id: 'cpr-esbl-action',
+    type: 'result',
+    module: 2,
+    title: 'ESBL — Disposition',
+    body: '**Action:**\n✓ Recall + admit\n✓ Meropenem 1g IV q8h\n✓ ID consult\n✓ Document foreign travel, prior antibiotics',
+    recommendation: 'Admit. Meropenem. ID consult. Avoid pip-tazo regardless of in-vitro susceptibility (MERINO).',
+    confidence: 'definitive',
+    citation: [12],
+  },
+
+  {
+    id: 'cpr-gnb-change',
+    type: 'result',
+    module: 2,
+    title: 'Resistant GNB — Recall and Change',
+    body: '**Organism resistant to current Rx. Recall, switch therapy.**\n\n**Decision:**\n• Stable, well-appearing, source-controlled → switch PO to susceptible agent + close follow-up\n• Sepsis criteria, fever, ill → admit, IV broad-spectrum per susceptibility\n• Uncertain → recall to ED for re-evaluation, blood cultures, decision',
+    recommendation: 'Recall patient. Reassess in ED. Switch to susceptible agent. Admit if any sepsis criteria.',
+    confidence: 'recommended',
+    citation: [9],
+  },
+
+  {
+    id: 'cpr-strep-blood',
+    type: 'info',
+    module: 2,
+    title: 'Streptococcal Bacteremia',
+    body: '**Source-directed treatment.** [13]\n\n**S. pneumoniae bacteremia:** [13]\n• Usually from CAP or meningitis source\n• Ceftriaxone 2g IV q24h covers most strains\n• Add vanco if meningitis cannot be excluded\n• Recall + admit unless rapidly improving on PO amox for known CAP\n\n**Group A strep (S. pyogenes):** [13]\n• High virulence — recall + admit\n• Penicillin G IV + clindamycin (toxin suppression)\n• Hunt for necrotizing infection — emergency surgical consult if any concern\n\n**Group B strep:** [13]\n• Always pathogen in adults\n• Source: UTI, SSTI, endocarditis\n• Ampicillin or ceftriaxone\n\n**Viridans group strep:** [13]\n• Single bottle, well, no endocarditis risk = possible contaminant\n• Multiple bottles, dental work, valve disease = endocarditis workup, TTE',
+    citation: [13],
+    next: 'cpr-strep-action',
+    summary: 'Strep blood: pneumo + GAS + GBS = recall, admit. Viridans single = consider contaminant unless endocarditis risk',
+  },
+
+  {
+    id: 'cpr-strep-action',
+    type: 'result',
+    module: 2,
+    title: 'Streptococcal Bacteremia — Disposition',
+    body: '**Action:**\n✓ Recall + admit (except clearly improving CAP with pneumococcal sensitivity)\n✓ Ceftriaxone 2g IV q24h covers most\n✓ GAS: penicillin G + clindamycin, screen for necrotizing\n✓ Viridans + multiple bottles or risk factors: TTE\n✓ ID consult for endocarditis suspicion',
+    recommendation: 'Admit. Ceftriaxone (or PCN G + clinda if GAS). TTE if endocarditis risk. ID consult if invasive.',
+    confidence: 'recommended',
+    citation: [13],
+  },
+
+  {
+    id: 'cpr-contam-blood',
+    type: 'info',
+    module: 2,
+    title: 'Likely Blood Culture Contaminant',
+    body: '**CoNS, single bottle, stable patient, no device, no immunocompromise = likely contaminant.** [3][5]\n\n**Cues for contamination:** [5]\n• Single bottle out of 2-4 drawn\n• Time to positivity >14h\n• Patient now well, no fevers\n• No indwelling lines or prosthesis\n• Not immunocompromised\n• Organism: CoNS (NOT S. lugdunensis), Corynebacterium, Bacillus, P. acnes, Micrococcus\n\n**Cues for TRUE BSI (treat as pathogen):** [5]\n• Multiple bottles positive same organism\n• S. lugdunensis identified (treat like S. aureus)\n• Indwelling line, prosthesis, immunocompromised, ≥3 SIRS\n• Time to positivity <14h\n\n**Action if contaminant:**\n✓ Phone contact, advise return if new symptoms\n✓ Notify PCP\n✓ Do NOT start antibiotics\n✓ Repeat cultures only if symptomatic',
+    citation: [3, 5],
+    next: 'cpr-contam-action',
+    summary: 'Single-bottle CoNS in stable, non-device patient = contaminant. Do not treat. Document phone contact.',
+  },
+
+  {
+    id: 'cpr-contam-action',
+    type: 'result',
+    module: 2,
+    title: 'Contaminant — Disposition',
+    body: '**Action:**\n✓ Document phone contact and reassurance\n✓ Notify PCP\n✓ Return precautions: fever, rigors, new symptoms\n✓ Do NOT start antibiotics',
+    recommendation: 'No antibiotics. Document phone contact + return precautions. Notify PCP. Repeat only if symptomatic.',
+    confidence: 'recommended',
+    citation: [3, 5],
+  },
+
+  {
+    id: 'cpr-blood-other',
+    type: 'info',
+    module: 2,
+    title: 'Other Blood Pathogens',
+    body: '**Pseudomonas:** [9]\n• Recall + admit\n• Empiric pip-tazo 4.5g IV q6h or cefepime 2g IV q8h\n• Hunt source: healthcare exposure, neutropenia, structural lung disease\n\n**Listeria:** [14]\n• Pregnant, >50, immunocompromised at highest risk\n• Recall + admit\n• Ampicillin 2g IV q4h (or TMP-SMX if PCN-allergic)\n• Cephalosporins do NOT cover Listeria\n\n**Anaerobes (Bacteroides, Clostridium):**\n• Indicates intra-abdominal or deep tissue source\n• Recall + admit + imaging + surgery consult\n• Pip-tazo or metronidazole-containing regimen\n\n**Neisseria meningitidis:**\n• Emergency — recall, admit, isolate, droplet precautions\n• Ceftriaxone 2g IV q12h\n• Public health notification\n• Prophylaxis for close contacts',
+    citation: [9, 14],
+    next: 'cpr-blood-other-action',
+    safetyLevel: 'warning',
+    summary: 'Pseudomonas/Listeria/anaerobes/Neisseria = recall + admit + organism-specific Rx. Listeria needs ampicillin (not ceftriaxone).',
+  },
+
+  {
+    id: 'cpr-blood-other-action',
+    type: 'result',
+    module: 2,
+    title: 'Other Pathogens — Disposition',
+    body: 'Recall + admit. Empiric directed by organism. ID consult.',
+    recommendation: 'Admit. Organism-specific empiric. ID consult. Public health notification for Neisseria.',
+    confidence: 'definitive',
+    citation: [9, 14],
+  },
+
+  // =====================================================================
+  // MODULE 3: URINE (CLEAN CATCH / MIDSTREAM)
+  // =====================================================================
+
+  {
+    id: 'cpr-urine-symptoms',
+    type: 'question',
+    module: 3,
+    title: 'Urine Culture — Symptomatic Status',
+    body: '**The single most important question for urine culture interpretation.** [15][16]\n\n[CFU Thresholds](#/info/cpr-urine-cfu)\n[Pregnancy Exception](#/info/cpr-preg-asb)\n\n**Patient status:**',
+    citation: [15, 16],
+    options: [
+      { label: 'Symptomatic (dysuria, frequency, suprapubic pain, fever, flank pain)', description: 'Treat UTI by syndrome', next: 'cpr-urine-symp' },
+      { label: 'Asymptomatic + pregnant', description: 'Must treat ASB in pregnancy', next: 'cpr-asb-preg', urgency: 'urgent' },
+      { label: 'Asymptomatic + pre-urologic procedure', description: 'Treat if mucosal trauma planned', next: 'cpr-asb-preop' },
+      { label: 'Asymptomatic + all others', description: 'Do NOT treat', next: 'cpr-asb-noT' },
+    ],
+    summary: 'Symptoms → treat. Asymptomatic → DO NOT treat (exceptions: pregnancy, pre-urologic procedure).',
+  },
+
+  {
+    id: 'cpr-urine-symp',
+    type: 'question',
+    module: 3,
+    title: 'Symptomatic UTI — Syndrome',
+    body: '**Cystitis vs pyelonephritis drives both treatment and disposition.** [15]\n\n**Cystitis:** dysuria, frequency, suprapubic discomfort, urinary urgency. No flank pain, no fever.\n\n**Pyelonephritis:** flank pain, fever, rigors, nausea/vomiting, costovertebral angle tenderness.\n\n[Treatment Map](#/info/cpr-uti-treat)',
+    citation: [15],
+    options: [
+      { label: 'Uncomplicated Cystitis', description: 'Dysuria/frequency only, otherwise well', next: 'cpr-cystitis' },
+      { label: 'Pyelonephritis — outpatient candidate', description: 'Stable, PO tolerant, reliable follow-up', next: 'cpr-pyelo-outpt' },
+      { label: 'Pyelonephritis — admission criteria', description: 'Sepsis, vomiting, pregnant, obstruction, fail outpt', next: 'cpr-pyelo-admit', urgency: 'urgent' },
+    ],
+    summary: 'Cystitis → 3-5d PO. Pyelo outpatient → 5-14d. Pyelo admit if sepsis, pregnancy, vomiting, obstruction.',
+  },
+
+  {
+    id: 'cpr-cystitis',
+    type: 'info',
+    module: 3,
+    title: 'Uncomplicated Cystitis — Treatment',
+    body: '**First-line (any of):** [15][17]\n• **Nitrofurantoin 100 mg PO BID x 5d** (avoid CrCl <30, avoid in pyelonephritis)\n• **TMP-SMX DS PO BID x 3d** (only if local resistance <20%, no use in 3 months)\n• **Fosfomycin 3g PO x 1 dose** (single dose, lower efficacy, OK for ESBL cystitis only)\n\n**Second-line:** [17]\n• Cephalexin 500 mg PO QID x 5-7d\n• Cefpodoxime 100 mg PO BID x 5-7d\n• Augmentin 500/125 mg PO BID x 5-7d\n\n**Avoid for cystitis:** [17]\n• Fluoroquinolones — FDA 2016 black box, reserve for pyelo\n• Ceftriaxone IV — overkill\n\n**ESBL on culture:** [12]\n• Cystitis only: nitrofurantoin or fosfomycin work\n• Pyelo: ertapenem outpatient or meropenem inpatient\n\n[Resistance Patterns](#/info/cpr-resistance-2026)',
+    citation: [12, 15, 17],
+    next: 'cpr-cystitis-action',
+    summary: 'Cystitis = nitrofurantoin 5d OR TMP-SMX 3d OR fosfo x1. Avoid FQ for cystitis. ESBL cystitis: nitro/fosfo still work.',
+  },
+
+  {
+    id: 'cpr-cystitis-action',
+    type: 'result',
+    module: 3,
+    title: 'Cystitis — Disposition',
+    body: '**Action:**\n✓ Confirm susceptibility on returned culture\n✓ If current Rx susceptible + improving: continue, no change\n✓ If resistant: call patient, switch to nitrofurantoin or fosfomycin\n✓ Document phone contact + return precautions (flank pain, fever)',
+    recommendation: 'Continue if susceptible + improving. Switch to nitrofurantoin or fosfomycin if resistant.',
+    confidence: 'recommended',
+    citation: [15, 17],
+  },
+
+  {
+    id: 'cpr-pyelo-outpt',
+    type: 'info',
+    module: 3,
+    title: 'Pyelonephritis Outpatient — Treatment',
+    body: '**Stable + PO tolerant + reliable follow-up only.** [15][17]\n\n**Regimen choice depends on local FQ resistance:** [17]\n\n**If local FQ resistance <10%:**\n• Ciprofloxacin 500 mg PO BID x 7d\n• Levofloxacin 750 mg PO qd x 5d\n\n**If local FQ resistance ≥10%:**\n• Ceftriaxone 1g IV in ED, then FQ PO at home OR cefpodoxime 200 mg BID x 10d\n\n**TMP-SMX:** ONLY if susceptible, 14 days BID.\n\n**Avoid for pyelo:** [17]\n• Nitrofurantoin (poor tissue penetration)\n• Fosfomycin single-dose (insufficient for pyelo)\n\n**ESBL pyelo outpatient:**\n• Ertapenem 1g IV qd (home infusion or daily ED visit)\n• Or admit for meropenem',
+    citation: [15, 17],
+    next: 'cpr-pyelo-outpt-action',
+    summary: 'Pyelo outpatient: cipro/levo 5-7d if FQ resistance <10%, else ceftriaxone IV + PO. ESBL pyelo = ertapenem or admit.',
+  },
+
+  {
+    id: 'cpr-pyelo-outpt-action',
+    type: 'result',
+    module: 3,
+    title: 'Pyelo Outpatient — Disposition',
+    body: '**Action:**\n✓ Confirm susceptibility on returned culture\n✓ Continue if covered + improving\n✓ Switch agent if resistant\n✓ Return if worsening, vomiting, fever persists >72h\n✓ ESBL → ertapenem or admit',
+    recommendation: 'Continue if susceptible + improving. Otherwise switch per susceptibilities. ESBL → ertapenem outpatient or admit.',
+    confidence: 'recommended',
+    citation: [15, 17],
+  },
+
+  {
+    id: 'cpr-pyelo-admit',
+    type: 'result',
+    module: 3,
+    title: 'Pyelo Admit — Disposition',
+    body: '**Admit if any of:** sepsis criteria, pregnancy, intractable vomiting, obstruction, immunocompromised, failed outpatient therapy. [15]\n\n**Empiric:** [9][17]\n• Stable: ceftriaxone 2g IV q24h\n• Sepsis: pip-tazo 4.5g IV q6h or cefepime 2g IV q8h\n• ESBL: meropenem 1g IV q8h',
+    recommendation: 'Admit. Ceftriaxone or pip-tazo per severity. ESBL = meropenem. Source-direct.',
+    confidence: 'definitive',
+    citation: [9, 15, 17],
+  },
+
+  {
+    id: 'cpr-asb-preg',
+    type: 'result',
+    module: 3,
+    title: 'Pregnant ASB — Must Treat',
+    body: '**Treat ALL asymptomatic bacteriuria in pregnancy** (untreated → 25% pyelo, low birth weight, preterm). [16]\n\n**Regimen (any of):** [16]\n• Nitrofurantoin 100 mg PO BID x 5-7d (avoid 1st trimester and term)\n• Cephalexin 500 mg PO QID x 7d (safe all trimesters)\n• Fosfomycin 3g PO x 1 (safe all trimesters)\n• Amoxicillin/Augmentin if susceptible\n\n**Avoid:** TMP-SMX 1st/3rd trimester, fluoroquinolones, tetracyclines.\n\n**Test of cure 1-2 weeks post-treatment is recommended.**',
+    recommendation: 'Treat per local susceptibilities (cephalexin or fosfomycin safest all trimesters). Test of cure at 1-2 weeks.',
+    confidence: 'definitive',
+    citation: [16],
+  },
+
+  {
+    id: 'cpr-asb-preop',
+    type: 'result',
+    module: 3,
+    title: 'Pre-Urologic Procedure ASB — Treat',
+    body: '**Treat ASB before any urologic procedure with mucosal trauma** (TURP, ureteroscopy, stone manipulation). [16]\n\nShort course (3-5d) timed to complete before procedure, per susceptibilities.\n\n**Do NOT treat for non-mucosal procedures.**',
+    recommendation: 'Short course (3-5d) per susceptibilities timed to procedure. Coordinate with urology.',
+    confidence: 'recommended',
+    citation: [16],
+  },
+
+  {
+    id: 'cpr-asb-noT',
+    type: 'result',
+    module: 3,
+    title: 'Asymptomatic Bacteriuria — DO NOT Treat',
+    body: '**Per IDSA 2019 ASB guidelines, do NOT treat asymptomatic bacteriuria in:** [16]\n• Elderly\n• Diabetics\n• Post-menopausal women\n• Indwelling catheter patients\n• Spinal cord injury\n• Neutropenic patients\n• ICU patients\n\n**Why:** treatment does NOT improve outcomes, drives C. difficile, drives resistance, causes adverse drug events.\n\n**Action:** document phone contact, no antibiotics, notify PCP, advise return if new urinary symptoms.',
+    recommendation: 'No antibiotics. Document phone contact + return precautions. Notify PCP.',
+    confidence: 'definitive',
+    citation: [16],
+  },
+
+  // =====================================================================
+  // MODULE 4: FOLEY / INDWELLING CATHETER URINE
+  // =====================================================================
+
+  {
+    id: 'cpr-foley-symptoms',
+    type: 'question',
+    module: 4,
+    title: 'Foley / Catheter Culture — Symptoms?',
+    body: '**CAUTI diagnosis requires SYMPTOMS plus ≥10³ CFU/mL.** [18]\n\n**Symptoms include:** fever, suprapubic pain, costovertebral tenderness, acute hematuria, new altered mental status (in cognitively intact patients).\n\n**Symptoms DO NOT include:** [18]\n• Cloudy or foul-smelling urine alone\n• Pyuria alone (almost universal in catheterized patients)\n• Asymptomatic positive culture',
+    citation: [18],
+    options: [
+      { label: 'Symptomatic CAUTI', description: 'Fever, CVAT, suprapubic pain, hematuria, AMS', next: 'cpr-cauti' },
+      { label: 'Asymptomatic catheter bacteriuria', description: 'Cloudy urine, smell, pyuria alone do not count', next: 'cpr-cab-noT' },
+      { label: 'Candida in catheter urine', description: 'Special pathway — usually do not treat', next: 'cpr-candiduria' },
+    ],
+    summary: 'CAUTI = symptoms + bacteriuria. Cloudy/smelly urine alone does NOT qualify. Candiduria usually do not treat.',
+  },
+
+  {
+    id: 'cpr-cauti',
+    type: 'info',
+    module: 4,
+    title: 'Symptomatic CAUTI — Treatment',
+    body: '**Step 1: REPLACE the catheter** before treatment if it has been in >2 weeks. [18]\n• Biofilm reservoir = treatment failure if old catheter kept\n• Send culture from NEW catheter, not old one\n• Consider catheter discontinuation altogether if possible — most effective intervention\n\n**Step 2: Empiric therapy** [18]\n• Acute community CAUTI: ceftriaxone 1-2g IV qd or cefepime if Pseudomonas concern\n• Chronic catheter (more resistant flora): pip-tazo or cefepime\n• ESBL or prior carbapenem use: meropenem\n\n**Step 3: Duration:** [18]\n• 7 days if rapid resolution\n• 10-14 days if delayed response or complicated\n\n**Step 4: Tailor to susceptibilities** when culture finalizes.',
+    citation: [18],
+    next: 'cpr-cauti-action',
+    summary: 'CAUTI = replace catheter + ceftriaxone/cefepime + 7-14d. Treat from new catheter culture, not old.',
+  },
+
+  {
+    id: 'cpr-cauti-action',
+    type: 'result',
+    module: 4,
+    title: 'CAUTI — Disposition',
+    body: '**Action:**\n✓ Replace catheter (or remove if possible) before treatment\n✓ Empiric per host: ceftriaxone (community) or pip-tazo (chronic)\n✓ Tailor to susceptibilities\n✓ 7-14d total\n✓ Consider admission if sepsis, immunocompromised, frail',
+    recommendation: 'Replace catheter. Empiric IV per setting. Tailor by susceptibilities. 7-14d duration.',
+    confidence: 'definitive',
+    citation: [18],
+  },
+
+  {
+    id: 'cpr-cab-noT',
+    type: 'result',
+    module: 4,
+    title: 'Asymptomatic Catheter Bacteriuria — DO NOT Treat',
+    body: '**Bacteriuria develops at 3-10% per catheter-day. By 30 days, 100% of catheterized patients are colonized.** [18]\n\nTreating asymptomatic catheter bacteriuria does NOT reduce symptomatic CAUTI and drives C. difficile + resistance.\n\n**Exceptions (rare):**\n• Pre-urologic procedure with mucosal trauma\n• Pregnant (rare in catheterized population, but treat)\n• Confirmed CAUTI symptoms develop\n\n**Action:**\n✓ No antibiotics\n✓ Consider catheter removal if no longer indicated (most important intervention)\n✓ Education: cloudy/smelly urine alone does NOT need treatment',
+    recommendation: 'No antibiotics. Remove catheter if not indicated. Educate patient/family on what does NOT need treatment.',
+    confidence: 'definitive',
+    citation: [18],
+  },
+
+  {
+    id: 'cpr-candiduria',
+    type: 'info',
+    module: 4,
+    title: 'Candiduria — Usually Do NOT Treat',
+    body: '**Candida in catheter urine = colonization in most patients.** [8]\n\n**Do NOT treat:** [8]\n• Asymptomatic catheterized patient\n• Asymptomatic non-catheterized patient with positive Candida urine\n\n**TREAT only if any of:** [8]\n• Symptomatic (fever, dysuria, CVA tenderness)\n• Neutropenic (high invasive candidiasis risk)\n• Renal/urologic transplant recipient\n• Pre-urologic procedure with mucosal trauma\n\n**Regimen when indicated:** [8]\n• Fluconazole 200-400 mg PO qd x 14d (susceptible strains)\n• Echinocandins do NOT achieve urinary concentrations — avoid for isolated funguria\n• Amphotericin bladder irrigation for resistant species when symptomatic\n\n**Action:** if catheter present + asymptomatic: REMOVE catheter, do not treat.',
+    citation: [8],
+    next: 'cpr-candiduria-action',
+    summary: 'Candiduria usually do NOT treat. Exceptions: symptomatic, neutropenic, transplant, pre-urologic procedure.',
+  },
+
+  {
+    id: 'cpr-candiduria-action',
+    type: 'result',
+    module: 4,
+    title: 'Candiduria — Disposition',
+    body: 'Most: remove catheter, no antibiotics, document.\nIndicated: fluconazole 200-400 mg PO qd x 14d.\nNeutropenic/transplant: ID consult.',
+    recommendation: 'Remove catheter if present. Treat only if symptomatic, neutropenic, transplant, or pre-urologic.',
+    confidence: 'recommended',
+    citation: [8],
+  },
+
+  // =====================================================================
+  // MODULE 5: WOUND CULTURES
+  // =====================================================================
+
+  {
+    id: 'cpr-wound-context',
+    type: 'question',
+    module: 5,
+    title: 'Wound Culture — Context',
+    body: '**Critical principle: surface wound swabs often show colonizers, not pathogens.** [19]\n\n**If patient is improving on empiric therapy + culture shows unexpected organism → continue current therapy.**\n\n**Recall and change ONLY if:** not improving, clearly resistant organism (e.g., MRSA on PCN), unusual pathogen.\n\n[SSTI Treatment Map](#/info/cpr-ssti-treat)\n\n**Wound type?**',
+    citation: [19],
+    options: [
+      { label: 'Cellulitis (non-purulent SSTI)', description: 'Strep more likely; surface swabs misleading', next: 'cpr-cellulitis' },
+      { label: 'Abscess / purulent SSTI', description: 'I&D is primary Rx; MRSA likely', next: 'cpr-abscess' },
+      { label: 'Diabetic foot infection', description: 'IWGDF/IDSA staging drives Rx', next: 'cpr-dfi' },
+      { label: 'Bite wound (animal or human)', description: 'Pasteurella + anaerobes mandatory', next: 'cpr-bite' },
+    ],
+    summary: 'Wound culture: surface swabs often misleading. Continue if improving. Change only if resistant or unusual organism.',
+  },
+
+  {
+    id: 'cpr-cellulitis',
+    type: 'info',
+    module: 5,
+    title: 'Cellulitis Culture Result',
+    body: '**Non-purulent cellulitis is usually Strep, not Staph.** [19][20]\n\n**Empiric ED Rx:** [19]\n• Cephalexin 500 mg PO QID x 5d (extend if not improved)\n• Add MRSA coverage (TMP-SMX, doxy, or clinda) only if: penetrating trauma, IVDU, purulent, prior MRSA, nasal MRSA colonization\n\n**Culture growing MRSA:**\n• If on cephalexin/dicloxacillin and improving — likely colonizer or co-infection; consider continue, follow closely\n• If not improving + MRSA confirmed → recall, switch to TMP-SMX DS BID or doxycycline 100 mg BID\n\n**Culture growing unexpected GNR or anaerobes:**\n• Reassess for source (necrotizing fasciitis, immunocompromised, water exposure, soil contamination)\n• Recall if not improving',
+    citation: [19, 20],
+    next: 'cpr-cellulitis-action',
+    summary: 'Cellulitis culture: continue cephalexin if improving. Recall + switch to TMP-SMX/doxy only if not improving + MRSA.',
+  },
+
+  {
+    id: 'cpr-cellulitis-action',
+    type: 'result',
+    module: 5,
+    title: 'Cellulitis — Disposition',
+    body: 'Continue if improving. Switch only if not improving + clearly resistant organism. Document phone contact + return precautions (spreading, fever, systemic).',
+    recommendation: 'Continue current Rx if improving. Recall and switch only if not improving with resistant pathogen.',
+    confidence: 'recommended',
+    citation: [19],
+  },
+
+  {
+    id: 'cpr-abscess',
+    type: 'info',
+    module: 5,
+    title: 'Abscess Culture Result',
+    body: '**I&D is the primary treatment for abscesses, not antibiotics.** [19][20]\n\n**Antibiotics added to I&D indicated if:** [20]\n• Systemic signs (fever, SIRS)\n• Large abscess (>2 cm)\n• Surrounding cellulitis\n• Immunocompromised\n• Face/hand/genital location\n• Failure of I&D alone\n\n**Empiric (when indicated):**\n• TMP-SMX DS BID x 5-7d (MRSA coverage)\n• Doxycycline 100 mg BID x 5-7d (alternative)\n• Clindamycin 300 mg QID (inducible resistance check)\n\n**Culture MRSA on:** TMP-SMX or doxy already → continue if improving. If on cephalexin: switch.\n\n**Culture growing unexpected organism (Pseudomonas, fungus):** consider water exposure, IVDU, immunocompromise; recall to ED for reassessment.\n\n**Decolonization** (chlorhexidine 4% body wash + mupirocin 2% nares BID x 5d) recommended for recurrent MRSA SSTI.',
+    citation: [19, 20],
+    next: 'cpr-abscess-action',
+    summary: 'Abscess: I&D primary. Antibiotics if systemic/large/face/etc. MRSA on cephalexin = switch. Decolonize if recurrent.',
+  },
+
+  {
+    id: 'cpr-abscess-action',
+    type: 'result',
+    module: 5,
+    title: 'Abscess — Disposition',
+    body: 'I&D primary. Continue antibiotic if susceptible + improving. Switch if on cephalexin and MRSA grew. Decolonize if recurrent.',
+    recommendation: 'I&D primary. Continue covered antibiotic if improving. Switch if cephalexin + MRSA. Decolonization if recurrent.',
+    confidence: 'recommended',
+    citation: [19, 20],
+  },
+
+  {
+    id: 'cpr-dfi',
+    type: 'info',
+    module: 5,
+    title: 'Diabetic Foot Infection — Stage and Treat',
+    body: '**IWGDF/IDSA 2023 staging:** [21]\n\n**Mild DFI:** cellulitis only, ≤2 cm beyond wound, no systemic signs.\n• PO cephalexin or augmentin x 1-2 weeks\n• Outpatient with close follow-up\n\n**Moderate DFI:** deeper involvement (joint, abscess, gangrene, bone), no SIRS.\n• PO augmentin OR levofloxacin + metronidazole OR moxifloxacin\n• Or admit for IV ampicillin-sulbactam, ertapenem\n• Consider MRI for osteomyelitis\n\n**Severe DFI:** SIRS or sepsis\n• Admit, IV broad spectrum (pip-tazo + vanco OR carbapenem + vanco)\n• Vascular + surgery consults\n\n**Probe-to-bone positive or MRI showing osteo:** [21]\n• 4-6 weeks total duration\n• ID + surgery involvement\n• Bone biopsy when possible\n\n**Pseudomonas in culture:** add pip-tazo or cefepime; avoid amox/cephalexin monotherapy.\n\n**Do NOT culture clinically uninfected wounds** — yields colonizers only.',
+    citation: [21],
+    next: 'cpr-dfi-action',
+    summary: 'DFI: mild = PO cephalexin/augmentin; moderate = PO broad or admit; severe = admit IV. Probe-to-bone + osteo = 4-6wk + ID/surgery.',
+  },
+
+  {
+    id: 'cpr-dfi-action',
+    type: 'result',
+    module: 5,
+    title: 'DFI — Disposition',
+    body: 'Stage drives disposition. Mild: PO outpatient + close f/u. Moderate: PO broad or admit. Severe: admit IV. Osteo: 4-6 weeks + ID + surgery.',
+    recommendation: 'Stage per IWGDF/IDSA. PO outpatient mild. Admit moderate-severe. ID + surgery for osteomyelitis.',
+    confidence: 'definitive',
+    citation: [21],
+  },
+
+  {
+    id: 'cpr-bite',
+    type: 'info',
+    module: 5,
+    title: 'Bite Wound — Always Cover Pasteurella + Anaerobes',
+    body: '**Empiric:** [22]\n• **Augmentin 875/125 mg PO BID x 5d** is the standard\n• PCN-allergic adults: doxycycline + metronidazole OR moxifloxacin\n• PCN-allergic kids: clindamycin + TMP-SMX\n\n**Cat bites:** prophylaxis recommended (deep puncture, Pasteurella aggressive).\n**Human bites:** always treat. Hand involvement → hand surgery consult.\n**Dog bites:** prophylaxis if deep, hand/face, immunocompromised, or signs of infection.\n\n**Culture result interpretation:**\n• Pasteurella multocida — augmentin works; doxy alternative\n• Eikenella (human bites) — augmentin works; metronidazole alone does NOT cover\n• MRSA — uncommon in bites but switch if present and not improving\n• Capnocytophaga (dog bites in immunocompromised/splenectomy) — admit, IV broad spectrum',
+    citation: [22],
+    next: 'cpr-bite-action',
+    summary: 'Bite wounds: augmentin first-line covers Pasteurella + anaerobes + Eikenella. Hand human bites → hand surgery.',
+  },
+
+  {
+    id: 'cpr-bite-action',
+    type: 'result',
+    module: 5,
+    title: 'Bite Wound — Disposition',
+    body: 'Augmentin most cases. Hand involvement = surgical consult. Capnocytophaga in immunocompromised = admit.',
+    recommendation: 'Augmentin first-line. Switch only if resistant. Hand or face injury → surgery. Capnocytophaga → admit.',
+    confidence: 'recommended',
+    citation: [22],
+  },
+
+  // =====================================================================
+  // MODULE 6: SPUTUM CULTURES
+  // =====================================================================
+
+  {
+    id: 'cpr-sputum-context',
+    type: 'question',
+    module: 6,
+    title: 'Sputum Culture — Context',
+    body: '**IDSA/ATS 2019 CAP Guideline: routine sputum cultures NOT recommended in outpatients.** [23]\n\nUseful in: severe CAP, treatment failure, HCAP, structural lung disease (CF, bronchiectasis), suspected resistant organism.\n\n**Interpretation criteria for "pathogen vs contaminant":** [23]\n• Heavy growth of single organism + >25 PMN + <10 epithelial cells per LPF = likely pathogen\n• Mixed flora, few PMN, many epithelial cells = oral contamination\n• Candida in sputum = almost never pathogen, do NOT treat',
+    citation: [23],
+    options: [
+      { label: 'CAP — patient improving on empiric', description: 'Likely continue current Rx', next: 'cpr-sputum-improving' },
+      { label: 'CAP — patient NOT improving', description: 'Recall, escalate based on organism', next: 'cpr-sputum-failing' },
+      { label: 'Resistant organism (Pseudomonas, MRSA)', description: 'Reassess + adjust', next: 'cpr-sputum-resistant' },
+    ],
+    summary: 'Sputum culture: continue if improving. Reassess if failing. Adjust for resistant organisms.',
+  },
+
+  {
+    id: 'cpr-sputum-improving',
+    type: 'result',
+    module: 6,
+    title: 'Sputum Culture + Improving',
+    body: 'Continue current therapy.\n\nMost outpatient CAP improves on amoxicillin 1g TID or doxycycline regardless of sputum result. [23]\n\nCulture rarely changes management if patient is improving. Document phone contact + return precautions.',
+    recommendation: 'Continue current Rx. Phone contact + return precautions. Complete 5d minimum or per guideline.',
+    confidence: 'recommended',
+    citation: [23],
+  },
+
+  {
+    id: 'cpr-sputum-failing',
+    type: 'info',
+    module: 6,
+    title: 'Sputum Culture + Not Improving',
+    body: '**Recall and reassess.** [23]\n\n**Workup:**\n• Repeat exam + vitals + chest imaging\n• Reassess severity (CURB-65, PSI)\n• Consider admission\n• Check culture susceptibilities\n\n**Common reasons for failure:**\n• Atypical pathogen not covered (mycoplasma, chlamydia, Legionella) — add macrolide or doxycycline\n• Resistant pneumococcus — switch to levofloxacin\n• Wrong diagnosis (PE, heart failure, malignancy)\n• Empyema — image, drain if present',
+    citation: [23],
+    next: 'cpr-sputum-failing-action',
+    summary: 'Not improving + sputum result = recall, reassess severity, image, consider admit, broaden if atypical not covered',
+  },
+
+  {
+    id: 'cpr-sputum-failing-action',
+    type: 'result',
+    module: 6,
+    title: 'Sputum Failing — Disposition',
+    body: 'Recall to ED. Reassess severity. Image. Admit if any sepsis criteria. Broaden coverage per culture/susceptibilities.',
+    recommendation: 'Recall + ED reassessment. Image. Admit if sepsis or moderate-severe. Broaden coverage as indicated.',
+    confidence: 'recommended',
+    citation: [23],
+  },
+
+  {
+    id: 'cpr-sputum-resistant',
+    type: 'info',
+    module: 6,
+    title: 'Resistant Organism in Sputum',
+    body: '**Pseudomonas:** [23]\n• Chronic structural lung disease (CF, severe COPD, bronchiectasis), HCAP, immunocompromised\n• Treat if symptomatic + clinical fit: cipro 750 mg PO BID or levofloxacin 750 mg PO qd\n• Inhaled antibiotics (tobramycin) in chronic colonization (CF/bronchiectasis)\n• Admit if sepsis\n\n**MRSA in sputum:** [23]\n• Improving on standard CAP Rx + low colonization burden in COPD = likely colonizer, weigh context\n• Severe CAP + clinical fit (necrotizing, cavitary, post-influenza) = add linezolid or vanco\n\n**S. aureus + influenza history = high-risk, admit.**',
+    citation: [23],
+    next: 'cpr-sputum-resistant-action',
+    summary: 'Sputum Pseudomonas = cipro/levo + admit if sepsis. MRSA = treat if severe/post-influenza, watch for colonizer.',
+  },
+
+  {
+    id: 'cpr-sputum-resistant-action',
+    type: 'result',
+    module: 6,
+    title: 'Resistant Sputum — Disposition',
+    body: 'Pseudomonas = anti-pseudomonal PO + admit if sepsis. MRSA = add linezolid/vanco if severe or post-influenza.',
+    recommendation: 'Anti-pseudomonal coverage if Pseudomonas. Vanco/linezolid if MRSA + severe disease. Admit if sepsis.',
+    confidence: 'recommended',
+    citation: [23],
+  },
+
+  // =====================================================================
+  // MODULE 7: STOOL CULTURES AND C. DIFF
+  // =====================================================================
+
+  {
+    id: 'cpr-stool-type',
+    type: 'question',
+    module: 7,
+    title: 'Stool Culture — Pathogen Type',
+    body: '**Bacterial pathogen identification drives treatment decisions:** [24]\n\n[Stool Pathogen Treatment Map](#/info/cpr-stool-treat)',
+    citation: [24],
+    options: [
+      { label: 'Salmonella (non-typhi)', description: 'Most patients do NOT need treatment', next: 'cpr-salmonella' },
+      { label: 'Shigella', description: 'Treat all — high transmission', next: 'cpr-shigella' },
+      { label: 'Campylobacter', description: 'Treat severe only', next: 'cpr-campy' },
+      { label: 'STEC / E. coli O157:H7', description: 'DO NOT treat — HUS risk', next: 'cpr-stec', urgency: 'critical' },
+      { label: 'Vibrio (non-cholera)', description: 'Treat sepsis cases, V. vulnificus in cirrhotics', next: 'cpr-vibrio' },
+      { label: 'C. difficile', description: 'NAAT vs toxin EIA, severity-based Rx', next: 'cpr-cdiff' },
+    ],
+    summary: 'Stool pathogen: Salmo/Campy = treat only severe. Shigella = treat all. STEC = NEVER treat. CDI = severity-based.',
+  },
+
+  {
+    id: 'cpr-salmonella',
+    type: 'info',
+    module: 7,
+    title: 'Salmonella (Non-Typhi) — Usually Do NOT Treat',
+    body: '**Most immunocompetent adults do NOT need antibiotics.** [24]\n\nAntibiotics PROLONG fecal shedding without shortening illness.\n\n**TREAT only if:** [24]\n• Age <3 months or >65 years\n• Immunocompromised (HIV, transplant, sickle cell, chemo)\n• Severe disease (sepsis, hospitalized)\n• Bacteremia confirmed\n• Sickle cell disease\n• Vascular grafts or prosthetic joints (high seeding risk)\n\n**Regimen (when indicated):** [24]\n• Ciprofloxacin 500 mg PO BID x 5-7d (first-line, check susceptibility)\n• Ceftriaxone 1-2g IV qd if resistant or severe\n• Azithromycin 500 mg PO qd x 7d (for FQ-resistant strains)\n\n**Resistance:** quinolone resistance rising globally — check susceptibilities.',
+    citation: [24],
+    next: 'cpr-salmonella-action',
+    summary: 'Salmonella: most do NOT need Rx (prolongs shedding). Treat only <3mo, >65, immunocompromised, severe, bacteremia, prosthetic joints.',
+  },
+
+  {
+    id: 'cpr-salmonella-action',
+    type: 'result',
+    module: 7,
+    title: 'Salmonella — Disposition',
+    body: 'Most: no antibiotics, supportive, return if worsening.\nIf indicated: cipro or ceftriaxone per susceptibilities.',
+    recommendation: 'No antibiotics for immunocompetent. Treat with cipro/ceftriaxone only if at-risk groups (age, immune, severe, prosthetic).',
+    confidence: 'recommended',
+    citation: [24],
+  },
+
+  {
+    id: 'cpr-shigella',
+    type: 'result',
+    module: 7,
+    title: 'Shigella — Treat All',
+    body: '**Treat all Shigella to reduce transmission and shorten illness.** [24]\n\n**First-line:** [24]\n• Azithromycin 500 mg PO qd x 3d (preferred — rising FQ resistance)\n• Ciprofloxacin 500 mg PO BID x 3d (if susceptible)\n• Ceftriaxone 2g IV qd x 5d if severe\n\n**Resistance:** extensively drug-resistant (XDR) Shigella sonnei and S. flexneri increasing in MSM and travelers — check susceptibility, consider azithromycin or ceftriaxone first.',
+    recommendation: 'Treat all. Azithromycin x 3d first-line. Cipro if susceptible. Ceftriaxone IV if severe.',
+    confidence: 'definitive',
+    citation: [24],
+  },
+
+  {
+    id: 'cpr-campy',
+    type: 'info',
+    module: 7,
+    title: 'Campylobacter — Treat Severe Only',
+    body: '**Most Campylobacter is self-limited. Treat only severe disease or immunocompromised.** [24]\n\n**Indications to treat:** [24]\n• Severe illness (>8 stools/day, fever, blood, dehydration)\n• Immunocompromised\n• Pregnancy\n• Symptoms >1 week\n\n**Regimen:** [24]\n• Azithromycin 500 mg PO qd x 3d (first-line, FQ resistance ~25% in US)\n• Ciprofloxacin 500 mg PO BID x 3d if susceptible\n\n**Guillain-Barré association:** counsel patient — small risk of GBS post-Campylobacter, return for new weakness.',
+    citation: [24],
+    next: 'cpr-campy-action',
+    summary: 'Campylobacter: treat only severe/immunocompromised/pregnant/persistent. Azithromycin first-line (FQ resistance ~25%).',
+  },
+
+  {
+    id: 'cpr-campy-action',
+    type: 'result',
+    module: 7,
+    title: 'Campylobacter — Disposition',
+    body: 'Self-limited in most. Azithromycin x 3d if severe or at-risk. Counsel on GBS return precautions.',
+    recommendation: 'Most no Rx. Azithromycin 500 mg qd x 3d if severe. Educate on GBS.',
+    confidence: 'recommended',
+    citation: [24],
+  },
+
+  {
+    id: 'cpr-stec',
+    type: 'info',
+    module: 7,
+    title: 'STEC / E. coli O157:H7 — DO NOT TREAT',
+    body: '**CRITICAL: Antibiotics INCREASE risk of hemolytic uremic syndrome (HUS).** [24]\n\n**Action:** [24]\n• NO antibiotics\n• NO loperamide or antimotility agents (also increase HUS risk)\n• Supportive care: hydration, monitor electrolytes\n• Monitor for HUS: CBC + BMP at 5-7 days post-infection\n• HUS signs: hemolytic anemia, thrombocytopenia, acute kidney injury — admit\n• Bloody diarrhea + child <10 = high suspicion, especially during outbreaks\n\n**Disposition:** outpatient supportive care, return precautions for decreased urine output, pallor, bleeding, lethargy. Lab follow-up CBC/BMP in 5-7 days.',
+    citation: [24],
+    safetyLevel: 'critical',
+    next: 'cpr-stec-action',
+    summary: 'STEC: NO antibiotics, NO loperamide. Supportive + monitor HUS (CBC/BMP in 5-7d). Admit if HUS signs.',
+  },
+
+  {
+    id: 'cpr-stec-action',
+    type: 'result',
+    module: 7,
+    title: 'STEC — Disposition',
+    body: 'NO antibiotics. NO antimotility. Supportive care. Monitor HUS labs in 5-7 days. Admit if HUS.',
+    recommendation: 'No antibiotics. No antimotility agents. Hydration. CBC/BMP at 5-7 days. Admit if HUS signs.',
+    confidence: 'definitive',
+    citation: [24],
+  },
+
+  {
+    id: 'cpr-vibrio',
+    type: 'info',
+    module: 7,
+    title: 'Vibrio (Non-Cholera) — Treat Severe + High-Risk',
+    body: '**V. vulnificus and V. parahaemolyticus most common in US (Gulf Coast, raw oyster ingestion, salt water wound exposure).** [24]\n\n**TREAT severe disease and high-risk hosts:** [24]\n• Sepsis, bacteremia\n• Cirrhosis or chronic liver disease (V. vulnificus mortality up to 50%)\n• Hemochromatosis\n• Immunocompromised\n• Necrotizing soft tissue from wound exposure to salt/brackish water\n\n**Regimen:** [24]\n• Doxycycline 100 mg PO/IV BID + ceftriaxone 2g IV qd\n• Surgical consult if necrotizing soft tissue\n• Admit',
+    citation: [24],
+    next: 'cpr-vibrio-action',
+    safetyLevel: 'warning',
+    summary: 'Vibrio: treat severe + cirrhotic + immunocompromised. Doxy + ceftriaxone. V. vulnificus mortality up to 50% in cirrhotics.',
+  },
+
+  {
+    id: 'cpr-vibrio-action',
+    type: 'result',
+    module: 7,
+    title: 'Vibrio — Disposition',
+    body: 'Admit for severe or high-risk. Doxycycline + ceftriaxone. Surgical consult if necrotizing.',
+    recommendation: 'Admit. Doxycycline + ceftriaxone. Surgery if necrotizing wound. Public health notification.',
+    confidence: 'definitive',
+    citation: [24],
+  },
+
+  {
+    id: 'cpr-cdiff',
+    type: 'question',
+    module: 7,
+    title: 'C. difficile — Interpret Result',
+    body: '**Diagnostic interpretation:** [25]\n• NAAT alone insufficient — can detect colonizers\n• NAAT + toxin EIA positive = true CDI\n• Symptomatic + both positive = treat\n• NAAT positive / toxin negative + asymptomatic = likely colonizer, do NOT treat\n• Patient with NO diarrhea (≥3 unformed stools/24h) — do NOT test or treat\n\n[CDI Severity Calculator](#/info/cpr-cdiff-severity)',
+    citation: [25],
+    options: [
+      { label: 'CDI confirmed + initial episode', description: 'Severity-based Rx', next: 'cpr-cdiff-severity' },
+      { label: 'CDI confirmed + recurrence', description: 'Adjust Rx, consider FMT consult', next: 'cpr-cdiff-recur' },
+      { label: 'NAAT+ / toxin- / asymptomatic', description: 'Likely colonizer — do NOT treat', next: 'cpr-cdiff-coloniz' },
+    ],
+    summary: 'CDI dx: NAAT + toxin both positive OR symptoms + NAAT. NAAT+/toxin-/asymptomatic = colonizer, no Rx.',
+  },
+
+  {
+    id: 'cpr-cdiff-severity',
+    type: 'info',
+    module: 7,
+    title: 'CDI Initial Episode — Severity and Treatment',
+    body: '**Severity assessment:** [25]\n• Non-severe: WBC <15k AND Cr <1.5\n• Severe: WBC ≥15k OR Cr ≥1.5\n• Fulminant: hypotension, ileus, megacolon\n\n**Treatment (IDSA/SHEA 2021 update):** [25]\n\n**Non-severe AND severe (same regimen):**\n• **Fidaxomicin 200 mg PO BID x 10d (preferred)** OR\n• **Vancomycin 125 mg PO QID x 10d**\n• Metronidazole now SECOND-LINE / non-recommended for adults\n\n**Fulminant:**\n• Vancomycin 500 mg PO/NG QID + metronidazole 500 mg IV q8h\n• Surgical consult (toxic megacolon, perforation)\n• ICU admission\n\n**Concurrent antibiotics:** stop offending antibiotics if possible.\n\n**Patient education:** hand hygiene, no alcohol-based gel (use soap and water), avoid pro-motility drugs.',
+    citation: [25],
+    next: 'cpr-cdiff-severity-action',
+    summary: 'CDI initial: fidaxomicin or vanco PO x 10d. Fulminant = vanco PO/NG + metronidazole IV + surgery consult.',
+  },
+
+  {
+    id: 'cpr-cdiff-severity-action',
+    type: 'result',
+    module: 7,
+    title: 'CDI Initial — Disposition',
+    body: '**Non-severe/severe:** outpatient if PO tolerant + reliable + no fulminant signs. Fidaxomicin or vanco PO x 10d.\n**Fulminant:** admit, ICU, vanco PO/NG + IV metronidazole, surgery consult.\n\nStop offending antibiotics if possible. Hand hygiene with soap and water. Return precautions.',
+    recommendation: 'Fidaxomicin OR vanco PO x 10d for non-severe/severe. Fulminant → admit, IV metronidazole + PO vanco, surgery.',
+    confidence: 'definitive',
+    citation: [25],
+  },
+
+  {
+    id: 'cpr-cdiff-recur',
+    type: 'info',
+    module: 7,
+    title: 'CDI Recurrence — Strategy',
+    body: '**First recurrence:** [25]\n• If vanco used initially: fidaxomicin 200 mg PO BID x 10d\n• If fidaxomicin used initially: vanco pulse-taper (125 mg QID x 14d, then BID x 7d, then qd x 7d, then q2-3d x 2-8 weeks)\n\n**Multiple recurrences (≥2):** [25]\n• Bezlotoxumab 10 mg/kg IV (monoclonal antibody) as adjunct to standard Rx\n• Consider fecal microbiota transplant (FMT) consult\n• ID + GI consult\n\n**SER-109** (live oral microbiome therapeutic) FDA approved 2023 for prevention of recurrence.',
+    citation: [25],
+    next: 'cpr-cdiff-recur-action',
+    summary: 'CDI recur: switch fidaxomicin↔vanco pulse-taper. Multiple recur = bezlotoxumab + FMT/ID consult.',
+  },
+
+  {
+    id: 'cpr-cdiff-recur-action',
+    type: 'result',
+    module: 7,
+    title: 'CDI Recurrence — Disposition',
+    body: 'First recurrence: switch agent (fidaxomicin↔vanco pulse-taper). Multiple recurrence: bezlotoxumab + FMT/ID consult.',
+    recommendation: 'First recurrence: switch fidaxomicin or vanco pulse-taper. Multiple: bezlotoxumab adjunct + FMT/ID.',
+    confidence: 'recommended',
+    citation: [25],
+  },
+
+  {
+    id: 'cpr-cdiff-coloniz',
+    type: 'result',
+    module: 7,
+    title: 'CDI NAAT+/Toxin-/Asymptomatic — Likely Colonizer',
+    body: '**Do NOT treat colonizers.** [25]\n\nNAAT positive without toxin and without diarrhea = colonization, not infection. Treating drives resistance and provides no benefit.\n\n**Action:** no antibiotics, document phone contact, return precautions for new diarrhea, hand hygiene with soap and water.',
+    recommendation: 'No antibiotics. Document phone contact + return precautions.',
+    confidence: 'recommended',
+    citation: [25],
+  },
+
+  // =====================================================================
+  // MODULE 8: CSF AND THROAT
+  // =====================================================================
+
+  {
+    id: 'cpr-csf-admit',
+    type: 'info',
+    module: 8,
+    title: 'CSF Culture Positive — Always Admit',
+    body: '**No CSF positive is dischargeable. Always admit.** [26]\n\nThis pathway covers the rare case of LP done in ED for low-suspicion meningitis (e.g., headache, fever workup) with culture turning positive after discharge.\n\n**Action:** [26]\n• Call patient — return immediately\n• Admit\n• Neurology + ID consults\n• Neurosurgery if post-op or shunt\n\n**Empiric (pending susceptibility):** [26]\n• Adult community: vancomycin 15-20 mg/kg IV q8h + ceftriaxone 2g IV q12h\n• Add ampicillin 2g IV q4h if: >50 years, pregnant, immunocompromised, alcoholism (Listeria coverage)\n• Pneumococcal suspicion (gram-positive cocci): dexamethasone 0.15 mg/kg IV q6h x 4d, start WITH or BEFORE first antibiotic dose\n• Post-neurosurgical or shunt: vancomycin + cefepime or meropenem\n• HSV suspected: acyclovir 10 mg/kg IV q8h',
+    citation: [26],
+    safetyLevel: 'critical',
+    next: 'cpr-csf-action',
+    summary: 'CSF positive = always admit. Vanco + ceftriaxone empiric. Add ampicillin if >50/preg/IC. Add dex if pneumo suspected.',
+  },
+
+  {
+    id: 'cpr-csf-action',
+    type: 'result',
+    module: 8,
+    title: 'CSF — Disposition',
+    body: 'Recall + admit + neurology + ID. Empiric vanco + ceftriaxone ± ampicillin ± dexamethasone per context.',
+    recommendation: 'Recall, admit. Vanco + ceftriaxone. Add ampicillin if >50/IC/preg. Dex if pneumococcal. Neuro + ID consults.',
+    confidence: 'definitive',
+    citation: [26],
+  },
+
+  {
+    id: 'cpr-throat-treat',
+    type: 'info',
+    module: 8,
+    title: 'GAS Pharyngitis — Treat',
+    body: '**Positive throat culture for Group A Strep = treat.** [27]\n\nPrimary goal: prevent rheumatic fever (especially <25 years) + reduce transmission + shorten illness.\n\n**First-line:** [27]\n• Penicillin V 500 mg PO BID or TID x 10d (gold standard, narrowest spectrum)\n• Amoxicillin 1g PO qd x 10d OR 500 mg PO BID x 10d\n• Single-dose benzathine PCN G IM 1.2 million units (for adherence concerns)\n\n**Penicillin allergy (non-anaphylactic):** [27]\n• Cephalexin 500 mg PO BID x 10d\n• Cefadroxil 1g PO qd x 10d\n\n**Penicillin allergy (anaphylactic):** [27]\n• Azithromycin 500 mg PO x 1, then 250 mg qd x 4d (note: 5-15% macrolide resistance, rising)\n• Clindamycin 300 mg PO QID x 10d\n\n**Asymptomatic GAS carriage:** do NOT treat (except in outbreak, household contact of rheumatic fever, recurrent symptomatic GAS).',
+    citation: [27],
+    next: 'cpr-throat-action',
+    summary: 'GAS positive = penicillin V or amox 10d. PCN allergy → cephalexin (non-anaphylactic) or azithro/clinda (anaphylactic).',
+  },
+
+  {
+    id: 'cpr-throat-action',
+    type: 'result',
+    module: 8,
+    title: 'GAS — Disposition',
+    body: 'Treat all positive culture (even if rapid was negative). Pen V or amoxicillin 10d. PCN allergy as above.',
+    recommendation: 'Penicillin V or amoxicillin 10d. Cephalexin if non-anaphylactic PCN allergy. Azithro/clinda if anaphylactic.',
+    confidence: 'definitive',
+    citation: [27],
+  },
+
+];
+
+// =====================================================================
+// MODULE LABELS
+// =====================================================================
+
+export const CULTURE_POSITIVE_RESULTS_ED_MODULE_LABELS = [
+  'Source Triage',
+  'Blood Cultures',
+  'Urine (Clean Catch)',
+  'Foley / Catheter',
+  'Wound Cultures',
+  'Sputum',
+  'Stool & C. diff',
+  'CSF & Throat',
+];
+
+export const CULTURE_POSITIVE_RESULTS_ED_NODE_COUNT = 69;
+
+// =====================================================================
+// CRITICAL ACTIONS
+// =====================================================================
+
+export const CULTURE_POSITIVE_RESULTS_ED_CRITICAL_ACTIONS = [
+  { text: 'S. aureus bacteremia = recall + admit + TTE + ID consult + cefazolin (MSSA) or vanco (MRSA)', nodeId: 'cpr-sab' },
+  { text: 'Candidemia = recall + admit + echinocandin + ophtho consult + ID consult', nodeId: 'cpr-candidemia' },
+  { text: 'STEC / E. coli O157:H7 = NO antibiotics, NO antimotility (HUS risk), monitor CBC/BMP at 5-7d', nodeId: 'cpr-stec' },
+  { text: 'Asymptomatic bacteriuria = DO NOT treat (except pregnancy or pre-urologic procedure)', nodeId: 'cpr-asb-noT' },
+  { text: 'Asymptomatic catheter bacteriuria = DO NOT treat — cloudy/smelly urine alone is not a symptom', nodeId: 'cpr-cab-noT' },
+  { text: 'ESBL bacteremia = carbapenem, avoid pip-tazo regardless of in-vitro susceptibility (MERINO)', nodeId: 'cpr-esbl' },
+  { text: 'CSF positive = always admit + vanco/ceftriaxone empiric + add ampicillin if >50/IC/pregnant (Listeria)', nodeId: 'cpr-csf-admit' },
+  { text: 'GAS pharyngitis positive culture = treat even if rapid was negative (rheumatic fever prevention <25)', nodeId: 'cpr-throat-treat' },
+  { text: 'CDI initial Rx = fidaxomicin or vanco PO x 10d. Metronidazole is second-line.', nodeId: 'cpr-cdiff-severity' },
+  { text: 'CAUTI = replace catheter before treatment (biofilm reservoir), then empiric IV', nodeId: 'cpr-cauti' },
+];
+
+// =====================================================================
+// CITATIONS
+// =====================================================================
+
+export const CULTURE_POSITIVE_RESULTS_ED_CITATIONS: Citation[] = [
+  { num: 1, text: 'Miller JM, Binnicker MJ, et al. IDSA/ASM Guide to Utilization of the Microbiology Laboratory for Diagnosis of Infectious Diseases: 2024 Update. Clin Infect Dis. 2024;ciae104.' },
+  { num: 2, text: 'Long B, Koyfman A. Best Clinical Practice: Blood Culture Utility in the Emergency Department. J Emerg Med. 2016;51(5):529-539.' },
+  { num: 3, text: 'Coburn B, Morris AM, Tomlinson G, Detsky AS. Does This Adult Patient with Suspected Bacteremia Require Blood Cultures? JAMA. 2012;308(5):502-511.' },
+  { num: 4, text: 'Hall KK, Lyman JA. Updated Review of Blood Culture Contamination. Clin Microbiol Rev. 2006;19(4):788-802.' },
+  { num: 5, text: 'Sautter RL, et al. ASM Evidence-Based Laboratory Medicine Practice Guidelines to Reduce Blood Culture Contamination. Clin Microbiol Rev. 2024;doi:10.1128/cmr.00087-24.' },
+  { num: 6, text: 'Holland TL, et al. Clinical Management of Staphylococcus aureus Bacteremia: IDSA Guidance Update. Clin Infect Dis. 2025.' },
+  { num: 7, text: 'Vogel M, Schmitz RP, Hagel S, et al. Infectious Disease Consultation for Staphylococcus aureus Bacteremia: A Systematic Review and Meta-analysis. JAMA. 2020;324(13):1376-1383.' },
+  { num: 8, text: 'Pappas PG, Kauffman CA, et al. IDSA Clinical Practice Guideline for the Management of Candidiasis: 2016 Update. Clin Infect Dis. 2016;62(4):e1-50.' },
+  { num: 9, text: 'Tabah A, et al. Use of antimicrobials in critically ill patients with bloodstream infections: position paper. Intensive Care Med. 2020;46(2):245-265.' },
+  { num: 10, text: 'Long B, Koyfman A. Emergency Medicine Evaluation and Management of the Patient with Sepsis. Emerg Med Clin North Am. 2017;35(4):859-880.' },
+  { num: 11, text: 'Yahav D, et al. Seven Versus 14 Days of Antibiotic Therapy for Uncomplicated Gram-Negative Bacteremia: A Noninferiority Randomized Controlled Trial. Clin Infect Dis. 2019;69(7):1091-1098.' },
+  { num: 12, text: 'Harris PNA, Tambyah PA, et al. Effect of Piperacillin-Tazobactam vs Meropenem on 30-Day Mortality for Patients with E coli or Klebsiella pneumoniae Bloodstream Infection (MERINO Trial). JAMA. 2018;320(10):984-994.' },
+  { num: 13, text: 'IDSA Practice Guidelines for the Management of Streptococcal Infections. Multiple sources, including Bartlett JG et al. Clin Infect Dis 2017 and IDSA endocarditis 2015.' },
+  { num: 14, text: 'Charlier C, et al. Clinical Features and Prognostic Factors of Listeriosis: The MONALISA National Prospective Cohort Study. Lancet Infect Dis. 2017;17(5):510-519.' },
+  { num: 15, text: 'Anger J, et al. American Urological Association Adult Uncomplicated UTI Guideline 2024 Update.' },
+  { num: 16, text: 'Nicolle LE, Gupta K, et al. Clinical Practice Guideline for the Management of Asymptomatic Bacteriuria: 2019 Update by IDSA. Clin Infect Dis. 2019;68(10):e83-e110.' },
+  { num: 17, text: 'Gupta K, et al. International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clin Infect Dis. 2011;52(5):e103-120. (FDA 2016 fluoroquinolone black box; AUA 2024 reaffirmation)' },
+  { num: 18, text: 'Hooton TM, et al. IDSA International Clinical Practice Guidelines for the Diagnosis, Prevention, and Treatment of Catheter-Associated Urinary Tract Infection in Adults. Clin Infect Dis. 2010;50(5):625-663.' },
+  { num: 19, text: 'Stevens DL, Bisno AL, et al. IDSA Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections: 2014 Update. Clin Infect Dis. 2014;59(2):e10-e52.' },
+  { num: 20, text: 'Daum RS, Miller LG, et al. A Placebo-Controlled Trial of Antibiotics for Smaller Skin Abscesses (TMP-SMX vs Clindamycin). N Engl J Med. 2017;376(26):2545-2555.' },
+  { num: 21, text: 'Senneville É, et al. IWGDF/IDSA Guidelines on the Diagnosis and Treatment of Diabetes-related Foot Infections. Diabetes Metab Res Rev. 2023.' },
+  { num: 22, text: 'Stevens DL, Bisno AL, et al. IDSA Bite Wound Section in 2014 SSTI Guideline + Goldstein EJ. Bite wounds and infection. Clin Infect Dis. 1992;14(3):633-638.' },
+  { num: 23, text: 'Metlay JP, Waterer GW, et al. Diagnosis and Treatment of Adults with Community-Acquired Pneumonia: An Official ATS/IDSA Clinical Practice Guideline. Am J Respir Crit Care Med. 2019;200(7):e45-e67.' },
+  { num: 24, text: 'Shane AL, Mody RK, et al. IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea. Clin Infect Dis. 2017;65(12):e45-e80.' },
+  { num: 25, text: 'Johnson S, Lavergne V, et al. Clinical Practice Guideline by IDSA/SHEA: 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults. Clin Infect Dis. 2021;73(5):e1029-e1044.' },
+  { num: 26, text: 'Tunkel AR, Hartman BJ, et al. Practice Guidelines for the Management of Bacterial Meningitis. Clin Infect Dis. 2004;39(9):1267-1284. (IDSA, still current)' },
+  { num: 27, text: 'Shulman ST, Bisno AL, et al. Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis: 2012 Update by IDSA. Clin Infect Dis. 2012;55(10):e86-102.' },
+];

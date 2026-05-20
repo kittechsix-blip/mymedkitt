@@ -1250,6 +1250,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/blood-culture-stewardship.js');
       return { nodes: m.BLOOD_CULTURE_STEWARDSHIP_NODES, entryNodeId: 'bcs-start', categoryId: 'infectious-disease', moduleLabels: m.BLOOD_CULTURE_STEWARDSHIP_MODULE_LABELS, citations: m.BLOOD_CULTURE_STEWARDSHIP_CITATIONS, criticalActions: m.BLOOD_CULTURE_STEWARDSHIP_CRITICAL_ACTIONS };
     },
+    'culture-positive-results-ed': async () => {
+      const m = await import('../data/trees/culture-positive-results-ed.js');
+      return { nodes: m.CULTURE_POSITIVE_RESULTS_ED_NODES, entryNodeId: 'cpr-start', categoryId: 'infectious-disease', moduleLabels: m.CULTURE_POSITIVE_RESULTS_ED_MODULE_LABELS, citations: m.CULTURE_POSITIVE_RESULTS_ED_CITATIONS, criticalActions: m.CULTURE_POSITIVE_RESULTS_ED_CRITICAL_ACTIONS };
+    },
     'low-back-pain': async () => {
       const m = await import('../data/trees/low-back-pain.js');
       return { nodes: m.LOW_BACK_PAIN_NODES, entryNodeId: 'lbp-start', categoryId: 'emergency-medicine', moduleLabels: m.LOW_BACK_PAIN_MODULE_LABELS, citations: m.LOW_BACK_PAIN_CITATIONS, criticalActions: m.LOW_BACK_PAIN_CRITICAL_ACTIONS };
