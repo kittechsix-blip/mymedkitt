@@ -1135,6 +1135,15 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hemolysis', label: 'Hemolysis', icon: '🔬', action: 'overlay', target: 'vad-hemolysis-labs' },
     { id: 'echo', label: 'Echo', icon: '🫀', action: 'overlay', target: 'vad-echo-findings' },
   ],
+  'myocarditis': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'myocarditis-start' },
+    { id: 'mimics', label: 'Mimics', icon: '🔍', action: 'jump', target: 'myocarditis-mimics' },
+    { id: 'echo', label: 'Echo', icon: '🫀', action: 'jump', target: 'myocarditis-pocus-echo' },
+    { id: 'fulminant', label: 'Shock', icon: '🚨', action: 'jump', target: 'myocarditis-fulminant' },
+    { id: 'cmr-biopsy', label: 'CMR/Bx', icon: '🧲', action: 'jump', target: 'myocarditis-cmr-biopsy' },
+    { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'myocarditis-disposition' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'jump', target: 'myocarditis-stop' },
+  ],
   'rhabdomyolysis': [
     { id: 'mcmahon', label: 'McMahon', icon: '📊', action: 'calculator', target: 'mcmahon-rhabdo' },
     { id: 'fluids', label: 'Fluids', icon: '💧', action: 'jump', target: 'rhabdo-fluid-resus' },

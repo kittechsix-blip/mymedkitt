@@ -849,6 +849,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/pericarditis.js');
             return { nodes: m.PERICARDITIS_NODES, entryNodeId: 'pericarditis-start', categoryId: 'cardiology', moduleLabels: m.PERICARDITIS_MODULE_LABELS, citations: m.PERICARDITIS_CITATIONS, criticalActions: m.PERICARDITIS_CRITICAL_ACTIONS };
         },
+        'myocarditis': async () => {
+            const m = await import('../data/trees/myocarditis.js');
+            return { nodes: m.MYOCARDITIS_NODES, entryNodeId: 'myocarditis-start', categoryId: 'cardiology', moduleLabels: m.MYOCARDITIS_MODULE_LABELS, citations: m.MYOCARDITIS_CITATIONS, criticalActions: m.MYOCARDITIS_CRITICAL_ACTIONS };
+        },
         'typhoid-fever': async () => {
             const m = await import('../data/trees/typhoid-fever.js');
             return { nodes: m.TYPHOID_FEVER_NODES, entryNodeId: 'typhoid-start', categoryId: 'infectious-disease', moduleLabels: m.TYPHOID_FEVER_MODULE_LABELS, citations: m.TYPHOID_FEVER_CITATIONS, criticalActions: m.TYPHOID_FEVER_CRITICAL_ACTIONS };

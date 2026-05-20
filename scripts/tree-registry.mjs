@@ -162,6 +162,7 @@ export const TREE_REGISTRY = {
   'fingertip-infections': { prefix: 'FTI',              entryNodeId: 'fti-start',          categoryId: 'orthopedics' },
   'peds-submersion':  { prefix: 'PEDS_SUBMERSION',     entryNodeId: 'ps-start',           categoryId: 'pediatrics' },
   'brugada-syndrome': { prefix: 'BRUGADA_SYNDROME',    entryNodeId: 'brugada-start',      categoryId: 'cardiology' },
+  'myocarditis':      { prefix: 'MYOCARDITIS',         entryNodeId: 'myocarditis-start',  categoryId: 'cardiology' },
   'hd-emergencies':   { prefix: 'HD_EMERGENCIES',      entryNodeId: 'hde-start',          categoryId: 'nephro-rheum-endo' },
   'marine-envenomation': { prefix: 'MARINE_ENVENOMATION', entryNodeId: 'me-start',       categoryId: 'toxicology' },
   'terrestrial-envenomation': { prefix: 'TERRESTRIAL_ENVENOMATION', entryNodeId: 'te-start', categoryId: 'toxicology' },
