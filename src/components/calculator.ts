@@ -30,6 +30,8 @@ interface CalculatorField {
   unit?: string;
   /** For select fields: the available options */
   selectOptions?: SelectOption[];
+  /** For formula calculators where option numeric values are clinical inputs, not score points */
+  hideOptionPoints?: boolean;
   /** For number fields: allow negative values (default false) */
   allowNegative?: boolean;
 }
@@ -6114,24 +6116,28 @@ const CIWA_AR_CALCULATOR: CalculatorDefinition = {
 
 const FACTOR_DOSING_CALCULATOR: CalculatorDefinition = {
   id: 'factor-dosing',
-  title: 'Factor Dosing',
-  subtitle: 'Factor VIII / IX Replacement Dosing Calculator',
-  description: 'Calculate clotting factor replacement dose based on hemophilia type, target level, and patient weight. Factor VIII: 1 unit/kg raises level by 2%. Factor IX: 1 unit/kg raises level by 1%.',
+  title: 'Hemophilia Factor Dose',
+  subtitle: 'Factor VIII / IX Replacement Dosing',
+  description: 'Dose recombinant factor from weight, hemophilia type, target factor level, and baseline level. Factor VIII: 1 U/kg raises level about 2%. Factor IX: 1 U/kg raises level about 1%. Treat major bleeds before labs return.',
   fields: [
     {
       name: 'weight',
       label: 'Patient Weight (kg)',
       type: 'number',
       points: 0,
+      valueIsPoints: true,
+      unit: 'kg',
+      description: 'Use actual body weight unless local hematology protocol says otherwise.',
     },
     {
       name: 'factor-type',
       label: 'Hemophilia Type',
       type: 'select',
       points: 0,
+      hideOptionPoints: true,
       selectOptions: [
-        { label: 'Hemophilia A (Factor VIII) — 1 U/kg = +2%', points: 2 },
-        { label: 'Hemophilia B (Factor IX) — 1 U/kg = +1%', points: 1 },
+        { label: 'Hemophilia A: Factor VIII, 1 U/kg raises ~2%', points: 2 },
+        { label: 'Hemophilia B: Factor IX, 1 U/kg raises ~1%', points: 1 },
       ],
     },
     {
@@ -6139,35 +6145,43 @@ const FACTOR_DOSING_CALCULATOR: CalculatorDefinition = {
       label: 'Target Factor Level (%)',
       type: 'select',
       points: 0,
+      hideOptionPoints: true,
       selectOptions: [
-        { label: '30–50% — Minor mucosal bleed', points: 40 },
-        { label: '40–60% — Hemarthrosis / muscle', points: 50 },
-        { label: '50% — Hematuria', points: 50 },
-        { label: '80% — Iliopsoas / GI bleed', points: 80 },
-        { label: '100% — ICH / major trauma', points: 100 },
+        { label: '40%: minor mucosal bleed', points: 40 },
+        { label: '50%: hemarthrosis, muscle bleed, hematuria', points: 50 },
+        { label: '80%: iliopsoas or GI bleed', points: 80 },
+        { label: '100%: ICH, neck/throat bleed, major trauma, surgery', points: 100 },
       ],
     },
     {
       name: 'baseline-level',
-      label: 'Baseline Factor Level (%, 0 if severe/unknown)',
+      label: 'Baseline Factor Level (%)',
       type: 'number',
       points: 0,
+      valueIsPoints: true,
+      unit: '%',
+      description: 'Use 0 if severe hemophilia or baseline is unknown.',
     },
   ],
   results: [],
-  thresholdNote: 'Round dose UP to nearest whole vial. Check post-infusion levels at 30–60 min for major bleeds.',
+  thresholdNote: 'Round dose UP to available vial size. For life-threatening bleeding, give factor immediately and involve hematology; do not delay for baseline factor level.',
   citations: [
-    'Treatment Guidelines Working Group. Guidelines for the management of hemophilia. 2nd ed. WFH. 2012.',
+    'Srivastava A, et al. WFH Guidelines for the Management of Hemophilia. 3rd edition. Haemophilia. 2020;26 Suppl 6:1-158.',
     'Schwartz KR, Rubinstein M. Hemophilia and vWD in children. Pediatr Emerg Med Pract. 2015;12(9):1-24.',
   ],
   computeResult: (values: Record<string, number>) => {
-    const weight = values['weight'] || 0;
-    const factorIncrement = values['factor-type'] || 2; // 2 for FVIII, 1 for FIX
-    const targetLevel = values['target-level'] || 50;
-    const baselineLevel = values['baseline-level'] || 0;
+    const weight = Number.isFinite(values['weight']) ? values['weight'] : 0;
+    const factorIncrement = Number.isFinite(values['factor-type']) ? values['factor-type'] : 2; // 2 for FVIII, 1 for FIX
+    const targetLevel = Number.isFinite(values['target-level']) ? values['target-level'] : 50;
+    const baselineLevel = Math.max(0, Number.isFinite(values['baseline-level']) ? values['baseline-level'] : 0);
 
     if (weight <= 0) {
-      return { value: '--', label: 'Enter weight', description: 'Enter patient weight in kg.', colorVar: '--color-text-muted' };
+      return {
+        value: '--',
+        label: 'Enter weight',
+        description: 'Enter patient weight in kg to calculate the replacement dose.',
+        colorVar: '--color-text-muted',
+      };
     }
 
     const levelNeeded = Math.max(targetLevel - baselineLevel, 0);
@@ -6175,15 +6189,23 @@ const FACTOR_DOSING_CALCULATOR: CalculatorDefinition = {
     const factorName = factorIncrement === 2 ? 'Factor VIII' : 'Factor IX';
     const halfLife = factorIncrement === 2 ? '8–12' : '18–24';
     const redoseInterval = factorIncrement === 2 ? 'q8–12h' : 'q18–24h';
+    const formula = factorIncrement === 2
+      ? 'FVIII units = weight × desired rise × 0.5'
+      : 'FIX units = weight × desired rise';
 
     if (levelNeeded <= 0) {
-      return { value: '0 units', label: 'No replacement needed', description: `Baseline level (${baselineLevel}%) already meets or exceeds target (${targetLevel}%).`, colorVar: '--color-primary' };
+      return {
+        value: '0 units',
+        label: 'Target already met',
+        description: `Baseline level (${baselineLevel}%) already meets or exceeds the selected target (${targetLevel}%). If bleeding is severe or baseline is unreliable, discuss empiric factor with hematology.`,
+        colorVar: '--color-primary',
+      };
     }
 
     return {
       value: `${dose.toLocaleString()} units`,
       label: `${factorName} dose`,
-      description: `**DOSE:** ${factorName} **${dose.toLocaleString()} units** IV\n\n**TARGET LEVEL:** ${targetLevel}% (from baseline ${baselineLevel}%)\n\n**EXPECTED RISE:** ${levelNeeded}%\n\n**HALF-LIFE:** ${halfLife} hours\n\n**REDOSE:** ${redoseInterval} if ongoing treatment needed\n\n**NOTE:** Round up to nearest whole vial`,
+      description: `**DOSE:** ${factorName} **${dose.toLocaleString()} units IV now**\n\n**FORMULA:** ${formula}\n\n**TARGET:** ${targetLevel}% from baseline ${baselineLevel}%\n\n**DESIRED RISE:** ${levelNeeded}%\n\n**HALF-LIFE:** ${halfLife} hours\n\n**REDOSE:** ${redoseInterval} if ongoing treatment needed\n\n**SAFETY:** For ICH, neck/throat bleeding, major trauma, compartment-risk bleeding, or surgery: factor first, hematology early, then check post-infusion level.`,
       colorVar: targetLevel >= 80 ? '--color-danger' : '--color-primary',
     };
   },
@@ -36745,6 +36767,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'ppcm-medication-guide': PPCM_MEDICATION_GUIDE_CALCULATOR,
   'ppcm-anticoag-guide': PPCM_ANTICOAG_GUIDE_CALCULATOR,
   'ppcm-prognosis-factors': PPCM_PROGNOSIS_FACTORS_CALCULATOR,
+  'ppcm-prognosis': PPCM_PROGNOSIS_FACTORS_CALCULATOR,
   'ppcm-delivery-guide': PPCM_DELIVERY_GUIDE_CALCULATOR,
   // HOP Killers (Physiologically Difficult Airway)
   'hop-hypotensive-intubation': HOP_HYPOTENSIVE_INTUBATION_CALCULATOR,
@@ -36845,6 +36868,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'asthma-bipap': ASTHMA_BIPAP_SETTINGS_CALCULATOR,
   'asthma-vent': ASTHMA_VENT_SETTINGS_CALCULATOR,
   'asthma-ibw': ASTHMA_IBW_CALCULATOR,
+  'ideal-body-weight': ASTHMA_IBW_CALCULATOR,
   // Peds Osteomyelitis
   'crp-trend': CRP_TREND_CALCULATOR,
   'iv-oral-transition': IV_ORAL_TRANSITION_CALCULATOR,
@@ -36921,6 +36945,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'ecmo-cannula-size': ECMO_CANNULA_SIZE_CALCULATOR,
   'ecmo-scai-stages': ECMO_SCAI_STAGES_CALCULATOR,
   'ecmo-ecpr-criteria': ECMO_ECPR_CRITERIA_CALCULATOR,
+  'ecpr-criteria': ECMO_ECPR_CRITERIA_CALCULATOR,
   'insulin-correction-dose': INSULIN_CORRECTION_DOSE_CALCULATOR,
   'tdd-estimator': TDD_ESTIMATOR_CALCULATOR,
   'basal-bolus-calc': BASAL_BOLUS_CALCULATOR,
@@ -36943,6 +36968,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'pe-resus-checklist': PE_RESUS_CHECKLIST_CALCULATOR,
   'cha2ds2vasc': CHA2DS2VASC_CALCULATOR,
   'nihss': NIHSS_CALCULATOR,
+  'nihss-calculator': NIHSS_CALCULATOR,
   'timi': TIMI_CALCULATOR,
   'bas': BAS_CALCULATOR,
   'fwd': FWD_CALCULATOR,
@@ -37055,6 +37081,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'battery-risk-stratification': BATTERY_RISK_STRATIFICATION_CALCULATOR,
   // NAT Screening
   'nat-ten4-facesp': NAT_TEN4_FACESP_CALCULATOR,
+  'nat-screening': NAT_TEN4_FACESP_CALCULATOR,
   // Difficult Airway
   'lemon-score': LEMON_SCORE_CALCULATOR,
   // Serotonin Syndrome
@@ -37095,10 +37122,13 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'ipss': IPSS_CALCULATOR,
   'pvr-interpretation': PVR_INTERPRETATION_CALCULATOR,
   'cauda-equina-checklist': CAUDA_EQUINA_CHECKLIST_CALCULATOR,
+  'cauda-equina-red-flags': CAUDA_EQUINA_CHECKLIST_CALCULATOR,
   'catheter-sizing': CATHETER_SIZING_GUIDE,
   'med-retention-reference': MED_RETENTION_REFERENCE,
+  'retention-meds': MED_RETENTION_REFERENCE,
   // RhoGAM Early Pregnancy
   'rhogam-decision': RHOGAM_DECISION_CALCULATOR,
+  'rhig-calculator': RHOGAM_DECISION_CALCULATOR,
   'kb-dosing': KB_DOSING_CALCULATOR,
   // OHSS
   'ohss-severity': OHSS_SEVERITY_CALCULATOR,
@@ -37153,6 +37183,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Adult UTI
   'uti-ua-interp': UTI_UA_INTERPRETER_CALCULATOR,
   'uti-crcl': UTI_CRCL_CALCULATOR,
+  'crcl-cockcroft-gault': UTI_CRCL_CALCULATOR,
   'uti-abx-select': UTI_ABX_SELECTOR_CALCULATOR,
   // TTP
   'ttp-plasmic': TTP_PLASMIC_CALCULATOR,
@@ -37865,13 +37896,13 @@ function renderSelectField(
     for (const opt of field.selectOptions) {
       const option = document.createElement('option');
       option.value = String(opt.points);
-      option.textContent = `${opt.label} (${opt.points})`;
+      option.textContent = field.hideOptionPoints ? opt.label : `${opt.label} (${opt.points})`;
       select.appendChild(option);
     }
   }
 
   select.addEventListener('change', () => {
-    values[field.name] = parseInt(select.value, 10);
+    values[field.name] = parseFloat(select.value);
     onChange();
   });
 
