@@ -2,7 +2,7 @@
 // Renders the 7-field Student Card and links to the underlying consult tree.
 
 import { getCard, getRotation, isCardReviewed, setCardReviewed } from '../services/learn-service.js';
-import type { StudentCard, PimpQuestion } from '../services/learn-service.js';
+import type { PimpQuestion } from '../services/learn-service.js';
 import { router } from '../services/router.js';
 import { appendBoldAware } from './text-renderer.js';
 import { showInfoModal } from './info-page.js';

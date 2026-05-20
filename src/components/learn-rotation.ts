@@ -7,7 +7,6 @@
 import {
   getRotation,
   getCardsForSection,
-  getCardsForPillar,
   getCardsForDomain,
   getCompletionStats,
   getLearnMode,
@@ -15,7 +14,6 @@ import {
   isCardReviewed,
   getDrillBestScore,
   ADMSEP_DOMAINS,
-  getDomainLabel,
 } from '../services/learn-service.js';
 import type { StudentCard, LearnMode } from '../services/learn-service.js';
 import { router } from '../services/router.js';

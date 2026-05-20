@@ -1,7 +1,7 @@
 // myMedKitt — MedKitt Learn OSCE drill renderer
 // Steps through OSCEDrill.steps, scores per option, shows debrief at end.
 
-import { getDrill, getRotation, recordDrillScore, getDrillBestScore } from '../services/learn-service.js';
+import { getDrill, recordDrillScore, getDrillBestScore } from '../services/learn-service.js';
 import type { OSCEDrill, OSCEDrillStep, OSCEDrillOption } from '../services/learn-service.js';
 import { router } from '../services/router.js';
 import { showInfoModal } from './info-page.js';
