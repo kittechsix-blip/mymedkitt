@@ -22041,6 +22041,133 @@ const PARA_STOP_PAGE = {
         { num: 1, text: 'Moore KP, Aithal GP. Guidelines on the management of ascites in cirrhosis. Gut. 2006;55 Suppl 6:vi1-vi12.' },
     ],
 };
+// -------------------------------------------------------------------
+// Cervical Spine Pain (Non-Traumatic) — Steps Summary + Reference Pages
+// -------------------------------------------------------------------
+const CSNT_STEPS_PAGE = {
+    id: 'csnt-steps',
+    title: 'Cervical Spine (Non-Traumatic) — Steps',
+    subtitle: 'High-yield workup at a glance',
+    sections: [
+        {
+            heading: 'The 5-Bucket Triage',
+            body: '1. **Red flags?** — fever/IVDU/immunocomp, cancer hx, sudden posterior HA, RA, progressive deficit\n2. **Myelopathy?** — Hoffman, Lhermitte, hyperreflexia, gait, hand clumsiness\n3. **Radiculopathy?** — dermatomal arm pain, myotome weakness, reflex change\n4. **Mechanical / myofascial?** — axial pain only, normal exam\n5. **Mixed?** — treat as the highest-acuity component',
+        },
+        {
+            heading: 'Imaging Quick Rules (ACR 2022)',
+            body: '• **MRI emergent:** myelopathy, infection (with contrast), MSCC (whole spine + contrast), progressive deficit\n• **MRI urgent:** refractory radiculopathy >6 weeks, pre-op planning\n• **CTA / MRA neck:** suspected vertebral artery dissection\n• **CT cervical:** if MRI contraindicated, bony pathology, RA AAS workup paired with XR\n• **Flex/ext XR:** RA atlantoaxial subluxation screen\n• **No imaging:** mechanical pain <6 weeks with no red flags',
+        },
+        {
+            heading: 'ED Treatment Defaults',
+            body: '**Mechanical / myofascial:**\n• NSAID (naproxen 500 BID or ibuprofen 600 TID) + APAP 1 g q6h\n• Short muscle relaxant if spasm (tizanidine 2-4 mg TID × 5-7 d)\n• No collar past 1-2 weeks. No opioids unless severe + brief\n\n**Radiculopathy:**\n• Above + consider gabapentin 300 mg TID titrated for neuropathic\n• Short PO steroid (prednisone 60 mg × 5d taper) for severe acute\n• PT referral 1-2 weeks\n\n**Myelopathy / cord syndrome:**\n• MRI now, spine surgery consult, MAP >85 if cord injury\n• Falls precautions, avoid manipulation\n\n**Infection:**\n• Vanc + ceftriaxone or cefepime, blood cx × 2, ESR/CRP, MRI w/ contrast\n\n**MSCC:**\n• Dex 10 mg IV NOW, MRI whole spine, neurosurg + rad onc',
+        },
+        {
+            heading: 'Discharge Red Flag Sheet (give written)',
+            body: 'Return immediately for:\n• New weakness in any arm or leg\n• Loss of bowel or bladder control\n• Numbness in groin or saddle area\n• Worsening gait, balance, or falls\n• Hand clumsiness or dropping things bilaterally\n• Fever or new severe pain\n• Severe posterior headache',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACR Appropriateness Criteria — Cervical Neck Pain. 2022.' },
+        { num: 2, text: 'Cohen SP. Advances in the diagnosis and management of neck pain. BMJ. 2017.' },
+    ],
+};
+const CSNT_DERMATOME_ATLAS_PAGE = {
+    id: 'csnt-dermatome-atlas',
+    title: 'Cervical Dermatome / Nerve Root Atlas',
+    subtitle: 'C5 — C6 — C7 — C8 — T1',
+    image: {
+        src: 'images/cervical-spine-nontraumatic/dermatomes.png',
+        alt: 'Whole-body dermatome map showing C2-T1 distribution across head, neck, shoulder, and upper extremity.',
+        caption: 'Dermatome map (Grant 1962, public domain via Wikimedia Commons).',
+    },
+    sections: [
+        {
+            heading: 'High-Yield Nerve Root Table',
+            body: '| Root | Dermatome | Myotome | Reflex | Tip |\n|------|-----------|---------|--------|-----|\n| **C5** | Lateral upper arm, deltoid | Shoulder abduction | Biceps | Pain to lateral arm |\n| **C6** | Lateral forearm, **thumb + index** | Wrist extension | Brachioradialis | Thumb tingling |\n| **C7** | **Middle finger**, post forearm | Wrist flexion, **triceps** | Triceps | Most common — triceps weak |\n| **C8** | Medial forearm, **ring + little finger** | Finger flexion | Finger flexor | Numb pinky |\n| **T1** | Medial upper arm, axilla | Hand intrinsics | None | Hand wasting; Horner = T1 |',
+        },
+        {
+            heading: 'Mnemonics',
+            body: '• **Fingers:** Thumb = C6 · Middle = C7 · Pinky = C8\n• **Reflexes — count to 8:** Biceps = C5-6 · Brachioradialis = C6 · Triceps = C7 · Finger flexor = C8\n• **C7 dominates** — accounts for ~60% of cervical radiculopathy presentations',
+        },
+        {
+            heading: 'Red Flag Patterns',
+            body: '• **T1 with Horner** → think Pancoast tumor (apical lung)\n• **Bilateral C8/T1 hand wasting** → think cord pathology (syringomyelia, ALS, central cord) — image the cord, not just the foramen\n• **C5 weakness with fasciculations** → anterior horn pathology (consider EMG / neurology)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Magee DJ. Orthopedic Physical Assessment. 7th ed. Elsevier, 2021.' },
+        { num: 2, text: 'Iyer S, Kim HJ. Cervical radiculopathy. Curr Rev Musculoskelet Med. 2016;9(3):272-280.' },
+    ],
+};
+const CSNT_PROVOCATIVE_PAGE = {
+    id: 'csnt-provocative-tests',
+    title: 'Cervical Provocative Tests',
+    subtitle: 'Spurling, distraction, ULTT, Lhermitte',
+    sections: [
+        {
+            heading: 'Spurling Test',
+            body: 'Extend neck → side-bend toward symptomatic side → apply downward axial pressure.\n\n• **Positive:** reproduction of radicular arm pain (not just local neck pain)\n• Sensitivity 30-60% / **Specificity 92-100%**\n• Use only if no instability or cord compression concern',
+        },
+        {
+            heading: 'Shoulder Abduction Relief (Bakody)',
+            body: 'Patient places palm of affected arm on top of head. Reduces nerve root tension.\n\n• Decreases pain = positive\n• Specificity ~80%',
+        },
+        {
+            heading: 'Neck Distraction',
+            body: 'Gentle axial traction on the head while seated.\n\n• Relieves radicular pain = positive\n• Specificity ~90%',
+        },
+        {
+            heading: 'Upper Limb Tension Test (ULTT, neural Spurling)',
+            body: 'Sequential shoulder abduction, elbow extension, wrist + finger extension, contralateral neck side-bend.\n\n• Reproduces symptoms = positive\n• Sensitivity 75-95% / Specificity 22-50% — good for ruling OUT',
+        },
+        {
+            heading: 'Lhermitte Sign',
+            body: 'Neck flexion → electric shock down spine or limbs.\n\n• **Suggests CORD pathology** (myelopathy, MS, B12, central disc)\n• If positive — escalate to myelopathy workup with MRI',
+        },
+        {
+            heading: 'Wainner Cluster (LR ~6.1 for cervical radic)',
+            body: '3 of 4 positive = high likelihood:\n1. Spurling positive\n2. Distraction positive\n3. ULTT positive\n4. Ipsilateral cervical rotation <60°',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tong HC, et al. The Spurling test and cervical radiculopathy. Spine. 2002.' },
+        { num: 2, text: 'Wainner RS, et al. Reliability and diagnostic accuracy of the clinical examination and patient self-report measures for cervical radiculopathy. Spine. 2003.' },
+    ],
+};
+const CSNT_IMAGING_DECISION_PAGE = {
+    id: 'csnt-imaging-decision',
+    title: 'Cervical Imaging Decision Aid',
+    subtitle: 'ACR Appropriateness 2022 distilled',
+    sections: [
+        {
+            heading: 'EMERGENT MRI Cervical (same visit)',
+            body: '• Myelopathy (any UMN signs)\n• Progressive motor deficit\n• Suspected spinal infection — **with contrast**\n• Suspected MSCC — **with contrast, image whole spine**\n• Severe acute radiculopathy with significant motor weakness',
+        },
+        {
+            heading: 'URGENT MRI (within 1-2 weeks, arrange from ED)',
+            body: '• Radicular symptoms >6 weeks despite conservative care\n• Progressive sensory symptoms\n• Pre-operative planning by spine surgery',
+        },
+        {
+            heading: 'CTA / MRA Neck — URGENT',
+            body: 'Suspected vertebral artery dissection:\n• Sudden severe posterior HA, post-manipulation, posterior circ symptoms\n• Age <50 with new severe posterior HA + neck pain\n\nUse CTA in ED (faster, more available).',
+        },
+        {
+            heading: 'CT Cervical Spine',
+            body: 'Limited role in non-traumatic neck pain:\n• MRI contraindicated (pacemaker, cochlear implant)\n• RA atlantoaxial concern (paired with flex/ext XR)\n• Suspected fused-spine fracture (ank spond) after minor trauma',
+        },
+        {
+            heading: 'XR Cervical Spine',
+            body: '• **Flex/ext views** — RA atlantoaxial subluxation (ADI, PADI)\n• Generally **NOT** routine for mechanical neck pain',
+        },
+        {
+            heading: 'No Imaging',
+            body: '• Mechanical/myofascial pain <6 weeks\n• No red flags, normal neuro exam\n• Imaging would not change management — counsel patient explicitly',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACR Appropriateness Criteria — Cervical Neck Pain. American College of Radiology. 2022 update.' },
+    ],
+};
 export const INFO_PAGES = {
     // Peritoneal Dialysis
     'pd-summary': PD_SUMMARY_PAGE,
@@ -22800,6 +22927,11 @@ export const INFO_PAGES = {
     'peds-fb-timing-table': PEDS_FB_TIMING_TABLE,
     'peds-fb-honey-protocol': PEDS_FB_HONEY_PROTOCOL,
     'peds-fb-pals-choking': PEDS_FB_PALS_CHOKING,
+    // Cervical Spine (Non-Traumatic)
+    'csnt-steps': CSNT_STEPS_PAGE,
+    'csnt-dermatome-atlas': CSNT_DERMATOME_ATLAS_PAGE,
+    'csnt-provocative-tests': CSNT_PROVOCATIVE_PAGE,
+    'csnt-imaging-decision': CSNT_IMAGING_DECISION_PAGE,
 };
 /** Get a single info page by ID (hardcoded fallback) */
 export function getInfoPageFallback(id) {

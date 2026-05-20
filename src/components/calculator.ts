@@ -22085,6 +22085,152 @@ const CES_PVR_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+const CERVICAL_MYELOPATHY_SCREEN_CALCULATOR: CalculatorDefinition = {
+  id: 'cervical-myelopathy-screen',
+  title: 'Cervical Myelopathy Screen',
+  subtitle: 'UMN findings count',
+  description: 'Structured count of upper motor neuron signs to screen for cervical myelopathy. More signs = higher pretest probability and stronger indication for emergent MRI.',
+  fields: [
+    { name: 'hoffman', label: 'Hoffman sign', type: 'select', points: 0, selectOptions: [
+      { label: 'Negative', points: 0 },
+      { label: 'Positive (especially if asymmetric)', points: 1 },
+    ] },
+    { name: 'lhermitte', label: 'Lhermitte sign (electric shock on neck flexion)', type: 'select', points: 0, selectOptions: [
+      { label: 'Negative', points: 0 },
+      { label: 'Positive', points: 1 },
+    ] },
+    { name: 'hyperreflexia', label: 'Hyperreflexia in any limb', type: 'select', points: 0, selectOptions: [
+      { label: 'Normal reflexes', points: 0 },
+      { label: 'Brisk reflexes', points: 1 },
+    ] },
+    { name: 'clonus', label: 'Clonus at ankle (>3 beats)', type: 'select', points: 0, selectOptions: [
+      { label: 'Absent', points: 0 },
+      { label: 'Present', points: 1 },
+    ] },
+    { name: 'babinski', label: 'Babinski / plantar extensor', type: 'select', points: 0, selectOptions: [
+      { label: 'Flexor (normal)', points: 0 },
+      { label: 'Extensor (positive)', points: 1 },
+    ] },
+    { name: 'gait', label: 'Gait disturbance (broad-based, spastic, falls)', type: 'select', points: 0, selectOptions: [
+      { label: 'Normal', points: 0 },
+      { label: 'Abnormal', points: 1 },
+    ] },
+    { name: 'hands', label: 'Hand clumsiness or bilateral intrinsic wasting', type: 'select', points: 0, selectOptions: [
+      { label: 'Absent', points: 0 },
+      { label: 'Present', points: 1 },
+    ] },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'Cook C, Roman M, Stewart ML, et al. Reliability and diagnostic accuracy of clinical special tests for myelopathy. JOSPT. 2009.',
+    'Fehlings MG, et al. A clinical practice guideline for the management of patients with degenerative cervical myelopathy. Global Spine J. 2017.',
+  ],
+  computeResult(values) {
+    const score = (values.hoffman || 0) + (values.lhermitte || 0) + (values.hyperreflexia || 0) + (values.clonus || 0) + (values.babinski || 0) + (values.gait || 0) + (values.hands || 0);
+
+    if (score >= 3) {
+      return {
+        value: `${score}/7`,
+        label: 'HIGH — Emergent MRI',
+        description: '**HIGH SUSPICION FOR CERVICAL MYELOPATHY**\n\n• 3+ UMN signs = strong likelihood of cord compression\n• **MRI cervical spine emergent** (same visit)\n• Spine surgery consult\n• Document baseline neuro exam in detail\n• Falls precautions\n• Avoid neck manipulation or extreme positioning',
+        colorVar: '--color-critical',
+      };
+    }
+
+    if (score >= 1) {
+      return {
+        value: `${score}/7`,
+        label: 'INTERMEDIATE — Investigate',
+        description: '**INTERMEDIATE SUSPICION**\n\n• 1-2 UMN signs — needs further workup\n• MRI cervical spine within 24-48 hours\n• Spine clinic referral\n• Reassess functional impact (gait, hand function)\n• Consider modified JOA score in clinic\n• Document and provide written precautions',
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: '0/7',
+      label: 'LOW — No UMN signs',
+      description: '**No UMN signs identified**\n\n• Cervical myelopathy unlikely\n• If symptoms persist, consider radiculopathy or mechanical pain\n• Provide return precautions for new gait change, hand clumsiness, bilateral symptoms',
+      colorVar: '--color-success',
+    };
+  },
+};
+
+const CERVICAL_REDFLAG_TRIAGE_CALCULATOR: CalculatorDefinition = {
+  id: 'cervical-redflag-triage',
+  title: 'Cervical Neck Pain Red Flag Triage',
+  subtitle: 'Non-traumatic neck pain screen',
+  description: 'Screen for the top "miss this and lose your license" diagnoses in non-traumatic neck pain.',
+  fields: [
+    { name: 'fever_ivdu', label: 'Fever, IVDU, immunosuppression, or recent spine procedure', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Yes — concern for infection', points: 3 },
+    ] },
+    { name: 'cancer', label: 'Known cancer + new severe neck pain ± night pain', type: 'select', points: 0, selectOptions: [
+      { label: 'No', points: 0 },
+      { label: 'Yes — concern for MSCC', points: 3 },
+    ] },
+    { name: 'sudden', label: 'Sudden onset, posterior HA, post-manipulation, posterior circ symptoms', type: 'select', points: 0, selectOptions: [
+      { label: 'No', points: 0 },
+      { label: 'Yes — concern for VAD', points: 3 },
+    ] },
+    { name: 'ra', label: 'Rheumatoid arthritis + occipital HA or new neuro signs', type: 'select', points: 0, selectOptions: [
+      { label: 'No', points: 0 },
+      { label: 'Yes — concern for atlantoaxial subluxation', points: 3 },
+    ] },
+    { name: 'umn', label: 'Any UMN signs (Hoffman, Lhermitte, hyperreflexia, gait, clonus)', type: 'select', points: 0, selectOptions: [
+      { label: 'No', points: 0 },
+      { label: 'Yes — concern for myelopathy', points: 3 },
+    ] },
+    { name: 'progressive', label: 'Progressive motor deficit', type: 'select', points: 0, selectOptions: [
+      { label: 'No', points: 0 },
+      { label: 'Yes', points: 2 },
+    ] },
+    { name: 'sphincter', label: 'New bowel or bladder dysfunction', type: 'select', points: 0, selectOptions: [
+      { label: 'No', points: 0 },
+      { label: 'Yes', points: 2 },
+    ] },
+    { name: 'duration', label: 'Duration of symptoms', type: 'select', points: 0, selectOptions: [
+      { label: '<6 weeks', points: 0 },
+      { label: '>6 weeks despite conservative care', points: 1 },
+    ] },
+  ],
+  results: [],
+  thresholdNote: '',
+  citations: [
+    'ACR Appropriateness Criteria — Cervical Neck Pain. 2022.',
+    'Cohen SP, Hooten WM. Advances in the diagnosis and management of neck pain. BMJ. 2017.',
+  ],
+  computeResult(values) {
+    const score = (values.fever_ivdu || 0) + (values.cancer || 0) + (values.sudden || 0) + (values.ra || 0) + (values.umn || 0) + (values.progressive || 0) + (values.sphincter || 0) + (values.duration || 0);
+
+    if (score >= 3) {
+      return {
+        value: `${score}`,
+        label: 'CRITICAL — Emergent workup',
+        description: '**CRITICAL RED FLAG**\n\n• At least one major red flag identified\n• **Specific actions by pattern:**\n  - Infection: MRI w/ contrast, ESR/CRP, blood cx × 2, empiric vanc + cef\n  - MSCC: dex 10 mg IV NOW, MRI whole spine, neurosurg + rad onc\n  - VAD: CTA neck, neuro consult, aspirin\n  - RA AAS: flex/ext XR, MRI, no manipulation, awake intub if airway needed\n  - Myelopathy: MRI cervical, spine surg consult\n• Do not discharge without imaging and consult',
+        colorVar: '--color-critical',
+      };
+    }
+
+    if (score >= 1) {
+      return {
+        value: `${score}`,
+        label: 'MODERATE — Investigate',
+        description: '**MODERATE CONCERN**\n\n• Soft red flag or refractory symptoms\n• MRI cervical spine (urgent, can arrange from ED)\n• Spine clinic within 1-2 weeks\n• Multimodal pain control\n• Written return precautions\n• Reassess if any new concerning features',
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: '0',
+      label: 'LOW — No red flags',
+      description: '**No red flags identified**\n\n• Mechanical/myofascial pattern most likely\n• Conservative management\n• NSAIDs + APAP, gentle activity\n• PCP / PT follow-up 1-2 weeks if not improving\n• Return precautions: new arm weakness, bilateral symptoms, sphincter changes, gait change, fever, severe HA',
+      colorVar: '--color-success',
+    };
+  },
+};
+
 const CES_TIMING_CALCULATOR: CalculatorDefinition = {
   id: 'ces-timing',
   title: 'Surgery Timing',
@@ -37251,6 +37397,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Cauda Equina Syndrome
   'ces-screening': CES_SCREENING_CALCULATOR,
   'ces-pvr': CES_PVR_CALCULATOR,
+  'cervical-myelopathy-screen': CERVICAL_MYELOPATHY_SCREEN_CALCULATOR,
+  'cervical-redflag-triage': CERVICAL_REDFLAG_TRIAGE_CALCULATOR,
   'ces-timing': CES_TIMING_CALCULATOR,
   // Brain Herniation
   'hern-icp': HERN_ICP_CALCULATOR,

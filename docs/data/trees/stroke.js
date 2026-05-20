@@ -201,8 +201,8 @@ export const STROKE_NODES = [
         type: 'question',
         module: 3,
         title: 'Extended IVT Window (4.5\u20139h)',
-        body: 'Perfusion imaging is required to determine eligibility.\n\nSee [Stroke Imaging Guide](#/info/stroke-imaging) for details on CT perfusion and MRI protocols.\n\n**EXTEND trial criteria:**\n\u2022 DWI-FLAIR (diffusion-weighted imaging / fluid-attenuated inversion recovery) mismatch on MRI (DWI+, FLAIR\u2212 suggests <4.5h)\n\u2022 OR CT perfusion showing salvageable tissue\n\u2022 Ischemic core <70 mL\n\u2022 Penumbra/core mismatch ratio >1.2',
-        citation: [5, 8],
+        body: 'Perfusion imaging is required to determine eligibility.\n\nSee [Stroke Imaging Guide](#/info/stroke-imaging) for details on CT perfusion and MRI protocols.\n\n**EXTEND trial criteria (alteplase 4.5\u20139h):**\n\u2022 DWI-FLAIR (diffusion-weighted imaging / fluid-attenuated inversion recovery) mismatch on MRI (DWI+, FLAIR\u2212 suggests <4.5h)\n\u2022 OR CT perfusion showing salvageable tissue\n\u2022 Ischemic core <70 mL\n\u2022 Penumbra/core mismatch ratio >1.2\n\n**TRACE-III (2024) / TIMELESS:** Tenecteplase 0.25 mg/kg also supported in extended window 4.5\u201324h with perfusion mismatch when EVT not available \u2014 2026 AHA/ASA Class IIb.',
+        citation: [5, 8, 14],
         options: [
             {
                 label: 'Salvageable tissue present',
@@ -315,10 +315,10 @@ export const STROKE_NODES = [
         type: 'result',
         module: 4,
         title: 'Dual Antiplatelet Therapy (DAPT)',
-        body: '**Loading (Day 1):**\n\u2022 [Aspirin](#/drug/aspirin/stroke) 325 mg + [Clopidogrel](#/drug/clopidogrel/stroke) 300 mg\n\n**Maintenance:**\n\u2022 Aspirin 81 mg + Clopidogrel 75 mg daily \u00D7 21 days\n\u2022 Then single antiplatelet (either agent)\n\n**Alternative (CYP2C19 poor metabolizer):**\n\u2022 [Ticagrelor](#/drug/ticagrelor/stroke) 180 mg load + Aspirin 325 mg, then Ticagrelor 90 mg BID + Aspirin 81 mg \u00D7 30 days\n\nPOINT trial: DAPT (dual antiplatelet therapy) reduced 90-day stroke from 6.5% to 5.0% (NNT 38). Duration beyond 21 days increases bleeding without additional benefit.\n\nAlso initiate statin (high-intensity) and complete stroke workup (telemetry, echo, vascular imaging).',
+        body: '**Loading (Day 1):**\n\u2022 [Aspirin](#/drug/aspirin/stroke) 325 mg + [Clopidogrel](#/drug/clopidogrel/stroke) 300 mg\n\n**Maintenance:**\n\u2022 Aspirin 81 mg + Clopidogrel 75 mg daily \u00D7 21 days\n\u2022 Then single antiplatelet (either agent)\n\n**Alternative (CYP2C19 poor metabolizer):**\n\u2022 [Ticagrelor](#/drug/ticagrelor/stroke) 180 mg load + Aspirin 325 mg, then Ticagrelor 90 mg BID + Aspirin 81 mg \u00D7 30 days (CHANCE-2 supports ticagrelor preference in CYP2C19 LOF carriers)\n\nPOINT trial: DAPT (dual antiplatelet therapy) reduced 90-day stroke from 6.5% to 5.0% (NNT 38). Duration beyond 21 days increases bleeding without additional benefit.\n\nAlso initiate statin (high-intensity) and complete stroke workup (telemetry, echo, vascular imaging).',
         recommendation: 'Start DAPT immediately. Limit duration to 21 days. Add high-intensity statin. Complete stroke etiology workup.',
         confidence: 'definitive',
-        citation: [3, 9, 10],
+        citation: [3, 9, 10, 12],
         treatment: {
             firstLine: {
                 drug: 'Aspirin + Clopidogrel',
@@ -546,7 +546,7 @@ export const STROKE_CITATIONS = [
     { num: 1, text: 'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.' },
     { num: 2, text: 'Mendelson SJ, Prabhakaran S. Diagnosis and Management of TIA and Acute Ischemic Stroke: A Review. JAMA. 2021;325(11):1088-1098.' },
     { num: 3, text: 'Johnston SC, et al. Clopidogrel and Aspirin in Acute Ischemic Stroke and High-Risk TIA (POINT). N Engl J Med. 2018;379(3):215-225.' },
-    { num: 4, text: 'Bhatt DL, et al. Tenecteplase vs Alteplase for Acute Ischemic Stroke (AcT). Lancet. 2024.' },
+    { num: 4, text: 'Menon BK, et al. Intravenous tenecteplase compared with alteplase for acute ischaemic stroke in Canada (AcT): a pragmatic, multicentre, open-label, registry-linked, randomised, controlled, non-inferiority trial. Lancet. 2022;400(10347):161-169.' },
     { num: 5, text: 'Ma H, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke (EXTEND). N Engl J Med. 2019;380(19):1795-1803.' },
     { num: 6, text: 'Goyal M, et al. Endovascular Thrombectomy after Large-Vessel Ischaemic Stroke: A Meta-analysis (HERMES). Lancet. 2016;387(10029):1723-1731.' },
     { num: 7, text: 'Nogueira RG, et al. Thrombectomy 6 to 24 Hours after Stroke with a Mismatch between Deficit and Infarct (DAWN). N Engl J Med. 2018;378(1):11-21.' },
@@ -554,6 +554,10 @@ export const STROKE_CITATIONS = [
     { num: 9, text: 'Wang Y, et al. Clopidogrel with Aspirin in Acute Minor Stroke or TIA (CHANCE). N Engl J Med. 2013;369(1):11-19.' },
     { num: 10, text: 'Johnston SC, et al. Ticagrelor and Aspirin or Aspirin Alone in Acute Ischemic Stroke or TIA (THALES). N Engl J Med. 2020;383(3):207-217.' },
     { num: 11, text: 'Kleindorfer DO, et al. 2021 Guideline for the Prevention of Stroke in Patients with Stroke and TIA. Stroke. 2021;52(7):e364-e467.' },
+    { num: 12, text: 'Wang Y, et al. Ticagrelor versus Clopidogrel in CYP2C19 Loss-of-Function Carriers with Stroke or TIA (CHANCE-2). N Engl J Med. 2021;385(27):2520-2530.' },
+    { num: 13, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press].' },
+    { num: 14, text: 'Xiong Y, Campbell BCV, Schwamm LH, et al. Tenecteplase for Ischemic Stroke at 4.5 to 24 Hours without Thrombectomy (TRACE-III). N Engl J Med. 2024;391(3):203-212.' },
+    { num: 15, text: 'Sarraj A, et al. Trial of Endovascular Thrombectomy for Large Ischemic Strokes (SELECT2). N Engl J Med. 2023;388(14):1259-1271.' },
 ];
 export const STROKE_CRITICAL_ACTIONS = [
     { text: 'Establish last known well time immediately - determines IVT window', nodeId: 'stroke-timing' },

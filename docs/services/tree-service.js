@@ -1145,6 +1145,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/cauda-equina.js');
             return { nodes: m.CAUDA_EQUINA_NODES, entryNodeId: 'ces-start', categoryId: 'trauma-surg', moduleLabels: m.CAUDA_EQUINA_MODULE_LABELS, citations: m.CAUDA_EQUINA_CITATIONS, criticalActions: m.CAUDA_EQUINA_CRITICAL_ACTIONS };
         },
+        'cervical-spine-nontraumatic': async () => {
+            const m = await import('../data/trees/cervical-spine-nontraumatic.js');
+            return { nodes: m.CERVICAL_SPINE_NONTRAUMATIC_NODES, entryNodeId: 'csnt-start', categoryId: 'emergency-medicine', moduleLabels: m.CERVICAL_SPINE_NONTRAUMATIC_MODULE_LABELS, citations: m.CERVICAL_SPINE_NONTRAUMATIC_CITATIONS, criticalActions: m.CERVICAL_SPINE_NONTRAUMATIC_CRITICAL_ACTIONS };
+        },
         'brain-herniation': async () => {
             const m = await import('../data/trees/brain-herniation.js');
             return { nodes: m.BRAIN_HERNIATION_NODES, entryNodeId: 'hern-start', categoryId: 'trauma-surg', moduleLabels: m.BRAIN_HERNIATION_MODULE_LABELS, citations: m.BRAIN_HERNIATION_CITATIONS, criticalActions: m.BRAIN_HERNIATION_CRITICAL_ACTIONS };

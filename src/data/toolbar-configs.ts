@@ -1546,6 +1546,18 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'timing', label: 'Surgery Time', icon: '⏱️', action: 'calculator', target: 'ces-timing' },
   ],
   // ---------------------------------------------------------------
+  // Cervical Spine — Non-Traumatic (Radiculopathy / Myelopathy)
+  // ---------------------------------------------------------------
+  'cervical-spine-nontraumatic': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'csnt-steps' },
+    { id: 'atlas', label: 'Derm Atlas', icon: '🗺️', action: 'overlay', target: 'csnt-dermatome-atlas' },
+    { id: 'myelo', label: 'Myelo Screen', icon: '🧠', action: 'calculator', target: 'cervical-myelopathy-screen' },
+    { id: 'redflag', label: 'Red Flags', icon: '🚩', action: 'calculator', target: 'cervical-redflag-triage' },
+    { id: 'tests', label: 'Provoc Tests', icon: '✋', action: 'overlay', target: 'csnt-provocative-tests' },
+    { id: 'imaging', label: 'Imaging Aid', icon: '🩻', action: 'overlay', target: 'csnt-imaging-decision' },
+    { id: 'distinguisher', label: 'Radic vs Myelo', icon: '🔀', action: 'jump', target: 'csnt-distinguisher' },
+  ],
+  // ---------------------------------------------------------------
   // Brain Herniation Syndromes
   // ---------------------------------------------------------------
   'brain-herniation': [
