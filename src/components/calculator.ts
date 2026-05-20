@@ -37508,6 +37508,14 @@ function addScrollIndicator(scrollParent: HTMLElement): void {
   setTimeout(update, 800);
 }
 
+function shouldUseStickyScoreDisplay(): boolean {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return true;
+  }
+
+  return window.matchMedia('(min-width: 640px) and (hover: hover) and (pointer: fine)').matches;
+}
+
 export function renderCalculator(container: HTMLElement, calculatorId: string): void {
   const calc = CALCULATORS[calculatorId];
   if (!calc) {
@@ -37561,19 +37569,24 @@ export function renderCalculator(container: HTMLElement, calculatorId: string): 
 
   // Score display (will update in real-time) — only if calculator has computeResult
   const scoreDisplay = document.createElement('div');
-  scoreDisplay.className = 'calculator-score-display calculator-score-display--sticky';
+  const useStickyScoreDisplay = shouldUseStickyScoreDisplay();
+  scoreDisplay.className = useStickyScoreDisplay
+    ? 'calculator-score-display calculator-score-display--sticky'
+    : 'calculator-score-display';
   scoreDisplay.id = 'calc-score-display';
   if (!calc.customRender || calc.computeResult) {
     container.appendChild(scoreDisplay);
 
     // Feature 1: Intersection observer for stuck state
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        scoreDisplay.classList.toggle('calculator-score-display--stuck', !entry.isIntersecting);
-      },
-      { threshold: 0, rootMargin: '-56px 0px 0px 0px' }
-    );
-    observer.observe(sentinel);
+    if (useStickyScoreDisplay) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          scoreDisplay.classList.toggle('calculator-score-display--stuck', !entry.isIntersecting);
+        },
+        { threshold: 0, rootMargin: '-56px 0px 0px 0px' }
+      );
+      observer.observe(sentinel);
+    }
   }
 
   // Custom render path (e.g., SVG body diagrams)
