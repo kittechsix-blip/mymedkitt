@@ -42,6 +42,13 @@ export const MYOCARDITIS_NODES = [
         title: 'Initial ED Tests',
         body: '**Minimum ED workup when myocarditis is on the table:** [1][2][5][6]\n\n• 12-lead ECG + repeat ECG if symptoms evolve\n• High-sensitivity troponin, repeat if early or changing symptoms\n• BNP/NT-proBNP if dyspnea/HF features\n• CBC with differential: eosinophilia matters\n• CMP/Mg/Phos, lactate if ill, TSH when indicated\n• CRP/ESR: supportive inflammation markers\n• Viral testing when clinically useful: SARS-CoV-2, influenza, respiratory panel\n• Pregnancy test when applicable\n• CXR if dyspnea/HF/alternative diagnosis\n• Bedside echo/POCUS early if abnormal vitals, dyspnea, syncope, or elevated troponin\n\n**Important:** ECG, troponin, and echo are useful for triage but normal tests do not fully rule out myocarditis when pretest suspicion is high. [1]',
         citation: [1, 2, 5, 6],
+        images: [
+            {
+                src: 'images/myocarditis/pericarditis-myocarditis-ecg.jpg',
+                alt: '12-lead ECG with diffuse ST elevation and PR depression pattern compatible with acute myopericarditis',
+                caption: 'ECG pattern compatible with acute myopericarditis: diffuse ST elevation with PR depression. Use as a pattern-recognition aid only; ACS, PE, dissection, Takotsubo, and demand ischemia still need active exclusion. Wikimedia Commons, James Heilman MD, CC BY-SA 4.0.',
+            },
+        ],
         options: [
             { label: 'Abnormal ECG, elevated troponin, LV dysfunction, or arrhythmia', next: 'myocarditis-risk-stratify', urgency: 'urgent' },
             { label: 'All tests normal and low suspicion', next: 'myocarditis-low-risk' },
