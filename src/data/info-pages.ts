@@ -345,6 +345,63 @@ const STROKE_CONTRAINDICATIONS_PAGE: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Stroke Treatment Windows
+// -------------------------------------------------------------------
+
+const STROKE_TREATMENT_WINDOWS_PAGE: InfoPage = {
+  id: 'stroke-treatment-windows',
+  title: 'Ischemic Stroke Treatment Windows',
+  subtitle: 'IV thrombolysis, extended-window selection, and thrombectomy',
+  sections: [
+    {
+      heading: 'Clock Rules First',
+      body: '**Use last-known-well (LKW), not time of symptom discovery.** If the patient woke up with symptoms, LKW is when they were last seen normal.\n\n**Do not let the clock hide the anatomy.** A patient outside the classic IV thrombolysis window can still be an EVT candidate if CTA shows LVO and imaging/clinical profile is favorable.\n\n**Do not delay standard-window IV thrombolysis for perfusion imaging** when NCCT excludes hemorrhage and the patient is otherwise eligible. Get CTA/CTP in parallel when LVO is possible.',
+    },
+    {
+      heading: 'Window Map - ED Action',
+      body: '**0-4.5 h:** NCCT excludes hemorrhage -> IV thrombolysis if disabling deficit and no contraindication. CTA for LVO in parallel.\n\n**Wake-up / unknown onset:** MRI DWI-FLAIR mismatch or CT/MR perfusion mismatch can identify selected IVT candidates; involve stroke team early.\n\n**4.5-9 h:** No routine blind IVT. Advanced imaging-selected thrombolysis may be reasonable if salvageable tissue and acceptable bleeding risk.\n\n**0-6 h anterior LVO:** EVT for eligible ICA/M1 and selected proximal targets; give IVT if eligible, but do not delay EVT.\n\n**6-24 h anterior LVO:** EVT if favorable clinical-core/perfusion profile; includes selected large-core patients under modern protocols.\n\n**0-24 h basilar LVO:** Selected basilar occlusions may benefit from EVT; activate stroke/neurointerventional team.\n\n**4.5-24 h LVO, EVT unavailable:** Expert-directed IVT may be considered when salvageable penumbra is present and EVT cannot be provided. Not routine late tPA/TNK.\n\n**>24 h:** Usually no routine reperfusion. Admit, treat complications, secondary prevention, and consult stroke for rare exceptions.',
+    },
+    {
+      heading: '0-4.5 h - Standard IV Thrombolysis',
+      body: '**Candidate:** disabling ischemic stroke, measurable deficit, hemorrhage excluded, BP controlled <185/110, and no major contraindication.\n\n**Agents:**\n• [Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg IV bolus, max 25 mg, where adopted by local protocol.\n• [Alteplase](#/drug/alteplase/stroke) 0.9 mg/kg IV, max 90 mg; 10% bolus, then remainder over 60 min.\n\n**Key ED rule:** fingerstick glucose is the only lab that universally precedes treatment. Do not wait for CBC/coags/chemistry unless anticoagulant use, bleeding history, thrombocytopenia concern, or another reason to suspect abnormal results.',
+    },
+    {
+      heading: 'Wake-Up / Unknown-Onset Stroke',
+      body: '**Treat clock time as LKW, but use imaging biology when available.**\n\nIV thrombolysis may be considered when imaging suggests recent infarct biology:\n• MRI DWI-positive / FLAIR-negative lesion.\n• CT or MR perfusion mismatch showing salvageable tissue.\n\nThis is not the same as treating every wake-up stroke. It requires stroke-team protocol, hemorrhage exclusion, deficit severity assessment, BP control, and contraindication screening.',
+    },
+    {
+      heading: '4.5-9 h - Imaging-Selected IVT',
+      body: '**Do not give thrombolysis solely because the patient is within 9 hours.** The extended IVT pathway is imaging-selected.\n\nTypical selection concepts:\n• Small-to-moderate ischemic core.\n• Clinically meaningful salvageable penumbra.\n• No hemorrhage or large completed infarct.\n• Disabling deficit where benefit justifies hemorrhage risk.\n\nEvidence supports selected use with perfusion or MRI mismatch; apply through local stroke protocol/stroke specialist.',
+    },
+    {
+      heading: '4.5-24 h - Late IVT Is Narrow',
+      body: 'Current guidance recognizes a narrow selected group: AIS due to LVO with salvageable penumbra who cannot receive EVT may benefit from expert-directed IV thrombolysis.\n\n**Practical ED interpretation:** this is not a routine late-thrombolysis pathway. It is a stroke-team decision after CTA/perfusion imaging, and it should not delay transfer for EVT when EVT is available.',
+    },
+    {
+      heading: 'Mechanical Thrombectomy Windows',
+      body: '**0-6 h anterior circulation LVO:** EVT is time-critical for eligible ICA/M1 and selected proximal MCA occlusions. CTA should be obtained rapidly when LVO is suspected.\n\n**6-24 h anterior circulation LVO:** EVT is recommended for selected patients with favorable imaging/clinical profile. Modern evidence also supports selected large-core patients when benefit outweighs risk.\n\n**Basilar artery occlusion:** Selected posterior circulation LVO patients may benefit from EVT up to 24 h. Do not dismiss basilar occlusion because the patient is outside 6 h.',
+    },
+    {
+      heading: 'Stop Points / Common Errors',
+      body: '• Do not use symptom discovery as onset when LKW is earlier.\n• Do not deny EVT because IV thrombolysis is contraindicated.\n• Do not delay EVT to finish an alteplase infusion.\n• Do not delay standard 0-4.5 h IVT for perfusion imaging if NCCT excludes hemorrhage and patient is otherwise eligible.\n• Do not give antiplatelet/anticoagulant during the first 24 h after IVT unless stroke specialist directs otherwise.\n• Do not treat a non-disabling mimic with reperfusion therapy without clear stroke diagnosis and risk-benefit discussion.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. 2026. doi:10.1161/STR.0000000000000513.' },
+    { num: 2, text: 'Berge E, Whiteley W, Audebert H, et al. European Stroke Organisation guidelines on intravenous thrombolysis for acute ischaemic stroke. Eur Stroke J. 2021;6(1):I-LXII.' },
+    { num: 3, text: 'Ma H, Campbell BCV, Parsons MW, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke. N Engl J Med. 2019;380:1795-1803.' },
+    { num: 4, text: 'Nogueira RG, Jadhav AP, Haussen DC, et al. Thrombectomy 6 to 24 Hours after Stroke with a Mismatch between Deficit and Infarct. N Engl J Med. 2018;378:11-21.' },
+    { num: 5, text: 'Albers GW, Marks MP, Kemp S, et al. Thrombectomy for Stroke at 6 to 16 Hours with Selection by Perfusion Imaging. N Engl J Med. 2018;378:708-718.' },
+    { num: 6, text: 'Sarraj A, Hassan AE, Abraham MG, et al. Trial of Endovascular Thrombectomy for Large Ischemic Strokes. N Engl J Med. 2023;388:1259-1271.' },
+    { num: 7, text: 'Tao C, Nogueira RG, Zhu Y, et al. Trial of Endovascular Treatment of Acute Basilar-Artery Occlusion. N Engl J Med. 2022;387:1361-1372.' },
+    { num: 8, text: 'Jovin TG, Li C, Wu L, et al. Trial of Thrombectomy 6 to 24 Hours after Stroke Due to Basilar-Artery Occlusion. N Engl J Med. 2022;387:1373-1384.' },
+    { num: 9, text: 'TIMELESS Investigators. Tenecteplase for Stroke at 4.5 to 24 Hours with Perfusion-Imaging Selection. N Engl J Med. 2024;390:701-711.' },
+    { num: 10, text: 'Xiong Y, Campbell BCV, Schwamm LH, et al. Tenecteplase for Ischemic Stroke at 4.5 to 24 Hours without Thrombectomy. N Engl J Med. 2024;391:203-212.' },
+    { num: 11, text: 'Farkas J. Acute ischemic stroke. Internet Book of Critical Care / EMCrit Project. Updated periodically; accessed May 2026.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Stroke Imaging: CT vs MRI
 // -------------------------------------------------------------------
 
@@ -1823,7 +1880,7 @@ const STROKE_SUMMARY: InfoPage = {
     },
     {
       heading: '3. Extended Window + EVT',
-      body: '• [4.5–9h → perfusion imaging for IVT eligibility (EXTEND criteria)](#/node/stroke-extended-ivt)\n• [LVO on CTA → activate neurointerventional team for EVT](#/node/stroke-evt-eligible)\n• [EVT window up to 24h with LVO + favorable perfusion (DAWN/DEFUSE-3)](#/node/stroke-evt-window)',
+      body: '• [Treatment windows quick map](#/info/stroke-treatment-windows)\n• [4.5–9h → perfusion imaging for IVT eligibility](#/node/stroke-extended-ivt)\n• [LVO on CTA → activate neurointerventional team for EVT](#/node/stroke-evt-eligible)\n• [EVT window up to 24h with LVO + favorable imaging/clinical profile](#/node/stroke-evt-window)',
     },
     {
       heading: '4. Minor Stroke (NIHSS 0–5)',
@@ -23349,6 +23406,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'pep-patient-info': PEP_PATIENT_INFO,
   'hbv-serology': HBV_SEROLOGY_PAGE,
   'stroke-contraindications': STROKE_CONTRAINDICATIONS_PAGE,
+  'stroke-treatment-windows': STROKE_TREATMENT_WINDOWS_PAGE,
   'stroke-imaging': STROKE_IMAGING_PAGE,
   'stroke-consent': STROKE_CONSENT_PAGE,
   'stroke-mri-screen': STROKE_MRI_SCREEN,
