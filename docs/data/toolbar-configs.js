@@ -170,8 +170,6 @@ const TOOLBAR_CONFIGS = {
     ],
     'stroke': [
         { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
-        { id: 'windows', label: 'Windows', icon: '\u23F1\uFE0F', action: 'overlay', target: 'stroke-treatment-windows' },
-        { id: 'ivt-imaging', label: 'IVT Imaging', icon: '\uD83D\uDDBC\uFE0F', action: 'overlay', target: 'stroke-ivt-imaging-criteria' },
         { id: 'lysis-contra', label: 'Contra', icon: '\uD83D\uDEAB', action: 'overlay', target: 'stroke-contraindications' },
         { id: 'ivt', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'stroke-ivt-treat' },
         { id: 'evt', label: 'EVT', icon: '\u23F0', action: 'jump', target: 'stroke-evt-window' },
@@ -183,6 +181,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'bp', label: 'BP Mgmt', icon: '\uD83E\uDE7A', action: 'jump', target: 'ich-bp' },
     ],
     'status-epilepticus': [
+        { id: 'bao-check', label: 'BAO?', icon: '\uD83D\uDC41\uFE0F', action: 'jump', target: 'se-bao-check' },
         { id: 'bzd', label: 'BZD Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'se-iv-bzd' },
         { id: 'second-line', label: '2nd Line', icon: '\u26A1', action: 'jump', target: 'se-2nd-line-choice' },
         { id: 'special', label: 'Special Pop', icon: '\uD83E\uDD30', action: 'jump', target: 'se-special-pop' },

@@ -1,7 +1,7 @@
 // MedKitt — Status Epilepticus Management
-// Recognition & stabilization → BZD first-line → 2nd-line ASM → Refractory/SRSE → Special populations → Differential/NCSE.
+// BAO mimicker check → Recognition & stabilization → BZD first-line → 2nd-line ASM → Refractory/SRSE → Special populations → Differential/NCSE.
 // 6 modules: Recognition → BZD → Urgent Control → Refractory → Special Populations → Differential
-// 26 nodes total.
+// 28 nodes total (added se-bao-check + se-bao-mimicker on 2026-05-21 per Dell Med teaching slide).
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
@@ -17,13 +17,83 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Status Epilepticus',
-    body: '[SE Steps Summary](#/info/se-summary) — time-critical escalating treatment pathway.\n\n**Status epilepticus (SE)** is defined as a seizure lasting >5 minutes or recurrent seizures without recovery between episodes.\n\nSE that persists despite first-line and second-line treatments often necessitates intubation and anesthetic infusions. Underrecognition and delays in treatment increase morbidity and mortality.\n\n**Key principle:** Benzodiazepines become less effective the longer SE persists — GABAA receptors are internalized from the cell surface during prolonged seizure activity. Early, adequate-dose treatment is critical.\n\n**Up to 30% morbidity and mortality** in adults. Etiology drives ~80% of SE-related mortality.',
+    body: '> 🚨 **BEFORE YOU START THE BZD ALGORITHM: LOOK AT THE EYES.**\n> Basilar artery occlusion (BAO) can mimic refractory SE — convulsive movements, posturing, hyperekplexia, and coma with no cortical EEG correlate. Median time from ED arrival to BAO diagnosis when it presents this way is **8h 24min**, and only 19% are caught inside the tPA window. BAO mortality without recanalization is ~75%.\n> 👉 **[Quick BAO mimicker check](#/node/se-bao-check)** — 60-second eye exam before committing to refractory SE.\n\n---\n\n[SE Steps Summary](#/info/se-summary) — time-critical escalating treatment pathway.\n\n**Status epilepticus (SE)** is defined as a seizure lasting >5 minutes or recurrent seizures without recovery between episodes.\n\nSE that persists despite first-line and second-line treatments often necessitates intubation and anesthetic infusions. Underrecognition and delays in treatment increase morbidity and mortality.\n\n**Key principle:** Benzodiazepines become less effective the longer SE persists — GABAA receptors are internalized from the cell surface during prolonged seizure activity. Early, adequate-dose treatment is critical.\n\n**Up to 30% morbidity and mortality** in adults. Etiology drives ~80% of SE-related mortality.',
     images: [{ src: 'images/status-epilepticus/spike-wave-eeg.png', alt: 'EEG tracing showing 3 Hz generalized spike-and-wave discharges — hallmark pattern of seizure activity', caption: 'EEG: generalized spike-wave discharges. Continuous/recurrent discharges without recovery = status epilepticus. cEEG required to detect non-convulsive SE. (CC BY-SA 2.0)' }],
-    citation: [1, 2, 3],
-    next: 'se-is-this-se',
+    citation: [1, 2, 3, 12, 13],
+    next: 'se-bao-check',
 
-    summary: 'SE defined as seizure >5 min or recurrent without recovery — BZDs less effective with delay, 30% morbidity/mortality',
-    skippable: true,
+    summary: 'SE defined as seizure >5 min or recurrent without recovery — check eyes for BAO mimic BEFORE BZD algorithm',
+    safetyLevel: 'critical',
+    skippable: false,
+  },
+
+  // ---------------------------------------------------------------------
+  // BAO MIMICKER CHECK — inserted at top of tree per Dell Med teaching
+  // "UNEXPLAINED LOC / COMA → BASILAR BASILAR BASILAR"
+  // ---------------------------------------------------------------------
+
+  {
+    id: 'se-bao-check',
+    type: 'question',
+    module: 1,
+    title: '60-Second BAO Mimicker Check — Look at the Eyes',
+    body: '**Dell Med pearl:** A "seizure" that won\'t respond to Ativan until you chemically coma them is **BASILAR until proven otherwise**.\n\nThe brainstem is the eyes\' window. In SE the brainstem is intact, so eyes still move conjugately, doll\'s eyes work, pupils are reactive. In BAO the brainstem is structurally wrecked — eyes give it away in 60 seconds.\n\n**Quick exam — answer YES if ANY of these are present:**\n\n• **Dysconjugate gaze** (one eye drifts away from the other) — SE never makes this; conjugacy is maintained by an intact MLF.\n• **Skew deviation** (vertical misalignment) — 100% sensitive / 96% specific for stroke in HINTS (Kattah 2009).\n• **Vertical gaze palsy** (up-gaze, down-gaze, or both lost) — classic for top-of-the-basilar (Caplan 1980, >75%).\n• **Ocular bobbing** (fast DOWN, slow return up) — pontine destruction → BAO.\n• **Pinpoint reactive pupils** (pons), **mid-position fixed pupils** (midbrain), or **one of each** — essentially pathognomonic for BAO. SE pupils are large and reactive from catecholamine surge.\n• **Absent or asymmetric doll\'s eyes** — brainstem destruction. SE should have intact oculocephalic reflex.\n• **INO, one-and-a-half syndrome** — structural pontine/midbrain lesion. SE never does this.\n\n**Also check:**\n• Crossed signs (ipsilateral CN deficit + contralateral hemiparesis) → BAO.\n• Sudden onset in a vasculopath, no prior seizure history, posterior circulation prodrome (vertigo, diplopia, dysarthria, ataxia) → BAO.',
+    citation: [12, 13, 14, 15, 16, 17, 18],
+    options: [
+      {
+        label: 'Eye exam is normal — eyes conjugate, doll\'s eyes intact, pupils symmetric',
+        description: 'Brainstem intact — proceed with SE algorithm',
+        next: 'se-is-this-se',
+      },
+      {
+        label: '⚠️ Any BAO red flag — pivot now',
+        description: 'Dysconjugate / skew / vertical palsy / bobbing / fixed or asymmetric pupils / absent doll\'s eyes / crossed signs',
+        next: 'se-bao-mimicker',
+        urgency: 'critical',
+      },
+      {
+        label: 'Patient is actively convulsing — can\'t fully exam yet',
+        description: 'Treat as SE; re-examine eyes between seizures or after first BZD',
+        next: 'se-is-this-se',
+        urgency: 'critical',
+      },
+    ],
+
+    summary: 'Eyes are the brainstem window — dysconjugate, skew, vertical palsy, bobbing, fixed pupils, absent doll\'s eyes = BAO',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'se-bao-mimicker',
+    type: 'result',
+    module: 1,
+    title: 'Pivot: Basilar Artery Occlusion Suspected',
+    body: '**Stop chasing SE. Get the CTA. Call neuro-IR.**\n\nBAO presenting as convulsive movements / refractory "SE" is a known and lethal trap. Median time to diagnosis when it presents this way is 8h 24min — only 19% caught inside the tPA window (Liu 2022 systematic review). Mortality without recanalization ~75% (StatPearls; ATTENTION/BAOCHE control arms).\n\n---\n\n**📋 Immediate actions:**\n\n1. **CTA head and neck STAT** — 90 seconds. NCCT alone misses 30-40% of BAOs (Goldmakher 2009). Hyperdense basilar artery sign is specific but only ~60% sensitive.\n2. **Activate neuro-IR / stroke team** — thrombectomy window extends to **24h** from last known well (BAOCHE/ATTENTION; mRS 0-3 at 90d ~46% vs ~24% medical, NNT ~4-5).\n3. **Hold further antiseizure escalation** — don\'t intubate-and-paralyze the brainstem exam away if BAO is on the table. If already intubated, use short-acting paralytic.\n4. **Permissive hypertension** — do NOT lower BP unless >220/120 (or >185/110 if going for tPA). Penumbra depends on collateral perfusion. Intraprocedural MAP target 80-110 mmHg.\n5. **Test for locked-in** — ask the patient to look up. A "comatose" patient who follows commands with vertical gaze is awake, aware, and locked-in — not in SE.\n6. **Document the eye findings in real time** — time-stamped evidence of the diagnostic pivot.\n\n---\n\n**🔬 Workup checklist:**\n• CTA head and neck (priority over EEG)\n• Fingerstick glucose (rule out hypo-mimic)\n• ECG (afib is the most common embolic source)\n• CBC, BMP, coags, troponin, type and screen\n• MRI/MRA if CTA negative but suspicion remains high\n\n---\n\n**🩺 Supportive care:**\n• HOB flat (0°) unless ICP concern — maximize cerebral perfusion\n• SpO2 ≥94% (avoid hyperoxia)\n• Glucose 140-180\n• Treat fever aggressively\n• Mechanical DVT prophylaxis only (no heparin pre-thrombectomy)\n\n---\n\n**🚩 Red flag money-quote checklist** (2+ present → BAO until proven otherwise):\n\n1. Eyes don\'t match the cortex story (any dysconjugate, skew, vertical palsy, bobbing, INO, pinpoint pontine pupils)\n2. Doll\'s eyes gone or asymmetric\n3. Crossed signs (ipsilateral CN + contralateral motor)\n4. Refractory to BZD + 2nd-line ASM with no clear cortical EEG correlate\n5. Posterior circulation prodrome before the "seizure" (vertigo, diplopia, dysarthria, dysphagia, ataxia, drop attack)\n\n**Bonus:** Sudden onset in a vasculopath — SE builds up, BAO drops like a guillotine.\n\n---\n\n**If CTA is negative or BAO is ruled out, return to the SE algorithm:**',
+    recommendation: 'Stop SE escalation. CTA head/neck STAT, activate neuro-IR, permissive HTN, test for locked-in with vertical gaze. Thrombectomy window up to 24h from LKW (BAOCHE/ATTENTION).',
+    confidence: 'definitive',
+    citation: [12, 13, 14, 15, 16, 17, 18],
+    treatment: {
+      firstLine: {
+        drug: 'CTA head + neck (not a drug — diagnostic priority)',
+        dose: 'STAT',
+        route: 'Imaging',
+        frequency: 'Once',
+        duration: '90 seconds acquisition',
+        notes: 'NCCT misses 30-40% of BAO. Hyperdense basilar artery sign 57-71% sensitive. Get CTA.',
+      },
+      alternative: {
+        drug: 'IV tPA (if within 4.5h AND no contraindications)',
+        dose: '0.9 mg/kg IV (max 90 mg), 10% bolus then infusion over 60 min',
+        route: 'IV',
+        frequency: 'Single',
+        duration: '60 min infusion',
+        notes: 'Concurrent with thrombectomy activation if eligible. Permissive HTN otherwise — do NOT lower BP <140 SBP.',
+      },
+      monitoring: 'Continuous neuro checks. Avoid hypoxia and hypotension. MAP 80-110 intraprocedurally. HOB flat unless ICP concern.',
+    },
+
+    summary: 'Stop SE workup, CTA STAT, activate neuro-IR, thrombectomy up to 24h (BAOCHE/ATTENTION), permissive HTN',
+    safetyLevel: 'critical',
   },
 
   {
@@ -663,7 +733,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'Not SE — Differential Diagnosis',
-    body: '**Common SE mimics:**\n\n• **Psychogenic nonepileptic seizures (PNES):** Most common mimic. Features suggesting PNES: side-to-side head movements, pelvic thrusting, forced eye closure (seizures: eyes open), emotional outbursts, asynchronous limb movements, waxing/waning pattern, absence of postictal confusion. Video EEG is definitive.\n\n• **Syncope with myoclonus:** Brief jerking movements after loss of consciousness — self-limited, resolves when horizontal. Lasts seconds (not minutes).\n\n• **Movement disorders:** Dystonic reactions (from dopamine-blocking medications), oculogyric crisis (20-30 min, no loss of consciousness), tremor, myoclonus.\n\n• **Metabolic encephalopathy:** Uremia, hyperammonemia, hepatic encephalopathy, myxedema coma.\n\n• **Drug toxicity / intoxication:** Alcohol, delirium tremens, serotonin syndrome.\n\n• **Locked-in syndrome:** Anterior pontine infarction — appears unresponsive but conscious. Test with vertical eye movements.\n\n• **Decerebrate/decorticate posturing:** From structural brain injury — not rhythmic.\n\n**Key differentiators:**\n• Lateral tongue laceration suggests seizure over syncope\n• Lactate >2.45 mmol/L: 88% sensitivity, 87% specificity for GTC seizure vs syncope/PNES\n• Prolactin elevated 10-20 min post-seizure: 53% sensitivity, 93% specificity for convulsive SE\n\n**If uncertain, treat as SE** until effectively ruled out — delayed treatment worsens outcomes.',
+    body: '**Common SE mimics:**\n\n• **Psychogenic nonepileptic seizures (PNES):** Most common mimic. Features suggesting PNES: side-to-side head movements, pelvic thrusting, forced eye closure (seizures: eyes open), emotional outbursts, asynchronous limb movements, waxing/waning pattern, absence of postictal confusion. Video EEG is definitive.\n\n• **Syncope with myoclonus:** Brief jerking movements after loss of consciousness — self-limited, resolves when horizontal. Lasts seconds (not minutes).\n\n• **Movement disorders:** Dystonic reactions (from dopamine-blocking medications), oculogyric crisis (20-30 min, no loss of consciousness), tremor, myoclonus.\n\n• **Metabolic encephalopathy:** Uremia, hyperammonemia, hepatic encephalopathy, myxedema coma.\n\n• **Drug toxicity / intoxication:** Alcohol, delirium tremens, serotonin syndrome.\n\n• **Basilar artery occlusion (BAO):** ⚠️ **The #1 lethal SE mimic.** Convulsive movements, hyperekplexia, posturing, and coma without cortical EEG correlate. Eyes give it away: dysconjugate gaze, skew, vertical palsy, ocular bobbing, fixed/asymmetric pupils, absent doll\'s eyes, INO, crossed signs. 24h thrombectomy window (BAOCHE/ATTENTION). **[Open BAO mimicker check](#/node/se-bao-check)**.\n\n• **Locked-in syndrome:** Ventral pontine infarction (basilar artery thrombosis) — quadriplegia + anarthria but **conscious**. Test with vertical eye movements ("look up if you can hear me") — a "comatose" patient who follows commands with vertical gaze is locked-in, not in SE. ~75% acute mortality.\n\n• **Decerebrate/decorticate posturing:** From structural brain injury — not rhythmic. Sustained extensor posture with absent doll\'s eyes → brainstem (BAO). Repetitive tonic-clonic with preserved doll\'s eyes and reactive pupils → SE.\n\n**Key differentiators:**\n• Lateral tongue laceration suggests seizure over syncope\n• Lactate >2.45 mmol/L: 88% sensitivity, 87% specificity for GTC seizure vs syncope/PNES\n• Prolactin elevated 10-20 min post-seizure: 53% sensitivity, 93% specificity for convulsive SE\n\n**If uncertain, treat as SE** until effectively ruled out — delayed treatment worsens outcomes.',
     recommendation: 'Consider alternative diagnosis. If uncertain, treat as SE until proven otherwise. PNES is the most common mimic — video EEG is definitive. Do not administer antiseizure medications for confirmed PNES.',
     confidence: 'consider',
     citation: [1, 3],
@@ -691,6 +761,8 @@ export const STATUS_EPILEPTICUS_MODULE_LABELS = [
 // -------------------------------------------------------------------
 
 export const STATUS_EPILEPTICUS_CRITICAL_ACTIONS = [
+  { text: '⚠️ Check the eyes BEFORE committing to refractory SE - dysconjugate / skew / vertical palsy / fixed pupils / absent doll\'s eyes = BAO until proven otherwise', nodeId: 'se-bao-check' },
+  { text: 'If BAO suspected: CTA head/neck STAT (NCCT misses 30-40%), activate neuro-IR - thrombectomy window up to 24h from LKW (BAOCHE/ATTENTION)', nodeId: 'se-bao-mimicker' },
   { text: 'Lorazepam 0.1 mg/kg IV (max 4 mg) or midazolam 0.2 mg/kg IM (max 10 mg) within 5 minutes', nodeId: 'se-iv-bzd' },
   { text: 'Repeat benzodiazepine once in 5-10 minutes if seizure persists', nodeId: 'se-bzd-response' },
   { text: 'Second-line ASM within 10 minutes: levetiracetam 60 mg/kg IV (max 4500 mg)', nodeId: 'se-levetiracetam' },
@@ -714,4 +786,11 @@ export const STATUS_EPILEPTICUS_CITATIONS: Citation[] = [
   { num: 9, text: 'Swor DE, et al. Management of Status Epilepticus in Pregnancy: A Survey of Neurologists and Neurointensivists. Neurocrit Care. 2024.' },
   { num: 10, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020;135(6):e237-e260.' },
   { num: 11, text: 'Trinka E, Cock H, Hesdorffer D, et al. A Definition and Classification of Status Epilepticus — Report of the ILAE Task Force on Classification of Status Epilepticus. Epilepsia. 2015;56(10):1515-1523.' },
+  { num: 12, text: 'Liu W, et al. Acute Basilar Artery Occlusion Presenting With Convulsive Movements: A Systematic Review. Front Neurol. 2022;12:803618. DOI: 10.3389/fneur.2021.803618. PMID: 35185758. (Median ED-to-diagnosis 8h 24min; only 19% caught in tPA window.)' },
+  { num: 13, text: 'Bhatt SK, Singh TD, Rabinstein AA. Refractory Left Focal Motor Status Epilepticus as Initial Clinical Presentation of Acute Basilar Artery Thrombosis. Mayo Clin Proc Innov Qual Outcomes. 2021;5(2):511-515. PMID: 33997647. PMC8105497.' },
+  { num: 14, text: 'Bourmaf M, Katyal R, Al-Awwad A. Top of Basilar Syndrome Presenting with Hyperekplexia Initially Diagnosed as Convulsive Status Epilepticus. J Emerg Med. 2020;59(5):e53-e56. DOI: 10.1016/j.jemermed.2020.06.044.' },
+  { num: 15, text: 'Kattah JC, Talkad AV, Wang DZ, Hsieh YH, Newman-Toker DE. HINTS to Diagnose Stroke in the Acute Vestibular Syndrome: Three-Step Bedside Oculomotor Examination More Sensitive than Early MRI Diffusion-Weighted Imaging. Stroke. 2009;40(11):3504-3510. PMID: 19762709. (Skew + direction-changing nystagmus + normal head impulse = 100% sensitive / 96% specific for stroke.)' },
+  { num: 16, text: 'Caplan LR. "Top of the Basilar" Syndrome. Neurology. 1980;30(1):72-79. PMID: 7188637. (Vertical gaze palsy in >75% of top-of-basilar cases.)' },
+  { num: 17, text: 'Tao C, Nogueira RG, Zhu Y, et al. Trial of Endovascular Treatment of Acute Basilar-Artery Occlusion (ATTENTION). N Engl J Med. 2022;387(15):1361-1372. PMID: 36239644. (0-12h window: mRS 0-3 at 90d 46% thrombectomy vs 23% medical, stopped early for efficacy.)' },
+  { num: 18, text: 'Jovin TG, Li C, Wu L, et al. Trial of Thrombectomy 6 to 24 Hours After Stroke Due to Basilar-Artery Occlusion (BAOCHE). N Engl J Med. 2022;387(15):1373-1384. PMID: 36239645. (6-24h window: mRS 0-3 at 90d 46% thrombectomy vs 24% medical, stopped early for efficacy.)' },
 ];
