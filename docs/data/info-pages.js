@@ -333,6 +333,49 @@ const STROKE_TREATMENT_WINDOWS_PAGE = {
     ],
 };
 // -------------------------------------------------------------------
+// Stroke IVT Imaging Criteria
+// -------------------------------------------------------------------
+const STROKE_IVT_IMAGING_CRITERIA_PAGE = {
+    id: 'stroke-ivt-imaging-criteria',
+    title: 'Imaging IVT Criteria',
+    subtitle: 'MRI DWI/FLAIR mismatch and CT/MR perfusion penumbra',
+    sections: [
+        {
+            heading: 'When This Tool Matters',
+            body: '**Do not use advanced imaging to slow down standard-window IVT.** If the patient is within 0-4.5 h from last-known-well, has a disabling deficit, and NCCT excludes hemorrhage, start IVT if otherwise eligible.\n\nUse imaging selection when the clock is uncertain or extended:\n• Wake-up / unknown-onset stroke.\n• Known onset 4.5-9 h.\n• Selected 4.5-24 h LVO patients when EVT is unavailable/not feasible and stroke team is directing care.\n\nThe question is: **does imaging show recent infarct biology or salvageable tissue?**',
+        },
+        {
+            heading: 'MRI DWI/FLAIR Mismatch',
+            body: '**Positive pattern:** DWI shows an acute ischemic lesion, but FLAIR shows no matching hyperintensity in that same region.\n\n**Why it works:** DWI becomes positive within minutes of ischemia. FLAIR signal usually lags behind and often appears several hours later. A DWI-positive / FLAIR-negative lesion is therefore used as a tissue-clock marker suggesting recent onset, roughly compatible with the 4.5 h IVT window.\n\n**Practical criteria:**\n• DWI lesion is visible and matches the deficit.\n• No clear corresponding FLAIR hyperintensity.\n• Lesion is not a large completed infarct.\n• No hemorrhage, mass lesion, or mimic explaining symptoms.\n• Patient still has a disabling deficit and no IVT contraindication.',
+        },
+        {
+            heading: 'CT/MR Perfusion Penumbra',
+            body: '**Penumbra means tissue at risk but not yet dead.** Perfusion imaging separates an ischemic core from delayed but potentially salvageable tissue.\n\nCommon automated thresholds used in EXTEND/ESO-style selection:\n• **Core:** rCBF <30% on CT perfusion, or ADC <620 micrometers squared/sec on diffusion MRI.\n• **Hypoperfused tissue:** Tmax >6 seconds on CT or MR perfusion.\n• **Mismatch / penumbra:** hypoperfused tissue volume minus core volume.\n• **Favorable mismatch:** core <70 mL, mismatch ratio >1.2, and mismatch volume >10 mL.\n\nLater LVO/no-EVT thrombolysis trials often used stricter automated mismatch thresholds, such as ratio >1.8, penumbra volume >15 mL, and core <70 mL.',
+        },
+        {
+            heading: 'Timing: What Each Modality Sees',
+            body: '**Noncontrast CT:** fastest hemorrhage exclusion. Early ischemia can be subtle or absent in the first hours; frank hypodensity suggests more established infarct.\n\n**DWI MRI:** usually detects acute ischemia within minutes. It is very sensitive early, including when CT is still normal.\n\n**FLAIR MRI:** often becomes visibly abnormal after several hours. FLAIR positivity means the lesion may be older, but timing is variable by lesion size, location, scanner, and patient factors.\n\n**CT/MR perfusion:** can show core/penumbra physiology early and is most useful when the time window is extended or uncertain. It should not replace rapid NCCT for hemorrhage exclusion.',
+        },
+        {
+            heading: 'Use These Findings Safely',
+            body: '• If imaging shows large core/no mismatch, do not force IVT just because the patient is close to a window.\n• If CTA shows LVO, activate EVT pathway even if IVT is contraindicated.\n• If standard-window IVT is otherwise clear, do not wait for perfusion maps.\n• Poor bolus timing, motion, severe chronic stenosis, and bad automated segmentation can mislabel core or penumbra.\n• Posterior circulation and small infarcts may be harder to time by FLAIR.\n• Always pair imaging with deficit severity, BP, anticoagulant history, glucose, and contraindication screen.',
+        },
+        {
+            heading: 'Documentation Phrase',
+            body: 'Example: "Extended/unknown-onset IVT considered using tissue-based imaging. MRI shows DWI-positive lesion without corresponding FLAIR hyperintensity / CTP shows favorable core-penumbra mismatch with core <70 mL, mismatch ratio >1.2, mismatch volume >10 mL. Hemorrhage excluded, disabling deficit persists, BP controlled, contraindication screen reviewed with stroke team."',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. 2026. doi:10.1161/STR.0000000000000513.' },
+        { num: 2, text: 'Thomalla G, Simonsen CZ, Boutitie F, et al. MRI-Guided Thrombolysis for Stroke with Unknown Time of Onset. N Engl J Med. 2018;379:611-622.' },
+        { num: 3, text: 'Ma H, Campbell BCV, Parsons MW, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke. N Engl J Med. 2019;380:1795-1803.' },
+        { num: 4, text: 'Berge E, Whiteley W, Audebert H, et al. European Stroke Organisation guidelines on intravenous thrombolysis for acute ischaemic stroke. Eur Stroke J. 2021;6(1):I-LXII.' },
+        { num: 5, text: 'TIMELESS Investigators. Tenecteplase for Stroke at 4.5 to 24 Hours with Perfusion-Imaging Selection. N Engl J Med. 2024;390:701-711.' },
+        { num: 6, text: 'Xiong Y, Campbell BCV, Schwamm LH, et al. Tenecteplase for Ischemic Stroke at 4.5 to 24 Hours without Thrombectomy. N Engl J Med. 2024;391:203-212.' },
+        { num: 7, text: 'Amin HP, Madsen TE, Bravata DM, et al. Diagnosis, Workup, Risk Reduction of TIA in the ED: AHA Scientific Statement. Stroke. 2023;54:e109-e121.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Stroke Imaging: CT vs MRI
 // -------------------------------------------------------------------
 const STROKE_IMAGING_PAGE = {
@@ -22408,6 +22451,7 @@ export const INFO_PAGES = {
     'hbv-serology': HBV_SEROLOGY_PAGE,
     'stroke-contraindications': STROKE_CONTRAINDICATIONS_PAGE,
     'stroke-treatment-windows': STROKE_TREATMENT_WINDOWS_PAGE,
+    'stroke-ivt-imaging-criteria': STROKE_IVT_IMAGING_CRITERIA_PAGE,
     'stroke-imaging': STROKE_IMAGING_PAGE,
     'stroke-consent': STROKE_CONSENT_PAGE,
     'stroke-mri-screen': STROKE_MRI_SCREEN,
