@@ -195,6 +195,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'bp', label: 'BP Mgmt', icon: '\uD83E\uDE7A', action: 'jump', target: 'ich-bp' },
   ],
   'status-epilepticus': [
+    { id: 'rx-flow', label: 'Rx Flow', icon: '\uD83D\uDC8A', action: 'overlay', target: 'se-rx-flow' },
     { id: 'bao-check', label: 'BAO?', icon: '\uD83D\uDC41\uFE0F', action: 'jump', target: 'se-bao-check' },
     { id: 'bzd', label: 'BZD Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'se-iv-bzd' },
     { id: 'second-line', label: '2nd Line', icon: '\u26A1', action: 'jump', target: 'se-2nd-line-choice' },

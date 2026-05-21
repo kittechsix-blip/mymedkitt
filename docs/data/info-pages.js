@@ -3193,6 +3193,55 @@ const AUB_DISCHARGE = {
 // -------------------------------------------------------------------
 // Status Epilepticus
 // -------------------------------------------------------------------
+const SE_RX_FLOW = {
+    id: 'se-rx-flow',
+    title: 'Seizure Rx Flow',
+    subtitle: 'First-line, second-line, refractory, and cause-specific rescue',
+    sections: [
+        {
+            heading: '0-5 Min: Stabilize + Find Reversible Triggers',
+            body: '**Treat convulsive seizure activity lasting >=5 minutes as status epilepticus.** Start airway positioning, suction, oxygen, monitor, IV/IO access, and a visible seizure clock.\n\n**Do immediately, in parallel:**\n• Fingerstick glucose; give dextrose if low or if glucose cannot be checked quickly.\n• Check sodium/electrolytes as soon as blood is available.\n• Ask about pregnancy/postpartum, TB meds/isoniazid, withdrawal, bupropion/TCA/sympathomimetics, head trauma, and missed antiseizure meds.\n• Do not wait for labs before giving a first-line benzodiazepine.',
+        },
+        {
+            heading: '1st Line: Benzodiazepine, Full Dose',
+            body: '**IV access:** [Lorazepam](#/drug/lorazepam/status epilepticus) **0.1 mg/kg IV**, max **4 mg/dose**, repeat once in 5 minutes if still seizing.\n\n**No IV/IO yet:** [Midazolam](#/drug/midazolam/status epilepticus im) **10 mg IM** adult, or **0.2 mg/kg IM/IN** max 10 mg.\n\n**Diazepam fallback:** 10 mg IV, repeat q5-10 min to max 30 mg, or rectal 0.2-0.5 mg/kg max 20 mg.\n\n**Do not underdose.** Adequate benzodiazepine treatment is less dangerous than ongoing status; persistent seizure drives acidosis, aspiration, hyperthermia, rhabdo, and neuronal injury.',
+        },
+        {
+            heading: '2nd Line: Load an Antiseizure Medication',
+            body: '**Give within 5-10 minutes of benzodiazepine failure.** Do not wait to see if the seizure "settles out."\n\nCommon ED choices:\n• [Levetiracetam](#/drug/levetiracetam/status epilepticus) **60 mg/kg IV**, max **4.5 g**. Good default; few interactions.\n• [Valproate](#/drug/valproate/status epilepticus) **40 mg/kg IV**, max **3 g**. Avoid pregnancy, liver failure, thrombocytopenia, known mitochondrial/urea-cycle disorder.\n• [Fosphenytoin](#/drug/fosphenytoin/status epilepticus) **20 mg PE/kg IV**, max **1500 mg PE**. Requires cardiac/BP monitoring; avoid significant conduction disease and many toxin/withdrawal seizures.\n• [Phenobarbital](#/drug/phenobarbital/status epilepticus) **15-20 mg/kg IV**, max **2 g**. Useful for alcohol/sedative withdrawal or when other agents unavailable; prepare airway/pressors.\n\nESETT supports levetiracetam, valproate, and fosphenytoin as similarly effective for benzodiazepine-refractory convulsive SE; choose by contraindications.',
+        },
+        {
+            heading: 'EMCrit 2025 Add-On: Early Ketamine Bridge',
+            body: '**EMCrit/IBCC emphasizes early ketamine as a seizure-lysis bridge while maintenance ASM is loading.** This is an expert-resuscitation approach, not a universal guideline mandate.\n\nReasonable adult ED approach when generalized convulsive SE continues after benzodiazepine and pharmacy delay/airway concern exists:\n• [Ketamine](#/drug/ketamine/status epilepticus) **100 mg IV slow push** as a practical adult dose, or **1-2 mg/kg IV** by local protocol.\n• If no IV and seizure remains uncontrolled, some experts consider **ketamine ~3 mg/kg IM** while access is obtained.\n\nKetamine does not replace the second-line antiseizure medication. It buys time and may reduce the need for a rushed intubation, but ongoing seizure, hypoxia, aspiration risk, or refractory course still requires airway/ICU escalation.',
+        },
+        {
+            heading: '3rd Line: Refractory SE / Neurolytic Intubation',
+            body: '**Refractory SE = benzodiazepine + adequate second-line ASM failed.** Activate neurology/ICU, prepare intubation, vasopressors, and continuous EEG.\n\nCommon infusion options after airway control:\n• [Propofol](#/drug/propofol/refractory status epilepticus) load **1-2 mg/kg**, then **30-200 mcg/kg/min**; monitor BP, triglycerides, CK, lactate, PRIS risk.\n• [Midazolam](#/drug/midazolam/refractory status epilepticus) load **0.2 mg/kg**, then **0.05-2 mg/kg/hr**; less hypotension, more accumulation.\n• [Ketamine](#/drug/ketamine/refractory status epilepticus) load **0.5-3 mg/kg**, then **0.1-5 mg/kg/hr**; NMDA pathway, often hemodynamically favorable.\n• Pentobarbital coma is neuro-ICU level rescue.\n\nIf paralyzing, use the shortest effective paralysis and get EEG. Paralysis hides motor seizures; it does not stop cortical seizure activity.',
+        },
+        {
+            heading: 'Cause-Specific Rescue: Do Not Miss These',
+            body: '**Hypoglycemia:** D50W **25 g IV** adult, or D10W **2-5 mL/kg** pediatric. Give [Thiamine](#/drug/thiamine/status epilepticus) **100-500 mg IV** if alcohol use, malnutrition, bariatric surgery, hyperemesis, or poor history; do not delay dextrose.\n\n**Hyponatremic seizure:** [3% hypertonic saline](#/drug/hypertonic-saline/severe symptomatic) **100-150 mL IV bolus over 10-20 min**, repeat up to 2 times for ongoing severe symptoms. Target initial Na rise **4-6 mEq/L**, then slow down and monitor q2h.\n\n**Eclampsia / pregnancy >20 wk / postpartum seizure:** [Magnesium sulfate](#/drug/magnesium-sulfate/eclampsia) **4-6 g IV load over 15-20 min**, then **1-2 g/hr**. Treat severe BP and call OB. If unclear, give magnesium while evaluating.\n\n**INH overdose or TB meds + refractory seizure/acidosis:** [Pyridoxine](#/drug/pyridoxine/inh toxicity) gram-for-gram to INH ingestion, or **5 g IV empiric** if unknown. Call poison center. Standard ASMs often fail until B6 is given.',
+        },
+        {
+            heading: 'Kitchen Sink for the Undifferentiated Bad Seizure',
+            body: 'Use when the patient is still seizing or deeply altered and the cause is unclear:\n\n• Benzodiazepine full dose, then second-line ASM immediately.\n• Glucose now if low, borderline, or cannot check rapidly.\n• Thiamine 100-500 mg IV if any malnutrition/alcohol risk or unknown history.\n• 3% saline bolus if Na is severely low or hyponatremic seizure is plausible.\n• Magnesium sulfate if pregnant/postpartum or eclampsia cannot be excluded.\n• Pyridoxine 5 g IV if INH/TB meds, refractory seizure + severe acidosis, or unknown ingestion with classic tox pattern.\n• Correct severe hypocalcemia/hypomagnesemia.\n• Treat hyperthermia, acidosis, rhabdomyolysis, hypoxia, and shock.\n• Avoid phenytoin/fosphenytoin for many toxin/withdrawal seizures; favor benzodiazepines, phenobarbital, propofol, or ketamine based on toxidrome and airway.',
+        },
+        {
+            heading: 'Stop Points',
+            body: '• Do not give repeated tiny benzodiazepine doses; give full doses and escalate.\n• Do not wait 20-30 minutes for pharmacy if convulsive SE continues; prepare airway and consider ketamine/propofol pathway.\n• Do not intubate and paralyze without a plan for EEG or seizure-suppressing sedation.\n• Do not miss BAO mimic; check pupils/gaze/skew/doll eyes before anchoring on refractory SE.\n• Do not forget maintenance ASM after benzodiazepine seizure termination; recurrence risk remains high.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Farkas J. Status Epilepticus. Internet Book of Critical Care / EMCrit Project. Updated Apr 15, 2025.' },
+        { num: 2, text: 'EMCrit 403. What’s the Status of Status — Status Epilepticus 2025 with PulmCrit. EMCrit Project. 2025.' },
+        { num: 3, text: 'Glauser T, Shinnar S, Gloss D, et al. Evidence-Based Guideline: Treatment of Convulsive Status Epilepticus in Children and Adults. Epilepsy Curr. 2016;16(1):48-61.' },
+        { num: 4, text: 'Brophy GM, Bell R, Claassen J, et al. Guidelines for the Evaluation and Management of Status Epilepticus. Neurocrit Care. 2012;17(1):3-23.' },
+        { num: 5, text: 'Kapur J, Elm J, Chamberlain JM, et al. Randomized Trial of Three Anticonvulsant Medications for Status Epilepticus. N Engl J Med. 2019;381:2103-2113.' },
+        { num: 6, text: 'Verbalis JG, Goldsmith SR, Greenberg A, et al. Diagnosis, Evaluation, and Treatment of Hyponatremia: Expert Panel Recommendations. Am J Med. 2013;126:S1-S42.' },
+        { num: 7, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020;135:e237-e260.' },
+        { num: 8, text: 'Wason S, Lacouture PG, Lovejoy FH Jr. Single High-Dose Pyridoxine Treatment for Isoniazid Overdose. JAMA. 1981;246(10):1102-1104.' },
+    ],
+};
 const SE_SUMMARY = {
     id: 'se-summary',
     title: 'Status Epilepticus Steps Summary',
@@ -22557,6 +22606,7 @@ export const INFO_PAGES = {
     'aub-surgical': AUB_SURGICAL,
     'aub-maintenance': AUB_MAINTENANCE,
     'aub-discharge': AUB_DISCHARGE,
+    'se-rx-flow': SE_RX_FLOW,
     'se-summary': SE_SUMMARY,
     'se-labs': SE_LABS,
     'se-asm-comparison': SE_ASM_COMPARISON,
