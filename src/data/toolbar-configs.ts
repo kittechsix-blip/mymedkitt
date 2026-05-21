@@ -184,6 +184,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   ],
   'stroke': [
     { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
+    { id: 'window-calc', label: 'Win Calc', icon: '\uD83E\uDDEE', action: 'calculator', target: 'stroke-window-calculator' },
     { id: 'windows', label: 'Windows', icon: '\u23F1\uFE0F', action: 'overlay', target: 'stroke-treatment-windows' },
     { id: 'ivt-imaging', label: 'IVT Imaging', icon: '\uD83E\uDDEA', action: 'overlay', target: 'stroke-ivt-imaging-criteria' },
     { id: 'lysis-contra', label: 'Contra', icon: '\uD83D\uDEAB', action: 'overlay', target: 'stroke-contraindications' },

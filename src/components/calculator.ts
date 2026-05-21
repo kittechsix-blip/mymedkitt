@@ -386,6 +386,344 @@ const NIHSS_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// Stroke Treatment Window Calculator
+// -------------------------------------------------------------------
+
+const HOUR_MS = 60 * 60 * 1000;
+
+function formatStrokeClock(ms: number | undefined): string {
+  if (!ms || !Number.isFinite(ms)) return 'not entered';
+  return new Date(ms).toLocaleString([], {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
+}
+
+function formatStrokeHours(hours: number | null): string {
+  if (hours === null || !Number.isFinite(hours)) return 'unknown';
+  if (hours < 1) return `${Math.round(hours * 60)} min`;
+  return `${hours.toFixed(1)} h`;
+}
+
+function strokeHoursBetween(laterMs: number, earlierMs: number): number | null {
+  if (!laterMs || !earlierMs || !Number.isFinite(laterMs) || !Number.isFinite(earlierMs)) return null;
+  if (laterMs < earlierMs) return null;
+  return (laterMs - earlierMs) / HOUR_MS;
+}
+
+function toLocalDateTimeValue(date: Date): string {
+  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0, 16);
+}
+
+function parseLocalDateTimeValue(value: string): number {
+  if (!value) return 0;
+  const ms = new Date(value).getTime();
+  return Number.isFinite(ms) ? ms : 0;
+}
+
+const STROKE_WINDOW_CALCULATOR: CalculatorDefinition = {
+  id: 'stroke-window-calculator',
+  title: 'Stroke Window Calculator',
+  subtitle: 'Patient-Specific IVT / EVT Clock',
+  description: 'Enter last-known-well, discovery/wake-up time, bedtime if relevant, and imaging gates to map the patient to standard IV thrombolysis, imaging-selected thrombolysis, and thrombectomy windows.',
+  fields: [],
+  results: [],
+  thresholdNote: 'This supports time-window triage only. It does not replace the full thrombolytic contraindication checklist, local stroke protocol, or stroke-team decision.',
+  citations: [
+    'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. 2026. doi:10.1161/STR.0000000000000513.',
+    'Berge E, Whiteley W, Audebert H, et al. European Stroke Organisation Guidelines on Intravenous Thrombolysis for Acute Ischaemic Stroke. Eur Stroke J. 2021;6:I-LXII.',
+    'Thomalla G, Simonsen CZ, Boutitie F, et al. MRI-Guided Thrombolysis for Stroke With Unknown Time of Onset. N Engl J Med. 2018;379:611-622.',
+    'Ma H, Campbell BCV, Parsons MW, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke. N Engl J Med. 2019;380:1795-1803.',
+    'Nogueira RG, Jadhav AP, Haussen DC, et al. Thrombectomy 6 to 24 Hours after Stroke with a Mismatch between Deficit and Infarct. N Engl J Med. 2018;378:11-21.',
+    'Albers GW, Marks MP, Kemp S, et al. Thrombectomy for Stroke at 6 to 16 Hours with Selection by Perfusion Imaging. N Engl J Med. 2018;378:708-718.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const scenario = values.scenario || 1;
+    const nowMs = values.now || 0;
+    const lkwInputMs = values.lkw || 0;
+    const discoveredMs = values.discovered || 0;
+    const bedtimeMs = values.bedtime || 0;
+    const imaging = values.imaging || 0;
+    const lvo = values.lvo || 0;
+    const disabling = Boolean(values.disabling);
+    const hemorrhageExcluded = Boolean(values.hemorrhageExcluded);
+    const noIvContra = Boolean(values.noIvContra);
+
+    const lkwMs = scenario === 2 && bedtimeMs ? bedtimeMs : lkwInputMs;
+    const lkwHours = strokeHoursBetween(nowMs, lkwMs);
+    const discoveryHours = strokeHoursBetween(nowMs, discoveredMs);
+    const midpointMs = lkwMs && discoveredMs && discoveredMs > lkwMs ? lkwMs + (discoveredMs - lkwMs) / 2 : 0;
+    const midpointHours = midpointMs ? strokeHoursBetween(nowMs, midpointMs) : null;
+
+    if (!nowMs || !lkwMs) {
+      return {
+        value: 'Enter times',
+        label: 'Last-known-well clock needed',
+        description: 'Enter **current decision time** and **last-known-well / last seen normal**. For wake-up stroke, use the time the patient went to bed normal as last-known-well.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (lkwHours === null || (discoveredMs && discoveryHours === null)) {
+      return {
+        value: 'Check times',
+        label: 'Time conflict',
+        description: 'One of the entered times is after the current decision time, or discovery occurs before last-known-well. Re-check the clock entries before using the output.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    const favorableMri = imaging === 1;
+    const favorablePerfusion = imaging === 2;
+    const favorableAdvancedImaging = favorableMri || favorablePerfusion;
+    const unfavorableImaging = imaging === 3;
+    const noAdvancedImaging = imaging === 0;
+    const anteriorLvo = lvo === 2;
+    const basilarLvo = lvo === 3;
+    const anyLvo = anteriorLvo || basilarLvo;
+
+    const ivGates: string[] = [];
+    if (!disabling) ivGates.push('deficit is not marked disabling');
+    if (!hemorrhageExcluded) ivGates.push('hemorrhage has not been excluded');
+    if (!noIvContra) ivGates.push('contraindication screen is not cleared');
+    const ivGateText = ivGates.length ? `\n\n**IVT gates still open:** ${ivGates.join(', ')}.` : '\n\n**IVT gates:** disabling deficit + hemorrhage excluded + major contraindication screen cleared.';
+
+    const timeLines = [
+      `**Current decision time:** ${formatStrokeClock(nowMs)}`,
+      `**Last-known-well / last seen normal:** ${formatStrokeClock(lkwMs)} (${formatStrokeHours(lkwHours)} ago)`,
+    ];
+    if (discoveredMs) {
+      timeLines.push(`**Symptom discovery / woke abnormal:** ${formatStrokeClock(discoveredMs)} (${formatStrokeHours(discoveryHours)} ago)`);
+    }
+    if (scenario === 2 && bedtimeMs) {
+      timeLines.push(`**Wake-up stroke:** bedtime-normal is the legal LKW; discovery time helps document recognition but does not replace LKW.`);
+    }
+    if (midpointHours !== null && scenario !== 1) {
+      timeLines.push(`**Midpoint estimate for unknown-onset perfusion protocols:** ${formatStrokeHours(midpointHours)} ago.`);
+    }
+
+    let ivtPlan = '';
+    let evtPlan = '';
+    let label = 'Advanced imaging / stroke-team decision';
+    let value = `${formatStrokeHours(lkwHours)} LKW`;
+    let colorVar = '--color-warning';
+
+    if (lkwHours <= 4.5) {
+      ivtPlan = '**IV thrombolysis:** Standard 0-4.5 h pathway if deficit is disabling and CT excludes hemorrhage. Do not delay for routine labs unless anticoagulant/coagulopathy concern exists.';
+      if (ivGates.length === 0) {
+        label = 'Standard IVT window active';
+        colorVar = '--color-danger';
+      }
+    } else if (lkwHours <= 9) {
+      if (favorableAdvancedImaging) {
+        ivtPlan = '**IV thrombolysis:** 4.5-9 h imaging-selected pathway is possible with favorable MRI DWI/FLAIR mismatch or CT/MR perfusion mismatch. Discuss with stroke team immediately.';
+        if (ivGates.length === 0) {
+          label = 'Imaging-selected IVT window active';
+          colorVar = '--color-danger';
+        }
+      } else if (unfavorableImaging) {
+        ivtPlan = '**IV thrombolysis:** Advanced imaging is not favorable; routine IVT is not supported outside 4.5 h.';
+      } else {
+        ivtPlan = '**IV thrombolysis:** Outside standard 4.5 h clock. Get MRI DWI/FLAIR or CT/MR perfusion now if the patient may be an imaging-selected candidate.';
+      }
+    } else if (scenario !== 1 && favorableAdvancedImaging) {
+      ivtPlan = '**IV thrombolysis:** Unknown/wake-up onset with favorable advanced imaging may still be considered by local protocol/stroke specialist. This is not a simple clock-only decision.';
+      if (ivGates.length === 0) {
+        label = 'Unknown-onset imaging IVT pathway';
+        colorVar = '--color-warning';
+      }
+    } else {
+      ivtPlan = '**IV thrombolysis:** Outside routine clock-based IVT windows unless local stroke team uses an advanced-imaging protocol.';
+    }
+
+    if (anyLvo) {
+      const lvoName = anteriorLvo ? 'anterior-circulation LVO' : 'basilar/posterior-circulation occlusion';
+      if (lkwHours <= 6) {
+        evtPlan = `**Mechanical thrombectomy:** ${lvoName} within 0-6 h. Activate neurointerventional team now.`;
+        label = 'EVT window active';
+        colorVar = '--color-danger';
+      } else if (lkwHours <= 24) {
+        if (favorableAdvancedImaging || basilarLvo) {
+          evtPlan = `**Mechanical thrombectomy:** ${lvoName} within 6-24 h. Selection depends on CTA plus favorable clinical/imaging profile; activate stroke/neuro-IR now.`;
+          label = 'Extended EVT window active';
+          colorVar = '--color-danger';
+        } else if (noAdvancedImaging) {
+          evtPlan = `**Mechanical thrombectomy:** ${lvoName} in the 6-24 h range needs selection imaging. Get CTA plus CT/MR perfusion or local late-window protocol imaging now.`;
+          label = 'Get EVT selection imaging now';
+          colorVar = '--color-warning';
+        } else {
+          evtPlan = `**Mechanical thrombectomy:** ${lvoName} but advanced imaging is not favorable. Discuss with stroke/neuro-IR; routine late-window EVT may not apply.`;
+        }
+      } else {
+        evtPlan = `**Mechanical thrombectomy:** >24 h from LKW. Routine EVT window is closed; discuss exceptional salvage cases with stroke/neuro-IR.`;
+      }
+    } else if (lvo === 0) {
+      evtPlan = '**Mechanical thrombectomy:** LVO status unknown. Get CTA head/neck early; do not wait for IVT decision to evaluate for LVO.';
+    } else {
+      evtPlan = '**Mechanical thrombectomy:** No LVO marked. EVT is not indicated without a treatable occlusion.';
+    }
+
+    const imagingPlan = favorableMri
+      ? '**Imaging gate:** MRI DWI-positive / FLAIR-negative mismatch entered. This supports wake-up or unknown-onset IVT selection when the clinical picture fits.'
+      : favorablePerfusion
+        ? '**Imaging gate:** CT/MR perfusion mismatch entered. This supports penumbra-based IVT/EVT selection when core is not too large and local protocol agrees.'
+        : unfavorableImaging
+          ? '**Imaging gate:** Advanced imaging entered as unfavorable. Reperfusion decisions should be specialist-driven.'
+          : '**Imaging gate:** No favorable advanced imaging entered. Use this calculator to trigger the right next image, not to deny treatment.';
+
+    const documentation = `**Suggested documentation:** "LKW ${formatStrokeClock(lkwMs)} (${formatStrokeHours(lkwHours)} before decision time); discovered/woke abnormal ${formatStrokeClock(discoveredMs)}; scenario ${scenario === 1 ? 'known onset' : scenario === 2 ? 'wake-up stroke' : 'found abnormal/unknown onset'}; IVT gates ${ivGates.length ? 'not fully cleared' : 'cleared'}; LVO status ${lvo === 0 ? 'unknown' : lvo === 1 ? 'no LVO marked' : anteriorLvo ? 'anterior LVO' : 'basilar/posterior occlusion'}."`;
+
+    return {
+      value,
+      label,
+      description: `${timeLines.join('\n')}\n\n${ivtPlan}${ivGateText}\n\n${evtPlan}\n\n${imagingPlan}\n\n${documentation}`,
+      colorVar,
+    };
+  },
+  customRender: (container: HTMLElement, onUpdate: (values: Record<string, number>) => void) => {
+    const style = document.createElement('style');
+    style.textContent = `
+      .stroke-window-field { margin-bottom: 14px; padding: 12px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); }
+      .stroke-window-label { display:block; font-weight:700; color:var(--color-text); margin-bottom:6px; }
+      .stroke-window-desc { display:block; color:var(--color-text-muted); font-size:13px; line-height:1.35; margin-bottom:8px; }
+      .stroke-window-input { width:100%; min-height:44px; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--color-border); background:var(--color-bg); color:var(--color-text); font-size:16px; }
+      .stroke-window-toggle-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px; padding:10px 12px; border:1px solid var(--color-border); border-radius:10px; background:var(--color-surface); }
+      .stroke-window-toggle-row input { width:24px; height:24px; flex:0 0 auto; }
+      .stroke-window-mini { font-size:12px; color:var(--color-text-muted); margin-top:8px; line-height:1.35; }
+    `;
+    container.appendChild(style);
+
+    const now = new Date();
+    const values: Record<string, number> = {
+      scenario: 1,
+      now: now.getTime(),
+      lkw: 0,
+      discovered: 0,
+      bedtime: 0,
+      imaging: 0,
+      lvo: 0,
+      disabling: 1,
+      hemorrhageExcluded: 0,
+      noIvContra: 0,
+    };
+
+    function update(): void {
+      onUpdate({ ...values });
+    }
+
+    function fieldWrap(label: string, desc?: string): HTMLDivElement {
+      const wrap = document.createElement('div');
+      wrap.className = 'stroke-window-field';
+      const labelEl = document.createElement('label');
+      labelEl.className = 'stroke-window-label';
+      labelEl.textContent = label;
+      wrap.appendChild(labelEl);
+      if (desc) {
+        const descEl = document.createElement('span');
+        descEl.className = 'stroke-window-desc';
+        descEl.textContent = desc;
+        wrap.appendChild(descEl);
+      }
+      return wrap;
+    }
+
+    function addSelect(name: string, label: string, desc: string, options: Array<{ label: string; value: number }>): void {
+      const wrap = fieldWrap(label, desc);
+      const select = document.createElement('select');
+      select.className = 'stroke-window-input';
+      for (const opt of options) {
+        const option = document.createElement('option');
+        option.value = String(opt.value);
+        option.textContent = opt.label;
+        select.appendChild(option);
+      }
+      select.addEventListener('change', () => {
+        values[name] = Number(select.value);
+        update();
+      });
+      values[name] = Number(select.value);
+      wrap.appendChild(select);
+      container.appendChild(wrap);
+    }
+
+    function addDateTime(name: string, label: string, desc: string, defaultValue?: string): void {
+      const wrap = fieldWrap(label, desc);
+      const input = document.createElement('input');
+      input.type = 'datetime-local';
+      input.className = 'stroke-window-input';
+      if (defaultValue) input.value = defaultValue;
+      input.addEventListener('input', () => {
+        values[name] = parseLocalDateTimeValue(input.value);
+        update();
+      });
+      values[name] = parseLocalDateTimeValue(input.value);
+      wrap.appendChild(input);
+      container.appendChild(wrap);
+    }
+
+    function addToggle(name: string, label: string, desc: string, defaultChecked = false): void {
+      const row = document.createElement('label');
+      row.className = 'stroke-window-toggle-row';
+      const textWrap = document.createElement('span');
+      const title = document.createElement('span');
+      title.className = 'stroke-window-label';
+      title.textContent = label;
+      textWrap.appendChild(title);
+      const note = document.createElement('span');
+      note.className = 'stroke-window-desc';
+      note.textContent = desc;
+      textWrap.appendChild(note);
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.checked = defaultChecked;
+      input.addEventListener('change', () => {
+        values[name] = input.checked ? 1 : 0;
+        update();
+      });
+      values[name] = input.checked ? 1 : 0;
+      row.appendChild(textWrap);
+      row.appendChild(input);
+      container.appendChild(row);
+    }
+
+    addSelect('scenario', 'Presentation type', 'Known onset uses symptom-onset/LKW. Wake-up and found-abnormal cases use last-known-well plus discovery time.', [
+      { label: 'Known / witnessed onset', value: 1 },
+      { label: 'Wake-up stroke', value: 2 },
+      { label: 'Found abnormal / unknown onset', value: 3 },
+    ]);
+    addDateTime('now', 'Current decision time', 'Defaults to now. Update if you are reconstructing an earlier stroke-team decision.', toLocalDateTimeValue(now));
+    addDateTime('lkw', 'Last-known-well / last seen normal', 'The legally relevant clock. For wake-up stroke this is usually when the patient went to bed normal.');
+    addDateTime('discovered', 'Symptom discovery / woke abnormal', 'When the deficit was first discovered. This documents recognition time but does not replace last-known-well.');
+    addDateTime('bedtime', 'Went to bed normal', 'Optional shortcut for wake-up stroke. If presentation type is wake-up, this overrides the LKW field.');
+    addSelect('imaging', 'Advanced imaging gate', 'Use after CT excludes hemorrhage. This does not replace local stroke-team interpretation.', [
+      { label: 'No advanced imaging result yet', value: 0 },
+      { label: 'MRI DWI-positive / FLAIR-negative mismatch', value: 1 },
+      { label: 'CT/MR perfusion mismatch / penumbra present', value: 2 },
+      { label: 'Advanced imaging unfavorable', value: 3 },
+    ]);
+    addSelect('lvo', 'CTA / vessel status', 'CTA drives thrombectomy decisions. Unknown should trigger CTA head/neck.', [
+      { label: 'Unknown / CTA not done yet', value: 0 },
+      { label: 'No treatable LVO marked', value: 1 },
+      { label: 'Anterior-circulation LVO', value: 2 },
+      { label: 'Basilar / posterior-circulation occlusion', value: 3 },
+    ]);
+    addToggle('disabling', 'Deficit is disabling', 'A disabling deficit can be present even with low NIHSS: aphasia, hemianopia, severe neglect, dominant-hand weakness, gait-preventing ataxia.', true);
+    addToggle('hemorrhageExcluded', 'Hemorrhage excluded on NCCT/MRI', 'Required before IV thrombolysis.');
+    addToggle('noIvContra', 'Major IVT contraindication screen cleared', 'Use the Contra tool for the full checklist. This calculator only maps the time/imaging windows.');
+
+    const note = document.createElement('div');
+    note.className = 'stroke-window-mini';
+    note.textContent = 'Tip: for wake-up stroke, enter went-to-bed-normal and woke/found-abnormal. The output keeps these clocks separate so documentation does not accidentally convert discovery time into LKW.';
+    container.appendChild(note);
+
+    update();
+  },
+};
+
+// -------------------------------------------------------------------
 // TIMI Risk Score Calculator Definition
 // -------------------------------------------------------------------
 
@@ -37115,6 +37453,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cha2ds2vasc': CHA2DS2VASC_CALCULATOR,
   'nihss': NIHSS_CALCULATOR,
   'nihss-calculator': NIHSS_CALCULATOR,
+  'stroke-window-calculator': STROKE_WINDOW_CALCULATOR,
+  'stroke-windows-calculator': STROKE_WINDOW_CALCULATOR,
   'timi': TIMI_CALCULATOR,
   'bas': BAS_CALCULATOR,
   'fwd': FWD_CALCULATOR,
