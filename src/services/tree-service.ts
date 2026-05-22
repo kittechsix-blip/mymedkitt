@@ -325,6 +325,18 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/new-onset-psychosis-hub.js');
       return { nodes: m.NEW_ONSET_PSYCHOSIS_HUB_NODES, entryNodeId: 'nop-start', categoryId: 'emergency-medicine', moduleLabels: m.NEW_ONSET_PSYCHOSIS_HUB_MODULE_LABELS, citations: m.NEW_ONSET_PSYCHOSIS_HUB_CITATIONS, criticalActions: m.NEW_ONSET_PSYCHOSIS_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'pelvic-pain-female-hub': async () => {
+      const m = await import('../data/trees/pelvic-pain-female-hub.js');
+      return { nodes: m.PELVIC_PAIN_FEMALE_HUB_NODES, entryNodeId: 'ppf-start', categoryId: 'emergency-medicine', moduleLabels: m.PELVIC_PAIN_FEMALE_HUB_MODULE_LABELS, citations: m.PELVIC_PAIN_FEMALE_HUB_CITATIONS, criticalActions: m.PELVIC_PAIN_FEMALE_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'vaginal-bleeding-hub': async () => {
+      const m = await import('../data/trees/vaginal-bleeding-hub.js');
+      return { nodes: m.VAGINAL_BLEEDING_HUB_NODES, entryNodeId: 'vb-start', categoryId: 'emergency-medicine', moduleLabels: m.VAGINAL_BLEEDING_HUB_MODULE_LABELS, citations: m.VAGINAL_BLEEDING_HUB_CITATIONS, criticalActions: m.VAGINAL_BLEEDING_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'crying-infant-hub': async () => {
+      const m = await import('../data/trees/crying-infant-hub.js');
+      return { nodes: m.CRYING_INFANT_HUB_NODES, entryNodeId: 'ci-start', categoryId: 'emergency-medicine', moduleLabels: m.CRYING_INFANT_HUB_MODULE_LABELS, citations: m.CRYING_INFANT_HUB_CITATIONS, criticalActions: m.CRYING_INFANT_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
     'vasopressor-extravasation': async () => {
       const m = await import('../data/trees/vasopressor-extravasation.js');
       return { nodes: m.VASOPRESSOR_EXTRAVASATION_NODES, entryNodeId: 'vex-start', categoryId: 'pharmacist', moduleLabels: m.VASOPRESSOR_EXTRAVASATION_MODULE_LABELS, citations: m.VASOPRESSOR_EXTRAVASATION_CITATIONS, criticalActions: m.VASOPRESSOR_EXTRAVASATION_CRITICAL_ACTIONS };

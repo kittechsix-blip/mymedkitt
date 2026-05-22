@@ -23657,6 +23657,144 @@ const NOP_STOP_PAGE: InfoPage = {
   ],
 };
 
+const PPF_STEPS_PAGE: InfoPage = {
+  id: 'ppf-steps',
+  title: 'Pelvic Pain, Female Hub - Steps Summary',
+  subtitle: 'Pregnancy, ectopic, torsion, PID/TOA, surgical abdomen, urinary, disposition',
+  sections: [
+    {
+      body: '1. **Sick check first.** Vitals/shock index, pregnancy test, LMP/gestational age, contraception/IUD/fertility treatment, pain phenotype, bleeding/discharge, abdominal/pelvic/CVA exam.\n2. **Time-critical exclusions:**\n   - Positive pregnancy test + pain/bleeding/syncope/shoulder pain -> [First Trimester Emergencies](#/tree/first-trimester). Ectopic until safe.\n   - Sudden unilateral pain/vomiting/adnexal mass -> ovarian/adnexal torsion. Normal Doppler flow does not rule it out.\n   - Fever/discharge/CMT/adnexal tenderness/STI risk -> [PID](#/tree/pid), consider TOA/severe PID.\n   - Sudden pain/free fluid/falling Hgb -> ruptured hemorrhagic cyst or hemoperitoneum after ectopic excluded.\n   - Peritoneal signs/RLQ migration/vomiting -> appendicitis or surgical abdomen.\n   - Flank/CVA/urinary symptoms/stone colic -> [UTI-Adult](#/tree/adult-uti), renal colic, infected stone.\n   - Postpartum/recent procedure -> hemorrhage, retained products, infection, perforation, thrombosis.\n3. **Initial bundle:** analgesia/antiemetic, pregnancy test, targeted labs, pelvic exam when it changes care, bedside/formal US, repeat exam.\n4. **Imaging:** pelvic US first for pregnancy/gynecologic suspicion; CT A/P for non-gynecologic surgical disease; MRI selectively when radiation avoidance matters.\n5. **Disposition:** admit ectopic/torsion/TOA/sepsis/surgical abdomen/unstable/uncontrolled pain. Discharge only with stable vitals, controlled pain, dangerous causes addressed, and reliable follow-up.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACR Appropriateness Criteria: Acute Pelvic Pain in the Reproductive Age Group, 2023 update.' },
+    { num: 2, text: 'CDC STI Treatment Guidelines: Pelvic Inflammatory Disease.' },
+  ],
+};
+
+const PPF_STOP_PAGE: InfoPage = {
+  id: 'ppf-stop',
+  title: 'Pelvic Pain, Female Hub - Do NOT',
+  subtitle: 'Critical pitfalls in ED pelvic pain',
+  sections: [
+    {
+      heading: 'Do NOT skip pregnancy testing',
+      body: 'Ectopic pregnancy can present with pain, bleeding, syncope, shoulder pain, or minimal symptoms. History and contraception do not safely exclude pregnancy.',
+    },
+    {
+      heading: 'Do NOT rule out torsion with normal Doppler flow',
+      body: 'Intermittent torsion and dual ovarian blood supply can preserve flow. High-suspicion torsion still needs OB/GYN consultation.',
+    },
+    {
+      heading: 'Do NOT wait for STI results to treat PID',
+      body: 'CDC minimum clinical criteria support empiric treatment when PID is plausible and no better cause explains pain.',
+    },
+    {
+      heading: 'Do NOT anchor on gynecology when the abdomen is surgical',
+      body: 'Appendicitis, diverticulitis, bowel pathology, urinary obstruction, and vascular disease can present as pelvic pain.',
+    },
+    {
+      heading: 'Do NOT discharge unresolved high-risk pelvic pain',
+      body: 'Persistent severe pain, peritoneal signs, unstable vitals, pregnancy risk, vomiting, fever, or diagnostic uncertainty needs observation, imaging, or consultation.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACOG Committee Opinion No. 783. Adnexal Torsion in Adolescents.' },
+  ],
+};
+
+const VB_STEPS_PAGE: InfoPage = {
+  id: 'vb-steps',
+  title: 'Vaginal Bleeding Hub - Steps Summary',
+  subtitle: 'Hemorrhage, pregnancy, postpartum, coagulopathy, AUB, disposition',
+  sections: [
+    {
+      body: '1. **Sick check first.** Vitals/shock index, bleeding amount, syncope, pregnancy test, LMP/gestational age, postpartum/procedure status, anticoagulants, pain, fever/discharge, trauma/assault, postmenopausal status.\n2. **Time-critical exclusions:**\n   - Hypotension/syncope/heavy ongoing bleeding -> hemorrhage posture, type/cross, OB/GYN early, MTP if needed.\n   - Positive pregnancy test -> [First Trimester Emergencies](#/tree/first-trimester). Ectopic-safe plan required.\n   - Pregnancy >=20 weeks -> OB-led pathway; avoid digital cervical exam until placenta previa excluded.\n   - Postpartum/procedure -> atony, retained products, laceration, perforation, infection, coagulopathy.\n   - Adolescent heavy bleeding -> screen for bleeding disorder.\n   - Anticoagulant/coagulopathy -> [Anticoagulation Reversal](#/tree/anticoag-reversal) when major bleeding.\n   - Postmenopausal bleeding -> malignancy-risk follow-up.\n   - Trauma/assault -> [DFSA / SANE Workup](#/tree/dfsa-workup) when relevant.\n3. **Initial bundle:** pregnancy test, CBC, type/screen or cross by severity, Rh status when pregnant by protocol, coags/fibrinogen when indicated, pelvic/speculum exam when it changes care.\n4. **Imaging:** TVUS for early pregnancy; OB US for late pregnancy; US for structural AUB/retained products; CT for procedural injury/abscess when plausible.\n5. **Disposition:** admit unstable, severe anemia, ectopic concern, late pregnancy bleeding, postpartum hemorrhage, uncontrolled/coagulopathic bleeding. Discharge only controlled, explained, pregnancy-safe, and followed.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACOG Committee Opinion No. 557. Acute Abnormal Uterine Bleeding.' },
+    { num: 2, text: 'ACEP Clinical Policy: Early Pregnancy.' },
+  ],
+};
+
+const VB_STOP_PAGE: InfoPage = {
+  id: 'vb-stop',
+  title: 'Vaginal Bleeding Hub - Do NOT',
+  subtitle: 'Critical pitfalls in ED vaginal bleeding',
+  sections: [
+    {
+      heading: 'Do NOT forget pregnancy testing',
+      body: 'Ectopic pregnancy can present as bleeding with little pain. Reproductive-age bleeding is pregnancy-related until tested.',
+    },
+    {
+      heading: 'Do NOT do a digital exam in late pregnancy bleeding before previa is excluded',
+      body: 'Bleeding at 20 weeks or later needs OB involvement and placental-location awareness.',
+    },
+    {
+      heading: 'Do NOT treat unstable bleeding as routine AUB',
+      body: 'Shock physiology, syncope, heavy ongoing bleeding, or symptomatic anemia needs hemorrhage support and specialty involvement.',
+    },
+    {
+      heading: 'Do NOT ignore postmenopausal bleeding',
+      body: 'Even if bleeding stops in the ED, postmenopausal bleeding requires gynecology follow-up for malignancy-risk evaluation.',
+    },
+    {
+      heading: 'Do NOT discharge pregnancy of unknown location without a plan',
+      body: 'Repeat beta-hCG, repeat ultrasound timing, ectopic precautions, and reachable follow-up must be explicit.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'NICE NG126. Ectopic pregnancy and miscarriage.' },
+  ],
+};
+
+const CI_STEPS_PAGE: InfoPage = {
+  id: 'ci-steps',
+  title: 'Crying Infant Hub - Steps Summary',
+  subtitle: 'Fever, respiratory/cardiac, GI/GU, trauma, occult pain, feeding, disposition',
+  sections: [
+    {
+      body: '1. **Sick check first.** Age, rectal temp, full vitals, appearance/perfusion/work of breathing, feeding/urine output, birth history, prematurity, maternal GBS/HSV, and caregiver concern.\n2. **Time-critical exclusions:**\n   - Fever/hypothermia/toxic/poor feeding/age <60 days with fever -> [Fever < 6 Months](#/tree/peds-fever).\n   - Respiratory distress/cyanosis/sweating feeds/murmur/weak pulses -> [Bronchiolitis](#/tree/bronchiolitis), [BRUE](#/tree/brue), cardiac lane.\n   - Bilious emesis, distension, episodic crying, bloody stool, lethargy between episodes -> [Intussusception](#/tree/intussusception), obstruction/hernia/volvulus.\n   - Scrotal/groin/genital findings -> [Testicular Torsion](#/tree/testicular-torsion), hernia, urinary retention, hair tourniquet.\n   - Bruising/burns/swelling/inconsistent story -> trauma/non-accidental trauma pathway.\n   - Hair tourniquet, corneal abrasion, mouth/ear/skin/diaper/extremity pain -> find and treat occult source.\n   - Bulging fontanelle, seizure, abnormal tone, altered responsiveness -> CNS/neuro lane.\n3. **Initial bundle:** rectal temp, vitals, glucose if risky, full undressed exam, feeding/hydration assessment, analgesia when painful cause suspected, targeted tests.\n4. **Imaging/workup:** by lane: febrile infant labs, US for intussusception, GU US only if it will not delay high-suspicion torsion care, NAT imaging/labs, fluorescein eye exam.\n5. **Disposition:** admit abnormal vitals, fever high-risk age, poor feeding/dehydration, GI/GU/resp/neuro/trauma concern, unsafe home, or persistent unexplained inconsolability. Discharge only normal vitals/exam, feeding, consolable, and safe caregiver plan.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Royal Children\'s Hospital Melbourne. Unsettled or crying babies guideline.' },
+    { num: 2, text: 'AAP 2021 Febrile Infant Clinical Practice Guideline.' },
+  ],
+};
+
+const CI_STOP_PAGE: InfoPage = {
+  id: 'ci-stop',
+  title: 'Crying Infant Hub - Do NOT',
+  subtitle: 'Critical pitfalls in inconsolable infants',
+  sections: [
+    {
+      heading: 'Do NOT diagnose colic before a complete undressed exam',
+      body: 'Remove socks and diaper. Check hair tourniquets, cornea, mouth, ears, groin, genitalia, skin, extremities, bruising, and burns.',
+    },
+    {
+      heading: 'Do NOT ignore abnormal vitals or high-risk age',
+      body: 'Young infants with fever, hypothermia, toxic appearance, poor feeding, or abnormal perfusion need age-based infectious workup.',
+    },
+    {
+      heading: 'Do NOT miss GI obstruction',
+      body: 'Bilious vomiting, distension, episodic severe crying, bloody stool, or lethargy between episodes needs intussusception/obstruction thinking.',
+    },
+    {
+      heading: 'Do NOT miss GU emergencies',
+      body: 'Always examine scrotum/groin/genitalia. Torsion, incarcerated hernia, urinary retention, and genital hair tourniquet can present as crying.',
+    },
+    {
+      heading: 'Do NOT discharge unsafe caregiver situations',
+      body: 'Persistent caregiver distress, unsafe dynamics, injury concerns, inability to feed, or inability to return should change disposition.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'MSD Manual Professional Edition. Crying in Children.' },
+  ],
+};
+
 const PARA_STOP_PAGE: InfoPage = {
   id: 'para-stop',
   title: 'Paracentesis Stop / Complications',
@@ -23966,6 +24104,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'dp-stop': DP_STOP_PAGE,
   'nop-steps': NOP_STEPS_PAGE,
   'nop-stop': NOP_STOP_PAGE,
+  'ppf-steps': PPF_STEPS_PAGE,
+  'ppf-stop': PPF_STOP_PAGE,
+  'vb-steps': VB_STEPS_PAGE,
+  'vb-stop': VB_STOP_PAGE,
+  'ci-steps': CI_STEPS_PAGE,
+  'ci-stop': CI_STOP_PAGE,
 
   // Traumatic Arrest / Resuscitative Thoracotomy
   'ta-steps': TA_STEPS_PAGE,

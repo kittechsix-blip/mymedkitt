@@ -445,6 +445,27 @@ const TOOLBAR_CONFIGS = {
         { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'nop-imaging' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'nop-stop' },
     ],
+    'pelvic-pain-female-hub': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ppf-steps' },
+        { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'ppf-exclusions' },
+        { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'ppf-rescue' },
+        { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'ppf-imaging' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'ppf-stop' },
+    ],
+    'vaginal-bleeding-hub': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vb-steps' },
+        { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'vb-exclusions' },
+        { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'vb-rescue' },
+        { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'vb-imaging' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'vb-stop' },
+    ],
+    'crying-infant-hub': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ci-steps' },
+        { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'ci-exclusions' },
+        { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'ci-rescue' },
+        { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'ci-imaging' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'ci-stop' },
+    ],
     'vasopressor-extravasation': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vex-steps' },
         { id: 'phentolamine', label: 'Phento', icon: '💉', action: 'overlay', target: 'vex-phentolamine-tool' },
