@@ -70,7 +70,7 @@ export function renderHubsHome(container: HTMLElement): void {
 
   const subtitle = document.createElement('p');
   subtitle.className = 'hubs-home__subtitle';
-  subtitle.textContent = 'Triage by chief complaint — SNOOP10 red-flag screen → phenotype → the right deep-dive consult.';
+  subtitle.textContent = 'Triage by chief complaint: sick check, time-critical exclusions, rescue, imaging, disposition.';
   header.appendChild(subtitle);
 
   page.appendChild(header);

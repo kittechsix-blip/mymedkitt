@@ -289,6 +289,18 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/headache-hub.js');
       return { nodes: m.HEADACHE_HUB_NODES, entryNodeId: 'hh-start', categoryId: 'emergency-medicine', moduleLabels: m.HEADACHE_HUB_MODULE_LABELS, citations: m.HEADACHE_HUB_CITATIONS, criticalActions: m.HEADACHE_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'chest-pain-hub': async () => {
+      const m = await import('../data/trees/chest-pain-hub.js');
+      return { nodes: m.CHEST_PAIN_HUB_NODES, entryNodeId: 'cp-start', categoryId: 'emergency-medicine', moduleLabels: m.CHEST_PAIN_HUB_MODULE_LABELS, citations: m.CHEST_PAIN_HUB_CITATIONS, criticalActions: m.CHEST_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'dyspnea-hub': async () => {
+      const m = await import('../data/trees/dyspnea-hub.js');
+      return { nodes: m.DYSPNEA_HUB_NODES, entryNodeId: 'dysp-start', categoryId: 'emergency-medicine', moduleLabels: m.DYSPNEA_HUB_MODULE_LABELS, citations: m.DYSPNEA_HUB_CITATIONS, criticalActions: m.DYSPNEA_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'altered-mental-status-hub': async () => {
+      const m = await import('../data/trees/altered-mental-status-hub.js');
+      return { nodes: m.AMS_HUB_NODES, entryNodeId: 'ams-start', categoryId: 'emergency-medicine', moduleLabels: m.AMS_HUB_MODULE_LABELS, citations: m.AMS_HUB_CITATIONS, criticalActions: m.AMS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
     'vasopressor-extravasation': async () => {
       const m = await import('../data/trees/vasopressor-extravasation.js');
       return { nodes: m.VASOPRESSOR_EXTRAVASATION_NODES, entryNodeId: 'vex-start', categoryId: 'pharmacist', moduleLabels: m.VASOPRESSOR_EXTRAVASATION_MODULE_LABELS, citations: m.VASOPRESSOR_EXTRAVASATION_CITATIONS, criticalActions: m.VASOPRESSOR_EXTRAVASATION_CRITICAL_ACTIONS };

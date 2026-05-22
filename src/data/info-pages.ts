@@ -23239,6 +23239,148 @@ const HH_STOP_PAGE: InfoPage = {
   ],
 };
 
+const CP_STEPS_PAGE: InfoPage = {
+  id: 'cp-steps',
+  title: 'Chest Pain Hub - Steps Summary',
+  subtitle: 'ECG first, then killer exclusions, rescue/reassess, imaging, disposition',
+  sections: [
+    {
+      body: '1. **Sick check first.** ECG reviewed within 10 minutes, monitor, IV access, aspirin if ACS possible and safe, POCUS if unstable.\n2. **Time-critical exclusions:**\n   - STEMI/OMI -> [STEMI](#/tree/stemi). Activate cath posture.\n   - Dynamic ischemia / rising troponin / Wellens -> [NSTEMI](#/tree/nstemi) or [Wellens](#/tree/wellens-syndrome). No stress test for Wellens.\n   - Tearing/back pain, pulse/BP/neuro deficit -> [Aortic Dissection](#/tree/aortic-dissection). Impulse control and CTA. Hold heparin/lytics until excluded.\n   - Pleuritic pain, hypoxia, syncope, VTE risk -> [PE Treatment](#/tree/pe-treatment). Echo if unstable.\n   - Positional pleuritic pain, diffuse STE/PR depression, viral prodrome -> [Pericarditis](#/tree/pericarditis) or [Myocarditis](#/tree/myocarditis).\n   - Post-emesis severe chest pain/toxic -> esophageal rupture posture: NPO, antibiotics, CT contrast strategy, surgery.\n   - Sudden unilateral pleuritic pain/absent sounds/hypotension -> [Pneumothorax](#/tree/pneumothorax). Treat tension clinically.\n3. **Initial bundle:** repeat ECG during pain, serial hs-troponin pathway, CXR, POCUS when physiology demands, pain/nausea control, nitro only when safe.\n4. **Imaging:** diagnosis-directed. CTA aorta for dissection, CTA PE for stable PE suspicion, echo/POCUS for tamponade/RV strain/edema, CXR/POCUS for PTX.\n5. **Disposition:** high-risk/positive -> admit/ICU/procedure; intermediate -> observation/serial testing; low risk -> discharge only after reassuring serial ECG/troponin strategy and explicit return precautions.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Gulati M, et al. 2021 AHA/ACC Chest Pain Guideline. J Am Coll Cardiol. 2021;78:e187-e285.' },
+    { num: 2, text: 'Byrne RA, et al. 2023 ESC ACS Guideline. Eur Heart J. 2023;44:3720-3826.' },
+  ],
+};
+
+const CP_STOP_PAGE: InfoPage = {
+  id: 'cp-stop',
+  title: 'Chest Pain Hub - Do NOT',
+  subtitle: 'Critical pitfalls in undifferentiated chest pain',
+  sections: [
+    {
+      heading: 'Do NOT delay the ECG',
+      body: 'Any acute chest pain needs an ECG acquired and reviewed within 10 minutes. Repeat ECGs matter when pain changes or the story remains concerning.',
+    },
+    {
+      heading: 'Do NOT anticoagulate or lyse a possible dissection',
+      body: 'Tearing pain, pulse/BP deficit, neuro deficit, severe HTN, or back pain should trigger dissection posture before routine ACS antithrombotics.',
+    },
+    {
+      heading: 'Do NOT call a resolved-pain Wellens patient low risk',
+      body: 'Pain resolution is typical in Wellens. Stress testing can precipitate infarction. Use the Wellens consult and urgent cardiology pathway.',
+    },
+    {
+      heading: 'Do NOT wait for imaging in tension pneumothorax',
+      body: 'Hypotension or peri-arrest physiology with unilateral absent breath sounds is a clinical decompression diagnosis.',
+    },
+    {
+      heading: 'Do NOT discharge after severe post-emesis chest pain without considering rupture',
+      body: 'Boerhaave syndrome is uncommon but high mortality when missed. Toxic appearance, subcutaneous air, pleural effusion, or severe pain after retching should move to NPO, antibiotics, CT contrast strategy, and surgery.',
+    },
+    {
+      heading: 'Do NOT let a negative first troponin override a concerning story',
+      body: 'High-sensitivity troponin pathways are serial risk tools. Dynamic ECG, recurrent pain, unstable physiology, or high-risk story still needs observation or admission.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Gulati M, et al. 2021 AHA/ACC Chest Pain Guideline. J Am Coll Cardiol. 2021;78:e187-e285.' },
+  ],
+};
+
+const DYSP_STEPS_PAGE: InfoPage = {
+  id: 'dysp-steps',
+  title: 'Shortness of Breath Hub - Steps Summary',
+  subtitle: 'Work of breathing first, then cause-directed rescue and imaging',
+  sections: [
+    {
+      body: '1. **Sick check first.** Can the patient speak? Are they tiring, altered, cyanotic, tripoding, silent, hypotensive, or hypoxic? Position upright and start oxygen with a target appropriate to hypercapnia risk.\n2. **Time-critical exclusions:**\n   - Silent chest/exhaustion/AMS -> [Asthma](#/tree/asthma-exacerbation) or [COPD](#/tree/copd-exacerbation). Maximize bronchodilation/NIV and plan difficult intubation.\n   - Hypertensive frothy pulmonary edema -> [CHF](#/tree/chf-exacerbation) and [SCAPE Nitroglycerin](#/tree/scape-nitroglycerin). NIV + nitrates.\n   - Pleuritic/syncope/VTE risk/RV strain -> [PE Treatment](#/tree/pe-treatment).\n   - Unilateral absent sounds -> [Pneumothorax](#/tree/pneumothorax). Decompress tension clinically.\n   - Fever/cough/sepsis -> [Pneumonia](#/tree/pneumonia) and [Sepsis](#/tree/sepsis).\n   - Hives/angioedema/hypotension/wheeze -> [Anaphylaxis](#/tree/anaphylaxis). IM epinephrine first.\n   - Chest pain/ischemic ECG/arrhythmia -> [STEMI](#/tree/stemi), [NSTEMI](#/tree/nstemi), [A-Fib RVR](#/tree/afib-rvr), [CHF](#/tree/chf-exacerbation).\n   - Cyanosis or exposure with misleading SpO2 -> [CO Toxicity](#/tree/co-toxicity) or [Methemoglobinemia](#/tree/methemoglobinemia). Co-oximetry.\n3. **Initial bundle:** upright, oxygen target, monitor/IV/ECG, CXR when stable, lung/cardiac POCUS, VBG/ABG when ventilation matters, treat cause in parallel.\n4. **Imaging:** CXR + POCUS are first-line for many. CTA PE/CT chest only when stable enough and actionable.\n5. **Disposition:** ICU for NIV/intubation/shock/rising CO2/high O2. Admit if oxygen need or uncertainty persists. Discharge only when stable on room air with clear diagnosis and plan.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Qaseem A, et al. ACP guideline on POCUS for acute dyspnea. Ann Intern Med. 2021;174:985-993.' },
+    { num: 2, text: 'British Thoracic Society oxygen guideline. Thorax. 2017;72(Suppl 1):ii1-ii90.' },
+  ],
+};
+
+const DYSP_STOP_PAGE: InfoPage = {
+  id: 'dysp-stop',
+  title: 'Shortness of Breath Hub - Do NOT',
+  subtitle: 'Critical pitfalls in undifferentiated dyspnea',
+  sections: [
+    {
+      heading: 'Do NOT trust pulse ox alone',
+      body: 'Work of breathing, mental status, ventilation, waveform quality, and co-oximetry context matter. CO and methemoglobinemia can fool standard pulse oximetry.',
+    },
+    {
+      heading: 'Do NOT delay NIV in the right phenotype',
+      body: 'COPD hypercapnic failure and hypertensive pulmonary edema often improve rapidly with NIV. Waiting until exhaustion makes intubation more dangerous.',
+    },
+    {
+      heading: 'Do NOT flood undifferentiated dyspnea reflexively',
+      body: 'Shock needs perfusion, but pulmonary edema, RV failure, and renal failure can worsen with blind fluids. Reassess lungs, heart, IVC, and perfusion repeatedly.',
+    },
+    {
+      heading: 'Do NOT send unstable dyspnea to CT unprepared',
+      body: 'If the patient may crash on the scanner table, stabilize airway, oxygenation, pressors, and procedure plan first.',
+    },
+    {
+      heading: 'Do NOT treat anaphylaxis with antihistamines first',
+      body: 'Airway, bronchospasm, or shock from anaphylaxis is epinephrine-first disease. Antihistamines and steroids are adjuncts.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Qaseem A, et al. ACP guideline on POCUS for acute dyspnea. Ann Intern Med. 2021;174:985-993.' },
+  ],
+};
+
+const AMS_STEPS_PAGE: InfoPage = {
+  id: 'ams-steps',
+  title: 'Altered Mental Status Hub - Steps Summary',
+  subtitle: 'Airway, glucose, tox, neuro, infection, seizure, metabolic, disposition',
+  sections: [
+    {
+      body: '1. **Sick check first.** Airway/breathing, GCS, ETCO2 if possible, glucose now, vitals including temperature, pupils/skin/tox, trauma, quick neuro.\n2. **Time-critical exclusions:**\n   - Glucose low or not checked -> treat immediately.\n   - Hypoventilation/miosis/opioid exposure -> ventilation + naloxone titrated to respirations; consider [Xylazine Toxicity](#/tree/xylazine-toxicity) if sedated after breathing improves.\n   - Focal deficit/aphasia/gaze/severe HA -> [Stroke](#/tree/stroke), [ICH](#/tree/ich), [SAH](#/tree/sah).\n   - Active seizure or failure to return to baseline -> [Status Epilepticus](#/tree/status-epilepticus), consider NCSE/EEG.\n   - Fever/hypotension/meningismus/immunocomp -> [Sepsis](#/tree/sepsis) and [Meningitis](#/tree/meningitis). Do not delay empiric therapy for LP.\n   - Toxidrome/acidosis/osm gap/salicylate/TCA/CO -> [TCA](#/tree/tca-toxidrome), [Salicylate](#/tree/salicylate), [Toxic Alcohols](#/tree/toxic-alcohols), [CO](#/tree/co-toxicity).\n   - Kussmaul/high glucose/ketones -> [DKA](#/tree/dka). Potassium gates insulin.\n   - Sodium/cirrhosis/uremia/thyroid/adrenal clues -> [Sodium](#/tree/sodium), [Thyroid](#/tree/thyroid), [HD Emergencies](#/tree/hd-emergencies).\n   - Elderly waxing/waning or dementia worse -> [Delirium](#/tree/delirium), [Dementia & Agitation](#/tree/dementia-agitation).\n3. **Initial bundle:** airway/ventilation, glucose repeat, core temp, ECG, targeted labs, CT head when indicated, collateral last-known-normal/baseline/meds/tox.\n4. **Imaging/EEG/LP:** CT head for trauma/focal/seizure/persistent unknown/anticoag; CTA for stroke/LVO; LP after empiric CNS therapy when needed; EEG for NCSE concern.\n5. **Disposition:** discharge only if back to known baseline, reversible cause corrected, vitals stable, no focal neuro deficit, safe supervision, and return precautions.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'EMCrit/IBCC. Approach to altered mental status / acute encephalopathy. https://emcrit.org/ibcc/coma/' },
+    { num: 2, text: 'ACEP Adult Psychiatric Emergencies policy statement, revised 2023.' },
+  ],
+};
+
+const AMS_STOP_PAGE: InfoPage = {
+  id: 'ams-stop',
+  title: 'Altered Mental Status Hub - Do NOT',
+  subtitle: 'Critical pitfalls in AMS',
+  sections: [
+    {
+      heading: 'Do NOT skip the glucose',
+      body: 'Glucose is immediate, reversible, and can mimic stroke or psychiatric disease. Check it early and recheck after treatment.',
+    },
+    {
+      heading: 'Do NOT call it psychiatric before delirium/mimics are addressed',
+      body: 'Abnormal vitals, altered cognition, new onset, intoxication, withdrawal, infection, trauma, metabolic disease, or neurologic findings all require medical workup.',
+    },
+    {
+      heading: 'Do NOT use urine drug screen as the resuscitation test',
+      body: 'ECG, glucose, ventilation, acid-base status, temperature, and targeted tox labs change immediate care more reliably.',
+    },
+    {
+      heading: 'Do NOT delay CNS infection treatment for CT or LP',
+      body: 'When meningitis/encephalitis is plausible, give empiric therapy after blood cultures if possible. Imaging and LP follow without delaying treatment.',
+    },
+    {
+      heading: 'Do NOT discharge persistent unexplained AMS',
+      body: 'Persistent AMS is not a discharge diagnosis. Admit, observe, image, or obtain EEG/LP based on the remaining differential.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'EMCrit/IBCC. Approach to altered mental status / acute encephalopathy. https://emcrit.org/ibcc/coma/' },
+  ],
+};
+
 const PARA_STOP_PAGE: InfoPage = {
   id: 'para-stop',
   title: 'Paracentesis Stop / Complications',
@@ -23530,6 +23672,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   // Headache Hub (EM + Neurology dual-list, type: 'hub') — final hub of the batch
   'hh-steps': HH_STEPS_PAGE,
   'hh-stop': HH_STOP_PAGE,
+  'cp-steps': CP_STEPS_PAGE,
+  'cp-stop': CP_STOP_PAGE,
+  'dysp-steps': DYSP_STEPS_PAGE,
+  'dysp-stop': DYSP_STOP_PAGE,
+  'ams-steps': AMS_STEPS_PAGE,
+  'ams-stop': AMS_STOP_PAGE,
 
   // Traumatic Arrest / Resuscitative Thoracotomy
   'ta-steps': TA_STEPS_PAGE,

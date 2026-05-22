@@ -417,6 +417,27 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hh-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hh-stop' },
   ],
+  'chest-pain-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'cp-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'cp-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'cp-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'cp-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'cp-stop' },
+  ],
+  'dyspnea-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dysp-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'dysp-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'dysp-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'dysp-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'dysp-stop' },
+  ],
+  'altered-mental-status-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ams-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'ams-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'ams-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'ams-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'ams-stop' },
+  ],
   'vasopressor-extravasation': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vex-steps' },
     { id: 'phentolamine', label: 'Phento', icon: '💉', action: 'overlay', target: 'vex-phentolamine-tool' },

@@ -283,7 +283,7 @@ export function renderDashboard(container: HTMLElement): void {
 
     const hubsSub = document.createElement('div');
     hubsSub.className = 'dashboard-hubs-card__sub';
-    hubsSub.textContent = 'Triage by chief complaint — SNOOP10 red-flag screen, phenotype, the right consult.';
+    hubsSub.textContent = 'Triage by chief complaint: sick check, exclusions, rescue, imaging, disposition.';
     hubsCard.appendChild(hubsSub);
 
     const hubsArrow = document.createElement('div');
