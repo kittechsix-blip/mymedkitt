@@ -313,6 +313,18 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/back-pain-hub.js');
       return { nodes: m.BACK_PAIN_HUB_NODES, entryNodeId: 'bp-start', categoryId: 'emergency-medicine', moduleLabels: m.BACK_PAIN_HUB_MODULE_LABELS, citations: m.BACK_PAIN_HUB_CITATIONS, criticalActions: m.BACK_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'monocular-vision-loss-hub': async () => {
+      const m = await import('../data/trees/monocular-vision-loss-hub.js');
+      return { nodes: m.MONOCULAR_VISION_LOSS_HUB_NODES, entryNodeId: 'mvl-start', categoryId: 'emergency-medicine', moduleLabels: m.MONOCULAR_VISION_LOSS_HUB_MODULE_LABELS, citations: m.MONOCULAR_VISION_LOSS_HUB_CITATIONS, criticalActions: m.MONOCULAR_VISION_LOSS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'dental-pain-hub': async () => {
+      const m = await import('../data/trees/dental-pain-hub.js');
+      return { nodes: m.DENTAL_PAIN_HUB_NODES, entryNodeId: 'dp-start', categoryId: 'emergency-medicine', moduleLabels: m.DENTAL_PAIN_HUB_MODULE_LABELS, citations: m.DENTAL_PAIN_HUB_CITATIONS, criticalActions: m.DENTAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'new-onset-psychosis-hub': async () => {
+      const m = await import('../data/trees/new-onset-psychosis-hub.js');
+      return { nodes: m.NEW_ONSET_PSYCHOSIS_HUB_NODES, entryNodeId: 'nop-start', categoryId: 'emergency-medicine', moduleLabels: m.NEW_ONSET_PSYCHOSIS_HUB_MODULE_LABELS, citations: m.NEW_ONSET_PSYCHOSIS_HUB_CITATIONS, criticalActions: m.NEW_ONSET_PSYCHOSIS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
     'vasopressor-extravasation': async () => {
       const m = await import('../data/trees/vasopressor-extravasation.js');
       return { nodes: m.VASOPRESSOR_EXTRAVASATION_NODES, entryNodeId: 'vex-start', categoryId: 'pharmacist', moduleLabels: m.VASOPRESSOR_EXTRAVASATION_MODULE_LABELS, citations: m.VASOPRESSOR_EXTRAVASATION_CITATIONS, criticalActions: m.VASOPRESSOR_EXTRAVASATION_CRITICAL_ACTIONS };

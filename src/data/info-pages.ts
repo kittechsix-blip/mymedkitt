@@ -23519,6 +23519,144 @@ const BP_STOP_PAGE: InfoPage = {
   ],
 };
 
+const MVL_STEPS_PAGE: InfoPage = {
+  id: 'mvl-steps',
+  title: 'Monocular Vision Loss Hub - Steps Summary',
+  subtitle: 'Retinal ischemia, GCA, glaucoma, trauma, retina, optic nerve, infection',
+  sections: [
+    {
+      body: '1. **Sick check first.** Confirm monocular vs binocular. Document last-known-normal/onset. Check visual acuity each eye, pupils/RAPD, fields, EOM, external eye, fluorescein/slit lamp, IOP when open globe is not suspected.\n2. **Time-critical exclusions:**\n   - Sudden painless persistent loss -> [CRAO](#/tree/crao), [Stroke](#/tree/stroke). Treat as retinal stroke.\n   - Transient curtain/shade with recovery -> [Amaurosis Fugax](#/tree/amaurosis-fugax). Treat as retinal TIA.\n   - Age >=50 with headache/jaw/scalp/PMR/diplopia -> GCA labs and empiric steroids when suspicious.\n   - Painful red eye/halos/vomiting/high IOP -> [AACG](#/tree/aacg).\n   - Trauma/open globe/OCS signs -> [Ocular Trauma](#/tree/ocular-trauma), [Globe Rupture](#/tree/globe-rupture). Shield, no pressure.\n   - Flashes/floaters/curtain -> retinal detachment/vitreous hemorrhage, [Ocular POCUS](#/tree/ocular-pocus) if globe intact.\n   - Pain with eye movement/dyschromatopsia -> [Multiple Sclerosis](#/tree/multiple-sclerosis) optic neuritis pathway.\n   - Orbital pain/swelling/proptosis/ophthalmoplegia -> [Orbital Cellulitis](#/tree/orbital-cellulitis).\n3. **Initial bundle:** VA, RAPD, IOP when safe, fundus/photo if available, glucose/ECG/neuro exam for vascular lane, ESR/CRP/CBC for GCA risk.\n4. **Imaging:** stroke MRI/CTA/carotids for retinal ischemia; CT orbit for trauma/infection; POCUS for retina when safe; MRI orbits/brain for optic neuritis.\n5. **Disposition:** emergent pathway for CRAO/TMVL high risk, GCA, AACG, open globe, OCS, orbital infection, severe persistent loss. Discharge only clear benign diagnosis, baseline vision, and reliable follow-up.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Mac Grory B, et al. AHA scientific statement on CRAO management. Stroke. 2021;52:e282-e294.' },
+    { num: 2, text: 'AAO Retinal and Ophthalmic Artery Occlusions Preferred Practice Pattern, 2024.' },
+  ],
+};
+
+const MVL_STOP_PAGE: InfoPage = {
+  id: 'mvl-stop',
+  title: 'Monocular Vision Loss Hub - Do NOT',
+  subtitle: 'Critical pitfalls in acute monocular vision loss',
+  sections: [
+    {
+      heading: 'Do NOT wait for perfect fundoscopy to activate a vascular pathway',
+      body: 'Early CRAO/TMVL can be subtle and ED fundoscopy is imperfect. Sudden painless monocular loss needs ophthalmology/stroke thinking based on history and exam.',
+    },
+    {
+      heading: 'Do NOT miss GCA in age >=50',
+      body: 'Vision symptoms plus headache, jaw claudication, scalp tenderness, PMR, diplopia, or elevated ESR/CRP should prompt empiric steroids when suspicion is high.',
+    },
+    {
+      heading: 'Do NOT put pressure on a possible open globe',
+      body: 'No tonometry, no ocular ultrasound, no patch pressure. Use a rigid shield, antiemetic, analgesia, NPO, CT orbit, and ophthalmology.',
+    },
+    {
+      heading: 'Do NOT call a painful red eye conjunctivitis until IOP and cornea/anterior chamber fit',
+      body: 'AACG, keratitis, uveitis, endophthalmitis, and orbital processes can threaten sight.',
+    },
+    {
+      heading: 'Do NOT discharge unexplained persistent vision loss',
+      body: 'Persistent monocular loss needs an actionable diagnosis or an urgent specialist/stroke plan.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Emergency Care BC. Acute Vision Loss clinical summary.' },
+  ],
+};
+
+const DP_STEPS_PAGE: InfoPage = {
+  id: 'dp-steps',
+  title: 'Dental Pain Hub - Steps Summary',
+  subtitle: 'Deep infection, trauma, abscess, pulpitis, analgesia, follow-up',
+  sections: [
+    {
+      body: '1. **Sick check first.** Airway/voice/drooling/stridor, floor of mouth, neck swelling, fever/toxicity, trismus/dysphagia, immune risk, trauma/missing fragments, and pain control.\n2. **Time-critical exclusions:**\n   - Floor-of-mouth elevation, tongue elevation, drooling, stridor, muffled voice, severe neck swelling -> [Deep Neck Infection](#/tree/deep-neck-infection). Airway plan first.\n   - Fever/cellulitis/trismus/dysphagia/toxicity/immunocompromise -> spreading odontogenic infection. Antibiotics plus source control.\n   - Avulsion/fracture/luxation/missing fragment -> [Dental Trauma](#/tree/dental-trauma), [Dental Avulsion](#/tree/dental-avulsion).\n   - Local fluctuance/vestibular swelling -> drain/source control when appropriate; antibiotics selectively.\n   - Toothache/cold sensitivity/caries without swelling/systemic signs -> pulpitis. Analgesia and dental care, not automatic antibiotics.\n   - Pericoronitis/dry socket -> local care, analgesia, dental follow-up; antibiotics only with spread/systemic risk.\n3. **Rescue:** oral exam, percuss culprit tooth, vitals, NSAID plus acetaminophen when safe, dental block, selective antibiotics, concrete dental referral.\n4. **Imaging:** CT neck/face contrast for deep infection; CT face for trauma; CXR if missing tooth/aspiration concern; dental films when available.\n5. **Disposition:** admit airway/deep/systemic danger. Urgent dental/OMFS for abscess/source control. Discharge only low-risk, pain controlled, and follow-up realistic.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ADA antibiotic guideline for urgent dental pain and swelling, endorsed by ACEP.' },
+    { num: 2, text: 'ADA acute dental pain management guideline, 2024.' },
+  ],
+};
+
+const DP_STOP_PAGE: InfoPage = {
+  id: 'dp-stop',
+  title: 'Dental Pain Hub - Do NOT',
+  subtitle: 'Critical pitfalls in ED dental pain',
+  sections: [
+    {
+      heading: 'Do NOT treat airway-risk dental infection as a simple toothache',
+      body: 'Drooling, voice change, trismus, dysphagia, floor-of-mouth firmness, tongue elevation, or neck swelling can become an airway emergency.',
+    },
+    {
+      heading: 'Do NOT prescribe antibiotics for uncomplicated pulpitis by reflex',
+      body: 'ADA guidance recommends analgesia and definitive dental treatment for most uncomplicated toothache/pulpitis without systemic involvement.',
+    },
+    {
+      heading: 'Do NOT use opioids as the default dental pain plan',
+      body: 'NSAIDs with acetaminophen are first-line for most acute dental pain when safe. Dental blocks are often high-yield.',
+    },
+    {
+      heading: 'Do NOT forget source control',
+      body: 'Abscess and odontogenic infection need drainage, extraction, root canal, or dental procedure when indicated. Medication alone is often temporary.',
+    },
+    {
+      heading: 'Do NOT ignore missing tooth fragments',
+      body: 'If a tooth or fragment is unaccounted for after trauma, consider aspiration or embedded soft-tissue fragment.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ADA antibiotic guideline for urgent dental pain and swelling.' },
+  ],
+};
+
+const NOP_STEPS_PAGE: InfoPage = {
+  id: 'nop-steps',
+  title: 'New Onset Psychosis Hub - Steps Summary',
+  subtitle: 'Safety, medical red flags, neuro/autoimmune, catatonia, workup, disposition',
+  sections: [
+    {
+      body: '1. **Sick check first.** Safety, agitation, SI/HI, vitals/temp, glucose, oxygenation, trauma, toxidrome/withdrawal, pregnancy/postpartum, attention/orientation/fluctuation, neuro exam.\n2. **Time-critical exclusions:**\n   - Violent agitation -> [Acute Agitation](#/tree/acute-agitation), [Combative Patient](#/tree/combative-patient), while checking glucose/vitals/tox.\n   - Abnormal vitals, glucose, AMS, fluctuating attention, visual hallucinations, intoxication/withdrawal -> [Psych Medical Stability](#/tree/medical-clearance-psych), [Delirium](#/tree/delirium), [AMS Hub](#/tree/altered-mental-status-hub).\n   - Seizure, decreased consciousness, dyskinesia, autonomic instability, rapid polymorphic symptoms -> autoimmune encephalitis concern, neurology/MRI/EEG/LP.\n   - Fever/meningismus/severe HA/immunocompromise -> [Meningitis](#/tree/meningitis).\n   - Catatonia/mutism/rigidity/posturing -> [Catatonia](#/tree/catatonia).\n   - Postpartum, mania, severe depression with psychosis -> high-risk psych/OB safety pathway.\n   - Normal vitals/attention, no red flags -> [Acute Psychosis](#/tree/acute-psychosis), [MSE Dictation](#/tree/psychiatry-assessment).\n3. **Initial bundle:** targeted testing based on history/exam, collateral, ECG before QT-risk meds, pregnancy when applicable, safety assessment.\n4. **Imaging/LP/EEG:** for focal neuro, seizure, headache, trauma, late onset, decreased consciousness, autoimmune/CNS infection signs, atypical or persistent symptoms.\n5. **Disposition:** medical admission for red flags; psych admission/hold for danger/grave disability/severe disorganization; discharge only rare low-risk cases with reliable support and rapid follow-up.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACEP Adult Psychiatric Emergencies policy statement, revised 2023.' },
+    { num: 2, text: 'Graus F, et al. Autoimmune encephalitis diagnostic approach. Lancet Neurol. 2016.' },
+  ],
+};
+
+const NOP_STOP_PAGE: InfoPage = {
+  id: 'nop-stop',
+  title: 'New Onset Psychosis Hub - Do NOT',
+  subtitle: 'Critical pitfalls in first-break or atypical psychosis',
+  sections: [
+    {
+      heading: 'Do NOT call it psychiatric before glucose, vitals, attention, tox, and neuro red flags',
+      body: 'New psychosis is a symptom. Delirium, tox, withdrawal, infection, seizure, endocrine disease, trauma, and neurologic disease can all present psychiatrically.',
+    },
+    {
+      heading: 'Do NOT use blanket labs as a substitute for examination',
+      body: 'ACEP supports targeted medical assessment guided by history, exam, vitals, and risk factors. Red flags still deserve expanded workup.',
+    },
+    {
+      heading: 'Do NOT miss autoimmune encephalitis red flags',
+      body: 'Rapid progression, seizure, movement disorder, catatonia, autonomic instability, decreased consciousness, speech dysfunction, or hyponatremia should trigger neurology thinking.',
+    },
+    {
+      heading: 'Do NOT escalate antipsychotics blindly in possible catatonia',
+      body: 'Catatonia and malignant catatonia require a different pathway. Consider lorazepam challenge and medical evaluation.',
+    },
+    {
+      heading: 'Do NOT discharge first-episode psychosis without a real safety and follow-up plan',
+      body: 'Collateral, weapons access, SI/HI, command hallucinations, grave disability, support, and rapid first-episode follow-up must be explicit.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACEP Adult Psychiatric Emergencies policy statement, revised 2023.' },
+  ],
+};
+
 const PARA_STOP_PAGE: InfoPage = {
   id: 'para-stop',
   title: 'Paracentesis Stop / Complications',
@@ -23822,6 +23960,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'np-stop': NP_STOP_PAGE,
   'bp-steps': BP_STEPS_PAGE,
   'bp-stop': BP_STOP_PAGE,
+  'mvl-steps': MVL_STEPS_PAGE,
+  'mvl-stop': MVL_STOP_PAGE,
+  'dp-steps': DP_STEPS_PAGE,
+  'dp-stop': DP_STOP_PAGE,
+  'nop-steps': NOP_STEPS_PAGE,
+  'nop-stop': NOP_STOP_PAGE,
 
   // Traumatic Arrest / Resuscitative Thoracotomy
   'ta-steps': TA_STEPS_PAGE,

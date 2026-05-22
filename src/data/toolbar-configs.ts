@@ -459,6 +459,27 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'bp-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'bp-stop' },
   ],
+  'monocular-vision-loss-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'mvl-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'mvl-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'mvl-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'mvl-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'mvl-stop' },
+  ],
+  'dental-pain-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dp-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'dp-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'dp-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'dp-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'dp-stop' },
+  ],
+  'new-onset-psychosis-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'nop-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'nop-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'nop-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'nop-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'nop-stop' },
+  ],
   'vasopressor-extravasation': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vex-steps' },
     { id: 'phentolamine', label: 'Phento', icon: '💉', action: 'overlay', target: 'vex-phentolamine-tool' },

@@ -97,6 +97,8 @@ const CROSS_LISTINGS = {
   'generalized-weakness-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'gw-start' }],
   'neck-pain-hub': [{ categoryId: 'orthopedics', displayTitle: null, displaySubtitle: null, entryNodeId: 'np-start' }],
   'back-pain-hub': [{ categoryId: 'orthopedics', displayTitle: null, displaySubtitle: null, entryNodeId: 'bp-start' }],
+  'monocular-vision-loss-hub': [{ categoryId: 'ophthalmology', displayTitle: null, displaySubtitle: null, entryNodeId: 'mvl-start' }],
+  'new-onset-psychosis-hub': [{ categoryId: 'psychiatry', displayTitle: null, displaySubtitle: null, entryNodeId: 'nop-start' }],
   'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],
   'pe-treatment':     [{ categoryId: 'emergency-medicine' }],
   'pep':              [{ categoryId: 'emergency-medicine' }],
