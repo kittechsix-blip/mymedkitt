@@ -23163,16 +23163,16 @@ const TN_STOP_PAGE: InfoPage = {
 const HH_STEPS_PAGE: InfoPage = {
   id: 'hh-steps',
   title: 'Headache Hub — Steps Summary',
-  subtitle: 'SNOOP10 → phenotype triage → workup → consult → dispo',
+  subtitle: 'Sick check → time-critical exclusions → rescue → reassess → dispo',
   sections: [
     {
-      body: '1. Run **SNOOP10**: Systemic / Neuro signs / Onset thunderclap / Older >50 / Pattern change / Positional / Valsalva-triggered / Papilledema / Progressive / Pregnancy / Painful eye / Post-traumatic / Immune-compromised / Painkiller-overuse / Posterior location. Any positive → red-flag triage.\n2. **Thunderclap** (peak <1 min) → open [SAH](#/tree/sah) for Ottawa SAH Rule + CT timing + LP. After SAH workup, consider CAD / CVST / RCVS / pituitary apoplexy.\n3. **Focal deficit / AMS / seizure** → image first; open [ICH](#/tree/ich), stroke pathway, or [Meningitis](#/tree/meningitis) as indicated. Status seizure → [Status Epilepticus](#/tree/status-epilepticus).\n4. **Painful eye** → rule out [AACG](#/tree/aacg) (fixed mid-dilated pupil, IOP >40) BEFORE assuming [Cluster](#/tree/cluster-headache) or Tolosa-Hunt.\n5. **Pregnancy / postpartum** → consider [HTN in Pregnancy / Pre-eclampsia](#/tree/htn-pregnancy), [CVST](#/tree/cvst), RCVS, pituitary apoplexy, [Cervical Artery Dissection](#/tree/cervical-artery-dissection).\n6. **Fever / immunocompromise** → empiric antibiotics within 1 h; open [Meningitis / Encephalitis](#/tree/meningitis). Do NOT delay for imaging or LP.\n7. **Positional / papilledema / Valsalva** → [IIH](#/tree/iih) or [CVST](#/tree/cvst) or CSF leak workup. Document fundoscopy.\n8. **Toxic exposure** → [CO Toxicity](#/tree/co-toxicity) — co-oximetry (standard SpO₂ falsely normal). 100% O₂ NRB while disposition decided; HBO if CO-Hgb ≥25%.\n9. **No red flags → phenotype triage:** migraine, cluster, TN, tension. Open the matching deep-dive consult: [Migraine](#/tree/migraine), [Cluster Headache](#/tree/cluster-headache), [Trigeminal Neuralgia](#/tree/trigeminal-neuralgia). Refractory cluster or status migrainosus → [Greater Occipital Nerve Block](#/tree/occipital-nerve-block).\n10. **Common workup** (after red flags): vitals TREND, full neuro exam, **fundoscopy explicitly documented**, targeted labs (ESR/CRP for GCA, CO-Hgb for tox, β-hCG for reproductive-age females), imaging by suspicion (non-contrast CT first; CTA/MRA/MRV/MRI/LP added by indication).\n11. **Disposition:** discharge if SNOOP10 cleared + treated + tolerating PO + follow-up arranged + written return precautions. Observe for partial response or pending workup. Admit per the deep-dive consult criteria for red-flag positive, refractory, SI, or pregnancy-related findings.',
+      body: '1. **Sick check first.** General appearance + vitals trend (BP, fever, brady+HTN, hypoxia on co-oximetry if CO suspected) + quick neuro + quick eye (red, mid-dilated, halos). If unstable: resus parallel to workup.\n2. **Time-critical exclusions** — ask history first, pick the most acute hit:\n   - **First-or-worst / thunderclap** → [SAH](#/tree/sah). Ottawa rule, non-contrast CT (~98% sens ≤6 h), LP for xanthochromia if >6 h or negative. BP 140-160 in the meantime.\n   - **Focal deficit / AMS / seizure** → [ICH](#/tree/ich) / stroke pathway / [Meningitis](#/tree/meningitis) / [Status Epilepticus](#/tree/status-epilepticus). Image first. Fingerstick glucose.\n   - **Fever + meningismus or immunocompromise** → [Meningitis](#/tree/meningitis). Empiric antibiotics within 60 min — do NOT delay for imaging or LP. Steroid adjunct.\n   - **Painful red eye + halos** → [AACG](#/tree/aacg). IOP now, medical IOP-lowering. No dim lights, no mydriatics.\n   - **Pregnant / postpartum** → [HTN in Pregnancy](#/tree/htn-pregnancy), [CVST](#/tree/cvst), RCVS, pituitary apoplexy, [Cervical Artery Dissection](#/tree/cervical-artery-dissection) all in parallel. MRI no-gad if feasible.\n   - **Neck pain + Horner / recent manipulation** → [Cervical Artery Dissection](#/tree/cervical-artery-dissection). CTA neck.\n   - **Postpartum + papilledema / seizure** → [CVST](#/tree/cvst). MRV.\n   - **Winter heater / fuel-burner / multiple sick at same address** → [CO Toxicity](#/tree/co-toxicity). 100% NRB. Co-oximetry (standard SpO₂ lies).\n   - **Severe unilateral periorbital + autonomic + restless** → [Cluster Headache](#/tree/cluster-headache). 100% O₂ NRB 12-15 L/min NOW.\n   - **Electric-shock V2/V3** → [Trigeminal Neuralgia](#/tree/trigeminal-neuralgia). HLA-B*1502 by ancestry BEFORE CBZ.\n   - **Age ≥50 + new HA + jaw claudication / scalp tenderness / vision change** → GCA. ESR + CRP + empiric prednisone 60 mg PO (1 g methylpred IV if visual). Biopsy within 1-2 weeks.\n   - **Recent trauma** → Canadian CT Head Rule. Reverse anticoagulation if ICH suspected.\n3. **Rescue cocktail** (benign-pattern HA, no red flags): **Compazine 10 mg IV** + **Benadryl 25 mg IV** (akathisia prophylaxis — do NOT skip) + **Toradol 15-30 mg IV** + **Mag 1-2 g IV** + **1 L NS bolus**. Reglan 10 mg IV alternative if Compazine unavailable / QT concern. Avoid opioids and butalbital combos.\n4. **Reassess at 60-90 min.** If pain ≥50% reduced + tolerating PO + no new neuro → discharge bundle. Partial → second round (repeat antidopaminergic + add dexamethasone 10 mg IV). Refractory → ONB or DHE protocol (after antiemetic pretreatment). NEW neuro feature → stop, image, return to exclusions.\n5. **Imaging when needed** (not every HA): first-or-worst, age >50 with new HA, anticoagulated, immunocompromised, post-trauma with red flags, papilledema, focal deficit. CT first; CTA / MRV / MRI / LP added by suspicion. CT before LP if AMS / focal / papilledema / immunocomp / recent seizure / age >60.\n6. **Discharge checklist:** pain controlled + tolerating PO + orthostatic vitals normal + no new neuro + suicide screen (cluster / TN / chronic migraine) + WRITTEN return precautions + follow-up arranged.\n7. **Admit** for red-flag workup positive, refractory after second round + DHE, suicidal ideation, severe drug AE requiring monitoring, IV bridge initiation needing continuous monitoring, pregnancy-related HA with pre-eclampsia / CVST / RCVS findings.',
     },
   ],
   citations: [
     { num: 1, text: 'Godwin SA, et al. ACEP Clinical Policy on Acute Headache. Ann Emerg Med. 2019;74(4):e41-e74.' },
-    { num: 2, text: 'Headache Classification Committee of the IHS. ICHD-3. Cephalalgia. 2018;38(1):1-211.' },
-    { num: 3, text: 'Dodick DW. SNOOP4 (updated to SNOOP10). Semin Neurol. 2010;30(1):74-81.' },
+    { num: 2, text: 'Orr SL, et al. AHS Evidence Assessment of Parenteral Pharmacotherapies for Acute Migraine. Headache. 2016;56(6):911-940.' },
+    { num: 3, text: 'Friedman BW, et al. Metoclopramide for acute migraine: a dose-finding RCT. Ann Emerg Med. 2011;57(5):475-482.' },
     { num: 4, text: 'Perry JJ, et al. Ottawa SAH Rule. JAMA. 2013;310(12):1248-1255; CMAJ. 2017;189(45):E1379-E1385.' },
   ],
 };
@@ -23200,27 +23200,35 @@ const HH_STOP_PAGE: InfoPage = {
     },
     {
       heading: '🛑 Do NOT order routine "headache panel" labs',
-      body: 'No defined panel. Targeted labs only — ESR/CRP for suspected GCA (age ≥50 + new HA + jaw claudication / visual / scalp tenderness / polymyalgia), CO-Hgb for exposure, β-hCG for reproductive-age females (broadens differential), tox for ingestion. Shotgun panels distract from the imaging decision. [Workup labs node](#/node/hh-workup-labs)',
+      body: 'No defined panel. Targeted labs only — ESR/CRP for suspected GCA (age ≥50 + new HA + jaw claudication / visual / scalp tenderness / polymyalgia), CO-Hgb for exposure, β-hCG for reproductive-age females (broadens differential), tox for ingestion. Shotgun panels distract from the imaging decision. [Imaging node](#/node/hh-imaging)',
     },
     {
-      heading: '🛑 Do NOT skip fundoscopy',
-      body: 'Papilledema present-or-absent must be explicitly documented. Even a "fundi non-visualized — dilated eye exam deferred" note is better than silence. Papilledema immediately changes [IIH](#/tree/iih), [CVST](#/tree/cvst), and mass differentials. [Workup vitals node](#/node/hh-workup-vitals)',
+      heading: '🛑 Do NOT skip fundoscopy when raised ICP is on the differential',
+      body: 'Papilledema changes the differential immediately — IIH, CVST, mass. Document present-or-absent explicitly. Even a "fundi non-visualized — dilated eye exam deferred" note is better than silence. [Sick check node](#/node/hh-start)',
+    },
+    {
+      heading: '🛑 Do NOT skip diphenhydramine when giving Compazine',
+      body: 'Akathisia rate with Compazine is high — diphenhydramine 25 mg IV concurrent dramatically reduces it. Skipping it leaves the patient miserable and looking for the exit. Reglan + Benadryl pairing is also standard; the akathisia rate is slightly lower with Reglan but still real. [Rescue cocktail](#/node/hh-rescue)',
+    },
+    {
+      heading: '🛑 Do NOT give opioids or butalbital combos for benign-pattern HA',
+      body: 'Acute opioids in the ED for migraine worsen recurrence rates and accelerate medication-overuse HA. Butalbital combinations (Fioricet) carry barbiturate dependence risk. The standard parenteral cocktail (Compazine + Benadryl + Toradol + Mag + NS) outperforms opioid rescue in pain control AND prevents the downstream chronification. [Rescue cocktail](#/node/hh-rescue)',
+    },
+    {
+      heading: '🛑 Do NOT discharge if a new neurologic finding appeared after the cocktail',
+      body: 'Pain that escalates differently after rescue, or any new focal deficit on the post-cocktail recheck, means the original triage missed something. Stop the discharge plan, image now, and return to time-critical exclusions. [Reassess node](#/node/hh-rescue-reassess)',
     },
     {
       heading: '🛑 Do NOT assume primary headache in pregnancy / postpartum without targeted workup',
-      body: 'Pregnancy and the postpartum period dramatically broaden the differential. Pre-eclampsia, CVST, RCVS, pituitary apoplexy, and cervical artery dissection are all more common. BP trend + neuro exam + low threshold for imaging (MRI without gadolinium preferred when available). [HTN in Pregnancy consult](#/tree/htn-pregnancy). [Pregnancy node](#/node/hh-pregnancy)',
+      body: 'Pregnancy and the postpartum period dramatically broaden the differential. Pre-eclampsia, CVST, RCVS, pituitary apoplexy, and cervical artery dissection are all more common. BP trend + neuro exam + low threshold for imaging (MRI without gadolinium preferred when available). [HTN in Pregnancy consult](#/tree/htn-pregnancy). [Pregnancy node](#/node/hh-exc-pregnancy)',
     },
     {
-      heading: '🛑 Do NOT discharge without written return precautions covering SNOOP10',
-      body: 'The hub triage is a snapshot — patients can develop red flags hours later. Written return precautions covering any SNOOP10 feature, severe pain unresponsive to home Rx, new neurologic symptom, fever, persistent vomiting, or vision change are part of the discharge bundle. [Discharge node](#/node/hh-dispo-discharge)',
+      heading: '🛑 Do NOT discharge without written return precautions',
+      body: 'The hub triage is a snapshot — patients can develop red flags hours later. Written return precautions covering first-or-worst severity, new neurologic symptom, fever or stiff neck, persistent vomiting, severe pain unresponsive to home Rx, vision change, or seizure are part of every discharge bundle. [Discharge node](#/node/hh-dispo-discharge)',
     },
     {
-      heading: '🛑 Do NOT use the hub as a treatment shortcut',
-      body: 'The hub is a triage map, not a treatment playbook. Once you commit to a phenotype, leave the hub and work the deep-dive consult — that consult holds the dosing, monitoring, and disposition criteria specific to the diagnosis. Duplicating clinical content here would silently desynchronize from the deep-dives. [Cross-Link Map](#/node/hh-crosslink-map)',
-    },
-    {
-      heading: '🛑 Do NOT splint a phenotype that does not fit ICHD-3',
-      body: 'If the headache does not meet ICHD-3 criteria for migraine, cluster, TN, or tension-type, do not force it. Atypical features = MRI + neurology referral, not a primary HA diagnosis. Common "force-fit" errors: TN with constant baseline pain (Burchiel TN2 needs MRI), cluster with bilateral attacks (uncommon — reconsider), migraine with thunderclap onset (SAH first).',
+      heading: '🛑 Do NOT use the hub as a treatment playbook',
+      body: 'The hub is a triage map. Once you commit to a phenotype, leave the hub and work the deep-dive consult — that consult holds the dosing, monitoring, and disposition criteria specific to the diagnosis. Duplicating clinical content here would silently desynchronize from the deep-dives.',
     },
   ],
   citations: [

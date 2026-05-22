@@ -7533,12 +7533,16 @@ const PHENOBARBITAL = {
 };
 const PROCHLORPERAZINE = {
     id: 'prochlorperazine',
-    name: 'Prochlorperazine',
+    name: 'Prochlorperazine (Compazine)',
     genericName: 'Prochlorperazine',
     drugClass: 'Phenothiazine / Dopamine antagonist antiemetic',
-    route: 'PR/IM',
-    indications: ['Nausea and vomiting of pregnancy (NVP)', 'Nausea/vomiting (general)'],
+    route: 'IV/IM/PR',
+    indications: ['Migraine cocktail (acute headache, ED)', 'Nausea and vomiting of pregnancy (NVP)', 'Nausea/vomiting (general)'],
     dosing: [
+        {
+            indication: 'Migraine cocktail — IV',
+            regimen: '**10 mg IV over 2 min** as the antidopaminergic component of the ED migraine / undifferentiated benign-pattern HA cocktail.\n\n**PAIR WITH:**\n• [Diphenhydramine 25 mg IV](#/drug/diphenhydramine/migraine cocktail) — akathisia prophylaxis (Compazine is the worst antidopaminergic offender; do not skip)\n• [Ketorolac 15-30 mg IV](#/drug/ketorolac/migraine) — NSAID component\n• [Magnesium 1-2 g IV](#/drug/magnesium-sulfate/migraine) over 15 min — adjunct\n• 1 L NS bolus\n\n**REASSESS at 60-90 min.** If pain reduced ≥50% → discharge with PCP follow-up. If refractory → consider DHE 0.5-1 mg IV (after metoclopramide pre-treatment) OR greater occipital nerve block.\n\n**ROLE:** Workhorse first-line for ED migraine — better evidence base than ondansetron for pain (not just nausea). NNT ~3 for pain freedom at 2 h.\n\n**WATCH FOR:** Akathisia (Compazine > Reglan); QT prolongation (check QTc if other QT-prolonging meds); orthostatic hypotension (sit patient up slowly post-infusion); rare dystonia.',
+        },
         {
             indication: 'NVP — rectal',
             regimen: '25 mg PR every 12 hours. Second-line agent in ACOG stepwise NVP pathway. Useful when patient cannot tolerate oral medications.',

@@ -377,9 +377,9 @@ const TOOLBAR_CONFIGS = {
     ],
     'headache-hub': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hh-steps' },
-        { id: 'redflags', label: 'SNOOP10', icon: '🚩', action: 'jump', target: 'hh-snoop10' },
-        { id: 'workup', label: 'Workup', icon: '🔬', action: 'jump', target: 'hh-workup-imaging' },
-        { id: 'map', label: 'Consult Map', icon: '🗺️', action: 'jump', target: 'hh-crosslink-map' },
+        { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'hh-exclusions' },
+        { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'hh-rescue' },
+        { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hh-imaging' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hh-stop' },
     ],
     'vasopressor-extravasation': [
