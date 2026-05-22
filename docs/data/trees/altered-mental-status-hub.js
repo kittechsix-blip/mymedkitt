@@ -2,7 +2,7 @@
 export const AMS_HUB_CRITICAL_ACTIONS = [
     { text: 'Fingerstick glucose immediately in every AMS patient', nodeId: 'ams-start' },
     { text: 'Treat hypoglycemia, opioid hypoventilation, and sepsis/stroke threats in parallel', nodeId: 'ams-exclusions' },
-    { text: 'Do not label psychiatric until delirium/medical mimics are addressed', nodeId: 'ams-stop' },
+    { text: 'Do not label psychiatric until delirium/medical mimics are addressed', nodeId: 'ams-delirium' },
 ];
 export const AMS_HUB_NODES = [
     {

@@ -438,6 +438,27 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'ams-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'ams-stop' },
   ],
+  'generalized-weakness-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'gw-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'gw-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'gw-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'gw-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'gw-stop' },
+  ],
+  'neck-pain-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'np-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'np-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'np-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'np-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'np-stop' },
+  ],
+  'back-pain-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'bp-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'bp-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'bp-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'bp-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'bp-stop' },
+  ],
   'vasopressor-extravasation': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vex-steps' },
     { id: 'phentolamine', label: 'Phento', icon: '💉', action: 'overlay', target: 'vex-phentolamine-tool' },

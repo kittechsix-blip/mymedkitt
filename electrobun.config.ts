@@ -9,6 +9,7 @@ const config: ElectrobunConfig = {
   },
   
   build: {
+    buildFolder: process.env.ELECTROBUN_BUILD_FOLDER || 'build',
     bun: {
       entrypoint: './src/main.ts',
     },

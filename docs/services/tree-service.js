@@ -230,6 +230,18 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/altered-mental-status-hub.js');
             return { nodes: m.AMS_HUB_NODES, entryNodeId: 'ams-start', categoryId: 'emergency-medicine', moduleLabels: m.AMS_HUB_MODULE_LABELS, citations: m.AMS_HUB_CITATIONS, criticalActions: m.AMS_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'generalized-weakness-hub': async () => {
+            const m = await import('../data/trees/generalized-weakness-hub.js');
+            return { nodes: m.GENERALIZED_WEAKNESS_HUB_NODES, entryNodeId: 'gw-start', categoryId: 'emergency-medicine', moduleLabels: m.GENERALIZED_WEAKNESS_HUB_MODULE_LABELS, citations: m.GENERALIZED_WEAKNESS_HUB_CITATIONS, criticalActions: m.GENERALIZED_WEAKNESS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'neck-pain-hub': async () => {
+            const m = await import('../data/trees/neck-pain-hub.js');
+            return { nodes: m.NECK_PAIN_HUB_NODES, entryNodeId: 'np-start', categoryId: 'emergency-medicine', moduleLabels: m.NECK_PAIN_HUB_MODULE_LABELS, citations: m.NECK_PAIN_HUB_CITATIONS, criticalActions: m.NECK_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'back-pain-hub': async () => {
+            const m = await import('../data/trees/back-pain-hub.js');
+            return { nodes: m.BACK_PAIN_HUB_NODES, entryNodeId: 'bp-start', categoryId: 'emergency-medicine', moduleLabels: m.BACK_PAIN_HUB_MODULE_LABELS, citations: m.BACK_PAIN_HUB_CITATIONS, criticalActions: m.BACK_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'vasopressor-extravasation': async () => {
             const m = await import('../data/trees/vasopressor-extravasation.js');
             return { nodes: m.VASOPRESSOR_EXTRAVASATION_NODES, entryNodeId: 'vex-start', categoryId: 'pharmacist', moduleLabels: m.VASOPRESSOR_EXTRAVASATION_MODULE_LABELS, citations: m.VASOPRESSOR_EXTRAVASATION_CITATIONS, criticalActions: m.VASOPRESSOR_EXTRAVASATION_CRITICAL_ACTIONS };

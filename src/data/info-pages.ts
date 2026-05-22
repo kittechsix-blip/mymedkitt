@@ -23381,6 +23381,144 @@ const AMS_STOP_PAGE: InfoPage = {
   ],
 };
 
+const GW_STEPS_PAGE: InfoPage = {
+  id: 'gw-steps',
+  title: 'Generalized Weakness Hub - Steps Summary',
+  subtitle: 'Glucose, ECG, localization, rescue bundle, imaging, disposition',
+  sections: [
+    {
+      body: '1. **Sick check first.** Decide true weakness vs fatigue/pain/AMS. Check airway/ventilation, glucose, ECG, vitals, meds/tox, and quick neuro localization.\n2. **Time-critical exclusions:**\n   - Shock/sepsis/volume problem -> [Sepsis](#/tree/sepsis). Treat physiology first.\n   - Focal deficit, aphasia, gaze, acute gait change -> [Stroke](#/tree/stroke), [ICH](#/tree/ich).\n   - Ascending weakness, areflexia, bulbar symptoms, weak cough -> [GBS](#/tree/guillain-barre) or [Myasthenia](#/tree/myasthenia-gravis). SpO2 can look normal until late.\n   - Paralysis/cramps/ECG changes -> [Sodium](#/tree/sodium), [Calcium](#/tree/calcium-disorders), [Phosphorous](#/tree/phosphorus-disorders), [Magnesium](#/tree/magnesium-disorders).\n   - DKA/HHS, thyroid, adrenal, heat/cold clues -> [DKA](#/tree/dka), [Thyroid](#/tree/thyroid), [Adrenal](#/tree/adrenal-insufficiency), [Heat Stroke](#/tree/heat-stroke).\n   - Chest/dyspnea/syncope/pallor/melena -> [Chest Pain Hub](#/tree/chest-pain-hub), ACS/dysrhythmia/anemia workup.\n   - Sedation/acidosis/osm gap/CO/med change -> tox pathway.\n3. **Initial bundle:** glucose repeat, ECG, CBC/CMP/Mg/Phos/Ca/CK as pointed, meds, orthostatics/ambulation when safe, repeat neuro exam.\n4. **Imaging:** CT/CTA for focal neuro; MRI brain/spine for progressive or localizing neuro; CXR/CT/US when physiology points to infection, CHF, bleed, or aorta.\n5. **Disposition:** admit if persistent true weakness, inability to walk, dangerous labs/ECG, neuro/bulbar/respiratory findings, or unstable vitals. Discharge only when baseline function is restored and cause is clear.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Narayanaswami P, et al. Muscle Weakness in Adults. Am Fam Physician. 2020;101:95-108.' },
+    { num: 2, text: 'EMCrit/IBCC. Acute encephalopathy, shock, electrolyte, and tox reviews. https://emcrit.org/ibcc/' },
+  ],
+};
+
+const GW_STOP_PAGE: InfoPage = {
+  id: 'gw-stop',
+  title: 'Generalized Weakness Hub - Do NOT',
+  subtitle: 'Critical pitfalls in vague weakness',
+  sections: [
+    {
+      heading: 'Do NOT skip glucose, ECG, or potassium thinking',
+      body: 'Hypoglycemia, hyperkalemia/hypokalemia, ischemia, dysrhythmia, and tox ECG patterns can all present as weakness and can change management immediately.',
+    },
+    {
+      heading: 'Do NOT discharge inability to walk',
+      body: 'Inability to stand or ambulate at baseline after treatment is a high-risk functional finding, even when the complaint sounds nonspecific.',
+    },
+    {
+      heading: 'Do NOT let normal SpO2 clear neuromuscular respiratory risk',
+      body: 'GBS and myasthenia can fail by ventilation, cough, secretion handling, and bulbar weakness before oxygen saturation falls.',
+    },
+    {
+      heading: 'Do NOT call it deconditioning until localization is addressed',
+      body: 'Repeat the neuro exam after fluids, glucose correction, analgesia, or rest. Look for focality, reflex changes, bulbar findings, and gait failure.',
+    },
+    {
+      heading: 'Do NOT overtrust urine drug screen',
+      body: 'Medication list, ECG, acid-base status, glucose, and tox levels drive immediate care more reliably than UDS.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Narayanaswami P, et al. Muscle Weakness in Adults. Am Fam Physician. 2020;101:95-108.' },
+  ],
+};
+
+const NP_STEPS_PAGE: InfoPage = {
+  id: 'np-steps',
+  title: 'Neck Pain Hub - Steps Summary',
+  subtitle: 'Airway, CNS infection, dissection, spine infection, cord, imaging',
+  sections: [
+    {
+      body: '1. **Sick check first.** Check airway/swallow/voice, neuro, trauma/strangulation/manipulation, infection risk, and cardiac/aortic clues.\n2. **Time-critical exclusions:**\n   - Trauma/midline tenderness/neuro deficit -> [Cervical Spine Injuries](#/tree/cervical-spine).\n   - Fever, meningismus, AMS, petechiae -> [Meningitis](#/tree/meningitis). Empiric therapy should not wait for LP logistics.\n   - Sudden unilateral posterior HA/neck pain, Horner, neuro symptoms, manipulation/strangulation -> [Cervical Artery Dissection](#/tree/cervical-artery-dissection) and [Stroke](#/tree/stroke).\n   - Drooling, muffled voice, trismus, dysphagia, neck swelling -> [Deep Neck Infection](#/tree/deep-neck-infection). Airway plan before supine CT if airway signs.\n   - Fever/IVDU/immunosuppression/focal spine tenderness/neuro finding -> [Cervical Spine Pain](#/tree/cervical-spine-nontraumatic), MRI for SEA/NVO.\n   - Hand clumsiness, gait change, hyperreflexia, bilateral symptoms -> myelopathy/cord pathway.\n   - Chest/jaw/arm symptoms, ischemic ECG, tearing pain -> [Chest Pain Hub](#/tree/chest-pain-hub) or [Aortic Dissection](#/tree/aortic-dissection).\n3. **Initial bundle:** analgesia, repeat neuro/airway/swallow exam, ESR/CRP by infection risk, avoid manipulation advice until red flags cleared.\n4. **Imaging:** CT C-spine trauma; CTA head/neck dissection; CT neck contrast deep infection; MRI C-spine cord/spine infection/malignancy/progressive deficit.\n5. **Disposition:** admit airway, CNS/spine infection, dissection/stroke, fracture/instability, myelopathy, unstable vitals. Discharge only benign mechanical pattern with normal neuro/airway exam.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACR Appropriateness Criteria. Cervical Neck Pain or Cervical Radiculopathy: 2024 Update.' },
+    { num: 2, text: 'Cohen SP, Hooten WM. Neck pain. BMJ. 2017;358:j3221.' },
+  ],
+};
+
+const NP_STOP_PAGE: InfoPage = {
+  id: 'np-stop',
+  title: 'Neck Pain Hub - Do NOT',
+  subtitle: 'Critical pitfalls in undifferentiated neck pain',
+  sections: [
+    {
+      heading: 'Do NOT send an airway-risk neck infection to CT without a plan',
+      body: 'Drooling, stridor, muffled voice, trismus, floor-of-mouth elevation, or severe swelling should trigger ENT/anesthesia/airway planning before supine CT.',
+    },
+    {
+      heading: 'Do NOT miss dissection in posterior neck pain',
+      body: 'Posterior headache/neck pain plus Horner, ataxia, diplopia, dysarthria, manipulation, minor trauma, or strangulation needs CTA consideration.',
+    },
+    {
+      heading: 'Do NOT discharge myelopathy',
+      body: 'Gait change, hand clumsiness, hyperreflexia, bilateral symptoms, or bowel/bladder symptoms are cord-level warnings.',
+    },
+    {
+      heading: 'Do NOT delay meningitis therapy for CT/LP logistics',
+      body: 'Blood cultures are useful when they do not delay therapy. Antibiotics and acyclovir are time-sensitive when CNS infection is plausible.',
+    },
+    {
+      heading: 'Do NOT recommend neck manipulation when dangerous causes remain possible',
+      body: 'Avoid manipulation advice when dissection, fracture/instability, myelopathy, or spine infection is still on the table.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACR Appropriateness Criteria. Cervical Neck Pain or Cervical Radiculopathy: 2024 Update.' },
+  ],
+};
+
+const BP_STEPS_PAGE: InfoPage = {
+  id: 'bp-steps',
+  title: 'Back Pain Hub - Steps Summary',
+  subtitle: 'Cauda, spine infection, aorta, fracture/cancer, renal mimics, disposition',
+  sections: [
+    {
+      body: '1. **Sick check first.** Check vitals, neuro/gait, bowel/bladder/saddle symptoms, vascular/abdominal clues, infection risk, trauma/cancer risk.\n2. **Time-critical exclusions:**\n   - Urinary retention/incontinence, saddle symptoms, bilateral sciatica, progressive leg weakness -> [Cauda Equina](#/tree/cauda-equina). PVR + emergency MRI.\n   - Fever, IVDU, diabetes, immunosuppression, recent bacteremia/procedure, focal tenderness -> spine infection posture. MRI with contrast; antibiotics should not wait in sepsis/neuro deficit.\n   - Older vascular risk, abrupt severe back/abdominal pain, syncope, hypotension, pulse deficit -> [Aortic Aneurysm](#/tree/aortic-aneurysm) or [Aortic Dissection](#/tree/aortic-dissection).\n   - Trauma, osteoporosis, steroids, cancer, weight loss, night pain -> fracture/malignancy/cord compression pathway.\n   - Flank pain, fever, urinary symptoms, stone-like colic, solitary kidney, pregnancy -> [Adult UTI](#/tree/adult-uti) / urinary mimic pathway.\n   - Unilateral radicular pain, no red flags, normal strength/bladder -> [Low Back Pain](#/tree/low-back-pain).\n3. **Initial bundle:** analgesia, repeat neuro/gait, bladder scan/PVR when indicated, ESR/CRP by infection risk, avoid prolonged bedrest advice.\n4. **Imaging:** MRI for cauda/infection/cancer/progressive neuro; CTA/US for aorta; CT/XR for fracture; no routine imaging for uncomplicated mechanical pain.\n5. **Disposition:** admit danger signs or inability to walk; observe pending MRI/CTA/labs or equivocal red flags; discharge only ambulatory, baseline neuro, no red flags, and explicit return precautions.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACR Appropriateness Criteria. Low Back Pain: 2021 Update. J Am Coll Radiol. 2021;18:S361-S379.' },
+    { num: 2, text: 'Berbari EF, et al. IDSA native vertebral osteomyelitis guideline. Clin Infect Dis. 2015;61:e26-e46.' },
+  ],
+};
+
+const BP_STOP_PAGE: InfoPage = {
+  id: 'bp-stop',
+  title: 'Back Pain Hub - Do NOT',
+  subtitle: 'Critical pitfalls in ED back pain',
+  sections: [
+    {
+      heading: 'Do NOT miss early cauda equina',
+      body: 'Ask specifically about urinary retention/hesitancy, saddle sensation, bilateral sciatica, progressive leg weakness, and bowel dysfunction. Pain response does not clear cauda.',
+    },
+    {
+      heading: 'Do NOT require fever for spinal epidural abscess',
+      body: 'SEA can present without fever. IVDU, bacteremia, immunosuppression, diabetes, recent spine procedure, or focal tenderness should raise suspicion.',
+    },
+    {
+      heading: 'Do NOT call abrupt vascular back pain musculoskeletal',
+      body: 'Older vascular-risk patient plus abrupt severe pain, syncope, hypotension, abdominal pain, or pulse deficit should trigger AAA/dissection posture.',
+    },
+    {
+      heading: 'Do NOT image uncomplicated mechanical back pain reflexively',
+      body: 'Absent red flags, advanced imaging rarely helps acute low back pain and can mislead. Image when results change management.',
+    },
+    {
+      heading: 'Do NOT discharge inability to ambulate safely',
+      body: 'A patient who cannot walk at baseline after ED treatment needs observation, admission, imaging, or a safer mobility plan.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACR Appropriateness Criteria. Low Back Pain: 2021 Update. J Am Coll Radiol. 2021;18:S361-S379.' },
+  ],
+};
+
 const PARA_STOP_PAGE: InfoPage = {
   id: 'para-stop',
   title: 'Paracentesis Stop / Complications',
@@ -23678,6 +23816,12 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'dysp-stop': DYSP_STOP_PAGE,
   'ams-steps': AMS_STEPS_PAGE,
   'ams-stop': AMS_STOP_PAGE,
+  'gw-steps': GW_STEPS_PAGE,
+  'gw-stop': GW_STOP_PAGE,
+  'np-steps': NP_STEPS_PAGE,
+  'np-stop': NP_STOP_PAGE,
+  'bp-steps': BP_STEPS_PAGE,
+  'bp-stop': BP_STOP_PAGE,
 
   // Traumatic Arrest / Resuscitative Thoracotomy
   'ta-steps': TA_STEPS_PAGE,
