@@ -95,7 +95,7 @@ export const BACK_PAIN_HUB_NODES = [
         type: 'result',
         module: 2,
         title: 'Radiculopathy / Mechanical Pattern',
-        body: 'Open [Low Back Pain Decision Support](#/tree/low-back-pain).\n\n**Next 5 minutes:** confirm no red flags, document motor/reflex/sensation, treat pain to enable mobility, avoid routine advanced imaging for uncomplicated acute low back pain/radiculopathy, encourage activity as tolerated.\n\n**Pitfall:** radicular pain does not equal cauda equina. Cauda requires bowel/bladder/saddle/progressive bilateral weakness screening every time.',
+        body: 'Open [Low Back Pain Decision Support](#/tree/low-back-pain).\n\nOpen [L4/L5/S1 Radiculopathy Localization](#/info/bp-radic-localization) for the bedside dermatome/myotome/reflex map.\n\n**Next 5 minutes:** confirm no red flags, document motor/reflex/sensation, treat pain to enable mobility, avoid routine advanced imaging for uncomplicated acute low back pain/radiculopathy, encourage activity as tolerated.\n\n**Pitfall:** radicular pain does not equal cauda equina. Cauda requires bowel/bladder/saddle/progressive bilateral weakness screening every time.',
         recommendation: 'Mechanical/radicular pain can be outpatient only after red flags and function are reassessed.',
         citation: [1, 2, 10],
         safetyLevel: 'warning',

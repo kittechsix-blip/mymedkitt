@@ -23519,6 +23519,49 @@ const BP_STOP_PAGE: InfoPage = {
   ],
 };
 
+const BP_RADIC_LOCALIZATION_PAGE: InfoPage = {
+  id: 'bp-radic-localization',
+  title: 'L4 / L5 / S1 Radiculopathy Localization',
+  subtitle: 'Pain, numbness, motor screen, and reflex pattern',
+  image: {
+    src: 'assets/images/back-pain/l4-l5-s1-radiculopathy.jpg',
+    alt: 'Reference diagram showing common L4, L5, and S1 radiculopathy pain, numbness, motor weakness, screening exam, and reflex findings',
+    caption: 'Bedside pattern recognition aid. Use the full cluster of symptoms and exam findings; dermatomes overlap and no single feature is definitive.',
+  },
+  sections: [
+    {
+      heading: 'Use This For Radicular Back Pain',
+      body: 'Use this card when the patient has radiating leg pain, numbness, paresthesias, positive straight-leg raise, or focal distal weakness after cauda equina, infection, fracture/cancer, and vascular causes have been screened.',
+    },
+    {
+      heading: 'L4 Pattern',
+      body: '**Pain/sensory:** anterior thigh, medial knee, and medial leg.\n\n**Motor:** knee extension / quadriceps weakness.\n\n**Bedside screen:** squat and rise.\n\n**Reflex:** patellar reflex diminished.',
+    },
+    {
+      heading: 'L5 Pattern',
+      body: '**Pain/sensory:** lateral leg, dorsum of foot, and great toe region.\n\n**Motor:** great toe extension and ankle/foot dorsiflexion weakness.\n\n**Bedside screen:** heel walking.\n\n**Reflex:** no consistently reliable bedside deep tendon reflex; medial hamstring may help when available.',
+    },
+    {
+      heading: 'S1 Pattern',
+      body: '**Pain/sensory:** posterior leg, lateral foot, and plantar foot.\n\n**Motor:** plantar flexion of foot/great toe weakness.\n\n**Bedside screen:** toe walking.\n\n**Reflex:** Achilles reflex diminished.',
+    },
+    {
+      heading: 'How To Document',
+      body: 'Document side, pain distribution, sensory loss, motor strength, gait screen, reflexes, straight-leg raise/crossed straight-leg raise, and whether bowel/bladder/saddle/progressive bilateral symptoms were absent or present.',
+    },
+    {
+      heading: 'Interpretation Guardrails',
+      body: '- L4, L5, and S1 patterns overlap; localize by clustering pain, sensory, motor, reflex, and provocative-test findings.\n- L5 is commonly tested by great toe extension and heel walking because a reliable reflex is often absent.\n- New or progressive motor deficit, inability to ambulate, bilateral symptoms, saddle anesthesia, urinary retention, fever/infection risk, cancer risk, or trauma should move back to the red-flag pathway.\n- Imaging decisions should follow red flags and management impact, not the dermatome map alone.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Casazza BA. Diagnosis and treatment of acute low back pain. Am Fam Physician. 2012;85:343-350.' },
+    { num: 2, text: 'Merck Manual Professional Edition. Lumbosacral Radiculopathy. Updated 2025.' },
+    { num: 3, text: 'StatPearls. Radicular Back Pain. NCBI Bookshelf. Updated 2022.' },
+    { num: 4, text: 'StatPearls. Electrodiagnostic Evaluation of Lumbosacral Radiculopathy. NCBI Bookshelf. Updated 2022.' },
+  ],
+};
+
 const MVL_STEPS_PAGE: InfoPage = {
   id: 'mvl-steps',
   title: 'Monocular Vision Loss Hub - Steps Summary',
@@ -24098,6 +24141,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'np-stop': NP_STOP_PAGE,
   'bp-steps': BP_STEPS_PAGE,
   'bp-stop': BP_STOP_PAGE,
+  'bp-radic-localization': BP_RADIC_LOCALIZATION_PAGE,
   'mvl-steps': MVL_STEPS_PAGE,
   'mvl-stop': MVL_STOP_PAGE,
   'dp-steps': DP_STEPS_PAGE,

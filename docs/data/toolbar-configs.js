@@ -420,6 +420,7 @@ const TOOLBAR_CONFIGS = {
     'back-pain-hub': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'bp-steps' },
         { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'bp-exclusions' },
+        { id: 'radic', label: 'Radic', icon: '🦵', action: 'overlay', target: 'bp-radic-localization' },
         { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'bp-rescue' },
         { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'bp-imaging' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'bp-stop' },
