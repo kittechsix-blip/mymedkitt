@@ -16,11 +16,14 @@ export const FLAGS = {
     //   (2) trigeminal-neuralgia (Phase 8 canary #2)
     //   (3) cluster-headache (Phase 8 canary #3 — depends on occipital-nerve-block flipped)
     //   (4) headache-hub LAST
-    // Headache-hub batch (Phases 4-7) launched live on 2026-05-22 per user decision
-    // to skip per-canary soak gates in PLAN.md R18. To re-stage any consult, add
-    // its id back to hiddenTreeIds (or hiddenHubs for type:'hub' trees) and /deploy.
-    hiddenTreeIds: [],
-    hiddenHubs: [],
+    // 2026-05-22 PM: headache-hub pulled off live pending rewrite.
+    // Andy flagged that the SNOOP10-walk + "phenotype triage" structure is
+    // neurology-clinic framing, not ER workflow. Rewriting around sick/not-sick →
+    // time-critical exclusions → rescue + dispo. Splits (cluster-headache,
+    // trigeminal-neuralgia, occipital-nerve-block) stay live since they're
+    // standalone and clinically usable.
+    hiddenTreeIds: ['headache-hub'],
+    hiddenHubs: ['headache-hub'],
 };
 /** True if a given tree id should be hidden from listings + router. */
 export function isTreeHidden(treeId, treeType) {
