@@ -1265,6 +1265,22 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/adult-pharyngitis.js');
             return { nodes: m.ADULT_PHARYNGITIS_NODES, entryNodeId: 'ap-start', categoryId: 'infectious-disease', moduleLabels: m.ADULT_PHARYNGITIS_MODULE_LABELS, citations: m.ADULT_PHARYNGITIS_CITATIONS, criticalActions: m.ADULT_PHARYNGITIS_CRITICAL_ACTIONS };
         },
+        'auricular-hematoma-drainage': async () => {
+            const m = await import('../data/trees/auricular-hematoma-drainage.js');
+            return { nodes: m.AURICULAR_HEMATOMA_DRAINAGE_NODES, entryNodeId: 'ahd-start', categoryId: 'procedures', moduleLabels: m.AURICULAR_HEMATOMA_DRAINAGE_MODULE_LABELS, citations: m.AURICULAR_HEMATOMA_DRAINAGE_CITATIONS, criticalActions: m.AURICULAR_HEMATOMA_DRAINAGE_CRITICAL_ACTIONS };
+        },
+        'corneal-fb-removal': async () => {
+            const m = await import('../data/trees/corneal-fb-removal.js');
+            return { nodes: m.CORNEAL_FB_REMOVAL_NODES, entryNodeId: 'cfb-start', categoryId: 'procedures', moduleLabels: m.CORNEAL_FB_REMOVAL_MODULE_LABELS, citations: m.CORNEAL_FB_REMOVAL_CITATIONS, criticalActions: m.CORNEAL_FB_REMOVAL_CRITICAL_ACTIONS };
+        },
+        'laceration-repair': async () => {
+            const m = await import('../data/trees/laceration-repair.js');
+            return { nodes: m.LACERATION_REPAIR_NODES, entryNodeId: 'lac-start', categoryId: 'procedures', moduleLabels: m.LACERATION_REPAIR_MODULE_LABELS, citations: m.LACERATION_REPAIR_CITATIONS, criticalActions: m.LACERATION_REPAIR_CRITICAL_ACTIONS };
+        },
+        'ring-removal': async () => {
+            const m = await import('../data/trees/ring-removal.js');
+            return { nodes: m.RING_REMOVAL_NODES, entryNodeId: 'ring-start', categoryId: 'procedures', moduleLabels: m.RING_REMOVAL_MODULE_LABELS, citations: m.RING_REMOVAL_CITATIONS, criticalActions: m.RING_REMOVAL_CRITICAL_ACTIONS };
+        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)

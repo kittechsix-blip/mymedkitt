@@ -282,4 +282,8 @@ export const TREE_REGISTRY = {
   'peritoneal-dialysis': { prefix: 'PERITONEAL_DIALYSIS', entryNodeId: 'pd-start', categoryId: 'nephro-rheum-endo' },
   'adult-pharyngitis': { prefix: 'ADULT_PHARYNGITIS', entryNodeId: 'ap-start', categoryId: 'infectious-disease' },
   'peds-ssti': { prefix: 'PEDS_SSTI', entryNodeId: 'pssti-start', categoryId: 'pediatrics' },
+  'auricular-hematoma-drainage': { prefix: 'AURICULAR_HEMATOMA_DRAINAGE', entryNodeId: 'ahd-start', categoryId: 'procedures' },
+  'corneal-fb-removal': { prefix: 'CORNEAL_FB_REMOVAL', entryNodeId: 'cfb-start', categoryId: 'procedures' },
+  'laceration-repair': { prefix: 'LACERATION_REPAIR', entryNodeId: 'lac-start', categoryId: 'procedures' },
+  'ring-removal': { prefix: 'RING_REMOVAL', entryNodeId: 'ring-start', categoryId: 'procedures' },
 };

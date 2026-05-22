@@ -1963,6 +1963,34 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'bridge-info', label: 'Bridge Info', icon: '🏥', action: 'overlay', target: 'pd-bridge-decision' },
     { id: 'summary', label: 'Summary', icon: '📖', action: 'overlay', target: 'pd-summary' },
   ],
+  'auricular-hematoma-drainage': [
+    { id: 'block', label: 'Block', icon: '💉', action: 'overlay', target: 'ahd-block' },
+    { id: 'aspirate-vs-id', label: 'Aspirate vs I&D', icon: '🩺', action: 'overlay', target: 'ahd-aspirate-vs-id' },
+    { id: 'bolster', label: 'Bolster', icon: '🪡', action: 'overlay', target: 'ahd-bolster-build' },
+    { id: 'antibiotics', label: 'Antibiotics', icon: '💊', action: 'overlay', target: 'ahd-antibiotics' },
+    { id: 'ent-followup', label: 'ENT F/U', icon: '📞', action: 'overlay', target: 'ahd-ent-followup' },
+  ],
+  'corneal-fb-removal': [
+    { id: 'seidel-va', label: 'Seidel + VA', icon: '👁️', action: 'overlay', target: 'cfb-seidel-va' },
+    { id: 'anesthetic', label: 'Anesthetic', icon: '💧', action: 'overlay', target: 'cfb-anesthetic' },
+    { id: 'eversion', label: 'Eversion', icon: '🔄', action: 'overlay', target: 'cfb-eversion' },
+    { id: 'removal-ladder', label: 'Removal', icon: '🪛', action: 'overlay', target: 'cfb-removal-ladder' },
+    { id: 'drop-selector', label: 'Drops', icon: '💊', action: 'overlay', target: 'cfb-drop-selector' },
+  ],
+  'laceration-repair': [
+    { id: 'closure-picker', label: 'Closure', icon: '🧵', action: 'overlay', target: 'lac-closure-picker' },
+    { id: 'lido-max', label: 'Lido Max', icon: '💉', action: 'calculator', target: 'lac-lido-max-dose' },
+    { id: 'let-topical', label: 'LET', icon: '🧪', action: 'overlay', target: 'lac-let-topical' },
+    { id: 'site-specials', label: 'Site Specials', icon: '🩹', action: 'overlay', target: 'lac-site-specials' },
+    { id: 'tetanus-abx', label: 'Tetanus + Abx', icon: '💊', action: 'overlay', target: 'lac-tetanus-abx' },
+  ],
+  'ring-removal': [
+    { id: 'material', label: 'Material', icon: '💍', action: 'overlay', target: 'ring-material-id' },
+    { id: 'string-wrap', label: 'String-Wrap', icon: '🧶', action: 'overlay', target: 'ring-string-wrap' },
+    { id: 'cutter', label: 'Cutter', icon: '✂️', action: 'overlay', target: 'ring-cutter-picker' },
+    { id: 'diamond', label: 'Diamond Tool', icon: '💎', action: 'overlay', target: 'ring-diamond-tool' },
+    { id: 'neurovasc', label: 'Neurovasc', icon: '🫀', action: 'overlay', target: 'ring-neurovasc' },
+  ],
 };
 
 // Stop button appended automatically to every consult
