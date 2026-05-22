@@ -326,7 +326,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'DAPT Duration & Special Populations',
-    body: 'Standard DAPT: 12 months post-PCI\n\u2022 Aspirin 81 mg + P2Y12 inhibitor daily\n\n**De-escalation options after 1\u20133 months if high bleeding risk:**\n\u2022 Switch from ticagrelor/prasugrel to clopidogrel (HOST-REDUCE trial)\n\u2022 Aspirin monotherapy after 1\u20133 months of DAPT (TWILIGHT trial)\n\n**Extended DAPT beyond 12 months:**\n\u2022 Consider if high ischemic risk (prior MI, diabetes, multivessel disease)\n\u2022 Ticagrelor 60 mg BID (PEGASUS-TIMI 54)\n\nIs this a MINOCA presentation?',
+    body: 'Standard DAPT: 12 months post-PCI (Class 1, 2025 ACC/AHA ACS)\n\u2022 Aspirin 81 mg + P2Y12 inhibitor daily\n\n**High bleeding risk \u2014 NEW Class 1 (2025 ACC/AHA):**\n\u2022 DAPT \u00D7 1 month, then **ticagrelor monotherapy** (ULTIMATE-DAPT, T-PASS)\n\u2022 BARC 2\u20135 bleeding halved without increase in MACCE\n\n**Other de-escalation options after 1\u20133 months if high bleeding risk:**\n\u2022 Switch from ticagrelor/prasugrel to clopidogrel (HOST-REDUCE)\n\u2022 Aspirin monotherapy after 1\u20133 months of DAPT (TWILIGHT \u2014 weaker than ticagrelor monotherapy)\n\n**Extended DAPT beyond 12 months:**\n\u2022 Consider if high ischemic risk (prior MI, diabetes, multivessel disease)\n\u2022 Ticagrelor 60 mg BID (PEGASUS-TIMI 54)\n\nIs this a MINOCA presentation?',
     citation: [1, 9, 10],
     treatment: {
       firstLine: {
@@ -338,12 +338,12 @@ export const NSTEMI_NODES: DecisionNode[] = [
         notes: 'Extended DAPT (ticagrelor 60 mg BID) per PEGASUS-TIMI 54 if prior MI, diabetes, or multivessel disease.',
       },
       alternative: {
-        drug: 'Aspirin monotherapy',
-        dose: '81 mg',
+        drug: 'Ticagrelor monotherapy (high bleeding risk)',
+        dose: '90 mg BID (then 60 mg BID after 12 months if extended)',
         route: 'PO',
-        frequency: 'Once daily',
-        duration: 'Lifelong',
-        notes: 'After 1-3 months DAPT if high bleeding risk (TWILIGHT trial). P2Y12 monotherapy also an option.',
+        frequency: 'Twice daily',
+        duration: 'Continue after 1 month of DAPT in high-bleed-risk ACS (2025 ACC/AHA Class 1)',
+        notes: 'NEW 2025 Class 1: 1 month DAPT \u2192 ticagrelor monotherapy halves BARC 2-5 bleeding without increase in MACCE (ULTIMATE-DAPT, T-PASS). Preferred over aspirin monotherapy in this scenario.',
       },
       monitoring: 'Bleeding assessment at each visit. Medication adherence counseling. Do NOT stop P2Y12 without cardiology consultation.',
     },
@@ -358,7 +358,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         next: 'nstemi-minoca',
       },
     ],
-    summary: 'Standard 12mo DAPT; de-escalation after 1-3mo if high bleed risk (HOST-REDUCE); extend beyond 12mo if high ischemic risk (PEGASUS)',
+    summary: 'Standard 12mo DAPT; NEW 2025 Class 1: 1mo DAPT → ticagrelor monotherapy if high bleed risk (ULTIMATE-DAPT/T-PASS); extend beyond 12mo if high ischemic risk (PEGASUS)',
   },
 
   {

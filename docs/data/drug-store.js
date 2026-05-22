@@ -84,11 +84,15 @@ const ACETAMINOPHEN = {
     genericName: 'Acetaminophen',
     drugClass: 'Non-opioid analgesic / Antipyretic',
     route: 'PO / IV',
-    indications: ['Headache / Analgesia', 'Fever', 'Pediatric fever / pain'],
+    indications: ['Headache / Analgesia', 'Fever', 'Pediatric fever / pain', 'Pregnancy-safe headache analgesia'],
     dosing: [
         {
             indication: 'Headache / Analgesia',
             regimen: '1000 mg PO or IV every 6 hours. Max 4000 mg/24h (2000 mg/24h in hepatic impairment or chronic alcohol use). IV administered over 15 minutes.',
+        },
+        {
+            indication: 'Pregnancy-safe headache analgesia',
+            regimen: '**1000 mg PO or IV every 6 hours.** Max 3000 mg/24h in pregnancy (more conservative than non-pregnant 4 g cap).\n\n**FDA Category B; first-line analgesic across all trimesters for migraine + tension-type headache.**\n\n**WHY PREFERRED IN PREGNANCY:**\n• No teratogenicity in established cohort data.\n• Does not affect platelet function (vs NSAIDs).\n• No vasoconstriction (vs triptans, ergots).\n• Crosses placenta but not associated with congenital malformations.\n\n**LIMITATIONS:**\n• Less effective than NSAIDs for severe migraine attacks.\n• Acetaminophen monotherapy may not break status migrainosus — combine with metoclopramide 10 mg IV + diphenhydramine 25 mg IV (both Category B) + magnesium 1-2 g IV.\n\n**AVOID:** Combination products containing caffeine + butalbital (Fioricet) — barbiturate dependence + neonatal withdrawal risk.',
         },
         {
             indication: 'Pediatric fever / pain',
@@ -855,6 +859,50 @@ const BUMETANIDE = {
         'Palmer BF, Clegg DJ. Hyperkalemia treatment standard. Nephrol Dial Transplant. 2024;39(7):1097-1104.',
     ],
 };
+const BUPIVACAINE = {
+    id: 'bupivacaine',
+    name: 'Bupivacaine 0.5% (Plain)',
+    genericName: 'Bupivacaine hydrochloride',
+    drugClass: 'Amide local anesthetic (long-acting)',
+    route: 'Local infiltration / Peripheral nerve block',
+    indications: ['Occipital nerve block', 'Peripheral nerve blocks', 'Local infiltration anesthesia', 'Hematoma block (long-duration alternative)'],
+    dosing: [
+        {
+            indication: 'Occipital Nerve Block',
+            regimen: '**2-3 mL of 0.5% PLAIN bupivacaine per side** (10-15 mg per side). NO EPINEPHRINE — risk of arterial vasoconstriction near vertebral system. Inject medial to occipital artery pulsation, ~1/3 distance from inion to mastoid process. Aspirate before injecting. Onset 5-15 min. Duration 4-8 h (longer than lidocaine). May add 40 mg methylprednisolone OR 4 mg dexamethasone for steroid adjunct (mixed in same syringe).',
+            weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose (no epi)' },
+        },
+        {
+            indication: 'Peripheral nerve block (general)',
+            regimen: '0.25-0.5% plain bupivacaine, volume per block target. Max plain dose: **2 mg/kg** (max ~175 mg). With epinephrine 1:200,000: max 3 mg/kg (max ~225 mg) — but NEVER use epi for occipital, dorsal penile, digital, or ear blocks. Onset 10-20 min, duration 4-8 h sensory, up to 24 h motor in some blocks.',
+            weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose' },
+        },
+        {
+            indication: 'Local infiltration',
+            regimen: '0.25% bupivacaine, infiltrate to effect up to max dose. Preferred over lidocaine when prolonged analgesia desired (laceration repair anticipating outpatient follow-up, post-procedure pain control).',
+            weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 175, label: 'Max plain dose' },
+        },
+    ],
+    contraindications: [
+        'Allergy to amide local anesthetics',
+        'NEVER use with epinephrine in end-artery territories (digits, penis, ear, occipital region — proximity to vertebral arterial supply)',
+        'IV regional anesthesia (Bier block) — bupivacaine cardiotoxicity makes it unsuitable',
+    ],
+    cautions: [
+        'Higher cardiotoxicity than lidocaine — accidental intravascular injection can cause refractory ventricular arrhythmia. Treatment: lipid emulsion 20% 1.5 mL/kg bolus + 0.25 mL/kg/min infusion.',
+        'Max plain dose: **2 mg/kg** (cap ~175 mg). With epi (NOT for occipital): 3 mg/kg.',
+        'Always aspirate before injecting peripheral blocks — palpate occipital artery before needle insertion.',
+        'Pregnancy: Category C — use with caution; lidocaine preferred when feasible.',
+    ],
+    monitoring: 'Test block adequacy with pinprick after 10-15 min. Observe 15-30 min post-block for vasovagal or LAST (local anesthetic systemic toxicity).',
+    notes: 'Long-acting amide LA preferred for occipital nerve blocks because the prolonged duration (4-8 h vs lidocaine 30-90 min) often outlasts the headache cycle and may break the autonomic-pain loop in cluster headache. Steroid adjunct (methylprednisolone 40 mg OR dexamethasone 4 mg) controversial for cluster (Ashkenazi 2008, Cuadrado 2017 — no added benefit beyond LA alone); reasonable for cervicogenic HA and hemicrania continua.',
+    citations: [
+        'Blumenfeld A, et al. Expert consensus recommendations for the performance of peripheral nerve blocks for headaches. Headache. 2013;53(3):437-46.',
+        'Tobin J, Flitman S. Occipital nerve blocks: when and what to inject? Headache. 2009;49(10):1521-33.',
+        'Ashkenazi A, et al. Greater occipital nerve block using LA alone or with triamcinolone for transformed migraine. J Neurol Neurosurg Psychiatry. 2008;79(4):415-7.',
+        'Robbins MS, et al. The American Headache Society Position Statement on Integrating New Migraine Treatments. Headache. 2024.',
+    ],
+};
 const BUPRENORPHINE = {
     id: 'buprenorphine',
     name: 'Buprenorphine (Subutex / Suboxone)',
@@ -1381,8 +1429,16 @@ const DEXAMETHASONE = {
     genericName: 'Dexamethasone',
     drugClass: 'Corticosteroid (glucocorticoid)',
     route: 'PO/IM/IV',
-    indications: ['Croup (standard of care)', 'Cerebral edema', 'Antiemetic (chemotherapy)', 'Bacterial meningitis (adjunctive)', 'Airway edema', 'Adrenal crisis (alternative)', 'Adrenal maintenance (alternative)', 'Anaphylaxis (adjunctive)', 'Migraine — recurrence prevention'],
+    indications: ['Occipital nerve block (steroid adjunct)', 'Croup (standard of care)', 'Cerebral edema', 'Antiemetic (chemotherapy)', 'Bacterial meningitis (adjunctive)', 'Airway edema', 'Adrenal crisis (alternative)', 'Adrenal maintenance (alternative)', 'Anaphylaxis (adjunctive)', 'Migraine — recurrence prevention', 'Status Migrainosus (anti-recurrence)'],
     dosing: [
+        {
+            indication: 'Occipital Nerve Block — steroid adjunct',
+            regimen: '**4 mg dexamethasone mixed with 2-3 mL local anesthetic** (bupivacaine 0.5% or lidocaine 1-2%) in the SAME syringe; injected per side at standard ONB landmarks.\n\n**EVIDENCE NOTE — controversial:** Ashkenazi 2008 and Cuadrado 2017 RCTs show no added benefit over LA alone for cluster and transformed migraine. Steroid adjunct is reasonable for cervicogenic headache and hemicrania continua.\n\n**ADVANTAGES vs methylprednisolone depot:**\n• No particulate matter (theoretically lower intra-arterial injection risk)\n• Less cutaneous atrophy / alopecia\n• Shorter local steroid effect (may be preferred for repeat blocks)\n\n**AVOID in:** pregnancy, active local infection, poorly controlled diabetes.',
+        },
+        {
+            indication: 'Status Migrainosus — anti-recurrence',
+            regimen: '**10 mg IV × 1 dose** at end of acute migraine treatment in ED. Reduces 24-72 h headache recurrence (NNT ~9, Colman BMJ 2008 meta-analysis). Given AFTER the migraine cocktail (metoclopramide + diphenhydramine + ketorolac ± IV fluids) — not as monotherapy. Equally effective as IM/PO dexamethasone if patient tolerating oral.',
+        },
         {
             indication: 'Croup',
             regimen: '0.6 mg/kg PO as a single dose (max 16 mg). Low-dose alternative: 0.15 mg/kg PO (non-inferior). If unable to tolerate oral: 0.6 mg/kg IM.',
@@ -1974,8 +2030,16 @@ const DIPHENHYDRAMINE = {
     genericName: 'Diphenhydramine hydrochloride',
     drugClass: 'Antihistamine / Antiemetic',
     route: 'PO/IV',
-    indications: ['Nausea and vomiting of pregnancy (NVP)', 'Allergic reactions', 'Insomnia', 'Anaphylaxis (H1 blocker)', 'Angioedema', 'Acute vertigo (short-term vestibular suppressant)'],
+    indications: ['Nausea and vomiting of pregnancy (NVP)', 'Allergic reactions', 'Insomnia', 'Anaphylaxis (H1 blocker)', 'Angioedema', 'Acute vertigo (short-term vestibular suppressant)', 'Migraine cocktail / EPS prophylaxis', 'Acute dystonia (antipsychotic-induced)'],
     dosing: [
+        {
+            indication: 'Migraine cocktail / EPS prophylaxis',
+            regimen: '**25 mg IV over 2 minutes** as part of the parenteral status migrainosus bundle.\n\n**ROLE:** Pre-treats the akathisia / extrapyramidal symptoms triggered by the neuroleptic (metoclopramide 10 mg IV or prochlorperazine 10 mg IV) in the cocktail. Mild sedation is a feature, not a bug, in status migrainosus.\n\n**SAFE IN PREGNANCY** (Category B). Use across all trimesters.\n\n**FULL COCKTAIL:**\n• Metoclopramide 10 mg IV or Prochlorperazine 10 mg IV\n• **Diphenhydramine 25 mg IV** (pre-treats EPS)\n• Ketorolac 30 mg IV (skip if pregnancy >30 wk or eGFR <30)\n• Dexamethasone 10 mg IV\n• 1 L NS bolus',
+        },
+        {
+            indication: 'Acute dystonia (antipsychotic-induced)',
+            regimen: '**50 mg IV** for acute dystonic reaction (oculogyric crisis, torticollis, laryngeal spasm) after metoclopramide, prochlorperazine, haloperidol, or other dopamine antagonists. Onset 5-15 min. Repeat in 30 min if no resolution; add benztropine 1-2 mg IV if persistent.\n\n**FOLLOW-UP:** Continue oral diphenhydramine 25-50 mg q6h × 48-72 h to prevent recurrence (dystonia can recur as offending drug clears).',
+        },
         {
             indication: 'Vestibular suppressant (short-term) — acute vertigo',
             regimen: '25-50 mg PO or IV every 6-8 hours PRN. **Maximum 72 hours** — prolonged use delays central vestibular compensation and prolongs recovery. Second-line to meclizine. Significant sedation — warn about falls and driving. Avoid in elderly (Beers criteria, delirium risk).',
@@ -2654,8 +2718,13 @@ const LIDOCAINE = {
     genericName: 'Lidocaine',
     drugClass: 'Amide local anesthetic / Class IB antiarrhythmic',
     route: 'Local injection / IV / Topical',
-    indications: ['Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)', 'RSI pretreatment', 'VAD ventricular tachycardia', 'Torsades de pointes'],
+    indications: ['Occipital nerve block', 'Dorsal penile nerve block', 'Hematoma block', 'Local anesthesia for minor procedures', 'Nerve blocks', 'TCA ventricular arrhythmia', 'Epistaxis (topical anesthesia)', 'RSI pretreatment', 'VAD ventricular tachycardia', 'Torsades de pointes'],
     dosing: [
+        {
+            indication: 'Occipital Nerve Block',
+            regimen: '**2-3 mL of 1-2% PLAIN lidocaine per side**. NO EPINEPHRINE — risk of arterial vasoconstriction near vertebral artery supply. Shorter duration than bupivacaine (30-90 min vs 4-8 h) — use when bupivacaine unavailable, when shorter block desired (diagnostic block), or when patient prefers shorter numbness. Inject medial to occipital artery pulsation, ~1/3 distance from inion to mastoid process. Aspirate before injecting. Max plain dose **4.5 mg/kg** (cap ~300 mg). May add 40 mg methylprednisolone OR 4 mg dexamethasone for steroid adjunct.',
+            weightCalc: { dosePerKg: 4.5, unit: 'mg', maxDose: 300, label: 'Max plain dose (no epi)' },
+        },
         {
             indication: 'Epistaxis (topical anesthesia)',
             regimen: 'Lidocaine 4% topical solution: apply to cotton pledget and insert into nose for 5-10 minutes. Provides anesthesia for visualization, cautery, and packing. Often combined with oxymetazoline for vasoconstriction + anesthesia.',
@@ -3390,8 +3459,12 @@ const METHYLPREDNISOLONE = {
     genericName: 'Methylprednisolone sodium succinate',
     drugClass: 'Corticosteroid (glucocorticoid)',
     route: 'IV / PO',
-    indications: ['Adrenal crisis (alternative to hydrocortisone)', 'Thyroid crisis (alternative)', 'Anaphylaxis (adjunctive, alternative)', 'Anaphylaxis / angioedema (adjunct)', 'Caustic ingestion (stricture prevention)'],
+    indications: ['Occipital nerve block (steroid adjunct)', 'Adrenal crisis (alternative to hydrocortisone)', 'Thyroid crisis (alternative)', 'Anaphylaxis (adjunctive, alternative)', 'Anaphylaxis / angioedema (adjunct)', 'Caustic ingestion (stricture prevention)'],
     dosing: [
+        {
+            indication: 'Occipital Nerve Block — steroid adjunct',
+            regimen: '**40 mg depot methylprednisolone (Depo-Medrol) mixed with 2-3 mL local anesthetic** (bupivacaine 0.5% or lidocaine 1-2%) in the SAME syringe; injected medial to occipital artery, ~1/3 distance from inion to mastoid process per side.\n\n**EVIDENCE NOTE — controversial:** Ashkenazi 2008 RCT and Cuadrado 2017 RCT both show **steroid does NOT add benefit beyond LA alone** for cluster headache and transformed migraine. Steroid adjunct is reasonable for cervicogenic headache and hemicrania continua only.\n\n**AVOID steroid adjunct in:**\n• Pregnancy\n• Repeated blocks (alopecia, cutaneous atrophy, Cushingoid features)\n• Diabetic patients (hyperglycemia for 5-10 days)\n• Active infection at injection site',
+        },
         {
             indication: 'Adrenal crisis (alternative)',
             regimen: '40 mg IV every 24 hours. Use ONLY when hydrocortisone is unavailable. Minimal mineralocorticoid activity — consider adding fludrocortisone once transitioned to maintenance doses in patients with primary adrenal insufficiency.',
@@ -3710,8 +3783,12 @@ const METOCLOPRAMIDE = {
     genericName: 'Metoclopramide hydrochloride',
     drugClass: 'Dopamine antagonist / Prokinetic antiemetic',
     route: 'IV/PO',
-    indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum', 'Vestibular migraine (acute)', 'Acute vertigo with nausea'],
+    indications: ['Nausea and vomiting of pregnancy (NVP)', 'Hyperemesis gravidarum', 'Vestibular migraine (acute)', 'Acute vertigo with nausea', 'Status migrainosus — IV cocktail'],
     dosing: [
+        {
+            indication: 'Status Migrainosus — IV cocktail',
+            regimen: '**10 mg IV over 15 minutes** as the neuroleptic anchor of the parenteral migraine bundle.\n\n**FULL COCKTAIL:**\n• Metoclopramide 10 mg IV (or prochlorperazine 10 mg IV if no QTc concern)\n• Diphenhydramine 25 mg IV — pre-treats EPS / akathisia\n• Ketorolac 30 mg IV (skip if pregnancy >30 wk or eGFR <30)\n• Dexamethasone 10 mg IV — reduces 24-72 h recurrence by ~50%\n• 1 L normal saline bolus\n\n**RE-DOSE:** Metoclopramide may be repeated 10 mg IV at 30 min if no relief.\n\n**WATCH FOR:**\n• Akathisia (restless, can\'t-sit-still) — give diphenhydramine 25 mg IV.\n• Acute dystonia — give diphenhydramine 50 mg IV; benztropine 1-2 mg IV if persistent.\n• QT prolongation (relative CI; prochlorperazine is worse).\n\n**SAFE IN PREGNANCY** (Category B). Used preferentially over prochlorperazine for status migrainosus when patient is pregnant.',
+        },
         {
             indication: 'Vestibular migraine / acute vertigo nausea',
             regimen: '10 mg IV over 15 minutes. Dopamine antagonist with dual antiemetic and antimigraine activity — particularly useful for vestibular migraine where both nausea and headache are present. Combine with IV fluids. Watch for akathisia — pretreat with diphenhydramine 25 mg IV if high-risk. Avoid in patients with QT prolongation or Parkinson disease.',
@@ -4192,8 +4269,12 @@ const OCTREOTIDE = {
     genericName: 'Octreotide acetate',
     drugClass: 'Somatostatin analog',
     route: 'SQ/IV',
-    indications: ['Opioid withdrawal — refractory diarrhea', 'Sulfonylurea-induced hypoglycemia', 'VAD GI bleeding (AVMs)'],
+    indications: ['Cluster headache — acute (alternative)', 'Opioid withdrawal — refractory diarrhea', 'Sulfonylurea-induced hypoglycemia', 'VAD GI bleeding (AVMs)'],
     dosing: [
+        {
+            indication: 'Cluster Headache — acute (alternative)',
+            regimen: '**100 mcg SQ × 1**. Alternative acute abortive when triptans contraindicated (CAD, uncontrolled HTN, recent ergot) or O2 unavailable. Onset ~15-30 min. Response rate ~52% (Matharu Ann Neurol 2004) — inferior to SQ sumatriptan (~74%) but useful when sumatriptan is unsafe. Not a first-line choice but worth knowing for refractory or contraindication scenarios.',
+        },
         {
             indication: 'Opioid withdrawal — refractory diarrhea',
             regimen: '**SQ:** 50 mcg. May repeat every 8\u201312 hours if diarrhea persists. For severe secretory diarrhea unresponsive to loperamide. Inhibits GI secretions and motility via somatostatin receptor agonism.',
@@ -4569,8 +4650,12 @@ const PREDNISONE = {
     genericName: 'Prednisone',
     drugClass: 'Corticosteroid (glucocorticoid)',
     route: 'PO',
-    indications: ['COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions', 'IRIS in TB/HIV coinfection'],
+    indications: ['Cluster headache — bridge therapy', 'COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions', 'IRIS in TB/HIV coinfection'],
     dosing: [
+        {
+            indication: 'Cluster Headache — bridge therapy',
+            regimen: '**60 mg PO daily × 5 days, then taper by 10 mg every 2 days (50 → 40 → 30 → 20 → 10 → 0 over 10 days).** Total course ~15 days.\n\n**ROLE:** Bridges the patient from cluster-period onset to therapeutic verapamil levels (which require 2-4 weeks to titrate). Suppresses ~70-80% of attacks within 24-48 h.\n\n**ALTERNATIVE:** Greater occipital nerve block — comparable efficacy to oral prednisone bridge (Leroux Lancet Neurol 2011) with fewer systemic side effects. Prefer ONB if patient is pregnant, diabetic, has osteoporosis, or has had prior steroid complications.\n\n**MONITORING:** Glucose (especially diabetic patients), BP, mood (rare steroid psychosis), insomnia, AVN risk with repeated courses.\n\n**DO NOT:** Repeat full-dose steroid bridge more than 2-3 times per year due to cumulative AVN, cataract, osteoporosis risk.',
+        },
         {
             indication: 'COPD exacerbation',
             regimen: '40 mg PO once daily for 5 days. No taper needed for 5-day course. GOLD 2024 standard. Longer courses offer no additional benefit.',
@@ -5899,9 +5984,13 @@ const VERAPAMIL = {
     name: 'Verapamil',
     genericName: 'Verapamil hydrochloride',
     drugClass: 'Nondihydropyridine calcium channel blocker',
-    route: 'IV',
-    indications: ['A-Fib / A-Flutter rate control', 'Supraventricular tachycardia'],
+    route: 'IV / PO',
+    indications: ['Cluster headache — maintenance prophylaxis', 'A-Fib / A-Flutter rate control', 'Supraventricular tachycardia'],
     dosing: [
+        {
+            indication: 'Cluster Headache — maintenance prophylaxis (1L)',
+            regimen: '**START:** 80 mg PO TID (240 mg/day total).\n\n**TITRATE:** Increase by 80 mg every 2 weeks (next steps: 320 → 400 → 480 → 560 → 640 → 720 → 800 → 880 → **960 mg/day max**) until attacks suppressed or ECG/side-effect limit.\n\n**CRITICAL — ECG BEFORE EVERY TITRATION:**\n• Baseline 12-lead ECG before first dose\n• Repeat 12-lead ECG **before EVERY dose escalation** AND ~10 days after each escalation\n• **HALT titration if:** PR interval >0.22 s, new 1st-degree AV block worsening, any 2nd/3rd-degree AV block, bradycardia <50 bpm, or hypotension\n\n**WHY THIS DOSE:** Cluster headache requires much higher verapamil doses than cardiac indications. Cohen Neurology 2007 documented PR prolongation in 19% and AV block in 4% across the titration range.\n\n**BRIDGE WHILE TITRATING:** Use [Prednisone bridge](#/drug/prednisone/cluster) OR [Greater occipital nerve block](#/drug/bupivacaine/occipital nerve block) for the 2-4 weeks while reaching effective verapamil dose.\n\n**MAINTAIN:** Continue through cluster period plus 2 weeks after attacks cease, then taper.',
+        },
         {
             indication: 'A-Fib rate control (acute)',
             regimen: '2.5-5 mg IV over 2 min. May repeat with 5-10 mg every 15-30 min as needed. Maximum total dose: 20 mg.',
@@ -11108,8 +11197,12 @@ const INDOMETHACIN = {
     genericName: 'Indomethacin',
     drugClass: 'Nonsteroidal anti-inflammatory drug (NSAID, non-selective COX inhibitor)',
     route: 'PO/IV/PR',
-    indications: ['Acute pericarditis', 'Acute gout flare', 'Tocolysis (preterm labor 24–32 wk)', 'Patent ductus arteriosus closure (neonatal)', 'Ankylosing spondylitis / inflammatory arthritis'],
+    indications: ['Hemicrania continua / paroxysmal hemicrania (diagnostic + therapeutic)', 'Acute pericarditis', 'Acute gout flare', 'Tocolysis (preterm labor 24–32 wk)', 'Patent ductus arteriosus closure (neonatal)', 'Ankylosing spondylitis / inflammatory arthritis'],
     dosing: [
+        {
+            indication: 'Hemicrania continua / paroxysmal hemicrania — Indotest',
+            regimen: '**INDOTEST (diagnostic + therapeutic):** 25 mg PO TID with food × 3 days. If pain abolished within 1-3 days → diagnosis confirmed (these headache types are by definition indomethacin-responsive per ICHD-3).\n\n**If response confirmed:** continue 25-75 mg PO TID maintenance (lowest effective dose). Add PPI for GI prophylaxis.\n\n**If no response in 3 days:** push to 50 mg PO TID × 3 more days before declaring negative; partial response argues against the diagnosis. Reconsider DDx (chronic cluster, SUNCT/SUNA, trigeminal autonomic cephalalgia variants).\n\n**WHY THIS MATTERS:** Hemicrania continua and paroxysmal hemicrania are commonly misdiagnosed as cluster headache or migraine. Indomethacin response is diagnostic per ICHD-3 §3.2 and §3.4. Patients with these can avoid years of failed migraine/cluster therapy.',
+        },
         {
             indication: 'Acute pericarditis',
             regimen: '50 mg PO TID × 1–2 weeks (with food), then taper by 25 mg every 1–2 weeks over 2–4 weeks. ALWAYS combine with colchicine 0.6 mg PO BID × 3 months (CORE/CORP trials — colchicine reduces recurrence ~50%). Add PPI for GI prophylaxis. Continue until CRP normalizes and patient asymptomatic, then taper.',
@@ -11222,8 +11315,12 @@ const GABAPENTIN = {
     genericName: 'Gabapentin',
     drugClass: 'Gabapentinoid (α2δ subunit calcium channel ligand) / antiepileptic',
     route: 'PO',
-    indications: ['Neuropathic pain (postherpetic neuralgia, diabetic peripheral neuropathy)', 'Focal (partial-onset) seizures (adjunct)', 'Restless legs syndrome (moderate-severe)', 'Alcohol use disorder (off-label)', 'Hot flashes (off-label)'],
+    indications: ['Trigeminal neuralgia (adjunct)', 'Neuropathic pain (postherpetic neuralgia, diabetic peripheral neuropathy)', 'Focal (partial-onset) seizures (adjunct)', 'Restless legs syndrome (moderate-severe)', 'Alcohol use disorder (off-label)', 'Hot flashes (off-label)'],
     dosing: [
+        {
+            indication: 'Trigeminal Neuralgia — adjunct',
+            regimen: '**START:** 300 mg PO qHS × 3 days.\n\n**TITRATE:** Increase by 300 mg every 3 days to **1800-3600 mg/day divided TID** based on response and tolerability.\n\n**ROLE:** Adjunct or alternative to [Carbamazepine](#/drug/carbamazepine/trigeminal neuralgia) (1L) or [Oxcarbazepine](#/drug/oxcarbazepine/trigeminal neuralgia) (2L). Preferred adjunct when sodium-channel agents cause sodium issues, cytopenias, or are not tolerated; also useful in pregnancy where CBZ/OXC are teratogenic.\n\n**ONSET:** Slower than CBZ; allow 2-4 weeks at target dose before declaring failure.\n\n**RENAL DOSING:** Entirely renally cleared — see Renal dosing adjustment below. Elderly TN patients commonly have eGFR <60 — dose accordingly to avoid neurotoxicity (sedation, ataxia, myoclonus).',
+        },
         {
             indication: 'Neuropathic pain (postherpetic neuralgia, DPN)',
             regimen: 'Day 1: 300 mg PO at bedtime. Day 2: 300 mg PO BID. Day 3: 300 mg PO TID. Then titrate up by 300 mg/day every 2–7 days based on response and tolerability. Target: 1800–3600 mg/day divided TID. Onset of analgesia: 1–2 weeks at therapeutic dose. Renal dose adjustment essential.',
@@ -11417,6 +11514,10 @@ const BACLOFEN = {
             indication: 'Pediatric spasticity',
             regimen: 'Age 2–7 yr: start 10–15 mg/day divided q8h, max 40 mg/day. Age ≥8 yr: max 60 mg/day. Titrate by 5–15 mg every 3 days.',
             weightCalc: { dosePerKg: 0.75, unit: 'mg', dailyDivided: 3, label: 'Pediatric initial divided dose' },
+        },
+        {
+            indication: 'Trigeminal Neuralgia — adjunct',
+            regimen: '**START:** 5 mg PO TID × 3 days.\n\n**TITRATE:** Increase by 5 mg per dose every 3 days as tolerated. Target **40-80 mg/day divided TID-QID**. Max 80 mg/day (some patients tolerate up to 120 mg/day under specialist care).\n\n**ROLE:** Adjunct to [Carbamazepine](#/drug/carbamazepine/trigeminal neuralgia) (1L) or [Oxcarbazepine](#/drug/oxcarbazepine/trigeminal neuralgia) (2L). Useful when sodium-channel agents alone are insufficient or when patient cannot tolerate them. May also be tried as alternative monotherapy in CBZ/OXC-intolerant patients.\n\n**CRITICAL — DO NOT ABRUPTLY DISCONTINUE.** Baclofen withdrawal can cause hyperthermia, rebound symptoms, hallucinations, seizures, rhabdomyolysis, multi-organ failure. Always taper over 1-2+ weeks.\n\n**RENAL DOSING:** See renal adjustment row — elderly TN patients commonly have eGFR <60. Failure to adjust causes encephalopathy.',
         },
         {
             indication: 'Renal dosing adjustment',
@@ -11958,6 +12059,295 @@ const ALBUMIN = {
         'Runyon BA. Management of adult patients with ascites due to cirrhosis: an update. Hepatology. 2009;49(6):2087-2107.',
     ],
 };
+const CARBAMAZEPINE = {
+    id: 'carbamazepine',
+    name: 'Carbamazepine (Tegretol)',
+    genericName: 'Carbamazepine',
+    drugClass: 'Sodium-channel blocker / anticonvulsant',
+    route: 'PO',
+    indications: ['Trigeminal neuralgia (first-line)', 'Focal seizures', 'Generalized tonic-clonic seizures', 'Bipolar disorder (acute mania, maintenance)'],
+    dosing: [
+        {
+            indication: 'Trigeminal Neuralgia — first-line (1L)',
+            regimen: '**START:** 100 mg PO BID.\n\n**TITRATE:** Increase by 100-200 mg every 3 days based on response and tolerability. Target **600-1200 mg/day divided BID-TID**. Some patients require up to 1600 mg/day.\n\n**EFFICACY:** NNT ~2 (Wiffen Cochrane 2014). Most effective drug for TN pain.\n\n**🚨 HLA-B\\*1502 SCREENING (FDA BOXED WARNING 2007):**\n• **MANDATORY before starting CBZ in patients of:** Han Chinese, Thai, Vietnamese, Filipino, Malay, Indonesian, or South Asian ancestry.\n• HLA-B\\*1502 positive → risk of **Stevens-Johnson syndrome / TEN** is dramatically increased.\n• If positive → use alternative ([Oxcarbazepine](#/drug/oxcarbazepine/trigeminal neuralgia) carries SAME risk — choose [Gabapentin](#/drug/gabapentin/trigeminal neuralgia), [Baclofen](#/drug/baclofen/trigeminal neuralgia), or [Lamotrigine](#/drug/lamotrigine/trigeminal neuralgia) instead).\n\n**HLA-A\\*3101** (European, Japanese ancestry) — increased risk of milder cutaneous reactions; routine testing not currently required but consider in concerning rash.\n\n**LAB MONITORING:**\n• Baseline: CBC, LFTs, sodium, CBZ level capability\n• During titration: CBC + LFTs at 2 weeks, monthly × 3 months, then every 6-12 months\n• CBZ level (target 4-12 mcg/mL) when stable, with breakthrough pain, or with toxicity symptoms\n• Sodium — CBZ causes SIADH/hyponatremia in ~10% (more common in elderly, female, low BMI)\n\n**🛑 IF HYPONATREMIA DEVELOPS: do NOT switch to oxcarbazepine** — oxcarbazepine causes MORE hyponatremia (15-30% vs ~10%). Stop CBZ, correct Na with fluid restriction ± hypertonic saline if symptomatic, switch to non-Na-lowering alt (gabapentin, baclofen, lamotrigine).\n\n**PREGNANCY:** Category D — neural tube defects, craniofacial abnormalities, developmental delay. AVOID unless benefit clearly outweighs risk. Document discussion of contraception in women of childbearing age.',
+        },
+        {
+            indication: 'Focal / Generalized seizures',
+            regimen: 'Start 200 mg PO BID, titrate by 200 mg/day weekly to 800-1200 mg/day divided BID-TID based on level and seizure control. Target level 4-12 mcg/mL.',
+        },
+        {
+            indication: 'Bipolar — acute mania',
+            regimen: 'Start 200 mg PO BID, titrate to 800-1600 mg/day divided BID-TID. Target level 6-12 mcg/mL.',
+        },
+    ],
+    contraindications: [
+        'HLA-B*1502 positive (in at-risk ancestry — see boxed warning)',
+        'Bone marrow suppression / history of CBZ-induced aplastic anemia, agranulocytosis',
+        'Concurrent MAOI use or within 14 days',
+        'Acute intermittent porphyria',
+        'AV block (CBZ can worsen)',
+        'Hypersensitivity to TCAs (cross-reactivity)',
+        'Pregnancy first trimester (relative — Category D)',
+        'Concurrent nefazodone, voriconazole (CYP3A4 interactions)',
+    ],
+    cautions: [
+        'Stevens-Johnson syndrome / TEN — risk highest in first 8 weeks; HLA-B*1502 testing in at-risk ancestry mandatory',
+        'Aplastic anemia / agranulocytosis (rare but life-threatening) — counsel patient to report sore throat, fever, easy bruising',
+        'SIADH / hyponatremia (~10%) — monitor sodium; symptoms confused with TN breakthrough',
+        'CYP3A4 inducer — reduces effectiveness of OCPs, warfarin, DOACs, many other drugs (auto-induction also reduces own level over first 3-4 weeks)',
+        'Hepatotoxicity — monitor LFTs',
+        'Hypothyroidism (long-term)',
+        'Vitamin D deficiency / osteomalacia (long-term inducer effect)',
+        'Sedation, dizziness, diplopia — usually titration-rate-related',
+        'Pregnancy: Category D — neural tube defects, craniofacial abnormalities',
+    ],
+    monitoring: 'HLA-B*1502 screening before starting (at-risk ancestry). Baseline + periodic CBC, LFTs, sodium, CBZ level. Symptom screening for rash, fever, sore throat at every visit during first 8 weeks.',
+    notes: 'First-line for TN per AAN/EFNS 2008 guidelines. NNT ~2 makes this the most effective TN drug despite the side-effect profile. Most patients see response within days to weeks at adequate dose. Auto-induction means the level achieved at week 1 will drop by weeks 3-4 — re-titrate based on level, not just starting dose. Monitor for the SIADH-induced hyponatremia that mimics TN breakthrough but is actually a drug side effect.',
+    citations: [
+        'Wiffen PJ, Derry S, Moore RA, Kalso EA. Carbamazepine for chronic neuropathic pain and fibromyalgia in adults. Cochrane Database Syst Rev. 2014;4:CD005451.',
+        'Cruccu G, Gronseth G, Alksne J, et al. AAN-EFNS guidelines on trigeminal neuralgia management. Neurology. 2008;71(15):1183-90.',
+        'FDA Drug Safety Communication. Information for Healthcare Professionals: Dangerous or Even Fatal Skin Reactions — Carbamazepine. December 2007.',
+        'Dong J, Cong Y, Lu D, Hong B. Carbamazepine and headache. J Headache Pain. 2005;6(2):70-72.',
+    ],
+};
+const OXCARBAZEPINE = {
+    id: 'oxcarbazepine',
+    name: 'Oxcarbazepine (Trileptal)',
+    genericName: 'Oxcarbazepine',
+    drugClass: 'Sodium-channel blocker / anticonvulsant (CBZ analog)',
+    route: 'PO',
+    indications: ['Trigeminal neuralgia (second-line)', 'Focal (partial-onset) seizures'],
+    dosing: [
+        {
+            indication: 'Trigeminal Neuralgia — second-line (2L)',
+            regimen: '**START:** 150 mg PO BID.\n\n**TITRATE:** Increase by 300 mg/day weekly to **1200 mg/day divided BID** (some patients require up to 1800 mg/day).\n\n**ROLE:** Second-line when [Carbamazepine](#/drug/carbamazepine/trigeminal neuralgia) is ineffective, not tolerated, or has caused drug-interaction issues (oxcarbazepine is a less potent CYP3A4 inducer).\n\n**🚨 HLA-B\\*1502 RISK CARRIES OVER:** Patients of Han Chinese, Thai, Vietnamese, Filipino, Malay ancestry who are HLA-B\\*1502 positive ALSO have increased SJS/TEN risk with oxcarbazepine. Do NOT switch from CBZ to OXC purely to avoid this risk.\n\n**🛑 HYPONATREMIA WARNING:** Oxcarbazepine causes more frequent and more severe hyponatremia than CBZ — **15-30% incidence vs CBZ ~10%**. If CBZ caused hyponatremia, do **NOT** switch to OXC — switch to non-Na-lowering alt ([Gabapentin](#/drug/gabapentin/trigeminal neuralgia), [Baclofen](#/drug/baclofen/trigeminal neuralgia), [Lamotrigine](#/drug/lamotrigine/trigeminal neuralgia)) with neurology input.\n\n**MONITORING:**\n• Baseline + periodic sodium (every 2 weeks during titration, then every 3-6 months)\n• Baseline CBC, LFTs (less monitoring than CBZ but still warranted)\n• Symptoms of hyponatremia: nausea, headache, lethargy, confusion (mimics TN breakthrough)\n\n**PREGNANCY:** Category C — fewer reported birth defects than CBZ but data limited.',
+        },
+        {
+            indication: 'Focal seizures',
+            regimen: 'Adults: 300 mg PO BID start, titrate by 600 mg/day weekly to 1200-2400 mg/day divided BID. Pediatric (4-16 yr): start 4-5 mg/kg/dose BID, titrate to 30-46 mg/kg/day divided BID.',
+            weightCalc: { dosePerKg: 30, unit: 'mg', dailyDivided: 2, label: 'Pediatric target dose' },
+        },
+    ],
+    contraindications: [
+        'Hypersensitivity to oxcarbazepine or carbamazepine (cross-reactivity ~25-30%)',
+        'HLA-B*1502 positive in at-risk ancestry (SJS/TEN risk)',
+        'History of CBZ-induced hyponatremia (worse with OXC)',
+    ],
+    cautions: [
+        'Hyponatremia 15-30% — much more common than CBZ; monitor sodium closely',
+        'SJS/TEN risk in HLA-B*1502 positive patients',
+        'CYP3A4 induction (less than CBZ but still clinically meaningful) — reduces OCP effectiveness, may affect warfarin, DOACs',
+        'Sedation, dizziness, diplopia',
+        'Cross-reactivity with CBZ ~25-30% — do not assume safe in CBZ-allergic patient',
+        'Pregnancy: Category C',
+    ],
+    monitoring: 'Sodium at baseline, every 2 weeks during titration, then every 3-6 months. Hyponatremia symptoms at every visit. CBC, LFTs less rigorously than CBZ but baseline + periodic.',
+    notes: 'Despite the keto- analog structure suggesting "safer than CBZ," oxcarbazepine causes MORE hyponatremia and SHARES the HLA-B*1502 SJS risk. The advantages over CBZ are: less potent CYP3A4 induction (fewer drug interactions), no auto-induction (more predictable dosing), and slightly less sedation in some patients. Switch from CBZ→OXC primarily for drug-interaction concerns, not for hyponatremia.',
+    citations: [
+        'Cruccu G, Gronseth G, Alksne J, et al. AAN-EFNS guidelines on trigeminal neuralgia management. Neurology. 2008;71(15):1183-90.',
+        'Berghuis B, de Haan GJ, van den Broek MP, et al. Carbamazepine- and oxcarbazepine-induced hyponatremia in people with epilepsy. Epilepsia. 2017;58(7):1227-1233.',
+        'Lim KS, Tan CT. Hyponatremia in oxcarbazepine therapy. Epilepsia. 2017;58(7):1234-1235.',
+    ],
+};
+const LAMOTRIGINE = {
+    id: 'lamotrigine',
+    name: 'Lamotrigine (Lamictal)',
+    genericName: 'Lamotrigine',
+    drugClass: 'Sodium-channel blocker / glutamate-release inhibitor / anticonvulsant',
+    route: 'PO',
+    indications: ['Trigeminal neuralgia (adjunct / refractory)', 'Bipolar disorder (maintenance)', 'Focal and generalized seizures'],
+    dosing: [
+        {
+            indication: 'Trigeminal Neuralgia — adjunct / refractory (4L)',
+            regimen: '**SLOW TITRATION MANDATORY** (SJS/TEN risk dose-related and titration-rate-related):\n\n• Weeks 1-2: **25 mg PO qHS**\n• Weeks 3-4: **50 mg PO qHS**\n• Week 5: **100 mg PO qHS**\n• Week 6: **150-200 mg/day** divided BID\n• Then titrate to effect — typical range **200-400 mg/day** divided BID.\n\n**🚨 IF ON VALPROATE:** Use HALF the doses above (valproate doubles lamotrigine half-life and SJS risk dramatically rises).\n\n**🚨 IF ON CARBAMAZEPINE OR OXCARBAZEPINE:** May need slightly faster titration / higher doses (CYP3A4 induction lowers level) — but do NOT skip the slow ladder.\n\n**ROLE:** Fourth-line adjunct or alternative for medically refractory TN, particularly when other agents not tolerated. Evidence from Zakrzewska Pain 1997 (small RCT) and AAN/EFNS 2008 update — modest benefit.\n\n**🛑 IF ANY RASH DEVELOPS: STOP LAMOTRIGINE IMMEDIATELY.** Even mild-appearing rash in first 2-8 weeks can be early Stevens-Johnson syndrome or DRESS. Refer to ED / dermatology same-day.\n\n**STARTING OVER:** If lamotrigine is interrupted ≥5 days, restart from the beginning of the titration ladder (do NOT resume at prior dose — receptor downregulation lost).',
+        },
+        {
+            indication: 'Bipolar — maintenance',
+            regimen: 'Same titration ladder as TN: 25 mg qHS × 2 wk → 50 mg × 2 wk → 100 mg × 1 wk → 200 mg/day target. Mood stabilization (especially depressive phase prevention).',
+        },
+        {
+            indication: 'Focal / Generalized seizures',
+            regimen: 'Same slow titration. Target 200-400 mg/day divided BID (monotherapy) or up to 700 mg/day (with enzyme inducer like CBZ). Half-dose if on valproate.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to lamotrigine',
+        'Prior lamotrigine-associated rash',
+    ],
+    cautions: [
+        '🚨 Stevens-Johnson syndrome / TEN — RISK IS DOSE-DEPENDENT AND TITRATION-RATE-DEPENDENT. Slow titration mandatory. Risk peaks in first 2-8 weeks. ANY rash = stop drug and evaluate.',
+        'DRESS syndrome — fever + rash + organ involvement (hepatitis, nephritis, hematologic abnormalities). Can be fatal.',
+        'Hemophagocytic lymphohistiocytosis (HLH) — rare but recognized FDA warning 2018.',
+        'Aseptic meningitis — rare; check for headache + meningeal signs + fever during initiation.',
+        'Drug interactions: Valproate DOUBLES lamotrigine level (use ½ dose). CBZ, OXC, phenytoin, phenobarbital LOWER level (may need higher dose). OCPs (especially estrogen-containing) lower level — anticipate seizure breakthrough or BTB.',
+        'If treatment interrupted ≥5 days, restart from beginning of titration ladder.',
+        'Pregnancy: Category C — lamotrigine level falls dramatically (~50%) in pregnancy due to increased glucuronidation; monitor levels and increase dose. Generally considered the safest of the older AEDs in pregnancy.',
+    ],
+    monitoring: 'Skin examination at every visit during titration and first 6 months. Counsel patient on rash symptoms (any new rash, mucosal involvement, blistering, fever, lymphadenopathy → ED). CBC, LFTs at baseline and periodically. Lamotrigine level not routinely needed but available when titration uncertain.',
+    notes: 'Lamotrigine is the safest of the older AEDs in pregnancy and a useful adjunct for refractory TN, but the SJS/TEN risk dictates slow titration. The "skipped doses" rule is critical — a patient who runs out for a week MUST restart from 25 mg/day, not resume at 200 mg. Counsel patients on this at every refill.',
+    citations: [
+        'Zakrzewska JM, Chaudhry Z, Nurmikko TJ, et al. Lamotrigine (Lamictal) in refractory trigeminal neuralgia: results from a double-blind placebo controlled crossover trial. Pain. 1997;73(2):223-30.',
+        'Cruccu G, Gronseth G, Alksne J, et al. AAN-EFNS guidelines on trigeminal neuralgia management. Neurology. 2008;71(15):1183-90.',
+        'FDA Drug Safety Communication: FDA warns of serious immune system reaction with seizure and mental health medicine lamotrigine. April 2018.',
+    ],
+};
+const SUMATRIPTAN = {
+    id: 'sumatriptan',
+    name: 'Sumatriptan (Imitrex)',
+    genericName: 'Sumatriptan succinate',
+    drugClass: 'Serotonin (5-HT 1B/1D) receptor agonist (triptan)',
+    route: 'SQ / Intranasal / PO',
+    indications: ['Cluster headache — acute (first-line)', 'Migraine — acute'],
+    dosing: [
+        {
+            indication: 'Cluster Headache — acute (first-line)',
+            regimen: '**6 mg SQ × 1.** May repeat once after ≥1 hour if a second attack occurs the same day. **Maximum 12 mg SQ in 24 hours.**\n\n**ONSET:** ≤15 min (74% response at 15 min per Ekbom NEJM 1991). The SQ route is preferred over IN/PO for cluster because attacks peak rapidly and PO/IN onset is too slow.\n\n**INTRANASAL alt:** **20 mg IN × 1**, may repeat ×1 after ≥2 h, max 40 mg/24h. Use when SQ unavailable, patient cannot self-inject, or repeated daily use is needed (the 4-mg autoinjector option is also reasonable).\n\n**DO NOT EXCEED daily max** — cluster patients often have multiple attacks/day. Once daily triptan max is reached, switch to O2 12-15 L/min via NRB, or [octreotide 100 mcg SQ](#/drug/octreotide/cluster headache acute), or wait for next interval.',
+        },
+        {
+            indication: 'Migraine — acute',
+            regimen: '**SQ:** 6 mg × 1, may repeat ×1 after ≥1 h, max 12 mg/24h.\n**IN:** 5-20 mg × 1, may repeat ×1 after ≥2 h, max 40 mg/24h.\n**PO:** 25-100 mg × 1, may repeat ×1 after ≥2 h, max 200 mg/24h.\n\nMost effective when given early in the attack (within 30-60 min of onset). 50 mg PO has better tolerability than 100 mg with similar efficacy in most patients.',
+        },
+    ],
+    contraindications: [
+        'CAD, ischemic heart disease, or coronary vasospasm history',
+        'Uncontrolled hypertension',
+        'Hemiplegic migraine, basilar migraine',
+        'Stroke or TIA within 6 months (vasoconstrictor)',
+        'Peripheral vascular disease',
+        'Ergot derivative use within 24 hours (DHE, ergotamine, methysergide)',
+        'Concurrent MAOI use or within 14 days',
+        'Severe hepatic impairment',
+        'Pregnancy — limited safety data; use only if clearly needed',
+    ],
+    cautions: [
+        'Serotonin syndrome with SSRIs, SNRIs, MAOIs, linezolid, lithium — FDA 2006 advisory; absolute risk low per Cochrane 2018 but warn patient',
+        'Chest tightness common (~40%) but rarely cardiac — counsel patients in advance',
+        'Medication-overuse headache if >10 days/month of triptan use',
+        'Pediatric use (<18 yo): IN approved age 12+; SQ not approved <18 yo',
+    ],
+    monitoring: 'BP before first dose if cardiovascular risk factors present. Response in 15-30 min for SQ; 30-60 min for IN/PO.',
+    notes: 'First-line acute abortive for cluster headache (alongside 100% O2). SQ route preferred due to rapid onset matching cluster attack tempo. Triptan + O2 frequently combined for the most rapid abortive response. Do NOT combine two triptans within 24h. Patients with frequent cluster attacks need both an abortive plan AND maintenance prophylaxis (verapamil ± lithium ± topiramate).',
+    citations: [
+        'Ekbom K, et al. Treatment of acute cluster headache with sumatriptan. N Engl J Med. 1991;325(5):322-6.',
+        'Robbins MS, et al. Treatment of cluster headache: The American Headache Society evidence-based guidelines. Headache. 2016;56(7):1093-1106.',
+        'Ailani J, et al. The American Headache Society Consensus Statement: Update on integrating new migraine treatments into clinical practice. Headache. 2021;61(7):1021-1039.',
+    ],
+};
+const ZOLMITRIPTAN = {
+    id: 'zolmitriptan',
+    name: 'Zolmitriptan (Zomig)',
+    genericName: 'Zolmitriptan',
+    drugClass: 'Serotonin (5-HT 1B/1D) receptor agonist (triptan)',
+    route: 'Intranasal / PO',
+    indications: ['Cluster headache — acute (alternative)', 'Migraine — acute'],
+    dosing: [
+        {
+            indication: 'Cluster Headache — acute (alternative)',
+            regimen: '**5 mg intranasal × 1**, may repeat ×1 after ≥2 hours, **max 10 mg/24h**.\n\n**ROLE:** Alternative when SQ sumatriptan unavailable, patient cannot self-inject, or cost/access issue. IN onset slower than SQ sumatriptan (~10-15 min vs 5-10 min). Response rate ~62% at 30 min (Cittadini Arch Neurol 2006) — inferior to SQ sumatriptan ~74%.\n\n**PO formulation NOT preferred for cluster** — onset too slow (30-60 min) for typical 30-90 min attack duration.',
+        },
+        {
+            indication: 'Migraine — acute',
+            regimen: '**PO:** 2.5 mg × 1 (may give 5 mg if attack severe); may repeat ×1 after ≥2 h, max 10 mg/24h.\n**IN:** 5 mg × 1, may repeat ×1 after ≥2 h, max 10 mg/24h.\n\nEffective for moderate-severe migraine. Similar efficacy to sumatriptan but slightly slower onset; some patients tolerate it better.',
+        },
+    ],
+    contraindications: [
+        'CAD, ischemic heart disease, coronary vasospasm history',
+        'Uncontrolled hypertension',
+        'Hemiplegic or basilar migraine',
+        'Stroke / TIA within 6 months',
+        'Peripheral vascular disease',
+        'Ergot derivative use within 24 hours',
+        'WPW or other accessory conduction disorders',
+        'Concurrent MAOI use or within 14 days',
+    ],
+    cautions: [
+        'Serotonin syndrome risk with SSRIs, SNRIs, MAOIs, linezolid, lithium',
+        'Hepatic impairment — reduce dose; severe impairment contraindicated',
+        'Medication-overuse headache risk',
+        'Pediatric: IN approved age 12+',
+    ],
+    monitoring: 'BP if cardiovascular risk factors. Response in 10-20 min for IN; 30-60 min for PO.',
+    notes: 'Intranasal zolmitriptan is a useful alternative when SQ sumatriptan is contraindicated, unavailable, or refused. The PO route is too slow for typical cluster attack duration and should be reserved for migraine. As with all triptans, do not combine with other triptans or ergots within 24h.',
+    citations: [
+        'Cittadini E, May A, Straube A, et al. Effectiveness of intranasal zolmitriptan in acute cluster headache: a randomized, placebo-controlled, double-blind crossover study. Arch Neurol. 2006;63(11):1537-42.',
+        'Rapoport AM, et al. Zolmitriptan nasal spray in the acute treatment of cluster headache: a double-blind study. Neurology. 2007;69(9):821-6.',
+    ],
+};
+const LITHIUM_CARBONATE = {
+    id: 'lithium-carbonate',
+    name: 'Lithium Carbonate',
+    genericName: 'Lithium carbonate',
+    drugClass: 'Mood stabilizer / Cluster headache prophylactic',
+    route: 'PO',
+    indications: ['Cluster headache — maintenance prophylaxis (alternative)', 'Chronic cluster headache'],
+    dosing: [
+        {
+            indication: 'Cluster Headache — maintenance prophylaxis (3L)',
+            regimen: '**START:** 300 mg PO BID (600 mg/day total).\n\n**TITRATE:** Adjust to serum lithium level **0.6-0.8 mEq/L** (lower than bipolar target range). Check level 5 days after dose change.\n\n**ROLE:** Third-line maintenance after verapamil failure or contraindication, especially for **chronic cluster** (>1 year without remission). Episodic cluster usually does not need lithium.\n\n**MONITORING (every dose change + every 3 months on stable dose):**\n• Serum lithium level\n• Renal function (creatinine, eGFR)\n• Thyroid (TSH, free T4) — hypothyroidism in ~20-30% long-term\n• Calcium (hyperparathyroidism in ~10%)\n• ECG if cardiac history\n\n**NARROW THERAPEUTIC WINDOW:** Toxicity begins at >1.2 mEq/L; severe at >2.5 mEq/L. Symptoms: tremor, ataxia, confusion, seizures, dysrhythmia.\n\n**DRUG INTERACTIONS THAT RAISE LEVEL:** Thiazides, ACE-I/ARB, NSAIDs (including indomethacin used for hemicrania), metronidazole, dehydration of any cause.',
+        },
+    ],
+    contraindications: [
+        'Significant renal impairment (eGFR <60)',
+        'Severe cardiovascular disease',
+        'Severe dehydration / volume depletion',
+        'Sodium depletion (low-sodium diet, diuretic-induced)',
+        'Pregnancy (especially 1st trimester — Ebstein anomaly risk)',
+        'Breastfeeding',
+    ],
+    cautions: [
+        'Narrow therapeutic window — toxicity at >1.2 mEq/L',
+        'Hypothyroidism / goiter (20-30% long-term)',
+        'Nephrogenic diabetes insipidus / chronic interstitial nephritis (long-term)',
+        'Tremor, GI upset, weight gain, cognitive blunting',
+        'Serotonin syndrome with triptans, SSRIs, SNRIs, MAOIs',
+        'Avoid NSAIDs (including indomethacin) — raises lithium level',
+    ],
+    monitoring: 'Lithium level 5 days after any dose change, then every 3 months. Renal function, TSH, calcium every 6 months. Check level any time toxicity suspected (tremor, ataxia, confusion).',
+    notes: 'For cluster, target a LOWER level (0.6-0.8) than for bipolar (0.8-1.2). Bussone Headache 1990 and Steiner J Neurol Sci 1997 support efficacy. Requires close monitoring and a primary-care or neurology partner for ongoing management — not a drug to start in the ED and send home without follow-up.',
+    citations: [
+        'Bussone G, Leone M, Peccarisi C, et al. Double blind comparison of lithium and verapamil in cluster headache prophylaxis. Headache. 1990;30(7):411-7.',
+        'Steiner TJ, Hering R, Couturier EG, et al. Double-blind placebo-controlled trial of lithium in episodic cluster headache. Cephalalgia. 1997;17(6):673-5.',
+        'Robbins MS, et al. Treatment of cluster headache: The American Headache Society evidence-based guidelines. Headache. 2016;56(7):1093-1106.',
+    ],
+};
+const TOPIRAMATE = {
+    id: 'topiramate',
+    name: 'Topiramate (Topamax)',
+    genericName: 'Topiramate',
+    drugClass: 'Anticonvulsant / Migraine and cluster prophylactic',
+    route: 'PO',
+    indications: ['Cluster headache — maintenance prophylaxis (alternative)', 'Migraine prophylaxis', 'Seizure (focal / generalized)'],
+    dosing: [
+        {
+            indication: 'Cluster Headache — maintenance prophylaxis (alternative)',
+            regimen: '**START:** 25 mg PO qHS × 1 week.\n\n**TITRATE:** Increase by 25 mg/week to **100 mg/day divided BID** (50 mg BID). May increase further to 200 mg/day if tolerated and needed.\n\n**ROLE:** Alternative when verapamil contraindicated (heart block, severe hypotension) or ineffective. May be combined with verapamil for refractory chronic cluster. Slower onset than verapamil — allow 2-4 weeks at target dose before declaring failure.\n\n**SIDE EFFECT MONITORING:**\n• Paresthesias (very common — usually resolve)\n• Cognitive slowing / word-finding difficulty ("Dopamax")\n• Kidney stones (drink ≥2 L/day water)\n• Metabolic acidosis (check serum bicarb at baseline + after titration)\n• Acute angle-closure glaucoma (rare but vision-threatening — counsel)\n• Weight loss / decreased appetite\n• Oligohidrosis + hyperthermia in children\n\n**TERATOGEN:** Cleft lip/palate risk in 1st trimester. Reliable contraception required for women of childbearing age.',
+        },
+        {
+            indication: 'Migraine prophylaxis',
+            regimen: 'Start 25 mg PO qHS × 1 week, titrate by 25 mg/week to target **50-100 mg/day divided BID**. Allow 2-3 months at target dose to assess efficacy. Most patients need at least 100 mg/day for benefit.',
+        },
+    ],
+    contraindications: [
+        'Hypersensitivity to topiramate',
+        'Recent metabolic acidosis (until corrected)',
+        'Pregnancy (Category D — cleft lip/palate, low birth weight)',
+    ],
+    cautions: [
+        'Cognitive slowing — counsel patient before starting',
+        'Kidney stones (especially with carbonic anhydrase inhibitor co-therapy)',
+        'Metabolic acidosis — check serum bicarbonate baseline + during titration',
+        'Acute myopia + angle-closure glaucoma — discontinue immediately and refer to ophthalmology',
+        'Oligohidrosis + hyperthermia in pediatric patients',
+        'Reliable contraception required in women of childbearing age',
+        'Reduces effectiveness of OCPs at doses >200 mg/day',
+    ],
+    monitoring: 'Serum bicarbonate at baseline and 1-3 months into titration. Renal function. Weight. Cognitive function (subjective).',
+    notes: 'Reasonable alternative or add-on to verapamil for cluster prophylaxis (Láinez Headache 2003 open-label data; no large RCT). Allow adequate titration time and monitor for the dose-limiting cognitive side effects, which are the most common reason for discontinuation.',
+    citations: [
+        'Láinez MJ, Pascual J, Pascual AM, et al. Topiramate in the prophylactic treatment of cluster headache. Headache. 2003;43(7):784-9.',
+        'Robbins MS, et al. Treatment of cluster headache: The American Headache Society evidence-based guidelines. Headache. 2016;56(7):1093-1106.',
+    ],
+};
 export const ALL_DRUGS = [
     ACAMPROSATE,
     ACETAMINOPHEN,
@@ -11995,6 +12385,7 @@ export const ALL_DRUGS = [
     BERINERT,
     BUDESONIDE_NEB,
     BUMETANIDE,
+    BUPIVACAINE,
     BUPRENORPHINE,
     CALCITONIN,
     CALCIUM_CHLORIDE,
@@ -12254,6 +12645,13 @@ export const ALL_DRUGS = [
     TERLIPRESSIN,
     TETANUS_IMMUNE_GLOBULIN,
     TIZANIDINE,
+    SUMATRIPTAN,
+    ZOLMITRIPTAN,
+    LITHIUM_CARBONATE,
+    TOPIRAMATE,
+    CARBAMAZEPINE,
+    OXCARBAZEPINE,
+    LAMOTRIGINE,
 ];
 const DRUG_MAP = {};
 for (const drug of ALL_DRUGS) {
@@ -12294,6 +12692,7 @@ const NAME_TO_ID = [
     [/berinert|c1.*esterase.*inhibitor.*human/i, 'berinert'],
     [/budesonide|pulmicort/i, 'budesonide-neb'],
     [/bumetanide|bumex/i, 'bumetanide'],
+    [/bupivacaine|marcaine|sensorcaine/i, 'bupivacaine'],
     [/benzathine.*penicillin/i, 'benzathine-penicillin'],
     [/benztropine|cogentin/i, 'benztropine'],
     [/calcium\s*chloride/i, 'calcium-chloride'],
@@ -12457,6 +12856,13 @@ const NAME_TO_ID = [
     [/whole\s*blood|LTOWB/i, 'whole-blood'],
     [/ziprasidone|geodon/i, 'ziprasidone'],
     [/pip.?tazo|piptazo|zosyn|piperacillin.?tazobactam/i, 'piperacillin-tazobactam'],
+    [/sumatriptan|imitrex/i, 'sumatriptan'],
+    [/zolmitriptan|zomig/i, 'zolmitriptan'],
+    [/lithium\s*carbonate|lithobid|eskalith|^lithium$/i, 'lithium-carbonate'],
+    [/topiramate|topamax|trokendi|qudexy/i, 'topiramate'],
+    [/carbamazepine|tegretol|carbatrol|equetro/i, 'carbamazepine'],
+    [/oxcarbazepine|trileptal|oxtellar/i, 'oxcarbazepine'],
+    [/lamotrigine|lamictal/i, 'lamotrigine'],
 ];
 /** Try to find a drug store ID from a drug name string. Returns undefined if no match. */
 export function findDrugIdByName(name) {

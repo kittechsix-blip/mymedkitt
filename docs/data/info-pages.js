@@ -278,104 +278,6 @@ const STROKE_CONTRAINDICATIONS_PAGE = {
     ],
 };
 // -------------------------------------------------------------------
-// Stroke Treatment Windows
-// -------------------------------------------------------------------
-const STROKE_TREATMENT_WINDOWS_PAGE = {
-    id: 'stroke-treatment-windows',
-    title: 'Ischemic Stroke Treatment Windows',
-    subtitle: 'IV thrombolysis, extended-window selection, and thrombectomy',
-    sections: [
-        {
-            heading: 'Clock Rules First',
-            body: '**Use last-known-well (LKW), not time of symptom discovery.** If the patient woke up with symptoms, LKW is when they were last seen normal.\n\n**Do not let the clock hide the anatomy.** A patient outside the classic IV thrombolysis window can still be an EVT candidate if CTA shows LVO and imaging/clinical profile is favorable.\n\n**Do not delay standard-window IV thrombolysis for perfusion imaging** when NCCT excludes hemorrhage and the patient is otherwise eligible. Get CTA/CTP in parallel when LVO is possible.',
-        },
-        {
-            heading: 'Window Map - ED Action',
-            body: '**0-4.5 h:** NCCT excludes hemorrhage -> IV thrombolysis if disabling deficit and no contraindication. CTA for LVO in parallel.\n\n**Wake-up / unknown onset:** MRI DWI-FLAIR mismatch or CT/MR perfusion mismatch can identify selected IVT candidates; involve stroke team early.\n\n**4.5-9 h:** No routine blind IVT. Advanced imaging-selected thrombolysis may be reasonable if salvageable tissue and acceptable bleeding risk.\n\n**0-6 h anterior LVO:** EVT for eligible ICA/M1 and selected proximal targets; give IVT if eligible, but do not delay EVT.\n\n**6-24 h anterior LVO:** EVT if favorable clinical-core/perfusion profile; includes selected large-core patients under modern protocols.\n\n**0-24 h basilar LVO:** Selected basilar occlusions may benefit from EVT; activate stroke/neurointerventional team.\n\n**4.5-24 h LVO, EVT unavailable:** Expert-directed IVT may be considered when salvageable penumbra is present and EVT cannot be provided. Not routine late tPA/TNK.\n\n**>24 h:** Usually no routine reperfusion. Admit, treat complications, secondary prevention, and consult stroke for rare exceptions.',
-        },
-        {
-            heading: '0-4.5 h - Standard IV Thrombolysis',
-            body: '**Candidate:** disabling ischemic stroke, measurable deficit, hemorrhage excluded, BP controlled <185/110, and no major contraindication.\n\n**Agents:**\n• [Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg IV bolus, max 25 mg, where adopted by local protocol.\n• [Alteplase](#/drug/alteplase/stroke) 0.9 mg/kg IV, max 90 mg; 10% bolus, then remainder over 60 min.\n\n**Key ED rule:** fingerstick glucose is the only lab that universally precedes treatment. Do not wait for CBC/coags/chemistry unless anticoagulant use, bleeding history, thrombocytopenia concern, or another reason to suspect abnormal results.',
-        },
-        {
-            heading: 'Wake-Up / Unknown-Onset Stroke',
-            body: '**Treat clock time as LKW, but use imaging biology when available.**\n\nIV thrombolysis may be considered when imaging suggests recent infarct biology:\n• MRI DWI-positive / FLAIR-negative lesion.\n• CT or MR perfusion mismatch showing salvageable tissue.\n\nThis is not the same as treating every wake-up stroke. It requires stroke-team protocol, hemorrhage exclusion, deficit severity assessment, BP control, and contraindication screening.',
-        },
-        {
-            heading: '4.5-9 h - Imaging-Selected IVT',
-            body: '**Do not give thrombolysis solely because the patient is within 9 hours.** The extended IVT pathway is imaging-selected.\n\nTypical selection concepts:\n• Small-to-moderate ischemic core.\n• Clinically meaningful salvageable penumbra.\n• No hemorrhage or large completed infarct.\n• Disabling deficit where benefit justifies hemorrhage risk.\n\nEvidence supports selected use with perfusion or MRI mismatch; apply through local stroke protocol/stroke specialist.',
-        },
-        {
-            heading: '4.5-24 h - Late IVT Is Narrow',
-            body: 'Current guidance recognizes a narrow selected group: AIS due to LVO with salvageable penumbra who cannot receive EVT may benefit from expert-directed IV thrombolysis.\n\n**Practical ED interpretation:** this is not a routine late-thrombolysis pathway. It is a stroke-team decision after CTA/perfusion imaging, and it should not delay transfer for EVT when EVT is available.',
-        },
-        {
-            heading: 'Mechanical Thrombectomy Windows',
-            body: '**0-6 h anterior circulation LVO:** EVT is time-critical for eligible ICA/M1 and selected proximal MCA occlusions. CTA should be obtained rapidly when LVO is suspected.\n\n**6-24 h anterior circulation LVO:** EVT is recommended for selected patients with favorable imaging/clinical profile. Modern evidence also supports selected large-core patients when benefit outweighs risk.\n\n**Basilar artery occlusion:** Selected posterior circulation LVO patients may benefit from EVT up to 24 h. Do not dismiss basilar occlusion because the patient is outside 6 h.',
-        },
-        {
-            heading: 'Stop Points / Common Errors',
-            body: '• Do not use symptom discovery as onset when LKW is earlier.\n• Do not deny EVT because IV thrombolysis is contraindicated.\n• Do not delay EVT to finish an alteplase infusion.\n• Do not delay standard 0-4.5 h IVT for perfusion imaging if NCCT excludes hemorrhage and patient is otherwise eligible.\n• Do not give antiplatelet/anticoagulant during the first 24 h after IVT unless stroke specialist directs otherwise.\n• Do not treat a non-disabling mimic with reperfusion therapy without clear stroke diagnosis and risk-benefit discussion.',
-        },
-    ],
-    citations: [
-        { num: 1, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. 2026. doi:10.1161/STR.0000000000000513.' },
-        { num: 2, text: 'Berge E, Whiteley W, Audebert H, et al. European Stroke Organisation guidelines on intravenous thrombolysis for acute ischaemic stroke. Eur Stroke J. 2021;6(1):I-LXII.' },
-        { num: 3, text: 'Ma H, Campbell BCV, Parsons MW, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke. N Engl J Med. 2019;380:1795-1803.' },
-        { num: 4, text: 'Nogueira RG, Jadhav AP, Haussen DC, et al. Thrombectomy 6 to 24 Hours after Stroke with a Mismatch between Deficit and Infarct. N Engl J Med. 2018;378:11-21.' },
-        { num: 5, text: 'Albers GW, Marks MP, Kemp S, et al. Thrombectomy for Stroke at 6 to 16 Hours with Selection by Perfusion Imaging. N Engl J Med. 2018;378:708-718.' },
-        { num: 6, text: 'Sarraj A, Hassan AE, Abraham MG, et al. Trial of Endovascular Thrombectomy for Large Ischemic Strokes. N Engl J Med. 2023;388:1259-1271.' },
-        { num: 7, text: 'Tao C, Nogueira RG, Zhu Y, et al. Trial of Endovascular Treatment of Acute Basilar-Artery Occlusion. N Engl J Med. 2022;387:1361-1372.' },
-        { num: 8, text: 'Jovin TG, Li C, Wu L, et al. Trial of Thrombectomy 6 to 24 Hours after Stroke Due to Basilar-Artery Occlusion. N Engl J Med. 2022;387:1373-1384.' },
-        { num: 9, text: 'TIMELESS Investigators. Tenecteplase for Stroke at 4.5 to 24 Hours with Perfusion-Imaging Selection. N Engl J Med. 2024;390:701-711.' },
-        { num: 10, text: 'Xiong Y, Campbell BCV, Schwamm LH, et al. Tenecteplase for Ischemic Stroke at 4.5 to 24 Hours without Thrombectomy. N Engl J Med. 2024;391:203-212.' },
-        { num: 11, text: 'Farkas J. Acute ischemic stroke. Internet Book of Critical Care / EMCrit Project. Updated periodically; accessed May 2026.' },
-    ],
-};
-// -------------------------------------------------------------------
-// Stroke IVT Imaging Criteria
-// -------------------------------------------------------------------
-const STROKE_IVT_IMAGING_CRITERIA_PAGE = {
-    id: 'stroke-ivt-imaging-criteria',
-    title: 'Imaging IVT Criteria',
-    subtitle: 'MRI DWI/FLAIR mismatch and CT/MR perfusion penumbra',
-    sections: [
-        {
-            heading: 'When This Tool Matters',
-            body: '**Do not use advanced imaging to slow down standard-window IVT.** If the patient is within 0-4.5 h from last-known-well, has a disabling deficit, and NCCT excludes hemorrhage, start IVT if otherwise eligible.\n\nUse imaging selection when the clock is uncertain or extended:\n• Wake-up / unknown-onset stroke.\n• Known onset 4.5-9 h.\n• Selected 4.5-24 h LVO patients when EVT is unavailable/not feasible and stroke team is directing care.\n\nThe question is: **does imaging show recent infarct biology or salvageable tissue?**',
-        },
-        {
-            heading: 'MRI DWI/FLAIR Mismatch',
-            body: '**Positive pattern:** DWI shows an acute ischemic lesion, but FLAIR shows no matching hyperintensity in that same region.\n\n**Why it works:** DWI becomes positive within minutes of ischemia. FLAIR signal usually lags behind and often appears several hours later. A DWI-positive / FLAIR-negative lesion is therefore used as a tissue-clock marker suggesting recent onset, roughly compatible with the 4.5 h IVT window.\n\n**Practical criteria:**\n• DWI lesion is visible and matches the deficit.\n• No clear corresponding FLAIR hyperintensity.\n• Lesion is not a large completed infarct.\n• No hemorrhage, mass lesion, or mimic explaining symptoms.\n• Patient still has a disabling deficit and no IVT contraindication.',
-        },
-        {
-            heading: 'CT/MR Perfusion Penumbra',
-            body: '**Penumbra means tissue at risk but not yet dead.** Perfusion imaging separates an ischemic core from delayed but potentially salvageable tissue.\n\nCommon automated thresholds used in EXTEND/ESO-style selection:\n• **Core:** rCBF <30% on CT perfusion, or ADC <620 micrometers squared/sec on diffusion MRI.\n• **Hypoperfused tissue:** Tmax >6 seconds on CT or MR perfusion.\n• **Mismatch / penumbra:** hypoperfused tissue volume minus core volume.\n• **Favorable mismatch:** core <70 mL, mismatch ratio >1.2, and mismatch volume >10 mL.\n\nLater LVO/no-EVT thrombolysis trials often used stricter automated mismatch thresholds, such as ratio >1.8, penumbra volume >15 mL, and core <70 mL.',
-        },
-        {
-            heading: 'Timing: What Each Modality Sees',
-            body: '**Noncontrast CT:** fastest hemorrhage exclusion. Early ischemia can be subtle or absent in the first hours; frank hypodensity suggests more established infarct.\n\n**DWI MRI:** usually detects acute ischemia within minutes. It is very sensitive early, including when CT is still normal.\n\n**FLAIR MRI:** often becomes visibly abnormal after several hours. FLAIR positivity means the lesion may be older, but timing is variable by lesion size, location, scanner, and patient factors.\n\n**CT/MR perfusion:** can show core/penumbra physiology early and is most useful when the time window is extended or uncertain. It should not replace rapid NCCT for hemorrhage exclusion.',
-        },
-        {
-            heading: 'Use These Findings Safely',
-            body: '• If imaging shows large core/no mismatch, do not force IVT just because the patient is close to a window.\n• If CTA shows LVO, activate EVT pathway even if IVT is contraindicated.\n• If standard-window IVT is otherwise clear, do not wait for perfusion maps.\n• Poor bolus timing, motion, severe chronic stenosis, and bad automated segmentation can mislabel core or penumbra.\n• Posterior circulation and small infarcts may be harder to time by FLAIR.\n• Always pair imaging with deficit severity, BP, anticoagulant history, glucose, and contraindication screen.',
-        },
-        {
-            heading: 'Documentation Phrase',
-            body: 'Example: "Extended/unknown-onset IVT considered using tissue-based imaging. MRI shows DWI-positive lesion without corresponding FLAIR hyperintensity / CTP shows favorable core-penumbra mismatch with core <70 mL, mismatch ratio >1.2, mismatch volume >10 mL. Hemorrhage excluded, disabling deficit persists, BP controlled, contraindication screen reviewed with stroke team."',
-        },
-    ],
-    citations: [
-        { num: 1, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. 2026. doi:10.1161/STR.0000000000000513.' },
-        { num: 2, text: 'Thomalla G, Simonsen CZ, Boutitie F, et al. MRI-Guided Thrombolysis for Stroke with Unknown Time of Onset. N Engl J Med. 2018;379:611-622.' },
-        { num: 3, text: 'Ma H, Campbell BCV, Parsons MW, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke. N Engl J Med. 2019;380:1795-1803.' },
-        { num: 4, text: 'Berge E, Whiteley W, Audebert H, et al. European Stroke Organisation guidelines on intravenous thrombolysis for acute ischaemic stroke. Eur Stroke J. 2021;6(1):I-LXII.' },
-        { num: 5, text: 'TIMELESS Investigators. Tenecteplase for Stroke at 4.5 to 24 Hours with Perfusion-Imaging Selection. N Engl J Med. 2024;390:701-711.' },
-        { num: 6, text: 'Xiong Y, Campbell BCV, Schwamm LH, et al. Tenecteplase for Ischemic Stroke at 4.5 to 24 Hours without Thrombectomy. N Engl J Med. 2024;391:203-212.' },
-        { num: 7, text: 'Amin HP, Madsen TE, Bravata DM, et al. Diagnosis, Workup, Risk Reduction of TIA in the ED: AHA Scientific Statement. Stroke. 2023;54:e109-e121.' },
-    ],
-};
-// -------------------------------------------------------------------
 // Stroke Imaging: CT vs MRI
 // -------------------------------------------------------------------
 const STROKE_IMAGING_PAGE = {
@@ -1777,7 +1679,7 @@ const STROKE_SUMMARY = {
         },
         {
             heading: '3. Extended Window + EVT',
-            body: '• [Treatment windows quick map](#/info/stroke-treatment-windows)\n• [4.5–9h → perfusion imaging for IVT eligibility](#/node/stroke-extended-ivt)\n• [LVO on CTA → activate neurointerventional team for EVT](#/node/stroke-evt-eligible)\n• [EVT window up to 24h with LVO + favorable imaging/clinical profile](#/node/stroke-evt-window)',
+            body: '• [4.5–9h → perfusion imaging for IVT eligibility (EXTEND criteria)](#/node/stroke-extended-ivt)\n• [LVO on CTA → activate neurointerventional team for EVT](#/node/stroke-evt-eligible)\n• [EVT window up to 24h with LVO + favorable perfusion (DAWN/DEFUSE-3)](#/node/stroke-evt-window)',
         },
         {
             heading: '4. Minor Stroke (NIHSS 0–5)',
@@ -3193,55 +3095,6 @@ const AUB_DISCHARGE = {
 // -------------------------------------------------------------------
 // Status Epilepticus
 // -------------------------------------------------------------------
-const SE_RX_FLOW = {
-    id: 'se-rx-flow',
-    title: 'Seizure Rx Flow',
-    subtitle: 'First-line, second-line, refractory, and cause-specific rescue',
-    sections: [
-        {
-            heading: '0-5 Min: Stabilize + Find Reversible Triggers',
-            body: '**Treat convulsive seizure activity lasting >=5 minutes as status epilepticus.** Start airway positioning, suction, oxygen, monitor, IV/IO access, and a visible seizure clock.\n\n**Do immediately, in parallel:**\n• Fingerstick glucose; give dextrose if low or if glucose cannot be checked quickly.\n• Check sodium/electrolytes as soon as blood is available.\n• Ask about pregnancy/postpartum, TB meds/isoniazid, withdrawal, bupropion/TCA/sympathomimetics, head trauma, and missed antiseizure meds.\n• Do not wait for labs before giving a first-line benzodiazepine.',
-        },
-        {
-            heading: '1st Line: Benzodiazepine, Full Dose',
-            body: '**IV access:** [Lorazepam](#/drug/lorazepam/status epilepticus) **0.1 mg/kg IV**, max **4 mg/dose**, repeat once in 5 minutes if still seizing.\n\n**No IV/IO yet:** [Midazolam](#/drug/midazolam/status epilepticus im) **10 mg IM** adult, or **0.2 mg/kg IM/IN** max 10 mg.\n\n**Diazepam fallback:** 10 mg IV, repeat q5-10 min to max 30 mg, or rectal 0.2-0.5 mg/kg max 20 mg.\n\n**Do not underdose.** Adequate benzodiazepine treatment is less dangerous than ongoing status; persistent seizure drives acidosis, aspiration, hyperthermia, rhabdo, and neuronal injury.',
-        },
-        {
-            heading: '2nd Line: Load an Antiseizure Medication',
-            body: '**Give within 5-10 minutes of benzodiazepine failure.** Do not wait to see if the seizure "settles out."\n\nCommon ED choices:\n• [Levetiracetam](#/drug/levetiracetam/status epilepticus) **60 mg/kg IV**, max **4.5 g**. Good default; few interactions.\n• [Valproate](#/drug/valproate/status epilepticus) **40 mg/kg IV**, max **3 g**. Avoid pregnancy, liver failure, thrombocytopenia, known mitochondrial/urea-cycle disorder.\n• [Fosphenytoin](#/drug/fosphenytoin/status epilepticus) **20 mg PE/kg IV**, max **1500 mg PE**. Requires cardiac/BP monitoring; avoid significant conduction disease and many toxin/withdrawal seizures.\n• [Phenobarbital](#/drug/phenobarbital/status epilepticus) **15-20 mg/kg IV**, max **2 g**. Useful for alcohol/sedative withdrawal or when other agents unavailable; prepare airway/pressors.\n\nESETT supports levetiracetam, valproate, and fosphenytoin as similarly effective for benzodiazepine-refractory convulsive SE; choose by contraindications.',
-        },
-        {
-            heading: 'EMCrit 2025 Add-On: Early Ketamine Bridge',
-            body: '**EMCrit/IBCC emphasizes early ketamine as a seizure-lysis bridge while maintenance ASM is loading.** This is an expert-resuscitation approach, not a universal guideline mandate.\n\nReasonable adult ED approach when generalized convulsive SE continues after benzodiazepine and pharmacy delay/airway concern exists:\n• [Ketamine](#/drug/ketamine/status epilepticus) **100 mg IV slow push** as a practical adult dose, or **1-2 mg/kg IV** by local protocol.\n• If no IV and seizure remains uncontrolled, some experts consider **ketamine ~3 mg/kg IM** while access is obtained.\n\nKetamine does not replace the second-line antiseizure medication. It buys time and may reduce the need for a rushed intubation, but ongoing seizure, hypoxia, aspiration risk, or refractory course still requires airway/ICU escalation.',
-        },
-        {
-            heading: '3rd Line: Refractory SE / Neurolytic Intubation',
-            body: '**Refractory SE = benzodiazepine + adequate second-line ASM failed.** Activate neurology/ICU, prepare intubation, vasopressors, and continuous EEG.\n\nCommon infusion options after airway control:\n• [Propofol](#/drug/propofol/refractory status epilepticus) load **1-2 mg/kg**, then **30-200 mcg/kg/min**; monitor BP, triglycerides, CK, lactate, PRIS risk.\n• [Midazolam](#/drug/midazolam/refractory status epilepticus) load **0.2 mg/kg**, then **0.05-2 mg/kg/hr**; less hypotension, more accumulation.\n• [Ketamine](#/drug/ketamine/refractory status epilepticus) load **0.5-3 mg/kg**, then **0.1-5 mg/kg/hr**; NMDA pathway, often hemodynamically favorable.\n• Pentobarbital coma is neuro-ICU level rescue.\n\nIf paralyzing, use the shortest effective paralysis and get EEG. Paralysis hides motor seizures; it does not stop cortical seizure activity.',
-        },
-        {
-            heading: 'Cause-Specific Rescue: Do Not Miss These',
-            body: '**Hypoglycemia:** D50W **25 g IV** adult, or D10W **2-5 mL/kg** pediatric. Give [Thiamine](#/drug/thiamine/status epilepticus) **100-500 mg IV** if alcohol use, malnutrition, bariatric surgery, hyperemesis, or poor history; do not delay dextrose.\n\n**Hyponatremic seizure:** [3% hypertonic saline](#/drug/hypertonic-saline/severe symptomatic) **100-150 mL IV bolus over 10-20 min**, repeat up to 2 times for ongoing severe symptoms. Target initial Na rise **4-6 mEq/L**, then slow down and monitor q2h.\n\n**Eclampsia / pregnancy >20 wk / postpartum seizure:** [Magnesium sulfate](#/drug/magnesium-sulfate/eclampsia) **4-6 g IV load over 15-20 min**, then **1-2 g/hr**. Treat severe BP and call OB. If unclear, give magnesium while evaluating.\n\n**INH overdose or TB meds + refractory seizure/acidosis:** [Pyridoxine](#/drug/pyridoxine/inh toxicity) gram-for-gram to INH ingestion, or **5 g IV empiric** if unknown. Call poison center. Standard ASMs often fail until B6 is given.',
-        },
-        {
-            heading: 'Kitchen Sink for the Undifferentiated Bad Seizure',
-            body: 'Use when the patient is still seizing or deeply altered and the cause is unclear:\n\n• Benzodiazepine full dose, then second-line ASM immediately.\n• Glucose now if low, borderline, or cannot check rapidly.\n• Thiamine 100-500 mg IV if any malnutrition/alcohol risk or unknown history.\n• 3% saline bolus if Na is severely low or hyponatremic seizure is plausible.\n• Magnesium sulfate if pregnant/postpartum or eclampsia cannot be excluded.\n• Pyridoxine 5 g IV if INH/TB meds, refractory seizure + severe acidosis, or unknown ingestion with classic tox pattern.\n• Correct severe hypocalcemia/hypomagnesemia.\n• Treat hyperthermia, acidosis, rhabdomyolysis, hypoxia, and shock.\n• Avoid phenytoin/fosphenytoin for many toxin/withdrawal seizures; favor benzodiazepines, phenobarbital, propofol, or ketamine based on toxidrome and airway.',
-        },
-        {
-            heading: 'Stop Points',
-            body: '• Do not give repeated tiny benzodiazepine doses; give full doses and escalate.\n• Do not wait 20-30 minutes for pharmacy if convulsive SE continues; prepare airway and consider ketamine/propofol pathway.\n• Do not intubate and paralyze without a plan for EEG or seizure-suppressing sedation.\n• Do not miss BAO mimic; check pupils/gaze/skew/doll eyes before anchoring on refractory SE.\n• Do not forget maintenance ASM after benzodiazepine seizure termination; recurrence risk remains high.',
-        },
-    ],
-    citations: [
-        { num: 1, text: 'Farkas J. Status Epilepticus. Internet Book of Critical Care / EMCrit Project. Updated Apr 15, 2025.' },
-        { num: 2, text: 'EMCrit 403. What’s the Status of Status — Status Epilepticus 2025 with PulmCrit. EMCrit Project. 2025.' },
-        { num: 3, text: 'Glauser T, Shinnar S, Gloss D, et al. Evidence-Based Guideline: Treatment of Convulsive Status Epilepticus in Children and Adults. Epilepsy Curr. 2016;16(1):48-61.' },
-        { num: 4, text: 'Brophy GM, Bell R, Claassen J, et al. Guidelines for the Evaluation and Management of Status Epilepticus. Neurocrit Care. 2012;17(1):3-23.' },
-        { num: 5, text: 'Kapur J, Elm J, Chamberlain JM, et al. Randomized Trial of Three Anticonvulsant Medications for Status Epilepticus. N Engl J Med. 2019;381:2103-2113.' },
-        { num: 6, text: 'Verbalis JG, Goldsmith SR, Greenberg A, et al. Diagnosis, Evaluation, and Treatment of Hyponatremia: Expert Panel Recommendations. Am J Med. 2013;126:S1-S42.' },
-        { num: 7, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020;135:e237-e260.' },
-        { num: 8, text: 'Wason S, Lacouture PG, Lovejoy FH Jr. Single High-Dose Pyridoxine Treatment for Isoniazid Overdose. JAMA. 1981;246(10):1102-1104.' },
-    ],
-};
 const SE_SUMMARY = {
     id: 'se-summary',
     title: 'Status Epilepticus Steps Summary',
@@ -22180,6 +22033,207 @@ const PARA_ALBUMIN_PAGE = {
         { num: 1, text: 'Biggins SW, Angeli P, Garcia-Tsao G, et al. Hepatology. 2021;74(2):1014-1048.' },
     ],
 };
+const ONB_STEPS_PAGE = {
+    id: 'onb-steps',
+    title: 'Occipital Nerve Block — Steps Summary',
+    subtitle: 'GON ± LON, bedside procedure',
+    sections: [
+        {
+            body: '1. Confirm indication: cluster (acute or bridge), occipital neuralgia, cervicogenic, post-traumatic, or refractory status migrainosus. Red flags ruled out via Headache Hub first.\n2. Pre-procedure: consent, allergy check, anticoag status, IV access if vasovagal-prone. No skin infection at site. No steroid in pregnancy.\n3. Position patient seated head-down on pillow (or prone if cluster). Identify inion + mastoid; mark 1/3 distance along superior nuchal line. Palpate occipital artery; mark GON 1-2 cm MEDIAL to artery pulse.\n4. Prep with chlorhexidine. Draw 2-3 mL bupivacaine 0.5% PLAIN (or lidocaine alt) into 3 mL syringe with 25-27 ga 1-1.5 inch needle. Steroid adjunct (methylpred 40 mg or dex 4 mg) ONLY for cervicogenic/hemicrania continua.\n5. Insert needle perpendicular to skull; advance to bone contact; withdraw 1-2 mm; **ASPIRATE**; if blood return → redirect 1-2 mm medially, re-aspirate. Inject slowly over 30 sec.\n6. For LON block (if indicated): repeat at 2/3 inion-mastoid point.\n7. Observe 15 min for vasovagal. Document baseline + post-procedure GON sensory exam. Onset 5-15 min for cluster; LA duration 4-6 h.\n8. Discharge with return precautions (severe new HA, fever, expanding hematoma, deficit beyond expected numbness) and neuro follow-up 1-2 wk.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Blumenfeld A, et al. Expert consensus recommendations for peripheral nerve blocks for headaches. Headache. 2013;53(3):437-446.' },
+        { num: 2, text: 'Tobin J, Flitman S. Occipital nerve blocks: when and what to inject? Headache. 2009;49(10):1521-1533.' },
+    ],
+};
+const ONB_STOP_PAGE = {
+    id: 'onb-stop',
+    title: 'Occipital Nerve Block — Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        { heading: '🛑 Do NOT inject without aspirating first', body: 'The occipital artery runs near the GON and feeds vertebral collaterals. Intra-arterial injection can cause seizure, transient neurologic deficit, or stroke. **Aspirate before EVERY injection.** If blood returns, withdraw and redirect 1-2 mm medially before re-aspirating.' },
+        { heading: '🛑 Do NOT use epinephrine-containing local anesthetic', body: 'Vasoconstriction near the vertebral system risks ischemia. Use PLAIN bupivacaine 0.5% or PLAIN lidocaine 1-2% only.' },
+        { heading: '🛑 Do NOT inject through infected skin', body: 'Cellulitis or active scalp pathology at the injection site is an absolute contraindication. Find an alternative therapy (pharmacologic, sphenopalatine block).' },
+        { heading: '🛑 Do NOT use steroid adjunct in pregnancy', body: 'Local anesthetic alone is safe in pregnancy and one of the few non-pharmacologic options for refractory pregnancy headache. Avoid corticosteroid adjunct due to fetal exposure concerns.' },
+        { heading: '🛑 Do NOT exceed 4 steroid blocks per year', body: 'Repeated triamcinolone or methylprednisolone injections cause patchy alopecia at the injection site and Cushingoid features. Counsel patients; use LA-only between steroid blocks.' },
+        { heading: '🛑 Do NOT block bilaterally for cluster headache', body: 'Cluster is unilateral. Block only the symptomatic side. Bilateral blocks are reserved for migraine variants per AHS guidance.' },
+        { heading: '🛑 Do NOT skip the red-flag screen', body: 'ONB does not treat secondary headache. Confirm SAH, dissection, CVST, AACG, meningitis, and hypertensive emergency are ruled out before any procedural therapy. Send the patient back through [Headache Hub](#/tree/headache-hub) if uncertain.' },
+        { heading: '🛑 Do NOT discharge without documenting the GON sensory exam', body: 'Baseline + post-procedure exam protects against missing a true neurologic complication (intra-arterial, hematoma) by ascribing it to "expected numbness."' },
+    ],
+    citations: [
+        { num: 1, text: 'Levin M. Nerve blocks in the treatment of headache. Neurotherapeutics. 2010;7(2):197-203.' },
+        { num: 2, text: 'Lavin PJ, Workman R. Cushing syndrome induced by serial occipital nerve blocks containing corticosteroids. Headache. 2001;41(9):902-904.' },
+    ],
+};
+const CLUSTER_STEPS_PAGE = {
+    id: 'cluster-steps',
+    title: 'Cluster Headache — Steps Summary',
+    subtitle: 'O₂ first, then abort, then bridge, then maintain',
+    sections: [
+        {
+            body: '1. Confirm ICHD-3 §3.1 cluster phenotype: severe unilateral periorbital/temporal pain, 15-180 min, ipsilateral autonomic features OR restlessness, 1qod-8/day during bout. Patient paces (vs. migraine prefers dark/quiet).\n2. Red-flag exclude SAH, ICH, cervical artery dissection, CVST, AACG, HTN-in-pregnancy, meningitis BEFORE treating as primary cluster. Atypical features (first attack, >50 yo onset, bilateral, postural, persistent autonomic) trigger imaging.\n3. Acute: **100% O₂ 12-15 L/min via NRB × 15 min** (NOT nasal cannula). Reassess at 7 min. ~78% abort by 15 min.\n4. If O₂ inadequate: **sumatriptan 6 mg SQ × 1** (max 2 SQ doses/24h, ≥1h apart). Hold if ergot in past 24 h, uncontrolled HTN, known CAD/stroke, pregnancy. Alternative: intranasal zolmitriptan 5 mg.\n5. Refractory to O₂ + triptan: greater occipital nerve block (procedure consult) ± intranasal lidocaine 4%.\n6. Bridge therapy (start day 1): **prednisone 60 mg × 5 d then taper 10 mg q2d** OR GON block with methylprednisolone depot. ONB preferred in pregnancy, diabetes, osteoporosis.\n7. Maintenance: **verapamil 80 mg PO TID** → titrate by 80 mg every 2 weeks to 480-960 mg/d. **ECG before every titration step + 10 days after.** Halt for PR >0.22 s, AV block, brady <50, sx hypotension.\n8. Refractory ladder (neurology-led): lithium 300 mg BID titrated to 0.6-0.8 mEq/L for chronic cluster; topiramate 25 mg qHS titrated to 100 mg/d; galcanezumab 300 mg SQ monthly (episodic).\n9. Patient education: avoid alcohol + nitrates during bout. Home O₂ + SQ sumatriptan autoinjector + IN zolmitriptan + bridge + maintenance. Safety screen — cluster has highest SI of any primary HA disorder.\n10. Disposition: discharge with full Rx bundle + neuro follow-up ≤1 week. Admit only for: refractory to all acute Rx, SI, no outpatient O₂ access.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Robbins MS, et al. Treatment of Cluster Headache: The American Headache Society Evidence-Based Guidelines. Headache. 2016;56(7):1093-1106.' },
+        { num: 2, text: 'Cohen AS, Burns B, Goadsby PJ. High-flow oxygen for treatment of cluster headache: a randomized trial. JAMA. 2009;302(22):2451-2457.' },
+        { num: 3, text: 'Cohen AS, Matharu MS, Goadsby PJ. Electrocardiographic abnormalities in patients with cluster headache on verapamil therapy. Neurology. 2007;69(7):668-675.' },
+    ],
+};
+const CLUSTER_STOP_PAGE = {
+    id: 'cluster-stop',
+    title: 'Cluster Headache — Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        { heading: '🛑 Do NOT use nasal cannula instead of NRB for O₂', body: 'Cluster requires **100% O₂ via non-rebreather at 12-15 L/min**. Nasal cannula peaks at ~40% FiO₂ — inadequate. Pure cluster patients failing "O₂" who were on NC have not actually had an O₂ trial. [Link: O₂ first-line node](#/node/cluster-acute-start)' },
+        { heading: '🛑 Do NOT skip the red-flag screen', body: 'Cluster autonomic features overlap with carotid dissection (Horner), AACG (red eye, mid-dilated pupil), CVST (postpartum / hypercoag), and SAH. Always exclude these before initiating cluster-specific Rx. [Red-flag exclusion module](#/node/cluster-redflags)' },
+        { heading: '🛑 Do NOT start verapamil without baseline ECG + plan for serial ECGs', body: 'Cluster doses (480-960 mg/d) cause PR prolongation in **19%** and AV block in **4%** per Cohen Neurology 2007. **12-lead ECG BEFORE every dose escalation + 10 days after.** Halt for PR >0.22 s, any 2nd/3rd-degree AVB, brady <50, sx hypotension. [Verapamil ECG protocol](#/node/cluster-verapamil-ecg)' },
+        { heading: '🛑 Do NOT give a triptan within 24 h of an ergot (or vice versa)', body: 'Additive vasoconstriction. Specifically: no sumatriptan/zolmitriptan within 24 h before/after DHE or ergotamine. Document interval explicitly before dosing.' },
+        { heading: '🛑 Do NOT exceed 2 SQ sumatriptan doses in 24 h', body: 'Max 2 × 6 mg SQ per 24 h with ≥1 h between. Use ONB or IN lidocaine if still attacking after the 24-h cap. [Sumatriptan node](#/node/cluster-acute-triptan)' },
+        { heading: '🛑 Do NOT give triptan with uncontrolled HTN, known CAD, prior MI/stroke, basilar/hemiplegic variant, or pregnancy', body: 'Coronary vasospasm risk. Use DHE only if non-pregnant + no CAD. In pregnancy: O₂ + GON block (LA-only or LA + low-dose steroid per OB) are the safer abortive options.' },
+        { heading: '🛑 Do NOT switch CBZ-associated hyponatremia to oxcarbazepine', body: 'Oxcarbazepine causes MORE hyponatremia than CBZ (~15-30% vs ~10%). If a cluster patient on CBZ-class drug develops low Na, stop the offending med, correct Na, switch to a non-Na-lowering alternative (gabapentin, baclofen, lamotrigine) with neurology input. [Dong J Headache Pain 2005; Berghuis Epilepsia 2017]' },
+        { heading: '🛑 Do NOT start lithium without thyroid/renal/electrolyte baseline + interaction screen', body: 'Narrow therapeutic window (target 0.6-0.8 mEq/L for cluster). NSAIDs (incl. indomethacin), thiazides, ACE-I/ARB, metronidazole, and dehydration RAISE lithium level — toxicity at >1.2, severe at >2.5. Best reserved for chronic cluster with reliable outpatient monitoring. [Lithium node](#/node/cluster-lithium)' },
+        { heading: '🛑 Do NOT use a prednisone bridge more than 2-3 times per year', body: 'Cumulative steroid toxicity: AVN, cataract, osteoporosis, glucose dysregulation, mood. After 2-3 bridges in a year, switch to ONB bridge or CGRP mAb (galcanezumab) for the next bout.' },
+        { heading: '🛑 Do NOT discharge a cluster patient without screening for suicidal ideation', body: '"Suicide headache" carries the highest SI rate of any primary headache disorder. Document a safety screen, provide 988 / crisis resources, and arrange neurology follow-up within 1 week.' },
+        { heading: '🛑 Do NOT counsel "alcohol only during bouts" — they must AVOID alcohol entirely during the bout', body: 'Even a single drink during an active bout reliably triggers an attack within ~30-60 min. Outside the bout, alcohol does not trigger. Same for nitrates and nitroglycerin during active bout.' },
+    ],
+    citations: [
+        { num: 1, text: 'Cohen AS, Matharu MS, Goadsby PJ. Electrocardiographic abnormalities in patients with cluster headache on verapamil therapy. Neurology. 2007;69(7):668-675.' },
+        { num: 2, text: 'Robbins MS, et al. Treatment of Cluster Headache: The American Headache Society Evidence-Based Guidelines. Headache. 2016;56(7):1093-1106.' },
+        { num: 3, text: 'Ailani J, et al. The American Headache Society Consensus Statement. Headache. 2021;61(7):1021-1039.' },
+        { num: 4, text: 'Dong X, et al. Hyponatremia from oxcarbazepine and carbamazepine. J Headache Pain. 2005;6(5):360-364.' },
+    ],
+};
+const TN_STEPS_PAGE = {
+    id: 'tn-steps',
+    title: 'Trigeminal Neuralgia — Steps Summary',
+    subtitle: 'Phenotype → MRI triggers → HLA → CBZ → ladder → refer',
+    sections: [
+        {
+            body: '1. Confirm ICHD-3 §13.1.1: unilateral V-distribution paroxysms, seconds to <2 min, electric-shock quality, triggered by innocuous stimuli (chewing, light touch). Refractory period between paroxysms; normal neuro exam between.\n2. Atypical features → **MRI brain with contrast + FIESTA/CISS trigeminal sequences BEFORE chronic CBZ:** age <40, bilateral pain, sensory deficit, V1-only, constant baseline pain (Burchiel TN2), any cranial nerve sign. Image to find vascular loop (~60-80%), MS plaque (2-4%), or CPA tumor (5-10%).\n3. Burchiel classification: TN1 (purely paroxysmal — best MVD candidate) vs TN2 (paroxysmal + constant baseline — lower MVD success, lower CBZ response).\n4. **BEFORE first CBZ or oxcarbazepine dose:** screen HLA-B*1502 if Han Chinese / Thai / Vietnamese / Filipino / Malay / Indonesian ancestry. Positive = avoid BOTH; use baclofen / gabapentin / lamotrigine. Bridge with gabapentin or baclofen while test pending.\n5. **Carbamazepine 100 mg PO BID** → titrate by 100-200 mg q3d → target 600-1200 mg/d (max 1600). NNT 2. Baseline + serial CBC, BMP, LFTs, sodium. Any rash → STOP + ED.\n6. **Ladder if CBZ fails or intolerable:** 2L oxcarbazepine 150 BID → 1200/d. 3L+ adjuncts: baclofen, gabapentin, lamotrigine (slow titration!). CBZ-induced hyponatremia → do NOT switch to oxcarb (oxcarb worsens hyponatremia); switch to non-Na-lowering alt.\n7. **Surgical referral** when refractory by AAN/EFNS criteria (≥2 first-line failures at adequate dose/duration): MVD = best long-term for TN1 + vascular loop + fit; percutaneous (glycerol/balloon/RF) for poor surgical candidates; gamma knife for elderly, MS-TN, surgery refusers.\n8. Address dehydration / weight loss — severe TN reliably causes both. Counsel trigger avoidance (chew unaffected side, soft foods, scarf in wind). Pregnancy planning: switch off CBZ/valproate (teratogenic) BEFORE conception.\n9. Screen for suicidal ideation — TN has one of the highest SI rates among chronic pain syndromes. Provide 988 and document.\n10. Disposition: discharge with titration plan + MRI ordered + labs + neuro follow-up within 2 weeks. Admit for crisis, dehydration, SI, or HLA-pending in at-risk patient without safe outpatient bridge.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cruccu G, et al. AAN-EFNS guidelines on trigeminal neuralgia management. Neurology. 2008;71(15):1183-1190.' },
+        { num: 2, text: 'Bendtsen L, et al. Advances in diagnosis, classification, pathophysiology, and management of trigeminal neuralgia. Lancet Neurol. 2020;19(9):784-796.' },
+        { num: 3, text: 'Wiffen PJ, et al. Carbamazepine for chronic neuropathic pain and fibromyalgia in adults. Cochrane Database Syst Rev. 2014;(4):CD005451.' },
+    ],
+};
+const TN_STOP_PAGE = {
+    id: 'tn-stop',
+    title: 'Trigeminal Neuralgia — Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        {
+            heading: '🛑 Do NOT start CBZ or oxcarbazepine without HLA-B*1502 screening in at-risk ancestry',
+            body: 'Han Chinese, Thai, Vietnamese, Filipino, Malay, and Indonesian ancestry carry HLA-B*1502 at ≥10% population frequency. The allele confers a several **hundred-fold** elevated risk of Stevens-Johnson Syndrome / Toxic Epidermal Necrolysis on CBZ or oxcarbazepine (FDA boxed warning 2007). Order the test before the first dose; bridge with gabapentin or baclofen while results pending. [HLA screen node](#/node/tn-cbz-hla)',
+        },
+        {
+            heading: '🛑 Do NOT switch CBZ-associated hyponatremia to oxcarbazepine',
+            body: 'Oxcarbazepine causes **MORE frequent and MORE severe** hyponatremia than CBZ — incidence ~15-30% vs ~10% (Dong J Headache Pain 2005; Berghuis Epilepsia 2017). Stop the offending Na-lowering anticonvulsant, correct sodium with fluid restriction ± hypertonic saline if symptomatic, then switch to a **non-Na-lowering alternative** (gabapentin, baclofen, lamotrigine) with neurology input. [Ladder node](#/node/tn-ladder)',
+        },
+        {
+            heading: '🛑 Do NOT give CBZ or valproate to a pregnant patient unless benefit clearly outweighs risk',
+            body: 'CBZ (Category D) causes neural tube defects and craniofacial anomalies. Valproate is the most teratogenic anticonvulsant in clinical use. **Plan the switch to baclofen / gabapentin / lamotrigine BEFORE conception** with neurology input. If a pregnant patient presents on CBZ, do not abruptly discontinue (withdrawal risk) — taper under neuro guidance. [Patient ed node](#/node/tn-pt-ed)',
+        },
+        {
+            heading: '🛑 Do NOT escalate lamotrigine faster than the FDA-mandated schedule',
+            body: 'Stevens-Johnson risk on lamotrigine is dose-related AND titration-rate-related. Start 25 mg daily; increase by 25 mg every 2 weeks; target 200-400 mg/d for TN. Any rash → STOP immediately. Faster titration nearly always increases the rash incidence to the point of being contraindicated. [Ladder node](#/node/tn-ladder)',
+        },
+        {
+            heading: '🛑 Do NOT assume primary TN in patients <40 yo, with bilateral symptoms, or with sensory deficit',
+            body: 'Atypical features require MRI brain with contrast + dedicated FIESTA/CISS trigeminal sequences BEFORE starting CBZ — secondary TN (multiple sclerosis, tumor at cerebellopontine angle, vascular loop) requires different management. Pure V1 distribution is also uncommon for primary TN. [Differential node](#/node/tn-differential)',
+        },
+        {
+            heading: '🛑 Do NOT delay surgical referral once AAN/EFNS refractoriness criteria are met',
+            body: 'Refractory = failure of ≥2 first-line agents at adequate dose AND duration with disabling pain. At that point, additional medication trials cost months of severe pain, weight loss, and suicide risk. Refer to neurosurgery; let the surgical team decide between MVD, percutaneous rhizotomy, and gamma knife — do not pre-select the procedure in the ED. [Surgical node](#/node/tn-surgical)',
+        },
+        {
+            heading: '🛑 Do NOT discharge an acute TN crisis without addressing fluid + nutrition',
+            body: 'Severe TN reliably causes dehydration and weight loss because patients fear chewing and swallowing. Treat ED fluid + electrolyte deficits, encourage liquid nutritional supplements, and document weight if able. Patients in nutritional crisis need admission for IV bridge therapy. [Patient ed node](#/node/tn-pt-ed)',
+        },
+        {
+            heading: '🛑 Do NOT discharge any new TN patient without a suicide screen',
+            body: 'TN carries one of the highest SI rates among chronic pain syndromes. Screen explicitly, provide 988, document, and ensure neurology follow-up within 2 weeks. The Facial Pain Association (fpa-support.org) is a patient-led, well-vetted resource worth recommending.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Chung WH, et al. Medical genetics: a marker for Stevens-Johnson syndrome. Nature. 2004;428(6982):486.' },
+        { num: 2, text: 'Dong X, et al. Hyponatremia from oxcarbazepine and carbamazepine. J Headache Pain. 2005;6(5):360-364.' },
+        { num: 3, text: 'Berghuis B, et al. Carbamazepine- and oxcarbazepine-induced hyponatremia in people with epilepsy. Epilepsia. 2017;58(7):1227-1233.' },
+        { num: 4, text: 'Bendtsen L, et al. Advances in diagnosis, classification, pathophysiology, and management of trigeminal neuralgia. Lancet Neurol. 2020;19(9):784-796.' },
+    ],
+};
+const HH_STEPS_PAGE = {
+    id: 'hh-steps',
+    title: 'Headache Hub — Steps Summary',
+    subtitle: 'SNOOP10 → phenotype triage → workup → consult → dispo',
+    sections: [
+        {
+            body: '1. Run **SNOOP10**: Systemic / Neuro signs / Onset thunderclap / Older >50 / Pattern change / Positional / Valsalva-triggered / Papilledema / Progressive / Pregnancy / Painful eye / Post-traumatic / Immune-compromised / Painkiller-overuse / Posterior location. Any positive → red-flag triage.\n2. **Thunderclap** (peak <1 min) → open [SAH](#/tree/sah) for Ottawa SAH Rule + CT timing + LP. After SAH workup, consider CAD / CVST / RCVS / pituitary apoplexy.\n3. **Focal deficit / AMS / seizure** → image first; open [ICH](#/tree/ich), stroke pathway, or [Meningitis](#/tree/meningitis) as indicated. Status seizure → [Status Epilepticus](#/tree/status-epilepticus).\n4. **Painful eye** → rule out [AACG](#/tree/aacg) (fixed mid-dilated pupil, IOP >40) BEFORE assuming [Cluster](#/tree/cluster-headache) or Tolosa-Hunt.\n5. **Pregnancy / postpartum** → consider [HTN in Pregnancy / Pre-eclampsia](#/tree/htn-pregnancy), [CVST](#/tree/cvst), RCVS, pituitary apoplexy, [Cervical Artery Dissection](#/tree/cervical-artery-dissection).\n6. **Fever / immunocompromise** → empiric antibiotics within 1 h; open [Meningitis / Encephalitis](#/tree/meningitis). Do NOT delay for imaging or LP.\n7. **Positional / papilledema / Valsalva** → [IIH](#/tree/iih) or [CVST](#/tree/cvst) or CSF leak workup. Document fundoscopy.\n8. **Toxic exposure** → [CO Toxicity](#/tree/co-toxicity) — co-oximetry (standard SpO₂ falsely normal). 100% O₂ NRB while disposition decided; HBO if CO-Hgb ≥25%.\n9. **No red flags → phenotype triage:** migraine, cluster, TN, tension. Open the matching deep-dive consult: [Migraine](#/tree/migraine), [Cluster Headache](#/tree/cluster-headache), [Trigeminal Neuralgia](#/tree/trigeminal-neuralgia). Refractory cluster or status migrainosus → [Greater Occipital Nerve Block](#/tree/occipital-nerve-block).\n10. **Common workup** (after red flags): vitals TREND, full neuro exam, **fundoscopy explicitly documented**, targeted labs (ESR/CRP for GCA, CO-Hgb for tox, β-hCG for reproductive-age females), imaging by suspicion (non-contrast CT first; CTA/MRA/MRV/MRI/LP added by indication).\n11. **Disposition:** discharge if SNOOP10 cleared + treated + tolerating PO + follow-up arranged + written return precautions. Observe for partial response or pending workup. Admit per the deep-dive consult criteria for red-flag positive, refractory, SI, or pregnancy-related findings.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Godwin SA, et al. ACEP Clinical Policy on Acute Headache. Ann Emerg Med. 2019;74(4):e41-e74.' },
+        { num: 2, text: 'Headache Classification Committee of the IHS. ICHD-3. Cephalalgia. 2018;38(1):1-211.' },
+        { num: 3, text: 'Dodick DW. SNOOP4 (updated to SNOOP10). Semin Neurol. 2010;30(1):74-81.' },
+        { num: 4, text: 'Perry JJ, et al. Ottawa SAH Rule. JAMA. 2013;310(12):1248-1255; CMAJ. 2017;189(45):E1379-E1385.' },
+    ],
+};
+const HH_STOP_PAGE = {
+    id: 'hh-stop',
+    title: 'Headache Hub — Do NOT',
+    subtitle: 'Critical pitfalls in undifferentiated headache',
+    sections: [
+        {
+            heading: '🛑 Do NOT discharge any thunderclap HA without imaging',
+            body: 'Mortality from missed SAH is ~50% over 30 days. Even atypical migraineurs can present with first-thunderclap SAH. Non-contrast CT is ~98% sensitive within 6 h of onset but sensitivity drops sharply after. After 6 h or negative CT with persistent suspicion, LP for xanthochromia is the rescue test. [SAH consult](#/tree/sah) carries the Ottawa SAH Rule. [Thunderclap node](#/node/hh-thunderclap)',
+        },
+        {
+            heading: '🛑 Do NOT delay empiric antibiotics for imaging in suspected meningitis',
+            body: 'Target antibiotic within 1 hour of suspicion. CT before LP is indicated when AMS, focal deficit, papilledema, immunocompromise, recent seizure, or age >60 — but that does NOT delay the empiric dose. Give antibiotics, then image, then LP. [Meningitis consult](#/tree/meningitis). [Fever node](#/node/hh-fever)',
+        },
+        {
+            heading: '🛑 Do NOT turn lights off or give mydriatic drops in suspected AACG',
+            body: 'Dim light → pupillary dilation → worsened angle closure. Mydriatic drops do the same. Painful red eye + mid-dilated pupil + IOP >40 = emergent ophthalmology. Treat IOP medically while ophthalmology mobilizes. [AACG consult](#/tree/aacg). [Eye node](#/node/hh-eye)',
+        },
+        {
+            heading: '🛑 Do NOT trust standard pulse oximetry in suspected CO toxicity',
+            body: 'Carboxyhemoglobin reads as oxyhemoglobin on standard SpO₂. Use **co-oximetry** — arterial or venous blood gas with co-ox, OR a specialized SpCO finger probe. Place patient on 100% O₂ via NRB while disposition decided. [CO Toxicity consult](#/tree/co-toxicity). [Tox node](#/node/hh-tox)',
+        },
+        {
+            heading: '🛑 Do NOT order routine "headache panel" labs',
+            body: 'No defined panel. Targeted labs only — ESR/CRP for suspected GCA (age ≥50 + new HA + jaw claudication / visual / scalp tenderness / polymyalgia), CO-Hgb for exposure, β-hCG for reproductive-age females (broadens differential), tox for ingestion. Shotgun panels distract from the imaging decision. [Workup labs node](#/node/hh-workup-labs)',
+        },
+        {
+            heading: '🛑 Do NOT skip fundoscopy',
+            body: 'Papilledema present-or-absent must be explicitly documented. Even a "fundi non-visualized — dilated eye exam deferred" note is better than silence. Papilledema immediately changes [IIH](#/tree/iih), [CVST](#/tree/cvst), and mass differentials. [Workup vitals node](#/node/hh-workup-vitals)',
+        },
+        {
+            heading: '🛑 Do NOT assume primary headache in pregnancy / postpartum without targeted workup',
+            body: 'Pregnancy and the postpartum period dramatically broaden the differential. Pre-eclampsia, CVST, RCVS, pituitary apoplexy, and cervical artery dissection are all more common. BP trend + neuro exam + low threshold for imaging (MRI without gadolinium preferred when available). [HTN in Pregnancy consult](#/tree/htn-pregnancy). [Pregnancy node](#/node/hh-pregnancy)',
+        },
+        {
+            heading: '🛑 Do NOT discharge without written return precautions covering SNOOP10',
+            body: 'The hub triage is a snapshot — patients can develop red flags hours later. Written return precautions covering any SNOOP10 feature, severe pain unresponsive to home Rx, new neurologic symptom, fever, persistent vomiting, or vision change are part of the discharge bundle. [Discharge node](#/node/hh-dispo-discharge)',
+        },
+        {
+            heading: '🛑 Do NOT use the hub as a treatment shortcut',
+            body: 'The hub is a triage map, not a treatment playbook. Once you commit to a phenotype, leave the hub and work the deep-dive consult — that consult holds the dosing, monitoring, and disposition criteria specific to the diagnosis. Duplicating clinical content here would silently desynchronize from the deep-dives. [Cross-Link Map](#/node/hh-crosslink-map)',
+        },
+        {
+            heading: '🛑 Do NOT splint a phenotype that does not fit ICHD-3',
+            body: 'If the headache does not meet ICHD-3 criteria for migraine, cluster, TN, or tension-type, do not force it. Atypical features = MRI + neurology referral, not a primary HA diagnosis. Common "force-fit" errors: TN with constant baseline pain (Burchiel TN2 needs MRI), cluster with bilateral attacks (uncommon — reconsider), migraine with thunderclap onset (SAH first).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Godwin SA, et al. ACEP Clinical Policy on Acute Headache. Ann Emerg Med. 2019;74(4):e41-e74.' },
+        { num: 2, text: 'Perry JJ, et al. Validation of the Ottawa Subarachnoid Hemorrhage Rule. CMAJ. 2017;189(45):E1379-E1385.' },
+        { num: 3, text: 'Weaver LK. Hyperbaric Oxygen Therapy Indications, 14th ed. Undersea and Hyperbaric Medical Society, 2019.' },
+        { num: 4, text: 'Headache Classification Committee of the IHS. ICHD-3. Cephalalgia. 2018;38(1):1-211.' },
+    ],
+};
 const PARA_STOP_PAGE = {
     id: 'para-stop',
     title: 'Paracentesis Stop / Complications',
@@ -22320,7 +22374,102 @@ const CSNT_IMAGING_DECISION_PAGE = {
         { num: 1, text: 'ACR Appropriateness Criteria — Cervical Neck Pain. American College of Radiology. 2022 update.' },
     ],
 };
+// =====================================================================
+// HEADACHE-HUB OVERLAY INFO PAGES (added 2026-05-22 — Phase 2)
+// =====================================================================
+// -------------------------------------------------------------------
+// Sphenopalatine Ganglion Block — intranasal procedure overlay
+// -------------------------------------------------------------------
+const SPG_BLOCK_PAGE = {
+    id: 'spg-block-procedure',
+    title: 'Sphenopalatine Ganglion Block',
+    subtitle: 'Intranasal lidocaine — ED-friendly cluster + status migrainosus rescue',
+    sections: [
+        {
+            heading: 'Indications',
+            body: '• Acute cluster headache attack not responding to high-flow O₂ + SQ sumatriptan, OR triptan contraindicated.\n• Status migrainosus refractory to IV cocktail when DHE is contraindicated.\n• Rescue analgesia for breakthrough cluster while bridging to verapamil.\n• Generally outpatient or short-stay friendly; can be repeated.',
+        },
+        {
+            heading: 'Anatomy',
+            body: 'The **sphenopalatine ganglion (SPG)** sits in the pterygopalatine fossa, just deep to the posterior end of the middle nasal turbinate. The mucosa over the SPG is thin (1-1.5 mm), allowing topical anesthetic to diffuse to the ganglion without an injection.\n\nNo needle is required for the simple ED-friendly version. The fascia overlying the SPG is the only barrier between the topical anesthetic and the ganglion. [1]',
+        },
+        {
+            heading: 'Equipment',
+            body: '• 4% lidocaine solution (preservative-free if possible), 1-2 mL per side. Avoid 10% solution (overdose risk).\n• A delivery device — options:\n  • **SphenoCath** (FDA-cleared catheter, $30-50/unit) — preferred when available.\n  • **Cotton-tip applicator** (long, 4-6 inch) — soak tip in lidocaine, advance to posterior nasopharynx along the floor of the nose.\n  • **Atomizer / MAD (mucosal atomization device)** mounted on a 3-mL syringe.\n• Topical decongestant (oxymetazoline 0.05%) optional — improves penetration in congested patients.\n• Tilt-back position or recumbent with head extended 45°.',
+        },
+        {
+            heading: 'Technique — cotton-tip method (no catheter required)',
+            body: '**Step 1.** Position patient supine with neck extended OR seated head-tilted-back at 45°.\n\n**Step 2.** Apply oxymetazoline 2 sprays per nostril 2-3 min before procedure (optional, improves diffusion).\n\n**Step 3.** Soak the tip of a long cotton-tipped applicator in 4% lidocaine.\n\n**Step 4.** Advance the cotton tip along the FLOOR of the affected nostril (parallel to the hard palate). Goal: tip rests at the posterior nasopharynx, just behind the middle turbinate. Estimated depth = distance from nostril to tragus (~7-8 cm in adults).\n\n**Step 5.** Leave in place 5-10 minutes. Reposition gently if patient gags (advanced too far).\n\n**Step 6.** Remove. May repeat on contralateral side if bilateral headache.\n\n**Step 7.** Observe for 15-30 minutes. Onset 5-10 min, peak 20-30 min. Effect duration 1-6 h (rescue, not prophylaxis).',
+        },
+        {
+            heading: 'Contraindications',
+            body: '• Local lidocaine allergy.\n• Facial fracture or nasal trauma on the target side.\n• Severe nasal anatomic deformity that prevents safe applicator advance.\n• Active epistaxis.\n• Caution: pregnancy (lidocaine Category B; small dose generally acceptable but document risk discussion). [2]',
+        },
+        {
+            heading: 'Complications',
+            body: '• Bitter taste / temporary numbness of soft palate and posterior pharynx — common, self-limited.\n• Lightheadedness.\n• Epistaxis (rare; minimize trauma during advance).\n• Lidocaine toxicity (overdose) — DO NOT exceed 4 mg/kg total dose; 1-2 mL of 4% solution per side = 40-80 mg total, well below toxicity threshold in adults.\n• Vasovagal reaction (rare).',
+        },
+        {
+            heading: 'Evidence',
+            body: 'The Cady RCT (Headache 2015) showed statistically significant decrease in cluster attack severity at 15 min vs sham (saline). Effect modest but reproducible. SphenoCath device-based RCTs have similar profile. [3]\n\nMost peer-reviewed evidence is for cluster headache; status migrainosus use is supported by smaller series. Routine in many academic headache centers as rescue therapy.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Robbins MS, et al. Sphenopalatine ganglion blockade for treatment of headache: a review. Curr Pain Headache Rep. 2016;20(11):60.' },
+        { num: 2, text: 'ACOG Committee Opinion No. 723: Guidelines for Diagnostic Imaging During Pregnancy. Obstet Gynecol. 2017;130(4):e210-216. (Lidocaine safety in pregnancy)' },
+        { num: 3, text: 'Cady RK, et al. A double-blind, placebo-controlled study of repetitive transnasal sphenopalatine ganglion blockade with tx360 as acute treatment for chronic migraine. Headache. 2015;55(1):101-116.' },
+    ],
+    shareable: false,
+};
+// -------------------------------------------------------------------
+// Pregnancy-Safe Headache Rx Ladder (ACOG 2019)
+// -------------------------------------------------------------------
+const PREGNANCY_HEADACHE_LADDER_PAGE = {
+    id: 'pregnancy-headache-ladder',
+    title: 'Pregnancy-Safe Headache Rx',
+    subtitle: 'Trimester-stratified acute + bridge therapy',
+    sections: [
+        {
+            heading: 'Step 1 — First-Line Acute (ALL Trimesters)',
+            body: '• **Acetaminophen 1 g PO/IV q6h** (max 3 g/day in pregnancy; FDA Category B). First-line analgesic across all trimesters.\n• **Metoclopramide 10 mg IV** (Category B). Anti-emetic + central anti-migraine effect; pre-treat with diphenhydramine 25 mg IV to prevent EPS.\n• **Diphenhydramine 25 mg IV** (Category B). Adjunct for nausea + EPS prevention; mild sedation.\n• **IV hydration** with normal saline 1-2 L.',
+        },
+        {
+            heading: 'Step 2 — Magnesium + Nerve Blocks',
+            body: '• **Magnesium sulfate 1-2 g IV over 30 min** — Category D in pre-eclampsia but acceptable short-term for migraine; monitor reflexes.\n• **Greater occipital nerve block** (bupivacaine 0.5% plain, 2-3 mL per side; NO epinephrine in pregnancy due to vasoconstriction). First-line procedural option, repeatable.\n• **Sphenopalatine ganglion block** (intranasal 4% lidocaine via cotton-tip or SphenoCath). Document risk discussion — lidocaine Category B, small dose, generally acceptable.',
+        },
+        {
+            heading: 'Step 3 — Refractory / Status Migrainosus',
+            body: '• **Prednisone 60 mg PO × 5 days** (low cumulative dose; Category C). May be used short-term for status migrainosus.\n• **Methylprednisolone IV** for status migrainosus refractory to above.\n• Consider admission for hydration + observation; obstetric co-management.',
+        },
+        {
+            heading: '🛑 AVOID — Trimester Notes',
+            body: '**First trimester (0-13 wk):**\n• NSAIDs (ibuprofen, naproxen, ketorolac) — relative risk of miscarriage; avoid if alternative exists.\n• Triptans — limited data; case reports suggest no major teratogenicity (sumatriptan registry data ~10 yr); reserve for severe cases after risk discussion.\n\n**Second trimester (14-27 wk):**\n• NSAIDs acceptable short-term (avoid third-trimester window).\n• Triptans — same as above.\n\n**Third trimester (28-40 wk):**\n• **NSAIDs CONTRAINDICATED after 30 weeks** — premature ductus arteriosus closure, oligohydramnios.\n• **Triptans CONTRAINDICATED** in third trimester per ACOG (vasoconstriction concern).\n\n**ALL TRIMESTERS — absolute contraindications:**\n• **Ergots (ergotamine, methylergonovine)** — oxytocic + vasoconstrictor.\n• **DHE (dihydroergotamine)** — vasoconstrictor.\n• **Valproate** — teratogenic (neural tube defects); avoid in any woman of reproductive age without contraception.\n• **Topiramate** — teratogenic (oral clefts).',
+        },
+        {
+            heading: 'Bridge / Prophylaxis if Cluster or Frequent Migraine',
+            body: '• **Propranolol** — Category C; widely used in pregnancy for migraine prophylaxis. Start 40 mg PO BID.\n• **Amitriptyline** — Category C; start 10-25 mg qHS.\n• **Memantine** and **CGRP antagonists** — limited pregnancy data; avoid.\n• **OnabotulinumtoxinA (Botox)** for chronic migraine — limited data; consult headache specialist.',
+        },
+        {
+            heading: 'Postpartum Considerations',
+            body: '• **Postpartum eclampsia / PRES / CVST** can present as severe headache up to 6 weeks postpartum — always include in differential.\n• **Breastfeeding-safe acute meds:** acetaminophen, ibuprofen, sumatriptan (low milk transfer), metoclopramide. Avoid prolonged metoclopramide (>2 weeks) due to maternal depression risk.\n• Reinstate prophylaxis if held during pregnancy; verapamil acceptable for cluster (compatible with breastfeeding).',
+        },
+        {
+            heading: 'When to Image in Pregnancy',
+            body: '• **MRI without gadolinium** is preferred over CT — no ionizing radiation, no fetal risk in any trimester (ACOG 723).\n• **CT head** when MRI unavailable or unstable patient — fetal dose <0.005 mGy (negligible).\n• **MRV/MRA** for posterior fossa headache, postpartum severe headache (CVST risk), or persistent thunderclap with negative non-contrast.\n• Gadolinium contrast generally avoided in pregnancy (Category C-D) but may be used if benefit clearly outweighs.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Committee Opinion No. 723: Guidelines for Diagnostic Imaging During Pregnancy and Lactation. Obstet Gynecol. 2017;130(4):e210-216.' },
+        { num: 2, text: 'Burch R. Headache in Pregnancy and the Puerperium. Neurol Clin. 2019;37(1):31-51.' },
+        { num: 3, text: 'Wells RE, et al. Acute treatment of migraine. Continuum (Minneap Minn). 2024;30(2):397-417.' },
+        { num: 4, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020;135(6):e237-260. (Magnesium use in pregnancy)' },
+    ],
+    shareable: true,
+};
 export const INFO_PAGES = {
+    // Headache hub (added 2026-05-22 — Phase 2)
+    'spg-block-procedure': SPG_BLOCK_PAGE,
+    'pregnancy-headache-ladder': PREGNANCY_HEADACHE_LADDER_PAGE,
     // Peritoneal Dialysis
     'pd-summary': PD_SUMMARY_PAGE,
     'pd-diff': PD_DIFF_PAGE,
@@ -22348,6 +22497,18 @@ export const INFO_PAGES = {
     'para-labs': PARA_LABS_PAGE,
     'para-albumin': PARA_ALBUMIN_PAGE,
     'para-stop': PARA_STOP_PAGE,
+    // Occipital Nerve Block (Procedures) — first split of headache-hub batch
+    'onb-steps': ONB_STEPS_PAGE,
+    'onb-stop': ONB_STOP_PAGE,
+    // Cluster Headache (Neurology + EM) — third split of headache-hub batch
+    'cluster-steps': CLUSTER_STEPS_PAGE,
+    'cluster-stop': CLUSTER_STOP_PAGE,
+    // Trigeminal Neuralgia (Neurology) — second split of headache-hub batch
+    'tn-steps': TN_STEPS_PAGE,
+    'tn-stop': TN_STOP_PAGE,
+    // Headache Hub (EM + Neurology dual-list, type: 'hub') — final hub of the batch
+    'hh-steps': HH_STEPS_PAGE,
+    'hh-stop': HH_STOP_PAGE,
     // Traumatic Arrest / Resuscitative Thoracotomy
     'ta-steps': TA_STEPS_PAGE,
     'ta-hott': TA_HOTT_PAGE,
@@ -22499,8 +22660,6 @@ export const INFO_PAGES = {
     'pep-patient-info': PEP_PATIENT_INFO,
     'hbv-serology': HBV_SEROLOGY_PAGE,
     'stroke-contraindications': STROKE_CONTRAINDICATIONS_PAGE,
-    'stroke-treatment-windows': STROKE_TREATMENT_WINDOWS_PAGE,
-    'stroke-ivt-imaging-criteria': STROKE_IVT_IMAGING_CRITERIA_PAGE,
     'stroke-imaging': STROKE_IMAGING_PAGE,
     'stroke-consent': STROKE_CONSENT_PAGE,
     'stroke-mri-screen': STROKE_MRI_SCREEN,
@@ -22606,7 +22765,6 @@ export const INFO_PAGES = {
     'aub-surgical': AUB_SURGICAL,
     'aub-maintenance': AUB_MAINTENANCE,
     'aub-discharge': AUB_DISCHARGE,
-    'se-rx-flow': SE_RX_FLOW,
     'se-summary': SE_SUMMARY,
     'se-labs': SE_LABS,
     'se-asm-comparison': SE_ASM_COMPARISON,

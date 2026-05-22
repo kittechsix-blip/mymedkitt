@@ -34,7 +34,7 @@ export const HYPOTHERMIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Accidental Hypothermia',
-    body: '**Definition:** Core temperature <35°C (95°F) due to environmental exposure.\n\n**"No one is dead until they are WARM and dead."**\n\nRemarkable survivals documented:\n- Lowest survivor: **13.7°C** (56.7°F)\n- Longest CPR with intact neuro survival: **6 hours 52 minutes**\n\n**Key principle:** Hypothermia is PROTECTIVE if it occurs BEFORE cardiac arrest. Cold brain = reduced metabolic demand = prolonged tolerance to ischemia. [1][2][3]',
+    body: '**Definition:** Core temperature <35°C (95°F) due to environmental exposure.\n\n**"No one is dead until they are WARM and dead."**\n\nRemarkable survivals documented:\n- Lowest survivor (accidental hypothermia): **11.8°C** (53.2°F) — per ERC 2025\n- Lowest survivor (induced hypothermia): **4.0°C**\n- Longest CPR with intact neuro survival: **6 hours 52 minutes**\n\n**Key principle:** Hypothermia is PROTECTIVE if it occurs BEFORE cardiac arrest. Cold brain = reduced metabolic demand = prolonged tolerance to ischemia. [1][2][3]',
     citation: [1, 2, 3],
     calculatorLinks: [
       { id: 'hypo-temp-convert', label: 'Temp Converter' },

@@ -202,6 +202,22 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/paracentesis.js');
             return { nodes: m.PARACENTESIS_NODES, entryNodeId: 'para-start', categoryId: 'procedures', moduleLabels: m.PARACENTESIS_MODULE_LABELS, citations: m.PARACENTESIS_CITATIONS, criticalActions: m.PARACENTESIS_CRITICAL_ACTIONS };
         },
+        'occipital-nerve-block': async () => {
+            const m = await import('../data/trees/occipital-nerve-block.js');
+            return { nodes: m.OCCIPITAL_NERVE_BLOCK_NODES, entryNodeId: 'onb-start', categoryId: 'procedures', moduleLabels: m.OCCIPITAL_NERVE_BLOCK_MODULE_LABELS, citations: m.OCCIPITAL_NERVE_BLOCK_CITATIONS, criticalActions: m.OCCIPITAL_NERVE_BLOCK_CRITICAL_ACTIONS };
+        },
+        'cluster-headache': async () => {
+            const m = await import('../data/trees/cluster-headache.js');
+            return { nodes: m.CLUSTER_HEADACHE_NODES, entryNodeId: 'cluster-start', categoryId: 'neurology', moduleLabels: m.CLUSTER_HEADACHE_MODULE_LABELS, citations: m.CLUSTER_HEADACHE_CITATIONS, criticalActions: m.CLUSTER_HEADACHE_CRITICAL_ACTIONS };
+        },
+        'trigeminal-neuralgia': async () => {
+            const m = await import('../data/trees/trigeminal-neuralgia.js');
+            return { nodes: m.TRIGEMINAL_NEURALGIA_NODES, entryNodeId: 'tn-start', categoryId: 'neurology', moduleLabels: m.TRIGEMINAL_NEURALGIA_MODULE_LABELS, citations: m.TRIGEMINAL_NEURALGIA_CITATIONS, criticalActions: m.TRIGEMINAL_NEURALGIA_CRITICAL_ACTIONS };
+        },
+        'headache-hub': async () => {
+            const m = await import('../data/trees/headache-hub.js');
+            return { nodes: m.HEADACHE_HUB_NODES, entryNodeId: 'hh-start', categoryId: 'emergency-medicine', moduleLabels: m.HEADACHE_HUB_MODULE_LABELS, citations: m.HEADACHE_HUB_CITATIONS, criticalActions: m.HEADACHE_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'vasopressor-extravasation': async () => {
             const m = await import('../data/trees/vasopressor-extravasation.js');
             return { nodes: m.VASOPRESSOR_EXTRAVASATION_NODES, entryNodeId: 'vex-start', categoryId: 'pharmacist', moduleLabels: m.VASOPRESSOR_EXTRAVASATION_MODULE_LABELS, citations: m.VASOPRESSOR_EXTRAVASATION_CITATIONS, criticalActions: m.VASOPRESSOR_EXTRAVASATION_CRITICAL_ACTIONS };

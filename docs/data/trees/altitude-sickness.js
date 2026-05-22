@@ -1,6 +1,6 @@
 // MedKitt — Altitude Sickness
 // ED evaluation and management of acute mountain sickness, HACE, and HAPE
-// Sources: Wilderness Medical Society Guidelines 2019, Lake Louise Criteria
+// Sources: Wilderness Medical Society Guidelines 2024 Update, Lake Louise Criteria 2018
 // 6 modules: Assessment → AMS → HACE → HAPE → Treatment → Disposition
 // ~20 nodes
 export const ALTITUDE_SICKNESS_NODES = [
@@ -141,7 +141,7 @@ export const ALTITUDE_SICKNESS_NODES = [
         type: 'info',
         module: 5,
         title: 'Altitude Medications — Dosing',
-        body: '**Acetazolamide (Diamox):**\n• MOA: Carbonic anhydrase inhibitor, induces metabolic acidosis → hyperventilation\n• Prevention: 125-250mg PO BID, start 1 day before ascent\n• Treatment: 250mg PO BID\n• Side effects: Paresthesias, dysgeusia, polyuria\n• CI: Sulfa allergy (relative), severe renal/hepatic disease\n\n**Dexamethasone:**\n• MOA: Reduces vasogenic edema, stabilizes BBB\n• Prevention: 2mg q6h or 4mg q12h\n• AMS treatment: 4mg q6h\n• HACE treatment: 8mg x1, then 4mg q6h\n• Caution: Does not aid acclimatization\n\n**Nifedipine (for HAPE):**\n• MOA: Reduces pulmonary artery pressure\n• Dose: 30mg SR q12h or 20mg SR q8h\n• Use extended-release only\n\n**Sildenafil/Tadalafil (for HAPE):**\n• Alternative to nifedipine\n• Sildenafil 50mg q8h, Tadalafil 10mg q12h [1][4]',
+        body: '**Acetazolamide (Diamox):**\n• MOA: Carbonic anhydrase inhibitor, induces metabolic acidosis → hyperventilation\n• Prevention: 125 mg PO BID, start 1 day before ascent (RADICAL trial: 125mg superior to 62.5mg)\n• Treatment: 250mg PO BID\n• Pediatric: prevention 1.25 mg/kg q12h (max 125mg); treatment 2.5 mg/kg q12h (max 250mg)\n• Side effects: Paresthesias, dysgeusia, polyuria\n• CI: **Absolute** only with prior anaphylaxis or SJS to a sulfonamide; non-anaphylactic sulfa allergy is a relative CI (supervised pre-trip trial acceptable per WMS 2024). Severe renal/hepatic disease.\n\n**Dexamethasone:**\n• MOA: Reduces vasogenic edema, stabilizes BBB\n• Prevention: 2mg q6h or 4mg q12h\n• AMS treatment: 4mg q6h\n• HACE treatment: 8mg x1, then 4mg q6h\n• Caution: Does not aid acclimatization\n\n**Nifedipine (for HAPE):**\n• MOA: Reduces pulmonary artery pressure\n• Dose: 30mg SR q12h or 20mg SR q8h\n• Use extended-release only\n\n**Sildenafil/Tadalafil (for HAPE):**\n• Alternative to nifedipine; tadalafil 10mg q12h elevated to alternative for prevention (WMS 2024 strong rec). Treatment use is weak rec — only if descent / O2 / hyperbaric / nifedipine unavailable.\n• Sildenafil 50mg q8h, Tadalafil 10mg q12h\n• **Do NOT combine nifedipine with a PDE5 inhibitor** — additive hypotension. Pick one. [1][4]',
         next: 'alt-disposition',
         citation: [1, 4],
     },
@@ -204,7 +204,7 @@ export const ALTITUDE_SICKNESS_MODULE_LABELS = [
 // Citations
 // =====================================================================
 export const ALTITUDE_SICKNESS_CITATIONS = [
-    { num: 1, text: 'Luks AM, et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Acute Altitude Illness: 2019 Update. Wilderness Environ Med. 2019;30(4S):S3-S18.' },
+    { num: 1, text: 'Luks AM, Beidleman BA, Freer L, et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention, Diagnosis, and Treatment of Acute Altitude Illness: 2024 Update. Wilderness Environ Med. 2024;35(1_suppl):2S-19S. doi:10.1016/j.wem.2023.05.013. PMID 37833187.' },
     { num: 2, text: 'Hackett PH, Roach RC. High-Altitude Illness. N Engl J Med. 2001;345(2):107-114.' },
     { num: 3, text: 'Roach RC, et al. The 2018 Lake Louise Acute Mountain Sickness Score. High Alt Med Biol. 2018;19(1):4-6.' },
     { num: 4, text: 'Luks AM, et al. Acute high-altitude sickness. Eur Respir Rev. 2017;26(143):160096.' },

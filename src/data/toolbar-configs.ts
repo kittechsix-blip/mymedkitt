@@ -391,6 +391,32 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'albumin', label: 'Albumin', icon: '💧', action: 'overlay', target: 'para-albumin' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'para-stop' },
   ],
+  'occipital-nerve-block': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'onb-steps' },
+    { id: 'anatomy', label: 'Anatomy', icon: '🧠', action: 'jump', target: 'onb-anatomy-ref' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'onb-stop' },
+  ],
+  'cluster-headache': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'cluster-steps' },
+    { id: 'acute', label: 'Acute Rx', icon: '🫁', action: 'jump', target: 'cluster-acute-start' },
+    { id: 'verapamil', label: 'Verapamil', icon: '💊', action: 'jump', target: 'cluster-verapamil-ecg' },
+    { id: 'bridge', label: 'Bridge', icon: '🌉', action: 'jump', target: 'cluster-bridge-decision' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'cluster-stop' },
+  ],
+  'trigeminal-neuralgia': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'tn-steps' },
+    { id: 'hla', label: 'HLA Screen', icon: '🧬', action: 'jump', target: 'tn-cbz-hla' },
+    { id: 'ladder', label: 'Rx Ladder', icon: '💊', action: 'jump', target: 'tn-ladder' },
+    { id: 'refer', label: 'Refer', icon: '🏥', action: 'jump', target: 'tn-surgical' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'tn-stop' },
+  ],
+  'headache-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hh-steps' },
+    { id: 'redflags', label: 'SNOOP10', icon: '🚩', action: 'jump', target: 'hh-snoop10' },
+    { id: 'workup', label: 'Workup', icon: '🔬', action: 'jump', target: 'hh-workup-imaging' },
+    { id: 'map', label: 'Consult Map', icon: '🗺️', action: 'jump', target: 'hh-crosslink-map' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hh-stop' },
+  ],
   'vasopressor-extravasation': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vex-steps' },
     { id: 'phentolamine', label: 'Phento', icon: '💉', action: 'overlay', target: 'vex-phentolamine-tool' },

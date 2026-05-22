@@ -155,6 +155,13 @@ export interface DecisionTreeMeta {
    * a fresh-looking DB row missing `type` still renders correctly.
    */
   type?: 'standard' | 'hub' | 'procedure';
+  /**
+   * For `type: 'hub'` trees only: the category whose color/identity the hub should adopt
+   * in the Chief Complaint Hubs dashboard view. Defaults to `categoryId` when unset.
+   * Example: `headache-hub` is canonically `emergency-medicine` (for routing + tab),
+   * but visually represents the Neurology specialty → `displayCategoryId: 'neurology'`.
+   */
+  displayCategoryId?: string;
 }
 
 // -------------------------------------------------------------------

@@ -75,6 +75,8 @@ function jsonbValOrNull(obj) {
 // Cross-listing: which consults appear in multiple categories
 // Map of treeId → array of { categoryId, displayTitle?, displaySubtitle?, entryNodeId? }
 const CROSS_LISTINGS = {
+  // Headache Hub (Phase 7) — canonical EM; cross-list into Neurology per PLAN.md R5.
+  'headache-hub':     [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'hh-start' }],
   'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],
   'pe-treatment':     [{ categoryId: 'emergency-medicine' }],
   'pep':              [{ categoryId: 'emergency-medicine' }],

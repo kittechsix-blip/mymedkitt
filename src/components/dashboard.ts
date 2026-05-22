@@ -261,6 +261,41 @@ export function renderDashboard(container: HTMLElement): void {
     dashboard.appendChild(recentsSection);
   }
 
+  // ---- Chief Complaint Hubs hero card (sits ABOVE MedKitt Learn) ----
+  // Hub list filtering happens inside renderHubsHome — we always show the tile
+  // so future hubs auto-appear without a dashboard change. In shared mode the
+  // tile still opens, and the hubs-home empty state handles the no-hubs case.
+  if (!isSharedMode()) {
+    const hubsCard = document.createElement('button');
+    hubsCard.className = 'dashboard-hubs-card';
+    hubsCard.type = 'button';
+    hubsCard.setAttribute('aria-label', 'Open Chief Complaint Hubs — triage by presenting complaint');
+
+    const hubsBadge = document.createElement('div');
+    hubsBadge.className = 'dashboard-hubs-card__badge';
+    hubsBadge.textContent = 'NEW';
+    hubsCard.appendChild(hubsBadge);
+
+    const hubsTitle = document.createElement('div');
+    hubsTitle.className = 'dashboard-hubs-card__title';
+    hubsTitle.textContent = 'Chief Complaint Hubs';
+    hubsCard.appendChild(hubsTitle);
+
+    const hubsSub = document.createElement('div');
+    hubsSub.className = 'dashboard-hubs-card__sub';
+    hubsSub.textContent = 'Triage by chief complaint — SNOOP10 red-flag screen, phenotype, the right consult.';
+    hubsCard.appendChild(hubsSub);
+
+    const hubsArrow = document.createElement('div');
+    hubsArrow.className = 'dashboard-hubs-card__arrow';
+    hubsArrow.textContent = '→';
+    hubsArrow.setAttribute('aria-hidden', 'true');
+    hubsCard.appendChild(hubsArrow);
+
+    hubsCard.addEventListener('click', () => router.navigate('/hubs'));
+    dashboard.appendChild(hubsCard);
+  }
+
   // ---- MedKitt Learn hero card (full-access only) ----
   if (!isSharedMode()) {
     const learnCard = document.createElement('button');

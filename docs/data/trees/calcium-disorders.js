@@ -153,8 +153,8 @@ export const CALCIUM_DISORDERS_MODULE_LABELS = [
 ];
 export const CALCIUM_DISORDERS_CITATIONS = [
     { num: 1, text: 'Turner J, Gittoes N, Selby P. Society for Endocrinology endocrine emergency guidance: emergency management of acute hypocalcaemia in adult patients. Endocr Connect. 2016;5:G7-G8; addendum 2019. doi:10.1530/EC-16-0056.' },
-    { num: 2, text: 'Farkas J. Hypocalcemia. Internet Book of Critical Care (IBCC). EMCrit. Updated 2025. https://emcrit.org/ibcc/hypocalcemia/' },
-    { num: 3, text: 'Farkas J. Hypercalcemia. Internet Book of Critical Care (IBCC). EMCrit. Updated 2025. https://emcrit.org/ibcc/hypercalcemia/' },
+    { num: 2, text: 'Farkas J. Hypocalcemia. Internet Book of Critical Care (IBCC). EMCrit. Indexed Dec 10, 2025. https://emcrit.org/ibcc/hypocalcemia/' },
+    { num: 3, text: 'Farkas J. Hypercalcemia. Internet Book of Critical Care (IBCC). EMCrit. Indexed Dec 11, 2025. https://emcrit.org/ibcc/hypercalcemia/' },
     { num: 4, text: 'Fuleihan GEH, Clines GA, Hu MI, et al. Treatment of hypercalcemia of malignancy in adults: an Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab. 2023;108(3):507-528. doi:10.1210/clinem/dgac621.' },
     { num: 5, text: 'Walsh J, Gittoes N, Selby P. Society for Endocrinology endocrine emergency guidance: emergency management of acute hypercalcaemia in adult patients. Endocr Connect. 2016;5:G9-G11. doi:10.1530/EC-16-0055.' },
     { num: 6, text: 'KDIGO CKD-MBD Update Work Group. KDIGO 2017 Clinical Practice Guideline Update for CKD-MBD. Kidney Int Suppl. 2017;7:1-59.' },

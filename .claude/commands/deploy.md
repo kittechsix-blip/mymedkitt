@@ -6,14 +6,16 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
 
 ## Steps
 
-00. **MANDATORY — Spotlight Preflight (do before anything else):**
+00. **EDEADLK Preflight (informational — DO NOT abort the deploy):**
     ```bash
-    # If any of these fail, abort the deploy and surface the EDEADLK playbook
-    ls ~/Desktop/myMedKitt >/dev/null 2>&1 || { echo "EDEADLK: project dir dataless. See ~/Desktop/claude-brain/operations/edeadlk-playbook.md"; exit 1; }
-    cd ~/Desktop/myMedKitt && git status >/dev/null 2>&1 || { echo "EDEADLK: git index dataless. Reboot required."; exit 1; }
+    # Diagnostic only. EDEADLK is not a build blocker anymore.
+    ls ~/Desktop/myMedKitt >/dev/null 2>&1 && echo "project dir OK"        || echo "project dir blocked (will use /tmp at commit)"
+    cd ~/Desktop/myMedKitt && git status >/dev/null 2>&1 && echo "git OK"  || echo "git blocked (will use /tmp at commit)"
     ```
 
-    **If preflight fails:** Do NOT attempt the deploy. Tell Andy plainly: "Spotlight has the project files locked. Only a Mac reboot clears this. See `~/Desktop/claude-brain/operations/edeadlk-playbook.md` for the 3 fix options." Do NOT loop on `killall`, `xattr`, `touch`, or retries — verified non-effective 2026-05-18.
+    Build steps 1-7 (TypeScript compile, CSS copy, cache sync, Supabase push, file verification) run on Desktop as usual — none of them go through git's mmap path, so they work even when git is locked. The commit/push step (step 8) routes through `~/Desktop/claude-brain/bin/git-via-tmp.sh`, which transparently falls back to a `/tmp` shadow when Desktop git can't open its pack files. Andy does NOT need to reboot, and does NOT need to be at the Mac.
+
+    Reboot is the last resort, not the first response. Verified 2-for-2 on real deploys (2026-05-20 culture-positive-results-ed, 2026-05-21 status-epilepticus BAO mimicker). Full reference: `~/Desktop/claude-brain/operations/edeadlk-playbook.md`.
 
 0. **MANDATORY — Lint CRITICAL_ACTIONS linkage:**
    ```bash
@@ -118,8 +120,25 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
 7. **Verify ALL compiled files are staged:**
    Run `git status docs/` and check for ANY unstaged changes. Every modified file in `docs/` MUST be committed.
 
-8. **Stage, commit, and push:**
-   Stage all changed files in BOTH `src/` and `docs/`, commit with a descriptive message, and push to `main`.
+8. **Stage, commit, and push — via the EDEADLK-safe helper:**
+   Stage the specific files this deploy touches in BOTH `src/` and `docs/`,
+   then hand off to the helper. It tries Desktop git first and transparently
+   falls back to the `/tmp` workaround on EDEADLK.
+
+   ```bash
+   cd ~/Desktop/myMedKitt
+   # Stage the changed files explicitly — NEVER use `git add -A` here, parallel
+   # sessions and the auto-bumped DATA_VERSION/SW cache files can collide.
+   git add <files-you-touched-in-src> <files-you-touched-in-docs>
+   git add docs/sw.js src/services/cache-db.ts docs/services/cache-db.js 2>/dev/null || true
+
+   # Commit + push (with auto-fallback to /tmp on EDEADLK):
+   ~/Desktop/claude-brain/bin/git-via-tmp.sh myMedKitt "<commit message>"
+   ```
+
+   Helper exits 0 on success. On exit 2 (true deadlock — `cp -R` of `.git`
+   itself failed), surface the error to Andy and offer the reboot option. This
+   is the last resort, not the first.
 
 9. **Verify deployment:**
    Run `gh api repos/kittechsix-blip/mymedkitt/pages/builds --jq '.[0] | {status, created_at}'` to confirm GitHub Pages built successfully. Wait for `status: "built"`.

@@ -89,6 +89,8 @@ const infoPageIds = getArgList('--info-pages');
 
 
 const CROSS_LISTINGS = {
+  // Headache Hub (Phase 7) — canonical EM; cross-list into Neurology per PLAN.md R5.
+  'headache-hub':     [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'hh-start' }],
   'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],
   'pe-treatment':     [{ categoryId: 'emergency-medicine' }],
   'pep':              [{ categoryId: 'emergency-medicine' }],

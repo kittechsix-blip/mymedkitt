@@ -386,344 +386,6 @@ const NIHSS_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
-// Stroke Treatment Window Calculator
-// -------------------------------------------------------------------
-
-const HOUR_MS = 60 * 60 * 1000;
-
-function formatStrokeClock(ms: number | undefined): string {
-  if (!ms || !Number.isFinite(ms)) return 'not entered';
-  return new Date(ms).toLocaleString([], {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  });
-}
-
-function formatStrokeHours(hours: number | null): string {
-  if (hours === null || !Number.isFinite(hours)) return 'unknown';
-  if (hours < 1) return `${Math.round(hours * 60)} min`;
-  return `${hours.toFixed(1)} h`;
-}
-
-function strokeHoursBetween(laterMs: number, earlierMs: number): number | null {
-  if (!laterMs || !earlierMs || !Number.isFinite(laterMs) || !Number.isFinite(earlierMs)) return null;
-  if (laterMs < earlierMs) return null;
-  return (laterMs - earlierMs) / HOUR_MS;
-}
-
-function toLocalDateTimeValue(date: Date): string {
-  const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-  return local.toISOString().slice(0, 16);
-}
-
-function parseLocalDateTimeValue(value: string): number {
-  if (!value) return 0;
-  const ms = new Date(value).getTime();
-  return Number.isFinite(ms) ? ms : 0;
-}
-
-const STROKE_WINDOW_CALCULATOR: CalculatorDefinition = {
-  id: 'stroke-window-calculator',
-  title: 'Stroke Window Calculator',
-  subtitle: 'Patient-Specific IVT / EVT Clock',
-  description: 'Enter last-known-well, discovery/wake-up time, bedtime if relevant, and imaging gates to map the patient to standard IV thrombolysis, imaging-selected thrombolysis, and thrombectomy windows.',
-  fields: [],
-  results: [],
-  thresholdNote: 'This supports time-window triage only. It does not replace the full thrombolytic contraindication checklist, local stroke protocol, or stroke-team decision.',
-  citations: [
-    'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. 2026. doi:10.1161/STR.0000000000000513.',
-    'Berge E, Whiteley W, Audebert H, et al. European Stroke Organisation Guidelines on Intravenous Thrombolysis for Acute Ischaemic Stroke. Eur Stroke J. 2021;6:I-LXII.',
-    'Thomalla G, Simonsen CZ, Boutitie F, et al. MRI-Guided Thrombolysis for Stroke With Unknown Time of Onset. N Engl J Med. 2018;379:611-622.',
-    'Ma H, Campbell BCV, Parsons MW, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke. N Engl J Med. 2019;380:1795-1803.',
-    'Nogueira RG, Jadhav AP, Haussen DC, et al. Thrombectomy 6 to 24 Hours after Stroke with a Mismatch between Deficit and Infarct. N Engl J Med. 2018;378:11-21.',
-    'Albers GW, Marks MP, Kemp S, et al. Thrombectomy for Stroke at 6 to 16 Hours with Selection by Perfusion Imaging. N Engl J Med. 2018;378:708-718.',
-  ],
-  computeResult: (values: Record<string, number>) => {
-    const scenario = values.scenario || 1;
-    const nowMs = values.now || 0;
-    const lkwInputMs = values.lkw || 0;
-    const discoveredMs = values.discovered || 0;
-    const bedtimeMs = values.bedtime || 0;
-    const imaging = values.imaging || 0;
-    const lvo = values.lvo || 0;
-    const disabling = Boolean(values.disabling);
-    const hemorrhageExcluded = Boolean(values.hemorrhageExcluded);
-    const noIvContra = Boolean(values.noIvContra);
-
-    const lkwMs = scenario === 2 && bedtimeMs ? bedtimeMs : lkwInputMs;
-    const lkwHours = strokeHoursBetween(nowMs, lkwMs);
-    const discoveryHours = strokeHoursBetween(nowMs, discoveredMs);
-    const midpointMs = lkwMs && discoveredMs && discoveredMs > lkwMs ? lkwMs + (discoveredMs - lkwMs) / 2 : 0;
-    const midpointHours = midpointMs ? strokeHoursBetween(nowMs, midpointMs) : null;
-
-    if (!nowMs || !lkwMs) {
-      return {
-        value: 'Enter times',
-        label: 'Last-known-well clock needed',
-        description: 'Enter **current decision time** and **last-known-well / last seen normal**. For wake-up stroke, use the time the patient went to bed normal as last-known-well.',
-        colorVar: '--color-warning',
-      };
-    }
-
-    if (lkwHours === null || (discoveredMs && discoveryHours === null)) {
-      return {
-        value: 'Check times',
-        label: 'Time conflict',
-        description: 'One of the entered times is after the current decision time, or discovery occurs before last-known-well. Re-check the clock entries before using the output.',
-        colorVar: '--color-danger',
-      };
-    }
-
-    const favorableMri = imaging === 1;
-    const favorablePerfusion = imaging === 2;
-    const favorableAdvancedImaging = favorableMri || favorablePerfusion;
-    const unfavorableImaging = imaging === 3;
-    const noAdvancedImaging = imaging === 0;
-    const anteriorLvo = lvo === 2;
-    const basilarLvo = lvo === 3;
-    const anyLvo = anteriorLvo || basilarLvo;
-
-    const ivGates: string[] = [];
-    if (!disabling) ivGates.push('deficit is not marked disabling');
-    if (!hemorrhageExcluded) ivGates.push('hemorrhage has not been excluded');
-    if (!noIvContra) ivGates.push('contraindication screen is not cleared');
-    const ivGateText = ivGates.length ? `\n\n**IVT gates still open:** ${ivGates.join(', ')}.` : '\n\n**IVT gates:** disabling deficit + hemorrhage excluded + major contraindication screen cleared.';
-
-    const timeLines = [
-      `**Current decision time:** ${formatStrokeClock(nowMs)}`,
-      `**Last-known-well / last seen normal:** ${formatStrokeClock(lkwMs)} (${formatStrokeHours(lkwHours)} ago)`,
-    ];
-    if (discoveredMs) {
-      timeLines.push(`**Symptom discovery / woke abnormal:** ${formatStrokeClock(discoveredMs)} (${formatStrokeHours(discoveryHours)} ago)`);
-    }
-    if (scenario === 2 && bedtimeMs) {
-      timeLines.push(`**Wake-up stroke:** bedtime-normal is the legal LKW; discovery time helps document recognition but does not replace LKW.`);
-    }
-    if (midpointHours !== null && scenario !== 1) {
-      timeLines.push(`**Midpoint estimate for unknown-onset perfusion protocols:** ${formatStrokeHours(midpointHours)} ago.`);
-    }
-
-    let ivtPlan = '';
-    let evtPlan = '';
-    let label = 'Advanced imaging / stroke-team decision';
-    let value = `${formatStrokeHours(lkwHours)} LKW`;
-    let colorVar = '--color-warning';
-
-    if (lkwHours <= 4.5) {
-      ivtPlan = '**IV thrombolysis:** Standard 0-4.5 h pathway if deficit is disabling and CT excludes hemorrhage. Do not delay for routine labs unless anticoagulant/coagulopathy concern exists.';
-      if (ivGates.length === 0) {
-        label = 'Standard IVT window active';
-        colorVar = '--color-danger';
-      }
-    } else if (lkwHours <= 9) {
-      if (favorableAdvancedImaging) {
-        ivtPlan = '**IV thrombolysis:** 4.5-9 h imaging-selected pathway is possible with favorable MRI DWI/FLAIR mismatch or CT/MR perfusion mismatch. Discuss with stroke team immediately.';
-        if (ivGates.length === 0) {
-          label = 'Imaging-selected IVT window active';
-          colorVar = '--color-danger';
-        }
-      } else if (unfavorableImaging) {
-        ivtPlan = '**IV thrombolysis:** Advanced imaging is not favorable; routine IVT is not supported outside 4.5 h.';
-      } else {
-        ivtPlan = '**IV thrombolysis:** Outside standard 4.5 h clock. Get MRI DWI/FLAIR or CT/MR perfusion now if the patient may be an imaging-selected candidate.';
-      }
-    } else if (scenario !== 1 && favorableAdvancedImaging) {
-      ivtPlan = '**IV thrombolysis:** Unknown/wake-up onset with favorable advanced imaging may still be considered by local protocol/stroke specialist. This is not a simple clock-only decision.';
-      if (ivGates.length === 0) {
-        label = 'Unknown-onset imaging IVT pathway';
-        colorVar = '--color-warning';
-      }
-    } else {
-      ivtPlan = '**IV thrombolysis:** Outside routine clock-based IVT windows unless local stroke team uses an advanced-imaging protocol.';
-    }
-
-    if (anyLvo) {
-      const lvoName = anteriorLvo ? 'anterior-circulation LVO' : 'basilar/posterior-circulation occlusion';
-      if (lkwHours <= 6) {
-        evtPlan = `**Mechanical thrombectomy:** ${lvoName} within 0-6 h. Activate neurointerventional team now.`;
-        label = 'EVT window active';
-        colorVar = '--color-danger';
-      } else if (lkwHours <= 24) {
-        if (favorableAdvancedImaging || basilarLvo) {
-          evtPlan = `**Mechanical thrombectomy:** ${lvoName} within 6-24 h. Selection depends on CTA plus favorable clinical/imaging profile; activate stroke/neuro-IR now.`;
-          label = 'Extended EVT window active';
-          colorVar = '--color-danger';
-        } else if (noAdvancedImaging) {
-          evtPlan = `**Mechanical thrombectomy:** ${lvoName} in the 6-24 h range needs selection imaging. Get CTA plus CT/MR perfusion or local late-window protocol imaging now.`;
-          label = 'Get EVT selection imaging now';
-          colorVar = '--color-warning';
-        } else {
-          evtPlan = `**Mechanical thrombectomy:** ${lvoName} but advanced imaging is not favorable. Discuss with stroke/neuro-IR; routine late-window EVT may not apply.`;
-        }
-      } else {
-        evtPlan = `**Mechanical thrombectomy:** >24 h from LKW. Routine EVT window is closed; discuss exceptional salvage cases with stroke/neuro-IR.`;
-      }
-    } else if (lvo === 0) {
-      evtPlan = '**Mechanical thrombectomy:** LVO status unknown. Get CTA head/neck early; do not wait for IVT decision to evaluate for LVO.';
-    } else {
-      evtPlan = '**Mechanical thrombectomy:** No LVO marked. EVT is not indicated without a treatable occlusion.';
-    }
-
-    const imagingPlan = favorableMri
-      ? '**Imaging gate:** MRI DWI-positive / FLAIR-negative mismatch entered. This supports wake-up or unknown-onset IVT selection when the clinical picture fits.'
-      : favorablePerfusion
-        ? '**Imaging gate:** CT/MR perfusion mismatch entered. This supports penumbra-based IVT/EVT selection when core is not too large and local protocol agrees.'
-        : unfavorableImaging
-          ? '**Imaging gate:** Advanced imaging entered as unfavorable. Reperfusion decisions should be specialist-driven.'
-          : '**Imaging gate:** No favorable advanced imaging entered. Use this calculator to trigger the right next image, not to deny treatment.';
-
-    const documentation = `**Suggested documentation:** "LKW ${formatStrokeClock(lkwMs)} (${formatStrokeHours(lkwHours)} before decision time); discovered/woke abnormal ${formatStrokeClock(discoveredMs)}; scenario ${scenario === 1 ? 'known onset' : scenario === 2 ? 'wake-up stroke' : 'found abnormal/unknown onset'}; IVT gates ${ivGates.length ? 'not fully cleared' : 'cleared'}; LVO status ${lvo === 0 ? 'unknown' : lvo === 1 ? 'no LVO marked' : anteriorLvo ? 'anterior LVO' : 'basilar/posterior occlusion'}."`;
-
-    return {
-      value,
-      label,
-      description: `${timeLines.join('\n')}\n\n${ivtPlan}${ivGateText}\n\n${evtPlan}\n\n${imagingPlan}\n\n${documentation}`,
-      colorVar,
-    };
-  },
-  customRender: (container: HTMLElement, onUpdate: (values: Record<string, number>) => void) => {
-    const style = document.createElement('style');
-    style.textContent = `
-      .stroke-window-field { margin-bottom: 14px; padding: 12px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); }
-      .stroke-window-label { display:block; font-weight:700; color:var(--color-text); margin-bottom:6px; }
-      .stroke-window-desc { display:block; color:var(--color-text-muted); font-size:13px; line-height:1.35; margin-bottom:8px; }
-      .stroke-window-input { width:100%; min-height:44px; box-sizing:border-box; padding:10px 12px; border-radius:8px; border:1px solid var(--color-border); background:var(--color-bg); color:var(--color-text); font-size:16px; }
-      .stroke-window-toggle-row { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:10px; padding:10px 12px; border:1px solid var(--color-border); border-radius:10px; background:var(--color-surface); }
-      .stroke-window-toggle-row input { width:24px; height:24px; flex:0 0 auto; }
-      .stroke-window-mini { font-size:12px; color:var(--color-text-muted); margin-top:8px; line-height:1.35; }
-    `;
-    container.appendChild(style);
-
-    const now = new Date();
-    const values: Record<string, number> = {
-      scenario: 1,
-      now: now.getTime(),
-      lkw: 0,
-      discovered: 0,
-      bedtime: 0,
-      imaging: 0,
-      lvo: 0,
-      disabling: 1,
-      hemorrhageExcluded: 0,
-      noIvContra: 0,
-    };
-
-    function update(): void {
-      onUpdate({ ...values });
-    }
-
-    function fieldWrap(label: string, desc?: string): HTMLDivElement {
-      const wrap = document.createElement('div');
-      wrap.className = 'stroke-window-field';
-      const labelEl = document.createElement('label');
-      labelEl.className = 'stroke-window-label';
-      labelEl.textContent = label;
-      wrap.appendChild(labelEl);
-      if (desc) {
-        const descEl = document.createElement('span');
-        descEl.className = 'stroke-window-desc';
-        descEl.textContent = desc;
-        wrap.appendChild(descEl);
-      }
-      return wrap;
-    }
-
-    function addSelect(name: string, label: string, desc: string, options: Array<{ label: string; value: number }>): void {
-      const wrap = fieldWrap(label, desc);
-      const select = document.createElement('select');
-      select.className = 'stroke-window-input';
-      for (const opt of options) {
-        const option = document.createElement('option');
-        option.value = String(opt.value);
-        option.textContent = opt.label;
-        select.appendChild(option);
-      }
-      select.addEventListener('change', () => {
-        values[name] = Number(select.value);
-        update();
-      });
-      values[name] = Number(select.value);
-      wrap.appendChild(select);
-      container.appendChild(wrap);
-    }
-
-    function addDateTime(name: string, label: string, desc: string, defaultValue?: string): void {
-      const wrap = fieldWrap(label, desc);
-      const input = document.createElement('input');
-      input.type = 'datetime-local';
-      input.className = 'stroke-window-input';
-      if (defaultValue) input.value = defaultValue;
-      input.addEventListener('input', () => {
-        values[name] = parseLocalDateTimeValue(input.value);
-        update();
-      });
-      values[name] = parseLocalDateTimeValue(input.value);
-      wrap.appendChild(input);
-      container.appendChild(wrap);
-    }
-
-    function addToggle(name: string, label: string, desc: string, defaultChecked = false): void {
-      const row = document.createElement('label');
-      row.className = 'stroke-window-toggle-row';
-      const textWrap = document.createElement('span');
-      const title = document.createElement('span');
-      title.className = 'stroke-window-label';
-      title.textContent = label;
-      textWrap.appendChild(title);
-      const note = document.createElement('span');
-      note.className = 'stroke-window-desc';
-      note.textContent = desc;
-      textWrap.appendChild(note);
-      const input = document.createElement('input');
-      input.type = 'checkbox';
-      input.checked = defaultChecked;
-      input.addEventListener('change', () => {
-        values[name] = input.checked ? 1 : 0;
-        update();
-      });
-      values[name] = input.checked ? 1 : 0;
-      row.appendChild(textWrap);
-      row.appendChild(input);
-      container.appendChild(row);
-    }
-
-    addSelect('scenario', 'Presentation type', 'Known onset uses symptom-onset/LKW. Wake-up and found-abnormal cases use last-known-well plus discovery time.', [
-      { label: 'Known / witnessed onset', value: 1 },
-      { label: 'Wake-up stroke', value: 2 },
-      { label: 'Found abnormal / unknown onset', value: 3 },
-    ]);
-    addDateTime('now', 'Current decision time', 'Defaults to now. Update if you are reconstructing an earlier stroke-team decision.', toLocalDateTimeValue(now));
-    addDateTime('lkw', 'Last-known-well / last seen normal', 'The legally relevant clock. For wake-up stroke this is usually when the patient went to bed normal.');
-    addDateTime('discovered', 'Symptom discovery / woke abnormal', 'When the deficit was first discovered. This documents recognition time but does not replace last-known-well.');
-    addDateTime('bedtime', 'Went to bed normal', 'Optional shortcut for wake-up stroke. If presentation type is wake-up, this overrides the LKW field.');
-    addSelect('imaging', 'Advanced imaging gate', 'Use after CT excludes hemorrhage. This does not replace local stroke-team interpretation.', [
-      { label: 'No advanced imaging result yet', value: 0 },
-      { label: 'MRI DWI-positive / FLAIR-negative mismatch', value: 1 },
-      { label: 'CT/MR perfusion mismatch / penumbra present', value: 2 },
-      { label: 'Advanced imaging unfavorable', value: 3 },
-    ]);
-    addSelect('lvo', 'CTA / vessel status', 'CTA drives thrombectomy decisions. Unknown should trigger CTA head/neck.', [
-      { label: 'Unknown / CTA not done yet', value: 0 },
-      { label: 'No treatable LVO marked', value: 1 },
-      { label: 'Anterior-circulation LVO', value: 2 },
-      { label: 'Basilar / posterior-circulation occlusion', value: 3 },
-    ]);
-    addToggle('disabling', 'Deficit is disabling', 'A disabling deficit can be present even with low NIHSS: aphasia, hemianopia, severe neglect, dominant-hand weakness, gait-preventing ataxia.', true);
-    addToggle('hemorrhageExcluded', 'Hemorrhage excluded on NCCT/MRI', 'Required before IV thrombolysis.');
-    addToggle('noIvContra', 'Major IVT contraindication screen cleared', 'Use the Contra tool for the full checklist. This calculator only maps the time/imaging windows.');
-
-    const note = document.createElement('div');
-    note.className = 'stroke-window-mini';
-    note.textContent = 'Tip: for wake-up stroke, enter went-to-bed-normal and woke/found-abnormal. The output keeps these clocks separate so documentation does not accidentally convert discovery time into LKW.';
-    container.appendChild(note);
-
-    update();
-  },
-};
-
-// -------------------------------------------------------------------
 // TIMI Risk Score Calculator Definition
 // -------------------------------------------------------------------
 
@@ -37223,6 +36885,1035 @@ const PE_RESUS_CHECKLIST_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// =====================================================================
+// HEADACHE-HUB CALCULATORS (added 2026-05-22 — Phase 2)
+//
+// Five net-new calculators that ship with the headache-hub batch.
+// Bounds enforcement (R24 / AC #13) is encoded inside `computeResult`
+// rather than via a schema extension — the CalculatorField interface
+// doesn't currently carry min/max/required. Each bounded numeric field
+// short-circuits to "Invalid input" before any clinical recommendation.
+//
+// Citation freeze status (Phase 13a): anchors marked ✓ are verified,
+// ⚠ are pending verification at consult-build time.
+// =====================================================================
+
+// -------------------------------------------------------------------
+// SNOOP10 — Red-Flag Headache Screen
+// -------------------------------------------------------------------
+
+const SNOOP10_CALCULATOR: CalculatorDefinition = {
+  id: 'snoop10',
+  title: 'SNOOP10 Red Flags',
+  subtitle: 'Secondary Headache Screen (AHS 2019 update)',
+  description: 'Ten red-flag features that should prompt secondary-headache workup. ANY single positive item warrants imaging ± LP. Absence of red flags does NOT rule out secondary headache in a high-risk presentation — re-screen if features evolve.',
+  fields: [
+    { name: 's1', label: 'S — Systemic symptoms (fever, weight loss, malignancy, immunocompromise)', type: 'toggle', points: 1 },
+    { name: 'n1', label: 'N — Neurologic deficit (focal signs, AMS, papilledema)', type: 'toggle', points: 1 },
+    { name: 'o1', label: 'O — Onset sudden / thunderclap (peak within 1 min)', type: 'toggle', points: 1 },
+    { name: 'o2', label: 'O — Older age at new headache onset (>50 yr)', type: 'toggle', points: 1 },
+    { name: 'p1', label: 'P — Pattern change or progression in known headache disorder', type: 'toggle', points: 1 },
+    { name: 'p2', label: 'P — Positional (worse supine / on standing — LP suspicion)', type: 'toggle', points: 1 },
+    { name: 'p3', label: 'P — Precipitated by Valsalva / cough / exertion', type: 'toggle', points: 1 },
+    { name: 'p4', label: 'P — Papilledema on fundoscopy', type: 'toggle', points: 1 },
+    { name: 'p5', label: 'P — Progressive / posterior (occipital, brainstem signs)', type: 'toggle', points: 1 },
+    { name: 'p6', label: 'P — Pregnancy or postpartum (eclampsia, PRES, CVST)', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Any single red-flag positive = secondary workup mandatory (non-contrast CT first; add LP, MRI/MRA/MRV, ESR/CRP based on the specific red flag).',
+  citations: [
+    'Dodick DW. Pearls: Headache. Semin Neurol. 2010;30(1):74-81. (Original SNOOP)',
+    'Do TP, et al. Red and orange flags for secondary headaches in clinical practice (SNOOP10). Neurology. 2019;92(3):134-144.', // ✓ AHS-cited
+  ],
+  computeResult: (values) => {
+    const keys = ['s1', 'n1', 'o1', 'o2', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6'];
+    const labels: Record<string, string> = {
+      s1: 'Systemic symptoms (fever, malignancy, immunocompromise)',
+      n1: 'Neurologic deficit (focal signs, AMS, papilledema)',
+      o1: 'Sudden / thunderclap onset',
+      o2: 'Older age at new-onset headache (>50)',
+      p1: 'Pattern change in known headache disorder',
+      p2: 'Positional (LP-suspicious)',
+      p3: 'Precipitated by Valsalva / exertion',
+      p4: 'Papilledema on fundoscopy',
+      p5: 'Progressive / posterior location',
+      p6: 'Pregnancy or postpartum',
+    };
+    const hits = keys.filter(k => (values[k] || 0) >= 1);
+
+    if (hits.length === 0) {
+      return {
+        value: '0 / 10',
+        label: 'No SNOOP10 red flags',
+        description: '**NO RED FLAGS DETECTED.**\n\n• Absence of red flags does NOT rule out secondary headache in a high-risk presentation.\n• Re-screen with SNOOP10 if features evolve.\n• Continue primary-headache workup (ICHD-3 criteria).',
+        colorVar: '--color-primary',
+      };
+    }
+
+    const bullets = hits.map(k => `• ${labels[k]}`).join('\n');
+    return {
+      value: `${hits.length} / 10`,
+      label: 'Secondary workup required',
+      description: `**SNOOP10 POSITIVE — ${hits.length} red flag(s):**\n\n${bullets}\n\n**NEXT STEPS:**\n• Non-contrast head CT FIRST.\n• Add LP if SAH suspicion + CT negative (within 6 h CT-only may suffice per Ottawa SAH; otherwise LP).\n• MRI / MRA / MRV for posterior, positional, progressive, or pregnancy red flags (CVST suspicion).\n• ESR / CRP if >50 yr (giant cell arteritis).\n• Do NOT discharge without resolution.`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// CLUSTER vs MIGRAINE vs TENSION DIFFERENTIATOR
+// -------------------------------------------------------------------
+//
+// Not a scored calculator — a side-by-side comparison surface. Uses
+// `computeResult` to render the table inline once the user toggles
+// which symptoms are present. Falls back to a "no symptoms picked"
+// hint if empty.
+
+const CLUSTER_MIGRAINE_TENSION_CALCULATOR: CalculatorDefinition = {
+  id: 'cluster-migraine-tension-differentiator',
+  title: 'Cluster vs Migraine vs Tension',
+  subtitle: 'ICHD-3 Side-by-Side Differentiator',
+  description: 'Side-by-side comparison of the three primary headache phenotypes by ICHD-3 §1 (migraine), §3 (cluster), §2 (tension-type). Toggle the features present; the differentiator highlights the best fit.',
+  fields: [
+    { name: 'unilateral', label: 'Strictly unilateral (same side every attack)', type: 'toggle', points: 1 },
+    { name: 'pulsating', label: 'Pulsating / throbbing quality', type: 'toggle', points: 1 },
+    { name: 'stabbing', label: 'Severe stabbing / boring quality', type: 'toggle', points: 1 },
+    { name: 'duration-short', label: 'Duration 15-180 min', type: 'toggle', points: 1 },
+    { name: 'duration-long', label: 'Duration 4-72 h', type: 'toggle', points: 1 },
+    { name: 'autonomic', label: 'Cranial autonomic features (lacrimation, rhinorrhea, ptosis, miosis, conjunctival injection — IPSILATERAL)', type: 'toggle', points: 1 },
+    { name: 'photophono', label: 'Photophobia + phonophobia', type: 'toggle', points: 1 },
+    { name: 'nausea', label: 'Nausea / vomiting', type: 'toggle', points: 1 },
+    { name: 'agitation', label: 'Patient restless / agitated during attack', type: 'toggle', points: 1 },
+    { name: 'bilateral-pressing', label: 'Bilateral pressing/tightening (non-pulsating)', type: 'toggle', points: 1 },
+    { name: 'circadian', label: 'Attacks at predictable time of day / clock-like', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'ICHD-3 criteria are diagnostic by pattern, not single features. Use the comparison panel to confirm phenotype before treatment routing.',
+  citations: [
+    'IHS Headache Classification Committee. International Classification of Headache Disorders, 3rd edition (ICHD-3). Cephalalgia. 2018;38(1):1-211.', // ✓
+  ],
+  computeResult: (values) => {
+    const u = values['unilateral'] || 0;
+    const pul = values['pulsating'] || 0;
+    const stab = values['stabbing'] || 0;
+    const ds = values['duration-short'] || 0;
+    const dl = values['duration-long'] || 0;
+    const aut = values['autonomic'] || 0;
+    const pp = values['photophono'] || 0;
+    const nv = values['nausea'] || 0;
+    const ag = values['agitation'] || 0;
+    const bp = values['bilateral-pressing'] || 0;
+    const circ = values['circadian'] || 0;
+
+    const total = u + pul + stab + ds + dl + aut + pp + nv + ag + bp + circ;
+    if (!total) {
+      return {
+        value: '—',
+        label: 'Pick features',
+        description: '**Toggle the features present in this attack.** The differentiator highlights the best fit once at least one feature is selected.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    const clusterScore = u + stab + ds + aut + ag + circ;
+    const migraineScore = pul + dl + pp + nv;
+    const tensionScore = bp + (dl ? 1 : 0); // tension is also 4-72h sometimes but milder
+
+    // Pick best fit
+    let phenotype: 'cluster' | 'migraine' | 'tension' | 'mixed' = 'mixed';
+    if (clusterScore >= 3 && clusterScore > migraineScore && clusterScore > tensionScore) phenotype = 'cluster';
+    else if (migraineScore >= 2 && migraineScore >= clusterScore) phenotype = 'migraine';
+    else if (tensionScore >= 1 && tensionScore >= migraineScore && tensionScore >= clusterScore) phenotype = 'tension';
+
+    const table = `**ICHD-3 COMPARISON:**\n• Cluster (§3.1) features: ${clusterScore} (unilateral, stabbing, 15-180 min, autonomic, restless, circadian)\n• Migraine (§1) features: ${migraineScore} (pulsating, 4-72 h, photophono, N/V)\n• Tension-type (§2) features: ${tensionScore} (bilateral pressing, mild, can be 30 min-7 d)`;
+
+    if (phenotype === 'cluster') {
+      return {
+        value: 'Cluster',
+        label: 'Cluster Headache (ICHD-3 §3.1)',
+        description: `**BEST FIT: CLUSTER HEADACHE.**\n\n${table}\n\n**ACUTE:**\n• High-flow O₂ 12-15 L/min via NRB × 15 min (first-line).\n• Sumatriptan 6 mg SQ (or 20 mg intranasal) — onset 10-15 min.\n• Zolmitriptan 5 mg intranasal — alt.\n\n**BRIDGE / PROPHYLAXIS:**\n• Prednisone 60 mg PO × 5 d, taper.\n• Greater occipital nerve block (depot steroid + LA).\n• Verapamil titration (ECG before each step).\n\n**PITFALL:** Patient agitation differs from migraine (who prefer dark/quiet) — cluster patients pace.`,
+        colorVar: '--color-danger',
+      };
+    }
+    if (phenotype === 'migraine') {
+      return {
+        value: 'Migraine',
+        label: 'Migraine (ICHD-3 §1)',
+        description: `**BEST FIT: MIGRAINE.**\n\n${table}\n\n**ACUTE LADDER:**\n• Metoclopramide 10 mg IV + diphenhydramine 25 mg IV + ketorolac 30 mg IV + dexamethasone 10 mg IV + 1 L NS bolus (status-migrainosus cocktail).\n• Triptan only if no CV CI (see Triptan Eligibility).\n• DHE protocol for refractory / status migrainosus.\n\n**CONFIRM:** Run ICHD-3 Migraine Criteria for rule-in.`,
+        colorVar: '--color-warning',
+      };
+    }
+    if (phenotype === 'tension') {
+      return {
+        value: 'Tension-type',
+        label: 'Tension-type Headache (ICHD-3 §2)',
+        description: `**BEST FIT: TENSION-TYPE HEADACHE.**\n\n${table}\n\n**ACUTE:**\n• Acetaminophen 1 g PO or NSAID (ibuprofen 400-600 mg PO).\n• Topical heat / neck stretches.\n• No autonomic features, no severe pain.\n\n**PITFALL:** Re-screen with SNOOP10 if new pattern — many "tension" presentations are actually undertreated migraine or a secondary cause.`,
+        colorVar: '--color-primary',
+      };
+    }
+    return {
+      value: 'Mixed',
+      label: 'Mixed / non-classic features',
+      description: `**MIXED PHENOTYPE.**\n\n${table}\n\n• Run ICHD-3 Migraine Criteria first.\n• If thunderclap or sudden onset → Ottawa SAH Rule + workup.\n• If new red flags → SNOOP10.\n• Consider secondary headache before treating empirically.`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// TRIPTAN ELIGIBILITY / CONTRAINDICATIONS
+// -------------------------------------------------------------------
+
+const TRIPTAN_ELIGIBILITY_CALCULATOR: CalculatorDefinition = {
+  id: 'triptan-eligibility',
+  title: 'Triptan Eligibility',
+  subtitle: 'Contraindication Screen Before Triptan',
+  description: 'Screen for absolute and relative contraindications BEFORE giving a triptan (sumatriptan, zolmitriptan, rizatriptan, etc.). Any absolute CI = use alternative pathway.',
+  fields: [
+    { name: 'cad', label: 'Known CAD, prior MI, or stable/unstable angina', type: 'toggle', points: 10 },
+    { name: 'cva', label: 'History of stroke / TIA', type: 'toggle', points: 10 },
+    { name: 'pvd', label: 'Peripheral or visceral vascular disease', type: 'toggle', points: 10 },
+    { name: 'htn', label: 'Uncontrolled hypertension (BP ≥160/100)', type: 'toggle', points: 10 },
+    { name: 'hemiplegic', label: 'Hemiplegic migraine or basilar-type migraine', type: 'toggle', points: 10 },
+    { name: 'prinzmetal', label: 'Prinzmetal / vasospastic angina', type: 'toggle', points: 10 },
+    { name: 'pregnancy', label: 'Pregnancy', type: 'toggle', points: 10 },
+    { name: 'ergot24', label: 'Ergot or DHE within 24 hours', type: 'toggle', points: 10 },
+    { name: 'maoi14', label: 'MAOI within 14 days', type: 'toggle', points: 10 },
+    { name: 'ssri', label: 'SSRI / SNRI in use', type: 'toggle', points: 1 },
+    { name: 'age65', label: 'Age >65 + new CV risk factors', type: 'toggle', points: 1 },
+    { name: 'hepatic', label: 'Severe hepatic impairment', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'List ALL contraindications, do NOT stop at first. Absolute CIs route to non-triptan pathway (DHE may also be CI in some); SSRI in use = serotonin-syndrome warning, not absolute CI.',
+  citations: [
+    'Ailani J, et al. The American Headache Society Consensus Statement: Update on Integrating New Migraine Treatments Into Clinical Practice. Headache. 2021;61(7):1021-1039.', // ⚠ verify
+    'FDA Class Warning — Triptans + SSRI/SNRI serotonin syndrome (2006).', // ✓
+  ],
+  computeResult: (values) => {
+    const absLabels: Record<string, string> = {
+      cad: 'CAD / prior MI / angina',
+      cva: 'Prior stroke / TIA',
+      pvd: 'Peripheral / visceral vascular disease',
+      htn: 'Uncontrolled HTN (≥160/100)',
+      hemiplegic: 'Hemiplegic or basilar migraine',
+      prinzmetal: 'Prinzmetal / vasospastic angina',
+      pregnancy: 'Pregnancy',
+      ergot24: 'Ergot / DHE within 24 h',
+      maoi14: 'MAOI within 14 days',
+    };
+    const relLabels: Record<string, string> = {
+      ssri: 'SSRI / SNRI in use (serotonin-syndrome risk)',
+      age65: 'Age >65 with new CV risk',
+      hepatic: 'Severe hepatic impairment',
+    };
+    const absHits = Object.keys(absLabels).filter(k => (values[k] || 0) >= 10);
+    const relHits = Object.keys(relLabels).filter(k => (values[k] || 0) >= 1);
+
+    if (absHits.length === 0 && relHits.length === 0) {
+      return {
+        value: 'Eligible',
+        label: 'No CIs identified',
+        description: '**TRIPTAN ELIGIBLE.**\n\n• Confirm no recent ergot/DHE (last 24 h) and no MAOI (last 14 d) before dosing.\n• Standard dose: sumatriptan 6 mg SQ (cluster) or 50-100 mg PO (migraine); zolmitriptan 5 mg IN (cluster) or 2.5-5 mg PO (migraine).\n• Re-screen BP before administering.',
+        colorVar: '--color-primary',
+      };
+    }
+    if (absHits.length > 0) {
+      const list = absHits.map(k => `• ${absLabels[k]}`).join('\n');
+      return {
+        value: `${absHits.length} absolute`,
+        label: 'Triptan CONTRAINDICATED',
+        description: `**ABSOLUTE CONTRAINDICATION(S):**\n\n${list}\n\n**DO NOT give triptan.**\n\n**ALTERNATIVE PATHWAY:**\n• Non-triptan acute: IV metoclopramide 10 mg + diphenhydramine 25 mg + ketorolac 30 mg (avoid NSAID if pregnancy >30 wk).\n• High-flow O₂ for cluster (no CIs).\n• Greater occipital nerve block.\n• DHE only if no peripheral vascular disease, no CAD, no recent triptan (24 h).`,
+        colorVar: '--color-danger',
+      };
+    }
+    // relative only
+    const list = relHits.map(k => `• ${relLabels[k]}`).join('\n');
+    return {
+      value: `${relHits.length} relative`,
+      label: 'Use with caution',
+      description: `**RELATIVE CONTRAINDICATION(S):**\n\n${list}\n\n• SSRI + triptan: FDA 2006 advisory; absolute risk of serotonin syndrome is low (Cochrane 2018) but document the conversation and lowest-effective dose.\n• Discuss alternative if patient prefers to avoid.\n• Monitor for tremor, hyperreflexia, autonomic instability post-dose.`,
+      colorVar: '--color-warning',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// STATUS MIGRAINOSUS COCKTAIL
+// -------------------------------------------------------------------
+
+const STATUS_MIGRAINOSUS_COCKTAIL_CALCULATOR: CalculatorDefinition = {
+  id: 'status-migrainosus-cocktail',
+  title: 'Status Migrainosus Cocktail',
+  subtitle: 'Parenteral Acute Migraine Bundle',
+  description: 'Standard ED parenteral cocktail for severe acute migraine (>72 h or refractory to oral). Toggle the optional adjuncts that apply.',
+  fields: [
+    { name: 'pregnant', label: 'Patient pregnant?', type: 'toggle', points: 1, description: 'Routes to pregnancy-safe ladder; SKIPS ketorolac after 30 wk and droperidol' },
+    { name: 'qtc', label: 'Known prolonged QTc / high-risk medications', type: 'toggle', points: 1, description: 'Avoid prochlorperazine / droperidol' },
+    { name: 'recurrence', label: 'Recurrent ED visits this cycle (≥2 in 7 d)', type: 'toggle', points: 1, description: 'Add 8-day taper bridge' },
+  ],
+  results: [],
+  thresholdNote: 'Re-dose ketorolac at 6 h; metoclopramide may repeat at 30 min if needed. If persistent at 60-90 min → DHE protocol or admit.',
+  citations: [
+    'Ailani J, et al. The American Headache Society Consensus Statement: Update on Integrating New Migraine Treatments Into Clinical Practice. Headache. 2021;61(7):1021-1039.', // ⚠ verify
+    'Friedman BW, et al. Randomized study of IV prochlorperazine plus diphenhydramine vs IV hydromorphone for migraine. Neurology. 2017;89(20):2075-2082.', // ✓
+  ],
+  computeResult: (values) => {
+    const preg = values['pregnant'] || 0;
+    const qtc = values['qtc'] || 0;
+    const recurrence = values['recurrence'] || 0;
+
+    if (preg) {
+      return {
+        value: 'Pregnancy-safe',
+        label: 'Pregnancy-modified cocktail',
+        description: '**PREGNANCY-SAFE STATUS MIGRAINOSUS LADDER:**\n\n• Acetaminophen 1 g PO/IV.\n• Metoclopramide 10 mg IV (Category B; safe across trimesters).\n• Diphenhydramine 25 mg IV (prevents EPS from metoclopramide).\n• Magnesium sulfate 1-2 g IV over 30 min (Category D in pre-eclampsia but used short-term in migraine).\n• Greater occipital nerve block (bupivacaine 0.5%, no epi) — first-line safe in pregnancy.\n\n**AVOID:**\n• NSAIDs after 30 weeks (premature ductal closure).\n• Triptans (data limited, generally avoid).\n• Ergots / DHE / valproate (absolute pregnancy CI).\n• Opioids (rebound + neonatal withdrawal risk).\n\n**See:** Pregnancy-Safe Headache Rx overlay for trimester-specific options.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    const neuroleptic = qtc
+      ? 'Metoclopramide 10 mg IV (avoid prochlorperazine/droperidol per QTc concern)'
+      : 'Prochlorperazine 10 mg IV (or Metoclopramide 10 mg IV)';
+    const taperLine = recurrence
+      ? '\n\n**8-DAY TAPER BRIDGE (recurrent presentation):**\n• Dexamethasone 4 mg PO BID × 4 d, then daily × 4 d.\n• OR Prednisone 60 mg × 5 d.\n• Schedule headache/neuro follow-up within 1 wk.'
+      : '';
+
+    return {
+      value: 'Standard',
+      label: 'Status migrainosus cocktail',
+      description: `**STATUS MIGRAINOSUS COCKTAIL (parenteral):**\n\n• ${neuroleptic}\n• Diphenhydramine 25 mg IV (over 2 min) — pre-treats akathisia / EPS from the neuroleptic.\n• Ketorolac 30 mg IV.\n• Dexamethasone 10 mg IV (reduces 24-72 h recurrence by ~50%).\n• Normal saline 1 L bolus.\n\n**MONITORING:**\n• Recheck pain at 30 min; if no relief, repeat metoclopramide 10 mg.\n• If no relief at 60-90 min → DHE protocol (if no triptan in last 24 h) OR admit.${taperLine}\n\n**PITFALL:** Do NOT give the IV cocktail without dropping the BP first — neuroleptics can drop SBP 10-20 mmHg in dehydrated patients.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// CO-Hgb THRESHOLD (HBO indication)
+// -------------------------------------------------------------------
+
+const CO_HGB_THRESHOLD_CALCULATOR: CalculatorDefinition = {
+  id: 'co-hgb-threshold',
+  title: 'CO-Hgb Threshold (HBO)',
+  subtitle: 'Hyperbaric Oxygen Indication for CO Toxicity',
+  description: 'Decide whether the patient meets criteria for hyperbaric O₂ therapy (HBO) per UHMS 2019 + Weaver NEJM 2002 trial. Enter CO-Hgb % and toggle clinical features.',
+  fields: [
+    { name: 'cohgb', label: 'CO-Hgb level', type: 'number', points: 0, unit: '%', description: 'Acceptable range: 0–80%. Values outside this range will fail validation.' },
+    { name: 'symp-syncope', label: 'Syncope or LOC at any point', type: 'toggle', points: 1 },
+    { name: 'symp-ams', label: 'Altered mental status / focal neuro deficit', type: 'toggle', points: 1 },
+    { name: 'symp-ischemia', label: 'Cardiac ischemia (chest pain, ECG changes, troponin↑)', type: 'toggle', points: 1 },
+    { name: 'pregnant', label: 'Pregnant patient', type: 'toggle', points: 1 },
+    { name: 'persistent', label: 'Persistent neuro symptoms after 4 h of normobaric 100% O₂', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Normobaric 100% O₂ via NRB is the floor for every CO patient. HBO indications are above that. Time to HBO ≤6 h ideal, ≤24 h acceptable per UHMS. Note: SpO₂ pulse-ox is FALSELY normal in CO toxicity (Hb-CO absorbs at 660 nm like oxyhemoglobin).',
+  citations: [
+    'Weaver LK, et al. Hyperbaric oxygen for acute carbon monoxide poisoning. N Engl J Med. 2002;347(14):1057-1067.', // ✓
+    'Hampson NB, et al. Practice recommendations in the diagnosis, management, and prevention of carbon monoxide poisoning. Am J Respir Crit Care Med. 2012;186(11):1095-1101.',
+    'UHMS Hyperbaric Oxygen Therapy Indications, 14th ed. 2019.', // ⚠ verify exact edition
+  ],
+  computeResult: (values) => {
+    const co = Number(values['cohgb']);
+    // Bounds enforcement per AC #13
+    if (!Number.isFinite(co) || co < 0 || co > 80) {
+      return {
+        value: 'Invalid',
+        label: 'Enter CO-Hgb 0–80%',
+        description: '**INVALID INPUT.**\n\n• CO-Hgb must be 0–80%.\n• Levels >50% are rare but possible; >70% nearly universally fatal pre-hospital. Confirm sample / co-oximetry / venous draw.\n• If you meant 0.5 (smoker baseline), enter `0.5`.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    const syncope = values['symp-syncope'] || 0;
+    const ams = values['symp-ams'] || 0;
+    const ischemia = values['symp-ischemia'] || 0;
+    const preg = values['pregnant'] || 0;
+    const persistent = values['persistent'] || 0;
+
+    const meetsIndication =
+      co >= 25 ||
+      (preg && co >= 15) ||
+      syncope ||
+      ams ||
+      ischemia ||
+      persistent;
+
+    const reasons: string[] = [];
+    if (co >= 25) reasons.push(`CO-Hgb ${co}% ≥ 25% (Weaver 2002 threshold)`);
+    if (preg && co >= 15) reasons.push(`Pregnancy + CO-Hgb ${co}% ≥ 15% (fetal Hb-CO half-life is 5× maternal)`);
+    if (syncope) reasons.push('Syncope or LOC (objective neuro insult)');
+    if (ams) reasons.push('AMS or focal deficit');
+    if (ischemia) reasons.push('Cardiac ischemia');
+    if (persistent) reasons.push('Persistent symptoms after 4 h of 100% O₂');
+
+    if (meetsIndication) {
+      return {
+        value: `${co}% — HBO`,
+        label: 'HBO indication MET',
+        description: `**HYPERBARIC O₂ INDICATED.**\n\n**REASONS:**\n${reasons.map(r => '• ' + r).join('\n')}\n\n**ACTIONS:**\n• Continue 100% O₂ via NRB at 15 L/min while arranging HBO transfer.\n• Goal: HBO ≤6 h from exposure (ideal); ≤24 h still beneficial.\n• 3-treatment Weaver protocol: 3 ATA × 1 h, then 2× 2 ATA × 1 h within 24 h.\n• Get CBC, CMP, troponin, ECG, lactate, pregnancy test, urine drug screen.\n• If hypotensive / cyanide co-exposure (smoke inhalation) → consider hydroxocobalamin 5 g IV.\n\n**REMINDER:** SpO₂ is falsely normal in CO toxicity. Use co-oximetry / blood gas.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    return {
+      value: `${co}%`,
+      label: 'Normobaric O₂ only',
+      description: `**HBO not indicated by current criteria.**\n\n• CO-Hgb ${co}% without high-risk features.\n• Continue 100% O₂ via NRB ≥4 h or until CO-Hgb <5% AND asymptomatic.\n• Reassess for delayed neurologic sequelae (DNS) on follow-up at 7-14 d (10-30% risk).\n• Discharge criteria: asymptomatic, CO-Hgb trending down, no troponin elevation, safe disposition (source eliminated).\n\nIf symptoms recur or persist → re-screen with this calc for HBO indication.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// =====================================================================
+// CLUSTER-HEADACHE CALCULATORS
+// =====================================================================
+
+// -------------------------------------------------------------------
+// Verapamil titration helper (cluster prophylaxis)
+//
+// Verapamil dosing for cluster headache prophylaxis requires a 12-lead
+// ECG BEFORE every dose increase (PR-interval prolongation risk; halt
+// titration if PR > 0.24 s or new heart block). Target effective dose
+// up to 960 mg/day in divided doses.
+// -------------------------------------------------------------------
+
+const VERAPAMIL_CLUSTER_TITRATION_CALCULATOR: CalculatorDefinition = {
+  id: 'verapamil-cluster-titration',
+  title: 'Verapamil Titration (Cluster)',
+  subtitle: 'Next-step dose + mandatory ECG check',
+  description: 'Cluster-headache prophylaxis dosing. Start 80 mg PO TID; titrate by 80 mg every 2 weeks to effect. Every titration step requires a 12-lead ECG — halt if PR > 0.24 s, new heart block, or HR < 50.',
+  fields: [
+    { name: 'current', label: 'Current daily dose', type: 'number', points: 0, unit: 'mg/day', description: 'Acceptable range: 0–960 mg/day' },
+    { name: 'days', label: 'Days at current dose', type: 'number', points: 0, unit: 'days', description: 'Minimum 14 days at each step before increase' },
+    { name: 'ecg-pr', label: 'PR interval on most recent ECG', type: 'number', points: 0, unit: 'ms', description: '0–400 ms; PR > 240 ms = STOP titration' },
+    { name: 'hr', label: 'Resting HR', type: 'number', points: 0, unit: 'bpm', description: '30–200 bpm; HR < 50 = STOP' },
+    { name: 'block', label: 'New AV block on ECG (1°/2°/3°)', type: 'toggle', points: 1 },
+    { name: 'effective', label: 'Current dose ALREADY suppressing attacks', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Steady-state cluster suppression typically at 240–480 mg/day. Some patients need up to 960 mg/day. ECG before each step is non-negotiable per AHS / EAN.',
+  citations: [
+    'Robbins MS, et al. Treatment of cluster headache: The American Headache Society evidence-based guidelines. Headache. 2016;56(7):1093-1106.', // ⚠ verify
+    'May A, et al. EAN guidelines on the treatment of cluster headache. Eur J Neurol. 2023;30(10):2955-2979.', // ⚠ verify
+  ],
+  computeResult: (values) => {
+    const current = Number(values['current']);
+    const days = Number(values['days']);
+    const pr = Number(values['ecg-pr']);
+    const hr = Number(values['hr']);
+    const block = values['block'] || 0;
+    const effective = values['effective'] || 0;
+
+    // Bounds enforcement (AC #13)
+    if (!Number.isFinite(current) || current < 0 || current > 960) {
+      return {
+        value: 'Invalid',
+        label: 'Enter current dose 0–960 mg/day',
+        description: '**INVALID INPUT.**\n\n• Maximum recommended verapamil cluster dose is 960 mg/day (rare; usually 240–480).\n• If patient is already on > 960 mg/day, ECG monitoring should be daily and cardiology consult required.',
+        colorVar: '--color-muted',
+      };
+    }
+    if (!Number.isFinite(pr) || pr < 0 || pr > 400) {
+      return {
+        value: 'Invalid',
+        label: 'Enter PR 0–400 ms',
+        description: '**INVALID INPUT.**\n\n• Normal PR is 120–200 ms.\n• PR > 240 ms = first-degree AV block; halt verapamil titration.',
+        colorVar: '--color-muted',
+      };
+    }
+    if (!Number.isFinite(hr) || hr < 30 || hr > 200) {
+      return {
+        value: 'Invalid',
+        label: 'Enter HR 30–200 bpm',
+        description: '**INVALID INPUT.**\n\n• Enter resting HR. Values outside 30–200 should prompt reassessment, not titration.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    // Hard stop conditions
+    if (pr > 240 || block || hr < 50) {
+      const issues: string[] = [];
+      if (pr > 240) issues.push(`PR ${pr} ms > 240 ms (1° AV block)`);
+      if (block) issues.push('New AV block on ECG');
+      if (hr < 50) issues.push(`Bradycardia (HR ${hr} bpm)`);
+      return {
+        value: 'STOP',
+        label: 'Halt verapamil titration',
+        description: `**STOP TITRATION — cardiac safety:**\n\n${issues.map(i => '• ' + i).join('\n')}\n\n**ACTIONS:**\n• Hold next dose; do NOT advance.\n• Repeat ECG in 24-48 h.\n• Cardiology consult if PR > 280 ms or 2°/3° block.\n• Consider switch to lithium 300 mg PO BID (target level 0.6–0.8 mEq/L) or topiramate 25 mg qHS escalating to 100 mg/d divided BID.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (effective) {
+      return {
+        value: `${current} mg/day`,
+        label: 'Maintain at current effective dose',
+        description: `**EFFECTIVE DOSE REACHED.**\n\n• Current ${current} mg/day suppressing attacks — do not advance.\n• Repeat ECG every 6 months at steady state.\n• Plan taper after 2-4 wk cluster-free period: decrease by 80 mg every 2 weeks.\n• Resume same dose at first prodrome of next cluster cycle.`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (days < 14) {
+      return {
+        value: `${current} mg/day (day ${days})`,
+        label: 'Hold — need 2 weeks at current step',
+        description: `**STEADY STATE NOT REACHED.**\n\n• Verapamil takes 10-14 days to reach full effect at a given dose.\n• Reassess at day 14.\n• Continue current ${current} mg/day; recheck ECG before any next step.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // Compute next step
+    if (current >= 960) {
+      return {
+        value: `${current} mg/day`,
+        label: 'At maximum recommended dose',
+        description: `**AT 960 mg/day CAP.**\n\n• If still ineffective: cardiology consult before considering higher (rare cases use up to 1080-1200 mg/day with cardiology co-management).\n• Add lithium or topiramate as 2L prophylaxis.\n• Greater occipital nerve block as bridge.\n• Re-evaluate diagnosis — atypical cluster mimics (e.g., trigeminal neuralgia, hemicrania continua) may need different agents.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    const next = current + 80;
+    return {
+      value: `${current} → ${next} mg/day`,
+      label: 'Increase by 80 mg/day',
+      description: `**ADVANCE TO ${next} mg/day** (divided TID-QID).\n\n**PRE-STEP CHECK (mandatory):**\n• 12-lead ECG today — PR ${pr} ms, HR ${hr} bpm acceptable.\n• Re-ECG at day 7-10 on new dose.\n\n**DOSING:**\n• ${next} mg/day divided. Common split: ${Math.round(next / 3 / 10) * 10} mg TID (round to nearest 40 mg increment).\n• Sustained-release verapamil acceptable; immediate-release preferred by some headache centers because IR allows tighter peak-trough monitoring.\n\n**REASSESS:**\n• Attack frequency at 2 weeks.\n• If effective → hold at ${next} mg/day.\n• If not effective + ECG safe → advance to ${next + 80} mg/day.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// =====================================================================
+// TRIGEMINAL-NEURALGIA CALCULATORS
+// =====================================================================
+
+// -------------------------------------------------------------------
+// CBZ titration helper (TN first-line)
+//
+// Carbamazepine is the only Class A evidence drug for TN per AAN/EFNS
+// 2008 + 2019 update. HLA-B*1502 screening warning for Han Chinese,
+// Thai, Vietnamese, Filipino, Malay ancestry (FDA boxed warning 2007).
+// CBZ-associated hyponatremia: do NOT switch to oxcarbazepine (causes
+// MORE hyponatremia, 15-30% vs 10%) — see R9.
+// -------------------------------------------------------------------
+
+const CBZ_TN_TITRATION_CALCULATOR: CalculatorDefinition = {
+  id: 'cbz-tn-titration',
+  title: 'CBZ Titration (TN)',
+  subtitle: 'Carbamazepine first-line, with ancestry + Na monitoring',
+  description: 'Carbamazepine for trigeminal neuralgia. Start 100 mg PO BID; titrate by 100-200 mg every 3 days to effect. Target 600-1200 mg/day divided. HLA-B*1502 screening required in at-risk ancestry BEFORE starting.',
+  fields: [
+    { name: 'current', label: 'Current daily dose', type: 'number', points: 0, unit: 'mg/day', description: 'Acceptable range: 0–1600 mg/day' },
+    { name: 'days', label: 'Days at current dose', type: 'number', points: 0, unit: 'days', description: 'Minimum 3 days at each step before increase' },
+    { name: 'effective', label: 'Pain controlled at current dose', type: 'toggle', points: 1 },
+    { name: 'asian-ancestry', label: 'Han Chinese, Thai, Vietnamese, Filipino, or Malay ancestry?', type: 'toggle', points: 1, description: 'FDA boxed warning — requires HLA-B*1502 genotype BEFORE starting' },
+    { name: 'hla-screened', label: 'HLA-B*1502 NEGATIVE (or not at risk)', type: 'toggle', points: 1 },
+    { name: 'na', label: 'Serum sodium', type: 'number', points: 0, unit: 'mEq/L', description: 'Acceptable range: 110–160 mEq/L; CBZ causes hyponatremia in ~10%' },
+    { name: 'rash', label: 'New rash since starting CBZ', type: 'toggle', points: 1, description: 'Any rash = STOP and evaluate for SJS/TEN' },
+  ],
+  results: [],
+  thresholdNote: 'Class A evidence (AAN/EFNS 2008 + 2019). NNT ~1.7 for first-month efficacy. AAN-recommended target 600-1200 mg/day; max 1600 mg/day.',
+  citations: [
+    'Cruccu G, et al. AAN-EFNS guidelines on trigeminal neuralgia management. Eur J Neurol. 2008;15(10):1013-1028.', // ✓
+    'Bendtsen L, et al. European Academy of Neurology guideline on trigeminal neuralgia. Eur J Neurol. 2019;26(6):831-849.', // ✓
+    'FDA Drug Safety Communication — HLA-B*1502 screening for Asian patients started on carbamazepine. December 2007.', // ✓
+  ],
+  computeResult: (values) => {
+    const current = Number(values['current']);
+    const days = Number(values['days']);
+    const effective = values['effective'] || 0;
+    const asian = values['asian-ancestry'] || 0;
+    const hlaSafe = values['hla-screened'] || 0;
+    const na = Number(values['na']);
+    const rash = values['rash'] || 0;
+
+    if (!Number.isFinite(current) || current < 0 || current > 1600) {
+      return {
+        value: 'Invalid',
+        label: 'Enter current dose 0–1600 mg/day',
+        description: '**INVALID INPUT.**\n\n• CBZ maximum is 1600 mg/day for TN. Above this is unusual; reassess diagnosis (MS-related TN? glossopharyngeal? secondary cause).',
+        colorVar: '--color-muted',
+      };
+    }
+    if (Number.isFinite(na) && (na < 110 || na > 160)) {
+      return {
+        value: 'Invalid',
+        label: 'Sodium out of plausible range',
+        description: '**INVALID INPUT.**\n\n• Sodium 110–160 mEq/L; check lab. Recompute after correct value.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    if (rash) {
+      return {
+        value: 'STOP',
+        label: 'Rash on CBZ — STOP',
+        description: '**STOP CBZ IMMEDIATELY.**\n\n• ANY rash on CBZ requires evaluation for SJS / TEN / DRESS.\n• Examine mucous membranes (Nikolsky sign, oral involvement).\n• If mucosal involvement, fever, or skin pain → ED admission, dermatology consult.\n• Do NOT rechallenge with CBZ.\n• Switch to **oxcarbazepine** with caution (10% cross-reactivity for SJS) — alternatives: baclofen, gabapentin, lamotrigine.\n• If HLA-B*1502 was never checked + Asian ancestry → especially high SJS suspicion.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (asian && !hlaSafe) {
+      return {
+        value: 'HOLD',
+        label: 'Confirm HLA-B*1502 first',
+        description: '**HLA-B*1502 SCREENING REQUIRED BEFORE INITIATION.**\n\n• Han Chinese, Thai, Vietnamese, Filipino, Malay ancestry: HLA-B*1502 carriers have ~10x risk of SJS/TEN on CBZ.\n• Send HLA-B*1502 genotype.\n• If POSITIVE → use baclofen, gabapentin, or lamotrigine instead (oxcarbazepine ALSO contraindicated — cross-reactive HLA-B*1502 risk).\n• If NEGATIVE → may proceed with CBZ. Re-check this calculator with "HLA-B*1502 negative" toggled.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (Number.isFinite(na) && na < 130) {
+      return {
+        value: `Na ${na}`,
+        label: 'CBZ-associated hyponatremia',
+        description: `**HYPONATREMIA ${na} mEq/L.**\n\n• CBZ-associated SIADH in ~10% — usually mild but can progress.\n• Do NOT routinely switch to oxcarbazepine — it causes MORE hyponatremia (15-30%).\n• ACTIONS:\n  • Fluid restrict to 1.5 L/day.\n  • Recheck Na in 3-7 days.\n  • If Na < 125 OR symptomatic → STOP CBZ, switch to gabapentin (300 mg qHS, titrate to 1800-3600 mg/day TID) or baclofen (5 mg TID, titrate to max 80 mg/day).\n  • Lamotrigine is another non-Na-lowering option (slow titration 25 mg qHS over 6 weeks).\n  • Hypertonic 3% saline only if symptomatic Na < 120.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (effective) {
+      return {
+        value: `${current} mg/day`,
+        label: 'Maintain at current effective dose',
+        description: `**PAIN CONTROLLED AT ${current} mg/day.**\n\n• Maintain steady state.\n• Recheck Na every 3-6 months.\n• Recheck CBC every 6-12 months (rare aplastic anemia / agranulocytosis).\n• After 6-12 months pain-free, consider gradual taper: decrease by 100-200 mg every 2-4 weeks while monitoring for recurrence.\n• If pain recurs → resume effective dose immediately.`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (days < 3) {
+      return {
+        value: `${current} mg/day (day ${days})`,
+        label: 'Hold — need 3 days at current step',
+        description: `**STEADY STATE NOT REACHED.**\n\n• Allow 3 days for full effect at current ${current} mg/day before advancing.\n• If breakthrough pain, can use IV/IM ketamine 0.1-0.3 mg/kg as bridge (limited evidence, off-label).`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (current >= 1200) {
+      return {
+        value: `${current} mg/day`,
+        label: 'At target — consider adjunct or referral',
+        description: `**AT TARGET 1200 mg/day; ATTACK PERSISTS.**\n\n• Add adjunct: baclofen 5 mg TID (titrate to 80 mg/day) OR gabapentin 300 mg qHS (titrate to 1800-3600 mg/day TID).\n• If still refractory at 1600 mg/day cap → refer for MICROVASCULAR DECOMPRESSION (gold-standard surgical option in fit candidates) or PERCUTANEOUS PROCEDURES (glycerol rhizotomy, balloon compression, radiofrequency rhizotomy) or GAMMA-KNIFE RADIOSURGERY.\n• MRI brain (with thin-cut trigeminal sequences) if not already done — rule out vascular loop / MS plaque / mass.`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    const next = current + 200 > 1200 ? 1200 : current + 200;
+    return {
+      value: `${current} → ${next} mg/day`,
+      label: `Increase by ${next - current} mg/day`,
+      description: `**ADVANCE TO ${next} mg/day** (divided BID-TID; e.g., ${Math.round(next / 2 / 50) * 50} mg BID or ${Math.round(next / 3 / 50) * 50} mg TID).\n\n**PRE-STEP CHECKS:**\n• Patient tolerating current dose (no diplopia, no ataxia, no rash, no GI intolerance).\n• Confirm no new sodium drop (recheck Na if not done in 1-2 weeks).\n\n**REASSESS at day 3-5 on new dose.**\n• If pain controlled → hold at ${next} mg/day.\n• If still pain → re-run this calc, may advance to ${next + 200} mg/day.`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// TN Rx Ladder navigator
+//
+// Stepwise: 1L CBZ → 2L oxcarbazepine → adjuncts (baclofen, gabapentin,
+// lamotrigine) → referral (MVD, glycerol rhizotomy, balloon compression,
+// gamma-knife). NOT a scored calculator — informational navigator with
+// branching based on current rung.
+// -------------------------------------------------------------------
+
+const TN_RX_LADDER_CALCULATOR: CalculatorDefinition = {
+  id: 'tn-rx-ladder',
+  title: 'TN Rx Ladder',
+  subtitle: 'Trigeminal Neuralgia Treatment Step Navigator',
+  description: 'AAN/EFNS-staged ladder for trigeminal neuralgia. Toggle the current state to see the next step.',
+  fields: [
+    { name: 'cbz-failed', label: 'Failed or could not tolerate CBZ (1L)', type: 'toggle', points: 1 },
+    { name: 'ox-failed', label: 'Failed or could not tolerate oxcarbazepine (2L)', type: 'toggle', points: 1 },
+    { name: 'baclofen-tried', label: 'Tried baclofen', type: 'toggle', points: 1 },
+    { name: 'gabapentin-tried', label: 'Tried gabapentin', type: 'toggle', points: 1 },
+    { name: 'lamotrigine-tried', label: 'Tried lamotrigine', type: 'toggle', points: 1 },
+    { name: 'ms-related', label: 'Multiple sclerosis suspected/confirmed (MS-related TN)', type: 'toggle', points: 1 },
+    { name: 'severe', label: 'Severe pain on max medical therapy', type: 'toggle', points: 1, description: 'Indicates need for procedural / surgical referral' },
+    { name: 'surgical-candidate', label: 'Patient is a surgical candidate (life expectancy >5 yr, low operative risk)', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'CBZ has Class A evidence; oxcarbazepine Class B (equivalent efficacy, better tolerability but MORE hyponatremia). Adjuncts have Class C evidence. Surgical options reserved for medical failure.',
+  citations: [
+    'Cruccu G, et al. AAN-EFNS guidelines on trigeminal neuralgia management. Eur J Neurol. 2008;15(10):1013-1028.',
+    'Bendtsen L, et al. European Academy of Neurology guideline on trigeminal neuralgia. Eur J Neurol. 2019;26(6):831-849.',
+    'Wiffen PJ, et al. Carbamazepine for chronic neuropathic pain and fibromyalgia in adults. Cochrane Database Syst Rev. 2014;(4):CD005451.', // ✓
+  ],
+  computeResult: (values) => {
+    const cbz = values['cbz-failed'] || 0;
+    const ox = values['ox-failed'] || 0;
+    const baclofen = values['baclofen-tried'] || 0;
+    const gabapentin = values['gabapentin-tried'] || 0;
+    const lamotrigine = values['lamotrigine-tried'] || 0;
+    const ms = values['ms-related'] || 0;
+    const severe = values['severe'] || 0;
+    const surgical = values['surgical-candidate'] || 0;
+
+    if (!cbz && !ox) {
+      const msNote = ms ? '\n\n**MS-RELATED TN:** also consider lamotrigine, baclofen as first-line (CBZ less effective in MS-TN per some series). MRI brain for plaque localization.' : '';
+      return {
+        value: '1L: CBZ',
+        label: 'Start carbamazepine (Class A)',
+        description: `**STEP 1 — CARBAMAZEPINE.**\n\n• Start 100 mg PO BID.\n• Titrate by 100-200 mg every 3 days to effect.\n• Target 600-1200 mg/day divided.\n• HLA-B*1502 SCREENING before starting in Han Chinese/Thai/Vietnamese/Filipino/Malay ancestry (FDA 2007).\n• Monitor Na, CBC.\n\n**See CBZ Titration calculator for step-by-step dosing.**${msNote}`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (cbz && !ox) {
+      return {
+        value: '2L: oxcarbazepine',
+        label: 'Try oxcarbazepine',
+        description: '**STEP 2 — OXCARBAZEPINE.**\n\n• Start 150 mg PO BID.\n• Titrate to 600-1800 mg/day divided BID.\n• Better tolerability than CBZ for many but causes MORE hyponatremia (15-30% vs 10%). Check Na before and weekly during titration.\n• ~10% SJS/TEN cross-reactivity with CBZ in HLA-B*1502 carriers — same screening rule.\n• Do NOT use oxcarbazepine specifically to AVOID CBZ-induced hyponatremia (see R9; will make it worse).',
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (cbz && ox) {
+      // Adjuncts
+      const adjuncts: string[] = [];
+      if (!baclofen) adjuncts.push('**Baclofen** 5 mg PO TID, titrate by 5 mg q3 days, max 80 mg/day.');
+      if (!gabapentin) adjuncts.push('**Gabapentin** 300 mg PO qHS, titrate to 1800-3600 mg/day TID.');
+      if (!lamotrigine) adjuncts.push('**Lamotrigine** 25 mg qHS × 2 wk → 50 mg → 100 mg → up to 400 mg/day. SLOW titration (SJS risk) — counsel patient on rash.');
+
+      const allAdjunctsTried = baclofen && gabapentin && lamotrigine;
+
+      if (severe && allAdjunctsTried && surgical) {
+        return {
+          value: 'Refer for procedure',
+          label: 'Procedural / surgical referral',
+          description: '**MEDICAL FAILURE + SURGICAL CANDIDATE.**\n\n**OPTIONS (best-to-worst long-term durability):**\n\n1. **Microvascular decompression (MVD)** — gold standard. 70-80% pain-free at 10 yr. Requires craniotomy. Best in young patients with classical TN (vascular loop visible on MRI).\n\n2. **Percutaneous procedures (Hartel approach via foramen ovale):**\n   • Glycerol rhizotomy — 50-60% pain-free at 5 yr; can repeat.\n   • Balloon compression — similar profile.\n   • Radiofrequency rhizotomy — selective, can spare touch.\n\n3. **Gamma-knife radiosurgery** — non-invasive but 6-week to 6-month delay to effect. 50% pain-free at 3-5 yr. Best for elderly / high surgical risk.\n\n**MRI brain with thin-cut trigeminal sequences MANDATORY before referral.**',
+          colorVar: '--color-warning',
+        };
+      }
+
+      if (severe && allAdjunctsTried && !surgical) {
+        return {
+          value: 'Non-surgical refractory',
+          label: 'Pain center / interventional',
+          description: '**MEDICAL FAILURE — NON-SURGICAL CANDIDATE.**\n\n• Refer to pain medicine for:\n  • Peripheral branch blocks (supraorbital, infraorbital, mental — depending on division).\n  • Pulsed radiofrequency.\n  • Botulinum toxin (small RCTs show benefit; ~50% response).\n• Consider gamma-knife (less invasive than open surgery, acceptable for higher-risk patients).\n• Hospice or palliative care if pain is uncontrollable + comorbid factors limit options.',
+          colorVar: '--color-warning',
+        };
+      }
+
+      if (adjuncts.length > 0) {
+        return {
+          value: 'Adjunct',
+          label: 'Add adjunct (Class C)',
+          description: `**ADD ADJUNCT — pick one untried agent:**\n\n${adjuncts.map(a => '• ' + a).join('\n')}\n\nLet the chosen adjunct reach effective dose (2-4 weeks) before declaring failure.`,
+          colorVar: '--color-primary',
+        };
+      }
+
+      return {
+        value: 'All medical tried',
+        label: 'Refer for procedural evaluation',
+        description: '**ALL FIRST/SECOND-LINE + ADJUNCTS TRIED.**\n\n• MRI brain (thin-cut trigeminal sequences) if not already done.\n• Neurosurgery / pain medicine referral for procedural options.\n• Re-toggle "Severe pain on max medical therapy" + surgical candidacy above to see specific procedural ladder.',
+        colorVar: '--color-warning',
+      };
+    }
+
+    // ox failed, cbz not yet — unusual order
+    return {
+      value: '1L still indicated',
+      label: 'Try CBZ first (Class A)',
+      description: '**CBZ HAS HIGHER-LEVEL EVIDENCE THAN OXCARBAZEPINE.**\n\n• Class A vs Class B per AAN/EFNS 2008.\n• Try CBZ before declaring medical failure if not contraindicated.\n• HLA-B*1502 screening if Asian ancestry.',
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+// =====================================================================
+// ICHD-3 EXTENSION PANELS (added 2026-05-22 — Phase 2 gap-fill)
+//
+// Per PLAN §2.1 #3: extend the existing MIGRAINE_CRITERIA_CALCULATOR
+// family with parallel cluster (§3.1) and tension-type (§2) diagnostic
+// rule-in calculators. These three calculators share structure so they
+// can be invoked from the hub differential-triage module side-by-side.
+// =====================================================================
+
+// -------------------------------------------------------------------
+// ICHD-3 Cluster Headache Criteria (§3.1)
+// -------------------------------------------------------------------
+
+const CLUSTER_CRITERIA_CALCULATOR: CalculatorDefinition = {
+  id: 'cluster-criteria',
+  title: 'ICHD-3 Cluster Headache Criteria',
+  subtitle: 'Rule-In Cluster Headache Diagnosis',
+  description: 'International Classification of Headache Disorders (ICHD-3) §3.1 criteria for Cluster Headache. Toggle the features present in this patient. Episodic (§3.1.1) vs Chronic (§3.1.2) subtype is determined by attack-period pattern over 1 year.',
+  fields: [
+    { name: 'attacks', label: 'A — ≥5 attacks meeting criteria B-D', type: 'toggle', points: 1 },
+    { name: 'severity', label: 'B — Severe or very severe unilateral orbital, supraorbital, and/or temporal pain', type: 'toggle', points: 1, description: 'Pain lasts 15-180 min untreated' },
+    { name: 'duration', label: 'B — Duration 15-180 min (untreated or unsuccessfully treated)', type: 'toggle', points: 1 },
+    // Criterion C - need ≥1 of 2
+    { name: 'autonomic', label: 'C1 — Ipsilateral cranial autonomic feature', type: 'toggle', points: 1, description: 'Conjunctival injection, lacrimation, nasal congestion, rhinorrhea, eyelid edema, sweating, miosis, ptosis (need ≥1; eyelid edema OR miosis/ptosis count)' },
+    { name: 'restlessness', label: 'C2 — Sense of restlessness or agitation during attack', type: 'toggle', points: 1, description: 'Patient paces, cannot lie still (contrasts with migraine preference for dark/quiet)' },
+    // Criterion D - frequency
+    { name: 'frequency', label: 'D — Frequency: 1 every other day to 8 per day', type: 'toggle', points: 1 },
+    // Criterion E - not better accounted for
+    { name: 'no-secondary', label: 'E — Not better accounted for by another ICHD-3 diagnosis', type: 'toggle', points: 1, description: 'Confirms primary headache; secondary causes (SAH, dissection, AACG, sinus mass) ruled out' },
+    // Subtype
+    { name: 'episodic', label: 'Episodic pattern (§3.1.1) — attacks occur in periods 7d-1yr separated by ≥3 months pain-free', type: 'toggle', points: 0 },
+    { name: 'chronic', label: 'Chronic pattern (§3.1.2) — attacks occur ≥1 year with no remission OR remission <3 months', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'ICHD-3 cluster criteria are diagnostic by pattern. Confirm before initiating O₂ + sumatriptan SQ + verapamil pathway.',
+  citations: [
+    'Headache Classification Committee of IHS. International Classification of Headache Disorders, 3rd edition (ICHD-3) §3.1. Cephalalgia. 2018;38(1):1-211.',
+    'Robbins MS, et al. Treatment of cluster headache: AHS evidence-based guidelines. Headache. 2016;56(7):1093-1106.',
+  ],
+  computeResult: (values) => {
+    const attacks = values['attacks'] || 0;
+    const severity = values['severity'] || 0;
+    const duration = values['duration'] || 0;
+    const autonomic = values['autonomic'] || 0;
+    const restlessness = values['restlessness'] || 0;
+    const frequency = values['frequency'] || 0;
+    const noSecondary = values['no-secondary'] || 0;
+    const episodic = values['episodic'] || 0;
+    const chronic = values['chronic'] || 0;
+
+    // Criterion C: need ≥1 of 2
+    const meetsCriterionC = autonomic >= 1 || restlessness >= 1;
+
+    const meetsAll = attacks && severity && duration && meetsCriterionC && frequency && noSecondary;
+
+    // Subtype determination
+    let subtype = '';
+    if (episodic && !chronic) subtype = '\n\n**SUBTYPE: Episodic Cluster Headache (§3.1.1)** — attacks in periods 7d-1yr separated by ≥3 months pain-free.';
+    else if (chronic && !episodic) subtype = '\n\n**SUBTYPE: Chronic Cluster Headache (§3.1.2)** — attacks ≥1 year with no remission OR remission <3 months. Higher refractoriness rate; often requires combination prophylaxis.';
+    else if (episodic && chronic) subtype = '\n\n**SUBTYPE: Inconsistent pattern selection** — pick episodic OR chronic, not both. Re-toggle to clarify.';
+    else if (meetsAll) subtype = '\n\n**SUBTYPE NOT SELECTED:** ask about cluster periods over the last 1-2 years to assign §3.1.1 vs §3.1.2 (impacts prophylaxis intensity).';
+
+    if (meetsAll) {
+      return {
+        value: 'Criteria Met',
+        label: 'Cluster Headache (ICHD-3 §3.1)',
+        description: `**ICHD-3 CLUSTER HEADACHE CRITERIA SATISFIED.**
+
+✅ A: ≥5 attacks
+✅ B: Severe unilateral orbital/supraorbital/temporal pain, 15-180 min duration
+✅ C: ${autonomic ? 'Cranial autonomic features present' : ''}${autonomic && restlessness ? ' + ' : ''}${restlessness ? 'Restlessness/agitation present' : ''}
+✅ D: Attack frequency 1/other-day to 8/day
+✅ E: No secondary cause identified${subtype}
+
+**ACUTE PATHWAY:**
+• High-flow O₂ 12-15 L/min via NRB × 15 min (first-line, 78% response).
+• Sumatriptan 6 mg SQ (74% response at 15 min) OR Zolmitriptan 5 mg IN (62%).
+
+**BRIDGE + PROPHYLAXIS:**
+• Greater occipital nerve block (LA ± steroid) OR Prednisone 60 mg × 5 d taper.
+• Verapamil 80 mg TID, titrate by 80 mg q2wk (ECG before EVERY step).
+
+**CONFIRM:** Exclude SAH, dissection, AACG, posterior ICA aneurysm before locking in primary diagnosis.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // Partial — list missing criteria
+    const missing: string[] = [];
+    if (!attacks) missing.push('A: ≥5 attacks');
+    if (!severity) missing.push('B: Severe unilateral orbital/supraorbital/temporal pain');
+    if (!duration) missing.push('B: Duration 15-180 min');
+    if (!meetsCriterionC) missing.push('C: Cranial autonomic features OR restlessness/agitation');
+    if (!frequency) missing.push('D: Frequency 1 every-other-day to 8/day');
+    if (!noSecondary) missing.push('E: Secondary causes excluded');
+
+    if (missing.length === 1) {
+      return {
+        value: 'Probable Cluster',
+        label: 'Missing 1 criterion',
+        description: `**PROBABLE CLUSTER HEADACHE (ICHD-3 §3.1.5).**
+
+Missing criterion:
+${missing.map(m => '• ' + m).join('\n')}
+
+Treat empirically as cluster while completing workup. Re-evaluate at 24-48 h. If criteria fully met after observation, upgrade to §3.1 diagnosis.
+
+**Run Cluster vs Migraine vs Tension Differentiator if phenotype unclear.**`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    if (missing.length === 0) {
+      return {
+        value: '—',
+        label: 'Begin toggling features',
+        description: 'Toggle the features above to test ICHD-3 §3.1 cluster headache criteria.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    return {
+      value: 'Does Not Meet',
+      label: 'Not Cluster Headache',
+      description: `**ICHD-3 §3.1 CRITERIA NOT MET — ${missing.length} missing:**
+
+${missing.map(m => '• ' + m).join('\n')}
+
+**CONSIDER ALTERNATIVES:**
+• Migraine (ICHD-3 §1) — run Migraine Criteria calculator.
+• Tension-type headache (§2) — run Tension Criteria calculator.
+• Hemicrania continua (§3.4) — indomethacin trial diagnostic.
+• Paroxysmal hemicrania (§3.2) — shorter attacks (2-30 min), >5/day, indomethacin-responsive.
+• SUNCT / SUNA (§3.3) — very brief (1-600 sec), >100/day.
+• Secondary causes — re-screen with SNOOP10.`,
+      colorVar: '--color-muted',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// ICHD-3 Tension-Type Headache Criteria (§2)
+// -------------------------------------------------------------------
+
+const TENSION_CRITERIA_CALCULATOR: CalculatorDefinition = {
+  id: 'tension-criteria',
+  title: 'ICHD-3 Tension-Type Headache Criteria',
+  subtitle: 'Rule-In Tension-Type Headache Diagnosis',
+  description: 'ICHD-3 §2 criteria for Tension-Type Headache (TTH). Subtype determined by attack frequency: §2.1 infrequent episodic (<1 day/month), §2.2 frequent episodic (1-14 days/month), §2.3 chronic (≥15 days/month for >3 months).',
+  fields: [
+    { name: 'attacks', label: 'A — At least 10 lifetime attacks meeting criteria B-D', type: 'toggle', points: 1, description: 'Required for §2.1 / §2.2; chronic §2.3 only requires attacks on ≥15 days/month for >3 months' },
+    { name: 'duration', label: 'B — Duration 30 min to 7 days', type: 'toggle', points: 1, description: 'Untreated duration; some chronic attacks may be continuous' },
+    // Criterion C - need ≥2 of 4
+    { name: 'bilateral', label: 'C1 — Bilateral location', type: 'toggle', points: 1, description: 'Criterion C (need ≥2)' },
+    { name: 'pressing', label: 'C2 — Pressing or tightening (non-pulsating) quality', type: 'toggle', points: 1, description: 'Criterion C (need ≥2)' },
+    { name: 'mild-mod', label: 'C3 — Mild to moderate intensity', type: 'toggle', points: 1, description: 'Criterion C (need ≥2). Severe pain argues AGAINST tension-type.' },
+    { name: 'no-activity', label: 'C4 — NOT aggravated by routine physical activity', type: 'toggle', points: 1, description: 'Criterion C (need ≥2). Walking/stairs do not worsen.' },
+    // Criterion D - both required
+    { name: 'no-nv', label: 'D1 — No nausea or vomiting', type: 'toggle', points: 1, description: 'Mild anorexia OK; vomiting argues AGAINST tension-type' },
+    { name: 'no-both-photophono', label: 'D2 — No more than ONE of photophobia OR phonophobia', type: 'toggle', points: 1, description: 'Both = migraine; neither or one = compatible with TTH' },
+    { name: 'no-secondary', label: 'E — Not better accounted for by another ICHD-3 diagnosis', type: 'toggle', points: 1 },
+    // Subtype
+    { name: 'freq-low', label: 'Frequency <1 day/month (§2.1 Infrequent episodic)', type: 'toggle', points: 0 },
+    { name: 'freq-mid', label: 'Frequency 1-14 days/month for >3 months (§2.2 Frequent episodic)', type: 'toggle', points: 0 },
+    { name: 'freq-high', label: 'Frequency ≥15 days/month for >3 months (§2.3 Chronic)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'TTH is a diagnosis of exclusion as much as inclusion — severe intensity, true unilaterality, throbbing quality, photo+phonophobia, or aggravation by activity argue for migraine over TTH. Always re-screen with SNOOP10 in any new-pattern or red-flagged presentation.',
+  citations: [
+    'Headache Classification Committee of IHS. International Classification of Headache Disorders, 3rd edition (ICHD-3) §2. Cephalalgia. 2018;38(1):1-211.',
+    'Bendtsen L, Jensen R. Tension-type headache: the most common, but also the most neglected, headache disorder. Curr Opin Neurol. 2006;19(3):305-309.',
+  ],
+  computeResult: (values) => {
+    const attacks = values['attacks'] || 0;
+    const duration = values['duration'] || 0;
+    const bilateral = values['bilateral'] || 0;
+    const pressing = values['pressing'] || 0;
+    const mildMod = values['mild-mod'] || 0;
+    const noActivity = values['no-activity'] || 0;
+    const noNv = values['no-nv'] || 0;
+    const noBothPP = values['no-both-photophono'] || 0;
+    const noSecondary = values['no-secondary'] || 0;
+    const freqLow = values['freq-low'] || 0;
+    const freqMid = values['freq-mid'] || 0;
+    const freqHigh = values['freq-high'] || 0;
+
+    // Criterion C: need ≥2 of 4
+    const cScore = bilateral + pressing + mildMod + noActivity;
+    const meetsCriterionC = cScore >= 2;
+
+    // Criterion D: BOTH required
+    const meetsCriterionD = noNv >= 1 && noBothPP >= 1;
+
+    // For §2.3 chronic, criterion A is "headache on ≥15 days/month for >3 months" — not 10 lifetime attacks
+    // We treat freqHigh as substituting for the attacks toggle
+    const meetsA = attacks >= 1 || freqHigh >= 1;
+
+    const meetsAll = meetsA && duration && meetsCriterionC && meetsCriterionD && noSecondary;
+
+    // Subtype determination
+    let subtype = '';
+    let subtypeLabel = 'Tension-Type Headache';
+    const freqCount = freqLow + freqMid + freqHigh;
+    if (freqCount === 1) {
+      if (freqLow) { subtype = '§2.1 Infrequent Episodic Tension-Type Headache'; subtypeLabel = 'Infrequent Episodic TTH'; }
+      else if (freqMid) { subtype = '§2.2 Frequent Episodic Tension-Type Headache'; subtypeLabel = 'Frequent Episodic TTH'; }
+      else if (freqHigh) { subtype = '§2.3 Chronic Tension-Type Headache'; subtypeLabel = 'Chronic TTH'; }
+    } else if (freqCount > 1) {
+      subtype = 'Inconsistent frequency selection — pick ONE frequency band';
+    } else {
+      subtype = 'No frequency band selected — choose §2.1, §2.2, or §2.3';
+    }
+
+    if (meetsAll && freqCount === 1) {
+      return {
+        value: 'Criteria Met',
+        label: subtypeLabel,
+        description: `**ICHD-3 ${subtype} CRITERIA SATISFIED.**
+
+✅ A: Required attack count / frequency
+✅ B: Duration 30 min - 7 days
+✅ C: ${cScore}/4 features (need ≥2)
+${bilateral ? '  • Bilateral\n' : ''}${pressing ? '  • Pressing/tightening (non-pulsating)\n' : ''}${mildMod ? '  • Mild-moderate intensity\n' : ''}${noActivity ? '  • Not aggravated by routine activity\n' : ''}✅ D: No N/V, ≤1 of photo/phonophobia
+✅ E: Secondary causes excluded
+
+**ACUTE TREATMENT:**
+• Acetaminophen 1 g PO/IV q4-6h (max 4 g/d).
+• NSAID — ibuprofen 400-600 mg PO OR naproxen 250-500 mg PO.
+• Avoid opioids and butalbital-containing combinations (cause medication-overuse headache).
+
+**FREQUENT/CHRONIC (§2.2/§2.3) PROPHYLAXIS:**
+• Amitriptyline 10-25 mg qHS, titrate to 50-75 mg.
+• Behavioral: CBT, biofeedback, stress reduction.
+• Treat comorbid sleep, mood, neck-pain conditions.
+
+**PITFALL:** Re-screen with SNOOP10 if pattern changes — many "tension" presentations are undertreated migraine or a secondary cause.`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    // Partial — list missing criteria
+    const missing: string[] = [];
+    if (!meetsA) missing.push('A: ≥10 lifetime attacks (§2.1/§2.2) OR ≥15 days/month >3 months (§2.3)');
+    if (!duration) missing.push('B: Duration 30 min - 7 days');
+    if (!meetsCriterionC) missing.push(`C: ≥2 of 4 features (currently ${cScore}/4)`);
+    if (!meetsCriterionD) missing.push('D: No N/V AND ≤1 of photo/phonophobia');
+    if (!noSecondary) missing.push('E: Secondary causes excluded');
+    if (freqCount === 0) missing.push('Frequency band (§2.1 / §2.2 / §2.3)');
+    if (freqCount > 1) missing.push('Single frequency band (currently >1 toggled)');
+
+    if (missing.length === 0) {
+      return {
+        value: '—',
+        label: 'Begin toggling features',
+        description: 'Toggle the features above to test ICHD-3 §2 tension-type headache criteria.',
+        colorVar: '--color-muted',
+      };
+    }
+
+    const missingCore = (!meetsA ? 1 : 0) + (!duration ? 1 : 0) + (!meetsCriterionC ? 1 : 0) + (!meetsCriterionD ? 1 : 0) + (!noSecondary ? 1 : 0);
+
+    if (missingCore === 1) {
+      return {
+        value: 'Probable TTH',
+        label: 'Probable Tension-Type Headache (§2.4)',
+        description: `**ICHD-3 §2.4 PROBABLE TENSION-TYPE HEADACHE.**
+
+Missing 1 of 5 core criteria:
+${missing.map(m => '• ' + m).join('\n')}
+
+Treat as TTH while completing workup. If criteria fully satisfied with continued history, upgrade to §2.1/§2.2/§2.3.
+
+**Run Migraine Criteria + Cluster Criteria + Cluster vs Migraine vs Tension Differentiator if phenotype unclear.**`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    return {
+      value: 'Does Not Meet',
+      label: 'Not Tension-Type Headache',
+      description: `**ICHD-3 §2 CRITERIA NOT MET — ${missingCore} core criterion(s) missing:**
+
+${missing.map(m => '• ' + m).join('\n')}
+
+**CONSIDER ALTERNATIVES:**
+• Migraine (§1) — pulsating, severe, unilateral, photo+phonophobia, N/V → run Migraine Criteria.
+• Cluster (§3.1) — severe unilateral orbital, autonomic features, restlessness → run Cluster Criteria.
+• Medication-Overuse Headache (§8.2) — daily/near-daily headache + frequent abortive use ≥3 months.
+• Secondary headache — re-screen with SNOOP10.`,
+      colorVar: '--color-muted',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Weight-Based Dosing
   'weight-dose': WEIGHT_DOSE_CALCULATOR,
@@ -37453,8 +38144,6 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cha2ds2vasc': CHA2DS2VASC_CALCULATOR,
   'nihss': NIHSS_CALCULATOR,
   'nihss-calculator': NIHSS_CALCULATOR,
-  'stroke-window-calculator': STROKE_WINDOW_CALCULATOR,
-  'stroke-windows-calculator': STROKE_WINDOW_CALCULATOR,
   'timi': TIMI_CALCULATOR,
   'bas': BAS_CALCULATOR,
   'fwd': FWD_CALCULATOR,
@@ -37810,6 +38499,19 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'pram-score': PRAM_SCORE_CALCULATOR,
   // Adult Pharyngitis (Strep Throat)
   'centor-mcisaac-score': CENTOR_MCISAAC_SCORE_CALCULATOR,
+  // Headache Hub (added 2026-05-22 — Phase 2)
+  'snoop10': SNOOP10_CALCULATOR,
+  'cluster-migraine-tension-differentiator': CLUSTER_MIGRAINE_TENSION_CALCULATOR,
+  'triptan-eligibility': TRIPTAN_ELIGIBILITY_CALCULATOR,
+  'status-migrainosus-cocktail': STATUS_MIGRAINOSUS_COCKTAIL_CALCULATOR,
+  'co-hgb-threshold': CO_HGB_THRESHOLD_CALCULATOR,
+  // ICHD-3 extension panels (gap-fill — paired with existing migraine-criteria)
+  'cluster-criteria': CLUSTER_CRITERIA_CALCULATOR,
+  'tension-criteria': TENSION_CRITERIA_CALCULATOR,
+  // Cluster-Headache + Trigeminal-Neuralgia (added 2026-05-22 — Phase 2)
+  'verapamil-cluster-titration': VERAPAMIL_CLUSTER_TITRATION_CALCULATOR,
+  'cbz-tn-titration': CBZ_TN_TITRATION_CALCULATOR,
+  'tn-rx-ladder': TN_RX_LADDER_CALCULATOR,
 };
 
 // -------------------------------------------------------------------

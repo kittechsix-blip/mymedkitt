@@ -46,7 +46,7 @@ export const STROKE_NODES = [
         type: 'question',
         module: 1,
         title: 'Time from Last Known Well',
-        body: 'How long since the patient was **last known well** (not time of symptom discovery)?\n\nFor wake-up strokes or unknown onset: treat clock time as last seen normal, then use imaging biology when available. See [Treatment Windows](#/info/stroke-treatment-windows) for IVT, extended-window, and thrombectomy pathways.',
+        body: 'How long since the patient was **last known well** (not time of symptom discovery)?\n\nFor wake-up strokes or unknown onset: treat as time from when last seen normal. MRI DWI-FLAIR mismatch may help identify candidates within 4.5h window.',
         citation: [1],
         options: [
             {
@@ -63,7 +63,7 @@ export const STROKE_NODES = [
             },
             {
                 label: '9\u201324 hours',
-                description: 'EVT window, plus narrow expert-directed late IVT pathway if EVT unavailable',
+                description: 'EVT (endovascular thrombectomy) window only \u2014 requires LVO (large vessel occlusion) + perfusion mismatch',
                 next: 'stroke-evt-window',
             },
             {
@@ -72,7 +72,7 @@ export const STROKE_NODES = [
                 next: 'stroke-late',
             },
         ],
-        summary: 'Time from last known well determines treatment window — 0-4.5h IVT, 4.5-9h imaging-selected IVT, 9-24h EVT/selected expert pathways',
+        summary: 'Time from last known well determines treatment window — 0-4.5h IVT, 4.5-9h extended, 9-24h EVT only',
     },
     // =====================================================================
     // MODULE 2: STANDARD IVT WINDOW (0\u20134.5h)
@@ -124,7 +124,7 @@ export const STROKE_NODES = [
         type: 'info',
         module: 2,
         title: 'Administer Thrombolysis',
-        body: '**Common local-protocol option:** [Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg IV bolus (max 25 mg) \u2014 single dose over 5 seconds.\n\n**Alternative / standard option:** [Alteplase](#/drug/alteplase/stroke) 0.9 mg/kg IV (max 90 mg) \u2014 10% bolus over 1 min, remainder over 60 min.\n\nTenecteplase has guideline support in eligible AIS patients and is operationally simpler, especially when EVT transfer is possible. Use the agent required by local stroke protocol.\n\n[Patient Consent Info](#/info/stroke-consent)\n\n**Post-thrombolysis orders:**\n\u2022 BP <180/105 \u00D7 24h ([Labetalol](#/drug/labetalol/stroke) or [Nicardipine](#/drug/nicardipine/stroke))\n\u2022 Neuro checks q15min \u00D7 2h, then q30min \u00D7 6h, then q1h \u00D7 16h\n\u2022 No antithrombotics \u00D7 24h\n\u2022 No arterial/central lines, NG tube, or Foley \u00D7 24h if possible\n\u2022 Any neuro decline \u2192 emergent NCCT',
+        body: '**Preferred:** [Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg IV bolus (max 25 mg) \u2014 single dose over 5 seconds.\n\n**Alternative:** [Alteplase](#/drug/alteplase/stroke) 0.9 mg/kg IV (max 90 mg) \u2014 10% bolus over 1 min, remainder over 60 min.\n\nTenecteplase is preferred per current guidelines due to equivalent efficacy, single bolus administration, and simpler dosing.\n\n[Patient Consent Info](#/info/stroke-consent)\n\n**Post-thrombolysis orders:**\n\u2022 BP <180/105 \u00D7 24h ([Labetalol](#/drug/labetalol/stroke) or [Nicardipine](#/drug/nicardipine/stroke))\n\u2022 Neuro checks q15min \u00D7 2h, then q30min \u00D7 6h, then q1h \u00D7 16h\n\u2022 No antithrombotics \u00D7 24h\n\u2022 No arterial/central lines, NG tube, or Foley \u00D7 24h if possible\n\u2022 Any neuro decline \u2192 emergent NCCT',
         citation: [1, 4, 5],
         treatment: {
             firstLine: {
@@ -146,7 +146,7 @@ export const STROKE_NODES = [
             monitoring: 'BP <180/105 x 24h. Neuro checks q15min x 2h, then q30min x 6h, then q1h x 16h. Any decline = emergent NCCT.',
         },
         next: 'stroke-lvo-check',
-        summary: 'Tenecteplase 0.25 mg/kg single bolus where local protocol supports it, or alteplase 0.9 mg/kg — BP <180/105 x24h, no antithrombotics x24h',
+        summary: 'Tenecteplase 0.25 mg/kg preferred single bolus — BP <180/105 x24h, no antithrombotics x24h, neuro checks q15min',
         safetyLevel: 'critical',
     },
     {
@@ -201,7 +201,7 @@ export const STROKE_NODES = [
         type: 'question',
         module: 3,
         title: 'Extended IVT Window (4.5\u20139h)',
-        body: 'Perfusion imaging is required to determine eligibility.\n\nSee [Treatment Windows](#/info/stroke-treatment-windows) and [Stroke Imaging Guide](#/info/stroke-imaging) for the IVT/EVT timing map.\n\n**EXTEND-style criteria (alteplase 4.5\u20139h):**\n\u2022 DWI-FLAIR (diffusion-weighted imaging / fluid-attenuated inversion recovery) mismatch on MRI (DWI+, FLAIR\u2212 suggests recent infarct biology)\n\u2022 OR CT/MR perfusion showing salvageable tissue\n\u2022 Ischemic core <70 mL\n\u2022 Penumbra/core mismatch ratio >1.2\n\n**4.5\u201324h nuance:** Tenecteplase 0.25 mg/kg may be considered only in highly selected LVO patients with salvageable penumbra when EVT is unavailable/not feasible. This is not routine late thrombolysis.',
+        body: 'Perfusion imaging is required to determine eligibility.\n\nSee [Stroke Imaging Guide](#/info/stroke-imaging) for details on CT perfusion and MRI protocols.\n\n**EXTEND trial criteria (alteplase 4.5\u20139h):**\n\u2022 DWI-FLAIR (diffusion-weighted imaging / fluid-attenuated inversion recovery) mismatch on MRI (DWI+, FLAIR\u2212 suggests <4.5h)\n\u2022 OR CT perfusion showing salvageable tissue\n\u2022 Ischemic core <70 mL\n\u2022 Penumbra/core mismatch ratio >1.2\n\n**TRACE-III (2024) / TIMELESS:** Tenecteplase 0.25 mg/kg also supported in extended window 4.5\u201324h with perfusion mismatch when EVT not available \u2014 2026 AHA/ASA Class IIb.',
         citation: [5, 8, 14],
         options: [
             {
@@ -563,7 +563,7 @@ export const STROKE_CRITICAL_ACTIONS = [
     { text: 'Establish last known well time immediately - determines IVT window', nodeId: 'stroke-timing' },
     { text: 'Fingerstick glucose is the ONLY required pre-tPA lab - do not delay for others', nodeId: 'stroke-start' },
     { text: 'BP <185/110 mmHg required before IVT - give labetalol 10-20 mg IV bolus', nodeId: 'stroke-ivt-check' },
-    { text: 'Tenecteplase 0.25 mg/kg single bolus or alteplase 0.9 mg/kg per local stroke protocol', nodeId: 'stroke-ivt-treat' },
+    { text: 'Tenecteplase 0.25 mg/kg single bolus preferred over alteplase 60-min infusion', nodeId: 'stroke-ivt-treat' },
     { text: 'Activate cath lab for LVO on CTA - EVT within 24h for select patients', nodeId: 'stroke-evt-eligible' },
     { text: 'DAPT x21 days only for minor stroke (NIHSS 0-5) with high risk features', nodeId: 'stroke-dapt' },
     { text: 'Avoid aggressive BP lowering to <140 systolic post-EVT — may worsen outcomes (2026 AHA/ASA)', nodeId: 'stroke-post-treatment' },

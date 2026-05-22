@@ -10,6 +10,15 @@ export const FLAGS = {
     hubTypeRender: true,
     routeActionEnabled: true,
     toolbarOverflowEnabled: true,
+    // Headache-hub batch is staged behind the hidden gate per PLAN.md R16/R18.
+    // Per-canary flip order removes ids one at a time:
+    //   (1) occipital-nerve-block (Phase 8 canary #1, smoke + soak)
+    //   (2) trigeminal-neuralgia (Phase 8 canary #2)
+    //   (3) cluster-headache (Phase 8 canary #3 — depends on occipital-nerve-block flipped)
+    //   (4) headache-hub LAST
+    // Headache-hub batch (Phases 4-7) launched live on 2026-05-22 per user decision
+    // to skip per-canary soak gates in PLAN.md R18. To re-stage any consult, add
+    // its id back to hiddenTreeIds (or hiddenHubs for type:'hub' trees) and /deploy.
     hiddenTreeIds: [],
     hiddenHubs: [],
 };
