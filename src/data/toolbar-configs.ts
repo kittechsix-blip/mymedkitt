@@ -5,14 +5,43 @@ export interface ToolbarItem {
   id: string;
   label: string;
   icon: string;
-  action: 'calculator' | 'overlay' | 'jump';
+  /**
+   * Action types:
+   *  - `calculator`: route to a calculator overlay (target = calculator id).
+   *  - `overlay`:    open an info-page overlay (target = info-page id).
+   *  - `jump`:       intra-tree node jump via ConsultFlowController (target = node id in THIS tree).
+   *  - `route`:      cross-tree navigation via `#/tree/<id>` (target = tree id). Added 2026-05-22 for the headache-hub IIH tool and similar.
+   */
+  action: 'calculator' | 'overlay' | 'jump' | 'route';
   target?: string;
+  /**
+   * When the consult opts into the Tools drawer (via `TOOLBAR_OVERFLOW` set below),
+   * `pinned: true` items render inline regardless of position; everything else past
+   * the visible cap (5) is moved into the 🧰 Tools ▾ drawer. No-op when the parent
+   * consult is not opted in.
+   */
+  pinned?: boolean;
 }
 
 export interface ToolbarConfig {
   consultId: string;
   tools: ToolbarItem[];
+  /**
+   * Opt-in per consult. When `true`, the contextual-toolbar splits items >5 into a
+   * 🧰 Tools ▾ bottom-sheet drawer (separate from the ••• Decision Map).
+   * Defaults to `false` — existing 40+ toolbars retain current behavior.
+   */
+  toolbarOverflow?: boolean;
 }
+
+/**
+ * Per-consult opt-in for the Tools drawer overflow UI. Membership flips a consult's
+ * runtime `ToolbarConfig.toolbarOverflow` to `true`. Default (not in the set) =
+ * existing inline-all behavior, no regression. See PLAN.md R2 + Phase 1.2.
+ */
+export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
+  // 'headache-hub' is added in Phase 7 when the consult ships.
+]);
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'oncological-emergencies': [
@@ -184,9 +213,6 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   ],
   'stroke': [
     { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
-    { id: 'window-calc', label: 'Win Calc', icon: '\uD83E\uDDEE', action: 'calculator', target: 'stroke-window-calculator' },
-    { id: 'windows', label: 'Windows', icon: '\u23F1\uFE0F', action: 'overlay', target: 'stroke-treatment-windows' },
-    { id: 'ivt-imaging', label: 'IVT Imaging', icon: '\uD83E\uDDEA', action: 'overlay', target: 'stroke-ivt-imaging-criteria' },
     { id: 'lysis-contra', label: 'Contra', icon: '\uD83D\uDEAB', action: 'overlay', target: 'stroke-contraindications' },
     { id: 'ivt', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'stroke-ivt-treat' },
     { id: 'evt', label: 'EVT', icon: '\u23F0', action: 'jump', target: 'stroke-evt-window' },
@@ -198,7 +224,6 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'bp', label: 'BP Mgmt', icon: '\uD83E\uDE7A', action: 'jump', target: 'ich-bp' },
   ],
   'status-epilepticus': [
-    { id: 'rx-flow', label: 'Rx Flow', icon: '\uD83D\uDC8A', action: 'overlay', target: 'se-rx-flow' },
     { id: 'bao-check', label: 'BAO?', icon: '\uD83D\uDC41\uFE0F', action: 'jump', target: 'se-bao-check' },
     { id: 'bzd', label: 'BZD Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'se-iv-bzd' },
     { id: 'second-line', label: '2nd Line', icon: '\u26A1', action: 'jump', target: 'se-2nd-line-choice' },
@@ -1963,34 +1988,6 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'bridge-info', label: 'Bridge Info', icon: '🏥', action: 'overlay', target: 'pd-bridge-decision' },
     { id: 'summary', label: 'Summary', icon: '📖', action: 'overlay', target: 'pd-summary' },
   ],
-  'auricular-hematoma-drainage': [
-    { id: 'block', label: 'Block', icon: '💉', action: 'overlay', target: 'ahd-block' },
-    { id: 'aspirate-vs-id', label: 'Aspirate vs I&D', icon: '🩺', action: 'overlay', target: 'ahd-aspirate-vs-id' },
-    { id: 'bolster', label: 'Bolster', icon: '🪡', action: 'overlay', target: 'ahd-bolster-build' },
-    { id: 'antibiotics', label: 'Antibiotics', icon: '💊', action: 'overlay', target: 'ahd-antibiotics' },
-    { id: 'ent-followup', label: 'ENT F/U', icon: '📞', action: 'overlay', target: 'ahd-ent-followup' },
-  ],
-  'corneal-fb-removal': [
-    { id: 'seidel-va', label: 'Seidel + VA', icon: '👁️', action: 'overlay', target: 'cfb-seidel-va' },
-    { id: 'anesthetic', label: 'Anesthetic', icon: '💧', action: 'overlay', target: 'cfb-anesthetic' },
-    { id: 'eversion', label: 'Eversion', icon: '🔄', action: 'overlay', target: 'cfb-eversion' },
-    { id: 'removal-ladder', label: 'Removal', icon: '🪛', action: 'overlay', target: 'cfb-removal-ladder' },
-    { id: 'drop-selector', label: 'Drops', icon: '💊', action: 'overlay', target: 'cfb-drop-selector' },
-  ],
-  'laceration-repair': [
-    { id: 'closure-picker', label: 'Closure', icon: '🧵', action: 'overlay', target: 'lac-closure-picker' },
-    { id: 'lido-max', label: 'Lido Max', icon: '💉', action: 'calculator', target: 'lac-lido-max-dose' },
-    { id: 'let-topical', label: 'LET', icon: '🧪', action: 'overlay', target: 'lac-let-topical' },
-    { id: 'site-specials', label: 'Site Specials', icon: '🩹', action: 'overlay', target: 'lac-site-specials' },
-    { id: 'tetanus-abx', label: 'Tetanus + Abx', icon: '💊', action: 'overlay', target: 'lac-tetanus-abx' },
-  ],
-  'ring-removal': [
-    { id: 'material', label: 'Material', icon: '💍', action: 'overlay', target: 'ring-material-id' },
-    { id: 'string-wrap', label: 'String-Wrap', icon: '🧶', action: 'overlay', target: 'ring-string-wrap' },
-    { id: 'cutter', label: 'Cutter', icon: '✂️', action: 'overlay', target: 'ring-cutter-picker' },
-    { id: 'diamond', label: 'Diamond Tool', icon: '💎', action: 'overlay', target: 'ring-diamond-tool' },
-    { id: 'neurovasc', label: 'Neurovasc', icon: '🫀', action: 'overlay', target: 'ring-neurovasc' },
-  ],
 };
 
 // Stop button appended automatically to every consult
@@ -1999,14 +1996,16 @@ const STOP_ITEM: ToolbarItem = { id: 'stop', label: 'Stop', icon: '🛑', action
 /** Get the toolbar config for a consult, always including the 🛑 Stop button */
 export function getToolbarConfig(consultId: string): ToolbarConfig {
   const tools = TOOLBAR_CONFIGS[consultId] ?? [];
+  const toolbarOverflow = TOOLBAR_OVERFLOW.has(consultId);
   // Only add stop item if not already present in tools
   const hasStopItem = tools.some(t => t.id === 'stop' || t.id.includes('-stop'));
   if (hasStopItem) {
-    return { consultId, tools };
+    return { consultId, tools, toolbarOverflow };
   }
   const stopItem: ToolbarItem = { ...STOP_ITEM, target: `${consultId}-stop` };
   return {
     consultId,
     tools: [...tools, stopItem],
+    toolbarOverflow,
   };
 }

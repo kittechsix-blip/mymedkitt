@@ -3,6 +3,7 @@
 // Exposes the same synchronous API as the old data/categories.ts exports.
 import { supabaseFetch } from './supabase.js';
 import { cacheGetAll, cachePutAll, setLastSync, getLastSync } from './cache-db.js';
+import { isTreeHidden } from '../data/feature-flags.js';
 // In-memory cache
 let categoryCache = [];
 let colorsCache = {};
@@ -102,6 +103,12 @@ async function mergeHardcodedConsults() {
         // title equals id (slug never replaced), missing subtitle, or
         // mismatched nodeCount. Fixes FlowRider 2026-05-17 finding where
         // post-tonsillectomy-bleed rendered as raw slug.
+        //
+        // Client-only metadata (currently `type`) is overlaid UNCONDITIONALLY,
+        // regardless of the stale-row signal. R1 + R2-M4 + R4-M3 (2026-05-22):
+        // a fresh-looking DB row whose Supabase schema lacks the column would
+        // never trigger the stale heuristic, so without this the `type: 'hub'`
+        // field would silently drop on every cache hit.
         for (const hTree of hCat.decisionTrees) {
             const idx = cached.decisionTrees.findIndex(t => t.id === hTree.id);
             if (idx === -1)
@@ -115,6 +122,11 @@ async function mergeHardcodedConsults() {
                     hTree.nodeCount !== cTree.nodeCount);
             if (stale) {
                 cached.decisionTrees[idx] = { ...cTree, ...hTree };
+            }
+            else if (hTree.type !== undefined && cTree.type !== hTree.type) {
+                // Hardcoded `type` always wins; do NOT clobber title/subtitle/nodeCount
+                // here — those have their own staleness story above.
+                cached.decisionTrees[idx] = { ...cTree, type: hTree.type };
             }
         }
     }
@@ -161,18 +173,30 @@ export async function initCategories() {
 }
 // ---- Public API (same signatures as data/categories.ts) ----
 export function getAllCategories() {
+    const filtered = filterHiddenTrees(categoryCache);
     // Merge with custom categories from localStorage
     try {
         const raw = localStorage.getItem('em-custom-categories');
         if (raw) {
             const custom = JSON.parse(raw);
-            return [...categoryCache, ...custom];
+            return [...filtered, ...filterHiddenTrees(custom)];
         }
     }
     catch {
         // ignore
     }
-    return categoryCache;
+    return filtered;
+}
+/**
+ * Drop trees gated off by `FLAGS.hiddenTreeIds` / `FLAGS.hiddenHubs`. Kept here
+ * (not in the merge function) so the filter runs on every read — flipping a
+ * flag takes effect on next render without an app restart.
+ */
+function filterHiddenTrees(categories) {
+    return categories.map(cat => ({
+        ...cat,
+        decisionTrees: cat.decisionTrees.filter(t => !isTreeHidden(t.id, t.type)),
+    }));
 }
 export { addCustomCategory } from '../data/categories.js';
 export function getCategoryColors() {

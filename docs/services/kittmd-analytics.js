@@ -247,6 +247,15 @@ export function getAnalyticsSummary() {
     }
     return summary;
 }
+/**
+ * Emit a rollout telemetry event. v1 sink is `console.warn` with a `[telemetry]`
+ * prefix; v2 will swap the body for a remote POST without changing this signature.
+ */
+export function logTelemetry(type, data = {}) {
+    if (typeof console === 'undefined')
+        return;
+    console.warn(`[telemetry] ${type}`, data);
+}
 // -------------------------------------------------------------------
 // Auto-initialize on module load
 // -------------------------------------------------------------------

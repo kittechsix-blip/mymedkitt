@@ -70,6 +70,11 @@ export interface ConsultTree {
   description: string;
   /** Medical specialty or category */
   category: string;
+  /**
+   * Tree kind — mirrors `DecisionTreeMeta.type` on the modern shape. Optional for
+   * backwards-compat with existing consult-tree records.
+   */
+  type?: 'standard' | 'hub' | 'procedure';
   /** Version of the consult guidelines */
   version: string;
   /** Last updated date (ISO format) */

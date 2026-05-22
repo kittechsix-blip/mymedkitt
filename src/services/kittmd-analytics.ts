@@ -325,6 +325,45 @@ export function getAnalyticsSummary(): {
 }
 
 // -------------------------------------------------------------------
+// Rollout telemetry (R13 / Phase 1.7) — console-only sink for v1
+// -------------------------------------------------------------------
+//
+// Andy decision 2026-05-22: no remote sink in v1. Events emit to the browser
+// console with a `[telemetry]` prefix so Safari Web Inspector catches them during
+// the headache-hub canary soak. Full rationale + v2 path in:
+//   ~/Desktop/claude-brain/decisions/2026-05-22-headache-hub-phase-0a-gates.md
+//
+// PRIVACY FLOOR (strict): tree-ids, node-ids, calculator-ids, version strings only.
+// No node body text. No drug names beyond canonical IDs. No user inputs. No patient
+// context. If a new event type is added, audit the payload against this floor first.
+//
+// TODO(v2): swap the console.warn body for a remote POST without changing the call
+// surface — keep `logTelemetry(type, data)` callable identically.
+
+export type TelemetryEventType =
+  | 'tree_load_source'        // { tree_id, source: 'supabase' | 'indexeddb' | 'hardcoded' }
+  | 'tree_load_error'         // { tree_id, error_type, message }
+  | 'link_resolution_error'   // { link_type, link_target, source_tree_id, source_node_id }
+  | 'route_action_error'      // { target_tree_id, error }
+  | 'route_action_disabled'   // { target_tree_id } — kill-switch hit, no error
+  | 'calculator_error'        // { calculator_id, error }
+  | 'sw_version'              // { cache_name } — once per session at boot
+  | 'data_version'            // { data_version } — once per session at boot
+  | 'hub_module_view';        // { hub_id, module_index }
+
+/**
+ * Emit a rollout telemetry event. v1 sink is `console.warn` with a `[telemetry]`
+ * prefix; v2 will swap the body for a remote POST without changing this signature.
+ */
+export function logTelemetry(
+  type: TelemetryEventType | string,
+  data: Record<string, unknown> = {},
+): void {
+  if (typeof console === 'undefined') return;
+  console.warn(`[telemetry] ${type}`, data);
+}
+
+// -------------------------------------------------------------------
 // Auto-initialize on module load
 // -------------------------------------------------------------------
 

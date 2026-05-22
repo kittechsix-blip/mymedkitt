@@ -147,6 +147,14 @@ export interface DecisionTreeMeta {
   nodeCount: number;
   /** ID of the first node in the tree */
   entryNodeId: string;
+  /**
+   * Tree kind. `'hub'` trees aggregate multiple downstream consults via cross-tree links;
+   * `'procedure'` trees are mandatory-image procedure consults; `'standard'` is the default.
+   * Client-side property only — NOT persisted to Supabase in v1. The hardcoded TREE_REGISTRY
+   * is the source of truth; `mergeHardcodedConsults()` overlays this field unconditionally so
+   * a fresh-looking DB row missing `type` still renders correctly.
+   */
+  type?: 'standard' | 'hub' | 'procedure';
 }
 
 // -------------------------------------------------------------------

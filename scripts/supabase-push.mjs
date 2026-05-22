@@ -63,9 +63,17 @@ const args = process.argv.slice(2);
 const consultId = args.find(a => !a.startsWith('--'));
 const isUpdate = args.includes('--update');
 const isDryRun = args.includes('--dry-run');
+// R7 / R15 / Phase 8.2 — staged-then-flip support. Skips the category_trees
+// upsert so the consult is hidden from category lists until a separate
+// visibility flip pushes those rows. Decision tree rows + citations + nodes
+// still write so smoke checks pass.
+const isNoVisibility = args.includes('--no-visibility');
+// R12 / Phase 8a — capture a pre-push snapshot to .deploy-state/snapshots/
+// before any write. Lets `supabase-rollback.mjs` restore exact prior state.
+const isSnapshotFirst = args.includes('--snapshot-first');
 
 if (!consultId) {
-  console.error('Usage: node scripts/supabase-push.mjs <consult-id> [--update] [--dry-run] [--drugs id1,id2] [--info-pages id1,id2]');
+  console.error('Usage: node scripts/supabase-push.mjs <consult-id> [--update] [--dry-run] [--no-visibility] [--snapshot-first] [--drugs id1,id2] [--info-pages id1,id2]');
   process.exit(1);
 }
 
@@ -129,7 +137,16 @@ if (!reg) {
 }
 
 // ---------------------------------------------------------------------------
-// REST helpers
+// REST helpers — FAIL-CLOSED (R7 / Round 2 H1 / Round 4 H3)
+//
+// These helpers used to log on non-2xx but return `false`, and most call sites
+// (`await supaUpsert(...)`) discarded the return value. A mid-push failure
+// would log to stderr but the script would continue, eventually exiting 0 —
+// the cache/git phase then advanced on a half-built tree.
+//
+// Now: every non-2xx throws. Module-level `await`s propagate the rejection,
+// which surfaces as an unhandled-rejection process exit with code 1 — exactly
+// what the staged-then-flip flow needs to gate `/deploy code-only`.
 // ---------------------------------------------------------------------------
 async function supaPost(table, data) {
   if (isDryRun) {
@@ -143,8 +160,7 @@ async function supaPost(table, data) {
   });
   if (!res.ok) {
     const err = await res.text();
-    console.error(`  ERROR POST ${table}: ${res.status} ${err}`);
-    return false;
+    throw new Error(`POST ${table} failed: ${res.status} ${err}`);
   }
   return true;
 }
@@ -161,8 +177,7 @@ async function supaUpsert(table, data) {
   });
   if (!res.ok) {
     const err = await res.text();
-    console.error(`  ERROR UPSERT ${table}: ${res.status} ${err}`);
-    return false;
+    throw new Error(`UPSERT ${table} failed: ${res.status} ${err}`);
   }
   return true;
 }
@@ -178,8 +193,7 @@ async function supaDelete(table, filter) {
   });
   if (!res.ok) {
     const err = await res.text();
-    console.error(`  ERROR DELETE ${table}: ${res.status} ${err}`);
-    return false;
+    throw new Error(`DELETE ${table} (filter=${filter}) failed: ${res.status} ${err}`);
   }
   return true;
 }
@@ -196,8 +210,7 @@ async function supaPatch(table, filter, data) {
   });
   if (!res.ok) {
     const err = await res.text();
-    console.error(`  ERROR PATCH ${table}: ${res.status} ${err}`);
-    return false;
+    throw new Error(`PATCH ${table} (filter=${filter}) failed: ${res.status} ${err}`);
   }
   return true;
 }
@@ -235,9 +248,24 @@ const treeVersion = primaryListing?.version || '1.0';
 const treeNodeCount = primaryListing?.nodeCount || nodes.length;
 
 // ---------------------------------------------------------------------------
+// Optional pre-push snapshot (R12 / Phase 8a — rollback prep)
+// ---------------------------------------------------------------------------
+if (isSnapshotFirst) {
+  console.log(`\n📸 Snapshot before push (--snapshot-first)...`);
+  const { spawnSync } = await import('child_process');
+  const snap = spawnSync('node', [
+    resolve(__dirname, 'supabase-snapshot.mjs'),
+    consultId,
+  ], { stdio: 'inherit' });
+  if (snap.status !== 0) {
+    throw new Error(`supabase-snapshot.mjs exited non-zero (${snap.status}); aborting push to keep rollback safe.`);
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Push to Supabase
 // ---------------------------------------------------------------------------
-console.log(`\n🚀 Pushing "${consultId}" to Supabase...${isDryRun ? ' (DRY RUN)' : ''}`);
+console.log(`\n🚀 Pushing "${consultId}" to Supabase...${isDryRun ? ' (DRY RUN)' : ''}${isNoVisibility ? ' (HIDDEN — category_trees skipped)' : ''}`);
 
 if (!isUpdate) {
   // ---- FULL INSERT (new consult) ----
@@ -254,23 +282,28 @@ if (!isUpdate) {
     module_labels: moduleLabels,
   });
 
-  // 2. category_trees
-  console.log('2️⃣  category_trees...');
-  const catRows = [
-    { category_id: reg.categoryId, tree_id: consultId, display_title: null, display_subtitle: null, entry_node_id: reg.entryNodeId, sort_order: 0 },
-  ];
-  const crossListings = CROSS_LISTINGS[consultId] || [];
-  crossListings.forEach((cl, idx) => {
-    catRows.push({
-      category_id: cl.categoryId,
-      tree_id: consultId,
-      display_title: cl.displayTitle || null,
-      display_subtitle: cl.displaySubtitle || null,
-      entry_node_id: cl.entryNodeId || null,
-      sort_order: idx + 1,
+  // 2. category_trees (SKIPPED when --no-visibility: staged-then-flip hides the
+  // tree from category lists until a separate visibility flip writes these rows).
+  if (isNoVisibility) {
+    console.log('2️⃣  category_trees... SKIPPED (--no-visibility, staging mode)');
+  } else {
+    console.log('2️⃣  category_trees...');
+    const catRows = [
+      { category_id: reg.categoryId, tree_id: consultId, display_title: null, display_subtitle: null, entry_node_id: reg.entryNodeId, sort_order: 0 },
+    ];
+    const crossListings = CROSS_LISTINGS[consultId] || [];
+    crossListings.forEach((cl, idx) => {
+      catRows.push({
+        category_id: cl.categoryId,
+        tree_id: consultId,
+        display_title: cl.displayTitle || null,
+        display_subtitle: cl.displaySubtitle || null,
+        entry_node_id: cl.entryNodeId || null,
+        sort_order: idx + 1,
+      });
     });
-  });
-  await supaUpsert('category_trees', catRows);
+    await supaUpsert('category_trees', catRows);
+  }
 
   // 3. tree_citations (delete + insert)
   console.log(`3️⃣  tree_citations (${citations.length})...`);

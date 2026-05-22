@@ -3,6 +3,7 @@
 // Loads tree data on demand (per tree) instead of all 22 trees upfront.
 import { supabaseFetch } from './supabase.js';
 import { cacheGetFiltered, cachePutMany, setLastSync, getLastSync } from './cache-db.js';
+import { isTreeHidden } from '../data/feature-flags.js';
 // In-memory cache keyed by tree ID
 const treeCache = new Map();
 const STALE_MS = 60 * 60 * 1000;
@@ -1265,22 +1266,6 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/adult-pharyngitis.js');
             return { nodes: m.ADULT_PHARYNGITIS_NODES, entryNodeId: 'ap-start', categoryId: 'infectious-disease', moduleLabels: m.ADULT_PHARYNGITIS_MODULE_LABELS, citations: m.ADULT_PHARYNGITIS_CITATIONS, criticalActions: m.ADULT_PHARYNGITIS_CRITICAL_ACTIONS };
         },
-        'auricular-hematoma-drainage': async () => {
-            const m = await import('../data/trees/auricular-hematoma-drainage.js');
-            return { nodes: m.AURICULAR_HEMATOMA_DRAINAGE_NODES, entryNodeId: 'ahd-start', categoryId: 'procedures', moduleLabels: m.AURICULAR_HEMATOMA_DRAINAGE_MODULE_LABELS, citations: m.AURICULAR_HEMATOMA_DRAINAGE_CITATIONS, criticalActions: m.AURICULAR_HEMATOMA_DRAINAGE_CRITICAL_ACTIONS };
-        },
-        'corneal-fb-removal': async () => {
-            const m = await import('../data/trees/corneal-fb-removal.js');
-            return { nodes: m.CORNEAL_FB_REMOVAL_NODES, entryNodeId: 'cfb-start', categoryId: 'procedures', moduleLabels: m.CORNEAL_FB_REMOVAL_MODULE_LABELS, citations: m.CORNEAL_FB_REMOVAL_CITATIONS, criticalActions: m.CORNEAL_FB_REMOVAL_CRITICAL_ACTIONS };
-        },
-        'laceration-repair': async () => {
-            const m = await import('../data/trees/laceration-repair.js');
-            return { nodes: m.LACERATION_REPAIR_NODES, entryNodeId: 'lac-start', categoryId: 'procedures', moduleLabels: m.LACERATION_REPAIR_MODULE_LABELS, citations: m.LACERATION_REPAIR_CITATIONS, criticalActions: m.LACERATION_REPAIR_CRITICAL_ACTIONS };
-        },
-        'ring-removal': async () => {
-            const m = await import('../data/trees/ring-removal.js');
-            return { nodes: m.RING_REMOVAL_NODES, entryNodeId: 'ring-start', categoryId: 'procedures', moduleLabels: m.RING_REMOVAL_MODULE_LABELS, citations: m.RING_REMOVAL_CITATIONS, criticalActions: m.RING_REMOVAL_CRITICAL_ACTIONS };
-        },
     };
     const loader = TREE_IMPORTS[treeId];
     if (!loader)
@@ -1292,6 +1277,11 @@ async function loadHardcodedFallback(treeId) {
  * Returns null if tree doesn't exist.
  */
 export async function getTreeConfig(treeId) {
+    // 0. Kill-switch gate (R16 — both paths). Honor `FLAGS.hiddenTreeIds` / `hiddenHubs`
+    // even if the tree is in cache. Returning null lets the router fall through to its
+    // standard "tree not found" path; the consult vanishes without a code rollback.
+    if (isTreeHidden(treeId))
+        return null;
     // 1. In-memory
     const cached = treeCache.get(treeId);
     if (cached)

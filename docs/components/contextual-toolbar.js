@@ -4,8 +4,13 @@
 import { getToolbarConfig } from '../data/toolbar-configs.js';
 import { router } from '../services/router.js';
 import { showInfoModal } from './info-page.js';
+import { FLAGS } from '../data/feature-flags.js';
+import { logTelemetry } from '../services/kittmd-analytics.js';
 let toolbarEl = null;
 let decisionMapEl = null;
+let toolsSheetEl = null;
+/** How many items render inline before overflowing into the Tools drawer (when opted in). */
+const TOOLBAR_VISIBLE_CAP = 5;
 /** Check if a consult toolbar is currently active */
 export function hasContextualToolbar() {
     return toolbarEl !== null;
@@ -15,6 +20,7 @@ export function removeContextualToolbar() {
     toolbarEl?.remove();
     toolbarEl = null;
     closeDecisionMap();
+    closeToolsSheet();
 }
 /** Render the contextual toolbar for a consult */
 export function renderContextualToolbar(consultId, controller, _entryNodeId, moduleLabels) {
@@ -27,30 +33,44 @@ export function renderContextualToolbar(consultId, controller, _entryNodeId, mod
     toolbar.className = 'contextual-toolbar';
     toolbar.setAttribute('translate', 'no'); // Prevent browser auto-translation
     const config = getToolbarConfig(consultId);
-    // Configurable tool buttons
-    for (const item of config.tools) {
-        const btn = document.createElement('button');
-        btn.className = 'contextual-toolbar__item';
-        const icon = document.createElement('span');
-        icon.className = 'contextual-toolbar__icon';
-        icon.textContent = item.icon;
-        const label = document.createElement('span');
-        label.textContent = item.label;
-        btn.appendChild(icon);
-        btn.appendChild(label);
-        btn.addEventListener('click', () => {
-            if (item.action === 'calculator' && item.target) {
-                router.navigate(`/calculator/${item.target}`);
-            }
-            else if (item.action === 'overlay' && item.target) {
-                showInfoModal(item.target);
-            }
-            else if (item.action === 'jump' && item.target) {
-                controller.jumpToNode(item.target);
-                window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: item.target }));
-            }
+    // Split items into inline vs overflow per `toolbarOverflow` opt-in. Existing
+    // toolbars (40+, including vertigo=6, oncological-emergencies=14, ocular-trauma=10)
+    // are NOT in TOOLBAR_OVERFLOW so `useOverflow` stays false and they render
+    // inline-everything exactly as before. Master kill switch:
+    // `FLAGS.toolbarOverflowEnabled = false` forces fallback regardless of opt-in.
+    const useOverflow = !!config.toolbarOverflow && FLAGS.toolbarOverflowEnabled;
+    let inlineItems;
+    let drawerItems;
+    if (useOverflow) {
+        const pinned = config.tools.filter(t => t.pinned);
+        const unpinned = config.tools.filter(t => !t.pinned);
+        const remaining = Math.max(0, TOOLBAR_VISIBLE_CAP - pinned.length);
+        inlineItems = [...pinned, ...unpinned.slice(0, remaining)];
+        drawerItems = unpinned.slice(remaining);
+    }
+    else {
+        inlineItems = config.tools;
+        drawerItems = [];
+    }
+    // Inline tool buttons
+    for (const item of inlineItems) {
+        toolbar.appendChild(createToolbarButton(item, controller));
+    }
+    // Tools drawer button — only when there are overflow items (>5 with opt-in)
+    if (drawerItems.length > 0) {
+        const toolsBtn = document.createElement('button');
+        toolsBtn.className = 'contextual-toolbar__item toolbar-tools-btn';
+        const toolsIcon = document.createElement('span');
+        toolsIcon.className = 'contextual-toolbar__icon';
+        toolsIcon.textContent = '\u{1F9F0}'; // 🧰
+        const toolsLabel = document.createElement('span');
+        toolsLabel.textContent = 'Tools ▾'; // Tools ▾
+        toolsBtn.appendChild(toolsIcon);
+        toolsBtn.appendChild(toolsLabel);
+        toolsBtn.addEventListener('click', () => {
+            toggleToolsSheet(consultId, drawerItems, controller);
         });
-        toolbar.appendChild(btn);
+        toolbar.appendChild(toolsBtn);
     }
     // Overflow (•••) button → opens Decision Map
     const overflowBtn = document.createElement('button');
@@ -68,6 +88,106 @@ export function renderContextualToolbar(consultId, controller, _entryNodeId, mod
     toolbar.appendChild(overflowBtn);
     document.body.appendChild(toolbar);
     toolbarEl = toolbar;
+}
+/** Build a toolbar/drawer button for a single ToolbarItem. */
+function createToolbarButton(item, controller) {
+    const btn = document.createElement('button');
+    btn.className = 'contextual-toolbar__item';
+    const icon = document.createElement('span');
+    icon.className = 'contextual-toolbar__icon';
+    icon.textContent = item.icon;
+    const label = document.createElement('span');
+    label.textContent = item.label;
+    btn.appendChild(icon);
+    btn.appendChild(label);
+    btn.addEventListener('click', () => {
+        dispatchToolbarAction(item, controller);
+    });
+    return btn;
+}
+/**
+ * Dispatch a toolbar item's action. `route` is gated by `FLAGS.routeActionEnabled`
+ * — when off, route taps log via telemetry rather than failing silently.
+ */
+function dispatchToolbarAction(item, controller) {
+    if (item.action === 'calculator' && item.target) {
+        router.navigate(`/calculator/${item.target}`);
+    }
+    else if (item.action === 'overlay' && item.target) {
+        showInfoModal(item.target);
+    }
+    else if (item.action === 'jump' && item.target) {
+        controller.jumpToNode(item.target);
+        window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: item.target }));
+    }
+    else if (item.action === 'route' && item.target) {
+        if (FLAGS.routeActionEnabled) {
+            window.location.hash = `#/tree/${item.target}`;
+        }
+        else {
+            logTelemetry('route_action_disabled', { target_tree_id: item.target });
+        }
+    }
+}
+// -------------------------------------------------------------------
+// Tools drawer — bottom sheet, separate from the Decision Map
+// -------------------------------------------------------------------
+function closeToolsSheet() {
+    if (toolsSheetEl) {
+        toolsSheetEl.remove();
+        toolsSheetEl = null;
+    }
+}
+function toggleToolsSheet(consultId, items, controller) {
+    if (toolsSheetEl) {
+        closeToolsSheet();
+        return;
+    }
+    const overlay = document.createElement('div');
+    overlay.className = 'toolbar-tools-overlay';
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay)
+            closeToolsSheet();
+    });
+    const sheet = document.createElement('div');
+    sheet.className = 'toolbar-tools-sheet';
+    sheet.setAttribute('data-consult-id', consultId);
+    const header = document.createElement('div');
+    header.className = 'toolbar-tools-sheet__header';
+    const title = document.createElement('span');
+    title.className = 'toolbar-tools-sheet__title';
+    title.textContent = 'Tools';
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'toolbar-tools-sheet__close';
+    closeBtn.textContent = '✕'; // ✕
+    closeBtn.setAttribute('aria-label', 'Close');
+    closeBtn.addEventListener('click', closeToolsSheet);
+    header.appendChild(title);
+    header.appendChild(closeBtn);
+    sheet.appendChild(header);
+    const list = document.createElement('div');
+    list.className = 'toolbar-tools-sheet__list';
+    for (const item of items) {
+        const row = document.createElement('button');
+        row.className = 'toolbar-tools-item';
+        const icon = document.createElement('span');
+        icon.className = 'toolbar-tools-item__icon';
+        icon.textContent = item.icon;
+        const label = document.createElement('span');
+        label.className = 'toolbar-tools-item__label';
+        label.textContent = item.label;
+        row.appendChild(icon);
+        row.appendChild(label);
+        row.addEventListener('click', () => {
+            closeToolsSheet();
+            dispatchToolbarAction(item, controller);
+        });
+        list.appendChild(row);
+    }
+    sheet.appendChild(list);
+    overlay.appendChild(sheet);
+    document.body.appendChild(overlay);
+    toolsSheetEl = overlay;
 }
 /** Collect ALL nodes grouped by module with real label names */
 function collectAllNodesByModule(controller, moduleLabels) {
