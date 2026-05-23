@@ -466,8 +466,12 @@ function renderFlowHeader(container, categoryId) {
         const currentModule = engine.getCurrentModule();
         const totalModules = engine.getTotalModules();
         if (currentModule !== null && totalModules > 0) {
-            progress.textContent = `${currentModule}/${totalModules}`;
-            progress.setAttribute('aria-label', `Module ${currentModule} of ${totalModules}`);
+            // Prefix with section glyph so users don't read it as a step/screen counter.
+            // The counter advances per module (clinical section), not per node — a path may
+            // traverse multiple nodes within the same module without the number changing.
+            progress.textContent = `\u00A7${currentModule}/${totalModules}`;
+            progress.setAttribute('aria-label', `Section ${currentModule} of ${totalModules}`);
+            progress.setAttribute('title', `Section ${currentModule} of ${totalModules}`);
         }
     }
     // Share button
