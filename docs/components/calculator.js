@@ -104,6 +104,125 @@ const CHA2DS2VASC_CALCULATOR = {
 // -------------------------------------------------------------------
 // NIHSS Calculator Definition
 // -------------------------------------------------------------------
+const NIHSS_RESULT_RANGES = [
+    { min: -Infinity, max: 1, label: 'Score 0', risk: 'No Stroke Symptoms', mortality: 'No measurable deficit', colorVar: '--color-primary' },
+    { min: 1, max: 5, label: 'Score 1\u20134', risk: 'Minor Stroke', mortality: 'Consider DAPT, MRI preferred', colorVar: '--color-primary' },
+    { min: 5, max: 16, label: 'Score 5\u201315', risk: 'Moderate Stroke', mortality: 'IVT candidate if within window', colorVar: '--color-warning' },
+    { min: 16, max: 21, label: 'Score 16\u201320', risk: 'Moderate-Severe Stroke', mortality: 'IVT + evaluate for EVT', colorVar: '--color-danger' },
+    { min: 21, max: Infinity, label: 'Score 21\u201342', risk: 'Severe Stroke', mortality: 'IVT + EVT if LVO. High mortality risk.', colorVar: '--color-danger' },
+];
+function getNihssResult(score) {
+    return NIHSS_RESULT_RANGES.find(r => score >= r.min && score < r.max) || NIHSS_RESULT_RANGES[NIHSS_RESULT_RANGES.length - 1];
+}
+function computeNihssFastResult(values) {
+    const score = NIHSS_CALCULATOR.fields.reduce((sum, field) => sum + (values[field.name] || 0), 0);
+    const result = getNihssResult(score);
+    return {
+        value: String(score),
+        label: `${result.risk} (${result.label})`,
+        description: `${result.mortality}\n\nNIHSS \u22656: evaluate for LVO/EVT pathway. Low NIHSS can still be disabling with aphasia, neglect, visual field loss, or posterior circulation syndromes.`,
+        colorVar: result.colorVar,
+    };
+}
+const NIHSS_FAST_LABELS = {
+    'loc': { title: 'LOC' },
+    'loc-questions': { title: 'LOC QUESTIONS', prompt: 'Ask: month and age' },
+    'loc-commands': { title: 'LOC COMMANDS', prompt: 'Ask: close eyes, make fist' },
+    'gaze': { title: 'BEST GAZE' },
+    'visual': { title: 'VISUAL FIELDS' },
+    'facial': { title: 'FACIAL PALSY' },
+    'left-arm': { title: 'LEFT ARM MOTOR', prompt: 'Hold arm up for 10 seconds' },
+    'right-arm': { title: 'RIGHT ARM MOTOR', prompt: 'Hold arm up for 10 seconds' },
+    'left-leg': { title: 'LEFT LEG MOTOR', prompt: 'Hold leg up for 5 seconds' },
+    'right-leg': { title: 'RIGHT LEG MOTOR', prompt: 'Hold leg up for 5 seconds' },
+    'ataxia': { title: 'LIMB ATAXIA', prompt: 'Finger-nose-finger and heel-shin' },
+    'sensory': { title: 'SENSORY' },
+    'language': { title: 'BEST LANGUAGE' },
+    'dysarthria': { title: 'DYSARTHRIA' },
+    'extinction': { title: 'EXTINCTION / INATTENTION' },
+};
+function renderNihssFastScoreSheet(container, onUpdate) {
+    container.classList.add('nihss-fast-sheet');
+    const values = {};
+    const activeButtons = new Map();
+    const resetRow = document.createElement('div');
+    resetRow.className = 'nihss-fast-actions';
+    const resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.className = 'nihss-fast-reset';
+    resetBtn.textContent = 'Reset';
+    resetRow.appendChild(resetBtn);
+    const completion = document.createElement('span');
+    completion.className = 'nihss-fast-completion';
+    resetRow.appendChild(completion);
+    container.appendChild(resetRow);
+    const updateCompletion = () => {
+        completion.textContent = `${Object.keys(values).length}/${NIHSS_CALCULATOR.fields.length} scored`;
+    };
+    const setFieldValue = (fieldName, points) => {
+        values[fieldName] = points;
+        const buttons = activeButtons.get(fieldName) || [];
+        for (const btn of buttons) {
+            btn.classList.toggle('active', Number(btn.dataset.points) === points);
+            btn.setAttribute('aria-pressed', String(Number(btn.dataset.points) === points));
+        }
+        updateCompletion();
+        onUpdate({ ...values });
+    };
+    for (const field of NIHSS_CALCULATOR.fields) {
+        values[field.name] = 0;
+        const item = document.createElement('section');
+        item.className = 'nihss-fast-item';
+        const meta = NIHSS_FAST_LABELS[field.name] || { title: field.label };
+        const title = document.createElement('h2');
+        title.className = 'nihss-fast-title';
+        title.textContent = meta.title;
+        item.appendChild(title);
+        if (meta.prompt || field.description) {
+            const prompt = document.createElement('div');
+            prompt.className = 'nihss-fast-prompt';
+            prompt.textContent = meta.prompt || field.description || '';
+            item.appendChild(prompt);
+        }
+        const buttonRow = document.createElement('div');
+        buttonRow.className = 'nihss-fast-score-row';
+        buttonRow.setAttribute('role', 'group');
+        buttonRow.setAttribute('aria-label', field.label);
+        const buttons = [];
+        for (const opt of field.selectOptions || []) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'nihss-fast-score-btn';
+            btn.textContent = String(opt.points);
+            btn.dataset.points = String(opt.points);
+            btn.setAttribute('aria-label', `${field.label}: ${opt.points}, ${opt.label}`);
+            btn.setAttribute('aria-pressed', String(opt.points === 0));
+            if (opt.points === 0)
+                btn.classList.add('active');
+            btn.addEventListener('click', () => setFieldValue(field.name, opt.points));
+            buttons.push(btn);
+            buttonRow.appendChild(btn);
+        }
+        activeButtons.set(field.name, buttons);
+        item.appendChild(buttonRow);
+        const optionList = document.createElement('div');
+        optionList.className = 'nihss-fast-option-list';
+        for (const opt of field.selectOptions || []) {
+            const line = document.createElement('div');
+            line.textContent = `${opt.points}: ${opt.label}`;
+            optionList.appendChild(line);
+        }
+        item.appendChild(optionList);
+        container.appendChild(item);
+    }
+    resetBtn.addEventListener('click', () => {
+        for (const field of NIHSS_CALCULATOR.fields) {
+            setFieldValue(field.name, 0);
+        }
+    });
+    updateCompletion();
+    onUpdate({ ...values });
+}
 const NIHSS_CALCULATOR = {
     id: 'nihss',
     title: 'NIHSS',
@@ -295,19 +414,15 @@ const NIHSS_CALCULATOR = {
             ],
         },
     ],
-    results: [
-        { min: -Infinity, max: 1, label: 'Score 0', risk: 'No Stroke Symptoms', mortality: 'No measurable deficit', colorVar: '--color-primary' },
-        { min: 1, max: 5, label: 'Score 1\u20134', risk: 'Minor Stroke', mortality: 'Consider DAPT, MRI preferred', colorVar: '--color-primary' },
-        { min: 5, max: 16, label: 'Score 5\u201315', risk: 'Moderate Stroke', mortality: 'IVT candidate if within window', colorVar: '--color-warning' },
-        { min: 16, max: 21, label: 'Score 16\u201320', risk: 'Moderate-Severe Stroke', mortality: 'IVT + evaluate for EVT', colorVar: '--color-danger' },
-        { min: 21, max: Infinity, label: 'Score 21\u201342', risk: 'Severe Stroke', mortality: 'IVT + EVT if LVO. High mortality risk.', colorVar: '--color-danger' },
-    ],
+    results: NIHSS_RESULT_RANGES,
     thresholdNote: 'NIHSS \u22656: EVT eligibility threshold (anterior LVO). NIHSS 0\u20135 with disabling deficit: still consider IVT. NIHSS 0\u20135 nondisabling: DAPT pathway.',
     citations: [
         'Brott T, et al. Measurements of Acute Cerebral Infarction: A Clinical Examination Scale. Stroke. 1989;20(7):864-870.',
         'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.',
         'Mendelson SJ, Prabhakaran S. Diagnosis and Management of TIA and Acute Ischemic Stroke: A Review. JAMA. 2021;325(11):1088-1098.',
     ],
+    computeResult: computeNihssFastResult,
+    customRender: renderNihssFastScoreSheet,
 };
 // -------------------------------------------------------------------
 // TIMI Risk Score Calculator Definition
@@ -37330,6 +37445,7 @@ function rankedCalcSearch(calcs, query) {
 /** Render the calculator list view with search */
 export function renderCalculatorList(container) {
     container.innerHTML = '';
+    container.classList.remove('calculator-container--nihss');
     // Back button
     const backBtn = document.createElement('button');
     backBtn.className = 'btn-text';
@@ -37452,6 +37568,7 @@ export function renderCalculator(container, calculatorId) {
     // Track calculator open for KittMD analytics
     trackCalcOpen(calculatorId);
     container.innerHTML = '';
+    container.classList.toggle('calculator-container--nihss', calculatorId === 'nihss');
     // Add custom scroll indicator for TBSA calculators (iOS hides native scrollbar)
     if (calculatorId.startsWith('tbsa')) {
         addScrollIndicator(container);
@@ -37489,6 +37606,9 @@ export function renderCalculator(container, calculatorId) {
     scoreDisplay.className = useStickyScoreDisplay
         ? 'calculator-score-display calculator-score-display--sticky'
         : 'calculator-score-display';
+    if (calculatorId === 'nihss') {
+        scoreDisplay.classList.add('nihss-fast-score-display');
+    }
     scoreDisplay.id = 'calc-score-display';
     if (!calc.customRender || calc.computeResult) {
         container.appendChild(scoreDisplay);

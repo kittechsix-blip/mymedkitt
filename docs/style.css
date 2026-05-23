@@ -3564,6 +3564,210 @@ body.critical-actions-open {
   box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.15);
 }
 
+/* ---- NIHSS Fast Score Sheet ---- */
+
+.calculator-container--nihss .btn-text {
+  margin-bottom: 8px;
+}
+
+.calculator-container--nihss .calculator-header {
+  max-width: 720px;
+  margin: 0 auto 4px;
+  text-align: left;
+}
+
+.calculator-container--nihss .calculator-title {
+  font-size: 42px;
+  line-height: 1;
+  font-weight: 900;
+  color: #111111;
+  letter-spacing: 0;
+}
+
+.calculator-container--nihss .calculator-subtitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111111;
+}
+
+.calculator-container--nihss .calculator-description {
+  display: none;
+}
+
+.nihss-fast-score-display {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 12px;
+  width: min(100%, 720px);
+  border: 3px solid #111111;
+  border-top: 6px solid #b11226;
+  background: #ffffff;
+  color: #111111;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 8px auto 10px;
+  padding: 6px 12px;
+}
+
+.nihss-fast-score-display .calculator-score-number {
+  font-size: 40px;
+  line-height: 0.95;
+  font-weight: 900;
+  color: #111111;
+}
+
+.nihss-fast-score-display .calculator-result-label {
+  color: #111111;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.nihss-fast-score-display .calculator-result-risk {
+  display: none;
+}
+
+.nihss-fast-score-display .calculator-copy-btn {
+  display: none;
+}
+
+.nihss-fast-sheet {
+  padding: 0;
+  background: #ffffff;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.nihss-fast-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0 12px;
+  border-bottom: 3px solid #111111;
+  margin-bottom: 4px;
+}
+
+.nihss-fast-reset {
+  min-height: 42px;
+  padding: 0 18px;
+  border: 2px solid #111111;
+  border-radius: 0;
+  background: #ffffff;
+  color: #111111;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.nihss-fast-completion {
+  color: #111111;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.nihss-fast-item {
+  padding: 18px 0 20px;
+  border-bottom: 2px solid #111111;
+  background: #ffffff;
+}
+
+.nihss-fast-title {
+  margin: 0 0 8px;
+  color: #111111;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.nihss-fast-prompt {
+  margin: 0 0 8px;
+  color: #111111;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.nihss-fast-score-row {
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(68px, 1fr);
+  max-width: 100%;
+  border: 2px solid #111111;
+  background: #ffffff;
+  margin: 0 0 8px;
+}
+
+.nihss-fast-score-btn {
+  min-width: 68px;
+  height: 48px;
+  border: 0;
+  border-right: 2px solid #111111;
+  border-radius: 0;
+  background: #f7f7f7;
+  color: #111111;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 900;
+  text-align: center;
+  touch-action: manipulation;
+}
+
+.nihss-fast-score-btn:last-child {
+  border-right: 0;
+}
+
+.nihss-fast-score-btn.active {
+  background: #5da2d9;
+  color: #111111;
+}
+
+.nihss-fast-score-btn:focus-visible {
+  outline: 4px solid #b11226;
+  outline-offset: 2px;
+}
+
+.nihss-fast-option-list {
+  color: #111111;
+  font-size: 21px;
+  line-height: 1.28;
+  font-weight: 800;
+}
+
+.calculator-container--nihss .calculator-threshold {
+  color: #111111;
+  font-size: 15px;
+  font-weight: 800;
+  font-style: normal;
+}
+
+@media (max-width: 420px) {
+  .calculator-container--nihss .calculator-title {
+    font-size: 38px;
+  }
+
+  .nihss-fast-title {
+    font-size: 30px;
+  }
+
+  .nihss-fast-prompt,
+  .nihss-fast-option-list {
+    font-size: 19px;
+  }
+
+  .nihss-fast-score-row {
+    width: 100%;
+  }
+
+  .nihss-fast-score-btn {
+    min-width: 0;
+  }
+}
+
 /* ---- Threshold Note & Citations ---- */
 
 .calculator-threshold {
