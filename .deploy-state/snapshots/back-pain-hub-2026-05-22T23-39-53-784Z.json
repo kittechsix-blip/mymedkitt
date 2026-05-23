@@ -1,0 +1,589 @@
+{
+  "tree_id": "back-pain-hub",
+  "captured_at": "2026-05-22T23:39:53.784Z",
+  "service_role_key_fingerprint": "778ea4be",
+  "tables": {
+    "decision_trees": [
+      {
+        "id": "back-pain-hub",
+        "title": "Back Pain Hub",
+        "subtitle": "Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo",
+        "version": "1.0",
+        "node_count": 15,
+        "entry_node_id": "bp-start",
+        "updated_at": "2026-05-22T19:37:49.553733+00:00",
+        "module_labels": [
+          "Sick Check",
+          "Time-Critical Exclusions",
+          "Rescue / Reassess",
+          "Imaging",
+          "Disposition"
+        ]
+      }
+    ],
+    "category_trees": [
+      {
+        "category_id": "emergency-medicine",
+        "tree_id": "back-pain-hub",
+        "display_title": null,
+        "display_subtitle": null,
+        "entry_node_id": "bp-start",
+        "sort_order": 0
+      },
+      {
+        "category_id": "orthopedics",
+        "tree_id": "back-pain-hub",
+        "display_title": null,
+        "display_subtitle": null,
+        "entry_node_id": "bp-start",
+        "sort_order": 1
+      }
+    ],
+    "tree_citations": [
+      {
+        "tree_id": "back-pain-hub",
+        "num": 1,
+        "text": "ACR Appropriateness Criteria. Low Back Pain: 2021 Update. J Am Coll Radiol. 2021;18:S361-S379."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 2,
+        "text": "Qaseem A, Wilt TJ, McLean RM, Forciea MA. Noninvasive treatments for acute, subacute, and chronic low back pain: ACP clinical practice guideline. Ann Intern Med. 2017;166:514-530."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 3,
+        "text": "Casazza BA. Diagnosis and treatment of acute low back pain. Am Fam Physician. 2012;85:343-350."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 4,
+        "text": "Lavy C, James A, Wilson-MacDonald J, Fairbank J. Cauda equina syndrome. BMJ. 2009;338:b936."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 5,
+        "text": "Todd NV. Guidelines for cauda equina syndrome: red flags and white flags. Br J Neurosurg. 2017;31:336-339."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 6,
+        "text": "Berbari EF, Kanj SS, Kowalski TJ, et al. IDSA guideline for native vertebral osteomyelitis in adults. Clin Infect Dis. 2015;61:e26-e46."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 7,
+        "text": "Davis DP, Wold RM, Patel RJ, et al. Clinical presentation and diagnostic delays in ED spinal epidural abscess. J Emerg Med. 2004;26:285-291."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 8,
+        "text": "Isselbacher EM, Preventza O, Hamilton Black J, et al. 2022 ACC/AHA guideline for diagnosis and management of aortic disease. Circulation. 2022;146:e334-e482."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 9,
+        "text": "Cole JS, Patchell RA. Metastatic epidural spinal cord compression. Lancet Neurol. 2008;7:459-466."
+      },
+      {
+        "tree_id": "back-pain-hub",
+        "num": 10,
+        "text": "Chou R, Deyo R, Friedly J, et al. Systemic pharmacologic therapies for low back pain. Ann Intern Med. 2017;166:480-492."
+      }
+    ],
+    "decision_nodes": [
+      {
+        "id": "bp-start",
+        "tree_id": "back-pain-hub",
+        "type": "info",
+        "module": 1,
+        "title": "Back Pain Hub - Sick Check First",
+        "body": "Open first:\n- [Hub Steps Summary](#/info/bp-steps)\n- [Hub Stop / Pitfalls](#/info/bp-stop)\n\n**First 60 seconds:**\n- General appearance: pale, diaphoretic, unable to sit still, toxic, septic, severe distress?\n- Vitals trend: hypotension, fever, tachycardia, hypoxia.\n- Neuro: leg strength, sensation, reflexes, gait if safe, saddle sensation, bowel/bladder symptoms.\n- Vascular/abdominal: abdominal pain, pulsatile mass, syncope, unequal pulses, tearing pain.\n- Infection risk: IVDU, diabetes, immunosuppression, recent bacteremia, dialysis, spinal injection/procedure, indwelling catheter.\n- Fracture/cancer risk: trauma, osteoporosis, steroids, age, malignancy, weight loss, night pain.\n\nMost back pain is mechanical. The ED job is to rapidly find the few that are spine, vascular, infectious, renal, traumatic, or malignant emergencies.",
+        "citation": [
+          1,
+          2,
+          3
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bp-exclusions",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 0,
+        "summary": "Vitals, neuro/bowel/bladder, vascular/abdominal, infection, trauma, cancer risk first.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-exclusions",
+        "tree_id": "back-pain-hub",
+        "type": "question",
+        "module": 2,
+        "title": "Time-Critical Exclusions - Pick the Best Fit",
+        "body": "Choose the first dangerous lane. Do not start with \"sciatica\" until these are screened.",
+        "citation": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "options": [
+          {
+            "next": "bp-cauda",
+            "label": "Urinary retention/incontinence, saddle symptoms, bilateral sciatica, progressive leg weakness",
+            "urgency": "critical",
+            "description": "Cauda equina / conus medullaris"
+          },
+          {
+            "next": "bp-spine-infection",
+            "label": "Fever, IVDU, diabetes, immunosuppression, recent bacteremia/procedure, focal spine tenderness",
+            "urgency": "critical",
+            "description": "SEA / vertebral osteomyelitis / discitis"
+          },
+          {
+            "next": "bp-aaa-dissection",
+            "label": "Older vascular risk, abrupt severe back/abdominal pain, syncope, hypotension, pulse deficit",
+            "urgency": "critical",
+            "description": "AAA rupture/leak or aortic dissection"
+          },
+          {
+            "next": "bp-fracture-cancer",
+            "label": "Trauma, osteoporosis, chronic steroids, cancer, weight loss, night pain",
+            "urgency": "urgent",
+            "description": "Fracture / malignancy / metastatic cord compression"
+          },
+          {
+            "next": "bp-renal",
+            "label": "Flank pain, fever, urinary symptoms, stone-like colic, solitary kidney, pregnancy",
+            "urgency": "urgent",
+            "description": "Renal/urinary or intra-abdominal mimic"
+          },
+          {
+            "next": "bp-radiculopathy",
+            "label": "Unilateral radicular pain, positive straight-leg, no red flags, normal strength/bladder",
+            "description": "Radiculopathy / mechanical pattern"
+          },
+          {
+            "next": "bp-rescue",
+            "label": "No immediate exclusion hit",
+            "description": "Initial back pain bundle and reassess"
+          }
+        ],
+        "inputs": null,
+        "next": null,
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 1,
+        "summary": "Cauda, spine infection, AAA/dissection, fracture/cancer, renal mimics, and radiculopathy are the main lanes.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-cauda",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 2,
+        "title": "Cauda Equina / Conus Medullaris",
+        "body": "Open [Cauda Equina Syndrome](#/tree/cauda-equina).\n\n**Next 5 minutes:** bladder scan/PVR, focused sacral exam when feasible, leg motor/reflex/sensation exam, urgent MRI lumbar spine, early spine/neurosurgery call if symptoms fit.\n\n**Red flags:** urinary retention or new overflow incontinence, saddle anesthesia, bilateral sciatica, progressive bilateral leg weakness, fecal incontinence, severe neurologic deficit.\n\n**Pitfall:** pain may be improving while bladder/neurologic injury is worsening. Do not reassure based on pain response.",
+        "citation": [
+          4,
+          5
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Suspected cauda equina needs emergency MRI and spine pathway.",
+        "treatment": null,
+        "confidence": "definitive",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 2,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-spine-infection",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 2,
+        "title": "Spinal Epidural Abscess / Vertebral Osteomyelitis",
+        "body": "Open [Low Back Pain Decision Support](#/tree/low-back-pain) while using spine infection posture.\n\n**Next 5 minutes:** neuro exam, ESR/CRP, blood cultures when febrile/high suspicion, MRI spine with and without contrast; consider whole-spine MRI when symptoms do not localize or risk is high. Antibiotics after cultures when stable; do not delay antibiotics for sepsis or neurologic deficit.\n\n**Pitfall:** the classic triad is insensitive. No fever does not clear SEA.",
+        "citation": [
+          3,
+          6,
+          7
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "MRI is the key diagnostic test when spine infection is plausible.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 3,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-aaa-dissection",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 2,
+        "title": "AAA / Aortic Dissection Back-Pain Variant",
+        "body": "Open [Aortic Aneurysm ED Management](#/tree/aortic-aneurysm) or [Aortic Dissection](#/tree/aortic-dissection).\n\n**Next 5 minutes:** two large-bore IVs, type/screen or MTP posture if unstable, bedside aorta ultrasound if rapid and available, CTA chest/abdomen/pelvis when stable, vascular/cardiothoracic surgery early. For dissection, impulse control before vasodilator when perfusing.\n\n**Pitfall:** do not anchor on musculoskeletal pain in an older vascular-risk patient with syncope, hypotension, abdominal pain, pulse deficit, or abrupt maximal pain.",
+        "citation": [
+          8
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Vascular back pain is a resuscitation diagnosis. Image and consult early.",
+        "treatment": null,
+        "confidence": "definitive",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 4,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-fracture-cancer",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 2,
+        "title": "Fracture / Malignancy / Metastatic Cord Compression",
+        "body": "Open [Low Back Pain Decision Support](#/tree/low-back-pain).\n\n**Next 5 minutes:** neuro exam, pain control, CT or radiographs for trauma/fracture by risk, MRI when cancer with neurologic symptoms, severe progressive pain, suspected cord/cauda compression, or epidural disease. Consider steroids after specialist discussion when metastatic cord compression is suspected.\n\n**Pitfall:** new severe back pain in a cancer patient is malignant spinal disease until reasonably excluded.",
+        "citation": [
+          1,
+          9
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Cancer, fracture risk, or neuro findings should trigger imaging beyond routine mechanical back pain care.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 5,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-renal",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 2,
+        "title": "Renal / Urinary / Intra-Abdominal Mimic",
+        "body": "Open [Adult UTI](#/tree/adult-uti) or [Urinary Retention](#/tree/urinary-retention) when those fit.\n\n**Next 5 minutes:** UA, pregnancy test when applicable, renal function, bedside bladder scan if retention, CT/ultrasound strategy for stone/obstruction/pyelo complication by risk. Reconsider abdominal pathology when pain is not reproducible/mechanical or vitals are abnormal.\n\n**Pitfall:** flank/back pain plus fever, solitary kidney, AKI, pregnancy, uncontrolled pain/vomiting, or sepsis physiology is not simple outpatient back pain.",
+        "citation": [
+          2
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Treat renal/urinary mimics by obstruction, infection severity, pregnancy, and renal risk.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 6,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "warning",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-radiculopathy",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 2,
+        "title": "Radiculopathy / Mechanical Pattern",
+        "body": "Open [Low Back Pain Decision Support](#/tree/low-back-pain).\n\nOpen [L4/L5/S1 Radiculopathy Localization](#/info/bp-radic-localization) for the bedside dermatome/myotome/reflex map.\n\n**Next 5 minutes:** confirm no red flags, document motor/reflex/sensation, treat pain to enable mobility, avoid routine advanced imaging for uncomplicated acute low back pain/radiculopathy, encourage activity as tolerated.\n\n**Pitfall:** radicular pain does not equal cauda equina. Cauda requires bowel/bladder/saddle/progressive bilateral weakness screening every time.",
+        "citation": [
+          1,
+          2,
+          10
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Mechanical/radicular pain can be outpatient only after red flags and function are reassessed.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 7,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "warning",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-rescue",
+        "tree_id": "back-pain-hub",
+        "type": "info",
+        "module": 3,
+        "title": "Rescue / Initial Bundle + Reassess",
+        "body": "**Default bundle when no killer has declared itself:**\n- Analgesia: acetaminophen, NSAID if safe, topical/local measures, muscle relaxer selectively; avoid routine opioids when alternatives work.\n- Neuro exam before and after analgesia: gait, strength, reflexes, sensation.\n- Bladder scan/PVR when urinary symptoms, severe bilateral symptoms, or cauda concern.\n- ESR/CRP when infection risk exists; normal labs do not overrule high clinical suspicion.\n- Encourage movement as tolerated; avoid prolonged bedrest instructions for uncomplicated mechanical pain.\n\n**Reassess in 30-60 minutes:** ability to stand/walk, neuro exam, bladder symptoms, pain control, vitals.",
+        "citation": [
+          1,
+          2,
+          3
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bp-reassess",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 8,
+        "summary": "Analgesia, repeat neuro/gait, PVR when indicated, ESR/CRP by infection risk, then reassess.",
+        "skippable": null,
+        "safety_level": "warning",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-reassess",
+        "tree_id": "back-pain-hub",
+        "type": "question",
+        "module": 3,
+        "title": "Reassess After Initial Bundle",
+        "body": "Disposition depends on function and the repeat neurologic exam.",
+        "citation": [
+          1,
+          2
+        ],
+        "options": [
+          {
+            "next": "bp-exclusions",
+            "label": "Worse, cannot walk, new neuro/bladder/fever/vascular feature",
+            "urgency": "critical",
+            "description": "Return to time-critical exclusions"
+          },
+          {
+            "next": "bp-imaging",
+            "label": "Persistent severe pain or red-flag uncertainty",
+            "description": "Use imaging strategy"
+          },
+          {
+            "next": "bp-disposition",
+            "label": "Improved, ambulatory, no red flags, stable exam",
+            "description": "Disposition checklist"
+          }
+        ],
+        "inputs": null,
+        "next": null,
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 9,
+        "summary": "New neuro/bladder/fever/vascular features reset the workup.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-imaging",
+        "tree_id": "back-pain-hub",
+        "type": "info",
+        "module": 4,
+        "title": "Imaging Decision",
+        "body": "**Image by suspected emergency:**\n- **MRI lumbar spine:** cauda/conus, progressive neurologic deficit, suspected epidural abscess/vertebral osteomyelitis, malignancy with neuro signs, cord/cauda compression.\n- **MRI with contrast / whole spine:** infection, malignancy, nonlocalizing spinal infection symptoms.\n- **CTA chest/abdomen/pelvis:** aortic dissection or unstable vascular back-pain phenotype when stable enough.\n- **Bedside aorta ultrasound:** rapid screen for AAA in older vascular-risk patients; do not let a limited scan delay CTA/surgery when unstable.\n- **CT/radiographs:** trauma or compression fracture risk.\n- **No routine imaging:** uncomplicated acute low back pain or radiculopathy without red flags.\n\nImage because the result changes management, not because the pain is severe.",
+        "citation": [
+          1,
+          3,
+          6,
+          8
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bp-disposition",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 10,
+        "summary": "MRI for cauda/infection/cancer/neuro, CTA/US for aorta, CT/XR for fracture, no imaging for uncomplicated mechanical pain.",
+        "skippable": null,
+        "safety_level": "warning",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-disposition",
+        "tree_id": "back-pain-hub",
+        "type": "question",
+        "module": 5,
+        "title": "Disposition",
+        "body": "Disposition follows neurologic safety, infection/vascular risk, mobility, and pain control.",
+        "citation": [
+          1,
+          2
+        ],
+        "options": [
+          {
+            "next": "bp-dispo-admit",
+            "label": "Cauda/SEA/aorta/fracture/cancer/neuro deficit/unstable vitals",
+            "urgency": "critical",
+            "description": "Admit/transfer/specialty pathway"
+          },
+          {
+            "next": "bp-dispo-observe",
+            "label": "Persistent severe pain, equivocal red flags, pending MRI/CTA/labs",
+            "description": "Observe/admit"
+          },
+          {
+            "next": "bp-dispo-discharge",
+            "label": "Mechanical pattern, ambulatory, no red flags, safe follow-up",
+            "description": "Discharge checklist"
+          }
+        ],
+        "inputs": null,
+        "next": null,
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 11,
+        "summary": "Danger signs admit; uncertainty observes; uncomplicated mechanical pain discharges after function and red flags are checked.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-dispo-admit",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 5,
+        "title": "Admit / Transfer / Specialty Pathway",
+        "body": "Admit/transfer for cauda/conus symptoms, progressive neurologic deficit, suspected or confirmed SEA/NVO, sepsis, AAA/dissection, unstable vitals, fracture needing intervention, malignancy/cord compression concern, inability to ambulate safely, urinary retention with neurologic concern, or pain requiring inpatient control.",
+        "citation": [
+          1,
+          3,
+          4,
+          6,
+          8
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Admit or transfer when the diagnosis threatens neurologic function, vascular survival, infection control, or safe mobility.",
+        "treatment": null,
+        "confidence": "definitive",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 12,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-dispo-observe",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 5,
+        "title": "Observation / Serial Exam",
+        "body": "Observe when MRI/CTA/labs are pending, pain prevents a reliable exam or ambulation test, symptoms are evolving, infection risk is moderate with unclear labs, or social support/transport is unsafe after treatment.",
+        "citation": [
+          1,
+          2
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Observation is for serial neuro/gait/vitals and completion of targeted testing.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 13,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "warning",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bp-dispo-discharge",
+        "tree_id": "back-pain-hub",
+        "type": "result",
+        "module": 5,
+        "title": "Discharge Checklist",
+        "body": "Discharge only when: no red flags, normal or baseline neuro exam, no bowel/bladder/saddle symptoms, ambulatory or baseline mobility restored, pain controlled enough for function, no infection/vascular/trauma/cancer concern, and follow-up is realistic.\n\n**Return precautions:** urinary retention/incontinence, saddle numbness, leg weakness, inability to walk, fever, worsening severe pain, abdominal pain/syncope, new numbness, cancer red flags, or uncontrolled vomiting/pain.",
+        "citation": [
+          1,
+          2
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Document red-flag screen, repeat neuro/gait exam, and explicit cauda/infection/vascular return precautions.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 14,
+        "summary": null,
+        "skippable": null,
+        "safety_level": "warning",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      }
+    ]
+  },
+  "sha256": "2f290b2f57e5067ff9739236fd48cf6d3cb6562379b9c7deafd28b14cfca1a03"
+}

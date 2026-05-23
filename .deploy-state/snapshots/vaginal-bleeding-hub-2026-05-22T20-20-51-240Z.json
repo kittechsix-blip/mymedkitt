@@ -1,0 +1,12 @@
+{
+  "tree_id": "vaginal-bleeding-hub",
+  "captured_at": "2026-05-22T20:20:51.240Z",
+  "service_role_key_fingerprint": "778ea4be",
+  "tables": {
+    "decision_trees": [],
+    "category_trees": [],
+    "tree_citations": [],
+    "decision_nodes": []
+  },
+  "sha256": "b9d5763d220127ce2f9c7ba6f7d523462ad6a4427ba0b179a036639fc69e978b"
+}

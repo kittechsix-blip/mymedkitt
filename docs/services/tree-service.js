@@ -246,6 +246,14 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/monocular-vision-loss-hub.js');
             return { nodes: m.MONOCULAR_VISION_LOSS_HUB_NODES, entryNodeId: 'mvl-start', categoryId: 'emergency-medicine', moduleLabels: m.MONOCULAR_VISION_LOSS_HUB_MODULE_LABELS, citations: m.MONOCULAR_VISION_LOSS_HUB_CITATIONS, criticalActions: m.MONOCULAR_VISION_LOSS_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'optic-neuropathy-hub': async () => {
+            const m = await import('../data/trees/optic-neuropathy-hub.js');
+            return { nodes: m.OPTIC_NEUROPATHY_HUB_NODES, entryNodeId: 'on-hub-start', categoryId: 'ophthalmology', moduleLabels: m.OPTIC_NEUROPATHY_HUB_MODULE_LABELS, citations: m.OPTIC_NEUROPATHY_HUB_CITATIONS, criticalActions: m.OPTIC_NEUROPATHY_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'optic-neuritis': async () => {
+            const m = await import('../data/trees/optic-neuritis.js');
+            return { nodes: m.OPTIC_NEURITIS_NODES, entryNodeId: 'on-confirm', categoryId: 'ophthalmology', moduleLabels: m.OPTIC_NEURITIS_MODULE_LABELS, citations: m.OPTIC_NEURITIS_CITATIONS, criticalActions: m.OPTIC_NEURITIS_CRITICAL_ACTIONS };
+        },
         'dental-pain-hub': async () => {
             const m = await import('../data/trees/dental-pain-hub.js');
             return { nodes: m.DENTAL_PAIN_HUB_NODES, entryNodeId: 'dp-start', categoryId: 'emergency-medicine', moduleLabels: m.DENTAL_PAIN_HUB_MODULE_LABELS, citations: m.DENTAL_PAIN_HUB_CITATIONS, criticalActions: m.DENTAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };

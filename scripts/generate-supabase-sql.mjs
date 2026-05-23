@@ -84,6 +84,8 @@ const CROSS_LISTINGS = {
   'neck-pain-hub': [{ categoryId: 'orthopedics', displayTitle: null, displaySubtitle: null, entryNodeId: 'np-start' }],
   'back-pain-hub': [{ categoryId: 'orthopedics', displayTitle: null, displaySubtitle: null, entryNodeId: 'bp-start' }],
   'monocular-vision-loss-hub': [{ categoryId: 'ophthalmology', displayTitle: null, displaySubtitle: null, entryNodeId: 'mvl-start' }],
+  // Optic Neuropathy Hub — canonical ophthalmology; cross-list into neurology per spec.
+  'optic-neuropathy-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'on-hub-start' }],
   'new-onset-psychosis-hub': [{ categoryId: 'psychiatry', displayTitle: null, displaySubtitle: null, entryNodeId: 'nop-start' }],
   'pelvic-pain-female-hub': [{ categoryId: 'ob-gyn', displayTitle: null, displaySubtitle: null, entryNodeId: 'ppf-start' }],
   'vaginal-bleeding-hub': [{ categoryId: 'ob-gyn', displayTitle: null, displaySubtitle: null, entryNodeId: 'vb-start' }],

@@ -217,6 +217,8 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ivt', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'stroke-ivt-treat' },
     { id: 'evt', label: 'EVT', icon: '\u23F0', action: 'jump', target: 'stroke-evt-window' },
     { id: 'mri-screen', label: 'MRI Screen', icon: '\uD83E\uDDA8', action: 'overlay', target: 'stroke-mri-screen' },
+    { id: 'windows', label: 'Windows', icon: '\u23F1\uFE0F', action: 'jump', target: 'stroke-timing' },
+    { id: 'mismatch', label: 'Mismatch', icon: '\uD83E\uDDEC', action: 'jump', target: 'stroke-evt-window' },
   ],
   'ich': [
     { id: 'reversal', label: 'Reversal', icon: '\uD83E\uDE78', action: 'jump', target: 'ich-anticoag' },
@@ -466,6 +468,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'mvl-rescue' },
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'mvl-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'mvl-stop' },
+  ],
+  'optic-neuropathy-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'optic-neuropathy-steps-summary' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'on-hub-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'on-hub-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'on-hub-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'optic-neuropathy-stop' },
+  ],
+  'optic-neuritis': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'optic-neuritis-steps-summary' },
+    { id: 'atypical', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'on-atypical' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'on-acute-rx' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'on-mri' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'optic-neuritis-stop' },
   ],
   'dental-pain-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dp-steps' },

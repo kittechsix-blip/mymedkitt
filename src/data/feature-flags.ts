@@ -38,6 +38,8 @@ export const FLAGS: FeatureFlags = {
   // time-critical exclusions → rescue cocktail + reassess → imaging → dispo).
   // Re-enabled live. SNOOP10-walk + phenotype-triage structure dropped per
   // Andy's clinical review.
+  // 2026-05-23: optic-neuropathy-hub + optic-neuritis built + Supabase-pushed.
+  // Clinical review approved. Flag flipped — both live.
   hiddenTreeIds: [],
   hiddenHubs: [],
 };
