@@ -1738,6 +1738,74 @@ const STROKE_MRI_SCREEN = {
     ],
 };
 // -------------------------------------------------------------------
+// Stroke Syndromes — Vascular Territory Localization
+// -------------------------------------------------------------------
+const STROKE_SYNDROMES_PAGE = {
+    id: 'stroke-syndromes',
+    title: 'Stroke Syndromes',
+    subtitle: 'Vascular territory, bedside pattern, and key clinical findings',
+    image: {
+        src: 'images/stroke/circle-of-willis.svg',
+        alt: 'Public domain Circle of Willis diagram showing anterior, middle, posterior, basilar, vertebral, PICA, AICA, and SCA arteries',
+        caption: 'Circle of Willis and vertebrobasilar anatomy. Use syndrome localization to guide vascular imaging, but CTA/MRA and perfusion imaging determine treatment decisions. Public domain, Wikimedia Commons.',
+    },
+    sections: [
+        {
+            heading: 'How to Use This at Bedside',
+            body: 'Use the syndrome to predict the likely vascular territory, decide whether CTA/CTP or MRI/MRA is urgent, and avoid being falsely reassured by a low NIHSS.\n\n**Do not use this to rule out stroke.** Clinical localization is imperfect, especially with posterior circulation, thalamic, lacunar, and multifocal embolic strokes. Sudden focal neurologic deficit still needs the stroke pathway. [1][2]\n\n**High-yield rule:** cortical signs point to cortex or large-vessel territory; absence of cortical signs with pure motor/sensory/ataxic patterns points toward lacunar or brainstem disease. [1][6]',
+        },
+        {
+            heading: 'Fast Localization One-Liners',
+            body: '• **Face/arm > leg weakness + aphasia, neglect, gaze deviation, or visual field cut:** MCA / ICA until proven otherwise.\n• **Leg > arm weakness + abulia, urinary incontinence, gait apraxia, grasp reflex:** ACA.\n• **Homonymous hemianopia, visual agnosia, memory disturbance, alexia, or cortical blindness:** PCA.\n• **Vertigo, diplopia, dysarthria, dysphagia, ataxia, crossed sensory/motor findings, or decreased consciousness:** posterior circulation / vertebrobasilar.\n• **Pure motor, pure sensory, sensorimotor, ataxic hemiparesis, or dysarthria-clumsy hand without aphasia/neglect/visual cortical signs:** lacunar pattern.\n• **Monocular curtain/vision loss:** retinal or ophthalmic artery ischemia, a stroke-equivalent pattern.',
+        },
+        {
+            heading: 'Anterior Circulation: MCA / ICA',
+            body: '**Proximal MCA / ICA terminus / tandem ICA-MCA**\nTerritory: lateral frontal, parietal, temporal cortex; insula; deep basal ganglia/internal capsule branches.\nPattern: dense contralateral face/arm > leg weakness and sensory loss, gaze preference toward lesion, homonymous field cut, aphasia if dominant hemisphere, neglect/anosognosia if nondominant hemisphere.\nED pitfall: severe right MCA neglect can look like confusion or intoxication; NIHSS is usually high but not always.\n\n**MCA superior division**\nTerritory: lateral frontal cortex, precentral region, Broca area when dominant.\nPattern: face/arm weakness > leg, gaze preference, expressive/nonfluent aphasia if dominant hemisphere, neglect if nondominant.\nED pitfall: isolated aphasia is disabling even with low motor score.\n\n**MCA inferior division**\nTerritory: lateral temporal and inferior parietal cortex, Wernicke/angular regions when dominant.\nPattern: receptive/fluent aphasia if dominant, homonymous field cut, visual/spatial neglect or anosognosia if nondominant; weakness may be mild.\nED pitfall: fluent aphasia may be mistaken for delirium, psychosis, or intoxication.\n\n**Deep MCA / lenticulostriate / internal capsule**\nTerritory: basal ganglia and internal capsule.\nPattern: contralateral pure motor or sensorimotor deficit, often face/arm/leg together; cortical signs usually absent.\nED pitfall: can be small-vessel lacunar, but large parent-vessel disease can block perforators, so CTA still matters when the presentation is acute or severe. [3]',
+        },
+        {
+            heading: 'Anterior Circulation: ACA',
+            body: '**ACA cortical territory**\nTerritory: medial frontal and parietal lobes; leg motor/sensory cortex; supplementary motor area; corpus callosum.\nPattern: contralateral leg > arm weakness or sensory loss, gait apraxia, abulia, apathy, impaired judgment, mutism, grasp reflex, urinary incontinence.\nED pitfall: ACA strokes can present as weakness plus odd behavior rather than classic FAST findings.\n\n**Bilateral ACA / azygos ACA pattern**\nTerritory: bilateral medial frontal lobes.\nPattern: paraparesis, akinetic mutism, profound abulia, frontal release signs, urinary incontinence.\nED pitfall: may be misrouted as metabolic encephalopathy or psychiatric disease if the leg-predominant weakness is not tested. [1][4]',
+        },
+        {
+            heading: 'Posterior Circulation: PCA and Thalamus',
+            body: '**PCA superficial territory**\nTerritory: occipital cortex and medial temporal lobe.\nPattern: contralateral homonymous hemianopia, quadrantanopia, visual agnosia, prosopagnosia, color/reading disturbance; dominant left PCA can cause alexia without agraphia; bilateral PCA can cause cortical blindness or Anton syndrome.\nED pitfall: a complete hemianopia is disabling but only scores 2 NIHSS points.\n\n**PCA deep / thalamic territory**\nTerritory: thalamus, posterior internal capsule, midbrain connections.\nPattern: hemisensory loss, sensory pain syndrome, hypersomnolence, confusion, memory impairment, dysarthria, ocular movement abnormalities, ataxia.\nED pitfall: thalamic strokes can mimic intoxication, seizure/postictal state, or nonspecific AMS.\n\n**Artery of Percheron**\nTerritory: bilateral paramedian thalami, sometimes rostral midbrain.\nPattern: sudden hypersomnolence/coma, vertical gaze palsy, memory disturbance, confusion, dysarthria.\nED pitfall: CT may be unrevealing early; consider MRI/CTA/MRA when unexplained hypersomnolence has ocular findings. [2][5]',
+        },
+        {
+            heading: 'Posterior Circulation: Vertebrobasilar',
+            body: '**Basilar artery occlusion**\nTerritory: pons, midbrain, cerebellar branches, top-of-basilar PCA/SCA territory.\nPattern: dizziness/vertigo may be early; dysarthria, diplopia, gaze palsy, cranial nerve deficits, bilateral weakness, quadriparesis, decreased consciousness, coma, or locked-in syndrome.\nED pitfall: early symptoms can be nonspecific. Rapid impaired consciousness plus motor or brainstem signs is basilar occlusion until proven otherwise. [7][9]\n\n**PICA / lateral medullary syndrome (Wallenberg)**\nTerritory: dorsolateral medulla, inferior cerebellar peduncle, vestibular nuclei, spinal trigeminal nucleus, sympathetic fibers, nucleus ambiguus.\nPattern: vertigo, nausea/vomiting, ipsilateral ataxia, ipsilateral facial pain/temp loss, contralateral body pain/temp loss, dysphagia, hoarseness, hiccups, Horner syndrome.\nED pitfall: can look like peripheral vertigo until crossed findings, dysphagia/hoarseness, Horner, or severe gait ataxia are found. [8]\n\n**AICA / lateral pontine syndrome**\nTerritory: lateral pons, middle cerebellar peduncle, CN VII/VIII region, inner ear via labyrinthine artery.\nPattern: vertigo, nystagmus, ipsilateral facial weakness, hearing loss/tinnitus, ipsilateral limb ataxia, facial sensory loss, contralateral body sensory changes.\nED pitfall: acute vestibular syndrome plus new unilateral hearing loss is a vascular red flag.\n\n**SCA / superior cerebellar territory**\nTerritory: superior cerebellum and rostral brainstem connections.\nPattern: ipsilateral limb ataxia, gait/truncal ataxia, dysarthria, nausea/vomiting, nystagmus; weakness may be absent.\nED pitfall: severe inability to sit or walk unaided is not benign vertigo, even if limb strength is normal. [7]',
+        },
+        {
+            heading: 'Deep / Lacunar Syndromes',
+            body: '**Pure motor hemiparesis**\nTerritory: posterior limb internal capsule, corona radiata, or ventral pons.\nPattern: contralateral face/arm/leg weakness without sensory loss, aphasia, neglect, or visual field deficit.\n\n**Pure sensory stroke**\nTerritory: thalamus, especially VPL.\nPattern: contralateral face/arm/leg numbness, paresthesia, or pain without weakness or cortical signs.\n\n**Sensorimotor lacunar stroke**\nTerritory: thalamocapsular region, internal capsule, putamen-capsule-caudate region.\nPattern: combined contralateral sensory and motor loss without cortical signs.\n\n**Ataxic hemiparesis**\nTerritory: internal capsule, corona radiata, or pons.\nPattern: mild contralateral weakness with disproportionate ipsilateral-appearing limb clumsiness/ataxia on the weak side.\n\n**Dysarthria-clumsy hand**\nTerritory: pons or internal capsule.\nPattern: dysarthria, facial/tongue weakness, clumsy hand/writing difficulty, preserved gross strength.\n\n**ED pitfall:** lacunar syndrome does not automatically mean "minor." Treat disabling deficit by function, not by NIHSS alone. [1][6]',
+        },
+        {
+            heading: 'Retinal / Ophthalmic Artery',
+            body: '**Central retinal artery / ophthalmic artery ischemia**\nTerritory: retina or ophthalmic branch of ICA.\nPattern: sudden painless monocular vision loss, curtain/gray-out, afferent pupillary defect, retinal whitening/cherry-red spot when visible.\nED pitfall: treat as acute retinal ischemia / stroke-equivalent. Look for carotid disease, atrial fibrillation, embolic source, and giant cell arteritis when age and symptoms fit. Open CRAO or Monocular Vision Loss Hub when this pattern is present. [1]',
+        },
+        {
+            heading: 'Watershed / Border-Zone',
+            body: '**Cortical watershed (ACA-MCA or MCA-PCA border)**\nTerritory: border zones between major cortical arteries.\nPattern: proximal arm/leg weakness, higher cortical deficits, or transcortical aphasia patterns; often after hypotension, severe carotid stenosis, or embolic shower.\n\n**Internal watershed**\nTerritory: deep white matter border zone between superficial and deep perforator systems.\nPattern: "man-in-the-barrel" proximal arm weakness or stepwise/fluctuating deficits.\nED pitfall: recurrent hypotension or over-aggressive BP lowering can worsen symptoms in flow-dependent stenosis. [3]',
+        },
+        {
+            heading: 'Documentation Phrase',
+            body: 'Suggested note language:\n\n"Deficit localizes clinically to ___ territory based on ___. Stroke pathway activated; CTA/CTP or MRI/MRA used to confirm vascular target and treatment eligibility. NIHSS interpreted in context because posterior circulation, visual, thalamic, and lacunar syndromes may be underweighted."',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Alexandrov AV, Krishnaiah B. Overview of Stroke. Merck Manual Professional Version. Reviewed Jun 2025; modified Jan 2026.' },
+        { num: 2, text: 'Ischemic Stroke. StatPearls. NCBI Bookshelf. Updated 2025/2026.' },
+        { num: 3, text: 'Middle Cerebral Artery Stroke. StatPearls. NCBI Bookshelf. Updated 2026.' },
+        { num: 4, text: 'Anterior Cerebral Artery Stroke. StatPearls. NCBI Bookshelf. Updated Aug 14, 2023.' },
+        { num: 5, text: 'Posterior Cerebral Artery Stroke. StatPearls. NCBI Bookshelf. Updated 2026.' },
+        { num: 6, text: 'Lacunar Stroke. StatPearls. NCBI Bookshelf. Updated 2024.' },
+        { num: 7, text: 'Brainstem Stroke. StatPearls. NCBI Bookshelf. Updated 2026.' },
+        { num: 8, text: 'Lateral Medullary Syndrome (Wallenberg Syndrome). StatPearls. NCBI Bookshelf. Updated 2025.' },
+        { num: 9, text: 'Basilar Artery Occlusion. StatPearls. NCBI Bookshelf. Updated 2026.' },
+        { num: 10, text: 'NeuroEMCrit. Time is Brain: Acute Ischemic Stroke Part I, Vascular Syndromes and Thrombolysis. EMCrit. Accessed May 2026.' },
+        { num: 11, text: 'Rhcastilhos. Circle of Willis en.svg. Wikimedia Commons. Public domain.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Pneumothorax POCUS — Steps Summary
 // -------------------------------------------------------------------
 const PTX_SUMMARY = {
@@ -23270,6 +23338,7 @@ export const INFO_PAGES = {
     'stroke-imaging': STROKE_IMAGING_PAGE,
     'stroke-consent': STROKE_CONSENT_PAGE,
     'stroke-mri-screen': STROKE_MRI_SCREEN,
+    'stroke-syndromes': STROKE_SYNDROMES_PAGE,
     'nstemi-antiplatelet-cx': NSTEMI_ANTIPLATELET_PAGE,
     'nstemi-conservative': NSTEMI_CONSERVATIVE_PAGE,
     'nstemi-pocus': NSTEMI_POCUS_PAGE,
