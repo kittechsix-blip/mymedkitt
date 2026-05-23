@@ -125,21 +125,21 @@ function computeNihssFastResult(values) {
     };
 }
 const NIHSS_FAST_LABELS = {
-    'loc': { title: 'LOC' },
-    'loc-questions': { title: 'LOC QUESTIONS', prompt: 'Ask: month and age' },
-    'loc-commands': { title: 'LOC COMMANDS', prompt: 'Ask: close eyes, make fist' },
-    'gaze': { title: 'BEST GAZE' },
-    'visual': { title: 'VISUAL FIELDS' },
-    'facial': { title: 'FACIAL PALSY' },
-    'left-arm': { title: 'LEFT ARM MOTOR', prompt: 'Hold arm up for 10 seconds' },
-    'right-arm': { title: 'RIGHT ARM MOTOR', prompt: 'Hold arm up for 10 seconds' },
-    'left-leg': { title: 'LEFT LEG MOTOR', prompt: 'Hold leg up for 5 seconds' },
-    'right-leg': { title: 'RIGHT LEG MOTOR', prompt: 'Hold leg up for 5 seconds' },
-    'ataxia': { title: 'LIMB ATAXIA', prompt: 'Finger-nose-finger and heel-shin' },
-    'sensory': { title: 'SENSORY' },
-    'language': { title: 'BEST LANGUAGE' },
-    'dysarthria': { title: 'DYSARTHRIA' },
-    'extinction': { title: 'EXTINCTION / INATTENTION' },
+    'loc': { title: '1A / CONSCIOUSNESS' },
+    'loc-questions': { title: '1B / ORIENTATION', prompt: 'Ask month and age' },
+    'loc-commands': { title: '1C / COMMANDS', prompt: 'Ask close eyes and make fist' },
+    'gaze': { title: '2 / GAZE' },
+    'visual': { title: '3 / FIELDS' },
+    'facial': { title: '4 / FACE' },
+    'left-arm': { title: '5A / LEFT ARM', prompt: 'Hold arm up for 10 seconds' },
+    'right-arm': { title: '5B / RIGHT ARM', prompt: 'Hold arm up for 10 seconds' },
+    'left-leg': { title: '6A / LEFT LEG', prompt: 'Hold leg up for 5 seconds' },
+    'right-leg': { title: '6B / RIGHT LEG', prompt: 'Hold leg up for 5 seconds' },
+    'ataxia': { title: '7 / COORDINATION', prompt: 'Finger-nose-finger and heel-shin' },
+    'sensory': { title: '8 / SENSORY' },
+    'language': { title: '9 / LANGUAGE' },
+    'dysarthria': { title: '10 / SPEECH CLARITY' },
+    'extinction': { title: '11 / NEGLECT' },
 };
 function renderNihssFastScoreSheet(container, onUpdate) {
     container.classList.add('nihss-fast-sheet');
@@ -209,7 +209,7 @@ function renderNihssFastScoreSheet(container, onUpdate) {
         optionList.className = 'nihss-fast-option-list';
         for (const opt of field.selectOptions || []) {
             const line = document.createElement('div');
-            line.textContent = `${opt.points}: ${opt.label}`;
+            line.textContent = `${opt.points} - ${opt.label}`;
             optionList.appendChild(line);
         }
         item.appendChild(optionList);
