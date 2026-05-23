@@ -486,7 +486,7 @@ export const MASSIVE_TRANSFUSION_CRITICAL_ACTIONS = [
     { text: 'Target temp >35°C, pH >7.2, ionized Ca >1.1 to prevent coagulopathy', nodeId: 'mtp-complications' },
     { text: 'Stop MTP when: hemorrhage controlled, INR <1.5, platelets >100k, fibrinogen >150', nodeId: 'mtp-when-stop' },
     { text: 'Avoid crystalloid dilution - limit to 1-2L NS/LR total', nodeId: 'mtp-permissive-hypotension' },
-    { text: 'Consider recombinant Factor VIIa 90 mcg/kg if refractory coagulopathy', nodeId: 'mtp-damage-control' },
+    { text: 'Factor VIIa NOT routinely recommended (CONTROL trial: no mortality benefit, ↑ thrombosis risk) — reserve for refractory bleeding after surgical control, balanced ratios, TXA, and goal-directed correction', nodeId: 'mtp-damage-control' },
 ];
 export const MASSIVE_TRANSFUSION_CITATIONS = [
     { num: 1, text: 'Holcomb JB, Tilley BC, Baraniuk S, et al. Transfusion of plasma, platelets, and red blood cells in a 1:1:1 vs a 1:1:2 ratio and mortality in patients with severe trauma: the PROPPR randomized clinical trial. JAMA. 2015;313(5):471-482. doi:10.1001/jama.2015.12' },

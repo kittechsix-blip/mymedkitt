@@ -502,7 +502,7 @@ export const MASSIVE_TRANSFUSION_CRITICAL_ACTIONS = [
   { text: 'Target temp >35°C, pH >7.2, ionized Ca >1.1 to prevent coagulopathy', nodeId: 'mtp-complications' },
   { text: 'Stop MTP when: hemorrhage controlled, INR <1.5, platelets >100k, fibrinogen >150', nodeId: 'mtp-when-stop' },
   { text: 'Avoid crystalloid dilution - limit to 1-2L NS/LR total', nodeId: 'mtp-permissive-hypotension' },
-  { text: 'Consider recombinant Factor VIIa 90 mcg/kg if refractory coagulopathy', nodeId: 'mtp-damage-control' },
+  { text: 'Factor VIIa NOT routinely recommended (CONTROL trial: no mortality benefit, ↑ thrombosis risk) — reserve for refractory bleeding after surgical control, balanced ratios, TXA, and goal-directed correction', nodeId: 'mtp-damage-control' },
 ];
 
 export const MASSIVE_TRANSFUSION_CITATIONS: Citation[] = [

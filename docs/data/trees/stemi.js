@@ -235,8 +235,8 @@ export const STEMI_NODES = [
         type: 'question',
         module: 3,
         title: 'P2Y12 Inhibitor Selection',
-        body: 'Load with ONE P2Y12 inhibitor before or at time of PCI. Discuss with interventional cardiologist.\n\n**[Prasugrel](#/drug/prasugrel/acs)** 60 mg loading \u2192 10 mg daily\n\u2022 More potent platelet inhibition, lower 30-day and 1-year mortality vs clopidogrel/ticagrelor [18]\n\u2022 **CONTRAINDICATED:** prior stroke/TIA\n\u2022 **No benefit:** age >75y, weight <60 kg\n\n**[Ticagrelor](#/drug/ticagrelor/acs)** 180 mg loading \u2192 90 mg BID\n\u2022 Fewer stent thromboses and lower death rate vs clopidogrel [19]\n\u2022 Higher stroke/ICH risk vs clopidogrel\n\n**[Clopidogrel](#/drug/clopidogrel/acs)** 600 mg loading \u2192 75 mg daily\n\u2022 Variable metabolism (CYP2C19)\n\u2022 Use if CI to prasugrel AND ticagrelor, or high bleeding risk\n\nAll three are Class I, Level B recommendations. [5]',
-        citation: [5, 18, 19, 20],
+        body: 'Load with ONE P2Y12 inhibitor before or at time of PCI. Discuss with interventional cardiologist.\n\n**[Prasugrel](#/drug/prasugrel/acs)** 60 mg loading \u2192 10 mg daily\n\u2022 More potent platelet inhibition, lower 30-day and 1-year mortality vs clopidogrel/ticagrelor [18]\n\u2022 **CONTRAINDICATED:** prior stroke/TIA\n\u2022 **No benefit:** age >75y, weight <60 kg\n\n**[Ticagrelor](#/drug/ticagrelor/acs)** 180 mg loading \u2192 90 mg BID\n\u2022 Fewer stent thromboses and lower death rate vs clopidogrel [19]\n\u2022 Higher stroke/ICH risk vs clopidogrel\n\n**[Clopidogrel](#/drug/clopidogrel/acs)** 600 mg loading \u2192 75 mg daily\n\u2022 Variable metabolism (CYP2C19)\n\u2022 Use if CI to prasugrel AND ticagrelor, or high bleeding risk\n\n**2025 ACC/AHA update:** Ticagrelor AND prasugrel are now Class I without distinction in PCI-managed STEMI; clopidogrel is the recommended concurrent P2Y12 agent for fibrinolytic-managed STEMI. [5][23]',
+        citation: [5, 18, 19, 20, 23],
         treatment: {
             firstLine: {
                 drug: 'Prasugrel',
@@ -266,19 +266,17 @@ export const STEMI_NODES = [
         },
         options: [
             {
-                label: 'Prasugrel (preferred if no CI)',
+                label: 'Prasugrel or Ticagrelor (Class I, equivalent per 2025 ACC/AHA)',
+                description: 'PCI-bound patients. Avoid prasugrel if prior stroke/TIA.',
                 next: 'stemi-anticoag',
             },
             {
-                label: 'Ticagrelor',
-                next: 'stemi-anticoag',
-            },
-            {
-                label: 'Clopidogrel (CI to others or high bleed risk)',
+                label: 'Clopidogrel (for fibrinolysis OR if prasugrel/ticagrelor CI)',
+                description: '2025 ACC/AHA: clopidogrel is the P2Y12 agent for fibrinolytic-managed STEMI.',
                 next: 'stemi-anticoag',
             },
         ],
-        summary: 'Load P2Y12 before PCI — prasugrel CI in prior stroke/TIA; ticagrelor higher ICH risk; clopidogrel variable metabolism',
+        summary: 'Prasugrel and ticagrelor Class I equivalent for PCI (2025 ACC/AHA); clopidogrel for fibrinolysis or if others CI',
         safetyLevel: 'warning',
     },
     {
@@ -573,7 +571,7 @@ export const STEMI_CRITICAL_ACTIONS = [
     { text: 'Aspirin 162-325 mg chewed + P2Y12 inhibitor loading before/during PCI', nodeId: 'stemi-initial-tx' },
     { text: 'Check posterior leads V7-V9 if V1-V3 show ST depression with upright T waves', nodeId: 'stemi-posterior' },
     { text: 'Apply Sgarbossa criteria for STEMI diagnosis in LBBB or paced rhythm', nodeId: 'stemi-lbbb' },
-    { text: 'Give beta-lactam FIRST when also giving vancomycin (improved survival)', nodeId: 'stemi-p2y12' },
+    { text: 'Load P2Y12 inhibitor early — prasugrel 60 mg or ticagrelor 180 mg preferred over clopidogrel for PCI (avoid prasugrel if prior stroke/TIA, age ≥75, or <60 kg)', nodeId: 'stemi-p2y12' },
     { text: 'Do NOT give morphine unless refractory pain - delays P2Y12 absorption, increases mortality', nodeId: 'stemi-initial-tx' },
     { text: 'Fibrinolytics within 30 min if PCI not available within 120 min FMC-to-device', nodeId: 'stemi-lytics' },
     { text: 'Check right-sided leads for all inferior STEMIs - avoid nitrates if RV involvement', nodeId: 'stemi-rv' },
