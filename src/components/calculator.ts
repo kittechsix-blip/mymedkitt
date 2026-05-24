@@ -525,6 +525,546 @@ const NIHSS_CALCULATOR: CalculatorDefinition = {
 };
 
 // -------------------------------------------------------------------
+// Stroke Syndrome Calculator Definition
+// -------------------------------------------------------------------
+
+interface StrokeSyndromeCandidate {
+  short: string;
+  name: string;
+  territory: string;
+  score: number;
+  reasons: string[];
+  nextSteps: string[];
+}
+
+const STROKE_SYNDROME_FAST_LABELS: Record<string, { title: string; prompt?: string }> = {
+  laterality: {
+    title: '1 / SIDE',
+    prompt: 'Which side of the body has the new deficit?',
+  },
+  density: {
+    title: '2 / DENSITY',
+    prompt: 'How dense is the loss of function?',
+  },
+  motorPattern: {
+    title: '3 / MOTOR PATTERN',
+    prompt: 'Where is weakness greatest?',
+  },
+  corticalSigns: {
+    title: '4 / CORTICAL SIGNS',
+    prompt: 'Aphasia, neglect, gaze, or cortical field cut?',
+  },
+  visualPattern: {
+    title: '5 / VISUAL PATTERN',
+    prompt: 'Monocular, homonymous, or cortical visual symptoms?',
+  },
+  posteriorSigns: {
+    title: '6 / POSTERIOR SIGNS',
+    prompt: 'Brainstem, cerebellar, crossed, or consciousness findings?',
+  },
+  lacunarPattern: {
+    title: '7 / DEEP PATTERN',
+    prompt: 'Pure motor/sensory or classic lacunar syndrome?',
+  },
+};
+
+function strokeSyndromeSidePhrase(laterality: number): string {
+  if (laterality === 1) return 'left body deficit → likely right supratentorial territory';
+  if (laterality === 2) return 'right body deficit → likely left supratentorial territory';
+  if (laterality === 3) return 'bilateral/alternating deficits → think brainstem, basilar, bilateral ACA, or multifocal embolic disease';
+  return 'side unclear → document affected body side, gaze direction, language, neglect, and affected eye';
+}
+
+function strokeSyndromeConfidence(score: number): string {
+  if (score >= 8) return 'High pattern match';
+  if (score >= 5) return 'Moderate pattern match';
+  if (score > 0) return 'Low pattern match';
+  return 'Insufficient localization';
+}
+
+function addStrokeSyndromeCandidate(
+  candidates: StrokeSyndromeCandidate[],
+  candidate: StrokeSyndromeCandidate,
+): void {
+  if (candidate.score > 0) candidates.push(candidate);
+}
+
+function summarizeStrokeSyndromeCandidate(candidate: StrokeSyndromeCandidate): string {
+  const reasons = candidate.reasons.slice(0, 4).map(reason => `• ${reason}`).join('\n');
+  return `**${candidate.name}**\nTerritory: ${candidate.territory}\nWhy: ${reasons}`;
+}
+
+function computeStrokeSyndromeResult(values: Record<string, number>): { value: string; label: string; description: string; colorVar: string } {
+  const laterality = values['laterality'] ?? 0;
+  const density = values['density'] ?? 0;
+  const motorPattern = values['motorPattern'] ?? 0;
+  const corticalSigns = values['corticalSigns'] ?? 0;
+  const visualPattern = values['visualPattern'] ?? 0;
+  const posteriorSigns = values['posteriorSigns'] ?? 0;
+  const lacunarPattern = values['lacunarPattern'] ?? 0;
+
+  const candidates: StrokeSyndromeCandidate[] = [];
+  const hasCortical = corticalSigns > 0 || visualPattern === 1 || visualPattern === 3;
+  const hasPosterior = posteriorSigns > 0;
+  const highDensity = density === 2;
+
+  let mcaScore = 0;
+  const mcaReasons: string[] = [];
+  if (motorPattern === 1) {
+    mcaScore += 4;
+    mcaReasons.push('Face/arm > leg weakness is the classic lateral MCA pattern.');
+  }
+  if (motorPattern === 3 && hasCortical) {
+    mcaScore += 2;
+    mcaReasons.push('Dense face/arm/leg deficit with cortical signs raises proximal MCA or ICA concern.');
+  }
+  if (corticalSigns === 1) {
+    mcaScore += 4;
+    mcaReasons.push('Aphasia localizes to dominant MCA cortex until proven otherwise.');
+  } else if (corticalSigns === 2) {
+    mcaScore += 4;
+    mcaReasons.push('Neglect/anosognosia localizes to nondominant MCA cortex.');
+  } else if (corticalSigns === 3) {
+    mcaScore += 5;
+    mcaReasons.push('Forced gaze deviation is a large-vessel cortical sign.');
+  } else if (corticalSigns === 4) {
+    mcaScore += 6;
+    mcaReasons.push('Multiple cortical signs strongly favor MCA/ICA territory.');
+  }
+  if (visualPattern === 1) {
+    mcaScore += 1;
+    mcaReasons.push('Homonymous field cut can accompany MCA or PCA stroke.');
+  }
+  if (highDensity && mcaScore > 0) {
+    mcaScore += 2;
+    mcaReasons.push('High-density deficit increases concern for proximal large-vessel occlusion.');
+  }
+  addStrokeSyndromeCandidate(candidates, {
+    short: 'MCA',
+    name: highDensity || corticalSigns === 3 || corticalSigns === 4
+      ? 'Proximal MCA / ICA terminus syndrome'
+      : 'MCA cortical syndrome',
+    territory: 'Contralateral MCA cortex, deep MCA perforators, or ICA-MCA tandem territory',
+    score: mcaScore,
+    reasons: mcaReasons,
+    nextSteps: [
+      'CTA head/neck now; add CTP or MRI/MRA per local stroke protocol.',
+      'Low NIHSS does not make aphasia, neglect, or field cut nondisabling.',
+    ],
+  });
+
+  let acaScore = 0;
+  const acaReasons: string[] = [];
+  if (motorPattern === 2) {
+    acaScore += 6;
+    acaReasons.push('Leg > arm weakness or sensory loss is the high-yield ACA pattern.');
+  }
+  if (laterality === 3 && motorPattern === 2) {
+    acaScore += 2;
+    acaReasons.push('Bilateral leg-predominant deficits raise bilateral or azygos ACA concern.');
+  }
+  if (corticalSigns > 0 && motorPattern === 2) {
+    acaScore += 1;
+    acaReasons.push('Behavioral/frontal features can accompany medial frontal ACA stroke.');
+  }
+  addStrokeSyndromeCandidate(candidates, {
+    short: 'ACA',
+    name: laterality === 3 ? 'Bilateral / azygos ACA syndrome' : 'ACA cortical syndrome',
+    territory: 'Medial frontal/parietal cortex, leg motor-sensory cortex, supplementary motor area',
+    score: acaScore,
+    reasons: acaReasons,
+    nextSteps: [
+      'Look for abulia, grasp reflex, gait apraxia, urinary incontinence, and bilateral leg findings.',
+      'CTA helps identify ACA occlusion or severe carotid/anterior circulation disease.',
+    ],
+  });
+
+  let pcaScore = 0;
+  const pcaReasons: string[] = [];
+  if (visualPattern === 1) {
+    pcaScore += 6;
+    pcaReasons.push('Homonymous hemianopia or quadrantanopia strongly suggests PCA or optic radiation territory.');
+  }
+  if (visualPattern === 3) {
+    pcaScore += 7;
+    pcaReasons.push('Cortical blindness, alexia, visual agnosia, or memory disturbance suggests PCA/thalamic territory.');
+  }
+  if (motorPattern === 0 && visualPattern > 0) {
+    pcaScore += 1;
+    pcaReasons.push('Prominent visual syndrome with little motor deficit fits PCA underweighting by NIHSS.');
+  }
+  if (posteriorSigns >= 2 && visualPattern > 0) {
+    pcaScore += 1;
+    pcaReasons.push('Top-of-basilar can combine PCA findings with brainstem signs.');
+  }
+  addStrokeSyndromeCandidate(candidates, {
+    short: 'PCA',
+    name: visualPattern === 3 ? 'PCA / thalamic syndrome' : 'PCA superficial territory syndrome',
+    territory: 'Occipital cortex, medial temporal lobe, thalamus, or top-of-basilar PCA territory',
+    score: pcaScore,
+    reasons: pcaReasons,
+    nextSteps: [
+      'Document visual fields carefully; complete hemianopia is disabling even with low NIHSS.',
+      'Use CTA/MRA to check PCA and basilar circulation when posterior features coexist.',
+    ],
+  });
+
+  let posteriorScore = 0;
+  const posteriorReasons: string[] = [];
+  if (posteriorSigns === 1) {
+    posteriorScore += 4;
+    posteriorReasons.push('Vertigo/ataxia/nystagmus can be cerebellar or brainstem stroke, especially if gait is unsafe.');
+  } else if (posteriorSigns === 2) {
+    posteriorScore += 6;
+    posteriorReasons.push('Diplopia, dysarthria, dysphagia, hearing loss, or cranial nerve findings localize posterior circulation.');
+  } else if (posteriorSigns === 3) {
+    posteriorScore += 8;
+    posteriorReasons.push('Crossed face/body findings, Horner syndrome, or severe dysphagia strongly favor brainstem stroke.');
+  } else if (posteriorSigns === 4) {
+    posteriorScore += 9;
+    posteriorReasons.push('Reduced consciousness, quadriparesis, or locked-in features are basilar occlusion until proven otherwise.');
+  }
+  if (motorPattern === 4) {
+    posteriorScore += 3;
+    posteriorReasons.push('Bilateral weakness or quadriparesis is a basilar/brainstem red flag.');
+  }
+  if (visualPattern === 3 && posteriorSigns > 0) {
+    posteriorScore += 2;
+    posteriorReasons.push('Cortical visual symptoms plus brainstem findings may be top-of-basilar.');
+  }
+  addStrokeSyndromeCandidate(candidates, {
+    short: 'VB',
+    name: posteriorSigns >= 4 || motorPattern === 4 ? 'Basilar / vertebrobasilar syndrome' : 'Posterior circulation syndrome',
+    territory: 'Vertebral, basilar, PICA, AICA, SCA, brainstem, cerebellum, or top-of-basilar territory',
+    score: posteriorScore,
+    reasons: posteriorReasons,
+    nextSteps: [
+      'CTA head/neck must include vertebral and basilar arteries.',
+      'Do not be reassured by low NIHSS; posterior circulation strokes are underweighted.',
+    ],
+  });
+
+  let lacunarScore = 0;
+  const lacunarReasons: string[] = [];
+  if (lacunarPattern === 1) {
+    lacunarScore += 7;
+    lacunarReasons.push('Pure motor, pure sensory, or sensorimotor syndrome without cortical signs fits lacunar/deep territory.');
+  } else if (lacunarPattern === 2) {
+    lacunarScore += 7;
+    lacunarReasons.push('Ataxic hemiparesis fits internal capsule, corona radiata, or pontine lacunar pattern.');
+  } else if (lacunarPattern === 3) {
+    lacunarScore += 7;
+    lacunarReasons.push('Dysarthria-clumsy hand fits internal capsule or pontine lacunar pattern.');
+  }
+  if (!hasCortical && !hasPosterior && lacunarScore > 0) {
+    lacunarScore += 2;
+    lacunarReasons.push('Absence of aphasia, neglect, cortical field cut, and brainstem signs supports deep small-vessel localization.');
+  }
+  if (highDensity && lacunarScore > 0) {
+    lacunarScore -= 1;
+    lacunarReasons.push('Very dense deficits can still be lacunar, but parent-vessel occlusion must be excluded.');
+  }
+  addStrokeSyndromeCandidate(candidates, {
+    short: 'DEEP',
+    name: 'Lacunar / deep perforator syndrome',
+    territory: 'Internal capsule, thalamus, corona radiata, basal ganglia, or pons',
+    score: lacunarScore,
+    reasons: lacunarReasons,
+    nextSteps: [
+      'Still follow acute stroke imaging pathway; lacunar pattern does not rule out LVO or parent-vessel disease.',
+      'Treat disabling deficit by function, not just by NIHSS number.',
+    ],
+  });
+
+  let retinalScore = 0;
+  const retinalReasons: string[] = [];
+  if (visualPattern === 2) {
+    retinalScore += 10;
+    retinalReasons.push('Sudden monocular curtain/gray-out localizes to retina or ophthalmic artery until proven otherwise.');
+  }
+  addStrokeSyndromeCandidate(candidates, {
+    short: 'EYE',
+    name: 'Retinal / ophthalmic artery ischemia',
+    territory: 'Central retinal artery, branch retinal artery, or ophthalmic branch of ICA',
+    score: retinalScore,
+    reasons: retinalReasons,
+    nextSteps: [
+      'Treat as stroke-equivalent; document affected eye and visual acuity.',
+      'Evaluate carotid, embolic, atrial fibrillation, and giant-cell arteritis risk when appropriate.',
+    ],
+  });
+
+  let watershedScore = 0;
+  const watershedReasons: string[] = [];
+  if (motorPattern === 4 && posteriorSigns === 0) {
+    watershedScore += 3;
+    watershedReasons.push('Bilateral proximal weakness without brainstem signs can be watershed or bilateral anterior circulation.');
+  }
+  if (density <= 1 && motorPattern === 4) {
+    watershedScore += 1;
+    watershedReasons.push('Lower-density bilateral deficits may occur in flow-dependent border-zone ischemia.');
+  }
+  addStrokeSyndromeCandidate(candidates, {
+    short: 'WS',
+    name: 'Watershed / border-zone pattern',
+    territory: 'ACA-MCA, MCA-PCA cortical border zones or internal watershed white matter',
+    score: watershedScore,
+    reasons: watershedReasons,
+    nextSteps: [
+      'Ask about hypotension, severe carotid stenosis, peri-arrest state, or embolic shower.',
+      'Avoid aggressive BP lowering if symptoms are pressure-dependent unless another indication dominates.',
+    ],
+  });
+
+  candidates.sort((a, b) => b.score - a.score);
+  const top = candidates[0];
+
+  if (!top || top.score <= 0) {
+    return {
+      value: '?',
+      label: 'Select exam findings',
+      description: 'No localizing syndrome selected yet.\n\nUse this as a bedside localization aid only. Sudden focal neurologic deficit still needs the acute stroke pathway, glucose check, CT/CTA strategy, and reperfusion window assessment.',
+      colorVar: '--color-primary',
+    };
+  }
+
+  const alternatives = candidates
+    .slice(1, 3)
+    .filter(candidate => candidate.score > 0)
+    .map(candidate => `• ${candidate.name} (${strokeSyndromeConfidence(candidate.score)})`)
+    .join('\n');
+
+  const densityPhrase = density === 2
+    ? 'High density'
+    : density === 1
+      ? 'Moderate density'
+      : 'Low density / subtle';
+
+  const nextSteps = top.nextSteps.map(step => `• ${step}`).join('\n');
+  const description = `${summarizeStrokeSyndromeCandidate(top)}\n\n**Side cue:** ${strokeSyndromeSidePhrase(laterality)}\n**Density cue:** ${densityPhrase}\n\n**Next moves:**\n${nextSteps}\n\n${alternatives ? `**Also consider:**\n${alternatives}\n\n` : ''}**Safety:** This does not diagnose or exclude stroke. Use CTA/CTP, MRI/MRA, neurology/stroke-team input, and treatment-window criteria to confirm.`;
+
+  return {
+    value: top.short,
+    label: `${strokeSyndromeConfidence(top.score)}: ${top.name}`,
+    description,
+    colorVar: top.score >= 8 ? '--color-danger' : top.score >= 5 ? '--color-warning' : '--color-primary',
+  };
+}
+
+function renderStrokeSyndromeFastSheet(
+  container: HTMLElement,
+  onUpdate: (values: Record<string, number>) => void,
+): void {
+  container.classList.add('nihss-fast-sheet', 'stroke-syndrome-fast-sheet');
+
+  const values: Record<string, number> = {};
+  const activeButtons = new Map<string, HTMLButtonElement[]>();
+
+  const resetRow = document.createElement('div');
+  resetRow.className = 'nihss-fast-actions';
+
+  const resetBtn = document.createElement('button');
+  resetBtn.type = 'button';
+  resetBtn.className = 'nihss-fast-reset';
+  resetBtn.textContent = 'Reset';
+  resetRow.appendChild(resetBtn);
+
+  const completion = document.createElement('span');
+  completion.className = 'nihss-fast-completion';
+  resetRow.appendChild(completion);
+
+  container.appendChild(resetRow);
+
+  const updateCompletion = (): void => {
+    completion.textContent = 'Tap findings, then swipe down';
+  };
+
+  const setFieldValue = (fieldName: string, points: number): void => {
+    values[fieldName] = points;
+    const buttons = activeButtons.get(fieldName) || [];
+    for (const btn of buttons) {
+      const isActive = Number(btn.dataset.points) === points;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    }
+    updateCompletion();
+    onUpdate({ ...values });
+  };
+
+  for (const field of STROKE_SYNDROME_CALCULATOR.fields) {
+    values[field.name] = 0;
+
+    const item = document.createElement('section');
+    item.className = 'nihss-fast-item';
+
+    const meta = STROKE_SYNDROME_FAST_LABELS[field.name] || { title: field.label };
+
+    const title = document.createElement('h2');
+    title.className = 'nihss-fast-title';
+    title.textContent = meta.title;
+    item.appendChild(title);
+
+    if (meta.prompt || field.description) {
+      const prompt = document.createElement('div');
+      prompt.className = 'nihss-fast-prompt';
+      prompt.textContent = meta.prompt || field.description || '';
+      item.appendChild(prompt);
+    }
+
+    const buttonRow = document.createElement('div');
+    buttonRow.className = 'nihss-fast-score-row';
+    buttonRow.setAttribute('role', 'group');
+    buttonRow.setAttribute('aria-label', field.label);
+
+    const buttons: HTMLButtonElement[] = [];
+    for (const opt of field.selectOptions || []) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'nihss-fast-score-btn';
+      btn.textContent = String(opt.points);
+      btn.dataset.points = String(opt.points);
+      btn.setAttribute('aria-label', `${field.label}: ${opt.label}`);
+      btn.setAttribute('aria-pressed', String(opt.points === 0));
+      if (opt.points === 0) btn.classList.add('active');
+      btn.addEventListener('click', () => setFieldValue(field.name, opt.points));
+      buttons.push(btn);
+      buttonRow.appendChild(btn);
+    }
+    activeButtons.set(field.name, buttons);
+    item.appendChild(buttonRow);
+
+    const optionList = document.createElement('div');
+    optionList.className = 'nihss-fast-option-list';
+    for (const opt of field.selectOptions || []) {
+      const line = document.createElement('div');
+      line.textContent = `${opt.points} - ${opt.label}`;
+      optionList.appendChild(line);
+    }
+    item.appendChild(optionList);
+    container.appendChild(item);
+  }
+
+  resetBtn.addEventListener('click', () => {
+    for (const field of STROKE_SYNDROME_CALCULATOR.fields) {
+      setFieldValue(field.name, 0);
+    }
+  });
+
+  updateCompletion();
+  onUpdate({ ...values });
+}
+
+const STROKE_SYNDROME_CALCULATOR: CalculatorDefinition = {
+  id: 'stroke-syndrome-calculator',
+  title: 'Syndrome Calculator',
+  subtitle: 'Stroke syndrome + vascular territory localization',
+  description: 'Fast bedside localization aid using lateralized findings, deficit density, cortical signs, visual symptoms, posterior circulation signs, and lacunar patterns. It does not diagnose or exclude stroke.',
+  fields: [
+    {
+      name: 'laterality',
+      label: 'Affected body side',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Unclear / not lateralized', points: 0 },
+        { label: 'Left face/arm/leg symptoms', points: 1 },
+        { label: 'Right face/arm/leg symptoms', points: 2 },
+        { label: 'Bilateral, alternating, or quadriparesis', points: 3 },
+      ],
+    },
+    {
+      name: 'density',
+      label: 'Density of loss',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Low / subtle deficit', points: 0 },
+        { label: 'Medium / clear deficit but not complete', points: 1 },
+        { label: 'High / dense paralysis, severe aphasia, coma, or disabling field loss', points: 2 },
+      ],
+    },
+    {
+      name: 'motorPattern',
+      label: 'Motor pattern',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No major motor deficit', points: 0 },
+        { label: 'Face/arm worse than leg', points: 1 },
+        { label: 'Leg worse than arm', points: 2 },
+        { label: 'Face/arm/leg about equally involved', points: 3 },
+        { label: 'Bilateral weakness or quadriparesis', points: 4 },
+      ],
+    },
+    {
+      name: 'corticalSigns',
+      label: 'Cortical signs',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Absent', points: 0 },
+        { label: 'Aphasia / language deficit', points: 1 },
+        { label: 'Neglect / anosognosia', points: 2 },
+        { label: 'Forced gaze deviation', points: 3 },
+        { label: 'Multiple cortical signs', points: 4 },
+      ],
+    },
+    {
+      name: 'visualPattern',
+      label: 'Visual pattern',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No visual syndrome', points: 0 },
+        { label: 'Homonymous field cut / quadrantanopia', points: 1 },
+        { label: 'Monocular curtain, gray-out, or sudden eye vision loss', points: 2 },
+        { label: 'Cortical blindness, alexia, visual agnosia, or memory disturbance', points: 3 },
+      ],
+    },
+    {
+      name: 'posteriorSigns',
+      label: 'Posterior circulation signs',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'Absent', points: 0 },
+        { label: 'Vertigo, nystagmus, gait/truncal ataxia', points: 1 },
+        { label: 'Diplopia, dysarthria, dysphagia, hearing loss, or cranial nerve finding', points: 2 },
+        { label: 'Crossed face/body findings, Horner, hoarseness, severe dysphagia', points: 3 },
+        { label: 'Decreased consciousness, locked-in features, or quadriparesis', points: 4 },
+      ],
+    },
+    {
+      name: 'lacunarPattern',
+      label: 'Deep / lacunar pattern',
+      type: 'select',
+      points: 0,
+      selectOptions: [
+        { label: 'No classic deep pattern', points: 0 },
+        { label: 'Pure motor, pure sensory, or sensorimotor without cortical signs', points: 1 },
+        { label: 'Ataxic hemiparesis', points: 2 },
+        { label: 'Dysarthria-clumsy hand', points: 3 },
+      ],
+    },
+  ],
+  results: [
+    { min: -Infinity, max: Infinity, label: 'Localization Aid', risk: 'Use imaging to confirm', mortality: 'CTA/CTP or MRI/MRA determines treatment target.', colorVar: '--color-primary' },
+  ],
+  thresholdNote: 'Use this as a localization aid only. It does not replace NIHSS, stroke-team activation, CT/CTA/CTP or MRI/MRA, thrombolysis criteria, or EVT criteria.',
+  citations: [
+    'Alexandrov AV, Krishnaiah B. Overview of Stroke. Merck Manual Professional Version. Reviewed Jun 2025; modified Jan 2026.',
+    'Middle Cerebral Artery Stroke. StatPearls. NCBI Bookshelf. Updated 2026.',
+    'Anterior Cerebral Artery Stroke. StatPearls. NCBI Bookshelf. Updated Aug 14, 2023.',
+    'Posterior Cerebral Artery Stroke. StatPearls. NCBI Bookshelf. Updated 2026.',
+    'Lacunar Stroke. StatPearls. NCBI Bookshelf. Updated 2024.',
+    'Brainstem Stroke and Basilar Artery Occlusion. StatPearls. NCBI Bookshelf. Updated 2026.',
+    'NeuroEMCrit. Time is Brain: Acute Ischemic Stroke Part I, Vascular Syndromes and Thrombolysis. EMCrit. Accessed May 2026.',
+  ],
+  computeResult: computeStrokeSyndromeResult,
+  customRender: renderStrokeSyndromeFastSheet,
+};
+
+// -------------------------------------------------------------------
 // TIMI Risk Score Calculator Definition
 // -------------------------------------------------------------------
 
@@ -38283,6 +38823,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'cha2ds2vasc': CHA2DS2VASC_CALCULATOR,
   'nihss': NIHSS_CALCULATOR,
   'nihss-calculator': NIHSS_CALCULATOR,
+  'stroke-syndrome-calculator': STROKE_SYNDROME_CALCULATOR,
+  'syndrome-calculator': STROKE_SYNDROME_CALCULATOR,
   'timi': TIMI_CALCULATOR,
   'bas': BAS_CALCULATOR,
   'fwd': FWD_CALCULATOR,
@@ -38857,7 +39399,8 @@ export function renderCalculator(container: HTMLElement, calculatorId: string): 
   trackCalcOpen(calculatorId);
 
   container.innerHTML = '';
-  container.classList.toggle('calculator-container--nihss', calculatorId === 'nihss');
+  const isFastStrokeCalculator = calculatorId === 'nihss' || calculatorId === 'stroke-syndrome-calculator';
+  container.classList.toggle('calculator-container--nihss', isFastStrokeCalculator);
 
   // Add custom scroll indicator for TBSA calculators (iOS hides native scrollbar)
   if (calculatorId.startsWith('tbsa')) {
@@ -38906,6 +39449,8 @@ export function renderCalculator(container: HTMLElement, calculatorId: string): 
     : 'calculator-score-display';
   if (calculatorId === 'nihss') {
     scoreDisplay.classList.add('nihss-fast-score-display');
+  } else if (calculatorId === 'stroke-syndrome-calculator') {
+    scoreDisplay.classList.add('syndrome-fast-score-display');
   }
   scoreDisplay.id = 'calc-score-display';
   if (!calc.customRender || calc.computeResult) {

@@ -178,6 +178,7 @@ const TOOLBAR_CONFIGS = {
     ],
     'stroke': [
         { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
+        { id: 'syndrome-calc', label: 'Syn Calc', icon: '\uD83E\uDDED', action: 'calculator', target: 'stroke-syndrome-calculator' },
         { id: 'lysis-contra', label: 'Contra', icon: '\uD83D\uDEAB', action: 'overlay', target: 'stroke-contraindications' },
         { id: 'syndromes', label: 'Syndromes', icon: '\uD83E\uDDED', action: 'overlay', target: 'stroke-syndromes' },
         { id: 'ivt', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'stroke-ivt-treat' },

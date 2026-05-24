@@ -3637,6 +3637,61 @@ body.critical-actions-open {
   display: none;
 }
 
+.syndrome-fast-score-display {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  align-items: start;
+  gap: 12px;
+  width: min(calc(100% - 24px), 720px);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  border-left: 6px solid #14b8a6;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(236, 253, 245, 0.78));
+  color: #073c3a;
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(7, 60, 58, 0.12);
+  margin: 10px auto 12px;
+  padding: 12px 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.syndrome-fast-score-display .calculator-score-number {
+  font-size: 34px;
+  line-height: 0.95;
+  font-weight: 900;
+  color: #073c3a;
+  text-align: center;
+}
+
+.syndrome-fast-score-display .calculator-result-label {
+  color: #0f5b55;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.syndrome-fast-score-display .calculator-result-risk {
+  display: block;
+  margin-top: 8px;
+  color: #193f3b;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 700;
+  text-align: left;
+}
+
+.syndrome-fast-score-display .calculator-result-risk strong {
+  color: #073c3a;
+  font-weight: 900;
+}
+
+.syndrome-fast-score-display .calculator-copy-btn {
+  display: none;
+}
+
 .nihss-fast-sheet {
   padding: 0 0 4px;
   background:

@@ -17,9 +17,12 @@ export const STROKE_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Ischemic Stroke Assumed',
-    body: '[Ischemic Stroke Steps Summary](#/info/stroke-summary) — time-critical reperfusion pathway.\n\nWe do not yet know if this is ischemic or hemorrhagic. If ICH (intracerebral hemorrhage) is highly suspicious, rule out with **CT head non-contrast** before proceeding.\n\nEstablish **last known well** time.\n\n**Immediate actions:**\n\u2022 Fingerstick glucose (only pre-tPA lab required)\n\u2022 Obtain [NIHSS (NIH Stroke Scale) score](#/calculator/nihss)\n\u2022 Establish IV access \u00D7 2\n\u2022 Activate stroke team if not already done\n\u2022 [Stroke Syndromes](#/info/stroke-syndromes) \u2014 localize vascular territory and avoid low-NIHSS traps\n\u2022 [MRI vs CT Stroke Protocol](#/info/stroke-imaging) \u2014 determine best imaging modality\n\nAll other labs (CBC, BMP, coags, troponin) should be drawn but should NOT delay thrombolysis in patients without known coagulopathy.',
+    body: '[Ischemic Stroke Steps Summary](#/info/stroke-summary) — time-critical reperfusion pathway.\n\nWe do not yet know if this is ischemic or hemorrhagic. If ICH (intracerebral hemorrhage) is highly suspicious, rule out with **CT head non-contrast** before proceeding.\n\nEstablish **last known well** time.\n\n**Immediate actions:**\n\u2022 Fingerstick glucose (only pre-tPA lab required)\n\u2022 Obtain [NIHSS (NIH Stroke Scale) score](#/calculator/nihss)\n\u2022 Use [Syndrome Calculator](#/calculator/stroke-syndrome-calculator) for fast vascular-territory localization\n\u2022 Establish IV access \u00D7 2\n\u2022 Activate stroke team if not already done\n\u2022 [Stroke Syndromes](#/info/stroke-syndromes) \u2014 localize vascular territory and avoid low-NIHSS traps\n\u2022 [MRI vs CT Stroke Protocol](#/info/stroke-imaging) \u2014 determine best imaging modality\n\nAll other labs (CBC, BMP, coags, troponin) should be drawn but should NOT delay thrombolysis in patients without known coagulopathy.',
     citation: [1, 2],
-    calculatorLinks: [{ id: 'nihss', label: 'NIHSS Calculator' }],
+    calculatorLinks: [
+      { id: 'nihss', label: 'NIHSS Calculator' },
+      { id: 'stroke-syndrome-calculator', label: 'Syndrome Calculator' },
+    ],
     images: [{ src: 'images/stroke/stroke-ct-hemorrhage.jpg', alt: 'CT head showing intracerebral hemorrhage', caption: 'Hemorrhagic stroke on CT: hyperdense blood in cerebellum — MUST rule out before thrombolytics. IVtPA and EVT contraindicated if ICH present (Wikimedia Commons, CC BY-SA 4.0)' }],
     next: 'stroke-deficit',
     summary: 'Establish last-known-well time, get NIHSS, fingerstick glucose — CT to rule out hemorrhage before thrombolytics',
@@ -31,9 +34,12 @@ export const STROKE_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Deficit Severity',
-    body: 'Is a **disabling deficit** present?\n\nUse the NIHSS calculator below to score the deficit. **NIHSS >5 = disabling.**\n\nDisabling = deficit that would impair activities of daily living (e.g., limb weakness, aphasia, neglect, visual field cut, gait impairment).\n\nNondisabling = isolated minor symptoms (e.g., mild sensory change, mild dysarthria, isolated facial droop without other deficits).',
+    body: 'Is a **disabling deficit** present?\n\nUse the NIHSS calculator below to score the deficit. **NIHSS >5 = disabling.** Use the [Syndrome Calculator](#/calculator/stroke-syndrome-calculator) when the pattern matters more than the number: aphasia, neglect, field cut, posterior circulation signs, retinal ischemia, or lacunar-appearing deficits.\n\nDisabling = deficit that would impair activities of daily living (e.g., limb weakness, aphasia, neglect, visual field cut, gait impairment).\n\nNondisabling = isolated minor symptoms (e.g., mild sensory change, mild dysarthria, isolated facial droop without other deficits).',
     citation: [2, 3],
-    calculatorLinks: [{ id: 'nihss', label: 'NIHSS Calculator' }],
+    calculatorLinks: [
+      { id: 'nihss', label: 'NIHSS Calculator' },
+      { id: 'stroke-syndrome-calculator', label: 'Syndrome Calculator' },
+    ],
     options: [
       {
         label: 'Yes \u2014 Disabling deficit',
