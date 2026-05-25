@@ -2676,8 +2676,21 @@ const BURNS_ESCHAROTOMY = {
             body: 'Escharotomy is a **bedside ED procedure** — do not delay for OR. Circumferential deep partial or full thickness burns create a tourniquet effect as interstitial edema increases during fluid resuscitation. The inelastic eschar restricts expansion, compressing underlying vessels, nerves, and (in chest burns) ventilation.',
         },
         {
+            heading: 'Visual Anchor: Eschar + Release',
+            image: {
+                src: 'images/burns/burns-escharotomy-photo.jpg',
+                alt: 'Clinical photograph showing upper extremity burn eschar being released with escharotomy incisions',
+                caption: 'Escharotomy example: dry inelastic eschar has been opened to allow the edematous extremity to expand. Wikimedia Commons, Dr. R.N. Sinha, CC BY-SA 3.0; resized for app use.',
+            },
+            body: 'Use the photo as a **pattern-recognition anchor**, not a procedural substitute. The bedside question is: does the circumferential eschar behave like a tourniquet? If the limb is tense with worsening pain, paresthesias, delayed cap refill, falling Doppler signal, undetectable digit SpO2, or elevated compartment pressure, open the eschar now and involve the burn surgeon early.',
+        },
+        {
             heading: 'Indications',
-            body: '**6 P\'s of Compartment Syndrome:**\n• **Pain** — out of proportion, or paradoxically absent in full-thickness\n• **Pressure** — tense, woody compartment\n• **Paresthesias** — early neurologic compromise\n• **Paralysis** — late, ominous\n• **Pulselessness** — very late, pre-amputation\n• **Pallor/Poikilothermia**\n\n**Objective measures:**\n• Doppler: absent or diminished pulses\n• Compartment pressure >30 mmHg\n• Capillary refill >3 seconds\n• Undetectable SpO\u2082 on digit\n\n**Do NOT wait for all 6 P\'s** — pulselessness and paralysis indicate ischemia is already well-established.',
+            body: '**Screen every circumferential deep partial/full-thickness burn early and repeatedly.** Edema worsens during the first hours of resuscitation, so a limb that looked acceptable on arrival can declare later.\n\n**6 P\'s of Compartment Syndrome:**\n• **Pain** — out of proportion, or paradoxically absent in full-thickness\n• **Pressure** — tense, woody compartment\n• **Paresthesias** — early neurologic compromise\n• **Paralysis** — late, ominous\n• **Pulselessness** — very late, pre-amputation\n• **Pallor/Poikilothermia**\n\n**Objective measures:**\n• Doppler: absent or diminished pulses\n• Compartment pressure >30 mmHg\n• Capillary refill >3 seconds\n• Undetectable SpO2 on digit\n• Rising ventilator pressures / poor chest excursion for chest eschar\n\n**Do NOT wait for all 6 P\'s** — pulselessness and paralysis indicate ischemia is already well-established.',
+        },
+        {
+            heading: 'ED Setup',
+            body: '• Call burn surgery/trauma surgery, but **do not delay decompression** for a threatened limb or restricted ventilation\n• Remove jewelry, watches, circumferential dressings, and constrictive splints\n• Baseline and post-procedure: pulses, Doppler, cap refill, motor/sensory, digit pulse ox when possible\n• Prep widely; expose the entire involved limb/chest\n• Analgesia/sedation as needed; full-thickness eschar may be insensate, but margins are not\n• Prefer electrocautery for hemostasis if available; scalpel is acceptable when time-critical',
         },
         {
             heading: 'Extremity Technique',
@@ -2701,6 +2714,7 @@ const BURNS_ESCHAROTOMY = {
         { num: 2, text: 'Butts CC et al. Surgical Escharotomy and Decompressive Therapies in Burns. J Burn Care Res. 2020;41(2):263-269.' },
         { num: 3, text: 'de Barros MEPM et al. Revisiting Escharotomy in Patients With Burns in Extremities. J Burn Care Res. 2017;38(4):e691-e698.' },
         { num: 4, text: 'Pegg SP. Escharotomy in Burns. Ann Acad Med Singapore. 1992;21(5):682-4.' },
+        { num: 5, text: 'Dr. R.N. Sinha. Escharatomy & Dressing of an 18percent Thermal Burn Patient. Wikimedia Commons. CC BY-SA 3.0.' },
     ],
 };
 const BURNS_DRESSING_GUIDE = {

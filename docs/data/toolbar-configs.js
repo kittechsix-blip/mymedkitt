@@ -6,7 +6,8 @@
  * existing inline-all behavior, no regression. See PLAN.md R2 + Phase 1.2.
  */
 export const TOOLBAR_OVERFLOW = new Set([
-// 'headache-hub' is added in Phase 7 when the consult ships.
+    'burns',
+    // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 const TOOLBAR_CONFIGS = {
     'oncological-emergencies': [
@@ -172,9 +173,19 @@ const TOOLBAR_CONFIGS = {
         { id: 'imaging', label: 'Imaging', icon: '\uD83D\uDCF7', action: 'jump', target: 'uti-imaging' },
     ],
     'burns': [
-        { id: 'tbsa', label: 'TBSA', icon: '\uD83D\uDD25', action: 'calculator', target: 'tbsa-adult' },
-        { id: 'fluid', label: 'Fluids', icon: '\uD83D\uDCA7', action: 'calculator', target: 'burn-parkland' },
-        { id: 'hf-protocol', label: 'HF Protocol', icon: '\u26A0\uFE0F', action: 'calculator', target: 'hf-treatment' },
+        { id: 'steps', label: 'Steps', icon: '\uD83D\uDCCB', action: 'overlay', target: 'burns-summary', pinned: true },
+        { id: 'tbsa', label: 'TBSA', icon: '\uD83D\uDD25', action: 'calculator', target: 'tbsa-adult', pinned: true },
+        { id: 'fluid', label: 'Fluids', icon: '\uD83D\uDCA7', action: 'calculator', target: 'burn-parkland', pinned: true },
+        { id: 'eschar', label: 'Eschar', icon: '\u2702\uFE0F', action: 'overlay', target: 'burns-escharotomy', pinned: true },
+        { id: 'transfer', label: 'Transfer', icon: '\uD83D\uDE91', action: 'jump', target: 'burn-transfer', pinned: true },
+        { id: 'rule10', label: 'Rule 10', icon: '\uD83E\uDDEE', action: 'calculator', target: 'burn-rule-of-10' },
+        { id: 'peds-tbsa', label: 'Peds TBSA', icon: '\uD83D\uDC76', action: 'calculator', target: 'tbsa-peds' },
+        { id: 'dell', label: 'Dell', icon: '\uD83C\uDFE5', action: 'calculator', target: 'burn-dell-seton' },
+        { id: 'airway', label: 'Airway', icon: '\uD83E\uDEC1', action: 'jump', target: 'burn-airway-assess' },
+        { id: 'co-cn', label: 'CO/CN', icon: '\u2620\uFE0F', action: 'overlay', target: 'burns-co-cyanide' },
+        { id: 'dress', label: 'Dress', icon: '\uD83E\uDE79', action: 'overlay', target: 'burns-dressing-guide' },
+        { id: 'chemical', label: 'Chemical', icon: '\uD83E\uDDEA', action: 'overlay', target: 'burns-chemical-detail' },
+        { id: 'hf-protocol', label: 'HF Acid', icon: '\u26A0\uFE0F', action: 'calculator', target: 'hf-treatment' },
     ],
     'stroke': [
         { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },

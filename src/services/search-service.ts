@@ -71,6 +71,7 @@ const CLINICAL_SYNONYMS: Record<string, string[]> = {
   'afib-rvr': ['afib', 'a-fib', 'atrial fibrillation', 'rvr', 'rapid ventricular', 'rate control', 'cardioversion'],
   'pe-treatment': ['pe', 'pulmonary embolism', 'dvt', 'anticoagulation', 'clot', 'thrombus'],
   'pneumothorax': ['pneumo', 'ptx', 'collapsed lung', 'chest tube', 'needle decompression'],
+  'burns': ['burn', 'thermal burn', 'scald', 'flame burn', 'eschar', 'escharotomy', 'circumferential burn', 'compartment syndrome', 'inhalation injury', 'carbon monoxide', 'cyanide', 'tbsa', 'parkland', 'rule of nines', 'hydrofluoric acid', 'hf burn', 'chemical burn', 'burn center'],
   'sepsis': ['septic', 'infection', 'bacteremia', 'lactate', 'qsofa', 'sofa'],
   'stroke': ['cva', 'tpa', 'thrombectomy', 'nihss', 'ischemic', 'hemorrhagic'],
   'stemi': ['mi', 'myocardial infarction', 'heart attack', 'pci', 'cath lab'],
@@ -99,6 +100,18 @@ const DRUG_SYNONYMS: Record<string, string[]> = {
   'epinephrine': ['epi', 'adrenaline', 'pressor'],
   'magnesium': ['mag', 'torsades', 'eclampsia'],
 };
+
+/** Focused search entries for high-yield subtools that clinicians expect by name. */
+const ADDITIONAL_SEARCH_DOCS: SearchDoc[] = [
+  {
+    id: 'burns',
+    type: 'consult',
+    title: 'Escharotomy',
+    subtitle: 'Burns consult — circumferential burn decompression',
+    keywords: ['eschar', 'burn eschar', 'eschar release', 'circumferential burn decompression', 'burn compartment syndrome', 'fasciotomy'],
+    categoryId: 'trauma-surgery',
+  },
+];
 
 /** Build search index from all content */
 export function buildSearchIndex(): void {
@@ -132,6 +145,8 @@ export function buildSearchIndex(): void {
       });
     }
   }
+
+  indexedDocs.push(...ADDITIONAL_SEARCH_DOCS);
 
   // Index drugs
   for (const drug of getAllDrugs()) {
@@ -348,6 +363,14 @@ function alphabeticalPrefixSearch(query: string): SearchResult[] {
         sublabel: calc.subtitle,
         route: `/calculator/${calc.id}`,
       });
+    }
+  }
+
+  // Named subtools/info cards - prefix match on title or high-yield keywords.
+  for (const doc of ADDITIONAL_SEARCH_DOCS) {
+    if (matchesPrefix(doc.title, query) || doc.keywords.some(keyword => matchesPrefix(keyword, query))) {
+      const mapped = docToResult(doc);
+      if (mapped) results.push(mapped);
     }
   }
 
