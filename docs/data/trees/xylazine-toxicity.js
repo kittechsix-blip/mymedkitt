@@ -12,7 +12,7 @@ export const XYLAZINE_TOXICITY_CRITICAL_ACTIONS = [
     { text: 'No antidote for xylazine - atipamezole (veterinary alpha-2 antagonist) NOT available for humans', nodeId: 'xyl-monitoring' },
     { text: 'Xylazine withdrawal: clonidine 0.1-0.3 mg PO q4-6h (hold if SBP <90 or HR <50)', nodeId: 'xyl-withdrawal-tx' },
     { text: 'Avoid atropine for bradycardia - risk of hypertensive crisis from unopposed vasoconstriction', nodeId: 'xyl-bradycardia' },
-    { text: 'Strangulation is leading predictor of future homicide in IPV - liberal imaging threshold', nodeId: 'xyl-start' },
+    { text: 'Co-occurs with fentanyl in >70% of street supply — naloxone partially effective for opioid component but does NOT reverse xylazine sedation (Philadelphia Consensus 2024)', nodeId: 'xyl-start' },
 ];
 export const XYLAZINE_TOXICITY_NODES = [
     // ═══════════════════════════════════════════════════════════════

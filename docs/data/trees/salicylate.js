@@ -671,10 +671,10 @@ export const SALICYLATE_NODES = [
 export const SALICYLATE_CRITICAL_ACTIONS = [
     { text: 'Sodium bicarbonate 150 mEq (3 amps) in 1L D5W at 200-250 mL/hr for urine alkalinization', nodeId: 'sal-bicarb-bolus' },
     { text: 'Target urine pH 7.5-8.0 (recheck q2-4h) to enhance renal elimination', nodeId: 'sal-alkalinize-monitor' },
-    { text: 'Hemodialysis for severe toxicity: pH <7.1, altered MS, pulmonary edema, renal failure, salicylate >100 mg/dL', nodeId: 'sal-hd-indications' },
+    { text: 'Hemodialysis for severe toxicity (EXTRIP): pH <7.20, altered MS, pulmonary edema, renal failure, salicylate >100 mg/dL (acute) or >80 mg/dL (chronic/elderly)', nodeId: 'sal-hd-indications' },
     { text: 'Avoid acetazolamide (worsens acidosis) and intubation (respiratory alkalosis compensation critical)', nodeId: 'sal-airway-warning' },
     { text: 'Activated charcoal 1 g/kg PO if <2 hours or evidence of ongoing absorption', nodeId: 'sal-charcoal' },
-    { text: 'Aggressive IV fluids: 500-1000 mL NS bolus, then 200-250 mL/hr', nodeId: 'sal-resus-assess' },
+    { text: 'Aggressive IV fluids: isotonic bicarbonate (pH <7.5) or LR/Plasmalyte (at target pH) at 200-250 mL/hr — NEVER normal saline (acidifying)', nodeId: 'sal-resus-assess' },
     { text: 'Check salicylate level q2-4h until declining (delayed absorption common)', nodeId: 'sal-monitor' },
 ];
 export const SALICYLATE_CITATIONS = [

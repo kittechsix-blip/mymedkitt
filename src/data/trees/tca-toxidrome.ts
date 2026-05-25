@@ -547,9 +547,9 @@ export const TCA_TOXIDROME_MODULE_LABELS = [
 export const TCA_TOXIDROME_CRITICAL_ACTIONS = [
   { text: 'Sodium bicarbonate 1-2 mEq/kg IV bolus (50-100 mEq) for QRS >100 ms or arrhythmia', nodeId: 'tca-bicarb' },
   { text: 'Target serum pH 7.50-7.55 with continuous bicarbonate infusion', nodeId: 'tca-bicarb-infusion' },
-  { text: 'Intubate for airway protection - avoid propofol (worsens hypotension), use etomidate/ketamine', nodeId: 'tca-intubation' },
+  { text: 'Intubate for airway protection - propofol if hemodynamically stable, ketamine/benzo if unstable (avoid propofol push-dose with hypotension)', nodeId: 'tca-intubation' },
   { text: 'Lipid emulsion 20%: 1.5 mL/kg bolus if refractory arrhythmias or cardiac arrest', nodeId: 'tca-lipid' },
-  { text: 'Norepinephrine for hypotension (avoid phenylephrine - unopposed alpha worsens outcomes)', nodeId: 'tca-vasopressors' },
+  { text: 'Norepinephrine first-line for hypotension; phenylephrine reserved for markedly tachycardic patients (pure alpha)', nodeId: 'tca-vasopressors' },
   { text: 'Avoid class IA/IC antiarrhythmics (procainamide, flecainide - worsen sodium channel blockade)', nodeId: 'tca-bicarb' },
   { text: 'Benzodiazepines for seizures (lorazepam 0.1 mg/kg IV)', nodeId: 'tca-seizure' },
 ];
