@@ -162,7 +162,7 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'PPI Therapy',
-    body: '**Pre-Endoscopy PPI:** [1][9]\n• ACG 2021: No strong recommendation (limited evidence)\n• If used: **Pantoprazole 80 mg IV** or Esomeprazole 80 mg IV\n\n**Post-Endoscopy PPI (High-Risk Ulcers):** [9]\n• **Bolus:** 80 mg IV\n• **Then:** 8 mg/hr infusion x 72h OR 40 mg IV BID-QID x 3 days\n• **Rationale:** Raises gastric pH >6, stabilizes clot\n\n**EMCrit/IBCC Approach:**\n• PPI 40 mg IV Q12h (bolus dosing = infusion efficacy)\n\n**Duration:**\n• High-risk (Rockall ≥6): PPI BID x 14 days\n• Low-risk: PPI daily, transition to PO\n• H. pylori positive: Add eradication therapy',
+    body: '**Pre-Endoscopy PPI:** [1][9]\n• ACG 2021: No strong recommendation (limited evidence)\n• If used: **Pantoprazole 80 mg IV** or Esomeprazole 80 mg IV\n\n**Post-Endoscopy PPI (High-Risk Ulcers):** [9]\n• **Bolus:** 80 mg IV\n• **Then:** 8 mg/hr infusion x 72h OR 40 mg IV BID-QID x 3 days\n• **Rationale:** Raises gastric pH >6, stabilizes clot\n\n**EMCrit/IBCC Approach:**\n• PPI 40 mg IV Q12h (bolus dosing = infusion efficacy)\n\n**Duration:**\n• High-risk (Rockall ≥6): PPI BID x 14 days\n• Low-risk: PPI daily, transition to PO\n• [H. pylori](#/tree/h-pylori) positive: add eradication therapy and test-of-cure',
     citation: [1, 9],
     next: 'ugib-pre-egd',
 
@@ -431,7 +431,7 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Post-Endoscopy Management',
-    body: '**Based on Endoscopic Findings:** [1][9]\n\n**Forrest Classification (Ulcers):**\n| Class | Description | Rebleed Risk |\n|-------|-------------|--------------|\n| Ia | Spurting hemorrhage | 90% |\n| Ib | Oozing hemorrhage | 50% |\n| IIa | Visible vessel | 43% |\n| IIb | Adherent clot | 22% |\n| IIc | Flat pigmented spot | 7% |\n| III | Clean ulcer base | 3% |\n\n**High-Risk (Ia, Ib, IIa):**\n• PPI infusion x 72h\n• Second-look EGD if concern for rebleeding\n• Hospital stay 72+ hours\n\n**Low-Risk (IIc, III):**\n• PO PPI\n• Diet advancement\n• May discharge 24-48h after EGD if stable\n\n**All Patients:**\n• H. pylori testing — treat if positive\n• NSAID cessation counseling\n• PPI for at least 8 weeks',
+    body: '**Based on Endoscopic Findings:** [1][9]\n\n**Forrest Classification (Ulcers):**\n| Class | Description | Rebleed Risk |\n|-------|-------------|--------------|\n| Ia | Spurting hemorrhage | 90% |\n| Ib | Oozing hemorrhage | 50% |\n| IIa | Visible vessel | 43% |\n| IIb | Adherent clot | 22% |\n| IIc | Flat pigmented spot | 7% |\n| III | Clean ulcer base | 3% |\n\n**High-Risk (Ia, Ib, IIa):**\n• PPI infusion x 72h\n• Second-look EGD if concern for rebleeding\n• Hospital stay 72+ hours\n\n**Low-Risk (IIc, III):**\n• PO PPI\n• Diet advancement\n• May discharge 24-48h after EGD if stable\n\n**All Patients:**\n• [H. pylori testing and eradication](#/tree/h-pylori) if positive, with test-of-cure\n• NSAID cessation counseling\n• PPI for at least 8 weeks',
     citation: [1, 9],
     calculatorLinks: [
       { id: 'forrest', label: 'Forrest Classification' },

@@ -247,6 +247,7 @@ export const TREE_REGISTRY = {
   'dental-trauma':    { prefix: 'DENTAL_TRAUMA',       entryNodeId: 'dt-start',           categoryId: 'em' },
   'pta-drainage':     { prefix: 'PTA_DRAINAGE',        entryNodeId: 'pta-start',          categoryId: 'procedures' },
   'upper-gi-bleed':   { prefix: 'UPPER_GI_BLEED',      entryNodeId: 'ugib-start',         categoryId: 'gastroenterology' },
+  'h-pylori':         { prefix: 'H_PYLORI',            entryNodeId: 'hp-start',           categoryId: 'gastroenterology' },
   'le-fort-fracture': { prefix: 'LE_FORT_FRACTURE',    entryNodeId: 'lff-start',          categoryId: 'em' },
   'lumbar-puncture':  { prefix: 'LUMBAR_PUNCTURE',     entryNodeId: 'lp-start',           categoryId: 'procedures' },
   'multiple-sclerosis': { prefix: 'MULTIPLE_SCLEROSIS', entryNodeId: 'ms-start',         categoryId: 'neurology' },

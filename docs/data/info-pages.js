@@ -3411,6 +3411,91 @@ const UGIB_SUMMARY = {
     ],
 };
 // -------------------------------------------------------------------
+// H. pylori
+// -------------------------------------------------------------------
+const H_PYLORI_STEPS = {
+    id: 'hp-steps',
+    title: 'H. pylori — Steps',
+    subtitle: 'Testing, eradication, and test-of-cure',
+    sections: [
+        {
+            body: '**Step 1: Sort the lane**\n• [Alarm / complicated](#/node/hp-alarm): GI bleed, anemia, weight loss, persistent vomiting, dysphagia, age >=60 new dyspepsia, peritonitis\n• Stable dyspepsia or PUD question: decide if active-infection testing is indicated\n• Known positive: choose eradication regimen\n• Persistent after therapy: verify test timing and route to salvage\n\n**Step 2: Test only when it changes care**\n• Current/prior PUD, dyspepsia without alarm features, unexplained IDA/ITP, gastric premalignant conditions, MALT, household contacts, chronic NSAID/aspirin contexts\n• Do not order a test unless the patient can be treated and followed\n\n**Step 3: Use active-infection testing**\n• Urea breath or stool antigen when no EGD is planned\n• Biopsy-based testing when EGD is already indicated\n• Avoid serology for cure or current active infection\n\n**Step 4: Treat confirmed infection**\n• Default: optimized bismuth quadruple therapy x14 days\n• Avoid empiric clarithromycin or levofloxacin regimens unless susceptibility is known\n\n**Step 5: Confirm eradication**\n• Test-of-cure is mandatory\n• At least 4 weeks after antibiotics; off PPI/PCAB x2 weeks; off antibiotics/bismuth x4 weeks',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Chey WD, et al. ACG Clinical Guideline: Treatment of Helicobacter pylori Infection. Am J Gastroenterol. 2024;119(9):1730-1753.' },
+    ],
+};
+const H_PYLORI_TESTING = {
+    id: 'hp-testing',
+    title: 'H. pylori — Testing',
+    subtitle: 'Active infection and test-of-cure rules',
+    sections: [
+        {
+            heading: 'Preferred Tests',
+            body: '• Urea breath test\n• Stool antigen test\n• Biopsy-based test if EGD is already being performed\n\nSerology is generally a poor ED/outpatient decision test because antibodies may persist after old infection. It also cannot prove eradication.',
+        },
+        {
+            heading: 'Medication Holds',
+            body: 'To reduce false negatives:\n• Hold PPI or PCAB for 2 weeks\n• Hold antibiotics and bismuth for 4 weeks\n• H2 blockers and antacids can be used as a bridge if symptoms require acid suppression',
+        },
+        {
+            heading: 'When EGD Is the Right Test',
+            body: 'Use an endoscopy lane for GI bleeding, gastric ulcer complication, alarm-feature dyspepsia, malignancy concern, or repeated treatment failure where culture/molecular susceptibility may change the salvage regimen.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Chey WD, et al. ACG Clinical Guideline: Treatment of Helicobacter pylori Infection. Am J Gastroenterol. 2024;119(9):1730-1753.' },
+        { num: 2, text: 'Malfertheiner P, et al. Management of Helicobacter pylori infection: the Maastricht VI/Florence consensus report. Gut. 2022;71(9):1724-1762.' },
+    ],
+};
+const H_PYLORI_REGIMENS = {
+    id: 'hp-regimens',
+    title: 'H. pylori — Regimens',
+    subtitle: 'Current adult eradication options',
+    sections: [
+        {
+            heading: 'Default Empiric Regimen',
+            body: '**Optimized bismuth quadruple therapy x14 days:**\n• PPI standard dose BID\n• Bismuth subcitrate 120-300 mg QID OR bismuth subsalicylate 300-524 mg QID\n• Tetracycline 500 mg QID\n• Metronidazole 500 mg TID or QID\n\nUse this when H. pylori is confirmed and susceptibility is unknown, unless contraindications or local GI guidance point elsewhere.',
+        },
+        {
+            heading: 'Alternatives',
+            body: '• Vonoprazan 20 mg BID + amoxicillin 1000 mg TID x14 days\n• Rifabutin 50 mg TID + amoxicillin 1000 mg TID + omeprazole 40 mg TID x14 days\n• Clarithromycin-containing therapy only when clarithromycin susceptibility is documented\n• Levofloxacin-containing therapy only when levofloxacin susceptibility is documented',
+        },
+        {
+            heading: 'Counseling Pearls',
+            body: '• Adherence matters more than elegance; BQT has a high pill burden\n• Bismuth can darken stool/tongue\n• Avoid alcohol with metronidazole\n• Tetracycline is not appropriate in pregnancy\n• Always pair treatment with a test-of-cure plan',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American College of Gastroenterology. ACG Guideline Highlights: Treatment of Helicobacter pylori Infection. 2025 summary PDF of 2024 ACG guideline.' },
+        { num: 2, text: 'Chey WD, et al. ACG Clinical Guideline: Treatment of Helicobacter pylori Infection. Am J Gastroenterol. 2024;119(9):1730-1753.' },
+    ],
+};
+const H_PYLORI_FAILURE = {
+    id: 'hp-failure',
+    title: 'H. pylori — Treatment Failure',
+    subtitle: 'Confirm persistence before salvage',
+    sections: [
+        {
+            heading: 'First Confirm It Is Real Failure',
+            body: '• Was the cure test done >=4 weeks after antibiotics?\n• Was the patient off PPI/PCAB x2 weeks?\n• Was the patient off bismuth/antibiotics x4 weeks?\n• Was the test stool antigen, urea breath, or biopsy-based?\n• Did the patient complete the regimen?',
+        },
+        {
+            heading: 'Do Not Reuse Failed Antibiotics Blindly',
+            body: 'Avoid repeating clarithromycin, levofloxacin, rifabutin, metronidazole, or tetracycline exposure unless susceptibility data or specialist guidance supports it. Clarithromycin and levofloxacin regimens should be susceptibility-guided.',
+        },
+        {
+            heading: 'When to Escalate',
+            body: 'Multiple failures, unclear prior regimen, significant allergy constraints, gastric ulcer complications, or ongoing alarm features should go to GI for culture or molecular susceptibility testing when available.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Chey WD, et al. ACG Clinical Guideline: Treatment of Helicobacter pylori Infection. Am J Gastroenterol. 2024;119(9):1730-1753.' },
+        { num: 2, text: 'Malfertheiner P, et al. Management of Helicobacter pylori infection: the Maastricht VI/Florence consensus report. Gut. 2022;71(9):1724-1762.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Acute Diarrhea
 // -------------------------------------------------------------------
 const DIARRHEA_SUMMARY = {
@@ -23899,6 +23984,11 @@ export const INFO_PAGES = {
     'alt-steps': ALT_STEPS_SUMMARY,
     // IBD Flare
     'ibd-steps': IBD_STEPS_SUMMARY,
+    // H. pylori
+    'hp-steps': H_PYLORI_STEPS,
+    'hp-testing': H_PYLORI_TESTING,
+    'hp-regimens': H_PYLORI_REGIMENS,
+    'hp-failure': H_PYLORI_FAILURE,
     // Transient Global Amnesia
     'tga-steps': TGA_STEPS_SUMMARY,
     // Mammalian Bite

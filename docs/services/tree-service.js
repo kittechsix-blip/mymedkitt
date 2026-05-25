@@ -566,6 +566,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/upper-gi-bleed.js');
             return { nodes: m.UPPER_GI_BLEED_NODES, entryNodeId: 'ugib-start', categoryId: 'gastroenterology', moduleLabels: m.UPPER_GI_BLEED_MODULE_LABELS, citations: m.UPPER_GI_BLEED_CITATIONS, criticalActions: m.UPPER_GI_BLEED_CRITICAL_ACTIONS };
         },
+        'h-pylori': async () => {
+            const m = await import('../data/trees/h-pylori.js');
+            return { nodes: m.H_PYLORI_NODES, entryNodeId: 'hp-start', categoryId: 'gastroenterology', moduleLabels: m.H_PYLORI_MODULE_LABELS, citations: m.H_PYLORI_CITATIONS, criticalActions: m.H_PYLORI_CRITICAL_ACTIONS };
+        },
         'diarrhea': async () => {
             const m = await import('../data/trees/diarrhea.js');
             return { nodes: m.DIARRHEA_NODES, entryNodeId: 'diarrhea-start', categoryId: 'gastroenterology', moduleLabels: m.DIARRHEA_MODULE_LABELS, citations: m.DIARRHEA_CITATIONS, criticalActions: m.DIARRHEA_CRITICAL_ACTIONS };

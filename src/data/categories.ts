@@ -1071,6 +1071,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'ugib-start',
       },
       {
+        id: 'h-pylori',
+        title: 'H. pylori',
+        subtitle: 'Testing → Active Infection → Eradication → Test-of-Cure → Failure',
+        categoryId: 'gastroenterology',
+        version: '1.0',
+        nodeCount: 15,
+        entryNodeId: 'hp-start',
+      },
+      {
         id: 'chs',
         title: 'Cannabinoid Hyperemesis Syndrome',
         subtitle: 'Recognition → Rule Out Organics → Butyrophenones → Capsaicin → Disposition',

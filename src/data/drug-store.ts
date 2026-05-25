@@ -11443,8 +11443,8 @@ const OMEPRAZOLE: DrugEntry = {
       regimen: 'Initial 60 mg PO daily; titrate to acid output <10 mEq/hr (or <5 mEq/hr in patients with prior gastric surgery). Doses up to 120 mg TID have been used.',
     },
     {
-      indication: 'H. pylori eradication (triple therapy)',
-      regimen: 'Omeprazole 20 mg PO BID + clarithromycin 500 mg BID + amoxicillin 1 g BID × 14 days (or metronidazole 500 mg BID if PCN-allergic). Quadruple therapy preferred in areas with high clarithromycin resistance.',
+      indication: 'H. pylori eradication (acid suppression component)',
+      regimen: 'Use as part of an eradication regimen, not as monotherapy. Current ACG guidance favors optimized bismuth quadruple therapy x14 days when susceptibility is unknown: PPI BID + bismuth QID + tetracycline 500 mg QID + metronidazole 500 mg TID/QID. Avoid empiric clarithromycin- or levofloxacin-containing regimens unless susceptibility is documented. Confirm eradication with stool antigen, urea breath test, or biopsy-based testing at least 4 weeks after antibiotics and after 2 weeks off PPI/PCAB.',
     },
   ],
   contraindications: [
@@ -11470,6 +11470,7 @@ const OMEPRAZOLE: DrugEntry = {
     'Barkun AN, et al. Management of Nonvariceal Upper Gastrointestinal Bleeding: Guideline Recommendations From the International Consensus Group. Ann Intern Med. 2019;171(11):805-822.',
     'Sachar H, et al. Intermittent vs Continuous Proton Pump Inhibitor Therapy for High-Risk Bleeding Ulcers: A Systematic Review and Meta-analysis. JAMA Intern Med. 2014;174(11):1755-1762.',
     'Sreedharan A, et al. Proton pump inhibitor treatment initiated prior to endoscopic diagnosis in upper gastrointestinal bleeding. Cochrane Database Syst Rev. 2010;(7):CD005415.',
+    'Chey WD, Howden CW, Moss SF, et al. ACG Clinical Guideline: Treatment of Helicobacter pylori Infection. Am J Gastroenterol. 2024;119(9):1730-1753.',
   ],
 };
 

@@ -69,7 +69,41 @@ const THORACOTOMY_PROCEDURE_STOP: InfoPage = {
   citations: [],
 };
 
+const H_PYLORI_STOP: InfoPage = {
+  id: 'h-pylori-stop',
+  title: 'H. pylori - Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: 'Do NOT use clarithromycin triple therapy empirically',
+      body: 'Current ACG guidance recommends against empiric clarithromycin-containing therapy unless susceptibility is documented. Clarithromycin resistance can make the classic PPI + clarithromycin + amoxicillin regimen fail. [See regimen node](#/node/hp-treatment-naive).',
+    },
+    {
+      heading: 'Do NOT use levofloxacin empirically',
+      body: 'Levofloxacin-containing therapy should be reserved for documented susceptibility or specialist-directed salvage. Reusing quinolones blindly adds harm and may fail due to resistance. [See alternatives](#/node/hp-alternatives).',
+    },
+    {
+      heading: 'Do NOT call symptom improvement a cure',
+      body: 'Every treated patient needs proof of eradication with stool antigen, urea breath test, or biopsy-based testing. Persistent infection matters even when dyspepsia improves. [See test-of-cure](#/node/hp-test-of-cure).',
+    },
+    {
+      heading: 'Do NOT test too early or while acid suppression masks infection',
+      body: 'False negatives occur if testing is done too soon. Wait at least 4 weeks after antibiotics; hold PPI/PCAB for 2 weeks and antibiotics/bismuth for 4 weeks before test-of-cure. [See testing rules](#/node/hp-testing-basics).',
+    },
+    {
+      heading: 'Do NOT use serology for test-of-cure',
+      body: 'Serology can remain positive after eradicated infection and does not prove active disease or cure. Use stool antigen, urea breath test, or biopsy-based testing. [See testing route](#/node/hp-test-choice).',
+    },
+    {
+      heading: 'Do NOT miss alarm features',
+      body: 'GI bleeding, iron-deficiency anemia, weight loss, persistent vomiting, dysphagia, peritonitis, or age >=60 with new dyspepsia should trigger an EGD/acute workup lane, not simple outpatient H. pylori discharge. [See alarm lane](#/node/hp-alarm).',
+    },
+  ],
+  citations: [],
+};
+
 export const STOP_PAGES_15: Record<string, InfoPage> = {
   'supraglottic-airway-stop': SUPRAGLOTTIC_AIRWAY_STOP,
   'thoracotomy-procedure-stop': THORACOTOMY_PROCEDURE_STOP,
+  'h-pylori-stop': H_PYLORI_STOP,
 };

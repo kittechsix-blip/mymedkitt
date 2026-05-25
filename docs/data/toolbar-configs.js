@@ -812,6 +812,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'variceal', label: 'Varices', icon: '🩸', action: 'jump', target: 'ugib-variceal-pathway' },
         { id: 'blakemore', label: 'Blakemore', icon: '🎈', action: 'jump', target: 'ugib-blakemore-indications' },
     ],
+    'h-pylori': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hp-steps' },
+        { id: 'test', label: 'Testing', icon: '🧪', action: 'overlay', target: 'hp-testing' },
+        { id: 'rx', label: 'Regimens', icon: '💊', action: 'overlay', target: 'hp-regimens' },
+        { id: 'failure', label: 'Failure', icon: '🔁', action: 'overlay', target: 'hp-failure' },
+    ],
     'serotonin-syndrome': [
         { id: 'hunter', label: 'Hunter', icon: '✅', action: 'calculator', target: 'hunter-criteria' },
         { id: 'ss-nms', label: 'SS vs NMS', icon: '🔀', action: 'calculator', target: 'ss-vs-nms' },
