@@ -23527,6 +23527,83 @@ const AA_STOP_PAGE: InfoPage = {
   ],
 };
 
+const GIB_STEPS_PAGE: InfoPage = {
+  id: 'gib-steps',
+  title: 'GI Bleed Hub — Steps Summary',
+  subtitle: 'Sick check → source pattern → initial bundle → imaging/source control → dispo',
+  sections: [
+    {
+      body: '1. **Sick check first.** HR/SBP/shock index (HR/SBP >1 = significant bleed even with normal BP), mental status, skin/perfusion, rectal exam EARLY (melena vs hematochezia changes the source map). Two large-bore IVs, T&C 2-4 units, activate [Massive Transfusion](#/tree/massive-transfusion) if shock index >1.0 or class III/IV shock.\n2. **Source pattern from history + exam:**\n   - **Hematemesis / coffee-grounds / melena** → upper source ~90% → [Upper GI Bleed](#/tree/upper-gi-bleed). BUN/Cr ratio >30 supports upper. NG lavage NOT recommended routinely (low yield, harmful in varices).\n   - **Hematochezia + shock** → rule out brisk UPPER bleed first (10-15% of "lower" bleeds are actually rapid upper) → [Upper GI Bleed](#/tree/upper-gi-bleed) then [Lower GI Bleed](#/tree/lower-gi-bleed).\n   - **Hematochezia + hemodynamically stable** → [Lower GI Bleed](#/tree/lower-gi-bleed). Oakland score for triage.\n   - **Cirrhosis + UGIB** → variceal pathway. Octreotide 50 mcg bolus + 50 mcg/h drip + ceftriaxone 1 g IV (AASLD prophylaxis reduces mortality). Urgent endoscopy <12 h.\n   - **Anticoagulated** → [Anticoag Reversal](#/tree/anticoag-reversal) (DOAC/VKA/heparin specific). Reverse in parallel with resus.\n   - **Prior aortic graft + UGIB** → [Aortic Aneurysm/AEF](#/tree/aortic-aneurysm). Herald bleed before exsanguination. CTA + vascular surgery STAT.\n   - **Bloody diarrhea + abdominal pain + IBD history** → [IBD Flare](#/tree/ibd-flare). Truelove-Witts severity.\n   - **Pain out of proportion + AFib/vasculopath + GI bleed** → [Mesenteric Ischemia](#/tree/mesenteric-ischemia). CTA mesenteric.\n   - **Peds:** age-specific differential — [Intussusception](#/tree/intussusception), [STEC/HUS](#/tree/peds-stec-hus), Meckel diverticulum, anal fissure, neonatal swallowed maternal blood ([Neonatal Resus](#/tree/neonatal-resus)).\n3. **Initial bundle:** 2 large-bore IVs (16-18 ga) > central line for resus, NPO, T&C ≥2-4 units, CBC/CMP/coags/lactate/T&S, type-specific blood early, transfuse to Hgb 7 (or 8 in cardiac/active bleeding per AABB/Villanueva 2013), correct INR if >2 in actively bleeding, platelets if <50k + active bleed, **permissive hypotension SBP 90-100 mmHg until source controlled** (Cannon EAST 2017). PPI 80 mg IV bolus + 8 mg/h drip if UGIB suspected.\n4. **TXA caution:** HALT-IT trial (Lancet 2020, n=12,009) showed TXA did NOT reduce GI bleed mortality and INCREASED VTE — do NOT routinely give TXA for GI bleed. Reserve only for massive trauma-pattern hemorrhage.\n5. **Reassess at 30-60 min.** Vitals trend, Hgb trend (lags 2-4 h), urine output, mentation. Failure to improve = source control urgency (endoscopy/IR/surgery).\n6. **Imaging + source control:**\n   - **UGIB:** EGD within 24 h (12 h if variceal/unstable). Pre-endoscopy erythromycin 250 mg IV 30-90 min before for prokinetic clearance.\n   - **LGIB:** CT angiography if active bleeding (sens 85-95% at >0.3 mL/min) → IR embolization. Colonoscopy within 24 h for stable.\n   - **Obscure/massive lower:** tagged RBC scan or angiography.\n   - **AEF:** CTA with arterial + portal phases; vascular surgery emergent.\n7. **Disposition:**\n   - **ICU:** shock index >1, ongoing transfusion, variceal bleed, intubated, post-arrest.\n   - **Step-down/floor:** stable post-transfusion, Glasgow-Blatchford ≥1, Oakland ≥8.\n   - **Observation:** intermediate risk, serial Hgb/exams.\n   - **Discharge (rare for ED GI bleed):** Glasgow-Blatchford ≤1 (UGIB) or Oakland ≤8 (LGIB) + reliable f/u + outpatient endoscopy arranged. Most ED GI bleeds get admitted.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Laine L, et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. Am J Gastroenterol. 2021;116(5):899-917.' },
+    { num: 2, text: 'Gralnek IM, et al. ESGE Guideline: Endoscopic diagnosis and management of nonvariceal upper GI hemorrhage. Endoscopy. 2021;53(3):300-332.' },
+    { num: 3, text: 'Strate LL, et al. ACG Clinical Guideline: Management of Patients With Acute Lower GI Bleeding. Am J Gastroenterol. 2016;111(4):459-474.' },
+    { num: 4, text: 'Oakland K, et al. BSG guidelines on the management of acute lower GI bleeding. Gut. 2019;68(5):776-789.' },
+    { num: 5, text: 'Garcia-Tsao G, et al. AASLD Practice Guidance: Portal Hypertensive Bleeding in Cirrhosis. Hepatology. 2017;65(1):310-335.' },
+    { num: 6, text: 'HALT-IT Trial Collaborators. Effects of a high-dose 24-h infusion of tranexamic acid on death and thromboembolic events in patients with acute GI bleeding (HALT-IT). Lancet. 2020;395(10241):1927-1936.' },
+    { num: 7, text: 'Villanueva C, et al. Transfusion strategies for acute upper gastrointestinal bleeding. N Engl J Med. 2013;368(1):11-21.' },
+  ],
+};
+
+const GIB_STOP_PAGE: InfoPage = {
+  id: 'gib-stop',
+  title: 'GI Bleed Hub — Do NOT',
+  subtitle: 'Critical pitfalls in undifferentiated GI bleeding',
+  sections: [
+    {
+      heading: '🛑 Do NOT routinely give TXA for GI bleed',
+      body: 'HALT-IT trial (n=12,009, Lancet 2020) showed TXA did NOT reduce GI bleed mortality (4.0% vs 4.0%) and INCREASED VTE (HR 1.85). Reverses prior CRASH-2 thinking. Do NOT extrapolate trauma TXA practice to GI bleed.',
+    },
+    {
+      heading: '🛑 Do NOT skip the rectal exam',
+      body: 'Melena vs hematochezia vs bright red blood vs occult blood changes the source map and the urgency. The rectal exam happens in the first 5 minutes alongside vitals. A "GI bleed" without a rectal exam is a story with no data.',
+    },
+    {
+      heading: '🛑 Do NOT transfuse to Hgb 10 in stable variceal bleeding',
+      body: 'Villanueva 2013 NEJM RCT: restrictive transfusion (Hgb trigger 7) had lower mortality and rebleeding than liberal (Hgb 9) in upper GI bleeding, especially cirrhotics. Over-transfusion raises portal pressure and worsens variceal bleeding.',
+    },
+    {
+      heading: '🛑 Do NOT chase a normotensive BP in active bleeding',
+      body: 'Permissive hypotension (SBP 90-100 mmHg) until source control is current EAST guidance for hemorrhagic shock — pushing BP to 120 with crystalloid blows clots off, dilutes coagulation factors, and worsens outcomes. Blood, not crystalloid; lower BP target until endoscopy/IR.',
+    },
+    {
+      heading: '🛑 Do NOT forget ceftriaxone in cirrhotic UGIB',
+      body: 'AASLD Class I rec: ceftriaxone 1 g IV daily for 7 days in any cirrhotic with UGIB reduces mortality (NNT ~22 for mortality benefit). Bacterial infection precipitates rebleeding. Antibiotic prophylaxis is non-negotiable in this population.',
+    },
+    {
+      heading: '🛑 Do NOT discount the AEF herald bleed',
+      body: 'Prior aortic graft + GI bleed = aortoenteric fistula until proven otherwise, even if the bleed seems small ("herald bleed"). 30-50% mortality. CTA emergent, vascular surgery STAT. Do NOT scope first — bleeding into the duodenum from a graft erosion is not a GI problem.',
+    },
+    {
+      heading: '🛑 Do NOT hold anti-motility / opiate agents in IBD flare with bloody diarrhea',
+      body: 'Loperamide / opioids in severe UC can precipitate toxic megacolon. Anti-motility agents are CONTRAINDICATED in suspected IBD flare with bloody diarrhea. Use Truelove-Witts criteria, hospitalize severe disease, IV steroids early.',
+    },
+    {
+      heading: '🛑 Do NOT assume hematochezia is lower in the shocked patient',
+      body: '10-15% of hematochezia presentations are brisk UPPER GI bleeds (rapid transit). In a shocked patient with hematochezia, the upper source must be ruled out (NG lavage is no longer recommended; EGD before colonoscopy is the safer pathway).',
+    },
+    {
+      heading: '🛑 Do NOT delay anticoagulation reversal for "confirming" the bleed',
+      body: 'In any actively bleeding anticoagulated patient with hemodynamic compromise, reversal happens in parallel with resus — not after confirming source. 4F-PCC for VKA, andexanet alfa or 4F-PCC for FXa inhibitors (ANNEXA-4), idarucizumab for dabigatran. Time to reversal = time saved.',
+    },
+    {
+      heading: '🛑 Do NOT use the hub as the treatment playbook',
+      body: 'The hub triages. Dosing, monitoring, and disposition for each phenotype live in the deep-dive consults (UGIB, LGIB, anticoag-reversal, massive-transfusion, AAA, IBD-flare, mesenteric). Once you commit to a phenotype, leave the hub and work the consult.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'HALT-IT Trial Collaborators. Lancet. 2020;395(10241):1927-1936.' },
+    { num: 2, text: 'Villanueva C, et al. NEJM. 2013;368(1):11-21.' },
+    { num: 3, text: 'Garcia-Tsao G, et al. AASLD. Hepatology. 2017;65(1):310-335.' },
+    { num: 4, text: 'Cannon JW, et al. Damage control resuscitation in patients with severe traumatic hemorrhage: EAST. J Trauma Acute Care Surg. 2017;82(3):605-617.' },
+    { num: 5, text: 'Connolly SJ, et al. Andexanet alfa for acute major bleeding associated with factor Xa inhibitors (ANNEXA-4). NEJM. 2019;380(14):1326-1335.' },
+    { num: 6, text: 'Truelove SC, Witts LJ. Cortisone in ulcerative colitis. BMJ. 1955;2(4947):1041-1048.' },
+    { num: 7, text: 'Saers SJF, Scheltinga MRM. Primary aortoenteric fistula. Br J Surg. 2005;92(2):143-152.' },
+  ],
+};
+
 const CP_STEPS_PAGE: InfoPage = {
   id: 'cp-steps',
   title: 'Chest Pain Hub - Steps Summary',
@@ -24421,6 +24498,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'aph-stop': APH_STOP_PAGE,
   'aa-steps': AA_STEPS_PAGE,
   'aa-stop': AA_STOP_PAGE,
+  'gib-steps': GIB_STEPS_PAGE,
+  'gib-stop': GIB_STOP_PAGE,
   'cp-steps': CP_STEPS_PAGE,
   'cp-stop': CP_STOP_PAGE,
   'dysp-steps': DYSP_STEPS_PAGE,

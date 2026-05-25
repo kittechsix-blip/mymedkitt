@@ -226,6 +226,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/adult-appendicitis.js');
             return { nodes: m.ADULT_APPENDICITIS_NODES, entryNodeId: 'aa-start', categoryId: 'gastroenterology', moduleLabels: m.ADULT_APPENDICITIS_MODULE_LABELS, citations: m.ADULT_APPENDICITIS_CITATIONS, criticalActions: m.ADULT_APPENDICITIS_CRITICAL_ACTIONS };
         },
+        'gi-bleed-hub': async () => {
+            const m = await import('../data/trees/gi-bleed-hub.js');
+            return { nodes: m.GI_BLEED_HUB_NODES, entryNodeId: 'gib-start', categoryId: 'emergency-medicine', moduleLabels: m.GI_BLEED_HUB_MODULE_LABELS, citations: m.GI_BLEED_HUB_CITATIONS, criticalActions: m.GI_BLEED_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'chest-pain-hub': async () => {
             const m = await import('../data/trees/chest-pain-hub.js');
             return { nodes: m.CHEST_PAIN_HUB_NODES, entryNodeId: 'cp-start', categoryId: 'emergency-medicine', moduleLabels: m.CHEST_PAIN_HUB_MODULE_LABELS, citations: m.CHEST_PAIN_HUB_CITATIONS, criticalActions: m.CHEST_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };

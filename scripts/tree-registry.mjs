@@ -38,6 +38,7 @@ export const TREE_REGISTRY = {
   'crying-infant-hub': { prefix: 'CRYING_INFANT_HUB', entryNodeId: 'ci-start', categoryId: 'emergency-medicine' },
   'abdominal-pain-hub': { prefix: 'ABDOMINAL_PAIN_HUB', entryNodeId: 'ap-start', categoryId: 'emergency-medicine' },
   'adult-appendicitis': { prefix: 'ADULT_APPENDICITIS', entryNodeId: 'aa-start', categoryId: 'gastroenterology' },
+  'gi-bleed-hub': { prefix: 'GI_BLEED_HUB', entryNodeId: 'gib-start', categoryId: 'emergency-medicine' },
   'vasopressor-extravasation': { prefix: 'VASOPRESSOR_EXTRAVASATION', entryNodeId: 'vex-start', categoryId: 'pharmacist' },
   'high-dose-insulin': { prefix: 'HIGH_DOSE_INSULIN', entryNodeId: 'hdi-start', categoryId: 'pharmacist' },
   'potassium-infusion': { prefix: 'POTASSIUM_INFUSION', entryNodeId: 'kclinf-start', categoryId: 'pharmacist' },

@@ -435,6 +435,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'aa-imaging-strategy' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'aa-stop' },
   ],
+  'gi-bleed-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'gib-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'gib-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'gib-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'gib-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'gib-stop' },
+  ],
   'chest-pain-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'cp-steps' },
     { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'cp-exclusions' },
