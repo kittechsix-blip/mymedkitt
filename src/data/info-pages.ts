@@ -24460,6 +24460,128 @@ const PREGNANCY_HEADACHE_LADDER_PAGE: InfoPage = {
   shareable: true,
 };
 
+const ANISOCORIA_STEPS_PAGE: InfoPage = {
+  id: 'anisocoria-steps',
+  title: 'Anisocoria Steps',
+  subtitle: 'Sick pupil first, then light vs dark localization',
+  sections: [
+    {
+      heading: '1. Sick Pupil Screen',
+      body: 'Document visual acuity, pupil size/reactivity/shape, EOMs, ptosis, IOP if open globe is not suspected, red eye, trauma signs, headache/neck pain, and focused neuro exam. Emergencies: pupil-involving CN III palsy, acute painful Horner syndrome, acute angle closure, open globe, orbital compartment syndrome, and brainstem stroke.',
+    },
+    {
+      heading: '2. Measure in Bright and Dim Light',
+      body: 'Measure both pupils in bright room light, then dim the room and remeasure after several seconds. Anisocoria greater in bright light means the larger pupil is abnormal. Anisocoria greater in the dark means the smaller pupil is abnormal. Same difference in light and dark, usually <1 mm, supports physiologic anisocoria if the exam is otherwise normal.',
+    },
+    {
+      heading: '3. Large Abnormal Pupil',
+      body: 'Think CN III palsy, acute angle closure, traumatic mydriasis/iris injury, pharmacologic mydriasis, or Adie tonic pupil. CN III signs, headache, pain, ptosis, diplopia, or EOM abnormality trigger emergent aneurysm imaging.',
+    },
+    {
+      heading: '4. Small Abnormal Pupil',
+      body: 'Think Horner syndrome, physiologic anisocoria, uveitis/iritis, or miotic exposure. Acute painful Horner syndrome needs same-day head and neck vascular imaging for carotid dissection.',
+    },
+    {
+      heading: '5. Disposition',
+      body: 'Emergent consult/imaging for CN III palsy, painful Horner, stroke signs, acute angle closure, open globe, or serious trauma. Urgent ophtho/neuro-ophtho for new unexplained anisocoria. Discharge only when physiologic or clear pharmacologic pattern is supported by a normal eye/neuro exam and reliable return precautions.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'AAO EyeWiki. Anisocoria. Accessed May 25, 2026.' },
+    { num: 2, text: 'Merck Manual Professional Edition. Anisocoria. Accessed May 25, 2026.' },
+  ],
+  shareable: true,
+};
+
+const ANISOCORIA_LIGHT_DARK_PAGE: InfoPage = {
+  id: 'anisocoria-light-dark',
+  title: 'Light / Dark Rule',
+  subtitle: 'Which pupil is abnormal?',
+  sections: [
+    {
+      heading: 'Worse in Bright Light',
+      body: 'The larger pupil is abnormal because it is not constricting normally. ED differential: CN III palsy, pharmacologic mydriasis, Adie tonic pupil, traumatic iris sphincter injury, acute angle closure, or prior ocular surgery.',
+    },
+    {
+      heading: 'Worse in the Dark',
+      body: 'The smaller pupil is abnormal because it is not dilating normally. ED differential: Horner syndrome, uveitis/iritis, miotic medication exposure, or less commonly brainstem/cavernous sinus disease.',
+    },
+    {
+      heading: 'Same in Light and Dark',
+      body: 'Physiologic anisocoria is common and usually <1 mm. It should be chronic, similar on old photos if available, and paired with normal VA, EOMs, neuro exam, no ptosis, no red eye, no trauma, and no headache/neck pain.',
+    },
+    {
+      heading: 'Do Not Skip',
+      body: 'A light/dark pattern localizes the abnormal pupil, but it does not by itself prove the cause is benign. Red flags override the pattern.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'AAO EyeWiki. Anisocoria. Accessed May 25, 2026.' },
+    { num: 2, text: 'Merck Manual Professional Edition. Anisocoria. Accessed May 25, 2026.' },
+  ],
+  shareable: true,
+};
+
+const ANISOCORIA_PHARM_PAGE: InfoPage = {
+  id: 'anisocoria-pharm',
+  title: 'Pharmacologic Pupil',
+  subtitle: 'Drop, nebulizer, patch, plant, or hand-to-eye exposure',
+  sections: [
+    {
+      heading: 'Mydriasis Exposure List',
+      body: 'Scopolamine patch, atropine/homatropine/tropicamide/cyclopentolate eye drops, ipratropium/albuterol nebulizer blowback, glycopyrrolate, anticholinergic medications, decongestants/sympathomimetics, stimulant exposure, jimson weed or other anticholinergic plants, and accidental hand-to-eye transfer.',
+    },
+    {
+      heading: 'Classic Pattern',
+      body: 'Isolated large pupil, poor light response, normal EOMs, no ptosis, no headache/neck pain, no neuro deficit, no red painful eye, and compatible exposure. Resolution depends on the agent and can take hours to days.',
+    },
+    {
+      heading: 'Pilocarpine Logic',
+      body: 'A pharmacologically blocked pupil usually will not constrict to 1% pilocarpine. A nonpharmacologic dilated pupil often constricts. Dilute pilocarpine may support Adie tonic pupil but false positives occur. Drop testing must not delay imaging if CN III signs or neurologic red flags exist.',
+    },
+    {
+      heading: 'Stop Point',
+      body: 'Do not diagnose pharmacologic mydriasis if ptosis, diplopia, EOM abnormality, severe headache, eye pain, red eye, trauma, vision loss, or focal neuro findings are present.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'AAO EyeWiki. Pharmacologic Dilation of Pupil. Accessed May 25, 2026.' },
+    { num: 2, text: 'AAO EyeWiki. Anisocoria. Accessed May 25, 2026.' },
+  ],
+  shareable: true,
+};
+
+const ANISOCORIA_STOP_PAGE: InfoPage = {
+  id: 'anisocoria-stop',
+  title: 'Anisocoria Stop Points',
+  subtitle: 'Do not miss these dangerous causes',
+  sections: [
+    {
+      heading: 'Pupil-Involving CN III Palsy',
+      body: 'Larger pupil plus ptosis, diplopia, abnormal EOM, headache, eye pain, progressive or incomplete CN III findings: image emergently for aneurysm/compressive lesion and involve neurology/neurosurgery plus ophthalmology.',
+    },
+    {
+      heading: 'Acute Painful Horner Syndrome',
+      body: 'Smaller pupil plus mild ptosis/dilation lag with acute headache, neck/face pain, trauma, or neurologic symptoms: same-day CTA/MRA head and neck for carotid dissection and brainstem/cavernous sinus causes.',
+    },
+    {
+      heading: 'Red Painful Eye',
+      body: 'Halos, vomiting, cloudy cornea, fixed or mid-dilated pupil, or high IOP: treat as acute angle closure until proven otherwise. If trauma/open globe is possible, shield the eye and avoid pressure/tonometry.',
+    },
+    {
+      heading: 'Uncertain Means Cautious',
+      body: 'If onset is unclear, exam is limited, old photos are unavailable, or drug exposure is uncertain, disposition follows the highest-risk remaining feature. Do not force a physiologic label.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'AAO EyeWiki. Anisocoria. Accessed May 25, 2026.' },
+    { num: 2, text: 'AAO EyeWiki. Acquired Oculomotor Nerve Palsy. Accessed May 25, 2026.' },
+    { num: 3, text: 'AAO EyeWiki. Horner Syndrome. Accessed May 25, 2026.' },
+    { num: 4, text: 'Neuro-Ophthalmological Emergencies. PMC review. 2015.' },
+  ],
+  shareable: true,
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   // Headache hub (added 2026-05-22 — Phase 2)
   'spg-block-procedure': SPG_BLOCK_PAGE,
@@ -24512,6 +24634,10 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'aph-stop': APH_STOP_PAGE,
   'aa-steps': AA_STEPS_PAGE,
   'aa-stop': AA_STOP_PAGE,
+  'anisocoria-steps': ANISOCORIA_STEPS_PAGE,
+  'anisocoria-light-dark': ANISOCORIA_LIGHT_DARK_PAGE,
+  'anisocoria-pharm': ANISOCORIA_PHARM_PAGE,
+  'anisocoria-stop': ANISOCORIA_STOP_PAGE,
   'gib-steps': GIB_STEPS_PAGE,
   'gib-stop': GIB_STOP_PAGE,
   'cp-steps': CP_STEPS_PAGE,

@@ -110,6 +110,7 @@ export const TREE_REGISTRY = {
   'snake-envenomation': { prefix: 'SNAKE_ENVENOMATION', entryNodeId: 'snake-start',       categoryId: 'toxicology' },
   'heat-stroke':      { prefix: 'HEAT_STROKE',         entryNodeId: 'heat-start',         categoryId: 'critical-care' },
   'aacg':             { prefix: 'AACG',                entryNodeId: 'aacg-start',         categoryId: 'ophthalmology' },
+  'anisocoria':       { prefix: 'ANISOCORIA',          entryNodeId: 'anisocoria-start',   categoryId: 'ophthalmology' },
   'chemical-burn':    { prefix: 'CHEMICAL_BURN',       entryNodeId: 'cb-start',           categoryId: 'ophthalmology' },
   'orbital-cellulitis': { prefix: 'ORBITAL_CELLULITIS', entryNodeId: 'oc-start',          categoryId: 'ophthalmology' },
   'crao':             { prefix: 'CRAO',                entryNodeId: 'crao-start',         categoryId: 'ophthalmology' },

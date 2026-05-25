@@ -41,6 +41,7 @@ export interface ToolbarConfig {
  */
 export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'burns',
+  'anisocoria',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -814,6 +815,17 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'aacg-iop', label: 'IOP', icon: '👁️', action: 'calculator', target: 'aacg-iop' },
     { id: 'aacg-tx', label: 'Tx Cascade', icon: '💊', action: 'calculator', target: 'aacg-treatment' },
     { id: 'aacg-meds', label: 'Drug Causes', icon: '💉', action: 'calculator', target: 'aacg-meds' },
+  ],
+  'anisocoria': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'anisocoria-steps', pinned: true },
+    { id: 'light-dark', label: 'Light/Dark', icon: '💡', action: 'overlay', target: 'anisocoria-light-dark', pinned: true },
+    { id: 'cn3', label: 'CN III', icon: '🧠', action: 'jump', target: 'anisocoria-cn3-emergency', pinned: true },
+    { id: 'horner', label: 'Horner', icon: '🧭', action: 'jump', target: 'anisocoria-horner-emergency', pinned: true },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'anisocoria-stop', pinned: true },
+    { id: 'pharm', label: 'Pharm', icon: '💊', action: 'overlay', target: 'anisocoria-pharm' },
+    { id: 'big-pupil', label: 'Big Pupil', icon: '🔦', action: 'jump', target: 'anisocoria-bright' },
+    { id: 'small-pupil', label: 'Small Pupil', icon: '🌙', action: 'jump', target: 'anisocoria-dark' },
+    { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'anisocoria-disposition' },
   ],
   'chemical-burn': [
     { id: 'chemburn-ph', label: 'pH Monitor', icon: '🧪', action: 'calculator', target: 'chemburn-ph' },

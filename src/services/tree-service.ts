@@ -773,6 +773,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/aacg.js');
       return { nodes: m.AACG_NODES, entryNodeId: 'aacg-start', categoryId: 'ophthalmology', moduleLabels: m.AACG_MODULE_LABELS, citations: m.AACG_CITATIONS, criticalActions: m.AACG_CRITICAL_ACTIONS };
     },
+    'anisocoria': async () => {
+      const m = await import('../data/trees/anisocoria.js');
+      return { nodes: m.ANISOCORIA_NODES, entryNodeId: 'anisocoria-start', categoryId: 'ophthalmology', moduleLabels: m.ANISOCORIA_MODULE_LABELS, citations: m.ANISOCORIA_CITATIONS, criticalActions: m.ANISOCORIA_CRITICAL_ACTIONS };
+    },
     'chemical-burn': async () => {
       const m = await import('../data/trees/chemical-burn.js');
       return { nodes: m.CHEMICAL_BURN_NODES, entryNodeId: 'chemburn-start', categoryId: 'ophthalmology', moduleLabels: m.CHEMICAL_BURN_MODULE_LABELS, citations: m.CHEMICAL_BURN_CITATIONS, criticalActions: m.CHEMICAL_BURN_CRITICAL_ACTIONS };

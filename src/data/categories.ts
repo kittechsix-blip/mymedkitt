@@ -2120,6 +2120,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'aacg-start',
       },
       {
+        id: 'anisocoria',
+        title: 'Anisocoria',
+        subtitle: 'Sick Pupil → Light vs Dark → Large Pupil → Small Pupil → Disposition',
+        categoryId: 'ophthalmology',
+        version: '1.0',
+        nodeCount: 18,
+        entryNodeId: 'anisocoria-start',
+      },
+      {
         id: 'chemical-burn',
         title: 'Chemical Eye Burn',
         subtitle: 'Recognition → Irrigation Protocol → Classification → Treatment Cascade → Disposition',
