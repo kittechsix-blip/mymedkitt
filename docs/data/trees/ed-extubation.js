@@ -334,7 +334,7 @@ export const ED_EXTUBATION_MODULE_LABELS = [
 ];
 export const ED_EXTUBATION_CITATIONS = [
     { num: 1, text: 'American Association for Respiratory Care. AARC Clinical Practice Guideline: Removal of the Endotracheal Tube. Respir Care. 2007;52(1):81-93.' },
-    { num: 2, text: 'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials for Liberation From Adult Mechanical Ventilation. Respir Care. 2024;69(11):1441-1457.' },
+    { num: 2, text: 'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials for Liberation From Adult Mechanical Ventilation. Respir Care. 2024;69(7):891-901.' },
     { num: 3, text: 'Schmidt GA, et al. Official Executive Summary of an ATS/ACCP Clinical Practice Guideline: Liberation From Mechanical Ventilation in Critically Ill Adults. Am J Respir Crit Care Med. 2017;195(1):115-119.' },
     { num: 4, text: 'Girard TD, et al. An Official ATS/ACCP Clinical Practice Guideline: Liberation From Mechanical Ventilation in Critically Ill Adults. Cuff Leak Tests and Corticosteroids. Am J Respir Crit Care Med. 2017;195(1):120-133.' },
     { num: 5, text: 'Rochwerg B, et al. Official ERS/ATS Clinical Practice Guidelines: Noninvasive Ventilation for Acute Respiratory Failure. Eur Respir J. 2017;50(2):1602426.' },

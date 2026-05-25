@@ -10391,7 +10391,7 @@ const EXTUB_STEPS = {
     ],
     citations: [
         { num: 1, text: 'American Association for Respiratory Care. AARC Clinical Practice Guideline: Removal of the Endotracheal Tube. Respir Care. 2007;52(1):81-93.' },
-        { num: 2, text: 'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials. Respir Care. 2024;69(11):1441-1457.' },
+        { num: 2, text: 'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials. Respir Care. 2024;69(7):891-901.' },
     ],
 };
 const EXTUB_READINESS = {
@@ -10417,7 +10417,7 @@ const EXTUB_READINESS = {
         },
     ],
     citations: [
-        { num: 1, text: 'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials. Respir Care. 2024;69(11):1441-1457.' },
+        { num: 1, text: 'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials. Respir Care. 2024;69(7):891-901.' },
         { num: 2, text: 'Schmidt GA, et al. ATS/ACCP Liberation From Mechanical Ventilation Executive Summary. Am J Respir Crit Care Med. 2017;195(1):115-119.' },
     ],
 };

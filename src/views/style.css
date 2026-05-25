@@ -3692,6 +3692,61 @@ body.critical-actions-open {
   display: none;
 }
 
+.extubation-fast-score-display {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: start;
+  gap: 12px;
+  width: min(calc(100% - 24px), 720px);
+  border: 1px solid rgba(184, 115, 51, 0.26);
+  border-left: 6px solid var(--color-umber);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(255, 247, 237, 0.76));
+  color: #073c3a;
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(91, 56, 23, 0.12);
+  margin: 10px auto 12px;
+  padding: 12px 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.extubation-fast-score-display .calculator-score-number {
+  font-size: 30px;
+  line-height: 0.95;
+  font-weight: 900;
+  color: #073c3a;
+  text-align: center;
+}
+
+.extubation-fast-score-display .calculator-result-label {
+  color: #0f5b55;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.extubation-fast-score-display .calculator-result-risk {
+  display: block;
+  margin-top: 8px;
+  color: #193f3b;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 700;
+  text-align: left;
+}
+
+.extubation-fast-score-display .calculator-result-risk strong {
+  color: #073c3a;
+  font-weight: 900;
+}
+
+.extubation-fast-score-display .calculator-copy-btn {
+  display: none;
+}
+
 .nihss-fast-sheet {
   padding: 0 0 4px;
   background:
@@ -3801,11 +3856,58 @@ body.critical-actions-open {
   outline-offset: 2px;
 }
 
+.extubation-fast-choice-row {
+  grid-auto-columns: minmax(120px, 1fr);
+}
+
+.extubation-fast-choice {
+  min-width: 0;
+  height: 52px;
+  font-size: 17px;
+  letter-spacing: 0;
+  white-space: normal;
+}
+
+.extubation-fast-choice[data-status="clear"].active {
+  background: linear-gradient(180deg, #27b56f, #168a51);
+  border-color: #168a51;
+  color: #ffffff;
+  box-shadow:
+    0 10px 20px rgba(22, 138, 81, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.extubation-fast-choice[data-status="caution"].active {
+  background: linear-gradient(180deg, #f59e0b, #c66a00);
+  border-color: #c66a00;
+  color: #ffffff;
+  box-shadow:
+    0 10px 20px rgba(198, 106, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.extubation-fast-choice[data-status="stop"].active {
+  background: linear-gradient(180deg, #ef4444, #b91c1c);
+  border-color: #b91c1c;
+  color: #ffffff;
+  box-shadow:
+    0 10px 20px rgba(185, 28, 28, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
 .nihss-fast-option-list {
   color: #193f3b;
   font-size: 18px;
   line-height: 1.28;
   font-weight: 800;
+}
+
+.extubation-fast-detail-list {
+  display: grid;
+  gap: 6px;
+  font-size: 16px;
+  line-height: 1.32;
+  font-weight: 760;
 }
 
 .calculator-container--nihss .calculator-threshold {

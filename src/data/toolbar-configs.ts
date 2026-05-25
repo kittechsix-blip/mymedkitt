@@ -83,7 +83,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'trouble', label: 'Trouble', icon: '🔧', action: 'overlay', target: 'sga-troubleshoot' },
   ],
   'ed-extubation': [
-    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'extub-steps' },
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'calculator', target: 'extubation-readiness-checklist' },
     { id: 'ready', label: 'Ready?', icon: '✅', action: 'overlay', target: 'extub-readiness' },
     { id: 'cuff', label: 'Cuff Leak', icon: '🫁', action: 'overlay', target: 'extub-cuff-leak' },
     { id: 'support', label: 'Support', icon: '⚙️', action: 'overlay', target: 'extub-post-support' },

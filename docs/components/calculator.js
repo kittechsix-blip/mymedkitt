@@ -15260,6 +15260,339 @@ const DNI_EMPIRIC_ABX_CALCULATOR = {
         };
     },
 };
+const EXTUBATION_CHECKLIST_ITEMS = [
+    {
+        name: 'indication',
+        title: '1 / INDICATION RESOLVED',
+        prompt: 'Why is this patient ready now?',
+        okLabel: 'Improved',
+        concernLabel: 'Still needs tube',
+        concernStatus: 'stop',
+        details: [
+            'Original reason for intubation has clearly improved.',
+            'No ongoing need for invasive ventilation for hypoxemia, hypercapnia, shock, procedure safety, airway protection, or incomplete workup.',
+            'Goals-of-care extubation follows the documented patient-specific plan.',
+        ],
+    },
+    {
+        name: 'team',
+        title: '2 / TEAM + MONITORING',
+        prompt: 'Can you rescue this airway immediately?',
+        okLabel: 'Ready',
+        concernLabel: 'Not ready',
+        concernStatus: 'stop',
+        details: [
+            'Continuous monitor, suction, oxygen, BVM, airway cart, and reintubation drugs are at bedside.',
+            'Airway-skilled clinician and RT/nursing support are present or immediately available.',
+            'Extubation is elective unless this is a goals-of-care plan.',
+        ],
+    },
+    {
+        name: 'reintubation',
+        title: '3 / REINTUBATION RISK',
+        prompt: 'Will the airway be hard to regain?',
+        okLabel: 'Regainable',
+        concernLabel: 'Hard airway',
+        concernStatus: 'caution',
+        details: [
+            'Caution if prior difficult airway, airway edema, angioedema, burns, facial/neck trauma, deep neck infection, trismus, distorted anatomy, or obesity/OSA.',
+            'If predicted difficult reintubation and backup is weak, delay or extubate with anesthesia/airway expert at bedside.',
+        ],
+    },
+    {
+        name: 'oxygenation',
+        title: '4 / OXYGENATION',
+        prompt: 'Is oxygenation stable on reasonable support?',
+        okLabel: 'Acceptable',
+        concernLabel: 'Too high',
+        concernStatus: 'stop',
+        details: [
+            'Typical target: SpO2 at goal on FiO2 <=0.40-0.50 and PEEP <=5-8 cm H2O.',
+            'No severe hypoxemia, escalating oxygen need, or high ventilator requirement.',
+            'Match target saturation to phenotype, such as COPD baseline.',
+        ],
+    },
+    {
+        name: 'ventilation',
+        title: '5 / VENTILATION + PH',
+        prompt: 'Can the patient ventilate without the tube?',
+        okLabel: 'Acceptable',
+        concernLabel: 'Unstable',
+        concernStatus: 'stop',
+        details: [
+            'Respiratory rate, tidal volume/minute ventilation, ETCO2/ABG when needed, and pH are acceptable.',
+            'CO2 should be near the patient baseline, especially in COPD or obesity hypoventilation.',
+            'Persistent severe acidosis or rising CO2 is a failed screen.',
+        ],
+    },
+    {
+        name: 'hemodynamics',
+        title: '6 / HEMODYNAMICS',
+        prompt: 'Is shock physiology controlled?',
+        okLabel: 'Stable',
+        concernLabel: 'Shock',
+        concernStatus: 'stop',
+        details: [
+            'No escalating vasopressors, unstable arrhythmia, active ischemia, or uncontrolled bleeding.',
+            'Treat pulmonary edema, bronchospasm, pain, fever, and metabolic demand before extubation.',
+        ],
+    },
+    {
+        name: 'sedation',
+        title: '7 / SEDATION + PARALYSIS',
+        prompt: 'Are sedatives and paralytics clear enough?',
+        okLabel: 'Awake enough',
+        concernLabel: 'Too sedated',
+        concernStatus: 'stop',
+        details: [
+            'Patient is awake enough for airway reflexes or follows simple commands when clinically appropriate.',
+            'No residual paralysis. Confirm train-of-four or reversal when neuromuscular blocker exposure is relevant.',
+            'Avoid extubating through deep sedation unless this is a deliberate expert airway plan.',
+        ],
+    },
+    {
+        name: 'airway-protection',
+        title: '8 / AIRWAY PROTECTION',
+        prompt: 'Can they protect the airway?',
+        okLabel: 'Protects',
+        concernLabel: 'Fails',
+        concernStatus: 'stop',
+        details: [
+            'Adequate cough, gag/swallow when relevant, and ability to handle secretions.',
+            'No active vomiting, uncontrolled airway bleeding, or high aspiration risk.',
+            'A passed SBT does not override poor airway protection.',
+        ],
+    },
+    {
+        name: 'secretions',
+        title: '9 / SECRETIONS',
+        prompt: 'Is the secretion burden manageable?',
+        okLabel: 'Manageable',
+        concernLabel: 'Heavy',
+        concernStatus: 'stop',
+        details: [
+            'Secretions are thin enough and infrequent enough to manage with bedside suctioning.',
+            'Weak cough plus frequent suctioning is a failed extubation screen even with good ventilator numbers.',
+        ],
+    },
+    {
+        name: 'sbt',
+        title: '10 / SBT',
+        prompt: 'Did they pass a structured spontaneous breathing trial?',
+        okLabel: 'Passed',
+        concernLabel: 'Failed',
+        concernStatus: 'stop',
+        details: [
+            'Use T-piece, CPAP, or low pressure support for about 30 minutes when feasible.',
+            'Pass = comfortable work of breathing, stable vitals, acceptable oxygenation/ventilation, and patient comfort.',
+            'Fail for distress, diaphoresis, tachypnea, hypoxemia, rising CO2, arrhythmia, hypotension, or worsening mental status.',
+        ],
+    },
+    {
+        name: 'stridor',
+        title: '11 / STRIDOR RISK',
+        prompt: 'Is upper-airway obstruction risk handled?',
+        okLabel: 'Low/managed',
+        concernLabel: 'High risk',
+        concernStatus: 'caution',
+        details: [
+            'Cuff leak testing is most useful when stridor risk is high.',
+            'High risk: traumatic/multiple attempts, airway edema, prolonged intubation, large ETT, prior stridor, or concerning airway exam.',
+            'If cuff leak fails and extubation is not urgent, delay and give systemic corticosteroids before extubation.',
+        ],
+    },
+    {
+        name: 'support',
+        title: '12 / SUPPORT DEVICE',
+        prompt: 'What receives the patient after tube removal?',
+        okLabel: 'Set up',
+        concernLabel: 'Not set',
+        concernStatus: 'stop',
+        details: [
+            'Choose NIV, HFNC, or standard oxygen before tube removal.',
+            'NIV favored for COPD, hypercapnia, obesity hypoventilation, OSA with hypercapnia, or CHF/pulmonary edema.',
+            'HFNC favored for high-risk hypoxemic patients who do not clearly need NIV.',
+        ],
+    },
+    {
+        name: 'procedure',
+        title: '13 / TUBE REMOVAL PREP',
+        prompt: 'Is the actual removal sequence ready?',
+        okLabel: 'Ready',
+        concernLabel: 'Missing',
+        concernStatus: 'stop',
+        details: [
+            'Position upright, preoxygenate on planned support, suction mouth and ETT, confirm cuff syringe.',
+            'Deflate cuff completely and remove smoothly during inspiration or with gentle positive pressure per local practice.',
+            'Apply planned oxygen/NIV/HFNC immediately.',
+        ],
+    },
+    {
+        name: 'rescue',
+        title: '14 / FIRST 30 MIN RESCUE',
+        prompt: 'Do you know when to abort?',
+        okLabel: 'Plan set',
+        concernLabel: 'No plan',
+        concernStatus: 'stop',
+        details: [
+            'Continuous reassessment for stridor, fatigue, secretion failure, hypoxemia, hypercapnia, aspiration, or worsening mental status.',
+            'Use racemic epinephrine/steroids as temporizing therapy for stridor, but do not delay reintubation if severe or worsening.',
+            'Established severe post-extubation failure should trigger early reintubation.',
+        ],
+    },
+];
+function computeExtubationChecklistResult(values) {
+    const assessed = EXTUBATION_CHECKLIST_ITEMS.filter(item => Object.prototype.hasOwnProperty.call(values, item.name));
+    const missing = EXTUBATION_CHECKLIST_ITEMS.length - assessed.length;
+    const hardStops = EXTUBATION_CHECKLIST_ITEMS.filter(item => item.concernStatus === 'stop' && values[item.name] === 2);
+    const cautions = EXTUBATION_CHECKLIST_ITEMS.filter(item => item.concernStatus === 'caution' && values[item.name] === 1);
+    const shortTitle = (item) => item.title.split('/').slice(1).join('/').trim();
+    if (hardStops.length > 0) {
+        return {
+            value: 'HOLD',
+            label: 'Do not extubate yet',
+            description: `Completed: ${assessed.length}/${EXTUBATION_CHECKLIST_ITEMS.length}\n\nHard stops checked:\n${hardStops.map(item => `• ${shortTitle(item)}`).join('\n')}\n\nKeep the tube, correct reversible problems, or extubate only with a stronger airway/rescue plan.`,
+            colorVar: '--color-danger',
+        };
+    }
+    if (missing > 0) {
+        return {
+            value: 'CHECK',
+            label: 'Finish the checklist',
+            description: `Completed: ${assessed.length}/${EXTUBATION_CHECKLIST_ITEMS.length}\n\nNo hard stop selected yet, but ${missing} item${missing === 1 ? '' : 's'} remain unassessed. Finish the screen before removing the tube.`,
+            colorVar: '--color-warning',
+        };
+    }
+    if (cautions.length > 0) {
+        return {
+            value: 'CAUT',
+            label: 'High-risk extubation',
+            description: `Caution items:\n${cautions.map(item => `• ${shortTitle(item)}`).join('\n')}\n\nProceed only if the backup plan is strong, support device is set, and the airway team agrees.`,
+            colorVar: '--color-warning',
+        };
+    }
+    return {
+        value: 'GO',
+        label: 'Ready by checklist',
+        description: 'All readiness items are clear. Extubate in a monitored setting with planned support applied immediately and reintubation equipment ready.',
+        colorVar: '--color-primary',
+    };
+}
+function renderExtubationFastChecklist(container, onUpdate) {
+    container.classList.add('nihss-fast-sheet', 'extubation-fast-sheet');
+    const values = {};
+    const activeButtons = new Map();
+    const resetRow = document.createElement('div');
+    resetRow.className = 'nihss-fast-actions';
+    const resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.className = 'nihss-fast-reset';
+    resetBtn.textContent = 'Reset';
+    resetRow.appendChild(resetBtn);
+    const completion = document.createElement('span');
+    completion.className = 'nihss-fast-completion';
+    resetRow.appendChild(completion);
+    container.appendChild(resetRow);
+    const updateCompletion = () => {
+        completion.textContent = `${Object.keys(values).length}/${EXTUBATION_CHECKLIST_ITEMS.length} checked`;
+    };
+    const setItemValue = (item, value) => {
+        values[item.name] = value;
+        const buttons = activeButtons.get(item.name) || [];
+        for (const btn of buttons) {
+            const isActive = Number(btn.dataset.value) === value;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-pressed', String(isActive));
+        }
+        updateCompletion();
+        onUpdate({ ...values });
+    };
+    for (const itemData of EXTUBATION_CHECKLIST_ITEMS) {
+        const item = document.createElement('section');
+        item.className = 'nihss-fast-item extubation-fast-item';
+        const title = document.createElement('h2');
+        title.className = 'nihss-fast-title';
+        title.textContent = itemData.title;
+        item.appendChild(title);
+        const prompt = document.createElement('div');
+        prompt.className = 'nihss-fast-prompt';
+        prompt.textContent = itemData.prompt;
+        item.appendChild(prompt);
+        const buttonRow = document.createElement('div');
+        buttonRow.className = 'nihss-fast-score-row extubation-fast-choice-row';
+        buttonRow.setAttribute('role', 'group');
+        buttonRow.setAttribute('aria-label', itemData.title);
+        const choices = [
+            { label: itemData.okLabel, value: 0, status: 'clear' },
+            { label: itemData.concernLabel, value: itemData.concernStatus === 'stop' ? 2 : 1, status: itemData.concernStatus },
+        ];
+        const buttons = [];
+        for (const choice of choices) {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'nihss-fast-score-btn extubation-fast-choice';
+            btn.textContent = choice.label;
+            btn.dataset.value = String(choice.value);
+            btn.dataset.status = choice.status;
+            btn.setAttribute('aria-label', `${itemData.title}: ${choice.label}`);
+            btn.setAttribute('aria-pressed', 'false');
+            btn.addEventListener('click', () => setItemValue(itemData, choice.value));
+            buttons.push(btn);
+            buttonRow.appendChild(btn);
+        }
+        activeButtons.set(itemData.name, buttons);
+        item.appendChild(buttonRow);
+        const detailList = document.createElement('div');
+        detailList.className = 'nihss-fast-option-list extubation-fast-detail-list';
+        for (const detail of itemData.details) {
+            const line = document.createElement('div');
+            line.textContent = `• ${detail}`;
+            detailList.appendChild(line);
+        }
+        item.appendChild(detailList);
+        container.appendChild(item);
+    }
+    resetBtn.addEventListener('click', () => {
+        for (const item of EXTUBATION_CHECKLIST_ITEMS) {
+            delete values[item.name];
+            const buttons = activeButtons.get(item.name) || [];
+            for (const btn of buttons) {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
+            }
+        }
+        updateCompletion();
+        onUpdate({ ...values });
+    });
+    updateCompletion();
+    onUpdate({ ...values });
+}
+const EXTUBATION_READINESS_CHECKLIST_CALCULATOR = {
+    id: 'extubation-readiness-checklist',
+    title: 'Extubation Checklist',
+    subtitle: 'Readiness, SBT, airway protection, support, and rescue',
+    description: 'Fast ED extubation readiness checklist using a large-button scroll sheet. Clear every hard stop before tube removal.',
+    fields: EXTUBATION_CHECKLIST_ITEMS.map(item => ({
+        name: item.name,
+        label: item.title,
+        type: 'select',
+        points: 0,
+        selectOptions: [
+            { label: item.okLabel, points: 0 },
+            { label: item.concernLabel, points: item.concernStatus === 'stop' ? 2 : 1 },
+        ],
+    })),
+    results: [],
+    thresholdNote: 'Hard stop = keep tube or strengthen the rescue plan. Caution = proceed only with airway-skilled backup and planned NIV/HFNC/oxygen ready.',
+    citations: [
+        'American Association for Respiratory Care. AARC Clinical Practice Guideline: Removal of the Endotracheal Tube. Respir Care. 2007;52(1):81-93.',
+        'Ouellette DR, et al. AARC Clinical Practice Guideline: Spontaneous Breathing Trials for Liberation From Adult Mechanical Ventilation. Respir Care. 2024;69(7):891-901.',
+        'Girard TD, et al. ATS/ACCP Guideline: Cuff Leak Tests and Corticosteroids. Am J Respir Crit Care Med. 2017;195(1):120-133.',
+        'Rochwerg B, et al. Official ERS/ATS Clinical Practice Guidelines: Noninvasive Ventilation for Acute Respiratory Failure. Eur Respir J. 2017;50(2):1602426.',
+    ],
+    computeResult: computeExtubationChecklistResult,
+    customRender: renderExtubationFastChecklist,
+};
 // -------------------------------------------------------------------
 // HFNC Tools (adding to existing ROX)
 // -------------------------------------------------------------------
@@ -37749,6 +38082,7 @@ const CALCULATORS = {
     // Rhabdomyolysis
     'mcmahon-rhabdo': MCMAHON_RHABDO_CALCULATOR,
     // HFNC & Oxygen Delivery
+    'extubation-readiness-checklist': EXTUBATION_READINESS_CHECKLIST_CALCULATOR,
     'rox-index': ROX_INDEX_CALCULATOR,
     'hfnc-settings': HFNC_SETTINGS_CALCULATOR,
     'hfnc-escalation': HFNC_ESCALATION_CALCULATOR,
@@ -38439,7 +38773,7 @@ export function renderCalculator(container, calculatorId) {
     // Track calculator open for KittMD analytics
     trackCalcOpen(calculatorId);
     container.innerHTML = '';
-    const isFastStrokeCalculator = calculatorId === 'nihss' || calculatorId === 'stroke-syndrome-calculator';
+    const isFastStrokeCalculator = calculatorId === 'nihss' || calculatorId === 'stroke-syndrome-calculator' || calculatorId === 'extubation-readiness-checklist';
     container.classList.toggle('calculator-container--nihss', isFastStrokeCalculator);
     // Add custom scroll indicator for TBSA calculators (iOS hides native scrollbar)
     if (calculatorId.startsWith('tbsa')) {
@@ -38483,6 +38817,9 @@ export function renderCalculator(container, calculatorId) {
     }
     else if (calculatorId === 'stroke-syndrome-calculator') {
         scoreDisplay.classList.add('syndrome-fast-score-display');
+    }
+    else if (calculatorId === 'extubation-readiness-checklist') {
+        scoreDisplay.classList.add('extubation-fast-score-display');
     }
     scoreDisplay.id = 'calc-score-display';
     if (!calc.customRender || calc.computeResult) {
