@@ -14,6 +14,7 @@ export const NEONATAL_RESUS_CRITICAL_ACTIONS = [
   { text: 'Monitor SpO2 on RIGHT hand/wrist (preductal) - target 60-65% at 1 min', nodeId: 'nrp-spo2-targets' },
   { text: 'Use T-piece resuscitator (preferred) - PIP 20-25 cm, rate 40-60/min', nodeId: 'nrp-ppv' },
   { text: 'Apply MR SOPA corrective steps if PPV ineffective', nodeId: 'nrp-corrective' },
+  { text: 'DCC for vigorous term/late preterm: AT LEAST 60 seconds (2025 AHA/AAP update)', nodeId: 'nrp-initial-steps' },
   { text: 'CPR if HR <60 despite effective PPV - 3:1 ratio (90 compressions + 30 breaths)', nodeId: 'nrp-cpr' },
   { text: 'Epinephrine 0.01-0.03 mg/kg IV if HR <60 after 60 sec CPR', nodeId: 'nrp-epinephrine' },
   { text: 'Establish UVC early for IV access (2-4 cm depth only)', nodeId: 'nrp-uvc' },

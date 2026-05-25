@@ -22395,6 +22395,130 @@ const HH_STOP_PAGE = {
         { num: 4, text: 'Headache Classification Committee of the IHS. ICHD-3. Cephalalgia. 2018;38(1):1-211.' },
     ],
 };
+const APH_STEPS_PAGE = {
+    id: 'aph-steps',
+    title: 'Abdominal Pain Hub — Steps Summary',
+    subtitle: 'Sick check → time-critical exclusions → initial bundle → imaging → dispo',
+    sections: [
+        {
+            body: '1. **Sick check first.** Vitals trend (HR, BP, lactate, glucose), general appearance, abdominal exam (peritoneal signs, distention, pulsatile mass), pregnancy test in any female of reproductive age. If unstable or peritoneal: resus parallel to workup, early surgery call.\n2. **Time-critical exclusions** — ask the most acute hits first:\n   - **Age ≥50 + tearing/back pain + pulsatile mass / syncope / shock** → [AAA](#/tree/aortic-aneurysm). Bedside US (~99% sens for AAA); CTA if stable; no delay for labs. Permissive hypotension until OR.\n   - **Pain out of proportion to exam + lactate / AFib / vasculopath** → [Mesenteric Ischemia](#/tree/mesenteric-ischemia). CTA mesenteric NOW. Heparin, surgery + IR.\n   - **Female + reproductive-age + RLQ/LLQ + missed period / syncope / shock** → [First-Trimester Bleeding/Ectopic](#/tree/first-trimester). β-hCG + TVUS. Anti-D if Rh-neg. Ovarian torsion in differential.\n   - **RUQ + fever / jaundice / Murphy** → [Gallbladder](#/tree/gallbladder). RUQ US, Tokyo 2018 criteria, empiric antibiotics for cholangitis/cholecystitis.\n   - **Epigastric + lipase ≥3× ULN / radiation to back** → [Acute Pancreatitis](#/tree/acute-pancreatitis). BISAP, aggressive LR (250-500 mL/h titrated to UO), early enteral nutrition.\n   - **RLQ migrating pain + anorexia / Rovsing / fever** → [Adult Appendicitis](#/tree/adult-appendicitis) (or [Peds Appendicitis](#/tree/peds-appendicitis) for <18 y). AAS / Alvarado / PAS, US-first in young/lean/peds/pregnant, CT in adults with intermediate risk.\n   - **LLQ + fever + diverticular history** → diverticulitis workup. CT with contrast, Hinchey staging, oral vs IV abx by complication.\n   - **Free air on imaging / rigid abdomen** → perforation pathway. NPO, NG decompression, broad antibiotics, immediate surgery.\n   - **Epigastric pain + age ≥50 / DM / atypical cardiac risk** → screen for [STEMI](#/tree/stemi)/MI with ECG and troponin. Inferior MI hides as epigastric pain.\n3. **Initial bundle:** IV access ×2, NPO, antiemetic, analgesia (analgesia does NOT mask the exam — give it), CBC/CMP/lipase/lactate/coags/T&S, urinalysis + β-hCG for females, lactate if shock/sepsis. ECG if age ≥50 or epigastric.\n4. **Reassess at 30-60 min.** Pain trajectory, vitals, peritoneal signs. New peritoneal signs = go to surgery posture, image only if it changes management timing. Pain better → continue workup. Pain unchanged + abnormal labs → image now.\n5. **Imaging strategy:**\n   - Unstable + AAA/ectopic/dissection on differential → bedside US first.\n   - Pregnant or peds → US-first (no radiation). MRI second-line if US non-diagnostic.\n   - Adults with intermediate suspicion → CT abdomen/pelvis with IV contrast.\n   - RUQ-focused → RUQ US.\n   - Suspected mesenteric → CTA arterial + portal venous phases.\n6. **Disposition:** Peritoneal/unstable/surgical pathology → OR or admit. Diagnostic uncertainty + serial reassuring exams → observation. Benign exam + reassuring workup + tolerating PO + reliable follow-up → discharge with WRITTEN return precautions (worsening pain, fever, vomiting, syncope, GI bleeding).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Macaluso CR, McNamara RM. Evaluation and management of acute abdominal pain in the emergency department. Int J Gen Med. 2012;5:789-797.' },
+        { num: 2, text: 'Cervellin G, et al. Epidemiology and outcomes of acute abdominal pain in a large urban Emergency Department. Ann Transl Med. 2016;4(19):362.' },
+        { num: 3, text: 'Chaikof EL, et al. The Society for Vascular Surgery practice guidelines on the care of patients with an abdominal aortic aneurysm. J Vasc Surg. 2018;67(1):2-77.' },
+        { num: 4, text: 'Bala M, et al. Acute mesenteric ischemia: guidelines of the WSES. World J Emerg Surg. 2017;12:38.' },
+        { num: 5, text: 'Di Saverio S, et al. Diagnosis and treatment of acute appendicitis: 2020 update of the WSES Jerusalem guidelines. World J Emerg Surg. 2020;15:27.' },
+    ],
+};
+const APH_STOP_PAGE = {
+    id: 'aph-stop',
+    title: 'Abdominal Pain Hub — Do NOT',
+    subtitle: 'Critical pitfalls in undifferentiated abdominal pain',
+    sections: [
+        {
+            heading: '🛑 Do NOT defer the pregnancy test on any female of reproductive age',
+            body: 'Ectopic, ruptured corpus luteum, heterotopic pregnancy, and pre-eclampsia all change the workup. β-hCG is faster than the differential. Quantitative β-hCG + bedside or formal TVUS if positive. [First-Trimester consult](#/tree/first-trimester)',
+        },
+        {
+            heading: '🛑 Do NOT delay AAA imaging in the older patient with back/flank pain',
+            body: 'AAA classically presents as renal colic mimicker in age ≥50. Bedside US is ~99% sensitive for AAA presence (not for rupture, but presence + the right clinical story is enough). If unstable: OR not CT. [AAA consult](#/tree/aortic-aneurysm)',
+        },
+        {
+            heading: '🛑 Do NOT trust a soft abdomen in suspected mesenteric ischemia',
+            body: 'Pain out of proportion to exam is the classic teaching for a reason — early mesenteric ischemia has a benign abdomen with elevated lactate and risk factors (AFib, CHF, vasculopath, hypercoagulable). CTA mesenteric NOW. Delay is the lethal step. [Mesenteric Ischemia consult](#/tree/mesenteric-ischemia)',
+        },
+        {
+            heading: '🛑 Do NOT withhold analgesia waiting for the surgeon',
+            body: 'Multiple RCTs and SAEM/ACEP policy: appropriate analgesia does NOT obscure surgical exam findings. Patients with adequate pain control have BETTER exam reliability. Withholding opioids is a quality-of-care failure.',
+        },
+        {
+            heading: '🛑 Do NOT skip the ECG for epigastric pain in age ≥50',
+            body: 'Inferior MI presents as epigastric pain ~25% of the time in older adults, diabetics, and women. ECG + troponin in the bundle for any epigastric pain or atypical risk profile. [STEMI consult](#/tree/stemi)',
+        },
+        {
+            heading: '🛑 Do NOT discharge for "constipation" without ruling out obstruction or AAA',
+            body: 'No-stool + abdominal pain + age ≥50 is a triple-threat that gets discharged as constipation and bounces back ruptured. Plain film or CT, vascular exam, rectal exam, and an honest reassessment of pretest probability.',
+        },
+        {
+            heading: '🛑 Do NOT delay surgery for additional imaging in clear peritonitis',
+            body: 'Rigid abdomen + free air on upright CXR or bedside US = OR. CT confirms a diagnosis the surgeon already needs to operate on. Image only if it changes the surgical plan, not to make the call.',
+        },
+        {
+            heading: '🛑 Do NOT use the hub as a treatment playbook',
+            body: 'The hub is a triage map. Once you commit to a phenotype, leave the hub and work the deep-dive consult — that consult holds the dosing, monitoring, and disposition criteria specific to the diagnosis.',
+        },
+        {
+            heading: '🛑 Do NOT discharge without written return precautions',
+            body: 'Abdominal pain dispositions miss appendicitis, ectopic, AAA, and dissection at non-trivial rates even after a reassuring ED workup. Written return precautions covering worsening pain, fever, vomiting, syncope, GI bleeding, and inability to tolerate PO are mandatory.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Macaluso CR, McNamara RM. Int J Gen Med. 2012;5:789-797.' },
+        { num: 2, text: 'Manterola C, et al. Analgesia in patients with acute abdominal pain. Cochrane Database Syst Rev. 2011;(1):CD005660.' },
+        { num: 3, text: 'Chaikof EL, et al. SVS AAA guidelines. J Vasc Surg. 2018;67(1):2-77.' },
+        { num: 4, text: 'Bala M, et al. WSES Mesenteric Ischemia. World J Emerg Surg. 2017;12:38.' },
+    ],
+};
+const AA_STEPS_PAGE = {
+    id: 'aa-steps',
+    title: 'Adult Appendicitis — Steps Summary',
+    subtitle: 'Recognition → AAS / Alvarado → workup → imaging → antibiotics + surgical decision → dispo',
+    sections: [
+        {
+            body: '1. **Recognize the phenotype.** Migration of periumbilical pain to RLQ + anorexia + low-grade fever + RLQ tenderness with peritoneal signs. Atypical presentations: retrocecal (flank pain, psoas sign), pelvic (suprapubic, tender DRE), pregnant (RUQ as gravid uterus displaces appendix), elderly (delayed presentation, lower fever response), immunocompromised (blunted signs).\n2. **Stratify with AAS (preferred) or Alvarado.**\n   - **AAS (Sammalkorpi 2014):** integrates pain location/migration, peritoneal signs, WBC, CRP, sex/age — yields low / intermediate / high risk. Better calibrated than Alvarado in modern cohorts.\n   - **Alvarado/MANTRELS:** still widely used; ≥7 high probability, 4-6 equivocal, ≤3 low.\n   - In peds, use [Pediatric Appendicitis Score](#/tree/peds-appendicitis).\n3. **Workup:** CBC, CMP, CRP, lipase (rule out pancreatitis), urinalysis + β-hCG (mandatory for females of reproductive age), lactate if toxic. ECG if elderly/cardiac risk.\n4. **Imaging strategy:**\n   - **High-risk (AAS high / Alvarado ≥7) + classic exam** → surgical consult, imaging may be skipped per institutional pathway (controversial; most centers still image).\n   - **Intermediate risk in adults (non-pregnant)** → **CT abdomen/pelvis with IV contrast** (~95% sens/spec).\n   - **Young/lean adults, pregnancy, peds** → **US first**. If non-diagnostic in pregnancy → MRI (no gadolinium).\n   - **Pregnant** → graded compression US, then MRI without gad. CT only if MRI unavailable and clinical concern remains high.\n5. **Antibiotics:** Single empiric dose pre-op covering gram-negatives + anaerobes — piperacillin-tazobactam 4.5 g IV OR ceftriaxone 2 g IV + metronidazole 500 mg IV. Continue 24 h post-op for uncomplicated; 4-7 days if perforated/abscess.\n6. **Surgical decision:**\n   - **Uncomplicated** → laparoscopic appendectomy is standard of care.\n   - **Phlegmon / abscess (Hinchey-like)** → consider IR drainage + antibiotics + interval appendectomy (controversial — some advocate immediate).\n   - **Antibiotic-only therapy (CODA trial 2020):** 7-day course of antibiotics is non-inferior at 30 days for uncomplicated appendicitis in carefully selected adults; ~30% require appendectomy by 1 year. Shared decision-making — appendectomy remains the default.\n7. **Disposition:**\n   - OR → admit post-op.\n   - Perforated/complicated → admit surgical service, IV antibiotics, IR consult if abscess.\n   - Observation (intermediate risk + reassuring serial exams + access for repeat imaging) → admit obs or ED-obs.\n   - Discharge only when imaging negative, exam benign, pain controlled, tolerating PO, AAS/Alvarado low, AND reliable follow-up — WITH 24-h recheck.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Di Saverio S, et al. WSES Jerusalem guidelines for diagnosis and treatment of acute appendicitis: 2020 update. World J Emerg Surg. 2020;15:27.' },
+        { num: 2, text: 'Sammalkorpi HE, et al. A new adult appendicitis score (AAS). BMC Gastroenterol. 2014;14:114.' },
+        { num: 3, text: 'Alvarado A. A practical score for the early diagnosis of acute appendicitis. Ann Emerg Med. 1986;15(5):557-564.' },
+        { num: 4, text: 'CODA Collaborative. A randomized trial comparing antibiotics with appendectomy for appendicitis. N Engl J Med. 2020;383:1907-1919.' },
+        { num: 5, text: 'Bhangu A, et al. Acute appendicitis: modern understanding of pathogenesis, diagnosis, and management. Lancet. 2015;386(10000):1278-1287.' },
+    ],
+};
+const AA_STOP_PAGE = {
+    id: 'aa-stop',
+    title: 'Adult Appendicitis — Do NOT',
+    subtitle: 'Critical pitfalls in adult appendicitis',
+    sections: [
+        {
+            heading: '🛑 Do NOT skip β-hCG in any female of reproductive age',
+            body: 'Ectopic pregnancy presents identically to appendicitis (RLQ pain, peritoneal signs, low-grade fever). Quantitative β-hCG before imaging strategy decisions, before antibiotics, before consenting for surgery.',
+        },
+        {
+            heading: '🛑 Do NOT delay surgical consult for the imaging result',
+            body: 'High-risk AAS/Alvarado + classic exam can proceed to surgical consult in parallel with imaging. Imaging waiting time is operating-room waiting time.',
+        },
+        {
+            heading: '🛑 Do NOT default to CT in young/lean/pregnant patients',
+            body: 'US-first protocol saves radiation in pediatric and pregnant populations. Graded-compression US has ~85% sens in trained hands. If non-diagnostic, escalate (MRI in pregnancy, CT in young adults). Anchoring on CT in everyone is a quality-of-care miss.',
+        },
+        {
+            heading: '🛑 Do NOT discharge equivocal imaging + ongoing pain without observation',
+            body: 'Indeterminate CT/US ("dilated appendix, no clear inflammation") + persistent RLQ pain has a non-trivial false-negative rate. Serial exam, serial labs, admit or short-stay obs.',
+        },
+        {
+            heading: '🛑 Do NOT assume antibiotic-only therapy is safe for everyone',
+            body: 'CODA trial showed non-inferiority for uncomplicated appendicitis without appendicolith. Exclusions: perforation, abscess, appendicolith on imaging, signs of complicated appendicitis, suspected malignancy. ~30% recurrence at 1 year. Shared decision; default remains appendectomy.',
+        },
+        {
+            heading: '🛑 Do NOT under-cover anaerobes in suspected perforation',
+            body: 'Piperacillin-tazobactam OR ceftriaxone + metronidazole. Bowel flora coverage is non-negotiable for perforation/abscess. Single-agent ceftriaxone alone is inadequate.',
+        },
+        {
+            heading: '🛑 Do NOT skip the suspicion of malignancy in older patients',
+            body: 'Adults >40 with appendicitis carry elevated risk of underlying cecal/appendiceal malignancy. Mandates interval colonoscopy follow-up after recovery. Discharge plan must include the GI/surgery referral.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Di Saverio S, et al. WSES 2020 Jerusalem guidelines. World J Emerg Surg. 2020;15:27.' },
+        { num: 2, text: 'CODA Collaborative. NEJM. 2020;383:1907-1919.' },
+        { num: 3, text: 'Bhangu A, et al. Lancet. 2015;386(10000):1278-1287.' },
+        { num: 4, text: 'ACR Appropriateness Criteria: Right Lower Quadrant Pain. 2018.' },
+    ],
+};
 const CP_STEPS_PAGE = {
     id: 'cp-steps',
     title: 'Chest Pain Hub - Steps Summary',
@@ -23244,6 +23368,10 @@ export const INFO_PAGES = {
     // Headache Hub (EM + Neurology dual-list, type: 'hub') — final hub of the batch
     'hh-steps': HH_STEPS_PAGE,
     'hh-stop': HH_STOP_PAGE,
+    'aph-steps': APH_STEPS_PAGE,
+    'aph-stop': APH_STOP_PAGE,
+    'aa-steps': AA_STEPS_PAGE,
+    'aa-stop': AA_STOP_PAGE,
     'cp-steps': CP_STEPS_PAGE,
     'cp-stop': CP_STOP_PAGE,
     'dysp-steps': DYSP_STEPS_PAGE,

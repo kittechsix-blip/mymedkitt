@@ -464,7 +464,7 @@ export const SNAKE_ENVENOMATION_NODES = [
         type: 'info',
         module: 6,
         title: 'Coral Snake Antivenom',
-        body: '**North American Coral Snake Antivenin (NACSA):**\n\n**⚠️ AVAILABILITY CRISIS:**\n- Production stopped 2003\n- FDA extending expiration on existing lots\n- Current lot (CL6814) extended through June 30, 2025\n- No FDA-approved alternative in US\n\n**Dosing:**\n- 3-5 vials IV for adults/adolescents\n- **Do NOT give empirically before symptoms**\n- Give at first sign of neurotoxicity\n\n**Alternative (Investigational):**\n- Coralmyn (Mexican antivenom)\n- Available through Poison Control/FDA\n- 1-800-222-1222\n\n**If Antivenom Unavailable:**\n- Supportive care\n- Early intubation for respiratory failure\n- May require prolonged mechanical ventilation (weeks)\n- Recovery possible with support [6]',
+        body: '**North American Coral Snake Antivenin (NACSA):**\n\n**⚠️ AVAILABILITY CRISIS:**\n- Production stopped 2003\n- FDA extending expiration on existing lots\n- Current lot (CL6814) extended through June 30, 2026 (FDA stability data)\n- No FDA-approved alternative in US\n\n**Dosing:**\n- 3-5 vials IV for adults/adolescents\n- **Do NOT give empirically before symptoms**\n- Give at first sign of neurotoxicity\n\n**Alternative (Investigational):**\n- Coralmyn (Mexican antivenom)\n- Available through Poison Control/FDA\n- 1-800-222-1222\n\n**If Antivenom Unavailable:**\n- Supportive care\n- Early intubation for respiratory failure\n- May require prolonged mechanical ventilation (weeks)\n- Recovery possible with support [6]',
         citation: [6],
         treatment: {
             firstLine: {

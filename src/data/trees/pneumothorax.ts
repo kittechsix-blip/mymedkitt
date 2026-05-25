@@ -7,12 +7,13 @@ import type { DecisionNode } from '../../models/types.js';
 
 export const PNEUMOTHORAX_CRITICAL_ACTIONS = [
   { text: 'Needle decompression at 2nd ICS MCL if tension PTX (hypotension + JVD + tracheal deviation)', nodeId: 'needle-decompression' },
-  { text: 'Chest tube (28-32Fr) for PTX ≥3cm at apex or any symptomatic PTX', nodeId: 'large-ptx' },
+  { text: 'Asymptomatic / minimally symptomatic PSP: conservative management is first-line REGARDLESS of size (ERS/EACTS/ESTS 2024, BTS 2023)', nodeId: 'small-ptx' },
+  { text: 'Symptomatic PSP requiring intervention: needle aspiration PREFERRED over chest tube (ERS 2024 strong recommendation)', nodeId: 'large-ptx' },
+  { text: 'If chest drain used for PSP: small-bore pigtail (<14 Fr); large-bore (>28 Fr) only for SSP with hemothorax/air leak', nodeId: 'large-ptx' },
   { text: 'Lung point on POCUS is pathognomonic for PTX (100% specificity)', nodeId: 'confirmed-ptx' },
   { text: 'Normal lung sliding, B-lines, or seashore sign excludes PTX (NPV >99%)', nodeId: 'normal-findings' },
   { text: 'Do NOT delay needle decompression for imaging if tension suspected', nodeId: 'needle-decompression' },
   { text: 'Occult PTX on POCUS requires chest tube if positive pressure ventilation planned', nodeId: 'trauma-efast' },
-  { text: 'Small PTX (<3cm): high-flow O2 increases reabsorption rate from 2%/day to 4%/day', nodeId: 'small-ptx' },
 ];
 
 export const PNEUMOTHORAX_NODES: DecisionNode[] = [
@@ -195,41 +196,41 @@ export const PNEUMOTHORAX_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Stable Patient — Size Assessment',
-    body: 'Obtain **CXR or CT** to assess pneumothorax size.\n\nPOCUS lung point location provides initial size estimate.',
-    citation: [1, 5],
-    images: [{ src: 'images/pneumothorax/ptx-cxr-annotated.png', alt: 'Annotated chest X-ray showing pneumothorax', caption: 'CXR: visceral pleural line (white arrow) with absent lung markings lateral to it. Size measured at apex (BTS method). ≥3cm at apex or symptomatic → chest tube. <3cm + stable → observation with O2.' }],
+    body: 'Obtain **CXR or CT** to assess pneumothorax size, but **2024 ERS/EACTS/ESTS + BTS 2023 emphasize symptom-based, not size-based, decisions.** [6]\n\nPOCUS lung point location provides initial size estimate.\n\n**Updated paradigm (2024):**\n• Asymptomatic / minimally symptomatic PSP → conservative management regardless of size (Brown et al NEJM 2020 conservative-non-inferior trial)\n• Symptomatic → needle aspiration preferred over chest tube as first invasive step',
+    citation: [1, 5, 6],
+    images: [{ src: 'images/pneumothorax/ptx-cxr-annotated.png', alt: 'Annotated chest X-ray showing pneumothorax', caption: 'CXR: visceral pleural line (white arrow) with absent lung markings lateral to it. Size historically measured at apex (BTS); 2024 guidelines now prioritize symptoms over absolute size.' }],
     options: [
       {
-        label: 'Small PTX (<3cm at apex)',
-        description: 'Observation with supplemental O2',
+        label: 'Asymptomatic / minimally symptomatic',
+        description: '2024 ERS/EACTS/ESTS: conservative management first-line regardless of size',
         next: 'small-ptx',
       },
       {
-        label: 'Large PTX (≥3cm or symptomatic)',
-        description: 'Chest tube or aspiration',
+        label: 'Symptomatic PSP (pain, dyspnea)',
+        description: 'Needle aspiration preferred over chest tube per 2024 ERS',
         next: 'large-ptx',
       },
     ],
-    summary: 'Obtain CXR/CT for size — BTS method measures at apex, guides chest tube vs observation decision',
+    summary: '2024 ERS/EACTS/ESTS + BTS 2023 — symptom-based, not size-based; conservative for asymptomatic PSP, needle aspiration before chest tube for symptomatic',
   },
 
   {
     id: 'small-ptx',
     type: 'result',
     module: 4,
-    title: 'Small Pneumothorax — Observation',
-    body: '**Observation with high-flow O2** (if not COPD):\n• Repeat imaging in **6 hours**\n• Admit for observation\n• Supplemental O2 increases reabsorption rate (~2%/day → ~4%/day)\n\n**Discharge criteria:**\n• Stable or improving on repeat imaging\n• No respiratory distress\n• Reliable follow-up available',
-    citation: [1],
-    confidence: 'consider',
+    title: 'Asymptomatic / Minimally Symptomatic PSP — Conservative Management',
+    body: '**2024 ERS/EACTS/ESTS + BTS 2023:** Conservative (watch-and-wait) management is first-line for asymptomatic or minimally symptomatic primary spontaneous pneumothorax (PSP), **regardless of size**. [6]\n\n**Evidence:** Brown et al (NEJM 2020 PSP-CMT trial): conservative care non-inferior to chest drain for 8-week radiologic resolution, with fewer adverse events and lower 1-year recurrence. Pooled meta-analysis (11,922 cases, 8 studies): RR of recurrence 0.98 (95% CI 0.75-1.28).\n\n**ED disposition options:**\n• Observation 4-6 hours, repeat CXR — if stable, discharge with close follow-up (48-72h)\n• Ambulatory management (Heimlich valve) if local infrastructure supports it\n• Supplemental O2 increases reabsorption rate (~2%/day → ~4%/day) but is not mandatory in modern conservative protocols\n\n**Discharge criteria:**\n• Stable on repeat imaging at 4-6h\n• No respiratory distress\n• Reliable follow-up within 48-72h\n• Patient understands return precautions (worsening dyspnea, chest pain)\n\n**Admission for observation** still appropriate for: secondary spontaneous PTX (SSP — underlying lung disease), uncertain follow-up, large symptomatic PSP awaiting intervention.',
+    citation: [1, 6],
+    confidence: 'recommended',
   },
 
   {
     id: 'large-ptx',
     type: 'result',
     module: 4,
-    title: 'Large Pneumothorax — Intervention',
-    body: '**Chest tube placement** indicated.\n\nSimple aspiration may be considered for **primary spontaneous pneumothorax** in select patients.\n\nSee [Chest Tube / Pneumothorax Management](#/tree/chest-tube) for:\n• Tube thoracostomy procedure\n• Insertion technique\n• Post-placement management',
-    citation: [1],
+    title: 'Symptomatic PSP — Intervention',
+    body: '**2024 ERS/EACTS/ESTS strong recommendation:** Needle aspiration is **preferred over chest tube** as the first invasive intervention for symptomatic PSP. [6]\n\n**Step 1 — Needle Aspiration:**\n• 16-18G angiocath or aspiration kit, 2nd ICS MCL\n• Aspirate up to 2.5 L; stop if resistance, cough, or 2.5 L reached\n• Reassess with CXR — if lung re-expanded: observe, then discharge with close follow-up\n• Success rate ~60-70% for PSP\n\n**Step 2 — Chest Drain (if aspiration fails or SSP):**\n• **Small-bore pigtail catheter (<14 Fr) preferred for PSP** (2010 BTS, retained in 2023)\n• Large-bore (>28 Fr) reserved for SSP with hemothorax, large air leak, or mechanical ventilation\n• Connect to underwater seal ± suction\n\n**Ambulatory device (Heimlich/Atrium Pneumostat):** Increasingly favored for select PSP patients with good support and access to follow-up.\n\nSee [Chest Tube / Pneumothorax Management](#/tree/chest-tube) for tube thoracostomy procedure.',
+    citation: [1, 6],
     confidence: 'recommended',
   },
 
@@ -260,4 +261,5 @@ export const PNEUMOTHORAX_CITATIONS: { num: number; text: string }[] = [
   { num: 3, text: 'Lichtenstein DA, Mezière GA. Bedside Lung Ultrasound in the Critically Ill (BLUE) Protocol. Chest. 2008;134(1):117-25. https://doi.org/10.1378/chest.07-2800' },
   { num: 4, text: 'Sistrom CL, Reiheld CT, Gay SB, et al. Accuracy of Transthoracic Sonography in Detection of Pneumothorax After Sonographically Guided Lung Biopsy. J Ultrasound Med. 2004;23(4):495-503. https://doi.org/10.7863/jum.2004.23.4.495' },
   { num: 5, text: 'Dietrich CF, Mathis G, Blaivas M, et al. EFSUMB Guidelines and Recommendations on the Clinical Use of Lung Ultrasound. Ultraschall Med. 2012;33(1):32-9. https://doi.org/10.1055/s-0031-1286386' },
+  { num: 6, text: 'Mummadi SR, Lehmann KJ, Murray E, et al; ERS/EACTS/ESTS Task Force. ERS/EACTS/ESTS clinical practice guidelines on adults with spontaneous pneumothorax. Eur Respir J. 2024;63(5):2300797. https://doi.org/10.1183/13993003.00797-2023' },
 ];

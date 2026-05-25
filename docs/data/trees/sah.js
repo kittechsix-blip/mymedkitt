@@ -264,7 +264,7 @@ const SAH_BP_CONTROL = {
     type: 'info',
     module: 4,
     title: 'Blood Pressure Management',
-    body: '**Target: SBP <160 mmHg** until aneurysm is secured (AHA/ASA 2012).\n\nHigher pressures may increase rebleeding risk, but aggressive lowering may compromise cerebral perfusion.\n\n**Titratable IV agents:**\n• [Labetalol](#/drug/labetalol/sah blood pressure) — 10-20 mg IV bolus over 1-2 min. Repeat or start infusion 2-8 mg/min. Max 300 mg/24h.\n• [Nicardipine](#/drug/nicardipine/sah blood pressure) — 5 mg/hr IV, titrate by 2.5 mg/hr q5-15 min. Max 15 mg/hr.\n• [Clevidipine](#/drug/clevidipine/sah blood pressure) — 1-2 mg/hr IV, double q90 sec to target. Ultra-short t½ (~1 min).\n\n**Avoid nitroprusside** — increases intracranial pressure and risk of toxicity with prolonged infusion.\n\n**Arterial line** recommended for continuous BP monitoring if extended ED stay anticipated.',
+    body: '**Target: SBP <160 mmHg** until aneurysm is secured (AHA/ASA 2023 — no precise numeric target mandated, but avoiding hypertension minimizes rebleeding).\n\nHigher pressures may increase rebleeding risk, but aggressive lowering may compromise cerebral perfusion.\n\n**Titratable IV agents:**\n• [Labetalol](#/drug/labetalol/sah blood pressure) — 10-20 mg IV bolus over 1-2 min. Repeat or start infusion 2-8 mg/min. Max 300 mg/24h.\n• [Nicardipine](#/drug/nicardipine/sah blood pressure) — 5 mg/hr IV, titrate by 2.5 mg/hr q5-15 min. Max 15 mg/hr.\n• [Clevidipine](#/drug/clevidipine/sah blood pressure) — 1-2 mg/hr IV, double q90 sec to target. Ultra-short t½ (~1 min).\n\n**Avoid nitroprusside** — increases intracranial pressure and risk of toxicity with prolonged infusion.\n\n**Arterial line** recommended for continuous BP monitoring if extended ED stay anticipated.',
     citation: [2, 3],
     treatment: {
         firstLine: {
@@ -337,10 +337,10 @@ const SAH_REBLEED_PREV = {
     type: 'info',
     module: 4,
     title: 'Rebleeding Prevention',
-    body: 'Rebleeding is **one of the most devastating complications** after aSAH, with the highest mortality of any complication.\n\n• Cumulative incidence: **8-23%** in first 72 hours\n• **50-90% of episodes occur within first 6 hours** after primary bleed\n• Clinical signs: acute/worsening headache, decreased consciousness, loss of brainstem reflexes, posturing, respiratory arrest, seizures\n\n**Risk factors for rebleeding:**\n• High-grade SAH (Hunt & Hess 4-5)\n• Larger aneurysms\n• Prolonged time to surgery\n• Sentinel/warning bleeds\n• Catheter angiography\n\n**Prevention strategies:**\n• **Early definitive repair** — primary strategy (within 72 hours)\n• **Blood pressure control** — SBP <160 mmHg\n• **Antifibrinolytics** — short courses may reduce rebleeding; discuss with neurosurgical team before initiating\n\n**Rapid diagnosis + early repair** remains the optimal approach.',
-    citation: [2, 14],
+    body: 'Rebleeding is **one of the most devastating complications** after aSAH, with the highest mortality of any complication.\n\n• Cumulative incidence: **8-23%** in first 72 hours\n• **50-90% of episodes occur within first 6 hours** after primary bleed\n• Clinical signs: acute/worsening headache, decreased consciousness, loss of brainstem reflexes, posturing, respiratory arrest, seizures\n\n**Risk factors for rebleeding:**\n• High-grade SAH (Hunt & Hess 4-5)\n• Larger aneurysms\n• Prolonged time to surgery\n• Sentinel/warning bleeds\n• Catheter angiography\n\n**Prevention strategies:**\n• **Early definitive repair** — primary strategy (within 24-72 hours per 2023 AHA/ASA)\n• **Blood pressure control** — SBP <160 mmHg\n• **Antifibrinolytics (TXA): NOT recommended** by 2023 AHA/ASA. The ULTRA trial (Post 2021, Lancet) showed ultra-early short-course TXA did not improve 6-month functional outcomes (mRS 0-3: 60% TXA vs 64% control) and the rate of excellent outcome (mRS 0-2) was *lower* in the TXA arm. Increased hydrocephalus (pooled +13%) and seizures (17% vs 10%, OR 1.95) signals — risks outweigh the modest rebleed reduction. [16]\n\n**Rapid diagnosis + early repair** remains the optimal approach.',
+    citation: [2, 14, 16],
     next: 'sah-cardiac-comp',
-    summary: 'Rebleeding 8-23% in first 72h (50-90% within 6h) — highest mortality of any SAH complication, early repair is primary prevention strategy',
+    summary: 'Rebleeding 8-23% in first 72h (50-90% within 6h) — highest mortality of any SAH complication, early repair is primary prevention. TXA NOT recommended per 2023 AHA/ASA (ULTRA trial negative).',
     safetyLevel: 'critical',
 };
 const SAH_CARDIAC_COMP = {
@@ -509,7 +509,7 @@ export const SAH_CRITICAL_ACTIONS = [
 ];
 export const SAH_CITATIONS = [
     { num: 1, text: 'Godwin SA, Cherkas DS, Panagos PD, et al. Clinical policy: critical issues in the evaluation and management of adult patients presenting to the emergency department with acute headache. Ann Emerg Med. 2019;74(4):e41-e74.' },
-    { num: 2, text: 'Connolly ES Jr, Rabinstein AA, Carhuapoma JR, et al. Guidelines for the management of aneurysmal subarachnoid hemorrhage: a guideline for healthcare professionals from the American Heart Association/American Stroke Association. Stroke. 2012;43(6):1711-1737.' },
+    { num: 2, text: 'Hoh BL, Ko NU, Amin-Hanjani S, et al. 2023 Guideline for the Management of Patients With Aneurysmal Subarachnoid Hemorrhage: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2023;54(7):e314-e370. doi:10.1161/STR.0000000000000436' },
     { num: 3, text: 'Diringer MN, Bleck TP, Claude Hemphill J 3rd, et al. Critical care management of patients following aneurysmal subarachnoid hemorrhage: recommendations from the Neurocritical Care Society\'s Multidisciplinary Consensus Conference. Neurocrit Care. 2011;15(2):211-240.' },
     { num: 4, text: 'Perry JJ, Stiell IG, Sivilotti ML, et al. Clinical decision rules to rule out subarachnoid hemorrhage for acute headache. JAMA. 2013;310(12):1248-1255.' },
     { num: 5, text: 'Perry JJ, Stiell IG, Sivilotti ML, et al. Sensitivity of computed tomography performed within six hours of onset of headache for diagnosis of subarachnoid haemorrhage: prospective cohort study. BMJ. 2011;343:d4277.' },
@@ -523,4 +523,5 @@ export const SAH_CITATIONS = [
     { num: 13, text: 'Perry JJ, Spacek A, Forbes M, et al. Is the combination of negative computed tomography result and negative lumbar puncture result sufficient to rule out subarachnoid hemorrhage? Ann Emerg Med. 2008;51(6):707-713.' },
     { num: 14, text: 'Larsen CC, Astrup J. Rebleeding after aneurysmal subarachnoid hemorrhage: a literature review. World Neurosurg. 2013;79(2):307-312.' },
     { num: 15, text: 'Perry JJ, Sivilotti MLA, Émond M, et al. Prospective Implementation of the Ottawa Subarachnoid Hemorrhage Rule and 6-Hour Computed Tomography Rule. Stroke. 2020;51(2):424-430.' },
+    { num: 16, text: 'Post R, Germans MR, Tjerkstra MA, et al. Ultra-early tranexamic acid after subarachnoid haemorrhage (ULTRA): a randomised controlled trial. Lancet. 2021;397(10269):112-118. doi:10.1016/S0140-6736(20)32518-6' },
 ];

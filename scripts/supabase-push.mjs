@@ -104,6 +104,7 @@ const CROSS_LISTINGS = {
   'pelvic-pain-female-hub': [{ categoryId: 'ob-gyn', displayTitle: null, displaySubtitle: null, entryNodeId: 'ppf-start' }],
   'vaginal-bleeding-hub': [{ categoryId: 'ob-gyn', displayTitle: null, displaySubtitle: null, entryNodeId: 'vb-start' }],
   'crying-infant-hub': [{ categoryId: 'pediatrics', displayTitle: null, displaySubtitle: null, entryNodeId: 'ci-start' }],
+  'abdominal-pain-hub': [{ categoryId: 'gastroenterology', displayTitle: null, displaySubtitle: null, entryNodeId: 'ap-start' }],
   'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],
   'pe-treatment':     [{ categoryId: 'emergency-medicine' }],
   'pep':              [{ categoryId: 'emergency-medicine' }],

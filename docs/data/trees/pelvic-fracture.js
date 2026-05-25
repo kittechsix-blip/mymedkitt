@@ -10,7 +10,7 @@ export const PELVIC_FRACTURE_CRITICAL_ACTIONS = [
     { text: 'Retrograde urethrogram BEFORE Foley if blood at meatus, high-riding prostate, or scrotal hematoma', nodeId: 'pelvic-urethral-injury' },
     { text: 'Intraperitoneal bladder rupture requires surgical repair - extraperitoneal can be managed with Foley', nodeId: 'pelvic-intraperitoneal-bladder' },
     { text: '90% of pelvic hemorrhage is venous (binder + resuscitation), 10% arterial (needs angio)', nodeId: 'pelvic-fast-negative' },
-    { text: 'REBOA Zone 3 buys time but max occlusion 60-90 min - bridge to PPP or angio', nodeId: 'pelvic-reboa' },
+    { text: 'REBOA Zone 3 buys time but target <30 min, max 60 min occlusion - bridge to PPP or angio (2025 update)', nodeId: 'pelvic-reboa' },
 ];
 export const PELVIC_FRACTURE_NODES = [
     // =====================================================================
@@ -183,7 +183,7 @@ export const PELVIC_FRACTURE_NODES = [
         type: 'question',
         module: 2,
         title: 'Refractory Hemorrhage',
-        body: '**Options for refractory pelvic hemorrhage:**\n\n**Preperitoneal Pelvic Packing (PPP):**\n• Rapidly controls venous bleeding\n• Can be performed bedside or in OR\n• Effective within 20-30 minutes\n• Packs placed in space of Retzius\n\n**Angioembolization:**\n• Targets arterial bleeding (contrast blush on CT)\n• Requires angiography suite availability\n• May take 1-2 hours to complete\n• 80-100% success for arterial hemorrhage\n\n**REBOA (Resuscitative Endovascular Balloon Occlusion of Aorta):**\n• Zone 3 placement (infrarenal)\n• Bridge to definitive hemorrhage control\n• Max occlusion time 60-90 minutes\n• Requires trained personnel\n\n**Decision based on suspected source and resources:**',
+        body: '**Options for refractory pelvic hemorrhage:**\n\n**Preperitoneal Pelvic Packing (PPP):**\n• Rapidly controls venous bleeding\n• Can be performed bedside or in OR\n• Effective within 20-30 minutes\n• Packs placed in space of Retzius\n\n**Angioembolization:**\n• Targets arterial bleeding (contrast blush on CT)\n• Requires angiography suite availability\n• May take 1-2 hours to complete\n• 80-100% success for arterial hemorrhage\n\n**REBOA (Resuscitative Endovascular Balloon Occlusion of Aorta):**\n• Zone 3 placement (infrarenal)\n• Bridge to definitive hemorrhage control\n• Target <30 min, max 60 min total occlusion (2025 AAOS update)\n• Requires trained personnel\n\n**Decision based on suspected source and resources:**',
         citation: [2, 6, 7],
         options: [
             {
@@ -251,8 +251,8 @@ export const PELVIC_FRACTURE_NODES = [
         type: 'result',
         module: 2,
         title: 'REBOA Placement',
-        body: '**Zone 3 REBOA for pelvic hemorrhage:**\n\n**Placement:**\n• Common femoral artery access (7-12 Fr sheath)\n• Advance balloon to Zone 3 (infrarenal aorta, above bifurcation)\n• Confirm position with portable X-ray\n• Inflate balloon to occlude aorta\n\n**Physiology:**\n• Increases central perfusion pressure\n• Reduces distal hemorrhage\n• Buys time for definitive control\n\n**Limitations:**\n• Max inflation time: 60-90 minutes\n• Requires trained personnel\n• Limb ischemia risk\n• Does NOT stop hemorrhage — only temporizes\n\n**Bridge to:**\n• Preperitoneal packing\n• Angioembolization\n• OR for external fixation\n\nPartial REBOA (pREBOA) allows longer inflation times with lower ischemic burden.',
-        recommendation: 'Zone 3 REBOA as bridge to definitive hemorrhage control. Max occlusion 60-90 min. Proceed urgently to PPP or angioembolization.',
+        body: '**Zone 3 REBOA for pelvic hemorrhage:**\n\n**Placement:**\n• Common femoral artery access (7-12 Fr sheath)\n• Advance balloon to Zone 3 (infrarenal aorta, above bifurcation)\n• Confirm position with portable X-ray\n• Inflate balloon to occlude aorta\n\n**Physiology:**\n• Increases central perfusion pressure\n• Reduces distal hemorrhage\n• Buys time for definitive control\n\n**Limitations:**\n• Target inflation <30 min, max 60 min total (2025 AAOS update)\n• Requires trained personnel\n• Limb ischemia risk\n• Does NOT stop hemorrhage — only temporizes\n\n**Bridge to:**\n• Preperitoneal packing\n• Angioembolization\n• OR for external fixation\n\nPartial REBOA (pREBOA) allows longer inflation times with lower ischemic burden.',
+        recommendation: 'Zone 3 REBOA as bridge to definitive hemorrhage control. Target <30 min, max 60 min total occlusion (per 2025 AAOS hemorrhage control update). Proceed urgently to PPP or angioembolization.',
         confidence: 'recommended',
         citation: [6, 7],
         treatment: {
@@ -262,7 +262,7 @@ export const PELVIC_FRACTURE_NODES = [
                 route: 'IV',
                 frequency: 'Continuous',
                 duration: 'Bridge therapy',
-                notes: 'Max occlusion 60-90 min. Consider partial REBOA for longer duration.',
+                notes: 'Target <30 min, max 60 min total occlusion (per 2025 AAOS hemorrhage control update). Consider partial REBOA for longer duration.',
             },
             monitoring: 'Bilateral lower extremity pulses. Lactate (expect rise with occlusion). Prepare definitive intervention.',
         },

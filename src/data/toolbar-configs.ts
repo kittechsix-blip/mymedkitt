@@ -421,6 +421,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hh-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hh-stop' },
   ],
+  'abdominal-pain-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aph-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'ap-exclusions' },
+    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'ap-rescue' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'ap-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'aph-stop' },
+  ],
+  'adult-appendicitis': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aa-steps' },
+    { id: 'aas', label: 'AAS', icon: '🧮', action: 'calculator', target: 'aas-score' },
+    { id: 'alvarado', label: 'Alvarado', icon: '🧮', action: 'calculator', target: 'alvarado' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'aa-imaging-strategy' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'aa-stop' },
+  ],
   'chest-pain-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'cp-steps' },
     { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'cp-exclusions' },

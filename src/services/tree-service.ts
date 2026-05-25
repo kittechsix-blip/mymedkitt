@@ -289,6 +289,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/headache-hub.js');
       return { nodes: m.HEADACHE_HUB_NODES, entryNodeId: 'hh-start', categoryId: 'emergency-medicine', moduleLabels: m.HEADACHE_HUB_MODULE_LABELS, citations: m.HEADACHE_HUB_CITATIONS, criticalActions: m.HEADACHE_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'abdominal-pain-hub': async () => {
+      const m = await import('../data/trees/abdominal-pain-hub.js');
+      return { nodes: m.ABDOMINAL_PAIN_HUB_NODES, entryNodeId: 'ap-start', categoryId: 'emergency-medicine', moduleLabels: m.ABDOMINAL_PAIN_HUB_MODULE_LABELS, citations: m.ABDOMINAL_PAIN_HUB_CITATIONS, criticalActions: m.ABDOMINAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'adult-appendicitis': async () => {
+      const m = await import('../data/trees/adult-appendicitis.js');
+      return { nodes: m.ADULT_APPENDICITIS_NODES, entryNodeId: 'aa-start', categoryId: 'gastroenterology', moduleLabels: m.ADULT_APPENDICITIS_MODULE_LABELS, citations: m.ADULT_APPENDICITIS_CITATIONS, criticalActions: m.ADULT_APPENDICITIS_CRITICAL_ACTIONS };
+    },
     'chest-pain-hub': async () => {
       const m = await import('../data/trees/chest-pain-hub.js');
       return { nodes: m.CHEST_PAIN_HUB_NODES, entryNodeId: 'cp-start', categoryId: 'emergency-medicine', moduleLabels: m.CHEST_PAIN_HUB_MODULE_LABELS, citations: m.CHEST_PAIN_HUB_CITATIONS, criticalActions: m.CHEST_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
