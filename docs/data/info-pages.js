@@ -22608,6 +22608,81 @@ const GIB_STOP_PAGE = {
         { num: 7, text: 'Saers SJF, Scheltinga MRM. Primary aortoenteric fistula. Br J Surg. 2005;92(2):143-152.' },
     ],
 };
+const TYPHOID_STEPS_PAGE = {
+    id: 'typhoid-steps',
+    title: 'Typhoid Fever — Steps Summary',
+    subtitle: 'Endemic exposure → blood culture → empiric Rx by resistance pattern → severity-directed care',
+    sections: [
+        {
+            body: '1. **Suspect typhoid in any febrile returned traveler from an endemic region** (South Asia, Sub-Saharan Africa, Latin America/Caribbean, Southeast Asia). Pakistan/Iraq carry XDR risk. Classic features: stepwise fever (1-3 weeks), relative bradycardia (Faget sign), abdominal pain, rose spots (~30%), hepatosplenomegaly, constipation early then diarrhea later. Mental status changes ("muttering delirium") in severe disease.\n2. **Blood cultures ×2-3 before antibiotics** (sensitivity 40-80%; highest in first week). Stool cultures sensitivity rises in weeks 2-3. Bone marrow culture is gold standard (90% sens) but rarely done in ED. Widal serology is unreliable — do not anchor.\n3. **Initial labs:** CBC (leukopenia or normal WBC is classic; eosinopenia common), LFTs (mild transaminitis 2-3x ULN typical), BMP, blood cultures, malaria smear (rule out co-infection in any febrile traveler), HIV, hepatitis serologies if jaundiced. POCUS RUQ if hepatomegaly + jaundice.\n4. **Stratify severity:**\n   - **Uncomplicated:** fever, GI symptoms, hemodynamically stable, no end-organ dysfunction.\n   - **Complicated/severe:** altered mental status, GI hemorrhage, intestinal perforation (peak risk weeks 3-4), shock, hepatitis with coagulopathy, myocarditis. **Mortality 10-30% untreated; <1% with appropriate antibiotics.**\n5. **Resistance pattern drives empiric therapy:**\n   - **Pakistan/Iraq travel (XDR risk):** ceftriaxone WILL FAIL. Uncomplicated → azithromycin 1 g PO ×1, then 500 mg PO daily ×6 days (7 days total). Complicated → meropenem 1 g IV q8h (peds 20 mg/kg q8h). Use the [Antibiotic Dosing](#/calculator/typhoid-antibiotic-dosing) calculator.\n   - **South Asia/Sub-Saharan Africa/Latin America (MDR, ceftriaxone-susceptible):** ceftriaxone 2 g IV daily ×10-14 days (peds 75 mg/kg IV daily, max 2 g). Azithromycin is reasonable alternative for uncomplicated outpatient management.\n   - **No endemic travel:** still consider, but expand differential (other enteric fevers, rickettsial, leptospirosis, malaria, viral hepatitis, abscess, endocarditis).\n   - **Avoid empiric fluoroquinolones** — >85% global Typhi resistance to ciprofloxacin makes them unreliable as monotherapy.\n6. **Dexamethasone for severe disease.** Hoffman 1984 NEJM RCT: dexamethasone 3 mg/kg IV load then 1 mg/kg q6h ×8 doses reduced mortality from 55.6% to 9.5% in severe typhoid with shock, stupor, or coma. **Give in parallel with antibiotics** when severity criteria met.\n7. **Surgical consult if intestinal perforation suspected** (sudden worsening abdominal pain, peritonism, free air on CXR/CT, weeks 3-4 of illness). Mortality 10-30% with perforation. Resuscitate, broad-spectrum antibiotics (add metronidazole + piperacillin-tazobactam for anaerobic/gram-negative coverage), urgent OR.\n8. **Disposition:**\n   - **Outpatient (oral azithromycin):** uncomplicated, tolerating PO, reliable follow-up <48 h, no severity features, social support.\n   - **Admit (ward):** complicated, vomiting, dehydration, social/follow-up concerns, age extremes, immunocompromise.\n   - **ICU:** shock, AMS, hemorrhage, perforation, severe sepsis.\n9. **Public health:** report to county health department (notifiable disease). Stool cultures clear at 1, 2, and 3 months — 1-5% become chronic carriers and need ciprofloxacin or cholecystectomy. Counsel on hand hygiene and food/water safety for travelers.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'CDC Yellow Book 2024: Typhoid & Paratyphoid Fever. Centers for Disease Control and Prevention.' },
+        { num: 2, text: 'Crump JA, Sjölund-Karlsson M, Gordon MA, Parry CM. Epidemiology, Clinical Presentation, Laboratory Diagnosis, Antimicrobial Resistance, and Antimicrobial Management of Invasive Salmonella Infections. Clin Microbiol Rev. 2015;28(4):901-937.' },
+        { num: 3, text: 'Klemm EJ, et al. Emergence of an Extensively Drug-Resistant Salmonella enterica Serovar Typhi Clone Harboring a Promiscuous Plasmid Encoding Resistance to Fluoroquinolones and Third-Generation Cephalosporins. mBio. 2018;9(1):e00105-18.' },
+        { num: 4, text: 'Yousafzai MT, et al. Ceftriaxone-resistant Salmonella Typhi outbreak in Hyderabad City of Sindh, Pakistan. Clin Infect Dis. 2019;68(Suppl 1):S16-S21.' },
+        { num: 5, text: 'Hoffman SL, et al. Reduction of mortality in chloramphenicol-treated severe typhoid fever by high-dose dexamethasone. N Engl J Med. 1984;310(2):82-88.' },
+        { num: 6, text: 'WHO Background document: The diagnosis, treatment and prevention of typhoid fever. World Health Organization. 2003 (updated guidance 2018).' },
+        { num: 7, text: 'Parry CM, Hien TT, Dougan G, White NJ, Farrar JJ. Typhoid Fever. N Engl J Med. 2002;347(22):1770-1782.' },
+    ],
+};
+const TYPHOID_STOP_PAGE = {
+    id: 'typhoid-stop',
+    title: 'Typhoid Fever — Do NOT',
+    subtitle: 'Critical pitfalls in suspected typhoid',
+    sections: [
+        {
+            heading: '🛑 Do NOT give ceftriaxone empirically for Pakistan/Iraq travelers',
+            body: 'XDR Typhi (Klemm 2018; Yousafzai 2019) is endemic in Pakistan since 2016 and confirmed in Iraq. It carries plasmid-mediated resistance to ampicillin, chloramphenicol, TMP-SMX, fluoroquinolones, AND third-generation cephalosporins. Ceftriaxone will fail. Default to azithromycin (uncomplicated) or meropenem (complicated). Use the [XDR Risk](#/calculator/typhoid-xdr-risk) calculator to stratify.',
+        },
+        {
+            heading: '🛑 Do NOT rely on Widal serology',
+            body: 'Widal has poor sensitivity and specificity (cross-reacts with malaria, dengue, other Salmonella; false negatives in early disease and with prior vaccination). Blood culture is the diagnostic standard. Do not start or withhold antibiotics based on Widal alone.',
+        },
+        {
+            heading: '🛑 Do NOT skip the malaria smear',
+            body: 'Any febrile returned traveler from a malaria-endemic region needs malaria thick-and-thin smears (or RDT) regardless of typhoid suspicion. Co-infection is common; missed P. falciparum kills faster than missed typhoid. Send 3 negative smears over 24 h before excluding malaria clinically.',
+        },
+        {
+            heading: '🛑 Do NOT use ciprofloxacin as empiric monotherapy',
+            body: '>85% of global Typhi isolates carry gyrA mutations conferring fluoroquinolone resistance (decreased susceptibility or full resistance). Even "susceptible" isolates by old breakpoints have clinical failure rates >30%. Fluoroquinolones are no longer first-line. Reserve only when susceptibility is confirmed and no alternatives.',
+        },
+        {
+            heading: '🛑 Do NOT delay dexamethasone in severe disease',
+            body: 'Hoffman 1984 NEJM RCT: high-dose dexamethasone (3 mg/kg load, then 1 mg/kg q6h ×8 doses) cut mortality from 55.6% to 9.5% in severe typhoid with shock, stupor, or coma. The benefit is well-replicated. Give in parallel with antibiotics, not after.',
+        },
+        {
+            heading: '🛑 Do NOT miss intestinal perforation in weeks 3-4',
+            body: 'Perforation peaks at weeks 3-4 of illness and carries 10-30% mortality. Sudden worsening abdominal pain, peritonism, free air on imaging, or unexplained shock in a known typhoid case = surgical emergency. CT abdomen/pelvis with contrast, broad-spectrum antibiotics (add anaerobic coverage), urgent OR. Do NOT manage non-operatively.',
+        },
+        {
+            heading: '🛑 Do NOT discharge without confirmed follow-up',
+            body: 'Outpatient azithromycin is reasonable for uncomplicated typhoid but only with reliable <48 h reassessment. Defervescence takes 3-5 days even with appropriate antibiotics — slow response is normal. Premature switch to a different antibiotic for "not responding" is a common error. Counsel patients on expected timeline + return precautions (worsening pain, bleeding, AMS, intolerance of PO).',
+        },
+        {
+            heading: '🛑 Do NOT forget the chronic carrier state',
+            body: '1-5% of patients become chronic biliary carriers, shedding Typhi for >1 year. Stool cultures at 1, 2, and 3 months post-treatment confirm clearance. Persistent carriers need ciprofloxacin ×4 weeks or cholecystectomy (Typhoid Mary). This is a public health issue, not just an individual one — high-risk occupations (food handler, healthcare) require clearance before return to work.',
+        },
+        {
+            heading: '🛑 Do NOT skip notifiable disease reporting',
+            body: 'Typhoid is reportable in all 50 states. Report to county/state health department promptly. Failure to report delays contact tracing and source identification — most US cases are travel-acquired but secondary household transmission occurs.',
+        },
+        {
+            heading: '🛑 Do NOT anchor on typhoid without ruling out parallel diagnoses',
+            body: 'The [Endemic Regions](#/calculator/typhoid-endemic-regions) calculator surfaces the parallel febrile-traveler differential — malaria, dengue, rickettsial disease, leptospirosis, viral hepatitis, amebic liver abscess, HIV seroconversion, TB. Workup is broad: malaria smear, blood cultures, hepatitis serologies, HIV, RUQ US if hepatomegaly. Do not narrow until data support narrowing.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Klemm EJ, et al. mBio. 2018;9(1):e00105-18.' },
+        { num: 2, text: 'Yousafzai MT, et al. Clin Infect Dis. 2019;68(Suppl 1):S16-S21.' },
+        { num: 3, text: 'Hoffman SL, et al. NEJM. 1984;310(2):82-88.' },
+        { num: 4, text: 'Crump JA, et al. Clin Microbiol Rev. 2015;28(4):901-937.' },
+        { num: 5, text: 'CDC Yellow Book 2024: Typhoid & Paratyphoid Fever.' },
+        { num: 6, text: 'Parry CM, et al. NEJM. 2002;347(22):1770-1782.' },
+        { num: 7, text: 'WHO Background document on typhoid fever (2018 update).' },
+    ],
+};
 const CP_STEPS_PAGE = {
     id: 'cp-steps',
     title: 'Chest Pain Hub - Steps Summary',
@@ -23585,6 +23660,8 @@ export const INFO_PAGES = {
     'anisocoria-stop': ANISOCORIA_STOP_PAGE,
     'gib-steps': GIB_STEPS_PAGE,
     'gib-stop': GIB_STOP_PAGE,
+    'typhoid-steps': TYPHOID_STEPS_PAGE,
+    'typhoid-stop': TYPHOID_STOP_PAGE,
     'cp-steps': CP_STEPS_PAGE,
     'cp-stop': CP_STOP_PAGE,
     'dysp-steps': DYSP_STEPS_PAGE,

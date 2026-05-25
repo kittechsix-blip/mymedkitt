@@ -419,6 +419,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'gib-imaging' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'gib-stop' },
     ],
+    'typhoid-fever': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'typhoid-steps' },
+        { id: 'endemic', label: 'Endemic', icon: '🌍', action: 'calculator', target: 'typhoid-endemic-regions' },
+        { id: 'xdr', label: 'XDR Risk', icon: '⚠️', action: 'calculator', target: 'typhoid-xdr-risk' },
+        { id: 'dosing', label: 'Dosing', icon: '💊', action: 'calculator', target: 'typhoid-antibiotic-dosing' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'typhoid-stop' },
+    ],
     'chest-pain-hub': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'cp-steps' },
         { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'cp-exclusions' },

@@ -37305,7 +37305,378 @@ ${missing.map(m => '• ' + m).join('\n')}
         };
     },
 };
+// -------------------------------------------------------------------
+// Typhoid Fever Calculators (Path #2 dead-calc fix)
+// -------------------------------------------------------------------
+const TYPHOID_ENDEMIC_REGIONS_CALCULATOR = {
+    id: 'typhoid-endemic-regions',
+    title: 'Typhoid Endemic Regions',
+    subtitle: 'Travel-based resistance pattern + empiric therapy + parallel differential',
+    description: 'Select the patient\'s travel region in the prior 30 days. Each region carries a distinct resistance pattern that determines empiric antibiotic choice. The result also surfaces the parallel febrile-traveler differential that must be worked up in parallel.',
+    fields: [
+        {
+            name: 'region',
+            label: 'Travel region in prior 30 days',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Pakistan or Iraq (XDR endemic)', points: 1 },
+                { label: 'South Asia (India, Bangladesh, Nepal)', points: 2 },
+                { label: 'Sub-Saharan Africa', points: 3 },
+                { label: 'Latin America / Caribbean', points: 4 },
+                { label: 'Southeast Asia (Vietnam, Indonesia, Philippines)', points: 5 },
+                { label: 'No endemic travel', points: 6 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Empiric therapy depends on region. Pakistan/Iraq → azithromycin or meropenem. Other endemic regions → ceftriaxone or azithromycin. No travel → broaden differential.',
+    citations: [
+        'CDC Yellow Book 2024: Typhoid & Paratyphoid Fever.',
+        'Crump JA, et al. Clin Microbiol Rev. 2015;28(4):901-937.',
+        'Klemm EJ, et al. mBio. 2018;9(1):e00105-18.',
+        'Yousafzai MT, et al. Clin Infect Dis. 2019;68(Suppl 1):S16-S21.',
+    ],
+    computeResult: (values) => {
+        const r = values['region'];
+        if (r === 1) {
+            return {
+                value: 'XDR-RISK',
+                label: 'Pakistan / Iraq — XDR Typhi endemic',
+                description: `Resistance: ampicillin, chloramphenicol, TMP-SMX, fluoroquinolones, AND ceftriaxone (3rd-gen ceph). Klemm 2018 / Yousafzai 2019.
+
+Empiric Rx:
+• Uncomplicated → azithromycin 1 g PO ×1, then 500 mg PO daily ×6 d
+• Complicated/severe → meropenem 1 g IV q8h (peds 20 mg/kg q8h) + dexamethasone for shock/AMS
+• DO NOT default to ceftriaxone — it will fail.
+
+Parallel differential (febrile returned traveler):
+• Malaria — thick/thin smear ×3 over 24 h, RDT
+• Dengue / chikungunya — IgM, NS1
+• Hepatitis A/E — LFTs, serologies
+• Leptospirosis — exposure history
+• HIV seroconversion — 4th-gen Ag/Ab
+
+Workup: blood cultures ×2-3 BEFORE antibiotics, CBC, CMP, malaria smear, hepatitis panel, HIV, urinalysis.`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (r === 2) {
+            return {
+                value: 'MDR',
+                label: 'South Asia — MDR Typhi, ceftriaxone-susceptible',
+                description: `Resistance: ampicillin, chloramphenicol, TMP-SMX, fluoroquinolones (>85% gyrA mutations). Ceftriaxone usually still works.
+
+Empiric Rx:
+• Uncomplicated → ceftriaxone 2 g IV daily ×10-14 d, OR azithromycin 1 g PO ×1 then 500 mg daily ×6 d
+• Complicated → ceftriaxone 2 g IV daily + dexamethasone for severe disease
+• Peds: ceftriaxone 75 mg/kg IV daily (max 2 g) or azithromycin 20 mg/kg/d.
+
+Parallel differential: malaria, dengue, hepatitis, leptospirosis, rickettsial (scrub typhus in rural South Asia).
+
+Workup: blood cultures ×2-3, CBC, CMP, malaria smear, hepatitis panel, HIV.`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (r === 3) {
+            return {
+                value: 'SSA',
+                label: 'Sub-Saharan Africa — invasive non-typhoidal + Typhi',
+                description: `Resistance: variable, generally ceftriaxone-susceptible. Invasive non-typhoidal Salmonella (iNTS) bacteremia is common in HIV+ and malnourished patients in SSA — same empiric Rx.
+
+Empiric Rx:
+• Uncomplicated → ceftriaxone 2 g IV daily ×10-14 d
+• Complicated → ceftriaxone 2 g IV daily + dexamethasone for severe disease
+• Peds: ceftriaxone 75 mg/kg IV daily.
+
+Parallel differential: MALARIA (highest pre-test prob in SSA — never miss), HIV (check viral load + CD4), TB, schistosomiasis, rickettsial (African tick-bite fever), VHF if outbreak region.
+
+Workup: blood cultures ×2-3, CBC, CMP, malaria smear ×3 / RDT, HIV, CXR, hepatitis panel.`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (r === 4) {
+            return {
+                value: 'LATAM',
+                label: 'Latin America / Caribbean — ceftriaxone-susceptible Typhi',
+                description: `Resistance: lower MDR prevalence; ceftriaxone first-line.
+
+Empiric Rx:
+• Uncomplicated → ceftriaxone 2 g IV daily ×10-14 d OR azithromycin 1 g PO ×1 then 500 mg daily ×6 d
+• Complicated → ceftriaxone 2 g IV daily + dexamethasone for severe disease.
+
+Parallel differential: dengue, chikungunya, Zika, leptospirosis, malaria (Amazon basin, parts of Central America), hepatitis A.
+
+Workup: blood cultures ×2-3, CBC, CMP, dengue NS1 + IgM, malaria smear if exposure region, hepatitis panel.`,
+                colorVar: '--color-info',
+            };
+        }
+        if (r === 5) {
+            return {
+                value: 'SEA',
+                label: 'Southeast Asia — ceftriaxone-susceptible Typhi',
+                description: `Resistance: variable; fluoroquinolone resistance high (esp Vietnam). Ceftriaxone or azithromycin first-line.
+
+Empiric Rx:
+• Uncomplicated → ceftriaxone 2 g IV daily ×10-14 d OR azithromycin 1 g PO ×1 then 500 mg daily ×6 d
+• Complicated → ceftriaxone 2 g IV daily + dexamethasone for severe disease.
+
+Parallel differential: dengue (very high), malaria (rural), leptospirosis, scrub typhus, melioidosis (Thailand, N Australia), hepatitis A/E.
+
+Workup: blood cultures ×2-3, CBC, CMP, dengue NS1 + IgM, malaria smear, hepatitis panel.`,
+                colorVar: '--color-info',
+            };
+        }
+        return {
+            value: 'NO-TRAVEL',
+            label: 'No endemic travel — broaden differential',
+            description: `Without endemic exposure, typhoid is unlikely (but not impossible — domestic chronic-carrier transmission, undocumented exposure). Broaden the differential before anchoring.
+
+Consider:
+• Other enteric fevers (paratyphoid)
+• Rickettsial disease (RMSF, ehrlichiosis, anaplasmosis)
+• Leptospirosis (occupational/recreational water exposure)
+• Viral hepatitis
+• Liver / intra-abdominal abscess
+• Endocarditis (fever of unknown origin)
+• Lymphoma / hematologic malignancy
+• Tuberculosis (immigrant population, immunocompromise)
+• HIV seroconversion
+
+Workup: blood cultures ×2-3, CBC, CMP, LFTs, urinalysis, CXR, HIV, hepatitis panel, RUQ ultrasound if hepatomegaly, blood smear for parasites if any exposure history.`,
+            colorVar: '--color-muted',
+        };
+    },
+};
+const TYPHOID_XDR_RISK_CALCULATOR = {
+    id: 'typhoid-xdr-risk',
+    title: 'Typhoid XDR Risk',
+    subtitle: 'Stratify probability of extensively drug-resistant Typhi',
+    description: 'Tally exposure factors that raise the probability of XDR Salmonella Typhi (resistant to ceftriaxone). Drives empiric antibiotic choice — high risk = skip ceftriaxone, default to azithromycin or meropenem.',
+    fields: [
+        { name: 'pak-iraq-travel', label: 'Travel to Pakistan or Iraq in prior 30 days', type: 'toggle', points: 5 },
+        { name: 'household-contact', label: 'Household contact with confirmed XDR typhoid case', type: 'toggle', points: 5 },
+        { name: 'ctx-failure', label: 'Failed empiric ceftriaxone (worsening on day 3-5)', type: 'toggle', points: 3 },
+        { name: 'vfr', label: 'Visiting Friends & Relatives (VFR) travel pattern', type: 'toggle', points: 2 },
+        { name: 'unvaccinated', label: 'Unvaccinated for typhoid', type: 'toggle', points: 1 },
+        { name: 'prolonged-stay', label: 'Prolonged stay in endemic region (>4 weeks)', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 0, max: 2, label: 'Low XDR risk', risk: 'Standard MDR pattern likely', mortality: 'Empiric ceftriaxone reasonable', colorVar: '--color-success' },
+        { min: 2, max: 5, label: 'Moderate XDR risk', risk: 'Empiric azithromycin preferred', mortality: 'Consider local epidemiology', colorVar: '--color-warning' },
+        { min: 5, max: 999, label: 'High XDR risk', risk: 'Treat as XDR — skip ceftriaxone', mortality: 'Azithromycin (uncomp) / meropenem (severe)', colorVar: '--color-danger' },
+    ],
+    thresholdNote: '<2 Low, 2-4 Moderate, ≥5 High. Pakistan/Iraq travel alone is sufficient to trigger XDR coverage.',
+    citations: [
+        'Klemm EJ, et al. mBio. 2018;9(1):e00105-18.',
+        'Yousafzai MT, et al. Clin Infect Dis. 2019;68(Suppl 1):S16-S21.',
+        'CDC Yellow Book 2024: Typhoid & Paratyphoid Fever.',
+    ],
+};
+const TYPHOID_ANTIBIOTIC_DOSING_CALCULATOR = {
+    id: 'typhoid-antibiotic-dosing',
+    title: 'Typhoid Antibiotic Dosing',
+    subtitle: 'Severity + resistance pattern → drug, dose, duration',
+    description: 'Combine weight, severity, and XDR likelihood to produce the specific empiric regimen with dose, route, and duration. Peds dosing kicks in at weight <40 kg.',
+    fields: [
+        { name: 'weight', label: 'Patient weight', type: 'number', points: 0, unit: 'kg', description: '<40 kg = pediatric weight-based dosing' },
+        {
+            name: 'severity',
+            label: 'Severity',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Uncomplicated (stable, tolerating PO)', points: 1 },
+                { label: 'Complicated / severe (shock, AMS, hemorrhage, perforation)', points: 2 },
+            ],
+        },
+        {
+            name: 'xdr',
+            label: 'XDR likelihood',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Low / standard MDR (ceftriaxone-susceptible)', points: 1 },
+                { label: 'High (Pakistan/Iraq, ceftriaxone failure)', points: 2 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Always send blood cultures ×2-3 BEFORE antibiotics. Adjust regimen when susceptibilities return.',
+    citations: [
+        'CDC Yellow Book 2024: Typhoid & Paratyphoid Fever.',
+        'Crump JA, et al. Clin Microbiol Rev. 2015;28(4):901-937.',
+        'Hoffman SL, et al. NEJM. 1984;310(2):82-88.',
+        'WHO Background document on typhoid fever (2018 update).',
+    ],
+    computeResult: (values) => {
+        const wt = values['weight'] || 0;
+        const sev = values['severity']; // 1 = uncomplicated, 2 = complicated
+        const xdr = values['xdr']; // 1 = low, 2 = high
+        const peds = wt > 0 && wt < 40;
+        if (!sev || !xdr || !wt) {
+            return {
+                value: '—',
+                label: 'Enter weight, severity, and XDR likelihood',
+                description: 'All three inputs required to generate dosing regimen.',
+                colorVar: '--color-muted',
+            };
+        }
+        if (xdr === 2 && sev === 1) {
+            // XDR + uncomplicated → azithromycin
+            const dose = peds ? `${Math.round(20 * wt)} mg PO ×1, then ${Math.round(10 * wt)} mg PO daily ×6 d (20 mg/kg load, 10 mg/kg/d)` : '1 g PO ×1, then 500 mg PO daily ×6 d (adult)';
+            return {
+                value: 'AZITHROMYCIN',
+                label: `XDR + Uncomplicated → Azithromycin${peds ? ' (peds)' : ''}`,
+                description: `Azithromycin ${dose}
+• Duration: 7 days total
+• Defervescence expected by day 3-5 — slow response is normal
+• Send blood cultures ×2-3 before first dose
+• Reassess at 48-72 h, switch on susceptibilities
+
+DO NOT give ceftriaxone — XDR Typhi resistant.
+
+Adjunctive: PO hydration, antipyretics, NPO if peritonism/ileus, surgical consult if perforation suspected.`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (xdr === 2 && sev === 2) {
+            // XDR + complicated → meropenem + dexamethasone
+            const meroDose = peds ? `${Math.round(20 * wt)} mg IV q8h (20 mg/kg q8h, max 1 g/dose)` : '1 g IV q8h (adult)';
+            const dexLoad = peds ? `${(3 * wt).toFixed(1)} mg IV load, then ${wt.toFixed(1)} mg IV q6h ×8 doses (3 mg/kg load, 1 mg/kg q6h)` : `${(3 * wt).toFixed(0)} mg IV load (3 mg/kg), then ${wt.toFixed(0)} mg IV q6h ×8 doses (1 mg/kg q6h)`;
+            return {
+                value: 'MEROPENEM + DEX',
+                label: `XDR + Complicated → Meropenem + Dexamethasone${peds ? ' (peds)' : ''}`,
+                description: `Meropenem ${meroDose}
+• Duration: 10-14 days (transition to PO azithromycin when stable)
+• Send blood cultures ×2-3 before first dose
+
+Dexamethasone (Hoffman 1984 — for severe typhoid with shock/stupor/coma; cut mortality 55.6% → 9.5%):
+${dexLoad}
+
+ICU admit. Fluid resuscitation, vasopressors PRN. Surgical consult if perforation suspected. Address coagulopathy. NG decompression if ileus.
+
+DO NOT give ceftriaxone — XDR Typhi resistant.`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (xdr === 1 && sev === 1) {
+            // MDR + uncomplicated → ceftriaxone OR azithromycin
+            const ctxDose = peds ? `${Math.round(75 * wt)} mg IV daily (75 mg/kg, max 2 g)` : '2 g IV daily (adult)';
+            const azDose = peds ? `${Math.round(20 * wt)} mg PO ×1, then ${Math.round(10 * wt)} mg PO daily ×6 d` : '1 g PO ×1, then 500 mg PO daily ×6 d (adult)';
+            return {
+                value: 'CTX or AZITH',
+                label: `MDR + Uncomplicated → Ceftriaxone OR Azithromycin${peds ? ' (peds)' : ''}`,
+                description: `First-line options:
+
+1️⃣ Ceftriaxone ${ctxDose}
+• Duration: 10-14 days
+• Preferred for inpatient management or PO intolerance
+
+2️⃣ Azithromycin ${azDose}
+• Duration: 7 days total
+• Reasonable for outpatient if reliable <48 h follow-up
+
+Send blood cultures ×2-3 before first dose. Adjust on susceptibilities. Defervescence by day 3-5 — slow response is normal.
+
+DO NOT use fluoroquinolones empirically — >85% global Typhi resistance.`,
+                colorVar: '--color-warning',
+            };
+        }
+        // MDR + complicated → ceftriaxone IV + dexamethasone
+        const ctxDose = peds ? `${Math.round(75 * wt)} mg IV daily (75 mg/kg, max 2 g)` : '2 g IV daily (adult)';
+        const dexLoad = peds ? `${(3 * wt).toFixed(1)} mg IV load, then ${wt.toFixed(1)} mg IV q6h ×8 doses` : `${(3 * wt).toFixed(0)} mg IV load, then ${wt.toFixed(0)} mg IV q6h ×8 doses`;
+        return {
+            value: 'CTX + DEX',
+            label: `MDR + Complicated → Ceftriaxone IV + Dexamethasone${peds ? ' (peds)' : ''}`,
+            description: `Ceftriaxone ${ctxDose}
+• Duration: 10-14 days IV (transition to PO once stable/afebrile 48 h)
+• Send blood cultures ×2-3 before first dose
+
+Dexamethasone (Hoffman 1984 — for severe typhoid with shock/stupor/coma):
+${dexLoad}
+
+ICU admit. Fluid resuscitation, vasopressors PRN. Surgical consult if perforation suspected. NG decompression if ileus.
+
+If ceftriaxone failure (worsening on day 3-5) → escalate to meropenem and reassess for XDR Typhi.`,
+            colorVar: '--color-danger',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// AAS Score (Sammalkorpi 2014) — Adult Appendicitis dead-calc fix
+// -------------------------------------------------------------------
+const AAS_SCORE_CALCULATOR = {
+    id: 'aas-score',
+    title: 'Adult Appendicitis Score (AAS)',
+    subtitle: 'Sammalkorpi 2014 — stratify appendicitis probability',
+    description: 'The AAS combines clinical findings, sex/age-stratified scoring, and inflammatory markers. ≥16 high probability; 11-15 intermediate (image); <11 low (observe/discharge with safety net).',
+    fields: [
+        { name: 'rlq-pain', label: 'Pain in RLQ', type: 'toggle', points: 2 },
+        { name: 'migration', label: 'Pain migration to RLQ', type: 'toggle', points: 2 },
+        { name: 'rlq-tenderness', label: 'RLQ tenderness on exam', type: 'toggle', points: 3 },
+        { name: 'guarding-mild', label: 'Guarding — mild', type: 'toggle', points: 2 },
+        { name: 'guarding-mod-severe', label: 'Guarding — moderate or severe', type: 'toggle', points: 4 },
+        { name: 'female-16-49', label: 'Female age 16-49 (sex/age modifier)', type: 'toggle', points: -1 },
+        { name: 'male-or-other-female', label: 'Male, or female ≥50 or <16 (sex/age modifier)', type: 'toggle', points: 1 },
+        { name: 'wbc-7-10', label: 'WBC 7.2-10.9 ×10⁹/L', type: 'toggle', points: 1 },
+        { name: 'wbc-10-14', label: 'WBC 10.9-14.0 ×10⁹/L', type: 'toggle', points: 2 },
+        { name: 'wbc-gt-14', label: 'WBC ≥14.0 ×10⁹/L', type: 'toggle', points: 3 },
+        { name: 'pmn-pct', label: 'PMN ≥75%', type: 'toggle', points: 2 },
+        { name: 'crp-4-49', label: 'CRP 4-49 mg/L (or symptoms <24 h with elevated CRP)', type: 'toggle', points: 2 },
+        { name: 'crp-50-plus', label: 'CRP ≥50 mg/L (symptoms ≥24 h)', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: -100, max: 11, label: 'Low probability', risk: 'Appendicitis unlikely', mortality: 'Observe / discharge with safety net + 12-24 h reassessment', colorVar: '--color-success' },
+        { min: 11, max: 16, label: 'Intermediate probability', risk: 'Image to clarify', mortality: 'CT abdomen/pelvis (or ultrasound in young/thin/peds/pregnancy)', colorVar: '--color-warning' },
+        { min: 16, max: 999, label: 'High probability', risk: 'Appendicitis likely', mortality: 'Surgical consult + imaging confirmation; antibiotics + OR planning', colorVar: '--color-danger' },
+    ],
+    thresholdNote: '<11 Low (observe/dispo). 11-15 Intermediate (image). ≥16 High (surgical pathway). Sammalkorpi 2014 derivation cohort: AUC 0.882.',
+    citations: [
+        'Sammalkorpi HE, Mentula P, Leppäniemi A. A new adult appendicitis score improves diagnostic accuracy of acute appendicitis — a prospective study. BMC Gastroenterol. 2014;14:114.',
+        'Sammalkorpi HE, et al. The Adult Appendicitis Score is accurate in identifying patients with low or high probability of acute appendicitis. World J Surg. 2017;41(7):1741-1748.',
+    ],
+};
+// -------------------------------------------------------------------
+// Alvarado Score (MANTRELS) — Adult Appendicitis dead-calc fix
+// -------------------------------------------------------------------
+const ALVARADO_CALCULATOR = {
+    id: 'alvarado',
+    title: 'Alvarado Score',
+    subtitle: 'MANTRELS — classic appendicitis screen',
+    description: 'Eight-item score (max 10). ≤3 low risk (discharge with safety net). 4-6 intermediate (image / observe). ≥7 high risk (surgical pathway). Useful screen, but less specific than AAS — newer scores have better calibration in adults.',
+    fields: [
+        { name: 'migration', label: 'M — Migration of pain to RLQ', type: 'toggle', points: 1 },
+        { name: 'anorexia', label: 'A — Anorexia', type: 'toggle', points: 1 },
+        { name: 'nausea-vomiting', label: 'N — Nausea or vomiting', type: 'toggle', points: 1 },
+        { name: 'rlq-tenderness', label: 'T — Tenderness in RLQ', type: 'toggle', points: 2 },
+        { name: 'rebound', label: 'R — Rebound tenderness', type: 'toggle', points: 1 },
+        { name: 'elevated-temp', label: 'E — Elevated temperature >37.3 °C / 99.1 °F', type: 'toggle', points: 1 },
+        { name: 'leukocytosis', label: 'L — Leukocytosis WBC >10 ×10⁹/L', type: 'toggle', points: 2 },
+        { name: 'shift', label: 'S — Shift to left (PMN >75%)', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 0, max: 4, label: 'Low risk', risk: 'Appendicitis unlikely', mortality: 'Discharge with strict return precautions + 12-24 h reassessment', colorVar: '--color-success' },
+        { min: 4, max: 7, label: 'Intermediate risk', risk: 'Image / observe', mortality: 'CT abdomen/pelvis or ultrasound; serial exams', colorVar: '--color-warning' },
+        { min: 7, max: 999, label: 'High risk', risk: 'Appendicitis likely', mortality: 'Surgical consult + imaging confirmation; antibiotics + OR planning', colorVar: '--color-danger' },
+    ],
+    thresholdNote: '≤3 Low, 4-6 Intermediate, ≥7 High. Note: AAS (Sammalkorpi 2014) has higher AUC in adults — consider AAS as primary, Alvarado as adjunct.',
+    citations: [
+        'Alvarado A. A practical score for the early diagnosis of acute appendicitis. Ann Emerg Med. 1986;15(5):557-564.',
+        'Ohle R, et al. The Alvarado score for predicting acute appendicitis: a systematic review. BMC Med. 2011;9:139.',
+    ],
+};
 const CALCULATORS = {
+    // Typhoid Fever (Path #2 dead-calc fix)
+    'typhoid-endemic-regions': TYPHOID_ENDEMIC_REGIONS_CALCULATOR,
+    'typhoid-xdr-risk': TYPHOID_XDR_RISK_CALCULATOR,
+    'typhoid-antibiotic-dosing': TYPHOID_ANTIBIOTIC_DOSING_CALCULATOR,
+    // Adult Appendicitis (Path #2 dead-calc fix)
+    'aas-score': AAS_SCORE_CALCULATOR,
+    'alvarado': ALVARADO_CALCULATOR,
     // Weight-Based Dosing
     'weight-dose': WEIGHT_DOSE_CALCULATOR,
     'peds-dose': PEDS_DOSE_CALCULATOR,
