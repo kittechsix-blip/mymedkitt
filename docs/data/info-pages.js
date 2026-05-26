@@ -23713,6 +23713,72 @@ const ANISOCORIA_STOP_PAGE = {
     ],
     shareable: true,
 };
+// -------------------------------------------------------------------
+// Penile Zipper Release — Steps Summary
+// -------------------------------------------------------------------
+const PZR_STEPS_PAGE = {
+    id: 'pzr-steps',
+    title: 'Penile Zipper Release — Steps',
+    subtitle: 'Quick-reference algorithm',
+    sections: [
+        {
+            heading: '1. Red-Flag Screen FIRST',
+            body: 'Before any manipulation: [Triage](#/node/pzr-triage)\n\u2022 Urethral meatus bleeding\n\u2022 Significant skin avulsion / devascularized flap\n\u2022 Dusky / cyanotic skin = vascular compromise\n\nAny of the above \u2192 urology now, do NOT manipulate the zipper. [1,3]',
+        },
+        {
+            heading: '2. Pain Control',
+            body: '\u2022 Adult cooperative \u2192 topical 2% lidocaine + small subdermal wheals plain 1% lidocaine: [Topical](#/node/pzr-pain-adult)\n\u2022 Adult anxious / swollen \u2192 dorsal penile block 10 mL plain 1% lidocaine (NO epi): [Block](#/node/pzr-pain-block)\n\u2022 Pediatric uncooperative \u2192 sedate BEFORE touching zipper: [Peds Sedation](#/node/pzr-pain-peds)',
+        },
+        {
+            heading: '3. Technique Ladder',
+            body: '**1st: [Mineral oil + retrograde unzip](#/node/pzr-mineral-oil)** \u2014 soak 10-15 min, gentle reverse unzip if skin intact.\n\n**2nd: [Median-bar cut](#/node/pzr-median-bar)** \u2014 single decisive bone-cutter bite through the slider bridge. Most reliable destruction technique.\n\n**3rd: [Lateral teeth separation](#/node/pzr-lateral-teeth)** \u2014 pry teeth apart distal to slider with screwdriver/hemostat. Only if slider is NOT jammed.\n\n**Alt: [Slider-side destruction](#/node/pzr-slider-destruction)** \u2014 cut along faceplate seams when median bar is inaccessible.\n\n**Never force a stuck slider.** [1,2,3]',
+        },
+        {
+            heading: '4. Post-Release',
+            body: '\u2022 Inspect skin \u2014 [Assessment](#/node/pzr-post-release)\n\u2022 Saline irrigation, ointment, loose dressing \u2014 [Wound Care](#/node/pzr-wound-care)\n\u2022 Tetanus if last booster >5 yr \u2014 [Tetanus](#/node/pzr-tetanus)\n\u2022 No routine antibiotics \u2014 [Antibiotics](#/node/pzr-antibiotics)\n\u2022 Return precautions reviewed \u2014 [Return](#/node/pzr-return)',
+        },
+        {
+            heading: '5. Urology Criteria',
+            body: '\u2022 Suspected urethral injury\n\u2022 Significant skin loss / full-thickness laceration\n\u2022 Failed bedside release after one destruction technique with adequate analgesia\n\u2022 Vascular compromise\n\u2022 Complex peds case that cannot tolerate sedation\n\nSee [Urology Criteria](#/node/pzr-urology-criteria).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ALiEM. Penile Zipper Entrapment. aliem.com/penile-zipper-entrapment/.' },
+        { num: 2, text: 'LITFL. Penile Zipper Injury. litfl.com/penile-zipper-injury/.' },
+        { num: 3, text: 'Leslie SW, Sajjad H. Penile Zipper and Ring Injuries. StatPearls; NBK459308.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Penile Zipper Release — Urology Consult Template
+// -------------------------------------------------------------------
+const PZR_UROLOGY_TEMPLATE_PAGE = {
+    id: 'pzr-urology-template',
+    title: 'Urology Consult Template',
+    subtitle: 'Handoff script \u2014 penile zipper entrapment',
+    shareable: true,
+    sections: [
+        {
+            heading: 'One-Liner',
+            body: '\u201C{age}{sex} with penile-skin zipper entrapment, time entrapped {duration}, currently {skin status}, calling for {reason: failed bedside release / urethral injury concern / significant skin loss / complex peds case}.\u201D',
+        },
+        {
+            heading: 'Mandatory Data Points',
+            body: '\u2022 Mechanism (zipper type, position when caught)\n\u2022 Time entrapped\n\u2022 Skin findings: color, capillary refill, intact vs avulsion\n\u2022 Urethral findings: meatal bleeding, hematuria, ability to void\n\u2022 Techniques attempted: mineral oil / median-bar cut / lateral teeth / slider destruction\n\u2022 Analgesia given: topical, local infiltration, penile block, sedation\n\u2022 Last tetanus booster\n\u2022 Comorbidities: diabetes, immunocompromise, anticoagulation',
+        },
+        {
+            heading: 'Disposition Question',
+            body: 'Make the disposition ask explicit:\n\u2022 \u201CCan you see the patient in the ED now?\u201D\n\u2022 \u201CDo you want the patient sent to OR / clinic?\u201D\n\u2022 \u201CAm I OK to attempt one more bedside technique under your guidance?\u201D',
+        },
+        {
+            heading: 'Documentation Reminder',
+            body: 'Document the conversation: time, urologist name, plan agreed, any verbal recommendations. Photograph the wound (with patient consent) before and after release for the chart.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ALiEM. Penile Zipper Entrapment. aliem.com/penile-zipper-entrapment/.' },
+        { num: 2, text: 'AUA Guidelines portal. auanet.org/guidelines-and-quality/guidelines.' },
+    ],
+};
 export const INFO_PAGES = {
     // Headache hub (added 2026-05-22 — Phase 2)
     'spg-block-procedure': SPG_BLOCK_PAGE,
@@ -23941,6 +24007,9 @@ export const INFO_PAGES = {
     'caustic-contraindications': CAUSTIC_CONTRAINDICATIONS,
     'doac-pe': DOAC_PE_PAGE,
     'priapism-return-precautions': PRIAPISM_RETURN_PRECAUTIONS,
+    // Penile zipper release (added 2026-05-26)
+    'pzr-steps': PZR_STEPS_PAGE,
+    'pzr-urology-template': PZR_UROLOGY_TEMPLATE_PAGE,
     'cardioversion-afib': CARDIOVERSION_AFIB_PAGE,
     'croup-return-precautions': CROUP_RETURN_PRECAUTIONS,
     'afib-discharge': AFIB_DISCHARGE_PAGE,

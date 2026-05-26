@@ -1433,6 +1433,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/adult-pharyngitis.js');
       return { nodes: m.ADULT_PHARYNGITIS_NODES, entryNodeId: 'ap-start', categoryId: 'infectious-disease', moduleLabels: m.ADULT_PHARYNGITIS_MODULE_LABELS, citations: m.ADULT_PHARYNGITIS_CITATIONS, criticalActions: m.ADULT_PHARYNGITIS_CRITICAL_ACTIONS };
     },
+    'penile-zipper-release': async () => {
+      const m = await import('../data/trees/penile-zipper-release.js');
+      return { nodes: m.PENILE_ZIPPER_RELEASE_NODES, entryNodeId: 'pzr-start', categoryId: 'procedures', moduleLabels: m.PENILE_ZIPPER_RELEASE_MODULE_LABELS, citations: m.PENILE_ZIPPER_RELEASE_CITATIONS, criticalActions: m.PENILE_ZIPPER_RELEASE_CRITICAL_ACTIONS };
+    },
   };
 
   const loader = TREE_IMPORTS[treeId];

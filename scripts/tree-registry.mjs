@@ -306,4 +306,5 @@ export const TREE_REGISTRY = {
   'peritoneal-dialysis': { prefix: 'PERITONEAL_DIALYSIS', entryNodeId: 'pd-start', categoryId: 'nephro-rheum-endo' },
   'adult-pharyngitis': { prefix: 'ADULT_PHARYNGITIS', entryNodeId: 'ap-start', categoryId: 'infectious-disease' },
   'peds-ssti': { prefix: 'PEDS_SSTI', entryNodeId: 'pssti-start', categoryId: 'pediatrics' },
+  'penile-zipper-release': { prefix: 'PENILE_ZIPPER_RELEASE', entryNodeId: 'pzr-start', categoryId: 'procedures' },
 };

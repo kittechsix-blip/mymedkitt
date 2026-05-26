@@ -2156,6 +2156,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'bridge-info', label: 'Bridge Info', icon: '🏥', action: 'overlay', target: 'pd-bridge-decision' },
         { id: 'summary', label: 'Summary', icon: '📖', action: 'overlay', target: 'pd-summary' },
     ],
+    'penile-zipper-release': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'pzr-steps' },
+        { id: 'oil', label: 'Oil First', icon: '🧴', action: 'jump', target: 'pzr-mineral-oil' },
+        { id: 'cut', label: 'Median-Bar', icon: '✂️', action: 'jump', target: 'pzr-median-bar' },
+        { id: 'tetanus', label: 'Tetanus', icon: '💉', action: 'calculator', target: 'tet-prophylaxis' },
+        { id: 'urology', label: 'Urology', icon: '🏥', action: 'overlay', target: 'pzr-urology-template' },
+    ],
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };
