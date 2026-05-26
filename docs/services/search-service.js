@@ -11,12 +11,17 @@ import { sanitizeSearchInput } from './sanitize.js';
 // ===================================================================
 let searchIndex = null;
 let indexedDocs = [];
+// Node-body docs are pre-baked at build time (scripts/build-search-node-index.mjs)
+// and fetched lazily. The flag prevents double-fetching across rapid keystrokes.
+let nodeDocs = [];
+let nodeIndexLoading = false;
+let nodeIndexLoaded = false;
 /** Clinical synonyms for common queries */
 const CLINICAL_SYNONYMS = {
     'afib-rvr': ['afib', 'a-fib', 'atrial fibrillation', 'rvr', 'rapid ventricular', 'rate control', 'cardioversion'],
     'pe-treatment': ['pe', 'pulmonary embolism', 'dvt', 'anticoagulation', 'clot', 'thrombus'],
     'pneumothorax': ['pneumo', 'ptx', 'collapsed lung', 'chest tube', 'needle decompression'],
-    'burns': ['burn', 'thermal burn', 'scald', 'flame burn', 'eschar', 'escharotomy', 'circumferential burn', 'compartment syndrome', 'inhalation injury', 'carbon monoxide', 'cyanide', 'tbsa', 'parkland', 'rule of nines', 'hydrofluoric acid', 'hf burn', 'chemical burn', 'burn center'],
+    'burns': ['burn', 'thermal burn', 'scald', 'flame burn', 'eschar', 'escharotomy', 'circumferential burn', 'compartment syndrome', 'inhalation injury', 'carbon monoxide', 'cyanide', 'tbsa', 'parkland', 'rule of nines', 'hydrofluoric acid', 'hydroflouric acid', 'hydrofloric acid', 'hf burn', 'hf acid', 'fluoride burn', 'calcium gluconate burn', 'chemical burn', 'burn center'],
     'sepsis': ['septic', 'infection', 'bacteremia', 'lactate', 'qsofa', 'sofa'],
     'stroke': ['cva', 'tpa', 'thrombectomy', 'nihss', 'ischemic', 'hemorrhagic'],
     'stemi': ['mi', 'myocardial infarction', 'heart attack', 'pci', 'cath lab'],
@@ -55,6 +60,48 @@ const ADDITIONAL_SEARCH_DOCS = [
         categoryId: 'trauma-surgery',
     },
 ];
+/**
+ * Lazy-load the pre-baked node body index (docs/data/search-node-index.json).
+ * Called by buildSearchIndex() — fire-and-forget. When the JSON lands we
+ * re-run buildSearchIndex() to merge nodeDocs into the Fuse instance so the
+ * next keystroke sees node hits. Cached by SW after first hit.
+ */
+async function loadNodeIndex() {
+    if (nodeIndexLoaded || nodeIndexLoading)
+        return;
+    nodeIndexLoading = true;
+    try {
+        // Relative path resolves correctly under GitHub Pages base path. The
+        // service worker precaches this asset (regenerated via deploy-cache-sync).
+        const res = await fetch('data/search-node-index.json');
+        if (!res.ok)
+            throw new Error(`HTTP ${res.status}`);
+        const data = (await res.json());
+        nodeDocs = data.nodes.map(n => ({
+            id: `node-${n.treeId}-${n.id}`,
+            type: 'node',
+            title: n.title,
+            // Subtitle shows which consult the snippet lives in.
+            subtitle: `In: ${n.treeId.replace(/-/g, ' ')}`,
+            // Pour body/summary/recommendation into keywords so they're searchable
+            // without dominating the title-weighted ranking.
+            keywords: [n.summary, n.body, n.recommendation].filter(Boolean),
+            treeId: n.treeId,
+            nodeId: n.id,
+        }));
+        nodeIndexLoaded = true;
+        console.log(`[SearchService] Loaded ${nodeDocs.length} node docs from search-node-index.json`);
+        // Rebuild index so subsequent searches include node hits.
+        buildSearchIndex();
+    }
+    catch (e) {
+        // Non-fatal — search still works against titles/synonyms. Log once.
+        console.warn('[SearchService] Could not load search-node-index.json:', e);
+    }
+    finally {
+        nodeIndexLoading = false;
+    }
+}
 /** Build search index from all content */
 export function buildSearchIndex() {
     indexedDocs = [];
@@ -108,24 +155,36 @@ export function buildSearchIndex() {
             keywords: [calc.id],
         });
     }
-    // Create Fuse index
+    // Merge in pre-baked node-body docs once loaded. First-paint paths use the
+    // title-only index; node hits appear after the JSON fetches in.
+    if (nodeIndexLoaded && nodeDocs.length > 0) {
+        indexedDocs.push(...nodeDocs);
+    }
+    // Create Fuse index. Threshold bumped 0.35 -> 0.4 so common transposition
+    // typos (e.g. "hydroflouric" vs "hydrofluoric") still hit. Higher than 0.4
+    // starts producing noisy false positives in QA.
     if (typeof Fuse !== 'undefined') {
         searchIndex = new Fuse(indexedDocs, {
             keys: [
                 { name: 'title', weight: 0.4 },
-                { name: 'subtitle', weight: 0.2 },
-                { name: 'keywords', weight: 0.4 },
+                { name: 'subtitle', weight: 0.15 },
+                { name: 'keywords', weight: 0.45 },
             ],
-            threshold: 0.35,
+            threshold: 0.4,
             includeScore: true,
             ignoreLocation: true,
             minMatchCharLength: 2,
             findAllMatches: true,
         });
-        console.log(`[SearchService] Indexed ${indexedDocs.length} items with Fuse.js`);
+        console.log(`[SearchService] Indexed ${indexedDocs.length} items with Fuse.js (nodeIndex=${nodeIndexLoaded})`);
     }
     else {
         console.warn('[SearchService] Fuse.js not loaded, falling back to substring search');
+    }
+    // Kick off lazy node-index load on the first build call. It will re-invoke
+    // buildSearchIndex() once the JSON lands.
+    if (!nodeIndexLoaded && !nodeIndexLoading) {
+        void loadNodeIndex();
     }
 }
 /**
@@ -189,6 +248,15 @@ function docToResult(doc) {
             return { type: 'drug', label: doc.title, sublabel: doc.subtitle, route: '/drugs', drugId: doc.drugId || doc.id };
         case 'calculator':
             return { type: 'calculator', label: doc.title, sublabel: doc.subtitle, route: `/calculator/${doc.id}` };
+        case 'node':
+            // Route via /tree/:id/node/:nodeId — registered in app.ts router so the
+            // consult opens directly on the matching node.
+            return {
+                type: 'node',
+                label: doc.title || `Node ${doc.nodeId}`,
+                sublabel: doc.subtitle,
+                route: `/tree/${doc.treeId}/node/${doc.nodeId}`,
+            };
         default:
             return null;
     }

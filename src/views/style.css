@@ -4689,6 +4689,7 @@ body.critical-actions-open {
 .dashboard-hero-search__badge--drug { background: #2E7D32; }
 .dashboard-hero-search__badge--calculator { background: #6A1B9A; }
 .dashboard-hero-search__badge--category { background: #455A64; }
+.dashboard-hero-search__badge--node { background: #00838F; } /* teal — in-consult node hit */
 
 .dashboard-hero-search__label-wrap {
   display: flex;
