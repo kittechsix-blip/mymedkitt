@@ -1818,6 +1818,16 @@ const TOOLBAR_CONFIGS = {
         { id: 'post-reduction', label: 'Post-Reduce', icon: '✅', action: 'overlay', target: 'intuss-post-reduction' },
     ],
     // ---------------------------------------------------------------
+    // Kratom Withdrawal
+    // ---------------------------------------------------------------
+    'kratom-withdrawal': [
+        { id: 'cows', label: 'COWS', icon: '🧮', action: 'calculator', target: 'cows' },
+        { id: 'timeline', label: 'Timeline', icon: '⏱️', action: 'overlay', target: 'kw-timeline-chart' },
+        { id: 'tx-compare', label: 'Tx Compare', icon: '⚖️', action: 'overlay', target: 'kw-treatment-comparison' },
+        { id: 'bup-dosing', label: 'Bup Dose', icon: '💊', action: 'overlay', target: 'kw-bup-dosing-tool' },
+        { id: 'complications', label: 'Complications', icon: '⚠️', action: 'overlay', target: 'kw-complications-guide' },
+    ],
+    // ---------------------------------------------------------------
     // Fishhook Removal
     // ---------------------------------------------------------------
     'fishhook-removal': [

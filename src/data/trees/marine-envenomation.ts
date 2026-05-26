@@ -46,7 +46,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-start',
     type: 'question',
-    module: 0,
+    module: 1,
     title: 'Marine Envenomation — Initial Assessment',
     body: `**Immediate Priorities:**
 - ABCs — look for anaphylaxis or cardiovascular collapse
@@ -73,7 +73,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-toxidrome',
     type: 'info',
-    module: 0,
+    module: 1,
     title: 'Toxidrome-Based Identification',
     body: `**Match symptoms to likely creature:**
 
@@ -101,7 +101,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-cnidarian',
     type: 'question',
-    module: 1,
+    module: 2,
     title: 'Cnidarian Envenomation — Species',
     body: `**Jellyfish Classification:**
 
@@ -136,7 +136,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-box-jelly',
     type: 'info',
-    module: 1,
+    module: 2,
     title: 'Box Jellyfish — Emergency Management',
     body: `**Prehospital First Aid (ANZCOR):**
 1. Remove from water, call for help
@@ -172,7 +172,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-irukandji',
     type: 'info',
-    module: 1,
+    module: 2,
     title: 'Irukandji Syndrome — Management',
     body: `**Clinical Presentation:**
 - Initial sting often unnoticed or mild
@@ -213,7 +213,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-bluebottle',
     type: 'info',
-    module: 1,
+    module: 2,
     title: 'Bluebottle / Portuguese Man-of-War',
     body: `**Important: Do NOT use vinegar (causes nematocyst discharge)**
 
@@ -239,7 +239,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-jelly-minor',
     type: 'info',
-    module: 1,
+    module: 2,
     title: 'Minor Jellyfish Stings',
     body: `**Local Reaction Only:**
 - Painful dermatitis, linear wheals
@@ -272,7 +272,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-fish',
     type: 'question',
-    module: 2,
+    module: 3,
     title: 'Fish Envenomation — Overview',
     body: `**Key Principle: All fish venoms are heat-labile**
 
@@ -307,7 +307,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-stingray',
     type: 'info',
-    module: 2,
+    module: 3,
     title: 'Stingray Injury',
     body: `**Presentation:**
 - Painful puncture wound (usually foot/ankle)
@@ -338,7 +338,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-stonefish',
     type: 'info',
-    module: 2,
+    module: 3,
     title: 'Stonefish — Most Potent Fish Venom',
     body: `**Presentation:**
 - Excruciating pain ("worst pain ever experienced")
@@ -371,7 +371,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-lionfish',
     type: 'info',
-    module: 2,
+    module: 3,
     title: 'Lionfish / Scorpionfish',
     body: `**Less potent than stonefish but still very painful**
 
@@ -405,7 +405,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-other',
     type: 'question',
-    module: 3,
+    module: 4,
     title: 'Other Marine Envenomation',
     body: `**Select the creature type:**
 
@@ -427,7 +427,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-urchin',
     type: 'info',
-    module: 3,
+    module: 4,
     title: 'Sea Urchin Injuries',
     body: `**Presentation:**
 - Multiple spine punctures (usually feet/hands)
@@ -457,7 +457,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-octopus',
     type: 'info',
-    module: 3,
+    module: 4,
     title: 'Blue-Ringed Octopus — Tetrodotoxin',
     body: `**Life-threatening — prepare for respiratory support**
 
@@ -490,7 +490,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-cone',
     type: 'info',
-    module: 3,
+    module: 4,
     title: 'Cone Snail — Conotoxin',
     body: `**Similar presentation to blue-ringed octopus**
 
@@ -517,7 +517,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-seasnake',
     type: 'info',
-    module: 3,
+    module: 4,
     title: 'Sea Snake Envenomation',
     body: `**Rare but serious**
 
@@ -558,7 +558,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-systemic',
     type: 'question',
-    module: 4,
+    module: 5,
     title: 'Systemic Reactions & Antivenom Summary',
     body: `**Antivenom Availability:**
 
@@ -592,7 +592,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-anaphylaxis',
     type: 'info',
-    module: 4,
+    module: 5,
     title: 'Anaphylaxis Management',
     body: `**If antivenom reaction occurs:**
 1. Stop infusion immediately
@@ -625,7 +625,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-disposition',
     type: 'question',
-    module: 5,
+    module: 6,
     title: 'Disposition Criteria',
     body: `**Discharge Criteria:**
 - Pain controlled with oral analgesics
@@ -652,7 +652,7 @@ export const MARINE_ENVENOMATION_NODES: DecisionNode[] = [
   {
     id: 'marine-discharge',
     type: 'info',
-    module: 5,
+    module: 6,
     title: 'Discharge Instructions',
     body: `**Wound Care:**
 - Keep wound clean and dry
@@ -683,7 +683,7 @@ Deep punctures, contaminated wounds, stingray injuries, immunocompromised
   {
     id: 'marine-admit',
     type: 'info',
-    module: 5,
+    module: 6,
     title: 'Admission Indications',
     body: `**ICU Admission:**
 - Antivenom administration (anaphylaxis risk)

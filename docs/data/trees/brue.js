@@ -106,7 +106,7 @@ export const BRUE_NODES = [
     {
         id: 'brue-low-risk-discharge',
         type: 'result',
-        module: 3,
+        module: 6,
         title: 'Lower-Risk BRUE — Discharge',
         body: '**Discharge Criteria:**\n✓ Normal observation period (1-4 hours)\n✓ No recurrent events\n✓ Normal vital signs and exam\n✓ Parent education completed\n✓ Follow-up arranged (PCP within 24-48 hours)\n\n**Discharge Instructions:**\n\n**Return immediately if:**\n• Another similar event\n• Color change (blue/pale)\n• Breathing difficulty\n• Feeding problems\n• Lethargy or decreased responsiveness\n• Fever\n\n**Safe Sleep Reminders:**\n• Back to sleep (supine)\n• Firm, flat mattress\n• No loose bedding, pillows, or soft toys\n• Room sharing (not bed sharing)\n• No smoking exposure\n\n**Prognosis:** Excellent. Recurrence ~5%, serious underlying condition ~1% in true low-risk BRUE.',
         recommendation: 'DISCHARGE HOME with close PCP follow-up in 24-48 hours. Provide infant CPR resources. No routine testing needed.',
