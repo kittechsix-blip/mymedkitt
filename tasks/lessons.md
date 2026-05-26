@@ -25,3 +25,18 @@ Rules and patterns extracted from mistakes. Review at session start.
 ---
 
 ## Add future lessons below
+
+---
+
+## CRITICAL: Do Not Use git-via-tmp for Surgical Commits (2026-05-26)
+
+**Context:** The EDEADLK helper `~/Desktop/claude-brain/bin/git-via-tmp.sh` runs `git add -A` on the fast path. Even if specific files were staged first, the helper will sweep every dirty file in the worktree into the commit.
+
+**Rule:** For scoped work in a dirty myMedKitt tree, do not use `git-via-tmp.sh` unless the intended commit is explicitly "commit everything currently dirty." Use normal `git commit` after staging exact files. Reserve `git-via-tmp.sh` for true Desktop/iCloud git deadlock fallback only.
+
+**Prevention:** Before committing:
+- Run `git status --short` and identify unrelated dirty files.
+- Stage exact files only.
+- Run `git diff --cached --stat`.
+- Commit with `git commit -m "..."; git push`.
+- If Desktop git fails with EDEADLK, then discuss fallback rather than calling the helper reflexively.

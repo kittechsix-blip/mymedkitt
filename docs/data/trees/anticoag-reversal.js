@@ -449,4 +449,5 @@ export const ANTICOAG_REVERSAL_CITATIONS = [
     { num: 14, text: 'Sperry JD, Rose AE, Williams E, et al. Emergent Reversal of Antithrombotics and Treatment of Life-Threatening Bleeding from Coagulopathies: A Clinical Review. J Emerg Med. 2022;63(1):17-48. doi:10.1016/j.jemermed.2022.05.011' },
     { num: 15, text: 'ESO/EANS Joint Guidelines Committee. European Stroke Organisation and European Association of Neurosurgical Societies guideline on stroke due to spontaneous ICH. Eur Stroke J. 2025;10(4):1007-1086. doi:10.1177/23969873251327397' },
     { num: 16, text: 'Farkas J. Anticoagulant Reversal. Internet Book of Critical Care (IBCC). Updated April 25, 2025. EMCrit Project.' },
+    { num: 17, text: 'Connolly SJ, Sharma M, Cohen AT, et al. Andexanet for Factor Xa Inhibitor-Associated Acute Intracerebral Hemorrhage (ANNEXA-I). N Engl J Med. 2024;390(19):1745-1755. doi:10.1056/NEJMoa2313040' },
 ];

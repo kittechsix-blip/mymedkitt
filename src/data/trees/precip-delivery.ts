@@ -15,7 +15,7 @@ export const PRECIP_DELIVERY_CRITICAL_ACTIONS = [
   { text: 'Deferred cord clamping (at least 60 sec) unless resuscitation needed', nodeId: 'precip-cord' },
   { text: 'Dry, warm, stimulate newborn', nodeId: 'precip-baby' },
   { text: 'Controlled cord traction for placenta', nodeId: 'precip-placenta' },
-  { text: 'Oxytocin 10 units IM after placenta delivers', nodeId: 'precip-oxytocin' },
+  { text: 'Oxytocin 20 units in 1L NS IV at 250 mL/hr after placenta delivers (10 units IM if no IV access). Do NOT give IV push.', nodeId: 'precip-oxytocin' },
 ];
 
 export const PRECIP_DELIVERY_NODES: DecisionNode[] = [
@@ -321,7 +321,7 @@ export const PRECIP_DELIVERY_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Oxytocin & Uterine Massage',
-    body: 'OXYTOCIN — POSTPARTUM UTEROTONIC\n\n[Oxytocin](#/drug/oxytocin/precipitous delivery) 20 units in 1L NS (or LR) at 250 mL/hr.\n\n**Do NOT give IV push** — can cause profound hypotension. [8]\n\n**Timing:** Start after the placenta is delivered. Do not wait to assess bleeding — **empiric oxytocin decreases postpartum hemorrhage risk.** [8]\n\nBIMANUAL UTERINE MASSAGE\n• Place one hand on the uterine fundus abdominally\n• Massage firmly until the uterus contracts and feels firm ("boggy" uterus = atony = hemorrhage risk)\n• Continue massage intermittently until uterine tone is maintained\n\n**Uterine atony is the #1 cause of postpartum hemorrhage.** Oxytocin + massage addresses this directly. [8]',
+    body: 'OXYTOCIN — POSTPARTUM UTEROTONIC\n\n**Preferred (IV access established):** [Oxytocin](#/drug/oxytocin/precipitous delivery) 20 units in 1L NS (or LR) at 250 mL/hr.\n\n**No IV access:** [Oxytocin](#/drug/oxytocin/precipitous delivery) 10 units IM into the anterolateral thigh — this is the WHO-preferred prophylactic route in low-resource or pre-IV settings. [8]\n\n**Do NOT give IV push** — can cause profound hypotension. [8]\n\n**Timing:** Start after the placenta is delivered. Do not wait to assess bleeding — **empiric oxytocin decreases postpartum hemorrhage risk.** [8]\n\nBIMANUAL UTERINE MASSAGE\n• Place one hand on the uterine fundus abdominally\n• Massage firmly until the uterus contracts and feels firm ("boggy" uterus = atony = hemorrhage risk)\n• Continue massage intermittently until uterine tone is maintained\n\n**Uterine atony is the #1 cause of postpartum hemorrhage.** Oxytocin + massage addresses this directly. [8]',
     citation: [8],
     treatment: {
       firstLine: {
@@ -330,7 +330,7 @@ export const PRECIP_DELIVERY_NODES: DecisionNode[] = [
         route: 'IV infusion',
         frequency: '250 mL/hr (83 mL/hr = 10 mU/min)',
         duration: 'until uterine tone maintained',
-        notes: 'Do NOT give IV push - causes profound hypotension. Start after placenta delivered.',
+        notes: 'Do NOT give IV push - causes profound hypotension. Start after placenta delivered. If no IV access: 10 units IM into anterolateral thigh (WHO-preferred IM dose).',
       },
       alternative: {
         drug: 'Methylergonovine (Methergine)',
@@ -351,7 +351,7 @@ export const PRECIP_DELIVERY_NODES: DecisionNode[] = [
       monitoring: 'Uterine tone (firm vs boggy), vaginal bleeding, vital signs q15 min x1 hour post-placenta.',
     },
     next: 'precip-lacerations',
-    summary: 'Oxytocin 20 units in 1L NS at 250 mL/hr — do NOT IV push, bimanual massage until firm uterine tone',
+    summary: 'Oxytocin 20 units in 1L NS IV at 250 mL/hr (or 10 units IM if no IV access) — do NOT IV push, bimanual massage until firm uterine tone',
     safetyLevel: 'critical',
   },
 
