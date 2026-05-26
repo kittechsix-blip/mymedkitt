@@ -134,6 +134,44 @@ export class TreeEngine {
     return max;
   }
 
+  /** Path-aware section counter.
+   *
+   *  Returns the rank (1-based position) of the current node's module
+   *  within the *ordered list of distinct modules visited on this path*,
+   *  plus the total count of distinct modules visited so far.
+   *
+   *  This guarantees:
+   *   - Counter always STARTS at §1/1 (no §0).
+   *   - Counter is MONOTONIC along any single path (never goes backwards).
+   *   - Counter never overstates progress with a misleading "max possible"
+   *     denominator — only modules the user has actually visited count.
+   *
+   *  Returns null if no session is active or no current node exists. */
+  getPathPosition(): { rank: number; total: number } | null {
+    if (!this.session) return null;
+    const currentNode = this.getCurrentNode();
+    if (!currentNode || typeof currentNode.module !== 'number') return null;
+
+    // Build the ordered list of modules visited along the current path.
+    // history[] holds the nodeIds of nodes the user already left behind,
+    // in chronological order. Append the current node at the end.
+    const visitedNodeIds = [...this.session.history, this.session.currentNodeId];
+    const distinctModulesInOrder: number[] = [];
+    for (const nodeId of visitedNodeIds) {
+      const node = this.nodes.get(nodeId);
+      if (!node || typeof node.module !== 'number') continue;
+      if (!distinctModulesInOrder.includes(node.module)) {
+        distinctModulesInOrder.push(node.module);
+      }
+    }
+
+    // Rank of the current node's module within that ordered list.
+    const rank = distinctModulesInOrder.indexOf(currentNode.module) + 1;
+    if (rank < 1) return null;
+
+    return { rank, total: distinctModulesInOrder.length };
+  }
+
   /** Jump back to a specific point in the history.
    *  Truncates history to the given index and removes answers after that point. */
   jumpToHistory(index: number): DecisionNode | null {

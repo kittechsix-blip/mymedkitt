@@ -497,15 +497,24 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
   progress.className = 'consult-flow-header__progress';
   if (controller) {
     const engine = controller.getEngine();
-    const currentModule = engine.getCurrentModule();
-    const totalModules = engine.getTotalModules();
-    if (currentModule !== null && totalModules > 0) {
+    // Path-aware counter: rank within distinct modules visited on THIS path.
+    // Guarantees: always starts at §1/1, never decreases, never overstates
+    // progress with a misleading "max-possible" denominator. Falls back to
+    // the legacy module/total rendering only if no session is active.
+    const pos = engine.getPathPosition();
+    if (pos) {
       // Prefix with section glyph so users don't read it as a step/screen counter.
-      // The counter advances per module (clinical section), not per node — a path may
-      // traverse multiple nodes within the same module without the number changing.
-      progress.textContent = `\u00A7${currentModule}/${totalModules}`;
-      progress.setAttribute('aria-label', `Section ${currentModule} of ${totalModules}`);
-      progress.setAttribute('title', `Section ${currentModule} of ${totalModules}`);
+      progress.textContent = `\u00A7${pos.rank}/${pos.total}`;
+      progress.setAttribute('aria-label', `Section ${pos.rank} of ${pos.total}`);
+      progress.setAttribute('title', `Section ${pos.rank} of ${pos.total}`);
+    } else {
+      const currentModule = engine.getCurrentModule();
+      const totalModules = engine.getTotalModules();
+      if (currentModule !== null && totalModules > 0) {
+        progress.textContent = `\u00A7${currentModule}/${totalModules}`;
+        progress.setAttribute('aria-label', `Section ${currentModule} of ${totalModules}`);
+        progress.setAttribute('title', `Section ${currentModule} of ${totalModules}`);
+      }
     }
   }
 

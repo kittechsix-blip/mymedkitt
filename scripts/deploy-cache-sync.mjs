@@ -336,6 +336,32 @@ if (!skipSW) {
 }
 
 // ---------------------------------------------------------------------------
+// 4.5. Regenerate search-node-index.json if any tree changed.
+//      The in-app search bar's "node body" index is a pre-baked JSON. If a
+//      tree edit ships without rebuilding this JSON, the search bar's
+//      in-consult hits go stale (still works against the prior snapshot).
+//      Cheap to run (~150ms) — always regenerate on deploy so it stays fresh.
+//      Carry-forward: was a manual step until 2026-05-26; now part of every
+//      deploy so the index never drifts.
+// ---------------------------------------------------------------------------
+console.log('\n=== Step 4.5: Regenerating in-app search node index ===\n');
+
+if (!dryRun) {
+  try {
+    const out = execSync('node scripts/build-search-node-index.mjs', {
+      cwd: projectRoot,
+      encoding: 'utf-8',
+    });
+    // Trim and prefix each line so the wrap is obvious in deploy logs.
+    out.trim().split('\n').forEach(line => console.log('  ' + line));
+  } catch (e) {
+    console.error('⚠  search-node-index regen failed (non-fatal):', e.message);
+  }
+} else {
+  console.log('📝 Would run: node scripts/build-search-node-index.mjs');
+}
+
+// ---------------------------------------------------------------------------
 // 5. Regenerate SW precache asset list from docs/ contents
 //    Eliminates hand-maintained drift (the cause of the 2026-04 SW install
 //    failure where listed files breadcrumb-nav.js, lab-parser.js, etc. didn't
