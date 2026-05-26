@@ -22683,6 +22683,101 @@ const TYPHOID_STOP_PAGE = {
         { num: 7, text: 'WHO Background document on typhoid fever (2018 update).' },
     ],
 };
+const UI_STEPS_PAGE = {
+    id: 'ui-steps',
+    title: 'Unknown Ingestion Hub - Steps Summary',
+    subtitle: 'Resus first, decontamination second, antidote third - never invert',
+    sections: [
+        {
+            body: '1. **Sick check first.** ABCs, monitor, IV/IO, bedside glucose, [naloxone](#/drug/naloxone/dosing) if hypoventilation or miosis, 12-lead ECG, ABG/VBG with co-oximetry.\n2. **Mandatory bundle on EVERY unknown ingestion:**\n   - Glucose, electrolytes, BUN/Cr, lactate.\n   - Anion gap + osmolar gap.\n   - **Acetaminophen level + salicylate level (always, regardless of history).**\n   - ABG/VBG with co-oximetry.\n   - ECG.\n3. **Match the toxidrome:**\n   - Wide QRS -> [TCA / Sodium-Channel Blocker](#/tree/tca-toxidrome). Bicarb first.\n   - Mixed acid-base + tinnitus -> [Salicylate](#/tree/salicylate). Bicarb + HD.\n   - APAP exposure or unknown -> [Acetaminophen](#/tree/acetaminophen). [Rumack-Matthew Nomogram](#/calculator/rumack-matthew).\n   - Hypoventilation + miosis -> [Xylazine / Opioid](#/tree/xylazine-toxicity). Titrate naloxone to breathing.\n   - Sympathomimetic -> benzos + cooling, avoid pure beta-blocker.\n   - Cholinergic / OP -> [atropine](#/drug/atropine/cholinergic) to dry secretions + [pralidoxime](#/drug/pralidoxime/dosing).\n   - Anticholinergic -> benzos + cooling; physostigmine only for pure narrow-QRS cases.\n   - Serotonergic -> [Serotonin Syndrome](#/tree/serotonin-syndrome). Stop agents, benzos, [cyproheptadine](#/drug/cyproheptadine/dosing).\n   - Closed-space fire -> [CO Toxicity](#/tree/co-toxicity) + empiric [hydroxocobalamin](#/drug/hydroxocobalamin/dosing).\n   - Caustic -> [Caustic Ingestion](#/tree/caustic-ingestion). NPO, airway, endoscopy.\n   - Osmolar gap -> [Toxic Alcohols](#/tree/toxic-alcohols). [Fomepizole](#/drug/fomepizole/dosing).\n   - Brady + hyperK + GI -> [Digoxin](#/tree/digoxin-toxicity) + [Digibind](#/drug/digoxin-immune-fab/dosing).\n4. **Resus first, decon second, antidote third.** Charcoal only with protected airway and binding agent <1-2h. Lipid emulsion 1.5 mL/kg as rescue for lipophilic cardiotoxin arrest.\n5. **Reassess every 15-30 min.** Tox trajectories diverge fast - especially sustained-release agents.\n6. **Disposition:** ICU for instability/antidote infusion/dialysis; admit for sustained-release or long half-life; medical-clear for psych once mandatory labs and observation window pass.\n7. **Call Poison Control 1-800-222-1222** early for any concerning ingestion.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Goldfrank LR, et al. Goldfrank\'s Toxicologic Emergencies, 12e. McGraw-Hill; 2024.' },
+        { num: 2, text: 'ACMT position statements + EXTRIP workgroup. https://www.acmt.net/' },
+        { num: 3, text: 'EMCrit/IBCC. Tox toxidromes and antidote review. https://emcrit.org/ibcc/' },
+    ],
+};
+const UI_STOP_PAGE = {
+    id: 'ui-stop',
+    title: 'Unknown Ingestion Hub - Do NOT',
+    subtitle: 'Critical pitfalls in undifferentiated toxicology',
+    sections: [
+        {
+            heading: 'Do NOT skip the universal labs',
+            body: 'APAP and salicylate levels are mandatory on every unknown ingestion, even when the patient denies them. They are common, treatable, and silent. Missing them is the most common preventable bad outcome in tox.',
+        },
+        {
+            heading: 'Do NOT trust the urine drug screen',
+            body: 'UDS misses fentanyl analogs, designer benzos, synthetic opioids, GHB, and ketamine. It false-positives on poppy seeds, certain antibiotics, and many psych meds. It rarely changes management in the first 6 hours. Do not let it drive treatment.',
+        },
+        {
+            heading: 'Do NOT invert the order: resus, decon, antidote',
+            body: 'Stabilize physiology before charcoal. Charcoal without an airway plan is aspiration pneumonia and a worse trajectory. Antidotes come third - except when they are the resus itself (atropine, glucagon, calcium, bicarb).',
+        },
+        {
+            heading: 'Do NOT push naloxone',
+            body: 'Titrate to respiratory effort, not consciousness. Rapid full reversal triggers precipitated opioid withdrawal, pulmonary edema, and agitation. >70% of street fentanyl carries xylazine - naloxone will not fix the sedation, ventilate the patient.',
+        },
+        {
+            heading: 'Do NOT intubate salicylate unless absolutely required',
+            body: 'Salicylate patients are breathing off acid. Apnea + paralysis = catastrophic acidemia. If you must intubate, match minute ventilation, induce with ketamine, and consider rocuronium short-burst with rapid sedation depth.',
+        },
+        {
+            heading: 'Do NOT give physostigmine with QRS prolongation',
+            body: 'Anticholinergic toxicity reverses with physostigmine, but TCA and many other agents have mixed anticholinergic + sodium-channel blockade. Physostigmine in a wide-QRS patient can cause asystole. Confirm narrow QRS and pure toxidrome.',
+        },
+        {
+            heading: 'Do NOT medically clear for psych without trajectory',
+            body: 'Staggered APAP, sustained-release CCB, lithium, and salicylate look benign early and decompensate late. Repeat labs at the observation window for the agent and document a clear trajectory before psych transfer.',
+        },
+        {
+            heading: 'Do NOT forget Poison Control',
+            body: 'Regional Poison Control (1-800-222-1222) has live access to outbreak data, antidote stock locations, dosing for rare agents, and tox consult. They will call you back faster than the patient deteriorates.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AAPCC / AACT. Annual report and consensus statements. Clin Toxicol. 2023.' },
+        { num: 2, text: 'EXTRIP workgroup. Recommendations for extracorporeal treatments in poisoning. https://www.extrip-workgroup.org/' },
+        { num: 3, text: 'EMCrit/IBCC. Salicylate, TCA, anticholinergic chapters. https://emcrit.org/ibcc/' },
+    ],
+};
+const UI_TOXIDROMES_TABLE_PAGE = {
+    id: 'ui-toxidromes-table',
+    title: 'Unknown Ingestion - Toxidromes at a Glance',
+    subtitle: 'Five toxidromes that drive bedside decisions',
+    sections: [
+        {
+            heading: 'Sympathomimetic',
+            body: '**Vitals:** tachy, HTN, hyperthermic, tachypneic.\n**Pupils:** mydriasis (reactive).\n**Skin:** diaphoretic.\n**Mental status:** agitated, paranoid, hyperalert.\n**Bowel sounds:** normal or increased.\n**Agents:** cocaine, methamphetamine, MDMA, bath salts, PCP, theophylline, caffeine overdose, decongestants.\n**Treatment:** benzos + cooling. Avoid pure beta-blockers (unopposed alpha).',
+        },
+        {
+            heading: 'Anticholinergic',
+            body: '**Vitals:** tachy, mildly hypertensive, hyperthermic.\n**Pupils:** mydriasis (often poorly reactive).\n**Skin:** dry, red, flushed.\n**Mental status:** delirium, "mad as a hatter", picking at the air, mumbling.\n**Bowel sounds:** absent, urinary retention.\n**Agents:** diphenhydramine, atropine, scopolamine, TCAs (mixed picture), antipsychotics, jimson weed, antiparkinson agents.\n**Treatment:** benzos + cooling + Foley. Physostigmine only with narrow QRS and pure toxidrome.\n**Mnemonic:** hot as a hare, dry as a bone, red as a beet, blind as a bat, mad as a hatter, full as a flask.',
+        },
+        {
+            heading: 'Cholinergic',
+            body: '**Vitals:** brady (early), then tachy late.\n**Pupils:** miosis.\n**Skin:** diaphoretic.\n**Mental status:** confused, seizures, coma.\n**Bowel sounds:** hyperactive, defecation/urination/emesis.\n**Agents:** organophosphates, carbamates, nerve agents, pilocarpine, certain mushrooms, nicotine.\n**Treatment:** decontaminate (PPE!), atropine to dry secretions (DOUBLE q5 min), pralidoxime infusion for OP.\n**Mnemonic:** SLUDGE-BBB (Salivation, Lacrimation, Urination, Defecation, GI cramping, Emesis, Bronchorrhea, Bronchospasm, Bradycardia) and DUMBELS.',
+        },
+        {
+            heading: 'Serotonergic',
+            body: '**Vitals:** tachy, HTN, hyperthermic, hyperreflexic.\n**Pupils:** mydriasis.\n**Skin:** diaphoretic, flushed.\n**Mental status:** agitated, restless, anxious.\n**Bowel sounds:** hyperactive.\n**Distinguishing finding:** **clonus, especially lower extremities, and inducible/sustained clonus.** Tremor, hyperreflexia.\n**Agents:** SSRIs + MAOIs, SSRIs + tramadol/linezolid/methylene blue, fentanyl + serotonergic, MDMA, dextromethorphan in serotonergic patient.\n**Treatment:** stop agents, benzos, cooling, cyproheptadine 12 mg PO then 2 mg q2h for moderate-severe.',
+        },
+        {
+            heading: 'Opioid',
+            body: '**Vitals:** brady, hypotensive, hypoventilating, hypothermic.\n**Pupils:** miosis (PINPOINT).\n**Skin:** normal or cool.\n**Mental status:** stuporous, coma.\n**Bowel sounds:** decreased.\n**Agents:** heroin, fentanyl + xylazine, morphine, oxycodone, methadone, tramadol, diphenoxylate (peds).\n**Treatment:** ventilate, titrate naloxone 0.04-0.4 mg IV to respirations, watch for renarcotization and concurrent xylazine sedation (will not reverse with naloxone).',
+        },
+        {
+            heading: 'Toxidrome look-alikes worth a separate mention',
+            body: '**Sedative-hypnotic:** somnolence, slurred speech, ataxia, near-normal vitals. Agents: benzos, barbs, GHB, zolpidem.\n**Sodium-channel blocker:** wide QRS, hypotension, seizures, AMS. Agents: TCA, bupropion, diphenhydramine in massive dose, cocaine. Treat with bicarb regardless of substance.\n**Methylxanthine:** tachy, GI distress, agitation, severe hypokalemia, seizures. Agents: theophylline, caffeine.\n**Withdrawal:** mirror of the chronic toxidrome - opioid withdrawal looks like cholinergic-light; benzo/ETOH withdrawal looks like sympathomimetic.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Holstege CP, Borek HA. Pathophysiology of toxidromes. Crit Care Clin. 2012 reaffirmed 2023.' },
+        { num: 2, text: 'EMRA Toxicology Guide. Latest edition.' },
+        { num: 3, text: 'EMCrit/IBCC. Toxidrome chapters. https://emcrit.org/ibcc/' },
+    ],
+};
 const CP_STEPS_PAGE = {
     id: 'cp-steps',
     title: 'Chest Pain Hub - Steps Summary',
@@ -23662,6 +23757,9 @@ export const INFO_PAGES = {
     'gib-stop': GIB_STOP_PAGE,
     'typhoid-steps': TYPHOID_STEPS_PAGE,
     'typhoid-stop': TYPHOID_STOP_PAGE,
+    'ui-steps': UI_STEPS_PAGE,
+    'ui-stop': UI_STOP_PAGE,
+    'ui-toxidromes-table': UI_TOXIDROMES_TABLE_PAGE,
     'cp-steps': CP_STEPS_PAGE,
     'cp-stop': CP_STOP_PAGE,
     'dysp-steps': DYSP_STEPS_PAGE,

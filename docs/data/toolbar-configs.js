@@ -419,6 +419,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'gib-imaging' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'gib-stop' },
     ],
+    'unknown-ingestion-hub': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ui-steps' },
+        { id: 'toxidromes', label: 'Toxidromes', icon: '🧪', action: 'overlay', target: 'ui-toxidromes-table' },
+        { id: 'apap', label: 'APAP Nomogram', icon: '🧮', action: 'calculator', target: 'rumack-matthew' },
+        { id: 'gaps', label: 'AG / Osm Gap', icon: '🧮', action: 'calculator', target: 'anion-gap' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'ui-stop' },
+    ],
     'typhoid-fever': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'typhoid-steps' },
         { id: 'endemic', label: 'Endemic', icon: '🌍', action: 'calculator', target: 'typhoid-endemic-regions' },
