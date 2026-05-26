@@ -24701,28 +24701,39 @@ const ANISOCORIA_LIGHT_DARK_PAGE: InfoPage = {
 const ANISOCORIA_PHARM_PAGE: InfoPage = {
   id: 'anisocoria-pharm',
   title: 'Pharmacologic Pupil',
-  subtitle: 'Drop, nebulizer, patch, plant, or hand-to-eye exposure',
+  subtitle: 'Mydriasis or miosis from topical, aerosol, plant, or hand-to-eye exposure',
   sections: [
     {
-      heading: 'Mydriasis Exposure List',
-      body: 'Scopolamine patch, atropine/homatropine/tropicamide/cyclopentolate eye drops, ipratropium/albuterol nebulizer blowback, glycopyrrolate, anticholinergic medications, decongestants/sympathomimetics, stimulant exposure, jimson weed or other anticholinergic plants, and accidental hand-to-eye transfer.',
+      heading: 'How Drugs Create Anisocoria',
+      body: 'Unilateral anisocoria usually requires one-eye exposure: wrong-eye drops, diagnostic dilation, hand-to-eye transfer, leaking nebulizer mask, aerosol/spray exposure, plant toxin, cosmetic/skin product, or chemical splash. Systemic drugs usually affect both pupils; if only one pupil is abnormal, look for asymmetric topical exposure or another diagnosis.',
     },
     {
-      heading: 'Classic Pattern',
-      body: 'Isolated large pupil, poor light response, normal EOMs, no ptosis, no headache/neck pain, no neuro deficit, no red painful eye, and compatible exposure. Resolution depends on the agent and can take hours to days.',
+      heading: 'Large Pupil: Anticholinergic Block',
+      body: 'Common causes: atropine, homatropine, cyclopentolate, tropicamide, scopolamine patch transfer, ipratropium or tiotropium nebulizer/inhaler exposure, glycopyrrolate, anticholinergic hyperhidrosis wipes, Datura/jimson weed, Brugmansia/angel trumpet, belladonna/atropa, and botulinum toxin near the orbit.\n\nPattern: isolated large poorly reactive pupil, glare/blurred near vision, normal EOMs, no ptosis, no red painful eye, and compatible exposure. An anticholinergic-blocked pupil usually will not constrict to 1% pilocarpine.',
     },
     {
-      heading: 'Pilocarpine Logic',
-      body: 'A pharmacologically blocked pupil usually will not constrict to 1% pilocarpine. A nonpharmacologic dilated pupil often constricts. Dilute pilocarpine may support Adie tonic pupil but false positives occur. Drop testing must not delay imaging if CN III signs or neurologic red flags exist.',
+      heading: 'Large Pupil: Adrenergic / Sympathomimetic',
+      body: 'Common causes: phenylephrine or epinephrine ophthalmic drops, ocular/nasal decongestants such as oxymetazoline, naphazoline, or tetrahydrozoline, cocaine, amphetamines, ephedrine-like products, and adrenergic aerosol exposure.\n\nPattern: mydriasis may preserve some light response because the sphincter is not fully blocked. Conjunctival blanching supports topical adrenergic exposure. CN III red flags still override the exposure story.',
+    },
+    {
+      heading: 'Small Pupil: Miotic or Cholinergic',
+      body: 'Common causes: pilocarpine or carbachol glaucoma drops, older cholinesterase-inhibitor miotics such as echothiophate/demecarium/physostigmine, brimonidine or apraclonidine glaucoma drops, organophosphate/carbamate pesticide or animal flea product exposure, and nerve-agent/cholinergic chemical exposure.\n\nSystemic opioids or clonidine usually cause bilateral miosis. Unilateral miosis should still trigger Horner/uveitis screening unless there is a clear one-eye exposure.',
+    },
+    {
+      heading: 'ED Exposure Questions',
+      body: 'Ask specifically: eye exam or dilation today? Glaucoma drops in the patient or household? Motion-sickness patch? Nebulized bronchodilator or anticholinergic mask leak? Nasal or eye decongestant spray? Contact with plants, gardening, herbal products, or tea leaves? Pesticide/flea product splash? Cosmetics, wipes, skin medication, or occupational/veterinary medication? Was only one eye rubbed after handling the product?',
     },
     {
       heading: 'Stop Point',
-      body: 'Do not diagnose pharmacologic mydriasis if ptosis, diplopia, EOM abnormality, severe headache, eye pain, red eye, trauma, vision loss, or focal neuro findings are present.',
+      body: 'Do not diagnose pharmacologic anisocoria if ptosis, diplopia, EOM abnormality, severe headache, neck/face pain, eye pain, red eye, trauma, vision loss, focal neuro findings, or acute painful Horner pattern is present. Drop testing must not delay imaging when CN III palsy or carotid dissection remains possible.',
     },
   ],
   citations: [
     { num: 1, text: 'AAO EyeWiki. Pharmacologic Dilation of Pupil. Accessed May 25, 2026.' },
     { num: 2, text: 'AAO EyeWiki. Anisocoria. Accessed May 25, 2026.' },
+    { num: 3, text: 'Merck Manual Professional Edition. Anisocoria. Medication and substance exposure table. Accessed May 26, 2026.' },
+    { num: 4, text: 'StatPearls. Anisocoria. NCBI Bookshelf. Accessed May 26, 2026.' },
+    { num: 5, text: 'Diagnostic Approach to Pupillary Abnormalities. PMC review. 2023.' },
   ],
   shareable: true,
 };

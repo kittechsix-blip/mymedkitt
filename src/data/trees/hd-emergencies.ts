@@ -15,9 +15,9 @@ export const HD_EMERGENCIES_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Use AEIOU framework to triage HD emergencies', nodeId: 'hd-start' },
   { text: 'Check potassium immediately and get EKG if elevated', nodeId: 'hd-hyperkalemia' },
   { text: 'Give calcium gluconate 1-2g IV for severe hyperkalemia with EKG changes', nodeId: 'hd-hyperkalemia' },
-  { text: 'Arrange emergent dialysis for refractory hyperkalemia, pulmonary edema, or uremic emergency', nodeId: 'hd-emergent-dialysis' },
-  { text: 'Preserve vascular access at all costs (avoid blood draws, BP cuffs on access arm)', nodeId: 'hd-access' },
-  { text: 'Give antibiotics early for suspected catheter-related sepsis', nodeId: 'hd-infection' },
+  { text: 'Arrange emergent dialysis for refractory hyperkalemia, pulmonary edema, or uremic emergency', nodeId: 'hd-overload-main' },
+  { text: 'Preserve vascular access at all costs (avoid blood draws, BP cuffs on access arm)', nodeId: 'hd-access-main' },
+  { text: 'Give antibiotics early for suspected catheter-related sepsis', nodeId: 'hd-infection-main' },
   { text: 'Call nephrology early for all HD-related emergencies', nodeId: 'hd-start' },
 ];
 

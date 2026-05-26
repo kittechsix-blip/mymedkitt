@@ -19,8 +19,8 @@ export const INTUSSUSCEPTION_CRITICAL_ACTIONS = [
     { text: 'Consider intussusception in ANY infant with episodic inconsolable crying, lethargy, or altered mental status', nodeId: 'intuss-start' },
     { text: 'Ultrasound is gold standard (>97% sensitivity/specificity) - look for target/donut sign in RUQ', nodeId: 'intuss-ultrasound' },
     { text: 'Classic triad (pain + currant jelly stool + mass) present in <25% - do NOT rely on it', nodeId: 'intuss-presentation' },
-    { text: 'ABSOLUTE contraindications to enema reduction: peritonitis, free air, shock', nodeId: 'intuss-contraindications' },
-    { text: 'Age <3 months or >5 years = higher risk of pathologic lead point - consider early surgery consultation', nodeId: 'intuss-lead-points' },
+    { text: 'ABSOLUTE contraindications to enema reduction: peritonitis, free air, shock', nodeId: 'intuss-surgery' },
+    { text: 'Age <3 months or >5 years = higher risk of pathologic lead point - consider early surgery consultation', nodeId: 'intuss-higher-risk' },
     { text: 'Post-reduction: observe 4+ hours, trial PO at 2 hours, recurrence rate is 8-10%', nodeId: 'intuss-post-reduction' },
 ];
 export const INTUSSUSCEPTION_MODULE_LABELS = [

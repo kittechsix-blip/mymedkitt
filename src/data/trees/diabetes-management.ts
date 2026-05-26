@@ -12,14 +12,14 @@ interface Citation {
 }
 
 export const DIABETES_MANAGEMENT_CRITICAL_ACTIONS: CriticalAction[] = [
-  { text: 'Treat severe hypoglycemia (<40 or symptomatic) with D50 25-50mL IV', nodeId: 'dm-hypo-treatment' },
-  { text: 'Check for DKA/HHS: glucose, VBG/ABG, ketones, anion gap', nodeId: 'dm-dka-screening' },
-  { text: 'Start insulin infusion (0.1 units/kg/hr) for DKA after fluids', nodeId: 'dm-dka-insulin' },
-  { text: 'Give aggressive fluid resuscitation for HHS (often 6-10L deficit)', nodeId: 'dm-hhs-fluids' },
-  { text: 'Correct sodium slowly (<10-12 mEq/L per 24h) to avoid osmotic demyelination', nodeId: 'dm-hhs-treatment' },
-  { text: 'Continue basal insulin even if NPO (prevents rebound hyperglycemia)', nodeId: 'dm-inpatient-npo' },
-  { text: 'Use correctional insulin with sliding scale for inpatient management', nodeId: 'dm-inpatient-correction' },
-  { text: 'Bridge to outpatient diabetes care with medication reconciliation', nodeId: 'dm-discharge' },
+  { text: 'Treat severe hypoglycemia (<40 or symptomatic) with D50 25-50mL IV', nodeId: 'dm-hypo-severe' },
+  { text: 'Check for DKA/HHS: glucose, VBG/ABG, ketones, anion gap', nodeId: 'dm-dka-screen' },
+  { text: 'Start insulin infusion (0.1 units/kg/hr) for DKA after fluids', nodeId: 'dm-dka-link' },
+  { text: 'Give aggressive fluid resuscitation for HHS (often 6-10L deficit)', nodeId: 'dm-hhs-management' },
+  { text: 'Correct sodium slowly (<10-12 mEq/L per 24h) to avoid osmotic demyelination', nodeId: 'dm-hhs-management' },
+  { text: 'Continue basal insulin even if NPO (prevents rebound hyperglycemia)', nodeId: 'dm-npo-management' },
+  { text: 'Use correctional insulin with sliding scale for inpatient management', nodeId: 'dm-inpatient-regimen' },
+  { text: 'Bridge to outpatient diabetes care with medication reconciliation', nodeId: 'dm-discharge-planning' },
 ];
 
 export const DIABETES_MANAGEMENT_NODES: DecisionNode[] = [

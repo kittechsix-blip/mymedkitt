@@ -17,10 +17,10 @@ export const HYPOTHERMIA_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Remove wet clothing and prevent further heat loss immediately', nodeId: 'hypo-rewarming' },
   { text: 'Give warm IV fluids (40-42°C) via Level 1 or Ranger', nodeId: 'hypo-rewarming' },
   { text: 'Start active rewarming with Bair Hugger, warm blankets, heated humidified O2', nodeId: 'hypo-rewarming' },
-  { text: 'Avoid defibrillation if temp <30°C (J-wave VF is refractory)', nodeId: 'hypo-cardiac-arrest' },
-  { text: 'Continue CPR during rewarming (may need hours of CPR)', nodeId: 'hypo-cardiac-arrest' },
-  { text: 'Activate ECMO for cardiac arrest with temp <28°C (best survival)', nodeId: 'hypo-ecmo' },
-  { text: 'Calculate HOPE score to guide ECMO futility (K+ >12, asphyxia, trauma)', nodeId: 'hypo-ecmo' },
+  { text: 'Avoid defibrillation if temp <30°C (J-wave VF is refractory)', nodeId: 'hypo-arrest-decision' },
+  { text: 'Continue CPR during rewarming (may need hours of CPR)', nodeId: 'hypo-arrest-cpr' },
+  { text: 'Activate ECMO for cardiac arrest with temp <28°C (best survival)', nodeId: 'hypo-arrest-ecmo-decision' },
+  { text: 'Calculate HOPE score to guide ECMO futility (K+ >12, asphyxia, trauma)', nodeId: 'hypo-arrest-ecmo-decision' },
 ];
 
 export const HYPOTHERMIA_NODES: DecisionNode[] = [

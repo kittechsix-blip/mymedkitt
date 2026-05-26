@@ -1,14 +1,14 @@
 // MedKitt — Marine Envenomation
 // Jellyfish → Fish → Other Marine → Systemic → Disposition
 export const MARINE_ENVENOMATION_CRITICAL_ACTIONS = [
-    { text: 'For jellyfish stings: rinse with vinegar (box jellyfish) or seawater (other species)', nodeId: 'marine-jellyfish-treatment' },
-    { text: 'Remove tentacles carefully without triggering nematocysts', nodeId: 'marine-jellyfish-treatment' },
-    { text: 'Give box jellyfish antivenom for Chironex fleckeri stings', nodeId: 'marine-box-jellyfish' },
-    { text: 'For fish stings (stingray, stonefish): immerse in hot water (40-45°C) for 30-90min', nodeId: 'marine-fish-treatment' },
-    { text: 'Explore wound and remove retained spines/barbs', nodeId: 'marine-fish-treatment' },
+    { text: 'For jellyfish stings: rinse with vinegar (box jellyfish) or seawater (other species)', nodeId: 'marine-cnidarian' },
+    { text: 'Remove tentacles carefully without triggering nematocysts', nodeId: 'marine-cnidarian' },
+    { text: 'Give box jellyfish antivenom for Chironex fleckeri stings', nodeId: 'marine-box-jelly' },
+    { text: 'For fish stings (stingray, stonefish): immerse in hot water (40-45°C) for 30-90min', nodeId: 'marine-fish' },
+    { text: 'Explore wound and remove retained spines/barbs', nodeId: 'marine-fish' },
     { text: 'Give stonefish antivenom for severe stonefish envenomation', nodeId: 'marine-stonefish' },
     { text: 'Monitor for systemic reactions: Irukandji syndrome (catecholamine storm)', nodeId: 'marine-systemic' },
-    { text: 'Update tetanus and give antibiotics for deep/contaminated wounds', nodeId: 'marine-wound-care' },
+    { text: 'Update tetanus and give antibiotics for deep/contaminated wounds', nodeId: 'marine-disposition' },
 ];
 export const MARINE_ENVENOMATION_MODULE_LABELS = [
     'Initial Assessment',

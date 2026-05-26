@@ -9,9 +9,9 @@ export const DIFFICULT_AIRWAY_BOUGIE_CRITICAL_ACTIONS = [
     { text: 'Use bougie-first technique for predicted difficult airways (98% vs 87% success)', nodeId: 'dab-technique' },
     { text: 'Feel for tracheal clicks as bougie advances along tracheal rings', nodeId: 'dab-technique' },
     { text: 'Hold bougie in place while loading ETT over it', nodeId: 'dab-technique' },
-    { text: 'Confirm placement with waveform capnography', nodeId: 'dab-confirmation' },
-    { text: 'Call for help early if failed attempt - do not exceed 3 attempts', nodeId: 'dab-failed-airway' },
-    { text: 'Perform emergency cricothyrotomy if cannot ventilate/cannot intubate', nodeId: 'dab-surgical-airway' },
+    { text: 'Confirm placement with waveform capnography', nodeId: 'dab-confirm' },
+    { text: 'Call for help early if failed attempt - do not exceed 3 attempts', nodeId: 'dab-failed' },
+    { text: 'Perform emergency cricothyrotomy if cannot ventilate/cannot intubate', nodeId: 'dab-cric-go' },
 ];
 export const DIFFICULT_AIRWAY_BOUGIE_NODES = [
     // =====================================================================

@@ -5,10 +5,10 @@
 export const SODIUM_CRITICAL_ACTIONS = [
     { text: 'Assess severity of hyponatremia: severe symptoms require immediate 3% saline', nodeId: 'na-hypo-symptoms' },
     { text: 'Give 3% saline 100mL bolus for severe symptomatic hyponatremia', nodeId: 'na-hypo-emergency' },
-    { text: 'Calculate serum osmolality and check urine osmolality/sodium', nodeId: 'na-hypo-workup' },
+    { text: 'Calculate serum osmolality and check urine osmolality/sodium', nodeId: 'na-hypo-etiology' },
     { text: 'Limit sodium correction to <8-10 mEq/L in 24h (avoid osmotic demyelination)', nodeId: 'na-hypo-emergency' },
-    { text: 'Fluid restrict to 800-1000mL/day for SIAD', nodeId: 'na-siad' },
-    { text: 'Correct hypernatremia slowly with D5W or 0.45% saline (<10-12 mEq/L per 24h)', nodeId: 'na-hyper-treatment' },
+    { text: 'Fluid restrict to 800-1000mL/day for SIAD', nodeId: 'na-siad-treatment' },
+    { text: 'Correct hypernatremia slowly with D5W or 0.45% saline (<10-12 mEq/L per 24h)', nodeId: 'na-hyper-fwd' },
     { text: 'Monitor sodium q2-4h during active correction', nodeId: 'na-hypo-emergency' },
     { text: 'Treat underlying cause (not just the number)', nodeId: 'na-start' },
 ];

@@ -117,7 +117,7 @@ export const ANISOCORIA_NODES = [
         type: 'question',
         module: 3,
         title: 'Pharmacologic Mydriasis vs Adie Tonic Pupil',
-        body: '[Open pharmacology quick card](#/info/anisocoria-pharm)\n\n**Ask about exposure:** scopolamine patch, ipratropium/albuterol nebulizer blowback, glycopyrrolate, atropine/homatropine/tropicamide eye drops, plants such as jimson weed, sympathomimetics, decongestants, or accidental hand-to-eye transfer.\n\n**Bedside pharmacologic clue:** a pharmacologically blocked pupil usually will not constrict to 1% pilocarpine. A nonpharmacologic dilated pupil often constricts. Do not let drop testing delay imaging when CN III signs, headache, ptosis, diplopia, or neuro deficit are present.',
+        body: '[Open pharmacology quick card](#/info/anisocoria-pharm)\n\n**Ask about exposure:** diagnostic/cycloplegic eye drops, scopolamine patch hand-to-eye transfer, leaking ipratropium neb or anticholinergic inhaler exposure, glycopyrrolate, anticholinergic plants, sympathomimetic/nasal decongestant sprays, cocaine/amphetamine exposure, botulinum toxin near the orbit, or accidental wrong-eye/wrong-drop exposure.\n\n**Bedside pharmacologic clue:** an anticholinergic-blocked pupil usually will not constrict to 1% pilocarpine. Adrenergic mydriasis may retain some light response. A nonpharmacologic dilated pupil often constricts. Do not let drop testing delay imaging when CN III signs, headache, ptosis, diplopia, or neuro deficit are present.',
         options: [
             { label: 'Clear exposure and otherwise normal eye/neuro exam', description: 'Pharmacologic mydriasis likely', next: 'anisocoria-pharm-confirmed' },
             { label: 'No exposure, light-near dissociation or tonic response', description: 'Adie tonic pupil more likely', next: 'anisocoria-adie' },
@@ -159,11 +159,23 @@ export const ANISOCORIA_NODES = [
             { label: 'Acute Horner pattern with headache, neck/face pain, trauma, neuro symptoms, or stroke symptoms', description: 'Carotid dissection or brainstem process until excluded', next: 'anisocoria-horner-emergency', urgency: 'critical' },
             { label: 'Small pupil + mild ptosis or dilation lag, no pain, timing unclear', description: 'Horner syndrome workup', next: 'anisocoria-horner', urgency: 'urgent' },
             { label: 'Red painful photophobic eye with small pupil', description: 'Anterior uveitis/iritis pattern', next: 'anisocoria-uveitis', urgency: 'urgent' },
+            { label: 'Clear miotic exposure and otherwise normal eye/neuro exam', description: 'Pharmacologic miosis likely after danger screen', next: 'anisocoria-pharm-small' },
             { label: 'Mild, chronic, same on old photos, no ptosis or neuro signs', description: 'Physiologic anisocoria likely', next: 'anisocoria-physiologic' },
         ],
         citation: [1, 2, 4],
         summary: 'Small abnormal pupil: acute painful Horner means carotid dissection until proven otherwise.',
         safetyLevel: 'critical',
+    },
+    {
+        id: 'anisocoria-pharm-small',
+        type: 'result',
+        module: 4,
+        title: 'Likely Pharmacologic Miosis',
+        body: '[Open pharmacology quick card](#/info/anisocoria-pharm)\n\n**Pattern:** smaller pupil is abnormal, no painful red eye/photophobia, no ptosis or dilation lag suggesting Horner, no focal neurologic findings, and a compatible miotic/cholinergic exposure.\n\n**Common exposures:** pilocarpine or carbachol glaucoma drops, older cholinesterase-inhibitor miotics, apraclonidine/brimonidine or other topical glaucoma drops, organophosphate/carbamate ocular splash, and systemic opioid/clonidine exposure. Systemic drugs usually affect both pupils; anisocoria usually means one eye had more direct topical exposure or another asymmetric diagnosis is present.\n\n**Disposition:** remove/stop exposure if appropriate, irrigate if chemical splash, contact poison center/toxicology for organophosphate or cholinergic syndrome, and arrange ophthalmology follow-up if persistent or uncertain.',
+        recommendation: 'Do not call a small pupil pharmacologic until painful Horner, uveitis, and neurologic causes have been considered.',
+        citation: [1, 2, 9],
+        confidence: 'consider',
+        safetyLevel: 'warning',
     },
     {
         id: 'anisocoria-horner-emergency',
@@ -248,4 +260,5 @@ export const ANISOCORIA_CITATIONS = [
     { num: 6, text: 'American Academy of Ophthalmology EyeWiki. Pharmacologic Dilation of Pupil. Updated 2025. Accessed May 25, 2026.' },
     { num: 7, text: 'American Academy of Ophthalmology EyeWiki. Adie Pupil. Updated 2026. Accessed May 25, 2026.' },
     { num: 8, text: 'Acute painful Horner syndrome as the first presenting sign of carotid artery dissection. Case report and review. Cureus/PMC. 2023.' },
+    { num: 9, text: 'StatPearls. Anisocoria. NCBI Bookshelf. Pharmacologic causes and topical/systemic exposure patterns. Accessed May 26, 2026.' },
 ];

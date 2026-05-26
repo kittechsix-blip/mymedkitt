@@ -22,7 +22,7 @@ export const AMAUROSIS_FUGAX_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'If CRAO (persistent vision loss) <4.5 hours, consider IV tPA per stroke protocol', nodeId: 'af-crao-check' },
   { text: 'Carotid imaging mandatory — CEA indicated for symptomatic stenosis ≥50%', nodeId: 'af-carotid' },
   { text: 'Start DAPT (aspirin + clopidogrel) within 24h for high-risk TIA/minor stroke', nodeId: 'af-antiplatelet' },
-  { text: 'MRI-DWI preferred — 20-30% of TMVL patients have silent acute infarcts', nodeId: 'af-mri' },
+  { text: 'MRI-DWI preferred — 20-30% of TMVL patients have silent acute infarcts', nodeId: 'af-stroke-workup' },
 ];
 
 export const AMAUROSIS_FUGAX_CITATIONS: Citation[] = [

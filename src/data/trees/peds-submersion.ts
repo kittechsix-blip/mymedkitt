@@ -13,13 +13,13 @@ interface Citation {
 
 export const PEDS_SUBMERSION_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Obtain accurate submersion duration (most important prognostic factor)', nodeId: 'submersion-start' },
-  { text: 'Begin CPR immediately if pulseless (prolonged resuscitation may be successful)', nodeId: 'submersion-cpr' },
-  { text: 'Warm hypothermic patients before declaring death', nodeId: 'submersion-hypothermia' },
-  { text: 'Obtain chest X-ray for all symptomatic submersion patients', nodeId: 'submersion-imaging' },
+  { text: 'Begin CPR immediately if pulseless (prolonged resuscitation may be successful)', nodeId: 'submersion-arrest' },
+  { text: 'Warm hypothermic patients before declaring death', nodeId: 'submersion-severe-hypothermia' },
+  { text: 'Obtain chest X-ray for all symptomatic submersion patients', nodeId: 'submersion-resp-symptoms' },
   { text: 'Observe all symptomatic patients for minimum 4-8 hours', nodeId: 'submersion-observation' },
-  { text: 'Admit patients with hypoxia, altered mental status, or respiratory distress', nodeId: 'submersion-dispo' },
-  { text: 'Consider child abuse in submersion injuries <1 year or with inconsistent history', nodeId: 'submersion-abuse' },
-  { text: 'Provide family support and anticipatory guidance', nodeId: 'submersion-dispo' },
+  { text: 'Admit patients with hypoxia, altered mental status, or respiratory distress', nodeId: 'submersion-disposition-critical' },
+  { text: 'Consider child abuse in submersion injuries <1 year or with inconsistent history', nodeId: 'submersion-scene-info' },
+  { text: 'Provide family support and anticipatory guidance', nodeId: 'submersion-disposition-critical' },
 ];
 
 export const PEDS_SUBMERSION_NODES: DecisionNode[] = [

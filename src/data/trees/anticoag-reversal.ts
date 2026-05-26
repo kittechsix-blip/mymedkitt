@@ -165,8 +165,8 @@ export const ANTICOAG_REVERSAL_NODES: DecisionNode[] = [
     type: 'result',
     module: 2,
     title: 'Factor Xa Inhibitor Reversal',
-    body: '**Apixaban (Eliquis), Rivaroxaban (Xarelto), Edoxaban (Savaysa), Fondaparinux (Arixtra)**\n\n**[1] [4-Factor PCC (Kcentra)](#/drug/pcc-4factor/doac reversal)**\n• CNS bleeding: 50 units/kg (max 5,000 units) [5,6]\n• Non-CNS: 25 units/kg (max 2,500) or **fixed 2,000 units** (simplest, best evidence) [5]\n• ⚠️ PCC will NOT change the anti-Xa level (anti-Xa measures DOAC in the body, not clotting factor levels)\n\n**[2] If ingested <2h:** [Activated Charcoal](#/drug/activated-charcoal/doac decontamination) 50 g\n\n**[3] If INR elevated:** [Vitamin K](#/drug/vitamin-k/warfarin reversal) 10 mg IV — exclude concurrent vitamin K deficiency\n\n**NOT dialyzable:** Apixaban/Eliquis (~90% protein bound), Rivaroxaban/Xarelto (~95%). Edoxaban/Savaysa (~50% bound) is somewhat dialyzable.\n\n**Monitoring:**\n• Normal INR argues against significant Xa inhibitor level but doesn\'t exclude it [4]\n• Anti-Xa level correlates well with drug level; normal anti-Xa excludes clinically relevant Xa inhibitors\n• Follow INR after PCC, then q6h (rebounding INR may indicate waning PCC effect) [5]',
-    citation: [3, 4, 5, 6],
+    body: '**Apixaban (Eliquis), Rivaroxaban (Xarelto), Edoxaban (Savaysa), Fondaparinux (Arixtra)**\n\n**[1] [4-Factor PCC (Kcentra)](#/drug/pcc-4factor/doac reversal)** — default first-line at most US centers\n• CNS bleeding: 50 units/kg (max 5,000 units) [5,6]\n• Non-CNS: 25 units/kg (max 2,500) or **fixed 2,000 units** (simplest, best evidence) [5]\n• ⚠️ PCC will NOT change the anti-Xa level (anti-Xa measures DOAC in the body, not clotting factor levels)\n\n**[2] [Andexanet alfa (Andexxa)](#/drug/andexanet-alfa/doac reversal)** — specific Xa antidote, AHA/ASA Class I for ICH if available [1]\n• **Low dose** (rivaroxaban ≤10 mg or apixaban ≤5 mg, OR last dose ≥8h ago): 400 mg IV bolus + 4 mg/min × 120 min\n• **High dose** (rivaroxaban >10 mg, apixaban >5 mg, OR unknown dose within 8h): 800 mg IV bolus + 8 mg/min × 120 min\n• ANNEXA-I (NEJM 2024, n=530): superior hemostatic efficacy vs usual care (mostly PCC) in Xa-associated ICH, stopped early [17]\n• ⚠️ **Thrombotic events 10.7% vs 3.1% with PCC** (2021 meta-analysis); no mortality benefit demonstrated [17]\n• ⚠️ NOT shown superior outside ICH; cost ~$25,000+ per dose vs ~$5,000 for PCC\n• Practical: most US centers default to PCC; reserve andexanet for ICH with andexanet on formulary and no acute thrombotic contraindication\n\n**[3] If ingested <2h:** [Activated Charcoal](#/drug/activated-charcoal/doac decontamination) 50 g\n\n**[4] If INR elevated:** [Vitamin K](#/drug/vitamin-k/warfarin reversal) 10 mg IV — exclude concurrent vitamin K deficiency\n\n**NOT dialyzable:** Apixaban/Eliquis (~90% protein bound), Rivaroxaban/Xarelto (~95%). Edoxaban/Savaysa (~50% bound) is somewhat dialyzable.\n\n**Monitoring:**\n• Normal INR argues against significant Xa inhibitor level but doesn\'t exclude it [4]\n• Anti-Xa level correlates well with drug level; normal anti-Xa excludes clinically relevant Xa inhibitors\n• ⚠️ Anti-Xa assays are **unreliable after andexanet** (drug interferes with assay) — do not use to gauge reversal [17]\n• Follow INR after PCC, then q6h (rebounding INR may indicate waning PCC effect) [5]',
+    citation: [1, 3, 4, 5, 6, 17],
     treatment: {
       firstLine: {
         drug: '4-Factor PCC (Kcentra)',
@@ -174,17 +174,17 @@ export const ANTICOAG_REVERSAL_NODES: DecisionNode[] = [
         route: 'IV',
         frequency: 'Once',
         duration: 'Single dose',
-        notes: 'Fixed 2,000 units has best evidence for non-CNS. PCC will NOT change anti-Xa level.',
+        notes: 'Default first-line at most US centers (cost, availability, thrombotic profile). PCC will NOT change anti-Xa level.',
       },
       alternative: {
-        drug: 'Activated Charcoal',
-        dose: '50 g',
-        route: 'PO/NG',
+        drug: 'Andexanet alfa (Andexxa)',
+        dose: 'Low dose: 400 mg IV bolus + 4 mg/min × 120 min | High dose: 800 mg IV bolus + 8 mg/min × 120 min (see body for dose criteria)',
+        route: 'IV',
         frequency: 'Once',
-        duration: 'Single dose',
-        notes: 'Only if ingested <2 hours ago. Consider Vitamin K 10 mg IV if INR elevated (concurrent vitamin K deficiency).',
+        duration: '~2 hours',
+        notes: 'AHA/ASA Class I for ICH if available. ANNEXA-I 2024: superior hemostasis vs usual care, no mortality benefit, 3-4× thrombotic risk vs PCC. Reserve for Xa-ICH with andexanet on formulary and no acute thrombotic contraindication.',
       },
-      monitoring: 'INR after PCC, then q6h. Anti-Xa level if available. Rebounding INR may indicate waning PCC effect.',
+      monitoring: 'INR after PCC, then q6h. Anti-Xa level if available — but UNRELIABLE after andexanet (assay interference). Rebounding INR may indicate waning PCC effect.',
     },
   },
   {
@@ -470,4 +470,5 @@ export const ANTICOAG_REVERSAL_CITATIONS: { num: number; text: string }[] = [
   { num: 14, text: 'Sperry JD, Rose AE, Williams E, et al. Emergent Reversal of Antithrombotics and Treatment of Life-Threatening Bleeding from Coagulopathies: A Clinical Review. J Emerg Med. 2022;63(1):17-48. doi:10.1016/j.jemermed.2022.05.011' },
   { num: 15, text: 'ESO/EANS Joint Guidelines Committee. European Stroke Organisation and European Association of Neurosurgical Societies guideline on stroke due to spontaneous ICH. Eur Stroke J. 2025;10(4):1007-1086. doi:10.1177/23969873251327397' },
   { num: 16, text: 'Farkas J. Anticoagulant Reversal. Internet Book of Critical Care (IBCC). Updated April 25, 2025. EMCrit Project.' },
+  { num: 17, text: 'Connolly SJ, Sharma M, Cohen AT, et al. Andexanet for Factor Xa Inhibitor-Associated Acute Intracerebral Hemorrhage (ANNEXA-I). N Engl J Med. 2024;390(19):1745-1755. doi:10.1056/NEJMoa2313040' },
 ];

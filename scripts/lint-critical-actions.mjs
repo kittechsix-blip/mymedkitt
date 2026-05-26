@@ -54,15 +54,18 @@ for (const file of treeFiles) {
   }
 
   // Find the CRITICAL_ACTIONS array (zero or more allowed per file)
-  // Pattern: export const FOO_CRITICAL_ACTIONS = [ ... ];
-  const caMatch = src.match(/export const \w+_CRITICAL_ACTIONS\s*=\s*\[([\s\S]*?)\];/);
+  // Pattern: export const FOO_CRITICAL_ACTIONS [: CriticalAction[]]? = [ ... ];
+  // The optional type annotation `: CriticalAction[]` is present in ~50 trees
+  // and was previously skipped by this lint — that was the original blind spot
+  // that let Louis flag this defect class 5 times before this lint shipped.
+  const caMatch = src.match(/export const \w+_CRITICAL_ACTIONS(?:\s*:\s*[^=]+?)?\s*=\s*\[([\s\S]*?)\];/);
   if (!caMatch) {
     // No CRITICAL_ACTIONS array — skip silently (not every tree has one)
     continue;
   }
 
-  // Find the NODES array
-  const nodesMatch = src.match(/export const \w+_NODES\s*:\s*DecisionNode\[\]\s*=\s*\[([\s\S]*)\];/);
+  // Find the NODES array (also accept readonly DecisionNode[], etc.)
+  const nodesMatch = src.match(/export const \w+_NODES(?:\s*:\s*[^=]+?)?\s*=\s*\[([\s\S]*)\];/);
   if (!nodesMatch) {
     failureReport.push({ file, error: 'has CRITICAL_ACTIONS but no NODES array found' });
     totalFailures++;

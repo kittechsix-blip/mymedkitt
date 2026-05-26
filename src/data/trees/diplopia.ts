@@ -16,7 +16,7 @@ export const DIPLOPIA_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'ALL CN III palsies need emergent CTA regardless of pupil status', nodeId: 'diplopia-cn3-pupil' },
   { text: 'Pupil-involving CN III + headache = PCommA aneurysm until proven otherwise', nodeId: 'diplopia-cn3-pupil' },
   { text: 'ESR/CRP in ALL patients >50 years with new diplopia (GCA screen)', nodeId: 'diplopia-gca' },
-  { text: 'Isolated CN VI can be false localizing sign of elevated ICP - check for papilledema', nodeId: 'diplopia-cn6' },
+  { text: 'Isolated CN VI can be false localizing sign of elevated ICP - check for papilledema', nodeId: 'diplopia-cn6-start' },
   { text: 'Multiple CN palsies = cavernous sinus or orbital apex pathology', nodeId: 'diplopia-red-flags' },
 ];
 

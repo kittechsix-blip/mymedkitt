@@ -5,9 +5,9 @@
 export const ORBITAL_CELLULITIS_CRITICAL_ACTIONS = [
     { text: 'Distinguish preseptal (anterior) from orbital (posterior to septum)', nodeId: 'orbital-start' },
     { text: 'Test for signs of orbital involvement: proptosis, EOM restriction, vision loss', nodeId: 'orbital-exam' },
-    { text: 'Obtain CT orbits with contrast if orbital cellulitis suspected', nodeId: 'orbital-imaging' },
+    { text: 'Obtain CT orbits with contrast if orbital cellulitis suspected', nodeId: 'orbital-ct-findings' },
     { text: 'Give IV antibiotics immediately (ampicillin-sulbactam or ceftriaxone + vancomycin)', nodeId: 'orbital-treatment' },
-    { text: 'Immediate ophthalmology and ENT consult for orbital cellulitis', nodeId: 'orbital-consult' },
+    { text: 'Immediate ophthalmology and ENT consult for orbital cellulitis', nodeId: 'orbital-admit' },
     { text: 'Admit all orbital cellulitis for IV antibiotics and monitoring', nodeId: 'orbital-dispo' },
     { text: 'Recognize cavernous sinus thrombosis (bilateral, severe, cranial nerve palsies)', nodeId: 'orbital-start' },
 ];

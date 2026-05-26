@@ -13,9 +13,9 @@ export const CO_TOXICITY_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Check for household cluster: multiple patients with headache/nausea', nodeId: 'co-start' },
   { text: 'Consider cyanide co-exposure in fire/smoke inhalation victims', nodeId: 'co-cyanide' },
   { text: 'Arrange hyperbaric oxygen (HBO) for severe cases: AMS, loss of consciousness, pregnancy, COHb >25%', nodeId: 'co-hbo' },
-  { text: 'Give normobaric 100% O2 for minimum 6 hours if HBO not available', nodeId: 'co-oxygen' },
+  { text: 'Give normobaric 100% O2 for minimum 6 hours if HBO not available', nodeId: 'co-nbo-protocol' },
   { text: 'Assess for delayed neurologic sequelae at 2-6 weeks follow-up', nodeId: 'co-dns' },
-  { text: 'Notify fire department/housing authority for source investigation', nodeId: 'co-dispo' },
+  { text: 'Notify fire department/housing authority for source investigation', nodeId: 'co-disposition' },
 ];
 
 export const CO_TOXICITY_NODES: DecisionNode[] = [

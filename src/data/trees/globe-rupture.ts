@@ -19,7 +19,7 @@ export const GLOBE_RUPTURE_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Give anti-emetics to prevent Valsalva-induced IOP spikes', nodeId: 'globe-antibiotics' },
   { text: 'Obtain CT orbits (3mm axial/coronal, no contrast) to confirm diagnosis', nodeId: 'globe-imaging' },
   { text: 'Immediate ophthalmology consult for surgical repair', nodeId: 'globe-consult' },
-  { text: 'Keep patient NPO for emergent surgery', nodeId: 'globe-operative' },
+  { text: 'Keep patient NPO for emergent surgery', nodeId: 'globe-dispo' },
 ];
 
 export const GLOBE_RUPTURE_NODES: DecisionNode[] = [
