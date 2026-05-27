@@ -64,7 +64,7 @@ export const ANTICOAG_REVERSAL_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Identify the Anticoagulant',
-    body: '**Act fast.** For ICH on warfarin, give PCC immediately — do NOT wait for INR result. [1,15]\n\nReview all medications affecting coagulation. Determine last dose and timing.',
+    body: '**Act fast.** For ICH on warfarin, give PCC immediately — do NOT wait for INR result. [1,15]\n\n⚠️ **Massive hemorrhage on unknown anticoagulant:** activate **MTP (1:1:1)** and give **empiric 4-factor PCC 25–50 units/kg** while you identify the specific agent and last dose. Do not delay PCC waiting for agent confirmation in life-threatening bleeding. [1,15]\n\nReview all medications affecting coagulation. Determine last dose and timing.',
     citation: [1, 15],
     options: [
       {
