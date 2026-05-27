@@ -12302,7 +12302,7 @@ const HYPO_TREATMENT_CALCULATOR: CalculatorDefinition = {
   thresholdNote: 'Goal: Raise glucose to >100 mg/dL. Recheck in 15 minutes. Rule of 15: 15g glucose raises BG ~50 mg/dL in adults.',
   citations: [
     'Cryer PE, et al. Evaluation and Management of Hypoglycemic Disorders. J Clin Endocrinol Metab. 2009;94(3):709-728.',
-    'ElSayed NA, et al. Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1).',
+    'American Diabetes Association Professional Practice Committee. Standards of Care in Diabetes - 2026. Diabetes Care. 2026;49(Suppl 1).',
   ],
   computeResult: (values: Record<string, number>) => {
     const currentBg = values['current-bg'] || 0;
@@ -12341,6 +12341,80 @@ const HYPO_TREATMENT_CALCULATOR: CalculatorDefinition = {
       label: severity,
       description: `**Current glucose:** ${currentBg} mg/dL\n**Mental Status:** Altered - requires IV/IM treatment\n\n**IV Treatment (first-line):**\n- **D50W** 25-50 mL (12.5-25g dextrose) IV push, OR\n- **D10W** 100-250 mL IV over 10-15 min\n\n**No IV Access:**\n- **Glucagon** ${glucagonDose} mg IM/SC (lateral thigh), OR\n- **Glucagon intranasal** 3 mg (Baqsimi)\n\n**THIAMINE FIRST** if alcoholic/malnourished:\n- Thiamine 100 mg IV before or with dextrose\n\n**Recheck glucose in 15 min.** May need repeat dosing or D10W infusion.\n\n**Sulfonylurea-induced:** Extended monitoring required (12-72h). Consider octreotide.`,
       colorVar,
+    };
+  },
+};
+
+const HYPOGLYCEMIA_REBOUND_RISK_CALCULATOR: CalculatorDefinition = {
+  id: 'hypoglycemia-rebound-risk',
+  title: 'Hypoglycemia Rebound Risk',
+  subtitle: 'Observation, infusion, octreotide, or discharge screen',
+  description: 'Screens for features that make a corrected glucose unsafe for rapid discharge. Use after initial stabilization and before disposition.',
+  fields: [
+    { name: 'severe', label: 'Seizure, coma, prolonged AMS, or unsafe swallow', type: 'toggle', points: 3, description: 'Level 3 event or airway/aspiration concern' },
+    { name: 'recurrent', label: 'Recurrent glucose <70 after initial treatment', type: 'toggle', points: 3, description: 'Any repeat low during ED observation' },
+    { name: 'secretagogue', label: 'Sulfonylurea or meglitinide possible', type: 'toggle', points: 4, description: 'Glipizide, glyburide, glimepiride, repaglinide, nateglinide' },
+    { name: 'long-acting-insulin', label: 'Long-acting insulin, pump error, or large insulin dose', type: 'toggle', points: 4, description: 'Basal insulin, concentrated insulin, pump malfunction, unknown dose' },
+    { name: 'renal', label: 'Renal failure or missed dialysis', type: 'toggle', points: 2, description: 'Reduced insulin or medication clearance' },
+    { name: 'critical-illness', label: 'Critical illness or endocrine cause possible', type: 'toggle', points: 3, description: 'Sepsis, liver failure, adrenal crisis, shock, hypothermia, malnutrition' },
+    { name: 'poor-po', label: 'Poor oral intake, vomiting, NPO, or frailty', type: 'toggle', points: 2, description: 'Cannot reliably maintain carbohydrate intake' },
+    { name: 'unsafe', label: 'Intentional overdose or unsafe follow-up/home setting', type: 'toggle', points: 3, description: 'Self-harm concern, medication confusion, no supplies or food access' },
+  ],
+  results: [],
+  thresholdNote: 'Any secretagogue, long-acting insulin overdose, recurrent low, critical illness, poor intake, or unsafe follow-up should override a single normal glucose.',
+  citations: [
+    'American Diabetes Association Professional Practice Committee. Standards of Care in Diabetes - 2026. Diabetes Care. 2026;49(Suppl 1).',
+    'Cryer PE, et al. Evaluation and Management of Adult Hypoglycemic Disorders. J Clin Endocrinol Metab. 2009;94(3):709-728.',
+    'Klein-Schwartz W, Stassinos GL, Isbister GK. Treatment of sulfonylurea and insulin overdose. Br J Clin Pharmacol. 2016;81(3):496-504.',
+    'EMCrit Project, Internet Book of Critical Care. Hypoglycemia.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const severe = values['severe'] || 0;
+    const recurrent = values['recurrent'] || 0;
+    const secretagogue = values['secretagogue'] || 0;
+    const longActingInsulin = values['long-acting-insulin'] || 0;
+    const renal = values['renal'] || 0;
+    const criticalIllness = values['critical-illness'] || 0;
+    const poorPo = values['poor-po'] || 0;
+    const unsafe = values['unsafe'] || 0;
+    const score = severe + recurrent + secretagogue + longActingInsulin + renal + criticalIllness + poorPo + unsafe;
+
+    const flags: string[] = [];
+    if (severe) flags.push('Level 3 or unsafe swallow event');
+    if (recurrent) flags.push('recurrent low after treatment');
+    if (secretagogue) flags.push('sulfonylurea/meglitinide exposure');
+    if (longActingInsulin) flags.push('long-acting insulin, pump issue, or large insulin dose');
+    if (renal) flags.push('renal failure or missed dialysis');
+    if (criticalIllness) flags.push('critical illness or endocrine cause');
+    if (poorPo) flags.push('poor oral intake, NPO status, vomiting, or frailty');
+    if (unsafe) flags.push('intentional overdose or unsafe follow-up');
+
+    if (score === 0) {
+      return {
+        value: 'Low rebound risk',
+        label: 'Discharge may be reasonable',
+        description: '**All screened high-risk features are absent.**\n\nDischarge can be considered if the patient is eating, serial glucose checks are stable after treatment, the cause is clear and reversible, medications are adjusted, glucose supplies are available, and follow-up is reliable.',
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (secretagogue || longActingInsulin || recurrent || criticalIllness || score >= 5) {
+      const octreotideLine = secretagogue
+        ? '\n\n**Sulfonylurea/meglitinide:** add octreotide 50-100 mcg SC/IV q6h after dextrose correction and observe/admit.'
+        : '';
+      return {
+        value: 'High rebound risk',
+        label: 'Observe or admit',
+        description: `**High-risk features:** ${flags.join('; ')}.\n\nRecommended ED plan:\n- Continue serial glucose monitoring.\n- Use D10W infusion if glucose is recurrent or oral intake is unreliable.\n- Address the cause, not only the glucose number.\n- Admit or observe until glucose remains stable after dextrose is weaned.${octreotideLine}`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    return {
+      value: 'Moderate rebound risk',
+      label: 'Extended ED observation',
+      description: `**Risk features:** ${flags.join('; ')}.\n\nObserve with serial glucose checks, confirm meal tolerance, correct medication or nutrition mismatch, and reassess before discharge. Escalate to admission if any recurrence occurs or the patient cannot maintain oral intake.`,
+      colorVar: '--color-warning',
     };
   },
 };
@@ -39753,6 +39827,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'basal-bolus-calc': BASAL_BOLUS_CALCULATOR,
   'icr-calc': CARB_INSULIN_RATIO_CALCULATOR,
   'hypo-treatment': HYPO_TREATMENT_CALCULATOR,
+  'hypoglycemia-rebound-risk': HYPOGLYCEMIA_REBOUND_RISK_CALCULATOR,
   'sliding-scale-gen': SLIDING_SCALE_GENERATOR,
   'abc-score': ABC_SCORE_CALCULATOR,
   'shock-index': SHOCK_INDEX_CALCULATOR,

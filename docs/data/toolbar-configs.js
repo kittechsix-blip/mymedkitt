@@ -8,6 +8,7 @@
 export const TOOLBAR_OVERFLOW = new Set([
     'burns',
     'anisocoria',
+    'hypoglycemia',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 const TOOLBAR_CONFIGS = {
@@ -852,6 +853,16 @@ const TOOLBAR_CONFIGS = {
         { id: 'tdd', label: 'TDD', icon: '🧮', action: 'calculator', target: 'tdd-estimator' },
         { id: 'insulin-dc', label: 'Insulin DC', icon: '📄', action: 'overlay', target: 'dm-insulin-discharge' },
         { id: 'oral-dc', label: 'Oral DC', icon: '💊', action: 'overlay', target: 'dm-oral-discharge' },
+    ],
+    'hypoglycemia': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hypoglycemia-steps', pinned: true },
+        { id: 'diff', label: 'Diff', icon: '🧩', action: 'overlay', target: 'hypoglycemia-differential-guide', pinned: true },
+        { id: 'treat', label: 'Treat', icon: '💉', action: 'calculator', target: 'hypo-treatment', pinned: true },
+        { id: 'rebound', label: 'Rebound', icon: '🔁', action: 'calculator', target: 'hypoglycemia-rebound-risk', pinned: true },
+        { id: 'su', label: 'SU', icon: '🧪', action: 'jump', target: 'hypoglycemia-sulfonylurea', pinned: true },
+        { id: 'sample', label: 'Sample', icon: '🧬', action: 'overlay', target: 'hypoglycemia-critical-sample' },
+        { id: 'dispo', label: 'Dispo', icon: '🏁', action: 'jump', target: 'hypoglycemia-disposition' },
+        { id: 'pitfalls', label: 'Pitfalls', icon: '⚠️', action: 'overlay', target: 'hypoglycemia-pitfalls' },
     ],
     'caustic-ingestion': [
         { id: 'caustic-agent', label: 'Acid/Alkali', icon: '🧪', action: 'calculator', target: 'caustic-agent' },

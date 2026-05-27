@@ -9872,6 +9872,117 @@ const PELVIC_RUG_PROCEDURE = {
 // -------------------------------------------------------------------
 // Diabetes Management Summary
 // -------------------------------------------------------------------
+const HYPOGLYCEMIA_STEPS_PAGE = {
+    id: 'hypoglycemia-steps',
+    title: 'Hypoglycemia Steps',
+    subtitle: 'ED sequence for stabilization, cause, recurrence risk, and disposition',
+    sections: [
+        {
+            heading: '1. Treat the symptomatic patient',
+            body: '- Check POC glucose immediately.\n- If altered, seizing, or unsafe to swallow: IV dextrose if access, glucagon if no access.\n- If awake and able to swallow: 15-20 g fast carbohydrate PO.\n- Do not delay dextrose for confirmatory labs in an unstable patient.',
+        },
+        {
+            heading: '2. Recheck and prove durability',
+            body: '- Recheck glucose in 15 minutes.\n- Repeat therapy until glucose is >70 mg/dL and symptoms improve.\n- Once corrected, give longer-acting carbohydrate or meal if medication effect remains active.\n- If recurrent, start D10W infusion and move to rebound-risk assessment.',
+        },
+        {
+            heading: '3. Put the differential early',
+            body: '- Medication mismatch: insulin, sulfonylurea, meglitinide, pump, duplicate dose.\n- Intake or substrate: missed meal, vomiting, alcohol, malnutrition, exercise.\n- Clearance: renal failure, hepatic failure.\n- Illness: sepsis, shock, hypothermia.\n- Endocrine: adrenal insufficiency, hypopituitarism.\n- Unexplained or non-diabetic: apply Whipple triad and consider critical sample.',
+        },
+        {
+            heading: '4. Match treatment to cause',
+            body: '- Insulin effect: food if awake, dextrose infusion if recurrent, electrolyte monitoring if overdose.\n- Sulfonylurea/meglitinide: dextrose for immediate correction plus octreotide for recurrent or high-risk cases.\n- Critical illness or endocrine cause: treat glucose and the underlying condition in parallel.',
+        },
+        {
+            heading: '5. Disposition',
+            body: 'Discharge only if glucose remains stable, the cause is clear and reversible, the patient is eating, medications are adjusted, supplies and food access are realistic, and follow-up is reliable. Observe or admit recurrent, medication-driven, unclear, critical illness, renal failure, poor intake, or unsafe cases.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American Diabetes Association Professional Practice Committee. Standards of Care in Diabetes - 2026. Diabetes Care. 2026;49(Suppl 1).' },
+        { num: 2, text: 'Cryer PE, et al. Evaluation and Management of Adult Hypoglycemic Disorders. J Clin Endocrinol Metab. 2009;94(3):709-728.' },
+        { num: 3, text: 'Klein-Schwartz W, Stassinos GL, Isbister GK. Treatment of sulfonylurea and insulin overdose. Br J Clin Pharmacol. 2016;81(3):496-504.' },
+    ],
+};
+const HYPOGLYCEMIA_DIFFERENTIAL_GUIDE = {
+    id: 'hypoglycemia-differential-guide',
+    title: 'Hypoglycemia Differential',
+    subtitle: 'Rapid ED cause map',
+    sections: [
+        {
+            heading: 'Diabetes medication or nutrition mismatch',
+            body: '**Most common ED bucket.**\n\n- Insulin: wrong dose, duplicate dose, meal missed after bolus, pump basal error, renal failure reducing clearance.\n- Sulfonylureas/meglitinides: glyburide, glipizide, glimepiride, repaglinide, nateglinide.\n- Poor intake, vomiting, alcohol, exercise, frailty, food insecurity, medication confusion.',
+        },
+        {
+            heading: 'Critical illness and organ failure',
+            body: '- Sepsis, shock, hypothermia.\n- Liver failure or acute hepatic injury.\n- Renal failure or missed dialysis.\n- Malnutrition or depleted glycogen stores.\n\nThese patients often need admission even if the initial glucose corrects.',
+        },
+        {
+            heading: 'Endocrine and non-diabetic causes',
+            body: '- Adrenal insufficiency or adrenal crisis.\n- Hypopituitarism.\n- Insulinoma or non-islet cell tumor.\n- Post-bariatric or post-prandial hypoglycemia.\n- Surreptitious insulin or secretagogue exposure.\n- Medication effects beyond diabetes drugs, including quinolones, pentamidine, quinine, beta blockers masking symptoms, and other patient-specific exposures.',
+        },
+        {
+            heading: 'Artifact and pseudohypoglycemia',
+            body: 'Consider when fingerstick is discordant with clinical picture or lab delay is plausible:\n\n- Poor peripheral perfusion.\n- Delayed sample processing.\n- Severe leukocytosis or erythrocytosis.\n- Capillary meter error.\n\nConfirm with plasma glucose if the patient is stable, but do not delay treatment of symptomatic hypoglycemia.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cryer PE, et al. Evaluation and Management of Adult Hypoglycemic Disorders. J Clin Endocrinol Metab. 2009;94(3):709-728.' },
+        { num: 2, text: 'Endotext. Non-Diabetic Hypoglycemia. NCBI Bookshelf.' },
+        { num: 3, text: 'Murad MH, et al. Drug-Induced Hypoglycemia: A Systematic Review. J Clin Endocrinol Metab. 2009;94(3):741-745.' },
+    ],
+};
+const HYPOGLYCEMIA_CRITICAL_SAMPLE_PAGE = {
+    id: 'hypoglycemia-critical-sample',
+    title: 'Critical Sample',
+    subtitle: 'What to send during unexplained or recurrent hypoglycemia',
+    sections: [
+        {
+            heading: 'When to send',
+            body: 'Send during a documented low glucose episode when hypoglycemia is unexplained, recurrent, non-diabetic, medication history is unreliable, or the clinical picture does not fit the stated cause. Draw before dextrose only if doing so does not delay treatment.',
+        },
+        {
+            heading: 'Core labs',
+            body: '- Plasma glucose.\n- Insulin.\n- C-peptide.\n- Proinsulin.\n- Beta-hydroxybutyrate.\n- Sulfonylurea/meglitinide screen.\n- Cortisol if adrenal insufficiency is plausible.\n- Ethanol, renal function, liver panel, lactate, and sepsis labs as clinically indicated.',
+        },
+        {
+            heading: 'Interpretation pattern',
+            body: '- High insulin + high C-peptide: endogenous insulin or secretagogue.\n- High insulin + low C-peptide: exogenous insulin.\n- Low beta-hydroxybutyrate during hypoglycemia: hyperinsulinemic pattern.\n- High ketones with low insulin: fasting, alcohol, malnutrition, adrenal or critical illness pattern.\n\nEndocrinology input is appropriate for unexplained, recurrent, non-diabetic, or suspected hyperinsulinemic cases.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cryer PE, et al. Evaluation and Management of Adult Hypoglycemic Disorders. J Clin Endocrinol Metab. 2009;94(3):709-728.' },
+        { num: 2, text: 'Endotext. Non-Diabetic Hypoglycemia. NCBI Bookshelf.' },
+    ],
+};
+const HYPOGLYCEMIA_PITFALLS_PAGE = {
+    id: 'hypoglycemia-pitfalls',
+    title: 'Hypoglycemia Pitfalls',
+    subtitle: 'Common ED misses',
+    sections: [
+        {
+            heading: 'Single normal glucose is not disposition',
+            body: 'A corrected glucose proves treatment worked once. It does not prove the medication effect, organ failure, poor intake, or intentional overdose risk has resolved.',
+        },
+        {
+            heading: 'Repeated D50 can worsen sulfonylurea cycling',
+            body: 'Dextrose is required for immediate correction, but recurrent sulfonylurea or meglitinide hypoglycemia needs octreotide because secretagogues continue to drive insulin release.',
+        },
+        {
+            heading: 'Food access and med access matter',
+            body: 'Discharge can fail if the patient cannot eat reliably, cannot check glucose, has no fast carbohydrate, has medication confusion, or cannot adjust the culprit drug.',
+        },
+        {
+            heading: 'Critical illness hypoglycemia is high risk',
+            body: 'Sepsis, liver failure, renal failure, adrenal crisis, hypothermia, and malnutrition are not benign hypoglycemia causes. Treat the glucose and the underlying illness together.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American Diabetes Association Professional Practice Committee. Standards of Care in Diabetes - 2026. Diabetes Care. 2026;49(Suppl 1).' },
+        { num: 2, text: 'Klein-Schwartz W, Stassinos GL, Isbister GK. Treatment of sulfonylurea and insulin overdose. Br J Clin Pharmacol. 2016;81(3):496-504.' },
+        { num: 3, text: 'EMCrit Project, Internet Book of Critical Care. Hypoglycemia.' },
+    ],
+};
 const DM_SUMMARY = {
     id: 'dm-summary',
     title: 'Diabetes Management',
@@ -24036,6 +24147,10 @@ export const INFO_PAGES = {
     'asthma-bipap-guide': ASTHMA_BIPAP_GUIDE,
     'asthma-intubation-approach': ASTHMA_INTUBATION_APPROACH,
     'asthma-vent-strategy': ASTHMA_VENT_STRATEGY,
+    'hypoglycemia-steps': HYPOGLYCEMIA_STEPS_PAGE,
+    'hypoglycemia-differential-guide': HYPOGLYCEMIA_DIFFERENTIAL_GUIDE,
+    'hypoglycemia-critical-sample': HYPOGLYCEMIA_CRITICAL_SAMPLE_PAGE,
+    'hypoglycemia-pitfalls': HYPOGLYCEMIA_PITFALLS_PAGE,
     'dm-summary': DM_SUMMARY,
     'dm-insulin-discharge': DM_INSULIN_DISCHARGE,
     'dm-oral-discharge': DM_ORAL_DISCHARGE,

@@ -104,6 +104,7 @@ export const TREE_REGISTRY = {
   'acetaminophen':    { prefix: 'ACETAMINOPHEN_OD',    entryNodeId: 'apap-start',         categoryId: 'toxicology' },
   'salicylate':       { prefix: 'SALICYLATE',          entryNodeId: 'sal-start',          categoryId: 'toxicology' },
   'dka':              { prefix: 'DKA',                 entryNodeId: 'dka-start',          categoryId: 'nephro-rheum-endo' },
+  'hypoglycemia':     { prefix: 'HYPOGLYCEMIA',        entryNodeId: 'hypoglycemia-start', categoryId: 'nephro-rheum-endo' },
   'sepsis':           { prefix: 'SEPSIS',              entryNodeId: 'sepsis-start',       categoryId: 'critical-care' },
   'vertigo':          { prefix: 'VERTIGO',             entryNodeId: 'vert-start',         categoryId: 'neurology' },
   'chf-exacerbation': { prefix: 'CHF_EXACERBATION',    entryNodeId: 'chf-start',          categoryId: 'cardiology' },

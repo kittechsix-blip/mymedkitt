@@ -1608,6 +1608,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'dm-start',
       },
       {
+        id: 'hypoglycemia',
+        title: 'Hypoglycemia',
+        subtitle: 'Stabilize -> Differential -> Treatment -> Rebound Risk -> Critical Sample -> Disposition',
+        categoryId: 'nephro-rheum-endo',
+        version: '1.0',
+        nodeCount: 14,
+        entryNodeId: 'hypoglycemia-start',
+      },
+      {
         id: 'rhabdomyolysis',
         title: 'Rhabdomyolysis',
         subtitle: 'Recognition \u2192 Etiology \u2192 Workup \u2192 Treatment \u2192 Complications \u2192 Disposition',

@@ -741,6 +741,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/diabetes-management.js');
       return { nodes: m.DIABETES_MANAGEMENT_NODES, entryNodeId: 'dm-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.DIABETES_MANAGEMENT_MODULE_LABELS, citations: m.DIABETES_MANAGEMENT_CITATIONS, criticalActions: m.DIABETES_MANAGEMENT_CRITICAL_ACTIONS };
     },
+    'hypoglycemia': async () => {
+      const m = await import('../data/trees/hypoglycemia.js');
+      return { nodes: m.HYPOGLYCEMIA_NODES, entryNodeId: 'hypoglycemia-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.HYPOGLYCEMIA_MODULE_LABELS, citations: m.HYPOGLYCEMIA_CITATIONS, criticalActions: m.HYPOGLYCEMIA_CRITICAL_ACTIONS };
+    },
     'sepsis': async () => {
       const m = await import('../data/trees/sepsis.js');
       return { nodes: m.SEPSIS_NODES, entryNodeId: 'sepsis-start', categoryId: 'infectious-disease', moduleLabels: m.SEPSIS_MODULE_LABELS, citations: m.SEPSIS_CITATIONS, criticalActions: m.SEPSIS_CRITICAL_ACTIONS };

@@ -103,6 +103,7 @@ const CLINICAL_SYNONYMS: Record<string, string[]> = {
   'nstemi': ['mi', 'acs', 'acute coronary', 'troponin'],
   'intubation': ['rsi', 'airway', 'etomidate', 'rocuronium', 'tube'],
   'dka': ['diabetic ketoacidosis', 'hyperglycemia', 'insulin', 'bicarb'],
+  'hypoglycemia': ['low blood sugar', 'low glucose', 'dextrose', 'd50', 'd10', 'glucagon', 'sulfonylurea', 'glipizide', 'glyburide', 'glimepiride', 'octreotide', 'insulin overdose', 'recurrent hypoglycemia', 'diabetes', 'endocrine', 'critical sample'],
   'syncope': ['passed out', 'fainted', 'loss of consciousness', 'loc'],
   'meningitis': ['meningeal', 'lumbar puncture', 'lp', 'csf'],
   'syphilis': ['neurosyphilis', 'treponemal', 'rpr', 'vdrl'],
