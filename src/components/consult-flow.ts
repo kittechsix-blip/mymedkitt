@@ -55,7 +55,11 @@ function scrollCardBelowHeader(card: Element): void {
 }
 
 /** Initialize and render the consult flow for a given tree */
-export async function renderConsultFlow(container: HTMLElement, treeId: string): Promise<void> {
+export async function renderConsultFlow(
+  container: HTMLElement,
+  treeId: string,
+  options?: { jumpToNodeId?: string }
+): Promise<void> {
   const config = await getTreeConfig(treeId);
   if (!config) {
     renderUnavailable(container, treeId);
@@ -119,7 +123,25 @@ export async function renderConsultFlow(container: HTMLElement, treeId: string):
     }
   }
 
+  // Deep-link to a specific node if requested (from search results).
+  // Silently falls back to entry node if nodeId is not valid in this tree.
+  const jumpId = options?.jumpToNodeId;
+  const jumpValid = !!jumpId && config.nodes.some(n => n.id === jumpId);
+  if (jumpValid && jumpId) {
+    controller.jumpToNode(jumpId);
+  }
+
   renderFlow(container);
+
+  // Scroll deep-linked card into view below the sticky header
+  if (jumpValid) {
+    requestAnimationFrame(() => {
+      const activeCard = container.querySelector('.decision-card--active');
+      if (activeCard) {
+        scrollCardBelowHeader(activeCard);
+      }
+    });
+  }
 }
 
 /** Render the full card stack + active card + header + toolbar */

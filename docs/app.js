@@ -81,9 +81,17 @@ function renderPlaceholder(title, subtitle, icon) {
     titleEl.textContent = title;
     const subtitleEl = document.createElement('p');
     subtitleEl.textContent = subtitle;
+    const backBtn = document.createElement('button');
+    backBtn.type = 'button';
+    backBtn.className = 'empty-state-back';
+    backBtn.textContent = '\u2190 Back to Home';
+    backBtn.addEventListener('click', () => {
+        router.navigate('/');
+    });
     container.appendChild(iconEl);
     container.appendChild(titleEl);
     container.appendChild(subtitleEl);
+    container.appendChild(backBtn);
     main.appendChild(container);
 }
 // -------------------------------------------------------------------
@@ -144,7 +152,8 @@ function handleTreeNode(params) {
     hideGlobalTabBar();
     const treeId = params['id'] ?? 'unknown';
     const nodeId = params['nodeId'] ?? 'unknown';
-    renderPlaceholder(`Node: ${nodeId}`, `In tree: ${treeId}.`, '\uD83D\uDD35');
+    const main = clearMain();
+    void renderConsultFlow(main, treeId, { jumpToNodeId: nodeId });
 }
 function handleReference(params) {
     removeContextualToolbar();
