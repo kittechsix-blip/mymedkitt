@@ -16,7 +16,7 @@ export const PENILE_ZIPPER_RELEASE_MODULE_LABELS = [
 ];
 export const PENILE_ZIPPER_RELEASE_CITATIONS = [
     { num: 1, text: 'Lin EM, Liss MA, Lefcourt JG, et al. Penile Zipper Entrapment. ALiEM. Available at: aliem.com/penile-zipper-entrapment/. Accessed 2026.' },
-    { num: 2, text: 'Nickson C. Penile Zipper Injury. Life in the Fast Lane (LITFL). Available at: litfl.com/penile-zipper-injury/. Accessed 2026.' },
+    { num: 2, text: 'Nickson C. Zany Zipper. Life in the Fast Lane (LITFL). Available at: litfl.com/zany-zipper/. Accessed 2026.' },
     { num: 3, text: 'Leslie SW, Sajjad H. Penile Zipper and Ring Injuries. In: StatPearls. Treasure Island (FL): StatPearls Publishing; 2024. NBK459308. Available at: ncbi.nlm.nih.gov/books/NBK459308/.' },
     { num: 4, text: 'Mishra SC. A device for the disengagement of skin caught in zipper. Br J Plast Surg. 2005;58(6):868-869.' },
     { num: 5, text: 'Strait RT. A novel method for removal of penile zipper entrapment. Pediatr Emerg Care. 1999;15(6):412-413.' },

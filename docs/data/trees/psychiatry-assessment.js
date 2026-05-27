@@ -420,7 +420,7 @@ export const PSYCHIATRY_ASSESSMENT_MODULE_LABELS = [
 // -------------------------------------------------------------------
 export const PSYCHIATRY_ASSESSMENT_CITATIONS = [
     { num: 1, text: 'Sadock BJ, Sadock VA, Ruiz P. Kaplan & Sadock\'s Synopsis of Psychiatry: Behavioral Sciences/Clinical Psychiatry. 11th ed. Wolters Kluwer; 2015.' },
-    { num: 2, text: 'Lukens TW, Wolf SJ, Edlow JA, et al. Clinical Policy: Critical Issues in the Diagnosis and Management of the Adult Psychiatric Patient in the Emergency Department. Ann Emerg Med. 2006;47(1):79-99.' },
+    { num: 2, text: 'Nazarian DJ, Broder JS, Thiessen MEW, et al. ACEP Clinical Policy: Critical Issues in the Diagnosis and Management of the Adult Psychiatric Patient in the Emergency Department. Ann Emerg Med. 2017;69(4):480-498. (Current ACEP policy; a Severe Agitation Clinical Policy is in development.)' },
     { num: 3, text: 'Posner K, Brown GK, Stanley B, et al. The Columbia-Suicide Severity Rating Scale (C-SSRS): Initial Validity and Internal Consistency Findings From Three Multisite Studies With Adolescents and Adults. Am J Psychiatry. 2011;168(12):1266-1277.' },
     { num: 4, text: 'Marx JA, Hockberger RS, Walls RM. Rosen\'s Emergency Medicine: Concepts and Clinical Practice. 9th ed. Elsevier; 2018. Chapter 100: Thought Disorders.' },
 ];

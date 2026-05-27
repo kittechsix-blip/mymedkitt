@@ -1,13 +1,19 @@
 -- =====================================================================
 -- MedKitt — Auto-generated UPDATE SQL for changed nodes
--- Generated: 2026-05-26
+-- Generated: 2026-05-27
 -- Review carefully, then paste into Supabase SQL Editor.
 -- =====================================================================
 
 BEGIN;
 
--- Node: precip-oxytocin (3 field(s) changed)
-UPDATE decision_nodes SET data = '{"type":"info","module":5,"title":"Oxytocin & Uterine Massage","body":"OXYTOCIN — POSTPARTUM UTEROTONIC\n\n**Preferred (IV access established):** [Oxytocin](#/drug/oxytocin/precipitous delivery) 20 units in 1L NS (or LR) at 250 mL/hr.\n\n**No IV access:** [Oxytocin](#/drug/oxytocin/precipitous delivery) 10 units IM into the anterolateral thigh — this is the WHO-preferred prophylactic route in low-resource or pre-IV settings. [8]\n\n**Do NOT give IV push** — can cause profound hypotension. [8]\n\n**Timing:** Start after the placenta is delivered. Do not wait to assess bleeding — **empiric oxytocin decreases postpartum hemorrhage risk.** [8]\n\nBIMANUAL UTERINE MASSAGE\n• Place one hand on the uterine fundus abdominally\n• Massage firmly until the uterus contracts and feels firm (\"boggy\" uterus = atony = hemorrhage risk)\n• Continue massage intermittently until uterine tone is maintained\n\n**Uterine atony is the #1 cause of postpartum hemorrhage.** Oxytocin + massage addresses this directly. [8]","citation":[8],"next":"precip-lacerations","treatment":{"firstLine":{"drug":"Oxytocin","dose":"20 units in 1L NS or LR","route":"IV infusion","frequency":"250 mL/hr (83 mL/hr = 10 mU/min)","duration":"until uterine tone maintained","notes":"Do NOT give IV push - causes profound hypotension. Start after placenta delivered. If no IV access: 10 units IM into anterolateral thigh (WHO-preferred IM dose)."},"alternative":{"drug":"Methylergonovine (Methergine)","dose":"0.2 mg","route":"IM","frequency":"q2-4h PRN","duration":"max 5 doses","notes":"CONTRAINDICATED in hypertension or preeclampsia. Second-line if oxytocin fails."},"pcnAllergy":{"drug":"Misoprostol (Cytotec)","dose":"800-1000 mcg","route":"PR or SL","frequency":"once","duration":"single dose","notes":"Alternative uterotonic. Causes fever, shivering, diarrhea. No contraindication in HTN."},"monitoring":"Uterine tone (firm vs boggy), vaginal bleeding, vital signs q15 min x1 hour post-placenta."},"summary":"Oxytocin 20 units in 1L NS IV at 250 mL/hr (or 10 units IM if no IV access) — do NOT IV push, bimanual massage until firm uterine tone","safetyLevel":"critical"}'::jsonb
-WHERE id = 'precip-oxytocin' AND tree_id = 'precip-delivery';
+-- Citations changed — DELETE and re-INSERT
+DELETE FROM tree_citations WHERE tree_id = 'penile-zipper-release';
+INSERT INTO tree_citations (tree_id, num, text) VALUES ('penile-zipper-release', 1, 'Lin EM, Liss MA, Lefcourt JG, et al. Penile Zipper Entrapment. ALiEM. Available at: aliem.com/penile-zipper-entrapment/. Accessed 2026.');
+INSERT INTO tree_citations (tree_id, num, text) VALUES ('penile-zipper-release', 2, 'Nickson C. Zany Zipper. Life in the Fast Lane (LITFL). Available at: litfl.com/zany-zipper/. Accessed 2026.');
+INSERT INTO tree_citations (tree_id, num, text) VALUES ('penile-zipper-release', 3, 'Leslie SW, Sajjad H. Penile Zipper and Ring Injuries. In: StatPearls. Treasure Island (FL): StatPearls Publishing; 2024. NBK459308. Available at: ncbi.nlm.nih.gov/books/NBK459308/.');
+INSERT INTO tree_citations (tree_id, num, text) VALUES ('penile-zipper-release', 4, 'Mishra SC. A device for the disengagement of skin caught in zipper. Br J Plast Surg. 2005;58(6):868-869.');
+INSERT INTO tree_citations (tree_id, num, text) VALUES ('penile-zipper-release', 5, 'Strait RT. A novel method for removal of penile zipper entrapment. Pediatr Emerg Care. 1999;15(6):412-413.');
+INSERT INTO tree_citations (tree_id, num, text) VALUES ('penile-zipper-release', 6, 'American Urological Association. Guidelines and Quality. AUA. Available at: auanet.org/guidelines-and-quality/guidelines. Accessed 2026.');
+INSERT INTO tree_citations (tree_id, num, text) VALUES ('penile-zipper-release', 7, 'Centers for Disease Control and Prevention. Tetanus Vaccination Recommendations. CDC. 2024.');
 
 COMMIT;

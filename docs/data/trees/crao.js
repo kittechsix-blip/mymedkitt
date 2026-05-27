@@ -299,7 +299,7 @@ export const CRAO_NODES = [
         type: 'info',
         module: 4,
         title: 'IV tPA for CRAO',
-        body: '**IV Alteplase (tPA) for Non-Arteritic CRAO:**\n\n**Dose:** Same as stroke protocol\n- 0.9 mg/kg (max 90 mg)\n- 10% as bolus over 1 minute\n- 90% as infusion over 60 minutes\n\n**Evidence:**\n- NNT = 4 for functional visual recovery\n- 50% recovery rate within 4.5h window\n- No increased ICH risk in studies\n- No benefit if given >4.5 hours\n\n**Post-tPA Monitoring:**\n- Neuro checks q15min × 2h, then q30min × 6h, then q1h × 16h\n- BP monitoring (goal <180/105)\n- No antiplatelet/anticoagulant × 24h\n\n**IA tPA (Interventional):**\n- Some centers offer intra-arterial approach\n- Extended window (up to 6 hours)\n- Not widely available [1][2]',
+        body: '**IV Alteplase (tPA) for Non-Arteritic CRAO:**\n\n**Dose:** Same as stroke protocol\n- 0.9 mg/kg (max 90 mg)\n- 10% as bolus over 1 minute\n- 90% as infusion over 60 minutes\n\n**Evidence (UPDATED 2026):**\n- **2026 AHA/ASA: IV thrombolysis within 4.5h is Class 2b / C-LD** — benefit uncertain (weak rec, low-quality data)\n- **THEIA (n=70, presented Oct 2024):** No significant visual acuity difference between alteplase and 300 mg PO aspirin within 4.5h\n- **TenCRAOS (n=78, 2025):** No benefit of tenecteplase vs aspirin, and serious safety concerns\n- **REVISION (n≈1,400, alteplase vs placebo) results pending (estimated 2026)**\n- Earlier observational "NNT=4 / 50% recovery" claims are not supported by the completed RCTs\n- 300 mg PO aspirin is a reasonable alternative pending REVISION\n\n**If giving tPA (shared decision-making, document equipoise):**\n- Must be ≤4.5h from onset, GCA excluded, CT head negative, no standard stroke contraindications\n- Same post-tPA monitoring as stroke: neuro checks q15min × 2h → q30min × 6h → q1h × 16h\n- BP goal <180/105; no antiplatelet/anticoagulant × 24h\n\n**IA tPA (Interventional):**\n- Some centers offer intra-arterial approach (window up to ~6 hours)\n- Not widely available; same equipoise applies [1][2][5]',
         citation: [1, 2],
         treatment: {
             firstLine: {
@@ -321,7 +321,7 @@ export const CRAO_NODES = [
             monitoring: 'Neuro checks q15min x 2h, then q30min x 6h, then q1h x 16h. BP goal <180/105. No antiplatelet/anticoagulant x 24h. Monitor for signs of ICH.',
         },
         next: 'crao-workup',
-        summary: 'tPA 0.9 mg/kg (max 90mg) — NNT 4 for visual recovery within 4.5h window, 50% recovery rate',
+        summary: 'tPA 0.9 mg/kg (max 90mg) within 4.5h — 2026 AHA/ASA Class 2b/C-LD (uncertain benefit); THEIA + TenCRAOS RCTs negative; aspirin 300 mg PO is a reasonable alternative pending REVISION',
         skippable: true,
         safetyLevel: 'critical',
     },
@@ -397,7 +397,7 @@ export const CRAO_NODES = [
         type: 'info',
         module: 5,
         title: 'Prognosis',
-        body: '**Visual Prognosis:**\n\n| Presentation | VA Outcome |\n|--------------|------------|\n| CRAO (untreated) | 93% remain ≤20/400 |\n| CRAO with tPA <4.5h | 50% improve |\n| CRAO with cilioretinal sparing | Better central vision |\n| BRAO | 80% recover to 20/40+ |\n\n**Systemic Prognosis:**\n- 5-year mortality: 40% (higher than age-matched)\n- Stroke risk highest in first week\n- MI risk elevated for months\n\n**Follow-Up:**\n- Ophthalmology: 1-2 weeks\n- Neurology: per stroke protocol\n- PCP: ongoing risk factor management\n\n**Key Takeaway:**\nTreat the eye, but remember this is a systemic vascular disease. The CRAO is a warning of worse events to come. [1][2]',
+        body: '**Visual Prognosis:**\n\n| Presentation | VA Outcome |\n|--------------|------------|\n| CRAO (untreated) | 93% remain ≤20/400 |\n| CRAO with tPA <4.5h | Older observational data suggested ~50% improve; THEIA/TenCRAOS RCTs did not confirm a difference vs aspirin |\n| CRAO with cilioretinal sparing | Better central vision |\n| BRAO | 80% recover to 20/40+ |\n\n**Systemic Prognosis:**\n- 5-year mortality: 40% (higher than age-matched)\n- Stroke risk highest in first week\n- MI risk elevated for months\n\n**Follow-Up:**\n- Ophthalmology: 1-2 weeks\n- Neurology: per stroke protocol\n- PCP: ongoing risk factor management\n\n**Key Takeaway:**\nTreat the eye, but remember this is a systemic vascular disease. The CRAO is a warning of worse events to come. [1][2][5]',
         citation: [1, 2],
         options: [
             {
@@ -421,4 +421,5 @@ export const CRAO_CITATIONS = [
     { num: 2, text: 'StatPearls. Central Retinal Artery Occlusion. 2024.' },
     { num: 3, text: 'EyeWiki. Retinal Artery Occlusion. 2024.' },
     { num: 4, text: 'OpenEvidence. Giant Cell Arteritis ED Management. 2024.' },
+    { num: 5, text: '2026 AHA/ASA Guideline: IV thrombolysis for acute CRAO within 4.5h is Class 2b / C-LD (uncertain benefit). Reflects THEIA (alteplase vs ASA, n=70, World Stroke Congress Oct 2024, negative primary outcome) and TenCRAOS (tenecteplase vs ASA, n=78, 2025, no benefit + safety concerns). REVISION trial (alteplase vs placebo, n≈1,400, NCT04965038) pending. See also: Updates in Central Retinal Artery Occlusion. J Neuro-Ophthalmol. 2026 Mar.' },
 ];
