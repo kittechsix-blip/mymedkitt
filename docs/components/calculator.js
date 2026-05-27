@@ -28700,6 +28700,202 @@ const HYPO_ECMO_TRANSPORT_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// ANGIOEDEMA AIRWAY TOOLS
+// -------------------------------------------------------------------
+const ANGIO_AIRWAY_RISK_CALCULATOR = {
+    id: 'angio-airway-risk',
+    title: 'Angioedema Airway Risk',
+    subtitle: 'Intubation risk + airway plan',
+    description: 'Objective ED airway assessment using hard airway triggers, Ishoo anatomic stage, and the 2023 AJEM angioedema intubation-risk score. This supports, but does not replace, senior airway judgment.',
+    results: [],
+    thresholdNote: 'AJEM score bands: <5 low risk, 5-7 moderate risk, >7 high risk. Any hard airway trigger overrides the numeric score.',
+    citations: [
+        'Zirkle M, Bhattacharyya N. Clinical predictors of endotracheal intubation in emergency department patients with angioedema. Am J Emerg Med. 2023;65:99-104.',
+        'Ishoo E, et al. Predicting airway risk in angioedema: staging system based on presentation. Otolaryngol Head Neck Surg. 1999;121(3):263-268.',
+        'Das C, et al. Evaluation of staging criteria for disposition and airway intervention in emergency department angioedema patients. Acute Med Surg. 2021;8(1):e704.',
+        'Bernstein JA, et al. Angioedema in the emergency department: a practical guide to differential diagnosis and management. Int J Emerg Med. 2017;10(1):15.',
+        'Sandefur BJ, et al. Emergency department intubations in patients with angioedema: a report from the National Emergency Airway Registry. J Emerg Med. 2021;61(5):481-488.',
+        'Farkas J. Angioedema. Internet Book of Critical Care. EMCrit Project.',
+    ],
+    fields: [
+        {
+            name: 'stage',
+            label: 'Ishoo Anatomic Stage',
+            description: 'Highest anatomic site involved right now',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Stage 1: face, lip, facial rash only', points: 1 },
+                { label: 'Stage 2: soft palate edema', points: 2 },
+                { label: 'Stage 3: tongue or floor of mouth edema', points: 3 },
+                { label: 'Stage 4: laryngeal edema, stridor, or clear laryngeal symptoms', points: 4 },
+            ],
+        },
+        {
+            name: 'hypertension',
+            label: 'Hypertension history',
+            description: 'AJEM predictor: +2',
+            type: 'toggle',
+            points: 2,
+        },
+        {
+            name: 'anterior-tongue',
+            label: 'Anterior tongue swelling',
+            description: 'AJEM predictor: +2',
+            type: 'toggle',
+            points: 2,
+        },
+        {
+            name: 'pharyngeal-edema',
+            label: 'Pharyngeal swelling',
+            description: 'AJEM predictor: +3',
+            type: 'toggle',
+            points: 3,
+        },
+        {
+            name: 'drooling',
+            label: 'Drooling',
+            description: 'AJEM predictor: +4',
+            type: 'toggle',
+            points: 4,
+        },
+        {
+            name: 'secretion-failure',
+            label: 'Cannot handle secretions',
+            description: 'Pooling secretions, suction dependence, or inability to swallow saliva',
+            type: 'toggle',
+            points: 0,
+        },
+        {
+            name: 'shortness-breath',
+            label: 'Shortness of breath',
+            description: 'AJEM predictor: +5',
+            type: 'toggle',
+            points: 5,
+        },
+        {
+            name: 'voice-change',
+            label: 'Voice change / hoarseness',
+            description: 'Airway warning sign even if the numeric score is not high',
+            type: 'toggle',
+            points: 0,
+        },
+        {
+            name: 'stridor',
+            label: 'Stridor',
+            description: 'Hard airway trigger',
+            type: 'toggle',
+            points: 0,
+        },
+        {
+            name: 'hypoxemia',
+            label: 'Hypoxemia or respiratory fatigue',
+            description: 'Hard airway trigger',
+            type: 'toggle',
+            points: 0,
+        },
+        {
+            name: 'progression',
+            label: 'Progressing in the ED',
+            description: 'Worsening swelling, voice, dyspnea, or secretion handling during observation',
+            type: 'toggle',
+            points: 0,
+        },
+        {
+            name: 'mechanism',
+            label: 'Likely Mechanism',
+            description: 'Bradykinin-mediated disease tends to progress more slowly and respond poorly to allergic meds',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Histamine-mediated or clearly improving allergic pattern', points: 0 },
+                { label: 'Undifferentiated or uncertain mechanism', points: 1 },
+                { label: 'ACEi / HAE / acquired bradykinin pattern', points: 2 },
+                { label: 'Post-thrombolysis angioedema', points: 3 },
+            ],
+        },
+    ],
+    computeResult: (values) => {
+        const ajemScore = (values['hypertension'] || 0) +
+            (values['anterior-tongue'] || 0) +
+            (values['pharyngeal-edema'] || 0) +
+            (values['drooling'] || 0) +
+            (values['shortness-breath'] || 0);
+        const stage = values['stage'] || 1;
+        const mechanism = values['mechanism'] || 0;
+        const hardTriggers = [];
+        if (stage >= 4)
+            hardTriggers.push('Ishoo stage 4 / laryngeal involvement');
+        if (values['stridor'])
+            hardTriggers.push('stridor');
+        if (values['hypoxemia'])
+            hardTriggers.push('hypoxemia or respiratory fatigue');
+        if (values['secretion-failure'])
+            hardTriggers.push('inability to handle secretions');
+        if (values['shortness-breath'] && values['voice-change'])
+            hardTriggers.push('dyspnea plus voice change');
+        if (values['progression'] && (values['voice-change'] || values['anterior-tongue'] || values['pharyngeal-edema']))
+            hardTriggers.push('progressive head/neck symptoms in the ED');
+        const moderateFlags = [];
+        if (ajemScore >= 5 && ajemScore <= 7)
+            moderateFlags.push('AJEM score 5-7');
+        if (stage === 3)
+            moderateFlags.push('stage 3 tongue or floor-of-mouth edema');
+        if (values['progression'])
+            moderateFlags.push('progression during observation');
+        if (values['drooling'])
+            moderateFlags.push('drooling');
+        if (values['voice-change'])
+            moderateFlags.push('voice change or hoarseness');
+        if (values['pharyngeal-edema'])
+            moderateFlags.push('pharyngeal edema');
+        if (mechanism >= 2)
+            moderateFlags.push('bradykinin or post-thrombolysis mechanism');
+        const selectedPredictors = [];
+        if (values['hypertension'])
+            selectedPredictors.push('hypertension +2');
+        if (values['anterior-tongue'])
+            selectedPredictors.push('anterior tongue swelling +2');
+        if (values['pharyngeal-edema'])
+            selectedPredictors.push('pharyngeal swelling +3');
+        if (values['drooling'])
+            selectedPredictors.push('drooling +4');
+        if (values['shortness-breath'])
+            selectedPredictors.push('shortness of breath +5');
+        const scoreSummary = selectedPredictors.length > 0
+            ? selectedPredictors.map(item => '- ' + item).join('\n')
+            : '- No AJEM score predictors selected';
+        if (hardTriggers.length > 0 || ajemScore > 7) {
+            const reasons = [
+                ...hardTriggers,
+                ...(ajemScore > 7 ? [`AJEM score ${ajemScore} (>7 high-risk band; ~68% intubation in derivation cohort)`] : []),
+            ];
+            return {
+                value: `AJEM ${ajemScore}`,
+                label: 'AIRWAY NOW / DUAL SETUP',
+                description: `**High-risk angioedema airway.**\n\n**Why:**\n${reasons.map(item => '- ' + item).join('\n')}\n\n**Immediate plan:**\n- Call senior airway operator now; notify anesthesia/ENT/trauma airway when available.\n- Sit upright. Keep spontaneously breathing if oxygenation allows.\n- Prepare awake flexible endoscopic or awake video-assisted intubation.\n- Cricothyrotomy tray open and assigned operator identified before the first attempt.\n- Avoid paralytic until anatomy is visualized and a rescue plan is ready, unless the patient is crashing.\n- Do not send away from airway backup for CT or transfer without a definitive airway plan.\n\n**AJEM score components:**\n${scoreSummary}`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (moderateFlags.length > 0 || ajemScore >= 5) {
+            return {
+                value: `AJEM ${ajemScore}`,
+                label: 'HIGH-RISK WATCH',
+                description: `**Moderate airway risk.** This is not a discharge airway.\n\n**Why:**\n${moderateFlags.map(item => '- ' + item).join('\n')}\n\n**Plan:**\n- Continuous monitoring with q15 minute airway reassessment until clearly improving.\n- Airway cart and cric tray immediately available.\n- Senior airway operator aware before deterioration.\n- Consider flexible laryngoscopy if available or if laryngeal involvement is uncertain.\n- Treat mechanism in parallel, but do not wait for medication response if symptoms progress.\n- Escalate to airway now for worsening voice, dyspnea, drooling, tongue/floor-of-mouth edema, stridor, hypoxemia, or AJEM score rising above 7.\n\n**AJEM score components:**\n${scoreSummary}`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: `AJEM ${ajemScore}`,
+            label: 'LOW-RISK AIRWAY PATTERN',
+            description: `**Low airway risk after structured screen.**\n\nThis fits low-risk observation only if symptoms remain stable or improve and there is no tongue, floor-of-mouth, pharyngeal, laryngeal, voice, dyspnea, drooling, or secretion-handling concern.\n\n**Plan:**\n- Observe at least 4-6 hours based on mechanism and trajectory.\n- Reassess airway before discharge.\n- Discharge only if no progression, tolerating PO, reliable return precautions, and clear medication plan.\n- Return immediately for voice change, throat tightness, dyspnea, drooling, tongue swelling, or worsening facial/oral swelling.\n\n**AJEM score components:**\n${scoreSummary}`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
 // AWAKE INTUBATION TOOLS
 // -------------------------------------------------------------------
 // Tool 1: Who Needs Awake Intubation?
@@ -38427,6 +38623,8 @@ const CALCULATORS = {
     'hypo-hope-score': HYPO_HOPE_SCORE_CALCULATOR,
     'hypo-rewarming': HYPO_REWARMING_CALCULATOR,
     'hypo-ecmo-transport': HYPO_ECMO_TRANSPORT_CALCULATOR,
+    // Angioedema
+    'angio-airway-risk': ANGIO_AIRWAY_RISK_CALCULATOR,
     // Awake Intubation
     'awake-who-needs': AWAKE_WHO_NEEDS_CALCULATOR,
     'awake-topical-prep': AWAKE_TOPICAL_PREP_CALCULATOR,

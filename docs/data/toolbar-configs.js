@@ -662,10 +662,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'bb-debate', label: 'BB Debate', icon: '\u2696\uFE0F', action: 'overlay', target: 'thyroid-bb-controversy' },
     ],
     'angioedema': [
-        { id: 'airway', label: 'Airway', icon: '\uD83E\uDEC1', action: 'jump', target: 'angio-airway-secure' },
+        { id: 'airway-risk', label: 'Risk', icon: '\uD83D\uDCCA', action: 'calculator', target: 'angio-airway-risk' },
+        { id: 'airway', label: 'Airway', icon: '\uD83E\uDEC1', action: 'jump', target: 'angio-airway-risk-tree' },
         { id: 'acei-rx', label: 'ACEi Rx', icon: '\uD83D\uDC8A', action: 'jump', target: 'angio-acei-treat' },
         { id: 'hae-rx', label: 'HAE Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'angio-hae-treat' },
         { id: 'staging', label: 'Staging', icon: '\uD83D\uDCCA', action: 'overlay', target: 'angio-ishoo-staging' },
+        { id: 'airway-guide', label: 'Guide', icon: '\uD83D\uDCD6', action: 'overlay', target: 'angio-airway-risk-guide' },
     ],
     'sickle-cell': [
         { id: 'triage', label: 'Triage', icon: '\uD83C\uDFE5', action: 'calculator', target: 'scd-triage' },

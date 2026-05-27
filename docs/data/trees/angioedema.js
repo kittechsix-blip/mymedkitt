@@ -1,7 +1,7 @@
 // MedKitt — Angioedema (Initial Assessment → Classification → Histamine Treatment → Bradykinin Treatment → Abdominal Angioedema → Disposition)
 // Airway Assessment → Classify Mechanism → Histamine-Mediated → Bradykinin-Mediated (ACEi/HAE/tPA/AAE) → Abdominal → Disposition
 // 6 modules: Initial Assessment → Classification → Histamine Treatment → Bradykinin Treatment → Abdominal Angioedema → Disposition
-// 25 nodes total.
+// 26 nodes total.
 export const ANGIOEDEMA_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT & AIRWAY
@@ -11,37 +11,68 @@ export const ANGIOEDEMA_NODES = [
         type: 'question',
         module: 1,
         title: 'Angioedema — Initial Assessment',
-        body: '[Angioedema Steps Summary](#/info/angio-steps-summary)\n\n~110,000 ED visits/year in the US. Up to 44% of patients with hereditary angioedema (HAE) are initially misdiagnosed. The critical first step is assessment of airway patency. [1][5][7]\n\nAssess for signs of airway compromise: voice change, hoarseness, stridor, dyspnea, inability to handle secretions.',
-        citation: [1, 5, 7],
+        body: '[Angioedema Steps Summary](#/info/angio-steps-summary)\n\n~110,000 ED visits/year in the US. Up to 44% of patients with hereditary angioedema (HAE) are initially misdiagnosed. The critical first step is a structured airway assessment before mechanism classification. [1][5][7]\n\nUse the airway-risk tool when the patient is not an obvious immediate airway. It combines hard airway triggers, Ishoo anatomic staging, and the 2023 AJEM ED intubation-risk score. [7][8][26]\n\n[Angioedema Airway Risk Calculator](#/calculator/angio-airway-risk)\n\nAssess for voice change, hoarseness, stridor, dyspnea, drooling, secretion intolerance, tongue/floor-of-mouth edema, pharyngeal edema, laryngeal edema, progression in the ED, and ability to tolerate supine positioning.',
+        citation: [1, 5, 7, 8, 26],
+        calculatorLinks: [{ id: 'angio-airway-risk', label: 'Angioedema Airway Risk' }],
         options: [
             {
-                label: 'Signs of Airway Compromise',
-                description: 'Stridor, voice change, dyspnea, drooling',
+                label: 'Immediate Airway Threat',
+                description: 'Stridor, hypoxemia, secretion failure, rapidly progressive voice/laryngeal symptoms',
                 next: 'angio-airway-secure',
                 urgency: 'critical',
             },
             {
-                label: 'Concerning but Stable',
-                description: 'Facial/tongue swelling without airway symptoms',
-                next: 'angio-airway-monitor',
+                label: 'Run Objective Airway Risk',
+                description: 'Stable enough to score, but not clearly low-risk',
+                next: 'angio-airway-risk-tree',
             },
             {
-                label: 'No Airway Concern',
-                description: 'Peripheral or mild facial edema only',
+                label: 'Clearly Low-Risk Peripheral Edema',
+                description: 'Lip/facial edema only, no voice, dyspnea, drooling, tongue, pharyngeal, or laryngeal involvement',
                 next: 'angio-classify',
             },
         ],
-        summary: '~110K ED visits/year, 44% HAE initially misdiagnosed — first assess airway patency before classification',
+        summary: '~110K ED visits/year, 44% HAE initially misdiagnosed - first run structured airway risk before classification',
+    },
+    {
+        id: 'angio-airway-risk-tree',
+        type: 'question',
+        module: 1,
+        title: 'Objective Airway Risk',
+        body: '[Angioedema Airway Risk Calculator](#/calculator/angio-airway-risk)\n\n**Do not wait for a score if the airway is declaring itself.** Intubate now for stridor, hypoxemia, inability to handle secretions, rapidly progressive tongue/floor-of-mouth swelling, altered mental status, exhaustion, or confirmed laryngeal edema. [5][9][27]\n\n**AJEM 2023 ED intubation-risk score:**\n• Hypertension: +2\n• Anterior tongue swelling: +2\n• Pharyngeal swelling: +3\n• Drooling: +4\n• Shortness of breath: +5\n\nRisk bands: score <5 low risk (~5% intubation), score 5-7 moderate risk (~16% intubation), score >7 high risk (~68% intubation). [26]\n\n**Anatomic risk still matters:** Ishoo stage 1 lip/face is low-risk; stage 3 tongue/floor-of-mouth needs admission-level monitoring; stage 4 laryngeal involvement is ICU/airway territory. [7][8]',
+        citation: [5, 7, 8, 9, 26, 27],
+        calculatorLinks: [{ id: 'angio-airway-risk', label: 'Angioedema Airway Risk' }],
+        options: [
+            {
+                label: 'Airway Now / High-Risk Score',
+                description: 'Hard airway trigger, Ishoo stage 4, or AJEM score >7',
+                next: 'angio-airway-secure',
+                urgency: 'critical',
+            },
+            {
+                label: 'Moderate Risk / Close Watch',
+                description: 'AJEM score 5-7, stage 3 anatomy, progressive course, or uncertain laryngeal symptoms',
+                next: 'angio-airway-monitor',
+                urgency: 'urgent',
+            },
+            {
+                label: 'Low Risk After Structured Screen',
+                description: 'Score <5, stage 1-2 only, stable or improving, no hard airway triggers',
+                next: 'angio-classify',
+            },
+        ],
+        summary: 'Use hard airway triggers first, then AJEM score and Ishoo stage to decide intubate now vs monitored airway watch vs low-risk pathway',
     },
     {
         id: 'angio-airway-secure',
         type: 'info',
         module: 1,
         title: 'Secure the Airway',
-        body: '**DUAL SETUP: Intubation + cricothyrotomy ready simultaneously.** Awake fiberoptic intubation preferred — do NOT paralyze until clear view of airway anatomy obtained. Nasotracheal route may bypass lingual swelling (95% first-attempt success vs 70% orotracheal). Avoid positive-pressure ventilation — barotrauma worsens edema. [9]\n\nFlexible endoscope used in 49% of angioedema intubations. Cricothyrotomy performed in 2% of cases. Topical lidocaine for awake approaches. [9]\n\n**[Awake Intubation](#/tree/awake-intubation)** (see Airway category)\n\n**Extubation:** Wait for visible improvement of edema. Extubate over airway exchange catheter. Video laryngoscopy to confirm laryngeal edema resolution. Cuff leak may provide adjunctive info.',
-        citation: [9],
+        body: '**DUAL SETUP: intubation + cricothyrotomy ready simultaneously.** Call the most experienced airway operator early. Notify anesthesia/ENT/trauma airway when available. Keep the patient upright and spontaneously breathing if oxygenation allows. [9][27]\n\n**High-risk features requiring definitive airway planning:** stridor, hypoxemia, secretion intolerance/drooling, shortness of breath, voice change/hoarseness with progression, pharyngeal edema, posterior tongue/floor-of-mouth edema, laryngeal edema on scope, altered mental status, exhaustion, or AJEM score >7. [5][26][27]\n\n**Preferred approach:** awake flexible endoscopic or awake video-assisted technique with topical lidocaine and surgical airway backup. Do NOT paralyze until the airway anatomy is visualized and a viable rescue plan is ready unless the patient is crashing. Nasotracheal route may bypass lingual swelling in selected patients; NEAR angioedema data reported higher first-attempt success with nasotracheal than orotracheal intubation. [9]\n\n**[Awake Intubation](#/tree/awake-intubation)** (see Airway category)\n\n**Extubation:** Wait for visible improvement of edema. Extubate over airway exchange catheter. Video laryngoscopy or flexible scope to confirm laryngeal edema resolution. Cuff leak may provide adjunctive info.',
+        citation: [5, 9, 26, 27],
+        calculatorLinks: [{ id: 'angio-airway-risk', label: 'Angioedema Airway Risk' }],
         next: 'angio-classify',
-        summary: 'Dual setup: intubation + cric ready; awake fiberoptic preferred — do NOT paralyze until airway visualized',
+        summary: 'Dual setup: intubation + cric ready; awake flexible/video approach preferred when oxygenation allows; avoid paralysis until anatomy and rescue plan are clear',
         safetyLevel: 'critical',
     },
     {
@@ -49,10 +80,11 @@ export const ANGIOEDEMA_NODES = [
         type: 'info',
         module: 1,
         title: 'Airway Monitoring',
-        body: '**Supplemental O2 and continuous monitoring.** Do NOT use NIPPV (CPAP/BiPAP) — positive pressure/barotrauma can worsen angioedema. [5]\n\nFrequent reassessment is critical — clinical conditions can change rapidly. Low threshold for definitive airway if any signs of compromise.\n\nFlexible laryngoscopy on case-by-case basis for patients with facial edema but no laryngeal symptoms. The true airway threat is the larynx and posterior tongue — not the lips and anterior tongue. [7][8]\n\n**KEY:** Edema localized to the lips alone does NOT have increased intubation risk. [7][8]',
-        citation: [5, 7, 8],
+        body: '**Supplemental O2, continuous monitoring, and q15 minute airway reassessment until clearly improving.** Do NOT rely on NIPPV (CPAP/BiPAP) because it does not treat a supraglottic/anatomic obstruction and can delay definitive airway control. [5][27]\n\n[Angioedema Airway Risk Calculator](#/calculator/angio-airway-risk)\n\n**Moderate-risk watch group:** AJEM score 5-7, stage 3 tongue/floor-of-mouth edema, progressive symptoms, pharyngeal edema, dyspnea without current distress, bradykinin mechanism with head/neck involvement, or inability to confidently exclude laryngeal edema. [7][8][26]\n\n**Monitoring plan:** senior airway operator aware, airway cart and cric tray immediately available, consider flexible laryngoscopy if available, avoid transport away from airway backup unless necessary, and re-score after treatment. Escalate immediately for voice progression, drooling, dyspnea, stridor, hypoxemia, worsening tongue/floor-of-mouth swelling, or score rising above 7.\n\n**KEY:** isolated lip/facial edema without tongue, pharyngeal, dyspnea, voice, drooling, or laryngeal involvement is low risk for intubation. [7][8][26]',
+        citation: [5, 7, 8, 26, 27],
+        calculatorLinks: [{ id: 'angio-airway-risk', label: 'Angioedema Airway Risk' }],
         next: 'angio-classify',
-        summary: 'No NIPPV (worsens edema); lip-only edema = low intubation risk; true threat is larynx and posterior tongue',
+        summary: 'Moderate-risk airway watch: q15 min reassessment, airway backup ready, scope if available, escalate for symptom progression or score >7',
     },
     // =====================================================================
     // MODULE 2: CLASSIFICATION
@@ -525,8 +557,9 @@ export const ANGIOEDEMA_NODES = [
         type: 'question',
         module: 6,
         title: 'Disposition — Ishoo Staging',
-        body: 'Angioedema staging based on anatomic location helps predict need for admission and airway intervention. [7][8]\n\n[Ishoo Staging & Disposition Guide](#/info/angio-ishoo-staging)\n\n**Modified Ishoo Staging:**\n• **Stage 1:** Facial rash, facial edema, lip edema\n• **Stage 2:** Soft palate edema\n• **Stage 3:** Tongue edema, floor of mouth edema\n• **Stage 4:** Laryngeal edema (voice change, stridor)\n\nAll patients need strict return precautions and PCP follow-up. [4]',
-        citation: [4, 7, 8],
+        body: 'Disposition should combine anatomic location, trajectory during observation, mechanism, and the objective airway-risk score. [4][7][8][26]\n\n[Ishoo Staging & Disposition Guide](#/info/angio-ishoo-staging)\n[Angioedema Airway Risk Calculator](#/calculator/angio-airway-risk)\n\n**Modified Ishoo Staging:**\n• **Stage 1:** Facial rash, facial edema, lip edema\n• **Stage 2:** Soft palate edema\n• **Stage 3:** Tongue edema, floor of mouth edema\n• **Stage 4:** Laryngeal edema (voice change, stridor)\n\nAll patients need strict return precautions and PCP follow-up. Discharge is appropriate only after stable/improving symptoms, no airway warning signs, ability to tolerate oral intake, and reliable return precautions. [4][5]',
+        citation: [4, 5, 7, 8, 26],
+        calculatorLinks: [{ id: 'angio-airway-risk', label: 'Angioedema Airway Risk' }],
         options: [
             {
                 label: 'Stage 1-2: Face / Lip / Soft Palate',
@@ -546,7 +579,7 @@ export const ANGIOEDEMA_NODES = [
                 urgency: 'critical',
             },
         ],
-        summary: 'Ishoo staging guides disposition: Stage 1-2 (face/lip) = observe 4-6h, Stage 3 (tongue) = admit, Stage 4 (laryngeal) = ICU',
+        summary: 'Disposition: stage 1-2 and low score may discharge after observation; stage 3 or moderate score admit/observe closely; stage 4 or high score ICU/airway',
     },
     {
         id: 'angio-dispo-mild',
@@ -585,7 +618,8 @@ export const ANGIOEDEMA_MODULE_LABELS = [
     'Disposition',
 ];
 export const ANGIOEDEMA_CRITICAL_ACTIONS = [
-    { text: 'Secure airway EARLY if stridor, voice change, or tongue swelling - have cricothyrotomy kit ready', nodeId: 'angio-airway-secure' },
+    { text: 'Run objective airway risk early: hard triggers, Ishoo stage, and AJEM intubation score', nodeId: 'angio-airway-risk-tree' },
+    { text: 'Secure airway EARLY if stridor, hypoxemia, secretion failure, laryngeal edema, or AJEM score >7 - have cricothyrotomy kit ready', nodeId: 'angio-airway-secure' },
     { text: 'ACE-inhibitor angioedema: icatibant 30 mg SQ or FFP 2-4 units (bradykinin-mediated - epi/steroids ineffective)', nodeId: 'angio-acei-treat' },
     { text: 'Hereditary angioedema: C1-esterase inhibitor 20 units/kg IV or icatibant 30 mg SQ', nodeId: 'angio-hae-treat' },
     { text: 'Histamine-mediated: epinephrine 0.3-0.5 mg IM + antihistamines + steroids', nodeId: 'angio-histamine-treat' },
@@ -618,4 +652,6 @@ export const ANGIOEDEMA_CITATIONS = [
     { num: 23, text: 'Rosenbaum S, et al. Clinical practice statement: what is the emergency department management of patients with angioedema secondary to an ACE-inhibitor? J Emerg Med. 2021;61(1):105-112.' },
     { num: 24, text: 'Lacuesta G, et al. Angioedema. Allergy Asthma Clin Immunol. 2024;20(Suppl 3):65.' },
     { num: 25, text: 'Kesh S, Bernstein JA. Isolated angioedema: a review of classification and update on management. Ann Allergy Asthma Immunol. 2022;129(6):692-702.' },
+    { num: 26, text: 'Zirkle M, Bhattacharyya N. Clinical predictors of endotracheal intubation in emergency department patients with angioedema. Am J Emerg Med. 2023;65:99-104.' },
+    { num: 27, text: 'Farkas J. Angioedema. Internet Book of Critical Care. EMCrit Project.' },
 ];

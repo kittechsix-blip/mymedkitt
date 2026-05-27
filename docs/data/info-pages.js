@@ -6426,7 +6426,11 @@ const ANGIO_ISHOO_STAGING = {
         },
         {
             heading: 'Key Clinical Correlations',
-            body: '• Voice change, hoarseness, dyspnea, and stridor are significantly correlated with need for ICU admission [1]\n• Voice change, hoarseness, dyspnea, and stridor predict need for airway intervention [1]\n• **Edema localized to lips alone = low intubation risk** [1][2]\n• Approximately 40-60% of all angioedema patients are admitted for observation',
+            body: '• Voice change, hoarseness, dyspnea, and stridor are significantly correlated with need for ICU admission [1]\n• Voice change, hoarseness, dyspnea, and stridor predict need for airway intervention [1]\n• **Edema localized to lips alone = low intubation risk** [1][2]\n• The AJEM 2023 intubation-risk score adds objective clinical predictors: hypertension, anterior tongue swelling, pharyngeal swelling, drooling, and shortness of breath [3]\n• Approximately 40-60% of all angioedema patients are admitted for observation',
+        },
+        {
+            heading: 'Airway Calculator',
+            body: '[Open Angioedema Airway Risk Calculator](#/calculator/angio-airway-risk)\n\nUse the calculator when the patient is stable enough to score but not clearly low-risk. Do not delay intubation for stridor, hypoxemia, secretion failure, rapidly progressive symptoms, or laryngeal edema.',
         },
         {
             heading: 'General Disposition Recommendations',
@@ -6436,6 +6440,48 @@ const ANGIO_ISHOO_STAGING = {
     citations: [
         { num: 1, text: 'Ishoo E, et al. Predicting airway risk in angioedema: staging system based on presentation. Otolaryngol Head Neck Surg. 1999;121(3):263-268.' },
         { num: 2, text: 'Das C, et al. Evaluation of staging criteria for disposition and airway intervention in emergency department angioedema patients. Acute Med Surg. 2021;8(1):e704.' },
+        { num: 3, text: 'Zirkle M, Bhattacharyya N. Clinical predictors of endotracheal intubation in emergency department patients with angioedema. Am J Emerg Med. 2023;65:99-104.' },
+    ],
+};
+// -------------------------------------------------------------------
+// Angioedema — Airway Risk Guide
+// -------------------------------------------------------------------
+const ANGIO_AIRWAY_RISK_GUIDE = {
+    id: 'angio-airway-risk-guide',
+    title: 'Angioedema Airway Risk',
+    subtitle: 'Objective intubation-risk assessment and airway plan',
+    sections: [
+        {
+            heading: 'Use a Two-Layer Airway Model',
+            body: '**Layer 1: hard airway triggers.** Intubate now if stridor, hypoxemia, inability to handle secretions, rapidly progressive tongue/floor-of-mouth swelling, altered mental status, exhaustion, or confirmed laryngeal edema.\n\n**Layer 2: structured risk estimate.** If the patient is stable enough to score, combine Ishoo anatomic stage with the AJEM 2023 ED intubation-risk score. [1][2][3]',
+        },
+        {
+            heading: 'AJEM 2023 Intubation-Risk Score',
+            body: 'Predictors and point values:\n• Hypertension: +2\n• Anterior tongue swelling: +2\n• Pharyngeal swelling: +3\n• Drooling: +4\n• Shortness of breath: +5\n\nRisk bands:\n• Score <5: low risk, ~5% intubation in derivation cohort\n• Score 5-7: moderate risk, ~16% intubation\n• Score >7: high risk, ~68% intubation [3]\n\n[Open Calculator](#/calculator/angio-airway-risk)',
+        },
+        {
+            heading: 'Ishoo Anatomy Still Matters',
+            body: '• **Stage 1:** face/lip/facial rash only. Usually observation/discharge candidate after stability.\n• **Stage 2:** soft palate. Observation or admission depends on trajectory and mechanism.\n• **Stage 3:** tongue or floor of mouth. Admit for close airway monitoring.\n• **Stage 4:** laryngeal involvement, stridor, or clear laryngeal symptoms. ICU/airway territory. [1][2]',
+        },
+        {
+            heading: 'High-Risk Airway Plan',
+            body: '• Call the most experienced airway operator early.\n• Notify anesthesia/ENT/trauma airway when available.\n• Keep the patient upright and spontaneously breathing if oxygenation allows.\n• Prepare awake flexible endoscopic or awake video-assisted intubation with topical lidocaine.\n• Open cricothyrotomy tray and identify surgical-airway operator before the first attempt.\n• Avoid paralytic until anatomy is visualized and a rescue plan is ready, unless the patient is crashing.\n• Do not transport away from airway backup until the airway plan is secure. [4][5]',
+        },
+        {
+            heading: 'Moderate-Risk Watch Plan',
+            body: 'Moderate-risk patients are not discharge airways. Use continuous monitoring, q15 minute reassessment, airway cart and cric tray immediately available, senior airway operator aware, and flexible laryngoscopy when available or when laryngeal involvement is uncertain.\n\nEscalate immediately for worsening voice, dyspnea, drooling, tongue/floor-of-mouth edema, stridor, hypoxemia, or AJEM score rising above 7.',
+        },
+        {
+            heading: 'Low-Risk Discharge Pattern',
+            body: 'Low-risk discharge requires stable or improving symptoms after observation, no tongue/floor-of-mouth/pharyngeal/laryngeal involvement, no voice change, no dyspnea, no drooling, ability to tolerate oral intake, reliable return precautions, and a mechanism-specific medication plan. Isolated lip/facial edema is the classic low-risk anatomy. [1][2][3]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Ishoo E, et al. Predicting airway risk in angioedema: staging system based on presentation. Otolaryngol Head Neck Surg. 1999;121(3):263-268.' },
+        { num: 2, text: 'Das C, et al. Evaluation of staging criteria for disposition and airway intervention in emergency department angioedema patients. Acute Med Surg. 2021;8(1):e704.' },
+        { num: 3, text: 'Zirkle M, Bhattacharyya N. Clinical predictors of endotracheal intubation in emergency department patients with angioedema. Am J Emerg Med. 2023;65:99-104.' },
+        { num: 4, text: 'Sandefur BJ, et al. Emergency department intubations in patients with angioedema: a report from the National Emergency Airway Registry. J Emerg Med. 2021;61(5):481-488.' },
+        { num: 5, text: 'Farkas J. Angioedema. Internet Book of Critical Care. EMCrit Project.' },
     ],
 };
 // -------------------------------------------------------------------
@@ -24226,6 +24272,7 @@ export const INFO_PAGES = {
     'angio-differentiation': ANGIO_DIFFERENTIATION,
     'angio-labs': ANGIO_LABS,
     'angio-ishoo-staging': ANGIO_ISHOO_STAGING,
+    'angio-airway-risk-guide': ANGIO_AIRWAY_RISK_GUIDE,
     'angio-hae-types': ANGIO_HAE_TYPES,
     'angio-discharge': ANGIO_DISCHARGE,
     'angio-acei-alternatives': ANGIO_ACEI_ALTERNATIVES,
