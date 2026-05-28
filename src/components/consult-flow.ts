@@ -523,20 +523,29 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
     // Guarantees: always starts at §1/1, never decreases, never overstates
     // progress with a misleading "max-possible" denominator. Falls back to
     // the legacy module/total rendering only if no session is active.
+    // For hub-pattern consults (≥3 declared modules), prefer the ABSOLUTE
+    // current-module / total-modules chip — users want to see "where in the
+    // 5-module hub am I", not "rank of distinct modules visited so far".
+    // FlowRider 2026-05-28: §1/1 on every node of acute-jaundice-hub because
+    // path-rank starts at 1 in every fresh-tree session. Hubs need the
+    // absolute denominator. Linear procedural trees keep the path-aware chip.
+    const currentModule = engine.getCurrentModule();
+    const totalModules = engine.getTotalModules();
+    const isHubLike = totalModules >= 3;
     const pos = engine.getPathPosition();
-    if (pos) {
+    if (isHubLike && currentModule !== null && totalModules > 0) {
+      progress.textContent = `\u00A7${currentModule}/${totalModules}`;
+      progress.setAttribute('aria-label', `Section ${currentModule} of ${totalModules}`);
+      progress.setAttribute('title', `Section ${currentModule} of ${totalModules}`);
+    } else if (pos) {
       // Prefix with section glyph so users don't read it as a step/screen counter.
       progress.textContent = `\u00A7${pos.rank}/${pos.total}`;
       progress.setAttribute('aria-label', `Section ${pos.rank} of ${pos.total}`);
       progress.setAttribute('title', `Section ${pos.rank} of ${pos.total}`);
-    } else {
-      const currentModule = engine.getCurrentModule();
-      const totalModules = engine.getTotalModules();
-      if (currentModule !== null && totalModules > 0) {
-        progress.textContent = `\u00A7${currentModule}/${totalModules}`;
-        progress.setAttribute('aria-label', `Section ${currentModule} of ${totalModules}`);
-        progress.setAttribute('title', `Section ${currentModule} of ${totalModules}`);
-      }
+    } else if (currentModule !== null && totalModules > 0) {
+      progress.textContent = `\u00A7${currentModule}/${totalModules}`;
+      progress.setAttribute('aria-label', `Section ${currentModule} of ${totalModules}`);
+      progress.setAttribute('title', `Section ${currentModule} of ${totalModules}`);
     }
   }
 

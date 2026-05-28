@@ -1,0 +1,242 @@
+{
+  "consult_id": "acute-jaundice-hub",
+  "title": "Acute Jaundice",
+  "source_files": [
+    "src/data/trees/acute-jaundice-hub.ts",
+    "src/data/info-pages.ts (AJ_STEPS_PAGE, AJ_STOP_PAGE)"
+  ],
+  "extracted_at": "2026-05-28T13:31:16.203Z",
+  "deliverables": [
+    {
+      "id": "exclusions",
+      "type": "vertical_1080x1620",
+      "title": "Acute Jaundice: 9 Time-Critical Exclusions",
+      "visual_concept": "Central jaundice patient illustration; 9 labeled exclusion branches radiating outward. Each branch shows the recognition pattern and the killer action.",
+      "items": [
+        {
+          "id": "aj-exc-cholangitis",
+          "clinical_title": "Ascending Cholangitis — Charcot / Reynolds",
+          "pattern": "Fever + RUQ pain + jaundice (Charcot) ± hypotension / AMS (Reynolds)",
+          "killer_action": "Ascending cholangitis — antibiotics within 1 hour, GI for emergent ERCP"
+        },
+        {
+          "id": "aj-exc-apap",
+          "clinical_title": "Acetaminophen Hepatotoxicity",
+          "pattern": "Any acetaminophen exposure (acute or chronic supra-therapeutic) in last 72 h",
+          "killer_action": "APAP hepatotoxicity — Rumack-Matthew + NAC threshold; treat early, treat empirically"
+        },
+        {
+          "id": "aj-exc-alf",
+          "clinical_title": "Acute Liver Failure — Any Cause",
+          "pattern": "Encephalopathy + INR ≥1.5 + no known cirrhosis",
+          "killer_action": "Acute liver failure — Kings College criteria, NAC, transplant center NOW"
+        },
+        {
+          "id": "aj-exc-hemolysis",
+          "clinical_title": "Massive Hemolysis",
+          "pattern": "Indirect hyperbili + anemia + ↑LDH + ↓haptoglobin + schistocytes",
+          "killer_action": "Massive hemolysis (TTP/HUS/MAHA/sickle/G6PD/AIHA) — type and cross, heme STAT"
+        },
+        {
+          "id": "aj-exc-ischemic",
+          "clinical_title": "Ischemic Hepatitis (\"Shock Liver\")",
+          "pattern": "AST/ALT >1000 + recent shock / cardiac arrest / hypotension",
+          "killer_action": "Ischemic hepatitis (\"shock liver\") — fix the upstream perfusion failure"
+        },
+        {
+          "id": "aj-exc-obstruction",
+          "clinical_title": "Painless Obstructive Jaundice",
+          "pattern": "Painless jaundice + weight loss + age ≥50 (± Courvoisier sign)",
+          "killer_action": "Malignant biliary obstruction until proven otherwise — imaging + GI/onc"
+        },
+        {
+          "id": "aj-exc-wilson",
+          "clinical_title": "Wilson Disease — De Novo Presentation",
+          "pattern": "Age <40 + hemolysis + low alk phos + AST:ALT >2 ± Kayser-Fleischer rings",
+          "killer_action": "Wilson disease de novo presentation — ceruloplasmin, 24h urine copper, hepatology"
+        },
+        {
+          "id": "aj-exc-budd-chiari",
+          "clinical_title": "Budd-Chiari Syndrome",
+          "pattern": "Abdominal pain + ascites + hepatomegaly + hypercoagulable state",
+          "killer_action": "Budd-Chiari syndrome — Doppler US, CT venogram, anticoag, hepatology"
+        },
+        {
+          "id": "aj-exc-aih",
+          "clinical_title": "Autoimmune Hepatitis Flare",
+          "pattern": "Young female + AST/ALT very high + ↑IgG + ANA/SMA positive",
+          "killer_action": "Autoimmune hepatitis flare — steroids per hepatology, biopsy planning"
+        }
+      ]
+    },
+    {
+      "id": "pathway",
+      "type": "horizontal_1920x1080",
+      "title": "Acute Jaundice: 5-Module Pathway",
+      "visual_concept": "5 numbered boxes left to right with arrows. Color-coded by urgency tier. 2-3 bullet labels per box.",
+      "items": [
+        {
+          "step": 1,
+          "module_name": "Sick Check",
+          "lead_node_id": "aj-start",
+          "summary": "Gestalt sick check + West Haven grade + 4-question screen (APAP, Charcot, encephalopathy, recent shock). Resus parallel if unstable, encephalopathic, or coagulopathic."
+        },
+        {
+          "step": 2,
+          "module_name": "Time-Critical Exclusions",
+          "lead_node_id": "aj-exclusions",
+          "summary": "Pick the most acute hit. Each branch links to its deep-dive or focused result + tells you the next 5-min action."
+        },
+        {
+          "step": 3,
+          "module_name": "Initial Bundle + Reassess",
+          "lead_node_id": "aj-bundle",
+          "summary": "IV + NPO + ondansetron + APAP-free analgesia + broad hepatic panel + APAP level (always) + viral / autoimmune / hemolysis workup. Reassess at 60-90 min."
+        },
+        {
+          "step": 4,
+          "module_name": "Imaging",
+          "lead_node_id": "aj-imaging",
+          "summary": "RUQ US first for nearly everyone. MRCP for biliary tree mapping. CT/CTA for mass / vascular workup. ERCP is therapeutic. \"Normal imaging\" does not rule out hepatocellular causes."
+        },
+        {
+          "step": 5,
+          "module_name": "Disposition",
+          "lead_node_id": "aj-dispo",
+          "summary": "Transplant center if ALF / King\\"
+        }
+      ]
+    },
+    {
+      "id": "donots",
+      "type": "square_1080x1080",
+      "title": "Acute Jaundice: 10 Do-NOTs",
+      "visual_concept": "2x5 grid of red-bordered warning cards. Each card has a number, a short imperative verb, and a one-line teaser.",
+      "items": [
+        {
+          "n": 1,
+          "imperative": "Do NOT skip the APAP level on any altered + jaundiced patient",
+          "teaser": "APAP is the most common cause of acute liver failure in the US."
+        },
+        {
+          "n": 2,
+          "imperative": "Do NOT correct INR with FFP in ALF unless actively bleeding",
+          "teaser": "INR is the prognostic marker that drives King\\"
+        },
+        {
+          "n": 3,
+          "imperative": "Do NOT delay antibiotics for the ERCP slot in cholangitis",
+          "teaser": "Charcot triad → blood cultures × 2 → antibiotics within 1 hour."
+        },
+        {
+          "n": 4,
+          "imperative": "Do NOT mistake Reynolds pentad for ALF encephalopathy",
+          "teaser": "Septic shock from cholangitis presents with AMS + jaundice + hypotension + fever."
+        },
+        {
+          "n": 5,
+          "imperative": "Do NOT discharge \"painless jaundice in age ≥50\" as viral hepatitis",
+          "teaser": "Painless jaundice + weight loss + age ≥50 + cholestatic LFT pattern (alk phos / GGT out of proportion) = malignant biliary obstruction until proven otherwise."
+        },
+        {
+          "n": 6,
+          "imperative": "Do NOT miss Wilson disease in the young ALF patient",
+          "teaser": "Young patient + ALF + LOW alk phos + alk-phos-to-bili ratio <4 + Coombs-negative hemolysis = Wilson disease."
+        },
+        {
+          "n": 7,
+          "imperative": "Do NOT forget glucose monitoring q1h in ALF",
+          "teaser": "Hepatocyte gluconeogenesis failure causes hypoglycemia that is silent in the encephalopathic patient."
+        },
+        {
+          "n": 8,
+          "imperative": "Do NOT give platelets in suspected TTP",
+          "teaser": "TTP pentad (MAHA + thrombocytopenia + fever + AMS + renal failure) — platelets fuel microthrombi and worsen end-organ ischemia."
+        },
+        {
+          "n": 9,
+          "imperative": "Do NOT use the hub as a treatment playbook",
+          "teaser": "The hub is a triage map."
+        },
+        {
+          "n": 10,
+          "imperative": "Do NOT discharge without written return precautions and a booked 48-72 h recheck",
+          "teaser": "Even benign-pattern jaundice (Gilbert, stable cirrhosis at baseline, very mild non-progressive viral hepatitis) requires hepatology or PCP follow-up within 48-72 hours."
+        }
+      ]
+    }
+  ],
+  "visual_anchors": [
+    "yellow sclera (scleral icterus)",
+    "bile flow / biliary tree",
+    "RUQ anatomy",
+    "liver silhouette",
+    "amber/yellow gradient on skin",
+    "INR / coag panel iconography"
+  ],
+  "brand_palette": {
+    "primary_navy": "#0F2A44",
+    "accent_amber": "#F5B600",
+    "accent_red_critical": "#C92A2A",
+    "background": "#FFFFFF",
+    "muted_text": "#4A5568"
+  },
+  "citations": [
+    {
+      "num": 1,
+      "text": "Roche SP, Kobos R. Jaundice in the adult patient. Am Fam Physician. 2004;69(2):299-304."
+    },
+    {
+      "num": 2,
+      "text": "Fargo MV, Grogan SP, Saguil A. Evaluation of jaundice in adults. Am Fam Physician. 2017;95(3):164-168."
+    },
+    {
+      "num": 3,
+      "text": "EMCrit Podcast 386 — Acute Liver Failure (Pirani H). 2025."
+    },
+    {
+      "num": 4,
+      "text": "Kiriyama S, Kozaka K, Takada T, et al. Tokyo Guidelines 2018: diagnostic criteria and severity grading of acute cholangitis. J Hepatobiliary Pancreat Sci. 2018;25(1):17-30."
+    },
+    {
+      "num": 5,
+      "text": "Heard KJ. Acetylcysteine for acetaminophen poisoning. N Engl J Med. 2008;359(3):285-292."
+    },
+    {
+      "num": 6,
+      "text": "Lee WM, Hynan LS, Rossaro L, et al. Intravenous N-acetylcysteine improves transplant-free survival in early stage non-acetaminophen acute liver failure. Gastroenterology. 2009;137(3):856-864."
+    },
+    {
+      "num": 7,
+      "text": "AASLD Practice Guidance — Acute Liver Failure 2023. Hepatology. 2023;77(3):1036-1065."
+    },
+    {
+      "num": 8,
+      "text": "O'Grady JG, Alexander GJ, Hayllar KM, Williams R. Early indicators of prognosis in fulminant hepatic failure. Gastroenterology. 1989;97(2):439-445."
+    },
+    {
+      "num": 9,
+      "text": "Phillips J, Henderson AC. Hemolytic anemia: evaluation and differential diagnosis. Am Fam Physician. 2018;98(6):354-361."
+    },
+    {
+      "num": 10,
+      "text": "Henrion J. Hypoxic hepatitis. Liver Int. 2012;32(7):1039-1052."
+    },
+    {
+      "num": 11,
+      "text": "EB Medicine — Emergency Department Evaluation and Management of Jaundice. Emerg Med Pract. 2018."
+    },
+    {
+      "num": 12,
+      "text": "Schilsky ML, Roberts EA, Bronstein JM, et al. AASLD Practice Guidance on Wilson Disease 2022. Hepatology. 2023;77(4):1428-1455."
+    },
+    {
+      "num": 13,
+      "text": "Northup PG, Garcia-Pagan JC, Garcia-Tsao G, et al. Vascular liver disorders, portal vein thrombosis, and procedural bleeding in patients with liver disease: AASLD Practice Guidance. Hepatology. 2021;73(1):366-413."
+    },
+    {
+      "num": 14,
+      "text": "Mack CL, Adams D, Assis DN, et al. Diagnosis and management of autoimmune hepatitis in adults and children: 2019 practice guidance. Hepatology. 2020;72(2):671-722."
+    }
+  ]
+}

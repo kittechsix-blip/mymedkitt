@@ -23,6 +23,7 @@ import { initInfoPages } from './services/info-service.js';
 import { addSharedConsult, markOrganicVisit, hasFullAccess } from './services/shared-mode.js';
 import { showSplashScreen } from './components/splash-screen.js';
 import { removeContextualToolbar, hasContextualToolbar } from './components/contextual-toolbar.js';
+import { showInfoModal } from './components/info-page.js';
 
 // -------------------------------------------------------------------
 // Service Worker Registration
@@ -334,6 +335,22 @@ async function init(): Promise<void> {
   router.on('/drugs', handleDrugList);
   router.on('/calculators', handleCalculatorList);
   router.on('/calculator/:id', handleCalculator);
+  // Info-page overlay route — matches inline #/info/<id> body links used by hub
+  // consults' "Open first" cross-links (e.g., aj-steps, aj-stop). Opens the
+  // existing info modal over whatever's currently rendered. If the underlying
+  // view is the splash / nothing (direct URL hit or share-link), render the
+  // dashboard first so the close-x has somewhere meaningful to dismiss back to.
+  router.on('/info/:id', (params) => {
+    const main = document.getElementById('main-content');
+    const isEmpty = !main || main.children.length === 0;
+    if (isEmpty) {
+      handleHome({} as RouteParams);
+    }
+    const ok = showInfoModal(params.id);
+    if (!ok) {
+      handleNotFound();
+    }
+  });
   router.on('/learn', handleLearnHome);
   router.on('/hubs', handleHubsHome);
   router.on('/learn/:rotationId', handleLearnRotation);

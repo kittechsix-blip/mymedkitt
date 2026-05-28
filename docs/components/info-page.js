@@ -182,8 +182,22 @@ function renderPictograph(picto) {
 // -------------------------------------------------------------------
 let overlayEl = null;
 function destroyOverlay() {
-    overlayEl?.remove();
-    overlayEl = null;
+    if (overlayEl) {
+        // Tear down a11y handlers + restore focus to the launcher (FlowRider 2026-05-28)
+        const keyHandler = overlayEl._keyHandler;
+        if (keyHandler) {
+            document.removeEventListener('keydown', keyHandler);
+        }
+        const prev = overlayEl._previouslyFocused;
+        overlayEl.remove();
+        overlayEl = null;
+        if (prev && typeof prev.focus === 'function') {
+            try {
+                prev.focus();
+            }
+            catch { /* element no longer in DOM — ignore */ }
+        }
+    }
 }
 /** Build plain-text version of an info page for sharing via SMS/email */
 function buildShareText(page) {
@@ -252,13 +266,49 @@ export function showInfoModal(pageId) {
     if (!page)
         return false;
     destroyOverlay();
-    // Create overlay
+    // Create overlay — a11y (FlowRider 2026-05-28): tag as dialog/modal so screen
+    // readers announce it correctly, and trap Tab focus inside the panel while
+    // open so keyboard users can't drift into the underlying consult content.
     overlayEl = document.createElement('div');
     overlayEl.className = 'modal-overlay info-modal-overlay active';
+    overlayEl.setAttribute('role', 'dialog');
+    overlayEl.setAttribute('aria-modal', 'true');
+    const titleElId = `info-modal-title-${page.id}`;
+    overlayEl.setAttribute('aria-labelledby', titleElId);
     overlayEl.addEventListener('click', (e) => {
         if (e.target === overlayEl)
             destroyOverlay();
     });
+    // Save the element that had focus before the modal opened so we can restore
+    // it on close. Listen for Escape to close. Trap Tab cycles within the panel.
+    const previouslyFocused = document.activeElement;
+    const keyHandler = (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            destroyOverlay();
+            return;
+        }
+        if (e.key !== 'Tab' || !overlayEl)
+            return;
+        const focusables = overlayEl.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+        if (focusables.length === 0)
+            return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement;
+        if (e.shiftKey && active === first) {
+            e.preventDefault();
+            last.focus();
+        }
+        else if (!e.shiftKey && active === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    };
+    document.addEventListener('keydown', keyHandler);
+    overlayEl.setAttribute('data-restore-focus', previouslyFocused ? 'yes' : 'no');
+    overlayEl._keyHandler = keyHandler;
+    overlayEl._previouslyFocused = previouslyFocused;
     // Panel
     const panel = document.createElement('div');
     panel.className = 'modal-content info-modal-panel';
@@ -267,6 +317,7 @@ export function showInfoModal(pageId) {
     header.className = 'modal-header';
     const titleWrap = document.createElement('div');
     const title = document.createElement('h3');
+    title.id = titleElId;
     title.textContent = page.title;
     titleWrap.appendChild(title);
     const subtitle = document.createElement('div');
