@@ -293,6 +293,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/abdominal-pain-hub.js');
       return { nodes: m.ABDOMINAL_PAIN_HUB_NODES, entryNodeId: 'ap-start', categoryId: 'emergency-medicine', moduleLabels: m.ABDOMINAL_PAIN_HUB_MODULE_LABELS, citations: m.ABDOMINAL_PAIN_HUB_CITATIONS, criticalActions: m.ABDOMINAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'acute-jaundice-hub': async () => {
+      const m = await import('../data/trees/acute-jaundice-hub.js');
+      return { nodes: m.ACUTE_JAUNDICE_HUB_NODES, entryNodeId: 'aj-start', categoryId: 'emergency-medicine', moduleLabels: m.ACUTE_JAUNDICE_HUB_MODULE_LABELS, citations: m.ACUTE_JAUNDICE_HUB_CITATIONS, criticalActions: m.ACUTE_JAUNDICE_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
     'adult-appendicitis': async () => {
       const m = await import('../data/trees/adult-appendicitis.js');
       return { nodes: m.ADULT_APPENDICITIS_NODES, entryNodeId: 'aa-start', categoryId: 'gastroenterology', moduleLabels: m.ADULT_APPENDICITIS_MODULE_LABELS, citations: m.ADULT_APPENDICITIS_CITATIONS, criticalActions: m.ADULT_APPENDICITIS_CRITICAL_ACTIONS };

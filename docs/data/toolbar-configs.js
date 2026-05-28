@@ -406,6 +406,16 @@ const TOOLBAR_CONFIGS = {
         { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'ap-imaging' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'aph-stop' },
     ],
+    'acute-jaundice-hub': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aj-steps' },
+        { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'aj-exclusions' },
+        { id: 'kings', label: "King's", icon: '🧮', action: 'calculator', target: 'kings-college' },
+        { id: 'rumack', label: 'Rumack', icon: '🧮', action: 'calculator', target: 'rumack-matthew' },
+        { id: 'nac', label: 'NAC', icon: '💉', action: 'calculator', target: 'nac-dosing' },
+        { id: 'qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa' },
+        { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'aj-imaging' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'aj-stop' },
+    ],
     'adult-appendicitis': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aa-steps' },
         { id: 'aas', label: 'AAS', icon: '🧮', action: 'calculator', target: 'aas-score' },

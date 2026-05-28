@@ -37,6 +37,7 @@ export const TREE_REGISTRY = {
   'vaginal-bleeding-hub': { prefix: 'VAGINAL_BLEEDING_HUB', entryNodeId: 'vb-start', categoryId: 'emergency-medicine' },
   'crying-infant-hub': { prefix: 'CRYING_INFANT_HUB', entryNodeId: 'ci-start', categoryId: 'emergency-medicine' },
   'abdominal-pain-hub': { prefix: 'ABDOMINAL_PAIN_HUB', entryNodeId: 'ap-start', categoryId: 'emergency-medicine' },
+  'acute-jaundice-hub': { prefix: 'ACUTE_JAUNDICE_HUB', entryNodeId: 'aj-start', categoryId: 'emergency-medicine' },
   'adult-appendicitis': { prefix: 'ADULT_APPENDICITIS', entryNodeId: 'aa-start', categoryId: 'gastroenterology' },
   'gi-bleed-hub': { prefix: 'GI_BLEED_HUB', entryNodeId: 'gib-start', categoryId: 'emergency-medicine' },
   'unknown-ingestion-hub': { prefix: 'UNKNOWN_INGESTION_HUB', entryNodeId: 'ui-start', categoryId: 'toxicology' },

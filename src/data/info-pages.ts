@@ -24703,6 +24703,83 @@ const CSNT_IMAGING_DECISION_PAGE: InfoPage = {
 };
 
 // =====================================================================
+// ACUTE JAUNDICE HUB OVERLAY INFO PAGES (added 2026-05-28)
+// =====================================================================
+
+const AJ_STEPS_PAGE: InfoPage = {
+  id: 'aj-steps',
+  title: 'Acute Jaundice Hub — Steps Summary',
+  subtitle: 'Sick check → time-critical exclusions → initial bundle → imaging → dispo',
+  sections: [
+    {
+      body: '1. **Sick check first.** West Haven grade + 4-question screen (APAP exposure, Charcot triad, encephalopathy, recent shock state). If unstable, encephalopathic, or coagulopathic: resus parallel to workup, transplant center on the line early.\n2. **Time-critical exclusions** — anchor on the lab + exam pivot:\n   - **Charcot triad (fever + RUQ pain + jaundice) ± Reynolds pentad** → [Gallbladder Disease](#/tree/gallbladder). Blood cultures → antibiotics within 1 hour ([pip-tazo](#/drug/piperacillin-tazobactam/cholangitis) OR ceftriaxone + metronidazole). RUQ US. Tokyo TG18 grade drives ERCP timing. Use [qSOFA](#/calculator/qsofa) to flag sepsis physiology.\n   - **Any APAP exposure in 72 h** → [Acetaminophen Toxicity](#/tree/acetaminophen). Send APAP level mandatory. [Rumack-Matthew](#/calculator/rumack-matthew) for acute single ingestion. [NAC](#/calculator/nac-dosing) empirically for any clinical concern; do NOT trust a low level in delayed presentation.\n   - **Encephalopathy + INR ≥1.5 + no cirrhosis = ALF.** [Kings College](#/calculator/kings-college) from arrival. NAC for ALL ALF (Lee 2009 NEJM — improves transplant-free survival in non-APAP). Transplant center within 1 hour of recognition.\n   - **Indirect hyperbili + ↓Hgb + ↑LDH + ↓haptoglobin + smear findings** → massive hemolysis. Coombs, type and CROSS, hematology consult. PEX for TTP, steroids for AIHA.\n   - **AST/ALT >1000 + recent shock state** → ischemic hepatitis ("shock liver"). Fix upstream perfusion. APAP level still mandatory. Repeat LFTs at 12-24 h — rapid fall confirms.\n   - **Painless jaundice + weight loss + age ≥50** → malignant biliary obstruction until proven otherwise. RUQ US + CT pancreatic protocol + GI for ERCP with brushings.\n   - **Young + ALF + low alk phos + Coombs-neg hemolysis** → Wilson disease. Ceruloplasmin + 24-h urine copper + slit-lamp from ED. Transplant is definitive therapy.\n   - **Abdominal pain + ascites + hepatomegaly + hypercoag state** → Budd-Chiari. Hepatic vein Doppler US + CT/MR venogram. Heparin + hepatology + IR (TIPS).\n   - **Young female + AST/ALT very high + ↑IgG + ANA/SMA+** → autoimmune hepatitis flare. Send full autoimmune panel from ED. Hepatology drives steroid timing.\n3. **Initial bundle:** IV + NPO + ondansetron + APAP-free analgesia + broad lab stack (CBC, CMP with fractionated bili, GGT, alk phos, AST/ALT, INR/PT/PTT/fibrinogen, lipase, ammonia, lactate, ABG, type and screen, blood cultures if febrile, **APAP level always**, hepatitis panel, autoimmune panel, ceruloplasmin if <40, LDH/haptoglobin/retic/smear if hemolysis, β-hCG).\n4. **Reassess at 60-90 minutes.** Pivot identified → exclusions branch. Equivocal → image/observe. New encephalopathy or INR climbing → STOP, ALF pathway. Benign Gilbert pattern → discharge bundle.\n5. **Imaging strategy:**\n   - RUQ US first in nearly every patient (obstruction screen).\n   - MRCP for biliary tree mapping when ERCP not imminent.\n   - CT abd/pelvis with IV contrast for mass / pancreatitis overlay / abscess.\n   - CTA / MR venogram for Budd-Chiari, portal vein thrombosis.\n   - HIDA for clinical cholecystitis with non-diagnostic US.\n   - Head CT then MRI for Grade III-IV encephalopathy (cerebral edema).\n6. **Disposition:** Transplant center NOW if ALF / King\'s College met / Wilsonian ALF. ICU for cholangitic shock, shock liver, progressing ALF. Floor for stable obstruction / hepatitis workup / post-transfusion hemolysis. Discharge ONLY for Gilbert pattern, stable known cirrhosis at baseline, or very mild non-progressive pattern with reliable hepatology / PCP follow-up within 48-72 h.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Fargo MV, Grogan SP, Saguil A. Evaluation of jaundice in adults. Am Fam Physician. 2017;95(3):164-168.' },
+    { num: 2, text: 'AASLD Practice Guidance — Acute Liver Failure 2023. Hepatology. 2023;77(3):1036-1065.' },
+    { num: 3, text: 'Kiriyama S, et al. Tokyo Guidelines 2018: acute cholangitis diagnostic criteria and severity grading. J Hepatobiliary Pancreat Sci. 2018;25(1):17-30.' },
+    { num: 4, text: 'Lee WM, et al. IV N-acetylcysteine improves transplant-free survival in non-APAP ALF. Gastroenterology. 2009;137(3):856-864.' },
+    { num: 5, text: 'EMCrit Podcast 386 — Acute Liver Failure (Pirani H). 2025.' },
+  ],
+};
+
+const AJ_STOP_PAGE: InfoPage = {
+  id: 'aj-stop',
+  title: 'Acute Jaundice Hub — Do NOT',
+  subtitle: 'Critical pitfalls in acute jaundice',
+  sections: [
+    {
+      heading: '🛑 Do NOT skip the APAP level on any altered + jaundiced patient',
+      body: 'APAP is the most common cause of acute liver failure in the US. Patients deny exposure, forget chronic dosing, or present after the level has fallen. Send APAP level on every "altered + jaundiced" or "encephalopathic + INR climbing" case — even when the patient denies APAP. Delayed-presentation APAP can show a negative or low level with skyrocketing AST/ALT. NAC is still indicated. [Acetaminophen consult](#/tree/acetaminophen)',
+    },
+    {
+      heading: '🛑 Do NOT correct INR with FFP in ALF unless actively bleeding',
+      body: 'INR is the prognostic marker that drives King\'s College Criteria and transplant center decisions. Correcting it with FFP / PCC erases the signal and the receiving center loses the data they need. Give Vit K 10 mg IV (corrects nutritional component) but reserve FFP / PCC for active bleeding or pre-procedure. [Kings College](#/calculator/kings-college)',
+    },
+    {
+      heading: '🛑 Do NOT delay antibiotics for the ERCP slot in cholangitis',
+      body: 'Charcot triad → blood cultures × 2 → antibiotics within 1 hour. ERCP source control comes later. Reynolds pentad (Charcot + hypotension + AMS) = Tokyo Grade III = emergent ERCP / PTBD within 24 h, ICU level care, vasopressors, lactate-guided resuscitation.',
+    },
+    {
+      heading: '🛑 Do NOT mistake Reynolds pentad for ALF encephalopathy',
+      body: 'Septic shock from cholangitis presents with AMS + jaundice + hypotension + fever. Looks like ALF on first glance but the source is biliary, not hepatocellular. Source control via ERCP / PTBD changes the trajectory. Differential is driven by RUQ US showing dilation + recent fever pattern.',
+    },
+    {
+      heading: '🛑 Do NOT discharge "painless jaundice in age ≥50" as viral hepatitis',
+      body: 'Painless jaundice + weight loss + age ≥50 + cholestatic LFT pattern (alk phos / GGT out of proportion) = malignant biliary obstruction until proven otherwise. Pancreatic head adenocarcinoma is the most common culprit. RUQ US → CT pancreatic protocol → GI for ERCP with brushings → oncology. Outpatient discharge is rarely appropriate at first presentation.',
+    },
+    {
+      heading: '🛑 Do NOT miss Wilson disease in the young ALF patient',
+      body: 'Young patient + ALF + LOW alk phos + alk-phos-to-bili ratio <4 + Coombs-negative hemolysis = Wilson disease. Wilsonian ALF has the worst transplant-free survival of any ALF subtype (<10%). Order ceruloplasmin + 24-h urine copper + slit-lamp from the ED. Chelation does NOT rescue fulminant Wilsonian ALF — transplant is the definitive therapy.',
+    },
+    {
+      heading: '🛑 Do NOT forget glucose monitoring q1h in ALF',
+      body: 'Hepatocyte gluconeogenesis failure causes hypoglycemia that is silent in the encephalopathic patient. Glucose q1h, D10W infusion if any hypoglycemia, treat as aggressively as you would in DKA-style monitoring frequency.',
+    },
+    {
+      heading: '🛑 Do NOT give platelets in suspected TTP',
+      body: 'TTP pentad (MAHA + thrombocytopenia + fever + AMS + renal failure) — platelets fuel microthrombi and worsen end-organ ischemia. Reserve for catastrophic bleeding. Emergency plasma exchange is the therapy; steroids while waiting.',
+    },
+    {
+      heading: '🛑 Do NOT use the hub as a treatment playbook',
+      body: 'The hub is a triage map. Once you commit to a phenotype (APAP, cholangitis, ALF, hemolysis), leave the hub and work the deep-dive consult — that consult holds the dosing, monitoring, and disposition criteria specific to the diagnosis.',
+    },
+    {
+      heading: '🛑 Do NOT discharge without written return precautions and a booked 48-72 h recheck',
+      body: 'Even benign-pattern jaundice (Gilbert, stable cirrhosis at baseline, very mild non-progressive viral hepatitis) requires hepatology or PCP follow-up within 48-72 hours. Written return precautions cover: worsening yellowing, confusion / drowsiness, new RUQ pain or fever, persistent vomiting, dark urine + light stool worsening, bleeding, intractable pruritus. Patients must abstain from acetaminophen, NSAIDs, alcohol, and untested supplements.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Fargo MV, et al. Am Fam Physician. 2017;95(3):164-168.' },
+    { num: 2, text: 'AASLD Practice Guidance — Acute Liver Failure 2023. Hepatology. 2023;77(3):1036-1065.' },
+    { num: 3, text: 'Heard KJ. Acetylcysteine for acetaminophen poisoning. N Engl J Med. 2008;359(3):285-292.' },
+    { num: 4, text: 'Kiriyama S, et al. Tokyo Guidelines 2018. J Hepatobiliary Pancreat Sci. 2018;25(1):17-30.' },
+    { num: 5, text: 'Schilsky ML, et al. AASLD Wilson Disease 2022. Hepatology. 2023;77(4):1428-1455.' },
+  ],
+};
+
+// =====================================================================
 // HEADACHE-HUB OVERLAY INFO PAGES (added 2026-05-22 — Phase 2)
 // =====================================================================
 
@@ -25842,6 +25919,10 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'csnt-dermatome-atlas': CSNT_DERMATOME_ATLAS_PAGE,
   'csnt-provocative-tests': CSNT_PROVOCATIVE_PAGE,
   'csnt-imaging-decision': CSNT_IMAGING_DECISION_PAGE,
+
+  // Acute Jaundice Hub (EM + GI dual-list, type: 'hub')
+  'aj-steps': AJ_STEPS_PAGE,
+  'aj-stop': AJ_STOP_PAGE,
 };
 
 /** Get a single info page by ID (hardcoded fallback) */
