@@ -8,7 +8,7 @@ import type { Citation } from './neurosyphilis.js';
 
 export const MESENTERIC_ISCHEMIA_CRITICAL_ACTIONS = [
   { text: 'Pain out of proportion to exam = AMI until proven otherwise', nodeId: 'ami-start' },
-  { text: 'CTA immediately — do NOT wait for labs; every 6h delay doubles mortality', nodeId: 'ami-imaging' },
+  { text: 'CTA immediately — do NOT wait for labs; 14% mortality if treated <12h vs 80-100% if delayed >24h', nodeId: 'ami-imaging' },
   { text: 'Normal lactate does NOT rule out AMI — lactate rises late', nodeId: 'ami-labs' },
   { text: 'Heparin 80 U/kg bolus → 18 U/kg/hr infusion — start before surgery', nodeId: 'ami-anticoag' },
   { text: 'Pip-tazo 4.5g IV q6h — broad gut coverage immediately', nodeId: 'ami-abx' },
