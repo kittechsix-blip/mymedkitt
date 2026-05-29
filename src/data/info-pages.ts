@@ -24145,6 +24145,53 @@ const GW_STOP_PAGE: InfoPage = {
   ],
 };
 
+const HYPER_STEPS_PAGE: InfoPage = {
+  id: 'hyper-steps',
+  title: 'Hyperthermia Hub - Steps Summary',
+  subtitle: 'Core temp, cause triage, active cooling, disposition',
+  sections: [
+    {
+      body: '1. **Core temp first.** Get a rectal/esophageal/bladder temperature - peripheral temps underestimate. Distinguish **fever** (raised set point, antipyretics work) from **true hyperthermia** (normal set point, failed heat dissipation, antipyretics fail).\n2. **If core >40C with altered mental status, start active cooling NOW** while you work the cause.\n3. **Pick the dominant cause:**\n   - Exertion/heat exposure -> [Heat Stroke](#/tree/heat-stroke).\n   - Serotonergic drug + clonus/hyperreflexia/mydriasis, rapid onset -> [Serotonin Syndrome](#/tree/serotonin-syndrome).\n   - Antipsychotic + lead-pipe rigidity, slow onset, bradyreflexia -> [NMS](#/tree/nms).\n   - Hyperthyroid history, AF, agitation -> [Thyroid Storm](#/tree/thyroid).\n   - Dry/flushed skin, mydriasis, urinary retention -> anticholinergic toxidrome.\n   - Tinnitus, hyperpnea, mixed acid-base -> [Salicylate](#/tree/salicylate).\n   - Infection source, rigors, hypotension -> [Sepsis](#/tree/sepsis).\n4. **Cooling principles (all causes):** immersion for exertional heat stroke, evaporative + ice packs otherwise; cold IV fluids; benzodiazepines to cut shivering/thermogenesis; target ~38.5C then stop; paralysis for intractable >41C (avoid succinylcholine with rhabdo). Antipyretics do not work.\n5. **Disposition:** ICU for >40C, AMS, rigidity, rhabdo/AKI, DIC, or instability. Cause-specific consult drives definitive therapy.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Walter EJ, Carraretto M. Neurological and cognitive consequences of hyperthermia. Crit Care. 2016;20:199.' },
+    { num: 2, text: 'EMCrit/IBCC. Hyperthermia and the differential of the hot patient. https://emcrit.org/ibcc/' },
+  ],
+};
+
+const HYPER_STOP_PAGE: InfoPage = {
+  id: 'hyper-stop',
+  title: 'Hyperthermia Hub - Do NOT',
+  subtitle: 'Critical pitfalls in the hot patient',
+  sections: [
+    {
+      heading: 'Do NOT rely on antipyretics in true hyperthermia',
+      body: 'Acetaminophen and NSAIDs target a raised set point. In heat illness, toxidromes, NMS, and thyroid storm the set point is normal - they do not work, and NSAIDs add renal/GI/coagulopathy risk. Active cooling is the treatment.',
+    },
+    {
+      heading: 'Do NOT trust a peripheral temperature',
+      body: 'Oral and axillary temps underestimate core. A normal peripheral reading does not exclude life-threatening core hyperthermia. Measure rectal/esophageal/bladder temp.',
+    },
+    {
+      heading: 'Do NOT wait for the diagnosis to start cooling',
+      body: 'Core >40C with AMS is a cooling emergency. Begin active cooling within minutes while the cause-specific workup runs.',
+    },
+    {
+      heading: 'Do NOT give succinylcholine when rhabdomyolysis is likely',
+      body: 'If paralysis is needed for intractable hyperthermia with rigidity, use rocuronium/vecuronium. Succinylcholine risks lethal hyperkalemia in rhabdo.',
+    },
+    {
+      heading: 'Do NOT interchange cause-specific antidotes',
+      body: 'Cyproheptadine (serotonin syndrome), dantrolene/bromocriptine (NMS), and thionamide+beta-blocker+iodine (thyroid storm) are not interchangeable. Bromocriptine is contraindicated in serotonin syndrome. Confirm the diagnosis first.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Walter EJ, Carraretto M. Neurological and cognitive consequences of hyperthermia. Crit Care. 2016;20:199.' },
+    { num: 2, text: 'EMCrit/IBCC. Hyperthermia and the differential of the hot patient. https://emcrit.org/ibcc/' },
+  ],
+};
+
 const NP_STEPS_PAGE: InfoPage = {
   id: 'np-steps',
   title: 'Neck Pain Hub - Steps Summary',
@@ -25150,6 +25197,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'ams-stop': AMS_STOP_PAGE,
   'gw-steps': GW_STEPS_PAGE,
   'gw-stop': GW_STOP_PAGE,
+  'hyper-steps': HYPER_STEPS_PAGE,
+  'hyper-stop': HYPER_STOP_PAGE,
   'np-steps': NP_STEPS_PAGE,
   'np-stop': NP_STOP_PAGE,
   'bp-steps': BP_STEPS_PAGE,

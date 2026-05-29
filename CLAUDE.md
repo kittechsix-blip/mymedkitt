@@ -3,6 +3,15 @@
 > Read this file at the start of every session working on this project.
 > The PRD (`myMedKitt-PRD.md`) is the **single source of truth** for all UI/UX decisions.
 
+@~/Desktop/claude-brain/agent-instructions/wingman.md
+
+<!--
+  WingMan import (above): pairs this app with the Kittech WingMan skill family.
+  myMedKitt's WingMan skills (coordinator + flagship deep-solo) are planned —
+  see ~/Desktop/kittech-wingman/registry/registry.md for current status.
+  When you start the build, follow ~/Desktop/kittech-wingman/NEW-SKILL-CHECKLIST.md.
+-->
+
 ---
 
 ## Agent Reports (Session Start)

@@ -325,6 +325,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/generalized-weakness-hub.js');
       return { nodes: m.GENERALIZED_WEAKNESS_HUB_NODES, entryNodeId: 'gw-start', categoryId: 'emergency-medicine', moduleLabels: m.GENERALIZED_WEAKNESS_HUB_MODULE_LABELS, citations: m.GENERALIZED_WEAKNESS_HUB_CITATIONS, criticalActions: m.GENERALIZED_WEAKNESS_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'hyperthermia-hub': async () => {
+      const m = await import('../data/trees/hyperthermia-hub.js');
+      return { nodes: m.HYPERTHERMIA_HUB_NODES, entryNodeId: 'hyper-start', categoryId: 'emergency-medicine', moduleLabels: m.HYPERTHERMIA_HUB_MODULE_LABELS, citations: m.HYPERTHERMIA_HUB_CITATIONS, criticalActions: m.HYPERTHERMIA_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
     'neck-pain-hub': async () => {
       const m = await import('../data/trees/neck-pain-hub.js');
       return { nodes: m.NECK_PAIN_HUB_NODES, entryNodeId: 'np-start', categoryId: 'emergency-medicine', moduleLabels: m.NECK_PAIN_HUB_MODULE_LABELS, citations: m.NECK_PAIN_HUB_CITATIONS, criticalActions: m.NECK_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };

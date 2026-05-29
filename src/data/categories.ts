@@ -715,6 +715,17 @@ export const DEFAULT_CATEGORIES: Category[] = [
         displayCategoryId: 'neurology',
       },
       {
+        id: 'hyperthermia-hub',
+        title: 'Hyperthermia Hub',
+        subtitle: 'Core Temp First → Pick the Cause → Cooling Principles → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 13,
+        entryNodeId: 'hyper-start',
+        type: 'hub',
+        displayCategoryId: 'emergency-medicine',
+      },
+      {
         id: 'neck-pain-hub',
         title: 'Neck Pain Hub',
         subtitle: 'Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo',

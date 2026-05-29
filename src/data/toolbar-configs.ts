@@ -507,6 +507,15 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'gw-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'gw-stop' },
   ],
+  'hyperthermia-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hyper-steps' },
+    { id: 'cooling', label: 'Cooling', icon: '🧊', action: 'jump', target: 'hyper-cooling' },
+    { id: 'heat-stroke', label: 'Heat Stroke', icon: '🌡️', action: 'route', target: 'heat-stroke' },
+    { id: 'serotonin', label: 'Serotonin', icon: '⚡', action: 'route', target: 'serotonin-syndrome' },
+    { id: 'nms', label: 'NMS', icon: '💊', action: 'route', target: 'nms' },
+    { id: 'thyroid-storm', label: 'Thyroid Storm', icon: '🦋', action: 'route', target: 'thyroid' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hyper-stop' },
+  ],
   'neck-pain-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'np-steps' },
     { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'np-exclusions' },
