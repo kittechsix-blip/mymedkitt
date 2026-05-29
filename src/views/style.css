@@ -5063,6 +5063,18 @@ body.critical-actions-open {
   .spotlight-modal {
     max-width: 640px;
   }
+
+  /* Cap consult-flow reading width on desktop and center it.
+     Without this, the header/search/card-stack stretch edge-to-edge
+     (~1434px at 1440px viewport), producing uncomfortably long line
+     lengths for clinical text. (Flow Rider 2026-05-29) */
+  .consult-flow-header,
+  .consult-search,
+  .card-stack-container {
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ==================================================================

@@ -124,7 +124,7 @@ export const INTRALIPID_NODES = [
         body: '**Case reports support ILE use for various lipophilic agents:** [6][12]\n\n**Reported successes:**\n- Diphenhydramine (cardiac arrest)\n- Bupropion (refractory seizures, cardiac arrest)\n- Clomipramine\n- Quetiapine\n- Cocaine (with concurrent local anesthetic effects)\n- Flecainide\n- Lamotrigine\n\n**General principle:**\nConsider ILE when:\n1. Agent is highly lipophilic (log P > 2)\n2. Life-threatening toxicity present\n3. Standard antidotes have failed or are unavailable\n4. Cardiac arrest has occurred\n\n**ACMT position statement:** [6]\n"In circumstances where there is serious hemodynamic, or other, instability from a xenobiotic with a high degree of lipid solubility, lipid resuscitation therapy is viewed as a reasonable consideration for therapy, even if the patient is not in cardiac arrest."\n\n**What ILE is NOT indicated for:**\n- Routine overdose without hemodynamic compromise\n- Hydrophilic drug toxicity (digoxin, lithium, salicylates)\n- As alternative to specific antidotes (e.g., DigiFab for digoxin)',
         citation: [6, 12],
         next: 'ile-dosing-protocol',
-        summary: 'Other lipophilic agents: consider ILE for diphenhydramine, haloperidol, amiodarone toxicity as rescue',
+        summary: 'Other lipophilic agents: consider ILE for diphenhydramine, bupropion, clomipramine toxicity as rescue',
         skippable: true,
     },
     // =====================================================================
@@ -135,7 +135,7 @@ export const INTRALIPID_NODES = [
         type: 'info',
         module: 3,
         title: 'ILE Dosing Protocol',
-        body: '**Standard ILE Protocol (ASRA 2020):** [1]\n\nUse **20% [Lipid Emulsion](#/drug/lipid-emulsion/LAST)** (Intralipid, Liposyn)\n\n**BOLUS:**\n- **1.5 mL/kg** IV over 1 minute\n- For 70 kg patient: ~100 mL\n\n**INFUSION:**\n- **0.25 mL/kg/min** continuous\n- May double to 0.5 mL/kg/min if unstable\n- Continue for at least 15-30 minutes after hemodynamic stability\n\n**If cardiac arrest or recurrent instability:**\n- Repeat bolus 1-2 times at 5-minute intervals\n- Double infusion rate to 0.5 mL/kg/min\n\n**MAXIMUM DOSE:**\n- **~12 mL/kg** in the first 30 minutes\n- For 70 kg patient: ~840 mL\n\n**Practical tip:** For patients >70 kg, start with ~100 mL bolus. For patients <40 kg or children, use a pump and calculate precisely.',
+        body: '**Standard ILE Protocol (ASRA 2020 checklist):** [1]\n\nUse **20% [Lipid Emulsion](#/drug/lipid-emulsion/LAST)** (Intralipid, Liposyn)\n\n**BOLUS:**\n- **1.5 mL/kg** IV (lean body mass) over 2-3 minutes\n- For 70 kg patient: ~100 mL\n\n**INFUSION:**\n- **0.25 mL/kg/min** continuous\n- May double to 0.5 mL/kg/min if circulatory stability not attained\n- Continue for at least 10-15 minutes after hemodynamic stability\n\n**If cardiac arrest or recurrent instability:**\n- Repeat bolus 1-2 times at 5-minute intervals\n- Double infusion rate to 0.5 mL/kg/min\n\n**MAXIMUM DOSE:**\n- **~10 mL/kg over the first 30 minutes** (ASRA 2020 upper limit)\n- For 70 kg patient: ~700 mL\n\n**Practical tip:** For patients >70 kg, start with ~100 mL bolus. For patients <40 kg or children, use a pump and calculate precisely.',
         citation: [1],
         calculatorLinks: [
             { id: 'ile-dosing', label: 'ILE Dose Calculator' },
@@ -146,13 +146,13 @@ export const INTRALIPID_NODES = [
                 drug: 'Lipid Emulsion 20%',
                 dose: '1.5 mL/kg bolus, then 0.25 mL/kg/min infusion',
                 route: 'IV',
-                frequency: 'Bolus over 1 min, continuous infusion',
-                duration: 'Until stable for 15+ minutes',
-                notes: 'May repeat bolus x2 at 5 min intervals if unstable. Max ~12 mL/kg in 30 min.',
+                frequency: 'Bolus over 2-3 min, continuous infusion',
+                duration: 'Until stable for 10+ minutes',
+                notes: 'May repeat bolus x2 at 5 min intervals if unstable. Max ~10 mL/kg in 30 min.',
             },
             monitoring: 'Hemodynamics (BP, HR, rhythm), clinical response, triglycerides if prolonged use.',
         },
-        summary: 'Bolus 1.5 mL/kg 20% lipid over 1 min, then infusion 0.25 mL/kg/min — may repeat bolus x2',
+        summary: 'Bolus 1.5 mL/kg 20% lipid over 2-3 min, then infusion 0.25 mL/kg/min — may repeat bolus x2',
         safetyLevel: 'critical',
     },
     {
@@ -160,7 +160,7 @@ export const INTRALIPID_NODES = [
         type: 'info',
         module: 3,
         title: 'Administration Details',
-        body: '**Practical considerations:** [1][2]\n\n**IV Access:**\n- Peripheral IV is acceptable (20% lipid emulsion is safe peripherally)\n- Central line preferred if available but DO NOT delay for access\n- Large bore (18G or larger) recommended for rapid bolus\n\n**Administration:**\n- Draw up in large syringes (60 mL) for bolus\n- Use IV tubing (not a pump) for initial bolus to ensure rapid delivery\n- Switch to pump for infusion phase\n- Bolus should be given over 1 minute (not slower)\n\n**Compatible lines:**\n- Can run through same line as crystalloids\n- Avoid mixing with other medications if possible\n- Flush line before/after if alternating with pressors\n\n**Storage:**\n- Room temperature or refrigerated\n- Protect from light if stored long-term\n- Check expiration date\n- Should be available in OR, ED, procedural areas\n\n**Standard supply:** Most hospitals stock 500 mL bags of 20% lipid emulsion in OR and pharmacy.',
+        body: '**Practical considerations:** [1][2]\n\n**IV Access:**\n- Peripheral IV is acceptable (20% lipid emulsion is safe peripherally)\n- Central line preferred if available but DO NOT delay for access\n- Large bore (18G or larger) recommended for rapid bolus\n\n**Administration:**\n- Draw up in large syringes (60 mL) for bolus\n- Use IV tubing (not a pump) for initial bolus to ensure rapid delivery\n- Switch to pump for infusion phase\n- Bolus should be given over 2-3 minutes (lean body mass) — push it, do not run as a slow drip\n\n**Compatible lines:**\n- Can run through same line as crystalloids\n- Avoid mixing with other medications if possible\n- Flush line before/after if alternating with pressors\n\n**Storage:**\n- Room temperature or refrigerated\n- Protect from light if stored long-term\n- Check expiration date\n- Should be available in OR, ED, procedural areas\n\n**Standard supply:** Most hospitals stock 500 mL bags of 20% lipid emulsion in OR and pharmacy.',
         citation: [1, 2],
         next: 'ile-cpr-modifications',
         summary: 'Use 20% lipid emulsion via large-bore IV — can give via peripheral or central line',
@@ -185,7 +185,7 @@ export const INTRALIPID_NODES = [
         type: 'info',
         module: 4,
         title: 'Monitoring During ILE',
-        body: '**Real-time monitoring:** [1][2]\n\n**Hemodynamics:**\n- Continuous cardiac monitoring (rhythm, rate)\n- Arterial line if available (BP, waveform)\n- Pulse oximetry\n- Capnography (ROSC detection, ventilation)\n\n**Clinical response markers:**\n- ROSC (in arrest)\n- Blood pressure improvement (MAP >65)\n- Heart rate normalization\n- QRS narrowing (if widened)\n- Resolution of seizures\n- Improved mentation\n\n**When to repeat bolus:**\n- Persistent hemodynamic instability\n- Recurrent arrhythmias\n- No response after 5 minutes\n- May repeat 1-2 additional times\n\n**Duration:**\n- Continue infusion for **at least 15-30 minutes** after stability achieved\n- Some sources recommend up to 60 minutes post-stability\n- Lipophilic drugs may redistribute from lipid compartment as ILE is metabolized\n- Watch for "recrudescence" - return of toxicity after ILE stopped',
+        body: '**Real-time monitoring:** [1][2]\n\n**Hemodynamics:**\n- Continuous cardiac monitoring (rhythm, rate)\n- Arterial line if available (BP, waveform)\n- Pulse oximetry\n- Capnography (ROSC detection, ventilation)\n\n**Clinical response markers:**\n- ROSC (in arrest)\n- Blood pressure improvement (MAP >65)\n- Heart rate normalization\n- QRS narrowing (if widened)\n- Resolution of seizures\n- Improved mentation\n\n**When to repeat bolus:**\n- Persistent hemodynamic instability\n- Recurrent arrhythmias\n- No response after 5 minutes\n- May repeat 1-2 additional times\n\n**Duration:**\n- Continue infusion for **at least 10-15 minutes** after stability achieved\n- Some sources recommend up to 60 minutes post-stability\n- Lipophilic drugs may redistribute from lipid compartment as ILE is metabolized\n- Watch for "recrudescence" - return of toxicity after ILE stopped',
         citation: [1, 2],
         next: 'ile-endpoints',
         summary: 'Monitor BP, HR, ECG, and mental status — expect improvement within 15-30 min of bolus',
@@ -196,7 +196,7 @@ export const INTRALIPID_NODES = [
         type: 'info',
         module: 4,
         title: 'Treatment Endpoints',
-        body: '**When to stop ILE:** [1][2]\n\n**Clinical stability achieved:**\n- Stable blood pressure (MAP >65) for 15+ minutes\n- Stable heart rate and rhythm\n- Resolution of neurologic symptoms\n- No recurrence of toxicity\n\n**Maximum dose reached:**\n- ~12 mL/kg in first 30 minutes\n- Continuing beyond this increases adverse effect risk\n- If still unstable: consider ECMO, other rescue therapies\n\n**Weaning protocol:**\n- Once stable 15-30 minutes, decrease infusion rate by 50%\n- Observe for recurrence\n- Stop if remains stable for additional 15 minutes\n- Monitor for 4-6 hours minimum after discontinuation\n\n**Recrudescence:**\n- Toxicity may return as ILE metabolized (6-12 hours)\n- Particularly with long-acting agents (bupivacaine, extended-release CCB)\n- Consider restarting ILE if symptoms recur\n- Admit to monitored setting',
+        body: '**When to stop ILE:** [1][2]\n\n**Clinical stability achieved:**\n- Stable blood pressure (MAP >65) for 10+ minutes\n- Stable heart rate and rhythm\n- Resolution of neurologic symptoms\n- No recurrence of toxicity\n\n**Maximum dose reached:**\n- ~10 mL/kg in first 30 minutes\n- Continuing beyond this increases adverse effect risk\n- If still unstable: consider ECMO, other rescue therapies\n\n**Weaning protocol:**\n- Once stable 10-15 minutes, decrease infusion rate by 50%\n- Observe for recurrence\n- Stop if remains stable for additional 15 minutes\n- Monitor for 4-6 hours minimum after discontinuation\n\n**Recrudescence:**\n- Toxicity may return as ILE metabolized (6-12 hours)\n- Particularly with long-acting agents (bupivacaine, extended-release CCB)\n- Consider restarting ILE if symptoms recur\n- Admit to monitored setting',
         citation: [1, 2],
         next: 'ile-lab-interference',
         summary: 'Stop infusion when hemodynamically stable — max total dose 10 mL/kg over first 30 minutes',
@@ -232,7 +232,7 @@ export const INTRALIPID_NODES = [
         type: 'info',
         module: 5,
         title: 'Special Populations',
-        body: '**Pediatrics:** [1][14]\n- Same dosing: 1.5 mL/kg bolus, 0.25 mL/kg/min infusion\n- Use pump for precise dosing in small children\n- Maximum dose 12 mL/kg applies\n- LAST can occur in children receiving nerve blocks\n\n**Pregnancy:** [1]\n- ILE is indicated for maternal LAST\n- Treat mother first (fetal survival depends on maternal resuscitation)\n- No specific dose adjustments\n- Consider early cesarean if near term and maternal arrest\n\n**Obesity:**\n- Use ideal body weight or lean body mass for dosing\n- Actual body weight may lead to overdosing\n- For cardiac arrest, may use actual weight initially\n\n**Renal/Hepatic impairment:**\n- No dose adjustment needed for acute rescue\n- Lipid clearance may be delayed\n- Monitor triglycerides if prolonged infusion needed\n\n**Elderly:**\n- No specific dose adjustment\n- May have delayed lipid clearance\n- Higher risk of fat overload with prolonged use',
+        body: '**Pediatrics:** [1][14]\n- Same dosing: 1.5 mL/kg bolus, 0.25 mL/kg/min infusion\n- Use pump for precise dosing in small children\n- Maximum dose ~10 mL/kg over first 30 min applies\n- LAST can occur in children receiving nerve blocks\n\n**Pregnancy:** [1]\n- ILE is indicated for maternal LAST\n- Treat mother first (fetal survival depends on maternal resuscitation)\n- No specific dose adjustments\n- Consider early cesarean if near term and maternal arrest\n\n**Obesity:**\n- Use ideal body weight or lean body mass for dosing\n- Actual body weight may lead to overdosing\n- For cardiac arrest, may use actual weight initially\n\n**Renal/Hepatic impairment:**\n- No dose adjustment needed for acute rescue\n- Lipid clearance may be delayed\n- Monitor triglycerides if prolonged infusion needed\n\n**Elderly:**\n- No specific dose adjustment\n- May have delayed lipid clearance\n- Higher risk of fat overload with prolonged use',
         citation: [1, 14],
         next: 'ile-disposition',
         summary: 'Pediatric dosing same mL/kg as adult. Pregnancy: ILE is safe. Soy allergy: theoretical risk, give anyway in arrest',
@@ -319,12 +319,12 @@ export const INTRALIPID_NODES = [
         type: 'info',
         module: 1,
         title: 'ILE Quick Reference',
-        body: '**LIPID EMULSION 20% (Intralipid) PROTOCOL**\n\n**BOLUS:**\n1.5 mL/kg IV push over 1 minute\n- 70 kg patient: ~100 mL\n- May repeat x2 at 5-minute intervals\n\n**INFUSION:**\n0.25 mL/kg/min (15 mL/kg/hr)\n- 70 kg patient: ~17.5 mL/min or ~1050 mL/hr\n- Double rate to 0.5 mL/kg/min if unstable\n\n**MAXIMUM:**\n~12 mL/kg in first 30 minutes\n- 70 kg patient: ~840 mL max\n\n**DURATION:**\nContinue infusion 15-30 minutes after hemodynamic stability\n\n**CPR MODIFICATIONS:**\n- Low-dose epinephrine (<1 mcg/kg)\n- Avoid vasopressin, lidocaine, calcium blockers\n- Prolonged resuscitation may be needed\n\n**INDICATIONS:**\n- LAST (primary)\n- Refractory BB/CCB/TCA toxicity\n- Cardiac arrest from lipophilic agents',
+        body: '**LIPID EMULSION 20% (Intralipid) PROTOCOL**\n\n**BOLUS:**\n1.5 mL/kg IV (lean body mass) over 2-3 minutes\n- 70 kg patient: ~100 mL\n- May repeat x2 at 5-minute intervals\n\n**INFUSION:**\n0.25 mL/kg/min (15 mL/kg/hr)\n- 70 kg patient: ~17.5 mL/min or ~1050 mL/hr\n- Double rate to 0.5 mL/kg/min if unstable\n\n**MAXIMUM:**\n~10 mL/kg in first 30 minutes (ASRA 2020 upper limit)\n- 70 kg patient: ~700 mL max\n\n**DURATION:**\nContinue infusion 10-15 minutes after hemodynamic stability\n\n**CPR MODIFICATIONS:**\n- Low-dose epinephrine (<1 mcg/kg)\n- Avoid vasopressin, lidocaine, calcium blockers\n- Prolonged resuscitation may be needed\n\n**INDICATIONS:**\n- LAST (primary)\n- Refractory BB/CCB/TCA toxicity\n- Cardiac arrest from lipophilic agents',
         citation: [1],
         calculatorLinks: [
             { id: 'ile-dosing', label: 'ILE Dose Calculator' },
         ],
-        summary: 'ILE: 1.5 mL/kg bolus → 0.25 mL/kg/min infusion, max 10 mL/kg in 30 min — strongest for LAST',
+        summary: 'ILE: 1.5 mL/kg bolus over 2-3 min → 0.25 mL/kg/min infusion, max 10 mL/kg in 30 min — strongest for LAST',
     },
 ];
 // =====================================================================
@@ -342,10 +342,10 @@ export const INTRALIPID_NODE_COUNT = 21;
 // CITATIONS
 // =====================================================================
 export const INTRALIPID_CRITICAL_ACTIONS = [
-    { text: 'Intralipid 20% bolus: 1.5 mL/kg IV over 1 minute (may repeat x2 at 5-min intervals)', nodeId: 'ile-dosing-protocol' },
+    { text: 'Intralipid 20% bolus: 1.5 mL/kg IV (lean body mass) over 2-3 minutes (may repeat x2 at 5-min intervals)', nodeId: 'ile-dosing-protocol' },
     { text: 'Intralipid 20% infusion: 0.25 mL/kg/min continuous (double to 0.5 if unstable)', nodeId: 'ile-dosing-protocol' },
-    { text: 'Maximum dose: ~12 mL/kg in first 30 minutes (~840 mL for 70 kg patient)', nodeId: 'ile-dosing-protocol' },
-    { text: 'Continue infusion 15-30 minutes after hemodynamic stability achieved', nodeId: 'ile-endpoints' },
+    { text: 'Maximum dose: ~10 mL/kg in first 30 minutes (~700 mL for 70 kg patient)', nodeId: 'ile-dosing-protocol' },
+    { text: 'Continue infusion 10-15 minutes after hemodynamic stability achieved', nodeId: 'ile-endpoints' },
     { text: 'Modified CPR for LAST: use small-dose epinephrine (<1 mcg/kg), avoid vasopressin and propofol', nodeId: 'ile-cpr-modifications' },
     { text: 'Best evidence for LAST (standard of care per ASRA/AHA), also used for lipophilic drug OD (BB/CCB/TCA)', nodeId: 'ile-indications-question' },
     { text: 'Stop local anesthetic injection immediately at first signs of toxicity', nodeId: 'ile-last' },
@@ -356,7 +356,7 @@ export const INTRALIPID_CRITICAL_ACTIONS = [
 export const INTRALIPID_CITATIONS = [
     {
         num: 1,
-        text: 'Neal JM, Barrington MJ, Fettiplace MR, et al. The Third American Society of Regional Anesthesia and Pain Medicine Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.',
+        text: 'Neal JM, Neal EJ, Weinberg GL. American Society of Regional Anesthesia and Pain Medicine Local Anesthetic Systemic Toxicity checklist: 2020 version. Reg Anesth Pain Med. 2021;46(1):81-82. (updates the 2018 ASRA Third Practice Advisory; upper-limit lipid dose ~10 mL/kg over first 30 min)',
     },
     {
         num: 2,
