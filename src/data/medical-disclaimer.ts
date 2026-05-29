@@ -7,16 +7,15 @@
 // can never drift). This constant MIRRORS the deployed legal banner's four
 // acknowledgments — it introduces no new legal language.
 //
-// ⚠️ SIGN-OFF REQUIRED (Andy, EM physician + product owner):
-//   1. Confirm DISCLAIMER_VERSION / DISCLAIMER_EFFECTIVE_DATE (none existed before;
-//      values below are placeholders pending your confirmation).
-//   2. Confirm the acknowledgment wording below matches the deployed banner
-//      verbatim (it is reproduced from docs/index.html; verify before any ship).
-//   Once confirmed, the app's legal-banner could later read FROM this constant so
-//   the banner and the skill share one source — separate task, your call.
+// SIGN-OFF LOG (Andy Kitlowski, EM physician + product owner):
+//   2026-05-29 — APPROVED: DISCLAIMER_VERSION v1.0, effective 2026-05-29, and the
+//   four acknowledgments below (reproduced from the deployed banner in
+//   docs/index.html; no new legal language). The app's legal-banner could later
+//   read FROM this constant so the banner and the skill share one source — a
+//   separate task, Andy's call.
 
-export const DISCLAIMER_VERSION = "v1.0"; // PENDING SIGN-OFF
-export const DISCLAIMER_EFFECTIVE_DATE = "2026-05-29"; // PENDING SIGN-OFF
+export const DISCLAIMER_VERSION = "v1.0"; // signed 2026-05-29
+export const DISCLAIMER_EFFECTIVE_DATE = "2026-05-29"; // signed 2026-05-29
 export const DISCLAIMER_STORAGE_VALUE = `${DISCLAIMER_VERSION}-${DISCLAIMER_EFFECTIVE_DATE}`;
 
 export interface DisclaimerAcknowledgment {

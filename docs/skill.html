@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; connect-src 'self'" />
+  <meta name="theme-color" content="#FAFAF5" />
+  <title>myMedKitt — Get the Claude Skill</title>
+  <style>
+    :root {
+      --bg: #FAFAF5; --card: #FFFFFF; --text: #1A1A1A; --text-2: #5A5A5A;
+      --green: #3CB371; --umber: #B87333; --danger: #B22222; --line: rgba(0,0,0,.08);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 20px 16px 64px;
+      padding-top: calc(20px + env(safe-area-inset-top)); }
+    .fda { font-size: 12px; font-weight: 700; letter-spacing: .3px; color: var(--danger);
+      background: #FDF2F2; border: 1px solid rgba(178,34,34,.2);
+      border-radius: 10px; padding: 8px 12px; margin-bottom: 20px; }
+    h1 { font-size: 26px; font-weight: 800; letter-spacing: -.5px; margin: 0 0 6px; }
+    h2 { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
+      color: var(--umber); margin: 28px 0 10px; }
+    p { margin: 0 0 12px; }
+    .muted { color: var(--text-2); }
+    .stamp { font-size: 13px; font-weight: 600; color: var(--text-2);
+      text-transform: uppercase; letter-spacing: .3px; margin: 8px 0 0; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 18px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; border: none; border-radius: 12px; padding: 14px 18px; font-size: 16px;
+      font-weight: 700; cursor: pointer; text-decoration: none; }
+    .btn-primary { background: linear-gradient(180deg, #46c87f, var(--green)); color: #fff;
+      box-shadow: 0 2px 0 #2f8f59, 0 4px 10px rgba(60,179,113,.35); }
+    .btn-primary:active { transform: translateY(1px); }
+    .btn-ghost { background: #fff; color: var(--text); border: 1.5px solid var(--line); margin-top: 8px; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .tab { border: 1px solid rgba(184,115,51,.3); background: #fff; color: var(--umber);
+      border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 700; cursor: pointer; }
+    .tab[aria-selected="true"] { background: var(--umber); color: #fff; }
+    .panel { display: none; } .panel.on { display: block; }
+    code, pre { font-family: ui-monospace, Menlo, Monaco, monospace; }
+    code { background: rgba(0,0,0,.05); padding: 1px 5px; border-radius: 5px; font-size: 13px; }
+    pre { background: #1A1A1A; color: #F5F5F5; border-radius: 10px; padding: 12px;
+      overflow: auto; font-size: 11px; max-height: 280px; }
+    ol, ul { margin: 0 0 10px; padding-left: 20px; } li { margin: 4px 0; }
+    a.link { color: var(--green); font-weight: 600; }
+    .scope { background: #FDF2F2; border: 1px solid rgba(178,34,34,.2); border-radius: 14px; padding: 16px; }
+    .scope h2 { color: var(--danger); margin-top: 0; }
+    #gate { text-align: center; padding: 40px 16px; }
+    #content { display: none; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="fda">NOT FDA CLEARED — for licensed clinician use only. Decision support, not a substitute for clinical judgment.</div>
+
+    <!-- Disclaimer gate (shown until the in-app disclaimer has been accepted) -->
+    <div id="gate">
+      <h1>myMedKitt Claude Skill</h1>
+      <p class="muted">This download is for licensed clinicians who have accepted the myMedKitt disclaimer.</p>
+      <p><a class="btn btn-primary" href="app.html">Open myMedKitt &amp; accept the disclaimer →</a></p>
+      <p class="muted" style="font-size:13px">Once you've accepted it in the app, return here to download.</p>
+    </div>
+
+    <!-- Download UI (revealed after gate passes) -->
+    <main id="content">
+      <h1>Get the myMedKitt Claude Skill</h1>
+      <p>A conversational companion for Claude that pairs with myMedKitt — it routes across the consult library, surfaces each consult's critical actions and safety gates, and coordinates in real time when a case pivots (e.g. a seizure that turns out to be hyponatremic).</p>
+      <p class="muted">For licensed clinicians only. It structures the workup and teaches the reasoning; the app stays the execution layer (calculators, dosing, full decision trees).</p>
+      <p class="stamp" id="stamp">Loading version…</p>
+
+      <a class="btn btn-primary" id="dl" href="skill/myMedKitt.skill" download="myMedKitt.skill" style="margin-top:16px">⬇ Download the .skill file</a>
+
+      <h2>Install it</h2>
+      <div class="card">
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" data-tab="desktop" aria-selected="true">Claude desktop</button>
+          <button class="tab" role="tab" data-tab="code" aria-selected="false">Claude Code</button>
+          <button class="tab" role="tab" data-tab="cowork" aria-selected="false">Cowork</button>
+        </div>
+        <div class="panel on" data-panel="desktop">
+          <ol>
+            <li>Open the Claude desktop app.</li>
+            <li>Settings → Capabilities → Skills → add a skill, and select the downloaded <code>.skill</code> file (some builds let you drag it onto the window).</li>
+            <li>Start a new chat and describe an ED case — the skill triggers on its own.</li>
+          </ol>
+        </div>
+        <div class="panel" data-panel="code">
+          <p>A <code>.skill</code> file is a zip — unzip it into your Claude Code skills directory:</p>
+          <pre>unzip ~/Downloads/myMedKitt.skill -d ~/.claude/skills/</pre>
+          <p class="muted">Creates <code>~/.claude/skills/myMedKitt/</code>. Start a new session and it's available.</p>
+        </div>
+        <div class="panel" data-panel="cowork">
+          <p>In a Cowork chat, use the "install skill" card when it appears, or ask Cowork to install from the downloaded <code>.skill</code> file. Then open a fresh chat and describe a case.</p>
+        </div>
+        <p class="muted" style="font-size:13px;margin-top:10px">Install UX across Claude products is evolving — if a step looks different in your version, the gist is the same: point Claude at the downloaded file.</p>
+      </div>
+
+      <h2>No .skill support? Paste it instead</h2>
+      <div class="card">
+        <p class="muted" style="font-size:14px">If your Claude product can't accept <code>.skill</code> files yet, paste the SKILL.md below as your first message in a new conversation. This is the router/overview only — the full consult references live inside the <code>.skill</code>, so install the file for full behavior.</p>
+        <button class="btn btn-ghost" id="copy">Copy SKILL.md</button>
+        <pre id="skillmd">Loading…</pre>
+      </div>
+
+      <div class="scope">
+        <h2>What this skill does not do</h2>
+        <ul>
+          <li>It does not replace clinical judgment or make the diagnosis — you do.</li>
+          <li>It does not give specific drug doses to act on without primary-reference verification (the app's dosing + weight calculators do that).</li>
+          <li>It does not walk through invasive procedures step-by-step.</li>
+          <li>It does not override institution-specific protocols (massive transfusion, stroke/STEMI activation, code status).</li>
+          <li>It is not for patient self-diagnosis.</li>
+        </ul>
+      </div>
+
+      <h2>When to come back</h2>
+      <p class="muted">We rebuild this skill whenever the app's clinical content changes. The version stamp above tells you which version you have — if it's older than the one shown here, redownload.</p>
+
+      <p style="margin-top:24px"><a class="link" href="app.html">← Back to myMedKitt</a></p>
+    </main>
+  </div>
+  <script src="skill.js"></script>
+</body>
+</html>
