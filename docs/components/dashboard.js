@@ -363,6 +363,40 @@ export function renderDashboard(container) {
     shareCard.appendChild(shareArrow);
     shareCard.addEventListener('click', () => showShareModal());
     dashboard.appendChild(shareCard);
+    // ---- Get the Claude Skill card (WingMan coordinator — links to skill.html) ----
+    const skillCard = document.createElement('button');
+    skillCard.className = 'dashboard-share-card';
+    skillCard.type = 'button';
+    skillCard.setAttribute('aria-label', 'Get the myMedKitt Claude skill — for licensed clinicians');
+    const skillIcon = document.createElement('div');
+    skillIcon.className = 'dashboard-share-card__icon';
+    skillIcon.innerHTML = `
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 3l1.9 4.6L18.5 9l-4.6 1.4L12 15l-1.9-4.6L5.5 9l4.6-1.4z"/>
+      <path d="M18 14l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>
+    </svg>
+  `;
+    skillCard.appendChild(skillIcon);
+    const skillBody = document.createElement('div');
+    skillBody.className = 'dashboard-share-card__body';
+    const skillTitle = document.createElement('div');
+    skillTitle.className = 'dashboard-share-card__title';
+    skillTitle.textContent = 'Get the Claude Skill';
+    skillBody.appendChild(skillTitle);
+    const skillSub = document.createElement('div');
+    skillSub.className = 'dashboard-share-card__sub';
+    skillSub.textContent = "Bring myMedKitt's consult reasoning into Claude. For licensed clinicians.";
+    skillBody.appendChild(skillSub);
+    skillCard.appendChild(skillBody);
+    const skillArrow = document.createElement('div');
+    skillArrow.className = 'dashboard-share-card__arrow';
+    skillArrow.textContent = '→';
+    skillArrow.setAttribute('aria-hidden', 'true');
+    skillCard.appendChild(skillArrow);
+    skillCard.addEventListener('click', () => {
+        window.location.href = 'skill.html';
+    });
+    dashboard.appendChild(skillCard);
     // ---- Disclaimer ----
     const disclaimer = document.createElement('p');
     disclaimer.className = 'dashboard-disclaimer';
