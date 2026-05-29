@@ -6,7 +6,10 @@
   "scripts": {
     "start": "electrobun run",
     "build": "electrobun build",
-    "dev": "electrobun dev"
+    "dev": "electrobun dev",
+    "build:skill": "bun scripts/build-skill/build.ts",
+    "build:skill:check": "bun scripts/build-skill/check.ts",
+    "build:skill:eval": "bun scripts/build-skill/eval.ts"
   },
   "dependencies": {
     "electrobun": "1.14.4",
