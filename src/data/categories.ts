@@ -726,6 +726,16 @@ export const DEFAULT_CATEGORIES: Category[] = [
         displayCategoryId: 'emergency-medicine',
       },
       {
+        id: 'ischemic-limb',
+        title: 'Acute Limb Ischemia & PAD',
+        subtitle: 'Recognition → Rutherford Triage → Workup → Management → Chronic PAD/CLTI → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 17,
+        entryNodeId: 'il-start',
+        displayCategoryId: 'emergency-medicine',
+      },
+      {
         id: 'neck-pain-hub',
         title: 'Neck Pain Hub',
         subtitle: 'Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo',

@@ -329,6 +329,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/hyperthermia-hub.js');
       return { nodes: m.HYPERTHERMIA_HUB_NODES, entryNodeId: 'hyper-start', categoryId: 'emergency-medicine', moduleLabels: m.HYPERTHERMIA_HUB_MODULE_LABELS, citations: m.HYPERTHERMIA_HUB_CITATIONS, criticalActions: m.HYPERTHERMIA_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'ischemic-limb': async () => {
+      const m = await import('../data/trees/ischemic-limb.js');
+      return { nodes: m.ISCHEMIC_LIMB_NODES, entryNodeId: 'il-start', categoryId: 'emergency-medicine', moduleLabels: m.ISCHEMIC_LIMB_MODULE_LABELS, citations: m.ISCHEMIC_LIMB_CITATIONS, criticalActions: m.ISCHEMIC_LIMB_CRITICAL_ACTIONS };
+    },
     'neck-pain-hub': async () => {
       const m = await import('../data/trees/neck-pain-hub.js');
       return { nodes: m.NECK_PAIN_HUB_NODES, entryNodeId: 'np-start', categoryId: 'emergency-medicine', moduleLabels: m.NECK_PAIN_HUB_MODULE_LABELS, citations: m.NECK_PAIN_HUB_CITATIONS, criticalActions: m.NECK_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };

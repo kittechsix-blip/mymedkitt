@@ -47,6 +47,14 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
 ]);
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'ischemic-limb': [
+    { id: 'rutherford', label: 'Rutherford', icon: '📊', action: 'calculator', target: 'rutherford-acute-limb' },
+    { id: 'abi', label: 'ABI', icon: '🧮', action: 'calculator', target: 'abi-il' },
+    { id: 'six-ps', label: '6 P\'s', icon: '🦵', action: 'overlay', target: 'il-six-ps' },
+    { id: 'heparin', label: 'Heparin', icon: '💉', action: 'jump', target: 'il-heparin' },
+    { id: 'reperfusion', label: 'Reperfusion', icon: '⚠️', action: 'jump', target: 'il-reperfusion' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'il-stop' },
+  ],
   'oncological-emergencies': [
     { id: 'summary', label: 'Onc Steps', icon: '📋', action: 'overlay', target: 'onc-emergency-summary' },
     { id: 'chemo', label: 'Chemo Ref', icon: '💊', action: 'overlay', target: 'chemo-regimens' },

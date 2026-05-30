@@ -39607,7 +39607,121 @@ const ALVARADO_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+const ABI_IL_CALCULATOR: CalculatorDefinition = {
+  id: 'abi-il',
+  title: 'Ankle-Brachial Index (ABI)',
+  subtitle: 'Higher ankle pressure / higher brachial pressure',
+  description: 'Enter the higher ankle systolic (DP or PT) for the limb and the higher of the two brachial systolics. ABI = ankle / brachial. If >1.40 the vessel is noncompressible (calcified) and the ABI is unreliable — get a toe-brachial index.',
+  fields: [
+    { name: 'ankle', label: 'Higher ankle systolic (DP or PT)', type: 'number', points: 0, unit: 'mmHg' },
+    { name: 'brachial', label: 'Higher brachial systolic', type: 'number', points: 0, unit: 'mmHg' },
+  ],
+  results: [],
+  thresholdNote: '>1.40 noncompressible (use TBI; TBI <0.70 = impaired). 1.00-1.40 normal. 0.91-0.99 borderline. 0.41-0.90 mild-moderate PAD. <=0.90 diagnostic for PAD. 0.00-0.40 severe / critical ischemia. In true Rutherford IIb/III acute ischemia do NOT delay the vascular consult to chase an ABI.',
+  citations: ['Aboyans V, et al. Measurement and Interpretation of the ABI. AHA Scientific Statement. Circulation. 2012;126:2890-2909.', '2024 ACC/AHA Lower Extremity PAD Guideline. Circulation. 2024.'],
+  computeResult: (values) => {
+    const ankle = values['ankle'] || 0;
+    const brachial = values['brachial'] || 0;
+    if (!ankle || !brachial) {
+      return { value: '--', label: 'ABI', description: 'Enter both ankle and brachial systolic pressures.', colorVar: '--color-decision-active' };
+    }
+    const abi = ankle / brachial;
+    let interp = '';
+    let color = '--color-primary';
+    if (abi > 1.40) {
+      interp = 'Noncompressible / calcified vessel (diabetes, ESRD, elderly). ABI is UNRELIABLE here — get a toe-brachial index (TBI). TBI <0.70 = impaired perfusion.';
+      color = '--color-warning';
+    } else if (abi >= 1.00) {
+      interp = 'Normal.';
+      color = '--color-primary';
+    } else if (abi >= 0.91) {
+      interp = 'Borderline.';
+      color = '--color-warning';
+    } else if (abi >= 0.41) {
+      interp = 'Mild-to-moderate PAD. ABI <=0.90 is diagnostic for PAD (>90% sens/spec vs angiography).';
+      color = '--color-warning';
+    } else {
+      interp = 'Severe PAD / critical ischemia. CLI criteria with rest pain or tissue loss: ABI <=0.50, ankle pressure <70 mmHg, or toe pressure <50 mmHg.';
+      color = '--color-danger';
+    }
+    return {
+      value: abi.toFixed(2),
+      label: 'Ankle-Brachial Index',
+      description: `**ABI = ${ankle} / ${brachial} = ${abi.toFixed(2)}**\n\n${interp}\n\n_Acute limb? The handheld Doppler exam and Rutherford category drive urgency — do not delay the vascular consult to chase an ABI in a IIb/III limb._`,
+      colorVar: color,
+    };
+  },
+};
+
+const RUTHERFORD_ALI_CALCULATOR: CalculatorDefinition = {
+  id: 'rutherford-acute-limb',
+  title: 'Rutherford Acute Limb Ischemia Category',
+  subtitle: 'Sensory + motor + Doppler → category & urgency',
+  description: 'Classifies acute limb ischemia by the bedside exam. The sensory/motor exam and the venous-vs-arterial Doppler signal separate the four categories. Category drives urgency.',
+  fields: [
+    { name: 'sensory', label: 'Sensory loss', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Minimal (toes only)', points: 1 },
+      { label: 'More than toes, with rest pain', points: 2 },
+      { label: 'Profound / anesthetic', points: 3 },
+    ]},
+    { name: 'motor', label: 'Motor deficit', type: 'select', points: 0, selectOptions: [
+      { label: 'None', points: 0 },
+      { label: 'Mild to moderate weakness', points: 2 },
+      { label: 'Profound / paralysis (rigor)', points: 3 },
+    ]},
+    { name: 'arterial', label: 'Arterial Doppler (pedal)', type: 'select', points: 0, selectOptions: [
+      { label: 'Audible', points: 0 },
+      { label: 'Inaudible', points: 1 },
+    ]},
+    { name: 'venous', label: 'Venous Doppler', type: 'select', points: 0, selectOptions: [
+      { label: 'Audible', points: 0 },
+      { label: 'Inaudible', points: 1 },
+    ]},
+  ],
+  results: [],
+  thresholdNote: 'Neither IIa nor IIb has an audible arterial pedal signal — the motor/sensory exam separates them. A woody, paralyzed limb that cannot wiggle toes (IIb/III) vs subjective sensory change with preserved motor function (IIa) is the single most important triage decision.',
+  citations: ['Rutherford RB, et al. Recommended standards for reports dealing with lower extremity ischemia: revised version. J Vasc Surg. 1997;26:517-538.', '2024 ACC/AHA Lower Extremity PAD Guideline. Circulation. 2024.'],
+  computeResult: (values) => {
+    const sensory = values['sensory'] || 0;
+    const motor = values['motor'] || 0;
+    const venous = values['venous'] || 0;
+
+    let category = '';
+    let action = '';
+    let color = '--color-primary';
+
+    if (motor >= 3 && venous >= 1) {
+      category = 'III — Irreversible';
+      action = 'Major tissue/nerve loss inevitable. Profound anesthetic + paralysis, inaudible arterial AND venous Doppler. → Primary amputation pathway. Do NOT reperfuse a dead limb (lethal reperfusion). Supportive IV fluids ± empiric antibiotics.';
+      color = '--color-danger';
+    } else if (motor >= 2 || sensory >= 2) {
+      category = 'IIb — Immediately threatened';
+      action = 'Salvageable only with IMMEDIATE revascularization. Sensory loss > toes + rest pain, mild-moderate motor deficit. → EMERGENT surgical embolectomy/thrombectomy or bypass; catheter-directed lysis usually too slow for a motor-deficit limb.';
+      color = '--color-danger';
+    } else if (sensory >= 1) {
+      category = 'IIa — Marginally threatened';
+      action = 'Salvageable if promptly treated. Minimal (toe) sensory loss, no motor deficit. → Urgent endovascular or open revascularization; catheter-directed thrombolysis well-suited when there is time and no motor threat.';
+      color = '--color-warning';
+    } else {
+      category = 'I — Viable';
+      action = 'Not immediately threatened. No sensory or motor loss, audible arterial + venous Doppler. → Anticoagulate; urgent (not emergent) revascularization, often after imaging.';
+      color = '--color-primary';
+    }
+
+    return {
+      value: category.split(' ')[0],
+      label: `Rutherford ${category}`,
+      description: `**Rutherford ${category}**\n\n${action}\n\n_Start IV unfractionated heparin immediately in any acute limb unless contraindicated — do not wait for imaging._`,
+      colorVar: color,
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  // Ischemic Limb (Acute Limb Ischemia & PAD)
+  'abi-il': ABI_IL_CALCULATOR,
+  'rutherford-acute-limb': RUTHERFORD_ALI_CALCULATOR,
   // Typhoid Fever (Path #2 dead-calc fix)
   'typhoid-endemic-regions': TYPHOID_ENDEMIC_REGIONS_CALCULATOR,
   'typhoid-xdr-risk': TYPHOID_XDR_RISK_CALCULATOR,

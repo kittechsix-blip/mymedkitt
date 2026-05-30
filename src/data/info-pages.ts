@@ -18419,6 +18419,54 @@ const PNES_STOP: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Ischemic Limb Reference Pages
+// -------------------------------------------------------------------
+
+const IL_SIX_PS: InfoPage = {
+  id: 'il-six-ps',
+  title: 'The 6 P\'s of Acute Limb Ischemia',
+  subtitle: 'Recognition reference',
+  sections: [
+    {
+      heading: 'The 6 P\'s (distal to the occlusion)',
+      body: '• **Pain** — early and severe\n• **Pallor** — pale / marble-white skin\n• **Pulselessness** — absent distal pulses (confirm with handheld Doppler)\n• **Paresthesia** — sensory loss; an EARLY and ominous sign\n• **Paralysis** — motor deficit; a LATE, limb-threatening sign\n• **Poikilothermia** — perishingly cold limb',
+    },
+    {
+      heading: 'Why the order matters',
+      body: 'Pain, pallor, pulselessness and coldness come first. **Paresthesia then paralysis mark progression toward irreversible injury** — once motor function is lost, the salvage window is closing. Skeletal muscle tolerates roughly 6 hours of ischemia before irreversible necrosis.',
+    },
+    {
+      heading: 'First moves',
+      body: '• Two large-bore IVs, IV analgesia, NPO (likely OR)\n• Keep the limb **dependent and warm-not-hot** — never apply direct heat to insensate skin\n• Handheld Doppler of pedal arterial + venous signals\n• Start IV heparin and call vascular EARLY — do not wait for imaging',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Limb Embolism and Ischaemia — 6 P\'s. Patient.info, 2023.' },
+    { num: 2, text: '2024 ACC/AHA Lower Extremity PAD Guideline. Circulation. 2024.' },
+  ],
+};
+
+const IL_STOP: InfoPage = {
+  id: 'il-stop',
+  title: 'Ischemic Limb — Things That Kill / Do NOT',
+  subtitle: 'Stop checklist',
+  sections: [
+    {
+      heading: 'Do NOT',
+      body: '🛑 **Do NOT delay anticoagulation or the vascular consult** to chase advanced imaging in an obviously threatened limb.\n\n🛑 **Do NOT reperfuse a nonviable (Rutherford III) limb** — releases potassium, myoglobin and acid load and can be lethal. That limb goes down the primary amputation pathway.\n\n🛑 **Do NOT apply direct heat** to an insensate ischemic limb — burn risk. Keep it dependent and warm-not-hot.\n\n🛑 **Do NOT use CK/lactate/myoglobin to decide whether to revascularize** — they are reperfusion/rhabdo baselines, not gatekeepers.',
+    },
+    {
+      heading: 'Do NOT Miss',
+      body: '• **Phlegmasia cerulea dolens** — a warm, swollen, cyanotic limb from massive DVT is the mimic that looks opposite to arterial ischemia.\n• **Aortic dissection extending to the iliacs** presenting as a unilateral cold pulseless leg.\n• **Compartment syndrome** after revascularization — fasciotomy if pressure >30 mmHg.\n• **Reperfusion hyperkalemia / rhabdo / AKI** — monitor and treat aggressively; dialysis if refractory.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ESVS 2020 CPG on Acute Limb Ischaemia.' },
+    { num: 2, text: '2024 ACC/AHA Lower Extremity PAD Guideline. Circulation. 2024.' },
+    { num: 3, text: 'Phlegmasia Alba and Cerulea Dolens. StatPearls NBK563137.' },
+  ],
+};
+
 // Myasthenia Gravis Reference Pages
 // -------------------------------------------------------------------
 
@@ -25127,6 +25175,9 @@ const PZR_UROLOGY_TEMPLATE_PAGE: InfoPage = {
 };
 
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // Ischemic Limb
+  'il-six-ps': IL_SIX_PS,
+  'il-stop': IL_STOP,
   // Headache hub (added 2026-05-22 — Phase 2)
   'spg-block-procedure': SPG_BLOCK_PAGE,
   'pregnancy-headache-ladder': PREGNANCY_HEADACHE_LADDER_PAGE,
