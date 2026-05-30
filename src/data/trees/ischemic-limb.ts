@@ -67,7 +67,7 @@ export const ISCHEMIC_LIMB_NODES: DecisionNode[] = [
     type: 'result',
     module: 2,
     title: 'Rutherford I — Viable',
-    body: 'Limb is **not immediately threatened**: no sensory or motor loss, audible arterial AND venous Doppler.\n\n- Start [IV heparin](#/calculator/abi-il) anticoagulation now.\n- Urgent (not emergent) revascularization — often after [CT angiography](#/node/il-workup).\n- Admit, serial exams, vascular planning.',
+    body: 'Limb is **not immediately threatened**: no sensory or motor loss, audible arterial AND venous Doppler.\n\n- Start [IV heparin](#/node/il-heparin) anticoagulation now.\n- Urgent (not emergent) revascularization — often after [CT angiography](#/node/il-workup).\n- Admit, serial exams, vascular planning.',
     citation: [1, 2, 6],
     recommendation: 'Anticoagulate. Urgent — not emergent — revascularization, typically after imaging. Admit for serial vascular exams.',
     confidence: 'recommended',
