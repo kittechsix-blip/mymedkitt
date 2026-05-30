@@ -449,9 +449,9 @@ export const MASSIVE_HEMOPTYSIS_MODULE_LABELS = [
 
 export const MASSIVE_HEMOPTYSIS_CRITICAL_ACTIONS = [
   { text: 'Position patient bleeding-side down (protect good lung from blood)', nodeId: 'hemo-positioning' },
-  { text: 'Intubate with largest ETT possible (≥8.0) for bronchoscopy and isolation', nodeId: 'hemo-ett-selection' },
-  { text: 'Double-lumen tube or bronchial blocker for lung isolation if available', nodeId: 'hemo-lung-isolation' },
-  { text: 'TXA 1 g IV over 10 min (may reduce bleeding)', nodeId: 'hemo-txa' },
+  { text: 'Intubate with largest ETT possible (≥8.5 mm ID) for bronchoscopy and isolation', nodeId: 'hemo-ett-selection' },
+  { text: 'Mainstem intubation or endobronchial blocker for lung isolation (avoid double-lumen tube — clogs, difficult emergent placement)', nodeId: 'hemo-lung-isolation' },
+  { text: 'TXA nebulized 1000 mg load then 500 mg q8h (or 500 mg IV TID if neb impairs expectoration)', nodeId: 'hemo-txa' },
   { text: 'Reverse anticoagulation urgently (4-factor PCC, protamine, idarucizumab as indicated)', nodeId: 'hemo-coag-reversal' },
   { text: 'IR consult for emergent bronchial artery embolization (definitive treatment)', nodeId: 'hemo-bae' },
   { text: 'Rigid bronchoscopy for massive bleeding (better suction/hemostasis than flexible)', nodeId: 'hemo-bronchoscopy' },

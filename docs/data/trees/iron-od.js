@@ -309,7 +309,7 @@ export const IRON_OD_NODES = [
             monitoring: 'BP closely during infusion (hypotension). Urine output. Serial iron levels, lactate, ABG. Continue until clinically improved.',
         },
         next: 'iron-dfo-duration',
-        summary: 'Deferoxamine 15 mg/kg/hr continuous IV — max 6-8 g/day, vin rosé urine = chelation working',
+        summary: 'Deferoxamine: start 5 mg/kg/hr, titrate to 15 mg/kg/hr continuous IV — max 6 g/24h; do NOT use vin rosé urine to guide therapy (unreliable)',
     },
     {
         id: 'iron-dfo-duration',

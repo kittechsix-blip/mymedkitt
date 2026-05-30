@@ -498,13 +498,13 @@ export const SAH_MODULE_LABELS = [
     'Disposition',
 ];
 export const SAH_CRITICAL_ACTIONS = [
-    { text: 'Lower MAP to 100-110 mmHg (SBP <160) within 30 minutes to prevent rebleeding', nodeId: 'sah-bp-control' },
+    { text: 'Keep SBP <160 mmHg until aneurysm secured to prevent rebleeding (labetalol or nicardipine IV; avoid nitroprusside)', nodeId: 'sah-bp-control' },
     { text: 'Nimodipine 60 mg PO/NG q4h to prevent vasospasm (start within 96 hours)', nodeId: 'sah-vasospasm-prev' },
     { text: 'Stat non-contrast head CT (98% sensitive if <6 hours from onset)', nodeId: 'sah-ct' },
     { text: 'LP if CT negative and high suspicion (xanthochromia, elevated RBC count)', nodeId: 'sah-lp' },
     { text: 'Neurosurgery consult immediately for aneurysm securing (clipping vs coiling)', nodeId: 'sah-definitive' },
     { text: 'Prevent Valsalva: stool softeners, antiemetics, adequate analgesia', nodeId: 'sah-rebleed-prev' },
-    { text: 'Seizure prophylaxis: levetiracetam 1000-1500 mg IV load (avoid phenytoin)', nodeId: 'sah-seizure-mgmt' },
+    { text: 'If seizure prophylaxis used: levetiracetam 500 mg PO/IV BID, short course <3 days (avoid phenytoin)', nodeId: 'sah-seizure-mgmt' },
     { text: 'Maintain euvolemia (avoid hypovolemia which worsens vasospasm)', nodeId: 'sah-initial-mgmt' },
 ];
 export const SAH_CITATIONS = [
