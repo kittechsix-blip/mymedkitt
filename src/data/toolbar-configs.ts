@@ -515,6 +515,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'gw-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'gw-stop' },
   ],
+  'dizziness-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'diz-steps' },
+    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'diz-exclusions' },
+    { id: 'vertigo', label: 'Vertigo', icon: '🌀', action: 'route', target: 'vertigo' },
+    { id: 'syncope', label: 'Syncope', icon: '💓', action: 'route', target: 'syncope' },
+    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'diz-imaging' },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'diz-stop' },
+  ],
   'hyperthermia-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hyper-steps' },
     { id: 'cooling', label: 'Cooling', icon: '🧊', action: 'jump', target: 'hyper-cooling' },

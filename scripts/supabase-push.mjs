@@ -95,6 +95,7 @@ const CROSS_LISTINGS = {
   'dyspnea-hub':      [{ categoryId: 'critical-care', displayTitle: 'Shortness of Breath Hub', displaySubtitle: null, entryNodeId: 'dysp-start' }],
   'altered-mental-status-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'ams-start' }],
   'generalized-weakness-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'gw-start' }],
+  'dizziness-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'diz-start' }],
   'neck-pain-hub': [{ categoryId: 'orthopedics', displayTitle: null, displaySubtitle: null, entryNodeId: 'np-start' }],
   'back-pain-hub': [{ categoryId: 'orthopedics', displayTitle: null, displaySubtitle: null, entryNodeId: 'bp-start' }],
   'monocular-vision-loss-hub': [{ categoryId: 'ophthalmology', displayTitle: null, displaySubtitle: null, entryNodeId: 'mvl-start' }],

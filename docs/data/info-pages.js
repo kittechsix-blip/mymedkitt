@@ -23160,6 +23160,51 @@ const GW_STOP_PAGE = {
         { num: 1, text: 'Narayanaswami P, et al. Muscle Weakness in Adults. Am Fam Physician. 2020;101:95-108.' },
     ],
 };
+const DIZ_STEPS_PAGE = {
+    id: 'diz-steps',
+    title: 'Dizziness Hub - Steps Summary',
+    subtitle: 'Sick check, differential, timing/triggers, consult links, imaging, disposition',
+    sections: [
+        {
+            body: '1. **Sick check first.** Fingerstick glucose, vitals, ECG when unclear/lightheaded, stroke screen, gait/truncal stability, ocular motor exam, medication/toxin scan.\n2. **Name the dangerous differential early:** posterior stroke/TIA/ICH/dissection, dysrhythmia/ACS/bleed/shock, hypoglycemia/electrolyte/endocrine, sepsis, CO/tox/medication, vestibular migraine, BPPV, neuritis/labyrinthitis.\n3. **Use timing and triggers, not the patient word alone:**\n   - Continuous hours-days with spontaneous nystagmus -> AVS -> [Vertigo](#/tree/vertigo), HINTS only when appropriate; [Stroke](#/tree/stroke) if central/uncertain.\n   - Brief positional spells -> likely BPPV -> [Vertigo](#/tree/vertigo).\n   - Spontaneous episodes -> vestibular migraine/TIA/Meniere/dysrhythmia -> [Migraine](#/tree/migraine), [Stroke](#/tree/stroke), [Syncope](#/tree/syncope).\n   - Lightheaded/near-faint -> [Syncope](#/tree/syncope), [Chest Pain Hub](#/tree/chest-pain-hub), [GI Bleed Hub](#/tree/gi-bleed-hub).\n   - Exposure/medication -> [CO Toxicity](#/tree/co-toxicity), [Unknown Ingestion Hub](#/tree/unknown-ingestion-hub), [Hypoglycemia](#/tree/hypoglycemia).\n4. **Image by risk:** CT/CTA for stroke/bleed/dissection clues; MRI when posterior stroke remains plausible. Do not image classic BPPV without atypical findings.\n5. **Disposition:** admit/observe if central signs, inability to walk, high-risk syncope, recurrent metabolic/tox risk, unstable vitals, dangerous labs/ECG, or persistent unexplained objective abnormality.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Edlow JA, et al. GRACE-3 Guidelines for ED dizziness and vertigo. Acad Emerg Med. 2023;30:442-486.' },
+        { num: 2, text: 'Newman-Toker DE, Edlow JA. TiTrATE: A Novel Approach to Diagnosing Acute Dizziness and Vertigo. Neurol Clin. 2015;33:577-599.' },
+    ],
+};
+const DIZ_STOP_PAGE = {
+    id: 'diz-stop',
+    title: 'Dizziness Hub - Do NOT',
+    subtitle: 'Critical pitfalls in dizzy, vertigo, lightheaded, and off-balance complaints',
+    sections: [
+        {
+            heading: 'Do NOT sort dizziness by word choice alone',
+            body: 'Patients use vertigo, dizziness, lightheadedness, imbalance, and weakness inconsistently. Timing, triggers, objective gait, ocular motor findings, neuro exam, ECG, glucose, and vitals are safer.',
+        },
+        {
+            heading: 'Do NOT use HINTS outside acute vestibular syndrome',
+            body: 'HINTS is for continuous AVS with spontaneous nystagmus and a trained examiner. It is not a screening test for vague dizziness, resolved spells, BPPV, presyncope, or patients without nystagmus.',
+        },
+        {
+            heading: 'Do NOT clear posterior stroke with a normal CT',
+            body: 'Non-contrast CT can miss early posterior fossa ischemia. Central ocular signs, severe truncal ataxia, focal neurologic findings, dissection features, or inability to walk need stroke imaging/neurology thinking even after CT.',
+        },
+        {
+            heading: 'Do NOT discharge inability to walk',
+            body: 'Unsafe gait or inability to ambulate at baseline is an objective high-risk finding. Reassess after treatment and document the walking exam before discharge.',
+        },
+        {
+            heading: 'Do NOT miss non-vestibular killers',
+            body: 'Hypoglycemia, dysrhythmia, ACS, bleeding/anemia, sepsis, CO toxicity, overdose, and medication effects can present as dizziness. Glucose and ECG are low-cost, high-yield tests in unclear cases.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Edlow JA, et al. GRACE-3 Guidelines for ED dizziness and vertigo. Acad Emerg Med. 2023;30:442-486.' },
+        { num: 2, text: 'Kattah JC, et al. HINTS to diagnose stroke in acute vestibular syndrome. Stroke. 2009;40:3504-3510.' },
+    ],
+};
 const HYPER_STEPS_PAGE = {
     id: 'hyper-steps',
     title: 'Hyperthermia Hub - Steps Summary',
@@ -24213,6 +24258,8 @@ export const INFO_PAGES = {
     'ams-stop': AMS_STOP_PAGE,
     'gw-steps': GW_STEPS_PAGE,
     'gw-stop': GW_STOP_PAGE,
+    'diz-steps': DIZ_STEPS_PAGE,
+    'diz-stop': DIZ_STOP_PAGE,
     'hyper-steps': HYPER_STEPS_PAGE,
     'hyper-stop': HYPER_STOP_PAGE,
     'np-steps': NP_STEPS_PAGE,

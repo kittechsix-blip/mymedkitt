@@ -254,6 +254,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/generalized-weakness-hub.js');
             return { nodes: m.GENERALIZED_WEAKNESS_HUB_NODES, entryNodeId: 'gw-start', categoryId: 'emergency-medicine', moduleLabels: m.GENERALIZED_WEAKNESS_HUB_MODULE_LABELS, citations: m.GENERALIZED_WEAKNESS_HUB_CITATIONS, criticalActions: m.GENERALIZED_WEAKNESS_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'dizziness-hub': async () => {
+            const m = await import('../data/trees/dizziness-hub.js');
+            return { nodes: m.DIZZINESS_HUB_NODES, entryNodeId: 'diz-start', categoryId: 'emergency-medicine', moduleLabels: m.DIZZINESS_HUB_MODULE_LABELS, citations: m.DIZZINESS_HUB_CITATIONS, criticalActions: m.DIZZINESS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'hyperthermia-hub': async () => {
             const m = await import('../data/trees/hyperthermia-hub.js');
             return { nodes: m.HYPERTHERMIA_HUB_NODES, entryNodeId: 'hyper-start', categoryId: 'emergency-medicine', moduleLabels: m.HYPERTHERMIA_HUB_MODULE_LABELS, citations: m.HYPERTHERMIA_HUB_CITATIONS, criticalActions: m.HYPERTHERMIA_HUB_CRITICAL_ACTIONS, type: 'hub' };

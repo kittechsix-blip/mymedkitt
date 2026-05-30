@@ -26,6 +26,7 @@ export const TREE_REGISTRY = {
   'dyspnea-hub': { prefix: 'DYSPNEA_HUB', entryNodeId: 'dysp-start', categoryId: 'emergency-medicine' },
   'altered-mental-status-hub': { prefix: 'AMS_HUB', entryNodeId: 'ams-start', categoryId: 'emergency-medicine' },
   'generalized-weakness-hub': { prefix: 'GENERALIZED_WEAKNESS_HUB', entryNodeId: 'gw-start', categoryId: 'emergency-medicine' },
+  'dizziness-hub': { prefix: 'DIZZINESS_HUB', entryNodeId: 'diz-start', categoryId: 'emergency-medicine' },
   'hyperthermia-hub': { prefix: 'HYPERTHERMIA_HUB', entryNodeId: 'hyper-start', categoryId: 'emergency-medicine' },
   'ischemic-limb': { prefix: 'ISCHEMIC_LIMB', entryNodeId: 'il-start', categoryId: 'emergency-medicine' },
   'neck-pain-hub': { prefix: 'NECK_PAIN_HUB', entryNodeId: 'np-start', categoryId: 'emergency-medicine' },
