@@ -24375,6 +24375,52 @@ const BP_RADIC_LOCALIZATION_PAGE: InfoPage = {
   ],
 };
 
+const ON_HUB_STEPS_PAGE: InfoPage = {
+  id: 'on-hub-steps',
+  title: 'Optic Neuropathy Hub - Steps Summary',
+  subtitle: 'GCA, traumatic, pituitary apoplexy, methanol, optic neuritis, cortical, CRAO',
+  sections: [
+    {
+      body: '1. **Sick check first.** Vitals (HTN crisis? fever?), quick neuro for a cortical/bilateral pattern. **Eye exam every time, both eyes:** VA (CF/HM/LP/NLP is fine), **RAPD** (the single most useful sign), color desaturation, disc exam, pupil/IOP/lids/EOM. If unstable, HTN emergency, methanol suspected, or trauma -> resus parallel to workup.\n2. **Time-critical exclusions (pick the worst fit):**\n   - Age >50 + scalp tender / jaw claudication / new HA / PMR, ESR or CRP up -> **GCA / arteritic AION**: methylprednisolone 1 g IV NOW, do not wait for biopsy or labs.\n   - Trauma with new RAPD -> **traumatic optic neuropathy**: thin-cut CT face/orbits, ophtho + neurosurg + oculoplastics.\n   - Bitemporal field cut + headache +/- ophthalmoplegia/endocrine signs -> **pituitary apoplexy**: hydrocortisone 100 mg IV BEFORE imaging, then pituitary MRI.\n   - Methanol / ethylene glycol / moonshine exposure + anion/osm gap + bilateral loss -> **toxic optic neuropathy**: fomepizole, bicarbonate, dialysis.\n   - Painful loss with eye movement + color desat out of proportion, young -> **optic neuritis**: MRI brain/orbits, demyelinating workup.\n   - Sudden binocular loss + altered + severe HTN -> **PRES / occipital stroke**: control BP, neuro-imaging.\n   - Painless mono loss + cherry-red spot -> **CRAO** (retinal mimic): treat as retinal stroke.\n   - Horner + neck pain + vision loss -> **cervical artery dissection**.\n   - Proptosis + fever + ophthalmoplegia -> **orbital cellulitis**.\n3. **Initial bundle:** VA, RAPD, color, IOP when safe, fundus/photo, glucose; ESR/CRP/CBC/platelets when GCA possible; tox/gas/osmolar gap when toxic alcohol possible.\n4. **Imaging:** thin-cut CT face/orbits for trauma; pituitary MRI for apoplexy; MRI brain/orbits for optic neuritis and cortical causes; vascular imaging for CAD/CRAO.\n5. **Disposition:** emergent pathway for GCA, TON, pituitary apoplexy, methanol, CRAO, CAD, orbital cellulitis, cortical/PRES. Discharge only a clear benign cause with baseline vision and reliable ophthalmology follow-up.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'AAO Optic Neuropathy / Neuro-ophthalmology Preferred Practice Pattern.' },
+    { num: 2, text: 'Biousse V, Newman NJ. Ischemic Optic Neuropathies. N Engl J Med. 2015;372:2428-2436.' },
+  ],
+};
+
+const ON_HUB_STOP_PAGE: InfoPage = {
+  id: 'on-hub-stop',
+  title: 'Optic Neuropathy Hub - Do NOT',
+  subtitle: 'Critical pitfalls in acute optic neuropathy',
+  sections: [
+    {
+      heading: 'Do NOT delay steroids for GCA waiting on ESR/CRP or biopsy',
+      body: 'In age >50 with jaw claudication, scalp tenderness, new headache, or PMR, give high-dose IV methylprednisolone immediately. Untreated GCA has a ~30% rate of contralateral blindness. Biopsy remains valid within a short window after starting steroids.',
+    },
+    {
+      heading: 'Do NOT image pituitary apoplexy before giving stress-dose steroids',
+      body: 'Apoplexy is adrenal crisis until proven otherwise. Give hydrocortisone 100 mg IV before MRI; patients crash hemodynamically during imaging delays.',
+    },
+    {
+      heading: 'Do NOT anchor on the eye when the pattern is cortical',
+      body: 'Bilateral loss with altered mental status, severe hypertension, or no RAPD points to PRES, occipital stroke, or methanol, not an isolated optic nerve. Methanol needs gap workup and antidote, not ophthalmology alone.',
+    },
+    {
+      heading: 'Do NOT order thick-cut CT for traumatic optic neuropathy',
+      body: 'Thick cuts miss canal fractures. Request thin-cut (1 mm) bone-algorithm CT of the face and orbits, and get neurosurgery/oculoplastics involved early.',
+    },
+    {
+      heading: 'Do NOT discharge unexplained persistent optic-nerve vision loss',
+      body: 'A new RAPD with central scotoma and color desaturation is optic nerve until proven otherwise and needs a diagnosis or an urgent neuro-ophthalmology/stroke plan before discharge.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Biousse V, Newman NJ. Ischemic Optic Neuropathies. N Engl J Med. 2015;372:2428-2436.' },
+  ],
+};
+
 const MVL_STEPS_PAGE: InfoPage = {
   id: 'mvl-steps',
   title: 'Monocular Vision Loss Hub - Steps Summary',
@@ -25255,6 +25301,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'bp-steps': BP_STEPS_PAGE,
   'bp-stop': BP_STOP_PAGE,
   'bp-radic-localization': BP_RADIC_LOCALIZATION_PAGE,
+  'on-hub-steps': ON_HUB_STEPS_PAGE,
+  'on-hub-stop': ON_HUB_STOP_PAGE,
   'mvl-steps': MVL_STEPS_PAGE,
   'mvl-stop': MVL_STOP_PAGE,
   'dp-steps': DP_STEPS_PAGE,

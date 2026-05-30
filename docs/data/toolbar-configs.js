@@ -512,11 +512,11 @@ const TOOLBAR_CONFIGS = {
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'mvl-stop' },
     ],
     'optic-neuropathy-hub': [
-        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'optic-neuropathy-steps-summary' },
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'on-hub-steps' },
         { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'on-hub-exclusions' },
         { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'on-hub-rescue' },
         { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'on-hub-imaging' },
-        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'optic-neuropathy-stop' },
+        { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'on-hub-stop' },
     ],
     'optic-neuritis': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'optic-neuritis-steps-summary' },
