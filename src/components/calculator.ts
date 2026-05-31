@@ -8982,10 +8982,10 @@ const AACG_TREATMENT_CALCULATOR: CalculatorDefinition = {
         description: `**IOP ${iop} mmHg — Initial control achieved**
 
 **Maintenance Therapy:**
-• Timolol 0.5% BID${asthma ? ' ⚠️ Use with caution (asthma)' : ''}
+• Timolol 0.5% BID${asthma ? ' ⚠️ Use with caution (asthma)' : ''}${chf ? ' ⚠️ Use cautiously if decompensated CHF (systemic beta-blockade)' : ''}
 • Brimonidine 0.15% TID
 • Prednisolone 1% q1-4h
-• Acetazolamide 250mg PO q6h${sulfa ? ' ⚠️ Sulfa allergy — use with caution or omit' : ''}
+• Acetazolamide 250mg PO q6h${sulfa ? ' ⚠️ Sulfa allergy — use with caution or omit' : ''}${renal ? ' ⚠️ Renal impairment — reduce dose (avoid if GFR <10 / dialysis), monitor electrolytes + bicarbonate' : ''}
 
 **Fellow Eye Prophylaxis:**
 • Pilocarpine 2% 1 drop × 1
@@ -9013,6 +9013,8 @@ const AACG_TREATMENT_CALCULATOR: CalculatorDefinition = {
 
       if (sulfa) meds += '\n\n⚠️ **Sulfa allergy:** Acetazolamide cross-reactivity rare but monitor.';
       if (asthma) meds += '\n\n⚠️ **Asthma/COPD:** Use timolol with caution. Consider brimonidine only.';
+      if (renal) meds += '\n\n⚠️ **Renal impairment:** Acetazolamide is renally cleared. AVOID if GFR <10 mL/min or on dialysis (true contraindication — risk of metabolic acidosis/accumulation). For GFR 10-30 reduce dose ~75%, GFR 30-50 reduce ~50%; monitor electrolytes + bicarbonate. Topical timolol/brimonidine and osmotics carry the IOP-lowering load instead.';
+      if (chf) meds += '\n\n⚠️ **CHF / volume overload:** Acetazolamide itself is acceptable (not contraindicated), but anticipate Phase 2 — give osmotics as glycerol PO, NOT IV mannitol, to avoid precipitating pulmonary edema. Use timolol cautiously if decompensated.';
 
       meds += `\n\n**Also:**
 • Position SUPINE
