@@ -388,6 +388,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pericardium', label: 'Pericard', icon: '🫀', action: 'overlay', target: 'thorac-pericardium' },
     { id: 'aorta', label: 'Aorta', icon: '🩸', action: 'overlay', target: 'thorac-aorta' },
   ],
+  'rectal-prolapse-reduction': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'rpr-steps' },
+    { id: 'recognition', label: 'Type', icon: '🔍', action: 'overlay', target: 'rpr-recognition' },
+    { id: 'sugar', label: 'Sugar', icon: '🧂', action: 'jump', target: 'rpr-sugar' },
+    { id: 'reduce', label: 'Reduce', icon: '🤲', action: 'jump', target: 'rpr-reduce' },
+    { id: 'stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'rpr-stop' },
+  ],
+  'esophageal-food-bolus': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'efb-steps' },
+    { id: 'timing', label: 'Timing', icon: '⏱️', action: 'overlay', target: 'efb-timing' },
+    { id: 'glucagon', label: 'Glucagon', icon: '💉', action: 'jump', target: 'efb-pharm' },
+    { id: 'endoscopy', label: 'Scope', icon: '🔬', action: 'jump', target: 'efb-endoscopy' },
+    { id: 'stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'efb-stop' },
+  ],
   'procedural-sedation': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ps-steps' },
     { id: 'airway', label: 'Airway', icon: '🫁', action: 'overlay', target: 'ps-airway' },

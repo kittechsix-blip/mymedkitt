@@ -1,0 +1,206 @@
+// MedKitt — Rectal Prolapse Reduction (Bedside Procedure)
+// Recognize full-thickness vs mucosal/hemorrhoid, gate on viability,
+// reduce manually with the granulated-sugar (sucrose) technique, then disposition.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const RECTAL_PROLAPSE_REDUCTION_NODES: DecisionNode[] = [
+  {
+    id: 'rpr-start',
+    type: 'info',
+    module: 1,
+    title: 'Rectal Prolapse Reduction: Bedside Review',
+    body: 'Use this for the patient with rectal tissue protruding through the anus. Most acute prolapse can be reduced at the bedside; the job is to confirm it is reducible, relieve edema, and reduce gently before tissue becomes nonviable.\n\nOpen first:\n- [Reduction Steps](#/info/rpr-steps)\n- [Prolapse vs Hemorrhoid](#/info/rpr-recognition)\n- [Do NOT](#/info/rpr-stop)\n\nCore sequence:\n1. Confirm it is prolapse (concentric rings) and full-thickness vs mucosal.\n2. Screen viability/red flags — necrosis, strangulation, peritonitis, or rupture = NO bedside reduction.\n3. Analgesia +/- sedation; consider a perianal block.\n4. Apply granulated table sugar liberally to draw out edema, dwell 10-15 min.\n5. Gentle steady circumferential pressure, rolling the apex inward.\n6. Confirm reduction (DRE), arrange bowel regimen + surgical referral.',
+    citation: [1, 2, 5],
+    images: [
+      {
+        src: 'images/rectal-prolapse-reduction/rectal-prolapse.jpg',
+        alt: 'Full-thickness rectal prolapse with concentric circular mucosal folds protruding through the anus',
+        caption: 'Full-thickness rectal prolapse: note the concentric (circular) mucosal rings. Radial folds suggest prolapsing hemorrhoids instead. Image: Wikimedia Commons (Freak1972), public domain.',
+      },
+    ],
+    next: 'rpr-confirm',
+    summary: 'Confirm reducible prolapse, relieve edema with sugar, reduce gently, then refer.',
+    safetyLevel: 'warning',
+  },
+  {
+    id: 'rpr-confirm',
+    type: 'question',
+    module: 1,
+    title: 'What Is Protruding?',
+    body: 'Inspect the protruding tissue. **Full-thickness rectal prolapse** shows concentric (circular) mucosal rings and a palpable sulcus between the prolapse and the anal verge. **Mucosal prolapse / prolapsing internal hemorrhoids** show radial folds and no sulcus.\n\nIn a child, a circumferential protrusion is usually mucosal prolapse, but a finger that passes alongside the mass into a sulcus suggests intussusception presenting at the anus.',
+    options: [
+      {
+        label: 'Full-thickness prolapse (concentric rings + sulcus)',
+        description: 'Circular folds, palpable groove between mass and anal verge — proceed to viability check',
+        next: 'rpr-viability',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Mucosal prolapse / prolapsing hemorrhoids (radial folds)',
+        description: 'Radial folds, no sulcus, often visible engorged hemorrhoidal columns',
+        next: 'rpr-mucosal',
+        urgency: 'routine',
+      },
+      {
+        label: 'Child with circumferential protrusion',
+        description: 'Pediatric rectal prolapse — usually mucosal and self-limited; screen the cause',
+        next: 'rpr-peds',
+        urgency: 'routine',
+      },
+    ],
+    citation: [1, 2, 6],
+    summary: 'Concentric rings + sulcus = full-thickness; radial folds = mucosal/hemorrhoid.',
+  },
+  {
+    id: 'rpr-mucosal',
+    type: 'info',
+    module: 1,
+    title: 'Mucosal Prolapse / Prolapsing Hemorrhoids',
+    body: 'Mucosal prolapse and prolapsing internal hemorrhoids are usually reducible with gentle pressure and rarely strangulate, but the same edema-reduction principles apply.\n\n- Reduce gently after analgesia; the granulated-sugar technique works here too if the tissue is edematous.\n- A thrombosed or strangulated hemorrhoid that will not reduce, or one with necrosis, warrants surgical/colorectal evaluation rather than forced reduction.\n- Treat the underlying driver: constipation, straining, prolonged toileting.\n\nIf the picture is actually full-thickness prolapse (concentric rings + sulcus), return to the [recognition step](#/node/rpr-confirm).',
+    recommendation: 'Reduce gently, treat constipation, and refer non-reducible or strangulated hemorrhoids for surgical evaluation.',
+    confidence: 'recommended',
+    citation: [2, 6],
+    next: 'rpr-dispo',
+    summary: 'Mucosal/hemorrhoidal prolapse: gentle reduction, treat constipation, refer if strangulated.',
+  },
+  {
+    id: 'rpr-viability',
+    type: 'question',
+    module: 2,
+    title: 'Is the Tissue Viable / Reducible?',
+    body: 'Before reducing, assess for tissue compromise. Reducing dead bowel or a perforation back into the abdomen is harmful.\n\n**Red flags against bedside reduction:** frank necrosis or black/gangrenous mucosa, deep ulceration, peritonitis, hemodynamic instability, evisceration of small bowel through a rupture, or an irreducible incarcerated prolapse despite adequate edema reduction and analgesia.',
+    options: [
+      {
+        label: 'Viable, reducible-appearing tissue',
+        description: 'Pink/dusky but viable mucosa, no necrosis or peritonitis — proceed to reduction',
+        next: 'rpr-analgesia',
+        urgency: 'urgent',
+      },
+      {
+        label: 'Necrosis / strangulation / peritonitis / rupture',
+        description: 'Gangrene, evisceration, peritoneal signs, or instability',
+        next: 'rpr-surgical',
+        urgency: 'critical',
+      },
+    ],
+    citation: [1, 3, 5],
+    summary: 'Necrosis, strangulation, peritonitis, or rupture = do NOT reduce; call surgery.',
+  },
+  {
+    id: 'rpr-surgical',
+    type: 'result',
+    module: 2,
+    title: 'Do NOT Reduce — Surgical Emergency',
+    body: 'Stop. Do not attempt bedside reduction.\n\n- Nonviable (necrotic/gangrenous) prolapse, strangulation, peritonitis, instability, or a ruptured prolapse with eviscerated bowel needs emergent **colorectal/general surgery** consultation.\n- Resuscitate: IV access, fluids, analgesia, blood work, and broad-spectrum antibiotics if perforation/peritonitis is suspected.\n- Keep eviscerated bowel moist with saline-soaked gauze; do not push it back in.\n- A rare but reported complication is rupture of the prolapse with bowel evisceration — treat as a surgical abdomen.',
+    recommendation: 'Emergent surgical consultation; resuscitate, do not reduce nonviable or ruptured prolapse.',
+    confidence: 'definitive',
+    citation: [1, 3, 4, 5],
+    summary: 'Nonviable/ruptured/strangulated prolapse goes to surgery, not bedside reduction.',
+    safetyLevel: 'critical',
+  },
+  {
+    id: 'rpr-analgesia',
+    type: 'info',
+    module: 3,
+    title: 'Analgesia, Positioning, Sedation',
+    body: 'Make the patient comfortable and relaxed — a tense patient and a painful prolapse defeat reduction.\n\n**Positioning:** knee-chest (prone jackknife) or left lateral decubitus with hips flexed; Trendelenburg can help gravity assist a large prolapse.\n\n**Analgesia / relaxation (titrate; see drug references):**\n- Local perianal field block with [lidocaine](#/drug/lidocaine/perianal block) (or [bupivacaine](#/drug/bupivacaine/perianal block) for longer duration) to relax the sphincter and reduce pain.\n- IV analgesia: [fentanyl](#/drug/fentanyl/procedural analgesia) or [morphine](#/drug/morphine/analgesia) / [hydromorphone](#/drug/hydromorphone/analgesia).\n- Procedural sedation ([ketamine](#/drug/ketamine/procedural sedation), [propofol](#/drug/propofol/procedural sedation), or [midazolam](#/drug/midazolam/anxiolysis)) for a large, painful, or anxious prolapse — follow [Procedural Sedation](#/tree/procedural-sedation).\n\nSphincter relaxation is often the limiting step; a good block plus light sedation frequently allows reduction that pressure alone could not.',
+    citation: [2, 5, 7],
+    next: 'rpr-sugar',
+    summary: 'Knee-chest/lateral position, perianal block + analgesia/sedation to relax the sphincter.',
+  },
+  {
+    id: 'rpr-sugar',
+    type: 'info',
+    module: 3,
+    title: 'Granulated Sugar (Sucrose) Technique',
+    body: 'Edema is what blocks reduction. Granulated table sugar is hyperosmotic and osmotically draws fluid out of the prolapsed mucosa, shrinking it.\n\n**Steps:**\n1. Liberally pour/pack ordinary granulated table sugar over the entire exposed mucosal surface.\n2. Let it dwell **10-15 minutes** (a cold compress or wrapping the mass can add osmotic/contraction effect).\n3. As the prolapse shrinks, it often begins to reduce partially on its own.\n4. If still edematous, reapply sugar and wait again — you may repeat the cycle.\n\nThis is a low-cost, well-described ED maneuver for edematous prolapse (also used for stomas). It buys you a reducible mass; it is not a substitute for the viability check.',
+    citation: [5, 8, 9],
+    next: 'rpr-reduce',
+    summary: 'Liberal granulated sugar, 10-15 min dwell, osmotically shrinks edema; reapply as needed.',
+  },
+  {
+    id: 'rpr-reduce',
+    type: 'info',
+    module: 3,
+    title: 'Manual Reduction',
+    body: 'Once edema is reduced and the patient is comfortable:\n\n**Technique:**\n1. Apply gentle, steady, circumferential pressure with the thumbs/palms over the apex of the prolapse.\n2. Invaginate the leading edge (apex) first, rolling it inward through the anal canal like reversing a sock.\n3. Maintain firm, patient pressure for 1-2 minutes rather than short forceful pushes.\n4. Once the apex passes the sphincter, the remainder usually follows.\n5. A gloved finger can guide the last segment in and confirm it has fully reduced.\n\n**If it will not reduce** after adequate edema reduction, analgesia, and sphincter relaxation, stop forcing it and treat as incarcerated — re-screen viability and consult surgery.',
+    citation: [2, 5, 7],
+    next: 'rpr-postreduction',
+    summary: 'Gentle steady circumferential pressure, invaginate the apex first, roll it inward.',
+    safetyLevel: 'warning',
+  },
+  {
+    id: 'rpr-postreduction',
+    type: 'question',
+    module: 3,
+    title: 'Did It Reduce?',
+    body: 'After the attempt, confirm with a digital rectal exam that the rectum is fully reduced and the tone/canal are normal.',
+    options: [
+      {
+        label: 'Fully reduced',
+        description: 'Prolapse reduced, DRE confirms normal canal',
+        next: 'rpr-dispo',
+        urgency: 'routine',
+      },
+      {
+        label: 'Irreducible despite adequate prep',
+        description: 'Persistent incarceration after sugar, analgesia, sphincter relaxation',
+        next: 'rpr-surgical',
+        urgency: 'urgent',
+      },
+    ],
+    citation: [2, 5],
+    summary: 'Confirm reduction by DRE; persistent incarceration becomes a surgical problem.',
+  },
+  {
+    id: 'rpr-peds',
+    type: 'info',
+    module: 4,
+    title: 'Pediatric Rectal Prolapse',
+    body: 'Pediatric rectal prolapse is usually **mucosal, benign, and self-limited**, often reducing spontaneously or with gentle pressure.\n\n**Reduce** gently with steady pressure (the sugar technique can help if edematous); sedation is rarely needed.\n\n**Always look for the underlying cause:**\n- **Constipation/straining** is the most common driver — treat aggressively.\n- **Cystic fibrosis** — prolapse can be the presenting sign; have a low threshold for a sweat chloride test.\n- Other: chronic diarrhea/parasites, malnutrition, pertussis, neuromuscular disease, or a pathologic lead point (polyp) suggesting intussusception.\n\nIf a finger passes into a sulcus alongside the mass, consider **intussusception** rather than simple prolapse and evaluate accordingly.',
+    recommendation: 'Reduce gently, treat constipation, and screen for cystic fibrosis and other underlying causes.',
+    confidence: 'recommended',
+    citation: [6, 10],
+    next: 'rpr-dispo',
+    summary: 'Peds prolapse: usually benign/mucosal; reduce gently and hunt the cause (constipation, CF).',
+  },
+  {
+    id: 'rpr-dispo',
+    type: 'result',
+    module: 5,
+    title: 'After Reduction: Disposition & Follow-up',
+    body: 'Most patients with a successfully reduced prolapse go home.\n\n**Bowel regimen (prevent recurrence and straining):**\n- Stool softener / osmotic laxative (polyethylene glycol or equivalent) and dietary fiber.\n- Avoid straining and prolonged toileting; treat constipation or diarrhea.\n\n**Referral:**\n- Refer all full-thickness prolapse to **colorectal surgery** — definitive treatment is operative (e.g., rectopexy or perineal repair); reduction is temporizing.\n- New-onset prolapse, age >50, or any alarm features (bleeding, weight loss, change in bowel habits) warrant **colonoscopy** to exclude a lead point or malignancy.\n\n**Admit / observe** if reduction was difficult, viability was borderline, there is significant comorbidity, or pain control/social factors preclude safe discharge.\n\n**Return precautions:** recurrence that will not reduce, severe pain, bleeding, fever, or signs of strangulation.',
+    recommendation: 'Discharge reduced viable prolapse with a bowel regimen and colorectal referral; colonoscopy for new-onset/age >50; admit difficult or borderline cases.',
+    confidence: 'recommended',
+    citation: [2, 4, 11, 12],
+    summary: 'Home with bowel regimen + colorectal referral; colonoscopy if new/>50; admit difficult cases.',
+  },
+];
+
+export const RECTAL_PROLAPSE_REDUCTION_CRITICAL_ACTIONS = [
+  { text: 'Distinguish full-thickness prolapse (concentric rings + sulcus) from mucosal/hemorrhoidal prolapse (radial folds).', nodeId: 'rpr-confirm' },
+  { text: 'Do NOT reduce a necrotic, strangulated, perforated/ruptured, or peritonitic prolapse — call surgery.', nodeId: 'rpr-viability' },
+  { text: 'Relieve edema with liberal granulated sugar (10-15 min dwell) before attempting reduction.', nodeId: 'rpr-sugar' },
+  { text: 'Use gentle steady circumferential pressure, invaginating the apex first; do not force.', nodeId: 'rpr-reduce' },
+  { text: 'Discharge with a bowel regimen and colorectal referral; colonoscopy for new-onset or age >50.', nodeId: 'rpr-dispo' },
+];
+
+export const RECTAL_PROLAPSE_REDUCTION_CITATIONS: Citation[] = [
+  { num: 1, text: 'Bordeianou L, Paquette I, Johnson E, et al. Clinical Practice Guidelines for the Treatment of Rectal Prolapse. Dis Colon Rectum. 2017;60(11):1121-1131.' },
+  { num: 2, text: 'Gourgiotis S, Baratsis S. Rectal prolapse. Int J Colorectal Dis. 2007;22(3):231-243.' },
+  { num: 3, text: 'Hovey MA, Metcalf AM. Incarcerated rectal prolapse: rupture and ileal evisceration after failed reduction. Report of a case. Dis Colon Rectum. 1997;40(10):1254-1257.' },
+  { num: 4, text: 'Varma M, Rafferty J, Buie WD; Standards Practice Task Force of the ASCRS. Practice parameters for the management of rectal prolapse. Dis Colon Rectum. 2011;54(11):1339-1346.' },
+  { num: 5, text: 'Coburn WM 3rd, Russell MA, Hofstetter WL. Sucrose as an aid to manual reduction of incarcerated rectal prolapse. Ann Emerg Med. 1997;30(3):347-349.' },
+  { num: 6, text: 'Rentea RM, St Peter SD. Pediatric Rectal Prolapse. StatPearls. NCBI Bookshelf NBK532308. Updated 2023.' },
+  { num: 7, text: 'Tintinalli JE, et al. Tintinalli\u2019s Emergency Medicine: A Comprehensive Study Guide. Anorectal disorders chapter. 9th ed. 2020.' },
+  { num: 8, text: 'Myers JO, Rothenberger DA. Sugar in the reduction of incarcerated prolapsed bowel. Report of two cases. Dis Colon Rectum. 1991;34(5):416-418.' },
+  { num: 9, text: 'Brandt LJ. Use of granulated sugar to reduce edematous prolapsed/incarcerated bowel and stoma. Am J Gastroenterol. 1985;80(8):658.' },
+  { num: 10, text: 'Antao B, Bradley V, Roberts JP, Shawis R. Management of rectal prolapse in children. Dis Colon Rectum. 2005;48(8):1620-1625.' },
+  { num: 11, text: 'Albeladi B, et al. Acute Irreducible Rectal Prolapse Managed in the Emergency Department. Cureus. 2021;13(8):e17086.' },
+  { num: 12, text: 'Bordeianou L, Hicks CW, Kaiser AM, et al. Rectal prolapse: an overview of clinical features, diagnosis, and patient-specific management strategies. J Gastrointest Surg. 2014;18(5):1059-1069.' },
+];
+
+export const RECTAL_PROLAPSE_REDUCTION_NODE_COUNT = RECTAL_PROLAPSE_REDUCTION_NODES.length;
+export const RECTAL_PROLAPSE_REDUCTION_MODULE_LABELS = ['Recognition', 'Viability', 'Reduction', 'Pediatric', 'Disposition'];

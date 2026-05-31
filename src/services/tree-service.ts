@@ -1397,6 +1397,14 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/gi-foreign-body.js');
       return { nodes: m.GI_FOREIGN_BODY_NODES, entryNodeId: 'gifb-start', categoryId: 'gastroenterology', moduleLabels: m.GI_FOREIGN_BODY_MODULE_LABELS, citations: m.GI_FOREIGN_BODY_CITATIONS, criticalActions: m.GI_FOREIGN_BODY_CRITICAL_ACTIONS };
     },
+    'rectal-prolapse-reduction': async () => {
+      const m = await import('../data/trees/rectal-prolapse-reduction.js');
+      return { nodes: m.RECTAL_PROLAPSE_REDUCTION_NODES, entryNodeId: 'rpr-start', categoryId: 'gastroenterology', moduleLabels: m.RECTAL_PROLAPSE_REDUCTION_MODULE_LABELS, citations: m.RECTAL_PROLAPSE_REDUCTION_CITATIONS, criticalActions: m.RECTAL_PROLAPSE_REDUCTION_CRITICAL_ACTIONS };
+    },
+    'esophageal-food-bolus': async () => {
+      const m = await import('../data/trees/esophageal-food-bolus.js');
+      return { nodes: m.ESOPHAGEAL_FOOD_BOLUS_NODES, entryNodeId: 'efb-start', categoryId: 'gastroenterology', moduleLabels: m.ESOPHAGEAL_FOOD_BOLUS_MODULE_LABELS, citations: m.ESOPHAGEAL_FOOD_BOLUS_CITATIONS, criticalActions: m.ESOPHAGEAL_FOOD_BOLUS_CRITICAL_ACTIONS };
+    },
     'pid': async () => {
       const m = await import('../data/trees/pid.js');
       return { nodes: m.PID_NODES, entryNodeId: 'pid-start', categoryId: 'infectious-disease', moduleLabels: m.PID_MODULE_LABELS, citations: m.PID_CITATIONS, criticalActions: m.PID_CRITICAL_ACTIONS };

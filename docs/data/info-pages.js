@@ -23424,6 +23424,154 @@ const ON_HUB_STOP_PAGE = {
         { num: 1, text: 'Biousse V, Newman NJ. Ischemic Optic Neuropathies. N Engl J Med. 2015;372:2428-2436.' },
     ],
 };
+const RPR_STEPS_PAGE = {
+    id: 'rpr-steps',
+    title: 'Rectal Prolapse Reduction - Steps',
+    subtitle: 'Recognize, gate on viability, sugar technique, reduce, refer',
+    sections: [
+        {
+            body: '1. **Confirm prolapse and type.** Concentric (circular) mucosal rings + a palpable sulcus = full-thickness rectal prolapse. Radial folds, no sulcus = mucosal prolapse / prolapsing hemorrhoids. In a child a finger passing into a sulcus alongside the mass suggests intussusception.\n2. **Viability / red-flag gate.** Do NOT reduce necrosis, gangrene, strangulation, peritonitis, instability, or a ruptured prolapse with eviscerated bowel - those go to surgery.\n3. **Analgesia and positioning.** Knee-chest (prone jackknife) or left lateral; Trendelenburg helps. Perianal local block (lidocaine/bupivacaine) +/- IV analgesia or procedural sedation to relax the sphincter.\n4. **Granulated sugar technique.** Liberally coat the exposed mucosa with ordinary table sugar; let it dwell 10-15 minutes to osmotically draw out edema (a cold compress/wrap helps). Reapply and repeat as needed.\n5. **Reduce.** Gentle, steady, circumferential pressure; invaginate the apex first and roll it inward through the anal canal. Hold steady pressure rather than forceful pushes.\n6. **Confirm and dispo.** DRE to confirm full reduction. Discharge a viable, reduced prolapse with a bowel regimen and colorectal referral; colonoscopy for new-onset or age >50; admit difficult or borderline cases. Persistent incarceration despite adequate prep becomes a surgical problem.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Coburn WM 3rd, Russell MA, Hofstetter WL. Sucrose as an aid to manual reduction of incarcerated rectal prolapse. Ann Emerg Med. 1997;30(3):347-349.' },
+        { num: 2, text: 'Bordeianou L, Paquette I, Johnson E, et al. Clinical Practice Guidelines for the Treatment of Rectal Prolapse. Dis Colon Rectum. 2017;60(11):1121-1131.' },
+    ],
+};
+const RPR_RECOGNITION_PAGE = {
+    id: 'rpr-recognition',
+    title: 'Prolapse vs Hemorrhoid',
+    subtitle: 'Concentric rings + sulcus vs radial folds',
+    sections: [
+        {
+            heading: 'Full-thickness rectal prolapse',
+            body: 'Concentric (circular) mucosal rings protrude through the anus, with a **palpable sulcus** (groove) between the prolapse and the anal verge because the full bowel wall has telescoped out. This is the lesion this consult is built for.',
+        },
+        {
+            heading: 'Mucosal prolapse / prolapsing internal hemorrhoids',
+            body: '**Radial folds** (spokes of a wheel), **no sulcus**, often with visibly engorged hemorrhoidal columns. Usually reducible with gentle pressure and rarely strangulates. Same edema-reduction principles apply.',
+        },
+        {
+            heading: 'Pediatric protrusion',
+            body: 'Children most often have mucosal prolapse, usually benign and self-limited. A finger that passes into a sulcus alongside the mass suggests intussusception presenting at the anus rather than simple prolapse.',
+        },
+        {
+            heading: 'Why it matters',
+            body: 'Type guides aggressiveness of follow-up: full-thickness prolapse needs colorectal referral and (for new-onset/age >50) colonoscopy to exclude a lead point or malignancy; isolated hemorrhoidal prolapse is managed with constipation control and hemorrhoid care.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gourgiotis S, Baratsis S. Rectal prolapse. Int J Colorectal Dis. 2007;22(3):231-243.' },
+        { num: 2, text: 'Rentea RM, St Peter SD. Pediatric Rectal Prolapse. StatPearls. NCBI Bookshelf NBK532308. 2023.' },
+    ],
+};
+const RPR_STOP_PAGE = {
+    id: 'rpr-stop',
+    title: 'Rectal Prolapse - Do NOT',
+    subtitle: 'Critical pitfalls in bedside reduction',
+    sections: [
+        {
+            heading: 'Do NOT reduce nonviable or ruptured prolapse',
+            body: 'Necrosis, gangrene, strangulation, peritonitis, instability, or a ruptured prolapse with eviscerated bowel is a surgical emergency. Reducing dead bowel or a perforation into the abdomen is harmful. Keep eviscerated bowel moist and call surgery.',
+        },
+        {
+            heading: 'Do NOT force an edematous prolapse',
+            body: 'Edema, not anatomy, usually blocks reduction. Relieve it first with the granulated-sugar technique (10-15 min dwell) and good sphincter relaxation. Forceful pushing risks mucosal injury and rupture.',
+        },
+        {
+            heading: 'Do NOT skip analgesia / sphincter relaxation',
+            body: 'A tense sphincter and pain defeat reduction. A perianal block plus light sedation frequently allows reduction that pressure alone could not.',
+        },
+        {
+            heading: 'Do NOT discharge new-onset prolapse without a plan',
+            body: 'New full-thickness prolapse, age >50, bleeding, weight loss, or change in bowel habits warrants colonoscopy to exclude a lead point or malignancy, plus colorectal referral - reduction is only temporizing.',
+        },
+        {
+            heading: 'Do NOT forget the pediatric cause',
+            body: 'In children, look for the driver: constipation/straining (most common) and cystic fibrosis (prolapse can be the presenting sign - low threshold for sweat chloride).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hovey MA, Metcalf AM. Incarcerated rectal prolapse: rupture and ileal evisceration after failed reduction. Dis Colon Rectum. 1997;40(10):1254-1257.' },
+        { num: 2, text: 'Bordeianou L, Paquette I, Johnson E, et al. Clinical Practice Guidelines for the Treatment of Rectal Prolapse. Dis Colon Rectum. 2017;60(11):1121-1131.' },
+    ],
+};
+const EFB_STEPS_PAGE = {
+    id: 'efb-steps',
+    title: 'Esophageal Food Bolus - Steps',
+    subtitle: 'Triage, exclude perforation, bridge, scope, biopsy',
+    sections: [
+        {
+            body: '1. **Triage by secretions.** Drooling / cannot swallow saliva = COMPLETE obstruction = aspiration risk = emergent endoscopy within ~6 hours. Tolerating secretions = partial = urgent (within 24 hours).\n2. **Exclude perforation.** Subcutaneous crepitus, severe chest/back pain, fever, sepsis, or Hamman crunch -> STOP. NPO, water-soluble (not barium) contrast CT/esophagram, antibiotics, emergent surgery + GI. No push, no pharmacology.\n3. **Exclude a dangerous object.** A button battery in the esophagus is a same-hour emergency; sharp bones, long objects, and magnets follow different rules. Route those to the GI Foreign Body pathway.\n4. **Pharmacologic bridge (optional, low-yield).** Glucagon 1 mg IV slow push, may repeat once; warn about vomiting. NO papain/meat tenderizer (perforation risk). No effervescent agents in complete obstruction. Never delay scope for a drug in complete obstruction.\n5. **Definitive endoscopy.** Push the bolus into the stomach when the distal lumen is patent, or retrieve with a net/snare/overtube; protect the airway in complete obstruction. Never leave a bolus impacted beyond 24 hours.\n6. **Find the cause + biopsy.** Schatzki ring, peptic stricture, malignancy, and especially eosinophilic esophagitis. Obtain >=6 esophageal biopsies for EoE even if mucosa looks normal; start a PPI; arrange GI follow-up.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ASGE Standards of Practice Committee. Management of ingested foreign bodies and food impactions. Gastrointest Endosc. 2011;73(6):1085-1091.' },
+        { num: 2, text: 'Birk M, et al. Removal of foreign bodies in the upper GI tract in adults: ESGE Clinical Guideline. Endoscopy. 2016;48(5):489-496.' },
+    ],
+};
+const EFB_TIMING_PAGE = {
+    id: 'efb-timing',
+    title: 'ASGE Endoscopy Timing Windows',
+    subtitle: 'When to scope a food bolus',
+    sections: [
+        {
+            heading: 'Emergent - within ~6 hours',
+            body: '**Complete obstruction**: the patient cannot manage secretions (drooling, cannot swallow saliva). Aspiration risk. Also emergent: any esophageal **button battery** or **sharp/pointed object** (use the GI Foreign Body pathway).',
+        },
+        {
+            heading: 'Urgent - within 24 hours',
+            body: '**Food bolus without complete obstruction** (partial - can still swallow saliva). Endoscopy within 24 hours; do not let it drift past the 24-hour mark.',
+        },
+        {
+            heading: 'Hard ceiling - 24 hours',
+            body: 'A food bolus should NOT remain impacted beyond 24 hours regardless of symptoms. Prolonged mucosal contact causes pressure necrosis, ulceration, and rising perforation risk.',
+        },
+        {
+            heading: 'Do not delay for drugs',
+            body: 'Pharmacologic agents (glucagon) are low-yield adjuncts. In complete obstruction, arrange endoscopy immediately rather than waiting to see if a drug works.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ASGE Standards of Practice Committee. Management of ingested foreign bodies and food impactions. Gastrointest Endosc. 2011;73(6):1085-1091.' },
+        { num: 2, text: 'Birk M, et al. ESGE Clinical Guideline. Endoscopy. 2016;48(5):489-496.' },
+    ],
+};
+const EFB_STOP_PAGE = {
+    id: 'efb-stop',
+    title: 'Esophageal Food Bolus - Do NOT',
+    subtitle: 'Critical pitfalls in disimpaction',
+    sections: [
+        {
+            heading: 'Do NOT use papain / meat tenderizer',
+            body: 'Proteolytic enzymes (papain) are contraindicated - associated with esophageal perforation and severe mucosal injury. This is a historical practice that causes harm.',
+        },
+        {
+            heading: 'Do NOT push or give pharmacology when perforation is suspected',
+            body: 'Crepitus, severe chest/back pain, fever, or sepsis = suspected perforation. NPO, water-soluble (not barium) contrast CT/esophagram, antibiotics, and emergent surgery/GI. Glucagon, effervescent agents, and forceful push are all contraindicated.',
+        },
+        {
+            heading: 'Do NOT use effervescent agents in complete obstruction',
+            body: 'Gas-forming agents trapped above a complete block raise intraluminal pressure and perforation risk.',
+        },
+        {
+            heading: 'Do NOT leave a bolus impacted beyond 24 hours',
+            body: 'Prolonged contact causes pressure necrosis, ulceration, and perforation. Complete obstruction needs endoscopy within ~6 hours; any bolus within 24 hours.',
+        },
+        {
+            heading: 'Do NOT skip the EoE biopsy',
+            body: 'Eosinophilic esophagitis is the leading cause of food impaction in young men and recurrent impactions. Obtain >=6 esophageal biopsies at the index endoscopy even if the mucosa looks normal, and start a PPI.',
+        },
+        {
+            heading: 'Do NOT miss a button battery hiding behind food',
+            body: 'A button battery in the esophagus causes liquefactive necrosis within hours and is a same-hour emergency. Confirm the impaction is truly soft food; route dangerous objects to the GI Foreign Body pathway.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ASGE Standards of Practice Committee. Management of ingested foreign bodies and food impactions. Gastrointest Endosc. 2011;73(6):1085-1091.' },
+        { num: 2, text: 'Khayyat YM. Pharmacological management of esophageal food bolus impaction. Emerg Med Int. 2013;2013:924015.' },
+    ],
+};
 const MVL_STEPS_PAGE = {
     id: 'mvl-steps',
     title: 'Monocular Vision Loss Hub - Steps Summary',
@@ -24269,6 +24417,12 @@ export const INFO_PAGES = {
     'bp-radic-localization': BP_RADIC_LOCALIZATION_PAGE,
     'on-hub-steps': ON_HUB_STEPS_PAGE,
     'on-hub-stop': ON_HUB_STOP_PAGE,
+    'rpr-steps': RPR_STEPS_PAGE,
+    'rpr-recognition': RPR_RECOGNITION_PAGE,
+    'rpr-stop': RPR_STOP_PAGE,
+    'efb-steps': EFB_STEPS_PAGE,
+    'efb-timing': EFB_TIMING_PAGE,
+    'efb-stop': EFB_STOP_PAGE,
     'mvl-steps': MVL_STEPS_PAGE,
     'mvl-stop': MVL_STOP_PAGE,
     'dp-steps': DP_STEPS_PAGE,

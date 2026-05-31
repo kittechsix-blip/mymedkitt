@@ -295,6 +295,8 @@ export const TREE_REGISTRY = {
   'typhoid-fever':      { prefix: 'TYPHOID_FEVER',       entryNodeId: 'typhoid-start',      categoryId: 'infectious-disease' },
   'lower-gi-bleed':     { prefix: 'LOWER_GI_BLEED',      entryNodeId: 'lgib-start',         categoryId: 'gastroenterology' },
   'gi-foreign-body':    { prefix: 'GI_FOREIGN_BODY',     entryNodeId: 'gifb-start',         categoryId: 'gastroenterology' },
+  'rectal-prolapse-reduction': { prefix: 'RECTAL_PROLAPSE_REDUCTION', entryNodeId: 'rpr-start', categoryId: 'gastroenterology' },
+  'esophageal-food-bolus': { prefix: 'ESOPHAGEAL_FOOD_BOLUS', entryNodeId: 'efb-start',      categoryId: 'gastroenterology' },
   'pid':                { prefix: 'PID',                 entryNodeId: 'pid-start',          categoryId: 'infectious-disease' },
   'hypotension-workup': { prefix: 'HYPOTENSION_WORKUP',  entryNodeId: 'hypotension-start',         categoryId: 'critical-care' },
   'peripheral-neuropathy': { prefix: 'PERIPHERAL_NEUROPATHY', entryNodeId: 'pn-start',      categoryId: 'neurology' },
