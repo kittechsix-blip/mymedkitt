@@ -218,6 +218,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/headache-hub.js');
             return { nodes: m.HEADACHE_HUB_NODES, entryNodeId: 'hh-start', categoryId: 'emergency-medicine', moduleLabels: m.HEADACHE_HUB_MODULE_LABELS, citations: m.HEADACHE_HUB_CITATIONS, criticalActions: m.HEADACHE_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'unilateral-facial-pain-hub': async () => {
+            const m = await import('../data/trees/unilateral-facial-pain-hub.js');
+            return { nodes: m.UNILATERAL_FACIAL_PAIN_HUB_NODES, entryNodeId: 'ufp-start', categoryId: 'emergency-medicine', moduleLabels: m.UNILATERAL_FACIAL_PAIN_HUB_MODULE_LABELS, citations: m.UNILATERAL_FACIAL_PAIN_HUB_CITATIONS, criticalActions: m.UNILATERAL_FACIAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'abdominal-pain-hub': async () => {
             const m = await import('../data/trees/abdominal-pain-hub.js');
             return { nodes: m.ABDOMINAL_PAIN_HUB_NODES, entryNodeId: 'ap-start', categoryId: 'emergency-medicine', moduleLabels: m.ABDOMINAL_PAIN_HUB_MODULE_LABELS, citations: m.ABDOMINAL_PAIN_HUB_CITATIONS, criticalActions: m.ABDOMINAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };

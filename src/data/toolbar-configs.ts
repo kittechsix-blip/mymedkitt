@@ -44,6 +44,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'anisocoria',
   'hypoglycemia',
   'dementia',
+  'unilateral-facial-pain-hub',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -456,6 +457,18 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'hh-rescue' },
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hh-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hh-stop' },
+  ],
+  'unilateral-facial-pain-hub': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ufp-steps', pinned: true },
+    { id: 'red', label: 'Red', icon: '🚩', action: 'jump', target: 'ufp-red-flags', pinned: true },
+    { id: 'diff', label: 'Diff', icon: '🧩', action: 'overlay', target: 'ufp-differential-guide', pinned: true },
+    { id: 'pattern', label: 'Pattern', icon: '🧭', action: 'jump', target: 'ufp-pattern', pinned: true },
+    { id: 'test', label: 'Testing', icon: '🔬', action: 'overlay', target: 'ufp-testing-guide', pinned: true },
+    { id: 'dispo', label: 'Dispo', icon: '🏁', action: 'overlay', target: 'ufp-dispo-guide' },
+    { id: 'guide', label: 'Guide', icon: '🛑', action: 'overlay', target: 'ufp-red-flags-guide' },
+    { id: 'tn', label: 'TN', icon: '⚡', action: 'route', target: 'trigeminal-neuralgia' },
+    { id: 'cluster', label: 'Cluster', icon: '🫁', action: 'route', target: 'cluster-headache' },
+    { id: 'dental', label: 'Dental', icon: '🦷', action: 'route', target: 'dental-pain-hub' },
   ],
   'abdominal-pain-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aph-steps' },

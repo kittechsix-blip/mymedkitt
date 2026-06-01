@@ -77,6 +77,7 @@ function jsonbValOrNull(obj) {
 const CROSS_LISTINGS = {
   // Headache Hub (Phase 7) — canonical EM; cross-list into Neurology per PLAN.md R5.
   'headache-hub':     [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'hh-start' }],
+  'unilateral-facial-pain-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'ufp-start' }],
   'chest-pain-hub':   [{ categoryId: 'cardiology', displayTitle: null, displaySubtitle: null, entryNodeId: 'cp-start' }],
   'dyspnea-hub':      [{ categoryId: 'critical-care', displayTitle: 'Shortness of Breath Hub', displaySubtitle: null, entryNodeId: 'dysp-start' }],
   'altered-mental-status-hub': [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'ams-start' }],

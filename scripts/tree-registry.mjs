@@ -22,6 +22,7 @@ export const TREE_REGISTRY = {
   'cluster-headache': { prefix: 'CLUSTER_HEADACHE', entryNodeId: 'cluster-start', categoryId: 'neurology' },
   'trigeminal-neuralgia': { prefix: 'TRIGEMINAL_NEURALGIA', entryNodeId: 'tn-start', categoryId: 'neurology' },
   'headache-hub': { prefix: 'HEADACHE_HUB', entryNodeId: 'hh-start', categoryId: 'emergency-medicine' },
+  'unilateral-facial-pain-hub': { prefix: 'UNILATERAL_FACIAL_PAIN_HUB', entryNodeId: 'ufp-start', categoryId: 'emergency-medicine' },
   'chest-pain-hub': { prefix: 'CHEST_PAIN_HUB', entryNodeId: 'cp-start', categoryId: 'emergency-medicine' },
   'dyspnea-hub': { prefix: 'DYSPNEA_HUB', entryNodeId: 'dysp-start', categoryId: 'emergency-medicine' },
   'altered-mental-status-hub': { prefix: 'AMS_HUB', entryNodeId: 'ams-start', categoryId: 'emergency-medicine' },

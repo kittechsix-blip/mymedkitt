@@ -10113,6 +10113,158 @@ const DEMENTIA_SAFETY_GUIDE = {
         { num: 2, text: 'American Geriatrics Society 2023 Updated AGS Beers Criteria for Potentially Inappropriate Medication Use in Older Adults. J Am Geriatr Soc. 2023;71(7):2052-2081.' },
     ],
 };
+const UFP_STEPS_PAGE = {
+    id: 'ufp-steps',
+    title: 'Unilateral Facial Pain Steps',
+    subtitle: 'ED chief complaint sequence',
+    sections: [
+        {
+            heading: '1. First pass: sick and dangerous screen',
+            body: 'Start with vitals, fever/toxic appearance, immunocompromise, visual acuity, pupils, red eye, EOM, proptosis, cranial nerves, gait, Horner pattern, oral/dental exam, floor of mouth, trismus, dysphagia, skin, ear, and age >50 GCA symptoms.',
+        },
+        {
+            heading: '2. Name the dangerous differential early',
+            body: '- Eye/orbit: acute angle closure, keratitis/uveitis, orbital cellulitis, HZO, cavernous sinus process.\n- Neurovascular: cervical artery dissection, stroke/TIA, SAH/ICH, cavernous sinus thrombosis.\n- Infection: odontogenic abscess, deep neck infection, Ludwig angina, complicated sinusitis, mastoiditis.\n- Inflammatory: giant cell arteritis.\n- Zoster: HZO, Ramsay Hunt, pre-eruptive neuralgia.',
+        },
+        {
+            heading: '3. Branch by first red flag',
+            body: 'Red painful eye, neurologic/vascular symptoms, deep infection signs, age >50 GCA symptoms, or dermatomal zoster signs should move directly to the relevant urgent lane before calling the pain sinus, dental, TMJ, migraine, cluster, or trigeminal neuralgia.',
+        },
+        {
+            heading: '4. Then use pain behavior',
+            body: '- Triggered electric shocks: trigeminal neuralgia pattern.\n- Orbital/temporal attacks with autonomic signs and restlessness: cluster/TAC pattern.\n- Tooth percussion, biting pain, swelling: dental pattern.\n- Persistent >10 days, severe purulent/febrile, or double-worsening URI: bacterial rhinosinusitis pattern.\n- Jaw clicking, bruxism, chewing pain: TMJ/myofascial pattern.\n- Photophobia, nausea, movement sensitivity: migraine/headache pattern.',
+        },
+        {
+            heading: '5. Disposition by risk, not label',
+            body: 'Admit or consult for ocular emergency, neurovascular concern, deep infection or airway risk, vision-threatening GCA, immunocompromised zoster/complicated infection, toxic appearance, uncontrolled pain, inability to hydrate, unsafe home, or uncertain diagnosis with objective abnormality.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'International Classification of Headache Disorders, 3rd edition. Trigeminal neuralgia and trigeminal autonomic cephalalgia criteria.' },
+        { num: 2, text: 'ACEP Clinical Policy: Critical Issues in the Evaluation and Management of Adult Patients Presenting to the Emergency Department With Acute Headache. Ann Emerg Med. 2019.' },
+        { num: 3, text: '2021 American College of Rheumatology/Vasculitis Foundation Guideline for the Management of Giant Cell Arteritis and Takayasu Arteritis.' },
+    ],
+};
+const UFP_RED_FLAGS_GUIDE = {
+    id: 'ufp-red-flags-guide',
+    title: 'Facial Pain Red Flags',
+    subtitle: 'Find the limb, vision, airway, and brain threats first',
+    sections: [
+        {
+            heading: 'Eye and orbit',
+            body: 'Red painful eye, halos, vomiting, fixed or mid-dilated pupil, decreased vision, photophobia, corneal findings, proptosis, diplopia, painful or restricted EOM, V1 rash, nose-tip lesions, or fever with eyelid/orbital swelling.',
+        },
+        {
+            heading: 'Neurovascular',
+            body: 'Thunderclap onset, focal neurologic deficit, aphasia, diplopia, ataxia, transient monocular vision loss, Horner syndrome, unilateral neck pain, posterior headache, trauma/manipulation, severe sudden headache, anticoagulation, or cancer/immunosuppression.',
+        },
+        {
+            heading: 'Deep infection and airway',
+            body: 'Toxic appearance, fever, rigors, trismus, dysphagia, drooling, muffled voice, floor-of-mouth elevation, neck swelling, odontogenic swelling, diabetes, immunocompromise, periorbital spread, or pain out of proportion.',
+        },
+        {
+            heading: 'GCA',
+            body: 'Age >50 plus new temporal/scalp/facial pain, jaw claudication, visual symptoms, diplopia, PMR shoulder/hip symptoms, fever, weight loss, scalp tenderness, or abnormal temporal artery.',
+        },
+        {
+            heading: 'Zoster and cranial neuropathy',
+            body: 'Dermatomal burning/allodynia, V1 rash, ear vesicles, facial weakness, hearing symptoms, vertigo, immunocompromise, disseminated rash, or ocular symptoms. Pre-eruptive zoster may have pain before visible lesions.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACR Appropriateness Criteria. Headache.' },
+        { num: 2, text: 'American Heart Association Scientific Statement. Treatment and Outcomes of Cervical Artery Dissection in Adults.' },
+        { num: 3, text: 'American Academy of Ophthalmology EyeWiki. Herpes Zoster Ophthalmicus.' },
+    ],
+};
+const UFP_DIFFERENTIAL_GUIDE = {
+    id: 'ufp-differential-guide',
+    title: 'Unilateral Facial Pain Differential',
+    subtitle: 'Dangerous causes, then common phenotypes',
+    sections: [
+        {
+            heading: 'Emergency causes',
+            body: '- Acute angle closure glaucoma, keratitis, uveitis, orbital cellulitis, cavernous sinus thrombosis.\n- Cervical artery dissection, stroke/TIA, SAH, ICH.\n- Odontogenic deep-space infection, Ludwig angina, mastoiditis, complicated sinusitis.\n- Giant cell arteritis.\n- HZO, Ramsay Hunt, disseminated zoster.\n- Malignancy, invasive fungal sinusitis, osteomyelitis in selected hosts.',
+        },
+        {
+            heading: 'Neuralgia and headache phenotypes',
+            body: '- Trigeminal neuralgia: brief electric shocks, V2/V3, triggered by light touch or chewing.\n- Cluster headache/TAC: strictly unilateral orbital/temporal attacks with autonomic signs or restlessness.\n- Migraine: unilateral pain with photophobia, nausea, movement sensitivity, prior pattern.\n- Occipital/cervicogenic referral can involve face/head but should not bypass vascular red flags.',
+        },
+        {
+            heading: 'ENT, dental, and jaw causes',
+            body: '- Dental pulpitis, apical periodontitis, cracked tooth, abscess, cellulitis.\n- Acute bacterial rhinosinusitis only when persistent, severe purulent/febrile, or double-worsening criteria are met.\n- Otitis externa/media, mastoiditis, malignant otitis externa in high-risk hosts.\n- TMJ dysfunction or myofascial pain after dental, eye, infection, and neurovascular threats are addressed.',
+        },
+        {
+            heading: 'Why this hub exists',
+            body: 'Unilateral facial pain is commonly mis-labeled as sinus, dental, migraine, or TMJ. The diagnostic task is to prove no eye, vascular, deep infection, GCA, or zoster danger signal is present before settling on a benign phenotype.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'International Classification of Headache Disorders, 3rd edition. Trigeminal neuralgia and cluster headache criteria.' },
+        { num: 2, text: 'American Dental Association guideline on antibiotic use for urgent management of pulpal and periapical dental pain and swelling. JADA. 2019.' },
+        { num: 3, text: 'IDSA Clinical Practice Guideline for Acute Bacterial Rhinosinusitis and CDC Adult Outpatient Treatment Recommendations.' },
+    ],
+};
+const UFP_TESTING_GUIDE = {
+    id: 'ufp-testing-guide',
+    title: 'Facial Pain Testing',
+    subtitle: 'Match tests to the dangerous lane',
+    sections: [
+        {
+            heading: 'Eye and orbit testing',
+            body: 'Visual acuity is a vital sign for facial pain with eye symptoms. Add fluorescein/slit lamp, IOP when angle closure is plausible, EOM/proptosis exam, and CT orbit/sinuses with contrast when orbital cellulitis, abscess, or cavernous sinus process is possible.',
+        },
+        {
+            heading: 'Neurovascular testing',
+            body: 'CTA head/neck for dissection, stroke/TIA, Horner plus pain, transient monocular vision loss, thunderclap with vascular concern, or focal neurologic symptoms. Non-contrast CT head first when ICH/SAH is the immediate question. MRI/MRA can follow when suspicion persists.',
+        },
+        {
+            heading: 'Infection testing',
+            body: 'CT face/neck with IV contrast for deep-space infection, trismus, dysphagia, floor-of-mouth swelling, facial cellulitis, abscess, immunocompromise, or complicated odontogenic disease. Add CBC/CMP/lactate/cultures by sepsis severity, not as a reflex for simple dental pain.',
+        },
+        {
+            heading: 'GCA testing',
+            body: 'ESR, CRP, CBC with platelets, and CMP support the diagnosis but do not replace clinical judgment. Start steroids before confirmatory biopsy/ultrasound when suspicion is meaningful, especially with visual symptoms.',
+        },
+        {
+            heading: 'Low-yield testing to avoid',
+            body: 'Do not CT uncomplicated bacterial rhinosinusitis, classic TMJ pain, or classic recurrent migraine without red flags. Do not use normal dental or sinus findings to close a neurovascular presentation.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACR Appropriateness Criteria. Headache.' },
+        { num: 2, text: 'ACEP Acute Headache Clinical Policy. Ann Emerg Med. 2019.' },
+        { num: 3, text: '2021 ACR/Vasculitis Foundation Guideline for GCA.' },
+    ],
+};
+const UFP_DISPO_GUIDE = {
+    id: 'ufp-dispo-guide',
+    title: 'Facial Pain Disposition',
+    subtitle: 'Risk-based ED endpoints',
+    sections: [
+        {
+            heading: 'Admit, transfer, or urgent specialty care',
+            body: '- Vision threat, AACG, orbital cellulitis, HZO with eye involvement, proptosis, ophthalmoplegia, or decreased visual acuity.\n- Dissection, stroke/TIA, SAH/ICH concern, cavernous sinus thrombosis, or objective neuro deficit.\n- Deep neck/odontogenic infection with airway risk, trismus, dysphagia, toxic appearance, diabetes/immunocompromise, or need for IV antibiotics/source control.\n- GCA with visual symptoms, diplopia, or high suspicion requiring urgent steroid pathway.\n- Inability to hydrate, uncontrolled pain, unsafe social situation, or unclear diagnosis with objective abnormality.',
+        },
+        {
+            heading: 'Observation can fit',
+            body: 'Use observation when pain is severe or diagnosis is evolving, CT/CTA/MRI or specialty assessment is pending, oral intake is uncertain, infection response needs reassessment, or discharge safety depends on symptom control and repeat exam.',
+        },
+        {
+            heading: 'Reasonable discharge criteria',
+            body: 'Dangerous eye/neurovascular/infection/GCA/zoster features are absent or addressed, vitals stable, neuro and eye exams documented as appropriate, pain controlled, patient can eat/drink, follow-up is specific, and return precautions cover vision change, focal neuro symptoms, fever, swelling, trismus, dysphagia, rash, and worsening pain.',
+        },
+        {
+            heading: 'Documentation pearl',
+            body: 'Do not only document the final label. Document the negative danger screen: visual acuity/eye exam, neurovascular clues, dental/deep infection screen, GCA screen when age >50, and zoster/skin/ear exam.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACEP Acute Headache Clinical Policy. Ann Emerg Med. 2019.' },
+        { num: 2, text: 'American Dental Association antibiotic guideline for dental pain and swelling. JADA. 2019.' },
+        { num: 3, text: 'CDC Adult Outpatient Treatment Recommendations for Acute Rhinosinusitis.' },
+    ],
+};
 const DM_SUMMARY = {
     id: 'dm-summary',
     title: 'Diabetes Management',
@@ -24702,6 +24854,11 @@ export const INFO_PAGES = {
     'dementia-diagnosis-guide': DEMENTIA_DIAGNOSIS_GUIDE,
     'dementia-infection-guide': DEMENTIA_INFECTION_GUIDE,
     'dementia-safety-guide': DEMENTIA_SAFETY_GUIDE,
+    'ufp-steps': UFP_STEPS_PAGE,
+    'ufp-red-flags-guide': UFP_RED_FLAGS_GUIDE,
+    'ufp-differential-guide': UFP_DIFFERENTIAL_GUIDE,
+    'ufp-testing-guide': UFP_TESTING_GUIDE,
+    'ufp-dispo-guide': UFP_DISPO_GUIDE,
     'dm-summary': DM_SUMMARY,
     'dm-insulin-discharge': DM_INSULIN_DISCHARGE,
     'dm-oral-discharge': DM_ORAL_DISCHARGE,
