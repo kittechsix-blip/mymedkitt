@@ -45,6 +45,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'hypoglycemia',
   'dementia',
   'unilateral-facial-pain-hub',
+  'thrombocytopenia',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -1701,6 +1702,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'classify', label: 'Classify', icon: '📋', action: 'overlay', target: 'uti-classification' },
     { id: 'special', label: 'Special', icon: '⚠️', action: 'overlay', target: 'uti-special-pops' },
     { id: 'resistant', label: 'Resistant', icon: '🦠', action: 'jump', target: 'uti-resistant-start' },
+  ],
+  // ---------------------------------------------------------------
+  // Thrombocytopenia
+  // ---------------------------------------------------------------
+  'thrombocytopenia': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'thrombocytopenia-steps', pinned: true },
+    { id: 'bleed', label: 'Bleed', icon: '🩸', action: 'jump', target: 'thrombo-bleeding-triage', pinned: true },
+    { id: 'ttp', label: 'TTP', icon: '⚠️', action: 'jump', target: 'thrombo-ttp-tma', pinned: true },
+    { id: 'hit', label: 'HIT', icon: '💉', action: 'jump', target: 'thrombo-hit', pinned: true },
+    { id: 'itp', label: 'ITP', icon: '🛡️', action: 'jump', target: 'thrombo-itp', pinned: true },
+    { id: 'diff', label: 'Diff', icon: '🧩', action: 'overlay', target: 'thrombocytopenia-differential-guide' },
+    { id: 'labs', label: 'Labs', icon: '🧪', action: 'overlay', target: 'thrombocytopenia-labs-guide' },
+    { id: 'platelets', label: 'Platelets', icon: '🩸', action: 'overlay', target: 'thrombocytopenia-transfusion-guide' },
+    { id: 'dispo', label: 'Dispo', icon: '🏁', action: 'jump', target: 'thrombo-disposition' },
   ],
   // ---------------------------------------------------------------
   // TTP

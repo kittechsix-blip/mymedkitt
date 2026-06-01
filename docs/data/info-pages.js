@@ -13115,6 +13115,191 @@ const COAG_PLT_JUMP = {
         { num: 3, text: 'Zheng XL, et al. ISTH guidelines for the diagnosis and management of TTP. J Thromb Haemost. 2020;18(10):2486-2495.' },
     ],
 };
+const THROMBOCYTOPENIA_CITATIONS = [
+    { num: 1, text: 'Gauer RL, Braun MM. Thrombocytopenia: Evaluation and Management. Am Fam Physician. 2022;106(3):288-298.' },
+    { num: 2, text: 'Neunert C, Terrell DR, Arnold DM, et al. American Society of Hematology 2019 guidelines for immune thrombocytopenia. Blood Adv. 2019;3(23):3829-3866.' },
+    { num: 3, text: 'Zheng XL, Vesely SK, Cataland SR, et al. ISTH guidelines for treatment of thrombotic thrombocytopenic purpura. J Thromb Haemost. 2020;18(10):2496-2502.' },
+    { num: 4, text: 'Zheng XL, Vesely SK, Cataland SR, et al. ISTH guidelines for diagnosis of thrombotic thrombocytopenic purpura. J Thromb Haemost. 2020;18(10):2486-2495.' },
+    { num: 5, text: 'Cuker A, Arepally GM, Chong BH, et al. American Society of Hematology 2018 guidelines for heparin-induced thrombocytopenia. Blood Adv. 2018;2(22):3360-3392.' },
+    { num: 6, text: 'Kaufman RM, Djulbegovic B, Gernsheimer T, et al. Platelet transfusion: a clinical practice guideline from the AABB. Ann Intern Med. 2015;162(3):205-213.' },
+    { num: 7, text: 'Taylor FB Jr, Toh CH, Hoots WK, Wada H, Levi M. ISTH overt DIC scoring system. Thromb Haemost. 2001;86(5):1327-1330.' },
+];
+const THROMBOCYTOPENIA_STEPS = {
+    id: 'thrombocytopenia-steps',
+    title: 'Thrombocytopenia ED Steps',
+    subtitle: 'Confirm true count, find the dangerous phenotype, then treat by mechanism',
+    sections: [
+        {
+            heading: '1. Confirm the platelet count',
+            body: 'Review prior CBCs, repeat the CBC if unexpected, and ask the lab to review a peripheral smear. Platelet clumping or EDTA-dependent pseudothrombocytopenia can create a false low count and should not trigger transfusion or admission by itself.',
+        },
+        {
+            heading: '2. Triage bleeding and procedure risk',
+            body: 'Critical bleeding, CNS or posterior eye bleeding, massive GI bleeding, obstetric hemorrhage, airway bleeding, shock, or urgent invasive procedure changes the first move. Resuscitate, call blood bank early, and use platelet targets based on bleeding site and procedure risk.',
+        },
+        {
+            heading: '3. Screen the five dangerous buckets',
+            body: 'Before calling it ITP, actively exclude TTP/TMA, DIC/sepsis, HIT, pregnancy/postpartum emergencies, and marrow failure or acute leukemia. These are the diagnoses where delay changes outcome.',
+        },
+        {
+            heading: '4. Classify the mechanism',
+            body: 'If the dangerous screen is negative, sort by pattern: isolated immune destruction, drug-induced thrombocytopenia, liver/splenic sequestration, alcohol or marrow suppression, infection/systemic illness, or chronic baseline.',
+        },
+        {
+            heading: '5. Disposition by risk, not by number alone',
+            body: 'Admission is usually needed for bleeding, suspected TTP/TMA, DIC, HIT requiring non-heparin anticoagulation, pregnancy danger patterns, blasts/pancytopenia, platelets <10k, rapidly falling counts, unreliable follow-up, or need for IVIG/transfusion/procedure.',
+        },
+    ],
+    citations: THROMBOCYTOPENIA_CITATIONS,
+};
+const THROMBOCYTOPENIA_DIFFERENTIAL_GUIDE = {
+    id: 'thrombocytopenia-differential-guide',
+    title: 'Thrombocytopenia Differential',
+    subtitle: 'Pattern recognition for the ED',
+    sections: [
+        {
+            heading: 'Artifact',
+            body: 'Pseudothrombocytopenia: platelet clumping on smear, unexpected isolated low count, no bleeding phenotype. Repeat in citrate or heparin tube.',
+        },
+        {
+            heading: 'Destruction or immune consumption',
+            body: 'ITP, drug-induced immune thrombocytopenia, HIT, TTP/TMA, DIC, post-transfusion purpura, autoimmune disease, viral-associated immune thrombocytopenia.',
+        },
+        {
+            heading: 'Production failure',
+            body: 'Acute leukemia, aplastic anemia, myelodysplastic syndrome, chemotherapy/radiation, marrow infiltration, alcohol, B12/folate deficiency, severe infection, medication marrow suppression.',
+        },
+        {
+            heading: 'Sequestration or dilution',
+            body: 'Cirrhosis with portal hypertension, splenomegaly, hypersplenism, massive transfusion, pregnancy-related dilution, chronic liver disease.',
+        },
+        {
+            heading: 'Pregnancy and postpartum diagnoses',
+            body: 'Gestational thrombocytopenia is mild and well appearing. Severe thrombocytopenia, hypertension, RUQ pain, headache, renal injury, hemolysis, elevated LFTs, or bleeding should trigger HELLP, preeclampsia, AFLP, TTP/HUS, DIC, and ITP evaluation.',
+        },
+    ],
+    citations: THROMBOCYTOPENIA_CITATIONS,
+};
+const THROMBOCYTOPENIA_LABS_GUIDE = {
+    id: 'thrombocytopenia-labs-guide',
+    title: 'Thrombocytopenia Lab Stack',
+    subtitle: 'What to send, and what each pattern means',
+    sections: [
+        {
+            heading: 'Core labs',
+            body: 'Repeat CBC with differential, peripheral smear, CMP with creatinine and LFTs, PT/INR, aPTT, fibrinogen, D-dimer when ill/bleeding/pregnant or DIC concern, type and screen when severe or bleeding, pregnancy test when applicable.',
+        },
+        {
+            heading: 'TMA / hemolysis labs',
+            body: 'LDH, haptoglobin, indirect bilirubin, reticulocyte count, urinalysis, creatinine, and smear for schistocytes. Send ADAMTS13 activity/inhibitor before plasma exposure if feasible, but do not delay hematology escalation.',
+        },
+        {
+            heading: 'HIT labs',
+            body: 'Use 4Ts before testing. Low 4Ts should generally not be tested. Intermediate/high probability: stop heparin, send PF4/heparin immunoassay, and confirm with functional assay such as serotonin release assay when needed.',
+        },
+        {
+            heading: 'Isolated unexplained thrombocytopenia',
+            body: 'Add HIV and hepatitis C testing when unexplained. Add B12/folate, thyroid testing, autoimmune testing, tickborne/travel testing, or imaging for splenomegaly only when the clinical pattern supports it.',
+        },
+    ],
+    citations: THROMBOCYTOPENIA_CITATIONS,
+};
+const THROMBOCYTOPENIA_TRANSFUSION_GUIDE = {
+    id: 'thrombocytopenia-transfusion-guide',
+    title: 'Platelet Transfusion Guide',
+    subtitle: 'Clinical targets, exceptions, and product response',
+    sections: [
+        {
+            heading: 'Common platelet targets',
+            body: '- Stable hypoproliferative thrombocytopenia: prophylaxis often at <10k.\n- Fever, sepsis, rapid fall, or added bleeding risk: consider <20k.\n- Active major bleeding or most invasive procedures: target at least 50k.\n- CNS bleeding, posterior eye bleeding, neurosurgery, or critical-site procedure: often target 100k with specialist input.',
+        },
+        {
+            heading: 'Do not reflexively transfuse',
+            body: 'Avoid routine platelet transfusion in suspected TTP/TMA or HIT unless there is life-threatening bleeding or an urgent invasive procedure. In ITP, platelet transfusion is usually reserved for life-threatening bleeding or urgent procedure and should be paired with disease-directed therapy such as IVIG and corticosteroids.',
+        },
+        {
+            heading: 'Expected response',
+            body: 'One adult apheresis unit often raises platelets by about 30k to 60k in a non-consuming patient. Response is lower with immune destruction, DIC, sepsis, splenomegaly, fever, ongoing bleeding, or alloimmunization.',
+        },
+        {
+            heading: 'Reassess',
+            body: 'Recheck CBC 10 to 60 minutes after transfusion when the response matters. Trend fibrinogen, PT/aPTT, calcium, temperature, pH, and bleeding source in major hemorrhage.',
+        },
+    ],
+    citations: THROMBOCYTOPENIA_CITATIONS,
+};
+const THROMBOCYTOPENIA_HIT_GUIDE = {
+    id: 'thrombocytopenia-hit-guide',
+    title: 'HIT Quick Guide',
+    subtitle: '4Ts first, then test and anticoagulate by probability',
+    sections: [
+        {
+            heading: 'When to suspect HIT',
+            body: 'Platelet fall usually begins 5 to 10 days after heparin exposure, or sooner with recent exposure. Clues include >50% platelet fall, new thrombosis, skin necrosis, anaphylactoid reaction after IV heparin, and absence of a better explanation.',
+        },
+        {
+            heading: '4Ts score interpretation',
+            body: 'Low probability 4Ts 0 to 3: HIT unlikely, avoid reflex testing. Intermediate/high probability 4Ts 4 to 8: stop all heparin products, send PF4/heparin immunoassay, and start a non-heparin anticoagulant unless bleeding risk prohibits it.',
+        },
+        {
+            heading: 'Treatment frame',
+            body: 'Non-heparin options include argatroban, bivalirudin, fondaparinux, or selected DOAC pathways depending on acuity, renal/hepatic function, thrombosis burden, procedure needs, and local protocol. Do not start warfarin until platelet recovery.',
+        },
+        {
+            heading: 'Platelets',
+            body: 'Do not transfuse platelets routinely in HIT. Reserve for life-threatening bleeding or urgent invasive procedure after specialist discussion.',
+        },
+    ],
+    citations: THROMBOCYTOPENIA_CITATIONS,
+};
+const THROMBOCYTOPENIA_ITP_GUIDE = {
+    id: 'thrombocytopenia-itp-guide',
+    title: 'ITP ED Guide',
+    subtitle: 'Diagnosis of exclusion, treatment by bleeding and risk',
+    sections: [
+        {
+            heading: 'Pattern',
+            body: 'ITP is isolated thrombocytopenia with otherwise reassuring CBC and smear after exclusion of TTP/TMA, DIC, HIT, pregnancy emergencies, marrow disease, infection, liver/spleen disease, and drug-induced thrombocytopenia.',
+        },
+        {
+            heading: 'No or minor bleeding',
+            body: 'Adults with platelets generally >=30k and no significant bleeding are often observed with close hematology follow-up rather than treated immediately.',
+        },
+        {
+            heading: 'When ED treatment is more likely',
+            body: 'Platelets <30k, significant mucosal bleeding, wet purpura, high-risk anticoagulated patient, critical bleeding, urgent procedure, or unreliable follow-up should prompt hematology discussion. Corticosteroids are common first-line therapy; IVIG is used when a faster platelet rise is needed.',
+        },
+        {
+            heading: 'Critical bleeding',
+            body: 'Use platelet transfusion only for life-threatening bleeding or urgent procedure, typically with IVIG plus corticosteroids because transfused platelets are rapidly destroyed.',
+        },
+    ],
+    citations: THROMBOCYTOPENIA_CITATIONS,
+};
+const THROMBOCYTOPENIA_DISPO_GUIDE = {
+    id: 'thrombocytopenia-dispo-guide',
+    title: 'Thrombocytopenia Disposition',
+    subtitle: 'Who can go home, who needs admission, who needs transfer',
+    sections: [
+        {
+            heading: 'Admit or transfer',
+            body: 'Admit or transfer for critical bleeding, recurrent bleeding, suspected TTP/TMA, DIC, intermediate/high probability HIT requiring non-heparin anticoagulation, pregnancy/postpartum danger pattern, blasts/pancytopenia, suspected acute leukemia/APL, severe sepsis, neurologic symptoms, renal injury, rapidly falling platelets, platelets <10k, or unreliable follow-up.',
+        },
+        {
+            heading: 'Observation can fit',
+            body: 'Observation is useful for uncertain trends, pending smear/coag/hemolysis labs, moderate thrombocytopenia with risk factors, post-transfusion response checks, medication washout, or heme/onc planning when the patient is not clearly safe for discharge.',
+        },
+        {
+            heading: 'Possible discharge',
+            body: 'Consider discharge only when the patient is well appearing, has no active bleeding or wet purpura, no schistocytes or blasts, no DIC/HIT/TMA/pregnancy danger pattern, noncritical stable platelet count or clear chronic explanation, medication review completed, and reliable near-term follow-up.',
+        },
+        {
+            heading: 'Return precautions',
+            body: 'Return immediately for headache, confusion, focal neurologic symptoms, syncope, melena, hematemesis, hematuria, heavy vaginal bleeding, mucosal bleeding, wet purpura, fever, chest pain, dyspnea, new limb swelling/pain, or worsening weakness.',
+        },
+    ],
+    citations: THROMBOCYTOPENIA_CITATIONS,
+};
 const COAG_THROMBOPHILIA_PANEL = {
     id: 'coag-thrombophilia-panel',
     title: 'Hypercoag Workup',
@@ -24824,6 +25009,14 @@ export const INFO_PAGES = {
     'ttp-steps': TTP_STEPS_SUMMARY,
     'ttp-tma-ddx': TTP_TMA_DDX,
     'ttp-treatment': TTP_TREATMENT_SUMMARY,
+    // Thrombocytopenia
+    'thrombocytopenia-steps': THROMBOCYTOPENIA_STEPS,
+    'thrombocytopenia-differential-guide': THROMBOCYTOPENIA_DIFFERENTIAL_GUIDE,
+    'thrombocytopenia-labs-guide': THROMBOCYTOPENIA_LABS_GUIDE,
+    'thrombocytopenia-transfusion-guide': THROMBOCYTOPENIA_TRANSFUSION_GUIDE,
+    'thrombocytopenia-hit-guide': THROMBOCYTOPENIA_HIT_GUIDE,
+    'thrombocytopenia-itp-guide': THROMBOCYTOPENIA_ITP_GUIDE,
+    'thrombocytopenia-dispo-guide': THROMBOCYTOPENIA_DISPO_GUIDE,
     // DIC
     'dic-steps': DIC_STEPS_SUMMARY,
     'dic-product-thresholds': DIC_PRODUCT_THRESHOLDS,

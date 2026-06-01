@@ -1311,6 +1311,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'acr-start',
             },
             {
+                id: 'thrombocytopenia',
+                title: 'Thrombocytopenia',
+                subtitle: 'Confirm → Bleeding → TTP / DIC / HIT → Mechanism → Transfusion → Disposition',
+                categoryId: 'heme-onc',
+                version: '1.0',
+                nodeCount: 23,
+                entryNodeId: 'thrombocytopenia-start',
+            },
+            {
                 id: 'ttp',
                 title: 'Thrombotic Thrombocytopenic Purpura (TTP)',
                 subtitle: 'Recognition → PLASMIC Score → ADAMTS13 → Plasma Exchange → Caplacizumab → Disposition',

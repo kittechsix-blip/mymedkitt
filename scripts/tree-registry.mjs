@@ -250,6 +250,7 @@ export const TREE_REGISTRY = {
   'post-rosc':        { prefix: 'POST_ROSC',           entryNodeId: 'rosc-start',           categoryId: 'cardiology' },
   'asthma-exacerbation': { prefix: 'ASTHMA_EXACERBATION', entryNodeId: 'asthma-start', categoryId: 'critical-care' },
   'adult-uti':        { prefix: 'ADULT_UTI',           entryNodeId: 'uti-start',           categoryId: 'em' },
+  'thrombocytopenia': { prefix: 'THROMBOCYTOPENIA',    entryNodeId: 'thrombocytopenia-start', categoryId: 'heme-onc' },
   'ttp':              { prefix: 'TTP',                 entryNodeId: 'ttp-start',          categoryId: 'heme-onc' },
   'dic':              { prefix: 'DIC',                 entryNodeId: 'dic-start',          categoryId: 'heme-onc' },
   'coagulation-cascade': { prefix: 'COAG_CASCADE',     entryNodeId: 'coag-start',         categoryId: 'heme-onc' },

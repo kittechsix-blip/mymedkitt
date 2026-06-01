@@ -1289,6 +1289,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/adult-uti.js');
       return { nodes: m.ADULT_UTI_NODES, entryNodeId: 'uti-start', categoryId: 'urology', moduleLabels: m.ADULT_UTI_MODULE_LABELS, citations: m.ADULT_UTI_CITATIONS, criticalActions: m.ADULT_UTI_CRITICAL_ACTIONS };
     },
+    'thrombocytopenia': async () => {
+      const m = await import('../data/trees/thrombocytopenia.js');
+      return { nodes: m.THROMBOCYTOPENIA_NODES, entryNodeId: 'thrombocytopenia-start', categoryId: 'heme-onc', moduleLabels: m.THROMBOCYTOPENIA_MODULE_LABELS, citations: m.THROMBOCYTOPENIA_CITATIONS, criticalActions: m.THROMBOCYTOPENIA_CRITICAL_ACTIONS };
+    },
     'ttp': async () => {
       const m = await import('../data/trees/ttp.js');
       return { nodes: m.TTP_NODES, entryNodeId: 'ttp-start', categoryId: 'heme-onc', moduleLabels: m.TTP_MODULE_LABELS, citations: m.TTP_CITATIONS, criticalActions: m.TTP_CRITICAL_ACTIONS };
