@@ -31782,7 +31782,8 @@ const PEF_PERCENT_PREDICTED_CALCULATOR = {
                 { label: 'Female', points: 0 },
             ],
         },
-        { name: 'height', label: 'Height', type: 'number', points: 0, unit: 'inches', description: 'Height in inches' },
+        { name: 'height-ft', label: 'Height (feet)', type: 'number', points: 0, unit: 'ft', description: 'Feet portion of height' },
+        { name: 'height-in', label: 'Height (inches)', type: 'number', points: 0, unit: 'in', description: 'Inches portion of height (0-11)' },
         { name: 'measured-pef', label: 'Measured PEF', type: 'number', points: 0, unit: 'L/min', description: 'Actual peak flow measurement' },
     ],
     results: [],
@@ -31794,10 +31795,12 @@ const PEF_PERCENT_PREDICTED_CALCULATOR = {
     computeResult: (values) => {
         const age = values['age'] || 0;
         const sex = values['sex'] || 0; // 1 = male, 0 = female
-        const heightIn = values['height'] || 0;
+        const heightFt = values['height-ft'] || 0;
+        const heightInExtra = values['height-in'] || 0;
+        const heightIn = (heightFt * 12) + heightInExtra; // total inches
         const measuredPef = values['measured-pef'] || 0;
         if (age <= 0 || heightIn <= 0) {
-            return { value: '--', label: 'Enter Values', description: 'Enter age, sex, and height to calculate predicted PEF', colorVar: '--color-text-muted' };
+            return { value: '--', label: 'Enter Values', description: 'Enter age, sex, and height (feet + inches) to calculate predicted PEF', colorVar: '--color-text-muted' };
         }
         // Convert height to cm
         const heightCm = heightIn * 2.54;
