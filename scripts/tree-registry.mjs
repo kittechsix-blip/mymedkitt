@@ -54,6 +54,7 @@ export const TREE_REGISTRY = {
   'sodium-bicarbonate-drip': { prefix: 'SODIUM_BICARBONATE_DRIP', entryNodeId: 'bicarbdrip-start', categoryId: 'pharmacist' },
   'bleeding-av-fistula': { prefix: 'BLEEDING_AV_FISTULA', entryNodeId: 'avfb-start', categoryId: 'nephro-rheum-endo' },
   'infectious-endocarditis': { prefix: 'INFECTIOUS_ENDOCARDITIS', entryNodeId: 'ie-start', categoryId: 'infectious-disease' },
+  'dementia': { prefix: 'DEMENTIA', entryNodeId: 'dementia-start', categoryId: 'neurology' },
   'dementia-agitation': { prefix: 'DEMENTIA_AGITATION', entryNodeId: 'demagit-start', categoryId: 'neurology' },
   'chs':              { prefix: 'CHS',                 entryNodeId: 'chs-start',          categoryId: 'gastroenterology' },
   'pep':              { prefix: 'PEP',                 entryNodeId: 'pep-start',          categoryId: 'infectious-disease' },

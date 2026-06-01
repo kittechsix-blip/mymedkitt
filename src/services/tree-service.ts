@@ -417,6 +417,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/infectious-endocarditis.js');
       return { nodes: m.INFECTIOUS_ENDOCARDITIS_NODES, entryNodeId: 'ie-start', categoryId: 'infectious-disease', moduleLabels: m.INFECTIOUS_ENDOCARDITIS_MODULE_LABELS, citations: m.INFECTIOUS_ENDOCARDITIS_CITATIONS, criticalActions: m.INFECTIOUS_ENDOCARDITIS_CRITICAL_ACTIONS };
     },
+    'dementia': async () => {
+      const m = await import('../data/trees/dementia.js');
+      return { nodes: m.DEMENTIA_NODES, entryNodeId: 'dementia-start', categoryId: 'neurology', moduleLabels: m.DEMENTIA_MODULE_LABELS, citations: m.DEMENTIA_CITATIONS, criticalActions: m.DEMENTIA_CRITICAL_ACTIONS };
+    },
     'dementia-agitation': async () => {
       const m = await import('../data/trees/dementia-agitation.js');
       return { nodes: m.DEMENTIA_AGITATION_NODES, entryNodeId: 'demagit-start', categoryId: 'neurology', moduleLabels: m.DEMENTIA_AGITATION_MODULE_LABELS, citations: m.DEMENTIA_AGITATION_CITATIONS, criticalActions: m.DEMENTIA_AGITATION_CRITICAL_ACTIONS };

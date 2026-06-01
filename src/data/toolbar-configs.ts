@@ -43,6 +43,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'burns',
   'anisocoria',
   'hypoglycemia',
+  'dementia',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -947,6 +948,18 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'sample', label: 'Sample', icon: '🧬', action: 'overlay', target: 'hypoglycemia-critical-sample' },
     { id: 'dispo', label: 'Dispo', icon: '🏁', action: 'jump', target: 'hypoglycemia-disposition' },
     { id: 'pitfalls', label: 'Pitfalls', icon: '⚠️', action: 'overlay', target: 'hypoglycemia-pitfalls' },
+  ],
+  'dementia': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dementia-steps', pinned: true },
+    { id: 'diff', label: 'Diff', icon: '🧩', action: 'overlay', target: 'dementia-differential-guide', pinned: true },
+    { id: 'dx', label: 'Dx', icon: '🧠', action: 'overlay', target: 'dementia-diagnosis-guide', pinned: true },
+    { id: 'agitation', label: 'Agit', icon: '🚨', action: 'route', target: 'dementia-agitation', pinned: true },
+    { id: 'dispo', label: 'Dispo', icon: '🏁', action: 'jump', target: 'dementia-disposition', pinned: true },
+    { id: 'infection', label: 'Infect', icon: '🦠', action: 'overlay', target: 'dementia-infection-guide' },
+    { id: 'safety', label: 'Safety', icon: '🛡️', action: 'overlay', target: 'dementia-safety-guide' },
+    { id: 'workup', label: 'Workup', icon: '🧪', action: 'jump', target: 'dementia-workup-labs' },
+    { id: 'image', label: 'Image', icon: '🧲', action: 'jump', target: 'dementia-imaging' },
+    { id: 'delirium', label: 'Delirium', icon: '🔁', action: 'route', target: 'delirium' },
   ],
   'caustic-ingestion': [
     { id: 'caustic-agent', label: 'Acid/Alkali', icon: '🧪', action: 'calculator', target: 'caustic-agent' },

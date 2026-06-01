@@ -9983,6 +9983,136 @@ const HYPOGLYCEMIA_PITFALLS_PAGE = {
         { num: 3, text: 'EMCrit Project, Internet Book of Critical Care. Hypoglycemia.' },
     ],
 };
+const DEMENTIA_STEPS_PAGE = {
+    id: 'dementia-steps',
+    title: 'Dementia Steps',
+    subtitle: 'ED approach to new cognitive concern',
+    sections: [
+        {
+            heading: '1. Delirium first',
+            body: 'Acute onset, fluctuation, inattention, altered arousal, or sudden loss of baseline function is delirium or medical illness until proven otherwise. Check glucose, oxygenation, vitals, temperature, medication/toxin exposure, pain, urinary retention, constipation, trauma, stroke signs, seizure, and infection clues.',
+        },
+        {
+            heading: '2. Put the differential before the label',
+            body: 'Dementia is a syndrome. Consider Alzheimer disease, vascular cognitive impairment, Lewy body dementia, frontotemporal dementia, Parkinson disease dementia, normal pressure hydrocephalus, depression, sleep apnea, sensory impairment, medication toxicity, alcohol/substance effects, B12/thyroid/metabolic disease, and rapidly progressive neurologic disease.',
+        },
+        {
+            heading: '3. Get collateral and functional baseline',
+            body: 'Ask family, caregiver, facility, or prior records about baseline cognition, time course, ADLs, IADLs, medication management, finances, driving, wandering, falls, stove/firearms, scams, caregiver capacity, and supervision. Functional loss is the line between cognitive concern/MCI and dementia-level impairment.',
+        },
+        {
+            heading: '4. Use cognitive testing as documentation',
+            body: 'Mini-Cog, MoCA, SLUMS, clock drawing, or brief recall/attention testing can support the assessment, but no single ED screen diagnoses dementia. Note hearing, vision, language, education, pain, intoxication, delirium, and fatigue.',
+        },
+        {
+            heading: '5. Decide safe disposition',
+            body: 'Discharge requires medical stability, reliable supervision, medication safety, ability to eat and transfer/ambulate safely, no active wandering or dangerous behavior, and follow-up. Observe, admit, or arrange protected placement when delirium, falls, caregiver failure, unsafe home, poor intake, agitation danger, or capacity limits make discharge unsafe.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Alzheimer\'s Association. Clinical Practice Guideline for the Diagnostic Evaluation, Testing, Counseling, and Disclosure of Suspected Alzheimer\'s Disease and Related Disorders. Alzheimers Dement. 2024.' },
+        { num: 2, text: 'NICE Guideline NG97. Dementia: assessment, management and support for people living with dementia and their carers.' },
+        { num: 3, text: 'NICE Clinical Guideline CG103. Delirium: prevention, diagnosis and management in hospital and long-term care.' },
+    ],
+};
+const DEMENTIA_DIFFERENTIAL_GUIDE = {
+    id: 'dementia-differential-guide',
+    title: 'Dementia Differential',
+    subtitle: 'Pattern recognition plus reversible contributors',
+    sections: [
+        {
+            heading: 'Neurodegenerative and vascular patterns',
+            body: '- Alzheimer disease: gradual episodic memory and learning decline.\n- Vascular cognitive impairment: executive dysfunction, stepwise decline, stroke/TIA history, focal signs.\n- Lewy body dementia: fluctuation, visual hallucinations, REM sleep behavior disorder, parkinsonism, neuroleptic sensitivity.\n- Frontotemporal dementia: early behavior, personality, disinhibition, apathy, compulsions, or language-predominant syndrome.\n- Parkinson disease dementia: parkinsonism established before cognitive syndrome.',
+        },
+        {
+            heading: 'Do-not-miss mimics',
+            body: '- Delirium from infection, hypoxia, dehydration, metabolic disease, medication toxicity, pain, retention, constipation, intoxication, or withdrawal.\n- Stroke/TIA, ICH/subdural, seizure, CNS infection, tumor, normal pressure hydrocephalus.\n- Depression, grief, psychosis, sleep apnea, severe hearing/vision loss, isolation.\n- B12 deficiency, thyroid disease, renal/hepatic failure, sodium/calcium disorders, alcohol use disorder.',
+        },
+        {
+            heading: 'Escalate atypical or rapid decline',
+            body: 'Weeks-to-months decline, young onset, focal deficits, seizures, myoclonus, ataxia, early parkinsonism, severe headache, cancer/immunosuppression, systemic inflammatory symptoms, or prominent gait-first presentation should trigger a higher urgency diagnostic pathway.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Alzheimer\'s Association. Clinical Practice Guideline for the Diagnostic Evaluation, Testing, Counseling, and Disclosure of Suspected Alzheimer\'s Disease and Related Disorders. Alzheimers Dement. 2024.' },
+        { num: 2, text: 'NICE Guideline NG97. Dementia: assessment, management and support for people living with dementia and their carers.' },
+        { num: 3, text: 'Petersen RC, et al. Practice guideline update summary: Mild cognitive impairment. Neurology. 2018;90(3):126-135.' },
+    ],
+};
+const DEMENTIA_DIAGNOSIS_GUIDE = {
+    id: 'dementia-diagnosis-guide',
+    title: 'Diagnosis Comfort',
+    subtitle: 'When to say suspected dementia',
+    sections: [
+        {
+            heading: 'Minimum clinical confidence set',
+            body: 'Use "suspected dementia" or "major neurocognitive disorder pattern" when there is acquired decline from prior baseline, persistent/progressive course, objective cognitive abnormality, functional impact on IADLs or ADLs, collateral support, and reasonable exclusion of delirium or major reversible mimics.',
+        },
+        {
+            heading: 'MCI versus dementia',
+            body: 'Mild cognitive impairment has objective cognitive concern but preserved functional independence. Dementia-level impairment means cognition is interfering with independence: meds, finances, cooking, shopping, transportation, phone use, bathing, dressing, toileting, eating, or safe supervision.',
+        },
+        {
+            heading: 'ED documentation language',
+            body: 'Preferred wording: "Pattern concerning for dementia; formal outpatient longitudinal evaluation is needed to confirm type and stage." Avoid diagnosing a dementia subtype from one acute visit unless prior documentation already supports it.',
+        },
+        {
+            heading: 'Do not diagnose during delirium',
+            body: 'An abnormal cognitive screen during infection, intoxication, withdrawal, severe pain, hypoxia, metabolic derangement, or acute hospitalization documents impairment today. It does not establish chronic dementia until the acute syndrome resolves and baseline is reassessed.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Alzheimer\'s Association. Clinical Practice Guideline for the Diagnostic Evaluation, Testing, Counseling, and Disclosure of Suspected Alzheimer\'s Disease and Related Disorders. Alzheimers Dement. 2024.' },
+        { num: 2, text: 'NICE Guideline NG97. Dementia: assessment, management and support for people living with dementia and their carers.' },
+        { num: 3, text: 'Petersen RC, et al. Practice guideline update summary: Mild cognitive impairment. Neurology. 2018;90(3):126-135.' },
+    ],
+};
+const DEMENTIA_INFECTION_GUIDE = {
+    id: 'dementia-infection-guide',
+    title: 'Dementia Infection Edge Cases',
+    subtitle: 'Avoid the automatic UTI trap',
+    sections: [
+        {
+            heading: 'Confusion alone is not a UTI',
+            body: 'Older adults with dementia can have bacteriuria without infection. IDSA recommends assessment for other causes and observation rather than antibiotics when bacteriuria occurs with delirium/confusion but without urinary symptoms or systemic infection signs.',
+        },
+        {
+            heading: 'Treat when syndrome supports infection',
+            body: 'Treat when there are urinary symptoms, flank or suprapubic pain, catheter obstruction/trauma, fever, hypothermia, sepsis physiology, leukocytosis with clinical source, respiratory findings, cellulitis/wound, abdominal source, meningismus, or another convincing source pattern.',
+        },
+        {
+            heading: 'Parallel delirium support',
+            body: 'Correct dehydration, hypoxia, fever, pain, urinary retention, constipation, medication toxicity, and sleep disruption. Avoid anticholinergics, benzodiazepines, and sedatives unless specifically indicated.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Nicolle LE, et al. Clinical Practice Guideline for the Management of Asymptomatic Bacteriuria: 2019 Update by IDSA. Clin Infect Dis. 2019;68(10):e83-e110.' },
+        { num: 2, text: 'NICE Clinical Guideline CG103. Delirium: prevention, diagnosis and management in hospital and long-term care.' },
+    ],
+};
+const DEMENTIA_SAFETY_GUIDE = {
+    id: 'dementia-safety-guide',
+    title: 'Dementia Safety and Dispo',
+    subtitle: 'Complications that change ED disposition',
+    sections: [
+        {
+            heading: 'High-risk discharge blockers',
+            body: '- Active delirium or unstable medical illness.\n- Unsafe gait, recurrent falls, inability to transfer, unsafe ambulation.\n- Wandering, elopement, stove/firearms/driving risk.\n- Medication mismanagement with insulin, anticoagulants, opioids, sedatives, or polypharmacy.\n- Poor intake, dehydration, dysphagia, aspiration risk, failure to thrive.\n- No reliable caregiver, caregiver burnout, suspected neglect, abuse, or exploitation.\n- Lacks capacity for discharge decision and no safe surrogate plan.',
+        },
+        {
+            heading: 'Discharge safety bundle',
+            body: '- Confirm supervision and transportation.\n- Review medication list and remove high-risk nonessential deliriogenic meds when possible.\n- Give caregiver return precautions.\n- Arrange PCP/geriatrics/neurology/neuropsychology follow-up.\n- Address driving, weapons, wandering, stove safety, fall risk, hydration, nutrition, and med administration.',
+        },
+        {
+            heading: 'When to involve support services',
+            body: 'Use case management/social work for caregiver failure, placement, home health, APS concern, food/med access, transportation, or unsafe discharge. Use PT/OT for gait, transfer, falls, DME, or rehab/SNF questions. Use pharmacy for medication simplification and high-risk drug reconciliation.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'NICE Guideline NG97. Dementia: assessment, management and support for people living with dementia and their carers.' },
+        { num: 2, text: 'American Geriatrics Society 2023 Updated AGS Beers Criteria for Potentially Inappropriate Medication Use in Older Adults. J Am Geriatr Soc. 2023;71(7):2052-2081.' },
+    ],
+};
 const DM_SUMMARY = {
     id: 'dm-summary',
     title: 'Diabetes Management',
@@ -24567,6 +24697,11 @@ export const INFO_PAGES = {
     'hypoglycemia-differential-guide': HYPOGLYCEMIA_DIFFERENTIAL_GUIDE,
     'hypoglycemia-critical-sample': HYPOGLYCEMIA_CRITICAL_SAMPLE_PAGE,
     'hypoglycemia-pitfalls': HYPOGLYCEMIA_PITFALLS_PAGE,
+    'dementia-steps': DEMENTIA_STEPS_PAGE,
+    'dementia-differential-guide': DEMENTIA_DIFFERENTIAL_GUIDE,
+    'dementia-diagnosis-guide': DEMENTIA_DIAGNOSIS_GUIDE,
+    'dementia-infection-guide': DEMENTIA_INFECTION_GUIDE,
+    'dementia-safety-guide': DEMENTIA_SAFETY_GUIDE,
     'dm-summary': DM_SUMMARY,
     'dm-insulin-discharge': DM_INSULIN_DISCHARGE,
     'dm-oral-discharge': DM_ORAL_DISCHARGE,

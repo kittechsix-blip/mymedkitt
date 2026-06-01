@@ -29,6 +29,8 @@ const CLINICAL_SYNONYMS = {
     'intubation': ['rsi', 'airway', 'etomidate', 'rocuronium', 'tube'],
     'dka': ['diabetic ketoacidosis', 'hyperglycemia', 'insulin', 'bicarb'],
     'hypoglycemia': ['low blood sugar', 'low glucose', 'dextrose', 'd50', 'd10', 'glucagon', 'sulfonylurea', 'glipizide', 'glyburide', 'glimepiride', 'octreotide', 'insulin overdose', 'recurrent hypoglycemia', 'diabetes', 'endocrine', 'critical sample'],
+    'dementia': ['memory loss', 'memory problem', 'cognitive decline', 'cognitive impairment', 'new dementia', 'suspected dementia', 'major neurocognitive disorder', 'mild cognitive impairment', 'mci', 'alzheimer', 'alzheimers', 'alzheimer disease', 'vascular dementia', 'lewy body', 'frontotemporal dementia', 'nph', 'wandering', 'caregiver', 'caregiver failure', 'unsafe home', 'delirium first', 'confusion chronic', 'agitation dementia'],
+    'dementia-agitation': ['dementia agitation', 'agitated dementia', 'behavior crisis dementia', 'lewy body agitation', 'parkinson dementia agitation', 'capacity dementia', 'wandering agitation', 'sundowning'],
     'syncope': ['passed out', 'fainted', 'loss of consciousness', 'loc'],
     'meningitis': ['meningeal', 'lumbar puncture', 'lp', 'csf'],
     'syphilis': ['neurosyphilis', 'treponemal', 'rpr', 'vdrl'],

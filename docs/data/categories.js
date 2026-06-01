@@ -1793,6 +1793,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'delirium-start',
             },
             {
+                id: 'dementia',
+                title: 'Dementia',
+                subtitle: 'Delirium First -> Differential -> Diagnosis Comfort -> Workup -> Complications -> Disposition',
+                categoryId: 'neurology',
+                version: '1.0',
+                nodeCount: 21,
+                entryNodeId: 'dementia-start',
+            },
+            {
                 id: 'dementia-agitation',
                 title: 'Dementia & Agitation',
                 subtitle: 'Safety → Medical Triggers → Capacity → Texas Law → Meds → Disposition',
