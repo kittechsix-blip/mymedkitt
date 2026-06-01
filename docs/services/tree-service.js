@@ -506,6 +506,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/burns.js');
             return { nodes: m.BURNS_NODES, entryNodeId: 'burn-start', categoryId: 'trauma-surg', moduleLabels: m.BURNS_MODULE_LABELS, citations: m.BURNS_CITATIONS, criticalActions: m.BURNS_CRITICAL_ACTIONS };
         },
+        'sjs-ten': async () => {
+            const m = await import('../data/trees/sjs-ten.js');
+            return { nodes: m.SJS_TEN_NODES, entryNodeId: 'sjs-ten-start', categoryId: 'emergency-medicine', moduleLabels: m.SJS_TEN_MODULE_LABELS, citations: m.SJS_TEN_CITATIONS };
+        },
         'psych-assessment': async () => {
             const m = await import('../data/trees/psych-assessment.js');
             return { nodes: m.PSYCH_ASSESSMENT_NODES, entryNodeId: 'psych-start', categoryId: 'psychiatry', moduleLabels: m.PSYCH_ASSESSMENT_MODULE_LABELS, citations: m.PSYCH_ASSESSMENT_CITATIONS, criticalActions: m.PSYCH_ASSESSMENT_CRITICAL_ACTIONS };

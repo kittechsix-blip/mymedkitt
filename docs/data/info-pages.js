@@ -24804,7 +24804,131 @@ const PZR_UROLOGY_TEMPLATE_PAGE = {
         { num: 2, text: 'AUA Guidelines portal. auanet.org/guidelines-and-quality/guidelines.' },
     ],
 };
+// -------------------------------------------------------------------
+// SJS / TEN info pages
+// -------------------------------------------------------------------
+const SJS_TEN_SUMMARY_PAGE = {
+    id: 'sjs-ten-summary',
+    title: 'SJS / TEN — Steps Summary',
+    subtitle: 'Quick Reference',
+    sections: [
+        {
+            body: 'Stepwise approach to suspected Stevens-Johnson syndrome / toxic epidermal necrolysis. Tap any step to jump to that section of the consult.',
+        },
+        {
+            heading: '1. Recognize',
+            body: '• [Painful skin + URI-like prodrome — "the rash that hurts"](#/node/sjs-ten-exam)\n• [Nikolsky / Asboe-Hansen signs, ≥2 mucosal sites](#/node/sjs-ten-exam)',
+        },
+        {
+            heading: '2. Classify',
+            body: '• [EM vs SJS vs overlap vs TEN by % BSA detachment](#/node/sjs-ten-classify)\n• [EM is a distinct entity; MIRM/RIME in kids](#/node/sjs-ten-classify)',
+        },
+        {
+            heading: '3. Stop the Culprit',
+            body: '• [Stop the drug now — review last 4–8 weeks](#/node/sjs-ten-culprit)\n• [High-risk: allopurinol, anticonvulsants, sulfa, NSAIDs](#/node/sjs-ten-culprit)',
+        },
+        {
+            heading: '4. Score',
+            body: '• [SCORTEN — day 1 AND day 3](#/node/sjs-ten-scorten-node)',
+        },
+        {
+            heading: '5. Support',
+            body: '• [⅔-Parkland fluid, titrate to UOP 0.5–1 mL/kg/hr](#/node/sjs-ten-supportive)\n• [Urgent ophthalmology, mucosal/wound care, NO prophylactic abx](#/node/sjs-ten-supportive)',
+        },
+        {
+            heading: '6–7. Treat & Disposition',
+            body: '• [Adjuvant therapy is derm-guided (weak evidence)](#/node/sjs-ten-dmt)\n• [>10% BSA → ICU; TEN → burn center](#/node/sjs-ten-dispo)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Creamer D, et al. U.K. guidelines for the management of SJS/TEN in adults 2016. Br J Dermatol. 2016;174(6):1194-1227.' },
+    ],
+};
+const SJS_TEN_IMAGES_PAGE = {
+    id: 'sjs-ten-images',
+    title: 'What It Looks Like',
+    subtitle: 'EM · SJS · TEN',
+    sections: [
+        {
+            heading: 'Erythema Multiforme',
+            image: { src: 'images/sjs-ten/em-target-lesion.jpg', alt: 'Erythema multiforme target lesion on forearm', caption: 'Classic target (bulls-eye) lesion of erythema multiforme — three concentric zones, acral. Alborz Fallah, CC BY-SA 3.0, via Wikimedia Commons.' },
+            body: 'Typical target lesions — three concentric zones, <3 cm, well-defined, acral. Nikolsky-negative. EM is infection-driven (HSV) and is **not** on the SJS/TEN spectrum.',
+        },
+        {
+            heading: 'Stevens-Johnson Syndrome',
+            image: { src: 'images/sjs-ten/sjs-mucosal.jpg', alt: 'Mucosal desquamation of the lips in Stevens-Johnson syndrome', caption: 'Hemorrhagic crusting and mucosal desquamation of the lips in SJS. James Heilman, MD, CC BY-SA 3.0, via Wikimedia Commons.' },
+            body: 'Hemorrhagic crusting of the lips and mucosal desquamation. Mucosal involvement at ≥2 sites is characteristic of SJS/TEN.',
+        },
+        {
+            heading: 'Toxic Epidermal Necrolysis',
+            image: { src: 'images/sjs-ten/ten-sloughing.jpg', alt: 'Widespread epidermal sloughing in toxic epidermal necrolysis', caption: 'Widespread epidermal detachment / sloughing in TEN (>30% BSA). AfroBrazilian, CC BY-SA 3.0, via Wikimedia Commons.' },
+            body: 'Confluent dusky skin with full-thickness epidermal detachment — Nikolsky-positive. >30% BSA defines TEN.',
+        },
+        {
+            heading: 'TEN — Healing Phase',
+            image: { src: 'images/sjs-ten/ten-day10.jpg', alt: 'Toxic epidermal necrolysis on the back, day 10', caption: 'TEN on the back at day 10 of illness. Jay2Base, CC BY-SA 4.0, via Wikimedia Commons.' },
+            body: 'Extensive epidermal loss on the back during the subacute phase.',
+        },
+    ],
+    citations: [],
+};
+const SJS_TEN_EM_COMPARE_PAGE = {
+    id: 'sjs-ten-em-compare',
+    title: 'EM vs SJS/TEN',
+    subtitle: 'Two different diseases',
+    sections: [
+        {
+            body: '**Erythema multiforme is not "mild SJS."** It is a distinct entity with different pathophysiology, distribution, and prognosis.',
+        },
+        {
+            heading: 'Erythema Multiforme',
+            body: '• **Trigger:** infection — HSV (dominant), Mycoplasma\n• **Lesions:** *typical* targets — 3 concentric zones, <3 cm, well-defined\n• **Distribution:** acral (dorsal hands/feet) → proximal\n• **Nikolsky:** negative\n• **Course:** self-limiting over 1–2 weeks\n• **EM minor** = no/minimal mucosa; **EM major** = mucosa + systemic symptoms (still EM)',
+        },
+        {
+            heading: 'SJS / TEN',
+            body: '• **Trigger:** drugs (4–28 day latency)\n• **Lesions:** dusky/purpuric macules + *flat atypical* targets → detachment\n• **Distribution:** truncal/central, spreading\n• **Nikolsky:** positive\n• **Mucosa:** ≥2 sites in most\n• **Classification:** SJS <10% · overlap 10–30% · TEN >30% BSA detachment',
+        },
+        {
+            heading: 'Bottom line',
+            body: 'Acral typical targets + HSV history + Nikolsky-negative → **EM** (manage as EM). Truncal dusky macules + flat atypical targets + Nikolsky-positive + recent drug → **SJS/TEN** (stop the drug, burn-style supportive care).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Bastuji-Garin S, et al. Clinical classification of TEN, SJS, and erythema multiforme. Arch Dermatol. 1993;129(1):92-96.' },
+    ],
+};
+const SJS_TEN_CULPRITS_PAGE = {
+    id: 'sjs-ten-culprits',
+    title: 'Culprit Drugs',
+    subtitle: 'High-risk medications & latency',
+    sections: [
+        {
+            body: '**Stop the culprit drug immediately** — earlier withdrawal of short-half-life drugs lowers mortality. Typical latency from first exposure to onset is **4–28 days** (anticonvulsants up to ~8 weeks). Review all new drugs in the prior 4–8 weeks.',
+        },
+        {
+            heading: 'Highest-risk (RegiSCAR / EuroSCAR)',
+            body: '• **Allopurinol** (HLA-B*58:01)\n• **Anticonvulsants** — carbamazepine (HLA-B*15:02 in Han Chinese/SE Asian), lamotrigine, phenytoin, phenobarbital\n• **Sulfonamide antibiotics** — TMP-SMX (cotrimoxazole), sulfasalazine\n• **Nevirapine**, **abacavir** (HLA-B*57:01)\n• **Oxicam NSAIDs** (e.g., piroxicam, meloxicam)',
+        },
+        {
+            heading: 'Moderate-risk',
+            body: 'Cephalosporins, macrolides, quinolones, tetracyclines, acetic-acid NSAIDs.',
+        },
+        {
+            heading: 'Causality',
+            body: 'Use the **ALDEN algorithm** (latency, drug present at index day, dechallenge/rechallenge, notoriety, alternative causes) when multiple drugs are plausible. Score ≥6 = very probable culprit.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Mockenhaupt M, et al. EuroSCAR study. J Invest Dermatol. 2008;128(1):35-44.' },
+        { num: 2, text: 'Sassolas B, et al. ALDEN algorithm. Clin Pharmacol Ther. 2010;88(1):60-68.' },
+    ],
+};
 export const INFO_PAGES = {
+    // SJS / TEN
+    'sjs-ten-summary': SJS_TEN_SUMMARY_PAGE,
+    'sjs-ten-images': SJS_TEN_IMAGES_PAGE,
+    'sjs-ten-em-compare': SJS_TEN_EM_COMPARE_PAGE,
+    'sjs-ten-culprits': SJS_TEN_CULPRITS_PAGE,
     // Ischemic Limb
     'il-six-ps': IL_SIX_PS,
     'il-stop': IL_STOP,

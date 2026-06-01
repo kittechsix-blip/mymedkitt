@@ -38395,7 +38395,117 @@ const RUTHERFORD_ALI_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// SCORTEN — Severity-of-Illness Score for Toxic Epidermal Necrolysis
+// -------------------------------------------------------------------
+const SCORTEN_CALCULATOR = {
+    id: 'scorten',
+    title: 'SCORTEN',
+    subtitle: 'Severity-of-Illness Score for TEN / SJS',
+    description: 'Seven independent risk factors, 1 point each. Calculate on day 1 AND day 3 of admission — a low early score underestimates risk and never justifies under-treatment. Best discrimination on day 3.',
+    fields: [
+        { name: 'age', label: 'Age > 40 years', type: 'toggle', points: 1 },
+        { name: 'malignancy', label: 'Malignancy present', type: 'toggle', points: 1 },
+        { name: 'hr', label: 'Heart rate > 120 /min', type: 'toggle', points: 1 },
+        { name: 'bsa', label: 'Epidermal detachment > 10% BSA', description: 'Body surface area, assessed day 1', type: 'toggle', points: 1 },
+        { name: 'bun', label: 'BUN > 28 mg/dL', description: 'Serum urea > 10 mmol/L', type: 'toggle', points: 1 },
+        { name: 'glucose', label: 'Glucose > 252 mg/dL', description: 'Serum glucose > 14 mmol/L', type: 'toggle', points: 1 },
+        { name: 'bicarb', label: 'Bicarbonate < 20 mEq/L', description: 'Serum bicarbonate < 20 mmol/L', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'Predicted mortality: 0–1 ≈ 3.2% · 2 ≈ 12.1% · 3 ≈ 35.3% · 4 ≈ 58.3% · ≥5 ≈ 90%. Each point OR 3.45 (95% CI 2.26–5.25).',
+    citations: [
+        'Bastuji-Garin S, Fouchard N, Bertocchi M, Roujeau JC, Revuz J, Wolkenstein P. SCORTEN: a severity-of-illness score for toxic epidermal necrolysis. J Invest Dermatol. 2000;115(2):149-153.',
+        'Guégan S, Bastuji-Garin S, Poszepczynska-Guigné E, Roujeau JC, Revuz J. Performance of the SCORTEN during the first five days of hospitalization. J Invest Dermatol. 2006;126(2):272-276.',
+    ],
+    computeResult: (values) => {
+        const score = (values['age'] || 0) +
+            (values['malignancy'] || 0) +
+            (values['hr'] || 0) +
+            (values['bsa'] || 0) +
+            (values['bun'] || 0) +
+            (values['glucose'] || 0) +
+            (values['bicarb'] || 0);
+        let mortality;
+        let label;
+        let color;
+        if (score <= 1) {
+            mortality = '≈ 3.2%';
+            label = 'Low predicted mortality';
+            color = '--color-primary';
+        }
+        else if (score === 2) {
+            mortality = '≈ 12.1%';
+            label = 'Moderate predicted mortality';
+            color = '--color-warning';
+        }
+        else if (score === 3) {
+            mortality = '≈ 35.3%';
+            label = 'High predicted mortality';
+            color = '--color-warning';
+        }
+        else if (score === 4) {
+            mortality = '≈ 58.3%';
+            label = 'Very high predicted mortality';
+            color = '--color-danger';
+        }
+        else {
+            mortality = '≈ 90%';
+            label = 'Critical predicted mortality';
+            color = '--color-danger';
+        }
+        return {
+            value: String(score),
+            label,
+            description: `Predicted in-hospital mortality ${mortality}.\n\nRecompute on day 3 — early scores underestimate risk for scores ≥3. A low score does NOT justify under-treating: any >10% BSA detachment needs ICU / burn-center level care.`,
+            colorVar: color,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// TEN Fluid Resuscitation — 2 mL/kg × %BSA detachment (first 24h)
+// -------------------------------------------------------------------
+const TEN_FLUID_CALCULATOR = {
+    id: 'ten-fluid',
+    title: 'TEN Fluid Estimate',
+    subtitle: 'SJS/TEN first-24h crystalloid (≈ ⅔ Parkland)',
+    description: 'SJS/TEN needs LESS fluid than a thermal burn of equal area. Estimate first-24h crystalloid as 2 mL/kg × %BSA detachment, then TITRATE TO URINE OUTPUT 0.5–1 mL/kg/hr. Over-resuscitation causes pulmonary and intestinal edema.',
+    fields: [
+        { name: 'weight', label: 'Weight', type: 'number', points: 0, unit: 'kg', description: 'Patient weight in kilograms' },
+        { name: 'bsa', label: 'Epidermal detachment', type: 'number', points: 0, unit: '% BSA', description: 'Percent body surface area detached / Nikolsky-positive' },
+    ],
+    results: [],
+    thresholdNote: 'Formula: 2 mL/kg × %BSA over first 24h (Shiga & Cartotto, per UK 2016 guideline). This is an estimate — urine output 0.5–1 mL/kg/hr is the real target.',
+    citations: [
+        'Creamer D, Walsh SA, Dziewulski P, et al. U.K. guidelines for the management of Stevens-Johnson syndrome / toxic epidermal necrolysis in adults 2016. Br J Dermatol. 2016;174(6):1194-1227.',
+    ],
+    computeResult: (values) => {
+        const weight = values['weight'] || 0;
+        const bsa = values['bsa'] || 0;
+        if (weight <= 0 || bsa <= 0) {
+            return {
+                value: '--',
+                label: 'Enter weight and %BSA',
+                description: 'Provide patient weight (kg) and percent epidermal detachment to estimate first-24h fluid.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const total = 2 * weight * bsa; // mL over 24h
+        const ratePerHr = total / 24;
+        const uopLow = (0.5 * weight).toFixed(0);
+        const uopHigh = (1 * weight).toFixed(0);
+        return {
+            value: `${Math.round(total).toLocaleString()} mL`,
+            label: 'Estimated first-24h crystalloid',
+            description: `≈ ${Math.round(ratePerHr).toLocaleString()} mL/hr starting rate.\n\nTITRATE TO URINE OUTPUT ${uopLow}–${uopHigh} mL/hr (0.5–1 mL/kg/hr). Do NOT apply full Parkland — SJS/TEN needs ~⅔ of burn fluid; over-resuscitation drives pulmonary and intestinal edema.`,
+            colorVar: '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
+    // SJS/TEN
+    'scorten': SCORTEN_CALCULATOR,
+    'ten-fluid': TEN_FLUID_CALCULATOR,
     // Ischemic Limb (Acute Limb Ischemia & PAD)
     'abi-il': ABI_IL_CALCULATOR,
     'rutherford-acute-limb': RUTHERFORD_ALI_CALCULATOR,

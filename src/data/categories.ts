@@ -480,6 +480,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'anaph-start',
       },
       {
+        id: 'sjs-ten',
+        title: 'Stevens-Johnson Syndrome / TEN',
+        subtitle: 'Recognition → EM vs SJS/TEN → Culprit → SCORTEN → Supportive care → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 10,
+        entryNodeId: 'sjs-ten-start',
+      },
+      {
         id: 'angioedema',
         title: 'Angioedema',
         subtitle: 'Airway → Classification → Histamine vs Bradykinin → Treatment → Disposition',

@@ -46,10 +46,19 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'dementia',
   'unilateral-facial-pain-hub',
   'thrombocytopenia',
+  'sjs-ten',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'sjs-ten': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'sjs-ten-summary', pinned: true },
+    { id: 'scorten', label: 'SCORTEN', icon: '🧮', action: 'calculator', target: 'scorten', pinned: true },
+    { id: 'fluid', label: 'Fluids', icon: '💧', action: 'calculator', target: 'ten-fluid', pinned: true },
+    { id: 'em-vs', label: 'EM vs SJS', icon: '🎯', action: 'overlay', target: 'sjs-ten-em-compare', pinned: true },
+    { id: 'culprits', label: 'Culprits', icon: '💊', action: 'overlay', target: 'sjs-ten-culprits', pinned: true },
+    { id: 'support', label: 'Support', icon: '🩹', action: 'jump', target: 'sjs-ten-supportive' },
+  ],
   'ischemic-limb': [
     { id: 'rutherford', label: 'Rutherford', icon: '📊', action: 'calculator', target: 'rutherford-acute-limb' },
     { id: 'abi', label: 'ABI', icon: '🧮', action: 'calculator', target: 'abi-il' },
