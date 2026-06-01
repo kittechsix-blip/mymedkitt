@@ -375,7 +375,7 @@ export const STROKE_NODES = [
         module: 5,
         title: 'Post-Thrombolysis Management',
         body: '**BP management \u00D7 24h:**\n\u2022 Target <180/105 mmHg\n\u2022 [Labetalol](#/drug/labetalol/stroke) bolus \u00B1 infusion (first-line)\n\u2022 [Nicardipine](#/drug/nicardipine/stroke) infusion (alternative)\n\u2022 [Clevidipine](#/drug/clevidipine/stroke) (if faster titration needed)\n\n**Neuro checks protocol:**\n\u2022 Every 15 min \u00D7 2h\n\u2022 Then every 30 min \u00D7 6h\n\u2022 Then hourly \u00D7 16h\n\u2022 Any decline \u2192 emergent NCCT\n\n**Antithrombotics:**\n\u2022 NO aspirin, heparin, or anticoagulants \u00D7 24h post-thrombolysis\n\u2022 Repeat NCCT at 24h\n\u2022 If no hemorrhage: start antiplatelets',
-        citation: [1, 2],
+        citation: [1, 2, 13],
         treatment: {
             firstLine: {
                 drug: 'Labetalol',

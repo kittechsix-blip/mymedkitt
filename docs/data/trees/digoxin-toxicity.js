@@ -7,7 +7,7 @@ export const DIGOXIN_TOXICITY_CRITICAL_ACTIONS = [
     { text: 'K+ >5.5 mEq/L in digoxin toxicity = DigiFab indicated immediately', nodeId: 'dig-hyperkalemia' },
     { text: 'Avoid cardioversion if possible - can precipitate refractory VF. Use lowest effective energy if absolutely necessary', nodeId: 'dig-tachy' },
     { text: 'Magnesium sulfate 2g IV over 2-5 min first-line for ventricular arrhythmias', nodeId: 'dig-tachy' },
-    { text: 'DigiFab dosing: 10 vials empiric for life-threatening tox, or calculate based on ingestion/level', nodeId: 'dig-fab-dosing' },
+    { text: 'DigiFab dosing: 10-20 vials empiric (acute) or 3-6 vials (chronic), or calculate based on ingestion/level', nodeId: 'dig-fab-dosing' },
     { text: 'Acute ingestion with normal K+ can appear deceptively well before cardiovascular collapse', nodeId: 'dig-acute' },
     { text: 'PAT with block and bidirectional VT are pathognomonic for digoxin toxicity', nodeId: 'dig-ecg' },
     { text: 'Chronic toxicity can occur at therapeutic levels (1-2 ng/mL) with predisposing factors', nodeId: 'dig-chronic' },

@@ -2,7 +2,7 @@
 // Comprehensive 6-module approach to pediatric trauma management in the ED.
 // Initial Assessment -> Hemorrhage Control -> Head Trauma -> Thoracoabdominal -> Orthopedic -> Disposition
 // Sources: ATLS 10th ed, PECARN, AAP, Pediatric Surgery journals
-// 32 nodes total
+// 26 nodes total
 export const PEDS_TRAUMA_CRITICAL_ACTIONS = [
     { text: 'Obtain weight using Broselow tape or formula', nodeId: 'peds-trauma-weight' },
     { text: '20 mL/kg NS/LR bolus if hemodynamically unstable', nodeId: 'peds-trauma-hemorrhage' },

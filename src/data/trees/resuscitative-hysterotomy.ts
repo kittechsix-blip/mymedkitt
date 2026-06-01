@@ -1,7 +1,7 @@
 // MedKitt — Resuscitative Hysterotomy (Perimortem Cesarean Delivery)
 // Time-critical delivery of the fetus during maternal cardiac arrest to restore maternal circulation
 // 6 modules: Recognition → Pre-Arrest Optimization → Arrest Response → 4-Minute Decision → Procedure → Post-Delivery
-// 34 nodes total.
+// 31 nodes total.
 // Primary source: EMCrit — Weingart, Swaminathan (emcrit.org/emcrit/resuscitative-hysterotomy/)
 // Secondary: AHA 2023 Scientific Statement (Circulation); SOAP 2014 Consensus (A&A); Katz 1986; Rose 2015 AJOG; Einav 2012 Resuscitation; ACOG
 
