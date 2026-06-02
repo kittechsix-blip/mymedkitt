@@ -15,7 +15,7 @@ import { sanitizeSearchInput } from './sanitize.js';
 
 export interface SearchDoc {
   id: string;
-  type: 'category' | 'consult' | 'drug' | 'calculator' | 'node';
+  type: 'category' | 'consult' | 'drug' | 'calculator' | 'node' | 'trick';
   title: string;
   subtitle: string;
   keywords: string[];
@@ -25,10 +25,14 @@ export interface SearchDoc {
   // /tree/{treeId}?nodeId={id} when a node body is the match.
   treeId?: string;
   nodeId?: string;
+  // For 'trick' docs only — route to /tricks/{specialtyId}/trick/{anchorId}
+  // so the specialty directory opens with the full trick modal scrolled in.
+  specialtyId?: string;
+  anchorId?: string;
 }
 
 export interface SearchResult {
-  type: 'category' | 'consult' | 'drug' | 'calculator' | 'node';
+  type: 'category' | 'consult' | 'drug' | 'calculator' | 'node' | 'trick';
   label: string;
   sublabel: string;
   route: string;
@@ -73,6 +77,7 @@ let indexedDocs: SearchDoc[] = [];
 // Node-body docs are pre-baked at build time (scripts/build-search-node-index.mjs)
 // and fetched lazily. The flag prevents double-fetching across rapid keystrokes.
 let nodeDocs: SearchDoc[] = [];
+let trickDocs: SearchDoc[] = [];
 let nodeIndexLoading = false;
 let nodeIndexLoaded = false;
 
@@ -85,10 +90,21 @@ interface NodeIndexEntry {
   recommendation: string;
 }
 
+interface NodeTrickEntry {
+  id: string;
+  infoPageId: string;
+  specialtyId: string;
+  specialtyLabel: string;
+  anchorId: string;
+  title: string;
+  blurb: string;
+}
+
 interface NodeIndexFile {
   generated: string;
   count: number;
   nodes: NodeIndexEntry[];
+  tricks?: NodeTrickEntry[];
 }
 
 /** Clinical synonyms for common queries */
@@ -170,8 +186,19 @@ async function loadNodeIndex(): Promise<void> {
       treeId: n.treeId,
       nodeId: n.id,
     }));
+    // Tricks of the Trade — each section becomes a globally searchable doc that
+    // deep-links to /tricks/{specialtyId}/trick/{anchorId}.
+    trickDocs = (data.tricks ?? []).map(t => ({
+      id: `trick-${t.specialtyId}-${t.anchorId}`,
+      type: 'trick' as const,
+      title: t.title,
+      subtitle: `Trick \u2014 ${t.specialtyLabel}`,
+      keywords: [t.blurb, t.specialtyLabel].filter(Boolean),
+      specialtyId: t.specialtyId,
+      anchorId: t.anchorId,
+    }));
     nodeIndexLoaded = true;
-    console.log(`[SearchService] Loaded ${nodeDocs.length} node docs from search-node-index.json`);
+    console.log(`[SearchService] Loaded ${nodeDocs.length} node docs + ${trickDocs.length} trick docs from search-node-index.json`);
     // Rebuild index so subsequent searches include node hits.
     buildSearchIndex();
   } catch (e) {
@@ -245,6 +272,10 @@ export function buildSearchIndex(): void {
   // title-only index; node hits appear after the JSON fetches in.
   if (nodeIndexLoaded && nodeDocs.length > 0) {
     indexedDocs.push(...nodeDocs);
+  }
+  // Tricks of the Trade docs ship in the same lazy index file.
+  if (nodeIndexLoaded && trickDocs.length > 0) {
+    indexedDocs.push(...trickDocs);
   }
 
   // Create Fuse index. Threshold bumped 0.35 -> 0.4 so common transposition
@@ -348,6 +379,15 @@ function docToResult(doc: SearchDoc): SearchResult | null {
         sublabel: doc.subtitle,
         route: `/tree/${doc.treeId}/node/${doc.nodeId}`,
       };
+    case 'trick':
+      // Route via /tricks/:specialtyId/trick/:anchorId — opens the specialty
+      // directory then surfaces the full trick modal scrolled to the anchor.
+      return {
+        type: 'trick',
+        label: doc.title,
+        sublabel: doc.subtitle,
+        route: `/tricks/${doc.specialtyId}/trick/${doc.anchorId}`,
+      };
     default:
       return null;
   }
@@ -357,7 +397,7 @@ function docToResult(doc: SearchDoc): SearchResult | null {
 // Feature 4: Faceted Search with Type Filters
 // ===================================================================
 
-export type SearchFilterType = 'category' | 'consult' | 'drug' | 'calculator' | 'node';
+export type SearchFilterType = 'category' | 'consult' | 'drug' | 'calculator' | 'node' | 'trick';
 
 /** Search with optional type filters */
 export function searchWithFilters(query: string, filters?: SearchFilterType[]): SearchResult[] {
@@ -377,6 +417,7 @@ export function getAvailableFilterTypes(): { type: SearchFilterType; label: stri
     { type: 'consult', label: 'Consults' },
     { type: 'drug', label: 'Drugs' },
     { type: 'calculator', label: 'Calculators' },
+    { type: 'trick', label: 'Tricks' },
   ];
 }
 

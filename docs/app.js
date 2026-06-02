@@ -7,7 +7,7 @@ import { renderSpecialtyView } from './components/specialty-view.js';
 import { renderConsultFlow } from './components/consult-flow.js';
 import { renderLearnHome } from './components/learn-home.js';
 import { renderHubsHome } from './components/hubs-home.js';
-import { renderTricksHome } from './components/tricks-home.js';
+import { renderTricksHome, renderTricksSpecialty } from './components/tricks-home.js';
 import { renderLearnRotation } from './components/learn-rotation.js';
 import { renderLearnCard } from './components/learn-card.js';
 import { renderLearnPreRound } from './components/learn-pre-round.js';
@@ -216,6 +216,12 @@ function handleTricksHome(_params) {
     const main = clearMain();
     renderTricksHome(main);
 }
+function handleTricksSpecialty(params) {
+    removeContextualToolbar();
+    hideGlobalTabBar();
+    const main = clearMain();
+    renderTricksSpecialty(main, params['specialtyId'] ?? '', params['anchorId']);
+}
 function handleLearnRotation(params) {
     removeContextualToolbar();
     hideGlobalTabBar();
@@ -328,6 +334,8 @@ async function init() {
     router.on('/learn', handleLearnHome);
     router.on('/hubs', handleHubsHome);
     router.on('/tricks', handleTricksHome);
+    router.on('/tricks/:specialtyId', handleTricksSpecialty);
+    router.on('/tricks/:specialtyId/trick/:anchorId', handleTricksSpecialty);
     router.on('/learn/:rotationId', handleLearnRotation);
     router.on('/learn/:rotationId/card/:cardId', handleLearnCard);
     router.on('/learn/:rotationId/pre-round', handleLearnPreRound);

@@ -173,6 +173,112 @@ function extractNodesFromTree(src, treeId) {
 }
 
 // ---------------------------------------------------------------------------
+// Tricks of the Trade — scrape the TRICKS_*_PAGE InfoPages so individual tricks
+// are globally searchable (route /tricks/<specialtyId>). Source of truth is the
+// same info-pages.ts the app renders; each section heading = a trick title.
+// ---------------------------------------------------------------------------
+const INFO_PAGES_PATH = path.resolve(PROJECT_ROOT, 'src', 'data', 'info-pages.ts');
+
+// infoPageId -> { specialtyId, label } — mirrors src/data/tricks-registry.ts
+const TRICK_SPECIALTY_MAP = {
+  'tricks-airway': { specialtyId: 'airway', label: 'Airway' },
+  'tricks-procedures': { specialtyId: 'procedures', label: 'Procedures & Access' },
+  'tricks-ent': { specialtyId: 'ent', label: 'ENT' },
+  'tricks-ophtho': { specialtyId: 'ophtho', label: 'Ophthalmology' },
+  'tricks-urology': { specialtyId: 'urology', label: 'Urology' },
+  'tricks-wound': { specialtyId: 'wound', label: 'Wound Care' },
+  'tricks-cardiology': { specialtyId: 'cardiology', label: 'Cardiology' },
+  'tricks-neuro': { specialtyId: 'neuro', label: 'Neurology' },
+  'tricks-tox': { specialtyId: 'tox', label: 'Toxicology' },
+  'tricks-general': { specialtyId: 'general', label: 'General & Diagnostics' },
+  'tricks-ortho': { specialtyId: 'ortho', label: 'Orthopedics' },
+};
+
+// Decode \uXXXX and \xXX escapes captured literally from source so titles and
+// anchors match what the browser renders at runtime (the app sees real chars).
+function decodeEscapes(s) {
+  if (!s) return s;
+  return s
+    .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)))
+    .replace(/\\x([0-9a-fA-F]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+}
+
+function trickAnchor(heading) {
+  return 'trick-' + decodeEscapes(heading)
+    .toLowerCase()
+    .replace(/[\u2018\u2019']/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function blurbFromBody(body) {
+  if (!body) return '';
+  const clean = decodeEscapes(body).replace(/\\n/g, '\n');
+  const m = clean.match(/\*\*Accomplishes:\*\*\s*([\s\S]*?)(?:\s*\[\d+\]|\n|$)/);
+  let blurb = m ? m[1] : clean.split('\n')[0];
+  return cleanForSearch(blurb).slice(0, 160);
+}
+
+function extractTricks(infoSrc) {
+  const tricks = [];
+  for (const [infoPageId, meta] of Object.entries(TRICK_SPECIALTY_MAP)) {
+    // Find: const TRICKS_FOO_PAGE: InfoPage = { ... id: 'tricks-foo' ... sections: [ ... ], citations: [...] };
+    // Locate the page const by its id literal, then capture its sections array.
+    const idRe = new RegExp(`id:\\s*'${infoPageId}'`);
+    const idMatch = infoSrc.match(idRe);
+    if (!idMatch) continue;
+    // From the id position, find the next `sections: [` and capture to the matching `]`.
+    const after = infoSrc.slice(idMatch.index);
+    const secStart = after.indexOf('sections:');
+    if (secStart === -1) continue;
+    const bracketStart = after.indexOf('[', secStart);
+    if (bracketStart === -1) continue;
+    // Walk to the matching close bracket.
+    let depth = 0, end = -1, inS = false, inD = false, inT = false;
+    for (let i = bracketStart; i < after.length; i++) {
+      const ch = after[i];
+      if (inS) { if (ch === '\\') { i++; continue; } if (ch === "'") inS = false; continue; }
+      if (inD) { if (ch === '\\') { i++; continue; } if (ch === '"') inD = false; continue; }
+      if (inT) { if (ch === '\\') { i++; continue; } if (ch === '`') inT = false; continue; }
+      if (ch === "'") { inS = true; continue; }
+      if (ch === '"') { inD = true; continue; }
+      if (ch === '`') { inT = true; continue; }
+      if (ch === '[') depth++;
+      else if (ch === ']') { depth--; if (depth === 0) { end = i; break; } }
+    }
+    if (end === -1) continue;
+    const sectionsBody = after.slice(bracketStart + 1, end);
+    const blocks = splitTopLevelObjects(sectionsBody);
+    for (const block of blocks) {
+      const heading = captureField(block, 'heading');
+      if (!heading) continue;
+      if (/being added daily|coming soon/i.test(heading)) continue;
+      const body = captureField(block, 'body') || '';
+      if (/being added daily|coming soon/i.test(body)) continue;
+      tricks.push({
+        id: `${infoPageId}-${trickAnchor(heading)}`,
+        infoPageId,
+        specialtyId: meta.specialtyId,
+        specialtyLabel: meta.label,
+        anchorId: trickAnchor(heading),
+        title: cleanForSearch(decodeEscapes(heading)),
+        blurb: blurbFromBody(body),
+      });
+    }
+  }
+  tricks.sort((a, b) => a.title.localeCompare(b.title));
+  return tricks;
+}
+
+let tricksDocs = [];
+try {
+  const infoSrc = fs.readFileSync(INFO_PAGES_PATH, 'utf8');
+  tricksDocs = extractTricks(infoSrc);
+} catch (e) {
+  console.error(`SKIP tricks scrape: ${e.code || e.message}`);
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 const treeFiles = fs
@@ -204,8 +310,8 @@ for (const file of treeFiles) {
 
 // Ensure docs/data directory exists
 fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
-fs.writeFileSync(OUTPUT_PATH, JSON.stringify({ generated: new Date().toISOString(), count: allDocs.length, nodes: allDocs }));
+fs.writeFileSync(OUTPUT_PATH, JSON.stringify({ generated: new Date().toISOString(), count: allDocs.length, nodes: allDocs, tricks: tricksDocs }));
 
 const sizeKB = (fs.statSync(OUTPUT_PATH).size / 1024).toFixed(1);
-console.log(`✅ Wrote ${allDocs.length} node docs across ${treesScanned} trees → ${path.relative(PROJECT_ROOT, OUTPUT_PATH)} (${sizeKB} KB)`);
+console.log(`✅ Wrote ${allDocs.length} node docs across ${treesScanned} trees + ${tricksDocs.length} tricks → ${path.relative(PROJECT_ROOT, OUTPUT_PATH)} (${sizeKB} KB)`);
 if (treesSkipped > 0) console.log(`   Skipped ${treesSkipped} trees (no extractable nodes)`);

@@ -281,7 +281,16 @@ function showCopiedToast(): void {
 }
 
 /** Show an info page as a modal overlay. Returns false if pageId not found. */
-export function showInfoModal(pageId: string): boolean {
+/** Slugify a section heading into a stable anchor id (shared with tricks directory). */
+export function trickAnchorId(heading: string): string {
+  return 'trick-' + heading
+    .toLowerCase()
+    .replace(/[\u2018\u2019']/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+export function showInfoModal(pageId: string, anchorId?: string): boolean {
   const page = getInfoPage(pageId);
   if (!page) return false;
 
@@ -408,6 +417,8 @@ export function showInfoModal(pageId: string): boolean {
     sectionEl.className = 'info-page-section';
 
     if (section.heading) {
+      // Stable anchor so the Tricks directory can deep-link to a single trick.
+      sectionEl.id = trickAnchorId(section.heading);
       const h = document.createElement('h2');
       h.className = 'info-page-section-heading';
       h.textContent = section.heading;
@@ -508,6 +519,18 @@ export function showInfoModal(pageId: string): boolean {
   panel.appendChild(body);
   overlayEl.appendChild(panel);
   document.body.appendChild(overlayEl);
+
+  // Deep-link: if an anchor was requested, scroll that trick into view and flash it.
+  if (anchorId) {
+    requestAnimationFrame(() => {
+      const target = overlayEl?.querySelector<HTMLElement>(`#${CSS.escape(anchorId)}`);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.classList.add('cite-highlight');
+        setTimeout(() => target.classList.remove('cite-highlight'), 1500);
+      }
+    });
+  }
 
   return true;
 }

@@ -115,3 +115,55 @@ export const TRICK_SPECIALTIES = [
 export function getTrickSpecialty(id) {
     return TRICK_SPECIALTIES.find((s) => s.id === id);
 }
+function slugAnchor(heading) {
+    return 'trick-' + heading
+        .toLowerCase()
+        .replace(/[\u2018\u2019']/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
+/**
+ * Extract the one-line description from a trick body. The authoring pattern is
+ * `**Accomplishes:** <blurb>. [N] ...`. We take the text after "Accomplishes:"
+ * up to the first citation marker or line break. Falls back to the first line
+ * of the body. Returns '' for placeholder sections.
+ */
+function extractBlurb(body) {
+    if (!body)
+        return '';
+    const clean = body.replace(/\\n/g, '\n');
+    const m = clean.match(/\*\*Accomplishes:\*\*\s*([\s\S]*?)(?:\s*\[\d+\]|\n|$)/);
+    let blurb = m ? m[1] : clean.split('\n')[0];
+    blurb = blurb
+        .replace(/\*\*([^*]+)\*\*/g, '$1')
+        .replace(/\[\d+\]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    if (blurb.length > 140)
+        blurb = blurb.slice(0, 137).trimEnd() + '\u2026';
+    return blurb;
+}
+const PLACEHOLDER_RE = /being added daily|coming soon/i;
+/**
+ * Distill an InfoPage's sections into a sorted, scannable trick list.
+ * `page` is the InfoPage returned by getInfoPage() (three-tier source), passed
+ * in so this data module stays free of service imports. Sorted A->Z by title.
+ */
+export function getTrickList(page) {
+    if (!page || !page.sections)
+        return [];
+    const items = [];
+    for (const s of page.sections) {
+        if (!s.heading)
+            continue;
+        if (PLACEHOLDER_RE.test(s.heading) || PLACEHOLDER_RE.test(s.body || ''))
+            continue;
+        items.push({
+            title: s.heading,
+            blurb: extractBlurb(s.body || ''),
+            anchorId: slugAnchor(s.heading),
+        });
+    }
+    items.sort((a, b) => a.title.localeCompare(b.title));
+    return items;
+}

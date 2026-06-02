@@ -14,6 +14,7 @@ let indexedDocs = [];
 // Node-body docs are pre-baked at build time (scripts/build-search-node-index.mjs)
 // and fetched lazily. The flag prevents double-fetching across rapid keystrokes.
 let nodeDocs = [];
+let trickDocs = [];
 let nodeIndexLoading = false;
 let nodeIndexLoaded = false;
 /** Clinical synonyms for common queries */
@@ -94,8 +95,19 @@ async function loadNodeIndex() {
             treeId: n.treeId,
             nodeId: n.id,
         }));
+        // Tricks of the Trade — each section becomes a globally searchable doc that
+        // deep-links to /tricks/{specialtyId}/trick/{anchorId}.
+        trickDocs = (data.tricks ?? []).map(t => ({
+            id: `trick-${t.specialtyId}-${t.anchorId}`,
+            type: 'trick',
+            title: t.title,
+            subtitle: `Trick \u2014 ${t.specialtyLabel}`,
+            keywords: [t.blurb, t.specialtyLabel].filter(Boolean),
+            specialtyId: t.specialtyId,
+            anchorId: t.anchorId,
+        }));
         nodeIndexLoaded = true;
-        console.log(`[SearchService] Loaded ${nodeDocs.length} node docs from search-node-index.json`);
+        console.log(`[SearchService] Loaded ${nodeDocs.length} node docs + ${trickDocs.length} trick docs from search-node-index.json`);
         // Rebuild index so subsequent searches include node hits.
         buildSearchIndex();
     }
@@ -164,6 +176,10 @@ export function buildSearchIndex() {
     // title-only index; node hits appear after the JSON fetches in.
     if (nodeIndexLoaded && nodeDocs.length > 0) {
         indexedDocs.push(...nodeDocs);
+    }
+    // Tricks of the Trade docs ship in the same lazy index file.
+    if (nodeIndexLoaded && trickDocs.length > 0) {
+        indexedDocs.push(...trickDocs);
     }
     // Create Fuse index. Threshold bumped 0.35 -> 0.4 so common transposition
     // typos (e.g. "hydroflouric" vs "hydrofluoric") still hit. Higher than 0.4
@@ -262,6 +278,15 @@ function docToResult(doc) {
                 sublabel: doc.subtitle,
                 route: `/tree/${doc.treeId}/node/${doc.nodeId}`,
             };
+        case 'trick':
+            // Route via /tricks/:specialtyId/trick/:anchorId — opens the specialty
+            // directory then surfaces the full trick modal scrolled to the anchor.
+            return {
+                type: 'trick',
+                label: doc.title,
+                sublabel: doc.subtitle,
+                route: `/tricks/${doc.specialtyId}/trick/${doc.anchorId}`,
+            };
         default:
             return null;
     }
@@ -281,6 +306,7 @@ export function getAvailableFilterTypes() {
         { type: 'consult', label: 'Consults' },
         { type: 'drug', label: 'Drugs' },
         { type: 'calculator', label: 'Calculators' },
+        { type: 'trick', label: 'Tricks' },
     ];
 }
 /** Normalize string for prefix matching (remove hyphens, spaces, special chars) */
