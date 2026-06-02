@@ -39,6 +39,15 @@ export const TRICK_SPECIALTIES = [
         trickCount: 4,
     },
     {
+        id: 'dental',
+        label: 'Dental',
+        icon: '\uD83E\uDDB7', // 🦷
+        color: '#6D4C41',
+        subtitle: 'Extraction bleeding, dry socket, and oral hemostasis pearls.',
+        infoPageId: 'tricks-dental',
+        trickCount: 5,
+    },
+    {
         id: 'ophtho',
         label: 'Ophthalmology',
         icon: '\uD83D\uDC41\uFE0F', // 👁️

@@ -26328,6 +26328,197 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
   ],
 };
 
+const DENTAL_EXTRACTION_STEPS_PAGE: InfoPage = {
+  id: 'dental-extraction-steps',
+  title: 'Dental Extraction Complications - Steps',
+  subtitle: 'Bleeding, dry socket, infection, oroantral communication, meds, disposition',
+  sections: [
+    {
+      heading: 'Fast Sort',
+      body: '1. **Airway/deep infection first:** voice change, drooling, stridor, floor-of-mouth elevation, severe trismus, dysphagia, neck swelling, toxicity, immunocompromise, or rapidly progressive swelling -> airway-capable room, OMFS/ENT, antibiotics, and CT only after airway safety.\n2. **Active bleeding:** identify the socket, suction, remove loose clot only if needed for visualization, direct socket pressure, local hemostatic packing, suture if needed, and topical TXA for persistent mucosal/socket bleeding.\n3. **Day 2-5 severe empty-socket pain:** dry socket / alveolar osteitis. Treat pain, gentle irrigation, dental dressing/follow-up. No routine antibiotics unless cellulitis, fever, purulence, or systemic risk.\n4. **Swelling, fever, pus, or spreading erythema:** distinguish local socket infection from deep odontogenic infection. Antibiotics are an adjunct. Source control and dental/OMFS follow-up matter most.\n5. **Posterior maxillary extraction plus air/fluid through socket, unilateral sinus symptoms, or visible communication:** suspect oroantral communication. Do not probe aggressively. Give sinus precautions and OMFS/dental follow-up.',
+    },
+    {
+      heading: 'First Five Minutes',
+      body: '• Put light, suction, gauze, topical anesthetic/local block, and dental box supplies at bedside.\n• Ask: extraction date, tooth/site, surgeon/dentist, anticoagulants/antiplatelets, liver disease, renal disease, platelet/coagulation history, antibiotics already started, smoking, vigorous rinsing/spitting/straw use.\n• Examine: socket clot, active bleeding point, exposed bone, purulence, vestibular swelling, floor of mouth, tongue elevation, trismus, dysphagia, voice, facial/neck swelling, maxillary sinus symptoms.\n• Choose the lane: bleeding, dry socket, infection, sinus communication, medication issue, or routine post-op course.\n• Disposition requires a concrete dental/OMFS plan, pain control, bleeding control, and clear return precautions.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American Dental Association. Oral Anticoagulant and Antiplatelet Medications and Dental Procedures.' },
+    { num: 2, text: 'American Dental Association. Antibiotics for Dental Pain and Swelling Guideline. 2019.' },
+    { num: 3, text: 'Cochrane Oral Health. Interventions for treating post-extraction bleeding. Cochrane Database Syst Rev. 2018.' },
+    { num: 4, text: 'Cochrane Oral Health. Local interventions for alveolar osteitis. Cochrane Database Syst Rev. 2022.' },
+  ],
+};
+
+const DENTAL_EXTRACTION_BOX_PAGE: InfoPage = {
+  id: 'dental-extraction-box',
+  title: 'Dental Box - Extraction Complications',
+  subtitle: 'What to pull before walking into the room',
+  sections: [
+    {
+      heading: 'Core Setup',
+      body: '• PPE, good light/headlamp, Yankauer suction, emesis basin.\n• Dental mirror, cotton pliers/forceps, irrigation syringe, saline.\n• 2x2 gauze, dental rolls, cotton rolls. Black tea bag backup if supplies are limited.\n• Topical anesthetic plus local anesthetic with epinephrine when safe.\n• Needle/syringe for block or local infiltration.',
+    },
+    {
+      heading: 'Hemostasis Supplies',
+      body: '• Oxidized cellulose/Surgicel.\n• Absorbable gelatin sponge/Gelfoam.\n• Collagen plug if stocked.\n• Topical thrombin if stocked.\n• Tranexamic acid for soaked gauze/dental roll.\n• 3-0 or 4-0 chromic gut or silk, needle driver, pickups, scissors.\n• Hemostat and suture scissors.',
+    },
+    {
+      heading: 'Dry Socket / Socket Pain Supplies',
+      body: '• Saline irrigation syringe.\n• Dental block supplies.\n• Eugenol-containing or medicated dry-socket dressing if stocked.\n• Analgesia plan: NSAID plus acetaminophen first line when safe.\n• Dental follow-up instructions. ED dressing is a bridge, not definitive care.',
+    },
+    {
+      heading: 'Do Not Do With the Dental Box',
+      body: '• Do not pack so much material that the patient cannot bite pressure directly over the socket.\n• Do not keep checking every few minutes. Direct pressure only works if uninterrupted.\n• Do not aggressively curette a dry socket.\n• Do not probe or forcefully irrigate a suspected oroantral communication.\n• Do not reverse anticoagulation reflexively for controlled dental bleeding.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'SDCEP. Management of Dental Patients Taking Anticoagulants or Antiplatelet Drugs. 2nd ed. 2022.' },
+    { num: 2, text: 'Cochrane Oral Health. Interventions for treating post-extraction bleeding. 2018.' },
+  ],
+};
+
+const DENTAL_EXTRACTION_TXA_PAGE: InfoPage = {
+  id: 'dental-extraction-txa',
+  title: 'Topical TXA for Dental Socket Bleeding',
+  subtitle: 'Local antifibrinolytic technique for persistent oral/socket bleeding',
+  sections: [
+    {
+      heading: 'Technique',
+      body: '• Use tranexamic acid oral solution 500 mg/5 mL, or injectable TXA 100 mg/mL placed on gauze/dental roll when oral solution is unavailable.\n• Fold gauze or dental roll into a small firm plug that sits directly over the socket.\n• Soak the plug with TXA, place it over the bleeding socket, and have the patient bite continuously for 20-30 minutes.\n• Repeat once if bleeding improves but persists.\n• If still bleeding, combine with socket packing such as Surgicel/Gelfoam/collagen plug and suture/figure-of-eight when appropriate.',
+    },
+    {
+      heading: 'When It Helps',
+      body: '• Persistent oozing after direct pressure.\n• Anticoagulant or antiplatelet patients when local control is preferred.\n• Mucosal/socket bleeding where clot keeps lysing in saliva.\n• Bridge while arranging dental/OMFS help for refractory bleeding.',
+    },
+    {
+      heading: 'Cautions',
+      body: '• TXA is an adjunct. It does not replace identifying the socket, direct pressure, packing, or suture when needed.\n• Avoid swallowing large amounts of TXA solution.\n• Escalate if brisk bleeding, hemodynamic instability, airway contamination, expanding hematoma, or inability to maintain pressure.\n• Check local policy/formulary for available concentration and route.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Cochrane Oral Health. Interventions for treating post-extraction bleeding. 2018.' },
+    { num: 2, text: 'American Dental Association. Oral Anticoagulant and Antiplatelet Medications and Dental Procedures.' },
+  ],
+};
+
+const DENTAL_EXTRACTION_MEDS_PAGE: InfoPage = {
+  id: 'dental-extraction-meds',
+  title: 'Dental Extraction Medication Guide',
+  subtitle: 'Analgesia, antibiotics, anticoagulants, and dry socket medication choices',
+  sections: [
+    {
+      heading: 'Analgesia',
+      body: '• NSAID plus acetaminophen is first-line for most acute dental pain when safe.\n• Consider dental block for severe pain or dry socket bridge.\n• Avoid routine opioid-first plans. Use brief rescue only when first-line therapy is unsafe or inadequate and follow-up is concrete.',
+    },
+    {
+      heading: 'Antibiotics',
+      body: '• Do not use antibiotics for dry socket alone or uncomplicated post-extraction pain.\n• Use antibiotics when cellulitis/spreading infection, fever/systemic signs, purulence with surrounding cellulitis, immunocompromise, or deep space concern is present.\n• Antibiotics are adjuncts. Dental/OMFS source control is still required for abscess or infected extraction site.',
+    },
+    {
+      heading: 'Anticoagulants / Antiplatelets',
+      body: '• Local hemostasis first for most dental bleeding.\n• Do not reflexively stop or reverse anticoagulants for controlled socket bleeding.\n• Check INR for warfarin patients with significant bleeding or if status is unknown.\n• Escalate reversal decisions only for major bleeding, hemodynamic compromise, airway risk, or bleeding not controlled with local measures.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American Dental Association. Oral Analgesics for Acute Dental Pain. 2024.' },
+    { num: 2, text: 'American Dental Association. Antibiotics for Dental Pain and Swelling Guideline. 2019.' },
+    { num: 3, text: 'SDCEP. Management of Dental Patients Taking Anticoagulants or Antiplatelet Drugs. 2022.' },
+  ],
+};
+
+const DENTAL_EXTRACTION_SINUS_PAGE: InfoPage = {
+  id: 'dental-extraction-sinus',
+  title: 'Oroantral Communication After Extraction',
+  subtitle: 'Posterior maxillary extraction with possible sinus communication',
+  sections: [
+    {
+      heading: 'When to Suspect',
+      body: '• Recent maxillary molar or premolar extraction.\n• Air, fluid, or bubbling through the socket.\n• Unilateral maxillary sinus pressure, foul drainage, or fluid entering nose/mouth.\n• Visible socket communication or large bony defect.\n• Recurrent bleeding or pain after posterior maxillary extraction.',
+    },
+    {
+      heading: 'ED Approach',
+      body: '• Do not aggressively probe the socket to prove the communication.\n• Avoid forceful irrigation if the communication is suspected.\n• Look for infection, retained root fragment, facial swelling, and systemic illness.\n• Discuss with OMFS/dentist for closure timing and follow-up urgency.\n• Consider imaging when retained fragment, facial fracture, deep infection, or uncertain anatomy changes management.',
+    },
+    {
+      heading: 'Sinus Precautions',
+      body: '• No nose blowing.\n• Sneeze with mouth open.\n• No straws, smoking, forceful spitting, or vigorous rinsing.\n• Soft diet and head elevation.\n• Return for fever, worsening facial swelling, purulent drainage, uncontrolled bleeding, or inability to swallow/handle secretions.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Parvini P, et al. Decision-making in closure of oroantral communication and fistula. Int J Implant Dent. 2019.' },
+  ],
+};
+
+const DENTAL_EXTRACTION_TRICKS_PAGE: InfoPage = {
+  id: 'dental-extraction-tricks',
+  title: 'Dental Extraction Tricks',
+  subtitle: 'High-yield bedside moves for post-extraction bleeding and pain',
+  shareable: true,
+  sections: [
+    {
+      heading: 'Socket Pressure Stack',
+      body: '**Accomplishes:** Turns gauze from a mouth sponge into a true pressure plug directly over the bleeding socket.\n\n**How to:** Fold damp gauze or a dental roll into a compact plug, seat it directly over the extraction socket, and have the patient bite continuously for 30-60 minutes. Do not let the patient peek every few minutes.',
+    },
+    {
+      heading: 'TXA Dental Roll',
+      body: '**Accomplishes:** Concentrates antifibrinolytic medication exactly where saliva keeps breaking down clot.\n\n**How to:** Soak a dental roll or gauze plug with TXA, place it directly over the socket, and have the patient bite continuously for 20-30 minutes. Repeat or combine with Surgicel/Gelfoam and suture if needed.',
+    },
+    {
+      heading: 'Tea Bag Backup',
+      body: '**Accomplishes:** Gives a low-tech pressure/tannin adjunct when dental supplies are limited.\n\n**How to:** Moisten a black tea bag, wrap it in gauze if needed, place it over the socket, and have the patient bite for 20-30 minutes. Use as backup only, not as definitive care for brisk bleeding.',
+    },
+    {
+      heading: 'Dry Socket: Irrigate, Do Not Curette',
+      body: '**Accomplishes:** Removes debris without stripping fragile socket tissue or worsening pain.\n\n**How to:** Use gentle saline irrigation, dental block/analgesia, and dental dressing/follow-up when available. Avoid aggressive scraping of the socket.',
+    },
+    {
+      heading: 'Sinus Communication: Do Not Prove It',
+      body: '**Accomplishes:** Avoids enlarging a suspected oroantral communication.\n\n**How to:** If posterior maxillary extraction symptoms suggest sinus communication, avoid probing and forceful irrigation. Give sinus precautions and arrange dental/OMFS follow-up.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Cochrane Oral Health. Interventions for treating post-extraction bleeding. 2018.' },
+    { num: 2, text: 'Mamoun JS. Dry Socket Etiology, Diagnosis, and Clinical Treatment Techniques. J Korean Assoc Oral Maxillofac Surg. 2018.' },
+    { num: 3, text: 'Parvini P, et al. Decision-making in closure of oroantral communication and fistula. 2019.' },
+  ],
+};
+
+const DENTAL_EXTRACTION_PHOTOS_PAGE: InfoPage = {
+  id: 'dental-extraction-photos',
+  title: 'Dental Extraction Photos',
+  subtitle: 'Open-source dental extraction reference image',
+  image: {
+    src: 'images/dental-extraction-complications/dental-extraction-us-navy.jpg',
+    alt: 'Dentist performing a dental extraction.',
+    caption: 'Dental extraction procedure. U.S. Navy public-domain image via Wikimedia Commons.',
+  },
+  sections: [
+    {
+      heading: 'Use Photos as Context, Not Diagnosis',
+      image: {
+        src: 'images/dental-extraction-complications/dental-extraction-us-navy.jpg',
+        alt: 'Dental extraction procedure with clinician working in the oral cavity.',
+        caption: 'Public-domain extraction image. Post-extraction complications still require exam-based sorting.',
+      },
+      body: 'The photo is included as a general extraction reference. Post-extraction ED diagnosis still comes from timing and exam: active socket bleeding, severe day 2-5 empty-socket pain suggesting dry socket, cellulitis/purulence suggesting infection, or posterior maxillary symptoms suggesting oroantral communication.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Wikimedia Commons. U.S. Navy dentist extracts wisdom teeth. Public domain / U.S. Government work. https://commons.wikimedia.org/wiki/File:Flickr_-_Official_U.S._Navy_Imagery_-_Dentist_extracts_wisdom_teeth.jpg' },
+    { num: 2, text: 'Cochrane Oral Health. Local interventions for the management of alveolar osteitis. 2022.' },
+  ],
+};
+
+const TRICKS_DENTAL_PAGE: InfoPage = {
+  id: 'tricks-dental',
+  title: 'Dental - Tricks of the Trade',
+  subtitle: 'Extraction bleeding, dry socket, and oral hemostasis pearls.',
+  shareable: true,
+  sections: DENTAL_EXTRACTION_TRICKS_PAGE.sections,
+  citations: DENTAL_EXTRACTION_TRICKS_PAGE.citations,
+};
+
 const TRICKS_ORTHO_PAGE: InfoPage = {
   id: 'tricks-ortho',
   title: 'Orthopedics — Tricks of the Trade',
@@ -26346,6 +26537,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'tricks-airway': TRICKS_AIRWAY_PAGE,
   'tricks-procedures': TRICKS_PROCEDURES_PAGE,
   'tricks-ent': TRICKS_ENT_PAGE,
+  'tricks-dental': TRICKS_DENTAL_PAGE,
   'tricks-ophtho': TRICKS_OPHTHO_PAGE,
   'tricks-urology': TRICKS_UROLOGY_PAGE,
   'tricks-wound': TRICKS_WOUND_PAGE,
@@ -26453,6 +26645,13 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'mvl-stop': MVL_STOP_PAGE,
   'dp-steps': DP_STEPS_PAGE,
   'dp-stop': DP_STOP_PAGE,
+  'dental-extraction-steps': DENTAL_EXTRACTION_STEPS_PAGE,
+  'dental-extraction-box': DENTAL_EXTRACTION_BOX_PAGE,
+  'dental-extraction-txa': DENTAL_EXTRACTION_TXA_PAGE,
+  'dental-extraction-meds': DENTAL_EXTRACTION_MEDS_PAGE,
+  'dental-extraction-sinus': DENTAL_EXTRACTION_SINUS_PAGE,
+  'dental-extraction-tricks': DENTAL_EXTRACTION_TRICKS_PAGE,
+  'dental-extraction-photos': DENTAL_EXTRACTION_PHOTOS_PAGE,
   'nop-steps': NOP_STEPS_PAGE,
   'nop-stop': NOP_STOP_PAGE,
   'ppf-steps': PPF_STEPS_PAGE,

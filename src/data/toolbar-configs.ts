@@ -46,6 +46,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'dementia',
   'unilateral-facial-pain-hub',
   'thrombocytopenia',
+  'dental-extraction-complications',
   'sjs-ten',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
@@ -612,6 +613,19 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'dp-rescue' },
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'dp-imaging' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'dp-stop' },
+  ],
+  'dental-extraction-complications': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dental-extraction-steps', pinned: true },
+    { id: 'bleed', label: 'Bleed', icon: '🩸', action: 'jump', target: 'dec-bleeding', pinned: true },
+    { id: 'dry', label: 'Dry', icon: '🦷', action: 'jump', target: 'dec-dry-socket', pinned: true },
+    { id: 'infect', label: 'Infect', icon: '🦠', action: 'jump', target: 'dec-infection', pinned: true },
+    { id: 'box', label: 'Box', icon: '🧰', action: 'overlay', target: 'dental-extraction-box', pinned: true },
+    { id: 'txa', label: 'TXA', icon: '🧪', action: 'overlay', target: 'dental-extraction-txa' },
+    { id: 'meds', label: 'Meds', icon: '💊', action: 'overlay', target: 'dental-extraction-meds' },
+    { id: 'sinus', label: 'Sinus', icon: '🫧', action: 'overlay', target: 'dental-extraction-sinus' },
+    { id: 'tricks', label: 'Tricks', icon: '💡', action: 'overlay', target: 'dental-extraction-tricks' },
+    { id: 'photo', label: 'Photo', icon: '🖼️', action: 'overlay', target: 'dental-extraction-photos' },
+    { id: 'dispo', label: 'Dispo', icon: '🏁', action: 'jump', target: 'dec-disposition' },
   ],
   'new-onset-psychosis-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'nop-steps' },

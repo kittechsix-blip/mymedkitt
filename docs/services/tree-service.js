@@ -294,6 +294,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/dental-pain-hub.js');
             return { nodes: m.DENTAL_PAIN_HUB_NODES, entryNodeId: 'dp-start', categoryId: 'emergency-medicine', moduleLabels: m.DENTAL_PAIN_HUB_MODULE_LABELS, citations: m.DENTAL_PAIN_HUB_CITATIONS, criticalActions: m.DENTAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'dental-extraction-complications': async () => {
+            const m = await import('../data/trees/dental-extraction-complications.js');
+            return { nodes: m.DENTAL_EXTRACTION_COMPLICATIONS_NODES, entryNodeId: 'dec-start', categoryId: 'emergency-medicine', moduleLabels: m.DENTAL_EXTRACTION_COMPLICATIONS_MODULE_LABELS, citations: m.DENTAL_EXTRACTION_COMPLICATIONS_CITATIONS, criticalActions: m.DENTAL_EXTRACTION_COMPLICATIONS_CRITICAL_ACTIONS };
+        },
         'new-onset-psychosis-hub': async () => {
             const m = await import('../data/trees/new-onset-psychosis-hub.js');
             return { nodes: m.NEW_ONSET_PSYCHOSIS_HUB_NODES, entryNodeId: 'nop-start', categoryId: 'emergency-medicine', moduleLabels: m.NEW_ONSET_PSYCHOSIS_HUB_MODULE_LABELS, citations: m.NEW_ONSET_PSYCHOSIS_HUB_CITATIONS, criticalActions: m.NEW_ONSET_PSYCHOSIS_HUB_CRITICAL_ACTIONS, type: 'hub' };

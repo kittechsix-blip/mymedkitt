@@ -810,6 +810,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         type: 'hub',
       },
       {
+        id: 'dental-extraction-complications',
+        title: 'Dental Extraction Complications',
+        subtitle: 'Bleeding → Dry Socket → Infection → Dental Box → Tricks → Dispo',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 19,
+        entryNodeId: 'dec-start',
+      },
+      {
         id: 'new-onset-psychosis-hub',
         title: 'New Onset Psychosis Hub',
         subtitle: 'Sick Check → Medical/Tox/Neuro/Autoimmune → Rescue → Workup → Dispo',

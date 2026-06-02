@@ -36,6 +36,7 @@ export const TREE_REGISTRY = {
   'optic-neuropathy-hub': { prefix: 'OPTIC_NEUROPATHY_HUB', entryNodeId: 'on-hub-start', categoryId: 'ophthalmology' },
   'optic-neuritis':   { prefix: 'OPTIC_NEURITIS',      entryNodeId: 'on-confirm',         categoryId: 'ophthalmology' },
   'dental-pain-hub': { prefix: 'DENTAL_PAIN_HUB', entryNodeId: 'dp-start', categoryId: 'emergency-medicine' },
+  'dental-extraction-complications': { prefix: 'DENTAL_EXTRACTION_COMPLICATIONS', entryNodeId: 'dec-start', categoryId: 'emergency-medicine' },
   'new-onset-psychosis-hub': { prefix: 'NEW_ONSET_PSYCHOSIS_HUB', entryNodeId: 'nop-start', categoryId: 'emergency-medicine' },
   'pelvic-pain-female-hub': { prefix: 'PELVIC_PAIN_FEMALE_HUB', entryNodeId: 'ppf-start', categoryId: 'emergency-medicine' },
   'vaginal-bleeding-hub': { prefix: 'VAGINAL_BLEEDING_HUB', entryNodeId: 'vb-start', categoryId: 'emergency-medicine' },
