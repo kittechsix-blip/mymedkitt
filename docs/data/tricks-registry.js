@@ -90,7 +90,7 @@ export const TRICK_SPECIALTIES = [
         color: '#4527A0',
         subtitle: 'Bedside CN testing and BPPV maneuvers.',
         infoPageId: 'tricks-neuro',
-        trickCount: 2,
+        trickCount: 3,
     },
     {
         id: 'tox',
@@ -117,7 +117,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction and splinting tricks (growing daily).',
         infoPageId: 'tricks-ortho',
-        trickCount: 0,
+        trickCount: 4,
     },
 ];
 /** Lookup a specialty by its id. */

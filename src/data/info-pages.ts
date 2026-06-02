@@ -26264,10 +26264,15 @@ const TRICKS_NEURO_PAGE: InfoPage = {
       heading: 'BPPV Beyond the Basics',
       body: '**Accomplishes:** Alternative BPPV diagnostic and treatment maneuvers for patients who can\u2019t tolerate standard Dix-Hallpike/Epley (kyphosis, obesity, back pain, orthopnea). [2]\n\n**How to:**\n1. **Loaded Dix-Hallpike:** flex the head forward 30\u00B0 in the plane of the affected posterior canal for 30 sec before going supine; use pillows under the thoracic spine for kyphotic/elderly patients.\n2. **Sidelying test:** rotate the head 45\u00B0 contralateral to the tested canal, then descend to the ipsilateral side (good when the patient can\u2019t lie flat).\n3. **BBQ/Lempert roll (horizontal canal):** from supine, roll the head in 90\u00B0 steps through a full 360\u00B0, holding 30 sec at each step (>90% success).\n4. **Semont maneuver:** rapidly transition side-to-side without pausing seated, keeping the head rotated, to mobilize otoliths.\n\n**Equipment:** Exam bed; pillows optional.\n\n_Source: ALiEM Tricks of the Trade._',
     },
+    {
+      heading: 'Dix-Hallpike Without Hanging the Head Off the Bed',
+      body: '**Accomplishes:** Lets you do a Dix-Hallpike on a narrow ED gurney where you can\u2019t safely extend the patient\u2019s neck off the end of the bed. [3]\n\n**How to:**\n1. Stack 2\u20133 folded blankets on the gurney where the patient\u2019s shoulders will lie.\n2. Rotate the head 45\u00B0 toward the tested ear and sit the patient so the shoulders will land on the blankets.\n3. Lay the patient back so the shoulders rest on the blanket stack and the head drops into ~20\u201330\u00B0 of neck extension over the blanket edge \u2014 no overhang needed.\n4. Hold 30\u201360 sec and watch for nystagmus/vertigo.\n\n**Equipment:** 2\u20133 folded blankets, a standard gurney.\n\n_Source: ALiEM Trick of the Trade \u2014 Dix-Hallpike maneuver variation._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 2, text: 'ALiEM. Tricks of the Trade: BPPV beyond the basics. aliem.com.' },
+    { num: 3, text: 'ALiEM. Trick of the Trade: Dix-Hallpike maneuver variation. aliem.com.' },
   ],
 };
 
@@ -26526,10 +26531,28 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
   shareable: true,
   sections: [
     {
-      body: 'Orthopedic tricks are being added daily by the Tricks of the Trade scout. Check back soon \u2014 reduction techniques, splinting hacks, and joint-relocation pearls are on the way.',
+      heading: 'Cunningham Maneuver for Anterior Shoulder Dislocation',
+      body: '**Accomplishes:** Analgesia-sparing, often medication-free reduction of an anterior shoulder dislocation by relaxing the spasmed biceps. [1]\n\n**How to:**\n1. Seat the patient upright; sit facing them with their forearm resting on yours.\n2. First fix the scapula: have the patient sit up straight, puff out the chest, pull both shoulders back, and relax.\n3. Rest the patient\u2019s hand on your shoulder; place your hand in their antecubital fossa.\n4. Massage the biceps, deltoid, and trapezius while gently encouraging the elbow downward.\n5. Let the relaxed humeral head slide spontaneously back over the glenoid rim \u2014 no traction-countertraction force.\n\n**Equipment:** A chair and a calm, cooperative patient (no sedation required).\n\n_Source: ALiEM Trick of the Trade \u2014 Cunningham maneuver._',
+    },
+    {
+      heading: 'Hyperpronation for Nursemaid\u2019s Elbow',
+      body: '**Accomplishes:** Higher first-attempt success and less pain than supination-flexion for radial-head subluxation (94% vs 69% first-pass). [2]\n\n**How to:**\n1. Hold the child\u2019s elbow at 90\u00B0 flexion with one hand, thumb resting over the radial head.\n2. Grasp the wrist with the other hand.\n3. Firmly hyperpronate the forearm (turn the palm fully downward/outward).\n4. Feel for a click over the radial head \u2014 it usually signals successful reduction.\n5. If it fails, repeat or try supination-flexion as the alternate.\n\n**Equipment:** None.\n\n_Source: ALiEM Tricks of the Trade \u2014 Nursemaid elbow reduction (Bek 2009)._',
+    },
+    {
+      heading: 'DIY Finger Traps from a Gauze Roll',
+      body: '**Accomplishes:** Improvises finger-trap traction for a distal radius reduction when commercial finger traps aren\u2019t stocked. [3]\n\n**How to:**\n1. Tie a gauze roll around the patient\u2019s fingers in a loop that grips without strangling.\n2. Suspend the looped fingers from an IV pole with the elbow near 90\u00B0 and off the bed.\n3. Loop stockinette around the biceps and hang light weight for counter-traction.\n4. Let gravity/traction overcome spasm for several minutes before applying dorsal reduction pressure.\n5. Pad thin/elderly skin with Coban or foam tape to prevent injury.\n\n**Equipment:** Gauze roll, IV pole, stockinette, light weight, Coban/foam tape.\n\n_Source: ALiEM Trick of the Trade \u2014 DIY finger traps._',
+    },
+    {
+      heading: 'Three-Point Mold for Splinting',
+      body: '**Accomplishes:** Keeps a reduced fracture from drifting back out of alignment \u2014 \u201Ccrooked splints make straight bones.\u201D [4]\n\n**How to:**\n1. After reduction, apply the splint material along the fracture.\n2. While it sets, press with three points of force: one over the apex of the deformity and two on the opposite side, proximal and distal to the fracture.\n3. This creates a fulcrum that bends the splint and holds the reduction.\n4. Use broad, flat pressure (palm/thenar) \u2014 never fingertips, which leave focal pressure points.\n5. Re-check neurovascular status before and after; keep the splint snug but not constrictive.\n\n**Equipment:** Plaster or fiberglass splint material, padding, stockinette.\n\n_Source: NUEM Blog \u2014 Visual Guide to Splinting._',
     },
   ],
-  citations: [],
+  citations: [
+    { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
+    { num: 2, text: 'ALiEM. Tricks of the Trade: Nursemaid elbow reduction (Bek et al. 2009). aliem.com.' },
+    { num: 3, text: 'ALiEM. Trick of the Trade: DIY finger traps. aliem.com.' },
+    { num: 4, text: 'NUEM Blog. Visual Guide to Splinting. nuemblog.com/blog/splinting.' },
+  ],
 };
 
 export const INFO_PAGES: Record<string, InfoPage> = {
