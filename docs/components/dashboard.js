@@ -236,6 +236,32 @@ export function renderDashboard(container) {
         hubsCard.addEventListener('click', () => router.navigate('/hubs'));
         dashboard.appendChild(hubsCard);
     }
+    // ---- Tricks of the Trade hero card (sits next to Chief Complaint Hubs) ----
+    if (!isSharedMode()) {
+        const tricksCard = document.createElement('button');
+        tricksCard.className = 'dashboard-tricks-card';
+        tricksCard.type = 'button';
+        tricksCard.setAttribute('aria-label', 'Open Tricks of the Trade — clinical techniques by specialty');
+        const tricksBadge = document.createElement('div');
+        tricksBadge.className = 'dashboard-tricks-card__badge';
+        tricksBadge.textContent = 'NEW';
+        tricksCard.appendChild(tricksBadge);
+        const tricksTitle = document.createElement('div');
+        tricksTitle.className = 'dashboard-tricks-card__title';
+        tricksTitle.textContent = 'Tricks of the Trade';
+        tricksCard.appendChild(tricksTitle);
+        const tricksSub = document.createElement('div');
+        tricksSub.className = 'dashboard-tricks-card__sub';
+        tricksSub.textContent = 'Clever bedside techniques by specialty: what it does, how to do it, what you need.';
+        tricksCard.appendChild(tricksSub);
+        const tricksArrow = document.createElement('div');
+        tricksArrow.className = 'dashboard-tricks-card__arrow';
+        tricksArrow.textContent = '\u2192';
+        tricksArrow.setAttribute('aria-hidden', 'true');
+        tricksCard.appendChild(tricksArrow);
+        tricksCard.addEventListener('click', () => router.navigate('/tricks'));
+        dashboard.appendChild(tricksCard);
+    }
     // ---- MedKitt Learn hero card (full-access only) ----
     if (!isSharedMode()) {
         const learnCard = document.createElement('button');

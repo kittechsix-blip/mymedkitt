@@ -24923,7 +24923,318 @@ const SJS_TEN_CULPRITS_PAGE = {
         { num: 2, text: 'Sassolas B, et al. ALDEN algorithm. Clin Pharmacol Ther. 2010;88(1):60-68.' },
     ],
 };
+// ===================================================================
+// TRICKS OF THE TRADE
+// Reference content (one InfoPage per specialty). Each section is one trick:
+// what it Accomplishes, How to do it, Equipment, and source attribution.
+// Seed content from EMCrit 426 (Dr. David Carr) + ALiEM Tricks of the Trade.
+// Grant's daily cron appends new tricks as new sections.
+// ===================================================================
+const TRICKS_AIRWAY_PAGE = {
+    id: 'tricks-airway',
+    title: 'Airway — Tricks of the Trade',
+    subtitle: 'Suction, NG placement, and supraglottic exchange hacks.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Large-Bore ETT as a Suction Catheter (DIY DuCanto)',
+            body: '**Accomplishes:** Clears massive airway soiling (vomit, blood, food chunks) far better than a Yankauer — a 10.0 ETT gives a ~10 mm bore vs the Yankauer\u2019s ~3.6 mm — when a large-bore suction catheter isn\u2019t available. [1]\n\n**How to:**\n1. Grab a size 10.0 ETT (or the largest available).\n2. Attach rubber suction tubing to the ETT 15 mm adaptor.\n3. Connect the tubing to the wall suction canister.\n4. Activate suction and insert the ETT into the airway to clear debris.\n\n**Equipment:** Size 10.0 endotracheal tube, suction tubing, wall suction canister.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'NPA as a Conduit for NG Tube Placement',
+            body: '**Accomplishes:** Boosts first-attempt nasogastric tube success in sedated/intubated patients (first-pass ~83% vs ~47%). [2]\n\n**How to:**\n1. Lubricate and insert an appropriately sized NPA into a nostril (usually the right).\n2. Thread a lubricated NG tube through the NPA lumen.\n3. Once the NG tip exits the NPA into the oropharynx, advance into the esophagus with head flexion / chin tuck.\n4. Leave the NPA in place or remove it as clinically indicated.\n\n**Equipment:** NPA, lubricated NG tube, lubricant, syringe for placement check.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: '\u201CFiberbougie\u201D \u2014 Supraglottic (King) to ETT Exchange',
+            body: '**Accomplishes:** Exchanges a supraglottic (King) airway for an endotracheal tube while maintaining tracheal access, using a cut disposable bronchoscope as a bougie. [3]\n\n**How to:**\n1. Pass a disposable bronchoscope through the King airway port and side port into the trachea toward the carina.\n2. Cut the disposable scope at the level of the handle, leaving a \u201Cfiberbougie\u201D in the trachea.\n3. Withdraw the King device over the cut scope (modified Seldinger) while suctioning.\n4. Advance the ETT over the fiberbougie.\n5. Confirm passage through the cords with video/direct laryngoscopy, then capnography and CXR.\n\n**Equipment:** Disposable bronchoscope, ETT, 50 mL syringe, video/direct laryngoscope, trauma shears, suction, capnography.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ALiEM. Trick of the Trade: Large-bore endotracheal tube to suction an occluded airway. aliem.com.' },
+        { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 3, text: 'ALiEM. Trick of the Trade: Fiberbougie for supraglottic (King) airway exchange. aliem.com.' },
+    ],
+};
+const TRICKS_PROCEDURES_PAGE = {
+    id: 'tricks-procedures',
+    title: 'Procedures & Access — Tricks of the Trade',
+    subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Tourniquet Infusion to Upsize an IV',
+            body: '**Accomplishes:** Converts a small existing IV (e.g., 22G) into access for a larger-bore catheter in volume-depleted / difficult-access patients, often avoiding a central line (~68% success). [1]\n\n**How to:**\n1. Confirm the patient can tolerate a small fluid bolus.\n2. Place a tourniquet proximal to the existing small IV (for AC placement, just above the elbow).\n3. Rapidly infuse 50\u2013100 mL through the small IV to distend the veins between it and the tourniquet.\n4. Cannulate the now-dilated vein with the larger catheter.\n\n**Equipment:** Tourniquet, existing IV, IV fluids, larger-bore catheter.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Cut IV Tubing for a 2-Person Ultrasound Nerve Block',
+            body: '**Accomplishes:** Lets a second operator inject while the sonographer keeps the probe and needle motionless during an US-guided nerve block. [2]\n\n**How to:**\n1. Connect a length of IV extension tubing between the block needle and the syringe.\n2. Operator 1 holds the probe and needle and watches the screen.\n3. Operator 2 aspirates and injects via the tubing on command, keeping the needle tip still.\n\n**Equipment:** IV extension tubing, block needle, local anesthetic syringe, ultrasound.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: '\u201CWinging It\u201D \u2014 External Jugular Cannulation',
+            body: '**Accomplishes:** Easier EJ vein cannulation in difficult peripheral access by improving vein engorgement and stabilization. [3]\n\n**How to:**\n1. Place the patient in Trendelenburg to engorge the EJ.\n2. \u201CWing\u201D the position to tense and anchor the vein.\n3. Cannulate the EJ along its course toward the clavicle.\n\n**Equipment:** IV catheter, standard IV supplies.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Gel-Free Ultrasound-Guided Peripheral IV',
+            body: '**Accomplishes:** Performs US-guided PIV access without slippery gel contaminating the site / sterile field. [4]\n\n**How to:**\n1. Use saline (or a sterile transparent film over the probe) as the coupling medium instead of gel.\n2. Maintain probe contact and visualize the vein.\n3. Cannulate without gel fouling the site.\n\n**Equipment:** Ultrasound, saline or sterile film, IV catheter.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Don\u2019t Fight the Ultrasound Cord',
+            body: '**Accomplishes:** Ergonomic fix so the probe cord doesn\u2019t twist your wrist during US-guided PIV. [5]\n\n**How to:**\n1. Drape the probe cord over your forearm or shoulder before scanning.\n2. Orient the probe marker so the cord falls away from your working hand.\n3. Scan and cannulate without cable tension.\n\n**Equipment:** Ultrasound probe.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Ultrarapid Adenosine Push via Pressure Bag',
+            body: '**Accomplishes:** Delivers undiluted adenosine to the heart at high flow to terminate SVT, exploiting its very short half-life \u2014 combines single-syringe speed with a large flush. [6]\n\n**How to:**\n1. Prime a pressure bag with saline tubing; close the roller clamp.\n2. Connect the line to the patient\u2019s angiocatheter.\n3. Attach the undiluted adenosine syringe to the Y-site nearest the patient.\n4. Open the roller clamp for high-pressure flow.\n5. Rapidly inject the adenosine into the tubing.\n\n**Equipment:** Pressure bag with primed saline line, IV angiocatheter, undiluted adenosine syringe, Y-site connector.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Chest-Tube Rewarming With a Foley Bag Connector',
+            body: '**Accomplishes:** Connects warmed IV fluids to chest tubes for thoracic lavage in severe hypothermia, using the Foley bag\u2019s built-in connector as an adapter. [7]\n\n**How to:**\n1. Connect warmed IV fluids to the Luer-lock port on the Foley bag tubing.\n2. Insert the tapered nozzle of the Foley tubing into the chest tube.\n3. Clamp proximal to the Luer lock to limit backflow.\n4. Run warm fluid into one tube and drain from the adjacent tube.\n5. Continue standard rewarming.\n\n**Equipment:** Foley catheter bag/tubing, warmed IV fluids, chest tubes, clamp.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Inflate a Blakemore/Minnesota Balloon Without a Manometer',
+            body: '**Accomplishes:** Measures and titrates esophageal balloon pressure for variceal tamponade using a manual BP cuff gauge when no manometer is available. [8]\n\n**How to:**\n1. Detach the manual BP cuff so only the tubing to the gauge remains.\n2. Connect that tubing to the male Luer of a 3-way stopcock; attach the balloon to one female port and a 50 cc syringe to the other.\n3. Turn the stopcock away from the gauge and inject 10 cc of air.\n4. Rotate the stopcock to isolate the syringe and read the gauge.\n5. Repeat in 10 cc increments to reach 30 mmHg (max 45 mmHg if still bleeding).\n6. Watch units \u2014 manometers often read cmH2O; balloons use mmHg (1 cmH2O = 0.74 mmHg).\n\n**Equipment:** Manual sphygmomanometer, 3-way stopcock, 50 cc syringe, Blakemore/Minnesota tube.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Persistent Paracentesis Leak \u2014 Pressure Dressing 2.0',
+            body: '**Accomplishes:** Stops persistent ascitic fluid leak from a paracentesis site using a tight gauze ball plus stretched film for sustained pressure. [9]\n\n**How to:**\n1. Apply benzoin tincture around the leak to improve adhesion.\n2. Roll gauze into a tight ball and press firmly over the leak.\n3. Stretch a transparent film dressing over the gauze center while keeping pressure.\n4. Add 2\u20133 more stretched film layers.\n5. Leave in place 24\u201348 hours; optionally combine with tissue adhesive.\n\n**Equipment:** Benzoin tincture, 2x2 gauze, transparent film dressing x3\u20134.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Foley Catheter for Penetrating Trauma',
+            body: '**Accomplishes:** Tamponades bleeding from a penetrating wound (e.g., neck / junctional) by inflating a Foley balloon in the wound tract. [10]\n\n**How to:**\n1. Insert a Foley catheter into the bleeding wound tract.\n2. Inflate the balloon to tamponade the vessel.\n3. Clamp the catheter and secure; arrange definitive surgical management.\n\n**Equipment:** Foley catheter, syringe/saline, clamp.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Alternative to a Pressure Bag for IV Fluids',
+            body: '**Accomplishes:** Delivers rapid fluid boluses when a pressure bag is unavailable. [11]\n\n**How to:**\n1. Wrap a BP cuff around the fluid bag and inflate, OR use a 3-way stopcock + syringe for a push-pull setup.\n2. Squeeze/inflate to accelerate flow while monitoring the bag.\n\n**Equipment:** IV fluid bag, BP cuff or 3-way stopcock + syringe.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
+        { num: 2, text: 'ALiEM. Trick of the Trade: Cut IV tubing for 2-person US nerve block. aliem.com.' },
+        { num: 3, text: 'ALiEM. Trick of the Trade: Winging it \u2014 external jugular cannulation. aliem.com.' },
+        { num: 4, text: 'ALiEM. Trick of the Trade: Gel-free ultrasound-guided peripheral IV. aliem.com.' },
+        { num: 5, text: 'ALiEM. Trick of the Trade: Don\u2019t fight the ultrasound cord. aliem.com.' },
+        { num: 6, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag. aliem.com.' },
+        { num: 7, text: 'ALiEM. Trick of the Trade: Chest-tube rewarming with Foley tubing connector. aliem.com.' },
+        { num: 8, text: 'ALiEM. Trick of the Trade: Inflating an esophageal balloon without a manometer. aliem.com.' },
+        { num: 9, text: 'ALiEM. Trick of the Trade: Persistent paracentesis leakage. aliem.com.' },
+        { num: 10, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 11, text: 'ALiEM. Trick of the Trade: Alternative to a pressure bag for IV fluids. aliem.com.' },
+    ],
+};
+const TRICKS_ENT_PAGE = {
+    id: 'tricks-ent',
+    title: 'ENT — Tricks of the Trade',
+    subtitle: 'Epistaxis packing tricks and nasal suction.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Surgicel \u201CBurrito\u201D for Epistaxis',
+            body: '**Accomplishes:** Anterior nasal packing for epistaxis using oxidized cellulose \u2014 an alternative to commercial tampons that dissolves and doesn\u2019t require removal. [1]\n\n**How to:**\n1. Take a strip of Surgicel (oxidized regenerated cellulose).\n2. Roll it into a compact \u201Cburrito.\u201D\n3. Pack it into the bleeding anterior nasal cavity for tamponade and hemostasis.\n\n**Equipment:** Surgicel, nasal speculum, bayonet forceps.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Dual Foley Catheter for Massive Epistaxis',
+            body: '**Accomplishes:** Improvised posterior + anterior tamponade for severe / posterior epistaxis when a commercial dual-balloon device isn\u2019t available. [2]\n\n**How to:**\n1. With the mouth open, insert a 14-Fr Foley into the nostril until the tip is visible in the posterior oropharynx.\n2. Inflate the first balloon with 15\u201320 cc air.\n3. Pull the catheter forward until it seats against the posterior choana.\n4. If bleeding persists, insert a second Foley to resistance and inflate ~15 cc for added surface tamponade.\n\n**Equipment:** Two 14-Fr Foley catheters, syringe/air, lubricant.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'Merocel Packing With an Angiocatheter',
+            body: '**Accomplishes:** Improves placement and hydration of a Merocel nasal tampon, easing insertion and expansion. [3]\n\n**How to:**\n1. Pass an angiocatheter alongside/through the Merocel to direct saline.\n2. Insert the Merocel into the nasal cavity.\n3. Inject saline through the angiocatheter to rapidly expand the tampon in place.\n\n**Equipment:** Merocel nasal tampon, angiocatheter, saline syringe.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+        {
+            heading: 'DIY Nasal Aspirator (Pediatric)',
+            body: '**Accomplishes:** Clears nasal secretions in a congested infant (e.g., bronchiolitis) when a commercial aspirator isn\u2019t available. [4]\n\n**How to:**\n1. Assemble a low-pressure aspirator from suction tubing and a small suction catheter.\n2. Apply gentle suction to each nostril to evacuate secretions (keep pressure low to protect mucosa).\n\n**Equipment:** Suction tubing, small suction catheter, wall suction on a low setting.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 2, text: 'ALiEM. Trick of the Trade: Dual Foley catheter for massive epistaxis. aliem.com.' },
+        { num: 3, text: 'ALiEM. Trick of the Trade: Merocel nasal packing with an angiocatheter. aliem.com.' },
+        { num: 4, text: 'ALiEM. Trick of the Trade: DIY nasal snot aspirator. aliem.com.' },
+    ],
+};
+const TRICKS_OPHTHO_PAGE = {
+    id: 'tricks-ophtho',
+    title: 'Ophthalmology — Tricks of the Trade',
+    subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Digital Globe Palpation for Angle-Closure',
+            body: '**Accomplishes:** Rapid bedside screen for markedly elevated intraocular pressure when a tonometer isn\u2019t at hand. It can rule IN a hard eye but cannot rule out elevated pressure \u2014 it does not replace tonometry. [1]\n\n**How to:**\n1. Have the patient gently close both eyes.\n2. Gently press both globes through the closed lids with fingertips.\n3. Compare firmness of the affected eye to the normal eye.\n4. A \u201Crock hard\u201D globe suggests acutely elevated IOP / angle closure.\n\n**Equipment:** None (examiner\u2019s fingers).\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Bacitracin to Remove Nail Glue From Eyelids',
+            body: '**Accomplishes:** Frees eyelids/lashes glued shut by accidental cyanoacrylate (super/nail glue) without acetone or forceps that can scratch the cornea. [2]\n\n**How to:**\n1. Liberally coat the affected lid margins with bacitracin (petroleum-based) ointment.\n2. Wait 15\u201320 minutes undisturbed.\n3. Gently tease the lids and lashes apart with cotton-tipped applicators \u2014 avoid vigorous massage (residual hard glue can abrade cornea).\n4. Irrigate copiously with saline.\n5. Perform an ocular exam; consider ophthalmology referral.\n\n**Equipment:** Bacitracin ointment (1\u20132 tubes), cotton-tipped applicators, irrigation saline.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 2, text: 'ALiEM. Trick of the Trade: Antibiotic ointment for nail-glue removal from eyelids. aliem.com.' },
+    ],
+};
+const TRICKS_UROLOGY_PAGE = {
+    id: 'tricks-urology',
+    title: 'Urology — Tricks of the Trade',
+    subtitle: 'Voiding trials, priapism, and entrapment releases.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Active Voiding Trial (AVT) for Foley Removal',
+            body: '**Accomplishes:** Tests whether a patient can void adequately right after catheter removal, reducing repeat catheterization, retention, and CAUTI risk. [1]\n\n**How to:**\n1. Instill 250\u2013400 cc sterile saline through the Foley by gravity or slow push; stop early if discomfort/fullness.\n2. Clamp the catheter to prevent drainage.\n3. Deflate the balloon and remove the catheter; document the instilled volume.\n4. Assist the patient to void immediately (males standing, females sitting).\n5. Compare instilled vs voided volume and report within one hour; notify if the trial fails.\n\n**Equipment:** Sterile saline, in-place Foley, catheter clamp, syringe.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Exercise for Low-Flow Priapism',
+            body: '**Accomplishes:** Non-invasive first attempt to abort low-flow (ischemic) priapism before aspiration/phenylephrine (~40% success in studied patients). [2]\n\n**How to:**\n1. Have the patient perform vigorous exercise immediately (stair climbing, squats).\n2. Do not delay invasive management more than a few minutes if exercise fails.\n\n**Equipment:** None.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Release of an Entrapped Metal Zipper',
+            body: '**Accomplishes:** Frees skin caught in a metal zipper without procedural sedation, minimizing pain. [3]\n\n**How to:**\n1. Pull the garment away from the zipper to reduce stretch on trapped skin.\n2. Apply lidocaine gel to the site for 2\u20133 minutes.\n3. Identify the exposed teeth closest to the slider and carefully cut the zipper there, avoiding skin.\n4. Gently advance the slider body forward to disengage it from the teeth.\n5. Add more gel/lubricant to ease sliding; the zipper halves then release.\n\n**Equipment:** Lidocaine gel, blade or scissors (wire/trauma cutters).\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 3, text: 'ALiEM. Trick of the Trade: Removal of an entrapped metal zipper. aliem.com.' },
+    ],
+};
+const TRICKS_WOUND_PAGE = {
+    id: 'tricks-wound',
+    title: 'Wound Care — Tricks of the Trade',
+    subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Nailbed Repair With Tissue Adhesive',
+            body: '**Accomplishes:** Repairs/secures a nailbed laceration without sutures \u2014 faster and less painful than suturing the bed. [1]\n\n**How to:**\n1. Achieve hemostasis (digital block + finger tourniquet) and clean the nailbed.\n2. Approximate the nailbed laceration.\n3. Apply cyanoacrylate tissue adhesive to hold the bed (and replaced nail plate) in position.\n\n**Equipment:** Tissue adhesive (cyanoacrylate), digital block supplies, the avulsed nail plate if available.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Fingertip Shave Laceration \u2014 LET + Tourniquet + Glue',
+            body: '**Accomplishes:** Manages a bleeding shallow shave/mandoline fingertip laceration without suturing. [2]\n\n**How to:**\n1. Soak the wound in LET (lidocaine-epinephrine-tetracaine) for anesthesia and vasoconstriction.\n2. Apply a digit tourniquet proximal to the injury for a bloodless field.\n3. Apply tissue glue liberally to approximate the flap/edges.\n\n**Equipment:** LET solution, finger tourniquet, tissue adhesive.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Sterile Gel for Bloody Scalp Lacerations',
+            body: '**Accomplishes:** Clears matted blood/clot/hair from a scalp wound for visualization and closure \u2014 without shaving the scalp. [3]\n\n**How to:**\n1. Do preliminary irrigation if needed.\n2. Apply a generous amount of sterile water-soluble lubricating gel to the clotted area and matted hair.\n3. Wait 3\u20135 minutes for the gel to penetrate fibrin and soften clot.\n4. Massage gently in circles with gloved fingers to separate hair and loosen clot.\n5. Irrigate with saline (water-soluble gel rinses away easily).\n6. Proceed with standard cleaning and closure.\n\n**Equipment:** Sterile water-soluble lubricating gel, gloves, irrigation saline.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 3, text: 'ALiEM. Trick of the Trade: Lubricating gel for bloody scalp lacerations. aliem.com.' },
+    ],
+};
+const TRICKS_CARDIOLOGY_PAGE = {
+    id: 'tricks-cardiology',
+    title: 'Cardiology — Tricks of the Trade',
+    subtitle: 'Rapid drug delivery and rhythm tricks.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Ultrarapid Adenosine Push via Pressure Bag (SVT)',
+            body: '**Accomplishes:** Delivers undiluted adenosine to the heart at high flow to terminate SVT, exploiting its very short half-life \u2014 combines single-syringe speed with a large flush. [1]\n\n**How to:**\n1. Prime a pressure bag with saline tubing; close the roller clamp.\n2. Connect the line to the patient\u2019s angiocatheter.\n3. Attach the undiluted adenosine syringe to the Y-site nearest the patient.\n4. Open the roller clamp for high-pressure flow.\n5. Rapidly inject the adenosine into the tubing.\n\n**Equipment:** Pressure bag with primed saline line, IV angiocatheter, undiluted adenosine syringe, Y-site connector.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
+    ],
+};
+const TRICKS_NEURO_PAGE = {
+    id: 'tricks-neuro',
+    title: 'Neurology — Tricks of the Trade',
+    subtitle: 'Bedside CN testing and BPPV maneuvers.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Sugar Test for Bell\u2019s Palsy (CN VII Taste)',
+            body: '**Accomplishes:** Bedside check of anterior-tongue taste (chorda tympani / CN VII) to support facial-palsy assessment. [1]\n\n**How to:**\n1. Gently hold the tongue out with gauze.\n2. Sprinkle a little sugar on one anterior side of the tongue; rinse with water between sides. OR\n3. Mix 2 tsp sugar in 1 tbsp water, draw into a syringe, and drip onto the target side.\n4. Have the patient report any difference in taste between sides.\n\n**Equipment:** Sugar (powder or dissolved), gauze, syringe/dropper (optional).\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'BPPV Beyond the Basics',
+            body: '**Accomplishes:** Alternative BPPV diagnostic and treatment maneuvers for patients who can\u2019t tolerate standard Dix-Hallpike/Epley (kyphosis, obesity, back pain, orthopnea). [2]\n\n**How to:**\n1. **Loaded Dix-Hallpike:** flex the head forward 30\u00B0 in the plane of the affected posterior canal for 30 sec before going supine; use pillows under the thoracic spine for kyphotic/elderly patients.\n2. **Sidelying test:** rotate the head 45\u00B0 contralateral to the tested canal, then descend to the ipsilateral side (good when the patient can\u2019t lie flat).\n3. **BBQ/Lempert roll (horizontal canal):** from supine, roll the head in 90\u00B0 steps through a full 360\u00B0, holding 30 sec at each step (>90% success).\n4. **Semont maneuver:** rapidly transition side-to-side without pausing seated, keeping the head rotated, to mobilize otoliths.\n\n**Equipment:** Exam bed; pillows optional.\n\n_Source: ALiEM Tricks of the Trade._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 2, text: 'ALiEM. Tricks of the Trade: BPPV beyond the basics. aliem.com.' },
+    ],
+};
+const TRICKS_TOX_PAGE = {
+    id: 'tricks-tox',
+    title: 'Toxicology — Tricks of the Trade',
+    subtitle: 'Antiemetic and toxidrome management pearls.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Haloperidol for Cannabinoid Hyperemesis (CHS)',
+            body: '**Accomplishes:** Treats refractory nausea/vomiting from chronic cannabis use \u2014 IV haloperidol outperformed ondansetron in the HaVOC trial. [1]\n\n**How to:**\n1. For CHS-pattern intractable vomiting, give IV haloperidol as an antiemetic (per HaVOC dosing).\n2. Topical capsaicin and hot showers are adjuncts.\n\n**Equipment:** IV haloperidol (alternative: ondansetron).\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/. (HaVOC trial.)' },
+    ],
+};
+const TRICKS_GENERAL_PAGE = {
+    id: 'tricks-general',
+    title: 'General & Diagnostics — Tricks of the Trade',
+    subtitle: 'Fast bedside screens, dosing pearls, and communication.',
+    shareable: true,
+    sections: [
+        {
+            heading: 'ETCO2 Capnography Screening for DKA',
+            body: '**Accomplishes:** Fast non-invasive screen to rule in/out DKA in a hyperglycemic patient (AUC ~0.95\u20130.96; correlates with bicarbonate/anion gap). [1]\n\n**How to:**\n1. Place a nasal capnography cannula and obtain the ETCO2 reading.\n2. Interpret: ETCO2 \u226535\u201336 mmHg \u2248 ~100% sensitivity to exclude DKA (rule out); ETCO2 \u226421 mmHg = 100% specificity for DKA (rule in).\n\n**Equipment:** Capnography monitor with nasal cannula.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Whole Blood on a Urine Pregnancy Cassette',
+            body: '**Accomplishes:** Rapid hCG result when urine is unavailable (95.8% sensitivity, 100% specificity, ~97.9% NPV; saves ~21 min). [2]\n\n**How to:**\n1. Place 2\u20133 drops of whole blood (from a routine draw) onto a standard urine hCG cassette well.\n2. Process per the kit\u2019s normal instructions and interpret as usual.\n\n**Equipment:** Standard POC urine hCG kit, whole blood from a routine draw.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'The \u201CJedi Mind Trick\u201D for Obstruction of Care',
+            body: '**Accomplishes:** De-escalation phrase to get a patient/family/consultant to cooperate when they\u2019re blocking necessary care. [3]\n\n**How to:**\n1. Calmly say: \u201CI am sure you can understand the implications of both of us missing this diagnosis.\u201D\n2. This shares accountability and reframes the decision around the shared risk of a missed diagnosis.\n\n**Equipment:** None (verbal technique).\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Cephalexin 1 g BID Dosing',
+            body: '**Accomplishes:** Simplifies outpatient cephalexin to twice-daily dosing for better adherence in susceptible skin/soft-tissue infections. [4]\n\n**How to:**\n1. Prescribe cephalexin 1 g PO twice daily. OR\n2. Use cefadroxil for once-daily dosing where available.\n\n**Equipment:** None.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Phenytoin/Fosphenytoin for Acute Trigeminal Neuralgia',
+            body: '**Accomplishes:** Rapid abortive treatment of a severe acute trigeminal neuralgia flare in the ED. [5]\n\n**How to:**\n1. Give IV/IM phenytoin or fosphenytoin for the acute flare (carbamazepine remains the chronic mainstay).\n\n**Equipment:** Phenytoin or fosphenytoin (IV/IM).\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+        {
+            heading: 'Low-Dose Colchicine for Acute Gout',
+            body: '**Accomplishes:** Treats an acute gout flare with a low-dose regimen that\u2019s far better tolerated (less GI toxicity) than older high-dose protocols. [6]\n\n**How to:**\n1. Give colchicine 1.2 mg loading dose.\n2. Follow with 0.6 mg one hour later.\n\n**Equipment:** Colchicine tablets.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 3, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 4, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 5, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+        { num: 6, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+    ],
+};
+const TRICKS_ORTHO_PAGE = {
+    id: 'tricks-ortho',
+    title: 'Orthopedics — Tricks of the Trade',
+    subtitle: 'Reduction and splinting tricks (growing daily).',
+    shareable: true,
+    sections: [
+        {
+            body: 'Orthopedic tricks are being added daily by the Tricks of the Trade scout. Check back soon \u2014 reduction techniques, splinting hacks, and joint-relocation pearls are on the way.',
+        },
+    ],
+    citations: [],
+};
 export const INFO_PAGES = {
+    // Tricks of the Trade
+    'tricks-airway': TRICKS_AIRWAY_PAGE,
+    'tricks-procedures': TRICKS_PROCEDURES_PAGE,
+    'tricks-ent': TRICKS_ENT_PAGE,
+    'tricks-ophtho': TRICKS_OPHTHO_PAGE,
+    'tricks-urology': TRICKS_UROLOGY_PAGE,
+    'tricks-wound': TRICKS_WOUND_PAGE,
+    'tricks-cardiology': TRICKS_CARDIOLOGY_PAGE,
+    'tricks-neuro': TRICKS_NEURO_PAGE,
+    'tricks-tox': TRICKS_TOX_PAGE,
+    'tricks-general': TRICKS_GENERAL_PAGE,
+    'tricks-ortho': TRICKS_ORTHO_PAGE,
     // SJS / TEN
     'sjs-ten-summary': SJS_TEN_SUMMARY_PAGE,
     'sjs-ten-images': SJS_TEN_IMAGES_PAGE,
