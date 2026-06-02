@@ -200,7 +200,7 @@ export const WIDE_COMPLEX_TACHYCARDIA_NODES = [
         module: 4,
         title: 'Brugada Algorithm',
         body: '**Step-by-step (stop if YES at any step = VT):**\n\n**Step 1:** Absence of RS complex in ALL precordial leads (V1-V6)?\n• All monophasic = VT\n\n**Step 2:** RS interval >100ms in any precordial lead?\n• Measure R onset to S nadir\n• >100ms = VT\n\n**Step 3:** AV dissociation present?\n• P waves at different rate = VT\n\n**Step 4:** Morphology criteria (V1 and V6):\n• **RBBB pattern:** Tall left rabbit ear in V1, or QS/rS in V6 = VT\n• **LBBB pattern:** R >30ms in V1, notched S descent, RS >70ms = VT\n\n**If all 4 steps NO → suggests SVT**',
-        citation: [6, 9],
+        citation: [4, 6, 9],
         next: 'wct-brugada-result',
         summary: 'Brugada: 4 steps — no RS in precordials, RS >100ms, AV dissociation, morphology criteria. Any YES = VT.',
         images: [{ src: 'images/ecg/brugada-algorithm.png', alt: 'Brugada algorithm flowchart', caption: 'Brugada 4-step algorithm for WCT differentiation' }],

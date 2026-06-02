@@ -85,6 +85,7 @@ export const BREECH_DELIVERY_NODES = [
         body: 'POCUS or exam shows vertex presentation. Proceed with the [Precipitous Delivery](#/tree/precip-delivery) consult for standard ED vaginal delivery.',
         recommendation: 'Vertex presentation confirmed — use Precipitous Delivery consult for standard stepwise management.',
         confidence: 'recommended',
+        citation: [1],
     },
     {
         id: 'breech-transverse',
@@ -454,8 +455,8 @@ export const BREECH_DELIVERY_NODES = [
         type: 'info',
         module: 6,
         title: 'Delivery Complete — Neonatal Assessment',
-        body: 'NEONATAL ASSESSMENT\n\nBreech neonates have a **higher rate of resuscitation needs** than cephalic — even in uncomplicated vaginal breech. Anticipate the need for bag-mask ventilation.\n\n**IMMEDIATE NEONATAL CARE:**\n1. **Clamp and cut cord** (two clamps ~3 cm apart; delayed cord clamping 30–60 sec if vigorous)\n2. **Dry and stimulate** the baby\n3. **APGAR at 1 and 5 minutes**\n4. **Transfer to neonatal warmer**\n5. **If HR <100 or not breathing → initiate [Neonatal Resuscitation](#/tree/neonatal-resus) (NRP)**\n\n**SPECIFIC INJURY ASSESSMENT FOR BREECH NEONATE:**\n• **Brachial plexus palsy** (Erb-Duchenne or Klumpke) — from arm traction during Løvset. Check movement of both arms.\n• **Humerus / clavicle fracture** — palpate both arms for crepitus or pain response\n• **Femur fracture** — palpate both legs\n• **Cephalohematoma / caput** — expected from head compression\n• **Hip dysplasia** (developmental) — common after breech; will need screening exam and US\n• **Genital / scrotal bruising** (males) or **labial bruising** (females) — from pelvic crowning\n• **Adrenal hemorrhage** — suspect if pallor, abdominal distension, hypotension (flank grip damage)\n• **Intracranial hemorrhage** — monitor for seizures, bulging fontanelle, apnea [1][2][4][6]',
-        citation: [1, 2, 4, 6],
+        body: 'NEONATAL ASSESSMENT\n\nBreech neonates have a **higher rate of resuscitation needs** than cephalic — even in uncomplicated vaginal breech. Anticipate the need for bag-mask ventilation.\n\n**IMMEDIATE NEONATAL CARE:**\n1. **Clamp and cut cord** (two clamps ~3 cm apart; delayed cord clamping 30–60 sec if vigorous)\n2. **Dry and stimulate** the baby\n3. **APGAR at 1 and 5 minutes**\n4. **Transfer to neonatal warmer**\n5. **If HR <100 or not breathing → initiate [Neonatal Resuscitation](#/tree/neonatal-resus) (NRP)**\n\n**SPECIFIC INJURY ASSESSMENT FOR BREECH NEONATE:**\n• **Brachial plexus palsy** (Erb-Duchenne or Klumpke) — from arm traction during Løvset. Check movement of both arms.\n• **Humerus / clavicle fracture** — palpate both arms for crepitus or pain response\n• **Femur fracture** — palpate both legs\n• **Cephalohematoma / caput** — expected from head compression\n• **Hip dysplasia** (developmental) — common after breech; will need screening exam and US\n• **Genital / scrotal bruising** (males) or **labial bruising** (females) — from pelvic crowning\n• **Adrenal hemorrhage** — suspect if pallor, abdominal distension, hypotension (flank grip damage)\n• **Intracranial hemorrhage** — monitor for seizures, bulging fontanelle, apnea [1][2][4][6][7]',
+        citation: [1, 2, 4, 6, 7],
         next: 'breech-maternal-postpartum',
         summary: 'Higher resus need than cephalic. Check for brachial plexus palsy, fractures, adrenal hemorrhage, ICH.',
     },
