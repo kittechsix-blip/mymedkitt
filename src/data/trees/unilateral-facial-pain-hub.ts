@@ -1,4 +1,4 @@
-// MedKitt - Unilateral Facial Pain Hub
+// MedKitt - Facial Pain-Unilateral
 // Chief complaint hub for ED pattern recognition and dangerous-exclusion workflow.
 
 import type { DecisionNode } from '../../models/types.js';
@@ -17,11 +17,11 @@ export const UNILATERAL_FACIAL_PAIN_HUB_NODES: DecisionNode[] = [
     id: 'ufp-start',
     type: 'info',
     module: 1,
-    title: 'Unilateral Facial Pain Hub - First Pass',
+    title: 'Facial Pain-Unilateral - First Pass',
     body: 'Open first: [Steps](#/info/ufp-steps) | [Differential](#/info/ufp-differential-guide) | [Red Flags](#/info/ufp-red-flags-guide)\n\n**Goal:** decide whether this is dangerous eye/orbit, neurovascular, deep infection, GCA, zoster, cranial neuralgia, TAC/cluster, dental, sinus/ear, TMJ, or migraine/headache phenotype.\n\n**First 60 seconds:**\n- Vitals, fever, toxic appearance, immunocompromise.\n- Visual acuity, pupils, red eye, cornea/fluorescein, IOP when angle closure is plausible, EOM pain/restriction, proptosis.\n- Neuro: face symmetry, speech, limb drift, gait, cranial nerves, Horner pattern.\n- Mouth/neck: teeth, gingiva, floor of mouth, trismus, dysphagia, voice, neck swelling.\n- Skin/ear: V1 vesicles, tip of nose, ear vesicles, facial weakness, dermatomal allodynia.\n- Age >50: temporal pain, scalp tenderness, jaw claudication, PMR, constitutional symptoms, diplopia/vision loss.\n\nDo not call this "sinus" or "TMJ" until the eye, neurovascular, infection, GCA, and zoster lanes are actively considered.',
     citation: [1, 2, 4, 7, 8],
     next: 'ufp-early-differential',
-    summary: 'Unilateral facial pain hub: dangerous exclusions first, then pattern recognition.',
+    summary: 'Facial Pain-Unilateral: dangerous exclusions first, then pattern recognition.',
     safetyLevel: 'critical',
   },
   {

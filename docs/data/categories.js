@@ -678,7 +678,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'unilateral-facial-pain-hub',
-                title: 'Unilateral Facial Pain Hub',
+                title: 'Facial Pain-Unilateral',
                 subtitle: 'Sick Check → Dangerous Differential → Pattern Recognition → Testing → Dispo',
                 categoryId: 'emergency-medicine',
                 version: '1.0',
@@ -1888,7 +1888,7 @@ export const DEFAULT_CATEGORIES = [
             },
             {
                 id: 'unilateral-facial-pain-hub',
-                title: 'Unilateral Facial Pain Hub',
+                title: 'Facial Pain-Unilateral',
                 subtitle: 'Sick Check → Dangerous Differential → Pattern Recognition → Testing → Dispo',
                 categoryId: 'emergency-medicine',
                 version: '1.0',

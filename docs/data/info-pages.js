@@ -10115,7 +10115,7 @@ const DEMENTIA_SAFETY_GUIDE = {
 };
 const UFP_STEPS_PAGE = {
     id: 'ufp-steps',
-    title: 'Unilateral Facial Pain Steps',
+    title: 'Facial Pain-Unilateral Steps',
     subtitle: 'ED chief complaint sequence',
     sections: [
         {
@@ -10179,7 +10179,7 @@ const UFP_RED_FLAGS_GUIDE = {
 };
 const UFP_DIFFERENTIAL_GUIDE = {
     id: 'ufp-differential-guide',
-    title: 'Unilateral Facial Pain Differential',
+    title: 'Facial Pain-Unilateral Differential',
     subtitle: 'Dangerous causes, then common phenotypes',
     sections: [
         {
