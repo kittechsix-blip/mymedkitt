@@ -23585,7 +23585,7 @@ const AMS_STOP_PAGE = {
 };
 const GW_STEPS_PAGE = {
     id: 'gw-steps',
-    title: 'Generalized Weakness Hub - Steps Summary',
+    title: 'Weakness Hub - Steps Summary',
     subtitle: 'Glucose, ECG, localization, rescue bundle, imaging, disposition',
     sections: [
         {
@@ -23599,7 +23599,7 @@ const GW_STEPS_PAGE = {
 };
 const GW_STOP_PAGE = {
     id: 'gw-stop',
-    title: 'Generalized Weakness Hub - Do NOT',
+    title: 'Weakness Hub - Do NOT',
     subtitle: 'Critical pitfalls in vague weakness',
     sections: [
         {

@@ -725,7 +725,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'generalized-weakness-hub',
-        title: 'Generalized Weakness Hub',
+        title: 'Weakness Hub',
         subtitle: 'Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo',
         categoryId: 'emergency-medicine',
         version: '1.0',
@@ -1304,6 +1304,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     name: 'Heme/Onc',
     icon: 'heme-onc.png',
     decisionTrees: [
+      {
+        id: 'lambert-eaton',
+        title: 'Lambert-Eaton Myasthenic Syndrome (LEMS)',
+        subtitle: 'Recognition → Triad → vs MG → Diagnosis → Cancer Search → Drugs to Avoid → Respiratory → Treatment → Disposition',
+        categoryId: 'heme-onc',
+        version: '1.0',
+        nodeCount: 10,
+        entryNodeId: 'lems-start',
+      },
       {
         id: 'sickle-cell',
         title: 'Sickle Cell Disease',
@@ -1922,7 +1931,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'generalized-weakness-hub',
-        title: 'Generalized Weakness Hub',
+        title: 'Weakness Hub',
         subtitle: 'Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo',
         categoryId: 'emergency-medicine',
         version: '1.0',
@@ -1960,6 +1969,33 @@ export const DEFAULT_CATEGORIES: Category[] = [
         version: '1.0',
         nodeCount: 21,
         entryNodeId: 'gbs-start',
+      },
+      {
+        id: 'transverse-myelitis',
+        title: 'Acute Transverse Myelitis',
+        subtitle: 'Recognition → Exclude Compression (MRI) → Workup → Etiology → Steroids/PLEX → Differential → Disposition',
+        categoryId: 'neurology',
+        version: '1.0',
+        nodeCount: 11,
+        entryNodeId: 'tm-start',
+      },
+      {
+        id: 'tick-paralysis',
+        title: 'Tick Paralysis',
+        subtitle: 'Recognition → Find the Tick → Removal → Monitor → Geography → Differential → Disposition',
+        categoryId: 'neurology',
+        version: '1.0',
+        nodeCount: 9,
+        entryNodeId: 'tp-start',
+      },
+      {
+        id: 'b12-deficiency',
+        title: 'B12 Deficiency / Subacute Combined Degeneration',
+        subtitle: 'Recognition → Etiology → Diagnosis → Pitfalls (folate/N2O) → Repletion → Differential → Disposition',
+        categoryId: 'neurology',
+        version: '1.0',
+        nodeCount: 8,
+        entryNodeId: 'b12-start',
       },
       {
         id: 'iih',

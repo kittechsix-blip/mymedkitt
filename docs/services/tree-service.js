@@ -834,6 +834,22 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/myasthenia-gravis.js');
             return { nodes: m.MYASTHENIA_GRAVIS_NODES, entryNodeId: 'mg-start', categoryId: 'neurology', moduleLabels: m.MYASTHENIA_GRAVIS_MODULE_LABELS, citations: m.MYASTHENIA_GRAVIS_CITATIONS, criticalActions: m.MYASTHENIA_GRAVIS_CRITICAL_ACTIONS };
         },
+        'transverse-myelitis': async () => {
+            const m = await import('../data/trees/transverse-myelitis.js');
+            return { nodes: m.TRANSVERSE_MYELITIS_NODES, entryNodeId: 'tm-start', categoryId: 'neurology', moduleLabels: m.TRANSVERSE_MYELITIS_MODULE_LABELS, citations: m.TRANSVERSE_MYELITIS_CITATIONS, criticalActions: m.TRANSVERSE_MYELITIS_CRITICAL_ACTIONS };
+        },
+        'tick-paralysis': async () => {
+            const m = await import('../data/trees/tick-paralysis.js');
+            return { nodes: m.TICK_PARALYSIS_NODES, entryNodeId: 'tp-start', categoryId: 'neurology', moduleLabels: m.TICK_PARALYSIS_MODULE_LABELS, citations: m.TICK_PARALYSIS_CITATIONS, criticalActions: m.TICK_PARALYSIS_CRITICAL_ACTIONS };
+        },
+        'lambert-eaton': async () => {
+            const m = await import('../data/trees/lambert-eaton.js');
+            return { nodes: m.LAMBERT_EATON_NODES, entryNodeId: 'lems-start', categoryId: 'heme-onc', moduleLabels: m.LAMBERT_EATON_MODULE_LABELS, citations: m.LAMBERT_EATON_CITATIONS, criticalActions: m.LAMBERT_EATON_CRITICAL_ACTIONS };
+        },
+        'b12-deficiency': async () => {
+            const m = await import('../data/trees/b12-deficiency.js');
+            return { nodes: m.B12_DEFICIENCY_NODES, entryNodeId: 'b12-start', categoryId: 'neurology', moduleLabels: m.B12_DEFICIENCY_MODULE_LABELS, citations: m.B12_DEFICIENCY_CITATIONS, criticalActions: m.B12_DEFICIENCY_CRITICAL_ACTIONS };
+        },
         'parkinson-ed': async () => {
             const m = await import('../data/trees/parkinson-ed.js');
             return { nodes: m.PARKINSON_ED_NODES, entryNodeId: 'pd-start', categoryId: 'neurology', moduleLabels: m.PARKINSON_ED_MODULE_LABELS, citations: m.PARKINSON_ED_CITATIONS, criticalActions: m.PARKINSON_ED_CRITICAL_ACTIONS };
