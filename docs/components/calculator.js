@@ -24426,6 +24426,121 @@ const QT_DRUG_CHECKER_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// MRI Safety / Screening Calculator
+// -------------------------------------------------------------------
+const MRI_SCREEN_CALCULATOR = {
+    id: 'mri-screen',
+    title: 'MRI Screening Tool',
+    subtitle: 'MRI safety screen: implants, metal, gadolinium, and operational risk',
+    description: 'Conservative ED MRI safety screen. This tool does not independently clear MRI. It identifies patients who need MR safety, radiology, device-team, or contrast-risk review before Zone III/IV entry or gadolinium administration.',
+    fields: [
+        { name: 'screenReliability', label: 'Screen reliability', type: 'select', points: 0, hideOptionPoints: true, description: 'If the screen is unreliable, treat MR safety as unknown until verified.', selectOptions: [
+                { label: 'Reliable patient/caregiver/chart screen completed', points: 0 },
+                { label: 'Patient cannot answer and no reliable collateral', points: 1 },
+            ] },
+        { name: 'unknownImplant', label: 'Any implant/device with unknown MR status', type: 'toggle', points: 1, description: 'No model/card/op note, or MR conditions not confirmed.' },
+        { name: 'cardiacDevice', label: 'Pacemaker, ICD, loop recorder, or retained cardiac leads', type: 'toggle', points: 1, description: 'Requires MR protocol, device identification, programming/monitoring plan, and appropriate clearance.' },
+        { name: 'neuroStimulator', label: 'Neurostimulator, spinal cord stimulator, DBS, vagal stimulator', type: 'toggle', points: 1, description: 'All system components and manufacturer conditions must be confirmed.' },
+        { name: 'aneurysmClip', label: 'Intracranial aneurysm clip or unknown intracranial vascular implant', type: 'toggle', points: 1, description: 'Do not assume safety from a prior uneventful MRI.' },
+        { name: 'cochlearImplant', label: 'Cochlear/otologic implant or programmable hearing implant', type: 'toggle', points: 1, description: 'May require model-specific magnet, bandage, or surgical-magnet instructions.' },
+        { name: 'implantedPump', label: 'Infusion pump, pain pump, insulin pump, or implanted medication device', type: 'toggle', points: 1, description: 'Active devices may malfunction or require removal/programming.' },
+        { name: 'vpShunt', label: 'Programmable VP shunt or implanted valve', type: 'toggle', points: 1, description: 'May require model confirmation and post-MRI setting check.' },
+        { name: 'recentImplant', label: 'Recent procedure/implant, temporary hardware, or post-op device', type: 'toggle', points: 1, description: 'Confirm device identity, fixation, and local MR policy before scanning.' },
+        { name: 'orbitalMetal', label: 'Possible orbital metal or penetrating eye injury history', type: 'toggle', points: 1, description: 'Metal work, grinding, blast injury, or penetrating ocular injury may need orbit imaging/clearance.' },
+        { name: 'retainedMetal', label: 'Retained shrapnel/bullet/metal near CNS, orbit, vessel, or unknown location', type: 'toggle', points: 1, description: 'Risk depends on ferromagnetism, location, chronicity, and tissue fixation.' },
+        { name: 'externalMetal', label: 'External ferromagnetic item cannot be removed', type: 'toggle', points: 1, description: 'Examples: unsafe monitor, oxygen cylinder, pump, jewelry, piercings, weighted blankets, some wound/skin products.' },
+        { name: 'contrastPlanned', label: 'Gadolinium contrast planned?', type: 'select', points: 0, hideOptionPoints: true, description: 'Contrast risk is separate from magnet/device safety.', selectOptions: [
+                { label: 'No gadolinium planned', points: 0 },
+                { label: 'Gadolinium planned', points: 1 },
+            ] },
+        { name: 'renalRisk', label: 'Renal risk if gadolinium planned', type: 'select', points: 0, hideOptionPoints: true, description: 'Use local contrast policy and radiology guidance for AKI, dialysis, or eGFR <30.', selectOptions: [
+                { label: 'No AKI and eGFR >=30, or not applicable', points: 0 },
+                { label: 'AKI, dialysis, or eGFR <30', points: 2 },
+                { label: 'Renal function unknown and contrast planned', points: 1 },
+            ] },
+        { name: 'pregnancy', label: 'Pregnancy status', type: 'select', points: 0, hideOptionPoints: true, description: 'Noncontrast MRI is a separate risk-benefit discussion from gadolinium.', selectOptions: [
+                { label: 'Not pregnant / not applicable', points: 0 },
+                { label: 'Pregnant or pregnancy uncertain', points: 1 },
+            ] },
+        { name: 'monitoringRisk', label: 'Needs monitoring/infusion/equipment not confirmed MRI-compatible', type: 'toggle', points: 1, description: 'Confirm MR Conditional monitor, tubing, pump, oxygen source, ventilator, and staffing plan.' },
+        { name: 'sedationRisk', label: 'Severe claustrophobia, agitation, or cannot lie still', type: 'toggle', points: 1, description: 'May need anxiolysis, sedation plan, monitoring, or alternate imaging.' },
+    ],
+    results: [],
+    thresholdNote: 'Use this as a pre-MRI risk screen, not as final MRI clearance. Unknown implant status, unreliable screening, or unverified MR Conditional requirements should trigger MR safety/radiology review before Zone III/IV entry.',
+    citations: [
+        'American College of Radiology. ACR Manual on MR Safety. 2026.',
+        'American College of Radiology Committee on Drugs and Contrast Media. ACR Manual on Contrast Media. Current online version.',
+        'U.S. Food and Drug Administration. Benefits and Risks of MRI. Content current as of 2017.',
+        'U.S. Food and Drug Administration. Testing and Labeling Medical Devices for Safety in the Magnetic Resonance (MR) Environment. Guidance for Industry and FDA Staff. 2023.',
+    ],
+    computeResult: (values) => {
+        const has = (key) => (values[key] || 0) > 0;
+        const contrastPlanned = has('contrastPlanned');
+        const contrastRisk = contrastPlanned && ((values['renalRisk'] || 0) > 0 || (values['pregnancy'] || 0) > 0);
+        const hardStopFlags = [
+            'screenReliability',
+            'unknownImplant',
+            'cardiacDevice',
+            'neuroStimulator',
+            'aneurysmClip',
+            'cochlearImplant',
+            'implantedPump',
+            'orbitalMetal',
+            'externalMetal',
+        ];
+        const verifyFlags = [
+            'vpShunt',
+            'recentImplant',
+            'retainedMetal',
+        ];
+        const operationalFlags = [
+            'monitoringRisk',
+            'sedationRisk',
+        ];
+        const hardStop = hardStopFlags.some(has);
+        const needsConditionalProtocol = verifyFlags.some(has);
+        const needsOperationalPlan = operationalFlags.some(has);
+        if (hardStop) {
+            return {
+                value: 'STOP',
+                label: 'MR safety clearance before scan',
+                description: '**Do not enter MRI Zone III/IV yet.**\n\n- Verify device/implant make, model, location, and MR labeling.\n- Confirm MR Safe or exact MR Conditional instructions in writing or the chart.\n- Involve MRI technologist, MR safety officer/medical director, radiology, and device team as needed.\n- If the patient cannot be screened reliably, treat MRI safety as unknown until collateral/records/imaging resolve it.\n\nUnknown MR status should be managed as unsafe until verified.',
+                colorVar: '--color-danger',
+            };
+        }
+        if (needsConditionalProtocol) {
+            return {
+                value: 'VERIFY',
+                label: 'MR-conditional protocol required',
+                description: '**MRI may be possible, but only after the specific conditions are verified.**\n\n- Confirm field strength, SAR/RF limits, scan region, device configuration, and post-scan requirements.\n- Do not rely on "had an MRI before" as proof of safety.\n- Programmable shunts/valves may need post-MRI setting confirmation.\n- Retained metal decisions should consider location, ferromagnetism, chronicity, and risk if it moves or heats.',
+                colorVar: '--color-warning',
+            };
+        }
+        if (contrastRisk) {
+            return {
+                value: 'CONTRAST',
+                label: 'Gadolinium risk review required',
+                description: '**Magnet safety screen is not the same as gadolinium clearance.**\n\n- If AKI, dialysis, eGFR <30, or renal function is unknown, discuss contrast necessity and agent selection with radiology.\n- If pregnant or pregnancy uncertain, avoid gadolinium unless the expected diagnostic benefit justifies fetal exposure risk.\n- Consider noncontrast MRI, CT, ultrasound, or delayed imaging if it answers the clinical question.',
+                colorVar: '--color-warning',
+            };
+        }
+        if (needsOperationalPlan) {
+            return {
+                value: 'PLAN',
+                label: 'Operational MRI plan needed',
+                description: '**No hard MR safety stop identified, but the scan still needs planning.**\n\n- Use MR Conditional monitoring, oxygen, pumps, tubing, and transport equipment.\n- Build a sedation/anxiolysis plan if the patient cannot lie still or tolerate the scanner.\n- Confirm staff can monitor and rescue the patient outside Zone IV if symptoms or instability develop.',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'OK',
+            label: 'Standard MRI screen complete',
+            description: '**No high-risk MRI screen item selected.**\n\nProceed only through local MRI screening workflow and radiology/MRI technologist approval. Remove external metal, change into MR Safe attire per local policy, confirm hearing protection, and repeat screening if new information appears.',
+            colorVar: '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
 // CT Decision Support Calculators
 // -------------------------------------------------------------------
 const CANADIAN_CT_HEAD_CALCULATOR = {
@@ -39007,6 +39122,8 @@ const CALCULATORS = {
     // Torsades de Pointes
     'qtc-calculator': QTC_CALCULATOR,
     'qt-drug-checker': QT_DRUG_CHECKER_CALCULATOR,
+    // Imaging Safety
+    'mri-screen': MRI_SCREEN_CALCULATOR,
     // CT Decision Support
     'canadian-ct-head': CANADIAN_CT_HEAD_CALCULATOR,
     'wells-pe': WELLS_PE_CALCULATOR,
