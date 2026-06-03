@@ -203,7 +203,7 @@ export const AORTIC_DISSECTION_NODES = [
         type: 'info',
         module: 4,
         title: 'Beta-Blocker Therapy',
-        body: '**Beta-blockers are the cornerstone of anti-impulse therapy.** [1,9]\n\n**[Esmolol](#/drug/esmolol/dissection) (preferred for titration):**\n- Bolus: 500 mcg/kg IV over 1 minute\n- Infusion: 50-200 mcg/kg/min\n- Ultra-short acting (t½ 9 minutes)\n- Easy to titrate up/down\n- Stop if proceeding to OR\n\n**[Labetalol](#/drug/labetalol/dissection) (alternative):**\n- 20mg IV, then 20-80mg q10min\n- Max 300mg\n- Combined alpha/beta blockade\n- Longer duration (good for stable patients)\n\n**Metoprolol:**\n- 5mg IV q5min, up to 15mg\n- Then 25-50mg PO q6h\n- Longer acting\n\n**Target:**\n- HR <60 bpm\n- Adequate dosing before adding vasodilator\n\n**Contraindications:**\n- Severe bradycardia\n- AV block\n- Acute heart failure (relative)\n- Severe AR with hemodynamic compromise\n- Cocaine-induced (relative - use cautiously)',
+        body: '**Beta-blockers are the cornerstone of anti-impulse therapy.** [1,9]\n\n**[Esmolol](#/drug/esmolol/dissection) (preferred for titration):**\n- Bolus: 500 mcg/kg IV over 1 minute\n- Infusion: 50-200 mcg/kg/min\n- Ultra-short acting (t½ 9 minutes)\n- Easy to titrate up/down\n- Stop if proceeding to OR\n\n**[Labetalol](#/drug/labetalol/dissection) (alternative):**\n- 20mg IV, then 20-80mg q10min\n- Max 300mg\n- Combined alpha/beta blockade\n- Longer duration (good for stable patients)\n\n**Metoprolol:**\n- 5mg IV q5min, up to 15mg\n- Then 25-50mg PO q6h\n- Longer acting\n\n**If beta-blockade is contraindicated → non-dihydropyridine CCB:**\n- [Diltiazem](#/drug/diltiazem/dissection): 0.25 mg/kg IV over 2 min, then infusion 5-15 mg/hr — titrate to HR <60\n- Use ONLY when beta-blockers cannot be used (severe asthma/bronchospasm, decompensated HF, high-grade AV block, acute cocaine/sympathomimetic intoxication)\n- Esmolol is still preferred first-line whenever beta-blockade is tolerable; its short half-life lets you test tolerance in relative contraindications\n\n**Target:**\n- HR <60 bpm\n- Adequate dosing before adding vasodilator\n\n**Contraindications to beta-blockers:**\n- Severe bradycardia\n- High-grade AV block\n- Acute decompensated heart failure (relative)\n- Severe AR with hemodynamic compromise (slow HR worsens regurgitation)\n- Cocaine/sympathomimetic intoxication (relative — risk of unopposed alpha; use CCB)',
         citation: [1, 9],
         calculatorLinks: [
             { id: 'aortic-anti-impulse', label: 'Anti-Impulse Targets' },
@@ -373,7 +373,7 @@ export const AORTIC_DISSECTION_CRITICAL_ACTIONS = [
     { text: 'Stat CTA chest/abdomen/pelvis (or TEE if unstable) to confirm diagnosis and classify type', nodeId: 'dissect-imaging' },
     { text: 'Cardiothoracic surgery consult immediately for Type A dissection (surgical emergency)', nodeId: 'dissect-type-a' },
     { text: 'Pain control with opioids (fentanyl 50-100 mcg IV) to reduce catecholamine surge', nodeId: 'dissect-management' },
-    { text: 'Avoid beta-blockers if severe AI, bradycardia, or cocaine use (use diltiazem instead)', nodeId: 'dissect-beta-blocker' },
+    { text: 'Esmolol is first-line for rate control; only if beta-blockade is contraindicated (severe AR, high-grade AV block, decompensated HF, asthma, cocaine) substitute IV diltiazem', nodeId: 'dissect-beta-blocker' },
     { text: 'ADD-RS score ≥2: proceed directly to CTA without D-dimer', nodeId: 'dissect-add-rs' },
 ];
 export const AORTIC_DISSECTION_CITATIONS = [
