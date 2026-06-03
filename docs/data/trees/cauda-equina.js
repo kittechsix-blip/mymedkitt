@@ -2,7 +2,7 @@
 // Emergency recognition and management of cauda equina compression
 // Sources: GIRFT 2023, EMDocs, StatPearls, AJNR 2024
 // 6 modules: Recognition → Red Flags → Exam → Imaging → Neurosurgery → Disposition
-// ~20 nodes
+// ~16 nodes
 export const CAUDA_EQUINA_CRITICAL_ACTIONS = [
     { text: 'Ask EVERY back pain patient about bladder, bowel, and saddle sensation — CES is easily missed', nodeId: 'ces-start' },
     { text: 'Post-void residual >500 mL + bilateral sciatica = 48x odds of CES — get MRI STAT', nodeId: 'ces-pvr' },

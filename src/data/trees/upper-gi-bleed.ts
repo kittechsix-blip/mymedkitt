@@ -1,7 +1,7 @@
 // MedKitt — Upper GI Bleed Management
 // Assessment → Resuscitation → Medical Management → Variceal → Balloon Tamponade → Disposition
 // 6 modules: Initial Assessment → Resuscitation → Medical Management → Variceal Bleeding → Balloon Tamponade → Disposition
-// ~28 nodes total.
+// ~25 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 

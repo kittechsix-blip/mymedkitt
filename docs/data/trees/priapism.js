@@ -1,6 +1,6 @@
 // MedKitt — Priapism Treatment Consult
 // Classification → Duration → Penile Block → Aspiration → Phenylephrine → Reassessment → Escalation
-// AUA/SMSNA 2022 + EAU guidelines. 7 modules, 46 nodes.
+// AUA/SMSNA 2022 + EAU guidelines. 7 modules, 44 nodes.
 export const PRIAPISM_CRITICAL_ACTIONS = [
     { text: 'Ischemic priapism is urologic EMERGENCY - smooth muscle necrosis begins at 4-6 hours', nodeId: 'priapism-ischemic-confirm' },
     { text: 'Phenylephrine 200 mcg (2 mL of 100 mcg/mL) intracavernosal q5 min, max 5 doses total (NOT per side)', nodeId: 'priapism-phenylephrine-dose' },

@@ -1,7 +1,7 @@
 // MedKitt — Necrotizing Fasciitis (NSTI) Management
 // Recognition → Resuscitation → Surgical Consultation → Antimicrobial Therapy → Adjunctive Therapy → Monitoring → Disposition
 // 6 modules: Recognition & Risk Factors → Resuscitation & Surgical Urgency → Antimicrobial Therapy → Adjunctive Therapies → Monitoring & Complications → Disposition
-// 28 nodes total.
+// 25 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

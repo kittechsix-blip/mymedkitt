@@ -2,7 +2,7 @@
 // Emergency recognition and management of cauda equina compression
 // Sources: GIRFT 2023, EMDocs, StatPearls, AJNR 2024
 // 6 modules: Recognition → Red Flags → Exam → Imaging → Neurosurgery → Disposition
-// ~20 nodes
+// ~16 nodes
 
 import type { DecisionNode } from '../../models/types.js';
 

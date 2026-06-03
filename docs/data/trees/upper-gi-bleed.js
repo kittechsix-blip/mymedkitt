@@ -1,7 +1,7 @@
 // MedKitt — Upper GI Bleed Management
 // Assessment → Resuscitation → Medical Management → Variceal → Balloon Tamponade → Disposition
 // 6 modules: Initial Assessment → Resuscitation → Medical Management → Variceal Bleeding → Balloon Tamponade → Disposition
-// ~28 nodes total.
+// ~25 nodes total.
 export const UPPER_GI_BLEED_CRITICAL_ACTIONS = [
     { text: 'Restrictive transfusion: Hgb <7 g/dL threshold (except ACS)', nodeId: 'ugib-transfusion' },
     { text: 'TXA is NOT recommended (HALT-IT trial: no benefit, increased VTE/seizures)', nodeId: 'ugib-start' },

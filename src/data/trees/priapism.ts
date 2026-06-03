@@ -1,6 +1,6 @@
 // MedKitt — Priapism Treatment Consult
 // Classification → Duration → Penile Block → Aspiration → Phenylephrine → Reassessment → Escalation
-// AUA/SMSNA 2022 + EAU guidelines. 7 modules, 46 nodes.
+// AUA/SMSNA 2022 + EAU guidelines. 7 modules, 44 nodes.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

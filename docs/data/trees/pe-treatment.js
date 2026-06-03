@@ -2,7 +2,7 @@
 // Risk stratification → Category D-E (Crashing) → Category C (Intermediate) → Category A-B (Low-risk) → Anticoagulation
 // Updated per 2026 AHA/ACC/ACCP/ACEP PE Guidelines + EMCrit Episode 424
 // 6 modules: Risk Stratification → Crashing PE (D-E) → Intermediate-Risk (C) → Low-Risk (A-B) → Advanced Interventions → Anticoagulation
-// 17 nodes total.
+// 20 nodes total.
 export const PE_TREATMENT_NODES = [
     // =====================================================================
     // MODULE 1: RISK STRATIFICATION (2026 AHA/ACC Categories A-E)
@@ -76,7 +76,7 @@ export const PE_TREATMENT_NODES = [
         module: 2,
         title: 'Reperfusion Strategy',
         body: '**Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) — no bolus if thrombolysis imminent; low-dose infusion ≤500 U/hr\n• UFH preferred (can be stopped if hemorrhage)\n\n**Systemic thrombolysis** — only intervention with mortality benefit data.\n\n**Dosing options:**\n• Standard: [Alteplase](#/drug/alteplase/pulmonary) **100 mg IV over 2h** (10–20 mg bolus, remainder over 2h)\n• Reduced-dose: **50 mg IV** over 2h (emerging — less bleeding, equivalent efficacy; HI-PEITHO 2026)\n• Cardiac arrest: **50 mg IV bolus** + sustained CPR\n• **Tenecteplase (alternative, off-label):** weight-based single bolus — 30 mg (<60 kg), 35 mg (60–69), 40 mg (70–79), 45 mg (80–89), 50 mg (≥90 kg). Single bolus advantage; mortality similar to alteplase.\n\n**2026 update:** Mechanical thrombectomy now preferred over CDT for stable-enough patients (PEERLESS-I trial). STRATIFY (2026) shows peripheral 20 mg tPA over 6h equivalent to CDT.',
-        citation: [1, 6, 7, 8],
+        citation: [1, 6, 7, 8, 11, 12],
         calculatorLinks: [
             { id: 'alteplase-pe-dosing', label: 'Alteplase Dosing' },
         ],
