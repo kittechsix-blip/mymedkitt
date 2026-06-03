@@ -55,7 +55,7 @@ export const HEPARIN_INFUSION_NODES = [
         type: 'info',
         module: 2,
         title: 'ACS / STEMI Adjunct',
-        body: 'Common ACS regimen:\n- [Unfractionated heparin](#/drug/ufh/ACS/STEMI adjunct) 60 units/kg IV bolus, max 4,000 units\n- Infusion 12 units/kg/hr, initial max 1,000 units/hr\n- Titrate by institutional aPTT or anti-Xa nomogram\n\nCoordinate with antiplatelet therapy, cath lab strategy, lytic therapy if used, and bleeding risk. Avoid duplicate anticoagulants when the patient has already received LMWH/DOAC.',
+        body: 'ACS regimen depends on STEMI-with-fibrinolytic vs NSTEMI/UA:\n- STEMI + fibrinolytic: [Unfractionated heparin](#/drug/ufh/ACS/STEMI adjunct) 60 units/kg IV bolus, max 4,000 units; infusion 12 units/kg/hr, initial max 1,000 units/hr (per ACC/AHA STEMI guideline)\n- NSTEMI / unstable angina: 60-70 units/kg IV bolus, max 5,000 units; infusion 12-15 units/kg/hr; aPTT goal 50-70 sec (per AHA/ACC NSTE-ACS guideline)\n- Titrate by institutional aPTT or anti-Xa nomogram\n\nCoordinate with antiplatelet therapy, cath lab strategy, lytic therapy if used, and bleeding risk. Avoid duplicate anticoagulants when the patient has already received LMWH/DOAC.',
         citation: [1, 3, 6],
         next: 'ufhinf-monitor',
         summary: 'ACS UFH uses lower bolus/infusion caps than VTE protocols.',

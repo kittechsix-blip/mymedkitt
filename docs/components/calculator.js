@@ -13411,6 +13411,125 @@ const MG_IVIG_PLEX_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// Lambert-Eaton (LEMS) Calculators
+// -------------------------------------------------------------------
+const LEMS_DELTA_P_CALCULATOR = {
+    id: 'lems-delta-p',
+    title: 'DELTA-P Score',
+    subtitle: 'SCLC Risk in LEMS',
+    description: 'DELTA-P stratifies the probability of small cell lung cancer (SCLC) in a patient with newly diagnosed Lambert-Eaton myasthenic syndrome. Assess at, or within 3 months of, symptom onset. A high score should expedite FDG-PET/CT and oncology involvement.',
+    fields: [
+        { name: 'age', label: 'Age \u2265 50 at onset', type: 'toggle', points: 1 },
+        { name: 'smoking', label: 'Current smoking at diagnosis', type: 'toggle', points: 1 },
+        { name: 'weightloss', label: 'Weight loss \u2265 5%', type: 'toggle', points: 1 },
+        { name: 'bulbar', label: 'Bulbar involvement (dysarthria/dysphagia)', type: 'toggle', points: 1 },
+        { name: 'ed', label: 'Erectile dysfunction', type: 'toggle', points: 1, description: 'Applicable to male patients' },
+        { name: 'karnofsky', label: 'Karnofsky performance status < 70', type: 'toggle', points: 1 },
+    ],
+    results: [
+        { min: 0, max: 2, label: 'Low Risk', risk: 'DELTA-P 0\u20131', mortality: 'SCLC probability ~0\u20132.6%. Routine CT chest; if negative, surveillance per protocol.', colorVar: '--color-primary' },
+        { min: 2, max: 3, label: 'Intermediate', risk: 'DELTA-P 2', mortality: 'SCLC probability ~45%. CT chest \u2192 FDG-PET/CT if negative.', colorVar: '--color-warning' },
+        { min: 3, max: 4, label: 'High Risk', risk: 'DELTA-P 3', mortality: 'SCLC probability ~83.9%. Expedite FDG-PET/CT and oncology.', colorVar: '--color-danger' },
+        { min: 4, max: Infinity, label: 'Very High Risk', risk: 'DELTA-P 4\u20136', mortality: 'SCLC probability ~93.5% (4), ~96.6% (5), ~100% (6). Aggressive, expedited malignancy workup.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Assess at or within 3 months of onset. Score \u22653 \u2192 expedite FDG-PET/CT + oncology. If imaging is negative, repeat screening every 3\u20136 months for at least 2 years (high-risk: every 3 months).',
+    citations: [
+        'Titulaer MJ, et al. Clinical Dutch-English Lambert-Eaton Myasthenic syndrome (LEMS) tumor association prediction score accurately predicts small-cell lung cancer in the LEMS. J Clin Oncol. 2011;29(7):902-908.',
+    ],
+};
+// -------------------------------------------------------------------
+// B12 Deficiency Calculators
+// -------------------------------------------------------------------
+const B12_GRAY_ZONE_CALCULATOR = {
+    id: 'b12-gray-zone',
+    title: 'B12 Gray-Zone Interpreter',
+    subtitle: 'When to confirm with MMA / homocysteine',
+    description: 'Serum B12 is unreliable in the 200\u2013400 pg/mL "gray zone," and nitrous-oxide functional deficiency can occur with a fully NORMAL B12. Methylmalonic acid (MMA) is the most specific confirmatory test. This tool translates the labs into an action.',
+    fields: [
+        { name: 'b12', label: 'Serum B12', type: 'number', points: 0, unit: 'pg/mL' },
+        { name: 'mma', label: 'Methylmalonic acid (MMA)', type: 'select', points: 0, hideOptionPoints: true, selectOptions: [
+                { label: 'Not sent', points: 0 },
+                { label: 'Normal', points: 1 },
+                { label: 'Elevated', points: 2 },
+            ] },
+        { name: 'hcy', label: 'Homocysteine', type: 'select', points: 0, hideOptionPoints: true, selectOptions: [
+                { label: 'Not sent', points: 0 },
+                { label: 'Normal', points: 1 },
+                { label: 'Elevated', points: 2 },
+            ] },
+        { name: 'n2o', label: 'Nitrous oxide exposure (recreational or anesthetic)', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'MMA > homocysteine for specificity. Draw biochemical samples BEFORE starting B12 (markers normalize fast) but do NOT delay treatment for results. Never give folate alone \u2014 it masks the anemia while neurologic damage continues.',
+    citations: [
+        'Devalia V, et al. Guidelines for the diagnosis and treatment of cobalamin and folate disorders. Br J Haematol. 2014;166(4):496-513.',
+        'Stabler SP. Vitamin B12 Deficiency. N Engl J Med. 2013;368(2):149-160.',
+    ],
+    computeResult: (values) => {
+        const b12 = values['b12'] || 0;
+        const mma = values['mma'] || 0; // 0 not sent, 1 normal, 2 elevated
+        const hcy = values['hcy'] || 0;
+        const n2o = values['n2o'] || 0;
+        const folateNote = '\n\n**\u26a0 Never give folate alone** \u2014 it corrects the anemia while neurologic degeneration continues. Replace B12 first or together.';
+        const n2oNote = n2o
+            ? '\n\n**Nitrous oxide exposure noted:** N2O inactivates cobalamin, causing a *functional* deficiency that can present with a NORMAL serum B12 (~29% of N2O neuro cases). MMA + homocysteine are the arbiters here, not the B12 level.'
+            : '';
+        // Frank biochemical deficiency
+        if (b12 > 0 && b12 < 200) {
+            return {
+                value: 'Deficient \u2014 Treat',
+                label: 'B12 < 200 pg/mL',
+                description: `Serum B12 of ${b12} pg/mL confirms deficiency. Begin repletion. If subacute combined degeneration is suspected, treat urgently \u2014 early repletion drives neurologic recovery.${n2oNote}${folateNote}`,
+                colorVar: '--color-danger',
+            };
+        }
+        // MMA elevated is the strongest single confirmer regardless of B12
+        if (mma === 2) {
+            return {
+                value: 'Confirmed Deficiency (MMA+)',
+                label: 'Elevated MMA',
+                description: `Elevated MMA${b12 ? ` with a serum B12 of ${b12} pg/mL` : ''} confirms functional B12 deficiency \u2014 MMA is the most specific test and overrides a "normal" or gray-zone B12. Treat.${n2oNote}${folateNote}`,
+                colorVar: '--color-danger',
+            };
+        }
+        // Gray zone or N2O exposure with non-diagnostic confirmers
+        const grayZone = b12 >= 200 && b12 <= 400;
+        if (grayZone || n2o) {
+            // Both markers normal = deficiency unlikely
+            if (mma === 1 && hcy === 1) {
+                return {
+                    value: 'Deficiency Unlikely',
+                    label: 'Normal MMA + homocysteine',
+                    description: `B12 ${b12 ? `of ${b12} pg/mL ` : ''}falls in/near the gray zone, but normal MMA AND normal homocysteine make true deficiency unlikely. Pursue alternative causes of the neuro picture (consider copper-deficiency myelopathy \u2014 MRI is indistinguishable).${n2oNote}`,
+                    colorVar: '--color-primary',
+                };
+            }
+            return {
+                value: 'Indeterminate \u2014 Send MMA + HCY',
+                label: grayZone ? 'B12 gray zone (200\u2013400)' : 'Functional deficiency possible',
+                description: `${grayZone ? `Serum B12 of ${b12} pg/mL is in the gray zone (200\u2013400) and does NOT exclude deficiency \u2014 ~50% of subclinical deficiency has a "normal" B12.` : 'A normal B12 does not exclude functional deficiency.'} Send **MMA (most specific) + homocysteine**. If the clinical picture fits (dorsal-column signs, macrocytosis, risk factors), treat empirically while awaiting results.${n2oNote}${folateNote}`,
+                colorVar: '--color-warning',
+            };
+        }
+        // B12 clearly high, no N2O
+        if (b12 > 400) {
+            return {
+                value: 'Deficiency Unlikely',
+                label: 'B12 > 400 pg/mL',
+                description: `Serum B12 of ${b12} pg/mL is reassuring in the absence of nitrous-oxide exposure. If the neurologic picture is classic for subacute combined degeneration despite this, remember N2O functional deficiency can occur with a normal B12 \u2014 send MMA + homocysteine to be sure.`,
+                colorVar: '--color-primary',
+            };
+        }
+        // Default / nothing entered
+        return {
+            value: 'Enter B12 level',
+            label: 'Awaiting input',
+            description: `Enter the serum B12 and any available MMA/homocysteine. Key rule: a "normal" B12 (especially 200\u2013400, or any value with nitrous-oxide exposure) does not exclude deficiency \u2014 MMA is the arbiter.${folateNote}`,
+            colorVar: '--color-warning',
+        };
+    },
+};
+// -------------------------------------------------------------------
 // Botulism Calculators
 // -------------------------------------------------------------------
 const BOT_TYPES_CALCULATOR = {
@@ -38707,6 +38826,10 @@ const CALCULATORS = {
     'mg-ice-test': MG_ICE_TEST_CALCULATOR,
     'mg-pyridostigmine': MG_PYRIDOSTIGMINE_CALCULATOR,
     'mg-ivig-plex': MG_IVIG_PLEX_CALCULATOR,
+    // Lambert-Eaton (LEMS)
+    'lems-delta-p': LEMS_DELTA_P_CALCULATOR,
+    // B12 Deficiency
+    'b12-gray-zone': B12_GRAY_ZONE_CALCULATOR,
     // Botulism
     'bot-types': BOT_TYPES_CALCULATOR,
     'bot-ddx': BOT_DDX_CALCULATOR,
