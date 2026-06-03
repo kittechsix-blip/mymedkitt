@@ -320,61 +320,73 @@ const STROKE_IMAGING_PAGE = {
 // -------------------------------------------------------------------
 const STROKE_CONSENT_PAGE = {
     id: 'stroke-consent',
-    title: 'Thrombolysis: What You Need to Know',
-    subtitle: 'Patient Information \u2014 Clot-Dissolving Treatment for Stroke',
+    title: 'Stroke IV Thrombolysis Consent',
+    subtitle: 'Patient information - clot-dissolving treatment for ischemic stroke',
     shareable: true,
     sections: [
         {
-            heading: 'Your Chances of Recovery',
+            heading: 'Early Treatment: Benefit Out of 100 Patients',
             body: '',
             pictographs: [
                 {
-                    title: 'WITHOUT Treatment (out of 100 people like you)',
+                    title: 'Without IV thrombolysis',
                     groups: [
-                        { count: 26, color: '#66BB6A', label: '~26 people recover with little or no disability' },
-                        { count: 44, color: '#FFCA28', label: '~44 people have moderate disability' },
-                        { count: 30, color: '#EF5350', label: '~30 people have severe disability or die' },
+                        { count: 23, color: '#8FD19E', label: '~23 people recover with no or minimal deficit' },
+                        { count: 77, color: '#D8D8D2', label: '~77 people have persistent disability or die despite standard care' },
                     ],
                 },
                 {
-                    title: 'WITH Tenecteplase Treatment (out of 100 people like you)',
+                    title: 'With IV thrombolysis within 3 hours',
                     groups: [
-                        { count: 73, color: '#66BB6A', label: '~73 people recover with little or no disability' },
-                        { count: 8, color: '#FFCA28', label: '~8 people have moderate disability' },
-                        { count: 17, color: '#EF5350', label: '~19 people have severe disability or die' },
-                        { count: 2, color: '#EF5350', label: '~2 people have brain bleeding (included in totals above)', symbol: '\u26A0\uFE0F' },
+                        { count: 23, color: '#8FD19E', label: '~23 people recover with no or minimal deficit even without IVT' },
+                        { count: 10, color: '#3CB371', label: '~10 additional people recover well because of IVT' },
+                        { count: 67, color: '#D8D8D2', label: '~67 people still have disability or die despite treatment' },
+                    ],
+                },
+                {
+                    title: 'Major brain bleed risk',
+                    groups: [
+                        { count: 7, color: '#EF5350', label: '~2-7 people have symptomatic brain bleeding, depending on definition and risk factors' },
+                        { count: 93, color: '#D8D8D2', label: 'Most patients do not have symptomatic brain bleeding' },
                     ],
                 },
             ],
         },
         {
             heading: 'What Is Happening?',
-            body: 'You are having a stroke. A blood clot is blocking blood flow to part of your brain. Without treatment, the affected brain tissue will be permanently damaged.',
+            body: 'A blood clot is blocking blood flow to part of the brain. Without rapid reperfusion, threatened brain tissue can become permanently injured.',
         },
         {
             heading: 'What Is the Treatment?',
-            body: 'We are recommending a clot-dissolving medication (called a thrombolytic) given through your IV. This medication works by breaking up the blood clot that is blocking blood flow to your brain.\n\nThe sooner this medication is given, the better the chance of recovery. Every minute of delay means more brain tissue at risk.',
+            body: 'We are recommending an IV clot-dissolving medication, either tenecteplase or alteplase depending on local stroke protocol. The goal is to improve the chance of recovery with less disability.\n\nThe earlier the medication is given, the larger the expected benefit. Tenecteplase and alteplase are both guideline-supported options within the standard 4.5-hour treatment window. [1]',
         },
         {
             heading: 'What Are the Benefits?',
-            body: 'Clinical trials show that patients who receive this treatment are significantly more likely to recover with little or no disability:\n\n\u2022 Without treatment: about 26% of patients achieve a good outcome\n\u2022 With treatment: about 39% of patients achieve a good outcome\n\u2022 The earlier the treatment, the greater the benefit\n\u2022 For every 100 patients treated, approximately 13 additional patients recover well',
+            body: '\u2022 Treatment within 3 hours: about **10 additional patients per 100** reach disability-free survival or no/minimal deficit. [2]\n\u2022 Treatment from 3 to 4.5 hours: about **5 additional patients per 100** reach a good outcome. [2]\n\u2022 Selected wake-up or 4.5-9 hour patients with favorable advanced imaging may still benefit, but this requires stroke-team imaging criteria. [1][5]\n\u2022 IV thrombolysis does not replace thrombectomy when a large vessel occlusion is present.',
         },
         {
             heading: 'What Are the Risks?',
-            body: 'The main risk is bleeding:\n\n\u2022 Symptomatic bleeding into the brain occurs in approximately 2\u20137% of patients\n\u2022 This can sometimes be life-threatening\n\u2022 Your medical team will monitor you very closely for the first 24 hours\n\u2022 Minor bleeding (gums, IV site) is more common and usually manageable\n\nOther possible side effects:\n\u2022 Allergic reaction (rare)\n\u2022 Swelling of the tongue or lips (angioedema \u2014 rare, more common if taking ACE inhibitors)',
+            body: 'The main risk is bleeding:\n\n\u2022 Symptomatic bleeding into the brain is usually discussed as about **2-7 patients per 100**, depending on trial, definition, imaging selection, and patient-specific risk. [2][3][4]\n\u2022 Fatal intracranial bleeding excess in pooled alteplase trials is about **2 patients per 100**. [2]\n\u2022 Bleeding risk is higher with large infarct/core, severe deficit, uncontrolled blood pressure, anticoagulant effect, bleeding disorder, recent major surgery/trauma, or frailty.\n\u2022 Other risks include systemic bleeding, allergic reaction, and tongue/lip swelling (angioedema), which is uncommon but can threaten the airway.\n\u2022 After treatment, the team monitors neurologic status and blood pressure closely for 24 hours.',
         },
         {
-            heading: 'What Happens If We Don\u2019t Treat?',
-            body: 'Without clot-dissolving medication, the blocked area of your brain will continue to lose blood flow. This can lead to:\n\n\u2022 Permanent weakness or paralysis\n\u2022 Difficulty speaking or understanding speech\n\u2022 Vision loss\n\u2022 Disability requiring long-term care\n\u2022 In severe cases, death',
+            heading: 'What Happens If We Do Not Treat?',
+            body: 'Without IV thrombolysis, the stroke may improve on its own, but it may also leave permanent disability or worsen. Possible outcomes include weakness or paralysis, speech or language difficulty, vision loss, loss of independence, need for long-term care, or death.\n\nSupportive stroke care and thrombectomy evaluation still continue when appropriate.',
         },
         {
             heading: 'Emergency Consent',
-            body: 'Because time is critical in stroke treatment, emergency consent may be obtained if the patient is unable to communicate and no family member is immediately available. This is standard practice supported by medical guidelines \u2014 the benefit of rapid treatment outweighs the delay of waiting for formal consent.',
+            body: 'Because time is critical, treatment should not be delayed for a prolonged consent search when the patient lacks decision-making capacity and no surrogate is immediately available. In that setting, emergency consent may apply. Document the indication, risk/benefit discussion, decision-maker, and consent status.',
+        },
+        {
+            heading: 'Clinician Note',
+            body: 'This page supports, but does not replace, the formal eligibility screen: hemorrhage excluded, disabling deficit, blood pressure within protocol, glucose checked, no active anticoagulant effect or other hard-stop contraindication, and stroke-team workflow active.',
         },
     ],
     citations: [
-        { num: 1, text: 'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.' },
-        { num: 2, text: 'Wardlaw JM, et al. Thrombolysis for Acute Ischaemic Stroke. Cochrane Database Syst Rev. 2014.' },
+        { num: 1, text: 'Prabhakaran S, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. 2026. doi:10.1161/STR.0000000000000513.' },
+        { num: 2, text: 'Emberson J, et al. Effect of treatment delay, age, and stroke severity on the effects of IV alteplase for acute ischemic stroke: individual patient data meta-analysis. Lancet. 2014;384(9958):1929-1935.' },
+        { num: 3, text: 'Menon BK, et al. Intravenous tenecteplase compared with alteplase for acute ischemic stroke in Canada (AcT). Lancet. 2022;400(10347):161-169.' },
+        { num: 4, text: 'Muir KW, et al. Tenecteplase versus alteplase for acute stroke within 4.5h of onset (ATTEST-2). Lancet Neurol. 2024;23(11):1096-1105.' },
+        { num: 5, text: 'Ma H, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke (EXTEND). N Engl J Med. 2019;380(19):1795-1803.' },
     ],
 };
 // -------------------------------------------------------------------
@@ -24948,11 +24960,16 @@ const TRICKS_AIRWAY_PAGE = {
             heading: '\u201CFiberbougie\u201D \u2014 Supraglottic (King) to ETT Exchange',
             body: '**Accomplishes:** Exchanges a supraglottic (King) airway for an endotracheal tube while maintaining tracheal access, using a cut disposable bronchoscope as a bougie. [3]\n\n**How to:**\n1. Pass a disposable bronchoscope through the King airway port and side port into the trachea toward the carina.\n2. Cut the disposable scope at the level of the handle, leaving a \u201Cfiberbougie\u201D in the trachea.\n3. Withdraw the King device over the cut scope (modified Seldinger) while suctioning.\n4. Advance the ETT over the fiberbougie.\n5. Confirm passage through the cords with video/direct laryngoscopy, then capnography and CXR.\n\n**Equipment:** Disposable bronchoscope, ETT, 50 mL syringe, video/direct laryngoscope, trauma shears, suction, capnography.\n\n_Source: ALiEM Tricks of the Trade._',
         },
+        {
+            heading: 'Larson Maneuver to Break Laryngospasm',
+            body: '**Accomplishes:** Non-invasively breaks laryngospasm (often peri-sedation or pediatric) before resorting to a paralytic. [4]\n\n**How to:**\n1. Find the \u201Claryngospasm notch\u201D just behind each earlobe \u2014 bounded by the mandibular ramus in front, the mastoid behind, and the skull base above.\n2. Place a fingertip in each notch as superiorly as possible (do not slide down the mandible).\n3. Push both sides firmly inward toward the skull base while simultaneously pushing anteriorly, like a jaw thrust.\n4. Maintain firm pressure \u2014 spasm typically breaks within 1\u20132 breaths.\n5. If it fails, proceed to positive-pressure ventilation, deepen sedation, or give a paralytic.\n\n**Equipment:** None (examiner\u2019s fingers).\n\n_Source: ALiEM Trick of the Trade \u2014 Laryngospasm notch (Larson, Anesthesiology 1998)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Large-bore endotracheal tube to suction an occluded airway. aliem.com.' },
         { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: Fiberbougie for supraglottic (King) airway exchange. aliem.com.' },
+        { num: 4, text: 'ALiEM. Trick of the Trade: Laryngospasm notch maneuver (Larson CP. Anesthesiology 1998;89:1293). aliem.com.' },
     ],
 };
 const TRICKS_PROCEDURES_PAGE = {
@@ -25005,6 +25022,14 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Alternative to a Pressure Bag for IV Fluids',
             body: '**Accomplishes:** Delivers rapid fluid boluses when a pressure bag is unavailable. [11]\n\n**How to:**\n1. Wrap a BP cuff around the fluid bag and inflate, OR use a 3-way stopcock + syringe for a push-pull setup.\n2. Squeeze/inflate to accelerate flow while monitoring the bag.\n\n**Equipment:** IV fluid bag, BP cuff or 3-way stopcock + syringe.\n\n_Source: ALiEM Tricks of the Trade._',
         },
+        {
+            heading: 'Punch Biopsy to Extract a Small Retained Foreign Body',
+            body: '**Accomplishes:** Atraumatic removal of a small, deeply embedded soft-tissue foreign body (e.g., glass, splinter, metal) that resists forceps. [12]\n\n**How to:**\n1. Localize the foreign body to its single most-tender point (ultrasound helps).\n2. Anesthetize locally; pick a site that is not cosmetically sensitive and is neurovascularly low-risk.\n3. Center a 1\u20132 mm dermal punch biopsy tool directly over the maximal tender point.\n4. Punch down to core out a small cylinder of tissue containing the foreign body.\n5. Remove the core with the foreign body inside; irrigate, and leave the small punch defect to heal by secondary intention.\n\n**Equipment:** 1\u20132 mm punch biopsy tool, local anesthetic, forceps, irrigation, ultrasound (optional).\n\n_Source: ALiEM Trick of the Trade \u2014 \u201CPunch out\u201D the foreign body._',
+        },
+        {
+            heading: 'Rubber Tourniquet Wrap for Stuck Ring Removal',
+            body: '**Accomplishes:** Milks edema out of a swollen finger so a stuck ring slides off without cutting it. [13]\n\n**How to:**\n1. Tightly wrap the finger with a flat phlebotomy tourniquet in a distal-to-proximal direction, wrapping over the ring itself.\n2. Have the cooperative patient hold the proximal end taut for ~15 minutes to drive out edema.\n3. Lubricate, then unwrap and slide the ring over the now-decompressed tissue.\n4. If still stuck, consider a cold-water soak first or move to a ring cutter.\n\n**Equipment:** Flat rubber phlebotomy tourniquet, lubricant.\n\n_Source: ALiEM Trick of the Trade \u2014 Ring removal (Chavez)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25018,6 +25043,8 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 9, text: 'ALiEM. Trick of the Trade: Persistent paracentesis leakage. aliem.com.' },
         { num: 10, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 11, text: 'ALiEM. Trick of the Trade: Alternative to a pressure bag for IV fluids. aliem.com.' },
+        { num: 12, text: 'ALiEM. Trick of the Trade: \u201CPunch out\u201D the foreign body. aliem.com.' },
+        { num: 13, text: 'ALiEM. Trick of the Trade: Ring removal from a finger (Chavez). aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25358,11 +25385,16 @@ const DENTAL_EXTRACTION_TRICKS_PAGE = {
             heading: 'Sinus Communication: Do Not Prove It',
             body: '**Accomplishes:** Avoids enlarging a suspected oroantral communication.\n\n**How to:** If posterior maxillary extraction symptoms suggest sinus communication, avoid probing and forceful irrigation. Give sinus precautions and arrange dental/OMFS follow-up.',
         },
+        {
+            heading: 'N95 Nose-Bridge Splint for an Avulsed Tooth',
+            body: '**Accomplishes:** Stabilizes a reimplanted avulsed or subluxed permanent tooth in the ED when no dental splint kit is on hand \u2014 a temporizing bridge to the dentist. [4]\n\n**How to:**\n1. Time matters \u2014 reimplant a permanent tooth as fast as possible (viability drops sharply after ~30\u201360 min).\n2. Lightly rinse the tooth and socket with saline; pat dry.\n3. Reimplant the tooth into correct anatomic position.\n4. Bend the pliable metal nose-bridge wire from an N95 mask (or a non-rebreather) to span the target tooth plus one adjacent tooth on each side; cut and round the edges.\n5. Apply 2-octyl cyanoacrylate (tissue adhesive) to the inner splint and the buccal surfaces, bonding the splint across the teeth.\n6. Warn the patient to simply remove the splint if it loosens; do NOT replant avulsed primary (baby) teeth.\n\n**Equipment:** N95 mask metal nose strip, trauma shears, saline, gauze, 2-octyl cyanoacrylate tissue adhesive.\n\n_Source: ALiEM Trick of the Trade \u2014 Dental avulsion (Rosenberg, Ann Emerg Med 2011)._',
+        },
     ],
     citations: [
         { num: 1, text: 'Cochrane Oral Health. Interventions for treating post-extraction bleeding. 2018.' },
         { num: 2, text: 'Mamoun JS. Dry Socket Etiology, Diagnosis, and Clinical Treatment Techniques. J Korean Assoc Oral Maxillofac Surg. 2018.' },
         { num: 3, text: 'Parvini P, et al. Decision-making in closure of oroantral communication and fistula. 2019.' },
+        { num: 4, text: 'ALiEM. Trick of the Trade: Dental avulsion and subluxation (Rosenberg H. Ann Emerg Med 2011;57:375). aliem.com.' },
     ],
 };
 const DENTAL_EXTRACTION_PHOTOS_PAGE = {
@@ -25420,12 +25452,17 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Three-Point Mold for Splinting',
             body: '**Accomplishes:** Keeps a reduced fracture from drifting back out of alignment \u2014 \u201Ccrooked splints make straight bones.\u201D [4]\n\n**How to:**\n1. After reduction, apply the splint material along the fracture.\n2. While it sets, press with three points of force: one over the apex of the deformity and two on the opposite side, proximal and distal to the fracture.\n3. This creates a fulcrum that bends the splint and holds the reduction.\n4. Use broad, flat pressure (palm/thenar) \u2014 never fingertips, which leave focal pressure points.\n5. Re-check neurovascular status before and after; keep the splint snug but not constrictive.\n\n**Equipment:** Plaster or fiberglass splint material, padding, stockinette.\n\n_Source: NUEM Blog \u2014 Visual Guide to Splinting._',
         },
+        {
+            heading: 'Knee Extension to Reduce a Lateral Patellar Dislocation',
+            body: '**Accomplishes:** Quick, usually sedation-free reduction of the common lateral patellar dislocation by relaxing the extensor mechanism. [5]\n\n**How to:**\n1. First confirm this is a PATELLAR dislocation, not a true tibiofemoral knee dislocation (the latter carries popliteal-artery risk and needs vascular assessment).\n2. Have the patient lie supine; support and gently flex the hip to relax the quadriceps and rectus femoris.\n3. Slowly extend the knee while applying steady, gentle medial pressure to the lateral edge of the displaced patella.\n4. The patella usually \u201Cpops\u201D back into the trochlear groove as the knee reaches full extension.\n5. Obtain post-reduction AP, lateral, and sunrise views to check for osteochondral fracture; immobilize/weight-bear as tolerated.\n\n**Equipment:** Gurney, optional analgesia.\n\n_Source: CoreEM \u2014 Patellar dislocation reduction._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
         { num: 2, text: 'ALiEM. Tricks of the Trade: Nursemaid elbow reduction (Bek et al. 2009). aliem.com.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: DIY finger traps. aliem.com.' },
         { num: 4, text: 'NUEM Blog. Visual Guide to Splinting. nuemblog.com/blog/splinting.' },
+        { num: 5, text: 'CoreEM. True Knee + Patellar Dislocations. coreem.net.' },
     ],
 };
 export const INFO_PAGES = {

@@ -18,7 +18,7 @@ export const TRICK_SPECIALTIES = [
         color: '#1565C0',
         subtitle: 'Suction, NG placement, supraglottic exchange, and more.',
         infoPageId: 'tricks-airway',
-        trickCount: 3,
+        trickCount: 4,
     },
     {
         id: 'procedures',
@@ -27,7 +27,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 11,
+        trickCount: 13,
     },
     {
         id: 'ent',
@@ -45,7 +45,7 @@ export const TRICK_SPECIALTIES = [
         color: '#6D4C41',
         subtitle: 'Extraction bleeding, dry socket, and oral hemostasis pearls.',
         infoPageId: 'tricks-dental',
-        trickCount: 5,
+        trickCount: 6,
     },
     {
         id: 'ophtho',
@@ -117,7 +117,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction and splinting tricks (growing daily).',
         infoPageId: 'tricks-ortho',
-        trickCount: 4,
+        trickCount: 5,
     },
 ];
 /** Lookup a specialty by its id. */
