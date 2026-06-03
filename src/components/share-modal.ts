@@ -2,7 +2,7 @@
 // Shows a QR code + URL + Copy button + Add-to-Home-Screen instructions
 // so other users can scan to load the PWA on their phone.
 
-const INSTALL_URL = 'https://kittechsix-blip.github.io/mymedkitt/';
+const INSTALL_URL = 'https://kittechsix-blip.github.io/mymedkitt/app.html';
 
 /** Show the share/install modal as a full-screen overlay. */
 export function showShareModal(): void {
