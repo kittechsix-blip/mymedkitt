@@ -179,7 +179,12 @@
       justify-content: center;
       padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(12px + env(safe-area-inset-bottom, 0px));
       backdrop-filter: blur(10px);
-      overflow: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      box-sizing: border-box;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overscroll-behavior: contain;
     }
     .legal-splash-overlay.legal-splash-hidden { display: none !important; }
     .legal-splash-modal {
@@ -188,11 +193,14 @@
       border-radius: 16px;
       max-width: 600px;
       width: 100%;
-      max-height: calc(100vh - 24px);
-      max-height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      height: calc(100vh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      height: calc(100dvh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      max-height: 760px;
+      min-height: 0;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      box-sizing: border-box;
       padding: 24px 24px calc(16px + env(safe-area-inset-bottom, 0px));
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 107, 107, 0.3);
     }
@@ -219,6 +227,11 @@
     .legal-splash-content {
       background: rgba(0, 0, 0, 0.3); border-radius: 12px;
       padding: 20px; margin-bottom: 16px;
+      flex: 0 0 auto;
+      min-height: 0;
+      max-height: 132px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
     .legal-splash-content h3 { color: #fff; font-size: 14px; font-weight: 600; margin: 0 0 12px; text-transform: uppercase; letter-spacing: 0.5px; }
     .legal-splash-content p { color: #c0c0d0; font-size: 13px; line-height: 1.6; margin: 0 0 12px; }
@@ -229,8 +242,9 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
-      flex: 1 1 auto;
+      flex: 1 1 0;
       min-height: 0;
+      padding-right: 2px;
     }
     .legal-checkbox-item {
       display: flex; align-items: flex-start; gap: 12px; padding: 16px;
@@ -239,7 +253,7 @@
     }
     .legal-checkbox-item:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.2); }
     .legal-checkbox-item.checked { background: rgba(76, 175, 80, 0.1); border-color: rgba(76, 175, 80, 0.3); }
-    .legal-checkbox-item input[type="checkbox"] { width: 20px; height: 20px; margin: 0; flex-shrink: 0; cursor: pointer; accent-color: #4caf50; }
+    .legal-checkbox-item input[type="checkbox"] { width: 24px; height: 24px; margin: 0; flex-shrink: 0; cursor: pointer; accent-color: #4caf50; }
     .legal-checkbox-text { font-size: 13px; color: #e0e0f0; line-height: 1.5; }
     .legal-checkbox-text strong { color: #fff; display: block; margin-bottom: 4px; }
     .legal-splash-actions { display: flex; flex-direction: column; gap: 12px; }
@@ -269,6 +283,17 @@
       .legal-splash-content { padding: 14px; margin-bottom: 12px; }
       .legal-checkbox-item { padding: 12px; margin-bottom: 8px; }
       .legal-splash-footer { margin-top: 10px; padding-top: 10px; }
+    }
+    @media (max-height: 620px) {
+      .legal-splash-header { margin-bottom: 8px; }
+      .legal-splash-icon { display: none; }
+      .legal-splash-title { font-size: 18px; }
+      .legal-splash-subtitle { font-size: 12px; }
+      .fda-warning-badge { margin-bottom: 8px; }
+      .legal-splash-content { padding: 10px; margin-bottom: 8px; max-height: 76px; }
+      .legal-splash-actions { gap: 8px; }
+      .legal-splash-btn { padding: 12px 16px; }
+      .legal-splash-footer { display: none; }
     }
     @media (max-width: 430px) {
       .legal-splash-overlay {
