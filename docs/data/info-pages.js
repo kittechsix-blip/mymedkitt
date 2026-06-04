@@ -25030,6 +25030,10 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Rubber Tourniquet Wrap for Stuck Ring Removal',
             body: '**Accomplishes:** Milks edema out of a swollen finger so a stuck ring slides off without cutting it. [13]\n\n**How to:**\n1. Tightly wrap the finger with a flat phlebotomy tourniquet in a distal-to-proximal direction, wrapping over the ring itself.\n2. Have the cooperative patient hold the proximal end taut for ~15 minutes to drive out edema.\n3. Lubricate, then unwrap and slide the ring over the now-decompressed tissue.\n4. If still stuck, consider a cold-water soak first or move to a ring cutter.\n\n**Equipment:** Flat rubber phlebotomy tourniquet, lubricant.\n\n_Source: ALiEM Trick of the Trade \u2014 Ring removal (Chavez)._',
         },
+        {
+            heading: 'Loop Drainage for Skin Abscesses',
+            body: '**Accomplishes:** Drains a large abscess (>5 cm) without painful packing changes; noninferior to standard I&D in adults and superior/less painful in children. [14]\n\n**How to:**\n1. Anesthetize and make a small (~5 mm) stab incision at one edge of the abscess; break up loculations.\n2. Make a second small incision at the opposite edge of the cavity.\n3. Irrigate the cavity through both incisions.\n4. Pass a vessel loop (or a sterile glove/tourniquet strip) through one incision, out the other, and tie the ends loosely \u2014 leave slack, do not tension.\n5. Tell the patient to shower and gently jiggle the loop daily; they cut and remove it at home once drainage stops (usually 7\u201310 days).\n\n**Equipment:** Scalpel, vessel loop (or trimmed sterile glove band/tourniquet), hemostat, irrigation saline, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Incision and loop drainage._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25045,6 +25049,7 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 11, text: 'ALiEM. Trick of the Trade: Alternative to a pressure bag for IV fluids. aliem.com.' },
         { num: 12, text: 'ALiEM. Trick of the Trade: \u201CPunch out\u201D the foreign body. aliem.com.' },
         { num: 13, text: 'ALiEM. Trick of the Trade: Ring removal from a finger (Chavez). aliem.com.' },
+        { num: 14, text: 'ALiEM. Trick of the Trade: Incision and loop drainage of abscesses. aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25069,12 +25074,17 @@ const TRICKS_ENT_PAGE = {
             heading: 'DIY Nasal Aspirator (Pediatric)',
             body: '**Accomplishes:** Clears nasal secretions in a congested infant (e.g., bronchiolitis) when a commercial aspirator isn\u2019t available. [4]\n\n**How to:**\n1. Assemble a low-pressure aspirator from suction tubing and a small suction catheter.\n2. Apply gentle suction to each nostril to evacuate secretions (keep pressure low to protect mucosa).\n\n**Equipment:** Suction tubing, small suction catheter, wall suction on a low setting.\n\n_Source: ALiEM Tricks of the Trade._',
         },
+        {
+            heading: 'DIY Ear Irrigation Catheter for Cerumen',
+            body: '**Accomplishes:** Builds a safe, low-cost ear-irrigation rig to flush impacted cerumen or a foreign body when a commercial bulb/irrigator isn\u2019t stocked. [5]\n\n**How to:**\n1. First confirm the tympanic membrane is intact \u2014 do not irrigate a perforated or post-surgical (tube) ear.\n2. Remove the needle from an 18G angiocatheter and trim the plastic cannula short so it cannot reach the TM.\n3. Fill a 20\u201360 mL syringe with body-temperature water/saline (cool fluid triggers vertigo and vomiting) and attach the cannula.\n4. Straighten the canal (pull pinna up and back in adults), aim along the canal wall, and irrigate in pulses.\n5. Catch runoff in an emesis basin held under the ear; repeat, softening first with a cerumenolytic if needed.\n\n**Equipment:** 18G angiocatheter, 20\u201360 mL syringe, body-temperature saline, emesis basin, optional cerumenolytic.\n\n_Source: ALiEM Trick of the Trade \u2014 Ear irrigation in the ED._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 2, text: 'ALiEM. Trick of the Trade: Dual Foley catheter for massive epistaxis. aliem.com.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: Merocel nasal packing with an angiocatheter. aliem.com.' },
         { num: 4, text: 'ALiEM. Trick of the Trade: DIY nasal snot aspirator. aliem.com.' },
+        { num: 5, text: 'ALiEM. Trick of the Trade: Ear irrigation in the emergency department. aliem.com.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25091,10 +25101,15 @@ const TRICKS_OPHTHO_PAGE = {
             heading: 'Bacitracin to Remove Nail Glue From Eyelids',
             body: '**Accomplishes:** Frees eyelids/lashes glued shut by accidental cyanoacrylate (super/nail glue) without acetone or forceps that can scratch the cornea. [2]\n\n**How to:**\n1. Liberally coat the affected lid margins with bacitracin (petroleum-based) ointment.\n2. Wait 15\u201320 minutes undisturbed.\n3. Gently tease the lids and lashes apart with cotton-tipped applicators \u2014 avoid vigorous massage (residual hard glue can abrade cornea).\n4. Irrigate copiously with saline.\n5. Perform an ocular exam; consider ophthalmology referral.\n\n**Equipment:** Bacitracin ointment (1\u20132 tubes), cotton-tipped applicators, irrigation saline.\n\n_Source: ALiEM Tricks of the Trade._',
         },
+        {
+            heading: 'Trickle-In Eyedrops via the Medial Canthus',
+            body: '**Accomplishes:** Anesthetizes or medicates the eye of a patient who reflexively squeezes shut and cannot tolerate a drop placed directly on the cornea. [3]\n\n**How to:**\n1. Lay the patient supine with the nose pointing at the ceiling.\n2. Have the patient keep the eye gently closed \u2014 do not force the lids open.\n3. Drip several drops of the anesthetic/medication into the medial canthal well (the inner-corner pocket).\n4. Ask the patient to blink or briefly crack the eye; the pooled solution trickles under the lids and coats the surface.\n5. Once the topical anesthetic takes effect, the now-comfortable eye usually opens for exam.\n\n**Equipment:** Topical ophthalmic anesthetic/medication, supine positioning.\n\n_Source: ALiEM Trick of the Trade \u2014 Super-sensitive to eyedrops._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 2, text: 'ALiEM. Trick of the Trade: Antibiotic ointment for nail-glue removal from eyelids. aliem.com.' },
+        { num: 3, text: 'ALiEM. Trick of the Trade: Super-sensitive to eyedrops. aliem.com.' },
     ],
 };
 const TRICKS_UROLOGY_PAGE = {
@@ -25456,6 +25471,14 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Knee Extension to Reduce a Lateral Patellar Dislocation',
             body: '**Accomplishes:** Quick, usually sedation-free reduction of the common lateral patellar dislocation by relaxing the extensor mechanism. [5]\n\n**How to:**\n1. First confirm this is a PATELLAR dislocation, not a true tibiofemoral knee dislocation (the latter carries popliteal-artery risk and needs vascular assessment).\n2. Have the patient lie supine; support and gently flex the hip to relax the quadriceps and rectus femoris.\n3. Slowly extend the knee while applying steady, gentle medial pressure to the lateral edge of the displaced patella.\n4. The patella usually \u201Cpops\u201D back into the trochlear groove as the knee reaches full extension.\n5. Obtain post-reduction AP, lateral, and sunrise views to check for osteochondral fracture; immobilize/weight-bear as tolerated.\n\n**Equipment:** Gurney, optional analgesia.\n\n_Source: CoreEM \u2014 Patellar dislocation reduction._',
         },
+        {
+            heading: 'Quigley Maneuver for Ankle Fracture-Dislocation',
+            body: '**Accomplishes:** Uses gravity and leg internal rotation to reduce most unstable ankle fracture-dislocations with minimal hands-on force before splinting. [6]\n\n**How to:**\n1. Provide analgesia first \u2014 an ankle hematoma block (plus oral ibuprofen/acetaminophen/oxycodone) often avoids the need for procedural sedation.\n2. With the patient supine, flex the hip and knee to ~90\u00B0.\n3. Grasp the great toe / forefoot and lift the leg so it dangles, letting gravity distract the ankle.\n4. Apply gentle internal rotation and inversion of the foot; the talus and mortise usually realign as the leg hangs.\n5. Hold the reduced position and apply a posterior + stirrup (sugar-tong) splint, then re-check neurovascular status and x-ray. (Exception: a vertical medial malleolar fracture may not reduce this way.)\n\n**Equipment:** Ankle hematoma block kit, posterior/stirrup splint material, padding.\n\n_Source: EM News \u2014 The Quigley Maneuver for ankle fractures._',
+        },
+        {
+            heading: 'Radial Gutter Splint for 2nd/3rd Metacarpal Fractures',
+            body: '**Accomplishes:** Immobilizes index/middle metacarpal fractures from both sides while leaving the other fingers free \u2014 the radial-side equivalent of the ulnar gutter. [7]\n\n**How to:**\n1. Cut a 3\u20134 inch wide splint long enough to span the wrist to the fingertips.\n2. Bisect the splint lengthwise from the fingertip end back to the wrist, creating two tails.\n3. Place dry gauze or cotton between the 2nd and 3rd fingers to pad them.\n4. Fold the two tails so they sandwich the volar AND dorsal aspects of the 2nd and 3rd metacarpals.\n5. Wrap and mold with the wrist slightly extended and MCPs flexed; leave the 4th/5th fingers and thumb free.\n\n**Equipment:** Plaster or fiberglass splint roll, padding/stockinette, gauze, elastic wrap.\n\n_Source: ALiEM Trick of the Trade \u2014 Radial gutter splint._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25463,6 +25486,8 @@ const TRICKS_ORTHO_PAGE = {
         { num: 3, text: 'ALiEM. Trick of the Trade: DIY finger traps. aliem.com.' },
         { num: 4, text: 'NUEM Blog. Visual Guide to Splinting. nuemblog.com/blog/splinting.' },
         { num: 5, text: 'CoreEM. True Knee + Patellar Dislocations. coreem.net.' },
+        { num: 6, text: 'EM News. The Quigley Maneuver for ankle fractures. journals.lww.com/em-news.' },
+        { num: 7, text: 'ALiEM. Trick of the Trade: Radial gutter splint. aliem.com.' },
     ],
 };
 export const INFO_PAGES = {
