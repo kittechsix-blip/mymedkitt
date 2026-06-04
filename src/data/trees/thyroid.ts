@@ -1,7 +1,7 @@
 // MedKitt — Thyroid Disorders (Decompensated Hypothyroidism & Thyroid Storm)
 // Initial Assessment → Hypo Evaluation → Hypo Monitoring → Storm Treatment → Storm Special Situations → Subclinical
 // 6 modules: Initial Assessment → Decompensated Hypothyroidism Evaluation → Decompensated Hypothyroidism Monitoring → Thyroid Storm Treatment → Thyroid Storm Special Situations → Subclinical Findings
-// 33 nodes total.
+// 32 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
