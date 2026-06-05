@@ -11,7 +11,7 @@ export const DIGOXIN_TOXICITY_CRITICAL_ACTIONS = [
     { text: 'Acute ingestion with normal K+ can appear deceptively well before cardiovascular collapse', nodeId: 'dig-acute' },
     { text: 'PAT with block and bidirectional VT are pathognomonic for digoxin toxicity', nodeId: 'dig-ecg' },
     { text: 'Chronic toxicity can occur at therapeutic levels (1-2 ng/mL) with predisposing factors', nodeId: 'dig-chronic' },
-    { text: 'Do NOT give calcium for hyperkalemia in digoxin toxicity - worsens cardiotoxicity', nodeId: 'dig-hyperkalemia' },
+    { text: 'Treat digoxin-toxic hyperkalemia with DigiFab, which corrects K+ at the source. The "calcium causes stone heart" rule is not well evidence-based, but calcium is unnecessary when DigiFab is available; reserve it for life-threatening hyperkalemia when DigiFab is delayed/unavailable', nodeId: 'dig-hyperkalemia' },
     { text: 'Atropine for bradycardia may not work in severe toxicity - prepare DigiFab', nodeId: 'dig-brady' },
 ];
 export const DIGOXIN_TOXICITY_NODES = [
@@ -166,8 +166,8 @@ export const DIGOXIN_TOXICITY_NODES = [
         type: 'info',
         module: 3,
         title: 'Hyperkalemia in Digoxin Toxicity',
-        body: '⚠️ **Hyperkalemia (K+ >5.5) in digoxin toxicity is a CRITICAL finding** [3][4].\n\nIn acute toxicity: Indicates severe Na+/K+-ATPase inhibition — potassium cannot enter cells.\n\nPre-DigiFab mortality with K+ >5.5 was >50%. DigiFab has dramatically improved survival [3].\n\n**Management:**\n\n**DO give:**\n• [DigiFab](#/drug/digifab/digoxin toxicity) — definitive treatment, rapidly lowers K+ by restoring pump function\n• [Sodium bicarbonate](#/drug/sodium-bicarbonate/hyperkalemia) — shifts K+ intracellularly\n• **Insulin/glucose** — shifts K+ intracellularly\n• **Albuterol nebulizer** — shifts K+ intracellularly\n\n🚫 **AVOID or use CAUTIOUSLY:**\n• **Calcium** — traditionally avoided due to "stone heart" theory (cardiac tetany). This is largely debunked in recent literature, but most toxicologists still recommend caution. If life-threatening hyperkalemia with cardiac instability, low-dose CaCl₂ may be reasonable [4].\n\n**Bottom line:** Give DigiFab promptly — it treats both the digoxin toxicity AND the hyperkalemia.',
-        citation: [3, 4],
+        body: '⚠️ **Hyperkalemia (K+ >5.5) in digoxin toxicity is a CRITICAL finding** [3][4].\n\nIn acute toxicity: Indicates severe Na+/K+-ATPase inhibition — potassium cannot enter cells.\n\nPre-DigiFab mortality with K+ >5.5 was >50%. DigiFab has dramatically improved survival [3].\n\n**Management:**\n\n**DO give:**\n• [DigiFab](#/drug/digifab/digoxin toxicity) — definitive treatment, rapidly lowers K+ by restoring pump function\n• [Sodium bicarbonate](#/drug/sodium-bicarbonate/hyperkalemia) — shifts K+ intracellularly\n• **Insulin/glucose** — shifts K+ intracellularly\n• **Albuterol nebulizer** — shifts K+ intracellularly\n\n**Calcium — the "stone heart" question:**\n• The old teaching that IV calcium causes irreversible "stone heart" in digoxin toxicity rests on a handful of 1930s-50s case reports. A retrospective cohort (Levine 2011) and a porcine model found **no association** between calcium and death or malignant arrhythmia [5][4].\n• EMCrit/IBCC and consensus guidance still **avoid routine calcium** — not because it is proven lethal, but because there is **no proven benefit**: DigiFab corrects the hyperkalemia at its source, so calcium is simply unnecessary [4].\n• **Practical rule:** Give DigiFab. Do not reach for calcium first. If hyperkalemia is immediately life-threatening (peaked T waves → widening QRS) and DigiFab is delayed or unavailable, do NOT withhold calcium — give a standard dose slowly. Most of the data involve *chronic* toxicity [5].\n\n**Bottom line:** Give DigiFab promptly — it treats both the digoxin toxicity AND the hyperkalemia.',
+        citation: [3, 4, 5],
         next: 'dig-fab',
         summary: 'Hyperkalemia in Digoxin Toxicity — review key clinical information before proceeding',
     },
@@ -213,8 +213,8 @@ export const DIGOXIN_TOXICITY_NODES = [
         type: 'info',
         module: 4,
         title: 'Treatments to Avoid',
-        body: '🚫 **Avoid or use with extreme caution:**\n\n**Cardioversion:**\n• Can precipitate **refractory ventricular fibrillation** in digitalis-toxic heart [2]\n• If absolutely necessary (hemodynamically unstable VT/VF), use **lowest effective energy**\n• Have DigiFab ready before attempting\n\n**Calcium:**\n• Traditional teaching: avoid due to "stone heart" phenomenon (cardiac tetany from combined digoxin + Ca²⁺ effects)\n• Recent evidence suggests this is overstated — calcium is probably safe in small doses [4]\n• Most toxicologists still recommend **avoiding calcium unless life-threatening hyperkalemia with cardiac arrest**\n• If given: use low dose, give slowly, have DigiFab ready\n\n**Temporary pacing:**\n• Can trigger VF in sensitized myocardium\n• If needed: transvenous preferred, use lowest capture threshold\n• Ideally defer until after DigiFab\n\n**Beta-blockers and calcium channel blockers:**\n• Worsen bradycardia and AV block — hold these medications',
-        citation: [2, 4],
+        body: '🚫 **Avoid or use with extreme caution:**\n\n**Cardioversion:**\n• Can precipitate **refractory ventricular fibrillation** in digitalis-toxic heart [2]\n• If absolutely necessary (hemodynamically unstable VT/VF), use **lowest effective energy**\n• Have DigiFab ready before attempting\n\n**Calcium (the "stone heart" myth):**\n• Traditional teaching: avoid due to a "stone heart" (irreversible myocardial contraction). This rests on 1930s-50s case reports; a retrospective cohort (Levine 2011) and a porcine model found **no harm** [5][4].\n• The reason to avoid routine calcium is **lack of benefit, not proven harm** — DigiFab fixes the hyperkalemia at its source, so calcium is unnecessary [4].\n• **Do not withhold calcium** if hyperkalemia is immediately life-threatening (widening QRS, sine wave) and DigiFab is delayed/unavailable. Give a standard dose slowly and get DigiFab.\n\n**Temporary pacing:**\n• Can trigger VF in sensitized myocardium\n• If needed: transvenous preferred, use lowest capture threshold\n• Ideally defer until after DigiFab\n\n**Beta-blockers and calcium channel blockers:**\n• Worsen bradycardia and AV block — hold these medications',
+        citation: [2, 4, 5],
         next: 'dig-fab',
         summary: 'Treatments to Avoid — review key clinical information before proceeding',
     },
@@ -377,4 +377,5 @@ export const DIGOXIN_TOXICITY_CITATIONS = [
     { num: 2, text: 'Hack JB. Digoxin. In: Goldfrank\'s Toxicologic Emergencies, 11th ed. McGraw-Hill. 2019.' },
     { num: 3, text: 'Lapostolle F, et al. Digoxin-specific Fab fragments as single first-line therapy in digitalis poisoning. Crit Care Med. 2008;36(11):3014-3018. PMID 18824903' },
     { num: 4, text: 'Chan BS, et al. Digoxin Poisoning. Clin Toxicol. 2022;60(5):533-548. PMID 35285386' },
+    { num: 5, text: 'Levine M, et al. The effects of intravenous calcium in patients with digoxin toxicity. J Emerg Med. 2011;40(1):41-46. PMID 19201134' },
 ];
