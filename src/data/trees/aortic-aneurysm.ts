@@ -1,7 +1,7 @@
 // MedKitt — Aortic Aneurysm ED Management
 // Initial Assessment → Diagnosis → Hemodynamic Management → Type-Specific Management → Surgical Consultation & Disposition
 // 5 modules: Initial Assessment → Diagnosis → Hemodynamic Management → Type-Specific Management → Surgical Consultation & Disposition
-// 32 nodes total.
+// 25 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

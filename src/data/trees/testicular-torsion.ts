@@ -2,7 +2,7 @@ import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
 /**
- * TESTICULAR TORSION (28 nodes / 5 modules / 10 citations)
+ * TESTICULAR TORSION (26 nodes / 5 modules / 10 citations)
  *
  * Module 1: Suspicion & TWIST risk stratification
  * Module 2: Imaging vs OR pathway

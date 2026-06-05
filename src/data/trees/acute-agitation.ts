@@ -1,7 +1,7 @@
 // MedKitt — Acute Agitation
 // BETA Protocol → De-escalation → Chemical Restraint → Physical Restraint → Organic Causes
 // Evidence: ACEP 2024, Project BETA (AAEP), EMCrit
-// ~28 nodes
+// 34 nodes
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

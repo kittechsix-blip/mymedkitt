@@ -1,7 +1,7 @@
 // MedKitt — Epistaxis (Nosebleed) Management
 // Initial assessment → Localization → Treatment escalation → Anticoagulation → Disposition.
 // 5 modules: Assessment → Localization → Treatment → Anticoagulation → Disposition
-// 28 nodes total.
+// 22 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 
