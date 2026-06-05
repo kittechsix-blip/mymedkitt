@@ -111,6 +111,7 @@ const CROSS_LISTINGS = {
   'neonatal-resus':   [{ categoryId: 'emergency-medicine' }],
   'chest-tube':       [{ categoryId: 'procedures', displayTitle: 'Tube Thoracostomy', displaySubtitle: 'Preparation → Insertion → Management', entryNodeId: 'ctube-anatomy' }],
   'priapism':         [{ categoryId: 'urology' }],
+  'lateral-canthotomy': [{ categoryId: 'ophthalmology', displayTitle: null, displaySubtitle: null, entryNodeId: 'lcc-start' }],
   'afib-rvr':         [{ categoryId: 'procedures', displayTitle: 'Synchronized Cardioversion', displaySubtitle: 'A-Fib RVR: Stability → Cardioversion Protocol' }],
   'chs':              [{ categoryId: 'emergency-medicine' }],
   'diarrhea':         [{ categoryId: 'emergency-medicine' }],

@@ -922,6 +922,446 @@ const STROKE_SYNDROME_CALCULATOR = {
     computeResult: computeStrokeSyndromeResult,
     customRender: renderStrokeSyndromeFastSheet,
 };
+const IVT_CONSENT_SCENARIOS = [
+    {
+        id: 'early',
+        buttonLabel: '0-3h',
+        title: 'Known onset, treated within 3 hours',
+        noTreatmentGood: 23,
+        treatedGood: 33,
+        extraGood: 10,
+        benefitText: 'About 10 extra patients per 100 reach disability-free survival or no/minimal deficit when IVT is given within 3 hours. Benefit is strongest when treatment is earliest.',
+        bleedText: 'Major symptomatic brain bleeding is usually explained as about 2-7 per 100, depending on trial, agent, imaging selection, and definition. Fatal intracranial bleeding excess in pooled alteplase trials is about 2 per 100.',
+        sourceText: 'Emberson pooled alteplase IPD: 32.9% vs 23.1% good outcome within 3h; 2026 AHA/ASA endorses alteplase or tenecteplase within 4.5h.',
+    },
+    {
+        id: 'standard',
+        buttonLabel: '3-4.5h',
+        title: 'Known onset, treated from 3 to 4.5 hours',
+        noTreatmentGood: 30,
+        treatedGood: 35,
+        extraGood: 5,
+        benefitText: 'About 5 extra patients per 100 reach disability-free survival or no/minimal deficit when treated from 3 to 4.5 hours. Benefit persists, but is smaller than in the first 3 hours.',
+        bleedText: 'Bleeding risk does not disappear later in the window. Use the same brain-bleed discussion, with extra caution for large core, severe deficit, anticoagulant effect, uncontrolled BP, or frailty.',
+        sourceText: 'Emberson pooled alteplase IPD: 35.3% vs 30.1% good outcome from >3 to 4.5h.',
+    },
+    {
+        id: 'extended',
+        buttonLabel: '4.5-9h',
+        title: 'Unknown onset or 4.5-9 hours with favorable imaging',
+        noTreatmentGood: 30,
+        treatedGood: 36,
+        extraGood: 6,
+        benefitText: 'In carefully selected patients with favorable advanced imaging, about 6 extra patients per 100 may reach no/minimal deficit. This is not a plain-CT-only decision.',
+        bleedText: 'EXTEND reported symptomatic intracerebral hemorrhage 6.2% with alteplase vs 0.9% with placebo. Discuss this with stroke neurology and apply local advanced-imaging protocol.',
+        sourceText: 'EXTEND: alteplase 4.5-9h or wake-up stroke with perfusion mismatch increased mRS 0-1 by about 6 absolute percentage points.',
+    },
+];
+function renderIvtConsentInfographic(container, _onUpdate) {
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `
+    .ivt-consent {
+      color: var(--color-text-primary, #1A1A1A);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-bottom: 8px;
+    }
+    .ivt-consent * { box-sizing: border-box; }
+    .ivt-consent-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ivt-consent-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      padding: 8px 0;
+      background: var(--color-bg, #FAFAF5);
+    }
+    .ivt-consent-tab {
+      border: 1px solid var(--color-border, #E0E0DA);
+      background: var(--color-surface-card, #fff);
+      color: var(--color-text-secondary, #5A5A5A);
+      border-radius: 8px;
+      min-height: 44px;
+      padding: 8px 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .ivt-consent-tab.active {
+      border-color: var(--color-primary, #3CB371);
+      background: var(--color-primary, #3CB371);
+      color: #fff;
+    }
+    .ivt-consent-card {
+      border: 1px solid var(--color-border, #E0E0DA);
+      background: var(--color-surface-card, #fff);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .ivt-consent-card-title {
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--color-text-primary, #1A1A1A);
+    }
+    .ivt-consent-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .ivt-consent-metric {
+      border: 1px solid var(--color-border, #E0E0DA);
+      border-radius: 8px;
+      padding: 10px 8px;
+      min-height: 86px;
+      background: var(--color-bg, #FAFAF5);
+    }
+    .ivt-consent-metric-value {
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 900;
+      color: var(--color-primary, #3CB371);
+      margin-bottom: 6px;
+    }
+    .ivt-consent-metric-value.danger { color: var(--color-danger, #ff4757); }
+    .ivt-consent-metric-label {
+      font-size: 11px;
+      line-height: 1.25;
+      color: var(--color-text-secondary, #5A5A5A);
+      font-weight: 650;
+    }
+    .ivt-consent-pictos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .ivt-consent-picto-title {
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .ivt-consent-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 3px;
+      margin-bottom: 8px;
+    }
+    .ivt-consent-dot {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 4px;
+      background: #D8D8D2;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .ivt-consent-dot.base { background: #8FD19E; }
+    .ivt-consent-dot.extra { background: var(--color-primary, #3CB371); }
+    .ivt-consent-dot.harm { background: var(--color-danger, #ff4757); }
+    .ivt-consent-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--color-text-secondary, #5A5A5A);
+    }
+    .ivt-consent-legend-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1.3;
+    }
+    .ivt-consent-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex: 0 0 auto;
+      background: #D8D8D2;
+    }
+    .ivt-consent-swatch.base { background: #8FD19E; }
+    .ivt-consent-swatch.extra { background: var(--color-primary, #3CB371); }
+    .ivt-consent-swatch.harm { background: var(--color-danger, #ff4757); }
+    .ivt-consent-copy {
+      width: 100%;
+      min-height: 44px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--color-primary, #3CB371);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .ivt-consent-note {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--color-text-secondary, #5A5A5A);
+    }
+    .ivt-consent-script {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .ivt-consent-script-item {
+      background: var(--color-bg, #FAFAF5);
+      border: 1px solid var(--color-border, #E0E0DA);
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .ivt-consent-script-kicker {
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--color-text-secondary, #5A5A5A);
+      margin-bottom: 4px;
+    }
+    @media (max-width: 640px) {
+      .ivt-consent-summary,
+      .ivt-consent-pictos,
+      .ivt-consent-script {
+        grid-template-columns: 1fr;
+      }
+      .ivt-consent-tabs {
+        grid-template-columns: 1fr;
+        position: static;
+      }
+      .ivt-consent-metric {
+        min-height: 0;
+      }
+    }
+  `;
+    container.appendChild(styleEl);
+    const root = document.createElement('div');
+    root.className = 'ivt-consent';
+    container.appendChild(root);
+    let scenario = IVT_CONSENT_SCENARIOS[0];
+    const tabs = document.createElement('div');
+    tabs.className = 'ivt-consent-tabs';
+    root.appendChild(tabs);
+    const content = document.createElement('div');
+    content.className = 'ivt-consent-content';
+    root.appendChild(content);
+    function metric(value, label, danger = false) {
+        const card = document.createElement('div');
+        card.className = 'ivt-consent-metric';
+        const valueEl = document.createElement('div');
+        valueEl.className = danger ? 'ivt-consent-metric-value danger' : 'ivt-consent-metric-value';
+        valueEl.textContent = value;
+        const labelEl = document.createElement('div');
+        labelEl.className = 'ivt-consent-metric-label';
+        labelEl.textContent = label;
+        card.appendChild(valueEl);
+        card.appendChild(labelEl);
+        return card;
+    }
+    function legendRow(kind, text) {
+        const row = document.createElement('div');
+        row.className = 'ivt-consent-legend-row';
+        const swatch = document.createElement('span');
+        swatch.className = `ivt-consent-swatch ${kind}`;
+        const label = document.createElement('span');
+        label.textContent = text;
+        row.appendChild(swatch);
+        row.appendChild(label);
+        return row;
+    }
+    function pictograph(title, baseGood, extraGood) {
+        const card = document.createElement('div');
+        card.className = 'ivt-consent-card';
+        const titleEl = document.createElement('div');
+        titleEl.className = 'ivt-consent-picto-title';
+        titleEl.textContent = title;
+        card.appendChild(titleEl);
+        const grid = document.createElement('div');
+        grid.className = 'ivt-consent-grid';
+        for (let i = 0; i < 100; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'ivt-consent-dot';
+            if (i < baseGood) {
+                dot.classList.add('base');
+            }
+            else if (i < baseGood + extraGood) {
+                dot.classList.add('extra');
+            }
+            grid.appendChild(dot);
+        }
+        card.appendChild(grid);
+        const legend = document.createElement('div');
+        legend.className = 'ivt-consent-legend';
+        legend.appendChild(legendRow('base', `${baseGood} per 100: expected no/minimal deficit without IVT`));
+        if (extraGood > 0) {
+            legend.appendChild(legendRow('extra', `${extraGood} extra per 100 helped by IVT`));
+        }
+        legend.appendChild(legendRow('', 'Remaining patients: persistent disability or death despite care'));
+        card.appendChild(legend);
+        return card;
+    }
+    function harmPictograph(currentScenario) {
+        const highEstimate = currentScenario.id === 'extended' ? 6 : 7;
+        const card = document.createElement('div');
+        card.className = 'ivt-consent-card';
+        const titleEl = document.createElement('div');
+        titleEl.className = 'ivt-consent-picto-title';
+        titleEl.textContent = 'Major brain bleed risk';
+        card.appendChild(titleEl);
+        const grid = document.createElement('div');
+        grid.className = 'ivt-consent-grid';
+        for (let i = 0; i < 100; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'ivt-consent-dot';
+            if (i < highEstimate)
+                dot.classList.add('harm');
+            grid.appendChild(dot);
+        }
+        card.appendChild(grid);
+        const legend = document.createElement('div');
+        legend.className = 'ivt-consent-legend';
+        const bleedLabel = currentScenario.id === 'extended'
+            ? '~6 per 100: symptomatic intracranial bleeding in EXTEND'
+            : '2-7 per 100: symptomatic intracranial bleeding discussion range';
+        legend.appendChild(legendRow('harm', bleedLabel));
+        legend.appendChild(legendRow('', 'Risk changes with BP, anticoagulants, infarct size, age, and stroke severity'));
+        card.appendChild(legend);
+        return card;
+    }
+    function copyConsentNote(currentScenario, btn) {
+        const text = [
+            'IV thrombolysis consent discussion:',
+            `Scenario reviewed: ${currentScenario.title}.`,
+            `Expected benefit: ${currentScenario.benefitText}`,
+            `Major risk: ${currentScenario.bleedText}`,
+            'Discussed alternatives and parallel care: no IVT/supportive care, CTA/EVT evaluation when indicated, and local stroke-team protocol.',
+            'Reviewed risks of no treatment: persistent neurologic deficit, disability, loss of independence, or death.',
+            'Patient/surrogate questions addressed. Consent status: ____.',
+        ].join('\n');
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Copied consent note';
+            setTimeout(() => { btn.textContent = 'Copy consent note'; }, 1800);
+        }).catch(() => {
+            btn.textContent = 'Copy failed';
+            setTimeout(() => { btn.textContent = 'Copy consent note'; }, 1800);
+        });
+    }
+    function render() {
+        content.innerHTML = '';
+        for (const btn of tabs.querySelectorAll('button')) {
+            btn.classList.toggle('active', btn.getAttribute('data-scenario') === scenario.id);
+        }
+        const summary = document.createElement('div');
+        summary.className = 'ivt-consent-card';
+        const title = document.createElement('div');
+        title.className = 'ivt-consent-card-title';
+        title.textContent = scenario.title;
+        summary.appendChild(title);
+        const metrics = document.createElement('div');
+        metrics.className = 'ivt-consent-summary';
+        const bleedMetric = scenario.id === 'extended' ? '~6/100' : '2-7/100';
+        metrics.appendChild(metric(`+${scenario.extraGood}/100`, 'Additional patients with no/minimal deficit or disability-free survival'));
+        metrics.appendChild(metric(`${scenario.treatedGood}/100`, 'Approximate good outcome rate with IV thrombolysis'));
+        metrics.appendChild(metric(bleedMetric, 'Symptomatic brain bleed discussion estimate', true));
+        summary.appendChild(metrics);
+        content.appendChild(summary);
+        const pictos = document.createElement('div');
+        pictos.className = 'ivt-consent-pictos';
+        pictos.appendChild(pictograph('Recovery benefit out of 100 eligible patients', scenario.noTreatmentGood, scenario.extraGood));
+        pictos.appendChild(harmPictograph(scenario));
+        content.appendChild(pictos);
+        const script = document.createElement('div');
+        script.className = 'ivt-consent-card';
+        const scriptTitle = document.createElement('div');
+        scriptTitle.className = 'ivt-consent-card-title';
+        scriptTitle.textContent = 'Consent talking points';
+        script.appendChild(scriptTitle);
+        const scriptGrid = document.createElement('div');
+        scriptGrid.className = 'ivt-consent-script';
+        const items = [
+            ['Benefit', scenario.benefitText],
+            ['Major risk', scenario.bleedText],
+            ['No treatment', 'The stroke may remain disabling or worsen. Supportive care and thrombectomy evaluation may still be appropriate, but IVT is the only IV medication aimed at early clot dissolution.'],
+            ['Time pressure', 'Do not delay eligible IVT for advanced imaging, prolonged family search, or nonessential labs. Use emergency consent when the patient lacks capacity and no surrogate is immediately available.'],
+        ];
+        for (const [kicker, body] of items) {
+            const item = document.createElement('div');
+            item.className = 'ivt-consent-script-item';
+            const kickerEl = document.createElement('span');
+            kickerEl.className = 'ivt-consent-script-kicker';
+            kickerEl.textContent = kicker;
+            const bodyEl = document.createElement('span');
+            bodyEl.textContent = body;
+            item.appendChild(kickerEl);
+            item.appendChild(bodyEl);
+            scriptGrid.appendChild(item);
+        }
+        script.appendChild(scriptGrid);
+        content.appendChild(script);
+        const cautions = document.createElement('div');
+        cautions.className = 'ivt-consent-card';
+        const cautionTitle = document.createElement('div');
+        cautionTitle.className = 'ivt-consent-card-title';
+        cautionTitle.textContent = 'Must still be true before treatment';
+        cautions.appendChild(cautionTitle);
+        const cautionText = document.createElement('div');
+        cautionText.className = 'ivt-consent-note';
+        cautionText.textContent = 'Disabling ischemic stroke syndrome, hemorrhage excluded, BP controlled below protocol threshold, no active anticoagulant effect or other hard-stop contraindication, glucose checked, and stroke/neurology workflow active. IVT does not replace EVT when LVO is present.';
+        cautions.appendChild(cautionText);
+        content.appendChild(cautions);
+        const source = document.createElement('div');
+        source.className = 'ivt-consent-card';
+        const sourceTitle = document.createElement('div');
+        sourceTitle.className = 'ivt-consent-card-title';
+        sourceTitle.textContent = 'Source note';
+        source.appendChild(sourceTitle);
+        const sourceText = document.createElement('div');
+        sourceText.className = 'ivt-consent-note';
+        sourceText.textContent = `${scenario.sourceText} Modern tenecteplase/alteplase trials show similar functional outcomes and safety, with tenecteplase easier to administer as a single bolus.`;
+        source.appendChild(sourceText);
+        content.appendChild(source);
+        const copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.className = 'ivt-consent-copy';
+        copyBtn.textContent = 'Copy consent note';
+        copyBtn.addEventListener('click', () => copyConsentNote(scenario, copyBtn));
+        content.appendChild(copyBtn);
+    }
+    for (const s of IVT_CONSENT_SCENARIOS) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ivt-consent-tab';
+        btn.setAttribute('data-scenario', s.id);
+        btn.textContent = s.buttonLabel;
+        btn.addEventListener('click', () => {
+            scenario = s;
+            render();
+        });
+        tabs.appendChild(btn);
+    }
+    render();
+}
+const IVT_CONSENT_CALCULATOR = {
+    id: 'ivt-consent',
+    title: 'IVT Consent Infographic',
+    subtitle: 'Stroke thrombolysis risk/benefit visual and copyable consent note',
+    description: 'Bedside consent aid for eligible acute ischemic stroke patients. Shows population-level benefit, symptomatic intracranial bleeding risk, key talking points, and a copyable consent note for tenecteplase or alteplase discussions.',
+    fields: [],
+    results: [],
+    thresholdNote: 'Consent aid only. Eligibility, exclusions, agent choice, dosing, BP targets, and extended-window selection must follow local stroke protocol and stroke-team guidance.',
+    citations: [
+        'Prabhakaran S, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the AHA/ASA. Stroke. 2026. doi:10.1161/STR.0000000000000513.',
+        'Emberson J, et al. Effect of treatment delay, age, and stroke severity on the effects of IV alteplase for acute ischemic stroke: individual patient data meta-analysis. Lancet. 2014;384(9958):1929-1935.',
+        'Menon BK, et al. Intravenous tenecteplase compared with alteplase for acute ischemic stroke in Canada (AcT). Lancet. 2022;400(10347):161-169.',
+        'Muir KW, et al. Tenecteplase versus alteplase for acute stroke within 4.5h of onset (ATTEST-2). Lancet Neurol. 2024;23(11):1096-1105.',
+        'Ma H, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke (EXTEND). N Engl J Med. 2019;380(19):1795-1803.',
+    ],
+    customRender: renderIvtConsentInfographic,
+};
 // -------------------------------------------------------------------
 // TIMI Risk Score Calculator Definition
 // -------------------------------------------------------------------
@@ -38736,7 +39176,68 @@ const TEN_FLUID_CALCULATOR = {
         };
     },
 };
+const LCC_IOP_CALCULATOR = {
+    id: 'lcc-iop',
+    title: 'OCS — IOP Action Tier',
+    subtitle: 'Orbital Compartment Syndrome decision support',
+    description: 'Maps measured intraocular pressure plus the clinical picture to an action tier for suspected orbital compartment syndrome. Decompression is a CLINICAL decision — never delay canthotomy to obtain a number, and never measure IOP if globe rupture is suspected.',
+    fields: [
+        { name: 'iop', label: 'Intraocular Pressure', type: 'number', points: 0, valueIsPoints: true, unit: 'mmHg', description: 'Tono-Pen / tonometry. Normal 10–21 mmHg. Skip if globe rupture suspected.' },
+        { name: 'symptoms', label: 'Vision threat present (\u2193 acuity, RAPD, severe pain, or tense proptotic orbit)', type: 'toggle', points: 1, description: 'Any objective sign the eye is threatened' },
+    ],
+    results: [],
+    thresholdNote: 'Thresholds: IOP >40 mmHg = decompress now; IOP >30 mmHg WITH symptoms = call ophthalmology and prepare to decompress. Retinal ischemia is irreversible at ~90–120 min from onset. A clinically obvious OCS (proptosis + tense orbit + RAPD) warrants decompression regardless of the number.',
+    citations: [
+        'McCallum E, et al. Orbital Compartment Syndrome: An Update. StatPearls NBK557476. 2024.',
+        'EyeWiki (AAO). Orbital Compartment Syndrome.',
+        'Murali S, et al. Orbital compartment syndrome: pearls and pitfalls. JACEP Open. 2021;2(2):e12372. PMID 33778806.',
+    ],
+    computeResult: (values) => {
+        const iop = values['iop'] || 0;
+        const symptoms = (values['symptoms'] || 0) > 0;
+        if (iop <= 0) {
+            return {
+                value: '--',
+                label: 'Enter IOP',
+                description: 'Enter a measured IOP. **If the picture is clinically obvious (proptosis + tense orbit + RAPD), decompress now — do NOT wait for a number, CT, or ophthalmology.** Do not measure IOP if globe rupture is suspected.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        if (iop > 40) {
+            return {
+                value: `${Math.round(iop)} mmHg`,
+                label: 'DECOMPRESS NOW',
+                description: 'IOP >40 mmHg → emergent **lateral canthotomy + inferior cantholysis now**. Screen quickly for globe rupture (enophthalmos, teardrop pupil, IOP <5, Seidel+) but do not delay a threatened eye. The cantholysis is the decompressing step — do not stop at the skin cut.',
+                colorVar: '--color-danger',
+            };
+        }
+        if (iop > 30 && symptoms) {
+            return {
+                value: `${Math.round(iop)} mmHg`,
+                label: 'PREPARE TO DECOMPRESS',
+                description: 'IOP >30 mmHg WITH a vision threat → call ophthalmology and **prepare to decompress**. Trend closely; if IOP climbs >40, acuity drops, or an RAPD appears, perform canthotomy + inferior cantholysis. Elevate HOB; reverse anticoagulation if feasible.',
+                colorVar: '--color-warning',
+            };
+        }
+        if (iop > 21) {
+            return {
+                value: `${Math.round(iop)} mmHg`,
+                label: 'ELEVATED — RE-EXAMINE',
+                description: 'IOP above normal (21) but not yet at the procedural threshold. **Serial exams q15–30 min** (acuity, RAPD, IOP, proptosis, lid tension), HOB up, urgent ophthalmology + CT orbit. Return to the decompression pathway the moment OCS declares (IOP >40, or >30 with symptoms).',
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: `${Math.round(iop)} mmHg`,
+            label: 'Within normal range',
+            description: 'IOP 10–21 mmHg is normal. OCS is unlikely on pressure alone — but trust the clinical picture: a tense, proptotic orbit with an RAPD can still be OCS. Re-examine if the mechanism is concerning.',
+            colorVar: '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
+    // Lateral Canthotomy (Orbital Compartment Syndrome)
+    'lcc-iop': LCC_IOP_CALCULATOR,
     // SJS/TEN
     'scorten': SCORTEN_CALCULATOR,
     'ten-fluid': TEN_FLUID_CALCULATOR,
@@ -38987,6 +39488,9 @@ const CALCULATORS = {
     'nihss-calculator': NIHSS_CALCULATOR,
     'stroke-syndrome-calculator': STROKE_SYNDROME_CALCULATOR,
     'syndrome-calculator': STROKE_SYNDROME_CALCULATOR,
+    'ivt-consent': IVT_CONSENT_CALCULATOR,
+    'stroke-ivt-consent': IVT_CONSENT_CALCULATOR,
+    'thrombolysis-consent': IVT_CONSENT_CALCULATOR,
     'timi': TIMI_CALCULATOR,
     'bas': BAS_CALCULATOR,
     'fwd': FWD_CALCULATOR,

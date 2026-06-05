@@ -2294,6 +2294,15 @@ export const DEFAULT_CATEGORIES = [
         icon: 'ophthalmology.png',
         decisionTrees: [
             {
+                id: 'lateral-canthotomy',
+                title: 'Lateral Canthotomy & Cantholysis',
+                subtitle: 'Recognize OCS \u2192 IOP/VA \u2192 Setup \u2192 Canthotomy \u2192 Inferior Cantholysis \u2192 Reassess',
+                categoryId: 'ophthalmology',
+                version: '1.0',
+                nodeCount: 12,
+                entryNodeId: 'lcc-start',
+            },
+            {
                 id: 'aacg',
                 title: 'Acute Angle-Closure Glaucoma',
                 subtitle: 'Recognition → IOP Assessment → Treatment Cascade → Precipitating Meds → Disposition',
@@ -3146,6 +3155,15 @@ export const DEFAULT_CATEGORIES = [
         name: 'Procedures',
         icon: 'procedures.png',
         decisionTrees: [
+            {
+                id: 'lateral-canthotomy',
+                title: 'Lateral Canthotomy & Cantholysis',
+                subtitle: 'Recognize OCS \u2192 IOP/VA \u2192 Setup \u2192 Canthotomy \u2192 Inferior Cantholysis \u2192 Reassess',
+                categoryId: 'procedures',
+                version: '1.0',
+                nodeCount: 12,
+                entryNodeId: 'lcc-start',
+            },
             {
                 id: 'afib-rvr',
                 title: 'Synchronized Cardioversion',

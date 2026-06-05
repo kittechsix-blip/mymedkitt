@@ -18174,6 +18174,119 @@ const IL_STOP = {
         { num: 3, text: 'Phlegmasia Alba and Cerulea Dolens. StatPearls NBK563137.' },
     ],
 };
+// Lateral Canthotomy & Cantholysis Reference Pages
+// -------------------------------------------------------------------
+const LCC_INDICATIONS = {
+    id: 'lcc-indications',
+    title: 'When to Decompress — OCS Indications',
+    subtitle: 'Orbital compartment syndrome recognition',
+    sections: [
+        {
+            heading: 'The actionable triad',
+            body: '• **Relative proptosis** — globe bulges forward vs the other side\n• **Tense, tight eyelids** — hard to open, "rock-hard" globe, resistance to retropulsion\n• **RAPD** — relative afferent pupillary defect (Marcus Gunn pupil) in the injured eye\n\nProptosis + tense orbit + RAPD = orbital compartment syndrome until proven otherwise. Decompress.',
+        },
+        {
+            heading: 'Vision loss is a LATE sign',
+            body: '⚠️ Decreased acuity is present in **fewer than half** of OCS cases. Do NOT wait for blindness to act. Supporting signs: severe eye pain, ophthalmoplegia, markedly elevated IOP, chemosis, cherry-red macula.',
+        },
+        {
+            heading: 'Pressure thresholds',
+            body: '• Normal IOP **10–21 mmHg**\n• **>30 mmHg with symptoms** → call ophthalmology, prepare to decompress\n• **>40 mmHg** → decompress now\n• Retinal ischemia becomes irreversible at **~90–120 min** from onset — the clock started at symptom onset.',
+        },
+        {
+            heading: 'The two rules that save the eye',
+            body: '1. OCS is a **clinical** diagnosis — do NOT delay for CT, tonometry, or ophthalmology when the picture is obvious.\n2. The **cantholysis** decompresses (~30 mmHg drop), not the canthotomy (~14 mmHg). Never stop at the skin cut.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'McCallum E, et al. Orbital Compartment Syndrome: An Update. StatPearls NBK557476. 2024.' },
+        { num: 2, text: 'EyeWiki (AAO). Orbital Compartment Syndrome.' },
+        { num: 3, text: 'Murali S, et al. JACEP Open. 2021;2(2):e12372. PMID 33778806.' },
+        { num: 4, text: 'REBEL EM. Orbital Compartment Syndrome: Pearls and Pitfalls.' },
+    ],
+};
+const LCC_STEPS = {
+    id: 'lcc-steps',
+    title: 'Procedure Steps',
+    subtitle: 'Lateral canthotomy + inferior cantholysis',
+    sections: [
+        {
+            heading: '1. Anesthesia',
+            body: '• Topical ophthalmic anesthetic drops to the globe\n• Inject ~1–2 mL **lidocaine with epinephrine** into the lateral canthus, needle tip directed **away from the globe**.',
+        },
+        {
+            heading: '2. Hemostat crush (recommended)',
+            body: 'Lay a straight hemostat across the lateral canthus from the canthal angle to the orbital rim and **crush ~1 minute** — devascularizes tissue (less bleeding) and marks the incision line.',
+        },
+        {
+            heading: '3. Canthotomy (skin cut)',
+            body: 'With toothed forceps lifting skin away from the globe, cut horizontally through the crushed canthus toward the orbital rim, **~1–2 cm** (max 2 cm — facial nerve temporal branch). This exposes the tendon but does NOT decompress.',
+        },
+        {
+            heading: '4. Inferior cantholysis (the decompressing step)',
+            body: '• Grasp the **lower lid** at the lateral last-lash, pull **up and out** to tension the inferior crus\n• Point scissors **toward the nose, inferior-posterior, away from the globe**\n• **Strum** the taut tendon (guitar-string twang), then **cut the inferior crus** until the lower lid is completely free.',
+        },
+        {
+            heading: '5. Reassess ± superior crus',
+            body: 'Success = **swinging eyelid**, IOP <40 (ideally <30), softening globe, improving acuity/RAPD. If still tense AND the inferior crus is confirmed fully released → divide the **superior crus** (higher bleed/ptosis risk — lacrimal artery/gland, levator). Refractory → OR.',
+        },
+        {
+            heading: '6. Disposition',
+            body: 'Ophthalmology consult **parallel to**, never before, the procedure. CT orbit **after** decompression. Lid repair deferred. Admit for serial exams.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'McCallum E, et al. StatPearls NBK557476. 2024.' },
+        { num: 2, text: 'Rixen J, et al. University of Iowa EyeRounds — Lateral Canthotomy and Inferior Cantholysis.' },
+        { num: 3, text: 'LITFL. Procedure: Lateral Canthotomy.' },
+        { num: 4, text: 'Murali S, et al. JACEP Open. 2021;2(2):e12372. PMID 33778806.' },
+    ],
+};
+const LCC_LANDMARKS = {
+    id: 'lcc-landmarks',
+    title: 'Landmark Anatomy',
+    subtitle: 'Lateral canthal tendon',
+    sections: [
+        {
+            heading: 'The lateral canthal tendon',
+            body: 'The lateral canthal (palpebral) tendon anchors the lateral eyelids to the orbit and prevents forward globe movement. It has a **superior crus** and an **inferior crus**. Releasing it from the rim lets the globe move anteriorly, expanding orbital volume and dropping pressure.',
+        },
+        {
+            heading: 'Whitnall (lateral orbital) tubercle',
+            body: 'The tendon inserts on the lateral orbital (Whitnall) tubercle — a bony prominence on the **inner** surface of the lateral orbital wall, **~5 mm posterior to the rim** (range 1.5–5 mm), ~10 mm below the frontozygomatic suture. It is behind the rim margin, not at it.',
+        },
+        {
+            heading: 'Why the inferior crus first',
+            body: 'The inferior crus reliably decompresses, and working inferiorly avoids the superiorly located **lacrimal gland, lacrimal artery, and levator aponeurosis** — the structures whose injury causes bleeding and ptosis. A bloodless cut means you are in the correct (avascular) tendon plane.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Gioia VM, Linberg JV, McCormick SA. The anatomy of the lateral canthal tendon. Arch Ophthalmol. 1987;105(4):529-532. PMID 3566607.' },
+        { num: 2, text: 'EyeWiki (AAO). Orbital Compartment Syndrome.' },
+        { num: 3, text: 'Rixen J, et al. University of Iowa EyeRounds.' },
+    ],
+};
+const LCC_STOP = {
+    id: 'lateral-canthotomy-stop',
+    title: 'Lateral Canthotomy — Do NOT / Pitfalls',
+    subtitle: 'Stop checklist',
+    sections: [
+        {
+            heading: 'Do NOT',
+            body: '🛑 **Do NOT delay decompression** for CT, tonometry, or ophthalmology when OCS is clinically obvious. Image after, not before.\n\n🛑 **Do NOT stop at the canthotomy (skin cut).** It drops IOP only ~14 mmHg. The **cantholysis** is what decompresses (~30 mmHg). Incomplete cantholysis is the #1 failure mode.\n\n🛑 **Do NOT wait for vision loss** — it is present in <50% of OCS. Act on proptosis + tense orbit + RAPD.\n\n🛑 **Do NOT point scissors toward the globe** and do NOT push on the globe — direct everything outward/posterior, toward the nose.\n\n🛑 **Do NOT routinely cut the superior crus first** — start inferior; the superior region holds the lacrimal artery/gland and levator (bleeding, ptosis).',
+        },
+        {
+            heading: 'Do NOT Miss',
+            body: '• **Globe rupture** — enophthalmos, teardrop/peaked pupil, hyphema, IOP <5, Seidel+. If the orbit is soft and rupture is likely → shield, no pressure, no cut, emergent ophthalmology. If the orbit is tense and vision-threatened, decompress gently while avoiding all globe pressure.\n• **Incomplete release** — if IOP stays high, re-explore and finish dividing the inferior crus before adding the superior crus.\n• **Refractory OCS** after both crura → OR for orbital/septal decompression. The procedure can be repeated/extended.\n• Adjuncts (mannitol, acetazolamide, IOP drops, HOB up) **do NOT replace decompression**.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Murali S, et al. JACEP Open. 2021;2(2):e12372. PMID 33778806.' },
+        { num: 2, text: 'McCallum E, et al. StatPearls NBK557476. 2024.' },
+        { num: 3, text: 'LITFL. Procedure: Lateral Canthotomy.' },
+        { num: 4, text: 'EyeWiki (AAO). Orbital Compartment Syndrome.' },
+    ],
+};
 // Myasthenia Gravis Reference Pages
 // -------------------------------------------------------------------
 const MG_SUMMARY = {
@@ -25537,6 +25650,10 @@ export const INFO_PAGES = {
     // Ischemic Limb
     'il-six-ps': IL_SIX_PS,
     'il-stop': IL_STOP,
+    'lcc-indications': LCC_INDICATIONS,
+    'lcc-steps': LCC_STEPS,
+    'lcc-landmarks': LCC_LANDMARKS,
+    'lateral-canthotomy-stop': LCC_STOP,
     // Headache hub (added 2026-05-22 — Phase 2)
     'spg-block-procedure': SPG_BLOCK_PAGE,
     'pregnancy-headache-ladder': PREGNANCY_HEADACHE_LADDER_PAGE,

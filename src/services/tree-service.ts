@@ -277,6 +277,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/occipital-nerve-block.js');
       return { nodes: m.OCCIPITAL_NERVE_BLOCK_NODES, entryNodeId: 'onb-start', categoryId: 'procedures', moduleLabels: m.OCCIPITAL_NERVE_BLOCK_MODULE_LABELS, citations: m.OCCIPITAL_NERVE_BLOCK_CITATIONS, criticalActions: m.OCCIPITAL_NERVE_BLOCK_CRITICAL_ACTIONS };
     },
+    'lateral-canthotomy': async () => {
+      const m = await import('../data/trees/lateral-canthotomy.js');
+      return { nodes: m.LATERAL_CANTHOTOMY_NODES, entryNodeId: 'lcc-start', categoryId: 'procedures', moduleLabels: m.LATERAL_CANTHOTOMY_MODULE_LABELS, citations: m.LATERAL_CANTHOTOMY_CITATIONS, criticalActions: m.LATERAL_CANTHOTOMY_CRITICAL_ACTIONS };
+    },
     'cluster-headache': async () => {
       const m = await import('../data/trees/cluster-headache.js');
       return { nodes: m.CLUSTER_HEADACHE_NODES, entryNodeId: 'cluster-start', categoryId: 'neurology', moduleLabels: m.CLUSTER_HEADACHE_MODULE_LABELS, citations: m.CLUSTER_HEADACHE_CITATIONS, criticalActions: m.CLUSTER_HEADACHE_CRITICAL_ACTIONS };

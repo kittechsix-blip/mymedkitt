@@ -19,6 +19,7 @@ export const TREE_REGISTRY = {
   'difficult-vascular-access': { prefix: 'DIFFICULT_VASCULAR_ACCESS', entryNodeId: 'dva-start', categoryId: 'procedures' },
   'paracentesis': { prefix: 'PARACENTESIS', entryNodeId: 'para-start', categoryId: 'procedures' },
   'occipital-nerve-block': { prefix: 'OCCIPITAL_NERVE_BLOCK', entryNodeId: 'onb-start', categoryId: 'procedures' },
+  'lateral-canthotomy': { prefix: 'LATERAL_CANTHOTOMY', entryNodeId: 'lcc-start', categoryId: 'procedures' },
   'cluster-headache': { prefix: 'CLUSTER_HEADACHE', entryNodeId: 'cluster-start', categoryId: 'neurology' },
   'trigeminal-neuralgia': { prefix: 'TRIGEMINAL_NEURALGIA', entryNodeId: 'tn-start', categoryId: 'neurology' },
   'headache-hub': { prefix: 'HEADACHE_HUB', entryNodeId: 'hh-start', categoryId: 'emergency-medicine' },

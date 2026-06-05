@@ -250,10 +250,10 @@ export const LE_FORT_FRACTURE_NODES = [
         type: 'info',
         module: 4,
         title: 'Ocular Assessment',
-        body: '**Ocular Injury:** [3]\n• Present in 24-28% of facial fractures\n• Higher risk with Le Fort II and III (orbital involvement)\n\n**Examine For:**\n• Pupil irregularity\n• Hyphema\n• Restricted extraocular movements\n• Proptosis vs enophthalmos\n• Visual acuity changes\n• Afferent pupillary defect\n\n**Orbital Compartment Syndrome:**\n⚠️ **EMERGENCY** — Requires emergent lateral canthotomy if:\n• Tense globe with proptosis\n• Decreased visual acuity\n• Afferent pupillary defect\n• IOP >40 mmHg\n\n**Ophthalmology consult** for all Le Fort II/III fractures.',
+        body: '**Ocular Injury:** [3]\n• Present in 24-28% of facial fractures\n• Higher risk with Le Fort II and III (orbital involvement)\n\n**Examine For:**\n• Pupil irregularity\n• Hyphema\n• Restricted extraocular movements\n• Proptosis vs enophthalmos\n• Visual acuity changes\n• Afferent pupillary defect\n\n**Orbital Compartment Syndrome:**\n⚠️ **EMERGENCY** — Requires emergent lateral canthotomy if:\n• Tense globe with proptosis\n• Decreased visual acuity\n• Afferent pupillary defect\n• IOP >40 mmHg\n\nDo not delay decompression for imaging — see the [Lateral Canthotomy & Cantholysis](#/tree/lateral-canthotomy) consult.\n\n**Ophthalmology consult** for all Le Fort II/III fractures.',
         citation: [3],
         calculatorLinks: [
-            { id: 'lateral-canthotomy', label: 'Lateral Canthotomy' },
+            { id: 'lcc-iop', label: 'OCS — IOP Action Tier' },
         ],
         next: 'lefort-antibiotics',
         summary: 'Ophthalmology consult for orbital floor involvement — check VA, pupil reactivity, EOM',

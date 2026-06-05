@@ -14,9 +14,18 @@ export const TOOLBAR_OVERFLOW = new Set([
     'thrombocytopenia',
     'dental-extraction-complications',
     'sjs-ten',
+    'lateral-canthotomy',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 const TOOLBAR_CONFIGS = {
+    'lateral-canthotomy': [
+        { id: 'iop', label: 'IOP Target', icon: '🧮', action: 'calculator', target: 'lcc-iop', pinned: true },
+        { id: 'indications', label: 'Indications', icon: '🎯', action: 'overlay', target: 'lcc-indications', pinned: true },
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'lcc-steps', pinned: true },
+        { id: 'landmarks', label: 'Landmarks', icon: '📐', action: 'overlay', target: 'lcc-landmarks', pinned: true },
+        { id: 'cantholysis', label: 'Cantholysis', icon: '✂️', action: 'jump', target: 'lcc-cantholysis' },
+        { id: 'stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'lateral-canthotomy-stop' },
+    ],
     'sjs-ten': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'sjs-ten-summary', pinned: true },
         { id: 'scorten', label: 'SCORTEN', icon: '🧮', action: 'calculator', target: 'scorten', pinned: true },
@@ -213,6 +222,7 @@ const TOOLBAR_CONFIGS = {
     'stroke': [
         { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
         { id: 'syndrome-calc', label: 'Syn Calc', icon: '\uD83E\uDDED', action: 'calculator', target: 'stroke-syndrome-calculator' },
+        { id: 'ivt-consent', label: 'Consent', icon: '\uD83D\uDCDD', action: 'calculator', target: 'ivt-consent' },
         { id: 'lysis-contra', label: 'Contra', icon: '\uD83D\uDEAB', action: 'overlay', target: 'stroke-contraindications' },
         { id: 'syndromes', label: 'Syndromes', icon: '\uD83E\uDDED', action: 'overlay', target: 'stroke-syndromes' },
         { id: 'ivt', label: 'Lysis Rx', icon: '\uD83D\uDC89', action: 'jump', target: 'stroke-ivt-treat' },
