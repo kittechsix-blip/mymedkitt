@@ -26188,6 +26188,10 @@ const TRICKS_ENT_PAGE: InfoPage = {
       heading: 'DIY Ear Irrigation Catheter for Cerumen',
       body: '**Accomplishes:** Builds a safe, low-cost ear-irrigation rig to flush impacted cerumen or a foreign body when a commercial bulb/irrigator isn\u2019t stocked. [5]\n\n**How to:**\n1. First confirm the tympanic membrane is intact \u2014 do not irrigate a perforated or post-surgical (tube) ear.\n2. Remove the needle from an 18G angiocatheter and trim the plastic cannula short so it cannot reach the TM.\n3. Fill a 20\u201360 mL syringe with body-temperature water/saline (cool fluid triggers vertigo and vomiting) and attach the cannula.\n4. Straighten the canal (pull pinna up and back in adults), aim along the canal wall, and irrigate in pulses.\n5. Catch runoff in an emesis basin held under the ear; repeat, softening first with a cerumenolytic if needed.\n\n**Equipment:** 18G angiocatheter, 20\u201360 mL syringe, body-temperature saline, emesis basin, optional cerumenolytic.\n\n_Source: ALiEM Trick of the Trade \u2014 Ear irrigation in the ED._',
     },
+    {
+      heading: 'Acetone to Dissolve a Glued or Foam Ear Foreign Body',
+      body: '**Accomplishes:** Chemically softens or dissolves certain ear-canal foreign bodies (Styrofoam beads, a glue/cyanoacrylate plug) so they can be removed atraumatically instead of being grasped and fragmented. [6]\n\n**How to:**\n1. First confirm the tympanic membrane is intact \u2014 acetone is contraindicated with any TM perforation or tympanostomy tube.\n2. Confirm the object is acetone-susceptible (Styrofoam, cyanoacrylate); do NOT use it on organic matter, button batteries, or vegetable foreign bodies that may swell.\n3. Instill a few drops of acetone (nail-polish remover) into the canal with the affected ear up.\n4. Wait about 30 minutes for the object to dissolve or loosen.\n5. Gently suction or irrigate out the softened material; re-examine the canal and TM afterward.\n\n**Equipment:** Acetone (nail-polish remover), dropper, otoscope, suction or irrigation setup.\n\n_Source: ALiEM PEM Pearls \u2014 Search & rescue of ear foreign bodies._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26195,6 +26199,7 @@ const TRICKS_ENT_PAGE: InfoPage = {
     { num: 3, text: 'ALiEM. Trick of the Trade: Merocel nasal packing with an angiocatheter. aliem.com.' },
     { num: 4, text: 'ALiEM. Trick of the Trade: DIY nasal snot aspirator. aliem.com.' },
     { num: 5, text: 'ALiEM. Trick of the Trade: Ear irrigation in the emergency department. aliem.com.' },
+    { num: 6, text: 'ALiEM. PEM Pearls: Search & rescue of ear foreign bodies \u2014 picking the right tool. aliem.com.' },
   ],
 };
 
@@ -26216,11 +26221,16 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
       heading: 'Trickle-In Eyedrops via the Medial Canthus',
       body: '**Accomplishes:** Anesthetizes or medicates the eye of a patient who reflexively squeezes shut and cannot tolerate a drop placed directly on the cornea. [3]\n\n**How to:**\n1. Lay the patient supine with the nose pointing at the ceiling.\n2. Have the patient keep the eye gently closed \u2014 do not force the lids open.\n3. Drip several drops of the anesthetic/medication into the medial canthal well (the inner-corner pocket).\n4. Ask the patient to blink or briefly crack the eye; the pooled solution trickles under the lids and coats the surface.\n5. Once the topical anesthetic takes effect, the now-comfortable eye usually opens for exam.\n\n**Equipment:** Topical ophthalmic anesthetic/medication, supine positioning.\n\n_Source: ALiEM Trick of the Trade \u2014 Super-sensitive to eyedrops._',
     },
+    {
+      heading: 'Nasal Cannula for High-Volume Eye Irrigation',
+      body: '**Accomplishes:** Hands-light, well-tolerated continuous eye irrigation for chemical exposures \u2014 a cheaper, more comfortable alternative to the Morgan lens that every ED already stocks. [4]\n\n**How to:**\n1. Anesthetize the eye with a topical drop first (e.g., proparacaine) and check/adjust pH after irrigating.\n2. Attach a standard nasal cannula to IV tubing spiked into a 1 L crystalloid bag (the tubing fits snugly into the cannula).\n3. Rest the nasal prongs across the bridge of the nose so each prong directs flow into one eye.\n4. Open the IV tubing wide and let the saline flood both eyes; have the patient look in all directions to irrigate the fornices.\n5. Catch runoff in a basin or with towels; continue until the target volume/pH is reached.\n\n**Equipment:** Nasal cannula, IV tubing, 1 L crystalloid bag(s), topical anesthetic, pH paper, collection basin/towels.\n\n_Source: ALiEM Trick of the Trade \u2014 Eye irrigation setup._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 2, text: 'ALiEM. Trick of the Trade: Antibiotic ointment for nail-glue removal from eyelids. aliem.com.' },
     { num: 3, text: 'ALiEM. Trick of the Trade: Super-sensitive to eyedrops. aliem.com.' },
+    { num: 4, text: 'ALiEM. Trick of the Trade: Eye irrigation setup with a nasal cannula. aliem.com.' },
   ],
 };
 
@@ -26286,9 +26296,14 @@ const TRICKS_CARDIOLOGY_PAGE: InfoPage = {
       heading: 'Ultrarapid Adenosine Push via Pressure Bag (SVT)',
       body: '**Accomplishes:** Delivers undiluted adenosine to the heart at high flow to terminate SVT, exploiting its very short half-life \u2014 combines single-syringe speed with a large flush. [1]\n\n**How to:**\n1. Prime a pressure bag with saline tubing; close the roller clamp.\n2. Connect the line to the patient\u2019s angiocatheter.\n3. Attach the undiluted adenosine syringe to the Y-site nearest the patient.\n4. Open the roller clamp for high-pressure flow.\n5. Rapidly inject the adenosine into the tubing.\n\n**Equipment:** Pressure bag with primed saline line, IV angiocatheter, undiluted adenosine syringe, Y-site connector.\n\n_Source: ALiEM Tricks of the Trade._',
     },
+    {
+      heading: 'Modified Valsalva (REVERT) to Convert Stable SVT',
+      body: '**Accomplishes:** Roughly doubles cardioversion of stable SVT versus the standard strain (43% vs 17% in the REVERT trial) and often spares the patient adenosine. [2]\n\n**How to:**\n1. Confirm the patient is hemodynamically stable and sit them semi-upright (Fowler\u2019s) on a gurney.\n2. Strain phase: have them blow into a 10 mL syringe just hard enough to move the plunger (~40 mmHg) for 15 seconds (a 10 mL syringe reliably generates this pressure).\n3. Immediately at the end of the strain, lay them flat and have an assistant passively raise both legs to ~45\u00B0 for 15 seconds.\n4. Return the patient to semi-upright and re-check the rhythm/monitor after about a minute.\n5. Repeat once if needed before escalating to adenosine.\n\n**Equipment:** 10 mL syringe, gurney that reclines, an assistant to raise the legs, cardiac monitor.\n\n_Source: Appelboam et al., REVERT trial (Lancet 2015) \u2014 via ALiEM / REBEL EM._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
+    { num: 2, text: 'Appelboam A, et al. Postural modification to the standard Valsalva manoeuvre for emergency treatment of supraventricular tachycardias (REVERT). Lancet 2015. rebelem.com.' },
   ],
 };
 
@@ -26605,6 +26620,14 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
       heading: 'Radial Gutter Splint for 2nd/3rd Metacarpal Fractures',
       body: '**Accomplishes:** Immobilizes index/middle metacarpal fractures from both sides while leaving the other fingers free \u2014 the radial-side equivalent of the ulnar gutter. [7]\n\n**How to:**\n1. Cut a 3\u20134 inch wide splint long enough to span the wrist to the fingertips.\n2. Bisect the splint lengthwise from the fingertip end back to the wrist, creating two tails.\n3. Place dry gauze or cotton between the 2nd and 3rd fingers to pad them.\n4. Fold the two tails so they sandwich the volar AND dorsal aspects of the 2nd and 3rd metacarpals.\n5. Wrap and mold with the wrist slightly extended and MCPs flexed; leave the 4th/5th fingers and thumb free.\n\n**Equipment:** Plaster or fiberglass splint roll, padding/stockinette, gauze, elastic wrap.\n\n_Source: ALiEM Trick of the Trade \u2014 Radial gutter splint._',
     },
+    {
+      heading: 'Captain Morgan Technique for Posterior Hip Dislocation',
+      body: '**Accomplishes:** Reduces a dislocated (often prosthetic) hip using the operator\u2019s own propped leg as the lever, sparing your back and avoiding standing on the gurney \u2014 92% success in the original series. [8]\n\n**How to:**\n1. Lay the patient supine and fix the pelvis to the bed with a strap, or have an assistant press down on the bony pelvis.\n2. Flex the patient\u2019s hip and knee to 90\u00B0.\n3. Plant one foot on the gurney and tuck your knee under the patient\u2019s flexed knee (the \u201CCaptain Morgan\u201D pose).\n4. Hold the patient\u2019s ankle down with one hand while plantar-flexing your own ankle so your propped knee lifts the femur upward (anterior force).\n5. Add gentle internal/external rotation of the leg until the head relocates with a clunk; confirm with post-reduction x-ray.\n\n**Equipment:** Gurney, pelvic strap or assistant, procedural sedation/analgesia.\n\n_Source: Hendey & Avila, Ann Emerg Med 2011 \u2014 via ALiEM Trick of the Trade._',
+    },
+    {
+      heading: 'Legg Maneuver for Anterior Shoulder Dislocation',
+      body: '**Accomplishes:** A single-operator, leverage-based anterior shoulder reduction that needs no assistant and little or no sedation. [9]\n\n**How to:**\n1. Seat or recline the patient and gently abduct the affected arm to about 90\u00B0, supporting it at the wrist.\n2. Place your forearm into the patient\u2019s axilla to act as a fulcrum against the humeral neck.\n3. Apply slow, steady axial traction down the abducted arm while letting the muscles fatigue and relax.\n4. Use your axillary forearm to ease the humeral head laterally and over the glenoid rim.\n5. Adduct and internally rotate the arm once reduced; confirm neurovascular status and post-reduction film.\n\n**Equipment:** A chair/gurney; optional intra-articular lidocaine or light analgesia.\n\n_Source: ALiEM Trick of the Trade \u2014 Legg maneuver for shoulder dislocation._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -26614,6 +26637,8 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
     { num: 5, text: 'CoreEM. True Knee + Patellar Dislocations. coreem.net.' },
     { num: 6, text: 'EM News. The Quigley Maneuver for ankle fractures. journals.lww.com/em-news.' },
     { num: 7, text: 'ALiEM. Trick of the Trade: Radial gutter splint. aliem.com.' },
+    { num: 8, text: 'Hendey GW, Avila A. The Captain Morgan technique for the reduction of the dislocated hip. Ann Emerg Med 2011;58(6):536-40. aliem.com.' },
+    { num: 9, text: 'ALiEM. Trick of the Trade: Legg maneuver for shoulder dislocation. aliem.com.' },
   ],
 };
 

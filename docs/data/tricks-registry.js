@@ -36,7 +36,7 @@ export const TRICK_SPECIALTIES = [
         color: '#6A1B9A',
         subtitle: 'Epistaxis packing tricks and nasal suction.',
         infoPageId: 'tricks-ent',
-        trickCount: 5,
+        trickCount: 6,
     },
     {
         id: 'dental',
@@ -54,7 +54,7 @@ export const TRICK_SPECIALTIES = [
         color: '#2E7D32',
         subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
         infoPageId: 'tricks-ophtho',
-        trickCount: 3,
+        trickCount: 4,
     },
     {
         id: 'urology',
@@ -81,7 +81,7 @@ export const TRICK_SPECIALTIES = [
         color: '#C62828',
         subtitle: 'Rapid adenosine delivery and rhythm tricks.',
         infoPageId: 'tricks-cardiology',
-        trickCount: 1,
+        trickCount: 2,
     },
     {
         id: 'neuro',
@@ -117,7 +117,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction and splinting tricks (growing daily).',
         infoPageId: 'tricks-ortho',
-        trickCount: 7,
+        trickCount: 9,
     },
 ];
 /** Lookup a specialty by its id. */
