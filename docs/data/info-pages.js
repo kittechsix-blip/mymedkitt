@@ -18209,6 +18209,11 @@ const LCC_STEPS = {
     id: 'lcc-steps',
     title: 'Procedure Steps',
     subtitle: 'Lateral canthotomy + inferior cantholysis',
+    image: {
+        src: 'images/lateral-canthotomy/lateral-canthal-anatomy.jpg',
+        alt: 'Where to cut: the inferior limb of the lateral canthal tendon (blue circle) is the cantholysis target; green line shows the incision direction',
+        caption: 'WHERE TO CUT. After the canthotomy, the BLUE circle is the inferior crus of the lateral canthal tendon — strum it taut and divide it (this is the decompressing step). The GREEN line shows the cut direction: inferior and posterior along the orbital rim, away from the globe.',
+    },
     sections: [
         {
             heading: '1. Anesthesia',
@@ -18246,6 +18251,11 @@ const LCC_LANDMARKS = {
     id: 'lcc-landmarks',
     title: 'Landmark Anatomy',
     subtitle: 'Lateral canthal tendon',
+    image: {
+        src: 'images/lateral-canthotomy/lateral-canthal-anatomy.jpg',
+        alt: 'Lateral canthal anatomy: lateral orbital tubercle, orbital rim, incision line, and the inferior limb of the lateral canthal tendon (circled) — the cantholysis target',
+        caption: 'The lateral canthal tendon after canthotomy. The BLUE circle marks the inferior limb (crus) of the lateral canthal tendon — this is the structure you divide during inferior cantholysis. The GREEN line is the incision/cut location, directed inferiorly and posteriorly along the orbital rim, away from the globe.',
+    },
     sections: [
         {
             heading: 'The lateral canthal tendon',
