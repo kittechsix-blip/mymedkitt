@@ -117,7 +117,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction and splinting tricks (growing daily).',
         infoPageId: 'tricks-ortho',
-        trickCount: 9,
+        trickCount: 14,
     },
 ];
 /** Lookup a specialty by its id. */

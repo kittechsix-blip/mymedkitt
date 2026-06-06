@@ -25625,6 +25625,22 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Legg Maneuver for Anterior Shoulder Dislocation',
             body: '**Accomplishes:** A single-operator, leverage-based anterior shoulder reduction that needs no assistant and little or no sedation. [9]\n\n**How to:**\n1. Seat or recline the patient and gently abduct the affected arm to about 90\u00B0, supporting it at the wrist.\n2. Place your forearm into the patient\u2019s axilla to act as a fulcrum against the humeral neck.\n3. Apply slow, steady axial traction down the abducted arm while letting the muscles fatigue and relax.\n4. Use your axillary forearm to ease the humeral head laterally and over the glenoid rim.\n5. Adduct and internally rotate the arm once reduced; confirm neurovascular status and post-reduction film.\n\n**Equipment:** A chair/gurney; optional intra-articular lidocaine or light analgesia.\n\n_Source: ALiEM Trick of the Trade \u2014 Legg maneuver for shoulder dislocation._',
         },
+        {
+            heading: 'Reverse Sugar-Tong Splint for Distal Radius Fractures',
+            body: '**Accomplishes:** Volar-and-dorsal distal-radius immobilization that avoids the painful buckling a standard sugar-tong creates at the elbow fold \u2014 more comfortable and faster to wrap. [10]\n\n**How to:**\n1. Size a 3-inch fiberglass splint roll to span the forearm.\n2. Cut transversely through the fiberglass at the midpoint, leaving the cast padding intact as a \u201Cbridge.\u201D\n3. Seat the padding bridge in the patient\u2019s first webspace (between thumb and index).\n4. Fold the two halves so they sandwich the volar and dorsal forearm up toward the elbow.\n5. Let the ends overlap and curl snugly at the elbow; wrap with elastic bandage and mold the reduction.\n\n**Equipment:** 3-inch fiberglass splint roll, cast padding, elastic bandage wrap.\n\n_Source: ALiEM Trick of the Trade \u2014 Reverse sugar-tong splint._',
+        },
+        {
+            heading: 'Jahss 90-90 Maneuver for Boxer\u2019s Fracture',
+            body: '**Accomplishes:** Reduces a stubborn metacarpal-neck (boxer\u2019s) fracture when axial traction and simple push-back fail, using the flexed proximal phalanx as a lever against the metacarpal head. [11]\n\n**How to:**\n1. Anesthetize with a hematoma block or ulnar nerve block.\n2. Flex the MCP joint to 90\u00B0 \u2014 this tightens the collateral ligaments and locks the proximal phalanx to the metacarpal head.\n3. Flex the PIP joint to 90\u00B0.\n4. Push the proximal phalanx dorsally to drive the metacarpal head back up while stabilizing the metacarpal shaft.\n5. Apply counter-pressure on the dorsal shaft to seat the reduction; immobilize in an ulnar gutter splint.\n\n**Equipment:** Local anesthetic (hematoma or ulnar block), ulnar gutter splint material.\n\n_Source: ALiEM Trick of the Trade \u2014 Reducing the metacarpal neck fracture (Jahss)._',
+        },
+        {
+            heading: 'Saline Joint Insufflation for a Stuck Patellar Dislocation',
+            body: '**Accomplishes:** Reduces a subacute or difficult lateral patellar dislocation that resists the standard knee-extension maneuver, floating the patella up over the femoral condyle and sparing sedation or the OR. [12]\n\n**How to:**\n1. Sterile-prep the lateral knee; consider intra-articular lidocaine.\n2. Insert a large-bore needle into the knee joint.\n3. Insufflate sterile normal saline to distend the joint and lift the patella clear of the condyles.\n4. Slowly extend the knee while applying gentle medial pressure on the lateral edge of the patella.\n5. Confirm reduction and obtain AP, lateral, and sunrise films.\n\n**Equipment:** Sterile normal saline, large-bore needle and syringe, intra-articular lidocaine, sterile prep.\n\n_Source: Ding & Egol, Am J Orthop 2015 \u2014 closed reduction of subacute patellar dislocation by saline insufflation._',
+        },
+        {
+            heading: 'Stimson Hands-Free Traction with Wrist Restraints (Shoulder)',
+            body: '**Accomplishes:** Lets an anterior shoulder dislocation self-reduce hands-free while you tend to other patients, using a soft wrist restraint to suspend a constant axial load instead of holding weights. [13]\n\n**How to:**\n1. Place the patient prone with the affected arm hanging off the bed toward the floor.\n2. Pad the bed edge under the axilla to protect the neurovascular bundle.\n3. Secure a soft wrist restraint with ~10 lb of weight to the wrist for steady axial traction.\n4. Leave the arm to hang and let the rotator cuff and deltoid fatigue over 15-30 minutes.\n5. Return and check \u2014 the joint has often self-reduced; confirm with post-reduction films and a neurovascular exam.\n\n**Equipment:** Soft wrist restraint, ~10 lb weight, padding for the bed edge.\n\n_Source: ALiEM Trick of the Trade \u2014 Stimson technique using wrist restraints._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25636,6 +25652,10 @@ const TRICKS_ORTHO_PAGE = {
         { num: 7, text: 'ALiEM. Trick of the Trade: Radial gutter splint. aliem.com.' },
         { num: 8, text: 'Hendey GW, Avila A. The Captain Morgan technique for the reduction of the dislocated hip. Ann Emerg Med 2011;58(6):536-40. aliem.com.' },
         { num: 9, text: 'ALiEM. Trick of the Trade: Legg maneuver for shoulder dislocation. aliem.com.' },
+        { num: 10, text: 'ALiEM. Trick of the Trade: Reverse sugar tong splint. aliem.com.' },
+        { num: 11, text: 'ALiEM. Trick of the Trade: Reducing the metacarpal neck fracture (Jahss 90-90). aliem.com.' },
+        { num: 12, text: 'Ding DY, Egol KA. Closed reduction of subacute patellar dislocation using saline joint insufflation: a technical trick. Am J Orthop. 2015;44(7):299-301.' },
+        { num: 13, text: 'ALiEM. Trick of the Trade: Stimson technique using wrist restraints for shoulder dislocation. aliem.com.' },
     ],
 };
 // ===================================================================
