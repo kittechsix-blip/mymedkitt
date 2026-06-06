@@ -1,7 +1,7 @@
 // MedKitt - Tracheostomy Emergencies
 // Emergency Algorithm → Trach Types → Obstruction → Dislodgement → Bleeding → Fresh vs Mature → Disposition
 // 6 modules: Emergency Algorithm → Tracheostomy Types → Obstruction Management → Dislodgement → Bleeding → Disposition
-// 28 nodes total.
+// 26 nodes total.
 export const TRACH_EMERGENCY_CRITICAL_ACTIONS = [
     { text: 'Apply high-flow O2 to BOTH face AND stoma', nodeId: 'trach-start' },
     { text: 'Remove inner cannula FIRST for obstruction', nodeId: 'trach-obstruction-start' },

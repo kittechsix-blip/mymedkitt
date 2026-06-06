@@ -1,7 +1,7 @@
 // MedKitt — Sepsis Management
 // Recognition → Resuscitation Bundle → Hemodynamic Management → Advanced Therapies → Monitoring → Disposition
 // 6 modules: Recognition & Initial Assessment → Resuscitation Bundle → Hemodynamic Management → Advanced Therapies → Monitoring & De-escalation → Disposition
-// 31 nodes total.
+// 30 nodes total.
 export const SEPSIS_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION & INITIAL ASSESSMENT
@@ -606,7 +606,7 @@ export const SEPSIS_MODULE_LABELS = [
     'Monitoring & De-escalation',
     'Disposition',
 ];
-export const SEPSIS_NODE_COUNT = 31;
+export const SEPSIS_NODE_COUNT = SEPSIS_NODES.length;
 // =====================================================================
 // CITATIONS
 // =====================================================================

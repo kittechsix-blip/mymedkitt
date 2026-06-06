@@ -1,7 +1,7 @@
 // MedKitt - Tracheostomy Emergencies
 // Emergency Algorithm → Trach Types → Obstruction → Dislodgement → Bleeding → Fresh vs Mature → Disposition
 // 6 modules: Emergency Algorithm → Tracheostomy Types → Obstruction Management → Dislodgement → Bleeding → Disposition
-// 28 nodes total.
+// 26 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

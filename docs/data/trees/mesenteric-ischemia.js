@@ -1,7 +1,7 @@
 // MedKitt — Acute Mesenteric Ischemia (AMI)
 // Pain out of proportion → CTA → Type-specific treatment → Surgery vs Endovascular
 // 6 modules: Recognition → Workup → Resuscitation → Type-Specific Tx → Surgery → Disposition
-// ~32 nodes total.
+// 23 nodes total.
 export const MESENTERIC_ISCHEMIA_CRITICAL_ACTIONS = [
     { text: 'Pain out of proportion to exam = AMI until proven otherwise', nodeId: 'ami-start' },
     { text: 'CTA immediately — do NOT wait for labs; 14% mortality if treated <12h vs 80-100% if delayed >24h', nodeId: 'ami-imaging' },

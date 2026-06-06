@@ -1,7 +1,7 @@
 // MedKitt — Acute Mesenteric Ischemia (AMI)
 // Pain out of proportion → CTA → Type-specific treatment → Surgery vs Endovascular
 // 6 modules: Recognition → Workup → Resuscitation → Type-Specific Tx → Surgery → Disposition
-// ~32 nodes total.
+// 23 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

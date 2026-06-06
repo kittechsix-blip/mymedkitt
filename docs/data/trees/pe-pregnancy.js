@@ -303,8 +303,8 @@ export const PE_PREGNANCY_NODES = [
         type: 'question',
         module: 6,
         title: 'Disposition',
-        body: '**Disposition depends on PE severity and patient stability:**\n\n| Severity | Disposition |\n|----------|-------------|\n| Low-risk | May discharge with LMWH, close follow-up |\n| Submassive | ICU admission |\n| Massive | ICU, consider thrombolysis/embolectomy |\n\n**Before discharge (if appropriate):**\n• LMWH teaching and supplies\n• OB follow-up within 1 week\n• Hematology referral\n• Return precautions [1][2]',
-        citation: [1, 2],
+        body: '**Disposition depends on PE severity and patient stability:**\n\n| Severity | Disposition |\n|----------|-------------|\n| Low-risk | May discharge with LMWH, close follow-up |\n| Submassive | ICU admission |\n| Massive | ICU, consider thrombolysis/embolectomy |\n\n**Before discharge (if appropriate):**\n• LMWH teaching and supplies\n• OB follow-up within 1 week\n• Hematology referral\n• Return precautions\n\n**Peripartum anticoagulation plan:**\n• Continue therapeutic LMWH until delivery\n• Switch LMWH → UFH around 36 weeks (or earlier if delivery anticipated): UFH has a shorter half-life and is reversible, allowing neuraxial anesthesia\n• Hold anticoagulation per OB/anesthesia for planned delivery\n\n**Postpartum anticoagulation:**\n• Continue for a minimum of 6 weeks postpartum (total ≥3 months from diagnosis)\n• Warfarin is acceptable postpartum (does not enter breast milk in clinically significant amounts) — bridge from LMWH/UFH to therapeutic INR\n• Coordinate duration with hematology/OB [2][6]',
+        citation: [2, 6],
         options: [
             {
                 label: 'ICU admission — submassive/massive PE',
@@ -320,7 +320,7 @@ export const PE_PREGNANCY_NODES = [
                 next: 'pep-discharge',
             },
         ],
-        summary: 'Disposition by severity: low-risk may discharge with LMWH; submassive/massive require ICU admission',
+        summary: 'Disposition by severity: low-risk may discharge with LMWH; submassive/massive require ICU. Peripartum: LMWH→UFH ~36wk for neuraxial. Postpartum: ≥6wk, warfarin OK',
     },
     {
         id: 'pep-icu',
@@ -363,9 +363,9 @@ export const PE_PREGNANCY_MODULE_LABELS = [
 ];
 export const PE_PREGNANCY_CRITICAL_ACTIONS = [
     { text: 'Missing PE is more dangerous than diagnostic radiation (fetal radiation risk overstated)', nodeId: 'pep-start' },
-    { text: 'D-dimer normally elevated in pregnancy - use pregnancy-adjusted thresholds (>1000 in 3rd trimester)', nodeId: 'pep-clinical-prob' },
+    { text: 'D-dimer normally rises in pregnancy - pregnancy-adapted YEARS uses fixed thresholds (<1000 or <500 by criteria count), NOT trimester-adjusted cutoffs', nodeId: 'pep-clinical-prob' },
     { text: 'CTA chest preferred imaging (lower breast radiation than V/Q, higher diagnostic yield)', nodeId: 'pep-workup' },
-    { text: 'Pregnancy-adapted YEARS algorithm: CTA if ≥1 clinical criterion + D-dimer >1000', nodeId: 'pep-clinical-prob' },
+    { text: 'Pregnancy-adapted YEARS: image if 0 criteria + D-dimer ≥1000, OR ≥1 criterion + D-dimer ≥500', nodeId: 'pep-clinical-prob' },
     { text: 'Anticoagulation: LMWH preferred (enoxaparin 1 mg/kg SC q12h). Avoid warfarin (teratogenic).', nodeId: 'pep-treatment' },
     { text: 'Thrombolysis indications: massive PE with hemodynamic instability (alteplase 100 mg IV over 2h)', nodeId: 'pep-thrombolysis' },
     { text: 'Pregnancy is 5-10x increased VTE risk (highest risk in 3rd trimester and postpartum)', nodeId: 'pep-start' },
