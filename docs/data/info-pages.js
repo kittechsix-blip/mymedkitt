@@ -25641,6 +25641,10 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Stimson Hands-Free Traction with Wrist Restraints (Shoulder)',
             body: '**Accomplishes:** Lets an anterior shoulder dislocation self-reduce hands-free while you tend to other patients, using a soft wrist restraint to suspend a constant axial load instead of holding weights. [13]\n\n**How to:**\n1. Place the patient prone with the affected arm hanging off the bed toward the floor.\n2. Pad the bed edge under the axilla to protect the neurovascular bundle.\n3. Secure a soft wrist restraint with ~10 lb of weight to the wrist for steady axial traction.\n4. Leave the arm to hang and let the rotator cuff and deltoid fatigue over 15-30 minutes.\n5. Return and check \u2014 the joint has often self-reduced; confirm with post-reduction films and a neurovascular exam.\n\n**Equipment:** Soft wrist restraint, ~10 lb weight, padding for the bed edge.\n\n_Source: ALiEM Trick of the Trade \u2014 Stimson technique using wrist restraints._',
         },
+        {
+            heading: 'Park Method (Axillary Fist Fulcrum) for Shoulder Reduction',
+            body: '**Accomplishes:** Reduces an anterior shoulder dislocation single-handed without traction-countertraction, using your fist in the axilla as a fulcrum to lever the humeral head back over the glenoid rim. [14]\n\n**How to:**\n1. Seat or recline the patient; provide analgesia or intra-articular lidocaine.\n2. Place your fist in the patient\u2019s axilla against the displaced humeral head.\n3. Adduct the patient\u2019s elbow against your fist while applying gentle axial distraction.\n4. Use your fist as a fulcrum to slide the humeral head over the anteroinferior glenoid lip.\n5. Confirm reduction and neurovascular status; sling the arm.\n\n**Equipment:** Analgesia or intra-articular lidocaine, sling.\n\n_Source: ALiEM Trick of the Trade \u2014 Park method (axillary fulcrum) for shoulder dislocation._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25656,6 +25660,7 @@ const TRICKS_ORTHO_PAGE = {
         { num: 11, text: 'ALiEM. Trick of the Trade: Reducing the metacarpal neck fracture (Jahss 90-90). aliem.com.' },
         { num: 12, text: 'Ding DY, Egol KA. Closed reduction of subacute patellar dislocation using saline joint insufflation: a technical trick. Am J Orthop. 2015;44(7):299-301.' },
         { num: 13, text: 'ALiEM. Trick of the Trade: Stimson technique using wrist restraints for shoulder dislocation. aliem.com.' },
+        { num: 14, text: 'ALiEM. Trick of the Trade: Park method (axillary fulcrum) for shoulder dislocation. aliem.com.' },
     ],
 };
 // ===================================================================
