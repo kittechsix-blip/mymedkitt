@@ -1,7 +1,7 @@
 // MedKitt — NSTEMI (Non-ST-Elevation Myocardial Infarction) Management
 // Diagnosis → Risk Stratification → Invasive Strategy → Special Considerations → Discharge & Prevention
 // 5 modules: Diagnosis & Initial Mgmt → Risk Stratification → Invasive Strategy → Special Considerations → Discharge & Prevention
-// 18 nodes total.
+// 17 nodes total.
 export const NSTEMI_NODES = [
     // =====================================================================
     // MODULE 1: DIAGNOSIS & INITIAL MANAGEMENT

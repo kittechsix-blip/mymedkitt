@@ -344,7 +344,7 @@ export const PERICARDITIS_NODES = [
         type: 'info',
         module: 4,
         title: 'Corticosteroid Therapy',
-        body: '**Avoid steroids first-line — increase recurrence risk 2-4x** [1][2][3]\n\n**Indications for steroids:**\n• Contraindication to NSAIDs (renal failure, active GI bleeding)\n• Contraindication to colchicine\n• NSAID failure after 1-2 weeks\n• Autoimmune/connective tissue disease\n• Pregnancy (aspirin + colchicine can be used, but steroids if needed)\n\n**If steroids required:**\n• Low dose: [Prednisone](#/drug/prednisone/pericarditis) 0.25-0.5 mg/kg/day (NOT high-dose)\n• Maximum ~25mg/day for most patients\n• Continue colchicine throughout\n• **Very slow taper** — key to preventing recurrence\n\n**Taper protocol:**\n• Maintain dose until symptom-free + CRP normal (usually 2-4 weeks)\n• Then decrease by 2.5-5mg every 2 weeks (if >25mg/day)\n• Below 25mg: decrease by 1.25-2.5mg every 2-4 weeks\n• Total taper duration: often 3-6 months\n\n**If flare during taper:**\n• Return to last effective dose\n• Add/optimize colchicine\n• Consider steroid-sparing agent',
+        body: '**Avoid steroids first-line — increase recurrence risk 2-4x** [1][2][3]\n\n**Note (2025 ACC):** for recurrent/refractory inflammatory-phenotype pericarditis, IL-1 inhibitors are now preferred over escalating corticosteroids — see [Refractory Pericarditis](#/node/pericarditis-refractory). [15]\n\n**Indications for steroids:**\n• Contraindication to NSAIDs (renal failure, active GI bleeding)\n• Contraindication to colchicine\n• NSAID failure after 1-2 weeks\n• Autoimmune/connective tissue disease\n• Pregnancy (aspirin + colchicine can be used, but steroids if needed)\n\n**If steroids required:**\n• Low dose: [Prednisone](#/drug/prednisone/pericarditis) 0.25-0.5 mg/kg/day (NOT high-dose)\n• Maximum ~25mg/day for most patients\n• Continue colchicine throughout\n• **Very slow taper** — key to preventing recurrence\n\n**Taper protocol:**\n• Maintain dose until symptom-free + CRP normal (usually 2-4 weeks)\n• Then decrease by 2.5-5mg every 2 weeks (if >25mg/day)\n• Below 25mg: decrease by 1.25-2.5mg every 2-4 weeks\n• Total taper duration: often 3-6 months\n\n**If flare during taper:**\n• Return to last effective dose\n• Add/optimize colchicine\n• Consider steroid-sparing agent',
         citation: [1, 2, 3],
         treatment: {
             firstLine: {
@@ -358,7 +358,7 @@ export const PERICARDITIS_NODES = [
             monitoring: 'CRP to guide taper; blood glucose; BP; symptoms during taper — flare = return to last effective dose',
         },
         next: 'pericarditis-recurrent',
-        summary: 'Avoid first-line (2-4x recurrence risk); if needed: low dose 0.25-0.5 mg/kg (max 25mg); very slow taper over months',
+        summary: 'Avoid first-line (2-4x recurrence risk); if needed: low dose 0.25-0.5 mg/kg (max 25mg); very slow taper over months; 2025 ACC: IL-1 preferred over steroids for recurrent inflammatory phenotype',
         safetyLevel: 'warning',
     },
     // =====================================================================
@@ -369,7 +369,7 @@ export const PERICARDITIS_NODES = [
         type: 'question',
         module: 5,
         title: 'Recurrent Pericarditis',
-        body: '**Recurrence occurs in 15-30% despite optimal therapy** [1][13]\n\n**Definitions:**\n• **Recurrent:** symptom-free interval ≥4-6 weeks between episodes\n• **Incessant:** symptoms persist >4-6 weeks OR recurrence within 6 weeks of stopping therapy\n\n**Risk factors for recurrence:**\n• Incomplete initial treatment\n• Premature NSAID taper\n• Not using colchicine\n• Steroid use (especially high-dose or rapid taper)\n• Female sex\n• Autoimmune etiology\n\n**Recurrence management ladder:**\n1. NSAIDs + colchicine (longer duration — 6 months)\n2. Add low-dose steroids with very slow taper\n3. IL-1 antagonists (anakinra, rilonacept)\n4. Other immunosuppressants (azathioprine, IVIG)\n5. Pericardiectomy (last resort)',
+        body: '**Recurrence occurs in 15-30% despite optimal therapy** [1][13]\n\n**Definitions:**\n• **Recurrent:** symptom-free interval ≥4-6 weeks between episodes\n• **Incessant:** symptoms persist >4-6 weeks OR recurrence within 6 weeks of stopping therapy\n\n**Risk factors for recurrence:**\n• Incomplete initial treatment\n• Premature NSAID taper\n• Not using colchicine\n• Steroid use (especially high-dose or rapid taper)\n• Female sex\n• Autoimmune etiology\n\n**Recurrence management ladder (2025 ACC update):**\n1. NSAIDs + colchicine (longer duration — 6 months)\n2. **IL-1 antagonists (anakinra, rilonacept, goflikicept)** — now preferred over corticosteroids as second-line for the inflammatory phenotype (2025 ACC Expert Consensus)\n3. Low-dose corticosteroids with very slow taper — if IL-1 unavailable/contraindicated or non-inflammatory phenotype\n4. Other immunosuppressants (azathioprine, IVIG)\n5. Pericardiectomy (last resort)',
         citation: [1, 13],
         options: [
             {
@@ -414,8 +414,8 @@ export const PERICARDITIS_NODES = [
         type: 'info',
         module: 5,
         title: 'Refractory / Steroid-Dependent Pericarditis',
-        body: '**IL-1 antagonists are now preferred over escalating steroids** [1][13][14]\n\n**Indications for IL-1 therapy:**\n• ≥2 recurrences despite NSAIDs + colchicine\n• Steroid-dependent (unable to taper below physiologic dose)\n• Contraindication to steroids\n\n**IL-1 antagonists:**\n\n| Drug | Dose | Notes |\n|------|------|-------|\n| **Anakinra** | 100mg SC daily | Rapid onset, injection site reactions |\n| **Rilonacept** | 320mg SC load, then 160mg weekly | FDA-approved for recurrent pericarditis (RHAPSODY trial) |\n\n**RHAPSODY trial (rilonacept):** [14]\n• 96% reduction in recurrence vs placebo\n• Rapid symptom relief (median 5 days)\n\n**Other options:**\n• Azathioprine (steroid-sparing)\n• IVIG (limited evidence)\n• Pericardiectomy — last resort for truly refractory cases\n\n**Referral:**\n• Rheumatology and/or cardiology subspecialty involvement recommended',
-        citation: [1, 13, 14],
+        body: '**IL-1 antagonists are now preferred over corticosteroids as second-line for the inflammatory phenotype** (2025 ACC Expert Consensus) [1][13][14][15]\n\n**Indications for IL-1 therapy:**\n• Recurrent/incessant pericarditis after failing colchicine (typically by 2nd recurrence)\n• Steroid-dependent (unable to taper below physiologic dose)\n• Contraindication to steroids\n• Inflammatory phenotype (elevated CRP, fever, pericardial enhancement on CMR)\n\n**IL-1 antagonists:**\n\n| Drug | Dose | Notes |\n|------|------|-------|\n| **Rilonacept** | 320mg SC load, then 160mg weekly | FDA-approved for recurrent pericarditis (RHAPSODY trial) |\n| **Anakinra** | 100mg SC daily | Rapid onset, injection site reactions (AIRTRIP trial) |\n| **Goflikicept** | Per protocol | Newer IL-1 trap, named in 2025 ACC consensus |\n\n**Trial evidence:** [14]\n• RHAPSODY (rilonacept): 96% reduction in recurrence vs placebo, rapid symptom relief (median 5 days)\n• AIRTRIP (anakinra): 18% vs 90% recurrence after withdrawal\n\n**Weaning once on IL-1 therapy:** sequentially wean prednisone → NSAID → colchicine (colchicine may be continued for additive benefit). Treatment duration ≥12 months, individualized to clinical/biomarker/imaging remission.\n\n**Other options:**\n• Azathioprine (steroid-sparing)\n• IVIG (limited evidence)\n• Pericardiectomy — last resort for truly refractory cases\n\n**Referral:**\n• Rheumatology and/or cardiology subspecialty involvement recommended',
+        citation: [1, 13, 14, 15],
         treatment: {
             firstLine: {
                 drug: 'Rilonacept',
@@ -520,4 +520,5 @@ export const PERICARDITIS_CITATIONS = [
     { num: 12, text: 'Imazio M, Brucato A, Cemin R, et al. Colchicine for Recurrent Pericarditis (CORP): A Randomized Trial. Ann Intern Med. 2011;155(7):409-414.' },
     { num: 13, text: 'Lazaros G, Imazio M, Brucato A, et al. Recurrent Pericarditis: An Autoimmune Disease? Eur Heart J. 2021;42(13):1332-1343.' },
     { num: 14, text: 'Klein AL, Imazio M, Cremer P, et al. Phase 3 Trial of Interleukin-1 Trap Rilonacept in Recurrent Pericarditis (RHAPSODY). N Engl J Med. 2021;384(1):31-41.' },
+    { num: 15, text: '2025 Concise Clinical Guidance: An ACC Expert Consensus Statement on the Diagnosis and Management of Pericarditis. J Am Coll Cardiol. 2025. doi:10.1016/j.jacc.2025.05.023. IL-1 inhibitors (rilonacept, anakinra, goflikicept) preferred over corticosteroids as second-line for inflammatory-phenotype recurrent pericarditis.' },
 ];

@@ -1,7 +1,7 @@
 // MedKitt — Acute Agitation
 // BETA Protocol → De-escalation → Chemical Restraint → Physical Restraint → Organic Causes
 // Evidence: ACEP 2024, Project BETA (AAEP), EMCrit
-// ~28 nodes
+// 34 nodes
 export const ACUTE_AGITATION_CRITICAL_ACTIONS = [
     { text: 'Verbal de-escalation FIRST — BETA protocol', nodeId: 'agit-deescalate' },
     { text: 'Check glucose, O2 sat, temp before sedation', nodeId: 'agit-organic-screen' },

@@ -1,7 +1,7 @@
 // MedKitt — Epistaxis (Nosebleed) Management
 // Initial assessment → Localization → Treatment escalation → Anticoagulation → Disposition.
 // 5 modules: Assessment → Localization → Treatment → Anticoagulation → Disposition
-// 28 nodes total.
+// 22 nodes total.
 export const EPISTAXIS_CRITICAL_ACTIONS = [
     { text: 'Firm compression of fleshy part of nose for 15-20 min (not bony bridge)', nodeId: 'epi-initial-measures' },
     { text: 'Apply topical vasoconstrictor (oxymetazoline or phenylephrine) + lidocaine', nodeId: 'epi-initial-measures' },

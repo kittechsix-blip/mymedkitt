@@ -1,7 +1,7 @@
 // MedKitt — Fever Without a Source (FWS) in Infants 0–6 Months
 // Age-stratified workup → inflammatory markers → risk stratification → treatment → disposition.
 // 5 modules: Initial Assessment → Workup → Risk Stratification → Treatment → Disposition
-// 36 nodes total.
+// 46 nodes total.
 export const PEDS_FEVER_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT (shared nodes)

@@ -1,7 +1,7 @@
 // MedKitt — Precipitous Delivery
 // Stepwise walkthrough of assessing active labor and delivering a baby in the ED.
 // 5 modules: Initial Assessment → Preparation → Stage 1 (Labor) → Stage 2 (Delivery) → Stage 3 (Placenta & Postpartum)
-// 20 nodes total.
+// 21 nodes total.
 // Source: Pope & Tibbles (ACEP 2012), VanRooyen & Scott (Tintinalli's 7e), McFarlin (EMR 2019), NRP 9e (AAP 2025)
 export const PRECIP_DELIVERY_CRITICAL_ACTIONS = [
     { text: 'Page OB and Pediatrics STAT', nodeId: 'precip-callhelp' },

@@ -131,8 +131,8 @@ export const NMS_NODES = [
         type: 'info',
         module: 2,
         title: 'Bromocriptine',
-        body: '**Dopamine agonist - restores dopaminergic transmission**\n\n**Dosing:**\n* **Initial:** 2.5 mg PO/NG q8h\n* **Escalate:** 5 mg q8h if no improvement in 24h\n* **Max:** 45 mg/day\n* **Duration:** Continue for 10 days minimum after NMS resolves\n\n**Route:** PO or NG tube\n\n**Mechanism:** D2 agonist - counteracts dopamine blockade\n\n**Cautions:**\n* Hypotension (start low)\n* Nausea/vomiting\n* Psychosis (rare at these doses)',
-        citation: [4],
+        body: '**Dopamine agonist - restores dopaminergic transmission**\n\n**Dosing:**\n* **Initial:** 2.5 mg PO/NG q8h\n* **Escalate:** 5 mg q8h if no improvement in 24h\n* **Max:** 45 mg/day\n* **Duration:** Continue for 10 days minimum after NMS resolves\n\n**Route:** PO or NG tube\n\n**Mechanism:** D2 agonist - counteracts dopamine blockade\n\n**Cautions:**\n* Hypotension (start low)\n* Nausea/vomiting\n* Psychosis (rare at these doses)\n* **Prothrombotic:** bromocriptine increases MI/stroke/VTE risk — consider VTE prophylaxis/anticoagulation in immobilized NMS patients on bromocriptine [9]',
+        citation: [4, 9],
         next: 'nms-dantrolene',
         summary: 'Bromocriptine 2.5 mg q8h, increase to 5 mg q8h. Continue 10 days after resolution.',
     },
@@ -189,11 +189,11 @@ export const NMS_NODES = [
         type: 'result',
         module: 4,
         title: 'ICU Admission',
-        body: '**ICU mandatory for:** [1][2][6]\n* Temp >40 degC\n* Severe rigidity\n* Rhabdomyolysis (CK >10,000)\n* Respiratory compromise\n* Renal failure\n* Autonomic instability\n\n**Mortality:** 10-20% even with treatment. Higher if delayed diagnosis. [3][7]',
+        body: '**ICU mandatory for:** [1][2][6]\n* Temp >40 degC\n* Severe rigidity\n* Rhabdomyolysis (CK >10,000)\n* Respiratory compromise\n* Renal failure\n* Autonomic instability\n\n**Mortality:** Historically reported at 10-20%, but contemporary cohorts are lower — ~5-10% in-hospital, with 30-day mortality near 4.7% and 1-year mortality ~15.1% in recent data. Risk rises with delayed diagnosis, severe rhabdomyolysis, and renal failure. [3][7][9]',
         recommendation: 'ICU admission for severe NMS.',
         confidence: 'definitive',
-        citation: [1, 2, 3, 6, 7],
-        summary: 'ICU for severe NMS. Mortality 10-20% with treatment.',
+        citation: [1, 2, 3, 6, 7, 9],
+        summary: 'ICU for severe NMS. Modern mortality ~5-10% in-hospital (30-day ~4.7%), historically up to 20%.',
     },
     {
         id: 'nms-floor-admit',
@@ -222,5 +222,6 @@ export const NMS_CITATIONS = [
     { num: 6, text: 'Caroff SN, Mann SC. Neuroleptic Malignant Syndrome. Med Clin North Am 1993;77:185-202.' },
     { num: 7, text: 'Modi S, Dharaiya D, Schultz L, Varelas P. Neuroleptic Malignant Syndrome: Complications, Outcomes, and Mortality. Neurocrit Care 2016;24:97-103.' },
     { num: 8, text: 'Velamoor VR, Norman RM, Caroff SN, Mann SC, Sullivan KA, Antelo RE. Progression of symptoms in neuroleptic malignant syndrome. J Nerv Ment Dis 1994;182:168-73.' },
+    { num: 9, text: 'Pileggi DJ, Cook AM, et al. Neuroleptic Malignant Syndrome (Review). N Engl J Med 2024;391(12):1130-1138. Reports contemporary 30-day mortality ~4.7%, 1-year ~15.1%.' },
 ];
 export const NMS_NODE_COUNT = NMS_NODES.length;

@@ -1,7 +1,7 @@
 // myMedKitt — Postpartum Hemorrhage (PPH)
 // Stepwise approach to postpartum hemorrhage in the ED: Recognition → Immediate Measures →
 // 4 T's Differential → Uterotonic Ladder → Advanced Interventions → Disposition.
-// 34 nodes, 6 modules. Cross-listed: OB/GYN + Emergency Medicine.
+// 35 nodes, 6 modules. Cross-listed: OB/GYN + Emergency Medicine.
 // Primary sources:
 //   - ACOG Practice Bulletin No. 183: Postpartum Hemorrhage (2017, reaffirmed 2023)
 //   - WHO Recommendations for the Prevention and Treatment of Postpartum Haemorrhage (2012, 2017 update)

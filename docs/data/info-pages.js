@@ -25638,7 +25638,473 @@ const TRICKS_ORTHO_PAGE = {
         { num: 9, text: 'ALiEM. Trick of the Trade: Legg maneuver for shoulder dislocation. aliem.com.' },
     ],
 };
+// ===================================================================
+// Procedure batch 2026-06-06 — Ingrown Toenail Avulsion + Phenol
+// ===================================================================
+const ITN_STEPS_PAGE = {
+    id: 'itn-steps',
+    title: 'Steps Summary',
+    subtitle: 'Partial Nail Avulsion + Phenol Matrixectomy',
+    sections: [
+        {
+            body: '1. Stage + screen perfusion (no phenol in diabetes/PVD/poor perfusion).\n2. Digital block; confirm full anesthesia.\n3. Digital tourniquet for a bloodless field (phenol is inactivated by blood) — start a timer.\n4. Free + cut a 3-5 mm lateral nail strip proximally to the matrix; remove the whole strip including its proximal corner; curette granulation.\n5. Phenol matrixectomy: protect skin with petrolatum; apply phenol to the lateral matrix 3 × 30 s; neutralize with isopropyl alcohol.\n6. REMOVE the tourniquet, confirm reperfusion, dress; tetanus; aftercare + follow-up.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Mayeaux EJ Jr, et al. Ingrown Toenail Management. Am Fam Physician. 2019;100(3):158-164.' },
+    ],
+};
+const ITN_BLOCK_DOSING_PAGE = {
+    id: 'itn-block-dosing',
+    title: 'Digital Block Dosing',
+    subtitle: 'Local Anesthetic for the Toe',
+    sections: [
+        {
+            heading: 'Agent',
+            body: '• Lidocaine 1-2% PLAIN, ~2-4 mL total for a digital block.\n• Max lidocaine plain ≈ 4.5 mg/kg.\n• Bupivacaine 0.25-0.5% plain gives longer post-procedure analgesia if desired.',
+        },
+        {
+            heading: 'Epinephrine nuance',
+            body: 'Traditional teaching avoids epinephrine in digits. Modern evidence supports low-concentration commercial lidocaine-with-epinephrine in healthy digits, but for a brief toe procedure PLAIN anesthetic is the simplest safe default, especially with any vascular concern.',
+        },
+        {
+            heading: 'Technique',
+            body: 'Two-point block at the dorsolateral base of the proximal phalanx bilaterally; aspirate before injecting; wait 5-10 min; test before cutting.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Heidelbaugh JJ, Lee H. Management of the ingrown toenail. Am Fam Physician. 2009;79(4):303-308.' },
+    ],
+};
+const ITN_PHENOL_TIMER_PAGE = {
+    id: 'itn-phenol-timer',
+    title: 'Phenol Contact-Time Checklist',
+    subtitle: 'Chemical Matrixectomy — Do It Right',
+    sections: [
+        {
+            heading: 'Pre-application',
+            body: '• Field must be DRY and bloodless (tourniquet on) — phenol is neutralized by blood/fluid.\n• Protect the surrounding skin (perionychium) with petrolatum.',
+        },
+        {
+            heading: 'Application',
+            body: '• Use a tightly-wound cotton-tipped applicator.\n• Apply ~88% phenol to the exposed lateral matrix, especially the lateral horn.\n• Three 30-second applications (≈90 s total) is a common protocol; 30-60-90 s ranges are described.\n• Roll the applicator firmly into the matrix groove.',
+        },
+        {
+            heading: 'Neutralize',
+            body: '• Flush copiously with isopropyl alcohol (or sterile saline) after the final application to stop ongoing chemical burn.\n• Over-application or inadequate neutralization burns surrounding tissue and delays healing.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'RACGP HANDI. Partial nail avulsion and matricectomy (phenolisation) for ingrown toenail.' },
+    ],
+};
+const ITN_VASCULAR_STOP_PAGE = {
+    id: 'itn-vascular-stop',
+    title: 'Diabetic / PVD Stop-Check',
+    subtitle: 'When NOT to Use Phenol',
+    sections: [
+        {
+            body: 'Phenol depends on healthy local healing. In a poorly perfused foot it risks delayed healing, ulceration, or necrosis.',
+        },
+        {
+            heading: 'Screen before phenol',
+            body: '• Palpable dorsalis pedis / posterior tibial pulses?\n• Brisk capillary refill in the toe?\n• Diabetes — glycemic control, neuropathy, prior foot ulcers?\n• Known peripheral arterial disease / claudication?',
+        },
+        {
+            heading: 'If any concern',
+            body: 'Avulse for symptom relief if needed, but DO NOT apply phenol. Refer to podiatry / foot-and-ankle surgery for definitive matrixectomy under controlled conditions. Document pedal pulses / consider ABI.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Khunger N, Kandhari R. Ingrown toenails. Indian J Dermatol Venereol Leprol. 2012;78(3):279-289.' },
+    ],
+};
+const ITN_AFTERCARE_PAGE = {
+    id: 'itn-aftercare',
+    title: 'Aftercare + Return Precautions',
+    subtitle: 'Patient Discharge Instructions — Toenail Procedure',
+    shareable: true,
+    sections: [
+        {
+            heading: 'Wound care',
+            body: '• Keep the dressing clean and dry for the first 24 hours.\n• After 24 h, soak the toe in warm soapy water 1-2× daily, then apply petroleum jelly or antibiotic ointment and a clean non-stick dressing.\n• Some clear or blood-tinged drainage for 1-2 weeks is normal after phenol — the area weeps as it heals.',
+        },
+        {
+            heading: 'Activity + footwear',
+            body: '• Wear open-toe or wide, soft footwear until comfortable.\n• Elevate the foot and limit standing/walking for the first day or two.\n• Over-the-counter pain relievers as directed.',
+        },
+        {
+            heading: 'Return / call if',
+            body: '• Spreading redness, warmth, swelling, or pus (infection)\n• Fever\n• Increasing pain after the first few days\n• Bleeding that will not stop with pressure\n• Numbness, blue color, or cold toe',
+        },
+        {
+            heading: 'Follow-up',
+            body: 'Healing usually takes 2-6 weeks. See your primary care doctor or podiatrist if it has not healed by then, or if the nail grows back ingrown.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Mayeaux EJ Jr, et al. Ingrown Toenail Management. Am Fam Physician. 2019;100(3):158-164.' },
+    ],
+};
+// ===================================================================
+// Procedure batch 2026-06-06 — Tar / Asphalt Burn Removal
+// ===================================================================
+const TAR_STEPS_PAGE = {
+    id: 'tar-steps',
+    title: 'Steps Summary',
+    subtitle: 'Tar / Asphalt Burn Removal',
+    sections: [
+        {
+            body: '1. Screen airway / inhalation injury and CO/cyanide FIRST — airway supersedes wound care.\n2. Cool the tar ~20 min (no ice) to stop thermal injury; give analgesia early.\n3. Do NOT peel. Apply a petroleum-based emulsifier (bacitracin/Neosporin, surfactant, mineral oil, or vitamin E).\n4. Cover and let it dwell; reapply q1-2h; tar releases atraumatically.\n5. Reassess burn depth + TBSA only after tar is cleared; tetanus.\n6. Discharge small superficial burns with ongoing ointment + follow-up; transfer if burn-center criteria.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American Burn Association. Advanced Burn Life Support (ABLS).' },
+    ],
+};
+const TAR_AGENT_LADDER_PAGE = {
+    id: 'tar-agent-ladder',
+    title: 'Dissolution-Agent Ladder',
+    subtitle: 'Petroleum / Surfactant Emulsifiers',
+    sections: [
+        {
+            heading: 'Use what you have (all petroleum/surfactant-based)',
+            body: '1. Antibiotic ointment — bacitracin or Neosporin: available in any ED; apply thickly, reapply q1-2h.\n2. Surfactant emulsifiers — polysorbate (Tween-80), De-Solv-It, Tarsol: purpose-made, dissolve tar fastest where stocked.\n3. Mineral oil / petrolatum / butter: household petroleum sources (case-reported effective).\n4. Vitamin E ointment: reported effective and skin-friendly.',
+        },
+        {
+            heading: 'NEVER use',
+            body: 'Acetone, gasoline, or other organic solvents — they cause chemical injury to already-burned skin.',
+        },
+        {
+            heading: 'Principle',
+            body: 'Tar is petroleum-based, so a petroleum/surfactant emulsifier dissolves it without harming skin. Apply generously, cover, dwell, reapply, and let the tar lift off on its own.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Steenvoorde P, et al. Tar removal from a burn with butter. World Wide Wounds. 2004 Dec.' },
+        { num: 2, text: 'Vitamin E ointment for hot tar burn. CJEM. 2013 (PMID 23972137).' },
+    ],
+};
+const TAR_TBSA_TRANSFER_PAGE = {
+    id: 'tar-tbsa-transfer',
+    title: 'Burn TBSA + Transfer Criteria',
+    subtitle: 'Assess Only After Tar Is Cleared',
+    sections: [
+        {
+            heading: 'TBSA estimation',
+            body: '• Rule of Nines (adults) or the patient\u2019s palm (incl. fingers) ≈ 1% TBSA for small/patchy burns.\n• Count partial- and full-thickness burn only; exclude superficial (erythema-only).\n• Depth cannot be judged while tar covers the skin — estimate after clearance.',
+        },
+        {
+            heading: 'Burn-center referral (ABA criteria, abbreviated)',
+            body: '• Partial-thickness > 10% TBSA\n• Any full-thickness burn\n• Burns to face, hands, feet, genitalia, perineum, or major joints\n• Inhalation injury, electrical/chemical burns, or significant comorbidity\n• Burns in patients who will need special social/rehab support',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American Burn Association burn-center referral criteria.' },
+    ],
+};
+const TAR_ANALGESIA_PAGE = {
+    id: 'tar-analgesia',
+    title: 'Analgesia Options',
+    subtitle: 'Tar Burns Are Painful — Treat Early',
+    sections: [
+        {
+            body: '• Dissolution takes time; provide analgesia up front and reassess.\n• IV opioid titration for moderate-severe pain ([Morphine](#/drug/morphine/burn pain) or [Fentanyl](#/drug/fentanyl/burn pain) where stocked).\n• Adjunct acetaminophen / NSAID for smaller burns.\n• Consider regional/digital block for distal-extremity tar burns.\n• Reassess pain after cooling and during dwell periods.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hettiaratchy S, Papini R. Initial management of a major burn. BMJ. 2004;329:101-103.' },
+    ],
+};
+const TAR_STOP_PAGE = {
+    id: 'tar-stop',
+    title: 'Do-NOT List',
+    subtitle: 'Tar Burn Pitfalls',
+    sections: [
+        {
+            body: '• Do NOT mechanically peel, pick, or scrub adherent tar — it strips viable skin.\n• Do NOT use acetone, gasoline, or organic solvents on the skin.\n• Do NOT apply ice (worsens injury) or risk hypothermia in large burns.\n• Do NOT judge burn depth while tar is still present.\n• Do NOT prioritize wound care over airway in inhalation injury.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Anesthesia Key. Partial-Thickness (Second-Degree) Burns and Tar Burns.' },
+    ],
+};
+// ===================================================================
+// Procedure batch 2026-06-06 — Continuous Bladder Irrigation
+// ===================================================================
+const CBI_STEPS_PAGE = {
+    id: 'cbi-steps',
+    title: 'Steps Summary',
+    subtitle: 'CBI for Clot Retention',
+    sections: [
+        {
+            body: '1. Confirm clot retention (gross hematuria + clots), not simple retention.\n2. Address coagulopathy; send CBC/coags/type-and-screen if bleeding briskly.\n3. Place a large-bore 3-way (hematuria) catheter, 22-24 Fr; confirm placement before inflating balloon.\n4. MANUALLY evacuate clots with a Toomey syringe until returns are clear — CBI does NOT break clots.\n5. Start saline CBI; titrate inflow to keep effluent light-pink/clear.\n6. Watch outflow vs inflow — if outflow lags, STOP and troubleshoot; urology if not resolved.\n7. Admit/observe; ensure urologic follow-up for all gross-hematuria clot retention.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AUA Medical Student Curriculum: Urologic Emergencies.' },
+    ],
+};
+const CBI_CATHETER_SIZE_PAGE = {
+    id: 'cbi-catheter-size',
+    title: 'Catheter French-Size Selector',
+    subtitle: 'Why Bigger + 3-Way for Clots',
+    sections: [
+        {
+            heading: 'Choose a 3-way hematuria catheter',
+            body: '• A standard 14-16 Fr 2-way Foley has no irrigation channel and clogs with clots.\n• Use a 3-way (triple-lumen) catheter: balloon, drainage, and irrigation lumens.\n• Typical size for clot retention: 22-24 Fr (larger lumen drains clots and allows irrigation).',
+        },
+        {
+            heading: 'Placement note',
+            body: 'Confirm intravesical placement (urine/blood return) BEFORE inflating the balloon. Larger catheters are stiffer — gentle technique; lubricate well.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AUA Medical Student Curriculum: Bladder Drainage and Urinary Catheterization.' },
+    ],
+};
+const CBI_TITRATION_PAGE = {
+    id: 'cbi-titration',
+    title: 'CBI Titration Card',
+    subtitle: 'Inflow Rate by Bleed Severity',
+    sections: [
+        {
+            heading: 'Goal',
+            body: 'Keep the effluent light pink to clear and prevent NEW clots from forming. CBI does not break existing clots — those are removed manually first.',
+        },
+        {
+            heading: 'Titration',
+            body: '• Brisk/bright-red bleeding → run inflow fast (wide open initially) to keep effluent dilute.\n• As effluent lightens → slow the inflow stepwise.\n• Clear/light-pink and stable → maintain a low maintenance rate.\n• Re-darkening effluent → increase inflow and reassess for a re-bleed/clot.',
+        },
+        {
+            heading: 'Balance',
+            body: 'Track net fluid: true urine output = total drainage − irrigant instilled. Maintain a closed sterile system.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Willette PA, Coffield S. Bladder irrigation management. West J Emerg Med. 2012;13(6):472-478.' },
+    ],
+};
+const CBI_STOP_CHECK_PAGE = {
+    id: 'cbi-stop-check',
+    title: 'Inflow-vs-Outflow Stop-Check',
+    subtitle: 'The Key CBI Safety Signal',
+    sections: [
+        {
+            body: '**Outflow must roughly match or exceed inflow.** If you keep running fluid in but little drains out, the bladder is overfilling — risk of overdistension and perforation.',
+        },
+        {
+            heading: 'If outflow lags inflow',
+            body: '1. STOP the irrigation inflow immediately.\n2. Manually aspirate the catheter with a Toomey syringe to clear an obstructing clot.\n3. Check for kinking and verify the balloon has not slipped into the urethra.\n4. If outflow does not promptly recover, or there is severe pain / peritoneal signs → urology now (cystoscopy ± imaging).\n5. Do not restart CBI until free drainage is re-established.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AUA Medical Student Curriculum: Urologic Emergencies.' },
+    ],
+};
+const CBI_ESCALATION_PAGE = {
+    id: 'cbi-escalation',
+    title: 'Urology Escalation + Hematuria Workup',
+    subtitle: 'When to Call + What to Order',
+    sections: [
+        {
+            heading: 'Call urology urgently if',
+            body: '• Cannot clear clots manually or bladder will not drain (needs cystoscopic evacuation)\n• Outflow obstruction not resolving / suspected bladder injury\n• Brisk ongoing bleeding, dropping hemoglobin, or hemodynamic change\n• Suspected tumor source or recent urologic surgery complication',
+        },
+        {
+            heading: 'Workup',
+            body: '• CBC, coagulation panel, type-and-screen if significant bleeding\n• Review and correct anticoagulation\n• All gross hematuria with clot retention needs outpatient urologic evaluation (cystoscopy ± upper-tract imaging) to exclude malignancy, regardless of resolution.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'AMBOSS. Hematuria — clot retention and management.' },
+    ],
+};
+// ===================================================================
+// Procedure batch 2026-06-06 — Tendon-Sheath Injection
+// ===================================================================
+const TSI_STEPS_PAGE = {
+    id: 'tsi-steps',
+    title: 'Steps Summary',
+    subtitle: 'Tendon-Sheath Steroid Injection',
+    sections: [
+        {
+            body: '1. Diagnose: de Quervain (Finkelstein) vs trigger finger (A1 nodule/triggering). Exclude infection / flexor tenosynovitis.\n2. Consent: flare, fat atrophy/depigmentation, tendon rupture, infection, recurrence.\n3. Select target: first dorsal compartment or A1 pulley.\n4. Draw steroid + lidocaine (~1 mL); insert 25-27 ga into the sheath.\n5. Confirm sheath, not tendon: low-resistance free flow; needle should NOT move with passive tendon excursion.\n6. Inject slowly; keep deposit off subcutaneous tissue.\n7. Dress; counsel; hand-surgery referral if no improvement or recurrence.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tallia AF, Cardone DA. Injection of the wrist and hand region. Am Fam Physician. 2003;67(4):745-750.' },
+    ],
+};
+const TSI_STEROID_DOSE_PAGE = {
+    id: 'tsi-steroid-dose',
+    title: 'Steroid Prep + Dose Card',
+    subtitle: 'Injectate for de Quervain / Trigger Finger',
+    sections: [
+        {
+            heading: 'Typical injectate (~1 mL total)',
+            body: '• Corticosteroid: triamcinolone 10-20 mg, OR methylprednisolone 20-40 mg, OR dexamethasone 4 mg.\n• Mixed with lidocaine 1% ~0.5-1 mL for volume + immediate comfort.\n• Small total volume — the sheath is a small space.',
+        },
+        {
+            heading: 'Notes',
+            body: '• Dexamethasone is non-particulate (some prefer it to reduce subcutaneous atrophy risk).\n• Use the smallest effective steroid dose.\n• Avoid repeated injections at short intervals — diminishing returns and cumulative tissue effects.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Peters-Veluthamaningal C, et al. Corticosteroid injection for trigger finger. Cochrane 2009;(1):CD005617.' },
+    ],
+};
+const TSI_SHEATH_CONFIRM_PAGE = {
+    id: 'tsi-sheath-confirm',
+    title: 'Sheath-vs-Tendon Confirmation Checklist',
+    subtitle: 'Avoid Injecting the Tendon',
+    sections: [
+        {
+            body: '**Steroid into the tendon itself can cause rupture. Confirm you are in the sheath before injecting.**',
+        },
+        {
+            heading: 'Confirm sheath',
+            body: '• Injectate flows with LOW resistance.\n• Passive tendon-excursion test: have the patient gently move the digit/thumb — if the needle moves with the tendon, you are IN the tendon; withdraw 1-2 mm until the needle stays still and flow is free.\n• Ultrasound guidance, if available, confirms intra-sheath placement and helps with a de Quervain EPB septum.',
+        },
+        {
+            heading: 'If high resistance',
+            body: 'STOP. Do not force. Withdraw slightly until free flow is achieved, then inject slowly.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Roberts and Hedges\u2019 Clinical Procedures in EM \u2014 MSK injection (domain comparator).' },
+    ],
+};
+const TSI_ATROPHY_PAGE = {
+    id: 'tsi-atrophy',
+    title: 'Skin Atrophy / Depigmentation Caution',
+    subtitle: 'Keep Steroid Off the Subcutaneous Tissue',
+    sections: [
+        {
+            body: '• Subcutaneous steroid deposition causes fat atrophy and skin depigmentation at the site.\n• This is **more visible and more concerning in patients with darker skin** — counsel explicitly and obtain consent.\n• Prevent it by keeping the deposit deep in the sheath, using the smallest effective dose, and considering a non-particulate steroid (dexamethasone).\n• Effects usually appear weeks-to-months later and are often (not always) reversible.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tallia AF, Cardone DA. Injection of the wrist and hand region. Am Fam Physician. 2003;67(4):745-750.' },
+    ],
+};
+const TSI_REFERRAL_PAGE = {
+    id: 'tsi-referral',
+    title: 'Hand-Surgery Referral Criteria',
+    subtitle: 'When Injection Is Not Enough',
+    sections: [
+        {
+            body: '• No improvement after one (or at most two) injections\n• Recurrent triggering / locking after initial response\n• Fixed flexion contracture or a digit locked in flexion\n• de Quervain with a separate EPB subcompartment septum causing injection failure\n• Diagnostic uncertainty or suspected alternative pathology\n\nDefinitive treatment is surgical release (A1 pulley release for trigger finger; first dorsal compartment release for de Quervain).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Makkouk AH, et al. Trigger finger: evaluation and treatment. Curr Rev Musculoskelet Med. 2008;1(2):92-96.' },
+    ],
+};
+// ===================================================================
+// Procedure batch 2026-06-06 — Cyanoacrylate (Super Glue) Removal
+// ===================================================================
+const CYA_STEPS_PAGE = {
+    id: 'cya-steps',
+    title: 'Steps Summary',
+    subtitle: 'Cyanoacrylate Eye / Eyelid / Skin Removal',
+    sections: [
+        {
+            body: '1. Triage location: eyelids glued / ocular surface / skin only.\n2. For eye involvement: check visual acuity and rule out globe injury before manipulation.\n3. Eyelids: topical anesthetic, then antibiotic-ointment dwell OR gentle hook — never force apart; trim stubborn lashes.\n4. Skin: warm soapy soak + petroleum; roll apart gently (acetone only far from eye/mucosa).\n5. Fluorescein-check the cornea after de-adhesion; treat any abrasion.\n6. Reassure: residual glue self-detaches over hours-to-days. Ophthalmology for abrasion / retained glue / globe concern.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMRA. The Superglued Eye.' },
+    ],
+};
+const CYA_TRIAGE_PAGE = {
+    id: 'cya-triage',
+    title: 'Eye vs Eyelid vs Skin Triage Card',
+    subtitle: 'Location Drives Technique',
+    sections: [
+        {
+            heading: 'Eyelids glued shut',
+            body: 'Lids/lashes stuck together; eye likely intact underneath. Most common. → topical anesthetic + ointment dwell or gentle hook; never force.',
+        },
+        {
+            heading: 'Ocular surface / true instillation',
+            body: 'Glue instilled mistaking it for eyedrops; foreign-body sensation; fragments on cornea/conjunctiva. → rule out globe injury, fluorescein, remove only loose fragments, ophthalmology if symptomatic.',
+        },
+        {
+            heading: 'Skin only',
+            body: 'Fingers, lips, other skin, no eye involvement. → warm soapy soak + petroleum; gentle roll-apart.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'McLean CJ. Ocular superglue injury. J Accid Emerg Med. 1997;14(1):40-41.' },
+    ],
+};
+const CYA_ANESTHETIC_PAGE = {
+    id: 'cya-anesthetic',
+    title: 'Topical Anesthetic Options',
+    subtitle: 'Comfort Before Eyelid Manipulation',
+    sections: [
+        {
+            body: '• A topical ocular anesthetic (e.g., proparacaine or tetracaine drops) along the lid margin/fissure improves comfort and cooperation before any hook technique or lash trimming.\n• Topical anesthetics are for procedural use only — never prescribed for home use (corneal toxicity / delayed healing).\n• Combine with liberal ophthalmic ointment to lubricate and soften glue.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMRA. The Superglued Eye.' },
+    ],
+};
+const CYA_FLUORESCEIN_PAGE = {
+    id: 'cya-fluorescein',
+    title: 'Fluorescein / Corneal-Abrasion Check',
+    subtitle: 'Recheck the Cornea After De-adhesion',
+    sections: [
+        {
+            body: '• Once the eye is accessible, instill fluorescein and examine under cobalt-blue / Wood\u2019s light.\n• Hardened glue fragments can scratch the cornea — look for an abrasion (uptake pattern).\n• Treat an abrasion with topical antibiotic and analgesia per standard care; arrange ophthalmology follow-up.\n• Remove only loose conjunctival glue fragments; do not chase well-adhered fragments — they slough over days.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Roberts and Hedges\u2019 Clinical Procedures in EM \u2014 ophthalmologic procedures (domain comparator).' },
+    ],
+};
+const CYA_STOP_PAGE = {
+    id: 'cya-stop',
+    title: 'Do-NOT: Acetone Near Eye',
+    subtitle: 'Cyanoacrylate Eye Pitfalls',
+    sections: [
+        {
+            body: '• NEVER use acetone near the eye, lid margins, or mucous membranes — it causes chemical injury.\n• NEVER force glued eyelids apart with traction — it tears lid skin and can injure the cornea.\n• Do NOT pull glued lashes — trim them with scissors instead.\n• Do NOT chase well-adhered ocular-surface glue — it self-detaches over days.\n• Do NOT skip the globe assessment before manipulating around the eye.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'EMRA. The Superglued Eye.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Procedure Scout batch 2026-06-06
+    'itn-steps': ITN_STEPS_PAGE,
+    'itn-block-dosing': ITN_BLOCK_DOSING_PAGE,
+    'itn-phenol-timer': ITN_PHENOL_TIMER_PAGE,
+    'itn-vascular-stop': ITN_VASCULAR_STOP_PAGE,
+    'itn-aftercare': ITN_AFTERCARE_PAGE,
+    'tar-steps': TAR_STEPS_PAGE,
+    'tar-agent-ladder': TAR_AGENT_LADDER_PAGE,
+    'tar-tbsa-transfer': TAR_TBSA_TRANSFER_PAGE,
+    'tar-analgesia': TAR_ANALGESIA_PAGE,
+    'tar-stop': TAR_STOP_PAGE,
+    'cbi-steps': CBI_STEPS_PAGE,
+    'cbi-catheter-size': CBI_CATHETER_SIZE_PAGE,
+    'cbi-titration': CBI_TITRATION_PAGE,
+    'cbi-stop-check': CBI_STOP_CHECK_PAGE,
+    'cbi-escalation': CBI_ESCALATION_PAGE,
+    'tsi-steps': TSI_STEPS_PAGE,
+    'tsi-steroid-dose': TSI_STEROID_DOSE_PAGE,
+    'tsi-sheath-confirm': TSI_SHEATH_CONFIRM_PAGE,
+    'tsi-atrophy': TSI_ATROPHY_PAGE,
+    'tsi-referral': TSI_REFERRAL_PAGE,
+    'cya-steps': CYA_STEPS_PAGE,
+    'cya-triage': CYA_TRIAGE_PAGE,
+    'cya-anesthetic': CYA_ANESTHETIC_PAGE,
+    'cya-fluorescein': CYA_FLUORESCEIN_PAGE,
+    'cya-stop': CYA_STOP_PAGE,
     // Tricks of the Trade
     'tricks-airway': TRICKS_AIRWAY_PAGE,
     'tricks-procedures': TRICKS_PROCEDURES_PAGE,

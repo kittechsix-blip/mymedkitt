@@ -277,6 +277,26 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/occipital-nerve-block.js');
       return { nodes: m.OCCIPITAL_NERVE_BLOCK_NODES, entryNodeId: 'onb-start', categoryId: 'procedures', moduleLabels: m.OCCIPITAL_NERVE_BLOCK_MODULE_LABELS, citations: m.OCCIPITAL_NERVE_BLOCK_CITATIONS, criticalActions: m.OCCIPITAL_NERVE_BLOCK_CRITICAL_ACTIONS };
     },
+    'ingrown-toenail-avulsion': async () => {
+      const m = await import('../data/trees/ingrown-toenail-avulsion.js');
+      return { nodes: m.INGROWN_TOENAIL_AVULSION_NODES, entryNodeId: 'itn-start', categoryId: 'procedures', moduleLabels: m.INGROWN_TOENAIL_AVULSION_MODULE_LABELS, citations: m.INGROWN_TOENAIL_AVULSION_CITATIONS, criticalActions: m.INGROWN_TOENAIL_AVULSION_CRITICAL_ACTIONS };
+    },
+    'tar-burn-removal': async () => {
+      const m = await import('../data/trees/tar-burn-removal.js');
+      return { nodes: m.TAR_BURN_REMOVAL_NODES, entryNodeId: 'tar-start', categoryId: 'procedures', moduleLabels: m.TAR_BURN_REMOVAL_MODULE_LABELS, citations: m.TAR_BURN_REMOVAL_CITATIONS, criticalActions: m.TAR_BURN_REMOVAL_CRITICAL_ACTIONS };
+    },
+    'continuous-bladder-irrigation': async () => {
+      const m = await import('../data/trees/continuous-bladder-irrigation.js');
+      return { nodes: m.CONTINUOUS_BLADDER_IRRIGATION_NODES, entryNodeId: 'cbi-start', categoryId: 'procedures', moduleLabels: m.CONTINUOUS_BLADDER_IRRIGATION_MODULE_LABELS, citations: m.CONTINUOUS_BLADDER_IRRIGATION_CITATIONS, criticalActions: m.CONTINUOUS_BLADDER_IRRIGATION_CRITICAL_ACTIONS };
+    },
+    'tendon-sheath-injection': async () => {
+      const m = await import('../data/trees/tendon-sheath-injection.js');
+      return { nodes: m.TENDON_SHEATH_INJECTION_NODES, entryNodeId: 'tsi-start', categoryId: 'procedures', moduleLabels: m.TENDON_SHEATH_INJECTION_MODULE_LABELS, citations: m.TENDON_SHEATH_INJECTION_CITATIONS, criticalActions: m.TENDON_SHEATH_INJECTION_CRITICAL_ACTIONS };
+    },
+    'cyanoacrylate-removal': async () => {
+      const m = await import('../data/trees/cyanoacrylate-removal.js');
+      return { nodes: m.CYANOACRYLATE_REMOVAL_NODES, entryNodeId: 'cya-start', categoryId: 'procedures', moduleLabels: m.CYANOACRYLATE_REMOVAL_MODULE_LABELS, citations: m.CYANOACRYLATE_REMOVAL_CITATIONS, criticalActions: m.CYANOACRYLATE_REMOVAL_CRITICAL_ACTIONS };
+    },
     'lateral-canthotomy': async () => {
       const m = await import('../data/trees/lateral-canthotomy.js');
       return { nodes: m.LATERAL_CANTHOTOMY_NODES, entryNodeId: 'lcc-start', categoryId: 'procedures', moduleLabels: m.LATERAL_CANTHOTOMY_MODULE_LABELS, citations: m.LATERAL_CANTHOTOMY_CITATIONS, criticalActions: m.LATERAL_CANTHOTOMY_CRITICAL_ACTIONS };

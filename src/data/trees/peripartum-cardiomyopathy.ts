@@ -623,15 +623,15 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODE_COUNT = 28;
 
 export const PERIPARTUM_CARDIOMYOPATHY_CRITICAL_ACTIONS = [
   { text: 'Echocardiogram STAT for any pregnant/postpartum woman with orthopnea, PND, or dyspnea at rest (LVEF <45% diagnostic)', nodeId: 'ppcm-workup' },
-  { text: 'Bromocriptine 2.5 mg PO BID x 2 weeks, then daily x 6 weeks (improves EF recovery)', nodeId: 'ppcm-bromocriptine' },
+  { text: 'Bromocriptine (ESC Class IIb): uncomplicated 2.5 mg PO daily x1 wk; severe/EF<25%/shock 2.5 mg BID x2 wk then daily x6 wk. ALWAYS with anticoagulation', nodeId: 'ppcm-bromocriptine' },
   { text: 'Anticoagulation for LVEF <30% or LV thrombus (high-risk population)', nodeId: 'ppcm-anticoag' },
   { text: 'ACE inhibitors/ARBs only AFTER delivery (teratogenic before delivery)', nodeId: 'ppcm-acei' },
   { text: 'Beta-blocker (metoprolol or carvedilol) safe in pregnancy and breastfeeding', nodeId: 'ppcm-beta-blockers' },
   { text: 'Avoid NSAIDs (worsen heart failure and increase afterload)', nodeId: 'ppcm-delivery-considerations' },
   { text: 'Deliver at 37 weeks if LVEF <30% (increased risk of decompensation)', nodeId: 'ppcm-urgent-delivery' },
-  { text: 'STOP breastfeeding and start bromocriptine (prolactin worsens PPCM)', nodeId: 'ppcm-bromocriptine' },
+  { text: 'Bromocriptine suppresses lactation — discuss as shared decision (ESC IIb); enables full GDMT but is not mandatory for every patient', nodeId: 'ppcm-bromocriptine' },
   { text: 'Dobutamine or milrinone for cardiogenic shock (low-dose vasopressin if refractory)', nodeId: 'ppcm-unstable' },
-  { text: 'Contraception essential - pregnancy within 5 years has 50% mortality if LVEF not recovered', nodeId: 'ppcm-disposition' },
+  { text: 'Contraception essential - subsequent pregnancy with unrecovered LVEF (<50%) carries high relapse risk and substantial mortality (~15-25%); counsel against pregnancy until recovery', nodeId: 'ppcm-disposition' },
 ];
 
 // =====================================================================

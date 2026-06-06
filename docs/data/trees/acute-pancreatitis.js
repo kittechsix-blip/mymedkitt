@@ -1,7 +1,7 @@
 // MedKitt — Acute Pancreatitis Management
 // Diagnosis → Severity → Resuscitation → Complications → Intervention → Disposition
 // 6 modules: Diagnosis & Severity → Resuscitation → Etiology & Workup → Complications → Intervention → Disposition
-// ~35 nodes total.
+// 24 nodes total.
 export const ACUTE_PANCREATITIS_NODES = [
     // =====================================================================
     // MODULE 1: DIAGNOSIS & SEVERITY ASSESSMENT

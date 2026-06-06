@@ -1,7 +1,7 @@
 // MedKitt — Thyroid Disorders (Decompensated Hypothyroidism & Thyroid Storm)
 // Initial Assessment → Hypo Evaluation → Hypo Monitoring → Storm Treatment → Storm Special Situations → Subclinical
 // 6 modules: Initial Assessment → Decompensated Hypothyroidism Evaluation → Decompensated Hypothyroidism Monitoring → Thyroid Storm Treatment → Thyroid Storm Special Situations → Subclinical Findings
-// 33 nodes total.
+// 32 nodes total.
 export const THYROID_CRITICAL_ACTIONS = [
     { text: 'Levothyroxine 200-400 mcg IV load for decompensated hypothyroidism - do NOT delay for lab confirmation', nodeId: 'thyroid-hypo-t4' },
     { text: 'Hydrocortisone 100 mg IV q8h BEFORE levothyroxine (prevent adrenal crisis)', nodeId: 'thyroid-hypo-steroids' },

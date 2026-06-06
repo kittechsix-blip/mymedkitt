@@ -1,7 +1,7 @@
 // MedKitt — Amniotic Fluid Embolism (AFE)
 // Peripartum cardiovascular collapse + hypoxemia + DIC. Clinical diagnosis of exclusion.
 // 6 modules: Recognition → Resuscitation → Perimortem C/S → Pharmacologic Rx → Hemodynamic + DIC → Post-ROSC
-// 28 nodes. Source: SMFM Clinical Guideline #9 (2016), SMFM Checklist (2021), Rezai A-O-K (2017), AHA Pregnancy Arrest (2015), Pacheco (2020)
+// 17 nodes. Source: SMFM Clinical Guideline #9 (2016), SMFM Checklist (2021), Rezai A-O-K (2017), AHA Pregnancy Arrest (2015), Pacheco (2020)
 export const AFE_CRITICAL_ACTIONS = [
     { text: 'Call CODE: OB, anesthesia, critical care, NICU, blood bank — activate MTP now', nodeId: 'afe-call' },
     { text: 'Manual left uterine displacement if fundus ≥ umbilicus', nodeId: 'afe-lud' },

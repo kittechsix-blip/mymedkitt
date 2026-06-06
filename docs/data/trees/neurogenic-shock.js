@@ -7,7 +7,7 @@ export const NEUROGENIC_SHOCK_CRITICAL_ACTIONS = [
     { text: 'Neurogenic shock is a DIAGNOSIS OF EXCLUSION — rule out hemorrhage FIRST', nodeId: 'neuro-shock-rule-out' },
     { text: 'Norepinephrine is FIRST-LINE — has both α and β activity for BP AND heart rate', nodeId: 'neuro-shock-vasopressors' },
     { text: 'AVOID phenylephrine monotherapy — pure α causes reflex bradycardia, worsens existing bradycardia', nodeId: 'neuro-shock-avoid-phenyl' },
-    { text: 'MAP target 85-90 mmHg for 3-7 days — small differences (2-3 mmHg) correlate with neurologic outcomes', nodeId: 'neuro-shock-map-targets' },
+    { text: 'MAP target per 2024 guideline: lower limit 75-80, upper 90-95 mmHg for 3-7 days (≥85 common in practice); priority is avoiding hypotension', nodeId: 'neuro-shock-map-targets' },
     { text: 'Spinal shock ≠ neurogenic shock: spinal shock is areflexia (neurologic), neurogenic shock is hypotension (hemodynamic)', nodeId: 'spinal-shock-definition' },
 ];
 export const NEUROGENIC_SHOCK_NODES = [
@@ -121,7 +121,7 @@ export const NEUROGENIC_SHOCK_NODES = [
         type: 'info',
         module: 5,
         title: 'MAP Targets — Critical for Outcomes',
-        body: '**2024 Guidelines — Hemodynamic Targets:**\n\n| Parameter | Target | Duration |\n|-----------|--------|----------|\n| **MAP** | **85-90 mmHg** | 3-7 days |\n| Lower limit | 75-80 mmHg | Minimum acceptable |\n| Upper limit | 90-95 mmHg | Maximum target |\n\n**Why this matters:**\n• A difference of **2-3 mmHg** in MAP over first 3 days distinguishes neurologic recovery vs non-recovery\n• MAPs <85 mmHg associated with poorer outcomes (AIS grades A, B, C)\n• Secondary injury from hypoperfusion is PREVENTABLE\n\n**Monitoring:**\n• Arterial line for continuous MAP monitoring\n• Hourly neuro checks\n• UOP >30 mL/hr\n• Lactate trending\n\n**Duration:**\n• Strongest evidence: first **72 hours**\n• Continue augmented targets for **5-7 days** [1][6]',
+        body: '**2024 AO Spine / AANS / CNS Guideline (Kwon et al.) — Hemodynamic Targets:**\n\n| Parameter | Target | Duration |\n|-----------|--------|----------|\n| **MAP lower limit** | **75-80 mmHg** | 3-7 days |\n| **MAP upper limit** | **90-95 mmHg** | 3-7 days |\n\n**What changed:** The old 2013 AANS/CNS target was a narrow **85-90 mmHg** for 7 days. The 2024 GRADE update **broadened the range** (lower 75-80, upper 90-95) for **3-7 days** because the narrow 5-mmHg band was impractical and the supporting evidence is very-low quality (weak recommendation). Many centers default to **MAP ≥85** in practice.\n\n**Why this matters:**\n• Avoiding hypotension is the priority — even transient MAP dips in the first 72h are associated with worse neurologic recovery\n• Secondary injury from hypoperfusion is PREVENTABLE\n\n**Vasopressor choice:** The 2024 guideline made **no formal vasopressor recommendation** (evidence gap). Norepinephrine remains the common practical first-line; dopamine carries higher complication rates, especially in the elderly.\n\n**Monitoring:**\n• Arterial line for continuous MAP monitoring\n• Hourly neuro checks\n• UOP >30 mL/hr\n• Lactate trending\n\n**Duration:** augment for **3-7 days** post-injury (strongest signal in first 72h) [1][6]',
         citation: [1, 6],
         calculatorLinks: [
             { id: 'neuro-shock-map-calc', label: 'MAP Calculator' },
@@ -242,7 +242,7 @@ export const NEUROGENIC_SHOCK_CITATIONS = [
     { num: 3, text: 'WikEM. Neurogenic Shock. https://wikem.org/wiki/Neurogenic_shock. 2024.' },
     { num: 4, text: 'StatPearls. Neurogenic Shock. https://www.ncbi.nlm.nih.gov/books/NBK459361/. 2024.' },
     { num: 5, text: 'emDocs. Neurogenic Shock Definition, Identification, and Management in the ED. 2023.' },
-    { num: 6, text: '2024 Clinical Practice Guidelines. Hemodynamic Management in Acute SCI. Sage Journals. 2024.' },
+    { num: 6, text: 'Kwon BK, Tetreault LA, Martin AR, et al. A Clinical Practice Guideline for the Management of Patients With Acute Spinal Cord Injury: Recommendations on Hemodynamic Management. Global Spine J. 2024;14(3_suppl):187S-211S. doi:10.1177/21925682231202348. (MAP lower 75-80, upper 90-95 mmHg, 3-7 days; weak recommendation, very-low evidence; no vasopressor recommendation.)' },
     { num: 7, text: 'Hurlbert RJ, et al. Pharmacological Therapy for Acute SCI. Neurosurgery. 2013;72 Suppl 2:93-105.' },
     { num: 8, text: 'Ditunno JF, et al. Spinal Shock Revisited. Spinal Cord. 2004;42(7):383-95.' },
     { num: 9, text: 'Jones CF, et al. Bulbocavernosus Reflex Has No Prognostic Utility. J Neurotrauma. 2023.' },
