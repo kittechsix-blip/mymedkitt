@@ -25157,6 +25157,14 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Loop Drainage for Skin Abscesses',
             body: '**Accomplishes:** Drains a large abscess (>5 cm) without painful packing changes; noninferior to standard I&D in adults and superior/less painful in children. [14]\n\n**How to:**\n1. Anesthetize and make a small (~5 mm) stab incision at one edge of the abscess; break up loculations.\n2. Make a second small incision at the opposite edge of the cavity.\n3. Irrigate the cavity through both incisions.\n4. Pass a vessel loop (or a sterile glove/tourniquet strip) through one incision, out the other, and tie the ends loosely \u2014 leave slack, do not tension.\n5. Tell the patient to shower and gently jiggle the loop daily; they cut and remove it at home once drainage stops (usually 7\u201310 days).\n\n**Equipment:** Scalpel, vessel loop (or trimmed sterile glove band/tourniquet), hemostat, irrigation saline, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Incision and loop drainage._',
         },
+        {
+            heading: 'Topical TXA-Soaked Gauze for Oral & Socket Bleeding',
+            body: '**Accomplishes:** Stops oozing dental-socket or oral-mucosal bleeding at the bedside, even in anticoagulated patients, with a cheap readily-stocked agent. [15]\n\n**How to:**\n1. Suction clot and identify the bleeding socket or mucosal site.\n2. Soak a 4x4 gauze with about 500 mg (5 mL) of the 100 mg/mL IV tranexamic acid solution.\n3. Place the soaked gauze directly over the site and have the patient bite down (or hold firm pressure) for 15\u201320 minutes.\n4. Re-inspect; repeat once if still oozing. Escalate to FloSeal, sutures, or ENT/IR if bleeding is brisk or airway is threatened.\n5. Discharge with TXA mouthwash instructions when appropriate.\n\n**Equipment:** 100 mg/mL IV tranexamic acid, 4x4 gauze, suction, syringe.\n\n_Source: ALiEM Trick of the Trade \u2014 Topical tranexamic acid for oral bleeding._',
+        },
+        {
+            heading: 'Apply EMLA Early for Lumbar Punctures',
+            body: '**Accomplishes:** Gives a near-painless skin wheal and improves first-pass LP success in adults and children by starting the slow-onset topical anesthetic at the front of the workup. [16]\n\n**How to:**\n1. The moment an LP is anticipated, apply a thick layer of EMLA (2.5% lidocaine / 2.5% prilocaine) over the target interspaces.\n2. Cover with an occlusive transparent film dressing to drive penetration.\n3. Let it sit at least 60 minutes (use the labs/imaging wait) \u2014 onset is the rate-limiting step, so start it first, not last.\n4. Wipe off, prep, and still infiltrate deeper lidocaine for the track; EMLA only numbs skin.\n5. Safe in neonates \u226537 weeks gestation; avoid with local-anesthetic allergy or methemoglobinemia risk.\n\n**Equipment:** EMLA cream, occlusive film dressing, standard LP kit, lidocaine for deeper infiltration.\n\n_Source: ALiEM Trick of the Trade \u2014 EMLA for lumbar punctures._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25173,6 +25181,8 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 12, text: 'ALiEM. Trick of the Trade: \u201CPunch out\u201D the foreign body. aliem.com.' },
         { num: 13, text: 'ALiEM. Trick of the Trade: Ring removal from a finger (Chavez). aliem.com.' },
         { num: 14, text: 'ALiEM. Trick of the Trade: Incision and loop drainage of abscesses. aliem.com.' },
+        { num: 15, text: 'ALiEM. Trick of the Trade: Topical tranexamic acid paste for hemostasis. aliem.com. See also Wright J, et al. Topical TXA for oral bleed on a DOAC. Clin Pract Cases Emerg Med. 2020.' },
+        { num: 16, text: 'ALiEM. Trick of the Trade: EMLA for lumbar punctures. aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25205,6 +25215,10 @@ const TRICKS_ENT_PAGE = {
             heading: 'Acetone to Dissolve a Glued or Foam Ear Foreign Body',
             body: '**Accomplishes:** Chemically softens or dissolves certain ear-canal foreign bodies (Styrofoam beads, a glue/cyanoacrylate plug) so they can be removed atraumatically instead of being grasped and fragmented. [6]\n\n**How to:**\n1. First confirm the tympanic membrane is intact \u2014 acetone is contraindicated with any TM perforation or tympanostomy tube.\n2. Confirm the object is acetone-susceptible (Styrofoam, cyanoacrylate); do NOT use it on organic matter, button batteries, or vegetable foreign bodies that may swell.\n3. Instill a few drops of acetone (nail-polish remover) into the canal with the affected ear up.\n4. Wait about 30 minutes for the object to dissolve or loosen.\n5. Gently suction or irrigate out the softened material; re-examine the canal and TM afterward.\n\n**Equipment:** Acetone (nail-polish remover), dropper, otoscope, suction or irrigation setup.\n\n_Source: ALiEM PEM Pearls \u2014 Search & rescue of ear foreign bodies._',
         },
+        {
+            heading: 'Needle-Cap Bumper Guard for Peritonsillar Abscess Drainage',
+            body: '**Accomplishes:** Prevents over-advancing the spinal needle into the carotid (which sits 2\u20132.5 cm posterolateral to the tonsil) during PTA aspiration by capping insertion depth. [7]\n\n**How to:**\n1. Choose a 3.5-inch 18G spinal needle for the deep narrow oropharynx.\n2. Trim the distal ~1 cm off the plastic needle sheath, then slide it back over the needle so only about 1\u20131.5 cm of tip protrudes.\n3. Tape the cut sheath to the syringe so it cannot slide back during the procedure.\n4. Use POCUS first when available to map carotid depth, then aspirate at the point of maximal fluctuance no deeper than the exposed tip.\n5. For I&D, similarly tape the scalpel guard so the blade only exposes ~1 cm.\n\n**Equipment:** 3.5-inch 18G spinal needle, syringe, scalpel, tape, scissors, POCUS (optional).\n\n_Source: ALiEM Trick of the Trade \u2014 Peritonsillar abscess drainage (Lin & Afarian)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25213,6 +25227,7 @@ const TRICKS_ENT_PAGE = {
         { num: 4, text: 'ALiEM. Trick of the Trade: DIY nasal snot aspirator. aliem.com.' },
         { num: 5, text: 'ALiEM. Trick of the Trade: Ear irrigation in the emergency department. aliem.com.' },
         { num: 6, text: 'ALiEM. PEM Pearls: Search & rescue of ear foreign bodies \u2014 picking the right tool. aliem.com.' },
+        { num: 7, text: 'ALiEM. Trick of the Trade: Peritonsillar abscess needle aspiration / drainage 2.0. aliem.com.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25294,11 +25309,16 @@ const TRICKS_WOUND_PAGE = {
             heading: 'Sterile Gel for Bloody Scalp Lacerations',
             body: '**Accomplishes:** Clears matted blood/clot/hair from a scalp wound for visualization and closure \u2014 without shaving the scalp. [3]\n\n**How to:**\n1. Do preliminary irrigation if needed.\n2. Apply a generous amount of sterile water-soluble lubricating gel to the clotted area and matted hair.\n3. Wait 3\u20135 minutes for the gel to penetrate fibrin and soften clot.\n4. Massage gently in circles with gloved fingers to separate hair and loosen clot.\n5. Irrigate with saline (water-soluble gel rinses away easily).\n6. Proceed with standard cleaning and closure.\n\n**Equipment:** Sterile water-soluble lubricating gel, gloves, irrigation saline.\n\n_Source: ALiEM Tricks of the Trade._',
         },
+        {
+            heading: 'Warm the Local Anesthetic Before Injecting',
+            body: '**Accomplishes:** Cuts injection pain at no cost or risk \u2014 a meta-analysis of 18 studies shows warmed local anesthetic hurts significantly less than room-temperature. [4]\n\n**How to:**\n1. While gathering and prepping the rest of your laceration supplies, set the lidocaine or bupivacaine vial in a small tub of warm water.\n2. Let it sit a few minutes to reach roughly body temperature (about 37\u201340\u00B0C); a warm IV-fluid cabinet or running warm tap water over the vial also works.\n3. Draw up and inject as usual, slowly, with a small-gauge needle.\n4. Note that warming (and buffering) shortens lidocaine shelf life, so warm only what you will use.\n\n**Equipment:** Local anesthetic vial, warm water bath or fluid warmer, syringe, small-gauge needle.\n\n_Source: ALiEM Trick of the Trade \u2014 Heat it up (Hogan meta-analysis, Ann Emerg Med 2011)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: Lubricating gel for bloody scalp lacerations. aliem.com.' },
+        { num: 4, text: 'ALiEM. Trick of the Trade: Heat it up. aliem.com. Hogan ME, et al. Systematic review and meta-analysis of warming local anesthetics on injection pain. Ann Emerg Med. 2011.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
@@ -25343,6 +25363,10 @@ const TRICKS_NEURO_PAGE = {
             heading: 'Low-Dose Propofol Rescue for Refractory Migraine',
             body: '**Accomplishes:** May abort severe migraine after standard ED therapy has failed, while avoiding opioids. This is an off-label rescue technique with limited and conflicting evidence. Standard migraine therapy remains dopamine antagonist/NSAID/acetaminophen/magnesium/dexamethasone or nerve-block strategy per local pathway. [4,5]\n\n**How to:**\n1. First rule out red flags: thunderclap onset, meningismus, focal deficit, pregnancy/postpartum concern, immunocompromise, anticoagulation, trauma, cancer, fever, papilledema, altered mental status, or new headache age >50.\n2. Try standard ED migraine therapy first unless contraindicated.\n3. If migraine remains severe and the patient is monitored in an airway-capable area, give propofol 20 mg IV slowly.\n4. Reassess pain, sedation, BP, SpO2, and airway after 5-10 minutes. Repeat 20 mg IV aliquots as needed, commonly up to 60-120 mg total by local protocol.\n5. Stop if hypotension, hypoxia, excessive sedation, airway obstruction, diagnostic uncertainty, or inadequate staff monitoring.\n\n**Do NOT use if:** unstable airway, hypoxia, shock/hypotension, pregnancy unless specialist-guided, egg/soy allergy per local policy, intoxication/co-sedative load, or no ability to rescue apnea.\n\n**Equipment:** IV propofol, monitor, BP cycling, SpO2, capnography if available, oxygen, suction, BVM, airway cart, clinician credentialed for procedural sedation.\n\n_Source: EMCrit 426 - Dr. David Carr; Piatka systematic review. Newer headache guideline evidence remains cautious, so keep this as monitored rescue, not routine first-line care._',
         },
+        {
+            heading: 'Transnasal Sphenopalatine Ganglion Block for Headache',
+            body: '**Accomplishes:** Aborts refractory migraine, cluster, or post-dural-puncture headache noninvasively with only a cotton swab and lidocaine \u2014 no needles, no opioids. [6]\n\n**How to:**\n1. Put the patient supine in the sniffing position and place them on a monitor (nasal mucosa is highly vascular).\n2. Soak a long 10 cm cotton-tipped applicator in 1\u20134% lidocaine (or 0.5% bupivacaine).\n3. Insert it into the naris on the headache side, advancing along the superior border of the middle turbinate.\n4. Apply firm, steady pressure (like seating nasal packing) until you meet the posterior nasopharyngeal wall.\n5. Leave it in place 5\u201310 minutes; relief is often dramatic. Repeat on the other side for bilateral pain.\n\n**Equipment:** Two long 10 cm cotton-tipped applicators, 1\u20134% lidocaine or 0.5% bupivacaine, cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Sphenopalatine ganglion block for primary headaches (Shih)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25350,6 +25374,7 @@ const TRICKS_NEURO_PAGE = {
         { num: 3, text: 'ALiEM. Trick of the Trade: Dix-Hallpike maneuver variation. aliem.com.' },
         { num: 4, text: 'Piatka C, Beckett RD. Propofol for Treatment of Acute Migraine in the Emergency Department: A Systematic Review. Acad Emerg Med. 2020;27(2):148-160.' },
         { num: 5, text: 'Robblee J, et al. 2025 guideline update to acute treatment of migraine for adults in the ED: American Headache Society evidence assessment of parenteral pharmacotherapies. Headache. 2026;66(1):53-76.' },
+        { num: 6, text: 'ALiEM. Trick of the Trade: Sphenopalatine ganglion block for treatment of primary headaches. aliem.com.' },
     ],
 };
 const TRICKS_TOX_PAGE = {

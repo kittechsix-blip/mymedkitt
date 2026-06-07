@@ -26499,6 +26499,10 @@ const TRICKS_NEURO_PAGE: InfoPage = {
       heading: 'Low-Dose Propofol Rescue for Refractory Migraine',
       body: '**Accomplishes:** May abort severe migraine after standard ED therapy has failed, while avoiding opioids. This is an off-label rescue technique with limited and conflicting evidence. Standard migraine therapy remains dopamine antagonist/NSAID/acetaminophen/magnesium/dexamethasone or nerve-block strategy per local pathway. [4,5]\n\n**How to:**\n1. First rule out red flags: thunderclap onset, meningismus, focal deficit, pregnancy/postpartum concern, immunocompromise, anticoagulation, trauma, cancer, fever, papilledema, altered mental status, or new headache age >50.\n2. Try standard ED migraine therapy first unless contraindicated.\n3. If migraine remains severe and the patient is monitored in an airway-capable area, give propofol 20 mg IV slowly.\n4. Reassess pain, sedation, BP, SpO2, and airway after 5-10 minutes. Repeat 20 mg IV aliquots as needed, commonly up to 60-120 mg total by local protocol.\n5. Stop if hypotension, hypoxia, excessive sedation, airway obstruction, diagnostic uncertainty, or inadequate staff monitoring.\n\n**Do NOT use if:** unstable airway, hypoxia, shock/hypotension, pregnancy unless specialist-guided, egg/soy allergy per local policy, intoxication/co-sedative load, or no ability to rescue apnea.\n\n**Equipment:** IV propofol, monitor, BP cycling, SpO2, capnography if available, oxygen, suction, BVM, airway cart, clinician credentialed for procedural sedation.\n\n_Source: EMCrit 426 - Dr. David Carr; Piatka systematic review. Newer headache guideline evidence remains cautious, so keep this as monitored rescue, not routine first-line care._',
     },
+    {
+      heading: 'Transnasal Sphenopalatine Ganglion Block for Headache',
+      body: '**Accomplishes:** Aborts refractory migraine, cluster, or post-dural-puncture headache noninvasively with only a cotton swab and lidocaine \u2014 no needles, no opioids. [6]\n\n**How to:**\n1. Put the patient supine in the sniffing position and place them on a monitor (nasal mucosa is highly vascular).\n2. Soak a long 10 cm cotton-tipped applicator in 1\u20134% lidocaine (or 0.5% bupivacaine).\n3. Insert it into the naris on the headache side, advancing along the superior border of the middle turbinate.\n4. Apply firm, steady pressure (like seating nasal packing) until you meet the posterior nasopharyngeal wall.\n5. Leave it in place 5\u201310 minutes; relief is often dramatic. Repeat on the other side for bilateral pain.\n\n**Equipment:** Two long 10 cm cotton-tipped applicators, 1\u20134% lidocaine or 0.5% bupivacaine, cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Sphenopalatine ganglion block for primary headaches (Shih)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26506,6 +26510,7 @@ const TRICKS_NEURO_PAGE: InfoPage = {
     { num: 3, text: 'ALiEM. Trick of the Trade: Dix-Hallpike maneuver variation. aliem.com.' },
     { num: 4, text: 'Piatka C, Beckett RD. Propofol for Treatment of Acute Migraine in the Emergency Department: A Systematic Review. Acad Emerg Med. 2020;27(2):148-160.' },
     { num: 5, text: 'Robblee J, et al. 2025 guideline update to acute treatment of migraine for adults in the ED: American Headache Society evidence assessment of parenteral pharmacotherapies. Headache. 2026;66(1):53-76.' },
+    { num: 6, text: 'ALiEM. Trick of the Trade: Sphenopalatine ganglion block for treatment of primary headaches. aliem.com.' },
   ],
 };
 
