@@ -1,7 +1,7 @@
 // MedKitt — Tracheo-Innominate Fistula (TIF)
 // Recognition → Hyperinflate Cuff → Finger Tamponade → Surgical Alert → Stabilize
 // 5 modules: Recognize Sentinel Bleed → Hyperinflate Cuff → Finger Tamponade → Surgical Alert → Stabilize
-// 22 nodes total.
+// 19 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

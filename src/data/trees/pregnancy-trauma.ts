@@ -1,7 +1,7 @@
 // MedKitt — Pregnancy in Trauma
 // ED evaluation and management of the pregnant trauma patient
 // 6 modules: Initial Assessment → Maternal Resuscitation → Fetal Assessment → Pregnancy-Specific Injuries → Cardiac Arrest → Disposition
-// ~40 nodes total.
+// 24 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 

@@ -2,7 +2,7 @@
 // Evidence-based management: primary vs secondary, severity assessment, TXA, ENT criteria
 // AAO-HNS guidelines, pediatric airway considerations, blood product thresholds
 // 6 modules: Initial → Severity → Hemostasis → TXA → Airway → Disposition
-// 24 nodes total.
+// 21 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { CriticalAction, Citation } from '../../services/tree-service.js';

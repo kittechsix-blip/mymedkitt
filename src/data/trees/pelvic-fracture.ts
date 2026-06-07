@@ -1,7 +1,7 @@
 // MedKitt — Pelvic Fracture Management
 // High-energy mechanism → assessment → hemodynamic stabilization → classification → urogenital evaluation → definitive management
 // 5 modules: Assessment → Hemodynamic → Classification → Urogenital → Definitive Management
-// 42 nodes total.
+// 40 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 
