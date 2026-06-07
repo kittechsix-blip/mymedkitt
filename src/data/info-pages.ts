@@ -27303,7 +27303,263 @@ const EXCITED_DELIRIUM_STOP_PAGE: InfoPage = {
   ],
 };
 
+const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
+  id: 'sedation-options-slide',
+  title: 'Sedation Options: Visual Slide',
+  subtitle: 'Onset, Duration, Use Case, Major Risk',
+  sections: [
+    {
+      heading: 'Fast Visual Matrix',
+      body: `Read left to right at bedside: onset, useful duration, best fit, major risk, avoid/caution.
+
+Ketamine | IV 30-60 sec, IM 3-5 min | IV 10-20 min, IM 15-30 min | Dissociation, analgesia, severe danger | saliva, emesis, rare laryngospasm, HTN/tachy | severe HTN, ischemia, severe RV strain, catecholamine-depleted shock caution
+Propofol | IV 15-60 sec | 3-10 min | brief deep sedation, cardioversion, reduction | apnea, hypotension | shock, severe hypovolemia, frailty without major dose reduction
+Etomidate | IV 30-60 sec | 3-10 min | brief hypnosis with less BP drop | myoclonus, emesis, adrenal suppression signal | sepsis/adrenal concern if alternatives reasonable, no analgesia
+Midazolam | IV 1-5 min, IM 5-15 min, IN 5-10 min | 30-60 min or longer | anxiolysis, amnesia, stimulant/withdrawal physiology | respiratory depression, delirium, stacking | old/frail, OSA/COPD, intoxication, opioid co-use
+Lorazepam/diazepam | IV minutes | hours, longer with repeats | withdrawal, seizures, stimulant physiology | respiratory depression, delirium, long-tail stacking | routine procedure turnover, frailty, intoxication, opioid co-use
+Fentanyl | IV 1-2 min | 30-60 min | analgesia adjunct | apnea, chest wall rigidity at rapid high dose | OSA/COPD, intoxication, hypotension, no amnesia
+Droperidol | IV 3-10 min, IM 5-15 min | 2-4 h | undifferentiated severe agitation, nausea/headache use | QT, EPS, oversedation with benzos | QTc >500 ms, torsades risk, Parkinson/Lewy body
+Haloperidol | IM 15-30 min | 4-8 h or longer | psychosis/delirium when slower onset acceptable | QT, EPS, dystonia, NMS | Parkinson/Lewy body, high QT risk
+Olanzapine | IM 15-30 min, PO 30-60 min | 12-24 h | primary psychosis, longer calming | sedation, orthostasis, anticholinergic effects | IM use near parenteral benzos, dementia psychosis warning
+Dexmedetomidine | no-load 15-30 min | offset often 30-120 min | cooperative light sedation, NIV, extubation bridge | bradycardia, hypotension, slow onset | shock, high-grade block, severe bradycardia, withdrawal monotherapy
+Phenobarbital | IV about 5-30 min | many hours, half-life days | alcohol withdrawal, GABAergic control | long tail, respiratory depression, hypotension | heavy co-sedative load, severe hepatic/resp failure
+Methohexital | IV 30-60 sec | 5-10 min | uncommon brief deep sedation or cardioversion where local practice supports it | apnea, hypotension, excitatory movements | porphyria, unstable airway/BP, seizure-prone context if alternatives fit
+Nitrous oxide | 2-5 min | 3-5 min after stop | brief cooperative procedure | nausea, dizziness, closed-space expansion | pneumothorax, bowel obstruction, intracranial air, first trimester, severe B12 deficiency`,
+    },
+    {
+      heading: 'Drug Cards',
+      body: '',
+      drugTable: [
+        {
+          drug: 'Ketamine',
+          regimen: 'IV 1-2 mg/kg or IM 4-5 mg/kg for dissociation. Onset IV 30-60 sec, IM 3-5 min. Best for painful procedures, pediatric dissociation, bronchospasm, or immediate violent danger. Watch saliva, emesis, laryngospasm, HTN/tachycardia, and post-dose airway risk. [2,3,6,7,11]',
+        },
+        {
+          drug: 'Propofol',
+          regimen: '0.5-1 mg/kg IV, then 0.25-0.5 mg/kg aliquots. Onset 15-60 sec, duration 3-10 min. Best for brief deep sedation and cardioversion/reduction with airway-ready team. No analgesia. Major risks are apnea and hypotension. [1,2,6,7]',
+        },
+        {
+          drug: 'Etomidate',
+          regimen: '0.1-0.2 mg/kg IV for procedural sedation, 0.3 mg/kg IV for RSI. Onset 30-60 sec, duration 3-10 min. Hemodynamic-friendly brief hypnosis, but no analgesia. Myoclonus, emesis, and adrenal suppression signal matter. [2,6,7]',
+        },
+        {
+          drug: 'Midazolam plus fentanyl',
+          regimen: 'Midazolam IV 0.5-2 mg aliquots plus fentanyl IV 0.5-1 mcg/kg aliquots when anxiolysis/amnesia plus analgesia is the target. Wait between redoses. Main hazard is synergistic respiratory depression, especially old/frail, OSA/COPD, intoxication, opioids. [2,6,7,12]',
+        },
+        {
+          drug: 'Lorazepam / diazepam',
+          regimen: 'Better for seizure, withdrawal, or sympathomimetic physiology than procedure turnover. Lorazepam has slower onset and longer clinical effect. Diazepam has faster IV onset but active metabolites and long tail. Both stack with opioids, alcohol, phenobarbital, and frailty. [6,7,12]',
+        },
+        {
+          drug: 'Droperidol',
+          regimen: '5-10 mg IM/IV for severe agitation, often paired with midazolam 2-5 mg when fast control is needed. Onset IV 3-10 min, IM 5-15 min, duration 2-4 h. Avoid repeated dosing in QTc >500 ms or major torsades risks when possible. [3,4,8]',
+        },
+        {
+          drug: 'Haloperidol / olanzapine',
+          regimen: 'Useful for psychosis-dominant agitation when onset can be slower. Haloperidol has QT/EPS risk. Olanzapine lasts longer and should not be given IM close to parenteral benzodiazepines because of cardiopulmonary risk. [3,4,8,12]',
+        },
+        {
+          drug: 'Dexmedetomidine',
+          regimen: '0.2-0.7 mcg/kg/hr IV, usually no load in ED/ICU patients. No-load onset 15-30 min. Best for cooperative light sedation, NIV, extubation bridge, and delirium-prone ventilated patients. Bradycardia and hypotension limit use. Not withdrawal monotherapy. [1,5,9]',
+        },
+        {
+          drug: 'Phenobarbital',
+          regimen: '130-260 mg IV increments or 10-15 mg/kg load per local protocol for alcohol withdrawal. IV onset is minutes, duration is many hours with half-life days. Avoid casual stacking with large benzodiazepine/opioid exposure without airway/ICU plan. [1,10,12]',
+        },
+        {
+          drug: 'Methohexital',
+          regimen: 'Uncommon ultra-short barbiturate option for brief deep sedation or cardioversion when local practice supports it. IV onset 30-60 sec, duration often 5-10 min. Risks are apnea, hypotension, and excitatory movements. Avoid porphyria and unstable airway/BP physiology. [6,7]',
+        },
+        {
+          drug: 'Nitrous oxide',
+          regimen: 'Rapid inhaled anxiolysis and mild analgesia. Onset 2-5 min, offset 3-5 min after stop. Best for brief cooperative procedures. Avoid closed gas spaces, first trimester pregnancy, severe B12 deficiency, and inability to cooperate. [6,7]',
+        },
+      ],
+    },
+    {
+      heading: 'Speed Ranking',
+      body: `Seconds:
+- Propofol, etomidate, IV ketamine.
+
+Early minutes:
+- Fentanyl IV, midazolam IV, droperidol IV, ketamine IM.
+
+Later minutes:
+- Droperidol IM, haloperidol IM, olanzapine IM, nitrous mask setup, dexmedetomidine if no load.
+
+Long tail:
+- Lorazepam/diazepam, phenobarbital, olanzapine, repeated benzodiazepines, stacked sedatives.`,
+    },
+    {
+      heading: 'Adverse-Effect Fingerprints',
+      body: `Apnea/obstruction:
+- Propofol, benzo/opioid stacking, intoxication, OSA/COPD.
+
+Hypotension:
+- Propofol, dex loading, high total sedative burden, shock physiology.
+
+QT/EPS:
+- Droperidol and haloperidol, especially QTc >500 ms, electrolyte depletion, QT polypharmacy, Parkinson/Lewy body.
+
+Bradycardia:
+- Dexmedetomidine, beta-blockers, high vagal tone, conduction disease.
+
+Myoclonus:
+- Etomidate.
+
+Saliva/emesis/laryngospasm:
+- Ketamine.
+
+Long-tail oversedation:
+- Phenobarbital, lorazepam, diazepam, olanzapine, repeated benzodiazepines.`,
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Farkas J. Analgesia and sedation for the critically ill patient. EMCrit IBCC. Accessed 2026-06-07.' },
+    { num: 2, text: 'Godwin SA, et al. ACEP Clinical policy: procedural sedation and analgesia in the emergency department. Ann Emerg Med. 2014.' },
+    { num: 3, text: 'ACEP Clinical Policy: Severe agitation. Ann Emerg Med. 2024.' },
+    { num: 4, text: 'Wilson MP, et al. Project BETA psychopharmacology of agitation. West J Emerg Med. 2012.' },
+    { num: 5, text: 'Devlin JW, et al. SCCM PADIS Guidelines. Crit Care Med. 2018.' },
+    { num: 6, text: 'Merck Manual Professional. How To Do Procedural Sedation and Analgesia. Accessed 2026-06-07.' },
+    { num: 7, text: 'StatPearls. Procedural Sedation. NCBI Bookshelf. Accessed 2026-06-07.' },
+    { num: 8, text: 'UIC Drug Information Group. Droperidol and QT prolongation FAQ. 2021.' },
+    { num: 9, text: 'StatPearls. Dexmedetomidine. NCBI Bookshelf. Accessed 2026-06-07.' },
+    { num: 10, text: 'Punia V, et al. Phenobarbital for alcohol withdrawal management in the ED. Acad Emerg Med. 2024.' },
+    { num: 11, text: 'Green SM, et al. ED ketamine dissociative sedation guideline. Ann Emerg Med. 2011.' },
+    { num: 12, text: 'UpToDate. Procedural sedation in adults and management of acute agitation in adults. Accessed 2026-06-07.' },
+  ],
+};
+
+const SEDATION_OPTIONS_USE_CASES_PAGE: InfoPage = {
+  id: 'sedation-options-use-cases',
+  title: 'Sedation Options: Use-Case Selector',
+  subtitle: 'Match the Drug to the Job',
+  sections: [
+    {
+      heading: 'Procedure',
+      body: `Brief deep sedation:
+- Propofol when BP and airway setup are ready.
+- Etomidate when hypotension from propofol is a major concern.
+
+Painful procedure needing dissociation:
+- Ketamine, especially pediatric, severe pain, bronchospasm, or preserved respiratory-tone priority.
+
+Lower-depth anxiety plus analgesia:
+- Midazolam plus fentanyl in small separated aliquots.
+
+Brief cooperative procedure:
+- Nitrous oxide if no closed-space contraindication and patient can cooperate.`,
+    },
+    {
+      heading: 'Agitation / Aggression',
+      body: `Immediate violent danger:
+- Ketamine IM/IV when prolonged physical struggle is more dangerous than dissociation.
+
+Stimulant, hyperthermia, withdrawal, seizure physiology:
+- Benzodiazepines are physiology-first treatment. Cool, check glucose, monitor ventilation, and treat complications.
+
+Undifferentiated severe agitation:
+- Droperidol plus midazolam is evidence-supported when QT/stimulant hyperthermia are not dominant.
+
+Primary psychosis, not crashing:
+- Antipsychotic-focused pathway. Use lower dosing in older/frail patients.
+
+QT or Parkinson/Lewy risk:
+- Avoid reflex butyrophenone stacking. Use ECG/electrolytes when safe and choose alternatives when clinically appropriate.`,
+    },
+    {
+      heading: 'ICU / Airway',
+      body: `Post-intubation:
+- Treat pain first.
+- Set a RASS target.
+- Propofol for deep titratable sedation if BP tolerates.
+- Dexmedetomidine for cooperative light sedation, NIV, or extubation bridge.
+- Ketamine as analgesic/sedative adjunct when bronchospasm, pain, or propofol hypotension matters.
+
+Withdrawal or seizure-risk state:
+- Benzodiazepine or phenobarbital effect is required.
+- Dexmedetomidine is adjunct only and does not prevent withdrawal seizures.`,
+    },
+    {
+      heading: 'Special Populations',
+      body: `Older/frail:
+- Start 25-50% lower, redose slowly, avoid stacking.
+
+Severe acidosis or shock:
+- Pair sedation with airway, ventilator, pressor, and immediate post-intubation minute ventilation plan. Propofol and apnea can crash the patient.
+
+QT risk:
+- Do not delay lifesaving control. Get ECG first when practical for known long QT, QTc >500 ms, torsades history, QT polypharmacy, electrolyte depletion, syncope, chest pain, stimulant tox, older/frail, renal failure, or repeated antipsychotic dosing.
+
+OSA/COPD/intoxication:
+- Use ETCO2 when available, lower depth, separated aliquots, and airway rescue setup before dosing.`,
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACEP Clinical Policy: Procedural sedation and analgesia in the ED. Ann Emerg Med. 2014.' },
+    { num: 2, text: 'ACEP Clinical Policy: Severe agitation. Ann Emerg Med. 2024.' },
+    { num: 3, text: 'EMCrit IBCC. Analgesia and sedation for the critically ill patient. Accessed 2026-06-07.' },
+    { num: 4, text: 'SCCM PADIS Guidelines. Crit Care Med. 2018.' },
+    { num: 5, text: 'UIC Drug Information Group. Droperidol and QT prolongation FAQ. 2021.' },
+  ],
+};
+
+const SEDATION_OPTIONS_STOP_PAGE: InfoPage = {
+  id: 'sedation-options-stop',
+  title: 'Do NOT: Sedation Options',
+  subtitle: 'Sedative Selection Pitfalls',
+  sections: [
+    {
+      heading: 'No Rescue Setup',
+      body: 'Do NOT give deep sedation without suction, oxygen, BVM, airway adjuncts, monitor, BP cycling, and a person assigned to monitor the patient.',
+    },
+    {
+      heading: 'Wrong Goal',
+      body: 'Do NOT choose a drug by habit. Analgesia, anxiolysis, amnesia, dissociation, deep hypnosis, cooperative sedation, withdrawal control, and chemical control are different targets.',
+    },
+    {
+      heading: 'Stacking Respiratory Depressants',
+      body: 'Do NOT rapidly stack benzodiazepines, opioids, phenobarbital, alcohol co-ingestion, sleep meds, or propofol without reassessing ventilation and airway obstruction.',
+    },
+    {
+      heading: 'Propofol in Shock',
+      body: 'Do NOT use routine propofol dosing in shock, hypovolemia, severe RV failure, or frailty. Dose-reduce heavily or choose a different strategy.',
+    },
+    {
+      heading: 'Ketamine Without Reassessment',
+      body: 'Do NOT assume ketamine eliminates airway risk. Reassess after control for hypoventilation, emesis, saliva, laryngospasm, acidosis, hyperthermia, and occult trauma.',
+    },
+    {
+      heading: 'QT Blindness',
+      body: 'Do NOT repeatedly dose droperidol or haloperidol in QTc >500 ms, torsades history, severe low K/Mg/Ca, or heavy QT polypharmacy when safer alternatives fit. Do not delay emergency control for ECG in an immediate threat.',
+    },
+    {
+      heading: 'Dex as Withdrawal Monotherapy',
+      body: 'Do NOT use dexmedetomidine alone for alcohol or benzodiazepine withdrawal. It may calm autonomic signs but does not prevent seizures or delirium tremens.',
+    },
+    {
+      heading: 'Phenobarbital Stacking',
+      body: 'Do NOT forget phenobarbital has a long tail and no rapid reversal. Track cumulative dose and co-sedative load before redosing.',
+    },
+    {
+      heading: 'Discharge Too Early',
+      body: 'Do NOT discharge or leave unmonitored until airway, ventilation, perfusion, mentation, pain/nausea, gait when relevant, and sedation trajectory are safe.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'ACEP Clinical Policy: Procedural sedation and analgesia in the ED. Ann Emerg Med. 2014.' },
+    { num: 2, text: 'ACEP Clinical Policy: Severe agitation. Ann Emerg Med. 2024.' },
+    { num: 3, text: 'EMCrit IBCC. Analgesia and sedation for the critically ill patient. Accessed 2026-06-07.' },
+    { num: 4, text: 'SCCM PADIS Guidelines. Crit Care Med. 2018.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // Sedation Options
+  'sedation-options-slide': SEDATION_OPTIONS_SLIDE_PAGE,
+  'sedation-options-use-cases': SEDATION_OPTIONS_USE_CASES_PAGE,
+  'sedation-options-stop': SEDATION_OPTIONS_STOP_PAGE,
+
   // State of Extreme Agitation with Aggression
   'excited-delirium-summary': EXCITED_DELIRIUM_SUMMARY_PAGE,
   'excited-delirium-stop': EXCITED_DELIRIUM_STOP_PAGE,

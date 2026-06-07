@@ -2867,6 +2867,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'dex-start',
             },
             {
+                id: 'sedation-options',
+                title: 'Sedation Options',
+                subtitle: 'Visual Slide -> Procedures -> Agitation -> ICU -> Special Populations -> Drug Pearls',
+                categoryId: 'pharmacist',
+                version: '1.0',
+                nodeCount: 23,
+                entryNodeId: 'sedopt-start',
+            },
+            {
                 id: 'intralipid',
                 title: 'Intralipid / Lipid Emulsion Therapy',
                 subtitle: 'LAST -> Indications -> Dosing Protocol -> Monitoring -> Complications',

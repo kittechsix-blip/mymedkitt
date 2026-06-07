@@ -16,6 +16,7 @@ export const TOOLBAR_OVERFLOW = new Set([
     'sjs-ten',
     'lateral-canthotomy',
     'excited-delirium',
+    'sedation-options',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 const TOOLBAR_CONFIGS = {
@@ -2176,6 +2177,18 @@ const TOOLBAR_CONFIGS = {
         { id: 'htn', label: 'HTN Emerg', icon: '📈', action: 'jump', target: 'ccd-htn-overview' },
         { id: 'insulin', label: 'DKA Insulin', icon: '🧪', action: 'jump', target: 'ccd-insulin-dka' },
         { id: 'quick-ref', label: 'Quick Ref', icon: '📋', action: 'jump', target: 'ccd-quick-reference' },
+    ],
+    'sedation-options': [
+        { id: 'slide', label: 'Slide', icon: '📊', action: 'overlay', target: 'sedation-options-slide', pinned: true },
+        { id: 'rass', label: 'RASS', icon: '🎯', action: 'calculator', target: 'rass', pinned: true },
+        { id: 'procedure', label: 'Procedure', icon: '🩺', action: 'jump', target: 'sedopt-procedure', pinned: true },
+        { id: 'agitation', label: 'Agitation', icon: '⚡', action: 'jump', target: 'sedopt-agitation', pinned: true },
+        { id: 'icu', label: 'ICU', icon: '🫁', action: 'jump', target: 'sedopt-icu', pinned: true },
+        { id: 'old', label: 'Old', icon: '👴', action: 'jump', target: 'sedopt-older' },
+        { id: 'acidosis', label: 'Acid', icon: '🧪', action: 'jump', target: 'sedopt-acidosis' },
+        { id: 'qt', label: 'QT', icon: '📈', action: 'jump', target: 'sedopt-qt' },
+        { id: 'uses', label: 'Uses', icon: '📋', action: 'overlay', target: 'sedation-options-use-cases' },
+        { id: 'stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'sedation-options-stop' },
     ],
     'blood-transfusions': [
         { id: 'mtp', label: 'MTP', icon: '🩸', action: 'jump', target: 'bt-mtp-protocol' },
