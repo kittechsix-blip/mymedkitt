@@ -25248,7 +25248,7 @@ const TRICKS_OPHTHO_PAGE = {
 const TRICKS_UROLOGY_PAGE = {
     id: 'tricks-urology',
     title: 'Urology — Tricks of the Trade',
-    subtitle: 'Voiding trials, priapism, and entrapment releases.',
+    subtitle: 'Voiding trials, renal colic, priapism, and entrapment releases.',
     shareable: true,
     sections: [
         {
@@ -25263,11 +25263,17 @@ const TRICKS_UROLOGY_PAGE = {
             heading: 'Release of an Entrapped Metal Zipper',
             body: '**Accomplishes:** Frees skin caught in a metal zipper without procedural sedation, minimizing pain. [3]\n\n**How to:**\n1. Pull the garment away from the zipper to reduce stretch on trapped skin.\n2. Apply lidocaine gel to the site for 2\u20133 minutes.\n3. Identify the exposed teeth closest to the slider and carefully cut the zipper there, avoiding skin.\n4. Gently advance the slider body forward to disengage it from the teeth.\n5. Add more gel/lubricant to ease sliding; the zipper halves then release.\n\n**Equipment:** Lidocaine gel, blade or scissors (wire/trauma cutters).\n\n_Source: ALiEM Tricks of the Trade._',
         },
+        {
+            heading: 'IV Lidocaine Rescue for Renal Colic',
+            body: '**Accomplishes:** Opioid-sparing rescue analgesia for severe renal colic when NSAIDs and standard analgesia are inadequate or contraindicated. Evidence is mixed, so use this as a monitored rescue option, not first-line renal colic therapy. [4,5]\n\n**How to:**\n1. Confirm a renal-colic phenotype and screen for infection, solitary kidney/AKI risk, uncontrolled vomiting, AAA mimic, testicular/ovarian mimic, and other high-risk alternate diagnoses.\n2. Use NSAID therapy first when safe; add acetaminophen/opioid rescue per usual pathway.\n3. If pain remains severe and no lidocaine contraindication is present, give lidocaine 1.5 mg/kg IV slowly over about 10 minutes, max 200 mg.\n4. Put the patient on a monitor during and shortly after dosing; reassess pain, mental status, BP, rhythm, and early toxicity symptoms.\n5. Stop and treat toxicity if perioral numbness, metallic taste, tinnitus, confusion, seizure, hypotension, bradycardia, or dysrhythmia develops.\n\n**Do NOT use if:** known lidocaine allergy, significant heart block without pacer, serious ventricular dysrhythmia, ischemia/unstable CAD, severe hepatic disease, severe renal disease, pregnancy/lactation, seizure disorder poorly controlled, hemodynamic instability, or interacting sodium-channel blocker toxicity.\n\n**Equipment:** IV lidocaine, cardiac monitor, BP/SpO2 monitoring, intralipid access per local LAST protocol.\n\n_Source: EMCrit 426 - Dr. David Carr; Soleimanpour renal-colic RCT; ED IV lidocaine systematic reviews._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: Removal of an entrapped metal zipper. aliem.com.' },
+        { num: 4, text: 'Soleimanpour H, et al. Effectiveness of intravenous lidocaine versus intravenous morphine for patients with renal colic in the ED. BMC Urol. 2012;12:13.' },
+        { num: 5, text: 'Motamed H, Maleki Verki M. Intravenous lidocaine compared to fentanyl in renal colic pain management: a randomized clinical trial. Emergency. 2017;5(1):e82. See also ED IV lidocaine systematic reviews noting limited renal-colic evidence and inadequate safety certainty.' },
     ],
 };
 const TRICKS_WOUND_PAGE = {
@@ -25318,7 +25324,7 @@ const TRICKS_CARDIOLOGY_PAGE = {
 const TRICKS_NEURO_PAGE = {
     id: 'tricks-neuro',
     title: 'Neurology — Tricks of the Trade',
-    subtitle: 'Bedside CN testing and BPPV maneuvers.',
+    subtitle: 'Bedside CN testing, BPPV maneuvers, and refractory migraine rescue.',
     shareable: true,
     sections: [
         {
@@ -25333,11 +25339,17 @@ const TRICKS_NEURO_PAGE = {
             heading: 'Dix-Hallpike Without Hanging the Head Off the Bed',
             body: '**Accomplishes:** Lets you do a Dix-Hallpike on a narrow ED gurney where you can\u2019t safely extend the patient\u2019s neck off the end of the bed. [3]\n\n**How to:**\n1. Stack 2\u20133 folded blankets on the gurney where the patient\u2019s shoulders will lie.\n2. Rotate the head 45\u00B0 toward the tested ear and sit the patient so the shoulders will land on the blankets.\n3. Lay the patient back so the shoulders rest on the blanket stack and the head drops into ~20\u201330\u00B0 of neck extension over the blanket edge \u2014 no overhang needed.\n4. Hold 30\u201360 sec and watch for nystagmus/vertigo.\n\n**Equipment:** 2\u20133 folded blankets, a standard gurney.\n\n_Source: ALiEM Trick of the Trade \u2014 Dix-Hallpike maneuver variation._',
         },
+        {
+            heading: 'Low-Dose Propofol Rescue for Refractory Migraine',
+            body: '**Accomplishes:** May abort severe migraine after standard ED therapy has failed, while avoiding opioids. This is an off-label rescue technique with limited and conflicting evidence. Standard migraine therapy remains dopamine antagonist/NSAID/acetaminophen/magnesium/dexamethasone or nerve-block strategy per local pathway. [4,5]\n\n**How to:**\n1. First rule out red flags: thunderclap onset, meningismus, focal deficit, pregnancy/postpartum concern, immunocompromise, anticoagulation, trauma, cancer, fever, papilledema, altered mental status, or new headache age >50.\n2. Try standard ED migraine therapy first unless contraindicated.\n3. If migraine remains severe and the patient is monitored in an airway-capable area, give propofol 20 mg IV slowly.\n4. Reassess pain, sedation, BP, SpO2, and airway after 5-10 minutes. Repeat 20 mg IV aliquots as needed, commonly up to 60-120 mg total by local protocol.\n5. Stop if hypotension, hypoxia, excessive sedation, airway obstruction, diagnostic uncertainty, or inadequate staff monitoring.\n\n**Do NOT use if:** unstable airway, hypoxia, shock/hypotension, pregnancy unless specialist-guided, egg/soy allergy per local policy, intoxication/co-sedative load, or no ability to rescue apnea.\n\n**Equipment:** IV propofol, monitor, BP cycling, SpO2, capnography if available, oxygen, suction, BVM, airway cart, clinician credentialed for procedural sedation.\n\n_Source: EMCrit 426 - Dr. David Carr; Piatka systematic review. Newer headache guideline evidence remains cautious, so keep this as monitored rescue, not routine first-line care._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 2, text: 'ALiEM. Tricks of the Trade: BPPV beyond the basics. aliem.com.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: Dix-Hallpike maneuver variation. aliem.com.' },
+        { num: 4, text: 'Piatka C, Beckett RD. Propofol for Treatment of Acute Migraine in the Emergency Department: A Systematic Review. Acad Emerg Med. 2020;27(2):148-160.' },
+        { num: 5, text: 'Robblee J, et al. 2025 guideline update to acute treatment of migraine for adults in the ED: American Headache Society evidence assessment of parenteral pharmacotherapies. Headache. 2026;66(1):53-76.' },
     ],
 };
 const TRICKS_TOX_PAGE = {
@@ -25586,7 +25598,7 @@ const TRICKS_DENTAL_PAGE = {
 const TRICKS_ORTHO_PAGE = {
     id: 'tricks-ortho',
     title: 'Orthopedics — Tricks of the Trade',
-    subtitle: 'Reduction and splinting tricks (growing daily).',
+    subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
     shareable: true,
     sections: [
         {
@@ -25645,6 +25657,10 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Park Method (Axillary Fist Fulcrum) for Shoulder Reduction',
             body: '**Accomplishes:** Reduces an anterior shoulder dislocation single-handed without traction-countertraction, using your fist in the axilla as a fulcrum to lever the humeral head back over the glenoid rim. [14]\n\n**How to:**\n1. Seat or recline the patient; provide analgesia or intra-articular lidocaine.\n2. Place your fist in the patient\u2019s axilla against the displaced humeral head.\n3. Adduct the patient\u2019s elbow against your fist while applying gentle axial distraction.\n4. Use your fist as a fulcrum to slide the humeral head over the anteroinferior glenoid lip.\n5. Confirm reduction and neurovascular status; sling the arm.\n\n**Equipment:** Analgesia or intra-articular lidocaine, sling.\n\n_Source: ALiEM Trick of the Trade \u2014 Park method (axillary fulcrum) for shoulder dislocation._',
         },
+        {
+            heading: 'Dextrose + Lidocaine Prolotherapy for Chronic Joint Pain',
+            body: '**Accomplishes:** Offers an outpatient/sports-medicine option for chronic osteoarthritis-type joint pain when standard conservative therapy is limited or ineffective. Evidence is best for knee OA, with potential pain/function benefit but variable study quality. This is not an ED hot-joint injection trick. [15,16]\n\n**How to:**\n1. Use only after diagnosis is clear: chronic OA or ligament/tendon-related pain, not undifferentiated acute monoarthritis.\n2. Do NOT inject a joint with fever, erythema, severe warmth, rapidly worsening effusion, immunocompromise concern, bacteremia risk, fracture, overlying cellulitis, or possible septic arthritis/crystal arthritis needing arthrocentesis.\n3. Discuss as a planned outpatient injection strategy, ideally ultrasound-guided and performed by sports med/PM&R/orthopedics or a clinician trained in prolotherapy.\n4. Common research protocols use hypertonic dextrose mixed with lidocaine, with extra-articular tender-point injections plus intra-articular injection over multiple sessions. Example knee OA research mixtures include 10-25% dextrose with dilute lidocaine, not D50 injected straight into the joint.\n5. Counsel that this is not immediate anti-inflammatory rescue like NSAID/steroid therapy. The expected benefit, if it occurs, is delayed symptom improvement over weeks to months.\n\n**Do NOT use if:** suspected infection, inflammatory/crystal flare not yet evaluated, prosthetic joint without specialist input, anticoagulation/bleeding risk not addressed, uncontrolled diabetes risk not considered, allergy to injectate, or no sterile technique/landmark confidence.\n\n**Equipment:** Sterile injection setup, local anesthetic, dextrose dilution prepared to protocol, ultrasound if available, clinician trained in joint injection/prolotherapy.\n\n_Source: Dextrose prolotherapy knee OA RCTs and systematic reviews. Keep as an outpatient chronic joint-pain option, not acute septic/inflammatory joint management._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25661,6 +25677,8 @@ const TRICKS_ORTHO_PAGE = {
         { num: 12, text: 'Ding DY, Egol KA. Closed reduction of subacute patellar dislocation using saline joint insufflation: a technical trick. Am J Orthop. 2015;44(7):299-301.' },
         { num: 13, text: 'ALiEM. Trick of the Trade: Stimson technique using wrist restraints for shoulder dislocation. aliem.com.' },
         { num: 14, text: 'ALiEM. Trick of the Trade: Park method (axillary fulcrum) for shoulder dislocation. aliem.com.' },
+        { num: 15, text: 'Rabago D, et al. Dextrose prolotherapy for knee osteoarthritis: a randomized controlled trial. Ann Fam Med. 2013;11(3):229-237.' },
+        { num: 16, text: 'Wee TC, et al. Dextrose prolotherapy in knee osteoarthritis: a systematic review and meta-analysis. J Clin Orthop Trauma. 2021;19:108-117.' },
     ],
 };
 // ===================================================================

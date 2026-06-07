@@ -79,9 +79,9 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     label: 'Urology',
     icon: '\uD83D\uDEBD', // 🚽
     color: '#EF6C00',
-    subtitle: 'Voiding trials, priapism, and entrapment releases.',
+    subtitle: 'Voiding trials, renal colic, priapism, and entrapment releases.',
     infoPageId: 'tricks-urology',
-    trickCount: 3,
+    trickCount: 4,
   },
   {
     id: 'wound',
@@ -106,9 +106,9 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     label: 'Neurology',
     icon: '\uD83E\uDDE0', // 🧠
     color: '#4527A0',
-    subtitle: 'Bedside CN testing and BPPV maneuvers.',
+    subtitle: 'Bedside CN testing, BPPV maneuvers, and refractory migraine rescue.',
     infoPageId: 'tricks-neuro',
-    trickCount: 3,
+    trickCount: 4,
   },
   {
     id: 'tox',
@@ -133,9 +133,9 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     label: 'Orthopedics',
     icon: '\uD83E\uDDB4', // 🦴
     color: '#5D4037',
-    subtitle: 'Reduction and splinting tricks (growing daily).',
+    subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
     infoPageId: 'tricks-ortho',
-    trickCount: 14,
+    trickCount: 15,
   },
 ];
 
