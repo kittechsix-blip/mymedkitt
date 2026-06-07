@@ -2746,6 +2746,10 @@ body.critical-actions-open {
   max-width: 100%;
 }
 
+.info-modal-panel--wide {
+  max-width: min(1120px, calc(100vw - 32px));
+}
+
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -2882,6 +2886,99 @@ body.critical-actions-open {
 .info-page-drug-regimen {
   font-size: 14px;
   color: var(--color-text-secondary);
+}
+
+.info-page-comparison-wrap {
+  margin-top: 12px;
+  overflow-x: auto;
+  border: 1px solid rgba(31, 41, 55, 0.12);
+  border-radius: 8px;
+  background: #f8faf8;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.info-page-comparison-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--color-text-primary);
+}
+
+.info-page-comparison-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #143d31;
+  color: #fffaf3;
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.info-page-comparison-table th:first-child {
+  left: 0;
+  z-index: 3;
+  background: #7c3f21;
+}
+
+.info-page-comparison-table td {
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  vertical-align: top;
+  border-right: 1px solid rgba(31, 41, 55, 0.08);
+  border-bottom: 1px solid rgba(31, 41, 55, 0.1);
+}
+
+.info-page-comparison-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 150px;
+  max-width: 180px;
+  color: #fffaf3;
+  font-weight: 800;
+  background: var(--comparison-accent);
+  box-shadow: 10px 0 18px rgba(15, 23, 42, 0.08);
+}
+
+.info-page-comparison-table tr:nth-child(odd) {
+  --comparison-accent: #7c3f21;
+  --comparison-row-bg: #fbf0e8;
+}
+
+.info-page-comparison-table tr:nth-child(even) {
+  --comparison-accent: #0f4f3a;
+  --comparison-row-bg: #edf6f0;
+}
+
+.info-page-comparison-table tr:nth-child(odd) td:not(:first-child),
+.info-page-comparison-table tr:nth-child(even) td:not(:first-child) {
+  background: var(--comparison-row-bg);
+}
+
+.info-page-comparison-table td[data-column-key='onset'],
+.info-page-comparison-table td[data-column-key='duration'] {
+  width: 150px;
+  font-weight: 650;
+}
+
+.info-page-comparison-table td[data-column-key='indications'] {
+  width: 280px;
+}
+
+.info-page-comparison-table td[data-column-key='risks'] {
+  width: 360px;
+}
+
+.info-page-comparison-table tr:last-child td {
+  border-bottom: none;
 }
 
 .info-page-citations {

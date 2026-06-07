@@ -177,6 +177,37 @@ function renderPictograph(picto) {
     container.appendChild(legend);
     return container;
 }
+function renderComparisonTable(tableData) {
+    const wrap = document.createElement('div');
+    wrap.className = `info-page-comparison-wrap${tableData.variant ? ` info-page-comparison-wrap--${tableData.variant}` : ''}`;
+    const table = document.createElement('table');
+    table.className = `info-page-comparison-table${tableData.variant ? ` info-page-comparison-table--${tableData.variant}` : ''}`;
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    for (const column of tableData.columns) {
+        const th = document.createElement('th');
+        th.scope = 'col';
+        th.textContent = column.label;
+        th.dataset.columnKey = column.key;
+        headerRow.appendChild(th);
+    }
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+    const tbody = document.createElement('tbody');
+    for (const row of tableData.rows) {
+        const tr = document.createElement('tr');
+        for (const column of tableData.columns) {
+            const td = document.createElement('td');
+            td.dataset.columnKey = column.key;
+            renderInfoBodyLine(td, row.cells[column.key] ?? '');
+            tr.appendChild(td);
+        }
+        tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    return wrap;
+}
 // -------------------------------------------------------------------
 // Modal Overlay
 // -------------------------------------------------------------------
@@ -219,6 +250,14 @@ function buildShareText(page) {
                     lines.push(`\u2022 ${group.label}`);
                 }
                 lines.push('');
+            }
+        }
+        if (section.comparisonTable) {
+            const headers = section.comparisonTable.columns.map((column) => column.label).join(' | ');
+            lines.push(headers);
+            for (const row of section.comparisonTable.rows) {
+                const rowText = section.comparisonTable.columns.map((column) => row.cells[column.key] ?? '').join(' | ');
+                lines.push(rowText);
             }
         }
         lines.push('');
@@ -320,6 +359,9 @@ export function showInfoModal(pageId, anchorId) {
     // Panel
     const panel = document.createElement('div');
     panel.className = 'modal-content info-modal-panel';
+    if (page.sections.some((section) => section.comparisonTable)) {
+        panel.classList.add('info-modal-panel--wide');
+    }
     // Header
     const header = document.createElement('div');
     header.className = 'modal-header';
@@ -418,6 +460,9 @@ export function showInfoModal(pageId, anchorId) {
                 card.appendChild(regimen);
                 sectionEl.appendChild(card);
             }
+        }
+        if (section.comparisonTable) {
+            sectionEl.appendChild(renderComparisonTable(section.comparisonTable));
         }
         if (section.pictographs) {
             for (const picto of section.pictographs) {

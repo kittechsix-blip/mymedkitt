@@ -16,6 +16,21 @@ export interface DrugDosing {
   regimen: string;
 }
 
+export interface InfoComparisonColumn {
+  key: string;
+  label: string;
+}
+
+export interface InfoComparisonRow {
+  cells: Record<string, string>;
+}
+
+export interface InfoComparisonTable {
+  columns: InfoComparisonColumn[];
+  rows: InfoComparisonRow[];
+  variant?: 'sedation';
+}
+
 export interface InfoPageImage {
   src: string;
   alt: string;
@@ -51,6 +66,7 @@ export interface InfoSection {
   image?: InfoPageImage;
   body: string;
   drugTable?: DrugDosing[];
+  comparisonTable?: InfoComparisonTable;
   pictographs?: Pictograph[];
 }
 
@@ -27328,21 +27344,136 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
   sections: [
     {
       heading: 'Fast Visual Matrix',
-      body: `Read left to right at bedside: onset, useful duration, best fit, major risk, avoid/caution.
-
-Ketamine | IV 30-60 sec, IM 3-5 min | IV 10-20 min, IM 15-30 min | Dissociation, analgesia, severe danger | saliva, emesis, rare laryngospasm, HTN/tachy | severe HTN, ischemia, severe RV strain, catecholamine-depleted shock caution
-Propofol | IV 15-60 sec | 3-10 min | brief deep sedation, cardioversion, reduction | apnea, hypotension | shock, severe hypovolemia, frailty without major dose reduction
-Etomidate | IV 30-60 sec | 3-10 min | brief hypnosis with less BP drop | myoclonus, emesis, adrenal suppression signal | sepsis/adrenal concern if alternatives reasonable, no analgesia
-Midazolam | IV 1-5 min, IM 5-15 min, IN 5-10 min | 30-60 min or longer | anxiolysis, amnesia, stimulant/withdrawal physiology | respiratory depression, delirium, stacking | old/frail, OSA/COPD, intoxication, opioid co-use
-Lorazepam/diazepam | IV minutes | hours, longer with repeats | withdrawal, seizures, stimulant physiology | respiratory depression, delirium, long-tail stacking | routine procedure turnover, frailty, intoxication, opioid co-use
-Fentanyl | IV 1-2 min | 30-60 min | analgesia adjunct | apnea, chest wall rigidity at rapid high dose | OSA/COPD, intoxication, hypotension, no amnesia
-Droperidol | IV 3-10 min, IM 5-15 min | 2-4 h | undifferentiated severe agitation, nausea/headache use | QT, EPS, oversedation with benzos | QTc >500 ms, torsades risk, Parkinson/Lewy body
-Haloperidol | IM 15-30 min | 4-8 h or longer | psychosis/delirium when slower onset acceptable | QT, EPS, dystonia, NMS | Parkinson/Lewy body, high QT risk
-Olanzapine | IM 15-30 min, PO 30-60 min | 12-24 h | primary psychosis, longer calming | sedation, orthostasis, anticholinergic effects | IM use near parenteral benzos, dementia psychosis warning
-Dexmedetomidine | no-load 15-30 min | offset often 30-120 min | cooperative light sedation, NIV, extubation bridge | bradycardia, hypotension, slow onset | shock, high-grade block, severe bradycardia, withdrawal monotherapy
-Phenobarbital | IV about 5-30 min | many hours, half-life days | alcohol withdrawal, GABAergic control | long tail, respiratory depression, hypotension | heavy co-sedative load, severe hepatic/resp failure
-Methohexital | IV 30-60 sec | 5-10 min | uncommon brief deep sedation or cardioversion where local practice supports it | apnea, hypotension, excitatory movements | porphyria, unstable airway/BP, seizure-prone context if alternatives fit
-Nitrous oxide | 2-5 min | 3-5 min after stop | brief cooperative procedure | nausea, dizziness, closed-space expansion | pneumothorax, bowel obstruction, intracranial air, first trimester, severe B12 deficiency`,
+      body: 'Readable bedside grid. Choose by the clinical target first, then use onset and risk profile to choose the safest sedative.',
+      comparisonTable: {
+        variant: 'sedation',
+        columns: [
+          { key: 'drug', label: 'Drug' },
+          { key: 'onset', label: 'Onset' },
+          { key: 'duration', label: 'Clinical Duration' },
+          { key: 'indications', label: 'Indications' },
+          { key: 'risks', label: 'Contraindications / Side Effects' },
+        ],
+        rows: [
+          {
+            cells: {
+              drug: 'Ketamine',
+              onset: 'IV 30-60 sec; IM 3-5 min',
+              duration: 'IV 10-20 min; IM 15-30 min, recovery longer',
+              indications: 'Dissociation, analgesia, painful procedures, pediatric procedures, severe danger, bronchospasm',
+              risks: 'Saliva, emesis, rare laryngospasm, HTN/tachycardia. Caution severe HTN, ischemia, severe RV strain, catecholamine-depleted shock.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Propofol',
+              onset: 'IV 15-60 sec',
+              duration: '3-10 min',
+              indications: 'Brief deep sedation, cardioversion, reductions, post-intubation deep sedation if BP tolerates',
+              risks: 'Apnea, airway obstruction, hypotension, no analgesia. Avoid routine dosing in shock, hypovolemia, severe RV failure, frailty.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Etomidate',
+              onset: 'IV 30-60 sec',
+              duration: '3-10 min',
+              indications: 'Brief hypnosis when propofol hypotension is a concern, RSI induction, cardioversion/reduction with separate analgesia',
+              risks: 'Myoclonus, nausea/vomiting, adrenal suppression signal, no analgesia. Caution sepsis/adrenal concern if alternatives fit.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Midazolam',
+              onset: 'IV 1-5 min; IM 5-15 min; IN 5-10 min',
+              duration: '30-60 min or longer with repeats/frailty',
+              indications: 'Anxiolysis, amnesia, stimulant physiology, withdrawal/seizure pathway, lower-depth procedures with analgesia',
+              risks: 'Respiratory depression, delirium, long-tail stacking. High caution old/frail, OSA/COPD, intoxication, opioid co-use.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Lorazepam / Diazepam',
+              onset: 'IV minutes; diazepam faster than lorazepam',
+              duration: 'Hours, longer with repeats and active metabolites',
+              indications: 'Withdrawal, seizures, stimulant physiology; not quick procedure turnover',
+              risks: 'Respiratory depression, delirium, oversedation. Avoid rapid stacking with opioids, alcohol, phenobarbital, frailty.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Fentanyl',
+              onset: 'IV 1-2 min',
+              duration: '30-60 min',
+              indications: 'Analgesia adjunct for painful procedures; pairs with anxiolytic when lower-depth sedation fits',
+              risks: 'Apnea, hypotension, nausea, chest wall rigidity at rapid high dose. No amnesia. High caution OSA/COPD/intoxication.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Droperidol',
+              onset: 'IV 3-10 min; IM 5-15 min',
+              duration: '2-4 h, sometimes longer',
+              indications: 'Undifferentiated severe agitation, psychosis/agitation, nausea, migraine/CHS per local practice',
+              risks: 'QT prolongation, EPS/akathisia/dystonia, hypotension, oversedation with benzos. Avoid QTc >500 ms or major torsades risks when possible.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Haloperidol',
+              onset: 'IM 15-30 min; IV faster but monitor QT/EPS',
+              duration: '4-8 h or longer',
+              indications: 'Psychosis-dominant agitation, delirium agitation when slower onset is acceptable and respiratory depression is undesirable',
+              risks: 'QT prolongation, EPS, dystonia, akathisia, NMS. Avoid Parkinson disease, Lewy body dementia, high QT risk.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Olanzapine',
+              onset: 'IM 15-30 min; PO/ODT 30-60 min',
+              duration: '12-24 h',
+              indications: 'Primary psychosis/agitation when longer calming is desired',
+              risks: 'Sedation, orthostasis, anticholinergic effects, dementia warning. Do not give IM close to parenteral benzodiazepines.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Dexmedetomidine',
+              onset: 'No-load 15-30 min; load 5-10 min but often avoided',
+              duration: 'Offset often 30-120 min',
+              indications: 'Cooperative light sedation, NIV tolerance, extubation bridge, awake airway cooperation, delirium-prone ventilated patient',
+              risks: 'Bradycardia, hypotension, slow onset. Avoid shock, high-grade AV block, severe bradycardia. Not withdrawal monotherapy.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Phenobarbital',
+              onset: 'IV about 5-30 min depending on rate/endpoint',
+              duration: 'Many hours; half-life about 3-4 days',
+              indications: 'Alcohol withdrawal, benzodiazepine withdrawal adjunct/alternative, selected seizure/status pathways',
+              risks: 'Long tail, stacking, respiratory depression, hypotension, coma. Avoid casual stacking with benzos/opioids/alcohol or severe hepatic/respiratory failure.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Methohexital',
+              onset: 'IV 30-60 sec',
+              duration: '5-10 min',
+              indications: 'Uncommon brief deep sedation or cardioversion where local practice supports it',
+              risks: 'Apnea, hypotension, excitatory movements. Avoid porphyria, unstable airway/BP, seizure-prone context if alternatives fit.',
+            },
+          },
+          {
+            cells: {
+              drug: 'Nitrous oxide',
+              onset: '2-5 min',
+              duration: '3-5 min after stop',
+              indications: 'Brief cooperative procedures, laceration repair, IV start, minor ortho manipulation, fast recovery',
+              risks: 'Nausea/vomiting, dizziness, dysphoria, closed-space expansion. Avoid pneumothorax, bowel obstruction, intracranial air, first trimester, severe B12 deficiency.',
+            },
+          },
+        ],
+      },
     },
     {
       heading: 'Drug Cards',

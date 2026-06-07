@@ -3,7 +3,7 @@
 // Data loaded via info-service (Supabase → IndexedDB → hardcoded fallback).
 
 import { getInfoPage } from '../services/info-service.js';
-import type { InfoPage, InfoPageImage, Pictograph } from '../data/info-pages.js';
+import type { InfoComparisonTable, InfoPage, InfoPageImage, Pictograph } from '../data/info-pages.js';
 
 // -------------------------------------------------------------------
 // Body Text with Clickable Footnotes
@@ -196,6 +196,42 @@ function renderPictograph(picto: Pictograph): HTMLElement {
   return container;
 }
 
+function renderComparisonTable(tableData: InfoComparisonTable): HTMLElement {
+  const wrap = document.createElement('div');
+  wrap.className = `info-page-comparison-wrap${tableData.variant ? ` info-page-comparison-wrap--${tableData.variant}` : ''}`;
+
+  const table = document.createElement('table');
+  table.className = `info-page-comparison-table${tableData.variant ? ` info-page-comparison-table--${tableData.variant}` : ''}`;
+
+  const thead = document.createElement('thead');
+  const headerRow = document.createElement('tr');
+  for (const column of tableData.columns) {
+    const th = document.createElement('th');
+    th.scope = 'col';
+    th.textContent = column.label;
+    th.dataset.columnKey = column.key;
+    headerRow.appendChild(th);
+  }
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  const tbody = document.createElement('tbody');
+  for (const row of tableData.rows) {
+    const tr = document.createElement('tr');
+    for (const column of tableData.columns) {
+      const td = document.createElement('td');
+      td.dataset.columnKey = column.key;
+      renderInfoBodyLine(td, row.cells[column.key] ?? '');
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+
+  return wrap;
+}
+
 // -------------------------------------------------------------------
 // Modal Overlay
 // -------------------------------------------------------------------
@@ -238,6 +274,14 @@ function buildShareText(page: InfoPage): string {
           lines.push(`\u2022 ${group.label}`);
         }
         lines.push('');
+      }
+    }
+    if (section.comparisonTable) {
+      const headers = section.comparisonTable.columns.map((column) => column.label).join(' | ');
+      lines.push(headers);
+      for (const row of section.comparisonTable.rows) {
+        const rowText = section.comparisonTable.columns.map((column) => row.cells[column.key] ?? '').join(' | ');
+        lines.push(rowText);
       }
     }
     lines.push('');
@@ -342,6 +386,9 @@ export function showInfoModal(pageId: string, anchorId?: string): boolean {
   // Panel
   const panel = document.createElement('div');
   panel.className = 'modal-content info-modal-panel';
+  if (page.sections.some((section) => section.comparisonTable)) {
+    panel.classList.add('info-modal-panel--wide');
+  }
 
   // Header
   const header = document.createElement('div');
@@ -460,6 +507,10 @@ export function showInfoModal(pageId: string, anchorId?: string): boolean {
 
         sectionEl.appendChild(card);
       }
+    }
+
+    if (section.comparisonTable) {
+      sectionEl.appendChild(renderComparisonTable(section.comparisonTable));
     }
 
     if (section.pictographs) {
