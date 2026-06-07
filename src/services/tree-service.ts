@@ -514,6 +514,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/adrenal-insufficiency.js');
       return { nodes: m.ADRENAL_INSUFFICIENCY_NODES, entryNodeId: 'ai-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.ADRENAL_INSUFFICIENCY_MODULE_LABELS, citations: m.ADRENAL_INSUFFICIENCY_CITATIONS, criticalActions: m.ADRENAL_INSUFFICIENCY_CRITICAL_ACTIONS };
     },
+    'hepatitis': async () => {
+      const m = await import('../data/trees/hepatitis.js');
+      return { nodes: m.HEPATITIS_NODES, entryNodeId: 'hepatitis-start', categoryId: 'gastroenterology', moduleLabels: m.HEPATITIS_MODULE_LABELS, citations: m.HEPATITIS_CITATIONS };
+    },
     'thyroid': async () => {
       const m = await import('../data/trees/thyroid.js');
       return { nodes: m.THYROID_NODES, entryNodeId: 'thyroid-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.THYROID_MODULE_LABELS, citations: m.THYROID_CITATIONS, criticalActions: m.THYROID_CRITICAL_ACTIONS };

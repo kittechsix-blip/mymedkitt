@@ -40981,9 +40981,308 @@ const LCC_IOP_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// Hepatitis / Elevated Liver Enzymes
+// -------------------------------------------------------------------
+
+const HEP_R_FACTOR_CALCULATOR: CalculatorDefinition = {
+  id: 'hep-r-factor',
+  title: 'R-Factor (Liver Injury Pattern)',
+  subtitle: 'Classify hepatocellular vs cholestatic vs mixed',
+  description: 'R = (ALT ÷ ALT-ULN) ÷ (ALP ÷ ALP-ULN). >5 hepatocellular, 2–5 mixed, <2 cholestatic. Drives the differential branch.',
+  fields: [
+    { name: 'alt', label: 'ALT (patient value)', type: 'number', points: 0, unit: 'IU/L' },
+    { name: 'alt-uln', label: 'ALT upper limit of normal (ULN)', type: 'number', points: 0, unit: 'IU/L', description: 'Lab-specific; commonly ~40' },
+    { name: 'alp', label: 'ALP (patient value)', type: 'number', points: 0, unit: 'IU/L' },
+    { name: 'alp-uln', label: 'ALP upper limit of normal (ULN)', type: 'number', points: 0, unit: 'IU/L', description: 'Lab-specific; commonly ~120' },
+  ],
+  results: [],
+  thresholdNote: 'R >5 hepatocellular · 2–5 mixed · <2 cholestatic. Confirm cholestatic ALP source with GGT.',
+  citations: [
+    'Kwo PY, et al. ACG Clinical Guideline: Evaluation of Abnormal Liver Chemistries. Am J Gastroenterol. 2017;112(1):18-35.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const alt = values['alt'] || 0;
+    const altUln = values['alt-uln'] || 0;
+    const alp = values['alp'] || 0;
+    const alpUln = values['alp-uln'] || 0;
+    if (!alt || !altUln || !alp || !alpUln) {
+      return { value: '—', label: 'Enter ALT, ALP, and both ULNs', description: 'All four values are required to compute R.', colorVar: '--color-muted' };
+    }
+    const r = (alt / altUln) / (alp / alpUln);
+    const rStr = r.toFixed(1);
+    if (r > 5) {
+      return { value: `R = ${rStr}`, label: 'Hepatocellular pattern', description: 'R >5 → transaminase-predominant injury. Work the hepatocellular branch: viral, alcohol (AST:ALT >2:1), ischemic (ALT in thousands), drug/toxin (incl. APAP), MASLD, autoimmune, Wilson/hemochromatosis.', colorVar: '--color-danger' };
+    }
+    if (r < 2) {
+      return { value: `R = ${rStr}`, label: 'Cholestatic pattern', description: 'R <2 → ALP-predominant. Confirm hepatic source with GGT, then split extrahepatic/obstructive (image ducts) vs intrahepatic (PBC, PSC, drug, infiltrative).', colorVar: '--color-warning' };
+    }
+    return { value: `R = ${rStr}`, label: 'Mixed pattern', description: 'R 2–5 → mixed. Most often DILI or evolving/resolving viral hepatitis. Manage by dominant features and recheck the LFT trend.', colorVar: '--color-primary' };
+  },
+};
+
+const HEP_GGT_SOURCE_CALCULATOR: CalculatorDefinition = {
+  id: 'hep-ggt-source',
+  title: 'GGT Source Interpreter',
+  subtitle: 'Is an elevated ALP coming from the liver?',
+  description: 'When ALP is high, GGT confirms whether the source is hepatobiliary or non-hepatic (bone, growth, placenta).',
+  fields: [
+    {
+      name: 'alp',
+      label: 'ALP',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'ALP normal', points: 1 },
+        { label: 'ALP elevated', points: 2 },
+      ],
+    },
+    {
+      name: 'ggt',
+      label: 'GGT',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'GGT normal', points: 1 },
+        { label: 'GGT elevated', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'GGT confirms a hepatobiliary source for an elevated ALP. Normal GGT with high ALP → look outside the liver.',
+  citations: [
+    'Kwo PY, et al. ACG Clinical Guideline: Evaluation of Abnormal Liver Chemistries. Am J Gastroenterol. 2017;112(1):18-35.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const alp = values['alp'];
+    const ggt = values['ggt'];
+    if (!alp || !ggt) {
+      return { value: '—', label: 'Select ALP and GGT status', description: 'Choose both to interpret the source.', colorVar: '--color-muted' };
+    }
+    if (alp === 2 && ggt === 2) {
+      return { value: 'Hepatobiliary', label: 'ALP high + GGT high', description: 'Both elevated → hepatobiliary source confirmed. Pursue the cholestatic differential (extrahepatic obstruction vs intrahepatic PBC/PSC/drug/infiltrative).', colorVar: '--color-warning' };
+    }
+    if (alp === 2 && ggt === 1) {
+      return { value: 'Non-hepatic ALP', label: 'ALP high + GGT normal', description: 'High ALP with a normal GGT points away from the liver: bone (Paget, fracture, mets, vitamin D deficiency), growth in children/adolescents, or placenta in pregnancy. Liver workup not indicated.', colorVar: '--color-success' };
+    }
+    if (alp === 1 && ggt === 2) {
+      return { value: 'Isolated GGT', label: 'GGT high + ALP normal', description: 'Isolated GGT elevation is nonspecific — alcohol, enzyme-inducing drugs, or fatty liver. Correlate clinically; not diagnostic alone.', colorVar: '--color-primary' };
+    }
+    return { value: 'Normal', label: 'ALP + GGT normal', description: 'No biochemical evidence of cholestasis.', colorVar: '--color-success' };
+  },
+};
+
+const HEP_VIRAL_SEROLOGY_CALCULATOR: CalculatorDefinition = {
+  id: 'hep-viral-serology',
+  title: 'Viral Hepatitis Serology Interpreter',
+  subtitle: 'Hep B & C panels → acute / chronic / immune / cleared',
+  description: 'Enter the serology pattern to resolve Hep B status (acute, chronic, vaccinated, resolved, window) and Hep C activity.',
+  fields: [
+    {
+      name: 'hbsag',
+      label: 'HBsAg (surface antigen)',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'Not tested / NA', points: 0 },
+        { label: 'Negative', points: 1 },
+        { label: 'Positive', points: 2 },
+      ],
+    },
+    {
+      name: 'anti-hbc',
+      label: 'Anti-HBc (core antibody)',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'Not tested / NA', points: 0 },
+        { label: 'Negative', points: 1 },
+        { label: 'Positive — IgM (acute)', points: 2 },
+        { label: 'Positive — IgG/total', points: 3 },
+      ],
+    },
+    {
+      name: 'anti-hbs',
+      label: 'Anti-HBs (surface antibody)',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'Not tested / NA', points: 0 },
+        { label: 'Negative', points: 1 },
+        { label: 'Positive', points: 2 },
+      ],
+    },
+    {
+      name: 'hcv-ab',
+      label: 'HCV antibody',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'Not tested / NA', points: 0 },
+        { label: 'Negative', points: 1 },
+        { label: 'Positive', points: 2 },
+      ],
+    },
+    {
+      name: 'hcv-rna',
+      label: 'HCV RNA (PCR)',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'Not tested / NA', points: 0 },
+        { label: 'Negative / undetectable', points: 1 },
+        { label: 'Positive / detectable', points: 2 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'HBsAg + anti-HBc IgM = acute B; HBsAg + anti-HBc IgG (>6 mo) = chronic; anti-HBs only = vaccinated; anti-HBs + anti-HBc = resolved. HCV Ab+ with RNA+ = active.',
+  citations: [
+    'Terrault NA, et al. AASLD 2018 Hepatitis B Guidance. Hepatology. 2018;67(4):1560-1599.',
+    'AASLD-IDSA. HCV Guidance: Testing, Managing, and Treating Hepatitis C. hcvguidelines.org.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const hbsag = values['hbsag'] || 0;
+    const hbc = values['anti-hbc'] || 0;
+    const hbs = values['anti-hbs'] || 0;
+    const hcvAb = values['hcv-ab'] || 0;
+    const hcvRna = values['hcv-rna'] || 0;
+
+    const lines: string[] = [];
+
+    // Hep B interpretation
+    if (hbsag === 2 && hbc === 2) {
+      lines.push('HEP B: Acute infection (HBsAg+ / anti-HBc IgM+).');
+    } else if (hbsag === 2 && hbc === 3) {
+      lines.push('HEP B: Chronic infection (HBsAg+ / anti-HBc IgG+ >6 mo).');
+    } else if (hbsag === 2) {
+      lines.push('HEP B: HBsAg+ — active infection; clarify acute vs chronic with anti-HBc IgM.');
+    } else if (hbsag === 1 && hbs === 2 && (hbc === 2 || hbc === 3)) {
+      lines.push('HEP B: Resolved past infection (anti-HBs+ and anti-HBc+, HBsAg−).');
+    } else if (hbsag === 1 && hbs === 2 && hbc === 1) {
+      lines.push('HEP B: Immune from vaccination (anti-HBs+ only).');
+    } else if (hbsag === 1 && hbs === 1 && (hbc === 2 || hbc === 3)) {
+      lines.push('HEP B: Isolated anti-HBc — window period, occult infection, or false positive. Consider HBV DNA.');
+    } else if (hbsag === 1 && hbs === 1 && hbc === 1) {
+      lines.push('HEP B: Susceptible (all negative) — candidate for vaccination.');
+    }
+
+    // Hep C interpretation
+    if (hcvAb === 2 && hcvRna === 2) {
+      lines.push('HEP C: Active infection (Ab+ / RNA+).');
+    } else if (hcvAb === 2 && hcvRna === 1) {
+      lines.push('HEP C: Past/cleared or treated (Ab+ / RNA−).');
+    } else if (hcvAb === 2 && hcvRna === 0) {
+      lines.push('HEP C: Ab+ — confirm activity with HCV RNA.');
+    } else if (hcvAb === 1) {
+      lines.push('HEP C: No antibody detected (consider window period if recent high-risk exposure).');
+    }
+
+    if (lines.length === 0) {
+      return { value: '—', label: 'Enter serology values', description: 'Select the available results to interpret. Leave untested markers as NA.', colorVar: '--color-muted' };
+    }
+
+    const active = lines.some((l) => l.includes('Acute') || l.includes('Chronic') || l.includes('Active') || l.includes('HBsAg+'));
+    return {
+      value: active ? 'Active' : 'Interpreted',
+      label: 'Serology interpretation',
+      description: lines.join('\n'),
+      colorVar: active ? '--color-danger' : '--color-primary',
+    };
+  },
+};
+
+const HEP_KINGS_COLLEGE_CALCULATOR: CalculatorDefinition = {
+  id: 'hep-kings-college',
+  title: "King's College Criteria (ALF)",
+  subtitle: 'Transplant / transfer criteria for acute liver failure',
+  description: "Identify acute liver failure patients who warrant emergency transplant evaluation. Separate criteria for acetaminophen vs non-acetaminophen etiology.",
+  fields: [
+    {
+      name: 'etiology',
+      label: 'Etiology',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'Acetaminophen (paracetamol)', points: 1 },
+        { label: 'Non-acetaminophen', points: 2 },
+      ],
+    },
+    // Acetaminophen criteria
+    { name: 'apap-ph', label: 'APAP: arterial pH <7.3 (after resuscitation)', type: 'toggle', points: 0 },
+    { name: 'apap-inr', label: 'APAP: INR >6.5 (PT >100 s)', type: 'toggle', points: 0 },
+    { name: 'apap-cr', label: 'APAP: creatinine >300 µmol/L (>3.4 mg/dL)', type: 'toggle', points: 0 },
+    { name: 'apap-enceph', label: 'APAP: grade III/IV encephalopathy', type: 'toggle', points: 0 },
+    // Non-APAP criteria
+    { name: 'nonapap-inr', label: 'Non-APAP: INR >6.5 (PT >100 s)', type: 'toggle', points: 0 },
+    { name: 'nonapap-etiology', label: 'Non-APAP minor: unfavorable etiology (non-A/non-B, drug, halothane)', type: 'toggle', points: 0 },
+    { name: 'nonapap-age', label: 'Non-APAP minor: age <10 or >40', type: 'toggle', points: 0 },
+    { name: 'nonapap-jaundice', label: 'Non-APAP minor: jaundice-to-encephalopathy >7 days', type: 'toggle', points: 0 },
+    { name: 'nonapap-pt', label: 'Non-APAP minor: INR >3.5 (PT >50 s)', type: 'toggle', points: 0 },
+    { name: 'nonapap-bili', label: 'Non-APAP minor: bilirubin >300 µmol/L (>17.5 mg/dL)', type: 'toggle', points: 0 },
+  ],
+  results: [],
+  thresholdNote: 'High specificity (~90%), modest sensitivity (~68%). Transfer early to a transplant center even if criteria are not fully met.',
+  citations: [
+    "O'Grady JG, et al. Early indicators of prognosis in fulminant hepatic failure. Gastroenterology. 1989;97(2):439-445.",
+    'Lee WM, et al. AASLD Position Paper: Management of Acute Liver Failure: Update 2011. Hepatology. 2012;55(3):965-967.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const etiology = values['etiology'];
+    if (!etiology) {
+      return { value: '—', label: 'Select etiology', description: 'Choose acetaminophen or non-acetaminophen to apply the correct criteria.', colorVar: '--color-muted' };
+    }
+    if (etiology === 1) {
+      const ph = !!values['apap-ph'];
+      const inr = !!values['apap-inr'];
+      const cr = !!values['apap-cr'];
+      const enceph = !!values['apap-enceph'];
+      const triad = inr && cr && enceph;
+      const meets = ph || triad;
+      const reason = ph
+        ? 'Arterial pH <7.3 met.'
+        : triad
+          ? 'INR >6.5 + creatinine >300 + grade III/IV encephalopathy all met.'
+          : 'Neither pH <7.3 nor the full INR+Cr+encephalopathy triad met.';
+      return {
+        value: meets ? 'CRITERIA MET' : 'Not met',
+        label: meets ? 'Emergency transplant evaluation' : 'Criteria not met',
+        description: `${reason}\n\nAcetaminophen ALF: list for transplant if pH <7.3 OR all three of INR >6.5 + Cr >300 µmol/L + grade III/IV encephalopathy. ${meets ? 'Refer for emergency transplant evaluation and transfer now.' : 'Continue NAC and supportive care; transfer early if deteriorating — criteria are specific but insensitive.'}`,
+        colorVar: meets ? '--color-danger' : '--color-warning',
+      };
+    }
+    // Non-APAP
+    const major = !!values['nonapap-inr'];
+    const minors = ['nonapap-etiology', 'nonapap-age', 'nonapap-jaundice', 'nonapap-pt', 'nonapap-bili'].reduce((n, k) => n + (values[k] ? 1 : 0), 0);
+    const meets = major || minors >= 3;
+    const reason = major
+      ? 'Major criterion met (INR >6.5).'
+      : `${minors} of 5 minor criteria met (need any 3).`;
+    return {
+      value: meets ? 'CRITERIA MET' : 'Not met',
+      label: meets ? 'Emergency transplant evaluation' : 'Criteria not met',
+      description: `${reason}\n\nNon-acetaminophen ALF: list for transplant if INR >6.5 alone, OR any 3 minors (unfavorable etiology, age <10 or >40, jaundice-to-encephalopathy >7 d, INR >3.5, bilirubin >300 µmol/L). ${meets ? 'Refer for emergency transplant evaluation and transfer now.' : 'Transfer early if deteriorating — criteria are specific but insensitive.'}`,
+      colorVar: meets ? '--color-danger' : '--color-warning',
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Lateral Canthotomy (Orbital Compartment Syndrome)
   'lcc-iop': LCC_IOP_CALCULATOR,
+  // Hepatitis / Elevated Liver Enzymes
+  'hep-r-factor': HEP_R_FACTOR_CALCULATOR,
+  'hep-ggt-source': HEP_GGT_SOURCE_CALCULATOR,
+  'hep-viral-serology': HEP_VIRAL_SEROLOGY_CALCULATOR,
+  'hep-kings-college': HEP_KINGS_COLLEGE_CALCULATOR,
   // SJS/TEN
   'scorten': SCORTEN_CALCULATOR,
   'ten-fluid': TEN_FLUID_CALCULATOR,

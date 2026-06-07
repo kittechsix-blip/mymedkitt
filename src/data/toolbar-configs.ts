@@ -55,6 +55,13 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
 ]);
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'hepatitis': [
+    { id: 'r-factor', label: 'R-Factor', icon: '🧮', action: 'calculator', target: 'hep-r-factor', pinned: true },
+    { id: 'ggt', label: 'GGT', icon: '🧪', action: 'calculator', target: 'hep-ggt-source', pinned: true },
+    { id: 'serology', label: 'Serology', icon: '🦠', action: 'calculator', target: 'hep-viral-serology', pinned: true },
+    { id: 'kings', label: "King's College", icon: '⚖️', action: 'calculator', target: 'hep-kings-college', pinned: true },
+    { id: 'differential', label: 'Differential', icon: '🎯', action: 'overlay', target: 'hep-pattern-differential', pinned: true },
+  ],
   'lateral-canthotomy': [
     { id: 'iop', label: 'IOP Target', icon: '🧮', action: 'calculator', target: 'lcc-iop', pinned: true },
     { id: 'indications', label: 'Indications', icon: '🎯', action: 'overlay', target: 'lcc-indications', pinned: true },

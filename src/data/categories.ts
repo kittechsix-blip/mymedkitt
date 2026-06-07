@@ -1165,6 +1165,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     icon: 'gi.png',
     decisionTrees: [
       {
+        id: 'hepatitis',
+        title: 'Hepatitis / Elevated Liver Enzymes',
+        subtitle: 'Pattern (R-factor) → Hepatocellular / Cholestatic / Mixed → Acute Liver Failure',
+        categoryId: 'gastroenterology',
+        version: '1.0',
+        nodeCount: 18,
+        entryNodeId: 'hepatitis-start',
+      },
+      {
         id: 'acute-pancreatitis',
         title: 'Acute Pancreatitis',
         subtitle: 'Diagnosis → Severity → Resuscitation → Complications → Intervention',

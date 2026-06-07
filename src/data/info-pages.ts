@@ -27744,7 +27744,96 @@ const SEDATION_OPTIONS_STOP_PAGE: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Hepatitis / Elevated Liver Enzymes
+// -------------------------------------------------------------------
+
+const HEP_SUMMARY_PAGE: InfoPage = {
+  id: 'hep-summary',
+  title: 'Elevated Liver Enzymes — Workup Summary',
+  subtitle: 'Pattern first, then differential, then ALF',
+  sections: [
+    {
+      heading: 'Step 1 — Classify the pattern',
+      body: 'Compute the **R-factor** = (ALT ÷ ALT-ULN) ÷ (ALP ÷ ALP-ULN).\n• **R >5** → hepatocellular\n• **R 2–5** → mixed\n• **R <2** → cholestatic\n\nThis single number routes the rest of the workup. [1]',
+    },
+    {
+      heading: 'Step 2 — Branch the differential',
+      body: '**Hepatocellular:** viral (A/B/C/D/E), alcohol (AST:ALT >2:1), ischemic/shock liver (ALT in thousands, rapid rise/fall), drug/toxin incl. acetaminophen, MASLD/MASH, autoimmune, Wilson, hemochromatosis.\n\n**Cholestatic:** confirm hepatic source with GGT, then extrahepatic/obstructive (image the ducts) vs intrahepatic (PBC, PSC, drug, infiltrative).\n\n**Mixed:** usually DILI or evolving viral — trend the labs. [1][2]',
+    },
+    {
+      heading: 'Step 3 — Never miss acute liver failure',
+      body: '**ALF = INR ≥1.5 + hepatic encephalopathy + illness <26 weeks without prior cirrhosis.** Apply King\'s College Criteria, start supportive care (NAC, watch cerebral edema), and **transfer early** to a transplant center. [3][4]',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kwo PY, et al. ACG Clinical Guideline: Evaluation of Abnormal Liver Chemistries. Am J Gastroenterol. 2017;112(1):18-35.' },
+    { num: 2, text: 'Newsome PN, et al. Guidelines on the management of abnormal liver blood tests. Gut. 2018;67(1):6-19.' },
+    { num: 3, text: "O'Grady JG, et al. Early indicators of prognosis in fulminant hepatic failure. Gastroenterology. 1989;97(2):439-445." },
+    { num: 4, text: 'Lee WM, et al. AASLD Position Paper: Management of Acute Liver Failure: Update 2011. Hepatology. 2012;55(3):965-967.' },
+  ],
+};
+
+const HEP_PATTERN_DIFFERENTIAL_PAGE: InfoPage = {
+  id: 'hep-pattern-differential',
+  title: 'Pattern → Differential Lens',
+  subtitle: 'Match the LFT pattern to the cause',
+  sections: [
+    {
+      heading: 'By pattern',
+      body: '',
+      comparisonTable: {
+        columns: [
+          { key: 'pattern', label: 'Pattern' },
+          { key: 'clue', label: 'Key clue' },
+          { key: 'causes', label: 'Top causes' },
+        ],
+        rows: [
+          { cells: { pattern: 'Hepatocellular (R >5)', clue: 'ALT/AST ≫ ALP', causes: 'Viral, alcohol, ischemic, drug/APAP, MASLD, autoimmune, Wilson, hemochromatosis' } },
+          { cells: { pattern: 'Cholestatic (R <2)', clue: 'ALP ≫ ALT; confirm with GGT', causes: 'Obstruction (stones/stricture/tumor), PBC, PSC, drug, infiltrative' } },
+          { cells: { pattern: 'Mixed (R 2–5)', clue: 'Both elevated', causes: 'DILI, evolving/resolving viral' } },
+          { cells: { pattern: 'AST:ALT >2:1', clue: 'GGT high', causes: 'Alcohol-associated' } },
+          { cells: { pattern: 'ALT >1000, rapid rise/fall', clue: 'Hemodynamic insult', causes: 'Ischemic/shock liver, viral, toxin, autoimmune flare' } },
+          { cells: { pattern: 'High ALP, normal GGT', clue: 'Non-hepatic ALP', causes: 'Bone, growth, placenta — not liver' } },
+        ],
+      },
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kwo PY, et al. ACG Clinical Guideline: Evaluation of Abnormal Liver Chemistries. Am J Gastroenterol. 2017;112(1):18-35.' },
+    { num: 2, text: 'Newsome PN, et al. Guidelines on the management of abnormal liver blood tests. Gut. 2018;67(1):6-19.' },
+  ],
+};
+
+const HEP_MASSIVE_TRANSAMINITIS_PAGE: InfoPage = {
+  id: 'hep-massive-transaminitis',
+  title: 'Massive Transaminitis (ALT >1000)',
+  subtitle: 'The short, urgent differential',
+  sections: [
+    {
+      body: 'When ALT/AST climb above ~1000 IU/L, the causes narrow to a small, urgent list. Think **vascular, viral, toxic, autoimmune**.',
+    },
+    {
+      heading: 'The short list',
+      body: '• **Ischemic / shock liver** — rapid rise then ~50%/day fall after a hemodynamic insult; LDH high.\n• **Acute viral hepatitis** — A, B, E (E severe in pregnancy).\n• **Drug / toxin** — acetaminophen (give NAC), mushroom (Amanita), idiosyncratic DILI.\n• **Autoimmune hepatitis flare** — ↑IgG, ANA/ASMA.\n• **Acute biliary obstruction** — transient transaminase spike from a passing stone (then cholestatic pattern follows).\n• **Wilson disease** (young) and **Budd-Chiari / venous outflow obstruction** — don\'t forget vascular.',
+    },
+    {
+      heading: 'Watch for ALF',
+      body: 'Any massive transaminitis with rising INR and encephalopathy is acute liver failure until proven otherwise — apply King\'s College Criteria and transfer early.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kwo PY, et al. ACG Clinical Guideline: Evaluation of Abnormal Liver Chemistries. Am J Gastroenterol. 2017;112(1):18-35.' },
+    { num: 2, text: 'Lee WM, et al. AASLD Position Paper: Management of Acute Liver Failure: Update 2011. Hepatology. 2012;55(3):965-967.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // Hepatitis / Elevated Liver Enzymes
+  'hep-summary': HEP_SUMMARY_PAGE,
+  'hep-pattern-differential': HEP_PATTERN_DIFFERENTIAL_PAGE,
+  'hep-massive-transaminitis': HEP_MASSIVE_TRANSAMINITIS_PAGE,
+
   // Sedation Options
   'sedation-options-slide': SEDATION_OPTIONS_SLIDE_PAGE,
   'sedation-options-use-cases': SEDATION_OPTIONS_USE_CASES_PAGE,
