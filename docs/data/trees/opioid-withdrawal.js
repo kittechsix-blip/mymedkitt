@@ -7,7 +7,7 @@
 export const OPIOID_WITHDRAWAL_CRITICAL_ACTIONS = [
     { text: 'Calculate COWS score to objectively assess withdrawal severity', nodeId: 'ow-recognize' },
     { text: 'Initiate buprenorphine when objective withdrawal is present', nodeId: 'ow-bup-protocol' },
-    { text: 'Give buprenorphine 4mg SL, reassess in 60-90min, repeat up to 16-24mg day 1', nodeId: 'ow-bup-standard' },
+    { text: 'Give buprenorphine 8mg SL, reassess in 30-60min, repeat 4-8mg up to 32mg day 1', nodeId: 'ow-bup-standard' },
     { text: 'Fentanyl: do not use clock time alone. Wait for objective withdrawal or use low-dose overlap', nodeId: 'ow-fentanyl-nuance' },
     { text: 'Avoid precipitated withdrawal: wait for withdrawal signs before first dose', nodeId: 'ow-precip-entry' },
     { text: 'Provide non-opioid adjuncts: ondansetron, loperamide, clonidine, NSAIDs', nodeId: 'ow-adjuncts' },

@@ -8,7 +8,7 @@ export const PEA_ARREST_CRITICAL_ACTIONS = [
     { text: 'Pericardial effusion + RV collapse → emergent pericardiocentesis', nodeId: 'pea-tamponade' },
     { text: 'RV dilation + McConnell sign → tPA 50mg IV push', nodeId: 'pea-massive-pe' },
     { text: 'Collapsed IVC → 1-2L rapid IV bolus', nodeId: 'pea-hypovolemia' },
-    { text: 'Epi 1mg q3-5 min after 1st CPR cycle', nodeId: 'pea-epi' },
+    { text: 'True PEA (PRES): Epi 1mg IV/IO q3-5 min after 1st CPR cycle, limit to ≤3 doses (PARAMEDIC-2). In pseudo-PEA (PREM) do NOT give 1mg epi - use titratable vasopressors (norepi, push-dose epi 5-20 mcg, vasopressin)', nodeId: 'pea-epi' },
     { text: 'No cardiac activity on POCUS after adequate resus = futility marker', nodeId: 'pea-no-activity' },
 ];
 export const PEA_ARREST_NODES = [

@@ -696,7 +696,7 @@ export const ANAPHYLAXIS_CRITICAL_ACTIONS = [
   { text: 'Repeat IM epinephrine every 5 minutes if no response, up to 3 doses before escalating to IV', nodeId: 'anaph-epi-response' },
   { text: 'IV epinephrine infusion if refractory to 2-3 IM doses: 1 mg in 100 mL NS at 10 mcg/min', nodeId: 'anaph-epi-infusion' },
   { text: 'Aggressive IV fluid resuscitation: 500-1000 mL NS bolus (adults), 20-30 mL/kg (peds)', nodeId: 'anaph-fluids' },
-  { text: 'BiPAP/CPAP 15-20 cm H₂O for SCAPE-like presentations with massive afterload', nodeId: 'anaph-airway-critical' },
+  { text: 'Upper airway edema: nebulized racemic epinephrine (0.5 mL 2.25% in 4.5 mL NS) as temporizing measure - do NOT delay intubation if deteriorating', nodeId: 'anaph-airway-critical' },
   { text: 'Secure airway if stridor or upper airway edema - prepare for difficult airway with video laryngoscopy', nodeId: 'anaph-airway-critical' },
   { text: 'Methylene blue 1-2 mg/kg IV for beta-blocked patients with blunted epinephrine response', nodeId: 'anaph-beta-blocked' },
   { text: 'Push-dose epinephrine 20-50 mcg IV for peri-arrest presentations', nodeId: 'anaph-peri-arrest' },

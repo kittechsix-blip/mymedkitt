@@ -343,12 +343,12 @@ export const SEROTONIN_SYNDROME_MODULE_LABELS = [
 
 export const SEROTONIN_SYNDROME_CRITICAL_ACTIONS = [
   { text: 'Stop all serotonergic agents immediately (SSRIs, SNRIs, MAOIs, tramadol, linezolid, etc)', nodeId: 'ss-investigate-drugs' },
-  { text: 'Benzodiazepines for agitation: lorazepam 1-2 mg IV q5-10min to control myoclonus/rigidity', nodeId: 'ss-moderate-tx' },
+  { text: 'Benzodiazepines first-line for agitation: lorazepam 2-4 mg IV q15-30min PRN (or diazepam 5-10 mg IV q15min); reduces muscle activity and thermogenesis', nodeId: 'ss-moderate-tx' },
   { text: 'Cyproheptadine 12 mg PO initial, then 2 mg q2h (max 32 mg/day) for moderate-severe cases', nodeId: 'ss-moderate-tx' },
   { text: 'Aggressive cooling for hyperthermia >41°C (evaporative + cold IV fluids)', nodeId: 'ss-severe-tx' },
   { text: 'Intubate with paralysis (rocuronium/vecuronium) if severe rigidity or temp >41°C', nodeId: 'ss-severe-tx' },
   { text: 'Avoid antipyretics (ineffective), avoid succinylcholine (rhabdo risk with rigidity)', nodeId: 'ss-severe-tx' },
-  { text: 'Hunter criteria for diagnosis: serotonergic agent + (myoclonus + agitation) OR (tremor + hyperreflexia + temp >38)', nodeId: 'ss-hunter' },
+  { text: 'Hunter criteria: serotonergic agent + ONE of - spontaneous clonus; inducible clonus + agitation/diaphoresis; ocular clonus + agitation/diaphoresis; tremor + hyperreflexia; or hypertonia + temp >38°C + ocular/inducible clonus', nodeId: 'ss-hunter' },
 ];
 
 export const SEROTONIN_SYNDROME_CITATIONS: Citation[] = [
