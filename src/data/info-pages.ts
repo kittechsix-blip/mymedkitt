@@ -27438,6 +27438,15 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
+              drug: 'Ziprasidone (Geodon)',
+              onset: 'IM 15-30 min; PO with food 30-60 min',
+              duration: '2-4 h acute calming; longer antipsychotic tail possible',
+              indications: 'Psychosis-dominant agitation, schizophrenia-associated agitation, lower EPS/metabolic-burden option when slower onset is acceptable',
+              risks: 'QT prolongation, torsades-risk stacking, orthostasis, somnolence, EPS/NMS rare. Avoid QTc >500 ms, congenital long QT, recent MI, decompensated HF, electrolyte depletion, QT polypharmacy.',
+            },
+          },
+          {
+            cells: {
               drug: 'Dexmedetomidine',
               onset: 'No-load 15-30 min; load 5-10 min but often avoided',
               duration: 'Offset often 30-120 min',
@@ -27508,6 +27517,10 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           regimen: 'Useful for psychosis-dominant agitation when onset can be slower. Haloperidol has QT/EPS risk. Olanzapine lasts longer and should not be given IM close to parenteral benzodiazepines because of cardiopulmonary risk. [3,4,8,12]',
         },
         {
+          drug: 'Ziprasidone (Geodon)',
+          regimen: '10-20 mg IM for schizophrenia-associated acute agitation. Onset of calming is usually 15-30 min, with clinical effect over hours. Useful when psychosis dominates and a lower EPS/metabolic-burden option is desired, but it is not the fastest agent for immediate violent danger. Major limiter is QT risk: avoid QTc >500 ms, congenital long QT, recent MI, decompensated HF, electrolyte depletion, and QT polypharmacy. PO ziprasidone needs food for absorption. [4,13,14,15]',
+        },
+        {
           drug: 'Dexmedetomidine',
           regimen: '0.2-0.7 mcg/kg/hr IV, usually no load in ED/ICU patients. No-load onset 15-30 min. Best for cooperative light sedation, NIV, extubation bridge, and delirium-prone ventilated patients. Bradycardia and hypotension limit use. Not withdrawal monotherapy. [1,5,9]',
         },
@@ -27534,10 +27547,10 @@ Early minutes:
 - Fentanyl IV, midazolam IV, droperidol IV, ketamine IM.
 
 Later minutes:
-- Droperidol IM, haloperidol IM, olanzapine IM, nitrous mask setup, dexmedetomidine if no load.
+- Droperidol IM, haloperidol IM, olanzapine IM, ziprasidone IM, nitrous mask setup, dexmedetomidine if no load.
 
 Long tail:
-- Lorazepam/diazepam, phenobarbital, olanzapine, repeated benzodiazepines, stacked sedatives.`,
+- Lorazepam/diazepam, phenobarbital, olanzapine, ziprasidone, repeated benzodiazepines, stacked sedatives.`,
     },
     {
       heading: 'Adverse-Effect Fingerprints',
@@ -27548,7 +27561,7 @@ Hypotension:
 - Propofol, dex loading, high total sedative burden, shock physiology.
 
 QT/EPS:
-- Droperidol and haloperidol, especially QTc >500 ms, electrolyte depletion, QT polypharmacy, Parkinson/Lewy body.
+- Droperidol, haloperidol, and ziprasidone, especially QTc >500 ms, electrolyte depletion, QT polypharmacy, Parkinson/Lewy body.
 
 Bradycardia:
 - Dexmedetomidine, beta-blockers, high vagal tone, conduction disease.
@@ -27576,6 +27589,9 @@ Long-tail oversedation:
     { num: 10, text: 'Punia V, et al. Phenobarbital for alcohol withdrawal management in the ED. Acad Emerg Med. 2024.' },
     { num: 11, text: 'Green SM, et al. ED ketamine dissociative sedation guideline. Ann Emerg Med. 2011.' },
     { num: 12, text: 'UpToDate. Procedural sedation in adults and management of acute agitation in adults. Accessed 2026-06-07.' },
+    { num: 13, text: 'DailyMed. Ziprasidone mesylate injection prescribing information. Accessed 2026-06-07.' },
+    { num: 14, text: 'Klein LR, et al. Intramuscular midazolam, olanzapine, ziprasidone, or haloperidol for treating acute agitation in the ED. Ann Emerg Med. 2018.' },
+    { num: 15, text: 'Holloman GH, et al. Evidence-based review of pharmacotherapy for acute agitation. Part 1: onset of efficacy. J Emerg Med. 2018.' },
   ],
 };
 
