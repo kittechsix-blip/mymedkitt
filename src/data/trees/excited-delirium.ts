@@ -1,4 +1,4 @@
-// myMedKitt - Excited Delirium / Hyperactive Delirium with Severe Agitation
+// myMedKitt - State of Extreme Agitation with Aggression
 // Danger screen -> rapid sedation -> cooling -> acidosis/rhabdo -> QT/ECG -> disposition
 
 import type { DecisionNode } from '../../models/types.js';
@@ -81,7 +81,7 @@ export const EXCITED_DELIRIUM_NODES: DecisionNode[] = [
     id: 'exdel-start',
     type: 'question',
     module: 1,
-    title: 'Excited Delirium / Hyperactive Delirium: First Screen',
+    title: 'State of Extreme Agitation with Aggression: First Screen',
     body: `This consult is for severe hyperactive delirium with dangerous agitation, especially when paired with hyperthermia, acidosis, stimulant toxidrome, prolonged struggle, restraint, or physiologic collapse.
 
 Use the term "excited delirium" for searchability, not as a final diagnosis. Treat the physiology first, then find the cause.`,

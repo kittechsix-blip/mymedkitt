@@ -356,7 +356,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'excited-delirium',
-        title: 'Excited Delirium / Hyperactive Delirium',
+        title: 'State of Extreme Agitation with Aggression',
         subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
         categoryId: 'critical-care',
         version: '1.0',
@@ -499,7 +499,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'excited-delirium',
-        title: 'Excited Delirium / Hyperactive Delirium',
+        title: 'State of Extreme Agitation with Aggression',
         subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
         categoryId: 'emergency-medicine',
         version: '1.0',
@@ -2997,7 +2997,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'excited-delirium',
-        title: 'Excited Delirium / Hyperactive Delirium',
+        title: 'State of Extreme Agitation with Aggression',
         subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
         categoryId: 'psychiatry',
         version: '1.0',
@@ -3499,7 +3499,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'excited-delirium',
-        title: 'Excited Delirium / Hyperactive Delirium',
+        title: 'State of Extreme Agitation with Aggression',
         subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
         categoryId: 'toxicology',
         version: '1.0',

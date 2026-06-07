@@ -27267,7 +27267,7 @@ const CYA_STOP_PAGE: InfoPage = {
 
 const EXCITED_DELIRIUM_SUMMARY_PAGE: InfoPage = {
   id: 'excited-delirium-summary',
-  title: 'Excited Delirium / Hyperactive Delirium',
+  title: 'State of Extreme Agitation with Aggression',
   subtitle: 'Rapid Resuscitation Steps',
   sections: [
     {
@@ -27289,7 +27289,7 @@ const EXCITED_DELIRIUM_SUMMARY_PAGE: InfoPage = {
 
 const EXCITED_DELIRIUM_STOP_PAGE: InfoPage = {
   id: 'excited-delirium-stop',
-  title: 'Do NOT: Excited Delirium',
+  title: 'Do NOT: State of Extreme Agitation',
   subtitle: 'High-Risk Pitfalls',
   sections: [
     {
@@ -27304,7 +27304,7 @@ const EXCITED_DELIRIUM_STOP_PAGE: InfoPage = {
 };
 
 export const INFO_PAGES: Record<string, InfoPage> = {
-  // Excited Delirium / Hyperactive Delirium
+  // State of Extreme Agitation with Aggression
   'excited-delirium-summary': EXCITED_DELIRIUM_SUMMARY_PAGE,
   'excited-delirium-stop': EXCITED_DELIRIUM_STOP_PAGE,
 

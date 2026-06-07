@@ -26105,7 +26105,7 @@ const CYA_STOP_PAGE = {
 };
 const EXCITED_DELIRIUM_SUMMARY_PAGE = {
     id: 'excited-delirium-summary',
-    title: 'Excited Delirium / Hyperactive Delirium',
+    title: 'State of Extreme Agitation with Aggression',
     subtitle: 'Rapid Resuscitation Steps',
     sections: [
         {
@@ -26126,7 +26126,7 @@ const EXCITED_DELIRIUM_SUMMARY_PAGE = {
 };
 const EXCITED_DELIRIUM_STOP_PAGE = {
     id: 'excited-delirium-stop',
-    title: 'Do NOT: Excited Delirium',
+    title: 'Do NOT: State of Extreme Agitation',
     subtitle: 'High-Risk Pitfalls',
     sections: [
         {
@@ -26140,7 +26140,7 @@ const EXCITED_DELIRIUM_STOP_PAGE = {
     ],
 };
 export const INFO_PAGES = {
-    // Excited Delirium / Hyperactive Delirium
+    // State of Extreme Agitation with Aggression
     'excited-delirium-summary': EXCITED_DELIRIUM_SUMMARY_PAGE,
     'excited-delirium-stop': EXCITED_DELIRIUM_STOP_PAGE,
     // Procedure Scout batch 2026-06-06
