@@ -36390,63 +36390,408 @@ const PM_ICD_STORM_CALCULATOR: CalculatorDefinition = {
 // WEIGHT-BASED DOSE CALCULATORS
 // =====================================================================
 
+interface WeightDoseRegimen {
+  name: string;
+  doseText: string;
+  dosePerKg: number;
+  highDosePerKg?: number;
+  unit: string;
+  route: string;
+  maxDose?: number;
+  maxUnit?: string;
+  precision?: number;
+  notes?: string;
+  safety?: string;
+  postCalculation?: (dose: number) => string;
+}
+
+const WEIGHT_DOSE_REGIMENS: Record<number, WeightDoseRegimen> = {
+  // AFib / rate control pattern
+  10: {
+    name: 'Diltiazem initial bolus',
+    doseText: '0.25 mg/kg',
+    dosePerKg: 0.25,
+    unit: 'mg',
+    route: 'IV over 2 min',
+    maxDose: 25,
+    notes: 'AFib/AFlutter RVR rate control. Reassess BP and HR before repeat dosing.',
+    safety: 'Avoid EF <=40%, decompensated HF, SBP <90, WPW with AF, high-grade AV block, and concurrent IV beta-blocker.',
+  },
+  11: {
+    name: 'Diltiazem second bolus',
+    doseText: '0.35 mg/kg',
+    dosePerKg: 0.35,
+    unit: 'mg',
+    route: 'IV over 2 min',
+    maxDose: 25,
+    notes: 'Only if inadequate response after about 15 min and BP tolerates.',
+    safety: 'Avoid EF <=40%, decompensated HF, SBP <90, WPW with AF, high-grade AV block, and concurrent IV beta-blocker.',
+  },
+  12: {
+    name: 'Esmolol bolus',
+    doseText: '500 mcg/kg',
+    dosePerKg: 500,
+    unit: 'mcg',
+    route: 'IV over 1 min',
+    notes: 'Then infusion 50-200 mcg/kg/min as clinically indicated.',
+    safety: 'Avoid severe asthma/COPD exacerbation, decompensated HF, severe bradycardia, and high-grade AV block.',
+  },
+  13: {
+    name: 'Esmolol starting infusion',
+    doseText: '50 mcg/kg/min',
+    dosePerKg: 50,
+    unit: 'mcg/min',
+    route: 'IV infusion',
+    notes: 'Titrate q5 min to effect, commonly 50-200 mcg/kg/min; max often 300 mcg/kg/min by protocol.',
+    safety: 'Use continuous ECG/BP monitoring. Reduce or stop quickly for hypotension or bradycardia.',
+  },
+
+  // Sedation Options slide
+  100: {
+    name: 'Ketamine IV dissociation',
+    doseText: '1-2 mg/kg',
+    dosePerKg: 1,
+    highDosePerKg: 2,
+    unit: 'mg',
+    route: 'IV slow push',
+    notes: 'Painful procedures, dissociation, bronchospasm, or severe danger. Redose smaller aliquots to effect.',
+    safety: 'Prepare suction and airway equipment. Watch emesis, saliva, rare laryngospasm, hypertension, tachycardia.',
+  },
+  101: {
+    name: 'Ketamine IM dissociation',
+    doseText: '4-5 mg/kg',
+    dosePerKg: 4,
+    highDosePerKg: 5,
+    unit: 'mg',
+    route: 'IM',
+    notes: 'Useful when IV access is not available or immediate control is needed.',
+    safety: 'Longer recovery than IV. Prepare suction and airway equipment.',
+  },
+  102: {
+    name: 'Propofol procedural sedation',
+    doseText: '0.5-1 mg/kg',
+    dosePerKg: 0.5,
+    highDosePerKg: 1,
+    unit: 'mg',
+    route: 'IV slow push',
+    notes: 'Use smaller redoses, typically 0.25-0.5 mg/kg, after effect is assessed.',
+    safety: 'No analgesia. High apnea/hypotension risk, especially old/frail, shock, hypovolemia, RV failure, or sedative stacking.',
+  },
+  103: {
+    name: 'Propofol redose',
+    doseText: '0.25-0.5 mg/kg',
+    dosePerKg: 0.25,
+    highDosePerKg: 0.5,
+    unit: 'mg',
+    route: 'IV aliquot',
+    notes: 'Wait for peak effect before repeating. Titrate to procedure and airway status.',
+    safety: 'Stop or reduce dosing for apnea, airway obstruction, or hypotension.',
+  },
+  104: {
+    name: 'Etomidate procedural sedation',
+    doseText: '0.1-0.2 mg/kg',
+    dosePerKg: 0.1,
+    highDosePerKg: 0.2,
+    unit: 'mg',
+    route: 'IV',
+    notes: 'Brief hypnosis with separate analgesia when needed.',
+    safety: 'No analgesia. Watch myoclonus and vomiting. Consider adrenal/sepsis context.',
+  },
+  105: {
+    name: 'Etomidate RSI induction',
+    doseText: '0.3 mg/kg',
+    dosePerKg: 0.3,
+    unit: 'mg',
+    route: 'IV',
+    notes: 'Induction dose for RSI, not procedural analgesia.',
+    safety: 'No analgesia. Consider adrenal/sepsis context.',
+  },
+  106: {
+    name: 'Midazolam IV sedation',
+    doseText: '0.02-0.05 mg/kg',
+    dosePerKg: 0.02,
+    highDosePerKg: 0.05,
+    unit: 'mg',
+    route: 'IV aliquots',
+    maxDose: 5,
+    notes: 'Give slowly and wait between doses. Lower starting doses in old/frail patients.',
+    safety: 'Respiratory depression and delirium risk, especially with opioids, alcohol, OSA/COPD, or repeated dosing.',
+  },
+  107: {
+    name: 'Midazolam IM/IN sedation',
+    doseText: '0.2 mg/kg',
+    dosePerKg: 0.2,
+    unit: 'mg',
+    route: 'IM or IN',
+    maxDose: 10,
+    notes: 'Split intranasal dosing between nares if used IN.',
+    safety: 'Respiratory depression and long-tail stacking risk.',
+  },
+  108: {
+    name: 'Lorazepam IV',
+    doseText: '0.02-0.1 mg/kg',
+    dosePerKg: 0.02,
+    highDosePerKg: 0.1,
+    unit: 'mg',
+    route: 'IV',
+    maxDose: 4,
+    notes: 'Withdrawal, seizures, or stimulant physiology. Slower onset and longer clinical effect than midazolam.',
+    safety: 'High stacking risk with alcohol, opioids, phenobarbital, frailty, COPD/OSA.',
+  },
+  109: {
+    name: 'Diazepam IV',
+    doseText: '0.15-0.2 mg/kg',
+    dosePerKg: 0.15,
+    highDosePerKg: 0.2,
+    unit: 'mg',
+    route: 'IV',
+    maxDose: 10,
+    notes: 'Withdrawal, seizures, or stimulant physiology. Fast IV onset but active metabolites.',
+    safety: 'Long-tail sedation and respiratory depression risk with repeats or co-ingestants.',
+  },
+  110: {
+    name: 'Fentanyl IV analgesia',
+    doseText: '0.5-1 mcg/kg',
+    dosePerKg: 0.5,
+    highDosePerKg: 1,
+    unit: 'mcg',
+    route: 'IV aliquots',
+    maxDose: 100,
+    notes: 'Analgesic adjunct. Titrate in small aliquots and wait for effect.',
+    safety: 'Synergistic respiratory depression with benzodiazepines, propofol, alcohol, or OSA/COPD.',
+  },
+  111: {
+    name: 'Droperidol weight-based antiemetic/agitation',
+    doseText: '0.05 mg/kg',
+    dosePerKg: 0.05,
+    unit: 'mg',
+    route: 'IV or IM',
+    maxDose: 5,
+    notes: 'Severe agitation often uses fixed adult 5-10 mg by local protocol rather than pure weight-based dosing.',
+    safety: 'Check QT risk, electrolytes, and QT-polypharmacy when clinically feasible. Avoid repeated dosing with QTc >500 ms when possible.',
+  },
+  112: {
+    name: 'Haloperidol agitation',
+    doseText: '0.05-0.1 mg/kg',
+    dosePerKg: 0.05,
+    highDosePerKg: 0.1,
+    unit: 'mg',
+    route: 'IM or IV',
+    maxDose: 10,
+    notes: 'Psychosis-dominant agitation when slower onset is acceptable.',
+    safety: 'QT/EPS risk. Avoid Parkinson/Lewy body dementia when possible; check QT risk when feasible.',
+  },
+  113: {
+    name: 'Dexmedetomidine infusion',
+    doseText: '0.2-0.7 mcg/kg/hr',
+    dosePerKg: 0.2,
+    highDosePerKg: 0.7,
+    unit: 'mcg/hr',
+    route: 'IV infusion',
+    notes: 'Often avoid loading dose in ED/ICU patients. Useful for cooperative light sedation, NIV, or extubation bridge.',
+    safety: 'Bradycardia and hypotension limit use. Not monotherapy for alcohol withdrawal.',
+  },
+  114: {
+    name: 'Dexmedetomidine optional load',
+    doseText: '0.5-1 mcg/kg',
+    dosePerKg: 0.5,
+    highDosePerKg: 1,
+    unit: 'mcg',
+    route: 'IV over 10 min',
+    notes: 'Often avoided in unstable ED/ICU patients because loading increases bradycardia/hypotension.',
+    safety: 'Avoid or reduce in bradycardia, hypotension, high-grade block, or shock.',
+  },
+  115: {
+    name: 'Phenobarbital alcohol withdrawal load',
+    doseText: '10-15 mg/kg',
+    dosePerKg: 10,
+    highDosePerKg: 15,
+    unit: 'mg',
+    route: 'IV, IM, or PO per protocol',
+    notes: 'Use protocolized loading or incremental dosing. Long half-life provides auto-taper.',
+    safety: 'Avoid casual stacking with large benzodiazepine/opioid burden without airway/ICU plan.',
+  },
+  116: {
+    name: 'Phenobarbital seizure/status load',
+    doseText: '15-20 mg/kg',
+    dosePerKg: 15,
+    highDosePerKg: 20,
+    unit: 'mg',
+    route: 'IV',
+    notes: 'Use seizure/status protocol and monitor airway, BP, and cumulative sedative burden.',
+    safety: 'Long half-life. Respiratory depression risk rises with sedative stacking.',
+  },
+  117: {
+    name: 'Methohexital brief deep sedation',
+    doseText: '0.5-1 mg/kg',
+    dosePerKg: 0.5,
+    highDosePerKg: 1,
+    unit: 'mg',
+    route: 'IV',
+    notes: 'Uncommon ultra-short option for brief deep sedation or cardioversion where local practice supports it.',
+    safety: 'Apnea, hypotension, and excitatory movements. Avoid porphyria.',
+  },
+
+  // High-risk ED weight-based drugs commonly cross-linked elsewhere
+  200: {
+    name: 'Tenecteplase acute ischemic stroke',
+    doseText: '0.25 mg/kg',
+    dosePerKg: 0.25,
+    unit: 'mg',
+    route: 'IV bolus',
+    maxDose: 25,
+    notes: 'Use only when adopted by local stroke protocol and all thrombolysis criteria are met.',
+    safety: 'BP must be <185/110 before treatment and <180/105 for 24 hr after. No antithrombotics for 24 hr unless specialist-directed.',
+  },
+  201: {
+    name: 'Alteplase acute ischemic stroke',
+    doseText: '0.9 mg/kg',
+    dosePerKg: 0.9,
+    unit: 'mg',
+    route: 'IV bolus + infusion',
+    maxDose: 90,
+    notes: 'Give 10% as bolus over 1 min, then 90% over 60 min.',
+    safety: 'BP must be <185/110 before treatment and <180/105 for 24 hr after. No antithrombotics for 24 hr unless specialist-directed.',
+    postCalculation: (dose) => {
+      const bolus = formatWeightDose(dose * 0.1, 'mg', 1);
+      const infusion = formatWeightDose(dose * 0.9, 'mg', 1);
+      return `**Split:** ${bolus} bolus over 1 min, then ${infusion} over 60 min.`;
+    },
+  },
+  202: {
+    name: 'Rocuronium RSI',
+    doseText: '1.2 mg/kg',
+    dosePerKg: 1.2,
+    unit: 'mg',
+    route: 'IV',
+    notes: 'Paralytic dose for RSI. Confirm airway plan, sedation, and post-intubation analgesia/sedation.',
+    safety: 'Paralysis without sedation is a never-event.',
+  },
+  203: {
+    name: 'Succinylcholine RSI',
+    doseText: '1.5 mg/kg',
+    dosePerKg: 1.5,
+    unit: 'mg',
+    route: 'IV',
+    notes: 'Depolarizing paralytic for RSI when no contraindications.',
+    safety: 'Avoid major burns/crush/denervation after 24-48 hr, known hyperkalemia, neuromuscular disease, malignant hyperthermia risk.',
+  },
+};
+
+function formatWeightDose(value: number, unit: string, precision = 2): string {
+  const rounded = Math.round(value * 10 ** precision) / 10 ** precision;
+  const normalized = Number.isInteger(rounded) ? String(rounded) : String(rounded).replace(/0+$/, '').replace(/\.$/, '');
+  return `${normalized} ${unit}`;
+}
+
+function formatWeightDoseRange(low: number, high: number | undefined, unit: string, precision = 2): string {
+  if (high === undefined || Math.abs(high - low) < 0.000001) {
+    return formatWeightDose(low, unit, precision);
+  }
+
+  const lowText = formatWeightDose(low, unit, precision).replace(` ${unit}`, '');
+  return `${lowText}-${formatWeightDose(high, unit, precision)}`;
+}
+
 const WEIGHT_DOSE_CALCULATOR: CalculatorDefinition = {
   id: 'weight-dose',
   title: 'Weight-Based Dose Calculator',
-  subtitle: 'Calculate doses from mg/kg',
-  description: 'Universal weight-based medication dose calculator. Enter patient weight and dose per kg to calculate total dose.',
+  subtitle: 'Regimen-based ED dosing',
+  description: 'Select a medication/regimen and enter patient weight. Calculates the dose, applies listed caps, and shows route, repeat-dose notes, and safety checks.',
   fields: [
     { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Patient weight in kilograms' },
-    { name: 'dosePerKg', label: 'Dose per kg', type: 'number', points: 0, valueIsPoints: true, description: 'mg/kg (or mcg/kg, mL/kg, units/kg)' },
     {
-      name: 'unit',
-      label: 'Unit',
+      name: 'regimen',
+      label: 'Medication / Regimen',
       type: 'select',
       points: 0,
+      hideOptionPoints: true,
       selectOptions: [
-        { label: 'mg/kg', points: 1 },
-        { label: 'mcg/kg', points: 2 },
-        { label: 'mL/kg', points: 3 },
-        { label: 'units/kg', points: 4 },
-        { label: 'mEq/kg', points: 5 },
-        { label: 'g/kg', points: 6 },
+        { label: '-- AFib / Rate Control --', points: 0 },
+        { label: 'Diltiazem initial bolus 0.25 mg/kg IV', points: 10 },
+        { label: 'Diltiazem second bolus 0.35 mg/kg IV', points: 11 },
+        { label: 'Esmolol bolus 500 mcg/kg IV', points: 12 },
+        { label: 'Esmolol starting infusion 50 mcg/kg/min', points: 13 },
+        { label: '-- Sedation / Agitation --', points: 0 },
+        { label: 'Ketamine IV 1-2 mg/kg', points: 100 },
+        { label: 'Ketamine IM 4-5 mg/kg', points: 101 },
+        { label: 'Propofol 0.5-1 mg/kg IV', points: 102 },
+        { label: 'Propofol redose 0.25-0.5 mg/kg IV', points: 103 },
+        { label: 'Etomidate PSA 0.1-0.2 mg/kg IV', points: 104 },
+        { label: 'Etomidate RSI 0.3 mg/kg IV', points: 105 },
+        { label: 'Midazolam 0.02-0.05 mg/kg IV', points: 106 },
+        { label: 'Midazolam 0.2 mg/kg IM/IN', points: 107 },
+        { label: 'Lorazepam 0.02-0.1 mg/kg IV', points: 108 },
+        { label: 'Diazepam 0.15-0.2 mg/kg IV', points: 109 },
+        { label: 'Fentanyl 0.5-1 mcg/kg IV', points: 110 },
+        { label: 'Droperidol 0.05 mg/kg IV/IM', points: 111 },
+        { label: 'Haloperidol 0.05-0.1 mg/kg IM/IV', points: 112 },
+        { label: 'Dexmedetomidine 0.2-0.7 mcg/kg/hr', points: 113 },
+        { label: 'Dexmedetomidine load 0.5-1 mcg/kg', points: 114 },
+        { label: 'Phenobarbital withdrawal 10-15 mg/kg', points: 115 },
+        { label: 'Phenobarbital seizure/status 15-20 mg/kg', points: 116 },
+        { label: 'Methohexital 0.5-1 mg/kg IV', points: 117 },
+        { label: '-- Stroke / Airway --', points: 0 },
+        { label: 'Tenecteplase stroke 0.25 mg/kg IV', points: 200 },
+        { label: 'Alteplase stroke 0.9 mg/kg IV', points: 201 },
+        { label: 'Rocuronium RSI 1.2 mg/kg IV', points: 202 },
+        { label: 'Succinylcholine RSI 1.5 mg/kg IV', points: 203 },
       ],
     },
-    { name: 'maxDose', label: 'Maximum Dose (optional)', type: 'number', points: 0, valueIsPoints: true, description: 'Cap the calculated dose at this maximum' },
   ],
   results: [],
-  thresholdNote: 'Always verify weight-based calculations with pharmacy resources. Pediatric doses may have different maximums than adults.',
-  citations: ['Lexicomp Pediatric & Neonatal Dosage Handbook. 2024.'],
+  thresholdNote: 'Regimen locks reduce arithmetic mistakes but do not replace clinical judgment, pharmacy verification, protocol review, or patient-specific dose adjustment.',
+  citations: [
+    'Joglar JA, et al. 2023 ACC/AHA/ACCP/HRS Guideline for AF. J Am Coll Cardiol. 2024;83(1):109-279.',
+    'Godwin SA, et al. ACEP Clinical policy: procedural sedation and analgesia in the emergency department. Ann Emerg Med. 2014.',
+    'Merck Manual Professional. How To Do Procedural Sedation and Analgesia. Accessed 2026-06-07.',
+    'DailyMed drug labels for selected sedatives and thrombolytics. Accessed 2026-06-07.',
+  ],
   computeResult: (values: Record<string, number>) => {
     const weight = values['weight'] || 0;
-    const dosePerKg = values['dosePerKg'] || 0;
-    const unitType = values['unit'] || 1;
-    const maxDose = values['maxDose'] || 0;
+    const regimenId = values['regimen'] || 0;
 
     if (weight <= 0) {
       return { value: '--', label: 'Enter weight', description: 'Enter patient weight in kg to calculate dose.', colorVar: '--color-text-muted' };
     }
-    if (dosePerKg <= 0) {
-      return { value: '--', label: 'Enter dose/kg', description: 'Enter the dose per kg to calculate total dose.', colorVar: '--color-text-muted' };
+    if (regimenId === 0) {
+      return { value: '--', label: 'Select regimen', description: 'Select a medication/regimen from the list. Category headers are not selectable regimens.', colorVar: '--color-text-muted' };
     }
 
-    const unitLabels: Record<number, string> = { 1: 'mg', 2: 'mcg', 3: 'mL', 4: 'units', 5: 'mEq', 6: 'g' };
-    const unitPerKgLabels: Record<number, string> = { 1: 'mg/kg', 2: 'mcg/kg', 3: 'mL/kg', 4: 'units/kg', 5: 'mEq/kg', 6: 'g/kg' };
-    const unitLabel = unitLabels[unitType] || 'mg';
-    const unitPerKgLabel = unitPerKgLabels[unitType] || 'mg/kg';
-
-    let calculatedDose = Math.round(weight * dosePerKg * 100) / 100;
-    let capped = false;
-    if (maxDose > 0 && calculatedDose > maxDose) {
-      calculatedDose = maxDose;
-      capped = true;
+    const regimen = WEIGHT_DOSE_REGIMENS[regimenId];
+    if (!regimen) {
+      return { value: '--', label: 'Select regimen', description: 'Select a medication/regimen from the list.', colorVar: '--color-text-muted' };
     }
 
-    const description = `**CALCULATION:**\n${weight} kg × ${dosePerKg} ${unitPerKgLabel} = **${Math.round(weight * dosePerKg * 100) / 100} ${unitLabel}**${capped ? `\n\n⚠️ **CAPPED** at maximum dose: ${maxDose} ${unitLabel}` : ''}`;
+    const precision = regimen.precision ?? 2;
+    const rawLowDose = weight * regimen.dosePerKg;
+    const rawHighDose = regimen.highDosePerKg !== undefined ? weight * regimen.highDosePerKg : undefined;
+
+    const finalLowDose = regimen.maxDose !== undefined ? Math.min(rawLowDose, regimen.maxDose) : rawLowDose;
+    const finalHighDose = rawHighDose !== undefined
+      ? regimen.maxDose !== undefined ? Math.min(rawHighDose, regimen.maxDose) : rawHighDose
+      : undefined;
+    const capped = regimen.maxDose !== undefined && (
+      rawLowDose > regimen.maxDose || (rawHighDose !== undefined && rawHighDose > regimen.maxDose)
+    );
+
+    const calculatedText = formatWeightDoseRange(rawLowDose, rawHighDose, regimen.unit, precision);
+    const finalText = formatWeightDoseRange(finalLowDose, finalHighDose, regimen.unit, precision);
+    const capText = capped && regimen.maxDose !== undefined
+      ? `\n\n**Cap applied:** maximum ${formatWeightDose(regimen.maxDose, regimen.maxUnit || regimen.unit, precision)}.`
+      : '';
+    const postCalculation = regimen.postCalculation ? `\n\n${regimen.postCalculation(finalHighDose ?? finalLowDose)}` : '';
+
+    const description = `**${regimen.name}**\n\n**Regimen:** ${regimen.doseText}\n**Patient weight:** ${weight} kg\n**Calculation:** ${weight} kg x ${regimen.doseText} = ${calculatedText}${capText}\n\n**Final dose:** **${finalText}**\n**Route:** ${regimen.route}${postCalculation}${regimen.notes ? `\n\n**Notes:** ${regimen.notes}` : ''}${regimen.safety ? `\n\n**Safety:** ${regimen.safety}` : ''}`;
+
+    let value = finalText;
+    if (value.length > 18 && finalHighDose !== undefined) {
+      value = formatWeightDose(finalHighDose, regimen.unit, precision);
+    }
 
     return {
-      value: `${calculatedDose} ${unitLabel}`,
-      label: 'Calculated Dose',
+      value,
+      label: regimen.name,
       description,
       colorVar: capped ? '--color-warning' : '--color-primary',
     };
