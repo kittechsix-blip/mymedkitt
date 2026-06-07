@@ -15,6 +15,7 @@ export const TOOLBAR_OVERFLOW = new Set([
     'dental-extraction-complications',
     'sjs-ten',
     'lateral-canthotomy',
+    'excited-delirium',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 const TOOLBAR_CONFIGS = {
@@ -2274,6 +2275,18 @@ const TOOLBAR_CONFIGS = {
         { id: 'ketamine', label: 'Ketamine', icon: '⚡', action: 'jump', target: 'agit-ketamine' },
         { id: 'benzo', label: 'Benzos', icon: '💊', action: 'jump', target: 'agit-benzo-protocol' },
         { id: 'hyperactive-delirium', label: 'Hyperactive', icon: '🔥', action: 'jump', target: 'agit-excited-delirium' },
+    ],
+    'excited-delirium': [
+        { id: 'rass', label: 'RASS', icon: '📊', action: 'calculator', target: 'rass', pinned: true },
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'excited-delirium-summary', pinned: true },
+        { id: 'sedation', label: 'Sedation', icon: '💉', action: 'jump', target: 'exdel-sedation-choice', pinned: true },
+        { id: 'elderly', label: 'Elderly', icon: '👴', action: 'jump', target: 'exdel-elderly', pinned: true },
+        { id: 'qt', label: 'QT/ECG', icon: '⚡', action: 'jump', target: 'exdel-qt-risk', pinned: true },
+        { id: 'acidosis', label: 'Acidosis', icon: '🧪', action: 'jump', target: 'exdel-acidosis' },
+        { id: 'cooling', label: 'Cooling', icon: '🌡️', action: 'jump', target: 'exdel-cooling' },
+        { id: 'mcmahon', label: 'McMahon', icon: '🧮', action: 'calculator', target: 'mcmahon-rhabdo' },
+        { id: 'rhabdo', label: 'Rhabdo', icon: '🧬', action: 'route', target: 'rhabdomyolysis' },
+        { id: 'stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'excited-delirium-stop' },
     ],
     'suicidal-patient': [
         { id: 'safety', label: 'Safety', icon: '🔒', action: 'jump', target: 'sui-safety' },

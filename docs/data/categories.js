@@ -352,6 +352,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'sepsis-start',
             },
             {
+                id: 'excited-delirium',
+                title: 'Excited Delirium / Hyperactive Delirium',
+                subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
+                categoryId: 'critical-care',
+                version: '1.0',
+                nodeCount: 35,
+                entryNodeId: 'exdel-start',
+            },
+            {
                 id: 'ecmo',
                 title: 'Extracorporeal Membrane Oxygenation (ECMO)',
                 subtitle: 'VV vs VA → Indications → Cannulation → Complications → Scores → Communication',
@@ -484,6 +493,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 10,
                 entryNodeId: 'sjs-ten-start',
+            },
+            {
+                id: 'excited-delirium',
+                title: 'Excited Delirium / Hyperactive Delirium',
+                subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 35,
+                entryNodeId: 'exdel-start',
             },
             {
                 id: 'angioedema',
@@ -2975,6 +2993,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'agit-start',
             },
             {
+                id: 'excited-delirium',
+                title: 'Excited Delirium / Hyperactive Delirium',
+                subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
+                categoryId: 'psychiatry',
+                version: '1.0',
+                nodeCount: 35,
+                entryNodeId: 'exdel-start',
+            },
+            {
                 id: 'suicidal-patient',
                 title: 'Suicidal Patient',
                 subtitle: 'Screening → C-SSRS → Risk Stratification → Safety Planning → Disposition',
@@ -3466,6 +3493,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 18,
                 entryNodeId: 'ss-start',
+            },
+            {
+                id: 'excited-delirium',
+                title: 'Excited Delirium / Hyperactive Delirium',
+                subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
+                categoryId: 'toxicology',
+                version: '1.0',
+                nodeCount: 35,
+                entryNodeId: 'exdel-start',
             },
             {
                 id: 'digoxin-toxicity',

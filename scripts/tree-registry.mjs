@@ -140,6 +140,7 @@ export const TREE_REGISTRY = {
   'alcohol-withdrawal': { prefix: 'ALCOHOL_WITHDRAWAL', entryNodeId: 'aw-start',          categoryId: 'psychiatry' },
   'psych-triage':      { prefix: 'PSYCH_TRIAGE',       entryNodeId: 'pst-start',          categoryId: 'psychiatry' },
   'acute-agitation':   { prefix: 'ACUTE_AGITATION',    entryNodeId: 'agit-start',         categoryId: 'psychiatry' },
+  'excited-delirium':  { prefix: 'EXCITED_DELIRIUM',   entryNodeId: 'exdel-start',        categoryId: 'emergency-medicine' },
   'suicidal-patient':  { prefix: 'SUICIDAL_PATIENT',   entryNodeId: 'sui-start',          categoryId: 'psychiatry' },
   'medical-clearance-psych': { prefix: 'MEDICAL_CLEARANCE_PSYCH', entryNodeId: 'mcp-start', categoryId: 'psychiatry' },
   'nms': { prefix: 'NMS', entryNodeId: 'nms-start', categoryId: 'psychiatry' },

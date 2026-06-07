@@ -26103,7 +26103,46 @@ const CYA_STOP_PAGE = {
         { num: 1, text: 'EMRA. The Superglued Eye.' },
     ],
 };
+const EXCITED_DELIRIUM_SUMMARY_PAGE = {
+    id: 'excited-delirium-summary',
+    title: 'Excited Delirium / Hyperactive Delirium',
+    subtitle: 'Rapid Resuscitation Steps',
+    sections: [
+        {
+            heading: 'Core Sequence',
+            body: '- Treat as hyperactive delirium with severe agitation, not a final diagnosis.\n- Call team, assign roles, minimize stimulation, and avoid prone/compressive restraint.\n- Immediate threat: chemical control now. Do not delay lifesaving sedation for ECG or labs.\n- Stimulant/hyperthermic phenotype: benzodiazepines, rapid cooling, fluids, and complication surveillance.\n- Immediate violent threat: ketamine 4-5 mg/kg IM when prolonged struggle is more dangerous than dissociation.\n- Undifferentiated severe agitation without high QT/stimulant hyperthermia: droperidol 5-10 mg plus midazolam 5 mg is evidence-supported.\n- Older/frail: start 25-50% lower, avoid routine benzodiazepines unless withdrawal/stimulant/seizure/immediate safety.\n- Severe acidosis: control muscle activity, cool, oxygenate, and match minute ventilation if intubated.\n- Check ECG when safe, especially QT risk, repeated butyrophenone dosing, electrolyte abnormality, chest pain, syncope, stimulant tox, or dysrhythmia.',
+        },
+        {
+            heading: 'Complication Screen',
+            body: '- Core temperature.\n- Glucose, oxygenation, ventilation/ETCO2.\n- VBG/ABG with lactate when severe.\n- ECG, K, Mg, Ca, renal function.\n- CK now and repeat if rising, UA/urine output.\n- Troponin if stimulant, chest pain, dysrhythmia, shock, older patient, or concerning ECG.\n- Coags/fibrinogen/LFTs/platelets if hyperthermia or severe illness.\n- Search for heat stroke, serotonin syndrome, NMS, sepsis, CNS emergency, seizure, withdrawal, toxic ingestion, pain, urinary retention, and trauma.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACEP Clinical Policy: Severe Agitation. Ann Emerg Med. 2024.' },
+        { num: 2, text: 'ACEP Task Force Report on Hyperactive Delirium with Severe Agitation in Emergency Settings.' },
+        { num: 3, text: 'EMCrit IBCC. Sympathomimetic intoxication and withdrawal.' },
+        { num: 4, text: 'AHA CPR/ECC Guidelines. Sympathomimetic poisoning.' },
+    ],
+};
+const EXCITED_DELIRIUM_STOP_PAGE = {
+    id: 'excited-delirium-stop',
+    title: 'Do NOT: Excited Delirium',
+    subtitle: 'High-Risk Pitfalls',
+    sections: [
+        {
+            body: '- Do NOT use "excited delirium" as a final diagnosis or stop looking for the cause.\n- Do NOT leave the patient prone, hog-tied, or compressed under body weight.\n- Do NOT keep escalating physical struggle when chemical control is needed.\n- Do NOT delay lifesaving sedation for ECG, labs, CT, or IV access in an immediate threat.\n- Do NOT use antipsychotic-only sedation as core therapy for stimulant-associated life-threatening hyperthermia.\n- Do NOT give IM olanzapine close to parenteral benzodiazepines.\n- Do NOT forget core temperature, glucose, oxygenation, lactate/pH, CK, renal function, K/Mg/Ca, ECG, and urine output.\n- Do NOT intubate profound metabolic acidosis without a plan to match minute ventilation immediately after paralysis.\n- Do NOT use succinylcholine when hyperkalemia or severe rhabdomyolysis is suspected.\n- Do NOT chase mild asymptomatic hypocalcemia in rhabdomyolysis.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACEP Clinical Policy: Severe Agitation. Ann Emerg Med. 2024.' },
+        { num: 2, text: 'ACEP Task Force Report on Hyperactive Delirium with Severe Agitation in Emergency Settings.' },
+        { num: 3, text: 'AAST Critical Care Committee Clinical Consensus Document: Rhabdomyolysis. 2022.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Excited Delirium / Hyperactive Delirium
+    'excited-delirium-summary': EXCITED_DELIRIUM_SUMMARY_PAGE,
+    'excited-delirium-stop': EXCITED_DELIRIUM_STOP_PAGE,
     // Procedure Scout batch 2026-06-06
     'itn-steps': ITN_STEPS_PAGE,
     'itn-block-dosing': ITN_BLOCK_DOSING_PAGE,

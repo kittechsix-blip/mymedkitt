@@ -12,6 +12,7 @@ const LOCAL_TREE_OVERRIDES = new Set([
     'acute-psychosis',
     'capacity-assessment',
     'catatonia',
+    'excited-delirium',
     'medical-clearance-psych',
     'psych-assessment',
     'psych-triage',
@@ -601,6 +602,10 @@ async function loadHardcodedFallback(treeId) {
         'acute-agitation': async () => {
             const m = await import('../data/trees/acute-agitation.js');
             return { nodes: m.ACUTE_AGITATION_NODES, entryNodeId: 'agit-start', categoryId: 'psychiatry', moduleLabels: m.ACUTE_AGITATION_MODULE_LABELS, citations: m.ACUTE_AGITATION_CITATIONS, criticalActions: m.ACUTE_AGITATION_CRITICAL_ACTIONS };
+        },
+        'excited-delirium': async () => {
+            const m = await import('../data/trees/excited-delirium.js');
+            return { nodes: m.EXCITED_DELIRIUM_NODES, entryNodeId: 'exdel-start', categoryId: 'emergency-medicine', moduleLabels: m.EXCITED_DELIRIUM_MODULE_LABELS, citations: m.EXCITED_DELIRIUM_CITATIONS, criticalActions: m.EXCITED_DELIRIUM_CRITICAL_ACTIONS };
         },
         'suicidal-patient': async () => {
             const m = await import('../data/trees/suicidal-patient.js');
