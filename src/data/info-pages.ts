@@ -26287,6 +26287,14 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
       heading: 'Loop Drainage for Skin Abscesses',
       body: '**Accomplishes:** Drains a large abscess (>5 cm) without painful packing changes; noninferior to standard I&D in adults and superior/less painful in children. [14]\n\n**How to:**\n1. Anesthetize and make a small (~5 mm) stab incision at one edge of the abscess; break up loculations.\n2. Make a second small incision at the opposite edge of the cavity.\n3. Irrigate the cavity through both incisions.\n4. Pass a vessel loop (or a sterile glove/tourniquet strip) through one incision, out the other, and tie the ends loosely \u2014 leave slack, do not tension.\n5. Tell the patient to shower and gently jiggle the loop daily; they cut and remove it at home once drainage stops (usually 7\u201310 days).\n\n**Equipment:** Scalpel, vessel loop (or trimmed sterile glove band/tourniquet), hemostat, irrigation saline, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Incision and loop drainage._',
     },
+    {
+      heading: 'Topical TXA-Soaked Gauze for Oral & Socket Bleeding',
+      body: '**Accomplishes:** Stops oozing dental-socket or oral-mucosal bleeding at the bedside, even in anticoagulated patients, with a cheap readily-stocked agent. [15]\n\n**How to:**\n1. Suction clot and identify the bleeding socket or mucosal site.\n2. Soak a 4x4 gauze with about 500 mg (5 mL) of the 100 mg/mL IV tranexamic acid solution.\n3. Place the soaked gauze directly over the site and have the patient bite down (or hold firm pressure) for 15\u201320 minutes.\n4. Re-inspect; repeat once if still oozing. Escalate to FloSeal, sutures, or ENT/IR if bleeding is brisk or airway is threatened.\n5. Discharge with TXA mouthwash instructions when appropriate.\n\n**Equipment:** 100 mg/mL IV tranexamic acid, 4x4 gauze, suction, syringe.\n\n_Source: ALiEM Trick of the Trade \u2014 Topical tranexamic acid for oral bleeding._',
+    },
+    {
+      heading: 'Apply EMLA Early for Lumbar Punctures',
+      body: '**Accomplishes:** Gives a near-painless skin wheal and improves first-pass LP success in adults and children by starting the slow-onset topical anesthetic at the front of the workup. [16]\n\n**How to:**\n1. The moment an LP is anticipated, apply a thick layer of EMLA (2.5% lidocaine / 2.5% prilocaine) over the target interspaces.\n2. Cover with an occlusive transparent film dressing to drive penetration.\n3. Let it sit at least 60 minutes (use the labs/imaging wait) \u2014 onset is the rate-limiting step, so start it first, not last.\n4. Wipe off, prep, and still infiltrate deeper lidocaine for the track; EMLA only numbs skin.\n5. Safe in neonates \u226537 weeks gestation; avoid with local-anesthetic allergy or methemoglobinemia risk.\n\n**Equipment:** EMLA cream, occlusive film dressing, standard LP kit, lidocaine for deeper infiltration.\n\n_Source: ALiEM Trick of the Trade \u2014 EMLA for lumbar punctures._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -26303,6 +26311,8 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
     { num: 12, text: 'ALiEM. Trick of the Trade: \u201CPunch out\u201D the foreign body. aliem.com.' },
     { num: 13, text: 'ALiEM. Trick of the Trade: Ring removal from a finger (Chavez). aliem.com.' },
     { num: 14, text: 'ALiEM. Trick of the Trade: Incision and loop drainage of abscesses. aliem.com.' },
+    { num: 15, text: 'ALiEM. Trick of the Trade: Topical tranexamic acid paste for hemostasis. aliem.com. See also Wright J, et al. Topical TXA for oral bleed on a DOAC. Clin Pract Cases Emerg Med. 2020.' },
+    { num: 16, text: 'ALiEM. Trick of the Trade: EMLA for lumbar punctures. aliem.com.' },
   ],
 };
 
@@ -26336,6 +26346,10 @@ const TRICKS_ENT_PAGE: InfoPage = {
       heading: 'Acetone to Dissolve a Glued or Foam Ear Foreign Body',
       body: '**Accomplishes:** Chemically softens or dissolves certain ear-canal foreign bodies (Styrofoam beads, a glue/cyanoacrylate plug) so they can be removed atraumatically instead of being grasped and fragmented. [6]\n\n**How to:**\n1. First confirm the tympanic membrane is intact \u2014 acetone is contraindicated with any TM perforation or tympanostomy tube.\n2. Confirm the object is acetone-susceptible (Styrofoam, cyanoacrylate); do NOT use it on organic matter, button batteries, or vegetable foreign bodies that may swell.\n3. Instill a few drops of acetone (nail-polish remover) into the canal with the affected ear up.\n4. Wait about 30 minutes for the object to dissolve or loosen.\n5. Gently suction or irrigate out the softened material; re-examine the canal and TM afterward.\n\n**Equipment:** Acetone (nail-polish remover), dropper, otoscope, suction or irrigation setup.\n\n_Source: ALiEM PEM Pearls \u2014 Search & rescue of ear foreign bodies._',
     },
+    {
+      heading: 'Needle-Cap Bumper Guard for Peritonsillar Abscess Drainage',
+      body: '**Accomplishes:** Prevents over-advancing the spinal needle into the carotid (which sits 2\u20132.5 cm posterolateral to the tonsil) during PTA aspiration by capping insertion depth. [7]\n\n**How to:**\n1. Choose a 3.5-inch 18G spinal needle for the deep narrow oropharynx.\n2. Trim the distal ~1 cm off the plastic needle sheath, then slide it back over the needle so only about 1\u20131.5 cm of tip protrudes.\n3. Tape the cut sheath to the syringe so it cannot slide back during the procedure.\n4. Use POCUS first when available to map carotid depth, then aspirate at the point of maximal fluctuance no deeper than the exposed tip.\n5. For I&D, similarly tape the scalpel guard so the blade only exposes ~1 cm.\n\n**Equipment:** 3.5-inch 18G spinal needle, syringe, scalpel, tape, scissors, POCUS (optional).\n\n_Source: ALiEM Trick of the Trade \u2014 Peritonsillar abscess drainage (Lin & Afarian)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26344,6 +26358,7 @@ const TRICKS_ENT_PAGE: InfoPage = {
     { num: 4, text: 'ALiEM. Trick of the Trade: DIY nasal snot aspirator. aliem.com.' },
     { num: 5, text: 'ALiEM. Trick of the Trade: Ear irrigation in the emergency department. aliem.com.' },
     { num: 6, text: 'ALiEM. PEM Pearls: Search & rescue of ear foreign bodies \u2014 picking the right tool. aliem.com.' },
+    { num: 7, text: 'ALiEM. Trick of the Trade: Peritonsillar abscess needle aspiration / drainage 2.0. aliem.com.' },
   ],
 };
 
@@ -26428,11 +26443,16 @@ const TRICKS_WOUND_PAGE: InfoPage = {
       heading: 'Sterile Gel for Bloody Scalp Lacerations',
       body: '**Accomplishes:** Clears matted blood/clot/hair from a scalp wound for visualization and closure \u2014 without shaving the scalp. [3]\n\n**How to:**\n1. Do preliminary irrigation if needed.\n2. Apply a generous amount of sterile water-soluble lubricating gel to the clotted area and matted hair.\n3. Wait 3\u20135 minutes for the gel to penetrate fibrin and soften clot.\n4. Massage gently in circles with gloved fingers to separate hair and loosen clot.\n5. Irrigate with saline (water-soluble gel rinses away easily).\n6. Proceed with standard cleaning and closure.\n\n**Equipment:** Sterile water-soluble lubricating gel, gloves, irrigation saline.\n\n_Source: ALiEM Tricks of the Trade._',
     },
+    {
+      heading: 'Warm the Local Anesthetic Before Injecting',
+      body: '**Accomplishes:** Cuts injection pain at no cost or risk \u2014 a meta-analysis of 18 studies shows warmed local anesthetic hurts significantly less than room-temperature. [4]\n\n**How to:**\n1. While gathering and prepping the rest of your laceration supplies, set the lidocaine or bupivacaine vial in a small tub of warm water.\n2. Let it sit a few minutes to reach roughly body temperature (about 37\u201340\u00B0C); a warm IV-fluid cabinet or running warm tap water over the vial also works.\n3. Draw up and inject as usual, slowly, with a small-gauge needle.\n4. Note that warming (and buffering) shortens lidocaine shelf life, so warm only what you will use.\n\n**Equipment:** Local anesthetic vial, warm water bath or fluid warmer, syringe, small-gauge needle.\n\n_Source: ALiEM Trick of the Trade \u2014 Heat it up (Hogan meta-analysis, Ann Emerg Med 2011)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 3, text: 'ALiEM. Trick of the Trade: Lubricating gel for bloody scalp lacerations. aliem.com.' },
+    { num: 4, text: 'ALiEM. Trick of the Trade: Heat it up. aliem.com. Hogan ME, et al. Systematic review and meta-analysis of warming local anesthetics on injection pain. Ann Emerg Med. 2011.' },
   ],
 };
 
@@ -27357,7 +27377,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
         rows: [
           {
             cells: {
-              drug: 'Ketamine',
+              drug: '[Ketamine](#/calculator/weight-dose)\nDose: [IV 1-2 mg/kg; IM 4-5 mg/kg](#/calculator/weight-dose)',
               onset: 'IV 30-60 sec; IM 3-5 min',
               duration: 'IV 10-20 min; IM 15-30 min, recovery longer',
               indications: 'Dissociation, analgesia, painful procedures, pediatric procedures, severe danger, bronchospasm',
@@ -27366,7 +27386,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Propofol',
+              drug: '[Propofol](#/calculator/weight-dose)\nDose: [0.5-1 mg/kg IV; redose 0.25-0.5 mg/kg](#/calculator/weight-dose)',
               onset: 'IV 15-60 sec',
               duration: '3-10 min',
               indications: 'Brief deep sedation, cardioversion, reductions, post-intubation deep sedation if BP tolerates',
@@ -27375,7 +27395,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Etomidate',
+              drug: '[Etomidate](#/calculator/weight-dose)\nDose: [0.1-0.2 mg/kg IV PSA; 0.3 mg/kg RSI](#/calculator/weight-dose)',
               onset: 'IV 30-60 sec',
               duration: '3-10 min',
               indications: 'Brief hypnosis when propofol hypotension is a concern, RSI induction, cardioversion/reduction with separate analgesia',
@@ -27384,7 +27404,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Midazolam',
+              drug: '[Midazolam](#/calculator/weight-dose)\nDose: [0.02-0.05 mg/kg IV; 0.2 mg/kg IM/IN max 10 mg](#/calculator/weight-dose)',
               onset: 'IV 1-5 min; IM 5-15 min; IN 5-10 min',
               duration: '30-60 min or longer with repeats/frailty',
               indications: 'Anxiolysis, amnesia, stimulant physiology, withdrawal/seizure pathway, lower-depth procedures with analgesia',
@@ -27393,7 +27413,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Lorazepam / Diazepam',
+              drug: '[Lorazepam / Diazepam](#/calculator/weight-dose)\nDose: [Lorazepam 0.02-0.1 mg/kg IV; Diazepam 0.15-0.2 mg/kg IV](#/calculator/weight-dose)',
               onset: 'IV minutes; diazepam faster than lorazepam',
               duration: 'Hours, longer with repeats and active metabolites',
               indications: 'Withdrawal, seizures, stimulant physiology; not quick procedure turnover',
@@ -27402,7 +27422,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Fentanyl',
+              drug: '[Fentanyl](#/calculator/weight-dose)\nDose: [0.5-1 mcg/kg IV aliquots](#/calculator/weight-dose)',
               onset: 'IV 1-2 min',
               duration: '30-60 min',
               indications: 'Analgesia adjunct for painful procedures; pairs with anxiolytic when lower-depth sedation fits',
@@ -27411,7 +27431,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Droperidol',
+              drug: '[Droperidol](#/calculator/weight-dose)\nDose: [0.05 mg/kg max 5 mg; severe agitation 5-10 mg](#/calculator/weight-dose)',
               onset: 'IV 3-10 min; IM 5-15 min',
               duration: '2-4 h, sometimes longer',
               indications: 'Undifferentiated severe agitation, psychosis/agitation, nausea, migraine/CHS per local practice',
@@ -27420,7 +27440,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Haloperidol',
+              drug: '[Haloperidol](#/calculator/weight-dose)\nDose: [0.05-0.1 mg/kg; typical 2.5-10 mg IM/IV](#/calculator/weight-dose)',
               onset: 'IM 15-30 min; IV faster but monitor QT/EPS',
               duration: '4-8 h or longer',
               indications: 'Psychosis-dominant agitation, delirium agitation when slower onset is acceptable and respiratory depression is undesirable',
@@ -27429,7 +27449,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Olanzapine',
+              drug: '[Olanzapine](#/calculator/weight-dose)\nDose: Fixed adult 5-10 mg IM/ODT; older 2.5-5 mg',
               onset: 'IM 15-30 min; PO/ODT 30-60 min',
               duration: '12-24 h',
               indications: 'Primary psychosis/agitation when longer calming is desired',
@@ -27438,7 +27458,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Ziprasidone (Geodon)',
+              drug: '[Ziprasidone (Geodon)](#/calculator/weight-dose)\nDose: Fixed adult 10-20 mg IM; max 40 mg/day IM',
               onset: 'IM 15-30 min; PO with food 30-60 min',
               duration: '2-4 h acute calming; longer antipsychotic tail possible',
               indications: 'Psychosis-dominant agitation, schizophrenia-associated agitation, lower EPS/metabolic-burden option when slower onset is acceptable',
@@ -27447,7 +27467,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Dexmedetomidine',
+              drug: '[Dexmedetomidine](#/calculator/weight-dose)\nDose: [0.2-0.7 mcg/kg/hr; optional load 0.5-1 mcg/kg](#/calculator/weight-dose)',
               onset: 'No-load 15-30 min; load 5-10 min but often avoided',
               duration: 'Offset often 30-120 min',
               indications: 'Cooperative light sedation, NIV tolerance, extubation bridge, awake airway cooperation, delirium-prone ventilated patient',
@@ -27456,7 +27476,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Phenobarbital',
+              drug: '[Phenobarbital](#/calculator/weight-dose)\nDose: [10-15 mg/kg withdrawal; 15-20 mg/kg seizure](#/calculator/weight-dose)',
               onset: 'IV about 5-30 min depending on rate/endpoint',
               duration: 'Many hours; half-life about 3-4 days',
               indications: 'Alcohol withdrawal, benzodiazepine withdrawal adjunct/alternative, selected seizure/status pathways',
@@ -27465,7 +27485,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Methohexital',
+              drug: '[Methohexital](#/calculator/weight-dose)\nDose: [0.5-1 mg/kg IV](#/calculator/weight-dose)',
               onset: 'IV 30-60 sec',
               duration: '5-10 min',
               indications: 'Uncommon brief deep sedation or cardioversion where local practice supports it',
@@ -27474,7 +27494,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE: InfoPage = {
           },
           {
             cells: {
-              drug: 'Nitrous oxide',
+              drug: '[Nitrous oxide](#/calculator/weight-dose)\nDose: Titrated inhaled 50% N2O/O2; no weight dose',
               onset: '2-5 min',
               duration: '3-5 min after stop',
               indications: 'Brief cooperative procedures, laceration repair, IV start, minor ortho manipulation, fast recovery',

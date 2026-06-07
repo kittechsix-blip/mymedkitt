@@ -26177,7 +26177,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                 rows: [
                     {
                         cells: {
-                            drug: 'Ketamine',
+                            drug: '[Ketamine](#/calculator/weight-dose)\nDose: [IV 1-2 mg/kg; IM 4-5 mg/kg](#/calculator/weight-dose)',
                             onset: 'IV 30-60 sec; IM 3-5 min',
                             duration: 'IV 10-20 min; IM 15-30 min, recovery longer',
                             indications: 'Dissociation, analgesia, painful procedures, pediatric procedures, severe danger, bronchospasm',
@@ -26186,7 +26186,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Propofol',
+                            drug: '[Propofol](#/calculator/weight-dose)\nDose: [0.5-1 mg/kg IV; redose 0.25-0.5 mg/kg](#/calculator/weight-dose)',
                             onset: 'IV 15-60 sec',
                             duration: '3-10 min',
                             indications: 'Brief deep sedation, cardioversion, reductions, post-intubation deep sedation if BP tolerates',
@@ -26195,7 +26195,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Etomidate',
+                            drug: '[Etomidate](#/calculator/weight-dose)\nDose: [0.1-0.2 mg/kg IV PSA; 0.3 mg/kg RSI](#/calculator/weight-dose)',
                             onset: 'IV 30-60 sec',
                             duration: '3-10 min',
                             indications: 'Brief hypnosis when propofol hypotension is a concern, RSI induction, cardioversion/reduction with separate analgesia',
@@ -26204,7 +26204,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Midazolam',
+                            drug: '[Midazolam](#/calculator/weight-dose)\nDose: [0.02-0.05 mg/kg IV; 0.2 mg/kg IM/IN max 10 mg](#/calculator/weight-dose)',
                             onset: 'IV 1-5 min; IM 5-15 min; IN 5-10 min',
                             duration: '30-60 min or longer with repeats/frailty',
                             indications: 'Anxiolysis, amnesia, stimulant physiology, withdrawal/seizure pathway, lower-depth procedures with analgesia',
@@ -26213,7 +26213,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Lorazepam / Diazepam',
+                            drug: '[Lorazepam / Diazepam](#/calculator/weight-dose)\nDose: [Lorazepam 0.02-0.1 mg/kg IV; Diazepam 0.15-0.2 mg/kg IV](#/calculator/weight-dose)',
                             onset: 'IV minutes; diazepam faster than lorazepam',
                             duration: 'Hours, longer with repeats and active metabolites',
                             indications: 'Withdrawal, seizures, stimulant physiology; not quick procedure turnover',
@@ -26222,7 +26222,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Fentanyl',
+                            drug: '[Fentanyl](#/calculator/weight-dose)\nDose: [0.5-1 mcg/kg IV aliquots](#/calculator/weight-dose)',
                             onset: 'IV 1-2 min',
                             duration: '30-60 min',
                             indications: 'Analgesia adjunct for painful procedures; pairs with anxiolytic when lower-depth sedation fits',
@@ -26231,7 +26231,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Droperidol',
+                            drug: '[Droperidol](#/calculator/weight-dose)\nDose: [0.05 mg/kg max 5 mg; severe agitation 5-10 mg](#/calculator/weight-dose)',
                             onset: 'IV 3-10 min; IM 5-15 min',
                             duration: '2-4 h, sometimes longer',
                             indications: 'Undifferentiated severe agitation, psychosis/agitation, nausea, migraine/CHS per local practice',
@@ -26240,7 +26240,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Haloperidol',
+                            drug: '[Haloperidol](#/calculator/weight-dose)\nDose: [0.05-0.1 mg/kg; typical 2.5-10 mg IM/IV](#/calculator/weight-dose)',
                             onset: 'IM 15-30 min; IV faster but monitor QT/EPS',
                             duration: '4-8 h or longer',
                             indications: 'Psychosis-dominant agitation, delirium agitation when slower onset is acceptable and respiratory depression is undesirable',
@@ -26249,7 +26249,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Olanzapine',
+                            drug: '[Olanzapine](#/calculator/weight-dose)\nDose: Fixed adult 5-10 mg IM/ODT; older 2.5-5 mg',
                             onset: 'IM 15-30 min; PO/ODT 30-60 min',
                             duration: '12-24 h',
                             indications: 'Primary psychosis/agitation when longer calming is desired',
@@ -26258,7 +26258,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Ziprasidone (Geodon)',
+                            drug: '[Ziprasidone (Geodon)](#/calculator/weight-dose)\nDose: Fixed adult 10-20 mg IM; max 40 mg/day IM',
                             onset: 'IM 15-30 min; PO with food 30-60 min',
                             duration: '2-4 h acute calming; longer antipsychotic tail possible',
                             indications: 'Psychosis-dominant agitation, schizophrenia-associated agitation, lower EPS/metabolic-burden option when slower onset is acceptable',
@@ -26267,7 +26267,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Dexmedetomidine',
+                            drug: '[Dexmedetomidine](#/calculator/weight-dose)\nDose: [0.2-0.7 mcg/kg/hr; optional load 0.5-1 mcg/kg](#/calculator/weight-dose)',
                             onset: 'No-load 15-30 min; load 5-10 min but often avoided',
                             duration: 'Offset often 30-120 min',
                             indications: 'Cooperative light sedation, NIV tolerance, extubation bridge, awake airway cooperation, delirium-prone ventilated patient',
@@ -26276,7 +26276,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Phenobarbital',
+                            drug: '[Phenobarbital](#/calculator/weight-dose)\nDose: [10-15 mg/kg withdrawal; 15-20 mg/kg seizure](#/calculator/weight-dose)',
                             onset: 'IV about 5-30 min depending on rate/endpoint',
                             duration: 'Many hours; half-life about 3-4 days',
                             indications: 'Alcohol withdrawal, benzodiazepine withdrawal adjunct/alternative, selected seizure/status pathways',
@@ -26285,7 +26285,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Methohexital',
+                            drug: '[Methohexital](#/calculator/weight-dose)\nDose: [0.5-1 mg/kg IV](#/calculator/weight-dose)',
                             onset: 'IV 30-60 sec',
                             duration: '5-10 min',
                             indications: 'Uncommon brief deep sedation or cardioversion where local practice supports it',
@@ -26294,7 +26294,7 @@ const SEDATION_OPTIONS_SLIDE_PAGE = {
                     },
                     {
                         cells: {
-                            drug: 'Nitrous oxide',
+                            drug: '[Nitrous oxide](#/calculator/weight-dose)\nDose: Titrated inhaled 50% N2O/O2; no weight dose',
                             onset: '2-5 min',
                             duration: '3-5 min after stop',
                             indications: 'Brief cooperative procedures, laceration repair, IV start, minor ortho manipulation, fast recovery',

@@ -221,7 +221,7 @@ function renderComparisonTable(tableData: InfoComparisonTable): HTMLElement {
     for (const column of tableData.columns) {
       const td = document.createElement('td');
       td.dataset.columnKey = column.key;
-      renderInfoBodyLine(td, row.cells[column.key] ?? '');
+      renderComparisonCell(td, column.key, row.cells[column.key] ?? '');
       tr.appendChild(td);
     }
     tbody.appendChild(tr);
@@ -230,6 +230,39 @@ function renderComparisonTable(tableData: InfoComparisonTable): HTMLElement {
   wrap.appendChild(table);
 
   return wrap;
+}
+
+function renderComparisonCell(td: HTMLElement, columnKey: string, value: string): void {
+  const lines = value.split('\n').map((line) => line.trim()).filter(Boolean);
+  if (lines.length <= 1) {
+    renderInfoBodyLine(td, value);
+    return;
+  }
+
+  td.classList.add('info-page-comparison-cell--stacked');
+  if (columnKey === 'drug') {
+    td.classList.add('info-page-comparison-cell--drug');
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = document.createElement('div');
+    line.className = getComparisonCellLineClass(columnKey, i);
+    renderInfoBodyLine(line, lines[i]);
+    td.appendChild(line);
+  }
+}
+
+function getComparisonCellLineClass(columnKey: string, lineIndex: number): string {
+  if (columnKey !== 'drug') {
+    return 'info-page-comparison-cell-line';
+  }
+  if (lineIndex === 0) {
+    return 'info-page-comparison-drug-name';
+  }
+  if (lineIndex === 1) {
+    return 'info-page-comparison-drug-dose';
+  }
+  return 'info-page-comparison-drug-note';
 }
 
 // -------------------------------------------------------------------
