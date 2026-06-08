@@ -26295,6 +26295,14 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
       heading: 'Apply EMLA Early for Lumbar Punctures',
       body: '**Accomplishes:** Gives a near-painless skin wheal and improves first-pass LP success in adults and children by starting the slow-onset topical anesthetic at the front of the workup. [16]\n\n**How to:**\n1. The moment an LP is anticipated, apply a thick layer of EMLA (2.5% lidocaine / 2.5% prilocaine) over the target interspaces.\n2. Cover with an occlusive transparent film dressing to drive penetration.\n3. Let it sit at least 60 minutes (use the labs/imaging wait) \u2014 onset is the rate-limiting step, so start it first, not last.\n4. Wipe off, prep, and still infiltrate deeper lidocaine for the track; EMLA only numbs skin.\n5. Safe in neonates \u226537 weeks gestation; avoid with local-anesthetic allergy or methemoglobinemia risk.\n\n**Equipment:** EMLA cream, occlusive film dressing, standard LP kit, lidocaine for deeper infiltration.\n\n_Source: ALiEM Trick of the Trade \u2014 EMLA for lumbar punctures._',
     },
+    {
+      heading: 'Ultrasound-Guided Supraclavicular Subclavian Line',
+      body: '**Accomplishes:** Gives a sonographically visible, real-time approach to the subclavian vein when the clavicle blocks the usual infraclavicular view \u2014 useful when IJ and femoral sites are unavailable. [17]\n\n**How to:**\n1. Place the patient supine, head slightly turned away; the target site sits just lateral to the clavicular head of the sternocleidomastoid.\n2. Use a small-footprint endocavitary (curved) probe \u2014 it nests into the supraclavicular fossa better than a flat linear probe.\n3. Angle the probe to get a long-axis view of the subclavian vein where it joins the internal jugular.\n4. Advance the needle in-plane under continuous ultrasound, watching the tip enter the vein, then thread the wire by Seldinger technique.\n\n**Equipment:** Endocavitary/curved ultrasound probe, central line kit, sterile probe cover.\n\n_Source: ALiEM Trick of the Trade \u2014 US-guided supraclavicular subclavian cannulation (Mallin, Am J Emerg Med)._',
+    },
+    {
+      heading: 'Needle-to-Needle Ultrasound Alignment for a Retained Needle',
+      body: '**Accomplishes:** Locates and extracts a broken-off or deeply embedded metallic needle by lining up an introducer needle exactly parallel to it under ultrasound, so you dig in the right plane instead of blindly. [18]\n\n**How to:**\n1. Find the retained needle on ultrasound and rotate the probe until you see its full length in long axis (a bright linear echo).\n2. Anesthetize, then introduce a large-gauge (14\u201316G) needle in-plane alongside the probe.\n3. Adjust your needle\u2019s angle until both needles appear as parallel bright lines in the same long-axis view \u2014 that confirms you are tracking the same depth and plane.\n4. Advance your needle to the tip of the foreign body and use it as a guide to grasp and withdraw the retained needle through a small incision.\n\n**Equipment:** Ultrasound with linear probe, 14\u201316G needle, local anesthetic, scalpel, hemostat/forceps.\n\n_Source: ALiEM Trick of the Trade \u2014 Needle foreign body removal._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -26313,6 +26321,8 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
     { num: 14, text: 'ALiEM. Trick of the Trade: Incision and loop drainage of abscesses. aliem.com.' },
     { num: 15, text: 'ALiEM. Trick of the Trade: Topical tranexamic acid paste for hemostasis. aliem.com. See also Wright J, et al. Topical TXA for oral bleed on a DOAC. Clin Pract Cases Emerg Med. 2020.' },
     { num: 16, text: 'ALiEM. Trick of the Trade: EMLA for lumbar punctures. aliem.com.' },
+    { num: 17, text: 'ALiEM. Trick of the Trade: Ultrasound-guided supraclavicular central line. aliem.com. Mallin M, et al. A novel technique for ultrasound-guided supraclavicular subclavian cannulation. Am J Emerg Med.' },
+    { num: 18, text: 'ALiEM. Trick of the Trade: Needle foreign body removal. aliem.com.' },
   ],
 };
 
@@ -26384,12 +26394,17 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
       heading: 'Nasal Cannula for High-Volume Eye Irrigation',
       body: '**Accomplishes:** Hands-light, well-tolerated continuous eye irrigation for chemical exposures \u2014 a cheaper, more comfortable alternative to the Morgan lens that every ED already stocks. [4]\n\n**How to:**\n1. Anesthetize the eye with a topical drop first (e.g., proparacaine) and check/adjust pH after irrigating.\n2. Attach a standard nasal cannula to IV tubing spiked into a 1 L crystalloid bag (the tubing fits snugly into the cannula).\n3. Rest the nasal prongs across the bridge of the nose so each prong directs flow into one eye.\n4. Open the IV tubing wide and let the saline flood both eyes; have the patient look in all directions to irrigate the fornices.\n5. Catch runoff in a basin or with towels; continue until the target volume/pH is reached.\n\n**Equipment:** Nasal cannula, IV tubing, 1 L crystalloid bag(s), topical anesthetic, pH paper, collection basin/towels.\n\n_Source: ALiEM Trick of the Trade \u2014 Eye irrigation setup._',
     },
+    {
+      heading: 'Photograph Slit-Lamp Findings With a Smartphone',
+      body: '**Accomplishes:** Captures a sharable image of a dendritic ulcer, abrasion pattern, or corneal edema to send to ophthalmology \u2014 no expensive camera adapter required. [5]\n\n**How to:**\n1. Position the patient comfortably at the slit lamp and focus the finding through the eyepiece as usual.\n2. Without moving the slit lamp or the patient, step back from the eyepiece.\n3. Hold the smartphone camera lens flush against the eyepiece where your eye just was.\n4. Let the camera autofocus on the illuminated image, then capture; a small adapter steadies it but is optional.\n\n**Equipment:** Slit lamp, smartphone camera.\n\n_Source: ALiEM Trick of the Trade \u2014 Photograph slit lamp findings (Silver/Lin)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 2, text: 'ALiEM. Trick of the Trade: Antibiotic ointment for nail-glue removal from eyelids. aliem.com.' },
     { num: 3, text: 'ALiEM. Trick of the Trade: Super-sensitive to eyedrops. aliem.com.' },
     { num: 4, text: 'ALiEM. Trick of the Trade: Eye irrigation setup with a nasal cannula. aliem.com.' },
+    { num: 5, text: 'ALiEM. Trick of the Trade: Photograph slit lamp findings. aliem.com.' },
   ],
 };
 
@@ -26470,10 +26485,15 @@ const TRICKS_CARDIOLOGY_PAGE: InfoPage = {
       heading: 'Modified Valsalva (REVERT) to Convert Stable SVT',
       body: '**Accomplishes:** Roughly doubles cardioversion of stable SVT versus the standard strain (43% vs 17% in the REVERT trial) and often spares the patient adenosine. [2]\n\n**How to:**\n1. Confirm the patient is hemodynamically stable and sit them semi-upright (Fowler\u2019s) on a gurney.\n2. Strain phase: have them blow into a 10 mL syringe just hard enough to move the plunger (~40 mmHg) for 15 seconds (a 10 mL syringe reliably generates this pressure).\n3. Immediately at the end of the strain, lay them flat and have an assistant passively raise both legs to ~45\u00B0 for 15 seconds.\n4. Return the patient to semi-upright and re-check the rhythm/monitor after about a minute.\n5. Repeat once if needed before escalating to adenosine.\n\n**Equipment:** 10 mL syringe, gurney that reclines, an assistant to raise the legs, cardiac monitor.\n\n_Source: Appelboam et al., REVERT trial (Lancet 2015) \u2014 via ALiEM / REBEL EM._',
     },
+    {
+      heading: 'Single-Syringe Adenosine for SVT (No Stopcock)',
+      body: '**Accomplishes:** Delivers a fast adenosine bolus solo, diluting the drug with saline in one syringe so it reaches the AV node before the short half-life expires \u2014 no stopcock, extension tubing, or second nurse needed. [3]\n\n**How to:**\n1. Draw 6 mg (2 mL) of adenosine into a 20 mL syringe, then draw saline up to a total of 20 mL (a 10 mL syringe with 5\u201318 mL of saline also works if 20 mL is unavailable).\n2. Connect directly to the IV hub closest to the patient (an antecubital or more proximal vein is ideal).\n3. Push the entire 20 mL as fast as you physically can, in 1\u20132 seconds.\n4. Watch the monitor; if SVT persists, repeat with 12 mg (4 mL) of adenosine topped to 20 mL with saline.\n\n**Equipment:** 20 mL (or 10 mL) syringe, adenosine, normal saline, IV with a proximal hub, cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Combine adenosine with the flush (single-syringe technique); McDowell, Acad Emerg Med 2020._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
     { num: 2, text: 'Appelboam A, et al. Postural modification to the standard Valsalva manoeuvre for emergency treatment of supraventricular tachycardias (REVERT). Lancet 2015. rebelem.com.' },
+    { num: 3, text: 'ALiEM. Trick of the Trade: Combine adenosine with the flush \u2014 single-syringe technique. aliem.com. McDowell M, et al. Single-syringe administration of diluted adenosine. Acad Emerg Med. 2020;27(1):61-63.' },
   ],
 };
 
@@ -26503,6 +26523,10 @@ const TRICKS_NEURO_PAGE: InfoPage = {
       heading: 'Transnasal Sphenopalatine Ganglion Block for Headache',
       body: '**Accomplishes:** Aborts refractory migraine, cluster, or post-dural-puncture headache noninvasively with only a cotton swab and lidocaine \u2014 no needles, no opioids. [6]\n\n**How to:**\n1. Put the patient supine in the sniffing position and place them on a monitor (nasal mucosa is highly vascular).\n2. Soak a long 10 cm cotton-tipped applicator in 1\u20134% lidocaine (or 0.5% bupivacaine).\n3. Insert it into the naris on the headache side, advancing along the superior border of the middle turbinate.\n4. Apply firm, steady pressure (like seating nasal packing) until you meet the posterior nasopharyngeal wall.\n5. Leave it in place 5\u201310 minutes; relief is often dramatic. Repeat on the other side for bilateral pain.\n\n**Equipment:** Two long 10 cm cotton-tipped applicators, 1\u20134% lidocaine or 0.5% bupivacaine, cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Sphenopalatine ganglion block for primary headaches (Shih)._',
     },
+    {
+      heading: 'Smartphone Selfie Mode for Gaze Testing in Aphasic Patients',
+      body: '**Accomplishes:** Tests voluntary horizontal gaze (NIHSS \u201Cbest gaze\u201D) in a patient who can\u2019t follow verbal commands, by exploiting their reflex to track their own familiar face on the screen. [7]\n\n**How to:**\n1. Open the phone\u2019s camera app and switch to \u201Cselfie\u201D (front-facing) mode.\n2. Hold the screen ~30\u201340 cm in front of the patient so they see their own face.\n3. Slowly move the phone side to side and watch whether the eyes track horizontally in both directions.\n4. Note any conjugate gaze deviation or failure to cross midline as you would on the formal NIHSS.\n\n**Equipment:** Smartphone with a front-facing camera.\n\n_Source: ALiEM Trick of the Trade \u2014 Gaze testing using selfie mode (Bortolon 2017)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26511,6 +26535,7 @@ const TRICKS_NEURO_PAGE: InfoPage = {
     { num: 4, text: 'Piatka C, Beckett RD. Propofol for Treatment of Acute Migraine in the Emergency Department: A Systematic Review. Acad Emerg Med. 2020;27(2):148-160.' },
     { num: 5, text: 'Robblee J, et al. 2025 guideline update to acute treatment of migraine for adults in the ED: American Headache Society evidence assessment of parenteral pharmacotherapies. Headache. 2026;66(1):53-76.' },
     { num: 6, text: 'ALiEM. Trick of the Trade: Sphenopalatine ganglion block for treatment of primary headaches. aliem.com.' },
+    { num: 7, text: 'ALiEM. Trick of the Trade: Gaze testing using \u201Cselfie mode\u201D on your smartphone camera. aliem.com. Bortolon C, et al. 2017.' },
   ],
 };
 

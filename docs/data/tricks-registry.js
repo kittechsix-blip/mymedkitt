@@ -27,7 +27,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 16,
+        trickCount: 18,
     },
     {
         id: 'ent',
@@ -54,7 +54,7 @@ export const TRICK_SPECIALTIES = [
         color: '#2E7D32',
         subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
         infoPageId: 'tricks-ophtho',
-        trickCount: 4,
+        trickCount: 5,
     },
     {
         id: 'urology',
@@ -81,7 +81,7 @@ export const TRICK_SPECIALTIES = [
         color: '#C62828',
         subtitle: 'Rapid adenosine delivery and rhythm tricks.',
         infoPageId: 'tricks-cardiology',
-        trickCount: 2,
+        trickCount: 3,
     },
     {
         id: 'neuro',
@@ -90,7 +90,7 @@ export const TRICK_SPECIALTIES = [
         color: '#4527A0',
         subtitle: 'Bedside CN testing, BPPV maneuvers, and refractory migraine rescue.',
         infoPageId: 'tricks-neuro',
-        trickCount: 5,
+        trickCount: 6,
     },
     {
         id: 'tox',
