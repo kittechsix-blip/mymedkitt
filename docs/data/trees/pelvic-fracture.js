@@ -1,7 +1,7 @@
 // MedKitt — Pelvic Fracture Management
 // High-energy mechanism → assessment → hemodynamic stabilization → classification → urogenital evaluation → definitive management
 // 5 modules: Assessment → Hemodynamic → Classification → Urogenital → Definitive Management
-// 42 nodes total.
+// 40 nodes total.
 export const PELVIC_FRACTURE_CRITICAL_ACTIONS = [
     { text: 'Apply pelvic binder immediately at level of greater trochanters (NOT iliac crests)', nodeId: 'pelvic-unstable' },
     { text: 'TXA 1g IV load within 3h of injury, then 1g over 8h - mortality benefit', nodeId: 'pelvic-unstable' },

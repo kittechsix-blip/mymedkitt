@@ -5,10 +5,10 @@
 export const GLOBE_RUPTURE_CRITICAL_ACTIONS = [
     { text: 'Protect the eye with a rigid eye shield immediately', nodeId: 'globe-start' },
     { text: 'DO NOT manipulate the eye, remove foreign bodies, or check IOP', nodeId: 'globe-start' },
-    { text: 'Give IV antibiotics (ceftriaxone 1-2g + vancomycin 15mg/kg)', nodeId: 'globe-antibiotics' },
-    { text: 'Update tetanus prophylaxis', nodeId: 'globe-antibiotics' },
-    { text: 'Give anti-emetics to prevent Valsalva-induced IOP spikes', nodeId: 'globe-antibiotics' },
-    { text: 'Obtain CT orbits (3mm axial/coronal, no contrast) to confirm diagnosis', nodeId: 'globe-imaging' },
+    { text: 'Give IV antibiotics (vancomycin 15mg/kg + ceftazidime 50mg/kg)', nodeId: 'globe-antibiotics' },
+    { text: 'Update tetanus prophylaxis', nodeId: 'globe-tetanus' },
+    { text: 'Give anti-emetics to prevent Valsalva-induced IOP spikes', nodeId: 'globe-protect' },
+    { text: 'Obtain CT orbits (1-1.5mm thin cuts, no contrast) to confirm diagnosis', nodeId: 'globe-imaging' },
     { text: 'Immediate ophthalmology consult for surgical repair', nodeId: 'globe-consult' },
     { text: 'Keep patient NPO for emergent surgery', nodeId: 'globe-dispo' },
 ];

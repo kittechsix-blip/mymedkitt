@@ -2,7 +2,7 @@
 // ED evaluation and management of penetrating and blunt neck trauma
 // Sources: EAST Guidelines 2020, WTA Multicenter Study, AAST
 // 6 modules: Primary Survey → Zone Assessment → Hard Signs → Imaging → Airway → Disposition
-// ~20 nodes
+// 23 nodes
 export const NECK_TRAUMA_NODES = [
     // =====================================================================
     // MODULE 1: PRIMARY SURVEY

@@ -2,7 +2,7 @@
 // Evidence-based management: primary vs secondary, severity assessment, TXA, ENT criteria
 // AAO-HNS guidelines, pediatric airway considerations, blood product thresholds
 // 6 modules: Initial → Severity → Hemostasis → TXA → Airway → Disposition
-// 24 nodes total.
+// 21 nodes total.
 export const PTH_CRITICAL_ACTIONS = [
     { text: 'Primary risk is ASPIRATION, not exsanguination — position upright, suction available', nodeId: 'pth-initial' },
     { text: 'Secondary hemorrhage (days 5-10) more common than primary; sloughing of fibrin clot', nodeId: 'pth-timing' },
