@@ -25173,6 +25173,14 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Needle-to-Needle Ultrasound Alignment for a Retained Needle',
             body: '**Accomplishes:** Locates and extracts a broken-off or deeply embedded metallic needle by lining up an introducer needle exactly parallel to it under ultrasound, so you dig in the right plane instead of blindly. [18]\n\n**How to:**\n1. Find the retained needle on ultrasound and rotate the probe until you see its full length in long axis (a bright linear echo).\n2. Anesthetize, then introduce a large-gauge (14\u201316G) needle in-plane alongside the probe.\n3. Adjust your needle\u2019s angle until both needles appear as parallel bright lines in the same long-axis view \u2014 that confirms you are tracking the same depth and plane.\n4. Advance your needle to the tip of the foreign body and use it as a guide to grasp and withdraw the retained needle through a small incision.\n\n**Equipment:** Ultrasound with linear probe, 14\u201316G needle, local anesthetic, scalpel, hemostat/forceps.\n\n_Source: ALiEM Trick of the Trade \u2014 Needle foreign body removal._',
         },
+        {
+            heading: 'Water-Bath Ultrasound for a Soft-Tissue Foreign Body',
+            body: '**Accomplishes:** Sharper imaging of a superficial foreign body or distal-extremity structure by submerging the part \u2014 the water standoff removes near-field artifact and lets you scan a tender area without pressing on it. [19]\n\n**How to:**\n1. Fill a basin with room-temperature water and submerge the affected hand or foot.\n2. Hold the linear transducer perpendicular to the skin, about 1 cm OFF the surface, fully under the water.\n3. The water column acts as a built-in standoff pad, so you image the foreign body in the optimized focal zone with no probe pressure or pain.\n4. Fan through the area; wood, glass, and plastic show as bright echoes, often with posterior shadowing or reverberation.\n\n**Equipment:** Basin of water, ultrasound with linear probe.\n\n_Source: ALiEM Trick of the Trade \u2014 Water-bath (underwater) ultrasonography._',
+        },
+        {
+            heading: 'Cutting Needle to Release a Refractory Hair Tourniquet',
+            body: '**Accomplishes:** Cleanly severs a hair/thread tourniquet strangling an infant\u2019s toe or finger when edema hides the strand and forceps unwrapping has failed \u2014 averting ischemia and digit loss. [20]\n\n**How to:**\n1. Examine the deep crease circumferentially; the constricting hair is often invisible against skin once the digit is swollen.\n2. Apply a digital block / topical anesthetic and immobilize the digit.\n3. Pick the dorsal midline (extensor surface), where the neurovascular bundles are NOT, as your cut site.\n4. Lay a small cutting (e.g., PC-1) needle flat into the depth of the groove and lever/cut outward across the band until the strand divides and the constriction releases.\n5. Confirm the full strand is freed and reperfusion returns; if circumferential release fails, incise to bone along the lateral digit per plastics guidance.\n\n**Equipment:** PC-1 (or similar) cutting needle, fine forceps, digital-block supplies, loupe/good light.\n\n_Source: ALiEM Trick of the Trade \u2014 Hair tourniquet release with a cutting needle (Morris)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25193,6 +25201,8 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 16, text: 'ALiEM. Trick of the Trade: EMLA for lumbar punctures. aliem.com.' },
         { num: 17, text: 'ALiEM. Trick of the Trade: Ultrasound-guided supraclavicular central line. aliem.com. Mallin M, et al. A novel technique for ultrasound-guided supraclavicular subclavian cannulation. Am J Emerg Med.' },
         { num: 18, text: 'ALiEM. Trick of the Trade: Needle foreign body removal. aliem.com.' },
+        { num: 19, text: 'ALiEM. Trick of the Trade: Underwater (water-bath) ultrasonography for foreign body detection. aliem.com.' },
+        { num: 20, text: 'ALiEM. Trick of the Trade: Hair tourniquet release using a cutting needle (Morris). aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25229,6 +25239,14 @@ const TRICKS_ENT_PAGE = {
             heading: 'Needle-Cap Bumper Guard for Peritonsillar Abscess Drainage',
             body: '**Accomplishes:** Prevents over-advancing the spinal needle into the carotid (which sits 2\u20132.5 cm posterolateral to the tonsil) during PTA aspiration by capping insertion depth. [7]\n\n**How to:**\n1. Choose a 3.5-inch 18G spinal needle for the deep narrow oropharynx.\n2. Trim the distal ~1 cm off the plastic needle sheath, then slide it back over the needle so only about 1\u20131.5 cm of tip protrudes.\n3. Tape the cut sheath to the syringe so it cannot slide back during the procedure.\n4. Use POCUS first when available to map carotid depth, then aspirate at the point of maximal fluctuance no deeper than the exposed tip.\n5. For I&D, similarly tape the scalpel guard so the blade only exposes ~1 cm.\n\n**Equipment:** 3.5-inch 18G spinal needle, syringe, scalpel, tape, scissors, POCUS (optional).\n\n_Source: ALiEM Trick of the Trade \u2014 Peritonsillar abscess drainage (Lin & Afarian)._',
         },
+        {
+            heading: 'Magnetized Hemostat to Retrieve a Metallic Ear/Nose Foreign Body',
+            body: '**Accomplishes:** Extracts a small ferromagnetic object (a BB, button-cell fragment, metal bead) from the ear canal or nose without grasping and pushing it deeper, using gear every ED already stocks. [8]\n\n**How to:**\n1. Confirm the object is metallic and likely ferromagnetic on history/exam (and on x-ray if a button battery must be excluded \u2014 batteries need urgent removal, not delay).\n2. Grab the donut-shaped cardiac/pacemaker magnet kept for defibrillator troubleshooting.\n3. Touch the tip of a metal hemostat or alligator forceps to the magnet for several seconds \u2014 this temporarily magnetizes the instrument tip.\n4. Advance the now-magnetized tip up to (not past) the object under direct visualization; the metal jumps onto the tip.\n5. Withdraw slowly, keeping the object on the tip; re-examine the canal/naris and TM afterward.\n\n**Equipment:** Cardiac/pacemaker magnet, metal hemostat or alligator forceps, otoscope/headlamp.\n\n_Source: ALiEM Trick of the Trade \u2014 Magnet trick for metallic foreign body removal._',
+        },
+        {
+            heading: 'Tongue-Blade Bite Test to Screen for Mandible Fracture',
+            body: '**Accomplishes:** A fast, no-cost bedside screen for mandibular fracture \u2014 roughly 95\u201396% sensitive, so a clearly normal test makes fracture unlikely and helps prioritize imaging. [9]\n\n**How to:**\n1. Place a wooden tongue blade between the patient\u2019s molars on one side and ask them to bite down hard.\n2. Grasp the protruding end and twist/torque it, trying to snap the blade against their clenched bite.\n3. A patient with an intact mandible bites hard enough that you can rotate and crack the blade.\n4. A patient who releases the bite or cannot tolerate the torque from pain is a POSITIVE test \u2014 image the mandible.\n5. Test both sides; pair with exam for malocclusion, step-off, and sublingual hematoma. It is a screen, not a rule-out \u2014 image if clinical suspicion is high.\n\n**Equipment:** Wooden tongue blade(s).\n\n_Source: ALiEM Trick of the Trade \u2014 The tongue blade test for mandible fracture (Lin)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25238,6 +25256,8 @@ const TRICKS_ENT_PAGE = {
         { num: 5, text: 'ALiEM. Trick of the Trade: Ear irrigation in the emergency department. aliem.com.' },
         { num: 6, text: 'ALiEM. PEM Pearls: Search & rescue of ear foreign bodies \u2014 picking the right tool. aliem.com.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Peritonsillar abscess needle aspiration / drainage 2.0. aliem.com.' },
+        { num: 8, text: 'ALiEM. Trick of the Trade: Another magnet trick for metallic foreign body removal. aliem.com.' },
+        { num: 9, text: 'ALiEM. Trick of the Trade: A tongue blade is as mighty as an x-ray (mandible fracture screen). aliem.com. Schwab RA, et al. The tongue blade test. Acad Emerg Med.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25711,6 +25731,10 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Dextrose + Lidocaine Prolotherapy for Chronic Joint Pain',
             body: '**Accomplishes:** Offers an outpatient/sports-medicine option for chronic osteoarthritis-type joint pain when standard conservative therapy is limited or ineffective. Evidence is best for knee OA, with potential pain/function benefit but variable study quality. This is not an ED hot-joint injection trick. [15,16]\n\n**How to:**\n1. Use only after diagnosis is clear: chronic OA or ligament/tendon-related pain, not undifferentiated acute monoarthritis.\n2. Do NOT inject a joint with fever, erythema, severe warmth, rapidly worsening effusion, immunocompromise concern, bacteremia risk, fracture, overlying cellulitis, or possible septic arthritis/crystal arthritis needing arthrocentesis.\n3. Discuss as a planned outpatient injection strategy, ideally ultrasound-guided and performed by sports med/PM&R/orthopedics or a clinician trained in prolotherapy.\n4. Common research protocols use hypertonic dextrose mixed with lidocaine, with extra-articular tender-point injections plus intra-articular injection over multiple sessions. Example knee OA research mixtures include 10-25% dextrose with dilute lidocaine, not D50 injected straight into the joint.\n5. Counsel that this is not immediate anti-inflammatory rescue like NSAID/steroid therapy. The expected benefit, if it occurs, is delayed symptom improvement over weeks to months.\n\n**Do NOT use if:** suspected infection, inflammatory/crystal flare not yet evaluated, prosthetic joint without specialist input, anticoagulation/bleeding risk not addressed, uncontrolled diabetes risk not considered, allergy to injectate, or no sterile technique/landmark confidence.\n\n**Equipment:** Sterile injection setup, local anesthetic, dextrose dilution prepared to protocol, ultrasound if available, clinician trained in joint injection/prolotherapy.\n\n_Source: Dextrose prolotherapy knee OA RCTs and systematic reviews. Keep as an outpatient chronic joint-pain option, not acute septic/inflammatory joint management._',
         },
+        {
+            heading: 'Stacked Tongue Blades to Reduce a TMJ Dislocation',
+            body: '**Accomplishes:** Relocates an acute jaw (temporomandibular) dislocation without putting your thumbs at bite-risk inside the mouth, by fatiguing the spasmed masseters with a sustained over-stretch. [17]\n\n**How to:**\n1. Confirm a true anterior TMJ dislocation (open-locked jaw, often bilateral after a wide yawn); consider procedural analgesia or a masseter/auriculotemporal block for spasm.\n2. Build a stack of several wooden tongue blades and place it between the molars on the dislocated side.\n3. Have the patient bite gently on the stack, which OVER-exaggerates the open position and stretches the chewing muscles even further.\n4. Hold that sustained stretch for a few minutes until the masseter/temporalis fatigue and relax.\n5. Remove the stack \u2014 in the brief relaxation window the condyle slides back under the articular eminence; if it self-reduces, great; if not, add gentle downward-then-posterior pressure on the molars. Advise a soft diet and to avoid wide opening.\n\n**Equipment:** A stack of wooden tongue blades; optional intra-articular or masseter local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Temporomandibular (TMJ) dislocation reduction._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25729,6 +25753,7 @@ const TRICKS_ORTHO_PAGE = {
         { num: 14, text: 'ALiEM. Trick of the Trade: Park method (axillary fulcrum) for shoulder dislocation. aliem.com.' },
         { num: 15, text: 'Rabago D, et al. Dextrose prolotherapy for knee osteoarthritis: a randomized controlled trial. Ann Fam Med. 2013;11(3):229-237.' },
         { num: 16, text: 'Wee TC, et al. Dextrose prolotherapy in knee osteoarthritis: a systematic review and meta-analysis. J Clin Orthop Trauma. 2021;19:108-117.' },
+        { num: 17, text: 'ALiEM. Trick of the Trade: TMJ dislocation reduction with a stack of tongue blades. aliem.com.' },
     ],
 };
 // ===================================================================
