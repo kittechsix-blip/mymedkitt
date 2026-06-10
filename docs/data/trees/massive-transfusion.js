@@ -364,6 +364,7 @@ export const MASSIVE_TRANSFUSION_NODES = [
         module: 5,
         title: 'Transition to Maintenance',
         body: '**Post-MTP management:**\n\n**Hemoglobin target:**\n• Most patients: Hgb 7-8 g/dL\n• Active coronary disease: Hgb 8-9 g/dL\n• Ongoing bleeding: Higher threshold\n\n**Coagulation targets:**\n• INR <1.5\n• Fibrinogen >150-200 mg/dL\n• Platelets >50,000 (>100,000 for CNS injury)\n• iCa >1.0 mmol/L\n\n**Rewarming:**\n• Target core temp >36°C\n• Active warming: Bair Hugger, warm IV fluids, warm blankets\n• Hypothermia impairs coagulation even with normal factor levels\n\n**Reversal of anticoagulation:**\n• If patient was anticoagulated, ensure adequate reversal\n• See [Anticoagulant Reversal](#/tree/anticoag-reversal) consult\n\n**ICU admission:** All MTP patients require ICU-level monitoring',
+        citation: [1, 2],
         next: 'mtp-termination-q',
         summary: 'Hgb>7, INR<1.5, fib>150, plt>50k, rewarm>36C',
     },
@@ -450,7 +451,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         type: 'info',
         module: 5,
         title: 'Pediatric MTP',
-        body: '**Weight-based dosing:**\n• pRBCs: 10-20 mL/kg\n• FFP: 10-15 mL/kg\n• Platelets: 5-10 mL/kg\n• Cryoprecipitate: 1-2 units/10 kg\n\n**MTP activation criteria in peds:**\n• Estimated blood loss >40 mL/kg\n• Ongoing transfusion requirement\n• Hemodynamic instability despite resuscitation\n\n**Special considerations:**\n• Use appropriately sized blood tubing\n• Irradiated products for immunocompromised or neonates\n• CMV-negative products for CMV-seronegative neonates\n• Warm all products — children hypothermic faster\n\n**TXA in peds:**\n• 15 mg/kg (max 1 g) IV over 10 min, then 2 mg/kg/hr (max 1 g over 8h)\n• Same 3-hour window as adults',
+        body: '**Weight-based dosing:** [2,24]\n• pRBCs: 10-20 mL/kg\n• FFP: 10-15 mL/kg\n• Platelets: 5-10 mL/kg\n• Cryoprecipitate: 1-2 units/10 kg\n\n**MTP activation criteria in peds:** [24]\n• Estimated blood loss >40 mL/kg\n• Ongoing transfusion requirement\n• Hemodynamic instability despite resuscitation\n\n**Special considerations:**\n• Use appropriately sized blood tubing\n• Irradiated products for immunocompromised or neonates\n• CMV-negative products for CMV-seronegative neonates\n• Warm all products — children hypothermic faster\n\n**TXA in peds:** [11,24]\n• 15 mg/kg (max 1 g) IV over 10 min, then 2 mg/kg/hr (max 1 g over 8h)\n• Same 3-hour window as adults',
+        citation: [2, 11, 24],
         next: 'mtp-special-pops',
     },
     {
@@ -458,8 +460,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         type: 'info',
         module: 5,
         title: 'Anticoagulated Patient in MTP',
-        body: '**Immediate reversal required for massive hemorrhage:**\n\n**Warfarin:**\n• [4-Factor PCC](#/drug/pcc-4factor/mtp) 25-50 units/kg IV\n• [Vitamin K](#/drug/vitamin-k/mtp) 10 mg IV over 30 min\n• Do NOT use FFP alone (volume-inefficient)\n\n**Direct Xa inhibitors (apixaban, rivaroxaban):**\n• [Andexanet alfa](#/drug/andexanet/mtp) if available OR\n• 4-Factor PCC 50 units/kg\n\n**Dabigatran:**\n• [Idarucizumab](#/drug/idarucizumab/mtp) 5 g IV OR\n• 4-Factor PCC 50 units/kg\n• Hemodialysis if idarucizumab unavailable\n\n**Heparin/LMWH:**\n• [Protamine](#/drug/protamine/mtp) 1 mg per 100 units heparin (max 50 mg)\n• For LMWH: Protamine only ~50% effective\n\n**Antiplatelet agents:**\n• DDAVP 0.3 mcg/kg IV (improves platelet function)\n• Platelet transfusion — controversial (PATCH trial showed no benefit in ICH) [23]\n\nSee [Anticoagulant Reversal](#/tree/anticoag-reversal) for complete guidance.',
-        citation: [23],
+        body: '**Immediate reversal required for massive hemorrhage:** [25]\n\n**Warfarin:**\n• [4-Factor PCC](#/drug/pcc-4factor/mtp) 25-50 units/kg IV\n• [Vitamin K](#/drug/vitamin-k/mtp) 10 mg IV over 30 min\n• Do NOT use FFP alone (volume-inefficient)\n\n**Direct Xa inhibitors (apixaban, rivaroxaban):**\n• [Andexanet alfa](#/drug/andexanet/mtp) if available OR\n• 4-Factor PCC 50 units/kg\n\n**Dabigatran:**\n• [Idarucizumab](#/drug/idarucizumab/mtp) 5 g IV OR\n• 4-Factor PCC 50 units/kg\n• Hemodialysis if idarucizumab unavailable\n\n**Heparin/LMWH:**\n• [Protamine](#/drug/protamine/mtp) 1 mg per 100 units heparin (max 50 mg)\n• For LMWH: Protamine only ~50% effective\n\n**Antiplatelet agents:**\n• DDAVP 0.3 mcg/kg IV (improves platelet function)\n• Platelet transfusion — controversial (PATCH trial showed no benefit in ICH) [23]\n\nSee [Anticoagulant Reversal](#/tree/anticoag-reversal) for complete guidance.',
+        citation: [23, 25],
         next: 'mtp-special-pops',
     },
     {
@@ -512,4 +514,6 @@ export const MASSIVE_TRANSFUSION_CITATIONS = [
     { num: 21, text: 'Toy P, Gajic O, Bacchetti P, et al. Transfusion-related acute lung injury: incidence and risk factors. Blood. 2012;119(7):1757-1767. doi:10.1182/blood-2011-08-370932' },
     { num: 22, text: 'Rotondo MF, Schwab CW, McGonigal MD, et al. "Damage control": an approach for improved survival in exsanguinating penetrating abdominal injury. J Trauma. 1993;35(3):375-382. doi:10.1097/00005373-199309000-00008' },
     { num: 23, text: 'Baharoglu MI, Cordonnier C, Al-Shahi Salman R, et al. Platelet transfusion versus standard care after acute stroke due to spontaneous cerebral haemorrhage associated with antiplatelet therapy (PATCH): a randomised, open-label, phase 3 trial. Lancet. 2016;387(10038):2605-2613. doi:10.1016/S0140-6736(16)30392-0' },
+    { num: 24, text: 'American College of Surgeons Trauma Quality Improvement Program (TQIP). Massive Transfusion in Trauma Guidelines — Pediatric Considerations. ACS; 2014. + Cannon JW, et al. Damage control resuscitation. J Trauma Acute Care Surg. 2017;82(3):605-617.' },
+    { num: 25, text: 'Frontera JA, Lewin JJ 3rd, Rabinstein AA, et al. Guideline for Reversal of Antithrombotics in Intracranial Hemorrhage: A Statement for Healthcare Professionals from the Neurocritical Care Society and Society of Critical Care Medicine. Neurocrit Care. 2016;24(1):6-46. doi:10.1007/s12028-015-0222-x' },
 ];
