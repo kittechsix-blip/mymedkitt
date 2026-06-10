@@ -26311,6 +26311,14 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
       heading: 'Cutting Needle to Release a Refractory Hair Tourniquet',
       body: '**Accomplishes:** Cleanly severs a hair/thread tourniquet strangling an infant\u2019s toe or finger when edema hides the strand and forceps unwrapping has failed \u2014 averting ischemia and digit loss. [20]\n\n**How to:**\n1. Examine the deep crease circumferentially; the constricting hair is often invisible against skin once the digit is swollen.\n2. Apply a digital block / topical anesthetic and immobilize the digit.\n3. Pick the dorsal midline (extensor surface), where the neurovascular bundles are NOT, as your cut site.\n4. Lay a small cutting (e.g., PC-1) needle flat into the depth of the groove and lever/cut outward across the band until the strand divides and the constriction releases.\n5. Confirm the full strand is freed and reperfusion returns; if circumferential release fails, incise to bone along the lateral digit per plastics guidance.\n\n**Equipment:** PC-1 (or similar) cutting needle, fine forceps, digital-block supplies, loupe/good light.\n\n_Source: ALiEM Trick of the Trade \u2014 Hair tourniquet release with a cutting needle (Morris)._',
     },
+    {
+      heading: 'String-Yank to Remove an Embedded Fishhook',
+      body: '**Accomplishes:** Fast, low-resource removal of a barbed fishhook, often with no anesthetic and no incision, when the barb sits near the surface. [21]\n\n**How to:**\n1. Lay the affected part flat against a firm surface and stabilize it.\n2. Loop a strong string (monofilament line, 0-silk, or umbilical tape) around the bend (midpoint) of the hook.\n3. With your other hand, press down on the shank/eye of the hook to disengage the barb from the tissue, keeping the shank parallel to the skin.\n4. While maintaining that downward pressure, give a single firm, quick yank on the string parallel to the shank, 180\u00B0 along the entry path.\n5. Cover the field with gauze before yanking so the freed hook does not fly. If it fails, switch to the advance-and-cut method after a digital block.\n\n**Equipment:** Strong string/suture/fishing line, gauze, optional local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Fishhook removal techniques (Riveros)._',
+    },
+    {
+      heading: 'Glove-Finger Tourniquet for a Bleeding Digit',
+      body: '**Accomplishes:** Creates a controlled digital tourniquet from a single exam glove so a profusely bleeding finger laceration can be examined and repaired in a bloodless field. [22]\n\n**How to:**\n1. Cut the finger off an exam glove and snip a small hole in its tip.\n2. Roll that glove finger onto the patient\u2019s injured digit, then roll it proximally so it self-rolls into a tight \u201Cring\u201D tourniquet at the base.\n3. Keep the hole small for maximum tension; if too loose, use the pinky finger of the glove or start with a smaller glove.\n4. Examine and repair, then ALWAYS remove the ring at the end \u2014 a rolled glove ring is easy to forget and can cause digital ischemia.\n\n**Equipment:** Single exam glove, scissors.\n\n_Source: ALiEM Trick of the Trade \u2014 Hemostasis of a bleeding finger laceration using a glove._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -26333,6 +26341,8 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
     { num: 18, text: 'ALiEM. Trick of the Trade: Needle foreign body removal. aliem.com.' },
     { num: 19, text: 'ALiEM. Trick of the Trade: Underwater (water-bath) ultrasonography for foreign body detection. aliem.com.' },
     { num: 20, text: 'ALiEM. Trick of the Trade: Hair tourniquet release using a cutting needle (Morris). aliem.com.' },
+    { num: 21, text: 'ALiEM. Trick of the Trade: Fishhook removal techniques (Riveros). aliem.com.' },
+    { num: 22, text: 'ALiEM. Trick of the Trade: Hemostasis of a bleeding finger laceration using a glove. aliem.com.' },
   ],
 };
 
@@ -26482,12 +26492,22 @@ const TRICKS_WOUND_PAGE: InfoPage = {
       heading: 'Warm the Local Anesthetic Before Injecting',
       body: '**Accomplishes:** Cuts injection pain at no cost or risk \u2014 a meta-analysis of 18 studies shows warmed local anesthetic hurts significantly less than room-temperature. [4]\n\n**How to:**\n1. While gathering and prepping the rest of your laceration supplies, set the lidocaine or bupivacaine vial in a small tub of warm water.\n2. Let it sit a few minutes to reach roughly body temperature (about 37\u201340\u00B0C); a warm IV-fluid cabinet or running warm tap water over the vial also works.\n3. Draw up and inject as usual, slowly, with a small-gauge needle.\n4. Note that warming (and buffering) shortens lidocaine shelf life, so warm only what you will use.\n\n**Equipment:** Local anesthetic vial, warm water bath or fluid warmer, syringe, small-gauge needle.\n\n_Source: ALiEM Trick of the Trade \u2014 Heat it up (Hogan meta-analysis, Ann Emerg Med 2011)._',
     },
+    {
+      heading: 'Silk-Suture Retraction for a Squirmy Tongue Laceration',
+      body: '**Accomplishes:** Holds a slippery, jumpy tongue protruded and still for repair without fingers or clamps in the bite zone, giving a clear two-handed field. [5]\n\n**How to:**\n1. Anesthetize the tongue (topical, then a lingual/local block).\n2. Pass a single 0-silk suture straight through the central body of the tongue, staying midline and as anterior as possible to avoid the lingual artery.\n3. Use that suture as a handle to gently pull the tongue forward and hold it out while you work.\n4. Repair the laceration with 4-0 or 5-0 chromic gut (absorbable); a dry field helps \u2014 an assistant can blow air through a Yankauer to keep saliva off.\n5. Remove the silk retraction suture at the end; the chromic repair sutures are left to dissolve.\n\n**Equipment:** 0-silk suture, 4-0/5-0 chromic gut, needle driver, local/lingual block supplies, suction.\n\n_Source: LacerationRepair.com (Brian Lin) / WikEM \u2014 tongue laceration retraction._',
+    },
+    {
+      heading: 'Electrocautery Trephination of a Subungual Hematoma',
+      body: '**Accomplishes:** Painlessly decompresses a painful subungual hematoma (>25% of the nail or severe pain) through the nail plate, with minimal nailbed-injury risk and no anesthesia. [6]\n\n**How to:**\n1. Confirm there is no displaced distal phalanx fracture needing other care and that the nail folds are intact (if disrupted, consider nail removal/repair instead).\n2. CONTRAINDICATION CHECK: do NOT use electrocautery on acrylic/gel artificial nails \u2014 ignition risk; use a needle or another method.\n3. Rest the fingertip on a firm surface and center the heated cautery tip over the hematoma.\n4. Apply the tip to melt a hole straight through the nail; once it reaches the blood the tip cools and self-limits, protecting the bed.\n5. Let blood drain, express gently, then dress; works best within ~48 hours of injury.\n\n**Equipment:** Disposable electrocautery unit, fingertip rest surface, gauze/dressing.\n\n_Source: emDocs / LITFL \u2014 subungual hematoma trephination._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 3, text: 'ALiEM. Trick of the Trade: Lubricating gel for bloody scalp lacerations. aliem.com.' },
     { num: 4, text: 'ALiEM. Trick of the Trade: Heat it up. aliem.com. Hogan ME, et al. Systematic review and meta-analysis of warming local anesthetics on injection pain. Ann Emerg Med. 2011.' },
+    { num: 5, text: 'Lin B. Tongue lacerations \u2014 closing the gap. lacerationrepair.com. See also WikEM: Tongue laceration; EP Monthly: How to repair a lingual laceration.' },
+    { num: 6, text: 'emDocs. Evidence-based approach to nailbed injuries. emdocs.net. See also LITFL: Subungual haematoma trephination.' },
   ],
 };
 
@@ -26605,6 +26625,10 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
       heading: 'Low-Dose Colchicine for Acute Gout',
       body: '**Accomplishes:** Treats an acute gout flare with a low-dose regimen that\u2019s far better tolerated (less GI toxicity) than older high-dose protocols. [6]\n\n**How to:**\n1. Give colchicine 1.2 mg loading dose.\n2. Follow with 0.6 mg one hour later.\n\n**Equipment:** Colchicine tablets.\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
     },
+    {
+      heading: 'Oxygen-Mask Strap to Remove a Stuck Ring',
+      body: '**Accomplishes:** Slides a stuck ring off a swollen finger using the stretchy elastic strap from an O2 face mask \u2014 thinner and stretchier than string, so it slips under the ring better and milks edema distally. [7]\n\n**How to:**\n1. Cut the elastic strap off a standard oxygen face mask.\n2. Thread one end UNDER the ring (a hemostat tip helps feed it through).\n3. Wrap the strap snugly around the finger distal-to-proximal, coil by coil, past the knuckle, compressing the swelling out toward the fingertip.\n4. Grab the end that was fed under the ring and unwind it from the proximal side; as it unwinds it walks the ring distally over the compressed tissue and off.\n5. Lubricate and repeat if needed; if the ring is tungsten/ceramic and won\u2019t budge, crack it with vise/locking pliers instead of a cutter.\n\n**Equipment:** Oxygen face-mask elastic strap, hemostat, lubricant.\n\n_Source: ALiEM Trick of the Trade \u2014 Ring removal using an oxygen mask strap._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26613,6 +26637,7 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
     { num: 4, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 5, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
     { num: 6, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
+    { num: 7, text: 'ALiEM. Trick of the Trade: Ring removal using an oxygen mask strap. aliem.com.' },
   ],
 };
 

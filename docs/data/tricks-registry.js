@@ -27,7 +27,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 20,
+        trickCount: 22,
     },
     {
         id: 'ent',
@@ -72,7 +72,7 @@ export const TRICK_SPECIALTIES = [
         color: '#AD1457',
         subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
         infoPageId: 'tricks-wound',
-        trickCount: 4,
+        trickCount: 6,
     },
     {
         id: 'cardiology',
@@ -108,7 +108,7 @@ export const TRICK_SPECIALTIES = [
         color: '#455A64',
         subtitle: 'Fast bedside screens, dosing pearls, communication.',
         infoPageId: 'tricks-general',
-        trickCount: 6,
+        trickCount: 7,
     },
     {
         id: 'ortho',
