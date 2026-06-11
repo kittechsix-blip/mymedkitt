@@ -25257,6 +25257,14 @@ const TRICKS_ENT_PAGE = {
             heading: 'Tongue-Blade Bite Test to Screen for Mandible Fracture',
             body: '**Accomplishes:** A fast, no-cost bedside screen for mandibular fracture \u2014 roughly 95\u201396% sensitive, so a clearly normal test makes fracture unlikely and helps prioritize imaging. [9]\n\n**How to:**\n1. Place a wooden tongue blade between the patient\u2019s molars on one side and ask them to bite down hard.\n2. Grasp the protruding end and twist/torque it, trying to snap the blade against their clenched bite.\n3. A patient with an intact mandible bites hard enough that you can rotate and crack the blade.\n4. A patient who releases the bite or cannot tolerate the torque from pain is a POSITIVE test \u2014 image the mandible.\n5. Test both sides; pair with exam for malocclusion, step-off, and sublingual hematoma. It is a screen, not a rule-out \u2014 image if clinical suspicion is high.\n\n**Equipment:** Wooden tongue blade(s).\n\n_Source: ALiEM Trick of the Trade \u2014 The tongue blade test for mandible fracture (Lin)._',
         },
+        {
+            heading: 'Single Volar Subcutaneous Digital Block',
+            body: '**Accomplishes:** Anesthetizes a finger with ONE volar injection instead of the traditional two- or three-stick ring block, with comparable success and less needle-stick pain. [10]\n\n**How to:**\n1. Prep the volar finger base; identify the proximal digital (palmar) crease where the finger meets the palm.\n2. Insert the needle subcutaneously at the midpoint of that crease, just under the skin on the volar side (you are depositing on top of the flexor tendon sheath, not into it).\n3. Inject 2\u20133 mL of plain lidocaine as a subcutaneous wheal; the anesthetic spreads laterally to bathe both digital nerves.\n4. Wait about 5 minutes; ~75% are fully anesthetized by 5 min and nearly all by 10 min.\n5. Use PLAIN local anesthetic and standard digital-block precautions; top up with a traditional ring block if a patch persists.\n\n**Equipment:** Plain lidocaine 1\u20132%, 25\u201327G needle, 3\u20135 mL syringe, skin prep.\n\n_Source: ALiEM Trick of the Trade \u2014 Single (volar subcutaneous) digital block._',
+        },
+        {
+            heading: '18G Introducer Trick for a Flimsy Atraumatic LP Needle',
+            body: '**Accomplishes:** Lets you drive a thin, flexible small-gauge atraumatic (pencil-point) spinal needle \u2014 which lowers post-LP headache rates \u2014 without it bending or buckling on the skin. [11]\n\n**How to:**\n1. Choose an atraumatic 22\u201325G pencil-point needle to minimize the dural defect (post-LP headache ~4% with 22G atraumatic vs ~40% with a 20G cutting needle).\n2. After local anesthesia, puncture only the skin and superficial soft tissue with a standard 18G needle to create a track \u2014 it acts as an introducer/trocar.\n3. Leave the 18G hub seated, then thread the flexible atraumatic needle THROUGH the 18G introducer so the rigid sheath keeps it from flexing.\n4. Advance the atraumatic needle in the usual midline trajectory toward the thecal sac; remove the stylet to check for CSF.\n5. Re-insert the stylet before withdrawing at the end.\n\n**Equipment:** 22\u201325G atraumatic (pencil-point) spinal needle, standard 18G needle as introducer, LP tray, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Reducing post-LP headache risk (needle selection + 18G introducer)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25268,6 +25276,8 @@ const TRICKS_ENT_PAGE = {
         { num: 7, text: 'ALiEM. Trick of the Trade: Peritonsillar abscess needle aspiration / drainage 2.0. aliem.com.' },
         { num: 8, text: 'ALiEM. Trick of the Trade: Another magnet trick for metallic foreign body removal. aliem.com.' },
         { num: 9, text: 'ALiEM. Trick of the Trade: A tongue blade is as mighty as an x-ray (mandible fracture screen). aliem.com. Schwab RA, et al. The tongue blade test. Acad Emerg Med.' },
+        { num: 10, text: 'ALiEM. Trick of the Trade: Single (volar subcutaneous) digital block. aliem.com.' },
+        { num: 11, text: 'ALiEM. Trick of the Trade: Reducing post-LP headache risk (atraumatic needle + 18G introducer). aliem.com.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25327,6 +25337,10 @@ const TRICKS_UROLOGY_PAGE = {
             heading: 'IV Lidocaine Rescue for Renal Colic',
             body: '**Accomplishes:** Opioid-sparing rescue analgesia for severe renal colic when NSAIDs and standard analgesia are inadequate or contraindicated. Evidence is mixed, so use this as a monitored rescue option, not first-line renal colic therapy. [4,5]\n\n**How to:**\n1. Confirm a renal-colic phenotype and screen for infection, solitary kidney/AKI risk, uncontrolled vomiting, AAA mimic, testicular/ovarian mimic, and other high-risk alternate diagnoses.\n2. Use NSAID therapy first when safe; add acetaminophen/opioid rescue per usual pathway.\n3. If pain remains severe and no lidocaine contraindication is present, give lidocaine 1.5 mg/kg IV slowly over about 10 minutes, max 200 mg.\n4. Put the patient on a monitor during and shortly after dosing; reassess pain, mental status, BP, rhythm, and early toxicity symptoms.\n5. Stop and treat toxicity if perioral numbness, metallic taste, tinnitus, confusion, seizure, hypotension, bradycardia, or dysrhythmia develops.\n\n**Do NOT use if:** known lidocaine allergy, significant heart block without pacer, serious ventricular dysrhythmia, ischemia/unstable CAD, severe hepatic disease, severe renal disease, pregnancy/lactation, seizure disorder poorly controlled, hemodynamic instability, or interacting sodium-channel blocker toxicity.\n\n**Equipment:** IV lidocaine, cardiac monitor, BP/SpO2 monitoring, intralipid access per local LAST protocol.\n\n_Source: EMCrit 426 - Dr. David Carr; Soleimanpour renal-colic RCT; ED IV lidocaine systematic reviews._',
         },
+        {
+            heading: 'Osmotic \u201CSugar\u201D Reduction of Paraphimosis',
+            body: '**Accomplishes:** Shrinks a swollen, trapped foreskin with osmosis so it can be reduced without procedural sedation or a dorsal slit \u2014 useful when manual compression alone fails. [6]\n\n**How to:**\n1. Confirm paraphimosis (retracted foreskin stuck proximal to the glans with a constricting band and distal edema) \u2014 this is time-sensitive; do not delay reduction in a dusky/compromised glans.\n2. Mix ~50 mL of 50% dextrose with 2% lidocaine jelly (a Urojet works) to make an osmotic, analgesic slurry.\n3. Soak gauze in the slurry and wrap it over the glans and edematous foreskin; cover with a condom or condom-Foley to hold it in contact.\n4. Wait up to ~1 hour: the high sugar concentration draws fluid out of the swollen tissue while the lidocaine numbs it.\n5. Once the edema is down, reduce manually \u2014 thumbs on the glans, fingers drawing the foreskin forward over it. If osmosis/manual reduction fails or the glans is compromised, escalate to puncture/dorsal-slit or urology.\n\n**Equipment:** 50% dextrose (~50 mL), 2% lidocaine jelly/Urojet, gauze, condom or condom-Foley.\n\n_Source: ALiEM Trick of the Trade \u2014 Paraphimosis: \u201CPour some sugar on me\u201D (Fu, Watts, Coralic)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25334,6 +25348,7 @@ const TRICKS_UROLOGY_PAGE = {
         { num: 3, text: 'ALiEM. Trick of the Trade: Removal of an entrapped metal zipper. aliem.com.' },
         { num: 4, text: 'Soleimanpour H, et al. Effectiveness of intravenous lidocaine versus intravenous morphine for patients with renal colic in the ED. BMC Urol. 2012;12:13.' },
         { num: 5, text: 'Motamed H, Maleki Verki M. Intravenous lidocaine compared to fentanyl in renal colic pain management: a randomized clinical trial. Emergency. 2017;5(1):e82. See also ED IV lidocaine systematic reviews noting limited renal-colic evidence and inadequate safety certainty.' },
+        { num: 6, text: 'ALiEM. Trick of the Trade: Paraphimosis - Pour some sugar on me (Fu, Watts, Coralic). aliem.com.' },
     ],
 };
 const TRICKS_WOUND_PAGE = {
@@ -25366,6 +25381,10 @@ const TRICKS_WOUND_PAGE = {
             heading: 'Electrocautery Trephination of a Subungual Hematoma',
             body: '**Accomplishes:** Painlessly decompresses a painful subungual hematoma (>25% of the nail or severe pain) through the nail plate, with minimal nailbed-injury risk and no anesthesia. [6]\n\n**How to:**\n1. Confirm there is no displaced distal phalanx fracture needing other care and that the nail folds are intact (if disrupted, consider nail removal/repair instead).\n2. CONTRAINDICATION CHECK: do NOT use electrocautery on acrylic/gel artificial nails \u2014 ignition risk; use a needle or another method.\n3. Rest the fingertip on a firm surface and center the heated cautery tip over the hematoma.\n4. Apply the tip to melt a hole straight through the nail; once it reaches the blood the tip cools and self-limits, protecting the bed.\n5. Let blood drain, express gently, then dress; works best within ~48 hours of injury.\n\n**Equipment:** Disposable electrocautery unit, fingertip rest surface, gauze/dressing.\n\n_Source: emDocs / LITFL \u2014 subungual hematoma trephination._',
         },
+        {
+            heading: 'Tegaderm Dam to Stop Tissue-Adhesive Seepage Near the Eye',
+            body: '**Accomplishes:** Keeps runny cyanoacrylate (Dermabond) from tracking into the eye, eyebrow, or hairline when gluing a wound near the eyelid or scalp. [7]\n\n**How to:**\n1. Cut an oval or circular window out of the center of a transparent Tegaderm (the clear dressing in any IV/central-line kit).\n2. Peel and adhere the Tegaderm to dry skin so the cut-out window frames just the laceration; press the window edges down to seal against seepage.\n3. You do NOT need to stick the whole dressing down \u2014 sealing the inner rim is enough, and leaving it loose avoids pulling out eyebrow or lash hairs on removal.\n4. Approximate the wound and apply the tissue adhesive within the window; the Tegaderm rim dams any \u201Crun.\u201D\n5. Once the glue is tacky-dry, gently peel the Tegaderm away to reveal a clean, well-circumscribed bead of adhesive over the wound.\n\n**Equipment:** Transparent Tegaderm dressing, scissors, cyanoacrylate tissue adhesive.\n\n_Source: ALiEM Trick of the Trade \u2014 Preventing tissue adhesive seepage (Afarian)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25374,6 +25393,7 @@ const TRICKS_WOUND_PAGE = {
         { num: 4, text: 'ALiEM. Trick of the Trade: Heat it up. aliem.com. Hogan ME, et al. Systematic review and meta-analysis of warming local anesthetics on injection pain. Ann Emerg Med. 2011.' },
         { num: 5, text: 'Lin B. Tongue lacerations \u2014 closing the gap. lacerationrepair.com. See also WikEM: Tongue laceration; EP Monthly: How to repair a lingual laceration.' },
         { num: 6, text: 'emDocs. Evidence-based approach to nailbed injuries. emdocs.net. See also LITFL: Subungual haematoma trephination.' },
+        { num: 7, text: 'ALiEM. Trick of the Trade: Preventing tissue adhesive seepage. aliem.com.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
@@ -25760,6 +25780,10 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Stacked Tongue Blades to Reduce a TMJ Dislocation',
             body: '**Accomplishes:** Relocates an acute jaw (temporomandibular) dislocation without putting your thumbs at bite-risk inside the mouth, by fatiguing the spasmed masseters with a sustained over-stretch. [17]\n\n**How to:**\n1. Confirm a true anterior TMJ dislocation (open-locked jaw, often bilateral after a wide yawn); consider procedural analgesia or a masseter/auriculotemporal block for spasm.\n2. Build a stack of several wooden tongue blades and place it between the molars on the dislocated side.\n3. Have the patient bite gently on the stack, which OVER-exaggerates the open position and stretches the chewing muscles even further.\n4. Hold that sustained stretch for a few minutes until the masseter/temporalis fatigue and relax.\n5. Remove the stack \u2014 in the brief relaxation window the condyle slides back under the articular eminence; if it self-reduces, great; if not, add gentle downward-then-posterior pressure on the molars. Advise a soft diet and to avoid wide opening.\n\n**Equipment:** A stack of wooden tongue blades; optional intra-articular or masseter local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Temporomandibular (TMJ) dislocation reduction._',
         },
+        {
+            heading: 'Extra-Oral (Gag-Reflex-Sparing) Anterior Mandible Reduction',
+            body: '**Accomplishes:** Reduces an anterior TMJ (jaw) dislocation from OUTSIDE the mouth \u2014 no thumbs between the molars, no bite risk, and it avoids triggering the gag reflex. [18]\n\n**How to:**\n1. Confirm an anterior mandibular dislocation (open-locked jaw, often after a wide yawn); provide analgesia or a masseter/auriculotemporal block to relax spasm.\n2. Stand at the side of the seated patient. Locate the displaced coronoid process: feel the bony bump that has slid forward in the cheek, just below and in front of the zygomatic arch.\n3. Place your thumb on that coronoid process on one side and your other thumb on the same landmark on the opposite cheek.\n4. Push the coronoid process(es) steadily DOWNWARD and BACKWARD (caudad then posterior) while an assistant cups the chin and guides it up.\n5. The condyle slips back under the articular eminence with a clunk. Advise a soft diet, support the jaw when yawning, and avoid wide opening for ~2 weeks.\n\n**Equipment:** None mandatory; optional masseter/auriculotemporal local anesthetic; an assistant for the chin.\n\n_Source: ALiEM Trick of the Trade \u2014 Extra-oral reduction technique for anterior mandible dislocation._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25779,6 +25803,7 @@ const TRICKS_ORTHO_PAGE = {
         { num: 15, text: 'Rabago D, et al. Dextrose prolotherapy for knee osteoarthritis: a randomized controlled trial. Ann Fam Med. 2013;11(3):229-237.' },
         { num: 16, text: 'Wee TC, et al. Dextrose prolotherapy in knee osteoarthritis: a systematic review and meta-analysis. J Clin Orthop Trauma. 2021;19:108-117.' },
         { num: 17, text: 'ALiEM. Trick of the Trade: TMJ dislocation reduction with a stack of tongue blades. aliem.com.' },
+        { num: 18, text: 'ALiEM. Trick of the Trade: Extra-oral reduction technique for anterior mandible dislocation. aliem.com.' },
     ],
 };
 // ===================================================================
