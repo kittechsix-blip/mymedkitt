@@ -1,0 +1,10 @@
+#!/bin/sh
+# Build gate — refuse to push on type errors (web type-check, no emit).
+# instar-kb.vercel.app/c/build-gate
+echo "build gate: type-checking before push (bunx tsc --noEmit)…"
+if bunx tsc --noEmit; then
+  echo "build gate: green — pushing."
+else
+  echo "build gate: BUILD FAILED — push blocked. Fix the type errors, then push again." >&2
+  exit 1
+fi
