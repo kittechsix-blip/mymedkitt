@@ -193,7 +193,7 @@ export const CAUSTIC_INGESTION_NODES = [
         body: '**Surgical emergency - bypass endoscopy**\n\nPatients with confirmed or strongly suspected perforation should proceed directly to OR without EGD.\n\n**Indications for emergent surgery:**\n- Pneumomediastinum or pneumoperitoneum\n- Peritoneal signs (rigidity, guarding)\n- Hemodynamic instability despite resuscitation\n- Persistent lactic acidosis\n- CT evidence of transmural necrosis\n\n**Surgical options:**\n- Esophagectomy with cervical esophagostomy\n- Gastrectomy (partial or total)\n- Mediastinal drainage\n\n**Supportive care:**\n- NPO\n- Broad-spectrum antibiotics ([Piperacillin-Tazobactam](#/drug/piperacillin-tazobactam/sepsis empiric) 4.5g IV q6h)\n- Aggressive fluid resuscitation\n- ICU admission',
         recommendation: 'Emergent surgical consultation. NPO, broad-spectrum antibiotics, ICU admission. Do NOT delay surgery for endoscopy.',
         confidence: 'definitive',
-        citation: [1, 2],
+        citation: [1, 2, 6],
         treatment: {
             firstLine: {
                 drug: 'Piperacillin-Tazobactam',
@@ -355,7 +355,7 @@ export const CAUSTIC_INGESTION_NODES = [
         body: '**Necrotic injury - high mortality, surgery often required**\n\n**Immediate management:**\n- ICU admission\n- NPO\n- Aggressive fluid resuscitation\n- Central line, arterial line\n- Broad-spectrum antibiotics ([Piperacillin-Tazobactam](#/drug/piperacillin-tazobactam/sepsis empiric) 4.5g IV q6h)\n\n**Surgical consultation:**\n- Grade 3a: Consider conservative management with very close monitoring vs surgery\n- Grade 3b: Usually requires surgery (esophagectomy, gastrectomy)\n\n**Indications for emergent surgery:**\n- Hemodynamic instability\n- Evidence of perforation\n- Extensive grade 3b necrosis\n- Failure to improve with conservative management\n\n**Long-term:**\n- Survivors have high stricture rate\n- May require esophageal reconstruction\n- Lifelong cancer surveillance (1000x increased risk)',
         recommendation: 'ICU admission. Surgical consultation for grade 3a; emergent surgery likely for grade 3b. Broad-spectrum antibiotics.',
         confidence: 'definitive',
-        citation: [1, 2, 4],
+        citation: [1, 2, 4, 6],
         treatment: {
             firstLine: {
                 drug: 'Piperacillin-Tazobactam',
@@ -493,6 +493,7 @@ export const CAUSTIC_INGESTION_CITATIONS = [
     { num: 3, text: 'Contini S, Scarpignato C. Caustic injury of the upper gastrointestinal tract: a comprehensive review. World J Gastroenterol. 2013;19(25):3918-3930.' },
     { num: 4, text: 'Zargar SA, Kochhar R, Mehta S, Mehta SK. The role of fiberoptic endoscopy in the management of corrosive ingestion and modified endoscopic classification of burns. Gastrointest Endosc. 1991;37(2):165-169.' },
     { num: 5, text: 'Chirica M, Bonavina L, Kelly MD, et al. Caustic ingestion. Lancet. 2017;389(10083):2041-2052.' },
+    { num: 6, text: 'Mazuski JE, Tessier JM, May AK, et al. The Surgical Infection Society Revised Guidelines on the Management of Intra-Abdominal Infection. Surg Infect (Larchmt). 2017;18(1):1-76. (Empiric piperacillin-tazobactam 4.5 g IV q6h; meropenem 1 g IV q8h for complicated intra-abdominal/GI-perforation source control.)' },
 ];
 // -------------------------------------------------------------------
 // Clinical Notes
