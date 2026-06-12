@@ -27,7 +27,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 24,
+        trickCount: 25,
     },
     {
         id: 'ent',
@@ -36,7 +36,7 @@ export const TRICK_SPECIALTIES = [
         color: '#6A1B9A',
         subtitle: 'Epistaxis packing tricks and nasal suction.',
         infoPageId: 'tricks-ent',
-        trickCount: 9,
+        trickCount: 10,
     },
     {
         id: 'dental',
@@ -54,7 +54,7 @@ export const TRICK_SPECIALTIES = [
         color: '#2E7D32',
         subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
         infoPageId: 'tricks-ophtho',
-        trickCount: 5,
+        trickCount: 7,
     },
     {
         id: 'urology',
@@ -117,7 +117,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
         infoPageId: 'tricks-ortho',
-        trickCount: 17,
+        trickCount: 18,
     },
 ];
 /** Lookup a specialty by its id. */

@@ -25189,6 +25189,10 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Glove-Finger Tourniquet for a Bleeding Digit',
             body: '**Accomplishes:** Creates a controlled digital tourniquet from a single exam glove so a profusely bleeding finger laceration can be examined and repaired in a bloodless field. [22]\n\n**How to:**\n1. Cut the finger off an exam glove and snip a small hole in its tip.\n2. Roll that glove finger onto the patient\u2019s injured digit, then roll it proximally so it self-rolls into a tight \u201Cring\u201D tourniquet at the base.\n3. Keep the hole small for maximum tension; if too loose, use the pinky finger of the glove or start with a smaller glove.\n4. Examine and repair, then ALWAYS remove the ring at the end \u2014 a rolled glove ring is easy to forget and can cause digital ischemia.\n\n**Equipment:** Single exam glove, scissors.\n\n_Source: ALiEM Trick of the Trade \u2014 Hemostasis of a bleeding finger laceration using a glove._',
         },
+        {
+            heading: 'M-Mode Line to Aim a US-Guided Peripheral IV',
+            body: '**Accomplishes:** Shows exactly where the probe\u2019s centerline projects, so you advance the IV needle along the right trajectory instead of guessing where mid-screen sits on the probe. [23]\n\n**How to:**\n1. Center the target vein in the middle of the ultrasound screen in short axis.\n2. Press the M-mode button ONCE \u2014 a vertical reference line appears down the middle of the image, marking the probe\u2019s centerline.\n3. Line up your IV catheter with the corresponding center notch on the probe face.\n4. Insert the needle in that plane and advance \u2014 the M-mode line predicts the needle\u2019s path to the vein.\n5. This is a free stand-in for a \u201Cbiopsy guide\u201D feature that not every machine has.\n\n**Equipment:** Ultrasound with M-mode, linear probe, IV catheter.\n\n_Source: ALiEM Trick of the Trade \u2014 Needle-vein alignment in US-guided PIV (Wiswell)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25213,6 +25217,7 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 20, text: 'ALiEM. Trick of the Trade: Hair tourniquet release using a cutting needle (Morris). aliem.com.' },
         { num: 21, text: 'ALiEM. Trick of the Trade: Fishhook removal techniques (Riveros). aliem.com.' },
         { num: 22, text: 'ALiEM. Trick of the Trade: Hemostasis of a bleeding finger laceration using a glove. aliem.com.' },
+        { num: 23, text: 'ALiEM. Trick of the Trade: Needle-vein alignment in ultrasound-guided peripheral IV (Wiswell). aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25265,6 +25270,10 @@ const TRICKS_ENT_PAGE = {
             heading: '18G Introducer Trick for a Flimsy Atraumatic LP Needle',
             body: '**Accomplishes:** Lets you drive a thin, flexible small-gauge atraumatic (pencil-point) spinal needle \u2014 which lowers post-LP headache rates \u2014 without it bending or buckling on the skin. [11]\n\n**How to:**\n1. Choose an atraumatic 22\u201325G pencil-point needle to minimize the dural defect (post-LP headache ~4% with 22G atraumatic vs ~40% with a 20G cutting needle).\n2. After local anesthesia, puncture only the skin and superficial soft tissue with a standard 18G needle to create a track \u2014 it acts as an introducer/trocar.\n3. Leave the 18G hub seated, then thread the flexible atraumatic needle THROUGH the 18G introducer so the rigid sheath keeps it from flexing.\n4. Advance the atraumatic needle in the usual midline trajectory toward the thecal sac; remove the stylet to check for CSF.\n5. Re-insert the stylet before withdrawing at the end.\n\n**Equipment:** 22\u201325G atraumatic (pencil-point) spinal needle, standard 18G needle as introducer, LP tray, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Reducing post-LP headache risk (needle selection + 18G introducer)._',
         },
+        {
+            heading: 'Nasal Trumpet Guide for Less-Traumatic Nasopharyngoscopy',
+            body: '**Accomplishes:** Cuts the pain and mucosal trauma of flexible nasopharyngoscopy by padding the scope through the sharpest turn in the nasal passage. [12]\n\n**How to:**\n1. Anesthetize first: viscous lidocaine into the nares plus nebulized lidocaine to numb the nasopharynx.\n2. Insert a soft, malleable nasal trumpet (nasopharyngeal airway) into the nostril as a protective conduit.\n3. Thread the fiberoptic scope through the lumen of the trumpet so the cable rides inside the soft tube, not against raw mucosa, through the painful inferior turn past the conchae.\n4. Advance to the posterior pharynx/larynx to inspect for foreign body or laryngeal edema.\n5. If the trumpet rim blocks your view, pull it back slightly while keeping the scope in place.\n\n**Equipment:** Soft nasal trumpet (NPA), flexible nasopharyngoscope, viscous + nebulized lidocaine.\n\n_Source: ALiEM Trick of the Trade \u2014 Less traumatic nasopharyngoscopy (Cade, Lutfy-Clayton)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25278,6 +25287,7 @@ const TRICKS_ENT_PAGE = {
         { num: 9, text: 'ALiEM. Trick of the Trade: A tongue blade is as mighty as an x-ray (mandible fracture screen). aliem.com. Schwab RA, et al. The tongue blade test. Acad Emerg Med.' },
         { num: 10, text: 'ALiEM. Trick of the Trade: Single (volar subcutaneous) digital block. aliem.com.' },
         { num: 11, text: 'ALiEM. Trick of the Trade: Reducing post-LP headache risk (atraumatic needle + 18G introducer). aliem.com.' },
+        { num: 12, text: 'ALiEM. Trick of the Trade: Less traumatic nasopharyngoscopy (Cade, Lutfy-Clayton). aliem.com.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25306,6 +25316,14 @@ const TRICKS_OPHTHO_PAGE = {
             heading: 'Photograph Slit-Lamp Findings With a Smartphone',
             body: '**Accomplishes:** Captures a sharable image of a dendritic ulcer, abrasion pattern, or corneal edema to send to ophthalmology \u2014 no expensive camera adapter required. [5]\n\n**How to:**\n1. Position the patient comfortably at the slit lamp and focus the finding through the eyepiece as usual.\n2. Without moving the slit lamp or the patient, step back from the eyepiece.\n3. Hold the smartphone camera lens flush against the eyepiece where your eye just was.\n4. Let the camera autofocus on the illuminated image, then capture; a small adapter steadies it but is optional.\n\n**Equipment:** Slit lamp, smartphone camera.\n\n_Source: ALiEM Trick of the Trade \u2014 Photograph slit lamp findings (Silver/Lin)._',
         },
+        {
+            heading: 'Fluorescein to Find a Wandering Contact Lens',
+            body: '**Accomplishes:** Reveals a clear, hard-to-see soft contact lens (or a torn fragment) that a patient swears is still in the eye but you cannot visualize. [6]\n\n**How to:**\n1. Confirm the patient has NOT already removed the lens \u2014 fluorescein permanently stains a soft lens, so you only do this when you actually intend to find and remove it.\n2. Instill a drop of fluorescein into the affected eye.\n3. The soft-lens gel matrix soaks up the dye and turns yellow-green; sweep the fornices and under the upper lid with a cobalt-blue light.\n4. The now-stained lens (or fragment) stands out clearly \u2014 grasp and remove it.\n5. Irrigate afterward and re-examine the cornea for an abrasion.\n\n**Equipment:** Fluorescein strip or drops, cobalt-blue (Wood\u2019s) light, irrigation saline.\n\n_Source: ALiEM Trick of the Trade \u2014 Finding the wandering contact lens (Paolillo/Lin)._',
+        },
+        {
+            heading: 'Saline-Rinsed Strip as a Gentle Fluorescein Dropper',
+            body: '**Accomplishes:** Makes an improvised liquid fluorescein dropper so you can dose the dye onto a squirmy patient\u2019s eye (e.g., an infant) without the discomfort of touching a paper strip to the cornea. [7]\n\n**How to:**\n1. Remove contact lenses first (fluorescein permanently stains them).\n2. Open only ONE end of the fluorescein strip package.\n3. Flush a saline vial in and out of the open packet several times until the fluid turns yellow.\n4. Use that yellow-tinted saline vial as an eyedropper, trickling it onto the eye; corneal epithelial defects glow green under blue light.\n5. Mucus also stains \u2014 have the patient blink to tell them apart (mucus moves, a true defect stays put). Never reuse or share dye (Pseudomonas risk).\n\n**Equipment:** Fluorescein strip, single saline flush vial, cobalt-blue light.\n\n_Source: ALiEM Trick of the Trade \u2014 Easy ocular application of fluorescein (Ko/Chan)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25313,6 +25331,8 @@ const TRICKS_OPHTHO_PAGE = {
         { num: 3, text: 'ALiEM. Trick of the Trade: Super-sensitive to eyedrops. aliem.com.' },
         { num: 4, text: 'ALiEM. Trick of the Trade: Eye irrigation setup with a nasal cannula. aliem.com.' },
         { num: 5, text: 'ALiEM. Trick of the Trade: Photograph slit lamp findings. aliem.com.' },
+        { num: 6, text: 'ALiEM. Trick of the Trade: Finding the wandering contact lens (Paolillo/Lin). aliem.com.' },
+        { num: 7, text: 'ALiEM. Trick of the Trade: Easy ocular application of fluorescein (Ko/Chan). aliem.com.' },
     ],
 };
 const TRICKS_UROLOGY_PAGE = {
@@ -25784,6 +25804,10 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Extra-Oral (Gag-Reflex-Sparing) Anterior Mandible Reduction',
             body: '**Accomplishes:** Reduces an anterior TMJ (jaw) dislocation from OUTSIDE the mouth \u2014 no thumbs between the molars, no bite risk, and it avoids triggering the gag reflex. [18]\n\n**How to:**\n1. Confirm an anterior mandibular dislocation (open-locked jaw, often after a wide yawn); provide analgesia or a masseter/auriculotemporal block to relax spasm.\n2. Stand at the side of the seated patient. Locate the displaced coronoid process: feel the bony bump that has slid forward in the cheek, just below and in front of the zygomatic arch.\n3. Place your thumb on that coronoid process on one side and your other thumb on the same landmark on the opposite cheek.\n4. Push the coronoid process(es) steadily DOWNWARD and BACKWARD (caudad then posterior) while an assistant cups the chin and guides it up.\n5. The condyle slips back under the articular eminence with a clunk. Advise a soft diet, support the jaw when yawning, and avoid wide opening for ~2 weeks.\n\n**Equipment:** None mandatory; optional masseter/auriculotemporal local anesthetic; an assistant for the chin.\n\n_Source: ALiEM Trick of the Trade \u2014 Extra-oral reduction technique for anterior mandible dislocation._',
         },
+        {
+            heading: 'Whistler Forearm-Fulcrum Reduction for a Dislocated Hip',
+            body: '**Accomplishes:** Reduces a posterior hip dislocation using your forearm as the lever, so you never have to climb onto the gurney like the Captain Morgan technique \u2014 same physics, easier on your back. [19]\n\n**How to:**\n1. Lay the patient supine; have an assistant flex the UNAFFECTED knee and stabilize the pelvis on the bed.\n2. Slide your forearm under the affected leg into the popliteal fossa, and let that same hand grasp the assistant-held unaffected knee for an anchor.\n3. With your other hand, grasp the affected lower leg near the ankle.\n4. Flex the dislocated hip to 90\u00B0; your forearm is the fulcrum and the affected lower leg is the lever.\n5. Pull down on the lower leg \u2014 this flexes the knee over your forearm and drives traction along the femur; add gentle internal/external rotation until the head clunks back in. Confirm with post-reduction x-ray.\n\n**Equipment:** Gurney, one assistant, procedural sedation/analgesia.\n\n_Source: ALiEM Trick of the Trade \u2014 Hip dislocation Part II (Whistler technique); Walden & Hamer, J Emerg Med 1999._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25804,6 +25828,7 @@ const TRICKS_ORTHO_PAGE = {
         { num: 16, text: 'Wee TC, et al. Dextrose prolotherapy in knee osteoarthritis: a systematic review and meta-analysis. J Clin Orthop Trauma. 2021;19:108-117.' },
         { num: 17, text: 'ALiEM. Trick of the Trade: TMJ dislocation reduction with a stack of tongue blades. aliem.com.' },
         { num: 18, text: 'ALiEM. Trick of the Trade: Extra-oral reduction technique for anterior mandible dislocation. aliem.com.' },
+        { num: 19, text: 'ALiEM. Trick of the Trade: Hip dislocation Part II (Whistler technique). aliem.com. Walden PD, Hamer JR. Whistler technique used to reduce traumatic hip dislocation. J Emerg Med. 1999;17(3):441-4.' },
     ],
 };
 // ===================================================================
