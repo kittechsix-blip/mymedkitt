@@ -212,7 +212,7 @@ export const POST_ROSC_NODES: DecisionNode[] = [
     module: 5,
     title: 'ICU Bundle',
     body: '**ICU bundle:**\n• **Glucose 140-180 mg/dL** — avoid hypoglycemia (<70), treat hyperglycemia with insulin infusion\n• **Seizure surveillance:** continuous EEG × 24-48h minimum\n• **Echo:** assess LV function, wall motion abnormalities, post-arrest stunning\n• **Ventilator:** TV 6 mL/kg IBW, PEEP 5-8, target PaCO₂ 35-45\n• **Labs q4-6h:** lactate (trending down = good), troponin, electrolytes, ABG\n• **Foley:** strict I/O monitoring, target UOP >0.5 mL/kg/hr\n• **DVT prophylaxis:** enoxaparin or heparin SQ once hemostasis confirmed',
-    citation: [1, 5, 6],
+    citation: [1, 5, 6, 11],
     next: 'rosc-disposition',
     summary: 'Glucose 140-180, EEG x24-48h, echo, TV 6 mL/kg IBW, labs q4-6h, DVT prophylaxis',
   },

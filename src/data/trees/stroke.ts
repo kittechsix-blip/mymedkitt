@@ -247,7 +247,7 @@ export const STROKE_NODES: DecisionNode[] = [
     module: 3,
     title: 'EVT Eligibility (6\u201324h)',
     body: '**Anterior circulation (DAWN/DEFUSE-3 criteria):**\n\u2022 NIHSS \u22656\n\u2022 ICA or M1 occlusion on CTA\n\u2022 Small ischemic core on CT perfusion (<70 mL at 6\u201316h; <21 mL at 16\u201324h)\n\u2022 Large penumbra with mismatch ratio >1.8\n\n**Posterior circulation (basilar artery):**\n\u2022 NIHSS \u226510\n\u2022 Basilar artery occlusion on CTA\n\u2022 PC-ASPECTS \u22656\n\u2022 Up to 24h from onset (ATTENTION trial)',
-    citation: [6, 7],
+    citation: [6, 7, 15],
     options: [
       {
         label: 'Meets EVT criteria',

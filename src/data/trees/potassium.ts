@@ -82,7 +82,7 @@ export const POTASSIUM_NODES: DecisionNode[] = [
     module: 2,
     title: 'Hyperkalemia Severity',
     body: 'Classify severity based on potassium level, ECG changes, chronicity, and ongoing K+ release.\n\n**Severe hyperkalemia (KDIGO):**\n\u2022 K+ \u2265 6.5 mEq/L with ECG changes\n\u2022 K+ \u2265 6.0 mEq/L with rapid rise or ongoing release (TLS, rhabdo)\n\n**Chronic hyperkalemia** (e.g., dialysis patients) is better tolerated than acute.\n\n**Most dangerous ECG findings:** Bradycardia (RR 12.3), QRS widening (RR 4.7), junctional rhythm (RR 7.5).',
-    citation: [1, 5, 7],
+    citation: [1, 5, 7, 10],
     options: [
       {
         label: 'Severe Hyperkalemia',

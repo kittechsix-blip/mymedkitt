@@ -232,7 +232,7 @@ export const TRACH_EMERGENCY_NODES = [
         module: 4,
         title: 'Fresh Trach (<7 days): DO NOT REPLACE',
         body: '**CRITICAL: Blind reinsertion contraindicated in fresh trach**\n\n**Risks of blind reinsertion:**\n- False passage into pretracheal space\n- Subcutaneous emphysema\n- Pneumomediastinum\n- Complete loss of airway\n- Death\n\n**Immediate management:**\n1. Call for help (anesthesia, ENT, surgery)\n2. Oxygenate via FACE: BVM or oral intubation\n3. Occlude stoma with gauze/finger during face ventilation\n4. Advance ETT cuff PAST stoma level\n5. Keep patient calm, positioned upright if possible\n\n**Definitive management:**\n- Surgeon replacement under direct visualization\n- Fiberoptic guidance through stoma\n- OR for difficult cases [1][2][3][4]',
-        citation: [1, 2, 3, 4],
+        citation: [1, 2, 3, 4, 11],
         next: 'trach-disposition-ent',
         summary: 'Blind reinsertion contraindicated — oxygenate via face, occlude stoma, oral intubate past stoma, call surgeon',
         safetyLevel: 'critical',
@@ -363,7 +363,7 @@ export const TRACH_EMERGENCY_NODES = [
         body: '**Indications for urgent ENT/surgical consultation:**\n\n**Absolute:**\n- Fresh trach dislodgement\n- Bleeding concerning for TIF\n- Failed bedside replacement\n- Suspected false passage\n- Laryngectomy emergency\n\n**Relative:**\n- Recurrent obstruction\n- Difficult anatomy\n- Need for trach change to different type/size\n- Granulation tissue causing symptoms\n\n**Information for consultant:**\n- Original indication for tracheostomy\n- Placement date and technique (surgical vs percutaneous)\n- Current tube type, size, brand\n- Description of emergency and interventions\n- Current airway status and ventilator settings [1][2][3][4]',
         recommendation: 'ENT/surgical consultation required for specialist management. Stabilize airway while awaiting consultation.',
         confidence: 'recommended',
-        citation: [1, 2, 3, 4],
+        citation: [1, 2, 3, 4, 12],
     },
     {
         id: 'trach-oxygenation-strategies',
