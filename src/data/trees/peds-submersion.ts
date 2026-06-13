@@ -16,7 +16,7 @@ export const PEDS_SUBMERSION_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Begin CPR immediately if pulseless (prolonged resuscitation may be successful)', nodeId: 'submersion-arrest' },
   { text: 'Warm hypothermic patients before declaring death', nodeId: 'submersion-severe-hypothermia' },
   { text: 'Obtain chest X-ray for all symptomatic submersion patients', nodeId: 'submersion-resp-symptoms' },
-  { text: 'Observe all symptomatic patients for minimum 4-8 hours', nodeId: 'submersion-observation' },
+  { text: 'Observe all symptomatic patients for minimum 4-8 hours', nodeId: 'submersion-observation-ed' },
   { text: 'Admit patients with hypoxia, altered mental status, or respiratory distress', nodeId: 'submersion-disposition-critical' },
   { text: 'Consider child abuse in submersion injuries <1 year or with inconsistent history', nodeId: 'submersion-scene-info' },
   { text: 'Provide family support and anticipatory guidance', nodeId: 'submersion-disposition-critical' },
