@@ -2691,6 +2691,9 @@ body.critical-actions-open {
 }
 
 .btn-text {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding: 10px 16px;
   background: transparent;
   color: var(--color-text-secondary);
@@ -2775,8 +2778,8 @@ body.critical-actions-open {
 }
 
 .modal-close {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
