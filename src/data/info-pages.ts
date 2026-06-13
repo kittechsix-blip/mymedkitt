@@ -26405,6 +26405,14 @@ const TRICKS_ENT_PAGE: InfoPage = {
       heading: 'Nasal Trumpet Guide for Less-Traumatic Nasopharyngoscopy',
       body: '**Accomplishes:** Cuts the pain and mucosal trauma of flexible nasopharyngoscopy by padding the scope through the sharpest turn in the nasal passage. [12]\n\n**How to:**\n1. Anesthetize first: viscous lidocaine into the nares plus nebulized lidocaine to numb the nasopharynx.\n2. Insert a soft, malleable nasal trumpet (nasopharyngeal airway) into the nostril as a protective conduit.\n3. Thread the fiberoptic scope through the lumen of the trumpet so the cable rides inside the soft tube, not against raw mucosa, through the painful inferior turn past the conchae.\n4. Advance to the posterior pharynx/larynx to inspect for foreign body or laryngeal edema.\n5. If the trumpet rim blocks your view, pull it back slightly while keeping the scope in place.\n\n**Equipment:** Soft nasal trumpet (NPA), flexible nasopharyngoscope, viscous + nebulized lidocaine.\n\n_Source: ALiEM Trick of the Trade \u2014 Less traumatic nasopharyngoscopy (Cade, Lutfy-Clayton)._',
     },
+    {
+      heading: 'Tongue-Blade \u201CNose Pincher\u201D for Constant Epistaxis Pressure',
+      body: '**Accomplishes:** Forces uninterrupted nasal compression for anterior epistaxis, fixing the real reason nosebleeds persist \u2014 patients keep releasing pressure every few seconds to check. [13]\n\n**How to:**\n1. First have the patient blow out clots and apply a topical vasoconstrictor (oxymetazoline) if available.\n2. Tape the ends of two wooden tongue blades together to form a hinged \u201Cclothespin.\u201D\n3. Wedge the soft cartilaginous part of the nose (not the bony bridge) between the open ends so the blades squeeze both nostrils shut.\n4. Leave the pincher clamped in place for a full 15\u201320 minutes \u2014 the constant, hands-free pressure the patient cannot fidget with is what stops the bleed.\n5. Release and re-inspect; if still bleeding, escalate to packing.\n\n**Equipment:** Two wooden tongue blades, tape, topical vasoconstrictor (optional).\n\n_Source: ALiEM Trick of the Trade \u2014 Epistaxis control with tongue blades._',
+    },
+    {
+      heading: 'Drain a Nasal Septal Hematoma Before It Eats the Cartilage',
+      body: '**Accomplishes:** Evacuates a septal hematoma so the avascular septal cartilage keeps its blood supply, heading off septal necrosis, abscess, and a permanent saddle-nose deformity. [14]\n\n**How to:**\n1. Suspect it after ANY nasal trauma: examine both nares and gently press the septum with a cotton swab \u2014 a normal septum is thin and firm, a hematoma is a soft, boggy, bluish bulge that compresses.\n2. Anesthetize topically/locally, then incise the mucosa over the most fluctuant point with an 11-blade.\n3. Express and suction the clot; a small Penrose drain or a corner of glove can keep the pocket open.\n4. Place bilateral anterior packing or a quilting/mattress suture to compress the leaves of mucosa back against the cartilage and prevent reaccumulation.\n5. Always check BOTH sides (cartilage fractures easily and bilateral hematomas occur); start antibiotics covering S. aureus and arrange 24\u2013hour ENT recheck. In children even minor trauma can do this within 24\u201372 h.\n\n**Equipment:** Nasal speculum, headlamp, 11-blade scalpel, suction, anterior packing or Penrose drain, suture, anti-staph antibiotic.\n\n_Source: WikEM \u2014 Nasal septal hematoma; ALiEM ENT tricks of the trade._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26419,6 +26427,8 @@ const TRICKS_ENT_PAGE: InfoPage = {
     { num: 10, text: 'ALiEM. Trick of the Trade: Single (volar subcutaneous) digital block. aliem.com.' },
     { num: 11, text: 'ALiEM. Trick of the Trade: Reducing post-LP headache risk (atraumatic needle + 18G introducer). aliem.com.' },
     { num: 12, text: 'ALiEM. Trick of the Trade: Less traumatic nasopharyngoscopy (Cade, Lutfy-Clayton). aliem.com.' },
+    { num: 13, text: 'ALiEM. Trick of the Trade: Epistaxis control with tongue blades. aliem.com.' },
+    { num: 14, text: 'WikEM. Nasal septal hematoma. wikem.org. See also ALiEM ENT tricks of the trade.' },
   ],
 };
 
@@ -26494,6 +26504,14 @@ const TRICKS_UROLOGY_PAGE: InfoPage = {
       heading: 'Osmotic \u201CSugar\u201D Reduction of Paraphimosis',
       body: '**Accomplishes:** Shrinks a swollen, trapped foreskin with osmosis so it can be reduced without procedural sedation or a dorsal slit \u2014 useful when manual compression alone fails. [6]\n\n**How to:**\n1. Confirm paraphimosis (retracted foreskin stuck proximal to the glans with a constricting band and distal edema) \u2014 this is time-sensitive; do not delay reduction in a dusky/compromised glans.\n2. Mix ~50 mL of 50% dextrose with 2% lidocaine jelly (a Urojet works) to make an osmotic, analgesic slurry.\n3. Soak gauze in the slurry and wrap it over the glans and edematous foreskin; cover with a condom or condom-Foley to hold it in contact.\n4. Wait up to ~1 hour: the high sugar concentration draws fluid out of the swollen tissue while the lidocaine numbs it.\n5. Once the edema is down, reduce manually \u2014 thumbs on the glans, fingers drawing the foreskin forward over it. If osmosis/manual reduction fails or the glans is compromised, escalate to puncture/dorsal-slit or urology.\n\n**Equipment:** 50% dextrose (~50 mL), 2% lidocaine jelly/Urojet, gauze, condom or condom-Foley.\n\n_Source: ALiEM Trick of the Trade \u2014 Paraphimosis: \u201CPour some sugar on me\u201D (Fu, Watts, Coralic)._',
     },
+    {
+      heading: 'Guidewire Railroad for a Difficult Urethral Catheterization',
+      body: '**Accomplishes:** Gets a Foley into a bladder you cannot blindly cannulate (stricture, false passage, big prostate) at the bedside, sparing the patient a suprapubic tube or after-hours urology call. [7]\n\n**How to:**\n1. After failing standard and coud\u00E9-tip attempts, instill lidocaine jelly and pass a soft hydrophilic (Terumo/Glidewire) guidewire gently down the urethra.\n2. Advance until at least two-thirds of the wire is in \u2014 that length guarantees the soft J-tip is coiled in the bladder, not a false passage. Never force against resistance.\n3. Perforate the very tip of a Foley catheter with a 16G IV cannula to create an over-the-wire channel.\n4. Railroad (thread) the Foley over the guidewire into the bladder, keeping tension on the wire so it does not advance with the catheter.\n5. Confirm urine return, inflate the balloon ONLY after good flow, then withdraw the guidewire. If anything feels wrong, stop and get urology rather than risk a urethral injury.\n\n**Equipment:** Hydrophilic guidewire (Terumo/Glidewire), Foley catheter, 16G IV cannula, lidocaine jelly, sterile setup.\n\n_Source: Gupta et al \u2014 atraumatic guidewire technique for difficult urethral catheterization (BMJ Case Reports / J Surg Tech)._',
+    },
+    {
+      heading: '\u201CFoley Balloon Be Gone\u201D \u2014 Free a Retained Catheter With a Stuck Balloon',
+      body: '**Accomplishes:** Removes a Foley whose balloon will not deflate (failed inflation valve or a channel plugged by crystals) without cutting blindly or yanking, which can injure the urethra. [8]\n\n**How to:**\n1. First try the simplest step: cut the catheter across the inflation (balloon) port arm distal to the bifurcation \u2014 this removes the one-way valve and the balloon water often drains on its own.\n2. If it still will not drain, gently pass a thin lubricated guidewire down the now-open inflation channel to push past obstructing exudate/crystals; the balloon then empties.\n3. Do NOT overinflate to \u201Cburst\u201D the balloon blindly and never cut the catheter flush at the meatus (you lose your handle and balloon fragments can be retained).\n4. Once deflated, withdraw the catheter and inspect the tip to confirm the balloon came out intact.\n5. If both maneuvers fail, escalate to urology for ultrasound-guided balloon puncture rather than improvising further.\n\n**Equipment:** Scissors, thin lubricated guidewire, syringe, sterile gloves.\n\n_Source: ALiEM Trick of the Trade \u2014 Foley balloon be gone!_',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26502,6 +26520,8 @@ const TRICKS_UROLOGY_PAGE: InfoPage = {
     { num: 4, text: 'Soleimanpour H, et al. Effectiveness of intravenous lidocaine versus intravenous morphine for patients with renal colic in the ED. BMC Urol. 2012;12:13.' },
     { num: 5, text: 'Motamed H, Maleki Verki M. Intravenous lidocaine compared to fentanyl in renal colic pain management: a randomized clinical trial. Emergency. 2017;5(1):e82. See also ED IV lidocaine systematic reviews noting limited renal-colic evidence and inadequate safety certainty.' },
     { num: 6, text: 'ALiEM. Trick of the Trade: Paraphimosis - Pour some sugar on me (Fu, Watts, Coralic). aliem.com.' },
+    { num: 7, text: 'Gupta S, et al. A time and equipment saving tip for difficult urethral catheterizations (hydrophilic guidewire railroad technique). PMC5137669.' },
+    { num: 8, text: 'ALiEM. Trick of the Trade: Foley balloon be gone! aliem.com.' },
   ],
 };
 
@@ -26955,6 +26975,10 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
       heading: 'Whistler Forearm-Fulcrum Reduction for a Dislocated Hip',
       body: '**Accomplishes:** Reduces a posterior hip dislocation using your forearm as the lever, so you never have to climb onto the gurney like the Captain Morgan technique \u2014 same physics, easier on your back. [19]\n\n**How to:**\n1. Lay the patient supine; have an assistant flex the UNAFFECTED knee and stabilize the pelvis on the bed.\n2. Slide your forearm under the affected leg into the popliteal fossa, and let that same hand grasp the assistant-held unaffected knee for an anchor.\n3. With your other hand, grasp the affected lower leg near the ankle.\n4. Flex the dislocated hip to 90\u00B0; your forearm is the fulcrum and the affected lower leg is the lever.\n5. Pull down on the lower leg \u2014 this flexes the knee over your forearm and drives traction along the femur; add gentle internal/external rotation until the head clunks back in. Confirm with post-reduction x-ray.\n\n**Equipment:** Gurney, one assistant, procedural sedation/analgesia.\n\n_Source: ALiEM Trick of the Trade \u2014 Hip dislocation Part II (Whistler technique); Walden & Hamer, J Emerg Med 1999._',
     },
+    {
+      heading: 'Buddy-Tape a Toe Fracture \u2014 Pad the Web and Leave the Nail Showing',
+      body: '**Accomplishes:** Functionally splints a non-displaced lesser-toe fracture using the adjacent toe as a stabilizer, while two small habits prevent the classic complications \u2014 maceration and a missed rotational deformity. [20]\n\n**How to:**\n1. First reduce any angulated/displaced toe under a digital block; most lesser-toe fractures are minimally displaced and need only taping.\n2. Place a strip of gauze or cotton in the web space BETWEEN the injured toe and its neighbor \u2014 skin-on-skin taping macerates and breaks down.\n3. Tape the injured toe to the adjacent (usually larger) toe at the proximal and distal phalanx, snug but not circumferentially tight.\n4. Leave the NAIL BEDS exposed and visible \u2014 lining the nails up is how you confirm there is no rotational deformity hiding under the tape.\n5. Hard-soled / postoperative shoe, change tape every 2\u20133 days, keep dry. Treat the great toe with more respect: image it, and refer displaced/intra-articular hallux fractures (>25% joint surface) to ortho.\n\n**Equipment:** Gauze or cotton padding, tape, hard-soled (postoperative) shoe.\n\n_Source: Hatch & Hacking, AFP \u2014 Evaluation and Management of Toe Fractures; Merck Manual (Professional)._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -26976,6 +27000,7 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
     { num: 17, text: 'ALiEM. Trick of the Trade: TMJ dislocation reduction with a stack of tongue blades. aliem.com.' },
     { num: 18, text: 'ALiEM. Trick of the Trade: Extra-oral reduction technique for anterior mandible dislocation. aliem.com.' },
     { num: 19, text: 'ALiEM. Trick of the Trade: Hip dislocation Part II (Whistler technique). aliem.com. Walden PD, Hamer JR. Whistler technique used to reduce traumatic hip dislocation. J Emerg Med. 1999;17(3):441-4.' },
+    { num: 20, text: 'Hatch RL, Hacking S. Evaluation and management of toe fractures. Am Fam Physician. 2003;68(12):2413-2418. See also Merck Manual Professional: Toe fractures.' },
   ],
 };
 
