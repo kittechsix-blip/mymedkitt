@@ -25193,6 +25193,10 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'M-Mode Line to Aim a US-Guided Peripheral IV',
             body: '**Accomplishes:** Shows exactly where the probe\u2019s centerline projects, so you advance the IV needle along the right trajectory instead of guessing where mid-screen sits on the probe. [23]\n\n**How to:**\n1. Center the target vein in the middle of the ultrasound screen in short axis.\n2. Press the M-mode button ONCE \u2014 a vertical reference line appears down the middle of the image, marking the probe\u2019s centerline.\n3. Line up your IV catheter with the corresponding center notch on the probe face.\n4. Insert the needle in that plane and advance \u2014 the M-mode line predicts the needle\u2019s path to the vein.\n5. This is a free stand-in for a \u201Cbiopsy guide\u201D feature that not every machine has.\n\n**Equipment:** Ultrasound with M-mode, linear probe, IV catheter.\n\n_Source: ALiEM Trick of the Trade \u2014 Needle-vein alignment in US-guided PIV (Wiswell)._',
         },
+        {
+            heading: 'Arm-Board Finger Immobilization for a Pediatric Hand Procedure',
+            body: '**Accomplishes:** Isolates one finger and pins a squirming child\u2019s hand still for a nailbed repair, laceration, or foreign-body removal \u2014 and hides the procedure from the child\u2019s view to cut anxiety. [24]\n\n**How to:**\n1. Lay the child\u2019s forearm on an adult-size rigid IV arm board, leaving extra board sticking out past the fingertips to use as a handle.\n2. Tape the wrist and forearm to the board snugly but NOT circumferentially tight \u2014 leave room to check perfusion.\n3. Tape down every finger joint EXCEPT the digit you are working on, securing each to the board so the child cannot pull or twist away.\n4. The single freed finger is now isolated in your field; the taped-down neighbors and the board handle stop the whole hand from moving.\n5. Position the board so the work area faces you and away from the child\u2019s line of sight; remove all tape and re-check the fingers at the end.\n\n**Equipment:** Adult-size rigid IV arm board, tape, padding.\n\n_Source: ALiEM Pediatric Trick of the Trade \u2014 Finger immobilization technique._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25218,6 +25222,7 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 21, text: 'ALiEM. Trick of the Trade: Fishhook removal techniques (Riveros). aliem.com.' },
         { num: 22, text: 'ALiEM. Trick of the Trade: Hemostasis of a bleeding finger laceration using a glove. aliem.com.' },
         { num: 23, text: 'ALiEM. Trick of the Trade: Needle-vein alignment in ultrasound-guided peripheral IV (Wiswell). aliem.com.' },
+        { num: 24, text: 'ALiEM. Pediatric Trick of the Trade: Finger immobilization technique. aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25282,6 +25287,10 @@ const TRICKS_ENT_PAGE = {
             heading: 'Drain a Nasal Septal Hematoma Before It Eats the Cartilage',
             body: '**Accomplishes:** Evacuates a septal hematoma so the avascular septal cartilage keeps its blood supply, heading off septal necrosis, abscess, and a permanent saddle-nose deformity. [14]\n\n**How to:**\n1. Suspect it after ANY nasal trauma: examine both nares and gently press the septum with a cotton swab \u2014 a normal septum is thin and firm, a hematoma is a soft, boggy, bluish bulge that compresses.\n2. Anesthetize topically/locally, then incise the mucosa over the most fluctuant point with an 11-blade.\n3. Express and suction the clot; a small Penrose drain or a corner of glove can keep the pocket open.\n4. Place bilateral anterior packing or a quilting/mattress suture to compress the leaves of mucosa back against the cartilage and prevent reaccumulation.\n5. Always check BOTH sides (cartilage fractures easily and bilateral hematomas occur); start antibiotics covering S. aureus and arrange 24\u2013hour ENT recheck. In children even minor trauma can do this within 24\u201372 h.\n\n**Equipment:** Nasal speculum, headlamp, 11-blade scalpel, suction, anterior packing or Penrose drain, suture, anti-staph antibiotic.\n\n_Source: WikEM \u2014 Nasal septal hematoma; ALiEM ENT tricks of the trade._',
         },
+        {
+            heading: 'Mother\u2019s Kiss for a Pediatric Nasal Foreign Body',
+            body: '**Accomplishes:** Expels an anterior nasal foreign body in a young child with a parent-delivered puff of positive pressure \u2014 no instruments, no sedation, and it often avoids a trip to the OR. [15]\n\n**How to:**\n1. Best for a cooperative caregiver and a smooth, anteriorly located object; warn against button batteries or magnets, which need urgent instrument removal instead.\n2. Have the parent explain it as a \u201Cbig kiss\u201D so the child is not frightened.\n3. The parent occludes the UNAFFECTED nostril with a finger, pressing it closed.\n4. The parent places their mouth over the child\u2019s open mouth to form a seal and gives a short, sharp puff \u2014 first gently until they feel the glottis close (resistance), then one more forceful blow.\n5. The pressure (about a sneeze, ~60 mmHg) drives the object out of the affected nostril; repeat a few times. Even a partial result usually improves visualization for instrument removal.\n\n**Equipment:** None \u2014 just a willing parent/guardian.\n\n_Source: CMAJ systematic review (Cook, Burton, Glasziou 2012) \u2014 efficacy and safety of the \u201Cmother\u2019s kiss\u201D; ACEP Now positive-pressure technique._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25298,6 +25307,7 @@ const TRICKS_ENT_PAGE = {
         { num: 12, text: 'ALiEM. Trick of the Trade: Less traumatic nasopharyngoscopy (Cade, Lutfy-Clayton). aliem.com.' },
         { num: 13, text: 'ALiEM. Trick of the Trade: Epistaxis control with tongue blades. aliem.com.' },
         { num: 14, text: 'WikEM. Nasal septal hematoma. wikem.org. See also ALiEM ENT tricks of the trade.' },
+        { num: 15, text: 'Cook S, Burton M, Glasziou P. Efficacy and safety of the \u201Cmother\u2019s kiss\u201D technique: a systematic review of case reports and case series. CMAJ. 2012;184(17):E904-E912. See also ACEP Now: positive pressure technique for nasal foreign body removal.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25425,6 +25435,10 @@ const TRICKS_WOUND_PAGE = {
             heading: 'Tegaderm Dam to Stop Tissue-Adhesive Seepage Near the Eye',
             body: '**Accomplishes:** Keeps runny cyanoacrylate (Dermabond) from tracking into the eye, eyebrow, or hairline when gluing a wound near the eyelid or scalp. [7]\n\n**How to:**\n1. Cut an oval or circular window out of the center of a transparent Tegaderm (the clear dressing in any IV/central-line kit).\n2. Peel and adhere the Tegaderm to dry skin so the cut-out window frames just the laceration; press the window edges down to seal against seepage.\n3. You do NOT need to stick the whole dressing down \u2014 sealing the inner rim is enough, and leaving it loose avoids pulling out eyebrow or lash hairs on removal.\n4. Approximate the wound and apply the tissue adhesive within the window; the Tegaderm rim dams any \u201Crun.\u201D\n5. Once the glue is tacky-dry, gently peel the Tegaderm away to reveal a clean, well-circumscribed bead of adhesive over the wound.\n\n**Equipment:** Transparent Tegaderm dressing, scissors, cyanoacrylate tissue adhesive.\n\n_Source: ALiEM Trick of the Trade \u2014 Preventing tissue adhesive seepage (Afarian)._',
         },
+        {
+            heading: 'Head Basin to Wash Out a Bloody Scalp Laceration',
+            body: '**Accomplishes:** Builds a \u201Chairdresser sink\u201D from a plastic basin so you can flush clotted blood out of the hair and irrigate a scalp wound without soaking the patient or the gurney \u2014 and it works on a C-collared patient who cannot reach a sink. [8]\n\n**How to:**\n1. Take an emesis/wash basin and cut a semicircular or rectangular opening in its rim, leaving a 2\u20134 inch lip at the bottom so fluid still pools and does not pour out.\n2. Pad the cut edges (tape or gauze) for comfort, then cradle the back of the head in the basin so the neck rests in the cut-out notch \u2014 the collar can stay on.\n3. Put the patient in slight Trendelenburg so runoff flows toward the basin, not down the back.\n4. Irrigate with a pullout faucet head, or improvise a high-flow stream by punching several 18G-needle holes in the cap of a saline bottle and squeezing.\n5. Wash out matted blood to expose any occult lacerations, then proceed with standard cleaning and closure; empty the basin as it fills.\n\n**Equipment:** Plastic wash/emesis basin, scissors, tape/gauze padding, irrigation saline or a sink faucet, 18G needle (for the DIY squirt cap).\n\n_Source: ALiEM Trick of the Trade \u2014 Irrigating scalp lacerations (the \u201Chead basin\u201D / hairdresser-sink technique, Lin)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25434,6 +25448,7 @@ const TRICKS_WOUND_PAGE = {
         { num: 5, text: 'Lin B. Tongue lacerations \u2014 closing the gap. lacerationrepair.com. See also WikEM: Tongue laceration; EP Monthly: How to repair a lingual laceration.' },
         { num: 6, text: 'emDocs. Evidence-based approach to nailbed injuries. emdocs.net. See also LITFL: Subungual haematoma trephination.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Preventing tissue adhesive seepage. aliem.com.' },
+        { num: 8, text: 'ALiEM. Trick of the Trade: Irrigating scalp lacerations (head basin / hairdresser-sink technique). aliem.com.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
@@ -25832,6 +25847,14 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Buddy-Tape a Toe Fracture \u2014 Pad the Web and Leave the Nail Showing',
             body: '**Accomplishes:** Functionally splints a non-displaced lesser-toe fracture using the adjacent toe as a stabilizer, while two small habits prevent the classic complications \u2014 maceration and a missed rotational deformity. [20]\n\n**How to:**\n1. First reduce any angulated/displaced toe under a digital block; most lesser-toe fractures are minimally displaced and need only taping.\n2. Place a strip of gauze or cotton in the web space BETWEEN the injured toe and its neighbor \u2014 skin-on-skin taping macerates and breaks down.\n3. Tape the injured toe to the adjacent (usually larger) toe at the proximal and distal phalanx, snug but not circumferentially tight.\n4. Leave the NAIL BEDS exposed and visible \u2014 lining the nails up is how you confirm there is no rotational deformity hiding under the tape.\n5. Hard-soled / postoperative shoe, change tape every 2\u20133 days, keep dry. Treat the great toe with more respect: image it, and refer displaced/intra-articular hallux fractures (>25% joint surface) to ortho.\n\n**Equipment:** Gauze or cotton padding, tape, hard-soled (postoperative) shoe.\n\n_Source: Hatch & Hacking, AFP \u2014 Evaluation and Management of Toe Fractures; Merck Manual (Professional)._',
         },
+        {
+            heading: 'Davos (Boss-Holzach-Matter) Self-Reduction for Anterior Shoulder Dislocation',
+            body: '**Accomplishes:** Lets the patient reduce their own anterior shoulder dislocation with self-applied traction, usually with no sedation and minimal pain \u2014 ideal first-line, especially for recurrent dislocators. [21]\n\n**How to:**\n1. Confirm an anterior dislocation in a calm, cooperative patient and attempt EARLY (within ~30 minutes); avoid if the dislocation is old (>7\u201310 days) or a fracture is suspected.\n2. Seat the patient on the gurney and have them flex the knee on the SAME side as the dislocated shoulder to 90\u00B0, foot flat.\n3. Have the patient lace the fingers of both hands together around the front of that flexed knee.\n4. Ask them to lean slowly BACKWARD with the neck slightly extended until the arms pull fully straight \u2014 this self-administered axial traction is patient-controlled, so they throttle their own pain and muscle spasm.\n5. While leaning back, have them gently shrug the shoulders forward; the relaxed humeral head slides back over the glenoid. Only ONE attempt without analgesia is recommended before escalating.\n\n**Equipment:** A gurney/hard surface and a cooperative patient (no sedation or assistant required).\n\n_Source: ALiEM / Merck Manual \u2014 Davos (Boss-Holzach-Matter) technique; Marcano-Fernandez RCT, Acad Emerg Med 2018._',
+        },
+        {
+            heading: 'Pencil Fulcrum Reduction for a Pediatric Extra-Octave Fracture',
+            body: '**Accomplishes:** Reduces a displaced little-finger proximal phalanx \u201Cextra-octave\u201D fracture in a child using a simple pencil as a fulcrum \u2014 gentler and lower-resource than the forceful Jahss maneuver, often without sedation. [22]\n\n**How to:**\n1. Confirm an extra-octave fracture: a base-of-proximal-phalanx fracture of the little finger with ulnar deviation and dorsal/volar angulation, classically from a ball striking the abducted finger.\n2. Provide analgesia (digital block or intranasal analgesia in a child as needed).\n3. Lay an ordinary pencil at the base of the FOURTH web space, snug against the metacarpophalangeal joint of the little finger \u2014 this is your fulcrum.\n4. With the pencil held as the pivot, apply gentle ADDUCTION and flexion pressure to the proximal phalanx, levering the finger toward the ring finger.\n5. The biomechanical leverage corrects both the ulnar deviation and the angulation at once; confirm alignment, buddy-tape or splint, and obtain post-reduction films.\n\n**Equipment:** A standard pencil, digital-block supplies, buddy tape or splint material.\n\n_Source: Pencil Fulcrum Technique for closed reduction of pediatric extra-octave fractures (PMC12705274)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25854,6 +25877,8 @@ const TRICKS_ORTHO_PAGE = {
         { num: 18, text: 'ALiEM. Trick of the Trade: Extra-oral reduction technique for anterior mandible dislocation. aliem.com.' },
         { num: 19, text: 'ALiEM. Trick of the Trade: Hip dislocation Part II (Whistler technique). aliem.com. Walden PD, Hamer JR. Whistler technique used to reduce traumatic hip dislocation. J Emerg Med. 1999;17(3):441-4.' },
         { num: 20, text: 'Hatch RL, Hacking S. Evaluation and management of toe fractures. Am Fam Physician. 2003;68(12):2413-2418. See also Merck Manual Professional: Toe fractures.' },
+        { num: 21, text: 'Merck Manual Professional: How to reduce anterior shoulder dislocations using the Davos technique. Boss A, Holzach P, Matter P (1993). Marcano-Fernandez FA, et al. Teaching patients how to reduce a shoulder dislocation: BHM self-assisted vs Spaso, an RCT. Acad Emerg Med. 2018.' },
+        { num: 22, text: 'Pencil Fulcrum Technique: a simple method for closed reduction of extra-octave fractures in children. PMC12705274.' },
     ],
 };
 // ===================================================================
