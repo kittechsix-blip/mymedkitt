@@ -662,7 +662,7 @@ export const DKA_NODES = [
         module: 5,
         title: 'Early Basal Insulin (Glargine)',
         body: '**Give basal insulin on admission — this is critical to prevent recurrent DKA.**\n\n**Timing:** Administer [insulin glargine](#/drug/insulin-glargine/DKA basal) within first 6-12 hours of DKA presentation. Do NOT wait until glucose normalized or acidosis resolved.\n\n**Dosing:**\n• **Known diabetes on insulin:** Use home insulin glargine dose if known (or home total daily insulin × 0.5 if not on glargine)\n• **New diagnosis or dose unknown:** 0.25 U/kg once daily (example: 70 kg → 17-18 units once daily)\n• Some experts use 0.3 U/kg for new diagnosis\n• Starting glargine is SEPARATE from IV insulin drip — not calculated from drip rate\n\n**Why so early?**\n• IV insulin drip stops once acidosis resolves, but patient still has insulin requirement\n• Basal insulin prevents relapse (DKA recurrence common if basal not given)\n• Provides 24-hour coverage while transitioning from drip\n\n**Administration:**\n• [Insulin glargine (Lantus, Basagam)](#/drug/insulin-glargine/) SC daily (preferred: evening, or AM if long-acting preferred)\n• Can overlap with IV drip — no problem\n\n**Transition planning (later, see Module 6):** Transition from drip to basal + bolus SC insulin once patient eating and stable.',
-        citation: [1, 5, 14],
+        citation: [1, 5, 14, 17],
         next: 'dka-electrolytes-monitor',
         treatment: {
             firstLine: {
@@ -774,7 +774,7 @@ export const DKA_NODES = [
         module: 6,
         title: 'DKA Resolution — Stopping Insulin Infusion',
         body: '**ALL of the following criteria must be met to stop IV insulin and transition to SC insulin:**\n\n**Stopping criteria (per 2025 ADA Standards of Care §16 + 2024 ADA/EASD/JBDS Consensus):** [1]\n1. **Anion gap <12** (essentially normalized, or approaching normal for chronic renal disease)\n2. **Venous pH >7.30** AND **serum bicarbonate ≥18 mEq/L** (or ≥15-20 if NAGMA present)\n3. **Plasma/capillary β-hydroxybutyrate (BOHB) <0.6 mmol/L** (2025 ADA resolution marker — preferred over AG alone in CKD/HD)\n4. **Basal insulin given** (glargine or equivalent) at least 2 hours prior to stopping drip — ensures 24-hour coverage\n5. **Glucose <250 mg/dL** (well-controlled)\n6. **Patient tolerate oral intake** (able to eat, holding down food/fluids) — critical for transition to meal-associated insulin\n\n**Do NOT stop insulin if:**\n• Any single criterion not met\n• Patient still vomiting — cannot absorb SC insulin\n• Acidosis worsening or not improving\n• K still critically low despite repletion\n\n**Transition protocol:**\n• Once all criteria met, stop IV insulin drip\n• Continue basal glargine (given on admission)\n• Start meal-time insulin: regular insulin or rapid-acting (aspart, lispro) with meals\n• Sliding scale insulin for glucose >150: 2-4 units per 50 mg/dL above 150\n• Target glucose 120-180 mg/dL during hospitalization\n\n**Timing:** Usually 12-24 hours from presentation if no complications. Longer if severe DKA or complications present.',
-        citation: [1, 2, 5],
+        citation: [1, 2, 5, 16, 17],
         next: 'dka-disposition-plan',
         summary: 'Stop IV insulin when: AG <12, HCO3 >=18, glucose <250, tolerating PO, and basal given 2h+ prior.',
     },
@@ -1124,7 +1124,7 @@ export const DKA_CRITICAL_ACTIONS = [
     { text: 'Check β-hydroxybutyrate (BOHB) ≥3 mmol/L to confirm DKA diagnosis', nodeId: 'dka-bohb-interpret' },
     { text: 'Repeat labs q2-4h: BMP, glucose, anion gap, BOHB until DKA resolved', nodeId: 'dka-electrolytes-monitor' },
     { text: 'DKA resolution (2025 ADA): glucose <250 + anion gap <12 + venous pH >7.3 + HCO₃ ≥18 + BOHB <0.6 mmol/L + basal insulin given + tolerating PO', nodeId: 'dka-stopping-criteria' },
-    { text: 'Overlap insulin: continue IV insulin x1-2 hours after starting subcutaneous insulin', nodeId: 'dka-disposition-plan' },
+    { text: 'Overlap insulin: continue IV insulin x1-2 hours after starting subcutaneous insulin', nodeId: 'dka-stopping-criteria' },
     { text: 'Identify and treat precipitant (infection most common) to prevent recurrence', nodeId: 'dka-precipitant-screen' },
     { text: 'PUMP USERS: Suspend pump if malfunction suspected — start IV insulin, do not delay for troubleshooting', nodeId: 'dka-insulin-pump' },
 ];
