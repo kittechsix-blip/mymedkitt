@@ -25087,12 +25087,17 @@ const TRICKS_AIRWAY_PAGE = {
             heading: 'Larson Maneuver to Break Laryngospasm',
             body: '**Accomplishes:** Non-invasively breaks laryngospasm (often peri-sedation or pediatric) before resorting to a paralytic. [4]\n\n**How to:**\n1. Find the \u201Claryngospasm notch\u201D just behind each earlobe \u2014 bounded by the mandibular ramus in front, the mastoid behind, and the skull base above.\n2. Place a fingertip in each notch as superiorly as possible (do not slide down the mandible).\n3. Push both sides firmly inward toward the skull base while simultaneously pushing anteriorly, like a jaw thrust.\n4. Maintain firm pressure \u2014 spasm typically breaks within 1\u20132 breaths.\n5. If it fails, proceed to positive-pressure ventilation, deepen sedation, or give a paralytic.\n\n**Equipment:** None (examiner\u2019s fingers).\n\n_Source: ALiEM Trick of the Trade \u2014 Laryngospasm notch (Larson, Anesthesiology 1998)._',
         },
+        {
+            heading: 'SALAD \u2014 Suction-Assisted Laryngoscopy for the Soiled Airway',
+            body: '**Accomplishes:** Keeps profuse vomit or blood out of your view during intubation of a massively soiled airway, so you can pass the tube on the first attempt instead of drowning the camera. [5]\n\n**How to:**\n1. Hold a rigid (DuCanto or Yankauer) suction catheter in an overhand grip so it mimics the curve of the laryngoscope blade.\n2. Suction the mouth and oropharynx first, then insert the laryngoscope blade hugging the tongue so the camera/optics do not submerge in vomit.\n3. Use the rigid suction itself as a tongue depressor/lifter to seat the blade and expose the cords.\n4. Decontaminate the hypopharynx, then park the suction tip in the proximal esophagus to drain ongoing emesis; the blade pins the catheter to the left, out of the tube\u2019s path.\n5. Pass the endotracheal tube to the right of the parked suction; confirm with capnography.\n\n**Equipment:** Rigid suction catheter (DuCanto or Yankauer), wall suction, laryngoscope (video preferred), endotracheal tube.\n\n_Source: LITFL \u2014 Suction Assisted Laryngoscopy Airway Decontamination (Du Canto)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Large-bore endotracheal tube to suction an occluded airway. aliem.com.' },
         { num: 2, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: Fiberbougie for supraglottic (King) airway exchange. aliem.com.' },
         { num: 4, text: 'ALiEM. Trick of the Trade: Laryngospasm notch maneuver (Larson CP. Anesthesiology 1998;89:1293). aliem.com.' },
+        { num: 5, text: 'DuCanto J, et al. Suction Assisted Laryngoscopy Airway Decontamination (SALAD). litfl.com. See also EP Monthly: Suck it up with SALAD.' },
     ],
 };
 const TRICKS_PROCEDURES_PAGE = {
@@ -25291,6 +25296,10 @@ const TRICKS_ENT_PAGE = {
             heading: 'Mother\u2019s Kiss for a Pediatric Nasal Foreign Body',
             body: '**Accomplishes:** Expels an anterior nasal foreign body in a young child with a parent-delivered puff of positive pressure \u2014 no instruments, no sedation, and it often avoids a trip to the OR. [15]\n\n**How to:**\n1. Best for a cooperative caregiver and a smooth, anteriorly located object; warn against button batteries or magnets, which need urgent instrument removal instead.\n2. Have the parent explain it as a \u201Cbig kiss\u201D so the child is not frightened.\n3. The parent occludes the UNAFFECTED nostril with a finger, pressing it closed.\n4. The parent places their mouth over the child\u2019s open mouth to form a seal and gives a short, sharp puff \u2014 first gently until they feel the glottis close (resistance), then one more forceful blow.\n5. The pressure (about a sneeze, ~60 mmHg) drives the object out of the affected nostril; repeat a few times. Even a partial result usually improves visualization for instrument removal.\n\n**Equipment:** None \u2014 just a willing parent/guardian.\n\n_Source: CMAJ systematic review (Cook, Burton, Glasziou 2012) \u2014 efficacy and safety of the \u201Cmother\u2019s kiss\u201D; ACEP Now positive-pressure technique._',
         },
+        {
+            heading: 'Pelvic Speculum as a Lit Tongue Depressor for PTA Drainage',
+            body: '**Accomplishes:** Gives you both bright light and tongue depression for peritonsillar abscess aspiration when no laryngoscope is free, and frees one of your hands by letting the patient hold the device. [16]\n\n**How to:**\n1. Take a disposable fiberoptic-lit plastic vaginal speculum and remove the top blade, leaving the single bottom blade with its attached light.\n2. Hand the lit half-speculum to the seated, anesthetized patient and have them depress their own tongue base with it.\n3. Put a Yankauer suction in the patient\u2019s other hand for self-suction, which frees BOTH of your hands for the needle and syringe.\n4. Aspirate the point of maximal fluctuance under the bright direct light; keep the needle shallow (carotid sits ~2\u20132.5 cm posterolateral).\n5. If you prefer to drive it yourself, a Macintosh or video-laryngoscope blade works the same way as the illuminated depressor.\n\n**Equipment:** Disposable fiberoptic-lit vaginal speculum, Yankauer suction, spinal needle and syringe, topical/local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Pelvic speculum for peritonsillar abscess drainage (Lin)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25308,6 +25317,7 @@ const TRICKS_ENT_PAGE = {
         { num: 13, text: 'ALiEM. Trick of the Trade: Epistaxis control with tongue blades. aliem.com.' },
         { num: 14, text: 'WikEM. Nasal septal hematoma. wikem.org. See also ALiEM ENT tricks of the trade.' },
         { num: 15, text: 'Cook S, Burton M, Glasziou P. Efficacy and safety of the \u201Cmother\u2019s kiss\u201D technique: a systematic review of case reports and case series. CMAJ. 2012;184(17):E904-E912. See also ACEP Now: positive pressure technique for nasal foreign body removal.' },
+        { num: 16, text: 'ALiEM. Trick of the Trade: Pelvic speculum for peritonsillar abscess drainage (Lin). aliem.com.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25439,6 +25449,14 @@ const TRICKS_WOUND_PAGE = {
             heading: 'Head Basin to Wash Out a Bloody Scalp Laceration',
             body: '**Accomplishes:** Builds a \u201Chairdresser sink\u201D from a plastic basin so you can flush clotted blood out of the hair and irrigate a scalp wound without soaking the patient or the gurney \u2014 and it works on a C-collared patient who cannot reach a sink. [8]\n\n**How to:**\n1. Take an emesis/wash basin and cut a semicircular or rectangular opening in its rim, leaving a 2\u20134 inch lip at the bottom so fluid still pools and does not pour out.\n2. Pad the cut edges (tape or gauze) for comfort, then cradle the back of the head in the basin so the neck rests in the cut-out notch \u2014 the collar can stay on.\n3. Put the patient in slight Trendelenburg so runoff flows toward the basin, not down the back.\n4. Irrigate with a pullout faucet head, or improvise a high-flow stream by punching several 18G-needle holes in the cap of a saline bottle and squeezing.\n5. Wash out matted blood to expose any occult lacerations, then proceed with standard cleaning and closure; empty the basin as it fills.\n\n**Equipment:** Plastic wash/emesis basin, scissors, tape/gauze padding, irrigation saline or a sink faucet, 18G needle (for the DIY squirt cap).\n\n_Source: ALiEM Trick of the Trade \u2014 Irrigating scalp lacerations (the \u201Chead basin\u201D / hairdresser-sink technique, Lin)._',
         },
+        {
+            heading: 'Hair Apposition Technique (HAT Trick) for Scalp Lacerations',
+            body: '**Accomplishes:** Closes a linear scalp laceration by braiding and gluing the patient\u2019s own hair \u2014 no anesthetic, no staples, no return visit, and it unravels on its own in about a week. [9]\n\n**How to:**\n1. Irrigate and inspect the wound; the technique needs hair at least ~3 cm long on both sides (use the modified clamp version for shorter hair).\n2. Dry the surrounding hair thoroughly \u2014 tissue adhesive will not stick to wet hair.\n3. Grab 3\u20137 strands on one side of the wound and the same on the other side.\n4. Cross the two bundles and twist them through a single 360\u00B0 revolution to appose the wound edges; do NOT tie a knot.\n5. Drop a few drops of tissue adhesive on the twist to lock it; repeat along the length of the laceration. Tell the patient it self-releases in ~1 week.\n\n**Equipment:** Irrigation saline, towel/gauze to dry, cyanoacrylate tissue adhesive.\n\n_Source: ALiEM Trick of the Trade \u2014 Hair apposition technique (HAT trick); Ong, Ann Emerg Med 2002._',
+        },
+        {
+            heading: 'V-to-Y Flap for a Laceration Under Tension',
+            body: '**Accomplishes:** Closes a gaping or V-shaped wound whose edges will not meet without ischemic tension, redistributing the pull so the flap tip keeps its blood supply instead of necrosing. [10]\n\n**How to:**\n1. Identify a V-shaped flap laceration where simple interrupted sutures would blanch and strangle the tip.\n2. Anesthetize and irrigate; gently debride only clearly devitalized edges.\n3. Anchor the point of the V FIRST with a half-buried horizontal mattress (corner) suture \u2014 the needle passes through the dermis of the flap tip, not the epidermis, so you do not crush its tenuous blood supply.\n4. This pulls the V forward into a Y configuration, advancing the flap and spreading tension across the limbs of the Y.\n5. Close the rest of the limbs with simple interrupted sutures; the corner stitch carries the load.\n\n**Equipment:** Suture kit, fine (e.g., 5-0/6-0) nonabsorbable suture, needle driver, forceps, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 V-to-Y flap laceration repair (Brian Lin, LacerationRepair.com)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25449,6 +25467,8 @@ const TRICKS_WOUND_PAGE = {
         { num: 6, text: 'emDocs. Evidence-based approach to nailbed injuries. emdocs.net. See also LITFL: Subungual haematoma trephination.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Preventing tissue adhesive seepage. aliem.com.' },
         { num: 8, text: 'ALiEM. Trick of the Trade: Irrigating scalp lacerations (head basin / hairdresser-sink technique). aliem.com.' },
+        { num: 9, text: 'ALiEM. Trick of the Trade: Hair apposition technique (HAT trick) for scalp lacerations. aliem.com. Ong ME, et al. A randomized controlled trial comparing the hair apposition technique with tissue glue to standard suturing in scalp lacerations. Ann Emerg Med. 2002.' },
+        { num: 10, text: 'ALiEM. Trick of the Trade: V-to-Y flap laceration repair for tension wounds (Brian Lin). aliem.com. See also lacerationrepair.com.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
@@ -25566,6 +25586,10 @@ const TRICKS_GENERAL_PAGE = {
             heading: 'Oxygen-Mask Strap to Remove a Stuck Ring',
             body: '**Accomplishes:** Slides a stuck ring off a swollen finger using the stretchy elastic strap from an O2 face mask \u2014 thinner and stretchier than string, so it slips under the ring better and milks edema distally. [7]\n\n**How to:**\n1. Cut the elastic strap off a standard oxygen face mask.\n2. Thread one end UNDER the ring (a hemostat tip helps feed it through).\n3. Wrap the strap snugly around the finger distal-to-proximal, coil by coil, past the knuckle, compressing the swelling out toward the fingertip.\n4. Grab the end that was fed under the ring and unwind it from the proximal side; as it unwinds it walks the ring distally over the compressed tissue and off.\n5. Lubricate and repeat if needed; if the ring is tungsten/ceramic and won\u2019t budge, crack it with vise/locking pliers instead of a cutter.\n\n**Equipment:** Oxygen face-mask elastic strap, hemostat, lubricant.\n\n_Source: ALiEM Trick of the Trade \u2014 Ring removal using an oxygen mask strap._',
         },
+        {
+            heading: 'Digital Rectal Massage for Intractable Hiccups',
+            body: '**Accomplishes:** Aborts refractory (intractable) hiccups by triggering a vagal reflex, an option to try before reaching for chlorpromazine or other drugs. [8]\n\n**How to:**\n1. Reserve this for hiccups that have failed simpler vagal/respiratory maneuvers (breath-hold, Valsalva, swallowing granulated sugar) and are distressing or persistent.\n2. Explain the maneuver, get verbal consent, and have a chaperone present; document both.\n3. Don a glove, lubricate, and perform a slow, rhythmic digital rectal massage \u2014 the same technique as a vagal maneuver reported to break the hiccup reflex arc.\n4. Hiccups often stop abruptly; if they recur, the maneuver can be repeated.\n5. If still intractable, move on to pharmacology (e.g., chlorpromazine, baclofen, metoclopramide) and work up an underlying cause.\n\n**Equipment:** Glove, lubricant, a chaperone.\n\n_Source: Odeh M, et al. Termination of intractable hiccups with digital rectal massage. J Intern Med 1990; Fesmire FM, Ann Emerg Med 1988 (Ig Nobel)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25575,6 +25599,7 @@ const TRICKS_GENERAL_PAGE = {
         { num: 5, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 6, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Ring removal using an oxygen mask strap. aliem.com.' },
+        { num: 8, text: 'Odeh M, Bassan H, Oliven A. Termination of intractable hiccups with digital rectal massage. J Intern Med. 1990;227(2):145-146. Fesmire FM. Termination of refractory SVT/hiccups by digital rectal massage. Ann Emerg Med. 1988 (Ig Nobel Prize 2006).' },
     ],
 };
 const DENTAL_EXTRACTION_STEPS_PAGE = {
