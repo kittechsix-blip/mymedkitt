@@ -162,6 +162,7 @@ export const TREE_REGISTRY = {
   'acute-pancreatitis': { prefix: 'ACUTE_PANCREATITIS', entryNodeId: 'ap-start',         categoryId: 'gastroenterology' },
   'hepatitis':        { prefix: 'HEPATITIS',           entryNodeId: 'hepatitis-start',    categoryId: 'gastroenterology' },
   'serotonin-syndrome': { prefix: 'SEROTONIN_SYNDROME', entryNodeId: 'ss-start',         categoryId: 'toxicology' },
+  'lithium-toxicity': { prefix: 'LITHIUM_TOXICITY',    entryNodeId: 'lith-start',        categoryId: 'toxicology' },
   'digoxin-toxicity': { prefix: 'DIGOXIN_TOXICITY',    entryNodeId: 'dig-start',          categoryId: 'toxicology' },
   'beta-blocker-od':  { prefix: 'BETA_BLOCKER_OD',     entryNodeId: 'bb-start',           categoryId: 'toxicology' },
   'ccb-od':           { prefix: 'CCB_OD',              entryNodeId: 'ccb-start',          categoryId: 'toxicology' },

@@ -3507,6 +3507,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'sal-start',
       },
       {
+        id: 'lithium-toxicity',
+        title: 'Lithium Toxicity',
+        subtitle: 'Exposure Type → Levels/Workup → Decontamination → Saline/Euvolemia → EXTRIP HD → Disposition',
+        categoryId: 'toxicology',
+        version: '1.0',
+        nodeCount: 27,
+        entryNodeId: 'lith-start',
+      },
+      {
         id: 'caustic-ingestion',
         title: 'Caustic Ingestion',
         subtitle: 'Assessment → Airway → Workup → Zargar Grading → Treatment → Disposition',

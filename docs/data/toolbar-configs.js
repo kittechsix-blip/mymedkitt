@@ -18,6 +18,7 @@ export const TOOLBAR_OVERFLOW = new Set([
     'excited-delirium',
     'sedation-options',
     'dystonic-reaction',
+    'lithium-toxicity',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 const TOOLBAR_CONFIGS = {
@@ -801,6 +802,20 @@ const TOOLBAR_CONFIGS = {
         { id: 'bicarb', label: 'NaHCO\u2083', icon: '\uD83D\uDC89', action: 'jump', target: 'sal-bicarb-bolus' },
         { id: 'hd', label: 'HD', icon: '\uD83D\uDEA8', action: 'jump', target: 'sal-hd-indications' },
         { id: 'airway', label: 'Airway \u26A0', icon: '\u26A0\uFE0F', action: 'overlay', target: 'sal-death-spiral' },
+    ],
+    'lithium-toxicity': [
+        { id: 'hd', label: 'HD', icon: '🩸', action: 'jump', target: 'lith-hd-screen', pinned: true },
+        { id: 'levels', label: 'Levels', icon: '📈', action: 'jump', target: 'lith-levels', pinned: true },
+        { id: 'fluids', label: 'Fluids', icon: '💧', action: 'jump', target: 'lith-fluids', pinned: true },
+        { id: 'decon', label: 'Decon', icon: '🧼', action: 'jump', target: 'lith-decon', pinned: true },
+        { id: 'rebound', label: 'Rebound', icon: '↩️', action: 'jump', target: 'lith-hd-procedure-rebound', pinned: true },
+        { id: 'type', label: 'Type', icon: '🧭', action: 'jump', target: 'lith-exposure-type' },
+        { id: 'labs', label: 'Labs', icon: '🧪', action: 'jump', target: 'lith-workup' },
+        { id: 'meds', label: 'Meds', icon: '💊', action: 'jump', target: 'lith-med-interactions' },
+        { id: 'neuro', label: 'Neuro', icon: '🧠', action: 'jump', target: 'lith-clinical-presentations' },
+        { id: 'ddx', label: 'DDx', icon: '🔀', action: 'jump', target: 'lith-differential' },
+        { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'lith-disposition' },
+        { id: 'restart', label: 'Restart', icon: '🔁', action: 'jump', target: 'lith-restart-prevention' },
     ],
     'sepsis': [
         { id: 'qsofa', label: 'qSOFA', icon: '\uD83D\uDCCA', action: 'calculator', target: 'qsofa' },

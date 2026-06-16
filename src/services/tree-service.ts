@@ -798,6 +798,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/salicylate.js');
       return { nodes: m.SALICYLATE_NODES, entryNodeId: 'sal-start', categoryId: 'toxicology', moduleLabels: m.SALICYLATE_MODULE_LABELS, citations: m.SALICYLATE_CITATIONS, criticalActions: m.SALICYLATE_CRITICAL_ACTIONS };
     },
+    'lithium-toxicity': async () => {
+      const m = await import('../data/trees/lithium-toxicity.js');
+      return { nodes: m.LITHIUM_TOXICITY_NODES, entryNodeId: 'lith-start', categoryId: 'toxicology', moduleLabels: m.LITHIUM_TOXICITY_MODULE_LABELS, citations: m.LITHIUM_TOXICITY_CITATIONS, criticalActions: m.LITHIUM_TOXICITY_CRITICAL_ACTIONS };
+    },
     'acetaminophen': async () => {
       const m = await import('../data/trees/acetaminophen.js');
       return { nodes: m.ACETAMINOPHEN_OD_NODES, entryNodeId: 'apap-start', categoryId: 'toxicology', moduleLabels: m.ACETAMINOPHEN_OD_MODULE_LABELS, citations: m.ACETAMINOPHEN_OD_CITATIONS, criticalActions: m.ACETAMINOPHEN_OD_CRITICAL_ACTIONS };
