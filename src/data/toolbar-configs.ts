@@ -258,10 +258,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'peds-tbsa', label: 'Peds TBSA', icon: '\uD83D\uDC76', action: 'calculator', target: 'tbsa-peds' },
     { id: 'dell', label: 'Dell', icon: '\uD83C\uDFE5', action: 'calculator', target: 'burn-dell-seton' },
     { id: 'airway', label: 'Airway', icon: '\uD83E\uDEC1', action: 'jump', target: 'burn-airway-assess' },
+    { id: 'hf-protocol', label: 'HF Rx', icon: '\u26A0\uFE0F', action: 'calculator', target: 'hf-treatment', pinned: true },
+    { id: 'cyanide-rx', label: 'CN Rx', icon: '\u2620\uFE0F', action: 'jump', target: 'burn-cyanide-rx', pinned: true },
     { id: 'co-cn', label: 'CO/CN', icon: '\u2620\uFE0F', action: 'overlay', target: 'burns-co-cyanide' },
     { id: 'dress', label: 'Dress', icon: '\uD83E\uDE79', action: 'overlay', target: 'burns-dressing-guide' },
     { id: 'chemical', label: 'Chemical', icon: '\uD83E\uDDEA', action: 'overlay', target: 'burns-chemical-detail' },
-    { id: 'hf-protocol', label: 'HF Acid', icon: '\u26A0\uFE0F', action: 'calculator', target: 'hf-treatment' },
   ],
   'stroke': [
     { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },

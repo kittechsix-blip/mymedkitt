@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 860" role="img" aria-labelledby="title desc">
+  <title id="title">Escharotomy incision map</title>
+  <desc id="desc">Red lines show escharotomy incision sites for chest, arms, hands, legs, and feet. Gray labels show structures and areas to avoid.</desc>
+  <defs>
+    <style>
+      .bg { fill: #fffaf2; }
+      .skin { fill: #f8d5c5; stroke: #7d4b3b; stroke-width: 3; }
+      .joint { fill: none; stroke: #b57968; stroke-width: 2; stroke-dasharray: 6 7; opacity: .65; }
+      .cut { fill: none; stroke: #d7263d; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+      .optional { fill: none; stroke: #d7263d; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 14 13; }
+      .avoid { fill: none; stroke: #263238; stroke-width: 6; stroke-linecap: round; opacity: .85; }
+      .label { font: 700 24px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #1f2933; }
+      .small { font: 600 18px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #344054; }
+      .tiny { font: 600 15px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #344054; }
+      .callout { stroke: #344054; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .cut-callout { stroke: #d7263d; stroke-width: 3; fill: none; marker-end: url(#red-arrow); }
+      .panel { fill: #ffffff; stroke: #d0d5dd; stroke-width: 2; rx: 18; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#344054" />
+    </marker>
+    <marker id="red-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#d7263d" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="960" height="860" />
+  <rect x="24" y="22" width="912" height="816" rx="24" fill="#fffdf8" stroke="#d0d5dd" stroke-width="2" />
+  <text x="48" y="62" class="label">Escharotomy: actual incision lines</text>
+  <text x="48" y="92" class="small">RED = cut through eschar to subcutaneous fat. BLACK = avoid neurovascular danger zones.</text>
+
+  <!-- Body silhouette -->
+  <circle class="skin" cx="480" cy="155" r="48" />
+  <path class="skin" d="M408 206 C428 191 532 191 552 206 L590 344 C603 391 575 445 540 466 L525 618 L565 790 C570 812 550 827 533 806 L485 646 L475 646 L427 806 C410 827 390 812 395 790 L435 618 L420 466 C385 445 357 391 370 344 Z" />
+
+  <!-- Arms -->
+  <path class="skin" d="M405 222 C350 242 294 279 245 332 C229 349 206 336 216 314 C261 235 326 198 396 190 Z" />
+  <path class="skin" d="M555 222 C610 242 666 279 715 332 C731 349 754 336 744 314 C699 235 634 198 564 190 Z" />
+  <path class="skin" d="M223 327 C192 369 177 417 170 479 C168 498 145 507 136 490 C119 452 139 372 204 310 Z" />
+  <path class="skin" d="M737 327 C768 369 783 417 790 479 C792 498 815 507 824 490 C841 452 821 372 756 310 Z" />
+  <path class="skin" d="M155 480 C134 492 124 512 136 529 C147 545 178 544 190 526 C204 505 185 485 155 480 Z" />
+  <path class="skin" d="M805 480 C826 492 836 512 824 529 C813 545 782 544 770 526 C756 505 775 485 805 480 Z" />
+
+  <!-- Joint guides -->
+  <path class="joint" d="M381 315 C430 335 530 335 579 315" />
+  <path class="joint" d="M420 458 C454 472 506 472 540 458" />
+  <path class="joint" d="M398 611 C440 622 520 622 562 611" />
+
+  <!-- Chest/trunk cuts -->
+  <path class="cut" d="M398 216 C389 255 383 297 383 340 C383 383 397 423 421 454" />
+  <path class="cut" d="M562 216 C571 255 577 297 577 340 C577 383 563 423 539 454" />
+  <path class="cut" d="M421 454 C456 470 504 470 539 454" />
+  <path class="optional" d="M396 236 C426 251 534 251 564 236" />
+  <path class="optional" d="M421 454 C405 505 402 554 410 612" />
+  <path class="optional" d="M539 454 C555 505 558 554 550 612" />
+
+  <!-- Arm cuts -->
+  <path class="cut" d="M372 220 C321 257 274 304 230 357 C196 399 183 444 179 505" />
+  <path class="cut" d="M398 244 C350 291 304 346 258 414 C238 444 217 482 186 521" />
+  <path class="cut" d="M588 220 C639 257 686 304 730 357 C764 399 777 444 781 505" />
+  <path class="cut" d="M562 244 C610 291 656 346 702 414 C722 444 743 482 774 521" />
+
+  <!-- Dorsal hand cuts -->
+  <path class="cut" d="M143 494 L135 520" />
+  <path class="cut" d="M154 490 L153 528" />
+  <path class="cut" d="M166 490 L171 527" />
+  <path class="cut" d="M817 494 L825 520" />
+  <path class="cut" d="M806 490 L807 528" />
+  <path class="cut" d="M794 490 L789 527" />
+
+  <!-- Leg cuts -->
+  <path class="cut" d="M438 468 C422 535 407 615 394 705 C390 737 383 774 371 807" />
+  <path class="cut" d="M472 470 C457 548 449 626 445 708 C444 748 438 783 427 812" />
+  <path class="cut" d="M522 470 C537 548 545 626 549 708 C550 748 556 783 567 812" />
+  <path class="cut" d="M542 468 C558 535 573 615 586 705 C590 737 597 774 609 807" />
+
+  <!-- Foot dorsal extensions -->
+  <path class="cut" d="M371 807 C352 808 333 812 315 820" />
+  <path class="cut" d="M427 812 C407 822 391 827 373 830" />
+  <path class="cut" d="M567 812 C587 822 603 827 621 830" />
+  <path class="cut" d="M609 807 C628 808 647 812 665 820" />
+
+  <!-- Avoid zones -->
+  <path class="avoid" d="M280 338 C291 352 303 360 317 367" />
+  <path class="avoid" d="M680 338 C669 352 657 360 643 367" />
+  <path class="avoid" d="M420 705 C429 722 432 741 430 759" />
+  <path class="avoid" d="M581 641 C594 657 600 673 598 692" />
+  <path class="avoid" d="M387 736 C377 752 373 769 375 786" />
+
+  <!-- Callouts -->
+  <line class="cut-callout" x1="110" y1="154" x2="391" y2="236" />
+  <text x="48" y="145" class="small">Chest: anterior/mid-axillary</text>
+  <text x="48" y="169" class="small">verticals + connectors</text>
+
+  <line class="cut-callout" x1="139" y1="228" x2="250" y2="363" />
+  <text x="48" y="222" class="small">Arms: medial + lateral</text>
+  <text x="48" y="246" class="small">mid-axial lines</text>
+
+  <line class="cut-callout" x1="166" y1="602" x2="430" y2="636" />
+  <text x="48" y="596" class="small">Legs: bilateral mid-axial</text>
+  <text x="48" y="620" class="small">groin to ankle</text>
+
+  <line class="cut-callout" x1="773" y1="602" x2="807" y2="505" />
+  <text x="720" y="596" class="small">Hands: dorsal</text>
+  <text x="720" y="620" class="small">intermetacarpal cuts</text>
+
+  <line class="callout" x1="712" y1="196" x2="646" y2="356" />
+  <text x="706" y="172" class="small">Avoid ulnar nerve</text>
+  <text x="706" y="196" class="small">at medial elbow</text>
+
+  <line class="callout" x1="730" y1="688" x2="594" y2="660" />
+  <text x="700" y="684" class="small">Avoid common</text>
+  <text x="700" y="708" class="small">peroneal nerve</text>
+
+  <line class="callout" x1="184" y1="746" x2="384" y2="756" />
+  <text x="48" y="742" class="small">Avoid posterior tibial</text>
+  <text x="48" y="766" class="small">bundle at ankle</text>
+
+</svg>

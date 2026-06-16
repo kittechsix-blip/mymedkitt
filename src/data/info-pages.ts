@@ -2895,13 +2895,13 @@ const BURNS_ESCHAROTOMY: InfoPage = {
       body: 'Escharotomy is a **bedside ED procedure** — do not delay for OR. Circumferential deep partial or full thickness burns create a tourniquet effect as interstitial edema increases during fluid resuscitation. The inelastic eschar restricts expansion, compressing underlying vessels, nerves, and (in chest burns) ventilation.',
     },
     {
-      heading: 'Visual Anchor: Eschar + Release',
+      heading: 'Cut-Line Map: Where to Incise',
       image: {
-        src: 'images/burns/burns-escharotomy-photo.jpg',
-        alt: 'Clinical photograph showing upper extremity burn eschar being released with escharotomy incisions',
-        caption: 'Escharotomy example: dry inelastic eschar has been opened to allow the edematous extremity to expand. Wikimedia Commons, Dr. R.N. Sinha, CC BY-SA 3.0; resized for app use.',
+        src: 'images/burns/burns-escharotomy-cut-lines.svg',
+        alt: 'Escharotomy cut-line map showing red incision paths on chest, arms, hands, legs, and feet',
+        caption: 'Red = actual escharotomy incisions. Black = neurovascular danger zones to mark and avoid before cutting.',
       },
-      body: 'Use the photo as a **pattern-recognition anchor**, not a procedural substitute. The bedside question is: does the circumferential eschar behave like a tourniquet? If the limb is tense with worsening pain, paresthesias, delayed cap refill, falling Doppler signal, undetectable digit SpO2, or elevated compartment pressure, open the eschar now and involve the burn surgeon early.',
+      body: 'Use the map as the procedural anchor. **Mark the intended cut lines before incision.** For limbs, cut the **medial and lateral mid-axial lines** between flexor and extensor surfaces. For chest/trunk restriction, cut the **bilateral anterior/mid-axillary lines** from clavicle to costal margin and connect across the costal margin when needed. For hand involvement, use **dorsal intermetacarpal incisions** rather than palmar cuts. The bedside question is: does the circumferential eschar behave like a tourniquet? If perfusion or ventilation is threatened, open the eschar now and involve burn surgery early.',
     },
     {
       heading: 'Indications',
@@ -2913,7 +2913,7 @@ const BURNS_ESCHAROTOMY: InfoPage = {
     },
     {
       heading: 'Extremity Technique',
-      body: '• **Medial and lateral mid-axial lines** — incise through full thickness of eschar to subcutaneous fat\n• Adequate depth: tissue **gapes open** and subcutaneous fat is visible\n• Eschar in full-thickness areas is **insensate** — no anesthesia needed (may need for margins)\n• Use **electrocautery** (preferred — hemostasis) or **scalpel**\n\n**Upper extremity:** Axilla to wrist along medial and lateral mid-axial lines. If hand involved, extend to thenar and hypothenar eminences.\n\n**Lower extremity:** Groin to ankle along medial and lateral lines. If foot involved, extend along dorsum.\n\n**Digits:** Mid-lateral incisions along non-pinch surfaces. Preserve Grayson\'s and Cleland\'s ligaments where possible. [1]',
+      body: '• **Medial and lateral mid-axial lines** — incise through full thickness of eschar to subcutaneous fat\n• Adequate depth: tissue **gapes open** and subcutaneous fat is visible\n• Start and finish about **1 cm into healthy skin** when possible; anesthetize viable skin margins\n• Eschar in full-thickness areas is **insensate** — no anesthesia needed within the eschar itself (sedation/analgesia still usually needed)\n• Use **electrocautery** (preferred — hemostasis) or **scalpel**\n• Avoid crossing flexor creases directly; curve/Z/S across joints when needed\n\n**Upper extremity:** Axilla to wrist along medial and lateral mid-axial lines. Pass **anterior to the medial epicondyle** to avoid the ulnar nerve. If hand involved, use **dorsal intermetacarpal incisions**; avoid the palm.\n\n**Lower extremity:** Groin to ankle along medial and lateral lines. Pass **anterior to the medial malleolus** to avoid the posterior tibial bundle and anterior to the fibular head/neck to avoid the common peroneal nerve.\n\n**Digits:** Mid-lateral incisions along non-pinch surfaces. Preserve Grayson\'s and Cleland\'s ligaments where possible. [1]',
     },
     {
       heading: 'Chest/Trunk Technique',
@@ -2933,7 +2933,8 @@ const BURNS_ESCHAROTOMY: InfoPage = {
     { num: 2, text: 'Butts CC et al. Surgical Escharotomy and Decompressive Therapies in Burns. J Burn Care Res. 2020;41(2):263-269.' },
     { num: 3, text: 'de Barros MEPM et al. Revisiting Escharotomy in Patients With Burns in Extremities. J Burn Care Res. 2017;38(4):e691-e698.' },
     { num: 4, text: 'Pegg SP. Escharotomy in Burns. Ann Acad Med Singapore. 1992;21(5):682-4.' },
-    { num: 5, text: 'Dr. R.N. Sinha. Escharatomy & Dressing of an 18percent Thermal Burn Patient. Wikimedia Commons. CC BY-SA 3.0.' },
+    { num: 5, text: 'NSW Agency for Clinical Innovation. Escharotomy for burn patients: a guide for clinicians. August 2025.' },
+    { num: 6, text: 'Merck Manual Professional Edition. How To Do Burn Escharotomy. Updated 2025.' },
   ],
 };
 
