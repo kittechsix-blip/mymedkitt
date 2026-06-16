@@ -96,8 +96,37 @@ const H_PYLORI_STOP = {
     ],
     citations: [],
 };
+const DYSTONIC_REACTION_STOP = {
+    id: 'dystonic-reaction-stop',
+    title: 'Acute Dystonic Reaction - Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        {
+            heading: 'Do NOT miss laryngeal dystonia',
+            body: 'Stridor, dysphonia, dyspnea, throat tightness, drooling, or hypoxia after a dopamine blocker is an airway emergency. Give anticholinergic therapy immediately and prepare airway backup. [See airway node](#/node/adr-airway).',
+        },
+        {
+            heading: 'Do NOT call tongue symptoms allergy without looking',
+            body: 'Buccolingual dystonia can feel like tongue swelling, but the tongue is not truly edematous. If there is urticaria, wheeze, hypotension, or visible progressive swelling, treat anaphylaxis/angioedema. Otherwise, anticholinergic response helps clarify. [See allergy mimic](#/node/adr-allergy-mimic).',
+        },
+        {
+            heading: 'Do NOT give more dopamine blocker',
+            body: 'Do not redose metoclopramide, prochlorperazine, haloperidol, droperidol, or related agents while treating the reaction. Stop the culprit and choose a safer substitute. [See culprit table](#/node/adr-culprit-incidence).',
+        },
+        {
+            heading: 'Do NOT discharge without relapse prevention',
+            body: 'The culprit drug often outlasts IV/IM diphenhydramine or benztropine. Give a short oral anticholinergic course when appropriate and warn about recurrent airway, eye, neck, jaw, or tongue symptoms. [See relapse prevention](#/node/adr-relapse-prevention).',
+        },
+        {
+            heading: 'Do NOT anchor if anticholinergic therapy fails',
+            body: 'No meaningful response after adequate anticholinergic therapy should reset the differential: seizure, tetanus, hypocalcemia, serotonin syndrome, NMS, allergy, CNS infection, stroke, or tox exposure. [See no-response pathway](#/node/adr-no-response).',
+        },
+    ],
+    citations: [],
+};
 export const STOP_PAGES_15 = {
     'supraglottic-airway-stop': SUPRAGLOTTIC_AIRWAY_STOP,
     'thoracotomy-procedure-stop': THORACOTOMY_PROCEDURE_STOP,
     'h-pylori-stop': H_PYLORI_STOP,
+    'dystonic-reaction-stop': DYSTONIC_REACTION_STOP,
 };

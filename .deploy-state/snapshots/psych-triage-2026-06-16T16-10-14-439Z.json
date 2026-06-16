@@ -1,0 +1,425 @@
+{
+  "tree_id": "psych-triage",
+  "captured_at": "2026-06-16T16:10:14.439Z",
+  "service_role_key_fingerprint": "778ea4be",
+  "tables": {
+    "decision_trees": [
+      {
+        "id": "psych-triage",
+        "title": "Psych Triage",
+        "subtitle": "Symptom-Based Entry → Agitation → Suicidal → Psychosis → Withdrawal → Medical Clearance",
+        "version": "1.0",
+        "node_count": 12,
+        "entry_node_id": "pst-start",
+        "updated_at": "2026-05-05T12:10:24.178172+00:00",
+        "module_labels": [
+          "Entry",
+          "Routing"
+        ]
+      }
+    ],
+    "category_trees": [
+      {
+        "category_id": "psychiatry",
+        "tree_id": "psych-triage",
+        "display_title": null,
+        "display_subtitle": null,
+        "entry_node_id": null,
+        "sort_order": 0
+      }
+    ],
+    "tree_citations": [
+      {
+        "tree_id": "psych-triage",
+        "num": 1,
+        "text": "ACEP Clinical Policy: Adult Psychiatric Emergencies. Annals of Emergency Medicine 2021."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 2,
+        "text": "ACEP Clinical Policy: Severe Agitation in ED Patients. Annals of Emergency Medicine 2024."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 3,
+        "text": "Joint Commission National Patient Safety Goal NPSG 15.01.01: Suicide Prevention. 2024."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 4,
+        "text": "AAEP Task Force on Medical Clearance of Adult Psychiatric Patients. Western Journal of Emergency Medicine 2017."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 5,
+        "text": "Dalmau J, et al. Anti-NMDA-receptor encephalitis: case series and analysis of the effects of antibodies. Lancet Neurol 2008;7:1091-8."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 6,
+        "text": "ASAM Clinical Practice Guideline on Alcohol Withdrawal Management. 2020."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 7,
+        "text": "Sienaert P, et al. A Clinical Review of the Treatment of Catatonia. Front Psychiatry 2014;5:181."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 8,
+        "text": "Berman BD. Neuroleptic malignant syndrome: a review for neurohospitalists. Neurohospitalist 2011;1:41-7."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 9,
+        "text": "Boyer EW, Shannon M. The serotonin syndrome. N Engl J Med 2005;352:1112-20."
+      },
+      {
+        "tree_id": "psych-triage",
+        "num": 10,
+        "text": "MARSIPAN: Management of Really Sick Patients with Anorexia Nervosa. Royal College of Psychiatrists 2014."
+      }
+    ],
+    "decision_nodes": [
+      {
+        "id": "pst-start",
+        "tree_id": "psych-triage",
+        "type": "question",
+        "module": 1,
+        "title": "Psych Triage",
+        "body": "**What is the PRIMARY presenting concern?**\n\nSelect the most urgent/dominant feature. Many psychiatric presentations overlap — this routes to the most appropriate starting point.",
+        "citation": [
+          1
+        ],
+        "options": [
+          {
+            "next": "pst-agitated",
+            "label": "Agitation / Aggression",
+            "urgency": "critical",
+            "description": "Combative, threatening, pacing, unable to cooperate"
+          },
+          {
+            "next": "pst-suicidal",
+            "label": "Suicidal Ideation / Attempt",
+            "urgency": "critical",
+            "description": "Expressed SI, self-harm, or post-attempt"
+          },
+          {
+            "next": "pst-altered",
+            "label": "Altered Mental Status",
+            "urgency": "urgent",
+            "description": "Confused, disoriented, fluctuating consciousness"
+          },
+          {
+            "next": "pst-psychotic",
+            "label": "Bizarre Behavior / Psychosis",
+            "description": "Hallucinations, delusions, disorganized thinking"
+          },
+          {
+            "next": "pst-anxiety",
+            "label": "Anxiety / Panic",
+            "description": "Acute anxiety, panic attack, hyperventilation"
+          },
+          {
+            "next": "pst-withdrawal",
+            "label": "Withdrawal Symptoms",
+            "urgency": "urgent",
+            "description": "Tremor, diaphoresis, tachycardia, h/o alcohol/benzo/opioid use"
+          },
+          {
+            "next": "pst-catatonia",
+            "label": "Unresponsive / Mute / Rigid",
+            "urgency": "urgent",
+            "description": "Catatonic features, not speaking, waxy flexibility"
+          },
+          {
+            "next": "pst-med-reaction",
+            "label": "Medication Reaction",
+            "urgency": "critical",
+            "description": "Suspected NMS, serotonin syndrome, dystonia"
+          },
+          {
+            "next": "pst-eating",
+            "label": "Not Eating / Purging",
+            "description": "Eating disorder presentation, weight loss, electrolyte concerns"
+          }
+        ],
+        "inputs": null,
+        "next": null,
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 0,
+        "summary": "Route to appropriate psychiatric pathway based on primary presenting concern.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-agitated",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Agitation Pathway",
+        "body": "**→ [Acute Agitation Consult](#/tree/acute-agitation)**\n\n**Immediate priorities:**\n• Verbal de-escalation (BETA protocol)\n• Chemical restraint if de-escalation fails\n• Rule out organic causes (hypoglycemia, hypoxia, intoxication)\n\n**Key decision:** Is this delirium/medical OR primary psychiatric?",
+        "citation": [
+          2
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 1,
+        "summary": "Agitated patient — route to Acute Agitation consult for BETA protocol and chemical restraint.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-suicidal",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Suicidal Patient Pathway",
+        "body": "**→ [Suicidal Patient Consult](#/tree/suicidal-patient)**\n\n**Immediate priorities:**\n• 1:1 constant visual observation\n• Remove ligatures, sharps, medications from room\n• Environmental safety checklist\n• ASQ or C-SSRS screening\n\n**Key decision:** Risk stratification → disposition (discharge vs voluntary vs involuntary)",
+        "citation": [
+          3
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 2,
+        "summary": "Suicidal patient — route to Suicidal Patient consult for C-SSRS and risk stratification.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-altered",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Altered Mental Status Pathway",
+        "body": "**→ [Medical Clearance - Psych](#/tree/medical-clearance-psych)**\n\n**Critical question:** Is this DELIRIUM or PRIMARY PSYCHOSIS?\n\n**Delirium red flags:**\n• Acute onset (hours-days)\n• Fluctuating course\n• Inattention (cannot focus on interview)\n• Visual hallucinations\n• Abnormal vital signs\n• Age >45 with first psychiatric symptoms\n\n**20% of acute psychosis has a medical etiology.** Always rule out organic causes first.",
+        "citation": [
+          4
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 3,
+        "summary": "Altered mental status — route to Medical Clearance for organic workup.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-psychotic",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Psychosis Pathway",
+        "body": "**Start with:** [Medical Clearance - Psych](#/tree/medical-clearance-psych)\n\n**Rule out organic causes FIRST:**\n• Anti-NMDA receptor encephalitis\n• Stimulant intoxication\n• Medication toxicity\n• Encephalitis/meningitis\n• Metabolic derangement\n\n**New-onset psychosis in patient >45:** Medical cause until proven otherwise.\n\n**If agitated:** [Acute Agitation](#/tree/acute-agitation) for chemical restraint options.",
+        "citation": [
+          4,
+          5
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 4,
+        "summary": "Psychosis — start with medical clearance to rule out organic causes.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-anxiety",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Anxiety / Panic Pathway",
+        "body": "**Panic attack vs medical emergency:**\n\nBefore diagnosing panic, rule out:\n• Pulmonary embolism (consider PERC, Wells)\n• Acute coronary syndrome (especially if risk factors)\n• Arrhythmia (check ECG)\n• Hyperthyroidism\n• Pheochromocytoma\n• Stimulant intoxication\n\n**If true panic attack:**\n• Reassurance, calm environment\n• Breathing exercises\n• Benzodiazepine if severe (lorazepam 0.5-1 mg PO/SL)\n• Outpatient psychiatry/therapy referral",
+        "citation": [
+          1
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 5,
+        "summary": "Anxiety/panic — rule out PE, ACS, arrhythmia before diagnosing panic disorder.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-withdrawal",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Withdrawal Pathway",
+        "body": "**→ [Alcohol Withdrawal Consult](#/tree/alcohol-withdrawal)**\n\n**Early treatment prevents:**\n• Withdrawal seizures (peak 12-48h)\n• Delirium tremens (peak 48-96h, mortality 5-15%)\n\n**Which substance?**\n• **Alcohol/Benzos:** CIWA-Ar, benzodiazepines, phenobarbital\n• **Opioids:** COWS score, buprenorphine initiation, clonidine\n• **Stimulants:** Supportive care, benzos for agitation\n\n**High-risk features:** Prior seizures/DTs, PAWSS ≥4, prolonged heavy use",
+        "citation": [
+          6
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 6,
+        "summary": "Withdrawal — route to Alcohol Withdrawal consult for CIWA-Ar and benzo protocols.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-catatonia",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Catatonia Pathway",
+        "body": "**Recognize catatonia early — it's treatable!**\n\n**Bush-Francis Catatonia Rating Scale:**\n• Immobility / stupor\n• Mutism\n• Staring / fixed gaze\n• Posturing / waxy flexibility\n• Negativism (resistance to movement)\n\n**Treatment:**\n• **Lorazepam challenge:** 2 mg IV — improvement within 10 min confirms diagnosis\n• If response: Continue lorazepam 2 mg q4-6h\n• If no response: Consider ECT\n\n⚠️ **AVOID antipsychotics initially** — can trigger malignant catatonia or NMS",
+        "citation": [
+          7
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 7,
+        "summary": "Catatonia — lorazepam challenge 2 mg IV. Avoid antipsychotics initially.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-med-reaction",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Medication Reaction Pathway",
+        "body": "**Differentiate these emergencies:**\n\n| Feature | NMS | Serotonin Syndrome | Dystonia |\n|---------|-----|-------------------|----------|\n| **Onset** | Days | Hours | Minutes-hours |\n| **Rigidity** | Lead-pipe | Hyperreflexia, clonus | Focal (torticollis, oculogyric) |\n| **Temp** | >40°C | Variable | Normal |\n| **Mental status** | Altered | Agitated | Clear |\n| **Pupils** | Normal | Dilated | Normal |\n| **Cause** | Antipsychotics | SSRIs, MAOIs | Antipsychotics, antiemetics |\n\n**Treatments:**\n• **NMS:** Stop offending agent, dantrolene, bromocriptine, cooling\n• **Serotonin syndrome:** Stop offending agent, cyproheptadine, benzos\n• **Dystonia:** [Diphenhydramine](#/drug/diphenhydramine/dystonia) 50 mg IV/IM or benztropine 2 mg",
+        "citation": [
+          8,
+          9
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 8,
+        "summary": "Med reaction — differentiate NMS vs serotonin syndrome vs dystonia. Treatment differs.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-eating",
+        "tree_id": "psych-triage",
+        "type": "info",
+        "module": 2,
+        "title": "Eating Disorder Pathway",
+        "body": "**Eating disorder emergency — focus on medical stability:**\n\n**Check immediately:**\n• Electrolytes: K+, PO4, Mg2+ (refeeding risk)\n• ECG: QTc prolongation, bradycardia\n• Glucose\n• Vitals: Bradycardia, orthostatic hypotension\n\n**MARSIPAN criteria for admission:**\n• BMI <13 or rapid weight loss >1 kg/week\n• K+ <3.0 or PO4 <0.5\n• HR <40 or BP <90 systolic\n• QTc >450 ms\n• Syncope\n• Hypoglycemia\n\n**Refeeding syndrome risk:** Start feeding slowly, monitor PO4/K+/Mg2+ daily × 3 days",
+        "citation": [
+          10
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "pst-end",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 9,
+        "summary": "Eating disorder — check electrolytes, ECG, vitals. Refeeding syndrome risk.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "pst-end",
+        "tree_id": "psych-triage",
+        "type": "result",
+        "module": 2,
+        "title": "Routed to Consult",
+        "body": "Continue with the linked specialty consult for detailed management.\n\n**Return to Psych Triage** if the clinical picture changes or a different pathway is needed.",
+        "citation": null,
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Follow the linked consult pathway for detailed management.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 10,
+        "summary": "Continue with specialty consult for detailed management.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      }
+    ]
+  },
+  "sha256": "e87c5c8506a35d832606ab955c40e487ec9e134a4edb253e8d88db82a5a1c78b"
+}

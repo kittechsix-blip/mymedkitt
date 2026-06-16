@@ -3014,6 +3014,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'agit-start',
       },
       {
+        id: 'dystonic-reaction',
+        title: 'Acute Dystonic Reaction',
+        subtitle: 'Airway Screen → Culprit Meds/Incidence → Presentations → Differential → Anticholinergic Rx → Disposition',
+        categoryId: 'psychiatry',
+        version: '1.0',
+        nodeCount: 24,
+        entryNodeId: 'adr-start',
+      },
+      {
         id: 'excited-delirium',
         title: 'State of Extreme Agitation with Aggression',
         subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',

@@ -51,6 +51,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'lateral-canthotomy',
   'excited-delirium',
   'sedation-options',
+  'dystonic-reaction',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -2368,6 +2369,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'nmda', label: 'Anti-NMDA', icon: '🧠', action: 'jump', target: 'ap-nmda' },
     { id: 'delirium', label: 'Delirium', icon: '🌫️', action: 'jump', target: 'ap-delirium' },
     { id: 'treatment', label: 'Rx', icon: '💊', action: 'jump', target: 'ap-treatment' },
+  ],
+  'dystonic-reaction': [
+    { id: 'treat', label: 'Treat', icon: '💉', action: 'jump', target: 'adr-treatment-first-line', pinned: true },
+    { id: 'airway', label: 'Airway', icon: '🫁', action: 'jump', target: 'adr-airway', pinned: true },
+    { id: 'culprits', label: 'Culprits', icon: '💊', action: 'jump', target: 'adr-culprit-incidence', pinned: true },
+    { id: 'ddx', label: 'DDx', icon: '🔀', action: 'jump', target: 'adr-differential', pinned: true },
+    { id: 'relapse', label: 'Relapse', icon: '🔁', action: 'jump', target: 'adr-relapse-prevention', pinned: true },
+    { id: 'present', label: 'Present', icon: '🎭', action: 'jump', target: 'adr-presentations' },
+    { id: 'risk', label: 'Risk', icon: '📊', action: 'jump', target: 'adr-risk' },
+    { id: 'no-response', label: 'No Resp', icon: '⚠️', action: 'jump', target: 'adr-no-response' },
+    { id: 'nms-ss', label: 'NMS/SS', icon: '🌡️', action: 'jump', target: 'adr-nms-ss' },
+    { id: 'peds', label: 'Kids', icon: '👶', action: 'jump', target: 'adr-special-populations' },
+    { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'adr-disposition' },
+    { id: 'avoid', label: 'Avoid', icon: '🚫', action: 'jump', target: 'adr-avoid-rechallenge' },
   ],
   'capacity-assessment': [
     { id: 'aid4', label: '4 Abilities', icon: '⚖️', action: 'jump', target: 'cap-aid4' },
