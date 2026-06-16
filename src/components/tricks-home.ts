@@ -42,6 +42,33 @@ function openTrick(infoPageId: string, anchorId: string): void {
   showInfoModal(infoPageId, anchorId);
 }
 
+/**
+ * Relevance score for a trick against a lowercased query.
+ * Higher = better match. Returns 0 when nothing matches (caller filters those out).
+ * Tiers, strongest first:
+ *   100  exact title match
+ *    80  a title WORD starts with the query (e.g. "sal" -> "SALAD …")
+ *    60  title starts with the query
+ *    40  title contains the query anywhere
+ *    20  blurb contains the query
+ *    10  specialty label contains the query
+ * This is what makes "Sal" surface "SALAD …" first instead of burying it
+ * behind alphabetically-earlier tricks that merely mention "sal" in prose.
+ */
+function scoreTrick(title: string, blurb: string, specialtyLabel: string, query: string): number {
+  const t = title.toLowerCase();
+  const b = blurb.toLowerCase();
+  const s = specialtyLabel.toLowerCase();
+  if (t === query) return 100;
+  // Any word in the title that begins with the query.
+  if (t.split(/[^a-z0-9]+/).some((w) => w.startsWith(query))) return 80;
+  if (t.startsWith(query)) return 60;
+  if (t.includes(query)) return 40;
+  if (b.includes(query)) return 20;
+  if (s.includes(query)) return 10;
+  return 0;
+}
+
 function makeBack(label: string, to: string): HTMLButtonElement {
   const back = document.createElement('button');
   back.className = 'tricks-home__back';
@@ -183,9 +210,12 @@ export function renderTricksHome(container: HTMLElement): void {
     grid.style.display = 'none';
     results.style.display = '';
     results.innerHTML = '';
-    const hits = flat.filter((t) =>
-      t.title.toLowerCase().includes(query) || t.blurb.toLowerCase().includes(query) || t.specialtyLabel.toLowerCase().includes(query),
-    );
+    const hits = flat
+      .map((t) => ({ t, score: scoreTrick(t.title, t.blurb, t.specialtyLabel, query) }))
+      .filter((h) => h.score > 0)
+      // Best match first; alphabetical title as the tiebreak within a tier.
+      .sort((a, b) => b.score - a.score || a.t.title.localeCompare(b.t.title))
+      .map((h) => h.t);
     if (hits.length === 0) {
       const empty = document.createElement('p');
       empty.className = 'tricks-directory__empty';
@@ -252,7 +282,11 @@ export function renderTricksSpecialty(container: HTMLElement, specialtyId: strin
     const query = q.trim().toLowerCase();
     list.innerHTML = '';
     const hits = query
-      ? tricks.filter((t) => t.title.toLowerCase().includes(query) || t.blurb.toLowerCase().includes(query))
+      ? tricks
+          .map((t) => ({ t, score: scoreTrick(t.title, t.blurb, '', query) }))
+          .filter((h) => h.score > 0)
+          .sort((a, b) => b.score - a.score || a.t.title.localeCompare(b.t.title))
+          .map((h) => h.t)
       : tricks;
     if (hits.length === 0) {
       const empty = document.createElement('p');
