@@ -51,6 +51,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'lateral-canthotomy',
   'excited-delirium',
   'sedation-options',
+  'dystonic-reaction',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -258,10 +259,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'peds-tbsa', label: 'Peds TBSA', icon: '\uD83D\uDC76', action: 'calculator', target: 'tbsa-peds' },
     { id: 'dell', label: 'Dell', icon: '\uD83C\uDFE5', action: 'calculator', target: 'burn-dell-seton' },
     { id: 'airway', label: 'Airway', icon: '\uD83E\uDEC1', action: 'jump', target: 'burn-airway-assess' },
+    { id: 'hf-protocol', label: 'HF Rx', icon: '\u26A0\uFE0F', action: 'calculator', target: 'hf-treatment', pinned: true },
+    { id: 'cyanide-rx', label: 'CN Rx', icon: '\u2620\uFE0F', action: 'jump', target: 'burn-cyanide-rx', pinned: true },
     { id: 'co-cn', label: 'CO/CN', icon: '\u2620\uFE0F', action: 'overlay', target: 'burns-co-cyanide' },
     { id: 'dress', label: 'Dress', icon: '\uD83E\uDE79', action: 'overlay', target: 'burns-dressing-guide' },
     { id: 'chemical', label: 'Chemical', icon: '\uD83E\uDDEA', action: 'overlay', target: 'burns-chemical-detail' },
-    { id: 'hf-protocol', label: 'HF Acid', icon: '\u26A0\uFE0F', action: 'calculator', target: 'hf-treatment' },
   ],
   'stroke': [
     { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
@@ -2367,6 +2369,20 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'nmda', label: 'Anti-NMDA', icon: '🧠', action: 'jump', target: 'ap-nmda' },
     { id: 'delirium', label: 'Delirium', icon: '🌫️', action: 'jump', target: 'ap-delirium' },
     { id: 'treatment', label: 'Rx', icon: '💊', action: 'jump', target: 'ap-treatment' },
+  ],
+  'dystonic-reaction': [
+    { id: 'treat', label: 'Treat', icon: '💉', action: 'jump', target: 'adr-treatment-first-line', pinned: true },
+    { id: 'airway', label: 'Airway', icon: '🫁', action: 'jump', target: 'adr-airway', pinned: true },
+    { id: 'culprits', label: 'Culprits', icon: '💊', action: 'jump', target: 'adr-culprit-incidence', pinned: true },
+    { id: 'ddx', label: 'DDx', icon: '🔀', action: 'jump', target: 'adr-differential', pinned: true },
+    { id: 'relapse', label: 'Relapse', icon: '🔁', action: 'jump', target: 'adr-relapse-prevention', pinned: true },
+    { id: 'present', label: 'Present', icon: '🎭', action: 'jump', target: 'adr-presentations' },
+    { id: 'risk', label: 'Risk', icon: '📊', action: 'jump', target: 'adr-risk' },
+    { id: 'no-response', label: 'No Resp', icon: '⚠️', action: 'jump', target: 'adr-no-response' },
+    { id: 'nms-ss', label: 'NMS/SS', icon: '🌡️', action: 'jump', target: 'adr-nms-ss' },
+    { id: 'peds', label: 'Kids', icon: '👶', action: 'jump', target: 'adr-special-populations' },
+    { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'adr-disposition' },
+    { id: 'avoid', label: 'Avoid', icon: '🚫', action: 'jump', target: 'adr-avoid-rechallenge' },
   ],
   'capacity-assessment': [
     { id: 'aid4', label: '4 Abilities', icon: '⚖️', action: 'jump', target: 'cap-aid4' },

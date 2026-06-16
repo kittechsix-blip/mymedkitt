@@ -1,13 +1,13 @@
 -- =====================================================================
 -- MedKitt — Auto-generated UPDATE SQL for changed nodes
--- Generated: 2026-06-07
+-- Generated: 2026-06-16
 -- Review carefully, then paste into Supabase SQL Editor.
 -- =====================================================================
 
 BEGIN;
 
--- Node: exdel-start (1 field(s) changed)
-UPDATE decision_nodes SET data = '{"type":"question","module":1,"title":"State of Extreme Agitation with Aggression: First Screen","body":"This consult is for severe hyperactive delirium with dangerous agitation, especially when paired with hyperthermia, acidosis, stimulant toxidrome, prolonged struggle, restraint, or physiologic collapse.\n\nUse the term \"excited delirium\" for searchability, not as a final diagnosis. Treat the physiology first, then find the cause.","citation":[1,2,3],"options":[{"label":"Immediate threat, prolonged struggle, or physiologic danger","description":"Cannot safely assess, violent threat, exhaustion, hyperthermia, acidosis, hypoxia, shock, or restraint struggle","next":"exdel-danger","urgency":"critical"},{"label":"Agitated but not currently dangerous","description":"Can talk, separate from triggers, and obtain targeted vitals without unsafe restraint","next":"exdel-not-danger","urgency":"urgent"}],"summary":"First decide whether this is a dangerous resuscitation syndrome or agitation that allows assessment first.","safetyLevel":"critical"}'::jsonb
-WHERE id = 'exdel-start' AND tree_id = 'excited-delirium';
+-- Node: pst-med-reaction (1 field(s) changed)
+UPDATE decision_nodes SET data = '{"type":"info","module":2,"title":"Medication Reaction Pathway","body":"**Differentiate these emergencies:**\n\n| Feature | NMS | Serotonin Syndrome | Dystonia |\n|---------|-----|-------------------|----------|\n| **Onset** | Days | Hours | Minutes-hours |\n| **Rigidity** | Lead-pipe | Hyperreflexia, clonus | Focal (torticollis, oculogyric) |\n| **Temp** | >40°C | Variable | Normal |\n| **Mental status** | Altered | Agitated | Clear |\n| **Pupils** | Normal | Dilated | Normal |\n| **Cause** | Antipsychotics | SSRIs, MAOIs | Antipsychotics, antiemetics |\n\n**Treatments:**\n• **NMS:** Stop offending agent, dantrolene, bromocriptine, cooling\n• **Serotonin syndrome:** Stop offending agent, cyproheptadine, benzos\n• **Dystonia:** [Acute Dystonic Reaction consult](#/tree/dystonic-reaction) → [Diphenhydramine](#/drug/diphenhydramine/dystonia) 50 mg IV/IM or benztropine 1-2 mg IV/IM","citation":[8,9],"next":"pst-end","summary":"Med reaction — differentiate NMS vs serotonin syndrome vs dystonia. Treatment differs."}'::jsonb
+WHERE id = 'pst-med-reaction' AND tree_id = 'psych-triage';
 
 COMMIT;

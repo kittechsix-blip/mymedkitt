@@ -607,6 +607,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/acute-agitation.js');
             return { nodes: m.ACUTE_AGITATION_NODES, entryNodeId: 'agit-start', categoryId: 'psychiatry', moduleLabels: m.ACUTE_AGITATION_MODULE_LABELS, citations: m.ACUTE_AGITATION_CITATIONS, criticalActions: m.ACUTE_AGITATION_CRITICAL_ACTIONS };
         },
+        'dystonic-reaction': async () => {
+            const m = await import('../data/trees/dystonic-reaction.js');
+            return { nodes: m.DYSTONIC_REACTION_NODES, entryNodeId: 'adr-start', categoryId: 'psychiatry', moduleLabels: m.DYSTONIC_REACTION_MODULE_LABELS, citations: m.DYSTONIC_REACTION_CITATIONS, criticalActions: m.DYSTONIC_REACTION_CRITICAL_ACTIONS };
+        },
         'excited-delirium': async () => {
             const m = await import('../data/trees/excited-delirium.js');
             return { nodes: m.EXCITED_DELIRIUM_NODES, entryNodeId: 'exdel-start', categoryId: 'emergency-medicine', moduleLabels: m.EXCITED_DELIRIUM_MODULE_LABELS, citations: m.EXCITED_DELIRIUM_CITATIONS, criticalActions: m.EXCITED_DELIRIUM_CRITICAL_ACTIONS };
