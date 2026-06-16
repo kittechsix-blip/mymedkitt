@@ -2688,13 +2688,13 @@ const BURNS_ESCHAROTOMY = {
             body: 'Escharotomy is a **bedside ED procedure** — do not delay for OR. Circumferential deep partial or full thickness burns create a tourniquet effect as interstitial edema increases during fluid resuscitation. The inelastic eschar restricts expansion, compressing underlying vessels, nerves, and (in chest burns) ventilation.',
         },
         {
-            heading: 'Visual Anchor: Eschar + Release',
+            heading: 'Cut-Line Map: Where to Incise',
             image: {
-                src: 'images/burns/burns-escharotomy-photo.jpg',
-                alt: 'Clinical photograph showing upper extremity burn eschar being released with escharotomy incisions',
-                caption: 'Escharotomy example: dry inelastic eschar has been opened to allow the edematous extremity to expand. Wikimedia Commons, Dr. R.N. Sinha, CC BY-SA 3.0; resized for app use.',
+                src: 'images/burns/burns-escharotomy-cut-lines.svg',
+                alt: 'Escharotomy cut-line map showing red incision paths on chest, arms, hands, legs, and feet',
+                caption: 'Red = actual escharotomy incisions. Black = neurovascular danger zones to mark and avoid before cutting.',
             },
-            body: 'Use the photo as a **pattern-recognition anchor**, not a procedural substitute. The bedside question is: does the circumferential eschar behave like a tourniquet? If the limb is tense with worsening pain, paresthesias, delayed cap refill, falling Doppler signal, undetectable digit SpO2, or elevated compartment pressure, open the eschar now and involve the burn surgeon early.',
+            body: 'Use the map as the procedural anchor. **Mark the intended cut lines before incision.** For limbs, cut the **medial and lateral mid-axial lines** between flexor and extensor surfaces. For chest/trunk restriction, cut the **bilateral anterior/mid-axillary lines** from clavicle to costal margin and connect across the costal margin when needed. For hand involvement, use **dorsal intermetacarpal incisions** rather than palmar cuts. The bedside question is: does the circumferential eschar behave like a tourniquet? If perfusion or ventilation is threatened, open the eschar now and involve burn surgery early.',
         },
         {
             heading: 'Indications',
@@ -2706,7 +2706,7 @@ const BURNS_ESCHAROTOMY = {
         },
         {
             heading: 'Extremity Technique',
-            body: '• **Medial and lateral mid-axial lines** — incise through full thickness of eschar to subcutaneous fat\n• Adequate depth: tissue **gapes open** and subcutaneous fat is visible\n• Eschar in full-thickness areas is **insensate** — no anesthesia needed (may need for margins)\n• Use **electrocautery** (preferred — hemostasis) or **scalpel**\n\n**Upper extremity:** Axilla to wrist along medial and lateral mid-axial lines. If hand involved, extend to thenar and hypothenar eminences.\n\n**Lower extremity:** Groin to ankle along medial and lateral lines. If foot involved, extend along dorsum.\n\n**Digits:** Mid-lateral incisions along non-pinch surfaces. Preserve Grayson\'s and Cleland\'s ligaments where possible. [1]',
+            body: '• **Medial and lateral mid-axial lines** — incise through full thickness of eschar to subcutaneous fat\n• Adequate depth: tissue **gapes open** and subcutaneous fat is visible\n• Start and finish about **1 cm into healthy skin** when possible; anesthetize viable skin margins\n• Eschar in full-thickness areas is **insensate** — no anesthesia needed within the eschar itself (sedation/analgesia still usually needed)\n• Use **electrocautery** (preferred — hemostasis) or **scalpel**\n• Avoid crossing flexor creases directly; curve/Z/S across joints when needed\n\n**Upper extremity:** Axilla to wrist along medial and lateral mid-axial lines. Pass **anterior to the medial epicondyle** to avoid the ulnar nerve. If hand involved, use **dorsal intermetacarpal incisions**; avoid the palm.\n\n**Lower extremity:** Groin to ankle along medial and lateral lines. Pass **anterior to the medial malleolus** to avoid the posterior tibial bundle and anterior to the fibular head/neck to avoid the common peroneal nerve.\n\n**Digits:** Mid-lateral incisions along non-pinch surfaces. Preserve Grayson\'s and Cleland\'s ligaments where possible. [1]',
         },
         {
             heading: 'Chest/Trunk Technique',
@@ -2726,7 +2726,8 @@ const BURNS_ESCHAROTOMY = {
         { num: 2, text: 'Butts CC et al. Surgical Escharotomy and Decompressive Therapies in Burns. J Burn Care Res. 2020;41(2):263-269.' },
         { num: 3, text: 'de Barros MEPM et al. Revisiting Escharotomy in Patients With Burns in Extremities. J Burn Care Res. 2017;38(4):e691-e698.' },
         { num: 4, text: 'Pegg SP. Escharotomy in Burns. Ann Acad Med Singapore. 1992;21(5):682-4.' },
-        { num: 5, text: 'Dr. R.N. Sinha. Escharatomy & Dressing of an 18percent Thermal Burn Patient. Wikimedia Commons. CC BY-SA 3.0.' },
+        { num: 5, text: 'NSW Agency for Clinical Innovation. Escharotomy for burn patients: a guide for clinicians. August 2025.' },
+        { num: 6, text: 'Merck Manual Professional Edition. How To Do Burn Escharotomy. Updated 2025.' },
     ],
 };
 const BURNS_DRESSING_GUIDE = {
@@ -25091,6 +25092,14 @@ const TRICKS_AIRWAY_PAGE = {
             heading: 'SALAD \u2014 Suction-Assisted Laryngoscopy for the Soiled Airway',
             body: '**Accomplishes:** Keeps profuse vomit or blood out of your view during intubation of a massively soiled airway, so you can pass the tube on the first attempt instead of drowning the camera. [5]\n\n**How to:**\n1. Hold a rigid (DuCanto or Yankauer) suction catheter in an overhand grip so it mimics the curve of the laryngoscope blade.\n2. Suction the mouth and oropharynx first, then insert the laryngoscope blade hugging the tongue so the camera/optics do not submerge in vomit.\n3. Use the rigid suction itself as a tongue depressor/lifter to seat the blade and expose the cords.\n4. Decontaminate the hypopharynx, then park the suction tip in the proximal esophagus to drain ongoing emesis; the blade pins the catheter to the left, out of the tube\u2019s path.\n5. Pass the endotracheal tube to the right of the parked suction; confirm with capnography.\n\n**Equipment:** Rigid suction catheter (DuCanto or Yankauer), wall suction, laryngoscope (video preferred), endotracheal tube.\n\n_Source: LITFL \u2014 Suction Assisted Laryngoscopy Airway Decontamination (Du Canto)._',
         },
+        {
+            heading: 'Bimanual Laryngoscopy to Improve a Bad Glottic View',
+            body: '**Accomplishes:** Instantly upgrades a poor laryngoscopy view by letting the intubator optimize external laryngeal manipulation with their own hand before an assistant locks it in \u2014 outperforms cricoid pressure and BURP. [6]\n\n**How to:**\n1. During direct or video (Macintosh-geometry) laryngoscopy, reach around with your free RIGHT hand and press on the patient\u2019s thyroid cartilage while watching the screen.\n2. Move the larynx (back, up, and toward the patient\u2019s right) until the glottic view is best \u2014 the force opposes your laryngoscope lift.\n3. Once optimized, have an assistant place their hand exactly where yours is and say \u201Ckeep this pressure and direction.\u201D\n4. Release your right hand \u2014 now free to pass the tube \u2014 while the assistant maintains the view.\n5. Avoid blind cricoid pressure / BURP, which frequently WORSEN the view.\n\n**Equipment:** Laryngoscope (DL or VL), an assistant.\n\n_Source: ALiEM Trick of the Trade \u2014 Two hands are better than one; Levitan RM, et al. Ann Emerg Med 2006._',
+        },
+        {
+            heading: 'Ketamine-Only Breathing Intubation (KOBI)',
+            body: '**Accomplishes:** Intubates the anticipated difficult or non-cooperative airway (angioedema, obstruction, can\u2019t lie flat) while the patient keeps breathing, using dissociative-dose ketamine instead of a paralytic-first RSI. [7]\n\n**How to:**\n1. Pre-oxygenate and FULLY set up for RSI and a failed airway FIRST \u2014 a paralytic must be drawn up and immediately available to convert at any moment.\n2. Give ketamine in small aliquots (about 25 mg, or ~0.5 mg/kg) IV every ~15 seconds, titrating to dissociation (average effective total ~1\u20132 mg/kg).\n3. Optionally topicalize the airway with atomized lidocaine for extra tolerance.\n4. Perform gentle laryngoscopy and pass the tube while the patient breathes; this demands a skilled intubator.\n5. If laryngoscopy fails or the patient vomits/obstructs, push the paralytic and convert to a full RSI.\n\n**Equipment:** Ketamine, syringes for aliquot dosing, paralytic drawn up and ready, video/direct laryngoscope, suction, capnography, BVM, failed-airway cart.\n\n_Source: EMCrit 247 \u2014 The Dissociated Awake Intubation (Weingart); emupdates KOBI (Strayer)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Large-bore endotracheal tube to suction an occluded airway. aliem.com.' },
@@ -25098,6 +25107,8 @@ const TRICKS_AIRWAY_PAGE = {
         { num: 3, text: 'ALiEM. Trick of the Trade: Fiberbougie for supraglottic (King) airway exchange. aliem.com.' },
         { num: 4, text: 'ALiEM. Trick of the Trade: Laryngospasm notch maneuver (Larson CP. Anesthesiology 1998;89:1293). aliem.com.' },
         { num: 5, text: 'DuCanto J, et al. Suction Assisted Laryngoscopy Airway Decontamination (SALAD). litfl.com. See also EP Monthly: Suck it up with SALAD.' },
+        { num: 6, text: 'ALiEM. Trick of the Trade for intubation: Two hands are better than one (bimanual laryngoscopy). aliem.com. Levitan RM, et al. Bimanual laryngoscopy: external laryngeal manipulation. Ann Emerg Med. 2006.' },
+        { num: 7, text: 'Weingart S. EMCrit 247 \u2014 The Dissociated Awake Intubation with ketamine. emcrit.org. Strayer R. Ketamine-only breathing intubation (KOBI). emupdates.com.' },
     ],
 };
 const TRICKS_PROCEDURES_PAGE = {
@@ -25202,6 +25213,10 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Arm-Board Finger Immobilization for a Pediatric Hand Procedure',
             body: '**Accomplishes:** Isolates one finger and pins a squirming child\u2019s hand still for a nailbed repair, laceration, or foreign-body removal \u2014 and hides the procedure from the child\u2019s view to cut anxiety. [24]\n\n**How to:**\n1. Lay the child\u2019s forearm on an adult-size rigid IV arm board, leaving extra board sticking out past the fingertips to use as a handle.\n2. Tape the wrist and forearm to the board snugly but NOT circumferentially tight \u2014 leave room to check perfusion.\n3. Tape down every finger joint EXCEPT the digit you are working on, securing each to the board so the child cannot pull or twist away.\n4. The single freed finger is now isolated in your field; the taped-down neighbors and the board handle stop the whole hand from moving.\n5. Position the board so the work area faces you and away from the child\u2019s line of sight; remove all tape and re-check the fingers at the end.\n\n**Equipment:** Adult-size rigid IV arm board, tape, padding.\n\n_Source: ALiEM Pediatric Trick of the Trade \u2014 Finger immobilization technique._',
         },
+        {
+            heading: 'Bougie-Guided (Seldinger) Chest Tube in the Obese Patient',
+            body: '**Accomplishes:** Guarantees a chest tube actually reaches the pleural space instead of getting lost in subcutaneous fat, by railroading it over a bougie left in the chest after finger thoracostomy. [25]\n\n**How to:**\n1. Make your incision and bluntly dissect over the rib into the pleural space; perform a finger sweep to confirm you are inside the thorax (feel lung or empty cavity, not fat).\n2. Keeping your finger in the tract, slide a standard airway bougie alongside it into the pleural cavity, coude tip leading.\n3. Confirm the bougie sits intrathoracic (it advances freely and easily past your fingertip into the cavity).\n4. Load the chest tube over the bougie like a guidewire and advance the tube along the bougie into the chest.\n5. Remove the bougie, direct the tube posteriorly/apically, connect to drainage, and secure.\n\n**Equipment:** Chest tube, airway bougie, scalpel, Kelly clamp, sterile glove (finger sweep), chest-drain collection system.\n\n_Source: ALiEM Trick of the Trade \u2014 Seldinger chest tube using a bougie (Maddow/Trueger); Ann Emerg Med 2015._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25228,6 +25243,7 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 22, text: 'ALiEM. Trick of the Trade: Hemostasis of a bleeding finger laceration using a glove. aliem.com.' },
         { num: 23, text: 'ALiEM. Trick of the Trade: Needle-vein alignment in ultrasound-guided peripheral IV (Wiswell). aliem.com.' },
         { num: 24, text: 'ALiEM. Pediatric Trick of the Trade: Finger immobilization technique. aliem.com.' },
+        { num: 25, text: 'ALiEM. Trick of the Trade: Seldinger chest tube technique using a bougie (Maddow/Trueger). aliem.com. See also Bougie-Assisted Tube Thoracostomy Placement. Ann Emerg Med. 2015.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25457,6 +25473,10 @@ const TRICKS_WOUND_PAGE = {
             heading: 'V-to-Y Flap for a Laceration Under Tension',
             body: '**Accomplishes:** Closes a gaping or V-shaped wound whose edges will not meet without ischemic tension, redistributing the pull so the flap tip keeps its blood supply instead of necrosing. [10]\n\n**How to:**\n1. Identify a V-shaped flap laceration where simple interrupted sutures would blanch and strangle the tip.\n2. Anesthetize and irrigate; gently debride only clearly devitalized edges.\n3. Anchor the point of the V FIRST with a half-buried horizontal mattress (corner) suture \u2014 the needle passes through the dermis of the flap tip, not the epidermis, so you do not crush its tenuous blood supply.\n4. This pulls the V forward into a Y configuration, advancing the flap and spreading tension across the limbs of the Y.\n5. Close the rest of the limbs with simple interrupted sutures; the corner stitch carries the load.\n\n**Equipment:** Suture kit, fine (e.g., 5-0/6-0) nonabsorbable suture, needle driver, forceps, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 V-to-Y flap laceration repair (Brian Lin, LacerationRepair.com)._',
         },
+        {
+            heading: '18G Needle Spin-Trephination of a Subungual Hematoma (No Block)',
+            body: '**Accomplishes:** Painlessly drains a tense subungual hematoma using just an 18-gauge needle and no anesthesia \u2014 the safe alternative to electrocautery in patients with acrylic/gel nails, where cautery is a fire hazard. [11]\n\n**How to:**\n1. Confirm no displaced distal-phalanx fracture or disrupted nail folds (those may need nail removal / bed repair instead).\n2. Clean the nail with iodine, NOT flammable alcohol, and let it dry; identify the central darkest point of the hematoma under bright light.\n3. Hold an 18-gauge needle perpendicular (90\u00B0) over that central point.\n4. Spin the needle between your fingers like a drill, letting the bevel bore its own hole through the nail plate \u2014 do NOT push down hard; the give as you reach blood tells you to stop.\n5. Express the blood for immediate relief; dress, keep dry, and avoid soaking. No digital block needed \u2014 the block usually hurts more than the procedure.\n\n**Equipment:** 18-gauge needle, povidone-iodine, bright light, gauze/dressing.\n\n_Source: J Emerg Med \u2014 18-gauge needle evacuation of subungual hematomas; Brown EM Blog (2024)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25469,6 +25489,7 @@ const TRICKS_WOUND_PAGE = {
         { num: 8, text: 'ALiEM. Trick of the Trade: Irrigating scalp lacerations (head basin / hairdresser-sink technique). aliem.com.' },
         { num: 9, text: 'ALiEM. Trick of the Trade: Hair apposition technique (HAT trick) for scalp lacerations. aliem.com. Ong ME, et al. A randomized controlled trial comparing the hair apposition technique with tissue glue to standard suturing in scalp lacerations. Ann Emerg Med. 2002.' },
         { num: 10, text: 'ALiEM. Trick of the Trade: V-to-Y flap laceration repair for tension wounds (Brian Lin). aliem.com. See also lacerationrepair.com.' },
+        { num: 11, text: 'Bonisteel PS. Practice tips: Trephination of subungual hematoma. J Emerg Med / Can Fam Physician. See also Brown Emergency Medicine Blog: Subungual hematomas (2024). brownemblog.com.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
@@ -25590,6 +25611,10 @@ const TRICKS_GENERAL_PAGE = {
             heading: 'Digital Rectal Massage for Intractable Hiccups',
             body: '**Accomplishes:** Aborts refractory (intractable) hiccups by triggering a vagal reflex, an option to try before reaching for chlorpromazine or other drugs. [8]\n\n**How to:**\n1. Reserve this for hiccups that have failed simpler vagal/respiratory maneuvers (breath-hold, Valsalva, swallowing granulated sugar) and are distressing or persistent.\n2. Explain the maneuver, get verbal consent, and have a chaperone present; document both.\n3. Don a glove, lubricate, and perform a slow, rhythmic digital rectal massage \u2014 the same technique as a vagal maneuver reported to break the hiccup reflex arc.\n4. Hiccups often stop abruptly; if they recur, the maneuver can be repeated.\n5. If still intractable, move on to pharmacology (e.g., chlorpromazine, baclofen, metoclopramide) and work up an underlying cause.\n\n**Equipment:** Glove, lubricant, a chaperone.\n\n_Source: Odeh M, et al. Termination of intractable hiccups with digital rectal massage. J Intern Med 1990; Fesmire FM, Ann Emerg Med 1988 (Ig Nobel)._',
         },
+        {
+            heading: 'Honey for a Witnessed Esophageal Button-Battery Ingestion',
+            body: '**Accomplishes:** Buys time and reduces caustic esophageal injury while a child with a recently swallowed button battery awaits urgent endoscopic removal \u2014 honey coats the battery and its alkaline current path, slowing tissue burn. [9]\n\n**How to:**\n1. Use ONLY for a witnessed/known button-battery ingestion in a child \u22651 year, within 12 hours, who can swallow and protect their airway.\n2. Do NOT delay imaging, GI/ENT consult, or transfer \u2014 this is a bridge to emergent endoscopic removal, not a substitute.\n3. Give 10 mL (2 teaspoons) of honey by mouth every 10 minutes, up to ~6 doses, while arranging removal.\n4. Hard stops: do NOT give if age <1 year (botulism risk), suspected perforation/sepsis/mediastinitis, inability to swallow, or >12 hours since ingestion.\n5. If sucralfate is available in-hospital and honey is not, it can substitute on the same schedule.\n\n**Equipment:** Honey (or in-hospital sucralfate), oral dosing syringe/spoon.\n\n_Source: National Capital Poison Center button-battery guideline; NASPGHAN/ESPGHAN position statements._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25600,6 +25625,7 @@ const TRICKS_GENERAL_PAGE = {
         { num: 6, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Ring removal using an oxygen mask strap. aliem.com.' },
         { num: 8, text: 'Odeh M, Bassan H, Oliven A. Termination of intractable hiccups with digital rectal massage. J Intern Med. 1990;227(2):145-146. Fesmire FM. Termination of refractory SVT/hiccups by digital rectal massage. Ann Emerg Med. 1988 (Ig Nobel Prize 2006).' },
+        { num: 9, text: 'National Capital Poison Center (Poison Control). Button battery ingestion triage and treatment guideline (honey/sucralfate). poison.org. See also NASPGHAN/ESPGHAN position statements on button battery management.' },
     ],
 };
 const DENTAL_EXTRACTION_STEPS_PAGE = {
