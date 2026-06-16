@@ -11,8 +11,8 @@ export const HEAT_STROKE_NODES = [
         type: 'info',
         module: 1,
         title: 'Heat Stroke Management',
-        body: '**Heat stroke is a TRUE EMERGENCY** — mortality 10-50% without rapid cooling. Every minute of delay increases mortality.\n\n**Definition:** Core temperature >40°C (104°F) + CNS dysfunction (altered mental status, seizures, coma).\n\n**Two types:**\n• **Classic (non-exertional):** Elderly, chronic illness, medications, heat waves\n• **Exertional:** Young healthy athletes, laborers, military [1][2][3]',
-        citation: [1, 2, 3],
+        body: '**Heat stroke is a TRUE EMERGENCY** — mortality 10-50% without rapid cooling. Every minute of delay increases mortality.\n\n**Definition:** Core temperature >40°C (104°F) + CNS dysfunction (altered mental status, seizures, coma).\n\n**Two types:**\n• **Classic (non-exertional):** Elderly, chronic illness, medications, heat waves\n• **Exertional:** Young healthy athletes, laborers, military [1][2][3][6]',
+        citation: [1, 2, 3, 6],
         calculatorLinks: [
             { id: 'heat-index', label: 'Heat Index Calculator' },
             { id: 'cooling-rate', label: 'Cooling Rate Monitor' },
@@ -132,8 +132,8 @@ export const HEAT_STROKE_NODES = [
         type: 'info',
         module: 2,
         title: 'Ice Water Immersion Protocol',
-        body: '**GOLD STANDARD — cooling rate 0.2°C/min** [1][2]\n\n**Setup:**\n• Large tub/tank filled with ice water (1-17°C / 34-63°F)\n• Submerge patient to neck level\n• Continuous agitation of water (prevents thermal boundary layer)\n• Assign staff to hold patient\'s head above water\n\n**Monitoring during immersion:**\n• Continuous rectal temperature probe\n• **Stop immersion at 39°C (102.2°F)** — temp will continue to drift down\n• Cardiac monitoring (waterproof leads or pause briefly for rhythm check)\n\n**Shivering is NOT a contraindication** — shivering generates heat but CWI cooling rate still exceeds heat generation. [1]',
-        citation: [1, 2],
+        body: '**GOLD STANDARD — cooling rate 0.2°C/min** [1][2]\n\n**Setup:**\n• Large tub/tank filled with ice water (1-17°C / 34-63°F)\n• Submerge patient to neck level\n• Continuous agitation of water (prevents thermal boundary layer)\n• Assign staff to hold patient\'s head above water\n\n**Monitoring during immersion:**\n• Continuous rectal temperature probe\n• **Stop immersion at 39°C (102.2°F)** — temp will continue to drift down\n• Cardiac monitoring (waterproof leads or pause briefly for rhythm check)\n\n**Shivering is NOT a contraindication** — shivering generates heat but CWI cooling rate still exceeds heat generation. [1]\n\nCold water immersion is the established gold standard for exertional heatstroke. [5]',
+        citation: [1, 2, 5],
         next: 'hs-cooling-endpoint',
         treatment: {
             firstLine: {
@@ -497,7 +497,7 @@ export const HEAT_STROKE_CRITICAL_ACTIONS = [
     { text: 'Ice water immersion if available (0.15-0.35°C/min) - stop at 38.5-39°C', nodeId: 'hs-immersion' },
     { text: 'Cold IV saline 1-2L (4°C) + ice packs to groin/axillae/neck', nodeId: 'hs-ice-packs' },
     { text: 'Benzodiazepines for agitation/shivering (lorazepam 2-4 mg IV)', nodeId: 'hs-seizure-rx' },
-    { text: 'Avoid antipyretics (aspirin/acetaminophen) - ineffective and may worsen coagulopathy', nodeId: 'hs-cooling-method' },
+    { text: 'Avoid antipyretics (aspirin/acetaminophen) - ineffective and may worsen coagulopathy', nodeId: 'hs-ice-packs' },
     { text: 'Monitor for rhabdomyolysis: CK, myoglobin, aggressive IVF if CK >5000', nodeId: 'hs-rhabdo' },
     { text: 'Check DIC labs: PT/INR, fibrinogen, platelets (common complication)', nodeId: 'hs-coags' },
 ];

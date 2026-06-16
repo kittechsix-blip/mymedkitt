@@ -11,7 +11,7 @@ import type { Citation } from './neurosyphilis.js';
 
 export const HTN_PREGNANCY_CRITICAL_ACTIONS = [
   { text: 'Severe-range BP (≥160 SBP OR ≥110 DBP) sustained ≥15 min → treat within 30–60 min', nodeId: 'htnp-severe-acute' },
-  { text: 'First-line severe-range options: IV labetalol, IV hydralazine, or PO nifedipine IR', nodeId: 'htnp-severe-labetalol' },
+  { text: 'First-line severe-range options: IV labetalol, IV hydralazine, or PO nifedipine IR', nodeId: 'htnp-severe-choose' },
   { text: 'Magnesium sulfate for seizure prophylaxis in preeclampsia w/ severe features — 4–6 g IV load, 1–2 g/hr', nodeId: 'htnp-mag-prophylaxis' },
   { text: 'If active seizure → Eclampsia pathway (separate consult)', nodeId: 'htnp-seizure-redirect' },
   { text: 'Labs at presentation: CBC + smear, Cr, AST/ALT, LDH, uric acid, UA + spot protein/Cr', nodeId: 'htnp-workup' },

@@ -6,8 +6,8 @@
 export const AWAKE_INTUBATION_CRITICAL_ACTIONS = [
     { text: 'Identify indications: cannot intubate/ventilate predicted, airway obstruction, C-spine injury', nodeId: 'awake-indications' },
     { text: 'Prepare all equipment before starting: bougie, video laryngoscope, surgical airway kit', nodeId: 'awake-prep-overview' },
-    { text: 'Topicalize airway thoroughly: lidocaine nebulizer, atomizer, and superior laryngeal nerve block', nodeId: 'awake-route' },
-    { text: 'Use low-dose ketamine (0.2-0.5mg/kg) for sedation while preserving airway reflexes', nodeId: 'awake-sedation' },
+    { text: 'Topicalize airway thoroughly: lidocaine nebulizer, atomizer, and superior laryngeal nerve block', nodeId: 'awake-nasal-prep' },
+    { text: 'Use low-dose ketamine (0.2-0.5mg/kg) for sedation while preserving airway reflexes', nodeId: 'awake-ketamine' },
     { text: 'Perform video laryngoscopy first (confirm view BEFORE committing)', nodeId: 'awake-technique-choice' },
     { text: 'Use bougie-first technique through vocal cords', nodeId: 'awake-technique-choice' },
     { text: 'Give propofol/rocuronium ONLY after tube through cords', nodeId: 'awake-technique-choice' },
@@ -503,8 +503,8 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Leave 1-2 min, then advance to 32-36 French if possible
 - Prepare BOTH nares
 
-**Max Lidocaine: 9 mg/kg lean body weight** [3][4]`,
-        citation: [3, 4],
+**Max Lidocaine: 9 mg/kg lean body weight** [3][4][9]`,
+        citation: [3, 4, 9],
         calculatorLinks: [
             { id: 'awake-topical-prep', label: 'Topical Prep Recipe' },
         ],
