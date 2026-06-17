@@ -159,7 +159,7 @@ export const LOWER_GI_BLEED_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Resuscitation & Transfusion',
-    body: '[Transfusion Thresholds](#/info/transfusion-thresholds)\n\n**IV Fluid Resuscitation:**\n• Balanced crystalloid (LR preferred over NS)\n• Avoid over-resuscitation — may worsen bleeding\n• Target MAP ≥65 mmHg\n\n**Transfusion Thresholds:**\n• **Hgb <7 g/dL** — transfuse in stable patients\n• **Hgb <8 g/dL** — transfuse if cardiovascular disease or symptomatic\n• **Active hemorrhage** — transfuse regardless of Hgb\n\n**Massive Transfusion Protocol:**\n• Activate if shock index >1.0 + ongoing bleeding\n• Target 1:1:1 ratio (pRBC:FFP:platelets)\n• Give TXA 1g IV if <3h from bleed onset (extrapolated from trauma data)\n\n**Coagulopathy Correction:**\n• Platelets if <50k with active bleeding\n• FFP if INR >1.5\n• Fibrinogen replacement if <150 mg/dL',
+    body: '[Transfusion Thresholds](#/info/transfusion-thresholds)\n\n**IV Fluid Resuscitation:**\n• Balanced crystalloid (LR preferred over NS)\n• Avoid over-resuscitation — may worsen bleeding\n• Target MAP ≥65 mmHg\n\n**Transfusion Thresholds:**\n• **Hgb <7 g/dL** — transfuse in stable patients\n• **Hgb <8 g/dL** — transfuse if cardiovascular disease or symptomatic\n• **Active hemorrhage** — transfuse regardless of Hgb\n\n**Massive Transfusion Protocol:**\n• Activate if shock index >1.0 + ongoing bleeding\n• Target 1:1:1 ratio (pRBC:FFP:platelets)\n• Do NOT give tranexamic acid (TXA): the ACG 2023 guideline recommends against antifibrinolytics in LGIB after the HALT-IT trial showed no mortality benefit and increased venous thromboembolism\n\n**Coagulopathy Correction:**\n• Platelets if <30k (target >50k before endoscopy) with active bleeding\n• FFP if INR >2.5 and unstable despite resuscitation; endoscopy is generally safe at INR ≤2.5\n• Fibrinogen replacement if <150 mg/dL\n• Avoid routine anticoagulation reversal unless hemodynamically unstable despite resuscitation',
     citation: [1, 3, 5],
     treatment: {
       firstLine: {
@@ -171,18 +171,18 @@ export const LOWER_GI_BLEED_NODES: DecisionNode[] = [
         notes: 'Threshold: <7 g/dL stable, <8 g/dL cardiac disease, any Hgb if active hemorrhage',
       },
       alternative: {
-        drug: 'Tranexamic Acid (TXA)',
-        dose: '1 g',
+        drug: 'Platelet transfusion',
+        dose: 'Target platelets >50k before endoscopy',
         route: 'IV',
-        frequency: 'Once, then 1 g over 8 hours if ongoing',
-        duration: 'Single dose or infusion',
-        notes: 'Consider if <3h from bleed onset; limited data in LGIB',
+        frequency: 'As needed for active bleeding',
+        duration: 'Until target reached',
+        notes: 'Transfuse for platelets <30k with active bleeding; do NOT use TXA (ACG 2023 recommends against antifibrinolytics; HALT-IT showed no benefit and increased VTE)',
       },
       monitoring: 'Serial Hgb q4-6h during active bleeding; coagulation studies; hemodynamics',
     },
     next: 'lgib-imaging',
 
-    summary: 'Transfuse Hgb <7 (stable) or <8 (cardiac); MTP if shock + ongoing bleeding; TXA if <3h from onset',
+    summary: 'Transfuse Hgb <7 (stable) or <8 (cardiac); MTP if shock + ongoing bleeding; do NOT give TXA (ACG recommends against)',
     safetyLevel: 'warning',
   },
 
@@ -195,7 +195,7 @@ export const LOWER_GI_BLEED_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Imaging & Localization',
-    body: '**Goal:** Identify bleeding source to guide intervention.\n\n**Imaging options based on hemodynamic status:**\n\n**CTA (CT Angiography):**\n• First-line for hemodynamically significant bleeding\n• Detects bleeding rates ≥0.3-0.5 mL/min\n• Can localize for embolization or surgery\n\n**Colonoscopy:**\n• First-line for stable patients\n• Diagnostic AND therapeutic\n• Timing: within 24h for most; urgent if ongoing bleeding\n\n**Nuclear Medicine (Tagged RBC Scan):**\n• Detects slower bleeding (0.1-0.4 mL/min)\n• Less specific for localization\n• Useful if intermittent bleeding',
+    body: '**Goal:** Identify bleeding source to guide intervention.\n\n**Imaging options based on hemodynamic status:**\n\n**CTA (CT Angiography):**\n• First-line for hemodynamically significant bleeding\n• Detects bleeding rates ≥0.3-0.5 mL/min\n• Can localize for embolization or surgery\n\n**Colonoscopy:**\n• First-line for stable patients\n• Diagnostic AND therapeutic\n• Timing (ACG 2023): NONURGENT colonoscopy for most — urgent colonoscopy within 24h does NOT improve rebleeding, mortality, or other outcomes. In stable patients, colonoscopy within 14 days is as effective as within 24h. Reserve urgent colonoscopy for ongoing hemodynamically significant bleeding.\n\n**Nuclear Medicine (Tagged RBC Scan):**\n• Detects slower bleeding (0.1-0.4 mL/min)\n• Less specific for localization\n• Useful if intermittent bleeding',
     citation: [1, 6],
     options: [
       {
@@ -236,11 +236,11 @@ export const LOWER_GI_BLEED_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Colonoscopy',
-    body: '**Timing:**\n• **Within 24 hours** for most admissions — improves diagnostic yield\n• **Urgent (<12h)** if ongoing bleeding, hemodynamic instability\n• **Elective** for low-risk outpatients\n\n**Bowel prep:**\n• Rapid prep (4-6L PEG over 3-4h) improves visualization\n• May skip prep for urgent colonoscopy if significant blood\n\n**Therapeutic interventions:**\n• Hemostatic clips\n• Epinephrine injection\n• Thermal coagulation (APC, bipolar)\n• Band ligation for hemorrhoids\n\n**Common findings:**\n• Diverticulosis (30-65%)\n• Hemorrhoids (5-20%)\n• Angiodysplasia (3-15%)\n• Post-polypectomy bleeding\n• Colorectal neoplasm',
+    body: '**Timing (ACG 2023):**\n• **NONURGENT colonoscopy** for most hospitalized patients — urgent colonoscopy within 24h does NOT improve rebleeding, mortality, transfusion, or LOS. In stable patients, within 14 days is as effective as within 24h.\n• **Urgent** only for ongoing hemodynamically significant bleeding not controlled by resuscitation (consider CTA ± embolization first in the unstable patient)\n• **Elective/outpatient** for low-risk patients (Oakland ≤8) within 7-14 days\n\n**Bowel prep:**\n• Rapid prep (4-6L PEG over 3-4h) improves visualization\n• May skip prep for urgent colonoscopy if significant blood\n\n**Therapeutic interventions:**\n• Hemostatic clips\n• Epinephrine injection\n• Thermal coagulation (APC, bipolar)\n• Band ligation for hemorrhoids\n\n**Common findings:**\n• Diverticulosis (30-65%)\n• Hemorrhoids (5-20%)\n• Angiodysplasia (3-15%)\n• Post-polypectomy bleeding\n• Colorectal neoplasm',
     citation: [1, 6],
     next: 'lgib-intervention',
 
-    summary: 'Colonoscopy within 24h (urgent <12h if unstable); therapeutic options include clips, injection, coagulation',
+    summary: 'NONURGENT colonoscopy for most (ACG 2023: 24h does not beat 14d); urgent only for ongoing significant bleeding; therapeutic options include clips, injection, coagulation',
   },
 
   {
@@ -381,7 +381,7 @@ export const LOWER_GI_BLEED_NODES: DecisionNode[] = [
     module: 6,
     title: 'Floor Admission',
     body: '**Floor admission criteria:**\n• Hemodynamically stable\n• Oakland Score >8 or high-risk features\n• Requires monitoring or intervention\n• Anemia requiring transfusion but stable\n\n**Floor orders:**\n• Telemetry monitoring\n• Serial Hgb q6-8h × 24h\n• Type and screen\n• NPO until colonoscopy\n• GI consultation for colonoscopy timing\n• Hold anticoagulation per GI guidance',
-    recommendation: 'Admit to floor. GI consultation for colonoscopy within 24 hours. Serial hemoglobin monitoring. Address anticoagulation.',
+    recommendation: 'Admit to floor. GI consultation for nonurgent colonoscopy (ACG 2023: urgent <24h does not improve outcomes). Serial hemoglobin monitoring. Address anticoagulation.',
     citation: [1, 2],
   },
 
@@ -410,7 +410,7 @@ export const LOWER_GI_BLEED_CRITICAL_ACTIONS = [
   { text: 'Rule out UGIB in unstable patients — up to 15% of apparent LGIB is brisk upper GI source', nodeId: 'lgib-start' },
   { text: 'Oakland Score ≤8 = 95% safe discharge probability', nodeId: 'lgib-stable-risk' },
   { text: 'Transfuse at Hgb <7 (stable) or <8 (cardiac disease)', nodeId: 'lgib-resuscitation' },
-  { text: 'CTA first if hemodynamically significant; colonoscopy within 24h for stable patients', nodeId: 'lgib-imaging' },
+  { text: 'CTA first if hemodynamically significant; NONURGENT colonoscopy for stable patients (ACG 2023: urgent <24h does not improve outcomes)', nodeId: 'lgib-imaging' },
   { text: 'Reverse anticoagulation: Vitamin K + PCC for warfarin; idarucizumab for dabigatran', nodeId: 'lgib-high-risk' },
 ];
 
