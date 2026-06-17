@@ -26229,6 +26229,10 @@ const TRICKS_AIRWAY_PAGE: InfoPage = {
       heading: 'Ketamine-Only Breathing Intubation (KOBI)',
       body: '**Accomplishes:** Intubates the anticipated difficult or non-cooperative airway (angioedema, obstruction, can\u2019t lie flat) while the patient keeps breathing, using dissociative-dose ketamine instead of a paralytic-first RSI. [7]\n\n**How to:**\n1. Pre-oxygenate and FULLY set up for RSI and a failed airway FIRST \u2014 a paralytic must be drawn up and immediately available to convert at any moment.\n2. Give ketamine in small aliquots (about 25 mg, or ~0.5 mg/kg) IV every ~15 seconds, titrating to dissociation (average effective total ~1\u20132 mg/kg).\n3. Optionally topicalize the airway with atomized lidocaine for extra tolerance.\n4. Perform gentle laryngoscopy and pass the tube while the patient breathes; this demands a skilled intubator.\n5. If laryngoscopy fails or the patient vomits/obstructs, push the paralytic and convert to a full RSI.\n\n**Equipment:** Ketamine, syringes for aliquot dosing, paralytic drawn up and ready, video/direct laryngoscope, suction, capnography, BVM, failed-airway cart.\n\n_Source: EMCrit 247 \u2014 The Dissociated Awake Intubation (Weingart); emupdates KOBI (Strayer)._',
     },
+    {
+      heading: 'Nasopharyngeal Oxygenation via a Repurposed NPA',
+      body: '**Accomplishes:** Delivers high-flow positive-pressure oxygen straight into the pharynx of a crashing upper-airway patient (angioedema, anaphylaxis, end-stage COPD) when you cannot get a mask seal. [8]\n\n**How to:**\n1. Lubricate and place a standard nasopharyngeal airway through either nostril.\n2. Connect standard wall-suction tubing (via its included adapter) to the external end of the NPA.\n3. Connect the other end of that tubing directly to a wall oxygen flowmeter.\n4. Turn the oxygen flow up well beyond the marked 0\u201315 L/min range to deliver >25 L/min of positive-pressure oxygen into the posterior pharynx.\n5. Watch for gastric insufflation and use it as a bridge while you prepare a definitive airway.\n\n**Equipment:** Nasopharyngeal airway, wall-suction tubing with adapter, wall oxygen flowmeter, lubricant.\n\n_Source: ALiEM Trick of the Trade \u2014 Nasopharyngeal oxygenation._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Large-bore endotracheal tube to suction an occluded airway. aliem.com.' },
@@ -26238,6 +26242,7 @@ const TRICKS_AIRWAY_PAGE: InfoPage = {
     { num: 5, text: 'DuCanto J, et al. Suction Assisted Laryngoscopy Airway Decontamination (SALAD). litfl.com. See also EP Monthly: Suck it up with SALAD.' },
     { num: 6, text: 'ALiEM. Trick of the Trade for intubation: Two hands are better than one (bimanual laryngoscopy). aliem.com. Levitan RM, et al. Bimanual laryngoscopy: external laryngeal manipulation. Ann Emerg Med. 2006.' },
     { num: 7, text: 'Weingart S. EMCrit 247 \u2014 The Dissociated Awake Intubation with ketamine. emcrit.org. Strayer R. Ketamine-only breathing intubation (KOBI). emupdates.com.' },
+    { num: 8, text: 'ALiEM. Trick of the Trade: Nasopharyngeal oxygenation (NPA + suction tubing + oxygen). aliem.com.' },
   ],
 };
 
@@ -26447,6 +26452,10 @@ const TRICKS_ENT_PAGE: InfoPage = {
       heading: 'Pelvic Speculum as a Lit Tongue Depressor for PTA Drainage',
       body: '**Accomplishes:** Gives you both bright light and tongue depression for peritonsillar abscess aspiration when no laryngoscope is free, and frees one of your hands by letting the patient hold the device. [16]\n\n**How to:**\n1. Take a disposable fiberoptic-lit plastic vaginal speculum and remove the top blade, leaving the single bottom blade with its attached light.\n2. Hand the lit half-speculum to the seated, anesthetized patient and have them depress their own tongue base with it.\n3. Put a Yankauer suction in the patient\u2019s other hand for self-suction, which frees BOTH of your hands for the needle and syringe.\n4. Aspirate the point of maximal fluctuance under the bright direct light; keep the needle shallow (carotid sits ~2\u20132.5 cm posterolateral).\n5. If you prefer to drive it yourself, a Macintosh or video-laryngoscope blade works the same way as the illuminated depressor.\n\n**Equipment:** Disposable fiberoptic-lit vaginal speculum, Yankauer suction, spinal needle and syringe, topical/local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Pelvic speculum for peritonsillar abscess drainage (Lin)._',
     },
+    {
+      heading: 'Pediatric Video Laryngoscope to See and Grab an Ear Foreign Body',
+      body: '**Accomplishes:** Turns a frustrating, poorly-lit ear-canal foreign-body removal into a hands-free, magnified, two-handed procedure \u2014 the screen shows the object while both your hands work, beating the cramped otoscope view. [17]\n\n**How to:**\n1. Position the child (papoose or parent-held) and straighten the canal by pulling the pinna up and back.\n2. Insert a Miller 0 (pediatric) video-laryngoscope blade, such as a C-MAC, into the ear canal aperture to light and magnify the canal on the screen.\n3. With the canal and object displayed, pass alligator forceps, a cerumen loop, or a right-angle hook alongside the blade under direct video.\n4. Grasp or hook the object and withdraw; the video view confirms you have it and lets an assistant watch.\n5. Re-examine the canal and tympanic membrane afterward for trauma.\n\n**Equipment:** Pediatric video laryngoscope with Miller 0 blade (e.g., C-MAC), alligator forceps / cerumen loop / right-angle hook.\n\n_Source: ALiEM Trick of the Trade \u2014 Pediatric video laryngoscope for ear foreign bodies._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26465,6 +26474,7 @@ const TRICKS_ENT_PAGE: InfoPage = {
     { num: 14, text: 'WikEM. Nasal septal hematoma. wikem.org. See also ALiEM ENT tricks of the trade.' },
     { num: 15, text: 'Cook S, Burton M, Glasziou P. Efficacy and safety of the \u201Cmother\u2019s kiss\u201D technique: a systematic review of case reports and case series. CMAJ. 2012;184(17):E904-E912. See also ACEP Now: positive pressure technique for nasal foreign body removal.' },
     { num: 16, text: 'ALiEM. Trick of the Trade: Pelvic speculum for peritonsillar abscess drainage (Lin). aliem.com.' },
+    { num: 17, text: 'ALiEM. Trick of the Trade: Pediatric video laryngoscope for ear foreign bodies. aliem.com.' },
   ],
 };
 
@@ -26502,6 +26512,10 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
       heading: 'Saline-Rinsed Strip as a Gentle Fluorescein Dropper',
       body: '**Accomplishes:** Makes an improvised liquid fluorescein dropper so you can dose the dye onto a squirmy patient\u2019s eye (e.g., an infant) without the discomfort of touching a paper strip to the cornea. [7]\n\n**How to:**\n1. Remove contact lenses first (fluorescein permanently stains them).\n2. Open only ONE end of the fluorescein strip package.\n3. Flush a saline vial in and out of the open packet several times until the fluid turns yellow.\n4. Use that yellow-tinted saline vial as an eyedropper, trickling it onto the eye; corneal epithelial defects glow green under blue light.\n5. Mucus also stains \u2014 have the patient blink to tell them apart (mucus moves, a true defect stays put). Never reuse or share dye (Pseudomonas risk).\n\n**Equipment:** Fluorescein strip, single saline flush vial, cobalt-blue light.\n\n_Source: ALiEM Trick of the Trade \u2014 Easy ocular application of fluorescein (Ko/Chan)._',
     },
+    {
+      heading: 'Bevel-Flick Technique for Corneal Foreign Body Removal',
+      body: '**Accomplishes:** Lifts an embedded corneal foreign body off the eye at the slit lamp while minimizing extra epithelial/conjunctival damage \u2014 you scoop under it with the flat of the bevel instead of scraping. [8]\n\n**How to:**\n1. Anesthetize BOTH eyes with topical proparacaine (numbing the other eye reduces reflex blinking); try irrigating the cornea first \u2014 a truly superficial foreign body may simply float off.\n2. Mount a small needle (a 25-27G or even a 29G insulin/TB needle looks less threatening) on a syringe used as a handle, bevel UP and facing away from the eye.\n3. Stabilize your dominant hand on the patient\u2019s zygoma, bring the needle into the slit-lamp field, and approach the foreign body nearly tangent to the cornea.\n4. Press the flat, non-cutting flat of the bevel against the cornea, slide the tip just UNDER the edge of the object, and flick it off \u2014 do not dig straight down.\n5. If a rust ring remains, remove it with an Alger brush (battery ophthalmic burr); refer central-axis foreign bodies or residual rust ring to ophthalmology next day.\n\n**Equipment:** Slit lamp, topical proparacaine, 25-29G needle on a syringe, moistened cotton applicator, Alger brush (for rust ring).\n\n_Source: LITFL \u2014 Ocular foreign body removal; Maimonides EM \u2014 Corneal foreign bodies._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26511,6 +26525,7 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
     { num: 5, text: 'ALiEM. Trick of the Trade: Photograph slit lamp findings. aliem.com.' },
     { num: 6, text: 'ALiEM. Trick of the Trade: Finding the wandering contact lens (Paolillo/Lin). aliem.com.' },
     { num: 7, text: 'ALiEM. Trick of the Trade: Easy ocular application of fluorescein (Ko/Chan). aliem.com.' },
+    { num: 8, text: 'LITFL. Ocular foreign body removal. litfl.com. See also Maimonides Emergency Medicine \u2014 Corneal foreign bodies (bevel-flick technique, Alger brush rust ring).' },
   ],
 };
 
@@ -26548,6 +26563,10 @@ const TRICKS_UROLOGY_PAGE: InfoPage = {
       heading: '\u201CFoley Balloon Be Gone\u201D \u2014 Free a Retained Catheter With a Stuck Balloon',
       body: '**Accomplishes:** Removes a Foley whose balloon will not deflate (failed inflation valve or a channel plugged by crystals) without cutting blindly or yanking, which can injure the urethra. [8]\n\n**How to:**\n1. First try the simplest step: cut the catheter across the inflation (balloon) port arm distal to the bifurcation \u2014 this removes the one-way valve and the balloon water often drains on its own.\n2. If it still will not drain, gently pass a thin lubricated guidewire down the now-open inflation channel to push past obstructing exudate/crystals; the balloon then empties.\n3. Do NOT overinflate to \u201Cburst\u201D the balloon blindly and never cut the catheter flush at the meatus (you lose your handle and balloon fragments can be retained).\n4. Once deflated, withdraw the catheter and inspect the tip to confirm the balloon came out intact.\n5. If both maneuvers fail, escalate to urology for ultrasound-guided balloon puncture rather than improvising further.\n\n**Equipment:** Scissors, thin lubricated guidewire, syringe, sterile gloves.\n\n_Source: ALiEM Trick of the Trade \u2014 Foley balloon be gone!_',
     },
+    {
+      heading: '\u201COpen-Book\u201D Manual Testicular Detorsion',
+      body: '**Accomplishes:** Restores blood flow to a torsed testis at the bedside, buying time and relieving pain while the patient goes to the OR \u2014 it is a temporizing bridge, never a substitute for surgical exploration. [9]\n\n**How to:**\n1. Stand facing the supine or standing patient; give analgesia (a spermatic-cord block or IV opioid) since manipulation is painful.\n2. Detorse like opening a book: rotate the affected testis from MEDIAL to LATERAL \u2014 patient\u2019s right testis turns counterclockwise, left testis turns clockwise (as you face them).\n3. Lift the testis slightly cephalad as you rotate; most torsions are 180-720\u00B0, so repeat the same direction 1-3 times until pain eases and the testis drops and lies vertically.\n4. Confirm success with Doppler ultrasound showing restored flow \u2014 pain relief alone is unreliable, and up to a third of cases need lateral-to-medial rotation instead, so reverse direction if the first way worsens pain or fails.\n5. Call urology immediately regardless of result; even a successful detorsion can be incomplete and still needs orchidopexy.\n\n**Equipment:** Doppler ultrasound, analgesia (cord block or IV opioid), gloves.\n\n_Source: Medscape \u2014 Manual detorsion of the testes; Sessions et al. (direction-of-rotation data)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26558,6 +26577,7 @@ const TRICKS_UROLOGY_PAGE: InfoPage = {
     { num: 6, text: 'ALiEM. Trick of the Trade: Paraphimosis - Pour some sugar on me (Fu, Watts, Coralic). aliem.com.' },
     { num: 7, text: 'Gupta S, et al. A time and equipment saving tip for difficult urethral catheterizations (hydrophilic guidewire railroad technique). PMC5137669.' },
     { num: 8, text: 'ALiEM. Trick of the Trade: Foley balloon be gone! aliem.com.' },
+    { num: 9, text: 'Medscape. Manual Detorsion of the Testes (open-book technique). emedicine.medscape.com. See also Sessions AE, et al. Testicular torsion: direction, degree, duration and disinformation. J Urol.' },
   ],
 };
 
@@ -26705,9 +26725,14 @@ const TRICKS_TOX_PAGE: InfoPage = {
       heading: 'Haloperidol for Cannabinoid Hyperemesis (CHS)',
       body: '**Accomplishes:** Treats refractory nausea/vomiting from chronic cannabis use \u2014 IV haloperidol outperformed ondansetron in the HaVOC trial. [1]\n\n**How to:**\n1. For CHS-pattern intractable vomiting, give IV haloperidol as an antiemetic (per HaVOC dosing).\n2. Topical capsaicin and hot showers are adjuncts.\n\n**Equipment:** IV haloperidol (alternative: ondansetron).\n\n_Source: EMCrit 426 \u2014 Dr. David Carr._',
     },
+    {
+      heading: 'Dilute Naloxone for a Titrated Opioid Reversal',
+      body: '**Accomplishes:** Reverses opioid-induced respiratory depression in an opioid-dependent patient while avoiding the abrupt, miserable (and vomiting/agitation-prone) precipitated withdrawal a full 0.4 mg push causes. [2]\n\n**How to:**\n1. Confirm this is for ventilatory depression, NOT frank apnea/respiratory arrest \u2014 if the patient is apneic, give standard full-dose naloxone and ventilate instead.\n2. Draw 1 mL of naloxone 0.4 mg/mL into a 10 mL syringe.\n3. Add 9 mL of normal saline to make 10 mL of a 0.04 mg/mL solution; clearly label the syringe with drug and concentration (do not use an unlabeled flush).\n4. Give 1-2 mL (0.04-0.08 mg) IV every 60 seconds, titrating to adequate spontaneous breathing \u2014 not full arousal.\n5. The wake-up amount you used also gives a sensible starting point if a naloxone infusion is needed; keep monitoring for re-sedation as naloxone wears off.\n\n**Equipment:** Naloxone 0.4 mg/mL vial, 10 mL syringe, normal saline, label.\n\n_Source: ALiEM Trick of the Trade \u2014 Naloxone dilution for opioid overdose; Kim & Nelson, J Med Toxicol 2016._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/. (HaVOC trial.)' },
+    { num: 2, text: 'ALiEM. Trick of the Trade: Naloxone dilution for opioid overdose. aliem.com. Kim HK, Nelson LS. Reversal of opioid-induced ventilatory depression using low-dose naloxone (0.04 mg): a case series. J Med Toxicol. 2016;12(1):107-110.' },
   ],
 };
 

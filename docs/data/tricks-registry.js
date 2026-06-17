@@ -18,7 +18,7 @@ export const TRICK_SPECIALTIES = [
         color: '#1565C0',
         subtitle: 'Suction, NG placement, supraglottic exchange, and more.',
         infoPageId: 'tricks-airway',
-        trickCount: 7,
+        trickCount: 8,
     },
     {
         id: 'procedures',
@@ -36,7 +36,7 @@ export const TRICK_SPECIALTIES = [
         color: '#6A1B9A',
         subtitle: 'Epistaxis packing tricks and nasal suction.',
         infoPageId: 'tricks-ent',
-        trickCount: 14,
+        trickCount: 15,
     },
     {
         id: 'dental',
@@ -54,7 +54,7 @@ export const TRICK_SPECIALTIES = [
         color: '#2E7D32',
         subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
         infoPageId: 'tricks-ophtho',
-        trickCount: 7,
+        trickCount: 8,
     },
     {
         id: 'urology',
@@ -63,7 +63,7 @@ export const TRICK_SPECIALTIES = [
         color: '#EF6C00',
         subtitle: 'Voiding trials, renal colic, priapism, and entrapment releases.',
         infoPageId: 'tricks-urology',
-        trickCount: 7,
+        trickCount: 8,
     },
     {
         id: 'wound',
@@ -99,7 +99,7 @@ export const TRICK_SPECIALTIES = [
         color: '#37474F',
         subtitle: 'Antiemetic and toxidrome management pearls.',
         infoPageId: 'tricks-tox',
-        trickCount: 1,
+        trickCount: 2,
     },
     {
         id: 'general',
