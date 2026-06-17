@@ -1316,6 +1316,29 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Expand tap targets to the 44px iOS/WCAG minimum without enlarging the
+   36px visual circles (keeps the header bar from crowding at 375px). The
+   transparent ::after overlay extends the hit area beyond the visible icon. */
+.consult-flow-header__back,
+.consult-flow-header__reset,
+.consult-flow-header__share,
+.consult-flow-header__home {
+  position: relative;
+}
+
+.consult-flow-header__back::after,
+.consult-flow-header__reset::after,
+.consult-flow-header__share::after,
+.consult-flow-header__home::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
 /* ===================================================================
    SEARCH BAR (Expandable)
    =================================================================== */
