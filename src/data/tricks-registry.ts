@@ -54,7 +54,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#6A1B9A',
     subtitle: 'Epistaxis packing tricks and nasal suction.',
     infoPageId: 'tricks-ent',
-    trickCount: 15,
+    trickCount: 16,
   },
   {
     id: 'dental',
@@ -81,7 +81,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#EF6C00',
     subtitle: 'Voiding trials, renal colic, priapism, and entrapment releases.',
     infoPageId: 'tricks-urology',
-    trickCount: 8,
+    trickCount: 9,
   },
   {
     id: 'wound',
@@ -99,7 +99,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#C62828',
     subtitle: 'Rapid adenosine delivery and rhythm tricks.',
     infoPageId: 'tricks-cardiology',
-    trickCount: 3,
+    trickCount: 4,
   },
   {
     id: 'neuro',
@@ -135,7 +135,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#5D4037',
     subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
     infoPageId: 'tricks-ortho',
-    trickCount: 21,
+    trickCount: 23,
   },
 ];
 

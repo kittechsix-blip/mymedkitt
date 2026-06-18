@@ -25366,6 +25366,10 @@ const TRICKS_ENT_PAGE = {
             heading: 'Pediatric Video Laryngoscope to See and Grab an Ear Foreign Body',
             body: '**Accomplishes:** Turns a frustrating, poorly-lit ear-canal foreign-body removal into a hands-free, magnified, two-handed procedure \u2014 the screen shows the object while both your hands work, beating the cramped otoscope view. [17]\n\n**How to:**\n1. Position the child (papoose or parent-held) and straighten the canal by pulling the pinna up and back.\n2. Insert a Miller 0 (pediatric) video-laryngoscope blade, such as a C-MAC, into the ear canal aperture to light and magnify the canal on the screen.\n3. With the canal and object displayed, pass alligator forceps, a cerumen loop, or a right-angle hook alongside the blade under direct video.\n4. Grasp or hook the object and withdraw; the video view confirms you have it and lets an assistant watch.\n5. Re-examine the canal and tympanic membrane afterward for trauma.\n\n**Equipment:** Pediatric video laryngoscope with Miller 0 blade (e.g., C-MAC), alligator forceps / cerumen loop / right-angle hook.\n\n_Source: ALiEM Trick of the Trade \u2014 Pediatric video laryngoscope for ear foreign bodies._',
         },
+        {
+            heading: 'Frazier Suction to Extract a Live Insect From the Ear',
+            body: '**Accomplishes:** Removes a live or dead insect from the ear canal in one intact piece, avoiding the shredding and retained debris that forceps cause on a friable insect body. [18]\n\n**How to:**\n1. First immobilize the insect: instill viscous (or plain) lidocaine to drown it and stop the distressing movement.\n2. Connect a Frazier suction tip to low continuous wall suction.\n3. Consider light sedation \u2014 the buzzing sensation is very distressing and a still patient protects the canal.\n4. Once the insect is confirmed dead, advance the Frazier tip slowly into the canal under direct visualization.\n5. Suction the insect out whole rather than grasping and fragmenting it; re-examine the canal and TM.\n\n**Equipment:** Frazier suction tip, wall suction, viscous or plain lidocaine, otoscope.\n\n_Source: ALiEM Trick of the Trade \u2014 Insect removal from the ear._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25385,6 +25389,7 @@ const TRICKS_ENT_PAGE = {
         { num: 15, text: 'Cook S, Burton M, Glasziou P. Efficacy and safety of the \u201Cmother\u2019s kiss\u201D technique: a systematic review of case reports and case series. CMAJ. 2012;184(17):E904-E912. See also ACEP Now: positive pressure technique for nasal foreign body removal.' },
         { num: 16, text: 'ALiEM. Trick of the Trade: Pelvic speculum for peritonsillar abscess drainage (Lin). aliem.com.' },
         { num: 17, text: 'ALiEM. Trick of the Trade: Pediatric video laryngoscope for ear foreign bodies. aliem.com.' },
+        { num: 18, text: 'ALiEM. Trick of the Trade: Insect removal from the ear. aliem.com.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25475,6 +25480,10 @@ const TRICKS_UROLOGY_PAGE = {
             heading: '\u201COpen-Book\u201D Manual Testicular Detorsion',
             body: '**Accomplishes:** Restores blood flow to a torsed testis at the bedside, buying time and relieving pain while the patient goes to the OR \u2014 it is a temporizing bridge, never a substitute for surgical exploration. [9]\n\n**How to:**\n1. Stand facing the supine or standing patient; give analgesia (a spermatic-cord block or IV opioid) since manipulation is painful.\n2. Detorse like opening a book: rotate the affected testis from MEDIAL to LATERAL \u2014 patient\u2019s right testis turns counterclockwise, left testis turns clockwise (as you face them).\n3. Lift the testis slightly cephalad as you rotate; most torsions are 180-720\u00B0, so repeat the same direction 1-3 times until pain eases and the testis drops and lies vertically.\n4. Confirm success with Doppler ultrasound showing restored flow \u2014 pain relief alone is unreliable, and up to a third of cases need lateral-to-medial rotation instead, so reverse direction if the first way worsens pain or fails.\n5. Call urology immediately regardless of result; even a successful detorsion can be incomplete and still needs orchidopexy.\n\n**Equipment:** Doppler ultrasound, analgesia (cord block or IV opioid), gloves.\n\n_Source: Medscape \u2014 Manual detorsion of the testes; Sessions et al. (direction-of-rotation data)._',
         },
+        {
+            heading: 'Jacobi Ring Catheter for a Bartholin Abscess',
+            body: '**Accomplishes:** Drains a Bartholin abscess when the Word catheter will not fit or keeps falling out, using a looped catheter that stays put and forms a durable epithelialized tract. [10]\n\n**How to:**\n1. Anesthetize and make a stab incision into the abscess cavity on the medial mucosal surface.\n2. Thread suture material through the lumen of an 8-French rubber tube (butterfly tubing works for the loop variant).\n3. Pass one end of the tube into the incision, then bring the other end out through a second small incision a short distance away (loop-drainage style).\n4. Tie the suture ends together so the catheter forms a ring/loop bridging the cavity.\n5. Leave it in place to maintain drainage and let the tract epithelialize; remove at outpatient follow-up.\n\n**Equipment:** 8-Fr rubber tube (or butterfly tubing), suture material, scalpel, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Alternative to the Word catheter for Bartholin abscess (Jacobi ring)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25486,6 +25495,7 @@ const TRICKS_UROLOGY_PAGE = {
         { num: 7, text: 'Gupta S, et al. A time and equipment saving tip for difficult urethral catheterizations (hydrophilic guidewire railroad technique). PMC5137669.' },
         { num: 8, text: 'ALiEM. Trick of the Trade: Foley balloon be gone! aliem.com.' },
         { num: 9, text: 'Medscape. Manual Detorsion of the Testes (open-book technique). emedicine.medscape.com. See also Sessions AE, et al. Testicular torsion: direction, degree, duration and disinformation. J Urol.' },
+        { num: 10, text: 'ALiEM. Trick of the Trade: Alternative to the Word catheter for Bartholin abscess (Jacobi ring catheter). aliem.com.' },
     ],
 };
 const TRICKS_WOUND_PAGE = {
@@ -25571,11 +25581,16 @@ const TRICKS_CARDIOLOGY_PAGE = {
             heading: 'Single-Syringe Adenosine for SVT (No Stopcock)',
             body: '**Accomplishes:** Delivers a fast adenosine bolus solo, diluting the drug with saline in one syringe so it reaches the AV node before the short half-life expires \u2014 no stopcock, extension tubing, or second nurse needed. [3]\n\n**How to:**\n1. Draw 6 mg (2 mL) of adenosine into a 20 mL syringe, then draw saline up to a total of 20 mL (a 10 mL syringe with 5\u201318 mL of saline also works if 20 mL is unavailable).\n2. Connect directly to the IV hub closest to the patient (an antecubital or more proximal vein is ideal).\n3. Push the entire 20 mL as fast as you physically can, in 1\u20132 seconds.\n4. Watch the monitor; if SVT persists, repeat with 12 mg (4 mL) of adenosine topped to 20 mL with saline.\n\n**Equipment:** 20 mL (or 10 mL) syringe, adenosine, normal saline, IV with a proximal hub, cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Combine adenosine with the flush (single-syringe technique); McDowell, Acad Emerg Med 2020._',
         },
+        {
+            heading: 'Lewis (S5) Lead to Unmask Hidden P-Waves',
+            body: '**Accomplishes:** Amplifies invisible atrial activity to confirm atrial flutter or distinguish VT from SVT at the bedside in seconds, using only the leads already on the patient. [4]\n\n**How to:**\n1. Start with the patient on the standard limb leads.\n2. Move the Right Arm electrode to the manubrium (just right of the sternum, 2nd intercostal space).\n3. Move the Left Arm electrode to the 5th intercostal space at the right sternal border (4th ICS right sternal border for the rapid variant).\n4. Move the Left Leg electrode to the right lower costal margin.\n5. Record and read Lead I \u2014 flutter waves and AV dissociation that were invisible on the 12-lead now stand out.\n\n**Equipment:** Standard ECG machine with limb leads, the existing electrodes.\n\n_Source: emDOCs \u2014 ECG Pointers: The Lewis Lead; LITFL._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
         { num: 2, text: 'Appelboam A, et al. Postural modification to the standard Valsalva manoeuvre for emergency treatment of supraventricular tachycardias (REVERT). Lancet 2015. rebelem.com.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: Combine adenosine with the flush \u2014 single-syringe technique. aliem.com. McDowell M, et al. Single-syringe administration of diluted adenosine. Acad Emerg Med. 2020;27(1):61-63.' },
+        { num: 4, text: 'emDOCs. ECG Pointers: The Lewis Lead. emdocs.net. See also LITFL: Lewis lead (S5 lead). litfl.com.' },
     ],
 };
 const TRICKS_NEURO_PAGE = {
@@ -25972,6 +25987,14 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Pencil Fulcrum Reduction for a Pediatric Extra-Octave Fracture',
             body: '**Accomplishes:** Reduces a displaced little-finger proximal phalanx \u201Cextra-octave\u201D fracture in a child using a simple pencil as a fulcrum \u2014 gentler and lower-resource than the forceful Jahss maneuver, often without sedation. [22]\n\n**How to:**\n1. Confirm an extra-octave fracture: a base-of-proximal-phalanx fracture of the little finger with ulnar deviation and dorsal/volar angulation, classically from a ball striking the abducted finger.\n2. Provide analgesia (digital block or intranasal analgesia in a child as needed).\n3. Lay an ordinary pencil at the base of the FOURTH web space, snug against the metacarpophalangeal joint of the little finger \u2014 this is your fulcrum.\n4. With the pencil held as the pivot, apply gentle ADDUCTION and flexion pressure to the proximal phalanx, levering the finger toward the ring finger.\n5. The biomechanical leverage corrects both the ulnar deviation and the angulation at once; confirm alignment, buddy-tape or splint, and obtain post-reduction films.\n\n**Equipment:** A standard pencil, digital-block supplies, buddy tape or splint material.\n\n_Source: Pencil Fulcrum Technique for closed reduction of pediatric extra-octave fractures (PMC12705274)._',
         },
+        {
+            heading: 'Syringe Roll for Patient Self-Reduction of a TMJ Dislocation',
+            body: '**Accomplishes:** Lets the patient self-reduce an anterior TMJ dislocation by biting and rolling a syringe \u2014 no sedation and no provider hands in the bite zone (97% success, 77% under one minute). [23]\n\n**How to:**\n1. Confirm an anterior (not lateral or posterior) TMJ dislocation.\n2. Place a 5 or 10 mL syringe horizontally between the posterior molars on the dislocated side, like a bit.\n3. Instruct the patient to gently bite and roll the syringe back and forth between the upper and lower teeth.\n4. The rolling motion walks the condyle back over the articular eminence and self-reduces the joint.\n5. Confirm reduction and normal occlusion; advise a soft diet and to avoid wide opening. (Will not work in edentulous patients \u2014 no teeth to grip the syringe.)\n\n**Equipment:** One 5\u201310 mL syringe.\n\n_Source: CoreEM \u2014 The syringe technique for TMJ reduction._',
+        },
+        {
+            heading: 'Finger-Trap Gravity Disimpaction for Distal Radius Fractures',
+            body: '**Accomplishes:** Pre-disimpacts a displaced distal radius fracture passively with traction and gravity so the final manipulation is far easier \u2014 you set it up and walk away to see other patients. [24]\n\n**How to:**\n1. Anesthetize with a hematoma block: insert a 25-gauge needle dorsally into the fracture hematoma at ~30\u00B0, aspirate to confirm blood return, then instill 8\u201312 mL of lidocaine.\n2. Suspend the hand vertically in finger traps (index and middle fingers), arm pointing to the ceiling.\n3. Hang 2\u20135 kg of weight from the upper arm with the elbow flexed at 90\u00B0 for countertraction.\n4. Give light anxiolysis and tell the patient to fully relax the arm.\n5. Leave it for about 10 minutes (go see another patient); traction restores 1\u20132 cm of length, making the final reduction easy. Pad thin/elderly skin under the finger traps.\n\n**Equipment:** 25-gauge needle, lidocaine, syringe, finger traps, 2\u20135 kg weights, padding.\n\n_Source: Emergency Physicians Monthly \u2014 Distal radius fractures: reducing the confusion._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -25996,6 +26019,8 @@ const TRICKS_ORTHO_PAGE = {
         { num: 20, text: 'Hatch RL, Hacking S. Evaluation and management of toe fractures. Am Fam Physician. 2003;68(12):2413-2418. See also Merck Manual Professional: Toe fractures.' },
         { num: 21, text: 'Merck Manual Professional: How to reduce anterior shoulder dislocations using the Davos technique. Boss A, Holzach P, Matter P (1993). Marcano-Fernandez FA, et al. Teaching patients how to reduce a shoulder dislocation: BHM self-assisted vs Spaso, an RCT. Acad Emerg Med. 2018.' },
         { num: 22, text: 'Pencil Fulcrum Technique: a simple method for closed reduction of extra-octave fractures in children. PMC12705274.' },
+        { num: 23, text: 'CoreEM. The syringe technique for temporomandibular joint (TMJ) reduction. coreem.net. Gorchynski J, et al. The syringe technique: a hands-free approach for TMJ reduction. J Emerg Med.' },
+        { num: 24, text: 'Emergency Physicians Monthly. Distal radius fractures: reducing the confusion (hematoma block + finger-trap gravity disimpaction). epmonthly.com.' },
     ],
 };
 // ===================================================================
