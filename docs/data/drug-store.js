@@ -6986,6 +6986,11 @@ const PCC_4FACTOR = {
             regimen: '50 IU/kg IV (fixed dose regardless of anti-Xa level). Use when andexanet alfa unavailable. Less targeted than specific reversal but widely available.',
             weightCalc: { dosePerKg: 50, unit: 'IU', maxDose: 5000 },
         },
+        {
+            indication: 'Trauma coagulopathy — viscoelastic-guided factor support (off-label)',
+            regimen: 'Off-label, low-volume alternative to plasma for prolonged CK-R on TEG when rapid factor repletion is needed or volume overload is a concern. Typical 25-50 IU/kg IV (cap per institutional protocol; max 5000 IU). Does NOT replace fibrinogen or platelets — correct low CFF-MA with cryoprecipitate and low CRT-MA with platelets separately. Carries thrombotic risk; use only within a goal-directed protocol and reassess TEG in 30-60 min.',
+            weightCalc: { dosePerKg: 25, unit: 'IU', maxDose: 5000, label: 'Trauma factor support' },
+        },
     ],
     contraindications: [
         'Known anaphylaxis to PCC components',
@@ -8692,6 +8697,11 @@ const FFP = {
         {
             indication: 'Angioedema (second-line)',
             regimen: '2 units IV initially. May give additional 2 units if no response. Each unit is 200-250 mL. Contains C1-INH, ACE, and other bradykinin-metabolizing enzymes. Use only if targeted therapies (C1-INH concentrate, icatibant, TXA) are unavailable. Retrospective cohort: FFP reduced intubation risk in non-HAE angioedema patients.',
+        },
+        {
+            indication: 'Trauma hemorrhage — viscoelastic (TEG)-guided',
+            regimen: 'Prolonged CK-R (>10 min on TEG 6s trauma cartridge) indicates clotting-factor deficiency → give plasma 15-30 mL/kg IV (~4 units in a 70 kg adult). Each ~250 mL unit raises most factors only ~2.5%, so volumes are large. Reassess TEG in 30-60 min. 4-factor PCC is a low-volume alternative when rapid factor repletion is needed or volume overload is a concern. IMPORTANT: low fibrinogen (low CFF-MA) is corrected with cryoprecipitate FIRST — plasma alone rarely normalizes fibrinogen.',
+            weightCalc: { dosePerKg: 15, unit: 'mL', label: 'Plasma (TEG-guided), low end' },
         },
         {
             indication: 'Warfarin reversal (if PCC unavailable)',

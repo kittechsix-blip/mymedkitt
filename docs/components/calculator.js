@@ -39844,7 +39844,313 @@ const HEP_KINGS_COLLEGE_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// TEG (Thromboelastography) — TEG 6s trauma cartridge
+// All thresholds are assay-specific to the TEG 6s trauma/global-hemostasis
+// cartridge (CK / CKH / CRT / CFF channels). They are NOT interchangeable with
+// rapid-TEG (rTEG) or citrated-kaolin TEG 5000 cutoffs. Anchored on the Sarani
+// 2025 Delphi consensus algorithm and FDA K232018 / Hartmann 2025 reference ranges.
+// -------------------------------------------------------------------
+const TEG6S_INTERPRETER_CALCULATOR = {
+    id: 'teg6s-interpreter',
+    title: 'TEG 6s Interpreter',
+    subtitle: 'Trauma cartridge → product recommendations',
+    description: 'Enter the four TEG 6s trauma-cartridge values. Returns a prioritized, goal-directed transfusion plan. Thresholds are TEG 6s-specific (Sarani 2025 Delphi). Correct fibrinogen (CFF-MA) before attributing a low CRT-MA to platelets.',
+    fields: [
+        { name: 'ckr', label: 'CK-R time', type: 'number', points: 0, valueIsPoints: true, unit: 'min', description: 'Clotting factors. Normal 4.6–9.1 min' },
+        { name: 'cffma', label: 'CFF-MA (functional fibrinogen)', type: 'number', points: 0, valueIsPoints: true, unit: 'mm', description: 'Fibrinogen. Normal 15–32 mm' },
+        { name: 'crtma', label: 'CRT-MA (overall clot strength)', type: 'number', points: 0, valueIsPoints: true, unit: 'mm', description: 'Platelets + fibrinogen. Normal 52–70 mm' },
+        { name: 'ckly30', label: 'CK-LY30 (lysis)', type: 'number', points: 0, valueIsPoints: true, unit: '%', description: 'Fibrinolysis. Normal 0–2.6%' },
+        { name: 'hours', label: 'Hours since injury (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'h', description: 'For TXA timing — enter 0 if unknown' },
+    ],
+    results: [],
+    thresholdNote: 'TEG 6s trauma cartridge only. Reassess TEG every 30–60 min or per MTP round. Tool supports — does not replace — clinical judgment.',
+    citations: [
+        'Sarani B, Callum J, Neal MD, et al. Goal-directed transfusion algorithm for trauma patients with severe hemorrhage using TEG 6S: a Delphi consensus. J Trauma Acute Care Surg. 2025;98(6):984-991.',
+        'Bugaev N, Como JJ, Golani G, et al. Thromboelastography and rotational thromboelastometry in bleeding patients with coagulopathy: EAST practice management guideline. J Trauma Acute Care Surg. 2020;89(6):999-1017.',
+        'Shakur H, Roberts I, et al. (CRASH-2). Effects of tranexamic acid on death, vascular occlusive events, and blood transfusion in trauma patients. Lancet. 2010;376(9734):23-32.',
+    ],
+    computeResult: (values) => {
+        const ckr = values['ckr'] || 0;
+        const cffma = values['cffma'] || 0;
+        const crtma = values['crtma'] || 0;
+        const ly30 = values['ckly30'] || 0;
+        const hours = values['hours'] || 0;
+        if (ckr <= 0 && cffma <= 0 && crtma <= 0 && ly30 <= 0) {
+            return { value: '--', label: 'Enter TEG values', description: 'Enter at least one TEG 6s value to generate a plan.', colorVar: '--color-text-muted' };
+        }
+        const steps = [];
+        let abnormal = 0;
+        // 1. Hyperfibrinolysis → TXA (address first; cheap, time-critical)
+        if (ly30 > 2.6) {
+            abnormal++;
+            let txaLine = '**ELEVATED CK-LY30 (>2.6%) → HYPERFIBRINOLYSIS:**\n• Give **tranexamic acid (TXA)**: 1 g IV over 10 min, then 1 g over 8 h (CRASH-2 regimen)';
+            if (hours > 3) {
+                txaLine += '\n• ⚠️ >3 h since injury — CRASH-2 showed TXA given after 3 h may INCREASE bleeding death. Weigh carefully.';
+            }
+            else if (hours > 0) {
+                txaLine += `\n• ${hours} h since injury — within the ≤3 h window where TXA reduces mortality.`;
+            }
+            else {
+                txaLine += '\n• Most benefit when given ≤3 h from injury; avoid initiating >3 h out.';
+            }
+            steps.push(txaLine);
+        }
+        // 2. Fibrinogen (CFF-MA) — correct BEFORE platelets
+        const lowFib = cffma > 0 && cffma < 14;
+        if (lowFib) {
+            abnormal++;
+            steps.push('**LOW CFF-MA (<14 mm) → FIBRINOGEN DEFICIT:**\n• Give **cryoprecipitate** 10 units (≈6 g fibrinogen) — or fibrinogen concentrate 4–6 g\n• Each 10 U cryo raises fibrinogen ~50–100 mg/dL; target fibrinogen >150–200 mg/dL (>200 if TBI)\n• Correct fibrinogen FIRST — a low CRT-MA is often driven by low fibrinogen.');
+        }
+        // 3. Factors (CK-R)
+        if (ckr > 10) {
+            abnormal++;
+            steps.push('**PROLONGED CK-R (>10 min) → FACTOR DEFICIENCY / ANTICOAGULANT:**\n• Give **plasma (FFP)** 15–30 mL/kg IV (~4 units in a 70 kg adult)\n• Low-volume alternative: **4-factor PCC** 25–50 IU/kg (off-label in trauma)\n• If on heparin, consider the CK-R vs CKH-R (heparinase) gap → protamine.');
+        }
+        // 4. Platelets (CRT-MA) — gated on fibrinogen being adequate
+        if (crtma > 0 && crtma < 52) {
+            abnormal++;
+            if (lowFib) {
+                steps.push('**LOW CRT-MA (<52 mm) — BUT CFF-MA IS LOW:**\n• Do NOT reflexively give platelets. Correct fibrinogen (cryo) first, then RECHECK TEG.\n• If CRT-MA stays low after CFF-MA normalizes (≥15 mm), then treat as platelet deficit below.');
+            }
+            else {
+                let pltLine = '**LOW CRT-MA (<52 mm) WITH ADEQUATE FIBRINOGEN → PLATELET DEFICIT/DYSFUNCTION:**';
+                if (crtma < 45) {
+                    pltLine += '\n• CRT-MA <45 → give **1–2 apheresis platelet units**';
+                }
+                else {
+                    pltLine += '\n• CRT-MA 45–50 → give **1 apheresis platelet unit**';
+                }
+                pltLine += '\n• Remember: TEG is blind to aspirin/P2Y12 platelet inhibition — a normal CRT-MA does not exclude antiplatelet effect (use PlateletMapping).';
+                steps.push(pltLine);
+            }
+        }
+        if (abnormal === 0) {
+            return {
+                value: 'No product trigger',
+                label: 'TEG within trauma thresholds',
+                description: '**NO TEG-BASED PRODUCT INDICATED:**\n• All entered values are within TEG 6s trauma thresholds.\n\n**IF STILL BLEEDING, THINK:**\n• Surgical/structural bleed — TEG cannot detect anatomic bleeding; pursue source control and transfuse 1:1:1 to replace ongoing losses.\n• TEG blind spots: antiplatelet drugs (aspirin/P2Y12), von Willebrand disease, and HYPOTHERMIA (sample is warmed to 37 °C — masks in-vivo cold coagulopathy).\n• Acidosis and hypocalcemia — correct ionized Ca²⁺ and pH.',
+                colorVar: '--color-primary',
+            };
+        }
+        const summary = `**GOAL-DIRECTED PLAN (${abnormal} abnormal value${abnormal > 1 ? 's' : ''}, treat in order):**\n\n` + steps.join('\n\n') + '\n\n**THEN:**\n• Reassess TEG in 30–60 min / next MTP round.\n• Maintain temperature, ionized calcium, and pH alongside product therapy.';
+        const color = abnormal >= 2 ? '--color-danger' : '--color-warning';
+        return { value: `${abnormal} target${abnormal > 1 ? 's' : ''}`, label: 'Coagulopathy profile', description: summary, colorVar: color };
+    },
+};
+const TEG_FIBRINOLYSIS_CALCULATOR = {
+    id: 'teg-fibrinolysis',
+    title: 'Fibrinolysis Phenotype & TXA',
+    subtitle: 'LY30 → shutdown / physiologic / hyperfibrinolysis',
+    description: 'Classifies post-injury fibrinolysis from LY30 and guides the TXA decision. Phenotype cut-points are from the Denver rapid-TEG cohort (Moore 2016); the TEG 6s trauma cartridge flags lysis above its 2.6% upper limit of normal.',
+    fields: [
+        { name: 'ly30', label: 'LY30', type: 'number', points: 0, valueIsPoints: true, unit: '%', description: 'Clot lysis at 30 min' },
+        { name: 'hours', label: 'Hours since injury (optional)', type: 'number', points: 0, valueIsPoints: true, unit: 'h', description: 'Enter 0 if unknown' },
+    ],
+    results: [],
+    thresholdNote: 'Denver rTEG phenotypes: shutdown <0.8%, physiologic 0.8–2.9%, hyperfibrinolysis ≥3%. TEG 6s trauma ULN ≈2.6%. LY30 cutoffs are assay-specific.',
+    citations: [
+        'Moore HB, Moore EE, Liras IN, et al. Acute fibrinolysis shutdown after injury occurs frequently and increases mortality: a multicenter evaluation of 2,540 severely injured patients. J Am Coll Surg. 2016;222(4):347-355.',
+        'Chapman MP, Moore EE, Moore HB, et al. Fibrinolysis >3% is the critical value for initiation of antifibrinolytic therapy. J Trauma Acute Care Surg. 2013;75(6):961-967.',
+        'Roberts I, et al. (CRASH-2). Importance of early treatment with tranexamic acid in bleeding trauma patients. Lancet. 2011;377(9771):1096-1101.',
+    ],
+    computeResult: (values) => {
+        const ly30 = values['ly30'];
+        const hours = values['hours'] || 0;
+        if (ly30 === undefined || Number.isNaN(ly30) || (ly30 === 0 && values['ly30'] === undefined)) {
+            return { value: '--', label: 'Enter LY30', description: 'Enter the LY30 value (%).', colorVar: '--color-text-muted' };
+        }
+        let timing = '\n• Most benefit when TXA is given ≤3 h from injury.';
+        if (hours > 3)
+            timing = '\n• ⚠️ >3 h since injury — CRASH-2 showed TXA after 3 h may INCREASE bleeding death.';
+        else if (hours > 0)
+            timing = `\n• ${hours} h since injury — within the ≤3 h benefit window.`;
+        if (ly30 >= 3) {
+            return {
+                value: `${ly30}%`,
+                label: 'Hyperfibrinolysis',
+                description: `**HYPERFIBRINOLYSIS (LY30 ≥3%):**\n• Highest-mortality phenotype (~34% in the Denver cohort).\n\n**GIVE TXA:**\n• Tranexamic acid 1 g IV over 10 min, then 1 g over 8 h (CRASH-2).${timing}`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (ly30 > 2.6) {
+            return {
+                value: `${ly30}%`,
+                label: 'Above TEG 6s ULN',
+                description: `**LY30 ABOVE TEG 6s NORMAL (>2.6%):**\n• On the TEG 6s trauma cartridge this exceeds the upper limit of normal — treat as a fibrinolysis signal.\n\n**CONSIDER TXA:**\n• Tranexamic acid 1 g IV over 10 min, then 1 g over 8 h, especially if bleeding.${timing}`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (ly30 >= 0.8) {
+            return {
+                value: `${ly30}%`,
+                label: 'Physiologic fibrinolysis',
+                description: '**PHYSIOLOGIC FIBRINOLYSIS (LY30 0.8–2.9%):**\n• Lowest-mortality phenotype — this is the desired range.\n\n**ACTION:**\n• No antifibrinolytic indicated on lysis grounds alone.\n• Treat other TEG abnormalities and the clinical bleed as usual.',
+                colorVar: '--color-primary',
+            };
+        }
+        return {
+            value: `${ly30}%`,
+            label: 'Fibrinolysis shutdown',
+            description: '**FIBRINOLYSIS SHUTDOWN (LY30 <0.8%):**\n• Common after major injury (~46%) and associated with increased mortality (impaired clot clearance, organ failure).\n\n**TXA CAUTION:**\n• Routine TXA is NOT indicated for shutdown on lysis grounds.\n• The hypothesis that TXA HARMS shutdown patients is from the Denver group and is CONTESTED by CRASH-2/CRASH-3/WOMAN — treat as hypothesis, not settled doctrine.\n• Decide TXA on the overall clinical picture and timing, not LY30 alone.',
+            colorVar: '--color-warning',
+        };
+    },
+};
+const TEG_FIBRINOGEN_DOSE_CALCULATOR = {
+    id: 'teg-fibrinogen-dose',
+    title: 'CFF-MA → Cryo/Fibrinogen Dose',
+    subtitle: 'Functional fibrinogen replacement',
+    description: 'Estimates cryoprecipitate / fibrinogen-concentrate dosing from the TEG 6s functional-fibrinogen MA (CFF-MA). A CFF-MA <14 mm corresponds to a clinically low fibrinogen (~<150 mg/dL).',
+    fields: [
+        { name: 'cffma', label: 'CFF-MA (functional fibrinogen)', type: 'number', points: 0, valueIsPoints: true, unit: 'mm', description: 'Normal 15–32 mm' },
+        { name: 'tbi', label: 'TBI / CNS injury (higher target)', type: 'toggle', points: 1, description: 'Target fibrinogen >200 mg/dL' },
+    ],
+    results: [],
+    thresholdNote: 'CFF-MA <14 mm → replace fibrinogen. 10 U cryo ≈ 6 g ≈ +50–100 mg/dL fibrinogen; 5 U ≈ 3 g. Confirm with a quantitative fibrinogen where available.',
+    citations: [
+        'Sarani B, Callum J, Neal MD, et al. Goal-directed transfusion algorithm for trauma patients with severe hemorrhage using TEG 6S: a Delphi consensus. J Trauma Acute Care Surg. 2025;98(6):984-991.',
+        'Bugaev N, Como JJ, Golani G, et al. TEG and ROTEM in bleeding patients with coagulopathy: EAST practice management guideline. J Trauma Acute Care Surg. 2020;89(6):999-1017.',
+    ],
+    computeResult: (values) => {
+        const cffma = values['cffma'] || 0;
+        const tbi = (values['tbi'] || 0) > 0;
+        if (cffma <= 0) {
+            return { value: '--', label: 'Enter CFF-MA', description: 'Enter the functional-fibrinogen MA (mm).', colorVar: '--color-text-muted' };
+        }
+        const target = tbi ? '>200 mg/dL (TBI/CNS)' : '>150 mg/dL';
+        if (cffma >= 15) {
+            return {
+                value: `${cffma} mm`,
+                label: 'Fibrinogen adequate',
+                description: `**CFF-MA ≥15 mm — FIBRINOGEN ADEQUATE:**\n• No fibrinogen replacement indicated on TEG grounds.\n• If overall clot strength (CRT-MA) is low, the deficit is platelets, not fibrinogen.\n• Target fibrinogen: ${target}.`,
+                colorVar: '--color-primary',
+            };
+        }
+        const severe = cffma < 10;
+        const cryo = severe ? '10 units (≈6 g)' : '5–10 units (≈3–6 g)';
+        return {
+            value: `${cffma} mm`,
+            label: severe ? 'Severe fibrinogen deficit' : 'Low fibrinogen',
+            description: `**CFF-MA <14 mm → REPLACE FIBRINOGEN:**\n• Give **cryoprecipitate ${cryo}** — or fibrinogen concentrate 4–6 g.\n• Each 10 U cryo raises fibrinogen ~50–100 mg/dL.\n\n**TARGET:**\n• Fibrinogen ${target}.\n\n**THEN:**\n• Recheck TEG/fibrinogen in 30–60 min.\n• Correct fibrinogen BEFORE attributing a low CRT-MA to platelets.`,
+            colorVar: severe ? '--color-danger' : '--color-warning',
+        };
+    },
+};
+const TEG_HEPARIN_CALCULATOR = {
+    id: 'teg-heparin',
+    title: 'Heparin Effect (CK-R vs CKH-R)',
+    subtitle: 'Heparinase channel → protamine',
+    description: 'Detects a heparin effect by comparing the CK-R (kaolin) to the CKH-R (kaolin + heparinase). A CK-R that is substantially prolonged relative to a normal/shorter CKH-R indicates circulating heparin.',
+    fields: [
+        { name: 'ckr', label: 'CK-R time', type: 'number', points: 0, valueIsPoints: true, unit: 'min', description: 'Standard kaolin channel' },
+        { name: 'ckhr', label: 'CKH-R time (heparinase)', type: 'number', points: 0, valueIsPoints: true, unit: 'min', description: 'Heparin-neutralized channel. Normal 4.3–8.3 min' },
+    ],
+    results: [],
+    thresholdNote: 'Heparin effect if CK-R is prolonged and CK-R > ~1.5× CKH-R (or CK-R − CKH-R > 2 min). The R-vs-heparinase → protamine logic is cardiac/ICU-derived, NOT validated in trauma.',
+    citations: [
+        'Maxey-Jones C, Seelhammer TG, Arabia FA, et al. TEG 6s-guided algorithm for optimizing patient blood management in cardiovascular surgery. J Cardiothorac Vasc Anesth. 2025;39(5):1162-1172.',
+        'Hartmann J, Dias J, Shilo A, et al. TEG 6s with a novel heparin-neutralization cartridge: technical validation and normal reference ranges. Am J Clin Pathol. 2025;163(1):12-19.',
+    ],
+    computeResult: (values) => {
+        const ckr = values['ckr'] || 0;
+        const ckhr = values['ckhr'] || 0;
+        if (ckr <= 0 || ckhr <= 0) {
+            return { value: '--', label: 'Enter both R times', description: 'Enter CK-R and CKH-R (heparinase) values.', colorVar: '--color-text-muted' };
+        }
+        const delta = Math.round((ckr - ckhr) * 10) / 10;
+        const ratio = Math.round((ckr / ckhr) * 100) / 100;
+        const heparinEffect = ckr > 9.5 && (ratio >= 1.5 || delta >= 2);
+        const disclaimer = '\n\n**CAVEAT:**\n• The R-gap → protamine approach is derived from cardiac surgery / ICU, NOT validated in trauma. Use clinical judgment and the bleeding context.';
+        if (heparinEffect) {
+            return {
+                value: `Δ ${delta} min`,
+                label: 'Heparin effect present',
+                description: `**HEPARIN EFFECT DETECTED:**\n• CK-R ${ckr} min vs CKH-R ${ckhr} min (ratio ${ratio}, Δ ${delta} min).\n• The heparinase channel corrects the prolongation → circulating heparin is the cause.\n\n**CONSIDER PROTAMINE:**\n• Protamine 25–50 mg IV (reverses unfractionated heparin; partial for LMWH).\n• If CKH-R is also prolonged, an additional factor deficiency is present → add plasma.${disclaimer}`,
+                colorVar: '--color-warning',
+            };
+        }
+        if (ckr > 9.5) {
+            return {
+                value: `Δ ${delta} min`,
+                label: 'Prolonged R, not heparin',
+                description: `**PROLONGED CK-R WITHOUT A HEPARIN GAP:**\n• CK-R ${ckr} min and CKH-R ${ckhr} min are both prolonged (Δ only ${delta} min).\n• Heparinase does NOT correct it → the cause is factor deficiency/anticoagulant, not heparin.\n\n**ACTION:**\n• Treat as factor deficiency → plasma 15–30 mL/kg or PCC. Protamine is not indicated.`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: `Δ ${delta} min`,
+            label: 'No heparin effect',
+            description: `**NO HEPARIN EFFECT:**\n• CK-R ${ckr} min is within normal limits and the heparinase gap is small (Δ ${delta} min).\n• No protamine indicated on TEG grounds.`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+const TEG_PLATELETMAPPING_CALCULATOR = {
+    id: 'teg-plateletmapping',
+    title: 'TEG PlateletMapping',
+    subtitle: 'Antiplatelet effect (AA / ADP pathways)',
+    description: 'Computes % platelet inhibition in the aspirin (AA / thromboxane) and P2Y12 (ADP) pathways from the four PlateletMapping MAs. For elective/peri-procedural antiplatelet assessment — NOT for the acute bleed (standard TEG is thrombin-driven and overrides platelet inhibition).',
+    fields: [
+        { name: 'hkh', label: 'MA-Thrombin (HKH)', type: 'number', points: 0, valueIsPoints: true, unit: 'mm', description: 'Maximal (uninhibited) clot strength' },
+        { name: 'actf', label: 'MA-ActF (fibrin only)', type: 'number', points: 0, valueIsPoints: true, unit: 'mm', description: 'Fibrin-only floor (platelets off)' },
+        { name: 'aa', label: 'MA-AA', type: 'number', points: 0, valueIsPoints: true, unit: 'mm', description: 'Arachidonic-acid (aspirin) pathway' },
+        { name: 'adp', label: 'MA-ADP', type: 'number', points: 0, valueIsPoints: true, unit: 'mm', description: 'P2Y12 (clopidogrel/ticagrelor) pathway' },
+    ],
+    results: [],
+    thresholdNote: 'NOT for the acute bleed — elective/peri-procedural use only. %Inhibition = 100 − [(MA_agonist − MA_ActF)/(MA_HKH − MA_ActF) × 100]. Aspirin effect: AA %inhibition ≥50%. P2Y12 effect: MA-ADP <~47–50 mm (more robust than ADP %inhibition).',
+    citations: [
+        'Collyer TC, Gray DJ, Sandhu R, et al. Assessment of platelet inhibition secondary to clopidogrel and aspirin therapy in preoperative assessment (TEG PlateletMapping). Br J Anaesth. 2009;102(4):492-498.',
+        'Gurbel PA, Bliden KP, Tantry US, et al. First report of the point-of-care TEG: technical validation study of the TEG-6S. Platelets. 2016;27(7):642-649.',
+    ],
+    computeResult: (values) => {
+        const hkh = values['hkh'] || 0;
+        const actf = values['actf'] || 0;
+        const aa = values['aa'] || 0;
+        const adp = values['adp'] || 0;
+        if (hkh <= 0 || actf <= 0) {
+            return { value: '--', label: 'Enter MAs', description: 'Enter MA-Thrombin (HKH) and MA-ActF at minimum, plus the agonist MA you want to assess (AA and/or ADP).', colorVar: '--color-text-muted' };
+        }
+        const denom = hkh - actf;
+        if (denom <= 0) {
+            return { value: 'check inputs', label: 'Invalid MAs', description: 'MA-Thrombin (HKH) must be greater than MA-ActF. Re-check the entered values.', colorVar: '--color-danger' };
+        }
+        const pctInhib = (ma) => Math.max(0, Math.min(100, Math.round((100 - ((ma - actf) / denom) * 100) * 10) / 10));
+        const lines = [];
+        let flagged = false;
+        if (aa > 0) {
+            const aaInhib = pctInhib(aa);
+            const aspirinEffect = aaInhib >= 50 || aa < 51;
+            if (aspirinEffect)
+                flagged = true;
+            lines.push(`**ASPIRIN / AA PATHWAY:**\n• MA-AA ${aa} mm → ${aaInhib}% inhibition.\n• ${aspirinEffect ? 'Aspirin/NSAID (thromboxane) effect LIKELY (≥50% inhibition or low AA-MA).' : 'No significant aspirin effect (functional thromboxane pathway).'}`);
+        }
+        if (adp > 0) {
+            const adpInhib = pctInhib(adp);
+            const p2y12Effect = adp < 47 || adpInhib > 50;
+            if (p2y12Effect)
+                flagged = true;
+            lines.push(`**P2Y12 / ADP PATHWAY:**\n• MA-ADP ${adp} mm → ${adpInhib}% inhibition.\n• ${p2y12Effect ? 'P2Y12 inhibitor (clopidogrel/ticagrelor) or GPIIb/IIIa effect LIKELY (MA-ADP <~47 mm).' : 'No significant P2Y12 effect.'}`);
+        }
+        if (lines.length === 0) {
+            return { value: '--', label: 'Enter an agonist MA', description: 'Enter MA-AA and/or MA-ADP to assess the aspirin and P2Y12 pathways.', colorVar: '--color-text-muted' };
+        }
+        const banner = '\n\n**REMEMBER:**\n• PlateletMapping is for elective/peri-procedural assessment, NOT the acute bleed.\n• Large overlap between treated and untreated patients — interpret with the clinical picture.';
+        return {
+            value: flagged ? 'Inhibition present' : 'No major inhibition',
+            label: 'PlateletMapping',
+            description: lines.join('\n\n') + banner,
+            colorVar: flagged ? '--color-warning' : '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
+    // TEG (Thromboelastography) — TEG 6s trauma cartridge
+    'teg6s-interpreter': TEG6S_INTERPRETER_CALCULATOR,
+    'teg-fibrinolysis': TEG_FIBRINOLYSIS_CALCULATOR,
+    'teg-fibrinogen-dose': TEG_FIBRINOGEN_DOSE_CALCULATOR,
+    'teg-heparin': TEG_HEPARIN_CALCULATOR,
+    'teg-plateletmapping': TEG_PLATELETMAPPING_CALCULATOR,
     // Lateral Canthotomy (Orbital Compartment Syndrome)
     'lcc-iop': LCC_IOP_CALCULATOR,
     // Hepatitis / Elevated Liver Enzymes

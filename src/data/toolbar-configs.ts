@@ -53,10 +53,22 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'sedation-options',
   'dystonic-reaction',
   'lithium-toxicity',
+  'teg',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'teg': [
+    { id: 'teg-interpreter', label: 'TEG 6s', icon: '📊', action: 'calculator', target: 'teg6s-interpreter', pinned: true },
+    { id: 'teg-fibrinolysis', label: 'Fibrinolysis', icon: '🧮', action: 'calculator', target: 'teg-fibrinolysis', pinned: true },
+    { id: 'teg-fibrinogen', label: 'Cryo Dose', icon: '🧬', action: 'calculator', target: 'teg-fibrinogen-dose', pinned: true },
+    { id: 'teg-treatment', label: 'Treatment', icon: '💊', action: 'overlay', target: 'teg-treatment-ladder', pinned: true },
+    { id: 'teg-differential', label: 'Differential', icon: '🎯', action: 'overlay', target: 'teg-differential', pinned: true },
+    { id: 'teg-heparin', label: 'Heparin', icon: '💉', action: 'calculator', target: 'teg-heparin' },
+    { id: 'teg-pmap', label: 'PlateletMap', icon: '🩸', action: 'calculator', target: 'teg-plateletmapping' },
+    { id: 'teg-params', label: 'Parameters', icon: '📐', action: 'overlay', target: 'teg-parameters' },
+    { id: 'teg-stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'teg-stop' },
+  ],
   'hepatitis': [
     { id: 'r-factor', label: 'R-Factor', icon: '🧮', action: 'calculator', target: 'hep-r-factor', pinned: true },
     { id: 'ggt', label: 'GGT', icon: '🧪', action: 'calculator', target: 'hep-ggt-source', pinned: true },

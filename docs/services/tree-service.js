@@ -1303,6 +1303,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/coagulation-cascade.js');
             return { nodes: m.COAG_CASCADE_NODES, entryNodeId: 'coag-start', categoryId: 'heme-onc', moduleLabels: m.COAG_CASCADE_MODULE_LABELS, citations: m.COAG_CASCADE_CITATIONS, criticalActions: m.COAG_CASCADE_CRITICAL_ACTIONS };
         },
+        'teg': async () => {
+            const m = await import('../data/trees/teg.js');
+            return { nodes: m.TEG_NODES, entryNodeId: 'teg-start', categoryId: 'heme-onc', moduleLabels: m.TEG_MODULE_LABELS, citations: m.TEG_CITATIONS, criticalActions: m.TEG_CRITICAL_ACTIONS };
+        },
         'testicular-torsion': async () => {
             const m = await import('../data/trees/testicular-torsion.js');
             return { nodes: m.TESTICULAR_TORSION_NODES, entryNodeId: 'tt-start', categoryId: 'urology', moduleLabels: m.TESTICULAR_TORSION_MODULE_LABELS, citations: m.TESTICULAR_TORSION_CITATIONS, criticalActions: m.TESTICULAR_TORSION_CRITICAL_ACTIONS };

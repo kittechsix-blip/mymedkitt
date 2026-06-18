@@ -28121,7 +28121,225 @@ const HEP_MASSIVE_TRANSAMINITIS_PAGE: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// TEG (Thromboelastography) — info pages
+// -------------------------------------------------------------------
+
+const TEG_BASICS_PAGE: InfoPage = {
+  id: 'teg-basics',
+  title: 'TEG Basics — When to Use & Limits',
+  subtitle: 'Whole-blood viscoelastic testing at the point of care',
+  sections: [
+    {
+      body: 'Thromboelastography (TEG) measures the viscoelastic strength of a whole-blood clot in real time — from initiation, through platelet/fibrin strengthening, to lysis. Unlike PT/PTT (plasma, isolated steps), TEG reflects the whole cell-based process and returns early numbers in ~5–10 minutes, fast enough to direct goal-directed component therapy. [1]',
+    },
+    {
+      heading: 'When to Use',
+      body: '• Major trauma hemorrhage / massive transfusion — to target the specific deficit (factors vs fibrinogen vs platelets vs lysis) instead of fixed-ratio product. [1][3]\n• Rapid point-of-care differentiation of the mechanism of coagulopathy.\n• Detection of hyperfibrinolysis (LY30) to direct TXA. [10][11]\n• Strongest non-trauma evidence: cardiac surgery and liver transplantation (product reduction). [1]\n• PlateletMapping (separate assay) for elective/peri-procedural antiplatelet assessment — not the acute bleed. [12]',
+    },
+    {
+      heading: '⚠️ Assays Are Not Interchangeable',
+      body: 'TEG 6s (cartridge), rapid-TEG (rTEG), and citrated-kaolin TEG 5000 report the same parameter names (R, MA, LY30) with materially different cutoffs. Always know which analyzer produced the result. This consult uses TEG 6s trauma-cartridge thresholds. [6][7]',
+    },
+    {
+      heading: 'Blind Spots — What TEG Cannot See',
+      body: '• Aspirin / P2Y12 platelet inhibition — standard TEG is thrombin-driven and overrides drug-induced platelet inhibition (needs PlateletMapping). [12]\n• Von Willebrand disease — high-shear vWF-mediated adhesion is not captured.\n• Hypothermia — the sample is warmed to 37 °C, masking the patient\'s true cold coagulopathy.\n• Vessel-wall/endothelial contribution, mild factor deficiencies, and LMWH/DOAC effects are poorly captured.',
+    },
+    {
+      heading: 'Evidence Quality',
+      body: 'Viscoelastic-guided transfusion in trauma is a conditional recommendation on VERY LOW quality evidence (EAST 2020). [1] A single-center RCT (Gonzalez 2016) showed a mortality benefit, [3] but the multicenter ITACTIC trial (2021) was negative for its primary outcome. [2] TEG supports clinical judgment; it does not replace it.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bugaev N, et al. TEG and ROTEM in bleeding patients with coagulopathy: EAST practice management guideline. J Trauma Acute Care Surg. 2020;89(6):999-1017.' },
+    { num: 2, text: 'Baksaas-Aasen K, et al. Viscoelastic haemostatic assay augmented protocols for major trauma haemorrhage (ITACTIC). Intensive Care Med. 2021;47(1):49-59.' },
+    { num: 3, text: 'Gonzalez E, et al. Goal-directed hemostatic resuscitation of trauma-induced coagulopathy: a pragmatic RCT. Ann Surg. 2016;263(6):1051-1059.' },
+    { num: 6, text: 'Sarani B, et al. A goal-directed transfusion algorithm for trauma patients with severe hemorrhage using TEG 6S: a Delphi consensus study. J Trauma Acute Care Surg. 2025;98(6):984-991.' },
+    { num: 7, text: 'Hartmann J, et al. TEG 6s with a novel heparin-neutralization cartridge: technical validation and normal reference ranges. Am J Clin Pathol. 2025;163(1):12-19.' },
+    { num: 10, text: 'Moore HB, et al. Acute fibrinolysis shutdown after injury occurs frequently and increases mortality. J Am Coll Surg. 2016;222(4):347-355.' },
+    { num: 11, text: 'Chapman MP, et al. Fibrinolysis >3% is the critical value for initiation of antifibrinolytic therapy. J Trauma Acute Care Surg. 2013;75(6):961-967.' },
+    { num: 12, text: 'Collyer TC, et al. Assessment of platelet inhibition secondary to clopidogrel and aspirin therapy (TEG PlateletMapping). Br J Anaesth. 2009;102(4):492-498.' },
+  ],
+};
+
+const TEG_PARAMETERS_PAGE: InfoPage = {
+  id: 'teg-parameters',
+  title: 'The TEG 6s Trauma Parameters',
+  subtitle: 'What each value measures, and its normal range',
+  sections: [
+    {
+      body: 'The TEG 6s trauma cartridge runs four channels (CK, CKH, CRT, CFF). Each parameter maps to a specific part of the clot. Normal ranges below are for the TEG 6s trauma cartridge — they do not transfer to rTEG or TEG 5000. [6][7]',
+    },
+    {
+      heading: 'CK-R — Clotting Factors (4.6–9.1 min)',
+      body: 'Reaction time: how long until the clot starts to form (the tracing splits from one line into two). Prolonged (>10 min) = factor deficiency or anticoagulant. The CKH channel (kaolin + heparinase) isolates a heparin effect: if CK-R is prolonged but CKH-R is normal, heparin is the cause. [6][7]',
+    },
+    {
+      heading: 'CFF-MA — Fibrinogen (15–32 mm)',
+      body: 'Functional fibrinogen MA: clot strength with platelets chemically blocked, so it reflects fibrinogen alone. Low (<14 mm) = inadequate fibrinogen → cryoprecipitate / fibrinogen concentrate. Correct this BEFORE platelets — fibrinogen also contributes to overall clot strength. [6]',
+    },
+    {
+      heading: 'CRT-MA — Overall Clot Strength (52–70 mm)',
+      body: 'Maximum amplitude of the rapid-TEG channel: the strength of the fully formed clot (~80% platelets, ~20% fibrinogen). Low (<52 mm, especially <45 mm) with adequate fibrinogen = platelet deficit/dysfunction → platelets. [6][7]',
+    },
+    {
+      heading: 'CK-LY30 — Fibrinolysis (0–2.6%)',
+      body: 'Percent clot breakdown 30 min after maximum strength. Elevated (>2.6% on TEG 6s) = hyperfibrinolysis → TXA. A pinching/narrowing of the tracing tail is visible well before the LY30 number officially posts. [6][10][11]',
+    },
+    {
+      heading: 'Quick map: parameter → component → product',
+      body: '• CK-R ↑ → factors → plasma / PCC\n• CFF-MA ↓ → fibrinogen → cryoprecipitate (first)\n• CRT-MA ↓ → platelets (after fibrinogen corrected)\n• CK-LY30 ↑ → fibrinolysis → TXA',
+    },
+  ],
+  citations: [
+    { num: 6, text: 'Sarani B, et al. A goal-directed transfusion algorithm for trauma patients using TEG 6S: a Delphi consensus study. J Trauma Acute Care Surg. 2025;98(6):984-991.' },
+    { num: 7, text: 'Hartmann J, et al. TEG 6s with a novel heparin-neutralization cartridge: technical validation and normal reference ranges. Am J Clin Pathol. 2025;163(1):12-19.' },
+    { num: 10, text: 'Moore HB, et al. Acute fibrinolysis shutdown after injury occurs frequently and increases mortality. J Am Coll Surg. 2016;222(4):347-355.' },
+    { num: 11, text: 'Chapman MP, et al. Fibrinolysis >3% is the critical value for initiation of antifibrinolytic therapy. J Trauma Acute Care Surg. 2013;75(6):961-967.' },
+  ],
+};
+
+const TEG_TREATMENT_LADDER_PAGE: InfoPage = {
+  id: 'teg-treatment-ladder',
+  title: 'TEG 6s Treatment Ladder',
+  subtitle: 'Goal-directed transfusion targets and doses',
+  sections: [
+    {
+      body: 'Each abnormal TEG 6s value maps to one product. Treat hyperfibrinolysis and fibrinogen early; correct fibrinogen before attributing a low overall MA to platelets. Re-test in 30–60 min. Thresholds: Sarani 2025 Delphi; doses standard. [6][8]',
+    },
+    {
+      heading: 'Prolonged CK-R (>10 min) → Factors',
+      body: '',
+      drugTable: [
+        { drug: 'Plasma (FFP)', regimen: '15–30 mL/kg IV (~4 units in a 70 kg adult). Reassess CK-R in 30–60 min.' },
+        { drug: '4-Factor PCC', regimen: '25–50 IU/kg IV (off-label in trauma; low volume; thrombotic risk). Max 5000 IU.' },
+      ],
+    },
+    {
+      heading: 'Low CFF-MA (<14 mm) → Fibrinogen (first)',
+      body: '',
+      drugTable: [
+        { drug: 'Cryoprecipitate', regimen: '10 units (≈6 g) — raises fibrinogen ~50–100 mg/dL. Target >150 mg/dL (>200 if TBI).' },
+        { drug: 'Fibrinogen concentrate', regimen: '4–6 g IV (where available). Same fibrinogen target.' },
+      ],
+    },
+    {
+      heading: 'Low CRT-MA (<52 mm) → Platelets',
+      body: 'Only after CFF-MA is adequate (≥15 mm).',
+      drugTable: [
+        { drug: 'Platelets (apheresis)', regimen: 'CRT-MA <45 → 1–2 units; CRT-MA 45–50 → 1 unit. TEG is blind to aspirin/P2Y12 effect.' },
+      ],
+    },
+    {
+      heading: 'Elevated CK-LY30 (>2.6%) → Antifibrinolytic',
+      body: '',
+      drugTable: [
+        { drug: 'Tranexamic acid (TXA)', regimen: '1 g IV over 10 min, then 1 g over 8 h (CRASH-2). Best ≤3 h from injury; possible harm if started >3 h out.' },
+      ],
+    },
+    {
+      heading: 'Heparin effect (CK-R prolonged, CKH-R normal)',
+      body: '',
+      drugTable: [
+        { drug: 'Protamine', regimen: '25–50 mg IV. Cardiac/ICU-derived logic, not trauma-validated.' },
+      ],
+    },
+    {
+      heading: 'Always, alongside products',
+      body: '• Keep the patient WARM (sample runs at 37 °C — TEG masks hypothermia).\n• Correct ionized calcium (citrate chelates Ca²⁺).\n• Correct pH / acidosis.\n• Pursue surgical source control — TEG cannot detect anatomic bleeding.',
+    },
+  ],
+  citations: [
+    { num: 6, text: 'Sarani B, et al. A goal-directed transfusion algorithm for trauma patients using TEG 6S: a Delphi consensus study. J Trauma Acute Care Surg. 2025;98(6):984-991.' },
+    { num: 8, text: 'CRASH-2 trial collaborators. Effects of tranexamic acid on death, vascular occlusive events, and blood transfusion in trauma patients with significant haemorrhage (CRASH-2). Lancet. 2010;376(9734):23-32.' },
+  ],
+};
+
+const TEG_DIFFERENTIAL_PAGE: InfoPage = {
+  id: 'teg-differential',
+  title: 'TEG Pattern Differential',
+  subtitle: 'What an abnormal tracing means',
+  sections: [
+    {
+      heading: 'Prolonged CK-R (slow to start)',
+      body: '• Anticoagulant: heparin (check CKH-R), warfarin, DOAC\n• Clotting factor deficiency (II, V, VII, IX, X), liver disease\n• Severe hypofibrinogenemia (early)\n• Dilutional coagulopathy from crystalloid/large-volume resuscitation',
+    },
+    {
+      heading: 'Low CFF-MA (weak fibrinogen)',
+      body: '• Trauma-induced/dilutional hypofibrinogenemia\n• DIC (consumption) — a flat CFF tracing with low CRT-MA\n• Obstetric hemorrhage (fibrinogen falls early and fast)\n• Hyperfibrinolytic consumption of fibrinogen',
+    },
+    {
+      heading: 'Low CRT-MA (weak overall clot)',
+      body: '• Thrombocytopenia or platelet dysfunction (uremia, hypothermia, drugs)\n• Low fibrinogen contributing to a low MA (check CFF-MA — fix first)\n• Severe combined coagulopathy in massive hemorrhage',
+    },
+    {
+      heading: 'Elevated CK-LY30 (clot breaking down)',
+      body: '• Hyperfibrinolysis of trauma-induced coagulopathy\n• Hyperfibrinolytic DIC, obstetric hemorrhage\n• Note: very low LY30 (<0.8%) = fibrinolysis shutdown — a distinct high-mortality phenotype',
+    },
+    {
+      heading: 'Normal TEG in a bleeding patient',
+      body: '• Surgical/structural (anatomic) bleeding — TEG cannot see it\n• Aspirin/P2Y12 platelet inhibition (TEG is thrombin-driven; needs PlateletMapping)\n• Von Willebrand disease\n• Hypothermia (sample warmed to 37 °C masks it), acidosis, hypocalcemia',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Bugaev N, et al. TEG and ROTEM in bleeding patients with coagulopathy: EAST practice management guideline. J Trauma Acute Care Surg. 2020;89(6):999-1017.' },
+    { num: 6, text: 'Sarani B, et al. A goal-directed transfusion algorithm for trauma patients using TEG 6S: a Delphi consensus study. J Trauma Acute Care Surg. 2025;98(6):984-991.' },
+    { num: 10, text: 'Moore HB, et al. Acute fibrinolysis shutdown after injury occurs frequently and increases mortality. J Am Coll Surg. 2016;222(4):347-355.' },
+  ],
+};
+
+const TEG_STOP_PAGE: InfoPage = {
+  id: 'teg-stop',
+  title: 'TEG — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: '🛑 Do NOT apply one analyzer\'s cutoffs to another',
+      body: 'TEG 6s, rTEG, and CK-TEG 5000 report R/MA/LY30 with different normal ranges. Using rTEG thresholds on a TEG 6s result (or vice versa) can trigger the wrong transfusion. Confirm the assay. [Assay note](#/node/teg-start).',
+    },
+    {
+      heading: '🛑 Do NOT give platelets for a low CRT-MA before checking fibrinogen',
+      body: 'A low overall MA is frequently driven by low fibrinogen. Correct CFF-MA with cryo first and recheck — cryo also raises the CRT-MA. [Fibrinogen first](#/node/teg-tx-fibrinogen).',
+    },
+    {
+      heading: '🛑 Do NOT trust a normal TEG to exclude antiplatelet effect',
+      body: 'Standard TEG is thrombin-driven and overrides aspirin/P2Y12 inhibition — the CRT-MA can look normal on a fully inhibited platelet. Use PlateletMapping and clinical context. [PlateletMapping](#/node/teg-pmap).',
+    },
+    {
+      heading: '🛑 Do NOT assume a normal TEG means no hypothermic coagulopathy',
+      body: 'The sample is warmed to 37 °C, so the TEG cannot reflect the patient\'s actual (cold) temperature. Rewarm aggressively regardless of the tracing. [Normal-but-bleeding](#/node/teg-normal-bleeding).',
+    },
+    {
+      heading: '🛑 Do NOT start TXA late without weighing harm',
+      body: 'CRASH-2 showed TXA given >3 h after injury may INCREASE death from bleeding. Within 3 h it reduces mortality. [TXA decision](#/node/teg-tx-txa).',
+    },
+    {
+      heading: '🛑 Do NOT chase TEG numbers in an obvious surgical bleed',
+      body: 'A normal TEG in a bleeding patient points to an anatomic/surgical source. Definitive source control and even 1:1:1 replacement take priority over tweaking products. [Normal-but-bleeding](#/node/teg-normal-bleeding).',
+    },
+    {
+      heading: '🛑 Do NOT extrapolate the protamine logic into trauma uncritically',
+      body: 'The CK-R vs CKH-R → protamine approach is derived from cardiac surgery/ICU and is not validated in trauma. Use judgment. [Heparin effect](#/node/teg-heparin-node).',
+    },
+    {
+      heading: '🛑 Do NOT use a single TEG to drive an entire resuscitation',
+      body: 'TEG-guided therapy is iterative. Re-test every 30–60 min / per MTP round, and forget neither calcium nor pH. [Reassess](#/node/teg-reassess).',
+    },
+  ],
+  citations: [
+    { num: 6, text: 'Sarani B, et al. A goal-directed transfusion algorithm for trauma patients using TEG 6S: a Delphi consensus study. J Trauma Acute Care Surg. 2025;98(6):984-991.' },
+    { num: 8, text: 'CRASH-2 trial collaborators. Effects of tranexamic acid in trauma patients with significant haemorrhage (CRASH-2). Lancet. 2010;376(9734):23-32.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // TEG (Thromboelastography)
+  'teg-basics': TEG_BASICS_PAGE,
+  'teg-parameters': TEG_PARAMETERS_PAGE,
+  'teg-treatment-ladder': TEG_TREATMENT_LADDER_PAGE,
+  'teg-differential': TEG_DIFFERENTIAL_PAGE,
+  'teg-stop': TEG_STOP_PAGE,
+
   // Hepatitis / Elevated Liver Enzymes
   'hep-summary': HEP_SUMMARY_PAGE,
   'hep-pattern-differential': HEP_PATTERN_DIFFERENTIAL_PAGE,
