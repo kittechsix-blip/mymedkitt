@@ -53,7 +53,6 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'sedation-options',
   'dystonic-reaction',
   'lithium-toxicity',
-  'acid-base',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -788,12 +787,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'spesi', label: 'sPESI', icon: '\uD83E\uDEC1', action: 'calculator', target: 'spesi' },
   ],
   'acid-base': [
-    { id: 'anion-gap', label: 'AG', icon: '\uD83E\uDDEA', action: 'calculator', target: 'anion-gap', pinned: true },
-    { id: 'delta-gap', label: 'Delta', icon: '\u0394', action: 'calculator', target: 'delta-gap', pinned: true },
-    { id: 'winters', label: "Winter's", icon: '\uD83C\uDF21\uFE0F', action: 'calculator', target: 'winters-formula', pinned: true },
-    { id: 'stewart', label: 'Stewart', icon: '\u2696\uFE0F', action: 'calculator', target: 'stewart-sig', pinned: true },
-    { id: 'osm-gap', label: 'Osm Gap', icon: '\uD83E\uDDF4', action: 'calculator', target: 'osmolar-gap', pinned: true },
-    { id: 'comp-rules', label: 'Rules', icon: '\uD83D\uDCCF', action: 'overlay', target: 'ab-compensation', pinned: true },
+    { id: 'anion-gap', label: 'AG', icon: '\uD83E\uDDEA', action: 'calculator', target: 'anion-gap' },
+    { id: 'delta-gap', label: 'Delta', icon: '\u0394', action: 'calculator', target: 'delta-gap' },
+    { id: 'winters', label: "Winter's", icon: '\uD83C\uDF21\uFE0F', action: 'calculator', target: 'winters-formula' },
+    { id: 'stewart', label: 'Stewart', icon: '\u2696\uFE0F', action: 'calculator', target: 'stewart-sig' },
+    { id: 'osm-gap', label: 'Osm Gap', icon: '\uD83E\uDDF4', action: 'calculator', target: 'osmolar-gap' },
+    { id: 'comp-rules', label: 'Rules', icon: '\uD83D\uDCCF', action: 'overlay', target: 'ab-compensation' },
     { id: 'differential', label: 'Differential', icon: '\uD83C\uDFAF', action: 'overlay', target: 'ab-differential' },
     { id: 'lactic-ddx', label: 'Lactic Ddx', icon: '\uD83E\uDE78', action: 'overlay', target: 'ab-lactic-differential' },
   ],
