@@ -1384,6 +1384,20 @@ body {
   box-shadow: var(--shadow-sm);
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
+  position: relative;
+}
+
+/* Expand the 32px search toggle to the 44px iOS/WCAG minimum hit area
+   without enlarging the visible circle. Matches the header-button pattern
+   above (consult-flow-header__*::after). Flagged by Flow Rider 2026-06-18. */
+.consult-search__toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 
 .consult-search__input {
