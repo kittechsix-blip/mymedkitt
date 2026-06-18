@@ -5408,6 +5408,47 @@ const AB_LACTATE_KETONES = {
         { num: 2, text: 'Kamel KS, Halperin ML. Acid-base problems in diabetic ketoacidosis. NEJM. 2015;372(6):546-554.' },
     ],
 };
+const AB_LACTIC_DIFFERENTIAL = {
+    id: 'ab-lactic-differential',
+    title: 'Lactic Acidosis Differential Diagnosis',
+    subtitle: 'Cohen-Woods Classification — Type A vs Type B',
+    sections: [
+        {
+            heading: 'Framework — Cohen-Woods Classification',
+            body: 'Lactic acidosis is the most common cause of high anion gap metabolic acidosis in hospitalized patients. The Cohen-Woods system divides it by mechanism: [1][2]\n\n• **Type A** — impaired tissue oxygenation (oxygen supply/demand mismatch → anaerobic glycolysis)\n• **Type B** — lactate accumulation WITHOUT overt hypoperfusion or hypoxia (B1 disease, B2 drugs/toxins, B3 inborn errors)\n\nMany critically ill patients have BOTH (e.g., septic shock = Type A hypoperfusion + Type B accelerated aerobic glycolysis). **Lactate > 4 mmol/L or a rising lactate carries high mortality regardless of category.** [3]',
+        },
+        {
+            heading: 'TYPE A — Tissue Hypoxia / Hypoperfusion',
+            body: '**Shock (all forms):**\n• Septic shock\n• Cardiogenic shock\n• Hypovolemic / hemorrhagic shock\n• Obstructive shock (massive PE, cardiac tamponade, tension pneumothorax)\n\n**Regional / tissue ischemia:**\n• Mesenteric ischemia (lactate may be normal early — do NOT exclude)\n• Acute limb ischemia, compartment syndrome\n• Necrotizing soft tissue infection\n• Major burns, crush injury / trauma\n• Volvulus, incarcerated bowel\n\n**Global oxygen delivery failure:**\n• Cardiac arrest / post-ROSC\n• Severe hypoxemia (PaO₂ very low)\n• Severe anemia\n• Carbon monoxide poisoning (impaired O₂ delivery)\n\n**Markedly increased demand:**\n• Generalized seizures / status epilepticus (usually clears in 1-2 h)\n• Extreme exertion, severe shivering\n• Severe asthma / heavy work of breathing (overlaps Type B from β-agonists)',
+        },
+        {
+            heading: 'TYPE B1 — Underlying Disease',
+            body: '• **Sepsis** (hyperdynamic/early phase — accelerated aerobic glycolysis, Na⁺/K⁺-ATPase upregulation, often before hypoperfusion)\n• **Hepatic failure / cirrhosis** — impaired lactate clearance (Cori cycle)\n• **Malignancy** — leukemia, lymphoma, bulky solid tumors (Warburg effect / aerobic glycolysis); consider in unexplained lactate\n• **Thiamine (B1) deficiency** — impaired pyruvate dehydrogenase; alcoholics, malnutrition, hyperemesis, bariatric, TPN without thiamine\n• **Diabetes mellitus / DKA**\n• **Pheochromocytoma** (catecholamine-driven glycolysis)\n• **Severe renal failure** (reduced clearance)\n• **HIV / AIDS** (disease and antiretroviral-related)',
+        },
+        {
+            heading: 'TYPE B2 — Drugs & Toxins',
+            body: '**Mitochondrial / clearance-impairing:**\n• **Metformin** (MALA) — inhibits gluconeogenesis + Complex I; risk ↑ with renal failure, sepsis, contrast\n• **Linezolid** — disrupts mitochondrial protein synthesis (prolonged use)\n• **Propofol** (propofol infusion syndrome — high dose/prolonged)\n• **NRTIs** (stavudine, didanosine, zidovudine) — mitochondrial γ-polymerase toxicity\n\n**Catecholaminergic (β₂-driven glycolysis):**\n• Epinephrine (endogenous or infused), norepinephrine\n• β₂-agonists — albuterol, terbutaline\n• Theophylline, cocaine / sympathomimetics\n\n**Toxic alcohols & osmoles (check osmolar gap):**\n• Methanol, ethylene glycol\n• Propylene glycol — diluent in IV lorazepam, diazepam, phenobarbital, nitroglycerin\n• Ethanol (impairs gluconeogenesis; AKA)\n\n**Other:** Salicylates, acetaminophen (massive ingestion / "5-HT" picture), isoniazid, iron, cyanide, toluene, niacin; IV fructose/sorbitol/xylitol, TPN.',
+        },
+        {
+            heading: 'TYPE B3 — Inborn Errors of Metabolism',
+            body: 'Usually present in infancy/childhood but can surface in adults under metabolic stress:\n\n• Glucose-6-phosphatase deficiency (von Gierke / GSD type I)\n• Fructose-1,6-bisphosphatase deficiency\n• Pyruvate dehydrogenase deficiency\n• Pyruvate carboxylase deficiency\n• Mitochondrial myopathies — e.g., MELAS\n• Defects of oxidative phosphorylation / respiratory chain',
+        },
+        {
+            heading: 'Special Case — D-Lactic Acidosis',
+            body: '**Standard lactate assays measure only the L-isomer.** D-lactic acidosis produces a high anion gap metabolic acidosis with a *normal* measured (L-)lactate. [4]\n\n**Setting:** Short bowel syndrome / jejunoileal bypass — malabsorbed carbohydrate is fermented by colonic bacteria to D-lactate.\n\n**Clue:** Episodic encephalopathy (confusion, slurred speech, ataxia) after a high-carbohydrate meal, with an unexplained AG acidosis. Order a specific **D-lactate** level. Treat with carbohydrate restriction ± non-absorbable antibiotics.',
+        },
+        {
+            heading: 'ED Workup Pearls',
+            body: '• **Repeat / trend lactate** — clearance predicts outcome better than a single value.\n• Venous lactate is adequate for screening; a tourniquet, delayed processing, or struggling/seizing limb falsely elevates it.\n• **Normal lactate does not exclude mesenteric ischemia** early.\n• Unexplained Type B lactate → review the med list (metformin, propofol, linezolid, β-agonists, propylene-glycol vehicles), give empiric **thiamine**, and consider occult malignancy.\n• Treat the cause — bicarbonate does not improve hemodynamics and is reserved for pH ≤ 7.20 with AKI (BICAR-ICU).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Cohen RD, Woods HF. Clinical and Biochemical Aspects of Lactic Acidosis. Oxford: Blackwell Scientific; 1976.' },
+        { num: 2, text: 'Kraut JA, Madias NE. Lactic acidosis. N Engl J Med. 2014;371(24):2309-2319.' },
+        { num: 3, text: 'Gunnerson KJ, Saul M, He S, et al. Lactate versus non-lactate metabolic acidosis: a retrospective outcome evaluation of critically ill patients. Crit Care. 2006;10(1):R22.' },
+        { num: 4, text: 'Kowlgi NG, Chhabra L. D-lactic acidosis: an underrecognized complication of short bowel syndrome. Gastroenterol Res Pract. 2015;2015:476215.' },
+    ],
+};
 const AB_STEWART_EXPLAINED = {
     id: 'ab-stewart-explained',
     title: 'Stewart Approach Explained',
@@ -27408,6 +27449,7 @@ export const INFO_PAGES = {
     'ab-differential': AB_DIFFERENTIAL,
     'ab-abg-vbg': AB_ABG_VBG,
     'ab-lactate-ketones': AB_LACTATE_KETONES,
+    'ab-lactic-differential': AB_LACTIC_DIFFERENTIAL,
     'ab-stewart-explained': AB_STEWART_EXPLAINED,
     'ab-fluids-guide': AB_FLUIDS_GUIDE,
     'delirium-summary': DELIRIUM_SUMMARY,
