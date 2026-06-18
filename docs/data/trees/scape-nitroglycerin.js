@@ -90,8 +90,8 @@ export const SCAPE_NITROGLYCERIN_NODES = [
         type: 'info',
         module: 3,
         title: 'High-Dose Nitroglycerin',
-        body: 'Common ED approach for severe hypertensive SCAPE:\n- While preparing infusion: SL nitroglycerin 0.4 mg q5 min if able\n- IV push strategy by protocol: nitroglycerin 400-800 mcg IV every 2-5 min for severe distress and SBP usually >180\n- Infusion strategy: start 100-200 mcg/min and rapidly titrate every 3-5 min; severe SCAPE may require 300-800 mcg/min initially\n- Reduce once work of breathing improves and SBP approaches safer range, often 140-160\n\nUse close BP monitoring. Arterial line is helpful but should not delay initial treatment in crashing SCAPE.',
-        citation: [1, 2, 5],
+        body: 'Common ED approach for severe hypertensive SCAPE:\n- While preparing infusion: SL nitroglycerin 0.4 mg q5 min if able\n- **Loading-dose strategy (current EMCrit/IBCC):** a front-loaded IV bolus of ~600-2000 mcg over ~2 min (titrated to initial SBP), OR a brief high-rate infusion of 400-800 mcg/min for ~2.5 min, to rapidly break the crisis. Higher end for SBP >200.\n- IV push strategy by protocol: nitroglycerin 400-800 mcg IV every 2-5 min for severe distress and SBP usually >180\n- Infusion strategy: start 100-200 mcg/min and rapidly titrate every 3-5 min; severe SCAPE may require 300-800 mcg/min initially\n- Reduce once work of breathing improves and SBP approaches safer range, often 140-160\n\nHypotension after a bolus is usually transient (short nitro half-life) and responds to observation or a small crystalloid bolus. Use close BP monitoring. Arterial line is helpful but should not delay initial treatment in crashing SCAPE.',
+        citation: [1, 2, 5, 6],
         next: 'scape-monitor',
         summary: 'SCAPE often needs rapid high-dose nitroglycerin titration rather than slow standard CHF dosing.',
         safetyLevel: 'critical',
@@ -145,6 +145,7 @@ export const SCAPE_NITROGLYCERIN_CITATIONS = [
     { num: 3, text: 'Heidenreich PA, et al. 2022 AHA/ACC/HFSA Guideline for Management of Heart Failure. Circulation. 2022;145:e895-e1032.' },
     { num: 4, text: 'Peacock WF, et al. Hypertensive Heart Failure and Acute Pulmonary Edema Reviews. Emerg Med Clin North Am. 2005;23(4):1105-1125.' },
     { num: 5, text: 'Wilson SS, et al. High-dose nitroglycerin infusion for SCAPE: case series. Am J Emerg Med. 2018;36(8):1526.e5-1526.e7.' },
+    { num: 6, text: 'Randomized trial of high-dose vs low-dose nitroglycerin in SCAPE: high-dose (600-1000 mcg bolus + 100 mcg/min infusion) achieved 65% symptom resolution at 6h vs 11.5% low-dose (p<0.001). 2024.' },
 ];
 export const SCAPE_NITROGLYCERIN_CRITICAL_ACTIONS = [
     { text: 'Recognize hypertensive flash pulmonary edema phenotype.', nodeId: 'scape-recognize' },
