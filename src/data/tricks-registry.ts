@@ -54,7 +54,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#6A1B9A',
     subtitle: 'Epistaxis packing tricks and nasal suction.',
     infoPageId: 'tricks-ent',
-    trickCount: 16,
+    trickCount: 17,
   },
   {
     id: 'dental',
@@ -90,7 +90,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#AD1457',
     subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
     infoPageId: 'tricks-wound',
-    trickCount: 11,
+    trickCount: 13,
   },
   {
     id: 'cardiology',
@@ -135,7 +135,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#5D4037',
     subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
     infoPageId: 'tricks-ortho',
-    trickCount: 23,
+    trickCount: 25,
   },
 ];
 

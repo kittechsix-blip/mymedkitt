@@ -26502,6 +26502,10 @@ const TRICKS_ENT_PAGE: InfoPage = {
       heading: 'Frazier Suction to Extract a Live Insect From the Ear',
       body: '**Accomplishes:** Removes a live or dead insect from the ear canal in one intact piece, avoiding the shredding and retained debris that forceps cause on a friable insect body. [18]\n\n**How to:**\n1. First immobilize the insect: instill viscous (or plain) lidocaine to drown it and stop the distressing movement.\n2. Connect a Frazier suction tip to low continuous wall suction.\n3. Consider light sedation \u2014 the buzzing sensation is very distressing and a still patient protects the canal.\n4. Once the insect is confirmed dead, advance the Frazier tip slowly into the canal under direct visualization.\n5. Suction the insect out whole rather than grasping and fragmenting it; re-examine the canal and TM.\n\n**Equipment:** Frazier suction tip, wall suction, viscous or plain lidocaine, otoscope.\n\n_Source: ALiEM Trick of the Trade \u2014 Insect removal from the ear._',
     },
+    {
+      heading: 'Walk Anesthesia Up the Nose With Viscous-Lidocaine Q-Tips',
+      body: '**Accomplishes:** Numbs the most sensitive spot \u2014 where an NG tube or scope turns the corner into the nasopharynx \u2014 AND tests for adequate anesthesia before instrumentation, making NG placement and nasopharyngoscopy far less painful than blind atomization. [19]\n\n**How to:**\n1. Load the cotton end of a long Q-tip with copious viscous lidocaine.\n2. Slide it into the nostril along the intended NG/scope path.\n3. Stop advancing when you meet resistance or the patient feels discomfort; twirl the Q-tip to coat the mucosa.\n4. Wait until the patient can no longer feel the swab at that depth.\n5. Reload, advance a bit further, and repeat until you reach the nasopharynx, then proceed with the NG tube or scope.\n\n**Equipment:** Long cotton-tipped swabs, viscous lidocaine; optional nebulized lidocaine for the posterior oropharynx.\n\n_Source: ALiEM Trick of the Trade \u2014 Anesthetizing the nasal tract._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26522,6 +26526,7 @@ const TRICKS_ENT_PAGE: InfoPage = {
     { num: 16, text: 'ALiEM. Trick of the Trade: Pelvic speculum for peritonsillar abscess drainage (Lin). aliem.com.' },
     { num: 17, text: 'ALiEM. Trick of the Trade: Pediatric video laryngoscope for ear foreign bodies. aliem.com.' },
     { num: 18, text: 'ALiEM. Trick of the Trade: Insect removal from the ear. aliem.com.' },
+    { num: 19, text: 'ALiEM. Trick of the Trade: Anesthetizing the nasal tract (viscous lidocaine Q-tip technique). aliem.com.' },
   ],
 };
 
@@ -26683,6 +26688,14 @@ const TRICKS_WOUND_PAGE: InfoPage = {
       heading: '18G Needle Spin-Trephination of a Subungual Hematoma (No Block)',
       body: '**Accomplishes:** Painlessly drains a tense subungual hematoma using just an 18-gauge needle and no anesthesia \u2014 the safe alternative to electrocautery in patients with acrylic/gel nails, where cautery is a fire hazard. [11]\n\n**How to:**\n1. Confirm no displaced distal-phalanx fracture or disrupted nail folds (those may need nail removal / bed repair instead).\n2. Clean the nail with iodine, NOT flammable alcohol, and let it dry; identify the central darkest point of the hematoma under bright light.\n3. Hold an 18-gauge needle perpendicular (90\u00B0) over that central point.\n4. Spin the needle between your fingers like a drill, letting the bevel bore its own hole through the nail plate \u2014 do NOT push down hard; the give as you reach blood tells you to stop.\n5. Express the blood for immediate relief; dress, keep dry, and avoid soaking. No digital block needed \u2014 the block usually hurts more than the procedure.\n\n**Equipment:** 18-gauge needle, povidone-iodine, bright light, gauze/dressing.\n\n_Source: J Emerg Med \u2014 18-gauge needle evacuation of subungual hematomas; Brown EM Blog (2024)._',
     },
+    {
+      heading: 'Topical Lidocaine Jelly for Skin Tears and Road Rash',
+      body: '**Accomplishes:** Anesthetizes large, fragile wounds too big or too thin to inject around, while the jelly base rehydrates skin flaps and loosens embedded debris for easier cleaning. [12]\n\n**How to:**\n1. Apply 2% lidocaine jelly liberally over the skin tear or abrasion and cover loosely with gauze.\n2. Wait 10\u201315 minutes of contact time.\n3. Irrigate gently, then reapply a thin layer of jelly.\n4. Unfold and reposition skin flaps over the wound bed; for road rash, debride debris with soft surgical sponges during irrigation.\n5. Wipe off remaining jelly before closing with steri-strips or sutures. Respect the 4.5 mg/kg lidocaine max (about 15 mL of 2% jelly in a 70 kg adult).\n\n**Equipment:** 2% lidocaine jelly, loose gauze, irrigation solution, soft surgical prep sponges, steri-strips.\n\n_Source: ALiEM Trick of the Trade \u2014 Topical lidocaine jelly for skin tears and road rash (Bragg & Fox)._',
+    },
+    {
+      heading: 'Dissolve Adherent Tar Off a Burn With Petrolatum Ointment',
+      body: '**Accomplishes:** Removes hot-tar (bitumen) stuck to a burn without the further tissue destruction and pain of harsh solvents or peeling \u2014 the petrolatum base plus emulsifier lifts the tar gradually while protecting the wound. [13]\n\n**How to:**\n1. Cool the tar immediately with water; do NOT peel adherent cooled tar (it strips skin).\n2. Do NOT use gasoline or caustic solvents.\n3. Smear the tarred area generously with a petrolatum-based ointment (e.g., bacitracin, or a polysorbate/Tween-80 emulsifier ointment).\n4. Cover with an absorbent dressing.\n5. Have the patient wash and reapply ointment with dressing changes twice daily; tar typically lifts over hours to a few days. Prefer bacitracin or a dedicated emulsifier over neomycin/Neosporin (allergic contact dermatitis risk).\n\n**Equipment:** Cool water/saline, petrolatum-based ointment (bacitracin or polysorbate/Tween-80 emulsifier), absorbent dressing.\n\n_Source: Ng et al. \u2014 Management of hot tar burn using vitamin E ointment containing petroleum and polyoxyethylene sorbitan. CJEM._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26696,6 +26709,8 @@ const TRICKS_WOUND_PAGE: InfoPage = {
     { num: 9, text: 'ALiEM. Trick of the Trade: Hair apposition technique (HAT trick) for scalp lacerations. aliem.com. Ong ME, et al. A randomized controlled trial comparing the hair apposition technique with tissue glue to standard suturing in scalp lacerations. Ann Emerg Med. 2002.' },
     { num: 10, text: 'ALiEM. Trick of the Trade: V-to-Y flap laceration repair for tension wounds (Brian Lin). aliem.com. See also lacerationrepair.com.' },
     { num: 11, text: 'Bonisteel PS. Practice tips: Trephination of subungual hematoma. J Emerg Med / Can Fam Physician. See also Brown Emergency Medicine Blog: Subungual hematomas (2024). brownemblog.com.' },
+    { num: 12, text: 'ALiEM. Trick of the Trade: Topical lidocaine jelly for skin tears and road rash (Bragg & Fox). aliem.com.' },
+    { num: 13, text: 'Ng KC, et al. Management of hot tar burn using vitamin E ointment containing petroleum and polyoxyethylene sorbitan. CJEM (Canadian Journal of Emergency Medicine). cambridge.org.' },
   ],
 };
 
@@ -27143,6 +27158,14 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
       heading: 'Finger-Trap Gravity Disimpaction for Distal Radius Fractures',
       body: '**Accomplishes:** Pre-disimpacts a displaced distal radius fracture passively with traction and gravity so the final manipulation is far easier \u2014 you set it up and walk away to see other patients. [24]\n\n**How to:**\n1. Anesthetize with a hematoma block: insert a 25-gauge needle dorsally into the fracture hematoma at ~30\u00B0, aspirate to confirm blood return, then instill 8\u201312 mL of lidocaine.\n2. Suspend the hand vertically in finger traps (index and middle fingers), arm pointing to the ceiling.\n3. Hang 2\u20135 kg of weight from the upper arm with the elbow flexed at 90\u00B0 for countertraction.\n4. Give light anxiolysis and tell the patient to fully relax the arm.\n5. Leave it for about 10 minutes (go see another patient); traction restores 1\u20132 cm of length, making the final reduction easy. Pad thin/elderly skin under the finger traps.\n\n**Equipment:** 25-gauge needle, lidocaine, syringe, finger traps, 2\u20135 kg weights, padding.\n\n_Source: Emergency Physicians Monthly \u2014 Distal radius fractures: reducing the confusion._',
     },
+    {
+      heading: 'Single-Operator Posterior Elbow Reduction by Coronoid Disengagement',
+      body: '**Accomplishes:** Reduces a posterior elbow dislocation solo \u2014 no assistant, no forceful hyperextension traction, less neurovascular risk. [25]\n\n**How to:**\n1. Place the patient supine with the elbow gently flexed; provide analgesia or intra-articular lidocaine.\n2. With one hand grasp the wrist/forearm and apply GENTLE in-line distraction \u2014 not the forceful traction of traction-countertraction methods.\n3. With the thumb of your other hand, push the displaced olecranon/coronoid distally and forward to disengage the coronoid process from the olecranon fossa.\n4. As the coronoid clears, gently flex the elbow and feel for the confirmatory clunk of reduction.\n5. Recheck and document neurovascular status, then immobilize in a long-arm posterior splint at \u224890\u00B0.\n\n**Equipment:** Long-arm posterior splint material, padding; optional intra-articular lidocaine.\n\n_Source: StatPearls \u2014 Posterior Elbow Dislocation; Singh & Pradhan closed-reduction technique._',
+    },
+    {
+      heading: 'Hematoma Block Instead of Sedation for Ankle Fracture-Dislocation',
+      body: '**Accomplishes:** Gives analgesia comparable to procedural sedation for closed reduction of an ankle fracture-dislocation, without the respiratory/cardiovascular risk, extra staffing, or delay \u2014 letting you reduce a time-sensitive injury faster. [26]\n\n**How to:**\n1. Identify the fracture site and prep the skin with antiseptic.\n2. Insert the needle into the fracture hematoma / ankle joint and aspirate to confirm a flash of blood (intra-articular/intra-hematoma placement).\n3. Infiltrate local anesthetic into the hematoma and joint space; wait 5\u201310 minutes for onset.\n4. Reduce by reversing the deforming force: flex the knee to relax the gastroc-soleus, plantarflex the ankle, and apply traction with anterior force on the heel.\n5. Apply a posterior plus stirrup splint, then obtain post-reduction films and a neurovascular exam.\n\n**Equipment:** Local anesthetic (lidocaine +/- bupivacaine), syringe, needle, antiseptic, posterior/stirrup splint material.\n\n_Source: Singh et al. \u2014 hematoma block for closed reduction of ankle fracture dislocations; ALiEM SplintER Series._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -27169,6 +27192,8 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
     { num: 22, text: 'Pencil Fulcrum Technique: a simple method for closed reduction of extra-octave fractures in children. PMC12705274.' },
     { num: 23, text: 'CoreEM. The syringe technique for temporomandibular joint (TMJ) reduction. coreem.net. Gorchynski J, et al. The syringe technique: a hands-free approach for TMJ reduction. J Emerg Med.' },
     { num: 24, text: 'Emergency Physicians Monthly. Distal radius fractures: reducing the confusion (hematoma block + finger-trap gravity disimpaction). epmonthly.com.' },
+    { num: 25, text: 'StatPearls. Posterior Elbow Dislocation. ncbi.nlm.nih.gov/books/NBK470574. Singh & Pradhan. Closed reduction of posterior dislocation of the elbow: a simple technique. PubMed 9892129.' },
+    { num: 26, text: 'Singh BI, et al. The hematoma block: a simple, effective technique for closed reduction of ankle fracture dislocations. PubMed 21708343. See also ALiEM SplintER Series: Ankle Dislocation.' },
   ],
 };
 
