@@ -25489,6 +25489,18 @@ const TRICKS_UROLOGY_PAGE = {
             heading: 'Jacobi Ring Catheter for a Bartholin Abscess',
             body: '**Accomplishes:** Drains a Bartholin abscess when the Word catheter will not fit or keeps falling out, using a looped catheter that stays put and forms a durable epithelialized tract. [10]\n\n**How to:**\n1. Anesthetize and make a stab incision into the abscess cavity on the medial mucosal surface.\n2. Thread suture material through the lumen of an 8-French rubber tube (butterfly tubing works for the loop variant).\n3. Pass one end of the tube into the incision, then bring the other end out through a second small incision a short distance away (loop-drainage style).\n4. Tie the suture ends together so the catheter forms a ring/loop bridging the cavity.\n5. Leave it in place to maintain drainage and let the tract epithelialize; remove at outpatient follow-up.\n\n**Equipment:** 8-Fr rubber tube (or butterfly tubing), suture material, scalpel, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Alternative to the Word catheter for Bartholin abscess (Jacobi ring)._',
         },
+        {
+            heading: 'DIY High-Volume Irrigation From a Saline Bottle Cap',
+            body: '**Accomplishes:** Delivers fast, high-pressure, high-volume irrigation of an open fracture or grossly contaminated wound when a 30 mL syringe and angiocatheter are too slow. [11]\n\n**How to:**\n1. Grab a sterile bottle of normal saline (the rigid pour-bottle, not an IV bag).\n2. Punch several evenly spaced holes through the plastic screw cap with an 18-gauge needle, creating a multi-stream \u201Cshower head.\u201D\n3. Screw the cap back on and squeeze the bottle firmly to drive a strong pressurized spray into the wound.\n4. Refill or open new bottles as needed; multiple people can irrigate at once while the patient is mobilized to the OR.\n5. Ensure a large open exit so you are not pressurizing a closed space, and wear a splash shield/eye protection.\n\n**Equipment:** Rigid sterile saline pour-bottle, 18-gauge needle, eye/splash protection.\n\n_Source: ALiEM Trick of the Trade \u2014 The key to pollution is dilution (high-volume open-fracture irrigation)._',
+        },
+        {
+            heading: 'Crack a Stuck Tungsten Ring With a Vise Grip',
+            body: '**Accomplishes:** Removes a tungsten-carbide ring from a swollen or injured finger \u2014 standard ring cutters cannot scratch tungsten, but it is brittle and shatters under compression. [12]\n\n**How to:**\n1. Confirm the ring is tungsten (very hard, heavy, scratch-resistant) \u2014 ring cutters and even bolt cutters fail on it, so do not waste time.\n2. Borrow an adjustable locking vise grip / locking pliers (hospital engineering or your own toolkit).\n3. Position the jaws across the band and apply firm, steady compression.\n4. The brittle tungsten fractures and cracks apart rather than bending.\n5. Carefully collect every fragment \u2014 broken edges are sharp \u2014 and re-examine the finger for cuts and residual constriction.\n\n**Equipment:** Adjustable locking vise grip / locking pliers, gauze to catch fragments, eye protection.\n\n_Source: ALiEM Trick of the Trade \u2014 Removing a tungsten ring stuck on a finger._',
+        },
+        {
+            heading: 'Depilatory Cream to Dissolve a Hair Tourniquet',
+            body: '**Accomplishes:** Releases a hair or thread tourniquet strangling a digit, toe, or genitalia by chemically dissolving the hair \u2014 no cutting near tender, edematous tissue. [13]\n\n**How to:**\n1. Confirm the constricting band is HAIR or a synthetic thread that depilatory cream can break down (it dissolves keratin/some synthetics; it will NOT touch elastic or rubber bands).\n2. Confirm intact skin with no open wound at the site \u2014 do not apply depilatory cream to broken skin or mucosa.\n3. Apply a generous layer of depilatory cream (e.g., Nair) over the constricting hair and the surrounding groove.\n4. Wait about 3\u20138 minutes for the cream to chemically dissolve the hair; the band loosens and releases.\n5. Wipe and rinse thoroughly, then reassess perfusion distal to the groove. If the hair is buried/epithelialized or perfusion is still threatened, switch to the cut-down (incision) technique.\n\n**Equipment:** Depilatory cream (thioglycolate-based, e.g., Nair), gauze, water for rinsing.\n\n_Source: ALiEM Trick of the Trade \u2014 Hair tourniquet removal using depilatory cream._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25501,6 +25513,9 @@ const TRICKS_UROLOGY_PAGE = {
         { num: 8, text: 'ALiEM. Trick of the Trade: Foley balloon be gone! aliem.com.' },
         { num: 9, text: 'Medscape. Manual Detorsion of the Testes (open-book technique). emedicine.medscape.com. See also Sessions AE, et al. Testicular torsion: direction, degree, duration and disinformation. J Urol.' },
         { num: 10, text: 'ALiEM. Trick of the Trade: Alternative to the Word catheter for Bartholin abscess (Jacobi ring catheter). aliem.com.' },
+        { num: 11, text: 'ALiEM. Trick of the Trade: The key to pollution is dilution (high-volume open-fracture irrigation via needle-punched saline bottle cap). aliem.com.' },
+        { num: 12, text: 'ALiEM. Trick of the Trade: Removing a tungsten ring stuck on your finger (vise-grip fracture technique). aliem.com.' },
+        { num: 13, text: 'ALiEM. Trick of the Trade: Hair tourniquet removal using depilatory cream. aliem.com.' },
     ],
 };
 const TRICKS_WOUND_PAGE = {
@@ -25600,12 +25615,22 @@ const TRICKS_CARDIOLOGY_PAGE = {
             heading: 'Lewis (S5) Lead to Unmask Hidden P-Waves',
             body: '**Accomplishes:** Amplifies invisible atrial activity to confirm atrial flutter or distinguish VT from SVT at the bedside in seconds, using only the leads already on the patient. [4]\n\n**How to:**\n1. Start with the patient on the standard limb leads.\n2. Move the Right Arm electrode to the manubrium (just right of the sternum, 2nd intercostal space).\n3. Move the Left Arm electrode to the 5th intercostal space at the right sternal border (4th ICS right sternal border for the rapid variant).\n4. Move the Left Leg electrode to the right lower costal margin.\n5. Record and read Lead I \u2014 flutter waves and AV dissociation that were invisible on the 12-lead now stand out.\n\n**Equipment:** Standard ECG machine with limb leads, the existing electrodes.\n\n_Source: emDOCs \u2014 ECG Pointers: The Lewis Lead; LITFL._',
         },
+        {
+            heading: 'Water-Soaked Gauze to Get an ECG on a Hairy Chest',
+            body: '**Accomplishes:** Gets clean ECG tracings on a very hairy chest without stopping to shave, when adhesive electrodes will not stick and you are getting artifact or flatline leads. [5]\n\n**How to:**\n1. Recognize the problem: loose leads on hairy skin give wandering-baseline artifact or no signal at all.\n2. Generously soak a few gauze squares with plain water (saline also works).\n3. Lay a wet gauze square over each electrode position where the lead will contact hairy skin.\n4. Press the electrode down onto the wet gauze so the water bridges the gap \u2014 water conducts the cardiac signal and maximizes contact area.\n5. Record immediately; if you still get artifact at a site, shave a small patch there as backup.\n\n**Equipment:** Gauze squares, water (or saline), ECG electrodes.\n\n_Source: ALiEM Trick of the Trade \u2014 Getting an EKG on \u201CChewbacca\u201D (water-soaked gauze on a hairy chest)._',
+        },
+        {
+            heading: 'Double the ECG Paper Speed to Unmask a Tachycardia',
+            body: '**Accomplishes:** Spreads out a fast, cramped rhythm so hidden P-waves, flutter waves, and QRS morphology become readable when you cannot tell SVT from flutter from VT at 25 mm/sec. [6]\n\n**How to:**\n1. Acquire the standard 12-lead at the usual 25 mm/sec first.\n2. On the ECG machine, change the paper/recording speed setting to 50 mm/sec (double speed).\n3. Re-record \u2014 every complex and interval is now stretched to twice its width, like pulling a string taut, so buried atrial activity separates out.\n4. Remember the calibration changed: at 50 mm/sec each small box is 0.02 s and rates appear halved, so interpret intervals against the new scale (or simply use it to SEE the waves, then measure on the standard strip).\n5. Switch back to 25 mm/sec for the record of file.\n\n**Equipment:** Standard ECG machine with adjustable paper speed.\n\n_Source: ALiEM Trick of the Trade \u2014 Speed up the ECG paper rate to differentiate tachycardias._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
         { num: 2, text: 'Appelboam A, et al. Postural modification to the standard Valsalva manoeuvre for emergency treatment of supraventricular tachycardias (REVERT). Lancet 2015. rebelem.com.' },
         { num: 3, text: 'ALiEM. Trick of the Trade: Combine adenosine with the flush \u2014 single-syringe technique. aliem.com. McDowell M, et al. Single-syringe administration of diluted adenosine. Acad Emerg Med. 2020;27(1):61-63.' },
         { num: 4, text: 'emDOCs. ECG Pointers: The Lewis Lead. emdocs.net. See also LITFL: Lewis lead (S5 lead). litfl.com.' },
+        { num: 5, text: 'ALiEM. Trick of the Trade: Getting an EKG on Chewbacca (water-soaked gauze for a hairy chest). aliem.com.' },
+        { num: 6, text: 'ALiEM. Trick of the Trade: Speed up ECG paper rate to differentiate tachycardias. aliem.com.' },
     ],
 };
 const TRICKS_NEURO_PAGE = {
@@ -27188,7 +27213,180 @@ const TEG_STOP_PAGE = {
         { num: 8, text: 'CRASH-2 trial collaborators. Effects of tranexamic acid in trauma patients with significant haemorrhage (CRASH-2). Lancet. 2010;376(9734):23-32.' },
     ],
 };
+// -------------------------------------------------------------------
+// Facial Peripheral Nerve Block (added 2026-06-20)
+// -------------------------------------------------------------------
+const DNB_STEPS_PAGE = {
+    id: 'dnb-steps',
+    title: 'Procedure Steps',
+    subtitle: 'Dental / intraoral nerve block — universal sequence',
+    image: {
+        src: 'images/dental-nerve-blocks/trigeminal-v2-v3-distribution.png',
+        alt: 'Trigeminal nerve maxillary (V2) and mandibular (V3) divisions showing the inferior alveolar, lingual, mental, and dental branches',
+        caption: 'Trigeminal nerve — maxillary (V2) and mandibular (V3) divisions with the inferior alveolar, lingual, and mental branches that intraoral blocks target. Gray\u2019s Anatomy (1918), Plate 778. Public domain (PD-old-100).',
+    },
+    sections: [
+        {
+            heading: '1. Decide & consent',
+            body: 'Confirm the tooth/region and the target block (use the Block Selector tool). Remember: maxillary teeth respond to **infiltration / superior-alveolar** blocks (porous bone); mandibular teeth need the **inferior alveolar block** (dense bone). Obtain verbal consent: transient lip/tongue numbness, self-inflicted bite injury while numb, failed/partial block, hematoma, and (for the IANB) transient facial palsy. Document allergies and anticoagulation.',
+        },
+        {
+            heading: '2. Calculate the max dose',
+            body: 'Before drawing up, compute the **maximum weight-based dose** and the cartridge count (Max Dose tool). Dental cartridges are **1.8 mL** each; most intraoral blocks use only 0.3–1.8 mL. Track cartridge count, especially in children.',
+        },
+        {
+            heading: '3. Prep & topical',
+            body: '• 3 mL or dental aspirating syringe; **25–27 ga** needle (use a **1.5-inch “long” needle for the IANB**)\n• Dry the mucosa with gauze, apply **topical benzocaine 20%** for 1–2 min\n• Choose agent: **lidocaine 2% with epi 1:100,000** (standard) or **bupivacaine 0.5% with epi** (long duration)\n• Good light + suction.',
+        },
+        {
+            heading: '4. Locate the landmark',
+            body: '• **Maxillary infiltration:** mucobuccal fold at the root apex of the target tooth\n• **Infraorbital / mental / greater-palatine / nasopalatine:** the named foramen (keep a finger over it)\n• **IANB:** palpate the **coronoid notch**; position the barrel over the **contralateral premolars**, entry ~1 cm above the occlusal plane lateral to the pterygomandibular raphe.',
+        },
+        {
+            heading: '5. Inject',
+            body: '• Keep the bevel toward bone; advance to target depth\n• **ASPIRATE** before injecting — **double-aspirate (rotate 90°) for the IANB**\n• For the IANB, **contact bone first**, then withdraw ~1 mm (no bone contact risks parotid injection → facial palsy)\n• Inject **SLOWLY** (≥1 min per cartridge)\n• Deposit **ADJACENT to, never INTO, the foramen**; stop if the patient reports an electric shock.',
+        },
+        {
+            heading: '6. Wait, test & warn',
+            body: 'Wait **3–5 min** (infiltration/maxillary) or **5–10 min** (IANB). Test pinprick/cold versus the contralateral side — **lower-lip numbness signals a successful IANB**. Partial/none → re-confirm landmark/depth, supplement, and recheck the running total. **Warn the patient (especially children) not to bite or burn the numb lip, cheek, or tongue.**',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Roberts JR, Custalow CB, Thomsen TW, eds. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Elsevier; 2023. Ch. 30 & Ch. 64.' },
+        { num: 2, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. Elsevier; 2020.' },
+        { num: 3, text: 'Tintinalli JE, et al. Tintinalli\u2019s Emergency Medicine. 9th ed. McGraw-Hill; 2020. Oral and Dental Emergencies.' },
+    ],
+};
+const DNB_STOP_PAGE = {
+    id: 'dnb-stop',
+    title: 'Do NOT — Pitfalls & Safety',
+    subtitle: 'Dental / intraoral nerve block',
+    image: {
+        src: 'images/dental-nerve-blocks/mandibular-nerve-branches.png',
+        alt: 'Mandibular nerve (V3) branches: inferior alveolar, lingual, mental, long buccal, auriculotemporal, and the nearby parotid gland',
+        caption: 'Mandibular nerve (V3) and its relation to the parotid gland and masseter \u2014 note how an over-deep IANB can reach the facial nerve in the parotid. Gray\u2019s Anatomy (1918), Plate 781. Public domain (PD-old-100).',
+    },
+    sections: [
+        {
+            heading: 'Do NOT inject the IANB without bone contact',
+            body: 'Advancing too deep/posterior WITHOUT contacting the medial ramus risks injecting into the parotid gland → **transient facial nerve (CN VII) palsy** (facial droop, can\u2019t close the eye). Always **contact bone, withdraw ~1 mm, then inject.** The palsy is self-limited — protect the eye and reassure.',
+        },
+        {
+            heading: 'Do NOT skip aspiration',
+            body: 'The **inferior alveolar** and **posterior superior alveolar** blocks are the highest-risk for intravascular injection (IA vessels; pterygoid venous plexus). **Aspirate before EVERY injection; double-aspirate (rotate 90°) for the IANB.** Positive aspiration → withdraw and redirect.',
+        },
+        {
+            heading: 'Do NOT inject into a foramen',
+            body: 'Depositing anesthetic INSIDE the foramen or intraneurally causes persistent paresthesia. Inject **adjacent** to the greater-palatine, infraorbital, or mental foramen. Stop immediately if the patient reports an electric-shock sensation.',
+        },
+        {
+            heading: 'Do NOT inject through infected tissue',
+            body: 'Active infection/cellulitis at the injection site is a contraindication — it risks spreading infection and the block often fails in acidic infected tissue. Choose an alternative landmark or coordinate drainage.',
+        },
+        {
+            heading: 'Do NOT forget the bite warning',
+            body: 'A numb lip, cheek, or tongue is easily bitten or burned — this is the most common complication, especially in children. **Explicitly warn every patient** and caregiver, and document it.',
+        },
+        {
+            heading: 'Do NOT exceed the max dose',
+            body: 'Multiple blocks stack up fast. Track cartridge count (Volume Tracker tool) and stay under the calculated maximum. Watch for LAST: perioral numbness, tinnitus, metallic taste → seizures/cardiac collapse. If suspected → stop, 100% O2, treat seizures, and give **20% lipid emulsion 1.5 mL/kg bolus** then infusion (LAST Rescue tool); ACLS with reduced epinephrine (\u22641 mcg/kg).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. Elsevier; 2020. Complications of local anesthesia.' },
+        { num: 2, text: 'Neal JM, et al. The Third ASRA Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.' },
+        { num: 3, text: 'Weinberg GL. Lipid emulsion infusion: resuscitation for local anesthetic and other drug overdose. Anesthesiology. 2012;117(1):180-187.' },
+    ],
+};
+const FNB_STEPS_PAGE = {
+    id: 'fnb-steps',
+    title: 'Procedure Steps',
+    subtitle: 'Facial peripheral nerve block — universal sequence',
+    image: {
+        src: 'images/facial-nerve-block/trigeminal-sensory-territories.png',
+        alt: 'Color-coded sensory territories of the face: ophthalmic (V1), maxillary (V2), and mandibular (V3) divisions of the trigeminal nerve',
+        caption: 'Sensory territories of the face \u2014 ophthalmic (V1), maxillary (V2), and mandibular (V3). Knowing which division covers the wound tells you which block to use. Gray\u2019s Anatomy (1918), Plate 784. Public domain (PD-old-100).',
+    },
+    sections: [
+        {
+            heading: '1. Decide & consent',
+            body: 'Confirm the wound region and the target block (use the Block Selector tool). Obtain verbal informed consent: transient numbness, failed/partial block, hematoma, intravascular injection, nerve irritation. Document allergies and anticoagulation status.',
+        },
+        {
+            heading: '2. Calculate the max dose',
+            body: 'Before drawing up, compute the **maximum weight-based local-anesthetic dose** (Max Dose tool). Facial blocks need only 1–3 mL each (ear ring ~6–8 mL), but verify whenever combining a block with wound infiltration.',
+        },
+        {
+            heading: '3. Prep & position',
+            body: '• 3 mL syringe, **25–27 ga** needle\n• Antiseptic prep (chlorhexidine or alcohol); let dry\n• Choose agent: **lidocaine 1–2%** (onset 2–5 min, 1–2 h) or **bupivacaine 0.25–0.5%** (onset 5–10 min, 4–8 h)\n• Buffer lidocaine 9:1 with sodium bicarbonate to reduce injection pain.',
+        },
+        {
+            heading: '4. Locate the landmark',
+            body: 'The supraorbital, infraorbital, and mental foramina all align vertically at the **mid-pupillary line**. Palpate the foramen (or the coronoid notch / superficial temporal pulse / ear base, depending on block) and keep a fingertip over it to direct flow.',
+        },
+        {
+            heading: '5. Inject',
+            body: '• Warn the patient of a brief sting\n• Advance toward the target and **ASPIRATE** (the face is densely vascular)\n• Inject **SLOWLY** — slow injection = less pain\n• Deposit anesthetic **ADJACENT to, never INTO, the foramen** (intraneural injection causes persistent paresthesia)\n• Stop immediately if the patient reports an electric shock.',
+        },
+        {
+            heading: '6. Wait & test',
+            body: 'Wait **5–10 minutes**, then test pinprick across the territory versus the contralateral side. Full anesthesia → proceed. Partial/none → re-confirm the landmark, re-block, or add small-volume local infiltration at the deficient edge (recheck the running total against the max dose).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Roberts JR, Custalow CB, Thomsen TW, eds. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Elsevier; 2023. Ch. 30 & Ch. 64.' },
+        { num: 2, text: 'Tintinalli JE, et al. Tintinalli\u2019s Emergency Medicine. 9th ed. McGraw-Hill; 2020. Local and Regional Anesthesia.' },
+        { num: 3, text: 'Cepeda MS, et al. Adjusting the pH of lidocaine for reducing pain on injection. Cochrane Database Syst Rev. 2010;(12):CD006581.' },
+    ],
+};
+const FNB_STOP_PAGE = {
+    id: 'fnb-stop',
+    title: 'Do NOT — Pitfalls & Safety',
+    subtitle: 'Facial peripheral nerve block',
+    image: {
+        src: 'images/facial-nerve-block/cutaneous-nerves-of-face.png',
+        alt: 'Cutaneous nerves of the scalp, face, and neck: supraorbital, supratrochlear, infraorbital, mental, and auriculotemporal nerves at their foramina',
+        caption: 'Cutaneous nerves of the face \u2014 the supraorbital, infraorbital, and mental foramina line up along the mid-pupillary line, the key landmark for these blocks. Gray\u2019s Anatomy (1918), Plate 790. Public domain (PD-old-100).',
+    },
+    sections: [
+        {
+            heading: 'Do NOT inject into a foramen',
+            body: 'Depositing anesthetic INSIDE the foramen (or intraneurally) causes persistent paresthesia / nerve injury. Inject **adjacent** to the foramen. Stop immediately if the patient reports an electric-shock sensation.',
+        },
+        {
+            heading: 'Do NOT skip aspiration',
+            body: 'The face is densely vascular — angular, infraorbital, superficial temporal, and inferior alveolar vessels all run with the target nerves. **Aspirate before EVERY injection.** Positive aspiration → withdraw and redirect.',
+        },
+        {
+            heading: 'Do NOT inject through infected skin',
+            body: 'Overlying cellulitis/infection at the planned injection site is an absolute contraindication — it can seed deeper tissue. Choose an alternative approach or infiltrate after irrigation.',
+        },
+        {
+            heading: 'Do NOT aim toward the globe',
+            body: 'For periorbital blocks (supraorbital, infratrochlear), keep the needle **on the orbital rim** and direct **away from the globe** to avoid globe injury.',
+        },
+        {
+            heading: 'Do NOT exceed the max dose',
+            body: 'Multiple sites or block-plus-infiltration can stack up. Track the running total (Volume Tracker tool) and stay under the calculated maximum. Watch for LAST: perioral numbness, tinnitus, metallic taste → seizures/cardiac collapse.',
+        },
+        {
+            heading: 'If LAST is suspected',
+            body: 'Stop injecting, call for help, 100% O2, manage the airway, treat seizures with a benzodiazepine, and give **20% lipid emulsion 1.5 mL/kg bolus** then infusion (LAST Rescue tool). Run ACLS with reduced epinephrine boluses (≤1 mcg/kg); avoid propofol if unstable.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Roberts JR, et al. Roberts and Hedges\u2019 Clinical Procedures. 8th ed. Elsevier; 2023. Ch. 30 & Ch. 64.' },
+        { num: 2, text: 'Neal JM, et al. The Third ASRA Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.' },
+        { num: 3, text: 'Weinberg GL. Lipid emulsion infusion: resuscitation for local anesthetic and other drug overdose. Anesthesiology. 2012;117(1):180-187.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Dental / Intraoral Nerve Blocks (added 2026-06-20)
+    'dnb-steps': DNB_STEPS_PAGE,
+    'dnb-stop': DNB_STOP_PAGE,
+    // Facial Peripheral Nerve Block (added 2026-06-20)
+    'fnb-steps': FNB_STEPS_PAGE,
+    'fnb-stop': FNB_STOP_PAGE,
     // TEG (Thromboelastography)
     'teg-basics': TEG_BASICS_PAGE,
     'teg-parameters': TEG_PARAMETERS_PAGE,

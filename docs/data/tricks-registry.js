@@ -10,6 +10,18 @@
 //
 // `trickCount` is informational (shown on the card). Keep it roughly in sync with
 // the number of trick sections in the page; it is not load-bearing.
+/**
+ * Ordered list of the top-level categories. The home grid renders one labeled
+ * section per category, in this order, with the matching specialty cards under
+ * each. Mirrors how myMedKitt consults are grouped by clinical domain.
+ */
+export const TRICK_CATEGORIES = [
+    { id: 'resus-procedures', label: 'Resuscitation & Procedures' },
+    { id: 'head-neck', label: 'Head & Neck' },
+    { id: 'wounds-msk', label: 'Wounds & Musculoskeletal' },
+    { id: 'genitourinary', label: 'Genitourinary' },
+    { id: 'general-tox', label: 'General & Toxicology' },
+];
 export const TRICK_SPECIALTIES = [
     {
         id: 'airway',
@@ -19,6 +31,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Suction, NG placement, supraglottic exchange, and more.',
         infoPageId: 'tricks-airway',
         trickCount: 8,
+        category: 'resus-procedures',
     },
     {
         id: 'procedures',
@@ -27,7 +40,8 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 27,
+        trickCount: 30,
+        category: 'resus-procedures',
     },
     {
         id: 'ent',
@@ -37,6 +51,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Epistaxis packing tricks and nasal suction.',
         infoPageId: 'tricks-ent',
         trickCount: 17,
+        category: 'head-neck',
     },
     {
         id: 'dental',
@@ -46,6 +61,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Extraction bleeding, dry socket, and oral hemostasis pearls.',
         infoPageId: 'tricks-dental',
         trickCount: 6,
+        category: 'head-neck',
     },
     {
         id: 'ophtho',
@@ -55,6 +71,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
         infoPageId: 'tricks-ophtho',
         trickCount: 8,
+        category: 'head-neck',
     },
     {
         id: 'urology',
@@ -64,6 +81,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Voiding trials, renal colic, priapism, and entrapment releases.',
         infoPageId: 'tricks-urology',
         trickCount: 9,
+        category: 'genitourinary',
     },
     {
         id: 'wound',
@@ -73,6 +91,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
         infoPageId: 'tricks-wound',
         trickCount: 13,
+        category: 'wounds-msk',
     },
     {
         id: 'cardiology',
@@ -81,7 +100,8 @@ export const TRICK_SPECIALTIES = [
         color: '#C62828',
         subtitle: 'Rapid adenosine delivery and rhythm tricks.',
         infoPageId: 'tricks-cardiology',
-        trickCount: 4,
+        trickCount: 6,
+        category: 'resus-procedures',
     },
     {
         id: 'neuro',
@@ -91,6 +111,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Bedside CN testing, BPPV maneuvers, and refractory migraine rescue.',
         infoPageId: 'tricks-neuro',
         trickCount: 6,
+        category: 'head-neck',
     },
     {
         id: 'tox',
@@ -100,6 +121,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Antiemetic and toxidrome management pearls.',
         infoPageId: 'tricks-tox',
         trickCount: 2,
+        category: 'general-tox',
     },
     {
         id: 'general',
@@ -109,6 +131,7 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Fast bedside screens, dosing pearls, communication.',
         infoPageId: 'tricks-general',
         trickCount: 9,
+        category: 'general-tox',
     },
     {
         id: 'ortho',
@@ -118,8 +141,22 @@ export const TRICK_SPECIALTIES = [
         subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
         infoPageId: 'tricks-ortho',
         trickCount: 25,
+        category: 'wounds-msk',
     },
 ];
+/**
+ * Specialties grouped by category, in TRICK_CATEGORIES order, with the
+ * specialty order preserved within each group. Categories with no specialties
+ * are omitted so the home grid never renders an empty header.
+ */
+export function getTrickSpecialtiesByCategory() {
+    return TRICK_CATEGORIES
+        .map((category) => ({
+        category,
+        specialties: TRICK_SPECIALTIES.filter((s) => s.category === category.id),
+    }))
+        .filter((g) => g.specialties.length > 0);
+}
 /** Lookup a specialty by its id. */
 export function getTrickSpecialty(id) {
     return TRICK_SPECIALTIES.find((s) => s.id === id);
