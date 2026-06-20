@@ -1,0 +1,425 @@
+{
+  "tree_id": "sodium-bicarbonate-drip",
+  "captured_at": "2026-06-20T20:12:30.620Z",
+  "service_role_key_fingerprint": "778ea4be",
+  "tables": {
+    "decision_trees": [
+      {
+        "id": "sodium-bicarbonate-drip",
+        "title": "Sodium Bicarbonate Drip Protocol",
+        "subtitle": "Indications -> Recipe -> Tox Targets -> Monitoring -> Stop Criteria",
+        "version": "1.0",
+        "node_count": 11,
+        "entry_node_id": "bicarbdrip-start",
+        "updated_at": "2026-05-12T05:34:13.444324+00:00",
+        "module_labels": [
+          "Indication",
+          "Use Case",
+          "Recipe",
+          "Monitor"
+        ]
+      }
+    ],
+    "category_trees": [
+      {
+        "category_id": "pharmacist",
+        "tree_id": "sodium-bicarbonate-drip",
+        "display_title": null,
+        "display_subtitle": null,
+        "entry_node_id": "bicarbdrip-start",
+        "sort_order": 0
+      }
+    ],
+    "tree_citations": [
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 1,
+        "text": "Jaber S, et al. Sodium bicarbonate therapy for patients with severe metabolic acidaemia in the ICU (BICAR-ICU). Lancet. 2018;392(10141):31-40."
+      },
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 2,
+        "text": "EMCrit/IBCC. Hyperkalemia and isotonic bicarbonate resuscitation. Accessed 2026."
+      },
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 3,
+        "text": "EMCrit/IBCC. Salicylate intoxication and urinary alkalinization. Accessed 2026."
+      },
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 4,
+        "text": "EMCrit/IBCC and toxicology reviews. Sodium-channel blocker/TCA bicarbonate management. Accessed 2026."
+      },
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 5,
+        "text": "Forsythe SM, Schmidt GA. Sodium bicarbonate for the treatment of lactic acidosis. Chest. 2000;117(1):260-267."
+      },
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 6,
+        "text": "EMCrit/IBCC. Fluid selection and pH-guided fluid resuscitation. Accessed 2026."
+      },
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 7,
+        "text": "American College of Medical Toxicology guidance and poison center practice patterns for salicylate alkalinization/hemodialysis. Accessed 2026."
+      },
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 8,
+        "text": "Hoffman RS, et al. Goldfrank's Toxicologic Emergencies. Sodium-channel blocker and salicylate poisoning chapters. 11th ed."
+      },
+      {
+        "tree_id": "sodium-bicarbonate-drip",
+        "num": 9,
+        "text": "Panchal AR, et al. 2020 AHA Guidelines for Adult Basic and Advanced Life Support. Circulation. 2020;142:S366-S468."
+      }
+    ],
+    "decision_nodes": [
+      {
+        "id": "bicarbdrip-start",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "info",
+        "module": 1,
+        "title": "Sodium Bicarbonate Drip Protocol",
+        "body": "[Bicarbonate Drip Steps](#/info/bicarbdrip-steps)\n\nThis consult is for continuous sodium bicarbonate infusion, not reflex ampules during routine resuscitation.\n\nCommon ED/ICU indications:\n- Severe metabolic acidemia, especially pH <=7.20 with moderate-severe AKI or bicarbonate loss\n- Hyperkalemia with metabolic acidosis when isotonic bicarbonate can be used as resuscitative fluid\n- Salicylate toxicity requiring serum/urine alkalinization\n- Sodium-channel blocker toxicity after bolus therapy when QRS/pH targets require maintenance infusion\n\nDo not use bicarbonate drip as routine treatment for cardiac arrest, isolated lactic acidosis without severe acidemia/AKI, routine DKA, or primary respiratory acidosis.",
+        "citation": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bicarbdrip-scenario",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 0,
+        "summary": "Bicarbonate infusion is indication-specific; avoid routine use without severe acidemia, alkalinization target, or tox indication.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-scenario",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "question",
+        "module": 1,
+        "title": "Indication",
+        "body": "Why are you starting a bicarbonate drip?",
+        "citation": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "options": [
+          {
+            "next": "bicarbdrip-metabolic",
+            "label": "Severe metabolic acidemia / AKI",
+            "urgency": "critical",
+            "description": "pH <=7.20, HCO3 low, AKI/uremia or bicarbonate loss physiology"
+          },
+          {
+            "next": "bicarbdrip-hyperk",
+            "label": "Hyperkalemia + metabolic acidosis",
+            "urgency": "critical",
+            "description": "Acidotic hyperkalemia, often AKI/volume depletion"
+          },
+          {
+            "next": "bicarbdrip-salicylate",
+            "label": "Salicylate toxicity",
+            "urgency": "critical",
+            "description": "Urinary/serum alkalinization and dialysis bridge"
+          },
+          {
+            "next": "bicarbdrip-sodium-channel",
+            "label": "TCA / sodium-channel blocker",
+            "urgency": "critical",
+            "description": "QRS widening, ventricular dysrhythmia, hypotension after boluses"
+          },
+          {
+            "next": "bicarbdrip-not-routine",
+            "label": "Unclear or routine arrest/lactic/DKA",
+            "urgency": "critical",
+            "description": "Stop and reassess indication"
+          }
+        ],
+        "inputs": null,
+        "next": null,
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 1,
+        "summary": "The target and rate depend on whether the goal is pH correction, potassium shift, urine alkalinization, or sodium-channel rescue.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-metabolic",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "info",
+        "module": 2,
+        "title": "Severe Metabolic Acidemia / AKI",
+        "body": "Consider bicarbonate infusion when severe metabolic acidemia is clinically important and reversible/supportable.\n\nBest-supported ICU phenotype:\n- pH <=7.20 with low bicarbonate and moderate-severe AKI\n- Uremic or non-anion-gap/bicarbonate-loss acidosis\n- Severe acidemia contributing to vasopressor resistance or cardiac dysfunction\n\nRecipe:\n- [Sodium bicarbonate](#/drug/sodium-bicarbonate/isotonic bicarbonate infusion) 150 mEq in 1 L D5W or sterile water per local pharmacy policy\n- Typical rate 100-250 mL/hr, or as resuscitative fluid if volume depleted\n- Target pH often >7.20 initially, then >7.30 when using BICAR-ICU-style endpoints\n\nTreat the cause and plan dialysis when acidosis is refractory or due to renal failure/toxin requiring clearance.",
+        "citation": [
+          1,
+          2,
+          5
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bicarbdrip-recipe",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 2,
+        "summary": "Best evidence is severe acidemia with AKI; bicarbonate is a bridge, not source control.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-hyperk",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "info",
+        "module": 2,
+        "title": "Hyperkalemia + Metabolic Acidosis",
+        "body": "Bicarbonate is most useful for hyperkalemia when metabolic acidosis is present.\n\nDo first if ECG changes/severe K:\n- Calcium for membrane stabilization\n- Insulin/dextrose and albuterol for rapid intracellular shift\n- Dialysis/diuresis/potassium binders for removal when appropriate\n\nBicarbonate strategy:\n- Use [Sodium bicarbonate](#/drug/sodium-bicarbonate/hyperkalemia with metabolic acidosis) isotonic infusion as resuscitative fluid when hypovolemic/acidotic\n- Recipe: 150 mEq in 1 L D5W or sterile water per policy\n- Rate: 500-1000 mL/hr initially if true resuscitation fluid is needed; slower if euvolemic or overload risk\n- Once serum bicarbonate is >24 and additional volume is needed, transition to balanced crystalloid\n\nDo not rely on bicarbonate alone for life-threatening hyperkalemia.",
+        "citation": [
+          2,
+          6
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bicarbdrip-recipe",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 3,
+        "summary": "Isotonic bicarbonate can help acidotic hyperkalemia, but calcium/insulin/removal remain essential.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-salicylate",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "info",
+        "module": 2,
+        "title": "Salicylate Toxicity",
+        "body": "Goal is serum and urine alkalinization, not correction of a bicarbonate number.\n\nInitial sequence:\n- Call poison center/toxicology and nephrology early\n- Give [Sodium bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity) 1-2 mEq/kg IV bolus if severe toxicity, acidemia, altered mental status, or before unavoidable intubation\n- Start infusion: 150 mEq sodium bicarbonate in 1 L D5W, typically 150-250 mL/hr\n- Add [Potassium chloride IV](#/drug/potassium-chloride-iv/severe hypokalemia) 20-40 mEq/L unless contraindicated; hypokalemia blocks urine alkalinization\n\nTargets:\n- Serum pH 7.45-7.55, avoid >7.60\n- Urine pH 7.5-8.0\n- Urine output 2-3 mL/kg/hr when feasible\n\nDo not use acetazolamide. Escalate to hemodialysis for severe poisoning or alkalinization failure.",
+        "citation": [
+          3,
+          7
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bicarbdrip-monitor",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 4,
+        "summary": "Salicylate bicarbonate infusion targets urine pH and requires aggressive potassium support.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-sodium-channel",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "info",
+        "module": 2,
+        "title": "TCA / Sodium-Channel Blocker",
+        "body": "Bicarbonate infusion is maintenance therapy after boluses when sodium-channel blockade persists.\n\nInitial therapy:\n- [Sodium bicarbonate](#/drug/sodium-bicarbonate/TCA Overdose — Sodium Channel Blockade) 1-2 mEq/kg IV bolus\n- Repeat boluses q3-5 min until QRS narrows, hypotension improves, or pH target reached\n- Target serum pH 7.50-7.55 and QRS <100 ms when feasible\n\nInfusion:\n- 150 mEq sodium bicarbonate in 1 L D5W at 150-250 mL/hr\n- Continue while QRS or hemodynamics require alkalinization\n- Monitor pH, potassium, ionized calcium, sodium, QRS width\n\nAvoid class IA/IC antiarrhythmics. Treat seizures with benzodiazepines and involve poison center/toxicology.",
+        "citation": [
+          4,
+          8
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bicarbdrip-monitor",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 5,
+        "summary": "TCA/sodium-channel toxicity uses boluses first, then infusion to maintain pH/QRS targets.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-not-routine",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "result",
+        "module": 1,
+        "title": "Not Routine Bicarbonate Drip",
+        "body": "Do not start bicarbonate infusion for:\n- Routine cardiac arrest/CPR without hyperkalemia or sodium-channel blocker toxicity\n- Isolated respiratory acidosis; improve ventilation instead\n- Routine lactic acidosis without severe acidemia/AKI or bicarbonate-loss physiology\n- Routine DKA; insulin/fluids/potassium are definitive, bicarbonate generally only if pH <6.9 by DKA protocols\n- Metabolic alkalosis\n- Uncontrolled volume overload or severe hypernatremia unless benefit clearly outweighs risk\n\nIf pH is critically low, identify whether bicarbonate can be ventilated off as CO2; inadequate ventilation can worsen intracellular/respiratory acidosis.",
+        "citation": [
+          1,
+          4,
+          9
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Hold bicarbonate drip and treat the underlying process unless a clear indication/target exists.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 6,
+        "summary": "Bicarbonate infusion should not be reflexive for routine arrest, respiratory acidosis, DKA, or lactic acidosis.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-recipe",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "info",
+        "module": 3,
+        "title": "Recipe / Administration",
+        "body": "Common isotonic bicarbonate recipe:\n- 150 mEq sodium bicarbonate = three 50 mEq ampules of 8.4% NaHCO3\n- Add to 1 L D5W or sterile water per local pharmacy policy\n- Final solution is approximately isotonic bicarbonate, ~150 mEq/L sodium bicarbonate\n\nRates:\n- Maintenance/metabolic acidosis: commonly 100-250 mL/hr\n- Hyperkalemic metabolic acidosis with hypovolemia: may run 500-1000 mL/hr as resuscitative fluid\n- Salicylate or sodium-channel toxicity: commonly 150-250 mL/hr, titrated to pH/urine/QRS targets\n\nLine considerations:\n- Use pump and label clearly\n- Central access preferred for repeated hypertonic ampules or concentrated preparations\n- Peripheral isotonic bicarbonate infusion is commonly used if IV is reliable and local policy allows",
+        "citation": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bicarbdrip-monitor",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 7,
+        "summary": "Standard drip recipe is 150 mEq sodium bicarbonate in 1 L D5W/sterile water, rate by indication.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-monitor",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "info",
+        "module": 3,
+        "title": "Monitoring",
+        "body": "Core monitoring:\n- VBG/ABG q2-4 hr during active titration; q1-2 hr if unstable or target-dependent tox case\n- BMP q2-4 hr: sodium, potassium, bicarbonate, chloride, creatinine\n- Ionized calcium q4-6 hr or sooner if symptomatic/hypocalcemia risk\n- Volume status, pulmonary edema, urine output\n- Continuous ECG for hyperkalemia, TCA/sodium-channel toxicity, severe acidemia, or rapid shifts\n\nToxicology targets:\n- Salicylate: serum pH 7.45-7.55, urine pH 7.5-8.0, K often >=4.0-4.5\n- TCA/sodium-channel blocker: QRS narrowing and serum pH 7.50-7.55\n\nVentilation requirement:\n- Bicarbonate generates CO2. Ensure the patient can increase minute ventilation or is mechanically ventilated appropriately.",
+        "citation": [
+          1,
+          3,
+          4,
+          8
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bicarbdrip-complications",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 8,
+        "summary": "Monitor pH, sodium, potassium, ionized calcium, volume, ECG, and ventilation.",
+        "skippable": null,
+        "safety_level": "critical",
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-complications",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "info",
+        "module": 4,
+        "title": "Complications",
+        "body": "Watch for:\n- Hypernatremia and hyperosmolality\n- Hypokalemia from intracellular shift\n- Lower ionized calcium with tetany, seizures, hypotension, or reduced contractility\n- Volume overload/pulmonary edema\n- Metabolic alkalosis\n- Increased CO2 load with worsening respiratory acidosis if ventilation is inadequate\n- Delayed dialysis when bicarbonate is used beyond its role as a bridge\n\nStop or slow the drip when targets are reached, adverse effects develop, or definitive therapy has taken over.",
+        "citation": [
+          1,
+          4,
+          5
+        ],
+        "options": null,
+        "inputs": null,
+        "next": "bicarbdrip-dispo",
+        "recommendation": null,
+        "treatment": null,
+        "confidence": null,
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 9,
+        "summary": "Major risks are sodium/volume load, hypokalemia, low ionized calcium, alkalemia, and CO2 generation.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      },
+      {
+        "id": "bicarbdrip-dispo",
+        "tree_id": "sodium-bicarbonate-drip",
+        "type": "result",
+        "module": 4,
+        "title": "Disposition / Handoff",
+        "body": "Most bicarbonate drip patients need ICU, stepdown, or close monitored care.\n\nHandoff must include:\n- Indication and target: pH, urine pH, QRS, potassium, or bridge to dialysis\n- Recipe and current rate\n- Total bicarbonate/sodium administered\n- Latest pH, Na, K, ionized Ca, creatinine, urine output\n- Ventilation status and CO2 clearance\n- Stop criteria and next lab time\n- Toxicology/nephrology/poison center recommendations when applicable",
+        "citation": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "options": null,
+        "inputs": null,
+        "next": null,
+        "recommendation": "Continue only with a clear endpoint, monitoring schedule, and definitive treatment plan.",
+        "treatment": null,
+        "confidence": "recommended",
+        "images": null,
+        "calculator_links": null,
+        "sort_order": 10,
+        "summary": "Bicarbonate drips require monitored disposition and explicit stop criteria.",
+        "skippable": null,
+        "safety_level": null,
+        "when_to_use": null,
+        "pearls": null,
+        "evidence": null
+      }
+    ]
+  },
+  "sha256": "7a036229934a5fc9ce5ddc57750709adbd20421f0ec1fa2917f77d81151a9874"
+}

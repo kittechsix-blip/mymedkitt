@@ -19,6 +19,8 @@ export const TREE_REGISTRY = {
   'difficult-vascular-access': { prefix: 'DIFFICULT_VASCULAR_ACCESS', entryNodeId: 'dva-start', categoryId: 'procedures' },
   'paracentesis': { prefix: 'PARACENTESIS', entryNodeId: 'para-start', categoryId: 'procedures' },
   'occipital-nerve-block': { prefix: 'OCCIPITAL_NERVE_BLOCK', entryNodeId: 'onb-start', categoryId: 'procedures' },
+  'facial-nerve-block': { prefix: 'FACIAL_NERVE_BLOCK', entryNodeId: 'fnb-start', categoryId: 'procedures' },
+  'dental-nerve-blocks': { prefix: 'DENTAL_NERVE_BLOCKS', entryNodeId: 'dnb-start', categoryId: 'procedures' },
   'ingrown-toenail-avulsion': { prefix: 'INGROWN_TOENAIL_AVULSION', entryNodeId: 'itn-start', categoryId: 'procedures' },
   'tar-burn-removal': { prefix: 'TAR_BURN_REMOVAL', entryNodeId: 'tar-start', categoryId: 'procedures' },
   'continuous-bladder-irrigation': { prefix: 'CONTINUOUS_BLADDER_IRRIGATION', entryNodeId: 'cbi-start', categoryId: 'procedures' },

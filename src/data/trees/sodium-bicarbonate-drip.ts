@@ -81,10 +81,10 @@ export const SODIUM_BICARBONATE_DRIP_NODES: DecisionNode[] = [
     type: 'result',
     module: 1,
     title: 'Not Routine Bicarbonate Drip',
-    body: 'Do not start bicarbonate infusion for:\n- Routine cardiac arrest/CPR without hyperkalemia or sodium-channel blocker toxicity\n- Isolated respiratory acidosis; improve ventilation instead\n- Routine lactic acidosis without severe acidemia/AKI or bicarbonate-loss physiology\n- Routine DKA; insulin/fluids/potassium are definitive, bicarbonate generally only if pH <6.9 by DKA protocols\n- Metabolic alkalosis\n- Uncontrolled volume overload or severe hypernatremia unless benefit clearly outweighs risk\n\nIf pH is critically low, identify whether bicarbonate can be ventilated off as CO2; inadequate ventilation can worsen intracellular/respiratory acidosis.',
+    body: 'Do not start bicarbonate infusion for:\n- Routine cardiac arrest/CPR without hyperkalemia or sodium-channel blocker toxicity\n- Isolated respiratory acidosis; improve ventilation instead\n- Routine lactic acidosis without severe acidemia/AKI or bicarbonate-loss physiology\n- Routine DKA; insulin/fluids/potassium are definitive. The 2024 ADA hyperglycemic crises consensus report recommends bicarbonate only in severe acidosis (pH <7.0), and even then no mortality benefit has been shown (the older 2009 ADA threshold was pH <6.9)\n- Metabolic alkalosis\n- Uncontrolled volume overload or severe hypernatremia unless benefit clearly outweighs risk\n\nIf pH is critically low, identify whether bicarbonate can be ventilated off as CO2; inadequate ventilation can worsen intracellular/respiratory acidosis.',
     recommendation: 'Hold bicarbonate drip and treat the underlying process unless a clear indication/target exists.',
     confidence: 'recommended',
-    citation: [1, 4, 9],
+    citation: [1, 4, 9, 10],
     summary: 'Bicarbonate infusion should not be reflexive for routine arrest, respiratory acidosis, DKA, or lactic acidosis.',
     safetyLevel: 'critical',
   },
@@ -144,6 +144,7 @@ export const SODIUM_BICARBONATE_DRIP_CITATIONS: Citation[] = [
   { num: 7, text: 'American College of Medical Toxicology guidance and poison center practice patterns for salicylate alkalinization/hemodialysis. Accessed 2026.' },
   { num: 8, text: 'Hoffman RS, et al. Goldfrank\'s Toxicologic Emergencies. Sodium-channel blocker and salicylate poisoning chapters. 11th ed.' },
   { num: 9, text: 'Panchal AR, et al. 2020 AHA Guidelines for Adult Basic and Advanced Life Support. Circulation. 2020;142:S366-S468.' },
+  { num: 10, text: 'Umpierrez GE, Davis GM, ElSayed NA, et al. Hyperglycemic crises in adults with diabetes: a consensus report (ADA/EASD/JBDS/AACE/DTS). Diabetes Care. 2024;47(8):1257-1275. Bicarbonate considered only in severe acidosis pH <7.0.' },
 ];
 
 export const SODIUM_BICARBONATE_DRIP_CRITICAL_ACTIONS = [

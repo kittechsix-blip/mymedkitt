@@ -207,6 +207,14 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/occipital-nerve-block.js');
             return { nodes: m.OCCIPITAL_NERVE_BLOCK_NODES, entryNodeId: 'onb-start', categoryId: 'procedures', moduleLabels: m.OCCIPITAL_NERVE_BLOCK_MODULE_LABELS, citations: m.OCCIPITAL_NERVE_BLOCK_CITATIONS, criticalActions: m.OCCIPITAL_NERVE_BLOCK_CRITICAL_ACTIONS };
         },
+        'facial-nerve-block': async () => {
+            const m = await import('../data/trees/facial-nerve-block.js');
+            return { nodes: m.FACIAL_NERVE_BLOCK_NODES, entryNodeId: 'fnb-start', categoryId: 'procedures', moduleLabels: m.FACIAL_NERVE_BLOCK_MODULE_LABELS, citations: m.FACIAL_NERVE_BLOCK_CITATIONS, criticalActions: m.FACIAL_NERVE_BLOCK_CRITICAL_ACTIONS };
+        },
+        'dental-nerve-blocks': async () => {
+            const m = await import('../data/trees/dental-nerve-blocks.js');
+            return { nodes: m.DENTAL_NERVE_BLOCKS_NODES, entryNodeId: 'dnb-start', categoryId: 'procedures', moduleLabels: m.DENTAL_NERVE_BLOCKS_MODULE_LABELS, citations: m.DENTAL_NERVE_BLOCKS_CITATIONS, criticalActions: m.DENTAL_NERVE_BLOCKS_CRITICAL_ACTIONS };
+        },
         'ingrown-toenail-avulsion': async () => {
             const m = await import('../data/trees/ingrown-toenail-avulsion.js');
             return { nodes: m.INGROWN_TOENAIL_AVULSION_NODES, entryNodeId: 'itn-start', categoryId: 'procedures', moduleLabels: m.INGROWN_TOENAIL_AVULSION_MODULE_LABELS, citations: m.INGROWN_TOENAIL_AVULSION_CITATIONS, criticalActions: m.INGROWN_TOENAIL_AVULSION_CRITICAL_ACTIONS };

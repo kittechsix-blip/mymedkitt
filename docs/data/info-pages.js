@@ -27220,13 +27220,13 @@ const DNB_STEPS_PAGE = {
     id: 'dnb-steps',
     title: 'Procedure Steps',
     subtitle: 'Dental / intraoral nerve block — universal sequence',
-    image: {
-        src: 'images/dental-nerve-blocks/trigeminal-v2-v3-distribution.png',
-        alt: 'Trigeminal nerve maxillary (V2) and mandibular (V3) divisions showing the inferior alveolar, lingual, mental, and dental branches',
-        caption: 'Trigeminal nerve — maxillary (V2) and mandibular (V3) divisions with the inferior alveolar, lingual, and mental branches that intraoral blocks target. Gray\u2019s Anatomy (1918), Plate 778. Public domain (PD-old-100).',
-    },
     sections: [
         {
+            image: {
+                src: 'images/dental-nerve-blocks/trigeminal-v2-v3-distribution.png',
+                alt: 'Trigeminal nerve maxillary (V2) and mandibular (V3) divisions showing the inferior alveolar, lingual, mental, and dental branches',
+                caption: 'Trigeminal nerve — maxillary (V2) and mandibular (V3) divisions with the inferior alveolar, lingual, and mental branches that intraoral blocks target. Gray\u2019s Anatomy (1918), Plate 778. Public domain (PD-old-100).',
+            },
             heading: '1. Decide & consent',
             body: 'Confirm the tooth/region and the target block (use the Block Selector tool). Remember: maxillary teeth respond to **infiltration / superior-alveolar** blocks (porous bone); mandibular teeth need the **inferior alveolar block** (dense bone). Obtain verbal consent: transient lip/tongue numbness, self-inflicted bite injury while numb, failed/partial block, hematoma, and (for the IANB) transient facial palsy. Document allergies and anticoagulation.',
         },
@@ -27261,13 +27261,13 @@ const DNB_STOP_PAGE = {
     id: 'dnb-stop',
     title: 'Do NOT — Pitfalls & Safety',
     subtitle: 'Dental / intraoral nerve block',
-    image: {
-        src: 'images/dental-nerve-blocks/mandibular-nerve-branches.png',
-        alt: 'Mandibular nerve (V3) branches: inferior alveolar, lingual, mental, long buccal, auriculotemporal, and the nearby parotid gland',
-        caption: 'Mandibular nerve (V3) and its relation to the parotid gland and masseter \u2014 note how an over-deep IANB can reach the facial nerve in the parotid. Gray\u2019s Anatomy (1918), Plate 781. Public domain (PD-old-100).',
-    },
     sections: [
         {
+            image: {
+                src: 'images/dental-nerve-blocks/mandibular-nerve-branches.png',
+                alt: 'Mandibular nerve (V3) branches: inferior alveolar, lingual, mental, long buccal, auriculotemporal, and the nearby parotid gland',
+                caption: 'Mandibular nerve (V3) and its relation to the parotid gland and masseter \u2014 note how an over-deep IANB can reach the facial nerve in the parotid. Gray\u2019s Anatomy (1918), Plate 781. Public domain (PD-old-100).',
+            },
             heading: 'Do NOT inject the IANB without bone contact',
             body: 'Advancing too deep/posterior WITHOUT contacting the medial ramus risks injecting into the parotid gland → **transient facial nerve (CN VII) palsy** (facial droop, can\u2019t close the eye). Always **contact bone, withdraw ~1 mm, then inject.** The palsy is self-limited — protect the eye and reassure.',
         },
@@ -27302,13 +27302,13 @@ const FNB_STEPS_PAGE = {
     id: 'fnb-steps',
     title: 'Procedure Steps',
     subtitle: 'Facial peripheral nerve block — universal sequence',
-    image: {
-        src: 'images/facial-nerve-block/trigeminal-sensory-territories.png',
-        alt: 'Color-coded sensory territories of the face: ophthalmic (V1), maxillary (V2), and mandibular (V3) divisions of the trigeminal nerve',
-        caption: 'Sensory territories of the face \u2014 ophthalmic (V1), maxillary (V2), and mandibular (V3). Knowing which division covers the wound tells you which block to use. Gray\u2019s Anatomy (1918), Plate 784. Public domain (PD-old-100).',
-    },
     sections: [
         {
+            image: {
+                src: 'images/facial-nerve-block/trigeminal-sensory-territories.png',
+                alt: 'Color-coded sensory territories of the face: ophthalmic (V1), maxillary (V2), and mandibular (V3) divisions of the trigeminal nerve',
+                caption: 'Sensory territories of the face \u2014 ophthalmic (V1), maxillary (V2), and mandibular (V3). Knowing which division covers the wound tells you which block to use. Gray\u2019s Anatomy (1918), Plate 784. Public domain (PD-old-100).',
+            },
             heading: '1. Decide & consent',
             body: 'Confirm the wound region and the target block (use the Block Selector tool). Obtain verbal informed consent: transient numbness, failed/partial block, hematoma, intravascular injection, nerve irritation. Document allergies and anticoagulation status.',
         },
@@ -27343,13 +27343,13 @@ const FNB_STOP_PAGE = {
     id: 'fnb-stop',
     title: 'Do NOT — Pitfalls & Safety',
     subtitle: 'Facial peripheral nerve block',
-    image: {
-        src: 'images/facial-nerve-block/cutaneous-nerves-of-face.png',
-        alt: 'Cutaneous nerves of the scalp, face, and neck: supraorbital, supratrochlear, infraorbital, mental, and auriculotemporal nerves at their foramina',
-        caption: 'Cutaneous nerves of the face \u2014 the supraorbital, infraorbital, and mental foramina line up along the mid-pupillary line, the key landmark for these blocks. Gray\u2019s Anatomy (1918), Plate 790. Public domain (PD-old-100).',
-    },
     sections: [
         {
+            image: {
+                src: 'images/facial-nerve-block/cutaneous-nerves-of-face.png',
+                alt: 'Cutaneous nerves of the scalp, face, and neck: supraorbital, supratrochlear, infraorbital, mental, and auriculotemporal nerves at their foramina',
+                caption: 'Cutaneous nerves of the face \u2014 the supraorbital, infraorbital, and mental foramina line up along the mid-pupillary line, the key landmark for these blocks. Gray\u2019s Anatomy (1918), Plate 790. Public domain (PD-old-100).',
+            },
             heading: 'Do NOT inject into a foramen',
             body: 'Depositing anesthetic INSIDE the foramen (or intraneurally) causes persistent paresthesia / nerve injury. Inject **adjacent** to the foramen. Stop immediately if the patient reports an electric-shock sensation.',
         },

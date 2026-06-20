@@ -40144,7 +40144,612 @@ const TEG_PLATELETMAPPING_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// FACIAL PERIPHERAL NERVE BLOCK CALCULATORS (added 2026-06-20)
+// -------------------------------------------------------------------
+// 1) Maximum safe local-anesthetic dose (weight-based, by agent ± epinephrine)
+const FNB_LA_MAX_DOSE_CALCULATOR = {
+    id: 'fnb-la-max-dose',
+    title: 'Max Local Anesthetic Dose',
+    subtitle: 'Weight-based max for facial blocks',
+    description: 'Calculates the maximum safe local-anesthetic dose for facial nerve blocks and how many mL that allows at the chosen concentration. Facial blocks use small volumes, but verify whenever combining a block with wound infiltration. Maxima per Roberts & Hedges / ASRA.',
+    fields: [
+        {
+            name: 'weight',
+            label: 'Patient Weight',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'kg',
+            description: 'Use lean/ideal body weight in obese patients',
+        },
+        {
+            name: 'agent',
+            label: 'Agent',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            description: 'Max mg/kg encoded in the option value',
+            selectOptions: [
+                { label: 'Lidocaine (plain) — 4.5 mg/kg', points: 45 },
+                { label: 'Lidocaine WITH epinephrine — 7 mg/kg', points: 70 },
+                { label: 'Bupivacaine (plain) — 2 mg/kg', points: 20 },
+                { label: 'Bupivacaine WITH epinephrine — 3 mg/kg', points: 30 },
+            ],
+        },
+        {
+            name: 'conc',
+            label: 'Concentration',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            description: 'mg per mL (e.g., 1% = 10 mg/mL)',
+            selectOptions: [
+                { label: '0.25% (2.5 mg/mL)', points: 25 },
+                { label: '0.5% (5 mg/mL)', points: 50 },
+                { label: '1% (10 mg/mL)', points: 100 },
+                { label: '2% (20 mg/mL)', points: 200 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'These are maxima — use the smallest effective volume. Aspirate before every injection; the face is densely vascular.',
+    citations: [
+        'Roberts JR, Custalow CB, Thomsen TW, eds. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Elsevier; 2023. Ch. 30, Local and Topical Anesthesia.',
+        'Neal JM, et al. ASRA Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.',
+    ],
+    computeResult: (values) => {
+        const weight = values['weight'] || 0;
+        const mgPerKg = (values['agent'] || 0) / 10; // 45→4.5, 70→7, 20→2, 30→3
+        const mgPerMl = (values['conc'] || 0) / 10; // 25→2.5, 50→5, 100→10, 200→20
+        if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0) {
+            return {
+                value: '--',
+                label: 'Enter values',
+                description: 'Enter weight, agent, and concentration to calculate the maximum dose.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const maxMg = Math.round(weight * mgPerKg);
+        const maxMl = Math.round((maxMg / mgPerMl) * 10) / 10;
+        return {
+            value: `${maxMg} mg`,
+            label: 'Maximum Safe Dose',
+            description: `**MAX DOSE:** **${maxMg} mg** (${weight} kg × ${mgPerKg} mg/kg)\n\n**MAX VOLUME at this concentration:** **${maxMl} mL** (${maxMg} mg ÷ ${mgPerMl} mg/mL)\n\n**REMEMBER:** Facial blocks need only 1–3 mL each; ear ring blocks ~6–8 mL. Use the smallest effective volume and ASPIRATE before every injection.`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// 2) Running LA volume tracker — % of max already used across sites
+const FNB_VOLUME_TRACKER_CALCULATOR = {
+    id: 'fnb-volume-tracker',
+    title: 'LA Volume / Toxicity Tracker',
+    subtitle: 'Running total vs maximum',
+    description: 'Tracks total local-anesthetic milligrams given across multiple block sites and wound infiltration, and reports the fraction of the patient\u2019s maximum already used. Use when doing several blocks or combining a block with infiltration.',
+    fields: [
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+        {
+            name: 'agent',
+            label: 'Agent',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Lidocaine (plain) — 4.5 mg/kg', points: 45 },
+                { label: 'Lidocaine WITH epinephrine — 7 mg/kg', points: 70 },
+                { label: 'Bupivacaine (plain) — 2 mg/kg', points: 20 },
+                { label: 'Bupivacaine WITH epinephrine — 3 mg/kg', points: 30 },
+            ],
+        },
+        {
+            name: 'conc',
+            label: 'Concentration',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '0.25% (2.5 mg/mL)', points: 25 },
+                { label: '0.5% (5 mg/mL)', points: 50 },
+                { label: '1% (10 mg/mL)', points: 100 },
+                { label: '2% (20 mg/mL)', points: 200 },
+            ],
+        },
+        { name: 'volume', label: 'Total Volume Given So Far', type: 'number', points: 0, valueIsPoints: true, unit: 'mL', description: 'Sum of all injections at this concentration' },
+    ],
+    results: [],
+    thresholdNote: 'Stay well under 100% of max. Suspected LAST → stop, O2, treat seizures, 20% lipid emulsion 1.5 mL/kg.',
+    citations: [
+        'Roberts JR, et al. Roberts and Hedges\u2019 Clinical Procedures. 8th ed. Elsevier; 2023. Ch. 30.',
+        'Neal JM, et al. ASRA Practice Advisory on LAST. Reg Anesth Pain Med. 2018;43(2):113-123.',
+    ],
+    computeResult: (values) => {
+        const weight = values['weight'] || 0;
+        const mgPerKg = (values['agent'] || 0) / 10;
+        const mgPerMl = (values['conc'] || 0) / 10;
+        const volume = values['volume'] || 0;
+        if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0 || volume <= 0) {
+            return {
+                value: '--',
+                label: 'Enter values',
+                description: 'Enter weight, agent, concentration, and total volume given to compute the running total.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const maxMg = weight * mgPerKg;
+        const givenMg = volume * mgPerMl;
+        const pct = Math.round((givenMg / maxMg) * 100);
+        let label;
+        let colorVar;
+        if (pct < 50) {
+            label = 'Well Within Limit';
+            colorVar = '--color-primary';
+        }
+        else if (pct < 80) {
+            label = 'Approaching Limit';
+            colorVar = '--color-warning';
+        }
+        else {
+            label = 'At / Over Limit — STOP';
+            colorVar = '--color-danger';
+        }
+        return {
+            value: `${pct}% of max`,
+            label,
+            description: `**GIVEN:** ${Math.round(givenMg)} mg (${volume} mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${weight} kg × ${mgPerKg} mg/kg)\n\n**REMAINING:** ${Math.max(0, Math.round(maxMg - givenMg))} mg\n\n${pct >= 80 ? '**WARNING:** At or over the maximum — do not give more; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
+            colorVar,
+        };
+    },
+};
+// 3) LAST rescue — 20% lipid emulsion dosing
+const FNB_LAST_LIPID_CALCULATOR = {
+    id: 'fnb-last-lipid',
+    title: 'LAST — Lipid Emulsion Dose',
+    subtitle: '20% intralipid rescue',
+    description: 'Calculates the 20% lipid-emulsion (Intralipid) regimen for local-anesthetic systemic toxicity: initial bolus, continuous infusion rate, and the recommended upper dosing limit. Use the moment LAST is suspected during or after a block.',
+    fields: [
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Use actual body weight, capped at 70 kg per ASRA' },
+    ],
+    results: [],
+    thresholdNote: 'Concurrently: stop injecting, call for help, manage airway/100% O2, treat seizures with benzodiazepine, avoid propofol in cardiovascular collapse. ACLS with reduced epinephrine boluses (\u22641 mcg/kg).',
+    citations: [
+        'Neal JM, et al. ASRA Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.',
+        'Weinberg GL. Lipid emulsion infusion: resuscitation for local anesthetic and other drug overdose. Anesthesiology. 2012;117(1):180-187.',
+    ],
+    computeResult: (values) => {
+        const rawWeight = values['weight'] || 0;
+        if (rawWeight <= 0) {
+            return {
+                value: '--',
+                label: 'Enter weight',
+                description: 'Enter patient weight to calculate the 20% lipid emulsion regimen.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const weight = Math.min(rawWeight, 70); // ASRA caps dosing weight at 70 kg
+        const bolusMl = Math.round(1.5 * weight * 10) / 10; // 1.5 mL/kg
+        const infRateMlMin = Math.round(0.25 * weight * 10) / 10; // 0.25 mL/kg/min
+        const maxMl = Math.round(12 * weight); // ~12 mL/kg upper limit
+        const capNote = rawWeight > 70 ? ` (capped at 70 kg; actual ${rawWeight} kg)` : '';
+        return {
+            value: `${bolusMl} mL bolus`,
+            label: '20% Lipid Emulsion',
+            description: `**BOLUS:** **${bolusMl} mL** of 20% lipid emulsion IV over ~1 min (1.5 mL/kg${capNote})\n\n**INFUSION:** **${infRateMlMin} mL/min** (0.25 mL/kg/min); double to ${Math.round(infRateMlMin * 2 * 10) / 10} mL/min if BP stays low\n\n**REPEAT BOLUS:** may repeat 1–2× for persistent collapse\n\n**UPPER LIMIT:** ~**${maxMl} mL** (12 mL/kg) over the first 30 min\n\n**ALSO:** stop LA, 100% O2, treat seizures, ACLS with reduced epinephrine (\u22641 mcg/kg), avoid propofol if unstable.`,
+            colorVar: '--color-danger',
+        };
+    },
+};
+// 4) Agent onset/duration quick reference
+const FNB_ONSET_DURATION_CALCULATOR = {
+    id: 'fnb-onset-duration',
+    title: 'LA Onset & Duration',
+    subtitle: 'Pick agent → expected timing',
+    description: 'Quick reference for the onset and duration of the local anesthetics used in facial blocks, so you know how long to wait before testing and how long anesthesia should last for the repair.',
+    fields: [
+        {
+            name: 'agent',
+            label: 'Agent / Formulation',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Lidocaine 1–2% (plain)', points: 1 },
+                { label: 'Lidocaine 1–2% with epinephrine', points: 2 },
+                { label: 'Bupivacaine 0.25–0.5% (plain)', points: 3 },
+                { label: 'Bupivacaine 0.25–0.5% with epinephrine', points: 4 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Always test the territory with pinprick before starting; wait the longer end of the onset window for bupivacaine.',
+    citations: [
+        'Roberts JR, et al. Roberts and Hedges\u2019 Clinical Procedures. 8th ed. Elsevier; 2023. Ch. 30.',
+        'Tintinalli JE, et al. Tintinalli\u2019s Emergency Medicine. 9th ed. McGraw-Hill; 2020. Local and Regional Anesthesia.',
+    ],
+    computeResult: (values) => {
+        const a = values['agent'] || 0;
+        if (a <= 0) {
+            return { value: '--', label: 'Select an agent', description: 'Choose an agent/formulation to see onset and duration.', colorVar: '--color-text-muted' };
+        }
+        const map = {
+            1: { onset: '2–5 min', duration: '1–2 h', note: 'Fast, short — good for quick repairs.' },
+            2: { onset: '2–5 min', duration: '2–4 h', note: 'Epinephrine prolongs duration and reduces bleeding/absorption.' },
+            3: { onset: '5–10 min', duration: '4–8 h', note: 'Slow onset — wait the full window before testing. Long duration good for prolonged repairs.' },
+            4: { onset: '5–10 min', duration: '6–12 h', note: 'Longest duration; epinephrine adds margin against toxicity.' },
+        };
+        const r = map[a];
+        return {
+            value: r.onset,
+            label: 'Onset → Duration',
+            description: `**ONSET:** **${r.onset}**\n\n**DURATION:** **${r.duration}**\n\n**NOTE:** ${r.note}`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// 5) Region → recommended block selector (nerve + foramen/landmark)
+const FNB_BLOCK_SELECTOR_CALCULATOR = {
+    id: 'fnb-block-selector',
+    title: 'Block Selector',
+    subtitle: 'Region → nerve + landmark',
+    description: 'Pick the facial region of the wound and get the target nerve, the block to perform, and the surface landmark — a fast bedside cross-reference for the full consult.',
+    fields: [
+        {
+            name: 'region',
+            label: 'Wound / Procedure Region',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Forehead / anterior scalp', points: 1 },
+                { label: 'Medial canthus / nose bridge', points: 2 },
+                { label: 'Lower eyelid / cheek / upper lip', points: 3 },
+                { label: 'Nasal tip / ala', points: 4 },
+                { label: 'Lower lip / chin', points: 5 },
+                { label: 'Mandibular teeth / hemi-lower-lip', points: 6 },
+                { label: 'Temple / anterior ear', points: 7 },
+                { label: 'External ear (auricle)', points: 8 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Foramina (supraorbital, infraorbital, mental) all line up vertically at the mid-pupillary line. Inject ADJACENT to, never INTO, the foramen.',
+    citations: [
+        'Roberts JR, et al. Roberts and Hedges\u2019 Clinical Procedures. 8th ed. Elsevier; 2023. Ch. 64, Regional Nerve Blocks of the Head and Neck.',
+    ],
+    computeResult: (values) => {
+        const r = values['region'] || 0;
+        if (r <= 0) {
+            return { value: '--', label: 'Select a region', description: 'Choose the wound region to see the target nerve and landmark.', colorVar: '--color-text-muted' };
+        }
+        const map = {
+            1: { block: 'Supraorbital + supratrochlear', nerve: 'V1 (ophthalmic)', landmark: 'Supraorbital notch at mid-pupillary line on the brow ridge; supratrochlear ~1 cm medial.' },
+            2: { block: 'Infratrochlear', nerve: 'V1 (ophthalmic)', landmark: 'Superomedial orbital angle, just above the medial canthus; aim away from the globe.' },
+            3: { block: 'Infraorbital', nerve: 'V2 (maxillary)', landmark: 'Infraorbital foramen ~1 cm below the orbital rim at mid-pupillary line; intraoral via gingivobuccal sulcus.' },
+            4: { block: 'External nasal branch ± bilateral infraorbital', nerve: 'V1 + V2', landmark: 'Nasal bone–upper-lateral-cartilage junction (external nasal branch); add infraorbital for the ala. Small volumes.' },
+            5: { block: 'Mental', nerve: 'V3 (mandibular)', landmark: 'Mental foramen below the 2nd premolar at mid-pupillary line; intraoral via sulcus. Bilateral for midline.' },
+            6: { block: 'Inferior alveolar', nerve: 'V3 (mandibular)', landmark: 'Mandibular foramen via the coronoid notch; contact bone, withdraw 1 mm, aspirate (vascular).' },
+            7: { block: 'Auriculotemporal', nerve: 'V3 (mandibular)', landmark: 'Anterior to the tragus, posterior to the superficial temporal artery pulse; aspirate (artery!).' },
+            8: { block: 'Ear ring block', nerve: 'Auriculotemporal + great auricular (± lesser occipital)', landmark: 'Subcutaneous ring from superior + inferior entries, anterior + posterior passes. Concha/canal = Arnold/vagus — infiltrate separately.' },
+        };
+        const m = map[r];
+        return {
+            value: m.block,
+            label: m.nerve,
+            description: `**BLOCK:** **${m.block}**\n\n**TARGET NERVE:** ${m.nerve}\n\n**LANDMARK:** ${m.landmark}`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// ============================================================
+// Dental / Intraoral Nerve Blocks (added 2026-06-20)
+// ============================================================
+// 1) Max LA dose by cartridge — dental cartridges are 1.8 mL
+const DNB_LA_MAX_DOSE_CALCULATOR = {
+    id: 'dnb-la-max-dose',
+    title: 'Max LA Dose (Cartridges)',
+    subtitle: 'Weight-based max → # of dental cartridges',
+    description: 'Calculates the maximum safe local-anesthetic dose for intraoral dental blocks and converts it to how many 1.8 mL dental cartridges that allows at the chosen concentration. Dental LA is dispensed in 1.8 mL cartridges, so tracking cartridge count is the practical safety check. Maxima per Roberts & Hedges / Malamed / ASRA.',
+    fields: [
+        {
+            name: 'weight',
+            label: 'Patient Weight',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'kg',
+            description: 'Use lean/ideal body weight in obese patients; pediatric maxima are weight-critical',
+        },
+        {
+            name: 'agent',
+            label: 'Agent',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            description: 'Max mg/kg encoded in the option value',
+            selectOptions: [
+                { label: 'Lidocaine 2% with epi — 7 mg/kg', points: 70 },
+                { label: 'Lidocaine 2% plain — 4.5 mg/kg', points: 45 },
+                { label: 'Articaine 4% with epi — 7 mg/kg', points: 70 },
+                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg', points: 30 },
+            ],
+        },
+        {
+            name: 'conc',
+            label: 'Concentration',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            description: 'mg per mL (2% = 20 mg/mL)',
+            selectOptions: [
+                { label: '0.5% (5 mg/mL) — bupivacaine', points: 50 },
+                { label: '2% (20 mg/mL) — lidocaine', points: 200 },
+                { label: '4% (40 mg/mL) — articaine', points: 400 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'These are maxima — use the smallest effective volume. 1 dental cartridge = 1.8 mL. Aspirate before every injection; double-aspirate for the inferior alveolar block.',
+    citations: [
+        'Malamed SF. Handbook of Local Anesthesia. 7th ed. Elsevier; 2020. Maximum recommended doses.',
+        'Roberts JR, et al. Roberts and Hedges\u2019 Clinical Procedures. 8th ed. Elsevier; 2023. Ch. 30.',
+        'Neal JM, et al. ASRA Practice Advisory on LAST. Reg Anesth Pain Med. 2018;43(2):113-123.',
+    ],
+    computeResult: (values) => {
+        const weight = values['weight'] || 0;
+        const mgPerKg = (values['agent'] || 0) / 10; // 70→7, 45→4.5, 30→3
+        const mgPerMl = (values['conc'] || 0) / 10; // 50→5, 200→20, 400→40
+        if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0) {
+            return {
+                value: '--',
+                label: 'Enter values',
+                description: 'Enter weight, agent, and concentration to calculate the maximum dose and cartridge count.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const maxMg = Math.round(weight * mgPerKg);
+        const maxMl = Math.round((maxMg / mgPerMl) * 10) / 10;
+        const cartridges = Math.floor(maxMl / 1.8);
+        return {
+            value: `${cartridges} cartridges`,
+            label: 'Maximum Safe Dose',
+            description: `**MAX DOSE:** **${maxMg} mg** (${weight} kg × ${mgPerKg} mg/kg)\n\n**MAX VOLUME at this concentration:** **${maxMl} mL** (${maxMg} mg ÷ ${mgPerMl} mg/mL)\n\n**MAX DENTAL CARTRIDGES (1.8 mL each):** **${cartridges}**\n\n**REMEMBER:** Each intraoral block uses only ~0.3–1.8 mL. Use the smallest effective volume, track cartridge count, and ASPIRATE before every injection.`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// 2) Running LA volume tracker (by cartridges given)
+const DNB_VOLUME_TRACKER_CALCULATOR = {
+    id: 'dnb-volume-tracker',
+    title: 'LA Cartridge / Toxicity Tracker',
+    subtitle: 'Cartridges given vs maximum',
+    description: 'Tracks total local-anesthetic given across multiple intraoral blocks (in 1.8 mL cartridges) and reports the fraction of the patient\u2019s maximum already used. Use when doing several blocks in one session.',
+    fields: [
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+        {
+            name: 'agent',
+            label: 'Agent',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Lidocaine 2% with epi — 7 mg/kg', points: 70 },
+                { label: 'Lidocaine 2% plain — 4.5 mg/kg', points: 45 },
+                { label: 'Articaine 4% with epi — 7 mg/kg', points: 70 },
+                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg', points: 30 },
+            ],
+        },
+        {
+            name: 'conc',
+            label: 'Concentration',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '0.5% (5 mg/mL)', points: 50 },
+                { label: '2% (20 mg/mL)', points: 200 },
+                { label: '4% (40 mg/mL)', points: 400 },
+            ],
+        },
+        { name: 'cartridges', label: 'Cartridges Given So Far', type: 'number', points: 0, valueIsPoints: true, unit: 'cartridges', description: 'Number of 1.8 mL cartridges used at this concentration' },
+    ],
+    results: [],
+    thresholdNote: 'Stay well under 100% of max. Suspected LAST → stop, O2, treat seizures, 20% lipid emulsion 1.5 mL/kg.',
+    citations: [
+        'Malamed SF. Handbook of Local Anesthesia. 7th ed. Elsevier; 2020.',
+        'Neal JM, et al. ASRA Practice Advisory on LAST. Reg Anesth Pain Med. 2018;43(2):113-123.',
+    ],
+    computeResult: (values) => {
+        const weight = values['weight'] || 0;
+        const mgPerKg = (values['agent'] || 0) / 10;
+        const mgPerMl = (values['conc'] || 0) / 10;
+        const cartridges = values['cartridges'] || 0;
+        if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0 || cartridges <= 0) {
+            return {
+                value: '--',
+                label: 'Enter values',
+                description: 'Enter weight, agent, concentration, and cartridges given to compute the running total.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const maxMg = weight * mgPerKg;
+        const givenMg = cartridges * 1.8 * mgPerMl;
+        const pct = Math.round((givenMg / maxMg) * 100);
+        let label;
+        let colorVar;
+        if (pct < 50) {
+            label = 'Well Within Limit';
+            colorVar = '--color-primary';
+        }
+        else if (pct < 80) {
+            label = 'Approaching Limit';
+            colorVar = '--color-warning';
+        }
+        else {
+            label = 'At / Over Limit — STOP';
+            colorVar = '--color-danger';
+        }
+        return {
+            value: `${pct}% of max`,
+            label,
+            description: `**GIVEN:** ${Math.round(givenMg)} mg (${cartridges} cartridges × 1.8 mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${weight} kg × ${mgPerKg} mg/kg)\n\n**REMAINING:** ${Math.max(0, Math.round(maxMg - givenMg))} mg (~${Math.max(0, Math.floor((maxMg - givenMg) / (1.8 * mgPerMl)))} more cartridges)\n\n${pct >= 80 ? '**WARNING:** At or over the maximum — do not give more; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
+            colorVar,
+        };
+    },
+};
+// 3) LAST rescue — 20% lipid emulsion dosing (shared regimen)
+const DNB_LAST_LIPID_CALCULATOR = {
+    id: 'dnb-last-lipid',
+    title: 'LAST — Lipid Emulsion Dose',
+    subtitle: '20% intralipid rescue',
+    description: 'Calculates the 20% lipid-emulsion (Intralipid) regimen for local-anesthetic systemic toxicity: initial bolus, continuous infusion rate, and the recommended upper dosing limit. Use the moment LAST is suspected during or after an intraoral block.',
+    fields: [
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Use actual body weight, capped at 70 kg per ASRA' },
+    ],
+    results: [],
+    thresholdNote: 'Concurrently: stop injecting, call for help, manage airway/100% O2, treat seizures with benzodiazepine, avoid propofol in cardiovascular collapse. ACLS with reduced epinephrine boluses (\u22641 mcg/kg).',
+    citations: [
+        'Neal JM, et al. ASRA Practice Advisory on Local Anesthetic Systemic Toxicity. Reg Anesth Pain Med. 2018;43(2):113-123.',
+        'Weinberg GL. Lipid emulsion infusion: resuscitation for local anesthetic and other drug overdose. Anesthesiology. 2012;117(1):180-187.',
+    ],
+    computeResult: (values) => {
+        const rawWeight = values['weight'] || 0;
+        if (rawWeight <= 0) {
+            return {
+                value: '--',
+                label: 'Enter weight',
+                description: 'Enter patient weight to calculate the 20% lipid emulsion regimen.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const weight = Math.min(rawWeight, 70); // ASRA caps dosing weight at 70 kg
+        const bolusMl = Math.round(1.5 * weight * 10) / 10; // 1.5 mL/kg
+        const infRateMlMin = Math.round(0.25 * weight * 10) / 10; // 0.25 mL/kg/min
+        const maxMl = Math.round(12 * weight); // ~12 mL/kg upper limit
+        const capNote = rawWeight > 70 ? ` (capped at 70 kg; actual ${rawWeight} kg)` : '';
+        return {
+            value: `${bolusMl} mL bolus`,
+            label: '20% Lipid Emulsion',
+            description: `**BOLUS:** **${bolusMl} mL** of 20% lipid emulsion IV over ~1 min (1.5 mL/kg${capNote})\n\n**INFUSION:** **${infRateMlMin} mL/min** (0.25 mL/kg/min); double to ${Math.round(infRateMlMin * 2 * 10) / 10} mL/min if BP stays low\n\n**REPEAT BOLUS:** may repeat 1–2× for persistent collapse\n\n**UPPER LIMIT:** ~**${maxMl} mL** (12 mL/kg) over the first 30 min\n\n**ALSO:** stop LA, 100% O2, treat seizures, ACLS with reduced epinephrine (\u22641 mcg/kg), avoid propofol if unstable.`,
+            colorVar: '--color-danger',
+        };
+    },
+};
+// 4) Agent onset/duration quick reference (dental concentrations)
+const DNB_ONSET_DURATION_CALCULATOR = {
+    id: 'dnb-onset-duration',
+    title: 'LA Onset & Duration',
+    subtitle: 'Pick agent → expected timing',
+    description: 'Quick reference for the onset, pulpal (tooth) duration, and soft-tissue duration of the local anesthetics used in intraoral dental blocks, so you know how long to wait before testing and how long anesthesia should last.',
+    fields: [
+        {
+            name: 'agent',
+            label: 'Agent / Formulation',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Lidocaine 2% with epi 1:100,000', points: 1 },
+                { label: 'Articaine 4% with epi', points: 2 },
+                { label: 'Bupivacaine 0.5% with epi', points: 3 },
+                { label: 'Lidocaine 2% plain (no epi)', points: 4 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Always test the territory (lower-lip numbness for IANB) before starting; wait the longer end of the onset window for bupivacaine and for the IANB.',
+    citations: [
+        'Malamed SF. Handbook of Local Anesthesia. 7th ed. Elsevier; 2020. Pharmacology and duration tables.',
+        'Tintinalli JE, et al. Tintinalli\u2019s Emergency Medicine. 9th ed. McGraw-Hill; 2020.',
+    ],
+    computeResult: (values) => {
+        const a = values['agent'] || 0;
+        if (a <= 0) {
+            return { value: '--', label: 'Select an agent', description: 'Choose an agent/formulation to see onset and duration.', colorVar: '--color-text-muted' };
+        }
+        const map = {
+            1: { onset: '2–5 min (block 5–10 min)', pulpal: '~60 min', soft: '3–4 h', note: 'Standard ED/dental workhorse. Epinephrine prolongs duration and reduces bleeding.' },
+            2: { onset: '1–3 min', pulpal: '~60–75 min', soft: '3–5 h', note: 'Superior soft-tissue diffusion; favored by dentistry. Avoid repeated mandibular blocks (paresthesia signal in literature).' },
+            3: { onset: '5–10 min (block up to 10–15 min)', pulpal: '~90–180 min', soft: '4–9 h', note: 'Long duration — good for prolonged pain control / overnight relief. Wait the full onset window.' },
+            4: { onset: '2–5 min', pulpal: '~10–20 min', soft: '1–2 h', note: 'Short — plain lidocaine pulpal anesthesia is brief; epinephrine markedly extends it.' },
+        };
+        const r = map[a];
+        return {
+            value: r.onset,
+            label: 'Onset → Pulpal / Soft-tissue',
+            description: `**ONSET:** **${r.onset}**\n\n**PULPAL (tooth) DURATION:** **${r.pulpal}**\n\n**SOFT-TISSUE DURATION:** **${r.soft}** (warn the patient about the numb lip/tongue this long)\n\n**NOTE:** ${r.note}`,
+            colorVar: '--color-primary',
+        };
+    },
+};
+// 5) Tooth / region → recommended block selector (nerve + landmark)
+const DNB_BLOCK_SELECTOR_CALCULATOR = {
+    id: 'dnb-block-selector',
+    title: 'Block Selector',
+    subtitle: 'Tooth / region → nerve + landmark',
+    description: 'Pick the tooth or intraoral region and get the target nerve, the block to perform, and the surface landmark — a fast bedside cross-reference for the full dental-block consult.',
+    fields: [
+        {
+            name: 'region',
+            label: 'Tooth / Region',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Single maxillary tooth (any)', points: 1 },
+                { label: 'Maxillary incisors / canine', points: 2 },
+                { label: 'Maxillary premolars', points: 3 },
+                { label: 'Maxillary molars', points: 4 },
+                { label: 'Posterior hard palate', points: 5 },
+                { label: 'Anterior hard palate', points: 6 },
+                { label: 'Any mandibular tooth (quadrant)', points: 7 },
+                { label: 'Mandibular premolars-to-midline / lower lip', points: 8 },
+                { label: 'Buccal gingiva of mandibular molars', points: 9 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Maxillary teeth respond to infiltration/superior-alveolar blocks (porous bone); mandibular teeth need the inferior alveolar block (dense bone). Inject ADJACENT to, never INTO, the foramen.',
+    citations: [
+        'Roberts JR, et al. Roberts and Hedges\u2019 Clinical Procedures. 8th ed. Elsevier; 2023. Ch. 64.',
+        'Malamed SF. Handbook of Local Anesthesia. 7th ed. Elsevier; 2020.',
+    ],
+    computeResult: (values) => {
+        const r = values['region'] || 0;
+        if (r <= 0) {
+            return { value: '--', label: 'Select a tooth/region', description: 'Choose the tooth or region to see the target nerve and landmark.', colorVar: '--color-text-muted' };
+        }
+        const map = {
+            1: { block: 'Supraperiosteal (local) infiltration', nerve: 'Terminal V2 (maxillary) apical branches', landmark: 'Mucobuccal fold at the root apex of the target tooth, bevel to bone, ~1–1.8 mL. Buccal only (not palate).' },
+            2: { block: 'Anterior superior alveolar / infraorbital', nerve: 'V2 — ASA branch of infraorbital', landmark: 'Infraorbital foramen ~1 cm below the rim at mid-pupillary line; intraoral via 1st-premolar sulcus, finger over foramen, 1.5–3 mL.' },
+            3: { block: 'Middle superior alveolar (MSA)', nerve: 'V2 — MSA (absent in 30–50%, use ASA)', landmark: 'Mucobuccal fold above the 2nd premolar apex, ~0.9–1.8 mL.' },
+            4: { block: 'Posterior superior alveolar (PSA)', nerve: 'V2 — PSA', landmark: 'Above the 2nd molar; advance up/in/back ~16 mm along the tuberosity. Aspirate — pterygoid plexus hematoma risk.' },
+            5: { block: 'Greater (anterior) palatine', nerve: 'V2 — greater palatine', landmark: 'Greater palatine foramen ~1 cm medial to the 2nd/3rd molar gingiva. Pressure first, 0.3–0.5 mL only.' },
+            6: { block: 'Nasopalatine', nerve: 'V2 — nasopalatine', landmark: 'Incisive foramen under the incisive papilla behind the central incisors; approach lateral to papilla, 0.3–0.5 mL.' },
+            7: { block: 'Inferior alveolar (IANB) ± lingual', nerve: 'V3 — inferior alveolar + lingual', landmark: 'Coronoid notch, barrel over contralateral premolars, contact bone ~20–25 mm, withdraw 1 mm, double-aspirate, 1.5 mL + 0.5 mL for lingual.' },
+            8: { block: 'Mental (± incisive)', nerve: 'V3 — mental / incisive', landmark: 'Mental foramen below the 1st/2nd premolars at mid-pupillary line; ~1–1.8 mL; pressure over foramen for incisive (pulpal). Bilateral for midline lip.' },
+            9: { block: '(Long) buccal', nerve: 'V3 — buccal (long buccal)', landmark: 'Submucosa distal/buccal to the last mandibular molar at the occlusal plane, ~0.3 mL. Adjunct to IANB.' },
+        };
+        const m = map[r];
+        return {
+            value: m.block,
+            label: m.nerve,
+            description: `**BLOCK:** **${m.block}**\n\n**TARGET NERVE:** ${m.nerve}\n\n**LANDMARK:** ${m.landmark}`,
+            colorVar: '--color-primary',
+        };
+    },
+};
 const CALCULATORS = {
+    // Dental / Intraoral Nerve Blocks (added 2026-06-20)
+    'dnb-la-max-dose': DNB_LA_MAX_DOSE_CALCULATOR,
+    'dnb-volume-tracker': DNB_VOLUME_TRACKER_CALCULATOR,
+    'dnb-last-lipid': DNB_LAST_LIPID_CALCULATOR,
+    'dnb-onset-duration': DNB_ONSET_DURATION_CALCULATOR,
+    'dnb-block-selector': DNB_BLOCK_SELECTOR_CALCULATOR,
+    // Facial Peripheral Nerve Block (added 2026-06-20)
+    'fnb-la-max-dose': FNB_LA_MAX_DOSE_CALCULATOR,
+    'fnb-volume-tracker': FNB_VOLUME_TRACKER_CALCULATOR,
+    'fnb-last-lipid': FNB_LAST_LIPID_CALCULATOR,
+    'fnb-onset-duration': FNB_ONSET_DURATION_CALCULATOR,
+    'fnb-block-selector': FNB_BLOCK_SELECTOR_CALCULATOR,
     // TEG (Thromboelastography) — TEG 6s trauma cartridge
     'teg6s-interpreter': TEG6S_INTERPRETER_CALCULATOR,
     'teg-fibrinolysis': TEG_FIBRINOLYSIS_CALCULATOR,

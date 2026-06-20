@@ -58,6 +58,20 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
 ]);
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'dental-nerve-blocks': [
+    { id: 'dnb-max-dose', label: 'Max Dose', icon: '🧮', action: 'calculator', target: 'dnb-la-max-dose', pinned: true },
+    { id: 'dnb-selector', label: 'Block Selector', icon: '🎯', action: 'calculator', target: 'dnb-block-selector', pinned: true },
+    { id: 'dnb-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dnb-steps', pinned: true },
+    { id: 'dnb-last', label: 'LAST Rescue', icon: '💉', action: 'calculator', target: 'dnb-last-lipid', pinned: true },
+    { id: 'dnb-stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'dnb-stop', pinned: true },
+  ],
+  'facial-nerve-block': [
+    { id: 'fnb-max-dose', label: 'Max Dose', icon: '🧮', action: 'calculator', target: 'fnb-la-max-dose', pinned: true },
+    { id: 'fnb-selector', label: 'Block Selector', icon: '🎯', action: 'calculator', target: 'fnb-block-selector', pinned: true },
+    { id: 'fnb-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'fnb-steps', pinned: true },
+    { id: 'fnb-last', label: 'LAST Rescue', icon: '💉', action: 'calculator', target: 'fnb-last-lipid', pinned: true },
+    { id: 'fnb-stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'fnb-stop', pinned: true },
+  ],
   'teg': [
     { id: 'teg-interpreter', label: 'TEG 6s', icon: '📊', action: 'calculator', target: 'teg6s-interpreter', pinned: true },
     { id: 'teg-fibrinolysis', label: 'Fibrinolysis', icon: '🧮', action: 'calculator', target: 'teg-fibrinolysis', pinned: true },

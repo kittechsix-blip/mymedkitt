@@ -11,7 +11,7 @@
 // page's sections into {title, blurb, anchorId}. Adding a trick (a new section)
 // automatically populates both the directory and search — no extra bookkeeping.
 import { router } from '../services/router.js';
-import { TRICK_SPECIALTIES, getTrickSpecialty, getTrickList } from '../data/tricks-registry.js';
+import { TRICK_SPECIALTIES, getTrickSpecialty, getTrickList, getTrickSpecialtiesByCategory } from '../data/tricks-registry.js';
 import { getInfoPage } from '../services/info-service.js';
 import { showInfoModal } from './info-page.js';
 /** Build the full alphabetical list of every trick across all specialties. */
@@ -104,6 +104,34 @@ function trickRow(title, blurb, specialtyLabel, onClick) {
     row.addEventListener('click', onClick);
     return row;
 }
+/** Build one tappable specialty card (gradient, icon, label, subtitle, live count). */
+function buildSpecialtyCard(spec) {
+    const count = getTrickList(getInfoPage(spec.infoPageId)).length;
+    const card = document.createElement('button');
+    card.className = 'trick-card';
+    card.type = 'button';
+    card.setAttribute('aria-label', `Open ${spec.label} tricks`);
+    card.style.background = `linear-gradient(135deg, ${spec.color} 0%, ${shade(spec.color, -18)} 100%)`;
+    const icon = document.createElement('div');
+    icon.className = 'trick-card__icon';
+    icon.textContent = spec.icon;
+    icon.setAttribute('aria-hidden', 'true');
+    card.appendChild(icon);
+    const cardTitle = document.createElement('div');
+    cardTitle.className = 'trick-card__title';
+    cardTitle.textContent = spec.label;
+    card.appendChild(cardTitle);
+    const cardSub = document.createElement('div');
+    cardSub.className = 'trick-card__sub';
+    cardSub.textContent = spec.subtitle;
+    card.appendChild(cardSub);
+    const countEl = document.createElement('div');
+    countEl.className = 'trick-card__count';
+    countEl.textContent = count === 1 ? '1 trick' : `${count} tricks`;
+    card.appendChild(countEl);
+    card.addEventListener('click', () => router.navigate(`/tricks/${spec.id}`));
+    return card;
+}
 // ===================================================================
 // /tricks — specialty grid + cross-specialty search
 // ===================================================================
@@ -134,37 +162,26 @@ export function renderTricksHome(container) {
     input.setAttribute('aria-label', 'Search all tricks');
     searchWrap.appendChild(input);
     page.appendChild(searchWrap);
-    // ---- Grid (default) ----
-    const grid = document.createElement('div');
-    grid.className = 'tricks-home__grid';
-    for (const spec of TRICK_SPECIALTIES) {
-        const count = getTrickList(getInfoPage(spec.infoPageId)).length;
-        const card = document.createElement('button');
-        card.className = 'trick-card';
-        card.type = 'button';
-        card.setAttribute('aria-label', `Open ${spec.label} tricks`);
-        card.style.background = `linear-gradient(135deg, ${spec.color} 0%, ${shade(spec.color, -18)} 100%)`;
-        const icon = document.createElement('div');
-        icon.className = 'trick-card__icon';
-        icon.textContent = spec.icon;
-        icon.setAttribute('aria-hidden', 'true');
-        card.appendChild(icon);
-        const cardTitle = document.createElement('div');
-        cardTitle.className = 'trick-card__title';
-        cardTitle.textContent = spec.label;
-        card.appendChild(cardTitle);
-        const cardSub = document.createElement('div');
-        cardSub.className = 'trick-card__sub';
-        cardSub.textContent = spec.subtitle;
-        card.appendChild(cardSub);
-        const countEl = document.createElement('div');
-        countEl.className = 'trick-card__count';
-        countEl.textContent = count === 1 ? '1 trick' : `${count} tricks`;
-        card.appendChild(countEl);
-        card.addEventListener('click', () => router.navigate(`/tricks/${spec.id}`));
-        grid.appendChild(card);
+    // ---- Grouped grid (default): one labeled section per category ----
+    // `groups` wraps all category sections so search can hide them in one toggle.
+    const groups = document.createElement('div');
+    groups.className = 'tricks-home__groups';
+    for (const { category, specialties } of getTrickSpecialtiesByCategory()) {
+        const section = document.createElement('section');
+        section.className = 'tricks-home__category';
+        const heading = document.createElement('h2');
+        heading.className = 'tricks-home__category-title';
+        heading.textContent = category.label;
+        section.appendChild(heading);
+        const grid = document.createElement('div');
+        grid.className = 'tricks-home__grid';
+        for (const spec of specialties) {
+            grid.appendChild(buildSpecialtyCard(spec));
+        }
+        section.appendChild(grid);
+        groups.appendChild(section);
     }
-    page.appendChild(grid);
+    page.appendChild(groups);
     // ---- Search results (hidden until typing) ----
     const results = document.createElement('div');
     results.className = 'tricks-directory';
@@ -175,10 +192,10 @@ export function renderTricksHome(container) {
         const query = q.trim().toLowerCase();
         if (!query) {
             results.style.display = 'none';
-            grid.style.display = '';
+            groups.style.display = '';
             return;
         }
-        grid.style.display = 'none';
+        groups.style.display = 'none';
         results.style.display = '';
         results.innerHTML = '';
         const hits = flat

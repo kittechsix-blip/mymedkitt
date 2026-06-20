@@ -559,7 +559,7 @@ export const FUO_CITATIONS: Citation[] = [
   { num: 5, text: 'Freedman DO, et al. Spectrum of Disease and Relation to Place of Exposure among Ill Returned Travelers. N Engl J Med. 2006;354(2):119-30.' },
   { num: 6, text: 'Bleeker-Rovers CP, et al. A Prospective Multicenter Study on Fever of Unknown Origin. Medicine (Baltimore). 2007;86(1):26-38.' },
   { num: 7, text: 'Salvarani C, et al. Polymyalgia Rheumatica and Giant-Cell Arteritis. N Engl J Med. 2002;347(4):261-71.' },
-  { num: 8, text: 'Habib G, et al. 2015 ESC Guidelines for the Management of Infective Endocarditis. Eur Heart J. 2015;36(44):3075-128.' },
+  { num: 8, text: 'Fowler VG, et al. The 2023 Duke-ISCVID Criteria for Infective Endocarditis: Updating the Modified Duke Criteria. Clin Infect Dis. 2023;77(4):518-526. (Updates 2015 ESC / modified Duke criteria with new microbiology, imaging, and CIED criteria.)' },
   { num: 9, text: 'Patel RA, Gallagher JC. Drug Fever. Pharmacotherapy. 2010;30(1):57-69.' },
   { num: 10, text: 'Defined S, et al. FDG PET in Evaluation of Patients With Fever of Unknown Origin. AJR Am J Roentgenol. 2023;221(4):558-568.' },
   { num: 11, text: 'Freifeld AG, et al. Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer. Clin Infect Dis. 2011;52(4):e56-93.' },
