@@ -419,12 +419,12 @@ export const PE_PREGNANCY_CRITICAL_ACTIONS = [
   { text: 'D-dimer normally rises in pregnancy - pregnancy-adapted YEARS uses fixed thresholds (<1000 or <500 by criteria count), NOT trimester-adjusted cutoffs', nodeId: 'pep-clinical-prob' },
   { text: 'CTA chest preferred imaging (lower breast radiation than V/Q, higher diagnostic yield)', nodeId: 'pep-workup' },
   { text: 'Pregnancy-adapted YEARS: image if 0 criteria + D-dimer ≥1000, OR ≥1 criterion + D-dimer ≥500', nodeId: 'pep-clinical-prob' },
-  { text: 'Anticoagulation: LMWH preferred (enoxaparin 1 mg/kg SC q12h). Avoid warfarin (teratogenic).', nodeId: 'pep-treatment' },
-  { text: 'Thrombolysis indications: massive PE with hemodynamic instability (alteplase 100 mg IV over 2h)', nodeId: 'pep-thrombolysis' },
+  { text: 'Anticoagulation: LMWH preferred (enoxaparin 1 mg/kg SC q12h). Avoid warfarin (teratogenic).', nodeId: 'pep-lmwh-dosing' },
+  { text: 'Thrombolysis indications: massive PE with hemodynamic instability (alteplase 100 mg IV over 2h)', nodeId: 'pep-tpa-dosing' },
   { text: 'Pregnancy is 5-10x increased VTE risk (highest risk in 3rd trimester and postpartum)', nodeId: 'pep-start' },
   { text: 'Continue LMWH until delivery, switch to UFH at 36 weeks (shorter half-life for neuraxial anesthesia)', nodeId: 'pep-disposition' },
   { text: 'Postpartum anticoagulation for 6 weeks minimum (can use warfarin postpartum)', nodeId: 'pep-disposition' },
-  { text: 'Fetal radiation exposure: CTA chest ~0.01-0.66 mGy (safe, <50 mGy threshold)', nodeId: 'pep-start' },
+  { text: 'Fetal radiation exposure: CTA chest ~0.01-0.66 mGy (safe, <50 mGy threshold)', nodeId: 'pep-workup' },
 ];
 
 export const PE_PREGNANCY_CITATIONS: Citation[] = [

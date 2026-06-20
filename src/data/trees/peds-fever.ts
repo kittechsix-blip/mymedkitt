@@ -1113,14 +1113,14 @@ export const PEDS_FEVER_MODULE_LABELS = [
 // -------------------------------------------------------------------
 
 export const PEDS_FEVER_CRITICAL_ACTIONS = [
-  { text: 'Age-stratified workup: <21 days = full sepsis workup + empiric antibiotics, 22-28 days = Step-by-Step algorithm', nodeId: 'pf-start' },
+  { text: 'Age-stratified workup: <21 days = full sepsis workup + empiric antibiotics, 22-28 days = Step-by-Step algorithm', nodeId: 'pf-22-im' },
   { text: 'Infants <21 days: full sepsis workup — CBC, blood culture, CMP, catheterized UA/culture, and LP (cell count, glucose/protein, Gram stain, culture, meningitis PCR; hold tube #4 for HSV PCR)', nodeId: 'pf-neo-labs' },
   { text: 'HSV workup if: <21 days, vesicular rash, seizures, CSF pleocytosis, maternal HSV, mucocutaneous lesions', nodeId: 'pf-neo-hsv' },
-  { text: 'Step-by-Step (22-90 days): CRP <2.0 mg/dL + ANC <4000 + procalcitonin <0.5 ng/mL + UA normal = low risk', nodeId: 'pf-22-screen' },
+  { text: 'Step-by-Step (22-90 days): CRP <2.0 mg/dL + ANC <4000 + procalcitonin <0.5 ng/mL + UA normal = low risk', nodeId: 'pf-22-im' },
   { text: 'UTI most common serious bacterial infection in febrile infants (5-10%)', nodeId: 'pf-22-uti' },
-  { text: 'Ceftriaxone contraindicated in neonates receiving calcium-containing IV fluids (risk of precipitation)', nodeId: 'pf-neo-mening' },
+  { text: 'Ceftriaxone contraindicated in neonates receiving calcium-containing IV fluids (risk of precipitation)', nodeId: 'pf-neo-age' },
   { text: 'Circumcised males <3 months have lower UTI risk, but still get urine culture if febrile without source', nodeId: 'pf-6m-uti' },
-  { text: 'LP required for infants <28 days and those appearing ill regardless of inflammatory markers', nodeId: 'pf-neo-csf' },
+  { text: 'LP required for infants <28 days and those appearing ill regardless of inflammatory markers', nodeId: 'pf-neo-labs' },
   { text: 'Discharge criteria: well-appearing, normal inflammatory markers, reliable follow-up in 24h', nodeId: 'pf-22-dispo' },
   { text: 'Do NOT give antipyretics before LP (may mask fever and delay diagnosis)', nodeId: 'pf-start' },
 ];

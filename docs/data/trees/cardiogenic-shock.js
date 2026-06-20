@@ -5,7 +5,7 @@
 export const CARDIOGENIC_SHOCK_CRITICAL_ACTIONS = [
     { text: 'Recognize the SHOCK spiral: hypotension worsens coronary perfusion', nodeId: 'cs-start' },
     { text: 'Obtain bedside echo to assess EF, wall motion, and valves', nodeId: 'cs-hemodynamics' },
-    { text: 'Avoid fluid boluses if POCUS shows B-lines or hyperdynamic LV', nodeId: 'cs-recognize' },
+    { text: 'Avoid fluid boluses if POCUS shows B-lines or hyperdynamic LV', nodeId: 'cs-hemodynamics' },
     { text: 'Start inotropes early: dobutamine for true cardiogenic shock', nodeId: 'cs-pressors' },
     { text: 'Add vasopressor (norepinephrine) if MAP <65 despite inotropes', nodeId: 'cs-pressor-choice' },
     { text: 'Activate cath lab immediately for STEMI-related shock', nodeId: 'cs-cath' },
