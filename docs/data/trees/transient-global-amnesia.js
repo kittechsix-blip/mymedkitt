@@ -68,7 +68,7 @@ export const TRANSIENT_GLOBAL_AMNESIA_NODES = [
         type: 'info',
         module: 3,
         title: 'Transient Epileptic Amnesia',
-        body: '**Transient Epileptic Amnesia (TEA) vs TGA:**\n\n**Suspect TEA if:**\n• Episodes <1 hour (TGA usually 4-6 hours)\n• Recurrent episodes (TGA rarely recurs)\n• Occurs upon waking\n• Subtle automatisms or lip smacking\n• History of epilepsy\n• Younger patient (<50)\n\n**TEA features:**\n• Brief episodes of isolated amnesia\n• May be only seizure manifestation\n• Often temporal lobe origin\n• Responds to antiepileptics\n\n**Workup:**\n• EEG (may need prolonged/sleep-deprived)\n• MRI brain with epilepsy protocol\n• Neurology referral\n\n**Treatment:**\n• Antiepileptic drugs (levetiracetam, lamotrigine)\n• Driving restrictions per state law [1][6]',
+        body: '**Transient Epileptic Amnesia (TEA) vs TGA:**\n\n**Suspect TEA if:**\n• Episodes <1 hour (TGA usually 4-8 hours)\n• Recurrent episodes (TGA rarely recurs)\n• Occurs upon waking\n• Subtle automatisms or lip smacking\n• History of epilepsy\n• Younger patient (<50)\n\n**TEA features:**\n• Brief episodes of isolated amnesia\n• May be only seizure manifestation\n• Often temporal lobe origin\n• Responds to antiepileptics\n\n**Workup:**\n• EEG (may need prolonged/sleep-deprived)\n• MRI brain with epilepsy protocol\n• Neurology referral\n\n**Treatment:**\n• Antiepileptic drugs (levetiracetam, lamotrigine)\n• Driving restrictions per state law [1][6]',
         next: 'tga-workup',
         citation: [1, 6],
     },

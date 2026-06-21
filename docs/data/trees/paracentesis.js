@@ -143,7 +143,7 @@ export const PARACENTESIS_NODES = [
         type: 'result',
         module: 5,
         title: 'SBP Treatment Pathway',
-        body: 'Treat PMN >=250 cells/mm3 as SBP.\n\nTypical ED actions:\n- Blood cultures if septic or not already obtained\n- Start empiric antibiotics such as [Ceftriaxone](#/drug/ceftriaxone/sbp) per local resistance pattern\n- Give [Albumin](#/drug/albumin/sbp) when renal dysfunction, high bilirubin, or severe disease criteria are met per guideline/local protocol\n- Admit and evaluate for sepsis, AKI, GI bleed, and secondary peritonitis',
+        body: 'Treat PMN >=250 cells/mm3 as SBP.\n\nTypical ED actions:\n- Blood cultures if septic or not already obtained\n- Start empiric antibiotics such as [Ceftriaxone](#/drug/ceftriaxone/sbp) per local resistance pattern\n- Give [Albumin](#/drug/albumin/sbp) **1.5 g/kg within 6 h of diagnosis, then 1.0 g/kg on day 3** (AASLD 2021) — strongest benefit when Cr >1 mg/dL, BUN >30 mg/dL, or bilirubin >4 mg/dL (Sort NEJM 1999: in-hospital mortality 10% vs 29%, AKI 10% vs 33%)\n- Admit and evaluate for sepsis, AKI, GI bleed, and secondary peritonitis',
         recommendation: 'SBP is time-sensitive infection; do not wait for culture positivity.',
         confidence: 'definitive',
         citation: [1, 2, 3],
@@ -155,7 +155,7 @@ export const PARACENTESIS_NODES = [
         type: 'result',
         module: 5,
         title: 'Large-Volume Paracentesis',
-        body: 'For therapeutic drainage, reassess symptoms, vitals, and leak/bleeding during removal.\n\nGive [Albumin](#/drug/albumin/large-volume-paracentesis) after large-volume paracentesis per guideline/local protocol, commonly when >5 L removed.',
+        body: 'For therapeutic drainage, reassess symptoms, vitals, and leak/bleeding during removal.\n\nGive [Albumin](#/drug/albumin/large-volume-paracentesis) **6-8 g per liter of ascites removed** (20% or 25% solution) when **>5 L** is removed (AASLD 2021, Class IIa). Not required for taps <4-5 L. Example: 8 L removed → 48-64 g albumin IV. Prevents post-paracentesis circulatory dysfunction.',
         recommendation: 'Albumin reduces post-paracentesis circulatory dysfunction after large-volume drainage.',
         confidence: 'recommended',
         citation: [1, 2],
@@ -201,7 +201,7 @@ export const PARACENTESIS_CRITICAL_ACTIONS = [
     { text: 'Use ultrasound to confirm a bowel-free fluid pocket.', nodeId: 'para-us-site' },
     { text: 'Send cell count/differential, culture bottles, albumin, and total protein.', nodeId: 'para-labs' },
     { text: 'Treat PMN >=250 cells/mm3 as SBP.', nodeId: 'para-sbp' },
-    { text: 'Give albumin after large-volume paracentesis per guideline/local protocol.', nodeId: 'para-albumin' },
+    { text: 'Give albumin 6-8 g/L of ascites removed when >5 L drained (AASLD 2021).', nodeId: 'para-albumin' },
 ];
 export const PARACENTESIS_CITATIONS = [
     { num: 1, text: 'Biggins SW, Angeli P, Garcia-Tsao G, et al. Diagnosis, evaluation, and management of ascites, spontaneous bacterial peritonitis and hepatorenal syndrome: 2021 practice guidance by the American Association for the Study of Liver Diseases. Hepatology. 2021;74(2):1014-1048.' },
