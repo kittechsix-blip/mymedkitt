@@ -26275,6 +26275,10 @@ const TRICKS_AIRWAY_PAGE: InfoPage = {
       heading: 'Nasopharyngeal Oxygenation via a Repurposed NPA',
       body: '**Accomplishes:** Delivers high-flow positive-pressure oxygen straight into the pharynx of a crashing upper-airway patient (angioedema, anaphylaxis, end-stage COPD) when you cannot get a mask seal. [8]\n\n**How to:**\n1. Lubricate and place a standard nasopharyngeal airway through either nostril.\n2. Connect standard wall-suction tubing (via its included adapter) to the external end of the NPA.\n3. Connect the other end of that tubing directly to a wall oxygen flowmeter.\n4. Turn the oxygen flow up well beyond the marked 0\u201315 L/min range to deliver >25 L/min of positive-pressure oxygen into the posterior pharynx.\n5. Watch for gastric insufflation and use it as a bridge while you prepare a definitive airway.\n\n**Equipment:** Nasopharyngeal airway, wall-suction tubing with adapter, wall oxygen flowmeter, lubricant.\n\n_Source: ALiEM Trick of the Trade \u2014 Nasopharyngeal oxygenation._',
     },
+    {
+      heading: 'ETT as a Guide for Rapid Orogastric Tube Placement',
+      body: '**Accomplishes:** Places an orogastric tube in seconds in an intubated patient when blind OG insertion keeps coiling in the mouth, using a spare endotracheal tube as a rigid conduit to the esophagus. [9]\n\n**How to:**\n1. Use ONLY on an already-intubated patient with a protected airway (this risks vomiting otherwise).\n2. Grip a lubricated 8.0 ETT like a dart in your dominant hand; stand at the patient\u2019s side and gently advance it down the oropharynx into the esophagus without forcing.\n3. Cover the ETT hub with a glove to stop gastric contents from spraying out.\n4. Thread a lubricated 16\u201318 French NG/OG tube through the ETT into the stomach and connect it to suction.\n5. After imaging confirms position, remove the ETT hub adaptor and slide the ETT back out over the OG tube while holding the OG in place; trim the ETT with shears if needed, then secure the OG tube.\n\n**Equipment:** Spare 8.0 endotracheal tube, 16\u201318 Fr NG/OG tube, lubricating jelly, glove, suction, trauma shears.\n\n_Source: ALiEM Trick of the Trade \u2014 Rapid insertion of an orogastric tube (Willette); Ghatak T, et al. N Am J Med Sci 2013._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Large-bore endotracheal tube to suction an occluded airway. aliem.com.' },
@@ -26285,6 +26289,7 @@ const TRICKS_AIRWAY_PAGE: InfoPage = {
     { num: 6, text: 'ALiEM. Trick of the Trade for intubation: Two hands are better than one (bimanual laryngoscopy). aliem.com. Levitan RM, et al. Bimanual laryngoscopy: external laryngeal manipulation. Ann Emerg Med. 2006.' },
     { num: 7, text: 'Weingart S. EMCrit 247 \u2014 The Dissociated Awake Intubation with ketamine. emcrit.org. Strayer R. Ketamine-only breathing intubation (KOBI). emupdates.com.' },
     { num: 8, text: 'ALiEM. Trick of the Trade: Nasopharyngeal oxygenation (NPA + suction tubing + oxygen). aliem.com.' },
+    { num: 9, text: 'ALiEM. Trick of the Trade: Rapid insertion of an orogastric tube (Willette). aliem.com. Ghatak T, et al. A new technique to insert nasogastric tube in an unconscious intubated patient. N Am J Med Sci. 2013;5(1):68-70.' },
   ],
 };
 
@@ -26394,6 +26399,14 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
       heading: 'Bougie-Guided (Seldinger) Chest Tube in the Obese Patient',
       body: '**Accomplishes:** Guarantees a chest tube actually reaches the pleural space instead of getting lost in subcutaneous fat, by railroading it over a bougie left in the chest after finger thoracostomy. [25]\n\n**How to:**\n1. Make your incision and bluntly dissect over the rib into the pleural space; perform a finger sweep to confirm you are inside the thorax (feel lung or empty cavity, not fat).\n2. Keeping your finger in the tract, slide a standard airway bougie alongside it into the pleural cavity, coude tip leading.\n3. Confirm the bougie sits intrathoracic (it advances freely and easily past your fingertip into the cavity).\n4. Load the chest tube over the bougie like a guidewire and advance the tube along the bougie into the chest.\n5. Remove the bougie, direct the tube posteriorly/apically, connect to drainage, and secure.\n\n**Equipment:** Chest tube, airway bougie, scalpel, Kelly clamp, sterile glove (finger sweep), chest-drain collection system.\n\n_Source: ALiEM Trick of the Trade \u2014 Seldinger chest tube using a bougie (Maddow/Trueger); Ann Emerg Med 2015._',
     },
+    {
+      heading: 'Bubble Study to Confirm Central Line Placement at the Bedside',
+      body: '**Accomplishes:** Confirms a central venous catheter is in the vein (not an artery) and excludes pneumothorax in minutes with ultrasound, ~24 minutes faster than waiting on a chest x-ray. [26]\n\n**How to:**\n1. First scan the lung apices for pleural sliding to rule out a pneumothorax from the stick.\n2. Look at both internal jugular veins to make sure the catheter did not get misdirected up the neck.\n3. Put the ultrasound on the heart in a subcostal or apical four-chamber view so you can see the right atrium.\n4. Have a partner inject 10 mL of saline (agitated for more bubbles) into the CVC\u2019s distal port while you watch the right atrium.\n5. A prompt shower of microbubbles in the right heart confirms venous placement (~98% specific); absent or delayed bubbles should make you doubt venous position before you use the line.\n\n**Equipment:** Point-of-care ultrasound, 10 mL saline flush, the central line\u2019s distal port.\n\n_Source: ALiEM Trick of the Trade \u2014 Bubble study for central line placement (Montrief); Duran-Gehring P, et al. Am J Emerg Med 2015._',
+    },
+    {
+      heading: 'Angiocatheter Instead of a Needle for Knee Arthrocentesis',
+      body: '**Accomplishes:** Lets you tap or inject a knee without a rigid metal needle sitting in the joint \u2014 a soft catheter stays put through syringe swaps, lets you milk out every fluid pocket, and spares cartilage from needle movement. [27]\n\n**How to:**\n1. Prep and anesthetize for arthrocentesis in the usual way (anteromedial or anterolateral approach).\n2. Put an 18-gauge angiocatheter (instead of a plain needle) on the syringe.\n3. Insert while aspirating; the instant synovial fluid returns, advance the plastic catheter into the joint and withdraw the inner needle.\n4. Aspirate through the indwelling catheter; gently milk/manipulate the knee to herd fluid toward the tip, and aspirate as you slowly withdraw to catch residual pockets (watch for catheter kinking).\n5. The same catheter lets you swap syringes or inject intra-articular steroid/anesthetic without re-sticking.\n\n**Equipment:** 18-gauge angiocatheter, syringe(s), antiseptic, sterile drapes, local anesthetic, optional intra-articular steroid.\n\n_Source: ALiEM Trick of the Trade \u2014 Knee arthrocentesis with an angiocatheter (Fred Wu)._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -26421,6 +26434,8 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
     { num: 23, text: 'ALiEM. Trick of the Trade: Needle-vein alignment in ultrasound-guided peripheral IV (Wiswell). aliem.com.' },
     { num: 24, text: 'ALiEM. Pediatric Trick of the Trade: Finger immobilization technique. aliem.com.' },
     { num: 25, text: 'ALiEM. Trick of the Trade: Seldinger chest tube technique using a bougie (Maddow/Trueger). aliem.com. See also Bougie-Assisted Tube Thoracostomy Placement. Ann Emerg Med. 2015.' },
+    { num: 26, text: 'ALiEM. Trick of the Trade: Bubble study for confirmation of central line placement (Montrief). aliem.com. Duran-Gehring P, et al. Ultrasound bubble study for central venous catheter placement confirmation. Am J Emerg Med. 2015;33(3):315-319.' },
+    { num: 27, text: 'ALiEM. Trick of the Trade: Knee arthrocentesis using an angiocatheter (Fred Wu). aliem.com.' },
   ],
 };
 
@@ -26711,6 +26726,10 @@ const TRICKS_WOUND_PAGE: InfoPage = {
       heading: 'Dissolve Adherent Tar Off a Burn With Petrolatum Ointment',
       body: '**Accomplishes:** Removes hot-tar (bitumen) stuck to a burn without the further tissue destruction and pain of harsh solvents or peeling \u2014 the petrolatum base plus emulsifier lifts the tar gradually while protecting the wound. [13]\n\n**How to:**\n1. Cool the tar immediately with water; do NOT peel adherent cooled tar (it strips skin).\n2. Do NOT use gasoline or caustic solvents.\n3. Smear the tarred area generously with a petrolatum-based ointment (e.g., bacitracin, or a polysorbate/Tween-80 emulsifier ointment).\n4. Cover with an absorbent dressing.\n5. Have the patient wash and reapply ointment with dressing changes twice daily; tar typically lifts over hours to a few days. Prefer bacitracin or a dedicated emulsifier over neomycin/Neosporin (allergic contact dermatitis risk).\n\n**Equipment:** Cool water/saline, petrolatum-based ointment (bacitracin or polysorbate/Tween-80 emulsifier), absorbent dressing.\n\n_Source: Ng et al. \u2014 Management of hot tar burn using vitamin E ointment containing petroleum and polyoxyethylene sorbitan. CJEM._',
     },
+    {
+      heading: 'Split-Tourniquet + Glue Hemostasis for a Fingertip Dermal Avulsion',
+      body: '**Accomplishes:** Stops the brisk ooze of a fingertip skin-avulsion (\u201Cde-gloving\u201D of the pulp) and seals it with tissue adhesive in one shot, often sparing the patient sutures. [14]\n\n**How to:**\n1. Have the patient soak the injured fingertip in 1% lidocaine WITH epinephrine for ~5 minutes in a small cup \u2014 this numbs it and the epinephrine vasoconstricts to cut bleeding.\n2. Slice a standard IV tourniquet lengthwise (trauma shears) so it is thin, encircle the proximal digit, and clamp the two ends with a needle driver.\n3. Twist the needle driver 5\u201310 turns until bleeding stops but the patient still tolerates the pressure \u2014 a controlled digital tourniquet.\n4. Dry the wound bed (suction tubing on compressed air/oxygen works as a mini blow-dryer), then paint tissue adhesive over the avulsion and let it fully cure.\n5. Only once the glue is dry, release and remove the needle-driver tourniquet. Never leave the tourniquet on the finger.\n\n**Equipment:** 1% lidocaine with epinephrine, small cup, IV tourniquet, trauma shears, needle driver, tissue adhesive, suction tubing/air source.\n\n_Source: ALiEM Trick of the Trade \u2014 Dermal avulsion injuries 2.0 (Brian Lin); J Emerg Med 2015._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26726,6 +26745,7 @@ const TRICKS_WOUND_PAGE: InfoPage = {
     { num: 11, text: 'Bonisteel PS. Practice tips: Trephination of subungual hematoma. J Emerg Med / Can Fam Physician. See also Brown Emergency Medicine Blog: Subungual hematomas (2024). brownemblog.com.' },
     { num: 12, text: 'ALiEM. Trick of the Trade: Topical lidocaine jelly for skin tears and road rash (Bragg & Fox). aliem.com.' },
     { num: 13, text: 'Ng KC, et al. Management of hot tar burn using vitamin E ointment containing petroleum and polyoxyethylene sorbitan. CJEM (Canadian Journal of Emergency Medicine). cambridge.org.' },
+    { num: 14, text: 'ALiEM. Trick of the Trade: Dermal avulsion injuries 2.0 (Brian Lin). aliem.com. Lin B. A novel, simple method for achieving hemostasis of fingertip dermal avulsion injuries. J Emerg Med. 2015;48(6):702-705.' },
   ],
 };
 
@@ -26875,6 +26895,10 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
       heading: 'Honey for a Witnessed Esophageal Button-Battery Ingestion',
       body: '**Accomplishes:** Buys time and reduces caustic esophageal injury while a child with a recently swallowed button battery awaits urgent endoscopic removal \u2014 honey coats the battery and its alkaline current path, slowing tissue burn. [9]\n\n**How to:**\n1. Use ONLY for a witnessed/known button-battery ingestion in a child \u22651 year, within 12 hours, who can swallow and protect their airway.\n2. Do NOT delay imaging, GI/ENT consult, or transfer \u2014 this is a bridge to emergent endoscopic removal, not a substitute.\n3. Give 10 mL (2 teaspoons) of honey by mouth every 10 minutes, up to ~6 doses, while arranging removal.\n4. Hard stops: do NOT give if age <1 year (botulism risk), suspected perforation/sepsis/mediastinitis, inability to swallow, or >12 hours since ingestion.\n5. If sucralfate is available in-hospital and honey is not, it can substitute on the same schedule.\n\n**Equipment:** Honey (or in-hospital sucralfate), oral dosing syringe/spoon.\n\n_Source: National Capital Poison Center button-battery guideline; NASPGHAN/ESPGHAN position statements._',
     },
+    {
+      heading: 'Serial Venous Lactate Clearance Instead of a Central Line in Sepsis',
+      body: '**Accomplishes:** Tracks resuscitation in severe sepsis with cheap peripheral venous lactates instead of placing a central line for ScvO2 \u2014 a \u226510% drop over 2 hours is as good a target as ScvO2 \u226570%. [10]\n\n**How to:**\n1. Draw a venous lactate at time zero (a venous gas works; you do not need an arterial stick or a central line).\n2. Resuscitate with fluids through peripheral access; gauge volume status with a quick IVC ultrasound 1\u20132 cm from the right atrium (small/collapsing = give more; plump/static = euvolemic).\n3. Repeat the venous lactate at 2 hours.\n4. Calculate clearance: (initial \u2212 repeat) \u00F7 initial \u00D7 100. A drop of \u226510% signals adequate resuscitation, on par with hitting an ScvO2 of \u226570%.\n5. If lactate is NOT clearing, reassess for ongoing shock, source control, and the need to escalate \u2014 do not be falsely reassured.\n\n**Equipment:** Venous blood gas / lactate assay, peripheral IV, bedside ultrasound (for IVC).\n\n_Source: ALiEM Trick of the Trade \u2014 Serial lactate measurements in sepsis (Michelle Lin); Jones AE, et al. JAMA 2010._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26886,6 +26910,7 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
     { num: 7, text: 'ALiEM. Trick of the Trade: Ring removal using an oxygen mask strap. aliem.com.' },
     { num: 8, text: 'Odeh M, Bassan H, Oliven A. Termination of intractable hiccups with digital rectal massage. J Intern Med. 1990;227(2):145-146. Fesmire FM. Termination of refractory SVT/hiccups by digital rectal massage. Ann Emerg Med. 1988 (Ig Nobel Prize 2006).' },
     { num: 9, text: 'National Capital Poison Center (Poison Control). Button battery ingestion triage and treatment guideline (honey/sucralfate). poison.org. See also NASPGHAN/ESPGHAN position statements on button battery management.' },
+    { num: 10, text: 'ALiEM. Trick of the Trade: Serial lactate measurements in sepsis (Michelle Lin). aliem.com. Jones AE, Shapiro NI, Trzeciak S, et al. Lactate clearance vs central venous oxygen saturation as goals of early sepsis therapy. JAMA. 2010;303(8):739-746.' },
   ],
 };
 
