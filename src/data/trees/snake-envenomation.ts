@@ -18,7 +18,7 @@ export const SNAKE_ENVENOMATION_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Do NOT apply ice, tourniquets, or incise/suction bite', nodeId: 'snake-start' },
   { text: 'Grade pit viper envenomation severity (mild/moderate/severe)', nodeId: 'snake-pit-severity-grade' },
   { text: 'Give CroFab antivenom for moderate-severe envenomation (loading dose 4-6 vials)', nodeId: 'snake-crofab' },
-  { text: 'Monitor for coagulopathy (PT/INR, fibrinogen q6h × 3 days)', nodeId: 'snake-observe-protocol' },
+  { text: 'Monitor for coagulopathy (PT/INR, fibrinogen q6h × 3 days)', nodeId: 'snake-recurrence-counseling' },
   { text: 'Admit all moderate-severe envenomations and coral snake bites', nodeId: 'snake-dispo-decision' },
 ];
 

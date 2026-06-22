@@ -386,7 +386,7 @@ export const ECLAMPSIA_CRITICAL_ACTIONS = [
     { text: 'OB consult stat - definitive treatment is delivery (stabilize mother first)', nodeId: 'eclampsia-delivery-decision' },
     { text: 'Monitor magnesium toxicity: loss of DTRs, respiratory depression (hold if RR <12)', nodeId: 'eclampsia-mag-toxicity' },
     { text: 'Calcium gluconate 1 g IV for magnesium toxicity (antidote)', nodeId: 'eclampsia-mag-toxicity' },
-    { text: 'Labs: CBC, CMP, LFTs, uric acid, 24h protein or spot protein/Cr ratio', nodeId: 'eclampsia-preeclampsia' },
+    { text: 'Labs: CBC, CMP, LFTs, uric acid, 24h protein or spot protein/Cr ratio', nodeId: 'eclampsia-postictal' },
 ];
 export const ECLAMPSIA_CITATIONS = [
     { num: 1, text: 'ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia. Obstet Gynecol. 2020;135(6):e237-e260.' },

@@ -96,7 +96,7 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     module: 1,
     title: 'Emergency Steroid Replacement',
     body: '**Hydrocortisone — first-line for adrenal crisis:**\n\n**Adults:**\n• [Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) 100 mg IV/IM bolus immediately\n• Then 200 mg/24h as continuous infusion (preferred) or 50 mg IV q6h\n• Taper to oral over 1-3 days as hemodynamics stabilize\n\n**Pediatrics:**\n• [Hydrocortisone](#/drug/hydrocortisone/pediatric adrenal crisis) 50 mg/m² IV bolus (max 100 mg)\n• Then 50-100 mg/m²/day divided q6-8h\n• BSA required → use toolbar BSA calculator\n\n**If hydrocortisone unavailable:**\n• [Dexamethasone](#/drug/dexamethasone/adrenal crisis) 4 mg IV — does NOT interfere with cortisol assay (advantage if diagnosis uncertain)\n• [Methylprednisolone](#/drug/methylprednisolone/adrenal crisis) 40 mg IV\n\n**KEY:** At hydrocortisone doses ≥50 mg/day, mineralocorticoid activity is sufficient — [fludrocortisone](#/drug/fludrocortisone/adrenal maintenance) is NOT needed during acute crisis management. [1][2]',
-    citation: [1, 2, 5, 6],
+    citation: [1, 2, 5, 6, 17, 18],
     treatment: {
       firstLine: {
         drug: 'Hydrocortisone',
@@ -430,7 +430,7 @@ export const ADRENAL_INSUFFICIENCY_NODES: DecisionNode[] = [
     module: 5,
     title: 'Crisis Prevention & Patient Education',
     body: '**Every AI patient must have ALL of the following:** [16]\n\n**1. Medical Alert Identification**\n• MedicAlert bracelet or necklace stating: "Adrenal Insufficiency — Requires Stress-Dose Steroids"\n\n**2. Emergency Injection Kit**\n• [Hydrocortisone](#/drug/hydrocortisone/emergency IM) 100 mg for IM self-injection (lateral thigh)\n• Patient AND family/caregivers trained in injection technique\n• Replace before expiration date\n• In a study, only 44% of patients in adrenal emergency received their emergency injection before arriving at a medical facility [15]\n\n**3. Steroid Emergency Card**\n• Wallet card with diagnosis, medications, dosing, emergency contact, and instructions for first responders\n\n**4. Written Sick-Day Action Plan**\n• [Sick-Day Rules & Stress Dosing Guide](#/info/ai-sick-day-rules)\n\n**5. Education Topics:**\n• Never stop steroids abruptly\n• Increase dose when ill (sick-day rules)\n• Use IM injection if unable to keep oral steroids down\n• Go to ED immediately after IM injection\n• Inform ALL healthcare providers of diagnosis\n• Wear medical alert identification at all times\n\nGroup education sessions improved patient confidence in emergency injection from 68% to 91%. [16]',
-    citation: [1, 15, 16],
+    citation: [1, 10, 15, 16],
     next: 'ai-disposition',
 
     summary: 'Every AI patient needs: MedicAlert ID, IM hydrocortisone kit, steroid card, written sick-day plan, trained caregivers',

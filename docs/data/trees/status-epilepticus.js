@@ -695,7 +695,7 @@ export const STATUS_EPILEPTICUS_CRITICAL_ACTIONS = [
     { text: '⚠️ Check the eyes BEFORE committing to refractory SE - dysconjugate / skew / vertical palsy / fixed pupils / absent doll\'s eyes = BAO until proven otherwise', nodeId: 'se-bao-check' },
     { text: 'If BAO suspected: CTA head/neck STAT (NCCT misses 30-40%), activate neuro-IR - thrombectomy window up to 24h from LKW (BAOCHE/ATTENTION)', nodeId: 'se-bao-mimicker' },
     { text: 'Lorazepam 0.1 mg/kg IV (max 4 mg) or midazolam 0.2 mg/kg IM (max 10 mg) within 5 minutes', nodeId: 'se-iv-bzd' },
-    { text: 'Repeat benzodiazepine once in 5-10 minutes if seizure persists', nodeId: 'se-bzd-response' },
+    { text: 'Repeat benzodiazepine once in 5-10 minutes if seizure persists', nodeId: 'se-iv-bzd' },
     { text: 'Second-line ASM within 10 minutes: levetiracetam 60 mg/kg IV (max 4500 mg)', nodeId: 'se-levetiracetam' },
     { text: 'Check fingerstick glucose STAT - treat if <60 mg/dL with D50W 25 g IV', nodeId: 'se-glucose-labs' },
     { text: 'Intubate for refractory SE - use short-acting paralytic (avoid prolonged paralysis)', nodeId: 'se-rse-prep' },

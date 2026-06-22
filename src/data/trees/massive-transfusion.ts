@@ -498,13 +498,13 @@ export const MASSIVE_TRANSFUSION_MODULE_LABELS = [
 ];
 
 export const MASSIVE_TRANSFUSION_CRITICAL_ACTIONS = [
-  { text: 'Activate MTP within 5 minutes: 1:1:1 ratio (6 units PRBCs : 6 units FFP : 1 unit platelets)', nodeId: 'mtp-initial-resus' },
+  { text: 'Activate MTP within 5 minutes: 1:1:1 ratio (6 units PRBCs : 6 units FFP : 1 unit platelets)', nodeId: 'mtp-products' },
   { text: 'TXA 1 g IV over 10 min within 3 hours of injury (second 1 g over 8h)', nodeId: 'mtp-txa' },
   { text: 'Calcium chloride 1 g IV (10 mL of 10%) for every 4 units of blood products', nodeId: 'mtp-calcium' },
   { text: 'Target temp >35°C, pH >7.2, ionized Ca >1.1 to prevent coagulopathy', nodeId: 'mtp-complications' },
   { text: 'Stop MTP when: hemorrhage controlled, INR <1.5, platelets >100k, fibrinogen >150', nodeId: 'mtp-when-stop' },
   { text: 'Avoid crystalloid dilution - limit to 1-2L NS/LR total', nodeId: 'mtp-permissive-hypotension' },
-  { text: 'Factor VIIa NOT routinely recommended (CONTROL trial: no mortality benefit, ↑ thrombosis risk) — reserve for refractory bleeding after surgical control, balanced ratios, TXA, and goal-directed correction', nodeId: 'mtp-damage-control' },
+  { text: 'Factor VIIa NOT routinely recommended (CONTROL trial: no mortality benefit, ↑ thrombosis risk) — reserve for refractory bleeding after surgical control, balanced ratios, TXA, and goal-directed correction', nodeId: 'mtp-cooler-contents' },
 ];
 
 export const MASSIVE_TRANSFUSION_CITATIONS: Citation[] = [

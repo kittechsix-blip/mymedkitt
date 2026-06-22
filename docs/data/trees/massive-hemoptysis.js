@@ -12,7 +12,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         module: 1,
         title: 'Massive Hemoptysis',
         body: '**Life-threatening hemoptysis** = any volume causing:\n• Airway obstruction\n• Respiratory failure\n• Hemodynamic instability\n\n**Volume thresholds (no consensus):**\n• Classic: ≥600 mL/24h\n• Alternative: ≥200 mL/single episode OR ≥100 mL/hr\n• Best mortality predictor: ≥300 mL expectorated [1]\n\n**Key insight:** Adult tracheobronchial space is only 150-200 mL — even "small" volumes can cause asphyxiation. **Death is from hypoxemia (drowning), not exsanguination.**\n\n**ABCDE Cognitive Aid**',
-        citation: [1, 2],
+        citation: [1, 2, 4],
         calculatorLinks: [
             { id: 'txa-hemoptysis', label: 'TXA Dosing Calculator' },
             { id: 'coag-reversal', label: 'Coagulopathy Reversal' },
@@ -37,7 +37,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         module: 1,
         title: 'Initial Assessment',
         body: '**Simultaneous actions:**\n1. Supplemental O₂ (target SpO₂ >92%)\n2. Large-bore IV x2\n3. Type & crossmatch\n4. STAT labs: CBC, BMP, coags (INR, PTT, fibrinogen), ABG\n5. Review medications (anticoagulants, antiplatelets)\n\n**STAT portable CXR** — may lateralize bleeding (~50% sensitivity)\n\nWhat is the patient\'s hemodynamic and respiratory status?',
-        citation: [1],
+        citation: [1, 5],
         options: [
             {
                 label: 'Stable — clearing blood effectively',
@@ -316,7 +316,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         module: 4,
         title: 'Bronchial Artery Embolization (BAE)',
         body: '**First-line definitive therapy for most patients** [1][2]\n\n**Success rates:**\n• Technical success: 92-97%\n• Clinical success: 70-93%\n• Recurrence: 10-58% (varies by etiology)\n• Major complication rate: 0.1%\n\n**Embolization materials:**\n• PVA particles (355-500 µm) — CIRSE recommended\n• N-butyl cyanoacrylate (NBCA) — lowest recurrence\n• Coils, Gelfoam\n\n**High recurrence risk:**\n• Aspergilloma/mycetoma (highest)\n• Tuberculosis\n• Bronchiectasis\n• Non-bronchial collateral supply [2]',
-        citation: [1, 2],
+        citation: [1, 2, 6],
         next: 'hemo-surgery-consider',
         summary: 'BAE first-line definitive therapy — 92-97% technical success; recurrence 10-58% (highest with aspergilloma/TB)',
     },

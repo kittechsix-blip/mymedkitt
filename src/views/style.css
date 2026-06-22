@@ -4257,6 +4257,7 @@ body.critical-actions-open {
 .calculator-copy-btn {
   display: block;
   width: 100%;
+  min-height: 44px;
   margin-top: 12px;
   padding: 10px 16px;
   background: rgba(184, 115, 51, 0.1);
