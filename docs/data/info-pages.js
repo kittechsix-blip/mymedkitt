@@ -25389,6 +25389,10 @@ const TRICKS_ENT_PAGE = {
             heading: 'Walk Anesthesia Up the Nose With Viscous-Lidocaine Q-Tips',
             body: '**Accomplishes:** Numbs the most sensitive spot \u2014 where an NG tube or scope turns the corner into the nasopharynx \u2014 AND tests for adequate anesthesia before instrumentation, making NG placement and nasopharyngoscopy far less painful than blind atomization. [19]\n\n**How to:**\n1. Load the cotton end of a long Q-tip with copious viscous lidocaine.\n2. Slide it into the nostril along the intended NG/scope path.\n3. Stop advancing when you meet resistance or the patient feels discomfort; twirl the Q-tip to coat the mucosa.\n4. Wait until the patient can no longer feel the swab at that depth.\n5. Reload, advance a bit further, and repeat until you reach the nasopharynx, then proceed with the NG tube or scope.\n\n**Equipment:** Long cotton-tipped swabs, viscous lidocaine; optional nebulized lidocaine for the posterior oropharynx.\n\n_Source: ALiEM Trick of the Trade \u2014 Anesthetizing the nasal tract._',
         },
+        {
+            heading: 'DIY Lidocaine-Oxymetazoline Atomizer for Painless NG/Nasal Tubes',
+            body: '**Accomplishes:** Anesthetizes AND vasoconstricts the nose in one atomized spray so NG-tube placement and nasopharyngoscopy stop on the first try \u2014 patients typically only give you one or two attempts before they refuse. [20]\n\n**How to:**\n1. Grab a stock nasal oxymetazoline (Afrin) spray bottle \u2014 the small pump atomizer is what you want.\n2. Using a 25G needle through the bottle stopper, draw OUT a few mL of the oxymetazoline and inject IN 5\u201310 mL of 1\u20132% lidocaine, mixing the vasoconstrictor and anesthetic in the same atomizer.\n3. Have the patient sniff while you actuate 2\u20133 sprays into each nostril; the pump finely atomizes the mix so it coats the whole nasal mucosa.\n4. Wait a few minutes \u2014 anesthesia and shrinkage of the turbinates are usually excellent, opening a wider, numb channel.\n5. Lubricate and pass the NG tube or scope along the floor of the nose. (No Afrin bottle? Atomize the same lido mix with a mucosal atomizer device.)\n\n**Equipment:** Oxymetazoline (Afrin) nasal spray bottle, 1\u20132% lidocaine, 25G needle + syringe (or a mucosal atomizer device), the NG tube/scope.\n\n_Source: ALiEM Trick of the Trade \u2014 Making the NG and NP procedures less painful (DIY lidocaine-oxymetazoline atomizer)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25410,6 +25414,7 @@ const TRICKS_ENT_PAGE = {
         { num: 17, text: 'ALiEM. Trick of the Trade: Pediatric video laryngoscope for ear foreign bodies. aliem.com.' },
         { num: 18, text: 'ALiEM. Trick of the Trade: Insect removal from the ear. aliem.com.' },
         { num: 19, text: 'ALiEM. Trick of the Trade: Anesthetizing the nasal tract (viscous lidocaine Q-tip technique). aliem.com.' },
+        { num: 20, text: 'ALiEM. Trick of the Trade: Making the NG and NP procedures less painful (DIY lidocaine-oxymetazoline atomizer). aliem.com.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25450,6 +25455,10 @@ const TRICKS_OPHTHO_PAGE = {
             heading: 'Bevel-Flick Technique for Corneal Foreign Body Removal',
             body: '**Accomplishes:** Lifts an embedded corneal foreign body off the eye at the slit lamp while minimizing extra epithelial/conjunctival damage \u2014 you scoop under it with the flat of the bevel instead of scraping. [8]\n\n**How to:**\n1. Anesthetize BOTH eyes with topical proparacaine (numbing the other eye reduces reflex blinking); try irrigating the cornea first \u2014 a truly superficial foreign body may simply float off.\n2. Mount a small needle (a 25-27G or even a 29G insulin/TB needle looks less threatening) on a syringe used as a handle, bevel UP and facing away from the eye.\n3. Stabilize your dominant hand on the patient\u2019s zygoma, bring the needle into the slit-lamp field, and approach the foreign body nearly tangent to the cornea.\n4. Press the flat, non-cutting flat of the bevel against the cornea, slide the tip just UNDER the edge of the object, and flick it off \u2014 do not dig straight down.\n5. If a rust ring remains, remove it with an Alger brush (battery ophthalmic burr); refer central-axis foreign bodies or residual rust ring to ophthalmology next day.\n\n**Equipment:** Slit lamp, topical proparacaine, 25-29G needle on a syringe, moistened cotton applicator, Alger brush (for rust ring).\n\n_Source: LITFL \u2014 Ocular foreign body removal; Maimonides EM \u2014 Corneal foreign bodies._',
         },
+        {
+            heading: 'Needle-Driver Crush Before Lateral Canthotomy',
+            body: '**Accomplishes:** Makes a vision-saving lateral canthotomy/cantholysis for orbital compartment syndrome faster and far less bloody by pre-crushing the lateral canthus to mark the cut. [9]\n\n**How to:**\n1. Confirm orbital compartment syndrome (proptosis, \u201Crock hard\u201D eye, vision loss, afferent pupil defect, IOP often >40); the ONLY absolute contraindication is suspected globe rupture, so rule out laceration, hyphema, irregular pupil, IOP <5, or positive Seidel.\n2. Inject ~2 mL of 1\u20132% lidocaine WITH epinephrine into the lateral canthus with a 25G needle, pointing away from the globe.\n3. Clamp a needle driver (or hemostat) horizontally from the lateral canthus to the bony orbital rim \u2014 feel the lower jaw hit the rim \u2014 and lock it for 20 seconds to 2 minutes. This crushes the tissue: it stops bleeding and marks your incision line through traumatic edema.\n4. Release the clamp and cut the now-crushed, bloodless track to the orbital rim (~1\u20132 cm, no more \u2014 the facial nerve crosses laterally) with iris scissors \u2014 that is the canthotomy.\n5. Grasp the lower lid, point scissors inferoposteriorly away from the globe, and \u201Cstrum\u201D for the taut inferior crus of the lateral canthal tendon; cut it (the cantholysis). Recheck IOP and release the superior crus if still elevated. Call ophthalmology but do NOT wait for them.\n\n**Equipment:** 25G needle + lidocaine with epinephrine, needle driver or hemostat, iris/tenotomy scissors, toothed forceps, tonometer.\n\n_Source: First10EM \u2014 Lateral canthotomy procedure guide; StatPearls \u2014 Lateral orbital canthotomy._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25460,6 +25469,7 @@ const TRICKS_OPHTHO_PAGE = {
         { num: 6, text: 'ALiEM. Trick of the Trade: Finding the wandering contact lens (Paolillo/Lin). aliem.com.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Easy ocular application of fluorescein (Ko/Chan). aliem.com.' },
         { num: 8, text: 'LITFL. Ocular foreign body removal. litfl.com. See also Maimonides Emergency Medicine \u2014 Corneal foreign bodies (bevel-flick technique, Alger brush rust ring).' },
+        { num: 9, text: 'First10EM. Lateral canthotomy \u2014 procedure guide. first10em.com. See also StatPearls \u2014 Lateral Orbital Canthotomy (NCBI Bookshelf NBK557476) and Merck Manual \u2014 How to do lateral canthotomy.' },
     ],
 };
 const TRICKS_UROLOGY_PAGE = {
@@ -25516,6 +25526,10 @@ const TRICKS_UROLOGY_PAGE = {
             heading: 'Depilatory Cream to Dissolve a Hair Tourniquet',
             body: '**Accomplishes:** Releases a hair or thread tourniquet strangling a digit, toe, or genitalia by chemically dissolving the hair \u2014 no cutting near tender, edematous tissue. [13]\n\n**How to:**\n1. Confirm the constricting band is HAIR or a synthetic thread that depilatory cream can break down (it dissolves keratin/some synthetics; it will NOT touch elastic or rubber bands).\n2. Confirm intact skin with no open wound at the site \u2014 do not apply depilatory cream to broken skin or mucosa.\n3. Apply a generous layer of depilatory cream (e.g., Nair) over the constricting hair and the surrounding groove.\n4. Wait about 3\u20138 minutes for the cream to chemically dissolve the hair; the band loosens and releases.\n5. Wipe and rinse thoroughly, then reassess perfusion distal to the groove. If the hair is buried/epithelialized or perfusion is still threatened, switch to the cut-down (incision) technique.\n\n**Equipment:** Depilatory cream (thioglycolate-based, e.g., Nair), gauze, water for rinsing.\n\n_Source: ALiEM Trick of the Trade \u2014 Hair tourniquet removal using depilatory cream._',
         },
+        {
+            heading: 'Iced-Glove Compression for Paraphimosis',
+            body: '**Accomplishes:** Shrinks the swollen trapped foreskin in paraphimosis with cold-driven vasoconstriction so it can be manually reduced \u2014 a fast, equipment-light alternative when sugar/osmotic methods are unavailable. [14]\n\n**How to:**\n1. Confirm paraphimosis (foreskin stuck proximal to the glans with a constricting band and distal edema); this is time-sensitive \u2014 do not delay if the glans is dusky/compromised.\n2. Give analgesia first (topical EMLA, a dorsal penile nerve block, or IV opioid); a numb patient lets you compress effectively.\n3. Fill an exam glove with ice and a little water, then invaginate (push in) the thumb of the glove to make a pocket.\n4. Slide the edematous glans and foreskin into the iced thumb pocket and hold for several minutes \u2014 the cold contracts vessels and squeezes fluid out of the swollen tissue.\n5. Once edema is down, reduce manually: both thumbs on the glans, index fingers drawing the foreskin forward over it. If cold + manual reduction fails, escalate to puncture/dorsal-slit or urology.\n\n**Equipment:** Exam glove, ice + water, analgesia (EMLA / dorsal penile block / IV opioid).\n\n_Source: Pediatric EM Morsels \u2014 Pediatric paraphimosis (iced-glove technique); EM:RAP \u2014 Paraphimosis reduction._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25531,6 +25545,7 @@ const TRICKS_UROLOGY_PAGE = {
         { num: 11, text: 'ALiEM. Trick of the Trade: The key to pollution is dilution (high-volume open-fracture irrigation via needle-punched saline bottle cap). aliem.com.' },
         { num: 12, text: 'ALiEM. Trick of the Trade: Removing a tungsten ring stuck on your finger (vise-grip fracture technique). aliem.com.' },
         { num: 13, text: 'ALiEM. Trick of the Trade: Hair tourniquet removal using depilatory cream. aliem.com.' },
+        { num: 14, text: 'Pediatric EM Morsels. Pediatric paraphimosis (iced-glove reduction technique). pedemmorsels.com. See also EM:RAP \u2014 Paraphimosis reduction and First10EM \u2014 Paraphimosis.' },
     ],
 };
 const TRICKS_WOUND_PAGE = {
@@ -25595,6 +25610,10 @@ const TRICKS_WOUND_PAGE = {
             heading: 'Split-Tourniquet + Glue Hemostasis for a Fingertip Dermal Avulsion',
             body: '**Accomplishes:** Stops the brisk ooze of a fingertip skin-avulsion (\u201Cde-gloving\u201D of the pulp) and seals it with tissue adhesive in one shot, often sparing the patient sutures. [14]\n\n**How to:**\n1. Have the patient soak the injured fingertip in 1% lidocaine WITH epinephrine for ~5 minutes in a small cup \u2014 this numbs it and the epinephrine vasoconstricts to cut bleeding.\n2. Slice a standard IV tourniquet lengthwise (trauma shears) so it is thin, encircle the proximal digit, and clamp the two ends with a needle driver.\n3. Twist the needle driver 5\u201310 turns until bleeding stops but the patient still tolerates the pressure \u2014 a controlled digital tourniquet.\n4. Dry the wound bed (suction tubing on compressed air/oxygen works as a mini blow-dryer), then paint tissue adhesive over the avulsion and let it fully cure.\n5. Only once the glue is dry, release and remove the needle-driver tourniquet. Never leave the tourniquet on the finger.\n\n**Equipment:** 1% lidocaine with epinephrine, small cup, IV tourniquet, trauma shears, needle driver, tissue adhesive, suction tubing/air source.\n\n_Source: ALiEM Trick of the Trade \u2014 Dermal avulsion injuries 2.0 (Brian Lin); J Emerg Med 2015._',
         },
+        {
+            heading: 'Use the Native Fingernail to Reapproximate a Nailbed Laceration',
+            body: '**Accomplishes:** Repairs a clean nailbed laceration WITHOUT suturing the fragile bed \u2014 the patient\u2019s own fingernail is used as the splint that aligns the lacerated edges and protects the eponychial fold so a normal nail regrows. [15]\n\n**How to:**\n1. Use this for a relatively CLEAN nailbed laceration (a stellate crush that already shattered/required removing the nail is better sutured or glued).\n2. Get a bloodless field: digital block, then a finger tourniquet (a cut glove finger works).\n3. Gently lift the proximal nail fold and ease the existing nail plate up just enough to expose the laceration, but DO NOT avulse it.\n4. Irrigate and reapproximate the nailbed edges underneath; the overlying nail naturally presses the edges flat and in line.\n5. Reseat the nail under the eponychial fold and secure it (a single suture through the nail, tissue adhesive, or Steri-Strips). Leaving the native nail in place keeps the fold open so a new nail grows out normally.\n\n**Equipment:** Digital block supplies, finger tourniquet (or cut glove finger), irrigation saline, fine suture or tissue adhesive / Steri-Strips.\n\n_Source: ALiEM Trick of the Trade \u2014 Finger nailbed laceration repair (Michelle Lin)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25611,6 +25630,7 @@ const TRICKS_WOUND_PAGE = {
         { num: 12, text: 'ALiEM. Trick of the Trade: Topical lidocaine jelly for skin tears and road rash (Bragg & Fox). aliem.com.' },
         { num: 13, text: 'Ng KC, et al. Management of hot tar burn using vitamin E ointment containing petroleum and polyoxyethylene sorbitan. CJEM (Canadian Journal of Emergency Medicine). cambridge.org.' },
         { num: 14, text: 'ALiEM. Trick of the Trade: Dermal avulsion injuries 2.0 (Brian Lin). aliem.com. Lin B. A novel, simple method for achieving hemostasis of fingertip dermal avulsion injuries. J Emerg Med. 2015;48(6):702-705.' },
+        { num: 15, text: 'ALiEM. Trick of the Trade: Finger nailbed laceration repair (Michelle Lin). aliem.com.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
@@ -25643,6 +25663,10 @@ const TRICKS_CARDIOLOGY_PAGE = {
             heading: 'Double the ECG Paper Speed to Unmask a Tachycardia',
             body: '**Accomplishes:** Spreads out a fast, cramped rhythm so hidden P-waves, flutter waves, and QRS morphology become readable when you cannot tell SVT from flutter from VT at 25 mm/sec. [6]\n\n**How to:**\n1. Acquire the standard 12-lead at the usual 25 mm/sec first.\n2. On the ECG machine, change the paper/recording speed setting to 50 mm/sec (double speed).\n3. Re-record \u2014 every complex and interval is now stretched to twice its width, like pulling a string taut, so buried atrial activity separates out.\n4. Remember the calibration changed: at 50 mm/sec each small box is 0.02 s and rates appear halved, so interpret intervals against the new scale (or simply use it to SEE the waves, then measure on the standard strip).\n5. Switch back to 25 mm/sec for the record of file.\n\n**Equipment:** Standard ECG machine with adjustable paper speed.\n\n_Source: ALiEM Trick of the Trade \u2014 Speed up the ECG paper rate to differentiate tachycardias._',
         },
+        {
+            heading: 'Posterior Leads (V7\u2013V9) to Catch a Posterior STEMI',
+            body: '**Accomplishes:** Confirms an isolated posterior MI \u2014 a STEMI-equivalent that looks like benign anterior ST depression on a standard 12-lead \u2014 by recording directly over the back of the heart, so the patient gets the cath lab instead of a missed occlusion. [7]\n\n**How to:**\n1. Suspect posterior MI when V1\u2013V3 show horizontal ST DEPRESSION with tall, broad R waves and upright T waves (the mirror image of an anterior STEMI), especially alongside an inferior or lateral MI.\n2. Keep the limb leads on; peel leads V4, V5, V6 off the front of the chest.\n3. Place them around the LEFT side onto the back, all in the SAME horizontal line as V6: V7 at the posterior axillary line, V8 at the tip of the scapula (mid-scapular), V9 just left of the spine (paraspinal).\n4. Record and RELABEL the tracing V7\u2013V9 so it is not misread as V4\u2013V6.\n5. Because the back is farther from the heart, the threshold is lower: \u2265 0.5 mm of ST elevation in ANY of V7\u2013V9 (\u2265 1 mm in men <40) confirms posterior STEMI \u2014 activate the cath lab.\n\n**Equipment:** Standard 12-lead ECG machine and electrodes (no extra hardware).\n\n_Source: ALiEM \u2014 Posterior MI and the posterior leads (V7\u2013V9); Paucis Verbis \u2014 right and posterior ECG leads._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
@@ -25651,6 +25675,7 @@ const TRICKS_CARDIOLOGY_PAGE = {
         { num: 4, text: 'emDOCs. ECG Pointers: The Lewis Lead. emdocs.net. See also LITFL: Lewis lead (S5 lead). litfl.com.' },
         { num: 5, text: 'ALiEM. Trick of the Trade: Getting an EKG on Chewbacca (water-soaked gauze for a hairy chest). aliem.com.' },
         { num: 6, text: 'ALiEM. Trick of the Trade: Speed up ECG paper rate to differentiate tachycardias. aliem.com.' },
+        { num: 7, text: 'ALiEM. Posterior myocardial infarction \u2014 how accurate is the flipped ECG trick? (posterior leads V7\u2013V9). aliem.com. See also ALiEM Paucis Verbis: Right and posterior ECG leads.' },
     ],
 };
 const TRICKS_NEURO_PAGE = {

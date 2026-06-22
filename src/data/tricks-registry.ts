@@ -65,7 +65,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#1565C0',
     subtitle: 'Suction, NG placement, supraglottic exchange, and more.',
     infoPageId: 'tricks-airway',
-    trickCount: 9,
+    trickCount: 10,
     category: 'resus-procedures',
   },
   {
@@ -105,7 +105,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#2E7D32',
     subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
     infoPageId: 'tricks-ophtho',
-    trickCount: 8,
+    trickCount: 9,
     category: 'head-neck',
   },
   {
@@ -115,7 +115,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#EF6C00',
     subtitle: 'Voiding trials, renal colic, priapism, and entrapment releases.',
     infoPageId: 'tricks-urology',
-    trickCount: 9,
+    trickCount: 10,
     category: 'genitourinary',
   },
   {
@@ -125,7 +125,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#AD1457',
     subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
     infoPageId: 'tricks-wound',
-    trickCount: 14,
+    trickCount: 15,
     category: 'wounds-msk',
   },
   {
@@ -135,7 +135,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#C62828',
     subtitle: 'Rapid adenosine delivery and rhythm tricks.',
     infoPageId: 'tricks-cardiology',
-    trickCount: 6,
+    trickCount: 7,
     category: 'resus-procedures',
   },
   {
