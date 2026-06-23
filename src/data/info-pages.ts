@@ -26592,6 +26592,10 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
       heading: 'Needle-Driver Crush Before Lateral Canthotomy',
       body: '**Accomplishes:** Makes a vision-saving lateral canthotomy/cantholysis for orbital compartment syndrome faster and far less bloody by pre-crushing the lateral canthus to mark the cut. [9]\n\n**How to:**\n1. Confirm orbital compartment syndrome (proptosis, \u201Crock hard\u201D eye, vision loss, afferent pupil defect, IOP often >40); the ONLY absolute contraindication is suspected globe rupture, so rule out laceration, hyphema, irregular pupil, IOP <5, or positive Seidel.\n2. Inject ~2 mL of 1\u20132% lidocaine WITH epinephrine into the lateral canthus with a 25G needle, pointing away from the globe.\n3. Clamp a needle driver (or hemostat) horizontally from the lateral canthus to the bony orbital rim \u2014 feel the lower jaw hit the rim \u2014 and lock it for 20 seconds to 2 minutes. This crushes the tissue: it stops bleeding and marks your incision line through traumatic edema.\n4. Release the clamp and cut the now-crushed, bloodless track to the orbital rim (~1\u20132 cm, no more \u2014 the facial nerve crosses laterally) with iris scissors \u2014 that is the canthotomy.\n5. Grasp the lower lid, point scissors inferoposteriorly away from the globe, and \u201Cstrum\u201D for the taut inferior crus of the lateral canthal tendon; cut it (the cantholysis). Recheck IOP and release the superior crus if still elevated. Call ophthalmology but do NOT wait for them.\n\n**Equipment:** 25G needle + lidocaine with epinephrine, needle driver or hemostat, iris/tenotomy scissors, toothed forceps, tonometer.\n\n_Source: First10EM \u2014 Lateral canthotomy procedure guide; StatPearls \u2014 Lateral orbital canthotomy._',
     },
+    {
+      heading: 'Benzoin for Traction on Bloody, Swollen Eyelids',
+      body: '**Accomplishes:** Lets you retract markedly swollen, blood-slicked eyelids for a trauma ocular exam when fingers and a cotton swab keep slipping \u2014 without putting pressure on a potentially ruptured globe. [10]\n\n**How to:**\n1. First rule out obvious globe rupture (irregular pupil, extruded contents, positive Seidel); if present, shield the eye and do NOT manipulate the lids.\n2. Clean and DRY the upper and lower eyelid skin so they are no longer bloody \u2014 benzoin will not grip wet skin.\n3. Apply a thin layer of tincture of benzoin to the eyelid skin only, carefully avoiding the eye, lash line, and conjunctiva.\n4. Let it dry to a tacky finish (~1\u20132 minutes).\n5. Now use your fingers or cotton-tipped applicators on the grippy lid skin to gently retract the lids open and inspect the globe \u2014 the tackiness gives traction without squeezing the eye.\n\n**Equipment:** Tincture of benzoin, gauze, cotton-tipped applicators.\n\n_Source: ALiEM Trick of the Trade \u2014 Benzoin for opening traumatic, swollen eyelids._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26603,6 +26607,7 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
     { num: 7, text: 'ALiEM. Trick of the Trade: Easy ocular application of fluorescein (Ko/Chan). aliem.com.' },
     { num: 8, text: 'LITFL. Ocular foreign body removal. litfl.com. See also Maimonides Emergency Medicine \u2014 Corneal foreign bodies (bevel-flick technique, Alger brush rust ring).' },
     { num: 9, text: 'First10EM. Lateral canthotomy \u2014 procedure guide. first10em.com. See also StatPearls \u2014 Lateral Orbital Canthotomy (NCBI Bookshelf NBK557476) and Merck Manual \u2014 How to do lateral canthotomy.' },
+    { num: 10, text: 'ALiEM. Trick of the Trade: Benzoin for opening traumatic, swollen eyelids. aliem.com.' },
   ],
 };
 
@@ -26803,6 +26808,14 @@ const TRICKS_CARDIOLOGY_PAGE: InfoPage = {
       heading: 'Posterior Leads (V7\u2013V9) to Catch a Posterior STEMI',
       body: '**Accomplishes:** Confirms an isolated posterior MI \u2014 a STEMI-equivalent that looks like benign anterior ST depression on a standard 12-lead \u2014 by recording directly over the back of the heart, so the patient gets the cath lab instead of a missed occlusion. [7]\n\n**How to:**\n1. Suspect posterior MI when V1\u2013V3 show horizontal ST DEPRESSION with tall, broad R waves and upright T waves (the mirror image of an anterior STEMI), especially alongside an inferior or lateral MI.\n2. Keep the limb leads on; peel leads V4, V5, V6 off the front of the chest.\n3. Place them around the LEFT side onto the back, all in the SAME horizontal line as V6: V7 at the posterior axillary line, V8 at the tip of the scapula (mid-scapular), V9 just left of the spine (paraspinal).\n4. Record and RELABEL the tracing V7\u2013V9 so it is not misread as V4\u2013V6.\n5. Because the back is farther from the heart, the threshold is lower: \u2265 0.5 mm of ST elevation in ANY of V7\u2013V9 (\u2265 1 mm in men <40) confirms posterior STEMI \u2014 activate the cath lab.\n\n**Equipment:** Standard 12-lead ECG machine and electrodes (no extra hardware).\n\n_Source: ALiEM \u2014 Posterior MI and the posterior leads (V7\u2013V9); Paucis Verbis \u2014 right and posterior ECG leads._',
     },
+    {
+      heading: 'Sit the Patient on Their Hands to Quiet a Tremor-Artifact ECG',
+      body: '**Accomplishes:** Eliminates upper-extremity movement artifact (Parkinson\u2019s, essential tremor, shivering) that buries the ECG tracing, so you get a readable 12-lead without sedation or repeated attempts. [8]\n\n**How to:**\n1. Place the ECG limb and precordial leads as usual.\n2. Have the patient sit on both hands, palms down, tucked under the buttocks and thighs.\n3. This braces the arms and dampens the tremor at its source so the limb-lead baseline settles.\n4. Acquire the tracing immediately.\n5. If it is still noisy, drape a warm blanket over the shoulders and have the patient consciously relax before re-recording.\n\n**Equipment:** ECG machine, exam table or chair, warm blanket (optional).\n\n_Source: ALiEM Trick of the Trade \u2014 Quieting the shaky EKG tracing (Michelle Lin)._',
+    },
+    {
+      heading: 'Ice-Water Slurry to the Face to Break Infant SVT (Diving Reflex)',
+      body: '**Accomplishes:** Terminates stable supraventricular tachycardia in neonates and young infants via the mammalian diving reflex \u2014 a vagal maneuver you can do while IV access and adenosine are being prepared. [9]\n\n**How to:**\n1. Keep the infant on continuous ECG monitoring with defibrillator pads already in place.\n2. Wrap the arms snugly in a towel to keep them out of the way.\n3. Fill a bag (or soak a washcloth) with an ice-and-water slurry (~5 \u00B0C / ice plus a little water).\n4. Apply it firmly over the WHOLE face \u2014 forehead, eyes, and bridge of the nose \u2014 for ~15\u201330 seconds; do not occlude breathing longer than tolerated.\n5. Watch the monitor for abrupt conversion. Do NOT use carotid massage or eyeball pressure in infants. If there is no conversion, move to adenosine 0.1 mg/kg rapid IV.\n\n**Equipment:** Ice, water, plastic bag or washcloth, towel, cardiac monitor with defibrillator pads.\n\n_Source: ALiEM EM ReSCu Peds \u2014 Pediatric SVT case (diving reflex vagal maneuver)._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
@@ -26812,6 +26825,8 @@ const TRICKS_CARDIOLOGY_PAGE: InfoPage = {
     { num: 5, text: 'ALiEM. Trick of the Trade: Getting an EKG on Chewbacca (water-soaked gauze for a hairy chest). aliem.com.' },
     { num: 6, text: 'ALiEM. Trick of the Trade: Speed up ECG paper rate to differentiate tachycardias. aliem.com.' },
     { num: 7, text: 'ALiEM. Posterior myocardial infarction \u2014 how accurate is the flipped ECG trick? (posterior leads V7\u2013V9). aliem.com. See also ALiEM Paucis Verbis: Right and posterior ECG leads.' },
+    { num: 8, text: 'ALiEM. Trick of the Trade: Quieting the shaky EKG tracing (have the patient sit on their hands). aliem.com.' },
+    { num: 9, text: 'ALiEM EM ReSCu Peds. Pediatric supraventricular tachycardia case \u2014 ice-water slurry to the face (diving reflex) as a vagal maneuver. aliem.com.' },
   ],
 };
 
@@ -26871,10 +26886,15 @@ const TRICKS_TOX_PAGE: InfoPage = {
       heading: 'Dilute Naloxone for a Titrated Opioid Reversal',
       body: '**Accomplishes:** Reverses opioid-induced respiratory depression in an opioid-dependent patient while avoiding the abrupt, miserable (and vomiting/agitation-prone) precipitated withdrawal a full 0.4 mg push causes. [2]\n\n**How to:**\n1. Confirm this is for ventilatory depression, NOT frank apnea/respiratory arrest \u2014 if the patient is apneic, give standard full-dose naloxone and ventilate instead.\n2. Draw 1 mL of naloxone 0.4 mg/mL into a 10 mL syringe.\n3. Add 9 mL of normal saline to make 10 mL of a 0.04 mg/mL solution; clearly label the syringe with drug and concentration (do not use an unlabeled flush).\n4. Give 1-2 mL (0.04-0.08 mg) IV every 60 seconds, titrating to adequate spontaneous breathing \u2014 not full arousal.\n5. The wake-up amount you used also gives a sensible starting point if a naloxone infusion is needed; keep monitoring for re-sedation as naloxone wears off.\n\n**Equipment:** Naloxone 0.4 mg/mL vial, 10 mL syringe, normal saline, label.\n\n_Source: ALiEM Trick of the Trade \u2014 Naloxone dilution for opioid overdose; Kim & Nelson, J Med Toxicol 2016._',
     },
+    {
+      heading: 'Calcium Gluconate Gel in a Glove for a Hydrofluoric Acid Hand Burn',
+      body: '**Accomplishes:** Delivers continuous topical calcium to bind fluoride ions and relieve the severe, out-of-proportion pain of a hydrofluoric acid burn to the fingers or hand when commercial 2.5% calcium gluconate gel is not stocked. [3]\n\n**How to:**\n1. Irrigate the burn thoroughly with water first.\n2. Make the gel: mix ~75 mL of water-soluble lubricant (K-Y jelly) with ~25 mL of 10% calcium gluconate solution (or stir 2.5 g calcium gluconate powder into ~100 mL of lubricant) to roughly a 2.5% gel.\n3. Squeeze a generous amount of the gel into a surgical or exam glove.\n4. Have the patient slide the affected hand into the glove and wear it for at least 30 minutes of continuous contact.\n5. Reassess: pain often recurs and may need re-application; observe digital exposures for 4\u20136 hours and arrange toxicology/specialist follow-up. Escalating or refractory pain may need intradermal or intra-arterial calcium \u2014 escalate, do not just keep re-gloving.\n\n**Equipment:** Water-soluble lubricant (K-Y jelly), 10% calcium gluconate solution or powder, surgical/exam glove.\n\n_Source: ALiEM Tricks of the Trade \u2014 Calcium gel for hydrofluoric acid burns._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/. (HaVOC trial.)' },
     { num: 2, text: 'ALiEM. Trick of the Trade: Naloxone dilution for opioid overdose. aliem.com. Kim HK, Nelson LS. Reversal of opioid-induced ventilatory depression using low-dose naloxone (0.04 mg): a case series. J Med Toxicol. 2016;12(1):107-110.' },
+    { num: 3, text: 'ALiEM. Tricks of the Trade: Calcium gel for hydrofluoric acid burns (calcium gluconate + water-soluble lubricant in a glove). aliem.com.' },
   ],
 };
 
@@ -26924,6 +26944,10 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
       heading: 'Serial Venous Lactate Clearance Instead of a Central Line in Sepsis',
       body: '**Accomplishes:** Tracks resuscitation in severe sepsis with cheap peripheral venous lactates instead of placing a central line for ScvO2 \u2014 a \u226510% drop over 2 hours is as good a target as ScvO2 \u226570%. [10]\n\n**How to:**\n1. Draw a venous lactate at time zero (a venous gas works; you do not need an arterial stick or a central line).\n2. Resuscitate with fluids through peripheral access; gauge volume status with a quick IVC ultrasound 1\u20132 cm from the right atrium (small/collapsing = give more; plump/static = euvolemic).\n3. Repeat the venous lactate at 2 hours.\n4. Calculate clearance: (initial \u2212 repeat) \u00F7 initial \u00D7 100. A drop of \u226510% signals adequate resuscitation, on par with hitting an ScvO2 of \u226570%.\n5. If lactate is NOT clearing, reassess for ongoing shock, source control, and the need to escalate \u2014 do not be falsely reassured.\n\n**Equipment:** Venous blood gas / lactate assay, peripheral IV, bedside ultrasound (for IVC).\n\n_Source: ALiEM Trick of the Trade \u2014 Serial lactate measurements in sepsis (Michelle Lin); Jones AE, et al. JAMA 2010._',
     },
+    {
+      heading: 'Angiocatheter-as-Caulk-Gun for Clean Dental Cement Application',
+      body: '**Accomplishes:** Delivers fast-drying temporary dental cement precisely onto the exposed dentin of a fractured tooth (Ellis class II/III) without the usual messy, clumsy finger application, protecting the pulp until dental follow-up. [11]\n\n**How to:**\n1. Gather everything FIRST \u2014 dental cement sets fast, so have your delivery system ready before you mix.\n2. Remove the plastic catheter from an 18-gauge angiocatheter and seat the catheter hub onto a 3 mL syringe.\n3. Mix a slightly larger-than-usual quantity of the dental cement.\n4. Pull the syringe plunger out, load the cement into the back of the barrel, reinsert the plunger, and advance until cement reaches the fine catheter tip.\n5. Dry the tooth, then use the fine tip to lay a precise bead of cement over the exposed dentin; arrange urgent dental follow-up.\n\n**Equipment:** 3 mL syringe, 18-gauge angiocatheter, temporary dental cement and mixing supplies, gauze to dry the tooth.\n\n_Source: ALiEM Trick of the Trade \u2014 A cleaner way to apply dental cement (Jason Hine)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26936,6 +26960,7 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
     { num: 8, text: 'Odeh M, Bassan H, Oliven A. Termination of intractable hiccups with digital rectal massage. J Intern Med. 1990;227(2):145-146. Fesmire FM. Termination of refractory SVT/hiccups by digital rectal massage. Ann Emerg Med. 1988 (Ig Nobel Prize 2006).' },
     { num: 9, text: 'National Capital Poison Center (Poison Control). Button battery ingestion triage and treatment guideline (honey/sucralfate). poison.org. See also NASPGHAN/ESPGHAN position statements on button battery management.' },
     { num: 10, text: 'ALiEM. Trick of the Trade: Serial lactate measurements in sepsis (Michelle Lin). aliem.com. Jones AE, Shapiro NI, Trzeciak S, et al. Lactate clearance vs central venous oxygen saturation as goals of early sepsis therapy. JAMA. 2010;303(8):739-746.' },
+    { num: 11, text: 'ALiEM. Trick of the Trade: A cleaner way to apply dental cement \u2014 angiocatheter delivery (Jason Hine). aliem.com.' },
   ],
 };
 

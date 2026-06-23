@@ -105,7 +105,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#2E7D32',
     subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
     infoPageId: 'tricks-ophtho',
-    trickCount: 9,
+    trickCount: 10,
     category: 'head-neck',
   },
   {
@@ -135,7 +135,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#C62828',
     subtitle: 'Rapid adenosine delivery and rhythm tricks.',
     infoPageId: 'tricks-cardiology',
-    trickCount: 7,
+    trickCount: 9,
     category: 'resus-procedures',
   },
   {
@@ -155,7 +155,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#37474F',
     subtitle: 'Antiemetic and toxidrome management pearls.',
     infoPageId: 'tricks-tox',
-    trickCount: 2,
+    trickCount: 3,
     category: 'general-tox',
   },
   {
@@ -165,7 +165,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#455A64',
     subtitle: 'Fast bedside screens, dosing pearls, communication.',
     infoPageId: 'tricks-general',
-    trickCount: 10,
+    trickCount: 11,
     category: 'general-tox',
   },
   {
