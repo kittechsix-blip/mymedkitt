@@ -522,7 +522,7 @@ export const RHOGAM_EARLY_PREGNANCY_MODULE_LABELS = [
     'Special Scenarios',
 ];
 export const RHOGAM_EARLY_PREGNANCY_CITATIONS = [
-    { num: 1, text: 'ACOG Practice Advisory. Prevention of Rh D Alloimmunization: Updated Guidance. American College of Obstetricians and Gynecologists. 2024.' },
+    { num: 1, text: 'ACOG Clinical Practice Update: Rh D Immune Globulin Administration After Abortion or Pregnancy Loss at Less Than 12 Weeks of Gestation. Obstet Gynecol. 2024;144(6):e152-e158. PMID 39255498.' },
     { num: 2, text: 'Karanth L, Jaafar SH, Engeland A, et al. Anti-D administration after spontaneous miscarriage for preventing Rh alloimmunisation. Cochrane Database Syst Rev. 2020;3(3):CD009617.' },
     { num: 3, text: 'ACOG Practice Bulletin No. 181: Prevention of Rh D Alloimmunization. Obstet Gynecol. 2017;130(2):e57-e70.' },
     { num: 4, text: 'Mari G, Deter RL, Carpenter RL, et al. Noninvasive diagnosis by Doppler ultrasonography of fetal anemia due to maternal red-cell alloimmunization. N Engl J Med. 2000;342(1):9-14.' },
