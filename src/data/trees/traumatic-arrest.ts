@@ -29,6 +29,7 @@ export const TRAUMATIC_ARREST_NODES: DecisionNode[] = [
     module: 1,
     title: 'Confirm Scenario',
     body: 'Which scenario best describes the patient right now?',
+    citation: [1, 2],
     options: [
       {
         label: 'Pulseless traumatic arrest',
@@ -90,6 +91,7 @@ export const TRAUMATIC_ARREST_NODES: DecisionNode[] = [
     module: 2,
     title: 'Mechanism Drives Thoracotomy Threshold',
     body: 'What is the arrest mechanism?',
+    citation: [2, 3],
     options: [
       {
         label: 'Penetrating thoracic trauma',
