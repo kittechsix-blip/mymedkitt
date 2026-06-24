@@ -26407,6 +26407,14 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
       heading: 'Angiocatheter Instead of a Needle for Knee Arthrocentesis',
       body: '**Accomplishes:** Lets you tap or inject a knee without a rigid metal needle sitting in the joint \u2014 a soft catheter stays put through syringe swaps, lets you milk out every fluid pocket, and spares cartilage from needle movement. [27]\n\n**How to:**\n1. Prep and anesthetize for arthrocentesis in the usual way (anteromedial or anterolateral approach).\n2. Put an 18-gauge angiocatheter (instead of a plain needle) on the syringe.\n3. Insert while aspirating; the instant synovial fluid returns, advance the plastic catheter into the joint and withdraw the inner needle.\n4. Aspirate through the indwelling catheter; gently milk/manipulate the knee to herd fluid toward the tip, and aspirate as you slowly withdraw to catch residual pockets (watch for catheter kinking).\n5. The same catheter lets you swap syringes or inject intra-articular steroid/anesthetic without re-sticking.\n\n**Equipment:** 18-gauge angiocatheter, syringe(s), antiseptic, sterile drapes, local anesthetic, optional intra-articular steroid.\n\n_Source: ALiEM Trick of the Trade \u2014 Knee arthrocentesis with an angiocatheter (Fred Wu)._',
     },
+    {
+      heading: 'IV Tubing as an LP Opening-Pressure Manometer',
+      body: '**Accomplishes:** Measures CSF opening pressure during a lumbar puncture when no dedicated spinal manometer is on the tray, using the giving set every ED already stocks. [28]\n\n**How to:**\n1. Keep the patient in the LATERAL DECUBITUS position with legs relaxed \u2014 a sitting position or a straining/Valsalva patient falsely raises the reading.\n2. Once you have free CSF flow, attach a three-way stopcock to the spinal needle hub.\n3. Connect a length of standard IV giving-set tubing to the stopcock, held vertically against a tape measure or ruler.\n4. Open the stopcock to the tubing and let CSF rise; read the height of the fluid column above the needle in cm.\n5. Interpret cautiously \u2014 a giving set tends to UNDERESTIMATE versus a true manometer (an upper-normal of ~25 cm on a manometer reads ~19 cm here), so treat borderline values as approximate and confirm with a manometer when management hinges on the number.\n\n**Equipment:** Three-way stopcock, sterile IV giving-set tubing, tape measure or ruler.\n\n_Source: Du Toit J, et al. Is the intravenous giving set a reliable alternative to the spinal manometer in measuring CSF opening pressure? (PubMed 30421716)._',
+    },
+    {
+      heading: 'Lateral Insulin-Needle Drainage of a Subungual Hematoma',
+      body: '**Accomplishes:** Evacuates a painful subungual hematoma without drilling through the nail plate \u2014 you enter alongside the nail with a fine needle, avoiding the cracking and nail-bed contact of the drill or cautery methods. [29]\n\n**How to:**\n1. Confirm an intact nail with a simple hematoma (no large nail-edge laceration or displaced distal phalanx fracture needing repair); clean the digit.\n2. Take a 29-gauge extra-fine (insulin) needle and orient it PARALLEL to the nail at the hyponychium (the free distal edge).\n3. Aim toward the most distal portion of the hematoma, keeping the needle closer to the underside of the nail than to the nail bed.\n4. Advance just until you penetrate the blood pocket, then withdraw the needle.\n5. Apply gentle pressure on the nail to milk the dark blood out through the channel; dress the fingertip.\n\n**Equipment:** 29-gauge (insulin) needle, antiseptic, gauze.\n\n_Source: Merck Manual Professional \u2014 How to do nail trephination; Brown Emergency Medicine Blog \u2014 Subungual hematomas (2024)._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -26436,6 +26444,8 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
     { num: 25, text: 'ALiEM. Trick of the Trade: Seldinger chest tube technique using a bougie (Maddow/Trueger). aliem.com. See also Bougie-Assisted Tube Thoracostomy Placement. Ann Emerg Med. 2015.' },
     { num: 26, text: 'ALiEM. Trick of the Trade: Bubble study for confirmation of central line placement (Montrief). aliem.com. Duran-Gehring P, et al. Ultrasound bubble study for central venous catheter placement confirmation. Am J Emerg Med. 2015;33(3):315-319.' },
     { num: 27, text: 'ALiEM. Trick of the Trade: Knee arthrocentesis using an angiocatheter (Fred Wu). aliem.com.' },
+    { num: 28, text: 'Du Toit J, et al. Is the intravenous giving set a reliable alternative to the spinal manometer in measuring cerebrospinal fluid opening pressure? S Afr Med J. 2018. PubMed 30421716.' },
+    { num: 29, text: 'Merck Manual Professional. How to do nail trephination. merckmanuals.com. See also Brown Emergency Medicine Blog \u2014 Subungual hematomas (2024).' },
   ],
 };
 
@@ -26669,6 +26679,10 @@ const TRICKS_UROLOGY_PAGE: InfoPage = {
       heading: 'Iced-Glove Compression for Paraphimosis',
       body: '**Accomplishes:** Shrinks the swollen trapped foreskin in paraphimosis with cold-driven vasoconstriction so it can be manually reduced \u2014 a fast, equipment-light alternative when sugar/osmotic methods are unavailable. [14]\n\n**How to:**\n1. Confirm paraphimosis (foreskin stuck proximal to the glans with a constricting band and distal edema); this is time-sensitive \u2014 do not delay if the glans is dusky/compromised.\n2. Give analgesia first (topical EMLA, a dorsal penile nerve block, or IV opioid); a numb patient lets you compress effectively.\n3. Fill an exam glove with ice and a little water, then invaginate (push in) the thumb of the glove to make a pocket.\n4. Slide the edematous glans and foreskin into the iced thumb pocket and hold for several minutes \u2014 the cold contracts vessels and squeezes fluid out of the swollen tissue.\n5. Once edema is down, reduce manually: both thumbs on the glans, index fingers drawing the foreskin forward over it. If cold + manual reduction fails, escalate to puncture/dorsal-slit or urology.\n\n**Equipment:** Exam glove, ice + water, analgesia (EMLA / dorsal penile block / IV opioid).\n\n_Source: Pediatric EM Morsels \u2014 Pediatric paraphimosis (iced-glove technique); EM:RAP \u2014 Paraphimosis reduction._',
     },
+    {
+      heading: 'Point the Coude Balloon Port Up to Clear an Enlarged Prostate',
+      body: '**Accomplishes:** Gets a Foley past an obstructing prostate (BPH) or a posterior false passage on the first try by guaranteeing the curved coude tip rides over the obstruction instead of digging into it. [15]\n\n**How to:**\n1. Choose a coude (curved-tip) catheter for the anticipated difficult male \u2014 the bend hugs the natural upward curve of the bulbar/prostatic urethra and is less likely to create a false passage than a straight tip.\n2. Before insertion, find the balloon-inflation port (the small side knob at the drainage end): the curved tip points the SAME direction as that port.\n3. Hold the catheter so the balloon port \u2014 and therefore the tip \u2014 points UP toward the ceiling (anterior/cephalad) the entire time.\n4. Inject lidocaine jelly into the meatus first, put the penis on gentle upward traction (~60\u00B0 along its curve), and advance steadily without rotating the catheter.\n5. Insert ALL the way to the Y-hub before inflating the balloon \u2014 early urine return does not confirm the balloon is in the bladder, and inflating in the urethra causes serious injury.\n\n**Equipment:** Coude (curved-tip) Foley catheter, lidocaine lubricating jelly, syringe.\n\n_Source: WikEM \u2014 Coude catheter; StatPearls \u2014 Difficult Foley Catheterization (NCBI Bookshelf NBK564404)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26685,6 +26699,7 @@ const TRICKS_UROLOGY_PAGE: InfoPage = {
     { num: 12, text: 'ALiEM. Trick of the Trade: Removing a tungsten ring stuck on your finger (vise-grip fracture technique). aliem.com.' },
     { num: 13, text: 'ALiEM. Trick of the Trade: Hair tourniquet removal using depilatory cream. aliem.com.' },
     { num: 14, text: 'Pediatric EM Morsels. Pediatric paraphimosis (iced-glove reduction technique). pedemmorsels.com. See also EM:RAP \u2014 Paraphimosis reduction and First10EM \u2014 Paraphimosis.' },
+    { num: 15, text: 'WikEM. Coude catheter. wikem.org. See also StatPearls \u2014 Difficult Foley Catheterization (NCBI Bookshelf NBK564404).' },
   ],
 };
 
@@ -26816,6 +26831,10 @@ const TRICKS_CARDIOLOGY_PAGE: InfoPage = {
       heading: 'Ice-Water Slurry to the Face to Break Infant SVT (Diving Reflex)',
       body: '**Accomplishes:** Terminates stable supraventricular tachycardia in neonates and young infants via the mammalian diving reflex \u2014 a vagal maneuver you can do while IV access and adenosine are being prepared. [9]\n\n**How to:**\n1. Keep the infant on continuous ECG monitoring with defibrillator pads already in place.\n2. Wrap the arms snugly in a towel to keep them out of the way.\n3. Fill a bag (or soak a washcloth) with an ice-and-water slurry (~5 \u00B0C / ice plus a little water).\n4. Apply it firmly over the WHOLE face \u2014 forehead, eyes, and bridge of the nose \u2014 for ~15\u201330 seconds; do not occlude breathing longer than tolerated.\n5. Watch the monitor for abrupt conversion. Do NOT use carotid massage or eyeball pressure in infants. If there is no conversion, move to adenosine 0.1 mg/kg rapid IV.\n\n**Equipment:** Ice, water, plastic bag or washcloth, towel, cardiac monitor with defibrillator pads.\n\n_Source: ALiEM EM ReSCu Peds \u2014 Pediatric SVT case (diving reflex vagal maneuver)._',
     },
+    {
+      heading: 'Abdominal-Pressure \u201CPush Me Away\u201D Valsalva for SVT',
+      body: '**Accomplishes:** Generates an effective vagal strain in a patient who cannot follow blow-into-a-syringe instructions \u2014 the patient pushes against your hands on their belly, which is intuitive and easy to coach. [10]\n\n**How to:**\n1. Confirm the patient is hemodynamically stable and on a cardiac monitor; lay them supine.\n2. Have the patient relax the abdomen, then place both of your hands flat near the umbilicus.\n3. Apply firm downward pressure and tell the patient to \u201Cpush my hands away\u201D using their belly \u2014 bearing down against your resistance creates the Valsalva strain.\n4. Hold the strain for ~15 seconds, then release; if combining with the modified Valsalva, lay them flat and raise the legs at this point.\n5. Re-check the rhythm; repeat once before escalating to adenosine.\n\n**Equipment:** None (examiner\u2019s hands), cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Valsalva maneuver by pressing on the abdomen._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
@@ -26827,6 +26846,7 @@ const TRICKS_CARDIOLOGY_PAGE: InfoPage = {
     { num: 7, text: 'ALiEM. Posterior myocardial infarction \u2014 how accurate is the flipped ECG trick? (posterior leads V7\u2013V9). aliem.com. See also ALiEM Paucis Verbis: Right and posterior ECG leads.' },
     { num: 8, text: 'ALiEM. Trick of the Trade: Quieting the shaky EKG tracing (have the patient sit on their hands). aliem.com.' },
     { num: 9, text: 'ALiEM EM ReSCu Peds. Pediatric supraventricular tachycardia case \u2014 ice-water slurry to the face (diving reflex) as a vagal maneuver. aliem.com.' },
+    { num: 10, text: 'ALiEM. Trick of the Trade: Valsalva maneuver by pressing on the abdomen. aliem.com.' },
   ],
 };
 
@@ -27266,6 +27286,10 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
       heading: 'Hematoma Block Instead of Sedation for Ankle Fracture-Dislocation',
       body: '**Accomplishes:** Gives analgesia comparable to procedural sedation for closed reduction of an ankle fracture-dislocation, without the respiratory/cardiovascular risk, extra staffing, or delay \u2014 letting you reduce a time-sensitive injury faster. [26]\n\n**How to:**\n1. Identify the fracture site and prep the skin with antiseptic.\n2. Insert the needle into the fracture hematoma / ankle joint and aspirate to confirm a flash of blood (intra-articular/intra-hematoma placement).\n3. Infiltrate local anesthetic into the hematoma and joint space; wait 5\u201310 minutes for onset.\n4. Reduce by reversing the deforming force: flex the knee to relax the gastroc-soleus, plantarflex the ankle, and apply traction with anterior force on the heel.\n5. Apply a posterior plus stirrup splint, then obtain post-reduction films and a neurovascular exam.\n\n**Equipment:** Local anesthetic (lidocaine +/- bupivacaine), syringe, needle, antiseptic, posterior/stirrup splint material.\n\n_Source: Singh et al. \u2014 hematoma block for closed reduction of ankle fracture dislocations; ALiEM SplintER Series._',
     },
+    {
+      heading: 'Mallet Finger \u2014 Splint the DIP in Extension, Leave the PIP Free',
+      body: '**Accomplishes:** Treats a mallet finger (extensor tendon avulsion at the DIP, dropped fingertip) non-operatively while avoiding the single most common cause of failure \u2014 letting the DIP flex even once and resetting the healing clock. [27]\n\n**How to:**\n1. Confirm a mallet finger: the patient cannot actively straighten the fingertip; x-ray to check for an avulsion fragment (most are still managed non-operatively unless the fragment involves >1/3 of the joint or there is volar subluxation).\n2. Apply a stack/foam or aluminum splint holding ONLY the DIP joint in full extension (slight hyperextension is acceptable; do NOT force marked hyperextension, which blanches the skin).\n3. Leave the PIP joint completely FREE to bend \u2014 splinting it stiffens the finger needlessly.\n4. Counsel the cardinal rule: the DIP must stay extended 24/7 for 6\u20138 weeks. If the fingertip droops even briefly during a splint change, the 6\u20138-week clock starts over.\n5. Teach a swap-without-flexing technique (support the fingertip flat on a table while changing the splint) and arrange hand-clinic follow-up.\n\n**Equipment:** Stack/foam or aluminum mallet (DIP-extension) splint, tape, x-ray.\n\n_Source: ALiEM SplintER Series \u2014 Mallet finger; Medscape \u2014 Mallet finger treatment & management._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -27294,6 +27318,7 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
     { num: 24, text: 'Emergency Physicians Monthly. Distal radius fractures: reducing the confusion (hematoma block + finger-trap gravity disimpaction). epmonthly.com.' },
     { num: 25, text: 'StatPearls. Posterior Elbow Dislocation. ncbi.nlm.nih.gov/books/NBK470574. Singh & Pradhan. Closed reduction of posterior dislocation of the elbow: a simple technique. PubMed 9892129.' },
     { num: 26, text: 'Singh BI, et al. The hematoma block: a simple, effective technique for closed reduction of ankle fracture dislocations. PubMed 21708343. See also ALiEM SplintER Series: Ankle Dislocation.' },
+    { num: 27, text: 'ALiEM. SplintER Series: Mallet finger. aliem.com. See also Medscape \u2014 Mallet finger treatment & management (emedicine.medscape.com/article/1242305).' },
   ],
 };
 

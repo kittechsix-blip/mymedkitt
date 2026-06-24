@@ -75,7 +75,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#00838F',
     subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
     infoPageId: 'tricks-procedures',
-    trickCount: 32,
+    trickCount: 34,
     category: 'resus-procedures',
   },
   {
@@ -115,7 +115,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#EF6C00',
     subtitle: 'Voiding trials, renal colic, priapism, and entrapment releases.',
     infoPageId: 'tricks-urology',
-    trickCount: 10,
+    trickCount: 11,
     category: 'genitourinary',
   },
   {
@@ -135,7 +135,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#C62828',
     subtitle: 'Rapid adenosine delivery and rhythm tricks.',
     infoPageId: 'tricks-cardiology',
-    trickCount: 9,
+    trickCount: 10,
     category: 'resus-procedures',
   },
   {
@@ -175,7 +175,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#5D4037',
     subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
     infoPageId: 'tricks-ortho',
-    trickCount: 25,
+    trickCount: 26,
     category: 'wounds-msk',
   },
 ];
