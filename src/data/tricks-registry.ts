@@ -85,7 +85,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#6A1B9A',
     subtitle: 'Epistaxis packing tricks and nasal suction.',
     infoPageId: 'tricks-ent',
-    trickCount: 17,
+    trickCount: 19,
     category: 'head-neck',
   },
   {
@@ -155,7 +155,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#37474F',
     subtitle: 'Antiemetic and toxidrome management pearls.',
     infoPageId: 'tricks-tox',
-    trickCount: 3,
+    trickCount: 4,
     category: 'general-tox',
   },
   {
@@ -175,7 +175,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#5D4037',
     subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
     infoPageId: 'tricks-ortho',
-    trickCount: 26,
+    trickCount: 28,
     category: 'wounds-msk',
   },
 ];
