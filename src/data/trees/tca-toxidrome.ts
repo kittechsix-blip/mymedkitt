@@ -20,8 +20,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'TCA Overdose — Initial Assessment',
-    body: '[TCA Overdose Steps Summary](#/info/tca-steps-summary) — quick reference.\n\nTricyclic antidepressants remain a leading cause of death from prescription drug overdose. **Narrow therapeutic index** — lethal dose is only 3-5× the therapeutic dose [1][3].\n\n**Multiple mechanisms of toxicity:**\n• **Sodium channel blockade** → QRS widening → ventricular arrhythmias (most dangerous)\n• Anticholinergic effects → tachycardia, mydriasis, AMS\n• Alpha-1 blockade → hypotension\n• GABA-A antagonism → seizures\n• K+ channel blockade → QT prolongation\n\n⚠️ **Toxicity can progress from alert to cardiac arrest within 1 hour** [1][16].\n\nCommon TCAs: amitriptyline, nortriptyline, imipramine, desipramine, doxepin, clomipramine.\n\n[Agents That Block Sodium Channels](#/info/tca-na-blockers) — comprehensive list.\n\nWhat is the patient\'s current clinical status?',
-    citation: [1, 3, 16],
+    body: '[TCA Overdose Steps Summary](#/info/tca-steps-summary) — quick reference.\n\nTricyclic antidepressants remain a leading cause of death from prescription drug overdose. **Narrow therapeutic index** — lethal dose is only 3-5× the therapeutic dose [1][3].\n\n**Multiple mechanisms of toxicity:**\n• **Sodium channel blockade** → QRS widening → ventricular arrhythmias (most dangerous)\n• Anticholinergic effects → tachycardia, mydriasis, AMS\n• Alpha-1 blockade → hypotension\n• GABA-A antagonism → seizures\n• K+ channel blockade → QT prolongation\n\n⚠️ **Toxicity can progress from alert to cardiac arrest within 1 hour** [1][16].\n\nCommon TCAs: amitriptyline, nortriptyline, imipramine, desipramine, doxepin, clomipramine.\n\n[Agents That Block Sodium Channels](#/info/tca-na-blockers) — comprehensive list. Other agents (e.g., diphenhydramine) can produce the same Na-channel-blockade picture [15].\n\nWhat is the patient\'s current clinical status?',
+    citation: [1, 3, 15, 16],
     options: [
       { label: 'Mild — anticholinergic features', description: 'Alert, tachycardic, mydriasis, dry skin. No seizures, no hemodynamic instability.', next: 'tca-mild' },
       { label: 'Moderate — altered mental status', description: 'Drowsy to obtunded, tachycardia, but no seizures or wide QRS.', next: 'tca-critical' },
@@ -147,8 +147,8 @@ export const TCA_TOXIDROME_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Sodium Bicarbonate — Cornerstone of Treatment',
-    body: '[NaHCO₃ Protocol](#/info/tca-bicarb-protocol) — detailed reference.\n\n**Indications for bicarbonate** [4][16]:\n• QRS >100 ms\n• Ventricular arrhythmias\n• Hypotension refractory to fluids\n• Seizures (adjunct)\n\n**Bolus:** [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose) 1-2 mEq/kg IV push. Repeat every 3-5 minutes until QRS narrows [4][16].\n\n**Mechanism (dual action)** [16]:\n1. **Sodium loading** — high sodium content competes for cardiac sodium channels\n2. **Alkalosis** — increases protein binding of TCA (less free/toxic drug)\n\n⚠️ Severe cases may require massive doses — one case report used 2650 mEq total [8].\n\nIf QRS doesn\'t respond despite 100-200 mEq, question the diagnosis — but do not give up prematurely [16].',
-    citation: [4, 8, 16],
+    body: '[NaHCO₃ Protocol](#/info/tca-bicarb-protocol) — detailed reference.\n\n**Indications for bicarbonate** [4][16]:\n• QRS >100 ms\n• Ventricular arrhythmias\n• Hypotension refractory to fluids\n• Seizures (adjunct)\n\n**Bolus:** [Sodium Bicarbonate](#/drug/sodium-bicarbonate/tca overdose) 1-2 mEq/kg IV push. Repeat every 3-5 minutes until QRS narrows [4][16].\n\n**Mechanism (dual action)** [16]:\n1. **Sodium loading** — high sodium content competes for cardiac sodium channels\n2. **Alkalosis** — increases protein binding of TCA (less free/toxic drug)\n\n⚠️ Severe cases may require massive doses — one case report used 2650 mEq total [8].\n\nIf QRS doesn\'t respond despite 100-200 mEq, question the diagnosis — but do not give up prematurely [16][20].',
+    citation: [4, 8, 16, 20],
     calculatorLinks: [{ id: 'bicarb-dose', label: 'NaHCO₃ Dose Calculator' }],
     treatment: {
       firstLine: {
@@ -550,7 +550,7 @@ export const TCA_TOXIDROME_CRITICAL_ACTIONS = [
   { text: 'Intubate for airway protection - propofol if hemodynamically stable, ketamine/benzo if unstable (avoid propofol push-dose with hypotension)', nodeId: 'tca-intubation' },
   { text: 'Lipid emulsion 20%: 1.5 mL/kg bolus if refractory arrhythmias or cardiac arrest', nodeId: 'tca-lipid' },
   { text: 'Norepinephrine first-line for hypotension; phenylephrine reserved for markedly tachycardic patients (pure alpha)', nodeId: 'tca-vasopressors' },
-  { text: 'Avoid class IA/IC antiarrhythmics (procainamide, flecainide - worsen sodium channel blockade)', nodeId: 'tca-bicarb' },
+  { text: 'Avoid class IA/IC antiarrhythmics (procainamide, flecainide - worsen sodium channel blockade)', nodeId: 'tca-vtach' },
   { text: 'Benzodiazepines for seizures (lorazepam 0.1 mg/kg IV)', nodeId: 'tca-seizure' },
 ];
 

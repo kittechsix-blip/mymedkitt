@@ -2,7 +2,7 @@
 // Immediate Post-ROSC → Hemodynamic Targets → Temperature Management → Neuroprognostication → ICU Targets
 // AHA 2023, TTM2 Trial, ERC 2021. 5 modules, 16 nodes.
 export const POST_ROSC_CRITICAL_ACTIONS = [
-    { text: '12-lead ECG immediately — STEMI → emergent PCI, do not delay', nodeId: 'rosc-stemi' },
+    { text: '12-lead ECG immediately — STEMI → emergent PCI, do not delay', nodeId: 'rosc-cath' },
     { text: 'MAP ≥65 mmHg — start norepinephrine if hypotensive', nodeId: 'rosc-hemo' },
     { text: 'SpO₂ 94-98% — avoid hyperoxia; PaCO₂ 35-45 — avoid hypocapnia', nodeId: 'rosc-hemo' },
     { text: 'Prevent fever >37.8°C × 72h for comatose patients', nodeId: 'rosc-ttm-coma' },
