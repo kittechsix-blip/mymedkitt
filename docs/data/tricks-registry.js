@@ -40,7 +40,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 34,
+        trickCount: 36,
         category: 'resus-procedures',
     },
     {
@@ -110,7 +110,7 @@ export const TRICK_SPECIALTIES = [
         color: '#4527A0',
         subtitle: 'Bedside CN testing, BPPV maneuvers, and refractory migraine rescue.',
         infoPageId: 'tricks-neuro',
-        trickCount: 6,
+        trickCount: 7,
         category: 'head-neck',
     },
     {
@@ -130,7 +130,7 @@ export const TRICK_SPECIALTIES = [
         color: '#455A64',
         subtitle: 'Fast bedside screens, dosing pearls, communication.',
         infoPageId: 'tricks-general',
-        trickCount: 11,
+        trickCount: 12,
         category: 'general-tox',
     },
     {
@@ -140,7 +140,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
         infoPageId: 'tricks-ortho',
-        trickCount: 28,
+        trickCount: 30,
         category: 'wounds-msk',
     },
 ];

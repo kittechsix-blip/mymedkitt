@@ -25284,6 +25284,14 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Lateral Insulin-Needle Drainage of a Subungual Hematoma',
             body: '**Accomplishes:** Evacuates a painful subungual hematoma without drilling through the nail plate \u2014 you enter alongside the nail with a fine needle, avoiding the cracking and nail-bed contact of the drill or cautery methods. [29]\n\n**How to:**\n1. Confirm an intact nail with a simple hematoma (no large nail-edge laceration or displaced distal phalanx fracture needing repair); clean the digit.\n2. Take a 29-gauge extra-fine (insulin) needle and orient it PARALLEL to the nail at the hyponychium (the free distal edge).\n3. Aim toward the most distal portion of the hematoma, keeping the needle closer to the underside of the nail than to the nail bed.\n4. Advance just until you penetrate the blood pocket, then withdraw the needle.\n5. Apply gentle pressure on the nail to milk the dark blood out through the channel; dress the fingertip.\n\n**Equipment:** 29-gauge (insulin) needle, antiseptic, gauze.\n\n_Source: Merck Manual Professional \u2014 How to do nail trephination; Brown Emergency Medicine Blog \u2014 Subungual hematomas (2024)._',
         },
+        {
+            heading: 'Blood-Pressure Cuff as a Wide, Adjustable IV Tourniquet',
+            body: '**Accomplishes:** Distends veins for difficult IV access more comfortably and controllably than a rubber band tourniquet \u2014 the wide cuff compresses evenly and lets you dial in the exact pressure that fills the veins without occluding arterial inflow. [30]\n\n**How to:**\n1. Wrap a standard BP cuff around the arm proximal to your target vein.\n2. Inflate to roughly the patient\u2019s diastolic pressure (or start low and creep up) so venous outflow is blocked but the radial pulse stays palpable.\n3. Let the veins fill for a minute, then cannulate as usual.\n4. Deflate the cuff once the catheter is in and flushing.\n\n**Equipment:** Blood-pressure cuff with manometer/bulb, IV catheter.\n\n_Source: Approach to Difficult Vascular Access (ALiEM); standard ED difficult-access technique._',
+        },
+        {
+            heading: 'Stethoscope as a Neck Tourniquet for External Jugular Cannulation',
+            body: '**Accomplishes:** Plumps up a flat external jugular vein for IV access when you have no good way to tourniquet the neck \u2014 a stethoscope looped around the neck increased EJ cross-sectional area about 4-fold in one minute, without compressing the trachea or needing Trendelenburg. [31]\n\n**How to:**\n1. Position the patient supine with the head turned slightly away from the target side.\n2. Loop the tubing of your stethoscope around the patient\u2019s neck (binaurals/chestpiece acting like the tourniquet ends), snug but comfortable, occluding the superficial EJ without restricting the airway.\n3. Wait ~1 minute for the EJ to distend and become visible/palpable.\n4. Cannulate the EJ as usual; have the patient hum if you need extra distension.\n5. Remove the stethoscope once the catheter is seated.\n\n**Equipment:** Stethoscope, IV catheter.\n\n_Source: ALiEM Trick of the Trade \u2014 External jugular tourniquet (stethoscope); see also Hum-out the jugular veins (UCSF)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25315,6 +25323,8 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 27, text: 'ALiEM. Trick of the Trade: Knee arthrocentesis using an angiocatheter (Fred Wu). aliem.com.' },
         { num: 28, text: 'Du Toit J, et al. Is the intravenous giving set a reliable alternative to the spinal manometer in measuring cerebrospinal fluid opening pressure? S Afr Med J. 2018. PubMed 30421716.' },
         { num: 29, text: 'Merck Manual Professional. How to do nail trephination. merckmanuals.com. See also Brown Emergency Medicine Blog \u2014 Subungual hematomas (2024).' },
+        { num: 30, text: 'ALiEM. Approach to Difficult Vascular Access. aliem.com. (Blood-pressure cuff as a wide, adjustable tourniquet.)' },
+        { num: 31, text: 'ALiEM. Trick of the Trade: External jugular tourniquet (stethoscope around the neck). aliem.com. See also ALiEM. Trick of the Trade: Hum-out the jugular veins (UCSF venous distension study).' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25753,6 +25763,10 @@ const TRICKS_NEURO_PAGE = {
             heading: 'Smartphone Selfie Mode for Gaze Testing in Aphasic Patients',
             body: '**Accomplishes:** Tests voluntary horizontal gaze (NIHSS \u201Cbest gaze\u201D) in a patient who can\u2019t follow verbal commands, by exploiting their reflex to track their own familiar face on the screen. [7]\n\n**How to:**\n1. Open the phone\u2019s camera app and switch to \u201Cselfie\u201D (front-facing) mode.\n2. Hold the screen ~30\u201340 cm in front of the patient so they see their own face.\n3. Slowly move the phone side to side and watch whether the eyes track horizontally in both directions.\n4. Note any conjugate gaze deviation or failure to cross midline as you would on the formal NIHSS.\n\n**Equipment:** Smartphone with a front-facing camera.\n\n_Source: ALiEM Trick of the Trade \u2014 Gaze testing using selfie mode (Bortolon 2017)._',
         },
+        {
+            heading: 'Saline-Drop Corneal Reflex Test',
+            body: '**Accomplishes:** Tests the corneal (blink) reflex (CN V afferent, CN VII efferent) in an obtunded patient without dragging a cotton wisp across the cornea and risking an abrasion. [8]\n\n**How to:**\n1. Grab a pre-filled sterile saline flush syringe (the kind used to flush IVs).\n2. From a few centimeters away, squirt a few drops of sterile saline directly onto the cornea.\n3. Watch for a reflexive blink; test each eye and compare.\n4. An intact blink confirms the CN V\u2013VII reflex arc without touching the eye.\n\n**Equipment:** Pre-filled sterile saline flush syringe.\n\n_Source: ALiEM Trick of the Trade \u2014 Corneal reflex test (saline-drop method)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25762,6 +25776,7 @@ const TRICKS_NEURO_PAGE = {
         { num: 5, text: 'Robblee J, et al. 2025 guideline update to acute treatment of migraine for adults in the ED: American Headache Society evidence assessment of parenteral pharmacotherapies. Headache. 2026;66(1):53-76.' },
         { num: 6, text: 'ALiEM. Trick of the Trade: Sphenopalatine ganglion block for treatment of primary headaches. aliem.com.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Gaze testing using \u201Cselfie mode\u201D on your smartphone camera. aliem.com. Bortolon C, et al. 2017.' },
+        { num: 8, text: 'ALiEM. Trick of the Trade: Corneal reflex test (sterile saline-drop method). aliem.com.' },
     ],
 };
 const TRICKS_TOX_PAGE = {
@@ -25844,6 +25859,10 @@ const TRICKS_GENERAL_PAGE = {
             heading: 'Angiocatheter-as-Caulk-Gun for Clean Dental Cement Application',
             body: '**Accomplishes:** Delivers fast-drying temporary dental cement precisely onto the exposed dentin of a fractured tooth (Ellis class II/III) without the usual messy, clumsy finger application, protecting the pulp until dental follow-up. [11]\n\n**How to:**\n1. Gather everything FIRST \u2014 dental cement sets fast, so have your delivery system ready before you mix.\n2. Remove the plastic catheter from an 18-gauge angiocatheter and seat the catheter hub onto a 3 mL syringe.\n3. Mix a slightly larger-than-usual quantity of the dental cement.\n4. Pull the syringe plunger out, load the cement into the back of the barrel, reinsert the plunger, and advance until cement reaches the fine catheter tip.\n5. Dry the tooth, then use the fine tip to lay a precise bead of cement over the exposed dentin; arrange urgent dental follow-up.\n\n**Equipment:** 3 mL syringe, 18-gauge angiocatheter, temporary dental cement and mixing supplies, gauze to dry the tooth.\n\n_Source: ALiEM Trick of the Trade \u2014 A cleaner way to apply dental cement (Jason Hine)._',
         },
+        {
+            heading: 'MidaKet (Midazolam + Ketamine) to Cut Procedural Sedation Side Effects',
+            body: '**Accomplishes:** Combines midazolam with ketamine for procedural sedation so you can use a lower total ketamine dose \u2014 which reduces hypersalivation and emergence agitation \u2014 often without needing a separate antisialagogue. [12]\n\n**How to:**\n1. Use for a monitored painful procedure (e.g., fracture/joint reduction, abscess I&D) in an airway-capable setting with full monitoring.\n2. Give a small dose of midazolam first (e.g., 1\u20132 mg IV in a typical adult, per local protocol) to blunt emergence phenomena.\n3. Titrate ketamine to dissociation; the co-administered midazolam lets you reach effect with less total ketamine.\n4. Because lower ketamine doses produce less salivation, a routine antisialagogue (atropine/glycopyrrolate) is usually unnecessary.\n5. Monitor SpO2, capnography, BP, and airway throughout and during recovery; treat agitation with additional small midazolam aliquots if needed.\n\n**Equipment:** IV midazolam, IV ketamine, cardiac monitor, SpO2, capnography, oxygen, suction, BVM/airway cart, sedation-credentialed clinician.\n\n_Source: EMCrit 379 \u2014 Procedural Sedation Part IV (the critically ill patient and MidaKet); PulmCrit (Weingart/Farkas)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25857,6 +25876,7 @@ const TRICKS_GENERAL_PAGE = {
         { num: 9, text: 'National Capital Poison Center (Poison Control). Button battery ingestion triage and treatment guideline (honey/sucralfate). poison.org. See also NASPGHAN/ESPGHAN position statements on button battery management.' },
         { num: 10, text: 'ALiEM. Trick of the Trade: Serial lactate measurements in sepsis (Michelle Lin). aliem.com. Jones AE, Shapiro NI, Trzeciak S, et al. Lactate clearance vs central venous oxygen saturation as goals of early sepsis therapy. JAMA. 2010;303(8):739-746.' },
         { num: 11, text: 'ALiEM. Trick of the Trade: A cleaner way to apply dental cement \u2014 angiocatheter delivery (Jason Hine). aliem.com.' },
+        { num: 12, text: 'EMCrit 379 \u2014 Procedural Sedation Part IV: the critically ill patient and MidaKet. emcrit.org. See also PulmCrit: MidaKet for procedural sedation in critical illness.' },
     ],
 };
 const DENTAL_EXTRACTION_STEPS_PAGE = {
@@ -26165,6 +26185,10 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Ultrasound-Guided Intra-Articular Lidocaine for Shoulder Reduction',
             body: '**Accomplishes:** Provides pre-reduction analgesia for an anterior shoulder dislocation with equal success to procedural sedation but fewer adverse events and shorter ED stay \u2014 essentially a hematoma block of the glenohumeral joint. [29]\n\n**How to:**\n1. Prep the posterolateral shoulder sterile: chlorhexidine, sterile gloves, sterile gel, and a probe cover.\n2. Place the probe to visualize the glenohumeral joint and the gap left by the dislocated humeral head.\n3. Use a SPINAL needle \u2014 a standard needle often will not reach the deep joint.\n4. Advance under direct ultrasound guidance into the joint; you almost always get a flash of blood (hemarthrosis) confirming intra-articular position.\n5. Inject 15\u201320 mL of 1% lidocaine into the joint, wait 10\u201315 minutes for onset, then attempt your reduction maneuver of choice.\n\n**Equipment:** Ultrasound with linear probe, spinal needle, 1% lidocaine, sterile prep (chlorhexidine, sterile gloves/gel, probe cover).\n\n_Source: ALiEM Trick of the Trade \u2014 Ultrasound-guided injection for shoulder dislocation (Stone)._',
         },
+        {
+            heading: 'Ultrasound-Guided Ulnar Nerve Block for Boxer\u2019s Fracture Reduction',
+            body: '**Accomplishes:** Provides clean analgesia for reduction and splinting of a 5th-metacarpal (boxer\u2019s) fracture when severe swelling makes a hematoma block fail \u2014 a forearm ulnar nerve block anesthetizes the little finger and ulnar hand without procedural sedation. [30]\n\n**How to:**\n1. Position the forearm supinated; scan the volar mid-forearm with a high-frequency linear probe.\n2. Find the ulnar artery, then identify the round, honeycomb ulnar nerve sitting just ULNAR (medial) to the artery.\n3. Trace proximally a few centimeters to where the nerve separates from the artery \u2014 block there to avoid the vessel.\n4. Under real-time ultrasound, advance an in-plane needle and deposit 5\u201310 mL of local anesthetic to surround the nerve.\n5. Wait ~10\u201315 minutes for the little/ring finger and ulnar hand to go numb, then reduce and apply an ulnar gutter splint.\n\n**Equipment:** Ultrasound with linear probe, block needle, 5\u201310 mL local anesthetic, sterile prep, ulnar gutter splint material.\n\n_Source: ALiEM Trick of the Trade \u2014 Ultrasound-guided ulnar nerve block for boxer\u2019s fracture analgesia._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -26196,6 +26220,7 @@ const TRICKS_ORTHO_PAGE = {
         { num: 27, text: 'ALiEM. SplintER Series: Mallet finger. aliem.com. See also Medscape \u2014 Mallet finger treatment & management (emedicine.medscape.com/article/1242305).' },
         { num: 28, text: 'The Fulcrum: a novel technique for reduction of shoulder dislocations. CJEM 2025. ncbi.nlm.nih.gov/pmc/articles/PMC12170694.' },
         { num: 29, text: 'ALiEM. Trick of the Trade: Ultrasound-guided injection for shoulder dislocation (Stone). aliem.com.' },
+        { num: 30, text: 'ALiEM. Trick of the Trade: Ultrasound-guided ulnar nerve block for analgesia in boxer\u2019s (5th metacarpal) fracture reduction. aliem.com.' },
     ],
 };
 // ===================================================================
