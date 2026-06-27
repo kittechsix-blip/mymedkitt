@@ -25292,6 +25292,14 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Stethoscope as a Neck Tourniquet for External Jugular Cannulation',
             body: '**Accomplishes:** Plumps up a flat external jugular vein for IV access when you have no good way to tourniquet the neck \u2014 a stethoscope looped around the neck increased EJ cross-sectional area about 4-fold in one minute, without compressing the trachea or needing Trendelenburg. [31]\n\n**How to:**\n1. Position the patient supine with the head turned slightly away from the target side.\n2. Loop the tubing of your stethoscope around the patient\u2019s neck (binaurals/chestpiece acting like the tourniquet ends), snug but comfortable, occluding the superficial EJ without restricting the airway.\n3. Wait ~1 minute for the EJ to distend and become visible/palpable.\n4. Cannulate the EJ as usual; have the patient hum if you need extra distension.\n5. Remove the stethoscope once the catheter is seated.\n\n**Equipment:** Stethoscope, IV catheter.\n\n_Source: ALiEM Trick of the Trade \u2014 External jugular tourniquet (stethoscope); see also Hum-out the jugular veins (UCSF)._',
         },
+        {
+            heading: 'Glass Cleaner (Windex) as a Slick Lubricant for Ring Removal',
+            body: '**Accomplishes:** Slides a stuck ring off a swollen finger when soap and water fail, using the surfactant in ammonia-based glass cleaner as a super-slick lubricant \u2014 a fast, atraumatic alternative before resorting to a ring cutter. [32]\n\n**How to:**\n1. First milk the edema distally: elevate the hand and compress the finger from tip to base for a minute to push swelling proximally.\n2. Spray or apply a generous amount of ammonia-based glass cleaner (e.g., Windex) around the ring and finger \u2014 the surfactant is far more slippery than soap.\n3. Twist and rock the ring while applying steady distal traction, working it over the knuckle.\n4. Reapply cleaner as needed; combine with the string/elastic-wrap or oxygen-mask-strap technique if the knuckle is the holdup.\n5. Wash the finger afterward and check distal perfusion and sensation. If the ring is tungsten/ceramic and won\u2019t move, crack it with locking pliers instead.\n\n**Equipment:** Ammonia-based glass cleaner (Windex), gauze; optional string or elastic strap.\n\n_Source: ALiEM Trick of the Trade \u2014 Windex for ring removal._',
+        },
+        {
+            heading: 'Zigzag Posterolateral Tract for Olecranon Bursa Aspiration',
+            body: '**Accomplishes:** Aspirates an olecranon (or prepatellar) bursa while preventing the dreaded chronic draining fistula \u2014 a long, angled skin tract self-seals once the needle is out, unlike a straight perpendicular stick. [33]\n\n**How to:**\n1. Position the elbow flexed ~90 degrees resting on a table; prep the skin and avoid the MEDIAL approach (the ulnar nerve runs there).\n2. Enter from a posterolateral point a centimeter or two AWAY from the most fluctuant peak, not directly over it.\n3. Angle the needle obliquely (a \u201Czigzag\u201D / Z-track), advancing through skin and subcutaneous tissue before entering the bursa, so the skin and bursal puncture sites do not line up.\n4. Aspirate to dryness, keeping the needle parallel to the ulna; send fluid for cell count, Gram stain, culture, and crystals (initial fluid cannot rule out septic bursitis).\n5. Withdraw and let the offset tract collapse on itself; apply a compressive dressing to discourage reaccumulation.\n\n**Equipment:** 18\u201320G needle, 20\u201360 mL syringe, skin prep, compressive dressing, specimen tubes.\n\n_Source: Merck Manual Professional \u2014 How to aspirate or inject an olecranon bursa (zigzag/oblique tract); StatPearls \u2014 Olecranon Bursa Aspiration._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25325,6 +25333,8 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 29, text: 'Merck Manual Professional. How to do nail trephination. merckmanuals.com. See also Brown Emergency Medicine Blog \u2014 Subungual hematomas (2024).' },
         { num: 30, text: 'ALiEM. Approach to Difficult Vascular Access. aliem.com. (Blood-pressure cuff as a wide, adjustable tourniquet.)' },
         { num: 31, text: 'ALiEM. Trick of the Trade: External jugular tourniquet (stethoscope around the neck). aliem.com. See also ALiEM. Trick of the Trade: Hum-out the jugular veins (UCSF venous distension study).' },
+        { num: 32, text: 'ALiEM. Trick of the Trade: Windex for ring removal (ammonia-based glass cleaner as a slick lubricant). aliem.com.' },
+        { num: 33, text: 'Merck Manual Professional. How to aspirate or inject an olecranon bursa (posterolateral oblique/zigzag tract to prevent fistula). merckmanuals.com. See also StatPearls \u2014 Olecranon Bursa Aspiration (NCBI Bookshelf NBK554617).' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25421,6 +25431,10 @@ const TRICKS_ENT_PAGE = {
             heading: 'Improvised Condom-and-Angiocath Suction Device for a Nasal Foreign Body',
             body: '**Accomplishes:** Builds a gentle, sealed suction-extraction tool to pull a smooth anterior nasal foreign body (a bead, popcorn kernel) out of a child\u2019s nose when commercial suction tips and balloon catheters are not handy. [22]\n\n**How to:**\n1. Confirm an anterior, smooth, non-organic object; button batteries and magnets need urgent instrument removal instead, not a suction trick.\n2. Cut the closed tip off a condom and tape the open end over the hub of a large-bore (e.g., 18G) angiocatheter to make a soft, atraumatic suction cup.\n3. Apply plenty of lubricant around the foreign body and the device tip.\n4. Connect the angiocatheter to low wall suction, seat the soft condom cup against the object under direct visualization, and apply suction.\n5. Withdraw slowly with the object held on the tip; re-examine the naris. (If the child is cooperative, a parent-delivered \u201Cmother\u2019s kiss\u201D positive-pressure puff is a good first-line alternative.)\n\n**Equipment:** Condom, large-bore angiocatheter (18G), tape, lubricant, wall suction.\n\n_Source: ALiEM Trick of the Trade \u2014 An improvised foreign body removal device._',
         },
+        {
+            heading: 'Oxymetazoline Straight Onto the Nasal Packing',
+            body: '**Accomplishes:** Adds local vasoconstriction at the bleeding site by soaking the nasal tampon itself with oxymetazoline, so the packing both tamponades AND shrinks the vessels \u2014 even useful for posterior bleeds. [23]\n\n**How to:**\n1. After controlling clots, insert the compressed Merocel/cotton tampon along the floor of the nose as usual.\n2. Instead of expanding it with plain saline, drip oxymetazoline (Afrin) directly onto the inserted tampon.\n3. The packing expands to tamponade while the alpha-agonist is delivered right onto the mucosa for vasoconstriction.\n4. Top up with a few more drops if bleeding persists; reassess in 15\u201320 minutes.\n5. Pair with topical TXA on the same packing when available for an added hemostatic effect.\n\n**Equipment:** Merocel/cotton nasal tampon, oxymetazoline (Afrin), dropper, nasal speculum.\n\n_Source: ALiEM \u2014 Epistaxis Management in the Emergency Department (mnemonic): apply oxymetazoline directly onto the tampon._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25445,6 +25459,7 @@ const TRICKS_ENT_PAGE = {
         { num: 20, text: 'ALiEM. Trick of the Trade: Making the NG and NP procedures less painful (DIY lidocaine-oxymetazoline atomizer). aliem.com.' },
         { num: 21, text: 'ALiEM. Trick of the Trade: Managing epistaxis with Merocel nasal packing (wet the leading tip). aliem.com.' },
         { num: 22, text: 'ALiEM. Trick of the Trade: An improvised foreign body removal device (condom + 18G angiocatheter). aliem.com.' },
+        { num: 23, text: 'ALiEM. Epistaxis Management in the Emergency Department: a helpful mnemonic (apply oxymetazoline directly onto the nasal tampon for vasoconstriction). aliem.com.' },
     ],
 };
 const TRICKS_OPHTHO_PAGE = {
@@ -25493,6 +25508,10 @@ const TRICKS_OPHTHO_PAGE = {
             heading: 'Benzoin for Traction on Bloody, Swollen Eyelids',
             body: '**Accomplishes:** Lets you retract markedly swollen, blood-slicked eyelids for a trauma ocular exam when fingers and a cotton swab keep slipping \u2014 without putting pressure on a potentially ruptured globe. [10]\n\n**How to:**\n1. First rule out obvious globe rupture (irregular pupil, extruded contents, positive Seidel); if present, shield the eye and do NOT manipulate the lids.\n2. Clean and DRY the upper and lower eyelid skin so they are no longer bloody \u2014 benzoin will not grip wet skin.\n3. Apply a thin layer of tincture of benzoin to the eyelid skin only, carefully avoiding the eye, lash line, and conjunctiva.\n4. Let it dry to a tacky finish (~1\u20132 minutes).\n5. Now use your fingers or cotton-tipped applicators on the grippy lid skin to gently retract the lids open and inspect the globe \u2014 the tackiness gives traction without squeezing the eye.\n\n**Equipment:** Tincture of benzoin, gauze, cotton-tipped applicators.\n\n_Source: ALiEM Trick of the Trade \u2014 Benzoin for opening traumatic, swollen eyelids._',
         },
+        {
+            heading: 'Bend the Needle Tip Into a \u201CSpoon\u201D for Corneal Foreign Body Removal',
+            body: '**Accomplishes:** Turns the scary sharp needle into a tiny blunt scoop so you lift a corneal foreign body OFF the eye rather than risking a deeper jab \u2014 reassuring for the patient and safer if they flinch. [11]\n\n**How to:**\n1. Anesthetize with topical proparacaine and seat the patient firmly at the slit lamp; try irrigation first \u2014 a loose foreign body may just float off.\n2. Grasp a 25G needle (hub on a syringe used as a handle) with a hemostat near the tip.\n3. Bend the very tip of the needle ~45\u201360 degrees AWAY from the bevel, creating a small hook/spoon shape.\n4. Stabilize your hand on the patient\u2019s cheek and approach tangentially; slide the concave bent tip UNDER the foreign body and lift it out like a tiny spoon, never pointing the sharp toward the globe.\n5. If a rust ring remains, burr it with an Alger brush; refer central or deep foreign bodies and any residual rust ring to ophthalmology.\n\n**Equipment:** Slit lamp, topical proparacaine, 25G needle on a syringe, hemostat, Alger brush (for rust ring).\n\n_Source: LITFL \u2014 Ocular foreign body removal (bend the needle tip with a haemostat to scoop rather than stab)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25505,6 +25524,7 @@ const TRICKS_OPHTHO_PAGE = {
         { num: 8, text: 'LITFL. Ocular foreign body removal. litfl.com. See also Maimonides Emergency Medicine \u2014 Corneal foreign bodies (bevel-flick technique, Alger brush rust ring).' },
         { num: 9, text: 'First10EM. Lateral canthotomy \u2014 procedure guide. first10em.com. See also StatPearls \u2014 Lateral Orbital Canthotomy (NCBI Bookshelf NBK557476) and Merck Manual \u2014 How to do lateral canthotomy.' },
         { num: 10, text: 'ALiEM. Trick of the Trade: Benzoin for opening traumatic, swollen eyelids. aliem.com.' },
+        { num: 11, text: 'LITFL. Ocular foreign body removal (procedure): bend the needle tip away from the eye with a haemostat to scoop the foreign body out rather than stab it. litfl.com.' },
     ],
 };
 const TRICKS_UROLOGY_PAGE = {
@@ -25863,6 +25883,10 @@ const TRICKS_GENERAL_PAGE = {
             heading: 'MidaKet (Midazolam + Ketamine) to Cut Procedural Sedation Side Effects',
             body: '**Accomplishes:** Combines midazolam with ketamine for procedural sedation so you can use a lower total ketamine dose \u2014 which reduces hypersalivation and emergence agitation \u2014 often without needing a separate antisialagogue. [12]\n\n**How to:**\n1. Use for a monitored painful procedure (e.g., fracture/joint reduction, abscess I&D) in an airway-capable setting with full monitoring.\n2. Give a small dose of midazolam first (e.g., 1\u20132 mg IV in a typical adult, per local protocol) to blunt emergence phenomena.\n3. Titrate ketamine to dissociation; the co-administered midazolam lets you reach effect with less total ketamine.\n4. Because lower ketamine doses produce less salivation, a routine antisialagogue (atropine/glycopyrrolate) is usually unnecessary.\n5. Monitor SpO2, capnography, BP, and airway throughout and during recovery; treat agitation with additional small midazolam aliquots if needed.\n\n**Equipment:** IV midazolam, IV ketamine, cardiac monitor, SpO2, capnography, oxygen, suction, BVM/airway cart, sedation-credentialed clinician.\n\n_Source: EMCrit 379 \u2014 Procedural Sedation Part IV (the critically ill patient and MidaKet); PulmCrit (Weingart/Farkas)._',
         },
+        {
+            heading: 'Topical Lidocaine Cream on a Child\u2019s Abscess Before You Cut',
+            body: '**Accomplishes:** Putting 4% lidocaine (LMX-4) cream on a pediatric skin abscess under occlusion either drains it spontaneously (no cutting at all) or pre-numbs the skin \u2014 either way it cuts the need for procedural sedation. [13]\n\n**How to:**\n1. For a child with an uncomplicated cutaneous abscess (skip the face, genitalia, perianal, and pilonidal areas), apply a thick layer of 4% lidocaine (LMX-4) cream over the abscess and a small margin.\n2. Cover with an occlusive dressing (e.g., Tegaderm) and leave it on for 30\u201340 minutes.\n3. Re-examine: in the original series ~24% of treated abscesses drained spontaneously under the dressing, and the cream group needed procedural sedation less often (24% vs 41%).\n4. If it has not self-drained, the skin is now partly anesthetized \u2014 inject local and perform I&D (or loop drainage) with less pain and often without deep sedation.\n5. This is an adjunct, not a substitute for definitive drainage of a fluctuant abscess.\n\n**Equipment:** 4% lidocaine (LMX-4) cream, occlusive dressing (Tegaderm), I&D supplies if needed.\n\n_Source: ALiEM Trick of the Trade \u2014 Topical anesthetic cream for cutaneous abscess drainage in children; Cassidy-Smith T, et al. Am J Emerg Med 2012._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25877,6 +25901,7 @@ const TRICKS_GENERAL_PAGE = {
         { num: 10, text: 'ALiEM. Trick of the Trade: Serial lactate measurements in sepsis (Michelle Lin). aliem.com. Jones AE, Shapiro NI, Trzeciak S, et al. Lactate clearance vs central venous oxygen saturation as goals of early sepsis therapy. JAMA. 2010;303(8):739-746.' },
         { num: 11, text: 'ALiEM. Trick of the Trade: A cleaner way to apply dental cement \u2014 angiocatheter delivery (Jason Hine). aliem.com.' },
         { num: 12, text: 'EMCrit 379 \u2014 Procedural Sedation Part IV: the critically ill patient and MidaKet. emcrit.org. See also PulmCrit: MidaKet for procedural sedation in critical illness.' },
+        { num: 13, text: 'ALiEM. Trick of the Trade: Topical anesthetic cream for cutaneous abscess drainage in children. aliem.com. Cassidy-Smith T, Mistry R, Russo C, et al. Topical anesthetic cream is associated with spontaneous cutaneous abscess drainage in children. Am J Emerg Med. 2012;30(1):104-109.' },
     ],
 };
 const DENTAL_EXTRACTION_STEPS_PAGE = {

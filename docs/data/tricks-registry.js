@@ -40,7 +40,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 36,
+        trickCount: 38,
         category: 'resus-procedures',
     },
     {
@@ -50,7 +50,7 @@ export const TRICK_SPECIALTIES = [
         color: '#6A1B9A',
         subtitle: 'Epistaxis packing tricks and nasal suction.',
         infoPageId: 'tricks-ent',
-        trickCount: 19,
+        trickCount: 20,
         category: 'head-neck',
     },
     {
@@ -70,7 +70,7 @@ export const TRICK_SPECIALTIES = [
         color: '#2E7D32',
         subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
         infoPageId: 'tricks-ophtho',
-        trickCount: 10,
+        trickCount: 11,
         category: 'head-neck',
     },
     {
@@ -130,7 +130,7 @@ export const TRICK_SPECIALTIES = [
         color: '#455A64',
         subtitle: 'Fast bedside screens, dosing pearls, communication.',
         infoPageId: 'tricks-general',
-        trickCount: 12,
+        trickCount: 13,
         category: 'general-tox',
     },
     {
