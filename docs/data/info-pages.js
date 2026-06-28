@@ -25300,6 +25300,10 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Zigzag Posterolateral Tract for Olecranon Bursa Aspiration',
             body: '**Accomplishes:** Aspirates an olecranon (or prepatellar) bursa while preventing the dreaded chronic draining fistula \u2014 a long, angled skin tract self-seals once the needle is out, unlike a straight perpendicular stick. [33]\n\n**How to:**\n1. Position the elbow flexed ~90 degrees resting on a table; prep the skin and avoid the MEDIAL approach (the ulnar nerve runs there).\n2. Enter from a posterolateral point a centimeter or two AWAY from the most fluctuant peak, not directly over it.\n3. Angle the needle obliquely (a \u201Czigzag\u201D / Z-track), advancing through skin and subcutaneous tissue before entering the bursa, so the skin and bursal puncture sites do not line up.\n4. Aspirate to dryness, keeping the needle parallel to the ulna; send fluid for cell count, Gram stain, culture, and crystals (initial fluid cannot rule out septic bursitis).\n5. Withdraw and let the offset tract collapse on itself; apply a compressive dressing to discourage reaccumulation.\n\n**Equipment:** 18\u201320G needle, 20\u201360 mL syringe, skin prep, compressive dressing, specimen tubes.\n\n_Source: Merck Manual Professional \u2014 How to aspirate or inject an olecranon bursa (zigzag/oblique tract); StatPearls \u2014 Olecranon Bursa Aspiration._',
         },
+        {
+            heading: 'Ultrasound to Find the Pedal Pulse for an ABI',
+            body: '**Accomplishes:** Pinpoints the dorsalis pedis or posterior tibial artery when you cannot palpate it, so you can get a true ankle-brachial index instead of wasting minutes whisking the Doppler over the wrong spot. [34]\n\n**How to:**\n1. Place a linear (high-frequency) ultrasound probe over the expected location of the dorsalis pedis (lateral to the EHL tendon on the dorsum) or posterior tibial (behind the medial malleolus) artery.\n2. Find the pulsatile vessel on the screen and mark the skin directly over it with a pen.\n3. Put the continuous-wave Doppler probe exactly on that mark to lock onto the arterial waveform.\n4. Inflate the ankle cuff and record the pressure at which flow returns; divide by the higher brachial systolic pressure for the ABI.\n5. No signal at a confirmed artery location means truly absent flow \u2014 not just a misplaced probe \u2014 which raises concern for vascular injury.\n\n**Equipment:** Linear ultrasound probe, continuous-wave Doppler, BP cuff, skin-marking pen.\n\n_Source: ALiEM Trick of the Trade \u2014 Ultrasound for pedal pulse identification and ABI (Rose, Sills, Shyy)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25335,6 +25339,7 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 31, text: 'ALiEM. Trick of the Trade: External jugular tourniquet (stethoscope around the neck). aliem.com. See also ALiEM. Trick of the Trade: Hum-out the jugular veins (UCSF venous distension study).' },
         { num: 32, text: 'ALiEM. Trick of the Trade: Windex for ring removal (ammonia-based glass cleaner as a slick lubricant). aliem.com.' },
         { num: 33, text: 'Merck Manual Professional. How to aspirate or inject an olecranon bursa (posterolateral oblique/zigzag tract to prevent fistula). merckmanuals.com. See also StatPearls \u2014 Olecranon Bursa Aspiration (NCBI Bookshelf NBK554617).' },
+        { num: 34, text: 'ALiEM. Trick of the Trade: Ultrasound for pedal pulse identification and ABI (Rose C, Sills J, Shyy W). aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25589,6 +25594,10 @@ const TRICKS_UROLOGY_PAGE = {
             heading: 'Point the Coude Balloon Port Up to Clear an Enlarged Prostate',
             body: '**Accomplishes:** Gets a Foley past an obstructing prostate (BPH) or a posterior false passage on the first try by guaranteeing the curved coude tip rides over the obstruction instead of digging into it. [15]\n\n**How to:**\n1. Choose a coude (curved-tip) catheter for the anticipated difficult male \u2014 the bend hugs the natural upward curve of the bulbar/prostatic urethra and is less likely to create a false passage than a straight tip.\n2. Before insertion, find the balloon-inflation port (the small side knob at the drainage end): the curved tip points the SAME direction as that port.\n3. Hold the catheter so the balloon port \u2014 and therefore the tip \u2014 points UP toward the ceiling (anterior/cephalad) the entire time.\n4. Inject lidocaine jelly into the meatus first, put the penis on gentle upward traction (~60\u00B0 along its curve), and advance steadily without rotating the catheter.\n5. Insert ALL the way to the Y-hub before inflating the balloon \u2014 early urine return does not confirm the balloon is in the bladder, and inflating in the urethra causes serious injury.\n\n**Equipment:** Coude (curved-tip) Foley catheter, lidocaine lubricating jelly, syringe.\n\n_Source: WikEM \u2014 Coude catheter; StatPearls \u2014 Difficult Foley Catheterization (NCBI Bookshelf NBK564404)._',
         },
+        {
+            heading: 'Plaster Ear Splint to Stop an Auricular Hematoma Reaccumulating',
+            body: '**Accomplishes:** After draining an auricular hematoma (cauliflower ear), a molded plaster splint presses the skin back onto the cartilage so blood cannot refill the perichondrial space \u2014 the real failure point of these injuries. [16]\n\n**How to:**\n1. Drain the hematoma first (incision or needle aspiration) and clean the ear.\n2. Cut a short plaster roll to the shape of the ear and soak it in water.\n3. Lay ONE thin layer of padding against the ear so the wet plaster will not stick to the skin.\n4. Press the plaster firmly into the natural contours of the auricle so it conforms and applies even compression; tuck gauze behind the ear for counter-pressure.\n5. Pile several layers of gauze over the top and hold the whole splint snug with a beanie hat. Arrange ~24-hour ENT follow-up for re-check.\n\n**Equipment:** Plaster roll, soft padding, gauze, a beanie hat, water.\n\n_Source: ALiEM Trick of the Trade \u2014 Splinting the ear (Michelle Lin)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25606,6 +25615,7 @@ const TRICKS_UROLOGY_PAGE = {
         { num: 13, text: 'ALiEM. Trick of the Trade: Hair tourniquet removal using depilatory cream. aliem.com.' },
         { num: 14, text: 'Pediatric EM Morsels. Pediatric paraphimosis (iced-glove reduction technique). pedemmorsels.com. See also EM:RAP \u2014 Paraphimosis reduction and First10EM \u2014 Paraphimosis.' },
         { num: 15, text: 'WikEM. Coude catheter. wikem.org. See also StatPearls \u2014 Difficult Foley Catheterization (NCBI Bookshelf NBK564404).' },
+        { num: 16, text: 'ALiEM. Trick of the Trade: Splinting the ear (Michelle Lin). aliem.com.' },
     ],
 };
 const TRICKS_WOUND_PAGE = {
@@ -25674,6 +25684,14 @@ const TRICKS_WOUND_PAGE = {
             heading: 'Use the Native Fingernail to Reapproximate a Nailbed Laceration',
             body: '**Accomplishes:** Repairs a clean nailbed laceration WITHOUT suturing the fragile bed \u2014 the patient\u2019s own fingernail is used as the splint that aligns the lacerated edges and protects the eponychial fold so a normal nail regrows. [15]\n\n**How to:**\n1. Use this for a relatively CLEAN nailbed laceration (a stellate crush that already shattered/required removing the nail is better sutured or glued).\n2. Get a bloodless field: digital block, then a finger tourniquet (a cut glove finger works).\n3. Gently lift the proximal nail fold and ease the existing nail plate up just enough to expose the laceration, but DO NOT avulse it.\n4. Irrigate and reapproximate the nailbed edges underneath; the overlying nail naturally presses the edges flat and in line.\n5. Reseat the nail under the eponychial fold and secure it (a single suture through the nail, tissue adhesive, or Steri-Strips). Leaving the native nail in place keeps the fold open so a new nail grows out normally.\n\n**Equipment:** Digital block supplies, finger tourniquet (or cut glove finger), irrigation saline, fine suture or tissue adhesive / Steri-Strips.\n\n_Source: ALiEM Trick of the Trade \u2014 Finger nailbed laceration repair (Michelle Lin)._',
         },
+        {
+            heading: 'modHAT: Kelly Clamps to Close a Short-Hair Scalp Laceration',
+            body: '**Accomplishes:** Extends the glue-and-hair (HAT) scalp closure down to hair as short as 1 cm \u2014 below the ~3 cm the bare-fingers technique needs \u2014 by twisting the bundles with instruments instead of fingertips. [16]\n\n**How to:**\n1. Irrigate and inspect the wound; reach for this version when the hair is too short to twist by hand but still at least ~1 cm long.\n2. Dry the surrounding hair well \u2014 tissue adhesive will not grip wet hair.\n3. Grasp a small bundle of hair on each side of the wound with its own Kelly (curved hemostat) clamp.\n4. Use the clamps to cross and twist the two bundles a single 360\u00B0 turn so the wound edges appose; do NOT tie a knot.\n5. Place just ONE drop of tissue adhesive on the twist (more glue makes later removal harder), let it set, and repeat along the laceration. It self-releases in about a week.\n\n**Equipment:** Two Kelly (curved hemostat) clamps, cyanoacrylate tissue adhesive, irrigation saline, gauze to dry.\n\n_Source: ALiEM Trick of the Trade \u2014 Modified hair apposition technique (modHAT); Karaduman S, et al. Am J Emerg Med 2009._',
+        },
+        {
+            heading: 'Double Staple Gun for the Squirming Child\u2019s Scalp Laceration',
+            body: '**Accomplishes:** Closes a tiny 2-staple scalp laceration in one move on an awake, frightened child, avoiding the painful chase for the second staple after the first one makes the child bolt. [17]\n\n**How to:**\n1. Reserve this for a SHORT scalp laceration that needs only about two staples (longer wounds are better suited to the HAT trick or sedation).\n2. Anesthetize the wound as best you can and have the child held/positioned still by a caregiver or staff.\n3. Recruit a second provider so each of you holds a skin stapler.\n4. Position both staplers along the wound edges, each held perpendicular to the scalp, over its intended staple site.\n5. Count down out loud (\u201C3-2-1-go\u201D) and fire both staplers at the same instant \u2014 the wound is closed in a single coordinated action with no second pass.\n\n**Equipment:** Two skin staplers, local anesthetic, an assistant provider, help to immobilize the child.\n\n_Source: ALiEM Trick of the Trade \u2014 Double staple gun (Michelle Lin)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25691,6 +25709,8 @@ const TRICKS_WOUND_PAGE = {
         { num: 13, text: 'Ng KC, et al. Management of hot tar burn using vitamin E ointment containing petroleum and polyoxyethylene sorbitan. CJEM (Canadian Journal of Emergency Medicine). cambridge.org.' },
         { num: 14, text: 'ALiEM. Trick of the Trade: Dermal avulsion injuries 2.0 (Brian Lin). aliem.com. Lin B. A novel, simple method for achieving hemostasis of fingertip dermal avulsion injuries. J Emerg Med. 2015;48(6):702-705.' },
         { num: 15, text: 'ALiEM. Trick of the Trade: Finger nailbed laceration repair (Michelle Lin). aliem.com.' },
+        { num: 16, text: 'ALiEM. Trick of the Trade: Modified hair apposition technique (modHAT) using Kelly clamps. aliem.com. Karaduman S, et al. Modified hair apposition technique. Am J Emerg Med. 2009;27(9):1050-1055.' },
+        { num: 17, text: 'ALiEM. Trick of the Trade: Double staple gun for pediatric scalp lacerations (Michelle Lin). aliem.com.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
