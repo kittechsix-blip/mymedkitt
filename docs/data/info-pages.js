@@ -25149,6 +25149,10 @@ const TRICKS_AIRWAY_PAGE = {
             heading: 'ETT as a Guide for Rapid Orogastric Tube Placement',
             body: '**Accomplishes:** Places an orogastric tube in seconds in an intubated patient when blind OG insertion keeps coiling in the mouth, using a spare endotracheal tube as a rigid conduit to the esophagus. [9]\n\n**How to:**\n1. Use ONLY on an already-intubated patient with a protected airway (this risks vomiting otherwise).\n2. Grip a lubricated 8.0 ETT like a dart in your dominant hand; stand at the patient\u2019s side and gently advance it down the oropharynx into the esophagus without forcing.\n3. Cover the ETT hub with a glove to stop gastric contents from spraying out.\n4. Thread a lubricated 16\u201318 French NG/OG tube through the ETT into the stomach and connect it to suction.\n5. After imaging confirms position, remove the ETT hub adaptor and slide the ETT back out over the OG tube while holding the OG in place; trim the ETT with shears if needed, then secure the OG tube.\n\n**Equipment:** Spare 8.0 endotracheal tube, 16\u201318 Fr NG/OG tube, lubricating jelly, glove, suction, trauma shears.\n\n_Source: ALiEM Trick of the Trade \u2014 Rapid insertion of an orogastric tube (Willette); Ghatak T, et al. N Am J Med Sci 2013._',
         },
+        {
+            heading: 'Duoderm Seal to Temporize a Leaking Tracheostomy',
+            body: '**Accomplishes:** Restores the seal and PEEP around a leaking trach cannula in a vent-dependent patient, buying time until a longer cannula or surgical fix is available. [10]\n\n**How to:**\n1. Puncture the center of a Duoderm dressing with suture scissors \u2014 use a small puncture, not a linear cut, so the hole does not run.\n2. Push the tracheostomy tube through the punctured Duoderm so the dressing hugs the cannula tightly.\n3. Insert the cannula into the stoma using standard technique.\n4. Press the Duoderm firmly onto the surrounding neck skin to create an occlusive seal, then recheck the vent for resolution of the leak.\n\n**Equipment:** Duoderm (hydrocolloid) dressing, suture scissors, tracheostomy tube.\n\n_Source: ALiEM Trick of the Trade \u2014 Tracheostomy leak temporization (Obrzut, Mareiniss, Abubshait)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Large-bore endotracheal tube to suction an occluded airway. aliem.com.' },
@@ -25160,6 +25164,7 @@ const TRICKS_AIRWAY_PAGE = {
         { num: 7, text: 'Weingart S. EMCrit 247 \u2014 The Dissociated Awake Intubation with ketamine. emcrit.org. Strayer R. Ketamine-only breathing intubation (KOBI). emupdates.com.' },
         { num: 8, text: 'ALiEM. Trick of the Trade: Nasopharyngeal oxygenation (NPA + suction tubing + oxygen). aliem.com.' },
         { num: 9, text: 'ALiEM. Trick of the Trade: Rapid insertion of an orogastric tube (Willette). aliem.com. Ghatak T, et al. A new technique to insert nasogastric tube in an unconscious intubated patient. N Am J Med Sci. 2013;5(1):68-70.' },
+        { num: 10, text: 'Obrzut S, Mareiniss D, Abubshait L. ALiEM. Trick of the Trade: Tracheostomy leak temporization with Duoderm. aliem.com.' },
     ],
 };
 const TRICKS_PROCEDURES_PAGE = {
@@ -25304,6 +25309,10 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Ultrasound to Find the Pedal Pulse for an ABI',
             body: '**Accomplishes:** Pinpoints the dorsalis pedis or posterior tibial artery when you cannot palpate it, so you can get a true ankle-brachial index instead of wasting minutes whisking the Doppler over the wrong spot. [34]\n\n**How to:**\n1. Place a linear (high-frequency) ultrasound probe over the expected location of the dorsalis pedis (lateral to the EHL tendon on the dorsum) or posterior tibial (behind the medial malleolus) artery.\n2. Find the pulsatile vessel on the screen and mark the skin directly over it with a pen.\n3. Put the continuous-wave Doppler probe exactly on that mark to lock onto the arterial waveform.\n4. Inflate the ankle cuff and record the pressure at which flow returns; divide by the higher brachial systolic pressure for the ABI.\n5. No signal at a confirmed artery location means truly absent flow \u2014 not just a misplaced probe \u2014 which raises concern for vascular injury.\n\n**Equipment:** Linear ultrasound probe, continuous-wave Doppler, BP cuff, skin-marking pen.\n\n_Source: ALiEM Trick of the Trade \u2014 Ultrasound for pedal pulse identification and ABI (Rose, Sills, Shyy)._',
         },
+        {
+            heading: 'IV Catheter to Deflate a Stuck Gastrostomy Tube Balloon',
+            body: '**Accomplishes:** Frees a G-tube whose balloon cuff will not deflate so you can replace it at the bedside instead of calling surgery or IR. [35]\n\n**How to:**\n1. Trace the tube near the skin and identify the balloon-cuff lumen by its different coloration.\n2. Bend the G-tube so a catheter can enter the cuff lumen parallel to the skin, and slip a barrier between tube and patient to avoid a needlestick.\n3. Insert a 22G IV catheter into the cuff lumen, then withdraw the inner needle.\n4. Attach a 10 cc syringe to the catheter and aspirate the balloon fluid until the cuff collapses.\n5. Remove and replace the gastrostomy tube using standard technique.\n\n**Equipment:** 22G IV catheter, 10 cc syringe, skin barrier, replacement G-tube.\n\n_Source: ALiEM Trick of the Trade \u2014 Deflate the undeflatable gastrostomy tube (Leach & Wiederhold)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25340,6 +25349,7 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 32, text: 'ALiEM. Trick of the Trade: Windex for ring removal (ammonia-based glass cleaner as a slick lubricant). aliem.com.' },
         { num: 33, text: 'Merck Manual Professional. How to aspirate or inject an olecranon bursa (posterolateral oblique/zigzag tract to prevent fistula). merckmanuals.com. See also StatPearls \u2014 Olecranon Bursa Aspiration (NCBI Bookshelf NBK554617).' },
         { num: 34, text: 'ALiEM. Trick of the Trade: Ultrasound for pedal pulse identification and ABI (Rose C, Sills J, Shyy W). aliem.com.' },
+        { num: 35, text: 'Leach B, Wiederhold B. ALiEM. Trick of the Trade: Deflate the undeflatable gastrostomy tube. aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25517,6 +25527,10 @@ const TRICKS_OPHTHO_PAGE = {
             heading: 'Bend the Needle Tip Into a \u201CSpoon\u201D for Corneal Foreign Body Removal',
             body: '**Accomplishes:** Turns the scary sharp needle into a tiny blunt scoop so you lift a corneal foreign body OFF the eye rather than risking a deeper jab \u2014 reassuring for the patient and safer if they flinch. [11]\n\n**How to:**\n1. Anesthetize with topical proparacaine and seat the patient firmly at the slit lamp; try irrigation first \u2014 a loose foreign body may just float off.\n2. Grasp a 25G needle (hub on a syringe used as a handle) with a hemostat near the tip.\n3. Bend the very tip of the needle ~45\u201360 degrees AWAY from the bevel, creating a small hook/spoon shape.\n4. Stabilize your hand on the patient\u2019s cheek and approach tangentially; slide the concave bent tip UNDER the foreign body and lift it out like a tiny spoon, never pointing the sharp toward the globe.\n5. If a rust ring remains, burr it with an Alger brush; refer central or deep foreign bodies and any residual rust ring to ophthalmology.\n\n**Equipment:** Slit lamp, topical proparacaine, 25G needle on a syringe, hemostat, Alger brush (for rust ring).\n\n_Source: LITFL \u2014 Ocular foreign body removal (bend the needle tip with a haemostat to scoop rather than stab)._',
         },
+        {
+            heading: 'Urine Dipstick to Check Eye pH in Chemical Burns',
+            body: '**Accomplishes:** Measures ocular surface pH during a chemical-burn irrigation when dedicated pH paper is missing, repurposing a ubiquitous urine reagent strip to guide your irrigation endpoint. [12]\n\n**How to:**\n1. Cut a urine dipstick so the pH reagent pad is the last pad on the end of the strip.\n2. After topical anesthesia, gently touch that pad to the lower conjunctival sac (fornix), watching the trimmed sharp edge away from the cornea.\n3. Read the color against the bottle chart; the urine-strip pH range (about 5\u20138.5) is reliable for this purpose.\n4. Keep irrigating and rechecking every few minutes until the pH normalizes to ~7.0\u20137.4 and stays there.\n5. If the reading sits outside the 5\u20138.5 window, switch to true eye pH paper (range 1\u201314) for an accurate number.\n\n**Equipment:** Urine dipstick reagent strip, scissors, topical ophthalmic anesthetic, irrigation fluid.\n\n_Source: ALiEM Trick of the Trade \u2014 Checking eye pH with a urine dipstick (Lin; credit Izsak)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25530,6 +25544,7 @@ const TRICKS_OPHTHO_PAGE = {
         { num: 9, text: 'First10EM. Lateral canthotomy \u2014 procedure guide. first10em.com. See also StatPearls \u2014 Lateral Orbital Canthotomy (NCBI Bookshelf NBK557476) and Merck Manual \u2014 How to do lateral canthotomy.' },
         { num: 10, text: 'ALiEM. Trick of the Trade: Benzoin for opening traumatic, swollen eyelids. aliem.com.' },
         { num: 11, text: 'LITFL. Ocular foreign body removal (procedure): bend the needle tip away from the eye with a haemostat to scoop the foreign body out rather than stab it. litfl.com.' },
+        { num: 12, text: 'Lin M. ALiEM. Trick of the Trade: Checking eye pH with a urine dipstick (credit Eugene Izsak). aliem.com.' },
     ],
 };
 const TRICKS_UROLOGY_PAGE = {
@@ -25759,6 +25774,10 @@ const TRICKS_CARDIOLOGY_PAGE = {
             heading: 'Abdominal-Pressure \u201CPush Me Away\u201D Valsalva for SVT',
             body: '**Accomplishes:** Generates an effective vagal strain in a patient who cannot follow blow-into-a-syringe instructions \u2014 the patient pushes against your hands on their belly, which is intuitive and easy to coach. [10]\n\n**How to:**\n1. Confirm the patient is hemodynamically stable and on a cardiac monitor; lay them supine.\n2. Have the patient relax the abdomen, then place both of your hands flat near the umbilicus.\n3. Apply firm downward pressure and tell the patient to \u201Cpush my hands away\u201D using their belly \u2014 bearing down against your resistance creates the Valsalva strain.\n4. Hold the strain for ~15 seconds, then release; if combining with the modified Valsalva, lay them flat and raise the legs at this point.\n5. Re-check the rhythm; repeat once before escalating to adenosine.\n\n**Equipment:** None (examiner\u2019s hands), cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Valsalva maneuver by pressing on the abdomen._',
         },
+        {
+            heading: 'Pre-Charge the Defibrillator Before the Rhythm Check',
+            body: '**Accomplishes:** Cuts peri-shock hands-off time by charging the defibrillator during ongoing compressions, eliminating the second CPR pause in ACLS and preserving coronary perfusion pressure. [11]\n\n**How to:**\n1. Assign a timekeeper to warn the team 15\u201330 seconds before each scheduled rhythm check.\n2. With chest compressions continuing UNINTERRUPTED, the defib operator charges the device in anticipation.\n3. At the 2-minute mark, pause compressions briefly and check the rhythm.\n4. If VF/pulseless VT, immediately deliver the already-charged shock and resume CPR \u2014 the hands-off interval is just the rhythm glance.\n5. If the rhythm is asystole/PEA, safely DISARM/dump the stored charge and resume compressions.\n\n**Equipment:** Manual defibrillator, designated timekeeper, cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Pre-charge the defibrillator (Sam Ghali)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
@@ -25771,6 +25790,7 @@ const TRICKS_CARDIOLOGY_PAGE = {
         { num: 8, text: 'ALiEM. Trick of the Trade: Quieting the shaky EKG tracing (have the patient sit on their hands). aliem.com.' },
         { num: 9, text: 'ALiEM EM ReSCu Peds. Pediatric supraventricular tachycardia case \u2014 ice-water slurry to the face (diving reflex) as a vagal maneuver. aliem.com.' },
         { num: 10, text: 'ALiEM. Trick of the Trade: Valsalva maneuver by pressing on the abdomen. aliem.com.' },
+        { num: 11, text: 'Ghali S. ALiEM. Trick of the Trade: Pre-charge the defibrillator to minimize peri-shock pause. aliem.com.' },
     ],
 };
 const TRICKS_NEURO_PAGE = {
@@ -26234,6 +26254,10 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Ultrasound-Guided Ulnar Nerve Block for Boxer\u2019s Fracture Reduction',
             body: '**Accomplishes:** Provides clean analgesia for reduction and splinting of a 5th-metacarpal (boxer\u2019s) fracture when severe swelling makes a hematoma block fail \u2014 a forearm ulnar nerve block anesthetizes the little finger and ulnar hand without procedural sedation. [30]\n\n**How to:**\n1. Position the forearm supinated; scan the volar mid-forearm with a high-frequency linear probe.\n2. Find the ulnar artery, then identify the round, honeycomb ulnar nerve sitting just ULNAR (medial) to the artery.\n3. Trace proximally a few centimeters to where the nerve separates from the artery \u2014 block there to avoid the vessel.\n4. Under real-time ultrasound, advance an in-plane needle and deposit 5\u201310 mL of local anesthetic to surround the nerve.\n5. Wait ~10\u201315 minutes for the little/ring finger and ulnar hand to go numb, then reduce and apply an ulnar gutter splint.\n\n**Equipment:** Ultrasound with linear probe, block needle, 5\u201310 mL local anesthetic, sterile prep, ulnar gutter splint material.\n\n_Source: ALiEM Trick of the Trade \u2014 Ultrasound-guided ulnar nerve block for boxer\u2019s fracture analgesia._',
         },
+        {
+            heading: 'Stockinette DIY Skyhook for Hand/Arm Elevation',
+            body: '**Accomplishes:** Keeps a swollen or injured upper extremity continuously elevated from an IV pole, reducing edema in hand infections and post-reduction swelling without tying up staff or stacking pillows. [31]\n\n**How to:**\n1. Stretch stockinette fingertip-to-fingertip across the patient\u2019s body and cut to that length (size 2 for peds, 3 for an average adult, 4 for larger arms).\n2. Cut the stockinette lengthwise for about one arm\u2019s length (roughly the first third to half of the tube).\n3. Slip the injured arm into the uncut portion so the two cut tails hang front and back across the torso.\n4. Tie the cut tails under the opposite armpit like a \u201CMiss America\u201D sash to anchor it.\n5. Use the remaining uncut end to lift the hand/arm and tie it up to an IV pole at the desired height; cut a small window over any site that needs frequent exam.\n\n**Equipment:** Stockinette (size 2\u20134), trauma shears, IV pole.\n\n_Source: ALiEM Trick of the Trade \u2014 DIY skyhook for arm elevation (Silverio)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -26266,6 +26290,7 @@ const TRICKS_ORTHO_PAGE = {
         { num: 28, text: 'The Fulcrum: a novel technique for reduction of shoulder dislocations. CJEM 2025. ncbi.nlm.nih.gov/pmc/articles/PMC12170694.' },
         { num: 29, text: 'ALiEM. Trick of the Trade: Ultrasound-guided injection for shoulder dislocation (Stone). aliem.com.' },
         { num: 30, text: 'ALiEM. Trick of the Trade: Ultrasound-guided ulnar nerve block for analgesia in boxer\u2019s (5th metacarpal) fracture reduction. aliem.com.' },
+        { num: 31, text: 'Silverio LM. ALiEM. Trick of the Trade: DIY skyhook (stockinette) for hand and arm elevation. aliem.com.' },
     ],
 };
 // ===================================================================

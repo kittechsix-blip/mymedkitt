@@ -30,7 +30,7 @@ export const TRICK_SPECIALTIES = [
         color: '#1565C0',
         subtitle: 'Suction, NG placement, supraglottic exchange, and more.',
         infoPageId: 'tricks-airway',
-        trickCount: 10,
+        trickCount: 11,
         category: 'resus-procedures',
     },
     {
@@ -40,7 +40,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 39,
+        trickCount: 40,
         category: 'resus-procedures',
     },
     {
@@ -70,7 +70,7 @@ export const TRICK_SPECIALTIES = [
         color: '#2E7D32',
         subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
         infoPageId: 'tricks-ophtho',
-        trickCount: 11,
+        trickCount: 12,
         category: 'head-neck',
     },
     {
@@ -100,7 +100,7 @@ export const TRICK_SPECIALTIES = [
         color: '#C62828',
         subtitle: 'Rapid adenosine delivery and rhythm tricks.',
         infoPageId: 'tricks-cardiology',
-        trickCount: 10,
+        trickCount: 11,
         category: 'resus-procedures',
     },
     {
@@ -140,7 +140,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
         infoPageId: 'tricks-ortho',
-        trickCount: 30,
+        trickCount: 31,
         category: 'wounds-msk',
     },
 ];
