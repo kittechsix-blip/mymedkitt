@@ -23,7 +23,7 @@ export const VAD_NODES = [
         module: 1,
         title: 'VAD Emergency Management',
         body: '[VAD Steps Summary](#/info/vad-steps-summary)\n\nVentricular Assist Device (VAD/LVAD) patient presenting to the ED.\n\n**Key principles:**\n\u2022 **No pulse is NORMAL** \u2014 continuous-flow LVADs produce minimal/zero pulsatility\n\u2022 **Contact VAD coordinator immediately** \u2014 every ED visit\n\u2022 **Listen for pump hum** \u2014 absence = pump failure = emergency\n\u2022 **MAP via Doppler** \u2014 traditional BP cuffs are unreliable',
-        citation: [1, 2],
+        citation: [1, 2, 27, 28, 29, 32],
         options: [
             {
                 label: 'Cardiac arrest / unresponsive',
@@ -126,7 +126,7 @@ export const VAD_NODES = [
         module: 2,
         title: 'Controller Parameter Check',
         body: '**Read and record all controller parameters.**\n\nCompare to patient\'s baseline values (from wallet card or family).\n\n[Device Parameter Reference](#/info/vad-device-params)\n\n| Parameter | Normal | Significance |\n|-----------|--------|-------------|\n| **Speed** (RPM) | Device-specific | Set by VAD team \u2014 do NOT change |\n| **Power** (Watts) | 3-7 W | \u2191 = thrombus or \u2191 flow demand |\n| **Flow** (L/min) | 3-6 | \u2193 = hypovolemia, obstruction, RV failure |\n| **PI** (Pulsatility) | 2-5 (HM3) | \u2193 = empty LV; \u2191 = native recovery |\n\n**Any active alarms?** [VAD Alarm Guide](#/info/vad-alarm-guide)',
-        citation: [1, 5, 7],
+        citation: [1, 5, 7, 25, 26],
         options: [
             {
                 label: 'Low flow (< 3 L/min)',
@@ -282,7 +282,7 @@ export const VAD_NODES = [
         module: 4,
         title: 'Bleeding Management',
         body: '**GI bleeding is the #1 cause of ED visits for VAD patients.**\n\n**Mechanism:** Continuous flow \u2192 acquired von Willebrand disease (shear forces destroy large VWF multimers) + intestinal AVMs from non-pulsatile flow + chronic anticoagulation.\n\n**CRITICAL transfusion principle:**\n\u2022 Use ONLY **leukoreduced, irradiated** blood products\n\u2022 Prevents HLA allosensitization that could preclude future heart transplant\n\n**Is the bleeding hemodynamically significant?**',
-        citation: [1, 2, 13, 14],
+        citation: [1, 2, 13, 14, 30],
         options: [
             {
                 label: 'Significant / active bleeding',
@@ -326,7 +326,7 @@ export const VAD_NODES = [
         module: 4,
         title: 'Pump Thrombosis',
         body: '**High power + hemolysis = pump thrombosis until proven otherwise.**\n\nThis is a surgical emergency \u2014 48% six-month mortality without intervention.\n\n[Hemolysis Lab Panel](#/info/vad-hemolysis-labs)\n\n**Diagnosis:**\n\u2022 Rising power trend or power >10 W (classic, but see caveat below)\n\u2022 LDH >2.5\u00D7 upper limit normal (>1,150 IU/L highly suggestive)\n\u2022 Haptoglobin undetectable\n\u2022 Plasma free hemoglobin >40 mg/dL\n\u2022 Dark urine (hemoglobinuria)\n\u2022 Acute kidney injury from free hemoglobin\n\n**CAVEAT \u2014 HeartMate 3 can thrombose with NORMAL power and LDH.** Normal HM3 power is only ~3.8-4.3 W; the >10 W cutoff is HeartMate II-derived. HM3 thrombosis often presents with low-flow alarms, intermittent pump stops, or rising pump temperature rather than high power. Low flow or hemolysis + clinical instability with "normal" numbers does NOT rule out thrombosis \u2014 maintain suspicion and call the VAD team. [5]\n\n**ED Management:**\n1. **Heparin anticoagulation:** [Heparin](#/drug/ufh/vad anticoagulation) infusion, target PTT 60-80\n2. Aggressive IV hydration \u2014 protect kidneys from free hemoglobin\n3. Maintain MAP 70-80 (avoid hypertension)\n4. Serial hemolysis labs q4-6h\n5. **Thrombolysis** (VAD team decision only):\n   \u2022 [Alteplase](#/drug/alteplase/vad pump thrombosis) per VAD center protocol\n   \u2022 70% hemolysis resolution without exchange; 10% hemorrhagic stroke risk\n6. **Definitive treatment:** Pump exchange surgery at VAD center\n\n**Transfer to VAD center emergently if not already at one.**',
-        citation: [1, 2, 5, 15, 16],
+        citation: [1, 2, 5, 15, 16, 31],
         next: 'vad-dispo-transfer',
         summary: 'High power + hemolysis = pump thrombosis — heparin drip, IV fluids, emergent VAD center transfer; 48% mortality',
         safetyLevel: 'critical',

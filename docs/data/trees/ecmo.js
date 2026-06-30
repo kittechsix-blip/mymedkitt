@@ -12,7 +12,7 @@ export const ECMO_CRITICAL_ACTIONS = [
     { text: 'VA-ECMO indication: lactate >4 and rising + CI <2.0 + MAP <65 despite high-dose pressors', nodeId: 'ecmo-va-indications' },
     { text: 'ECPR (cardiac arrest): CPR <60 min, witnessed arrest, bystander CPR, shockable rhythm best outcomes', nodeId: 'ecmo-ecpr' },
     { text: 'Absolute contraindication: severe aortic regurgitation for VA-ECMO (worsens with retrograde flow)', nodeId: 'ecmo-contraindications' },
-    { text: 'RESP score >3 predicts 75% survival on VV-ECMO | <-2 predicts 18% survival - use for triage', nodeId: 'ecmo-resp-score' },
+    { text: 'RESP score >3 predicts 75% survival on VV-ECMO | <-2 predicts 18% survival - use for triage', nodeId: 'ecmo-scores' },
     { text: 'Harlequin syndrome in VA-ECMO: upper body cyanosis + lower body pink = left ventricular failure with mixing', nodeId: 'ecmo-va-harlequin' },
 ];
 export const ECMO_NODES = [
