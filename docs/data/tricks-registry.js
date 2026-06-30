@@ -40,7 +40,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 40,
+        trickCount: 42,
         category: 'resus-procedures',
     },
     {
@@ -70,7 +70,7 @@ export const TRICK_SPECIALTIES = [
         color: '#2E7D32',
         subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
         infoPageId: 'tricks-ophtho',
-        trickCount: 12,
+        trickCount: 13,
         category: 'head-neck',
     },
     {
@@ -90,7 +90,7 @@ export const TRICK_SPECIALTIES = [
         color: '#AD1457',
         subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
         infoPageId: 'tricks-wound',
-        trickCount: 17,
+        trickCount: 18,
         category: 'wounds-msk',
     },
     {
@@ -120,7 +120,7 @@ export const TRICK_SPECIALTIES = [
         color: '#37474F',
         subtitle: 'Antiemetic and toxidrome management pearls.',
         infoPageId: 'tricks-tox',
-        trickCount: 4,
+        trickCount: 5,
         category: 'general-tox',
     },
     {

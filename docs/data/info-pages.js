@@ -25313,6 +25313,14 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'IV Catheter to Deflate a Stuck Gastrostomy Tube Balloon',
             body: '**Accomplishes:** Frees a G-tube whose balloon cuff will not deflate so you can replace it at the bedside instead of calling surgery or IR. [35]\n\n**How to:**\n1. Trace the tube near the skin and identify the balloon-cuff lumen by its different coloration.\n2. Bend the G-tube so a catheter can enter the cuff lumen parallel to the skin, and slip a barrier between tube and patient to avoid a needlestick.\n3. Insert a 22G IV catheter into the cuff lumen, then withdraw the inner needle.\n4. Attach a 10 cc syringe to the catheter and aspirate the balloon fluid until the cuff collapses.\n5. Remove and replace the gastrostomy tube using standard technique.\n\n**Equipment:** 22G IV catheter, 10 cc syringe, skin barrier, replacement G-tube.\n\n_Source: ALiEM Trick of the Trade \u2014 Deflate the undeflatable gastrostomy tube (Leach & Wiederhold)._',
         },
+        {
+            heading: 'AC Vein Plus Lidocaine Pretreatment to Kill Propofol Burn',
+            body: '**Accomplishes:** Eliminates the searing pain of a propofol push so an awake patient stays calm during induction of procedural sedation. [36]\n\n**How to:**\n1. Whenever you can, start the IV in the antecubital fossa rather than the hand \u2014 a larger proximal vein dilutes the propofol fast and hurts far less.\n2. For a hand or wrist IV that you cannot move, pretreat first: place a tourniquet proximal to the site.\n3. Inject 0.5 mg/kg of lidocaine IV (about 35 mg = 3.5 mL of 1% for a 70 kg adult) and leave the tourniquet up for 30\u2013120 seconds so the anesthetic dwells in the vein wall.\n4. Release the tourniquet, then push the propofol through the now-numbed vein.\n5. Warn the patient that some pressure is normal; the burn should be gone.\n\n**Equipment:** IV (antecubital preferred), tourniquet, 1% lidocaine, propofol.\n\n_Source: ALiEM Trick of the Trade \u2014 Minimizing propofol injection pain._',
+        },
+        {
+            heading: 'Gravity Large-Volume Paracentesis With an Angiocatheter',
+            body: '**Accomplishes:** Drains a tense ascites with only an angiocatheter and IV tubing when no paracentesis kit or vacuum bottle is available. [37]\n\n**How to:**\n1. Ultrasound-mark a pocket of fluid (classically the left lower quadrant, lateral to the rectus and inferior epigastric vessels); prep and drape sterilely.\n2. Anesthetize the skin and track, then advance a large-bore (14\u201316G) angiocatheter using a Z-track until you aspirate fluid; thread the cannula in and withdraw the needle.\n3. Connect IV extension tubing to the catheter hub and run the far end into a basin or empty container set BELOW the patient on the floor.\n4. Let gravity siphon the ascites out; raise the head of the bed and reposition the patient toward the catheter side to keep flow going as the abdomen empties.\n5. Cap or pull the catheter when drainage slows; give albumin per your usual threshold for large-volume taps.\n\n**Equipment:** 14\u201316G angiocatheter, IV extension tubing, local anesthetic, collection basin/container, ultrasound.\n\n_Source: ALiEM Trick of the Trade \u2014 Large volume paracentesis using gravity._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25350,6 +25358,8 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 33, text: 'Merck Manual Professional. How to aspirate or inject an olecranon bursa (posterolateral oblique/zigzag tract to prevent fistula). merckmanuals.com. See also StatPearls \u2014 Olecranon Bursa Aspiration (NCBI Bookshelf NBK554617).' },
         { num: 34, text: 'ALiEM. Trick of the Trade: Ultrasound for pedal pulse identification and ABI (Rose C, Sills J, Shyy W). aliem.com.' },
         { num: 35, text: 'Leach B, Wiederhold B. ALiEM. Trick of the Trade: Deflate the undeflatable gastrostomy tube. aliem.com.' },
+        { num: 36, text: 'ALiEM. Trick of the Trade: Minimizing propofol injection pain (antecubital vein + IV lidocaine pretreatment). aliem.com.' },
+        { num: 37, text: 'ALiEM. Trick of the Trade: Large volume paracentesis technique using gravity (angiocatheter + IV tubing). aliem.com.' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25531,6 +25541,10 @@ const TRICKS_OPHTHO_PAGE = {
             heading: 'Urine Dipstick to Check Eye pH in Chemical Burns',
             body: '**Accomplishes:** Measures ocular surface pH during a chemical-burn irrigation when dedicated pH paper is missing, repurposing a ubiquitous urine reagent strip to guide your irrigation endpoint. [12]\n\n**How to:**\n1. Cut a urine dipstick so the pH reagent pad is the last pad on the end of the strip.\n2. After topical anesthesia, gently touch that pad to the lower conjunctival sac (fornix), watching the trimmed sharp edge away from the cornea.\n3. Read the color against the bottle chart; the urine-strip pH range (about 5\u20138.5) is reliable for this purpose.\n4. Keep irrigating and rechecking every few minutes until the pH normalizes to ~7.0\u20137.4 and stays there.\n5. If the reading sits outside the 5\u20138.5 window, switch to true eye pH paper (range 1\u201314) for an accurate number.\n\n**Equipment:** Urine dipstick reagent strip, scissors, topical ophthalmic anesthetic, irrigation fluid.\n\n_Source: ALiEM Trick of the Trade \u2014 Checking eye pH with a urine dipstick (Lin; credit Izsak)._',
         },
+        {
+            heading: 'Paracanthal \u201COne-Snip\u201D Decompression for Orbital Compartment Syndrome',
+            body: '**Accomplishes:** Decompresses a sight-threatening retrobulbar hemorrhage with a single scissor cut, skipping the harder-to-strum cantholysis step of a full lateral canthotomy. [13]\n\n**How to:**\n1. Confirm orbital compartment syndrome (proptosis, \u201Crock hard\u201D eye, vision loss, afferent pupil defect, IOP often >40); rule out globe rupture first \u2014 that is the one absolute contraindication.\n2. Inject a little 1\u20132% lidocaine with epinephrine just lateral to the lateral canthus, needle pointed away from the globe.\n3. Pinch the full thickness of the lower eyelid about 1 cm directly below the lateral canthus with a hemostat for ~30 seconds to crush a bloodless line.\n4. Make ONE full-thickness vertical snip through that crushed paracanthal track with straight (iris) scissors \u2014 this single cut releases the orbital septum and decompresses the orbit.\n5. Recheck IOP and visual acuity; if still elevated, proceed to formal canthotomy/cantholysis. Call ophthalmology but do not wait for them.\n\n**Equipment:** 1\u20132% lidocaine with epinephrine + 25G needle, hemostat, straight iris scissors, tonometer.\n\n_Source: Yarter, Racht, Michels. Retrobulbar hemorrhage decompression with the paracanthal one-snip method. Am J Emerg Med 2023; Blandford AD, et al. Ophthalmic Plast Reconstr Surg 2018 (cadaver model). EMCrit 385 \u2014 Eye Trauma I._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25545,6 +25559,7 @@ const TRICKS_OPHTHO_PAGE = {
         { num: 10, text: 'ALiEM. Trick of the Trade: Benzoin for opening traumatic, swollen eyelids. aliem.com.' },
         { num: 11, text: 'LITFL. Ocular foreign body removal (procedure): bend the needle tip away from the eye with a haemostat to scoop the foreign body out rather than stab it. litfl.com.' },
         { num: 12, text: 'Lin M. ALiEM. Trick of the Trade: Checking eye pH with a urine dipstick (credit Eugene Izsak). aliem.com.' },
+        { num: 13, text: 'Yarter NM, Racht J, Michels KS. Retrobulbar hemorrhage decompression with paracanthal \u201Cone-snip\u201D method: time to retire lateral canthotomy? Am J Emerg Med. 2023. See also Blandford AD, et al. Paracanthal \u201Cone-snip\u201D decompression in a cadaver model. Ophthalmic Plast Reconstr Surg. 2018; EMCrit 385 \u2014 Eye Trauma I.' },
     ],
 };
 const TRICKS_UROLOGY_PAGE = {
@@ -25707,6 +25722,10 @@ const TRICKS_WOUND_PAGE = {
             heading: 'Double Staple Gun for the Squirming Child\u2019s Scalp Laceration',
             body: '**Accomplishes:** Closes a tiny 2-staple scalp laceration in one move on an awake, frightened child, avoiding the painful chase for the second staple after the first one makes the child bolt. [17]\n\n**How to:**\n1. Reserve this for a SHORT scalp laceration that needs only about two staples (longer wounds are better suited to the HAT trick or sedation).\n2. Anesthetize the wound as best you can and have the child held/positioned still by a caregiver or staff.\n3. Recruit a second provider so each of you holds a skin stapler.\n4. Position both staplers along the wound edges, each held perpendicular to the scalp, over its intended staple site.\n5. Count down out loud (\u201C3-2-1-go\u201D) and fire both staplers at the same instant \u2014 the wound is closed in a single coordinated action with no second pass.\n\n**Equipment:** Two skin staplers, local anesthetic, an assistant provider, help to immobilize the child.\n\n_Source: ALiEM Trick of the Trade \u2014 Double staple gun (Michelle Lin)._',
         },
+        {
+            heading: 'Part the Hair With Petroleum Ointment So It Stays Out of Your Stitches',
+            body: '**Accomplishes:** Holds hair off a scalp laceration so strands do not get caught in your sutures or staples, which would otherwise risk wound dehiscence, foreign-body reaction, or infection. [18]\n\n**How to:**\n1. Irrigate and inspect the scalp wound as usual.\n2. Scoop a generous amount of a thick petroleum-based ointment (bacitracin, plain petroleum jelly, or similar) onto a gloved finger or applicator.\n3. Smear it along both wound edges, slicking the surrounding hair flat and away from the laceration to each side.\n4. The greasy hair stays parted and out of the field, leaving a clear gap of skin to suture or staple.\n5. Close the wound; wipe the ointment off at the end. (For glue closures or the HAT technique, skip this \u2014 adhesive will not stick to greased hair.)\n\n**Equipment:** Thick petroleum-based ointment (bacitracin or petroleum jelly), gloves/applicator, suture or staple kit, irrigation saline.\n\n_Source: ALiEM Trick of the Trade \u2014 Parting the hair for scalp laceration repair._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25726,6 +25745,7 @@ const TRICKS_WOUND_PAGE = {
         { num: 15, text: 'ALiEM. Trick of the Trade: Finger nailbed laceration repair (Michelle Lin). aliem.com.' },
         { num: 16, text: 'ALiEM. Trick of the Trade: Modified hair apposition technique (modHAT) using Kelly clamps. aliem.com. Karaduman S, et al. Modified hair apposition technique. Am J Emerg Med. 2009;27(9):1050-1055.' },
         { num: 17, text: 'ALiEM. Trick of the Trade: Double staple gun for pediatric scalp lacerations (Michelle Lin). aliem.com.' },
+        { num: 18, text: 'ALiEM. Trick of the Trade: Parting the hair for scalp laceration repair (thick petroleum-based ointment to displace hair from the wound). aliem.com.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
@@ -25861,12 +25881,17 @@ const TRICKS_TOX_PAGE = {
             heading: 'Isopropyl Alcohol Inhalation for Acute Nausea',
             body: '**Accomplishes:** Rapid, cheap, non-invasive relief of acute nausea \u2014 sniffing an alcohol prep pad cut nausea scores more than placebo within 10 minutes, often before you can even draw up an antiemetic. [4]\n\n**How to:**\n1. Use for undifferentiated acute nausea/vomiting where a fast, low-risk option is wanted (great at triage while IV access and antiemetics are pending).\n2. Open a standard 70% isopropyl alcohol prep pad (the same wipe used to clean skin).\n3. Hold it about 1\u20132 cm under the patient\u2019s nose.\n4. Have them take slow, deep nasal breaths from the pad.\n5. Repeat with a fresh pad as needed; benefit is short-lived (~10\u201320 minutes), so pair it with a conventional antiemetic for sustained control. Avoid in patients who cannot protect their airway or who have an alcohol allergy/sensitivity.\n\n**Equipment:** 70% isopropyl alcohol prep pads.\n\n_Source: Beadle KL, et al. Isopropyl Alcohol Nasal Inhalation for Nausea in the ED: an RCT. Ann Emerg Med 2016._',
         },
+        {
+            heading: 'Nebulized Naloxone for a Gentle, IV-Free Opioid Reversal',
+            body: '**Accomplishes:** Reverses opioid-induced respiratory depression through a face mask in a patient you cannot get an IV on (common in injection drug users), giving a steady, self-titrating dose instead of an abrupt push. [5]\n\n**How to:**\n1. Use for a spontaneously breathing patient with depressed but present respirations \u2014 NOT for frank apnea/arrest, which needs full-dose naloxone and bag-mask ventilation.\n2. Draw up 1\u20132 mg of naloxone.\n3. Add normal saline to reach a total volume of 3\u20135 mL in a standard nebulizer cup.\n4. Run it on a simple face mask at 6\u20138 L/min of oxygen and let the patient breathe the mist.\n5. It self-titrates \u2014 as the patient wakes they pull the mask off, limiting overshoot; watch for re-sedation and step up to IV/IM/IN naloxone if breathing does not improve.\n\n**Equipment:** Naloxone, normal saline, nebulizer cup + face mask, oxygen source.\n\n_Source: ALiEM Trick of the Trade \u2014 Nebulized naloxone; Mycyk MB, et al. J Emerg Med 2003._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/. (HaVOC trial.)' },
         { num: 2, text: 'ALiEM. Trick of the Trade: Naloxone dilution for opioid overdose. aliem.com. Kim HK, Nelson LS. Reversal of opioid-induced ventilatory depression using low-dose naloxone (0.04 mg): a case series. J Med Toxicol. 2016;12(1):107-110.' },
         { num: 3, text: 'ALiEM. Tricks of the Trade: Calcium gel for hydrofluoric acid burns (calcium gluconate + water-soluble lubricant in a glove). aliem.com.' },
         { num: 4, text: 'Beadle KL, Helbling AR, Love SL, et al. Isopropyl Alcohol Nasal Inhalation for Nausea in the Emergency Department: A Randomized Controlled Trial. Ann Emerg Med. 2016;68(1):1-9. See also Core EM review.' },
+        { num: 5, text: 'ALiEM. Trick of the Trade: Nebulized naloxone. aliem.com. Mycyk MB, et al. Nebulized naloxone gently and effectively reverses methadone intoxication. J Emerg Med. 2003;24(2):185-187.' },
     ],
 };
 const TRICKS_GENERAL_PAGE = {
