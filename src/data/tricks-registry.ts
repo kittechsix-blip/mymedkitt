@@ -75,7 +75,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#00838F',
     subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
     infoPageId: 'tricks-procedures',
-    trickCount: 42,
+    trickCount: 43,
     category: 'resus-procedures',
   },
   {
@@ -85,7 +85,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#6A1B9A',
     subtitle: 'Epistaxis packing tricks and nasal suction.',
     infoPageId: 'tricks-ent',
-    trickCount: 21,
+    trickCount: 22,
     category: 'head-neck',
   },
   {
@@ -115,7 +115,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#EF6C00',
     subtitle: 'Voiding trials, renal colic, priapism, and entrapment releases.',
     infoPageId: 'tricks-urology',
-    trickCount: 11,
+    trickCount: 12,
     category: 'genitourinary',
   },
   {
@@ -125,7 +125,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#AD1457',
     subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
     infoPageId: 'tricks-wound',
-    trickCount: 18,
+    trickCount: 19,
     category: 'wounds-msk',
   },
   {

@@ -25321,6 +25321,10 @@ const TRICKS_PROCEDURES_PAGE = {
             heading: 'Gravity Large-Volume Paracentesis With an Angiocatheter',
             body: '**Accomplishes:** Drains a tense ascites with only an angiocatheter and IV tubing when no paracentesis kit or vacuum bottle is available. [37]\n\n**How to:**\n1. Ultrasound-mark a pocket of fluid (classically the left lower quadrant, lateral to the rectus and inferior epigastric vessels); prep and drape sterilely.\n2. Anesthetize the skin and track, then advance a large-bore (14\u201316G) angiocatheter using a Z-track until you aspirate fluid; thread the cannula in and withdraw the needle.\n3. Connect IV extension tubing to the catheter hub and run the far end into a basin or empty container set BELOW the patient on the floor.\n4. Let gravity siphon the ascites out; raise the head of the bed and reposition the patient toward the catheter side to keep flow going as the abdomen empties.\n5. Cap or pull the catheter when drainage slows; give albumin per your usual threshold for large-volume taps.\n\n**Equipment:** 14\u201316G angiocatheter, IV extension tubing, local anesthetic, collection basin/container, ultrasound.\n\n_Source: ALiEM Trick of the Trade \u2014 Large volume paracentesis using gravity._',
         },
+        {
+            heading: 'Hyaluronidase Perimeter Injection for IV Extravasation',
+            body: '**Accomplishes:** Rescues tissue after a non-vesicant IV infiltrates by enzymatically spreading and speeding reabsorption of the trapped fluid, often shrinking the swelling within 15\u201330 minutes and heading off necrosis. [38]\n\n**How to:**\n1. Stop the infusion immediately and, before removing the IV, gently aspirate back through it to pull off any residual extravasated drug; elevate the limb.\n2. Dilute hyaluronidase to 15 units/mL (the vial is usually 150 units/mL \u2014 draw it into a tuberculin syringe with a 25G or smaller needle).\n3. Give 15 units through the existing catheter, then remove the catheter.\n4. Inject five 0.2 mL aliquots (1 mL total) subcutaneously in a ring around the LEADING EDGE of the infiltration, changing to a fresh needle between sticks.\n5. Reassess in 30\u201360 minutes and repeat if swelling persists; apply a warm compress and keep the limb elevated. (Use phentolamine instead for a vasopressor/vesicant extravasation.)\n\n**Equipment:** Hyaluronidase 150 units/mL, normal saline for dilution, 1 mL tuberculin syringe, 25G (or smaller) needles.\n\n_Source: Cleveland Clinic Journal of Medicine \u2014 optimal approach to infiltration and extravasation of nonchemotherapy medications; APSF / pediatric extravasation guidelines._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -25360,6 +25364,7 @@ const TRICKS_PROCEDURES_PAGE = {
         { num: 35, text: 'Leach B, Wiederhold B. ALiEM. Trick of the Trade: Deflate the undeflatable gastrostomy tube. aliem.com.' },
         { num: 36, text: 'ALiEM. Trick of the Trade: Minimizing propofol injection pain (antecubital vein + IV lidocaine pretreatment). aliem.com.' },
         { num: 37, text: 'ALiEM. Trick of the Trade: Large volume paracentesis technique using gravity (angiocatheter + IV tubing). aliem.com.' },
+        { num: 38, text: 'Reynolds PM, et al. What is the optimal approach to infiltration and extravasation of nonchemotherapy medications? Cleve Clin J Med. 2023;90(5):292. See also APSF and pediatric extravasation guidelines on hyaluronidase (dilute to 15 units/mL, five 0.2 mL perimeter injections).' },
     ],
 };
 const TRICKS_ENT_PAGE = {
@@ -25560,6 +25565,7 @@ const TRICKS_OPHTHO_PAGE = {
         { num: 11, text: 'LITFL. Ocular foreign body removal (procedure): bend the needle tip away from the eye with a haemostat to scoop the foreign body out rather than stab it. litfl.com.' },
         { num: 12, text: 'Lin M. ALiEM. Trick of the Trade: Checking eye pH with a urine dipstick (credit Eugene Izsak). aliem.com.' },
         { num: 13, text: 'Yarter NM, Racht J, Michels KS. Retrobulbar hemorrhage decompression with paracanthal \u201Cone-snip\u201D method: time to retire lateral canthotomy? Am J Emerg Med. 2023. See also Blandford AD, et al. Paracanthal \u201Cone-snip\u201D decompression in a cadaver model. Ophthalmic Plast Reconstr Surg. 2018; EMCrit 385 \u2014 Eye Trauma I.' },
+        { num: 14, text: 'Adhikari S, et al. Novel techniques in performing extraoral ultrasound in diagnosing dental abscesses. Am J Emerg Med. sciencedirect.com. See also emDOCs \u2014 HEENT: point-of-care ultrasound for facial/dental swelling.' },
     ],
 };
 const TRICKS_UROLOGY_PAGE = {
@@ -25628,6 +25634,10 @@ const TRICKS_UROLOGY_PAGE = {
             heading: 'Plaster Ear Splint to Stop an Auricular Hematoma Reaccumulating',
             body: '**Accomplishes:** After draining an auricular hematoma (cauliflower ear), a molded plaster splint presses the skin back onto the cartilage so blood cannot refill the perichondrial space \u2014 the real failure point of these injuries. [16]\n\n**How to:**\n1. Drain the hematoma first (incision or needle aspiration) and clean the ear.\n2. Cut a short plaster roll to the shape of the ear and soak it in water.\n3. Lay ONE thin layer of padding against the ear so the wet plaster will not stick to the skin.\n4. Press the plaster firmly into the natural contours of the auricle so it conforms and applies even compression; tuck gauze behind the ear for counter-pressure.\n5. Pile several layers of gauze over the top and hold the whole splint snug with a beanie hat. Arrange ~24-hour ENT follow-up for re-check.\n\n**Equipment:** Plaster roll, soft padding, gauze, a beanie hat, water.\n\n_Source: ALiEM Trick of the Trade \u2014 Splinting the ear (Michelle Lin)._',
         },
+        {
+            heading: 'Three-Way Stopcock for Priapism Aspiration and Irrigation',
+            body: '**Accomplishes:** Lets you aspirate and irrigate the corpus cavernosum through ONE needle in ischemic priapism, avoiding repeated sticks and the anxiety of leaving a bare 18G needle parked in the penis. [17]\n\n**How to:**\n1. Consent, place the patient on cardiac and BP monitoring (you will be injecting phenylephrine), then sterile prep and do a dorsal penile nerve block with 1% plain lidocaine at the 10 and 2 o\u2019clock positions; wait ~10 minutes.\n2. Build the circuit: attach a \u226519G butterfly to a 3-way stopcock, with a saline-filled syringe on one port and an empty syringe on the other.\n3. Insert the butterfly perpendicular into the corpus cavernosum at the 2\u20133 or 9\u201310 o\u2019clock position in the mid-shaft near the base \u2014 NEVER the glans; avoid the ventral urethra and the dorsal neurovascular bundle. Send the first dark aspirate for a blood gas to confirm ischemic (low-flow) priapism.\n4. Turn the stopcock toward the empty syringe and aspirate dark blood while milking the shaft; turn the stopcock the other way to irrigate 10\u201320 mL saline aliquots, then back to aspirate. Repeat until bright red blood returns or the penis goes flaccid (often after ~30\u201360 mL removed).\n5. Through the SAME needle, inject phenylephrine 100\u2013500 mcg (dilute to 100 mcg/mL) every 3\u20135 minutes as needed. One side usually suffices (the corpora communicate). Afterward hold pressure 1 minute per site and wrap with an elastic bandage.\n\n**Equipment:** 19G (or larger) butterfly needle, 3-way stopcock, two syringes, normal saline, phenylephrine, 1% lidocaine for the block, elastic bandage, cardiac/BP monitor.\n\n_Source: Inman B. emDOCs \u2014 An effective technique for aspiration in ischemic priapism: the \u201Cstopcock\u201D method; AUA/SMSNA Acute Ischemic Priapism guideline._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25646,6 +25656,7 @@ const TRICKS_UROLOGY_PAGE = {
         { num: 14, text: 'Pediatric EM Morsels. Pediatric paraphimosis (iced-glove reduction technique). pedemmorsels.com. See also EM:RAP \u2014 Paraphimosis reduction and First10EM \u2014 Paraphimosis.' },
         { num: 15, text: 'WikEM. Coude catheter. wikem.org. See also StatPearls \u2014 Difficult Foley Catheterization (NCBI Bookshelf NBK564404).' },
         { num: 16, text: 'ALiEM. Trick of the Trade: Splinting the ear (Michelle Lin). aliem.com.' },
+        { num: 17, text: 'Inman B. An effective technique for aspiration in ischemic priapism: the \u201Cstopcock\u201D method. emDOCs.net. See also AUA/SMSNA Acute Ischemic Priapism Guideline (auanet.org).' },
     ],
 };
 const TRICKS_WOUND_PAGE = {
@@ -25726,6 +25737,10 @@ const TRICKS_WOUND_PAGE = {
             heading: 'Part the Hair With Petroleum Ointment So It Stays Out of Your Stitches',
             body: '**Accomplishes:** Holds hair off a scalp laceration so strands do not get caught in your sutures or staples, which would otherwise risk wound dehiscence, foreign-body reaction, or infection. [18]\n\n**How to:**\n1. Irrigate and inspect the scalp wound as usual.\n2. Scoop a generous amount of a thick petroleum-based ointment (bacitracin, plain petroleum jelly, or similar) onto a gloved finger or applicator.\n3. Smear it along both wound edges, slicking the surrounding hair flat and away from the laceration to each side.\n4. The greasy hair stays parted and out of the field, leaving a clear gap of skin to suture or staple.\n5. Close the wound; wipe the ointment off at the end. (For glue closures or the HAT technique, skip this \u2014 adhesive will not stick to greased hair.)\n\n**Equipment:** Thick petroleum-based ointment (bacitracin or petroleum jelly), gloves/applicator, suture or staple kit, irrigation saline.\n\n_Source: ALiEM Trick of the Trade \u2014 Parting the hair for scalp laceration repair._',
         },
+        {
+            heading: 'IV Catheter Sheath as a DIY Wound-Irrigation Splash Shield',
+            body: '**Accomplishes:** Delivers ideal-pressure (5\u20138 PSI) wound irrigation AND shields you from the infectious splash-back when no commercial splash guard is stocked. [19]\n\n**How to:**\n1. Draw irrigation saline into a 20\u201335 mL syringe \u2014 the large barrel plus a small orifice is what generates the 5\u20138 PSI that actually lowers bacterial load (a bulb syringe makes only 0.5\u20131 PSI and is too weak).\n2. Pull the plastic sheath (cannula) off an 18- or 19-gauge IV catheter and twist it onto the syringe tip in place of a needle.\n3. Hold the sheath tip just above the wound; you do NOT need to indent the skin.\n4. Irrigate in short pulses, 1\u20132 mL per squirt, so the stream flushes debris out like a washing machine rather than one long jet.\n5. Even with a shield, wear gloves and a face shield \u2014 splatter still happens; total volume ~50\u2013100 mL per cm of wound length.\n\n**Equipment:** 20\u201335 mL syringe, 18\u201319G IV catheter (sheath only), irrigation saline, face shield and gloves.\n\n_Source: Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine \u2014 wound irrigation (18\u201319G catheter sheath on a 30 mL syringe for 5\u20138 PSI); PEMCincinnati \u2014 wound irrigation splash technique._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25746,6 +25761,7 @@ const TRICKS_WOUND_PAGE = {
         { num: 16, text: 'ALiEM. Trick of the Trade: Modified hair apposition technique (modHAT) using Kelly clamps. aliem.com. Karaduman S, et al. Modified hair apposition technique. Am J Emerg Med. 2009;27(9):1050-1055.' },
         { num: 17, text: 'ALiEM. Trick of the Trade: Double staple gun for pediatric scalp lacerations (Michelle Lin). aliem.com.' },
         { num: 18, text: 'ALiEM. Trick of the Trade: Parting the hair for scalp laceration repair (thick petroleum-based ointment to displace hair from the wound). aliem.com.' },
+        { num: 19, text: 'Roberts JR, Custalow CB, Thomsen TW. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine \u2014 Methods of Wound Closure / irrigation (18\u201319G catheter sheath on a 20\u201335 mL syringe delivers 5\u20138 PSI). See also PEMCincinnati.com \u2014 Wound irrigation.' },
     ],
 };
 const TRICKS_CARDIOLOGY_PAGE = {
