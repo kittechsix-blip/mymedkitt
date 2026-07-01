@@ -7,7 +7,7 @@ export const MARINE_ENVENOMATION_CRITICAL_ACTIONS = [
     { text: 'For fish stings (stingray, stonefish): immerse in hot water (40-45°C) for 30-90min', nodeId: 'marine-fish' },
     { text: 'Explore wound and remove retained spines/barbs', nodeId: 'marine-fish' },
     { text: 'Give stonefish antivenom for severe stonefish envenomation', nodeId: 'marine-stonefish' },
-    { text: 'Monitor for systemic reactions: Irukandji syndrome (catecholamine storm)', nodeId: 'marine-systemic' },
+    { text: 'Monitor for systemic reactions: Irukandji syndrome (catecholamine storm)', nodeId: 'marine-irukandji' },
     { text: 'Update tetanus and give antibiotics for deep/contaminated wounds', nodeId: 'marine-disposition' },
 ];
 export const MARINE_ENVENOMATION_MODULE_LABELS = [

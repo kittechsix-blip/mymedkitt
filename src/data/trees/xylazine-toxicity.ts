@@ -175,8 +175,8 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'XAW Antibiotic Selection Guide',
-    body: '**Culture data from Philadelphia XAW series [4]:**\n• **56% MRSA**\n• **37% Group A Streptococcus**\n• Polymicrobial common\n\n**Outpatient (Stage 1, mild Stage 2):**\n| Regimen | Covers | Notes |\n|---------|--------|-------|\n| [TMP-SMX](#/drug/tmp-smx/xylazine) 1-2 DS BID | MRSA | First-line |\n| TMP-SMX + Amoxicillin 500 TID | MRSA + GAS | If cellulitis |\n| Doxycycline 100 BID | MRSA (some) | Alternative if sulfa allergy |\n\n**Inpatient (Stage 2-3 with infection):**\n| Regimen | Covers | Notes |\n|---------|--------|-------|\n| Vancomycin + Pip-Tazo | MRSA, GAS, GN, anaerobes | Severe infection |\n| Vancomycin + Ceftriaxone | MRSA, GAS | If AKI |\n\n**Topical:**\n• **Silver sulfadiazine** — broad spectrum, active 72+ hours\n• Mupirocin — decolonization\n\n**Duration:** 7-10 days (uncomplicated), 6 weeks (osteomyelitis) [3][4]',
-    citation: [3, 4],
+    body: '**Culture data from Philadelphia XAW series [4]:**\n• **56% MRSA**\n• **37% Group A Streptococcus**\n• Polymicrobial common\n\n**Outpatient (Stage 1, mild Stage 2):**\n| Regimen | Covers | Notes |\n|---------|--------|-------|\n| [TMP-SMX](#/drug/tmp-smx/xylazine) 1-2 DS BID | MRSA | First-line |\n| TMP-SMX + Amoxicillin 500 TID | MRSA + GAS | If cellulitis |\n| Doxycycline 100 BID | MRSA (some) | Alternative if sulfa allergy |\n\n**Inpatient (Stage 2-3 with infection):**\n| Regimen | Covers | Notes |\n|---------|--------|-------|\n| Vancomycin + Pip-Tazo | MRSA, GAS, GN, anaerobes | Severe infection |\n| Vancomycin + Ceftriaxone | MRSA, GAS | If AKI |\n\n**Topical:**\n• **Silver sulfadiazine** — broad spectrum, active 72+ hours\n• Mupirocin — decolonization\n\n**Duration:** 7-10 days (uncomplicated), 6 weeks (osteomyelitis) [3][4][7]',
+    citation: [3, 4, 7],
     next: 'xyl-dispo-wound',
 
     summary: 'TMP-SMX first-line outpatient for MRSA; add amoxicillin for GAS cellulitis; vanc + pip-tazo for severe/inpatient',

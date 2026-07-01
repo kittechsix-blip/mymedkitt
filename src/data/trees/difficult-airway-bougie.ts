@@ -11,11 +11,11 @@ export const DIFFICULT_AIRWAY_BOUGIE_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Assess difficult airway with LEMON criteria before induction', nodeId: 'dab-lemon' },
   { text: 'Have surgical airway kit at bedside before paralysis', nodeId: 'dab-start' },
   { text: 'Use video laryngoscopy for all intubations (14.3% improvement in first-pass)', nodeId: 'dab-start' },
-  { text: 'Use bougie-first technique for predicted difficult airways (98% vs 87% success)', nodeId: 'dab-technique' },
+  { text: 'Use bougie-first technique for predicted difficult airways (98% vs 87% success)', nodeId: 'dab-start' },
   { text: 'Feel for tracheal clicks as bougie advances along tracheal rings', nodeId: 'dab-technique' },
   { text: 'Hold bougie in place while loading ETT over it', nodeId: 'dab-technique' },
   { text: 'Confirm placement with waveform capnography', nodeId: 'dab-confirm' },
-  { text: 'Call for help early if failed attempt - do not exceed 3 attempts', nodeId: 'dab-failed' },
+  { text: 'Call for help early if failed attempt - do not exceed 3 attempts', nodeId: 'dab-max-attempts' },
   { text: 'Perform emergency cricothyrotomy if cannot ventilate/cannot intubate', nodeId: 'dab-cric-go' },
 ];
 

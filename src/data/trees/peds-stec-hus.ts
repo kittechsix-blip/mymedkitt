@@ -282,7 +282,7 @@ export const PEDS_STEC_HUS_NODES: DecisionNode[] = [
     title: 'Other HUS Complications',
     body: '**Monitor for and treat additional complications:** [3,7]\n\n**Cardiac:**\n- Myocardial dysfunction (Shiga toxin effect)\n- Pericardial effusion\n- Arrhythmias (electrolyte-related)\n- Consider echo if hemodynamically unstable\n\n**GI:**\n- Colonic necrosis/perforation (surgical emergency)\n- Intussusception\n- Rectal prolapse\n- Pancreatitis (check lipase)\n- Hepatitis\n\n**Hematologic:**\n- Severe bleeding (rare)\n- DIC (usually not true DIC in HUS)\n\n**Endocrine:**\n- New-onset diabetes (pancreatic islet damage) - may be transient or permanent\n- Monitor glucose closely\n\n**Surgical consultation:**\n- Worsening abdominal pain\n- Peritoneal signs\n- Free air on imaging\n- Colonic perforation mortality is high',
     citation: [3, 7],
-    next: 'hus-dispo',
+    next: 'hus-prognosis',
   },
 
   // ===================================================================
