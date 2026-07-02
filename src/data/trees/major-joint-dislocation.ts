@@ -223,9 +223,9 @@ export const MAJOR_JOINT_DISLOCATION_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Open Ankle Dislocation',
-    body: '**Open Fracture-Dislocation Protocol:**\n\n**Immediate:**\n1. Photograph wound (documentation)\n2. Remove gross contamination\n3. Sterile saline-moistened dressing\n4. Reduce dislocation (reduces contamination risk)\n5. Posterior splint\n\n**Antibiotics (give within 1 hour):**\n• Gustilo I-II: Cefazolin 2g IV\n• Gustilo III: Add gentamicin 5mg/kg\n• Farm/soil contamination: Add penicillin or metronidazole\n\n**Tetanus:** Update if needed\n\n**OR for:**\n• Irrigation and debridement\n• Definitive fixation\n• Usually within 6-24 hours\n\n**Do NOT delay reduction for OR availability.** [1][8]',
+    body: '**Open Fracture-Dislocation Protocol:**\n\n**Immediate:**\n1. Photograph wound (documentation)\n2. Remove gross contamination\n3. Sterile saline-moistened dressing\n4. Reduce dislocation (reduces contamination risk)\n5. Posterior splint\n\n**Antibiotics — timing is the #1 driver of infection risk. Give ASAP, ideally within 1 hr of injury (never delay past 3 hr):**\n• **All grades: Cefazolin 2g IV** (weight-based: 3g if ≥120 kg) — gram-positive coverage is the backbone (2023 AAOS / Surgical Infection Society)\n• PCN allergy: Clindamycin 900mg IV\n• Gustilo III (or heavily contaminated): add gram-negative coverage — **piperacillin-tazobactam 4.5g IV preferred over aminoglycosides** (aminoglycosides no longer routinely recommended — no proven infection benefit + nephrotoxicity/resistance risk)\n• Farm/soil/fecal contamination: add high-dose penicillin (anti-clostridial)\n\n**Duration:** cefazolin ≤24 hr after wound closure (extended-spectrum coverage does not improve outcomes).\n\n**Tetanus:** Update if needed\n\n**OR for:**\n• Irrigation and debridement\n• Definitive fixation\n• Usually within 6-24 hours\n\n**Do NOT delay reduction for OR availability.** [1][8][9]',
     next: 'mjd-post-reduction',
-    citation: [1, 8],
+    citation: [1, 8, 9],
     safetyLevel: 'critical',
   },
 
@@ -319,4 +319,5 @@ export const MAJOR_JOINT_DISLOCATION_CITATIONS: Citation[] = [
   { num: 6, text: 'Levy BA, et al. Controversies in the Treatment of Knee Dislocations and Multiligament Reconstruction. J Am Acad Orthop Surg. 2009;17(4):197-206.' },
   { num: 7, text: 'Patterson BM, et al. Popliteal Artery Injury in Knee Dislocation: Risk Factors and Outcomes. J Vasc Surg. 2021;73(2):593-600.' },
   { num: 8, text: 'Marsh JL, et al. Ankle Fractures and Dislocations. J Am Acad Orthop Surg. 2016;24(11):770-779.' },
+  { num: 9, text: 'AAOS/Surgical Infection Society. Prevention of Surgical Site Infection After Major Extremity Trauma / open fracture antibiotic prophylaxis. 2023. (Cefazolin monotherapy backbone; gram-negative coverage reserved for Gustilo III, pip-tazo preferred over aminoglycosides). See also EAST Open Fractures Prophylactic Antibiotic Use Update.' },
 ];
