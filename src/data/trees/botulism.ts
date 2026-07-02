@@ -1,7 +1,7 @@
 // MedKitt - Botulism Management
 // Recognition & types -> Differentiation from GBS/MG -> Diagnostic workup -> Antitoxin treatment -> Supportive care -> Public health -> Disposition -> Prognosis
 // 8 modules: Recognition & Types -> Differentiation -> Diagnostic Workup -> Antitoxin Treatment -> Supportive Care -> Public Health -> Disposition -> Prognosis
-// 22 nodes total.
+// 20 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
@@ -416,8 +416,8 @@ export const BOTULISM_CRITICAL_ACTIONS = [
   { text: 'Contact State Health Department and CDC IMMEDIATELY for antitoxin (1-770-488-7100)', nodeId: 'bot-public-health' },
   { text: 'Heptavalent equine antitoxin for adults (BabyBIG for infant botulism)', nodeId: 'bot-antitoxin-admin' },
   { text: 'Give antitoxin ASAP - halts progression but does NOT reverse paralysis', nodeId: 'bot-antitoxin' },
-  { text: 'Intubate early for vital capacity <30% or declining respiratory status (prolonged mechanical ventilation common)', nodeId: 'bot-supportive-general' },
-  { text: 'Do NOT give aminoglycosides (potentiate neuromuscular blockade)', nodeId: 'bot-supportive' },
+  { text: 'Intubate early for vital capacity <30% or declining respiratory status (prolonged mechanical ventilation common)', nodeId: 'bot-supportive' },
+  { text: 'Do NOT give aminoglycosides (potentiate neuromuscular blockade)', nodeId: 'bot-supportive-wound' },
   { text: 'Food history critical: home-canned foods, fermented fish, honey in infants', nodeId: 'bot-foodborne' },
   { text: 'EMG showing incremental response to high-frequency stimulation (not always present)', nodeId: 'bot-workup' },
   { text: 'Differentiate from Guillain-Barré (ascending, CSF protein ↑) and myasthenia gravis (fluctuating, Tensilon test +)', nodeId: 'bot-ddx-key-features' },

@@ -1,7 +1,7 @@
 // MedKitt — Hemophilia & von Willebrand Disease
 // ED evaluation and management of inherited bleeding disorders
 // 6 modules: Initial Assessment → Bleed Management → Factor Dosing → Special Populations → vWD Branch → Disposition
-// 35 nodes total.
+// 42 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 
@@ -15,8 +15,8 @@ interface Citation {
 // ===================================================================
 
 export const HEMOPHILIA_CRITICAL_ACTIONS = [
-  { text: 'Factor VIII or IX to 100% BEFORE imaging for head trauma/ICH - do NOT delay', nodeId: 'hemo-ich' },
-  { text: 'ICH mortality 20% in hemophilia - Factor FVIII 50 U/kg or FIX 100 U/kg STAT', nodeId: 'hemo-ich' },
+  { text: 'Factor VIII or IX to 100% BEFORE imaging for head trauma/ICH - do NOT delay', nodeId: 'hemo-ich-factor' },
+  { text: 'ICH mortality 20% in hemophilia - Factor FVIII 50 U/kg or FIX 100 U/kg STAT', nodeId: 'hemo-ich-factor' },
   { text: 'Hemophilia A dosing: 1 U/kg raises FVIII by 2% | Hemophilia B: 1 U/kg raises FIX by 1%', nodeId: 'hemo-factor-dosing' },
   { text: 'Iliopsoas hemorrhage: 80% factor level × 3 days, then >50% - strict bed rest, MRI imaging', nodeId: 'hemo-iliopsoas' },
   { text: 'Antifibrinolytics (aminocaproic acid/TXA) CONTRAINDICATED with hematuria - risk of renal thrombi', nodeId: 'hemo-hematuria' },
@@ -104,6 +104,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
       { label: 'Muscle / soft tissue', description: 'Including iliopsoas', next: 'hemo-muscle' },
       { label: 'Head trauma / ICH', description: 'Life-threatening — factor BEFORE imaging', next: 'hemo-ich', urgency: 'critical' },
       { label: 'Mucosal bleeding', description: 'Oral, epistaxis, post-dental', next: 'hemo-mucosal' },
+      { label: 'Other bleed types', description: 'GI hemorrhage, hematuria, major trauma, special populations', next: 'hemo-bleed-type-2' },
     ],
     summary: 'Classify bleed severity: life-threatening (ICH, neck), major (hemarthrosis, muscle), or mucosal/minor',
   },
