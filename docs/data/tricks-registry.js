@@ -40,7 +40,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 43,
+        trickCount: 45,
         category: 'resus-procedures',
     },
     {
@@ -130,7 +130,7 @@ export const TRICK_SPECIALTIES = [
         color: '#455A64',
         subtitle: 'Fast bedside screens, dosing pearls, communication.',
         infoPageId: 'tricks-general',
-        trickCount: 13,
+        trickCount: 16,
         category: 'general-tox',
     },
     {
