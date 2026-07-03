@@ -102,7 +102,7 @@ export const HYPEREMESIS_NODES = [
         module: 2,
         title: 'HG — Outpatient',
         body: 'Small frequent bland meals, ginger, avoid triggers. [Pyridoxine](#/drug/pyridoxine/nvp) ± [Doxylamine](#/drug/doxylamine/nvp) first; add an oral antiemetic if needed. Counsel on the **ondansetron first-trimester nuance** — a small possible signal for cardiac septal/oral-cleft defects **if used before 10 weeks** — via shared decision-making. [4]',
-        recommendation: 'Discharge on pyridoxine ± doxylamine, oral antiemetic PRN, hydration and dietary advice, obstetric follow-up. Return for inability to keep fluids down, weight loss, or dizziness. Pyridoxine >500 mg/day risks neuropathy — stay within dosing.',
+        recommendation: 'Discharge on pyridoxine ± doxylamine, oral antiemetic PRN, hydration and dietary advice, obstetric follow-up. Return for inability to keep fluids down, weight loss, or dizziness. Keep pyridoxine at the NVP dose (10–25 mg q6–8h, ~30–75 mg/day); sensory neuropathy is dose- and duration-dependent and has been reported below 500 mg/day, so cap total daily intake at ≤100 mg/day for prolonged use.',
         confidence: 'recommended',
         citation: [4],
         summary: 'B6 ± doxylamine + PRN antiemetic, hydration, OB follow-up; counsel ondansetron <10wk',
