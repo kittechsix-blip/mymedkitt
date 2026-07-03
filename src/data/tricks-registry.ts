@@ -85,7 +85,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#6A1B9A',
     subtitle: 'Epistaxis packing tricks and nasal suction.',
     infoPageId: 'tricks-ent',
-    trickCount: 22,
+    trickCount: 23,
     category: 'head-neck',
   },
   {
@@ -105,7 +105,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#2E7D32',
     subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
     infoPageId: 'tricks-ophtho',
-    trickCount: 13,
+    trickCount: 14,
     category: 'head-neck',
   },
   {
@@ -125,7 +125,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#AD1457',
     subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
     infoPageId: 'tricks-wound',
-    trickCount: 19,
+    trickCount: 21,
     category: 'wounds-msk',
   },
   {
@@ -165,7 +165,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#455A64',
     subtitle: 'Fast bedside screens, dosing pearls, communication.',
     infoPageId: 'tricks-general',
-    trickCount: 16,
+    trickCount: 17,
     category: 'general-tox',
   },
   {

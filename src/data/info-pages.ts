@@ -26607,6 +26607,10 @@ const TRICKS_ENT_PAGE: InfoPage = {
       heading: 'Oxymetazoline Straight Onto the Nasal Packing',
       body: '**Accomplishes:** Adds local vasoconstriction at the bleeding site by soaking the nasal tampon itself with oxymetazoline, so the packing both tamponades AND shrinks the vessels \u2014 even useful for posterior bleeds. [23]\n\n**How to:**\n1. After controlling clots, insert the compressed Merocel/cotton tampon along the floor of the nose as usual.\n2. Instead of expanding it with plain saline, drip oxymetazoline (Afrin) directly onto the inserted tampon.\n3. The packing expands to tamponade while the alpha-agonist is delivered right onto the mucosa for vasoconstriction.\n4. Top up with a few more drops if bleeding persists; reassess in 15\u201320 minutes.\n5. Pair with topical TXA on the same packing when available for an added hemostatic effect.\n\n**Equipment:** Merocel/cotton nasal tampon, oxymetazoline (Afrin), dropper, nasal speculum.\n\n_Source: ALiEM \u2014 Epistaxis Management in the Emergency Department (mnemonic): apply oxymetazoline directly onto the tampon._',
     },
+    {
+      heading: 'Tissue-Adhesive on a Swab to Pull Out a Hard Ear Foreign Body',
+      body: '**Accomplishes:** Extracts a smooth, hard, non-organic ear foreign body (a bead or plastic pellet) that forceps and cerumen loops just skid off of \u2014 without shoving it deeper toward the eardrum. [24]\n\n**How to:**\n1. Visualize the object under direct otoscopy or a video laryngoscope for magnification, and confirm it is smooth/hard and non-organic.\n2. Put a SMALL amount of tissue adhesive (Dermabond) on the wooden end of a cotton-tipped applicator (or a plastic ear pick with the tip cut flat for more surface contact).\n3. Under direct vision advance the glued end to just touch the surface of the object \u2014 do NOT overload the glue or it will drip and cement the object to the canal wall.\n4. Hold it in gentle contact for 20\u201330 seconds to let the glue set.\n5. Withdraw the applicator and the object together; re-examine the canal and tympanic membrane afterward.\n\n**Equipment:** Cotton-tipped applicator (wooden shaft) or plastic ear pick, tissue adhesive (Dermabond / 2-octyl cyanoacrylate), otoscope or video laryngoscope.\n\n_Source: ALiEM Trick of the Trade \u2014 Ear foreign body removal with tissue adhesive (Lin; Lew modification)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26632,6 +26636,7 @@ const TRICKS_ENT_PAGE: InfoPage = {
     { num: 21, text: 'ALiEM. Trick of the Trade: Managing epistaxis with Merocel nasal packing (wet the leading tip). aliem.com.' },
     { num: 22, text: 'ALiEM. Trick of the Trade: An improvised foreign body removal device (condom + 18G angiocatheter). aliem.com.' },
     { num: 23, text: 'ALiEM. Epistaxis Management in the Emergency Department: a helpful mnemonic (apply oxymetazoline directly onto the nasal tampon for vasoconstriction). aliem.com.' },
+    { num: 24, text: 'ALiEM. Trick of the Trade: Ear foreign body removal with tissue adhesive on a cotton-tipped applicator (Michelle Lin; Edward Lew ear-pick modification). aliem.com.' },
   ],
 };
 
@@ -26693,6 +26698,10 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
       heading: 'Paracanthal \u201COne-Snip\u201D Decompression for Orbital Compartment Syndrome',
       body: '**Accomplishes:** Decompresses a sight-threatening retrobulbar hemorrhage with a single scissor cut, skipping the harder-to-strum cantholysis step of a full lateral canthotomy. [13]\n\n**How to:**\n1. Confirm orbital compartment syndrome (proptosis, \u201Crock hard\u201D eye, vision loss, afferent pupil defect, IOP often >40); rule out globe rupture first \u2014 that is the one absolute contraindication.\n2. Inject a little 1\u20132% lidocaine with epinephrine just lateral to the lateral canthus, needle pointed away from the globe.\n3. Pinch the full thickness of the lower eyelid about 1 cm directly below the lateral canthus with a hemostat for ~30 seconds to crush a bloodless line.\n4. Make ONE full-thickness vertical snip through that crushed paracanthal track with straight (iris) scissors \u2014 this single cut releases the orbital septum and decompresses the orbit.\n5. Recheck IOP and visual acuity; if still elevated, proceed to formal canthotomy/cantholysis. Call ophthalmology but do not wait for them.\n\n**Equipment:** 1\u20132% lidocaine with epinephrine + 25G needle, hemostat, straight iris scissors, tonometer.\n\n_Source: Yarter, Racht, Michels. Retrobulbar hemorrhage decompression with the paracanthal one-snip method. Am J Emerg Med 2023; Blandford AD, et al. Ophthalmic Plast Reconstr Surg 2018 (cadaver model). EMCrit 385 \u2014 Eye Trauma I._',
     },
+    {
+      heading: 'Ocular Ultrasound for the Shut, Swollen Traumatic Eye',
+      body: '**Accomplishes:** Checks pupil reactivity and extraocular-muscle entrapment when the lids are too swollen to open \u2014 without prying them apart and pressing on a possibly ruptured globe. [15]\n\n**How to:**\n1. Lay a GENEROUS layer of sterile lubricating jelly over the closed, swollen lid so the probe never touches or presses the globe (the gel is your standoff).\n2. Rest a high-frequency linear probe gently on the lid with minimal pressure.\n3. Entrapment check: in the axial plane ask the patient to look left and right, then sagittal plane look up and down \u2014 asymmetric globe excursion suggests an entrapped extraocular muscle.\n4. Pupil check: angle the probe to bring the iris and lens into view, shine a light into either eye, and watch on-screen for iris constriction (direct and consensual).\n5. Also scan for lens dislocation, vitreous hemorrhage, or retrobulbar fluid; STOP and treat as an open globe if any rupture sign appears.\n\n**Equipment:** High-frequency linear ultrasound probe, sterile lubricating jelly, penlight.\n\n_Source: ALiEM Trick of the Trade \u2014 Ocular ultrasound for the swollen traumatic eye (Rose, Watts, Teismann)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26709,6 +26718,7 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
     { num: 12, text: 'Lin M. ALiEM. Trick of the Trade: Checking eye pH with a urine dipstick (credit Eugene Izsak). aliem.com.' },
     { num: 13, text: 'Yarter NM, Racht J, Michels KS. Retrobulbar hemorrhage decompression with paracanthal \u201Cone-snip\u201D method: time to retire lateral canthotomy? Am J Emerg Med. 2023. See also Blandford AD, et al. Paracanthal \u201Cone-snip\u201D decompression in a cadaver model. Ophthalmic Plast Reconstr Surg. 2018; EMCrit 385 \u2014 Eye Trauma I.' },
     { num: 14, text: 'Adhikari S, et al. Novel techniques in performing extraoral ultrasound in diagnosing dental abscesses. Am J Emerg Med. sciencedirect.com. See also emDOCs \u2014 HEENT: point-of-care ultrasound for facial/dental swelling.' },
+    { num: 15, text: 'ALiEM. Trick of the Trade: Ocular ultrasound for the swollen traumatic eye (Rose C, Watts M, Teismann N). aliem.com.' },
   ],
 };
 
@@ -26886,6 +26896,14 @@ const TRICKS_WOUND_PAGE: InfoPage = {
       heading: 'IV Catheter Sheath as a DIY Wound-Irrigation Splash Shield',
       body: '**Accomplishes:** Delivers ideal-pressure (5\u20138 PSI) wound irrigation AND shields you from the infectious splash-back when no commercial splash guard is stocked. [19]\n\n**How to:**\n1. Draw irrigation saline into a 20\u201335 mL syringe \u2014 the large barrel plus a small orifice is what generates the 5\u20138 PSI that actually lowers bacterial load (a bulb syringe makes only 0.5\u20131 PSI and is too weak).\n2. Pull the plastic sheath (cannula) off an 18- or 19-gauge IV catheter and twist it onto the syringe tip in place of a needle.\n3. Hold the sheath tip just above the wound; you do NOT need to indent the skin.\n4. Irrigate in short pulses, 1\u20132 mL per squirt, so the stream flushes debris out like a washing machine rather than one long jet.\n5. Even with a shield, wear gloves and a face shield \u2014 splatter still happens; total volume ~50\u2013100 mL per cm of wound length.\n\n**Equipment:** 20\u201335 mL syringe, 18\u201319G IV catheter (sheath only), irrigation saline, face shield and gloves.\n\n_Source: Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine \u2014 wound irrigation (18\u201319G catheter sheath on a 30 mL syringe for 5\u20138 PSI); PEMCincinnati \u2014 wound irrigation splash technique._',
     },
+    {
+      heading: 'Steri-Strip + Suture Combo for Fragile, Thin Skin',
+      body: '**Accomplishes:** Closes lacerations in elderly or chronic-steroid patients whose paper-thin skin cheese-wires through under a bare suture. [20]\n\n**How to:**\n1. Clean and irrigate the wound as usual and dry the surrounding skin so the strips will adhere.\n2. Lay Steri-Strips LONGITUDINALLY along each wound edge (parallel to the laceration), a few millimeters back from the edge, to build an artificial \u201Cskin layer.\u201D\n3. Place your sutures THROUGH the Steri-Strips rather than bare skin, so the strip spreads the tension and the suture cannot pull through.\n4. Tie down gently \u2014 the strip-reinforced edges hold without tearing.\n5. Dress as usual; longitudinal placement gives more even tensile strength along the edges than perpendicular strips.\n\n**Equipment:** Steri-Strips, nonabsorbable suture, needle driver, forceps, irrigation saline.\n\n_Source: ALiEM Trick of the Trade \u2014 Steri-strip/suture combination for thin-skinned individuals; Davis M, Nakhdjevani A, Lidder S. J Emerg Med 2011._',
+    },
+    {
+      heading: 'Tie-Over Bolster Dressing Using the Suture Tails',
+      body: '**Accomplishes:** Builds a self-contained pressure dressing over a sutured wound from the suture tails themselves \u2014 no tape or wrap needed, and the patient can remove it for a wound check. [21]\n\n**How to:**\n1. Close the laceration, but leave the suture tails long (about 6\u20138 cm) instead of trimming them short.\n2. Roll a piece of gauze into a bolster and lay it directly over the sutured wound.\n3. Tie the long tails across the top of the gauze bolster so it presses evenly onto the wound \u2014 giving hemostasis and apposition without tape.\n4. After 1\u20132 days the patient cuts the over-tied knots to lift off the gauze, inspect, and clean; the underlying wound sutures stay intact.\n5. Especially useful on hairy or contoured areas where a taped dressing will not stay put.\n\n**Equipment:** Standard suture kit (leave tails long), gauze.\n\n_Source: ALiEM Trick of the Trade \u2014 Tie-over dressing for scalp lacerations._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26907,6 +26925,8 @@ const TRICKS_WOUND_PAGE: InfoPage = {
     { num: 17, text: 'ALiEM. Trick of the Trade: Double staple gun for pediatric scalp lacerations (Michelle Lin). aliem.com.' },
     { num: 18, text: 'ALiEM. Trick of the Trade: Parting the hair for scalp laceration repair (thick petroleum-based ointment to displace hair from the wound). aliem.com.' },
     { num: 19, text: 'Roberts JR, Custalow CB, Thomsen TW. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine \u2014 Methods of Wound Closure / irrigation (18\u201319G catheter sheath on a 20\u201335 mL syringe delivers 5\u20138 PSI). See also PEMCincinnati.com \u2014 Wound irrigation.' },
+    { num: 20, text: 'ALiEM. Trick of the Trade: Steri-strip/suture combination for thin skin lacerations. aliem.com. Davis M, Nakhdjevani A, Lidder S. Suture/Steri-strip combination for the management of lacerations in thin-skinned individuals. J Emerg Med. 2011;40(3):322-323.' },
+    { num: 21, text: 'ALiEM. Trick of the Trade: Tie-over dressing for scalp lacerations (long suture tails tied over a gauze bolster). aliem.com.' },
   ],
 };
 
@@ -27129,6 +27149,10 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
       heading: 'Angiocatheter Splint for Toe Paronychia / Nail-Fold Pain',
       body: '**Accomplishes:** Keeps the lateral nail fold open after draining a toe paronychia or excising an ingrown nail edge, so the regrowing nail glides over a plastic \u201Crail\u201D rather than burrowing back into the skin. [16]\n\n**How to:**\n1. Anesthetize the toe with a digital block; often simply elevating the nail out of the lateral fold releases pus and relieves the paronychia.\n2. If the lateral nail edge must be excised, do so and clean the sulcus.\n3. Take the plastic sheath from an 18-gauge angiocatheter (discard the needle) and cut a short length.\n4. Slide the plastic sheath into the potential space between the nail edge and the lateral nail fold as a splint.\n5. The new nail grows out over this plastic rail; give wound care and podiatry follow-up.\n\n**Equipment:** 18-gauge angiocatheter (plastic sheath only), digital-block supplies, fine scissors.\n\n_Source: ALiEM Trick of the Trade \u2014 Toe paronychia splinting (Stella Yiu)._',
     },
+    {
+      heading: 'Syringe-Barrel or IV-Bag Funnel to Push Charcoal Down an NG Tube',
+      body: '**Accomplishes:** Gets thick, gritty activated charcoal (or lavage fluid) down an NG tube fast and gravity-fed, instead of fighting to force the slurry through a small syringe over and over. [17]\n\n**How to:**\n1. Confirm NG placement and keep the patient upright to reduce aspiration risk.\n2. Funnel method: pull the plunger out of a 60 mL catheter-tip syringe, attach the empty barrel to the NG port, and pour the charcoal/fluid into the open barrel \u2014 gravity carries it down.\n3. IV-bag method: cut the corner off (or empty) a 1 L IV bag, fill it with the charcoal slurry, then connect standard IV tubing snugly to the NG port and let it infuse.\n4. Tape the tubing-to-NG junction \u2014 gritty charcoal tends to leak and clog at the connector.\n5. Watch for gagging or retching throughout and stop if the patient cannot protect the airway.\n\n**Equipment:** 60 mL catheter-tip syringe (barrel as funnel) OR an empty 1 L IV bag + IV tubing + tape; NG tube; activated charcoal.\n\n_Source: ALiEM Trick of the Trade \u2014 Using a funnel for NG tubes (Michelle Lin)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -27147,6 +27171,7 @@ const TRICKS_GENERAL_PAGE: InfoPage = {
     { num: 14, text: 'ALiEM. Trick of the Trade: Opioids for air hunger. aliem.com. Jennings AL, et al. A systematic review of the use of opioids in the management of dyspnoea (Cochrane). Thorax. 2002.' },
     { num: 15, text: 'ALiEM. Trick of the Trade: Toenail splinting for ingrown toenails (cotton wisp technique; Stella Yiu). aliem.com.' },
     { num: 16, text: 'ALiEM. Trick of the Trade: Toe paronychia splinting (18-gauge angiocatheter sheath as a nail splint; Stella Yiu). aliem.com.' },
+    { num: 17, text: 'ALiEM. Trick of the Trade: Using a funnel for NG tubes (60 mL syringe barrel or IV-bag gravity delivery of activated charcoal; Michelle Lin). aliem.com.' },
   ],
 };
 
