@@ -1,7 +1,7 @@
 // MedKitt - Caustic Ingestion Management
 // ED evaluation and management of corrosive substance ingestion (acid vs alkali)
 // 5 modules: Assessment -> Airway -> Workup -> Treatment -> Disposition
-// 26 nodes total.
+// 22 nodes total.
 export const CAUSTIC_INGESTION_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL ASSESSMENT
@@ -345,6 +345,7 @@ export const CAUSTIC_INGESTION_NODES = [
             },
             monitoring: 'Serial abdominal exams q4-6h. CBC, CRP, lactate daily. Nutrition support. Watch for perforation.',
         },
+        next: 'caustic-supportive',
         summary: 'Grade 2b: ICU — 70-100% stricture rate, consider steroids per GI consult',
     },
     {
@@ -410,6 +411,12 @@ export const CAUSTIC_INGESTION_NODES = [
                 next: 'caustic-labs',
                 urgency: 'urgent',
             },
+            {
+                label: 'Intentional ingestion - psychiatric evaluation',
+                description: 'Mandatory psych eval before discharge regardless of injury severity',
+                next: 'caustic-psych',
+                urgency: 'urgent',
+            },
         ],
         summary: 'All criteria: asymptomatic, tolerating PO, no burns, accidental, reliable follow-up',
     },
@@ -444,6 +451,7 @@ export const CAUSTIC_INGESTION_NODES = [
         title: 'Supportive Care Measures',
         body: '**General supportive care:**\n\n**NPO status:**\n- All symptomatic patients initially NPO\n- Advance diet based on EGD findings and tolerance\n\n**Pain management:**\n- [Acetaminophen](#/drug/acetaminophen/pain) 1g IV q6h\n- [Hydromorphone](#/drug/hydromorphone/pain) 0.2-0.5mg IV q2-4h PRN for severe pain\n- Avoid NSAIDs (GI irritation)\n\n**Antiemetics:**\n- [Ondansetron](#/drug/ondansetron/nausea) 4-8mg IV q6-8h\n- Vomiting increases aspiration and re-exposure risk\n\n**Nutrition:**\n- Early TPN for grade 2b-3 injuries\n- Consider nasojejunal feeding tube placed under fluoroscopy (not blind)\n- Avoid NG tube through injured esophagus\n\n**PPI therapy:**\n- [Pantoprazole](#/drug/pantoprazole/gerd) 40mg IV q12h\n- May reduce secondary injury from acid reflux\n- Does NOT prevent stricture formation',
         citation: [1, 2],
+        next: 'caustic-long-term',
         summary: 'NPO initially, acetaminophen for pain, avoid NSAIDs, ondansetron for nausea',
     },
     {
@@ -474,7 +482,7 @@ export const CAUSTIC_INGESTION_MODULE_LABELS = [
 // Critical Actions
 // -------------------------------------------------------------------
 export const CAUSTIC_INGESTION_CRITICAL_ACTIONS = [
-    { text: 'Do NOT induce vomiting, use activated charcoal, or give neutralizing agents (worsens injury)', nodeId: 'caustic-supportive' },
+    { text: 'Do NOT induce vomiting, use activated charcoal, or give neutralizing agents (worsens injury)', nodeId: 'caustic-start' },
     { text: 'Airway burns require early intubation BEFORE edema progresses (have difficult airway cart ready)', nodeId: 'caustic-airway-secure' },
     { text: 'NPO immediately - do NOT give oral fluids (risk of perforation)', nodeId: 'caustic-supportive' },
     { text: 'GI consult for endoscopy within 12-24h (NOT emergent unless perforation suspected)', nodeId: 'caustic-egd-timing' },

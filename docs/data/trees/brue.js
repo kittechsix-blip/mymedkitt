@@ -157,7 +157,7 @@ export const BRUE_NODES = [
         title: 'Higher-Risk BRUE — Testing',
         body: '**Initial Tier (feasible without admission):**\n\n| Test | Indication |\n|------|------------|\n| **Continuous pulse ox** | All higher-risk — 4+ hours |\n| **12-lead ECG** | All — screen long QT, WPW |\n| **Pertussis PCR** | Underimmunized, exposure, outbreak |\n| **Respiratory viral panel** | Respiratory symptoms |\n| **Blood glucose** | All — hypoglycemia |\n| **VBG or BMP** | Metabolic screen (acidosis, electrolytes) |\n| **CBC** | Infection, anemia |\n| **Lactate** | If metabolic concern |\n\n**If NAT Concern:**\n• Head CT or MRI (subdural, SAH)\n• Skeletal survey\n• Retinal exam (ophthalmology)\n• Social work consult\n• Report to CPS\n\n**If Cardiac Concern:**\n• ECG (long QT, WPW, arrhythmia)\n• Consider echo if murmur or structural concern\n• Cardiology consult if abnormal\n\n**If Seizure Concern:**\n• EEG\n• Neurology consult\n\n**If GI/Feeding Concern:**\n• Observed feeding\n• Consider swallow study\n• GI consult',
         citation: [3, 6, 7],
-        next: 'brue-high-risk-admit',
+        next: 'brue-ddx',
         summary: 'Tier 1: Pulse ox, ECG, glucose, BMP/VBG, CBC, pertussis. Add head imaging + skeletal survey if NAT concern.',
         skippable: true,
     },
@@ -171,6 +171,7 @@ export const BRUE_NODES = [
         confidence: 'recommended',
         citation: [3, 6],
         calculatorLinks: [{ id: 'brue-risk', label: 'BRUE Risk Calculator' }],
+        next: 'brue-disposition',
     },
     // =====================================================================
     // MODULE 5: ETIOLOGY
@@ -215,6 +216,7 @@ export const BRUE_NODES = [
         title: 'Cardiac Causes of BRUE',
         body: '**Arrhythmias Presenting as BRUE:**\n\n| Condition | ECG Finding | Risk |\n|-----------|-------------|------|\n| **Long QT** | QTc >460 ms (>480 concerning) | Sudden death, torsades |\n| **WPW** | Delta wave, short PR | SVT, sudden death |\n| **SVT** | Narrow complex, rate >220 | Shock if prolonged |\n| **Heart block** | AV dissociation | Syncope, bradycardia |\n\n**ECG Screening:**\n• Recommended for ALL higher-risk BRUE\n• "May consider" for lower-risk\n• Pediatric cardiology interpretation if abnormal\n\n**QTc Calculation:**\n• Bazett formula: QTc = QT / √RR\n• Normal: <440 ms\n• Borderline: 440-460 ms\n• Prolonged: >460 ms\n\n**If Abnormal ECG:**\n• Cardiology consult\n• Consider echo\n• Consider Holter monitor\n• Family screening for inherited conditions\n\n**Family History Red Flags:**\n• Sudden death <50 years\n• Syncope with exercise\n• Known channelopathy\n• Defibrillator/pacemaker in family',
         citation: [1, 11],
+        next: 'brue-high-risk-admit',
         summary: 'ECG for all higher-risk BRUE. Long QT (QTc >460), WPW, SVT can cause BRUE. Cardiology consult if abnormal.',
     },
     // =====================================================================

@@ -283,8 +283,8 @@ export const DELAYED_SEQUENCE_INTUBATION_NODES = [
         module: 5,
         title: 'Post-Intubation Care',
         body: 'Intubation complete — proceed to post-intubation management. [1][6]',
-        recommendation: '**Post-DSI Intubation Checklist:** [1][6]\n\n**Confirm Placement:**\n- Waveform capnography (ETCO2 35-45 mmHg)\n- Bilateral breath sounds\n- Chest X-ray ordered\n\n**Secure ETT:**\n- Note depth at teeth (typically 21-23 cm adults)\n- Secure with tape or commercial holder\n\n**Post-Intubation Sedation:** [5][7]\n- Ketamine is wearing off — start continuous sedation\n- Propofol infusion 25-50 mcg/kg/min, OR\n- Fentanyl 1-2 mcg/kg/hr + midazolam 0.02-0.1 mg/kg/hr\n- Consider ketamine infusion 0.1-0.5 mg/kg/hr\n\n**Ventilator Settings:**\n- Lung-protective ventilation (6-8 mL/kg IBW)\n- PEEP 5-10 cm H2O\n- FiO2 to maintain SpO2 92-96%\n\n**Disposition:**\n- ICU admission\n- Arterial line for hemodynamic monitoring\n- Serial ABGs\n\n**Documentation:**\n- DSI technique used\n- Ketamine dose\n- Pre/post SpO2 values\n- Intubation details (view, device, tube size, depth)',
-        citation: [1, 5, 6, 7],
+        recommendation: '**Post-DSI Intubation Checklist:** [1][6]\n\n**Confirm Placement:**\n- Waveform capnography (ETCO2 35-45 mmHg)\n- Bilateral breath sounds\n- Chest X-ray ordered\n\n**Secure ETT:**\n- Note depth at teeth (typically 21-23 cm adults)\n- Secure with tape or commercial holder\n\n**Post-Intubation Sedation:** [5][7][8]\n- Ketamine is wearing off — start continuous sedation\n- Propofol infusion 25-50 mcg/kg/min, OR\n- Fentanyl 1-2 mcg/kg/hr + midazolam 0.02-0.1 mg/kg/hr\n- Consider ketamine infusion 0.1-0.5 mg/kg/hr\n\n**Ventilator Settings:** [8]\n- Lung-protective ventilation (6-8 mL/kg IBW)\n- PEEP 5-10 cm H2O\n- FiO2 to maintain SpO2 92-96%\n\n**Disposition:**\n- ICU admission\n- Arterial line for hemodynamic monitoring\n- Serial ABGs\n\n**Documentation:**\n- DSI technique used\n- Ketamine dose\n- Pre/post SpO2 values\n- Intubation details (view, device, tube size, depth)',
+        citation: [1, 5, 6, 7, 8],
         summary: 'Post-intubation: confirm with capnography, start continuous sedation (ketamine wearing off), ventilator settings, ICU',
     },
 ];
@@ -309,4 +309,5 @@ export const DELAYED_SEQUENCE_INTUBATION_CITATIONS = [
     { num: 5, text: 'Weingart SD. Alternatives to RSI: Contemporary airway management with ketamine. West J Emerg Med. 2019.' },
     { num: 6, text: 'Weingart SD. EMCrit Episode 137: DSI Update - Delayed Sequence Intubation. EMCrit.org. 2019.' },
     { num: 7, text: 'LITFL: Delayed Sequence Intubation. Life in the Fast Lane. https://litfl.com/delayed-sequence-intubation-dsi/' },
+    { num: 8, text: 'Devlin JW, et al. Clinical Practice Guidelines for the Prevention and Management of Pain, Agitation/Sedation, Delirium, Immobility, and Sleep Disruption in Adult Patients in the ICU (PADIS). Crit Care Med. 2018;46(9):e825-e873; and ARDS Network. Ventilation with lower tidal volumes (6 mL/kg IBW) for acute lung injury and ARDS. N Engl J Med. 2000;342(18):1301-1308.' },
 ];

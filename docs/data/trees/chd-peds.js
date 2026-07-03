@@ -1,7 +1,7 @@
 // MedKitt — Congenital Heart Disease in the Neonate
 // Blue babies (cyanotic lesions) vs Red/Shocked babies (obstructive lesions)
 // 5 modules: Initial Recognition → Blue Babies → Red Babies → Emergency Management → Disposition
-// 28 nodes total.
+// 22 nodes total.
 export const CHD_PEDS_NODES = [
     // =====================================================================
     // MODULE 1: INITIAL RECOGNITION
@@ -111,6 +111,11 @@ export const CHD_PEDS_NODES = [
                 next: 'chd-pge1',
                 urgency: 'urgent',
             },
+            {
+                label: 'Review the 5 T\'s',
+                description: 'Reference: the five cyanotic lesions',
+                next: 'chd-info-5ts',
+            },
         ],
         summary: 'Blue babies = 5 T\'s: Tetralogy, Transposition, Tricuspid atresia, TAPVR, Truncus; most are ductal-dependent',
     },
@@ -187,7 +192,7 @@ export const CHD_PEDS_NODES = [
         images: [{ src: 'images/chd-peds/tga-egg-string.jpg', alt: 'Chest X-ray showing egg-on-a-string appearance classic for TGA', caption: 'Classic "egg on a string" CXR in TGA: narrow mediastinum and egg-shaped cardiac silhouette' }],
         recommendation: 'TGA is DUCTAL-DEPENDENT. Start PGE1 immediately. Emergent cardiology for balloon atrial septostomy. Arterial switch surgery within 2 weeks.',
         confidence: 'definitive',
-        citation: [1, 2, 6],
+        citation: [1, 2, 6, 10],
         calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
@@ -251,7 +256,7 @@ export const CHD_PEDS_NODES = [
         images: [{ src: 'images/chd-peds/coarctation-diagram.svg', alt: 'Diagram showing coarctation of aorta with narrowing distal to left subclavian', caption: 'Coarctation typically occurs just distal to left subclavian artery at the isthmus' }],
         recommendation: 'Coarctation: Weak femorals + arm > leg BP gradient. Start PGE1 to reopen ductus. Surgical repair required.',
         confidence: 'definitive',
-        citation: [1, 2, 8],
+        citation: [1, 2, 8, 10],
         calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
@@ -282,7 +287,7 @@ export const CHD_PEDS_NODES = [
         body: '**HYPOPLASTIC LEFT HEART SYNDROME (HLHS)**\n\nUnderdeveloped left heart structures (LV, mitral valve, aortic valve, ascending aorta). Systemic circulation entirely dependent on PDA.\n\n**PRESENTATION**\n• May look well initially with open ductus\n• Rapid deterioration as ductus closes\n• Shock, acidosis, gray/mottled\n• Single S2 (no aortic component)\n• Hepatomegaly, poor pulses\n\n**CRITICAL CONCEPT**\nThe RV pumps to both pulmonary AND systemic circulations via PDA. Systemic perfusion = ductal blood flow.\n\n**MANAGEMENT PRIORITIES**\n\n1. **PGE1 IMMEDIATELY**\n[Prostaglandin E1](#/drug/prostaglandin-e1) 0.05-0.1 mcg/kg/min\n\n2. **AVOID HIGH FiO2**\n- High O2 dilates pulmonary vasculature\n- Steals blood from systemic circulation\n- Target SpO2 75-85% (NOT normal!)\n- Room air or low FiO2 preferred\n\n3. **ALLOW MILD ACIDOSIS**\n- Respiratory acidosis increases PVR\n- Helps balance Qp:Qs\n- Avoid aggressive hyperventilation\n\n4. **FLUID RESUSCITATION**\nCareful boluses - these are volume-dependent\n\n5. **INOTROPES**\nDopamine or Epinephrine if needed',
         recommendation: 'HLHS is DUCTAL-DEPENDENT. PGE1 immediately. AVOID HIGH O2 - target SpO2 75-85%. Prepare for staged surgical palliation (Norwood).',
         confidence: 'definitive',
-        citation: [1, 2, 9],
+        citation: [1, 2, 9, 10],
         calculatorLinks: [{ id: 'peds-dose', label: 'Peds Dose Calculator' }],
         treatment: {
             firstLine: {
@@ -322,6 +327,7 @@ export const CHD_PEDS_NODES = [
             monitoring: 'Respiratory status (apnea watch), SpO2, BP, HR, temperature (may cause fever).',
         },
         safetyLevel: 'critical',
+        next: 'chd-pge1-se',
     },
     {
         id: 'chd-pge1-se',
@@ -407,6 +413,7 @@ export const CHD_PEDS_NODES = [
         title: 'The 5 T\'s of Cyanotic CHD',
         body: '**THE 5 T\'s - CYANOTIC CONGENITAL HEART DISEASE**\n\n**1. TETRALOGY OF FALLOT**\n• Most common cyanotic CHD overall\n• VSD + pulmonary stenosis + overriding aorta + RVH\n• "Tet spells" - hypercyanotic episodes\n• Boot-shaped heart on CXR\n\n**2. TRANSPOSITION OF GREAT ARTERIES**\n• Most common cyanotic CHD in neonates\n• Parallel circulations - no mixing\n• Ductal-dependent\n• Egg-on-string CXR\n\n**3. TRICUSPID ATRESIA**\n• Absent tricuspid valve\n• Obligatory R→L shunt at atrial level\n• Requires ASD + VSD or PDA for survival\n\n**4. TOTAL ANOMALOUS PULMONARY VENOUS RETURN (TAPVR)**\n• Pulmonary veins drain to systemic circulation\n• Obstructed TAPVR = surgical emergency\n• Snowman heart on CXR (supracardiac type)\n\n**5. TRUNCUS ARTERIOSUS**\n• Single great vessel from heart\n• Supplies both systemic and pulmonary circulations\n• Variable cyanosis + CHF',
         citation: [1, 6],
+        next: 'chd-blue-screen',
     },
 ];
 export const CHD_PEDS_NODE_COUNT = CHD_PEDS_NODES.length;
@@ -424,7 +431,7 @@ export const CHD_PEDS_MODULE_LABELS = [
 // Critical Actions
 // -------------------------------------------------------------------
 export const CHD_PEDS_CRITICAL_ACTIONS = [
-    { text: 'Check femoral pulses in any sick neonate - weak/absent = coarctation until proven otherwise', nodeId: 'chd-start' },
+    { text: 'Check femoral pulses in any sick neonate - weak/absent = coarctation until proven otherwise', nodeId: 'chd-vitals' },
     { text: '4-extremity BP and pulse ox: arm > leg BP by >20 mmHg or pre > post sat by >3% suggests ductal lesion', nodeId: 'chd-vitals' },
     { text: 'Hyperoxia test: PaO2 <100 on 100% FiO2 = cardiac cause; PaO2 >150 = pulmonary cause', nodeId: 'chd-hyperox' },
     { text: 'Do NOT wait for echo to start PGE1 - clinical suspicion is enough', nodeId: 'chd-pge1' },

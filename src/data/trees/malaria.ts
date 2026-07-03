@@ -582,7 +582,7 @@ export const MALARIA_MODULE_LABELS = [
   'Disposition',
 ];
 
-export const MALARIA_NODE_COUNT = 35;
+export const MALARIA_NODE_COUNT = MALARIA_NODES.length;
 
 // =====================================================================
 // CRITICAL ACTIONS
@@ -592,7 +592,7 @@ export const MALARIA_CRITICAL_ACTIONS = [
   { text: 'STAT thick and thin blood smears - species ID and parasitemia % guide all treatment', nodeId: 'mal-diagnostics' },
   { text: 'Call CDC Malaria Hotline for severe cases - 770-488-7788 (24/7: 770-488-7100)', nodeId: 'mal-severe-treatment' },
   { text: 'IV artesunate is ONLY treatment for severe malaria - obtain via CDC IND protocol', nodeId: 'mal-severe-treatment' },
-  { text: 'Parasitemia >10% = severe malaria - requires ICU admission and immediate IV artesunate', nodeId: 'mal-severity' },
+  { text: 'Parasitemia >10% = severe malaria - requires ICU admission and immediate IV artesunate', nodeId: 'mal-severe-treatment' },
   { text: 'G6PD testing REQUIRED before primaquine - hemolysis risk if deficient', nodeId: 'mal-primaquine' },
   { text: 'Species identification is critical - P. falciparum can kill in 24-48 hours', nodeId: 'mal-species' },
   { text: 'Monitor glucose q4-6h in severe cases - especially with quinine or pregnancy', nodeId: 'mal-complications' },

@@ -102,6 +102,7 @@ export const MISFITS_PEDS_NODES: DecisionNode[] = [
       { label: 'Congenital Heart Disease', next: 'misfits-heart' },
       { label: 'CAH (Adrenal Crisis)', next: 'misfits-cah', urgency: 'urgent' },
       { label: 'Volvulus / NEC', next: 'misfits-volvulus', urgency: 'urgent' },
+      { label: 'Unstable / needs resuscitation', next: 'misfits-resus', urgency: 'urgent' },
     ],
   },
 
@@ -538,6 +539,7 @@ export const MISFITS_PEDS_NODES: DecisionNode[] = [
       monitoring: 'Blood culture at 48h. CRP trending. Clinical response. Gentamicin levels if prolonged use.',
     },
     safetyLevel: 'critical',
+    next: 'misfits-admit',
   },
 
   // =====================================================================
