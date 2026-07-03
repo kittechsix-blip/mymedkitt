@@ -1207,6 +1207,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'chs-start',
             },
             {
+                id: 'hyperemesis',
+                title: 'Recurrent & Cyclical Vomiting',
+                subtitle: 'Stabilize → Rule Out Organics → HG / CHS / Gastroparesis / CVS → Antiemetic Safety',
+                categoryId: 'gastroenterology',
+                version: '1.0',
+                nodeCount: 18,
+                entryNodeId: 'hyperemesis-start',
+            },
+            {
                 id: 'diarrhea',
                 title: 'Acute Diarrhea',
                 subtitle: 'Assessment → Red Flags → Diagnostics → Treatment → Disposition',
@@ -2155,6 +2164,15 @@ export const DEFAULT_CATEGORIES = [
         name: 'OB/GYN',
         icon: 'ob-gyn.png',
         decisionTrees: [
+            {
+                id: 'hyperemesis',
+                title: 'Recurrent & Cyclical Vomiting',
+                subtitle: 'Stabilize → Rule Out Organics → HG / CHS / Gastroparesis / CVS → Antiemetic Safety',
+                categoryId: 'gastroenterology',
+                version: '1.0',
+                nodeCount: 18,
+                entryNodeId: 'hyperemesis-start',
+            },
             {
                 id: 'precip-delivery',
                 title: 'Precipitous Delivery',

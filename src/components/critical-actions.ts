@@ -34,6 +34,12 @@ export function createCriticalActionsButton(opts: CriticalActionsOpts): HTMLButt
   return btn;
 }
 
+/** Overlay element augmented with the listeners we must tear down on close. */
+type OverlayWithHandlers = HTMLElement & {
+  __escHandler?: (e: KeyboardEvent) => void;
+  __navHandler?: () => void;
+};
+
 /** Render the Critical Actions modal. */
 function openCriticalActionsModal(opts: CriticalActionsOpts): void {
   closeCriticalActionsModal();
@@ -124,19 +130,30 @@ function openCriticalActionsModal(opts: CriticalActionsOpts): void {
   };
   document.addEventListener('keydown', escHandler);
   overlay.dataset.escHandler = 'attached';
-  (overlay as HTMLElement & { __escHandler?: (e: KeyboardEvent) => void }).__escHandler = escHandler;
+  (overlay as OverlayWithHandlers).__escHandler = escHandler;
+
+  // Close on any navigation. The overlay is attached to document.body, outside the
+  // consult flow container, so a route change (to another consult, Home, or a
+  // calculator) would otherwise leave this consult's critical actions displayed
+  // over the newly navigated view.
+  const navHandler = () => closeCriticalActionsModal();
+  window.addEventListener('hashchange', navHandler);
+  (overlay as OverlayWithHandlers).__navHandler = navHandler;
 
   document.body.appendChild(overlay);
   document.body.classList.add('critical-actions-open');
 }
 
-function closeCriticalActionsModal(): void {
-  const existing = document.querySelector('.critical-actions-overlay') as
-    | (HTMLElement & { __escHandler?: (e: KeyboardEvent) => void })
-    | null;
+export function closeCriticalActionsModal(): void {
+  const existing = document.querySelector(
+    '.critical-actions-overlay'
+  ) as OverlayWithHandlers | null;
   if (!existing) return;
   if (existing.__escHandler) {
     document.removeEventListener('keydown', existing.__escHandler);
+  }
+  if (existing.__navHandler) {
+    window.removeEventListener('hashchange', existing.__navHandler);
   }
   existing.remove();
   document.body.classList.remove('critical-actions-open');

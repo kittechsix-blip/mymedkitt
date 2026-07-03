@@ -40737,6 +40737,113 @@ const DNB_BLOCK_SELECTOR_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// PUQE Score — Pregnancy-Unique Quantification of Emesis (HG severity)
+// -------------------------------------------------------------------
+const PUQE_CALCULATOR = {
+    id: 'puqe',
+    title: 'PUQE Score',
+    subtitle: 'Pregnancy-Unique Quantification of Emesis',
+    description: 'Grades nausea/vomiting-of-pregnancy severity over the last 24 hours. Three items scored 1–5, total 3 (none) to 15 (worst). Mild ≤6, Moderate 7–12, Severe ≥13.',
+    fields: [
+        {
+            name: 'nausea',
+            label: '1. Hours of nausea in the last 24h',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'Not at all', points: 1 },
+                { label: '≤1 hour', points: 2 },
+                { label: '2–3 hours', points: 3 },
+                { label: '4–6 hours', points: 4 },
+                { label: '>6 hours', points: 5 },
+            ],
+        },
+        {
+            name: 'vomiting',
+            label: '2. Episodes of vomiting in the last 24h',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 1 },
+                { label: '1–2 times', points: 2 },
+                { label: '3–4 times', points: 3 },
+                { label: '5–6 times', points: 4 },
+                { label: '≥7 times', points: 5 },
+            ],
+        },
+        {
+            name: 'retching',
+            label: '3. Episodes of retching/dry heaving in the last 24h',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'None', points: 1 },
+                { label: '1–2 times', points: 2 },
+                { label: '3–4 times', points: 3 },
+                { label: '5–6 times', points: 4 },
+                { label: '≥7 times', points: 5 },
+            ],
+        },
+    ],
+    results: [
+        { min: -Infinity, max: 7, label: 'Mild', risk: 'Mild NVP', mortality: 'Score ≤6 — usually managed with lifestyle measures + pyridoxine ± doxylamine.', colorVar: '--color-primary' },
+        { min: 7, max: 13, label: 'Moderate', risk: 'Moderate NVP', mortality: 'Score 7–12 — add oral antiemetics; assess hydration and ketonuria.', colorVar: '--color-warning' },
+        { min: 13, max: Infinity, label: 'Severe', risk: 'Severe NVP / HG', mortality: 'Score ≥13 — consider IV rehydration (thiamine before dextrose), IV antiemetics, and admission.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'HG is a clinical diagnosis of exclusion (NVP + >5% weight loss / ketonuria / electrolyte derangement); PUQE grades severity, it does not diagnose HG. Give thiamine before any dextrose in prolonged vomiting.',
+    citations: [
+        'Koren G, Boskovic R, Hard M, et al. Motherisk-PUQE (pregnancy-unique quantification of emesis and nausea) scoring system for nausea and vomiting of pregnancy. Am J Obstet Gynecol. 2002;186(5 Suppl):S228-31.',
+        'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+    ],
+};
+// -------------------------------------------------------------------
+// Cyclic Vomiting Syndrome — Rome IV Diagnostic Criteria
+// -------------------------------------------------------------------
+const CVS_ROME_IV_CALCULATOR = {
+    id: 'cvs-rome-iv',
+    title: 'Rome IV CVS Criteria',
+    subtitle: 'Cyclic Vomiting Syndrome',
+    description: 'Rome IV requires ALL criteria for the last 3 months with symptom onset ≥6 months before diagnosis. Migraine history is supportive, not required.',
+    fields: [
+        { name: 'stereotypical', label: 'Stereotypical episodes of acute vomiting lasting <7 days', type: 'toggle', points: 1 },
+        { name: 'frequency', label: '≥3 discrete episodes in the prior year AND ≥2 in the last 6 months', type: 'toggle', points: 1 },
+        { name: 'interval', label: 'Episodes separated by ≥1 week of baseline health', type: 'toggle', points: 1 },
+        { name: 'well-between', label: 'Absence of vomiting between episodes (mild interepisodic symptoms allowed)', type: 'toggle', points: 1 },
+        { name: 'migraine', label: 'Supportive: personal/family history of migraine', type: 'toggle', points: 0 },
+        { name: 'no-cannabis', label: 'No chronic heavy cannabis use / hot-water bathing (else consider CHS)', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'CVS is a diagnosis of exclusion — organic causes must be ruled out first. Always screen for cannabis: chronic use with hot-water bathing reclassifies to cannabinoid hyperemesis syndrome (CHS), which is cured by cessation.',
+    citations: [
+        'Stanghellini V, Chan FKL, Hasler WL, et al. Gastroduodenal disorders (Rome IV). Gastroenterology. 2016;150(6):1380-1392.',
+        'Venkatesan T, Levinthal DJ, Tarbell SE, et al. Guidelines on management of cyclic vomiting syndrome in adults (ANMS/CVSA). Neurogastroenterol Motil. 2019;31(Suppl 2):e13604.',
+    ],
+    computeResult: (values) => {
+        const core = ['stereotypical', 'frequency', 'interval', 'well-between'];
+        const met = core.filter((k) => (values[k] || 0) > 0).length;
+        const migraine = (values['migraine'] || 0) > 0;
+        const noCannabis = (values['no-cannabis'] || 0) > 0;
+        if (met < core.length) {
+            return {
+                value: `${met}/4 core criteria`,
+                label: 'Criteria Not Met',
+                description: `${met} of 4 required core criteria present. Rome IV requires ALL four for a CVS diagnosis. Continue to exclude organic causes and reconsider the differential.`,
+                colorVar: '--color-text-muted',
+            };
+        }
+        const cannabisNote = noCannabis
+            ? ''
+            : '\n\n**⚠ CANNABIS NOT EXCLUDED:** chronic heavy use ± hot-water bathing reclassifies to CHS — cessation is curative. Confirm before labeling CVS.';
+        const migraineNote = migraine ? '\n\nMigraine history present — supports diagnosis; migraine-directed prophylaxis (amitriptyline, topiramate) is effective.' : '';
+        return {
+            value: 'Criteria Met',
+            label: 'Meets Rome IV CVS',
+            description: `All 4 core criteria met. **CVS is a diagnosis of exclusion** — ensure organic causes are ruled out.${migraineNote}${cannabisNote}`,
+            colorVar: noCannabis ? '--color-primary' : '--color-warning',
+        };
+    },
+};
 const CALCULATORS = {
     // Dental / Intraoral Nerve Blocks (added 2026-06-20)
     'dnb-la-max-dose': DNB_LA_MAX_DOSE_CALCULATOR,
@@ -41388,6 +41495,9 @@ const CALCULATORS = {
     'verapamil-cluster-titration': VERAPAMIL_CLUSTER_TITRATION_CALCULATOR,
     'cbz-tn-titration': CBZ_TN_TITRATION_CALCULATOR,
     'tn-rx-ladder': TN_RX_LADDER_CALCULATOR,
+    // Recurrent & Cyclical Vomiting (hyperemesis consult, added 2026-07-03)
+    'puqe': PUQE_CALCULATOR,
+    'cvs-rome-iv': CVS_ROME_IV_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

@@ -114,6 +114,7 @@ const CROSS_LISTINGS = {
   'lateral-canthotomy': [{ categoryId: 'ophthalmology', displayTitle: null, displaySubtitle: null, entryNodeId: 'lcc-start' }],
   'afib-rvr':         [{ categoryId: 'procedures', displayTitle: 'Synchronized Cardioversion', displaySubtitle: 'A-Fib RVR: Stability → Cardioversion Protocol' }],
   'chs':              [{ categoryId: 'emergency-medicine' }],
+  'hyperemesis':      [{ categoryId: 'ob-gyn' }],
   'diarrhea':         [{ categoryId: 'emergency-medicine' }],
   'hiv':              [{ categoryId: 'emergency-medicine' }],
   'sah':              [{ categoryId: 'emergency-medicine' }],

@@ -399,6 +399,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/chs.js');
             return { nodes: m.CHS_NODES, entryNodeId: 'chs-start', categoryId: 'gastroenterology', moduleLabels: m.CHS_MODULE_LABELS, citations: m.CHS_CITATIONS, criticalActions: m.CHS_CRITICAL_ACTIONS };
         },
+        'hyperemesis': async () => {
+            const m = await import('../data/trees/hyperemesis.js');
+            return { nodes: m.HYPEREMESIS_NODES, entryNodeId: 'hyperemesis-start', categoryId: 'gastroenterology', moduleLabels: m.HYPEREMESIS_MODULE_LABELS, citations: m.HYPEREMESIS_CITATIONS, criticalActions: m.HYPEREMESIS_CRITICAL_ACTIONS };
+        },
         'pep': async () => {
             const m = await import('../data/trees/pep.js');
             return { nodes: m.PEP_NODES, entryNodeId: 'pep-start', categoryId: 'infectious-disease', moduleLabels: m.PEP_MODULE_LABELS, citations: m.PEP_CITATIONS, criticalActions: m.PEP_CRITICAL_ACTIONS };

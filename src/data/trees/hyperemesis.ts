@@ -1,0 +1,300 @@
+// MedKitt — Recurrent & Cyclical Vomiting Consult
+// Stabilize & screen organic mimics → triage the syndrome → HG / CHS (cross-link) / Gastroparesis / CVS → antiemetic safety & disposition
+// 6 modules. CHS has its own dedicated consult (tree id 'chs') — this hub RECOGNIZES and ROUTES to it, does not duplicate.
+
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const HYPEREMESIS_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: STABILIZE & SCREEN FOR ORGANIC CAUSES
+  // =====================================================================
+
+  {
+    id: 'hyperemesis-start',
+    type: 'info',
+    module: 1,
+    title: 'Recurrent & Cyclical Vomiting',
+    body: '[Approach Steps Summary](#/info/hyperemesis-summary) — stepwise workup.\n\n**Stabilize before you diagnose.** Cyclic vomiting syndrome, cannabinoid hyperemesis, and functional vomiting are **diagnoses of exclusion** — correct dehydration and electrolyte/acid–base derangement first, then exclude the can\'t-miss organic causes.\n\n**4 anchors:**\n• **βhCG in every reproductive-age woman** before imaging or teratogen exposure. [1]\n• **Bilious or bloody vomiting is a red flag** — think obstruction / surgical cause until proven otherwise. [1]\n• **Vomiting can be the presenting sign of DKA, raised ICP, or adrenal crisis** — don\'t anchor on a GI cause. [1][3]\n• **Thiamine before dextrose** in any patient with prolonged poor intake — glucose first can precipitate Wernicke. [2][7]\n\n[Can\'t-miss organic mimics](#/info/hyperemesis-mimics) — the full differential.',
+    citation: [1, 3],
+    next: 'hyperemesis-redflags',
+    summary: 'Stabilize first; CVS/CHS/functional are diagnoses of exclusion — rule out organic causes',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'hyperemesis-redflags',
+    type: 'question',
+    module: 1,
+    title: 'Red-Flag Screen',
+    body: 'Any feature suggesting a **can\'t-miss organic cause**? [1]\n\n• **Bilious** or **hematemesis** → obstruction / GI bleed\n• **Headache + focal neuro deficit / papilledema** → raised ICP, posterior-fossa mass\n• **Severe or localized abdominal pain, peritonitis, distension, no flatus** → surgical abdomen\n• **Shock, hypotension + hyponatremia/hyperkalemia** → adrenal crisis\n• **Polyuria, Kussmaul, fruity breath** → DKA\n• Age >50 with new symptoms, fever, weight loss',
+    options: [
+      { label: 'Red flag present → organic workup', next: 'hyperemesis-organic', urgency: 'critical' },
+      { label: 'No red flags → recurrent-vomiting workup', next: 'hyperemesis-workup' },
+    ],
+    citation: [1],
+    summary: 'Bilious/bloody, headache+neuro, surgical abdomen, shock, DKA → organic pathway first',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'hyperemesis-organic',
+    type: 'result',
+    module: 1,
+    title: 'Organic Cause — Workup & Resuscitate',
+    body: 'A red flag is present. **Do not attribute to a functional syndrome.** Resuscitate and target the suspected cause. [1][3]\n\n**Directed workup:** CT abdomen/pelvis for obstruction; **CT head** for headache + neuro signs; **serum ketones + VBG + glucose** for DKA; **cortisol / empiric hydrocortisone** for suspected adrenal crisis; **Ca, BUN/Cr, Na** for metabolic causes; ECG for MI presenting atypically.\n\nSee the [can\'t-miss mimics table](#/info/hyperemesis-mimics) for the clue that points to each diagnosis.',
+    recommendation: 'Treat the identified organic cause on its own pathway (obstruction → surgery; DKA → insulin/fluids; raised ICP → neuroimaging + neurosurgery; adrenal crisis → hydrocortisone). Recurrent-vomiting syndromes remain diagnoses of exclusion — return to triage only once organic causes are excluded.',
+    confidence: 'definitive',
+    citation: [1, 3],
+    summary: 'Red flag = target the organic cause; functional syndromes stay diagnoses of exclusion',
+  },
+
+  {
+    id: 'hyperemesis-workup',
+    type: 'info',
+    module: 1,
+    title: 'Baseline ED Workup',
+    body: '**Labs:** CBC, CMP (glucose, Na, K, **Ca**, BUN/Cr), lipase, LFTs, **VBG + serum ketones + lactate**, **urine βhCG (all reproductive-age women)**, UA. Add TSH/cortisol/ammonia when indicated. [1]\n\n**ECG** — electrolyte effects and a baseline **QTc before QT-prolonging antiemetics** (ondansetron, haloperidol, droperidol, promethazine). [1]\n\n**Resuscitation:** isotonic crystalloid; replace K/Mg; **give thiamine before any dextrose-containing fluid.** [2][7]',
+    calculatorLinks: [{ id: 'anion-gap', label: 'Anion Gap' }],
+    citation: [1, 2],
+    next: 'hyperemesis-triage',
+    summary: 'CBC/CMP/lipase/VBG/ketones/βhCG + ECG for QTc; resuscitate, thiamine before dextrose',
+    skippable: true,
+  },
+
+  {
+    id: 'hyperemesis-triage',
+    type: 'question',
+    module: 1,
+    title: 'Pick the Pathway',
+    body: 'Organic causes excluded. Which pattern fits the recurrent vomiting? [4][8][9][10]',
+    options: [
+      { label: 'Pregnant (positive βhCG)', next: 'hg-recognition' },
+      { label: 'Chronic heavy cannabis ± hot-water bathing', next: 'chs-bridge' },
+      { label: 'Delayed gastric emptying / diabetic / post-surgical', next: 'gp-recognition' },
+      { label: 'Stereotypical episodes, well in between', next: 'cvs-recognition' },
+    ],
+    citation: [4, 8, 9, 10],
+    summary: 'Pregnant → HG · cannabis → CHS · delayed emptying → gastroparesis · stereotypical → CVS',
+  },
+
+  // =====================================================================
+  // MODULE 2: HYPEREMESIS GRAVIDARUM
+  // =====================================================================
+
+  {
+    id: 'hg-recognition',
+    type: 'info',
+    module: 2,
+    title: 'HG vs Normal NVP',
+    body: '**Hyperemesis gravidarum is a diagnosis of exclusion** — persistent vomiting NOT attributable to another cause **plus objective markers** that separate it from ordinary nausea/vomiting of pregnancy (NVP): [4]\n\n• **Weight loss >5%** of prepregnancy weight\n• **Large ketonuria** (acute starvation)\n• **Electrolyte / thyroid / liver derangement**\n\nUse the **PUQE score** to grade severity (mild <6 · moderate 7–12 · severe ≥13). Rule out molar/multiple gestation, thyrotoxicosis, DKA, pyelonephritis, hepatitis, pancreatitis. [4]',
+    calculatorLinks: [{ id: 'puqe', label: 'PUQE Score' }],
+    citation: [4],
+    next: 'hg-treatment',
+    summary: 'HG = NVP + >5% weight loss / ketonuria / electrolyte derangement; grade with PUQE',
+  },
+
+  {
+    id: 'hg-treatment',
+    type: 'question',
+    module: 2,
+    title: 'HG Treatment Ladder',
+    body: 'Where on the ladder is this patient? [4]\n\n**Step 1 (first-line):** [Pyridoxine (B6)](#/drug/pyridoxine/nvp) 10–25 mg PO q6–8h ± [Doxylamine](#/drug/doxylamine/nvp) — the only FDA-approved NVP combination.\n**Step 2 (antiemetics):** [Ondansetron](#/drug/ondansetron/nvp), [Promethazine](#/drug/promethazine/nvp), [Metoclopramide](#/drug/metoclopramide/nvp), [Prochlorperazine](#/drug/prochlorperazine/nvp).\n\n[Antiemetic doses & QT flags](#/info/hyperemesis-antiemetics).',
+    options: [
+      { label: 'Tolerating PO, mild–moderate', next: 'hg-outpatient' },
+      { label: 'Dehydrated / ketotic / failed PO', next: 'hg-iv', urgency: 'urgent' },
+      { label: 'Refractory despite IV therapy', next: 'hg-refractory', urgency: 'urgent' },
+    ],
+    citation: [4],
+    summary: 'Step 1 B6 ± doxylamine → Step 2 antiemetics → IV rehydration → steroids last',
+  },
+
+  {
+    id: 'hg-outpatient',
+    type: 'result',
+    module: 2,
+    title: 'HG — Outpatient',
+    body: 'Small frequent bland meals, ginger, avoid triggers. [Pyridoxine](#/drug/pyridoxine/nvp) ± [Doxylamine](#/drug/doxylamine/nvp) first; add an oral antiemetic if needed. Counsel on the **ondansetron first-trimester nuance** — a small possible signal for cardiac septal/oral-cleft defects **if used before 10 weeks** — via shared decision-making. [4]',
+    recommendation: 'Discharge on pyridoxine ± doxylamine, oral antiemetic PRN, hydration and dietary advice, obstetric follow-up. Return for inability to keep fluids down, weight loss, or dizziness. Pyridoxine >500 mg/day risks neuropathy — stay within dosing.',
+    confidence: 'recommended',
+    citation: [4],
+    summary: 'B6 ± doxylamine + PRN antiemetic, hydration, OB follow-up; counsel ondansetron <10wk',
+  },
+
+  {
+    id: 'hg-iv',
+    type: 'result',
+    module: 2,
+    title: 'HG — IV Rehydration & Admission',
+    body: '**Isotonic crystalloid or LR**, up to ~2 L over 2 h, then titrate to urine output ≥100 mL/h; replace K as needed. [4]\n\n**Give [thiamine](#/drug/thiamine/wernicke-prophylaxis) 100 mg IV BEFORE any dextrose** — glucose in a thiamine-deficient patient precipitates Wernicke encephalopathy. [2][7]\n\nIV antiemetic ([ondansetron](#/drug/ondansetron/nvp) / [metoclopramide](#/drug/metoclopramide/nvp) / [promethazine](#/drug/promethazine/nvp)). Admit for persistent intolerance, electrolyte derangement, or weight loss.',
+    recommendation: 'IV isotonic fluids titrated to UOP, thiamine before dextrose, IV antiemetic, electrolyte repletion. Admit if unable to tolerate PO after ED therapy. Watch for refeeding syndrome (K, Mg, phosphate) when nutrition resumes.',
+    confidence: 'recommended',
+    citation: [4, 2, 7],
+    summary: 'IV crystalloid to UOP, thiamine BEFORE dextrose, IV antiemetic, admit if PO intolerant',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'hg-refractory',
+    type: 'result',
+    module: 2,
+    title: 'HG — Refractory',
+    body: '**Corticosteroids are last-resort** for HG refractory to fluids + antiemetics: [Methylprednisolone](#/drug/methylprednisolone/hg) 16 mg PO/IV q8h × 3 days, then taper over ~2 weeks; total course ≤6 weeks. [4]\n\n**AVOID before 10 weeks gestation** — association with orofacial clefts. Consider enteral (NJ) nutrition before parenteral for prolonged intolerance; monitor for refeeding syndrome. [4]',
+    recommendation: 'Refractory HG: trial methylprednisolone 16 mg q8h ×3d then taper (avoid <10 weeks gestation), consider enteral nutrition before TPN, involve OB/MFM. Continue thiamine repletion; treat suspected Wernicke with thiamine 500 mg IV q8h ×3d.',
+    confidence: 'consider',
+    citation: [4, 7],
+    summary: 'Methylprednisolone last-resort (avoid <10wk), enteral before parenteral, MFM involvement',
+    safetyLevel: 'warning',
+  },
+
+  // =====================================================================
+  // MODULE 3: CANNABINOID HYPEREMESIS (bridge → dedicated CHS consult)
+  // =====================================================================
+
+  {
+    id: 'chs-bridge',
+    type: 'result',
+    module: 3,
+    title: 'Cannabinoid Hyperemesis Syndrome',
+    body: '**Recognize the triad:** stereotypical episodic vomiting + **prolonged heavy cannabis use** + relief with cessation. **Compulsive hot-water bathing (>41°C)** is near-pathognomonic (~92%). [11]\n\n**Key differentiator:** standard antiemetics and opioids typically **fail** — treatment is **topical capsaicin**, **haloperidol/droperidol**, benzodiazepines, and definitive **cannabis cessation**. [11][12]\n\n**This has a dedicated consult with full dosing, capsaicin technique, and QTc handling** → open it below.\n\n[Open the full CHS consult](#/tree/chs)',
+    recommendation: 'CHS suspected — manage via the dedicated CHS consult: topical capsaicin, haloperidol (0.05–0.1 mg/kg IV, HaVOC RCT superior to ondansetron), benzodiazepine adjunct, avoid opioids, and cannabis cessation for cure. Always screen CVS patients for cannabis — cessation can reclassify and cure.',
+    confidence: 'recommended',
+    citation: [11, 12],
+    summary: 'Triad + hot-water bathing; standard antiemetics fail — route to the full CHS consult',
+  },
+
+  // =====================================================================
+  // MODULE 4: GASTROPARESIS
+  // =====================================================================
+
+  {
+    id: 'gp-recognition',
+    type: 'info',
+    module: 4,
+    title: 'Gastroparesis — Recognition',
+    body: '**Delayed gastric emptying WITHOUT mechanical obstruction.** Cardinal symptoms: nausea, vomiting, early satiety, postprandial fullness, bloating. Symptom severity does **not** correlate with degree of delay. [13]\n\n**Gold standard:** 4-hour solid-phase **gastric-emptying scintigraphy** (>10% retention at 4 h) — outpatient; exclude obstruction (EGD/imaging) first. [13]\n\n**Causes:** diabetic, **idiopathic** (largest group), post-surgical (vagal injury), medication-induced (**opioids, GLP-1 agonists**, anticholinergics, CCBs). [13]',
+    citation: [13],
+    next: 'gp-management',
+    summary: 'Delayed emptying, no obstruction; 4-hr scintigraphy gold standard; dm/idiopathic/med-induced',
+  },
+
+  {
+    id: 'gp-management',
+    type: 'result',
+    module: 4,
+    title: 'Gastroparesis — ED Flare & Management',
+    body: '**ACG 2022:** dietary modification (small, frequent, low-fat/low-insoluble-fiber), **optimize glycemia** (hyperglycemia acutely slows emptying), prokinetics + antiemetics. [13]\n\n**Prokinetics:** [Metoclopramide](#/drug/metoclopramide/gastroparesis) 5 mg PO/IV TID before meals — **BLACK-BOX tardive dyskinesia; ≤12 weeks.** [Erythromycin](#/drug/erythromycin/gastroparesis) IV 3 mg/kg q8h (acute flare) — tachyphylaxis limits chronic use. Domperidone (IND access). [13]\n\n**AVOID opioids** — they worsen emptying and perpetuate the cycle. Refractory: gastric electrical stimulation, G-POEM; **pyloric botox is NOT recommended.** [13]\n\n[Prokinetic reference](#/info/hyperemesis-prokinetics).',
+    recommendation: 'Acute flare: IV isotonic fluids + K/Mg repletion, glucose control, IV antiemetic (ondansetron/prochlorperazine), IV prokinetic (erythromycin 3 mg/kg or metoclopramide 10 mg IV), and AVOID opioids. Chronic: metoclopramide ≤12 weeks (tardive dyskinesia), dietary and glycemic optimization, GI referral for refractory (GES/G-POEM). Do not use pyloric botox routinely.',
+    confidence: 'recommended',
+    citation: [13],
+    summary: 'Glucose control + prokinetic (erythromycin/metoclopramide) + antiemetic; avoid opioids',
+    safetyLevel: 'warning',
+  },
+
+  // =====================================================================
+  // MODULE 5: CYCLIC VOMITING SYNDROME
+  // =====================================================================
+
+  {
+    id: 'cvs-recognition',
+    type: 'info',
+    module: 5,
+    title: 'CVS — Rome IV Criteria',
+    body: '**Cyclic vomiting syndrome (Rome IV):** stereotypical episodes of acute vomiting lasting <7 days; **≥3 episodes in the prior year** (≥2 in last 6 months) separated by **≥1 week** of baseline health; **well between episodes**. Supportive: **personal/family history of migraine**. [8][9]\n\n**4 phases:** inter-episodic (well) → **prodrome** (window for abortive tx) → emetic → recovery.\n\n**Always ask about cannabis** — chronic use + hot-water bathing reclassifies to [CHS](#/tree/chs), which is cured by cessation. [11]',
+    calculatorLinks: [{ id: 'cvs-rome-iv', label: 'Rome IV CVS Criteria' }],
+    citation: [8, 9],
+    next: 'cvs-phase',
+    summary: 'Stereotypical episodes, well in between, migraine link; screen for cannabis (→CHS)',
+  },
+
+  {
+    id: 'cvs-phase',
+    type: 'question',
+    module: 5,
+    title: 'CVS — Abortive vs Prophylaxis',
+    body: 'Which phase is the patient in? [8]',
+    options: [
+      { label: 'Acute emetic / prodrome phase', next: 'cvs-abortive', urgency: 'urgent' },
+      { label: 'Well phase — planning prophylaxis', next: 'cvs-prophylaxis' },
+    ],
+    citation: [8],
+    summary: 'Emetic/prodrome → abortive; well phase → prophylaxis',
+  },
+
+  {
+    id: 'cvs-abortive',
+    type: 'result',
+    module: 5,
+    title: 'CVS — Abortive (Emetic Phase)',
+    body: '**Treat early in the prodrome.** [8]\n\n• [Sumatriptan](#/drug/sumatriptan/cvs) 20 mg intranasal (or 6 mg SC) — take as early as possible.\n• [Ondansetron](#/drug/ondansetron/cvs) 8 mg IV — aggressive antiemetic backbone.\n• **IV fluids WITH dextrose** (e.g., D10-containing crystalloid) + K repletion — aborts the catabolic/ketotic state.\n• Sedation with a benzodiazepine (± [diphenhydramine](#/drug/diphenhydramine/cvs)) to break the cycle.\n• [Aprepitant](#/drug/aprepitant/cvs) 125 mg day 1, then 80 mg days 2–3 (second-line NK-1). [8]',
+    recommendation: 'Abort early: sumatriptan (20 mg IN / 6 mg SC), ondansetron 8 mg IV, dextrose-containing IV fluids with K, benzodiazepine sedation ± diphenhydramine, and aprepitant for refractory. Avoid chronic opioids. Reassess for cannabis (CHS).',
+    confidence: 'recommended',
+    citation: [8],
+    summary: 'Sumatriptan + ondansetron + dextrose fluids + benzo sedation; aprepitant if refractory',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'cvs-prophylaxis',
+    type: 'result',
+    module: 5,
+    title: 'CVS — Prophylaxis',
+    body: 'For ≥4 episodes/year or severe disease (ANMS/CVSA 2019): [8]\n\n• **First-line:** [Amitriptyline](#/drug/amitriptyline/cvs) — start 10–25 mg qHS, titrate to 75–100 mg/day (1–1.5 mg/kg); baseline ECG for QTc.\n• Alternatives: topiramate ~100 mg/day, propranolol 20–40 mg BID.\n• Mitochondrial supplements: CoQ10 ~100 mg TID, L-carnitine ~1000 mg BID, riboflavin ~400 mg/day.',
+    recommendation: 'Start prophylaxis with amitriptyline (target 75–100 mg/day, ECG first); alternatives topiramate or propranolol; consider CoQ10/L-carnitine/riboflavin. Refer to neurogastroenterology. Confirm no cannabis use (would reclassify to CHS).',
+    confidence: 'recommended',
+    citation: [8],
+    summary: 'Amitriptyline first-line (ECG first); topiramate/propranolol alt; mito supplements adjunct',
+  },
+
+  // =====================================================================
+  // MODULE 6: ANTIEMETIC SAFETY & DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'hyperemesis-safety',
+    type: 'result',
+    module: 6,
+    title: 'Antiemetic Safety & Disposition',
+    body: 'Cross-cutting safety before discharge: [1][4][13]\n\n• **QTc check** before stacking QT-prolongers (ondansetron, haloperidol, droperidol, promethazine, domperidone).\n• **Metoclopramide** — tardive dyskinesia; ≤12 weeks (gastroparesis), ~5 days (HG per EMA).\n• **Avoid opioids** in CHS and gastroparesis flares.\n• **Thiamine before dextrose** in any prolonged poor-intake patient.\n\n[Antiemetic comparison & QT flags](#/info/hyperemesis-antiemetics).\n\n**Discharge** when tolerating PO with normalized electrolytes and a follow-up plan; **admit** for refractory vomiting, ongoing derangement, or an unresolved organic cause.',
+    recommendation: 'Discharge when tolerating oral intake with corrected electrolytes, appropriate antiemetic, and specialty follow-up (OB for HG, GI/neurogastro for gastroparesis/CVS, cessation support for CHS). Admit for refractory vomiting, persistent electrolyte/acid-base derangement, or any unresolved organic cause.',
+    confidence: 'recommended',
+    citation: [1, 4, 13],
+    summary: 'QTc before stacking; metoclopramide limits; avoid opioids; discharge on PO tolerance + follow-up',
+  },
+];
+
+export const HYPEREMESIS_MODULE_LABELS = [
+  'Stabilize & Screen',
+  'Hyperemesis Gravidarum',
+  'Cannabinoid Hyperemesis',
+  'Gastroparesis',
+  'Cyclic Vomiting Syndrome',
+  'Safety & Disposition',
+];
+
+export const HYPEREMESIS_CRITICAL_ACTIONS = [
+  { text: 'βhCG in every reproductive-age woman', nodeId: 'hyperemesis-start' },
+  { text: 'Bilious/bloody vomiting = organic until proven otherwise', nodeId: 'hyperemesis-redflags' },
+  { text: 'Thiamine BEFORE dextrose (prevents Wernicke)', nodeId: 'hg-iv' },
+  { text: 'CHS: standard antiemetics fail — capsaicin/haloperidol/cessation', nodeId: 'chs-bridge' },
+  { text: 'Gastroparesis/CHS: avoid opioids', nodeId: 'gp-management' },
+];
+
+export const HYPEREMESIS_CITATIONS: Citation[] = [
+  { num: 1, text: 'Tintinalli JE, et al. Nausea and Vomiting. Tintinalli\u2019s Emergency Medicine: A Comprehensive Study Guide, 9th ed. McGraw Hill; 2020.' },
+  { num: 2, text: 'Oudman E, Wijnia JW, Oey M, et al. Wernicke\u2019s encephalopathy in hyperemesis gravidarum: a systematic review. Eur J Obstet Gynecol Reprod Biol. 2019;236:84-93.' },
+  { num: 3, text: 'Long B, Lentz S. Diabetic ketoacidosis presenting with vomiting/abdominal pain. Adult DKA. StatPearls; 2023.' },
+  { num: 4, text: 'American College of Obstetricians and Gynecologists. Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.' },
+  { num: 5, text: 'Abas MN, Tan PC, Azmi N, Omar SZ. Ondansetron compared with metoclopramide for hyperemesis gravidarum: a randomized controlled trial. Obstet Gynecol. 2014;123(6):1272-1279.' },
+  { num: 6, text: 'Tan PC, Khine PP, Vallikkannu N, Omar SZ. Promethazine compared with metoclopramide for hyperemesis gravidarum: a randomized controlled trial. Obstet Gynecol. 2010;115(5):975-981.' },
+  { num: 7, text: 'FDA. Reglan (metoclopramide) prescribing information \u2014 Boxed Warning: tardive dyskinesia; \u226412-week limit. 2011.' },
+  { num: 8, text: 'Venkatesan T, Levinthal DJ, Tarbell SE, et al. Guidelines on management of cyclic vomiting syndrome in adults (ANMS and CVSA). Neurogastroenterol Motil. 2019;31(Suppl 2):e13604.' },
+  { num: 9, text: 'Stanghellini V, Chan FKL, Hasler WL, et al. Gastroduodenal disorders (Rome IV). Gastroenterology. 2016;150(6):1380-1392.' },
+  { num: 10, text: 'Lacy BE, Parkman HP, Camilleri M. Chronic nausea and vomiting: evaluation and treatment. Am J Gastroenterol. 2018;113(5):647-659.' },
+  { num: 11, text: 'Sorensen CJ, DeSanto K, Borgelt L, et al. Cannabinoid hyperemesis syndrome: diagnosis, pathophysiology, and treatment \u2014 a systematic review. J Med Toxicol. 2017;13(1):71-87.' },
+  { num: 12, text: 'Ruberto AJ, Sivilotti MLA, Forrester S, et al. Intravenous haloperidol versus ondansetron for cannabis hyperemesis syndrome (HaVOC): a randomized controlled trial. Ann Emerg Med. 2021;77(6):613-619.' },
+  { num: 13, text: 'Camilleri M, Kuo B, Nguyen L, et al. ACG Clinical Guideline: Gastroparesis. Am J Gastroenterol. 2022;117(8):1197-1220.' },
+];
+
+export const HYPEREMESIS_NODE_COUNT = HYPEREMESIS_NODES.length;

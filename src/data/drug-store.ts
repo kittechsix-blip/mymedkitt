@@ -422,6 +422,103 @@ const ALTEPLASE: DrugEntry = {
   ],
 };
 
+// Added 2026-07-03 for the Recurrent & Cyclical Vomiting (hyperemesis) consult
+const AMITRIPTYLINE: DrugEntry = {
+  id: 'amitriptyline',
+  name: 'Amitriptyline (Elavil)',
+  genericName: 'Amitriptyline hydrochloride',
+  drugClass: 'Tricyclic antidepressant (TCA)',
+  route: 'PO',
+  indications: ['Cyclic vomiting syndrome — prophylaxis (first-line)', 'Chronic neuropathic pain', 'Migraine prophylaxis'],
+  dosing: [
+    {
+      indication: 'Cyclic vomiting syndrome (CVS) — prophylaxis',
+      regimen: '**First-line prophylaxis** for CVS with \u22654 episodes/year or severe disease (ANMS/CVSA 2019). Start **10\u201325 mg PO at bedtime**, titrate up by 10\u201325 mg every 1\u20132 weeks to a target of **75\u2013100 mg/day (\u22481\u20131.5 mg/kg)**. **Obtain a baseline ECG for QTc before starting** and re-check with dose escalation. Benefit may take several weeks; do not stop abruptly.',
+    },
+  ],
+  contraindications: [
+    'Recent myocardial infarction / acute recovery phase',
+    'Known QT prolongation or high-grade AV block',
+    'Concurrent MAOI use or within 14 days',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'Anticholinergic effects (dry mouth, constipation, urinary retention, blurred vision)',
+    'QT prolongation / arrhythmia \u2014 baseline and follow-up ECG',
+    'Sedation and orthostatic hypotension \u2014 dose at bedtime',
+    'Lowers seizure threshold',
+    'Highly dangerous in overdose (cardiotoxic) \u2014 limit dispensed quantity in at-risk patients',
+  ],
+  monitoring: 'Baseline and follow-up ECG (QTc). Symptom frequency, mood, anticholinergic burden.',
+  notes: 'Most-studied prophylactic agent for adult CVS. Alternatives when not tolerated: topiramate (~100 mg/day) or propranolol (20\u201340 mg BID). Mitochondrial supplements (CoQ10, L-carnitine, riboflavin) are reasonable adjuncts.',
+  citations: [
+    'Venkatesan T, et al. Guidelines on management of cyclic vomiting syndrome in adults (ANMS and CVSA). Neurogastroenterol Motil. 2019;31(Suppl 2):e13604.',
+  ],
+};
+
+// Added 2026-07-03 for the Recurrent & Cyclical Vomiting (hyperemesis) consult
+const APREPITANT: DrugEntry = {
+  id: 'aprepitant',
+  name: 'Aprepitant (Emend)',
+  genericName: 'Aprepitant',
+  drugClass: 'Neurokinin-1 (NK-1) receptor antagonist / Antiemetic',
+  route: 'PO',
+  indications: ['Cyclic vomiting syndrome — refractory abortive/prophylaxis', 'Chemotherapy-induced nausea/vomiting'],
+  dosing: [
+    {
+      indication: 'Cyclic vomiting syndrome (CVS) — second-line',
+      regimen: '**125 mg PO on day 1, then 80 mg PO on days 2\u20133** for a refractory acute episode. Also used as an intermittent prophylactic in patients who fail first-line agents. Reserve as **second-line** (cost, drug interactions). **CYP3A4 substrate/inhibitor** \u2014 review interactions before use.',
+    },
+  ],
+  contraindications: [
+    'Concurrent pimozide (risk of serious QT prolongation)',
+    'Known hypersensitivity',
+  ],
+  cautions: [
+    'CYP3A4 interactions \u2014 may raise levels of dexamethasone, benzodiazepines, and others; reduces efficacy of hormonal contraceptives',
+    'Fatigue, hiccups, elevated LFTs',
+    'Expensive \u2014 reserve for refractory disease',
+  ],
+  monitoring: 'Symptom response; review the full medication list for CYP3A4 interactions.',
+  notes: 'NK-1 antagonists target substance P and are effective for refractory CVS when triptans and standard antiemetics fail (ANMS/CVSA 2019).',
+  citations: [
+    'Venkatesan T, et al. Guidelines on management of cyclic vomiting syndrome in adults (ANMS and CVSA). Neurogastroenterol Motil. 2019;31(Suppl 2):e13604.',
+  ],
+};
+
+// Added 2026-07-03 for the Recurrent & Cyclical Vomiting (hyperemesis) consult
+const ERYTHROMYCIN_PROKINETIC: DrugEntry = {
+  id: 'erythromycin',
+  name: 'Erythromycin (prokinetic)',
+  genericName: 'Erythromycin lactobionate / ethylsuccinate',
+  drugClass: 'Macrolide / Motilin receptor agonist (prokinetic)',
+  route: 'IV/PO',
+  indications: ['Gastroparesis — acute flare (prokinetic)'],
+  dosing: [
+    {
+      indication: 'Gastroparesis — prokinetic',
+      regimen: '**Acute flare:** 3 mg/kg IV every 8 hours \u2014 the most potent available prokinetic; best for hospitalized acute gastroparesis. **Oral:** 250 mg PO three times daily before meals. **Tachyphylaxis** develops within weeks (motilin receptor downregulation), so it is not suitable for long-term therapy. Check a baseline QTc.',
+      weightCalc: { dosePerKg: 3, unit: 'mg', dailyDivided: 3 },
+    },
+  ],
+  contraindications: [
+    'Known macrolide hypersensitivity',
+    'Congenital long QT syndrome',
+    'Concurrent QT-prolonging drugs where risk outweighs benefit',
+  ],
+  cautions: [
+    'QT prolongation \u2014 baseline ECG; caution with other QT-prolongers',
+    'Significant CYP3A4 drug interactions (statins, warfarin, others)',
+    'GI cramping / abdominal pain at higher doses',
+    'Tachyphylaxis limits chronic use',
+  ],
+  monitoring: 'ECG (QTc), symptom response, drug-interaction review.',
+  notes: 'Acts as a motilin receptor agonist to accelerate gastric emptying. Reserved for acute gastroparesis flares (ACG 2022) \u2014 not the same role as its antibiotic dosing.',
+  citations: [
+    'Camilleri M, et al. ACG Clinical Guideline: Gastroparesis. Am J Gastroenterol. 2022;117(8):1197-1220.',
+  ],
+};
+
 const AMIODARONE: DrugEntry = {
   id: 'amiodarone',
   name: 'Amiodarone',
@@ -3931,6 +4028,10 @@ const METOCLOPRAMIDE: DrugEntry = {
       indication: 'NVP — oral',
       regimen: '10 mg PO every 8 hours, 30 minutes before meals. For patients tolerating oral medications who have failed pyridoxine/doxylamine.',
     },
+    {
+      indication: 'Gastroparesis — prokinetic',
+      regimen: '**Acute flare:** 10 mg IV. **Chronic:** 5 mg PO/IV three times daily, 30 min before meals; use the lowest effective dose. **BLACK-BOX WARNING: tardive dyskinesia** \u2014 limit total duration to \u226412 weeks. First-line prokinetic per ACG 2022. Avoid combining with other dopamine antagonists.',
+    },
   ],
   contraindications: [
     'GI obstruction, perforation, or hemorrhage',
@@ -4522,6 +4623,10 @@ const ONDANSETRON: DrugEntry = {
     {
       indication: 'Opioid withdrawal — nausea/vomiting',
       regimen: '**IV/PO:** 4 mg every 6\u20138 hours PRN nausea. ODT (orally disintegrating tablet) preferred if patient is actively vomiting. **QT risk:** Use caution when combining with methadone and loperamide \u2014 all prolong QT interval. Check ECG and electrolytes (hypoK, hypoMg from vomiting/diarrhea worsen QT risk).',
+    },
+    {
+      indication: 'Cyclic vomiting syndrome (CVS) — emetic phase',
+      regimen: '8 mg IV as part of aggressive antiemetic backbone during the acute emetic phase, alongside sumatriptan, dextrose-containing IV fluids, and benzodiazepine sedation. Check baseline QTc before repeated dosing; correct K/Mg. Max 16 mg/day.',
     },
   ],
   contraindications: [
@@ -12556,8 +12661,12 @@ const SUMATRIPTAN: DrugEntry = {
   genericName: 'Sumatriptan succinate',
   drugClass: 'Serotonin (5-HT 1B/1D) receptor agonist (triptan)',
   route: 'SQ / Intranasal / PO',
-  indications: ['Cluster headache — acute (first-line)', 'Migraine — acute'],
+  indications: ['Cluster headache — acute (first-line)', 'Migraine — acute', 'Cyclic vomiting syndrome — abortive'],
   dosing: [
+    {
+      indication: 'Cyclic vomiting syndrome (CVS) — abortive',
+      regimen: '**20 mg intranasal** (or **6 mg SC**) taken **as early as possible in the prodrome** \u2014 aborts the emetic phase most reliably before vomiting is established. May repeat once after \u22652 h (IN) / \u22651 h (SC). Combine with aggressive antiemetics, dextrose-containing IV fluids, and benzodiazepine sedation. Same cardiovascular contraindications as migraine use (screen for CAD/uncontrolled HTN).',
+    },
     {
       indication: 'Cluster Headache — acute (first-line)',
       regimen: '**6 mg SQ × 1.** May repeat once after ≥1 hour if a second attack occurs the same day. **Maximum 12 mg SQ in 24 hours.**\n\n**ONSET:** ≤15 min (74% response at 15 min per Ekbom NEJM 1991). The SQ route is preferred over IN/PO for cluster because attacks peak rapidly and PO/IN onset is too slow.\n\n**INTRANASAL alt:** **20 mg IN × 1**, may repeat ×1 after ≥2 h, max 40 mg/24h. Use when SQ unavailable, patient cannot self-inject, or repeated daily use is needed (the 4-mg autoinjector option is also reasonable).\n\n**DO NOT EXCEED daily max** — cluster patients often have multiple attacks/day. Once daily triptan max is reached, switch to O2 12-15 L/min via NRB, or [octreotide 100 mcg SQ](#/drug/octreotide/cluster headache acute), or wait for next interval.',
@@ -12721,6 +12830,9 @@ export const ALL_DRUGS: DrugEntry[] = [
   ALLOPURINOL,
   ALBUMIN,
   ALTEPLASE,
+  AMITRIPTYLINE,
+  APREPITANT,
+  ERYTHROMYCIN_PROKINETIC,
   AMIODARONE,
   AMINOCAPROIC_ACID,
   AMOXICILLIN,

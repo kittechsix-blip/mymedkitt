@@ -67,6 +67,7 @@ export const TREE_REGISTRY = {
   'dementia': { prefix: 'DEMENTIA', entryNodeId: 'dementia-start', categoryId: 'neurology' },
   'dementia-agitation': { prefix: 'DEMENTIA_AGITATION', entryNodeId: 'demagit-start', categoryId: 'neurology' },
   'chs':              { prefix: 'CHS',                 entryNodeId: 'chs-start',          categoryId: 'gastroenterology' },
+  'hyperemesis':      { prefix: 'HYPEREMESIS',         entryNodeId: 'hyperemesis-start',  categoryId: 'gastroenterology' },
   'pep':              { prefix: 'PEP',                 entryNodeId: 'pep-start',          categoryId: 'infectious-disease' },
   'stroke':           { prefix: 'STROKE',              entryNodeId: 'stroke-start',       categoryId: 'neurology' },
   'nstemi':           { prefix: 'NSTEMI',              entryNodeId: 'nstemi-start',       categoryId: 'cardiology' },

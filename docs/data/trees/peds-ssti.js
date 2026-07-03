@@ -93,16 +93,16 @@ export const PEDS_SSTI_NODES = [
         type: 'info',
         module: 2,
         title: 'Purulent SSTI — Empiric Antibiotic Selection',
-        body: '**Coverage goal: CA-MRSA + MSSA.** [1,3,6]\n\n**First-line (oral):** [1,6,7]\n\n[Trimethoprim-sulfamethoxazole](#/drug/tmp-smx/pediatric-ssti) **8–12 mg/kg/dose TMP component PO BID** (max 320 mg/dose)\n- Best CA-MRSA coverage in most US regions\n- Talan NEJM 2016: TMP-SMX after I&D ↓ failure rate vs placebo (NNT ~14) [6]\n- Avoid in infants <2 months (kernicterus risk), G6PD deficiency, sulfa allergy\n\n**Alternative (oral):** [1,7]\n\n[Clindamycin](#/drug/clindamycin/pediatric-ssti) **10 mg/kg/dose PO TID** (max 600 mg/dose)\n- Daum NEJM 2017: clindamycin = TMP-SMX cure rate, fewer recurrences with clinda at 1 month [7]\n- Check local D-test for inducible resistance\n- C. difficile risk; diarrhea common\n\n**For older adolescents (≥45 kg) or alternative:** Doxycycline 4 mg/kg/day divided BID (avoid <8 years).\n\n**Duration:** 5–7 days post-I&D for most uncomplicated abscesses. Extend to 7–10 days for extensive cellulitis or slow response. [1]\n\n**Wound care:** [1,2]\n- Cover with dry dressing; change daily\n- If packed: remove packing in 24–48h, then warm soaks 3–4×/day\n- Loop drains stay for 7–10 days; remove in clinic\n- **Recheck visit at 48–72h** — verify improvement, drainage, no extension\n\nUse the [Peds Drug Doses](#/drug/tmp-smx/pediatric-ssti) for weight-based calculation.',
+        body: '**Coverage goal: CA-MRSA + MSSA.** [1,3,6]\n\n**First-line (oral):** [1,6,7]\n\n[Trimethoprim-sulfamethoxazole](#/drug/tmp-smx/pediatric-ssti) **4–6 mg/kg/dose TMP component PO BID (8–12 mg/kg/day total)** (max 160 mg TMP/dose)\n- Best CA-MRSA coverage in most US regions\n- Talan NEJM 2016: TMP-SMX after I&D ↓ failure rate vs placebo (NNT ~14) [6]\n- Avoid in infants <2 months (kernicterus risk), G6PD deficiency, sulfa allergy\n\n**Alternative (oral):** [1,7]\n\n[Clindamycin](#/drug/clindamycin/pediatric-ssti) **10 mg/kg/dose PO TID** (max 600 mg/dose)\n- Daum NEJM 2017: clindamycin = TMP-SMX cure rate, fewer recurrences with clinda at 1 month [7]\n- Check local D-test for inducible resistance\n- C. difficile risk; diarrhea common\n\n**For older adolescents (≥45 kg) or alternative:** Doxycycline 4 mg/kg/day divided BID (avoid <8 years).\n\n**Duration:** 5–7 days post-I&D for most uncomplicated abscesses. Extend to 7–10 days for extensive cellulitis or slow response. [1]\n\n**Wound care:** [1,2]\n- Cover with dry dressing; change daily\n- If packed: remove packing in 24–48h, then warm soaks 3–4×/day\n- Loop drains stay for 7–10 days; remove in clinic\n- **Recheck visit at 48–72h** — verify improvement, drainage, no extension\n\nUse the [Peds Drug Doses](#/drug/tmp-smx/pediatric-ssti) for weight-based calculation.',
         citation: [1, 3, 6, 7],
         treatment: {
             firstLine: {
                 drug: 'TMP-SMX',
-                dose: '8–12 mg/kg/dose (TMP)',
+                dose: '4–6 mg/kg/dose (TMP); 8–12 mg/kg/day total',
                 route: 'PO',
                 frequency: 'BID',
                 duration: '5–7 days post-I&D',
-                notes: 'Max 320 mg TMP/dose; avoid <2mo, G6PD, sulfa allergy; Talan NEJM 2016',
+                notes: 'Max 160 mg TMP/dose; avoid <2mo, G6PD, sulfa allergy; IDSA 2014 / Talan NEJM 2016',
             },
             alternative: {
                 drug: 'Clindamycin',
@@ -115,7 +115,7 @@ export const PEDS_SSTI_NODES = [
             monitoring: '48–72h recheck; watch for spreading erythema, fever, systemic signs',
         },
         next: 'pssti-purulent-dispo',
-        summary: 'TMP-SMX 8-12 mg/kg/dose BID OR clindamycin 10 mg/kg/dose TID; 5-7 days; 48-72h recheck mandatory.',
+        summary: 'TMP-SMX 4-6 mg/kg/dose BID (8-12 mg/kg/day) OR clindamycin 10 mg/kg/dose TID; 5-7 days; 48-72h recheck mandatory.',
     },
     {
         id: 'pssti-purulent-dispo',
@@ -156,7 +156,7 @@ export const PEDS_SSTI_NODES = [
         type: 'info',
         module: 3,
         title: 'Non-Purulent Cellulitis — Antibiotic Selection',
-        body: '**Outpatient PO regimen (mild-moderate, well-appearing):** [1,3]\n\n[Cephalexin](#/drug/cephalexin/pediatric-ssti) **25–50 mg/kg/day PO divided q6h (QID)** (max 4 g/day)\n- First-line for streptococcal cellulitis\n- Excellent bioavailability\n\n**Alternative (penicillin-allergic, non-anaphylaxis):** Cefadroxil 30 mg/kg/day PO BID.\n\n**Severe penicillin allergy:** Clindamycin 10 mg/kg/dose PO TID (also covers MRSA).\n\n**Inpatient / unable to tolerate PO:** [1]\n\n[Cefazolin](#/drug/cefazolin/pediatric-ssti) **50 mg/kg/dose IV q8h** (max 6 g/day)\n- Anti-streptococcal + MSSA\n- Excellent tissue penetration\n\n**If MRSA suspected (add or substitute):**\n- TMP-SMX 8–12 mg/kg/dose PO BID, OR\n- Clindamycin 10–13 mg/kg/dose IV/PO q6–8h, OR\n- Vancomycin 15 mg/kg/dose IV q6h (severe only)\n\n**Duration:** 5 days for uncomplicated cases responding well; extend to 7–10 days for slow response or extensive disease. [1]\n\n**48–72h recheck:** mandatory. Cellulitis often appears WORSE in the first 24–48h before improving (initial bacterial killing → inflammatory response). Document border and compare. [1,10]',
+        body: '**Outpatient PO regimen (mild-moderate, well-appearing):** [1,3]\n\n[Cephalexin](#/drug/cephalexin/pediatric-ssti) **25–50 mg/kg/day PO divided q6h (QID)** (max 4 g/day)\n- First-line for streptococcal cellulitis\n- Excellent bioavailability\n\n**Alternative (penicillin-allergic, non-anaphylaxis):** Cefadroxil 30 mg/kg/day PO BID.\n\n**Severe penicillin allergy:** Clindamycin 10 mg/kg/dose PO TID (also covers MRSA).\n\n**Inpatient / unable to tolerate PO:** [1]\n\n[Cefazolin](#/drug/cefazolin/pediatric-ssti) **50 mg/kg/dose IV q8h** (max 6 g/day)\n- Anti-streptococcal + MSSA\n- Excellent tissue penetration\n\n**If MRSA suspected (add or substitute):**\n- TMP-SMX 4–6 mg/kg/dose (TMP) PO BID (8–12 mg/kg/day), OR\n- Clindamycin 10–13 mg/kg/dose IV/PO q6–8h, OR\n- Vancomycin 15 mg/kg/dose IV q6h (severe only)\n\n**Duration:** 5 days for uncomplicated cases responding well; extend to 7–10 days for slow response or extensive disease. [1]\n\n**48–72h recheck:** mandatory. Cellulitis often appears WORSE in the first 24–48h before improving (initial bacterial killing → inflammatory response). Document border and compare. [1,10]',
         citation: [1, 3, 10],
         treatment: {
             firstLine: {

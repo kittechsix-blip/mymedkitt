@@ -372,7 +372,7 @@ export const MEASLES_CRITICAL_ACTIONS = [
     { text: 'Measles IgM and PCR (throat/nasopharyngeal swab) for confirmation', nodeId: 'measles-lab-confirm' },
     { text: 'Vitamin A 200,000 IU (100,000 IU if <1 year) PO x2 doses (reduces mortality)', nodeId: 'measles-vitamin-a' },
     { text: 'Notify Public Health Department immediately (reportable disease)', nodeId: 'measles-public-health' },
-    { text: 'Post-exposure prophylaxis: MMR within 72h OR IVIG within 6 days for high-risk contacts', nodeId: 'measles-pep' },
+    { text: 'Post-exposure prophylaxis: MMR within 72h OR IG within 6 days for high-risk contacts', nodeId: 'measles-pep-timing' },
     { text: 'Contagious 4 days before to 4 days after rash onset (isolate until day 4 of rash)', nodeId: 'measles-isolation' },
     { text: 'Monitor for complications: pneumonia (most common), encephalitis, subacute sclerosing panencephalitis', nodeId: 'measles-complications' },
     { text: 'Healthcare workers must have documented immunity (2 MMR doses or positive titers)', nodeId: 'measles-immunity-check' },

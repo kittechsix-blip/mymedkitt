@@ -20,9 +20,20 @@ export const TOOLBAR_OVERFLOW = new Set([
     'dystonic-reaction',
     'lithium-toxicity',
     'teg',
+    'hyperemesis',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 const TOOLBAR_CONFIGS = {
+    'hyperemesis': [
+        { id: 'hyp-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hyperemesis-summary', pinned: true },
+        { id: 'hyp-puqe', label: 'PUQE', icon: '🧮', action: 'calculator', target: 'puqe', pinned: true },
+        { id: 'hyp-cvs', label: 'Rome IV CVS', icon: '🔁', action: 'calculator', target: 'cvs-rome-iv', pinned: true },
+        { id: 'hyp-antiemetics', label: 'Antiemetics', icon: '💊', action: 'overlay', target: 'hyperemesis-antiemetics', pinned: true },
+        { id: 'hyp-mimics', label: "Can't-Miss", icon: '🎯', action: 'overlay', target: 'hyperemesis-mimics', pinned: true },
+        { id: 'hyp-anion-gap', label: 'Anion Gap', icon: '🧪', action: 'calculator', target: 'anion-gap' },
+        { id: 'hyp-prokinetics', label: 'Prokinetics', icon: '⚙️', action: 'overlay', target: 'hyperemesis-prokinetics' },
+        { id: 'hyp-chs', label: 'CHS Consult', icon: '🌿', action: 'route', target: 'chs' },
+    ],
     'dental-nerve-blocks': [
         { id: 'dnb-max-dose', label: 'Max Dose', icon: '🧮', action: 'calculator', target: 'dnb-la-max-dose', pinned: true },
         { id: 'dnb-selector', label: 'Block Selector', icon: '🎯', action: 'calculator', target: 'dnb-block-selector', pinned: true },

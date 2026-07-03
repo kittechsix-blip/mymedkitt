@@ -59,7 +59,7 @@ export const DIABETES_MANAGEMENT_NODES = [
         type: 'question',
         module: 1,
         title: 'DKA/HHS Screening',
-        body: '**Check for diabetic emergencies before routine hyperglycemia management.**\n\n**DKA criteria (any 2 of 3):** [1][2]\n- pH <7.3 or HCO3 <18 mEq/L\n- Anion gap >12\n- Beta-hydroxybutyrate >3 mmol/L (or ketones 2+)\n\n**HHS criteria:** [3]\n- Glucose >600 mg/dL\n- Serum osmolality >320 mOsm/kg\n- Minimal/no ketosis\n- pH usually >7.3\n\n**Euglycemic DKA:**\n- SGLT2 inhibitor use (empagliflozin, dapagliflozin, canagliflozin)\n- Can present with glucose 150-250 mg/dL with full DKA\n- Check beta-hydroxybutyrate if SGLT2i and any GI symptoms',
+        body: '**Check for diabetic emergencies before routine hyperglycemia management.**\n\n**DKA criteria — 2024 ADA/EASD consensus (all 3 required):** [1][2]\n- **D (hyperglycemia):** glucose >=200 mg/dL OR known history of diabetes (history allows euglycemic DKA)\n- **K (ketosis):** beta-hydroxybutyrate >=3.0 mmol/L (or ketonuria >=2+)\n- **A (acidosis):** pH <7.3 AND/OR HCO3 <18 mmol/L\n\n*The 2024 consensus REMOVED the anion gap from the diagnostic criteria and uses venous (not arterial) samples. Anion gap remains useful for tracking response but is no longer required for diagnosis.*\n\n**HHS criteria:** [3]\n- Glucose >600 mg/dL\n- Serum osmolality >320 mOsm/kg\n- Minimal/no ketosis\n- pH usually >7.3\n\n**Euglycemic DKA:**\n- SGLT2 inhibitor use (empagliflozin, dapagliflozin, canagliflozin)\n- Can present with glucose 150-250 mg/dL with full DKA\n- Check beta-hydroxybutyrate if SGLT2i and any GI symptoms',
         citation: [1, 2, 3],
         options: [
             {
@@ -780,7 +780,7 @@ export const DIABETES_MANAGEMENT_MODULE_LABELS = [
 ];
 export const DIABETES_MANAGEMENT_CITATIONS = [
     { num: 1, text: 'ElSayed NA, Aleppo G, Aroda VR, et al. 16. Diabetes Care in the Hospital: Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1):S295-S306.' },
-    { num: 2, text: 'Kitabchi AE, Umpierrez GE, Miles JM, Fisher JN. Hyperglycemic Crises in Adult Patients With Diabetes. Diabetes Care. 2009;32(7):1335-1343.' },
+    { num: 2, text: 'Umpierrez GE, Davis GM, ElSayed NA, et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS). Diabetes Care. 2024;47(8):1257-1275.' },
     { num: 3, text: 'Pasquel FJ, Umpierrez GE. Hyperosmolar Hyperglycemic State: A Historic Review of the Clinical Presentation, Diagnosis, and Treatment. Diabetes Care. 2014;37(11):3124-3131.' },
     { num: 4, text: 'Fadini GP, de Kreutzenberg SV, Rigato M, et al. Characteristics and Outcomes of the Hyperglycemic Hyperosmolar Non-Ketotic Syndrome in a Cohort of 51 Consecutive Cases at a Single Center. Diabetes Res Clin Pract. 2011;94(2):172-179.' },
     { num: 5, text: 'ElSayed NA, Aleppo G, Aroda VR, et al. 9. Pharmacologic Approaches to Glycemic Treatment: Standards of Care in Diabetes - 2024. Diabetes Care. 2024;47(Suppl 1):S158-S178.' },

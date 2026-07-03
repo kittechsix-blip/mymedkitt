@@ -92,15 +92,25 @@ function openCriticalActionsModal(opts) {
     document.addEventListener('keydown', escHandler);
     overlay.dataset.escHandler = 'attached';
     overlay.__escHandler = escHandler;
+    // Close on any navigation. The overlay is attached to document.body, outside the
+    // consult flow container, so a route change (to another consult, Home, or a
+    // calculator) would otherwise leave this consult's critical actions displayed
+    // over the newly navigated view.
+    const navHandler = () => closeCriticalActionsModal();
+    window.addEventListener('hashchange', navHandler);
+    overlay.__navHandler = navHandler;
     document.body.appendChild(overlay);
     document.body.classList.add('critical-actions-open');
 }
-function closeCriticalActionsModal() {
+export function closeCriticalActionsModal() {
     const existing = document.querySelector('.critical-actions-overlay');
     if (!existing)
         return;
     if (existing.__escHandler) {
         document.removeEventListener('keydown', existing.__escHandler);
+    }
+    if (existing.__navHandler) {
+        window.removeEventListener('hashchange', existing.__navHandler);
     }
     existing.remove();
     document.body.classList.remove('critical-actions-open');

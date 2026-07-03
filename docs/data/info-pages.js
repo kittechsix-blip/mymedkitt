@@ -27666,7 +27666,155 @@ const FNB_STOP_PAGE = {
         { num: 3, text: 'Weinberg GL. Lipid emulsion infusion: resuscitation for local anesthetic and other drug overdose. Anesthesiology. 2012;117(1):180-187.' },
     ],
 };
+// -------------------------------------------------------------------
+// Recurrent & Cyclical Vomiting (hyperemesis consult, added 2026-07-03)
+// -------------------------------------------------------------------
+const HYPEREMESIS_SUMMARY_PAGE = {
+    id: 'hyperemesis-summary',
+    title: 'Recurrent Vomiting — Approach',
+    subtitle: 'Stepwise workup for recurrent & cyclical vomiting',
+    sections: [
+        {
+            heading: 'Step 1 — Resuscitate',
+            body: '\u2022 Isotonic crystalloid; correct dehydration.\n\u2022 Replace K and Mg; recheck after repletion.\n\u2022 **Give thiamine 100 mg IV before any dextrose** in prolonged poor intake \u2014 glucose first can precipitate Wernicke. [2]',
+        },
+        {
+            heading: 'Step 2 — Screen the can\u2019t-miss organic causes',
+            body: '\u2022 **\u03B2hCG** in every reproductive-age woman before imaging or teratogen exposure.\n\u2022 **Bilious/bloody vomiting** \u2192 obstruction / GI bleed.\n\u2022 **Headache + focal deficit / papilledema** \u2192 raised ICP.\n\u2022 **Shock + hyponatremia/hyperkalemia** \u2192 adrenal crisis.\n\u2022 **Polyuria, Kussmaul, fruity breath** \u2192 DKA. [1]',
+        },
+        {
+            heading: 'Step 3 — Get baseline data',
+            body: 'CBC, CMP (glucose, Na, K, Ca, BUN/Cr), lipase, LFTs, VBG + serum ketones + lactate, urine \u03B2hCG, UA. **ECG for a baseline QTc** before QT-prolonging antiemetics. [1]',
+        },
+        {
+            heading: 'Step 4 — Triage the syndrome',
+            body: '\u2022 Pregnant \u2192 **Hyperemesis gravidarum** ladder.\n\u2022 Chronic heavy cannabis \u00B1 hot-water bathing \u2192 **CHS** (dedicated consult).\n\u2022 Delayed emptying / diabetic / post-surgical \u2192 **Gastroparesis**.\n\u2022 Stereotypical episodes, well between \u2192 **Cyclic vomiting syndrome**. [4][8][13]',
+        },
+        {
+            heading: 'Step 5 — Safety before disposition',
+            body: 'QTc before stacking QT-prolongers; limit metoclopramide duration (tardive dyskinesia); avoid opioids in CHS/gastroparesis; discharge on PO tolerance with follow-up. [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tintinalli JE, et al. Nausea and Vomiting. Tintinalli\u2019s Emergency Medicine, 9th ed. McGraw Hill; 2020.' },
+        { num: 2, text: 'Oudman E, et al. Wernicke\u2019s encephalopathy in hyperemesis gravidarum: a systematic review. Eur J Obstet Gynecol Reprod Biol. 2019;236:84-93.' },
+        { num: 4, text: 'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.' },
+        { num: 8, text: 'Venkatesan T, et al. Guidelines on management of cyclic vomiting syndrome in adults (ANMS/CVSA). Neurogastroenterol Motil. 2019;31(Suppl 2):e13604.' },
+        { num: 13, text: 'Camilleri M, et al. ACG Clinical Guideline: Gastroparesis. Am J Gastroenterol. 2022;117(8):1197-1220.' },
+    ],
+};
+const HYPEREMESIS_MIMICS_PAGE = {
+    id: 'hyperemesis-mimics',
+    title: 'Can\u2019t-Miss Vomiting Mimics',
+    subtitle: 'Organic causes to exclude before a functional diagnosis',
+    sections: [
+        {
+            body: 'Cyclic vomiting, cannabinoid hyperemesis, and functional vomiting are **diagnoses of exclusion**. Each row below is a dangerous organic cause and the clue that points to it. [1][3]',
+        },
+        {
+            heading: 'Differential by clue',
+            body: '',
+            comparisonTable: {
+                columns: [
+                    { key: 'dx', label: 'Diagnosis' },
+                    { key: 'clue', label: 'Clue' },
+                    { key: 'test', label: 'First test' },
+                ],
+                rows: [
+                    { cells: { dx: 'Bowel obstruction', clue: 'Bilious vomiting, distension, no flatus, prior surgery', test: 'CT abdomen/pelvis' } },
+                    { cells: { dx: 'GI bleed', clue: 'Hematemesis / coffee-ground emesis', test: 'CBC, type & screen, EGD' } },
+                    { cells: { dx: 'DKA', clue: 'Polyuria, Kussmaul, fruity breath, diabetic', test: 'Glucose, VBG, serum ketones' } },
+                    { cells: { dx: 'Raised ICP', clue: 'Headache, focal deficit, papilledema, morning vomiting', test: 'CT head' } },
+                    { cells: { dx: 'Adrenal crisis', clue: 'Shock, hyponatremia + hyperkalemia, steroid history', test: 'Cortisol; empiric hydrocortisone' } },
+                    { cells: { dx: 'Pancreatitis', clue: 'Epigastric pain radiating to back', test: 'Lipase' } },
+                    { cells: { dx: 'Hypercalcemia', clue: 'Stones, bones, groans, malignancy', test: 'Serum Ca' } },
+                    { cells: { dx: 'Pregnancy / molar', clue: 'Reproductive-age woman', test: 'Urine/serum \u03B2hCG, pelvic US' } },
+                    { cells: { dx: 'Atypical ACS', clue: 'Older, diabetic, epigastric symptoms', test: 'ECG, troponin' } },
+                ],
+            },
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tintinalli JE, et al. Nausea and Vomiting. Tintinalli\u2019s Emergency Medicine, 9th ed. McGraw Hill; 2020.' },
+        { num: 3, text: 'Long B, Lentz S. Adult Diabetic Ketoacidosis. StatPearls; 2023.' },
+    ],
+};
+const HYPEREMESIS_ANTIEMETICS_PAGE = {
+    id: 'hyperemesis-antiemetics',
+    title: 'Antiemetic Comparison',
+    subtitle: 'Class, dose, and QT / safety flags',
+    sections: [
+        {
+            body: 'Choose by cause and safety profile. **Get a baseline QTc before stacking QT-prolongers.** Pregnancy safety notes apply to the HG ladder. [1][4]',
+        },
+        {
+            heading: 'Comparison',
+            body: '',
+            comparisonTable: {
+                columns: [
+                    { key: 'drug', label: 'Drug' },
+                    { key: 'class', label: 'Class' },
+                    { key: 'dose', label: 'Typical dose' },
+                    { key: 'flag', label: 'Key flag' },
+                ],
+                rows: [
+                    { cells: { drug: 'Pyridoxine (B6)', class: 'Vitamin', dose: '10\u201325 mg PO q6\u20138h', flag: 'HG first-line; >500 mg/day \u2192 neuropathy' } },
+                    { cells: { drug: 'Doxylamine', class: 'Antihistamine', dose: '12.5\u201325 mg PO', flag: 'HG first-line with B6; sedation' } },
+                    { cells: { drug: 'Ondansetron', class: '5-HT3', dose: '4\u20138 mg IV/PO', flag: 'QT prolongation; <10wk pregnancy nuance' } },
+                    { cells: { drug: 'Metoclopramide', class: 'D2 / prokinetic', dose: '5\u201310 mg IV/PO', flag: 'Tardive dyskinesia (black box); EPS' } },
+                    { cells: { drug: 'Promethazine', class: 'Antihistamine/D2', dose: '12.5\u201325 mg IV/PO', flag: 'Sedation; IV tissue injury \u2014 dilute/slow' } },
+                    { cells: { drug: 'Prochlorperazine', class: 'D2', dose: '5\u201310 mg IV/PO', flag: 'EPS; QT prolongation' } },
+                    { cells: { drug: 'Haloperidol', class: 'D2 (butyrophenone)', dose: '0.05\u20130.1 mg/kg IV', flag: 'CHS first-line; QT; EPS' } },
+                    { cells: { drug: 'Aprepitant', class: 'NK-1', dose: '125 mg d1, 80 mg d2\u20133', flag: 'CVS second-line; CYP3A4 interactions' } },
+                ],
+            },
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Tintinalli JE, et al. Nausea and Vomiting. Tintinalli\u2019s Emergency Medicine, 9th ed. McGraw Hill; 2020.' },
+        { num: 4, text: 'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.' },
+    ],
+};
+const HYPEREMESIS_PROKINETICS_PAGE = {
+    id: 'hyperemesis-prokinetics',
+    title: 'Gastroparesis Prokinetics',
+    subtitle: 'Prokinetic options and limits (ACG 2022)',
+    sections: [
+        {
+            body: 'Prokinetics accelerate gastric emptying. **Optimize glycemia first** \u2014 acute hyperglycemia slows emptying and blunts prokinetic effect. **Avoid opioids.** [13]',
+        },
+        {
+            heading: 'Options',
+            body: '',
+            comparisonTable: {
+                columns: [
+                    { key: 'drug', label: 'Agent' },
+                    { key: 'dose', label: 'Dose' },
+                    { key: 'note', label: 'Note / limit' },
+                ],
+                rows: [
+                    { cells: { drug: 'Metoclopramide', dose: '5 mg PO/IV TID AC', note: 'Black-box tardive dyskinesia; limit \u226412 weeks' } },
+                    { cells: { drug: 'Erythromycin (IV)', dose: '3 mg/kg IV q8h', note: 'Best for acute flare; tachyphylaxis limits chronic use' } },
+                    { cells: { drug: 'Domperidone', dose: '10 mg PO TID', note: 'FDA IND access only; ECG for QT' } },
+                    { cells: { drug: 'Prucalopride', dose: '2 mg PO daily', note: '5-HT4 agonist; emerging evidence' } },
+                ],
+            },
+        },
+        {
+            heading: 'Not recommended / refractory',
+            body: '\u2022 **Pyloric botulinum toxin is NOT recommended** (ACG 2022).\n\u2022 Refractory: gastric electrical stimulation, G-POEM \u2014 GI referral. [13]',
+        },
+    ],
+    citations: [
+        { num: 13, text: 'Camilleri M, et al. ACG Clinical Guideline: Gastroparesis. Am J Gastroenterol. 2022;117(8):1197-1220.' },
+    ],
+};
 export const INFO_PAGES = {
+    // Recurrent & Cyclical Vomiting (hyperemesis consult, added 2026-07-03)
+    'hyperemesis-summary': HYPEREMESIS_SUMMARY_PAGE,
+    'hyperemesis-mimics': HYPEREMESIS_MIMICS_PAGE,
+    'hyperemesis-antiemetics': HYPEREMESIS_ANTIEMETICS_PAGE,
+    'hyperemesis-prokinetics': HYPEREMESIS_PROKINETICS_PAGE,
     // Dental / Intraoral Nerve Blocks (added 2026-06-20)
     'dnb-steps': DNB_STEPS_PAGE,
     'dnb-stop': DNB_STOP_PAGE,

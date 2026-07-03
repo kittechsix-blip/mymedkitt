@@ -185,7 +185,7 @@ export const LUMBAR_PUNCTURE_NODES: DecisionNode[] = [
     body: '**PLT 20,000-40,000 or INR 1.5-2.0**\n\n**Risk-benefit assessment:**\n• Spinal hematoma is rare even in this range\n• Suspected bacterial meningitis: benefit likely outweighs risk\n• Elective LP: consider correction first\n\n**Risk reduction strategies:**\n• Use smallest gauge needle practical (22-25G)\n• Single attempt if possible (avoid multiple passes)\n• Atraumatic (pencil-point) needle preferred\n• Avoid antiplatelet/anticoagulant post-procedure for 24h\n\n**Platelet transfusion thresholds:**\n• AABB 2025: PLT >20,000 may be sufficient for diagnostic LP\n• Traditional: Transfuse to >50,000 if time allows\n• In meningitis: Do NOT delay LP for platelet transfusion\n\n**Post-procedure monitoring:**\n• Monitor for back pain, leg weakness, urinary retention\n• Low threshold for MRI spine if symptoms develop',
     citation: [9, 10],
     next: 'lp-consent-prep',
-    summary: 'Mild coagulopathy (INR 1.5-2, plt 50-100K): proceed with smallest needle, apply pressure after',
+    summary: 'Mild coagulopathy (INR 1.5-2, plt 20-40k): proceed with smallest needle, apply pressure after',
     skippable: true,
   },
 
@@ -197,7 +197,7 @@ export const LUMBAR_PUNCTURE_NODES: DecisionNode[] = [
     body: '**PLT <20,000, INR >2.0, or Active Anticoagulation**\n\n**Options:**\n\n1. **Correct coagulopathy first (if time allows):**\n   • Platelet transfusion (target >50,000)\n   • Vitamin K + PCC for warfarin (FFP slower)\n   • Idarucizumab for dabigatran\n   • Andexanet alfa for Factor Xa inhibitors\n   • Wait for DOAC clearance (72h+)\n\n2. **Proceed despite risk (bacterial meningitis):**\n   • Discuss with attending\n   • Document risk-benefit discussion\n   • Use smallest needle, single attempt\n   • Close monitoring post-procedure\n\n3. **Empiric treatment without LP:**\n   • Treat based on clinical syndrome\n   • Blood cultures often yield organism\n   • LP when coagulation corrected\n\n**⚠️ In suspected bacterial meningitis:**\n• Mortality from untreated meningitis >> risk of spinal hematoma\n• Err on the side of treatment\n• Some experts proceed regardless of coagulation status [9][10]',
     citation: [9, 10],
     next: 'lp-consent-prep',
-    summary: 'Severe coagulopathy: correct before LP — FFP for INR, platelets for thrombocytopenia, hold anticoagulants',
+    summary: 'Severe coagulopathy: correct before LP — vit K + PCC for warfarin, platelets for thrombocytopenia, hold/reverse anticoagulants',
     safetyLevel: 'warning',
   },
 
@@ -402,7 +402,7 @@ export const LUMBAR_PUNCTURE_NODES: DecisionNode[] = [
     body: '**Normal Opening Pressure:** [1][13]\n\n| Population | Normal Range |\n|------------|-------------|\n| Adults | 6-25 cm H₂O |\n| Children | <28 cm H₂O |\n| Population mean | ~18 cm H₂O |\n\n**Elevated OP (>25 cm H₂O):**\n• Idiopathic intracranial hypertension (IIH)\n• Meningitis (bacterial, fungal, TB)\n• SAH (elevated in ~60%)\n• Cerebral venous sinus thrombosis\n• Mass lesion/tumor\n• Hydrocephalus\n• Hypertensive/hepatic encephalopathy\n\n**Low OP (<6 cm H₂O):**\n• CSF leak (post-LP, traumatic, spontaneous)\n• Dehydration/hypovolemia\n• Intracranial hypotension syndrome\n\n**Therapeutic Drainage (IIH):**\n• Remove 30-50 mL CSF\n• Target closing pressure: 10-15 cm H₂O\n• Provides immediate symptom relief [1][13]',
     citation: [1, 13],
     next: 'lp-csf-collection',
-    summary: 'Normal OP: 6-20 cmH2O in adults. >25 cmH2O elevated (IIH, meningitis). <6 cmH2O suggests CSF leak',
+    summary: 'Normal OP: 6-25 cmH2O in adults. >25 cmH2O elevated (IIH, meningitis). <6 cmH2O suggests CSF leak',
     skippable: true,
   },
 
