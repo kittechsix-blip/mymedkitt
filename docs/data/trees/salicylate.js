@@ -518,7 +518,7 @@ export const SALICYLATE_NODES = [
         type: 'question',
         module: 5,
         title: 'Hemodialysis Indications (EXTRIP)',
-        body: '**Hemodialysis is extremely effective for salicylate toxicity** — removes salicylate AND corrects acidosis simultaneously. [2][5]\n\n[EXTRIP Hemodialysis Indications](#/info/sal-extrip-hd)\n\n**Consult nephrology early.** HD takes time to arrange (access, setup). Patients who need emergent HD often deteriorate faster than logistics allow. [2]\n\n**EXTRIP Strongly Recommended HD for:** [5]\n• Salicylate level > 100 mg/dL (acute) or > 80 mg/dL (chronic/elderly)\n• pH < 7.20 despite resuscitation\n• Altered mental status or seizures\n• Non-cardiogenic pulmonary edema\n• Renal failure limiting clearance\n• Clinical deterioration despite treatment\n• Alkalinization failure\n\nDoes the patient meet HD criteria?',
+        body: '**Hemodialysis is extremely effective for salicylate toxicity** — removes salicylate AND corrects acidosis simultaneously. [2][5]\n\n[EXTRIP Hemodialysis Indications](#/info/sal-extrip-hd)\n\n**Consult nephrology early.** HD takes time to arrange (access, setup). Patients who need emergent HD often deteriorate faster than logistics allow. [2]\n\n**EXTRIP Recommended — regardless of level:** [5]\n• Altered mental status\n• ARDS / non-cardiogenic pulmonary edema requiring supplemental O2\n• Standard therapy failing / clinical deterioration despite treatment\n• pH ≤ 7.20 despite resuscitation\n• Impaired kidney function limiting clearance\n\n**EXTRIP By level — regardless of symptoms:** [5]\n• Salicylate > 100 mg/dL (7.2 mmol/L) → **recommended** [1D]\n• Salicylate > 90 mg/dL (6.5 mmol/L) → **suggested** [2D]\n• Lower threshold **> 80 mg/dL (5.8 mmol/L)** applies if impaired kidney function\n\n*Note: "acute vs chronic" is less important than the EXTRIP anchors above — the low 80 mg/dL threshold is tied to renal impairment (common in elderly/chronic toxicity).*\n\nDoes the patient meet HD criteria?',
         citation: [2, 5, 12],
         calculatorLinks: [
             { id: 'sal-tox-guide', label: 'Sal Tox Guide' },
@@ -671,7 +671,7 @@ export const SALICYLATE_NODES = [
 export const SALICYLATE_CRITICAL_ACTIONS = [
     { text: 'Sodium bicarbonate 150 mEq (3 amps) in 1L D5W at 200-250 mL/hr for urine alkalinization', nodeId: 'sal-bicarb-bolus' },
     { text: 'Target urine pH 7.5-8.0 (recheck q2-4h) to enhance renal elimination', nodeId: 'sal-alkalinize-monitor' },
-    { text: 'Hemodialysis for severe toxicity (EXTRIP): pH <7.20, altered MS, pulmonary edema, renal failure, salicylate >100 mg/dL (acute) or >80 mg/dL (chronic/elderly)', nodeId: 'sal-hd-indications' },
+    { text: 'Hemodialysis for severe toxicity (EXTRIP): altered MS, ARDS/pulmonary edema requiring O2, standard therapy failing, or pH ≤7.20; by level regardless of symptoms — >100 mg/dL (recommended) or >90 mg/dL (suggested), lower threshold >80 mg/dL if impaired kidney function', nodeId: 'sal-hd-indications' },
     { text: 'Avoid acetazolamide — lowers serum pH and displaces salicylate from albumin (increases free toxic drug)', nodeId: 'sal-bicarb-bolus' },
     { text: 'Avoid intubation if possible — compensatory hyperventilation maintains pH; eliminating it can precipitate arrest', nodeId: 'sal-airway-warning' },
     { text: 'Activated charcoal 1 g/kg PO if <2 hours or evidence of ongoing absorption', nodeId: 'sal-charcoal' },
