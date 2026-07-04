@@ -1,7 +1,7 @@
 // MedKitt — Refractory VF/VT
 // DOSE-VF Protocol: Optimize Basics → Vector Change → DSD → Pharmacology → ECPR → Emerging
 // 6 modules: Recognition → Optimize Basics → Advanced Defibrillation → Pharmacology → ECPR → Emerging Therapies
-// ~28 nodes total.
+// 22 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
@@ -27,7 +27,7 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Refractory VF/VT',
-    body: '**Definition:** VF or pulseless VT persisting after:\n• 3+ defibrillation attempts with 2-minute CPR cycles\n• Standard ACLS interventions (epi, antiarrhythmic)\n\n**2025 AHA terminology:** "Persisting VF/pVT" (preferred when mechanism unclear) [1][2]\n\n**Subtypes:**\n| Type | Definition |\n|------|------------|\n| True shock-refractory | VF never terminates |\n| Recurrent VF | VF terminates but refibrillates <5 sec |\n| Electrical storm | 3+ sustained VT/VF in 24h |\n\n**Incidence:** 10-25% of OHCA; survival only 2-12% with standard care [1]',
+    body: '**Definition:** VF or pulseless VT persisting after:\n• 3+ defibrillation attempts with 2-minute CPR cycles\n• Standard ACLS interventions (epi, antiarrhythmic)\n\n**2025 AHA terminology:** "Persisting VF/pVT" (preferred when mechanism unclear) [1][2]\n\n**Subtypes:**\n| Type | Definition |\n|------|------------|\n| True shock-refractory | VF never terminates |\n| Recurrent VF | VF terminates but refibrillates <5 sec |\n| Electrical storm | 3+ sustained VT/VF in 24h |\n\n**Incidence:** 10-25% of OHCA; survival only 2-12% with standard care [1]\n\n→ [Post-ROSC Management](#/node/rvf-post-rosc) once circulation returns',
     images: [
       { src: 'images/refractory-vfvt/vf-ecg-tracing.png', alt: 'ECG tracing showing ventricular fibrillation', caption: 'Ventricular fibrillation: chaotic, disorganized waveform with no discernible QRS complexes. Refractory VF persists after 3+ defibrillation attempts — requires escalation beyond standard ACLS. CC BY-SA 3.0 Wikimedia Commons.' },
     ],
@@ -269,7 +269,7 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
     title: 'Antiarrhythmic Dosing',
     body: '**[Amiodarone](#/drug/amiodarone/acls):**\n| Dose | Amount |\n|------|--------|\n| First bolus | 300 mg IV/IO |\n| Second bolus | 150 mg IV/IO |\n| Post-ROSC infusion | 1 mg/min x 6h, then 0.5 mg/min |\n| Max 24h | ~2.2 g |\n\n**[Lidocaine](#/drug/lidocaine/acls):**\n| Dose | Amount |\n|------|--------|\n| First bolus | 1-1.5 mg/kg IV/IO |\n| Second bolus | 0.5-0.75 mg/kg |\n| Infusion | 1-4 mg/min |\n| Max | 3 mg/kg total |',
     citation: [2],
-    next: 'rvf-esmolol-consider',
+    next: 'rvf-other-agents',
     treatment: {
       firstLine: {
         drug: 'Amiodarone',
@@ -346,7 +346,7 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
     title: 'Other Pharmacologic Options',
     body: '**Magnesium Sulfate:**\n• **Torsades de Pointes:** [Magnesium](#/drug/magnesium-sulfate/torsades) 2g IV over 2 min\n• **Routine refractory VF:** NOT recommended [2]\n\n**Sodium Bicarbonate:**\n• Severe acidosis (pH <7.2): 1 mEq/kg IV\n• Hyperkalemia: 50-100 mEq IV\n• TCA overdose: 1-2 mEq/kg IV\n• **Routine use:** NOT recommended [2]\n\n**Procainamide:**\n• 20 mg/min up to 17 mg/kg\n• Used for stable VT, uncertain in arrest',
     citation: [2],
-    next: 'rvf-ecpr-assess',
+    next: 'rvf-esmolol-consider',
 
     summary: 'MgSO4 only for torsades, NaHCO3 only for acidosis/hyperK/TCA — neither for routine refractory VF',
   },

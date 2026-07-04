@@ -36,7 +36,7 @@ export const PEDS_SUBMERSION_NODES = [
         type: 'question',
         module: 1,
         title: 'Scene Information',
-        body: '**Critical history to obtain:**\n\n**Submersion details:**\n• Estimated duration of submersion\n• Water type (fresh vs salt, pool vs natural)\n• Water temperature\n• Witnessed or unwitnessed\n\n**Rescue details:**\n• Time to rescue and extrication\n• CPR at scene (bystander or EMS)\n• Time to first breath/pulse\n\n**Pre-event:**\n• Trauma (diving, fall)?\n• Seizure prior to event?\n• Underlying conditions?\n\nWhat is the patient\'s current status?',
+        body: '**Critical history to obtain:**\n\n**Submersion details:**\n• Estimated duration of submersion\n• Water type (fresh vs salt, pool vs natural)\n• Water temperature\n• Witnessed or unwitnessed\n\n**Rescue details:**\n• Time to rescue and extrication\n• CPR at scene (bystander or EMS)\n• Time to first breath/pulse\n\n**Pre-event:**\n• Trauma (diving, fall)?\n• Seizure prior to event?\n• Underlying conditions?\n\n**Non-accidental trauma red flags:** [3]\n• Consider child abuse in submersion injuries <1 year of age\n• Inconsistent history, delayed presentation, or mechanism that does not fit development\n\nWhat is the patient\'s current status?',
         citation: [1, 3],
         options: [
             { label: 'Cardiac arrest/CPR ongoing', description: 'No pulse, active resuscitation', next: 'submersion-arrest' },

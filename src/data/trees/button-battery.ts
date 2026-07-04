@@ -65,6 +65,7 @@ export const BUTTON_BATTERY_NODES: DecisionNode[] = [
       { label: 'Battery in STOMACH', next: 'battery-gastric' },
       { label: 'Battery DISTAL to stomach', next: 'battery-distal' },
       { label: 'Unknown — patient symptomatic', next: 'battery-symptomatic' },
+      { label: 'Review interventions to AVOID', next: 'battery-avoid' },
     ],
     calculatorLinks: [
       { id: 'battery-risk-stratification', label: 'Battery Risk Stratification' },

@@ -1,6 +1,6 @@
 // MedKitt — Bradycardic Arrest
 // Recognition → Immediate Pacing → Medications → Reversible Causes → TVP / ROSC / TOR
-// 5 modules, ~14 nodes.
+// 5 modules, 18 nodes.
 export const BRADYCARDIC_ARREST_CRITICAL_ACTIONS = [
     { text: 'Transcutaneous pacing FIRST — do not wait for medications', nodeId: 'brady-tcp' },
     { text: 'Set TCP rate 60-80 bpm, increase mA until electrical capture', nodeId: 'brady-tcp' },

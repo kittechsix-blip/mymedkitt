@@ -1,7 +1,7 @@
 // MedKitt — Neonatal Resuscitation (NRP)
 // Stepwise approach to neonatal resuscitation based on 2025 AHA/AAP NRP Algorithm.
 // 6 modules: Preparation & Initial Assessment → Initial Steps (Golden 30s) → PPV → Chest Compressions → Medications & Vascular Access → Post-Resuscitation
-// 25 nodes total.
+// 27 nodes total.
 // Source: 2025 AHA/AAP Guidelines, NRP 8th ed (AAP 2021), 2020 ILCOR Consensus, McFarlin (EMR 2019)
 
 import type { DecisionNode } from '../../models/types.js';
@@ -14,7 +14,7 @@ export const NEONATAL_RESUS_CRITICAL_ACTIONS = [
   { text: 'Monitor SpO2 on RIGHT hand/wrist (preductal) - target 60-65% at 1 min', nodeId: 'nrp-spo2-targets' },
   { text: 'Use T-piece resuscitator (preferred) - PIP 20-25 cm, rate 40-60/min', nodeId: 'nrp-ppv' },
   { text: 'Apply MR SOPA corrective steps if PPV ineffective', nodeId: 'nrp-corrective' },
-  { text: 'DCC for vigorous term/late preterm: AT LEAST 60 seconds (2025 AHA/AAP update)', nodeId: 'nrp-initial-steps' },
+  { text: 'DCC for vigorous term/late preterm: AT LEAST 60 seconds (2025 AHA/AAP update)', nodeId: 'nrp-cord-mgmt' },
   { text: 'CPR if HR <60 despite effective PPV - 3:1 ratio (90 compressions + 30 breaths)', nodeId: 'nrp-cpr' },
   { text: 'Epinephrine 0.01-0.03 mg/kg IV if HR <60 after 60 sec CPR', nodeId: 'nrp-epinephrine' },
   { text: 'Establish UVC early for IV access (2-4 cm depth only)', nodeId: 'nrp-uvc' },

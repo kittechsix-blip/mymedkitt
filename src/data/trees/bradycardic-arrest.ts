@@ -1,6 +1,6 @@
 // MedKitt — Bradycardic Arrest
 // Recognition → Immediate Pacing → Medications → Reversible Causes → TVP / ROSC / TOR
-// 5 modules, ~14 nodes.
+// 5 modules, 18 nodes.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
