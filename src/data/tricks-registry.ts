@@ -65,7 +65,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#1565C0',
     subtitle: 'Suction, NG placement, supraglottic exchange, and more.',
     infoPageId: 'tricks-airway',
-    trickCount: 11,
+    trickCount: 12,
     category: 'resus-procedures',
   },
   {
@@ -75,7 +75,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#00838F',
     subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
     infoPageId: 'tricks-procedures',
-    trickCount: 45,
+    trickCount: 47,
     category: 'resus-procedures',
   },
   {
@@ -125,7 +125,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#AD1457',
     subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
     infoPageId: 'tricks-wound',
-    trickCount: 21,
+    trickCount: 22,
     category: 'wounds-msk',
   },
   {
@@ -165,7 +165,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#455A64',
     subtitle: 'Fast bedside screens, dosing pearls, communication.',
     infoPageId: 'tricks-general',
-    trickCount: 17,
+    trickCount: 18,
     category: 'general-tox',
   },
   {
