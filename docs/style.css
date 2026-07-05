@@ -3080,6 +3080,16 @@ body.critical-actions-open {
    REFERENCE TABLE
    =================================================================== */
 
+.reference-citations-inline summary {
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reference-citations-inline summary::-webkit-details-marker {
+  display: none;
+}
+
 .reference-citation-list {
   padding: 8px 0;
 }
