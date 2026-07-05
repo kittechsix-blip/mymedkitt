@@ -26469,6 +26469,10 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
       heading: 'Saline Float to Advance a Catheter Past a Valve',
       body: '**Accomplishes:** Salvages a peripheral IV that gets flashback but won\u2019t thread because the catheter tip is hung up on a venous valve, floating it through instead of abandoning the stick. [40]\n\n**How to:**\n1. Get flashback, then lower the needle/catheter nearly parallel to the skin and advance the catheter a few more millimeters off the needle first \u2014 this alone fixes many failures.\n2. If it still won\u2019t advance, leave the catheter in the vein and remove the needle.\n3. Attach a saline-filled syringe to the catheter hub.\n4. Simultaneously push a slow, gentle flush while advancing the catheter \u2014 the fluid opens the valve and \u201Cfloats\u201D the catheter through it.\n5. Stop and reassess if you see a bleb or feel resistance (extravasation); watch a straight, non-kinked vein \u2014 a kinked catheter cannot be floated and must be replaced.\n\n**Equipment:** In-place IV catheter, saline-filled syringe.\n\n_Source: Medscape \u2014 Intravenous Cannulation Technique (float the catheter through the valve); The Procedure Guide \u2014 Peripheral IV access._',
     },
+    {
+      heading: 'Nasal Speculum to See Into an Umbilical Foreign Body',
+      body: '**Accomplishes:** Turns a deep, blind umbilical pit into a directly visualized cavity so a retained foreign body (lint ball, jewelry, \u201Comphalolith\u201D) can be grasped under sight after skin retractors and blind probing fail. [41]\n\n**How to:**\n1. Clean the umbilicus and give topical or local anesthetic if the tract is tender.\n2. Insert a long ENT nasal speculum into the umbilical tract, closed.\n3. Open the speculum blades to retract the walls and light up the cavity (add a headlamp).\n4. Identify the foreign body under direct visualization.\n5. Remove it with bayonet or fine forceps; irrigate and re-inspect for retained material.\n\n**Equipment:** Long nasal speculum, forceps (bayonet/fine), headlamp, irrigation, local anesthetic.\n\n_Source: ALiEM Trick of the Trade \u2014 Umbilical foreign body removal (Chong/Raber)._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -26511,6 +26515,7 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
     { num: 38, text: 'Reynolds PM, et al. What is the optimal approach to infiltration and extravasation of nonchemotherapy medications? Cleve Clin J Med. 2023;90(5):292. See also APSF and pediatric extravasation guidelines on hyaluronidase (dilute to 15 units/mL, five 0.2 mL perimeter injections).' },
     { num: 39, text: 'ALiEM. Trick of the Trade: Unblocking the obstructed IV line (a saline-filled 3 mL syringe generates greater pressure per Pascal\u2019s principle; credit Matt Silver). aliem.com.' },
     { num: 40, text: 'Medscape. Intravenous Cannulation Technique (release and reapply the tourniquet, then \u201Cfloat\u201D the catheter through a valve by flushing saline while advancing). emedicine.medscape.com. See also The Procedure Guide \u2014 Peripheral IV access.' },
+    { num: 41, text: 'ALiEM. Trick of the Trade: Umbilical foreign body removal (long nasal speculum for direct visualization; Chong/Raber, UBC). aliem.com.' },
   ],
 };
 
@@ -26616,6 +26621,10 @@ const TRICKS_ENT_PAGE: InfoPage = {
       heading: 'Tissue-Adhesive on a Swab to Pull Out a Hard Ear Foreign Body',
       body: '**Accomplishes:** Extracts a smooth, hard, non-organic ear foreign body (a bead or plastic pellet) that forceps and cerumen loops just skid off of \u2014 without shoving it deeper toward the eardrum. [24]\n\n**How to:**\n1. Visualize the object under direct otoscopy or a video laryngoscope for magnification, and confirm it is smooth/hard and non-organic.\n2. Put a SMALL amount of tissue adhesive (Dermabond) on the wooden end of a cotton-tipped applicator (or a plastic ear pick with the tip cut flat for more surface contact).\n3. Under direct vision advance the glued end to just touch the surface of the object \u2014 do NOT overload the glue or it will drip and cement the object to the canal wall.\n4. Hold it in gentle contact for 20\u201330 seconds to let the glue set.\n5. Withdraw the applicator and the object together; re-examine the canal and tympanic membrane afterward.\n\n**Equipment:** Cotton-tipped applicator (wooden shaft) or plastic ear pick, tissue adhesive (Dermabond / 2-octyl cyanoacrylate), otoscope or video laryngoscope.\n\n_Source: ALiEM Trick of the Trade \u2014 Ear foreign body removal with tissue adhesive (Lin; Lew modification)._',
     },
+    {
+      heading: 'Cervical Collar to Hold the Jaw After a TMJ Reduction',
+      body: '**Accomplishes:** Prevents the frustrating early re-dislocation of a reduced anterior TMJ (temporomandibular joint) by holding the mouth closed, replacing the bulky, slip-prone Kerlix/ACE chin wrap. [25]\n\n**How to:**\n1. Reduce the anterior TMJ dislocation with your usual technique and confirm normal occlusion.\n2. Apply a semi-rigid cervical collar (Aspen or similar) instead of a chin-lift head bandage.\n3. Seat the collar so its chin piece pushes the chin gently upward, keeping the teeth together.\n4. Counsel the patient to avoid wide mouth opening and to eat a soft diet.\n5. Leave the collar on for support and arrange follow-up; especially useful for recurrent/lax-ligament dislocators.\n\n**Equipment:** Semi-rigid cervical collar (e.g., Aspen).\n\n_Source: ALiEM Trick of the Trade \u2014 Stabilizing mandibular relocations (Michelle Lin)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26642,6 +26651,7 @@ const TRICKS_ENT_PAGE: InfoPage = {
     { num: 22, text: 'ALiEM. Trick of the Trade: An improvised foreign body removal device (condom + 18G angiocatheter). aliem.com.' },
     { num: 23, text: 'ALiEM. Epistaxis Management in the Emergency Department: a helpful mnemonic (apply oxymetazoline directly onto the nasal tampon for vasoconstriction). aliem.com.' },
     { num: 24, text: 'ALiEM. Trick of the Trade: Ear foreign body removal with tissue adhesive on a cotton-tipped applicator (Michelle Lin; Edward Lew ear-pick modification). aliem.com.' },
+    { num: 25, text: 'Lin M. ALiEM. Trick of the Trade: Stabilizing mandibular relocations (semi-rigid cervical collar after TMJ reduction). aliem.com.' },
   ],
 };
 
@@ -26923,6 +26933,10 @@ const TRICKS_WOUND_PAGE: InfoPage = {
       heading: 'Vessel-Loop \u201CShoelace\u201D + Staples for a Wound That Won\u2019t Close',
       body: '**Accomplishes:** Gradually pulls together the gaping, retracted edges of a fasciotomy or other tense soft-tissue wound over days using the elastic stretch of skin, avoiding (or shrinking) a skin graft. [22]\n\n**How to:**\n1. Along each wound edge, place skin staples a couple centimeters apart, staggered so a staple on one side sits between two on the other.\n2. Anchor one end of a Silastic vessel loop to the staple at one end of the wound.\n3. Thread the vessel loop back and forth through the staples like lacing a shoe, running it from side to side down the length of the wound.\n4. Tension the loop just until the skin edges begin to draw together (do not force pale, blanched edges together \u2014 skin viscoelasticity does the work over time), and secure the free end to the end staple.\n5. Every 1\u20132 days, re-tension the loop a little more as the edges creep closer; when the edges meet, do formal delayed primary closure. A paper-clip on the end staple lets you re-tension without re-tying knots under tension.\n\n**Equipment:** Skin stapler, Silastic vessel loop(s), forceps, optional paper clip.\n\n_Source: Harris IA. Delayed primary closure using Silastic vessel loops and skin staples (the \u201Cshoelace\u201D technique). Ann Plast Surg 1999; paper-clip modification, Injury 2001._',
     },
+    {
+      heading: 'Tattoo the Vermillion Border Before You Numb the Lip',
+      body: '**Accomplishes:** Preserves the exact lip-margin landmark on a through-the-vermillion laceration, because local anesthetic and swelling erase it \u2014 even a 1\u20132 mm step-off at the vermillion border is a visible cosmetic defect. [23]\n\n**How to:**\n1. BEFORE injecting anesthetic or irrigating, take a fine-tip surgical marker.\n2. Place a precise ink dot on the vermillion-cutaneous border on each side of the wound.\n3. Now anesthetize (a mental or infraorbital block distorts the lip far less than local infiltration) and irrigate.\n4. Place your FIRST suture to align the two marked dots exactly, re-approximating the border.\n5. Close the rest of the wound in layers as needed.\n\n**Equipment:** Fine-tip surgical marking pen, 6-0 nylon (skin) / absorbable suture, block anesthetic.\n\n_Source: LacerationRepair.com (Brian Lin) \u2014 Lip lacerations: closing the gap._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26947,6 +26961,7 @@ const TRICKS_WOUND_PAGE: InfoPage = {
     { num: 20, text: 'ALiEM. Trick of the Trade: Steri-strip/suture combination for thin skin lacerations. aliem.com. Davis M, Nakhdjevani A, Lidder S. Suture/Steri-strip combination for the management of lacerations in thin-skinned individuals. J Emerg Med. 2011;40(3):322-323.' },
     { num: 21, text: 'ALiEM. Trick of the Trade: Tie-over dressing for scalp lacerations (long suture tails tied over a gauze bolster). aliem.com.' },
     { num: 22, text: 'Harris IA. Gradual closure of fasciotomy wounds using a vessel loop shoelace technique. Delayed primary closure using Silastic vessel loops and skin staples. Ann Plast Surg. 1999;42(3):327. See also the paper-clip modification to the vessel-loop shoelace technique. Injury. 2001.' },
+    { num: 23, text: 'Lin B. Lip lacerations \u2014 closing the gap (mark the vermillion border before anesthesia). lacerationrepair.com. See also Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine \u2014 facial lacerations.' },
   ],
 };
 
@@ -27000,6 +27015,10 @@ const TRICKS_CARDIOLOGY_PAGE: InfoPage = {
       heading: 'Pre-Charge the Defibrillator Before the Rhythm Check',
       body: '**Accomplishes:** Cuts peri-shock hands-off time by charging the defibrillator during ongoing compressions, eliminating the second CPR pause in ACLS and preserving coronary perfusion pressure. [11]\n\n**How to:**\n1. Assign a timekeeper to warn the team 15\u201330 seconds before each scheduled rhythm check.\n2. With chest compressions continuing UNINTERRUPTED, the defib operator charges the device in anticipation.\n3. At the 2-minute mark, pause compressions briefly and check the rhythm.\n4. If VF/pulseless VT, immediately deliver the already-charged shock and resume CPR \u2014 the hands-off interval is just the rhythm glance.\n5. If the rhythm is asystole/PEA, safely DISARM/dump the stored charge and resume compressions.\n\n**Equipment:** Manual defibrillator, designated timekeeper, cardiac monitor.\n\n_Source: ALiEM Trick of the Trade \u2014 Pre-charge the defibrillator (Sam Ghali)._',
     },
+    {
+      heading: 'Flip the Leads to Read a Dextrocardia ECG',
+      body: '**Accomplishes:** Unmasks an anterior MI that a standard left-sided ECG hides in true dextrocardia, by re-recording with mirror-image lead placement so the tracing reads normally. [12]\n\n**How to:**\n1. Spot the dextrocardia clues: negative QRS with an inverted P in lead I, an upright (positive) aVR, poor R-wave progression across the precordium, and right-axis deviation.\n2. First exclude simple left-arm/right-arm reversal, which mimics this but KEEPS normal precordial R-wave progression \u2014 only the limb leads look flipped in LA/RA reversal.\n3. If true dextrocardia is likely, swap the right-arm and left-arm electrodes.\n4. Move the precordial leads to the MIRROR positions on the right chest (V1R\u2013V6R): V1\u2013V2 swap sides, and V3\u2013V6 march across the right hemithorax.\n5. Record and read this reversed-lead ECG in the standard way \u2014 ischemia and infarct patterns now appear where you expect them.\n\n**Equipment:** Standard 12-lead ECG machine and electrodes (no extra hardware).\n\n_Source: LITFL ECG Library \u2014 Dextrocardia / limb-lead reversal._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
@@ -27013,6 +27032,7 @@ const TRICKS_CARDIOLOGY_PAGE: InfoPage = {
     { num: 9, text: 'ALiEM EM ReSCu Peds. Pediatric supraventricular tachycardia case \u2014 ice-water slurry to the face (diving reflex) as a vagal maneuver. aliem.com.' },
     { num: 10, text: 'ALiEM. Trick of the Trade: Valsalva maneuver by pressing on the abdomen. aliem.com.' },
     { num: 11, text: 'Ghali S. ALiEM. Trick of the Trade: Pre-charge the defibrillator to minimize peri-shock pause. aliem.com.' },
+    { num: 12, text: 'LITFL. ECG Library: Dextrocardia and limb-lead reversal (mirror-image right-sided lead placement to interpret the ECG). litfl.com.' },
   ],
 };
 
@@ -27522,6 +27542,10 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
       heading: 'Stockinette DIY Skyhook for Hand/Arm Elevation',
       body: '**Accomplishes:** Keeps a swollen or injured upper extremity continuously elevated from an IV pole, reducing edema in hand infections and post-reduction swelling without tying up staff or stacking pillows. [31]\n\n**How to:**\n1. Stretch stockinette fingertip-to-fingertip across the patient\u2019s body and cut to that length (size 2 for peds, 3 for an average adult, 4 for larger arms).\n2. Cut the stockinette lengthwise for about one arm\u2019s length (roughly the first third to half of the tube).\n3. Slip the injured arm into the uncut portion so the two cut tails hang front and back across the torso.\n4. Tie the cut tails under the opposite armpit like a \u201CMiss America\u201D sash to anchor it.\n5. Use the remaining uncut end to lift the hand/arm and tie it up to an IV pole at the desired height; cut a small window over any site that needs frequent exam.\n\n**Equipment:** Stockinette (size 2\u20134), trauma shears, IV pole.\n\n_Source: ALiEM Trick of the Trade \u2014 DIY skyhook for arm elevation (Silverio)._',
     },
+    {
+      heading: 'Parvin Gravity Hang for a Posterior Elbow Dislocation',
+      body: '**Accomplishes:** Reduces a posterior elbow dislocation single-handed with minimal force, letting gravity plus a hanging wrist weight fatigue the muscles \u2014 often with little or no procedural sedation. [32]\n\n**How to:**\n1. Place the patient PRONE on the gurney with the injured arm hanging straight off the edge, elbow flexed toward the floor; provide analgesia or an intra-articular block.\n2. Tuck a rolled towel or pillow under the distal humerus, just proximal to the elbow, as a fulcrum.\n3. Hang a 5\u201310 lb weight from the wrist (or apply gentle downward wrist traction) and wait several minutes for the muscles to relax.\n4. As the olecranon slides distally, gently guide it forward and feel for the reduction clunk; avoid forceful hyperextension.\n5. Recheck and document neurovascular status, then splint in a long-arm posterior splint at \u224890\u00B0 and obtain post-reduction films.\n\n**Equipment:** Gurney with an open edge, rolled towel/pillow, 5\u201310 lb hanging weight or wrist strap, long-arm posterior splint; optional intra-articular lidocaine.\n\n_Source: CoreEM \u2014 Elbow Dislocation (Parvin gravity method; Parvin, Arch Surg 1957)._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -27555,6 +27579,7 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
     { num: 29, text: 'ALiEM. Trick of the Trade: Ultrasound-guided injection for shoulder dislocation (Stone). aliem.com.' },
     { num: 30, text: 'ALiEM. Trick of the Trade: Ultrasound-guided ulnar nerve block for analgesia in boxer\u2019s (5th metacarpal) fracture reduction. aliem.com.' },
     { num: 31, text: 'Silverio LM. ALiEM. Trick of the Trade: DIY skyhook (stockinette) for hand and arm elevation. aliem.com.' },
+    { num: 32, text: 'CoreEM. Elbow Dislocation (Parvin gravity/weighted hanging-arm reduction technique). coreem.net. Parvin RW. Closed reduction of common shoulder and elbow dislocations without anesthesia. Arch Surg. 1957;75(6):972-975.' },
   ],
 };
 

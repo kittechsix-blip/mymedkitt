@@ -40,7 +40,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 47,
+        trickCount: 48,
         category: 'resus-procedures',
     },
     {
@@ -50,7 +50,7 @@ export const TRICK_SPECIALTIES = [
         color: '#6A1B9A',
         subtitle: 'Epistaxis packing tricks and nasal suction.',
         infoPageId: 'tricks-ent',
-        trickCount: 23,
+        trickCount: 24,
         category: 'head-neck',
     },
     {
@@ -90,7 +90,7 @@ export const TRICK_SPECIALTIES = [
         color: '#AD1457',
         subtitle: 'Glue repairs, gel for scalp lacs, bloodless fields.',
         infoPageId: 'tricks-wound',
-        trickCount: 22,
+        trickCount: 23,
         category: 'wounds-msk',
     },
     {
@@ -100,7 +100,7 @@ export const TRICK_SPECIALTIES = [
         color: '#C62828',
         subtitle: 'Rapid adenosine delivery and rhythm tricks.',
         infoPageId: 'tricks-cardiology',
-        trickCount: 11,
+        trickCount: 12,
         category: 'resus-procedures',
     },
     {
@@ -140,7 +140,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
         infoPageId: 'tricks-ortho',
-        trickCount: 31,
+        trickCount: 32,
         category: 'wounds-msk',
     },
 ];
