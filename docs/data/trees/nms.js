@@ -1,7 +1,7 @@
 // MedKitt - Neuroleptic Malignant Syndrome (NMS)
 // Recognition -> Levenson Criteria -> Treatment -> Differentiation -> Disposition
 // Evidence: Berman 2011, Strawn 2007, UpToDate
-// ~18 nodes
+// 17 nodes
 export const NMS_CRITICAL_ACTIONS = [
     { text: 'Stop ALL antipsychotics/dopamine blockers immediately', nodeId: 'nms-stop-agents' },
     { text: 'Lead-pipe rigidity + hyperthermia + antipsychotic = NMS', nodeId: 'nms-start' },

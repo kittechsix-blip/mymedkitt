@@ -1,7 +1,7 @@
 // MedKitt - Neuroleptic Malignant Syndrome (NMS)
 // Recognition -> Levenson Criteria -> Treatment -> Differentiation -> Disposition
 // Evidence: Berman 2011, Strawn 2007, UpToDate
-// ~18 nodes
+// 17 nodes
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
