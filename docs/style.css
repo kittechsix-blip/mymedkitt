@@ -770,6 +770,28 @@ body {
   display: none;
 }
 
+/* Right-edge fade affordance — signals there's more to scroll when toolbar
+   overflows horizontally (8+ items at 375px viewport). FlowRider 2026-05-28:
+   without this, hub users miss buttons past column ~5 because no visual cue
+   suggests horizontal scroll. The fade is a sticky pseudo-element so it
+   sits at the visible right edge regardless of scroll position. */
+.contextual-toolbar::after {
+  content: '';
+  position: sticky;
+  right: 0;
+  margin-left: -32px;
+  width: 32px;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-surface-card) 0%, transparent),
+    color-mix(in srgb, var(--color-surface-card) 90%, transparent)
+  );
+  pointer-events: none;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
 .contextual-toolbar__item {
   display: flex;
   flex-direction: column;
@@ -1294,6 +1316,29 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Expand tap targets to the 44px iOS/WCAG minimum without enlarging the
+   36px visual circles (keeps the header bar from crowding at 375px). The
+   transparent ::after overlay extends the hit area beyond the visible icon. */
+.consult-flow-header__back,
+.consult-flow-header__reset,
+.consult-flow-header__share,
+.consult-flow-header__home {
+  position: relative;
+}
+
+.consult-flow-header__back::after,
+.consult-flow-header__reset::after,
+.consult-flow-header__share::after,
+.consult-flow-header__home::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+}
+
 /* ===================================================================
    SEARCH BAR (Expandable)
    =================================================================== */
@@ -1339,6 +1384,20 @@ body {
   box-shadow: var(--shadow-sm);
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
+  position: relative;
+}
+
+/* Expand the 32px search toggle to the 44px iOS/WCAG minimum hit area
+   without enlarging the visible circle. Matches the header-button pattern
+   above (consult-flow-header__*::after). Flagged by Flow Rider 2026-06-18. */
+.consult-search__toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 
 .consult-search__input {
@@ -2669,6 +2728,9 @@ body.critical-actions-open {
 }
 
 .btn-text {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding: 10px 16px;
   background: transparent;
   color: var(--color-text-secondary);
@@ -2724,6 +2786,10 @@ body.critical-actions-open {
   max-width: 100%;
 }
 
+.info-modal-panel--wide {
+  max-width: min(1120px, calc(100vw - 32px));
+}
+
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -2749,8 +2815,8 @@ body.critical-actions-open {
 }
 
 .modal-close {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2862,6 +2928,142 @@ body.critical-actions-open {
   color: var(--color-text-secondary);
 }
 
+.info-page-comparison-wrap {
+  margin-top: 12px;
+  overflow-x: auto;
+  border: 1px solid rgba(31, 41, 55, 0.12);
+  border-radius: 8px;
+  background: #f8faf8;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.info-page-comparison-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--color-text-primary);
+}
+
+.info-page-comparison-table th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #143d31;
+  color: #fffaf3;
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.info-page-comparison-table th:first-child {
+  left: 0;
+  z-index: 3;
+  background: #7c3f21;
+}
+
+.info-page-comparison-table td {
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.45;
+  vertical-align: top;
+  border-right: 1px solid rgba(31, 41, 55, 0.08);
+  border-bottom: 1px solid rgba(31, 41, 55, 0.1);
+}
+
+.info-page-comparison-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 170px;
+  max-width: 210px;
+  color: #fffaf3;
+  font-weight: 800;
+  background: var(--comparison-accent);
+  box-shadow: 10px 0 18px rgba(15, 23, 42, 0.08);
+}
+
+.info-page-comparison-cell--stacked {
+  white-space: normal;
+}
+
+.info-page-comparison-drug-name {
+  display: block;
+  font-size: 13px;
+  line-height: 1.15;
+}
+
+.info-page-comparison-drug-dose {
+  display: block;
+  margin-top: 7px;
+  padding-top: 7px;
+  border-top: 1px solid rgba(255, 250, 243, 0.22);
+  font-size: 11.5px;
+  line-height: 1.3;
+  font-weight: 650;
+  color: rgba(255, 250, 243, 0.94);
+}
+
+.info-page-comparison-drug-note {
+  display: block;
+  margin-top: 4px;
+  font-size: 10.5px;
+  line-height: 1.25;
+  font-weight: 600;
+  color: rgba(255, 250, 243, 0.78);
+}
+
+.info-page-comparison-cell--drug .body-inline-link {
+  color: #fffaf3;
+  font-weight: 850;
+  text-decoration-color: rgba(255, 250, 243, 0.75);
+  text-decoration-thickness: 1.5px;
+}
+
+.info-page-comparison-drug-dose .body-inline-link {
+  color: #fff2bc;
+  font-weight: 800;
+  text-decoration-style: solid;
+}
+
+.info-page-comparison-table tr:nth-child(odd) {
+  --comparison-accent: #7c3f21;
+  --comparison-row-bg: #fbf0e8;
+}
+
+.info-page-comparison-table tr:nth-child(even) {
+  --comparison-accent: #0f4f3a;
+  --comparison-row-bg: #edf6f0;
+}
+
+.info-page-comparison-table tr:nth-child(odd) td:not(:first-child),
+.info-page-comparison-table tr:nth-child(even) td:not(:first-child) {
+  background: var(--comparison-row-bg);
+}
+
+.info-page-comparison-table td[data-column-key='onset'],
+.info-page-comparison-table td[data-column-key='duration'] {
+  width: 150px;
+  font-weight: 650;
+}
+
+.info-page-comparison-table td[data-column-key='indications'] {
+  width: 280px;
+}
+
+.info-page-comparison-table td[data-column-key='risks'] {
+  width: 360px;
+}
+
+.info-page-comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
 .info-page-citations {
   margin-top: 16px;
 }
@@ -2877,6 +3079,16 @@ body.critical-actions-open {
 /* ===================================================================
    REFERENCE TABLE
    =================================================================== */
+
+.reference-citations-inline summary {
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reference-citations-inline summary::-webkit-details-marker {
+  display: none;
+}
 
 .reference-citation-list {
   padding: 8px 0;
@@ -4055,6 +4267,7 @@ body.critical-actions-open {
 .calculator-copy-btn {
   display: block;
   width: 100%;
+  min-height: 44px;
   margin-top: 12px;
   padding: 10px 16px;
   background: rgba(184, 115, 51, 0.1);
@@ -4689,6 +4902,8 @@ body.critical-actions-open {
 .dashboard-hero-search__badge--drug { background: #2E7D32; }
 .dashboard-hero-search__badge--calculator { background: #6A1B9A; }
 .dashboard-hero-search__badge--category { background: #455A64; }
+.dashboard-hero-search__badge--node { background: #00838F; } /* teal — in-consult node hit */
+.dashboard-hero-search__badge--trick { background: #E65100; } /* amber — tricks of the trade */
 
 .dashboard-hero-search__label-wrap {
   display: flex;
@@ -5039,6 +5254,18 @@ body.critical-actions-open {
 
   .spotlight-modal {
     max-width: 640px;
+  }
+
+  /* Cap consult-flow reading width on desktop and center it.
+     Without this, the header/search/card-stack stretch edge-to-edge
+     (~1434px at 1440px viewport), producing uncomfortably long line
+     lengths for clinical text. (Flow Rider 2026-05-29) */
+  .consult-flow-header,
+  .consult-search,
+  .card-stack-container {
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -5429,6 +5656,261 @@ body.critical-actions-open {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.18);
   color: inherit;
+}
+
+
+/* ===================================================================
+ * Tricks of the Trade
+ * ================================================================ */
+
+/* ---- Dashboard hero card ---- */
+.dashboard-tricks-card {
+  position: relative;
+  display: block;
+  width: calc(100% - 32px);
+  margin: 12px 16px 12px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF3E0 100%);
+  border: 2px solid #E65100; /* warm amber — bench/workshop vibe */
+  border-radius: 16px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(230, 81, 0, 0.18);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.dashboard-tricks-card:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(230, 81, 0, 0.18);
+}
+.dashboard-tricks-card__badge {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: #E65100;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 3px 7px;
+  border-radius: 999px;
+}
+.dashboard-tricks-card__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+.dashboard-tricks-card__sub {
+  font-size: 13px;
+  color: var(--color-text-primary);
+  opacity: 0.75;
+  line-height: 1.4;
+  padding-right: 24px;
+}
+.dashboard-tricks-card__arrow {
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  font-size: 22px;
+  color: #E65100;
+  font-weight: 700;
+}
+
+/* ---- Tricks home page ---- */
+.tricks-home {
+  padding: 16px;
+  padding-top: calc(env(safe-area-inset-top, 0) + 12px);
+}
+.tricks-home__header {
+  margin-bottom: 18px;
+}
+.tricks-home__back {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  padding: 6px 0;
+  margin-bottom: 8px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.tricks-home__title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 4px 0 6px;
+}
+.tricks-home__subtitle {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  opacity: 0.75;
+  line-height: 1.45;
+  margin: 0;
+}
+.tricks-home__groups {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.tricks-home__category-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  opacity: 0.55;
+  margin: 0 0 10px;
+}
+.tricks-home__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+.tricks-home__category .tricks-home__grid {
+  margin-top: 0;
+}
+.trick-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 18px 20px 18px 64px;
+  border: none;
+  border-radius: 16px;
+  text-align: left;
+  cursor: pointer;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.trick-card:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+.trick-card__icon {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  font-size: 26px;
+  line-height: 1;
+}
+.trick-card__title {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.trick-card__sub {
+  font-size: 13px;
+  opacity: 0.92;
+  line-height: 1.4;
+  padding-right: 90px;
+}
+.trick-card__count {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  color: inherit;
+}
+
+/* ---- Tricks search box ---- */
+.tricks-search {
+  margin: 0 0 16px;
+}
+.tricks-search__input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid var(--border-color, #d8dee4);
+  border-radius: 10px;
+  background: var(--surface, #fff);
+  color: var(--text-primary, #1a1a1a);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.tricks-search__input:focus {
+  outline: none;
+  border-color: #E65100;
+  box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.15);
+}
+
+/* ---- Tricks directory (scannable list) ---- */
+.tricks-directory {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tricks-directory__empty {
+  color: var(--text-secondary, #6b7280);
+  font-size: 14px;
+  padding: 18px 4px;
+  text-align: center;
+}
+.trick-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  text-align: left;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-left: 4px solid #E65100;
+  border-radius: 10px;
+  background: var(--surface, #fff);
+  cursor: pointer;
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+}
+.trick-row:hover {
+  background: #FFF8F2;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.trick-row:active {
+  background: #FFEFE2;
+}
+.trick-row__main {
+  flex: 1;
+  min-width: 0;
+}
+.trick-row__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+  line-height: 1.3;
+}
+.trick-row__blurb {
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--text-secondary, #5b6470);
+  line-height: 1.35;
+}
+.trick-row__tag {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #E65100;
+  background: rgba(230, 81, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.trick-row__chevron {
+  flex: 0 0 auto;
+  font-size: 22px;
+  line-height: 1;
+  color: #c0673a;
 }
 
 

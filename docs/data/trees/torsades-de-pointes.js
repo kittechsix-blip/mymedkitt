@@ -7,7 +7,7 @@ export const TORSADES_DE_POINTES_CRITICAL_ACTIONS = [
     { text: 'Do NOT give amiodarone - it prolongs QT', nodeId: 'tdp-pulseless' },
     { text: 'Magnesium 2-4 g IV over 15 min (first-line)', nodeId: 'tdp-mg-protocol' },
     { text: 'Stop ALL QT-prolonging drugs immediately', nodeId: 'tdp-stop-drugs' },
-    { text: 'Correct hypokalemia to >4.5, hypomagnesemia to >2', nodeId: 'tdp-electrolytes' },
+    { text: 'Correct hypokalemia to >4.5, target serum Mg 3.5-5.0 mg/dL', nodeId: 'tdp-electrolytes' },
     { text: 'Overdrive pacing at 100-120 bpm if refractory', nodeId: 'tdp-overdrive' },
     { text: 'Isoproterenol infusion if no pacing available', nodeId: 'tdp-overdrive' },
 ];
