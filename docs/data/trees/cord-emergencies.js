@@ -170,7 +170,7 @@ export const CORD_EMERGENCIES_NODES = [
         module: 3,
         title: 'Nuchal Cord — Palpate After Head Delivers',
         body: '**Nuchal cord** — umbilical cord looped around the fetal neck. Present in **~20–35% of all deliveries**; most clinically insignificant. Tight nuchal cords (unable to slip over head) occur in ~6%. [8][9]\n\n**After the head delivers** (before shoulder delivery):\n• Sweep index finger around the neck to palpate for cord\n• Identify the number of loops (single vs multiple)\n• Assess tightness and whether it can be reduced\n\n**Collins classification (1997):** [13]\n• **Type A ("unlocked / free"):** cord loops such that the placental end crosses over the umbilical end — can spontaneously unwind with fetal movement; easier to slip over head\n• **Type B ("locked"):** umbilical end crosses over placental end creating a true-knot configuration — cannot spontaneously unwind; higher risk for fetal distress and stillbirth',
-        citation: [8, 13],
+        citation: [8, 9, 13],
         images: [
             {
                 src: 'images/cord-emergencies/nuchal-cord-type-a-free.gif',

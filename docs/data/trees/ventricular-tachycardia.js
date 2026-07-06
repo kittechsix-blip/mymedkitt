@@ -166,7 +166,7 @@ export const VENTRICULAR_TACHYCARDIA_NODES = [
         module: 4,
         title: 'Stable Monomorphic VT — IV Antiarrhythmic',
         body: '**Monomorphic stable VT — IV antiarrhythmic.**\n\n**First-line options:**\n• [Amiodarone](#/drug/amiodarone/stable vt) 150 mg IV over 10 min → 1 mg/min × 6h → 0.5 mg/min\n• [Procainamide](#/drug/procainamide/stable vt) 20–50 mg/min until arrhythmia suppresses, hypotension, QRS widens >50%, or max 17 mg/kg\n• [Lidocaine](#/drug/lidocaine/stable vt) 1–1.5 mg/kg → 0.5–0.75 mg/kg q5–10 min → infusion 1–4 mg/min\n\n**Procainamide may be preferred** (2023 AHA) — higher termination rates than amiodarone for hemodynamically stable VT [8].\n\n**⚠️ Avoid** if prolonged QTc at baseline → risk of Torsades.',
-        citation: [2, 3, 7, 8],
+        citation: [2, 3, 5, 7, 8],
         next: 'vt-mono-response',
         summary: 'Amiodarone 150mg/10min OR procainamide (may be preferred per 2023 AHA); avoid if prolonged QTc',
         safetyLevel: 'warning',

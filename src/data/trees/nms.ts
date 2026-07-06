@@ -202,6 +202,7 @@ export const NMS_NODES: DecisionNode[] = [
     module: 4,
     title: 'Disposition',
     body: '**Where does patient need to go?**',
+    citation: [1],
     options: [
       { label: 'ICU', description: 'Severe: temp >40 degC, intubated, rhabdo, organ failure', next: 'nms-icu-admit' },
       { label: 'Step-down/Telemetry', description: 'Moderate: requires monitoring and treatment', next: 'nms-floor-admit' },
