@@ -25933,6 +25933,10 @@ const TRICKS_NEURO_PAGE = {
             heading: 'Saline-Drop Corneal Reflex Test',
             body: '**Accomplishes:** Tests the corneal (blink) reflex (CN V afferent, CN VII efferent) in an obtunded patient without dragging a cotton wisp across the cornea and risking an abrasion. [8]\n\n**How to:**\n1. Grab a pre-filled sterile saline flush syringe (the kind used to flush IVs).\n2. From a few centimeters away, squirt a few drops of sterile saline directly onto the cornea.\n3. Watch for a reflexive blink; test each eye and compare.\n4. An intact blink confirms the CN V\u2013VII reflex arc without touching the eye.\n\n**Equipment:** Pre-filled sterile saline flush syringe.\n\n_Source: ALiEM Trick of the Trade \u2014 Corneal reflex test (saline-drop method)._',
         },
+        {
+            heading: 'Landmark Greater Occipital Nerve Block for Refractory Headache',
+            body: '**Accomplishes:** Aborts migraine, occipital neuralgia, and cluster headache at the bedside without opioids or ultrasound. A single landmark-based injection often gives relief that outlasts the anesthetic. [9]\n\n**How to:**\n1. Seat the patient with the head flexed forward (palms supporting the face) or prone over a chest pillow.\n2. Palpate the external occipital protuberance (OP) and the mastoid process (MP); mark the point one-third of the way from the OP toward the MP.\n3. Confirm there is no palpable occipital-artery pulse at your target.\n4. Prep with chlorhexidine or alcohol; draw up 2\u20134 mL of 0.25\u20130.5% bupivacaine or 1\u20132% lidocaine into a 25\u201327g 1.5-inch needle.\n5. Insert from an inferior angle; if you hit bone, withdraw slightly and aspirate to confirm you are not intravascular.\n6. Inject 1\u20133 mL per side, fanning slightly across tissue planes.\n7. Reassess posterior-scalp numbness at ~5 min (lidocaine) or 10\u201315 min (bupivacaine).\n\n**Equipment:** 5 mL syringe with draw needle, 25\u201327g 1.5-inch injection needle, bupivacaine or lidocaine, chlorhexidine/alcohol.\n\n_Source: ALiEM \u2014 Greater occipital nerve block in the emergency department._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -25943,6 +25947,7 @@ const TRICKS_NEURO_PAGE = {
         { num: 6, text: 'ALiEM. Trick of the Trade: Sphenopalatine ganglion block for treatment of primary headaches. aliem.com.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Gaze testing using \u201Cselfie mode\u201D on your smartphone camera. aliem.com. Bortolon C, et al. 2017.' },
         { num: 8, text: 'ALiEM. Trick of the Trade: Corneal reflex test (sterile saline-drop method). aliem.com.' },
+        { num: 9, text: 'ALiEM. Greater occipital nerve block in the emergency department. aliem.com.' },
     ],
 };
 const TRICKS_TOX_PAGE = {
@@ -25971,6 +25976,10 @@ const TRICKS_TOX_PAGE = {
             heading: 'Nebulized Naloxone for a Gentle, IV-Free Opioid Reversal',
             body: '**Accomplishes:** Reverses opioid-induced respiratory depression through a face mask in a patient you cannot get an IV on (common in injection drug users), giving a steady, self-titrating dose instead of an abrupt push. [5]\n\n**How to:**\n1. Use for a spontaneously breathing patient with depressed but present respirations \u2014 NOT for frank apnea/arrest, which needs full-dose naloxone and bag-mask ventilation.\n2. Draw up 1\u20132 mg of naloxone.\n3. Add normal saline to reach a total volume of 3\u20135 mL in a standard nebulizer cup.\n4. Run it on a simple face mask at 6\u20138 L/min of oxygen and let the patient breathe the mist.\n5. It self-titrates \u2014 as the patient wakes they pull the mask off, limiting overshoot; watch for re-sedation and step up to IV/IM/IN naloxone if breathing does not improve.\n\n**Equipment:** Naloxone, normal saline, nebulizer cup + face mask, oxygen source.\n\n_Source: ALiEM Trick of the Trade \u2014 Nebulized naloxone; Mycyk MB, et al. J Emerg Med 2003._',
         },
+        {
+            heading: 'Sodium Bicarb Ampule as a Stand-In for 3% Saline in Crashing Hyponatremia',
+            body: '**Accomplishes:** Delivers immediate hypertonic sodium from the crash cart when 3% saline is not at the bedside. A bicarb ampule can reverse acute hyponatremic seizures/coma in seconds while pharmacy sends the 3% NaCl. [6]\n\n**How to:**\n1. Use ONLY for a seizing or obtunded patient with confirmed/strongly suspected ACUTE symptomatic hyponatremia \u2014 not chronic asymptomatic hyponatremia (rapid correction there risks osmotic demyelination).\n2. Grab a 50 mL ampule of sodium bicarbonate 8.4% off the crash cart (50 mL = 50 mEq Na, comparable to ~100 mL of 3% saline at 51 mEq).\n3. Push 1 ampule slowly IV over 5\u201310 minutes.\n4. Recheck serum sodium.\n5. If Na has risen <4\u20136 mEq/L and symptoms persist, repeat with another ampule OR switch to 100 mL of 3% NaCl once it arrives.\n6. Cap the total acute rise at the standard limit (~6\u20138 mEq/L in 24 h) and hand off to the definitive hyponatremia plan.\n\n**Equipment:** Sodium bicarbonate 8.4% 50 mL ampule, IV access, stat/point-of-care electrolytes.\n\n_Source: ALiEM Trick of the Trade \u2014 Sodium bicarbonate for acute symptomatic hyponatremia._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/. (HaVOC trial.)' },
@@ -25978,6 +25987,7 @@ const TRICKS_TOX_PAGE = {
         { num: 3, text: 'ALiEM. Tricks of the Trade: Calcium gel for hydrofluoric acid burns (calcium gluconate + water-soluble lubricant in a glove). aliem.com.' },
         { num: 4, text: 'Beadle KL, Helbling AR, Love SL, et al. Isopropyl Alcohol Nasal Inhalation for Nausea in the Emergency Department: A Randomized Controlled Trial. Ann Emerg Med. 2016;68(1):1-9. See also Core EM review.' },
         { num: 5, text: 'ALiEM. Trick of the Trade: Nebulized naloxone. aliem.com. Mycyk MB, et al. Nebulized naloxone gently and effectively reverses methadone intoxication. J Emerg Med. 2003;24(2):185-187.' },
+        { num: 6, text: 'ALiEM. Trick of the Trade: Sodium bicarbonate for acute symptomatic hyponatremia. aliem.com.' },
     ],
 };
 const TRICKS_GENERAL_PAGE = {
@@ -26058,6 +26068,10 @@ const TRICKS_GENERAL_PAGE = {
             heading: 'Pure Rotation to Remove an Embedded Tick Intact',
             body: '**Accomplishes:** Extracts an attached tick with its mouthparts intact \u2014 rotating rather than yanking is more reliable at pulling the whole tick out, reducing retained mouthparts and later granuloma or infection. [18]\n\n**How to:**\n1. Grip the tick as close to the skin as possible, at its head/thorax, with fine-tipped forceps or a hemostat \u2014 do NOT squeeze the swollen abdomen (that can make it regurgitate).\n2. Do not pull upward or apply traction to the skin.\n3. Rotate the tick about two full revolutions around the long axis of its body; the backward-pointing \u201Cdenticles\u201D on its mouthparts release better to twisting (shear) than to pulling (tension).\n4. Lift the tick straight off once it disengages; inspect the site for any retained mouthparts.\n5. Skip folk methods \u2014 petroleum jelly, nail polish, a hot match, or alcohol are NOT advised, since they can trigger regurgitation and raise infection-transmission risk. Clean the site and give tick-borne-illness precautions.\n\n**Equipment:** Fine-tipped forceps or a fine hemostat (or a commercial tick-removal tool).\n\n_Source: Needham GR. A Novel Technique to Remove the Common Dog Tick (rotation method). Am Fam Physician 1998; StatPearls \u2014 Wound Foreign Body Removal._',
         },
+        {
+            heading: 'Chin-Tuck Double-Swallow for an Esophageal Food Bolus',
+            body: '**Accomplishes:** Clears an impacted esophageal food bolus at the bedside and may avert transfer for endoscopy. A borrowed dysphagia-rehab swallowing maneuver reopens the esophagus with no drugs and no scope. [19]\n\n**How to:**\n1. First confirm the patient is protecting the airway and handling secretions \u2014 a complete obstruction with drooling/inability to swallow saliva needs urgent ENT/GI, NOT this maneuver.\n2. Hand the patient a glass of water.\n3. Have them stand fully upright.\n4. Instruct them to flex the neck and tuck the chin firmly to the chest.\n5. Have them take a swallow of water, and the instant it starts down, immediately initiate a SECOND swallowing effort (the \u201Cdouble swallow\u201D).\n6. If the bolus passes, confirm they tolerate PO; if not, proceed to standard medical management (e.g., glucagon trial per local practice) and GI consultation.\n\n**Equipment:** A glass of water (no medication or equipment).\n\n_Source: Barden & Schwartz. Esophageal food-bolus impaction cleared with the upright-posture, chin-tuck, double-swallow maneuver. Clin Pract Cases Emerg Med 2024._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26078,6 +26092,7 @@ const TRICKS_GENERAL_PAGE = {
         { num: 16, text: 'ALiEM. Trick of the Trade: Toe paronychia splinting (18-gauge angiocatheter sheath as a nail splint; Stella Yiu). aliem.com.' },
         { num: 17, text: 'ALiEM. Trick of the Trade: Using a funnel for NG tubes (60 mL syringe barrel or IV-bag gravity delivery of activated charcoal; Michelle Lin). aliem.com.' },
         { num: 18, text: 'Needham GR. A Novel Technique to Remove the Common Dog Tick (mechanical rotation of ~2 revolutions, no traction). Am Fam Physician. 1998;58(2):354. See also StatPearls \u2014 Wound Foreign Body Removal (NCBI Bookshelf NBK554447).' },
+        { num: 19, text: 'Barden CB, Schwartz DT. Esophageal Obstruction from Food Bolus Impaction Successfully Managed with the \u201CUpright Posture, Chin Tuck, Double Swallow\u201D Maneuver: A Case Report. Clin Pract Cases Emerg Med. 2024. PMC11661253.' },
     ],
 };
 const DENTAL_EXTRACTION_STEPS_PAGE = {
@@ -26398,6 +26413,14 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Parvin Gravity Hang for a Posterior Elbow Dislocation',
             body: '**Accomplishes:** Reduces a posterior elbow dislocation single-handed with minimal force, letting gravity plus a hanging wrist weight fatigue the muscles \u2014 often with little or no procedural sedation. [32]\n\n**How to:**\n1. Place the patient PRONE on the gurney with the injured arm hanging straight off the edge, elbow flexed toward the floor; provide analgesia or an intra-articular block.\n2. Tuck a rolled towel or pillow under the distal humerus, just proximal to the elbow, as a fulcrum.\n3. Hang a 5\u201310 lb weight from the wrist (or apply gentle downward wrist traction) and wait several minutes for the muscles to relax.\n4. As the olecranon slides distally, gently guide it forward and feel for the reduction clunk; avoid forceful hyperextension.\n5. Recheck and document neurovascular status, then splint in a long-arm posterior splint at \u224890\u00B0 and obtain post-reduction films.\n\n**Equipment:** Gurney with an open edge, rolled towel/pillow, 5\u201310 lb hanging weight or wrist strap, long-arm posterior splint; optional intra-articular lidocaine.\n\n_Source: CoreEM \u2014 Elbow Dislocation (Parvin gravity method; Parvin, Arch Surg 1957)._',
         },
+        {
+            heading: 'Gravity-Assisted Reduction of an Ankle Fracture-Dislocation (GARA)',
+            body: '**Accomplishes:** Reduces a displaced ankle fracture-dislocation using the leg\u2019s own weight, no procedural sedation. It cuts the team from ~4 people to 2 and lets gravity do the reduction while you get the plaster ready. [33]\n\n**How to:**\n1. Give adequate analgesia (an ankle hematoma block often suffices; IV sedation is not required).\n2. Position by direction of displacement: for the common externally-rotated LATERAL displacement, lay the patient on their side with the injured ankle facing UP; for POSTERIOR displacement, place the patient prone.\n3. Let the lower leg hang off the end of the bed (or rest the thigh on a firm support) so gravity applies sustained axial traction to the ankle.\n4. Wait ~5\u201310 minutes in a cooperative patient \u2014 the reduction occurs gradually as the muscles fatigue.\n5. Apply a molded plaster/stirrup splint with only very gentle manipulation while gravity holds the alignment; a single assistant is optional.\n6. Obtain post-reduction films and recheck neurovascular status.\n\n**Equipment:** Analgesia (hematoma-block kit), exam table with an open end, bolsters/supports, plaster or fiberglass splint material.\n\n_Source: Kumar et al. \u2014 Gravity-Assisted Reduction of Ankle (GARA) fracture-dislocations; Foot Ankle Surg comparative study._',
+        },
+        {
+            heading: 'Towel-Clip Reduction of a Posterior Sternoclavicular Dislocation',
+            body: '**Accomplishes:** Pulls a posteriorly displaced medial clavicle off the mediastinal structures (trachea, esophagus, great vessels) it may be compressing, when abduction-traction alone fails. [34]\n\n**How to:**\n1. First get a CT chest (with angiography) BEFORE manipulating \u2014 a posterior dislocation is a potential vascular/airway emergency; have surgical backup available.\n2. Reduce only within ~10 days of injury (older injuries go to the OR).\n3. Under procedural sedation, place the patient supine with a bolster between the scapulae.\n4. Try abduction-traction first: abduct the ipsilateral arm to ~90\u00B0 and apply steady traction to translate the medial clavicle anteriorly.\n5. If that fails, prep the skin sterile, percutaneously grasp the medial clavicle with a sterile towel clip, and pull ANTERIORLY until it reduces with a clunk.\n6. Apply a figure-of-eight splint for ~6 weeks; observe/admit given proximity to vital structures.\n\n**Equipment:** Towel clip, procedural sedation kit, interscapular bolster, figure-of-eight splint, CT angiography access, sterile prep.\n\n_Source: ALiEM \u2014 Sternoclavicular joint dislocations: diagnosis and treatment._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -26432,6 +26455,8 @@ const TRICKS_ORTHO_PAGE = {
         { num: 30, text: 'ALiEM. Trick of the Trade: Ultrasound-guided ulnar nerve block for analgesia in boxer\u2019s (5th metacarpal) fracture reduction. aliem.com.' },
         { num: 31, text: 'Silverio LM. ALiEM. Trick of the Trade: DIY skyhook (stockinette) for hand and arm elevation. aliem.com.' },
         { num: 32, text: 'CoreEM. Elbow Dislocation (Parvin gravity/weighted hanging-arm reduction technique). coreem.net. Parvin RW. Closed reduction of common shoulder and elbow dislocations without anesthesia. Arch Surg. 1957;75(6):972-975.' },
+        { num: 33, text: 'Kumar V, et al. A novel technique for Gravity Assisted Reduction of Ankle (GARA) fracture dislocations. PMC7705148. See also comparative study, Foot Ankle Surg 2022.' },
+        { num: 34, text: 'ALiEM. Sternoclavicular joint dislocations: diagnosis and treatment (towel-clip anterior reduction of posterior SC dislocation). aliem.com.' },
     ],
 };
 // ===================================================================

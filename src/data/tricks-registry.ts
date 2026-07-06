@@ -145,7 +145,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#4527A0',
     subtitle: 'Bedside CN testing, BPPV maneuvers, and refractory migraine rescue.',
     infoPageId: 'tricks-neuro',
-    trickCount: 7,
+    trickCount: 8,
     category: 'head-neck',
   },
   {
@@ -155,7 +155,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#37474F',
     subtitle: 'Antiemetic and toxidrome management pearls.',
     infoPageId: 'tricks-tox',
-    trickCount: 5,
+    trickCount: 6,
     category: 'general-tox',
   },
   {
@@ -165,7 +165,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#455A64',
     subtitle: 'Fast bedside screens, dosing pearls, communication.',
     infoPageId: 'tricks-general',
-    trickCount: 18,
+    trickCount: 19,
     category: 'general-tox',
   },
   {
@@ -175,7 +175,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#5D4037',
     subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
     infoPageId: 'tricks-ortho',
-    trickCount: 32,
+    trickCount: 34,
     category: 'wounds-msk',
   },
 ];
