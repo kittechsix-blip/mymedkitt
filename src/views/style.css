@@ -246,11 +246,6 @@ body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   flex: 1;
-  /* Cap the reading column so clinical text doesn't run edge-to-edge in very
-     long lines on desktop; centered. Mobile is unaffected (viewport < 720px). */
-  max-width: 720px;
-  margin-inline: auto;
-  width: 100%;
 }
 
 .decision-card {
