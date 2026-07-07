@@ -2,7 +2,7 @@
 // Evidence-based SVT management: vagal maneuvers, adenosine, rate control, cardioversion
 // Types: AVNRT, AVRT, atrial flutter, atrial tachycardia, WPW considerations
 // 7 modules: Initial → Vagal → Adenosine → Rate Control → Unstable → WPW → Disposition
-// 28 nodes total.
+// 19 nodes total.
 export const SVT_CRITICAL_ACTIONS = [
     { text: 'Unstable SVT (hypotension, AMS, chest pain, pulmonary edema) → synchronized cardioversion', nodeId: 'svt-unstable' },
     { text: 'Modified Valsalva (REVERT): 43% conversion vs 17% standard (NNT 3.8)', nodeId: 'svt-valsalva' },

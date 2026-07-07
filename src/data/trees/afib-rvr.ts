@@ -1,7 +1,7 @@
 // MedKitt — A-Fib RVR (Atrial Fibrillation with Rapid Ventricular Response) Consult
 // Initial assessment → hemodynamic stability → rate/rhythm control → anticoagulation → disposition.
 // 6 modules: Initial Assessment → Unstable Pathway → Rate Control → Refractory → Anticoagulation → Disposition
-// 20 nodes total.
+// 24 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
@@ -66,6 +66,7 @@ export const AFIB_RVR_NODES: DecisionNode[] = [
     module: 1,
     title: 'Ejection Fraction Assessment',
     body: 'Does the patient have reduced ejection fraction (EF ≤40%)?\n\nThis is critical for rate control agent selection. Calcium channel blockers (diltiazem, verapamil) are **contraindicated** in HFrEF (Class 3: Harm).\n\nCheck:\n• Prior echocardiogram\n• Known history of HFrEF or systolic heart failure\n• Bedside echo if available and EF unknown',
+    citation: [1],
     options: [
       {
         label: 'EF ≤40% or HFrEF',

@@ -1,7 +1,7 @@
 // MedKitt — Difficult Airway / Bougie-First Intubation
 // Pre-assessment → Approach Decision → Bougie Technique → Confirmation → Failed Airway → Surgical Airway.
 // 6 modules: Pre-Assessment → Approach → Bougie Technique → Confirmation → Failed Airway → Surgical Airway
-// 28 nodes total.
+// 27 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { CriticalAction } from '../../services/tree-service.js';

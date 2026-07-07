@@ -1,7 +1,7 @@
 // MedKitt — Difficult Airway / Bougie-First Intubation
 // Pre-assessment → Approach Decision → Bougie Technique → Confirmation → Failed Airway → Surgical Airway.
 // 6 modules: Pre-Assessment → Approach → Bougie Technique → Confirmation → Failed Airway → Surgical Airway
-// 28 nodes total.
+// 27 nodes total.
 export const DIFFICULT_AIRWAY_BOUGIE_CRITICAL_ACTIONS = [
     { text: 'Assess difficult airway with LEMON criteria before induction', nodeId: 'dab-lemon' },
     { text: 'Have surgical airway kit at bedside before paralysis', nodeId: 'dab-start' },
