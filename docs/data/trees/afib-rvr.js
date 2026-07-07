@@ -9,8 +9,8 @@ export const AFIB_RVR_CRITICAL_ACTIONS = [
     { text: 'CHA2DS2-VASc ≥2 → anticoagulation regardless of rhythm strategy', nodeId: 'afib-cha2ds2vasc' },
     { text: 'New AFib <48h → may cardiovert if no thrombus on TEE, or rate control + anticoagulation + cardiology', nodeId: 'afib-onset-assessment' },
     { text: 'Do NOT cardiovert AFib >48h without TEE or 3 weeks anticoagulation (stroke risk)', nodeId: 'afib-cha2ds2vasc' },
-    { text: 'Metoprolol may worsen hypotension in decompensated CHF - prefer diltiazem or amiodarone', nodeId: 'afib-hfref-drugs' },
-    { text: 'Digoxin onset 2-6 hours - inadequate for acute RVR, use as adjunct for CHF patients', nodeId: 'afib-refractory-dig' },
+    { text: 'HFrEF (EF ≤40%): CCBs contraindicated (Class 3 Harm) - metoprolol first-line, amiodarone or digoxin if hypotensive', nodeId: 'afib-hfref-drugs' },
+    { text: 'Digoxin onset ~3 hours - inadequate for acute RVR, use as adjunct for CHF patients', nodeId: 'afib-refractory-dig' },
 ];
 export const AFIB_RVR_NODES = [
     // =====================================================================
@@ -21,7 +21,7 @@ export const AFIB_RVR_NODES = [
         type: 'info',
         module: 1,
         title: 'A-Fib RVR: Initial Assessment',
-        body: '[A-Fib RVR Management Steps](#/info/afib-summary) \u2014 quick-reference for rate control, cardioversion, and anticoagulation.\n\nAtrial fibrillation with rapid ventricular response (RVR) is characterized by an irregularly irregular rhythm with a ventricular rate typically 120\u2013180 bpm. Confirm with 12-lead ECG.\n\nCOMMON PRECIPITANTS\n\u2022 Electrolyte abnormalities (K\u207a, Mg\u00b2\u207a)\n\u2022 Sepsis / infection\n\u2022 Pulmonary embolism\n\u2022 Thyrotoxicosis\n\u2022 Alcohol use / withdrawal\n\u2022 Pain / agitation\n\u2022 Respiratory failure / hypoxia\n\u2022 Underlying cardiac disease (valvular, ischemic, HF)\n\nAlways treat underlying causes alongside rate control. A-Fib RVR is often a symptom of another process \u2014 rate control alone may be insufficient if the precipitant is not addressed.',
+        body: '[A-Fib RVR Management Steps](#/info/afib-summary) \u2014 quick-reference for rate control, cardioversion, and anticoagulation.\n\nAtrial fibrillation with rapid ventricular response (RVR) is characterized by an irregularly irregular rhythm with a ventricular rate typically 120\u2013180 bpm. Confirm with 12-lead ECG.\n\nCOMMON PRECIPITANTS\n\u2022 Electrolyte abnormalities (K\u207a, Mg\u00b2\u207a)\n\u2022 Sepsis / infection\n\u2022 Pulmonary embolism\n\u2022 Thyrotoxicosis\n\u2022 Alcohol use / withdrawal\n\u2022 Pain / agitation\n\u2022 Respiratory failure / hypoxia\n\u2022 Underlying cardiac disease (valvular, ischemic, HF)\n\nINITIAL WORKUP (all patients)\n\u2022 12-lead ECG\n\u2022 Electrolytes (K\u207a, Mg\u00b2\u207a)\n\u2022 TSH \u2014 thyrotoxicosis is a critical reversible precipitant\n\u2022 Troponin \u2014 screen for ACS as precipitant\n\u2022 Consider PE workup if clinical suspicion\n\nAlways treat underlying causes alongside rate control. A-Fib RVR is often a symptom of another process \u2014 rate control alone may be insufficient if the precipitant is not addressed.',
         images: [{ src: 'images/afib-rvr/afib-ecg.jpg', alt: 'Atrial fibrillation ECG — two lead rhythm strip', caption: 'AFib: irregularly irregular rhythm, absent P waves, fibrillatory baseline (Wikimedia Commons, CC BY-SA 4.0)' }],
         citation: [1, 3],
         next: 'afib-stability',
