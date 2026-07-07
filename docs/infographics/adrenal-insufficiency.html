@@ -1,0 +1,428 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adrenal Crisis: Steroids Now, Diagnose Later — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle]{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig>
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Adrenal Crisis: Steroids Now, Diagnose Later</h1>
+  <p class="ig-use">Adults and children with suspected adrenal insufficiency or adrenal crisis in the ED. Toggle the patient's state to drive the recommendation. Excludes definitive endocrine management — arrange endocrine follow-up for every new diagnosis.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ <strong>Failure to stress-dose is the #1 cause of adrenal crisis.</strong> Double oral hydrocortisone for fever &gt;38°C, triple for &gt;39°C; give 100 mg IM and go to the ED if vomiting prevents oral intake.</div><div class="ig-scope-item">⚠ <strong>Give fluids and draw cortisol/ACTH before steroids — but never delay treatment for labs.</strong> A random cortisol &lt;18 μg/dL during physiologic stress supports AI; &gt;18 μg/dL makes it very unlikely.</div><div class="ig-scope-item">⚠ <strong>Hydrocortisone 100 mg IV/IM immediately, then 200 mg/24h.</strong> At ≥50 mg/day of hydrocortisone the mineralocorticoid effect is adequate, so no fludrocortisone is needed in the acute phase. Use dexamethasone if the diagnosis is uncertain (does not interfere with the cortisol assay).</div><div class="ig-scope-item">⚠ <strong>Adrenal crisis can be the first presentation of undiagnosed AI in up to 50% of cases.</strong> Maintain high suspicion in unexplained shock refractory to fluids and vasopressors.</div></div>
+<div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-weight">Weight <span class="ig-unit">(kg)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="weight" min="1" max="300" step="1" value="70" aria-label="Weight slider">
+<input type="number" id="ig-num-weight" data-input="weight" min="1" max="300" step="1" value="70" inputmode="decimal" aria-label="Weight exact value">
+</div>
+<div class="ig-warn" data-warn-for="weight" hidden role="alert">Value outside 1–300 kg — confirm.</div>
+</div><div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="crisis" aria-checked="true">In adrenal crisis (hemodynamic instability)</button><button type="button" class="ig-toggle" role="switch" data-toggle="pai" aria-checked="false">Primary AI (hyperpigmentation / hyperkalemia)</button><button type="button" class="ig-toggle" role="switch" data-toggle="peds" aria-checked="false">Pediatric patient</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<main class="ig-main"><section class="ig-section"><h2 class="ig-h2">1 · Recognize the crisis</h2><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Adrenal crisis is a medical emergency</div><div>Acute hemodynamic deterioration — <strong>SBP ≤100 mmHg or ≥20 mmHg below baseline</strong> — that resolves within 1–2 hours of parenteral hydrocortisone. Mortality is <strong>0.5 per 100 patient-years</strong> in known-AI patients, and crisis is the *first* presentation of undiagnosed AI in up to <strong>50%</strong> of cases.<a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref4" class="ig-ref">[4]</a></div></div><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Feature</th><th>Detail</th></tr></thead><tbody><tr class="ig-row t-danger"><td class="hero">Hemodynamic collapse</td><td>SBP ≤100 mmHg or ≥20 mmHg below baseline; shock refractory to fluids</td></tr><tr class="ig-row t-caution"><td class="hero">Hyponatremia</td><td>Present in 84% of cases</td></tr><tr class="ig-row t-caution"><td class="hero">Hypoglycemia</td><td>Common — check glucose early, treat with dextrose</td></tr><tr class="ig-row t-caution"><td class="hero">Hyperkalemia</td><td>Primary AI only (mineralocorticoid deficiency)</td></tr><tr class="ig-row"><td class="hero">Other</td><td>Fever, abdominal pain, nausea/vomiting, altered mental status</td></tr></tbody></table></div><p class="ig-block ig-text"><strong>Infection is the #1 precipitant</strong> — viral in children, bacterial in adults. Other triggers: trauma or surgery without stress dosing, abrupt steroid withdrawal, CYP3A4 inducers (rifampin, phenytoin, carbamazepine), and GI illness with vomiting. ~10% of crises have no identifiable precipitant.<a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref7" class="ig-ref">[7]</a></p></section><section class="ig-section"><h2 class="ig-h2">2 · What to do now</h2><p class="ig-block ig-text">Set the toggles above to match your patient. Exactly one instruction below applies — <strong>crisis overrides everything else.</strong></p><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Adrenal crisis — treat immediately</div><div>1. <strong>IV access · 1 L NS bolus</strong>, repeat PRN; add dextrose if hypoglycemic.<br>2. <strong>Draw cortisol + ACTH before steroids if possible — do NOT delay.</strong><br>3. <strong><a href="#/drug/hydrocortisone/adrenal crisis" target="_top" class="ig-link">Hydrocortisone</a> 100 mg IV/IM now</strong>, then 200 mg/24h.<br>4. Find and treat the precipitant (infection is #1). Reassess hemodynamics at 1–2 h.<a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref7" class="ig-ref">[7]</a></div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;pai&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Stable Primary AI — replace both hormones</div><div>Glucocorticoid <strong>and</strong> mineralocorticoid: <a href="#/drug/hydrocortisone/maintenance" target="_top" class="ig-link">Hydrocortisone</a> 15–25 mg PO daily (2/3 AM, 1/3 early afternoon) <strong>plus</strong> <a href="#/drug/fludrocortisone/adrenal maintenance" target="_top" class="ig-link">Fludrocortisone</a> 50–200 mcg PO daily. Hyperpigmentation and hyperkalemia point to PAI. Check 21-OH antibodies, CT adrenals, and TSH — treat cortisol <strong>before</strong> thyroxine.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref8" class="ig-ref">[8]</a></div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;pai&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Stable Secondary/Tertiary AI — glucocorticoid only</div><div>No hyperpigmentation, no hyperkalemia (RAAS axis intact) → <strong>no fludrocortisone needed.</strong> <a href="#/drug/hydrocortisone/maintenance" target="_top" class="ig-link">Hydrocortisone</a> 15–25 mg PO daily. Tertiary (steroid-induced) AI is the most common form overall; HPA-axis recovery takes 6–12 months after stopping steroids. Screen for other pituitary deficiencies in SAI.<a href="#cite-ref11" class="ig-ref">[11]</a><a href="#cite-ref13" class="ig-ref">[13]</a></div></div></div></section><section class="ig-section"><h2 class="ig-h2">3 · Emergency steroid replacement</h2><div class="ig-cond" data-whennode="n-hc"><div class="ig-block ig-dose"><div class="ig-dose-drug">Hydrocortisone (adult adrenal crisis)</div><div class="ig-dose-val">100 mg IV/IM bolus, then 200 mg/24h</div><div class="ig-dose-route">IV/IM</div><div class="ig-dose-note">Continuous infusion preferred, or 50 mg IV q6h. Taper to oral over 1–3 days as hemodynamics stabilize. At ≥50 mg/day no fludrocortisone is needed.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;peds&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><p class="ig-block ig-text"><strong>Pediatric bolus is weight-based at <a href="#/drug/hydrocortisone/pediatric adrenal crisis" target="_top" class="ig-link">2 mg/kg</a> (≈50 mg/m², max 100 mg).</strong> Toggle *Pediatric* on and enter weight:</p></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;peds&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="n-hc"><div class="ig-block ig-stat t-danger" data-calc="hydrocortisoneapproximation50mgm"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">Pediatric hydrocortisone bolus (2 mg/kg, max 100 mg)</span></div></div><div class="ig-cond" data-whennode="n-hc"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">If the diagnosis is uncertain</div><div>Give <a href="#/drug/dexamethasone/adrenal crisis" target="_top" class="ig-link">Dexamethasone</a> 4 mg IV instead — it does <strong>not</strong> interfere with the cortisol assay, so you can still run a cosyntropin stimulation test afterward.<a href="#cite-ref7" class="ig-ref">[7]</a></div></div></div></section><section class="ig-section"><h2 class="ig-h2">4 · Classify the type</h2><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Type</th><th>Lesion</th><th>ACTH</th><th>Hyperpigment</th><th>HyperK</th><th>Fludrocortisone</th></tr></thead><tbody><tr class="ig-row t-danger"><td class="hero">Primary (Addison)</td><td>Adrenal destruction</td><td>High (&gt;2× ULN)</td><td>Yes</td><td>Yes</td><td>Required</td></tr><tr class="ig-row t-caution"><td class="hero">Secondary</td><td>Pituitary ACTH deficiency</td><td>Low / normal</td><td>No</td><td>No</td><td>Not needed</td></tr><tr class="ig-row t-neutral"><td class="hero">Tertiary</td><td>Exogenous steroids (most common)</td><td>Low / normal</td><td>No</td><td>No</td><td>Not needed</td></tr></tbody></table></div><p class="ig-block ig-text">Any patient on <strong>≥prednisone 5 mg/day for ≥3 weeks</strong> is at risk for tertiary (steroid-induced) AI. Immune checkpoint inhibitors cause SAI: ipilimumab (anti-CTLA-4) &gt; pembrolizumab/nivolumab (anti-PD-1).<a href="#cite-ref11" class="ig-ref">[11]</a><a href="#cite-ref13" class="ig-ref">[13]</a></p></section><section class="ig-section"><h2 class="ig-h2">5 · Diagnostic workup</h2><div class="ig-block ig-callout t-mech" role="note"><div class="ig-callout-title">Morning cortisol + ACTH (draw 8–9 AM)</div><div><strong>AM cortisol &lt;3 μg/dL</strong> → AI virtually confirmed.  <strong>&gt;15 μg/dL</strong> → AI unlikely.  <strong>3–15 μg/dL</strong> → indeterminate, needs cosyntropin stimulation. Then ACTH sorts the type: <strong>&gt;2× ULN = Primary</strong>; low/normal = Secondary or Tertiary.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref6" class="ig-ref">[6]</a></div></div><div class="ig-block ig-dose"><div class="ig-dose-drug">Cosyntropin (ACTH) stimulation test</div><div class="ig-dose-val">250 mcg IV/IM</div><div class="ig-dose-route">IV/IM</div><div class="ig-dose-note">Draw baseline cortisol, give 250 mcg, then cortisol at 30 and 60 min. Peak ≥18 μg/dL = normal (excludes PAI). Does NOT reliably detect SAI or recent-onset PAI — refer for insulin tolerance or metyrapone testing if suspicion remains.</div></div><details class="ig-block ig-disc"><summary>Type-specific workup<span class="ig-scent">3 types</span></summary><div class="ig-disc-body"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Primary (Addison)</div><div>21-hydroxylase antibodies (positive in ~85% of autoimmune PAI), CT adrenals (TB = calcified/enlarged; hemorrhage = enlarged, high-density), renin + aldosterone (high renin + low aldosterone = PAI).<a href="#cite-ref8" class="ig-ref">[8]</a></div></div><div class="ig-block ig-callout t-neutral" role="note"><div class="ig-callout-title">Secondary</div><div>MRI pituitary with contrast, full anterior pituitary panel (TSH, LH/FSH, GH, prolactin). Consider Sheehan syndrome after severe postpartum hemorrhage.<a href="#cite-ref9" class="ig-ref">[9]</a></div></div><div class="ig-block ig-callout t-neutral" role="note"><div class="ig-callout-title">Tertiary</div><div>History of exogenous steroid exposure; HPA recovery takes 6–12 months. CYP3A4 inducers may double the maintenance requirement.<a href="#cite-ref11" class="ig-ref">[11]</a></div></div></div></details></section><section class="ig-section"><h2 class="ig-h2">6 · One-glance pathway</h2><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 888 804" width="888" height="804" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M549,98 L549,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,206 L549,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="223" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M549,206 L549,227 L339,227 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="223" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M549,314 L549,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,422 L549,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,530 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="601" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M549,530 L549,551 L759,551 L759,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="547" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M759,638 L759,659 L549,659 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,314 L339,335 L129,335 L129,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="331" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M339,314 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="331" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M129,422 L129,443 L339,443 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,422 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,530 L339,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,638 L339,659 L129,659 L129,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="655" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M339,638 L339,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="655" class="ig-edge-lbl" text-anchor="middle">no</text><g class="ig-node" data-node="n-start" aria-label="Suspected adrenal insufficiency"><rect x="461" y="32" width="176" height="66" rx="30" class="ig-shape t-mech"/><foreignObject x="467" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Suspected adrenal insufficiency</div></foreignObject></g><g class="ig-node" data-node="n-crisis" tabindex="0" role="button" aria-label="Adrenal crisis? (SBP ≤100 or ≥20 below baseline)"><polygon points="483,140 615,140 637,173 615,206 483,206 461,173" class="ig-shape t-neutral"/><foreignObject x="467" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Adrenal crisis? (SBP ≤100 or ≥20 below baseline)</div></foreignObject></g><g class="ig-node" data-node="n-resus" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="1 L NS bolus · draw cortisol + ACTH"><rect x="461" y="248" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="467" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">1 L NS bolus · draw cortisol + ACTH</div></foreignObject></g><g class="ig-node" data-node="n-hc" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Hydrocortisone 100 mg IV/IM → 200 mg/24h"><rect x="461" y="356" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="467" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Hydrocortisone 100 mg IV/IM → 200 mg/24h</div></foreignObject></g><g class="ig-node" data-node="n-response" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Hemodynamics improve in 1–2 h?"><polygon points="483,464 615,464 637,497 615,530 483,530 461,497" class="ig-shape t-neutral"/><foreignObject x="467" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Hemodynamics improve in 1–2 h?</div></foreignObject></g><g class="ig-node" data-node="n-refractory" tabindex="0" role="button" aria-label="Broaden differential · norepinephrine"><rect x="671" y="572" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="677" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Broaden differential · norepinephrine</div></foreignObject></g><g class="ig-node" data-node="n-icu" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="ICU admission"><rect x="461" y="680" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="467" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">ICU admission</div></foreignObject></g><g class="ig-node" data-node="n-classify" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}" tabindex="0" role="button" aria-label="Hyperpigmentation or hyperkalemia?"><polygon points="273,248 405,248 427,281 405,314 273,314 251,281" class="ig-shape t-neutral"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Hyperpigmentation or hyperkalemia?</div></foreignObject></g><g class="ig-node" data-node="n-pai" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;pai&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" tabindex="0" role="button" aria-label="Primary AI: hydrocortisone + fludrocortisone"><rect x="41" y="356" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Primary AI: hydrocortisone + fludrocortisone</div></foreignObject></g><g class="ig-node" data-node="n-sai" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;pai&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" tabindex="0" role="button" aria-label="Secondary/Tertiary: glucocorticoid only"><rect x="251" y="356" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="257" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Secondary/Tertiary: glucocorticoid only</div></foreignObject></g><g class="ig-node" data-node="n-labs" tabindex="0" role="button" aria-label="AM cortisol + ACTH; cosyntropin if 3–15 μg/dL"><rect x="251" y="464" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">AM cortisol + ACTH; cosyntropin if 3–15 μg/dL</div></foreignObject></g><g class="ig-node" data-node="n-dispo" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crisis&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}" tabindex="0" role="button" aria-label="Tolerating PO and hemodynamically stable?"><polygon points="273,572 405,572 427,605 405,638 273,638 251,605" class="ig-shape t-neutral"/><foreignObject x="257" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Tolerating PO and hemodynamically stable?</div></foreignObject></g><g class="ig-node" data-node="n-discharge" tabindex="0" role="button" aria-label="Discharge + sick-day plan"><rect x="41" y="680" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="47" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Discharge + sick-day plan</div></foreignObject></g><g class="ig-node" data-node="n-admit" tabindex="0" role="button" aria-label="Admit to floor"><rect x="251" y="680" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="257" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Admit to floor</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="n-crisis" hidden><strong>Adrenal crisis? (SBP ≤100 or ≥20 below baseline)</strong><br>Shock refractory to fluids/pressors, hyponatremia, hypoglycemia — treat empirically if in doubt.</div><div class="ig-node-detail" data-detail-for="n-resus" hidden><strong>1 L NS bolus · draw cortisol + ACTH</strong><br>Do NOT delay steroids for labs. Add dextrose if hypoglycemic. Peds: 20 mL/kg NS bolus.</div><div class="ig-node-detail" data-detail-for="n-hc" hidden><strong>Hydrocortisone 100 mg IV/IM → 200 mg/24h</strong><br>Dexamethasone 4 mg IV if diagnosis uncertain. Peds bolus 2 mg/kg (max 100 mg).</div><div class="ig-node-detail" data-detail-for="n-response" hidden><strong>Hemodynamics improve in 1–2 h?</strong><br>Adrenal crisis should respond to parenteral hydrocortisone within 1–2 hours.</div><div class="ig-node-detail" data-detail-for="n-refractory" hidden><strong>Broaden differential · norepinephrine</strong><br>Reassess for septic, cardiogenic, hypovolemic shock. Random cortisol &gt;18 μg/dL makes AI unlikely.</div><div class="ig-node-detail" data-detail-for="n-icu" hidden><strong>ICU admission</strong><br>Continuous hydrocortisone, q1–2h glucose, q4–6h electrolytes, treat precipitant, endocrine consult.</div><div class="ig-node-detail" data-detail-for="n-classify" hidden><strong>Hyperpigmentation or hyperkalemia?</strong><br>Points to primary AI (aldosterone deficiency). Absence favors secondary/tertiary.</div><div class="ig-node-detail" data-detail-for="n-pai" hidden><strong>Primary AI: hydrocortisone + fludrocortisone</strong><br>21-OH antibodies, CT adrenals, TSH. Treat cortisol before thyroxine.</div><div class="ig-node-detail" data-detail-for="n-sai" hidden><strong>Secondary/Tertiary: glucocorticoid only</strong><br>No fludrocortisone. MRI pituitary for SAI; steroid history for TAI.</div><div class="ig-node-detail" data-detail-for="n-labs" hidden><strong>AM cortisol + ACTH; cosyntropin if 3–15 μg/dL</strong><br>Cortisol &lt;3 confirms, &gt;15 excludes. ACTH sorts primary vs secondary/tertiary.</div><div class="ig-node-detail" data-detail-for="n-dispo" hidden><strong>Tolerating PO and hemodynamically stable?</strong><br>Ability to take oral steroids and resolved precipitant drive disposition.</div><div class="ig-node-detail" data-detail-for="n-discharge" hidden><strong>Discharge + sick-day plan</strong><br>Maintenance steroids, emergency IM kit, MedicAlert ID, written sick-day rules, endocrine follow-up.</div><div class="ig-node-detail" data-detail-for="n-admit" hidden><strong>Admit to floor</strong><br>Unable to take PO or new diagnosis needing workup. Stress-dose hydrocortisone, taper over 2–3 days.</div></div></div><p class="ig-block ig-text">Tap any box for detail. Toggle the patient's state above and the recommended path auto-highlights. The full branching protocol lives in the <a href="#/tree/adrenal-insufficiency" target="_top" class="ig-link">myMedKitt adrenal-insufficiency consult</a>.</p></section><section class="ig-section"><h2 class="ig-h2">7 · Disposition &amp; prevention</h2><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Disposition</th><th>Trigger</th></tr></thead><tbody><tr class="ig-row t-danger"><td class="hero">ICU</td><td>Active crisis needing IV hydrocortisone + vasopressors, or altered mental status</td></tr><tr class="ig-row t-caution"><td class="hero">Floor</td><td>Known AI unable to take PO, or new diagnosis needing inpatient workup</td></tr><tr class="ig-row t-normal"><td class="hero">Discharge</td><td>Stable, tolerating PO, precipitant resolved, emergency kit available</td></tr></tbody></table></div><details class="ig-block ig-disc"><summary>Every AI patient must leave with these<span class="ig-scent">5 items</span></summary><div class="ig-disc-body"><div class="ig-block ig-callout t-normal" role="note"><div><strong>MedicAlert ID</strong> stating &quot;Adrenal Insufficiency — Requires Stress-Dose Steroids.&quot;<a href="#cite-ref16" class="ig-ref">[16]</a></div></div><div class="ig-block ig-callout t-caution" role="note"><div><strong>Emergency injection kit:</strong> <a href="#/drug/hydrocortisone/emergency IM" target="_top" class="ig-link">Hydrocortisone</a> 100 mg IM (lateral thigh), patient AND caregivers trained. Only 44% of patients in adrenal emergency self-injected before reaching care.<a href="#cite-ref15" class="ig-ref">[15]</a></div></div><div class="ig-block ig-callout t-normal" role="note"><div><strong>Steroid emergency card</strong>, a <strong>written sick-day action plan</strong>, and <strong>trained caregivers</strong> complete the set.<a href="#cite-ref10" class="ig-ref">[10]</a><a href="#cite-ref16" class="ig-ref">[16]</a></div></div></div></details></section></main>
+<details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Recognize the crisis</h3><p>Acute hemodynamic deterioration — **SBP ≤100 mmHg or ≥20 mmHg below baseline** — that resolves within 1–2 hours of parenteral hydrocortisone. Mortality is **0.5 per 100 patient-years** in known-AI patients, and crisis is the *first* presentation of undiagnosed AI in up to **50%** of cases.{{ref2}}{{ref4}}</p><p>Feature | Detail</p><p>Hemodynamic collapse | SBP ≤100 mmHg or ≥20 mmHg below baseline; shock refractory to fluids</p><p>Hyponatremia | Present in 84% of cases</p><p>Hypoglycemia | Common — check glucose early, treat with dextrose</p><p>Hyperkalemia | Primary AI only (mineralocorticoid deficiency)</p><p>Other | Fever, abdominal pain, nausea/vomiting, altered mental status</p><p>**Infection is the #1 precipitant** — viral in children, bacterial in adults. Other triggers: trauma or surgery without stress dosing, abrupt steroid withdrawal, CYP3A4 inducers (rifampin, phenytoin, carbamazepine), and GI illness with vomiting. ~10% of crises have no identifiable precipitant.{{ref3}}{{ref7}}</p><h3>2 · What to do now</h3><p>Set the toggles above to match your patient. Exactly one instruction below applies — **crisis overrides everything else.**</p><p>1. **IV access · 1 L NS bolus**, repeat PRN; add dextrose if hypoglycemic.
+2. **Draw cortisol + ACTH before steroids if possible — do NOT delay.**
+3. **[Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) 100 mg IV/IM now**, then 200 mg/24h.
+4. Find and treat the precipitant (infection is #1). Reassess hemodynamics at 1–2 h.{{ref2}}{{ref7}}</p><p>Glucocorticoid **and** mineralocorticoid: [Hydrocortisone](#/drug/hydrocortisone/maintenance) 15–25 mg PO daily (2/3 AM, 1/3 early afternoon) **plus** [Fludrocortisone](#/drug/fludrocortisone/adrenal maintenance) 50–200 mcg PO daily. Hyperpigmentation and hyperkalemia point to PAI. Check 21-OH antibodies, CT adrenals, and TSH — treat cortisol **before** thyroxine.{{ref1}}{{ref8}}</p><p>No hyperpigmentation, no hyperkalemia (RAAS axis intact) → **no fludrocortisone needed.** [Hydrocortisone](#/drug/hydrocortisone/maintenance) 15–25 mg PO daily. Tertiary (steroid-induced) AI is the most common form overall; HPA-axis recovery takes 6–12 months after stopping steroids. Screen for other pituitary deficiencies in SAI.{{ref11}}{{ref13}}</p><h3>3 · Emergency steroid replacement</h3><p><strong>Hydrocortisone (adult adrenal crisis)</strong>: 100 mg IV/IM bolus, then 200 mg/24h IV/IM — Continuous infusion preferred, or 50 mg IV q6h. Taper to oral over 1–3 days as hemodynamics stabilize. At ≥50 mg/day no fludrocortisone is needed.</p><p>**Pediatric bolus is weight-based at [2 mg/kg](#/drug/hydrocortisone/pediatric adrenal crisis) (≈50 mg/m², max 100 mg).** Toggle *Pediatric* on and enter weight:</p><p>Pediatric hydrocortisone bolus (2 mg/kg, max 100 mg): 100 mg</p><p>Give [Dexamethasone](#/drug/dexamethasone/adrenal crisis) 4 mg IV instead — it does **not** interfere with the cortisol assay, so you can still run a cosyntropin stimulation test afterward.{{ref7}}</p><h3>4 · Classify the type</h3><p>Type | Lesion | ACTH | Hyperpigment | HyperK | Fludrocortisone</p><p>Primary (Addison) | Adrenal destruction | High (&gt;2× ULN) | Yes | Yes | Required</p><p>Secondary | Pituitary ACTH deficiency | Low / normal | No | No | Not needed</p><p>Tertiary | Exogenous steroids (most common) | Low / normal | No | No | Not needed</p><p>Any patient on **≥prednisone 5 mg/day for ≥3 weeks** is at risk for tertiary (steroid-induced) AI. Immune checkpoint inhibitors cause SAI: ipilimumab (anti-CTLA-4) &gt; pembrolizumab/nivolumab (anti-PD-1).{{ref11}}{{ref13}}</p><h3>5 · Diagnostic workup</h3><p>**AM cortisol &lt;3 μg/dL** → AI virtually confirmed.  **&gt;15 μg/dL** → AI unlikely.  **3–15 μg/dL** → indeterminate, needs cosyntropin stimulation. Then ACTH sorts the type: **&gt;2× ULN = Primary**; low/normal = Secondary or Tertiary.{{ref1}}{{ref6}}</p><p><strong>Cosyntropin (ACTH) stimulation test</strong>: 250 mcg IV/IM IV/IM — Draw baseline cortisol, give 250 mcg, then cortisol at 30 and 60 min. Peak ≥18 μg/dL = normal (excludes PAI). Does NOT reliably detect SAI or recent-onset PAI — refer for insulin tolerance or metyrapone testing if suspicion remains.</p><p><em>Type-specific workup</em></p><p>21-hydroxylase antibodies (positive in ~85% of autoimmune PAI), CT adrenals (TB = calcified/enlarged; hemorrhage = enlarged, high-density), renin + aldosterone (high renin + low aldosterone = PAI).{{ref8}}</p><p>MRI pituitary with contrast, full anterior pituitary panel (TSH, LH/FSH, GH, prolactin). Consider Sheehan syndrome after severe postpartum hemorrhage.{{ref9}}</p><p>History of exogenous steroid exposure; HPA recovery takes 6–12 months. CYP3A4 inducers may double the maintenance requirement.{{ref11}}</p><h3>6 · One-glance pathway</h3><p>Suspected adrenal insufficiency</p><p>Adrenal crisis? (SBP ≤100 or ≥20 below baseline) — Shock refractory to fluids/pressors, hyponatremia, hypoglycemia — treat empirically if in doubt.</p><p>1 L NS bolus · draw cortisol + ACTH — Do NOT delay steroids for labs. Add dextrose if hypoglycemic. Peds: 20 mL/kg NS bolus.</p><p>Hydrocortisone 100 mg IV/IM → 200 mg/24h — Dexamethasone 4 mg IV if diagnosis uncertain. Peds bolus 2 mg/kg (max 100 mg).</p><p>Hemodynamics improve in 1–2 h? — Adrenal crisis should respond to parenteral hydrocortisone within 1–2 hours.</p><p>Broaden differential · norepinephrine — Reassess for septic, cardiogenic, hypovolemic shock. Random cortisol &gt;18 μg/dL makes AI unlikely.</p><p>ICU admission — Continuous hydrocortisone, q1–2h glucose, q4–6h electrolytes, treat precipitant, endocrine consult.</p><p>Hyperpigmentation or hyperkalemia? — Points to primary AI (aldosterone deficiency). Absence favors secondary/tertiary.</p><p>Primary AI: hydrocortisone + fludrocortisone — 21-OH antibodies, CT adrenals, TSH. Treat cortisol before thyroxine.</p><p>Secondary/Tertiary: glucocorticoid only — No fludrocortisone. MRI pituitary for SAI; steroid history for TAI.</p><p>AM cortisol + ACTH; cosyntropin if 3–15 μg/dL — Cortisol &lt;3 confirms, &gt;15 excludes. ACTH sorts primary vs secondary/tertiary.</p><p>Tolerating PO and hemodynamically stable? — Ability to take oral steroids and resolved precipitant drive disposition.</p><p>Discharge + sick-day plan — Maintenance steroids, emergency IM kit, MedicAlert ID, written sick-day rules, endocrine follow-up.</p><p>Admit to floor — Unable to take PO or new diagnosis needing workup. Stress-dose hydrocortisone, taper over 2–3 days.</p><p>Tap any box for detail. Toggle the patient's state above and the recommended path auto-highlights. The full branching protocol lives in the [myMedKitt adrenal-insufficiency consult](#/tree/adrenal-insufficiency).</p><h3>7 · Disposition &amp; prevention</h3><p>Disposition | Trigger</p><p>ICU | Active crisis needing IV hydrocortisone + vasopressors, or altered mental status</p><p>Floor | Known AI unable to take PO, or new diagnosis needing inpatient workup</p><p>Discharge | Stable, tolerating PO, precipitant resolved, emergency kit available</p><p><em>Every AI patient must leave with these</em></p><p>**MedicAlert ID** stating &quot;Adrenal Insufficiency — Requires Stress-Dose Steroids.&quot;{{ref16}}</p><p>**Emergency injection kit:** [Hydrocortisone](#/drug/hydrocortisone/emergency IM) 100 mg IM (lateral thigh), patient AND caregivers trained. Only 44% of patients in adrenal emergency self-injected before reaching care.{{ref15}}</p><p>**Steroid emergency card**, a **written sick-day action plan**, and **trained caregivers** complete the set.{{ref10}}{{ref16}}</p></div></details>
+<section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Bornstein SR, Allolio B, Arlt W, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab. 2016;101(2):364-389. <span class="ig-cite-ids">Clinical practice guideline</span></li><li id="cite-ref2"><span class="ig-ref">[2]</span> Rushworth RL, Torpy DJ, Falhammar H. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Hahner S, Spinnler C, Fassnacht M, et al. High Incidence of Adrenal Crisis in Educated Patients With Chronic Adrenal Insufficiency: A Prospective Study. J Clin Endocrinol Metab. 2015;100(2):407-416.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Puar TH, Stikkelbroeck NM, Smans LC, et al. Adrenal Crisis: Still a Deadly Event in the 21st Century. Am J Med. 2016;129(3):339.e1-339.e9.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Husebye ES, Pearce SH, Krone NP, Kämpe O. Adrenal Insufficiency. Lancet. 2021;397(10274):613-629.</li><li id="cite-ref6"><span class="ig-ref">[6]</span> Vaidya A, Findling J, Bancos I. Adrenal Insufficiency in Adults. JAMA. 2025;334(8):714-725.</li><li id="cite-ref7"><span class="ig-ref">[7]</span> Lentz S, Collier KC, Willis G, et al. Diagnosis and Management of Adrenal Insufficiency and Adrenal Crisis in the Emergency Department. J Emerg Med. 2022;63(2):212-220. <span class="ig-cite-ids">Narrative review</span></li><li id="cite-ref8"><span class="ig-ref">[8]</span> Dong J, Hahner S, Bancos I, Tomlinson JW. Clinical Features, Investigation, and Management of Addison's Disease. Lancet Diabetes Endocrinol. 2026;S2213-8587(25)00393-6.</li><li id="cite-ref9"><span class="ig-ref">[9]</span> Hahner S, Ross RJ, Arlt W, et al. Adrenal Insufficiency. Nat Rev Dis Primers. 2021;7(1):19.</li><li id="cite-ref10"><span class="ig-ref">[10]</span> Simpson H, Tomlinson J, Wass J, et al. Guidance for the Prevention and Emergency Management of Adult Patients With Adrenal Insufficiency. Clin Med (Lond). 2020;20(4):371-378.</li><li id="cite-ref11"><span class="ig-ref">[11]</span> Broersen LH, Pereira AM, Jorgensen JO, Dekkers OM. Adrenal Insufficiency in Corticosteroid Use: Systematic Review and Meta-Analysis. J Clin Endocrinol Metab. 2015;100(6):2171-2180.</li><li id="cite-ref12"><span class="ig-ref">[12]</span> de Vries F, Bruin M, Lobatto DJ, et al. Opioids and Their Endocrine Effects: A Systematic Review and Meta-Analysis. J Clin Endocrinol Metab. 2020;105(3):1020-1029.</li><li id="cite-ref13"><span class="ig-ref">[13]</span> Beuschlein F, Else T, Bancos I, et al. European Society of Endocrinology and Endocrine Society Joint Clinical Guideline: Diagnosis and Therapy of Glucocorticoid-Induced Adrenal Insufficiency. J Clin Endocrinol Metab. 2024;109(7):1657-1683. <span class="ig-cite-ids">Joint clinical guideline</span></li><li id="cite-ref14"><span class="ig-ref">[14]</span> Ospina NS, Al Nofal A, Bancos I, et al. ACTH Stimulation Tests for the Diagnosis of Adrenal Insufficiency: Systematic Review and Meta-Analysis. J Clin Endocrinol Metab. 2016;101(2):427-434.</li><li id="cite-ref15"><span class="ig-ref">[15]</span> Burger-Stritt S, Kardonski P, Pulzer A, et al. Management of Adrenal Emergencies in Educated Patients With Adrenal Insufficiency — A Prospective Study. Clin Endocrinol (Oxf). 2018;89(1):22-29.</li><li id="cite-ref16"><span class="ig-ref">[16]</span> Burger-Stritt S, Eff A, Quinkler M, et al. Standardised Patient Education in Adrenal Insufficiency: A Prospective Multi-Centre Evaluation. Eur J Endocrinol. 2020;183(2):119-127.</li><li id="cite-ref17"><span class="ig-ref">[17]</span> Bosch NA, Teja B, Law AC, et al. Comparative Effectiveness of Fludrocortisone and Hydrocortisone vs Hydrocortisone Alone Among Patients With Septic Shock. JAMA Intern Med. 2023;183(5):451-459.</li><li id="cite-ref18"><span class="ig-ref">[18]</span> Mosteller RD. Simplified Calculation of Body-Surface Area. N Engl J Med. 1987;317(17):1098.</li></ol></section>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-07 · evidence through 2026 (JAMA/Lancet Diabetes Endocrinol updates) · next review 2027-07-07</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · adrenal-insufficiency · v1.0 initial — generated from myMedKitt adrenal-insufficiency consult</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"adrenal-insufficiency","title":"Adrenal Crisis: Steroids Now, Diagnose Later","shape":"algorithm","intendedUse":"Adults and children with suspected adrenal insufficiency or adrenal crisis in the ED. Toggle the patient's state to drive the recommendation. Excludes definitive endocrine management — arrange endocrine follow-up for every new diagnosis.","scopeWarnings":["**Failure to stress-dose is the #1 cause of adrenal crisis.** Double oral hydrocortisone for fever >38°C, triple for >39°C; give 100 mg IM and go to the ED if vomiting prevents oral intake.","**Give fluids and draw cortisol/ACTH before steroids — but never delay treatment for labs.** A random cortisol \u003c18 μg/dL during physiologic stress supports AI; >18 μg/dL makes it very unlikely.","**Hydrocortisone 100 mg IV/IM immediately, then 200 mg/24h.** At ≥50 mg/day of hydrocortisone the mineralocorticoid effect is adequate, so no fludrocortisone is needed in the acute phase. Use dexamethasone if the diagnosis is uncertain (does not interfere with the cortisol assay).","**Adrenal crisis can be the first presentation of undiagnosed AI in up to 50% of cases.** Maintain high suspicion in unexplained shock refractory to fluids and vasopressors."],"source":{"kind":"medkitt-consult","ref":"adrenal-insufficiency","hash":"ingest-2026-07-07"},"theme":{"preset":"medkitt"},"inputs":[{"id":"crisis","label":"In adrenal crisis (hemodynamic instability)","type":"boolean","default":1},{"id":"pai","label":"Primary AI (hyperpigmentation / hyperkalemia)","type":"boolean","default":0},{"id":"peds","label":"Pediatric patient","type":"boolean","default":0},{"id":"weight","label":"Weight","unit":"kg","type":"number","min":1,"max":300,"step":1,"default":70}],"calcs":[{"id":"hydrocortisoneapproximation50mgm","expr":"min(round(2*weight,1),100)","unit":"mg","formula":"2 mg/kg × weight (max 100 mg)","derivedFrom":{"drugId":"hydrocortisone","indication":"Pediatric adrenal crisis"},"testVectors":[{"in":{"weight":10},"expect":20},{"in":{"weight":40},"expect":80},{"in":{"weight":80},"expect":100}],"exprAst":{"k":"call","fn":"min","args":[{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":2},"b":{"k":"id","name":"weight"}},{"k":"num","v":1}]},{"k":"num","v":100}]}}],"facts":[{"id":"fhydrocortisoneapproximation50mgm","claim":"Hydrocortisone (Solu-Cortef) — Pediatric adrenal crisis","value":"2 mg/kg","provenance":"drug-store:hydrocortisone/Pediatric adrenal crisis","cite":[],"verified":"provenance"}],"sections":[{"id":"sec-recognize","title":"1 · Recognize the crisis","blocks":[{"id":"b-def","type":"callout","tone":"danger","title":"Adrenal crisis is a medical emergency","md":"Acute hemodynamic deterioration — **SBP ≤100 mmHg or ≥20 mmHg below baseline** — that resolves within 1–2 hours of parenteral hydrocortisone. Mortality is **0.5 per 100 patient-years** in known-AI patients, and crisis is the *first* presentation of undiagnosed AI in up to **50%** of cases.{{ref2}}{{ref4}}"},{"id":"b-features","type":"table","columns":["Feature","Detail"],"heroCol":0,"rows":[["Hemodynamic collapse","SBP ≤100 mmHg or ≥20 mmHg below baseline; shock refractory to fluids"],["Hyponatremia","Present in 84% of cases"],["Hypoglycemia","Common — check glucose early, treat with dextrose"],["Hyperkalemia","Primary AI only (mineralocorticoid deficiency)"],["Other","Fever, abdominal pain, nausea/vomiting, altered mental status"]],"rowTones":["danger","caution","caution","caution",null],"cite":["ref2","ref7"]},{"id":"b-trigger","type":"text","md":"**Infection is the #1 precipitant** — viral in children, bacterial in adults. Other triggers: trauma or surgery without stress dosing, abrupt steroid withdrawal, CYP3A4 inducers (rifampin, phenytoin, carbamazepine), and GI illness with vomiting. ~10% of crises have no identifiable precipitant.{{ref3}}{{ref7}}"}]},{"id":"sec-nownow","title":"2 · What to do now","blocks":[{"id":"b-toggle-hint","type":"text","md":"Set the toggles above to match your patient. Exactly one instruction below applies — **crisis overrides everything else.**"},{"id":"b-now-crisis","type":"callout","tone":"danger","title":"Adrenal crisis — treat immediately","showWhen":"crisis==1","md":"1. **IV access · 1 L NS bolus**, repeat PRN; add dextrose if hypoglycemic.\n2. **Draw cortisol + ACTH before steroids if possible — do NOT delay.**\n3. **[Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) 100 mg IV/IM now**, then 200 mg/24h.\n4. Find and treat the precipitant (infection is #1). Reassess hemodynamics at 1–2 h.{{ref2}}{{ref7}}"},{"id":"b-now-pai","type":"callout","tone":"caution","title":"Stable Primary AI — replace both hormones","showWhen":"crisis==0 && pai==1","md":"Glucocorticoid **and** mineralocorticoid: [Hydrocortisone](#/drug/hydrocortisone/maintenance) 15–25 mg PO daily (2/3 AM, 1/3 early afternoon) **plus** [Fludrocortisone](#/drug/fludrocortisone/adrenal maintenance) 50–200 mcg PO daily. Hyperpigmentation and hyperkalemia point to PAI. Check 21-OH antibodies, CT adrenals, and TSH — treat cortisol **before** thyroxine.{{ref1}}{{ref8}}"},{"id":"b-now-sai","type":"callout","tone":"normal","title":"Stable Secondary/Tertiary AI — glucocorticoid only","showWhen":"crisis==0 && pai==0","md":"No hyperpigmentation, no hyperkalemia (RAAS axis intact) → **no fludrocortisone needed.** [Hydrocortisone](#/drug/hydrocortisone/maintenance) 15–25 mg PO daily. Tertiary (steroid-induced) AI is the most common form overall; HPA-axis recovery takes 6–12 months after stopping steroids. Screen for other pituitary deficiencies in SAI.{{ref11}}{{ref13}}"}]},{"id":"sec-steroid","title":"3 · Emergency steroid replacement","blocks":[{"id":"b-hc-adult","type":"dose","drug":"Hydrocortisone (adult adrenal crisis)","dose":"100 mg IV/IM bolus, then 200 mg/24h","route":"IV/IM","note":"Continuous infusion preferred, or 50 mg IV q6h. Taper to oral over 1–3 days as hemodynamics stabilize. At ≥50 mg/day no fludrocortisone is needed.","whenNode":"n-hc","cite":["ref2","ref5"]},{"id":"b-peds-label","type":"text","md":"**Pediatric bolus is weight-based at [2 mg/kg](#/drug/hydrocortisone/pediatric adrenal crisis) (≈50 mg/m², max 100 mg).** Toggle *Pediatric* on and enter weight:","showWhen":"peds==1"},{"id":"b-hc-peds","type":"stat","label":"Pediatric hydrocortisone bolus (2 mg/kg, max 100 mg)","value":"100 mg","calcRef":"hydrocortisoneapproximation50mgm","unit":"mg","tone":"danger","showWhen":"peds==1","whenNode":"n-hc","cite":["ref7"]},{"id":"b-dex","type":"callout","tone":"caution","title":"If the diagnosis is uncertain","md":"Give [Dexamethasone](#/drug/dexamethasone/adrenal crisis) 4 mg IV instead — it does **not** interfere with the cortisol assay, so you can still run a cosyntropin stimulation test afterward.{{ref7}}","whenNode":"n-hc"}]},{"id":"sec-classify","title":"4 · Classify the type","blocks":[{"id":"b-types","type":"table","columns":["Type","Lesion","ACTH","Hyperpigment","HyperK","Fludrocortisone"],"heroCol":0,"rows":[["Primary (Addison)","Adrenal destruction","High (>2× ULN)","Yes","Yes","Required"],["Secondary","Pituitary ACTH deficiency","Low / normal","No","No","Not needed"],["Tertiary","Exogenous steroids (most common)","Low / normal","No","No","Not needed"]],"rowTones":["danger","caution","neutral"],"cite":["ref1","ref5"]},{"id":"b-classify-note","type":"text","md":"Any patient on **≥prednisone 5 mg/day for ≥3 weeks** is at risk for tertiary (steroid-induced) AI. Immune checkpoint inhibitors cause SAI: ipilimumab (anti-CTLA-4) > pembrolizumab/nivolumab (anti-PD-1).{{ref11}}{{ref13}}"}]},{"id":"sec-workup","title":"5 · Diagnostic workup","blocks":[{"id":"b-cortisol","type":"callout","tone":"mechanism","title":"Morning cortisol + ACTH (draw 8–9 AM)","md":"**AM cortisol \u003c3 μg/dL** → AI virtually confirmed.  **>15 μg/dL** → AI unlikely.  **3–15 μg/dL** → indeterminate, needs cosyntropin stimulation. Then ACTH sorts the type: **>2× ULN = Primary**; low/normal = Secondary or Tertiary.{{ref1}}{{ref6}}"},{"id":"b-cosyntropin","type":"dose","drug":"Cosyntropin (ACTH) stimulation test","dose":"250 mcg IV/IM","route":"IV/IM","note":"Draw baseline cortisol, give 250 mcg, then cortisol at 30 and 60 min. Peak ≥18 μg/dL = normal (excludes PAI). Does NOT reliably detect SAI or recent-onset PAI — refer for insulin tolerance or metyrapone testing if suspicion remains.","cite":["ref14"]},{"id":"b-workup-extra","type":"disclosure","summary":"Type-specific workup","scent":"3 types","blocks":[{"id":"b-wk-pai","type":"callout","tone":"caution","title":"Primary (Addison)","md":"21-hydroxylase antibodies (positive in ~85% of autoimmune PAI), CT adrenals (TB = calcified/enlarged; hemorrhage = enlarged, high-density), renin + aldosterone (high renin + low aldosterone = PAI).{{ref8}}"},{"id":"b-wk-sai","type":"callout","tone":"neutral","title":"Secondary","md":"MRI pituitary with contrast, full anterior pituitary panel (TSH, LH/FSH, GH, prolactin). Consider Sheehan syndrome after severe postpartum hemorrhage.{{ref9}}"},{"id":"b-wk-tai","type":"callout","tone":"neutral","title":"Tertiary","md":"History of exogenous steroid exposure; HPA recovery takes 6–12 months. CYP3A4 inducers may double the maintenance requirement.{{ref11}}"}]}]},{"id":"sec-flow","title":"6 · One-glance pathway","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"n-start","shape":"state","text":"Suspected adrenal insufficiency","col":0,"rank":0,"tone":"mechanism"},{"id":"n-crisis","shape":"decision","text":"Adrenal crisis? (SBP ≤100 or ≥20 below baseline)","col":0,"rank":1,"detail":"Shock refractory to fluids/pressors, hyponatremia, hypoglycemia — treat empirically if in doubt."},{"id":"n-resus","shape":"action","text":"1 L NS bolus · draw cortisol + ACTH","col":0,"rank":2,"tone":"danger","detail":"Do NOT delay steroids for labs. Add dextrose if hypoglycemic. Peds: 20 mL/kg NS bolus.","activeWhen":"crisis==1"},{"id":"n-hc","shape":"action","text":"Hydrocortisone 100 mg IV/IM → 200 mg/24h","col":0,"rank":3,"tone":"danger","detail":"Dexamethasone 4 mg IV if diagnosis uncertain. Peds bolus 2 mg/kg (max 100 mg).","activeWhen":"crisis==1"},{"id":"n-response","shape":"decision","text":"Hemodynamics improve in 1–2 h?","col":0,"rank":4,"detail":"Adrenal crisis should respond to parenteral hydrocortisone within 1–2 hours.","activeWhen":"crisis==1"},{"id":"n-refractory","shape":"action","text":"Broaden differential · norepinephrine","col":1,"rank":5,"tone":"danger","detail":"Reassess for septic, cardiogenic, hypovolemic shock. Random cortisol >18 μg/dL makes AI unlikely."},{"id":"n-icu","shape":"state","text":"ICU admission","col":0,"rank":6,"tone":"danger","detail":"Continuous hydrocortisone, q1–2h glucose, q4–6h electrolytes, treat precipitant, endocrine consult.","activeWhen":"crisis==1"},{"id":"n-classify","shape":"decision","text":"Hyperpigmentation or hyperkalemia?","col":-1,"rank":2,"detail":"Points to primary AI (aldosterone deficiency). Absence favors secondary/tertiary.","activeWhen":"crisis==0"},{"id":"n-pai","shape":"action","text":"Primary AI: hydrocortisone + fludrocortisone","col":-2,"rank":3,"tone":"caution","detail":"21-OH antibodies, CT adrenals, TSH. Treat cortisol before thyroxine.","activeWhen":"crisis==0 && pai==1"},{"id":"n-sai","shape":"action","text":"Secondary/Tertiary: glucocorticoid only","col":-1,"rank":3,"detail":"No fludrocortisone. MRI pituitary for SAI; steroid history for TAI.","activeWhen":"crisis==0 && pai==0"},{"id":"n-labs","shape":"action","text":"AM cortisol + ACTH; cosyntropin if 3–15 μg/dL","col":-1,"rank":4,"detail":"Cortisol \u003c3 confirms, >15 excludes. ACTH sorts primary vs secondary/tertiary."},{"id":"n-dispo","shape":"decision","text":"Tolerating PO and hemodynamically stable?","col":-1,"rank":5,"detail":"Ability to take oral steroids and resolved precipitant drive disposition.","activeWhen":"crisis==0"},{"id":"n-discharge","shape":"state","text":"Discharge + sick-day plan","col":-2,"rank":6,"tone":"normal","detail":"Maintenance steroids, emergency IM kit, MedicAlert ID, written sick-day rules, endocrine follow-up."},{"id":"n-admit","shape":"state","text":"Admit to floor","col":-1,"rank":6,"detail":"Unable to take PO or new diagnosis needing workup. Stress-dose hydrocortisone, taper over 2–3 days."}],"edges":[{"from":"n-start","to":"n-crisis"},{"from":"n-crisis","to":"n-resus","label":"yes"},{"from":"n-crisis","to":"n-classify","label":"no"},{"from":"n-resus","to":"n-hc"},{"from":"n-hc","to":"n-response"},{"from":"n-response","to":"n-icu","label":"yes"},{"from":"n-response","to":"n-refractory","label":"no"},{"from":"n-refractory","to":"n-icu"},{"from":"n-classify","to":"n-pai","label":"yes"},{"from":"n-classify","to":"n-sai","label":"no"},{"from":"n-pai","to":"n-labs"},{"from":"n-sai","to":"n-labs"},{"from":"n-labs","to":"n-dispo"},{"from":"n-dispo","to":"n-discharge","label":"yes"},{"from":"n-dispo","to":"n-admit","label":"no"}]},{"id":"b-flow-hint","type":"text","md":"Tap any box for detail. Toggle the patient's state above and the recommended path auto-highlights. The full branching protocol lives in the [myMedKitt adrenal-insufficiency consult](#/tree/adrenal-insufficiency)."}]},{"id":"sec-dispo","title":"7 · Disposition & prevention","blocks":[{"id":"b-dispo-table","type":"table","columns":["Disposition","Trigger"],"heroCol":0,"rows":[["ICU","Active crisis needing IV hydrocortisone + vasopressors, or altered mental status"],["Floor","Known AI unable to take PO, or new diagnosis needing inpatient workup"],["Discharge","Stable, tolerating PO, precipitant resolved, emergency kit available"]],"rowTones":["danger","caution","normal"],"cite":["ref7"]},{"id":"b-prevention","type":"disclosure","summary":"Every AI patient must leave with these","scent":"5 items","blocks":[{"id":"b-prev-1","type":"callout","tone":"normal","md":"**MedicAlert ID** stating \"Adrenal Insufficiency — Requires Stress-Dose Steroids.\"{{ref16}}"},{"id":"b-prev-2","type":"callout","tone":"caution","md":"**Emergency injection kit:** [Hydrocortisone](#/drug/hydrocortisone/emergency IM) 100 mg IM (lateral thigh), patient AND caregivers trained. Only 44% of patients in adrenal emergency self-injected before reaching care.{{ref15}}"},{"id":"b-prev-3","type":"callout","tone":"normal","md":"**Steroid emergency card**, a **written sick-day action plan**, and **trained caregivers** complete the set.{{ref10}}{{ref16}}"}]}]}],"citations":[{"id":"ref1","label":"Bornstein SR, Allolio B, Arlt W, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab. 2016;101(2):364-389.","grade":"Clinical practice guideline"},{"id":"ref2","label":"Rushworth RL, Torpy DJ, Falhammar H. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861."},{"id":"ref3","label":"Hahner S, Spinnler C, Fassnacht M, et al. High Incidence of Adrenal Crisis in Educated Patients With Chronic Adrenal Insufficiency: A Prospective Study. J Clin Endocrinol Metab. 2015;100(2):407-416."},{"id":"ref4","label":"Puar TH, Stikkelbroeck NM, Smans LC, et al. Adrenal Crisis: Still a Deadly Event in the 21st Century. Am J Med. 2016;129(3):339.e1-339.e9."},{"id":"ref5","label":"Husebye ES, Pearce SH, Krone NP, Kämpe O. Adrenal Insufficiency. Lancet. 2021;397(10274):613-629."},{"id":"ref6","label":"Vaidya A, Findling J, Bancos I. Adrenal Insufficiency in Adults. JAMA. 2025;334(8):714-725."},{"id":"ref7","label":"Lentz S, Collier KC, Willis G, et al. Diagnosis and Management of Adrenal Insufficiency and Adrenal Crisis in the Emergency Department. J Emerg Med. 2022;63(2):212-220.","grade":"Narrative review"},{"id":"ref8","label":"Dong J, Hahner S, Bancos I, Tomlinson JW. Clinical Features, Investigation, and Management of Addison's Disease. Lancet Diabetes Endocrinol. 2026;S2213-8587(25)00393-6."},{"id":"ref9","label":"Hahner S, Ross RJ, Arlt W, et al. Adrenal Insufficiency. Nat Rev Dis Primers. 2021;7(1):19."},{"id":"ref10","label":"Simpson H, Tomlinson J, Wass J, et al. Guidance for the Prevention and Emergency Management of Adult Patients With Adrenal Insufficiency. Clin Med (Lond). 2020;20(4):371-378."},{"id":"ref11","label":"Broersen LH, Pereira AM, Jorgensen JO, Dekkers OM. Adrenal Insufficiency in Corticosteroid Use: Systematic Review and Meta-Analysis. J Clin Endocrinol Metab. 2015;100(6):2171-2180."},{"id":"ref12","label":"de Vries F, Bruin M, Lobatto DJ, et al. Opioids and Their Endocrine Effects: A Systematic Review and Meta-Analysis. J Clin Endocrinol Metab. 2020;105(3):1020-1029."},{"id":"ref13","label":"Beuschlein F, Else T, Bancos I, et al. European Society of Endocrinology and Endocrine Society Joint Clinical Guideline: Diagnosis and Therapy of Glucocorticoid-Induced Adrenal Insufficiency. J Clin Endocrinol Metab. 2024;109(7):1657-1683.","grade":"Joint clinical guideline"},{"id":"ref14","label":"Ospina NS, Al Nofal A, Bancos I, et al. ACTH Stimulation Tests for the Diagnosis of Adrenal Insufficiency: Systematic Review and Meta-Analysis. J Clin Endocrinol Metab. 2016;101(2):427-434."},{"id":"ref15","label":"Burger-Stritt S, Kardonski P, Pulzer A, et al. Management of Adrenal Emergencies in Educated Patients With Adrenal Insufficiency — A Prospective Study. Clin Endocrinol (Oxf). 2018;89(1):22-29."},{"id":"ref16","label":"Burger-Stritt S, Eff A, Quinkler M, et al. Standardised Patient Education in Adrenal Insufficiency: A Prospective Multi-Centre Evaluation. Eur J Endocrinol. 2020;183(2):119-127."},{"id":"ref17","label":"Bosch NA, Teja B, Law AC, et al. Comparative Effectiveness of Fludrocortisone and Hydrocortisone vs Hydrocortisone Alone Among Patients With Septic Shock. JAMA Intern Med. 2023;183(5):451-459."},{"id":"ref18","label":"Mosteller RD. Simplified Calculation of Body-Surface Area. N Engl J Med. 1987;317(17):1098."}],"meta":{"version":"1.0","lastReviewed":"2026-07-07","evidenceThrough":"2026 (JAMA/Lancet Diabetes Endocrinol updates)","nextReview":"2027-07-07","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 initial — generated from myMedKitt adrenal-insufficiency consult"}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  render();
+})();
+</script>
+</body></html>

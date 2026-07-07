@@ -1,6 +1,8 @@
 // myMedKitt — Per-Consult Toolbar Configurations
 // Maps consult IDs to their contextual toolbar items.
 
+import { hasInfographic } from './infographic-registry.js';
+
 export interface ToolbarItem {
   id: string;
   label: string;
@@ -11,8 +13,9 @@ export interface ToolbarItem {
    *  - `overlay`:    open an info-page overlay (target = info-page id).
    *  - `jump`:       intra-tree node jump via ConsultFlowController (target = node id in THIS tree).
    *  - `route`:      cross-tree navigation via `#/tree/<id>` (target = tree id). Added 2026-05-22 for the headache-hub IIH tool and similar.
+   *  - `infographic`: open the consult's interactive infographic in a full-screen iframe overlay (target = consult id, file at docs/infographics/<id>.html).
    */
-  action: 'calculator' | 'overlay' | 'jump' | 'route';
+  action: 'calculator' | 'overlay' | 'jump' | 'route' | 'infographic';
   target?: string;
   /**
    * When the consult opts into the Tools drawer (via `TOOLBAR_OVERFLOW` set below),
@@ -2479,19 +2482,32 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
 // Stop button appended automatically to every consult
 const STOP_ITEM: ToolbarItem = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };
 
-/** Get the toolbar config for a consult, always including the 🛑 Stop button */
+/** Infographic button — prepended (pinned) to any consult that has a staged infographic. */
+const INFOGRAPHIC_ITEM: ToolbarItem = {
+  id: 'infographic', label: 'Visual', icon: '📊', action: 'infographic', pinned: true,
+};
+
+/**
+ * Get the toolbar config for a consult. Always includes the 🛑 Stop button, and
+ * prepends a pinned 📊 Visual button when an interactive infographic exists for
+ * this consult (gated by the auto-generated infographic registry).
+ */
 export function getToolbarConfig(consultId: string): ToolbarConfig {
-  const tools = TOOLBAR_CONFIGS[consultId] ?? [];
+  const baseTools = TOOLBAR_CONFIGS[consultId] ?? [];
   const toolbarOverflow = TOOLBAR_OVERFLOW.has(consultId);
-  // Only add stop item if not already present in tools
-  const hasStopItem = tools.some(t => t.id === 'stop' || t.id.includes('-stop'));
-  if (hasStopItem) {
-    return { consultId, tools, toolbarOverflow };
-  }
-  const stopItem: ToolbarItem = { ...STOP_ITEM, target: `${consultId}-stop` };
+
+  // Lead with the Visual button so the infographic is front-and-center.
+  const lead: ToolbarItem[] = hasInfographic(consultId)
+    ? [{ ...INFOGRAPHIC_ITEM, target: consultId }]
+    : [];
+
+  // Only add stop item if not already present in the base tools.
+  const hasStopItem = baseTools.some(t => t.id === 'stop' || t.id.includes('-stop'));
+  const trailing = hasStopItem ? [] : [{ ...STOP_ITEM, target: `${consultId}-stop` }];
+
   return {
     consultId,
-    tools: [...tools, stopItem],
+    tools: [...lead, ...baseTools, ...trailing],
     toolbarOverflow,
   };
 }

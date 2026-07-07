@@ -1,0 +1,425 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anaphylaxis — Adult ED Treatment Protocol — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle]{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig>
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Anaphylaxis — Adult ED Treatment Protocol</h1>
+  <p class="ig-use">Adults ≥18 in the ED with suspected anaphylaxis. Excludes pediatrics and pregnancy-specific dosing.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ There is NO absolute contraindication to epinephrine in anaphylaxis. Delayed epinephrine is the #1 cause of death.</div><div class="ig-scope-item">⚠ Give epinephrine IM in the anterolateral thigh, NOT subcutaneous (slower/erratic absorption) and NOT IV push for routine cases. IV push causes arrhythmia; IV epinephrine is for refractory shock as an infusion only.</div></div>
+<div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-weight">Patient weight <span class="ig-unit">(kg)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="weight" min="30" max="250" step="1" value="70" aria-label="Patient weight slider">
+<input type="number" id="ig-num-weight" data-input="weight" min="30" max="250" step="1" value="70" inputmode="decimal" aria-label="Patient weight exact value">
+</div>
+<div class="ig-warn" data-warn-for="weight" hidden role="alert">Value outside 30–250 kg — confirm.</div>
+</div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+
+<main class="ig-main"><section class="ig-section"><h2 class="ig-h2">Recognition</h2><p class="ig-block ig-text">Diagnose anaphylaxis when there is <strong>acute onset</strong> with involvement of <strong>≥2 organ systems</strong> (skin/mucosa, respiratory, CV/hypotension, GI), <strong>OR</strong> hypotension after a known allergen.</p></section><section class="ig-section"><h2 class="ig-h2">Treatment algorithm</h2><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 678 804" width="678" height="804" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-flow_main" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M339,98 L339,140" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><path d="M339,206 L339,248" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><text x="339" y="223" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M339,206 L339,227 L549,227 L549,248" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><text x="444" y="223" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M339,314 L339,356" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><path d="M339,422 L339,464" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><path d="M339,530 L339,572" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><text x="339" y="547" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M339,530 L339,551 L129,551 L129,572" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><text x="234" y="547" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M129,638 L129,680" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><path d="M339,638 L339,680" class="ig-edge" marker-end="url(#ig-arrow-flow_main)" fill="none"/><g class="ig-node" data-node="n_recognize" aria-label="Acute onset with ≥2 organ systems (skin/mucosa, respiratory, CV, GI), OR hypotension after known allergen"><rect x="251" y="32" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="257" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Acute onset with ≥2 organ systems (skin/mucosa, respiratory, CV, GI), OR hypotension after known allergen</div></foreignObject></g><g class="ig-node" data-node="n_criteria" tabindex="0" role="button" aria-label="Anaphylaxis criteria met?"><polygon points="273,140 405,140 427,173 405,206 273,206 251,173" class="ig-shape t-neutral"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Anaphylaxis criteria met?</div></foreignObject></g><g class="ig-node" data-node="n_reassess" aria-label="Reassess and treat the alternative diagnosis"><rect x="461" y="248" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="467" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Reassess and treat the alternative diagnosis</div></foreignObject></g><g class="ig-node" data-node="n_epi" tabindex="0" role="button" aria-label="Give epinephrine 0.01 mg/kg IM (max 0.5 mg), anterolateral thigh; repeat q5-15 min as needed"><rect x="251" y="248" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Give epinephrine 0.01 mg/kg IM (max 0.5 mg), anterolateral thigh; repeat q5-15 min as needed</div></foreignObject></g><g class="ig-node" data-node="n_adjuncts" aria-label="Add adjuncts: normal saline 1-2 L IV bolus for hypotension; nebulized albuterol for bronchospasm"><rect x="251" y="356" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="257" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Add adjuncts: normal saline 1-2 L IV bolus for hypotension; nebulized albuterol for bronchospasm</div></foreignObject></g><g class="ig-node" data-node="n_response" aria-label="Response after 2-3 IM doses?"><polygon points="273,464 405,464 427,497 405,530 273,530 251,497" class="ig-shape t-neutral"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Response after 2-3 IM doses?</div></foreignObject></g><g class="ig-node" data-node="n_refractory" aria-label="Start epinephrine IV infusion; add glucagon if on a beta-blocker"><rect x="41" y="572" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Start epinephrine IV infusion; add glucagon if on a beta-blocker</div></foreignObject></g><g class="ig-node" data-node="n_icu" aria-label="Admit to ICU for refractory anaphylaxis"><rect x="41" y="680" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="47" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Admit to ICU for refractory anaphylaxis</div></foreignObject></g><g class="ig-node" data-node="n_observe" aria-label="Observe 4-6 h for biphasic reaction"><rect x="251" y="572" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="257" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Observe 4-6 h for biphasic reaction</div></foreignObject></g><g class="ig-node" data-node="n_discharge" aria-label="Discharge with 2 epinephrine autoinjectors and allergy referral"><rect x="251" y="680" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="257" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Discharge with 2 epinephrine autoinjectors and allergy referral</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="n_criteria" hidden><strong>Anaphylaxis criteria met?</strong><br>Skin/mucosa (hives, angioedema), respiratory (dyspnea, wheeze, stridor), CV (hypotension, syncope), or GI (cramping, vomiting).</div><div class="ig-node-detail" data-detail-for="n_epi" hidden><strong>Give epinephrine 0.01 mg/kg IM (max 0.5 mg), anterolateral thigh; repeat q5-15 min as needed</strong><br>IM anterolateral thigh gives fast, reliable absorption. Subcutaneous is slower and erratic. IV push is reserved for refractory shock as an infusion; IV push causes arrhythmia.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">First-line: epinephrine</h2><div class="ig-block ig-dose" data-calc="epi_im"><div class="ig-dose-drug">Epinephrine</div><div class="ig-dose-val"><span data-calc-value>0.01 mg/kg IM</span></div><div class="ig-dose-route">Anterolateral thigh, intramuscular</div><div class="ig-dose-note">Repeat every 5-15 min as needed.</div></div><div class="ig-block ig-stat t-danger" data-calc="epi_im"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">Weight-based dose for this patient</span></div><p class="ig-block ig-text">Use the <strong>1 mg/mL</strong> (&quot;1:1000&quot;) ampule. The maximum single dose is <strong>0.5 mg</strong> IM.</p></section><section class="ig-section"><h2 class="ig-h2">Adjuncts (after epinephrine)</h2><p class="ig-block ig-text">Adjuncts follow epinephrine and never replace it. <strong>IV fluids:</strong> normal saline 1-2 L bolus for hypotension. <strong>Albuterol</strong> nebulized for bronchospasm. H1/H2 antihistamines and steroids are adjuncts only; they do not treat airway or cardiovascular compromise.</p></section><section class="ig-section"><h2 class="ig-h2">Refractory anaphylaxis</h2><p class="ig-block ig-text">No response after 2-3 IM doses: start an <strong>epinephrine IV infusion</strong>. Add <strong>glucagon</strong> if the patient is on a beta-blocker.</p></section><section class="ig-section"><h2 class="ig-h2">Disposition</h2><p class="ig-block ig-text">After response, observe <strong>4-6 h</strong> for biphasic reaction. At discharge, prescribe <strong>2 epinephrine autoinjectors</strong> and arrange <strong>allergy referral</strong>.</p></section></main>
+<details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>Recognition</h3><p>Diagnose anaphylaxis when there is **acute onset** with involvement of **≥2 organ systems** (skin/mucosa, respiratory, CV/hypotension, GI), **OR** hypotension after a known allergen.</p><h3>Treatment algorithm</h3><p>Acute onset with ≥2 organ systems (skin/mucosa, respiratory, CV, GI), OR hypotension after known allergen</p><p>Anaphylaxis criteria met? — Skin/mucosa (hives, angioedema), respiratory (dyspnea, wheeze, stridor), CV (hypotension, syncope), or GI (cramping, vomiting).</p><p>Reassess and treat the alternative diagnosis</p><p>Give epinephrine 0.01 mg/kg IM (max 0.5 mg), anterolateral thigh; repeat q5-15 min as needed — IM anterolateral thigh gives fast, reliable absorption. Subcutaneous is slower and erratic. IV push is reserved for refractory shock as an infusion; IV push causes arrhythmia.</p><p>Add adjuncts: normal saline 1-2 L IV bolus for hypotension; nebulized albuterol for bronchospasm</p><p>Response after 2-3 IM doses?</p><p>Start epinephrine IV infusion; add glucagon if on a beta-blocker</p><p>Admit to ICU for refractory anaphylaxis</p><p>Observe 4-6 h for biphasic reaction</p><p>Discharge with 2 epinephrine autoinjectors and allergy referral</p><h3>First-line: epinephrine</h3><p><strong>Epinephrine</strong>: 0.01 mg/kg IM Anterolateral thigh, intramuscular — Repeat every 5-15 min as needed.</p><p>Weight-based dose for this patient: (computed)</p><p>Use the **1 mg/mL** (&quot;1:1000&quot;) ampule. The maximum single dose is **0.5 mg** IM.</p><h3>Adjuncts (after epinephrine)</h3><p>Adjuncts follow epinephrine and never replace it. **IV fluids:** normal saline 1-2 L bolus for hypotension. **Albuterol** nebulized for bronchospasm. H1/H2 antihistamines and steroids are adjuncts only; they do not treat airway or cardiovascular compromise.</p><h3>Refractory anaphylaxis</h3><p>No response after 2-3 IM doses: start an **epinephrine IV infusion**. Add **glucagon** if the patient is on a beta-blocker.</p><h3>Disposition</h3><p>After response, observe **4-6 h** for biphasic reaction. At discharge, prescribe **2 epinephrine autoinjectors** and arrange **allergy referral**.</p></div></details>
+<section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-waao2020"><span class="ig-ref">[1]</span> Cardona V, et al. World Allergy Organization Anaphylaxis Guidance 2020. World Allergy Organ J. 2020;13(10):100472. <span class="ig-cite-ids">PMID 33089071 · guideline</span></li></ol></section>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-06 · evidence through WAO 2020 guidance</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: raw · raw</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"anaphylaxis-adult-ed","title":"Anaphylaxis — Adult ED Treatment Protocol","shape":"algorithm","intendedUse":"Adults ≥18 in the ED with suspected anaphylaxis. Excludes pediatrics and pregnancy-specific dosing.","scopeWarnings":["There is NO absolute contraindication to epinephrine in anaphylaxis. Delayed epinephrine is the #1 cause of death.","Give epinephrine IM in the anterolateral thigh, NOT subcutaneous (slower/erratic absorption) and NOT IV push for routine cases. IV push causes arrhythmia; IV epinephrine is for refractory shock as an infusion only."],"source":{"kind":"raw","ref":"raw"},"inputs":[{"id":"weight","label":"Patient weight","unit":"kg","type":"number","min":30,"max":250,"step":1,"default":70}],"calcs":[{"id":"epi_im","expr":"min(0.01 * weight, 0.5)","unit":"mg","formula":"0.01 mg/kg IM, capped at 0.5 mg per single dose","derivedFrom":{"drugId":"epinephrine","indication":"anaphylaxis"},"testVectors":[{"in":{"weight":30},"expect":0.3},{"in":{"weight":70},"expect":0.5},{"in":{"weight":120},"expect":0.5}],"cite":["waao2020"],"exprAst":{"k":"call","fn":"min","args":[{"k":"bin","op":"*","a":{"k":"num","v":0.01},"b":{"k":"id","name":"weight"}},{"k":"num","v":0.5}]}}],"facts":[{"id":"fact_epi_dose","claim":"Weight-based IM epinephrine dose in anaphylaxis","value":"0.01 mg/kg","provenance":"drug-store:epinephrine/anaphylaxis","cite":["waao2020"],"verified":"provenance"},{"id":"fact_epi_max","claim":"Maximum single IM epinephrine dose","value":"0.5 mg","provenance":"guideline:waao2020","cite":["waao2020"],"verified":"provenance"},{"id":"fact_epi_conc","claim":"Epinephrine concentration used for IM administration","value":"1 mg/mL","provenance":"guideline:waao2020","cite":["waao2020"],"verified":"provenance"},{"id":"fact_observation","claim":"Post-response observation window for biphasic reaction","value":"4-6 h","provenance":"guideline:waao2020","cite":["waao2020"],"verified":"provenance"}],"sections":[{"id":"recognition","title":"Recognition","blocks":[{"id":"recognition_text","type":"text","md":"Diagnose anaphylaxis when there is **acute onset** with involvement of **≥2 organ systems** (skin/mucosa, respiratory, CV/hypotension, GI), **OR** hypotension after a known allergen.","cite":["waao2020"]}]},{"id":"algorithm","title":"Treatment algorithm","blocks":[{"id":"flow_main","type":"flow","cite":["waao2020"],"nodes":[{"id":"n_recognize","shape":"state","text":"Acute onset with ≥2 organ systems (skin/mucosa, respiratory, CV, GI), OR hypotension after known allergen","col":0,"rank":0,"tone":"neutral"},{"id":"n_criteria","shape":"decision","text":"Anaphylaxis criteria met?","col":0,"rank":1,"detail":"Skin/mucosa (hives, angioedema), respiratory (dyspnea, wheeze, stridor), CV (hypotension, syncope), or GI (cramping, vomiting)."},{"id":"n_reassess","shape":"state","text":"Reassess and treat the alternative diagnosis","col":1,"rank":2,"tone":"caution"},{"id":"n_epi","shape":"action","text":"Give epinephrine 0.01 mg/kg IM (max 0.5 mg), anterolateral thigh; repeat q5-15 min as needed","col":0,"rank":2,"tone":"danger","detail":"IM anterolateral thigh gives fast, reliable absorption. Subcutaneous is slower and erratic. IV push is reserved for refractory shock as an infusion; IV push causes arrhythmia."},{"id":"n_adjuncts","shape":"action","text":"Add adjuncts: normal saline 1-2 L IV bolus for hypotension; nebulized albuterol for bronchospasm","col":0,"rank":3},{"id":"n_response","shape":"decision","text":"Response after 2-3 IM doses?","col":0,"rank":4},{"id":"n_refractory","shape":"action","text":"Start epinephrine IV infusion; add glucagon if on a beta-blocker","col":-1,"rank":5,"tone":"danger"},{"id":"n_icu","shape":"state","text":"Admit to ICU for refractory anaphylaxis","col":-1,"rank":6,"tone":"danger"},{"id":"n_observe","shape":"action","text":"Observe 4-6 h for biphasic reaction","col":0,"rank":5,"tone":"normal"},{"id":"n_discharge","shape":"state","text":"Discharge with 2 epinephrine autoinjectors and allergy referral","col":0,"rank":6,"tone":"normal"}],"edges":[{"from":"n_recognize","to":"n_criteria"},{"from":"n_criteria","to":"n_epi","label":"yes"},{"from":"n_criteria","to":"n_reassess","label":"no"},{"from":"n_epi","to":"n_adjuncts"},{"from":"n_adjuncts","to":"n_response"},{"from":"n_response","to":"n_observe","label":"yes"},{"from":"n_response","to":"n_refractory","label":"no"},{"from":"n_refractory","to":"n_icu"},{"from":"n_observe","to":"n_discharge"}]}]},{"id":"first-line","title":"First-line: epinephrine","blocks":[{"id":"epi_dose_block","type":"dose","drug":"Epinephrine","dose":"0.01 mg/kg IM","route":"Anterolateral thigh, intramuscular","note":"Repeat every 5-15 min as needed.","calcRef":"epi_im","drugId":"epinephrine","cite":["waao2020"]},{"id":"epi_dose_stat","type":"stat","label":"Weight-based dose for this patient","calcRef":"epi_im","unit":"mg","tone":"danger"},{"id":"epi_detail_text","type":"text","md":"Use the **1 mg/mL** (\"1:1000\") ampule. The maximum single dose is **0.5 mg** IM.","cite":["waao2020"]}]},{"id":"adjuncts","title":"Adjuncts (after epinephrine)","blocks":[{"id":"adjuncts_text","type":"text","md":"Adjuncts follow epinephrine and never replace it. **IV fluids:** normal saline 1-2 L bolus for hypotension. **Albuterol** nebulized for bronchospasm. H1/H2 antihistamines and steroids are adjuncts only; they do not treat airway or cardiovascular compromise.","cite":["waao2020"]}]},{"id":"refractory","title":"Refractory anaphylaxis","blocks":[{"id":"refractory_text","type":"text","md":"No response after 2-3 IM doses: start an **epinephrine IV infusion**. Add **glucagon** if the patient is on a beta-blocker.","cite":["waao2020"]}]},{"id":"disposition","title":"Disposition","blocks":[{"id":"disposition_text","type":"text","md":"After response, observe **4-6 h** for biphasic reaction. At discharge, prescribe **2 epinephrine autoinjectors** and arrange **allergy referral**.","cite":["waao2020"]}]}],"citations":[{"id":"waao2020","label":"Cardona V, et al. World Allergy Organization Anaphylaxis Guidance 2020. World Allergy Organ J. 2020;13(10):100472.","pmid":"33089071","grade":"guideline"}],"meta":{"version":"1.0","lastReviewed":"2026-07-06","evidenceThrough":"WAO 2020 guidance","reviewer":"A. Kitlowski, MD (Emergency Medicine)"}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  render();
+})();
+</script>
+</body></html>

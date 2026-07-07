@@ -1,0 +1,425 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calcium Channel Blocker Overdose: Match the Shock Phenotype — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle]{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig>
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Calcium Channel Blocker Overdose: Match the Shock Phenotype</h1>
+  <p class="ig-use">Adults in the ED/ICU with known or suspected calcium channel blocker overdose. Excludes pediatrics (weight-based doses shown are adult-scaled), pregnancy, and mixed toxidromes requiring a different antidote pathway.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Insulin 1 U/kg bolus then 1-10 U/kg/hr — maintain glucose 150-250, replete K+ to 4.0-4.5</div><div class="ig-scope-item">⚠ High-dose insulin euglycemia therapy (HIET): 1 unit/kg bolus, then 1-10 units/kg/hr infusion</div><div class="ig-scope-item">⚠ Calcium chloride 1-2g IV q15-20min (or continuous infusion) to overcome channel blockade</div><div class="ig-scope-item">⚠ Vasopressors at HIGH doses (norepinephrine 0.5-3 mcg/kg/min) for vasodilatory shock</div><div class="ig-scope-item">⚠ Whole bowel irrigation (GoLYTELY 2L/hr) for ALL extended-release CCB ingestions</div><div class="ig-scope-item">⚠ VA-ECMO bridges reversible CCB toxicity — contact ECMO team EARLY, full recovery possible</div></div>
+<div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-weight">Weight <span class="ig-unit">(kg)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="weight" min="1" max="300" step="1" value="70" aria-label="Weight slider">
+<input type="number" id="ig-num-weight" data-input="weight" min="1" max="300" step="1" value="70" inputmode="decimal" aria-label="Weight exact value">
+</div>
+<div class="ig-warn" data-warn-for="weight" hidden role="alert">Value outside 1–300 kg — confirm.</div>
+</div><div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="cardiogenic" aria-checked="false">Cardiogenic shock (bradycardia, cool, low CO)</button><button type="button" class="ig-toggle" role="switch" data-toggle="vasodilatory" aria-checked="false">Vasodilatory shock (warm, tachycardic, low SVR)</button><button type="button" class="ig-toggle" role="switch" data-toggle="extendedrelease" aria-checked="false">Extended-release formulation</button><button type="button" class="ig-toggle" role="switch" data-toggle="refractory" aria-checked="false">Refractory to calcium + HIET + max pressors</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<main class="ig-main"><section class="ig-section"><h2 class="ig-h2">1 · Recognize &amp; classify the class</h2><div class="ig-block ig-callout t-mech" role="note"><div class="ig-callout-title">The drug class predicts the shock</div><div>Calcium channel blockers are among the most lethal cardiovascular overdoses. The <strong>class</strong> tells you which shock to expect and which antidote leads.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref3" class="ig-ref">[3]</a></div></div><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Class</th><th>Examples</th><th>Dominant effect</th><th>Shock phenotype</th><th>Antidote lead</th></tr></thead><tbody><tr class="ig-row t-danger"><td class="hero">Non-dihydropyridine</td><td>verapamil, diltiazem</td><td>SA/AV node suppression, negative inotropy</td><td>CARDIOGENIC (cool, bradycardic)</td><td>HIET + inotropes</td></tr><tr class="ig-row t-caution"><td class="hero">Dihydropyridine</td><td>amlodipine, nifedipine, felodipine</td><td>Peripheral vasodilation, reflex tachycardia</td><td>VASODILATORY (warm, tachycardic)</td><td>High-dose vasopressors</td></tr></tbody></table></div><p class="ig-block ig-text"><a href="#/drug/verapamil/a-fib" target="_top" class="ig-link">Verapamil</a> is the most cardiotoxic and causes the most deaths. <strong>Amlodipine</strong> is the most dangerous dihydropyridine — 30–50 h half-life and inherently long-acting.<a href="#cite-ref3" class="ig-ref">[3]</a></p><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;extendedrelease&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Extended-release deceives you</div><div>Extended-release CCBs (verapamil SR/ER, diltiazem CD/XR, nifedipine XL) can look well early, then crash <strong>12–24 h</strong> later. Toggle <strong>Extended-release</strong> above to surface the decontamination step.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;extendedrelease&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Extended-release — act now</div><div>Whole bowel irrigation (GoLYTELY 2L/hr) for ALL extended-release CCB ingestions until clear rectal effluent. Admit for a <strong>24–48 h</strong> minimum ICU watch even if currently stable.<a href="#cite-ref1" class="ig-ref">[1]</a></div></div></div></section><section class="ig-section"><h2 class="ig-h2">2 · Set the patient state → get the play</h2><p class="ig-block ig-text">Toggle the patient's current state above. The single <strong>What to do now</strong> card below rewrites itself to exactly one instruction — and the pathway diagram highlights the matching branch.</p><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;cardiogenic&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;vasodilatory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;refractory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Play: stabilize &amp; decontaminate</div><div>No shock flagged yet. Two large-bore IVs, continuous monitor, 12-lead ECG, BMP + lactate + glucose. Give <strong>calcium</strong> as a temporizing agent and start <a href="#/drug/glucagon/ccb%20toxicity" target="_top" class="ig-link">glucagon</a> as a bridge. Reassess the phenotype every few minutes.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;refractory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;cardiogenic&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Play: HIET is first-line</div><div>Cardiogenic shock → <strong>high-dose insulin euglycemia therapy leads.</strong> Insulin 1 U/kg bolus then 1-10 U/kg/hr, maintain glucose 150–250, replete K+ to 4.0–4.5. Add an inotrope (epinephrine) if CO stays poor.<a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref4" class="ig-ref">[4]</a></div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;refractory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;cardiogenic&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;vasodilatory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Play: high-dose vasopressors lead</div><div>Vasodilatory shock → <strong><a href="#/drug/norepinephrine/ccb%20shock" target="_top" class="ig-link">norepinephrine</a> 0.1–3 mcg/kg/min</strong>, titrate aggressively, add <a href="#/drug/vasopressin/ccb%20shock" target="_top" class="ig-link">vasopressin</a> 0.04 units/min. CCB toxicity blunts catecholamine response — expect to go far higher than in sepsis.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;refractory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Play: rescue therapies + call ECMO</div><div>Refractory to calcium + HIET + max pressors → escalate to <strong>lipid emulsion</strong> and <strong>methylene blue</strong> (for vasoplegia), and contact the <strong>VA-ECMO</strong> team now. CCB toxicity is reversible — bridge the patient through it.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref5" class="ig-ref">[5]</a></div></div></div><p class="ig-block ig-text">Precedence: <strong>refractory</strong> overrides everything; otherwise <strong>cardiogenic</strong> takes the HIET play and <strong>vasodilatory</strong> takes the pressor play. If both shock types are flagged, treat both components — mixed shock is common.</p></section><section class="ig-section"><h2 class="ig-h2">3 · Weight-based antidote calculator</h2><p class="ig-block ig-text">Enter <strong>weight</strong> above. Doses below are live. Rescue doses appear only when their state is toggled on.</p><div class="ig-cond" data-whennode="ccb-hiet"><div class="ig-block ig-dose" data-calc="regularinsulindkadripperhour"><div class="ig-dose-drug">Regular insulin — HIET drip basis (0.1 units/kg)</div><div class="ig-dose-val"><span data-calc-value>8</span></div><div class="ig-dose-route">IV infusion, then titrate to 1-10 units/kg/hr</div><div class="ig-dose-note">Provenance is the standard insulin infusion rate (0.1 units/kg/hr). HIET starts with a 1 U/kg bolus and the infusion is titrated far higher — up to 1-10 units/kg/hr — with dextrose to hold glucose 150-250.</div></div></div><div class="ig-cond" data-whennode="ccb-stabilize"><div class="ig-block ig-dose" data-calc="glucagonpediatric20mcgkg"><div class="ig-dose-drug">Glucagon — pediatric weight-based bridge (0.02 mg/kg)</div><div class="ig-dose-val"><span data-calc-value>1</span></div><div class="ig-dose-route">IV bolus (adult 3–5 mg)</div><div class="ig-dose-note">Less effective in CCB than in beta-blocker toxicity. Use as a bridge while HIET is prepared — do not rely on it. Adult bolus is 3–5 mg; the calculator shows the 0.02 mg/kg pediatric weight-based dose (max 1 mg).</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;refractory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="ccb-rescue"><div class="ig-block ig-dose" data-calc="lipidemulsionivbolusdose"><div class="ig-dose-drug">Lipid emulsion 20% (Intralipid) — refractory only (1.5 mL/kg)</div><div class="ig-dose-val"><span data-calc-value>120</span></div><div class="ig-dose-route">IV bolus over 1 min, may repeat ×2</div><div class="ig-dose-note">Best evidence in verapamil (highly lipophilic). Max 10-12 mL/kg in the first hour. Creates a lipid sink for the drug.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;refractory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="ccb-rescue"><div class="ig-block ig-dose" data-calc="methylenebluestandarddose1mgkg"><div class="ig-dose-drug">Methylene blue — standard (1 mg/kg)</div><div class="ig-dose-val"><span data-calc-value>80</span></div><div class="ig-dose-route">IV over 5–15 min</div><div class="ig-dose-note">For refractory vasoplegia — inhibits NO synthase / guanylate cyclase. Contraindicated with serotonergic drugs; caution in G6PD deficiency.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;refractory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="ccb-rescue"><div class="ig-block ig-dose" data-calc="methylenebluehighdose2mgkg"><div class="ig-dose-drug">Methylene blue — high (2 mg/kg)</div><div class="ig-dose-val"><span data-calc-value>160</span></div><div class="ig-dose-route">IV over 5–15 min, may repeat q1h</div><div class="ig-dose-note">Upper end of the 1-2 mg/kg range for refractory vasoplegia. Will turn skin/urine blue and interferes with pulse oximetry.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">4 · One-glance pathway</h2><p class="ig-block ig-text">Tap any box for detail. Toggling a state above auto-highlights the matching branch below.</p><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 888 1128" width="888" height="1128" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M339,98 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,206 L339,227 L129,227 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="223" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M339,206 L339,227 L549,227 L549,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="223" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M129,314 L129,335 L339,335 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,314 L549,335 L339,335 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,422 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,530 L339,551 L129,551 L129,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="547" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M339,530 L339,551 L549,551 L549,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="547" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M129,638 L129,659 L339,659 L339,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,638 L549,659 L339,659 L339,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,746 L339,767 L549,767 L549,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="763" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M339,746 L339,767 L129,767 L129,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="763" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M549,854 L549,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="871" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M549,854 L549,875 L759,875 L759,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="871" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M129,854 L129,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,962 L129,1004" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="979" class="ig-edge-lbl" text-anchor="middle">yes</text><path d="M129,962 L129,929 L549,929 L549,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="925" class="ig-edge-lbl" text-anchor="middle">no</text><path d="M129,1070 L129,983 L549,983 L549,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="ccb-start" tabindex="0" role="button" aria-label="Suspected CCB overdose"><rect x="251" y="32" width="176" height="66" rx="30" class="ig-shape t-mech"/><foreignObject x="257" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Suspected CCB overdose</div></foreignObject></g><g class="ig-node" data-node="ccb-class" tabindex="0" role="button" aria-label="Non-DHP agent? (verapamil / diltiazem)"><polygon points="273,140 405,140 427,173 405,206 273,206 251,173" class="ig-shape t-neutral"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Non-DHP agent? (verapamil / diltiazem)</div></foreignObject></g><g class="ig-node" data-node="ccb-nondhp" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;cardiogenic&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Non-DHP → expect CARDIOGENIC shock"><rect x="41" y="248" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Non-DHP → expect CARDIOGENIC shock</div></foreignObject></g><g class="ig-node" data-node="ccb-dhp" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;vasodilatory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="DHP → expect VASODILATORY shock"><rect x="461" y="248" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="467" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">DHP → expect VASODILATORY shock</div></foreignObject></g><g class="ig-node" data-node="ccb-stabilize" tabindex="0" role="button" aria-label="Stabilize: IVs, monitor, ECG · calcium + glucagon bridge"><rect x="251" y="356" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="257" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Stabilize: IVs, monitor, ECG · calcium + glucagon bridge</div></foreignObject></g><g class="ig-node" data-node="ccb-phenotype" tabindex="0" role="button" aria-label="Cardiogenic shock (bradycardia, low CO)?"><polygon points="273,464 405,464 427,497 405,530 273,530 251,497" class="ig-shape t-caution"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Cardiogenic shock (bradycardia, low CO)?</div></foreignObject></g><g class="ig-node" data-node="ccb-hiet" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;cardiogenic&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="HIET first-line: insulin 1 U/kg → 1-10 U/kg/hr"><rect x="41" y="572" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">HIET first-line: insulin 1 U/kg → 1-10 U/kg/hr</div></foreignObject></g><g class="ig-node" data-node="ccb-pressors" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;vasodilatory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="High-dose vasopressors: norepinephrine + vasopressin"><rect x="461" y="572" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="467" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">High-dose vasopressors: norepinephrine + vasopressin</div></foreignObject></g><g class="ig-node" data-node="ccb-response" tabindex="0" role="button" aria-label="Responding to therapy?"><polygon points="273,680 405,680 427,713 405,746 273,746 251,713" class="ig-shape t-neutral"/><foreignObject x="257" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Responding to therapy?</div></foreignObject></g><g class="ig-node" data-node="ccb-dispo" tabindex="0" role="button" aria-label="High-risk? (ER formulation, verapamil, large dose)"><polygon points="483,788 615,788 637,821 615,854 483,854 461,821" class="ig-shape t-neutral"/><foreignObject x="467" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">High-risk? (ER formulation, verapamil, large dose)</div></foreignObject></g><g class="ig-node" data-node="ccb-icu" tabindex="0" role="button" aria-label="ICU admission — telemetry, arterial line"><rect x="461" y="896" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="467" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">ICU admission — telemetry, arterial line</div></foreignObject></g><g class="ig-node" data-node="ccb-obs" tabindex="0" role="button" aria-label="6 h monitored observation → discharge if normal"><rect x="671" y="896" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="677" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">6 h monitored observation → discharge if normal</div></foreignObject></g><g class="ig-node" data-node="ccb-rescue" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;refractory&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Rescue: lipid emulsion + methylene blue"><rect x="41" y="788" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Rescue: lipid emulsion + methylene blue</div></foreignObject></g><g class="ig-node" data-node="ccb-ecmo-q" tabindex="0" role="button" aria-label="Arrest or refractory despite max therapy?"><polygon points="63,896 195,896 217,929 195,962 63,962 41,929" class="ig-shape t-neutral"/><foreignObject x="47" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Arrest or refractory despite max therapy?</div></foreignObject></g><g class="ig-node" data-node="ccb-ecmo" tabindex="0" role="button" aria-label="VA-ECMO — bridge to recovery (call EARLY)"><rect x="41" y="1004" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="1008" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">VA-ECMO — bridge to recovery (call EARLY)</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="ccb-start" hidden><strong>Suspected CCB overdose</strong><br>Hyperglycemia supports the diagnosis — CCBs block pancreatic insulin release.</div><div class="ig-node-detail" data-detail-for="ccb-class" hidden><strong>Non-DHP agent? (verapamil / diltiazem)</strong><br>Class determines the expected shock. Non-DHP → cardiogenic; DHP (amlodipine, nifedipine) → vasodilatory.</div><div class="ig-node-detail" data-detail-for="ccb-nondhp" hidden><strong>Non-DHP → expect CARDIOGENIC shock</strong><br>Bradycardia, AV block, cool extremities, poor CO, rising lactate.</div><div class="ig-node-detail" data-detail-for="ccb-dhp" hidden><strong>DHP → expect VASODILATORY shock</strong><br>Warm extremities, reflex tachycardia, low SVR, wide pulse pressure early.</div><div class="ig-node-detail" data-detail-for="ccb-stabilize" hidden><strong>Stabilize: IVs, monitor, ECG · calcium + glucagon bridge</strong><br>Calcium chloride 1-2g q15-20min central, or calcium gluconate 3-6g peripherally. Atropine and pacing usually fail — the block is at the channel, not vagal.</div><div class="ig-node-detail" data-detail-for="ccb-phenotype" hidden><strong>Cardiogenic shock (bradycardia, low CO)?</strong><br>The pivot. Cardiogenic → HIET leads. Vasodilatory → pressors lead. Mixed → both.</div><div class="ig-node-detail" data-detail-for="ccb-hiet" hidden><strong>HIET first-line: insulin 1 U/kg → 1-10 U/kg/hr</strong><br>Hold glucose 150-250 with dextrose, replete K+ to 4.0-4.5. Onset 15-60 min — do not stop early or underdose.</div><div class="ig-node-detail" data-detail-for="ccb-pressors" hidden><strong>High-dose vasopressors: norepinephrine + vasopressin</strong><br>Norepinephrine 0.1-3 mcg/kg/min, add vasopressin 0.04 units/min. Escalate past septic-shock doses — receptors are desensitized.</div><div class="ig-node-detail" data-detail-for="ccb-response" hidden><strong>Responding to therapy?</strong><br>Improving BP, CO, lactate clearance, falling pressor need.</div><div class="ig-node-detail" data-detail-for="ccb-dispo" hidden><strong>High-risk? (ER formulation, verapamil, large dose)</strong><br>Extended-release or verapamil can deteriorate 12-24 h out.</div><div class="ig-node-detail" data-detail-for="ccb-icu" hidden><strong>ICU admission — telemetry, arterial line</strong><br>Serial glucose q1h, K+ q2h, lactate q4h. Extended-release: 48-72 h. Poison Control 1-800-222-1222.</div><div class="ig-node-detail" data-detail-for="ccb-obs" hidden><strong>6 h monitored observation → discharge if normal</strong><br>Only for small immediate-release DHP, asymptomatic ×6h, normal vitals and ECG, reliable history. Any doubt → ICU.</div><div class="ig-node-detail" data-detail-for="ccb-rescue" hidden><strong>Rescue: lipid emulsion + methylene blue</strong><br>Lipid emulsion 1.5 mL/kg (verapamil best evidence); methylene blue 1-2 mg/kg for refractory vasoplegia.</div><div class="ig-node-detail" data-detail-for="ccb-ecmo-q" hidden><strong>Arrest or refractory despite max therapy?</strong><br>CCB toxicity is reversible — bridge, do not give up.</div><div class="ig-node-detail" data-detail-for="ccb-ecmo" hidden><strong>VA-ECMO — bridge to recovery (call EARLY)</strong><br>Contact the ECMO team before arrest. Half-life 4-50 h; full recovery is possible.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">5 · Disposition &amp; pitfalls</h2><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Presentation</th><th class="hero">Disposition</th><th>Minimum monitoring</th></tr></thead><tbody><tr class="ig-row t-danger"><td>Any shock, ER formulation, or verapamil</td><td class="hero">ICU</td><td>48-72 h; arterial line, serial labs</td></tr><tr class="ig-row t-caution"><td>Large ingestion, stable</td><td class="hero">ICU / step-down</td><td>24-48 h telemetry, serial ECG</td></tr><tr class="ig-row t-normal"><td>Small immediate-release DHP, asymptomatic</td><td class="hero">Observation</td><td>6 h telemetry, then discharge if normal</td></tr></tbody></table></div><details class="ig-block ig-disc"><summary>Critical pitfalls<span class="ig-scent">4 items</span></summary><div class="ig-disc-body"><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT rely on atropine or pacing.</strong> The block is at the calcium channel, not the vagus — both usually fail to restore hemodynamics.</div></div><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT underdose or stop HIET early.</strong> Onset takes 15-60 min; titrate up to 10 units/kg/hr and supplement dextrose to avoid hypoglycemia.</div></div><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT be reassured by an extended-release patient who looks well.</strong> Toxicity peaks 12-24 h out — admit and irrigate.</div></div><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT abandon vasopressors at conventional ceilings.</strong> CCB toxicity needs far higher doses than sepsis — escalate and add a second agent.</div></div></div></details><p class="ig-block ig-text">This is a teaching overview. The full branching protocol lives in the <a href="#/tree/ccb-od" target="_top" class="ig-link">myMedKitt CCB overdose consult</a>.</p></section></main>
+<details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Recognize &amp; classify the class</h3><p>Calcium channel blockers are among the most lethal cardiovascular overdoses. The **class** tells you which shock to expect and which antidote leads.{{ref1}}{{ref3}}</p><p>Class | Examples | Dominant effect | Shock phenotype | Antidote lead</p><p>Non-dihydropyridine | verapamil, diltiazem | SA/AV node suppression, negative inotropy | CARDIOGENIC (cool, bradycardic) | HIET + inotropes</p><p>Dihydropyridine | amlodipine, nifedipine, felodipine | Peripheral vasodilation, reflex tachycardia | VASODILATORY (warm, tachycardic) | High-dose vasopressors</p><p>[Verapamil](#/drug/verapamil/a-fib) is the most cardiotoxic and causes the most deaths. **Amlodipine** is the most dangerous dihydropyridine — 30–50 h half-life and inherently long-acting.{{ref3}}</p><p>Extended-release CCBs (verapamil SR/ER, diltiazem CD/XR, nifedipine XL) can look well early, then crash **12–24 h** later. Toggle **Extended-release** above to surface the decontamination step.</p><p>Whole bowel irrigation (GoLYTELY 2L/hr) for ALL extended-release CCB ingestions until clear rectal effluent. Admit for a **24–48 h** minimum ICU watch even if currently stable.{{ref1}}</p><h3>2 · Set the patient state → get the play</h3><p>Toggle the patient's current state above. The single **What to do now** card below rewrites itself to exactly one instruction — and the pathway diagram highlights the matching branch.</p><p>No shock flagged yet. Two large-bore IVs, continuous monitor, 12-lead ECG, BMP + lactate + glucose. Give **calcium** as a temporizing agent and start [glucagon](#/drug/glucagon/ccb%20toxicity) as a bridge. Reassess the phenotype every few minutes.</p><p>Cardiogenic shock → **high-dose insulin euglycemia therapy leads.** Insulin 1 U/kg bolus then 1-10 U/kg/hr, maintain glucose 150–250, replete K+ to 4.0–4.5. Add an inotrope (epinephrine) if CO stays poor.{{ref2}}{{ref4}}</p><p>Vasodilatory shock → **[norepinephrine](#/drug/norepinephrine/ccb%20shock) 0.1–3 mcg/kg/min**, titrate aggressively, add [vasopressin](#/drug/vasopressin/ccb%20shock) 0.04 units/min. CCB toxicity blunts catecholamine response — expect to go far higher than in sepsis.{{ref1}}{{ref2}}</p><p>Refractory to calcium + HIET + max pressors → escalate to **lipid emulsion** and **methylene blue** (for vasoplegia), and contact the **VA-ECMO** team now. CCB toxicity is reversible — bridge the patient through it.{{ref1}}{{ref5}}</p><p>Precedence: **refractory** overrides everything; otherwise **cardiogenic** takes the HIET play and **vasodilatory** takes the pressor play. If both shock types are flagged, treat both components — mixed shock is common.</p><h3>3 · Weight-based antidote calculator</h3><p>Enter **weight** above. Doses below are live. Rescue doses appear only when their state is toggled on.</p><p><strong>Regular insulin — HIET drip basis (0.1 units/kg)</strong>: 8 IV infusion, then titrate to 1-10 units/kg/hr — Provenance is the standard insulin infusion rate (0.1 units/kg/hr). HIET starts with a 1 U/kg bolus and the infusion is titrated far higher — up to 1-10 units/kg/hr — with dextrose to hold glucose 150-250.</p><p><strong>Glucagon — pediatric weight-based bridge (0.02 mg/kg)</strong>: 1 IV bolus (adult 3–5 mg) — Less effective in CCB than in beta-blocker toxicity. Use as a bridge while HIET is prepared — do not rely on it. Adult bolus is 3–5 mg; the calculator shows the 0.02 mg/kg pediatric weight-based dose (max 1 mg).</p><p><strong>Lipid emulsion 20% (Intralipid) — refractory only (1.5 mL/kg)</strong>: 120 IV bolus over 1 min, may repeat ×2 — Best evidence in verapamil (highly lipophilic). Max 10-12 mL/kg in the first hour. Creates a lipid sink for the drug.</p><p><strong>Methylene blue — standard (1 mg/kg)</strong>: 80 IV over 5–15 min — For refractory vasoplegia — inhibits NO synthase / guanylate cyclase. Contraindicated with serotonergic drugs; caution in G6PD deficiency.</p><p><strong>Methylene blue — high (2 mg/kg)</strong>: 160 IV over 5–15 min, may repeat q1h — Upper end of the 1-2 mg/kg range for refractory vasoplegia. Will turn skin/urine blue and interferes with pulse oximetry.</p><h3>4 · One-glance pathway</h3><p>Tap any box for detail. Toggling a state above auto-highlights the matching branch below.</p><p>Suspected CCB overdose — Hyperglycemia supports the diagnosis — CCBs block pancreatic insulin release.</p><p>Non-DHP agent? (verapamil / diltiazem) — Class determines the expected shock. Non-DHP → cardiogenic; DHP (amlodipine, nifedipine) → vasodilatory.</p><p>Non-DHP → expect CARDIOGENIC shock — Bradycardia, AV block, cool extremities, poor CO, rising lactate.</p><p>DHP → expect VASODILATORY shock — Warm extremities, reflex tachycardia, low SVR, wide pulse pressure early.</p><p>Stabilize: IVs, monitor, ECG · calcium + glucagon bridge — Calcium chloride 1-2g q15-20min central, or calcium gluconate 3-6g peripherally. Atropine and pacing usually fail — the block is at the channel, not vagal.</p><p>Cardiogenic shock (bradycardia, low CO)? — The pivot. Cardiogenic → HIET leads. Vasodilatory → pressors lead. Mixed → both.</p><p>HIET first-line: insulin 1 U/kg → 1-10 U/kg/hr — Hold glucose 150-250 with dextrose, replete K+ to 4.0-4.5. Onset 15-60 min — do not stop early or underdose.</p><p>High-dose vasopressors: norepinephrine + vasopressin — Norepinephrine 0.1-3 mcg/kg/min, add vasopressin 0.04 units/min. Escalate past septic-shock doses — receptors are desensitized.</p><p>Responding to therapy? — Improving BP, CO, lactate clearance, falling pressor need.</p><p>High-risk? (ER formulation, verapamil, large dose) — Extended-release or verapamil can deteriorate 12-24 h out.</p><p>ICU admission — telemetry, arterial line — Serial glucose q1h, K+ q2h, lactate q4h. Extended-release: 48-72 h. Poison Control 1-800-222-1222.</p><p>6 h monitored observation → discharge if normal — Only for small immediate-release DHP, asymptomatic ×6h, normal vitals and ECG, reliable history. Any doubt → ICU.</p><p>Rescue: lipid emulsion + methylene blue — Lipid emulsion 1.5 mL/kg (verapamil best evidence); methylene blue 1-2 mg/kg for refractory vasoplegia.</p><p>Arrest or refractory despite max therapy? — CCB toxicity is reversible — bridge, do not give up.</p><p>VA-ECMO — bridge to recovery (call EARLY) — Contact the ECMO team before arrest. Half-life 4-50 h; full recovery is possible.</p><h3>5 · Disposition &amp; pitfalls</h3><p>Presentation | Disposition | Minimum monitoring</p><p>Any shock, ER formulation, or verapamil | ICU | 48-72 h; arterial line, serial labs</p><p>Large ingestion, stable | ICU / step-down | 24-48 h telemetry, serial ECG</p><p>Small immediate-release DHP, asymptomatic | Observation | 6 h telemetry, then discharge if normal</p><p><em>Critical pitfalls</em></p><p>**Do NOT rely on atropine or pacing.** The block is at the calcium channel, not the vagus — both usually fail to restore hemodynamics.</p><p>**Do NOT underdose or stop HIET early.** Onset takes 15-60 min; titrate up to 10 units/kg/hr and supplement dextrose to avoid hypoglycemia.</p><p>**Do NOT be reassured by an extended-release patient who looks well.** Toxicity peaks 12-24 h out — admit and irrigate.</p><p>**Do NOT abandon vasopressors at conventional ceilings.** CCB toxicity needs far higher doses than sepsis — escalate and add a second agent.</p><p>This is a teaching overview. The full branching protocol lives in the [myMedKitt CCB overdose consult](#/tree/ccb-od).</p></div></details>
+<section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> St-Onge M, Dubé PA, Gosselin S, et al. Treatment for Calcium Channel Blocker Poisoning: A Systematic Review. Clin Toxicol. 2014;52(9):926-944. AACT Position Statement. <span class="ig-cite-ids">Systematic review / position statement</span></li><li id="cite-ref2"><span class="ig-ref">[2]</span> Levine M, Curry SC, Padilla-Jones A, Ruha AM. Critical Care Management of Verapamil and Diltiazem Overdose With a Focus on Vasopressors: A 25-Year Experience at a Single Center. Ann Emerg Med. 2013;62(3):252-258.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Graudins A, Lee HM, Druda D. Calcium Channel Blocker and Beta-Blocker Toxicity. Emerg Med Clin North Am. 2022;40(3):507-523.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Engebretsen KM, Kaczmarek KM, Morgan J, Holger JS. High-Dose Insulin Therapy in Beta-Blocker and Calcium Channel Blocker Poisoning. Clin Toxicol. 2011;49(4):277-283.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Mégarbane B, Karyo S, Baud FJ. The Role of Antidotes in the Management of Calcium Channel Blocker Poisoning. Presse Med. 2013;42(4 Pt 2):e99-e109.</li></ol></section>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-07 · evidence through 2022 EMCNA / 2014 AACT position statement · next review 2027-07-07</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · ccb-od · v1.0 initial — generated from myMedKitt ccb-od consult</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"ccb-od","title":"Calcium Channel Blocker Overdose: Match the Shock Phenotype","shape":"algorithm","intendedUse":"Adults in the ED/ICU with known or suspected calcium channel blocker overdose. Excludes pediatrics (weight-based doses shown are adult-scaled), pregnancy, and mixed toxidromes requiring a different antidote pathway.","scopeWarnings":["Insulin 1 U/kg bolus then 1-10 U/kg/hr — maintain glucose 150-250, replete K+ to 4.0-4.5","High-dose insulin euglycemia therapy (HIET): 1 unit/kg bolus, then 1-10 units/kg/hr infusion","Calcium chloride 1-2g IV q15-20min (or continuous infusion) to overcome channel blockade","Vasopressors at HIGH doses (norepinephrine 0.5-3 mcg/kg/min) for vasodilatory shock","Whole bowel irrigation (GoLYTELY 2L/hr) for ALL extended-release CCB ingestions","VA-ECMO bridges reversible CCB toxicity — contact ECMO team EARLY, full recovery possible"],"source":{"kind":"medkitt-consult","ref":"ccb-od"},"theme":{"preset":"medkitt"},"inputs":[{"id":"weight","label":"Weight","unit":"kg","type":"number","min":1,"max":300,"step":1,"default":70},{"id":"cardiogenic","label":"Cardiogenic shock (bradycardia, cool, low CO)","type":"boolean","default":0},{"id":"vasodilatory","label":"Vasodilatory shock (warm, tachycardic, low SVR)","type":"boolean","default":0},{"id":"extendedrelease","label":"Extended-release formulation","type":"boolean","default":0},{"id":"refractory","label":"Refractory to calcium + HIET + max pressors","type":"boolean","default":0}],"calcs":[{"id":"regularinsulindkadripperhour","expr":"round(0.1*weight,2)","unit":"units","formula":"0.1 units/kg × weight","derivedFrom":{"drugId":"regular-insulin","indication":"DKA — IV infusion"},"testVectors":[{"in":{"weight":10},"expect":1},{"in":{"weight":40},"expect":4},{"in":{"weight":80},"expect":8}],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":0.1},"b":{"k":"id","name":"weight"}},{"k":"num","v":2}]}},{"id":"lipidemulsionivbolusdose","expr":"round(1.5*weight,1)","unit":"mL","formula":"1.5 mL/kg × weight","derivedFrom":{"drugId":"lipid-emulsion","indication":"TCA Overdose — Cardiac Arrest / Refractory Toxicity"},"testVectors":[{"in":{"weight":10},"expect":15},{"in":{"weight":40},"expect":60},{"in":{"weight":80},"expect":120}],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":1.5},"b":{"k":"id","name":"weight"}},{"k":"num","v":1}]}},{"id":"methylenebluestandarddose1mgkg","expr":"round(1*weight,1)","unit":"mg","formula":"1 mg/kg × weight","derivedFrom":{"drugId":"methylene-blue","indication":"Refractory anaphylaxis"},"testVectors":[{"in":{"weight":10},"expect":10},{"in":{"weight":40},"expect":40},{"in":{"weight":80},"expect":80}],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":1},"b":{"k":"id","name":"weight"}},{"k":"num","v":1}]}},{"id":"methylenebluehighdose2mgkg","expr":"round(2*weight,1)","unit":"mg","formula":"2 mg/kg × weight","derivedFrom":{"drugId":"methylene-blue","indication":"Refractory anaphylaxis"},"testVectors":[{"in":{"weight":10},"expect":20},{"in":{"weight":40},"expect":80},{"in":{"weight":80},"expect":160}],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":2},"b":{"k":"id","name":"weight"}},{"k":"num","v":1}]}},{"id":"glucagonpediatric20mcgkg","expr":"min(round(0.02*weight,2),1)","unit":"mg","formula":"0.02 mg/kg × weight (max 1 mg)","derivedFrom":{"drugId":"glucagon","indication":"Anaphylaxis (beta-blocked patient)"},"testVectors":[{"in":{"weight":10},"expect":0.2},{"in":{"weight":40},"expect":0.8},{"in":{"weight":80},"expect":1}],"exprAst":{"k":"call","fn":"min","args":[{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":0.02},"b":{"k":"id","name":"weight"}},{"k":"num","v":2}]},{"k":"num","v":1}]}}],"facts":[{"id":"fregularinsulindkadripperhour","claim":"Regular insulin drip rate (drug-store DKA infusion basis; HIET titrates far higher)","value":"0.1 units/kg","provenance":"drug-store:regular-insulin/DKA — IV infusion","cite":[],"verified":"provenance"},{"id":"flipidemulsionivbolusdose","claim":"Lipid emulsion 20% IV bolus dose","value":"1.5 mL/kg","provenance":"drug-store:lipid-emulsion/TCA Overdose — Cardiac Arrest / Refractory Toxicity","cite":[],"verified":"provenance"},{"id":"fmethylenebluestandarddose1mgkg","claim":"Methylene blue standard dose","value":"1 mg/kg","provenance":"drug-store:methylene-blue/Refractory anaphylaxis","cite":[],"verified":"provenance"},{"id":"fmethylenebluehighdose2mgkg","claim":"Methylene blue high dose","value":"2 mg/kg","provenance":"drug-store:methylene-blue/Refractory anaphylaxis","cite":[],"verified":"provenance"},{"id":"fglucagonpediatric20mcgkg","claim":"Glucagon pediatric weight-based dose","value":"0.02 mg/kg","provenance":"drug-store:glucagon/Anaphylaxis (beta-blocked patient)","cite":[],"verified":"provenance"}],"sections":[{"id":"sec-classify","title":"1 · Recognize & classify the class","blocks":[{"id":"b-intro","type":"callout","tone":"mechanism","title":"The drug class predicts the shock","md":"Calcium channel blockers are among the most lethal cardiovascular overdoses. The **class** tells you which shock to expect and which antidote leads.{{ref1}}{{ref3}}"},{"id":"b-classtable","type":"table","columns":["Class","Examples","Dominant effect","Shock phenotype","Antidote lead"],"heroCol":0,"rows":[["Non-dihydropyridine","verapamil, diltiazem","SA/AV node suppression, negative inotropy","CARDIOGENIC (cool, bradycardic)","HIET + inotropes"],["Dihydropyridine","amlodipine, nifedipine, felodipine","Peripheral vasodilation, reflex tachycardia","VASODILATORY (warm, tachycardic)","High-dose vasopressors"]],"rowTones":["danger","caution"],"cite":["ref1","ref2"]},{"id":"b-verapamil","type":"text","md":"[Verapamil](#/drug/verapamil/a-fib) is the most cardiotoxic and causes the most deaths. **Amlodipine** is the most dangerous dihydropyridine — 30–50 h half-life and inherently long-acting.{{ref3}}"},{"id":"b-er","type":"callout","tone":"caution","title":"Extended-release deceives you","md":"Extended-release CCBs (verapamil SR/ER, diltiazem CD/XR, nifedipine XL) can look well early, then crash **12–24 h** later. Toggle **Extended-release** above to surface the decontamination step.","showWhen":"extendedrelease==0"},{"id":"b-er-active","type":"callout","tone":"danger","title":"Extended-release — act now","md":"Whole bowel irrigation (GoLYTELY 2L/hr) for ALL extended-release CCB ingestions until clear rectal effluent. Admit for a **24–48 h** minimum ICU watch even if currently stable.{{ref1}}","showWhen":"extendedrelease==1"}]},{"id":"sec-state","title":"2 · Set the patient state → get the play","blocks":[{"id":"b-statehint","type":"text","md":"Toggle the patient's current state above. The single **What to do now** card below rewrites itself to exactly one instruction — and the pathway diagram highlights the matching branch."},{"id":"b-play-default","type":"callout","tone":"normal","title":"Play: stabilize & decontaminate","md":"No shock flagged yet. Two large-bore IVs, continuous monitor, 12-lead ECG, BMP + lactate + glucose. Give **calcium** as a temporizing agent and start [glucagon](#/drug/glucagon/ccb%20toxicity) as a bridge. Reassess the phenotype every few minutes.","showWhen":"cardiogenic==0 && vasodilatory==0 && refractory==0"},{"id":"b-play-cardiogenic","type":"callout","tone":"danger","title":"Play: HIET is first-line","md":"Cardiogenic shock → **high-dose insulin euglycemia therapy leads.** Insulin 1 U/kg bolus then 1-10 U/kg/hr, maintain glucose 150–250, replete K+ to 4.0–4.5. Add an inotrope (epinephrine) if CO stays poor.{{ref2}}{{ref4}}","showWhen":"refractory==0 && cardiogenic==1"},{"id":"b-play-vasodilatory","type":"callout","tone":"caution","title":"Play: high-dose vasopressors lead","md":"Vasodilatory shock → **[norepinephrine](#/drug/norepinephrine/ccb%20shock) 0.1–3 mcg/kg/min**, titrate aggressively, add [vasopressin](#/drug/vasopressin/ccb%20shock) 0.04 units/min. CCB toxicity blunts catecholamine response — expect to go far higher than in sepsis.{{ref1}}{{ref2}}","showWhen":"refractory==0 && cardiogenic==0 && vasodilatory==1"},{"id":"b-play-refractory","type":"callout","tone":"danger","title":"Play: rescue therapies + call ECMO","md":"Refractory to calcium + HIET + max pressors → escalate to **lipid emulsion** and **methylene blue** (for vasoplegia), and contact the **VA-ECMO** team now. CCB toxicity is reversible — bridge the patient through it.{{ref1}}{{ref5}}","showWhen":"refractory==1"},{"id":"b-precedence","type":"text","md":"Precedence: **refractory** overrides everything; otherwise **cardiogenic** takes the HIET play and **vasodilatory** takes the pressor play. If both shock types are flagged, treat both components — mixed shock is common."}]},{"id":"sec-doses","title":"3 · Weight-based antidote calculator","blocks":[{"id":"b-doseintro","type":"text","md":"Enter **weight** above. Doses below are live. Rescue doses appear only when their state is toggled on."},{"id":"b-insulin","type":"dose","drug":"Regular insulin — HIET drip basis (0.1 units/kg)","dose":"8","route":"IV infusion, then titrate to 1-10 units/kg/hr","calcRef":"regularinsulindkadripperhour","note":"Provenance is the standard insulin infusion rate (0.1 units/kg/hr). HIET starts with a 1 U/kg bolus and the infusion is titrated far higher — up to 1-10 units/kg/hr — with dextrose to hold glucose 150-250.","cite":["ref4"],"whenNode":"ccb-hiet"},{"id":"b-glucagon","type":"dose","drug":"Glucagon — pediatric weight-based bridge (0.02 mg/kg)","dose":"1","route":"IV bolus (adult 3–5 mg)","calcRef":"glucagonpediatric20mcgkg","note":"Less effective in CCB than in beta-blocker toxicity. Use as a bridge while HIET is prepared — do not rely on it. Adult bolus is 3–5 mg; the calculator shows the 0.02 mg/kg pediatric weight-based dose (max 1 mg).","cite":["ref3"],"whenNode":"ccb-stabilize"},{"id":"b-lipid","type":"dose","drug":"Lipid emulsion 20% (Intralipid) — refractory only (1.5 mL/kg)","dose":"120","route":"IV bolus over 1 min, may repeat ×2","calcRef":"lipidemulsionivbolusdose","note":"Best evidence in verapamil (highly lipophilic). Max 10-12 mL/kg in the first hour. Creates a lipid sink for the drug.","cite":["ref5"],"showWhen":"refractory==1","whenNode":"ccb-rescue"},{"id":"b-mb1","type":"dose","drug":"Methylene blue — standard (1 mg/kg)","dose":"80","route":"IV over 5–15 min","calcRef":"methylenebluestandarddose1mgkg","note":"For refractory vasoplegia — inhibits NO synthase / guanylate cyclase. Contraindicated with serotonergic drugs; caution in G6PD deficiency.","cite":["ref1"],"showWhen":"refractory==1","whenNode":"ccb-rescue"},{"id":"b-mb2","type":"dose","drug":"Methylene blue — high (2 mg/kg)","dose":"160","route":"IV over 5–15 min, may repeat q1h","calcRef":"methylenebluehighdose2mgkg","note":"Upper end of the 1-2 mg/kg range for refractory vasoplegia. Will turn skin/urine blue and interferes with pulse oximetry.","cite":["ref1"],"showWhen":"refractory==1","whenNode":"ccb-rescue"}]},{"id":"sec-flow","title":"4 · One-glance pathway","blocks":[{"id":"b-flowhint","type":"text","md":"Tap any box for detail. Toggling a state above auto-highlights the matching branch below."},{"id":"b-flow","type":"flow","nodes":[{"id":"ccb-start","shape":"state","text":"Suspected CCB overdose","col":0,"rank":0,"tone":"mechanism","detail":"Hyperglycemia supports the diagnosis — CCBs block pancreatic insulin release."},{"id":"ccb-class","shape":"decision","text":"Non-DHP agent? (verapamil / diltiazem)","col":0,"rank":1,"detail":"Class determines the expected shock. Non-DHP → cardiogenic; DHP (amlodipine, nifedipine) → vasodilatory."},{"id":"ccb-nondhp","shape":"action","text":"Non-DHP → expect CARDIOGENIC shock","col":-1,"rank":2,"tone":"danger","activeWhen":"cardiogenic==1","detail":"Bradycardia, AV block, cool extremities, poor CO, rising lactate."},{"id":"ccb-dhp","shape":"action","text":"DHP → expect VASODILATORY shock","col":1,"rank":2,"tone":"caution","activeWhen":"vasodilatory==1","detail":"Warm extremities, reflex tachycardia, low SVR, wide pulse pressure early."},{"id":"ccb-stabilize","shape":"action","text":"Stabilize: IVs, monitor, ECG · calcium + glucagon bridge","col":0,"rank":3,"detail":"Calcium chloride 1-2g q15-20min central, or calcium gluconate 3-6g peripherally. Atropine and pacing usually fail — the block is at the channel, not vagal."},{"id":"ccb-phenotype","shape":"decision","text":"Cardiogenic shock (bradycardia, low CO)?","col":0,"rank":4,"tone":"caution","detail":"The pivot. Cardiogenic → HIET leads. Vasodilatory → pressors lead. Mixed → both."},{"id":"ccb-hiet","shape":"action","text":"HIET first-line: insulin 1 U/kg → 1-10 U/kg/hr","col":-1,"rank":5,"tone":"danger","activeWhen":"cardiogenic==1","detail":"Hold glucose 150-250 with dextrose, replete K+ to 4.0-4.5. Onset 15-60 min — do not stop early or underdose."},{"id":"ccb-pressors","shape":"action","text":"High-dose vasopressors: norepinephrine + vasopressin","col":1,"rank":5,"tone":"caution","activeWhen":"vasodilatory==1","detail":"Norepinephrine 0.1-3 mcg/kg/min, add vasopressin 0.04 units/min. Escalate past septic-shock doses — receptors are desensitized."},{"id":"ccb-response","shape":"decision","text":"Responding to therapy?","col":0,"rank":6,"detail":"Improving BP, CO, lactate clearance, falling pressor need."},{"id":"ccb-dispo","shape":"decision","text":"High-risk? (ER formulation, verapamil, large dose)","col":1,"rank":7,"detail":"Extended-release or verapamil can deteriorate 12-24 h out."},{"id":"ccb-icu","shape":"state","text":"ICU admission — telemetry, arterial line","col":1,"rank":8,"tone":"normal","detail":"Serial glucose q1h, K+ q2h, lactate q4h. Extended-release: 48-72 h. Poison Control 1-800-222-1222."},{"id":"ccb-obs","shape":"state","text":"6 h monitored observation → discharge if normal","col":2,"rank":8,"tone":"normal","detail":"Only for small immediate-release DHP, asymptomatic ×6h, normal vitals and ECG, reliable history. Any doubt → ICU."},{"id":"ccb-rescue","shape":"action","text":"Rescue: lipid emulsion + methylene blue","col":-1,"rank":7,"tone":"caution","activeWhen":"refractory==1","detail":"Lipid emulsion 1.5 mL/kg (verapamil best evidence); methylene blue 1-2 mg/kg for refractory vasoplegia."},{"id":"ccb-ecmo-q","shape":"decision","text":"Arrest or refractory despite max therapy?","col":-1,"rank":8,"detail":"CCB toxicity is reversible — bridge, do not give up."},{"id":"ccb-ecmo","shape":"action","text":"VA-ECMO — bridge to recovery (call EARLY)","col":-1,"rank":9,"tone":"danger","detail":"Contact the ECMO team before arrest. Half-life 4-50 h; full recovery is possible."}],"edges":[{"from":"ccb-start","to":"ccb-class"},{"from":"ccb-class","to":"ccb-nondhp","label":"yes"},{"from":"ccb-class","to":"ccb-dhp","label":"no"},{"from":"ccb-nondhp","to":"ccb-stabilize"},{"from":"ccb-dhp","to":"ccb-stabilize"},{"from":"ccb-stabilize","to":"ccb-phenotype"},{"from":"ccb-phenotype","to":"ccb-hiet","label":"yes"},{"from":"ccb-phenotype","to":"ccb-pressors","label":"no"},{"from":"ccb-hiet","to":"ccb-response"},{"from":"ccb-pressors","to":"ccb-response"},{"from":"ccb-response","to":"ccb-dispo","label":"yes"},{"from":"ccb-response","to":"ccb-rescue","label":"no"},{"from":"ccb-dispo","to":"ccb-icu","label":"yes"},{"from":"ccb-dispo","to":"ccb-obs","label":"no"},{"from":"ccb-rescue","to":"ccb-ecmo-q"},{"from":"ccb-ecmo-q","to":"ccb-ecmo","label":"yes"},{"from":"ccb-ecmo-q","to":"ccb-icu","label":"no"},{"from":"ccb-ecmo","to":"ccb-icu"}]}]},{"id":"sec-pitfalls","title":"5 · Disposition & pitfalls","blocks":[{"id":"b-dispotable","type":"table","columns":["Presentation","Disposition","Minimum monitoring"],"heroCol":1,"rows":[["Any shock, ER formulation, or verapamil","ICU","48-72 h; arterial line, serial labs"],["Large ingestion, stable","ICU / step-down","24-48 h telemetry, serial ECG"],["Small immediate-release DHP, asymptomatic","Observation","6 h telemetry, then discharge if normal"]],"rowTones":["danger","caution","normal"],"cite":["ref1","ref3"]},{"id":"b-pitfalls","type":"disclosure","summary":"Critical pitfalls","scent":"4 items","blocks":[{"id":"b-p1","type":"callout","tone":"danger","md":"**Do NOT rely on atropine or pacing.** The block is at the calcium channel, not the vagus — both usually fail to restore hemodynamics."},{"id":"b-p2","type":"callout","tone":"danger","md":"**Do NOT underdose or stop HIET early.** Onset takes 15-60 min; titrate up to 10 units/kg/hr and supplement dextrose to avoid hypoglycemia."},{"id":"b-p3","type":"callout","tone":"caution","md":"**Do NOT be reassured by an extended-release patient who looks well.** Toxicity peaks 12-24 h out — admit and irrigate."},{"id":"b-p4","type":"callout","tone":"caution","md":"**Do NOT abandon vasopressors at conventional ceilings.** CCB toxicity needs far higher doses than sepsis — escalate and add a second agent."}]},{"id":"b-fulllink","type":"text","md":"This is a teaching overview. The full branching protocol lives in the [myMedKitt CCB overdose consult](#/tree/ccb-od)."}]}],"citations":[{"id":"ref1","label":"St-Onge M, Dubé PA, Gosselin S, et al. Treatment for Calcium Channel Blocker Poisoning: A Systematic Review. Clin Toxicol. 2014;52(9):926-944. AACT Position Statement.","grade":"Systematic review / position statement"},{"id":"ref2","label":"Levine M, Curry SC, Padilla-Jones A, Ruha AM. Critical Care Management of Verapamil and Diltiazem Overdose With a Focus on Vasopressors: A 25-Year Experience at a Single Center. Ann Emerg Med. 2013;62(3):252-258."},{"id":"ref3","label":"Graudins A, Lee HM, Druda D. Calcium Channel Blocker and Beta-Blocker Toxicity. Emerg Med Clin North Am. 2022;40(3):507-523."},{"id":"ref4","label":"Engebretsen KM, Kaczmarek KM, Morgan J, Holger JS. High-Dose Insulin Therapy in Beta-Blocker and Calcium Channel Blocker Poisoning. Clin Toxicol. 2011;49(4):277-283."},{"id":"ref5","label":"Mégarbane B, Karyo S, Baud FJ. The Role of Antidotes in the Management of Calcium Channel Blocker Poisoning. Presse Med. 2013;42(4 Pt 2):e99-e109."}],"meta":{"version":"1.0","lastReviewed":"2026-07-07","evidenceThrough":"2022 EMCNA / 2014 AACT position statement","nextReview":"2027-07-07","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 initial — generated from myMedKitt ccb-od consult"}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  render();
+})();
+</script>
+</body></html>

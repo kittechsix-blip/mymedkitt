@@ -1,5 +1,6 @@
 // myMedKitt — Per-Consult Toolbar Configurations
 // Maps consult IDs to their contextual toolbar items.
+import { hasInfographic } from './infographic-registry.js';
 /**
  * Per-consult opt-in for the Tools drawer overflow UI. Membership flips a consult's
  * runtime `ToolbarConfig.toolbarOverflow` to `true`. Default (not in the set) =
@@ -2442,19 +2443,28 @@ const TOOLBAR_CONFIGS = {
 };
 // Stop button appended automatically to every consult
 const STOP_ITEM = { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: '' };
-/** Get the toolbar config for a consult, always including the 🛑 Stop button */
+/** Infographic button — prepended (pinned) to any consult that has a staged infographic. */
+const INFOGRAPHIC_ITEM = {
+    id: 'infographic', label: 'Visual', icon: '📊', action: 'infographic', pinned: true,
+};
+/**
+ * Get the toolbar config for a consult. Always includes the 🛑 Stop button, and
+ * prepends a pinned 📊 Visual button when an interactive infographic exists for
+ * this consult (gated by the auto-generated infographic registry).
+ */
 export function getToolbarConfig(consultId) {
-    const tools = TOOLBAR_CONFIGS[consultId] ?? [];
+    const baseTools = TOOLBAR_CONFIGS[consultId] ?? [];
     const toolbarOverflow = TOOLBAR_OVERFLOW.has(consultId);
-    // Only add stop item if not already present in tools
-    const hasStopItem = tools.some(t => t.id === 'stop' || t.id.includes('-stop'));
-    if (hasStopItem) {
-        return { consultId, tools, toolbarOverflow };
-    }
-    const stopItem = { ...STOP_ITEM, target: `${consultId}-stop` };
+    // Lead with the Visual button so the infographic is front-and-center.
+    const lead = hasInfographic(consultId)
+        ? [{ ...INFOGRAPHIC_ITEM, target: consultId }]
+        : [];
+    // Only add stop item if not already present in the base tools.
+    const hasStopItem = baseTools.some(t => t.id === 'stop' || t.id.includes('-stop'));
+    const trailing = hasStopItem ? [] : [{ ...STOP_ITEM, target: `${consultId}-stop` }];
     return {
         consultId,
-        tools: [...tools, stopItem],
+        tools: [...lead, ...baseTools, ...trailing],
         toolbarOverflow,
     };
 }

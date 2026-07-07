@@ -4,11 +4,13 @@
 import { getToolbarConfig } from '../data/toolbar-configs.js';
 import { router } from '../services/router.js';
 import { showInfoModal } from './info-page.js';
+import { showDrugModal } from './drug-store.js';
 import { FLAGS } from '../data/feature-flags.js';
 import { logTelemetry } from '../services/kittmd-analytics.js';
 let toolbarEl = null;
 let decisionMapEl = null;
 let toolsSheetEl = null;
+let infographicEl = null;
 /** How many items render inline before overflowing into the Tools drawer (when opted in). */
 const TOOLBAR_VISIBLE_CAP = 5;
 /** Check if a consult toolbar is currently active */
@@ -21,6 +23,7 @@ export function removeContextualToolbar() {
     toolbarEl = null;
     closeDecisionMap();
     closeToolsSheet();
+    closeInfographic();
 }
 /** Render the contextual toolbar for a consult */
 export function renderContextualToolbar(consultId, controller, _entryNodeId, moduleLabels) {
@@ -128,6 +131,132 @@ function dispatchToolbarAction(item, controller) {
             logTelemetry('route_action_disabled', { target_tree_id: item.target });
         }
     }
+    else if (item.action === 'infographic' && item.target) {
+        openInfographicOverlay(item.target);
+    }
+}
+// -------------------------------------------------------------------
+// Interactive Infographic — full-screen iframe overlay
+// -------------------------------------------------------------------
+let infographicEscHandler = null;
+/** Close and remove the infographic overlay. */
+function closeInfographic() {
+    if (infographicEscHandler) {
+        document.removeEventListener('keydown', infographicEscHandler);
+        infographicEscHandler = null;
+    }
+    if (infographicEl) {
+        infographicEl.remove();
+        infographicEl = null;
+    }
+}
+/**
+ * Route a link tapped INSIDE the infographic iframe through the app's normal
+ * handlers. The iframe is same-origin, so we intercept its anchor clicks here
+ * (they render with target="_top", which would otherwise blow the whole app
+ * away to the raw infographic file). Internal `#/type/id` links dispatch to the
+ * same modal/route the app uses everywhere; external links open in a new tab.
+ */
+function handleInfographicLink(e) {
+    const anchor = e.target?.closest('a');
+    if (!anchor)
+        return;
+    const href = anchor.getAttribute('href') || '';
+    // In-iframe citation anchors (#cite-...) scroll within the infographic — leave them.
+    if (href.startsWith('#cite') || href === '#' || href === '')
+        return;
+    if (/^https?:\/\//i.test(href)) {
+        e.preventDefault();
+        window.open(href, '_blank', 'noopener,noreferrer');
+        return;
+    }
+    if (href.startsWith('#/')) {
+        e.preventDefault();
+        const parts = href.replace(/^#\//, '').split('/');
+        const linkType = parts[0];
+        const linkId = parts.slice(1).join('/');
+        if (!linkId)
+            return;
+        closeInfographic();
+        if (linkType === 'drug') {
+            const slash = linkId.indexOf('/');
+            if (slash !== -1)
+                showDrugModal(linkId.slice(0, slash), linkId.slice(slash + 1));
+            else
+                showDrugModal(linkId);
+        }
+        else if (linkType === 'calculator') {
+            router.navigate(`/calculator/${linkId}`);
+        }
+        else if (linkType === 'tree') {
+            router.navigate(`/tree/${linkId}`);
+        }
+        else if (linkType === 'info') {
+            showInfoModal(linkId);
+        }
+        else {
+            // Unknown internal type — fall back to a hash route rather than silently dropping.
+            window.location.hash = href;
+        }
+    }
+}
+/** Open the consult's interactive infographic in a full-screen iframe overlay. */
+function openInfographicOverlay(consultId) {
+    // Toggle: tapping again while open closes it.
+    if (infographicEl) {
+        closeInfographic();
+        return;
+    }
+    const overlay = document.createElement('div');
+    overlay.className = 'infographic-overlay';
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay)
+            closeInfographic();
+    });
+    const panel = document.createElement('div');
+    panel.className = 'infographic-panel';
+    const header = document.createElement('div');
+    header.className = 'infographic-panel__header';
+    const title = document.createElement('span');
+    title.className = 'infographic-panel__title';
+    title.textContent = 'Interactive Infographic';
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'infographic-panel__close';
+    closeBtn.textContent = '✕'; // ✕
+    closeBtn.setAttribute('aria-label', 'Close infographic');
+    closeBtn.addEventListener('click', closeInfographic);
+    header.appendChild(title);
+    header.appendChild(closeBtn);
+    const frame = document.createElement('iframe');
+    frame.className = 'infographic-frame';
+    frame.setAttribute('title', 'Interactive infographic');
+    frame.setAttribute('loading', 'lazy');
+    frame.src = `infographics/${consultId}.html`;
+    frame.addEventListener('load', () => {
+        try {
+            const doc = frame.contentDocument;
+            if (!doc)
+                return;
+            // Use the infographic's own <title> for the overlay header.
+            if (doc.title)
+                title.textContent = doc.title;
+            // Same-origin: intercept internal/external link taps at capture phase.
+            doc.addEventListener('click', handleInfographicLink, true);
+        }
+        catch {
+            /* cross-origin guard — should never trip for same-origin infographics */
+        }
+    });
+    panel.appendChild(header);
+    panel.appendChild(frame);
+    overlay.appendChild(panel);
+    document.body.appendChild(overlay);
+    infographicEl = overlay;
+    infographicEscHandler = (e) => {
+        if (e.key === 'Escape')
+            closeInfographic();
+    };
+    document.addEventListener('keydown', infographicEscHandler);
 }
 // -------------------------------------------------------------------
 // Tools drawer — bottom sheet, separate from the Decision Map

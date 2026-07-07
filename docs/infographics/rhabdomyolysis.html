@@ -1,0 +1,441 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rhabdomyolysis: Fluids First, CK Guides Intensity — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle]{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig>
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Rhabdomyolysis: Fluids First, CK Guides Intensity</h1>
+  <p class="ig-use">Adults ≥18 in the ED with suspected or confirmed rhabdomyolysis (CK &gt;1,000 U/L). Excludes pediatrics, pregnancy, and dialysis-dependent ESRD — each needs a modified fluid strategy.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Compartment syndrome: pain with passive stretch, pressure &gt;30mmHg or delta &lt;30mmHg — fasciotomy within 6h, do NOT elevate limb</div><div class="ig-scope-item">⚠ Check for hyperK (&gt;6 or ECG changes), symptomatic hypocalcemia, and severe acidosis — treat immediately before fluid resuscitation</div><div class="ig-scope-item">⚠ Aggressive IV fluids targeting UOP 1-3 mL/kg/hr - cornerstone of treatment</div><div class="ig-scope-item">⚠ CK &gt;15,000 significantly increases AKI risk (5-14% dialysis rate)</div><div class="ig-scope-item">⚠ Lactated Ringers preferred over NS - better pH maintenance, avoids hyperchloremic acidosis</div><div class="ig-scope-item">⚠ Bicarbonate (150 mEq NaHCO3 in 1L D5W) only if severe acidosis pH &lt;7.1 - NOT routine, fluids are priority</div></div>
+<div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-weight">Weight <span class="ig-unit">(kg)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="weight" min="1" max="300" step="1" value="70" aria-label="Weight slider">
+<input type="number" id="ig-num-weight" data-input="weight" min="1" max="300" step="1" value="70" inputmode="decimal" aria-label="Weight exact value">
+</div>
+<div class="ig-warn" data-warn-for="weight" hidden role="alert">Value outside 1–300 kg — confirm.</div>
+</div><div class="ig-ctl">
+<label for="ig-num-ck">Peak CK <span class="ig-unit">(U/L)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="ck" min="1000" max="100000" step="1000" value="20000" aria-label="Peak CK slider">
+<input type="number" id="ig-num-ck" data-input="ck" min="1000" max="100000" step="1000" value="20000" inputmode="decimal" aria-label="Peak CK exact value">
+</div>
+<div class="ig-warn" data-warn-for="ck" hidden role="alert">Value outside 1000–100000 U/L — confirm.</div>
+</div><div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="crush" aria-checked="false">Crush / trauma mechanism</button><button type="button" class="ig-toggle" role="switch" data-toggle="hyperk" aria-checked="false">K⁺ &gt;6 or ECG changes</button><button type="button" class="ig-toggle" role="switch" data-toggle="special" aria-checked="false">Heart failure / ESRD</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<main class="ig-main"><section class="ig-section"><h2 class="ig-h2">1 · Recognize &amp; diagnose</h2><div class="ig-block ig-callout t-mech" role="note"><div class="ig-callout-title">What it is</div><div>Skeletal muscle breakdown releasing intracellular contents — <strong>myoglobin, CK, potassium, phosphate</strong> — into the circulation. The classic triad of <strong>myalgia + weakness + dark/tea-colored urine</strong> is present in <strong>&lt;10%</strong>, so diagnosis rests on CK, not symptoms.<a href="#cite-ref1" class="ig-ref">[1]</a></div></div><p class="ig-block ig-text"><strong>Diagnostic criteria:</strong> CK &gt;5× the upper limit of normal; most clinicians use <strong>CK &gt;1,000 U/L</strong> (~1,000 U/L) as the working threshold. AKI complicates <strong>15-55%</strong> of cases and rises with CK level, dehydration, sepsis, and fluid resuscitation delayed &gt;6 hours.<a href="#cite-ref1" class="ig-ref">[1]</a></p><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">The urine clue</div><div>Urine dipstick <strong>positive for blood but no RBCs on microscopy = myoglobinuria</strong>. Urine myoglobin is cleared faster than CK and may be negative even with a high CK — do not use it to rule out.</div></div></section><section class="ig-section"><h2 class="ig-h2">2 · Stratify by CK level</h2><p class="ig-block ig-text">Enter the <strong>peak CK</strong> above — the marker moves along the severity scale and sets fluid intensity and disposition.</p><div class="ig-block"><div class="ig-scale-wrap"><svg viewBox="0 0 640 96" width="100%" role="img" aria-label="Severity scale (U/L)" preserveAspectRatio="xMidYMid meet">
+<line x1="40" y1="44" x2="600" y2="44" class="ig-axis"/><rect x="40" y="34" width="22.62626262626263" height="20" class="ig-band t-normal"/>
+<text x="51.313131313131315" y="70" text-anchor="middle" class="ig-band-lbl">Mild (~2% dialysis)</text>
+<text x="51.313131313131315" y="84" text-anchor="middle" class="ig-band-action">2-3 L/day</text><rect x="62.62626262626263" y="34" width="56.56565656565655" height="20" class="ig-band t-caution"/>
+<text x="90.9090909090909" y="70" text-anchor="middle" class="ig-band-lbl">Moderate (~3-8%)</text>
+<text x="90.9090909090909" y="84" text-anchor="middle" class="ig-band-action">3-6 L/day</text><rect x="119.19191919191918" y="34" width="197.97979797979804" height="20" class="ig-band t-danger"/>
+<text x="218.1818181818182" y="70" text-anchor="middle" class="ig-band-lbl">Severe (~5-14%)</text>
+<text x="218.1818181818182" y="84" text-anchor="middle" class="ig-band-action">&gt;6 L/day</text><rect x="317.1717171717172" y="34" width="282.8282828282828" height="20" class="ig-band t-danger"/>
+<text x="458.5858585858586" y="70" text-anchor="middle" class="ig-band-lbl">Very severe (~9-21%) → ICU</text>
+<text x="458.5858585858586" y="84" text-anchor="middle" class="ig-band-action">Aggressive + ICU</text><line x1="119.19191919191918" y1="26" x2="119.19191919191918" y2="58" class="ig-harm"/><text x="119.19191919191918" y="20" text-anchor="middle" class="ig-harm-lbl">CK &gt;15,000 → AKI risk climbs</text></svg></div></div><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">CK (U/L)</th><th>Severity</th><th>Fluid target</th><th>Dialysis risk</th></tr></thead><tbody><tr class="ig-row t-normal"><td class="hero">1,000-5,000</td><td>Mild</td><td>2-3 L/day</td><td>~2%</td></tr><tr class="ig-row t-caution"><td class="hero">5,000-15,000</td><td>Moderate</td><td>3-6 L/day</td><td>~3-8%</td></tr><tr class="ig-row t-danger"><td class="hero">&gt;15,000</td><td>Severe</td><td>&gt;6 L/day</td><td>~5-14%</td></tr><tr class="ig-row t-danger"><td class="hero">&gt;50,000</td><td>Very severe → ICU</td><td>Aggressive + ICU</td><td>~9-21%</td></tr></tbody></table></div><p class="ig-block ig-text">A 2025 cohort (n=73,036) confirms the gradient: <strong>CK &gt;15,000</strong> U/L marks the inflection where the dialysis rate jumps, and CK &gt;100,000 carried a 25% rate of Cr ≥4. <strong>McMahon score ≥6</strong> predicts need for renal replacement therapy.<a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a></p></section><section class="ig-section"><h2 class="ig-h2">3 · What to do right now</h2><p class="ig-block ig-text">Toggle the patient's state above. Exactly one instruction below shows — <strong>life-threats are handled before fluids</strong>.</p><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Hyperkalemia first — treat before fluids</div><div><strong>K⁺ &gt;6.0 mEq/L</strong> or ECG changes overrides everything. Stabilize the membrane, shift K⁺, and remove it <strong>simultaneously</strong> — do not sequence. See doses below and <a href="#/tree/potassium" target="_top" class="ig-link">Potassium Disorders</a>.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crush&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Crush / trauma — rule out compartment syndrome</div><div>Pain with passive stretch + a tense compartment = measure pressure. Absolute pressure <strong>&gt;30 mmHg</strong> or delta pressure (DBP − compartment) <strong>&lt;30 mmHg</strong> → <strong>fasciotomy within 6h</strong>. <strong>Do NOT elevate the limb</strong> — it lowers perfusion pressure.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crush&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;special&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Heart failure / ESRD — modify the fluids</div><div>Small boluses (250-500 mL), reassess with POCUS, lower maintenance rates. ESRD: minimal fluids, urgent nephrology for dialysis-based volume/toxin removal. Watch for severe hyperkalemia.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crush&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;special&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Standard: aggressive fluids now</div><div>No life-threat gating fluids. Start aggressive IV crystalloid targeting UOP <strong>1-3 mL/kg/hr</strong>. Early resuscitation (&lt;6h) is what prevents AKI.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="rhabdo-hyperkalemia-tx"><p class="ig-block ig-text"><strong>Hyperkalemia bundle — give together, not in sequence:</strong></p></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="rhabdo-hyperkalemia-tx"><div class="ig-block ig-dose"><div class="ig-dose-drug">Calcium gluconate — membrane stabilization</div><div class="ig-dose-val">1-2 g</div><div class="ig-dose-route">IV over 2-3 min</div><div class="ig-dose-note">Preferred for peripheral access. Central line → <a href="#/drug/calcium-chloride/hyperkalemia" target="_top" class="ig-link">calcium chloride</a> 500-1000 mg.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="rhabdo-hyperkalemia-tx"><div class="ig-block ig-dose"><div class="ig-dose-drug">Regular insulin + dextrose — shift K⁺</div><div class="ig-dose-val">10 units IV + D50W 25-50 mL</div><div class="ig-dose-route">IV</div><div class="ig-dose-note">Recheck glucose at 30-60 min; hypoglycemia is common. Links: <a href="#/drug/regular-insulin/hyperkalemia" target="_top" class="ig-link">regular insulin</a> · <a href="#/drug/dextrose/hyperkalemia" target="_top" class="ig-link">D50W</a>.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="rhabdo-hyperkalemia-tx"><div class="ig-block ig-dose"><div class="ig-dose-drug">Albuterol nebulized — shift K⁺</div><div class="ig-dose-val">10-20 mg</div><div class="ig-dose-route">nebulized</div><div class="ig-dose-note">Additive to insulin. Link: <a href="#/drug/albuterol-neb/hyperkalemia" target="_top" class="ig-link">albuterol</a>.</div></div></div><div class="ig-cond" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="rhabdo-hyperkalemia-tx"><div class="ig-block ig-dose"><div class="ig-dose-drug">Furosemide — kaliuresis (if making urine)</div><div class="ig-dose-val">40-80 mg</div><div class="ig-dose-route">IV</div><div class="ig-dose-note">Removes K⁺ only if renal function allows. Link: <a href="#/drug/furosemide/hyperkalemia" target="_top" class="ig-link">furosemide</a>.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">4 · Fluid resuscitation — the cornerstone</h2><p class="ig-block ig-text">Aggressive IV crystalloid is the mainstay. Maintain urine output <strong>1-3 mL/kg/hr</strong>, replace the deficit AND ongoing third-space losses, and start <strong>early (&lt;6h)</strong> to blunt AKI. Always check magnesium — <strong>up to 50%</strong> have concurrent hypomagnesemia.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref7" class="ig-ref">[7]</a></p><p class="ig-block ig-text">Enter <strong>weight</strong> above → your patient's UOP window:</p><div class="ig-block ig-stat t-normal" data-calc="uopLow"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">UOP target — low end (1 mL/kg/hr)</span></div><div class="ig-block ig-stat t-normal" data-calc="uopHigh"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">UOP target — high end (3 mL/kg/hr)</span></div><div class="ig-block ig-callout t-mech" role="note"><div class="ig-callout-title">LR vs NS — LR preferred</div><div><strong>Lactated Ringers</strong> maintains alkaline urine pH better and avoids the hyperchloremic (NAGMA) acidosis that large-volume NS produces. Its K⁺ content (4 mEq/L) does <strong>not</strong> worsen hyperkalemia — a myth; LR may actually lower K⁺ by correcting acidosis. <strong>NS is an acceptable alternative</strong> but may need bicarbonate for alkalinization.<a href="#cite-ref7" class="ig-ref">[7]</a></div></div><div class="ig-cond" data-whennode="rhabdo-lr-protocol rhabdo-ns-protocol"><ol class="ig-block ig-steps"><li>Initial bolus: 1-2 L IV crystalloid.</li><li>Maintenance 200-500 mL/hr, titrated to UOP.</li><li>Foley + hourly UOP; BMP and CK q6-12h.</li><li>Continue until CK is trending down AND &lt;5,000 U/L, or myoglobinuria clears.</li><li>Watch for volume overload (JVD, pulmonary edema) — cut the rate if it appears.</li></ol></div><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Bicarbonate is NOT routine</div><div>Urinary alkalinization has not beaten fluids alone in RCTs. Reserve <strong>150 mEq NaHCO3 in 1L D5W</strong> for severe acidosis (pH &lt;7.1) — fluids remain the priority.<a href="#cite-ref9" class="ig-ref">[9]</a><a href="#cite-ref10" class="ig-ref">[10]</a></div></div></section><section class="ig-section"><h2 class="ig-h2">5 · One-glance algorithm</h2><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 678 1128" width="678" height="1128" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M339,98 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,206 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="223" class="ig-edge-lbl" text-anchor="middle">any (1K→&gt;50K)</text><path d="M339,206 L339,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="493" class="ig-edge-lbl" text-anchor="middle">&gt;15K → escalate</text><path d="M339,314 L339,335 L129,335 L129,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="331" class="ig-edge-lbl" text-anchor="middle">traumatic/crush</text><path d="M339,314 L339,335 L549,335 L549,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="331" class="ig-edge-lbl" text-anchor="middle">drug/toxin</text><path d="M339,314 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="385" class="ig-edge-lbl" text-anchor="middle">exertional/metabolic</text><path d="M129,422 L129,443 L339,443 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,422 L549,443 L339,443 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,530 L339,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,638 L339,659 L129,659 L129,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="655" class="ig-edge-lbl" text-anchor="middle">hyperK / ECG</text><path d="M339,638 L339,659 L549,659 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="655" class="ig-edge-lbl" text-anchor="middle">symptomatic hypoCa</text><path d="M339,638 L339,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="709" class="ig-edge-lbl" text-anchor="middle">none</text><path d="M129,746 L129,767 L339,767 L339,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,746 L549,767 L339,767 L339,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,854 L339,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,962 L339,1004" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="979" class="ig-edge-lbl" text-anchor="middle">LR</text><path d="M339,962 L339,983 L549,983 L549,1004" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="979" class="ig-edge-lbl" text-anchor="middle">NS</text><path d="M339,962 L339,983 L129,983 L129,1004" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="979" class="ig-edge-lbl" text-anchor="middle">CHF / ESRD</text><g class="ig-node" data-node="rhabdo-start" tabindex="0" role="button" aria-label="Suspected rhabdo (CK &gt;1,000)"><rect x="251" y="32" width="176" height="66" rx="30" class="ig-shape t-mech"/><foreignObject x="257" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Suspected rhabdo (CK &gt;1,000)</div></foreignObject></g><g class="ig-node" data-node="rhabdo-severity" tabindex="0" role="button" aria-label="CK level?"><polygon points="273,140 405,140 427,173 405,206 273,206 251,173" class="ig-shape t-neutral"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">CK level?</div></foreignObject></g><g class="ig-node" data-node="rhabdo-etiology" tabindex="0" role="button" aria-label="Mechanism / cause?"><polygon points="273,248 405,248 427,281 405,314 273,314 251,281" class="ig-shape t-neutral"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Mechanism / cause?</div></foreignObject></g><g class="ig-node" data-node="rhabdo-compartment-eval" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;crush&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Assess compartment syndrome"><rect x="41" y="356" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Assess compartment syndrome</div></foreignObject></g><g class="ig-node" data-node="rhabdo-drug-induced" tabindex="0" role="button" aria-label="Stop offending drug/toxin"><rect x="461" y="356" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="467" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Stop offending drug/toxin</div></foreignObject></g><g class="ig-node" data-node="rhabdo-workup" tabindex="0" role="button" aria-label="Labs: CK, BMP, Ca/Phos/Mg, UA, ECG"><rect x="251" y="464" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Labs: CK, BMP, Ca/Phos/Mg, UA, ECG</div></foreignObject></g><g class="ig-node" data-node="rhabdo-electrolyte-check" tabindex="0" role="button" aria-label="Life-threatening electrolyte abnormality?"><polygon points="273,572 405,572 427,605 405,638 273,638 251,605" class="ig-shape t-danger"/><foreignObject x="257" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Life-threatening electrolyte abnormality?</div></foreignObject></g><g class="ig-node" data-node="rhabdo-hyperkalemia-tx" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hyperk&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Treat hyperkalemia (bundle)"><rect x="41" y="680" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Treat hyperkalemia (bundle)</div></foreignObject></g><g class="ig-node" data-node="rhabdo-hypocalcemia-tx" tabindex="0" role="button" aria-label="Treat symptomatic hypocalcemia only"><rect x="461" y="680" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="467" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Treat symptomatic hypocalcemia only</div></foreignObject></g><g class="ig-node" data-node="rhabdo-fluid-resus" tabindex="0" role="button" aria-label="Aggressive fluids → UOP 1-3 mL/kg/hr"><rect x="251" y="788" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="257" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Aggressive fluids → UOP 1-3 mL/kg/hr</div></foreignObject></g><g class="ig-node" data-node="rhabdo-fluid-choice" tabindex="0" role="button" aria-label="LR or NS?"><polygon points="273,896 405,896 427,929 405,962 273,962 251,929" class="ig-shape t-neutral"/><foreignObject x="257" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">LR or NS?</div></foreignObject></g><g class="ig-node" data-node="rhabdo-lr-protocol" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;special&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}" tabindex="0" role="button" aria-label="LR protocol → admit / monitor CK"><rect x="251" y="1004" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="257" y="1008" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">LR protocol → admit / monitor CK</div></foreignObject></g><g class="ig-node" data-node="rhabdo-ns-protocol" tabindex="0" role="button" aria-label="NS protocol → admit / monitor CK"><rect x="461" y="1004" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="467" y="1008" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">NS protocol → admit / monitor CK</div></foreignObject></g><g class="ig-node" data-node="rhabdo-special-fluid" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;special&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Modified fluids → ICU / nephrology"><rect x="41" y="1004" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="47" y="1008" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Modified fluids → ICU / nephrology</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="rhabdo-start" hidden><strong>Suspected rhabdo (CK &gt;1,000)</strong><br>Skeletal muscle breakdown → myoglobin, CK, K⁺, phosphate. Classic triad in &lt;10%; AKI in 15-55%.</div><div class="ig-node-detail" data-detail-for="rhabdo-severity" hidden><strong>CK level?</strong><br>Mild 1-5K (~2% dialysis) · Moderate 5-15K · Severe &gt;15K · Very severe &gt;50K → ICU.</div><div class="ig-node-detail" data-detail-for="rhabdo-etiology" hidden><strong>Mechanism / cause?</strong><br>Traumatic/crush (compartment risk) · exertional (better prognosis) · drug/toxin · metabolic/infectious.</div><div class="ig-node-detail" data-detail-for="rhabdo-compartment-eval" hidden><strong>Assess compartment syndrome</strong><br>Pain on passive stretch, pressure &gt;30 mmHg or delta &lt;30 mmHg → fasciotomy within 6h. Do NOT elevate limb.</div><div class="ig-node-detail" data-detail-for="rhabdo-drug-induced" hidden><strong>Stop offending drug/toxin</strong><br>Statin: stop now, rechallenge later OK. Cocaine: cool, avoid β-blockers. NMS/SS: see specific consults.</div><div class="ig-node-detail" data-detail-for="rhabdo-workup" hidden><strong>Labs: CK, BMP, Ca/Phos/Mg, UA, ECG</strong><br>Dipstick blood without RBCs = myoglobinuria. Ca often low early, Phos high, K⁺ dangerous.</div><div class="ig-node-detail" data-detail-for="rhabdo-electrolyte-check" hidden><strong>Life-threatening electrolyte abnormality?</strong><br>Treat hyperK, symptomatic hypocalcemia, and severe acidosis BEFORE fluids.</div><div class="ig-node-detail" data-detail-for="rhabdo-hyperkalemia-tx" hidden><strong>Treat hyperkalemia (bundle)</strong><br>Calcium + insulin/glucose + albuterol + kaliuresis, together. K⁺ &gt;6.0 mEq/L or ECG changes.</div><div class="ig-node-detail" data-detail-for="rhabdo-hypocalcemia-tx" hidden><strong>Treat symptomatic hypocalcemia only</strong><br>Only if tetany/seizure/QT arrhythmia. Asymptomatic Ca will rebound — replacing it worsens muscle calcification.</div><div class="ig-node-detail" data-detail-for="rhabdo-fluid-resus" hidden><strong>Aggressive fluids → UOP 1-3 mL/kg/hr</strong><br>Cornerstone. Early (&lt;6h) resuscitation prevents AKI.</div><div class="ig-node-detail" data-detail-for="rhabdo-fluid-choice" hidden><strong>LR or NS?</strong><br>LR preferred (pH, less NAGMA). NS acceptable. Special populations (CHF/ESRD) modify strategy.</div><div class="ig-node-detail" data-detail-for="rhabdo-lr-protocol" hidden><strong>LR protocol → admit / monitor CK</strong><br>1-2 L bolus, 200-500 mL/hr, Foley, CK q6-12h until &lt;5,000 and trending down.</div><div class="ig-node-detail" data-detail-for="rhabdo-ns-protocol" hidden><strong>NS protocol → admit / monitor CK</strong><br>Same targets; watch for NAGMA, add bicarbonate only if alkalinization needed.</div><div class="ig-node-detail" data-detail-for="rhabdo-special-fluid" hidden><strong>Modified fluids → ICU / nephrology</strong><br>CHF: small boluses + POCUS. ESRD: minimal fluids, urgent dialysis.</div></div></div><p class="ig-block ig-text">Tap any box for detail. Toggles above auto-highlight the matching path. The full branching protocol lives in the <a href="#/tree/rhabdomyolysis" target="_top" class="ig-link">myMedKitt rhabdomyolysis consult</a>.</p></section><section class="ig-section"><h2 class="ig-h2">6 · Do NOT</h2><details class="ig-block ig-disc"><summary>Critical pitfalls<span class="ig-scent">4 items</span></summary><div class="ig-disc-body"><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT elevate a crush limb</strong> — it drops perfusion pressure and worsens ischemia. Keep it at heart level while ruling out compartment syndrome.</div></div><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT sequence hyperkalemia treatment.</strong> Calcium, insulin/glucose, albuterol, and kaliuresis go together — not one, then wait.</div></div><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT reflexively give bicarbonate.</strong> Urinary alkalinization has not beaten fluids alone in RCTs; reserve it for pH &lt;7.1.</div></div><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT replace asymptomatic hypocalcemia.</strong> Early Ca deposits in damaged muscle and rebounds later — replacing it worsens heterotopic calcification.</div></div></div></details></section></main>
+<details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Recognize &amp; diagnose</h3><p>Skeletal muscle breakdown releasing intracellular contents — **myoglobin, CK, potassium, phosphate** — into the circulation. The classic triad of **myalgia + weakness + dark/tea-colored urine** is present in **&lt;10%**, so diagnosis rests on CK, not symptoms.{{ref1}}</p><p>**Diagnostic criteria:** CK &gt;5× the upper limit of normal; most clinicians use **CK &gt;1,000 U/L** (~1,000 U/L) as the working threshold. AKI complicates **15-55%** of cases and rises with CK level, dehydration, sepsis, and fluid resuscitation delayed &gt;6 hours.{{ref1}}</p><p>Urine dipstick **positive for blood but no RBCs on microscopy = myoglobinuria**. Urine myoglobin is cleared faster than CK and may be negative even with a high CK — do not use it to rule out.</p><h3>2 · Stratify by CK level</h3><p>Enter the **peak CK** above — the marker moves along the severity scale and sets fluid intensity and disposition.</p><p>U/L: Mild (~2% dialysis) 1000-5000; Moderate (~3-8%) 5000-15000; Severe (~5-14%) 15000-50000; Very severe (~9-21%) → ICU 50000-100000</p><p>CK (U/L) | Severity | Fluid target | Dialysis risk</p><p>1,000-5,000 | Mild | 2-3 L/day | ~2%</p><p>5,000-15,000 | Moderate | 3-6 L/day | ~3-8%</p><p>&gt;15,000 | Severe | &gt;6 L/day | ~5-14%</p><p>&gt;50,000 | Very severe → ICU | Aggressive + ICU | ~9-21%</p><p>A 2025 cohort (n=73,036) confirms the gradient: **CK &gt;15,000** U/L marks the inflection where the dialysis rate jumps, and CK &gt;100,000 carried a 25% rate of Cr ≥4. **McMahon score ≥6** predicts need for renal replacement therapy.{{ref2}}{{ref3}}</p><h3>3 · What to do right now</h3><p>Toggle the patient's state above. Exactly one instruction below shows — **life-threats are handled before fluids**.</p><p>**K⁺ &gt;6.0 mEq/L** or ECG changes overrides everything. Stabilize the membrane, shift K⁺, and remove it **simultaneously** — do not sequence. See doses below and [Potassium Disorders](#/tree/potassium).</p><p>Pain with passive stretch + a tense compartment = measure pressure. Absolute pressure **&gt;30 mmHg** or delta pressure (DBP − compartment) **&lt;30 mmHg** → **fasciotomy within 6h**. **Do NOT elevate the limb** — it lowers perfusion pressure.</p><p>Small boluses (250-500 mL), reassess with POCUS, lower maintenance rates. ESRD: minimal fluids, urgent nephrology for dialysis-based volume/toxin removal. Watch for severe hyperkalemia.</p><p>No life-threat gating fluids. Start aggressive IV crystalloid targeting UOP **1-3 mL/kg/hr**. Early resuscitation (&lt;6h) is what prevents AKI.</p><p>**Hyperkalemia bundle — give together, not in sequence:**</p><p><strong>Calcium gluconate — membrane stabilization</strong>: 1-2 g IV over 2-3 min — Preferred for peripheral access. Central line → [calcium chloride](#/drug/calcium-chloride/hyperkalemia) 500-1000 mg.</p><p><strong>Regular insulin + dextrose — shift K⁺</strong>: 10 units IV + D50W 25-50 mL IV — Recheck glucose at 30-60 min; hypoglycemia is common. Links: [regular insulin](#/drug/regular-insulin/hyperkalemia) · [D50W](#/drug/dextrose/hyperkalemia).</p><p><strong>Albuterol nebulized — shift K⁺</strong>: 10-20 mg nebulized — Additive to insulin. Link: [albuterol](#/drug/albuterol-neb/hyperkalemia).</p><p><strong>Furosemide — kaliuresis (if making urine)</strong>: 40-80 mg IV — Removes K⁺ only if renal function allows. Link: [furosemide](#/drug/furosemide/hyperkalemia).</p><h3>4 · Fluid resuscitation — the cornerstone</h3><p>Aggressive IV crystalloid is the mainstay. Maintain urine output **1-3 mL/kg/hr**, replace the deficit AND ongoing third-space losses, and start **early (&lt;6h)** to blunt AKI. Always check magnesium — **up to 50%** have concurrent hypomagnesemia.{{ref1}}{{ref7}}</p><p>Enter **weight** above → your patient's UOP window:</p><p>UOP target — low end (1 mL/kg/hr): 70 mL/hr</p><p>UOP target — high end (3 mL/kg/hr): 210 mL/hr</p><p>**Lactated Ringers** maintains alkaline urine pH better and avoids the hyperchloremic (NAGMA) acidosis that large-volume NS produces. Its K⁺ content (4 mEq/L) does **not** worsen hyperkalemia — a myth; LR may actually lower K⁺ by correcting acidosis. **NS is an acceptable alternative** but may need bicarbonate for alkalinization.{{ref7}}</p><ul><li>Initial bolus: 1-2 L IV crystalloid.</li><li>Maintenance 200-500 mL/hr, titrated to UOP.</li><li>Foley + hourly UOP; BMP and CK q6-12h.</li><li>Continue until CK is trending down AND &lt;5,000 U/L, or myoglobinuria clears.</li><li>Watch for volume overload (JVD, pulmonary edema) — cut the rate if it appears.</li></ul><p>Urinary alkalinization has not beaten fluids alone in RCTs. Reserve **150 mEq NaHCO3 in 1L D5W** for severe acidosis (pH &lt;7.1) — fluids remain the priority.{{ref9}}{{ref10}}</p><h3>5 · One-glance algorithm</h3><p>Suspected rhabdo (CK &gt;1,000) — Skeletal muscle breakdown → myoglobin, CK, K⁺, phosphate. Classic triad in &lt;10%; AKI in 15-55%.</p><p>CK level? — Mild 1-5K (~2% dialysis) · Moderate 5-15K · Severe &gt;15K · Very severe &gt;50K → ICU.</p><p>Mechanism / cause? — Traumatic/crush (compartment risk) · exertional (better prognosis) · drug/toxin · metabolic/infectious.</p><p>Assess compartment syndrome — Pain on passive stretch, pressure &gt;30 mmHg or delta &lt;30 mmHg → fasciotomy within 6h. Do NOT elevate limb.</p><p>Stop offending drug/toxin — Statin: stop now, rechallenge later OK. Cocaine: cool, avoid β-blockers. NMS/SS: see specific consults.</p><p>Labs: CK, BMP, Ca/Phos/Mg, UA, ECG — Dipstick blood without RBCs = myoglobinuria. Ca often low early, Phos high, K⁺ dangerous.</p><p>Life-threatening electrolyte abnormality? — Treat hyperK, symptomatic hypocalcemia, and severe acidosis BEFORE fluids.</p><p>Treat hyperkalemia (bundle) — Calcium + insulin/glucose + albuterol + kaliuresis, together. K⁺ &gt;6.0 mEq/L or ECG changes.</p><p>Treat symptomatic hypocalcemia only — Only if tetany/seizure/QT arrhythmia. Asymptomatic Ca will rebound — replacing it worsens muscle calcification.</p><p>Aggressive fluids → UOP 1-3 mL/kg/hr — Cornerstone. Early (&lt;6h) resuscitation prevents AKI.</p><p>LR or NS? — LR preferred (pH, less NAGMA). NS acceptable. Special populations (CHF/ESRD) modify strategy.</p><p>LR protocol → admit / monitor CK — 1-2 L bolus, 200-500 mL/hr, Foley, CK q6-12h until &lt;5,000 and trending down.</p><p>NS protocol → admit / monitor CK — Same targets; watch for NAGMA, add bicarbonate only if alkalinization needed.</p><p>Modified fluids → ICU / nephrology — CHF: small boluses + POCUS. ESRD: minimal fluids, urgent dialysis.</p><p>Tap any box for detail. Toggles above auto-highlight the matching path. The full branching protocol lives in the [myMedKitt rhabdomyolysis consult](#/tree/rhabdomyolysis).</p><h3>6 · Do NOT</h3><p><em>Critical pitfalls</em></p><p>**Do NOT elevate a crush limb** — it drops perfusion pressure and worsens ischemia. Keep it at heart level while ruling out compartment syndrome.</p><p>**Do NOT sequence hyperkalemia treatment.** Calcium, insulin/glucose, albuterol, and kaliuresis go together — not one, then wait.</p><p>**Do NOT reflexively give bicarbonate.** Urinary alkalinization has not beaten fluids alone in RCTs; reserve it for pH &lt;7.1.</p><p>**Do NOT replace asymptomatic hypocalcemia.** Early Ca deposits in damaged muscle and rebounds later — replacing it worsens heterotopic calcification.</p></div></details>
+<section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Bosch X, Poch E, Grau JM. Rhabdomyolysis and acute kidney injury. N Engl J Med. 2009;361(1):62-72. <span class="ig-cite-ids">PMID 19571284 · Narrative review</span></li><li id="cite-ref2"><span class="ig-ref">[2]</span> Chavez LO, et al. Creatine Kinase Elevations and Risk of Renal Failure and Dialysis in Patients With Rhabdomyolysis. Am J Med. 2025;138(1):45-52. <span class="ig-cite-ids">Retrospective cohort (n=73,036)</span></li><li id="cite-ref3"><span class="ig-ref">[3]</span> McMahon GM, et al. A risk prediction score for kidney failure or mortality in rhabdomyolysis. JAMA Intern Med. 2013;173(19):1821-8. <span class="ig-cite-ids">PMID 24000014 · Derivation/validation cohort</span></li><li id="cite-ref4"><span class="ig-ref">[4]</span> Voermans NC. A Clinical Approach to Rhabdomyolysis. Neuromuscul Disord. 2024;34(2):78-89. <span class="ig-cite-ids">Narrative review</span></li><li id="cite-ref5"><span class="ig-ref">[5]</span> Schmidt AH. Acute compartment syndrome. Injury. 2017;48 Suppl 1:S22-S25. <span class="ig-cite-ids">PMID 28870372 · Narrative review</span></li><li id="cite-ref6"><span class="ig-ref">[6]</span> Weisberg LS. Management of severe hyperkalemia. Crit Care Med. 2008;36(12):3246-3251. <span class="ig-cite-ids">PMID 18936701 · Narrative review</span></li><li id="cite-ref7"><span class="ig-ref">[7]</span> Brown CV, et al. Rhabdomyolysis: an American Association for the Surgery of Trauma Critical Care Committee Clinical Consensus Document. Trauma Surg Acute Care Open. 2022;7(1):e000836. <span class="ig-cite-ids">Consensus document</span></li><li id="cite-ref8"><span class="ig-ref">[8]</span> EB Medicine. Rhabdomyolysis: Evidence-Based Management in the Emergency Department. 2024. <span class="ig-cite-ids">Evidence-based review</span></li><li id="cite-ref9"><span class="ig-ref">[9]</span> Ghahramani M, et al. The Role of Urine Alkalinization in Preventing Rhabdomyolysis-Induced Acute Kidney Injury: A Systematic Review and Meta-Analysis. J Clin Med. 2025;14(1):112. <span class="ig-cite-ids">Systematic review / meta-analysis</span></li><li id="cite-ref10"><span class="ig-ref">[10]</span> Scharman EJ, Troutman WG. Prevention of kidney injury following rhabdomyolysis: a systematic review. Ann Pharmacother. 2013;47(1):90-105. <span class="ig-cite-ids">PMID 23324509 · Systematic review</span></li><li id="cite-ref11"><span class="ig-ref">[11]</span> Fernandez WG, et al. Prediction of safe discharge of emergency department patients with acute rhabdomyolysis. Crit Care Med. 2005;33(5):926-927. <span class="ig-cite-ids">Observational</span></li></ol></section>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-07 · evidence through 2025 (AAST consensus + 2025 CK cohort) · next review 2027-07-07</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · rhabdomyolysis · v1.0 initial — generated from myMedKitt rhabdomyolysis consult</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"rhabdomyolysis","title":"Rhabdomyolysis: Fluids First, CK Guides Intensity","shape":"algorithm","intendedUse":"Adults ≥18 in the ED with suspected or confirmed rhabdomyolysis (CK >1,000 U/L). Excludes pediatrics, pregnancy, and dialysis-dependent ESRD — each needs a modified fluid strategy.","scopeWarnings":["Compartment syndrome: pain with passive stretch, pressure >30mmHg or delta \u003c30mmHg — fasciotomy within 6h, do NOT elevate limb","Check for hyperK (>6 or ECG changes), symptomatic hypocalcemia, and severe acidosis — treat immediately before fluid resuscitation","Aggressive IV fluids targeting UOP 1-3 mL/kg/hr - cornerstone of treatment","CK >15,000 significantly increases AKI risk (5-14% dialysis rate)","Lactated Ringers preferred over NS - better pH maintenance, avoids hyperchloremic acidosis","Bicarbonate (150 mEq NaHCO3 in 1L D5W) only if severe acidosis pH \u003c7.1 - NOT routine, fluids are priority"],"source":{"kind":"medkitt-consult","ref":"rhabdomyolysis"},"theme":{"preset":"medkitt"},"inputs":[{"id":"weight","label":"Weight","unit":"kg","type":"number","min":1,"max":300,"step":1,"default":70},{"id":"ck","label":"Peak CK","unit":"U/L","type":"number","min":1000,"max":100000,"step":1000,"default":20000},{"id":"crush","label":"Crush / trauma mechanism","type":"boolean","default":0},{"id":"hyperk","label":"K⁺ >6 or ECG changes","type":"boolean","default":0},{"id":"special","label":"Heart failure / ESRD","type":"boolean","default":0}],"calcs":[{"id":"uopLow","expr":"round(1*weight,0)","unit":"mL/hr","formula":"1 mL/kg/hr × weight (low end of the UOP target)","testVectors":[{"in":{"weight":50},"expect":50},{"in":{"weight":70},"expect":70},{"in":{"weight":100},"expect":100}],"cite":["ref7"],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":1},"b":{"k":"id","name":"weight"}},{"k":"num","v":0}]}},{"id":"uopHigh","expr":"round(3*weight,0)","unit":"mL/hr","formula":"3 mL/kg/hr × weight (high end of the UOP target)","testVectors":[{"in":{"weight":50},"expect":150},{"in":{"weight":70},"expect":210},{"in":{"weight":100},"expect":300}],"cite":["ref7"],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":3},"b":{"k":"id","name":"weight"}},{"k":"num","v":0}]}},{"id":"ckLevel","expr":"round(ck,0)","unit":"U/L","formula":"peak CK, read against the severity bands","testVectors":[{"in":{"ck":3000},"expect":3000},{"in":{"ck":20000},"expect":20000},{"in":{"ck":60000},"expect":60000}],"cite":["ref2"],"exprAst":{"k":"call","fn":"round","args":[{"k":"id","name":"ck"},{"k":"num","v":0}]}}],"facts":[{"id":"f-ck-dx","claim":"CK threshold most clinicians use to diagnose rhabdomyolysis","value":"1,000 U/L","provenance":"consult:rhabdomyolysis/rhabdo-start","cite":["ref1"],"verified":"provenance"},{"id":"f-aki","claim":"AKI incidence across rhabdomyolysis cases","value":"15-55%","provenance":"consult:rhabdomyolysis/rhabdo-start","cite":["ref1"],"verified":"provenance"},{"id":"f-ck-severe","claim":"CK level above which AKI risk climbs sharply","value":"15,000","unit":"U/L","provenance":"consult:rhabdomyolysis/rhabdo-severity","cite":["ref2"],"verified":"provenance"},{"id":"f-uop","claim":"Urine-output resuscitation target","value":"1-3 mL/kg/hr","provenance":"consult:rhabdomyolysis/rhabdo-fluid-resus","cite":["ref7"],"verified":"provenance"},{"id":"f-compartment","claim":"Absolute compartment pressure that is concerning","value":"30 mmHg","provenance":"consult:rhabdomyolysis/rhabdo-compartment-eval","cite":["ref5"],"verified":"provenance"},{"id":"f-hyperk","claim":"Potassium threshold that demands immediate hyperkalemia treatment","value":"6.0 mEq/L","provenance":"consult:rhabdomyolysis/rhabdo-electrolyte-check","cite":["ref6"],"verified":"provenance"},{"id":"f-mg","claim":"Proportion with concurrent hypomagnesemia","value":"up to 50%","provenance":"consult:rhabdomyolysis/rhabdo-fluid-resus","cite":["ref7"],"verified":"provenance"},{"id":"f-bicarb","claim":"Bicarbonate regimen reserved for severe acidosis","value":"150 mEq NaHCO3 in 1L D5W","provenance":"consult:rhabdomyolysis/rhabdo-fluid-resus","cite":["ref9"],"verified":"provenance"}],"sections":[{"id":"sec-recognize","title":"1 · Recognize & diagnose","blocks":[{"id":"b-def","type":"callout","tone":"mechanism","title":"What it is","md":"Skeletal muscle breakdown releasing intracellular contents — **myoglobin, CK, potassium, phosphate** — into the circulation. The classic triad of **myalgia + weakness + dark/tea-colored urine** is present in **\u003c10%**, so diagnosis rests on CK, not symptoms.{{ref1}}","cite":["ref1"]},{"id":"b-dx","type":"text","md":"**Diagnostic criteria:** CK >5× the upper limit of normal; most clinicians use **CK >1,000 U/L** (~1,000 U/L) as the working threshold. AKI complicates **15-55%** of cases and rises with CK level, dehydration, sepsis, and fluid resuscitation delayed >6 hours.{{ref1}}","cite":["ref1"]},{"id":"b-uastat","type":"callout","tone":"caution","title":"The urine clue","md":"Urine dipstick **positive for blood but no RBCs on microscopy = myoglobinuria**. Urine myoglobin is cleared faster than CK and may be negative even with a high CK — do not use it to rule out."}]},{"id":"sec-severity","title":"2 · Stratify by CK level","blocks":[{"id":"b-ckhint","type":"text","md":"Enter the **peak CK** above — the marker moves along the severity scale and sets fluid intensity and disposition."},{"id":"b-ckscale","type":"scale","min":1000,"max":100000,"unit":"U/L","markerCalcRef":"ckLevel","markerLabel":"peak CK","bands":[{"from":1000,"to":5000,"label":"Mild (~2% dialysis)","action":"2-3 L/day","tone":"normal"},{"from":5000,"to":15000,"label":"Moderate (~3-8%)","action":"3-6 L/day","tone":"caution"},{"from":15000,"to":50000,"label":"Severe (~5-14%)","action":">6 L/day","tone":"danger"},{"from":50000,"to":100000,"label":"Very severe (~9-21%) → ICU","action":"Aggressive + ICU","tone":"danger"}],"harmAnchor":{"at":15000,"label":"CK >15,000 → AKI risk climbs"},"cite":["ref2"]},{"id":"b-cktable","type":"table","columns":["CK (U/L)","Severity","Fluid target","Dialysis risk"],"heroCol":0,"rows":[["1,000-5,000","Mild","2-3 L/day","~2%"],["5,000-15,000","Moderate","3-6 L/day","~3-8%"],[">15,000","Severe",">6 L/day","~5-14%"],[">50,000","Very severe → ICU","Aggressive + ICU","~9-21%"]],"rowTones":["normal","caution","danger","danger"],"cite":["ref2"]},{"id":"b-ck15","type":"text","md":"A 2025 cohort (n=73,036) confirms the gradient: **CK >15,000** U/L marks the inflection where the dialysis rate jumps, and CK >100,000 carried a 25% rate of Cr ≥4. **McMahon score ≥6** predicts need for renal replacement therapy.{{ref2}}{{ref3}}","cite":["ref2","ref3"]}]},{"id":"sec-nowbar","title":"3 · What to do right now","blocks":[{"id":"b-nowhint","type":"text","md":"Toggle the patient's state above. Exactly one instruction below shows — **life-threats are handled before fluids**."},{"id":"b-now-hyperk","type":"callout","tone":"danger","title":"Hyperkalemia first — treat before fluids","showWhen":"hyperk==1","md":"**K⁺ >6.0 mEq/L** or ECG changes overrides everything. Stabilize the membrane, shift K⁺, and remove it **simultaneously** — do not sequence. See doses below and [Potassium Disorders](#/tree/potassium).","cite":["ref6"]},{"id":"b-now-crush","type":"callout","tone":"danger","title":"Crush / trauma — rule out compartment syndrome","showWhen":"hyperk==0 && crush==1","md":"Pain with passive stretch + a tense compartment = measure pressure. Absolute pressure **>30 mmHg** or delta pressure (DBP − compartment) **\u003c30 mmHg** → **fasciotomy within 6h**. **Do NOT elevate the limb** — it lowers perfusion pressure.","cite":["ref5"]},{"id":"b-now-special","type":"callout","tone":"caution","title":"Heart failure / ESRD — modify the fluids","showWhen":"hyperk==0 && crush==0 && special==1","md":"Small boluses (250-500 mL), reassess with POCUS, lower maintenance rates. ESRD: minimal fluids, urgent nephrology for dialysis-based volume/toxin removal. Watch for severe hyperkalemia."},{"id":"b-now-standard","type":"callout","tone":"normal","title":"Standard: aggressive fluids now","showWhen":"hyperk==0 && crush==0 && special==0","md":"No life-threat gating fluids. Start aggressive IV crystalloid targeting UOP **1-3 mL/kg/hr**. Early resuscitation (\u003c6h) is what prevents AKI.","cite":["ref7"]},{"id":"b-hyperk-doses","type":"text","md":"**Hyperkalemia bundle — give together, not in sequence:**","showWhen":"hyperk==1","whenNode":"rhabdo-hyperkalemia-tx"},{"id":"b-d-cagluc","type":"dose","drug":"Calcium gluconate — membrane stabilization","dose":"1-2 g","route":"IV over 2-3 min","note":"Preferred for peripheral access. Central line → [calcium chloride](#/drug/calcium-chloride/hyperkalemia) 500-1000 mg.","drugId":"calcium-gluconate","showWhen":"hyperk==1","whenNode":"rhabdo-hyperkalemia-tx","cite":["ref6"]},{"id":"b-d-insulin","type":"dose","drug":"Regular insulin + dextrose — shift K⁺","dose":"10 units IV + D50W 25-50 mL","route":"IV","note":"Recheck glucose at 30-60 min; hypoglycemia is common. Links: [regular insulin](#/drug/regular-insulin/hyperkalemia) · [D50W](#/drug/dextrose/hyperkalemia).","drugId":"regular-insulin","showWhen":"hyperk==1","whenNode":"rhabdo-hyperkalemia-tx","cite":["ref6"]},{"id":"b-d-alb","type":"dose","drug":"Albuterol nebulized — shift K⁺","dose":"10-20 mg","route":"nebulized","note":"Additive to insulin. Link: [albuterol](#/drug/albuterol-neb/hyperkalemia).","drugId":"albuterol-neb","showWhen":"hyperk==1","whenNode":"rhabdo-hyperkalemia-tx","cite":["ref6"]},{"id":"b-d-furos","type":"dose","drug":"Furosemide — kaliuresis (if making urine)","dose":"40-80 mg","route":"IV","note":"Removes K⁺ only if renal function allows. Link: [furosemide](#/drug/furosemide/hyperkalemia).","drugId":"furosemide","showWhen":"hyperk==1","whenNode":"rhabdo-hyperkalemia-tx","cite":["ref6"]}]},{"id":"sec-fluids","title":"4 · Fluid resuscitation — the cornerstone","blocks":[{"id":"b-fluidwhy","type":"text","md":"Aggressive IV crystalloid is the mainstay. Maintain urine output **1-3 mL/kg/hr**, replace the deficit AND ongoing third-space losses, and start **early (\u003c6h)** to blunt AKI. Always check magnesium — **up to 50%** have concurrent hypomagnesemia.{{ref1}}{{ref7}}","cite":["ref1","ref7"]},{"id":"b-uop-hint","type":"text","md":"Enter **weight** above → your patient's UOP window:"},{"id":"b-uop-low","type":"stat","label":"UOP target — low end (1 mL/kg/hr)","value":"70 mL/hr","calcRef":"uopLow","tone":"normal","cite":["ref7"]},{"id":"b-uop-high","type":"stat","label":"UOP target — high end (3 mL/kg/hr)","value":"210 mL/hr","calcRef":"uopHigh","tone":"normal","cite":["ref7"]},{"id":"b-fluidchoice","type":"callout","tone":"mechanism","title":"LR vs NS — LR preferred","md":"**Lactated Ringers** maintains alkaline urine pH better and avoids the hyperchloremic (NAGMA) acidosis that large-volume NS produces. Its K⁺ content (4 mEq/L) does **not** worsen hyperkalemia — a myth; LR may actually lower K⁺ by correcting acidosis. **NS is an acceptable alternative** but may need bicarbonate for alkalinization.{{ref7}}","cite":["ref7"]},{"id":"b-protocol","type":"steps","ordered":true,"whenNode":["rhabdo-lr-protocol","rhabdo-ns-protocol"],"items":["Initial bolus: 1-2 L IV crystalloid.","Maintenance 200-500 mL/hr, titrated to UOP.","Foley + hourly UOP; BMP and CK q6-12h.","Continue until CK is trending down AND \u003c5,000 U/L, or myoglobinuria clears.","Watch for volume overload (JVD, pulmonary edema) — cut the rate if it appears."],"cite":["ref7"]},{"id":"b-bicarb","type":"callout","tone":"caution","title":"Bicarbonate is NOT routine","md":"Urinary alkalinization has not beaten fluids alone in RCTs. Reserve **150 mEq NaHCO3 in 1L D5W** for severe acidosis (pH \u003c7.1) — fluids remain the priority.{{ref9}}{{ref10}}","cite":["ref9","ref10"]}]},{"id":"sec-algo","title":"5 · One-glance algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"rhabdo-start","shape":"state","text":"Suspected rhabdo (CK >1,000)","col":0,"rank":0,"tone":"mechanism","detail":"Skeletal muscle breakdown → myoglobin, CK, K⁺, phosphate. Classic triad in \u003c10%; AKI in 15-55%."},{"id":"rhabdo-severity","shape":"decision","text":"CK level?","col":0,"rank":1,"detail":"Mild 1-5K (~2% dialysis) · Moderate 5-15K · Severe >15K · Very severe >50K → ICU."},{"id":"rhabdo-etiology","shape":"decision","text":"Mechanism / cause?","col":0,"rank":2,"detail":"Traumatic/crush (compartment risk) · exertional (better prognosis) · drug/toxin · metabolic/infectious."},{"id":"rhabdo-compartment-eval","shape":"action","text":"Assess compartment syndrome","col":-1,"rank":3,"tone":"danger","activeWhen":"crush==1","detail":"Pain on passive stretch, pressure >30 mmHg or delta \u003c30 mmHg → fasciotomy within 6h. Do NOT elevate limb."},{"id":"rhabdo-drug-induced","shape":"action","text":"Stop offending drug/toxin","col":1,"rank":3,"detail":"Statin: stop now, rechallenge later OK. Cocaine: cool, avoid β-blockers. NMS/SS: see specific consults."},{"id":"rhabdo-workup","shape":"action","text":"Labs: CK, BMP, Ca/Phos/Mg, UA, ECG","col":0,"rank":4,"detail":"Dipstick blood without RBCs = myoglobinuria. Ca often low early, Phos high, K⁺ dangerous."},{"id":"rhabdo-electrolyte-check","shape":"decision","text":"Life-threatening electrolyte abnormality?","col":0,"rank":5,"tone":"danger","detail":"Treat hyperK, symptomatic hypocalcemia, and severe acidosis BEFORE fluids."},{"id":"rhabdo-hyperkalemia-tx","shape":"action","text":"Treat hyperkalemia (bundle)","col":-1,"rank":6,"tone":"danger","activeWhen":"hyperk==1","detail":"Calcium + insulin/glucose + albuterol + kaliuresis, together. K⁺ >6.0 mEq/L or ECG changes."},{"id":"rhabdo-hypocalcemia-tx","shape":"action","text":"Treat symptomatic hypocalcemia only","col":1,"rank":6,"tone":"caution","detail":"Only if tetany/seizure/QT arrhythmia. Asymptomatic Ca will rebound — replacing it worsens muscle calcification."},{"id":"rhabdo-fluid-resus","shape":"action","text":"Aggressive fluids → UOP 1-3 mL/kg/hr","col":0,"rank":7,"tone":"normal","detail":"Cornerstone. Early (\u003c6h) resuscitation prevents AKI."},{"id":"rhabdo-fluid-choice","shape":"decision","text":"LR or NS?","col":0,"rank":8,"detail":"LR preferred (pH, less NAGMA). NS acceptable. Special populations (CHF/ESRD) modify strategy."},{"id":"rhabdo-lr-protocol","shape":"state","text":"LR protocol → admit / monitor CK","col":0,"rank":9,"tone":"normal","activeWhen":"special==0","detail":"1-2 L bolus, 200-500 mL/hr, Foley, CK q6-12h until \u003c5,000 and trending down."},{"id":"rhabdo-ns-protocol","shape":"state","text":"NS protocol → admit / monitor CK","col":1,"rank":9,"detail":"Same targets; watch for NAGMA, add bicarbonate only if alkalinization needed."},{"id":"rhabdo-special-fluid","shape":"state","text":"Modified fluids → ICU / nephrology","col":-1,"rank":9,"tone":"caution","activeWhen":"special==1","detail":"CHF: small boluses + POCUS. ESRD: minimal fluids, urgent dialysis."}],"edges":[{"from":"rhabdo-start","to":"rhabdo-severity"},{"from":"rhabdo-severity","to":"rhabdo-etiology","label":"any (1K→>50K)"},{"from":"rhabdo-severity","to":"rhabdo-fluid-resus","label":">15K → escalate"},{"from":"rhabdo-etiology","to":"rhabdo-compartment-eval","label":"traumatic/crush"},{"from":"rhabdo-etiology","to":"rhabdo-drug-induced","label":"drug/toxin"},{"from":"rhabdo-etiology","to":"rhabdo-workup","label":"exertional/metabolic"},{"from":"rhabdo-compartment-eval","to":"rhabdo-workup"},{"from":"rhabdo-drug-induced","to":"rhabdo-workup"},{"from":"rhabdo-workup","to":"rhabdo-electrolyte-check"},{"from":"rhabdo-electrolyte-check","to":"rhabdo-hyperkalemia-tx","label":"hyperK / ECG"},{"from":"rhabdo-electrolyte-check","to":"rhabdo-hypocalcemia-tx","label":"symptomatic hypoCa"},{"from":"rhabdo-electrolyte-check","to":"rhabdo-fluid-resus","label":"none"},{"from":"rhabdo-hyperkalemia-tx","to":"rhabdo-fluid-resus"},{"from":"rhabdo-hypocalcemia-tx","to":"rhabdo-fluid-resus"},{"from":"rhabdo-fluid-resus","to":"rhabdo-fluid-choice"},{"from":"rhabdo-fluid-choice","to":"rhabdo-lr-protocol","label":"LR"},{"from":"rhabdo-fluid-choice","to":"rhabdo-ns-protocol","label":"NS"},{"from":"rhabdo-fluid-choice","to":"rhabdo-special-fluid","label":"CHF / ESRD"}]},{"id":"b-flowhint","type":"text","md":"Tap any box for detail. Toggles above auto-highlight the matching path. The full branching protocol lives in the [myMedKitt rhabdomyolysis consult](#/tree/rhabdomyolysis)."}]},{"id":"sec-pitfalls","title":"6 · Do NOT","blocks":[{"id":"b-pit","type":"disclosure","summary":"Critical pitfalls","scent":"4 items","blocks":[{"id":"b-p1","type":"callout","tone":"danger","md":"**Do NOT elevate a crush limb** — it drops perfusion pressure and worsens ischemia. Keep it at heart level while ruling out compartment syndrome."},{"id":"b-p2","type":"callout","tone":"danger","md":"**Do NOT sequence hyperkalemia treatment.** Calcium, insulin/glucose, albuterol, and kaliuresis go together — not one, then wait."},{"id":"b-p3","type":"callout","tone":"caution","md":"**Do NOT reflexively give bicarbonate.** Urinary alkalinization has not beaten fluids alone in RCTs; reserve it for pH \u003c7.1."},{"id":"b-p4","type":"callout","tone":"caution","md":"**Do NOT replace asymptomatic hypocalcemia.** Early Ca deposits in damaged muscle and rebounds later — replacing it worsens heterotopic calcification."}]}]}],"citations":[{"id":"ref1","label":"Bosch X, Poch E, Grau JM. Rhabdomyolysis and acute kidney injury. N Engl J Med. 2009;361(1):62-72.","pmid":"19571284","grade":"Narrative review"},{"id":"ref2","label":"Chavez LO, et al. Creatine Kinase Elevations and Risk of Renal Failure and Dialysis in Patients With Rhabdomyolysis. Am J Med. 2025;138(1):45-52.","grade":"Retrospective cohort (n=73,036)"},{"id":"ref3","label":"McMahon GM, et al. A risk prediction score for kidney failure or mortality in rhabdomyolysis. JAMA Intern Med. 2013;173(19):1821-8.","pmid":"24000014","grade":"Derivation/validation cohort"},{"id":"ref4","label":"Voermans NC. A Clinical Approach to Rhabdomyolysis. Neuromuscul Disord. 2024;34(2):78-89.","grade":"Narrative review"},{"id":"ref5","label":"Schmidt AH. Acute compartment syndrome. Injury. 2017;48 Suppl 1:S22-S25.","pmid":"28870372","grade":"Narrative review"},{"id":"ref6","label":"Weisberg LS. Management of severe hyperkalemia. Crit Care Med. 2008;36(12):3246-3251.","pmid":"18936701","grade":"Narrative review"},{"id":"ref7","label":"Brown CV, et al. Rhabdomyolysis: an American Association for the Surgery of Trauma Critical Care Committee Clinical Consensus Document. Trauma Surg Acute Care Open. 2022;7(1):e000836.","grade":"Consensus document"},{"id":"ref8","label":"EB Medicine. Rhabdomyolysis: Evidence-Based Management in the Emergency Department. 2024.","grade":"Evidence-based review"},{"id":"ref9","label":"Ghahramani M, et al. The Role of Urine Alkalinization in Preventing Rhabdomyolysis-Induced Acute Kidney Injury: A Systematic Review and Meta-Analysis. J Clin Med. 2025;14(1):112.","grade":"Systematic review / meta-analysis"},{"id":"ref10","label":"Scharman EJ, Troutman WG. Prevention of kidney injury following rhabdomyolysis: a systematic review. Ann Pharmacother. 2013;47(1):90-105.","pmid":"23324509","grade":"Systematic review"},{"id":"ref11","label":"Fernandez WG, et al. Prediction of safe discharge of emergency department patients with acute rhabdomyolysis. Crit Care Med. 2005;33(5):926-927.","grade":"Observational"}],"meta":{"version":"1.0","lastReviewed":"2026-07-07","evidenceThrough":"2025 (AAST consensus + 2025 CK cohort)","nextReview":"2027-07-07","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 initial — generated from myMedKitt rhabdomyolysis consult"}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  render();
+})();
+</script>
+</body></html>
