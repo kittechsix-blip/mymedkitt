@@ -40,7 +40,7 @@ export const TRICK_SPECIALTIES = [
         color: '#00838F',
         subtitle: 'IV access, tamponade, lavage, and bedside procedure hacks.',
         infoPageId: 'tricks-procedures',
-        trickCount: 53,
+        trickCount: 55,
         category: 'resus-procedures',
     },
     {
@@ -50,7 +50,7 @@ export const TRICK_SPECIALTIES = [
         color: '#6A1B9A',
         subtitle: 'Epistaxis packing tricks and nasal suction.',
         infoPageId: 'tricks-ent',
-        trickCount: 24,
+        trickCount: 25,
         category: 'head-neck',
     },
     {
@@ -120,7 +120,7 @@ export const TRICK_SPECIALTIES = [
         color: '#37474F',
         subtitle: 'Antiemetic and toxidrome management pearls.',
         infoPageId: 'tricks-tox',
-        trickCount: 6,
+        trickCount: 7,
         category: 'general-tox',
     },
     {
@@ -140,7 +140,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
         infoPageId: 'tricks-ortho',
-        trickCount: 34,
+        trickCount: 35,
         category: 'wounds-msk',
     },
 ];

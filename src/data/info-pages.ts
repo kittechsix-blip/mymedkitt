@@ -26493,6 +26493,14 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
       heading: 'Removable Arterial-Line Guidewire as a Spare',
       body: '**Accomplishes:** Gives you a backup guidewire to salvage a tricky ultrasound-guided deep IV (e.g., basilic vein) when the vein is cannulated but the catheter won\u2019t thread and no dedicated wire is stocked. [46]\n\n**How to:**\n1. Grab an Arrow Seldinger-based arterial-line kit \u2014 its guidewire is removable.\n2. Look along the clear guidewire sheath for a narrow lengthwise slit and slide the guidewire out through it.\n3. Note the black plastic handle on one end \u2014 keep hold of it so the wire is never lost into the catheter.\n4. Feed the freed wire through your in-place IV catheter to stabilize access, then advance a longer catheter over it Seldinger-style.\n5. Keep the wire under control at all times and never let go of the trailing end.\n\n**Equipment:** Arrow arterial-line kit (for its removable guidewire), in-place IV catheter, longer catheter to exchange.\n\n_Source: ALiEM Trick of the Trade \u2014 A removable guidewire (Hall)._',
     },
+    {
+      heading: 'Yankauer Suction to Contain the Foul Abscess Smell',
+      body: '**Accomplishes:** Keeps the room (and staff) from being overwhelmed by a putrid abscess during I&D by moving the odorous pus straight into a closed suction canister instead of letting it drain into open air. [47]\n\n**How to:**\n1. Set up wall suction with a Yankauer tip and a closed canister as usual.\n2. Make only a small initial stab incision \u2014 just big enough to admit the Yankauer tip.\n3. Insert the Yankauer tip into the opening and suction out as much pus as possible directly into the canister.\n4. The principle: you are transferring the smell from one closed system (the abscess) into another closed system (the wall canister) rather than releasing it into the room.\n5. Then extend the incision and complete the I&D, break up loculations, and irrigate as usual.\n\n**Equipment:** Wall suction with closed canister, Yankauer suction tip, #11 blade, standard I&D tray.\n\n_Source: ALiEM Trick of the Trade \u2014 Minimizing abscess odor._',
+    },
+    {
+      heading: 'Thin LP Needle + 60 mL Syringe for Atraumatic Paracentesis',
+      body: '**Accomplishes:** Lets you tap ascites (e.g., to rule out SBP) with far less catheter/needle trauma, less pain, and less post-procedure ascitic leak than a large-bore needle or angiocatheter. [48]\n\n**How to:**\n1. Prep and drape the LLQ (or POCUS-marked) pocket sterilely and anesthetize the tract.\n2. Take a thin 22\u2013 or 24-gauge lumbar-puncture needle and discard the stylet.\n3. Attach it directly to a 60 mL syringe.\n4. Advance while gently aspirating until ascitic fluid returns; withdraw a diagnostic 30\u201360 mL.\n5. For culture yield, inoculate blood-culture bottles at the bedside \u2014 this raises sensitivity to >90%.\n\n**Equipment:** 22\u2013 or 24-gauge spinal (LP) needle, 60 mL syringe, sterile prep, local anesthetic, blood-culture bottles, ultrasound (optional).\n\n_Source: EMCrit IBCC \u2014 Spontaneous Bacterial Peritonitis (paracentesis technique)._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -26541,6 +26549,8 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
     { num: 44, text: 'ALiEM. Trick of the Trade: Straightening the guidewire (stretch the coil just proximal to the J-tip). aliem.com.' },
     { num: 45, text: 'ALiEM. Trick of the Trade: Safer guidewire disposal (coil around knuckles and dispose in a reversed glove; credit Rob Bryant, Utah Emergency Physicians). aliem.com.' },
     { num: 46, text: 'ALiEM. Trick of the Trade: A removable guidewire (Arrow arterial-line kit; credit Kennedy Hall, UCSF-SFGH). aliem.com.' },
+    { num: 47, text: 'ALiEM. Trick of the Trade: Minimizing abscess odor (Yankauer suction into a closed canister). aliem.com.' },
+    { num: 48, text: 'EMCrit IBCC \u2014 Spontaneous Bacterial Peritonitis (SBP): use a 22\u201324G LP needle without stylet on a 60 mL syringe; bedside inoculation of culture bottles raises sensitivity >90%. emcrit.org/ibcc/sbp/.' },
   ],
 };
 
@@ -27099,6 +27109,10 @@ const TRICKS_NEURO_PAGE: InfoPage = {
       heading: 'Landmark Greater Occipital Nerve Block for Refractory Headache',
       body: '**Accomplishes:** Aborts migraine, occipital neuralgia, and cluster headache at the bedside without opioids or ultrasound. A single landmark-based injection often gives relief that outlasts the anesthetic. [9]\n\n**How to:**\n1. Seat the patient with the head flexed forward (palms supporting the face) or prone over a chest pillow.\n2. Palpate the external occipital protuberance (OP) and the mastoid process (MP); mark the point one-third of the way from the OP toward the MP.\n3. Confirm there is no palpable occipital-artery pulse at your target.\n4. Prep with chlorhexidine or alcohol; draw up 2\u20134 mL of 0.25\u20130.5% bupivacaine or 1\u20132% lidocaine into a 25\u201327g 1.5-inch needle.\n5. Insert from an inferior angle; if you hit bone, withdraw slightly and aspirate to confirm you are not intravascular.\n6. Inject 1\u20133 mL per side, fanning slightly across tissue planes.\n7. Reassess posterior-scalp numbness at ~5 min (lidocaine) or 10\u201315 min (bupivacaine).\n\n**Equipment:** 5 mL syringe with draw needle, 25\u201327g 1.5-inch injection needle, bupivacaine or lidocaine, chlorhexidine/alcohol.\n\n_Source: ALiEM \u2014 Greater occipital nerve block in the emergency department._',
     },
+    {
+      heading: 'Directed Saline Irrigation for Nasal Suctioning in Infants',
+      body: '**Accomplishes:** Clears a congested infant\u2019s nose with saline irrigation while keeping the baby much less wet, distressed, and squirmy \u2014 and reassures anxious parents that home suctioning is safe. [10]\n\n**How to:**\n1. Connect an angiocath tip to a J-loop and attach that directly to a saline flush syringe.\n2. Rest the base of your non-dominant hand against the infant\u2019s cheek for control.\n3. Use two fingers of that hand to direct the angiocath tip into one nostril.\n4. Hold the flush syringe in your other hand and irrigate in short bursts, suctioning between.\n5. Use your forearms to gently pin the infant\u2019s arms so they can\u2019t bat the equipment away.\n\n**Equipment:** Angiocath tip, J-loop (IV extension loop), saline flush syringe, bulb or wall suction.\n\n_Source: ALiEM Trick of the Trade \u2014 Directed saline irrigation for nasal suctioning (Joshi)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -27110,6 +27124,7 @@ const TRICKS_NEURO_PAGE: InfoPage = {
     { num: 7, text: 'ALiEM. Trick of the Trade: Gaze testing using \u201Cselfie mode\u201D on your smartphone camera. aliem.com. Bortolon C, et al. 2017.' },
     { num: 8, text: 'ALiEM. Trick of the Trade: Corneal reflex test (sterile saline-drop method). aliem.com.' },
     { num: 9, text: 'ALiEM. Greater occipital nerve block in the emergency department. aliem.com.' },
+    { num: 10, text: 'ALiEM. Trick of the Trade: Directed saline irrigation for nasal suctioning (Kavita Joshi, UT Southwestern). aliem.com.' },
   ],
 };
 
@@ -27143,6 +27158,10 @@ const TRICKS_TOX_PAGE: InfoPage = {
       heading: 'Sodium Bicarb Ampule as a Stand-In for 3% Saline in Crashing Hyponatremia',
       body: '**Accomplishes:** Delivers immediate hypertonic sodium from the crash cart when 3% saline is not at the bedside. A bicarb ampule can reverse acute hyponatremic seizures/coma in seconds while pharmacy sends the 3% NaCl. [6]\n\n**How to:**\n1. Use ONLY for a seizing or obtunded patient with confirmed/strongly suspected ACUTE symptomatic hyponatremia \u2014 not chronic asymptomatic hyponatremia (rapid correction there risks osmotic demyelination).\n2. Grab a 50 mL ampule of sodium bicarbonate 8.4% off the crash cart (50 mL = 50 mEq Na, comparable to ~100 mL of 3% saline at 51 mEq).\n3. Push 1 ampule slowly IV over 5\u201310 minutes.\n4. Recheck serum sodium.\n5. If Na has risen <4\u20136 mEq/L and symptoms persist, repeat with another ampule OR switch to 100 mL of 3% NaCl once it arrives.\n6. Cap the total acute rise at the standard limit (~6\u20138 mEq/L in 24 h) and hand off to the definitive hyponatremia plan.\n\n**Equipment:** Sodium bicarbonate 8.4% 50 mL ampule, IV access, stat/point-of-care electrolytes.\n\n_Source: ALiEM Trick of the Trade \u2014 Sodium bicarbonate for acute symptomatic hyponatremia._',
     },
+    {
+      heading: 'Topical Capsaicin Cream on the Belly for Cannabinoid Hyperemesis',
+      body: '**Accomplishes:** Aborts the intractable vomiting of cannabinoid hyperemesis syndrome (CHS) by chemically recreating the relief patients get from compulsive hot showers \u2014 capsaicin activates skin TRPV1 receptors and dampens substance-P signaling. [7]\n\n**How to:**\n1. Confirm a CHS pattern (chronic cannabis use, cyclic vomiting, learned hot-shower/hot-bath relief).\n2. Apply a thin layer of 0.075% capsaicin cream (0.025% also reported effective) to the abdomen over a hand-sized area.\n3. Wear gloves to apply and keep it well clear of the eyes, mucous membranes, and genitals.\n4. Give it 30\u201345 minutes; reapply or widen the area if partial. Combine with an antiemetic (e.g., haloperidol) for refractory cases.\n5. If it irritates sensitive skin, wipe/rinse with milk \u2014 the casein protein lifts capsaicin better than water.\n\n**Equipment:** 0.075% (or 0.025%) capsaicin cream, exam gloves, milk on hand for irritation.\n\n_Source: ALiEM Trick of the Trade \u2014 Topical treatment of cannabinoid hyperemesis syndrome._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/. (HaVOC trial.)' },
@@ -27151,6 +27170,7 @@ const TRICKS_TOX_PAGE: InfoPage = {
     { num: 4, text: 'Beadle KL, Helbling AR, Love SL, et al. Isopropyl Alcohol Nasal Inhalation for Nausea in the Emergency Department: A Randomized Controlled Trial. Ann Emerg Med. 2016;68(1):1-9. See also Core EM review.' },
     { num: 5, text: 'ALiEM. Trick of the Trade: Nebulized naloxone. aliem.com. Mycyk MB, et al. Nebulized naloxone gently and effectively reverses methadone intoxication. J Emerg Med. 2003;24(2):185-187.' },
     { num: 6, text: 'ALiEM. Trick of the Trade: Sodium bicarbonate for acute symptomatic hyponatremia. aliem.com.' },
+    { num: 7, text: 'ALiEM. Trick of the Trade: Topical treatment of cannabinoid hyperemesis syndrome (0.075% capsaicin cream to the abdomen). aliem.com.' },
   ],
 };
 
@@ -27594,6 +27614,10 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
       heading: 'Towel-Clip Reduction of a Posterior Sternoclavicular Dislocation',
       body: '**Accomplishes:** Pulls a posteriorly displaced medial clavicle off the mediastinal structures (trachea, esophagus, great vessels) it may be compressing, when abduction-traction alone fails. [34]\n\n**How to:**\n1. First get a CT chest (with angiography) BEFORE manipulating \u2014 a posterior dislocation is a potential vascular/airway emergency; have surgical backup available.\n2. Reduce only within ~10 days of injury (older injuries go to the OR).\n3. Under procedural sedation, place the patient supine with a bolster between the scapulae.\n4. Try abduction-traction first: abduct the ipsilateral arm to ~90\u00B0 and apply steady traction to translate the medial clavicle anteriorly.\n5. If that fails, prep the skin sterile, percutaneously grasp the medial clavicle with a sterile towel clip, and pull ANTERIORLY until it reduces with a clunk.\n6. Apply a figure-of-eight splint for ~6 weeks; observe/admit given proximity to vital structures.\n\n**Equipment:** Towel clip, procedural sedation kit, interscapular bolster, figure-of-eight splint, CT angiography access, sterile prep.\n\n_Source: ALiEM \u2014 Sternoclavicular joint dislocations: diagnosis and treatment._',
     },
+    {
+      heading: 'Soft-Wrap / Buddy Tape a Boxer\u2019s Fracture Instead of Reducing and Casting',
+      body: '**Accomplishes:** Spares many 5th-metacarpal-neck (boxer\u2019s) fractures the pain of a hematoma-block reduction and a bulky ulnar-gutter cast \u2014 a simple soft wrap gives equivalent hand function and healing with better comfort and earlier motion. [35]\n\n**How to:**\n1. Confirm an isolated 5th metacarpal NECK fracture with acceptable angulation (up to ~70\u00B0 is well tolerated at the neck) and NO rotational deformity or scissoring of the flexed fingers \u2014 rotation still needs reduction/referral.\n2. Skip formal reduction and rigid casting for these acceptable fractures.\n3. Buddy-tape the ring and little fingers together and apply a soft supportive wrap (e.g., a compressive elastic bandage) for comfort.\n4. Encourage early active range of motion as pain allows rather than prolonged immobilization.\n5. Give hand-clinic follow-up in ~1 week and standard fracture precautions.\n\n**Equipment:** Buddy tape / paper tape, soft compressive/elastic bandage, +/- padding.\n\n_Source: ALiEM SplintER Series \u2014 Boxer\u2019s fracture; van Aaken J, et al. Soft wrap vs reduction/casting for 5th metacarpal neck fractures, an RCT. Arch Orthop Trauma Surg 2016._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -27630,6 +27654,7 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
     { num: 32, text: 'CoreEM. Elbow Dislocation (Parvin gravity/weighted hanging-arm reduction technique). coreem.net. Parvin RW. Closed reduction of common shoulder and elbow dislocations without anesthesia. Arch Surg. 1957;75(6):972-975.' },
     { num: 33, text: 'Kumar V, et al. A novel technique for Gravity Assisted Reduction of Ankle (GARA) fracture dislocations. PMC7705148. See also comparative study, Foot Ankle Surg 2022.' },
     { num: 34, text: 'ALiEM. Sternoclavicular joint dislocations: diagnosis and treatment (towel-clip anterior reduction of posterior SC dislocation). aliem.com.' },
+    { num: 35, text: 'ALiEM SplintER Series \u2014 Boxer\u2019s fracture (5th metacarpal neck). aliem.com. van Aaken J, et al. Fifth metacarpal neck fractures treated with soft wrap/buddy taping vs reduction and casting: a prospective, multicenter, randomized trial. Arch Orthop Trauma Surg. 2016;136(1):135-142.' },
   ],
 };
 
