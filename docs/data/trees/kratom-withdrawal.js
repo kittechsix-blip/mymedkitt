@@ -3,7 +3,7 @@
 // treatment selection (buprenorphine vs non-opioid), adjuncts,
 // complications monitoring, and disposition.
 // 7 modules: Recognition → Assessment → Treatment Selection → Buprenorphine → Non-Opioid → Complications → Disposition
-// 24 nodes total.
+// 19 nodes total.
 export const KRATOM_WITHDRAWAL_CRITICAL_ACTIONS = [
     { text: 'Use COWS to assess severity — not validated for kratom but reasonable proxy', nodeId: 'kw-assess' },
     { text: 'Buprenorphine is best-supported treatment for moderate-severe withdrawal', nodeId: 'kw-bup-dosing' },

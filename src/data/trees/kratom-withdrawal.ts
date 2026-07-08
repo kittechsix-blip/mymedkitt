@@ -3,7 +3,7 @@
 // treatment selection (buprenorphine vs non-opioid), adjuncts,
 // complications monitoring, and disposition.
 // 7 modules: Recognition → Assessment → Treatment Selection → Buprenorphine → Non-Opioid → Complications → Disposition
-// 24 nodes total.
+// 19 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { CriticalAction, Citation } from '../../services/tree-service.js';

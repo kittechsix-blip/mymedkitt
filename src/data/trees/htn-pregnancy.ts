@@ -4,7 +4,7 @@
 // Eclampsia (active seizures) is handled in the dedicated Eclampsia consult — link only.
 // Based on ACOG PB 222 (2020), ACOG CO 767 (2019), ACOG PB 203 (2019 — Chronic HTN),
 // SMFM 2022, CHAP trial (NEJM 2022), and the USPSTF 2021 aspirin prophylaxis guidance.
-// 6 modules. 41 nodes total.
+// 6 modules. 30 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

@@ -4,7 +4,7 @@
 // Eclampsia (active seizures) is handled in the dedicated Eclampsia consult — link only.
 // Based on ACOG PB 222 (2020), ACOG CO 767 (2019), ACOG PB 203 (2019 — Chronic HTN),
 // SMFM 2022, CHAP trial (NEJM 2022), and the USPSTF 2021 aspirin prophylaxis guidance.
-// 6 modules. 41 nodes total.
+// 6 modules. 30 nodes total.
 export const HTN_PREGNANCY_CRITICAL_ACTIONS = [
     { text: 'Severe-range BP (≥160 SBP OR ≥110 DBP) sustained ≥15 min → treat within 30–60 min', nodeId: 'htnp-severe-acute' },
     { text: 'First-line severe-range options: IV labetalol, IV hydralazine, or PO nifedipine IR', nodeId: 'htnp-severe-choose' },

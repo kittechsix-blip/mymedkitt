@@ -1,7 +1,7 @@
 // MedKitt — Thrombotic Thrombocytopenic Purpura (TTP)
 // Recognition → Diagnosis → Initial Treatment → Adjunctive Therapy → Special Populations → Monitoring
 // 6 modules: Recognition & Risk → Diagnostic Workup → Initial Treatment → Adjunctive Therapy → Special Populations → Disposition & Monitoring
-// 30 nodes total.
+// 24 nodes total.
 export const TTP_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION & RISK
@@ -390,7 +390,7 @@ export const TTP_CITATIONS = [
     { num: 8, text: 'Pourrat O, et al. HELLP syndrome with and without TTP: similarities and differences. Thromb Res. 2015;136(6):1203-1209.' },
     { num: 9, text: 'Fakhouri F, et al. Haemolytic uraemic syndrome. Lancet. 2017;390(10095):681-696.' },
     { num: 10, text: 'Scully M, et al. ISTH 2025 update on management of iTTP. J Thromb Haemost. 2025.' },
-    { num: 11, text: 'Swisher KK, et al. Pancreatitis preceding acute episodes of TTP-HUS: report of 5 patients. Am J Hematol. 2007;82(4):311-313.' },
+    { num: 11, text: 'Swisher KK, et al. Clinical outcomes after platelet transfusions in patients with thrombotic thrombocytopenic purpura. Transfusion. 2009;49(5):873-887.' },
     { num: 12, text: 'Balduini CL, et al. High versus standard dose methylprednisolone in acute TTP. Ann Hematol. 2010;89(6):591-596.' },
     { num: 13, text: 'Scully M, et al. Caplacizumab treatment for acquired TTP (HERCULES). N Engl J Med. 2019;380(4):335-346.' },
     { num: 14, text: 'Scully M, et al. Rituximab prophylaxis to prevent relapse in TTP. Blood Adv. 2017;1(15):1159-1166.' },

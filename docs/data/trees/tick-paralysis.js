@@ -77,7 +77,7 @@ export const TICK_PARALYSIS_NODES = [
         module: 2,
         title: 'FIND THE TICK — Full Skin Search',
         body: '**Diagnosis is clinical and there is no confirmatory test — the diagnosis IS finding the tick.** Patients rarely recall a bite, so a meticulous head-to-toe search is mandatory and is the single highest-yield action in this consult.\n\n**Search every hidden, hairy, and intertriginous site:**\n- **Entire scalp and hairline** (a fine-toothed comb helps) — most ticks hide here\n- **Behind the ears**, in the ear canal\n- **Axillae**, **groin / perineum**, gluteal cleft\n- Umbilicus, interdigital spaces, under breasts/skin folds\n- Back of the neck / base of skull and along the spine\n\nThe tick is on the **head or neck in ~60-70%** of cases. If you find one, **keep looking** — multiple ticks can be present.\n\n**Supporting labs (to separate from GBS, not to confirm tick paralysis):**\n- **CSF is NORMAL** (no albuminocytologic dissociation) — the key discriminator.\n- Nerve conduction (if done): reduced CMAP amplitude, preserved sensory potentials, NOT a demyelinating pattern; most useful late.',
-        citation: [1, 2, 8, 3],
+        citation: [1, 2, 8, 3, 6],
         next: 'tp-remove',
         summary: 'No lab confirms it — the diagnosis is finding the tick. Search scalp/hairline/ears/axillae/groin/perineum. Found on head/neck in ~60-70%. CSF normal.',
         safetyLevel: 'critical',
@@ -137,7 +137,7 @@ export const TICK_PARALYSIS_NODES = [
         module: 5,
         title: 'Geographic Risk: North American vs Australian',
         body: '**The species changes everything.** Risk-stratify by geography/tick type.\n\n**North American (Dermacentor andersoni / variabilis):**\n- **Excellent prognosis** — rapid reversal (hours-days) after removal\n- Supportive care is curative; antitoxin NOT used\n- Can still progress up to ~2 days post-removal — monitor\n\n**Australian (Ixodes holocyclus — the paralysis tick):**\n- **Far more severe** — higher rate of respiratory paralysis, death possible within 1-2 days untreated\n- **Paralysis can WORSEN AFTER removal**, peaking in the first 12-48 h → mandatory inpatient observation\n- **Tick antitoxin (TAS)** is used (some give it at the time of removal) — *FLAGGED: specialist/toxicology decision; non-standardized dosing and allergy/serum-sickness risk*\n- Remove carefully to avoid compressing the tick body (compression may trigger venom release)',
-        citation: [1, 5, 7],
+        citation: [1, 5, 7, 4],
         options: [
             {
                 label: 'North American (Dermacentor) — US Pacific NW / Rocky Mtn / SE',

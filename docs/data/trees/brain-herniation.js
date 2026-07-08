@@ -2,13 +2,13 @@
 // Emergency recognition and management of cerebral herniation
 // Sources: Neurocritical Care Society 2020, LITFL, StatPearls, BTF Guidelines
 // 6 modules: Recognition → Types → Imaging → Medical Management → Surgical → Monitoring
-// ~22 nodes
+// 18 nodes
 export const BRAIN_HERNIATION_CRITICAL_ACTIONS = [
     { text: 'Anisocoria + altered consciousness = ASSUME HERNIATION — treat immediately, do not wait for CT', nodeId: 'hern-start' },
     { text: 'Mannitol 20% 1 g/kg IV over 15-20 min OR Hypertonic saline 3% 250 mL bolus — either is first-line', nodeId: 'hern-osmolar' },
     { text: 'Head of bed 30°, midline head position — simple interventions that reduce ICP', nodeId: 'hern-positioning' },
     { text: 'Hyperventilation to PaCO2 32-35 mmHg is TEMPORIZING ONLY — max 2 hours, causes ischemia if prolonged', nodeId: 'hern-hypervent' },
-    { text: 'Midline shift >5 mm on CT = CALL NEUROSURGERY STAT — threshold for surgical evacuation', nodeId: 'hern-imaging' },
+    { text: 'Midline shift >5 mm on CT = CALL NEUROSURGERY STAT — threshold for surgical evacuation', nodeId: 'hern-imaging-findings' },
     { text: 'Cushing triad (HTN + bradycardia + irregular respirations) = IMMINENT HERNIATION — act NOW', nodeId: 'hern-tonsillar' },
 ];
 export const BRAIN_HERNIATION_NODES = [
