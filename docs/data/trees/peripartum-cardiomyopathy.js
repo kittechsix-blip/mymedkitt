@@ -1,6 +1,6 @@
 // MedKitt - Peripartum Cardiomyopathy (PPCM)
 // ED Recognition → Stabilization → Medications → Anticoagulation → Delivery → Disposition
-// 28 nodes total
+// 30 nodes total
 export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION & DIAGNOSIS
@@ -567,7 +567,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_MODULE_LABELS = [
     'Delivery Considerations',
     'Disposition & Prognosis',
 ];
-export const PERIPARTUM_CARDIOMYOPATHY_NODE_COUNT = 28;
+export const PERIPARTUM_CARDIOMYOPATHY_NODE_COUNT = PERIPARTUM_CARDIOMYOPATHY_NODES.length;
 // =====================================================================
 // CRITICAL ACTIONS
 // =====================================================================
