@@ -106,12 +106,25 @@ export const VASOPRESSOR_EXTRAVASATION_NODES = [
     },
     {
         id: 'vex-phentolamine',
-        type: 'info',
+        type: 'question',
         module: 2,
         title: 'Phentolamine Protocol',
-        body: '**Use for norepinephrine/epinephrine/phenylephrine/dopamine extravasation with ischemic risk.**\n\nDose:\n- [Phentolamine](#/drug/phentolamine/vasopressor extravasation) 5-10 mg diluted in 10 mL normal saline\n- Infiltrate subcutaneously/intradermally throughout the affected area using small aliquots\n- Use a small-gauge needle and inject around the margins and through the ischemic field\n- Best as soon as possible; DailyMed labeling specifies treatment within 12 hours for norepinephrine extravasation\n\nExpected response:\n- Local hyperemia and improved perfusion may occur rapidly when alpha-mediated vasoconstriction is reversed\n- Continue serial neurovascular checks even if color improves\n\nCautions:\n- Hypotension/tachycardia possible, especially with large dose or systemic absorption\n- Do not delay surgical consultation for progressive ischemia',
+        body: '**Use for norepinephrine/epinephrine/phenylephrine/dopamine extravasation with ischemic risk.**\n\nDose:\n- [Phentolamine](#/drug/phentolamine/vasopressor extravasation) 5-10 mg diluted in 10 mL normal saline\n- Infiltrate subcutaneously/intradermally throughout the affected area using small aliquots\n- Use a small-gauge needle and inject around the margins and through the ischemic field\n- Best as soon as possible; DailyMed labeling specifies treatment within 12 hours for norepinephrine extravasation\n\nExpected response:\n- Local hyperemia and improved perfusion may occur rapidly when alpha-mediated vasoconstriction is reversed\n- Continue serial neurovascular checks even if color improves\n\nCautions:\n- Hypotension/tachycardia possible, especially with large dose or systemic absorption\n- Do not delay surgical consultation for progressive ischemia\n\nIs phentolamine available?',
+        options: [
+            {
+                label: 'Phentolamine available',
+                description: 'Infiltrate phentolamine as above, then reassess perfusion',
+                next: 'vex-reassess',
+                urgency: 'critical',
+            },
+            {
+                label: 'Phentolamine unavailable',
+                description: 'See reported alternatives (terbutaline, topical nitroglycerin)',
+                next: 'vex-alternatives',
+                urgency: 'urgent',
+            },
+        ],
         citation: [1, 2],
-        next: 'vex-reassess',
         treatment: {
             firstLine: {
                 drug: 'Phentolamine',
