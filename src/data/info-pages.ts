@@ -26501,6 +26501,10 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
       heading: 'Thin LP Needle + 60 mL Syringe for Atraumatic Paracentesis',
       body: '**Accomplishes:** Lets you tap ascites (e.g., to rule out SBP) with far less catheter/needle trauma, less pain, and less post-procedure ascitic leak than a large-bore needle or angiocatheter. [48]\n\n**How to:**\n1. Prep and drape the LLQ (or POCUS-marked) pocket sterilely and anesthetize the tract.\n2. Take a thin 22\u2013 or 24-gauge lumbar-puncture needle and discard the stylet.\n3. Attach it directly to a 60 mL syringe.\n4. Advance while gently aspirating until ascitic fluid returns; withdraw a diagnostic 30\u201360 mL.\n5. For culture yield, inoculate blood-culture bottles at the bedside \u2014 this raises sensitivity to >90%.\n\n**Equipment:** 22\u2013 or 24-gauge spinal (LP) needle, 60 mL syringe, sterile prep, local anesthetic, blood-culture bottles, ultrasound (optional).\n\n_Source: EMCrit IBCC \u2014 Spontaneous Bacterial Peritonitis (paracentesis technique)._',
     },
+    {
+      heading: 'Squeeze Test to Confirm Intraosseous Placement',
+      body: '**Accomplishes:** Detects an IO needle that has passed through bone into soft tissue \u2014 a failure mode standard signs (marrow aspirate, firm needle, easy flush) can miss \u2014 preventing undetected extravasation of resuscitation drugs and fluids. [49]\n\n**How to:**\n1. Place the IO and confirm the usual signs (marrow return, firm seating, ability to flush).\n2. Begin flushing or infusing fluid through the line.\n3. With both hands, firmly compress the soft tissue circumferentially around the insertion site.\n4. Watch the flow: continued flow means the needle is intramedullary (good); flow that stalls or drops sharply means the needle is in soft tissue (misplaced), because your squeeze back-pressures the extravasated fluid.\n5. If misplaced, remove and re-site the IO at a different bone.\n\n**Equipment:** The in-place IO needle, flush/infusion setup (no extra equipment).\n\n_Source: ALiEM Trick of the Trade \u2014 Squeeze test for confirmation of intraosseous placement._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Tourniquet infusion technique. aliem.com.' },
@@ -26551,6 +26555,7 @@ const TRICKS_PROCEDURES_PAGE: InfoPage = {
     { num: 46, text: 'ALiEM. Trick of the Trade: A removable guidewire (Arrow arterial-line kit; credit Kennedy Hall, UCSF-SFGH). aliem.com.' },
     { num: 47, text: 'ALiEM. Trick of the Trade: Minimizing abscess odor (Yankauer suction into a closed canister). aliem.com.' },
     { num: 48, text: 'EMCrit IBCC \u2014 Spontaneous Bacterial Peritonitis (SBP): use a 22\u201324G LP needle without stylet on a 60 mL syringe; bedside inoculation of culture bottles raises sensitivity >90%. emcrit.org/ibcc/sbp/.' },
+    { num: 49, text: 'ALiEM. Trick of the Trade: Squeeze test for confirmation of intraosseous (IO) placement (compress the soft tissue around the site \u2014 flow that stalls signals extravasation). aliem.com.' },
   ],
 };
 
@@ -26660,6 +26665,10 @@ const TRICKS_ENT_PAGE: InfoPage = {
       heading: 'Cervical Collar to Hold the Jaw After a TMJ Reduction',
       body: '**Accomplishes:** Prevents the frustrating early re-dislocation of a reduced anterior TMJ (temporomandibular joint) by holding the mouth closed, replacing the bulky, slip-prone Kerlix/ACE chin wrap. [25]\n\n**How to:**\n1. Reduce the anterior TMJ dislocation with your usual technique and confirm normal occlusion.\n2. Apply a semi-rigid cervical collar (Aspen or similar) instead of a chin-lift head bandage.\n3. Seat the collar so its chin piece pushes the chin gently upward, keeping the teeth together.\n4. Counsel the patient to avoid wide mouth opening and to eat a soft diet.\n5. Leave the collar on for support and arrange follow-up; especially useful for recurrent/lax-ligament dislocators.\n\n**Equipment:** Semi-rigid cervical collar (e.g., Aspen).\n\n_Source: ALiEM Trick of the Trade \u2014 Stabilizing mandibular relocations (Michelle Lin)._',
     },
+    {
+      heading: 'DIY Soft Ear Curette From a Polyester Applicator',
+      body: '**Accomplishes:** Lets you clear impacted cerumen and see a pediatric tympanic membrane without the canal bleeding and trauma a rigid metal curette causes \u2014 the softer, shapeable tool is better tolerated and lowers parental anxiety. [26]\n\n**How to:**\n1. Take a polyester-tipped applicator (a malleable-handle swab, NOT a wooden cotton swab).\n2. Fold the applicator in half.\n3. Twist the two apposing edges together into a single stiffer curette shaft.\n4. Bend the tip to match the child\u2019s ear-canal angle and the location of the wax plug.\n5. Under direct otoscopic vision, gently scoop the cerumen out.\n\n**Equipment:** Polyester-tipped applicator (e.g., Puritan-style flexible swab).\n\n_Source: ALiEM Trick of the Trade \u2014 A flexible pediatric ear curette (Kornblith)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26687,6 +26696,7 @@ const TRICKS_ENT_PAGE: InfoPage = {
     { num: 23, text: 'ALiEM. Epistaxis Management in the Emergency Department: a helpful mnemonic (apply oxymetazoline directly onto the nasal tampon for vasoconstriction). aliem.com.' },
     { num: 24, text: 'ALiEM. Trick of the Trade: Ear foreign body removal with tissue adhesive on a cotton-tipped applicator (Michelle Lin; Edward Lew ear-pick modification). aliem.com.' },
     { num: 25, text: 'Lin M. ALiEM. Trick of the Trade: Stabilizing mandibular relocations (semi-rigid cervical collar after TMJ reduction). aliem.com.' },
+    { num: 26, text: 'ALiEM. Trick of the Trade: A flexible pediatric ear curette (fold and twist a polyester-tipped applicator; credit Aaron Kornblith, UCSF-SFGH). aliem.com.' },
   ],
 };
 
@@ -26752,6 +26762,10 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
       heading: 'Ocular Ultrasound for the Shut, Swollen Traumatic Eye',
       body: '**Accomplishes:** Checks pupil reactivity and extraocular-muscle entrapment when the lids are too swollen to open \u2014 without prying them apart and pressing on a possibly ruptured globe. [15]\n\n**How to:**\n1. Lay a GENEROUS layer of sterile lubricating jelly over the closed, swollen lid so the probe never touches or presses the globe (the gel is your standoff).\n2. Rest a high-frequency linear probe gently on the lid with minimal pressure.\n3. Entrapment check: in the axial plane ask the patient to look left and right, then sagittal plane look up and down \u2014 asymmetric globe excursion suggests an entrapped extraocular muscle.\n4. Pupil check: angle the probe to bring the iris and lens into view, shine a light into either eye, and watch on-screen for iris constriction (direct and consensual).\n5. Also scan for lens dislocation, vitreous hemorrhage, or retrobulbar fluid; STOP and treat as an open globe if any rupture sign appears.\n\n**Equipment:** High-frequency linear ultrasound probe, sterile lubricating jelly, penlight.\n\n_Source: ALiEM Trick of the Trade \u2014 Ocular ultrasound for the swollen traumatic eye (Rose, Watts, Teismann)._',
     },
+    {
+      heading: 'Paperclip Retractor for Double Lid Eversion',
+      body: '**Accomplishes:** Exposes the superior fornix under the upper eyelid \u2014 the classic hiding spot for a retained subtarsal foreign body causing repeated vertical corneal abrasions \u2014 when no commercial Desmarres retractor is on hand. [16]\n\n**How to:**\n1. Anesthetize the eye thoroughly with a topical anesthetic to reduce reflex blink.\n2. Unbend a paperclip and re-bend the wide distal end into a small smooth curve; wipe it with an alcohol swab.\n3. Evert the upper lid once over a cotton-tipped applicator while the patient looks down.\n4. Slide the smooth curved paperclip end under the everted lid margin and lift to achieve full double eversion, exposing the fornix.\n5. Inspect and sweep out any foreign body, then un-evert by having the patient look up. Keep the wire smooth and off the globe \u2014 metal edges can abrade the cornea.\n\n**Equipment:** Paperclip, topical ophthalmic anesthetic, cotton-tipped applicator, alcohol swab.\n\n_Source: EM:RAP \u2014 Paperclip technique for eyelid retraction; LITFL \u2014 Another poke in the eye._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26769,6 +26783,7 @@ const TRICKS_OPHTHO_PAGE: InfoPage = {
     { num: 13, text: 'Yarter NM, Racht J, Michels KS. Retrobulbar hemorrhage decompression with paracanthal \u201Cone-snip\u201D method: time to retire lateral canthotomy? Am J Emerg Med. 2023. See also Blandford AD, et al. Paracanthal \u201Cone-snip\u201D decompression in a cadaver model. Ophthalmic Plast Reconstr Surg. 2018; EMCrit 385 \u2014 Eye Trauma I.' },
     { num: 14, text: 'Adhikari S, et al. Novel techniques in performing extraoral ultrasound in diagnosing dental abscesses. Am J Emerg Med. sciencedirect.com. See also emDOCs \u2014 HEENT: point-of-care ultrasound for facial/dental swelling.' },
     { num: 15, text: 'ALiEM. Trick of the Trade: Ocular ultrasound for the swollen traumatic eye (Rose C, Watts M, Teismann N). aliem.com.' },
+    { num: 16, text: 'EM:RAP. Paperclip technique for eyelid retraction (double eversion to find a subtarsal foreign body). emrap.org. See also LITFL \u2014 Another poke in the eye. litfl.com.' },
   ],
 };
 
@@ -26972,6 +26987,10 @@ const TRICKS_WOUND_PAGE: InfoPage = {
       heading: 'Tattoo the Vermillion Border Before You Numb the Lip',
       body: '**Accomplishes:** Preserves the exact lip-margin landmark on a through-the-vermillion laceration, because local anesthetic and swelling erase it \u2014 even a 1\u20132 mm step-off at the vermillion border is a visible cosmetic defect. [23]\n\n**How to:**\n1. BEFORE injecting anesthetic or irrigating, take a fine-tip surgical marker.\n2. Place a precise ink dot on the vermillion-cutaneous border on each side of the wound.\n3. Now anesthetize (a mental or infraorbital block distorts the lip far less than local infiltration) and irrigate.\n4. Place your FIRST suture to align the two marked dots exactly, re-approximating the border.\n5. Close the rest of the wound in layers as needed.\n\n**Equipment:** Fine-tip surgical marking pen, 6-0 nylon (skin) / absorbable suture, block anesthetic.\n\n_Source: LacerationRepair.com (Brian Lin) \u2014 Lip lacerations: closing the gap._',
     },
+    {
+      heading: 'Bicarbonate-Buffered Lidocaine for a Painless Injection',
+      body: '**Accomplishes:** Neutralizes the acidic pH of commercial lidocaine so infiltration burns far less and takes effect faster, without reducing anesthetic efficacy \u2014 directly improving tolerance of laceration repair and abscess I&D. [24]\n\n**How to:**\n1. Draw up the lidocaine (with or without epinephrine) you plan to inject.\n2. Add 8.4% sodium bicarbonate in a 9:1 or 10:1 ratio (e.g., 9 mL lidocaine + 1 mL bicarb).\n3. Gently mix and use promptly \u2014 buffered lidocaine has a short shelf life, so mix it at the point of use.\n4. Inject slowly through a small-gauge needle as usual.\n\n**Equipment:** Lidocaine (+/- epinephrine), 8.4% sodium bicarbonate, syringe, small-gauge needle.\n\n_Source: Cepeda MS, et al. Adjusting the pH of lidocaine for reducing pain on injection (Cochrane systematic review)._',
+    },
   ],
   citations: [
     { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26997,6 +27016,7 @@ const TRICKS_WOUND_PAGE: InfoPage = {
     { num: 21, text: 'ALiEM. Trick of the Trade: Tie-over dressing for scalp lacerations (long suture tails tied over a gauze bolster). aliem.com.' },
     { num: 22, text: 'Harris IA. Gradual closure of fasciotomy wounds using a vessel loop shoelace technique. Delayed primary closure using Silastic vessel loops and skin staples. Ann Plast Surg. 1999;42(3):327. See also the paper-clip modification to the vessel-loop shoelace technique. Injury. 2001.' },
     { num: 23, text: 'Lin B. Lip lacerations \u2014 closing the gap (mark the vermillion border before anesthesia). lacerationrepair.com. See also Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine \u2014 facial lacerations.' },
+    { num: 24, text: 'Cepeda MS, Tzortzopoulou A, Thackrey M, et al. Adjusting the pH of lidocaine for reducing pain on injection. Cochrane Database Syst Rev. 2010;(12):CD006581.' },
   ],
 };
 
@@ -27618,6 +27638,10 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
       heading: 'Soft-Wrap / Buddy Tape a Boxer\u2019s Fracture Instead of Reducing and Casting',
       body: '**Accomplishes:** Spares many 5th-metacarpal-neck (boxer\u2019s) fractures the pain of a hematoma-block reduction and a bulky ulnar-gutter cast \u2014 a simple soft wrap gives equivalent hand function and healing with better comfort and earlier motion. [35]\n\n**How to:**\n1. Confirm an isolated 5th metacarpal NECK fracture with acceptable angulation (up to ~70\u00B0 is well tolerated at the neck) and NO rotational deformity or scissoring of the flexed fingers \u2014 rotation still needs reduction/referral.\n2. Skip formal reduction and rigid casting for these acceptable fractures.\n3. Buddy-tape the ring and little fingers together and apply a soft supportive wrap (e.g., a compressive elastic bandage) for comfort.\n4. Encourage early active range of motion as pain allows rather than prolonged immobilization.\n5. Give hand-clinic follow-up in ~1 week and standard fracture precautions.\n\n**Equipment:** Buddy tape / paper tape, soft compressive/elastic bandage, +/- padding.\n\n_Source: ALiEM SplintER Series \u2014 Boxer\u2019s fracture; van Aaken J, et al. Soft wrap vs reduction/casting for 5th metacarpal neck fractures, an RCT. Arch Orthop Trauma Surg 2016._',
     },
+    {
+      heading: 'Prone Scapular Manipulation for Anterior Shoulder Dislocation',
+      body: '**Accomplishes:** Reduces an anterior shoulder dislocation by repositioning the glenoid to the humeral head (rather than muscling the head into the glenoid), frequently without procedural sedation. Prospective ED series report roughly 90% first-attempt and near-100% overall success with no complications. [36]\n\n**How to:**\n1. Place the patient PRONE on the gurney with the dislocated arm hanging straight down over the edge.\n2. Allow several minutes of relaxation \u2014 the weight of the arm alone sometimes reduces it. An optional 5\u201310 lb hanging weight on the wrist fatigues the spasming muscles.\n3. Identify the inferior tip of the scapula.\n4. Stabilize the superior-medial border of the scapula with the fingers of one hand while both thumbs push the inferior scapular tip medially and dorsally (toward the spine).\n5. Add gentle downward traction on the arm plus slow internal/external rotation until the humeral head seats; recheck neurovascular status and obtain post-reduction films.\n\n**Equipment:** Gurney with an open edge, optional 5\u201310 lb hanging wrist weight.\n\n_Source: NUEM Blog \u2014 A recipe for reduction (scapular manipulation); Kothari RU, Dronen SC. Prospective evaluation of the scapular manipulation technique. Ann Emerg Med._',
+    },
   ],
   citations: [
     { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -27655,6 +27679,7 @@ const TRICKS_ORTHO_PAGE: InfoPage = {
     { num: 33, text: 'Kumar V, et al. A novel technique for Gravity Assisted Reduction of Ankle (GARA) fracture dislocations. PMC7705148. See also comparative study, Foot Ankle Surg 2022.' },
     { num: 34, text: 'ALiEM. Sternoclavicular joint dislocations: diagnosis and treatment (towel-clip anterior reduction of posterior SC dislocation). aliem.com.' },
     { num: 35, text: 'ALiEM SplintER Series \u2014 Boxer\u2019s fracture (5th metacarpal neck). aliem.com. van Aaken J, et al. Fifth metacarpal neck fractures treated with soft wrap/buddy taping vs reduction and casting: a prospective, multicenter, randomized trial. Arch Orthop Trauma Surg. 2016;136(1):135-142.' },
+    { num: 36, text: 'NUEM Blog. A recipe for reduction: alternative approaches for reducing an anterior shoulder dislocation (prone scapular manipulation). nuemblog.com. See also Kothari RU, Dronen SC. Prospective evaluation of the scapular manipulation technique. Ann Emerg Med.' },
   ],
 };
 
