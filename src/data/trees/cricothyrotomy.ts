@@ -259,7 +259,7 @@ export const CRICOTHYROTOMY_MODULE_LABELS = [
   'Complications',
 ];
 
-export const CRICOTHYROTOMY_NODE_COUNT = 26;
+export const CRICOTHYROTOMY_NODE_COUNT = CRICOTHYROTOMY_NODES.length;
 
 // =====================================================================
 // CITATIONS

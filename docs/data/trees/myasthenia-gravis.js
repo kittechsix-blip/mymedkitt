@@ -380,7 +380,7 @@ export const MYASTHENIA_GRAVIS_NODES = [
         module: 9,
         title: 'Disposition',
         body: '[Newer MG Maintenance Therapies (FcRn & Complement Inhibitors)](#/info/mg-newer-maintenance-therapies) — clinician reference: what to ask, complement-inhibitor meningococcal sepsis risk.\n\nDisposition depends on presentation severity and response to treatment.\n\n**Consider:**\n• Respiratory status (FVC, NIF)\n• Bulbar function (swallowing, secretion management)\n• Response to initial treatment\n• Ability to manage at home (medication compliance, follow-up)\n• Social support',
-        citation: [1, 2, 6, 7],
+        citation: [1, 2, 6, 7, 8],
         options: [
             {
                 label: 'ICU — myasthenic crisis',
