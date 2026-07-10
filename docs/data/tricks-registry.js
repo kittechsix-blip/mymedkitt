@@ -100,7 +100,7 @@ export const TRICK_SPECIALTIES = [
         color: '#C62828',
         subtitle: 'Rapid adenosine delivery and rhythm tricks.',
         infoPageId: 'tricks-cardiology',
-        trickCount: 12,
+        trickCount: 13,
         category: 'resus-procedures',
     },
     {
@@ -120,7 +120,7 @@ export const TRICK_SPECIALTIES = [
         color: '#37474F',
         subtitle: 'Antiemetic and toxidrome management pearls.',
         infoPageId: 'tricks-tox',
-        trickCount: 7,
+        trickCount: 8,
         category: 'general-tox',
     },
     {
@@ -130,7 +130,7 @@ export const TRICK_SPECIALTIES = [
         color: '#455A64',
         subtitle: 'Fast bedside screens, dosing pearls, communication.',
         infoPageId: 'tricks-general',
-        trickCount: 19,
+        trickCount: 20,
         category: 'general-tox',
     },
     {
@@ -140,7 +140,7 @@ export const TRICK_SPECIALTIES = [
         color: '#5D4037',
         subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
         infoPageId: 'tricks-ortho',
-        trickCount: 36,
+        trickCount: 38,
         category: 'wounds-msk',
     },
 ];

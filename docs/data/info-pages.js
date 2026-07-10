@@ -25938,6 +25938,10 @@ const TRICKS_CARDIOLOGY_PAGE = {
             heading: 'Flip the Leads to Read a Dextrocardia ECG',
             body: '**Accomplishes:** Unmasks an anterior MI that a standard left-sided ECG hides in true dextrocardia, by re-recording with mirror-image lead placement so the tracing reads normally. [12]\n\n**How to:**\n1. Spot the dextrocardia clues: negative QRS with an inverted P in lead I, an upright (positive) aVR, poor R-wave progression across the precordium, and right-axis deviation.\n2. First exclude simple left-arm/right-arm reversal, which mimics this but KEEPS normal precordial R-wave progression \u2014 only the limb leads look flipped in LA/RA reversal.\n3. If true dextrocardia is likely, swap the right-arm and left-arm electrodes.\n4. Move the precordial leads to the MIRROR positions on the right chest (V1R\u2013V6R): V1\u2013V2 swap sides, and V3\u2013V6 march across the right hemithorax.\n5. Record and read this reversed-lead ECG in the standard way \u2014 ischemia and infarct patterns now appear where you expect them.\n\n**Equipment:** Standard 12-lead ECG machine and electrodes (no extra hardware).\n\n_Source: LITFL ECG Library \u2014 Dextrocardia / limb-lead reversal._',
         },
+        {
+            heading: 'Confirm TRUE Capture During Transcutaneous Pacing (Don\u2019t Trust the Monitor)',
+            body: '**Accomplishes:** Stops you from being fooled by \u201Cfalse capture\u201D during transcutaneous pacing of unstable bradycardia \u2014 the pacing spike creates electrical artifact that mimics a QRS, so a patient with zero real capture can look paced while still in arrest. [13]\n\n**How to:**\n1. Do NOT judge capture off the pacer\u2019s distorted ECG alone.\n2. Read morphology: FALSE capture shows a near-vertical spike into a phantom complex with a slightly curved return to baseline and tiny, unimpressive T waves. TRUE electrical capture shows a genuine wide QRS each followed by a broad, discordant T wave.\n3. Confirm MECHANICAL capture independently: palpate a femoral (not carotid \u2014 muscle twitch fools you) pulse timed to the spikes, watch the SpO2 pleth for a pulse wave, or watch for a sudden rise in ETCO2.\n4. Better still, point bedside ultrasound at the heart and confirm each pacing spike produces a real ventricular contraction.\n5. Set the final output ~10% above the threshold where true mechanical capture first appeared.\n\n**Equipment:** Transcutaneous pacer/defib pads, pulse oximeter with plethysmograph, ETCO2 capnography, bedside ultrasound.\n\n_Source: First10EM \u2014 Emergent Cardiac Pacing (false capture)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Ultrarapid adenosine push via pressure bag for SVT. aliem.com.' },
@@ -25952,6 +25956,7 @@ const TRICKS_CARDIOLOGY_PAGE = {
         { num: 10, text: 'ALiEM. Trick of the Trade: Valsalva maneuver by pressing on the abdomen. aliem.com.' },
         { num: 11, text: 'Ghali S. ALiEM. Trick of the Trade: Pre-charge the defibrillator to minimize peri-shock pause. aliem.com.' },
         { num: 12, text: 'LITFL. ECG Library: Dextrocardia and limb-lead reversal (mirror-image right-sided lead placement to interpret the ECG). litfl.com.' },
+        { num: 13, text: 'Morgenstern J. Emergent Cardiac Pacing \u2014 recognizing false electrical capture in transcutaneous pacing. first10em.com.' },
     ],
 };
 const TRICKS_NEURO_PAGE = {
@@ -26044,6 +26049,10 @@ const TRICKS_TOX_PAGE = {
             heading: 'Topical Capsaicin Cream on the Belly for Cannabinoid Hyperemesis',
             body: '**Accomplishes:** Aborts the intractable vomiting of cannabinoid hyperemesis syndrome (CHS) by chemically recreating the relief patients get from compulsive hot showers \u2014 capsaicin activates skin TRPV1 receptors and dampens substance-P signaling. [7]\n\n**How to:**\n1. Confirm a CHS pattern (chronic cannabis use, cyclic vomiting, learned hot-shower/hot-bath relief).\n2. Apply a thin layer of 0.075% capsaicin cream (0.025% also reported effective) to the abdomen over a hand-sized area.\n3. Wear gloves to apply and keep it well clear of the eyes, mucous membranes, and genitals.\n4. Give it 30\u201345 minutes; reapply or widen the area if partial. Combine with an antiemetic (e.g., haloperidol) for refractory cases.\n5. If it irritates sensitive skin, wipe/rinse with milk \u2014 the casein protein lifts capsaicin better than water.\n\n**Equipment:** 0.075% (or 0.025%) capsaicin cream, exam gloves, milk on hand for irritation.\n\n_Source: ALiEM Trick of the Trade \u2014 Topical treatment of cannabinoid hyperemesis syndrome._',
         },
+        {
+            heading: 'Oral Oil to Encapsulate Aluminum/Zinc Phosphide Pellets',
+            body: '**Accomplishes:** In aluminum or zinc phosphide (rodenticide/fumigant) ingestion \u2014 an antidote-less poison with 30\u201370% mortality \u2014 early oral oil coats the pellets and suppresses ongoing phosphine gas generation in the gut, with signal toward reduced mortality and intubation. [8]\n\n**How to:**\n1. Recognize the ingestion early: garlic/fishy breath, \u201Cblack vomit,\u201D refractory shock, and a severe metabolic acidosis.\n2. Protect staff FIRST \u2014 exhaled and vomited phosphine gas is toxic; ventilate the room and treat vomitus/lavage waste as hazardous.\n3. Give oral or NG paraffin (mineral) oil early to encapsulate the pellets and blunt phosphine release.\n4. Resuscitate aggressively in parallel: airway, vasopressors, and correction of acidosis \u2014 the oil is a decontamination adjunct, not a substitute for supportive care.\n5. Consult toxicology/poison control; consider coconut oil + sodium bicarbonate lavage per regional protocol where described.\n\n**Equipment:** Paraffin (mineral) oil, NG tube, staff PPE, room ventilation.\n\n_Source: ALiEM ACMT Toxicology Visual Pearl \u2014 \u201CBlack Vomit, Big Problem\u201D (metal phosphide poisoning)._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/. (HaVOC trial.)' },
@@ -26053,6 +26062,7 @@ const TRICKS_TOX_PAGE = {
         { num: 5, text: 'ALiEM. Trick of the Trade: Nebulized naloxone. aliem.com. Mycyk MB, et al. Nebulized naloxone gently and effectively reverses methadone intoxication. J Emerg Med. 2003;24(2):185-187.' },
         { num: 6, text: 'ALiEM. Trick of the Trade: Sodium bicarbonate for acute symptomatic hyponatremia. aliem.com.' },
         { num: 7, text: 'ALiEM. Trick of the Trade: Topical treatment of cannabinoid hyperemesis syndrome (0.075% capsaicin cream to the abdomen). aliem.com.' },
+        { num: 8, text: 'ALiEM ACMT Toxicology Visual Pearl: Black Vomit, Big Problem (aluminum/zinc phosphide poisoning \u2014 oral oil to encapsulate pellets and blunt phosphine release). aliem.com.' },
     ],
 };
 const TRICKS_GENERAL_PAGE = {
@@ -26137,6 +26147,10 @@ const TRICKS_GENERAL_PAGE = {
             heading: 'Chin-Tuck Double-Swallow for an Esophageal Food Bolus',
             body: '**Accomplishes:** Clears an impacted esophageal food bolus at the bedside and may avert transfer for endoscopy. A borrowed dysphagia-rehab swallowing maneuver reopens the esophagus with no drugs and no scope. [19]\n\n**How to:**\n1. First confirm the patient is protecting the airway and handling secretions \u2014 a complete obstruction with drooling/inability to swallow saliva needs urgent ENT/GI, NOT this maneuver.\n2. Hand the patient a glass of water.\n3. Have them stand fully upright.\n4. Instruct them to flex the neck and tuck the chin firmly to the chest.\n5. Have them take a swallow of water, and the instant it starts down, immediately initiate a SECOND swallowing effort (the \u201Cdouble swallow\u201D).\n6. If the bolus passes, confirm they tolerate PO; if not, proceed to standard medical management (e.g., glucagon trial per local practice) and GI consultation.\n\n**Equipment:** A glass of water (no medication or equipment).\n\n_Source: Barden & Schwartz. Esophageal food-bolus impaction cleared with the upright-posture, chin-tuck, double-swallow maneuver. Clin Pract Cases Emerg Med 2024._',
         },
+        {
+            heading: 'Pour Sugar on an Incarcerated Rectal Prolapse to Shrink It',
+            body: '**Accomplishes:** Osmotically pulls edema out of a swollen, irreducible rectal prolapse so it can be manually reduced at the bedside, avoiding the OR. Ordinary table sugar draws water out of the boggy mucosa in about 15 minutes. [20]\n\n**How to:**\n1. Confirm an incarcerated/edematous rectal prolapse that resists gentle direct reduction; give analgesia and position the patient lateral decubitus or knee-chest.\n2. Liberally pack and coat the entire exposed prolapsed mucosa with granulated table sugar.\n3. Wait ~15 minutes \u2014 the hyperosmolar sugar draws fluid out and visibly shrinks the mucosa.\n4. Apply steady, gentle circumferential pressure to reduce the prolapse back through the anus.\n5. If it will not reduce or the mucosa looks dusky/ischemic, stop and consult surgery; arrange follow-up after successful reduction.\n\n**Equipment:** Granulated sugar, gauze, gloves, lubricant, analgesia.\n\n_Source: ALiEM Trick of the Trade \u2014 \u201CPour some sugar on me\u201D: reducing a rectal prolapse; Coburn 1997._',
+        },
     ],
     citations: [
         { num: 1, text: 'EMCrit 426 \u2014 Dave Carr: Tips & Tricks. emcrit.org/emcrit/carr-tips-tricks/.' },
@@ -26158,6 +26172,7 @@ const TRICKS_GENERAL_PAGE = {
         { num: 17, text: 'ALiEM. Trick of the Trade: Using a funnel for NG tubes (60 mL syringe barrel or IV-bag gravity delivery of activated charcoal; Michelle Lin). aliem.com.' },
         { num: 18, text: 'Needham GR. A Novel Technique to Remove the Common Dog Tick (mechanical rotation of ~2 revolutions, no traction). Am Fam Physician. 1998;58(2):354. See also StatPearls \u2014 Wound Foreign Body Removal (NCBI Bookshelf NBK554447).' },
         { num: 19, text: 'Barden CB, Schwartz DT. Esophageal Obstruction from Food Bolus Impaction Successfully Managed with the \u201CUpright Posture, Chin Tuck, Double Swallow\u201D Maneuver: A Case Report. Clin Pract Cases Emerg Med. 2024. PMC11661253.' },
+        { num: 20, text: 'ALiEM. Trick of the Trade: Pour some sugar on me \u2014 reducing an incarcerated rectal prolapse with granulated sugar. aliem.com. Coburn WM 3rd, et al. Granulated sugar reduction of an incarcerated rectal prolapse. 1997.' },
     ],
 };
 const DENTAL_EXTRACTION_STEPS_PAGE = {
@@ -26494,6 +26509,14 @@ const TRICKS_ORTHO_PAGE = {
             heading: 'Prone Scapular Manipulation for Anterior Shoulder Dislocation',
             body: '**Accomplishes:** Reduces an anterior shoulder dislocation by repositioning the glenoid to the humeral head (rather than muscling the head into the glenoid), frequently without procedural sedation. Prospective ED series report roughly 90% first-attempt and near-100% overall success with no complications. [36]\n\n**How to:**\n1. Place the patient PRONE on the gurney with the dislocated arm hanging straight down over the edge.\n2. Allow several minutes of relaxation \u2014 the weight of the arm alone sometimes reduces it. An optional 5\u201310 lb hanging weight on the wrist fatigues the spasming muscles.\n3. Identify the inferior tip of the scapula.\n4. Stabilize the superior-medial border of the scapula with the fingers of one hand while both thumbs push the inferior scapular tip medially and dorsally (toward the spine).\n5. Add gentle downward traction on the arm plus slow internal/external rotation until the humeral head seats; recheck neurovascular status and obtain post-reduction films.\n\n**Equipment:** Gurney with an open edge, optional 5\u201310 lb hanging wrist weight.\n\n_Source: NUEM Blog \u2014 A recipe for reduction (scapular manipulation); Kothari RU, Dronen SC. Prospective evaluation of the scapular manipulation technique. Ann Emerg Med._',
         },
+        {
+            heading: 'Double Sugar-Tong Splint to Hold an Unstable Distal Radius Reduction',
+            body: '**Accomplishes:** Locks out elbow motion so a reduced, unstable distal radius fracture does not re-displace overnight. A single sugar-tong loosens as the patient extends the elbow in their sleep; a second limb blocks that motion and holds the reduction. [37]\n\n**How to:**\n1. After reduction, apply the standard forearm sugar-tong (volar-to-dorsal, folded at the elbow) with the forearm in the alignment that maintains reduction.\n2. Add a SECOND sugar-tong limb oriented across the elbow to block elbow flexion/extension.\n3. Three-point mold the splint over the fracture while the plaster/fiberglass sets \u2014 broad palmar pressure, never fingertips.\n4. Wrap snugly (not constrictively) and recheck neurovascular status before and after.\n5. Post-reduction films; sling and prompt ortho follow-up for these unstable patterns.\n\n**Equipment:** Plaster or fiberglass splint roll (3\u20134 in), cast padding, stockinette, elastic wrap.\n\n_Source: NUEM Blog \u2014 Visual Guide to Splinting; Maimonides EM \u2014 Principles of ED Fracture Reduction._',
+        },
+        {
+            heading: 'Buddy-Splint the Legs When a Traction Splint Is Contraindicated (Femur)',
+            body: '**Accomplishes:** Immobilizes a mid/distal femur fracture when a traction splint cannot be used \u2014 an ipsilateral tib-fib or ankle fracture, or an open ankle, where the distal traction hitch would pull directly on a second fracture. The uninjured leg becomes the splint. [38]\n\n**How to:**\n1. Confirm a contraindication to traction (ipsilateral lower-leg/ankle fracture, open ankle, or a fracture/dislocation near the ankle hitch site).\n2. Pad generously between the legs over all bony prominences (knees, malleoli).\n3. Bind the injured leg to the uninjured leg at several levels \u2014 thigh, above and below the knee, and at the ankles \u2014 with cravats or wide straps.\n4. Keep the binding snug enough to limit motion but not so tight it compromises perfusion.\n5. Recheck distal pulses, sensation, and capillary refill after binding and before transport.\n\n**Equipment:** Padding/blankets, cravats or wide tape/straps.\n\n_Source: Taming the SRU \u2014 Traction Splints (contraindications and buddy-splinting alternative)._',
+        },
     ],
     citations: [
         { num: 1, text: 'ALiEM. Trick of the Trade: Cunningham maneuver for shoulder dislocation. aliem.com.' },
@@ -26532,6 +26555,8 @@ const TRICKS_ORTHO_PAGE = {
         { num: 34, text: 'ALiEM. Sternoclavicular joint dislocations: diagnosis and treatment (towel-clip anterior reduction of posterior SC dislocation). aliem.com.' },
         { num: 35, text: 'ALiEM SplintER Series \u2014 Boxer\u2019s fracture (5th metacarpal neck). aliem.com. van Aaken J, et al. Fifth metacarpal neck fractures treated with soft wrap/buddy taping vs reduction and casting: a prospective, multicenter, randomized trial. Arch Orthop Trauma Surg. 2016;136(1):135-142.' },
         { num: 36, text: 'NUEM Blog. A recipe for reduction: alternative approaches for reducing an anterior shoulder dislocation (prone scapular manipulation). nuemblog.com. See also Kothari RU, Dronen SC. Prospective evaluation of the scapular manipulation technique. Ann Emerg Med.' },
+        { num: 37, text: 'NUEM Blog. Visual Guide to Splinting (double sugar-tong to lock out the elbow for unstable distal radius fractures). nuemblog.com/blog/splinting. See also Maimonides Emergency Medicine: Principles of ED Fracture Reduction.' },
+        { num: 38, text: 'Taming the SRU. Traction Splints \u2014 applying the KTD traction splint (contraindications include ipsilateral lower-leg/ankle fracture; buddy-splint the legs as the alternative). tamingthesru.com.' },
     ],
 };
 // ===================================================================
