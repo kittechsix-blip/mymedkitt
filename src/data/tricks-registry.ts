@@ -61,7 +61,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
   {
     id: 'airway',
     label: 'Airway',
-    icon: '\uD83D\uDEAC', // 🫁-ish; use lungs
+    icon: '\uD83E\uDEC1', // U+1FAC1 lungs 🫁
     color: '#1565C0',
     subtitle: 'Suction, NG placement, supraglottic exchange, and more.',
     infoPageId: 'tricks-airway',
