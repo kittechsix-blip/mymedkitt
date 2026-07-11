@@ -581,6 +581,10 @@ const ASPIRIN: DrugEntry = {
   indications: ['Acute ischemic stroke', 'Acute coronary syndrome', 'Secondary stroke prevention', 'DAPT (dual antiplatelet therapy)', 'Preeclampsia prophylaxis (pregnancy)'],
   dosing: [
     {
+      indication: 'ACS / STEMI (loading)',
+      regimen: '162–325 mg non-enteric-coated, chewed, at first medical contact. Then 81 mg PO daily.',
+    },
+    {
       indication: 'Preeclampsia prophylaxis (pregnancy)',
       regimen: '81 mg PO once daily, started at 12–28 weeks gestation (ideally <16 wk), continued until delivery. USPSTF + ACOG 2021: reduces preeclampsia ~15% and preterm birth ~10%. Indicated for ≥1 high-risk factor (prior preeclampsia, multifetal, chronic HTN, DM, CKD, autoimmune) or ≥2 moderate-risk factors (nulliparity, obesity, family history, age ≥35, prior SGA/stillbirth, >10 y interpregnancy interval). No increase in abruption, PPH, or fetal bleeding at 81 mg.',
     },
@@ -1363,8 +1367,13 @@ const CEFTRIAXONE: DrugEntry = {
       ],
     },
     {
+      indication: 'Pediatric Meningitis (empiric first ED dose)',
+      regimen: '100 mg/kg IV once. Max 2 g. Same total daily dose as the q12h maintenance regimen below, given as a single loading dose at first suspicion of meningitis.',
+      weightCalc: { dosePerKg: 100, unit: 'mg', maxDose: 2000, label: 'Empiric loading dose' },
+    },
+    {
       indication: 'Pediatric Meningitis',
-      regimen: '50 mg/kg IV q12h (meningitic dose). Max 2 g/dose.',
+      regimen: '50 mg/kg IV q12h (meningitic dose, maintenance). Max 2 g/dose.',
       weightCalc: { dosePerKg: 50, unit: 'mg', maxDose: 2000, label: 'Meningitic (q12h)' },
     },
     {
@@ -6210,7 +6219,15 @@ const VANCOMYCIN: DrugEntry = {
   indications: ['Meningitis (>28 days, added to Ceftriaxone for MRSA/resistant organism coverage)', 'C. difficile infection (first-line, ORAL)', 'SCD meningitis', 'Sepsis / MRSA coverage', 'Infective endocarditis empiric / MRSA', 'VP shunt infection / healthcare-associated ventriculitis'],
   dosing: [
     {
-      indication: 'Meningitic',
+      indication: 'Meningitic (Adult)',
+      regimen: '15-20 mg/kg IV q8-12h, AUC/trough-guided.',
+      weightCalc: [
+        { dosePerKg: 15, unit: 'mg', label: 'Low end (15 mg/kg)' },
+        { dosePerKg: 20, unit: 'mg', label: 'High end (20 mg/kg)' },
+      ],
+    },
+    {
+      indication: 'Meningitic (Pediatric)',
       regimen: '15 mg/kg IV q6h.',
       weightCalc: { dosePerKg: 15, unit: 'mg', dailyDivided: 4 },
     },

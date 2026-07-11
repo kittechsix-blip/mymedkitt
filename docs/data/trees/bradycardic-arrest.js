@@ -7,7 +7,7 @@ export const BRADYCARDIC_ARREST_CRITICAL_ACTIONS = [
     { text: 'Confirm mechanical capture — electrical capture alone is insufficient', nodeId: 'brady-capture' },
     { text: 'Atropine 1mg IV × 3 doses — often ineffective in infranodal block', nodeId: 'brady-atropine' },
     { text: 'Epinephrine infusion 2-10 mcg/min as bridge', nodeId: 'brady-epi-infusion' },
-    { text: 'Hyperkalemia: calcium gluconate 1g IV immediately', nodeId: 'brady-causes' },
+    { text: 'Hyperkalemia: calcium gluconate 1-3g IV immediately (or calcium chloride 1g IV central)', nodeId: 'brady-causes' },
     { text: 'Hypothermia exception: defer pacing, active rewarming to >30°C first', nodeId: 'brady-tor' },
 ];
 export const BRADYCARDIC_ARREST_NODES = [
@@ -146,10 +146,10 @@ export const BRADYCARDIC_ARREST_NODES = [
         type: 'info',
         module: 4,
         title: 'Reversible Causes of Bradycardic Arrest',
-        body: 'Treatable causes of bradycardic arrest:\n\n• **Hyperkalemia** (wide QRS, peaked T): [Calcium Gluconate](#/drug/calcium-gluconate/hyperkalemia) 1g IV + bicarb + insulin/dextrose\n• **Hypothermia**: active rewarming, defer pacing until >30°C (myocardium irritable below 30°C)\n• **Drug toxicity**: beta blocker → [Glucagon](#/drug/glucagon/beta blocker overdose) 3-10mg IV; Ca channel blocker → calcium + high-dose insulin; Digoxin → [DigiFab](#/drug/digifab/digoxin toxicity)\n• **AV block** (complete): temporary pacing bridge → TVP → permanent pacer\n• **Hypoxia**: airway + oxygenation first\n• **Myocardial infarction**: inferior STEMI → right-sided ECG\n\n**Remember:** Treat the cause, not just the rhythm',
+        body: 'Treatable causes of bradycardic arrest:\n\n• **Hyperkalemia** (wide QRS, peaked T): [Calcium Gluconate](#/drug/calcium-gluconate/hyperkalemia) 1-3g IV + bicarb + insulin/dextrose\n• **Hypothermia**: active rewarming, defer pacing until >30°C (myocardium irritable below 30°C)\n• **Drug toxicity**: beta blocker → [Glucagon](#/drug/glucagon/beta blocker overdose) 3-10mg IV; Ca channel blocker → calcium + high-dose insulin; Digoxin → [DigiFab](#/drug/digifab/digoxin toxicity)\n• **AV block** (complete): temporary pacing bridge → TVP → permanent pacer\n• **Hypoxia**: airway + oxygenation first\n• **Myocardial infarction**: inferior STEMI → right-sided ECG\n\n**Remember:** Treat the cause, not just the rhythm',
         citation: [2, 3, 5, 10],
         next: 'brady-cause-check',
-        summary: 'HyperK: calcium gluconate 1g IV stat — hypothermia: rewarm >30C before pacing',
+        summary: 'HyperK: calcium gluconate 1-3g IV stat — hypothermia: rewarm >30C before pacing',
         safetyLevel: 'critical',
     },
     {
