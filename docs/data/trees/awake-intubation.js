@@ -270,7 +270,7 @@ If patient too agitated for awake approach:
 
 **If Patient Uncooperative:**
 Consider Delayed Sequence Intubation (DSI):
-1. Ketamine 1-1.5 mg/kg IV for dissociation
+1. Ketamine 1-2 mg/kg IV for dissociation
 2. Preoxygenate/prepare while dissociated
 3. Then proceed with awake technique once calm
 
@@ -293,7 +293,7 @@ Consider Delayed Sequence Intubation (DSI):
 **DSI Protocol:**
 
 **Step 1: Dissociate**
-- Ketamine 1-1.5 mg/kg IV push
+- Ketamine 1-2 mg/kg IV push
 - Patient becomes dissociated but maintains breathing
 
 **Step 2: Preoxygenate**
@@ -1228,8 +1228,8 @@ export const AWAKE_INTUBATION_MODULE_LABELS = [
     'Post-Intubation & Complications',
 ];
 export const AWAKE_INTUBATION_CITATIONS = [
-    { num: 1, text: 'Farkas J. Awake Intubation for Emergency and Critical Care. EMCrit IBCC. 2024. https://emcrit.org/emcrit/awakeintubation/' },
-    { num: 2, text: 'Driver BE, et al. Managing Awake Intubation. Annals of Emergency Medicine. 2024. doi:10.1016/j.annemergmed.2024.05.010' },
+    { num: 1, text: 'Weingart S. EMCrit 145 — Awake Intubation Lecture from SMACC. EMCrit Blog. 2015. https://emcrit.org/emcrit/awakeintubation/' },
+    { num: 2, text: 'Sandefur BJ, Driver BE, Long B. Managing Awake Intubation. Ann Emerg Med. 2025;85(1):21-30. doi:10.1016/j.annemergmed.2024.07.017. PMID: 39480375' },
     { num: 3, text: 'Ahmad I, et al. Difficult Airway Society Guidelines for Awake Tracheal Intubation (ATI) in Adults. Anaesthesia. 2020;75(4):509-528. PMID: 31729018' },
     { num: 4, text: 'LITFL. Awake Intubation. Life in the Fast Lane. 2024. https://litfl.com/awake-intubation/' },
     { num: 5, text: 'Farkas J. Angioedema. EMCrit IBCC. 2024. https://emcrit.org/ibcc/angioedema/' },

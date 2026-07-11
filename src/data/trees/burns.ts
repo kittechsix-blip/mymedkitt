@@ -405,7 +405,7 @@ export const BURNS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Pediatric Resuscitation Considerations',
-    body: '**Children <30 kg require BOTH maintenance fluids AND resuscitation fluids** — they have limited glycogen stores and are at high risk for hypoglycemia during large-volume crystalloid resuscitation.\n\n**Maintenance fluids (in addition to resuscitation):**\n• Use **D5 ½NS** (dextrose-containing) at standard 4-2-1 maintenance rate:\n  - First 10 kg: 4 mL/kg/hr\n  - 10-20 kg: add 2 mL/kg/hr\n  - >20 kg: add 1 mL/kg/hr\n• Run maintenance through a separate line from resuscitation LR\n\n**Resuscitation:**\n• Parkland formula applies: 4 mL × %TBSA × weight (kg)\n• Use LR for resuscitation (no dextrose in resuscitation fluid)\n• Target UOP: **1.0-1.5 mL/kg/hr** (higher than adults)\n\n**Glucose monitoring:**\n• Check glucose on arrival and q2-4h during resuscitation\n• Infants and toddlers are especially vulnerable to hypoglycemia\n• [Dextrose](#/drug/dextrose/hypoglycemia) D10 bolus (2-4 mL/kg) for glucose <60 mg/dL\n\n**Non-accidental trauma (NAT) screening:**\n• **Mandatory consideration in all pediatric burns**, especially:\n  - Scald burns with stocking/glove distribution\n  - Burns with sharp lines of demarcation\n  - Bilateral symmetric burns\n  - Delay in presentation (>2 hours)\n  - Story inconsistent with burn pattern or developmental age\n  - Prior injuries or ED visits\n• Document skin exam, photo-document burns, involve social work',
+    body: '**Children <30 kg require BOTH maintenance fluids AND resuscitation fluids** — they have limited glycogen stores and are at high risk for hypoglycemia during large-volume crystalloid resuscitation.\n\n**Maintenance fluids (in addition to resuscitation):**\n• Use **D5 ½NS** (dextrose-containing) at standard 4-2-1 maintenance rate:\n  - First 10 kg: 4 mL/kg/hr\n  - 10-20 kg: add 2 mL/kg/hr\n  - >20 kg: add 1 mL/kg/hr\n• Run maintenance through a separate line from resuscitation LR\n\n**Resuscitation:**\n• Parkland formula applies: 4 mL × %TBSA × weight (kg)\n• Use LR for resuscitation (no dextrose in resuscitation fluid)\n• Target UOP: **1.0-1.5 mL/kg/hr** (higher than adults)\n\n**Glucose monitoring:**\n• Check glucose on arrival and q2-4h during resuscitation\n• Infants and toddlers are especially vulnerable to hypoglycemia\n• [Dextrose](#/drug/dextrose/hypoglycemia) D10 bolus (5 mL/kg = 0.5 g/kg) for glucose <60 mg/dL\n\n**Non-accidental trauma (NAT) screening:**\n• **Mandatory consideration in all pediatric burns**, especially:\n  - Scald burns with stocking/glove distribution\n  - Burns with sharp lines of demarcation\n  - Bilateral symmetric burns\n  - Delay in presentation (>2 hours)\n  - Story inconsistent with burn pattern or developmental age\n  - Prior injuries or ED visits\n• Document skin exam, photo-document burns, involve social work',
     citation: [2, 23],
     next: 'burn-wound-care',
     treatment: {
@@ -425,7 +425,7 @@ export const BURNS_NODES: DecisionNode[] = [
         duration: 'Throughout resuscitation',
         notes: 'Required for children <30 kg. Prevents hypoglycemia. Check glucose q2-4h.',
       },
-      monitoring: 'UOP 1.0-1.5 mL/kg/hr. Glucose on arrival and q2-4h. D10 bolus 2-4 mL/kg if glucose <60.',
+      monitoring: 'UOP 1.0-1.5 mL/kg/hr. Glucose on arrival and q2-4h. D10 bolus 5 mL/kg (0.5 g/kg) if glucose <60.',
     },
     summary: '<30kg: BOTH maintenance AND resuscitation fluids — glucose q2-4h',
     safetyLevel: 'warning',
@@ -917,7 +917,7 @@ export const BURNS_NODES: DecisionNode[] = [
     body: '**American Burn Association (ABA) criteria for burn center referral:**\n\n1. **Partial thickness burns >10% TBSA**\n2. **Burns involving face, hands, feet, genitalia, perineum, or major joints**\n3. **Full thickness (3rd degree) burns of any size**\n4. **Electrical burns** (including lightning)\n5. **Chemical burns**\n6. **Inhalation injury**\n7. **Burns in patients with significant comorbidities** (diabetes, immunosuppression, etc.)\n8. **Burns with concomitant trauma** where the burn is the greater risk\n9. **Burns in children** at hospitals without pediatric burn capability\n10. **Burns requiring social, emotional, or rehabilitative intervention** (suspected abuse, psychiatric, long-term rehab)\n\n**Contact the burn center early** — even before all initial assessment is complete. Early communication facilitates bed availability and transport coordination.\n\n**Pre-transfer management:**\n• Continue IV fluid resuscitation — do NOT stop or reduce during transport\n• **Clean, dry dressings** for transport (no wet dressings — hypothermia risk during transport)\n• Warming measures — warm blankets, warm IV fluids, warm ambulance\n• Elevate burned extremities above heart level\n• Document all medications, fluids given, urine output, and interventions\n• Send copies of labs, imaging, and clinical notes',
     citation: [2, 16],
     next: 'burn-disposition',
-    summary: 'ABA: >20% TBSA, full >5%, face/hands/feet/genitalia/joints',
+    summary: 'ABA: partial >10% TBSA, full any size, face/hands/feet/genitalia/joints',
   },
 
   {
@@ -1053,7 +1053,7 @@ export const BURNS_CRITICAL_ACTIONS = [
   { text: 'Chemical burns: irrigate copiously (20-30 min minimum) before neutralization attempts', nodeId: 'burn-chem-start' },
   { text: 'HF burns: calcium gluconate gel topically + IV calcium for systemic toxicity', nodeId: 'burn-chem-hf' },
   { text: 'Target UOP 30-50 mL/hr (adults) or 1 mL/kg/hr (children) with fluid resuscitation', nodeId: 'burn-parkland' },
-  { text: 'Burn center transfer: >10% TBSA (>20% adults), face/hands/feet/genitals, electrical, inhalation injury', nodeId: 'burn-transfer' },
+  { text: 'Burn center transfer: partial thickness >10% TBSA (any age), full thickness any size, face/hands/feet/genitals, electrical, inhalation injury', nodeId: 'burn-transfer' },
 ];
 
 export const BURNS_CITATIONS: Citation[] = [

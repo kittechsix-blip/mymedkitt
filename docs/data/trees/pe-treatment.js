@@ -49,7 +49,7 @@ export const PE_TREATMENT_NODES = [
         type: 'info',
         module: 2,
         title: 'Crashing PE — Category D-E',
-        body: '**Category E:** Cardiopulmonary failure — sustained SBP <90 or ≥40 mmHg drop for >15 min, cardiogenic shock, cardiac arrest.\n\n**Category D:** Pre-failure — transient/borderline hypotension, approaching deterioration, HR <40.\n\n**Mortality >15%** without immediate reperfusion.\n\n**Red flags:**\n• **Bradycardia (HR <40)** — most ominous, harbinger of brady-asystolic arrest\n• Lactate >2 mM — 10% absolute mortality increase, HR 12 for death\n• RV dilatation on echo/CT\n\n**ICD-10:** I26.02 (saddle PE with cor pulmonale), I26.09, I26.90',
+        body: '**Category E:** Cardiopulmonary failure — sustained SBP <90 or ≥40 mmHg drop for >15 min, cardiogenic shock, cardiac arrest.\n\n**Category D:** Pre-failure — transient/borderline hypotension, approaching deterioration, HR <40.\n\n**Mortality >15%** without immediate reperfusion.\n\n**Red flags:**\n• **Bradycardia (HR <40)** — most ominous, harbinger of brady-asystolic arrest\n• Lactate >2 mM — 10% absolute mortality increase, HR 12 for death\n• RV dilatation on echo/CT\n\n**ICD-10:** I26.02 (saddle PE with cor pulmonale), I26.09, I26.99',
         images: [{ src: 'images/pe-treatment/saddle-pe-ct.png', alt: 'CT pulmonary angiogram showing saddle embolus straddling the main pulmonary artery bifurcation with bilateral filling defects', caption: 'Saddle PE on CT-PA — massive embolus at the main PA bifurcation with bilateral filling defects. (CC BY-SA 3.0, James Heilman MD)' }],
         citation: [1, 6],
         next: 'pe-crashing-resus',
@@ -75,7 +75,7 @@ export const PE_TREATMENT_NODES = [
         type: 'question',
         module: 2,
         title: 'Reperfusion Strategy',
-        body: '**Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) — no bolus if thrombolysis imminent; low-dose infusion ≤500 U/hr\n• UFH preferred (can be stopped if hemorrhage)\n\n**Systemic thrombolysis** — only intervention with mortality benefit data (foundational massive/submassive PE management).\n\n**Dosing options:**\n• Standard: [Alteplase](#/drug/alteplase/pulmonary) **100 mg IV over 2h** (10–20 mg bolus, remainder over 2h)\n• Reduced-dose: **50 mg IV** over 2h (emerging — less bleeding, equivalent efficacy; HI-PEITHO 2026)\n• Cardiac arrest: **50 mg IV bolus** + sustained CPR\n• **Tenecteplase (alternative, off-label):** weight-based single bolus — 30 mg (<60 kg), 35 mg (60–69), 40 mg (70–79), 45 mg (80–89), 50 mg (≥90 kg). Single bolus advantage; mortality similar to alteplase.\n\n**2026 update:** Mechanical thrombectomy now preferred over CDT for stable-enough patients (PEERLESS-I trial). STRATIFY (2026) shows peripheral 20 mg tPA over 6h equivalent to CDT.',
+        body: '**Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) — no bolus if thrombolysis imminent; low-dose infusion ≤500 U/hr\n• UFH preferred (can be stopped if hemorrhage)\n\n**Systemic thrombolysis** — only intervention with mortality benefit data (foundational massive/submassive PE management).\n\n**Dosing options:**\n• Standard: [Alteplase](#/drug/alteplase/pulmonary) **100 mg IV over 2h** (0.6 mg/kg up to 50 mg over first 15 min, remainder over next 1h45min)\n• Reduced-dose: **50 mg IV** over 2h (emerging — less bleeding, equivalent efficacy; HI-PEITHO 2026)\n• Cardiac arrest: **50 mg IV bolus** + sustained CPR\n• **Tenecteplase (alternative, off-label):** weight-based single bolus — 30 mg (<60 kg), 35 mg (60–69), 40 mg (70–79), 45 mg (80–89), 50 mg (≥90 kg). Single bolus advantage; mortality similar to alteplase.\n\n**2026 update:** Mechanical thrombectomy now preferred over CDT for stable-enough patients (PEERLESS-I trial). STRATIFY (2026) shows peripheral 20 mg tPA over 6h equivalent to CDT.',
         citation: [1, 2, 3, 6, 7, 8, 11, 12],
         calculatorLinks: [
             { id: 'alteplase-pe-dosing', label: 'Alteplase Dosing' },
@@ -83,9 +83,9 @@ export const PE_TREATMENT_NODES = [
         treatment: {
             firstLine: {
                 drug: 'Alteplase',
-                dose: '100 mg (or 50 mg reduced-dose; 0.6 mg/kg max 50 mg in arrest)',
+                dose: '100 mg (or 50 mg reduced-dose; 50 mg IV push if cardiac arrest)',
                 route: 'IV',
-                frequency: 'Over 2 hours (10–20 mg bolus, remainder over 2h); bolus if cardiac arrest',
+                frequency: 'Over 2 hours (0.6 mg/kg up to 50 mg over first 15 min, remainder over next 1h45min); flat 50 mg IV push if cardiac arrest',
                 duration: 'Single dose',
                 notes: 'Cardiac arrest: 50 mg IV bolus + CPR; avoid concurrent heparin bolus. Tenecteplase alternative: weight-based 30–50 mg single bolus.',
             },
@@ -267,10 +267,10 @@ export const PE_TREATMENT_NODES = [
         type: 'info',
         module: 4,
         title: 'Catheter-Directed Thrombolysis',
-        body: '**Low-dose alteplase delivered directly to clot** via catheter.\n\n**Typical protocol:**\n• Alteplase 1-2 mg/hr per catheter (total 8-24 mg over 6-24h)\n• With or without ultrasound assistance (EKOS)\n\n**Key insight (OPTALYSE PE):**\n• Peripheral slow infusion achieves equivalent outcomes to catheter-directed\n• Avoids procedural risk and cost\n• Option: 25 mg alteplase IV over 6h with fibrinogen monitoring\n\n**Bleeding risk:** 0.13% ICH in CDT trials (much lower than systemic full-dose)',
-        citation: [7, 9],
+        body: '**Low-dose alteplase delivered directly to clot** via catheter.\n\n**Typical protocol:**\n• Alteplase 1-2 mg/hr per catheter (total 8-24 mg over 6-24h)\n• With or without ultrasound assistance (EKOS)\n\n**Key insight (STRATIFY):**\n• Peripheral slow infusion achieves equivalent outcomes to catheter-directed\n• Avoids procedural risk and cost\n• Option: 20 mg alteplase IV over 6h with fibrinogen monitoring\n\n**Bleeding risk:** 0.13% ICH in CDT trials (much lower than systemic full-dose)',
+        citation: [7, 9, 12],
         next: 'pe-anticoag-selection',
-        summary: 'Alteplase 8-24 mg over 6-24h via catheter; peripheral slow infusion (25 mg over 6h) may be equivalent',
+        summary: 'Alteplase 8-24 mg over 6-24h via catheter; peripheral slow infusion (20 mg over 6h, STRATIFY) may be equivalent',
     },
     {
         id: 'pe-ecmo',

@@ -185,7 +185,7 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Neurogenic Shock',
-    body: '**Neurogenic shock** = loss of sympathetic tone from spinal cord injury (usually T6 and above).\n\n**Classic triad:**\n• Hypotension\n• Bradycardia (unlike other shock types)\n• Warm, dry skin (peripheral vasodilation)\n\n**Management:**\n\n**1. Volume resuscitation:**\n• Cautious fluids — may worsen spinal cord edema\n• 1-2 L crystalloid, reassess\n\n**2. Vasopressors:**\n• [Norepinephrine](#/drug/norepinephrine/shock) preferred (alpha > beta)\n• Target MAP ≥85-90 mmHg for spinal cord perfusion\n\n**3. Bradycardia:**\n• [Atropine](#/drug/atropine/bradycardia) 0.5-1 mg IV\n• Temporary pacing if refractory\n\n**4. Spinal precautions** — do NOT move without immobilization',
+    body: '**Neurogenic shock** = loss of sympathetic tone from spinal cord injury (usually T6 and above).\n\n**Classic triad:**\n• Hypotension\n• Bradycardia (unlike other shock types)\n• Warm, dry skin (peripheral vasodilation)\n\n**Management:**\n\n**1. Volume resuscitation:**\n• Cautious fluids — may worsen spinal cord edema\n• 1-2 L crystalloid, reassess\n\n**2. Vasopressors:**\n• [Norepinephrine](#/drug/norepinephrine/shock) preferred (alpha > beta)\n• Target MAP ≥85-90 mmHg for spinal cord perfusion\n\n**3. Bradycardia:**\n• [Atropine](#/drug/atropine/bradycardia) 1 mg IV\n• Temporary pacing if refractory\n\n**4. Spinal precautions** — do NOT move without immobilization',
     citation: [1],
     treatment: {
       firstLine: {
@@ -198,11 +198,11 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
       },
       alternative: {
         drug: 'Atropine',
-        dose: '0.5-1 mg',
+        dose: '1 mg',
         route: 'IV',
         frequency: 'Every 3-5 min, max 3 mg',
         duration: 'For symptomatic bradycardia',
-        notes: 'May need transcutaneous pacing if refractory.',
+        notes: 'Fixed 1 mg push per current AHA ACLS dosing (replaces older 0.5 mg incremental regimen). May need transcutaneous pacing if refractory.',
       },
       monitoring: 'MAP target 85-90 mmHg. Heart rate. Neurologic exam.',
     },
@@ -298,7 +298,7 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Hemorrhagic Shock',
-    body: '**Hemorrhagic shock requires source control + blood products.**\n\n**Massive Transfusion Protocol (MTP):**\n• Activate if shock index >1 + ongoing bleeding\n• Target **1:1:1 ratio** (pRBC : FFP : platelets)\n\n**Tranexamic Acid (TXA):**\n• [TXA](#/drug/txa/hemorrhage) 1 g IV over 10 min within 3 hours of injury\n• Then 1 g over 8 hours\n\n**Source control:**\n• Trauma → OR, IR, damage control surgery\n• GI bleed → endoscopy, IR embolization\n• Ruptured AAA → emergent vascular surgery\n• Ectopic → emergent OB/GYN\n\n**Permissive hypotension (trauma):**\n• Target SBP 80-90 mmHg until surgical control\n• Exception: TBI — maintain SBP >100',
+    body: '**Hemorrhagic shock requires source control + blood products.**\n\n**Massive Transfusion Protocol (MTP):**\n• Activate if shock index >1 + ongoing bleeding\n• Target **1:1:1 ratio** (pRBC : FFP : platelets)\n\n**Tranexamic Acid (TXA):**\n• [TXA](#/drug/tranexamic-acid/hemorrhage) 1 g IV over 10 min within 3 hours of injury\n• Then 1 g over 8 hours\n\n**Source control:**\n• Trauma → OR, IR, damage control surgery\n• GI bleed → endoscopy, IR embolization\n• Ruptured AAA → emergent vascular surgery\n• Ectopic → emergent OB/GYN\n\n**Permissive hypotension (trauma):**\n• Target SBP 80-90 mmHg until surgical control\n• Exception: TBI — maintain SBP >100',
     citation: [1, 9],
     treatment: {
       firstLine: {
@@ -581,12 +581,12 @@ export const HYPOTENSION_WORKUP_CITATIONS: Citation[] = [
   { num: 3, text: 'Perera P, Mailhot T, Riley D, Mandavia D. The RUSH Exam: Rapid Ultrasound in Shock. Emerg Med Clin North Am. 2010;28(1):29-56.' },
   { num: 4, text: 'Millington SJ, Arntfield RT, Guo RJ, et al. Expert Agreement in the Interpretation of Critical Care Ultrasonography. Crit Ultrasound J. 2018;10(1):18.' },
   { num: 5, text: 'Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines 2021. Crit Care Med. 2021;49(11):e1063-e1143.' },
-  { num: 6, text: 'Surviving Sepsis Campaign Guidelines 2026 Update. SCCM/ESICM. 2026.' },
+  { num: 6, text: 'Prescott HC, Antonelli M, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026. Crit Care Med. 2026;54(4):725-812.' },
   { num: 7, text: 'Rushworth RL, Torpy DJ, Falhammar H. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.' },
   { num: 8, text: 'van Diepen S, Katz JN, Albert NM, et al. Contemporary Management of Cardiogenic Shock. Circulation. 2017;136(16):e265-e298.' },
   { num: 9, text: 'ATLS Subcommittee. Advanced Trauma Life Support (ATLS). 10th ed. American College of Surgeons; 2018.' },
   { num: 10, text: 'Adler Y, Charron P, Imazio M, et al. 2015 ESC Guidelines for the Diagnosis and Management of Pericardial Diseases. Eur Heart J. 2015;36(42):2921-2964.' },
-  { num: 11, text: '2026 AHA/ACC/ACCP/ACEP PE Guidelines. Circulation. 2026.' },
+  { num: 11, text: 'Creager MA, et al. 2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults. Circulation. 2026;153(12):e977-e1051.' },
   { num: 12, text: 'Monnet X, Marik PE, Teboul JL. Prediction of Fluid Responsiveness. Crit Care Med. 2016;44(5):994-1002.' },
   { num: 13, text: 'Scheeren TWL, Bakker J, Kaufmann T, et al. Current Thinking About Norepinephrine in Septic Shock. J Crit Care. 2021;66:153-157.' },
 ];

@@ -607,7 +607,7 @@ export const ACETAMINOPHEN_OD_MODULE_LABELS = [
 ];
 
 export const ACETAMINOPHEN_OD_CRITICAL_ACTIONS = [
-  { text: 'N-acetylcysteine (NAC) within 8 hours for APAP level >150 mcg/mL at 4h (100% effective)', nodeId: 'apap-nac-iv' },
+  { text: 'N-acetylcysteine (NAC) within 8 hours for APAP level >150 mcg/mL at 4h (nearly 100% effective)', nodeId: 'apap-nac-iv' },
   { text: 'Activated charcoal 1 g/kg PO (max 50 g) if <4 hours since ingestion', nodeId: 'apap-gi-decon' },
   { text: 'NAC IV protocol: Bag 1: 150 mg/kg over 1h, Bag 2: 50 mg/kg over 4h, Bag 3: 100 mg/kg over 16h', nodeId: 'apap-nac-iv' },
   { text: 'Check APAP level at 4 hours post-ingestion and plot on Rumack-Matthew nomogram', nodeId: 'apap-acute-strat' },

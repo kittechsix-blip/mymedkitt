@@ -151,7 +151,7 @@ export const SCAPE_NITROGLYCERIN_CITATIONS: Citation[] = [
   { num: 3, text: 'Heidenreich PA, et al. 2022 AHA/ACC/HFSA Guideline for Management of Heart Failure. Circulation. 2022;145:e895-e1032.' },
   { num: 4, text: 'Peacock WF, et al. Hypertensive Heart Failure and Acute Pulmonary Edema Reviews. Emerg Med Clin North Am. 2005;23(4):1105-1125.' },
   { num: 5, text: 'Wilson SS, et al. High-dose nitroglycerin infusion for SCAPE: case series. Am J Emerg Med. 2018;36(8):1526.e5-1526.e7.' },
-  { num: 6, text: 'Randomized trial of high-dose vs low-dose nitroglycerin in SCAPE: high-dose (600-1000 mcg bolus + 100 mcg/min infusion) achieved 65% symptom resolution at 6h vs 11.5% low-dose (p<0.001). 2024.' },
+  { num: 6, text: 'Siddiqua N, Mathew R, Sahu AK, et al. High-dose versus low-dose intravenous nitroglycerine for sympathetic crashing acute pulmonary oedema: a randomised controlled trial. Emerg Med J. 2024;41(2):96-102. High-dose (600-1000 mcg bolus + 100 mcg/min infusion) vs low-dose (20-40 mcg/min): shorter LOS, fewer CV events, lower intubation rate.' },
 ];
 
 export const SCAPE_NITROGLYCERIN_CRITICAL_ACTIONS = [

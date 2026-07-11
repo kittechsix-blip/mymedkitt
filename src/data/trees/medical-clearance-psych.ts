@@ -8,7 +8,7 @@ import type { Citation } from './neurosyphilis.js';
 
 export const MEDICAL_CLEARANCE_PSYCH_CRITICAL_ACTIONS = [
   { text: 'Medical assessment is clinical - history, vitals, exam, mentation, and red flags drive testing', nodeId: 'mcp-start' },
-  { text: 'New-onset psychosis age >45 = medical until proven otherwise', nodeId: 'mcp-red-flags' },
+  { text: 'New-onset psychosis age >40 = medical until proven otherwise', nodeId: 'mcp-red-flags' },
   { text: 'Delirium = inattention + fluctuating course. Psychosis = fixed delusions + intact attention', nodeId: 'mcp-delirium-vs-psychosis' },
   { text: 'Normal vitals + normal exam + known psych history = labs usually unnecessary', nodeId: 'mcp-minimal-workup' },
   { text: 'ALWAYS check glucose, O2 sat, temperature', nodeId: 'mcp-vitals' },
@@ -79,10 +79,10 @@ export const MEDICAL_CLEARANCE_PSYCH_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Red Flags for Organic Cause',
-    body: '**Organic cause until proven otherwise if ANY present:**\n\n**Historical:**\n• Age >45 with first psychiatric symptoms\n• Acute onset (hours-days vs weeks-months)\n• No prior psychiatric history\n• Recent head trauma\n• Known medical illness (cancer, HIV, thyroid)\n• New medications or recent changes\n\n**Clinical:**\n• Visual hallucinations (vs auditory)\n• Fluctuating consciousness\n• Disorientation (time, place, person)\n• Abnormal vital signs\n• Focal neurologic findings\n• Signs of intoxication/withdrawal',
+    body: '**Organic cause until proven otherwise if ANY present:**\n\n**Historical:**\n• Age >40 with first psychiatric symptoms\n• Acute onset (hours-days vs weeks-months)\n• No prior psychiatric history\n• Recent head trauma\n• Known medical illness (cancer, HIV, thyroid)\n• New medications or recent changes\n\n**Clinical:**\n• Visual hallucinations (vs auditory)\n• Fluctuating consciousness\n• Disorientation (time, place, person)\n• Abnormal vital signs\n• Focal neurologic findings\n• Signs of intoxication/withdrawal',
     citation: [1, 2],
     next: 'mcp-red-flag-check',
-    summary: 'Age >45 first episode, visual hallucinations, fluctuating course, abnormal vitals = organic.',
+    summary: 'Age >40 first episode, visual hallucinations, fluctuating course, abnormal vitals = organic.',
     safetyLevel: 'critical',
   },
 
@@ -186,10 +186,10 @@ export const MEDICAL_CLEARANCE_PSYCH_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'First Psychotic Episode',
-    body: '**First episode requires targeted medical assessment:**\n\n**Labs:**\n• CBC, BMP, glucose\n• TSH when clinically indicated\n• Toxicology screen when substance-induced symptoms are plausible\n• UA if urinary symptoms, pregnancy concern, elderly, or delirium concern\n• RPR/HIV/B12/folate based on risk factors, atypical features, or local protocol\n\n**Imaging:**\n• ED CT for focal deficits, headache/seizure, trauma, delirium features, anticoagulation/immunosuppression, or age >45\n• MRI brain is preferred for stable non-emergent structural evaluation when available\n\n**Consider:**\n• EEG if seizure concern\n• LP if encephalitis concern\n• Anti-NMDA antibodies when young patient has prodrome, seizures, dyskinesias, autonomic instability, or decreased consciousness',
+    body: '**First episode requires targeted medical assessment:**\n\n**Labs:**\n• CBC, BMP, glucose\n• TSH when clinically indicated\n• Toxicology screen when substance-induced symptoms are plausible\n• UA if urinary symptoms, pregnancy concern, elderly, or delirium concern\n• RPR/HIV/B12/folate based on risk factors, atypical features, or local protocol\n\n**Imaging:**\n• ED CT for focal deficits, headache/seizure, trauma, delirium features, anticoagulation/immunosuppression, or age >40\n• MRI brain is preferred for stable non-emergent structural evaluation when available\n\n**Consider:**\n• EEG if seizure concern\n• LP if encephalitis concern\n• Anti-NMDA antibodies when young patient has prodrome, seizures, dyskinesias, autonomic instability, or decreased consciousness',
     citation: [1, 5],
     next: 'mcp-disposition',
-    summary: 'First episode: targeted labs; image for neurologic/atypical features or age >45; MRI can be non-emergent if stable.',
+    summary: 'First episode: targeted labs; image for neurologic/atypical features or age >40; MRI can be non-emergent if stable.',
   },
 
   {

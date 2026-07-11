@@ -387,13 +387,13 @@ export const SODIUM_NODES = [
         type: 'result',
         module: 4,
         title: 'Adrenal Insufficiency',
-        body: '**Cortisol deficiency causes hyponatremia through two mechanisms:**\n\u2022 Cortisol tonically inhibits ADH \u2014 deficiency leads to unopposed ADH secretion\n\u2022 Reduced cardiac output and GFR \u2192 nonosmotic ADH release\n\n**Diagnosis:**\n\u2022 AM cortisol <3 mcg/dL \u2192 virtually diagnostic\n\u2022 AM cortisol 3-18 mcg/dL \u2192 cosyntropin stimulation test\n\u2022 AM cortisol >18 mcg/dL \u2192 AI unlikely\n\u2022 Check ACTH to distinguish primary (high ACTH) from secondary (low ACTH)\n\n**If hemodynamically unstable:**\n\u2022 **Stress-dose hydrocortisone 100 mg IV** immediately \u2014 do NOT wait for cortisol results\n\u2022 Then 50 mg IV q8h until stable\n\u2022 Normal saline for volume resuscitation\n\n**If stable:**\n\u2022 Draw cortisol/ACTH, then start hydrocortisone 20 mg AM / 10 mg PM\n\u2022 Na+ corrects as cortisol is replaced\n\u2022 Monitor for overcorrection \u2014 ADH suppresses once cortisol is adequate',
-        recommendation: 'Check AM cortisol and ACTH. If hemodynamically unstable, give stress-dose hydrocortisone 100 mg IV stat (do not wait for results), then 50 mg IV q8h. If stable, draw labs then start physiologic replacement (20 mg AM / 10 mg PM). Na+ corrects as cortisol is replaced. Monitor for overcorrection once ADH suppresses. Endocrinology consult for all new adrenal insufficiency diagnoses.',
+        body: '**Cortisol deficiency causes hyponatremia through two mechanisms:**\n\u2022 Cortisol tonically inhibits ADH \u2014 deficiency leads to unopposed ADH secretion\n\u2022 Reduced cardiac output and GFR \u2192 nonosmotic ADH release\n\n**Diagnosis:**\n\u2022 AM cortisol <3 mcg/dL \u2192 virtually diagnostic\n\u2022 AM cortisol 3-18 mcg/dL \u2192 cosyntropin stimulation test\n\u2022 AM cortisol >18 mcg/dL \u2192 AI unlikely\n\u2022 Check ACTH to distinguish primary (high ACTH) from secondary (low ACTH)\n\n**If hemodynamically unstable:**\n\u2022 **Stress-dose hydrocortisone 100 mg IV** immediately \u2014 do NOT wait for cortisol results\n\u2022 Then 50 mg IV q8h until stable\n\u2022 Normal saline for volume resuscitation\n\n**If stable:**\n\u2022 Draw cortisol/ACTH, then start hydrocortisone 15 mg AM / 5 mg PM\n\u2022 Na+ corrects as cortisol is replaced\n\u2022 Monitor for overcorrection \u2014 ADH suppresses once cortisol is adequate',
+        recommendation: 'Check AM cortisol and ACTH. If hemodynamically unstable, give stress-dose hydrocortisone 100 mg IV stat (do not wait for results), then 50 mg IV q8h. If stable, draw labs then start physiologic replacement (15 mg AM / 5 mg PM). Na+ corrects as cortisol is replaced. Monitor for overcorrection once ADH suppresses. Endocrinology consult for all new adrenal insufficiency diagnoses.',
         citation: [1, 2, 3],
         treatment: {
             firstLine: {
                 drug: 'Hydrocortisone',
-                dose: '100 mg (stress dose) or 20 mg AM/10 mg PM (physiologic)',
+                dose: '100 mg (stress dose) or 15 mg AM/5 mg PM (physiologic)',
                 route: 'IV (stress) or PO (physiologic)',
                 frequency: 'Stress: 100 mg stat then 50 mg q8h. Physiologic: BID',
                 duration: 'Until hemodynamically stable, then transition to maintenance',

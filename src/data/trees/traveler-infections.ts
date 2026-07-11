@@ -1344,8 +1344,10 @@ Even with nonspecific findings, actively evaluate for **malaria, dengue, enteric
    - **Infiltrate wound site** (as much as possible)
    - Give remainder IM at distant site from vaccine
 3. [Rabies vaccine](#/drug/rabies-vaccine/unvaccinated immunocompetent)
-   - 4-dose series: days 0, 3, 7, 14
+   - 4-dose series: days 0, 3, 7, 14 (immunocompetent)
+   - **Immunocompromised: 5-dose series (add day 28) + check rabies titer**
    - IM (deltoid, NOT gluteal)
+   - HRIG can be given up to day 7 if not given at day 0
 
 **Previously Vaccinated:**
 - **No HRIG** needed

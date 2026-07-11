@@ -184,7 +184,7 @@ export const ABDOMINAL_PAIN_HUB_NODES = [
         body: 'Rigid abdomen + free air on imaging + sepsis physiology = perforated viscus until proven otherwise. Etiology: peptic ulcer (most common), diverticular, malignancy, ischemic, iatrogenic (post-procedure), foreign body, appendicitis with perforation.\n\n**Next 5 minutes:**\n- **Emergent surgical consult — do not delay for imaging if peritoneal signs + sepsis + free air on bedside CXR/US**\n- IV × 2 large-bore, NS / LR 1-2 L bolus, type and CROSS\n- Broad-spectrum IV antibiotics within 1 h: **piperacillin-tazobactam 4.5 g IV** OR **ceftriaxone 2 g IV + metronidazole 500 mg IV**\n- NPO, NG tube for decompression if obstruction features\n- Foley + monitor UOP\n- Lactate, CBC, CMP, coags, type and CROSS 4 units\n- Imaging: upright CXR (free air under diaphragm — sensitivity ~75%) OR CT abdomen/pelvis with IV contrast (more sensitive for free air, identifies source)\n- Reverse anticoagulation if surgery imminent\n- Pain control (do NOT withhold)\n\n🛑 Do NOT delay surgical consult for confirmatory CT if the patient is septic with peritoneal signs and any concern for perforation. The CT can happen in parallel.\n\n**Special case — boerhaave (esophageal rupture):** vomiting + chest/epigastric pain + sepsis ± subcutaneous emphysema. CT chest/abdomen with oral water-soluble contrast (Gastrografin). Surgical + thoracic consult emergent.',
         recommendation: 'Emergent surgical consult. Broad-spectrum abx within 1 h. CT abdomen/pelvis. Reverse anticoag.',
         confidence: 'definitive',
-        citation: [3],
+        citation: [14],
         safetyLevel: 'critical',
     },
     {
@@ -349,6 +349,7 @@ export const ABDOMINAL_PAIN_HUB_CITATIONS = [
     { num: 11, text: 'O\'Gara PT, Kushner FG, Ascheim DD, et al. 2013 ACCF/AHA Guideline for the Management of ST-Elevation Myocardial Infarction. Circulation. 2013;127(4):e362-e425.' },
     { num: 12, text: 'Gans SL, Pols MA, Stoker J, Boermeester MA. Guideline for the diagnostic pathway in patients with acute abdominal pain. Dig Surg. 2015;32(1):23-31.' },
     { num: 13, text: 'American College of Radiology. ACR Appropriateness Criteria: Acute Nonlocalized Abdominal Pain. J Am Coll Radiol. 2018;15(11S):S217-S231.' },
+    { num: 14, text: 'Søreide K, Thorsen K, Harrison EM, et al. Perforated peptic ulcer. Lancet. 2015;386(10000):1288-1298.' },
 ];
 export const ABDOMINAL_PAIN_HUB_NODE_COUNT = ABDOMINAL_PAIN_HUB_NODES.length;
 export const ABDOMINAL_PAIN_HUB_MODULE_LABELS = [

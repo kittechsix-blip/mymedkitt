@@ -11,7 +11,7 @@ export const CROUP_CRITICAL_ACTIONS = [
   { text: 'Racemic epinephrine 0.5 mL of 2.25% nebulized for stridor at rest - provides 1-2h relief', nodeId: 'croup-mod-tx' },
   { text: 'Observe minimum 2 hours after last epinephrine dose for rebound stridor', nodeId: 'croup-epi-obs' },
   { text: 'Use ETT 0.5-1.0 size smaller than age-predicted if intubation needed (subglottic narrowing)', nodeId: 'croup-failure-tx' },
-  { text: 'Dexamethasone 0.15 mg/kg PO is non-inferior to 0.6 mg/kg dose (Parker RCT 2019)', nodeId: 'croup-mild-tx' },
+  { text: 'Dexamethasone 0.15 mg/kg PO is non-inferior to 0.6 mg/kg dose per dose-ranging trials (Cochrane 2023 review)', nodeId: 'croup-mild-tx' },
   { text: 'Prednisolone 1 mg/kg PO: non-inferior symptom relief BUT 29% vs 7% re-presentation rate (use dex if available)', nodeId: 'croup-mild-tx' },
   { text: 'Repeated epinephrine doses may prevent intubation - do NOT limit to single dose', nodeId: 'croup-repeat-epi' },
   { text: 'Humidified air and cool mist have NO evidence of benefit - focus on steroids + epinephrine', nodeId: 'croup-discharge' },
@@ -79,7 +79,7 @@ export const CROUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Mild Croup — Glucocorticoid Only',
-    body: '**Single dose glucocorticoid is standard of care for ALL severities of croup.**\n\n**First-line:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg PO** (max 16 mg) \u2014 single dose\n\n**Non-inferior alternatives:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.15 mg/kg PO** \u2014 lower dose equally effective [3][6]\n\u2022 [Prednisolone](#/drug/prednisolone) **1 mg/kg PO** \u2014 non-inferior symptom relief, BUT higher re-presentation rate (29% vs 7% with dex) [6]\n\n**If unable to tolerate oral:**\n\u2022 [Budesonide](#/drug/budesonide-neb) **2 mg nebulized** \u2014 effective alternative [5][9]\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg IM**\n\n**NNT = 7** to prevent one return visit. Reduces return visits/readmissions by ~50%. Safe single-dose profile.',
+    body: '**Single dose glucocorticoid is standard of care for ALL severities of croup.**\n\n**First-line:**\n\u2022 [Dexamethasone](#/drug/dexamethasone/pediatric croup) **0.6 mg/kg PO** (max 16 mg) \u2014 single dose\n\n**Non-inferior alternatives:**\n\u2022 [Dexamethasone](#/drug/dexamethasone/pediatric croup) **0.15 mg/kg PO** \u2014 lower dose equally effective [3][6]\n\u2022 [Prednisolone](#/drug/prednisolone/pediatric croup) **1 mg/kg PO** \u2014 non-inferior symptom relief, BUT higher re-presentation rate (29% vs 7% with dex) [6]\n\n**If unable to tolerate oral:**\n\u2022 [Budesonide](#/drug/budesonide-neb/pediatric croup) **2 mg nebulized** \u2014 effective alternative [5][9]\n\u2022 [Dexamethasone](#/drug/dexamethasone/pediatric croup) **0.6 mg/kg IM**\n\n**NNT = 7** to prevent one return visit. Reduces return visits/readmissions by ~50%. Safe single-dose profile.',
     citation: [1, 2, 3, 5, 6, 8],
     next: 'croup-mild-obs',
   
@@ -91,7 +91,7 @@ export const CROUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Moderate Croup — Dexamethasone + Epinephrine',
-    body: '**Step 1: Glucocorticoid**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg PO/IM** (max 16 mg) \u2014 single dose\n\n**Step 2: Nebulized Epinephrine**\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine) **0.5 mL of 2.25%** in 4.5 mL normal saline\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) nebulized\n\nEpinephrine provides rapid but **temporary** relief (onset minutes, duration 1-2 hours). Must observe minimum 2 hours after administration.\n\n**Keep child calm** \u2014 agitation worsens airway obstruction.',
+    body: '**Step 1: Glucocorticoid**\n\u2022 [Dexamethasone](#/drug/dexamethasone/pediatric croup) **0.6 mg/kg PO/IM** (max 16 mg) \u2014 single dose\n\n**Step 2: Nebulized Epinephrine**\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine/pediatric croup) **0.5 mL of 2.25%** in 4.5 mL normal saline\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) nebulized\n\nEpinephrine provides rapid but **temporary** relief (onset minutes, duration 1-2 hours). Must observe minimum 2 hours after administration.\n\n**Keep child calm** \u2014 agitation worsens airway obstruction.',
     citation: [2, 4, 7],
     next: 'croup-epi-obs',
   
@@ -103,7 +103,7 @@ export const CROUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Severe Croup — Aggressive Treatment',
-    body: '**Step 1: Glucocorticoid**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg PO/IM** (max 16 mg) \u2014 single dose\n\n**Step 2: Nebulized Epinephrine**\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine) **0.5 mL of 2.25%** in 4.5 mL NS\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) neb\n\u2022 **May repeat epinephrine** \u2014 repeated doses can prevent intubation in many cases [4]\n\n**Additional considerations:**\n\u2022 Heliox (70:30 He:O\u2082) \u2014 may provide short-term benefit when combined with dex, but limited evidence [11]\n\u2022 Continuous monitoring with pulse oximetry\n\u2022 **Minimize interventions that cause agitation** \u2014 crying worsens obstruction\n\u2022 Have airway equipment at bedside',
+    body: '**Step 1: Glucocorticoid**\n\u2022 [Dexamethasone](#/drug/dexamethasone/pediatric croup) **0.6 mg/kg PO/IM** (max 16 mg) \u2014 single dose\n\n**Step 2: Nebulized Epinephrine**\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine/pediatric croup) **0.5 mL of 2.25%** in 4.5 mL NS\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) neb\n\u2022 **May repeat epinephrine** \u2014 repeated doses can prevent intubation in many cases [4]\n\n**Additional considerations:**\n\u2022 Heliox (70:30 He:O\u2082) \u2014 may provide short-term benefit when combined with dex, but limited evidence [11]\n\u2022 Continuous monitoring with pulse oximetry\n\u2022 **Minimize interventions that cause agitation** \u2014 crying worsens obstruction\n\u2022 Have airway equipment at bedside',
     citation: [2, 4, 7, 11],
     next: 'croup-epi-obs',
   
@@ -115,7 +115,7 @@ export const CROUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Impending Respiratory Failure',
-    body: '**This is a clinical emergency \u2014 activate airway team.**\n\n**Immediate interventions:**\n\u2022 [Dexamethasone](#/drug/dexamethasone) **0.6 mg/kg IM** (if not already given)\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine) nebulized \u2014 may repeat\n\u2022 **Blow-by oxygen** \u2014 do NOT agitate the child\n\u2022 **Call anesthesia/ENT for airway backup**\n\n**Airway management:**\n\u2022 Use endotracheal tube **0.5-1.0 size smaller** than age-predicted (subglottic narrowing)\n\u2022 Oral intubation preferred \u2014 may need smaller tube than expected\n\u2022 Have surgical airway equipment available\n\n**Rule out alternative diagnoses:** bacterial tracheitis, epiglottitis, foreign body, peritonsillar abscess.',
+    body: '**This is a clinical emergency \u2014 activate airway team.**\n\n**Immediate interventions:**\n\u2022 [Dexamethasone](#/drug/dexamethasone/pediatric croup) **0.6 mg/kg IM** (if not already given)\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine/pediatric croup) nebulized \u2014 may repeat\n\u2022 **Blow-by oxygen** \u2014 do NOT agitate the child\n\u2022 **Call anesthesia/ENT for airway backup**\n\n**Airway management:**\n\u2022 Use endotracheal tube **0.5-1.0 size smaller** than age-predicted (subglottic narrowing)\n\u2022 Oral intubation preferred \u2014 may need smaller tube than expected\n\u2022 Have surgical airway equipment available\n\n**Rule out alternative diagnoses:** bacterial tracheitis, epiglottitis, foreign body, peritonsillar abscess.',
     citation: [2, 4],
     next: 'croup-icu',
   
@@ -184,7 +184,7 @@ export const CROUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Repeat Nebulized Epinephrine',
-    body: '**Repeat nebulized epinephrine** at same dose:\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine) **0.5 mL of 2.25%** in 4.5 mL NS\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) neb\n\n**Repeated doses may prevent intubation** in many cases. [4]\n\nRestart 2-hour observation clock after each dose.\n\n**Escalation considerations:**\n\u2022 Multiple doses of epinephrine \u2192 strong indicator for admission\n\u2022 If requiring >2 doses \u2192 consider ICU level monitoring\n\u2022 **Failure to improve with dexamethasone + epinephrine** \u2192 consider alternative diagnoses (bacterial tracheitis, foreign body)',
+    body: '**Repeat nebulized epinephrine** at same dose:\n\u2022 [Racemic Epinephrine](#/drug/racemic-epinephrine/pediatric croup) **0.5 mL of 2.25%** in 4.5 mL NS\n\u2022 OR L-epinephrine **0.5 mL/kg of 1:1000** (max 5 mL) neb\n\n**Repeated doses may prevent intubation** in many cases. [4]\n\nRestart 2-hour observation clock after each dose.\n\n**Escalation considerations:**\n\u2022 Multiple doses of epinephrine \u2192 strong indicator for admission\n\u2022 If requiring >2 doses \u2192 consider ICU level monitoring\n\u2022 **Failure to improve with dexamethasone + epinephrine** \u2192 consider alternative diagnoses (bacterial tracheitis, foreign body)',
     citation: [4],
     next: 'croup-re-obs',
   

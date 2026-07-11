@@ -57,7 +57,7 @@ export const SICKLE_CELL_NODES = [
         body: '**Priapism** affects ~40% of males with SCD. [1]\n\nIntervention should occur within **4 hours** of erection duration to prevent permanent scarring and erectile dysfunction.\n\n**Initial Management:**\n• IV hydration\n• Analgesia (per VOC pathway)\n• Supplemental oxygen\n• Oral pseudoephedrine 30–60 mg may be considered [1]\n• Ketamine at procedural sedation doses has been shown to assist with corporal detumescence [1]\n\n**Definitive Management:**\n[Priapism Management](#/tree/priapism) — full aspiration, irrigation, and phenylephrine injection protocol\n\nEmergent urology consultation for definitive management.',
         recommendation: 'Initiate IV hydration, analgesia, and O2. If >4 hours duration, proceed to corporal aspiration per Priapism consult. Emergent urology consultation.',
         confidence: 'recommended',
-        citation: [1, 21],
+        citation: [1],
         treatment: {
             firstLine: {
                 drug: 'Pseudoephedrine',
@@ -107,8 +107,8 @@ export const SICKLE_CELL_NODES = [
         type: 'info',
         module: 2,
         title: 'IV Analgesia & Fluids',
-        body: '**NSAID (administer with first opioid dose):**\n[Ketorolac](#/drug/ketorolac/scd pain crisis) 0.5 mg/kg IV\n• Max 15 mg if <16 years, max 30 mg if ≥16 years\n• Reduces opioid requirements [8]\n• **Contraindications:** pregnancy, renal impairment, ketorolac within 5 days, ibuprofen within 6 hours, bleeding concerns, history of renal impairment\n\n**Opioid (choose one based on patient preference/pain plan):**\n[Morphine](#/drug/morphine/scd pain crisis) 0.1–0.2 mg/kg IV (max 8 mg)\nOR\n[Hydromorphone](#/drug/hydromorphone/scd pain crisis) 0.015–0.02 mg/kg IV (max 1 mg)\nOR\n[Fentanyl](#/drug/fentanyl/scd pain crisis iv) 2 mcg/kg IV (max 100 mcg)\n\nIf unable to obtain IV: Oxycodone 0.1 mg/kg PO (max 10 mg)\n\n**IV Fluids:**\n• NS 10 mL/kg bolus (max 1L) over 60 minutes\n• If concern for dehydration: 20 mL/kg bolus (max 1L)\n• Then start 1× maintenance IVF\n• **Avoid overhydration** — can worsen ACS [4][19]\n\n**Incentive Spirometry:**\nStart in ED — shown to **prevent development of ACS** during hospitalization. [1]\n\n**AVOID corticosteroids** — risk of rebound pain, stroke, and other complications. [4][5]',
-        citation: [1, 4, 5, 8, 19],
+        body: '**NSAID (administer with first opioid dose):**\n[Ketorolac](#/drug/ketorolac/scd pain crisis) 0.5 mg/kg IV\n• Max 15 mg if <16 years, max 30 mg if ≥16 years\n• Reduces opioid requirements [8]\n• **Contraindications:** pregnancy, renal impairment, ketorolac within 5 days, ibuprofen within 6 hours, bleeding concerns, history of renal impairment\n\n**Opioid (choose one based on patient preference/pain plan):**\n[Morphine](#/drug/morphine/scd pain crisis) 0.1–0.2 mg/kg IV (max 8 mg)\nOR\n[Hydromorphone](#/drug/hydromorphone/scd pain crisis) 0.015–0.02 mg/kg IV (max 1 mg)\nOR\n[Fentanyl](#/drug/fentanyl/scd pain crisis iv) 2 mcg/kg IV (max 100 mcg)\n\nIf unable to obtain IV: Oxycodone 0.1 mg/kg PO (max 10 mg)\n\n**IV Fluids:**\n• NS 10 mL/kg bolus (max 1L) over 60 minutes\n• If concern for dehydration: 20 mL/kg bolus (max 1L)\n• Then start 1× maintenance IVF\n• **Avoid overhydration** — can worsen ACS [4]\n\n**Incentive Spirometry:**\nStart in ED — shown to **prevent development of ACS** during hospitalization. [1]\n\n**AVOID corticosteroids** — risk of rebound pain, stroke, and other complications. [4][5]',
+        citation: [1, 4, 5, 8],
         next: 'scd-voc-reassess',
         summary: 'Ketorolac + opioid IV; NS 10mL/kg bolus; incentive spirometry q2h prevents ACS; AVOID corticosteroids — rebound pain and stroke risk',
         safetyLevel: 'warning',
@@ -213,8 +213,8 @@ export const SICKLE_CELL_NODES = [
         type: 'info',
         module: 3,
         title: 'Fever — Workup',
-        body: '**Obtain BEFORE antibiotics:**\n• Blood culture (ALWAYS — regardless of how well the patient appears) [1][4]\n\n**Laboratory Studies:**\n• CBC with differential + reticulocyte count\n• CMP (comprehensive metabolic panel)\n• Urinalysis if UTI concern\n\n**Imaging:**\n• **CXR if ANY respiratory symptoms** (cough, chest pain, hypoxia, tachypnea) — evaluate for ACS [1]\n\n**Additional Assessment:**\n• Vaccination status — PCV15/PCV20, PPSV23, meningococcal\n• Penicillin prophylaxis compliance\n• Central line → increased bacteremia risk\n• History of splenectomy → increased bacteremia risk\n\n**Viral Testing:**\n• Comprehensive viral testing is optional\n• A **positive viral test does NOT exclude bacteremia** in SCD [1]\n\n**Age <60 days:**\n• Full sepsis workup per AAP 2021 guidelines [1][13]',
-        citation: [1, 4, 11, 12],
+        body: '**Obtain BEFORE antibiotics:**\n• Blood culture (ALWAYS — regardless of how well the patient appears) [1][4]\n\n**Laboratory Studies:**\n• CBC with differential + reticulocyte count\n• CMP (comprehensive metabolic panel)\n• Urinalysis if UTI concern\n\n**Imaging:**\n• **CXR if ANY respiratory symptoms** (cough, chest pain, hypoxia, tachypnea) — evaluate for ACS [1]\n\n**Additional Assessment:**\n• Vaccination status — PCV15/PCV20, PPSV23, meningococcal\n• Penicillin prophylaxis compliance\n• Central line → increased bacteremia risk\n• History of splenectomy → increased bacteremia risk\n\n**Viral Testing:**\n• Comprehensive viral testing is optional\n• A **positive viral test does NOT exclude bacteremia** in SCD [1]\n\n**Age <60 days:**\n• Full sepsis workup per AAP 2021 guidelines [1][23]',
+        citation: [1, 4, 11, 12, 23],
         next: 'scd-fever-abx',
         summary: 'Blood culture ALWAYS before abx, CXR if any respiratory symptoms; positive viral test does NOT exclude bacteremia in SCD',
     },
@@ -568,4 +568,5 @@ export const SICKLE_CELL_CITATIONS = [
     { num: 20, text: 'Nelson DA, Deuster PA, Carter R 3rd, et al. Sickle cell trait, rhabdomyolysis, and mortality among U.S. Army soldiers. N Engl J Med. 2016;375(5):435-442.' },
     { num: 21, text: 'Alappan N, Marak CP, Chopra A, et al. Renal medullary cancer in a patient with sickle cell trait. Case Rep Oncol Med. 2013;2013:129813.' },
     { num: 22, text: 'Glassberg JA, Tanabe P, Chow A, et al. Emergency provider analgesic practices and attitudes toward patients with sickle cell disease. Ann Emerg Med. 2013;62(4):293-302.' },
+    { num: 23, text: 'Pantell RH, Roberts KB, Adams WG, et al. Clinical Practice Guideline: Evaluation and Management of Well-Appearing Febrile Infants 8 to 60 Days Old. Pediatrics. 2021;148(2):e2021052228. DOI: 10.1542/peds.2021-052228' },
 ];

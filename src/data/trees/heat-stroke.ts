@@ -199,7 +199,7 @@ export const HEAT_STROKE_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Ice Pack Cooling (Suboptimal)',
-    body: '**LEAST effective method — cooling rate ~0.05°C/min** [2]\n\n**If this is all you have:**\n• Place ice packs to axillae, groin, neck, and entire torso\n• Wet sheets over patient + fans\n• Cold IV fluids (4°C NS)\n• Rotate ice packs frequently (they warm up)\n\n**Consider transfer** to facility with immersion or evaporative capability if cooling is inadequate.\n\n**Avoid:**\n• Cooling blankets alone (too slow)\n• Antipyretics ([Acetaminophen](#/drug/acetaminophen/heat stroke) and NSAIDs are USELESS — thermoregulatory setpoint is normal) [1][2]',
+    body: '**LEAST effective method — cooling rate ~0.05°C/min** [2]\n\n**If this is all you have:**\n• Place ice packs to axillae, groin, neck, and entire torso\n• Wet sheets over patient + fans\n• Cold IV fluids (4°C NS)\n• Rotate ice packs frequently (they warm up)\n\n**Consider transfer** to facility with immersion or evaporative capability if cooling is inadequate.\n\n**Avoid:**\n• Cooling blankets alone (too slow)\n• Antipyretics ([Acetaminophen](#/drug/acetaminophen/fever) and NSAIDs are USELESS — thermoregulatory setpoint is normal) [1][2]',
     citation: [1, 2],
     next: 'hs-cooling-endpoint',
     treatment: {
@@ -282,7 +282,7 @@ export const HEAT_STROKE_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Intubation Considerations',
-    body: '**RSI for heat stroke:**\n\n**Induction:** [Ketamine](#/drug/ketamine/heat stroke) 1-2 mg/kg IV or [Propofol](#/drug/propofol/heat stroke) 1-2 mg/kg IV\n\n**Paralysis:** [Rocuronium](#/drug/rocuronium/heat stroke) 1.2 mg/kg IV\n• **AVOID succinylcholine** — hyperkalemia risk with rhabdomyolysis\n\n**Post-intubation:**\n• Continue active cooling\n• Target normocapnia (avoid hyperventilation)\n• Sedation: propofol or midazolam + fentanyl [2]',
+    body: '**RSI for heat stroke:**\n\n**Induction:** [Ketamine](#/drug/ketamine/RSI induction) 1-2 mg/kg IV or [Propofol](#/drug/propofol/RSI induction) 1-2 mg/kg IV\n\n**Paralysis:** [Rocuronium](#/drug/rocuronium/RSI intubation) 1.2 mg/kg IV\n• **AVOID succinylcholine** — hyperkalemia risk with rhabdomyolysis\n\n**Post-intubation:**\n• Continue active cooling\n• Target normocapnia (avoid hyperventilation)\n• Sedation: propofol or midazolam + fentanyl [2]',
     citation: [2],
     next: 'hs-seizures',
     treatment: {
@@ -326,7 +326,7 @@ export const HEAT_STROKE_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Seizure Treatment',
-    body: '**First-line:** [Midazolam](#/drug/midazolam/heat stroke) 0.2 mg/kg IV or IM (max 10 mg)\n\n**Alternative:** [Lorazepam](#/drug/lorazepam/heat stroke) 0.1 mg/kg IV (max 4 mg)\n\n**If refractory:**\n• [Propofol](#/drug/propofol/heat stroke) infusion or\n• [Phenobarbital](#/drug/phenobarbital/heat stroke) 20 mg/kg IV\n\n**Avoid phenytoin/fosphenytoin** — may worsen hyperthermia and is less effective for toxin-induced seizures.\n\n**Continue aggressive cooling** — seizures generate significant heat. [2][3]',
+    body: '**First-line:** [Midazolam](#/drug/midazolam/status epilepticus) 0.2 mg/kg IV or IM (max 10 mg)\n\n**Alternative:** [Lorazepam](#/drug/lorazepam/status epilepticus) 0.1 mg/kg IV (max 4 mg)\n\n**If refractory:**\n• [Propofol](#/drug/propofol/refractory se) infusion or\n• [Phenobarbital](#/drug/phenobarbital/status epilepticus) 20 mg/kg IV\n\n**Avoid phenytoin/fosphenytoin** — may worsen hyperthermia and is less effective for toxin-induced seizures.\n\n**Continue aggressive cooling** — seizures generate significant heat. [2][3]',
     citation: [2, 3],
     next: 'hs-complications',
     treatment: {
@@ -445,7 +445,7 @@ export const HEAT_STROKE_NODES: DecisionNode[] = [
       },
       monitoring: 'CK q6h, Cr, K+, ABG. Continuous cardiac monitoring for hyperkalemia.',
     },
-    summary: 'CK >15,000 or rising: continuous IV fluids, monitor for compartment syndrome and AKI',
+    summary: 'CK >40,000: continuous IV fluids, monitor for compartment syndrome and AKI',
     safetyLevel: 'critical',
   },
 
@@ -488,7 +488,7 @@ export const HEAT_STROKE_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
-    summary: 'ALL heat stroke patients require ICU admission — multi-organ failure may develop over 24-72h',
+    summary: 'ALL heat stroke patients require admission — mild/stable to floor, unstable/organ dysfunction to ICU',
   },
 
   {
@@ -529,11 +529,11 @@ export const HEAT_STROKE_MODULE_LABELS = [
 
 export const HEAT_STROKE_CRITICAL_ACTIONS = [
   { text: 'Aggressive cooling: target core temp <39°C within 30 min (prevents end-organ damage)', nodeId: 'hs-cooling-endpoint' },
-  { text: 'Evaporative cooling: mist + fans (fastest non-invasive method, 0.3°C/min)', nodeId: 'hs-evaporative' },
-  { text: 'Ice water immersion if available (0.15-0.35°C/min) - stop at 38.5-39°C', nodeId: 'hs-immersion' },
-  { text: 'Cold IV saline 1-2L (4°C) + ice packs to groin/axillae/neck', nodeId: 'hs-ice-packs' },
-  { text: 'Benzodiazepines for agitation/shivering (lorazepam 2-4 mg IV)', nodeId: 'hs-seizure-rx' },
-  { text: 'Avoid antipyretics (aspirin/acetaminophen) - ineffective and may worsen coagulopathy', nodeId: 'hs-ice-packs' },
+  { text: 'Evaporative cooling: mist + fans (practical ED method if immersion unavailable, ~0.1°C/min)', nodeId: 'hs-evaporative' },
+  { text: 'Ice water immersion if available (gold standard, ~0.2°C/min) - stop at 38.5-39°C', nodeId: 'hs-immersion' },
+  { text: 'Cold IV saline 500-1000 mL (4°C) + ice packs to groin/axillae/neck', nodeId: 'hs-ice-packs' },
+  { text: 'Benzodiazepines for seizures (lorazepam 0.1 mg/kg IV, max 4 mg)', nodeId: 'hs-seizure-rx' },
+  { text: 'Avoid antipyretics (acetaminophen/NSAIDs) - ineffective, thermoregulatory setpoint is normal', nodeId: 'hs-ice-packs' },
   { text: 'Monitor for rhabdomyolysis: CK, myoglobin, aggressive IVF if CK >5000', nodeId: 'hs-rhabdo' },
   { text: 'Check DIC labs: PT/INR, fibrinogen, platelets (common complication)', nodeId: 'hs-coags' },
 ];

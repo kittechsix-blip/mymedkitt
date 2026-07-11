@@ -258,7 +258,7 @@ export const POTASSIUM_NODES = [
         type: 'info',
         module: 3,
         title: 'Step 3: Kaliuresis (Diuretic Strategy)',
-        body: 'Scale diuretic intensity to severity of hyperkalemia and renal function.\n\n**Normal renal function:**\n\u2022 [Furosemide](#/drug/furosemide/hyperkalemia) 60-160 mg IV alone may suffice\n\n**Moderate-severe renal dysfunction ("nephron bomb"):**\n\u2022 [Furosemide](#/drug/furosemide/hyperkalemia) 160-250 mg IV (or [Bumetanide](#/drug/bumetanide) 4-5 mg IV)\n\u2022 + [Chlorothiazide](#/drug/chlorothiazide) 500-1000 mg IV (or [Metolazone](#/drug/metolazone) 5-10 mg PO)\n\u2022 +/- [Acetazolamide](#/drug/acetazolamide) 250-1000 mg IV/PO\n\u2022 +/- [Fludrocortisone](#/drug/fludrocortisone/hyperkalemia) 0.2 mg PO (esp. patients on ACEi/ARB, tacrolimus)\n\n**Replace urine losses** with crystalloid:\n\u2022 Bicarb < 22 \u2192 isotonic bicarbonate\n\u2022 Bicarb \u2265 22 \u2192 Lactated Ringers\n\nIn life-threatening hyperK, **err on the side of excessive diuretic**. Large-volume diuresis is easily corrected with crystalloid.',
+        body: 'Scale diuretic intensity to severity of hyperkalemia and renal function.\n\n**Normal renal function:**\n\u2022 [Furosemide](#/drug/furosemide/hyperkalemia) 40-80 mg IV alone may suffice\n\n**Moderate-severe renal dysfunction ("nephron bomb"):**\n\u2022 [Furosemide](#/drug/furosemide/hyperkalemia) 160-250 mg IV (or [Bumetanide](#/drug/bumetanide) 4-5 mg IV)\n\u2022 + [Chlorothiazide](#/drug/chlorothiazide) 500-1000 mg IV (or [Metolazone](#/drug/metolazone) 5-10 mg PO)\n\u2022 +/- [Acetazolamide](#/drug/acetazolamide) 250-1000 mg IV/PO\n\u2022 +/- [Fludrocortisone](#/drug/fludrocortisone/hyperkalemia) 0.2 mg PO (esp. patients on ACEi/ARB, tacrolimus)\n\n**Replace urine losses** with crystalloid:\n\u2022 Bicarb < 22 \u2192 isotonic bicarbonate\n\u2022 Bicarb \u2265 22 \u2192 Lactated Ringers\n\nIn life-threatening hyperK, **err on the side of excessive diuretic**. Large-volume diuresis is easily corrected with crystalloid.',
         citation: [1, 2],
         treatment: {
             firstLine: {
@@ -271,7 +271,7 @@ export const POTASSIUM_NODES = [
             },
             alternative: {
                 drug: 'Furosemide (monotherapy)',
-                dose: '60-160 mg',
+                dose: '40-80 mg',
                 route: 'IV',
                 frequency: 'Once, may repeat',
                 duration: 'Until adequate urine output and K+ improving',
@@ -464,7 +464,7 @@ export const POTASSIUM_NODES = [
         type: 'question',
         module: 6,
         title: 'Periodic Paralysis Assessment',
-        body: '**Hypokalemic Periodic Paralysis (HypoPP)**\n\nEpisodic flaccid paralysis, **proximal > distal**, with normal-to-decreased reflexes. Lasting minutes to days with spontaneous recovery.\n\n**Triggers:** Rest after strenuous exercise, carbohydrate-rich evening meals (morning attacks), stress, cold, high sodium intake, corticosteroids, alcohol\n\n**KEY DISTINCTION:** Hypokalemia in HypoPP is **transcellular redistribution, NOT true body K+ depletion**. This fundamentally changes treatment.\n\n**Genetics:** CACNA1 (calcium channel) or SCN4A (sodium channel) mutations.',
+        body: '**Hypokalemic Periodic Paralysis (HypoPP)**\n\nEpisodic flaccid paralysis, **proximal > distal**, with normal-to-decreased reflexes. Lasting minutes to days with spontaneous recovery.\n\n**Triggers:** Rest after strenuous exercise, carbohydrate-rich evening meals (morning attacks), stress, cold, high sodium intake, corticosteroids, alcohol\n\n**KEY DISTINCTION:** Hypokalemia in HypoPP is **transcellular redistribution, NOT true body K+ depletion**. This fundamentally changes treatment.\n\n**Genetics:** CACNA1S (calcium channel) or SCN4A (sodium channel) mutations.',
         citation: [17, 18],
         options: [
             {
@@ -516,8 +516,8 @@ export const POTASSIUM_NODES = [
         type: 'result',
         module: 6,
         title: 'HypoPP: Prevention & Long-Term',
-        body: '**Long-term prevention of hypokalemic periodic paralysis attacks.**\n\nTrigger avoidance: low sodium, low carbohydrate diet, avoid steroids/cold/stress/alcohol.\n\nDaily oral KCl 10-20 mEq TID (especially nocturnal dose for morning attacks).\n\nAcetazolamide is first-line pharmacologic prevention. If intolerant: K-sparing diuretics (triamterene, spironolactone, eplerenone).\n\nGenetic counseling: CACNA1 or SCN4A testing for family planning.',
-        recommendation: 'Trigger avoidance: low sodium, low carbohydrate diet, avoid steroids/cold/stress/alcohol. Daily oral KCl 10-20 mEq TID (especially nocturnal dose for morning attacks). Acetazolamide is first-line pharmacologic prevention (mechanism uncertain \u2014 may involve systemic acidosis reducing attack susceptibility). If intolerant: K-sparing diuretics (triamterene, spironolactone, eplerenone). Magnesium supplementation may enhance renal K+ retention. Anesthetic precautions: strict K+ control, avoid glucose/salt loads, maintain temperature and acid-base balance. Genetic counseling: CACNA1 or SCN4A testing for family planning.',
+        body: '**Long-term prevention of hypokalemic periodic paralysis attacks.**\n\nTrigger avoidance: low sodium, low carbohydrate diet, avoid steroids/cold/stress/alcohol.\n\nDaily oral KCl 10-20 mEq TID (especially nocturnal dose for morning attacks).\n\nAcetazolamide is first-line pharmacologic prevention. If intolerant: K-sparing diuretics (triamterene, spironolactone, eplerenone).\n\nGenetic counseling: CACNA1S or SCN4A testing for family planning.',
+        recommendation: 'Trigger avoidance: low sodium, low carbohydrate diet, avoid steroids/cold/stress/alcohol. Daily oral KCl 10-20 mEq TID (especially nocturnal dose for morning attacks). Acetazolamide is first-line pharmacologic prevention (mechanism uncertain \u2014 may involve systemic acidosis reducing attack susceptibility). If intolerant: K-sparing diuretics (triamterene, spironolactone, eplerenone). Magnesium supplementation may enhance renal K+ retention. Anesthetic precautions: strict K+ control, avoid glucose/salt loads, maintain temperature and acid-base balance. Genetic counseling: CACNA1S or SCN4A testing for family planning.',
         citation: [17, 18],
     },
 ];

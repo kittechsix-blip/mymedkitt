@@ -163,10 +163,10 @@ export const SUICIDAL_PATIENT_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Means Restriction Counseling',
-    body: '**Lethal means restriction SAVES LIVES**\n\n**Most lethal methods:**\n• Firearms (85% case fatality)\n• Hanging/suffocation (61%)\n• Jumping (31%)\n• Poisoning/overdose (2%)\n\n**Key point:** 90% who survive an attempt do NOT die by suicide later.\nReducing access to lethal means prevents impulsive deaths.\n\n**CALM approach:**\n• **C**larify if means are accessible\n• **A**sk about willingness to secure\n• **L**isten to barriers\n• **M**ake a plan together',
+    body: '**Lethal means restriction SAVES LIVES**\n\n**Most lethal methods:**\n• Firearms (~90% case fatality)\n• Drowning (56%)\n• Hanging/suffocation (53%)\n• Poisoning/overdose (~2%)\n\n**Key point:** 90% who survive an attempt do NOT die by suicide later.\nReducing access to lethal means prevents impulsive deaths.\n\n**CALM approach:**\n• **C**larify if means are accessible\n• **A**sk about willingness to secure\n• **L**isten to barriers\n• **M**ake a plan together',
     citation: [6],
     next: 'sui-means-firearms',
-    summary: 'Means restriction saves lives. Firearms = 85% case fatality. Use CALM approach.',
+    summary: 'Means restriction saves lives. Firearms = ~90% case fatality. Use CALM approach.',
   },
 
   {

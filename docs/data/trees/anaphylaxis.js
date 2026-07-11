@@ -538,7 +538,7 @@ export const ANAPHYLAXIS_NODES = [
         type: 'question',
         module: 6,
         title: 'Disposition Assessment',
-        body: '[Biphasic Reaction Risk Factors](#/info/anaph-biphasic)\n\n**Biphasic reactions:** ~5-20% of cases, majority occur within 8-10 hours. No deaths have been reported from biphasic reactions. [1][2][3]\n\n**Risk factors for biphasic retext:**\n• Multiple epinephrine doses required\n• IV fluid bolus needed\n• Delayed initial epinephrine\n• Inhaled beta-agonist required\n• Unknown trigger\n• Initial hypotension\n• Severe initial presentation [2]',
+        body: '[Biphasic Reaction Risk Factors](#/info/anaph-biphasic)\n\n**Biphasic reactions:** ~5-20% of cases, majority occur within 8-10 hours. No deaths have been reported from biphasic reactions. [1][2][3]\n\n**Risk factors for biphasic reaction:**\n• Multiple epinephrine doses required\n• IV fluid bolus needed\n• Delayed initial epinephrine\n• Inhaled beta-agonist required\n• Unknown trigger\n• Initial hypotension\n• Severe initial presentation [2]',
         citation: [1, 2, 3],
         options: [
             {
@@ -650,5 +650,5 @@ export const ANAPHYLAXIS_CITATIONS = [
     { num: 10, text: 'Brown SGA, Blackman KE, Stenlake V, Heddle R. Insect sting anaphylaxis; prospective evaluation of treatment with intravenous adrenaline and volume resuscitation. Emerg Med J. 2004;21(2):149-154.' },
     { num: 11, text: 'Krishnaswamy G. Critical Care Management of the Patient With Anaphylaxis: A Concise Definitive Review. Crit Care Med. 2021;49(5):838-857.' },
     { num: 12, text: 'Pumphrey RS. Lessons for management of anaphylaxis from a study of fatal reactions. Clin Exp Allergy. 2000;30(8):1144-50.' },
-    { num: 13, text: 'Retrospective comparison between 0.3 mg and 0.5 mg dosing of intramuscular epinephrine for anaphylaxis. Am J Emerg Med. Jan 2026.' },
+    { num: 13, text: 'Jackson CA, et al. Retrospective comparison between 0.3 mg and 0.5 mg dosing of intramuscular epinephrine for anaphylaxis. Am J Emerg Med. Jan 2026. doi:10.1016/j.ajem.2025.10.020.' },
 ];

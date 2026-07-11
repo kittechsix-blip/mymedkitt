@@ -431,9 +431,9 @@ export const CARDIOGENIC_SHOCK_MODULE_LABELS = [
 export const CARDIOGENIC_SHOCK_CITATIONS: Citation[] = [
   { num: 1, text: 'EMCrit IBCC - Cardiogenic Shock. Farkas J. https://emcrit.org/ibcc/cardiogenic-shock/' },
   { num: 2, text: 'CV EMCrit Archives - Hemodynamic Management. https://emcrit.org/category/cardiovascular/' },
-  { num: 3, text: 'SCAI SHOCK Stage Classification. Baran DA et al. Catheter Cardiovasc Interv. 2019;94(1):29-37.' },
+  { num: 3, text: 'SCAI SHOCK Stage Classification Expert Consensus Update. Naidu SS et al. J Am Coll Cardiol. 2022;79(9):933-946. (Updates original: Baran DA et al. Catheter Cardiovasc Interv. 2019;94(1):29-37.)' },
   { num: 4, text: 'Hochman JS et al. Early revascularization in acute myocardial infarction complicated by cardiogenic shock. SHOCK Trial. N Engl J Med. 1999;341(9):625-634.' },
-  { num: 5, text: 'Harjola VP et al. Contemporary management of cardiogenic shock. Eur Heart J. 2020;41(11):1179-1188.' },
+  { num: 5, text: 'Chioncel O, Parissis J, Mebazaa A, et al. Epidemiology, pathophysiology and contemporary management of cardiogenic shock - a position statement from the Heart Failure Association of the European Society of Cardiology. Eur J Heart Fail. 2020;22(8):1315-1341.' },
   { num: 6, text: 'UpToDate - Inotropic agents in heart failure with reduced ejection fraction. 2024.' },
   { num: 7, text: 'Basir MB et al. Improved outcomes with early initiation of mechanical circulatory support. J Am Coll Cardiol. 2021;77(9):1125-1136.' },
 ];

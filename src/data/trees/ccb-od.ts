@@ -60,7 +60,7 @@ export const CCB_OD_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Non-Dihydropyridine CCB Toxicity',
-    body: '**Non-dihydropyridines** (verapamil, diltiazem):\n\n• Block L-type calcium channels in **cardiac tissue**\n• SA node suppression → bradycardia\n• AV node blockade → conduction delays\n• Myocardial depression → reduced contractility\n• Shock phenotype: **CARDIOGENIC** (cool extremities, poor CO, elevated lactate) [1][2]\n\n[Verapamil](#/drug/verapamil/a-fib) is the most cardiotoxic:\n• Greatest negative inotropic effect\n• Most deaths occur with verapamil overdose [3]\n\n**Treatment emphasis:** High-dose insulin euglycemia therapy (HIET) + inotropes [1][2].',
+    body: '**Non-dihydropyridines** (verapamil, diltiazem):\n\n• Block L-type calcium channels in **cardiac tissue**\n• SA node suppression → bradycardia\n• AV node blockade → conduction delays\n• Myocardial depression → reduced contractility\n• Shock phenotype: **CARDIOGENIC** (cool extremities, poor CO, elevated lactate) [1][2]\n\n[Verapamil](#/drug/verapamil/overdose toxicity) is the most cardiotoxic:\n• Greatest negative inotropic effect\n• Most deaths occur with verapamil overdose [3]\n\n**Treatment emphasis:** High-dose insulin euglycemia therapy (HIET) + inotropes [1][2].',
     citation: [1, 2, 3],
     next: 'ccb-extended-release',
   
@@ -120,7 +120,7 @@ export const CCB_OD_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Initial Stabilization',
-    body: '**Immediate actions:**\n• ABCs, two large-bore IVs\n• Continuous cardiac monitor\n• 12-lead ECG (bradycardia, conduction delays)\n• Labs: BMP, lactate, glucose (hyperglycemia supports diagnosis)\n• Consider central line and arterial line early\n\n**[Atropine](#/drug/atropine/ccb bradycardia)** 0.5-1 mg IV:\n• Usually **ineffective** — toxicity is at the calcium channel, not vagal\n• May try, but do not delay other interventions [1][3]\n\n**Transcutaneous pacing:**\n• Temporizing measure\n• Often fails to capture or improve BP due to impaired contractility\n• Do not rely on pacing alone [1]',
+    body: '**Immediate actions:**\n• ABCs, two large-bore IVs\n• Continuous cardiac monitor\n• 12-lead ECG (bradycardia, conduction delays)\n• Labs: BMP, lactate, glucose (hyperglycemia supports diagnosis)\n• Consider central line and arterial line early\n\n**[Atropine](#/drug/atropine/ccb toxicity)** 0.5-1 mg IV:\n• Usually **ineffective** — toxicity is at the calcium channel, not vagal\n• May try, but do not delay other interventions [1][3]\n\n**Transcutaneous pacing:**\n• Temporizing measure\n• Often fails to capture or improve BP due to impaired contractility\n• Do not rely on pacing alone [1]',
     citation: [1, 3],
     next: 'ccb-calcium',
   
@@ -453,7 +453,7 @@ export const CCB_OD_MODULE_LABELS = [
 export const CCB_OD_CITATIONS: Citation[] = [
   { num: 1, text: 'St-Onge M, Dubé PA, Gosselin S, et al. Treatment for Calcium Channel Blocker Poisoning: A Systematic Review. Clin Toxicol. 2014;52(9):926-944. AACT Position Statement.' },
   { num: 2, text: 'Levine M, Curry SC, Padilla-Jones A, Ruha AM. Critical Care Management of Verapamil and Diltiazem Overdose With a Focus on Vasopressors: A 25-Year Experience at a Single Center. Ann Emerg Med. 2013;62(3):252-258.' },
-  { num: 3, text: 'Graudins A, Lee HM, Druda D. Calcium Channel Blocker and Beta-Blocker Toxicity. Emerg Med Clin North Am. 2022;40(3):507-523.' },
+  { num: 3, text: 'Graudins A, Lee HM, Druda D. Calcium channel antagonist and beta-blocker overdose: antidotes and adjunct therapies. Br J Clin Pharmacol. 2016;81(3):453-461.' },
   { num: 4, text: 'Engebretsen KM, Kaczmarek KM, Morgan J, Holger JS. High-Dose Insulin Therapy in Beta-Blocker and Calcium Channel Blocker Poisoning. Clin Toxicol. 2011;49(4):277-283.' },
-  { num: 5, text: 'Mégarbane B, Karyo S, Baud FJ. The Role of Antidotes in the Management of Calcium Channel Blocker Poisoning. Presse Med. 2013;42(4 Pt 2):e99-e109.' },
+  { num: 5, text: 'Gosselin S, Hoegberg LC, Hoffman RS, et al. Evidence-based recommendations on the use of intravenous lipid emulsion therapy in poisoning. Clin Toxicol (Phila). 2016;54(10):899-923.' },
 ];

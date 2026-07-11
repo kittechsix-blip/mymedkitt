@@ -223,8 +223,8 @@ export const DYSPNEA_HUB_CITATIONS = [
     { num: 3, text: 'Lichtenstein DA, Meziere GA. Relevance of lung ultrasound in acute respiratory failure: the BLUE protocol. Chest. 2008;134(1):117-125.' },
     { num: 4, text: 'Konstantinides SV, Meyer G, Becattini C, et al. 2019 ESC Guidelines for diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41:543-603.' },
     { num: 5, text: 'Metlay JP, Waterer GW, Long AC, et al. ATS/IDSA Guideline for Community-Acquired Pneumonia. Am J Respir Crit Care Med. 2019;200:e45-e67.' },
-    { num: 6, text: 'Global Initiative for Chronic Obstructive Lung Disease (GOLD). Global Strategy for Prevention, Diagnosis and Management of COPD. 2025 Report.' },
-    { num: 7, text: 'Global Initiative for Asthma (GINA). Global Strategy for Asthma Management and Prevention. 2025 Update.' },
+    { num: 6, text: 'Global Initiative for Chronic Obstructive Lung Disease (GOLD). Global Strategy for Prevention, Diagnosis and Management of COPD. 2026 Report.' },
+    { num: 7, text: 'Global Initiative for Asthma (GINA). Global Strategy for Asthma Management and Prevention. 2026 Update.' },
     { num: 8, text: 'EMCrit/IBCC. SCAPE and acute decompensated heart failure physiology. https://emcrit.org/ibcc/' },
     { num: 9, text: 'EMCrit/IBCC. Acute dyspnea, respiratory failure, anaphylaxis, PE, pneumothorax, and dyshemoglobinemia reviews. https://emcrit.org/ibcc/' },
 ];

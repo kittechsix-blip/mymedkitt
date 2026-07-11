@@ -417,7 +417,7 @@ export const AORTIC_DISSECTION_CITATIONS: Citation[] = [
   { num: 2, text: 'Hagan PG, et al. The International Registry of Acute Aortic Dissection (IRAD): new insights into an old disease. JAMA. 2000;283(7):897-903.' },
   { num: 3, text: 'Klompas M. Does this patient have an acute thoracic aortic dissection? JAMA. 2002;287(17):2262-2272.' },
   { num: 4, text: 'Imamura H, et al. Acute aortic dissection presenting as neurological symptoms. Ann Vasc Dis. 2019;12(2):141-144.' },
-  { num: 5, text: 'Nazerian P, et al. The aortic dissection detection risk score: a novel concept and diagnostic tool. ACEP CORD-EM module, 2024.' },
+  { num: 5, text: 'Rogers AM, Hermann LK, Booher AM, et al. Sensitivity of the aortic dissection detection risk score, a novel guideline-based tool for identification of acute aortic dissection at initial presentation: results from the international registry of acute aortic dissection. Circulation. 2011;123(20):2213-2218.' },
   { num: 6, text: 'Nazerian P, et al. Diagnostic accuracy of the aortic dissection detection risk score plus D-dimer for acute aortic syndromes: the ADvISED prospective multicenter study. Circulation. 2018;137(3):250-258.' },
   { num: 7, text: 'Suzuki T, et al. Biomarkers of aortic diseases. Am Heart J. 2009;157(6):S62-S68.' },
   { num: 8, text: 'Goldstein SA, et al. Multimodality imaging of diseases of the thoracic aorta in adults: from the American Society of Echocardiography and the European Association of Cardiovascular Imaging. J Am Soc Echocardiogr. 2015;28(2):119-182.' },

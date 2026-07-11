@@ -138,7 +138,7 @@ export const MIGRAINE_NODES = [
         type: 'info',
         module: 3,
         title: 'Mild Migraine — Oral Therapy',
-        body: '**Mild migraine may respond to oral medications:**\n\n**First-Line Options:**\n- **NSAIDs:** Ibuprofen 400-800 mg, Naproxen 500-550 mg, Ketorolac 10 mg PO\n- **Acetaminophen:** 1000 mg (if NSAIDs contraindicated)\n- **Triptan:** Sumatriptan 50-100 mg, Rizatriptan 10 mg, Eletriptan 40 mg\n\n**Combination more effective than monotherapy:**\n- Sumatriptan 50-100 mg + Naproxen 500 mg (Treximet)\n\n**Antiemetic if nausea:**\n- Ondansetron 4-8 mg ODT\n- Metoclopramide 10 mg PO\n\n**If no improvement in 1-2 hours** → escalate to parenteral therapy.\n\n**Triptan Contraindications:**\n- CAD, prior MI/stroke\n- Uncontrolled hypertension\n- Hemiplegic or basilar migraine\n- MAO inhibitor use within 14 days',
+        body: '**Mild migraine may respond to oral medications:**\n\n**First-Line Options:**\n- **NSAIDs:** Ibuprofen 400-800 mg, Naproxen 500-550 mg, Ketorolac 10 mg PO\n- **Acetaminophen:** 1000 mg (if NSAIDs contraindicated)\n- **Triptan:** Sumatriptan 50-100 mg, Rizatriptan 10 mg, Eletriptan 40 mg\n\n**Combination more effective than monotherapy:**\n- Sumatriptan 50-100 mg + Naproxen 500 mg (or fixed-dose sumatriptan 85 mg/naproxen 500 mg tablet — Treximet)\n\n**Antiemetic if nausea:**\n- Ondansetron 4-8 mg ODT\n- Metoclopramide 10 mg PO\n\n**If no improvement in 1-2 hours** → escalate to parenteral therapy.\n\n**Triptan Contraindications:**\n- CAD, prior MI/stroke\n- Uncontrolled hypertension\n- Hemiplegic or basilar migraine\n- MAO inhibitor use within 14 days',
         citation: [3, 4],
         treatment: {
             firstLine: {
@@ -175,7 +175,7 @@ export const MIGRAINE_NODES = [
         type: 'info',
         module: 3,
         title: 'Moderate-Severe Migraine — IV Cocktail',
-        body: '**2025 AHS Guidelines — ED First-Line:**\n\n**Standard "Migraine Cocktail":**\n\n| Step | Medication | Dose | Notes |\n|------|------------|------|-------|\n| 1 | [Diphenhydramine](#/drug/diphenhydramine/acute dystonia) | 25-50 mg IV | Give FIRST (prevents akathisia) |\n| 2 | [Prochlorperazine](#/drug/prochlorperazine/nausea vomiting) | 10 mg IV over 15 min | **Level A — Must Offer** (upgraded 2025) |\n| 3 | [Ketorolac](#/drug/ketorolac/scd pain crisis) | 15-30 mg IV | 15 mg equally effective as 30 mg |\n| 4 | **NS Bolus** | 500-1000 mL | If dehydrated from vomiting |\n\n⚡ **2025 Update:** Prochlorperazine upgraded to Level A (from Level B). Preferred over metoclopramide when available.\n\n**Before discharge, add:**\n- [Dexamethasone](#/drug/dexamethasone/cerebral edema) 10 mg IV — prevents 48-72h recurrence (NNT=9)\n\n**Key Points:**\n- Slow infusion (15 min) reduces akathisia by 61%\n- Darken the room\n- Give all meds up front (more effective than stepwise)\n- Reassess at 30-60 min [1][3][4]',
+        body: '**2025 AHS Guidelines — ED First-Line:**\n\n**Standard "Migraine Cocktail":**\n\n| Step | Medication | Dose | Notes |\n|------|------------|------|-------|\n| 1 | [Diphenhydramine](#/drug/diphenhydramine/migraine cocktail) | 25-50 mg IV | Give FIRST (prevents akathisia) |\n| 2 | [Prochlorperazine](#/drug/prochlorperazine/migraine cocktail) | 10 mg IV over 15 min | **Level A — Must Offer** (upgraded 2025) |\n| 3 | [Ketorolac](#/drug/ketorolac/migraine) | 15-30 mg IV | 15 mg equally effective as 30 mg |\n| 4 | **NS Bolus** | 500-1000 mL | If dehydrated from vomiting |\n\n⚡ **2025 Update:** Prochlorperazine upgraded to Level A (from Level B). Preferred over metoclopramide when available.\n\n**Before discharge, add:**\n- [Dexamethasone](#/drug/dexamethasone/migraine) 10 mg IV — prevents 48-72h recurrence (NNT=9)\n\n**Key Points:**\n- Slow infusion (15 min) may reduce akathisia risk vs rapid bolus (evidence mixed across trials)\n- Darken the room\n- Give all meds up front (more effective than stepwise)\n- Reassess at 30-60 min [1][3][4]',
         citation: [1, 3, 4],
         calculatorLinks: [
             { id: 'migraine-tx-algo', label: 'Treatment Algorithm' },
@@ -215,7 +215,7 @@ export const MIGRAINE_NODES = [
         type: 'info',
         module: 3,
         title: 'Status Migrainosus (>72 hours)',
-        body: '**Status migrainosus = migraine lasting >72 hours**\n\n**Initial Management:**\n- Aggressive IV hydration (1-2L NS)\n- Standard migraine cocktail (prochlorperazine + diphenhydramine + ketorolac)\n- **Dexamethasone 10 mg IV** (reduces recurrence)\n\n**If standard cocktail fails:**\n\n**Dihydroergotamine (DHE) Protocol:**\n- Metoclopramide 10 mg IV (give 30 min before DHE)\n- DHE 1 mg IV over 3 min\n- Can repeat DHE 0.5-1 mg q8h x 24-48h if needed\n- **Contraindicated:** CAD, uncontrolled HTN, pregnancy, recent triptan use\n\n**Alternative:**\n- **Valproate** 500-1000 mg IV (Level C)\n- [Magnesium sulfate](#/drug/magnesium-sulfate/hypomagnesemia) 1-2 g IV\n\n**Consider admission if:**\n- Refractory to multiple agents\n- Severe dehydration\n- Unable to tolerate PO\n- Need for DHE protocol [1][3]',
+        body: '**Status migrainosus = migraine lasting >72 hours**\n\n**Initial Management:**\n- Aggressive IV hydration (1-2L NS)\n- Standard migraine cocktail (prochlorperazine + diphenhydramine + ketorolac)\n- **Dexamethasone 10 mg IV** (reduces recurrence)\n\n**If standard cocktail fails:**\n\n**Dihydroergotamine (DHE) Protocol:**\n- Metoclopramide 10 mg IV (give 30 min before DHE)\n- DHE 1 mg IV over 3 min\n- Can repeat DHE 0.5-1 mg q8h x 24-48h if needed\n- **Contraindicated:** CAD, uncontrolled HTN, pregnancy, recent triptan use\n\n**Alternative:**\n- **Valproate** 500-1000 mg IV (Level C)\n- [Magnesium sulfate](#/drug/magnesium-sulfate/migraine) 1-2 g IV\n\n**Consider admission if:**\n- Refractory to multiple agents\n- Severe dehydration\n- Unable to tolerate PO\n- Need for DHE protocol [1][3]',
         citation: [1, 3],
         treatment: {
             firstLine: {
@@ -282,7 +282,7 @@ export const MIGRAINE_NODES = [
         type: 'question',
         module: 4,
         title: 'Rescue Therapy Options',
-        body: '**First-line failed — rescue options:**\n\n**Level A (Must Offer):**\n- **Greater Occipital Nerve Block** — highly effective, no systemic side effects\n\n**Level B (Should Offer):**\n- **Sumatriptan SC** 6 mg — if no contraindications\n- **Supraorbital Nerve Block** — alternative to GON\n\n**Level C (May Offer):**\n- **Valproate IV** 500-1000 mg — third-line\n- **Chlorpromazine IV** 12.5 mg — alternative antiemetic\n- [Magnesium sulfate](#/drug/magnesium-sulfate/hypomagnesemia) 1-2 g IV — especially if aura\n\n**Emerging (Limited Evidence):**\n- [Ketamine](#/drug/ketamine/sub-dissociative analgesia) low-dose IV\n- **Lidocaine** IV infusion\n- **SPG block** (intranasal)\n\n**DO NOT USE:**\n- **Opioids** — Level A against (hydromorphone ineffective)\n- **IV Acetaminophen** — likely ineffective\n\nSelect rescue approach:',
+        body: '**First-line failed — rescue options:**\n\n**Level A (Must Offer):**\n- **Greater Occipital Nerve Block** — highly effective, no systemic side effects\n\n**Level B (Should Offer):**\n- **Sumatriptan SC** 6 mg — if no contraindications\n- **Supraorbital Nerve Block** — alternative to GON\n\n**Level C (May Offer):**\n- **Valproate IV** 500-1000 mg — third-line\n- **Chlorpromazine IV** 12.5 mg — alternative antiemetic\n- [Magnesium sulfate](#/drug/magnesium-sulfate/migraine) 1-2 g IV — especially if aura\n\n**Emerging (Limited Evidence):**\n- [Ketamine](#/drug/ketamine/sub-dissociative analgesia) low-dose IV\n- **Lidocaine** IV infusion\n- **SPG block** (intranasal)\n\n**DO NOT USE:**\n- **Opioids** — Level A against (hydromorphone ineffective)\n- **IV Acetaminophen** — likely ineffective\n\nSelect rescue approach:',
         citation: [1, 3, 4],
         options: [
             {
@@ -521,11 +521,11 @@ export const MIGRAINE_MODULE_LABELS = [
 ];
 export const MIGRAINE_CRITICAL_ACTIONS = [
     { text: 'Ottawa SAH Rule: sudden-onset worst headache, thunderclap onset, age ≥40 with new headache = CT + LP if negative', nodeId: 'migraine-red-flags' },
-    { text: 'First-line: Prochlorperazine 10 mg IV + metoclopramide 10 mg IV + ketorolac 30 mg IV + NS 1L bolus', nodeId: 'migraine-first-line' },
-    { text: 'Magnesium 2g IV over 15 min (especially for aura)', nodeId: 'migraine-first-line' },
-    { text: 'Avoid opioids (rebound headache, medication overuse)', nodeId: 'migraine-tx-algo' },
-    { text: 'Greater occipital nerve block for refractory migraine (0.5% bupivacaine 3-5 mL)', nodeId: 'migraine-gon-block' },
-    { text: 'Dexamethasone 10 mg IV/IM to prevent recurrence within 72h', nodeId: 'migraine-tx-algo' },
+    { text: 'First-line: Diphenhydramine 25-50 mg IV (give FIRST) + Prochlorperazine 10 mg IV over 15 min + Ketorolac 15-30 mg IV + NS 500-1000 mL bolus if dehydrated', nodeId: 'migraine-first-line' },
+    { text: 'Magnesium sulfate 1-2 g IV over 15-30 min (especially for aura)', nodeId: 'migraine-status' },
+    { text: 'Avoid opioids (rebound headache, medication overuse)', nodeId: 'migraine-rescue' },
+    { text: 'Greater occipital nerve block for refractory migraine (2-3 mL 0.5% bupivacaine per side)', nodeId: 'migraine-gon-block' },
+    { text: 'Dexamethasone 10 mg IV/IM to prevent recurrence within 72h', nodeId: 'migraine-disposition' },
     { text: 'Triptans contraindicated in basilar/hemiplegic migraine, uncontrolled HTN, recent stroke/MI', nodeId: 'migraine-triptan-rescue' },
     { text: 'Admit for thunderclap onset, new neurologic deficits, or inability to exclude secondary cause', nodeId: 'migraine-disposition' },
     { text: 'Discharge with rescue triptan (sumatriptan 100 mg) and follow-up with neurology', nodeId: 'migraine-disposition' },

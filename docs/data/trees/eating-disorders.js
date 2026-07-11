@@ -40,7 +40,7 @@ export const EATING_DISORDERS_NODES = [
         type: 'info',
         module: 1,
         title: 'Anorexia Nervosa - Vital Sign Red Flags',
-        body: '**Anorexia Nervosa** causes adaptive physiological changes that can rapidly decompensate [1][2].\n\n[MARSIPAN Risk Assessment](#/calculator/marsipan-risk)\n\n**Vital Sign Red Flags (MARSIPAN 2022):**\n\n| Finding | High Risk Threshold |\n|---------|--------------------|\n| **Heart Rate** | <40 bpm (or <50 with QTc >450ms) |\n| **Blood Pressure** | Systolic <90 mmHg |\n| **Orthostatic Drop** | SBP drop >20 mmHg or HR rise >30 bpm |\n| **Temperature** | <35.5\u00b0C (95.9\u00b0F) |\n| **BMI** | <13 kg/m\u00b2 (extreme), <15 kg/m\u00b2 (high risk) |\n\n**Physical Exam Findings:**\n- Lanugo (fine downy hair)\n- Muscle wasting, loss of subcutaneous fat\n- Acrocyanosis, cold extremities\n- Peripheral edema (hypoalbuminemia)\n- Russell sign (knuckle calluses from purging)\n\n**ECG abnormalities:**\n- Sinus bradycardia\n- QTc prolongation (>450ms = high risk)\n- U waves, ST changes',
+        body: '**Anorexia Nervosa** causes adaptive physiological changes that can rapidly decompensate [1][2].\n\n[MARSIPAN Risk Assessment](#/calculator/marsipan-risk)\n\n**Vital Sign Red Flags (MEED 2022, RCPsych CR233):**\n\n| Finding | High Risk Threshold |\n|---------|--------------------|\n| **Heart Rate** | <40 bpm (40-50 = high concern) |\n| **QTc** | >460ms (female) / >450ms (male) |\n| **Blood Pressure** | Systolic <90 mmHg |\n| **Orthostatic Drop** | SBP drop >20 mmHg or HR rise >30 bpm |\n| **Temperature** | <35.5\u00b0C (95.9\u00b0F) |\n| **BMI** | <13 kg/m\u00b2 (extreme), <15 kg/m\u00b2 (high risk); peds use %median BMI <70% |\n\n**Physical Exam Findings:**\n- Lanugo (fine downy hair)\n- Muscle wasting, loss of subcutaneous fat\n- Acrocyanosis, cold extremities\n- Peripheral edema (hypoalbuminemia)\n- Russell sign (knuckle calluses from purging)\n\n**ECG abnormalities:**\n- Sinus bradycardia\n- QTc prolongation (>450ms = high risk)\n- U waves, ST changes',
         citation: [1, 2],
         calculatorLinks: [
             { id: 'qtc-calculator', label: 'QTc Calculator' },
@@ -439,7 +439,7 @@ export const EATING_DISORDERS_CRITICAL_ACTIONS = [
 ];
 export const EATING_DISORDERS_CITATIONS = [
     { num: 1, text: 'Mehler PS, Andersen AE. Eating Disorders: A Guide to Medical Care and Complications. 3rd ed. Johns Hopkins University Press. 2017.' },
-    { num: 2, text: 'Royal College of Psychiatrists. MARSIPAN: Management of Really Sick Patients with Anorexia Nervosa. 2nd ed. CR189. 2022.' },
+    { num: 2, text: 'Royal College of Psychiatrists. Medical Emergencies in Eating Disorders (MEED): Guidance on Recognition and Management. CR233. 2022. (Replaced MARSIPAN CR189, 2014.)' },
     { num: 3, text: 'American Psychiatric Association. Diagnostic and Statistical Manual of Mental Disorders (DSM-5-TR). 5th ed. 2022.' },
     { num: 4, text: 'National Institute for Health and Care Excellence (NICE). Eating Disorders: Recognition and Treatment. NG69. 2017 (updated 2020).' },
     { num: 5, text: 'American Psychiatric Association. Practice Guideline for the Treatment of Patients with Eating Disorders. 3rd ed. 2023.' },

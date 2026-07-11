@@ -289,7 +289,7 @@ export const TRAUMATIC_ARREST_CITATIONS: Citation[] = [
   { num: 2, text: 'Seamon MJ, Haut ER, Van Arendonk K, et al. An evidence-based approach to patient selection for emergency department thoracotomy: EAST practice management guideline. J Trauma Acute Care Surg. 2015;79(1):159-173.' },
   { num: 3, text: 'Burlew CC, Moore EE, Moore FA, et al. Western Trauma Association Critical Decisions in Trauma: Resuscitative thoracotomy. J Trauma Acute Care Surg. 2012;73(6):1359-1363.' },
   { num: 4, text: 'American College of Surgeons Committee on Trauma. ATLS: Advanced Trauma Life Support Student Course Manual. 10th ed. Chicago, IL: American College of Surgeons; 2018.' },
-  { num: 5, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
+  { num: 5, text: 'Aseni P, Rizzetto F, Grande AM, Bini R, Sammartano F, Vezzulli F, Vertemati M. Emergency department resuscitative thoracotomy: Indications, surgical procedure and outcome. A narrative review. Am J Surg. 2021;221(5):1082-1092.' },
   { num: 6, text: 'Coccolini F, Cremonini C, Moore EE, et al. Thoracic trauma WSES-AAST guidelines. World J Emerg Surg. 2025;20:78.' },
   { num: 7, text: 'Millin MG, Galvagno SM, Khandker SR, et al. Withholding and termination of resuscitation of adult cardiopulmonary arrest secondary to trauma: NAEMSP/ACS-COT position statements and resource document. J Trauma Acute Care Surg. 2013;75(3):459-467.' },
 ];

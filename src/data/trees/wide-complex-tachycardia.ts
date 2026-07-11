@@ -81,7 +81,7 @@ export const WIDE_COMPLEX_TACHYCARDIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Hyperkalemic WCT',
-    body: '**Treatment priority: membrane stabilization**\n\n**Calcium (immediate):**\n• Calcium gluconate 3g IV over 3 min\n• OR Calcium chloride 1g IV (central line preferred)\n• May repeat in 5 min if no ECG improvement\n\n**Shift potassium:**\n• Regular insulin 10 units IV + D50 50mL IV\n• Albuterol 10-20mg nebulized\n• Sodium bicarbonate 50-100 mEq IV (if acidemic)\n\n**Eliminate potassium:**\n• Emergent hemodialysis if severe (K >7) or refractory\n• Kayexalate is too slow for emergency\n\n→ See [Potassium](#/tree/potassium) for full protocol',
+    body: '**Treatment priority: membrane stabilization**\n\n**Calcium (immediate):**\n• Calcium gluconate 3g IV over 10 min\n• OR Calcium chloride 1g IV (central line preferred)\n• May repeat in 5 min if no ECG improvement\n\n**Shift potassium:**\n• Regular insulin 10 units IV + D50 50mL IV\n• Albuterol 10-20mg nebulized\n• Sodium bicarbonate 50-100 mEq IV (if acidemic)\n\n**Eliminate potassium:**\n• Emergent hemodialysis if severe (K >7) or refractory\n• Kayexalate is too slow for emergency\n\n→ See [Potassium](#/tree/potassium) for full protocol',
     citation: [3],
     next: 'wct-end',
 

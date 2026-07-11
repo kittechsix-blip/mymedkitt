@@ -157,7 +157,7 @@ export const MESENTERIC_ISCHEMIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Resuscitation — The 11 As',
-    body: '[The 11 As Checklist](#/info/ami-11as)\n\n**Start immediately while awaiting definitive treatment:**\n\n1. **Aggressive fluids** — LR boluses, blood products PRN\n2. **Address metabolic derangements** — correct acidosis, K+, Mg2+\n3. **Antibiotics** — [Pip-tazo 4.5g IV q6h](#/drug/piperacillin-tazobactam/ami)\n4. **Anticoagulation** — [Heparin](#/drug/heparin/ami) 80 U/kg bolus → 18 U/kg/hr\n5. **Analgesia** — IV opioids (do NOT withhold)\n6. **Avoid vasopressors** — worsen ischemia\n7. **Alleviate distension** — NG tube\n8. **Avoid hyperoxia** — target SpO2 96-99%\n9. **Advance directives** — discuss GOC early\n10. **Abdominal compartment syndrome** — monitor bladder pressures\n11. **All the help** — Vascular, General Surgery, IR, ICU',
+    body: '[The 11 As Checklist](#/info/ami-11as)\n\n**Start immediately while awaiting definitive treatment:**\n\n1. **Aggressive fluids** — LR boluses, blood products PRN\n2. **Address metabolic derangements** — correct acidosis, K+, Mg2+\n3. **Antibiotics** — [Pip-tazo 4.5g IV q6h](#/drug/piperacillin-tazobactam/ami)\n4. **Anticoagulation** — [Heparin](#/drug/ufh/ami) 80 U/kg bolus → 18 U/kg/hr\n5. **Analgesia** — IV opioids (do NOT withhold)\n6. **Avoid vasopressors** — worsen ischemia\n7. **Alleviate distension** — NG tube\n8. **Avoid hyperoxia** — target SpO2 96-99%\n9. **Advance directives** — discuss GOC early\n10. **Abdominal compartment syndrome** — monitor bladder pressures\n11. **All the help** — Vascular, General Surgery, IR, ICU',
     citation: [2, 4, 5],
     next: 'ami-anticoag',
 
@@ -169,7 +169,7 @@ export const MESENTERIC_ISCHEMIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Anticoagulation — Start Early',
-    body: '**Unfractionated Heparin (preferred):**\n\n• **Bolus:** [Heparin](#/drug/heparin/ami) 80 U/kg IV (max 5000 U)\n• **Infusion:** 18 U/kg/hr\n• **Goal aPTT:** 40-60 seconds\n\n**Why heparin:**\n• Can be rapidly reversed with protamine if surgery needed\n• Early anticoagulation improves survival\n• Prevents clot propagation\n\n🛑 **Do NOT delay anticoagulation waiting for surgery**\n\nStart immediately; it can be reversed if OR needed urgently.',
+    body: '**Unfractionated Heparin (preferred):**\n\n• **Bolus:** [Heparin](#/drug/ufh/ami) 80 U/kg IV (max 5000 U)\n• **Infusion:** 18 U/kg/hr\n• **Goal aPTT:** 40-60 seconds\n\n**Why heparin:**\n• Can be rapidly reversed with protamine if surgery needed\n• Early anticoagulation improves survival\n• Prevents clot propagation\n\n🛑 **Do NOT delay anticoagulation waiting for surgery**\n\nStart immediately; it can be reversed if OR needed urgently.',
     citation: [2, 4],
     next: 'ami-abx',
 
@@ -356,10 +356,10 @@ export const MESENTERIC_ISCHEMIA_MODULE_LABELS = [
 // =====================================================================
 
 export const MESENTERIC_ISCHEMIA_TOOLBAR_CONFIG = {
-  defaultTools: ['heparin', 'piperacillin-tazobactam', 'ami-11as', 'ami-ct-findings', 'lactate-clearance'],
+  defaultTools: ['ufh', 'piperacillin-tazobactam', 'ami-11as', 'ami-ct-findings', 'lactate-clearance'],
   contextualTools: {
     'ami-nomi': ['papaverine'],
-    'ami-anticoag': ['heparin'],
+    'ami-anticoag': ['ufh'],
   },
 };
 

@@ -89,11 +89,11 @@ export const CORNEAL_FB_REMOVAL_NODES: DecisionNode[] = [
     module: 1,
     title: 'Open Globe — STOP, Do NOT Remove',
     body: '**Seidel positive or open globe suspected. Hands off the eye.** Any pressure (including the eyelid retractor or pressing for slit lamp exam) can extrude intraocular contents.',
-    recommendation: '**Immediate actions:**\n1. **Rigid eye shield** (not a patch) — Fox shield or commercial shield. No pressure on the globe.\n2. NPO, head up 30°, anti-emetic (vomiting raises IOP) — [Ondansetron](#/drug/ondansetron/general) 4mg IV\n3. Pain control with IV analgesia — avoid topical drops\n4. **Tetanus** if not up to date\n5. **IV antibiotics**: [Vancomycin](#/drug/vancomycin/open-globe) 25mg/kg IV + [Ceftriaxone](#/drug/ceftriaxone/open-globe) 2g IV (or [Moxifloxacin](#/drug/moxifloxacin/open-globe) 400mg IV if PCN/cephalosporin allergy) — Gram-positive and Gram-negative endophthalmitis coverage\n6. **Emergent ophthalmology consult** for OR\n7. CT orbit (thin cuts, no contrast) to characterize injury, but do not delay ophthalmology call\n\n**Cross-link:** [Globe Rupture / Open Globe](#/tree/globe-rupture)',
+    recommendation: '**Immediate actions:**\n1. **Rigid eye shield** (not a patch) — Fox shield or commercial shield. No pressure on the globe.\n2. NPO, head up 30°, anti-emetic (vomiting raises IOP) — [Ondansetron](#/drug/ondansetron/general) 4mg IV\n3. Pain control with IV analgesia — avoid topical drops\n4. **Tetanus** if not up to date\n5. **IV antibiotics**: [Vancomycin](#/drug/vancomycin/open-globe) 15mg/kg IV (max 1.5g) + [Ceftriaxone](#/drug/ceftriaxone/open-globe) 2g IV (ceftazidime 50mg/kg, max 2g, is the guideline-preferred third-gen cephalosporin for anti-pseudomonal cover; or [Moxifloxacin](#/drug/moxifloxacin/open-globe) 400mg IV if PCN/cephalosporin allergy) — Gram-positive and Gram-negative endophthalmitis coverage\n6. **Emergent ophthalmology consult** for OR\n7. CT orbit (thin cuts, no contrast) to characterize injury, but do not delay ophthalmology call\n\n**Cross-link:** [Globe Rupture / Open Globe](#/tree/globe-rupture)',
     treatment: {
       firstLine: {
         drug: 'Rigid eye shield + IV antibiotics',
-        dose: 'Vancomycin 25mg/kg IV + Ceftriaxone 2g IV',
+        dose: 'Vancomycin 15mg/kg IV (max 1.5g) + Ceftriaxone 2g IV',
         route: 'IV',
         frequency: 'Once in ED, continue per ophthalmology',
         duration: 'Until OR',

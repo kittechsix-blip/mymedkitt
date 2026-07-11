@@ -466,7 +466,7 @@ export const ACID_BASE_NODES = [
         type: 'question',
         module: 5,
         title: 'Strong Ion Gap (Unmeasured Anions)',
-        body: '**SIG = Base Deficit + (SID − 38) + 2.5 × (4.2 − Albumin g/dL) − Lactate**\n\nAlternative (Story simplified): **Other Ions = BE − (Na-Cl−35) − (1−Lactate) − 2.5×(4.2−Albumin)**\n\nIf no base excess/deficit is available: use (24.2 − HCO3) as a substitute for base deficit.\n\n**SIG > 2** indicates clinically important **unmeasured anions** are present beyond what Na-Cl, lactate, and albumin can explain. [11]\n\nSee [Stewart Approach Explained](#/info/ab-stewart-explained) for the albumin weak acid effect.',
+        body: '**SIG = Base Deficit + (SID − 35) + 2.5 × (4.2 − Albumin g/dL) − Lactate**\n\nAlternative (Story simplified): **Other Ions = BE − (Na-Cl−35) − (1−Lactate) − 2.5×(4.2−Albumin)**\n\nIf no base excess/deficit is available: use (24.2 − HCO3) as a substitute for base deficit.\n\n**SIG > 2** indicates clinically important **unmeasured anions** are present beyond what Na-Cl, lactate, and albumin can explain. [11]\n\nSee [Stewart Approach Explained](#/info/ab-stewart-explained) for the albumin weak acid effect.',
         calculatorLinks: [{ id: 'stewart-sig', label: 'Stewart SID/SIG Calculator' }],
         citation: [10, 11],
         options: [
@@ -520,7 +520,7 @@ export const ACID_BASE_NODES = [
         type: 'info',
         module: 6,
         title: 'Treatment Considerations',
-        body: '**Sodium Bicarbonate:**\n[Sodium Bicarbonate](#/drug/sodium-bicarbonate/metabolic acidosis) — indications, dosing, and evidence.\n\n**Indications for bicarbonate:** [12][17]\n• pH ≤ 7.20 with moderate-to-severe AKI (BICAR-ICU: NNT 6 for 28-day mortality)\n• TCA overdose (sodium channel blockade)\n• Salicylate toxicity (urinary alkalinization)\n• Life-threatening hyperkalemia\n• Bicarbonate-losing conditions (severe diarrhea, RTA)\n\n**Note:** BICAR-ICU enrolled pH ≤ 7.20 + AKIN 2-3. The pH < 6.9 threshold is ADA guidance for DKA specifically.\n\n**NOT recommended:** [3][17]\n• Routine cardiac arrest or CPR\n• Routine DKA (unless pH < 6.9 per ADA)\n• Routine lactic acidosis (no hemodynamic benefit proven)\n\n[Fluid Selection Guide](#/info/ab-fluids-guide) — NS vs balanced crystalloids.',
+        body: '**Sodium Bicarbonate:**\n[Sodium Bicarbonate](#/drug/sodium-bicarbonate/metabolic acidosis) — indications, dosing, and evidence.\n\n**Indications for bicarbonate:** [12][17]\n• pH ≤ 7.20 with moderate-to-severe AKI (BICAR-ICU: NNT 6 for composite death/organ-failure outcome at day 28, in the AKI subgroup)\n• TCA overdose (sodium channel blockade)\n• Salicylate toxicity (urinary alkalinization)\n• Life-threatening hyperkalemia\n• Bicarbonate-losing conditions (severe diarrhea, RTA)\n\n**Note:** BICAR-ICU enrolled pH ≤ 7.20 + AKIN 2-3. The pH < 6.9 threshold is ADA guidance for DKA specifically.\n\n**NOT recommended:** [3][17]\n• Routine cardiac arrest or CPR\n• Routine DKA (unless pH < 6.9 per ADA)\n• Routine lactic acidosis (no hemodynamic benefit proven)\n\n[Fluid Selection Guide](#/info/ab-fluids-guide) — NS vs balanced crystalloids.',
         calculatorLinks: [
             { id: 'anion-gap', label: 'Anion Gap' },
             { id: 'stewart-sig', label: 'Stewart SID/SIG' },
@@ -573,12 +573,12 @@ export const ACID_BASE_MODULE_LABELS = [
 // -------------------------------------------------------------------
 export const ACID_BASE_CRITICAL_ACTIONS = [
     { text: 'Stepwise approach: pH → PCO2 compensation → Anion gap → Delta-delta → Osmolar gap', nodeId: 'ab-trad-ph' },
-    { text: 'Anion gap = Na - (Cl + HCO3), normal 8-12. Elevated AG >12 = GOLDMARK mnemonic', nodeId: 'ab-met-acid' },
+    { text: 'Anion gap = Na - (Cl + HCO3), normal 8-12. Elevated AG >12 = MUDPILES mnemonic', nodeId: 'ab-met-acid' },
     { text: 'Delta-delta ratio = ΔAG / ΔHCO3. Ratio <1 = non-AG acidosis, 1-2 = pure AG acidosis, >2 = concurrent metabolic alkalosis', nodeId: 'ab-delta' },
     { text: 'Winter formula for respiratory compensation: Expected PCO2 = 1.5(HCO3) + 8 ± 2', nodeId: 'ab-winters' },
     { text: 'Osmolar gap >10 suggests toxic alcohol (methanol, ethylene glycol, isopropanol)', nodeId: 'ab-stew-osm' },
     { text: 'Urine anion gap for non-AG metabolic acidosis: UAG = (Na + K) - Cl. Positive = RTA, Negative = GI losses', nodeId: 'ab-nagma' },
-    { text: 'Stewart approach: SID, A- tot (weak acids), PCO2. SID <40 = acidosis, >40 = alkalosis', nodeId: 'ab-stew-assess' },
+    { text: 'Stewart approach: SID, A- tot (weak acids), PCO2. SID <35 = acidosis, >38 = alkalosis', nodeId: 'ab-stew-assess' },
     { text: 'Treat underlying cause, NOT the pH (bicarbonate indicated if pH ≤7.20 + AKI per BICAR-ICU, or pH <6.9 in DKA)', nodeId: 'ab-treatment' },
     { text: 'VBG sufficient for most ED acid-base assessment (pH 0.04 lower than ABG)', nodeId: 'ab-start' },
     { text: 'Mixed disorders common: check for compensation, delta-delta, and clinical picture', nodeId: 'ab-mixed-result' },

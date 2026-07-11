@@ -264,7 +264,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
     module: 3,
     title: 'Post-PCI P2Y12 Selection',
     body: 'Select P2Y12 inhibitor for 12-month DAPT.\nSee [P2Y12 Selection Guide](#/info/nstemi-antiplatelet-cx)\n\n**Preferred:** [Ticagrelor](#/drug/ticagrelor) 90 mg BID\n\u2022 PLATO trial: reduced CV death/MI/stroke vs clopidogrel (NNT 54)\n\u2022 Aspirin \u2264100 mg/day required\n\n**High ischemic risk (diabetes, stent thrombosis):** [Prasugrel](#/drug/prasugrel) 10 mg daily\n\u2022 TRITON-TIMI 38: more potent, but more bleeding\n\u2022 CONTRAINDICATED if prior stroke/TIA\n\u2022 Avoid if age \u226575 or weight <60 kg\n\n**High bleeding risk or on OAC:** [Clopidogrel](#/drug/clopidogrel/acs) 75 mg daily\n\u2022 Preferred for triple therapy (OAC + DAPT)\n\u2022 Least bleeding risk of the three',
-    citation: [1, 6, 7, 8],
+    citation: [1, 6, 7],
     treatment: {
       firstLine: {
         drug: 'Ticagrelor',
@@ -398,7 +398,7 @@ export const NSTEMI_NODES: DecisionNode[] = [
         route: 'PO',
         frequency: 'Once daily',
         duration: 'Indefinite',
-        notes: 'Use if ACE inhibitor intolerant (cough). VALIANT trial showed equivalence to captopril post-MI.',
+        notes: 'Use if ACE inhibitor intolerant (cough). Note: VALIANT studied valsartan (not losartan) and showed valsartan non-inferior to captopril post-MI; losartan-specific post-MI data (OPTIMAAL) showed a non-significant trend favoring captopril, not established equivalence.',
       },
       monitoring: 'Cr and K+ 1-2 weeks after initiation/titration. Monitor for hypotension, hyperkalemia, cough (ACEi).',
     },
@@ -527,10 +527,10 @@ export const NSTEMI_CRITICAL_ACTIONS = [
   { text: 'Choose ONE anticoagulant and do NOT switch (switching increases bleeding)', nodeId: 'nstemi-initial-anticoag' },
   { text: 'Enoxaparin 1 mg/kg SC q12h preferred (reduce to daily if CrCl 15-30)', nodeId: 'nstemi-initial-anticoag' },
   { text: 'UFH if CrCl <30 or PCI within 24h (60 units/kg bolus, max 4000; then 12 units/kg/hr, max 1000)', nodeId: 'nstemi-initial-anticoag' },
-  { text: 'Emergent cath <2h if shock, refractory chest pain, VT/VF, acute MR/VSD, or heart failure', nodeId: 'nstemi-emergent' },
-  { text: 'TIMI score ≥3 = early invasive strategy within 24h (TIMI 5-7 = very high risk)', nodeId: 'nstemi-timi-stratify' },
+  { text: 'Emergent cath <2h if shock, refractory chest pain, VT/VF, acute MR/VSD, or heart failure', nodeId: 'nstemi-risk-stratify' },
+  { text: 'TIMI 4-7 (high risk) = early invasive strategy within 24h; TIMI 3 (intermediate) = delayed invasive strategy in 25-72h', nodeId: 'nstemi-timi-stratify' },
   { text: 'Ticagrelor 180 mg OR prasugrel 60 mg loading (NOT clopidogrel unless contraindications)', nodeId: 'nstemi-early-invasive' },
-  { text: 'Avoid prasugrel if prior stroke/TIA, age >75, or weight <60 kg', nodeId: 'nstemi-early-invasive' },
+  { text: 'Avoid prasugrel if prior stroke/TIA, age >75, or weight <60 kg', nodeId: 'nstemi-post-pci' },
   { text: 'Morphine only for refractory pain (may increase mortality)', nodeId: 'nstemi-start' },
   { text: 'Stat echo for suspected mechanical complication (acute MR, VSD, free wall rupture)', nodeId: 'nstemi-emergent' },
 ];

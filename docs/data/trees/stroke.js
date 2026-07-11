@@ -230,7 +230,7 @@ export const STROKE_NODES = [
         module: 3,
         title: 'EVT Eligibility (6\u201324h)',
         body: '**Anterior circulation (DAWN/DEFUSE-3 criteria):**\n\u2022 NIHSS \u22656\n\u2022 ICA or M1 occlusion on CTA\n\u2022 Small ischemic core on CT perfusion (<70 mL at 6\u201316h; <21 mL at 16\u201324h)\n\u2022 Large penumbra with mismatch ratio >1.8\n\n**Posterior circulation (basilar artery):**\n\u2022 NIHSS \u226510\n\u2022 Basilar artery occlusion on CTA\n\u2022 PC-ASPECTS \u22656\n\u2022 Up to 24h from onset (ATTENTION trial)',
-        citation: [6, 7, 15],
+        citation: [6, 7, 8],
         options: [
             {
                 label: 'Meets EVT criteria',
@@ -321,7 +321,7 @@ export const STROKE_NODES = [
         type: 'result',
         module: 4,
         title: 'Dual Antiplatelet Therapy (DAPT)',
-        body: '**Loading (Day 1):**\n\u2022 [Aspirin](#/drug/aspirin/stroke) 325 mg + [Clopidogrel](#/drug/clopidogrel/stroke) 300 mg\n\n**Maintenance:**\n\u2022 Aspirin 81 mg + Clopidogrel 75 mg daily \u00D7 21 days\n\u2022 Then single antiplatelet (either agent)\n\n**Alternative (CYP2C19 poor metabolizer):**\n\u2022 [Ticagrelor](#/drug/ticagrelor/stroke) 180 mg load + Aspirin 325 mg, then Ticagrelor 90 mg BID + Aspirin 81 mg \u00D7 30 days (CHANCE-2 supports ticagrelor preference in CYP2C19 LOF carriers)\n\nPOINT trial: DAPT (dual antiplatelet therapy) reduced 90-day stroke from 6.5% to 5.0% (NNT 38). Duration beyond 21 days increases bleeding without additional benefit.\n\nAlso initiate statin (high-intensity) and complete stroke workup (telemetry, echo, vascular imaging).',
+        body: '**Loading (Day 1):**\n\u2022 [Aspirin](#/drug/aspirin/stroke) 325 mg + [Clopidogrel](#/drug/clopidogrel/stroke) 300 mg\n\n**Maintenance:**\n\u2022 Aspirin 81 mg + Clopidogrel 75 mg daily \u00D7 21 days\n\u2022 Then single antiplatelet (either agent)\n\n**Alternative (CYP2C19 poor metabolizer):**\n\u2022 [Ticagrelor](#/drug/ticagrelor/stroke) 180 mg load + Aspirin 300 mg, then Ticagrelor 90 mg BID \u00D7 90 days total + Aspirin 81 mg \u00D7 21 days only \u2014 aspirin discontinued after day 21, ticagrelor continues alone through day 90 (CHANCE-2 protocol)\n\nPOINT trial: DAPT (dual antiplatelet therapy) reduced 90-day stroke from 6.5% to 5.0% (NNT 67). Duration beyond 21 days increases bleeding without additional benefit.\n\nAlso initiate statin (high-intensity) and complete stroke workup (telemetry, echo, vascular imaging).',
         recommendation: 'Start DAPT immediately. Limit duration to 21 days. Add high-intensity statin. Complete stroke etiology workup.',
         confidence: 'definitive',
         citation: [3, 9, 10, 12],
@@ -336,11 +336,11 @@ export const STROKE_NODES = [
             },
             alternative: {
                 drug: 'Ticagrelor + Aspirin',
-                dose: 'Load: Ticagrelor 180 mg + Aspirin 325 mg; Maintenance: Ticagrelor 90 mg + Aspirin 81 mg',
+                dose: 'Load: Ticagrelor 180 mg + Aspirin 300 mg; Days 2-21: Ticagrelor 90 mg BID + Aspirin 81 mg; Days 22-90: Ticagrelor 90 mg BID alone',
                 route: 'PO',
-                frequency: 'Ticagrelor BID, Aspirin daily',
-                duration: '30 days',
-                notes: 'For CYP2C19 poor metabolizers who cannot activate clopidogrel',
+                frequency: 'Ticagrelor BID, Aspirin daily (days 1-21 only)',
+                duration: '90 days total (aspirin discontinued after day 21)',
+                notes: 'For CYP2C19 poor metabolizers who cannot activate clopidogrel (CHANCE-2 protocol)',
             },
             monitoring: 'Monitor for bleeding (GI, intracranial). Complete stroke etiology workup. Add high-intensity statin.',
         },

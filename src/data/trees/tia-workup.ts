@@ -167,7 +167,7 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Canadian TIA Score (Preferred)',
-    body: '**13 Variables - Superior to ABCD2**\n\n**Clinical (9):**\n| Variable | Points |\n|----------|--------|\n| First TIA ever | +2.3 |\n| Duration >=10 min | +2.0 |\n| History of carotid stenosis | +2.0 |\n| On antiplatelet therapy | +1.5 |\n| Gait disturbance | +1.3 |\n| Unilateral weakness | +1.2 |\n| History of vertigo | -0.9 |\n| DBP >=110 mmHg | +0.6 |\n| Dysarthria or aphasia | +0.8 |\n\n**Investigation (4):**\n| Variable | Points |\n|----------|--------|\n| Afib on ECG | +1.2 |\n| Infarction on CT | +1.5 |\n| Platelets >=400 | +1.5 |\n| Glucose >=270 mg/dL | +1.0 |\n\n**7-Day Risk:**\n| Category | Score | Risk |\n|----------|-------|------|\n| Minimal | <-1 | <0.5% |\n| Low | -1 to 3 | 0.5-2.5% |\n| Medium | 4-7 | 2.3% |\n| High | 8-13 | 5.9% |\n| Critical | >13 | >10% |\n\n**Validation:** AUC 0.70 vs ABCD2 0.60 (p<0.001) in 7,607 patients. [4]',
+    body: '**13 Variables - Superior to ABCD2**\n\n**Clinical (9):**\n| Variable | Points |\n|----------|--------|\n| First TIA ever | +2 |\n| Duration >=10 min | +2 |\n| History of carotid stenosis | +2 |\n| On antiplatelet therapy | +3 |\n| Gait disturbance | +1 |\n| Unilateral weakness | +1 |\n| History of vertigo | -3 |\n| DBP >=110 mmHg | +3 |\n| Dysarthria or aphasia | +1 |\n\n**Investigation (4):**\n| Variable | Points |\n|----------|--------|\n| Afib on ECG | +2 |\n| Infarction on CT | +1 |\n| Platelets >=400 | +2 |\n| Glucose >=270 mg/dL | +3 |\n\n**7-Day Risk:**\n| Category | Score | Risk |\n|----------|-------|------|\n| Low | <=3 | 0.5% |\n| Medium | 4-8 | 2.3% |\n| High | >=9 | 5.9% |\n\n**Validation:** AUC 0.70 vs ABCD2 0.60 (p<0.001) in 7,607 patients. [4]',
     citation: [4],
     calculatorLinks: [
       { id: 'tia-canadian-score', label: 'Canadian TIA Calculator' },
@@ -231,7 +231,7 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Laboratory Studies',
-    body: '**Required Labs:**\n\n| Test | Rationale |\n|------|-----------|\n| **Fingerstick glucose** | Hypoglycemia mimic |\n| **CBC** | Anemia, thrombocytosis, polycythemia |\n| **BMP/CMP** | Electrolytes, renal function (for contrast) |\n| **PT/INR, PTT** | Baseline before anticoagulation |\n| **Lipid panel** | Guides statin therapy |\n| **HbA1c** | Undiagnosed diabetes |\n\n**Consider:**\n| Test | When |\n|------|------|\n| **Troponin** | Cardiac symptoms, concern for MI |\n| **TSH** | Afib detected |\n| **Hypercoagulable panel** | Young patient, no risk factors, cryptogenic |\n\n**Key Finding for Canadian TIA Score:**\n- Glucose >=270 mg/dL = +1.0 points\n- Platelets >=400 = +1.5 points [1][2]',
+    body: '**Required Labs:**\n\n| Test | Rationale |\n|------|-----------|\n| **Fingerstick glucose** | Hypoglycemia mimic |\n| **CBC** | Anemia, thrombocytosis, polycythemia |\n| **BMP/CMP** | Electrolytes, renal function (for contrast) |\n| **PT/INR, PTT** | Baseline before anticoagulation |\n| **Lipid panel** | Guides statin therapy |\n| **HbA1c** | Undiagnosed diabetes |\n\n**Consider:**\n| Test | When |\n|------|------|\n| **Troponin** | Cardiac symptoms, concern for MI |\n| **TSH** | Afib detected |\n| **Hypercoagulable panel** | Young patient, no risk factors, cryptogenic |\n\n**Key Finding for Canadian TIA Score:**\n- Glucose >=270 mg/dL = +3 points\n- Platelets >=400 = +2 points [1][2]',
     citation: [1, 2],
     next: 'tia-brain-imaging',
 
@@ -333,7 +333,7 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Large Artery Atherosclerosis',
-    body: '**Carotid Stenosis Management:**\n\n| Stenosis | Management |\n|----------|------------|\n| <50% | Medical management only |\n| 50-69% | Consider CEA/CAS, medical reasonable |\n| >=70% | CEA/CAS recommended if life expectancy >5 years |\n\n**Timing is Critical:**\n- **Within 2 weeks** of TIA for symptomatic stenosis >=50%\n- **CEA preferred over CAS** if within 7 days (lower stroke risk)\n- NNT = 3 if CEA within 2 weeks\n- NNT = 6 if delayed 2-4 weeks\n\n**CEA vs CAS:**\n| | CEA | CAS |\n|---|-----|-----|\n| **Preferred if** | Within 2 weeks, age >70 | High surgical risk, radiation, prior CEA |\n| **Early stroke risk** | 1.4% if within 2 weeks | 8.3% if within first week |\n\n**Intracranial Stenosis:**\n- Medical management preferred (SAMMPRIS trial)\n- Consider intervention only if refractory [1][5]',
+    body: '**Carotid Stenosis Management:**\n\n| Stenosis | Management |\n|----------|------------|\n| <50% | Medical management only |\n| 50-69% | Consider CEA/CAS, medical reasonable |\n| >=70% | CEA/CAS recommended if life expectancy >5 years |\n\n**Timing is Critical:**\n- **Within 2 weeks** of TIA for symptomatic stenosis >=50%\n- **CEA preferred over CAS** if within 7 days (lower stroke risk)\n- NNT = 5 if CEA performed within 2 weeks of symptom onset\n- NNT = 125 if delayed beyond 12 weeks\n\n**CEA vs CAS:**\n| | CEA | CAS |\n|---|-----|-----|\n| **Preferred if** | Within 2 weeks, age >70 | High surgical risk, radiation, prior CEA |\n| **Early stroke risk** | 1.4% if within 2 weeks | 8.3% if within first week |\n\n**Intracranial Stenosis:**\n- Medical management preferred (SAMMPRIS trial)\n- Consider intervention only if refractory [1][5]',
     citation: [1, 5],
     next: 'tia-treatment-intro',
 
@@ -441,8 +441,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'DAPT: POINT/CHANCE Protocol',
-    body: '**Indication:** High-risk TIA (ABCD2 >=4) or minor stroke (NIHSS <=3), non-cardioembolic.\n\n**Based on CHANCE and POINT Trials:**\n\n**LOADING:**\n- Aspirin 162-325 mg (if not already on)\n- Clopidogrel 300-600 mg loading dose\n\n**MAINTENANCE:**\n- Aspirin 81 mg daily\n- Clopidogrel 75 mg daily\n\n**DURATION:**\n- 21 days of DAPT (optimal per pooled analysis)\n- Then transition to aspirin monotherapy\n\n**TIMING:**\n- Ideally within 12-24 hours of symptom onset\n- May consider up to 7 days after onset\n\n**Who NOT to give DAPT:**\n- Cardioembolic TIA (needs anticoagulation)\n- Moderate-severe stroke (NIHSS >3)\n- High bleeding risk\n- Already on anticoagulation [6][7]',
-    citation: [6, 7],
+    body: '**Indication:** High-risk TIA (ABCD2 >=4) or minor stroke (NIHSS <=3), non-cardioembolic.\n\n**Based on CHANCE and POINT Trials:**\n\n**LOADING:**\n- Aspirin 162-325 mg (if not already on)\n- Clopidogrel 300-600 mg loading dose\n\n**MAINTENANCE:**\n- Aspirin 81 mg daily\n- Clopidogrel 75 mg daily\n\n**DURATION:**\n- 21 days of DAPT (optimal per pooled analysis)\n- Then transition to aspirin monotherapy\n\n**TIMING:**\n- Ideally within 12-24 hours of symptom onset\n- May consider up to 7 days after onset\n\n**Who NOT to give DAPT:**\n- Cardioembolic TIA (needs anticoagulation)\n- Moderate-severe stroke (NIHSS >3)\n- High bleeding risk\n- Already on anticoagulation [6][7][8]',
+    citation: [6, 7, 8],
     treatment: {
       firstLine: {
         drug: 'Clopidogrel',
@@ -527,8 +527,8 @@ export const TIA_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Disposition Overview',
-    body: '**Disposition Options:**\n\n1. **Admit** - For high-risk features or incomplete workup\n\n2. **ED Observation (23-hour)** - Moderate risk, can complete workup\n\n3. **Discharge with rapid follow-up** - Low risk with complete workup\n\n**Key Questions:**\n- Are high-risk features present?\n- Is workup complete (or can it be completed rapidly)?\n- Is rapid TIA clinic available (<48 hours)?\n- Can patient recognize warning signs and return?\n\n**EXPRESS Trial Lesson:**\n- Rapid assessment (<1 day) vs delayed (3 days)\n- 80% reduction in 90-day stroke risk (2.1% vs 10.3%)\n- Speed matters more than setting [1][2]',
-    citation: [1, 2],
+    body: '**Disposition Options:**\n\n1. **Admit** - For high-risk features or incomplete workup\n\n2. **ED Observation (23-hour)** - Moderate risk, can complete workup\n\n3. **Discharge with rapid follow-up** - Low risk with complete workup\n\n**Key Questions:**\n- Are high-risk features present?\n- Is workup complete (or can it be completed rapidly)?\n- Is rapid TIA clinic available (<48 hours)?\n- Can patient recognize warning signs and return?\n\n**EXPRESS Trial Lesson:**\n- Rapid assessment (<1 day) vs delayed (3 days)\n- 80% reduction in 90-day stroke risk (2.1% vs 10.3%)\n- Speed matters more than setting [1][2][9]',
+    citation: [1, 2, 9],
     calculatorLinks: [
       { id: 'tia-disposition', label: 'Disposition Calculator' },
     ],

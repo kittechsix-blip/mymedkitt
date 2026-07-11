@@ -71,7 +71,7 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'SCAPE: Immediate Treatment',
-    body: '**SCAPE is NOT volume overload.** The problem is fluid redistribution into lungs from massive afterload. Treatment = break the sympathetic spiral.\n\n**Simultaneous actions (do ALL at once):**\n\n**1. BiPAP/CPAP — Immediate**\n- Start CPAP 8-10 cm H₂O OR BiPAP 12/6\n- Titrate UP aggressively: goal CPAP 15-20 or BiPAP 20-24/10-12\n- Higher pressures = greater hemodynamic benefit\n- Reduces preload AND afterload\n\n**2. High-Dose Nitroglycerin — Aggressive**\n- **See NTG Protocol**\n- Bolus: 400-800 mcg/min x 2-2.5 min (OR 1000-2000 mcg IV bolus)\n- Then infusion: start 100-200 mcg/min, titrate to 400+ mcg/min\n- Goal: SBP <140 within 10 minutes\n\n**By 10 minutes, patient should be "out of the water."** [1][3]',
+    body: '**SCAPE is NOT volume overload.** The problem is fluid redistribution into lungs from massive afterload. Treatment = break the sympathetic spiral.\n\n**Simultaneous actions (do ALL at once):**\n\n**1. BiPAP/CPAP — Immediate**\n- Start CPAP 8-10 cm H₂O OR BiPAP 12/6\n- Titrate UP aggressively: goal CPAP 15-20 or BiPAP 20-24/10-12\n- Higher pressures = greater hemodynamic benefit\n- Reduces preload AND afterload\n\n**2. High-Dose [Nitroglycerin](#/drug/nitroglycerin/scape) — Aggressive**\n- **See NTG Protocol**\n- Bolus: 400-800 mcg/min x 2-2.5 min (OR 1000-2000 mcg IV bolus)\n- Then infusion: start 100-200 mcg/min, titrate to 400+ mcg/min\n- Goal: SBP <140 within 10 minutes\n\n**By 10 minutes, patient should be "out of the water."** [1][3]',
     citation: [1, 3],
     calculatorLinks: [
       { id: 'chf-ntg-calc', label: 'SCAPE NTG Calculator' },
@@ -107,7 +107,7 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'SCAPE: What to AVOID',
-    body: '**Critical: These can HARM your SCAPE patient:**\n\n| Agent | Why Harmful |\n|-------|-------------|\n| **Beta-blockers** | Impair pump function — absolutely contraindicated |\n| **Morphine** | MIMO trial stopped early for harm — increased cardiac arrest and shock |\n| **Routine diuretics** | Only if TRUE volume overload. Many SCAPE patients are intravascularly depleted |\n\n**When to give diuretics in SCAPE:**\n- Only AFTER vasodilator therapy working\n- Only if evidence of true volume overload (weight gain, weeks of edema)\n- Use low dose initially (20-40 mg furosemide)\n\n**Intubation:**\n- AVOID if possible — these patients often turn around dramatically\n- BiPAP buys time for NTG to work\n- If must intubate: ketamine > propofol (less hypotension) [1][3]',
+    body: '**Critical: These can HARM your SCAPE patient:**\n\n| Agent | Why Harmful |\n|-------|-------------|\n| **Beta-blockers** | Impair pump function — absolutely contraindicated |\n| **Morphine** | MIMO RCT: significantly more cardiovascular serious adverse events (cardiac arrest, cardiogenic shock) vs midazolam |\n| **Routine diuretics** | Only if TRUE volume overload. Many SCAPE patients are intravascularly depleted |\n\n**When to give diuretics in SCAPE:**\n- Only AFTER vasodilator therapy working\n- Only if evidence of true volume overload (weight gain, weeks of edema)\n- Use low dose initially (20-40 mg furosemide)\n\n**Intubation:**\n- AVOID if possible — these patients often turn around dramatically\n- BiPAP buys time for NTG to work\n- If must intubate: ketamine > propofol (less hypotension) [1][3]',
     citation: [1, 3],
     next: 'chf-scape-response',
   
@@ -309,7 +309,7 @@ export const CHF_EXACERBATION_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Diuretic Strategy — Warm & Wet',
-    body: '**Goal:** Reduce intravascular volume, relieve congestion.\n\n**IV Loop Diuretic (Furosemide):**\n- **Dose:** 1-2.5x home oral dose IV\n- If no home diuretic: start 40-80 mg IV\n- If home dose >80 mg: give 1-2x as IV\n\n**Monitoring targets:**\n- Urine output: >100-150 mL/hr by 6 hours\n- Urine spot sodium: >50-70 mEq/L at 2 hours\n- Daily weight loss: 0.5-1 kg/day\n\n**Bolus vs Infusion:**\n- DOSE trial: no significant difference\n- Bolus q8-12h often sufficient\n- Infusion (5-10 mg/hr) if high-dose needed\n\n**Adjunctive vasodilator:**\n- Add NTG if SBP >100 for faster symptom relief\n- Reduces preload, speeds diuresis [2][4]',
+    body: '**Goal:** Reduce intravascular volume, relieve congestion.\n\n**IV Loop Diuretic ([Furosemide](#/drug/furosemide/volume overload)):**\n- **Dose:** 1-2.5x home oral dose IV\n- If no home diuretic: start 40-80 mg IV\n- If home dose >80 mg: give 1-2x as IV\n\n**Monitoring targets:**\n- Urine output: >100-150 mL/hr by 6 hours\n- Urine spot sodium: >50-70 mEq/L at 2 hours\n- Daily weight loss: 0.5-1 kg/day\n\n**Bolus vs Infusion:**\n- DOSE trial: no significant difference\n- Bolus q8-12h often sufficient\n- Infusion (5-10 mg/hr) if high-dose needed\n\n**Adjunctive vasodilator:**\n- Add NTG if SBP >100 for faster symptom relief\n- Reduces preload, speeds diuresis [2][4]',
     citation: [2, 4],
     calculatorLinks: [
       { id: 'chf-lasix-calc', label: 'Lasix Dose Calculator' },
@@ -699,12 +699,12 @@ export const CHF_EXACERBATION_MODULE_LABELS = [
 ];
 
 export const CHF_EXACERBATION_CRITICAL_ACTIONS = [
-  { text: 'NIV (BiPAP/CPAP) 10-15 cm H₂O for severe respiratory distress', nodeId: 'chf-bipap' },
-  { text: 'Furosemide 40-80 mg IV (or 2× home dose) within 30 minutes', nodeId: 'chf-diuretic-strategy' },
-  { text: 'Nitroglycerin 0.4 mg SL q5min × 3 or infusion 10-20 mcg/min for afterload reduction', nodeId: 'chf-ntg-calc' },
-  { text: 'Intubate if severe hypoxia (SpO₂ <90%) despite NIV + maximal oxygen', nodeId: 'chf-scape-escalate' },
+  { text: 'NIV (BiPAP/CPAP) 10-15 cm H₂O for severe respiratory distress', nodeId: 'chf-scape-treatment' },
+  { text: 'Furosemide 40-80 mg IV (or 1-2.5× home oral dose) within 30 minutes', nodeId: 'chf-diuretic-strategy' },
+  { text: 'Nitroglycerin 0.4 mg SL q5min × 3 or infusion 10-20 mcg/min for afterload reduction', nodeId: 'chf-escalate-diuretic' },
+  { text: 'Intubate if severe hypoxia (SpO₂ <90%) despite NIV + maximal oxygen', nodeId: 'chf-scape-refractory' },
   { text: 'Push-dose pressors if hypotensive: norepinephrine 10-20 mcg IVP q2-3min', nodeId: 'chf-cardiogenic-shock' },
-  { text: 'Check BNP/NT-proBNP to confirm diagnosis (BNP >400 or NT-proBNP >900)', nodeId: 'chf-start' },
+  { text: 'Check BNP/NT-proBNP to confirm diagnosis (BNP >400, or NT-proBNP >450 if age <50 / >900 if age 50-75 / >1800 if age >75)', nodeId: 'chf-start' },
   { text: 'POCUS to assess IVC, LV function, B-lines for volume status', nodeId: 'chf-start' },
   { text: 'Avoid aggressive IV fluids in volume overload (may worsen pulmonary edema)', nodeId: 'chf-diuretic-strategy' },
 ];
