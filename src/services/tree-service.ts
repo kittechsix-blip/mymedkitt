@@ -894,6 +894,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/diplopia.js');
       return { nodes: m.DIPLOPIA_NODES, entryNodeId: 'diplopia-start', categoryId: 'ophthalmology', moduleLabels: m.DIPLOPIA_MODULE_LABELS, citations: m.DIPLOPIA_CITATIONS, criticalActions: m.DIPLOPIA_CRITICAL_ACTIONS };
     },
+    'corneal-fb-removal': async () => {
+      const m = await import('../data/trees/corneal-fb-removal.js');
+      return { nodes: m.CORNEAL_FB_REMOVAL_NODES, entryNodeId: 'cfb-start', categoryId: 'ophthalmology', moduleLabels: m.CORNEAL_FB_REMOVAL_MODULE_LABELS, citations: m.CORNEAL_FB_REMOVAL_CITATIONS, criticalActions: m.CORNEAL_FB_REMOVAL_CRITICAL_ACTIONS };
+    },
     'pacemaker': async () => {
       const m = await import('../data/trees/pacemaker.js');
       return { nodes: m.PACEMAKER_NODES, entryNodeId: 'pm-start', categoryId: 'cardiology', moduleLabels: m.PACEMAKER_MODULE_LABELS, citations: m.PACEMAKER_CITATIONS, criticalActions: m.PACEMAKER_CRITICAL_ACTIONS };

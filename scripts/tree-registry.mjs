@@ -136,6 +136,7 @@ export const TREE_REGISTRY = {
   'globe-rupture':    { prefix: 'GLOBE_RUPTURE',       entryNodeId: 'globe-start',           categoryId: 'ophthalmology' },
   'ocular-pocus':     { prefix: 'OCULAR_POCUS',        entryNodeId: 'opocus-start',           categoryId: 'ophthalmology' },
   'diplopia':         { prefix: 'DIPLOPIA',            entryNodeId: 'diplopia-start',          categoryId: 'ophthalmology' },
+  'corneal-fb-removal': { prefix: 'CORNEAL_FB_REMOVAL', entryNodeId: 'cfb-start',              categoryId: 'ophthalmology' },
   'pacemaker':        { prefix: 'PACEMAKER',           entryNodeId: 'pm-start',         categoryId: 'cardiology' },
   'opioid-withdrawal': { prefix: 'OPIOID_WITHDRAWAL',  entryNodeId: 'ow-start',           categoryId: 'toxicology' },
   'kratom-withdrawal': { prefix: 'KRATOM_WITHDRAWAL',  entryNodeId: 'kw-start',           categoryId: 'toxicology' },

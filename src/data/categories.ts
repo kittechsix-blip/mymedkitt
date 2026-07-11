@@ -2432,6 +2432,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'diplopia-start',
       },
       {
+        id: 'corneal-fb-removal',
+        title: 'Corneal Foreign Body Removal',
+        subtitle: 'Pre-Procedure Screen → Anesthesia & VA → Eyelid Eversion → Removal Ladder → Post-Removal Care → Follow-up',
+        categoryId: 'ophthalmology',
+        version: '1.0',
+        nodeCount: 14,
+        entryNodeId: 'cfb-start',
+      },
+      {
         id: 'amaurosis-fugax',
         title: 'Amaurosis Fugax (TMVL)',
         subtitle: 'Recognition → GCA Screen → Stroke Workup → Carotid Evaluation → Treatment → Disposition',

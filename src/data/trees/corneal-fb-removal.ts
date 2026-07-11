@@ -1,6 +1,6 @@
 // MedKitt — Corneal/Conjunctival Foreign Body Removal Consult
 // Pre-procedure (Seidel) → Anesthesia + VA → Eyelid eversion → Removal ladder → Post-removal care → Follow-up
-// Category: Procedures. 6 modules, ~16 nodes.
+// Category: Ophthalmology. 6 modules, 14 nodes.
 // Sources: ALiEM, LITFL, StatPearls NBK536957, AAO Preferred Practice Pattern.
 
 import type { DecisionNode } from '../../models/types.js';
