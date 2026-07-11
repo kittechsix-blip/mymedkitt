@@ -74,7 +74,7 @@ export const THYROID_NODES = [
         module: 1,
         title: 'Confirm Thyroid Storm',
         body: '**Thyroid storm = thyrotoxicosis causing end-organ dysfunction.** No validated diagnostic test — diagnosis is clinical. The Burch-Wartofsky Score helps frame the assessment but is NOT diagnostic. [4][9]\n\n**IBCC cognitive triggers to consider thyroid storm:**\n1. Known hyperthyroid + any acute deterioration\n2. New-onset AFib and/or dilated cardiomyopathy\n3. New delirium/psychosis + fever + tachycardia\n4. Hyperthermia (temp >40°C / 104°F)\n5. Septic-appearing patient without infection source\n\n**Common precipitants:**\n• Antithyroid medication noncompliance\n• Infection (#1 in most series)\n• Acute iodine load (contrast, amiodarone)\n• Surgery, trauma\n• DKA, pregnancy/delivery, PE, MI\n• No identifiable trigger in ~30% [2]\n\n**Underlying etiologies:** Graves disease (~30%), amiodarone-induced thyroiditis (~30%), toxic multinodular goiter, toxic adenoma [2]\n\n[Precipitants & Differential Diagnosis](#/info/thyroid-precipitants)',
-        citation: [2, 4, 9, 14],
+        citation: [2, 4, 9, 11, 14],
         calculatorLinks: [
             { id: 'burch-wartofsky', label: 'Burch-Wartofsky Score' },
         ],
@@ -566,8 +566,8 @@ export const THYROID_NODES = [
         type: 'question',
         module: 5,
         title: 'Thyroid Storm — Disposition',
-        body: '**All thyroid storm patients require ICU admission.** Mortality 8-25%. [1][14]\n\n**Monitor for complications:**\n• Worsening hemodynamics / cardiogenic shock\n• Arrhythmias (AFib, VT)\n• Hepatic failure (elevated LFTs common — liver failure is a grave prognostic sign)\n• DIC\n• Rhabdomyolysis\n\n**Clinical improvement expected in 24-72h** with aggressive multimodal therapy. [2]\n\n**Risk factors for mortality:** Age >60, neuropsychiatric manifestations, mechanical ventilation, non-use of antithyroid drugs or beta-blockers. [12]',
-        citation: [1, 2, 12, 14],
+        body: '**All thyroid storm patients require ICU admission.** Mortality 8-25%. [1][14]\n\n**Monitor for complications:**\n• Worsening hemodynamics / cardiogenic shock\n• Arrhythmias (AFib, VT)\n• Hepatic failure (elevated LFTs common — liver failure is a grave prognostic sign)\n• DIC\n• Rhabdomyolysis\n\n**Clinical improvement expected in 24-72h** with aggressive multimodal therapy. [2]\n\n**Risk factors for mortality:** Age >60, neuropsychiatric manifestations, mechanical ventilation, non-use of antithyroid drugs or beta-blockers. [10][12]',
+        citation: [1, 2, 10, 12, 14],
         options: [
             {
                 label: 'ICU Admission — Standard',

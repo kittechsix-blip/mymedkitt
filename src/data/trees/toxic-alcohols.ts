@@ -2,7 +2,7 @@
 // Methanol, ethylene glycol, isopropyl alcohol, propylene glycol: recognition, osmolar gap,
 // fomepizole/ethanol therapy, dialysis indications, cofactor therapy, and disposition.
 // 8 modules: Recognition → Identification → Workup → Antidote → Dialysis → Cofactors → Monitoring → Disposition
-// 42 nodes total.
+// 28 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 

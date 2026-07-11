@@ -1,7 +1,7 @@
 // MedKitt — Serotonin Syndrome Management
 // Recognition → Diagnosis → Differentiation → Treatment → Disposition
 // 5 modules: Recognition → Hunter Criteria → Differentiation → Treatment → Disposition
-// ~25 nodes total.
+// 17 nodes total.
 export const SEROTONIN_SYNDROME_NODES = [
     // =====================================================================
     // MODULE 1: RECOGNITION
@@ -295,7 +295,7 @@ export const SEROTONIN_SYNDROME_MODULE_LABELS = [
     'Disposition',
 ];
 export const SEROTONIN_SYNDROME_CRITICAL_ACTIONS = [
-    { text: 'Stop all serotonergic agents immediately (SSRIs, SNRIs, MAOIs, tramadol, linezolid, etc)', nodeId: 'ss-investigate-drugs' },
+    { text: 'Stop all serotonergic agents immediately (SSRIs, SNRIs, MAOIs, tramadol, linezolid, etc)', nodeId: 'ss-mild-tx' },
     { text: 'Benzodiazepines first-line for agitation: lorazepam 2-4 mg IV q15-30min PRN (or diazepam 5-10 mg IV q15min); reduces muscle activity and thermogenesis', nodeId: 'ss-moderate-tx' },
     { text: 'Cyproheptadine 12 mg PO initial, then 2 mg q2h (max 32 mg/day) for moderate-severe cases', nodeId: 'ss-moderate-tx' },
     { text: 'Aggressive cooling for hyperthermia >41°C (evaporative + cold IV fluids)', nodeId: 'ss-severe-tx' },

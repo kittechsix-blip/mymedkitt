@@ -374,7 +374,7 @@ export const AORTIC_DISSECTION_CRITICAL_ACTIONS = [
     { text: 'Cardiothoracic surgery consult immediately for Type A dissection (surgical emergency)', nodeId: 'dissect-type-a' },
     { text: 'Pain control with IV opioids (morphine or fentanyl) to reduce catecholamine surge', nodeId: 'dissect-management' },
     { text: 'Esmolol is first-line for rate control; only if beta-blockade is contraindicated (severe AR, high-grade AV block, decompensated HF, asthma, cocaine) substitute IV diltiazem', nodeId: 'dissect-beta-blocker' },
-    { text: 'ADD-RS score ≥2: proceed directly to CTA without D-dimer', nodeId: 'dissect-add-rs' },
+    { text: 'ADD-RS score ≥2: proceed directly to CTA without D-dimer', nodeId: 'dissect-ddimer' },
 ];
 export const AORTIC_DISSECTION_CITATIONS = [
     { num: 1, text: 'Isselbacher EM, et al. 2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease. J Am Coll Cardiol. 2022;80(24):e223-e393.' },
