@@ -1,0 +1,546 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transient Global Amnesia: Recognize, Exclude Mimics, Dispose — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Transient Global Amnesia: Recognize, Exclude Mimics, Dispose</h1>
+  <p class="ig-use">Adults presenting to the ED with sudden-onset anterograde amnesia. Excludes patients with focal neurologic deficits, episodes lasting &gt;24 hours, a witnessed seizure/post-ictal state, or recent head trauma — these require a stroke, seizure, or trauma workup instead of a TGA diagnosis. TGA has no medication protocol; this infographic is diagnostic/disposition-only.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Focal neurologic deficits — even transient — mean this is NOT TGA. Pursue stroke workup (non-contrast CT, MRI-DWI, CTA head/neck, ECG/telemetry) instead of diagnosing TGA.</div><div class="ig-scope-item">⚠ Episode duration &gt;24 hours is NOT TGA by definition — reassess for stroke or another diagnosis; do not extend the observation window past 24 hours expecting late resolution.</div><div class="ig-scope-item">⚠ Do NOT diagnose TGA if there is recent head trauma — this is post-traumatic amnesia; assess with CT per the Canadian CT Head Rule or PECARN instead.</div><div class="ig-scope-item">⚠ TGA requires ALL Hodges &amp; Warlow criteria to be met (witnessed attack, clear-cut anterograde amnesia, no clouding of consciousness or loss of personal identity, no focal signs, no epileptic features, no recent head injury, resolution within 24 hours) — missing any one criterion means TGA is not confirmed.</div><div class="ig-scope-item">⚠ Frequent or recurrent episodes are atypical for TGA (which rarely recurs) — reconsider transient epileptic amnesia (TEA) and pursue EEG plus neurology referral.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="tga-start" hidden><button type="button" data-route-select="tga-start"><span class="ig-route-rank">1</span><span>TGA — ED Evaluation</span></button></li><li data-route-node="tga-criteria" hidden><button type="button" data-route-select="tga-criteria"><span class="ig-route-rank">2</span><span>Diagnostic Criteria</span></button></li><li data-route-node="tga-trauma" hidden><button type="button" data-route-select="tga-trauma"><span class="ig-route-rank">2</span><span>Post-Traumatic Amnesia</span></button></li><li data-route-node="tga-stroke-workup" hidden><button type="button" data-route-select="tga-stroke-workup"><span class="ig-route-rank">2</span><span>Stroke Workup — TGA Mimic</span></button></li><li data-route-node="tga-tep" hidden><button type="button" data-route-select="tga-tep"><span class="ig-route-rank">2</span><span>Transient Epileptic Amnesia</span></button></li><li data-route-node="tga-confirmed" hidden><button type="button" data-route-select="tga-confirmed"><span class="ig-route-rank">3</span><span>TGA Confirmed — Pathophysiology</span></button></li><li data-route-node="tga-workup" hidden><button type="button" data-route-select="tga-workup"><span class="ig-route-rank">4</span><span>Workup Strategy</span></button></li><li data-route-node="tga-imaging" hidden><button type="button" data-route-select="tga-imaging"><span class="ig-route-rank">5</span><span>Imaging</span></button></li><li data-route-node="tga-prognosis" hidden><button type="button" data-route-select="tga-prognosis"><span class="ig-route-rank">6</span><span>Prognosis</span></button></li><li data-route-node="tga-disposition" hidden><button type="button" data-route-select="tga-disposition"><span class="ig-route-rank">7</span><span>Disposition</span></button></li><li data-route-node="tga-observe" hidden><button type="button" data-route-select="tga-observe"><span class="ig-route-rank">8</span><span>Observation</span></button></li><li data-route-node="tga-discharge" hidden><button type="button" data-route-select="tga-discharge"><span class="ig-route-rank">9</span><span>Discharge — TGA Resolved</span></button></li><li data-route-node="tga-admit-stroke" hidden><button type="button" data-route-select="tga-admit-stroke"><span class="ig-route-rank">9</span><span>Admit — Stroke Identified</span></button></li><li data-route-node="tga-admit-workup" hidden><button type="button" data-route-select="tga-admit-workup"><span class="ig-route-rank">9</span><span>Admit — Diagnostic Uncertainty</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 1308 1020" width="1308" height="1020" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M759,98 L759,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="115" class="ig-edge-lbl" text-anchor="middle">Classic presentation</text><path d="M759,98 L759,119 L339,119 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="115" class="ig-edge-lbl" text-anchor="middle">Focal neuro signs — critical</text><path d="M759,98 L759,119 L1179,119 L1179,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="969" y="115" class="ig-edge-lbl" text-anchor="middle">Seizure witnessed / post-ictal</text><path d="M759,98 L759,119 L129,119 L129,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="115" class="ig-edge-lbl" text-anchor="middle">Recent head trauma</text><path d="M759,206 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="223" class="ig-edge-lbl" text-anchor="middle">Meets all criteria</text><path d="M759,206 L759,173 L339,173 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="169" class="ig-edge-lbl" text-anchor="middle">Episode &gt;24h</text><path d="M759,206 L759,173 L339,173 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="169" class="ig-edge-lbl" text-anchor="middle">Focal signs present — critical</text><path d="M759,206 L759,173 L1179,173 L1179,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="969" y="169" class="ig-edge-lbl" text-anchor="middle">Recurrent episodes</text><path d="M759,314 L759,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,206 L339,281 L759,281 L759,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M1179,206 L1179,281 L759,281 L759,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,206 L129,443 L759,443 L759,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,422 L759,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="493" class="ig-edge-lbl" text-anchor="middle">Classic, resolving</text><path d="M759,422 L759,443 L969,443 L969,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="864" y="439" class="ig-edge-lbl" text-anchor="middle">Atypical features</text><path d="M759,422 L759,281 L339,281 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="277" class="ig-edge-lbl" text-anchor="middle">Concerned for stroke — urgent</text><path d="M759,422 L759,281 L1179,281 L1179,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="969" y="277" class="ig-edge-lbl" text-anchor="middle">Concerned for seizure</text><path d="M969,530 L969,551 L759,551 L759,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,638 L759,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,746 L759,821 L339,821 L339,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="817" class="ig-edge-lbl" text-anchor="middle">Classic TGA, resolved</text><path d="M759,746 L759,767 L549,767 L549,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="763" class="ig-edge-lbl" text-anchor="middle">Still symptomatic</text><path d="M759,746 L759,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="817" class="ig-edge-lbl" text-anchor="middle">Stroke identified</text><path d="M759,746 L759,821 L1179,821 L1179,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="969" y="817" class="ig-edge-lbl" text-anchor="middle">Diagnostic uncertainty</text><path d="M549,854 L549,767 L759,767 L759,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="763" class="ig-edge-lbl" text-anchor="middle">Reassess</text><g class="ig-node" data-node="tga-start" tabindex="0" role="button" aria-label="TGA — ED Evaluation"><polygon points="693,32 825,32 847,65 825,98 693,98 671,65" class="ig-shape t-neutral"/><foreignObject x="677" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">TGA — ED Evaluation</div></foreignObject></g><g class="ig-node" data-node="tga-criteria" tabindex="0" role="button" aria-label="Diagnostic Criteria"><polygon points="693,140 825,140 847,173 825,206 693,206 671,173" class="ig-shape t-neutral"/><foreignObject x="677" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Diagnostic Criteria</div></foreignObject></g><g class="ig-node" data-node="tga-trauma" tabindex="0" role="button" aria-label="Post-Traumatic Amnesia"><rect x="41" y="140" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Post-Traumatic Amnesia</div></foreignObject></g><g class="ig-node" data-node="tga-stroke-workup" tabindex="0" role="button" aria-label="Stroke Workup — TGA Mimic"><rect x="251" y="140" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Stroke Workup — TGA Mimic</div></foreignObject></g><g class="ig-node" data-node="tga-tep" tabindex="0" role="button" aria-label="Transient Epileptic Amnesia"><rect x="1091" y="140" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="1097" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Transient Epileptic Amnesia</div></foreignObject></g><g class="ig-node" data-node="tga-confirmed" tabindex="0" role="button" aria-label="TGA Confirmed — Pathophysiology"><rect x="671" y="248" width="176" height="66" rx="6" class="ig-shape t-mech"/><foreignObject x="677" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">TGA Confirmed — Pathophysiology</div></foreignObject></g><g class="ig-node" data-node="tga-workup" tabindex="0" role="button" aria-label="Workup Strategy"><polygon points="693,356 825,356 847,389 825,422 693,422 671,389" class="ig-shape t-neutral"/><foreignObject x="677" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Workup Strategy</div></foreignObject></g><g class="ig-node" data-node="tga-imaging" tabindex="0" role="button" aria-label="Imaging"><rect x="881" y="464" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="887" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Imaging</div></foreignObject></g><g class="ig-node" data-node="tga-prognosis" tabindex="0" role="button" aria-label="Prognosis"><rect x="671" y="572" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="677" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Prognosis</div></foreignObject></g><g class="ig-node" data-node="tga-disposition" tabindex="0" role="button" aria-label="Disposition"><polygon points="693,680 825,680 847,713 825,746 693,746 671,713" class="ig-shape t-neutral"/><foreignObject x="677" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Disposition</div></foreignObject></g><g class="ig-node" data-node="tga-observe" tabindex="0" role="button" aria-label="Observation"><rect x="461" y="788" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="467" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Observation</div></foreignObject></g><g class="ig-node" data-node="tga-discharge" tabindex="0" role="button" aria-label="Discharge — TGA Resolved"><rect x="251" y="896" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="257" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Discharge — TGA Resolved</div></foreignObject></g><g class="ig-node" data-node="tga-admit-stroke" tabindex="0" role="button" aria-label="Admit — Stroke Identified"><rect x="671" y="896" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="677" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Admit — Stroke Identified</div></foreignObject></g><g class="ig-node" data-node="tga-admit-workup" tabindex="0" role="button" aria-label="Admit — Diagnostic Uncertainty"><rect x="1091" y="896" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="1097" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Admit — Diagnostic Uncertainty</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="tga-start" hidden><strong>TGA — ED Evaluation</strong><span>Classic: sudden anterograde amnesia, repetitive questioning, personal identity preserved, no focal deficits, resolves within 24h. Screen for focal signs, seizure, or head trauma first.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-criteria" hidden><strong>Diagnostic Criteria</strong><span>Hodges &amp; Warlow (1990): ALL 7 criteria required — witnessed, clear-cut anterograde amnesia, no clouding/identity loss, no focal signs, no epileptic features, no head injury, resolves within 24h.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-criteria">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-trauma" hidden><strong>Post-Traumatic Amnesia</strong><span>Recent head injury → not TGA. CT per Canadian CT Head Rule/PECARN, GCS monitoring, repeat neuro exams.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-trauma">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-stroke-workup" hidden><strong>Stroke Workup — TGA Mimic</strong><span>Focal signs, vertigo/diplopia/dysarthria, or duration &gt;24h → stroke pathway: CT, MRI-DWI, CTA, ECG/telemetry, labs.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-stroke-workup">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-tep" hidden><strong>Transient Epileptic Amnesia</strong><span>Episodes &lt;1h, recurrent, on waking, subtle automatisms, age &lt;50 → EEG, MRI epilepsy protocol, antiepileptics.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-tep">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-confirmed" hidden><strong>TGA Confirmed — Pathophysiology</strong><span>Incidence 3-8/100,000/yr, peak age 50-70. Hippocampal dysfunction, venous congestion, cortical spreading depression — NOT stroke.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-confirmed">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-workup" hidden><strong>Workup Strategy</strong><span>Classic and resolving → minimal workup (glucose, basic labs, ECG). Atypical → CT, MRI-DWI, EEG, CTA as indicated.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-workup">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-imaging" hidden><strong>Imaging</strong><span>MRI-DWI gold standard — CA1 hippocampal lesions in 70-80%, best seen 24-72h; CT usually normal; not required for diagnosis.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-imaging">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-prognosis" hidden><strong>Prognosis</strong><span>Resolves in 4-8h (max 24h). Recurrence 2-3%/yr, 6-10% lifetime. No increased stroke, dementia, or mortality risk.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-prognosis">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-disposition" hidden><strong>Disposition</strong><span>Discharge if classic, resolved, and safe follow-up. Admit if persistent deficits, stroke found, or diagnostic uncertainty.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-disposition">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-observe" hidden><strong>Observation</strong><span>Serial exams q1-2h; reassess at 4-6h and 24h; discharge if resolved, admit if not (TGA max duration is 24h by definition).</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-observe">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-discharge" hidden><strong>Discharge — TGA Resolved</strong><span>Benign, not a stroke. No driving 24-48h. PCP follow-up in 1-2 weeks.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-discharge">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-admit-stroke" hidden><strong>Admit — Stroke Identified</strong><span>Not TGA — standard stroke workup and treatment; admit stroke service/neuro ICU.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-admit-stroke">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tga-admit-workup" hidden><strong>Admit — Diagnostic Uncertainty</strong><span>MRI-DWI, EEG, telemetry, neurology consult; most remain TGA, but atypical features need workup.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tga-admit-workup">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">1 · Initial assessment</h2><div class="ig-cond ig-stepbound" data-whennode="tga-start"><p class="ig-block ig-text"><strong>Transient Global Amnesia (TGA)</strong> — sudden-onset anterograde amnesia with repetitive questioning (&quot;What day is it?&quot; &quot;Why am I here?&quot;), preserved personal identity, and no focal neurologic deficits, resolving within 24 hours.<br><br>From a witness, get: exact onset time, the precipitant (physical exertion, emotional stress, Valsalva, or water immersion are common triggers), whether a seizure was witnessed, and whether there was recent head trauma.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">2 · Diagnostic criteria &amp; pathophysiology</h2><div class="ig-cond ig-stepbound" data-whennode="tga-criteria"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">#</th><th>Hodges &amp; Warlow criterion (ALL required)</th></tr></thead><tbody><tr class="ig-row"><td class="hero">1</td><td>Attack witnessed by a capable observer</td></tr><tr class="ig-row"><td class="hero">2</td><td>Clear-cut anterograde amnesia during the attack</td></tr><tr class="ig-row"><td class="hero">3</td><td>No clouding of consciousness or loss of personal identity</td></tr><tr class="ig-row"><td class="hero">4</td><td>No focal neurologic signs during or after the attack</td></tr><tr class="ig-row"><td class="hero">5</td><td>No epileptic features</td></tr><tr class="ig-row"><td class="hero">6</td><td>No recent head injury</td></tr><tr class="ig-row"><td class="hero">7</td><td>Resolution within 24 hours</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="tga-criteria"><p class="ig-block ig-text">Supportive features: age typically <strong>50-80 years</strong>, a precipitant is often identified, repetitive questioning is the hallmark, and retrograde amnesia (hours to days before the event) is variable.</p></div><div class="ig-cond ig-stepbound" data-whennode="tga-confirmed"><p class="ig-block ig-text"><strong>Epidemiology:</strong> incidence <strong>3-8 per 100,000/year</strong>, peak age <strong>50-70 years</strong>, rare under 40 (consider epilepsy), slight female predominance.<br><br><strong>Proposed mechanisms:</strong> transient hippocampal dysfunction, venous congestion (Valsalva, jugular reflux), cortical spreading depression — <strong>NOT ischemic stroke</strong>, despite DWI lesions.<br><br><strong>Common triggers:</strong> physical exertion, emotional stress, pain, sexual intercourse, water immersion, medical procedures.<br><br><strong>DWI-MRI:</strong> may show punctate CA1 hippocampal lesions, best seen <strong>24-72 hours</strong> after onset — not required for diagnosis.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">3 · Mimics &amp; red flags</h2><div class="ig-cond ig-stepbound" data-whennode="tga-stroke-workup"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Stroke mimic — red flags</div><div>Red flags for posterior circulation stroke: focal neurologic deficits (even transient), vertigo, diplopia, dysarthria, visual field cut, ataxia, duration &gt;24 hours, or prominent vascular risk factors. Thalamic/PCA stroke can cause anterograde amnesia similar to TGA but usually has other posterior-circulation signs.<br><br><strong>Workup:</strong> non-contrast CT head, MRI with DWI (preferred), CTA head/neck, ECG plus telemetry, labs (glucose, CBC, BMP, lipids, A1c). If stroke is confirmed, follow the stroke protocol; if the workup is negative and symptoms are resolving, TGA remains possible.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tga-tep"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Transient epileptic amnesia (TEA)</div><div>Suspect TEA if episodes are <strong>&lt;1 hour</strong> (TGA usually <strong>4-8 hours</strong>), recurrent (TGA rarely recurs), occur on waking, show subtle automatisms/lip-smacking, or there is a seizure history in a younger patient (&lt;50). Workup: EEG (may need prolonged/sleep-deprived) and MRI with an epilepsy protocol; refer to neurology. Treatment: antiepileptics (levetiracetam, lamotrigine) and driving restrictions per state law.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tga-trauma"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Post-traumatic amnesia</div><div>Recent head injury is the key differentiator. Assess with CT head per the Canadian CT Head Rule or PECARN, GCS monitoring, and repeated neuro exams; consider MRI if deficits persist. Treat the underlying TBI, cognitive rest, return precautions.<br><br><strong>Do NOT diagnose TGA if there is recent head trauma.</strong></div></div></div><div class="ig-cond ig-reference"><details class="ig-block ig-disc"><summary>Broader differential (other TGA mimics)<span class="ig-scent">6 categories</span></summary><div class="ig-disc-body"><div class="ig-cond ig-reference"><p class="ig-block ig-text"><strong>Vascular:</strong> posterior circulation TIA/stroke, thalamic infarct, subarachnoid hemorrhage.<br><br><strong>Epileptic:</strong> transient epileptic amnesia, post-ictal confusion, complex partial status.<br><br><strong>Toxic/metabolic:</strong> hypoglycemia, Wernicke encephalopathy, drug intoxication (benzodiazepines, anticholinergics), carbon monoxide.<br><br><strong>Psychiatric:</strong> dissociative (psychogenic) amnesia, malingering.<br><br><strong>Infectious:</strong> herpes encephalitis (usually more confused, febrile).<br><br><strong>Structural:</strong> tumor (gradual onset, not transient), hydrocephalus.<br><br>TGA is a diagnosis of exclusion — pursue this broader workup when the presentation is atypical for classic TGA.</p></div></div></details></div></section><section class="ig-section"><h2 class="ig-h2">4 · Management algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">This is the full diagnostic spine. See the <a href="#/tree/transient-global-amnesia" target="_top" class="ig-link">full protocol</a> for complete branch text.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">5 · Workup strategy</h2><div class="ig-cond ig-stepbound" data-whennode="tga-workup"><p class="ig-block ig-text"><strong>Minimal workup (classic presentation):</strong> fingerstick glucose, basic labs if indicated (CBC, BMP), ECG (screen for atrial fibrillation).<br><br><strong>Extended workup (atypical features):</strong> CT head, MRI with DWI (posterior-circulation stroke, hippocampal lesions), EEG if seizure is suspected, CTA if vascular risk factors are prominent.</p></div><div class="ig-cond ig-stepbound" data-whennode="tga-imaging"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Study</th><th>Findings / role</th></tr></thead><tbody><tr class="ig-row"><td>CT head</td><td>Usually normal in TGA; rules out hemorrhage or mass; reasonable first-line for atypical cases</td></tr><tr class="ig-row"><td>MRI-DWI</td><td>Gold standard if obtained — punctate CA1 hippocampal lesions in 70-80%, best seen 24-72 hours after onset; lesions resolve without infarction; not required for diagnosis</td></tr><tr class="ig-row"><td>CTA/MRA</td><td>Only if stroke is a concern — TGA itself is not a vascular event</td></tr></tbody></table></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">6 · Prognosis</h2><div class="ig-cond ig-stepbound" data-whennode="tga-prognosis"><p class="ig-block ig-text"><strong>Natural history:</strong> complete resolution within 24 hours (usually 4-8 hours); dense amnesia for the event itself persists; retrograde amnesia for hours-to-days before the event; full cognitive recovery otherwise.<br><br><strong>Recurrence:</strong> annual rate <strong>2-3%</strong>, lifetime <strong>6-10%</strong> — frequent recurrence should prompt reconsidering TEA.<br><br><strong>Long-term outcomes:</strong> no increased stroke risk, no increased dementia risk, no increased mortality; quality of life unaffected.<br><br>Reassurance is key — patients often will not remember the episode, and that is normal and expected.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">7 · Disposition</h2><div class="ig-cond ig-stepbound" data-whennode="tga-disposition"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Admit if</div><div>Persistent deficits beyond 24 hours, focal neurologic signs, stroke identified on imaging, recurrent episodes needing EEG, or diagnostic uncertainty.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tga-disposition"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Discharge if</div><div>Classic TGA criteria met, symptoms resolving or resolved, no focal deficits, a safe home environment, and reliable follow-up.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tga-observe"><ol class="ig-block ig-steps"><li>Serial neuro exams every 1-2 hours while symptoms are ongoing (most resolve in 4-8 hours)</li><li>Reassess at 4-6 hours — improving: continue observation and plan discharge; worsening or focal signs: CT/MRI and neurology consult</li><li>Reassess at 24 hours — resolved: discharge with follow-up; not resolved: no longer TGA, admit for workup (max duration by definition: 24 hours)</li><li>Keep the patient calm — repetitive questioning is distressing; keep family at bedside; give simple, repeated orientation and written instructions</li><li>Document time of onset, duration, and resolution time</li></ol></div><div class="ig-cond ig-stepbound" data-whennode="tga-discharge"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Discharge — TGA resolved</div><div>Criteria: symptoms fully resolved, no focal deficits, normal mental status, able to form new memories, safe home environment with an observer.<br><br><strong>Recommendation:</strong> Discharge home. Classic TGA, benign prognosis. No driving 24-48h. PCP follow-up 1-2 weeks. Return for new symptoms.<br><br>TGA is benign, NOT a stroke — the patient will not remember the episode, and that is normal. Low recurrence risk (<strong>2-3%</strong>/year). No driving for <strong>24-48 hours</strong>; no legal/financial decisions for 24 hours. PCP follow-up in 1-2 weeks; neurology if recurrent or atypical. Return for a new episode, focal weakness/numbness, speech difficulty, or severe headache.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tga-admit-stroke"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Admit — stroke identified</div><div>This is NOT TGA — follow standard stroke protocols; admit to the stroke service/neuro ICU. Workup: MRI-DWI if not done, CTA head/neck, echo (TTE/TEE), telemetry, lipids/A1c, hypercoagulability workup if young. Treatment: antiplatelet therapy, statin, risk-factor modification; thrombolysis if within window and a deficit is present.<br><br><strong>Recommendation:</strong> Admit stroke service. This is NOT TGA. Follow stroke protocol.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tga-admit-workup"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Admit — diagnostic uncertainty</div><div>Indications: symptoms &gt;24 hours, recurrent episodes, atypical features, cannot rule out stroke/seizure, or a young patient (&lt;50). Workup: MRI-DWI, EEG (routine or prolonged), continuous telemetry, neurology consult. Most will still be TGA, but the workup is needed for atypical cases.<br><br><strong>Recommendation:</strong> Admit for observation and workup. MRI, EEG, neuro consult. Monitor for resolution.</div></div></div><div class="ig-cond ig-reference"><details class="ig-block ig-disc"><summary>Other pitfalls<span class="ig-scent">3 items</span></summary><div class="ig-disc-body"><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT diagnose TGA if there is recent head trauma</strong> — this is post-traumatic amnesia, not TGA.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT dismiss frequent or recurrent episodes as TGA</strong> — TGA rarely recurs; reconsider transient epileptic amnesia and get an EEG.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT stop the stroke workup because the amnesia resembles TGA</strong> — thalamic/PCA stroke can present with isolated anterograde amnesia; focal signs or duration &gt;24 hours mean this is not TGA.</div></div></div></div></details></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Initial assessment</h3><p>**Transient Global Amnesia (TGA)** — sudden-onset anterograde amnesia with repetitive questioning (&quot;What day is it?&quot; &quot;Why am I here?&quot;), preserved personal identity, and no focal neurologic deficits, resolving within 24 hours.
+
+From a witness, get: exact onset time, the precipitant (physical exertion, emotional stress, Valsalva, or water immersion are common triggers), whether a seizure was witnessed, and whether there was recent head trauma.</p><h3>2 · Diagnostic criteria &amp; pathophysiology</h3><p># | Hodges &amp; Warlow criterion (ALL required)</p><p>1 | Attack witnessed by a capable observer</p><p>2 | Clear-cut anterograde amnesia during the attack</p><p>3 | No clouding of consciousness or loss of personal identity</p><p>4 | No focal neurologic signs during or after the attack</p><p>5 | No epileptic features</p><p>6 | No recent head injury</p><p>7 | Resolution within 24 hours</p><p>Supportive features: age typically **50-80 years**, a precipitant is often identified, repetitive questioning is the hallmark, and retrograde amnesia (hours to days before the event) is variable.</p><p>**Epidemiology:** incidence **3-8 per 100,000/year**, peak age **50-70 years**, rare under 40 (consider epilepsy), slight female predominance.
+
+**Proposed mechanisms:** transient hippocampal dysfunction, venous congestion (Valsalva, jugular reflux), cortical spreading depression — **NOT ischemic stroke**, despite DWI lesions.
+
+**Common triggers:** physical exertion, emotional stress, pain, sexual intercourse, water immersion, medical procedures.
+
+**DWI-MRI:** may show punctate CA1 hippocampal lesions, best seen **24-72 hours** after onset — not required for diagnosis.</p><h3>3 · Mimics &amp; red flags</h3><p>Red flags for posterior circulation stroke: focal neurologic deficits (even transient), vertigo, diplopia, dysarthria, visual field cut, ataxia, duration &gt;24 hours, or prominent vascular risk factors. Thalamic/PCA stroke can cause anterograde amnesia similar to TGA but usually has other posterior-circulation signs.
+
+**Workup:** non-contrast CT head, MRI with DWI (preferred), CTA head/neck, ECG plus telemetry, labs (glucose, CBC, BMP, lipids, A1c). If stroke is confirmed, follow the stroke protocol; if the workup is negative and symptoms are resolving, TGA remains possible.</p><p>Suspect TEA if episodes are **&lt;1 hour** (TGA usually **4-8 hours**), recurrent (TGA rarely recurs), occur on waking, show subtle automatisms/lip-smacking, or there is a seizure history in a younger patient (&lt;50). Workup: EEG (may need prolonged/sleep-deprived) and MRI with an epilepsy protocol; refer to neurology. Treatment: antiepileptics (levetiracetam, lamotrigine) and driving restrictions per state law.</p><p>Recent head injury is the key differentiator. Assess with CT head per the Canadian CT Head Rule or PECARN, GCS monitoring, and repeated neuro exams; consider MRI if deficits persist. Treat the underlying TBI, cognitive rest, return precautions.
+
+**Do NOT diagnose TGA if there is recent head trauma.**</p><p><em>Broader differential (other TGA mimics)</em></p><p>**Vascular:** posterior circulation TIA/stroke, thalamic infarct, subarachnoid hemorrhage.
+
+**Epileptic:** transient epileptic amnesia, post-ictal confusion, complex partial status.
+
+**Toxic/metabolic:** hypoglycemia, Wernicke encephalopathy, drug intoxication (benzodiazepines, anticholinergics), carbon monoxide.
+
+**Psychiatric:** dissociative (psychogenic) amnesia, malingering.
+
+**Infectious:** herpes encephalitis (usually more confused, febrile).
+
+**Structural:** tumor (gradual onset, not transient), hydrocephalus.
+
+TGA is a diagnosis of exclusion — pursue this broader workup when the presentation is atypical for classic TGA.</p><h3>4 · Management algorithm</h3><p>TGA — ED Evaluation — Classic: sudden anterograde amnesia, repetitive questioning, personal identity preserved, no focal deficits, resolves within 24h. Screen for focal signs, seizure, or head trauma first.</p><p>Diagnostic Criteria — Hodges &amp; Warlow (1990): ALL 7 criteria required — witnessed, clear-cut anterograde amnesia, no clouding/identity loss, no focal signs, no epileptic features, no head injury, resolves within 24h.</p><p>Post-Traumatic Amnesia — Recent head injury → not TGA. CT per Canadian CT Head Rule/PECARN, GCS monitoring, repeat neuro exams.</p><p>Stroke Workup — TGA Mimic — Focal signs, vertigo/diplopia/dysarthria, or duration &gt;24h → stroke pathway: CT, MRI-DWI, CTA, ECG/telemetry, labs.</p><p>Transient Epileptic Amnesia — Episodes &lt;1h, recurrent, on waking, subtle automatisms, age &lt;50 → EEG, MRI epilepsy protocol, antiepileptics.</p><p>TGA Confirmed — Pathophysiology — Incidence 3-8/100,000/yr, peak age 50-70. Hippocampal dysfunction, venous congestion, cortical spreading depression — NOT stroke.</p><p>Workup Strategy — Classic and resolving → minimal workup (glucose, basic labs, ECG). Atypical → CT, MRI-DWI, EEG, CTA as indicated.</p><p>Imaging — MRI-DWI gold standard — CA1 hippocampal lesions in 70-80%, best seen 24-72h; CT usually normal; not required for diagnosis.</p><p>Prognosis — Resolves in 4-8h (max 24h). Recurrence 2-3%/yr, 6-10% lifetime. No increased stroke, dementia, or mortality risk.</p><p>Disposition — Discharge if classic, resolved, and safe follow-up. Admit if persistent deficits, stroke found, or diagnostic uncertainty.</p><p>Observation — Serial exams q1-2h; reassess at 4-6h and 24h; discharge if resolved, admit if not (TGA max duration is 24h by definition).</p><p>Discharge — TGA Resolved — Benign, not a stroke. No driving 24-48h. PCP follow-up in 1-2 weeks.</p><p>Admit — Stroke Identified — Not TGA — standard stroke workup and treatment; admit stroke service/neuro ICU.</p><p>Admit — Diagnostic Uncertainty — MRI-DWI, EEG, telemetry, neurology consult; most remain TGA, but atypical features need workup.</p><p>This is the full diagnostic spine. See the [full protocol](#/tree/transient-global-amnesia) for complete branch text.</p><h3>5 · Workup strategy</h3><p>**Minimal workup (classic presentation):** fingerstick glucose, basic labs if indicated (CBC, BMP), ECG (screen for atrial fibrillation).
+
+**Extended workup (atypical features):** CT head, MRI with DWI (posterior-circulation stroke, hippocampal lesions), EEG if seizure is suspected, CTA if vascular risk factors are prominent.</p><p>Study | Findings / role</p><p>CT head | Usually normal in TGA; rules out hemorrhage or mass; reasonable first-line for atypical cases</p><p>MRI-DWI | Gold standard if obtained — punctate CA1 hippocampal lesions in 70-80%, best seen 24-72 hours after onset; lesions resolve without infarction; not required for diagnosis</p><p>CTA/MRA | Only if stroke is a concern — TGA itself is not a vascular event</p><h3>6 · Prognosis</h3><p>**Natural history:** complete resolution within 24 hours (usually 4-8 hours); dense amnesia for the event itself persists; retrograde amnesia for hours-to-days before the event; full cognitive recovery otherwise.
+
+**Recurrence:** annual rate **2-3%**, lifetime **6-10%** — frequent recurrence should prompt reconsidering TEA.
+
+**Long-term outcomes:** no increased stroke risk, no increased dementia risk, no increased mortality; quality of life unaffected.
+
+Reassurance is key — patients often will not remember the episode, and that is normal and expected.</p><h3>7 · Disposition</h3><p>Persistent deficits beyond 24 hours, focal neurologic signs, stroke identified on imaging, recurrent episodes needing EEG, or diagnostic uncertainty.</p><p>Classic TGA criteria met, symptoms resolving or resolved, no focal deficits, a safe home environment, and reliable follow-up.</p><ul><li>Serial neuro exams every 1-2 hours while symptoms are ongoing (most resolve in 4-8 hours)</li><li>Reassess at 4-6 hours — improving: continue observation and plan discharge; worsening or focal signs: CT/MRI and neurology consult</li><li>Reassess at 24 hours — resolved: discharge with follow-up; not resolved: no longer TGA, admit for workup (max duration by definition: 24 hours)</li><li>Keep the patient calm — repetitive questioning is distressing; keep family at bedside; give simple, repeated orientation and written instructions</li><li>Document time of onset, duration, and resolution time</li></ul><p>Criteria: symptoms fully resolved, no focal deficits, normal mental status, able to form new memories, safe home environment with an observer.
+
+**Recommendation:** Discharge home. Classic TGA, benign prognosis. No driving 24-48h. PCP follow-up 1-2 weeks. Return for new symptoms.
+
+TGA is benign, NOT a stroke — the patient will not remember the episode, and that is normal. Low recurrence risk (**2-3%**/year). No driving for **24-48 hours**; no legal/financial decisions for 24 hours. PCP follow-up in 1-2 weeks; neurology if recurrent or atypical. Return for a new episode, focal weakness/numbness, speech difficulty, or severe headache.</p><p>This is NOT TGA — follow standard stroke protocols; admit to the stroke service/neuro ICU. Workup: MRI-DWI if not done, CTA head/neck, echo (TTE/TEE), telemetry, lipids/A1c, hypercoagulability workup if young. Treatment: antiplatelet therapy, statin, risk-factor modification; thrombolysis if within window and a deficit is present.
+
+**Recommendation:** Admit stroke service. This is NOT TGA. Follow stroke protocol.</p><p>Indications: symptoms &gt;24 hours, recurrent episodes, atypical features, cannot rule out stroke/seizure, or a young patient (&lt;50). Workup: MRI-DWI, EEG (routine or prolonged), continuous telemetry, neurology consult. Most will still be TGA, but the workup is needed for atypical cases.
+
+**Recommendation:** Admit for observation and workup. MRI, EEG, neuro consult. Monitor for resolution.</p><p><em>Other pitfalls</em></p><p>**Do NOT diagnose TGA if there is recent head trauma** — this is post-traumatic amnesia, not TGA.</p><p>**Do NOT dismiss frequent or recurrent episodes as TGA** — TGA rarely recurs; reconsider transient epileptic amnesia and get an EEG.</p><p>**Do NOT stop the stroke workup because the amnesia resembles TGA** — thalamic/PCA stroke can present with isolated anterograde amnesia; focal signs or duration &gt;24 hours mean this is not TGA.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Arena JE, Rabinstein AA. Transient Global Amnesia. Mayo Clin Proc. 2015;90(2):264-272.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> Bartsch T, Deuschl G. Transient global amnesia: functional anatomy and clinical implications. Lancet Neurol. 2010;9(2):205-214.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Hodges JR, Warlow CP. Syndromes of transient amnesia: towards a classification. A study of 153 cases. J Neurol Neurosurg Psychiatry. 1990;53(10):834-843.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Bartsch T, et al. Focal lesions of human hippocampal CA1 neurons in transient global amnesia impair place memory. Science. 2010;328(5984):1412-1415.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Enzinger C, et al. Transient global amnesia: diffusion-weighted imaging lesions and cerebrovascular disease. Stroke. 2008;39(8):2219-2225.</li><li id="cite-ref6"><span class="ig-ref">[6]</span> Zeman AZ, et al. Transient epileptic amnesia: a description of the clinical and neuropsychological features in 10 cases and a review of the literature. J Neurol Neurosurg Psychiatry. 1998;64(4):435-443.</li><li id="cite-ref7"><span class="ig-ref">[7]</span> Pantoni L, et al. Transient global amnesia: a review emphasizing pathogenic aspects. Acta Neurol Scand. 2000;102(5):275-283.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-12 · evidence through 2015 (Mayo Clin Proc TGA review); 2010 (Lancet Neurol functional-anatomy review) · next review 2027-07-12</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · transient-global-amnesia · v1.0 InfoKitt Infographic Architecture cockpit spec — first-ever infographic for transient-global-amnesia. 14/15 source nodes represented as flow nodes (100% of reachable nodes); 1 orphan node (tga-other-mimics, unreachable in source tree) preserved as a disclosure block rather than a fabricated flow edge — see brief.md.</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"transient-global-amnesia","title":"Transient Global Amnesia: Recognize, Exclude Mimics, Dispose","shape":"algorithm","intendedUse":"Adults presenting to the ED with sudden-onset anterograde amnesia. Excludes patients with focal neurologic deficits, episodes lasting >24 hours, a witnessed seizure/post-ictal state, or recent head trauma — these require a stroke, seizure, or trauma workup instead of a TGA diagnosis. TGA has no medication protocol; this infographic is diagnostic/disposition-only.","scopeWarnings":["Focal neurologic deficits — even transient — mean this is NOT TGA. Pursue stroke workup (non-contrast CT, MRI-DWI, CTA head/neck, ECG/telemetry) instead of diagnosing TGA.","Episode duration >24 hours is NOT TGA by definition — reassess for stroke or another diagnosis; do not extend the observation window past 24 hours expecting late resolution.","Do NOT diagnose TGA if there is recent head trauma — this is post-traumatic amnesia; assess with CT per the Canadian CT Head Rule or PECARN instead.","TGA requires ALL Hodges & Warlow criteria to be met (witnessed attack, clear-cut anterograde amnesia, no clouding of consciousness or loss of personal identity, no focal signs, no epileptic features, no recent head injury, resolution within 24 hours) — missing any one criterion means TGA is not confirmed.","Frequent or recurrent episodes are atypical for TGA (which rarely recurs) — reconsider transient epileptic amnesia (TEA) and pursue EEG plus neurology referral."],"source":{"kind":"medkitt-consult","ref":"transient-global-amnesia"},"theme":{"preset":"medkitt"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"facts":[{"id":"fincidence","claim":"TGA incidence","value":"3-8 per 100,000/year","provenance":"consult:tga-confirmed/epidemiology","cite":["ref1","ref2"],"verified":"provenance"},{"id":"fpeakage","claim":"TGA peak incidence age","value":"50-70 years","provenance":"consult:tga-confirmed/epidemiology","cite":["ref1","ref2"],"verified":"provenance"},{"id":"fsupportiveage","claim":"TGA supportive-criteria age range","value":"50-80 years","provenance":"consult:tga-criteria/supportive-features","cite":["ref1","ref3"],"verified":"provenance"},{"id":"fdwitiming","claim":"DWI hippocampal lesion — best-seen timing","value":"24-72 hours","provenance":"consult:tga-imaging/mri-brain","cite":["ref4","ref5"],"verified":"provenance"},{"id":"fdwiprevalence","claim":"DWI hippocampal (CA1) lesion prevalence in TGA","value":"70-80%","provenance":"consult:tga-imaging/mri-brain","cite":["ref4","ref5"],"verified":"provenance"},{"id":"fannualrecur","claim":"TGA annual recurrence rate","value":"2-3%","provenance":"consult:tga-prognosis/recurrence","cite":["ref1","ref2","ref7"],"verified":"provenance"},{"id":"flifetimerecur","claim":"TGA lifetime recurrence rate","value":"6-10%","provenance":"consult:tga-prognosis/recurrence","cite":["ref1","ref2","ref7"],"verified":"provenance"},{"id":"fteaduration","claim":"TEA episode duration (vs TGA)","value":"\u003c1 hour","provenance":"consult:tga-tep/tea-vs-tga","cite":["ref1","ref6"],"verified":"provenance"},{"id":"ftgaduration","claim":"Typical TGA episode duration","value":"4-8 hours","provenance":"consult:tga-tep/tea-vs-tga","cite":["ref1","ref6"],"verified":"provenance"},{"id":"fnodriving","claim":"No-driving window after TGA discharge","value":"24-48 hours","provenance":"consult:tga-discharge/activity","cite":["ref1"],"verified":"provenance"},{"id":"fmaxduration","claim":"TGA maximum duration by definition","value":"24 hours","provenance":"consult:tga-observe/protocol","cite":["ref1"],"verified":"provenance"}],"sections":[{"id":"sec-assessment","title":"1 · Initial assessment","blocks":[{"id":"b-intro","type":"text","whenNode":"tga-start","md":"**Transient Global Amnesia (TGA)** — sudden-onset anterograde amnesia with repetitive questioning (\"What day is it?\" \"Why am I here?\"), preserved personal identity, and no focal neurologic deficits, resolving within 24 hours.\n\nFrom a witness, get: exact onset time, the precipitant (physical exertion, emotional stress, Valsalva, or water immersion are common triggers), whether a seizure was witnessed, and whether there was recent head trauma.","cite":["ref1","ref2"]}]},{"id":"sec-criteria","title":"2 · Diagnostic criteria & pathophysiology","blocks":[{"id":"b-criteria-table","type":"table","whenNode":"tga-criteria","columns":["#","Hodges & Warlow criterion (ALL required)"],"heroCol":0,"rows":[["1","Attack witnessed by a capable observer"],["2","Clear-cut anterograde amnesia during the attack"],["3","No clouding of consciousness or loss of personal identity"],["4","No focal neurologic signs during or after the attack"],["5","No epileptic features"],["6","No recent head injury"],["7","Resolution within 24 hours"]],"cite":["ref1","ref3"]},{"id":"b-criteria-supportive","type":"text","whenNode":"tga-criteria","md":"Supportive features: age typically **50-80 years**, a precipitant is often identified, repetitive questioning is the hallmark, and retrograde amnesia (hours to days before the event) is variable.","cite":["ref1","ref3"]},{"id":"b-confirmed","type":"text","whenNode":"tga-confirmed","md":"**Epidemiology:** incidence **3-8 per 100,000/year**, peak age **50-70 years**, rare under 40 (consider epilepsy), slight female predominance.\n\n**Proposed mechanisms:** transient hippocampal dysfunction, venous congestion (Valsalva, jugular reflux), cortical spreading depression — **NOT ischemic stroke**, despite DWI lesions.\n\n**Common triggers:** physical exertion, emotional stress, pain, sexual intercourse, water immersion, medical procedures.\n\n**DWI-MRI:** may show punctate CA1 hippocampal lesions, best seen **24-72 hours** after onset — not required for diagnosis.","cite":["ref1","ref2","ref4"]}]},{"id":"sec-mimics","title":"3 · Mimics & red flags","blocks":[{"id":"b-stroke-callout","type":"callout","tone":"danger","title":"Stroke mimic — red flags","whenNode":"tga-stroke-workup","md":"Red flags for posterior circulation stroke: focal neurologic deficits (even transient), vertigo, diplopia, dysarthria, visual field cut, ataxia, duration >24 hours, or prominent vascular risk factors. Thalamic/PCA stroke can cause anterograde amnesia similar to TGA but usually has other posterior-circulation signs.\n\n**Workup:** non-contrast CT head, MRI with DWI (preferred), CTA head/neck, ECG plus telemetry, labs (glucose, CBC, BMP, lipids, A1c). If stroke is confirmed, follow the stroke protocol; if the workup is negative and symptoms are resolving, TGA remains possible.","cite":["ref2","ref5"]},{"id":"b-tep-callout","type":"callout","tone":"caution","title":"Transient epileptic amnesia (TEA)","whenNode":"tga-tep","md":"Suspect TEA if episodes are **\u003c1 hour** (TGA usually **4-8 hours**), recurrent (TGA rarely recurs), occur on waking, show subtle automatisms/lip-smacking, or there is a seizure history in a younger patient (\u003c50). Workup: EEG (may need prolonged/sleep-deprived) and MRI with an epilepsy protocol; refer to neurology. Treatment: antiepileptics (levetiracetam, lamotrigine) and driving restrictions per state law.","cite":["ref1","ref6"]},{"id":"b-trauma-callout","type":"callout","tone":"caution","title":"Post-traumatic amnesia","whenNode":"tga-trauma","md":"Recent head injury is the key differentiator. Assess with CT head per the Canadian CT Head Rule or PECARN, GCS monitoring, and repeated neuro exams; consider MRI if deficits persist. Treat the underlying TBI, cognitive rest, return precautions.\n\n**Do NOT diagnose TGA if there is recent head trauma.**","cite":["ref1"]},{"id":"b-other-mimics-disclosure","type":"disclosure","summary":"Broader differential (other TGA mimics)","scent":"6 categories","cite":["ref1","ref2"],"blocks":[{"id":"b-other-mimics-text","type":"text","md":"**Vascular:** posterior circulation TIA/stroke, thalamic infarct, subarachnoid hemorrhage.\n\n**Epileptic:** transient epileptic amnesia, post-ictal confusion, complex partial status.\n\n**Toxic/metabolic:** hypoglycemia, Wernicke encephalopathy, drug intoxication (benzodiazepines, anticholinergics), carbon monoxide.\n\n**Psychiatric:** dissociative (psychogenic) amnesia, malingering.\n\n**Infectious:** herpes encephalitis (usually more confused, febrile).\n\n**Structural:** tumor (gradual onset, not transient), hydrocephalus.\n\nTGA is a diagnosis of exclusion — pursue this broader workup when the presentation is atypical for classic TGA."}]}]},{"id":"sec-flow","title":"4 · Management algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"tga-start","shape":"decision","text":"TGA — ED Evaluation","col":0,"rank":0,"detail":"Classic: sudden anterograde amnesia, repetitive questioning, personal identity preserved, no focal deficits, resolves within 24h. Screen for focal signs, seizure, or head trauma first."},{"id":"tga-criteria","shape":"decision","text":"Diagnostic Criteria","col":0,"rank":1,"detail":"Hodges & Warlow (1990): ALL 7 criteria required — witnessed, clear-cut anterograde amnesia, no clouding/identity loss, no focal signs, no epileptic features, no head injury, resolves within 24h."},{"id":"tga-trauma","shape":"action","text":"Post-Traumatic Amnesia","col":-3,"rank":1,"tone":"caution","detail":"Recent head injury → not TGA. CT per Canadian CT Head Rule/PECARN, GCS monitoring, repeat neuro exams."},{"id":"tga-stroke-workup","shape":"action","text":"Stroke Workup — TGA Mimic","col":-2,"rank":1,"tone":"danger","detail":"Focal signs, vertigo/diplopia/dysarthria, or duration >24h → stroke pathway: CT, MRI-DWI, CTA, ECG/telemetry, labs."},{"id":"tga-tep","shape":"action","text":"Transient Epileptic Amnesia","col":2,"rank":1,"tone":"caution","detail":"Episodes \u003c1h, recurrent, on waking, subtle automatisms, age \u003c50 → EEG, MRI epilepsy protocol, antiepileptics."},{"id":"tga-confirmed","shape":"action","text":"TGA Confirmed — Pathophysiology","col":0,"rank":2,"tone":"mechanism","detail":"Incidence 3-8/100,000/yr, peak age 50-70. Hippocampal dysfunction, venous congestion, cortical spreading depression — NOT stroke."},{"id":"tga-workup","shape":"decision","text":"Workup Strategy","col":0,"rank":3,"detail":"Classic and resolving → minimal workup (glucose, basic labs, ECG). Atypical → CT, MRI-DWI, EEG, CTA as indicated."},{"id":"tga-imaging","shape":"action","text":"Imaging","col":1,"rank":4,"tone":"normal","detail":"MRI-DWI gold standard — CA1 hippocampal lesions in 70-80%, best seen 24-72h; CT usually normal; not required for diagnosis."},{"id":"tga-prognosis","shape":"action","text":"Prognosis","col":0,"rank":5,"tone":"normal","detail":"Resolves in 4-8h (max 24h). Recurrence 2-3%/yr, 6-10% lifetime. No increased stroke, dementia, or mortality risk."},{"id":"tga-disposition","shape":"decision","text":"Disposition","col":0,"rank":6,"detail":"Discharge if classic, resolved, and safe follow-up. Admit if persistent deficits, stroke found, or diagnostic uncertainty."},{"id":"tga-observe","shape":"action","text":"Observation","col":-1,"rank":7,"tone":"caution","detail":"Serial exams q1-2h; reassess at 4-6h and 24h; discharge if resolved, admit if not (TGA max duration is 24h by definition)."},{"id":"tga-discharge","shape":"state","text":"Discharge — TGA Resolved","col":-2,"rank":8,"tone":"normal","detail":"Benign, not a stroke. No driving 24-48h. PCP follow-up in 1-2 weeks."},{"id":"tga-admit-stroke","shape":"state","text":"Admit — Stroke Identified","col":0,"rank":8,"tone":"danger","detail":"Not TGA — standard stroke workup and treatment; admit stroke service/neuro ICU."},{"id":"tga-admit-workup","shape":"state","text":"Admit — Diagnostic Uncertainty","col":2,"rank":8,"tone":"caution","detail":"MRI-DWI, EEG, telemetry, neurology consult; most remain TGA, but atypical features need workup."}],"edges":[{"from":"tga-start","to":"tga-criteria","label":"Classic presentation"},{"from":"tga-start","to":"tga-stroke-workup","label":"Focal neuro signs — critical"},{"from":"tga-start","to":"tga-tep","label":"Seizure witnessed / post-ictal"},{"from":"tga-start","to":"tga-trauma","label":"Recent head trauma"},{"from":"tga-criteria","to":"tga-confirmed","label":"Meets all criteria"},{"from":"tga-criteria","to":"tga-stroke-workup","label":"Episode >24h"},{"from":"tga-criteria","to":"tga-stroke-workup","label":"Focal signs present — critical"},{"from":"tga-criteria","to":"tga-tep","label":"Recurrent episodes"},{"from":"tga-confirmed","to":"tga-workup"},{"from":"tga-stroke-workup","to":"tga-workup"},{"from":"tga-tep","to":"tga-workup"},{"from":"tga-trauma","to":"tga-disposition"},{"from":"tga-workup","to":"tga-prognosis","label":"Classic, resolving"},{"from":"tga-workup","to":"tga-imaging","label":"Atypical features"},{"from":"tga-workup","to":"tga-stroke-workup","label":"Concerned for stroke — urgent"},{"from":"tga-workup","to":"tga-tep","label":"Concerned for seizure"},{"from":"tga-imaging","to":"tga-prognosis"},{"from":"tga-prognosis","to":"tga-disposition"},{"from":"tga-disposition","to":"tga-discharge","label":"Classic TGA, resolved"},{"from":"tga-disposition","to":"tga-observe","label":"Still symptomatic"},{"from":"tga-disposition","to":"tga-admit-stroke","label":"Stroke identified"},{"from":"tga-disposition","to":"tga-admit-workup","label":"Diagnostic uncertainty"},{"from":"tga-observe","to":"tga-disposition","label":"Reassess"}]},{"id":"b-fullprotocol","type":"text","md":"This is the full diagnostic spine. See the [full protocol](#/tree/transient-global-amnesia) for complete branch text."}]},{"id":"sec-workup","title":"5 · Workup strategy","blocks":[{"id":"b-workup-text","type":"text","whenNode":"tga-workup","md":"**Minimal workup (classic presentation):** fingerstick glucose, basic labs if indicated (CBC, BMP), ECG (screen for atrial fibrillation).\n\n**Extended workup (atypical features):** CT head, MRI with DWI (posterior-circulation stroke, hippocampal lesions), EEG if seizure is suspected, CTA if vascular risk factors are prominent.","cite":["ref1","ref4"]},{"id":"b-imaging-table","type":"table","whenNode":"tga-imaging","columns":["Study","Findings / role"],"rows":[["CT head","Usually normal in TGA; rules out hemorrhage or mass; reasonable first-line for atypical cases"],["MRI-DWI","Gold standard if obtained — punctate CA1 hippocampal lesions in 70-80%, best seen 24-72 hours after onset; lesions resolve without infarction; not required for diagnosis"],["CTA/MRA","Only if stroke is a concern — TGA itself is not a vascular event"]],"cite":["ref4","ref5"]}]},{"id":"sec-prognosis","title":"6 · Prognosis","blocks":[{"id":"b-prognosis","type":"text","whenNode":"tga-prognosis","md":"**Natural history:** complete resolution within 24 hours (usually 4-8 hours); dense amnesia for the event itself persists; retrograde amnesia for hours-to-days before the event; full cognitive recovery otherwise.\n\n**Recurrence:** annual rate **2-3%**, lifetime **6-10%** — frequent recurrence should prompt reconsidering TEA.\n\n**Long-term outcomes:** no increased stroke risk, no increased dementia risk, no increased mortality; quality of life unaffected.\n\nReassurance is key — patients often will not remember the episode, and that is normal and expected.","cite":["ref1","ref2","ref7"]}]},{"id":"sec-disposition","title":"7 · Disposition","blocks":[{"id":"b-disposition-admit","type":"callout","tone":"caution","title":"Admit if","whenNode":"tga-disposition","md":"Persistent deficits beyond 24 hours, focal neurologic signs, stroke identified on imaging, recurrent episodes needing EEG, or diagnostic uncertainty.","cite":["ref1"]},{"id":"b-disposition-discharge","type":"callout","tone":"normal","title":"Discharge if","whenNode":"tga-disposition","md":"Classic TGA criteria met, symptoms resolving or resolved, no focal deficits, a safe home environment, and reliable follow-up.","cite":["ref1"]},{"id":"b-observe-steps","type":"steps","ordered":true,"whenNode":"tga-observe","cite":["ref1"],"items":["Serial neuro exams every 1-2 hours while symptoms are ongoing (most resolve in 4-8 hours)","Reassess at 4-6 hours — improving: continue observation and plan discharge; worsening or focal signs: CT/MRI and neurology consult","Reassess at 24 hours — resolved: discharge with follow-up; not resolved: no longer TGA, admit for workup (max duration by definition: 24 hours)","Keep the patient calm — repetitive questioning is distressing; keep family at bedside; give simple, repeated orientation and written instructions","Document time of onset, duration, and resolution time"]},{"id":"b-discharge-callout","type":"callout","tone":"normal","title":"Discharge — TGA resolved","whenNode":"tga-discharge","md":"Criteria: symptoms fully resolved, no focal deficits, normal mental status, able to form new memories, safe home environment with an observer.\n\n**Recommendation:** Discharge home. Classic TGA, benign prognosis. No driving 24-48h. PCP follow-up 1-2 weeks. Return for new symptoms.\n\nTGA is benign, NOT a stroke — the patient will not remember the episode, and that is normal. Low recurrence risk (**2-3%**/year). No driving for **24-48 hours**; no legal/financial decisions for 24 hours. PCP follow-up in 1-2 weeks; neurology if recurrent or atypical. Return for a new episode, focal weakness/numbness, speech difficulty, or severe headache.","cite":["ref1","ref7"]},{"id":"b-admit-stroke-callout","type":"callout","tone":"danger","title":"Admit — stroke identified","whenNode":"tga-admit-stroke","md":"This is NOT TGA — follow standard stroke protocols; admit to the stroke service/neuro ICU. Workup: MRI-DWI if not done, CTA head/neck, echo (TTE/TEE), telemetry, lipids/A1c, hypercoagulability workup if young. Treatment: antiplatelet therapy, statin, risk-factor modification; thrombolysis if within window and a deficit is present.\n\n**Recommendation:** Admit stroke service. This is NOT TGA. Follow stroke protocol.","cite":["ref5"]},{"id":"b-admit-workup-callout","type":"callout","tone":"caution","title":"Admit — diagnostic uncertainty","whenNode":"tga-admit-workup","md":"Indications: symptoms >24 hours, recurrent episodes, atypical features, cannot rule out stroke/seizure, or a young patient (\u003c50). Workup: MRI-DWI, EEG (routine or prolonged), continuous telemetry, neurology consult. Most will still be TGA, but the workup is needed for atypical cases.\n\n**Recommendation:** Admit for observation and workup. MRI, EEG, neuro consult. Monitor for resolution.","cite":["ref1"]},{"id":"b-pitfalls","type":"disclosure","summary":"Other pitfalls","scent":"3 items","blocks":[{"id":"b-p1","type":"callout","tone":"caution","md":"**Do NOT diagnose TGA if there is recent head trauma** — this is post-traumatic amnesia, not TGA."},{"id":"b-p2","type":"callout","tone":"caution","md":"**Do NOT dismiss frequent or recurrent episodes as TGA** — TGA rarely recurs; reconsider transient epileptic amnesia and get an EEG."},{"id":"b-p3","type":"callout","tone":"caution","md":"**Do NOT stop the stroke workup because the amnesia resembles TGA** — thalamic/PCA stroke can present with isolated anterograde amnesia; focal signs or duration >24 hours mean this is not TGA."}]}]}],"citations":[{"id":"ref1","label":"Arena JE, Rabinstein AA. Transient Global Amnesia. Mayo Clin Proc. 2015;90(2):264-272."},{"id":"ref2","label":"Bartsch T, Deuschl G. Transient global amnesia: functional anatomy and clinical implications. Lancet Neurol. 2010;9(2):205-214."},{"id":"ref3","label":"Hodges JR, Warlow CP. Syndromes of transient amnesia: towards a classification. A study of 153 cases. J Neurol Neurosurg Psychiatry. 1990;53(10):834-843."},{"id":"ref4","label":"Bartsch T, et al. Focal lesions of human hippocampal CA1 neurons in transient global amnesia impair place memory. Science. 2010;328(5984):1412-1415."},{"id":"ref5","label":"Enzinger C, et al. Transient global amnesia: diffusion-weighted imaging lesions and cerebrovascular disease. Stroke. 2008;39(8):2219-2225."},{"id":"ref6","label":"Zeman AZ, et al. Transient epileptic amnesia: a description of the clinical and neuropsychological features in 10 cases and a review of the literature. J Neurol Neurosurg Psychiatry. 1998;64(4):435-443."},{"id":"ref7","label":"Pantoni L, et al. Transient global amnesia: a review emphasizing pathogenic aspects. Acta Neurol Scand. 2000;102(5):275-283."}],"meta":{"version":"1.0","lastReviewed":"2026-07-12","evidenceThrough":"2015 (Mayo Clin Proc TGA review); 2010 (Lancet Neurol functional-anatomy review)","nextReview":"2027-07-12","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 InfoKitt Infographic Architecture cockpit spec — first-ever infographic for transient-global-amnesia. 14/15 source nodes represented as flow nodes (100% of reachable nodes); 1 orphan node (tga-other-mimics, unreachable in source tree) preserved as a disclosure block rather than a fabricated flow edge — see brief.md."},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

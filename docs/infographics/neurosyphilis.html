@@ -1,0 +1,530 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neurosyphilis: Evaluation &amp; Treatment — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Neurosyphilis: Evaluation &amp; Treatment</h1>
+  <p class="ig-use">Adults with confirmed syphilis (any stage) being evaluated for neurologic, ocular, or otic involvement, in the ED/inpatient setting. Excludes pediatric/congenital syphilis and pregnancy-specific dosing.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ CSF-VDRL reactive is diagnostic of neurosyphilis — start IV penicillin G immediately.</div><div class="ig-scope-item">⚠ Aqueous crystalline penicillin G 18–24 million units/day IV × 10–14 days is first-line treatment.</div><div class="ig-scope-item">⚠ CSF pleocytosis (&gt;5 WBC/µL) or elevated protein with neuro symptoms → treat as neurosyphilis even if CSF-VDRL is negative.</div><div class="ig-scope-item">⚠ Ocular or otic syphilis: treat same as neurosyphilis — ophthalmology/ENT consult mandatory.</div><div class="ig-scope-item">⚠ Repeat CSF at 6 months — CSF pleocytosis should normalize first (protein/VDRL lag).</div><div class="ig-scope-item">⚠ PCN allergy: desensitization preferred over ceftriaxone alternative (limited data for ceftriaxone).</div><div class="ig-scope-item">⚠ Do NOT use benzathine penicillin for neurosyphilis — does NOT penetrate the blood-brain barrier.</div><div class="ig-scope-item">⚠ Ocular/otic syphilis: CSF examination is recommended but treatment should NOT be delayed for LP.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-days">Treatment days (IV/IM neurosyphilis regimen) <span class="ig-unit">(days)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="days" min="10" max="14" step="1" value="12" aria-label="Treatment days (IV/IM neurosyphilis regimen) slider">
+<input type="number" id="ig-num-days" data-input="days" min="10" max="14" step="1" value="12" inputmode="decimal" aria-label="Treatment days (IV/IM neurosyphilis regimen) exact value">
+</div>
+<div class="ig-warn" data-warn-for="days" hidden role="alert">Value outside 10–14 days — confirm.</div>
+</div><div class="ig-ctl">
+<label for="ig-num-doxydays">Doxycycline course length <span class="ig-unit">(days)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="doxydays" min="14" max="28" step="1" value="28" aria-label="Doxycycline course length slider">
+<input type="number" id="ig-num-doxydays" data-input="doxydays" min="14" max="28" step="1" value="28" inputmode="decimal" aria-label="Doxycycline course length exact value">
+</div>
+<div class="ig-warn" data-warn-for="doxydays" hidden role="alert">Value outside 14–28 days — confirm.</div>
+</div><div class="ig-ctl ig-select-ctl"><label for="ig-select-symptomtype">Presenting symptoms</label><select id="ig-select-symptomtype" data-input="symptomtype" data-select-input="1" aria-label="Presenting symptoms"><option value="1" selected>Neurological symptoms</option><option value="2">Ocular or otic symptoms</option><option value="3">Asymptomatic late latent syphilis</option></select></div><div class="ig-ctl ig-select-ctl"><label for="ig-select-csfvdrl">CSF-VDRL result</label><select id="ig-select-csfvdrl" data-input="csfvdrl" data-select-input="1" aria-label="CSF-VDRL result"><option value="0" selected>Pending / not yet drawn</option><option value="1">Reactive</option><option value="2">Non-reactive, abnormal CSF</option><option value="3">Non-reactive, normal CSF</option></select></div><div class="ig-ctl ig-select-ctl"><label for="ig-select-pcndosemu">Penicillin G daily dose</label><select id="ig-select-pcndosemu" data-input="pcndosemu" data-select-input="1" aria-label="Penicillin G daily dose"><option value="18" selected>18 million units/day (low end)</option><option value="24">24 million units/day (high end)</option></select></div><div class="ig-ctl ig-select-ctl"><label for="ig-select-benzdoses">Benzathine penicillin dose count</label><select id="ig-select-benzdoses" data-input="benzdoses" data-select-input="1" aria-label="Benzathine penicillin dose count"><option value="1">Early syphilis (1 dose)</option><option value="3" selected>Late latent (3 weekly doses)</option></select></div><div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="asympexception" aria-checked="false">Exception criteria present (Tx failure / HIV co-infection / new neuro signs / tertiary syphilis)</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="ns-start" hidden><button type="button" data-route-select="ns-start"><span class="ig-route-rank">1</span><span>Confirmed syphilis — suspect neurosyphilis</span></button></li><li data-route-node="ns-neuro-symptoms" hidden><button type="button" data-route-select="ns-neuro-symptoms"><span class="ig-route-rank">2</span><span>Neurological, ocular, or otic symptoms present?</span></button></li><li data-route-node="ns-ocular-otic" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}"><button type="button" data-route-select="ns-ocular-otic"><span class="ig-route-rank">3</span><span>Ocular/otic syphilis — treat as neurosyphilis</span></button></li><li data-route-node="ns-csf-eval" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;asympexception&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}}"><button type="button" data-route-select="ns-csf-eval"><span class="ig-route-rank">3</span><span>Order CSF-VDRL, FTA-ABS, cell count, protein, glucose</span></button></li><li data-route-node="ns-asymptomatic" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}"><button type="button" data-route-select="ns-asymptomatic"><span class="ig-route-rank">3</span><span>Asymptomatic late latent — exception criteria present?</span></button></li><li data-route-node="ns-csf-result" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;asympexception&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}}"><button type="button" data-route-select="ns-csf-result"><span class="ig-route-rank">4</span><span>CSF-VDRL result?</span></button></li><li data-route-node="ns-latent-treatment" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;asympexception&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><button type="button" data-route-select="ns-latent-treatment"><span class="ig-route-rank">4</span><span>Late latent syphilis treatment</span></button></li><li data-route-node="ns-probable" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}"><button type="button" data-route-select="ns-probable"><span class="ig-route-rank">5</span><span>Probable neurosyphilis — treat</span></button></li><li data-route-node="ns-confirmed" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}"><button type="button" data-route-select="ns-confirmed"><span class="ig-route-rank">5</span><span>Confirmed neurosyphilis — treat</span></button></li><li data-route-node="ns-unlikely" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}"><button type="button" data-route-select="ns-unlikely"><span class="ig-route-rank">5</span><span>Neurosyphilis unlikely — treat syphilis by stage</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 678 588" width="678" height="588" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M339,98 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,206 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="223" class="ig-edge-lbl" text-anchor="middle">Neuro symptoms</text><path d="M339,206 L339,227 L129,227 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="223" class="ig-edge-lbl" text-anchor="middle">Ocular/otic symptoms</text><path d="M339,206 L339,227 L549,227 L549,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="223" class="ig-edge-lbl" text-anchor="middle">Asymptomatic late latent</text><path d="M339,314 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,422 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="439" class="ig-edge-lbl" text-anchor="middle">VDRL reactive</text><path d="M339,422 L339,443 L129,443 L129,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="439" class="ig-edge-lbl" text-anchor="middle">Non-reactive, abnormal CSF</text><path d="M339,422 L339,443 L549,443 L549,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="439" class="ig-edge-lbl" text-anchor="middle">Non-reactive, normal CSF</text><path d="M549,314 L549,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="331" class="ig-edge-lbl" text-anchor="middle">No exception criteria</text><path d="M549,314 L549,281 L339,281 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="277" class="ig-edge-lbl" text-anchor="middle">Exception criteria present</text><g class="ig-node" data-node="ns-start" aria-label="Confirmed syphilis — suspect neurosyphilis"><rect x="251" y="32" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="257" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Confirmed syphilis — suspect neurosyphilis</div></foreignObject></g><g class="ig-node" data-node="ns-neuro-symptoms" aria-label="Neurological, ocular, or otic symptoms present?"><polygon points="273,140 405,140 427,173 405,206 273,206 251,173" class="ig-shape t-neutral"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Neurological, ocular, or otic symptoms present?</div></foreignObject></g><g class="ig-node" data-node="ns-ocular-otic" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" tabindex="0" role="button" aria-label="Ocular/otic syphilis — treat as neurosyphilis"><rect x="41" y="248" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Ocular/otic syphilis — treat as neurosyphilis</div></foreignObject></g><g class="ig-node" data-node="ns-csf-eval" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;asympexception&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}}" aria-label="Order CSF-VDRL, FTA-ABS, cell count, protein, glucose"><rect x="251" y="248" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Order CSF-VDRL, FTA-ABS, cell count, protein, glucose</div></foreignObject></g><g class="ig-node" data-node="ns-asymptomatic" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}" aria-label="Asymptomatic late latent — exception criteria present?"><polygon points="483,248 615,248 637,281 615,314 483,314 461,281" class="ig-shape t-neutral"/><foreignObject x="467" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Asymptomatic late latent — exception criteria present?</div></foreignObject></g><g class="ig-node" data-node="ns-csf-result" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;asympexception&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}}" aria-label="CSF-VDRL result?"><polygon points="273,356 405,356 427,389 405,422 273,422 251,389" class="ig-shape t-neutral"/><foreignObject x="257" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">CSF-VDRL result?</div></foreignObject></g><g class="ig-node" data-node="ns-latent-treatment" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;asympexception&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" aria-label="Late latent syphilis treatment"><rect x="461" y="356" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="467" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Late latent syphilis treatment</div></foreignObject></g><g class="ig-node" data-node="ns-probable" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}" aria-label="Probable neurosyphilis — treat"><rect x="41" y="464" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="47" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Probable neurosyphilis — treat</div></foreignObject></g><g class="ig-node" data-node="ns-confirmed" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}" aria-label="Confirmed neurosyphilis — treat"><rect x="251" y="464" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Confirmed neurosyphilis — treat</div></foreignObject></g><g class="ig-node" data-node="ns-unlikely" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}" aria-label="Neurosyphilis unlikely — treat syphilis by stage"><rect x="461" y="464" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="467" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Neurosyphilis unlikely — treat syphilis by stage</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="ns-ocular-otic" hidden><strong>Ocular/otic syphilis — treat as neurosyphilis</strong><span>Uveitis, optic neuritis, retinitis, papillitis, vision loss, sensorineural hearing loss, tinnitus, vertigo. Treat regardless of CSF findings — do not delay for LP.</span><button type="button" class="ig-btn ig-open-step" data-open-step="ns-ocular-otic">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section"><h2 class="ig-h2">Neurosyphilis — Suspect &amp; Screen</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">Neurosyphilis should be considered in any patient with confirmed syphilis who has neurological symptoms or signs. Diagnosis requires a combination of clinical, serologic, and CSF findings.<br><br><strong>Key presentations:</strong> visual changes, hearing loss, cognitive impairment, psychiatric symptoms, cranial nerve deficits, meningismus, stroke-like symptoms, tabes dorsalis (late), general paresis (late).</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">What To Do Now</h2><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" data-whennode="ns-csf-eval"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Order CSF evaluation</div><div>Neurological symptoms in a patient with syphilis → CSF-VDRL, FTA-ABS, cell count, protein, glucose.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}" data-whennode="ns-confirmed"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Confirmed neurosyphilis — treat immediately</div><div>CSF-VDRL reactive is <strong>diagnostic</strong>. Start <a href="#/drug/penicillin-g-iv/neurosyphilis" target="_top" class="ig-link">Penicillin G</a> 18–24 million units/day IV × 10–14 days now. Admit; ID consult.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}" data-whennode="ns-probable"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Probable neurosyphilis — treat as confirmed</div><div>CSF-VDRL non-reactive but pleocytosis &gt;5 WBC/µL or elevated protein with neuro symptoms → treat as neurosyphilis. Same regimen as confirmed.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;!=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}}" data-whennode="ns-unlikely"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Neurosyphilis unlikely — treat underlying stage</div><div>Normal CSF with non-reactive VDRL. Treat the syphilis stage instead (early vs. late latent) and consider alternative diagnoses for the neuro symptoms.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" data-whennode="ns-ocular-otic"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Ocular/otic syphilis — treat now, do not wait for LP</div><div>Treat as neurosyphilis regardless of CSF findings and regardless of stage. Ophthalmology and/or ENT consult mandatory; ID consult. CSF exam recommended but must NOT delay treatment.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;asympexception&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" data-whennode="ns-latent-treatment"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">No CSF indicated — treat late latent syphilis</div><div>Routine LP is NOT recommended for asymptomatic late latent syphilis without exception criteria. Treat with benzathine penicillin per stage.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;symptomtype&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;asympexception&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;csfvdrl&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" data-whennode="ns-csf-eval"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Exception criteria present — CSF exam indicated</div><div>Treatment failure, HIV co-infection, developing neuro signs, or tertiary syphilis → order CSF evaluation as above.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Treatment — Confirmed / Probable Neurosyphilis &amp; Ocular/Otic</h2><div class="ig-cond ig-stepbound" data-whennode="ns-confirmed ns-probable ns-ocular-otic"><div class="ig-block ig-dose" data-calc="pcntotalcourseunits"><div class="ig-dose-drug">Aqueous crystalline penicillin G</div><div class="ig-dose-val"><span data-calc-value>18–24 million units/day IV (3–4 million units IV q4h or continuous infusion) × 10–14 days</span></div><div class="ig-dose-route">IV</div><div class="ig-dose-note">Preferred regimen. Requires hospitalization for the full course.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-confirmed ns-probable ns-ocular-otic"><div class="ig-block ig-stat t-normal" data-calc="pcntotalcourseunits"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">Total penicillin G units for selected course</span></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-confirmed ns-probable ns-ocular-otic"><div class="ig-block ig-dose" data-calc="probenecidtotalcoursemg"><div class="ig-dose-drug">Procaine penicillin G + Probenecid</div><div class="ig-dose-val"><span data-calc-value>Procaine PCN G 2.4 million units IM daily + probenecid 500 mg PO QID, both × 10–14 days</span></div><div class="ig-dose-route">IM + PO</div><div class="ig-dose-note">Use if IV access is not feasible. Requires daily IM injections.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-confirmed ns-probable ns-ocular-otic"><div class="ig-block ig-stat t-normal" data-calc="probenecidtotalcoursemg"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">Total probenecid dose for selected course</span></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-confirmed ns-probable ns-ocular-otic"><div class="ig-block ig-dose" data-calc="ceftriaxonealttotalgrams"><div class="ig-dose-drug">Ceftriaxone</div><div class="ig-dose-val"><span data-calc-value>2 g IV daily × 10–14 days</span></div><div class="ig-dose-route">IV or IM</div><div class="ig-dose-note">Desensitization to penicillin is preferred if at all possible — limited data support ceftriaxone for neurosyphilis.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-confirmed ns-probable ns-ocular-otic"><div class="ig-block ig-stat t-normal" data-calc="ceftriaxonealttotalgrams"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">Total ceftriaxone for selected course</span></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-confirmed ns-probable"><ul class="ig-block ig-steps"><li>Repeat CSF at 6 months</li><li>CSF pleocytosis should normalize first (protein/VDRL lag)</li><li>Re-treat if CSF not improved at 6 months</li><li>Quantitative RPR at 6, 12, and 24 months</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="ns-ocular-otic"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Mandatory consults — ocular/otic</div><div>Ophthalmology for ocular involvement; ENT/Audiology for otic involvement; Infectious Disease. CSF exam recommended but treatment should NOT be delayed for LP.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Treatment — Neurosyphilis Unlikely / Late Latent Syphilis</h2><div class="ig-cond ig-stepbound" data-whennode="ns-unlikely ns-latent-treatment"><div class="ig-block ig-dose" data-calc="benzathinetotalunits"><div class="ig-dose-drug">Benzathine penicillin G</div><div class="ig-dose-val"><span data-calc-value>2.4 million units IM × 1 (early) or weekly × 3 weeks (late latent)</span></div><div class="ig-dose-route">IM</div><div class="ig-dose-note">Treat the underlying syphilis stage. Early = primary/secondary/early latent. Late latent = weekly × 3 weeks.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-unlikely ns-latent-treatment"><div class="ig-block ig-stat t-normal" data-calc="benzathinetotalunits"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">Total benzathine penicillin dose for selected regimen</span></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-unlikely ns-latent-treatment"><div class="ig-block ig-dose" data-calc="doxylatelatenttotalmg"><div class="ig-dose-drug">Doxycycline</div><div class="ig-dose-val"><span data-calc-value>100 mg PO BID × 28 days</span></div><div class="ig-dose-route">PO</div><div class="ig-dose-note">Late latent syphilis course shown (28 days); early syphilis uses 100 mg PO BID × 14 days instead. Desensitization to penicillin preferred. Doxycycline is not adequate for neurosyphilis — poor CSF penetration; used only once neurosyphilis has been ruled unlikely or was never on the differential.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-unlikely ns-latent-treatment"><div class="ig-block ig-stat t-normal" data-calc="doxylatelatenttotalmg"><span class="ig-stat-val"><span data-calc-value>—</span></span><span class="ig-stat-lbl">Total doxycycline dose for selected course length</span></div></div><div class="ig-cond ig-stepbound" data-whennode="ns-unlikely ns-latent-treatment"><p class="ig-block ig-text"><strong>Late latent regimen total: 7.2 million units</strong> (2.4 MU × 3 weekly doses). Follow-up: quantitative nontreponemal titers at 6 and 12 months (early syphilis) or 6, 12, and 24 months (late latent). Expect a 4-fold decline. If titers do not decline, evaluate for treatment failure and consider CSF exam.</p></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Benzathine penicillin is NOT a neurosyphilis treatment</div><div>Does NOT achieve treponemicidal levels in CSF — never substitute benzathine penicillin for the IV/IM regimens used in confirmed, probable, or ocular/otic neurosyphilis.</div></div></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>Neurosyphilis — Suspect &amp; Screen</h3><p>Neurosyphilis should be considered in any patient with confirmed syphilis who has neurological symptoms or signs. Diagnosis requires a combination of clinical, serologic, and CSF findings.
+
+**Key presentations:** visual changes, hearing loss, cognitive impairment, psychiatric symptoms, cranial nerve deficits, meningismus, stroke-like symptoms, tabes dorsalis (late), general paresis (late).</p><p>Confirmed syphilis — suspect neurosyphilis</p><p>Neurological, ocular, or otic symptoms present?</p><p>Ocular/otic syphilis — treat as neurosyphilis — Uveitis, optic neuritis, retinitis, papillitis, vision loss, sensorineural hearing loss, tinnitus, vertigo. Treat regardless of CSF findings — do not delay for LP.</p><p>Order CSF-VDRL, FTA-ABS, cell count, protein, glucose</p><p>Asymptomatic late latent — exception criteria present?</p><p>CSF-VDRL result?</p><p>Late latent syphilis treatment</p><p>Probable neurosyphilis — treat</p><p>Confirmed neurosyphilis — treat</p><p>Neurosyphilis unlikely — treat syphilis by stage</p><h3>What To Do Now</h3><p>Neurological symptoms in a patient with syphilis → CSF-VDRL, FTA-ABS, cell count, protein, glucose.</p><p>CSF-VDRL reactive is **diagnostic**. Start [Penicillin G](#/drug/penicillin-g-iv/neurosyphilis) 18–24 million units/day IV × 10–14 days now. Admit; ID consult.</p><p>CSF-VDRL non-reactive but pleocytosis &gt;5 WBC/µL or elevated protein with neuro symptoms → treat as neurosyphilis. Same regimen as confirmed.</p><p>Normal CSF with non-reactive VDRL. Treat the syphilis stage instead (early vs. late latent) and consider alternative diagnoses for the neuro symptoms.</p><p>Treat as neurosyphilis regardless of CSF findings and regardless of stage. Ophthalmology and/or ENT consult mandatory; ID consult. CSF exam recommended but must NOT delay treatment.</p><p>Routine LP is NOT recommended for asymptomatic late latent syphilis without exception criteria. Treat with benzathine penicillin per stage.</p><p>Treatment failure, HIV co-infection, developing neuro signs, or tertiary syphilis → order CSF evaluation as above.</p><h3>Treatment — Confirmed / Probable Neurosyphilis &amp; Ocular/Otic</h3><p><strong>Aqueous crystalline penicillin G</strong>: 18–24 million units/day IV (3–4 million units IV q4h or continuous infusion) × 10–14 days IV — Preferred regimen. Requires hospitalization for the full course.</p><p>Total penicillin G units for selected course: (computed)</p><p><strong>Procaine penicillin G + Probenecid</strong>: Procaine PCN G 2.4 million units IM daily + probenecid 500 mg PO QID, both × 10–14 days IM + PO — Use if IV access is not feasible. Requires daily IM injections.</p><p>Total probenecid dose for selected course: (computed)</p><p><strong>Ceftriaxone</strong>: 2 g IV daily × 10–14 days IV or IM — Desensitization to penicillin is preferred if at all possible — limited data support ceftriaxone for neurosyphilis.</p><p>Total ceftriaxone for selected course: (computed)</p><ul><li>Repeat CSF at 6 months</li><li>CSF pleocytosis should normalize first (protein/VDRL lag)</li><li>Re-treat if CSF not improved at 6 months</li><li>Quantitative RPR at 6, 12, and 24 months</li></ul><p>Ophthalmology for ocular involvement; ENT/Audiology for otic involvement; Infectious Disease. CSF exam recommended but treatment should NOT be delayed for LP.</p><h3>Treatment — Neurosyphilis Unlikely / Late Latent Syphilis</h3><p><strong>Benzathine penicillin G</strong>: 2.4 million units IM × 1 (early) or weekly × 3 weeks (late latent) IM — Treat the underlying syphilis stage. Early = primary/secondary/early latent. Late latent = weekly × 3 weeks.</p><p>Total benzathine penicillin dose for selected regimen: (computed)</p><p><strong>Doxycycline</strong>: 100 mg PO BID × 28 days PO — Late latent syphilis course shown (28 days); early syphilis uses 100 mg PO BID × 14 days instead. Desensitization to penicillin preferred. Doxycycline is not adequate for neurosyphilis — poor CSF penetration; used only once neurosyphilis has been ruled unlikely or was never on the differential.</p><p>Total doxycycline dose for selected course length: (computed)</p><p>**Late latent regimen total: 7.2 million units** (2.4 MU × 3 weekly doses). Follow-up: quantitative nontreponemal titers at 6 and 12 months (early syphilis) or 6, 12, and 24 months (late latent). Expect a 4-fold decline. If titers do not decline, evaluate for treatment failure and consider CSF exam.</p><p>Does NOT achieve treponemicidal levels in CSF — never substitute benzathine penicillin for the IV/IM regimens used in confirmed, probable, or ocular/otic neurosyphilis.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-cdc2021"><span class="ig-ref">[1]</span> <a href="https://www.cdc.gov/std/treatment-guidelines/syphilis.htm" target="_top" rel="noopener">CDC. Sexually Transmitted Infections Treatment Guidelines, 2021: Syphilis.</a></li><li id="cite-liu2014"><span class="ig-ref">[2]</span> Liu LL, Zheng HY, Zhang HP, et al. The Prognostic Value of the CSF-VDRL Test in Treated Syphilis. Sex Transm Dis. 2014;41(4):243-7.</li><li id="cite-marra2004"><span class="ig-ref">[3]</span> Marra CM. Clinical Manifestations and Diagnosis of Neurosyphilis. Curr Neurol Neurosci Rep. 2004;4(6):435-40.</li><li id="cite-ghanem2011"><span class="ig-ref">[4]</span> Ghanem KG, Workowski KA. Neurosyphilis: A Current Review. Curr Infect Dis Rep. 2011;13(2):128-35.</li><li id="cite-ropper2019"><span class="ig-ref">[5]</span> Ropper AH. Neurosyphilis. N Engl J Med. 2019;381(14):1358-1363.</li><li id="cite-dunaway2020"><span class="ig-ref">[6]</span> Dunaway SB, et al. Procaine Penicillin G vs Aqueous Crystalline Penicillin G for Neurosyphilis. Clin Infect Dis. 2020.</li><li id="cite-marra2019ceftriaxone"><span class="ig-ref">[7]</span> Marra CM, et al. Ceftriaxone for Neurosyphilis. Clin Infect Dis. 2019.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-12 · evidence through 2025</div>
+  <div>Andy Kittelson, MD — Emergency Medicine</div>
+  <div class="ig-provenance">Source: medkitt-consult · neurosyphilis · Initial cockpit-mode infographic authored from myMedKitt neurosyphilis consult tree.</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"neurosyphilis","title":"Neurosyphilis: Evaluation & Treatment","shape":"algorithm","intendedUse":"Adults with confirmed syphilis (any stage) being evaluated for neurologic, ocular, or otic involvement, in the ED/inpatient setting. Excludes pediatric/congenital syphilis and pregnancy-specific dosing.","scopeWarnings":["CSF-VDRL reactive is diagnostic of neurosyphilis — start IV penicillin G immediately.","Aqueous crystalline penicillin G 18–24 million units/day IV × 10–14 days is first-line treatment.","CSF pleocytosis (>5 WBC/µL) or elevated protein with neuro symptoms → treat as neurosyphilis even if CSF-VDRL is negative.","Ocular or otic syphilis: treat same as neurosyphilis — ophthalmology/ENT consult mandatory.","Repeat CSF at 6 months — CSF pleocytosis should normalize first (protein/VDRL lag).","PCN allergy: desensitization preferred over ceftriaxone alternative (limited data for ceftriaxone).","Do NOT use benzathine penicillin for neurosyphilis — does NOT penetrate the blood-brain barrier.","Ocular/otic syphilis: CSF examination is recommended but treatment should NOT be delayed for LP."],"source":{"kind":"medkitt-consult","ref":"neurosyphilis"},"theme":{"preset":"medkitt"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"symptomtype","label":"Presenting symptoms","type":"select","default":1,"options":[{"label":"Neurological symptoms","value":1},{"label":"Ocular or otic symptoms","value":2},{"label":"Asymptomatic late latent syphilis","value":3}]},{"id":"csfvdrl","label":"CSF-VDRL result","type":"select","default":0,"options":[{"label":"Pending / not yet drawn","value":0},{"label":"Reactive","value":1},{"label":"Non-reactive, abnormal CSF","value":2},{"label":"Non-reactive, normal CSF","value":3}]},{"id":"asympexception","label":"Exception criteria present (Tx failure / HIV co-infection / new neuro signs / tertiary syphilis)","type":"boolean","default":0},{"id":"days","label":"Treatment days (IV/IM neurosyphilis regimen)","unit":"days","type":"number","min":10,"max":14,"step":1,"default":12},{"id":"pcndosemu","label":"Penicillin G daily dose","unit":"million units/day","type":"select","default":18,"options":[{"label":"18 million units/day (low end)","value":18},{"label":"24 million units/day (high end)","value":24}]},{"id":"doxydays","label":"Doxycycline course length","unit":"days","type":"number","min":14,"max":28,"step":1,"default":28},{"id":"benzdoses","label":"Benzathine penicillin dose count","type":"select","default":3,"options":[{"label":"Early syphilis (1 dose)","value":1},{"label":"Late latent (3 weekly doses)","value":3}]}],"calcs":[{"id":"pcntotalcourseunits","expr":"round(pcndosemu*days,1)","unit":"million units","formula":"Daily dose (18–24 million units/day) × treatment days (10–14)","derivedFrom":{"kind":"drug-store","drugId":"penicillin-g-iv","indication":"Neurosyphilis / Ocular / Otic syphilis"},"testVectors":[{"in":{"pcndosemu":18,"days":10},"expect":180},{"in":{"pcndosemu":18,"days":14},"expect":252},{"in":{"pcndosemu":24,"days":14},"expect":336}],"cite":["cdc2021"],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"id","name":"pcndosemu"},"b":{"k":"id","name":"days"}},{"k":"num","v":1}]}},{"id":"probenecidtotalcoursemg","expr":"round(500*4*days,0)","unit":"mg","formula":"Probenecid 500 mg PO QID (2000 mg/day) × treatment days (10–14)","derivedFrom":{"kind":"drug-store","drugId":"procaine-penicillin","indication":"Neurosyphilis"},"testVectors":[{"in":{"days":10},"expect":20000},{"in":{"days":12},"expect":24000},{"in":{"days":14},"expect":28000}],"cite":["cdc2021","dunaway2020"],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"bin","op":"*","a":{"k":"num","v":500},"b":{"k":"num","v":4}},"b":{"k":"id","name":"days"}},{"k":"num","v":0}]}},{"id":"ceftriaxonealttotalgrams","expr":"round(2*days,1)","unit":"g","formula":"Ceftriaxone 2 g IV daily × treatment days (10–14)","derivedFrom":{"kind":"drug-store","drugId":"ceftriaxone","indication":"Neurosyphilis (if desensitization not feasible)"},"testVectors":[{"in":{"days":10},"expect":20},{"in":{"days":12},"expect":24},{"in":{"days":14},"expect":28}],"cite":["cdc2021","marra2019ceftriaxone"],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":2},"b":{"k":"id","name":"days"}},{"k":"num","v":1}]}},{"id":"doxylatelatenttotalmg","expr":"round(100*2*doxydays,0)","unit":"mg","formula":"Doxycycline 100 mg PO BID × course days (14 early / 28 late latent)","derivedFrom":{"kind":"drug-store","drugId":"doxycycline","indication":"Late latent / Tertiary syphilis (PCN allergy)"},"testVectors":[{"in":{"doxydays":14},"expect":2800},{"in":{"doxydays":21},"expect":4200},{"in":{"doxydays":28},"expect":5600}],"cite":["cdc2021"],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"bin","op":"*","a":{"k":"num","v":100},"b":{"k":"num","v":2}},"b":{"k":"id","name":"doxydays"}},{"k":"num","v":0}]}},{"id":"benzathinetotalunits","expr":"round(2.4*benzdoses,1)","unit":"million units","formula":"Benzathine penicillin G 2.4 million units IM × number of doses (1 early, 3 weekly for late latent)","derivedFrom":{"kind":"drug-store","drugId":"benzathine-penicillin","indication":"Late latent / Tertiary syphilis (non-neurologic)"},"testVectors":[{"in":{"benzdoses":1},"expect":2.4},{"in":{"benzdoses":3},"expect":7.2}],"cite":["cdc2021"],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":2.4},"b":{"k":"id","name":"benzdoses"}},{"k":"num","v":1}]}}],"facts":[{"id":"f-pleocytosis-threshold","claim":"CSF pleocytosis threshold used to call CSF 'abnormal' when VDRL is non-reactive","value":">5 WBC/µL","provenance":"consult:neurosyphilis/ns-csf-result","cite":["cdc2021"],"verified":"provenance"},{"id":"f-pcn-dose","claim":"First-line neurosyphilis antibiotic total daily dose","value":"18–24 million units/day","unit":"units/day","provenance":"drug-store:penicillin-g-iv/Neurosyphilis / Ocular / Otic syphilis","cite":["cdc2021","ropper2019"],"verified":"provenance"},{"id":"f-pcn-duration","claim":"First-line neurosyphilis antibiotic course duration","value":"10–14 days","provenance":"drug-store:penicillin-g-iv/Neurosyphilis / Ocular / Otic syphilis","cite":["cdc2021"],"verified":"provenance"},{"id":"f-procaine-dose","claim":"Procaine penicillin G alternative regimen dose","value":"2.4 million units IM daily","provenance":"drug-store:procaine-penicillin/Neurosyphilis","cite":["cdc2021","dunaway2020"],"verified":"provenance"},{"id":"f-probenecid-dose","claim":"Probenecid co-administration dose with procaine penicillin","value":"500 mg PO QID","provenance":"drug-store:procaine-penicillin/Neurosyphilis","cite":["cdc2021"],"verified":"provenance"},{"id":"f-ceftriaxone-dose","claim":"Ceftriaxone PCN-allergy alternative dose for neurosyphilis (drug-store value used — see spec note on tree vs. drug-store conflict)","value":"2 g IV daily","provenance":"drug-store:ceftriaxone/Neurosyphilis (if desensitization not feasible)","cite":["cdc2021","marra2019ceftriaxone"],"verified":"provenance"},{"id":"f-benzathine-early","claim":"Benzathine penicillin dose for early syphilis (once neurosyphilis is ruled unlikely)","value":"2.4 million units IM × 1","provenance":"drug-store:benzathine-penicillin/Primary / Secondary / Early latent syphilis","cite":["cdc2021"],"verified":"provenance"},{"id":"f-benzathine-late-total","claim":"Total benzathine penicillin dose across the 3-week late latent course","value":"7.2 million units","provenance":"consult:neurosyphilis/ns-latent-treatment","cite":["cdc2021"],"verified":"provenance"},{"id":"f-doxy-late-latent","claim":"Doxycycline PCN-allergy alternative for late latent syphilis (the tree's link hint says \"neurosyphilis\"; drug-store has no such indication — see spec note)","value":"100 mg PO BID × 28 days","provenance":"drug-store:doxycycline/Late latent / Tertiary syphilis (PCN allergy)","cite":["cdc2021"],"verified":"provenance"},{"id":"f-benzathine-no-csf","claim":"Why benzathine penicillin cannot be used to treat neurosyphilis","value":"Does NOT achieve treponemicidal levels in CSF","provenance":"drug-store:benzathine-penicillin/cautions","cite":["cdc2021"],"verified":"provenance"},{"id":"f-followup-6mo","claim":"Follow-up CSF re-examination timing after neurosyphilis treatment","value":"Repeat CSF at 6 months","provenance":"consult:neurosyphilis/ns-confirmed","cite":["cdc2021","liu2014"],"verified":"provenance"}],"sections":[{"id":"sec-overview","title":"Neurosyphilis — Suspect & Screen","blocks":[{"id":"b-intro","type":"text","md":"Neurosyphilis should be considered in any patient with confirmed syphilis who has neurological symptoms or signs. Diagnosis requires a combination of clinical, serologic, and CSF findings.\n\n**Key presentations:** visual changes, hearing loss, cognitive impairment, psychiatric symptoms, cranial nerve deficits, meningismus, stroke-like symptoms, tabes dorsalis (late), general paresis (late).","cite":["cdc2021","marra2004"]},{"id":"b-flow","type":"flow","nodes":[{"id":"ns-start","shape":"state","text":"Confirmed syphilis — suspect neurosyphilis","col":0,"rank":0},{"id":"ns-neuro-symptoms","shape":"decision","text":"Neurological, ocular, or otic symptoms present?","col":0,"rank":1},{"id":"ns-ocular-otic","shape":"state","text":"Ocular/otic syphilis — treat as neurosyphilis","col":-1,"rank":2,"tone":"danger","activeWhen":"symptomtype==2","detail":"Uveitis, optic neuritis, retinitis, papillitis, vision loss, sensorineural hearing loss, tinnitus, vertigo. Treat regardless of CSF findings — do not delay for LP."},{"id":"ns-csf-eval","shape":"action","text":"Order CSF-VDRL, FTA-ABS, cell count, protein, glucose","col":0,"rank":2,"activeWhen":"symptomtype==1 || (symptomtype==3 && asympexception==1)"},{"id":"ns-asymptomatic","shape":"decision","text":"Asymptomatic late latent — exception criteria present?","col":1,"rank":2,"activeWhen":"symptomtype==3"},{"id":"ns-csf-result","shape":"decision","text":"CSF-VDRL result?","col":0,"rank":3,"activeWhen":"symptomtype==1 || (symptomtype==3 && asympexception==1)"},{"id":"ns-latent-treatment","shape":"state","text":"Late latent syphilis treatment","col":1,"rank":3,"tone":"normal","activeWhen":"symptomtype==3 && asympexception==0"},{"id":"ns-probable","shape":"state","text":"Probable neurosyphilis — treat","col":-1,"rank":4,"tone":"danger","activeWhen":"csfvdrl==2 && symptomtype!=2"},{"id":"ns-confirmed","shape":"state","text":"Confirmed neurosyphilis — treat","col":0,"rank":4,"tone":"danger","activeWhen":"csfvdrl==1 && symptomtype!=2"},{"id":"ns-unlikely","shape":"state","text":"Neurosyphilis unlikely — treat syphilis by stage","col":1,"rank":4,"tone":"normal","activeWhen":"csfvdrl==3 && symptomtype!=2"}],"edges":[{"from":"ns-start","to":"ns-neuro-symptoms"},{"from":"ns-neuro-symptoms","to":"ns-csf-eval","label":"Neuro symptoms"},{"from":"ns-neuro-symptoms","to":"ns-ocular-otic","label":"Ocular/otic symptoms"},{"from":"ns-neuro-symptoms","to":"ns-asymptomatic","label":"Asymptomatic late latent"},{"from":"ns-csf-eval","to":"ns-csf-result"},{"from":"ns-csf-result","to":"ns-confirmed","label":"VDRL reactive"},{"from":"ns-csf-result","to":"ns-probable","label":"Non-reactive, abnormal CSF"},{"from":"ns-csf-result","to":"ns-unlikely","label":"Non-reactive, normal CSF"},{"from":"ns-asymptomatic","to":"ns-latent-treatment","label":"No exception criteria"},{"from":"ns-asymptomatic","to":"ns-csf-eval","label":"Exception criteria present"}]}]},{"id":"sec-whattodonow","title":"What To Do Now","blocks":[{"id":"callout-order-csf","type":"callout","tone":"caution","title":"Order CSF evaluation","md":"Neurological symptoms in a patient with syphilis → CSF-VDRL, FTA-ABS, cell count, protein, glucose.","showWhen":"symptomtype==1 && csfvdrl==0","whenNode":"ns-csf-eval"},{"id":"callout-confirmed","type":"callout","tone":"danger","title":"Confirmed neurosyphilis — treat immediately","md":"CSF-VDRL reactive is **diagnostic**. Start [Penicillin G](#/drug/penicillin-g-iv/neurosyphilis) 18–24 million units/day IV × 10–14 days now. Admit; ID consult.","showWhen":"csfvdrl==1 && symptomtype!=2","whenNode":"ns-confirmed"},{"id":"callout-probable","type":"callout","tone":"danger","title":"Probable neurosyphilis — treat as confirmed","md":"CSF-VDRL non-reactive but pleocytosis >5 WBC/µL or elevated protein with neuro symptoms → treat as neurosyphilis. Same regimen as confirmed.","showWhen":"csfvdrl==2 && symptomtype!=2","whenNode":"ns-probable"},{"id":"callout-unlikely","type":"callout","tone":"normal","title":"Neurosyphilis unlikely — treat underlying stage","md":"Normal CSF with non-reactive VDRL. Treat the syphilis stage instead (early vs. late latent) and consider alternative diagnoses for the neuro symptoms.","showWhen":"csfvdrl==3 && symptomtype!=2","whenNode":"ns-unlikely"},{"id":"callout-ocular","type":"callout","tone":"danger","title":"Ocular/otic syphilis — treat now, do not wait for LP","md":"Treat as neurosyphilis regardless of CSF findings and regardless of stage. Ophthalmology and/or ENT consult mandatory; ID consult. CSF exam recommended but must NOT delay treatment.","showWhen":"symptomtype==2","whenNode":"ns-ocular-otic"},{"id":"callout-asymp-standard","type":"callout","tone":"normal","title":"No CSF indicated — treat late latent syphilis","md":"Routine LP is NOT recommended for asymptomatic late latent syphilis without exception criteria. Treat with benzathine penicillin per stage.","showWhen":"symptomtype==3 && asympexception==0 && csfvdrl==0","whenNode":"ns-latent-treatment"},{"id":"callout-asymp-exception","type":"callout","tone":"caution","title":"Exception criteria present — CSF exam indicated","md":"Treatment failure, HIV co-infection, developing neuro signs, or tertiary syphilis → order CSF evaluation as above.","showWhen":"symptomtype==3 && asympexception==1 && csfvdrl==0","whenNode":"ns-csf-eval"}]},{"id":"sec-treatment-neurosyphilis","title":"Treatment — Confirmed / Probable Neurosyphilis & Ocular/Otic","blocks":[{"id":"b-tx-firstline","type":"dose","drug":"Aqueous crystalline penicillin G","dose":"18–24 million units/day IV (3–4 million units IV q4h or continuous infusion) × 10–14 days","route":"IV","note":"Preferred regimen. Requires hospitalization for the full course.","calcRef":"pcntotalcourseunits","drugId":"penicillin-g-iv","whenNode":["ns-confirmed","ns-probable","ns-ocular-otic"],"cite":["cdc2021","ropper2019"]},{"id":"stat-pcn-total","type":"stat","label":"Total penicillin G units for selected course","calcRef":"pcntotalcourseunits","unit":"million units","tone":"normal","whenNode":["ns-confirmed","ns-probable","ns-ocular-otic"]},{"id":"b-tx-alt","type":"dose","drug":"Procaine penicillin G + Probenecid","dose":"Procaine PCN G 2.4 million units IM daily + probenecid 500 mg PO QID, both × 10–14 days","route":"IM + PO","note":"Use if IV access is not feasible. Requires daily IM injections.","calcRef":"probenecidtotalcoursemg","drugId":"procaine-penicillin","whenNode":["ns-confirmed","ns-probable","ns-ocular-otic"],"cite":["cdc2021","dunaway2020"]},{"id":"stat-probenecid-total","type":"stat","label":"Total probenecid dose for selected course","calcRef":"probenecidtotalcoursemg","unit":"mg","tone":"normal","whenNode":["ns-confirmed","ns-probable","ns-ocular-otic"]},{"id":"b-tx-pcnallergy","type":"dose","drug":"Ceftriaxone","dose":"2 g IV daily × 10–14 days","route":"IV or IM","note":"Desensitization to penicillin is preferred if at all possible — limited data support ceftriaxone for neurosyphilis.","calcRef":"ceftriaxonealttotalgrams","drugId":"ceftriaxone","whenNode":["ns-confirmed","ns-probable","ns-ocular-otic"],"cite":["cdc2021","marra2019ceftriaxone"]},{"id":"stat-ceftriaxone-total","type":"stat","label":"Total ceftriaxone for selected course","calcRef":"ceftriaxonealttotalgrams","unit":"g","tone":"normal","whenNode":["ns-confirmed","ns-probable","ns-ocular-otic"]},{"id":"b-tx-monitoring","type":"steps","ordered":false,"items":["Repeat CSF at 6 months","CSF pleocytosis should normalize first (protein/VDRL lag)","Re-treat if CSF not improved at 6 months","Quantitative RPR at 6, 12, and 24 months"],"whenNode":["ns-confirmed","ns-probable"],"cite":["cdc2021","liu2014"]},{"id":"callout-ocular-consults","type":"callout","tone":"danger","title":"Mandatory consults — ocular/otic","md":"Ophthalmology for ocular involvement; ENT/Audiology for otic involvement; Infectious Disease. CSF exam recommended but treatment should NOT be delayed for LP.","whenNode":"ns-ocular-otic","cite":["cdc2021","ghanem2011"]}]},{"id":"sec-treatment-non-neuro","title":"Treatment — Neurosyphilis Unlikely / Late Latent Syphilis","blocks":[{"id":"b-tx-unlikely-benz","type":"dose","drug":"Benzathine penicillin G","dose":"2.4 million units IM × 1 (early) or weekly × 3 weeks (late latent)","route":"IM","note":"Treat the underlying syphilis stage. Early = primary/secondary/early latent. Late latent = weekly × 3 weeks.","calcRef":"benzathinetotalunits","drugId":"benzathine-penicillin","whenNode":["ns-unlikely","ns-latent-treatment"],"cite":["cdc2021"]},{"id":"stat-benz-total","type":"stat","label":"Total benzathine penicillin dose for selected regimen","calcRef":"benzathinetotalunits","unit":"million units","tone":"normal","whenNode":["ns-unlikely","ns-latent-treatment"]},{"id":"b-tx-unlikely-doxy","type":"dose","drug":"Doxycycline","dose":"100 mg PO BID × 28 days","route":"PO","note":"Late latent syphilis course shown (28 days); early syphilis uses 100 mg PO BID × 14 days instead. Desensitization to penicillin preferred. Doxycycline is not adequate for neurosyphilis — poor CSF penetration; used only once neurosyphilis has been ruled unlikely or was never on the differential.","calcRef":"doxylatelatenttotalmg","drugId":"doxycycline","whenNode":["ns-unlikely","ns-latent-treatment"],"cite":["cdc2021"]},{"id":"stat-doxy-total","type":"stat","label":"Total doxycycline dose for selected course length","calcRef":"doxylatelatenttotalmg","unit":"mg","tone":"normal","whenNode":["ns-unlikely","ns-latent-treatment"]},{"id":"b-tx-nonneuro-monitoring","type":"text","md":"**Late latent regimen total: 7.2 million units** (2.4 MU × 3 weekly doses). Follow-up: quantitative nontreponemal titers at 6 and 12 months (early syphilis) or 6, 12, and 24 months (late latent). Expect a 4-fold decline. If titers do not decline, evaluate for treatment failure and consider CSF exam.","whenNode":["ns-unlikely","ns-latent-treatment"],"cite":["cdc2021"]},{"id":"callout-benz-warning","type":"callout","tone":"danger","title":"Benzathine penicillin is NOT a neurosyphilis treatment","md":"Does NOT achieve treponemicidal levels in CSF — never substitute benzathine penicillin for the IV/IM regimens used in confirmed, probable, or ocular/otic neurosyphilis.","cite":["cdc2021"]}]}],"citations":[{"id":"cdc2021","label":"CDC. Sexually Transmitted Infections Treatment Guidelines, 2021: Syphilis.","url":"https://www.cdc.gov/std/treatment-guidelines/syphilis.htm"},{"id":"liu2014","label":"Liu LL, Zheng HY, Zhang HP, et al. The Prognostic Value of the CSF-VDRL Test in Treated Syphilis. Sex Transm Dis. 2014;41(4):243-7."},{"id":"marra2004","label":"Marra CM. Clinical Manifestations and Diagnosis of Neurosyphilis. Curr Neurol Neurosci Rep. 2004;4(6):435-40."},{"id":"ghanem2011","label":"Ghanem KG, Workowski KA. Neurosyphilis: A Current Review. Curr Infect Dis Rep. 2011;13(2):128-35."},{"id":"ropper2019","label":"Ropper AH. Neurosyphilis. N Engl J Med. 2019;381(14):1358-1363."},{"id":"dunaway2020","label":"Dunaway SB, et al. Procaine Penicillin G vs Aqueous Crystalline Penicillin G for Neurosyphilis. Clin Infect Dis. 2020."},{"id":"marra2019ceftriaxone","label":"Marra CM, et al. Ceftriaxone for Neurosyphilis. Clin Infect Dis. 2019."}],"meta":{"version":"1.0","lastReviewed":"2026-07-12","evidenceThrough":"2025","reviewer":"Andy Kittelson, MD — Emergency Medicine","changelog":"Initial cockpit-mode infographic authored from myMedKitt neurosyphilis consult tree."}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

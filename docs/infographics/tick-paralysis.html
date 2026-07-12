@@ -1,0 +1,516 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tick Paralysis: Find It, Pull It, Watch the Airway — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Tick Paralysis: Find It, Pull It, Watch the Airway</h1>
+  <p class="ig-use">All ages presenting with acute ascending flaccid paralysis in the ED — classic population is a young child (often a girl with long thick hair) with an occult scalp tick. Diagnosis is clinical; there is no confirmatory lab test. Excludes patients with an already-confirmed alternative diagnosis (Guillain-Barré, botulism, myasthenia gravis, transverse myelitis) or hypokalemic periodic paralysis on labs.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ <strong>Full head-to-toe skin search is the diagnostic test.</strong> There is no confirmatory lab — search scalp/hairline, behind the ears and ear canal, axillae, groin/perineum/gluteal cleft, umbilicus, interdigital spaces, and the neck/spine. If one tick is found, keep looking — multiple ticks can be present.</div><div class="ig-scope-item">⚠ <strong>Remove properly: fine forceps at the skin, straight-up steady pull.</strong> Do NOT twist, crush, or squeeze the tick body, and do NOT use folklore methods (petroleum jelly, nail polish, matches, heat) — these can trigger more toxin release.</div><div class="ig-scope-item">⚠ <strong>Respiratory failure is the cause of death.</strong> Serial bulbar and ventilatory monitoring is the priority while searching for the tick. Pulse oximetry is a late, poor indicator — a normal SpO2 should NOT be reassuring.</div><div class="ig-scope-item">⚠ <strong>Do NOT give IVIG or plasmapheresis</strong> — they do not work in tick paralysis, unlike GBS. Removing the tick is the treatment.</div><div class="ig-scope-item">⚠ <strong>Australian Ixodes holocyclus tick paralysis can WORSEN after removal</strong>, peaking in the first 12-48 h — admit and observe; involve toxicology regarding tick antitoxin (TAS), which carries non-standardized dosing and allergy/serum-sickness risk.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="bulbar" aria-checked="false">Bulbar / respiratory involvement present</button><button type="button" class="ig-toggle" role="switch" data-toggle="australian" aria-checked="false">Australian Ixodes holocyclus exposure</button><button type="button" class="ig-toggle" role="switch" data-toggle="concern" aria-checked="false">Ongoing progression or diagnostic uncertainty</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="n-start" hidden><button type="button" data-route-select="n-start"><span class="ig-route-rank">1</span><span>Suspected tick paralysis</span></button></li><li data-route-node="n-presentation" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="n-presentation"><span class="ig-route-rank">2</span><span>Ascending weakness or bulbar/resp signs first?</span></button></li><li data-route-node="n-find" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;bulbar&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}"><button type="button" data-route-select="n-find"><span class="ig-route-rank">3</span><span>Full skin search — FIND the tick</span></button></li><li data-route-node="n-remove" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;bulbar&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}"><button type="button" data-route-select="n-remove"><span class="ig-route-rank">4</span><span>Remove: forceps at skin, straight up</span></button></li><li data-route-node="n-monitor" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="n-monitor"><span class="ig-route-rank">5</span><span>Serial respiratory/bulbar monitoring</span></button></li><li data-route-node="n-geography" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="n-geography"><span class="ig-route-rank">6</span><span>North American or Australian tick?</span></button></li><li data-route-node="n-differential" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="n-differential"><span class="ig-route-rank">7</span><span>Differential: GBS, MFS, botulism, MG, TM, hypoK</span></button></li><li data-route-node="n-disposition" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="n-disposition"><span class="ig-route-rank">8</span><span>Disposition: admit vs observe/discharge</span></button></li><li data-route-node="n-prognosis" hidden><button type="button" data-route-select="n-prognosis"><span class="ig-route-rank">9</span><span>Prognosis: NA excellent · Australian guarded</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 258 1020" width="258" height="1020" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M129,98 L129,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,206 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="223" class="ig-edge-lbl" text-anchor="middle">Ascending flaccid weakness, areflexia, sensation spared</text><path d="M129,206 L129,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="331" class="ig-edge-lbl" text-anchor="middle">Bulbar/respiratory involvement</text><path d="M129,314 L129,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,422 L129,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,530 L129,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,638 L129,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="655" class="ig-edge-lbl" text-anchor="middle">North American (Dermacentor)</text><path d="M129,638 L129,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="655" class="ig-edge-lbl" text-anchor="middle">Australian (Ixodes holocyclus)</text><path d="M129,746 L129,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,854 L129,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="n-start" tabindex="0" role="button" aria-label="Suspected tick paralysis"><rect x="41" y="32" width="176" height="66" rx="30" class="ig-shape t-mech"/><foreignObject x="47" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Suspected tick paralysis</div></foreignObject></g><g class="ig-node" data-node="n-presentation" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Ascending weakness or bulbar/resp signs first?"><polygon points="63,140 195,140 217,173 195,206 63,206 41,173" class="ig-shape t-danger"/><foreignObject x="47" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Ascending weakness or bulbar/resp signs first?</div></foreignObject></g><g class="ig-node" data-node="n-find" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;bulbar&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}" tabindex="0" role="button" aria-label="Full skin search — FIND the tick"><rect x="41" y="248" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Full skin search — FIND the tick</div></foreignObject></g><g class="ig-node" data-node="n-remove" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;bulbar&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}" tabindex="0" role="button" aria-label="Remove: forceps at skin, straight up"><rect x="41" y="356" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Remove: forceps at skin, straight up</div></foreignObject></g><g class="ig-node" data-node="n-monitor" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Serial respiratory/bulbar monitoring"><rect x="41" y="464" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Serial respiratory/bulbar monitoring</div></foreignObject></g><g class="ig-node" data-node="n-geography" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="North American or Australian tick?"><polygon points="63,572 195,572 217,605 195,638 63,638 41,605" class="ig-shape t-caution"/><foreignObject x="47" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">North American or Australian tick?</div></foreignObject></g><g class="ig-node" data-node="n-differential" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Differential: GBS, MFS, botulism, MG, TM, hypoK"><rect x="41" y="680" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Differential: GBS, MFS, botulism, MG, TM, hypoK</div></foreignObject></g><g class="ig-node" data-node="n-disposition" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Disposition: admit vs observe/discharge"><rect x="41" y="788" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Disposition: admit vs observe/discharge</div></foreignObject></g><g class="ig-node" data-node="n-prognosis" tabindex="0" role="button" aria-label="Prognosis: NA excellent · Australian guarded"><rect x="41" y="896" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="47" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Prognosis: NA excellent · Australian guarded</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="n-start" hidden><strong>Suspected tick paralysis</strong><span>Neurotoxin from an engorged feeding female tick, not an infection. Symptoms begin 4-7 days after attachment. Classic: young child, scalp tick.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-presentation" hidden><strong>Ascending weakness or bulbar/resp signs first?</strong><span>Ascending flaccid weakness ± ataxia, areflexia, sensation spared — OR bulbar/respiratory involvement (dysarthria, dysphagia, weak cough). Both are critical presentations.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-presentation">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-find" hidden><strong>Full skin search — FIND the tick</strong><span>No confirmatory test — the diagnosis IS finding the tick. Search scalp/hairline, behind ears, ear canal, axillae, groin/perineum, gluteal cleft, umbilicus, neck/spine. Found on head/neck 60-70%. Keep looking after finding one.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-find">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-remove" hidden><strong>Remove: forceps at skin, straight up</strong><span>Fine-tipped forceps close to the skin, steady upward pull. No twist/crush/folklore remedies. May progress up to ~2 days post-removal.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-remove">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-monitor" hidden><strong>Serial respiratory/bulbar monitoring</strong><span>Respiratory failure is the killer. Watch bulbar signs, effort, rising CO2. SpO2 is a late, poor indicator. Support airway for impending failure.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-monitor">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-geography" hidden><strong>North American or Australian tick?</strong><span>Species changes everything: North American (Dermacentor) reverses rapidly and is supportive-care curative. Australian (Ixodes holocyclus) can worsen after removal.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-geography">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-differential" hidden><strong>Differential: GBS, MFS, botulism, MG, TM, hypoK</strong><span>GBS (CSF/NCS/no tick), Miller Fisher (eyes), botulism (descending/pupils), MG (fatigable), TM (sensory level), hypoK (check K+), polio/WNV (febrile/asymmetric). Do NOT give IVIG/PLEX.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-differential">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-disposition" hidden><strong>Disposition: admit vs observe/discharge</strong><span>Admit for bulbar/respiratory involvement, ongoing progression, diagnostic uncertainty, or any Australian exposure. NA mild/removed/no resp-bulbar signs can often be observed/discharged.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-disposition">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-prognosis" hidden><strong>Prognosis: NA excellent · Australian guarded</strong><span>North American: complete recovery expected in hours-days. Australian: admit several days, resp support may be needed &gt;1 week, death possible in 1-2 days if inadequately treated.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-prognosis">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section"><h2 class="ig-h2">1 · Recognize the GBS mimic</h2><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-mech" role="note"><div class="ig-callout-title">A toxin, not an infection</div><div><strong>Tick paralysis</strong> is acute ascending flaccid paralysis caused by a <strong>neurotoxin</strong> in the saliva of an engorged feeding female tick — there is no pathogen (distinct from Lyme/RMSF). The toxin is only secreted late in feeding, so symptoms appear after <strong>4-7 days</strong> of attachment. The patient rarely reports a known bite.</div></div></div><div class="ig-cond ig-reference"><p class="ig-block ig-text"><strong>Classic patient:</strong> a young child, often a girl with long thick hair hiding a scalp tick. Pacific Northwest, Rocky Mountains, Southeast US (Dermacentor); eastern Australia (Ixodes holocyclus — far more severe).</p></div><div class="ig-cond ig-reference"><p class="ig-block ig-text"><strong>The syndrome:</strong> prodrome of anorexia, lethargy, irritability; <strong>ataxia frequently precedes weakness</strong> (evaluate for tick paralysis in any child with acute ataxia); acute symmetric <strong>ascending flaccid paralysis</strong> (legs → trunk → arms) over 24-48 h; areflexia/hyporeflexia; bulbar and respiratory involvement late.<br><br><strong>Sparing features that point AWAY from a cord/brain lesion:</strong> sensation <strong>SPARED</strong>, mental status <strong>NORMAL</strong>, <strong>afebrile</strong>.</p></div><div class="ig-cond ig-reference"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Feature</th><th>Tick paralysis</th><th>GBS</th></tr></thead><tbody><tr class="ig-row t-normal"><td class="hero">CSF</td><td>CSF NORMAL</td><td>High protein (albuminocytologic dissociation)</td></tr><tr class="ig-row t-normal"><td class="hero">Tick</td><td>Findable on full-body search</td><td>None</td></tr><tr class="ig-row t-danger"><td class="hero">Course after treatment</td><td>Reverses in hours-days after removal</td><td>Days-weeks; needs IVIG/PLEX</td></tr><tr class="ig-row"><td class="hero">Sensation</td><td>Spared</td><td>Spared</td></tr></tbody></table></div></div><div class="ig-cond ig-reference"><p class="ig-block ig-text">Both are ascending, symmetric, areflexic, and afebrile — this exact overlap is why tick paralysis gets mislabeled GBS.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">2 · What to do now</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text"><strong>Set the toggles above</strong> — the matching disposition instruction appears below and the flow path highlights.</p></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;australian&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="n-geography"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Australian Ixodes holocyclus — admit and observe</div><div>Far more severe than North American disease. Paralysis can <strong>WORSEN after removal</strong>, peaking in the first <strong>12-48 h</strong> — mandatory inpatient observation. Involve toxicology regarding tick antitoxin (TAS); remove the tick carefully to avoid compressing the body (compression may trigger venom release).</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;australian&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;bulbar&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;concern&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}}" data-whennode="n-disposition"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">North American with bulbar signs, progression, or uncertainty — admit</div><div>Admit for any bulbar or respiratory involvement, ongoing progression, or diagnostic uncertainty — even North American disease can still progress <strong>up to ~2 days</strong> post-removal.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;australian&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;bulbar&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;concern&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" data-whennode="n-disposition"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">North American, mild, tick removed — observe/discharge</div><div>No bulbar/respiratory involvement, no ongoing progression, no diagnostic uncertainty: can often be observed and discharged once improving and ambulating safely, with clear return precautions — but err toward observation given progression can continue up to ~2 days.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">3 · One-glance algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">Tap any box for detail. The full branching protocol lives in the <a href="#/tree/tick-paralysis" target="_top" class="ig-link">myMedKitt tick-paralysis consult</a>.</p></div></section><section class="ig-section"><h2 class="ig-h2">4 · Differential &amp; do NOT</h2><div class="ig-cond ig-reference"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Mimic</th><th>Key discriminator</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Guillain-Barré (AIDP)</td><td>CSF albuminocytologic dissociation, demyelinating NCS, no tick, slower course. Caveat: early GBS (≤4 days) may lack the CSF protein rise.</td></tr><tr class="ig-row"><td class="hero">Miller Fisher variant</td><td>Ophthalmoplegia + ataxia + areflexia, anti-GQ1b; tick paralysis spares the eyes.</td></tr><tr class="ig-row"><td class="hero">Botulism</td><td>Descending, cranial-nerve-first, dilated/poorly reactive pupils + autonomic signs; tick paralysis is ascending with normal pupils.</td></tr><tr class="ig-row"><td class="hero">Myasthenia gravis</td><td>Fatigable, ptosis/diplopia, reflexes preserved; no tick.</td></tr><tr class="ig-row"><td class="hero">Transverse myelitis</td><td>Sensory level + bowel/bladder + UMN signs / abnormal MRI; tick paralysis spares sensation.</td></tr><tr class="ig-row"><td class="hero">Hypokalemic periodic paralysis</td><td>Low K+, episodic — check the potassium.</td></tr><tr class="ig-row"><td class="hero">Polio / West Nile neuroinvasive</td><td>Often asymmetric, febrile, CSF pleocytosis.</td></tr></tbody></table></div></div><div class="ig-cond ig-reference"><p class="ig-block ig-text">See myMedKitt: <a href="#/tree/guillain-barre" target="_top" class="ig-link">Guillain-Barré</a> · <a href="#/tree/botulism" target="_top" class="ig-link">Botulism</a> · <a href="#/tree/myasthenia-gravis" target="_top" class="ig-link">Myasthenia gravis</a> · <a href="#/tree/transverse-myelitis" target="_top" class="ig-link">Transverse myelitis</a>.</p></div><div class="ig-cond ig-reference"><details class="ig-block ig-disc"><summary>Critical pitfalls<span class="ig-scent">5 items</span></summary><div class="ig-disc-body"><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT give IVIG or plasmapheresis</strong> — they do not work in tick paralysis, and delay the one treatment that does: removing the tick.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT twist, crush, or squeeze the tick body</strong>, and do NOT use folklore removal methods (petroleum jelly, nail polish, matches, heat) — these can trigger more toxin release.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT be reassured by a normal SpO2</strong> — pulse oximetry is a late, poor indicator of neuromuscular respiratory strength.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT discharge an Australian Ixodes holocyclus exposure</strong> without admission — paralysis can worsen after removal, peaking 12-48 h.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT stop searching once one tick is found</strong> — multiple ticks can be present, and a missed second tick keeps the toxin source active.</div></div></div></div></details></div></section><section class="ig-section"><h2 class="ig-h2">5 · Prognosis &amp; the avoidable tragedy</h2><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">North American — excellent</div><div>Complete recovery is expected after tick removal, usually within hours to days.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Australian (I. holocyclus) — guarded</div><div>Admit for several days; paralysis can worsen post-removal; respiratory support may be needed for <strong>&gt;1 week</strong>; death possible within <strong>1-2 days</strong> if inadequately treated.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">The avoidable tragedy</div><div>Untreated tick paralysis (any type) progresses to respiratory failure and death, and unrecognized cases get committed to ineffective GBS therapy (IVIG/PLEX). Early recognition, a thorough skin search, and proper removal is the entire game.</div></div></div><div class="ig-cond ig-reference"><p class="ig-block ig-text"><strong>Recommendation:</strong> recognize the GBS mimic, perform a meticulous head-to-toe skin search and remove any tick with proper technique, and monitor respiratory/bulbar function. North American disease reverses rapidly; Australian I. holocyclus disease can worsen after removal — admit and involve toxicology regarding antitoxin. Do NOT give IVIG or plasmapheresis. Check a potassium to exclude hypokalemic periodic paralysis.</p></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Recognize the GBS mimic</h3><p>**Tick paralysis** is acute ascending flaccid paralysis caused by a **neurotoxin** in the saliva of an engorged feeding female tick — there is no pathogen (distinct from Lyme/RMSF). The toxin is only secreted late in feeding, so symptoms appear after **4-7 days** of attachment. The patient rarely reports a known bite.</p><p>**Classic patient:** a young child, often a girl with long thick hair hiding a scalp tick. Pacific Northwest, Rocky Mountains, Southeast US (Dermacentor); eastern Australia (Ixodes holocyclus — far more severe).</p><p>**The syndrome:** prodrome of anorexia, lethargy, irritability; **ataxia frequently precedes weakness** (evaluate for tick paralysis in any child with acute ataxia); acute symmetric **ascending flaccid paralysis** (legs → trunk → arms) over 24-48 h; areflexia/hyporeflexia; bulbar and respiratory involvement late.
+
+**Sparing features that point AWAY from a cord/brain lesion:** sensation **SPARED**, mental status **NORMAL**, **afebrile**.</p><p>Feature | Tick paralysis | GBS</p><p>CSF | CSF NORMAL | High protein (albuminocytologic dissociation)</p><p>Tick | Findable on full-body search | None</p><p>Course after treatment | Reverses in hours-days after removal | Days-weeks; needs IVIG/PLEX</p><p>Sensation | Spared | Spared</p><p>Both are ascending, symmetric, areflexic, and afebrile — this exact overlap is why tick paralysis gets mislabeled GBS.</p><h3>2 · What to do now</h3><p>**Set the toggles above** — the matching disposition instruction appears below and the flow path highlights.</p><p>Far more severe than North American disease. Paralysis can **WORSEN after removal**, peaking in the first **12-48 h** — mandatory inpatient observation. Involve toxicology regarding tick antitoxin (TAS); remove the tick carefully to avoid compressing the body (compression may trigger venom release).</p><p>Admit for any bulbar or respiratory involvement, ongoing progression, or diagnostic uncertainty — even North American disease can still progress **up to ~2 days** post-removal.</p><p>No bulbar/respiratory involvement, no ongoing progression, no diagnostic uncertainty: can often be observed and discharged once improving and ambulating safely, with clear return precautions — but err toward observation given progression can continue up to ~2 days.</p><h3>3 · One-glance algorithm</h3><p>Suspected tick paralysis — Neurotoxin from an engorged feeding female tick, not an infection. Symptoms begin 4-7 days after attachment. Classic: young child, scalp tick.</p><p>Ascending weakness or bulbar/resp signs first? — Ascending flaccid weakness ± ataxia, areflexia, sensation spared — OR bulbar/respiratory involvement (dysarthria, dysphagia, weak cough). Both are critical presentations.</p><p>Full skin search — FIND the tick — No confirmatory test — the diagnosis IS finding the tick. Search scalp/hairline, behind ears, ear canal, axillae, groin/perineum, gluteal cleft, umbilicus, neck/spine. Found on head/neck 60-70%. Keep looking after finding one.</p><p>Remove: forceps at skin, straight up — Fine-tipped forceps close to the skin, steady upward pull. No twist/crush/folklore remedies. May progress up to ~2 days post-removal.</p><p>Serial respiratory/bulbar monitoring — Respiratory failure is the killer. Watch bulbar signs, effort, rising CO2. SpO2 is a late, poor indicator. Support airway for impending failure.</p><p>North American or Australian tick? — Species changes everything: North American (Dermacentor) reverses rapidly and is supportive-care curative. Australian (Ixodes holocyclus) can worsen after removal.</p><p>Differential: GBS, MFS, botulism, MG, TM, hypoK — GBS (CSF/NCS/no tick), Miller Fisher (eyes), botulism (descending/pupils), MG (fatigable), TM (sensory level), hypoK (check K+), polio/WNV (febrile/asymmetric). Do NOT give IVIG/PLEX.</p><p>Disposition: admit vs observe/discharge — Admit for bulbar/respiratory involvement, ongoing progression, diagnostic uncertainty, or any Australian exposure. NA mild/removed/no resp-bulbar signs can often be observed/discharged.</p><p>Prognosis: NA excellent · Australian guarded — North American: complete recovery expected in hours-days. Australian: admit several days, resp support may be needed &gt;1 week, death possible in 1-2 days if inadequately treated.</p><p>Tap any box for detail. The full branching protocol lives in the [myMedKitt tick-paralysis consult](#/tree/tick-paralysis).</p><h3>4 · Differential &amp; do NOT</h3><p>Mimic | Key discriminator</p><p>Guillain-Barré (AIDP) | CSF albuminocytologic dissociation, demyelinating NCS, no tick, slower course. Caveat: early GBS (≤4 days) may lack the CSF protein rise.</p><p>Miller Fisher variant | Ophthalmoplegia + ataxia + areflexia, anti-GQ1b; tick paralysis spares the eyes.</p><p>Botulism | Descending, cranial-nerve-first, dilated/poorly reactive pupils + autonomic signs; tick paralysis is ascending with normal pupils.</p><p>Myasthenia gravis | Fatigable, ptosis/diplopia, reflexes preserved; no tick.</p><p>Transverse myelitis | Sensory level + bowel/bladder + UMN signs / abnormal MRI; tick paralysis spares sensation.</p><p>Hypokalemic periodic paralysis | Low K+, episodic — check the potassium.</p><p>Polio / West Nile neuroinvasive | Often asymmetric, febrile, CSF pleocytosis.</p><p>See myMedKitt: [Guillain-Barré](#/tree/guillain-barre) · [Botulism](#/tree/botulism) · [Myasthenia gravis](#/tree/myasthenia-gravis) · [Transverse myelitis](#/tree/transverse-myelitis).</p><p><em>Critical pitfalls</em></p><p>**Do NOT give IVIG or plasmapheresis** — they do not work in tick paralysis, and delay the one treatment that does: removing the tick.</p><p>**Do NOT twist, crush, or squeeze the tick body**, and do NOT use folklore removal methods (petroleum jelly, nail polish, matches, heat) — these can trigger more toxin release.</p><p>**Do NOT be reassured by a normal SpO2** — pulse oximetry is a late, poor indicator of neuromuscular respiratory strength.</p><p>**Do NOT discharge an Australian Ixodes holocyclus exposure** without admission — paralysis can worsen after removal, peaking 12-48 h.</p><p>**Do NOT stop searching once one tick is found** — multiple ticks can be present, and a missed second tick keeps the toxin source active.</p><h3>5 · Prognosis &amp; the avoidable tragedy</h3><p>Complete recovery is expected after tick removal, usually within hours to days.</p><p>Admit for several days; paralysis can worsen post-removal; respiratory support may be needed for **&gt;1 week**; death possible within **1-2 days** if inadequately treated.</p><p>Untreated tick paralysis (any type) progresses to respiratory failure and death, and unrecognized cases get committed to ineffective GBS therapy (IVIG/PLEX). Early recognition, a thorough skin search, and proper removal is the entire game.</p><p>**Recommendation:** recognize the GBS mimic, perform a meticulous head-to-toe skin search and remove any tick with proper technique, and monitor respiratory/bulbar function. North American disease reverses rapidly; Australian I. holocyclus disease can worsen after removal — admit and involve toxicology regarding antitoxin. Do NOT give IVIG or plasmapheresis. Check a potassium to exclude hypokalemic periodic paralysis.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Simon LV, West B, McKinney WP. Tick Paralysis. StatPearls. Treasure Island (FL): StatPearls Publishing; updated 2025.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> Tick paralysis. MedLink Neurology. Clinical course, GBS differentiation, management.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Swift TR, Ignacio OJ. Tick paralysis: electrophysiologic studies. Neurology. 1975;25(12):1130-1133.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Comprehensive analysis of the global impact and distribution of tick paralysis. Clin Microbiol Rev. 2024.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Massive tick (Ixodes holocyclus) infestation with delayed facial-nerve palsy. Med J Aust. 2002;176(6):264-265.</li><li id="cite-ref6"><span class="ig-ref">[6]</span> Child Neurology: Tick paralysis. Neurology. Pediatric NCS findings and GBS differentiation.</li><li id="cite-ref7"><span class="ig-ref">[7]</span> A Rare Tick Tale: Australian Paralysis Tick Causing Multiple Cranial Neuropathies. PMC11221948.</li><li id="cite-ref8"><span class="ig-ref">[8]</span> Felz MW, Smith CD, Swift TR. A Six-Year-Old Girl with Tick Paralysis. N Engl J Med. 2000;342(2):90-94.</li><li id="cite-ref9"><span class="ig-ref">[9]</span> Centers for Disease Control and Prevention. What to Do After a Tick Bite / Tick Removal. CDC, 2024.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-12 · evidence through StatPearls 2025 update; CDC 2024 removal guidance · next review 2027-07-12</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · tick-paralysis · v1.0 — generated from myMedKitt tick-paralysis consult, full 9-node fidelity, cockpit mode.</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"tick-paralysis","title":"Tick Paralysis: Find It, Pull It, Watch the Airway","shape":"algorithm","intendedUse":"All ages presenting with acute ascending flaccid paralysis in the ED — classic population is a young child (often a girl with long thick hair) with an occult scalp tick. Diagnosis is clinical; there is no confirmatory lab test. Excludes patients with an already-confirmed alternative diagnosis (Guillain-Barré, botulism, myasthenia gravis, transverse myelitis) or hypokalemic periodic paralysis on labs.","scopeWarnings":["**Full head-to-toe skin search is the diagnostic test.** There is no confirmatory lab — search scalp/hairline, behind the ears and ear canal, axillae, groin/perineum/gluteal cleft, umbilicus, interdigital spaces, and the neck/spine. If one tick is found, keep looking — multiple ticks can be present.","**Remove properly: fine forceps at the skin, straight-up steady pull.** Do NOT twist, crush, or squeeze the tick body, and do NOT use folklore methods (petroleum jelly, nail polish, matches, heat) — these can trigger more toxin release.","**Respiratory failure is the cause of death.** Serial bulbar and ventilatory monitoring is the priority while searching for the tick. Pulse oximetry is a late, poor indicator — a normal SpO2 should NOT be reassuring.","**Do NOT give IVIG or plasmapheresis** — they do not work in tick paralysis, unlike GBS. Removing the tick is the treatment.","**Australian Ixodes holocyclus tick paralysis can WORSEN after removal**, peaking in the first 12-48 h — admit and observe; involve toxicology regarding tick antitoxin (TAS), which carries non-standardized dosing and allergy/serum-sickness risk."],"source":{"kind":"medkitt-consult","ref":"tick-paralysis"},"theme":{"preset":"medkitt"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"bulbar","label":"Bulbar / respiratory involvement present","type":"boolean","default":0},{"id":"australian","label":"Australian Ixodes holocyclus exposure","type":"boolean","default":0},{"id":"concern","label":"Ongoing progression or diagnostic uncertainty","type":"boolean","default":0}],"facts":[{"id":"f-attach","claim":"Attachment period before toxin symptoms appear","value":"4-7 days","provenance":"consult:tick-paralysis/tp-start","cite":["ref1","ref2","ref8"],"verified":"provenance"},{"id":"f-yield","claim":"Tick found on head/neck","value":"60-70%","provenance":"consult:tick-paralysis/tp-find","cite":["ref1","ref2","ref8","ref3","ref6"],"verified":"provenance"},{"id":"f-csf","claim":"CSF finding — key discriminator vs GBS","value":"CSF NORMAL","provenance":"consult:tick-paralysis/tp-find","cite":["ref1","ref2","ref8","ref3","ref6"],"verified":"provenance"},{"id":"f-naprogress","claim":"North American progression window after removal","value":"up to ~2 days","provenance":"consult:tick-paralysis/tp-remove","cite":["ref1","ref8","ref9"],"verified":"provenance"},{"id":"f-auspeak","claim":"Australian post-removal worsening peak window","value":"12-48 h","provenance":"consult:tick-paralysis/tp-geography","cite":["ref1","ref5","ref7","ref4"],"verified":"provenance"},{"id":"f-ausdeath","claim":"Australian untreated death window","value":"1-2 days","provenance":"consult:tick-paralysis/tp-geography","cite":["ref1","ref5","ref7","ref4"],"verified":"provenance"},{"id":"f-aussupport","claim":"Australian respiratory support duration","value":">1 week","provenance":"consult:tick-paralysis/tp-prognosis","cite":["ref1","ref2","ref8"],"verified":"provenance"}],"sections":[{"id":"sec-recognize","title":"1 · Recognize the GBS mimic","blocks":[{"id":"b-mechanism","type":"callout","tone":"mechanism","title":"A toxin, not an infection","md":"**Tick paralysis** is acute ascending flaccid paralysis caused by a **neurotoxin** in the saliva of an engorged feeding female tick — there is no pathogen (distinct from Lyme/RMSF). The toxin is only secreted late in feeding, so symptoms appear after **4-7 days** of attachment. The patient rarely reports a known bite.","cite":["ref1","ref2","ref8"]},{"id":"b-classic","type":"text","md":"**Classic patient:** a young child, often a girl with long thick hair hiding a scalp tick. Pacific Northwest, Rocky Mountains, Southeast US (Dermacentor); eastern Australia (Ixodes holocyclus — far more severe).","cite":["ref1","ref2","ref8"]},{"id":"b-presentation","type":"text","md":"**The syndrome:** prodrome of anorexia, lethargy, irritability; **ataxia frequently precedes weakness** (evaluate for tick paralysis in any child with acute ataxia); acute symmetric **ascending flaccid paralysis** (legs → trunk → arms) over 24-48 h; areflexia/hyporeflexia; bulbar and respiratory involvement late.\n\n**Sparing features that point AWAY from a cord/brain lesion:** sensation **SPARED**, mental status **NORMAL**, **afebrile**.","cite":["ref1","ref2","ref3"]},{"id":"b-vsgbs","type":"table","columns":["Feature","Tick paralysis","GBS"],"heroCol":0,"rows":[["CSF","CSF NORMAL","High protein (albuminocytologic dissociation)"],["Tick","Findable on full-body search","None"],["Course after treatment","Reverses in hours-days after removal","Days-weeks; needs IVIG/PLEX"],["Sensation","Spared","Spared"]],"rowTones":["normal","normal","danger",null],"cite":["ref1","ref2","ref8"]},{"id":"b-both","type":"text","md":"Both are ascending, symmetric, areflexic, and afebrile — this exact overlap is why tick paralysis gets mislabeled GBS.","cite":["ref1"]}]},{"id":"sec-nextstep","title":"2 · What to do now","blocks":[{"id":"b-toggle-hint","type":"text","md":"**Set the toggles above** — the matching disposition instruction appears below and the flow path highlights."},{"id":"g-australian","type":"callout","tone":"danger","title":"Australian Ixodes holocyclus — admit and observe","showWhen":"australian==1","whenNode":"n-geography","md":"Far more severe than North American disease. Paralysis can **WORSEN after removal**, peaking in the first **12-48 h** — mandatory inpatient observation. Involve toxicology regarding tick antitoxin (TAS); remove the tick carefully to avoid compressing the body (compression may trigger venom release).","cite":["ref1","ref5","ref7","ref4"]},{"id":"g-naconcern","type":"callout","tone":"caution","title":"North American with bulbar signs, progression, or uncertainty — admit","showWhen":"australian==0 && (bulbar==1 || concern==1)","whenNode":"n-disposition","md":"Admit for any bulbar or respiratory involvement, ongoing progression, or diagnostic uncertainty — even North American disease can still progress **up to ~2 days** post-removal.","cite":["ref1","ref2","ref5"]},{"id":"g-namild","type":"callout","tone":"normal","title":"North American, mild, tick removed — observe/discharge","showWhen":"australian==0 && bulbar==0 && concern==0","whenNode":"n-disposition","md":"No bulbar/respiratory involvement, no ongoing progression, no diagnostic uncertainty: can often be observed and discharged once improving and ambulating safely, with clear return precautions — but err toward observation given progression can continue up to ~2 days.","cite":["ref1","ref2","ref5"]}]},{"id":"sec-algo","title":"3 · One-glance algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"n-start","shape":"state","text":"Suspected tick paralysis","col":0,"rank":0,"tone":"mechanism","detail":"Neurotoxin from an engorged feeding female tick, not an infection. Symptoms begin 4-7 days after attachment. Classic: young child, scalp tick."},{"id":"n-presentation","shape":"decision","text":"Ascending weakness or bulbar/resp signs first?","col":0,"rank":1,"tone":"danger","detail":"Ascending flaccid weakness ± ataxia, areflexia, sensation spared — OR bulbar/respiratory involvement (dysarthria, dysphagia, weak cough). Both are critical presentations.","activeWhen":"1"},{"id":"n-find","shape":"action","text":"Full skin search — FIND the tick","col":0,"rank":2,"tone":"danger","detail":"No confirmatory test — the diagnosis IS finding the tick. Search scalp/hairline, behind ears, ear canal, axillae, groin/perineum, gluteal cleft, umbilicus, neck/spine. Found on head/neck 60-70%. Keep looking after finding one.","activeWhen":"bulbar==0"},{"id":"n-remove","shape":"action","text":"Remove: forceps at skin, straight up","col":0,"rank":3,"detail":"Fine-tipped forceps close to the skin, steady upward pull. No twist/crush/folklore remedies. May progress up to ~2 days post-removal.","activeWhen":"bulbar==0"},{"id":"n-monitor","shape":"action","text":"Serial respiratory/bulbar monitoring","col":0,"rank":4,"tone":"danger","detail":"Respiratory failure is the killer. Watch bulbar signs, effort, rising CO2. SpO2 is a late, poor indicator. Support airway for impending failure.","activeWhen":"1"},{"id":"n-geography","shape":"decision","text":"North American or Australian tick?","col":0,"rank":5,"tone":"caution","detail":"Species changes everything: North American (Dermacentor) reverses rapidly and is supportive-care curative. Australian (Ixodes holocyclus) can worsen after removal.","activeWhen":"1"},{"id":"n-differential","shape":"action","text":"Differential: GBS, MFS, botulism, MG, TM, hypoK","col":0,"rank":6,"detail":"GBS (CSF/NCS/no tick), Miller Fisher (eyes), botulism (descending/pupils), MG (fatigable), TM (sensory level), hypoK (check K+), polio/WNV (febrile/asymmetric). Do NOT give IVIG/PLEX.","activeWhen":"1"},{"id":"n-disposition","shape":"action","text":"Disposition: admit vs observe/discharge","col":0,"rank":7,"tone":"caution","detail":"Admit for bulbar/respiratory involvement, ongoing progression, diagnostic uncertainty, or any Australian exposure. NA mild/removed/no resp-bulbar signs can often be observed/discharged.","activeWhen":"1"},{"id":"n-prognosis","shape":"state","text":"Prognosis: NA excellent · Australian guarded","col":0,"rank":8,"tone":"normal","detail":"North American: complete recovery expected in hours-days. Australian: admit several days, resp support may be needed >1 week, death possible in 1-2 days if inadequately treated."}],"edges":[{"from":"n-start","to":"n-presentation"},{"from":"n-presentation","to":"n-find","label":"Ascending flaccid weakness, areflexia, sensation spared"},{"from":"n-presentation","to":"n-monitor","label":"Bulbar/respiratory involvement"},{"from":"n-find","to":"n-remove"},{"from":"n-remove","to":"n-monitor"},{"from":"n-monitor","to":"n-geography"},{"from":"n-geography","to":"n-differential","label":"North American (Dermacentor)"},{"from":"n-geography","to":"n-differential","label":"Australian (Ixodes holocyclus)"},{"from":"n-differential","to":"n-disposition"},{"from":"n-disposition","to":"n-prognosis"}]},{"id":"b-flowhint","type":"text","md":"Tap any box for detail. The full branching protocol lives in the [myMedKitt tick-paralysis consult](#/tree/tick-paralysis)."}]},{"id":"sec-differential","title":"4 · Differential & do NOT","blocks":[{"id":"b-differential-table","type":"table","columns":["Mimic","Key discriminator"],"heroCol":0,"rows":[["Guillain-Barré (AIDP)","CSF albuminocytologic dissociation, demyelinating NCS, no tick, slower course. Caveat: early GBS (≤4 days) may lack the CSF protein rise."],["Miller Fisher variant","Ophthalmoplegia + ataxia + areflexia, anti-GQ1b; tick paralysis spares the eyes."],["Botulism","Descending, cranial-nerve-first, dilated/poorly reactive pupils + autonomic signs; tick paralysis is ascending with normal pupils."],["Myasthenia gravis","Fatigable, ptosis/diplopia, reflexes preserved; no tick."],["Transverse myelitis","Sensory level + bowel/bladder + UMN signs / abnormal MRI; tick paralysis spares sensation."],["Hypokalemic periodic paralysis","Low K+, episodic — check the potassium."],["Polio / West Nile neuroinvasive","Often asymmetric, febrile, CSF pleocytosis."]],"cite":["ref1","ref3","ref8"]},{"id":"b-crosslinks","type":"text","md":"See myMedKitt: [Guillain-Barré](#/tree/guillain-barre) · [Botulism](#/tree/botulism) · [Myasthenia gravis](#/tree/myasthenia-gravis) · [Transverse myelitis](#/tree/transverse-myelitis).","cite":["ref1","ref3","ref8"]},{"id":"b-donot","type":"disclosure","summary":"Critical pitfalls","scent":"5 items","blocks":[{"id":"b-d1","type":"callout","tone":"danger","md":"**Do NOT give IVIG or plasmapheresis** — they do not work in tick paralysis, and delay the one treatment that does: removing the tick."},{"id":"b-d2","type":"callout","tone":"danger","md":"**Do NOT twist, crush, or squeeze the tick body**, and do NOT use folklore removal methods (petroleum jelly, nail polish, matches, heat) — these can trigger more toxin release."},{"id":"b-d3","type":"callout","tone":"caution","md":"**Do NOT be reassured by a normal SpO2** — pulse oximetry is a late, poor indicator of neuromuscular respiratory strength."},{"id":"b-d4","type":"callout","tone":"danger","md":"**Do NOT discharge an Australian Ixodes holocyclus exposure** without admission — paralysis can worsen after removal, peaking 12-48 h."},{"id":"b-d5","type":"callout","tone":"caution","md":"**Do NOT stop searching once one tick is found** — multiple ticks can be present, and a missed second tick keeps the toxin source active."}]}]},{"id":"sec-prognosis","title":"5 · Prognosis & the avoidable tragedy","blocks":[{"id":"b-na-prog","type":"callout","tone":"normal","title":"North American — excellent","md":"Complete recovery is expected after tick removal, usually within hours to days.","cite":["ref1","ref2","ref8"]},{"id":"b-aus-prog","type":"callout","tone":"danger","title":"Australian (I. holocyclus) — guarded","md":"Admit for several days; paralysis can worsen post-removal; respiratory support may be needed for **>1 week**; death possible within **1-2 days** if inadequately treated.","cite":["ref1","ref2","ref4","ref5","ref7","ref8"]},{"id":"b-tragedy","type":"callout","tone":"caution","title":"The avoidable tragedy","md":"Untreated tick paralysis (any type) progresses to respiratory failure and death, and unrecognized cases get committed to ineffective GBS therapy (IVIG/PLEX). Early recognition, a thorough skin search, and proper removal is the entire game.","cite":["ref1","ref2","ref8"]},{"id":"b-recommendation","type":"text","md":"**Recommendation:** recognize the GBS mimic, perform a meticulous head-to-toe skin search and remove any tick with proper technique, and monitor respiratory/bulbar function. North American disease reverses rapidly; Australian I. holocyclus disease can worsen after removal — admit and involve toxicology regarding antitoxin. Do NOT give IVIG or plasmapheresis. Check a potassium to exclude hypokalemic periodic paralysis.","cite":["ref1","ref2","ref8"]}]}],"citations":[{"id":"ref1","label":"Simon LV, West B, McKinney WP. Tick Paralysis. StatPearls. Treasure Island (FL): StatPearls Publishing; updated 2025.","accessed":"2026-07-12"},{"id":"ref2","label":"Tick paralysis. MedLink Neurology. Clinical course, GBS differentiation, management.","accessed":"2026-07-12"},{"id":"ref3","label":"Swift TR, Ignacio OJ. Tick paralysis: electrophysiologic studies. Neurology. 1975;25(12):1130-1133.","accessed":"2026-07-12"},{"id":"ref4","label":"Comprehensive analysis of the global impact and distribution of tick paralysis. Clin Microbiol Rev. 2024.","accessed":"2026-07-12"},{"id":"ref5","label":"Massive tick (Ixodes holocyclus) infestation with delayed facial-nerve palsy. Med J Aust. 2002;176(6):264-265.","accessed":"2026-07-12"},{"id":"ref6","label":"Child Neurology: Tick paralysis. Neurology. Pediatric NCS findings and GBS differentiation.","accessed":"2026-07-12"},{"id":"ref7","label":"A Rare Tick Tale: Australian Paralysis Tick Causing Multiple Cranial Neuropathies. PMC11221948.","accessed":"2026-07-12"},{"id":"ref8","label":"Felz MW, Smith CD, Swift TR. A Six-Year-Old Girl with Tick Paralysis. N Engl J Med. 2000;342(2):90-94.","accessed":"2026-07-12"},{"id":"ref9","label":"Centers for Disease Control and Prevention. What to Do After a Tick Bite / Tick Removal. CDC, 2024.","accessed":"2026-07-12"}],"meta":{"version":"1.0","lastReviewed":"2026-07-12","evidenceThrough":"StatPearls 2025 update; CDC 2024 removal guidance","nextReview":"2027-07-12","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 — generated from myMedKitt tick-paralysis consult, full 9-node fidelity, cockpit mode."},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

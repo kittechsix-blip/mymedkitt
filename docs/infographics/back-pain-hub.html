@@ -1,0 +1,506 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Back Pain Hub — ED Triage — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Back Pain Hub — ED Triage</h1>
+  <p class="ig-use">Adults presenting to the ED with back pain. Screens the time-critical mimics (cauda equina, spinal epidural abscess, AAA/aortic dissection, fracture/malignancy, renal/urinary mimics) before defaulting to a mechanical/radicular pathway. Not a treatment protocol for confirmed diagnoses — each critical lane hands off to its own dedicated consult.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Ruptured/leaking AAA — age ≥50 + smoker, pulsatile mass, syncope → bedside ultrasound now.</div><div class="ig-scope-item">⚠ Spinal epidural abscess — fever, IVDU/immunosuppression, point tenderness, deficit → the classic triad is insensitive; no fever does NOT clear SEA.</div><div class="ig-scope-item">⚠ Cauda equina syndrome — saddle anesthesia, urinary retention, bilateral leg weakness → emergency MRI; pain improving does NOT mean bladder/neurologic injury is improving.</div><div class="ig-scope-item">⚠ Cord compression from malignancy — cancer history, night pain, progressive deficit → new severe back pain in a cancer patient is malignant spinal disease until reasonably excluded.</div><div class="ig-scope-item">⚠ Aortic dissection / pyelonephritis-urosepsis — tearing pain/pulse deficit, or fever + CVA tenderness → do not anchor on musculoskeletal pain in an older vascular-risk patient.</div><div class="ig-scope-item">⚠ Admit/transfer whenever cauda/conus symptoms, progressive neurologic deficit, suspected/confirmed spine infection, sepsis, AAA/dissection, unstable vitals, or cord compression concern are present.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="bp-start" hidden><button type="button" data-route-select="bp-start"><span class="ig-route-rank">1</span><span>Back pain — sick check first</span></button></li><li data-route-node="bp-exclusions" hidden><button type="button" data-route-select="bp-exclusions"><span class="ig-route-rank">2</span><span>Which time-critical lane fits best?</span></button></li><li data-route-node="bp-cauda" hidden><button type="button" data-route-select="bp-cauda"><span class="ig-route-rank">3</span><span>Cauda equina / conus medullaris</span></button></li><li data-route-node="bp-spine-infection" hidden><button type="button" data-route-select="bp-spine-infection"><span class="ig-route-rank">3</span><span>Spinal epidural abscess / vertebral osteomyelitis</span></button></li><li data-route-node="bp-aaa-dissection" hidden><button type="button" data-route-select="bp-aaa-dissection"><span class="ig-route-rank">3</span><span>AAA / aortic dissection variant</span></button></li><li data-route-node="bp-rescue" hidden><button type="button" data-route-select="bp-rescue"><span class="ig-route-rank">3</span><span>No immediate exclusion hit → initial bundle</span></button></li><li data-route-node="bp-fracture-cancer" hidden><button type="button" data-route-select="bp-fracture-cancer"><span class="ig-route-rank">3</span><span>Fracture / malignancy / cord compression</span></button></li><li data-route-node="bp-renal" hidden><button type="button" data-route-select="bp-renal"><span class="ig-route-rank">3</span><span>Renal / urinary / intra-abdominal mimic</span></button></li><li data-route-node="bp-radiculopathy" hidden><button type="button" data-route-select="bp-radiculopathy"><span class="ig-route-rank">3</span><span>Radiculopathy / mechanical pattern</span></button></li><li data-route-node="bp-reassess" hidden><button type="button" data-route-select="bp-reassess"><span class="ig-route-rank">4</span><span>Reassess after initial bundle</span></button></li><li data-route-node="bp-imaging" hidden><button type="button" data-route-select="bp-imaging"><span class="ig-route-rank">5</span><span>Imaging decision</span></button></li><li data-route-node="bp-disposition" hidden><button type="button" data-route-select="bp-disposition"><span class="ig-route-rank">6</span><span>Disposition</span></button></li><li data-route-node="bp-dispo-admit" hidden><button type="button" data-route-select="bp-dispo-admit"><span class="ig-route-rank">7</span><span>Admit / transfer / specialty pathway</span></button></li><li data-route-node="bp-dispo-observe" hidden><button type="button" data-route-select="bp-dispo-observe"><span class="ig-route-rank">7</span><span>Observation / serial exam</span></button></li><li data-route-node="bp-dispo-discharge" hidden><button type="button" data-route-select="bp-dispo-discharge"><span class="ig-route-rank">7</span><span>Discharge checklist</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 1518 804" width="1518" height="804" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M759,98 L759,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,206 L759,227 L129,227 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="223" class="ig-edge-lbl" text-anchor="middle">cauda/conus symptoms</text><path d="M759,206 L759,227 L339,227 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="223" class="ig-edge-lbl" text-anchor="middle">fever/IVDU + spine tenderness</text><path d="M759,206 L759,227 L549,227 L549,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="223" class="ig-edge-lbl" text-anchor="middle">vascular risk + abrupt pain</text><path d="M759,206 L759,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="864" y="223" class="ig-edge-lbl" text-anchor="middle">trauma/steroids/cancer</text><path d="M759,206 L759,227 L1179,227 L1179,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="969" y="223" class="ig-edge-lbl" text-anchor="middle">flank/fever/urinary</text><path d="M759,206 L759,227 L1389,227 L1389,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="1074" y="223" class="ig-edge-lbl" text-anchor="middle">unilateral radicular, no red flags</text><path d="M759,206 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="223" class="ig-edge-lbl" text-anchor="middle">no immediate exclusion hit</text><path d="M759,314 L759,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,422 L759,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="277" class="ig-edge-lbl" text-anchor="middle">worse / new red flag</text><path d="M759,422 L759,443 L969,443 L969,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="864" y="439" class="ig-edge-lbl" text-anchor="middle">persistent pain / uncertainty</text><path d="M759,422 L759,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="493" class="ig-edge-lbl" text-anchor="middle">improved, ambulatory, stable</text><path d="M969,530 L969,551 L759,551 L759,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,638 L759,659 L549,659 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="655" class="ig-edge-lbl" text-anchor="middle">danger signs</text><path d="M759,638 L759,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="655" class="ig-edge-lbl" text-anchor="middle">pending workup / uncertainty</text><path d="M759,638 L759,659 L969,659 L969,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="864" y="655" class="ig-edge-lbl" text-anchor="middle">mechanical, safe follow-up</text><g class="ig-node" data-node="bp-start" tabindex="0" role="button" aria-label="Back pain — sick check first"><rect x="671" y="32" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="677" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Back pain — sick check first</div></foreignObject></g><g class="ig-node" data-node="bp-exclusions" tabindex="0" role="button" aria-label="Which time-critical lane fits best?"><polygon points="693,140 825,140 847,173 825,206 693,206 671,173" class="ig-shape t-danger"/><foreignObject x="677" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Which time-critical lane fits best?</div></foreignObject></g><g class="ig-node" data-node="bp-cauda" tabindex="0" role="button" aria-label="Cauda equina / conus medullaris"><rect x="41" y="248" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Cauda equina / conus medullaris</div></foreignObject></g><g class="ig-node" data-node="bp-spine-infection" tabindex="0" role="button" aria-label="Spinal epidural abscess / vertebral osteomyelitis"><rect x="251" y="248" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Spinal epidural abscess / vertebral osteomyelitis</div></foreignObject></g><g class="ig-node" data-node="bp-aaa-dissection" tabindex="0" role="button" aria-label="AAA / aortic dissection variant"><rect x="461" y="248" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="467" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">AAA / aortic dissection variant</div></foreignObject></g><g class="ig-node" data-node="bp-rescue" tabindex="0" role="button" aria-label="No immediate exclusion hit → initial bundle"><rect x="671" y="248" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="677" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">No immediate exclusion hit → initial bundle</div></foreignObject></g><g class="ig-node" data-node="bp-fracture-cancer" tabindex="0" role="button" aria-label="Fracture / malignancy / cord compression"><rect x="881" y="248" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="887" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Fracture / malignancy / cord compression</div></foreignObject></g><g class="ig-node" data-node="bp-renal" tabindex="0" role="button" aria-label="Renal / urinary / intra-abdominal mimic"><rect x="1091" y="248" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="1097" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Renal / urinary / intra-abdominal mimic</div></foreignObject></g><g class="ig-node" data-node="bp-radiculopathy" tabindex="0" role="button" aria-label="Radiculopathy / mechanical pattern"><rect x="1301" y="248" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="1307" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Radiculopathy / mechanical pattern</div></foreignObject></g><g class="ig-node" data-node="bp-reassess" tabindex="0" role="button" aria-label="Reassess after initial bundle"><polygon points="693,356 825,356 847,389 825,422 693,422 671,389" class="ig-shape t-caution"/><foreignObject x="677" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Reassess after initial bundle</div></foreignObject></g><g class="ig-node" data-node="bp-imaging" tabindex="0" role="button" aria-label="Imaging decision"><rect x="881" y="464" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="887" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Imaging decision</div></foreignObject></g><g class="ig-node" data-node="bp-disposition" tabindex="0" role="button" aria-label="Disposition"><polygon points="693,572 825,572 847,605 825,638 693,638 671,605" class="ig-shape t-normal"/><foreignObject x="677" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Disposition</div></foreignObject></g><g class="ig-node" data-node="bp-dispo-admit" tabindex="0" role="button" aria-label="Admit / transfer / specialty pathway"><rect x="461" y="680" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="467" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Admit / transfer / specialty pathway</div></foreignObject></g><g class="ig-node" data-node="bp-dispo-observe" tabindex="0" role="button" aria-label="Observation / serial exam"><rect x="671" y="680" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="677" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Observation / serial exam</div></foreignObject></g><g class="ig-node" data-node="bp-dispo-discharge" tabindex="0" role="button" aria-label="Discharge checklist"><rect x="881" y="680" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="887" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Discharge checklist</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="bp-start" hidden><strong>Back pain — sick check first</strong><span>5 DO NOT MISS: ruptured/leaking AAA, spinal epidural abscess, cauda equina syndrome, cord compression from malignancy, aortic dissection/pyelo-urosepsis. Vitals, neuro, vascular/abdominal, infection, fracture/cancer risk first.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-exclusions" hidden><strong>Which time-critical lane fits best?</strong><span>Do not start with 'sciatica' until cauda, spine infection, AAA/dissection, fracture/cancer, and renal mimics are screened.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-exclusions">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-cauda" hidden><strong>Cauda equina / conus medullaris</strong><span>Urinary retention/incontinence, saddle anesthesia, bilateral sciatica, progressive bilateral leg weakness, fecal incontinence, severe deficit → emergency MRI + spine pathway.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-cauda">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-spine-infection" hidden><strong>Spinal epidural abscess / vertebral osteomyelitis</strong><span>Fever, IVDU, diabetes, immunosuppression, recent bacteremia/procedure, focal spine tenderness → MRI is the key diagnostic test.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-spine-infection">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-aaa-dissection" hidden><strong>AAA / aortic dissection variant</strong><span>Older vascular risk, abrupt severe back/abdominal pain, syncope, hypotension, pulse deficit → resuscitation diagnosis, image and consult early.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-aaa-dissection">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-rescue" hidden><strong>No immediate exclusion hit → initial bundle</strong><span>Analgesia (acetaminophen, NSAID if safe, topical/local, selective muscle relaxer, avoid routine opioids), repeat neuro/gait exam, bladder scan/PVR if indicated, ESR/CRP by infection risk, encourage movement.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-rescue">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-fracture-cancer" hidden><strong>Fracture / malignancy / cord compression</strong><span>Trauma, osteoporosis, chronic steroids, cancer, weight loss, night pain → imaging beyond routine mechanical back pain care.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-fracture-cancer">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-renal" hidden><strong>Renal / urinary / intra-abdominal mimic</strong><span>Flank pain, fever, urinary symptoms, stone-like colic, solitary kidney, pregnancy → treat by obstruction, infection severity, pregnancy, renal risk.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-renal">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-radiculopathy" hidden><strong>Radiculopathy / mechanical pattern</strong><span>Unilateral radicular pain, positive straight-leg, no red flags, normal strength/bladder → outpatient only after red flags and function reassessed.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-radiculopathy">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-reassess" hidden><strong>Reassess after initial bundle</strong><span>Reassess in 30-60 minutes: ability to stand/walk, neuro exam, bladder symptoms, pain control, vitals. New neuro/bladder/fever/vascular features reset the workup.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-reassess">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-imaging" hidden><strong>Imaging decision</strong><span>MRI lumbar spine for cauda/conus/progressive deficit/suspected SEA-NVO/malignancy-neuro/cord-cauda compression; CTA or bedside US for aorta; CT/radiographs for fracture; no routine imaging for uncomplicated mechanical pain/radiculopathy.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-imaging">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-disposition" hidden><strong>Disposition</strong><span>Disposition follows neurologic safety, infection/vascular risk, mobility, and pain control.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-disposition">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-dispo-admit" hidden><strong>Admit / transfer / specialty pathway</strong><span>Cauda/conus symptoms, progressive neurologic deficit, suspected/confirmed SEA/NVO, sepsis, AAA/dissection, unstable vitals, fracture needing intervention, malignancy/cord compression concern, unable to ambulate safely, retention with neuro concern, or pain needing inpatient control.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-dispo-admit">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-dispo-observe" hidden><strong>Observation / serial exam</strong><span>MRI/CTA/labs pending, pain prevents reliable exam/ambulation test, symptoms evolving, moderate infection risk with unclear labs, or unsafe social/transport situation.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-dispo-observe">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="bp-dispo-discharge" hidden><strong>Discharge checklist</strong><span>No red flags, normal/baseline neuro exam, no bowel/bladder/saddle symptoms, ambulatory, pain controlled, no infection/vascular/trauma/cancer concern, realistic follow-up. Explicit cauda/infection/vascular return precautions.</span><button type="button" class="ig-btn ig-open-step" data-open-step="bp-dispo-discharge">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Sick check first</h2><div class="ig-cond ig-stepbound" data-whennode="bp-start"><p class="ig-block ig-text">Most back pain is mechanical. The ED job is to rapidly find the few that are spine, vascular, infectious, renal, traumatic, or malignant emergencies. First 60 seconds: general appearance, vitals trend, neuro exam (leg strength/sensation/reflexes, gait, saddle sensation, bowel/bladder), vascular/abdominal exam, infection risk, and fracture/cancer risk.</p></div><div class="ig-cond ig-stepbound" data-whennode="bp-start"><ol class="ig-block ig-steps"><li>Ruptured / leaking AAA — age ≥50 + smoker, pulsatile mass, syncope; bedside US now.</li><li>Spinal epidural abscess — fever, IVDU/immunosuppression, point tenderness, deficit.</li><li>Cauda equina syndrome — saddle anesthesia, urinary retention, bilateral leg weakness.</li><li>Cord compression from malignancy — cancer history, night pain, progressive deficit.</li><li>Aortic dissection / pyelonephritis-urosepsis — tearing pain/pulse deficit, or fever + CVA tenderness.</li></ol></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">▶ What to do now</h2><div class="ig-cond ig-stepbound" data-whennode="bp-cauda"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Cauda equina / conus medullaris</div><div>Open <a href="#/tree/cauda-equina" target="_top" class="ig-link">Cauda Equina Syndrome</a>. Next 5 minutes: bladder scan/PVR, sacral exam, leg motor/reflex/sensation exam, urgent MRI lumbar spine, early spine/neurosurgery call. Pitfall: pain may be improving while bladder/neurologic injury is worsening.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="bp-spine-infection"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Spinal epidural abscess / vertebral osteomyelitis</div><div>Open <a href="#/tree/low-back-pain" target="_top" class="ig-link">Low Back Pain Decision Support</a> with spine-infection posture. Next 5 minutes: neuro exam, ESR/CRP, blood cultures when febrile/high-suspicion, <strong>MRI spine with and without contrast</strong>. Antibiotics after cultures when stable — do not delay for sepsis or a neurologic deficit.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="bp-aaa-dissection"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">AAA / aortic dissection back-pain variant</div><div>Open <a href="#/tree/aortic-aneurysm" target="_top" class="ig-link">Aortic Aneurysm ED Management</a> or <a href="#/tree/aortic-dissection" target="_top" class="ig-link">Aortic Dissection</a>. Next 5 minutes: two large-bore IVs, type/screen or MTP posture if unstable, bedside aorta ultrasound if available, CTA chest/abdomen/pelvis when stable, vascular/cardiothoracic surgery early.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="bp-fracture-cancer"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Fracture / malignancy / metastatic cord compression</div><div>Open <a href="#/tree/low-back-pain" target="_top" class="ig-link">Low Back Pain Decision Support</a>. Next 5 minutes: neuro exam, pain control, CT/radiographs for trauma/fracture by risk, MRI when cancer with neurologic symptoms or suspected cord/cauda compression. New severe back pain in a cancer patient is malignant spinal disease until reasonably excluded.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="bp-renal"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Renal / urinary / intra-abdominal mimic</div><div>Open <a href="#/tree/adult-uti" target="_top" class="ig-link">Adult UTI</a> or <a href="#/tree/urinary-retention" target="_top" class="ig-link">Urinary Retention</a> when those fit. Next 5 minutes: UA, pregnancy test when applicable, renal function, bedside bladder scan if retention, CT/ultrasound strategy for stone/obstruction/pyelo complication by risk.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="bp-radiculopathy"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Radiculopathy / mechanical pattern</div><div>Open <a href="#/tree/low-back-pain" target="_top" class="ig-link">Low Back Pain Decision Support</a> and the L4/L5/S1 dermatome/myotome/reflex map. Confirm no red flags, document motor/reflex/sensation, treat pain to enable mobility, avoid routine advanced imaging. Radicular pain does not equal cauda equina — screen bowel/bladder/saddle/bilateral weakness every time.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">Back pain hub algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">This is the high-yield triage spine. See the <a href="#/tree/back-pain-hub" target="_top" class="ig-link">full consult</a> for the Steps Summary and Stop/Pitfalls pages.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Initial bundle detail</h2><div class="ig-cond ig-stepbound" data-whennode="bp-rescue"><ul class="ig-block ig-steps"><li>Analgesia: acetaminophen, NSAID if safe, topical/local measures, muscle relaxer selectively; avoid routine opioids when alternatives work.</li><li>Neuro exam before and after analgesia: gait, strength, reflexes, sensation.</li><li>Bladder scan/PVR when urinary symptoms, severe bilateral symptoms, or cauda concern.</li><li>ESR/CRP when infection risk exists; normal labs do not overrule high clinical suspicion.</li><li>Encourage movement as tolerated; avoid prolonged bedrest instructions for uncomplicated mechanical pain.</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="bp-rescue"><div class="ig-block ig-stat t-neutral"><span class="ig-stat-val">30-60 minutes</span><span class="ig-stat-lbl">Reassessment interval</span></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Imaging strategy</h2><div class="ig-cond ig-stepbound" data-whennode="bp-imaging"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Suspected emergency</th><th class="hero">Imaging</th></tr></thead><tbody><tr class="ig-row"><td>Cauda/conus, progressive deficit, suspected SEA/vertebral osteo, malignancy+neuro, cord/cauda compression</td><td class="hero">MRI lumbar spine</td></tr><tr class="ig-row"><td>Infection, malignancy, nonlocalizing spinal symptoms</td><td class="hero">MRI with contrast / whole spine</td></tr><tr class="ig-row"><td>Aortic dissection or unstable vascular phenotype when stable enough</td><td class="hero">CTA chest/abdomen/pelvis</td></tr><tr class="ig-row"><td>Rapid AAA screen in older vascular-risk patients</td><td class="hero">Bedside aorta ultrasound (do not let a limited scan delay CTA/surgery if unstable)</td></tr><tr class="ig-row"><td>Trauma or compression fracture risk</td><td class="hero">CT / radiographs</td></tr><tr class="ig-row"><td>Uncomplicated acute low back pain or radiculopathy without red flags</td><td class="hero">No routine imaging</td></tr></tbody></table></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Disposition detail</h2><div class="ig-cond ig-stepbound" data-whennode="bp-dispo-discharge"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Return precautions</div><div>Urinary retention/incontinence, saddle numbness, leg weakness, inability to walk, fever, worsening severe pain, abdominal pain/syncope, new numbness, cancer red flags, or uncontrolled vomiting/pain.</div></div></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>Sick check first</h3><p>Most back pain is mechanical. The ED job is to rapidly find the few that are spine, vascular, infectious, renal, traumatic, or malignant emergencies. First 60 seconds: general appearance, vitals trend, neuro exam (leg strength/sensation/reflexes, gait, saddle sensation, bowel/bladder), vascular/abdominal exam, infection risk, and fracture/cancer risk.</p><ul><li>Ruptured / leaking AAA — age ≥50 + smoker, pulsatile mass, syncope; bedside US now.</li><li>Spinal epidural abscess — fever, IVDU/immunosuppression, point tenderness, deficit.</li><li>Cauda equina syndrome — saddle anesthesia, urinary retention, bilateral leg weakness.</li><li>Cord compression from malignancy — cancer history, night pain, progressive deficit.</li><li>Aortic dissection / pyelonephritis-urosepsis — tearing pain/pulse deficit, or fever + CVA tenderness.</li></ul><h3>▶ What to do now</h3><p>Open [Cauda Equina Syndrome](#/tree/cauda-equina). Next 5 minutes: bladder scan/PVR, sacral exam, leg motor/reflex/sensation exam, urgent MRI lumbar spine, early spine/neurosurgery call. Pitfall: pain may be improving while bladder/neurologic injury is worsening.</p><p>Open [Low Back Pain Decision Support](#/tree/low-back-pain) with spine-infection posture. Next 5 minutes: neuro exam, ESR/CRP, blood cultures when febrile/high-suspicion, **MRI spine with and without contrast**. Antibiotics after cultures when stable — do not delay for sepsis or a neurologic deficit.</p><p>Open [Aortic Aneurysm ED Management](#/tree/aortic-aneurysm) or [Aortic Dissection](#/tree/aortic-dissection). Next 5 minutes: two large-bore IVs, type/screen or MTP posture if unstable, bedside aorta ultrasound if available, CTA chest/abdomen/pelvis when stable, vascular/cardiothoracic surgery early.</p><p>Open [Low Back Pain Decision Support](#/tree/low-back-pain). Next 5 minutes: neuro exam, pain control, CT/radiographs for trauma/fracture by risk, MRI when cancer with neurologic symptoms or suspected cord/cauda compression. New severe back pain in a cancer patient is malignant spinal disease until reasonably excluded.</p><p>Open [Adult UTI](#/tree/adult-uti) or [Urinary Retention](#/tree/urinary-retention) when those fit. Next 5 minutes: UA, pregnancy test when applicable, renal function, bedside bladder scan if retention, CT/ultrasound strategy for stone/obstruction/pyelo complication by risk.</p><p>Open [Low Back Pain Decision Support](#/tree/low-back-pain) and the L4/L5/S1 dermatome/myotome/reflex map. Confirm no red flags, document motor/reflex/sensation, treat pain to enable mobility, avoid routine advanced imaging. Radicular pain does not equal cauda equina — screen bowel/bladder/saddle/bilateral weakness every time.</p><h3>Back pain hub algorithm</h3><p>Back pain — sick check first — 5 DO NOT MISS: ruptured/leaking AAA, spinal epidural abscess, cauda equina syndrome, cord compression from malignancy, aortic dissection/pyelo-urosepsis. Vitals, neuro, vascular/abdominal, infection, fracture/cancer risk first.</p><p>Which time-critical lane fits best? — Do not start with 'sciatica' until cauda, spine infection, AAA/dissection, fracture/cancer, and renal mimics are screened.</p><p>Cauda equina / conus medullaris — Urinary retention/incontinence, saddle anesthesia, bilateral sciatica, progressive bilateral leg weakness, fecal incontinence, severe deficit → emergency MRI + spine pathway.</p><p>Spinal epidural abscess / vertebral osteomyelitis — Fever, IVDU, diabetes, immunosuppression, recent bacteremia/procedure, focal spine tenderness → MRI is the key diagnostic test.</p><p>AAA / aortic dissection variant — Older vascular risk, abrupt severe back/abdominal pain, syncope, hypotension, pulse deficit → resuscitation diagnosis, image and consult early.</p><p>No immediate exclusion hit → initial bundle — Analgesia (acetaminophen, NSAID if safe, topical/local, selective muscle relaxer, avoid routine opioids), repeat neuro/gait exam, bladder scan/PVR if indicated, ESR/CRP by infection risk, encourage movement.</p><p>Fracture / malignancy / cord compression — Trauma, osteoporosis, chronic steroids, cancer, weight loss, night pain → imaging beyond routine mechanical back pain care.</p><p>Renal / urinary / intra-abdominal mimic — Flank pain, fever, urinary symptoms, stone-like colic, solitary kidney, pregnancy → treat by obstruction, infection severity, pregnancy, renal risk.</p><p>Radiculopathy / mechanical pattern — Unilateral radicular pain, positive straight-leg, no red flags, normal strength/bladder → outpatient only after red flags and function reassessed.</p><p>Reassess after initial bundle — Reassess in 30-60 minutes: ability to stand/walk, neuro exam, bladder symptoms, pain control, vitals. New neuro/bladder/fever/vascular features reset the workup.</p><p>Imaging decision — MRI lumbar spine for cauda/conus/progressive deficit/suspected SEA-NVO/malignancy-neuro/cord-cauda compression; CTA or bedside US for aorta; CT/radiographs for fracture; no routine imaging for uncomplicated mechanical pain/radiculopathy.</p><p>Disposition — Disposition follows neurologic safety, infection/vascular risk, mobility, and pain control.</p><p>Admit / transfer / specialty pathway — Cauda/conus symptoms, progressive neurologic deficit, suspected/confirmed SEA/NVO, sepsis, AAA/dissection, unstable vitals, fracture needing intervention, malignancy/cord compression concern, unable to ambulate safely, retention with neuro concern, or pain needing inpatient control.</p><p>Observation / serial exam — MRI/CTA/labs pending, pain prevents reliable exam/ambulation test, symptoms evolving, moderate infection risk with unclear labs, or unsafe social/transport situation.</p><p>Discharge checklist — No red flags, normal/baseline neuro exam, no bowel/bladder/saddle symptoms, ambulatory, pain controlled, no infection/vascular/trauma/cancer concern, realistic follow-up. Explicit cauda/infection/vascular return precautions.</p><p>This is the high-yield triage spine. See the [full consult](#/tree/back-pain-hub) for the Steps Summary and Stop/Pitfalls pages.</p><h3>Initial bundle detail</h3><ul><li>Analgesia: acetaminophen, NSAID if safe, topical/local measures, muscle relaxer selectively; avoid routine opioids when alternatives work.</li><li>Neuro exam before and after analgesia: gait, strength, reflexes, sensation.</li><li>Bladder scan/PVR when urinary symptoms, severe bilateral symptoms, or cauda concern.</li><li>ESR/CRP when infection risk exists; normal labs do not overrule high clinical suspicion.</li><li>Encourage movement as tolerated; avoid prolonged bedrest instructions for uncomplicated mechanical pain.</li></ul><p>Reassessment interval: 30-60 minutes</p><h3>Imaging strategy</h3><p>Suspected emergency | Imaging</p><p>Cauda/conus, progressive deficit, suspected SEA/vertebral osteo, malignancy+neuro, cord/cauda compression | MRI lumbar spine</p><p>Infection, malignancy, nonlocalizing spinal symptoms | MRI with contrast / whole spine</p><p>Aortic dissection or unstable vascular phenotype when stable enough | CTA chest/abdomen/pelvis</p><p>Rapid AAA screen in older vascular-risk patients | Bedside aorta ultrasound (do not let a limited scan delay CTA/surgery if unstable)</p><p>Trauma or compression fracture risk | CT / radiographs</p><p>Uncomplicated acute low back pain or radiculopathy without red flags | No routine imaging</p><h3>Disposition detail</h3><p>Urinary retention/incontinence, saddle numbness, leg weakness, inability to walk, fever, worsening severe pain, abdominal pain/syncope, new numbness, cancer red flags, or uncontrolled vomiting/pain.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> ACR Appropriateness Criteria. Low Back Pain: 2021 Update. J Am Coll Radiol. 2021;18:S361-S379.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> Qaseem A, Wilt TJ, McLean RM, Forciea MA. Noninvasive treatments for acute, subacute, and chronic low back pain: ACP clinical practice guideline. Ann Intern Med. 2017;166:514-530.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Casazza BA. Diagnosis and treatment of acute low back pain. Am Fam Physician. 2012;85:343-350.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Lavy C, James A, Wilson-MacDonald J, Fairbank J. Cauda equina syndrome. BMJ. 2009;338:b936.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Todd NV. Guidelines for cauda equina syndrome: red flags and white flags. Br J Neurosurg. 2017;31:336-339.</li><li id="cite-ref6"><span class="ig-ref">[6]</span> Berbari EF, Kanj SS, Kowalski TJ, et al. IDSA guideline for native vertebral osteomyelitis in adults. Clin Infect Dis. 2015;61:e26-e46.</li><li id="cite-ref7"><span class="ig-ref">[7]</span> Davis DP, Wold RM, Patel RJ, et al. Clinical presentation and diagnostic delays in ED spinal epidural abscess. J Emerg Med. 2004;26:285-291.</li><li id="cite-ref8"><span class="ig-ref">[8]</span> Isselbacher EM, Preventza O, Hamilton Black J, et al. 2022 ACC/AHA guideline for diagnosis and management of aortic disease. Circulation. 2022;146:e334-e482.</li><li id="cite-ref9"><span class="ig-ref">[9]</span> Cole JS, Patchell RA. Metastatic epidural spinal cord compression. Lancet Neurol. 2008;7:459-466.</li><li id="cite-ref10"><span class="ig-ref">[10]</span> Chou R, Deyo R, Friedly J, et al. Systemic pharmacologic therapies for low back pain. Ann Intern Med. 2017;166:480-492.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-12</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · back-pain-hub · v1.0 InfoKitt cockpit spec — initial build from back-pain-hub tree</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"back-pain-hub","title":"Back Pain Hub — ED Triage","shape":"algorithm","intendedUse":"Adults presenting to the ED with back pain. Screens the time-critical mimics (cauda equina, spinal epidural abscess, AAA/aortic dissection, fracture/malignancy, renal/urinary mimics) before defaulting to a mechanical/radicular pathway. Not a treatment protocol for confirmed diagnoses — each critical lane hands off to its own dedicated consult.","scopeWarnings":["Ruptured/leaking AAA — age ≥50 + smoker, pulsatile mass, syncope → bedside ultrasound now.","Spinal epidural abscess — fever, IVDU/immunosuppression, point tenderness, deficit → the classic triad is insensitive; no fever does NOT clear SEA.","Cauda equina syndrome — saddle anesthesia, urinary retention, bilateral leg weakness → emergency MRI; pain improving does NOT mean bladder/neurologic injury is improving.","Cord compression from malignancy — cancer history, night pain, progressive deficit → new severe back pain in a cancer patient is malignant spinal disease until reasonably excluded.","Aortic dissection / pyelonephritis-urosepsis — tearing pain/pulse deficit, or fever + CVA tenderness → do not anchor on musculoskeletal pain in an older vascular-risk patient.","Admit/transfer whenever cauda/conus symptoms, progressive neurologic deficit, suspected/confirmed spine infection, sepsis, AAA/dissection, unstable vitals, or cord compression concern are present."],"source":{"kind":"medkitt-consult","ref":"back-pain-hub"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"facts":[{"id":"f-aaa-age","claim":"AAA/dissection back-pain risk threshold","value":"age ≥50","provenance":"consult:back-pain-hub/bp-start","cite":["ref1","ref2","ref3"],"verified":"provenance"},{"id":"f-reassess-window","claim":"Reassessment interval after the initial bundle","value":"30-60 minutes","provenance":"consult:back-pain-hub/bp-rescue","cite":["ref1","ref2","ref3"],"verified":"provenance"},{"id":"f-sea-mri","claim":"Imaging of choice for suspected spine infection","value":"MRI spine with and without contrast","provenance":"consult:back-pain-hub/bp-spine-infection","cite":["ref3","ref6","ref7"],"verified":"provenance"}],"sections":[{"id":"sec-sick-check","title":"Sick check first","blocks":[{"id":"b-intro","type":"text","whenNode":"bp-start","md":"Most back pain is mechanical. The ED job is to rapidly find the few that are spine, vascular, infectious, renal, traumatic, or malignant emergencies. First 60 seconds: general appearance, vitals trend, neuro exam (leg strength/sensation/reflexes, gait, saddle sensation, bowel/bladder), vascular/abdominal exam, infection risk, and fracture/cancer risk.","cite":["ref1","ref2","ref3"]},{"id":"b-donotmiss","type":"steps","whenNode":"bp-start","ordered":true,"items":["Ruptured / leaking AAA — age ≥50 + smoker, pulsatile mass, syncope; bedside US now.","Spinal epidural abscess — fever, IVDU/immunosuppression, point tenderness, deficit.","Cauda equina syndrome — saddle anesthesia, urinary retention, bilateral leg weakness.","Cord compression from malignancy — cancer history, night pain, progressive deficit.","Aortic dissection / pyelonephritis-urosepsis — tearing pain/pulse deficit, or fever + CVA tenderness."],"cite":["ref1","ref2","ref3"]}]},{"id":"sec-nextstep","title":"▶ What to do now","blocks":[{"id":"g-cauda","type":"callout","tone":"danger","whenNode":"bp-cauda","title":"Cauda equina / conus medullaris","md":"Open [Cauda Equina Syndrome](#/tree/cauda-equina). Next 5 minutes: bladder scan/PVR, sacral exam, leg motor/reflex/sensation exam, urgent MRI lumbar spine, early spine/neurosurgery call. Pitfall: pain may be improving while bladder/neurologic injury is worsening.","cite":["ref4","ref5"]},{"id":"g-spine-infection","type":"callout","tone":"danger","whenNode":"bp-spine-infection","title":"Spinal epidural abscess / vertebral osteomyelitis","md":"Open [Low Back Pain Decision Support](#/tree/low-back-pain) with spine-infection posture. Next 5 minutes: neuro exam, ESR/CRP, blood cultures when febrile/high-suspicion, **MRI spine with and without contrast**. Antibiotics after cultures when stable — do not delay for sepsis or a neurologic deficit.","cite":["ref3","ref6","ref7"]},{"id":"g-aaa","type":"callout","tone":"danger","whenNode":"bp-aaa-dissection","title":"AAA / aortic dissection back-pain variant","md":"Open [Aortic Aneurysm ED Management](#/tree/aortic-aneurysm) or [Aortic Dissection](#/tree/aortic-dissection). Next 5 minutes: two large-bore IVs, type/screen or MTP posture if unstable, bedside aorta ultrasound if available, CTA chest/abdomen/pelvis when stable, vascular/cardiothoracic surgery early.","cite":["ref8"]},{"id":"g-fracture-cancer","type":"callout","tone":"danger","whenNode":"bp-fracture-cancer","title":"Fracture / malignancy / metastatic cord compression","md":"Open [Low Back Pain Decision Support](#/tree/low-back-pain). Next 5 minutes: neuro exam, pain control, CT/radiographs for trauma/fracture by risk, MRI when cancer with neurologic symptoms or suspected cord/cauda compression. New severe back pain in a cancer patient is malignant spinal disease until reasonably excluded.","cite":["ref1","ref9"]},{"id":"g-renal","type":"callout","tone":"caution","whenNode":"bp-renal","title":"Renal / urinary / intra-abdominal mimic","md":"Open [Adult UTI](#/tree/adult-uti) or [Urinary Retention](#/tree/urinary-retention) when those fit. Next 5 minutes: UA, pregnancy test when applicable, renal function, bedside bladder scan if retention, CT/ultrasound strategy for stone/obstruction/pyelo complication by risk.","cite":["ref2"]},{"id":"g-radiculopathy","type":"callout","tone":"normal","whenNode":"bp-radiculopathy","title":"Radiculopathy / mechanical pattern","md":"Open [Low Back Pain Decision Support](#/tree/low-back-pain) and the L4/L5/S1 dermatome/myotome/reflex map. Confirm no red flags, document motor/reflex/sensation, treat pain to enable mobility, avoid routine advanced imaging. Radicular pain does not equal cauda equina — screen bowel/bladder/saddle/bilateral weakness every time.","cite":["ref1","ref2","ref10"]}]},{"id":"sec-algorithm","title":"Back pain hub algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"bp-start","shape":"state","text":"Back pain — sick check first","col":0,"rank":0,"tone":"danger","detail":"5 DO NOT MISS: ruptured/leaking AAA, spinal epidural abscess, cauda equina syndrome, cord compression from malignancy, aortic dissection/pyelo-urosepsis. Vitals, neuro, vascular/abdominal, infection, fracture/cancer risk first."},{"id":"bp-exclusions","shape":"decision","text":"Which time-critical lane fits best?","col":0,"rank":1,"tone":"danger","detail":"Do not start with 'sciatica' until cauda, spine infection, AAA/dissection, fracture/cancer, and renal mimics are screened."},{"id":"bp-cauda","shape":"state","text":"Cauda equina / conus medullaris","col":-3,"rank":2,"tone":"danger","detail":"Urinary retention/incontinence, saddle anesthesia, bilateral sciatica, progressive bilateral leg weakness, fecal incontinence, severe deficit → emergency MRI + spine pathway."},{"id":"bp-spine-infection","shape":"state","text":"Spinal epidural abscess / vertebral osteomyelitis","col":-2,"rank":2,"tone":"danger","detail":"Fever, IVDU, diabetes, immunosuppression, recent bacteremia/procedure, focal spine tenderness → MRI is the key diagnostic test."},{"id":"bp-aaa-dissection","shape":"state","text":"AAA / aortic dissection variant","col":-1,"rank":2,"tone":"danger","detail":"Older vascular risk, abrupt severe back/abdominal pain, syncope, hypotension, pulse deficit → resuscitation diagnosis, image and consult early."},{"id":"bp-rescue","shape":"action","text":"No immediate exclusion hit → initial bundle","col":0,"rank":2,"tone":"caution","detail":"Analgesia (acetaminophen, NSAID if safe, topical/local, selective muscle relaxer, avoid routine opioids), repeat neuro/gait exam, bladder scan/PVR if indicated, ESR/CRP by infection risk, encourage movement."},{"id":"bp-fracture-cancer","shape":"state","text":"Fracture / malignancy / cord compression","col":1,"rank":2,"tone":"danger","detail":"Trauma, osteoporosis, chronic steroids, cancer, weight loss, night pain → imaging beyond routine mechanical back pain care."},{"id":"bp-renal","shape":"state","text":"Renal / urinary / intra-abdominal mimic","col":2,"rank":2,"tone":"caution","detail":"Flank pain, fever, urinary symptoms, stone-like colic, solitary kidney, pregnancy → treat by obstruction, infection severity, pregnancy, renal risk."},{"id":"bp-radiculopathy","shape":"state","text":"Radiculopathy / mechanical pattern","col":3,"rank":2,"tone":"normal","detail":"Unilateral radicular pain, positive straight-leg, no red flags, normal strength/bladder → outpatient only after red flags and function reassessed."},{"id":"bp-reassess","shape":"decision","text":"Reassess after initial bundle","col":0,"rank":3,"tone":"caution","detail":"Reassess in 30-60 minutes: ability to stand/walk, neuro exam, bladder symptoms, pain control, vitals. New neuro/bladder/fever/vascular features reset the workup."},{"id":"bp-imaging","shape":"action","text":"Imaging decision","col":1,"rank":4,"tone":"caution","detail":"MRI lumbar spine for cauda/conus/progressive deficit/suspected SEA-NVO/malignancy-neuro/cord-cauda compression; CTA or bedside US for aorta; CT/radiographs for fracture; no routine imaging for uncomplicated mechanical pain/radiculopathy."},{"id":"bp-disposition","shape":"decision","text":"Disposition","col":0,"rank":5,"tone":"normal","detail":"Disposition follows neurologic safety, infection/vascular risk, mobility, and pain control."},{"id":"bp-dispo-admit","shape":"state","text":"Admit / transfer / specialty pathway","col":-1,"rank":6,"tone":"danger","detail":"Cauda/conus symptoms, progressive neurologic deficit, suspected/confirmed SEA/NVO, sepsis, AAA/dissection, unstable vitals, fracture needing intervention, malignancy/cord compression concern, unable to ambulate safely, retention with neuro concern, or pain needing inpatient control."},{"id":"bp-dispo-observe","shape":"state","text":"Observation / serial exam","col":0,"rank":6,"tone":"caution","detail":"MRI/CTA/labs pending, pain prevents reliable exam/ambulation test, symptoms evolving, moderate infection risk with unclear labs, or unsafe social/transport situation."},{"id":"bp-dispo-discharge","shape":"state","text":"Discharge checklist","col":1,"rank":6,"tone":"normal","detail":"No red flags, normal/baseline neuro exam, no bowel/bladder/saddle symptoms, ambulatory, pain controlled, no infection/vascular/trauma/cancer concern, realistic follow-up. Explicit cauda/infection/vascular return precautions."}],"edges":[{"from":"bp-start","to":"bp-exclusions"},{"from":"bp-exclusions","to":"bp-cauda","label":"cauda/conus symptoms"},{"from":"bp-exclusions","to":"bp-spine-infection","label":"fever/IVDU + spine tenderness"},{"from":"bp-exclusions","to":"bp-aaa-dissection","label":"vascular risk + abrupt pain"},{"from":"bp-exclusions","to":"bp-fracture-cancer","label":"trauma/steroids/cancer"},{"from":"bp-exclusions","to":"bp-renal","label":"flank/fever/urinary"},{"from":"bp-exclusions","to":"bp-radiculopathy","label":"unilateral radicular, no red flags"},{"from":"bp-exclusions","to":"bp-rescue","label":"no immediate exclusion hit"},{"from":"bp-rescue","to":"bp-reassess"},{"from":"bp-reassess","to":"bp-exclusions","label":"worse / new red flag"},{"from":"bp-reassess","to":"bp-imaging","label":"persistent pain / uncertainty"},{"from":"bp-reassess","to":"bp-disposition","label":"improved, ambulatory, stable"},{"from":"bp-imaging","to":"bp-disposition"},{"from":"bp-disposition","to":"bp-dispo-admit","label":"danger signs"},{"from":"bp-disposition","to":"bp-dispo-observe","label":"pending workup / uncertainty"},{"from":"bp-disposition","to":"bp-dispo-discharge","label":"mechanical, safe follow-up"}]},{"id":"b-fullprotocol","type":"text","md":"This is the high-yield triage spine. See the [full consult](#/tree/back-pain-hub) for the Steps Summary and Stop/Pitfalls pages."}]},{"id":"sec-rescue-detail","title":"Initial bundle detail","blocks":[{"id":"b-rescue-detail","type":"steps","whenNode":"bp-rescue","ordered":false,"items":["Analgesia: acetaminophen, NSAID if safe, topical/local measures, muscle relaxer selectively; avoid routine opioids when alternatives work.","Neuro exam before and after analgesia: gait, strength, reflexes, sensation.","Bladder scan/PVR when urinary symptoms, severe bilateral symptoms, or cauda concern.","ESR/CRP when infection risk exists; normal labs do not overrule high clinical suspicion.","Encourage movement as tolerated; avoid prolonged bedrest instructions for uncomplicated mechanical pain."],"cite":["ref1","ref2","ref3"]},{"id":"b-reassess-window","type":"stat","whenNode":"bp-rescue","label":"Reassessment interval","value":"30-60 minutes","cite":["ref1","ref2","ref3"]}]},{"id":"sec-imaging-detail","title":"Imaging strategy","blocks":[{"id":"b-imaging-table","type":"table","whenNode":"bp-imaging","columns":["Suspected emergency","Imaging"],"rows":[["Cauda/conus, progressive deficit, suspected SEA/vertebral osteo, malignancy+neuro, cord/cauda compression","MRI lumbar spine"],["Infection, malignancy, nonlocalizing spinal symptoms","MRI with contrast / whole spine"],["Aortic dissection or unstable vascular phenotype when stable enough","CTA chest/abdomen/pelvis"],["Rapid AAA screen in older vascular-risk patients","Bedside aorta ultrasound (do not let a limited scan delay CTA/surgery if unstable)"],["Trauma or compression fracture risk","CT / radiographs"],["Uncomplicated acute low back pain or radiculopathy without red flags","No routine imaging"]],"heroCol":1,"cite":["ref1","ref3","ref6","ref8"]}]},{"id":"sec-disposition-detail","title":"Disposition detail","blocks":[{"id":"b-discharge-returns","type":"callout","tone":"caution","whenNode":"bp-dispo-discharge","title":"Return precautions","md":"Urinary retention/incontinence, saddle numbness, leg weakness, inability to walk, fever, worsening severe pain, abdominal pain/syncope, new numbness, cancer red flags, or uncontrolled vomiting/pain.","cite":["ref1","ref2"]}]}],"citations":[{"id":"ref1","label":"ACR Appropriateness Criteria. Low Back Pain: 2021 Update. J Am Coll Radiol. 2021;18:S361-S379."},{"id":"ref2","label":"Qaseem A, Wilt TJ, McLean RM, Forciea MA. Noninvasive treatments for acute, subacute, and chronic low back pain: ACP clinical practice guideline. Ann Intern Med. 2017;166:514-530."},{"id":"ref3","label":"Casazza BA. Diagnosis and treatment of acute low back pain. Am Fam Physician. 2012;85:343-350."},{"id":"ref4","label":"Lavy C, James A, Wilson-MacDonald J, Fairbank J. Cauda equina syndrome. BMJ. 2009;338:b936."},{"id":"ref5","label":"Todd NV. Guidelines for cauda equina syndrome: red flags and white flags. Br J Neurosurg. 2017;31:336-339."},{"id":"ref6","label":"Berbari EF, Kanj SS, Kowalski TJ, et al. IDSA guideline for native vertebral osteomyelitis in adults. Clin Infect Dis. 2015;61:e26-e46."},{"id":"ref7","label":"Davis DP, Wold RM, Patel RJ, et al. Clinical presentation and diagnostic delays in ED spinal epidural abscess. J Emerg Med. 2004;26:285-291."},{"id":"ref8","label":"Isselbacher EM, Preventza O, Hamilton Black J, et al. 2022 ACC/AHA guideline for diagnosis and management of aortic disease. Circulation. 2022;146:e334-e482."},{"id":"ref9","label":"Cole JS, Patchell RA. Metastatic epidural spinal cord compression. Lancet Neurol. 2008;7:459-466."},{"id":"ref10","label":"Chou R, Deyo R, Friedly J, et al. Systemic pharmacologic therapies for low back pain. Ann Intern Med. 2017;166:480-492."}],"meta":{"version":"1.0","lastReviewed":"2026-07-12","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 InfoKitt cockpit spec — initial build from back-pain-hub tree"},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>
