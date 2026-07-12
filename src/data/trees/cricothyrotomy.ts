@@ -1,7 +1,7 @@
 // MedKitt — Emergency Cricothyrotomy
 // Scalpel-Finger-Bougie Technique: Indications → Anatomy → Preparation → Technique → Confirmation → Complications
 // 6 modules: Indications • Anatomy • Preparation • Technique • Confirmation • Complications
-// 26 nodes total.
+// 15 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';

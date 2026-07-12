@@ -2,7 +2,7 @@
 // Tricyclic antidepressant toxicity: recognition, ECG interpretation, sodium bicarbonate protocol,
 // seizure management, hemodynamic support, and disposition.
 // 6 modules: Recognition → ECG → Bicarbonate → Seizures → Hemodynamics → Disposition
-// 32 nodes total.
+// 29 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 

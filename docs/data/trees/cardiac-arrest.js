@@ -1,6 +1,6 @@
 // MedKitt — Cardiac Arrest Hub
 // Scene Assessment → First 2 Minutes → Rhythm Routing → Universal Principles → Reversible Causes → Termination / ROSC
-// 6 modules, ~22 nodes. Routes to sub-protocols: VF, PEA, Bradycardic, VT, TdP, Post-ROSC.
+// 6 modules, 23 nodes. Routes to sub-protocols: VF, PEA, Bradycardic, VT, TdP, Post-ROSC.
 export const CARDIAC_ARREST_CRITICAL_ACTIONS = [
     { text: 'Confirm arrest in ≤10 sec → CPR immediately', nodeId: 'ca-confirm' },
     { text: 'ETCO2 waveform capnography after airway secured — target >20 mmHg', nodeId: 'ca-universal' },

@@ -24,7 +24,7 @@ export const BRADYCARDIC_ARREST_NODES = [
             { src: 'images/cardiac-arrest/asystole-ecg.png', alt: 'Asystole ECG strip', caption: 'Asystole — confirm in 2 leads' },
             { src: 'images/cardiac-arrest/chb-ecg.png', alt: 'Complete heart block ECG', caption: 'Complete heart block with ventricular escape' },
         ],
-        citation: [1, 2, 3],
+        citation: [1, 2, 3, 4],
         next: 'brady-confirm',
         summary: 'Confirm asystole in 2 leads — low gain and lead disconnect mimic flatline',
     },
