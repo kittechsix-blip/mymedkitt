@@ -1,0 +1,521 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Esophageal Food Bolus Impaction — ED Disimpaction — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Esophageal Food Bolus Impaction — ED Disimpaction</h1>
+  <p class="ig-use">Adults with acute esophageal food bolus impaction (&quot;steakhouse syndrome&quot;) in the ED. Excludes pediatric patients and caustic ingestion. Button battery, sharp bone, magnet, or other true foreign body route to the separate GI Foreign Body pathway, not this one.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Drooling / cannot swallow saliva = complete obstruction = emergent endoscopy within ~6 hours — aspiration risk.</div><div class="ig-scope-item">⚠ Crepitus, severe/tearing chest or back pain, fever, tachycardia/sepsis, or Hamman crunch = suspected perforation: STOP — no pharmacologic disimpaction, no blind push, no effervescent agents. NPO, resuscitate, water-soluble contrast CT chest or esophagram (avoid barium), broad-spectrum antibiotics, emergent thoracic/GI surgery + gastroenterology consult.</div><div class="ig-scope-item">⚠ Button battery, sharp bone, magnet, or other true foreign body is NOT a simple food bolus — route to the GI Foreign Body pathway; a button battery is a same-hour emergency.</div><div class="ig-scope-item">⚠ Never leave a food bolus impacted beyond 24 hours — prolonged contact causes pressure necrosis, ulceration, and perforation risk.</div><div class="ig-scope-item">⚠ Do NOT use papain / meat tenderizer — associated with esophageal perforation and severe mucosal injury. Effervescent/gas-forming agents are contraindicated in a complete obstruction.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-weight">Weight <span class="ig-unit">(kg)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="weight" min="1" max="300" step="1" value="70" aria-label="Weight slider">
+<input type="number" id="ig-num-weight" data-input="weight" min="1" max="300" step="1" value="70" inputmode="decimal" aria-label="Weight exact value">
+</div>
+<div class="ig-warn" data-warn-for="weight" hidden role="alert">Value outside 1–300 kg — confirm.</div>
+</div><div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="complete" aria-checked="false">Complete obstruction (drooling / cannot swallow saliva)</button><button type="button" class="ig-toggle" role="switch" data-toggle="perforation" aria-checked="false">Suspected perforation (crepitus, severe pain, fever)</button><button type="button" class="ig-toggle" role="switch" data-toggle="dangerousobject" aria-checked="false">Dangerous object (button battery / sharp / magnet)</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="efb-start" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="efb-start"><span class="ig-route-rank">1</span><span>Esophageal Food Bolus: Steakhouse Syndrome</span></button></li><li data-route-node="efb-secretions" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="efb-secretions"><span class="ig-route-rank">2</span><span>Can patient handle secretions?</span></button></li><li data-route-node="efb-perforation" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="efb-perforation"><span class="ig-route-rank">3</span><span>Any sign of perforation?</span></button></li><li data-route-node="efb-perforation-stop" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="efb-perforation-stop"><span class="ig-route-rank">4</span><span>STOP: NPO, water-soluble CT, no push/pharm</span></button></li><li data-route-node="efb-object-check" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}"><button type="button" data-route-select="efb-object-check"><span class="ig-route-rank">4</span><span>Soft food only, or a dangerous object?</span></button></li><li data-route-node="efb-foreign-body" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><button type="button" data-route-select="efb-foreign-body"><span class="ig-route-rank">5</span><span>Route to GI Foreign Body pathway</span></button></li><li data-route-node="efb-timing" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><button type="button" data-route-select="efb-timing"><span class="ig-route-rank">5</span><span>Timing: scope &lt;6h complete / &lt;24h partial</span></button></li><li data-route-node="efb-pharm" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><button type="button" data-route-select="efb-pharm"><span class="ig-route-rank">6</span><span>Glucagon bridge (optional, low-yield)</span></button></li><li data-route-node="efb-endoscopy" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><button type="button" data-route-select="efb-endoscopy"><span class="ig-route-rank">7</span><span>Definitive endoscopy: push or retrieve</span></button></li><li data-route-node="efb-cause" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><button type="button" data-route-select="efb-cause"><span class="ig-route-rank">8</span><span>Biopsy for EoE, start a PPI</span></button></li><li data-route-node="efb-dispo" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><button type="button" data-route-select="efb-dispo"><span class="ig-route-rank">9</span><span>Disposition &amp; follow-up</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 468 1020" width="468" height="1020" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M129,98 L129,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,206 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="223" class="ig-edge-lbl" text-anchor="middle">drooling — complete</text><path d="M129,206 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="223" class="ig-edge-lbl" text-anchor="middle">tolerating — partial</text><path d="M129,314 L129,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="331" class="ig-edge-lbl" text-anchor="middle">no perforation signs</text><path d="M129,314 L129,335 L339,335 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="331" class="ig-edge-lbl" text-anchor="middle">suspected perforation</text><path d="M129,422 L129,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="129" y="439" class="ig-edge-lbl" text-anchor="middle">soft food bolus</text><path d="M129,422 L129,443 L339,443 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="439" class="ig-edge-lbl" text-anchor="middle">battery/sharp/magnet</text><path d="M129,530 L129,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,638 L129,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,746 L129,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,854 L129,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="efb-start" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Esophageal Food Bolus: Steakhouse Syndrome"><rect x="41" y="32" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Esophageal Food Bolus: Steakhouse Syndrome</div></foreignObject></g><g class="ig-node" data-node="efb-secretions" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Can patient handle secretions?"><polygon points="63,140 195,140 217,173 195,206 63,206 41,173" class="ig-shape t-neutral"/><foreignObject x="47" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Can patient handle secretions?</div></foreignObject></g><g class="ig-node" data-node="efb-perforation" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Any sign of perforation?"><polygon points="63,248 195,248 217,281 195,314 63,314 41,281" class="ig-shape t-danger"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Any sign of perforation?</div></foreignObject></g><g class="ig-node" data-node="efb-perforation-stop" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="STOP: NPO, water-soluble CT, no push/pharm"><rect x="251" y="356" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="257" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">STOP: NPO, water-soluble CT, no push/pharm</div></foreignObject></g><g class="ig-node" data-node="efb-object-check" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}" tabindex="0" role="button" aria-label="Soft food only, or a dangerous object?"><polygon points="63,356 195,356 217,389 195,422 63,422 41,389" class="ig-shape t-neutral"/><foreignObject x="47" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Soft food only, or a dangerous object?</div></foreignObject></g><g class="ig-node" data-node="efb-foreign-body" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" tabindex="0" role="button" aria-label="Route to GI Foreign Body pathway"><rect x="251" y="464" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Route to GI Foreign Body pathway</div></foreignObject></g><g class="ig-node" data-node="efb-timing" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" tabindex="0" role="button" aria-label="Timing: scope &lt;6h complete / &lt;24h partial"><rect x="41" y="464" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Timing: scope &lt;6h complete / &lt;24h partial</div></foreignObject></g><g class="ig-node" data-node="efb-pharm" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" tabindex="0" role="button" aria-label="Glucagon bridge (optional, low-yield)"><rect x="41" y="572" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Glucagon bridge (optional, low-yield)</div></foreignObject></g><g class="ig-node" data-node="efb-endoscopy" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" tabindex="0" role="button" aria-label="Definitive endoscopy: push or retrieve"><rect x="41" y="680" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Definitive endoscopy: push or retrieve</div></foreignObject></g><g class="ig-node" data-node="efb-cause" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" tabindex="0" role="button" aria-label="Biopsy for EoE, start a PPI"><rect x="41" y="788" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Biopsy for EoE, start a PPI</div></foreignObject></g><g class="ig-node" data-node="efb-dispo" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" tabindex="0" role="button" aria-label="Disposition &amp; follow-up"><rect x="41" y="896" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="47" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Disposition &amp; follow-up</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="efb-start" hidden><strong>Esophageal Food Bolus: Steakhouse Syndrome</strong><span>Adult who suddenly cannot swallow during a meal. The bolus is almost always lodged at a pathologic narrowing.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-secretions" hidden><strong>Can patient handle secretions?</strong><span>Drooling / cannot swallow saliva = complete obstruction = airway/aspiration risk = emergent. Tolerating secretions = partial = urgent but not immediately airway-threatening.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-secretions">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-perforation" hidden><strong>Any sign of perforation?</strong><span>Red flags: subcutaneous crepitus, severe/tearing chest or back pain, fever, tachycardia/sepsis, Hamman crunch, or prolonged (&gt;24h) impaction with a sharp/bony bolus.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-perforation">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-perforation-stop" hidden><strong>STOP: NPO, water-soluble CT, no push/pharm</strong><span>NPO, resuscitate, IV access/fluids, broad-spectrum antibiotics. Water-soluble contrast CT/esophagram (avoid barium). Emergent thoracic/GI surgery + GI consult. No glucagon, no effervescent agents, no forceful push.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-perforation-stop">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-object-check" hidden><strong>Soft food only, or a dangerous object?</strong><span>Confirm this is a typical steakhouse-syndrome bolus (meat/bread) and not a button battery, sharp bone, magnet, or other true foreign body.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-object-check">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-foreign-body" hidden><strong>Route to GI Foreign Body pathway</strong><span>Button battery = same-hour emergency (liquefactive necrosis). Sharp/pointed objects, long (&gt;5-6cm) objects, and multiple magnets also need urgent endoscopy — different time-critical protocol.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-foreign-body">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-timing" hidden><strong>Timing: scope &lt;6h complete / &lt;24h partial</strong><span>Complete obstruction: endoscopy emergently within ~6 hours. Partial obstruction: endoscopy urgently within 24 hours. Never leave a bolus impacted beyond 24 hours.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-timing">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-pharm" hidden><strong>Glucagon bridge (optional, low-yield)</strong><span>Glucagon 1 mg IV slow push, may repeat once after 10-20 min. Adjunct only — never delays scope in complete obstruction. No papain, no effervescent agents in complete obstruction.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-pharm">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-endoscopy" hidden><strong>Definitive endoscopy: push or retrieve</strong><span>Push technique advances the bolus into the stomach once distal lumen is patent. Retrieval uses Roth net/snare/forceps with an overtube for airway protection.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-endoscopy">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-cause" hidden><strong>Biopsy for EoE, start a PPI</strong><span>Biopsy (≥6, proximal and distal) at index endoscopy even if mucosa looks normal — EoE is the leading cause in young adults. Start omeprazole or pantoprazole.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-cause">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="efb-dispo" hidden><strong>Disposition &amp; follow-up</strong><span>Discharge on a PPI with GI follow-up if uncomplicated; admit for perforation concern, difficult extraction, aspiration, or inability to tolerate PO.</span><button type="button" class="ig-btn ig-open-step" data-open-step="efb-dispo">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section"><h2 class="ig-h2">Overview</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">Adult who suddenly cannot swallow during a meal (&quot;steakhouse syndrome&quot;). The bolus is almost always lodged at a pathologic narrowing. Triage by secretions, exclude perforation, exclude a hidden dangerous object, then relieve the obstruction and find the cause.</p></div><div class="ig-cond ig-reference"><ol class="ig-block ig-steps"><li>Can the patient handle secretions? Drooling/cannot swallow saliva = complete obstruction = emergent.</li><li>Screen for perforation (crepitus, chest/back pain, fever) — if present, STOP, image, no push/pharm.</li><li>Exclude a button battery, sharp bone, or other true foreign body.</li><li>Pharmacologic bridge (glucagon) is low-yield but reasonable while arranging endoscopy.</li><li>Endoscopy is definitive — push or retrieve.</li><li>Treat the underlying cause; biopsy for eosinophilic esophagitis.</li></ol></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">▶ What to do now</h2><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="efb-perforation-stop"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Suspected perforation — STOP</div><div><strong>STOP</strong> — no pharmacologic disimpaction, no blind push, no effervescent agents. NPO, resuscitate, IV access/fluids, broad-spectrum antibiotics. Imaging: <strong>water-soluble contrast CT chest or esophagram</strong> (avoid barium). Emergent thoracic/GI surgery + gastroenterology consult.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" data-whennode="efb-foreign-body"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Dangerous object — not a simple bolus</div><div>This is not a simple food bolus. Route to <a href="#/tree/gi-foreign-body" target="_top" class="ig-link">GI Foreign Body</a> for object-specific, time-critical management — a button battery is a same-hour emergency.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;complete&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" data-whennode="efb-timing"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Complete obstruction</div><div>Endoscopy <strong>emergently, within ~6 hours</strong> — aspiration risk. Do not delay for a pharmacologic bridge.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;complete&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" data-whennode="efb-timing"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Partial obstruction</div><div>Endoscopy <strong>urgently, within 24 hours</strong>. A glucagon bridge is reasonable while arranging endoscopy.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">Disimpaction algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">This is the high-yield spine. See the <a href="#/tree/esophageal-food-bolus" target="_top" class="ig-link">full protocol</a> for complete disposition criteria and citations.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Timing &amp; ASGE windows</h2><div class="ig-cond ig-stepbound" data-whennode="efb-timing"><p class="ig-block ig-text">Timing drives urgency (ASGE/ESGE). Complete obstruction (cannot manage secretions): endoscopy emergently, within ~6 hours — aspiration risk. Partial obstruction / food bolus without complete obstruction: endoscopy urgently, within 24 hours. A bolus should not be left impacted beyond 24 hours — prolonged contact causes pressure necrosis, ulceration, and perforation risk. Do not delay definitive endoscopy waiting for a pharmacologic agent to work in a patient with complete obstruction.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Pharmacologic bridge</h2><div class="ig-cond ig-stepbound" data-whennode="efb-pharm"><p class="ig-block ig-text">Pharmacology is an adjunct, not a substitute for endoscopy. Success rates are low and it must never delay scope in complete obstruction.</p></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;perforation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;dangerousobject&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" data-whennode="efb-pharm"><div class="ig-block ig-dose" data-calc="glucagondoseefb"><div class="ig-dose-drug">Glucagon</div><div class="ig-dose-val"><span data-calc-value>1 mg IV slow push (may repeat once after 10-20 min if no response)</span></div><div class="ig-dose-route">IV</div><div class="ig-dose-note">Relaxes lower esophageal sphincter smooth muscle. Common: nausea/vomiting — warn the patient. Avoid in pheochromocytoma/insulinoma.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="efb-pharm"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Do NOT use</div><div><strong>Papain / meat tenderizer</strong> is contraindicated — associated with esophageal perforation and severe mucosal injury. <strong>Effervescent/gas-forming agents</strong> are contraindicated in a complete obstruction — trapped gas above a complete block raises perforation risk.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Suspected perforation</h2><div class="ig-cond ig-stepbound" data-whennode="efb-perforation-stop"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Suspected Perforation — STOP</div><div>Do not attempt pharmacologic disimpaction, blind passage, or effervescent agents. Make the patient NPO; resuscitate; IV access, fluids, broad-spectrum antibiotics covering oral/anaerobic flora. Imaging: CT chest with water-soluble (not barium) oral contrast or a water-soluble contrast esophagram. Avoid barium when perforation is suspected. Consult thoracic/GI surgery and gastroenterology emergently.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Dangerous object</h2><div class="ig-cond ig-stepbound" data-whennode="efb-foreign-body"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Dangerous Object — Use GI Foreign Body Pathway</div><div>A button battery in the esophagus can cause liquefactive necrosis within hours and is a same-hour emergency; sharp/pointed objects, long (&gt;5-6 cm) objects, and multiple magnets also need urgent endoscopy. Go to <a href="#/tree/gi-foreign-body" target="_top" class="ig-link">GI Foreign Body</a> for object-specific timing, battery protocol, sharp-object handling, and magnet rules.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Definitive endoscopy</h2><div class="ig-cond ig-stepbound" data-whennode="efb-endoscopy"><p class="ig-block ig-text">Flexible endoscopy is the definitive treatment and is successful in the large majority of cases. Push technique: gently advance the bolus into the stomach once the distal lumen is confirmed patent. Retrieval: extract piecemeal with a Roth net, snare, or forceps; an overtube protects the airway and allows repeated passes. Airway protection (overtube or intubation) for large/complete obstructions with aspiration risk.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Find the underlying cause</h2><div class="ig-cond ig-stepbound" data-whennode="efb-cause"><p class="ig-block ig-text">A food bolus impaction is a symptom of a narrowed esophagus until proven otherwise. Common structural causes: Schatzki ring, peptic stricture, eosinophilic esophagitis, and (especially in older patients with weight loss/progressive dysphagia) malignancy. Eosinophilic esophagitis (EoE) is the leading cause of food impaction in young adults, especially men, and recurrent impactions.</p></div><div class="ig-cond ig-stepbound" data-whennode="efb-cause"><ul class="ig-block ig-steps"><li>Obtain esophageal biopsies (typically ≥6, proximal and distal) at the index endoscopy — even if the mucosa looks normal — unless contraindicated.</li><li>Start a PPI (omeprazole or pantoprazole) — diagnostic-therapeutic for EoE and treats peptic stricture.</li><li>Dilation of a ring/stricture may be done at the same or a follow-up procedure per the endoscopist.</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="efb-cause"><div class="ig-block ig-dose"><div class="ig-dose-drug">Omeprazole</div><div class="ig-dose-val">20–40 mg PO once daily</div><div class="ig-dose-route">PO</div><div class="ig-dose-note">Drug-store has no EoE-specific dosing row — this is the GERD/erosive-esophagitis regimen, the closest matching indication.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="efb-cause"><div class="ig-block ig-dose"><div class="ig-dose-drug">Pantoprazole</div><div class="ig-dose-val">40 mg PO or IV once daily</div><div class="ig-dose-route">PO/IV</div><div class="ig-dose-note">Alternative PPI (GERD/erosive-esophagitis dosing); may increase to twice daily for severe erosive esophagitis.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Disposition &amp; follow-up</h2><div class="ig-cond ig-stepbound" data-whennode="efb-dispo"><ul class="ig-block ig-steps"><li>Discharge: comfortable, tolerating secretions and oral intake, no perforation concern — continue a PPI, arrange GI follow-up for biopsy results, EoE management, and dilation planning.</li><li>Counsel on recurrence prevention: chew thoroughly, avoid large meat boluses, treat reflux/EoE.</li><li>Admit / observe for: perforation concern, difficult or incomplete extraction, significant mucosal injury, aspiration, inability to tolerate oral intake, or significant comorbidity.</li><li>Return precautions: recurrent obstruction, chest/back pain, fever, vomiting blood, or inability to swallow.</li></ul></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>Overview</h3><p>Adult who suddenly cannot swallow during a meal (&quot;steakhouse syndrome&quot;). The bolus is almost always lodged at a pathologic narrowing. Triage by secretions, exclude perforation, exclude a hidden dangerous object, then relieve the obstruction and find the cause.</p><ul><li>Can the patient handle secretions? Drooling/cannot swallow saliva = complete obstruction = emergent.</li><li>Screen for perforation (crepitus, chest/back pain, fever) — if present, STOP, image, no push/pharm.</li><li>Exclude a button battery, sharp bone, or other true foreign body.</li><li>Pharmacologic bridge (glucagon) is low-yield but reasonable while arranging endoscopy.</li><li>Endoscopy is definitive — push or retrieve.</li><li>Treat the underlying cause; biopsy for eosinophilic esophagitis.</li></ul><h3>▶ What to do now</h3><p>**STOP** — no pharmacologic disimpaction, no blind push, no effervescent agents. NPO, resuscitate, IV access/fluids, broad-spectrum antibiotics. Imaging: **water-soluble contrast CT chest or esophagram** (avoid barium). Emergent thoracic/GI surgery + gastroenterology consult.</p><p>This is not a simple food bolus. Route to [GI Foreign Body](#/tree/gi-foreign-body) for object-specific, time-critical management — a button battery is a same-hour emergency.</p><p>Endoscopy **emergently, within ~6 hours** — aspiration risk. Do not delay for a pharmacologic bridge.</p><p>Endoscopy **urgently, within 24 hours**. A glucagon bridge is reasonable while arranging endoscopy.</p><h3>Disimpaction algorithm</h3><p>Esophageal Food Bolus: Steakhouse Syndrome — Adult who suddenly cannot swallow during a meal. The bolus is almost always lodged at a pathologic narrowing.</p><p>Can patient handle secretions? — Drooling / cannot swallow saliva = complete obstruction = airway/aspiration risk = emergent. Tolerating secretions = partial = urgent but not immediately airway-threatening.</p><p>Any sign of perforation? — Red flags: subcutaneous crepitus, severe/tearing chest or back pain, fever, tachycardia/sepsis, Hamman crunch, or prolonged (&gt;24h) impaction with a sharp/bony bolus.</p><p>STOP: NPO, water-soluble CT, no push/pharm — NPO, resuscitate, IV access/fluids, broad-spectrum antibiotics. Water-soluble contrast CT/esophagram (avoid barium). Emergent thoracic/GI surgery + GI consult. No glucagon, no effervescent agents, no forceful push.</p><p>Soft food only, or a dangerous object? — Confirm this is a typical steakhouse-syndrome bolus (meat/bread) and not a button battery, sharp bone, magnet, or other true foreign body.</p><p>Route to GI Foreign Body pathway — Button battery = same-hour emergency (liquefactive necrosis). Sharp/pointed objects, long (&gt;5-6cm) objects, and multiple magnets also need urgent endoscopy — different time-critical protocol.</p><p>Timing: scope &lt;6h complete / &lt;24h partial — Complete obstruction: endoscopy emergently within ~6 hours. Partial obstruction: endoscopy urgently within 24 hours. Never leave a bolus impacted beyond 24 hours.</p><p>Glucagon bridge (optional, low-yield) — Glucagon 1 mg IV slow push, may repeat once after 10-20 min. Adjunct only — never delays scope in complete obstruction. No papain, no effervescent agents in complete obstruction.</p><p>Definitive endoscopy: push or retrieve — Push technique advances the bolus into the stomach once distal lumen is patent. Retrieval uses Roth net/snare/forceps with an overtube for airway protection.</p><p>Biopsy for EoE, start a PPI — Biopsy (≥6, proximal and distal) at index endoscopy even if mucosa looks normal — EoE is the leading cause in young adults. Start omeprazole or pantoprazole.</p><p>Disposition &amp; follow-up — Discharge on a PPI with GI follow-up if uncomplicated; admit for perforation concern, difficult extraction, aspiration, or inability to tolerate PO.</p><p>This is the high-yield spine. See the [full protocol](#/tree/esophageal-food-bolus) for complete disposition criteria and citations.</p><h3>Timing &amp; ASGE windows</h3><p>Timing drives urgency (ASGE/ESGE). Complete obstruction (cannot manage secretions): endoscopy emergently, within ~6 hours — aspiration risk. Partial obstruction / food bolus without complete obstruction: endoscopy urgently, within 24 hours. A bolus should not be left impacted beyond 24 hours — prolonged contact causes pressure necrosis, ulceration, and perforation risk. Do not delay definitive endoscopy waiting for a pharmacologic agent to work in a patient with complete obstruction.</p><h3>Pharmacologic bridge</h3><p>Pharmacology is an adjunct, not a substitute for endoscopy. Success rates are low and it must never delay scope in complete obstruction.</p><p><strong>Glucagon</strong>: 1 mg IV slow push (may repeat once after 10-20 min if no response) IV — Relaxes lower esophageal sphincter smooth muscle. Common: nausea/vomiting — warn the patient. Avoid in pheochromocytoma/insulinoma.</p><p>**Papain / meat tenderizer** is contraindicated — associated with esophageal perforation and severe mucosal injury. **Effervescent/gas-forming agents** are contraindicated in a complete obstruction — trapped gas above a complete block raises perforation risk.</p><h3>Suspected perforation</h3><p>Do not attempt pharmacologic disimpaction, blind passage, or effervescent agents. Make the patient NPO; resuscitate; IV access, fluids, broad-spectrum antibiotics covering oral/anaerobic flora. Imaging: CT chest with water-soluble (not barium) oral contrast or a water-soluble contrast esophagram. Avoid barium when perforation is suspected. Consult thoracic/GI surgery and gastroenterology emergently.</p><h3>Dangerous object</h3><p>A button battery in the esophagus can cause liquefactive necrosis within hours and is a same-hour emergency; sharp/pointed objects, long (&gt;5-6 cm) objects, and multiple magnets also need urgent endoscopy. Go to [GI Foreign Body](#/tree/gi-foreign-body) for object-specific timing, battery protocol, sharp-object handling, and magnet rules.</p><h3>Definitive endoscopy</h3><p>Flexible endoscopy is the definitive treatment and is successful in the large majority of cases. Push technique: gently advance the bolus into the stomach once the distal lumen is confirmed patent. Retrieval: extract piecemeal with a Roth net, snare, or forceps; an overtube protects the airway and allows repeated passes. Airway protection (overtube or intubation) for large/complete obstructions with aspiration risk.</p><h3>Find the underlying cause</h3><p>A food bolus impaction is a symptom of a narrowed esophagus until proven otherwise. Common structural causes: Schatzki ring, peptic stricture, eosinophilic esophagitis, and (especially in older patients with weight loss/progressive dysphagia) malignancy. Eosinophilic esophagitis (EoE) is the leading cause of food impaction in young adults, especially men, and recurrent impactions.</p><ul><li>Obtain esophageal biopsies (typically ≥6, proximal and distal) at the index endoscopy — even if the mucosa looks normal — unless contraindicated.</li><li>Start a PPI (omeprazole or pantoprazole) — diagnostic-therapeutic for EoE and treats peptic stricture.</li><li>Dilation of a ring/stricture may be done at the same or a follow-up procedure per the endoscopist.</li></ul><p><strong>Omeprazole</strong>: 20–40 mg PO once daily PO — Drug-store has no EoE-specific dosing row — this is the GERD/erosive-esophagitis regimen, the closest matching indication.</p><p><strong>Pantoprazole</strong>: 40 mg PO or IV once daily PO/IV — Alternative PPI (GERD/erosive-esophagitis dosing); may increase to twice daily for severe erosive esophagitis.</p><h3>Disposition &amp; follow-up</h3><ul><li>Discharge: comfortable, tolerating secretions and oral intake, no perforation concern — continue a PPI, arrange GI follow-up for biopsy results, EoE management, and dilation planning.</li><li>Counsel on recurrence prevention: chew thoroughly, avoid large meat boluses, treat reflux/EoE.</li><li>Admit / observe for: perforation concern, difficult or incomplete extraction, significant mucosal injury, aspiration, inability to tolerate oral intake, or significant comorbidity.</li><li>Return precautions: recurrent obstruction, chest/back pain, fever, vomiting blood, or inability to swallow.</li></ul></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> ASGE Standards of Practice Committee. Management of ingested foreign bodies and food impactions. Gastrointest Endosc. 2011;73(6):1085-1091.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> Birk M, Bauerfeind P, Deprez PH, et al. Removal of foreign bodies in the upper gastrointestinal tract in adults: ESGE Clinical Guideline. Endoscopy. 2016;48(5):489-496.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Sodeman TC, Harewood GC, Baron TH. Assessment of the predictors of response to glucagon in the setting of acute esophageal food bolus impaction. Dysphagia. 2004;19(1):18-21.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Brinster CJ, Singhal S, Lee L, et al. Evolving options in the management of esophageal perforation. Ann Thorac Surg. 2004;77(4):1475-1483.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Sdralis EIK, Petousis S, Rashid F, et al. Epidemiology, diagnosis, and management of esophageal perforations: systematic review. Dis Esophagus. 2017;30(8):1-6.</li><li id="cite-ref6"><span class="ig-ref">[6]</span> Sperry SLW, Crockett SD, Miller CB, et al. Esophageal foreign-body impactions: epidemiology, time trends, and the impact of the increasing prevalence of eosinophilic esophagitis. Gastrointest Endosc. 2011;74(5):985-991.</li><li id="cite-ref7"><span class="ig-ref">[7]</span> Khayyat YM. Pharmacological management of esophageal food bolus impaction. Emerg Med Int. 2013;2013:924015.</li><li id="cite-ref8"><span class="ig-ref">[8]</span> Tibbling L, Bjorkhoel A, Jansson E, Stenkvist M. Effect of spasmolytic drugs on esophageal foreign bodies. Dysphagia. 1995;10(2):126-127.</li><li id="cite-ref9"><span class="ig-ref">[9]</span> Dellon ES, Gonsalves N, Hirano I, et al. ACG Clinical Guideline: Evidenced Based Approach to the Diagnosis and Management of Esophageal Eosinophilia and Eosinophilic Esophagitis. Am J Gastroenterol. 2013;108(5):679-692.</li><li id="cite-ref10"><span class="ig-ref">[10]</span> Hirano I, Chan ES, Rank MA, et al. AGA/JTF Clinical Guidelines on the Management of Eosinophilic Esophagitis. Gastroenterology. 2020;158(6):1776-1786.</li><li id="cite-ref11"><span class="ig-ref">[11]</span> Goyal RK, Bauer JL, Spiro HM. The nature and location of esophageal contraction rings (Schatzki ring). N Engl J Med. 1971;284(20):1175-1180.</li><li id="cite-ref12"><span class="ig-ref">[12]</span> Tintinalli JE, et al. Tintinalli's Emergency Medicine: A Comprehensive Study Guide. Esophageal emergencies chapter. 9th ed. 2020.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-11</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · esophageal-food-bolus · v1.0 initial cockpit infographic build from esophageal-food-bolus consult tree.</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"esophageal-food-bolus","title":"Esophageal Food Bolus Impaction — ED Disimpaction","shape":"algorithm","intendedUse":"Adults with acute esophageal food bolus impaction (\"steakhouse syndrome\") in the ED. Excludes pediatric patients and caustic ingestion. Button battery, sharp bone, magnet, or other true foreign body route to the separate GI Foreign Body pathway, not this one.","scopeWarnings":["Drooling / cannot swallow saliva = complete obstruction = emergent endoscopy within ~6 hours — aspiration risk.","Crepitus, severe/tearing chest or back pain, fever, tachycardia/sepsis, or Hamman crunch = suspected perforation: STOP — no pharmacologic disimpaction, no blind push, no effervescent agents. NPO, resuscitate, water-soluble contrast CT chest or esophagram (avoid barium), broad-spectrum antibiotics, emergent thoracic/GI surgery + gastroenterology consult.","Button battery, sharp bone, magnet, or other true foreign body is NOT a simple food bolus — route to the GI Foreign Body pathway; a button battery is a same-hour emergency.","Never leave a food bolus impacted beyond 24 hours — prolonged contact causes pressure necrosis, ulceration, and perforation risk.","Do NOT use papain / meat tenderizer — associated with esophageal perforation and severe mucosal injury. Effervescent/gas-forming agents are contraindicated in a complete obstruction."],"source":{"kind":"medkitt-consult","ref":"esophageal-food-bolus"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"weight","label":"Weight","unit":"kg","type":"number","min":1,"max":300,"step":1,"default":70},{"id":"complete","label":"Complete obstruction (drooling / cannot swallow saliva)","type":"boolean","default":0},{"id":"perforation","label":"Suspected perforation (crepitus, severe pain, fever)","type":"boolean","default":0},{"id":"dangerousobject","label":"Dangerous object (button battery / sharp / magnet)","type":"boolean","default":0}],"calcs":[{"id":"glucagondoseefb","expr":"round(min(1, 0.02*weight), 2)","unit":"mg","formula":"0.02 mg/kg × weight, capped at 1 mg (adult/adolescent fixed dose 1 mg IV push)","derivedFrom":{"drugId":"glucagon","indication":"Esophageal food bolus impaction"},"testVectors":[{"in":{"weight":12},"expect":0.24},{"in":{"weight":70},"expect":1},{"in":{"weight":100},"expect":1}],"cite":["ref3","ref7"],"exprAst":{"k":"call","fn":"round","args":[{"k":"call","fn":"min","args":[{"k":"num","v":1},{"k":"bin","op":"*","a":{"k":"num","v":0.02},"b":{"k":"id","name":"weight"}}]},{"k":"num","v":2}]}}],"facts":[{"id":"fsecretionscomplete","claim":"Complete obstruction (drooling / cannot swallow saliva) — target time to endoscopy","value":"~6 hours","provenance":"consult:efb-timing/complete-obstruction","cite":["ref1","ref2"],"verified":"provenance"},{"id":"fpartialtiming","claim":"Partial obstruction / food bolus without complete obstruction — target time to endoscopy","value":"within 24 hours","provenance":"consult:efb-timing/partial-obstruction","cite":["ref1","ref2","ref6"],"verified":"provenance"},{"id":"fneverexceed24h","claim":"Maximum time a bolus may remain impacted","value":"beyond 24 hours","provenance":"consult:efb-timing/max-duration","cite":["ref1","ref6"],"verified":"provenance"},{"id":"fglucagondose","claim":"Glucagon dose for esophageal food bolus (adult/adolescent)","value":"1 mg IV","provenance":"drug-store:glucagon/Esophageal food bolus impaction","cite":["ref3","ref7"],"verified":"provenance"},{"id":"fglucagonrepeat","claim":"Glucagon repeat-dosing interval if no response","value":"10-20 min","provenance":"consult:efb-pharm/glucagon-repeat","cite":["ref3"],"verified":"provenance"},{"id":"fglucagoncontraindication","claim":"Glucagon avoided in","value":"pheochromocytoma/insulinoma","provenance":"drug-store:glucagon/contraindications","cite":["ref3"],"verified":"provenance"},{"id":"fpapaincontraindicated","claim":"Papain / meat tenderizer status","value":"contraindicated","provenance":"consult:efb-pharm/do-not-use","cite":["ref3"],"verified":"provenance"},{"id":"feoebiopsycount","claim":"Esophageal biopsies obtained at the index endoscopy for EoE","value":"≥6","provenance":"consult:efb-cause/biopsy","cite":["ref9","ref10"],"verified":"provenance"},{"id":"fomeprazoledose","claim":"Omeprazole PPI dosing (drug-store's closest matching indication row — see notes)","value":"20–40 mg PO once daily","provenance":"drug-store:omeprazole/GERD / erosive esophagitis","cite":["ref9","ref10"],"verified":"provenance"},{"id":"fpantoprazoledose","claim":"Pantoprazole PPI dosing","value":"40 mg","provenance":"drug-store:pantoprazole/GERD / erosive esophagitis","cite":["ref9"],"verified":"provenance"}],"sections":[{"id":"sec-overview","title":"Overview","blocks":[{"id":"b-overview-text","type":"text","md":"Adult who suddenly cannot swallow during a meal (\"steakhouse syndrome\"). The bolus is almost always lodged at a pathologic narrowing. Triage by secretions, exclude perforation, exclude a hidden dangerous object, then relieve the obstruction and find the cause.","cite":["ref1","ref2"]},{"id":"b-overview-steps","type":"steps","ordered":true,"items":["Can the patient handle secretions? Drooling/cannot swallow saliva = complete obstruction = emergent.","Screen for perforation (crepitus, chest/back pain, fever) — if present, STOP, image, no push/pharm.","Exclude a button battery, sharp bone, or other true foreign body.","Pharmacologic bridge (glucagon) is low-yield but reasonable while arranging endoscopy.","Endoscopy is definitive — push or retrieve.","Treat the underlying cause; biopsy for eosinophilic esophagitis."]}]},{"id":"sec-nextstep","title":"▶ What to do now","blocks":[{"id":"g-perforation","type":"callout","tone":"danger","showWhen":"perforation==1","whenNode":"efb-perforation-stop","title":"Suspected perforation — STOP","md":"**STOP** — no pharmacologic disimpaction, no blind push, no effervescent agents. NPO, resuscitate, IV access/fluids, broad-spectrum antibiotics. Imaging: **water-soluble contrast CT chest or esophagram** (avoid barium). Emergent thoracic/GI surgery + gastroenterology consult.","cite":["ref2","ref4","ref5"]},{"id":"g-dangerousobject","type":"callout","tone":"danger","showWhen":"perforation==0 && dangerousobject==1","whenNode":"efb-foreign-body","title":"Dangerous object — not a simple bolus","md":"This is not a simple food bolus. Route to [GI Foreign Body](#/tree/gi-foreign-body) for object-specific, time-critical management — a button battery is a same-hour emergency.","cite":["ref1","ref2"]},{"id":"g-complete","type":"callout","tone":"caution","showWhen":"perforation==0 && dangerousobject==0 && complete==1","whenNode":"efb-timing","title":"Complete obstruction","md":"Endoscopy **emergently, within ~6 hours** — aspiration risk. Do not delay for a pharmacologic bridge.","cite":["ref1","ref2"]},{"id":"g-partial","type":"callout","tone":"normal","showWhen":"perforation==0 && dangerousobject==0 && complete==0","whenNode":"efb-timing","title":"Partial obstruction","md":"Endoscopy **urgently, within 24 hours**. A glucagon bridge is reasonable while arranging endoscopy.","cite":["ref1","ref2"]}]},{"id":"sec-algorithm","title":"Disimpaction algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"efb-start","shape":"state","text":"Esophageal Food Bolus: Steakhouse Syndrome","col":0,"rank":0,"detail":"Adult who suddenly cannot swallow during a meal. The bolus is almost always lodged at a pathologic narrowing.","activeWhen":"1"},{"id":"efb-secretions","shape":"decision","text":"Can patient handle secretions?","col":0,"rank":1,"detail":"Drooling / cannot swallow saliva = complete obstruction = airway/aspiration risk = emergent. Tolerating secretions = partial = urgent but not immediately airway-threatening.","activeWhen":"1"},{"id":"efb-perforation","shape":"decision","text":"Any sign of perforation?","col":0,"rank":2,"tone":"danger","detail":"Red flags: subcutaneous crepitus, severe/tearing chest or back pain, fever, tachycardia/sepsis, Hamman crunch, or prolonged (>24h) impaction with a sharp/bony bolus.","activeWhen":"1"},{"id":"efb-perforation-stop","shape":"state","text":"STOP: NPO, water-soluble CT, no push/pharm","col":1,"rank":3,"tone":"danger","detail":"NPO, resuscitate, IV access/fluids, broad-spectrum antibiotics. Water-soluble contrast CT/esophagram (avoid barium). Emergent thoracic/GI surgery + GI consult. No glucagon, no effervescent agents, no forceful push.","activeWhen":"perforation==1"},{"id":"efb-object-check","shape":"decision","text":"Soft food only, or a dangerous object?","col":0,"rank":3,"detail":"Confirm this is a typical steakhouse-syndrome bolus (meat/bread) and not a button battery, sharp bone, magnet, or other true foreign body.","activeWhen":"perforation==0"},{"id":"efb-foreign-body","shape":"state","text":"Route to GI Foreign Body pathway","col":1,"rank":4,"tone":"danger","detail":"Button battery = same-hour emergency (liquefactive necrosis). Sharp/pointed objects, long (>5-6cm) objects, and multiple magnets also need urgent endoscopy — different time-critical protocol.","activeWhen":"perforation==0 && dangerousobject==1"},{"id":"efb-timing","shape":"action","text":"Timing: scope \u003c6h complete / \u003c24h partial","col":0,"rank":4,"detail":"Complete obstruction: endoscopy emergently within ~6 hours. Partial obstruction: endoscopy urgently within 24 hours. Never leave a bolus impacted beyond 24 hours.","activeWhen":"perforation==0 && dangerousobject==0"},{"id":"efb-pharm","shape":"action","text":"Glucagon bridge (optional, low-yield)","col":0,"rank":5,"tone":"caution","detail":"Glucagon 1 mg IV slow push, may repeat once after 10-20 min. Adjunct only — never delays scope in complete obstruction. No papain, no effervescent agents in complete obstruction.","activeWhen":"perforation==0 && dangerousobject==0"},{"id":"efb-endoscopy","shape":"action","text":"Definitive endoscopy: push or retrieve","col":0,"rank":6,"detail":"Push technique advances the bolus into the stomach once distal lumen is patent. Retrieval uses Roth net/snare/forceps with an overtube for airway protection.","activeWhen":"perforation==0 && dangerousobject==0"},{"id":"efb-cause","shape":"action","text":"Biopsy for EoE, start a PPI","col":0,"rank":7,"detail":"Biopsy (≥6, proximal and distal) at index endoscopy even if mucosa looks normal — EoE is the leading cause in young adults. Start omeprazole or pantoprazole.","activeWhen":"perforation==0 && dangerousobject==0"},{"id":"efb-dispo","shape":"state","text":"Disposition & follow-up","col":0,"rank":8,"tone":"normal","detail":"Discharge on a PPI with GI follow-up if uncomplicated; admit for perforation concern, difficult extraction, aspiration, or inability to tolerate PO.","activeWhen":"perforation==0 && dangerousobject==0"}],"edges":[{"from":"efb-start","to":"efb-secretions"},{"from":"efb-secretions","to":"efb-perforation","label":"drooling — complete"},{"from":"efb-secretions","to":"efb-perforation","label":"tolerating — partial"},{"from":"efb-perforation","to":"efb-object-check","label":"no perforation signs"},{"from":"efb-perforation","to":"efb-perforation-stop","label":"suspected perforation"},{"from":"efb-object-check","to":"efb-timing","label":"soft food bolus"},{"from":"efb-object-check","to":"efb-foreign-body","label":"battery/sharp/magnet"},{"from":"efb-timing","to":"efb-pharm"},{"from":"efb-pharm","to":"efb-endoscopy"},{"from":"efb-endoscopy","to":"efb-cause"},{"from":"efb-cause","to":"efb-dispo"}]},{"id":"b-fullprotocol","type":"text","md":"This is the high-yield spine. See the [full protocol](#/tree/esophageal-food-bolus) for complete disposition criteria and citations."}]},{"id":"sec-timing","title":"Timing & ASGE windows","blocks":[{"id":"b-timing-text","type":"text","whenNode":"efb-timing","md":"Timing drives urgency (ASGE/ESGE). Complete obstruction (cannot manage secretions): endoscopy emergently, within ~6 hours — aspiration risk. Partial obstruction / food bolus without complete obstruction: endoscopy urgently, within 24 hours. A bolus should not be left impacted beyond 24 hours — prolonged contact causes pressure necrosis, ulceration, and perforation risk. Do not delay definitive endoscopy waiting for a pharmacologic agent to work in a patient with complete obstruction.","cite":["ref1","ref2","ref6"]}]},{"id":"sec-pharm","title":"Pharmacologic bridge","blocks":[{"id":"b-pharm-text","type":"text","whenNode":"efb-pharm","md":"Pharmacology is an adjunct, not a substitute for endoscopy. Success rates are low and it must never delay scope in complete obstruction.","cite":["ref3","ref7","ref8"]},{"id":"b-glucagon-dose","type":"dose","drug":"Glucagon","drugId":"glucagon","dose":"1 mg IV slow push (may repeat once after 10-20 min if no response)","route":"IV","note":"Relaxes lower esophageal sphincter smooth muscle. Common: nausea/vomiting — warn the patient. Avoid in pheochromocytoma/insulinoma.","calcRef":"glucagondoseefb","showWhen":"perforation==0 && dangerousobject==0","whenNode":"efb-pharm","cite":["ref3","ref7"]},{"id":"b-donot-callout","type":"callout","tone":"danger","title":"Do NOT use","whenNode":"efb-pharm","md":"**Papain / meat tenderizer** is contraindicated — associated with esophageal perforation and severe mucosal injury. **Effervescent/gas-forming agents** are contraindicated in a complete obstruction — trapped gas above a complete block raises perforation risk.","cite":["ref3"]}]},{"id":"sec-perforation","title":"Suspected perforation","blocks":[{"id":"b-perf-callout","type":"callout","tone":"danger","title":"Suspected Perforation — STOP","whenNode":"efb-perforation-stop","md":"Do not attempt pharmacologic disimpaction, blind passage, or effervescent agents. Make the patient NPO; resuscitate; IV access, fluids, broad-spectrum antibiotics covering oral/anaerobic flora. Imaging: CT chest with water-soluble (not barium) oral contrast or a water-soluble contrast esophagram. Avoid barium when perforation is suspected. Consult thoracic/GI surgery and gastroenterology emergently.","cite":["ref2","ref4","ref5"]}]},{"id":"sec-foreignbody","title":"Dangerous object","blocks":[{"id":"b-fb-callout","type":"callout","tone":"danger","title":"Dangerous Object — Use GI Foreign Body Pathway","whenNode":"efb-foreign-body","md":"A button battery in the esophagus can cause liquefactive necrosis within hours and is a same-hour emergency; sharp/pointed objects, long (>5-6 cm) objects, and multiple magnets also need urgent endoscopy. Go to [GI Foreign Body](#/tree/gi-foreign-body) for object-specific timing, battery protocol, sharp-object handling, and magnet rules.","cite":["ref1","ref2"]}]},{"id":"sec-endoscopy","title":"Definitive endoscopy","blocks":[{"id":"b-endo-text","type":"text","whenNode":"efb-endoscopy","md":"Flexible endoscopy is the definitive treatment and is successful in the large majority of cases. Push technique: gently advance the bolus into the stomach once the distal lumen is confirmed patent. Retrieval: extract piecemeal with a Roth net, snare, or forceps; an overtube protects the airway and allows repeated passes. Airway protection (overtube or intubation) for large/complete obstructions with aspiration risk.","cite":["ref1","ref2","ref6"]}]},{"id":"sec-cause","title":"Find the underlying cause","blocks":[{"id":"b-cause-text","type":"text","whenNode":"efb-cause","md":"A food bolus impaction is a symptom of a narrowed esophagus until proven otherwise. Common structural causes: Schatzki ring, peptic stricture, eosinophilic esophagitis, and (especially in older patients with weight loss/progressive dysphagia) malignancy. Eosinophilic esophagitis (EoE) is the leading cause of food impaction in young adults, especially men, and recurrent impactions.","cite":["ref9","ref10","ref11"]},{"id":"b-biopsy-steps","type":"steps","ordered":false,"whenNode":"efb-cause","items":["Obtain esophageal biopsies (typically ≥6, proximal and distal) at the index endoscopy — even if the mucosa looks normal — unless contraindicated.","Start a PPI (omeprazole or pantoprazole) — diagnostic-therapeutic for EoE and treats peptic stricture.","Dilation of a ring/stricture may be done at the same or a follow-up procedure per the endoscopist."],"cite":["ref9","ref10"]},{"id":"b-omeprazole-dose","type":"dose","drug":"Omeprazole","drugId":"omeprazole","dose":"20–40 mg PO once daily","route":"PO","note":"Drug-store has no EoE-specific dosing row — this is the GERD/erosive-esophagitis regimen, the closest matching indication.","whenNode":"efb-cause","cite":["ref9","ref10"]},{"id":"b-pantoprazole-dose","type":"dose","drug":"Pantoprazole","drugId":"pantoprazole","dose":"40 mg PO or IV once daily","route":"PO/IV","note":"Alternative PPI (GERD/erosive-esophagitis dosing); may increase to twice daily for severe erosive esophagitis.","whenNode":"efb-cause","cite":["ref9"]}]},{"id":"sec-disposition","title":"Disposition & follow-up","blocks":[{"id":"b-dispo-steps","type":"steps","ordered":false,"whenNode":"efb-dispo","items":["Discharge: comfortable, tolerating secretions and oral intake, no perforation concern — continue a PPI, arrange GI follow-up for biopsy results, EoE management, and dilation planning.","Counsel on recurrence prevention: chew thoroughly, avoid large meat boluses, treat reflux/EoE.","Admit / observe for: perforation concern, difficult or incomplete extraction, significant mucosal injury, aspiration, inability to tolerate oral intake, or significant comorbidity.","Return precautions: recurrent obstruction, chest/back pain, fever, vomiting blood, or inability to swallow."],"cite":["ref1","ref9","ref10","ref12"]}]}],"citations":[{"id":"ref1","label":"ASGE Standards of Practice Committee. Management of ingested foreign bodies and food impactions. Gastrointest Endosc. 2011;73(6):1085-1091."},{"id":"ref2","label":"Birk M, Bauerfeind P, Deprez PH, et al. Removal of foreign bodies in the upper gastrointestinal tract in adults: ESGE Clinical Guideline. Endoscopy. 2016;48(5):489-496."},{"id":"ref3","label":"Sodeman TC, Harewood GC, Baron TH. Assessment of the predictors of response to glucagon in the setting of acute esophageal food bolus impaction. Dysphagia. 2004;19(1):18-21."},{"id":"ref4","label":"Brinster CJ, Singhal S, Lee L, et al. Evolving options in the management of esophageal perforation. Ann Thorac Surg. 2004;77(4):1475-1483."},{"id":"ref5","label":"Sdralis EIK, Petousis S, Rashid F, et al. Epidemiology, diagnosis, and management of esophageal perforations: systematic review. Dis Esophagus. 2017;30(8):1-6."},{"id":"ref6","label":"Sperry SLW, Crockett SD, Miller CB, et al. Esophageal foreign-body impactions: epidemiology, time trends, and the impact of the increasing prevalence of eosinophilic esophagitis. Gastrointest Endosc. 2011;74(5):985-991."},{"id":"ref7","label":"Khayyat YM. Pharmacological management of esophageal food bolus impaction. Emerg Med Int. 2013;2013:924015."},{"id":"ref8","label":"Tibbling L, Bjorkhoel A, Jansson E, Stenkvist M. Effect of spasmolytic drugs on esophageal foreign bodies. Dysphagia. 1995;10(2):126-127."},{"id":"ref9","label":"Dellon ES, Gonsalves N, Hirano I, et al. ACG Clinical Guideline: Evidenced Based Approach to the Diagnosis and Management of Esophageal Eosinophilia and Eosinophilic Esophagitis. Am J Gastroenterol. 2013;108(5):679-692."},{"id":"ref10","label":"Hirano I, Chan ES, Rank MA, et al. AGA/JTF Clinical Guidelines on the Management of Eosinophilic Esophagitis. Gastroenterology. 2020;158(6):1776-1786."},{"id":"ref11","label":"Goyal RK, Bauer JL, Spiro HM. The nature and location of esophageal contraction rings (Schatzki ring). N Engl J Med. 1971;284(20):1175-1180."},{"id":"ref12","label":"Tintinalli JE, et al. Tintinalli's Emergency Medicine: A Comprehensive Study Guide. Esophageal emergencies chapter. 9th ed. 2020."}],"meta":{"version":"1.0","lastReviewed":"2026-07-11","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 initial cockpit infographic build from esophageal-food-bolus consult tree."}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

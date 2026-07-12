@@ -1,0 +1,514 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capacity Assessment: Four Abilities, Decision-Specific — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Capacity Assessment: Four Abilities, Decision-Specific</h1>
+  <p class="ig-use">Adults in the ED being assessed for decision-making capacity — refusing recommended treatment, leaving against medical advice, consenting to a procedure, or an end-of-life decision. A bedside clinical framework, not a substitute for a formal psychiatric or legal competency evaluation. Excludes minors (parent/guardian consent framework differs) and court competency determinations.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ <strong>Capacity is decision-specific</strong> — a patient may have capacity for one decision but not another; assess for THIS decision, not globally.</div><div class="ig-scope-item">⚠ <strong>Capacity != competency</strong> — capacity is a clinical determination made by the physician; competency is a legal determination made by a court. A diagnosis alone (dementia, psychosis, intoxication) does not determine capacity — patients are presumed to have capacity until proven otherwise.</div><div class="ig-scope-item">⚠ Capacity requires all <strong>four abilities</strong>: understanding, appreciation, reasoning, and communication of a stable choice — for THIS decision.</div><div class="ig-scope-item">⚠ If the patient <strong>lacks capacity</strong>, they cannot refuse treatment, cannot leave AMA, and cannot give informed consent — proceed via a surrogate decision-maker, or treat under implied consent in a true emergency.</div><div class="ig-scope-item">⚠ <strong>Document the specific decision, the process, and your reasoning</strong> — every capacity determination must be charted, not just the conclusion.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl ig-select-ctl"><label for="ig-select-trigger">Why is capacity being questioned?</label><select id="ig-select-trigger" data-input="trigger" data-select-input="1" aria-label="Why is capacity being questioned?"><option value="1" selected>Refusing treatment</option><option value="2">Leaving AMA</option><option value="3">Consenting to procedure</option><option value="4">End-of-life decision</option></select></div><div class="ig-ctl ig-select-ctl"><label for="ig-select-determination">Capacity determination</label><select id="ig-select-determination" data-input="determination" data-select-input="1" aria-label="Capacity determination"><option value="0" selected>Pending</option><option value="1">Has capacity</option><option value="2">Lacks capacity</option><option value="3">Unclear / borderline</option></select></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="cap-start" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="cap-start"><span class="ig-route-rank">1</span><span>Why is capacity being questioned?</span></button></li><li data-route-node="cap-refusing" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="cap-refusing"><span class="ig-route-rank">2</span><span>Refusing treatment</span></button></li><li data-route-node="cap-ama" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}"><button type="button" data-route-select="cap-ama"><span class="ig-route-rank">2</span><span>Leaving AMA</span></button></li><li data-route-node="cap-consent" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}"><button type="button" data-route-select="cap-consent"><span class="ig-route-rank">2</span><span>Consenting to procedure</span></button></li><li data-route-node="cap-eol" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:4}}"><button type="button" data-route-select="cap-eol"><span class="ig-route-rank">2</span><span>End-of-life decision</span></button></li><li data-route-node="cap-definitions" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="cap-definitions"><span class="ig-route-rank">3</span><span>Capacity vs Competency</span></button></li><li data-route-node="cap-aid4" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="cap-aid4"><span class="ig-route-rank">4</span><span>Four-Abilities Framework</span></button></li><li data-route-node="cap-questions" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="cap-questions"><span class="ig-route-rank">5</span><span>Assessment Questions</span></button></li><li data-route-node="cap-assessment" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="cap-assessment"><span class="ig-route-rank">6</span><span>Capacity Determination</span></button></li><li data-route-node="cap-has-capacity" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="cap-has-capacity"><span class="ig-route-rank">7</span><span>Has Capacity</span></button></li><li data-route-node="cap-lacks-capacity" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}"><button type="button" data-route-select="cap-lacks-capacity"><span class="ig-route-rank">7</span><span>Lacks Capacity</span></button></li><li data-route-node="cap-unclear" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}"><button type="button" data-route-select="cap-unclear"><span class="ig-route-rank">7</span><span>Unclear / Borderline</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 1518 804" width="1518" height="804" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M759,98 L759,119 L129,119 L129,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="115" class="ig-edge-lbl" text-anchor="middle">Refusing treatment</text><path d="M759,98 L759,119 L549,119 L549,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="115" class="ig-edge-lbl" text-anchor="middle">Leaving AMA</text><path d="M759,98 L759,119 L969,119 L969,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="864" y="115" class="ig-edge-lbl" text-anchor="middle">Consenting to procedure</text><path d="M759,98 L759,119 L1389,119 L1389,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="1074" y="115" class="ig-edge-lbl" text-anchor="middle">End-of-life decision</text><path d="M129,206 L129,227 L759,227 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,206 L549,227 L759,227 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M969,206 L969,227 L759,227 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M1389,206 L1389,227 L759,227 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,314 L759,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,422 L759,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,530 L759,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,638 L759,659 L339,659 L339,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="655" class="ig-edge-lbl" text-anchor="middle">Has capacity</text><path d="M759,638 L759,659 L1179,659 L1179,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="969" y="655" class="ig-edge-lbl" text-anchor="middle">Lacks capacity</text><path d="M759,638 L759,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="655" class="ig-edge-lbl" text-anchor="middle">Unclear / borderline</text><path d="M759,746 L759,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="655" class="ig-edge-lbl" text-anchor="middle">Reassess</text><g class="ig-node" data-node="cap-start" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Why is capacity being questioned?"><polygon points="693,32 825,32 847,65 825,98 693,98 671,65" class="ig-shape t-neutral"/><foreignObject x="677" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Why is capacity being questioned?</div></foreignObject></g><g class="ig-node" data-node="cap-refusing" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Refusing treatment"><rect x="41" y="140" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="47" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Refusing treatment</div></foreignObject></g><g class="ig-node" data-node="cap-ama" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" tabindex="0" role="button" aria-label="Leaving AMA"><rect x="461" y="140" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="467" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Leaving AMA</div></foreignObject></g><g class="ig-node" data-node="cap-consent" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}" tabindex="0" role="button" aria-label="Consenting to procedure"><rect x="881" y="140" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="887" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Consenting to procedure</div></foreignObject></g><g class="ig-node" data-node="cap-eol" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:4}}" tabindex="0" role="button" aria-label="End-of-life decision"><rect x="1301" y="140" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="1307" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">End-of-life decision</div></foreignObject></g><g class="ig-node" data-node="cap-definitions" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Capacity vs Competency"><rect x="671" y="248" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="677" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Capacity vs Competency</div></foreignObject></g><g class="ig-node" data-node="cap-aid4" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Four-Abilities Framework"><rect x="671" y="356" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="677" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Four-Abilities Framework</div></foreignObject></g><g class="ig-node" data-node="cap-questions" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Assessment Questions"><rect x="671" y="464" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="677" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Assessment Questions</div></foreignObject></g><g class="ig-node" data-node="cap-assessment" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Capacity Determination"><polygon points="693,572 825,572 847,605 825,638 693,638 671,605" class="ig-shape t-neutral"/><foreignObject x="677" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Capacity Determination</div></foreignObject></g><g class="ig-node" data-node="cap-has-capacity" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Has Capacity"><rect x="251" y="680" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="257" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Has Capacity</div></foreignObject></g><g class="ig-node" data-node="cap-lacks-capacity" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" tabindex="0" role="button" aria-label="Lacks Capacity"><rect x="1091" y="680" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="1097" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Lacks Capacity</div></foreignObject></g><g class="ig-node" data-node="cap-unclear" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}" tabindex="0" role="button" aria-label="Unclear / Borderline"><rect x="671" y="680" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="677" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Unclear / Borderline</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="cap-start" hidden><strong>Why is capacity being questioned?</strong><span>Common triggers: refusing treatment, leaving AMA, consenting to a high-risk procedure, signing DNR/POLST, psychotic/intoxicated/delirious. Capacity is decision-specific.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-refusing" hidden><strong>Refusing treatment</strong><span>Higher stakes = higher bar. Has capacity → respect decision, document. Lacks capacity → surrogate or implied consent.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-refusing">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-ama" hidden><strong>Leaving AMA</strong><span>Capacity assessment REQUIRED before AMA. Intoxication ≠ automatic incapacity. Delirium generally precludes AMA until treated.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-ama">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-consent" hidden><strong>Consenting to procedure</strong><span>Disclosure + capacity + voluntariness. Minors need guardian consent; interpreter for non-English speakers; delay elective in intoxication.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-consent">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-eol" hidden><strong>End-of-life decision</strong><span>Higher bar for irreversible decisions. Rule out depression. Lacks capacity → advance directive / proxy / substituted judgment.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-eol">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-definitions" hidden><strong>Capacity vs Competency</strong><span>Capacity = clinical (physician). Competency = legal (court). Presume capacity until proven otherwise; diagnosis alone does not determine it.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-definitions">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-aid4" hidden><strong>Four-Abilities Framework</strong><span>Understanding, appreciation, reasoning, communication of a stable choice.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-aid4">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-questions" hidden><strong>Assessment Questions</strong><span>Structured questions per domain: understanding, appreciation, reasoning, communication.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-questions">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-assessment" hidden><strong>Capacity Determination</strong><span>Capacity present if all four abilities are sufficiently intact for this decision; lacks capacity if a significant, decision-relevant deficit prevents informed decision-making.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-assessment">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-has-capacity" hidden><strong>Has Capacity</strong><span>Respect autonomous decision. Ensure informed decision. Document assessment thoroughly.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-has-capacity">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-lacks-capacity" hidden><strong>Lacks Capacity</strong><span>Identify surrogate decision-maker. Use substituted judgment or best interest. Implied consent if emergency and no surrogate available.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-lacks-capacity">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cap-unclear" hidden><strong>Unclear / Borderline</strong><span>More time, psychiatry consult (MacCAT), ethics consult, or court involvement. Meanwhile treat emergencies, presume capacity for low-stakes decisions.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cap-unclear">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">1 · Fundamentals</h2><div class="ig-cond ig-stepbound" data-whennode="cap-start"><p class="ig-block ig-text"><strong>Capacity is decision-specific</strong> — a patient may have capacity for one decision but not another. A patient with mild dementia may have capacity to refuse a blood draw but not to refuse life-saving surgery.</p></div><div class="ig-cond ig-stepbound" data-whennode="cap-start"><ul class="ig-block ig-steps"><li>Refusing recommended treatment</li><li>Leaving against medical advice (AMA)</li><li>Consenting to a high-risk procedure</li><li>Signing a DNR/POLST</li><li>Psychotic, intoxicated, or delirious presentation</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="cap-definitions"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Term</th><th>Definition</th><th>Who determines</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Capacity</td><td>Clinical ability to make a specific decision</td><td>Physician</td></tr><tr class="ig-row"><td class="hero">Competency</td><td>Legal status to make decisions</td><td>Court</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="cap-definitions"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Presume capacity</div><div>Patients are <strong>presumed to have capacity until proven otherwise</strong>. Diagnosis alone (dementia, psychosis, intoxication) does not determine capacity. A patient who makes a &quot;bad&quot; decision may still have capacity. Capacity can fluctuate — reassess if the patient's condition changes. When in doubt, treat the emergency first (implied consent).</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">2 · Four-abilities framework</h2><div class="ig-cond ig-stepbound" data-whennode="cap-aid4"><p class="ig-block ig-text">Capacity uses four abilities: <strong>understanding, appreciation, reasoning, and communication of a stable choice.</strong></p></div><div class="ig-cond ig-stepbound" data-whennode="cap-questions"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Ability</th><th>What it tests</th><th>Sample question</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Understanding</td><td>Describe condition, treatment, risks/benefits, alternatives in own words</td><td>&quot;Can you tell me what we are worried about and what treatment we recommend?&quot;</td></tr><tr class="ig-row"><td class="hero">Appreciation</td><td>Apply the information to their own situation as personally relevant</td><td>&quot;What do you think will happen to you if you leave or decline treatment?&quot;</td></tr><tr class="ig-row"><td class="hero">Reasoning</td><td>Compare options and consequences with a coherent process — a risky choice can still be intact reasoning</td><td>&quot;What are the pros and cons of treatment? Why are you choosing this option?&quot;</td></tr><tr class="ig-row"><td class="hero">Communication</td><td>State a clear, stable choice</td><td>&quot;What have you decided to do?&quot;</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="cap-assessment"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Capacity present if</div><div><strong>All four abilities are sufficiently intact for this decision.</strong></div></div></div><div class="ig-cond ig-stepbound" data-whennode="cap-assessment"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Lack of capacity if</div><div><strong>A significant, decision-relevant deficit prevents informed decision-making.</strong> Gray zone? Consider psychiatry consult, ethics consult, or more time to reassess.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">3 · What to do now</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">Set <strong>why capacity is being questioned</strong> above, and once assessed, set the <strong>determination</strong> — the matching guidance below updates and the algorithm path highlights.</p></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="cap-refusing"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Refusing treatment</div><div><strong>Higher stakes = higher bar for capacity.</strong> If has capacity: respect the decision, document thoroughly, ensure informed refusal, offer alternatives/follow-up. If lacks capacity: cannot refuse — proceed with a surrogate, or treat under implied consent if it is an emergency.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" data-whennode="cap-ama"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Leaving AMA</div><div><strong>Capacity assessment is REQUIRED before AMA.</strong> Intoxication raises concern but does not automatically remove capacity — assess clinically and reassess when it can safely wait. Delirious patients generally cannot leave AMA until delirium is addressed. If has capacity: they can leave, even if unsafe — document capacity, risks explained, alternatives offered; AMA does NOT mean punishment. If lacks capacity: cannot leave AMA — consider 1:1 sitter, security, medical hold, or psych evaluation.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}" data-whennode="cap-consent"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Consenting to a procedure</div><div>Valid consent requires <strong>Disclosure, capacity, and voluntariness</strong>. Minors need parent/guardian consent (except emancipated/emergencies). Non-English speakers need a professional interpreter. Delay elective procedures in intoxicated patients until the four abilities can be clinically demonstrated; emergencies get implied consent.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;trigger&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:4}}" data-whennode="cap-eol"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">End-of-life decision</div><div><strong>Higher bar for irreversible decisions.</strong> Ensure the patient fully understands the implications, check consistency with their values, and rule out depression affecting the decision. If lacks capacity: use the advance directive, healthcare proxy/POA, substituted judgment, or best-interest standard. Ethics consult for complex or conflicted cases.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="cap-has-capacity"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Patient has capacity</div><div>Respect the autonomous choice. Ensure an informed decision (risks/benefits/alternatives discussed) and document the assessment thoroughly — even if you disagree with the decision.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" data-whennode="cap-lacks-capacity"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Patient lacks capacity</div><div>Identify a surrogate decision-maker (<strong>Healthcare proxy / POA</strong> first, then spouse, adult children, parents, siblings, other relatives — hierarchy varies by state). Surrogate uses substituted judgment (<strong>&quot;What would patient want?&quot;</strong>) or best interest if wishes are unknown. Emergency with no surrogate → treat under implied consent.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}" data-whennode="cap-unclear"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Unclear / borderline</div><div>Options: more time (reassess when sober/rested/less stressed), psychiatry consult (formal evaluation, may use the <strong>MacArthur Competence Assessment Tool</strong>), ethics consult, or court involvement for urgent guardianship. Meanwhile: treat emergencies, presume capacity for low-stakes decisions.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">4 · Capacity assessment algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">This is the full node graph. See the <a href="#/tree/capacity-assessment" target="_top" class="ig-link">full capacity assessment consult</a> for complete scenario text and patient-specific detail.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">5 · Outcomes in depth</h2><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="cap-has-capacity"><ul class="ig-block ig-steps"><li>Respect their autonomous choice, even if you disagree</li><li>Ensure an informed decision — risks, benefits, and alternatives were discussed and understood</li><li>Document the specific decision, how each domain was assessed, and the patient's responses</li><li>Offer alternatives and follow-up; keep the door open for changing their mind</li></ul></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" data-whennode="cap-lacks-capacity"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Surrogate priority</th><th>Who</th></tr></thead><tbody><tr class="ig-row"><td class="hero">1</td><td>Healthcare proxy / POA (if designated)</td></tr><tr class="ig-row"><td class="hero">2</td><td>Spouse</td></tr><tr class="ig-row"><td class="hero">3</td><td>Adult children (majority if multiple)</td></tr><tr class="ig-row"><td class="hero">4</td><td>Parents</td></tr><tr class="ig-row"><td class="hero">5</td><td>Siblings</td></tr><tr class="ig-row"><td class="hero">6</td><td>Other relatives / close friends</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" data-whennode="cap-lacks-capacity"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Surrogate standards (hierarchy varies by state)</div><div>Surrogate uses <strong>substituted judgment</strong> (<strong>&quot;What would patient want?&quot;</strong>) or best interest if wishes are unknown. If emergency and no surrogate available: treat under implied consent and document that delay would harm the patient. If surrogate unavailable or disagrees: ethics consult or court-appointed guardian (takes time).</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;determination&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}" data-whennode="cap-unclear"><ul class="ig-block ig-steps"><li>More time: repeat assessment when sober, rested, less stressed — intoxication clears, delirium may improve with treatment</li><li>Psychiatry consult: formal evaluation, especially with underlying psychiatric illness; may use the MacArthur Competence Assessment Tool (MacCAT)</li><li>Ethics consult: mediate complex situations, help when family disagrees, clarify ethical frameworks</li><li>Court involvement: emergency guardianship if urgent, competency hearing for long-term incapacity</li></ul></div></section><section class="ig-section"><h2 class="ig-h2">6 · Documentation</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text"><strong>Document the specific decision, the process, and your reasoning</strong> — every capacity determination must be charted, not just the conclusion.</p></div><div class="ig-cond ig-reference"><ol class="ig-block ig-steps"><li>The specific decision being assessed</li><li>Clinical context — why capacity was questioned</li><li>Mental status exam findings</li><li>Assessment of each ability: understanding, appreciation, reasoning, communication (with the patient's actual responses)</li><li>Your conclusion and reasoning</li><li>What information was provided to the patient</li><li>Signature, date, time</li></ol></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Example phrasing</div><div>&quot;In my clinical judgment, this patient [has/lacks] capacity to [specific decision] because [reasoning].&quot;</div></div></div></section><section class="ig-section"><h2 class="ig-h2">7 · Do NOT</h2><div class="ig-cond ig-reference"><details class="ig-block ig-disc"><summary>Other pitfalls<span class="ig-scent">4 items</span></summary><div class="ig-disc-body"><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT assume a diagnosis alone (dementia, psychosis, intoxication) removes capacity</strong> — assess functionally, for this specific decision, every time.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT let a risky or &quot;bad&quot; decision override an intact capacity assessment</strong> — respect autonomy even when you disagree.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT delay emergency treatment to complete a full four-abilities assessment</strong> — treat under implied consent, then reassess when safe.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT chart only the conclusion</strong> (&quot;patient lacks capacity&quot;) without the specific decision, the process, and your reasoning.</div></div></div></div></details></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Fundamentals</h3><p>**Capacity is decision-specific** — a patient may have capacity for one decision but not another. A patient with mild dementia may have capacity to refuse a blood draw but not to refuse life-saving surgery.</p><ul><li>Refusing recommended treatment</li><li>Leaving against medical advice (AMA)</li><li>Consenting to a high-risk procedure</li><li>Signing a DNR/POLST</li><li>Psychotic, intoxicated, or delirious presentation</li></ul><p>Term | Definition | Who determines</p><p>Capacity | Clinical ability to make a specific decision | Physician</p><p>Competency | Legal status to make decisions | Court</p><p>Patients are **presumed to have capacity until proven otherwise**. Diagnosis alone (dementia, psychosis, intoxication) does not determine capacity. A patient who makes a &quot;bad&quot; decision may still have capacity. Capacity can fluctuate — reassess if the patient's condition changes. When in doubt, treat the emergency first (implied consent).</p><h3>2 · Four-abilities framework</h3><p>Capacity uses four abilities: **understanding, appreciation, reasoning, and communication of a stable choice.**</p><p>Ability | What it tests | Sample question</p><p>Understanding | Describe condition, treatment, risks/benefits, alternatives in own words | &quot;Can you tell me what we are worried about and what treatment we recommend?&quot;</p><p>Appreciation | Apply the information to their own situation as personally relevant | &quot;What do you think will happen to you if you leave or decline treatment?&quot;</p><p>Reasoning | Compare options and consequences with a coherent process — a risky choice can still be intact reasoning | &quot;What are the pros and cons of treatment? Why are you choosing this option?&quot;</p><p>Communication | State a clear, stable choice | &quot;What have you decided to do?&quot;</p><p>**All four abilities are sufficiently intact for this decision.**</p><p>**A significant, decision-relevant deficit prevents informed decision-making.** Gray zone? Consider psychiatry consult, ethics consult, or more time to reassess.</p><h3>3 · What to do now</h3><p>Set **why capacity is being questioned** above, and once assessed, set the **determination** — the matching guidance below updates and the algorithm path highlights.</p><p>**Higher stakes = higher bar for capacity.** If has capacity: respect the decision, document thoroughly, ensure informed refusal, offer alternatives/follow-up. If lacks capacity: cannot refuse — proceed with a surrogate, or treat under implied consent if it is an emergency.</p><p>**Capacity assessment is REQUIRED before AMA.** Intoxication raises concern but does not automatically remove capacity — assess clinically and reassess when it can safely wait. Delirious patients generally cannot leave AMA until delirium is addressed. If has capacity: they can leave, even if unsafe — document capacity, risks explained, alternatives offered; AMA does NOT mean punishment. If lacks capacity: cannot leave AMA — consider 1:1 sitter, security, medical hold, or psych evaluation.</p><p>Valid consent requires **Disclosure, capacity, and voluntariness**. Minors need parent/guardian consent (except emancipated/emergencies). Non-English speakers need a professional interpreter. Delay elective procedures in intoxicated patients until the four abilities can be clinically demonstrated; emergencies get implied consent.</p><p>**Higher bar for irreversible decisions.** Ensure the patient fully understands the implications, check consistency with their values, and rule out depression affecting the decision. If lacks capacity: use the advance directive, healthcare proxy/POA, substituted judgment, or best-interest standard. Ethics consult for complex or conflicted cases.</p><p>Respect the autonomous choice. Ensure an informed decision (risks/benefits/alternatives discussed) and document the assessment thoroughly — even if you disagree with the decision.</p><p>Identify a surrogate decision-maker (**Healthcare proxy / POA** first, then spouse, adult children, parents, siblings, other relatives — hierarchy varies by state). Surrogate uses substituted judgment (**&quot;What would patient want?&quot;**) or best interest if wishes are unknown. Emergency with no surrogate → treat under implied consent.</p><p>Options: more time (reassess when sober/rested/less stressed), psychiatry consult (formal evaluation, may use the **MacArthur Competence Assessment Tool**), ethics consult, or court involvement for urgent guardianship. Meanwhile: treat emergencies, presume capacity for low-stakes decisions.</p><h3>4 · Capacity assessment algorithm</h3><p>Why is capacity being questioned? — Common triggers: refusing treatment, leaving AMA, consenting to a high-risk procedure, signing DNR/POLST, psychotic/intoxicated/delirious. Capacity is decision-specific.</p><p>Refusing treatment — Higher stakes = higher bar. Has capacity → respect decision, document. Lacks capacity → surrogate or implied consent.</p><p>Leaving AMA — Capacity assessment REQUIRED before AMA. Intoxication ≠ automatic incapacity. Delirium generally precludes AMA until treated.</p><p>Consenting to procedure — Disclosure + capacity + voluntariness. Minors need guardian consent; interpreter for non-English speakers; delay elective in intoxication.</p><p>End-of-life decision — Higher bar for irreversible decisions. Rule out depression. Lacks capacity → advance directive / proxy / substituted judgment.</p><p>Capacity vs Competency — Capacity = clinical (physician). Competency = legal (court). Presume capacity until proven otherwise; diagnosis alone does not determine it.</p><p>Four-Abilities Framework — Understanding, appreciation, reasoning, communication of a stable choice.</p><p>Assessment Questions — Structured questions per domain: understanding, appreciation, reasoning, communication.</p><p>Capacity Determination — Capacity present if all four abilities are sufficiently intact for this decision; lacks capacity if a significant, decision-relevant deficit prevents informed decision-making.</p><p>Has Capacity — Respect autonomous decision. Ensure informed decision. Document assessment thoroughly.</p><p>Lacks Capacity — Identify surrogate decision-maker. Use substituted judgment or best interest. Implied consent if emergency and no surrogate available.</p><p>Unclear / Borderline — More time, psychiatry consult (MacCAT), ethics consult, or court involvement. Meanwhile treat emergencies, presume capacity for low-stakes decisions.</p><p>This is the full node graph. See the [full capacity assessment consult](#/tree/capacity-assessment) for complete scenario text and patient-specific detail.</p><h3>5 · Outcomes in depth</h3><ul><li>Respect their autonomous choice, even if you disagree</li><li>Ensure an informed decision — risks, benefits, and alternatives were discussed and understood</li><li>Document the specific decision, how each domain was assessed, and the patient's responses</li><li>Offer alternatives and follow-up; keep the door open for changing their mind</li></ul><p>Surrogate priority | Who</p><p>1 | Healthcare proxy / POA (if designated)</p><p>2 | Spouse</p><p>3 | Adult children (majority if multiple)</p><p>4 | Parents</p><p>5 | Siblings</p><p>6 | Other relatives / close friends</p><p>Surrogate uses **substituted judgment** (**&quot;What would patient want?&quot;**) or best interest if wishes are unknown. If emergency and no surrogate available: treat under implied consent and document that delay would harm the patient. If surrogate unavailable or disagrees: ethics consult or court-appointed guardian (takes time).</p><ul><li>More time: repeat assessment when sober, rested, less stressed — intoxication clears, delirium may improve with treatment</li><li>Psychiatry consult: formal evaluation, especially with underlying psychiatric illness; may use the MacArthur Competence Assessment Tool (MacCAT)</li><li>Ethics consult: mediate complex situations, help when family disagrees, clarify ethical frameworks</li><li>Court involvement: emergency guardianship if urgent, competency hearing for long-term incapacity</li></ul><h3>6 · Documentation</h3><p>**Document the specific decision, the process, and your reasoning** — every capacity determination must be charted, not just the conclusion.</p><ul><li>The specific decision being assessed</li><li>Clinical context — why capacity was questioned</li><li>Mental status exam findings</li><li>Assessment of each ability: understanding, appreciation, reasoning, communication (with the patient's actual responses)</li><li>Your conclusion and reasoning</li><li>What information was provided to the patient</li><li>Signature, date, time</li></ul><p>&quot;In my clinical judgment, this patient [has/lacks] capacity to [specific decision] because [reasoning].&quot;</p><h3>7 · Do NOT</h3><p><em>Other pitfalls</em></p><p>**Do NOT assume a diagnosis alone (dementia, psychosis, intoxication) removes capacity** — assess functionally, for this specific decision, every time.</p><p>**Do NOT let a risky or &quot;bad&quot; decision override an intact capacity assessment** — respect autonomy even when you disagree.</p><p>**Do NOT delay emergency treatment to complete a full four-abilities assessment** — treat under implied consent, then reassess when safe.</p><p>**Do NOT chart only the conclusion** (&quot;patient lacks capacity&quot;) without the specific decision, the process, and your reasoning.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Appelbaum PS. Clinical practice: Assessment of patients' competence to consent to treatment. N Engl J Med 2007;357:1834-40.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> Grisso T, Appelbaum PS. Assessing Competence to Consent to Treatment: A Guide for Physicians and Other Health Professionals. Oxford University Press, 1998.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Palmer BW, Harmell AL. Assessment of healthcare decision-making capacity. Arch Clin Neuropsychol 2016;31:530-40.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Alfandre DJ. &quot;I'm going home&quot;: Discharges against medical advice. Mayo Clin Proc 2009;84:255-60.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Lo B. Resolving Ethical Dilemmas: A Guide for Clinicians, 6th ed. Lippincott Williams &amp; Wilkins, 2019.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-11 · evidence through 2019 (Lo, Resolving Ethical Dilemmas, 6th ed.) · next review 2027-07-11</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · capacity-assessment · v1.0 — initial InfoKitt cockpit infographic generated from myMedKitt capacity-assessment tree (14 nodes; cap-documentation orphan node preserved as an always-visible Documentation section, not in the flow graph).</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"capacity-assessment","title":"Capacity Assessment: Four Abilities, Decision-Specific","shape":"algorithm","intendedUse":"Adults in the ED being assessed for decision-making capacity — refusing recommended treatment, leaving against medical advice, consenting to a procedure, or an end-of-life decision. A bedside clinical framework, not a substitute for a formal psychiatric or legal competency evaluation. Excludes minors (parent/guardian consent framework differs) and court competency determinations.","scopeWarnings":["**Capacity is decision-specific** — a patient may have capacity for one decision but not another; assess for THIS decision, not globally.","**Capacity != competency** — capacity is a clinical determination made by the physician; competency is a legal determination made by a court. A diagnosis alone (dementia, psychosis, intoxication) does not determine capacity — patients are presumed to have capacity until proven otherwise.","Capacity requires all **four abilities**: understanding, appreciation, reasoning, and communication of a stable choice — for THIS decision.","If the patient **lacks capacity**, they cannot refuse treatment, cannot leave AMA, and cannot give informed consent — proceed via a surrogate decision-maker, or treat under implied consent in a true emergency.","**Document the specific decision, the process, and your reasoning** — every capacity determination must be charted, not just the conclusion."],"source":{"kind":"medkitt-consult","ref":"capacity-assessment"},"theme":{"preset":"medkitt"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"trigger","label":"Why is capacity being questioned?","type":"select","default":1,"options":[{"label":"Refusing treatment","value":1},{"label":"Leaving AMA","value":2},{"label":"Consenting to procedure","value":3},{"label":"End-of-life decision","value":4}]},{"id":"determination","label":"Capacity determination","type":"select","default":0,"options":[{"label":"Pending","value":0},{"label":"Has capacity","value":1},{"label":"Lacks capacity","value":2},{"label":"Unclear / borderline","value":3}]}],"facts":[{"id":"fdecisionspecific","claim":"Capacity is decision-specific","value":"Capacity is decision-specific","provenance":"consult:capacity-assessment/cap-start","cite":["ref1"],"verified":"provenance"},{"id":"fcapacitydef","claim":"Capacity — definition and who determines it","value":"Clinical ability to make a specific decision","provenance":"consult:capacity-assessment/cap-definitions","cite":["ref1","ref2"],"verified":"provenance"},{"id":"fcompetencydef","claim":"Competency — definition and who determines it","value":"Legal status to make decisions","provenance":"consult:capacity-assessment/cap-definitions","cite":["ref1","ref2"],"verified":"provenance"},{"id":"fpresumed","claim":"Presumption of capacity","value":"presumed to have capacity until proven otherwise","provenance":"consult:capacity-assessment/cap-definitions","cite":["ref1","ref2"],"verified":"provenance"},{"id":"ffourabilities","claim":"The four abilities required for capacity","value":"understanding, appreciation, reasoning, and communication of a stable choice","provenance":"consult:capacity-assessment/cap-aid4","cite":["ref2","ref3"],"verified":"provenance"},{"id":"fcapacitypresent","claim":"Criterion for capacity present","value":"All four abilities are sufficiently intact for this decision","provenance":"consult:capacity-assessment/cap-assessment","cite":["ref2","ref3"],"verified":"provenance"},{"id":"flackscapacity","claim":"Criterion for lacking capacity","value":"A significant, decision-relevant deficit prevents informed decision-making","provenance":"consult:capacity-assessment/cap-assessment","cite":["ref2","ref3"],"verified":"provenance"},{"id":"frefusalstakes","claim":"Bar for treatment refusal scales with stakes","value":"Higher stakes = higher bar for capacity","provenance":"consult:capacity-assessment/cap-refusing","cite":["ref1"],"verified":"provenance"},{"id":"famarequired","claim":"Capacity assessment requirement before AMA discharge","value":"REQUIRED before AMA","provenance":"consult:capacity-assessment/cap-ama","cite":["ref4"],"verified":"provenance"},{"id":"fconsentelements","claim":"Elements of valid informed consent","value":"Disclosure, capacity, and voluntariness","provenance":"consult:capacity-assessment/cap-consent","cite":["ref1","ref5"],"verified":"provenance"},{"id":"feolbar","claim":"Bar for end-of-life decisions","value":"Higher bar for irreversible decisions","provenance":"consult:capacity-assessment/cap-eol","cite":["ref5"],"verified":"provenance"},{"id":"fsurrogatefirst","claim":"First surrogate in the decision-maker hierarchy","value":"Healthcare proxy / POA","provenance":"consult:capacity-assessment/cap-lacks-capacity","verified":"provenance"},{"id":"fsubstitutedjudgment","claim":"Substituted judgment standard","value":"What would patient want?","provenance":"consult:capacity-assessment/cap-lacks-capacity","verified":"provenance"},{"id":"fmaccat","claim":"Formal capacity evaluation tool used by psychiatry","value":"MacArthur Competence Assessment Tool","provenance":"consult:capacity-assessment/cap-unclear","cite":["ref3"],"verified":"provenance"},{"id":"fdocdecision","claim":"First required documentation element","value":"The specific decision being assessed","provenance":"consult:capacity-assessment/cap-documentation","cite":["ref1","ref2"],"verified":"provenance"},{"id":"fcriticaldoc","claim":"Critical action — documentation","value":"Document the specific decision, the process, and your reasoning","provenance":"consult:capacity-assessment/cap-documentation","cite":["ref1","ref2"],"verified":"provenance"}],"sections":[{"id":"sec-fundamentals","title":"1 · Fundamentals","blocks":[{"id":"b-intro","type":"text","whenNode":"cap-start","md":"**Capacity is decision-specific** — a patient may have capacity for one decision but not another. A patient with mild dementia may have capacity to refuse a blood draw but not to refuse life-saving surgery.","cite":["ref1"]},{"id":"b-triggers","type":"steps","ordered":false,"whenNode":"cap-start","items":["Refusing recommended treatment","Leaving against medical advice (AMA)","Consenting to a high-risk procedure","Signing a DNR/POLST","Psychotic, intoxicated, or delirious presentation"]},{"id":"b-vs-competency","type":"table","whenNode":"cap-definitions","columns":["Term","Definition","Who determines"],"heroCol":0,"rows":[["Capacity","Clinical ability to make a specific decision","Physician"],["Competency","Legal status to make decisions","Court"]],"cite":["ref1","ref2"]},{"id":"b-presumption","type":"callout","tone":"normal","title":"Presume capacity","whenNode":"cap-definitions","md":"Patients are **presumed to have capacity until proven otherwise**. Diagnosis alone (dementia, psychosis, intoxication) does not determine capacity. A patient who makes a \"bad\" decision may still have capacity. Capacity can fluctuate — reassess if the patient's condition changes. When in doubt, treat the emergency first (implied consent).","cite":["ref1","ref2"]}]},{"id":"sec-fourabilities","title":"2 · Four-abilities framework","blocks":[{"id":"b-aid4-intro","type":"text","whenNode":"cap-aid4","md":"Capacity uses four abilities: **understanding, appreciation, reasoning, and communication of a stable choice.**","cite":["ref2","ref3"]},{"id":"b-aid4-table","type":"table","whenNode":"cap-questions","columns":["Ability","What it tests","Sample question"],"heroCol":0,"rows":[["Understanding","Describe condition, treatment, risks/benefits, alternatives in own words","\"Can you tell me what we are worried about and what treatment we recommend?\""],["Appreciation","Apply the information to their own situation as personally relevant","\"What do you think will happen to you if you leave or decline treatment?\""],["Reasoning","Compare options and consequences with a coherent process — a risky choice can still be intact reasoning","\"What are the pros and cons of treatment? Why are you choosing this option?\""],["Communication","State a clear, stable choice","\"What have you decided to do?\""]],"cite":["ref2"]},{"id":"b-determination-present","type":"callout","tone":"normal","title":"Capacity present if","whenNode":"cap-assessment","md":"**All four abilities are sufficiently intact for this decision.**","cite":["ref2","ref3"]},{"id":"b-determination-lacks","type":"callout","tone":"caution","title":"Lack of capacity if","whenNode":"cap-assessment","md":"**A significant, decision-relevant deficit prevents informed decision-making.** Gray zone? Consider psychiatry consult, ethics consult, or more time to reassess.","cite":["ref2","ref3"]}]},{"id":"sec-nextstep","title":"3 · What to do now","blocks":[{"id":"b-hint","type":"text","md":"Set **why capacity is being questioned** above, and once assessed, set the **determination** — the matching guidance below updates and the algorithm path highlights."},{"id":"g-refusing","type":"callout","tone":"normal","title":"Refusing treatment","showWhen":"trigger==1","whenNode":"cap-refusing","md":"**Higher stakes = higher bar for capacity.** If has capacity: respect the decision, document thoroughly, ensure informed refusal, offer alternatives/follow-up. If lacks capacity: cannot refuse — proceed with a surrogate, or treat under implied consent if it is an emergency.","cite":["ref1"]},{"id":"g-ama","type":"callout","tone":"caution","title":"Leaving AMA","showWhen":"trigger==2","whenNode":"cap-ama","md":"**Capacity assessment is REQUIRED before AMA.** Intoxication raises concern but does not automatically remove capacity — assess clinically and reassess when it can safely wait. Delirious patients generally cannot leave AMA until delirium is addressed. If has capacity: they can leave, even if unsafe — document capacity, risks explained, alternatives offered; AMA does NOT mean punishment. If lacks capacity: cannot leave AMA — consider 1:1 sitter, security, medical hold, or psych evaluation.","cite":["ref4"]},{"id":"g-consent","type":"callout","tone":"normal","title":"Consenting to a procedure","showWhen":"trigger==3","whenNode":"cap-consent","md":"Valid consent requires **Disclosure, capacity, and voluntariness**. Minors need parent/guardian consent (except emancipated/emergencies). Non-English speakers need a professional interpreter. Delay elective procedures in intoxicated patients until the four abilities can be clinically demonstrated; emergencies get implied consent.","cite":["ref1","ref5"]},{"id":"g-eol","type":"callout","tone":"caution","title":"End-of-life decision","showWhen":"trigger==4","whenNode":"cap-eol","md":"**Higher bar for irreversible decisions.** Ensure the patient fully understands the implications, check consistency with their values, and rule out depression affecting the decision. If lacks capacity: use the advance directive, healthcare proxy/POA, substituted judgment, or best-interest standard. Ethics consult for complex or conflicted cases.","cite":["ref5"]},{"id":"g-has-capacity","type":"callout","tone":"normal","title":"Patient has capacity","showWhen":"determination==1","whenNode":"cap-has-capacity","md":"Respect the autonomous choice. Ensure an informed decision (risks/benefits/alternatives discussed) and document the assessment thoroughly — even if you disagree with the decision."},{"id":"g-lacks-capacity","type":"callout","tone":"caution","title":"Patient lacks capacity","showWhen":"determination==2","whenNode":"cap-lacks-capacity","md":"Identify a surrogate decision-maker (**Healthcare proxy / POA** first, then spouse, adult children, parents, siblings, other relatives — hierarchy varies by state). Surrogate uses substituted judgment (**\"What would patient want?\"**) or best interest if wishes are unknown. Emergency with no surrogate → treat under implied consent."},{"id":"g-unclear","type":"callout","tone":"caution","title":"Unclear / borderline","showWhen":"determination==3","whenNode":"cap-unclear","md":"Options: more time (reassess when sober/rested/less stressed), psychiatry consult (formal evaluation, may use the **MacArthur Competence Assessment Tool**), ethics consult, or court involvement for urgent guardianship. Meanwhile: treat emergencies, presume capacity for low-stakes decisions.","cite":["ref3"]}]},{"id":"sec-flow","title":"4 · Capacity assessment algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"cap-start","shape":"decision","text":"Why is capacity being questioned?","col":0,"rank":0,"detail":"Common triggers: refusing treatment, leaving AMA, consenting to a high-risk procedure, signing DNR/POLST, psychotic/intoxicated/delirious. Capacity is decision-specific.","activeWhen":"1"},{"id":"cap-refusing","shape":"action","text":"Refusing treatment","col":-3,"rank":1,"tone":"normal","detail":"Higher stakes = higher bar. Has capacity → respect decision, document. Lacks capacity → surrogate or implied consent.","activeWhen":"trigger==1"},{"id":"cap-ama","shape":"action","text":"Leaving AMA","col":-1,"rank":1,"tone":"caution","detail":"Capacity assessment REQUIRED before AMA. Intoxication ≠ automatic incapacity. Delirium generally precludes AMA until treated.","activeWhen":"trigger==2"},{"id":"cap-consent","shape":"action","text":"Consenting to procedure","col":1,"rank":1,"tone":"normal","detail":"Disclosure + capacity + voluntariness. Minors need guardian consent; interpreter for non-English speakers; delay elective in intoxication.","activeWhen":"trigger==3"},{"id":"cap-eol","shape":"action","text":"End-of-life decision","col":3,"rank":1,"tone":"caution","detail":"Higher bar for irreversible decisions. Rule out depression. Lacks capacity → advance directive / proxy / substituted judgment.","activeWhen":"trigger==4"},{"id":"cap-definitions","shape":"action","text":"Capacity vs Competency","col":0,"rank":2,"detail":"Capacity = clinical (physician). Competency = legal (court). Presume capacity until proven otherwise; diagnosis alone does not determine it.","activeWhen":"1"},{"id":"cap-aid4","shape":"action","text":"Four-Abilities Framework","col":0,"rank":3,"detail":"Understanding, appreciation, reasoning, communication of a stable choice.","activeWhen":"1"},{"id":"cap-questions","shape":"action","text":"Assessment Questions","col":0,"rank":4,"detail":"Structured questions per domain: understanding, appreciation, reasoning, communication.","activeWhen":"1"},{"id":"cap-assessment","shape":"decision","text":"Capacity Determination","col":0,"rank":5,"detail":"Capacity present if all four abilities are sufficiently intact for this decision; lacks capacity if a significant, decision-relevant deficit prevents informed decision-making.","activeWhen":"1"},{"id":"cap-has-capacity","shape":"state","text":"Has Capacity","col":-2,"rank":6,"tone":"normal","detail":"Respect autonomous decision. Ensure informed decision. Document assessment thoroughly.","activeWhen":"determination==1"},{"id":"cap-lacks-capacity","shape":"state","text":"Lacks Capacity","col":2,"rank":6,"tone":"caution","detail":"Identify surrogate decision-maker. Use substituted judgment or best interest. Implied consent if emergency and no surrogate available.","activeWhen":"determination==2"},{"id":"cap-unclear","shape":"action","text":"Unclear / Borderline","col":0,"rank":6,"tone":"caution","detail":"More time, psychiatry consult (MacCAT), ethics consult, or court involvement. Meanwhile treat emergencies, presume capacity for low-stakes decisions.","activeWhen":"determination==3"}],"edges":[{"from":"cap-start","to":"cap-refusing","label":"Refusing treatment"},{"from":"cap-start","to":"cap-ama","label":"Leaving AMA"},{"from":"cap-start","to":"cap-consent","label":"Consenting to procedure"},{"from":"cap-start","to":"cap-eol","label":"End-of-life decision"},{"from":"cap-refusing","to":"cap-definitions"},{"from":"cap-ama","to":"cap-definitions"},{"from":"cap-consent","to":"cap-definitions"},{"from":"cap-eol","to":"cap-definitions"},{"from":"cap-definitions","to":"cap-aid4"},{"from":"cap-aid4","to":"cap-questions"},{"from":"cap-questions","to":"cap-assessment"},{"from":"cap-assessment","to":"cap-has-capacity","label":"Has capacity"},{"from":"cap-assessment","to":"cap-lacks-capacity","label":"Lacks capacity"},{"from":"cap-assessment","to":"cap-unclear","label":"Unclear / borderline"},{"from":"cap-unclear","to":"cap-assessment","label":"Reassess"}]},{"id":"b-fullprotocol","type":"text","md":"This is the full node graph. See the [full capacity assessment consult](#/tree/capacity-assessment) for complete scenario text and patient-specific detail."}]},{"id":"sec-outcomes","title":"5 · Outcomes in depth","blocks":[{"id":"b-has-capacity-detail","type":"steps","ordered":false,"showWhen":"determination==1","whenNode":"cap-has-capacity","items":["Respect their autonomous choice, even if you disagree","Ensure an informed decision — risks, benefits, and alternatives were discussed and understood","Document the specific decision, how each domain was assessed, and the patient's responses","Offer alternatives and follow-up; keep the door open for changing their mind"]},{"id":"b-lacks-capacity-table","type":"table","showWhen":"determination==2","whenNode":"cap-lacks-capacity","columns":["Surrogate priority","Who"],"heroCol":0,"rows":[["1","Healthcare proxy / POA (if designated)"],["2","Spouse"],["3","Adult children (majority if multiple)"],["4","Parents"],["5","Siblings"],["6","Other relatives / close friends"]]},{"id":"b-lacks-capacity-note","type":"callout","tone":"caution","title":"Surrogate standards (hierarchy varies by state)","showWhen":"determination==2","whenNode":"cap-lacks-capacity","md":"Surrogate uses **substituted judgment** (**\"What would patient want?\"**) or best interest if wishes are unknown. If emergency and no surrogate available: treat under implied consent and document that delay would harm the patient. If surrogate unavailable or disagrees: ethics consult or court-appointed guardian (takes time)."},{"id":"b-unclear-steps","type":"steps","ordered":false,"showWhen":"determination==3","whenNode":"cap-unclear","items":["More time: repeat assessment when sober, rested, less stressed — intoxication clears, delirium may improve with treatment","Psychiatry consult: formal evaluation, especially with underlying psychiatric illness; may use the MacArthur Competence Assessment Tool (MacCAT)","Ethics consult: mediate complex situations, help when family disagrees, clarify ethical frameworks","Court involvement: emergency guardianship if urgent, competency hearing for long-term incapacity"],"cite":["ref3"]}]},{"id":"sec-documentation","title":"6 · Documentation","blocks":[{"id":"b-doc-intro","type":"text","md":"**Document the specific decision, the process, and your reasoning** — every capacity determination must be charted, not just the conclusion."},{"id":"b-doc-steps","type":"steps","ordered":true,"items":["The specific decision being assessed","Clinical context — why capacity was questioned","Mental status exam findings","Assessment of each ability: understanding, appreciation, reasoning, communication (with the patient's actual responses)","Your conclusion and reasoning","What information was provided to the patient","Signature, date, time"],"cite":["ref1","ref2"]},{"id":"b-doc-example","type":"callout","tone":"normal","title":"Example phrasing","md":"\"In my clinical judgment, this patient [has/lacks] capacity to [specific decision] because [reasoning].\"","cite":["ref1","ref2"]}]},{"id":"sec-donot","title":"7 · Do NOT","blocks":[{"id":"b-donot","type":"disclosure","summary":"Other pitfalls","scent":"4 items","blocks":[{"id":"b-d1","type":"callout","tone":"caution","md":"**Do NOT assume a diagnosis alone (dementia, psychosis, intoxication) removes capacity** — assess functionally, for this specific decision, every time."},{"id":"b-d2","type":"callout","tone":"caution","md":"**Do NOT let a risky or \"bad\" decision override an intact capacity assessment** — respect autonomy even when you disagree."},{"id":"b-d3","type":"callout","tone":"caution","md":"**Do NOT delay emergency treatment to complete a full four-abilities assessment** — treat under implied consent, then reassess when safe."},{"id":"b-d4","type":"callout","tone":"caution","md":"**Do NOT chart only the conclusion** (\"patient lacks capacity\") without the specific decision, the process, and your reasoning."}]}]}],"citations":[{"id":"ref1","label":"Appelbaum PS. Clinical practice: Assessment of patients' competence to consent to treatment. N Engl J Med 2007;357:1834-40."},{"id":"ref2","label":"Grisso T, Appelbaum PS. Assessing Competence to Consent to Treatment: A Guide for Physicians and Other Health Professionals. Oxford University Press, 1998."},{"id":"ref3","label":"Palmer BW, Harmell AL. Assessment of healthcare decision-making capacity. Arch Clin Neuropsychol 2016;31:530-40."},{"id":"ref4","label":"Alfandre DJ. \"I'm going home\": Discharges against medical advice. Mayo Clin Proc 2009;84:255-60."},{"id":"ref5","label":"Lo B. Resolving Ethical Dilemmas: A Guide for Clinicians, 6th ed. Lippincott Williams & Wilkins, 2019."}],"meta":{"version":"1.0","lastReviewed":"2026-07-11","evidenceThrough":"2019 (Lo, Resolving Ethical Dilemmas, 6th ed.)","nextReview":"2027-07-11","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 — initial InfoKitt cockpit infographic generated from myMedKitt capacity-assessment tree (14 nodes; cap-documentation orphan node preserved as an always-visible Documentation section, not in the flow graph)."},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>
