@@ -105,7 +105,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#2E7D32',
     subtitle: 'Bedside IOP screen, glue-in-eye, and ocular tricks.',
     infoPageId: 'tricks-ophtho',
-    trickCount: 15,
+    trickCount: 16,
     category: 'head-neck',
   },
   {
@@ -165,7 +165,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#455A64',
     subtitle: 'Fast bedside screens, dosing pearls, communication.',
     infoPageId: 'tricks-general',
-    trickCount: 21,
+    trickCount: 22,
     category: 'general-tox',
   },
   {
@@ -175,7 +175,7 @@ export const TRICK_SPECIALTIES: TrickSpecialty[] = [
     color: '#5D4037',
     subtitle: 'Reduction, splinting, and joint-pain injection tricks.',
     infoPageId: 'tricks-ortho',
-    trickCount: 38,
+    trickCount: 41,
     category: 'wounds-msk',
   },
 ];
