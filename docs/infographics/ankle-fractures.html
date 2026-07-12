@@ -1,0 +1,506 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ankle Fractures: Ottawa Rules → Weber Classification → Operative vs Non-Operative — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Ankle Fractures: Ottawa Rules → Weber Classification → Operative vs Non-Operative</h1>
+  <p class="ig-use">Adults presenting to the ED with acute ankle injury and suspected fracture. Ottawa Ankle Rules criteria are for adults; the tree routes patients with age &lt;2 or &gt;55, intoxication, or a distracting injury straight to X-ray rather than applying OAR. Excludes isolated midfoot injury (Ottawa Foot Rules noted but not modeled as its own branch) and pediatric ankle-fracture-specific patterns (Salter-Harris growth-plate injuries).</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ <strong>Maisonneuve fracture — do not miss it.</strong> Proximal fibula fracture + complete syndesmotic disruption + medial injury. Commonly missed because ankle pain dominates and the proximal fibula is not examined or imaged on ankle-only films. Red flags: medial malleolus fracture WITHOUT a lateral malleolus fracture, syndesmotic widening on ankle films, tenderness over the proximal fibula, high-ankle-sprain findings, or a Weber C pattern. Palpate the ENTIRE fibula from ankle to knee — proximal fibula tenderness is Maisonneuve until proven otherwise. Get full tibia/fibula AP + lateral films. ALL require operative fixation, non-weight-bearing, posterior splint, ortho consult in the ED.</div><div class="ig-scope-item">⚠ <strong>Bimalleolar / trimalleolar fractures are ALL inherently unstable and ALL require operative fixation</strong> — do not manage as an isolated non-operative fracture. Assess neurovascular status, reduce if grossly displaced/dislocated, posterior splint in neutral, strict non-weight-bearing, ortho consult (admit vs next-day OR).</div><div class="ig-scope-item">⚠ <strong>Weber C (suprasyndesmotic) fractures are almost always unstable by definition</strong> — the syndesmosis is disrupted. Virtually all require operative fixation with a syndesmotic screw; rule out Maisonneuve fracture by palpating the entire fibula to the knee before assuming this is an isolated ankle injury.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="af-start" hidden><button type="button" data-route-select="af-start"><span class="ig-route-rank">1</span><span>Ottawa Ankle Rules Assessment</span></button></li><li data-route-node="af-sprain" hidden><button type="button" data-route-select="af-sprain"><span class="ig-route-rank">2</span><span>Ankle Sprain — No Fracture</span></button></li><li data-route-node="af-xray-findings" hidden><button type="button" data-route-select="af-xray-findings"><span class="ig-route-rank">2</span><span>X-Ray Findings &amp; Weber Classification</span></button></li><li data-route-node="af-occult" hidden><button type="button" data-route-select="af-occult"><span class="ig-route-rank">3</span><span>Negative X-Ray — Occult Injury Workup</span></button></li><li data-route-node="af-weber-a" hidden><button type="button" data-route-select="af-weber-a"><span class="ig-route-rank">3</span><span>Weber A — Infrasyndesmotic</span></button></li><li data-route-node="af-weber-b" hidden><button type="button" data-route-select="af-weber-b"><span class="ig-route-rank">3</span><span>Weber B — Stability Assessment</span></button></li><li data-route-node="af-weber-c" hidden><button type="button" data-route-select="af-weber-c"><span class="ig-route-rank">3</span><span>Weber C — Suprasyndesmotic</span></button></li><li data-route-node="af-bimalleolar" hidden><button type="button" data-route-select="af-bimalleolar"><span class="ig-route-rank">3</span><span>Bimalleolar / Trimalleolar</span></button></li><li data-route-node="af-stress-test" hidden><button type="button" data-route-select="af-stress-test"><span class="ig-route-rank">4</span><span>Stress Testing</span></button></li><li data-route-node="af-maisonneuve" hidden><button type="button" data-route-select="af-maisonneuve"><span class="ig-route-rank">4</span><span>Maisonneuve — Do Not Miss</span></button></li><li data-route-node="af-disposition-nonop" hidden><button type="button" data-route-select="af-disposition-nonop"><span class="ig-route-rank">5</span><span>Non-Operative — Conservative Management</span></button></li><li data-route-node="af-operative" hidden><button type="button" data-route-select="af-operative"><span class="ig-route-rank">5</span><span>Operative — Ortho Consult</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 1098 588" width="1098" height="588" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M549,98 L549,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="115" class="ig-edge-lbl" text-anchor="middle">OAR positive</text><path d="M549,98 L549,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="115" class="ig-edge-lbl" text-anchor="middle">OAR not applicable</text><path d="M549,98 L549,119 L129,119 L129,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="115" class="ig-edge-lbl" text-anchor="middle">OAR negative</text><path d="M549,206 L549,227 L129,227 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="223" class="ig-edge-lbl" text-anchor="middle">No fracture</text><path d="M549,206 L549,227 L339,227 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="223" class="ig-edge-lbl" text-anchor="middle">Weber A</text><path d="M549,206 L549,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="223" class="ig-edge-lbl" text-anchor="middle">Weber B</text><path d="M549,206 L549,227 L759,227 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="223" class="ig-edge-lbl" text-anchor="middle">Weber C</text><path d="M549,206 L549,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="223" class="ig-edge-lbl" text-anchor="middle">Bimalleolar/trimalleolar</text><path d="M129,314 L129,389 L339,389 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,314 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,314 L549,389 L339,389 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="385" class="ig-edge-lbl" text-anchor="middle">Stable</text><path d="M549,314 L549,389 L759,389 L759,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="385" class="ig-edge-lbl" text-anchor="middle">Unstable</text><path d="M549,314 L549,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="331" class="ig-edge-lbl" text-anchor="middle">Uncertain</text><path d="M549,422 L549,443 L759,443 L759,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,314 L759,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,422 L759,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M969,314 L969,389 L759,389 L759,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="af-start" tabindex="0" role="button" aria-label="Ottawa Ankle Rules Assessment"><polygon points="483,32 615,32 637,65 615,98 483,98 461,65" class="ig-shape t-neutral"/><foreignObject x="467" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Ottawa Ankle Rules Assessment</div></foreignObject></g><g class="ig-node" data-node="af-sprain" tabindex="0" role="button" aria-label="Ankle Sprain — No Fracture"><rect x="41" y="140" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="47" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Ankle Sprain — No Fracture</div></foreignObject></g><g class="ig-node" data-node="af-xray-findings" tabindex="0" role="button" aria-label="X-Ray Findings &amp; Weber Classification"><polygon points="483,140 615,140 637,173 615,206 483,206 461,173" class="ig-shape t-neutral"/><foreignObject x="467" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">X-Ray Findings &amp; Weber Classification</div></foreignObject></g><g class="ig-node" data-node="af-occult" tabindex="0" role="button" aria-label="Negative X-Ray — Occult Injury Workup"><rect x="41" y="248" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Negative X-Ray — Occult Injury Workup</div></foreignObject></g><g class="ig-node" data-node="af-weber-a" tabindex="0" role="button" aria-label="Weber A — Infrasyndesmotic"><rect x="251" y="248" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Weber A — Infrasyndesmotic</div></foreignObject></g><g class="ig-node" data-node="af-weber-b" tabindex="0" role="button" aria-label="Weber B — Stability Assessment"><polygon points="483,248 615,248 637,281 615,314 483,314 461,281" class="ig-shape t-neutral"/><foreignObject x="467" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Weber B — Stability Assessment</div></foreignObject></g><g class="ig-node" data-node="af-weber-c" tabindex="0" role="button" aria-label="Weber C — Suprasyndesmotic"><rect x="671" y="248" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="677" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Weber C — Suprasyndesmotic</div></foreignObject></g><g class="ig-node" data-node="af-bimalleolar" tabindex="0" role="button" aria-label="Bimalleolar / Trimalleolar"><rect x="881" y="248" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="887" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Bimalleolar / Trimalleolar</div></foreignObject></g><g class="ig-node" data-node="af-stress-test" tabindex="0" role="button" aria-label="Stress Testing"><rect x="461" y="356" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="467" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Stress Testing</div></foreignObject></g><g class="ig-node" data-node="af-maisonneuve" tabindex="0" role="button" aria-label="Maisonneuve — Do Not Miss"><rect x="671" y="356" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="677" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Maisonneuve — Do Not Miss</div></foreignObject></g><g class="ig-node" data-node="af-disposition-nonop" tabindex="0" role="button" aria-label="Non-Operative — Conservative Management"><rect x="251" y="464" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Non-Operative — Conservative Management</div></foreignObject></g><g class="ig-node" data-node="af-operative" tabindex="0" role="button" aria-label="Operative — Ortho Consult"><rect x="671" y="464" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="677" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Operative — Ortho Consult</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="af-start" hidden><strong>Ottawa Ankle Rules Assessment</strong><span>X-ray if malleolar tenderness (distal 6cm) or cannot bear weight 4 steps; sensitivity 97.6%, NPV &gt;99%</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-sprain" hidden><strong>Ankle Sprain — No Fracture</strong><span>RICE, NSAIDs, brace, early mobilization, WBAT; PCP follow-up 1-2 weeks if symptoms persist</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-sprain">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-xray-findings" hidden><strong>X-Ray Findings &amp; Weber Classification</strong><span>AP/Mortise/Lateral views; assess fibula level, medial malleolus, posterior malleolus, mortise alignment</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-xray-findings">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-occult" hidden><strong>Negative X-Ray — Occult Injury Workup</strong><span>Occult fracture, syndesmotic injury, osteochondral talar lesion, stress fracture; squeeze/ER tests</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-occult">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-weber-a" hidden><strong>Weber A — Infrasyndesmotic</strong><span>Usually stable; medial clear space ≤4mm normal, &gt;4mm unstable</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-weber-a">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-weber-b" hidden><strong>Weber B — Stability Assessment</strong><span>Mortise congruence, medial clear space, medial tenderness, stress test determine stability</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-weber-b">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-weber-c" hidden><strong>Weber C — Suprasyndesmotic</strong><span>Almost always unstable by definition; rule out Maisonneuve; virtually all operative</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-weber-c">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-bimalleolar" hidden><strong>Bimalleolar / Trimalleolar</strong><span>All inherently unstable, all operative; surgery &gt;12 days delay worsens outcomes</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-bimalleolar">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-stress-test" hidden><strong>Stress Testing</strong><span>Weight-bearing/gravity/manual stress views; medial clear space widening &gt;4-5mm = unstable</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-stress-test">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-maisonneuve" hidden><strong>Maisonneuve — Do Not Miss</strong><span>Proximal fibula fracture + syndesmotic disruption + medial injury; palpate entire fibula to knee</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-maisonneuve">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-disposition-nonop" hidden><strong>Non-Operative — Conservative Management</strong><span>Walking boot, WBAT, 4-6 week immobilization, 10-12 week healing, ortho follow-up 5-7 days</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-disposition-nonop">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="af-operative" hidden><strong>Operative — Ortho Consult</strong><span>NV check, reduce if dislocated, posterior splint, NWB, ortho consult same day, follow-up 24-48h</span><button type="button" class="ig-btn ig-open-step" data-open-step="af-operative">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">1 · Ottawa Ankle Rules</h2><div class="ig-cond ig-stepbound" data-whennode="af-start"><p class="ig-block ig-text"><strong>Ottawa Ankle Rules (OAR)</strong> sensitivity for excluding fracture is <strong>97.6%</strong>, with NPV <strong>&gt;99%</strong>.</p></div><div class="ig-cond ig-stepbound" data-whennode="af-start"><ul class="ig-block ig-steps"><li>Bone tenderness at the posterior edge of the lateral malleolus (distal 6cm)</li><li>Bone tenderness at the posterior edge of the medial malleolus (distal 6cm)</li><li>Inability to bear weight (4 steps) immediately AND in the ED</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="af-start"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">OAR not applicable</div><div>Age &lt;2 or &gt;55, intoxication, or a distracting injury — the tree routes these straight to X-ray, the same as OAR-positive.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-start"><div class="ig-block ig-callout t-neutral" role="note"><div class="ig-callout-title">Also check midfoot — Ottawa Foot Rules</div><div>Base-of-5th-metatarsal tenderness or navicular bone tenderness — a separate rule set from the ankle criteria above.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-sprain"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">OAR negative — ankle sprain, no fracture</div><div>Fracture very unlikely (sensitivity <strong>97.6%</strong>, NPV <strong>&gt;99%</strong>). RICE protocol, NSAIDs PRN, ankle brace/stirrup splint for comfort, early mobilization, weight-bearing as tolerated. Return precautions: worsening pain despite rest, new inability to bear weight, significant swelling increase. PCP follow-up in 1-2 weeks if symptoms persist. <strong>High ankle sprain pearl:</strong> tenderness ABOVE the malleoli or a positive squeeze test — consider syndesmotic injury even without a fracture.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">2 · X-ray findings &amp; Weber classification</h2><div class="ig-cond ig-stepbound" data-whennode="af-xray-findings"><p class="ig-block ig-text">Standard views: AP, Mortise (15° internal rotation), Lateral. Assess fibula fracture level (Weber classification), medial malleolus (fracture or widened medial clear space), posterior malleolus (lateral view), and mortise alignment.</p></div><div class="ig-cond ig-stepbound" data-whennode="af-xray-findings"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Class</th><th>Fibula fracture level</th><th>Stability</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Weber A</td><td>Below the syndesmosis (infrasyndesmotic)</td><td>Usually stable — syndesmosis intact</td></tr><tr class="ig-row t-caution"><td class="hero">Weber B</td><td>At the syndesmosis (transsyndesmotic)</td><td>Variable — assess medial structures</td></tr><tr class="ig-row t-danger"><td class="hero">Weber C</td><td>Above the syndesmosis (suprasyndesmotic)</td><td>Almost always unstable — syndesmosis disrupted</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="af-occult"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">No fracture on X-ray — consider occult injury</div><div>Consider: occult fracture (MRI sensitivity &gt; CT for subtle injury), syndesmotic injury without fracture (high ankle sprain), osteochondral lesion of the talus, or stress fracture. Squeeze test (compress tibia/fibula at mid-calf; ankle pain = positive) and external rotation test (knee bent, externally rotate the foot; pain = positive). If syndesmotic injury is suspected: weight-bearing films if possible, consider outpatient MRI, ortho follow-up within 5-7 days. Otherwise treat as a sprain with close follow-up.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-weber-a"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Weber A — infrasyndesmotic</div><div>Usually stable, syndesmosis intact, often an avulsion fracture from the lateral ligament, low-energy mechanism. Medial clear space normal <strong>≤4 mm</strong>; widened <strong>&gt;4 mm</strong> = unstable. Stable (isolated) → non-operative (walking boot or short leg cast, weight-bearing as tolerated). Unstable (medial involvement) → operative.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">3 · Weber B — stable or unstable?</h2><div class="ig-cond ig-stepbound" data-whennode="af-weber-b"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Stable</th><th>Unstable</th></tr></thead><tbody><tr class="ig-row"><td>Mortise congruent</td><td>Mortise widened</td></tr><tr class="ig-row"><td>Medial clear space ≤4mm</td><td>Medial clear space &gt;4mm</td></tr><tr class="ig-row"><td>No medial tenderness</td><td>Medial malleolus fracture or deltoid rupture</td></tr><tr class="ig-row"><td>Negative stress test</td><td>Positive stress test</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="af-stress-test"><p class="ig-block ig-text">Used when stability is uncertain on non-weight-bearing films: weight-bearing mortise view, gravity stress view (external rotation, leg hanging), or manual stress under fluoro (usually ortho). Positive test: medial clear space widens <strong>&gt;4-5 mm</strong> under stress — indicates deltoid ligament rupture, fracture is unstable. If pain prevents weight-bearing: short-term immobilization, repeat films in 5-7 days, ortho follow-up arranged. <strong>Pearl:</strong> if in doubt, treat as unstable and involve ortho.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">4 · Do not miss — Weber C, Maisonneuve, bimalleolar</h2><div class="ig-cond ig-stepbound" data-whennode="af-weber-c"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Weber C — suprasyndesmotic</div><div>Fibula fracture ABOVE the syndesmosis — almost always unstable, syndesmosis disrupted by definition, higher energy mechanism, may have associated medial injury. <strong>Rule out Maisonneuve fracture</strong> — palpate the entire fibula to the knee; if proximal tenderness, get full leg films. Virtually all require operative fixation with syndesmotic screw placement; posterior splint, strict non-weight-bearing; ortho consult in the ED. Complications if missed: chronic instability, post-traumatic arthritis, poor functional outcomes.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-maisonneuve"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Maisonneuve fracture — do not miss</div><div>Proximal fibula fracture + complete syndesmotic disruption + medial injury. Commonly missed because ankle pain dominates and the proximal fibula is not examined, and the proximal fracture is not visible on ankle films.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-maisonneuve"><ul class="ig-block ig-steps"><li>Medial malleolus fracture without a lateral malleolus fracture</li><li>Syndesmotic widening on ankle films</li><li>Tenderness over the proximal fibula</li><li>High ankle sprain findings</li><li>Weber C fracture pattern</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="af-maisonneuve"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Maisonneuve — management</div><div>Exam: palpate the ENTIRE fibula from ankle to knee, squeeze test — proximal fibula tenderness is Maisonneuve until proven otherwise. Full tibia/fibula X-rays (AP + lateral). ALL require operative fixation, non-weight-bearing, posterior splint, ortho consult in the ED.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-bimalleolar"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Bimalleolar / trimalleolar — all unstable, all operative</div><div>Bimalleolar = both lateral AND medial malleoli fractured. Trimalleolar = lateral + medial + posterior malleolus (posterior tibial lip). ALL are inherently unstable, ALL require operative fixation, higher complication rates than unimalleolar injury; posterior malleolus involvement affects outcomes. ED management: assess neurovascular status, reduce if grossly displaced/dislocated, posterior splint in neutral, strict non-weight-bearing, ice and elevation, ortho consult (admission vs next-day OR). Timing of surgery: within 24 hours is optimal; delay <strong>&gt;12 days</strong> is associated with worse outcomes; may delay for severe swelling (wait for the “wrinkle sign”).</div></div></div></section><section class="ig-section"><h2 class="ig-h2">5 · Management algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">This is the full reachable graph. See the <a href="#/tree/ankle-fractures" target="_top" class="ig-link">full protocol</a> for complete branch text and patient-education detail.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">6 · Operative management</h2><div class="ig-cond ig-stepbound" data-whennode="af-operative"><p class="ig-block ig-text">Indications for ORIF: Weber C (suprasyndesmotic), unstable Weber B, bimalleolar or trimalleolar, Maisonneuve fracture, ankle dislocation (after reduction), intra-articular displacement &gt;2mm.</p></div><div class="ig-cond ig-stepbound" data-whennode="af-operative"><ol class="ig-block ig-steps"><li>Neurovascular check — document pulse, sensation, motor</li><li>Reduction if dislocated (procedural sedation)</li><li>Posterior splint — ankle at 90°, well-padded</li><li>Non-weight-bearing</li><li>Ice and elevation — critical for swelling</li><li>Analgesia — consider nerve block</li><li>Ortho consult — same day</li></ol></div><div class="ig-cond ig-stepbound" data-whennode="af-operative"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Follow-up — operative fractures</div><div>Ortho follow-up for operative ankle fractures: <strong>24-48 hours</strong> for OR planning. Surgery timing within 24h is optimal; may delay for soft-tissue swelling.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-operative af-disposition-nonop"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Admit</th><th>Discharge</th></tr></thead><tbody><tr class="ig-row"><td>Open fracture</td><td>Closed, stable or reduced fracture</td></tr><tr class="ig-row"><td>Neurovascular compromise</td><td>Neurovascularly intact</td></tr><tr class="ig-row"><td>Irreducible dislocation</td><td>Adequate pain control</td></tr><tr class="ig-row"><td>Unable to manage at home</td><td>Reliable follow-up arranged</td></tr><tr class="ig-row"><td>Pending OR (surgeon preference)</td><td>Can manage non-weight-bearing at home</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="af-operative"><details class="ig-block ig-disc"><summary>Admission orders &amp; open-fracture protocol<span class="ig-scent">3 groups</span></summary><div class="ig-disc-body"><div class="ig-cond ig-reference"><ul class="ig-block ig-steps"><li>NPO after midnight (anticipate OR)</li><li>Posterior splint, elevate on pillows</li><li>Ice 20 min q2h while awake</li><li>Strict non-weight-bearing</li><li>DVT prophylaxis if prolonged immobility expected</li><li>Pain management (consider regional block)</li><li>Ortho to determine OR timing</li></ul></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Open fracture protocol</div><div>Tetanus update; IV antibiotics (cefazolin ± gentamicin per Gustilo grade); irrigation in ED if contaminated; OR within 6-24h depending on grade.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Neurovascular compromise</div><div>Emergent reduction; vascular surgery if pulse not restored; compartment syndrome watch.</div></div></div></div></details></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">7 · Non-operative management</h2><div class="ig-cond ig-stepbound" data-whennode="af-disposition-nonop"><p class="ig-block ig-text">Indications: stable Weber A, stable Weber B (congruent mortise, no medial injury), isolated lateral malleolus avulsion.</p></div><div class="ig-cond ig-stepbound" data-whennode="af-disposition-nonop"><ul class="ig-block ig-steps"><li>Walking boot (preferred) — allows early weight-bearing</li><li>Posterior splint if significant swelling initially</li><li>Short leg cast if non-compliance concern</li><li>Weight-bearing as tolerated from day 1 — modern evidence-based approach</li><li>Traditional non-weight-bearing ×6 weeks no longer recommended for most stable fractures</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="af-disposition-nonop"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Duration &amp; follow-up — non-operative fractures</div><div>Boot/cast <strong>4-6 weeks</strong>; healing <strong>10-12 weeks</strong>. Ortho follow-up within <strong>5-7 days</strong> to confirm alignment with repeat films, then progress to ROM exercises as tolerated.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-disposition-nonop"><div class="ig-block ig-dose"><div class="ig-dose-drug">Ibuprofen</div><div class="ig-dose-val">400-600mg PO q6h with food</div><div class="ig-dose-route">PO</div><div class="ig-dose-note">Or acetaminophen (no specific dose given in this consult). Narcotic for breakthrough pain only.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="af-disposition-nonop"><details class="ig-block ig-disc"><summary>Discharge instructions &amp; return precautions<span class="ig-scent">immobilization, activity, meds, return-to-ED</span></summary><div class="ig-disc-body"><div class="ig-cond ig-reference"><p class="ig-block ig-text">Keep splint/boot on at all times except bathing; do not get it wet. Bring all imaging to the ortho follow-up appointment.</p></div><div class="ig-cond ig-reference"><ul class="ig-block ig-steps"><li>Elevate above heart level as much as possible for the first 48-72h</li><li>Ice 20 min every 2-3 hours while awake</li><li>Weight-bearing per ortho instructions (usually WBAT in boot for stable fractures)</li></ul></div><div class="ig-cond ig-reference"><ul class="ig-block ig-steps"><li>Increasing pain despite elevation and medications</li><li>Numbness or tingling in the toes</li><li>Toes turn blue or white</li><li>Fever &gt;101°F</li><li>Splint becomes too tight or too loose</li></ul></div></div></details></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Ottawa Ankle Rules</h3><p><strong>Ottawa Ankle Rules (OAR)</strong> sensitivity for excluding fracture is <strong>97.6%</strong>, with NPV <strong>&gt;99%</strong>.</p><ul><li>Bone tenderness at the posterior edge of the lateral malleolus (distal 6cm)</li><li>Bone tenderness at the posterior edge of the medial malleolus (distal 6cm)</li><li>Inability to bear weight (4 steps) immediately AND in the ED</li></ul><p>Age &lt;2 or &gt;55, intoxication, or a distracting injury — the tree routes these straight to X-ray, the same as OAR-positive.</p><p>Base-of-5th-metatarsal tenderness or navicular bone tenderness — a separate rule set from the ankle criteria above.</p><p>Fracture very unlikely (sensitivity <strong>97.6%</strong>, NPV <strong>&gt;99%</strong>). RICE protocol, NSAIDs PRN, ankle brace/stirrup splint for comfort, early mobilization, weight-bearing as tolerated. Return precautions: worsening pain despite rest, new inability to bear weight, significant swelling increase. PCP follow-up in 1-2 weeks if symptoms persist. <strong>High ankle sprain pearl:</strong> tenderness ABOVE the malleoli or a positive squeeze test — consider syndesmotic injury even without a fracture.</p><h3>2 · X-ray findings &amp; Weber classification</h3><p>Standard views: AP, Mortise (15° internal rotation), Lateral. Assess fibula fracture level (Weber classification), medial malleolus (fracture or widened medial clear space), posterior malleolus (lateral view), and mortise alignment.</p><p>Class | Fibula fracture level | Stability</p><p>Weber A | Below the syndesmosis (infrasyndesmotic) | Usually stable — syndesmosis intact</p><p>Weber B | At the syndesmosis (transsyndesmotic) | Variable — assess medial structures</p><p>Weber C | Above the syndesmosis (suprasyndesmotic) | Almost always unstable — syndesmosis disrupted</p><p>Consider: occult fracture (MRI sensitivity &gt; CT for subtle injury), syndesmotic injury without fracture (high ankle sprain), osteochondral lesion of the talus, or stress fracture. Squeeze test (compress tibia/fibula at mid-calf; ankle pain = positive) and external rotation test (knee bent, externally rotate the foot; pain = positive). If syndesmotic injury is suspected: weight-bearing films if possible, consider outpatient MRI, ortho follow-up within 5-7 days. Otherwise treat as a sprain with close follow-up.</p><p>Usually stable, syndesmosis intact, often an avulsion fracture from the lateral ligament, low-energy mechanism. Medial clear space normal <strong>≤4 mm</strong>; widened <strong>&gt;4 mm</strong> = unstable. Stable (isolated) → non-operative (walking boot or short leg cast, weight-bearing as tolerated). Unstable (medial involvement) → operative.</p><h3>3 · Weber B — stable or unstable?</h3><p>Stable | Unstable</p><p>Mortise congruent | Mortise widened</p><p>Medial clear space ≤4mm | Medial clear space &gt;4mm</p><p>No medial tenderness | Medial malleolus fracture or deltoid rupture</p><p>Negative stress test | Positive stress test</p><p>Used when stability is uncertain on non-weight-bearing films: weight-bearing mortise view, gravity stress view (external rotation, leg hanging), or manual stress under fluoro (usually ortho). Positive test: medial clear space widens <strong>&gt;4-5 mm</strong> under stress — indicates deltoid ligament rupture, fracture is unstable. If pain prevents weight-bearing: short-term immobilization, repeat films in 5-7 days, ortho follow-up arranged. <strong>Pearl:</strong> if in doubt, treat as unstable and involve ortho.</p><h3>4 · Do not miss — Weber C, Maisonneuve, bimalleolar</h3><p>Fibula fracture ABOVE the syndesmosis — almost always unstable, syndesmosis disrupted by definition, higher energy mechanism, may have associated medial injury. <strong>Rule out Maisonneuve fracture</strong> — palpate the entire fibula to the knee; if proximal tenderness, get full leg films. Virtually all require operative fixation with syndesmotic screw placement; posterior splint, strict non-weight-bearing; ortho consult in the ED. Complications if missed: chronic instability, post-traumatic arthritis, poor functional outcomes.</p><p>Proximal fibula fracture + complete syndesmotic disruption + medial injury. Commonly missed because ankle pain dominates and the proximal fibula is not examined, and the proximal fracture is not visible on ankle films.</p><ul><li>Medial malleolus fracture without a lateral malleolus fracture</li><li>Syndesmotic widening on ankle films</li><li>Tenderness over the proximal fibula</li><li>High ankle sprain findings</li><li>Weber C fracture pattern</li></ul><p>Exam: palpate the ENTIRE fibula from ankle to knee, squeeze test — proximal fibula tenderness is Maisonneuve until proven otherwise. Full tibia/fibula X-rays (AP + lateral). ALL require operative fixation, non-weight-bearing, posterior splint, ortho consult in the ED.</p><p>Bimalleolar = both lateral AND medial malleoli fractured. Trimalleolar = lateral + medial + posterior malleolus (posterior tibial lip). ALL are inherently unstable, ALL require operative fixation, higher complication rates than unimalleolar injury; posterior malleolus involvement affects outcomes. ED management: assess neurovascular status, reduce if grossly displaced/dislocated, posterior splint in neutral, strict non-weight-bearing, ice and elevation, ortho consult (admission vs next-day OR). Timing of surgery: within 24 hours is optimal; delay <strong>&gt;12 days</strong> is associated with worse outcomes; may delay for severe swelling (wait for the “wrinkle sign”).</p><h3>5 · Management algorithm</h3><p>Ottawa Ankle Rules Assessment — X-ray if malleolar tenderness (distal 6cm) or cannot bear weight 4 steps; sensitivity 97.6%, NPV &gt;99%</p><p>Ankle Sprain — No Fracture — RICE, NSAIDs, brace, early mobilization, WBAT; PCP follow-up 1-2 weeks if symptoms persist</p><p>X-Ray Findings &amp; Weber Classification — AP/Mortise/Lateral views; assess fibula level, medial malleolus, posterior malleolus, mortise alignment</p><p>Negative X-Ray — Occult Injury Workup — Occult fracture, syndesmotic injury, osteochondral talar lesion, stress fracture; squeeze/ER tests</p><p>Weber A — Infrasyndesmotic — Usually stable; medial clear space ≤4mm normal, &gt;4mm unstable</p><p>Weber B — Stability Assessment — Mortise congruence, medial clear space, medial tenderness, stress test determine stability</p><p>Weber C — Suprasyndesmotic — Almost always unstable by definition; rule out Maisonneuve; virtually all operative</p><p>Bimalleolar / Trimalleolar — All inherently unstable, all operative; surgery &gt;12 days delay worsens outcomes</p><p>Stress Testing — Weight-bearing/gravity/manual stress views; medial clear space widening &gt;4-5mm = unstable</p><p>Maisonneuve — Do Not Miss — Proximal fibula fracture + syndesmotic disruption + medial injury; palpate entire fibula to knee</p><p>Non-Operative — Conservative Management — Walking boot, WBAT, 4-6 week immobilization, 10-12 week healing, ortho follow-up 5-7 days</p><p>Operative — Ortho Consult — NV check, reduce if dislocated, posterior splint, NWB, ortho consult same day, follow-up 24-48h</p><p>This is the full reachable graph. See the <a href="#/tree/ankle-fractures" target="_top" class="ig-link">full protocol</a> for complete branch text and patient-education detail.</p><h3>6 · Operative management</h3><p>Indications for ORIF: Weber C (suprasyndesmotic), unstable Weber B, bimalleolar or trimalleolar, Maisonneuve fracture, ankle dislocation (after reduction), intra-articular displacement &gt;2mm.</p><ul><li>Neurovascular check — document pulse, sensation, motor</li><li>Reduction if dislocated (procedural sedation)</li><li>Posterior splint — ankle at 90°, well-padded</li><li>Non-weight-bearing</li><li>Ice and elevation — critical for swelling</li><li>Analgesia — consider nerve block</li><li>Ortho consult — same day</li></ul><p>Ortho follow-up for operative ankle fractures: <strong>24-48 hours</strong> for OR planning. Surgery timing within 24h is optimal; may delay for soft-tissue swelling.</p><p>Admit | Discharge</p><p>Open fracture | Closed, stable or reduced fracture</p><p>Neurovascular compromise | Neurovascularly intact</p><p>Irreducible dislocation | Adequate pain control</p><p>Unable to manage at home | Reliable follow-up arranged</p><p>Pending OR (surgeon preference) | Can manage non-weight-bearing at home</p><p><em>Admission orders &amp; open-fracture protocol</em></p><ul><li>NPO after midnight (anticipate OR)</li><li>Posterior splint, elevate on pillows</li><li>Ice 20 min q2h while awake</li><li>Strict non-weight-bearing</li><li>DVT prophylaxis if prolonged immobility expected</li><li>Pain management (consider regional block)</li><li>Ortho to determine OR timing</li></ul><p>Tetanus update; IV antibiotics (cefazolin ± gentamicin per Gustilo grade); irrigation in ED if contaminated; OR within 6-24h depending on grade.</p><p>Emergent reduction; vascular surgery if pulse not restored; compartment syndrome watch.</p><h3>7 · Non-operative management</h3><p>Indications: stable Weber A, stable Weber B (congruent mortise, no medial injury), isolated lateral malleolus avulsion.</p><ul><li>Walking boot (preferred) — allows early weight-bearing</li><li>Posterior splint if significant swelling initially</li><li>Short leg cast if non-compliance concern</li><li>Weight-bearing as tolerated from day 1 — modern evidence-based approach</li><li>Traditional non-weight-bearing ×6 weeks no longer recommended for most stable fractures</li></ul><p>Boot/cast <strong>4-6 weeks</strong>; healing <strong>10-12 weeks</strong>. Ortho follow-up within <strong>5-7 days</strong> to confirm alignment with repeat films, then progress to ROM exercises as tolerated.</p><p><strong>Ibuprofen</strong>: 400-600mg PO q6h with food PO — Or acetaminophen (no specific dose given in this consult). Narcotic for breakthrough pain only.</p><p><em>Discharge instructions &amp; return precautions</em></p><p>Keep splint/boot on at all times except bathing; do not get it wet. Bring all imaging to the ortho follow-up appointment.</p><ul><li>Elevate above heart level as much as possible for the first 48-72h</li><li>Ice 20 min every 2-3 hours while awake</li><li>Weight-bearing per ortho instructions (usually WBAT in boot for stable fractures)</li></ul><ul><li>Increasing pain despite elevation and medications</li><li>Numbness or tingling in the toes</li><li>Toes turn blue or white</li><li>Fever &gt;101°F</li><li>Splint becomes too tight or too loose</li></ul></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Stiell IG, Greenberg GH, McKnight RD, et al. Decision rules for the use of radiography in acute ankle injuries. JAMA. 1993;269(9):1127-1132.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> Bachmann LM, Kolb E, Koller MT, et al. Accuracy of Ottawa ankle rules to exclude fractures of the ankle and mid-foot: systematic review. BMJ. 2003;326(7386):417.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Okanobo H, Khurana B, Sheehan S, et al. Simplified diagnostic algorithm for Lauge-Hansen classification of ankle injuries. Radiographics. 2012;32(2):E71-E84.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> van den Bekerom MPJ, Kerkhoffs GMMJ, McCollum GA, et al. Management of acute lateral ankle ligament injury in the athlete. Knee Surg Sports Traumatol Arthrosc. 2013;21(6):1390-1395.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> NICE. Fractures (non-complex): assessment and management. NICE guideline NG38. 2016 (updated 2023).</li><li id="cite-ref6"><span class="ig-ref">[6]</span> Stufkens SA, van den Bekerom MP, Kerkhoffs GM, et al. Long-term outcome after 1822 operatively treated ankle fractures. Acta Orthop. 2011;82(4):445-452.</li><li id="cite-ref7"><span class="ig-ref">[7]</span> Konrath GA, Karges DE, Watson JT, et al. Early versus delayed treatment of severe ankle fractures. J Orthop Trauma. 1995;9(5):377-380.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-12 · evidence through 2023 (NICE NG38 updated); Okanobo 2012 (Weber/Lauge-Hansen classification) · next review 2027-07-12</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · ankle-fractures · v1.0 InfoKitt cockpit build — full 12-node reachable-graph fidelity to myMedKitt ankle-fractures tree. af-disposition/af-admit/af-discharge orphaned subtree (pre-existing source graph gap, not fixed) surfaced as non-flow reference content on the af-operative/af-disposition-nonop terminals; logged as a source conflict.</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"ankle-fractures","title":"Ankle Fractures: Ottawa Rules → Weber Classification → Operative vs Non-Operative","shape":"algorithm","intendedUse":"Adults presenting to the ED with acute ankle injury and suspected fracture. Ottawa Ankle Rules criteria are for adults; the tree routes patients with age \u003c2 or >55, intoxication, or a distracting injury straight to X-ray rather than applying OAR. Excludes isolated midfoot injury (Ottawa Foot Rules noted but not modeled as its own branch) and pediatric ankle-fracture-specific patterns (Salter-Harris growth-plate injuries).","scopeWarnings":["**Maisonneuve fracture — do not miss it.** Proximal fibula fracture + complete syndesmotic disruption + medial injury. Commonly missed because ankle pain dominates and the proximal fibula is not examined or imaged on ankle-only films. Red flags: medial malleolus fracture WITHOUT a lateral malleolus fracture, syndesmotic widening on ankle films, tenderness over the proximal fibula, high-ankle-sprain findings, or a Weber C pattern. Palpate the ENTIRE fibula from ankle to knee — proximal fibula tenderness is Maisonneuve until proven otherwise. Get full tibia/fibula AP + lateral films. ALL require operative fixation, non-weight-bearing, posterior splint, ortho consult in the ED.","**Bimalleolar / trimalleolar fractures are ALL inherently unstable and ALL require operative fixation** — do not manage as an isolated non-operative fracture. Assess neurovascular status, reduce if grossly displaced/dislocated, posterior splint in neutral, strict non-weight-bearing, ortho consult (admit vs next-day OR).","**Weber C (suprasyndesmotic) fractures are almost always unstable by definition** — the syndesmosis is disrupted. Virtually all require operative fixation with a syndesmotic screw; rule out Maisonneuve fracture by palpating the entire fibula to the knee before assuming this is an isolated ankle injury."],"source":{"kind":"medkitt-consult","ref":"ankle-fractures"},"theme":{"preset":"medkitt"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"facts":[{"id":"f-oar-sens","claim":"Ottawa Ankle Rules sensitivity for excluding fracture","value":"97.6%","provenance":"consult:ankle-fractures/af-start","cite":["ref1","ref2"],"verified":"provenance"},{"id":"f-oar-npv","claim":"Ottawa Ankle Rules negative predictive value","value":">99%","provenance":"consult:ankle-fractures/af-start","cite":["ref1","ref2"],"verified":"provenance"},{"id":"f-mcs-normal","claim":"Normal medial clear space (static mortise view)","value":"≤4 mm","provenance":"consult:ankle-fractures/af-weber-a","cite":["ref3","ref5"],"verified":"provenance"},{"id":"f-mcs-widened","claim":"Widened medial clear space — indicates instability (static mortise view)","value":">4 mm","provenance":"consult:ankle-fractures/af-weber-a","cite":["ref3","ref5"],"verified":"provenance"},{"id":"f-stress-widen","claim":"Medial clear space widening under stress/weight-bearing view — indicates deltoid rupture (distinct threshold from the static ≤4mm/>4mm cutoff)","value":">4-5 mm","provenance":"consult:ankle-fractures/af-stress-test","cite":["ref5"],"verified":"provenance"},{"id":"f-delay12","claim":"Surgical delay associated with worse outcomes for bimalleolar/trimalleolar fractures","value":">12 days","provenance":"consult:ankle-fractures/af-bimalleolar","cite":["ref5","ref7"],"verified":"provenance"},{"id":"f-op-followup","claim":"Ortho follow-up interval for OPERATIVE ankle fractures (distinct from non-operative interval)","value":"24-48 hours","provenance":"consult:ankle-fractures/af-operative","cite":["ref5","ref7"],"verified":"provenance"},{"id":"f-nonop-followup","claim":"Ortho follow-up interval for NON-OPERATIVE ankle fractures (distinct from operative interval)","value":"5-7 days","provenance":"consult:ankle-fractures/af-disposition-nonop","cite":["ref5","ref7"],"verified":"provenance"},{"id":"f-boot-duration","claim":"Walking boot/cast duration for non-operative fractures","value":"4-6 weeks","provenance":"consult:ankle-fractures/af-disposition-nonop","cite":["ref5","ref7"],"verified":"provenance"},{"id":"f-healing-duration","claim":"Bone healing duration for non-operative ankle fractures","value":"10-12 weeks","provenance":"consult:ankle-fractures/af-disposition-nonop","cite":["ref5","ref7"],"verified":"provenance"}],"sections":[{"id":"sec-oar","title":"1 · Ottawa Ankle Rules","blocks":[{"id":"b-oar-intro","type":"text","whenNode":"af-start","md":"**Ottawa Ankle Rules (OAR)** sensitivity for excluding fracture is **97.6%**, with NPV **>99%**.","cite":["ref1","ref2"]},{"id":"b-oar-criteria","type":"steps","whenNode":"af-start","ordered":false,"items":["Bone tenderness at the posterior edge of the lateral malleolus (distal 6cm)","Bone tenderness at the posterior edge of the medial malleolus (distal 6cm)","Inability to bear weight (4 steps) immediately AND in the ED"],"cite":["ref1","ref2"]},{"id":"b-oar-na","type":"callout","tone":"caution","title":"OAR not applicable","whenNode":"af-start","md":"Age \u003c2 or >55, intoxication, or a distracting injury — the tree routes these straight to X-ray, the same as OAR-positive."},{"id":"b-oar-foot","type":"callout","tone":"neutral","title":"Also check midfoot — Ottawa Foot Rules","whenNode":"af-start","md":"Base-of-5th-metatarsal tenderness or navicular bone tenderness — a separate rule set from the ankle criteria above."},{"id":"b-sprain","type":"callout","tone":"normal","title":"OAR negative — ankle sprain, no fracture","whenNode":"af-sprain","md":"Fracture very unlikely (sensitivity **97.6%**, NPV **>99%**). RICE protocol, NSAIDs PRN, ankle brace/stirrup splint for comfort, early mobilization, weight-bearing as tolerated. Return precautions: worsening pain despite rest, new inability to bear weight, significant swelling increase. PCP follow-up in 1-2 weeks if symptoms persist. **High ankle sprain pearl:** tenderness ABOVE the malleoli or a positive squeeze test — consider syndesmotic injury even without a fracture.","cite":["ref1"]}]},{"id":"sec-classify","title":"2 · X-ray findings & Weber classification","blocks":[{"id":"b-views","type":"text","whenNode":"af-xray-findings","md":"Standard views: AP, Mortise (15° internal rotation), Lateral. Assess fibula fracture level (Weber classification), medial malleolus (fracture or widened medial clear space), posterior malleolus (lateral view), and mortise alignment.","cite":["ref3"]},{"id":"b-weber-table","type":"table","whenNode":"af-xray-findings","columns":["Class","Fibula fracture level","Stability"],"heroCol":0,"rows":[["Weber A","Below the syndesmosis (infrasyndesmotic)","Usually stable — syndesmosis intact"],["Weber B","At the syndesmosis (transsyndesmotic)","Variable — assess medial structures"],["Weber C","Above the syndesmosis (suprasyndesmotic)","Almost always unstable — syndesmosis disrupted"]],"rowTones":[null,"caution","danger"],"cite":["ref3"]},{"id":"b-occult","type":"callout","tone":"caution","title":"No fracture on X-ray — consider occult injury","whenNode":"af-occult","md":"Consider: occult fracture (MRI sensitivity > CT for subtle injury), syndesmotic injury without fracture (high ankle sprain), osteochondral lesion of the talus, or stress fracture. Squeeze test (compress tibia/fibula at mid-calf; ankle pain = positive) and external rotation test (knee bent, externally rotate the foot; pain = positive). If syndesmotic injury is suspected: weight-bearing films if possible, consider outpatient MRI, ortho follow-up within 5-7 days. Otherwise treat as a sprain with close follow-up.","cite":["ref4"]},{"id":"b-webera","type":"callout","tone":"normal","title":"Weber A — infrasyndesmotic","whenNode":"af-weber-a","md":"Usually stable, syndesmosis intact, often an avulsion fracture from the lateral ligament, low-energy mechanism. Medial clear space normal **≤4 mm**; widened **>4 mm** = unstable. Stable (isolated) → non-operative (walking boot or short leg cast, weight-bearing as tolerated). Unstable (medial involvement) → operative.","cite":["ref3","ref5"]}]},{"id":"sec-weberb","title":"3 · Weber B — stable or unstable?","blocks":[{"id":"b-weberb-table","type":"table","whenNode":"af-weber-b","columns":["Stable","Unstable"],"rows":[["Mortise congruent","Mortise widened"],["Medial clear space ≤4mm","Medial clear space >4mm"],["No medial tenderness","Medial malleolus fracture or deltoid rupture"],["Negative stress test","Positive stress test"]],"cite":["ref3","ref5"]},{"id":"b-stresstest","type":"text","whenNode":"af-stress-test","md":"Used when stability is uncertain on non-weight-bearing films: weight-bearing mortise view, gravity stress view (external rotation, leg hanging), or manual stress under fluoro (usually ortho). Positive test: medial clear space widens **>4-5 mm** under stress — indicates deltoid ligament rupture, fracture is unstable. If pain prevents weight-bearing: short-term immobilization, repeat films in 5-7 days, ortho follow-up arranged. **Pearl:** if in doubt, treat as unstable and involve ortho.","cite":["ref5"]}]},{"id":"sec-danger","title":"4 · Do not miss — Weber C, Maisonneuve, bimalleolar","blocks":[{"id":"b-weberc","type":"callout","tone":"caution","title":"Weber C — suprasyndesmotic","whenNode":"af-weber-c","md":"Fibula fracture ABOVE the syndesmosis — almost always unstable, syndesmosis disrupted by definition, higher energy mechanism, may have associated medial injury. **Rule out Maisonneuve fracture** — palpate the entire fibula to the knee; if proximal tenderness, get full leg films. Virtually all require operative fixation with syndesmotic screw placement; posterior splint, strict non-weight-bearing; ortho consult in the ED. Complications if missed: chronic instability, post-traumatic arthritis, poor functional outcomes.","cite":["ref3","ref6"]},{"id":"b-maisonneuve","type":"callout","tone":"danger","title":"Maisonneuve fracture — do not miss","whenNode":"af-maisonneuve","md":"Proximal fibula fracture + complete syndesmotic disruption + medial injury. Commonly missed because ankle pain dominates and the proximal fibula is not examined, and the proximal fracture is not visible on ankle films.","cite":["ref6"]},{"id":"b-maisonneuve-redflags","type":"steps","whenNode":"af-maisonneuve","ordered":false,"items":["Medial malleolus fracture without a lateral malleolus fracture","Syndesmotic widening on ankle films","Tenderness over the proximal fibula","High ankle sprain findings","Weber C fracture pattern"],"cite":["ref6"]},{"id":"b-maisonneuve-mgmt","type":"callout","tone":"danger","title":"Maisonneuve — management","whenNode":"af-maisonneuve","md":"Exam: palpate the ENTIRE fibula from ankle to knee, squeeze test — proximal fibula tenderness is Maisonneuve until proven otherwise. Full tibia/fibula X-rays (AP + lateral). ALL require operative fixation, non-weight-bearing, posterior splint, ortho consult in the ED.","cite":["ref6"]},{"id":"b-bimalleolar","type":"callout","tone":"danger","title":"Bimalleolar / trimalleolar — all unstable, all operative","whenNode":"af-bimalleolar","md":"Bimalleolar = both lateral AND medial malleoli fractured. Trimalleolar = lateral + medial + posterior malleolus (posterior tibial lip). ALL are inherently unstable, ALL require operative fixation, higher complication rates than unimalleolar injury; posterior malleolus involvement affects outcomes. ED management: assess neurovascular status, reduce if grossly displaced/dislocated, posterior splint in neutral, strict non-weight-bearing, ice and elevation, ortho consult (admission vs next-day OR). Timing of surgery: within 24 hours is optimal; delay **>12 days** is associated with worse outcomes; may delay for severe swelling (wait for the “wrinkle sign”).","cite":["ref5","ref7"]}]},{"id":"sec-flow","title":"5 · Management algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"af-start","shape":"decision","text":"Ottawa Ankle Rules Assessment","col":0,"rank":0,"detail":"X-ray if malleolar tenderness (distal 6cm) or cannot bear weight 4 steps; sensitivity 97.6%, NPV >99%"},{"id":"af-sprain","shape":"state","text":"Ankle Sprain — No Fracture","col":-2,"rank":1,"tone":"normal","detail":"RICE, NSAIDs, brace, early mobilization, WBAT; PCP follow-up 1-2 weeks if symptoms persist"},{"id":"af-xray-findings","shape":"decision","text":"X-Ray Findings & Weber Classification","col":0,"rank":1,"detail":"AP/Mortise/Lateral views; assess fibula level, medial malleolus, posterior malleolus, mortise alignment"},{"id":"af-occult","shape":"action","text":"Negative X-Ray — Occult Injury Workup","col":-2,"rank":2,"detail":"Occult fracture, syndesmotic injury, osteochondral talar lesion, stress fracture; squeeze/ER tests"},{"id":"af-weber-a","shape":"action","text":"Weber A — Infrasyndesmotic","col":-1,"rank":2,"detail":"Usually stable; medial clear space ≤4mm normal, >4mm unstable"},{"id":"af-weber-b","shape":"decision","text":"Weber B — Stability Assessment","col":0,"rank":2,"detail":"Mortise congruence, medial clear space, medial tenderness, stress test determine stability"},{"id":"af-weber-c","shape":"action","text":"Weber C — Suprasyndesmotic","col":1,"rank":2,"tone":"caution","detail":"Almost always unstable by definition; rule out Maisonneuve; virtually all operative"},{"id":"af-bimalleolar","shape":"action","text":"Bimalleolar / Trimalleolar","col":2,"rank":2,"tone":"danger","detail":"All inherently unstable, all operative; surgery >12 days delay worsens outcomes"},{"id":"af-stress-test","shape":"action","text":"Stress Testing","col":0,"rank":3,"detail":"Weight-bearing/gravity/manual stress views; medial clear space widening >4-5mm = unstable"},{"id":"af-maisonneuve","shape":"action","text":"Maisonneuve — Do Not Miss","col":1,"rank":3,"tone":"danger","detail":"Proximal fibula fracture + syndesmotic disruption + medial injury; palpate entire fibula to knee"},{"id":"af-disposition-nonop","shape":"state","text":"Non-Operative — Conservative Management","col":-1,"rank":4,"tone":"normal","detail":"Walking boot, WBAT, 4-6 week immobilization, 10-12 week healing, ortho follow-up 5-7 days"},{"id":"af-operative","shape":"state","text":"Operative — Ortho Consult","col":1,"rank":4,"tone":"caution","detail":"NV check, reduce if dislocated, posterior splint, NWB, ortho consult same day, follow-up 24-48h"}],"edges":[{"from":"af-start","to":"af-xray-findings","label":"OAR positive"},{"from":"af-start","to":"af-xray-findings","label":"OAR not applicable"},{"from":"af-start","to":"af-sprain","label":"OAR negative"},{"from":"af-xray-findings","to":"af-occult","label":"No fracture"},{"from":"af-xray-findings","to":"af-weber-a","label":"Weber A"},{"from":"af-xray-findings","to":"af-weber-b","label":"Weber B"},{"from":"af-xray-findings","to":"af-weber-c","label":"Weber C"},{"from":"af-xray-findings","to":"af-bimalleolar","label":"Bimalleolar/trimalleolar"},{"from":"af-occult","to":"af-disposition-nonop"},{"from":"af-weber-a","to":"af-disposition-nonop"},{"from":"af-weber-b","to":"af-disposition-nonop","label":"Stable"},{"from":"af-weber-b","to":"af-operative","label":"Unstable"},{"from":"af-weber-b","to":"af-stress-test","label":"Uncertain"},{"from":"af-stress-test","to":"af-operative"},{"from":"af-weber-c","to":"af-maisonneuve"},{"from":"af-maisonneuve","to":"af-operative"},{"from":"af-bimalleolar","to":"af-operative"}]},{"id":"b-fullprotocol","type":"text","md":"This is the full reachable graph. See the [full protocol](#/tree/ankle-fractures) for complete branch text and patient-education detail."}]},{"id":"sec-operative","title":"6 · Operative management","blocks":[{"id":"b-op-indications","type":"text","whenNode":"af-operative","md":"Indications for ORIF: Weber C (suprasyndesmotic), unstable Weber B, bimalleolar or trimalleolar, Maisonneuve fracture, ankle dislocation (after reduction), intra-articular displacement >2mm.","cite":["ref5","ref7"]},{"id":"b-op-steps","type":"steps","whenNode":"af-operative","ordered":true,"items":["Neurovascular check — document pulse, sensation, motor","Reduction if dislocated (procedural sedation)","Posterior splint — ankle at 90°, well-padded","Non-weight-bearing","Ice and elevation — critical for swelling","Analgesia — consider nerve block","Ortho consult — same day"],"cite":["ref5","ref7"]},{"id":"b-op-followup-text","type":"callout","tone":"caution","title":"Follow-up — operative fractures","whenNode":"af-operative","md":"Ortho follow-up for operative ankle fractures: **24-48 hours** for OR planning. Surgery timing within 24h is optimal; may delay for soft-tissue swelling.","cite":["ref5","ref7"]},{"id":"b-disposition-criteria","type":"table","whenNode":["af-operative","af-disposition-nonop"],"columns":["Admit","Discharge"],"rows":[["Open fracture","Closed, stable or reduced fracture"],["Neurovascular compromise","Neurovascularly intact"],["Irreducible dislocation","Adequate pain control"],["Unable to manage at home","Reliable follow-up arranged"],["Pending OR (surgeon preference)","Can manage non-weight-bearing at home"]],"cite":["ref5","ref7"]},{"id":"b-admit-disclosure","type":"disclosure","summary":"Admission orders & open-fracture protocol","scent":"3 groups","whenNode":"af-operative","cite":["ref7"],"blocks":[{"id":"b-admit-orders","type":"steps","ordered":false,"items":["NPO after midnight (anticipate OR)","Posterior splint, elevate on pillows","Ice 20 min q2h while awake","Strict non-weight-bearing","DVT prophylaxis if prolonged immobility expected","Pain management (consider regional block)","Ortho to determine OR timing"]},{"id":"b-open-fx","type":"callout","tone":"danger","title":"Open fracture protocol","md":"Tetanus update; IV antibiotics (cefazolin ± gentamicin per Gustilo grade); irrigation in ED if contaminated; OR within 6-24h depending on grade."},{"id":"b-nv-compromise","type":"callout","tone":"danger","title":"Neurovascular compromise","md":"Emergent reduction; vascular surgery if pulse not restored; compartment syndrome watch."}]}]},{"id":"sec-nonop","title":"7 · Non-operative management","blocks":[{"id":"b-nonop-indications","type":"text","whenNode":"af-disposition-nonop","md":"Indications: stable Weber A, stable Weber B (congruent mortise, no medial injury), isolated lateral malleolus avulsion.","cite":["ref5","ref7"]},{"id":"b-nonop-steps","type":"steps","whenNode":"af-disposition-nonop","ordered":false,"items":["Walking boot (preferred) — allows early weight-bearing","Posterior splint if significant swelling initially","Short leg cast if non-compliance concern","Weight-bearing as tolerated from day 1 — modern evidence-based approach","Traditional non-weight-bearing ×6 weeks no longer recommended for most stable fractures"],"cite":["ref5","ref7"]},{"id":"b-nonop-duration","type":"callout","tone":"normal","title":"Duration & follow-up — non-operative fractures","whenNode":"af-disposition-nonop","md":"Boot/cast **4-6 weeks**; healing **10-12 weeks**. Ortho follow-up within **5-7 days** to confirm alignment with repeat films, then progress to ROM exercises as tolerated.","cite":["ref5","ref7"]},{"id":"b-ibuprofen-dose","type":"dose","whenNode":"af-disposition-nonop","drug":"Ibuprofen","drugId":"ibuprofen","dose":"400-600mg PO q6h with food","route":"PO","note":"Or acetaminophen (no specific dose given in this consult). Narcotic for breakthrough pain only.","cite":["ref5"]},{"id":"b-discharge-disclosure","type":"disclosure","summary":"Discharge instructions & return precautions","scent":"immobilization, activity, meds, return-to-ED","whenNode":"af-disposition-nonop","cite":["ref5"],"blocks":[{"id":"b-discharge-immob","type":"text","md":"Keep splint/boot on at all times except bathing; do not get it wet. Bring all imaging to the ortho follow-up appointment."},{"id":"b-discharge-activity","type":"steps","ordered":false,"items":["Elevate above heart level as much as possible for the first 48-72h","Ice 20 min every 2-3 hours while awake","Weight-bearing per ortho instructions (usually WBAT in boot for stable fractures)"]},{"id":"b-return-precautions","type":"steps","ordered":false,"items":["Increasing pain despite elevation and medications","Numbness or tingling in the toes","Toes turn blue or white","Fever >101°F","Splint becomes too tight or too loose"]}]}]}],"citations":[{"id":"ref1","label":"Stiell IG, Greenberg GH, McKnight RD, et al. Decision rules for the use of radiography in acute ankle injuries. JAMA. 1993;269(9):1127-1132."},{"id":"ref2","label":"Bachmann LM, Kolb E, Koller MT, et al. Accuracy of Ottawa ankle rules to exclude fractures of the ankle and mid-foot: systematic review. BMJ. 2003;326(7386):417."},{"id":"ref3","label":"Okanobo H, Khurana B, Sheehan S, et al. Simplified diagnostic algorithm for Lauge-Hansen classification of ankle injuries. Radiographics. 2012;32(2):E71-E84."},{"id":"ref4","label":"van den Bekerom MPJ, Kerkhoffs GMMJ, McCollum GA, et al. Management of acute lateral ankle ligament injury in the athlete. Knee Surg Sports Traumatol Arthrosc. 2013;21(6):1390-1395."},{"id":"ref5","label":"NICE. Fractures (non-complex): assessment and management. NICE guideline NG38. 2016 (updated 2023)."},{"id":"ref6","label":"Stufkens SA, van den Bekerom MP, Kerkhoffs GM, et al. Long-term outcome after 1822 operatively treated ankle fractures. Acta Orthop. 2011;82(4):445-452."},{"id":"ref7","label":"Konrath GA, Karges DE, Watson JT, et al. Early versus delayed treatment of severe ankle fractures. J Orthop Trauma. 1995;9(5):377-380."}],"meta":{"version":"1.0","lastReviewed":"2026-07-12","evidenceThrough":"2023 (NICE NG38 updated); Okanobo 2012 (Weber/Lauge-Hansen classification)","nextReview":"2027-07-12","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 InfoKitt cockpit build — full 12-node reachable-graph fidelity to myMedKitt ankle-fractures tree. af-disposition/af-admit/af-discharge orphaned subtree (pre-existing source graph gap, not fixed) surfaced as non-flow reference content on the af-operative/af-disposition-nonop terminals; logged as a source conflict."},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

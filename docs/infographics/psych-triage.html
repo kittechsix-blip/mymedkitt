@@ -1,0 +1,506 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Psych Triage: Route by Primary Presenting Concern — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Psych Triage: Route by Primary Presenting Concern</h1>
+  <p class="ig-use">Adults presenting to the ED with an acute psychiatric symptom (agitation, suicidal ideation, altered mental status, psychosis, anxiety/panic, withdrawal, catatonia, medication reaction, or eating-disorder presentation). Gateway/triage consult — routes to the matching myMedKitt specialty consult for detailed management. Excludes pediatric psychiatric presentations and formal psychiatric admission criteria beyond MARSIPAN medical-stability thresholds.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Safety first — secure the environment before beginning any psychiatric assessment.</div><div class="ig-scope-item">⚠ Rule out organic causes in ALL psychiatric presentations, especially new psychiatric symptoms first appearing after age 45, fluctuating mentation, abnormal vital signs, or focal neurologic findings.</div><div class="ig-scope-item">⚠ Agitation: verbal de-escalation (BETA protocol) before chemical restraint — chemical restraint is a last resort, not a first response.</div><div class="ig-scope-item">⚠ Suicidal ideation/attempt: 1:1 continuous visual observation and remove ligatures, sharps, and medications from the room immediately.</div><div class="ig-scope-item">⚠ Withdrawal: early benzodiazepines prevent withdrawal seizures (peak 12-48h) and delirium tremens (peak 48-96h, mortality 5-15%).</div><div class="ig-scope-item">⚠ Catatonia: do NOT give antipsychotics initially — can trigger malignant catatonia or NMS. Lorazepam challenge is first-line.</div><div class="ig-scope-item">⚠ Medication reaction: NMS, serotonin syndrome, and dystonia require different treatments — differentiate before treating.</div><div class="ig-scope-item">⚠ Eating disorder: MARSIPAN criteria (BMI &lt;13, K+ &lt;3.0, PO4 &lt;0.5, HR &lt;40, BP &lt;90 systolic, QTc &gt;450 ms, syncope, hypoglycemia) signal medical instability requiring admission.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="n-start" hidden><button type="button" data-route-select="n-start"><span class="ig-route-rank">1</span><span>What is the primary presenting concern?</span></button></li><li data-route-node="n-agitated" hidden><button type="button" data-route-select="n-agitated"><span class="ig-route-rank">2</span><span>Agitation/aggression → de-escalate before chemical restraint</span></button></li><li data-route-node="n-suicidal" hidden><button type="button" data-route-select="n-suicidal"><span class="ig-route-rank">2</span><span>Suicidal ideation/attempt → 1:1 observation, remove means</span></button></li><li data-route-node="n-altered" hidden><button type="button" data-route-select="n-altered"><span class="ig-route-rank">2</span><span>Altered mental status → delirium vs primary psychiatric</span></button></li><li data-route-node="n-psychotic" hidden><button type="button" data-route-select="n-psychotic"><span class="ig-route-rank">2</span><span>Bizarre behavior/psychosis → medical stability first</span></button></li><li data-route-node="n-anxiety" hidden><button type="button" data-route-select="n-anxiety"><span class="ig-route-rank">2</span><span>Anxiety/panic → rule out PE, ACS, arrhythmia first</span></button></li><li data-route-node="n-withdrawal" hidden><button type="button" data-route-select="n-withdrawal"><span class="ig-route-rank">2</span><span>Withdrawal symptoms → early benzodiazepines</span></button></li><li data-route-node="n-catatonia" hidden><button type="button" data-route-select="n-catatonia"><span class="ig-route-rank">2</span><span>Unresponsive/mute/rigid → lorazepam challenge, avoid antipsychotics</span></button></li><li data-route-node="n-medreaction" hidden><button type="button" data-route-select="n-medreaction"><span class="ig-route-rank">2</span><span>Medication reaction → differentiate NMS vs serotonin syndrome vs dystonia</span></button></li><li data-route-node="n-eating" hidden><button type="button" data-route-select="n-eating"><span class="ig-route-rank">2</span><span>Not eating/purging → electrolytes, ECG, MARSIPAN criteria</span></button></li><li data-route-node="n-end" hidden><button type="button" data-route-select="n-end"><span class="ig-route-rank">3</span><span>Continue in linked specialty consult</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 1938 372" width="1938" height="372" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M969,98 L969,119 L129,119 L129,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="115" class="ig-edge-lbl" text-anchor="middle">agitation</text><path d="M969,98 L969,119 L339,119 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="115" class="ig-edge-lbl" text-anchor="middle">suicidal</text><path d="M969,98 L969,119 L549,119 L549,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="115" class="ig-edge-lbl" text-anchor="middle">altered MS</text><path d="M969,98 L969,119 L759,119 L759,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="864" y="115" class="ig-edge-lbl" text-anchor="middle">psychosis</text><path d="M969,98 L969,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="969" y="115" class="ig-edge-lbl" text-anchor="middle">anxiety/panic</text><path d="M969,98 L969,119 L1179,119 L1179,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="1074" y="115" class="ig-edge-lbl" text-anchor="middle">withdrawal</text><path d="M969,98 L969,119 L1389,119 L1389,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="1179" y="115" class="ig-edge-lbl" text-anchor="middle">catatonia</text><path d="M969,98 L969,119 L1599,119 L1599,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="1284" y="115" class="ig-edge-lbl" text-anchor="middle">med reaction</text><path d="M969,98 L969,119 L1809,119 L1809,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="1389" y="115" class="ig-edge-lbl" text-anchor="middle">eating disorder</text><path d="M129,206 L129,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,206 L339,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,206 L549,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,206 L759,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M969,206 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M1179,206 L1179,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M1389,206 L1389,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M1599,206 L1599,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M1809,206 L1809,227 L969,227 L969,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="n-start" tabindex="0" role="button" aria-label="What is the primary presenting concern?"><polygon points="903,32 1035,32 1057,65 1035,98 903,98 881,65" class="ig-shape t-neutral"/><foreignObject x="887" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">What is the primary presenting concern?</div></foreignObject></g><g class="ig-node" data-node="n-agitated" tabindex="0" role="button" aria-label="Agitation/aggression → de-escalate before chemical restraint"><rect x="41" y="140" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Agitation/aggression → de-escalate before chemical restraint</div></foreignObject></g><g class="ig-node" data-node="n-suicidal" tabindex="0" role="button" aria-label="Suicidal ideation/attempt → 1:1 observation, remove means"><rect x="251" y="140" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Suicidal ideation/attempt → 1:1 observation, remove means</div></foreignObject></g><g class="ig-node" data-node="n-altered" tabindex="0" role="button" aria-label="Altered mental status → delirium vs primary psychiatric"><rect x="461" y="140" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="467" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Altered mental status → delirium vs primary psychiatric</div></foreignObject></g><g class="ig-node" data-node="n-psychotic" tabindex="0" role="button" aria-label="Bizarre behavior/psychosis → medical stability first"><rect x="671" y="140" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="677" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Bizarre behavior/psychosis → medical stability first</div></foreignObject></g><g class="ig-node" data-node="n-anxiety" tabindex="0" role="button" aria-label="Anxiety/panic → rule out PE, ACS, arrhythmia first"><rect x="881" y="140" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="887" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Anxiety/panic → rule out PE, ACS, arrhythmia first</div></foreignObject></g><g class="ig-node" data-node="n-withdrawal" tabindex="0" role="button" aria-label="Withdrawal symptoms → early benzodiazepines"><rect x="1091" y="140" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="1097" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Withdrawal symptoms → early benzodiazepines</div></foreignObject></g><g class="ig-node" data-node="n-catatonia" tabindex="0" role="button" aria-label="Unresponsive/mute/rigid → lorazepam challenge, avoid antipsychotics"><rect x="1301" y="140" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="1307" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Unresponsive/mute/rigid → lorazepam challenge, avoid antipsychotics</div></foreignObject></g><g class="ig-node" data-node="n-medreaction" tabindex="0" role="button" aria-label="Medication reaction → differentiate NMS vs serotonin syndrome vs dystonia"><rect x="1511" y="140" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="1517" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Medication reaction → differentiate NMS vs serotonin syndrome vs dystonia</div></foreignObject></g><g class="ig-node" data-node="n-eating" tabindex="0" role="button" aria-label="Not eating/purging → electrolytes, ECG, MARSIPAN criteria"><rect x="1721" y="140" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="1727" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Not eating/purging → electrolytes, ECG, MARSIPAN criteria</div></foreignObject></g><g class="ig-node" data-node="n-end" tabindex="0" role="button" aria-label="Continue in linked specialty consult"><rect x="881" y="248" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="887" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Continue in linked specialty consult</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="n-start" hidden><strong>What is the primary presenting concern?</strong><span>Select the most urgent/dominant feature — many presentations overlap. Safety first: secure the environment before assessment.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-agitated" hidden><strong>Agitation/aggression → de-escalate before chemical restraint</strong><span>BETA protocol first-line; rule out organic causes (hypoglycemia, hypoxia, intoxication).</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-agitated">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-suicidal" hidden><strong>Suicidal ideation/attempt → 1:1 observation, remove means</strong><span>Remove ligatures/sharps/meds; ASQ or C-SSRS; risk stratification drives disposition.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-suicidal">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-altered" hidden><strong>Altered mental status → delirium vs primary psychiatric</strong><span>Acute onset, fluctuating course, inattention, visual hallucinations, abnormal vitals, age &gt;45 first psychiatric symptoms.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-altered">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-psychotic" hidden><strong>Bizarre behavior/psychosis → medical stability first</strong><span>Rule out anti-NMDA encephalitis, stimulant intoxication, med toxicity, encephalitis/meningitis, metabolic derangement.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-psychotic">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-anxiety" hidden><strong>Anxiety/panic → rule out PE, ACS, arrhythmia first</strong><span>PERC/Wells, ECG, hyperthyroidism, pheochromocytoma, stimulant intoxication before diagnosing panic.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-anxiety">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-withdrawal" hidden><strong>Withdrawal symptoms → early benzodiazepines</strong><span>Prevents seizures (peak 12-48h) and DTs (peak 48-96h, mortality 5-15%).</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-withdrawal">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-catatonia" hidden><strong>Unresponsive/mute/rigid → lorazepam challenge, avoid antipsychotics</strong><span>2 mg IV; response in 10-15 min supports diagnosis. Antipsychotics can trigger malignant catatonia/NMS.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-catatonia">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-medreaction" hidden><strong>Medication reaction → differentiate NMS vs serotonin syndrome vs dystonia</strong><span>Onset, rigidity pattern, temperature, mental status, and pupils differ by diagnosis — treatment differs too.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-medreaction">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-eating" hidden><strong>Not eating/purging → electrolytes, ECG, MARSIPAN criteria</strong><span>Refeeding risk — K+/PO4/Mg2+, QTc, HR/BP, BMI, syncope, hypoglycemia.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-eating">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-end" hidden><strong>Continue in linked specialty consult</strong><span>Return to Psych Triage if the clinical picture changes or a different pathway is needed.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-end">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">1 · Route by primary presenting concern</h2><div class="ig-cond ig-stepbound" data-whennode="n-start"><p class="ig-block ig-text"><strong>Safety first</strong> — secure the environment before beginning any assessment. Select the most urgent/dominant feature below; many psychiatric presentations overlap, and this routes to the most appropriate starting point.<a href="#cite-ref1" class="ig-ref">[1]</a></p></div><div class="ig-cond ig-reference"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Primary concern</th><th>Destination pathway</th></tr></thead><tbody><tr class="ig-row t-danger"><td class="hero">Agitation / Aggression — combative, threatening, pacing, unable to cooperate</td><td>Acute Agitation consult — BETA protocol, chemical restraint</td></tr><tr class="ig-row t-danger"><td class="hero">Suicidal Ideation / Attempt — expressed SI, self-harm, or post-attempt</td><td>Suicidal Patient consult — C-SSRS, risk stratification</td></tr><tr class="ig-row t-caution"><td class="hero">Altered Mental Status — confused, disoriented, fluctuating consciousness</td><td>Psych Medical Stability — organic workup</td></tr><tr class="ig-row t-normal"><td class="hero">Bizarre Behavior / Psychosis — hallucinations, delusions, disorganized thinking</td><td>Psych Medical Stability, then Acute Psychosis / First Break</td></tr><tr class="ig-row t-normal"><td class="hero">Anxiety / Panic — acute anxiety, panic attack, hyperventilation</td><td>Rule out medical mimics, then panic management</td></tr><tr class="ig-row t-caution"><td class="hero">Withdrawal Symptoms — tremor, diaphoresis, tachycardia, h/o alcohol/benzo/opioid use</td><td>Alcohol Withdrawal consult — CIWA-Ar, benzodiazepines</td></tr><tr class="ig-row t-caution"><td class="hero">Unresponsive / Mute / Rigid — catatonic features, waxy flexibility</td><td>Catatonia consult — lorazepam challenge</td></tr><tr class="ig-row t-danger"><td class="hero">Medication Reaction — suspected NMS, serotonin syndrome, dystonia</td><td>Differentiate and treat per diagnosis</td></tr><tr class="ig-row t-normal"><td class="hero">Not Eating / Purging — eating disorder presentation, weight loss, electrolyte concerns</td><td>Medical stability screen, MARSIPAN criteria</td></tr></tbody></table></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">2 · Agitation / aggression</h2><div class="ig-cond ig-stepbound" data-whennode="n-agitated"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Verbal de-escalation before chemical restraint</div><div>Verbal de-escalation (BETA protocol) is first-line; chemical restraint is reserved for de-escalation failure. Rule out organic causes — hypoglycemia, hypoxia, intoxication — before treating as primary psychiatric agitation. Key decision: is this delirium/medical or primary psychiatric? Continue in the <a href="#/tree/acute-agitation" target="_top" class="ig-link">Acute Agitation consult</a> for the BETA protocol and chemical restraint options.<a href="#cite-ref2" class="ig-ref">[2]</a></div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">3 · Suicidal ideation / attempt</h2><div class="ig-cond ig-stepbound" data-whennode="n-suicidal"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">1:1 observation, remove means</div><div>1:1 continuous visual observation. Remove ligatures, sharps, and medications from the room immediately, and complete an environmental safety checklist. Screen with ASQ or C-SSRS. Risk stratification drives disposition — discharge vs voluntary vs involuntary hold. Continue in the <a href="#/tree/suicidal-patient" target="_top" class="ig-link">Suicidal Patient consult</a>.<a href="#cite-ref3" class="ig-ref">[3]</a></div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">4 · Altered mental status</h2><div class="ig-cond ig-stepbound" data-whennode="n-altered"><p class="ig-block ig-text"><strong>Critical question: delirium or primary psychosis?</strong> Use history, vitals, exam, mentation, and the red flags below to decide medical workup intensity. Continue in <a href="#/tree/medical-clearance-psych" target="_top" class="ig-link">Psych Medical Stability</a>.<a href="#cite-ref4" class="ig-ref">[4]</a></p></div><div class="ig-cond ig-stepbound" data-whennode="n-altered"><ol class="ig-block ig-steps"><li>Acute onset (hours-days)</li><li>Fluctuating course</li><li>Inattention — cannot focus on interview</li><li>Visual hallucinations</li><li>Abnormal vital signs</li><li>Age &gt;45 with first psychiatric symptoms</li></ol></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">5 · Bizarre behavior / psychosis</h2><div class="ig-cond ig-stepbound" data-whennode="n-psychotic"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Rule out organic causes first</div><div>Start with <a href="#/tree/medical-clearance-psych" target="_top" class="ig-link">Psych Medical Stability</a>, then continue to <a href="#/tree/acute-psychosis" target="_top" class="ig-link">Acute Psychosis / First Break</a>. Rule out organic causes FIRST when red flags are present: anti-NMDA receptor encephalitis, stimulant intoxication, medication toxicity, encephalitis/meningitis, metabolic derangement. <strong>New-onset psychosis in a patient older than 45 is a medical cause until proven otherwise.</strong> If agitated, use <a href="#/tree/acute-agitation" target="_top" class="ig-link">Acute Agitation</a> for chemical restraint options.<a href="#cite-ref4" class="ig-ref">[4]</a><a href="#cite-ref5" class="ig-ref">[5]</a></div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">6 · Anxiety / panic</h2><div class="ig-cond ig-stepbound" data-whennode="n-anxiety"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Panic attack vs medical emergency</div><div>Before diagnosing panic, rule out pulmonary embolism (PERC, Wells), acute coronary syndrome (especially with risk factors), arrhythmia (check ECG), hyperthyroidism, pheochromocytoma, and stimulant intoxication. If true panic attack: reassurance and a calm environment, breathing exercises, a benzodiazepine if severe, and outpatient psychiatry/therapy referral.<a href="#cite-ref1" class="ig-ref">[1]</a></div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-anxiety"><div class="ig-block ig-dose"><div class="ig-dose-drug">Lorazepam</div><div class="ig-dose-val">0.5-1 mg PO/SL</div><div class="ig-dose-note">For severe panic attack, after medical mimics (PE, ACS, arrhythmia, hyperthyroidism, pheochromocytoma, stimulant intoxication) are excluded. Not a linked drug-store indication in this tree — see source-conflict note.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">7 · Withdrawal symptoms</h2><div class="ig-cond ig-stepbound" data-whennode="n-withdrawal"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Early benzodiazepines prevent seizures and DTs</div><div>Early treatment prevents withdrawal seizures (peak <strong>12-48h</strong>) and delirium tremens (peak <strong>48-96h</strong>, mortality <strong>5-15%</strong>). High-risk features: prior seizures/DTs, <strong>PAWSS ≥4</strong>, prolonged heavy use. Continue in the <a href="#/tree/alcohol-withdrawal" target="_top" class="ig-link">Alcohol Withdrawal consult</a>.<a href="#cite-ref6" class="ig-ref">[6]</a></div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-withdrawal"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Substance</th><th>Assessment / treatment</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Alcohol / Benzodiazepines</td><td>CIWA-Ar, benzodiazepines, phenobarbital</td></tr><tr class="ig-row"><td class="hero">Opioids</td><td>COWS score, buprenorphine initiation, clonidine</td></tr><tr class="ig-row"><td class="hero">Stimulants</td><td>Supportive care, benzodiazepines for agitation</td></tr></tbody></table></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">8 · Unresponsive / mute / rigid (catatonia)</h2><div class="ig-cond ig-stepbound" data-whennode="n-catatonia"><p class="ig-block ig-text">Recognize catatonia early — it is treatable. <strong>Bush-Francis catatonia signs:</strong> immobility/stupor, mutism, staring/fixed gaze, posturing/waxy flexibility, negativism (resistance to movement). Continue in the <a href="#/tree/catatonia" target="_top" class="ig-link">Catatonia consult</a>.<a href="#cite-ref7" class="ig-ref">[7]</a></p></div><div class="ig-cond ig-stepbound" data-whennode="n-catatonia"><div class="ig-block ig-dose"><div class="ig-dose-drug">Lorazepam</div><div class="ig-dose-val">2 mg IV challenge</div><div class="ig-dose-note">Improvement within 10-15 min strongly supports the diagnosis. If response: continue lorazepam 2 mg q4-6h. If no response: ECT is the next step. Not a linked drug-store indication in this tree — see source-conflict note.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-catatonia"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Avoid antipsychotics initially</div><div>Antipsychotics given before the catatonia is recognized can trigger malignant catatonia or NMS.<a href="#cite-ref7" class="ig-ref">[7]</a></div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">9 · Medication reaction</h2><div class="ig-cond ig-stepbound" data-whennode="n-medreaction"><p class="ig-block ig-text">Differentiate these emergencies — treatment differs by diagnosis.<a href="#cite-ref8" class="ig-ref">[8]</a><a href="#cite-ref9" class="ig-ref">[9]</a></p></div><div class="ig-cond ig-stepbound" data-whennode="n-medreaction"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Feature</th><th>NMS</th><th>Serotonin Syndrome</th><th>Dystonia</th></tr></thead><tbody><tr class="ig-row t-danger"><td class="hero">Onset</td><td>Days</td><td>Hours</td><td>Minutes-hours</td></tr><tr class="ig-row t-danger"><td class="hero">Rigidity</td><td>Lead-pipe</td><td>Hyperreflexia, clonus</td><td>Focal (torticollis, oculogyric)</td></tr><tr class="ig-row t-danger"><td class="hero">Temp</td><td>&gt;40°C</td><td>Variable</td><td>Normal</td></tr><tr class="ig-row t-danger"><td class="hero">Mental status</td><td>Altered</td><td>Agitated</td><td>Clear</td></tr><tr class="ig-row t-danger"><td class="hero">Pupils</td><td>Normal</td><td>Dilated</td><td>Normal</td></tr><tr class="ig-row t-danger"><td class="hero">Cause</td><td>Antipsychotics</td><td>SSRIs, MAOIs</td><td>Antipsychotics, antiemetics</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-medreaction"><ol class="ig-block ig-steps"><li>NMS: stop offending agent, dantrolene, bromocriptine, cooling</li><li>Serotonin syndrome: stop offending agent, cyproheptadine, benzodiazepines</li><li>Dystonia: continue in the Acute Dystonic Reaction consult — diphenhydramine or benztropine</li></ol></div><div class="ig-cond ig-stepbound" data-whennode="n-medreaction"><div class="ig-block ig-dose"><div class="ig-dose-drug">Diphenhydramine</div><div class="ig-dose-val">50 mg IV/IM</div><div class="ig-dose-note">Onset 5-15 min; repeat in 30 min if no resolution. Continue oral diphenhydramine 25-50 mg q6h × 48-72h to prevent recurrence.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-medreaction"><div class="ig-block ig-dose"><div class="ig-dose-drug">Benztropine</div><div class="ig-dose-val">1-2 mg IV/IM</div><div class="ig-dose-note">Alternative to diphenhydramine if dystonia persists.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">10 · Not eating / purging</h2><div class="ig-cond ig-stepbound" data-whennode="n-eating"><p class="ig-block ig-text">Eating disorder emergency — focus on medical stability. Check immediately: electrolytes (K+, PO4, Mg2+ — refeeding risk), ECG (QTc prolongation, bradycardia), glucose, and vitals (bradycardia, orthostatic hypotension).<a href="#cite-ref10" class="ig-ref">[10]</a></p></div><div class="ig-cond ig-stepbound" data-whennode="n-eating"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">MARSIPAN admission criterion</th><th>Threshold</th></tr></thead><tbody><tr class="ig-row t-danger"><td class="hero">Body mass / weight loss</td><td>BMI &lt;13 or rapid weight loss &gt;1 kg/week</td></tr><tr class="ig-row t-danger"><td class="hero">Electrolytes</td><td>K+ &lt;3.0 or PO4 &lt;0.5</td></tr><tr class="ig-row t-danger"><td class="hero">Hemodynamics</td><td>HR &lt;40 or BP &lt;90 systolic</td></tr><tr class="ig-row t-danger"><td class="hero">ECG</td><td>QTc &gt;450 ms</td></tr><tr class="ig-row t-danger"><td class="hero">Neurologic</td><td>Syncope</td></tr><tr class="ig-row t-danger"><td class="hero">Metabolic</td><td>Hypoglycemia</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-eating"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Refeeding syndrome risk</div><div>Start feeding slowly; monitor PO4/K+/Mg2+ daily × 3 days.<a href="#cite-ref10" class="ig-ref">[10]</a></div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">11 · Routed to consult</h2><div class="ig-cond ig-stepbound" data-whennode="n-end"><p class="ig-block ig-text">Continue with the linked specialty consult for detailed management. Return to Psych Triage if the clinical picture changes or a different pathway is needed.</p></div></section><section class="ig-section"><h2 class="ig-h2">12 · One-glance triage map</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">Tap any box for detail. The full pathway lives in the <a href="#/tree/psych-triage" target="_top" class="ig-link">myMedKitt psych-triage consult</a>.</p></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Route by primary presenting concern</h3><p><strong>Safety first</strong> — secure the environment before beginning any assessment. Select the most urgent/dominant feature below; many psychiatric presentations overlap, and this routes to the most appropriate starting point.<a href="#cite-ref1" class="ig-ref">[1]</a></p><p>Primary concern | Destination pathway</p><p>Agitation / Aggression — combative, threatening, pacing, unable to cooperate | Acute Agitation consult — BETA protocol, chemical restraint</p><p>Suicidal Ideation / Attempt — expressed SI, self-harm, or post-attempt | Suicidal Patient consult — C-SSRS, risk stratification</p><p>Altered Mental Status — confused, disoriented, fluctuating consciousness | Psych Medical Stability — organic workup</p><p>Bizarre Behavior / Psychosis — hallucinations, delusions, disorganized thinking | Psych Medical Stability, then Acute Psychosis / First Break</p><p>Anxiety / Panic — acute anxiety, panic attack, hyperventilation | Rule out medical mimics, then panic management</p><p>Withdrawal Symptoms — tremor, diaphoresis, tachycardia, h/o alcohol/benzo/opioid use | Alcohol Withdrawal consult — CIWA-Ar, benzodiazepines</p><p>Unresponsive / Mute / Rigid — catatonic features, waxy flexibility | Catatonia consult — lorazepam challenge</p><p>Medication Reaction — suspected NMS, serotonin syndrome, dystonia | Differentiate and treat per diagnosis</p><p>Not Eating / Purging — eating disorder presentation, weight loss, electrolyte concerns | Medical stability screen, MARSIPAN criteria</p><h3>2 · Agitation / aggression</h3><p>Verbal de-escalation (BETA protocol) is first-line; chemical restraint is reserved for de-escalation failure. Rule out organic causes — hypoglycemia, hypoxia, intoxication — before treating as primary psychiatric agitation. Key decision: is this delirium/medical or primary psychiatric? Continue in the <a href="#/tree/acute-agitation" target="_top" class="ig-link">Acute Agitation consult</a> for the BETA protocol and chemical restraint options.<a href="#cite-ref2" class="ig-ref">[2]</a></p><h3>3 · Suicidal ideation / attempt</h3><p>1:1 continuous visual observation. Remove ligatures, sharps, and medications from the room immediately, and complete an environmental safety checklist. Screen with ASQ or C-SSRS. Risk stratification drives disposition — discharge vs voluntary vs involuntary hold. Continue in the <a href="#/tree/suicidal-patient" target="_top" class="ig-link">Suicidal Patient consult</a>.<a href="#cite-ref3" class="ig-ref">[3]</a></p><h3>4 · Altered mental status</h3><p><strong>Critical question: delirium or primary psychosis?</strong> Use history, vitals, exam, mentation, and the red flags below to decide medical workup intensity. Continue in <a href="#/tree/medical-clearance-psych" target="_top" class="ig-link">Psych Medical Stability</a>.<a href="#cite-ref4" class="ig-ref">[4]</a></p><ul><li>Acute onset (hours-days)</li><li>Fluctuating course</li><li>Inattention — cannot focus on interview</li><li>Visual hallucinations</li><li>Abnormal vital signs</li><li>Age &gt;45 with first psychiatric symptoms</li></ul><h3>5 · Bizarre behavior / psychosis</h3><p>Start with <a href="#/tree/medical-clearance-psych" target="_top" class="ig-link">Psych Medical Stability</a>, then continue to <a href="#/tree/acute-psychosis" target="_top" class="ig-link">Acute Psychosis / First Break</a>. Rule out organic causes FIRST when red flags are present: anti-NMDA receptor encephalitis, stimulant intoxication, medication toxicity, encephalitis/meningitis, metabolic derangement. <strong>New-onset psychosis in a patient older than 45 is a medical cause until proven otherwise.</strong> If agitated, use <a href="#/tree/acute-agitation" target="_top" class="ig-link">Acute Agitation</a> for chemical restraint options.<a href="#cite-ref4" class="ig-ref">[4]</a><a href="#cite-ref5" class="ig-ref">[5]</a></p><h3>6 · Anxiety / panic</h3><p>Before diagnosing panic, rule out pulmonary embolism (PERC, Wells), acute coronary syndrome (especially with risk factors), arrhythmia (check ECG), hyperthyroidism, pheochromocytoma, and stimulant intoxication. If true panic attack: reassurance and a calm environment, breathing exercises, a benzodiazepine if severe, and outpatient psychiatry/therapy referral.<a href="#cite-ref1" class="ig-ref">[1]</a></p><p><strong>Lorazepam</strong>: 0.5-1 mg PO/SL — For severe panic attack, after medical mimics (PE, ACS, arrhythmia, hyperthyroidism, pheochromocytoma, stimulant intoxication) are excluded. Not a linked drug-store indication in this tree — see source-conflict note.</p><h3>7 · Withdrawal symptoms</h3><p>Early treatment prevents withdrawal seizures (peak <strong>12-48h</strong>) and delirium tremens (peak <strong>48-96h</strong>, mortality <strong>5-15%</strong>). High-risk features: prior seizures/DTs, <strong>PAWSS ≥4</strong>, prolonged heavy use. Continue in the <a href="#/tree/alcohol-withdrawal" target="_top" class="ig-link">Alcohol Withdrawal consult</a>.<a href="#cite-ref6" class="ig-ref">[6]</a></p><p>Substance | Assessment / treatment</p><p>Alcohol / Benzodiazepines | CIWA-Ar, benzodiazepines, phenobarbital</p><p>Opioids | COWS score, buprenorphine initiation, clonidine</p><p>Stimulants | Supportive care, benzodiazepines for agitation</p><h3>8 · Unresponsive / mute / rigid (catatonia)</h3><p>Recognize catatonia early — it is treatable. <strong>Bush-Francis catatonia signs:</strong> immobility/stupor, mutism, staring/fixed gaze, posturing/waxy flexibility, negativism (resistance to movement). Continue in the <a href="#/tree/catatonia" target="_top" class="ig-link">Catatonia consult</a>.<a href="#cite-ref7" class="ig-ref">[7]</a></p><p><strong>Lorazepam</strong>: 2 mg IV challenge — Improvement within 10-15 min strongly supports the diagnosis. If response: continue lorazepam 2 mg q4-6h. If no response: ECT is the next step. Not a linked drug-store indication in this tree — see source-conflict note.</p><p>Antipsychotics given before the catatonia is recognized can trigger malignant catatonia or NMS.<a href="#cite-ref7" class="ig-ref">[7]</a></p><h3>9 · Medication reaction</h3><p>Differentiate these emergencies — treatment differs by diagnosis.<a href="#cite-ref8" class="ig-ref">[8]</a><a href="#cite-ref9" class="ig-ref">[9]</a></p><p>Feature | NMS | Serotonin Syndrome | Dystonia</p><p>Onset | Days | Hours | Minutes-hours</p><p>Rigidity | Lead-pipe | Hyperreflexia, clonus | Focal (torticollis, oculogyric)</p><p>Temp | &gt;40°C | Variable | Normal</p><p>Mental status | Altered | Agitated | Clear</p><p>Pupils | Normal | Dilated | Normal</p><p>Cause | Antipsychotics | SSRIs, MAOIs | Antipsychotics, antiemetics</p><ul><li>NMS: stop offending agent, dantrolene, bromocriptine, cooling</li><li>Serotonin syndrome: stop offending agent, cyproheptadine, benzodiazepines</li><li>Dystonia: continue in the Acute Dystonic Reaction consult — diphenhydramine or benztropine</li></ul><p><strong>Diphenhydramine</strong>: 50 mg IV/IM — Onset 5-15 min; repeat in 30 min if no resolution. Continue oral diphenhydramine 25-50 mg q6h × 48-72h to prevent recurrence.</p><p><strong>Benztropine</strong>: 1-2 mg IV/IM — Alternative to diphenhydramine if dystonia persists.</p><h3>10 · Not eating / purging</h3><p>Eating disorder emergency — focus on medical stability. Check immediately: electrolytes (K+, PO4, Mg2+ — refeeding risk), ECG (QTc prolongation, bradycardia), glucose, and vitals (bradycardia, orthostatic hypotension).<a href="#cite-ref10" class="ig-ref">[10]</a></p><p>MARSIPAN admission criterion | Threshold</p><p>Body mass / weight loss | BMI &lt;13 or rapid weight loss &gt;1 kg/week</p><p>Electrolytes | K+ &lt;3.0 or PO4 &lt;0.5</p><p>Hemodynamics | HR &lt;40 or BP &lt;90 systolic</p><p>ECG | QTc &gt;450 ms</p><p>Neurologic | Syncope</p><p>Metabolic | Hypoglycemia</p><p>Start feeding slowly; monitor PO4/K+/Mg2+ daily × 3 days.<a href="#cite-ref10" class="ig-ref">[10]</a></p><h3>11 · Routed to consult</h3><p>Continue with the linked specialty consult for detailed management. Return to Psych Triage if the clinical picture changes or a different pathway is needed.</p><h3>12 · One-glance triage map</h3><p>What is the primary presenting concern? — Select the most urgent/dominant feature — many presentations overlap. Safety first: secure the environment before assessment.</p><p>Agitation/aggression → de-escalate before chemical restraint — BETA protocol first-line; rule out organic causes (hypoglycemia, hypoxia, intoxication).</p><p>Suicidal ideation/attempt → 1:1 observation, remove means — Remove ligatures/sharps/meds; ASQ or C-SSRS; risk stratification drives disposition.</p><p>Altered mental status → delirium vs primary psychiatric — Acute onset, fluctuating course, inattention, visual hallucinations, abnormal vitals, age &gt;45 first psychiatric symptoms.</p><p>Bizarre behavior/psychosis → medical stability first — Rule out anti-NMDA encephalitis, stimulant intoxication, med toxicity, encephalitis/meningitis, metabolic derangement.</p><p>Anxiety/panic → rule out PE, ACS, arrhythmia first — PERC/Wells, ECG, hyperthyroidism, pheochromocytoma, stimulant intoxication before diagnosing panic.</p><p>Withdrawal symptoms → early benzodiazepines — Prevents seizures (peak 12-48h) and DTs (peak 48-96h, mortality 5-15%).</p><p>Unresponsive/mute/rigid → lorazepam challenge, avoid antipsychotics — 2 mg IV; response in 10-15 min supports diagnosis. Antipsychotics can trigger malignant catatonia/NMS.</p><p>Medication reaction → differentiate NMS vs serotonin syndrome vs dystonia — Onset, rigidity pattern, temperature, mental status, and pupils differ by diagnosis — treatment differs too.</p><p>Not eating/purging → electrolytes, ECG, MARSIPAN criteria — Refeeding risk — K+/PO4/Mg2+, QTc, HR/BP, BMI, syncope, hypoglycemia.</p><p>Continue in linked specialty consult — Return to Psych Triage if the clinical picture changes or a different pathway is needed.</p><p>Tap any box for detail. The full pathway lives in the <a href="#/tree/psych-triage" target="_top" class="ig-link">myMedKitt psych-triage consult</a>.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> ACEP Clinical Policy: Adult Psychiatric Emergencies. Annals of Emergency Medicine 2021.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> ACEP Clinical Policy: Severe Agitation in ED Patients. Annals of Emergency Medicine 2024.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Joint Commission National Patient Safety Goal NPSG 15.01.01: Suicide Prevention. 2024.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> AAEP Task Force on Medical Clearance of Adult Psychiatric Patients. Western Journal of Emergency Medicine 2017.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Dalmau J, et al. Anti-NMDA-receptor encephalitis: case series and analysis of the effects of antibodies. Lancet Neurol 2008;7:1091-8.</li><li id="cite-ref6"><span class="ig-ref">[6]</span> ASAM Clinical Practice Guideline on Alcohol Withdrawal Management. 2020.</li><li id="cite-ref7"><span class="ig-ref">[7]</span> Sienaert P, et al. A Clinical Review of the Treatment of Catatonia. Front Psychiatry 2014;5:181.</li><li id="cite-ref8"><span class="ig-ref">[8]</span> Berman BD. Neuroleptic malignant syndrome: a review for neurohospitalists. Neurohospitalist 2011;1:41-7.</li><li id="cite-ref9"><span class="ig-ref">[9]</span> Boyer EW, Shannon M. The serotonin syndrome. N Engl J Med 2005;352:1112-20.</li><li id="cite-ref10"><span class="ig-ref">[10]</span> MARSIPAN: Management of Really Sick Patients with Anorexia Nervosa. Royal College of Psychiatrists 2014.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-12 · evidence through ACEP 2024; ASAM 2020; MARSIPAN 2014; Joint Commission NPSG 2024 · next review 2027-07-12</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · psych-triage · v1.0 — initial spec generated from myMedKitt psych-triage consult (11-node gateway tree, all nodes mapped 1:1 to flow, zero folding required).</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"psych-triage","title":"Psych Triage: Route by Primary Presenting Concern","shape":"algorithm","intendedUse":"Adults presenting to the ED with an acute psychiatric symptom (agitation, suicidal ideation, altered mental status, psychosis, anxiety/panic, withdrawal, catatonia, medication reaction, or eating-disorder presentation). Gateway/triage consult — routes to the matching myMedKitt specialty consult for detailed management. Excludes pediatric psychiatric presentations and formal psychiatric admission criteria beyond MARSIPAN medical-stability thresholds.","scopeWarnings":["Safety first — secure the environment before beginning any psychiatric assessment.","Rule out organic causes in ALL psychiatric presentations, especially new psychiatric symptoms first appearing after age 45, fluctuating mentation, abnormal vital signs, or focal neurologic findings.","Agitation: verbal de-escalation (BETA protocol) before chemical restraint — chemical restraint is a last resort, not a first response.","Suicidal ideation/attempt: 1:1 continuous visual observation and remove ligatures, sharps, and medications from the room immediately.","Withdrawal: early benzodiazepines prevent withdrawal seizures (peak 12-48h) and delirium tremens (peak 48-96h, mortality 5-15%).","Catatonia: do NOT give antipsychotics initially — can trigger malignant catatonia or NMS. Lorazepam challenge is first-line.","Medication reaction: NMS, serotonin syndrome, and dystonia require different treatments — differentiate before treating.","Eating disorder: MARSIPAN criteria (BMI \u003c13, K+ \u003c3.0, PO4 \u003c0.5, HR \u003c40, BP \u003c90 systolic, QTc >450 ms, syncope, hypoglycemia) signal medical instability requiring admission."],"source":{"kind":"medkitt-consult","ref":"psych-triage"},"theme":{"preset":"medkitt"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"facts":[{"id":"f-dt-mortality","claim":"Delirium tremens mortality if untreated","value":"5-15%","unit":"%","provenance":"consult:pst-withdrawal/withdrawal-pathway","cite":["ref6"],"verified":"provenance"},{"id":"f-seizure-peak","claim":"Withdrawal seizure peak timing","value":"12-48h","provenance":"consult:pst-withdrawal/withdrawal-pathway","cite":["ref6"],"verified":"provenance"},{"id":"f-dt-peak","claim":"Delirium tremens peak timing","value":"48-96h","provenance":"consult:pst-withdrawal/withdrawal-pathway","cite":["ref6"],"verified":"provenance"},{"id":"f-pawss","claim":"PAWSS threshold marking high-risk severe alcohol withdrawal","value":"PAWSS ≥4","provenance":"consult:pst-withdrawal/withdrawal-pathway","cite":["ref6"],"verified":"provenance"},{"id":"f-catatonia-dose","claim":"Lorazepam challenge dose for catatonia","value":"2 mg IV","unit":"mg","provenance":"consult:pst-catatonia/lorazepam-challenge","cite":["ref7"],"verified":"provenance"},{"id":"f-catatonia-response","claim":"Time to improvement after lorazepam challenge that supports the catatonia diagnosis","value":"10-15 min","provenance":"consult:pst-catatonia/lorazepam-challenge","cite":["ref7"],"verified":"provenance"},{"id":"f-catatonia-maintenance","claim":"Lorazepam maintenance dosing once the challenge is positive","value":"2 mg q4-6h","provenance":"consult:pst-catatonia/lorazepam-challenge","cite":["ref7"],"verified":"provenance"},{"id":"f-dystonia-dose","claim":"Diphenhydramine dose for acute dystonic reaction","value":"50 mg IV/IM","provenance":"drug-store:diphenhydramine/Acute dystonia (antipsychotic-induced)","cite":["ref8","ref9"],"verified":"provenance"},{"id":"f-benztropine-dose","claim":"Benztropine alternative dose for acute dystonic reaction","value":"1-2 mg IV/IM","provenance":"drug-store:benztropine/Acute dystonia","cite":["ref8","ref9"],"verified":"provenance"},{"id":"f-panic-dose","claim":"Lorazepam dose for severe panic attack","value":"0.5-1 mg PO/SL","provenance":"consult:pst-anxiety/lorazepam-panic","cite":["ref1"],"verified":"provenance"},{"id":"f-nms-temp","claim":"Temperature typical of neuroleptic malignant syndrome","value":">40°C","provenance":"consult:pst-med-reaction/nms-ss-dystonia-table","cite":["ref8"],"verified":"provenance"},{"id":"f-marsipan-bmi","claim":"MARSIPAN BMI admission threshold","value":"BMI \u003c13","provenance":"consult:pst-eating/marsipan-criteria","cite":["ref10"],"verified":"provenance"},{"id":"f-marsipan-k","claim":"MARSIPAN potassium admission threshold","value":"K+ \u003c3.0","provenance":"consult:pst-eating/marsipan-criteria","cite":["ref10"],"verified":"provenance"},{"id":"f-marsipan-qtc","claim":"MARSIPAN QTc admission threshold","value":"QTc >450 ms","provenance":"consult:pst-eating/marsipan-criteria","cite":["ref10"],"verified":"provenance"},{"id":"f-psychosis-age","claim":"Age above which new-onset psychosis is medical until proven otherwise","value":">45","provenance":"consult:pst-psychotic/psychosis-pathway","cite":["ref4"],"verified":"provenance"}],"sections":[{"id":"sec-intro","title":"1 · Route by primary presenting concern","blocks":[{"id":"b-intro","type":"text","whenNode":"n-start","md":"**Safety first** — secure the environment before beginning any assessment. Select the most urgent/dominant feature below; many psychiatric presentations overlap, and this routes to the most appropriate starting point.{{ref1}}","cite":["ref1"]},{"id":"b-routing-table","type":"table","columns":["Primary concern","Destination pathway"],"heroCol":0,"rows":[["Agitation / Aggression — combative, threatening, pacing, unable to cooperate","Acute Agitation consult — BETA protocol, chemical restraint"],["Suicidal Ideation / Attempt — expressed SI, self-harm, or post-attempt","Suicidal Patient consult — C-SSRS, risk stratification"],["Altered Mental Status — confused, disoriented, fluctuating consciousness","Psych Medical Stability — organic workup"],["Bizarre Behavior / Psychosis — hallucinations, delusions, disorganized thinking","Psych Medical Stability, then Acute Psychosis / First Break"],["Anxiety / Panic — acute anxiety, panic attack, hyperventilation","Rule out medical mimics, then panic management"],["Withdrawal Symptoms — tremor, diaphoresis, tachycardia, h/o alcohol/benzo/opioid use","Alcohol Withdrawal consult — CIWA-Ar, benzodiazepines"],["Unresponsive / Mute / Rigid — catatonic features, waxy flexibility","Catatonia consult — lorazepam challenge"],["Medication Reaction — suspected NMS, serotonin syndrome, dystonia","Differentiate and treat per diagnosis"],["Not Eating / Purging — eating disorder presentation, weight loss, electrolyte concerns","Medical stability screen, MARSIPAN criteria"]],"rowTones":["danger","danger","caution","normal","normal","caution","caution","danger","normal"],"cite":["ref1"]}]},{"id":"sec-agitated","title":"2 · Agitation / aggression","blocks":[{"id":"b-agitated","type":"callout","tone":"danger","title":"Verbal de-escalation before chemical restraint","whenNode":"n-agitated","md":"Verbal de-escalation (BETA protocol) is first-line; chemical restraint is reserved for de-escalation failure. Rule out organic causes — hypoglycemia, hypoxia, intoxication — before treating as primary psychiatric agitation. Key decision: is this delirium/medical or primary psychiatric? Continue in the [Acute Agitation consult](#/tree/acute-agitation) for the BETA protocol and chemical restraint options.{{ref2}}","cite":["ref2"]}]},{"id":"sec-suicidal","title":"3 · Suicidal ideation / attempt","blocks":[{"id":"b-suicidal","type":"callout","tone":"danger","title":"1:1 observation, remove means","whenNode":"n-suicidal","md":"1:1 continuous visual observation. Remove ligatures, sharps, and medications from the room immediately, and complete an environmental safety checklist. Screen with ASQ or C-SSRS. Risk stratification drives disposition — discharge vs voluntary vs involuntary hold. Continue in the [Suicidal Patient consult](#/tree/suicidal-patient).{{ref3}}","cite":["ref3"]}]},{"id":"sec-altered","title":"4 · Altered mental status","blocks":[{"id":"b-altered-text","type":"text","whenNode":"n-altered","md":"**Critical question: delirium or primary psychosis?** Use history, vitals, exam, mentation, and the red flags below to decide medical workup intensity. Continue in [Psych Medical Stability](#/tree/medical-clearance-psych).{{ref4}}","cite":["ref4"]},{"id":"b-altered-flags","type":"steps","whenNode":"n-altered","items":["Acute onset (hours-days)","Fluctuating course","Inattention — cannot focus on interview","Visual hallucinations","Abnormal vital signs","Age >45 with first psychiatric symptoms"],"cite":["ref4"]}]},{"id":"sec-psychotic","title":"5 · Bizarre behavior / psychosis","blocks":[{"id":"b-psychotic","type":"callout","tone":"danger","title":"Rule out organic causes first","whenNode":"n-psychotic","md":"Start with [Psych Medical Stability](#/tree/medical-clearance-psych), then continue to [Acute Psychosis / First Break](#/tree/acute-psychosis). Rule out organic causes FIRST when red flags are present: anti-NMDA receptor encephalitis, stimulant intoxication, medication toxicity, encephalitis/meningitis, metabolic derangement. **New-onset psychosis in a patient older than 45 is a medical cause until proven otherwise.** If agitated, use [Acute Agitation](#/tree/acute-agitation) for chemical restraint options.{{ref4}}{{ref5}}","cite":["ref4","ref5"]}]},{"id":"sec-anxiety","title":"6 · Anxiety / panic","blocks":[{"id":"b-anxiety-text","type":"callout","tone":"caution","title":"Panic attack vs medical emergency","whenNode":"n-anxiety","md":"Before diagnosing panic, rule out pulmonary embolism (PERC, Wells), acute coronary syndrome (especially with risk factors), arrhythmia (check ECG), hyperthyroidism, pheochromocytoma, and stimulant intoxication. If true panic attack: reassurance and a calm environment, breathing exercises, a benzodiazepine if severe, and outpatient psychiatry/therapy referral.{{ref1}}","cite":["ref1"]},{"id":"b-anxiety-dose","type":"dose","whenNode":"n-anxiety","drug":"Lorazepam","dose":"0.5-1 mg PO/SL","note":"For severe panic attack, after medical mimics (PE, ACS, arrhythmia, hyperthyroidism, pheochromocytoma, stimulant intoxication) are excluded. Not a linked drug-store indication in this tree — see source-conflict note.","cite":["ref1"]}]},{"id":"sec-withdrawal","title":"7 · Withdrawal symptoms","blocks":[{"id":"b-withdrawal","type":"callout","tone":"danger","title":"Early benzodiazepines prevent seizures and DTs","whenNode":"n-withdrawal","md":"Early treatment prevents withdrawal seizures (peak **12-48h**) and delirium tremens (peak **48-96h**, mortality **5-15%**). High-risk features: prior seizures/DTs, **PAWSS ≥4**, prolonged heavy use. Continue in the [Alcohol Withdrawal consult](#/tree/alcohol-withdrawal).{{ref6}}","cite":["ref6"]},{"id":"b-withdrawal-table","type":"table","whenNode":"n-withdrawal","columns":["Substance","Assessment / treatment"],"heroCol":0,"rows":[["Alcohol / Benzodiazepines","CIWA-Ar, benzodiazepines, phenobarbital"],["Opioids","COWS score, buprenorphine initiation, clonidine"],["Stimulants","Supportive care, benzodiazepines for agitation"]],"cite":["ref6"]}]},{"id":"sec-catatonia","title":"8 · Unresponsive / mute / rigid (catatonia)","blocks":[{"id":"b-catatonia-text","type":"text","whenNode":"n-catatonia","md":"Recognize catatonia early — it is treatable. **Bush-Francis catatonia signs:** immobility/stupor, mutism, staring/fixed gaze, posturing/waxy flexibility, negativism (resistance to movement). Continue in the [Catatonia consult](#/tree/catatonia).{{ref7}}","cite":["ref7"]},{"id":"b-catatonia-dose","type":"dose","whenNode":"n-catatonia","drug":"Lorazepam","dose":"2 mg IV challenge","note":"Improvement within 10-15 min strongly supports the diagnosis. If response: continue lorazepam 2 mg q4-6h. If no response: ECT is the next step. Not a linked drug-store indication in this tree — see source-conflict note.","cite":["ref7"]},{"id":"b-catatonia-warn","type":"callout","tone":"danger","title":"Avoid antipsychotics initially","whenNode":"n-catatonia","md":"Antipsychotics given before the catatonia is recognized can trigger malignant catatonia or NMS.{{ref7}}","cite":["ref7"]}]},{"id":"sec-medreaction","title":"9 · Medication reaction","blocks":[{"id":"b-medreaction-text","type":"text","whenNode":"n-medreaction","md":"Differentiate these emergencies — treatment differs by diagnosis.{{ref8}}{{ref9}}","cite":["ref8","ref9"]},{"id":"b-medreaction-table","type":"table","whenNode":"n-medreaction","columns":["Feature","NMS","Serotonin Syndrome","Dystonia"],"heroCol":0,"rows":[["Onset","Days","Hours","Minutes-hours"],["Rigidity","Lead-pipe","Hyperreflexia, clonus","Focal (torticollis, oculogyric)"],["Temp",">40°C","Variable","Normal"],["Mental status","Altered","Agitated","Clear"],["Pupils","Normal","Dilated","Normal"],["Cause","Antipsychotics","SSRIs, MAOIs","Antipsychotics, antiemetics"]],"rowTones":["danger","danger","danger","danger","danger","danger"],"cite":["ref8","ref9"]},{"id":"b-medreaction-treat","type":"steps","whenNode":"n-medreaction","items":["NMS: stop offending agent, dantrolene, bromocriptine, cooling","Serotonin syndrome: stop offending agent, cyproheptadine, benzodiazepines","Dystonia: continue in the Acute Dystonic Reaction consult — diphenhydramine or benztropine"],"cite":["ref8","ref9"]},{"id":"b-dystonia-dose","type":"dose","whenNode":"n-medreaction","drug":"Diphenhydramine","drugId":"diphenhydramine","dose":"50 mg IV/IM","note":"Onset 5-15 min; repeat in 30 min if no resolution. Continue oral diphenhydramine 25-50 mg q6h × 48-72h to prevent recurrence.","cite":["ref8","ref9"]},{"id":"b-benztropine-dose","type":"dose","whenNode":"n-medreaction","drug":"Benztropine","drugId":"benztropine","dose":"1-2 mg IV/IM","note":"Alternative to diphenhydramine if dystonia persists.","cite":["ref8","ref9"]}]},{"id":"sec-eating","title":"10 · Not eating / purging","blocks":[{"id":"b-eating-text","type":"text","whenNode":"n-eating","md":"Eating disorder emergency — focus on medical stability. Check immediately: electrolytes (K+, PO4, Mg2+ — refeeding risk), ECG (QTc prolongation, bradycardia), glucose, and vitals (bradycardia, orthostatic hypotension).{{ref10}}","cite":["ref10"]},{"id":"b-marsipan-table","type":"table","whenNode":"n-eating","columns":["MARSIPAN admission criterion","Threshold"],"heroCol":0,"rows":[["Body mass / weight loss","BMI \u003c13 or rapid weight loss >1 kg/week"],["Electrolytes","K+ \u003c3.0 or PO4 \u003c0.5"],["Hemodynamics","HR \u003c40 or BP \u003c90 systolic"],["ECG","QTc >450 ms"],["Neurologic","Syncope"],["Metabolic","Hypoglycemia"]],"rowTones":["danger","danger","danger","danger","danger","danger"],"cite":["ref10"]},{"id":"b-refeeding","type":"callout","tone":"caution","title":"Refeeding syndrome risk","whenNode":"n-eating","md":"Start feeding slowly; monitor PO4/K+/Mg2+ daily × 3 days.{{ref10}}","cite":["ref10"]}]},{"id":"sec-end","title":"11 · Routed to consult","blocks":[{"id":"b-end","type":"text","whenNode":"n-end","md":"Continue with the linked specialty consult for detailed management. Return to Psych Triage if the clinical picture changes or a different pathway is needed."}]},{"id":"sec-flow","title":"12 · One-glance triage map","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"n-start","shape":"decision","text":"What is the primary presenting concern?","col":0,"rank":0,"tone":"neutral","detail":"Select the most urgent/dominant feature — many presentations overlap. Safety first: secure the environment before assessment."},{"id":"n-agitated","shape":"action","text":"Agitation/aggression → de-escalate before chemical restraint","col":-4,"rank":1,"tone":"danger","detail":"BETA protocol first-line; rule out organic causes (hypoglycemia, hypoxia, intoxication)."},{"id":"n-suicidal","shape":"action","text":"Suicidal ideation/attempt → 1:1 observation, remove means","col":-3,"rank":1,"tone":"danger","detail":"Remove ligatures/sharps/meds; ASQ or C-SSRS; risk stratification drives disposition."},{"id":"n-altered","shape":"action","text":"Altered mental status → delirium vs primary psychiatric","col":-2,"rank":1,"tone":"caution","detail":"Acute onset, fluctuating course, inattention, visual hallucinations, abnormal vitals, age >45 first psychiatric symptoms."},{"id":"n-psychotic","shape":"action","text":"Bizarre behavior/psychosis → medical stability first","col":-1,"rank":1,"tone":"normal","detail":"Rule out anti-NMDA encephalitis, stimulant intoxication, med toxicity, encephalitis/meningitis, metabolic derangement."},{"id":"n-anxiety","shape":"action","text":"Anxiety/panic → rule out PE, ACS, arrhythmia first","col":0,"rank":1,"tone":"normal","detail":"PERC/Wells, ECG, hyperthyroidism, pheochromocytoma, stimulant intoxication before diagnosing panic."},{"id":"n-withdrawal","shape":"action","text":"Withdrawal symptoms → early benzodiazepines","col":1,"rank":1,"tone":"caution","detail":"Prevents seizures (peak 12-48h) and DTs (peak 48-96h, mortality 5-15%)."},{"id":"n-catatonia","shape":"action","text":"Unresponsive/mute/rigid → lorazepam challenge, avoid antipsychotics","col":2,"rank":1,"tone":"caution","detail":"2 mg IV; response in 10-15 min supports diagnosis. Antipsychotics can trigger malignant catatonia/NMS."},{"id":"n-medreaction","shape":"action","text":"Medication reaction → differentiate NMS vs serotonin syndrome vs dystonia","col":3,"rank":1,"tone":"danger","detail":"Onset, rigidity pattern, temperature, mental status, and pupils differ by diagnosis — treatment differs too."},{"id":"n-eating","shape":"action","text":"Not eating/purging → electrolytes, ECG, MARSIPAN criteria","col":4,"rank":1,"tone":"normal","detail":"Refeeding risk — K+/PO4/Mg2+, QTc, HR/BP, BMI, syncope, hypoglycemia."},{"id":"n-end","shape":"state","text":"Continue in linked specialty consult","col":0,"rank":2,"tone":"normal","detail":"Return to Psych Triage if the clinical picture changes or a different pathway is needed."}],"edges":[{"from":"n-start","to":"n-agitated","label":"agitation"},{"from":"n-start","to":"n-suicidal","label":"suicidal"},{"from":"n-start","to":"n-altered","label":"altered MS"},{"from":"n-start","to":"n-psychotic","label":"psychosis"},{"from":"n-start","to":"n-anxiety","label":"anxiety/panic"},{"from":"n-start","to":"n-withdrawal","label":"withdrawal"},{"from":"n-start","to":"n-catatonia","label":"catatonia"},{"from":"n-start","to":"n-medreaction","label":"med reaction"},{"from":"n-start","to":"n-eating","label":"eating disorder"},{"from":"n-agitated","to":"n-end"},{"from":"n-suicidal","to":"n-end"},{"from":"n-altered","to":"n-end"},{"from":"n-psychotic","to":"n-end"},{"from":"n-anxiety","to":"n-end"},{"from":"n-withdrawal","to":"n-end"},{"from":"n-catatonia","to":"n-end"},{"from":"n-medreaction","to":"n-end"},{"from":"n-eating","to":"n-end"}]},{"id":"b-flowhint","type":"text","md":"Tap any box for detail. The full pathway lives in the [myMedKitt psych-triage consult](#/tree/psych-triage)."}]}],"citations":[{"id":"ref1","label":"ACEP Clinical Policy: Adult Psychiatric Emergencies. Annals of Emergency Medicine 2021."},{"id":"ref2","label":"ACEP Clinical Policy: Severe Agitation in ED Patients. Annals of Emergency Medicine 2024."},{"id":"ref3","label":"Joint Commission National Patient Safety Goal NPSG 15.01.01: Suicide Prevention. 2024."},{"id":"ref4","label":"AAEP Task Force on Medical Clearance of Adult Psychiatric Patients. Western Journal of Emergency Medicine 2017."},{"id":"ref5","label":"Dalmau J, et al. Anti-NMDA-receptor encephalitis: case series and analysis of the effects of antibodies. Lancet Neurol 2008;7:1091-8."},{"id":"ref6","label":"ASAM Clinical Practice Guideline on Alcohol Withdrawal Management. 2020."},{"id":"ref7","label":"Sienaert P, et al. A Clinical Review of the Treatment of Catatonia. Front Psychiatry 2014;5:181."},{"id":"ref8","label":"Berman BD. Neuroleptic malignant syndrome: a review for neurohospitalists. Neurohospitalist 2011;1:41-7."},{"id":"ref9","label":"Boyer EW, Shannon M. The serotonin syndrome. N Engl J Med 2005;352:1112-20."},{"id":"ref10","label":"MARSIPAN: Management of Really Sick Patients with Anorexia Nervosa. Royal College of Psychiatrists 2014."}],"meta":{"version":"1.0","lastReviewed":"2026-07-12","evidenceThrough":"ACEP 2024; ASAM 2020; MARSIPAN 2014; Joint Commission NPSG 2024","nextReview":"2027-07-12","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 — initial spec generated from myMedKitt psych-triage consult (11-node gateway tree, all nodes mapped 1:1 to flow, zero folding required)."},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

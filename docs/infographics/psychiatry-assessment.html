@@ -1,0 +1,514 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mental Status Exam — Structured Assessment &amp; Risk Stratification — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Mental Status Exam — Structured Assessment &amp; Risk Stratification</h1>
+  <p class="ig-use">Adults presenting to the ED requiring a documented mental status exam. Structured walkthrough for MSE dictation and suicide/homicide risk stratification. Not intended as a copy/paste template — clinician must verify findings against the actual patient exam before documenting. Excludes formal capacity assessment (separate consult) and pediatric-specific MSE norms.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Command auditory hallucinations to harm self/others = immediate safety concern — distinguish from non-command or no-harm-content auditory hallucinations, which do not carry the same acuity.</div><div class="ig-scope-item">⚠ Document suicidal ideation using standardized tiers: none/denies, passive, active without plan, active with plan, or active with plan and intent — vague documentation (e.g. &quot;denies SI&quot;) without ruling out passive ideation is inadequate.</div><div class="ig-scope-item">⚠ Active suicidal ideation with plan and intent = HIGH risk requiring admission or a documented safety plan.</div><div class="ig-scope-item">⚠ Assess insight and judgment explicitly — poor insight (anosognosia) may require involuntary commitment.</div><div class="ig-scope-item">⚠ Quote the patient's exact words for mood (subjective) vs your own observation for affect (objective) — these are not interchangeable and must not be merged in documentation.</div><div class="ig-scope-item">⚠ HIGH suicide risk also includes: intent to act, access to lethal means, a recent suicide attempt, hopelessness, impulsivity, and intoxication — any one of these can move a patient into the high-risk tier even without a stated plan.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl ig-select-ctl"><label for="ig-select-risktier">Suicide risk tier</label><select id="ig-select-risktier" data-input="risktier" data-select-input="1" aria-label="Suicide risk tier"><option value="0" selected>LOW risk</option><option value="1">MODERATE risk</option><option value="2">HIGH risk</option></select></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="n-start" hidden><button type="button" data-route-select="n-start"><span class="ig-route-rank">1</span><span>Begin MSE — 5 sequential domains</span></button></li><li data-route-node="n-appearance" hidden><button type="button" data-route-select="n-appearance"><span class="ig-route-rank">2</span><span>Appearance &amp; Behavior</span></button></li><li data-route-node="n-speech" hidden><button type="button" data-route-select="n-speech"><span class="ig-route-rank">3</span><span>Speech, Mood &amp; Affect</span></button></li><li data-route-node="n-thought" hidden><button type="button" data-route-select="n-thought"><span class="ig-route-rank">4</span><span>Thought Process &amp; Content — screen SI/HI</span></button></li><li data-route-node="n-perceptions" hidden><button type="button" data-route-select="n-perceptions"><span class="ig-route-rank">5</span><span>Perceptions &amp; Cognition — screen command AH</span></button></li><li data-route-node="n-insight" hidden><button type="button" data-route-select="n-insight"><span class="ig-route-rank">6</span><span>Insight, judgment &amp; suicide risk stratification</span></button></li><li data-route-node="n-risk-output" hidden><button type="button" data-route-select="n-risk-output"><span class="ig-route-rank">7</span><span>Risk documented — select tier above to see matching criteria</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 258 804" width="258" height="804" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M129,98 L129,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,206 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,314 L129,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,422 L129,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,530 L129,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,638 L129,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="n-start" tabindex="0" role="button" aria-label="Begin MSE — 5 sequential domains"><rect x="41" y="32" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Begin MSE — 5 sequential domains</div></foreignObject></g><g class="ig-node" data-node="n-appearance" tabindex="0" role="button" aria-label="Appearance &amp; Behavior"><rect x="41" y="140" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Appearance &amp; Behavior</div></foreignObject></g><g class="ig-node" data-node="n-speech" tabindex="0" role="button" aria-label="Speech, Mood &amp; Affect"><rect x="41" y="248" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Speech, Mood &amp; Affect</div></foreignObject></g><g class="ig-node" data-node="n-thought" tabindex="0" role="button" aria-label="Thought Process &amp; Content — screen SI/HI"><rect x="41" y="356" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Thought Process &amp; Content — screen SI/HI</div></foreignObject></g><g class="ig-node" data-node="n-perceptions" tabindex="0" role="button" aria-label="Perceptions &amp; Cognition — screen command AH"><rect x="41" y="464" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Perceptions &amp; Cognition — screen command AH</div></foreignObject></g><g class="ig-node" data-node="n-insight" tabindex="0" role="button" aria-label="Insight, judgment &amp; suicide risk stratification"><rect x="41" y="572" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Insight, judgment &amp; suicide risk stratification</div></foreignObject></g><g class="ig-node" data-node="n-risk-output" tabindex="0" role="button" aria-label="Risk documented — select tier above to see matching criteria"><rect x="41" y="680" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Risk documented — select tier above to see matching criteria</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="n-start" hidden><strong>Begin MSE — 5 sequential domains</strong><span>Reference Mode (read-only descriptors) or Build Dictation (interactive checklist → EMR summary) both walk the same 5 domains in the same order.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-appearance" hidden><strong>Appearance &amp; Behavior</strong><span>Grooming, hygiene, dress, age appearance, psychomotor activity, eye contact, cooperation.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-appearance">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-speech" hidden><strong>Speech, Mood &amp; Affect</strong><span>Speech rate/rhythm/volume/tone. Mood = patient's own words (subjective). Affect = your observation (objective).</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-speech">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-thought" hidden><strong>Thought Process &amp; Content — screen SI/HI</strong><span>Process type (linear→word salad), SI/HI classification tiers, delusion type, obsessions/compulsions.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-thought">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-perceptions" hidden><strong>Perceptions &amp; Cognition — screen command AH</strong><span>Hallucination type including command-to-harm-self/others split, illusions, orientation, attention, memory.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-perceptions">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-insight" hidden><strong>Insight, judgment &amp; suicide risk stratification</strong><span>Insight and judgment tiers, then document suicide risk tier (low/moderate/high) per the criteria below — the source consult does not branch here; both Reference and Build paths end at this same step regardless of which risk tier is selected.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-insight">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-risk-output" hidden><strong>Risk documented — select tier above to see matching criteria</strong><span>Use the Suicide risk tier selector above to view the matching LOW/MODERATE/HIGH criteria callout. This is descriptive risk-stratification text, not a graph-level branch — the underlying consult has a single terminal step here.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-risk-output">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section"><h2 class="ig-h2">1 · Purpose &amp; structure</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">Structured walkthrough for MSE documentation. Guides dictation through five sequential domains with standardized descriptors, ending in insight/judgment assessment and suicide risk stratification. Use as a reference for standardized terminology — not intended for copy/paste documentation; verify all findings against the actual patient exam.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p></div><div class="ig-cond ig-reference"><ol class="ig-block ig-steps"><li>Appearance &amp; Behavior</li><li>Speech, Mood &amp; Affect</li><li>Thought Process &amp; Content</li><li>Perceptions &amp; Cognition</li><li>Insight, Judgment &amp; Suicide Risk Stratification</li></ol></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">2 · Appearance &amp; Behavior</h2><div class="ig-cond ig-stepbound" data-whennode="n-appearance"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Category</th><th>Descriptors</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Grooming</td><td>Well-groomed, disheveled, unkempt</td></tr><tr class="ig-row"><td class="hero">Hygiene</td><td>Good, fair, poor</td></tr><tr class="ig-row"><td class="hero">Dress</td><td>Appropriate to weather/situation, inappropriate, bizarre</td></tr><tr class="ig-row"><td class="hero">Age appearance</td><td>Appears stated age, appears older, appears younger</td></tr><tr class="ig-row"><td class="hero">Psychomotor activity</td><td>Normal, agitated (increased motor activity, restlessness), retarded (slowed movements, decreased activity), catatonic (minimal response to environment)</td></tr><tr class="ig-row"><td class="hero">Eye contact</td><td>Good, poor, avoidant (actively looks away), intense/staring (fixed, unwavering)</td></tr><tr class="ig-row"><td class="hero">Cooperation</td><td>Cooperative, guarded (cautious, reluctant to share), hostile, uncooperative</td></tr></tbody></table></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">3 · Speech, Mood &amp; Affect</h2><div class="ig-cond ig-stepbound" data-whennode="n-speech"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Mood is subjective, affect is objective</div><div><strong>Quote patient's exact words for mood (subjective) vs your observation for affect (objective).</strong> These are documented separately and must not be merged.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-speech"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Category</th><th>Descriptors</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Speech rate</td><td>Normal, rapid, slow, pressured (rapid, difficult to interrupt)</td></tr><tr class="ig-row"><td class="hero">Speech rhythm</td><td>Normal, dysarthric (slurred, unclear articulation), stuttering</td></tr><tr class="ig-row"><td class="hero">Speech volume</td><td>Normal, loud, soft, mute</td></tr><tr class="ig-row"><td class="hero">Speech tone</td><td>Normal, monotone, anxious</td></tr><tr class="ig-row"><td class="hero">Mood (patient's own words)</td><td>&quot;Depressed&quot;, &quot;anxious&quot;, &quot;fine&quot;, &quot;I want to die&quot;, &quot;scared&quot;, &quot;angry&quot;, &quot;empty&quot;</td></tr><tr class="ig-row"><td class="hero">Affect range</td><td>Full (normal range), restricted (limited range), blunted (significantly diminished), flat (absent)</td></tr><tr class="ig-row"><td class="hero">Affect congruence</td><td>Congruent with stated mood, incongruent with stated mood</td></tr><tr class="ig-row"><td class="hero">Affect quality</td><td>Euthymic, dysphoric, euphoric, anxious, irritable, labile (rapidly shifting)</td></tr></tbody></table></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">4 · Thought Process &amp; Content</h2><div class="ig-cond ig-stepbound" data-whennode="n-thought"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Thought process type</th><th>Description</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Linear/goal-directed</td><td>Logical, coherent progression toward a point</td></tr><tr class="ig-row"><td class="hero">Circumstantial</td><td>Eventually reaches the point but with excessive, unnecessary detail</td></tr><tr class="ig-row"><td class="hero">Tangential</td><td>Never reaches the point, deviates to unrelated topics</td></tr><tr class="ig-row"><td class="hero">Loose associations</td><td>Ideas shift between unrelated topics without logical connection</td></tr><tr class="ig-row"><td class="hero">Flight of ideas</td><td>Rapid shifting between topics with tenuous connections (seen in mania)</td></tr><tr class="ig-row"><td class="hero">Thought blocking</td><td>Abrupt interruption of thought mid-sentence</td></tr><tr class="ig-row"><td class="hero">Perseveration</td><td>Repetitive focus on a single topic despite attempts to change subject</td></tr><tr class="ig-row"><td class="hero">Word salad</td><td>Incoherent, random words without meaningful connections</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-thought"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Suicidal ideation tier</th><th>Definition</th></tr></thead><tbody><tr class="ig-row t-normal"><td class="hero">None / denies</td><td>No suicidal ideation reported</td></tr><tr class="ig-row t-caution"><td class="hero">Passive</td><td>&quot;I wish I was dead,&quot; &quot;I wish I wouldn't wake up&quot; — no plan or intent</td></tr><tr class="ig-row t-caution"><td class="hero">Active without plan</td><td>&quot;I want to kill myself&quot; but no specific plan</td></tr><tr class="ig-row t-danger"><td class="hero">Active with plan</td><td>Has specific method in mind</td></tr><tr class="ig-row t-danger"><td class="hero">Active with plan and intent</td><td>Plan plus intention to act</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-thought"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Homicidal ideation tier</th><th>Definition</th></tr></thead><tbody><tr class="ig-row t-normal"><td class="hero">None / denies</td><td>No homicidal ideation reported</td></tr><tr class="ig-row t-caution"><td class="hero">Passive thoughts</td><td>Fleeting, no intent</td></tr><tr class="ig-row t-caution"><td class="hero">Active without plan</td><td>No specific plan</td></tr><tr class="ig-row t-danger"><td class="hero">Active with plan</td><td>Specific method in mind</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-thought"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Delusion type</th><th>Description</th></tr></thead><tbody><tr class="ig-row"><td class="hero">None</td><td>No delusional content</td></tr><tr class="ig-row"><td class="hero">Paranoid</td><td>Belief of persecution, conspiracy</td></tr><tr class="ig-row"><td class="hero">Grandiose</td><td>Inflated self-importance, special powers</td></tr><tr class="ig-row"><td class="hero">Somatic</td><td>False beliefs about body/health</td></tr><tr class="ig-row"><td class="hero">Religious</td><td>Inappropriate religious content</td></tr><tr class="ig-row"><td class="hero">Erotomanic</td><td>Belief someone is in love with them</td></tr><tr class="ig-row"><td class="hero">Ideas of reference</td><td>Belief that random events have personal significance</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-thought"><p class="ig-block ig-text"><strong>Obsessions/compulsions:</strong> present or absent.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p></div><div class="ig-cond ig-stepbound" data-whennode="n-thought"><p class="ig-block ig-text"><strong>SI documentation tiers, in order of severity:</strong> passive, active without plan, active with plan, active with plan and intent.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a></p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">5 · Perceptions &amp; Cognition</h2><div class="ig-cond ig-stepbound" data-whennode="n-perceptions"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Command AH to harm self/others = immediate safety concern</div><div><strong>Command auditory hallucinations to harm self/others = immediate safety concern.</strong> Distinguish from non-command auditory hallucinations and command auditory hallucinations without harm content, which do not carry the same acuity.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-perceptions"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Perception finding</th><th>Description</th></tr></thead><tbody><tr class="ig-row t-normal"><td class="hero">Denies hallucinations</td><td>No perceptual disturbance reported</td></tr><tr class="ig-row t-normal"><td class="hero">Auditory — non-command</td><td>Voices that do not direct behavior</td></tr><tr class="ig-row t-caution"><td class="hero">Auditory — command, no harm content</td><td>Voices directing action, no self/other-harm content</td></tr><tr class="ig-row t-danger"><td class="hero">Auditory — command to harm SELF</td><td>Immediate safety concern</td></tr><tr class="ig-row t-danger"><td class="hero">Auditory — command to harm OTHERS</td><td>Immediate safety concern</td></tr><tr class="ig-row t-caution"><td class="hero">Visual</td><td>Visual hallucinations</td></tr><tr class="ig-row t-caution"><td class="hero">Tactile</td><td>Tactile hallucinations</td></tr><tr class="ig-row t-caution"><td class="hero">Olfactory</td><td>Olfactory hallucinations</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-perceptions"><p class="ig-block ig-text"><strong>Illusions:</strong> present (misperception of an actual stimulus) or absent.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p></div><div class="ig-cond ig-stepbound" data-whennode="n-perceptions"><p class="ig-block ig-text">Build Dictation checklist splits command auditory hallucinations by harm target: command auditory hallucinations to harm self, command auditory hallucinations to harm others.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p></div><div class="ig-cond ig-stepbound" data-whennode="n-perceptions"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Cognitive domain</th><th>Descriptors</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Orientation</td><td>Oriented x4 (person, place, time, situation), Oriented x3 (person, place, time), Oriented x2 (person, place), Oriented x1 (person only), Oriented x0 (disoriented to all)</td></tr><tr class="ig-row"><td class="hero">Attention</td><td>Intact or impaired. Testing: serial 7s (subtract 7 from 100 sequentially), spell WORLD backward, days of week backward, months of year backward</td></tr><tr class="ig-row"><td class="hero">Memory</td><td>Intact or impaired. Types: immediate (repeat 3 words), recent/short-term (recall 3 words after 5 minutes), remote/long-term (past events, personal history)</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-perceptions"><p class="ig-block ig-text"><strong>Orientation grading, most to least intact:</strong> Oriented x4, Oriented x3, Oriented x2, Oriented x1, Oriented x0.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">6 · Insight, Judgment &amp; Suicide Risk Stratification</h2><div class="ig-cond ig-stepbound" data-whennode="n-insight"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th class="hero">Domain</th><th>Tiers</th></tr></thead><tbody><tr class="ig-row"><td class="hero">Insight</td><td>Good (understands illness and need for treatment), Fair (partial awareness or inconsistent acknowledgment), Poor/anosognosia (no insight, denies any problem)</td></tr><tr class="ig-row"><td class="hero">Judgment</td><td>Good (appropriate decisions, understands consequences), Fair (some impairment), Poor (significantly impaired, unable to make appropriate decisions)</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-insight"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Poor insight and disposition</div><div>Assess insight and judgment explicitly — <strong>poor insight may require involuntary commitment.</strong><a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></div></div></div><div class="ig-cond ig-reference" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;risktier&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">LOW suicide risk</div><div><strong>No suicidal ideation, no plan or intent, no history of attempts, protective factors present</strong> (family support, reasons for living, future orientation).<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></div></div></div><div class="ig-cond ig-reference" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;risktier&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">MODERATE suicide risk</div><div><strong>Passive suicidal ideation, history of prior attempts, or limited protective factors</strong> — current stressors without an active plan.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></div></div></div><div class="ig-cond ig-reference" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;risktier&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">HIGH suicide risk</div><div><strong>Active suicidal ideation with plan, intent to act, access to means, recent suicide attempt, command auditory hallucinations to harm self, hopelessness, impulsivity, intoxication.</strong> Requires admission or a documented safety plan.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-insight"><p class="ig-block ig-text">Use the <strong>C-SSRS</strong> for standardized suicide risk assessment.<a href="#cite-ref3" class="ig-ref">[3]</a></p></div><div class="ig-cond ig-stepbound" data-whennode="n-risk-output"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Documentation reminder</div><div>Verify all findings before submitting documentation. Risk stratification guides disposition and safety planning.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></div></div></div></section><section class="ig-section"><h2 class="ig-h2">7 · One-glance algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">Tap any box for detail. Full interactive builder (checklist → EMR summary) lives in the <a href="#/tree/psychiatry-assessment" target="_top" class="ig-link">myMedKitt psychiatry assessment consult</a>.</p></div></section><section class="ig-section"><h2 class="ig-h2">8 · Do NOT</h2><div class="ig-cond ig-reference"><details class="ig-block ig-disc"><summary>Documentation pitfalls<span class="ig-scent">4 items</span></summary><div class="ig-disc-body"><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT document &quot;denies SI&quot; without screening the full tier ladder</strong> — passive ideation, active without plan, active with plan, and active with plan and intent are distinct tiers that change disposition.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div><strong>Do NOT record a generic &quot;auditory hallucinations&quot; without asking about command content and harm direction</strong> — command AH to harm self or others is an immediate safety concern; non-command or no-harm-content AH is not the same acuity.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT merge mood and affect in documentation</strong> — mood is the patient's own words (subjective); affect is your observation (objective).</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div><strong>Do NOT skip insight and judgment assessment</strong> — poor insight (anosognosia) may change the disposition to involuntary commitment.</div></div></div></div></details></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Purpose &amp; structure</h3><p>Structured walkthrough for MSE documentation. Guides dictation through five sequential domains with standardized descriptors, ending in insight/judgment assessment and suicide risk stratification. Use as a reference for standardized terminology — not intended for copy/paste documentation; verify all findings against the actual patient exam.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p><ul><li>Appearance &amp; Behavior</li><li>Speech, Mood &amp; Affect</li><li>Thought Process &amp; Content</li><li>Perceptions &amp; Cognition</li><li>Insight, Judgment &amp; Suicide Risk Stratification</li></ul><h3>2 · Appearance &amp; Behavior</h3><p>Category | Descriptors</p><p>Grooming | Well-groomed, disheveled, unkempt</p><p>Hygiene | Good, fair, poor</p><p>Dress | Appropriate to weather/situation, inappropriate, bizarre</p><p>Age appearance | Appears stated age, appears older, appears younger</p><p>Psychomotor activity | Normal, agitated (increased motor activity, restlessness), retarded (slowed movements, decreased activity), catatonic (minimal response to environment)</p><p>Eye contact | Good, poor, avoidant (actively looks away), intense/staring (fixed, unwavering)</p><p>Cooperation | Cooperative, guarded (cautious, reluctant to share), hostile, uncooperative</p><h3>3 · Speech, Mood &amp; Affect</h3><p><strong>Quote patient's exact words for mood (subjective) vs your observation for affect (objective).</strong> These are documented separately and must not be merged.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p><p>Category | Descriptors</p><p>Speech rate | Normal, rapid, slow, pressured (rapid, difficult to interrupt)</p><p>Speech rhythm | Normal, dysarthric (slurred, unclear articulation), stuttering</p><p>Speech volume | Normal, loud, soft, mute</p><p>Speech tone | Normal, monotone, anxious</p><p>Mood (patient's own words) | &quot;Depressed&quot;, &quot;anxious&quot;, &quot;fine&quot;, &quot;I want to die&quot;, &quot;scared&quot;, &quot;angry&quot;, &quot;empty&quot;</p><p>Affect range | Full (normal range), restricted (limited range), blunted (significantly diminished), flat (absent)</p><p>Affect congruence | Congruent with stated mood, incongruent with stated mood</p><p>Affect quality | Euthymic, dysphoric, euphoric, anxious, irritable, labile (rapidly shifting)</p><h3>4 · Thought Process &amp; Content</h3><p>Thought process type | Description</p><p>Linear/goal-directed | Logical, coherent progression toward a point</p><p>Circumstantial | Eventually reaches the point but with excessive, unnecessary detail</p><p>Tangential | Never reaches the point, deviates to unrelated topics</p><p>Loose associations | Ideas shift between unrelated topics without logical connection</p><p>Flight of ideas | Rapid shifting between topics with tenuous connections (seen in mania)</p><p>Thought blocking | Abrupt interruption of thought mid-sentence</p><p>Perseveration | Repetitive focus on a single topic despite attempts to change subject</p><p>Word salad | Incoherent, random words without meaningful connections</p><p>Suicidal ideation tier | Definition</p><p>None / denies | No suicidal ideation reported</p><p>Passive | &quot;I wish I was dead,&quot; &quot;I wish I wouldn't wake up&quot; — no plan or intent</p><p>Active without plan | &quot;I want to kill myself&quot; but no specific plan</p><p>Active with plan | Has specific method in mind</p><p>Active with plan and intent | Plan plus intention to act</p><p>Homicidal ideation tier | Definition</p><p>None / denies | No homicidal ideation reported</p><p>Passive thoughts | Fleeting, no intent</p><p>Active without plan | No specific plan</p><p>Active with plan | Specific method in mind</p><p>Delusion type | Description</p><p>None | No delusional content</p><p>Paranoid | Belief of persecution, conspiracy</p><p>Grandiose | Inflated self-importance, special powers</p><p>Somatic | False beliefs about body/health</p><p>Religious | Inappropriate religious content</p><p>Erotomanic | Belief someone is in love with them</p><p>Ideas of reference | Belief that random events have personal significance</p><p><strong>Obsessions/compulsions:</strong> present or absent.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p><p><strong>SI documentation tiers, in order of severity:</strong> passive, active without plan, active with plan, active with plan and intent.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a></p><h3>5 · Perceptions &amp; Cognition</h3><p><strong>Command auditory hallucinations to harm self/others = immediate safety concern.</strong> Distinguish from non-command auditory hallucinations and command auditory hallucinations without harm content, which do not carry the same acuity.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p><p>Perception finding | Description</p><p>Denies hallucinations | No perceptual disturbance reported</p><p>Auditory — non-command | Voices that do not direct behavior</p><p>Auditory — command, no harm content | Voices directing action, no self/other-harm content</p><p>Auditory — command to harm SELF | Immediate safety concern</p><p>Auditory — command to harm OTHERS | Immediate safety concern</p><p>Visual | Visual hallucinations</p><p>Tactile | Tactile hallucinations</p><p>Olfactory | Olfactory hallucinations</p><p><strong>Illusions:</strong> present (misperception of an actual stimulus) or absent.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p><p>Build Dictation checklist splits command auditory hallucinations by harm target: command auditory hallucinations to harm self, command auditory hallucinations to harm others.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p><p>Cognitive domain | Descriptors</p><p>Orientation | Oriented x4 (person, place, time, situation), Oriented x3 (person, place, time), Oriented x2 (person, place), Oriented x1 (person only), Oriented x0 (disoriented to all)</p><p>Attention | Intact or impaired. Testing: serial 7s (subtract 7 from 100 sequentially), spell WORLD backward, days of week backward, months of year backward</p><p>Memory | Intact or impaired. Types: immediate (repeat 3 words), recent/short-term (recall 3 words after 5 minutes), remote/long-term (past events, personal history)</p><p><strong>Orientation grading, most to least intact:</strong> Oriented x4, Oriented x3, Oriented x2, Oriented x1, Oriented x0.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a></p><h3>6 · Insight, Judgment &amp; Suicide Risk Stratification</h3><p>Domain | Tiers</p><p>Insight | Good (understands illness and need for treatment), Fair (partial awareness or inconsistent acknowledgment), Poor/anosognosia (no insight, denies any problem)</p><p>Judgment | Good (appropriate decisions, understands consequences), Fair (some impairment), Poor (significantly impaired, unable to make appropriate decisions)</p><p>Assess insight and judgment explicitly — <strong>poor insight may require involuntary commitment.</strong><a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></p><p><strong>No suicidal ideation, no plan or intent, no history of attempts, protective factors present</strong> (family support, reasons for living, future orientation).<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></p><p><strong>Passive suicidal ideation, history of prior attempts, or limited protective factors</strong> — current stressors without an active plan.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></p><p><strong>Active suicidal ideation with plan, intent to act, access to means, recent suicide attempt, command auditory hallucinations to harm self, hopelessness, impulsivity, intoxication.</strong> Requires admission or a documented safety plan.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></p><p>Use the <strong>C-SSRS</strong> for standardized suicide risk assessment.<a href="#cite-ref3" class="ig-ref">[3]</a></p><p>Verify all findings before submitting documentation. Risk stratification guides disposition and safety planning.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a><a href="#cite-ref4" class="ig-ref">[4]</a></p><h3>7 · One-glance algorithm</h3><p>Begin MSE — 5 sequential domains — Reference Mode (read-only descriptors) or Build Dictation (interactive checklist → EMR summary) both walk the same 5 domains in the same order.</p><p>Appearance &amp; Behavior — Grooming, hygiene, dress, age appearance, psychomotor activity, eye contact, cooperation.</p><p>Speech, Mood &amp; Affect — Speech rate/rhythm/volume/tone. Mood = patient's own words (subjective). Affect = your observation (objective).</p><p>Thought Process &amp; Content — screen SI/HI — Process type (linear→word salad), SI/HI classification tiers, delusion type, obsessions/compulsions.</p><p>Perceptions &amp; Cognition — screen command AH — Hallucination type including command-to-harm-self/others split, illusions, orientation, attention, memory.</p><p>Insight, judgment &amp; suicide risk stratification — Insight and judgment tiers, then document suicide risk tier (low/moderate/high) per the criteria below — the source consult does not branch here; both Reference and Build paths end at this same step regardless of which risk tier is selected.</p><p>Risk documented — select tier above to see matching criteria — Use the Suicide risk tier selector above to view the matching LOW/MODERATE/HIGH criteria callout. This is descriptive risk-stratification text, not a graph-level branch — the underlying consult has a single terminal step here.</p><p>Tap any box for detail. Full interactive builder (checklist → EMR summary) lives in the <a href="#/tree/psychiatry-assessment" target="_top" class="ig-link">myMedKitt psychiatry assessment consult</a>.</p><h3>8 · Do NOT</h3><p><em>Documentation pitfalls</em></p><p><strong>Do NOT document &quot;denies SI&quot; without screening the full tier ladder</strong> — passive ideation, active without plan, active with plan, and active with plan and intent are distinct tiers that change disposition.</p><p><strong>Do NOT record a generic &quot;auditory hallucinations&quot; without asking about command content and harm direction</strong> — command AH to harm self or others is an immediate safety concern; non-command or no-harm-content AH is not the same acuity.</p><p><strong>Do NOT merge mood and affect in documentation</strong> — mood is the patient's own words (subjective); affect is your observation (objective).</p><p><strong>Do NOT skip insight and judgment assessment</strong> — poor insight (anosognosia) may change the disposition to involuntary commitment.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Sadock BJ, Sadock VA, Ruiz P. Kaplan &amp; Sadock's Synopsis of Psychiatry: Behavioral Sciences/Clinical Psychiatry. 11th ed. Wolters Kluwer; 2015.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> <a href="https://www.acep.org" target="_top" rel="noopener">Nazarian DJ, Broder JS, Thiessen MEW, et al. ACEP Clinical Policy: Critical Issues in the Diagnosis and Management of the Adult Psychiatric Patient in the Emergency Department.</a> <span class="ig-cite-ids">ACEP Clinical Policy, 2017</span></li><li id="cite-ref3"><span class="ig-ref">[3]</span> Posner K, Brown GK, Stanley B, et al. The Columbia-Suicide Severity Rating Scale (C-SSRS): Initial Validity and Internal Consistency Findings From Three Multisite Studies With Adolescents and Adults. Am J Psychiatry. 2011;168(12):1266-1277. <span class="ig-cite-ids">PMID 22193671</span></li><li id="cite-ref4"><span class="ig-ref">[4]</span> Marx JA, Hockberger RS, Walls RM. Rosen's Emergency Medicine: Concepts and Clinical Practice. 9th ed. Elsevier; 2018. Chapter 100: Thought Disorders.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-12 · evidence through ACEP Clinical Policy 2017; C-SSRS 2011; Rosen's 9th ed. 2018 · next review 2027-07-12</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · psychiatry-assessment · v1.0 — initial spec generated from myMedKitt psychiatry-assessment consult (18-node tree: Reference Mode + Build Dictation, both folded into one 7-node flow across 5 shared domains + single risk-stratification action/state pair). v1.1 — corrected node count (18, not 19) and fixed the flow diagram: n-insight was mistakenly modeled as a 'decision' with 3 labeled edges to n-low/n-moderate/n-high, which does not exist in the source graph (both mse-insight-judgment-risk and mse-build-insight-judgment-risk have no branching next/options by risk tier); replaced with a single 'action' node and a single edge to one n-risk-output state node. All 3 risk-tier callouts remain fully present via showWhen, unaffected.</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"psychiatry-assessment","title":"Mental Status Exam — Structured Assessment & Risk Stratification","shape":"algorithm","intendedUse":"Adults presenting to the ED requiring a documented mental status exam. Structured walkthrough for MSE dictation and suicide/homicide risk stratification. Not intended as a copy/paste template — clinician must verify findings against the actual patient exam before documenting. Excludes formal capacity assessment (separate consult) and pediatric-specific MSE norms.","scopeWarnings":["Command auditory hallucinations to harm self/others = immediate safety concern — distinguish from non-command or no-harm-content auditory hallucinations, which do not carry the same acuity.","Document suicidal ideation using standardized tiers: none/denies, passive, active without plan, active with plan, or active with plan and intent — vague documentation (e.g. \"denies SI\") without ruling out passive ideation is inadequate.","Active suicidal ideation with plan and intent = HIGH risk requiring admission or a documented safety plan.","Assess insight and judgment explicitly — poor insight (anosognosia) may require involuntary commitment.","Quote the patient's exact words for mood (subjective) vs your own observation for affect (objective) — these are not interchangeable and must not be merged in documentation.","HIGH suicide risk also includes: intent to act, access to lethal means, a recent suicide attempt, hopelessness, impulsivity, and intoxication — any one of these can move a patient into the high-risk tier even without a stated plan."],"source":{"kind":"medkitt-consult","ref":"psychiatry-assessment"},"theme":{"preset":"medkitt"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"risktier","label":"Suicide risk tier","type":"select","default":0,"options":[{"label":"LOW risk","value":0},{"label":"MODERATE risk","value":1},{"label":"HIGH risk","value":2}]}],"facts":[{"id":"f-si-tiers","claim":"Standardized suicidal-ideation documentation tiers","value":"passive, active without plan, active with plan, active with plan and intent","provenance":"consult:psychiatry-assessment/mse-thought-process-content","cite":["ref1","ref2","ref3"],"verified":"provenance"},{"id":"f-command-ah","claim":"Command auditory hallucination safety flag","value":"Command auditory hallucinations to harm self/others = immediate safety concern","provenance":"consult:psychiatry-assessment/mse-perceptions-cognition","cite":["ref1","ref2"],"verified":"provenance"},{"id":"f-command-ah-split","claim":"Command AH sub-classification distinguishing harm content","value":"command auditory hallucinations to harm self, command auditory hallucinations to harm others","provenance":"consult:psychiatry-assessment/mse-build-perceptions","cite":["ref1","ref2"],"verified":"provenance"},{"id":"f-mood-affect","claim":"Mood (subjective) vs affect (objective) documentation rule","value":"Quote patient's exact words for mood (subjective) vs your observation for affect (objective)","provenance":"consult:psychiatry-assessment/mse-speech-mood","cite":["ref1","ref2"],"verified":"provenance"},{"id":"f-insight-poor","claim":"Consequence of poor insight on disposition","value":"poor insight may require involuntary commitment","provenance":"consult:psychiatry-assessment/mse-insight-judgment-risk","cite":["ref1","ref2","ref3","ref4"],"verified":"provenance"},{"id":"f-risk-low","claim":"Low suicide risk criteria","value":"No suicidal ideation, no plan or intent, no history of attempts, protective factors present","provenance":"consult:psychiatry-assessment/mse-insight-judgment-risk","cite":["ref1","ref2","ref3","ref4"],"verified":"provenance"},{"id":"f-risk-moderate","claim":"Moderate suicide risk criteria","value":"Passive suicidal ideation, history of prior attempts, or limited protective factors","provenance":"consult:psychiatry-assessment/mse-insight-judgment-risk","cite":["ref1","ref2","ref3","ref4"],"verified":"provenance"},{"id":"f-risk-high","claim":"High suicide risk criteria","value":"Active suicidal ideation with plan, intent to act, access to means, recent suicide attempt, command auditory hallucinations to harm self, hopelessness, impulsivity, intoxication","provenance":"consult:psychiatry-assessment/mse-insight-judgment-risk","cite":["ref1","ref2","ref3","ref4"],"verified":"provenance"},{"id":"f-orientation","claim":"Orientation grading scale","value":"Oriented x4, Oriented x3, Oriented x2, Oriented x1, Oriented x0","provenance":"consult:psychiatry-assessment/mse-perceptions-cognition","cite":["ref1","ref2"],"verified":"provenance"},{"id":"f-cssrs","claim":"Standardized suicide-risk instrument referenced for structured assessment","value":"C-SSRS","provenance":"consult:psychiatry-assessment/mse-insight-judgment-risk","cite":["ref3"],"verified":"provenance"}],"sections":[{"id":"sec-intro","title":"1 · Purpose & structure","blocks":[{"id":"b-intro","type":"text","md":"Structured walkthrough for MSE documentation. Guides dictation through five sequential domains with standardized descriptors, ending in insight/judgment assessment and suicide risk stratification. Use as a reference for standardized terminology — not intended for copy/paste documentation; verify all findings against the actual patient exam.{{ref1}}{{ref2}}","cite":["ref1","ref2"]},{"id":"b-domains","type":"steps","ordered":true,"items":["Appearance & Behavior","Speech, Mood & Affect","Thought Process & Content","Perceptions & Cognition","Insight, Judgment & Suicide Risk Stratification"]}]},{"id":"sec-appearance","title":"2 · Appearance & Behavior","blocks":[{"id":"b-appearance-table","type":"table","whenNode":"n-appearance","columns":["Category","Descriptors"],"heroCol":0,"rows":[["Grooming","Well-groomed, disheveled, unkempt"],["Hygiene","Good, fair, poor"],["Dress","Appropriate to weather/situation, inappropriate, bizarre"],["Age appearance","Appears stated age, appears older, appears younger"],["Psychomotor activity","Normal, agitated (increased motor activity, restlessness), retarded (slowed movements, decreased activity), catatonic (minimal response to environment)"],["Eye contact","Good, poor, avoidant (actively looks away), intense/staring (fixed, unwavering)"],["Cooperation","Cooperative, guarded (cautious, reluctant to share), hostile, uncooperative"]],"cite":["ref1","ref2"]}]},{"id":"sec-speech","title":"3 · Speech, Mood & Affect","blocks":[{"id":"b-mood-affect-callout","type":"callout","tone":"caution","whenNode":"n-speech","title":"Mood is subjective, affect is objective","md":"**Quote patient's exact words for mood (subjective) vs your observation for affect (objective).** These are documented separately and must not be merged.{{ref1}}{{ref2}}","cite":["ref1","ref2"]},{"id":"b-speech-table","type":"table","whenNode":"n-speech","columns":["Category","Descriptors"],"heroCol":0,"rows":[["Speech rate","Normal, rapid, slow, pressured (rapid, difficult to interrupt)"],["Speech rhythm","Normal, dysarthric (slurred, unclear articulation), stuttering"],["Speech volume","Normal, loud, soft, mute"],["Speech tone","Normal, monotone, anxious"],["Mood (patient's own words)","\"Depressed\", \"anxious\", \"fine\", \"I want to die\", \"scared\", \"angry\", \"empty\""],["Affect range","Full (normal range), restricted (limited range), blunted (significantly diminished), flat (absent)"],["Affect congruence","Congruent with stated mood, incongruent with stated mood"],["Affect quality","Euthymic, dysphoric, euphoric, anxious, irritable, labile (rapidly shifting)"]],"cite":["ref1","ref2"]}]},{"id":"sec-thought","title":"4 · Thought Process & Content","blocks":[{"id":"b-process-table","type":"table","whenNode":"n-thought","columns":["Thought process type","Description"],"heroCol":0,"rows":[["Linear/goal-directed","Logical, coherent progression toward a point"],["Circumstantial","Eventually reaches the point but with excessive, unnecessary detail"],["Tangential","Never reaches the point, deviates to unrelated topics"],["Loose associations","Ideas shift between unrelated topics without logical connection"],["Flight of ideas","Rapid shifting between topics with tenuous connections (seen in mania)"],["Thought blocking","Abrupt interruption of thought mid-sentence"],["Perseveration","Repetitive focus on a single topic despite attempts to change subject"],["Word salad","Incoherent, random words without meaningful connections"]],"cite":["ref1","ref2"]},{"id":"b-si-table","type":"table","whenNode":"n-thought","columns":["Suicidal ideation tier","Definition"],"heroCol":0,"rows":[["None / denies","No suicidal ideation reported"],["Passive","\"I wish I was dead,\" \"I wish I wouldn't wake up\" — no plan or intent"],["Active without plan","\"I want to kill myself\" but no specific plan"],["Active with plan","Has specific method in mind"],["Active with plan and intent","Plan plus intention to act"]],"rowTones":["normal","caution","caution","danger","danger"],"cite":["ref1","ref2","ref3"]},{"id":"b-hi-table","type":"table","whenNode":"n-thought","columns":["Homicidal ideation tier","Definition"],"heroCol":0,"rows":[["None / denies","No homicidal ideation reported"],["Passive thoughts","Fleeting, no intent"],["Active without plan","No specific plan"],["Active with plan","Specific method in mind"]],"rowTones":["normal","caution","caution","danger"],"cite":["ref1","ref2"]},{"id":"b-delusion-table","type":"table","whenNode":"n-thought","columns":["Delusion type","Description"],"heroCol":0,"rows":[["None","No delusional content"],["Paranoid","Belief of persecution, conspiracy"],["Grandiose","Inflated self-importance, special powers"],["Somatic","False beliefs about body/health"],["Religious","Inappropriate religious content"],["Erotomanic","Belief someone is in love with them"],["Ideas of reference","Belief that random events have personal significance"]],"cite":["ref1","ref2"]},{"id":"b-obsessions","type":"text","whenNode":"n-thought","md":"**Obsessions/compulsions:** present or absent.{{ref1}}{{ref2}}","cite":["ref1","ref2"]},{"id":"b-si-tiers-list","type":"text","whenNode":"n-thought","md":"**SI documentation tiers, in order of severity:** passive, active without plan, active with plan, active with plan and intent.{{ref1}}{{ref2}}{{ref3}}","cite":["ref1","ref2","ref3"]}]},{"id":"sec-perceptions","title":"5 · Perceptions & Cognition","blocks":[{"id":"b-command-callout","type":"callout","tone":"danger","whenNode":"n-perceptions","title":"Command AH to harm self/others = immediate safety concern","md":"**Command auditory hallucinations to harm self/others = immediate safety concern.** Distinguish from non-command auditory hallucinations and command auditory hallucinations without harm content, which do not carry the same acuity.{{ref1}}{{ref2}}","cite":["ref1","ref2"]},{"id":"b-hallucination-table","type":"table","whenNode":"n-perceptions","columns":["Perception finding","Description"],"heroCol":0,"rows":[["Denies hallucinations","No perceptual disturbance reported"],["Auditory — non-command","Voices that do not direct behavior"],["Auditory — command, no harm content","Voices directing action, no self/other-harm content"],["Auditory — command to harm SELF","Immediate safety concern"],["Auditory — command to harm OTHERS","Immediate safety concern"],["Visual","Visual hallucinations"],["Tactile","Tactile hallucinations"],["Olfactory","Olfactory hallucinations"]],"rowTones":["normal","normal","caution","danger","danger","caution","caution","caution"],"cite":["ref1","ref2"]},{"id":"b-illusions","type":"text","whenNode":"n-perceptions","md":"**Illusions:** present (misperception of an actual stimulus) or absent.{{ref1}}{{ref2}}","cite":["ref1","ref2"]},{"id":"b-command-split-list","type":"text","whenNode":"n-perceptions","md":"Build Dictation checklist splits command auditory hallucinations by harm target: command auditory hallucinations to harm self, command auditory hallucinations to harm others.{{ref1}}{{ref2}}","cite":["ref1","ref2"]},{"id":"b-orientation-table","type":"table","whenNode":"n-perceptions","columns":["Cognitive domain","Descriptors"],"heroCol":0,"rows":[["Orientation","Oriented x4 (person, place, time, situation), Oriented x3 (person, place, time), Oriented x2 (person, place), Oriented x1 (person only), Oriented x0 (disoriented to all)"],["Attention","Intact or impaired. Testing: serial 7s (subtract 7 from 100 sequentially), spell WORLD backward, days of week backward, months of year backward"],["Memory","Intact or impaired. Types: immediate (repeat 3 words), recent/short-term (recall 3 words after 5 minutes), remote/long-term (past events, personal history)"]],"cite":["ref1","ref2"]},{"id":"b-orientation-list","type":"text","whenNode":"n-perceptions","md":"**Orientation grading, most to least intact:** Oriented x4, Oriented x3, Oriented x2, Oriented x1, Oriented x0.{{ref1}}{{ref2}}","cite":["ref1","ref2"]}]},{"id":"sec-risk","title":"6 · Insight, Judgment & Suicide Risk Stratification","blocks":[{"id":"b-insight-table","type":"table","whenNode":"n-insight","columns":["Domain","Tiers"],"heroCol":0,"rows":[["Insight","Good (understands illness and need for treatment), Fair (partial awareness or inconsistent acknowledgment), Poor/anosognosia (no insight, denies any problem)"],["Judgment","Good (appropriate decisions, understands consequences), Fair (some impairment), Poor (significantly impaired, unable to make appropriate decisions)"]],"cite":["ref1","ref2"]},{"id":"b-insight-poor-callout","type":"callout","tone":"danger","whenNode":"n-insight","title":"Poor insight and disposition","md":"Assess insight and judgment explicitly — **poor insight may require involuntary commitment.**{{ref1}}{{ref2}}{{ref3}}{{ref4}}","cite":["ref1","ref2","ref3","ref4"]},{"id":"b-risk-low","type":"callout","tone":"normal","title":"LOW suicide risk","showWhen":"risktier==0","md":"**No suicidal ideation, no plan or intent, no history of attempts, protective factors present** (family support, reasons for living, future orientation).{{ref1}}{{ref2}}{{ref3}}{{ref4}}","cite":["ref1","ref2","ref3","ref4"]},{"id":"b-risk-moderate","type":"callout","tone":"caution","title":"MODERATE suicide risk","showWhen":"risktier==1","md":"**Passive suicidal ideation, history of prior attempts, or limited protective factors** — current stressors without an active plan.{{ref1}}{{ref2}}{{ref3}}{{ref4}}","cite":["ref1","ref2","ref3","ref4"]},{"id":"b-risk-high","type":"callout","tone":"danger","title":"HIGH suicide risk","showWhen":"risktier==2","md":"**Active suicidal ideation with plan, intent to act, access to means, recent suicide attempt, command auditory hallucinations to harm self, hopelessness, impulsivity, intoxication.** Requires admission or a documented safety plan.{{ref1}}{{ref2}}{{ref3}}{{ref4}}","cite":["ref1","ref2","ref3","ref4"]},{"id":"b-cssrs","type":"text","whenNode":"n-insight","md":"Use the **C-SSRS** for standardized suicide risk assessment.{{ref3}}","cite":["ref3"]},{"id":"b-recommendation","type":"callout","tone":"normal","title":"Documentation reminder","whenNode":["n-risk-output"],"md":"Verify all findings before submitting documentation. Risk stratification guides disposition and safety planning.{{ref1}}{{ref2}}{{ref3}}{{ref4}}","cite":["ref1","ref2","ref3","ref4"]}]},{"id":"sec-flow","title":"7 · One-glance algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"n-start","shape":"state","text":"Begin MSE — 5 sequential domains","col":0,"rank":0,"detail":"Reference Mode (read-only descriptors) or Build Dictation (interactive checklist → EMR summary) both walk the same 5 domains in the same order."},{"id":"n-appearance","shape":"action","text":"Appearance & Behavior","col":0,"rank":1,"detail":"Grooming, hygiene, dress, age appearance, psychomotor activity, eye contact, cooperation."},{"id":"n-speech","shape":"action","text":"Speech, Mood & Affect","col":0,"rank":2,"detail":"Speech rate/rhythm/volume/tone. Mood = patient's own words (subjective). Affect = your observation (objective)."},{"id":"n-thought","shape":"action","text":"Thought Process & Content — screen SI/HI","col":0,"rank":3,"tone":"caution","detail":"Process type (linear→word salad), SI/HI classification tiers, delusion type, obsessions/compulsions."},{"id":"n-perceptions","shape":"action","text":"Perceptions & Cognition — screen command AH","col":0,"rank":4,"tone":"caution","detail":"Hallucination type including command-to-harm-self/others split, illusions, orientation, attention, memory."},{"id":"n-insight","shape":"action","text":"Insight, judgment & suicide risk stratification","col":0,"rank":5,"tone":"danger","detail":"Insight and judgment tiers, then document suicide risk tier (low/moderate/high) per the criteria below — the source consult does not branch here; both Reference and Build paths end at this same step regardless of which risk tier is selected."},{"id":"n-risk-output","shape":"state","text":"Risk documented — select tier above to see matching criteria","col":0,"rank":6,"tone":"neutral","detail":"Use the Suicide risk tier selector above to view the matching LOW/MODERATE/HIGH criteria callout. This is descriptive risk-stratification text, not a graph-level branch — the underlying consult has a single terminal step here."}],"edges":[{"from":"n-start","to":"n-appearance"},{"from":"n-appearance","to":"n-speech"},{"from":"n-speech","to":"n-thought"},{"from":"n-thought","to":"n-perceptions"},{"from":"n-perceptions","to":"n-insight"},{"from":"n-insight","to":"n-risk-output"}]},{"id":"b-flowhint","type":"text","md":"Tap any box for detail. Full interactive builder (checklist → EMR summary) lives in the [myMedKitt psychiatry assessment consult](#/tree/psychiatry-assessment)."}]},{"id":"sec-donot","title":"8 · Do NOT","blocks":[{"id":"b-donot","type":"disclosure","summary":"Documentation pitfalls","scent":"4 items","blocks":[{"id":"b-d1","type":"callout","tone":"danger","md":"**Do NOT document \"denies SI\" without screening the full tier ladder** — passive ideation, active without plan, active with plan, and active with plan and intent are distinct tiers that change disposition."},{"id":"b-d2","type":"callout","tone":"danger","md":"**Do NOT record a generic \"auditory hallucinations\" without asking about command content and harm direction** — command AH to harm self or others is an immediate safety concern; non-command or no-harm-content AH is not the same acuity."},{"id":"b-d3","type":"callout","tone":"caution","md":"**Do NOT merge mood and affect in documentation** — mood is the patient's own words (subjective); affect is your observation (objective)."},{"id":"b-d4","type":"callout","tone":"caution","md":"**Do NOT skip insight and judgment assessment** — poor insight (anosognosia) may change the disposition to involuntary commitment."}]}]}],"citations":[{"id":"ref1","label":"Sadock BJ, Sadock VA, Ruiz P. Kaplan & Sadock's Synopsis of Psychiatry: Behavioral Sciences/Clinical Psychiatry. 11th ed. Wolters Kluwer; 2015."},{"id":"ref2","label":"Nazarian DJ, Broder JS, Thiessen MEW, et al. ACEP Clinical Policy: Critical Issues in the Diagnosis and Management of the Adult Psychiatric Patient in the Emergency Department.","url":"https://www.acep.org","accessed":"2026-07-12","grade":"ACEP Clinical Policy, 2017"},{"id":"ref3","label":"Posner K, Brown GK, Stanley B, et al. The Columbia-Suicide Severity Rating Scale (C-SSRS): Initial Validity and Internal Consistency Findings From Three Multisite Studies With Adolescents and Adults. Am J Psychiatry. 2011;168(12):1266-1277.","pmid":"22193671"},{"id":"ref4","label":"Marx JA, Hockberger RS, Walls RM. Rosen's Emergency Medicine: Concepts and Clinical Practice. 9th ed. Elsevier; 2018. Chapter 100: Thought Disorders."}],"meta":{"version":"1.0","lastReviewed":"2026-07-12","evidenceThrough":"ACEP Clinical Policy 2017; C-SSRS 2011; Rosen's 9th ed. 2018","nextReview":"2027-07-12","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 — initial spec generated from myMedKitt psychiatry-assessment consult (18-node tree: Reference Mode + Build Dictation, both folded into one 7-node flow across 5 shared domains + single risk-stratification action/state pair). v1.1 — corrected node count (18, not 19) and fixed the flow diagram: n-insight was mistakenly modeled as a 'decision' with 3 labeled edges to n-low/n-moderate/n-high, which does not exist in the source graph (both mse-insight-judgment-risk and mse-build-insight-judgment-risk have no branching next/options by risk tier); replaced with a single 'action' node and a single edge to one n-risk-output state node. All 3 risk-tier callouts remain fully present via showWhen, unaffected."},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

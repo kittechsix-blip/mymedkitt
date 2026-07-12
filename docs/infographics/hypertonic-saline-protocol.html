@@ -1,0 +1,521 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hypertonic Saline Protocol: Herniation Rescue vs Severe Symptomatic Hyponatremia — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Hypertonic Saline Protocol: Herniation Rescue vs Severe Symptomatic Hyponatremia</h1>
+  <p class="ig-use">Adults with either (a) acute neurologic injury with elevated ICP/impending herniation, or (b) severe symptomatic hyponatremia (seizure, coma, severe encephalopathy). Excludes routine/chronic/asymptomatic hyponatremia and routine hypernatremia — neither is an indication for hypertonic saline.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Hypertonic saline treats two distinct emergencies only — severe symptomatic hyponatremia with cerebral edema/seizure/coma, or elevated ICP/impending herniation. It is not a treatment for routine hypernatremia.</div><div class="ig-scope-item">⚠ Herniation/elevated ICP rescue: call neurosurgery/neurocritical care immediately, keep the head of bed elevated and neck midline, avoid hypotension/hypoxia/fever, and treat seizures while definitive therapy is arranged.</div><div class="ig-scope-item">⚠ Severe symptomatic hyponatremia: bolus 3% NaCl to raise serum sodium 4-6 mEq/L and reverse symptoms — do not aim to normalize sodium in the ED.</div><div class="ig-scope-item">⚠ Do not give hypertonic saline to correct hypernatremia. If hypernatremia coexists with herniation/elevated ICP, treat as competing life threats and call neurocritical care/neurosurgery immediately — avoid hypotonic fluid boluses in acute cerebral edema.</div><div class="ig-scope-item">⚠ Avoid overcorrection: keep the 24-hour sodium rise under 8 mEq/L in high-ODS-risk patients (alcoholism, malnutrition, liver disease, hypokalemia, very low starting sodium) and under 10 mEq/L in most other patients.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-weight">Weight <span class="ig-unit">(kg)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="weight" min="1" max="300" step="1" value="70" aria-label="Weight slider">
+<input type="number" id="ig-num-weight" data-input="weight" min="1" max="300" step="1" value="70" inputmode="decimal" aria-label="Weight exact value">
+</div>
+<div class="ig-warn" data-warn-for="weight" hidden role="alert">Value outside 1–300 kg — confirm.</div>
+</div><div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="hernia" aria-checked="false">Impending herniation / elevated ICP</button><button type="button" class="ig-toggle" role="switch" data-toggle="hypona" aria-checked="false">Severe symptomatic hyponatremia</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="n-start" hidden><button type="button" data-route-select="n-start"><span class="ig-route-rank">1</span><span>Hypertonic saline protocol</span></button></li><li data-route-node="n-scenario" hidden><button type="button" data-route-select="n-scenario"><span class="ig-route-rank">2</span><span>Which emergency is present?</span></button></li><li data-route-node="n-herniation" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="n-herniation"><span class="ig-route-rank">3</span><span>Herniation/elevated ICP rescue: hyperosmolar bolus + neurosurgery now</span></button></li><li data-route-node="n-hyponatremia" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="n-hyponatremia"><span class="ig-route-rank">3</span><span>Severe symptomatic hyponatremia: 3% NaCl bolus to raise Na 4-6 mEq/L</span></button></li><li data-route-node="n-not-routine" hidden><button type="button" data-route-select="n-not-routine"><span class="ig-route-rank">3</span><span>Chronic/mild hyponatremia — not routine HTS</span></button></li><li data-route-node="n-hypernatremia-stop" hidden><button type="button" data-route-select="n-hypernatremia-stop"><span class="ig-route-rank">3</span><span>Hypernatremia without herniation — HTS safety stop</span></button></li><li data-route-node="n-sodium-limits" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><button type="button" data-route-select="n-sodium-limits"><span class="ig-route-rank">4</span><span>Sodium targets / ODS prevention</span></button></li><li data-route-node="n-access" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><button type="button" data-route-select="n-access"><span class="ig-route-rank">5</span><span>Access / monitoring</span></button></li><li data-route-node="n-dispo" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><button type="button" data-route-select="n-dispo"><span class="ig-route-rank">6</span><span>Disposition &amp; documentation</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 888 696" width="888" height="696" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M339,98 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,206 L339,227 L129,227 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="223" class="ig-edge-lbl" text-anchor="middle">impending herniation / elevated ICP</text><path d="M339,206 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="223" class="ig-edge-lbl" text-anchor="middle">severe symptomatic hyponatremia</text><path d="M339,206 L339,227 L549,227 L549,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="223" class="ig-edge-lbl" text-anchor="middle">chronic/mild hyponatremia</text><path d="M339,206 L339,227 L759,227 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="223" class="ig-edge-lbl" text-anchor="middle">hypernatremia, no herniation</text><path d="M129,314 L129,335 L339,335 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,314 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,422 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,530 L339,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="n-start" tabindex="0" role="button" aria-label="Hypertonic saline protocol"><rect x="251" y="32" width="176" height="66" rx="30" class="ig-shape t-mech"/><foreignObject x="257" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Hypertonic saline protocol</div></foreignObject></g><g class="ig-node" data-node="n-scenario" tabindex="0" role="button" aria-label="Which emergency is present?"><polygon points="273,140 405,140 427,173 405,206 273,206 251,173" class="ig-shape t-neutral"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Which emergency is present?</div></foreignObject></g><g class="ig-node" data-node="n-herniation" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Herniation/elevated ICP rescue: hyperosmolar bolus + neurosurgery now"><rect x="41" y="248" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Herniation/elevated ICP rescue: hyperosmolar bolus + neurosurgery now</div></foreignObject></g><g class="ig-node" data-node="n-hyponatremia" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Severe symptomatic hyponatremia: 3% NaCl bolus to raise Na 4-6 mEq/L"><rect x="251" y="248" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Severe symptomatic hyponatremia: 3% NaCl bolus to raise Na 4-6 mEq/L</div></foreignObject></g><g class="ig-node" data-node="n-not-routine" tabindex="0" role="button" aria-label="Chronic/mild hyponatremia — not routine HTS"><rect x="461" y="248" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="467" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Chronic/mild hyponatremia — not routine HTS</div></foreignObject></g><g class="ig-node" data-node="n-hypernatremia-stop" tabindex="0" role="button" aria-label="Hypernatremia without herniation — HTS safety stop"><rect x="671" y="248" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="677" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Hypernatremia without herniation — HTS safety stop</div></foreignObject></g><g class="ig-node" data-node="n-sodium-limits" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" tabindex="0" role="button" aria-label="Sodium targets / ODS prevention"><rect x="251" y="356" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="257" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Sodium targets / ODS prevention</div></foreignObject></g><g class="ig-node" data-node="n-access" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" tabindex="0" role="button" aria-label="Access / monitoring"><rect x="251" y="464" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Access / monitoring</div></foreignObject></g><g class="ig-node" data-node="n-dispo" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;||&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" tabindex="0" role="button" aria-label="Disposition &amp; documentation"><rect x="251" y="572" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="257" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Disposition &amp; documentation</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="n-start" hidden><strong>Hypertonic saline protocol</strong><span>Treats severe symptomatic hyponatremia or elevated ICP/herniation. Not for routine hypernatremia.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-scenario" hidden><strong>Which emergency is present?</strong><span>The dose and endpoint differ for herniation versus hyponatremic encephalopathy.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-scenario">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-herniation" hidden><strong>Herniation/elevated ICP rescue: hyperosmolar bolus + neurosurgery now</strong><span>Call neurosurgery/neurocritical care. HOB elevated, neck midline, avoid hypotension/hypoxia/fever. Treat seizures, reverse anticoagulation.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-herniation">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-hyponatremia" hidden><strong>Severe symptomatic hyponatremia: 3% NaCl bolus to raise Na 4-6 mEq/L</strong><span>Seizure, coma, severe encephalopathy, or cerebral edema signs from hyponatremia.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-hyponatremia">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-not-routine" hidden><strong>Chronic/mild hyponatremia — not routine HTS</strong><span>No severe neurologic symptoms. Use non-emergent management instead.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-not-routine">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-hypernatremia-stop" hidden><strong>Hypernatremia without herniation — HTS safety stop</strong><span>Do not give HTS to correct hypernatremia.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-hypernatremia-stop">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-sodium-limits" hidden><strong>Sodium targets / ODS prevention</strong><span>Treat symptoms first (+4 to +6 mEq/L), then prevent overcorrection and osmotic demyelination.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-sodium-limits">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-access" hidden><strong>Access / monitoring</strong><span>3% bolus can generally be peripheral; concentrated/continuous therapy needs policy-driven central access.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-access">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="n-dispo" hidden><strong>Disposition &amp; documentation</strong><span>Monitored setting with an explicit sodium follow-up plan.</span><button type="button" class="ig-btn ig-open-step" data-open-step="n-dispo">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section"><h2 class="ig-h2">1 · Two emergencies, one drug</h2><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-mech" role="note"><div class="ig-callout-title">What HTS is actually for</div><div>Hypertonic saline is used for two distinct emergencies: <strong>severe symptomatic hyponatremia</strong> with cerebral edema/seizure/coma, or <strong>elevated ICP/impending herniation</strong> from acute neurologic injury. It is <strong>not</strong> a treatment for routine hypernatremia.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a></div></div></div><div class="ig-cond ig-reference"><p class="ig-block ig-text">If a hypernatremic patient is herniating, manage as a <strong>neurocritical emergency</strong> with specialist input — hyperosmolar rescue may still be used when benefits outweigh sodium/osmolality risk.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">3 · What to do now</h2><div class="ig-cond ig-reference" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Herniation rescue — do this now</div><div>Call neurosurgery/neurocritical care immediately. Head of bed elevated, neck midline, avoid hypotension/hypoxia/fever. Give the hyperosmolar bolus below while definitive therapy is arranged.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" data-whennode="n-herniation"><div class="ig-block ig-dose" data-calc="hts3pctherniation"><div class="ig-dose-drug">3% NaCl (hypertonic saline)</div><div class="ig-dose-val"><span data-calc-value>2-5 mL/kg IV bolus (typically 150-250 mL) over 10-20 min</span></div><div class="ig-dose-route">IV (peripheral acceptable for bolus)</div><div class="ig-dose-note">Calculator uses 3 mL/kg — the midpoint of the 2-5 mL/kg range. 23.4% NaCl 30 mL IV over 10-20 min via central line is an alternative by protocol; mannitol if hemodynamics/renal status allow.</div></div></div><div class="ig-cond ig-reference" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Severe symptomatic hyponatremia — do this now</div><div>Give <strong>3% NaCl 100-150 mL IV over 10-20 min</strong> now. Repeat up to 2 additional boluses (3 total) for persistent severe symptoms. Target: raise Na <strong>4-6 mEq/L</strong> only — do not normalize sodium in the ED. Check serum sodium q2h during active correction.</div></div></div><div class="ig-cond ig-reference" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hernia&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;hypona&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><div class="ig-block ig-callout t-neutral" role="note"><div class="ig-callout-title">Select a scenario</div><div>Toggle <strong>herniation/elevated ICP</strong> or <strong>severe symptomatic hyponatremia</strong> above to see the exact next dose.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">4 · Herniation / elevated ICP rescue</h2><div class="ig-cond ig-stepbound" data-whennode="n-herniation"><ul class="ig-block ig-steps"><li>Call neurosurgery/neurocritical care</li><li>Head of bed elevated, neck midline, avoid hypotension/hypoxia/fever</li><li>Treat seizures and reverse anticoagulation when indicated</li><li>Temporize ventilation only for acute herniation while definitive therapy is arranged</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="n-herniation"><div class="ig-block ig-dose" data-calc="hts3pctherniation"><div class="ig-dose-drug">Hypertonic saline 3% NaCl</div><div class="ig-dose-val"><span data-calc-value>2-5 mL/kg IV bolus, often 150-250 mL over 10-20 min</span></div><div class="ig-dose-note">May repeat based on neurologic response and sodium/osmolality.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-herniation"><div class="ig-block ig-dose"><div class="ig-dose-drug">Hypertonic saline 23.4% NaCl</div><div class="ig-dose-val">30 mL IV over 10-20 min via central line</div><div class="ig-dose-note">When available/appropriate, per protocol.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-herniation"><p class="ig-block ig-text">Mannitol is an alternative when hemodynamics and renal status allow.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">5 · Severe symptomatic hyponatremia</h2><div class="ig-cond ig-stepbound" data-whennode="n-hyponatremia"><p class="ig-block ig-text">Indications: seizure, coma, severe encephalopathy, or signs of cerebral edema from hyponatremia.</p></div><div class="ig-cond ig-stepbound" data-whennode="n-hyponatremia"><div class="ig-block ig-dose"><div class="ig-dose-drug">Hypertonic saline 3% NaCl</div><div class="ig-dose-val">100-150 mL IV over 10-20 min</div><div class="ig-dose-note">Repeat up to 2 additional boluses (3 total) for persistent severe symptoms.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-hyponatremia"><div class="ig-block ig-stat t-danger"><span class="ig-stat-val">4-6 mEq/L</span><span class="ig-stat-lbl">Initial target</span></div></div><div class="ig-cond ig-stepbound" data-whennode="n-hyponatremia"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Do not normalize sodium in the ED</div><div>Check serum sodium q2h during active correction.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">6 · Not an emergency indication</h2><div class="ig-cond ig-stepbound" data-whennode="n-not-routine"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Chronic/mild hyponatremia — not routine HTS</div><div>Do not use 3% saline for mild, chronic, or asymptomatic hyponatremia. Identify cause and chronicity, stop offending fluids/medications when appropriate, and use fluid restriction, salt/loop strategy, or other cause-specific therapy. DDAVP clamp is reserved for expert-managed overcorrection-risk control.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="n-hypernatremia-stop"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Hypernatremia — HTS safety stop</div><div>Do not give hypertonic saline to correct hypernatremia. If hypernatremia plus herniation/elevated ICP is present: treat as competing life threats, call neurocritical care/neurosurgery immediately, and avoid hypotonic fluid boluses in acute cerebral edema. Hyperosmolar rescue only if impending-herniation benefit outweighs sodium/osmolality risk, with sodium and osmolality tracked closely. For routine hypernatremia, use controlled free-water replacement based on chronicity and volume status.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">7 · Sodium targets / ODS prevention</h2><div class="ig-cond ig-stepbound" data-whennode="n-sodium-limits"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Correction limit</th><th class="hero">Value</th></tr></thead><tbody><tr class="ig-row t-normal"><td>Initial severe-symptom target</td><td class="hero">4-6 mEq/L</td></tr><tr class="ig-row t-danger"><td>24h limit — high ODS risk</td><td class="hero">&gt;8 mEq/L</td></tr><tr class="ig-row t-danger"><td>24h limit — most patients</td><td class="hero">&gt;10 mEq/L</td></tr><tr class="ig-row t-caution"><td>High ODS risk factors</td><td class="hero">alcoholism, malnutrition, liver disease, hypokalemia, very low starting Na</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-sodium-limits"><p class="ig-block ig-text">If overcorrection occurs or is likely, use a DDAVP and D5W relowering strategy with nephrology/ICU guidance.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">8 · Access / monitoring</h2><div class="ig-cond ig-stepbound" data-whennode="n-access"><p class="ig-block ig-text">3% NaCl bolus can generally be given peripherally through a reliable IV. Continuous 3% infusion and 23.4% NaCl should follow local central-line policy. Use an infusion pump and label the line clearly.</p></div><div class="ig-cond ig-stepbound" data-whennode="n-access"><ul class="ig-block ig-steps"><li>Neuro exam and vital signs during bolus</li><li>Serum sodium/osmolality q2h during active correction</li><li>Strict I/O and volume status</li><li>Avoid hypotension, hypoxia, fever, and hypoglycemia in neurocritical patients</li></ul></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">9 · Disposition</h2><div class="ig-cond ig-stepbound" data-whennode="n-dispo"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Scenario</th><th>Disposition</th></tr></thead><tbody><tr class="ig-row"><td>Herniation/elevated ICP</td><td>ICU/neurosurgery/neurocritical care</td></tr><tr class="ig-row"><td>Severe symptomatic hyponatremia</td><td>ICU or closely monitored setting until sodium trajectory is controlled</td></tr><tr class="ig-row"><td>Need for DDAVP clamp</td><td>ICU/stepdown per local capability</td></tr><tr class="ig-row"><td>Overcorrection or high ODS risk</td><td>Nephrology/ICU involvement</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="n-dispo"><p class="ig-block ig-text">Document indication, dose, sodium before/after, neurologic response, and next sodium check time.</p></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>1 · Two emergencies, one drug</h3><p>Hypertonic saline is used for two distinct emergencies: <strong>severe symptomatic hyponatremia</strong> with cerebral edema/seizure/coma, or <strong>elevated ICP/impending herniation</strong> from acute neurologic injury. It is <strong>not</strong> a treatment for routine hypernatremia.<a href="#cite-ref1" class="ig-ref">[1]</a><a href="#cite-ref2" class="ig-ref">[2]</a><a href="#cite-ref3" class="ig-ref">[3]</a></p><p>If a hypernatremic patient is herniating, manage as a <strong>neurocritical emergency</strong> with specialist input — hyperosmolar rescue may still be used when benefits outweigh sodium/osmolality risk.</p><h3>2 · Which emergency?</h3><p>Hypertonic saline protocol — Treats severe symptomatic hyponatremia or elevated ICP/herniation. Not for routine hypernatremia.</p><p>Which emergency is present? — The dose and endpoint differ for herniation versus hyponatremic encephalopathy.</p><p>Herniation/elevated ICP rescue: hyperosmolar bolus + neurosurgery now — Call neurosurgery/neurocritical care. HOB elevated, neck midline, avoid hypotension/hypoxia/fever. Treat seizures, reverse anticoagulation.</p><p>Severe symptomatic hyponatremia: 3% NaCl bolus to raise Na 4-6 mEq/L — Seizure, coma, severe encephalopathy, or cerebral edema signs from hyponatremia.</p><p>Chronic/mild hyponatremia — not routine HTS — No severe neurologic symptoms. Use non-emergent management instead.</p><p>Hypernatremia without herniation — HTS safety stop — Do not give HTS to correct hypernatremia.</p><p>Sodium targets / ODS prevention — Treat symptoms first (+4 to +6 mEq/L), then prevent overcorrection and osmotic demyelination.</p><p>Access / monitoring — 3% bolus can generally be peripheral; concentrated/continuous therapy needs policy-driven central access.</p><p>Disposition &amp; documentation — Monitored setting with an explicit sodium follow-up plan.</p><h3>3 · What to do now</h3><p>Call neurosurgery/neurocritical care immediately. Head of bed elevated, neck midline, avoid hypotension/hypoxia/fever. Give the hyperosmolar bolus below while definitive therapy is arranged.</p><p><strong>3% NaCl (hypertonic saline)</strong>: 2-5 mL/kg IV bolus (typically 150-250 mL) over 10-20 min IV (peripheral acceptable for bolus) — Calculator uses 3 mL/kg — the midpoint of the 2-5 mL/kg range. 23.4% NaCl 30 mL IV over 10-20 min via central line is an alternative by protocol; mannitol if hemodynamics/renal status allow.</p><p>Give <strong>3% NaCl 100-150 mL IV over 10-20 min</strong> now. Repeat up to 2 additional boluses (3 total) for persistent severe symptoms. Target: raise Na <strong>4-6 mEq/L</strong> only — do not normalize sodium in the ED. Check serum sodium q2h during active correction.</p><p>Toggle <strong>herniation/elevated ICP</strong> or <strong>severe symptomatic hyponatremia</strong> above to see the exact next dose.</p><h3>4 · Herniation / elevated ICP rescue</h3><ul><li>Call neurosurgery/neurocritical care</li><li>Head of bed elevated, neck midline, avoid hypotension/hypoxia/fever</li><li>Treat seizures and reverse anticoagulation when indicated</li><li>Temporize ventilation only for acute herniation while definitive therapy is arranged</li></ul><p><strong>Hypertonic saline 3% NaCl</strong>: 2-5 mL/kg IV bolus, often 150-250 mL over 10-20 min — May repeat based on neurologic response and sodium/osmolality.</p><p><strong>Hypertonic saline 23.4% NaCl</strong>: 30 mL IV over 10-20 min via central line — When available/appropriate, per protocol.</p><p>Mannitol is an alternative when hemodynamics and renal status allow.</p><h3>5 · Severe symptomatic hyponatremia</h3><p>Indications: seizure, coma, severe encephalopathy, or signs of cerebral edema from hyponatremia.</p><p><strong>Hypertonic saline 3% NaCl</strong>: 100-150 mL IV over 10-20 min — Repeat up to 2 additional boluses (3 total) for persistent severe symptoms.</p><p>Initial target: 4-6 mEq/L</p><p>Check serum sodium q2h during active correction.</p><h3>6 · Not an emergency indication</h3><p>Do not use 3% saline for mild, chronic, or asymptomatic hyponatremia. Identify cause and chronicity, stop offending fluids/medications when appropriate, and use fluid restriction, salt/loop strategy, or other cause-specific therapy. DDAVP clamp is reserved for expert-managed overcorrection-risk control.</p><p>Do not give hypertonic saline to correct hypernatremia. If hypernatremia plus herniation/elevated ICP is present: treat as competing life threats, call neurocritical care/neurosurgery immediately, and avoid hypotonic fluid boluses in acute cerebral edema. Hyperosmolar rescue only if impending-herniation benefit outweighs sodium/osmolality risk, with sodium and osmolality tracked closely. For routine hypernatremia, use controlled free-water replacement based on chronicity and volume status.</p><h3>7 · Sodium targets / ODS prevention</h3><p>Correction limit | Value</p><p>Initial severe-symptom target | 4-6 mEq/L</p><p>24h limit — high ODS risk | &gt;8 mEq/L</p><p>24h limit — most patients | &gt;10 mEq/L</p><p>High ODS risk factors | alcoholism, malnutrition, liver disease, hypokalemia, very low starting Na</p><p>If overcorrection occurs or is likely, use a DDAVP and D5W relowering strategy with nephrology/ICU guidance.</p><h3>8 · Access / monitoring</h3><p>3% NaCl bolus can generally be given peripherally through a reliable IV. Continuous 3% infusion and 23.4% NaCl should follow local central-line policy. Use an infusion pump and label the line clearly.</p><ul><li>Neuro exam and vital signs during bolus</li><li>Serum sodium/osmolality q2h during active correction</li><li>Strict I/O and volume status</li><li>Avoid hypotension, hypoxia, fever, and hypoglycemia in neurocritical patients</li></ul><h3>9 · Disposition</h3><p>Scenario | Disposition</p><p>Herniation/elevated ICP | ICU/neurosurgery/neurocritical care</p><p>Severe symptomatic hyponatremia | ICU or closely monitored setting until sodium trajectory is controlled</p><p>Need for DDAVP clamp | ICU/stepdown per local capability</p><p>Overcorrection or high ODS risk | Nephrology/ICU involvement</p><p>Document indication, dose, sodium before/after, neurologic response, and next sodium check time.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Cook AM, et al. Guidelines for the Acute Treatment of Cerebral Edema in Neurocritical Care Patients <span class="ig-cite-ids">Neurocrit Care. 2020;32(3):647-666</span></li><li id="cite-ref2"><span class="ig-ref">[2]</span> Spasovski G, et al. Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia <span class="ig-cite-ids">Eur J Endocrinol. 2014;170(3):G1-G47</span></li><li id="cite-ref3"><span class="ig-ref">[3]</span> Baek SH, et al. SALSA Trial: Bolus vs Continuous Hypertonic Saline for Symptomatic Hyponatremia <span class="ig-cite-ids">JAMA Intern Med. 2021;181(1):81-92</span></li><li id="cite-ref4"><span class="ig-ref">[4]</span> <a href="https://emcrit.org/ibcc/" target="_top" rel="noopener">EMCrit/IBCC. Elevated intracranial pressure and hypertonic saline chapters</a></li><li id="cite-ref5"><span class="ig-ref">[5]</span> Sterns RH. Disorders of Plasma Sodium — Causes, Consequences, and Correction <span class="ig-cite-ids">N Engl J Med. 2015;372:55-65</span></li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-12 · evidence through SALSA trial 2021; Cook AM Neurocrit Care 2020 · next review 2027-07-12</div>
+  <div>A. Kitlowski, MD (Emergency Medicine)</div>
+  <div class="ig-provenance">Source: medkitt-consult · hypertonic-saline-protocol · v1.0 InfoKitt cockpit spec — full 9-node fidelity to myMedKitt hypertonic-saline-protocol tree, no merges/omissions.</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"hypertonic-saline-protocol","title":"Hypertonic Saline Protocol: Herniation Rescue vs Severe Symptomatic Hyponatremia","shape":"algorithm","intendedUse":"Adults with either (a) acute neurologic injury with elevated ICP/impending herniation, or (b) severe symptomatic hyponatremia (seizure, coma, severe encephalopathy). Excludes routine/chronic/asymptomatic hyponatremia and routine hypernatremia — neither is an indication for hypertonic saline.","scopeWarnings":["Hypertonic saline treats two distinct emergencies only — severe symptomatic hyponatremia with cerebral edema/seizure/coma, or elevated ICP/impending herniation. It is not a treatment for routine hypernatremia.","Herniation/elevated ICP rescue: call neurosurgery/neurocritical care immediately, keep the head of bed elevated and neck midline, avoid hypotension/hypoxia/fever, and treat seizures while definitive therapy is arranged.","Severe symptomatic hyponatremia: bolus 3% NaCl to raise serum sodium 4-6 mEq/L and reverse symptoms — do not aim to normalize sodium in the ED.","Do not give hypertonic saline to correct hypernatremia. If hypernatremia coexists with herniation/elevated ICP, treat as competing life threats and call neurocritical care/neurosurgery immediately — avoid hypotonic fluid boluses in acute cerebral edema.","Avoid overcorrection: keep the 24-hour sodium rise under 8 mEq/L in high-ODS-risk patients (alcoholism, malnutrition, liver disease, hypokalemia, very low starting sodium) and under 10 mEq/L in most other patients."],"source":{"kind":"medkitt-consult","ref":"hypertonic-saline-protocol"},"theme":{"preset":"medkitt"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"weight","label":"Weight","unit":"kg","type":"number","min":1,"max":300,"step":1,"default":70},{"id":"hernia","label":"Impending herniation / elevated ICP","type":"boolean","default":0},{"id":"hypona","label":"Severe symptomatic hyponatremia","type":"boolean","default":0}],"calcs":[{"id":"hts3pctherniation","expr":"round(3*weight,0)","unit":"mL","formula":"3 mL/kg × weight (midpoint of the 2-5 mL/kg herniation-rescue range)","derivedFrom":{"drugId":"hypertonic-saline","indication":"Intracranial hypertension / impending herniation"},"testVectors":[{"in":{"weight":12},"expect":36},{"in":{"weight":70},"expect":210},{"in":{"weight":100},"expect":300}],"cite":["ref1","ref4"],"exprAst":{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":3},"b":{"k":"id","name":"weight"}},{"k":"num","v":0}]}}],"facts":[{"id":"f-hernia-range","claim":"Herniation/elevated ICP — 3% NaCl bolus dose range","value":"2-5 mL/kg","provenance":"drug-store:hypertonic-saline/Intracranial hypertension / impending herniation","cite":["ref1","ref4"],"verified":"provenance"},{"id":"f-hernia-volume","claim":"Herniation/elevated ICP — typical 3% NaCl bolus volume","value":"150-250 mL","provenance":"drug-store:hypertonic-saline/Intracranial hypertension / impending herniation","cite":["ref1","ref4"],"verified":"provenance"},{"id":"f-hernia-234","claim":"Herniation/elevated ICP — 23.4% NaCl bolus dose","value":"30 mL","provenance":"drug-store:hypertonic-saline/Intracranial hypertension / impending herniation","cite":["ref1","ref4"],"verified":"provenance"},{"id":"f-hernia-calc-midpoint","claim":"Herniation-rescue calculator basis","value":"3 mL/kg","provenance":"drug-store:hypertonic-saline/Intracranial hypertension / impending herniation (weightCalc dosePerKg)","verified":"provenance"},{"id":"f-hypona-dose","claim":"Severe symptomatic hyponatremia — 3% NaCl bolus dose","value":"100-150 mL","provenance":"drug-store:hypertonic-saline/Severe symptomatic hyponatremia","cite":["ref2","ref3","ref5"],"verified":"provenance"},{"id":"f-hypona-repeat","claim":"Severe symptomatic hyponatremia — repeat dosing","value":"up to 2 additional boluses","provenance":"consult:hypertonic-saline-protocol/hts-hyponatremia","cite":["ref2","ref3","ref5"],"verified":"provenance"},{"id":"f-hypona-target","claim":"Severe symptomatic hyponatremia — initial correction target","value":"4-6 mEq/L","provenance":"consult:hypertonic-saline-protocol/hts-hyponatremia","cite":["ref2","ref3","ref5"],"verified":"provenance"},{"id":"f-not-hypernatremia","claim":"Contraindication — hypernatremia","value":"Do not give hypertonic saline to correct hypernatremia.","provenance":"consult:hypertonic-saline-protocol/hts-hypernatremia-stop","cite":["ref1","ref4"],"verified":"provenance"},{"id":"f-not-routine","claim":"Contraindication — mild/chronic hyponatremia","value":"Do not use 3% saline for mild, chronic, or asymptomatic hyponatremia.","provenance":"consult:hypertonic-saline-protocol/hts-not-routine","cite":["ref2","ref3"],"verified":"provenance"},{"id":"f-limit-highrisk","claim":"24-hour correction limit — high ODS risk","value":">8 mEq/L","provenance":"consult:hypertonic-saline-protocol/hts-sodium-limits","cite":["ref2","ref3","ref5"],"verified":"provenance"},{"id":"f-limit-most","claim":"24-hour correction limit — most patients","value":">10 mEq/L","provenance":"consult:hypertonic-saline-protocol/hts-sodium-limits","cite":["ref2","ref3","ref5"],"verified":"provenance"},{"id":"f-monitor-q2h","claim":"Serum sodium/osmolality monitoring interval during active correction","value":"q2h","provenance":"consult:hypertonic-saline-protocol/hts-access","cite":["ref1","ref2","ref4"],"verified":"provenance"},{"id":"f-access-peripheral","claim":"3% NaCl bolus access route","value":"generally be given peripherally through a reliable IV","provenance":"consult:hypertonic-saline-protocol/hts-access","cite":["ref1","ref2","ref4"],"verified":"provenance"}],"sections":[{"id":"sec-overview","title":"1 · Two emergencies, one drug","blocks":[{"id":"b-mechanism","type":"callout","tone":"mechanism","title":"What HTS is actually for","md":"Hypertonic saline is used for two distinct emergencies: **severe symptomatic hyponatremia** with cerebral edema/seizure/coma, or **elevated ICP/impending herniation** from acute neurologic injury. It is **not** a treatment for routine hypernatremia.{{ref1}}{{ref2}}{{ref3}}"},{"id":"b-hypernathernia","type":"text","md":"If a hypernatremic patient is herniating, manage as a **neurocritical emergency** with specialist input — hyperosmolar rescue may still be used when benefits outweigh sodium/osmolality risk."}]},{"id":"sec-flow","title":"2 · Which emergency?","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"n-start","shape":"state","text":"Hypertonic saline protocol","col":0,"rank":0,"tone":"mechanism","detail":"Treats severe symptomatic hyponatremia or elevated ICP/herniation. Not for routine hypernatremia."},{"id":"n-scenario","shape":"decision","text":"Which emergency is present?","col":0,"rank":1,"detail":"The dose and endpoint differ for herniation versus hyponatremic encephalopathy."},{"id":"n-herniation","shape":"action","text":"Herniation/elevated ICP rescue: hyperosmolar bolus + neurosurgery now","col":-1,"rank":2,"tone":"danger","detail":"Call neurosurgery/neurocritical care. HOB elevated, neck midline, avoid hypotension/hypoxia/fever. Treat seizures, reverse anticoagulation.","activeWhen":"hernia==1"},{"id":"n-hyponatremia","shape":"action","text":"Severe symptomatic hyponatremia: 3% NaCl bolus to raise Na 4-6 mEq/L","col":0,"rank":2,"tone":"danger","detail":"Seizure, coma, severe encephalopathy, or cerebral edema signs from hyponatremia.","activeWhen":"hypona==1"},{"id":"n-not-routine","shape":"state","text":"Chronic/mild hyponatremia — not routine HTS","col":1,"rank":2,"tone":"caution","detail":"No severe neurologic symptoms. Use non-emergent management instead."},{"id":"n-hypernatremia-stop","shape":"state","text":"Hypernatremia without herniation — HTS safety stop","col":2,"rank":2,"tone":"danger","detail":"Do not give HTS to correct hypernatremia."},{"id":"n-sodium-limits","shape":"action","text":"Sodium targets / ODS prevention","col":0,"rank":3,"tone":"caution","detail":"Treat symptoms first (+4 to +6 mEq/L), then prevent overcorrection and osmotic demyelination.","activeWhen":"hernia==1 || hypona==1"},{"id":"n-access","shape":"action","text":"Access / monitoring","col":0,"rank":4,"detail":"3% bolus can generally be peripheral; concentrated/continuous therapy needs policy-driven central access.","activeWhen":"hernia==1 || hypona==1"},{"id":"n-dispo","shape":"state","text":"Disposition & documentation","col":0,"rank":5,"tone":"normal","detail":"Monitored setting with an explicit sodium follow-up plan.","activeWhen":"hernia==1 || hypona==1"}],"edges":[{"from":"n-start","to":"n-scenario"},{"from":"n-scenario","to":"n-herniation","label":"impending herniation / elevated ICP"},{"from":"n-scenario","to":"n-hyponatremia","label":"severe symptomatic hyponatremia"},{"from":"n-scenario","to":"n-not-routine","label":"chronic/mild hyponatremia"},{"from":"n-scenario","to":"n-hypernatremia-stop","label":"hypernatremia, no herniation"},{"from":"n-herniation","to":"n-sodium-limits"},{"from":"n-hyponatremia","to":"n-sodium-limits"},{"from":"n-sodium-limits","to":"n-access"},{"from":"n-access","to":"n-dispo"}]}]},{"id":"sec-nownow","title":"3 · What to do now","blocks":[{"id":"b-nowherniation","type":"callout","tone":"danger","title":"Herniation rescue — do this now","md":"Call neurosurgery/neurocritical care immediately. Head of bed elevated, neck midline, avoid hypotension/hypoxia/fever. Give the hyperosmolar bolus below while definitive therapy is arranged.","showWhen":"hernia==1 && hypona==0"},{"id":"b-nowherniationdose","type":"dose","drug":"3% NaCl (hypertonic saline)","drugId":"hypertonic-saline","dose":"2-5 mL/kg IV bolus (typically 150-250 mL) over 10-20 min","route":"IV (peripheral acceptable for bolus)","note":"Calculator uses 3 mL/kg — the midpoint of the 2-5 mL/kg range. 23.4% NaCl 30 mL IV over 10-20 min via central line is an alternative by protocol; mannitol if hemodynamics/renal status allow.","calcRef":"hts3pctherniation","showWhen":"hernia==1 && hypona==0","whenNode":"n-herniation"},{"id":"b-nowhypona","type":"callout","tone":"danger","title":"Severe symptomatic hyponatremia — do this now","md":"Give **3% NaCl 100-150 mL IV over 10-20 min** now. Repeat up to 2 additional boluses (3 total) for persistent severe symptoms. Target: raise Na **4-6 mEq/L** only — do not normalize sodium in the ED. Check serum sodium q2h during active correction.","showWhen":"hypona==1 && hernia==0"},{"id":"b-nowneither","type":"callout","tone":"neutral","title":"Select a scenario","md":"Toggle **herniation/elevated ICP** or **severe symptomatic hyponatremia** above to see the exact next dose.","showWhen":"hernia==0 && hypona==0"}]},{"id":"sec-herniation","title":"4 · Herniation / elevated ICP rescue","blocks":[{"id":"b-hernia-steps","type":"steps","ordered":false,"items":["Call neurosurgery/neurocritical care","Head of bed elevated, neck midline, avoid hypotension/hypoxia/fever","Treat seizures and reverse anticoagulation when indicated","Temporize ventilation only for acute herniation while definitive therapy is arranged"],"whenNode":"n-herniation"},{"id":"b-hernia-dose1","type":"dose","drug":"Hypertonic saline 3% NaCl","drugId":"hypertonic-saline","dose":"2-5 mL/kg IV bolus, often 150-250 mL over 10-20 min","note":"May repeat based on neurologic response and sodium/osmolality.","calcRef":"hts3pctherniation","cite":["ref1","ref4"],"whenNode":"n-herniation"},{"id":"b-hernia-dose2","type":"dose","drug":"Hypertonic saline 23.4% NaCl","drugId":"hypertonic-saline","dose":"30 mL IV over 10-20 min via central line","note":"When available/appropriate, per protocol.","cite":["ref1","ref4"],"whenNode":"n-herniation"},{"id":"b-hernia-mannitol","type":"text","md":"Mannitol is an alternative when hemodynamics and renal status allow.","cite":["ref1","ref4"],"whenNode":"n-herniation"}]},{"id":"sec-hyponatremia","title":"5 · Severe symptomatic hyponatremia","blocks":[{"id":"b-hypona-indications","type":"text","md":"Indications: seizure, coma, severe encephalopathy, or signs of cerebral edema from hyponatremia.","cite":["ref2","ref3","ref5"],"whenNode":"n-hyponatremia"},{"id":"b-hypona-dose","type":"dose","drug":"Hypertonic saline 3% NaCl","drugId":"hypertonic-saline","dose":"100-150 mL IV over 10-20 min","note":"Repeat up to 2 additional boluses (3 total) for persistent severe symptoms.","cite":["ref2","ref3","ref5"],"whenNode":"n-hyponatremia"},{"id":"b-hypona-target","type":"stat","label":"Initial target","value":"4-6 mEq/L","tone":"danger","cite":["ref2","ref3","ref5"],"whenNode":"n-hyponatremia"},{"id":"b-hypona-nonormalize","type":"callout","tone":"danger","title":"Do not normalize sodium in the ED","md":"Check serum sodium q2h during active correction.","cite":["ref2","ref3","ref5"],"whenNode":"n-hyponatremia"}]},{"id":"sec-not-emergency","title":"6 · Not an emergency indication","blocks":[{"id":"b-not-routine","type":"callout","tone":"caution","title":"Chronic/mild hyponatremia — not routine HTS","md":"Do not use 3% saline for mild, chronic, or asymptomatic hyponatremia. Identify cause and chronicity, stop offending fluids/medications when appropriate, and use fluid restriction, salt/loop strategy, or other cause-specific therapy. DDAVP clamp is reserved for expert-managed overcorrection-risk control.","cite":["ref2","ref3"],"whenNode":"n-not-routine"},{"id":"b-hypernatremia-stop","type":"callout","tone":"danger","title":"Hypernatremia — HTS safety stop","md":"Do not give hypertonic saline to correct hypernatremia. If hypernatremia plus herniation/elevated ICP is present: treat as competing life threats, call neurocritical care/neurosurgery immediately, and avoid hypotonic fluid boluses in acute cerebral edema. Hyperosmolar rescue only if impending-herniation benefit outweighs sodium/osmolality risk, with sodium and osmolality tracked closely. For routine hypernatremia, use controlled free-water replacement based on chronicity and volume status.","cite":["ref1","ref4"],"whenNode":"n-hypernatremia-stop"}]},{"id":"sec-limits","title":"7 · Sodium targets / ODS prevention","blocks":[{"id":"b-limits-table","type":"table","columns":["Correction limit","Value"],"heroCol":1,"rows":[["Initial severe-symptom target","4-6 mEq/L"],["24h limit — high ODS risk",">8 mEq/L"],["24h limit — most patients",">10 mEq/L"],["High ODS risk factors","alcoholism, malnutrition, liver disease, hypokalemia, very low starting Na"]],"rowTones":["normal","danger","danger","caution"],"cite":["ref2","ref3","ref5"],"whenNode":"n-sodium-limits"},{"id":"b-limits-ods","type":"text","md":"If overcorrection occurs or is likely, use a DDAVP and D5W relowering strategy with nephrology/ICU guidance.","cite":["ref2","ref3","ref5"],"whenNode":"n-sodium-limits"}]},{"id":"sec-access","title":"8 · Access / monitoring","blocks":[{"id":"b-access-text","type":"text","md":"3% NaCl bolus can generally be given peripherally through a reliable IV. Continuous 3% infusion and 23.4% NaCl should follow local central-line policy. Use an infusion pump and label the line clearly.","cite":["ref1","ref2","ref4"],"whenNode":"n-access"},{"id":"b-monitoring-steps","type":"steps","ordered":false,"items":["Neuro exam and vital signs during bolus","Serum sodium/osmolality q2h during active correction","Strict I/O and volume status","Avoid hypotension, hypoxia, fever, and hypoglycemia in neurocritical patients"],"cite":["ref1","ref2","ref4"],"whenNode":"n-access"}]},{"id":"sec-dispo","title":"9 · Disposition","blocks":[{"id":"b-dispo-table","type":"table","columns":["Scenario","Disposition"],"rows":[["Herniation/elevated ICP","ICU/neurosurgery/neurocritical care"],["Severe symptomatic hyponatremia","ICU or closely monitored setting until sodium trajectory is controlled"],["Need for DDAVP clamp","ICU/stepdown per local capability"],["Overcorrection or high ODS risk","Nephrology/ICU involvement"]],"cite":["ref1","ref2","ref3"],"whenNode":"n-dispo"},{"id":"b-dispo-doc","type":"text","md":"Document indication, dose, sodium before/after, neurologic response, and next sodium check time.","cite":["ref1","ref2","ref3"],"whenNode":"n-dispo"}]}],"citations":[{"id":"ref1","label":"Cook AM, et al. Guidelines for the Acute Treatment of Cerebral Edema in Neurocritical Care Patients","url":"","grade":"Neurocrit Care. 2020;32(3):647-666","accessed":"2026"},{"id":"ref2","label":"Spasovski G, et al. Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia","url":"","grade":"Eur J Endocrinol. 2014;170(3):G1-G47","accessed":"2026"},{"id":"ref3","label":"Baek SH, et al. SALSA Trial: Bolus vs Continuous Hypertonic Saline for Symptomatic Hyponatremia","url":"","grade":"JAMA Intern Med. 2021;181(1):81-92","accessed":"2026"},{"id":"ref4","label":"EMCrit/IBCC. Elevated intracranial pressure and hypertonic saline chapters","url":"https://emcrit.org/ibcc/","accessed":"2026"},{"id":"ref5","label":"Sterns RH. Disorders of Plasma Sodium — Causes, Consequences, and Correction","url":"","grade":"N Engl J Med. 2015;372:55-65","accessed":"2026"}],"meta":{"version":"1.0","lastReviewed":"2026-07-12","evidenceThrough":"SALSA trial 2021; Cook AM Neurocrit Care 2020","nextReview":"2027-07-12","reviewer":"A. Kitlowski, MD (Emergency Medicine)","changelog":"v1.0 InfoKitt cockpit spec — full 9-node fidelity to myMedKitt hypertonic-saline-protocol tree, no merges/omissions."}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>
