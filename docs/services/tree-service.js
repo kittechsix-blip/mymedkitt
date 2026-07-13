@@ -259,6 +259,26 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/abdominal-pain-hub.js');
             return { nodes: m.ABDOMINAL_PAIN_HUB_NODES, entryNodeId: 'ap-start', categoryId: 'emergency-medicine', moduleLabels: m.ABDOMINAL_PAIN_HUB_MODULE_LABELS, citations: m.ABDOMINAL_PAIN_HUB_CITATIONS, criticalActions: m.ABDOMINAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'seizure-hub': async () => {
+            const m = await import('../data/trees/seizure-hub.js');
+            return { nodes: m.SEIZURE_HUB_NODES, entryNodeId: 'sz-start', categoryId: 'emergency-medicine', moduleLabels: m.SEIZURE_HUB_MODULE_LABELS, citations: m.SEIZURE_HUB_CITATIONS, criticalActions: m.SEIZURE_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'hemoptysis-hub': async () => {
+            const m = await import('../data/trees/hemoptysis-hub.js');
+            return { nodes: m.HEMOPTYSIS_HUB_NODES, entryNodeId: 'hmp-start', categoryId: 'emergency-medicine', moduleLabels: m.HEMOPTYSIS_HUB_MODULE_LABELS, citations: m.HEMOPTYSIS_HUB_CITATIONS, criticalActions: m.HEMOPTYSIS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'acute-monoarthritis-hub': async () => {
+            const m = await import('../data/trees/acute-monoarthritis-hub.js');
+            return { nodes: m.ACUTE_MONOARTHRITIS_HUB_NODES, entryNodeId: 'mono-start', categoryId: 'emergency-medicine', moduleLabels: m.ACUTE_MONOARTHRITIS_HUB_MODULE_LABELS, citations: m.ACUTE_MONOARTHRITIS_HUB_CITATIONS, criticalActions: m.ACUTE_MONOARTHRITIS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'sore-throat-hub': async () => {
+            const m = await import('../data/trees/sore-throat-hub.js');
+            return { nodes: m.SORE_THROAT_HUB_NODES, entryNodeId: 'st-start', categoryId: 'emergency-medicine', moduleLabels: m.SORE_THROAT_HUB_MODULE_LABELS, citations: m.SORE_THROAT_HUB_CITATIONS, criticalActions: m.SORE_THROAT_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'palpitations-hub': async () => {
+            const m = await import('../data/trees/palpitations-hub.js');
+            return { nodes: m.PALPITATIONS_HUB_NODES, entryNodeId: 'palp-start', categoryId: 'emergency-medicine', moduleLabels: m.PALPITATIONS_HUB_MODULE_LABELS, citations: m.PALPITATIONS_HUB_CITATIONS, criticalActions: m.PALPITATIONS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'acute-jaundice-hub': async () => {
             const m = await import('../data/trees/acute-jaundice-hub.js');
             return { nodes: m.ACUTE_JAUNDICE_HUB_NODES, entryNodeId: 'aj-start', categoryId: 'emergency-medicine', moduleLabels: m.ACUTE_JAUNDICE_HUB_MODULE_LABELS, citations: m.ACUTE_JAUNDICE_HUB_CITATIONS, criticalActions: m.ACUTE_JAUNDICE_HUB_CRITICAL_ACTIONS, type: 'hub' };
