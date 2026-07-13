@@ -2,6 +2,8 @@
   "name": "em-medkitt",
   "version": "1.0.0",
   "description": "Emergency Medicine Medkitt - Fast, offline-first EM workflow tool",
+  "license": "UNLICENSED",
+  "private": true,
   "main": "src/main.ts",
   "scripts": {
     "start": "electrobun run",
