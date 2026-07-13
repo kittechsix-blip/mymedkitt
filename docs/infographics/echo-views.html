@@ -1,0 +1,506 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basic Emergency Echocardiography Views (FoCUS) — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">cascade</div>
+  <h1 class="ig-title">Basic Emergency Echocardiography Views (FoCUS)</h1>
+  <p class="ig-use">Point-of-care focused cardiac ultrasound (FoCUS) for the emergency/critical-care setting — rapid assessment of global cardiac function, pericardial effusion/tamponade, RV size and strain (PE evaluation), and volume status (IVC) using the 5 essential emergency echo views: PLAX, PSAX, A4C, subcostal 4-chamber, and IVC. Requires a phased-array cardiac transducer (2–5 MHz). For quantitative LV function via EPSS, see the companion Echo-EPSS consult.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ This is a focused (not comprehensive) exam — formal echocardiography is recommended for complex cases or when findings would significantly change management.</div><div class="ig-scope-item">⚠ IVC assessment is less reliable in mechanically ventilated patients.</div><div class="ig-scope-item">⚠ Pericardial fat pad can mimic effusion — fat is slightly echogenic; true effusion is anechoic.</div><div class="ig-scope-item">⚠ Poor parasternal/apical acoustic windows (COPD, obesity, mechanical ventilation) — use the subcostal window instead.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="echo-views-start" hidden><button type="button" data-route-select="echo-views-start"><span class="ig-route-rank">1</span><span>FoCUS: 5 essential views</span></button></li><li data-route-node="echo-plax" hidden><button type="button" data-route-select="echo-plax"><span class="ig-route-rank">2</span><span>Acquire PLAX (parasternal long axis)</span></button></li><li data-route-node="echo-plax-assess" hidden><button type="button" data-route-select="echo-plax-assess"><span class="ig-route-rank">3</span><span>Assess PLAX: effusion, LV, RV, aortic root</span></button></li><li data-route-node="echo-psax" hidden><button type="button" data-route-select="echo-psax"><span class="ig-route-rank">4</span><span>Acquire PSAX (parasternal short axis)</span></button></li><li data-route-node="echo-psax-assess" hidden><button type="button" data-route-select="echo-psax-assess"><span class="ig-route-rank">5</span><span>Assess PSAX: D-sign, wall motion, LV squeeze</span></button></li><li data-route-node="echo-a4c" hidden><button type="button" data-route-select="echo-a4c"><span class="ig-route-rank">6</span><span>Acquire A4C (apical 4-chamber)</span></button></li><li data-route-node="echo-a4c-assess" hidden><button type="button" data-route-select="echo-a4c-assess"><span class="ig-route-rank">7</span><span>Assess A4C: RV:LV ratio, McConnell sign, TAPSE</span></button></li><li data-route-node="echo-subcostal" hidden><button type="button" data-route-select="echo-subcostal"><span class="ig-route-rank">8</span><span>Acquire subcostal 4-chamber</span></button></li><li data-route-node="echo-subcostal-assess" hidden><button type="button" data-route-select="echo-subcostal-assess"><span class="ig-route-rank">9</span><span>Assess subcostal: effusion, tamponade physiology</span></button></li><li data-route-node="echo-ivc" hidden><button type="button" data-route-select="echo-ivc"><span class="ig-route-rank">10</span><span>Assess IVC: diameter + collapse to CVP</span></button></li><li data-route-node="echo-summary" hidden><button type="button" data-route-select="echo-summary"><span class="ig-route-rank">11</span><span>FoCUS checklist complete</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 258 1236" width="258" height="1236" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M129,98 L129,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,206 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,314 L129,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,422 L129,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,530 L129,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,638 L129,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,746 L129,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,854 L129,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,962 L129,1004" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M129,1070 L129,1112" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="echo-views-start" tabindex="0" role="button" aria-label="FoCUS: 5 essential views"><rect x="41" y="32" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">FoCUS: 5 essential views</div></foreignObject></g><g class="ig-node" data-node="echo-plax" tabindex="0" role="button" aria-label="Acquire PLAX (parasternal long axis)"><rect x="41" y="140" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Acquire PLAX (parasternal long axis)</div></foreignObject></g><g class="ig-node" data-node="echo-plax-assess" tabindex="0" role="button" aria-label="Assess PLAX: effusion, LV, RV, aortic root"><rect x="41" y="248" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Assess PLAX: effusion, LV, RV, aortic root</div></foreignObject></g><g class="ig-node" data-node="echo-psax" tabindex="0" role="button" aria-label="Acquire PSAX (parasternal short axis)"><rect x="41" y="356" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Acquire PSAX (parasternal short axis)</div></foreignObject></g><g class="ig-node" data-node="echo-psax-assess" tabindex="0" role="button" aria-label="Assess PSAX: D-sign, wall motion, LV squeeze"><rect x="41" y="464" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Assess PSAX: D-sign, wall motion, LV squeeze</div></foreignObject></g><g class="ig-node" data-node="echo-a4c" tabindex="0" role="button" aria-label="Acquire A4C (apical 4-chamber)"><rect x="41" y="572" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Acquire A4C (apical 4-chamber)</div></foreignObject></g><g class="ig-node" data-node="echo-a4c-assess" tabindex="0" role="button" aria-label="Assess A4C: RV:LV ratio, McConnell sign, TAPSE"><rect x="41" y="680" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="47" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Assess A4C: RV:LV ratio, McConnell sign, TAPSE</div></foreignObject></g><g class="ig-node" data-node="echo-subcostal" tabindex="0" role="button" aria-label="Acquire subcostal 4-chamber"><rect x="41" y="788" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Acquire subcostal 4-chamber</div></foreignObject></g><g class="ig-node" data-node="echo-subcostal-assess" tabindex="0" role="button" aria-label="Assess subcostal: effusion, tamponade physiology"><rect x="41" y="896" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="47" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Assess subcostal: effusion, tamponade physiology</div></foreignObject></g><g class="ig-node" data-node="echo-ivc" tabindex="0" role="button" aria-label="Assess IVC: diameter + collapse to CVP"><rect x="41" y="1004" width="176" height="66" rx="6" class="ig-shape t-neutral"/><foreignObject x="47" y="1008" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Assess IVC: diameter + collapse to CVP</div></foreignObject></g><g class="ig-node" data-node="echo-summary" tabindex="0" role="button" aria-label="FoCUS checklist complete"><rect x="41" y="1112" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="47" y="1116" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">FoCUS checklist complete</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="echo-views-start" hidden><strong>FoCUS: 5 essential views</strong><span>FoCUS provides rapid LV function, pericardial effusion, RV strain, and IVC assessment</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-views-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-plax" hidden><strong>Acquire PLAX (parasternal long axis)</strong><span>PLAX: 3rd-4th ICS, marker toward left hip — remember the 3 L's rule</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-plax">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-plax-assess" hidden><strong>Assess PLAX: effusion, LV, RV, aortic root</strong><span>Assess pericardial effusion, LV function, RV size, aortic root, wall motion</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-plax-assess">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-psax" hidden><strong>Acquire PSAX (parasternal short axis)</strong><span>PSAX: rotate 90 degrees clockwise from PLAX, marker toward left shoulder</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-psax">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-psax-assess" hidden><strong>Assess PSAX: D-sign, wall motion, LV squeeze</strong><span>D-sign = RV pressure overload (PE/pulm HTN), assess wall motion and LV squeeze</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-psax-assess">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-a4c" hidden><strong>Acquire A4C (apical 4-chamber)</strong><span>A4C: cardiac apex 5th-6th ICS, probe nearly horizontal pointing toward right shoulder</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-a4c">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-a4c-assess" hidden><strong>Assess A4C: RV:LV ratio, McConnell sign, TAPSE</strong><span>RV:LV ratio &gt;1 = massive PE, McConnell sign (apical sparing) highly specific for PE</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-a4c-assess">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-subcostal" hidden><strong>Acquire subcostal 4-chamber</strong><span>Subcostal: best view for pericardial effusion, use when poor parasternal/apical windows</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-subcostal">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-subcostal-assess" hidden><strong>Assess subcostal: effusion, tamponade physiology</strong><span>Tamponade: RA systolic collapse (sensitive), RV diastolic collapse (specific)</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-subcostal-assess">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-ivc" hidden><strong>Assess IVC: diameter + collapse to CVP</strong><span>IVC &gt;2.1cm with &lt;50% collapse = elevated CVP; &lt;2.1cm with &gt;50% collapse = volume responsive</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-ivc">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="echo-summary" hidden><strong>FoCUS checklist complete</strong><span>Complete 5-view FoCUS checklist: effusion, LV function, RV strain, volume status</span><button type="button" class="ig-btn ig-open-step" data-open-step="echo-summary">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">FoCUS overview</h2><div class="ig-cond ig-stepbound" data-whennode="echo-views-start"><p class="ig-block ig-text"><strong>Focused cardiac ultrasound (FoCUS)</strong> gives a rapid bedside read on global cardiac function (LV squeeze), pericardial effusion/tamponade, RV size and strain (PE evaluation), and volume status (IVC). Probe: phased-array cardiac transducer (2–5 MHz). Patient position: supine or left lateral decubitus.</p></div><div class="ig-cond ig-stepbound" data-whennode="echo-views-start"><ol class="ig-block ig-steps"><li>Parasternal Long Axis (PLAX)</li><li>Parasternal Short Axis (PSAX)</li><li>Apical 4-Chamber (A4C)</li><li>Subcostal 4-Chamber</li><li>IVC (from subcostal)</li></ol></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">PLAX — acquisition</h2><div class="ig-cond ig-stepbound" data-whennode="echo-plax"><p class="ig-block ig-text"><strong>Position:</strong> left sternal border, 3rd–4th intercostal space. <strong>Indicator:</strong> toward right shoulder (or left hip in some conventions). Visualizes the left ventricle, left atrium, mitral valve, aortic valve/root, RVOT, and pericardium.</p></div><div class="ig-cond ig-stepbound" data-whennode="echo-plax"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">The 3 L's rule</div><div>Parasternal <strong>L</strong>ong axis should have the <strong>L</strong>eft ventricle on the <strong>L</strong>eft side of the screen.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">PLAX — assessment</h2><div class="ig-cond ig-stepbound" data-whennode="echo-plax-assess"><p class="ig-block ig-text"><strong>Pericardial effusion:</strong> anechoic stripe between epicardium and pericardium, most commonly posterior; size small (&lt;10mm), moderate (10–20mm), large (&gt;20mm). <strong>LV function:</strong> visual estimation of global squeeze; normal EF = walls move in &gt;50% during systole; see <a href="#/info/epss-measurement" target="_top" class="ig-link">EPSS measurement</a> for a quantitative read. <strong>RV size:</strong> RVOT should be &lt;2/3 of LV diameter — an enlarged RV suggests right heart strain. <strong>Aortic root:</strong> normally &lt;4 cm; look for a dissection flap if clinically indicated. <strong>Wall motion:</strong> regional hypokinesis suggests ischemia.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">PSAX — acquisition</h2><div class="ig-cond ig-stepbound" data-whennode="echo-psax"><p class="ig-block ig-text"><strong>From PLAX:</strong> rotate the probe 90° clockwise. <strong>Indicator:</strong> toward left shoulder. Fan through 4 levels: base (aortic valve — &quot;Mercedes-Benz sign&quot;), mitral valve (&quot;fish mouth&quot;), papillary muscle (best level for LV function; LV should look circular, an &quot;O&quot; shape), and apex (smallest cavity — look for apical thrombus).</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">PSAX — assessment</h2><div class="ig-cond ig-stepbound" data-whennode="echo-psax-assess"><p class="ig-block ig-text"><strong>Wall motion:</strong> all walls should contract symmetrically; regional hypokinesis/akinesis suggests coronary-territory infarction. <strong>LV function:</strong> watch the squeeze at the papillary muscle level — walls should thicken and move inward. <strong>RV size:</strong> compare RV to LV (RV wraps around LV) — an enlarged RV suggests right heart strain.</p></div><div class="ig-cond ig-stepbound" data-whennode="echo-psax-assess"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">D-sign (septal flattening)</div><div>Normal LV is circular (&quot;O&quot; shape). Pressure overload pushes the septum flat into a &quot;D&quot; shape — seen in massive PE and pulmonary hypertension. Flattening <strong>during systole</strong> = pressure overload; flattening <strong>during diastole</strong> = volume overload.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">A4C — acquisition</h2><div class="ig-cond ig-stepbound" data-whennode="echo-a4c"><p class="ig-block ig-text"><strong>Position:</strong> cardiac apex, mid-clavicular line, 5th–6th intercostal space. <strong>Indicator:</strong> toward the patient's left flank (3 o'clock). <strong>Technique:</strong> probe nearly horizontal, pointing toward the right shoulder. Visualizes all 4 chambers — LV apex at the top of screen, RV to the left of LV — plus mitral and tricuspid valves and both septa.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">A4C — assessment</h2><div class="ig-cond ig-stepbound" data-whennode="echo-a4c-assess"><p class="ig-block ig-text"><strong>RV:LV ratio:</strong> normal RV &lt;0.6× LV size; RV = LV suggests moderate RV dilation; RV &gt; LV suggests severe RV dilation (massive PE). <strong>TAPSE</strong> (tricuspid annular plane systolic excursion): M-mode through the lateral tricuspid annulus; normal ≥17 mm; &lt;17 mm suggests RV dysfunction. <strong>Global LV function:</strong> visual estimation of ejection fraction, compare to A2C view. <strong>Pericardial effusion:</strong> may see circumferential effusion from this view; RA/RV diastolic collapse suggests tamponade physiology.</p></div><div class="ig-cond ig-stepbound" data-whennode="echo-a4c-assess"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">McConnell sign</div><div>RV free wall akinesis <strong>with apical sparing</strong> — the apex &quot;winks&quot; while the rest of the RV doesn't move. Highly specific for acute PE.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="echo-a4c-assess"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">RV:LV ratio — massive PE</div><div>RV = LV suggests moderate dilation. <strong>RV &gt; LV suggests severe dilation (massive PE).</strong></div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Subcostal — acquisition</h2><div class="ig-cond ig-stepbound" data-whennode="echo-subcostal"><p class="ig-block ig-text"><strong>Position:</strong> just below the xiphoid process. <strong>Technique:</strong> probe nearly flat against the abdomen, angled toward the left shoulder. <strong>Indicator:</strong> toward the patient's left. <strong>When to use:</strong> poor parasternal/apical windows (COPD, obesity, ventilated patients); best view for pericardial effusion (liver provides the acoustic window); required for IVC assessment. Visualizes all 4 chambers (RV closest to probe), the liver, and the pericardium.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Subcostal — assessment</h2><div class="ig-cond ig-stepbound" data-whennode="echo-subcostal-assess"><p class="ig-block ig-text">Often the <strong>best view for posterior pericardial effusion</strong> — look for an anechoic stripe between the heart and liver, between the epicardium and the bright pericardial line. Global cardiac function is often easier to see here in patients with poor windows.</p></div><div class="ig-cond ig-stepbound" data-whennode="echo-subcostal-assess"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Tamponade physiology</div><div><strong>RA systolic collapse</strong> (very sensitive). <strong>RV diastolic collapse</strong> (very specific). Swinging heart in a large effusion.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="echo-subcostal-assess"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Pitfall</div><div>Pericardial fat pad can mimic effusion — fat is slightly echogenic, effusion is anechoic.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">IVC assessment</h2><div class="ig-cond ig-stepbound" data-whennode="echo-ivc"><p class="ig-block ig-text"><strong>From the subcostal view:</strong> rotate the probe to visualize the IVC entering the RA (longitudinal orientation). Measure IVC diameter 2–3 cm from the RA junction, and respiratory variation (sniff test or quiet breathing).</p></div><div class="ig-cond ig-stepbound" data-whennode="echo-ivc"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>IVC Diameter</th><th>Collapse</th><th>Estimated CVP</th></tr></thead><tbody><tr class="ig-row"><td>&lt;2.1 cm</td><td>&gt;50%</td><td>0–5 mmHg (low)</td></tr><tr class="ig-row"><td>&lt;2.1 cm</td><td>&lt;50%</td><td>5–10 mmHg</td></tr><tr class="ig-row"><td>&gt;2.1 cm</td><td>&gt;50%</td><td>5–10 mmHg</td></tr><tr class="ig-row"><td>&gt;2.1 cm</td><td>&lt;50%</td><td>10–20 mmHg (elevated)</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="echo-ivc"><p class="ig-block ig-text"><strong>Clinical applications:</strong> a plethoric IVC (&gt;2.1 cm, &lt;50% collapse) suggests elevated RA pressure, volume overload, RV failure, or tamponade. A collapsing IVC suggests the patient is likely volume responsive.</p></div><div class="ig-cond ig-stepbound" data-whennode="echo-ivc"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Pitfall</div><div>IVC assessment is less reliable in mechanically ventilated patients.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">View sequence</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">This is the condensed high-yield view. See the <a href="#/tree/echo-views" target="_top" class="ig-link">full protocol</a> for expanded technique detail and reference images at each view.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Summary &amp; disposition</h2><div class="ig-cond ig-stepbound" data-whennode="echo-summary"><ul class="ig-block ig-steps"><li>Pericardial effusion — PLAX, subcostal (best)</li><li>LV function — PLAX, PSAX, A4C (visual + EPSS)</li><li>RV size/strain — A4C (RV:LV ratio, McConnell sign)</li><li>Volume status — IVC (diameter + collapse)</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="echo-summary"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Red flags — notify immediately</div><div>Large pericardial effusion with tamponade physiology. Severely dilated RV with hypotension (massive PE). Severely reduced LV function with cardiogenic shock. Plethoric IVC with signs of volume overload.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="echo-summary"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">Recommendation</div><div>Complete 5-view focused cardiac ultrasound and integrate findings with the clinical presentation. Formal echocardiography is recommended for complex cases or when findings would significantly change management. For quantitative LV assessment, see <a href="#/info/epss-measurement" target="_top" class="ig-link">EPSS Measurement</a> or the <a href="#/tree/echo-epss" target="_top" class="ig-link">Echo-EPSS Consult</a>.</div></div></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>FoCUS overview</h3><p><strong>Focused cardiac ultrasound (FoCUS)</strong> gives a rapid bedside read on global cardiac function (LV squeeze), pericardial effusion/tamponade, RV size and strain (PE evaluation), and volume status (IVC). Probe: phased-array cardiac transducer (2–5 MHz). Patient position: supine or left lateral decubitus.</p><ul><li>Parasternal Long Axis (PLAX)</li><li>Parasternal Short Axis (PSAX)</li><li>Apical 4-Chamber (A4C)</li><li>Subcostal 4-Chamber</li><li>IVC (from subcostal)</li></ul><h3>PLAX — acquisition</h3><p><strong>Position:</strong> left sternal border, 3rd–4th intercostal space. <strong>Indicator:</strong> toward right shoulder (or left hip in some conventions). Visualizes the left ventricle, left atrium, mitral valve, aortic valve/root, RVOT, and pericardium.</p><p>Parasternal <strong>L</strong>ong axis should have the <strong>L</strong>eft ventricle on the <strong>L</strong>eft side of the screen.</p><h3>PLAX — assessment</h3><p><strong>Pericardial effusion:</strong> anechoic stripe between epicardium and pericardium, most commonly posterior; size small (&lt;10mm), moderate (10–20mm), large (&gt;20mm). <strong>LV function:</strong> visual estimation of global squeeze; normal EF = walls move in &gt;50% during systole; see <a href="#/info/epss-measurement" target="_top" class="ig-link">EPSS measurement</a> for a quantitative read. <strong>RV size:</strong> RVOT should be &lt;2/3 of LV diameter — an enlarged RV suggests right heart strain. <strong>Aortic root:</strong> normally &lt;4 cm; look for a dissection flap if clinically indicated. <strong>Wall motion:</strong> regional hypokinesis suggests ischemia.</p><h3>PSAX — acquisition</h3><p><strong>From PLAX:</strong> rotate the probe 90° clockwise. <strong>Indicator:</strong> toward left shoulder. Fan through 4 levels: base (aortic valve — &quot;Mercedes-Benz sign&quot;), mitral valve (&quot;fish mouth&quot;), papillary muscle (best level for LV function; LV should look circular, an &quot;O&quot; shape), and apex (smallest cavity — look for apical thrombus).</p><h3>PSAX — assessment</h3><p><strong>Wall motion:</strong> all walls should contract symmetrically; regional hypokinesis/akinesis suggests coronary-territory infarction. <strong>LV function:</strong> watch the squeeze at the papillary muscle level — walls should thicken and move inward. <strong>RV size:</strong> compare RV to LV (RV wraps around LV) — an enlarged RV suggests right heart strain.</p><p>Normal LV is circular (&quot;O&quot; shape). Pressure overload pushes the septum flat into a &quot;D&quot; shape — seen in massive PE and pulmonary hypertension. Flattening <strong>during systole</strong> = pressure overload; flattening <strong>during diastole</strong> = volume overload.</p><h3>A4C — acquisition</h3><p><strong>Position:</strong> cardiac apex, mid-clavicular line, 5th–6th intercostal space. <strong>Indicator:</strong> toward the patient's left flank (3 o'clock). <strong>Technique:</strong> probe nearly horizontal, pointing toward the right shoulder. Visualizes all 4 chambers — LV apex at the top of screen, RV to the left of LV — plus mitral and tricuspid valves and both septa.</p><h3>A4C — assessment</h3><p><strong>RV:LV ratio:</strong> normal RV &lt;0.6× LV size; RV = LV suggests moderate RV dilation; RV &gt; LV suggests severe RV dilation (massive PE). <strong>TAPSE</strong> (tricuspid annular plane systolic excursion): M-mode through the lateral tricuspid annulus; normal ≥17 mm; &lt;17 mm suggests RV dysfunction. <strong>Global LV function:</strong> visual estimation of ejection fraction, compare to A2C view. <strong>Pericardial effusion:</strong> may see circumferential effusion from this view; RA/RV diastolic collapse suggests tamponade physiology.</p><p>RV free wall akinesis <strong>with apical sparing</strong> — the apex &quot;winks&quot; while the rest of the RV doesn't move. Highly specific for acute PE.</p><p>RV = LV suggests moderate dilation. <strong>RV &gt; LV suggests severe dilation (massive PE).</strong></p><h3>Subcostal — acquisition</h3><p><strong>Position:</strong> just below the xiphoid process. <strong>Technique:</strong> probe nearly flat against the abdomen, angled toward the left shoulder. <strong>Indicator:</strong> toward the patient's left. <strong>When to use:</strong> poor parasternal/apical windows (COPD, obesity, ventilated patients); best view for pericardial effusion (liver provides the acoustic window); required for IVC assessment. Visualizes all 4 chambers (RV closest to probe), the liver, and the pericardium.</p><h3>Subcostal — assessment</h3><p>Often the <strong>best view for posterior pericardial effusion</strong> — look for an anechoic stripe between the heart and liver, between the epicardium and the bright pericardial line. Global cardiac function is often easier to see here in patients with poor windows.</p><p><strong>RA systolic collapse</strong> (very sensitive). <strong>RV diastolic collapse</strong> (very specific). Swinging heart in a large effusion.</p><p>Pericardial fat pad can mimic effusion — fat is slightly echogenic, effusion is anechoic.</p><h3>IVC assessment</h3><p><strong>From the subcostal view:</strong> rotate the probe to visualize the IVC entering the RA (longitudinal orientation). Measure IVC diameter 2–3 cm from the RA junction, and respiratory variation (sniff test or quiet breathing).</p><p>IVC Diameter | Collapse | Estimated CVP</p><p>&lt;2.1 cm | &gt;50% | 0–5 mmHg (low)</p><p>&lt;2.1 cm | &lt;50% | 5–10 mmHg</p><p>&gt;2.1 cm | &gt;50% | 5–10 mmHg</p><p>&gt;2.1 cm | &lt;50% | 10–20 mmHg (elevated)</p><p><strong>Clinical applications:</strong> a plethoric IVC (&gt;2.1 cm, &lt;50% collapse) suggests elevated RA pressure, volume overload, RV failure, or tamponade. A collapsing IVC suggests the patient is likely volume responsive.</p><p>IVC assessment is less reliable in mechanically ventilated patients.</p><h3>View sequence</h3><p>FoCUS: 5 essential views — FoCUS provides rapid LV function, pericardial effusion, RV strain, and IVC assessment</p><p>Acquire PLAX (parasternal long axis) — PLAX: 3rd-4th ICS, marker toward left hip — remember the 3 L's rule</p><p>Assess PLAX: effusion, LV, RV, aortic root — Assess pericardial effusion, LV function, RV size, aortic root, wall motion</p><p>Acquire PSAX (parasternal short axis) — PSAX: rotate 90 degrees clockwise from PLAX, marker toward left shoulder</p><p>Assess PSAX: D-sign, wall motion, LV squeeze — D-sign = RV pressure overload (PE/pulm HTN), assess wall motion and LV squeeze</p><p>Acquire A4C (apical 4-chamber) — A4C: cardiac apex 5th-6th ICS, probe nearly horizontal pointing toward right shoulder</p><p>Assess A4C: RV:LV ratio, McConnell sign, TAPSE — RV:LV ratio &gt;1 = massive PE, McConnell sign (apical sparing) highly specific for PE</p><p>Acquire subcostal 4-chamber — Subcostal: best view for pericardial effusion, use when poor parasternal/apical windows</p><p>Assess subcostal: effusion, tamponade physiology — Tamponade: RA systolic collapse (sensitive), RV diastolic collapse (specific)</p><p>Assess IVC: diameter + collapse to CVP — IVC &gt;2.1cm with &lt;50% collapse = elevated CVP; &lt;2.1cm with &gt;50% collapse = volume responsive</p><p>FoCUS checklist complete — Complete 5-view FoCUS checklist: effusion, LV function, RV strain, volume status</p><p>This is the condensed high-yield view. See the <a href="#/tree/echo-views" target="_top" class="ig-link">full protocol</a> for expanded technique detail and reference images at each view.</p><h3>Summary &amp; disposition</h3><ul><li>Pericardial effusion — PLAX, subcostal (best)</li><li>LV function — PLAX, PSAX, A4C (visual + EPSS)</li><li>RV size/strain — A4C (RV:LV ratio, McConnell sign)</li><li>Volume status — IVC (diameter + collapse)</li></ul><p>Large pericardial effusion with tamponade physiology. Severely dilated RV with hypotension (massive PE). Severely reduced LV function with cardiogenic shock. Plethoric IVC with signs of volume overload.</p><p>Complete 5-view focused cardiac ultrasound and integrate findings with the clinical presentation. Formal echocardiography is recommended for complex cases or when findings would significantly change management. For quantitative LV assessment, see <a href="#/info/epss-measurement" target="_top" class="ig-link">EPSS Measurement</a> or the <a href="#/tree/echo-epss" target="_top" class="ig-link">Echo-EPSS Consult</a>.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> American College of Emergency Physicians. Emergency Echocardiography: Policy Statement. ACEP. 2017.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> Lang RM, Badano LP, Mor-Avi V, et al. Recommendations for Cardiac Chamber Quantification by Echocardiography in Adults. J Am Soc Echocardiogr. 2015;28(1):1-39.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Moore CL, Rose GA, Tayal VS, et al. Focused Cardiac Ultrasound in the Emergent Setting. J Am Soc Echocardiogr. 2002;15(7):684-91.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Expert Round Table on Echocardiography in ICU. International Consensus Statement on Training Standards for Advanced Critical Care Echocardiography. Intensive Care Med. 2014;40(5):654-66.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Rudski LG, Lai WW, Afilalo J, et al. Guidelines for the Echocardiographic Assessment of the Right Heart in Adults. J Am Soc Echocardiogr. 2010;23(7):685-713.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-13</div>
+  <div>InfoKitt author+verify pipeline (source-audited against myMedKitt tree) — pending Andy Kitlowski MD final approval</div>
+  <div class="ig-provenance">Source: medkitt-consult · echo-views · v1.0 initial cockpit-mode InfoKitt spec authored from echo-views tree (11 nodes, 5 essential FoCUS views)</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"echo-views","title":"Basic Emergency Echocardiography Views (FoCUS)","shape":"cascade","intendedUse":"Point-of-care focused cardiac ultrasound (FoCUS) for the emergency/critical-care setting — rapid assessment of global cardiac function, pericardial effusion/tamponade, RV size and strain (PE evaluation), and volume status (IVC) using the 5 essential emergency echo views: PLAX, PSAX, A4C, subcostal 4-chamber, and IVC. Requires a phased-array cardiac transducer (2–5 MHz). For quantitative LV function via EPSS, see the companion Echo-EPSS consult.","scopeWarnings":["This is a focused (not comprehensive) exam — formal echocardiography is recommended for complex cases or when findings would significantly change management.","IVC assessment is less reliable in mechanically ventilated patients.","Pericardial fat pad can mimic effusion — fat is slightly echogenic; true effusion is anechoic.","Poor parasternal/apical acoustic windows (COPD, obesity, mechanical ventilation) — use the subcostal window instead."],"source":{"kind":"medkitt-consult","ref":"echo-views"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"facts":[{"id":"fivclowcvp","claim":"IVC diameter + >50% collapse — low estimated CVP","value":"\u003c2.1 cm","provenance":"consult:echo-views/echo-ivc","cite":["ref4","ref5"],"verified":"provenance"},{"id":"fivchighcvp","claim":"IVC diameter + \u003c50% collapse — elevated estimated CVP","value":">2.1 cm","provenance":"consult:echo-views/echo-ivc","cite":["ref4","ref5"],"verified":"provenance"},{"id":"ftapse","claim":"TAPSE — normal RV systolic function threshold","value":"≥17 mm","provenance":"consult:echo-views/echo-a4c-assess","cite":["ref5"],"verified":"provenance"},{"id":"frvlvratio","claim":"RV:LV ratio — severe RV dilation (massive PE) threshold","value":"RV > LV","provenance":"consult:echo-views/echo-a4c-assess","cite":["ref2","ref4","ref5"],"verified":"provenance"},{"id":"faorticroot","claim":"Aortic root — normal upper limit (PLAX)","value":"\u003c4 cm","provenance":"consult:echo-views/echo-plax-assess","cite":["ref2","ref3"],"verified":"provenance"},{"id":"frvot","claim":"RVOT size relative to LV diameter — normal upper limit (PLAX)","value":"\u003c2/3","provenance":"consult:echo-views/echo-plax-assess","cite":["ref2","ref3"],"verified":"provenance"}],"sections":[{"id":"sec-overview","title":"FoCUS overview","blocks":[{"id":"b-overview-text","type":"text","whenNode":"echo-views-start","md":"**Focused cardiac ultrasound (FoCUS)** gives a rapid bedside read on global cardiac function (LV squeeze), pericardial effusion/tamponade, RV size and strain (PE evaluation), and volume status (IVC). Probe: phased-array cardiac transducer (2–5 MHz). Patient position: supine or left lateral decubitus.","cite":["ref1","ref2"]},{"id":"b-overview-steps","type":"steps","whenNode":"echo-views-start","ordered":true,"items":["Parasternal Long Axis (PLAX)","Parasternal Short Axis (PSAX)","Apical 4-Chamber (A4C)","Subcostal 4-Chamber","IVC (from subcostal)"],"cite":["ref1","ref2"]}]},{"id":"sec-plax-view","title":"PLAX — acquisition","blocks":[{"id":"b-plax-text","type":"text","whenNode":"echo-plax","md":"**Position:** left sternal border, 3rd–4th intercostal space. **Indicator:** toward right shoulder (or left hip in some conventions). Visualizes the left ventricle, left atrium, mitral valve, aortic valve/root, RVOT, and pericardium.","cite":["ref2","ref3"]},{"id":"b-plax-3ls","type":"callout","tone":"normal","title":"The 3 L's rule","whenNode":"echo-plax","md":"Parasternal **L**ong axis should have the **L**eft ventricle on the **L**eft side of the screen.","cite":["ref2","ref3"]}]},{"id":"sec-plax-assess","title":"PLAX — assessment","blocks":[{"id":"b-plax-assess-text","type":"text","whenNode":"echo-plax-assess","md":"**Pericardial effusion:** anechoic stripe between epicardium and pericardium, most commonly posterior; size small (\u003c10mm), moderate (10–20mm), large (>20mm). **LV function:** visual estimation of global squeeze; normal EF = walls move in >50% during systole; see [EPSS measurement](#/info/epss-measurement) for a quantitative read. **RV size:** RVOT should be \u003c2/3 of LV diameter — an enlarged RV suggests right heart strain. **Aortic root:** normally \u003c4 cm; look for a dissection flap if clinically indicated. **Wall motion:** regional hypokinesis suggests ischemia.","cite":["ref2","ref3"]}]},{"id":"sec-psax-view","title":"PSAX — acquisition","blocks":[{"id":"b-psax-text","type":"text","whenNode":"echo-psax","md":"**From PLAX:** rotate the probe 90° clockwise. **Indicator:** toward left shoulder. Fan through 4 levels: base (aortic valve — \"Mercedes-Benz sign\"), mitral valve (\"fish mouth\"), papillary muscle (best level for LV function; LV should look circular, an \"O\" shape), and apex (smallest cavity — look for apical thrombus).","cite":["ref2","ref3"]}]},{"id":"sec-psax-assess","title":"PSAX — assessment","blocks":[{"id":"b-psax-assess-text","type":"text","whenNode":"echo-psax-assess","md":"**Wall motion:** all walls should contract symmetrically; regional hypokinesis/akinesis suggests coronary-territory infarction. **LV function:** watch the squeeze at the papillary muscle level — walls should thicken and move inward. **RV size:** compare RV to LV (RV wraps around LV) — an enlarged RV suggests right heart strain.","cite":["ref2","ref4"]},{"id":"b-psax-dsign","type":"callout","tone":"caution","title":"D-sign (septal flattening)","whenNode":"echo-psax-assess","md":"Normal LV is circular (\"O\" shape). Pressure overload pushes the septum flat into a \"D\" shape — seen in massive PE and pulmonary hypertension. Flattening **during systole** = pressure overload; flattening **during diastole** = volume overload.","cite":["ref2","ref4"]}]},{"id":"sec-a4c-view","title":"A4C — acquisition","blocks":[{"id":"b-a4c-text","type":"text","whenNode":"echo-a4c","md":"**Position:** cardiac apex, mid-clavicular line, 5th–6th intercostal space. **Indicator:** toward the patient's left flank (3 o'clock). **Technique:** probe nearly horizontal, pointing toward the right shoulder. Visualizes all 4 chambers — LV apex at the top of screen, RV to the left of LV — plus mitral and tricuspid valves and both septa.","cite":["ref2","ref3"]}]},{"id":"sec-a4c-assess","title":"A4C — assessment","blocks":[{"id":"b-a4c-assess-text","type":"text","whenNode":"echo-a4c-assess","md":"**RV:LV ratio:** normal RV \u003c0.6× LV size; RV = LV suggests moderate RV dilation; RV > LV suggests severe RV dilation (massive PE). **TAPSE** (tricuspid annular plane systolic excursion): M-mode through the lateral tricuspid annulus; normal ≥17 mm; \u003c17 mm suggests RV dysfunction. **Global LV function:** visual estimation of ejection fraction, compare to A2C view. **Pericardial effusion:** may see circumferential effusion from this view; RA/RV diastolic collapse suggests tamponade physiology.","cite":["ref2","ref4","ref5"]},{"id":"b-a4c-mcconnell","type":"callout","tone":"caution","title":"McConnell sign","whenNode":"echo-a4c-assess","md":"RV free wall akinesis **with apical sparing** — the apex \"winks\" while the rest of the RV doesn't move. Highly specific for acute PE.","cite":["ref2","ref4","ref5"]},{"id":"b-a4c-rvlv","type":"callout","tone":"caution","title":"RV:LV ratio — massive PE","whenNode":"echo-a4c-assess","md":"RV = LV suggests moderate dilation. **RV > LV suggests severe dilation (massive PE).**","cite":["ref2","ref4","ref5"]}]},{"id":"sec-subcostal-view","title":"Subcostal — acquisition","blocks":[{"id":"b-subcostal-text","type":"text","whenNode":"echo-subcostal","md":"**Position:** just below the xiphoid process. **Technique:** probe nearly flat against the abdomen, angled toward the left shoulder. **Indicator:** toward the patient's left. **When to use:** poor parasternal/apical windows (COPD, obesity, ventilated patients); best view for pericardial effusion (liver provides the acoustic window); required for IVC assessment. Visualizes all 4 chambers (RV closest to probe), the liver, and the pericardium.","cite":["ref1","ref2"]}]},{"id":"sec-subcostal-assess","title":"Subcostal — assessment","blocks":[{"id":"b-subcostal-assess-text","type":"text","whenNode":"echo-subcostal-assess","md":"Often the **best view for posterior pericardial effusion** — look for an anechoic stripe between the heart and liver, between the epicardium and the bright pericardial line. Global cardiac function is often easier to see here in patients with poor windows.","cite":["ref1","ref4"]},{"id":"b-subcostal-tamponade","type":"callout","tone":"danger","title":"Tamponade physiology","whenNode":"echo-subcostal-assess","md":"**RA systolic collapse** (very sensitive). **RV diastolic collapse** (very specific). Swinging heart in a large effusion.","cite":["ref1","ref4"]},{"id":"b-subcostal-pitfall","type":"callout","tone":"caution","title":"Pitfall","whenNode":"echo-subcostal-assess","md":"Pericardial fat pad can mimic effusion — fat is slightly echogenic, effusion is anechoic.","cite":["ref1","ref4"]}]},{"id":"sec-ivc","title":"IVC assessment","blocks":[{"id":"b-ivc-text","type":"text","whenNode":"echo-ivc","md":"**From the subcostal view:** rotate the probe to visualize the IVC entering the RA (longitudinal orientation). Measure IVC diameter 2–3 cm from the RA junction, and respiratory variation (sniff test or quiet breathing).","cite":["ref4","ref5"]},{"id":"b-ivc-table","type":"table","whenNode":"echo-ivc","columns":["IVC Diameter","Collapse","Estimated CVP"],"rows":[["\u003c2.1 cm",">50%","0–5 mmHg (low)"],["\u003c2.1 cm","\u003c50%","5–10 mmHg"],[">2.1 cm",">50%","5–10 mmHg"],[">2.1 cm","\u003c50%","10–20 mmHg (elevated)"]],"cite":["ref4","ref5"]},{"id":"b-ivc-application","type":"text","whenNode":"echo-ivc","md":"**Clinical applications:** a plethoric IVC (>2.1 cm, \u003c50% collapse) suggests elevated RA pressure, volume overload, RV failure, or tamponade. A collapsing IVC suggests the patient is likely volume responsive.","cite":["ref4","ref5"]},{"id":"b-ivc-pitfall","type":"callout","tone":"normal","title":"Pitfall","whenNode":"echo-ivc","md":"IVC assessment is less reliable in mechanically ventilated patients.","cite":["ref4","ref5"]}]},{"id":"sec-flow","title":"View sequence","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"echo-views-start","shape":"state","text":"FoCUS: 5 essential views","col":0,"rank":0,"detail":"FoCUS provides rapid LV function, pericardial effusion, RV strain, and IVC assessment"},{"id":"echo-plax","shape":"state","text":"Acquire PLAX (parasternal long axis)","col":0,"rank":1,"detail":"PLAX: 3rd-4th ICS, marker toward left hip — remember the 3 L's rule"},{"id":"echo-plax-assess","shape":"action","text":"Assess PLAX: effusion, LV, RV, aortic root","col":0,"rank":2,"detail":"Assess pericardial effusion, LV function, RV size, aortic root, wall motion"},{"id":"echo-psax","shape":"state","text":"Acquire PSAX (parasternal short axis)","col":0,"rank":3,"detail":"PSAX: rotate 90 degrees clockwise from PLAX, marker toward left shoulder"},{"id":"echo-psax-assess","shape":"action","text":"Assess PSAX: D-sign, wall motion, LV squeeze","col":0,"rank":4,"tone":"caution","detail":"D-sign = RV pressure overload (PE/pulm HTN), assess wall motion and LV squeeze"},{"id":"echo-a4c","shape":"state","text":"Acquire A4C (apical 4-chamber)","col":0,"rank":5,"detail":"A4C: cardiac apex 5th-6th ICS, probe nearly horizontal pointing toward right shoulder"},{"id":"echo-a4c-assess","shape":"action","text":"Assess A4C: RV:LV ratio, McConnell sign, TAPSE","col":0,"rank":6,"tone":"caution","detail":"RV:LV ratio >1 = massive PE, McConnell sign (apical sparing) highly specific for PE"},{"id":"echo-subcostal","shape":"state","text":"Acquire subcostal 4-chamber","col":0,"rank":7,"detail":"Subcostal: best view for pericardial effusion, use when poor parasternal/apical windows"},{"id":"echo-subcostal-assess","shape":"action","text":"Assess subcostal: effusion, tamponade physiology","col":0,"rank":8,"tone":"danger","detail":"Tamponade: RA systolic collapse (sensitive), RV diastolic collapse (specific)"},{"id":"echo-ivc","shape":"action","text":"Assess IVC: diameter + collapse to CVP","col":0,"rank":9,"detail":"IVC >2.1cm with \u003c50% collapse = elevated CVP; \u003c2.1cm with >50% collapse = volume responsive"},{"id":"echo-summary","shape":"state","text":"FoCUS checklist complete","col":0,"rank":10,"detail":"Complete 5-view FoCUS checklist: effusion, LV function, RV strain, volume status"}],"edges":[{"from":"echo-views-start","to":"echo-plax"},{"from":"echo-plax","to":"echo-plax-assess"},{"from":"echo-plax-assess","to":"echo-psax"},{"from":"echo-psax","to":"echo-psax-assess"},{"from":"echo-psax-assess","to":"echo-a4c"},{"from":"echo-a4c","to":"echo-a4c-assess"},{"from":"echo-a4c-assess","to":"echo-subcostal"},{"from":"echo-subcostal","to":"echo-subcostal-assess"},{"from":"echo-subcostal-assess","to":"echo-ivc"},{"from":"echo-ivc","to":"echo-summary"}]},{"id":"b-fullprotocol","type":"text","md":"This is the condensed high-yield view. See the [full protocol](#/tree/echo-views) for expanded technique detail and reference images at each view."}]},{"id":"sec-summary","title":"Summary & disposition","blocks":[{"id":"b-summary-checklist","type":"steps","whenNode":"echo-summary","ordered":false,"items":["Pericardial effusion — PLAX, subcostal (best)","LV function — PLAX, PSAX, A4C (visual + EPSS)","RV size/strain — A4C (RV:LV ratio, McConnell sign)","Volume status — IVC (diameter + collapse)"],"cite":["ref1","ref2","ref3","ref4","ref5"]},{"id":"b-summary-redflags","type":"callout","tone":"danger","title":"Red flags — notify immediately","whenNode":"echo-summary","md":"Large pericardial effusion with tamponade physiology. Severely dilated RV with hypotension (massive PE). Severely reduced LV function with cardiogenic shock. Plethoric IVC with signs of volume overload.","cite":["ref1","ref2","ref3","ref4","ref5"]},{"id":"b-summary-recommendation","type":"callout","tone":"normal","title":"Recommendation","whenNode":"echo-summary","md":"Complete 5-view focused cardiac ultrasound and integrate findings with the clinical presentation. Formal echocardiography is recommended for complex cases or when findings would significantly change management. For quantitative LV assessment, see [EPSS Measurement](#/info/epss-measurement) or the [Echo-EPSS Consult](#/tree/echo-epss).","cite":["ref1","ref2","ref3","ref4","ref5"]}]}],"citations":[{"id":"ref1","label":"American College of Emergency Physicians. Emergency Echocardiography: Policy Statement. ACEP. 2017."},{"id":"ref2","label":"Lang RM, Badano LP, Mor-Avi V, et al. Recommendations for Cardiac Chamber Quantification by Echocardiography in Adults. J Am Soc Echocardiogr. 2015;28(1):1-39."},{"id":"ref3","label":"Moore CL, Rose GA, Tayal VS, et al. Focused Cardiac Ultrasound in the Emergent Setting. J Am Soc Echocardiogr. 2002;15(7):684-91."},{"id":"ref4","label":"Expert Round Table on Echocardiography in ICU. International Consensus Statement on Training Standards for Advanced Critical Care Echocardiography. Intensive Care Med. 2014;40(5):654-66."},{"id":"ref5","label":"Rudski LG, Lai WW, Afilalo J, et al. Guidelines for the Echocardiographic Assessment of the Right Heart in Adults. J Am Soc Echocardiogr. 2010;23(7):685-713."}],"meta":{"version":"1.0","lastReviewed":"2026-07-13","reviewer":"InfoKitt author+verify pipeline (source-audited against myMedKitt tree) — pending Andy Kitlowski MD final approval","changelog":"v1.0 initial cockpit-mode InfoKitt spec authored from echo-views tree (11 nodes, 5 essential FoCUS views)"},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

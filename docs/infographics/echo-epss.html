@@ -1,0 +1,528 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Echo — EPSS for Systolic Function — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Echo — EPSS for Systolic Function</h1>
+  <p class="ig-use">Point-of-care assessment of left ventricular systolic function via E-point septal separation (EPSS), measured in the parasternal long-axis (PLAX) view with M-mode through the mitral valve leaflet tips. EPSS may be inaccurate in aortic regurgitation, mitral stenosis, hypertrophic cardiomyopathy (HCM), and non-sinus rhythms. Pediatric thresholds differ from adult thresholds (6.0 mm overall; 4.9 mm for ages 0-3 years).</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ EPSS &gt;7 mm suggests LVEF &lt;50% — the key validated threshold for reduced systolic function</div><div class="ig-scope-item">⚠ EPSS &gt;10 mm indicates more severe dysfunction (heart failure likely)</div><div class="ig-scope-item">⚠ 100% sensitivity for severe systolic dysfunction (LVEF ≤30%) when EPSS &gt;7 mm; specificity is moderate (52%) — combine with other echo findings</div><div class="ig-scope-item">⚠ Invalid in aortic regurgitation, mitral stenosis, hypertrophic cardiomyopathy (HCM), and non-sinus rhythms</div><div class="ig-scope-item">⚠ Pediatric thresholds differ from adult thresholds: 6.0 mm overall, 4.9 mm for ages 0-3 years</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-epss">Measured EPSS <span class="ig-unit">(mm)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="epss" min="0" max="25" step="0.1" value="5" aria-label="Measured EPSS slider">
+<input type="number" id="ig-num-epss" data-input="epss" min="0" max="25" step="0.1" value="5" inputmode="decimal" aria-label="Measured EPSS exact value">
+</div>
+<div class="ig-warn" data-warn-for="epss" hidden role="alert">Value outside 0–25 mm — confirm.</div>
+</div><div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="overload" aria-checked="false">B-lines or IVC plethora present</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="epss-start" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="epss-start"><span class="ig-route-rank">1</span><span>EPSS for Systolic Function</span></button></li><li data-route-node="epss-plax" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="epss-plax"><span class="ig-route-rank">2</span><span>Obtain PLAX view</span></button></li><li data-route-node="epss-mmode" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="epss-mmode"><span class="ig-route-rank">3</span><span>Activate M-mode through MV leaflet tips</span></button></li><li data-route-node="epss-measure" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="epss-measure"><span class="ig-route-rank">4</span><span>Measure E-point to septum gap</span></button></li><li data-route-node="epss-interpret" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="epss-interpret"><span class="ig-route-rank">5</span><span>Interpret EPSS value</span></button></li><li data-route-node="epss-normal" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}}"><button type="button" data-route-select="epss-normal"><span class="ig-route-rank">6</span><span>Normal systolic function likely</span></button></li><li data-route-node="epss-grey" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}}"><button type="button" data-route-select="epss-grey"><span class="ig-route-rank">6</span><span>Grey zone: assess B-lines / IVC</span></button></li><li data-route-node="epss-hf" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}"><button type="button" data-route-select="epss-hf"><span class="ig-route-rank">6</span><span>Reduced systolic function (HF likely)</span></button></li><li data-route-node="epss-overload" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;overload&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><button type="button" data-route-select="epss-overload"><span class="ig-route-rank">7</span><span>Grey zone + overload — likely reduced EF</span></button></li><li data-route-node="epss-indeterminate" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;overload&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><button type="button" data-route-select="epss-indeterminate"><span class="ig-route-rank">7</span><span>Grey zone, no overload — indeterminate</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 678 804" width="678" height="804" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M339,98 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,206 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,314 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,422 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,530 L339,551 L129,551 L129,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="547" class="ig-edge-lbl" text-anchor="middle">EPSS &lt; 7mm</text><path d="M339,530 L339,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="547" class="ig-edge-lbl" text-anchor="middle">EPSS 7-10mm</text><path d="M339,530 L339,551 L549,551 L549,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="547" class="ig-edge-lbl" text-anchor="middle">EPSS &gt; 10mm</text><path d="M339,638 L339,659 L129,659 L129,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="655" class="ig-edge-lbl" text-anchor="middle">B-lines / IVC plethora present</text><path d="M339,638 L339,659 L549,659 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="655" class="ig-edge-lbl" text-anchor="middle">No B-lines, IVC normal</text><g class="ig-node" data-node="epss-start" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="EPSS for Systolic Function"><rect x="251" y="32" width="176" height="66" rx="30" class="ig-shape t-mech"/><foreignObject x="257" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">EPSS for Systolic Function</div></foreignObject></g><g class="ig-node" data-node="epss-plax" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Obtain PLAX view"><rect x="251" y="140" width="176" height="66" rx="6" class="ig-shape t-mech"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Obtain PLAX view</div></foreignObject></g><g class="ig-node" data-node="epss-mmode" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Activate M-mode through MV leaflet tips"><rect x="251" y="248" width="176" height="66" rx="6" class="ig-shape t-mech"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Activate M-mode through MV leaflet tips</div></foreignObject></g><g class="ig-node" data-node="epss-measure" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Measure E-point to septum gap"><rect x="251" y="356" width="176" height="66" rx="6" class="ig-shape t-mech"/><foreignObject x="257" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Measure E-point to septum gap</div></foreignObject></g><g class="ig-node" data-node="epss-interpret" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Interpret EPSS value"><polygon points="273,464 405,464 427,497 405,530 273,530 251,497" class="ig-shape t-neutral"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Interpret EPSS value</div></foreignObject></g><g class="ig-node" data-node="epss-normal" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}}" tabindex="0" role="button" aria-label="Normal systolic function likely"><rect x="41" y="572" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="47" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Normal systolic function likely</div></foreignObject></g><g class="ig-node" data-node="epss-grey" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}}" tabindex="0" role="button" aria-label="Grey zone: assess B-lines / IVC"><polygon points="273,572 405,572 427,605 405,638 273,638 251,605" class="ig-shape t-caution"/><foreignObject x="257" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Grey zone: assess B-lines / IVC</div></foreignObject></g><g class="ig-node" data-node="epss-hf" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}" tabindex="0" role="button" aria-label="Reduced systolic function (HF likely)"><rect x="461" y="572" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="467" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Reduced systolic function (HF likely)</div></foreignObject></g><g class="ig-node" data-node="epss-overload" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;overload&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" tabindex="0" role="button" aria-label="Grey zone + overload — likely reduced EF"><rect x="41" y="680" width="176" height="66" rx="30" class="ig-shape t-caution"/><foreignObject x="47" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Grey zone + overload — likely reduced EF</div></foreignObject></g><g class="ig-node" data-node="epss-indeterminate" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;overload&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" tabindex="0" role="button" aria-label="Grey zone, no overload — indeterminate"><rect x="461" y="680" width="176" height="66" rx="30" class="ig-shape t-neutral"/><foreignObject x="467" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Grey zone, no overload — indeterminate</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="epss-start" hidden><strong>EPSS for Systolic Function</strong><span>EPSS &gt;7 mm is a validated threshold for reduced LVEF. Invalid in AR, MS, HCM, and non-sinus rhythms.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-plax" hidden><strong>Obtain PLAX view</strong><span>Probe at 3rd-4th ICS near sternum, marker to left hip. Visualize septum, anterior MV leaflet, LV cavity.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-plax">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-mmode" hidden><strong>Activate M-mode through MV leaflet tips</strong><span>Cursor perpendicular to septum, through tips of mitral valve leaflets in early diastole.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-mmode">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-measure" hidden><strong>Measure E-point to septum gap</strong><span>Shortest distance from the E-point peak (tallest peak on M-mode) to the nearest edge of the septum.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-measure">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-interpret" hidden><strong>Interpret EPSS value</strong><span>&lt;7mm normal, 7-10mm grey zone, &gt;10mm reduced systolic function.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-interpret">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-normal" hidden><strong>Normal systolic function likely</strong><span>EPSS &lt;7mm — preserved LVEF (≥50%) likely. Correlate clinically; consider MAPSE/FS if suspicion persists.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-normal">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-grey" hidden><strong>Grey zone: assess B-lines / IVC</strong><span>EPSS 7-10mm. Scan bilateral anterior chest for B-lines; assess IVC diameter and respiratory variation.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-grey">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-hf" hidden><strong>Reduced systolic function (HF likely)</strong><span>EPSS &gt;10mm — 100% sensitivity for LVEF ≤30%. Initiate HF workup, consider formal echo.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-hf">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-overload" hidden><strong>Grey zone + overload — likely reduced EF</strong><span>B-lines and/or IVC plethora present with borderline EPSS — supports reduced systolic function. Recommend formal echo.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-overload">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="epss-indeterminate" hidden><strong>Grey zone, no overload — indeterminate</strong><span>No B-lines, IVC normal. Specificity moderate (52%) at &gt;7mm — consider MAPSE/FS, formal echo if suspicion persists.</span><button type="button" class="ig-btn ig-open-step" data-open-step="epss-indeterminate">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">EPSS overview</h2><div class="ig-cond ig-stepbound" data-whennode="epss-start"><p class="ig-block ig-text"><strong>E-point septal separation (EPSS) &gt;7 mm is a validated threshold for detecting reduced left ventricular ejection fraction (LVEF).</strong> EPSS measures the shortest distance between the anterior mitral valve leaflet at its peak opening (E-point) and the interventricular septum during early diastole. A wider gap suggests reduced LV contractility and/or LV dilation. EPSS &gt;7 mm suggests LVEF &lt;50%; EPSS &gt;10 mm indicates more severe dysfunction. The measurement remains valid even with abnormal septal motion, including paradoxical septal movement.</p></div><div class="ig-cond ig-stepbound" data-whennode="epss-start"><div class="ig-block ig-stat t-normal"><span class="ig-stat-val">100%</span><span class="ig-stat-lbl">Sensitivity for LVEF ≤30% at EPSS &gt;7mm</span></div></div><div class="ig-cond ig-stepbound" data-whennode="epss-start"><div class="ig-block ig-stat t-caution"><span class="ig-stat-val">52%</span><span class="ig-stat-lbl">Specificity at EPSS &gt;7mm</span></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Technique — positioning, PLAX, M-mode</h2><div class="ig-cond ig-stepbound" data-whennode="epss-plax"><ul class="ig-block ig-steps"><li>Position patient supine or left lateral decubitus (brings heart closer to chest wall)</li><li>Use a phased-array cardiac transducer (2-5 MHz)</li><li>Place transducer at the 3rd-4th intercostal space, right next to the sternum</li><li>Probe marker points toward the patient's left hip (standard mode)</li><li>Hug the sternum, sliding up/down rib spaces to find the best window</li><li>Visualize interventricular septum, anterior mitral valve leaflet, and LV cavity</li><li>Remember the 3 L's: parasternal Long axis should have the Left ventricle on the Left side of the screen</li></ul></div><div class="ig-cond ig-stepbound" data-whennode="epss-mmode"><ol class="ig-block ig-steps"><li>With a good PLAX view on screen, activate M-mode</li><li>Place the M-mode cursor perpendicular to the interventricular septum</li><li>Cursor should pass through the tips of the mitral valve leaflets at the level where they open in early diastole</li><li>Ensure both septum and anterior mitral leaflet are clearly visible on the M-mode tracing</li><li>Adjust sweep speed to see 3-4 cardiac cycles</li><li>If unclear, return to 2D mode and readjust cursor position</li></ol></div><div class="ig-cond ig-stepbound" data-whennode="epss-measure"><p class="ig-block ig-text"><strong>Measure the shortest distance between the peak of the anterior mitral valve leaflet (E-point) and the interventricular septum during early diastole.</strong> On the M-mode tracing, the anterior mitral leaflet traces a characteristic pattern: the <strong>E-point</strong> is the tallest peak (maximal opening in early diastole); the <strong>A-point</strong> is a smaller peak just before systole from atrial contraction. Measure from the E-point peak to the nearest edge of the septum. EPSS reflects both the amplitude of mitral valve excursion and left ventricular size, particularly outflow tract dilation.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Interpretation thresholds</h2><div class="ig-cond ig-stepbound" data-whennode="epss-interpret"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>EPSS</th><th>Interpretation</th><th>Next step</th></tr></thead><tbody><tr class="ig-row t-normal"><td>&lt; 7 mm</td><td>Normal systolic function likely</td><td>Correlate clinically; consider MAPSE/fractional shortening if suspicion persists</td></tr><tr class="ig-row t-caution"><td>7-10 mm</td><td>Grey zone</td><td>Assess for B-lines and IVC plethora</td></tr><tr class="ig-row t-danger"><td>&gt; 10 mm</td><td>Reduced systolic function (heart failure likely)</td><td>Initiate heart failure workup; consider formal echo</td></tr></tbody></table></div></div><div class="ig-cond ig-reference"><div class="ig-block"><div class="ig-scale-wrap"><svg viewBox="0 0 640 96" width="100%" role="img" aria-label="Severity scale (mm)" preserveAspectRatio="xMidYMid meet">
+<line x1="40" y1="44" x2="600" y2="44" class="ig-axis"/><rect x="40" y="34" width="156.8" height="20" class="ig-band t-normal"/>
+<text x="118.4" y="70" text-anchor="middle" class="ig-band-lbl">Normal</text>
+<text x="118.4" y="84" text-anchor="middle" class="ig-band-action">Correlate clinically</text><rect x="196.8" y="34" width="67.19999999999999" height="20" class="ig-band t-caution"/>
+<text x="230.4" y="70" text-anchor="middle" class="ig-band-lbl">Grey zone</text>
+<text x="230.4" y="84" text-anchor="middle" class="ig-band-action">Assess B-lines / IVC</text><rect x="264" y="34" width="336" height="20" class="ig-band t-danger"/>
+<text x="432" y="70" text-anchor="middle" class="ig-band-lbl">Reduced EF (HF likely)</text>
+<text x="432" y="84" text-anchor="middle" class="ig-band-action">Initiate HF workup</text></svg></div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">▶ What to do now</h2><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}}" data-whennode="epss-normal"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">EPSS &lt; 7 mm — normal systolic function likely</div><div>Preserved LVEF (≥50%) likely. Combine with visual estimation of global cardiac function across multiple views. Consider MAPSE or fractional shortening if clinical suspicion for dysfunction persists.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}}" data-whennode="epss-grey"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">EPSS 7-10 mm — grey zone</div><div>Look for additional signs of fluid overload to clarify whether systolic function is truly reduced: bilateral B-lines on lung ultrasound and IVC diameter/collapsibility on subcostal view.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;overload&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" data-whennode="epss-overload"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Grey zone + fluid overload — likely reduced EF</div><div>EPSS 7-10 mm with B-lines and/or IVC plethora supports reduced LV systolic function. Obtain additional echo views (A4C, PSAX), consider formal echocardiography, and evaluate for underlying etiology.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:7}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&lt;=&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;overload&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" data-whennode="epss-indeterminate"><div class="ig-block ig-callout t-neutral" role="note"><div class="ig-callout-title">Grey zone, no overload — indeterminate</div><div>Specificity is moderate (52%) at the &gt;7 mm threshold — false positives can occur in this borderline range. Integrate with visual estimation of global function; consider MAPSE or fractional shortening; obtain formal echocardiography if suspicion persists.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&gt;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;epss&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:10}}" data-whennode="epss-hf"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">EPSS &gt; 10 mm — reduced systolic function</div><div>Strongly suggests severe reduction in ejection fraction (100% sensitivity for LVEF ≤30% at EPSS &gt;7 mm). Assess for fluid overload, obtain additional echo views, consider formal echocardiography, and initiate heart failure management as clinically indicated.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">EPSS assessment algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">This is the full EPSS assessment spine (5 modules, 10 steps). See the <a href="#/tree/echo-epss" target="_top" class="ig-link">full protocol</a> for image references and complete node text.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Grey zone assessment — B-lines &amp; IVC</h2><div class="ig-cond ig-stepbound" data-whennode="epss-grey"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Finding</th><th>Threshold</th><th>Significance</th></tr></thead><tbody><tr class="ig-row"><td>B-lines (lung ultrasound)</td><td>≥3 per intercostal space in ≥2 zones bilaterally</td><td>Pulmonary edema</td></tr><tr class="ig-row"><td>IVC (subcostal view)</td><td>&gt;2.1 cm diameter, &lt;50% collapse on sniff</td><td>Elevated RA pressure / fluid overload</td></tr></tbody></table></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Reference: alternative quantitative measures</h2><div class="ig-cond ig-stepbound" data-whennode="epss-normal epss-overload epss-indeterminate"><div class="ig-block ig-callout t-mech" role="note"><div class="ig-callout-title">MAPSE and fractional shortening</div><div>If clinical suspicion for dysfunction persists, consider <strong>MAPSE</strong> (mitral annular plane systolic excursion — normal ≥10 mm) or <strong>fractional shortening</strong> on PSAX (normal ≥25%) as additional quantitative measures alongside EPSS.</div></div></div></section><section class="ig-section"><h2 class="ig-h2">Reference — EPSS limitations &amp; pediatric thresholds</h2><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">EPSS may be inaccurate in</div><div>Aortic regurgitation, mitral stenosis, hypertrophic cardiomyopathy (HCM), and non-sinus rhythms. The measurement remains valid even with abnormal septal motion, including paradoxical septal movement.</div></div></div><div class="ig-cond ig-reference"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Population</th><th>EPSS threshold</th></tr></thead><tbody><tr class="ig-row"><td>Children overall</td><td>6.0 mm</td></tr><tr class="ig-row"><td>Ages 0-3 years</td><td>4.9 mm</td></tr></tbody></table></div></div><div class="ig-cond ig-reference"><p class="ig-block ig-text">For a video walkthrough of EPSS measurement, see CoreUltrasound.com — Basic Cardiac Function.</p></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>EPSS overview</h3><p><strong>E-point septal separation (EPSS) &gt;7 mm is a validated threshold for detecting reduced left ventricular ejection fraction (LVEF).</strong> EPSS measures the shortest distance between the anterior mitral valve leaflet at its peak opening (E-point) and the interventricular septum during early diastole. A wider gap suggests reduced LV contractility and/or LV dilation. EPSS &gt;7 mm suggests LVEF &lt;50%; EPSS &gt;10 mm indicates more severe dysfunction. The measurement remains valid even with abnormal septal motion, including paradoxical septal movement.</p><p>Sensitivity for LVEF ≤30% at EPSS &gt;7mm: 100%</p><p>Specificity at EPSS &gt;7mm: 52%</p><h3>Technique — positioning, PLAX, M-mode</h3><ul><li>Position patient supine or left lateral decubitus (brings heart closer to chest wall)</li><li>Use a phased-array cardiac transducer (2-5 MHz)</li><li>Place transducer at the 3rd-4th intercostal space, right next to the sternum</li><li>Probe marker points toward the patient's left hip (standard mode)</li><li>Hug the sternum, sliding up/down rib spaces to find the best window</li><li>Visualize interventricular septum, anterior mitral valve leaflet, and LV cavity</li><li>Remember the 3 L's: parasternal Long axis should have the Left ventricle on the Left side of the screen</li></ul><ul><li>With a good PLAX view on screen, activate M-mode</li><li>Place the M-mode cursor perpendicular to the interventricular septum</li><li>Cursor should pass through the tips of the mitral valve leaflets at the level where they open in early diastole</li><li>Ensure both septum and anterior mitral leaflet are clearly visible on the M-mode tracing</li><li>Adjust sweep speed to see 3-4 cardiac cycles</li><li>If unclear, return to 2D mode and readjust cursor position</li></ul><p><strong>Measure the shortest distance between the peak of the anterior mitral valve leaflet (E-point) and the interventricular septum during early diastole.</strong> On the M-mode tracing, the anterior mitral leaflet traces a characteristic pattern: the <strong>E-point</strong> is the tallest peak (maximal opening in early diastole); the <strong>A-point</strong> is a smaller peak just before systole from atrial contraction. Measure from the E-point peak to the nearest edge of the septum. EPSS reflects both the amplitude of mitral valve excursion and left ventricular size, particularly outflow tract dilation.</p><h3>Interpretation thresholds</h3><p>EPSS | Interpretation | Next step</p><p>&lt; 7 mm | Normal systolic function likely | Correlate clinically; consider MAPSE/fractional shortening if suspicion persists</p><p>7-10 mm | Grey zone | Assess for B-lines and IVC plethora</p><p>&gt; 10 mm | Reduced systolic function (heart failure likely) | Initiate heart failure workup; consider formal echo</p><p>mm: Normal 0-7; Grey zone 7-10; Reduced EF (HF likely) 10-25</p><h3>▶ What to do now</h3><p>Preserved LVEF (≥50%) likely. Combine with visual estimation of global cardiac function across multiple views. Consider MAPSE or fractional shortening if clinical suspicion for dysfunction persists.</p><p>Look for additional signs of fluid overload to clarify whether systolic function is truly reduced: bilateral B-lines on lung ultrasound and IVC diameter/collapsibility on subcostal view.</p><p>EPSS 7-10 mm with B-lines and/or IVC plethora supports reduced LV systolic function. Obtain additional echo views (A4C, PSAX), consider formal echocardiography, and evaluate for underlying etiology.</p><p>Specificity is moderate (52%) at the &gt;7 mm threshold — false positives can occur in this borderline range. Integrate with visual estimation of global function; consider MAPSE or fractional shortening; obtain formal echocardiography if suspicion persists.</p><p>Strongly suggests severe reduction in ejection fraction (100% sensitivity for LVEF ≤30% at EPSS &gt;7 mm). Assess for fluid overload, obtain additional echo views, consider formal echocardiography, and initiate heart failure management as clinically indicated.</p><h3>EPSS assessment algorithm</h3><p>EPSS for Systolic Function — EPSS &gt;7 mm is a validated threshold for reduced LVEF. Invalid in AR, MS, HCM, and non-sinus rhythms.</p><p>Obtain PLAX view — Probe at 3rd-4th ICS near sternum, marker to left hip. Visualize septum, anterior MV leaflet, LV cavity.</p><p>Activate M-mode through MV leaflet tips — Cursor perpendicular to septum, through tips of mitral valve leaflets in early diastole.</p><p>Measure E-point to septum gap — Shortest distance from the E-point peak (tallest peak on M-mode) to the nearest edge of the septum.</p><p>Interpret EPSS value — &lt;7mm normal, 7-10mm grey zone, &gt;10mm reduced systolic function.</p><p>Normal systolic function likely — EPSS &lt;7mm — preserved LVEF (≥50%) likely. Correlate clinically; consider MAPSE/FS if suspicion persists.</p><p>Grey zone: assess B-lines / IVC — EPSS 7-10mm. Scan bilateral anterior chest for B-lines; assess IVC diameter and respiratory variation.</p><p>Reduced systolic function (HF likely) — EPSS &gt;10mm — 100% sensitivity for LVEF ≤30%. Initiate HF workup, consider formal echo.</p><p>Grey zone + overload — likely reduced EF — B-lines and/or IVC plethora present with borderline EPSS — supports reduced systolic function. Recommend formal echo.</p><p>Grey zone, no overload — indeterminate — No B-lines, IVC normal. Specificity moderate (52%) at &gt;7mm — consider MAPSE/FS, formal echo if suspicion persists.</p><p>This is the full EPSS assessment spine (5 modules, 10 steps). See the <a href="#/tree/echo-epss" target="_top" class="ig-link">full protocol</a> for image references and complete node text.</p><h3>Grey zone assessment — B-lines &amp; IVC</h3><p>Finding | Threshold | Significance</p><p>B-lines (lung ultrasound) | ≥3 per intercostal space in ≥2 zones bilaterally | Pulmonary edema</p><p>IVC (subcostal view) | &gt;2.1 cm diameter, &lt;50% collapse on sniff | Elevated RA pressure / fluid overload</p><h3>Reference: alternative quantitative measures</h3><p>If clinical suspicion for dysfunction persists, consider <strong>MAPSE</strong> (mitral annular plane systolic excursion — normal ≥10 mm) or <strong>fractional shortening</strong> on PSAX (normal ≥25%) as additional quantitative measures alongside EPSS.</p><h3>Reference — EPSS limitations &amp; pediatric thresholds</h3><p>Aortic regurgitation, mitral stenosis, hypertrophic cardiomyopathy (HCM), and non-sinus rhythms. The measurement remains valid even with abnormal septal motion, including paradoxical septal movement.</p><p>Population | EPSS threshold</p><p>Children overall | 6.0 mm</p><p>Ages 0-3 years | 4.9 mm</p><p>For a video walkthrough of EPSS measurement, see CoreUltrasound.com — Basic Cardiac Function.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Stenberg Y, Wallinder L, Lindberg A, et al. Preoperative Point-of-Care Assessment of Left Ventricular Systolic Dysfunction With Transthoracic Echocardiography. Anesth Analg. 2021;132(3):717-725.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> McKaigney CJ, Krantz MJ, La Rocque CL, et al. E-Point Septal Separation: A Bedside Tool for Emergency Physician Assessment of Left Ventricular Ejection Fraction. Am J Emerg Med. 2014;32(6):493-7.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Prats MI, Bahner DP. Application of Focused Cardiac Ultrasound in Emergency Medicine. American College of Emergency Physicians. 2020.</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Satılmış Siliv N, Yamanoglu A, Pınar P, et al. Estimation of Cardiac Systolic Function Based on Mitral Valve Movements: An Accurate Bedside Tool for Emergency Physicians in Dyspneic Patients. J Ultrasound Med. 2019;38(4):1027-1038.</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Bahl A, Johnson S, Altwail M, et al. Left Ventricular Ejection Fraction Assessment by Emergency Physician-Performed Bedside Echocardiography: A Prospective Comparative Evaluation of Multiple Modalities. J Emerg Med. 2021;61(6):711-719.</li><li id="cite-ref6"><span class="ig-ref">[6]</span> Ginzton LE, Kulick D. Mitral Valve E-Point Septal Separation as an Indicator of Ejection Fraction in Patients With Reversed Septal Motion. Chest. 1985;88(3):429-31.</li><li id="cite-ref7"><span class="ig-ref">[7]</span> Ahmadpour H, Shah AA, Allen JW, et al. Mitral E Point Septal Separation: A Reliable Index of Left Ventricular Performance in Coronary Artery Disease. Am Heart J. 1983;106(1 Pt 1):21-8.</li><li id="cite-ref8"><span class="ig-ref">[8]</span> Chen E, Ramgopal S, Lorenz D, Jone PN, Horowitz R. Use of E-Point Septal Separation to Screen for Left Ventricular Function in Children. Am J Emerg Med. 2025;99:39-45.</li><li id="cite-ref9"><span class="ig-ref">[9]</span> Schick AL, Kaine JC, Al-Sadhan NA, et al. Focused Cardiac Ultrasound With Mitral Annular Plane Systolic Excursion (MAPSE) Detection of Left Ventricular Dysfunction. Am J Emerg Med. 2023;68:52-58.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-13</div>
+  <div>InfoKitt author+verify pipeline (source-audited against myMedKitt tree) — pending Andy Kitlowski MD final approval</div>
+  <div class="ig-provenance">Source: medkitt-consult · echo-epss</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"echo-epss","title":"Echo — EPSS for Systolic Function","shape":"algorithm","intendedUse":"Point-of-care assessment of left ventricular systolic function via E-point septal separation (EPSS), measured in the parasternal long-axis (PLAX) view with M-mode through the mitral valve leaflet tips. EPSS may be inaccurate in aortic regurgitation, mitral stenosis, hypertrophic cardiomyopathy (HCM), and non-sinus rhythms. Pediatric thresholds differ from adult thresholds (6.0 mm overall; 4.9 mm for ages 0-3 years).","scopeWarnings":["EPSS >7 mm suggests LVEF \u003c50% — the key validated threshold for reduced systolic function","EPSS >10 mm indicates more severe dysfunction (heart failure likely)","100% sensitivity for severe systolic dysfunction (LVEF ≤30%) when EPSS >7 mm; specificity is moderate (52%) — combine with other echo findings","Invalid in aortic regurgitation, mitral stenosis, hypertrophic cardiomyopathy (HCM), and non-sinus rhythms","Pediatric thresholds differ from adult thresholds: 6.0 mm overall, 4.9 mm for ages 0-3 years"],"source":{"kind":"medkitt-consult","ref":"echo-epss"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"epss","label":"Measured EPSS","unit":"mm","type":"number","min":0,"max":25,"step":0.1,"default":5},{"id":"overload","label":"B-lines or IVC plethora present","type":"boolean","default":0}],"calcs":[{"id":"epssdisplay","expr":"epss","unit":"mm","formula":"Measured EPSS value (E-point to septum, early diastole)","testVectors":[{"in":{"epss":5},"expect":5},{"in":{"epss":8},"expect":8},{"in":{"epss":16.3},"expect":16.3}],"exprAst":{"k":"id","name":"epss"}}],"facts":[{"id":"fsensitivity","claim":"Sensitivity for severe systolic dysfunction (LVEF ≤30%) at EPSS >7 mm","value":"100%","provenance":"consult:echo-epss/epss-start","cite":["ref2"],"verified":"provenance"},{"id":"fspecificity","claim":"Specificity at the EPSS >7 mm threshold","value":"52%","provenance":"consult:echo-epss/epss-start","cite":["ref5"],"verified":"provenance"},{"id":"fpedsoverall","claim":"Pediatric EPSS threshold, overall","value":"6.0 mm","provenance":"consult:echo-epss/epss-start","cite":["ref8"],"verified":"provenance"},{"id":"fpedsyoung","claim":"Pediatric EPSS threshold, ages 0-3 years","value":"4.9 mm","provenance":"consult:echo-epss/epss-start","cite":["ref8"],"verified":"provenance"},{"id":"fivc","claim":"Plethoric IVC threshold suggesting elevated RA pressure","value":">2.1 cm diameter, \u003c50% collapse on sniff","provenance":"consult:echo-epss/epss-grey","cite":["ref2","ref5"],"verified":"provenance"},{"id":"fblines","claim":"B-lines diagnostic of pulmonary edema","value":"≥3 per intercostal space in ≥2 zones bilaterally","provenance":"consult:echo-epss/epss-grey","cite":["ref2","ref5"],"verified":"provenance"},{"id":"fmapse","claim":"MAPSE normal threshold (alternative quantitative measure)","value":"≥10 mm","provenance":"consult:echo-epss/epss-indeterminate","cite":["ref1","ref9"],"verified":"provenance"},{"id":"ffs","claim":"Fractional shortening normal threshold on PSAX (alternative quantitative measure)","value":"≥25%","provenance":"consult:echo-epss/epss-indeterminate","cite":["ref5"],"verified":"provenance"}],"sections":[{"id":"sec-overview","title":"EPSS overview","blocks":[{"id":"b-intro","type":"text","whenNode":"epss-start","md":"**E-point septal separation (EPSS) >7 mm is a validated threshold for detecting reduced left ventricular ejection fraction (LVEF).** EPSS measures the shortest distance between the anterior mitral valve leaflet at its peak opening (E-point) and the interventricular septum during early diastole. A wider gap suggests reduced LV contractility and/or LV dilation. EPSS >7 mm suggests LVEF \u003c50%; EPSS >10 mm indicates more severe dysfunction. The measurement remains valid even with abnormal septal motion, including paradoxical septal movement.","cite":["ref1","ref2","ref3","ref4","ref6","ref7"]},{"id":"b-stat-sens","type":"stat","whenNode":"epss-start","label":"Sensitivity for LVEF ≤30% at EPSS >7mm","value":"100%","tone":"normal","cite":["ref2"]},{"id":"b-stat-spec","type":"stat","whenNode":"epss-start","label":"Specificity at EPSS >7mm","value":"52%","tone":"caution","cite":["ref5"]}]},{"id":"sec-technique","title":"Technique — positioning, PLAX, M-mode","blocks":[{"id":"b-plax-steps","type":"steps","whenNode":"epss-plax","ordered":false,"items":["Position patient supine or left lateral decubitus (brings heart closer to chest wall)","Use a phased-array cardiac transducer (2-5 MHz)","Place transducer at the 3rd-4th intercostal space, right next to the sternum","Probe marker points toward the patient's left hip (standard mode)","Hug the sternum, sliding up/down rib spaces to find the best window","Visualize interventricular septum, anterior mitral valve leaflet, and LV cavity","Remember the 3 L's: parasternal Long axis should have the Left ventricle on the Left side of the screen"],"cite":["ref3"]},{"id":"b-mmode-steps","type":"steps","whenNode":"epss-mmode","ordered":true,"items":["With a good PLAX view on screen, activate M-mode","Place the M-mode cursor perpendicular to the interventricular septum","Cursor should pass through the tips of the mitral valve leaflets at the level where they open in early diastole","Ensure both septum and anterior mitral leaflet are clearly visible on the M-mode tracing","Adjust sweep speed to see 3-4 cardiac cycles","If unclear, return to 2D mode and readjust cursor position"],"cite":["ref3"]},{"id":"b-measure-text","type":"text","whenNode":"epss-measure","md":"**Measure the shortest distance between the peak of the anterior mitral valve leaflet (E-point) and the interventricular septum during early diastole.** On the M-mode tracing, the anterior mitral leaflet traces a characteristic pattern: the **E-point** is the tallest peak (maximal opening in early diastole); the **A-point** is a smaller peak just before systole from atrial contraction. Measure from the E-point peak to the nearest edge of the septum. EPSS reflects both the amplitude of mitral valve excursion and left ventricular size, particularly outflow tract dilation.","cite":["ref1","ref2","ref3","ref4"]}]},{"id":"sec-interpretation","title":"Interpretation thresholds","blocks":[{"id":"b-interp-table","type":"table","whenNode":"epss-interpret","columns":["EPSS","Interpretation","Next step"],"rows":[["\u003c 7 mm","Normal systolic function likely","Correlate clinically; consider MAPSE/fractional shortening if suspicion persists"],["7-10 mm","Grey zone","Assess for B-lines and IVC plethora"],["> 10 mm","Reduced systolic function (heart failure likely)","Initiate heart failure workup; consider formal echo"]],"rowTones":["normal","caution","danger"],"cite":["ref2","ref4"]},{"id":"b-scale","type":"scale","min":0,"max":25,"unit":"mm","bands":[{"from":0,"to":7,"label":"Normal","action":"Correlate clinically","tone":"normal"},{"from":7,"to":10,"label":"Grey zone","action":"Assess B-lines / IVC","tone":"caution"},{"from":10,"to":25,"label":"Reduced EF (HF likely)","action":"Initiate HF workup","tone":"danger"}],"markerCalcRef":"epssdisplay","markerLabel":"Measured EPSS","cite":["ref2","ref4"]}]},{"id":"sec-nextstep","title":"▶ What to do now","blocks":[{"id":"g-normal","type":"callout","tone":"normal","showWhen":"epss\u003c7","whenNode":"epss-normal","title":"EPSS \u003c 7 mm — normal systolic function likely","md":"Preserved LVEF (≥50%) likely. Combine with visual estimation of global cardiac function across multiple views. Consider MAPSE or fractional shortening if clinical suspicion for dysfunction persists.","cite":["ref1","ref3"]},{"id":"g-grey","type":"callout","tone":"caution","showWhen":"epss>=7 && epss\u003c=10","whenNode":"epss-grey","title":"EPSS 7-10 mm — grey zone","md":"Look for additional signs of fluid overload to clarify whether systolic function is truly reduced: bilateral B-lines on lung ultrasound and IVC diameter/collapsibility on subcostal view.","cite":["ref2","ref5"]},{"id":"g-overload","type":"callout","tone":"caution","showWhen":"epss>=7 && epss\u003c=10 && overload==1","whenNode":"epss-overload","title":"Grey zone + fluid overload — likely reduced EF","md":"EPSS 7-10 mm with B-lines and/or IVC plethora supports reduced LV systolic function. Obtain additional echo views (A4C, PSAX), consider formal echocardiography, and evaluate for underlying etiology.","cite":["ref1","ref2","ref3"]},{"id":"g-indeterminate","type":"callout","tone":"neutral","showWhen":"epss>=7 && epss\u003c=10 && overload==0","whenNode":"epss-indeterminate","title":"Grey zone, no overload — indeterminate","md":"Specificity is moderate (52%) at the >7 mm threshold — false positives can occur in this borderline range. Integrate with visual estimation of global function; consider MAPSE or fractional shortening; obtain formal echocardiography if suspicion persists.","cite":["ref2","ref3"]},{"id":"g-hf","type":"callout","tone":"danger","showWhen":"epss>10","whenNode":"epss-hf","title":"EPSS > 10 mm — reduced systolic function","md":"Strongly suggests severe reduction in ejection fraction (100% sensitivity for LVEF ≤30% at EPSS >7 mm). Assess for fluid overload, obtain additional echo views, consider formal echocardiography, and initiate heart failure management as clinically indicated.","cite":["ref2","ref3","ref4"]}]},{"id":"sec-algorithm","title":"EPSS assessment algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"epss-start","shape":"state","text":"EPSS for Systolic Function","col":0,"rank":0,"tone":"mechanism","detail":"EPSS >7 mm is a validated threshold for reduced LVEF. Invalid in AR, MS, HCM, and non-sinus rhythms.","activeWhen":"1"},{"id":"epss-plax","shape":"action","text":"Obtain PLAX view","col":0,"rank":1,"tone":"mechanism","detail":"Probe at 3rd-4th ICS near sternum, marker to left hip. Visualize septum, anterior MV leaflet, LV cavity.","activeWhen":"1"},{"id":"epss-mmode","shape":"action","text":"Activate M-mode through MV leaflet tips","col":0,"rank":2,"tone":"mechanism","detail":"Cursor perpendicular to septum, through tips of mitral valve leaflets in early diastole.","activeWhen":"1"},{"id":"epss-measure","shape":"action","text":"Measure E-point to septum gap","col":0,"rank":3,"tone":"mechanism","detail":"Shortest distance from the E-point peak (tallest peak on M-mode) to the nearest edge of the septum.","activeWhen":"1"},{"id":"epss-interpret","shape":"decision","text":"Interpret EPSS value","col":0,"rank":4,"detail":"\u003c7mm normal, 7-10mm grey zone, >10mm reduced systolic function.","activeWhen":"1"},{"id":"epss-normal","shape":"state","text":"Normal systolic function likely","col":-1,"rank":5,"tone":"normal","detail":"EPSS \u003c7mm — preserved LVEF (≥50%) likely. Correlate clinically; consider MAPSE/FS if suspicion persists.","activeWhen":"epss\u003c7"},{"id":"epss-grey","shape":"decision","text":"Grey zone: assess B-lines / IVC","col":0,"rank":5,"tone":"caution","detail":"EPSS 7-10mm. Scan bilateral anterior chest for B-lines; assess IVC diameter and respiratory variation.","activeWhen":"epss>=7 && epss\u003c=10"},{"id":"epss-hf","shape":"state","text":"Reduced systolic function (HF likely)","col":1,"rank":5,"tone":"danger","detail":"EPSS >10mm — 100% sensitivity for LVEF ≤30%. Initiate HF workup, consider formal echo.","activeWhen":"epss>10"},{"id":"epss-overload","shape":"state","text":"Grey zone + overload — likely reduced EF","col":-1,"rank":6,"tone":"caution","detail":"B-lines and/or IVC plethora present with borderline EPSS — supports reduced systolic function. Recommend formal echo.","activeWhen":"epss>=7 && epss\u003c=10 && overload==1"},{"id":"epss-indeterminate","shape":"state","text":"Grey zone, no overload — indeterminate","col":1,"rank":6,"tone":"neutral","detail":"No B-lines, IVC normal. Specificity moderate (52%) at >7mm — consider MAPSE/FS, formal echo if suspicion persists.","activeWhen":"epss>=7 && epss\u003c=10 && overload==0"}],"edges":[{"from":"epss-start","to":"epss-plax"},{"from":"epss-plax","to":"epss-mmode"},{"from":"epss-mmode","to":"epss-measure"},{"from":"epss-measure","to":"epss-interpret"},{"from":"epss-interpret","to":"epss-normal","label":"EPSS \u003c 7mm"},{"from":"epss-interpret","to":"epss-grey","label":"EPSS 7-10mm"},{"from":"epss-interpret","to":"epss-hf","label":"EPSS > 10mm"},{"from":"epss-grey","to":"epss-overload","label":"B-lines / IVC plethora present"},{"from":"epss-grey","to":"epss-indeterminate","label":"No B-lines, IVC normal"}]},{"id":"b-fullprotocol","type":"text","md":"This is the full EPSS assessment spine (5 modules, 10 steps). See the [full protocol](#/tree/echo-epss) for image references and complete node text."}]},{"id":"sec-greyzone","title":"Grey zone assessment — B-lines & IVC","blocks":[{"id":"b-grey-table","type":"table","whenNode":"epss-grey","columns":["Finding","Threshold","Significance"],"rows":[["B-lines (lung ultrasound)","≥3 per intercostal space in ≥2 zones bilaterally","Pulmonary edema"],["IVC (subcostal view)",">2.1 cm diameter, \u003c50% collapse on sniff","Elevated RA pressure / fluid overload"]],"cite":["ref2","ref5"]}]},{"id":"sec-alt-measures","title":"Reference: alternative quantitative measures","blocks":[{"id":"b-alt-measures","type":"callout","tone":"mechanism","title":"MAPSE and fractional shortening","whenNode":["epss-normal","epss-overload","epss-indeterminate"],"md":"If clinical suspicion for dysfunction persists, consider **MAPSE** (mitral annular plane systolic excursion — normal ≥10 mm) or **fractional shortening** on PSAX (normal ≥25%) as additional quantitative measures alongside EPSS.","cite":["ref1","ref5","ref9"]}]},{"id":"sec-limitations","title":"Reference — EPSS limitations & pediatric thresholds","blocks":[{"id":"b-limitations-ref","type":"callout","tone":"caution","title":"EPSS may be inaccurate in","md":"Aortic regurgitation, mitral stenosis, hypertrophic cardiomyopathy (HCM), and non-sinus rhythms. The measurement remains valid even with abnormal septal motion, including paradoxical septal movement.","cite":["ref3","ref6","ref7"]},{"id":"b-peds-ref","type":"table","columns":["Population","EPSS threshold"],"rows":[["Children overall","6.0 mm"],["Ages 0-3 years","4.9 mm"]],"cite":["ref8"]},{"id":"b-video-ref","type":"text","md":"For a video walkthrough of EPSS measurement, see CoreUltrasound.com — Basic Cardiac Function."}]}],"citations":[{"id":"ref1","label":"Stenberg Y, Wallinder L, Lindberg A, et al. Preoperative Point-of-Care Assessment of Left Ventricular Systolic Dysfunction With Transthoracic Echocardiography. Anesth Analg. 2021;132(3):717-725."},{"id":"ref2","label":"McKaigney CJ, Krantz MJ, La Rocque CL, et al. E-Point Septal Separation: A Bedside Tool for Emergency Physician Assessment of Left Ventricular Ejection Fraction. Am J Emerg Med. 2014;32(6):493-7."},{"id":"ref3","label":"Prats MI, Bahner DP. Application of Focused Cardiac Ultrasound in Emergency Medicine. American College of Emergency Physicians. 2020."},{"id":"ref4","label":"Satılmış Siliv N, Yamanoglu A, Pınar P, et al. Estimation of Cardiac Systolic Function Based on Mitral Valve Movements: An Accurate Bedside Tool for Emergency Physicians in Dyspneic Patients. J Ultrasound Med. 2019;38(4):1027-1038."},{"id":"ref5","label":"Bahl A, Johnson S, Altwail M, et al. Left Ventricular Ejection Fraction Assessment by Emergency Physician-Performed Bedside Echocardiography: A Prospective Comparative Evaluation of Multiple Modalities. J Emerg Med. 2021;61(6):711-719."},{"id":"ref6","label":"Ginzton LE, Kulick D. Mitral Valve E-Point Septal Separation as an Indicator of Ejection Fraction in Patients With Reversed Septal Motion. Chest. 1985;88(3):429-31."},{"id":"ref7","label":"Ahmadpour H, Shah AA, Allen JW, et al. Mitral E Point Septal Separation: A Reliable Index of Left Ventricular Performance in Coronary Artery Disease. Am Heart J. 1983;106(1 Pt 1):21-8."},{"id":"ref8","label":"Chen E, Ramgopal S, Lorenz D, Jone PN, Horowitz R. Use of E-Point Septal Separation to Screen for Left Ventricular Function in Children. Am J Emerg Med. 2025;99:39-45."},{"id":"ref9","label":"Schick AL, Kaine JC, Al-Sadhan NA, et al. Focused Cardiac Ultrasound With Mitral Annular Plane Systolic Excursion (MAPSE) Detection of Left Ventricular Dysfunction. Am J Emerg Med. 2023;68:52-58."}],"meta":{"version":"1.0","lastReviewed":"2026-07-13","reviewer":"InfoKitt author+verify pipeline (source-audited against myMedKitt tree) — pending Andy Kitlowski MD final approval"}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

@@ -1,0 +1,514 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Continuous Bladder Irrigation — Clot Retention — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Continuous Bladder Irrigation — Clot Retention</h1>
+  <p class="ig-use">Adults with gross hematuria and clot retention (post-TURP, anticoagulated, BPH, known bladder tumor) requiring bladder decompression and irrigation in the ED. Excludes painless urinary retention with clear urine (no blood) — that pathway uses standard catheterization and the Urinary Retention workup, not CBI.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ CBI does NOT break up clots — existing clots must be MANUALLY evacuated with a Toomey syringe BEFORE starting irrigation.</div><div class="ig-scope-item">⚠ Use a large-bore 3-way (hematuria) catheter, typically 22-24 Fr — a standard small Foley clogs with clots and has no irrigation channel.</div><div class="ig-scope-item">⚠ During CBI, outflow must keep up with inflow. If outflow lags, STOP the inflow immediately — risk of bladder overdistension/perforation.</div><div class="ig-scope-item">⚠ Do NOT force the Toomey syringe against firm resistance during manual evacuation — risk of bladder injury.</div><div class="ig-scope-item">⚠ All gross hematuria with clot retention needs urologic follow-up even after CBI clears — to evaluate for malignancy and source.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl ig-select-ctl"><label for="ig-select-presentation">Presentation</label><select id="ig-select-presentation" data-input="presentation" data-select-input="1" aria-label="Presentation"><option value="1" selected>Gross hematuria + clots (clot retention)</option><option value="0">Painless retention, clear urine (no blood)</option></select></div><div class="ig-ctl ig-select-ctl"><label for="ig-select-outflow">During CBI: outflow vs inflow</label><select id="ig-select-outflow" data-input="outflow" data-select-input="1" aria-label="During CBI: outflow vs inflow"><option value="1" selected>Outflow matches inflow, effluent clearing</option><option value="0">Outflow &lt;&lt; inflow / bladder distending / pain</option></select></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="cbi-start" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="cbi-start"><span class="ig-route-rank">1</span><span>Continuous Bladder Irrigation — Clot Retention</span></button></li><li data-route-node="cbi-confirm" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="cbi-confirm"><span class="ig-route-rank">2</span><span>Clot retention vs simple retention?</span></button></li><li data-route-node="cbi-not-indicated" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}"><button type="button" data-route-select="cbi-not-indicated"><span class="ig-route-rank">3</span><span>Not clot retention — use retention pathway</span></button></li><li data-route-node="cbi-anticoag" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="cbi-anticoag"><span class="ig-route-rank">3</span><span>Identify + address bleeding source</span></button></li><li data-route-node="cbi-catheter" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="cbi-catheter"><span class="ig-route-rank">4</span><span>Step 1 — Place large-bore 3-way catheter (22-24 Fr)</span></button></li><li data-route-node="cbi-manual" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="cbi-manual"><span class="ig-route-rank">5</span><span>Step 2 — MANUAL clot evacuation (mandatory first)</span></button></li><li data-route-node="cbi-start-irrigation" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="cbi-start-irrigation"><span class="ig-route-rank">6</span><span>Step 3 — Start + titrate CBI</span></button></li><li data-route-node="cbi-monitor" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="cbi-monitor"><span class="ig-route-rank">7</span><span>Outflow vs inflow — watch closely</span></button></li><li data-route-node="cbi-working" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;outflow&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}"><button type="button" data-route-select="cbi-working"><span class="ig-route-rank">8</span><span>Disposition + mandatory hematuria workup</span></button></li><li data-route-node="cbi-obstruction" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;outflow&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}"><button type="button" data-route-select="cbi-obstruction"><span class="ig-route-rank">8</span><span>Outflow lagging — STOP + troubleshoot</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 678 912" width="678" height="912" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M339,98 L339,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,206 L339,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="223" class="ig-edge-lbl" text-anchor="middle">clot retention</text><path d="M339,206 L339,227 L129,227 L129,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="234" y="223" class="ig-edge-lbl" text-anchor="middle">simple retention</text><path d="M339,314 L339,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,422 L339,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,530 L339,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,638 L339,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,746 L339,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="763" class="ig-edge-lbl" text-anchor="middle">outflow keeps up</text><path d="M339,746 L339,767 L549,767 L549,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="763" class="ig-edge-lbl" text-anchor="middle">outflow lags</text><g class="ig-node" data-node="cbi-start" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Continuous Bladder Irrigation — Clot Retention"><rect x="251" y="32" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="257" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Continuous Bladder Irrigation — Clot Retention</div></foreignObject></g><g class="ig-node" data-node="cbi-confirm" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Clot retention vs simple retention?"><polygon points="273,140 405,140 427,173 405,206 273,206 251,173" class="ig-shape t-neutral"/><foreignObject x="257" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Clot retention vs simple retention?</div></foreignObject></g><g class="ig-node" data-node="cbi-not-indicated" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}" tabindex="0" role="button" aria-label="Not clot retention — use retention pathway"><rect x="41" y="248" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="47" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Not clot retention — use retention pathway</div></foreignObject></g><g class="ig-node" data-node="cbi-anticoag" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Identify + address bleeding source"><rect x="251" y="248" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="257" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Identify + address bleeding source</div></foreignObject></g><g class="ig-node" data-node="cbi-catheter" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Step 1 — Place large-bore 3-way catheter (22-24 Fr)"><rect x="251" y="356" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="257" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Step 1 — Place large-bore 3-way catheter (22-24 Fr)</div></foreignObject></g><g class="ig-node" data-node="cbi-manual" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Step 2 — MANUAL clot evacuation (mandatory first)"><rect x="251" y="464" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="257" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Step 2 — MANUAL clot evacuation (mandatory first)</div></foreignObject></g><g class="ig-node" data-node="cbi-start-irrigation" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Step 3 — Start + titrate CBI"><rect x="251" y="572" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="257" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Step 3 — Start + titrate CBI</div></foreignObject></g><g class="ig-node" data-node="cbi-monitor" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Outflow vs inflow — watch closely"><polygon points="273,680 405,680 427,713 405,746 273,746 251,713" class="ig-shape t-danger"/><foreignObject x="257" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Outflow vs inflow — watch closely</div></foreignObject></g><g class="ig-node" data-node="cbi-working" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;outflow&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}}" tabindex="0" role="button" aria-label="Disposition + mandatory hematuria workup"><rect x="251" y="788" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="257" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Disposition + mandatory hematuria workup</div></foreignObject></g><g class="ig-node" data-node="cbi-obstruction" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;&amp;&amp;&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;presentation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}},&quot;b&quot;:{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;outflow&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:0}}}" tabindex="0" role="button" aria-label="Outflow lagging — STOP + troubleshoot"><rect x="461" y="788" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="467" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Outflow lagging — STOP + troubleshoot</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="cbi-start" hidden><strong>Continuous Bladder Irrigation — Clot Retention</strong><span>Two rules that prevent harm: (1) CBI does NOT break up clots — manually evacuate first; (2) use a large-bore 3-way catheter, not a standard Foley.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-confirm" hidden><strong>Clot retention vs simple retention?</strong><span>Distinguish clot retention (gross hematuria + clots obstructing outflow) from simple urinary retention (no blood).</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-confirm">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-not-indicated" hidden><strong>Not clot retention — use retention pathway</strong><span>Clear urine with painless retention is simple urinary retention. CBI is not indicated; use standard catheter + retention workup.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-not-indicated">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-anticoag" hidden><strong>Identify + address bleeding source</strong><span>Review anticoagulants/antiplatelets, correct supratherapeutic INR, send CBC/coags/T&amp;S if brisk bleeding, note prior TURP/tumor.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-anticoag">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-catheter" hidden><strong>Step 1 — Place large-bore 3-way catheter (22-24 Fr)</strong><span>Confirm intravesical placement before inflating the balloon. Do NOT start irrigation fluid yet.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-catheter">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-manual" hidden><strong>Step 2 — MANUAL clot evacuation (mandatory first)</strong><span>Toomey-syringe instill/aspirate (~60 mL) until returns are clear. Do NOT force against resistance. Urology if clots will not clear.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-manual">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-start-irrigation" hidden><strong>Step 3 — Start + titrate CBI</strong><span>Titrate saline inflow to keep effluent light-pink/clear; track net fluid balance.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-start-irrigation">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-monitor" hidden><strong>Outflow vs inflow — watch closely</strong><span>The key safety check: outflow must roughly match or exceed inflow.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-monitor">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-working" hidden><strong>Disposition + mandatory hematuria workup</strong><span>Admit/observe with CBI; ensure urologic follow-up for all gross-hematuria clot retention.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-working">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="cbi-obstruction" hidden><strong>Outflow lagging — STOP + troubleshoot</strong><span>Stop inflow immediately; manually aspirate to clear; check kinking/balloon position; urology if not promptly resolved.</span><button type="button" class="ig-btn ig-open-step" data-open-step="cbi-obstruction">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Overview — Two Rules That Prevent Harm</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-start"><p class="ig-block ig-text">For gross hematuria with clot retention. Two rules prevent harm: <strong>(1) CBI does NOT break up clots</strong> — you must manually evacuate existing clots first; <strong>(2) use a large-bore 3-way catheter</strong>, not a standard Foley.</p></div><div class="ig-cond ig-stepbound" data-whennode="cbi-start"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Do not skip manual evacuation</div><div>CBI fluid flows around clots — it does not dissolve or break them. Starting irrigation before manual clot evacuation is the classic failure mode of this procedure.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Confirm Clot Retention vs Simple Retention</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-confirm"><p class="ig-block ig-text">Distinguish clot retention (gross hematuria + clots obstructing outflow) from simple urinary retention (no blood). The pathway and catheter choice differ. Clot retention: blood and clots in urine, painful distended bladder, prior TURP / anticoagulation / BPH / known bladder tumor.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Not Clot Retention — Use Retention Pathway</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-not-indicated"><div class="ig-block ig-callout t-normal" role="note"><div class="ig-callout-title">CBI not indicated</div><div>Clear urine with painless retention is simple urinary retention. CBI is not indicated. Decompress with a standard catheter and work up the cause via <a href="#/tree/urinary-retention" target="_top" class="ig-link">Urinary Retention</a>. If catheter placement is difficult, escalate per standard difficult-catheterization steps.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Identify + Address the Bleeding Source</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-anticoag"><p class="ig-block ig-text">While preparing the procedure, address reversible drivers. Reversal decisions are bleeding-severity dependent; severe hematuria with hemodynamic change warrants resuscitation and urgent urology.</p></div><div class="ig-cond ig-stepbound" data-whennode="cbi-anticoag"><ul class="ig-block ig-steps"><li>Review anticoagulants/antiplatelets; correct supratherapeutic INR; consider reversal if bleeding is severe (cross-reference institutional reversal pathway)</li><li>Check CBC, coags, type-and-screen if bleeding is brisk or hemoglobin is dropping</li><li>Note prior TURP/biopsy, known bladder/prostate tumor, recent instrumentation</li></ul></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Step 1 — Place Large-Bore 3-Way Catheter</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-catheter"><p class="ig-block ig-text">A standard 14-16 Fr Foley clogs with clots and has no irrigation channel. Use a large-bore 3-way (hematuria) catheter. The three lumens are: balloon inflation, drainage/outflow, and irrigation inflow. Do NOT start irrigation fluid yet — clots come out first, by hand.</p></div><div class="ig-cond ig-stepbound" data-whennode="cbi-catheter"><div class="ig-block ig-stat t-caution"><span class="ig-stat-val">22-24 Fr</span><span class="ig-stat-lbl">3-way hematuria catheter size</span></div></div><div class="ig-cond ig-stepbound" data-whennode="cbi-catheter"><ol class="ig-block ig-steps"><li>Sterile prep; insert the 3-way catheter; confirm intravesical placement (urine/blood return) before inflating the balloon</li><li>Inflate the balloon to the manufacturer's volume</li><li>Confirm three lumens: balloon inflation, drainage/outflow, irrigation inflow</li></ol></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Step 2 — MANUAL Clot Evacuation (Mandatory First)</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-manual"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">This is the step clinicians skip — and CBI fails without it</div><div>CBI fluid flows around clots; it does not break them. Only once the bladder is substantially clot-free do you start CBI.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="cbi-manual"><div class="ig-block ig-stat t-caution"><span class="ig-stat-val">~60 mL mL</span><span class="ig-stat-lbl">Toomey-syringe irrigation volume per cycle</span></div></div><div class="ig-cond ig-stepbound" data-whennode="cbi-manual"><ol class="ig-block ig-steps"><li>Using a catheter-tip (Toomey) syringe with ~60 mL sterile saline, instill and aspirate through the drainage port</li><li>Repeat aspiration/instillation, evacuating clots, until returns are clear or only lightly blood-tinged and no further clot is retrieved</li><li>Be patient — this can take many syringe cycles; gentle instillation, do NOT force against firm resistance (risk of bladder injury/perforation)</li><li>Only once the bladder is substantially clot-free do you start CBI</li></ol></div><div class="ig-cond ig-stepbound" data-whennode="cbi-manual"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">If clots will not clear</div><div>If you cannot clear clots manually or the bladder will not drain → urology now for cystoscopic clot evacuation.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Step 3 — Start + Titrate CBI</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-start-irrigation"><p class="ig-block ig-text">Connect sterile normal saline to the irrigation (inflow) port and open the drainage (outflow) to a closed bag. The goal is to keep clots from re-forming, NOT to break existing clots (those were removed manually). Maintain a closed, sterile system; track net fluid balance (subtract irrigant volume from total output to estimate true urine output).</p></div><div class="ig-cond ig-stepbound" data-whennode="cbi-start-irrigation"><ul class="ig-block ig-steps"><li>Titrate inflow rate to keep effluent light pink to clear — faster for brisk bleeding, slower as it clears</li><li>Brisk/bright-red bleeding → run inflow fast initially to keep effluent dilute</li><li>As effluent lightens → slow the inflow stepwise; clear/light-pink and stable → maintain a low maintenance rate</li><li>Re-darkening effluent → increase inflow and reassess for a re-bleed/clot</li></ul></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Inflow vs Outflow — Watch Closely</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-monitor"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">The key safety check during CBI</div><div>Outflow must roughly match or exceed inflow. If you keep running fluid in but little comes out, the bladder is overfilling.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Outflow Lagging — STOP + Troubleshoot</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-obstruction"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Stop the irrigation inflow immediately</div><div>Continuing to instill fluid into a non-draining bladder risks overdistension and perforation. Do not restart CBI until free drainage is re-established.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="cbi-obstruction"><ol class="ig-block ig-steps"><li>Manually aspirate the catheter with a Toomey syringe to clear an obstructing clot</li><li>Check the catheter is not kinked and the balloon is not displaced into the urethra</li><li>If outflow does not promptly recover, or bladder injury is suspected (severe pain, low return, peritoneal signs) → urology now for cystoscopy ± imaging</li></ol></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Disposition + Hematuria Workup</h2><div class="ig-cond ig-stepbound" data-whennode="cbi-working"><p class="ig-block ig-text">CBI running well with clearing effluent: admit for ongoing CBI and monitoring in most clot-retention cases; brisk or persistent bleeding warrants urology involvement and possible intervention (cystoscopic fulguration, intravesical agents). Continue to monitor hemoglobin, coagulation status, and net fluid balance.</p></div><div class="ig-cond ig-stepbound" data-whennode="cbi-working"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">Mandatory urologic follow-up</div><div>All gross hematuria with clot retention needs urologic follow-up even if it clears — to evaluate for malignancy and source.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="cbi-working"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Note field</th><th>Content</th></tr></thead><tbody><tr class="ig-row"><td>Indication</td><td>Gross hematuria with clot retention [post-TURP / anticoagulated / BPH / tumor]</td></tr><tr class="ig-row"><td>Catheter</td><td>[22/24] Fr 3-way placed, intravesical confirmed, balloon inflated</td></tr><tr class="ig-row"><td>Manual evacuation</td><td>Toomey-syringe irrigation × [n] until clear before CBI</td></tr><tr class="ig-row"><td>CBI</td><td>NS inflow titrated to light-pink effluent; outflow matched inflow</td></tr><tr class="ig-row"><td>Disposition</td><td>[Admit / urology consult]; hematuria follow-up arranged</td></tr></tbody></table></div></div></section><section class="ig-section"><h2 class="ig-h2">Reference — Urology Escalation &amp; Hematuria Workup Criteria (always visible)</h2><div class="ig-cond ig-reference"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Category</th><th>Criteria</th></tr></thead><tbody><tr class="ig-row"><td>Call urology urgently if</td><td>Cannot clear clots manually or bladder will not drain (needs cystoscopic evacuation)</td></tr><tr class="ig-row"><td>Call urology urgently if</td><td>Outflow obstruction not resolving / suspected bladder injury</td></tr><tr class="ig-row"><td>Call urology urgently if</td><td>Brisk ongoing bleeding, dropping hemoglobin, or hemodynamic change</td></tr><tr class="ig-row"><td>Call urology urgently if</td><td>Suspected tumor source or recent urologic surgery complication</td></tr><tr class="ig-row"><td>Workup</td><td>CBC, coagulation panel, type-and-screen if significant bleeding</td></tr><tr class="ig-row"><td>Workup</td><td>Review and correct anticoagulation</td></tr><tr class="ig-row"><td>Workup</td><td>All gross hematuria with clot retention needs outpatient urologic evaluation (cystoscopy ± upper-tract imaging) to exclude malignancy, regardless of resolution</td></tr></tbody></table></div></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>Overview — Two Rules That Prevent Harm</h3><p>For gross hematuria with clot retention. Two rules prevent harm: <strong>(1) CBI does NOT break up clots</strong> — you must manually evacuate existing clots first; <strong>(2) use a large-bore 3-way catheter</strong>, not a standard Foley.</p><p>CBI fluid flows around clots — it does not dissolve or break them. Starting irrigation before manual clot evacuation is the classic failure mode of this procedure.</p><h3>Confirm Clot Retention vs Simple Retention</h3><p>Distinguish clot retention (gross hematuria + clots obstructing outflow) from simple urinary retention (no blood). The pathway and catheter choice differ. Clot retention: blood and clots in urine, painful distended bladder, prior TURP / anticoagulation / BPH / known bladder tumor.</p><h3>Not Clot Retention — Use Retention Pathway</h3><p>Clear urine with painless retention is simple urinary retention. CBI is not indicated. Decompress with a standard catheter and work up the cause via <a href="#/tree/urinary-retention" target="_top" class="ig-link">Urinary Retention</a>. If catheter placement is difficult, escalate per standard difficult-catheterization steps.</p><h3>Identify + Address the Bleeding Source</h3><p>While preparing the procedure, address reversible drivers. Reversal decisions are bleeding-severity dependent; severe hematuria with hemodynamic change warrants resuscitation and urgent urology.</p><ul><li>Review anticoagulants/antiplatelets; correct supratherapeutic INR; consider reversal if bleeding is severe (cross-reference institutional reversal pathway)</li><li>Check CBC, coags, type-and-screen if bleeding is brisk or hemoglobin is dropping</li><li>Note prior TURP/biopsy, known bladder/prostate tumor, recent instrumentation</li></ul><h3>Step 1 — Place Large-Bore 3-Way Catheter</h3><p>A standard 14-16 Fr Foley clogs with clots and has no irrigation channel. Use a large-bore 3-way (hematuria) catheter. The three lumens are: balloon inflation, drainage/outflow, and irrigation inflow. Do NOT start irrigation fluid yet — clots come out first, by hand.</p><p>3-way hematuria catheter size: 22-24 Fr</p><ul><li>Sterile prep; insert the 3-way catheter; confirm intravesical placement (urine/blood return) before inflating the balloon</li><li>Inflate the balloon to the manufacturer's volume</li><li>Confirm three lumens: balloon inflation, drainage/outflow, irrigation inflow</li></ul><h3>Step 2 — MANUAL Clot Evacuation (Mandatory First)</h3><p>CBI fluid flows around clots; it does not break them. Only once the bladder is substantially clot-free do you start CBI.</p><p>Toomey-syringe irrigation volume per cycle: ~60 mL</p><ul><li>Using a catheter-tip (Toomey) syringe with ~60 mL sterile saline, instill and aspirate through the drainage port</li><li>Repeat aspiration/instillation, evacuating clots, until returns are clear or only lightly blood-tinged and no further clot is retrieved</li><li>Be patient — this can take many syringe cycles; gentle instillation, do NOT force against firm resistance (risk of bladder injury/perforation)</li><li>Only once the bladder is substantially clot-free do you start CBI</li></ul><p>If you cannot clear clots manually or the bladder will not drain → urology now for cystoscopic clot evacuation.</p><h3>Step 3 — Start + Titrate CBI</h3><p>Connect sterile normal saline to the irrigation (inflow) port and open the drainage (outflow) to a closed bag. The goal is to keep clots from re-forming, NOT to break existing clots (those were removed manually). Maintain a closed, sterile system; track net fluid balance (subtract irrigant volume from total output to estimate true urine output).</p><ul><li>Titrate inflow rate to keep effluent light pink to clear — faster for brisk bleeding, slower as it clears</li><li>Brisk/bright-red bleeding → run inflow fast initially to keep effluent dilute</li><li>As effluent lightens → slow the inflow stepwise; clear/light-pink and stable → maintain a low maintenance rate</li><li>Re-darkening effluent → increase inflow and reassess for a re-bleed/clot</li></ul><h3>Inflow vs Outflow — Watch Closely</h3><p>Outflow must roughly match or exceed inflow. If you keep running fluid in but little comes out, the bladder is overfilling.</p><h3>Outflow Lagging — STOP + Troubleshoot</h3><p>Continuing to instill fluid into a non-draining bladder risks overdistension and perforation. Do not restart CBI until free drainage is re-established.</p><ul><li>Manually aspirate the catheter with a Toomey syringe to clear an obstructing clot</li><li>Check the catheter is not kinked and the balloon is not displaced into the urethra</li><li>If outflow does not promptly recover, or bladder injury is suspected (severe pain, low return, peritoneal signs) → urology now for cystoscopy ± imaging</li></ul><h3>Disposition + Hematuria Workup</h3><p>CBI running well with clearing effluent: admit for ongoing CBI and monitoring in most clot-retention cases; brisk or persistent bleeding warrants urology involvement and possible intervention (cystoscopic fulguration, intravesical agents). Continue to monitor hemoglobin, coagulation status, and net fluid balance.</p><p>All gross hematuria with clot retention needs urologic follow-up even if it clears — to evaluate for malignancy and source.</p><p>Note field | Content</p><p>Indication | Gross hematuria with clot retention [post-TURP / anticoagulated / BPH / tumor]</p><p>Catheter | [22/24] Fr 3-way placed, intravesical confirmed, balloon inflated</p><p>Manual evacuation | Toomey-syringe irrigation × [n] until clear before CBI</p><p>CBI | NS inflow titrated to light-pink effluent; outflow matched inflow</p><p>Disposition | [Admit / urology consult]; hematuria follow-up arranged</p><h3>Reference — Urology Escalation &amp; Hematuria Workup Criteria (always visible)</h3><p>Category | Criteria</p><p>Call urology urgently if | Cannot clear clots manually or bladder will not drain (needs cystoscopic evacuation)</p><p>Call urology urgently if | Outflow obstruction not resolving / suspected bladder injury</p><p>Call urology urgently if | Brisk ongoing bleeding, dropping hemoglobin, or hemodynamic change</p><p>Call urology urgently if | Suspected tumor source or recent urologic surgery complication</p><p>Workup | CBC, coagulation panel, type-and-screen if significant bleeding</p><p>Workup | Review and correct anticoagulation</p><p>Workup | All gross hematuria with clot retention needs outpatient urologic evaluation (cystoscopy ± upper-tract imaging) to exclude malignancy, regardless of resolution</p><h3>CBI Algorithm</h3><p>Continuous Bladder Irrigation — Clot Retention — Two rules that prevent harm: (1) CBI does NOT break up clots — manually evacuate first; (2) use a large-bore 3-way catheter, not a standard Foley.</p><p>Clot retention vs simple retention? — Distinguish clot retention (gross hematuria + clots obstructing outflow) from simple urinary retention (no blood).</p><p>Not clot retention — use retention pathway — Clear urine with painless retention is simple urinary retention. CBI is not indicated; use standard catheter + retention workup.</p><p>Identify + address bleeding source — Review anticoagulants/antiplatelets, correct supratherapeutic INR, send CBC/coags/T&amp;S if brisk bleeding, note prior TURP/tumor.</p><p>Step 1 — Place large-bore 3-way catheter (22-24 Fr) — Confirm intravesical placement before inflating the balloon. Do NOT start irrigation fluid yet.</p><p>Step 2 — MANUAL clot evacuation (mandatory first) — Toomey-syringe instill/aspirate (~60 mL) until returns are clear. Do NOT force against resistance. Urology if clots will not clear.</p><p>Step 3 — Start + titrate CBI — Titrate saline inflow to keep effluent light-pink/clear; track net fluid balance.</p><p>Outflow vs inflow — watch closely — The key safety check: outflow must roughly match or exceed inflow.</p><p>Disposition + mandatory hematuria workup — Admit/observe with CBI; ensure urologic follow-up for all gross-hematuria clot retention.</p><p>Outflow lagging — STOP + troubleshoot — Stop inflow immediately; manually aspirate to clear; check kinking/balloon position; urology if not promptly resolved.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-aua-bladder-drainage"><span class="ig-ref">[1]</span> American Urological Association. Medical Student Curriculum: Bladder Drainage and Urinary Catheterization. auanet.org.</li><li id="cite-aua-urologic-emergencies"><span class="ig-ref">[2]</span> American Urological Association. Medical Student Curriculum: Urologic Emergencies (gross hematuria / clot retention). auanet.org.</li><li id="cite-roberts-hedges"><span class="ig-ref">[3]</span> Roberts JR, Custalow CB, Thomsen TW. Roberts and Hedges' Clinical Procedures in Emergency Medicine and Acute Care — GU procedures (domain comparator only).</li><li id="cite-willette-cbi"><span class="ig-ref">[4]</span> Willette PA, Coffield S. Current trends in the management of difficult urinary catheterizations and bladder irrigation. West J Emerg Med. 2012;13(6):472-478.</li><li id="cite-amboss-hematuria"><span class="ig-ref">[5]</span> AMBOSS. Hematuria — clot retention and management. amboss.com.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-13</div>
+  <div>InfoKitt author+verify pipeline (source-audited against myMedKitt tree) — pending Andy Kitlowski MD final approval</div>
+  <div class="ig-provenance">Source: medkitt-consult · continuous-bladder-irrigation · v1.0 initial cockpit-mode spec authored from myMedKitt continuous-bladder-irrigation.ts tree (10 nodes, full branch coverage).</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"continuous-bladder-irrigation","title":"Continuous Bladder Irrigation — Clot Retention","shape":"algorithm","intendedUse":"Adults with gross hematuria and clot retention (post-TURP, anticoagulated, BPH, known bladder tumor) requiring bladder decompression and irrigation in the ED. Excludes painless urinary retention with clear urine (no blood) — that pathway uses standard catheterization and the Urinary Retention workup, not CBI.","scopeWarnings":["CBI does NOT break up clots — existing clots must be MANUALLY evacuated with a Toomey syringe BEFORE starting irrigation.","Use a large-bore 3-way (hematuria) catheter, typically 22-24 Fr — a standard small Foley clogs with clots and has no irrigation channel.","During CBI, outflow must keep up with inflow. If outflow lags, STOP the inflow immediately — risk of bladder overdistension/perforation.","Do NOT force the Toomey syringe against firm resistance during manual evacuation — risk of bladder injury.","All gross hematuria with clot retention needs urologic follow-up even after CBI clears — to evaluate for malignancy and source."],"source":{"kind":"medkitt-consult","ref":"continuous-bladder-irrigation"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"presentation","label":"Presentation","type":"select","default":1,"options":[{"label":"Gross hematuria + clots (clot retention)","value":1},{"label":"Painless retention, clear urine (no blood)","value":0}]},{"id":"outflow","label":"During CBI: outflow vs inflow","type":"select","default":1,"options":[{"label":"Outflow matches inflow, effluent clearing","value":1},{"label":"Outflow \u003c\u003c inflow / bladder distending / pain","value":0}]}],"facts":[{"id":"fcathetersize","claim":"3-way hematuria catheter size for clot retention","value":"22-24 Fr","provenance":"consult:continuous-bladder-irrigation/cbi-catheter","cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"],"verified":"provenance"},{"id":"ftoomeyvolume","claim":"Toomey-syringe manual irrigation volume per instill/aspirate cycle","value":"~60 mL","unit":"mL","provenance":"consult:continuous-bladder-irrigation/cbi-manual","cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"],"verified":"provenance"}],"sections":[{"id":"sec-overview","title":"Overview — Two Rules That Prevent Harm","blocks":[{"id":"b-intro","type":"text","whenNode":"cbi-start","md":"For gross hematuria with clot retention. Two rules prevent harm: **(1) CBI does NOT break up clots** — you must manually evacuate existing clots first; **(2) use a large-bore 3-way catheter**, not a standard Foley.","cite":["aua-bladder-drainage","aua-urologic-emergencies"]},{"id":"b-goldenrules","type":"callout","tone":"danger","title":"Do not skip manual evacuation","whenNode":"cbi-start","md":"CBI fluid flows around clots — it does not dissolve or break them. Starting irrigation before manual clot evacuation is the classic failure mode of this procedure.","cite":["aua-bladder-drainage","aua-urologic-emergencies"]}]},{"id":"sec-confirm","title":"Confirm Clot Retention vs Simple Retention","blocks":[{"id":"b-confirm","type":"text","whenNode":"cbi-confirm","md":"Distinguish clot retention (gross hematuria + clots obstructing outflow) from simple urinary retention (no blood). The pathway and catheter choice differ. Clot retention: blood and clots in urine, painful distended bladder, prior TURP / anticoagulation / BPH / known bladder tumor.","cite":["aua-bladder-drainage","aua-urologic-emergencies"]}]},{"id":"sec-not-indicated","title":"Not Clot Retention — Use Retention Pathway","blocks":[{"id":"b-notindicated","type":"callout","tone":"normal","title":"CBI not indicated","whenNode":"cbi-not-indicated","md":"Clear urine with painless retention is simple urinary retention. CBI is not indicated. Decompress with a standard catheter and work up the cause via [Urinary Retention](#/tree/urinary-retention). If catheter placement is difficult, escalate per standard difficult-catheterization steps.","cite":["aua-urologic-emergencies"]}]},{"id":"sec-anticoag","title":"Identify + Address the Bleeding Source","blocks":[{"id":"b-anticoag-text","type":"text","whenNode":"cbi-anticoag","md":"While preparing the procedure, address reversible drivers. Reversal decisions are bleeding-severity dependent; severe hematuria with hemodynamic change warrants resuscitation and urgent urology.","cite":["aua-urologic-emergencies","roberts-hedges"]},{"id":"b-anticoag-steps","type":"steps","whenNode":"cbi-anticoag","ordered":false,"items":["Review anticoagulants/antiplatelets; correct supratherapeutic INR; consider reversal if bleeding is severe (cross-reference institutional reversal pathway)","Check CBC, coags, type-and-screen if bleeding is brisk or hemoglobin is dropping","Note prior TURP/biopsy, known bladder/prostate tumor, recent instrumentation"],"cite":["aua-urologic-emergencies","roberts-hedges"]}]},{"id":"sec-catheter","title":"Step 1 — Place Large-Bore 3-Way Catheter","blocks":[{"id":"b-catheter-text","type":"text","whenNode":"cbi-catheter","md":"A standard 14-16 Fr Foley clogs with clots and has no irrigation channel. Use a large-bore 3-way (hematuria) catheter. The three lumens are: balloon inflation, drainage/outflow, and irrigation inflow. Do NOT start irrigation fluid yet — clots come out first, by hand.","cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"]},{"id":"b-catheter-size","type":"stat","whenNode":"cbi-catheter","label":"3-way hematuria catheter size","value":"22-24 Fr","tone":"caution","cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"]},{"id":"b-catheter-steps","type":"steps","whenNode":"cbi-catheter","ordered":true,"items":["Sterile prep; insert the 3-way catheter; confirm intravesical placement (urine/blood return) before inflating the balloon","Inflate the balloon to the manufacturer's volume","Confirm three lumens: balloon inflation, drainage/outflow, irrigation inflow"],"cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"]}]},{"id":"sec-manual","title":"Step 2 — MANUAL Clot Evacuation (Mandatory First)","blocks":[{"id":"b-manual-callout","type":"callout","tone":"danger","title":"This is the step clinicians skip — and CBI fails without it","whenNode":"cbi-manual","md":"CBI fluid flows around clots; it does not break them. Only once the bladder is substantially clot-free do you start CBI.","cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"]},{"id":"b-manual-syringe","type":"stat","whenNode":"cbi-manual","label":"Toomey-syringe irrigation volume per cycle","value":"~60 mL","unit":"mL","tone":"caution","cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"]},{"id":"b-manual-steps","type":"steps","whenNode":"cbi-manual","ordered":true,"items":["Using a catheter-tip (Toomey) syringe with ~60 mL sterile saline, instill and aspirate through the drainage port","Repeat aspiration/instillation, evacuating clots, until returns are clear or only lightly blood-tinged and no further clot is retrieved","Be patient — this can take many syringe cycles; gentle instillation, do NOT force against firm resistance (risk of bladder injury/perforation)","Only once the bladder is substantially clot-free do you start CBI"],"cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"]},{"id":"b-manual-escalation","type":"callout","tone":"caution","title":"If clots will not clear","whenNode":"cbi-manual","md":"If you cannot clear clots manually or the bladder will not drain → urology now for cystoscopic clot evacuation.","cite":["aua-bladder-drainage","aua-urologic-emergencies","willette-cbi"]}]},{"id":"sec-irrigation","title":"Step 3 — Start + Titrate CBI","blocks":[{"id":"b-irrigation-text","type":"text","whenNode":"cbi-start-irrigation","md":"Connect sterile normal saline to the irrigation (inflow) port and open the drainage (outflow) to a closed bag. The goal is to keep clots from re-forming, NOT to break existing clots (those were removed manually). Maintain a closed, sterile system; track net fluid balance (subtract irrigant volume from total output to estimate true urine output).","cite":["aua-urologic-emergencies","willette-cbi"]},{"id":"b-irrigation-titration","type":"steps","whenNode":"cbi-start-irrigation","ordered":false,"items":["Titrate inflow rate to keep effluent light pink to clear — faster for brisk bleeding, slower as it clears","Brisk/bright-red bleeding → run inflow fast initially to keep effluent dilute","As effluent lightens → slow the inflow stepwise; clear/light-pink and stable → maintain a low maintenance rate","Re-darkening effluent → increase inflow and reassess for a re-bleed/clot"],"cite":["aua-urologic-emergencies","willette-cbi"]}]},{"id":"sec-monitor","title":"Inflow vs Outflow — Watch Closely","blocks":[{"id":"b-monitor-callout","type":"callout","tone":"danger","title":"The key safety check during CBI","whenNode":"cbi-monitor","md":"Outflow must roughly match or exceed inflow. If you keep running fluid in but little comes out, the bladder is overfilling.","cite":["aua-urologic-emergencies","willette-cbi"]}]},{"id":"sec-obstruction","title":"Outflow Lagging — STOP + Troubleshoot","blocks":[{"id":"b-obstruction-callout","type":"callout","tone":"danger","title":"Stop the irrigation inflow immediately","whenNode":"cbi-obstruction","md":"Continuing to instill fluid into a non-draining bladder risks overdistension and perforation. Do not restart CBI until free drainage is re-established.","cite":["aua-urologic-emergencies","willette-cbi"]},{"id":"b-obstruction-steps","type":"steps","whenNode":"cbi-obstruction","ordered":true,"items":["Manually aspirate the catheter with a Toomey syringe to clear an obstructing clot","Check the catheter is not kinked and the balloon is not displaced into the urethra","If outflow does not promptly recover, or bladder injury is suspected (severe pain, low return, peritoneal signs) → urology now for cystoscopy ± imaging"],"cite":["aua-urologic-emergencies","willette-cbi"]}]},{"id":"sec-working","title":"Disposition + Hematuria Workup","blocks":[{"id":"b-working-text","type":"text","whenNode":"cbi-working","md":"CBI running well with clearing effluent: admit for ongoing CBI and monitoring in most clot-retention cases; brisk or persistent bleeding warrants urology involvement and possible intervention (cystoscopic fulguration, intravesical agents). Continue to monitor hemoglobin, coagulation status, and net fluid balance.","cite":["aua-urologic-emergencies","amboss-hematuria"]},{"id":"b-working-followup","type":"callout","tone":"caution","title":"Mandatory urologic follow-up","whenNode":"cbi-working","md":"All gross hematuria with clot retention needs urologic follow-up even if it clears — to evaluate for malignancy and source.","cite":["aua-urologic-emergencies","amboss-hematuria"]},{"id":"b-working-note","type":"table","whenNode":"cbi-working","columns":["Note field","Content"],"rows":[["Indication","Gross hematuria with clot retention [post-TURP / anticoagulated / BPH / tumor]"],["Catheter","[22/24] Fr 3-way placed, intravesical confirmed, balloon inflated"],["Manual evacuation","Toomey-syringe irrigation × [n] until clear before CBI"],["CBI","NS inflow titrated to light-pink effluent; outflow matched inflow"],["Disposition","[Admit / urology consult]; hematuria follow-up arranged"]],"cite":["aua-urologic-emergencies","amboss-hematuria"]}]},{"id":"sec-reference-escalation","title":"Reference — Urology Escalation & Hematuria Workup Criteria (always visible)","blocks":[{"id":"b-reference-escalation","type":"table","columns":["Category","Criteria"],"rows":[["Call urology urgently if","Cannot clear clots manually or bladder will not drain (needs cystoscopic evacuation)"],["Call urology urgently if","Outflow obstruction not resolving / suspected bladder injury"],["Call urology urgently if","Brisk ongoing bleeding, dropping hemoglobin, or hemodynamic change"],["Call urology urgently if","Suspected tumor source or recent urologic surgery complication"],["Workup","CBC, coagulation panel, type-and-screen if significant bleeding"],["Workup","Review and correct anticoagulation"],["Workup","All gross hematuria with clot retention needs outpatient urologic evaluation (cystoscopy ± upper-tract imaging) to exclude malignancy, regardless of resolution"]],"cite":["aua-urologic-emergencies","amboss-hematuria"]}]},{"id":"sec-algorithm","title":"CBI Algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"cbi-start","shape":"state","text":"Continuous Bladder Irrigation — Clot Retention","col":0,"rank":0,"tone":"danger","detail":"Two rules that prevent harm: (1) CBI does NOT break up clots — manually evacuate first; (2) use a large-bore 3-way catheter, not a standard Foley.","activeWhen":"1"},{"id":"cbi-confirm","shape":"decision","text":"Clot retention vs simple retention?","col":0,"rank":1,"detail":"Distinguish clot retention (gross hematuria + clots obstructing outflow) from simple urinary retention (no blood).","activeWhen":"1"},{"id":"cbi-not-indicated","shape":"state","text":"Not clot retention — use retention pathway","col":-1,"rank":2,"tone":"normal","detail":"Clear urine with painless retention is simple urinary retention. CBI is not indicated; use standard catheter + retention workup.","activeWhen":"presentation==0"},{"id":"cbi-anticoag","shape":"action","text":"Identify + address bleeding source","col":0,"rank":2,"tone":"caution","detail":"Review anticoagulants/antiplatelets, correct supratherapeutic INR, send CBC/coags/T&S if brisk bleeding, note prior TURP/tumor.","activeWhen":"presentation==1"},{"id":"cbi-catheter","shape":"action","text":"Step 1 — Place large-bore 3-way catheter (22-24 Fr)","col":0,"rank":3,"tone":"caution","detail":"Confirm intravesical placement before inflating the balloon. Do NOT start irrigation fluid yet.","activeWhen":"presentation==1"},{"id":"cbi-manual","shape":"action","text":"Step 2 — MANUAL clot evacuation (mandatory first)","col":0,"rank":4,"tone":"danger","detail":"Toomey-syringe instill/aspirate (~60 mL) until returns are clear. Do NOT force against resistance. Urology if clots will not clear.","activeWhen":"presentation==1"},{"id":"cbi-start-irrigation","shape":"action","text":"Step 3 — Start + titrate CBI","col":0,"rank":5,"tone":"normal","detail":"Titrate saline inflow to keep effluent light-pink/clear; track net fluid balance.","activeWhen":"presentation==1"},{"id":"cbi-monitor","shape":"decision","text":"Outflow vs inflow — watch closely","col":0,"rank":6,"tone":"danger","detail":"The key safety check: outflow must roughly match or exceed inflow.","activeWhen":"presentation==1"},{"id":"cbi-working","shape":"state","text":"Disposition + mandatory hematuria workup","col":0,"rank":7,"tone":"normal","detail":"Admit/observe with CBI; ensure urologic follow-up for all gross-hematuria clot retention.","activeWhen":"presentation==1 && outflow==1"},{"id":"cbi-obstruction","shape":"action","text":"Outflow lagging — STOP + troubleshoot","col":1,"rank":7,"tone":"danger","detail":"Stop inflow immediately; manually aspirate to clear; check kinking/balloon position; urology if not promptly resolved.","activeWhen":"presentation==1 && outflow==0"}],"edges":[{"from":"cbi-start","to":"cbi-confirm"},{"from":"cbi-confirm","to":"cbi-anticoag","label":"clot retention"},{"from":"cbi-confirm","to":"cbi-not-indicated","label":"simple retention"},{"from":"cbi-anticoag","to":"cbi-catheter"},{"from":"cbi-catheter","to":"cbi-manual"},{"from":"cbi-manual","to":"cbi-start-irrigation"},{"from":"cbi-start-irrigation","to":"cbi-monitor"},{"from":"cbi-monitor","to":"cbi-working","label":"outflow keeps up"},{"from":"cbi-monitor","to":"cbi-obstruction","label":"outflow lags"}]}]}],"citations":[{"id":"aua-bladder-drainage","label":"American Urological Association. Medical Student Curriculum: Bladder Drainage and Urinary Catheterization. auanet.org."},{"id":"aua-urologic-emergencies","label":"American Urological Association. Medical Student Curriculum: Urologic Emergencies (gross hematuria / clot retention). auanet.org."},{"id":"roberts-hedges","label":"Roberts JR, Custalow CB, Thomsen TW. Roberts and Hedges' Clinical Procedures in Emergency Medicine and Acute Care — GU procedures (domain comparator only)."},{"id":"willette-cbi","label":"Willette PA, Coffield S. Current trends in the management of difficult urinary catheterizations and bladder irrigation. West J Emerg Med. 2012;13(6):472-478."},{"id":"amboss-hematuria","label":"AMBOSS. Hematuria — clot retention and management. amboss.com."}],"meta":{"version":"1.0","lastReviewed":"2026-07-13","reviewer":"InfoKitt author+verify pipeline (source-audited against myMedKitt tree) — pending Andy Kitlowski MD final approval","changelog":"v1.0 initial cockpit-mode spec authored from myMedKitt continuous-bladder-irrigation.ts tree (10 nodes, full branch coverage)."},"calcs":[]}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>

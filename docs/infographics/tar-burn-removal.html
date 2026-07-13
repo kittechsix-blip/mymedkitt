@@ -1,0 +1,521 @@
+<!doctype html><html lang="en" >
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tar / Asphalt Burn Removal — Dissolve, Don't Peel — InfoKitt</title><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';">
+<style>
+:root{
+  --bg:#FAFAF5; --surface:#FFFFFF; --ink:#1A1A1A; --ink2:#5A5A5A; --line:#e4e4dc;
+  --accent:#1565C0; --mech:#1565C0;
+  --normal:#2E7D32; --normal-bg:#e8f3e9;
+  --caution:#B26A00; --caution-bg:#fbefda;
+  --danger:#C62828; --danger-bg:#fbe4e4;
+  --neutral-bg:#f2f2ec;
+  --mono:'SF Mono',Monaco,'Cascadia Code',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius:12px; --shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#15161a; --surface:#1f2127; --ink:#f2f2ef; --ink2:#a9adb6; --line:#33363f;
+  --accent:#5aa2f0; --mech:#5aa2f0;
+  --normal:#7cc47f; --normal-bg:#17301c; --caution:#e6a94d; --caution-bg:#332612;
+  --danger:#ef6b6b; --danger-bg:#3a1c1c; --neutral-bg:#26282f;
+  --shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);
+}}
+:root[data-theme=light]{--bg:#FAFAF5;--surface:#FFFFFF;--ink:#1A1A1A;--ink2:#5A5A5A;--line:#e4e4dc;--accent:#1565C0;--mech:#1565C0;--normal:#2E7D32;--normal-bg:#e8f3e9;--caution:#B26A00;--caution-bg:#fbefda;--danger:#C62828;--danger-bg:#fbe4e4;--neutral-bg:#f2f2ec;--shadow:0 1px 3px rgba(0,0,0,.09),0 4px 12px rgba(0,0,0,.05);}
+:root[data-theme=dark]{--bg:#15161a;--surface:#1f2127;--ink:#f2f2ef;--ink2:#a9adb6;--line:#33363f;--accent:#5aa2f0;--mech:#5aa2f0;--normal:#7cc47f;--normal-bg:#17301c;--caution:#e6a94d;--caution-bg:#332612;--danger:#ef6b6b;--danger-bg:#3a1c1c;--neutral-bg:#26282f;--shadow:0 1px 3px rgba(0,0,0,.4),0 6px 16px rgba(0,0,0,.3);}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+.ig-root{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;max-width:760px;margin:0 auto;padding:16px 16px 48px;-webkit-text-size-adjust:100%}
+.ig-header{border-bottom:2px solid var(--line);padding-bottom:12px;margin-bottom:12px}
+.ig-shape-badge{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:2px 10px;margin-bottom:8px}
+.ig-title{font-size:26px;line-height:1.15;margin:0 0 4px}
+.ig-use{font-size:13px;color:var(--ink2);margin:0}
+.ig-scope{background:var(--danger-bg);border:1px solid var(--danger);border-radius:var(--radius);padding:10px 12px;margin-bottom:14px}
+.ig-scope-item{color:var(--danger);font-weight:600;font-size:14px}
+.ig-scope-item+.ig-scope-item{margin-top:4px}
+.ig-h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink2);margin:22px 0 10px;font-weight:700}
+.ig-section{margin-bottom:6px}
+.ig-block{margin:10px 0}
+.ig-text{font-size:16px}
+.ig-link{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
+.ig-ref{color:var(--accent);font-size:.72em;vertical-align:super;text-decoration:none;font-weight:700;padding:0 1px}
+.ig-stat{display:inline-flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);min-width:120px;margin:6px 8px 6px 0}
+.ig-stat-val{font-size:26px;font-weight:800;font-family:var(--mono);line-height:1}
+.ig-stat-lbl{font-size:12px;color:var(--ink2);margin-top:4px}
+.ig-stat.t-danger .ig-stat-val{color:var(--danger)} .ig-stat.t-normal .ig-stat-val{color:var(--normal)} .ig-stat.t-caution .ig-stat-val{color:var(--caution)} .ig-stat.t-mech .ig-stat-val{color:var(--mech)}
+.ig-stat[data-fail] .ig-stat-val{color:var(--danger);font-size:15px;font-weight:700}
+.ig-steps{padding-left:22px;font-size:15px} .ig-steps li{margin:5px 0}
+.ig-dose{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;box-shadow:var(--shadow)}
+.ig-dose-drug{font-weight:700;font-size:15px}
+.ig-dose-val{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--accent);text-align:right}
+.ig-dose[data-fail] .ig-dose-val{color:var(--danger);font-size:14px}
+.ig-dose-route{font-size:12px;color:var(--ink2)} .ig-dose-note{grid-column:1/-1;font-size:13px;color:var(--ink2);margin-top:4px}
+.ig-tablewrap{overflow-x:auto} .ig-table{border-collapse:collapse;width:100%;font-size:14px}
+.ig-table th,.ig-table td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+.ig-table th{background:var(--neutral-bg);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink2)}
+.ig-table td.hero,.ig-table th.hero{font-family:var(--mono);font-weight:800;font-size:15px}
+.ig-row.t-danger{background:var(--danger-bg)} .ig-row.t-caution{background:var(--caution-bg)} .ig-row.t-normal{background:var(--normal-bg)}
+.ig-callout{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);font-size:15px}
+.ig-callout.t-danger{background:var(--danger-bg);border-color:var(--danger)} .ig-callout.t-caution{background:var(--caution-bg);border-color:var(--caution)} .ig-callout.t-normal{background:var(--normal-bg);border-color:var(--normal)} .ig-callout.t-mech{background:color-mix(in srgb,var(--mech) 10%,transparent);border-color:var(--mech)}
+.ig-callout-title{font-weight:800;margin-bottom:3px}
+.ig-disc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:8px 0;box-shadow:var(--shadow)}
+.ig-disc>summary{cursor:pointer;padding:12px 14px;font-weight:600;font-size:15px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
+.ig-disc>summary::-webkit-details-marker{display:none}
+.ig-disc>summary::after{content:"+";font-size:20px;color:var(--ink2)} .ig-disc[open]>summary::after{content:"–"}
+.ig-scent{font-size:12px;color:var(--ink2);font-weight:400}
+.ig-disc-body{padding:0 14px 12px}
+.ig-flowblock{position:relative}
+.ig-zoom{position:absolute;top:8px;right:8px;z-index:3;display:flex;gap:4px}
+.ig-zoom button{width:36px;height:36px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:0}
+.ig-zoom button[data-zoom=reset]{width:auto;padding:0 10px;font-size:13px}
+.ig-flowwrap{overflow:auto;-webkit-overflow-scrolling:touch;padding:6px 0;max-height:78vh}
+.ig-flow{display:block;margin:0 auto;max-width:100%;height:auto;touch-action:pan-y pinch-zoom;transition:width .12s ease}
+.ig-shape{fill:var(--surface);stroke:var(--ink2);stroke-width:1.5;filter:drop-shadow(0 1px 2px rgba(0,0,0,.12))}
+.ig-shape.t-danger{fill:var(--danger-bg);stroke:var(--danger)} .ig-shape.t-caution{fill:var(--caution-bg);stroke:var(--caution)} .ig-shape.t-normal{fill:var(--normal-bg);stroke:var(--normal)} .ig-shape.t-mech{fill:color-mix(in srgb,var(--mech) 12%,var(--surface));stroke:var(--mech)}
+.ig-node{cursor:pointer} .ig-node:focus{outline:none} .ig-node:focus .ig-shape{stroke-width:3;stroke:var(--accent)}
+.ig-node-lbl{font-family:var(--sans);font-size:12.5px;line-height:1.15;color:var(--ink);text-align:center;height:100%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.ig-flow [data-node][data-active] .ig-shape,.ig-flow [data-node][data-auto] .ig-shape{stroke-width:3.5}
+.ig-flow [data-node][data-auto] .ig-shape{stroke:var(--accent)}
+.ig-flow:has([data-active]) [data-node]:not([data-active]),.ig-flow:has([data-auto]) [data-node]:not([data-auto]):not([data-active]){opacity:.35}
+.ig-edge{stroke:var(--ink2);stroke-width:1.75} .ig-arrowhead{fill:var(--ink2)}
+.ig-edge-lbl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+.ig-node-detail{background:var(--neutral-bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-top:8px}
+.ig-node-detail strong,.ig-node-detail span{display:block}.ig-node-detail span{margin:4px 0 10px;color:var(--ink2)}
+.ig-open-step{width:100%;border-color:var(--accent);color:var(--accent)}
+.ig-scale-wrap{margin:8px 0}
+.ig-axis{stroke:var(--ink2);stroke-width:1.5}
+.ig-band{opacity:.9} .ig-band.t-normal{fill:var(--normal)} .ig-band.t-caution{fill:var(--caution)} .ig-band.t-danger{fill:var(--danger)}
+.ig-band-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--sans)}
+.ig-band-action{font-size:9.5px;fill:var(--ink2);font-family:var(--sans)}
+.ig-marker{fill:var(--ink)} .ig-marker-lbl{font-size:11px;fill:var(--ink);font-weight:700;font-family:var(--mono)}
+.ig-harm{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:3 2} .ig-harm-lbl{font-size:9px;fill:var(--ink2)}
+.ig-controls{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:16px;box-shadow:var(--shadow)}
+@media (min-width:900px){.ig-controls{position:sticky;top:12px;z-index:5}}
+.ig-ctl-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ig-param-readout{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.ig-edited{font-size:11px;background:var(--caution);color:#fff;border-radius:20px;padding:1px 8px}
+.ig-ctl{margin:8px 0} .ig-ctl label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.ig-unit{color:var(--ink2);font-weight:400}
+.ig-ctl-row{display:flex;gap:10px;align-items:center}
+.ig-ctl-row input[type=range]{flex:1;height:32px} .ig-ctl-row input[type=number]{width:88px;font-family:var(--mono);font-size:16px;padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.ig-select-ctl select{width:100%;min-height:44px;padding:8px 34px 8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-weight:600}
+.ig-warn{color:var(--caution);font-size:12px;margin-top:4px;font-weight:600}
+.ig-ctl-btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ig-btn{min-height:44px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+.ig-btn:active{transform:translateY(1px)} .ig-btn[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ig-toggles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.ig-toggle{min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink2);font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow);display:flex;align-items:center;gap:8px}
+.ig-toggle::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ink2);flex:none}
+.ig-toggle[aria-checked=true]{background:var(--danger-bg);border-color:var(--danger);color:var(--danger)}
+.ig-toggle[aria-checked=true]::before{background:var(--danger);border-color:var(--danger)}
+.ig-toggle:active{transform:translateY(1px)}
+.ig-cond[hidden]{display:none}
+.ig-currentstep{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border-radius:12px;padding:9px 12px;margin-bottom:14px;box-shadow:var(--shadow);font-size:14px}
+.ig-cs-dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;animation:ig-pulse 1.6s ease-in-out infinite}
+@keyframes ig-pulse{0%,100%{opacity:.5}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ig-cs-dot{animation:none}}
+.ig-cs-label{flex:1;font-weight:600} .ig-cs-label b{font-weight:800}
+.ig-cs-clear{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:16px;min-height:34px;padding:4px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ig-cs-clear:active{transform:translateY(1px)}
+.ig-root[data-stepping] .ig-cond[data-whennode]:not([hidden]){outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
+[data-quiz][data-hidden]{background:var(--ink2);color:transparent;border-radius:4px;cursor:pointer;user-select:none}
+[data-quiz][data-hidden]::after{content:"tap to reveal";color:var(--bg);font-size:11px}
+.ig-textalt,.ig-cites{margin-top:20px}
+.ig-textalt>summary{cursor:pointer;font-size:13px;color:var(--ink2);min-height:44px;display:flex;align-items:center}
+.ig-textalt-body{font-size:14px;color:var(--ink2)}
+.ig-cite-list{font-size:13px;color:var(--ink2);padding-left:20px} .ig-cite-list li{margin:5px 0} .ig-cite-ids{color:var(--ink2);font-size:11px}
+.ig-cites a{color:var(--accent)}
+.ig-footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2);line-height:1.6}
+.ig-provenance{opacity:.8}
+.ig-modebar{position:sticky;top:0;z-index:8;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg);padding:6px 0 10px;margin-bottom:10px}
+.ig-modebar button{min-height:52px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink2);font:inherit;cursor:pointer;padding:5px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ig-modebar button span{font-weight:800}.ig-modebar button small{font-size:11px}.ig-modebar button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.ig-map-panel .ig-controls{margin-bottom:12px}
+.ig-route{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ig-route-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:8px;font-weight:800}.ig-route-head [data-route-status]{font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.ig-route ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.ig-route li{display:flex;align-items:center}.ig-route li+li::before{content:"→";color:var(--ink2);margin-right:6px}
+.ig-route button{display:flex;gap:7px;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:20px;background:var(--neutral-bg);color:var(--ink);padding:6px 11px;text-align:left;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.ig-route-rank{display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;flex:none}
+.ig-root[data-cockpit][data-mode=map] .ig-flowblock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:8px;box-shadow:var(--shadow)}
+.ig-root[data-cockpit][data-mode=map] .ig-flowwrap{max-height:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-reference{display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-section:not([data-has-steps]){display:none}
+.ig-root[data-cockpit][data-mode=checklist] .ig-h2{margin-top:14px}
+.ig-root[data-cockpit][data-mode=learn] .ig-currentstep{display:none}
+@media(max-width:520px){
+  .ig-route ol{display:block}.ig-route li{display:flex}.ig-route li+li::before{content:"↓";width:20px;text-align:center;margin:2px 4px 2px 0}.ig-route button{flex:1;border-radius:9px}
+  .ig-map-panel .ig-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ig-map-panel .ig-ctl-head,.ig-map-panel .ig-ctl-btns,.ig-map-panel .ig-toggles{grid-column:1/-1}
+  .ig-map-panel .ig-select-ctl{grid-column:1/-1}
+  .ig-map-panel .ig-ctl{margin:0}.ig-map-panel .ig-ctl-row input[type=range]{display:none}.ig-map-panel .ig-ctl-row input[type=number]{width:100%}
+  .ig-root[data-cockpit][data-mode=map] .ig-flowwrap{padding-top:42px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.ig-controls,.ig-textalt,[data-theme-toggle],.ig-modebar,.ig-route{display:none}.ig-disc{break-inside:avoid}.ig-disc>summary::after{display:none}.ig-disc-body{display:block!important}[data-mode-panel]{display:block!important}}
+</style></head>
+<body><div class="ig-root" data-ig data-cockpit="1" data-mode="map">
+<header class="ig-header">
+  <div class="ig-shape-badge">algorithm</div>
+  <h1 class="ig-title">Tar / Asphalt Burn Removal — Dissolve, Don't Peel</h1>
+  <p class="ig-use">ED patients with hot tar/asphalt contact burns to the skin (e.g. occupational roofing/paving exposures). Airway/inhalation injury must be screened and, if present, stabilized before tar-specific wound care begins.</p>
+</header>
+<div class="ig-scope" role="alert"><div class="ig-scope-item">⚠ Never mechanically peel, pick, or scrub adherent tar — it strips viable skin; dissolve with a petroleum-based emulsifier instead.</div><div class="ig-scope-item">⚠ Never use acetone, gasoline, or other organic solvents to remove tar — they cause chemical injury.</div><div class="ig-scope-item">⚠ Never apply ice to cool the burn — worsens injury; avoid hypothermia when cooling large burns.</div><div class="ig-scope-item">⚠ Airway/inhalation injury and CO/cyanide concern supersede tar removal — screen before focusing on the skin.</div><div class="ig-scope-item">⚠ Burn depth and TBSA cannot be judged while tar covers the skin — assess only after the tar is cleared.</div></div>
+
+<nav class="ig-modebar" aria-label="Clinical tool view">
+  <button type="button" data-mode-select="map" aria-selected="true"><span>Map</span><small>orient</small></button>
+  <button type="button" data-mode-select="checklist" aria-selected="false"><span>Checklist</span><small>act</small></button>
+  <button type="button" data-mode-select="learn" aria-selected="false"><span>Learn</span><small>understand</small></button>
+</nav>
+<section class="ig-map-panel" data-mode-panel="map">
+  <div class="ig-controls" role="group" aria-label="Live inputs">
+<div class="ig-ctl-head"><span class="ig-param-readout" data-param-readout>worked example</span><span class="ig-edited" data-edited-chip hidden>edited</span></div>
+<div class="ig-ctl">
+<label for="ig-num-weight">Patient weight <span class="ig-unit">(kg)</span></label>
+<div class="ig-ctl-row">
+<input type="range" data-input="weight" min="1" max="300" step="1" value="70" aria-label="Patient weight slider">
+<input type="number" id="ig-num-weight" data-input="weight" min="1" max="300" step="1" value="70" inputmode="decimal" aria-label="Patient weight exact value">
+</div>
+<div class="ig-warn" data-warn-for="weight" hidden role="alert">Value outside 1–300 kg — confirm.</div>
+</div><div class="ig-ctl ig-select-ctl"><label for="ig-select-agent">Dissolution agent selected</label><select id="ig-select-agent" data-input="agent" data-select-input="1" aria-label="Dissolution agent selected"><option value="1" selected>Bacitracin / Neosporin</option><option value="2">Surfactant (Tween-80 / De-Solv-It / Tarsol)</option><option value="3">Mineral oil / petrolatum / butter</option><option value="4">Vitamin E ointment</option></select></div><div class="ig-toggles"><button type="button" class="ig-toggle" role="switch" data-toggle="inhalation" aria-checked="false">Inhalation injury signs present</button></div>
+<div class="ig-ctl-btns">
+<button type="button" data-reset class="ig-btn">Reset to example</button>
+<button type="button" data-quiz-toggle aria-pressed="false" class="ig-btn">Quiz me</button>
+<button type="button" data-expand-all aria-pressed="false" class="ig-btn">Expand all</button>
+<button type="button" data-theme-toggle class="ig-btn" aria-label="Toggle light/dark">◐</button>
+</div></div>
+  <section class="ig-route" aria-label="Recommended route"><div class="ig-route-head"><span>Recommended route</span><span data-route-status>patient-specific</span></div><ol><li data-route-node="tar-start" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="tar-start"><span class="ig-route-rank">1</span><span>Tar / Asphalt Burn — Dissolve, Don't Peel</span></button></li><li data-route-node="tar-abc" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="tar-abc"><span class="ig-route-rank">2</span><span>Inhalation injury signs present?</span></button></li><li data-route-node="tar-airway-path" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;inhalation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="tar-airway-path"><span class="ig-route-rank">3</span><span>Airway takes priority</span></button></li><li data-route-node="tar-cool" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="tar-cool"><span class="ig-route-rank">4</span><span>Step 1 — Cool (~20 min, no ice) + analgesia</span></button></li><li data-route-node="tar-agent" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="tar-agent"><span class="ig-route-rank">5</span><span>Step 2 — Select dissolution agent</span></button></li><li data-route-node="tar-agent-bacitracin" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}"><button type="button" data-route-select="tar-agent-bacitracin"><span class="ig-route-rank">6</span><span>Bacitracin / Neosporin</span></button></li><li data-route-node="tar-agent-surfactant" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}"><button type="button" data-route-select="tar-agent-surfactant"><span class="ig-route-rank">6</span><span>Surfactant (Tween-80 / De-Solv-It / Tarsol)</span></button></li><li data-route-node="tar-agent-mineraloil" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}"><button type="button" data-route-select="tar-agent-mineraloil"><span class="ig-route-rank">6</span><span>Mineral oil / petrolatum / butter</span></button></li><li data-route-node="tar-agent-vitamine" data-routewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:4}}"><button type="button" data-route-select="tar-agent-vitamine"><span class="ig-route-rank">6</span><span>Vitamin E ointment</span></button></li><li data-route-node="tar-apply" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="tar-apply"><span class="ig-route-rank">7</span><span>Step 3 — Apply + dwell</span></button></li><li data-route-node="tar-reassess" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="tar-reassess"><span class="ig-route-rank">8</span><span>Step 4 — Reassess burn depth + TBSA</span></button></li><li data-route-node="tar-dispo" data-routewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}"><button type="button" data-route-select="tar-dispo"><span class="ig-route-rank">9</span><span>Disposition + note</span></button></li></ol></section>
+  <div class="ig-cond ig-reference"><div class="ig-block ig-flowblock"><div class="ig-zoom" role="group" aria-label="Zoom diagram"><button type="button" data-zoom="out" aria-label="Zoom out">−</button><button type="button" data-zoom="reset" aria-label="Fit diagram">fit</button><button type="button" data-zoom="in" aria-label="Zoom in">+</button></div><div class="ig-flowwrap"><svg viewBox="0 0 1098 1020" width="1098" height="1020" data-flow role="img" aria-label="Decision algorithm" class="ig-flow" preserveAspectRatio="xMidYMin meet">
+<defs><marker id="ig-arrow-b-flow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ig-arrowhead"/></marker></defs>
+<path d="M549,98 L549,140" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,206 L549,227 L759,227 L759,248" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="223" class="ig-edge-lbl" text-anchor="middle">inhalation injury present</text><path d="M549,206 L549,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="549" y="277" class="ig-edge-lbl" text-anchor="middle">no inhalation injury</text><path d="M759,314 L759,335 L549,335 L549,356" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="331" class="ig-edge-lbl" text-anchor="middle">after airway/CO/CN stabilized</text><path d="M549,422 L549,464" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,530 L549,551 L129,551 L129,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="339" y="547" class="ig-edge-lbl" text-anchor="middle">bacitracin/Neosporin</text><path d="M549,530 L549,551 L339,551 L339,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="444" y="547" class="ig-edge-lbl" text-anchor="middle">surfactant</text><path d="M549,530 L549,551 L759,551 L759,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="654" y="547" class="ig-edge-lbl" text-anchor="middle">mineral oil/butter</text><path d="M549,530 L549,551 L969,551 L969,572" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><text x="759" y="547" class="ig-edge-lbl" text-anchor="middle">vitamin E</text><path d="M129,638 L129,659 L549,659 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M339,638 L339,659 L549,659 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M759,638 L759,659 L549,659 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M969,638 L969,659 L549,659 L549,680" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,746 L549,788" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><path d="M549,854 L549,896" class="ig-edge" marker-end="url(#ig-arrow-b-flow)" fill="none"/><g class="ig-node" data-node="tar-start" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Tar / Asphalt Burn — Dissolve, Don't Peel"><rect x="461" y="32" width="176" height="66" rx="30" class="ig-shape t-danger"/><foreignObject x="467" y="36" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Tar / Asphalt Burn — Dissolve, Don't Peel</div></foreignObject></g><g class="ig-node" data-node="tar-abc" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Inhalation injury signs present?"><polygon points="483,140 615,140 637,173 615,206 483,206 461,173" class="ig-shape t-danger"/><foreignObject x="467" y="144" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Inhalation injury signs present?</div></foreignObject></g><g class="ig-node" data-node="tar-airway-path" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;inhalation&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Airway takes priority"><rect x="671" y="248" width="176" height="66" rx="6" class="ig-shape t-danger"/><foreignObject x="677" y="252" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Airway takes priority</div></foreignObject></g><g class="ig-node" data-node="tar-cool" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Step 1 — Cool (~20 min, no ice) + analgesia"><rect x="461" y="356" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="467" y="360" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Step 1 — Cool (~20 min, no ice) + analgesia</div></foreignObject></g><g class="ig-node" data-node="tar-agent" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Step 2 — Select dissolution agent"><polygon points="483,464 615,464 637,497 615,530 483,530 461,497" class="ig-shape t-caution"/><foreignObject x="467" y="468" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Step 2 — Select dissolution agent</div></foreignObject></g><g class="ig-node" data-node="tar-agent-bacitracin" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" tabindex="0" role="button" aria-label="Bacitracin / Neosporin"><rect x="41" y="572" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="47" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Bacitracin / Neosporin</div></foreignObject></g><g class="ig-node" data-node="tar-agent-surfactant" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" tabindex="0" role="button" aria-label="Surfactant (Tween-80 / De-Solv-It / Tarsol)"><rect x="251" y="572" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="257" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Surfactant (Tween-80 / De-Solv-It / Tarsol)</div></foreignObject></g><g class="ig-node" data-node="tar-agent-mineraloil" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}" tabindex="0" role="button" aria-label="Mineral oil / petrolatum / butter"><rect x="671" y="572" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="677" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Mineral oil / petrolatum / butter</div></foreignObject></g><g class="ig-node" data-node="tar-agent-vitamine" data-activewhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:4}}" tabindex="0" role="button" aria-label="Vitamin E ointment"><rect x="881" y="572" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="887" y="576" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Vitamin E ointment</div></foreignObject></g><g class="ig-node" data-node="tar-apply" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Step 3 — Apply + dwell"><rect x="461" y="680" width="176" height="66" rx="6" class="ig-shape t-caution"/><foreignObject x="467" y="684" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Step 3 — Apply + dwell</div></foreignObject></g><g class="ig-node" data-node="tar-reassess" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Step 4 — Reassess burn depth + TBSA"><rect x="461" y="788" width="176" height="66" rx="6" class="ig-shape t-normal"/><foreignObject x="467" y="792" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Step 4 — Reassess burn depth + TBSA</div></foreignObject></g><g class="ig-node" data-node="tar-dispo" data-activewhen="{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}" tabindex="0" role="button" aria-label="Disposition + note"><rect x="461" y="896" width="176" height="66" rx="30" class="ig-shape t-normal"/><foreignObject x="467" y="900" width="164" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="ig-node-lbl">Disposition + note</div></foreignObject></g></svg></div><div class="ig-flow-details"><div class="ig-node-detail" data-detail-for="tar-start" hidden><strong>Tar / Asphalt Burn — Dissolve, Don't Peel</strong><span>Adherent hot tar traps heat and hides burn depth. Cool first, then dissolve with a petroleum-based emulsifier.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-start">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-abc" hidden><strong>Inhalation injury signs present?</strong><span>Facial burns, singed nasal hair, soot in oropharynx, hoarseness, stridor, carbonaceous sputum, enclosed-space fire.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-abc">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-airway-path" hidden><strong>Airway takes priority</strong><span>Stabilize airway, treat CO/CN, then resume tar dissolution. Transfer if burn-center criteria + airway involvement.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-airway-path">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-cool" hidden><strong>Step 1 — Cool (~20 min, no ice) + analgesia</strong><span>Cool with room-temperature water ~20 min; avoid ice; analgesia early; do NOT peel at this stage.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-cool">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-agent" hidden><strong>Step 2 — Select dissolution agent</strong><span>Petroleum/surfactant emulsifier dissolves tar. Never use organic solvents (acetone, gasoline).</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-agent">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-agent-bacitracin" hidden><strong>Bacitracin / Neosporin</strong><span>Most available in any ED. Apply thickly under a dressing; reapply q1-2h.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-agent-bacitracin">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-agent-surfactant" hidden><strong>Surfactant (Tween-80 / De-Solv-It / Tarsol)</strong><span>Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-agent-surfactant">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-agent-mineraloil" hidden><strong>Mineral oil / petrolatum / butter</strong><span>Household/kitchen petroleum sources; case-reported effective (butter, mineral oil).</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-agent-mineraloil">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-agent-vitamine" hidden><strong>Vitamin E ointment</strong><span>Reported effective and skin-friendly for hot-tar burns (CJEM case series).</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-agent-vitamine">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-apply" hidden><strong>Step 3 — Apply + dwell</strong><span>Apply generously, cover with non-adherent dressing, reapply q1-2h. Do NOT force, scrub, or peel — let tar release atraumatically.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-apply">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-reassess" hidden><strong>Step 4 — Reassess burn depth + TBSA</strong><span>Assess depth/TBSA only after tar is cleared. Superficial/small → standard care; deep/large → burn-center referral. Update tetanus.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-reassess">Open focused checklist</button></div><div class="ig-node-detail" data-detail-for="tar-dispo" hidden><strong>Disposition + note</strong><span>Discharge small superficial/partial burns with ongoing emulsifier + follow-up; transfer if burn-center criteria met.</span><button type="button" class="ig-btn ig-open-step" data-open-step="tar-dispo">Open focused checklist</button></div></div></div></div>
+</section>
+<div class="ig-currentstep" data-currentstep hidden role="status" aria-live="polite"><span class="ig-cs-dot"></span><span class="ig-cs-label">You are here: <b data-currentstep-label></b></span><button type="button" class="ig-cs-clear" data-currentstep-clear>show all steps</button></div>
+<div class="ig-content-panel" data-mode-panel="checklist learn" hidden>
+  <main class="ig-main"><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Overview</h2><div class="ig-cond ig-stepbound" data-whennode="tar-start"><p class="ig-block ig-text">Adherent hot tar traps heat and hides burn depth. <strong>The core rule: never mechanically peel adherent tar — it strips viable skin. Cool first, then dissolve with a petroleum-based emulsifier.</strong></p></div><div class="ig-cond ig-stepbound" data-whennode="tar-start"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Dissolve, don't peel</div><div>Never mechanically peel or scrub adherent tar — reapply emulsifier and let it release atraumatically.</div></div></div><div class="ig-cond ig-reference"><ul class="ig-block ig-steps"><li>Screen for inhalation injury and CO/cyanide BEFORE wound care — airway supersedes tar removal.</li><li>Cool the tar (~20 min, no ice) to stop thermal injury; never apply ice to a large burn.</li><li>Dissolve with a petroleum-based emulsifier; NEVER use acetone, gasoline, or other organic solvents.</li><li>Never mechanically peel or scrub adherent tar — reapply emulsifier and let it release atraumatically.</li><li>Assess burn depth and TBSA only AFTER the tar is cleared; refer deep/large burns to a burn center.</li></ul></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Airway / Inhalation Screen</h2><div class="ig-cond ig-stepbound" data-whennode="tar-abc"><p class="ig-block ig-text">Wound care never precedes airway. Hot-tar exposures (enclosed spaces, kettle flashes) can carry inhalation injury — screen before focusing on the skin. Signs: facial burns, singed nasal hair, soot in oropharynx, hoarseness, stridor, carbonaceous sputum, enclosed-space fire.</p></div><div class="ig-cond ig-stepbound" data-whennode="tar-airway-path"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Airway takes priority</div><div>Manage the airway and systemic injury before tar: early intubation if progressive airway edema, stridor, or deep facial burns; 100% oxygen for suspected carbon monoxide; consider cyanide toxicity in enclosed-space fires. Then resume tar dissolution once the patient is stabilized. Significant burns with airway involvement warrant burn-center transfer.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Step 1 — Cool + Analgesia</h2><div class="ig-cond ig-stepbound" data-whennode="tar-cool"><ol class="ig-block ig-steps"><li>Cool the tar immediately with room-temperature water to stop ongoing thermal injury and harden the tar so it stops spreading. Cool ~20 minutes; avoid ice (worsens injury) and avoid hypothermia in large burns.</li><li>Provide analgesia early — tar burns are painful and dissolution takes time.</li><li>Do NOT attempt to pick, peel, or scrub the tar off at this stage.</li></ol></div><div class="ig-cond ig-stepbound" data-whennode="tar-cool"><div class="ig-block ig-callout t-caution" role="note"><div class="ig-callout-title">No ice</div><div>Do NOT apply ice (worsens injury) or risk hypothermia in large burns.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tar-cool"><p class="ig-block ig-text">Dissolution takes time; provide analgesia up front and reassess. IV opioid titration for moderate-severe pain; adjunct acetaminophen/NSAID for smaller burns; consider regional/digital block for distal-extremity tar burns.</p></div><div class="ig-cond ig-stepbound" data-whennode="tar-cool"><div class="ig-block ig-dose" data-calc="morphineburndose"><div class="ig-dose-drug">Morphine Sulfate</div><div class="ig-dose-val"><span data-calc-value>0.1 mg/kg IV over 5 min, max initial 10 mg; q2-4h PRN</span></div><div class="ig-dose-route">IV</div><div class="ig-dose-note">Adult burn analgesia; titrate to pain control.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tar-cool"><div class="ig-block ig-dose" data-calc="fentanylburndose"><div class="ig-dose-drug">Fentanyl</div><div class="ig-dose-val"><span data-calc-value>1-1.5 mcg/kg IV over 1-2 min, max 100 mcg; may repeat q30-60min PRN</span></div><div class="ig-dose-route">IV</div><div class="ig-dose-note">Rapid onset (2-3 min), short duration (30-60 min).</div></div></div></section><section class="ig-section"><h2 class="ig-h2">Tar Burn Removal Algorithm</h2><div class="ig-cond ig-reference"><p class="ig-block ig-text">This is the high-yield spine. See the <a href="#/tree/tar-burn-removal" target="_top" class="ig-link">full protocol</a> for the Steps Summary, Dissolution-Agent Ladder, and Do-NOT list overlays referenced throughout.</p></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Dissolution Agent Selection</h2><div class="ig-cond ig-stepbound" data-whennode="tar-agent"><p class="ig-block ig-text">Tar is petroleum-based, so a petroleum/surfactant emulsifier dissolves it without harming skin. Pick what you have.</p></div><div class="ig-cond ig-stepbound" data-whennode="tar-agent"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Never use organic solvents</div><div>Never use acetone, gasoline, or other organic solvents — they cause chemical injury.</div></div></div><div class="ig-cond ig-stepbound" data-whennode="tar-agent"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Agent</th><th>Notes</th></tr></thead><tbody><tr class="ig-row"><td>Antibiotic ointment (bacitracin / Neosporin)</td><td>Most available in any ED; apply thickly, reapply q1-2h; tar emulsifies over hours.</td></tr><tr class="ig-row"><td>Surfactant (polysorbate/Tween-80, De-Solv-It, Tarsol)</td><td>Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked.</td></tr><tr class="ig-row"><td>Mineral oil / petrolatum / butter</td><td>Household/kitchen petroleum sources; case-reported effective when nothing else is available.</td></tr><tr class="ig-row"><td>Vitamin E ointment</td><td>Reported effective and skin-friendly for hot-tar burns (CJEM case series).</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:1}}" data-whennode="tar-agent-bacitracin"><div class="ig-block ig-dose"><div class="ig-dose-drug">Bacitracin / Neosporin ointment</div><div class="ig-dose-val">Apply thickly under a dressing; reapply q1-2h</div><div class="ig-dose-note">Most available in any ED; tar emulsifies over hours.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:2}}" data-whennode="tar-agent-surfactant"><div class="ig-block ig-dose"><div class="ig-dose-drug">Surfactant emulsifier (Tween-80 / De-Solv-It / Tarsol)</div><div class="ig-dose-val">Apply per product instructions; reapply as needed</div><div class="ig-dose-note">Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked.</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:3}}" data-whennode="tar-agent-mineraloil"><div class="ig-block ig-dose"><div class="ig-dose-drug">Mineral oil / petrolatum / butter</div><div class="ig-dose-val">Apply generously; reapply as needed</div><div class="ig-dose-note">Household/kitchen petroleum sources; case-reported effective (butter, mineral oil).</div></div></div><div class="ig-cond ig-stepbound" data-showwhen="{&quot;k&quot;:&quot;bin&quot;,&quot;op&quot;:&quot;==&quot;,&quot;a&quot;:{&quot;k&quot;:&quot;id&quot;,&quot;name&quot;:&quot;agent&quot;},&quot;b&quot;:{&quot;k&quot;:&quot;num&quot;,&quot;v&quot;:4}}" data-whennode="tar-agent-vitamine"><div class="ig-block ig-dose"><div class="ig-dose-drug">Vitamin E ointment</div><div class="ig-dose-val">Apply generously; reapply as needed</div><div class="ig-dose-note">Reported effective and skin-friendly for hot-tar burns (CJEM case series).</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Step 3 — Apply + Dwell</h2><div class="ig-cond ig-stepbound" data-whennode="tar-apply"><ol class="ig-block ig-steps"><li>Apply the chosen emulsifier generously over ALL adherent tar.</li><li>Cover with a non-adherent dressing and a bulky outer wrap to hold the agent against the tar.</li><li>Let it dwell — tar dissolves gradually. Reapply the agent every 1-2 hours. As the tar softens it lifts off atraumatically with gentle wiping.</li><li>Complete dissolution can take several hours and may extend beyond the ED visit; outpatient continuation with ongoing ointment is acceptable for stable, small burns.</li></ol></div><div class="ig-cond ig-stepbound" data-whennode="tar-apply"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Do not force, scrub, or peel</div><div>Do NOT force, scrub, or peel any tar that is still adherent — reapply the emulsifier and wait.</div></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Step 4 — Reassess + Transfer Criteria</h2><div class="ig-cond ig-stepbound" data-whennode="tar-reassess"><p class="ig-block ig-text">Burn depth CANNOT be judged while tar covers the skin. Only after the tar is cleared: estimate depth (superficial / partial / full thickness) and TBSA, and update tetanus status.</p></div><div class="ig-cond ig-stepbound" data-whennode="tar-reassess"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Criterion</th><th>Detail</th></tr></thead><tbody><tr class="ig-row"><td>TBSA estimation</td><td>Rule of Nines (adults) or the patient's palm (incl. fingers) ≈ 1% TBSA for small/patchy burns.</td></tr><tr class="ig-row"><td>Depth counting</td><td>Count partial- and full-thickness burn only; exclude superficial (erythema-only).</td></tr><tr class="ig-row t-caution"><td>Burn-center referral</td><td>Partial-thickness &gt; 10% TBSA</td></tr><tr class="ig-row t-caution"><td>Burn-center referral</td><td>Any full-thickness burn</td></tr><tr class="ig-row t-caution"><td>Burn-center referral</td><td>Burns to face, hands, feet, genitalia, perineum, or major joints</td></tr><tr class="ig-row t-caution"><td>Burn-center referral</td><td>Inhalation injury, electrical/chemical burns, or significant comorbidity</td></tr></tbody></table></div></div></section><section class="ig-section" data-has-steps="1"><h2 class="ig-h2">Disposition + Documentation</h2><div class="ig-cond ig-stepbound" data-whennode="tar-dispo"><div class="ig-block ig-tablewrap"><table class="ig-table"><thead><tr><th>Disposition</th><th>Criteria</th></tr></thead><tbody><tr class="ig-row t-normal"><td>Discharge</td><td>Small superficial/partial-thickness burns once tar is substantially cleared and pain is controlled; ongoing emulsifier ointment + non-adherent dressing; burn-clinic or PCP follow-up in 24-48 h; clear return precautions (increasing pain, redness, fever, drainage).</td></tr><tr class="ig-row t-caution"><td>Admit / Transfer</td><td>Burn-center criteria met (deep partial/full thickness, large TBSA, hands/face/feet/perineum/joints, inhalation injury, comorbidity).</td></tr></tbody></table></div></div><div class="ig-cond ig-stepbound" data-whennode="tar-dispo"><p class="ig-block ig-text"><strong>Note template:</strong><br><strong>Mechanism:</strong> Hot tar/asphalt burn to [site], occupational/[other].<br><strong>Initial:</strong> Cooled ~20 min; analgesia [agent]; tar NOT peeled.<br><strong>Dissolution:</strong> [Bacitracin / surfactant / mineral oil / vitamin E] applied; reapplied q[1-2]h; tar released atraumatically.<br><strong>Burn assessment (post-clearance):</strong> [depth], TBSA [%].<br><strong>Tetanus:</strong> [status]. <strong>Disposition:</strong> [discharge w/ follow-up / transfer to burn center].</p></div></section><section class="ig-section"><h2 class="ig-h2">Do-NOT List (reference — tar burn pitfalls)</h2><div class="ig-cond ig-reference"><div class="ig-block ig-callout t-danger" role="note"><div class="ig-callout-title">Do-NOT List</div><div>Do NOT mechanically peel, pick, or scrub adherent tar — it strips viable skin.<br><br>Do NOT use acetone, gasoline, or organic solvents on the skin.<br><br>Do NOT apply ice (worsens injury) or risk hypothermia in large burns.<br><br>Do NOT judge burn depth while tar is still present.<br><br>Do NOT prioritize wound care over airway in inhalation injury.</div></div></div></section></main>
+</div>
+<div data-mode-panel="learn" hidden>
+  <details class="ig-textalt"><summary>Text version (screen-reader &amp; copy-paste)</summary><div class="ig-textalt-body"><h3>Overview</h3><p>Adherent hot tar traps heat and hides burn depth. <strong>The core rule: never mechanically peel adherent tar — it strips viable skin. Cool first, then dissolve with a petroleum-based emulsifier.</strong></p><p>Never mechanically peel or scrub adherent tar — reapply emulsifier and let it release atraumatically.</p><ul><li>Screen for inhalation injury and CO/cyanide BEFORE wound care — airway supersedes tar removal.</li><li>Cool the tar (~20 min, no ice) to stop thermal injury; never apply ice to a large burn.</li><li>Dissolve with a petroleum-based emulsifier; NEVER use acetone, gasoline, or other organic solvents.</li><li>Never mechanically peel or scrub adherent tar — reapply emulsifier and let it release atraumatically.</li><li>Assess burn depth and TBSA only AFTER the tar is cleared; refer deep/large burns to a burn center.</li></ul><h3>Airway / Inhalation Screen</h3><p>Wound care never precedes airway. Hot-tar exposures (enclosed spaces, kettle flashes) can carry inhalation injury — screen before focusing on the skin. Signs: facial burns, singed nasal hair, soot in oropharynx, hoarseness, stridor, carbonaceous sputum, enclosed-space fire.</p><p>Manage the airway and systemic injury before tar: early intubation if progressive airway edema, stridor, or deep facial burns; 100% oxygen for suspected carbon monoxide; consider cyanide toxicity in enclosed-space fires. Then resume tar dissolution once the patient is stabilized. Significant burns with airway involvement warrant burn-center transfer.</p><h3>Step 1 — Cool + Analgesia</h3><ul><li>Cool the tar immediately with room-temperature water to stop ongoing thermal injury and harden the tar so it stops spreading. Cool ~20 minutes; avoid ice (worsens injury) and avoid hypothermia in large burns.</li><li>Provide analgesia early — tar burns are painful and dissolution takes time.</li><li>Do NOT attempt to pick, peel, or scrub the tar off at this stage.</li></ul><p>Do NOT apply ice (worsens injury) or risk hypothermia in large burns.</p><p>Dissolution takes time; provide analgesia up front and reassess. IV opioid titration for moderate-severe pain; adjunct acetaminophen/NSAID for smaller burns; consider regional/digital block for distal-extremity tar burns.</p><p><strong>Morphine Sulfate</strong>: 0.1 mg/kg IV over 5 min, max initial 10 mg; q2-4h PRN IV — Adult burn analgesia; titrate to pain control.</p><p><strong>Fentanyl</strong>: 1-1.5 mcg/kg IV over 1-2 min, max 100 mcg; may repeat q30-60min PRN IV — Rapid onset (2-3 min), short duration (30-60 min).</p><h3>Tar Burn Removal Algorithm</h3><p>Tar / Asphalt Burn — Dissolve, Don't Peel — Adherent hot tar traps heat and hides burn depth. Cool first, then dissolve with a petroleum-based emulsifier.</p><p>Inhalation injury signs present? — Facial burns, singed nasal hair, soot in oropharynx, hoarseness, stridor, carbonaceous sputum, enclosed-space fire.</p><p>Airway takes priority — Stabilize airway, treat CO/CN, then resume tar dissolution. Transfer if burn-center criteria + airway involvement.</p><p>Step 1 — Cool (~20 min, no ice) + analgesia — Cool with room-temperature water ~20 min; avoid ice; analgesia early; do NOT peel at this stage.</p><p>Step 2 — Select dissolution agent — Petroleum/surfactant emulsifier dissolves tar. Never use organic solvents (acetone, gasoline).</p><p>Bacitracin / Neosporin — Most available in any ED. Apply thickly under a dressing; reapply q1-2h.</p><p>Surfactant (Tween-80 / De-Solv-It / Tarsol) — Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked.</p><p>Mineral oil / petrolatum / butter — Household/kitchen petroleum sources; case-reported effective (butter, mineral oil).</p><p>Vitamin E ointment — Reported effective and skin-friendly for hot-tar burns (CJEM case series).</p><p>Step 3 — Apply + dwell — Apply generously, cover with non-adherent dressing, reapply q1-2h. Do NOT force, scrub, or peel — let tar release atraumatically.</p><p>Step 4 — Reassess burn depth + TBSA — Assess depth/TBSA only after tar is cleared. Superficial/small → standard care; deep/large → burn-center referral. Update tetanus.</p><p>Disposition + note — Discharge small superficial/partial burns with ongoing emulsifier + follow-up; transfer if burn-center criteria met.</p><p>This is the high-yield spine. See the <a href="#/tree/tar-burn-removal" target="_top" class="ig-link">full protocol</a> for the Steps Summary, Dissolution-Agent Ladder, and Do-NOT list overlays referenced throughout.</p><h3>Dissolution Agent Selection</h3><p>Tar is petroleum-based, so a petroleum/surfactant emulsifier dissolves it without harming skin. Pick what you have.</p><p>Never use acetone, gasoline, or other organic solvents — they cause chemical injury.</p><p>Agent | Notes</p><p>Antibiotic ointment (bacitracin / Neosporin) | Most available in any ED; apply thickly, reapply q1-2h; tar emulsifies over hours.</p><p>Surfactant (polysorbate/Tween-80, De-Solv-It, Tarsol) | Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked.</p><p>Mineral oil / petrolatum / butter | Household/kitchen petroleum sources; case-reported effective when nothing else is available.</p><p>Vitamin E ointment | Reported effective and skin-friendly for hot-tar burns (CJEM case series).</p><p><strong>Bacitracin / Neosporin ointment</strong>: Apply thickly under a dressing; reapply q1-2h — Most available in any ED; tar emulsifies over hours.</p><p><strong>Surfactant emulsifier (Tween-80 / De-Solv-It / Tarsol)</strong>: Apply per product instructions; reapply as needed — Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked.</p><p><strong>Mineral oil / petrolatum / butter</strong>: Apply generously; reapply as needed — Household/kitchen petroleum sources; case-reported effective (butter, mineral oil).</p><p><strong>Vitamin E ointment</strong>: Apply generously; reapply as needed — Reported effective and skin-friendly for hot-tar burns (CJEM case series).</p><h3>Step 3 — Apply + Dwell</h3><ul><li>Apply the chosen emulsifier generously over ALL adherent tar.</li><li>Cover with a non-adherent dressing and a bulky outer wrap to hold the agent against the tar.</li><li>Let it dwell — tar dissolves gradually. Reapply the agent every 1-2 hours. As the tar softens it lifts off atraumatically with gentle wiping.</li><li>Complete dissolution can take several hours and may extend beyond the ED visit; outpatient continuation with ongoing ointment is acceptable for stable, small burns.</li></ul><p>Do NOT force, scrub, or peel any tar that is still adherent — reapply the emulsifier and wait.</p><h3>Step 4 — Reassess + Transfer Criteria</h3><p>Burn depth CANNOT be judged while tar covers the skin. Only after the tar is cleared: estimate depth (superficial / partial / full thickness) and TBSA, and update tetanus status.</p><p>Criterion | Detail</p><p>TBSA estimation | Rule of Nines (adults) or the patient's palm (incl. fingers) ≈ 1% TBSA for small/patchy burns.</p><p>Depth counting | Count partial- and full-thickness burn only; exclude superficial (erythema-only).</p><p>Burn-center referral | Partial-thickness &gt; 10% TBSA</p><p>Burn-center referral | Any full-thickness burn</p><p>Burn-center referral | Burns to face, hands, feet, genitalia, perineum, or major joints</p><p>Burn-center referral | Inhalation injury, electrical/chemical burns, or significant comorbidity</p><h3>Disposition + Documentation</h3><p>Disposition | Criteria</p><p>Discharge | Small superficial/partial-thickness burns once tar is substantially cleared and pain is controlled; ongoing emulsifier ointment + non-adherent dressing; burn-clinic or PCP follow-up in 24-48 h; clear return precautions (increasing pain, redness, fever, drainage).</p><p>Admit / Transfer | Burn-center criteria met (deep partial/full thickness, large TBSA, hands/face/feet/perineum/joints, inhalation injury, comorbidity).</p><p><strong>Note template:</strong><br><strong>Mechanism:</strong> Hot tar/asphalt burn to [site], occupational/[other].<br><strong>Initial:</strong> Cooled ~20 min; analgesia [agent]; tar NOT peeled.<br><strong>Dissolution:</strong> [Bacitracin / surfactant / mineral oil / vitamin E] applied; reapplied q[1-2]h; tar released atraumatically.<br><strong>Burn assessment (post-clearance):</strong> [depth], TBSA [%].<br><strong>Tetanus:</strong> [status]. <strong>Disposition:</strong> [discharge w/ follow-up / transfer to burn center].</p><h3>Do-NOT List (reference — tar burn pitfalls)</h3><p>Do NOT mechanically peel, pick, or scrub adherent tar — it strips viable skin.<br><br>Do NOT use acetone, gasoline, or organic solvents on the skin.<br><br>Do NOT apply ice (worsens injury) or risk hypothermia in large burns.<br><br>Do NOT judge burn depth while tar is still present.<br><br>Do NOT prioritize wound care over airway in inhalation injury.</p></div></details>
+  <section class="ig-cites"><h2 class="ig-h2">Citations</h2><ol class="ig-cite-list"><li id="cite-ref1"><span class="ig-ref">[1]</span> Steenvoorde P, et al. Tar removal from a burn with butter: an emulsifier approach. World Wide Wounds. 2004 Dec.</li><li id="cite-ref2"><span class="ig-ref">[2]</span> American Burn Association. Advanced Burn Life Support (ABLS) Provider Manual / burn-center referral criteria.</li><li id="cite-ref3"><span class="ig-ref">[3]</span> Roberts JR, Custalow CB, Thomsen TW. Roberts and Hedges' Clinical Procedures in Emergency Medicine and Acute Care — burn and wound management (domain comparator only).</li><li id="cite-ref4"><span class="ig-ref">[4]</span> Vitamin E ointment for the treatment of a hot tar burn. CJEM. 2013;15(0):1-2 (PMID 23972137).</li><li id="cite-ref5"><span class="ig-ref">[5]</span> Anesthesia Key. Partial-Thickness (Second-Degree) Burns and Tar Burns. aneskey.com.</li><li id="cite-ref6"><span class="ig-ref">[6]</span> Hettiaratchy S, Papini R. Initial management of a major burn: II—assessment and resuscitation. BMJ. 2004;329(7457):101-103.</li></ol></section>
+</div>
+<footer class="ig-footer">
+  <div>v1.0 · reviewed 2026-07-13</div>
+  <div>InfoKitt author+verify pipeline (source-audited against myMedKitt tree) — pending Andy Kitlowski MD final approval</div>
+  <div class="ig-provenance">Source: medkitt-consult · tar-burn-removal</div>
+</footer></div>
+<script type="application/json" id="ig-spec">{"specVersion":1,"id":"tar-burn-removal","title":"Tar / Asphalt Burn Removal — Dissolve, Don't Peel","shape":"algorithm","intendedUse":"ED patients with hot tar/asphalt contact burns to the skin (e.g. occupational roofing/paving exposures). Airway/inhalation injury must be screened and, if present, stabilized before tar-specific wound care begins.","scopeWarnings":["Never mechanically peel, pick, or scrub adherent tar — it strips viable skin; dissolve with a petroleum-based emulsifier instead.","Never use acetone, gasoline, or other organic solvents to remove tar — they cause chemical injury.","Never apply ice to cool the burn — worsens injury; avoid hypothermia when cooling large burns.","Airway/inhalation injury and CO/cyanide concern supersede tar removal — screen before focusing on the skin.","Burn depth and TBSA cannot be judged while tar covers the skin — assess only after the tar is cleared."],"source":{"kind":"medkitt-consult","ref":"tar-burn-removal"},"presentation":{"mode":"cockpit","primaryFlowBlockId":"b-flow","defaultView":"map"},"inputs":[{"id":"weight","label":"Patient weight","unit":"kg","type":"number","min":1,"max":300,"step":1,"default":70},{"id":"inhalation","label":"Inhalation injury signs present","type":"boolean","default":0},{"id":"agent","label":"Dissolution agent selected","type":"select","default":1,"options":[{"label":"Bacitracin / Neosporin","value":1},{"label":"Surfactant (Tween-80 / De-Solv-It / Tarsol)","value":2},{"label":"Mineral oil / petrolatum / butter","value":3},{"label":"Vitamin E ointment","value":4}]}],"calcs":[{"id":"morphineburndose","expr":"min(round(0.1*weight,2),10)","unit":"mg","formula":"0.1 mg/kg × weight, capped at 10 mg initial dose","derivedFrom":{"drugId":"morphine","indication":"Burns — adult"},"testVectors":[{"in":{"weight":50},"expect":5},{"in":{"weight":100},"expect":10},{"in":{"weight":150},"expect":10}],"exprAst":{"k":"call","fn":"min","args":[{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":0.1},"b":{"k":"id","name":"weight"}},{"k":"num","v":2}]},{"k":"num","v":10}]}},{"id":"fentanylburndose","expr":"min(round(1.5*weight,2),100)","unit":"mcg","formula":"1.5 mcg/kg × weight, capped at 100 mcg","derivedFrom":{"drugId":"fentanyl","indication":"Burns — IV analgesia"},"testVectors":[{"in":{"weight":20},"expect":30},{"in":{"weight":50},"expect":75},{"in":{"weight":80},"expect":100}],"exprAst":{"k":"call","fn":"min","args":[{"k":"call","fn":"round","args":[{"k":"bin","op":"*","a":{"k":"num","v":1.5},"b":{"k":"id","name":"weight"}},{"k":"num","v":2}]},{"k":"num","v":100}]}}],"sections":[{"id":"sec-overview","title":"Overview","blocks":[{"id":"b-intro","type":"text","whenNode":"tar-start","md":"Adherent hot tar traps heat and hides burn depth. **The core rule: never mechanically peel adherent tar — it strips viable skin. Cool first, then dissolve with a petroleum-based emulsifier.**","cite":["ref1","ref2"]},{"id":"b-core-rule","type":"callout","tone":"danger","title":"Dissolve, don't peel","whenNode":"tar-start","md":"Never mechanically peel or scrub adherent tar — reapply emulsifier and let it release atraumatically.","cite":["ref1"]},{"id":"b-critical-actions","type":"steps","ordered":false,"items":["Screen for inhalation injury and CO/cyanide BEFORE wound care — airway supersedes tar removal.","Cool the tar (~20 min, no ice) to stop thermal injury; never apply ice to a large burn.","Dissolve with a petroleum-based emulsifier; NEVER use acetone, gasoline, or other organic solvents.","Never mechanically peel or scrub adherent tar — reapply emulsifier and let it release atraumatically.","Assess burn depth and TBSA only AFTER the tar is cleared; refer deep/large burns to a burn center."]}]},{"id":"sec-airway","title":"Airway / Inhalation Screen","blocks":[{"id":"b-abc-text","type":"text","whenNode":"tar-abc","md":"Wound care never precedes airway. Hot-tar exposures (enclosed spaces, kettle flashes) can carry inhalation injury — screen before focusing on the skin. Signs: facial burns, singed nasal hair, soot in oropharynx, hoarseness, stridor, carbonaceous sputum, enclosed-space fire.","cite":["ref2","ref3"]},{"id":"b-airway-result","type":"callout","tone":"danger","title":"Airway takes priority","whenNode":"tar-airway-path","md":"Manage the airway and systemic injury before tar: early intubation if progressive airway edema, stridor, or deep facial burns; 100% oxygen for suspected carbon monoxide; consider cyanide toxicity in enclosed-space fires. Then resume tar dissolution once the patient is stabilized. Significant burns with airway involvement warrant burn-center transfer.","cite":["ref2","ref3"]}]},{"id":"sec-cool","title":"Step 1 — Cool + Analgesia","blocks":[{"id":"b-cool-steps","type":"steps","ordered":true,"whenNode":"tar-cool","items":["Cool the tar immediately with room-temperature water to stop ongoing thermal injury and harden the tar so it stops spreading. Cool ~20 minutes; avoid ice (worsens injury) and avoid hypothermia in large burns.","Provide analgesia early — tar burns are painful and dissolution takes time.","Do NOT attempt to pick, peel, or scrub the tar off at this stage."],"cite":["ref1","ref2"]},{"id":"b-no-ice","type":"callout","tone":"caution","title":"No ice","whenNode":"tar-cool","md":"Do NOT apply ice (worsens injury) or risk hypothermia in large burns.","cite":["ref1"]},{"id":"b-analgesia-text","type":"text","whenNode":"tar-cool","md":"Dissolution takes time; provide analgesia up front and reassess. IV opioid titration for moderate-severe pain; adjunct acetaminophen/NSAID for smaller burns; consider regional/digital block for distal-extremity tar burns.","cite":["ref6"]},{"id":"b-dose-morphine","type":"dose","drug":"Morphine Sulfate","drugId":"morphine","dose":"0.1 mg/kg IV over 5 min, max initial 10 mg; q2-4h PRN","route":"IV","note":"Adult burn analgesia; titrate to pain control.","calcRef":"morphineburndose","whenNode":"tar-cool"},{"id":"b-dose-fentanyl","type":"dose","drug":"Fentanyl","drugId":"fentanyl","dose":"1-1.5 mcg/kg IV over 1-2 min, max 100 mcg; may repeat q30-60min PRN","route":"IV","note":"Rapid onset (2-3 min), short duration (30-60 min).","calcRef":"fentanylburndose","whenNode":"tar-cool"}]},{"id":"sec-flow","title":"Tar Burn Removal Algorithm","blocks":[{"id":"b-flow","type":"flow","nodes":[{"id":"tar-start","shape":"state","text":"Tar / Asphalt Burn — Dissolve, Don't Peel","col":0,"rank":0,"tone":"danger","detail":"Adherent hot tar traps heat and hides burn depth. Cool first, then dissolve with a petroleum-based emulsifier.","activeWhen":"1"},{"id":"tar-abc","shape":"decision","text":"Inhalation injury signs present?","col":0,"rank":1,"tone":"danger","detail":"Facial burns, singed nasal hair, soot in oropharynx, hoarseness, stridor, carbonaceous sputum, enclosed-space fire.","activeWhen":"1"},{"id":"tar-airway-path","shape":"action","text":"Airway takes priority","col":1,"rank":2,"tone":"danger","detail":"Stabilize airway, treat CO/CN, then resume tar dissolution. Transfer if burn-center criteria + airway involvement.","activeWhen":"inhalation==1"},{"id":"tar-cool","shape":"action","text":"Step 1 — Cool (~20 min, no ice) + analgesia","col":0,"rank":3,"tone":"caution","detail":"Cool with room-temperature water ~20 min; avoid ice; analgesia early; do NOT peel at this stage.","activeWhen":"1"},{"id":"tar-agent","shape":"decision","text":"Step 2 — Select dissolution agent","col":0,"rank":4,"tone":"caution","detail":"Petroleum/surfactant emulsifier dissolves tar. Never use organic solvents (acetone, gasoline).","activeWhen":"1"},{"id":"tar-agent-bacitracin","shape":"action","text":"Bacitracin / Neosporin","col":-2,"rank":5,"tone":"normal","detail":"Most available in any ED. Apply thickly under a dressing; reapply q1-2h.","activeWhen":"agent==1"},{"id":"tar-agent-surfactant","shape":"action","text":"Surfactant (Tween-80 / De-Solv-It / Tarsol)","col":-1,"rank":5,"tone":"normal","detail":"Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked.","activeWhen":"agent==2"},{"id":"tar-agent-mineraloil","shape":"action","text":"Mineral oil / petrolatum / butter","col":1,"rank":5,"tone":"normal","detail":"Household/kitchen petroleum sources; case-reported effective (butter, mineral oil).","activeWhen":"agent==3"},{"id":"tar-agent-vitamine","shape":"action","text":"Vitamin E ointment","col":2,"rank":5,"tone":"normal","detail":"Reported effective and skin-friendly for hot-tar burns (CJEM case series).","activeWhen":"agent==4"},{"id":"tar-apply","shape":"action","text":"Step 3 — Apply + dwell","col":0,"rank":6,"tone":"caution","detail":"Apply generously, cover with non-adherent dressing, reapply q1-2h. Do NOT force, scrub, or peel — let tar release atraumatically.","activeWhen":"1"},{"id":"tar-reassess","shape":"action","text":"Step 4 — Reassess burn depth + TBSA","col":0,"rank":7,"tone":"normal","detail":"Assess depth/TBSA only after tar is cleared. Superficial/small → standard care; deep/large → burn-center referral. Update tetanus.","activeWhen":"1"},{"id":"tar-dispo","shape":"state","text":"Disposition + note","col":0,"rank":8,"tone":"normal","detail":"Discharge small superficial/partial burns with ongoing emulsifier + follow-up; transfer if burn-center criteria met.","activeWhen":"1"}],"edges":[{"from":"tar-start","to":"tar-abc"},{"from":"tar-abc","to":"tar-airway-path","label":"inhalation injury present"},{"from":"tar-abc","to":"tar-cool","label":"no inhalation injury"},{"from":"tar-airway-path","to":"tar-cool","label":"after airway/CO/CN stabilized"},{"from":"tar-cool","to":"tar-agent"},{"from":"tar-agent","to":"tar-agent-bacitracin","label":"bacitracin/Neosporin"},{"from":"tar-agent","to":"tar-agent-surfactant","label":"surfactant"},{"from":"tar-agent","to":"tar-agent-mineraloil","label":"mineral oil/butter"},{"from":"tar-agent","to":"tar-agent-vitamine","label":"vitamin E"},{"from":"tar-agent-bacitracin","to":"tar-apply"},{"from":"tar-agent-surfactant","to":"tar-apply"},{"from":"tar-agent-mineraloil","to":"tar-apply"},{"from":"tar-agent-vitamine","to":"tar-apply"},{"from":"tar-apply","to":"tar-reassess"},{"from":"tar-reassess","to":"tar-dispo"}]},{"id":"b-fullprotocol","type":"text","md":"This is the high-yield spine. See the [full protocol](#/tree/tar-burn-removal) for the Steps Summary, Dissolution-Agent Ladder, and Do-NOT list overlays referenced throughout."}]},{"id":"sec-agent","title":"Dissolution Agent Selection","blocks":[{"id":"b-agent-text","type":"text","whenNode":"tar-agent","md":"Tar is petroleum-based, so a petroleum/surfactant emulsifier dissolves it without harming skin. Pick what you have.","cite":["ref1","ref4","ref5"]},{"id":"b-no-solvents","type":"callout","tone":"danger","title":"Never use organic solvents","whenNode":"tar-agent","md":"Never use acetone, gasoline, or other organic solvents — they cause chemical injury.","cite":["ref1"]},{"id":"b-agent-ladder","type":"table","whenNode":"tar-agent","columns":["Agent","Notes"],"rows":[["Antibiotic ointment (bacitracin / Neosporin)","Most available in any ED; apply thickly, reapply q1-2h; tar emulsifies over hours."],["Surfactant (polysorbate/Tween-80, De-Solv-It, Tarsol)","Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked."],["Mineral oil / petrolatum / butter","Household/kitchen petroleum sources; case-reported effective when nothing else is available."],["Vitamin E ointment","Reported effective and skin-friendly for hot-tar burns (CJEM case series)."]],"cite":["ref1","ref4"]},{"id":"b-dose-bacitracin","type":"dose","drug":"Bacitracin / Neosporin ointment","drugId":"bacitracin","dose":"Apply thickly under a dressing; reapply q1-2h","note":"Most available in any ED; tar emulsifies over hours.","whenNode":"tar-agent-bacitracin","showWhen":"agent==1"},{"id":"b-dose-surfactant","type":"dose","drug":"Surfactant emulsifier (Tween-80 / De-Solv-It / Tarsol)","dose":"Apply per product instructions; reapply as needed","note":"Purpose-made petroleum-emulsifying surfactants; dissolve tar fastest where stocked.","whenNode":"tar-agent-surfactant","showWhen":"agent==2"},{"id":"b-dose-mineraloil","type":"dose","drug":"Mineral oil / petrolatum / butter","dose":"Apply generously; reapply as needed","note":"Household/kitchen petroleum sources; case-reported effective (butter, mineral oil).","whenNode":"tar-agent-mineraloil","showWhen":"agent==3"},{"id":"b-dose-vitamine","type":"dose","drug":"Vitamin E ointment","dose":"Apply generously; reapply as needed","note":"Reported effective and skin-friendly for hot-tar burns (CJEM case series).","whenNode":"tar-agent-vitamine","showWhen":"agent==4","cite":["ref4"]}]},{"id":"sec-apply","title":"Step 3 — Apply + Dwell","blocks":[{"id":"b-apply-steps","type":"steps","ordered":true,"whenNode":"tar-apply","items":["Apply the chosen emulsifier generously over ALL adherent tar.","Cover with a non-adherent dressing and a bulky outer wrap to hold the agent against the tar.","Let it dwell — tar dissolves gradually. Reapply the agent every 1-2 hours. As the tar softens it lifts off atraumatically with gentle wiping.","Complete dissolution can take several hours and may extend beyond the ED visit; outpatient continuation with ongoing ointment is acceptable for stable, small burns."],"cite":["ref1","ref4","ref5"]},{"id":"b-never-peel-apply","type":"callout","tone":"danger","title":"Do not force, scrub, or peel","whenNode":"tar-apply","md":"Do NOT force, scrub, or peel any tar that is still adherent — reapply the emulsifier and wait.","cite":["ref1"]}]},{"id":"sec-reassess","title":"Step 4 — Reassess + Transfer Criteria","blocks":[{"id":"b-reassess-text","type":"text","whenNode":"tar-reassess","md":"Burn depth CANNOT be judged while tar covers the skin. Only after the tar is cleared: estimate depth (superficial / partial / full thickness) and TBSA, and update tetanus status.","cite":["ref2","ref6"]},{"id":"b-tbsa-table","type":"table","whenNode":"tar-reassess","columns":["Criterion","Detail"],"rows":[["TBSA estimation","Rule of Nines (adults) or the patient's palm (incl. fingers) ≈ 1% TBSA for small/patchy burns."],["Depth counting","Count partial- and full-thickness burn only; exclude superficial (erythema-only)."],["Burn-center referral","Partial-thickness > 10% TBSA"],["Burn-center referral","Any full-thickness burn"],["Burn-center referral","Burns to face, hands, feet, genitalia, perineum, or major joints"],["Burn-center referral","Inhalation injury, electrical/chemical burns, or significant comorbidity"]],"rowTones":[null,null,"caution","caution","caution","caution"],"cite":["ref2"]}]},{"id":"sec-dispo","title":"Disposition + Documentation","blocks":[{"id":"b-dispo-table","type":"table","whenNode":"tar-dispo","columns":["Disposition","Criteria"],"rows":[["Discharge","Small superficial/partial-thickness burns once tar is substantially cleared and pain is controlled; ongoing emulsifier ointment + non-adherent dressing; burn-clinic or PCP follow-up in 24-48 h; clear return precautions (increasing pain, redness, fever, drainage)."],["Admit / Transfer","Burn-center criteria met (deep partial/full thickness, large TBSA, hands/face/feet/perineum/joints, inhalation injury, comorbidity)."]],"rowTones":["normal","caution"],"cite":["ref2","ref6"]},{"id":"b-note-template","type":"text","whenNode":"tar-dispo","md":"**Note template:**\n**Mechanism:** Hot tar/asphalt burn to [site], occupational/[other].\n**Initial:** Cooled ~20 min; analgesia [agent]; tar NOT peeled.\n**Dissolution:** [Bacitracin / surfactant / mineral oil / vitamin E] applied; reapplied q[1-2]h; tar released atraumatically.\n**Burn assessment (post-clearance):** [depth], TBSA [%].\n**Tetanus:** [status]. **Disposition:** [discharge w/ follow-up / transfer to burn center]."}]},{"id":"sec-stop","title":"Do-NOT List (reference — tar burn pitfalls)","blocks":[{"id":"b-stop-list","type":"callout","tone":"danger","title":"Do-NOT List","md":"Do NOT mechanically peel, pick, or scrub adherent tar — it strips viable skin.\n\nDo NOT use acetone, gasoline, or organic solvents on the skin.\n\nDo NOT apply ice (worsens injury) or risk hypothermia in large burns.\n\nDo NOT judge burn depth while tar is still present.\n\nDo NOT prioritize wound care over airway in inhalation injury.","cite":["ref5"]}]}],"citations":[{"id":"ref1","label":"Steenvoorde P, et al. Tar removal from a burn with butter: an emulsifier approach. World Wide Wounds. 2004 Dec."},{"id":"ref2","label":"American Burn Association. Advanced Burn Life Support (ABLS) Provider Manual / burn-center referral criteria."},{"id":"ref3","label":"Roberts JR, Custalow CB, Thomsen TW. Roberts and Hedges' Clinical Procedures in Emergency Medicine and Acute Care — burn and wound management (domain comparator only)."},{"id":"ref4","label":"Vitamin E ointment for the treatment of a hot tar burn. CJEM. 2013;15(0):1-2 (PMID 23972137)."},{"id":"ref5","label":"Anesthesia Key. Partial-Thickness (Second-Degree) Burns and Tar Burns. aneskey.com."},{"id":"ref6","label":"Hettiaratchy S, Papini R. Initial management of a major burn: II—assessment and resuscitation. BMJ. 2004;329(7457):101-103."}],"meta":{"version":"1.0","lastReviewed":"2026-07-13","reviewer":"InfoKitt author+verify pipeline (source-audited against myMedKitt tree) — pending Andy Kitlowski MD final approval"}}</script>
+<script>/* InfoKitt client runtime — inlined into every artifact. No external deps, CSP-safe:
+   no eval, no Function, no innerHTML with dynamic text (textContent only). ~5KB. */
+(function () {
+  "use strict";
+  var root = document.querySelector("[data-ig]") || document.body || document;
+  var specEl = document.getElementById("ig-spec");
+  if (!specEl) return;
+  var SPEC = JSON.parse(specEl.textContent);
+  var CALCS = {};
+  (SPEC.calcs || []).forEach(function (c) { CALCS[c.id] = c; });
+
+  // ---- AST walker (mirrors packages/expr evalAst; ASTs precompiled at render time) ----
+  function ev(n, s) {
+    switch (n.k) {
+      case "num": return n.v;
+      case "id": return typeof s[n.name] === "number" ? s[n.name] : NaN;
+      case "un": return -ev(n.x, s);
+      case "call": {
+        var a = n.args.map(function (x) { return ev(x, s); });
+        if (n.fn === "round") { var d = a.length === 2 ? a[1] : 0, m = Math.pow(10, d); return Math.round(a[0] * m) / m; }
+        if (n.fn === "min") return Math.min(a[0], a[1]);
+        if (n.fn === "max") return Math.max(a[0], a[1]);
+        if (n.fn === "floor") return Math.floor(a[0]);
+        if (n.fn === "ceil") return Math.ceil(a[0]);
+        if (n.fn === "clamp") return Math.min(Math.max(a[0], a[1]), a[2]);
+        return NaN;
+      }
+      case "bin": {
+        var x = ev(n.a, s), y = ev(n.b, s);
+        switch (n.op) {
+          case "+": return x + y; case "-": return x - y; case "*": return x * y; case "/": return x / y;
+          case "<": return x < y ? 1 : 0; case ">": return x > y ? 1 : 0;
+          case "<=": return x <= y ? 1 : 0; case ">=": return x >= y ? 1 : 0;
+          case "==": return x === y ? 1 : 0; case "!=": return x !== y ? 1 : 0;
+          case "&&": return x && y ? 1 : 0; case "||": return x || y ? 1 : 0;
+        }
+        return NaN;
+      }
+    }
+    return NaN;
+  }
+
+  // ---- state ----
+  var state = {};
+  var touched = false;
+  var currentNode = null; // "you are here" — the tapped flow node driving step focus below
+  var currentMode = root.getAttribute("data-mode") || "learn";
+  (SPEC.inputs || []).forEach(function (i) {
+    if (i.type === "boolean") state[i.id] = i.default ? 1 : 0;
+    else state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+  });
+
+  // parse a JSON-encoded AST from a data attribute once, cache on the element
+  function astOf(el, key) {
+    if (!el.__ast) el.__ast = {};
+    if (!(key in el.__ast)) { try { el.__ast[key] = JSON.parse(el.getAttribute(key)); } catch (e) { el.__ast[key] = null; } }
+    return el.__ast[key];
+  }
+
+  function computeCalc(id, scope) {
+    var c = CALCS[id]; if (!c) return null;
+    if (c.guardAst && !ev(c.guardAst, scope)) return { fail: c.guardFail || "—" };
+    var v = ev(c.exprAst, scope);
+    if (!isFinite(v)) return null;
+    return { value: v, unit: c.unit || "" };
+  }
+
+  function fmt(v) { return (Math.round(v * 100) / 100).toString(); }
+
+  function render() {
+    // live calc outputs
+    Array.prototype.forEach.call(root.querySelectorAll("[data-calc]"), function (el) {
+      var r = computeCalc(el.getAttribute("data-calc"), state);
+      var out = el.querySelector("[data-calc-value]") || el;
+      if (!r) { out.textContent = "—"; el.removeAttribute("data-fail"); return; }
+      if (r.fail) { out.textContent = r.fail; el.setAttribute("data-fail", "1"); return; }
+      el.removeAttribute("data-fail");
+      out.textContent = fmt(r.value) + (r.unit ? " " + r.unit : "");
+    });
+    // visibility: showWhen (input state) AND whenNode ("you are here" step focus)
+    Array.prototype.forEach.call(root.querySelectorAll("[data-showwhen],[data-whennode]"), function (el) {
+      var show = true;
+      if (el.hasAttribute("data-showwhen")) { var ast = astOf(el, "data-showwhen"); show = ast ? !!ev(ast, state) : true; }
+      if (show && currentMode === "checklist" && currentNode && el.hasAttribute("data-whennode")) {
+        show = el.getAttribute("data-whennode").split(/\s+/).indexOf(currentNode) >= 0;
+      }
+      el.hidden = !show;
+    });
+    Array.prototype.forEach.call(root.querySelectorAll(".ig-section[data-has-steps]"), function (section) {
+      if (currentMode !== "checklist") { section.hidden = false; return; }
+      section.hidden = !section.querySelector(".ig-stepbound:not([hidden])");
+    });
+    // activeWhen: auto-highlight the state-driven recommended path through the flow
+    Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-activewhen]"), function (g) {
+      var ast = astOf(g, "data-activewhen");
+      if (ast && ev(ast, state)) g.setAttribute("data-auto", "1"); else g.removeAttribute("data-auto");
+    });
+    // patient-specific route: the readable companion to the full topology map
+    Array.prototype.forEach.call(root.querySelectorAll("[data-route-node]"), function (item) {
+      var ast = astOf(item, "data-routewhen");
+      item.hidden = !(ast && ev(ast, state));
+    });
+    // param readout inside hero frame + control strip
+    var parts = (SPEC.inputs || []).map(function (i) {
+      if (i.type === "boolean") return state[i.id] ? i.label.toLowerCase() : null;
+      if (i.type === "select") {
+        var selected = (i.options || []).filter(function (o) { return o.value === state[i.id]; })[0];
+        return selected ? selected.label.toLowerCase() : null;
+      }
+      return isFinite(state[i.id]) ? fmt(state[i.id]) + (i.unit ? " " + i.unit : "") + " " + i.label.toLowerCase() : null;
+    }).filter(Boolean);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-param-readout]"), function (el) {
+      el.textContent = parts.length ? parts.join(" · ") : "enter values";
+    });
+    // edited chip
+    Array.prototype.forEach.call(root.querySelectorAll("[data-edited-chip]"), function (el) {
+      el.hidden = !touched;
+    });
+    // extreme-value warnings
+    Array.prototype.forEach.call(root.querySelectorAll("[data-warn-for]"), function (el) {
+      var id = el.getAttribute("data-warn-for"), v = state[id];
+      var inp = (SPEC.inputs || []).filter(function (i) { return i.id === id; })[0];
+      el.hidden = !(inp && isFinite(v) && (v < inp.min || v > inp.max));
+    });
+  }
+
+  function setMode(mode) {
+    currentMode = mode;
+    root.setAttribute("data-mode", mode);
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-mode-select") === mode ? "true" : "false");
+    });
+    Array.prototype.forEach.call(root.querySelectorAll("[data-mode-panel]"), function (panel) {
+      panel.hidden = panel.getAttribute("data-mode-panel").split(/\s+/).indexOf(mode) < 0;
+    });
+    render();
+  }
+
+  Array.prototype.forEach.call(root.querySelectorAll("[data-mode-select]"), function (btn) {
+    btn.addEventListener("click", function () { setMode(btn.getAttribute("data-mode-select")); });
+  });
+
+  // ---- input binding: slider <-> numeric, rAF-throttled ----
+  var raf = null;
+  function schedule() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; render(); }); }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-input]"), function (el) {
+    var id = el.getAttribute("data-input");
+    el.addEventListener("input", function () {
+      var v = el.value === "" ? NaN : parseFloat(el.value);
+      state[id] = v; touched = true;
+      // mirror slider<->number pair
+      Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + id + '"]'), function (o) {
+        if (o !== el && o.value != el.value) o.value = el.value;
+      });
+      schedule();
+    });
+  });
+
+  // ---- boolean toggles ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-toggle");
+      var next = btn.getAttribute("aria-checked") === "true" ? 0 : 1;
+      btn.setAttribute("aria-checked", next ? "true" : "false");
+      state[id] = next; touched = true; schedule();
+    });
+  });
+
+  // ---- zoom the flow diagram (SVG scales crisp; wrapper scrolls) ----
+  Array.prototype.forEach.call(root.querySelectorAll(".ig-flowblock"), function (block) {
+    var svg = block.querySelector(".ig-flow");
+    if (!svg) return;
+    var z = 1;
+    var apply = function () {
+      if (z <= 1.001) { svg.style.width = ""; svg.style.maxWidth = ""; }
+      else { svg.style.width = (z * 100) + "%"; svg.style.maxWidth = "none"; }
+    };
+    Array.prototype.forEach.call(block.querySelectorAll("[data-zoom]"), function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-zoom");
+        if (k === "in") z = Math.min(z + 0.35, 4);
+        else if (k === "out") z = Math.max(z - 0.35, 1);
+        else z = 1;
+        apply();
+      });
+    });
+  });
+
+  // ---- reset ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-reset]"), function (btn) {
+    btn.addEventListener("click", function () {
+      (SPEC.inputs || []).forEach(function (i) {
+        if (i.type === "boolean") {
+          state[i.id] = i.default ? 1 : 0;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-toggle="' + i.id + '"]'), function (o) {
+            o.setAttribute("aria-checked", i.default ? "true" : "false");
+          });
+        } else {
+          state[i.id] = (typeof i.default === "number") ? i.default : NaN;
+          Array.prototype.forEach.call(root.querySelectorAll('[data-input="' + i.id + '"]'), function (o) {
+            o.value = (typeof i.default === "number") ? i.default : "";
+          });
+        }
+      });
+      touched = false; render();
+    });
+  });
+
+  // ---- "you are here": tap a flow node -> focus that step's content below ----
+  function setCurrentNode(id, label) {
+    currentNode = id;
+    var bar = root.querySelector("[data-currentstep]");
+    if (bar) {
+      bar.hidden = !id;
+      if (id) { var lbl = bar.querySelector("[data-currentstep-label]"); if (lbl) lbl.textContent = label || id; }
+    }
+    if (id) root.setAttribute("data-stepping", "1"); else root.removeAttribute("data-stepping");
+    render();
+    if (id) {
+      // focus the first now-visible step block belonging to this node
+      var block = null;
+      Array.prototype.forEach.call(root.querySelectorAll('[data-whennode]'), function (el) {
+        if (!block && !el.hidden && el.getAttribute("data-whennode").split(/\s+/).indexOf(id) >= 0) block = el;
+      });
+      var target = block || (bar && !bar.hidden ? bar : null);
+      if (target && target.scrollIntoView) target.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
+  }
+  function activateFlowNode(svg, g) {
+      if (!g) return;
+      var was = g.getAttribute("data-active") === "1";
+      Array.prototype.forEach.call(svg.querySelectorAll("[data-node]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      if (!was) {
+        g.setAttribute("data-active", "1");
+        var id = g.getAttribute("data-node");
+        var d = root.querySelector('[data-detail-for="' + id + '"]');
+        if (d) d.hidden = false;
+        setCurrentNode(id, g.getAttribute("aria-label"));
+      } else {
+        setCurrentNode(null);
+      }
+  }
+  Array.prototype.forEach.call(root.querySelectorAll("[data-flow]"), function (svg) {
+    svg.addEventListener("click", function (e) {
+      activateFlowNode(svg, e.target.closest("[data-node]"));
+    });
+    svg.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var g = e.target.closest("[data-node]"); if (!g) return;
+      e.preventDefault(); activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-route-select]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-route-select");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      var svg = g && g.closest("[data-flow]");
+      if (svg && g) activateFlowNode(svg, g);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-open-step]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.getAttribute("data-open-step");
+      var g = root.querySelector('[data-node="' + id + '"]');
+      setMode("checklist");
+      setCurrentNode(id, g ? g.getAttribute("aria-label") : id);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-currentstep-clear]"), function (btn) {
+    btn.addEventListener("click", function () {
+      Array.prototype.forEach.call(root.querySelectorAll("[data-node][data-active]"), function (n) { n.removeAttribute("data-active"); });
+      Array.prototype.forEach.call(root.querySelectorAll("[data-detail-for]"), function (n) { n.hidden = true; });
+      setCurrentNode(null);
+    });
+  });
+
+  // ---- quiz mode: hide reveal chips until tapped ----
+  var quizOn = false;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-quiz-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      quizOn = !quizOn;
+      btn.setAttribute("aria-pressed", quizOn ? "true" : "false");
+      Array.prototype.forEach.call(root.querySelectorAll("[data-quiz]"), function (el) {
+        if (quizOn) { el.setAttribute("data-hidden", "1"); }
+        else { el.removeAttribute("data-hidden"); }
+      });
+    });
+  });
+  root.addEventListener("click", function (e) {
+    var q = e.target.closest("[data-quiz]");
+    if (q && q.getAttribute("data-hidden") === "1") q.removeAttribute("data-hidden");
+  });
+
+  // ---- expand all ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-expand-all]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var open = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.textContent = open ? "Collapse all" : "Expand all";
+      Array.prototype.forEach.call(root.querySelectorAll("details.ig-disc"), function (d) { d.open = open; });
+    });
+  });
+
+  // ---- theme toggle ----
+  Array.prototype.forEach.call(root.querySelectorAll("[data-theme-toggle]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var cur = document.documentElement.getAttribute("data-theme");
+      var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+      document.documentElement.setAttribute("data-theme", next);
+    });
+  });
+
+  setMode(currentMode);
+})();
+</script>
+</body></html>
