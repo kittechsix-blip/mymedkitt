@@ -301,6 +301,7 @@ export const CCB_OD_NODES = [
             { label: 'Refractory bradycardia', description: 'HR critically low, not responding', next: 'ccb-pacing', urgency: 'critical' },
             { label: 'Improving on current therapy', description: 'Hemodynamics stabilizing', next: 'ccb-disposition' },
         ],
+        citation: [1, 3],
         summary: 'Standard therapy failed — assess for refractory vasoplegia, cardiogenic shock, or bradycardia',
     },
     {
