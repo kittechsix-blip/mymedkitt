@@ -26198,6 +26198,51 @@ const REVISED_GENEVA_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+const HEART_SCORE_CALCULATOR: CalculatorDefinition = {
+  id: 'heart-score',
+  title: 'HEART Score',
+  subtitle: 'Major Adverse Cardiac Event (MACE) risk in ED chest pain',
+  description: 'Validated risk score for chest pain in the ED. Predicts 6-week risk of major adverse cardiac events (MACE: all-cause death, MI, or coronary revascularization). H-E-A-R-T: History, ECG, Age, Risk factors, Troponin. Each item scores 0, 1, or 2. Use only after STEMI and other immediate life-threats are excluded.',
+  fields: [
+    { name: 'history', label: 'History', type: 'select', points: 0, description: 'Clinical suspicion of the story being ACS.', selectOptions: [
+      { label: 'Slightly suspicious', points: 0 },
+      { label: 'Moderately suspicious', points: 1 },
+      { label: 'Highly suspicious', points: 2 },
+    ]},
+    { name: 'ecg', label: 'ECG', type: 'select', points: 0, description: 'LBBB / paced / repolarization changes = 1; significant ST deviation not from those = 2.', selectOptions: [
+      { label: 'Normal', points: 0 },
+      { label: 'Non-specific repolarization / LBBB / pacing', points: 1 },
+      { label: 'Significant ST deviation', points: 2 },
+    ]},
+    { name: 'age', label: 'Age', type: 'select', points: 0, selectOptions: [
+      { label: '< 45 years', points: 0 },
+      { label: '45 - 64 years', points: 1 },
+      { label: '\u2265 65 years', points: 2 },
+    ]},
+    { name: 'risk-factors', label: 'Risk factors', type: 'select', points: 0, description: 'HTN, hypercholesterolemia, DM, obesity (BMI >30), smoking (current or ceased \u22643 mo), family history of premature CAD, or known atherosclerotic disease.', selectOptions: [
+      { label: 'No known risk factors', points: 0 },
+      { label: '1 - 2 risk factors', points: 1 },
+      { label: '\u2265 3 risk factors, or history of atherosclerotic disease', points: 2 },
+    ]},
+    { name: 'troponin', label: 'Initial troponin', type: 'select', points: 0, description: 'Relative to the institutional upper limit of normal (ULN).', selectOptions: [
+      { label: '\u2264 normal limit', points: 0 },
+      { label: '1 - 3\u00D7 normal limit', points: 1 },
+      { label: '> 3\u00D7 normal limit', points: 2 },
+    ]},
+  ],
+  results: [
+    { min: -Infinity, max: 4, label: 'Low Risk (0-3)', risk: '6-week MACE ~0.9-1.7%', mortality: 'Score 0-3. Low risk. Reasonable for early discharge with a negative serial troponin pathway and follow-up. Does NOT override a positive troponin or dynamic ECG.', colorVar: '--color-decision-active' },
+    { min: 4, max: 7, label: 'Moderate Risk (4-6)', risk: '6-week MACE ~12-16.6%', mortality: 'Score 4-6. Admit / observation, serial troponin, non-invasive testing or cardiology as indicated.', colorVar: '--color-warning' },
+    { min: 7, max: Infinity, label: 'High Risk (7-10)', risk: '6-week MACE ~50-65%', mortality: 'Score 7-10. High risk. Early invasive strategy / cardiology, aggressive ACS therapy.', colorVar: '--color-danger' },
+  ],
+  thresholdNote: 'Three-tier: 0-3 Low (early discharge candidate with negative serial troponin), 4-6 Moderate (admit/observe), 7-10 High (invasive/cardiology). The HEART Pathway pairs a HEART score \u22643 with two negative troponins (0 and 3 h) to safely discharge. A single elevated troponin or ischemic ECG is an ACS pathway regardless of score.',
+  citations: [
+    'Six AJ, Backus BE, Kelder JC. Chest pain in the emergency room: value of the HEART score. Neth Heart J. 2008;16(6):191-196. doi:10.1007/BF03086144',
+    'Backus BE, Six AJ, Kelder JC, et al. A prospective validation of the HEART score for chest pain patients at the emergency department. Int J Cardiol. 2013;168(3):2153-2158. doi:10.1016/j.ijcard.2013.01.255',
+    'Mahler SA, Riley RF, Hiestand BC, et al. The HEART Pathway randomized trial: identifying emergency department patients with acute chest pain for early discharge. Circ Cardiovasc Qual Outcomes. 2015;8(2):195-203. doi:10.1161/CIRCOUTCOMES.114.001384',
+  ],
+};
+
 const ALVARADO_SCORE_CALCULATOR: CalculatorDefinition = {
   id: 'alvarado-score',
   title: 'Alvarado Score',
@@ -42736,6 +42781,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'wells-pe': WELLS_PE_CALCULATOR,
   'perc-rule': PERC_RULE_CALCULATOR,
   'revised-geneva': REVISED_GENEVA_CALCULATOR,
+  'heart-score': HEART_SCORE_CALCULATOR,
   'alvarado-score': ALVARADO_SCORE_CALCULATOR,
   // Pediatric Trauma
   'broselow-weight': BROSELOW_WEIGHT_CALCULATOR,

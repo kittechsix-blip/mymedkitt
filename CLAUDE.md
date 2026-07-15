@@ -104,6 +104,47 @@ Full rule and recovery steps: `~/Desktop/claude-brain/agent-instructions/agent-r
 9. Push to Supabase via REST API (see "Supabase API Deploy" section below)
 10. Commit and push to GitHub
 
+### Chief-Complaint Hub Template — Rule-In / Rule-Out Engine (MANDATORY for ALL hubs)
+
+**As of 2026-07-15, every chief-complaint hub (`*-hub.ts`) MUST follow the rule-in/rule-out engine pattern.** The reference implementation is `src/data/trees/dyspnea-hub.ts` (Shortness of Breath). A hub is NOT a differential-diagnosis printer — it is a workup engine that walks each differential through its **validated decision instrument** to an **explicit verdict** (excluded / test further / rule-in + treat).
+
+**Governing principles (from Andy, verbatim intent):**
+- "This hub should not just give me a differential diagnosis, but a very thoughtful process of how to rule in / rule out each diagnosis." The rule-in/rule-out process IS the value.
+- Every decision tool (score/calculator) lives in the **bottom toolbar**, not buried in prose.
+- **Evidence-based medicine sources ONLY** for citations — primary literature and society guidelines (ESC, ATS/IDSA, BTS, GOLD, GINA, NIAID/FAAN, ACP, landmark derivation/validation papers). **NO EMCrit, IBCC, UpToDate, or secondary-source citations in hubs.** (They may still be cited in non-hub consults per the general Citation rule; hubs are stricter.)
+
+**5-module skeleton (module numbers are literal):**
+1. **Sick Check** (module 1) — one `info` start node. Lead with a "⚠️ N DO NOT MISS" list, a "First 60 seconds" block (work of breathing, mental status, ventilation > pulse-ox alone), then `next` → the triage/differential-picker node. `safetyLevel: 'critical'`.
+2. **Rule In / Rule Out** (module 2) — the engine. One `question` "triage" node whose options are the differentials, each `next` → that differential's entry node. Then **one workup chain per differential**: an `entry` node (usually `question`, references the validated instrument) → intermediate step nodes → a `verdict` node (`type: 'result'`). Excluded verdicts and "reconsider" branches loop back to the triage node (`next: '<hub>-triage'`). Confirmed/positive verdicts link out to the definitive consult via `[Title](#/tree/tree-id)`.
+3. **Rescue / Reassess** (module 3) — an `info` rescue/initial-bundle node → a `question` reassess node that routes to triage (worsening), imaging (stable/unclear), or disposition (improving). **These MUST be reachable** — either from a chain or via a toolbar `jump` button. (The dyspnea rebuild orphaned these; caught by Flow Rider. Always verify reachability.)
+4. **Imaging** (module 4) — one `info` node, imaging-by-cause → `next` disposition.
+5. **Disposition** (module 5) — one `question` node → three `result` nodes (ICU/resus, admit/observe, discharge-checklist with return precautions).
+
+**Per-differential chain pattern (the crux):**
+- **Entry node** names the instrument and tells the user to open it from the toolbar (e.g., "open **Wells PE** or **Revised Geneva**"). Options branch by score tier.
+- **Intermediate nodes** walk sequential gates (e.g., PE: pretest-probability → PERC → age-adjusted D-dimer → CTPA), each an explicit rule-in/rule-out step.
+- **Verdict node** (`type: 'result'`) gives the disposition + `recommendation` + links to the treatment consult. Set `confidence: 'definitive'` when the pathway is conclusive, `'recommended'` when it guides.
+- Every node carries a `citation: [N]` array pointing at the EBM `CITATIONS` list.
+
+**Required exports (match dyspnea-hub.ts exactly):**
+```ts
+import type { DecisionNode } from '../../models/types.js';
+import type { Citation } from './neurosyphilis.js';
+export const <HUB>_CRITICAL_ACTIONS = [{ text, nodeId }, ...];  // 3-5, nodeIds must exist (lint-checked)
+export const <HUB>_NODES: DecisionNode[] = [ ... ];
+export const <HUB>_NODE_COUNT = <HUB>_NODES.length;
+export const <HUB>_MODULE_LABELS = ['Sick Check', 'Rule In / Rule Out', 'Rescue / Reassess', 'Imaging', 'Disposition'];
+export const <HUB>_CITATIONS: Citation[] = [{ num, text }, ...];  // EBM primary sources only
+```
+
+**Body text:** markdown with `\uXXXX` unicode escapes for emoji/symbols (⚠️ `\u26A0\uFE0F`, ≤ `\u2264`, ≥ `\u2265`, × `\u00D7`, → `\u2192`). Follow the Calculator Output Formatting rules (bold uppercase headers, bullets, `\n\n` between sections).
+
+**Toolbar (`src/data/toolbar-configs.ts`):** every validated score used in the hub gets a `{ action: 'calculator', target: '<calc-id>' }` button; pin the 2-3 primary ones. Add `{ action: 'jump', target: '<node-id>' }` buttons for major branch points (triage/rule-in-out, rescue, imaging) to guarantee reachability. **Any calculator referenced that does not exist in `calculator.ts` MUST be built first** (Le Gal Revised Geneva was built this way on 2026-07-15).
+
+**Deploy note — structural node changes need a FULL Supabase push.** A hub rewrite ADDS and REMOVES node IDs. The auto-generated `supabase-hotfix-update.sql` is UPDATE-only (patches existing nodes, misses new, orphans old). Use `node scripts/supabase-push.mjs <hub-id>` (FULL mode = delete+insert), NOT `--update`. After push, verify node count and patch `decision_trees.node_count` if the upsert left it stale.
+
+**Audit gate:** after every hub rewrite, run Dr. Kitlowski (clinical) + Flow Rider (UX/reachability). Flow Rider must confirm zero orphan nodes and zero dead toolbar buttons before the hub is considered done.
+
 ### Core Design Philosophy
 
 > **"All information accessible, but hidden by default."**
