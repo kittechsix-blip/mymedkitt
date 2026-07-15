@@ -569,6 +569,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'dysp-shock-index', label: 'Shock Idx', icon: '💓', action: 'calculator', target: 'shock-index' },
         { id: 'dysp-sgarbossa', label: 'Sgarbossa', icon: '📈', action: 'calculator', target: 'sgarbossa' },
         { id: 'dysp-triage', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'dysp-triage' },
+        { id: 'dysp-rescue-btn', label: 'Rescue', icon: '💉', action: 'jump', target: 'dysp-rescue' },
         { id: 'dysp-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'dysp-imaging' },
     ],
     'altered-mental-status-hub': [
