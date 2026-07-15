@@ -25056,6 +25056,35 @@ const PERC_RULE_CALCULATOR = {
         'Kline JA, et al. Clinical criteria to prevent unnecessary diagnostic testing in ED patients with suspected PE. J Thromb Haemost. 2004;2:1247-1255. PMID: 15304025.',
     ],
 };
+const REVISED_GENEVA_CALCULATOR = {
+    id: 'revised-geneva',
+    title: 'Revised Geneva Score',
+    subtitle: 'PE Pre-Test Probability (fully objective)',
+    description: 'Objective clinical prediction model for PE. Requires NO gestalt judgment (unlike Wells), so it is reproducible between clinicians. Use three-level interpretation.',
+    fields: [
+        { name: 'age65', label: 'Age > 65 years', type: 'toggle', points: 1 },
+        { name: 'prior-vte', label: 'Previous DVT or PE', type: 'toggle', points: 3 },
+        { name: 'surgery-fracture', label: 'Surgery (general anesthesia) or lower-limb fracture within 1 month', type: 'toggle', points: 2 },
+        { name: 'malignancy', label: 'Active malignancy (solid or hematologic, currently active or cured < 1 year)', type: 'toggle', points: 2 },
+        { name: 'unilateral-leg-pain', label: 'Unilateral lower-limb pain', type: 'toggle', points: 3 },
+        { name: 'hemoptysis', label: 'Hemoptysis', type: 'toggle', points: 2 },
+        { name: 'leg-exam', label: 'Pain on deep vein palpation AND unilateral edema', type: 'toggle', points: 4 },
+        { name: 'hr', label: 'Heart rate', type: 'select', points: 0, selectOptions: [
+                { label: '< 75 bpm', points: 0 },
+                { label: '75 - 94 bpm', points: 3 },
+                { label: '≥ 95 bpm', points: 5 },
+            ] },
+    ],
+    results: [
+        { min: -Infinity, max: 4, label: 'Low Risk', risk: 'PE unlikely (~8% prevalence)', mortality: 'Score 0-3. Proceed to D-dimer (age-adjusted). Consider PERC if gestalt also low.', colorVar: '--color-decision-active' },
+        { min: 4, max: 11, label: 'Intermediate Risk', risk: 'PE possible (~28% prevalence)', mortality: 'Score 4-10. Proceed to D-dimer; if positive, CTPA.', colorVar: '--color-warning' },
+        { min: 11, max: Infinity, label: 'High Risk', risk: 'PE likely (~74% prevalence)', mortality: 'Score ≥ 11. Proceed directly to CTPA. Do NOT use D-dimer.', colorVar: '--color-danger' },
+    ],
+    thresholdNote: 'Three-level: 0-3 Low, 4-10 Intermediate, ≥11 High. Fully objective alternative to Wells (no "PE most likely diagnosis" judgment call). Two-level option: ≤5 unlikely, ≥6 likely. Do NOT use D-dimer in high pre-test probability.',
+    citations: [
+        'Le Gal G, et al. Prediction of pulmonary embolism in the emergency department: the revised Geneva score. Ann Intern Med. 2006;144:165-171. PMID: 16461960.',
+    ],
+};
 const ALVARADO_SCORE_CALCULATOR = {
     id: 'alvarado-score',
     title: 'Alvarado Score',
@@ -41264,6 +41293,7 @@ const CALCULATORS = {
     'canadian-ct-head': CANADIAN_CT_HEAD_CALCULATOR,
     'wells-pe': WELLS_PE_CALCULATOR,
     'perc-rule': PERC_RULE_CALCULATOR,
+    'revised-geneva': REVISED_GENEVA_CALCULATOR,
     'alvarado-score': ALVARADO_SCORE_CALCULATOR,
     // Pediatric Trauma
     'broselow-weight': BROSELOW_WEIGHT_CALCULATOR,
