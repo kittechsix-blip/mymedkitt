@@ -525,11 +525,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'tn-stop' },
   ],
   'headache-hub': [
-    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hh-steps' },
-    { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'hh-exclusions' },
-    { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'hh-rescue' },
-    { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hh-imaging' },
-    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hh-stop' },
+    { id: 'hh-ottawa', label: 'Ottawa SAH', icon: '🧮', action: 'calculator', target: 'ottawa-sah', pinned: true },
+    { id: 'hh-cchr', label: 'Canadian CT Head', icon: '🧮', action: 'calculator', target: 'canadian-ct-head', pinned: true },
+    { id: 'hh-triage', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'hh-triage' },
+    { id: 'hh-rescue-btn', label: 'Rescue', icon: '💉', action: 'jump', target: 'hh-rescue' },
+    { id: 'hh-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hh-imaging' },
   ],
   'unilateral-facial-pain-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ufp-steps', pinned: true },
