@@ -100,17 +100,6 @@ export const DEFAULT_CATEGORIES: Category[] = [
     icon: 'cardiology.png',
     decisionTrees: [
       {
-        id: 'unilateral-leg-swelling-hub',
-        title: 'Unilateral Leg Swelling Hub',
-        subtitle: 'Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo',
-        categoryId: 'emergency-medicine',
-        version: '1.0',
-        nodeCount: 31,
-        entryNodeId: 'uls-sick-check',
-        type: 'hub',
-        displayCategoryId: 'cardiology',
-      },
-      {
         id: 'afib-rvr',
         title: 'A-Fib RVR',
         subtitle: 'Stability → Rate Control → Refractory → Anticoagulation',
@@ -977,7 +966,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         nodeCount: 31,
         entryNodeId: 'uls-sick-check',
         type: 'hub',
-        displayCategoryId: 'cardiology',
+        displayCategoryId: 'vascular',
       },
       {
         id: 'seizure-hub',
@@ -4105,6 +4094,45 @@ export const DEFAULT_CATEGORIES: Category[] = [
     isCustom: false,
   },
   {
+    id: 'vascular',
+    name: 'Vascular',
+    icon: 'heme-onc.png',
+    decisionTrees: [
+      {
+        id: 'unilateral-leg-swelling-hub',
+        title: 'Unilateral Leg Swelling Hub',
+        subtitle: 'Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 31,
+        entryNodeId: 'uls-sick-check',
+        type: 'hub',
+        displayCategoryId: 'vascular',
+      },
+      {
+        id: 'ischemic-limb',
+        title: 'Acute Limb Ischemia & PAD',
+        subtitle: 'Recognition → Rutherford Triage → Workup → Management → Chronic PAD/CLTI → Disposition',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 17,
+        entryNodeId: 'il-start',
+        displayCategoryId: 'vascular',
+      },
+      {
+        id: 'dvt',
+        title: 'Deep Vein Thrombosis',
+        subtitle: 'Wells Score → D-dimer → Ultrasound → Treatment Selection → Special Populations → Duration',
+        categoryId: 'heme-onc',
+        version: '1.0',
+        nodeCount: 26,
+        entryNodeId: 'dvt-start',
+        displayCategoryId: 'vascular',
+      },
+    ],
+    isCustom: false,
+  },
+  {
     id: 'urology',
     name: 'Urology',
     icon: 'urology.png',
@@ -4203,6 +4231,7 @@ export const CATEGORY_COLORS: Record<string, { card: string; iconBg: string; tex
   'trauma-surg':         { card: '#E65100', iconBg: '#E65100' },
   'us-rads':             { card: '#1A237E', iconBg: '#1A237E' },
   'urology':             { card: '#F57F17', iconBg: '#F57F17', textColor: '#1A1A2E' },
+  'vascular':            { card: '#0277BD', iconBg: '#0277BD' },
 };
 
 const STORAGE_KEY = 'em-custom-categories';
