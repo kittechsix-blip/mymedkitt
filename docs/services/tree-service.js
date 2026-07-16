@@ -263,6 +263,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/anorectal-bleeding-hub.js');
             return { nodes: m.ANORECTAL_BLEEDING_HUB_NODES, entryNodeId: 'arb-start', categoryId: 'emergency-medicine', moduleLabels: m.ANORECTAL_BLEEDING_HUB_MODULE_LABELS, citations: m.ANORECTAL_BLEEDING_HUB_CITATIONS, criticalActions: m.ANORECTAL_BLEEDING_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'hip-pain-hub': async () => {
+            const m = await import('../data/trees/hip-pain-hub.js');
+            return { nodes: m.HIP_PAIN_HUB_NODES, entryNodeId: 'hip-start', categoryId: 'emergency-medicine', moduleLabels: m.HIP_PAIN_HUB_MODULE_LABELS, citations: m.HIP_PAIN_HUB_CITATIONS, criticalActions: m.HIP_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'seizure-hub': async () => {
             const m = await import('../data/trees/seizure-hub.js');
             return { nodes: m.SEIZURE_HUB_NODES, entryNodeId: 'sz-start', categoryId: 'emergency-medicine', moduleLabels: m.SEIZURE_HUB_MODULE_LABELS, citations: m.SEIZURE_HUB_CITATIONS, criticalActions: m.SEIZURE_HUB_CRITICAL_ACTIONS, type: 'hub' };

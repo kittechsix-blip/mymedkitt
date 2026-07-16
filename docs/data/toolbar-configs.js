@@ -522,6 +522,13 @@ const TOOLBAR_CONFIGS = {
         { id: 'arb-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'arb-rescue' },
         { id: 'arb-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'arb-imaging' },
     ],
+    'hip-pain-hub': [
+        { id: 'hip-kocher', label: 'Kocher', icon: '🧮', action: 'calculator', target: 'kocher-criteria', pinned: true },
+        { id: 'hip-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa' },
+        { id: 'hip-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'hip-triage' },
+        { id: 'hip-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'hip-rescue' },
+        { id: 'hip-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hip-imaging' },
+    ],
     'acute-jaundice-hub': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aj-steps' },
         { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'aj-exclusions' },
