@@ -566,6 +566,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hip-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'hip-rescue' },
     { id: 'hip-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hip-imaging' },
   ],
+  'dysuria-hub': [
+    { id: 'dys-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
+    { id: 'dys-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'dys-triage' },
+    { id: 'dys-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'dys-rescue' },
+    { id: 'dys-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'dys-imaging' },
+  ],
   'acute-jaundice-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aj-steps' },
     { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'aj-exclusions' },

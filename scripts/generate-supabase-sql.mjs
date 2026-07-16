@@ -95,6 +95,7 @@ const CROSS_LISTINGS = {
   'abdominal-pain-hub': [{ categoryId: 'gastroenterology', displayTitle: null, displaySubtitle: null, entryNodeId: 'ap-start' }],
   'anorectal-bleeding-hub': [{ categoryId: 'gastroenterology', displayTitle: null, displaySubtitle: null, entryNodeId: 'arb-start' }],
   'hip-pain-hub': [{ categoryId: 'orthopedics', displayTitle: null, displaySubtitle: null, entryNodeId: 'hip-start' }],
+  'dysuria-hub': [{ categoryId: 'urology', displayTitle: null, displaySubtitle: null, entryNodeId: 'dys-start' }],
   'gi-bleed-hub': [{ categoryId: 'gastroenterology', displayTitle: null, displaySubtitle: null, entryNodeId: 'gib-start' }],
   'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],
   'pe-treatment':     [{ categoryId: 'emergency-medicine' }],

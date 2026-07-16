@@ -936,6 +936,17 @@ export const DEFAULT_CATEGORIES: Category[] = [
         displayCategoryId: 'orthopedics',
       },
       {
+        id: 'dysuria-hub',
+        title: 'Dysuria Hub',
+        subtitle: 'Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 28,
+        entryNodeId: 'dys-start',
+        type: 'hub',
+        displayCategoryId: 'urology',
+      },
+      {
         id: 'seizure-hub',
         title: 'Seizure Hub',
         subtitle: 'Sick Check → Time-Critical Exclusions → Initial Bundle → Imaging → Dispo',
@@ -4065,6 +4076,17 @@ export const DEFAULT_CATEGORIES: Category[] = [
     name: 'Urology',
     icon: 'urology.png',
     decisionTrees: [
+      {
+        id: 'dysuria-hub',
+        title: 'Dysuria Hub',
+        subtitle: 'Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 28,
+        entryNodeId: 'dys-start',
+        type: 'hub',
+        displayCategoryId: 'urology',
+      },
       {
         id: 'priapism',
         title: 'Priapism Treatment',
