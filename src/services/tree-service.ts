@@ -346,6 +346,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/painless-scrotal-swelling-hub.js');
       return { nodes: m.PAINLESS_SCROTAL_MASS_HUB_NODES, entryNodeId: 'psm-sick-check', categoryId: 'emergency-medicine', moduleLabels: m.PAINLESS_SCROTAL_MASS_HUB_MODULE_LABELS, citations: m.PAINLESS_SCROTAL_MASS_HUB_CITATIONS, criticalActions: m.PAINLESS_SCROTAL_MASS_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'unilateral-leg-swelling-hub': async () => {
+      const m = await import('../data/trees/unilateral-leg-swelling-hub.js');
+      return { nodes: m.UNILATERAL_LEG_SWELLING_HUB_NODES, entryNodeId: 'uls-sick-check', categoryId: 'emergency-medicine', moduleLabels: m.UNILATERAL_LEG_SWELLING_HUB_MODULE_LABELS, citations: m.UNILATERAL_LEG_SWELLING_HUB_CITATIONS, criticalActions: m.UNILATERAL_LEG_SWELLING_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
     'seizure-hub': async () => {
       const m = await import('../data/trees/seizure-hub.js');
       return { nodes: m.SEIZURE_HUB_NODES, entryNodeId: 'sz-start', categoryId: 'emergency-medicine', moduleLabels: m.SEIZURE_HUB_MODULE_LABELS, citations: m.SEIZURE_HUB_CITATIONS, criticalActions: m.SEIZURE_HUB_CRITICAL_ACTIONS, type: 'hub' };

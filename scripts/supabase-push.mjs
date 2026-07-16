@@ -111,6 +111,7 @@ const CROSS_LISTINGS = {
   'hip-pain-hub': [{ categoryId: 'orthopedics', displayTitle: null, displaySubtitle: null, entryNodeId: 'hip-start' }],
   'dysuria-hub': [{ categoryId: 'urology', displayTitle: null, displaySubtitle: null, entryNodeId: 'dys-start' }],
   'painless-scrotal-swelling-hub': [{ categoryId: 'urology', displayTitle: null, displaySubtitle: null, entryNodeId: 'psm-sick-check' }],
+  'unilateral-leg-swelling-hub': [{ categoryId: 'cardiology', displayTitle: null, displaySubtitle: null, entryNodeId: 'uls-sick-check' }],
   'gi-bleed-hub': [{ categoryId: 'gastroenterology', displayTitle: null, displaySubtitle: null, entryNodeId: 'gib-start' }],
   'culture-positive-results-ed': [{ categoryId: 'emergency-medicine' }],
   'pe-treatment':     [{ categoryId: 'emergency-medicine' }],

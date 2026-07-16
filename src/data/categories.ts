@@ -100,6 +100,17 @@ export const DEFAULT_CATEGORIES: Category[] = [
     icon: 'cardiology.png',
     decisionTrees: [
       {
+        id: 'unilateral-leg-swelling-hub',
+        title: 'Unilateral Leg Swelling Hub',
+        subtitle: 'Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 31,
+        entryNodeId: 'uls-sick-check',
+        type: 'hub',
+        displayCategoryId: 'cardiology',
+      },
+      {
         id: 'afib-rvr',
         title: 'A-Fib RVR',
         subtitle: 'Stability → Rate Control → Refractory → Anticoagulation',
@@ -956,6 +967,17 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'psm-sick-check',
         type: 'hub',
         displayCategoryId: 'urology',
+      },
+      {
+        id: 'unilateral-leg-swelling-hub',
+        title: 'Unilateral Leg Swelling Hub',
+        subtitle: 'Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 31,
+        entryNodeId: 'uls-sick-check',
+        type: 'hub',
+        displayCategoryId: 'cardiology',
       },
       {
         id: 'seizure-hub',

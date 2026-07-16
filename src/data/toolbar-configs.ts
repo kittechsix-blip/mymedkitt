@@ -572,6 +572,13 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'psm-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'psm-rescue' },
     { id: 'psm-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'psm-imaging' },
   ],
+  'unilateral-leg-swelling-hub': [
+    { id: 'uls-wells', label: 'Wells DVT', icon: '🧮', action: 'calculator', target: 'wells-dvt', pinned: true },
+    { id: 'uls-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa' },
+    { id: 'uls-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'uls-triage' },
+    { id: 'uls-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'uls-rescue' },
+    { id: 'uls-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'uls-imaging' },
+  ],
   'dysuria-hub': [
     { id: 'dys-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
     { id: 'dys-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'dys-triage' },

@@ -54,6 +54,7 @@ export const TREE_REGISTRY = {
   'hip-pain-hub': { prefix: 'HIP_PAIN_HUB', entryNodeId: 'hip-start', categoryId: 'emergency-medicine' },
   'dysuria-hub': { prefix: 'DYSURIA_HUB', entryNodeId: 'dys-start', categoryId: 'emergency-medicine' },
   'painless-scrotal-swelling-hub': { prefix: 'PAINLESS_SCROTAL_MASS_HUB', entryNodeId: 'psm-sick-check', categoryId: 'emergency-medicine' },
+  'unilateral-leg-swelling-hub': { prefix: 'UNILATERAL_LEG_SWELLING_HUB', entryNodeId: 'uls-sick-check', categoryId: 'emergency-medicine' },
   'seizure-hub': { prefix: 'SEIZURE_HUB', entryNodeId: 'sz-start', categoryId: 'emergency-medicine' },
   'hemoptysis-hub': { prefix: 'HEMOPTYSIS_HUB', entryNodeId: 'hmp-start', categoryId: 'emergency-medicine' },
   'acute-monoarthritis-hub': { prefix: 'ACUTE_MONOARTHRITIS_HUB', entryNodeId: 'mono-start', categoryId: 'emergency-medicine' },
