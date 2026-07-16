@@ -50,6 +50,7 @@ export const TREE_REGISTRY = {
   'vaginal-bleeding-hub': { prefix: 'VAGINAL_BLEEDING_HUB', entryNodeId: 'vb-start', categoryId: 'emergency-medicine' },
   'crying-infant-hub': { prefix: 'CRYING_INFANT_HUB', entryNodeId: 'ci-start', categoryId: 'emergency-medicine' },
   'abdominal-pain-hub': { prefix: 'ABDOMINAL_PAIN_HUB', entryNodeId: 'ap-start', categoryId: 'emergency-medicine' },
+  'anorectal-bleeding-hub': { prefix: 'ANORECTAL_BLEEDING_HUB', entryNodeId: 'arb-start', categoryId: 'emergency-medicine' },
   'seizure-hub': { prefix: 'SEIZURE_HUB', entryNodeId: 'sz-start', categoryId: 'emergency-medicine' },
   'hemoptysis-hub': { prefix: 'HEMOPTYSIS_HUB', entryNodeId: 'hmp-start', categoryId: 'emergency-medicine' },
   'acute-monoarthritis-hub': { prefix: 'ACUTE_MONOARTHRITIS_HUB', entryNodeId: 'mono-start', categoryId: 'emergency-medicine' },

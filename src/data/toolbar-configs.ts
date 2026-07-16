@@ -553,6 +553,12 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ap-rescue-btn', label: 'Rescue', icon: '💉', action: 'jump', target: 'ap-rescue' },
     { id: 'ap-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'ap-imaging' },
   ],
+  'anorectal-bleeding-hub': [
+    { id: 'arb-oakland', label: 'Oakland', icon: '🧮', action: 'calculator', target: 'oakland-score', pinned: true },
+    { id: 'arb-triage', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'arb-triage' },
+    { id: 'arb-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'arb-rescue' },
+    { id: 'arb-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'arb-imaging' },
+  ],
   'acute-jaundice-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aj-steps' },
     { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'aj-exclusions' },
