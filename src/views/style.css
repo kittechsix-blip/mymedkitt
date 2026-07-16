@@ -2749,6 +2749,10 @@ body.critical-actions-open {
 
 .wizard-calc-link {
   font-size: 13px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===================================================================
