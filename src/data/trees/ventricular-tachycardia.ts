@@ -198,11 +198,11 @@ export const VENTRICULAR_TACHYCARDIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Stable Monomorphic VT — IV Antiarrhythmic',
-    body: '**Monomorphic stable VT — IV antiarrhythmic.**\n\n**First-line options:**\n• [Amiodarone](#/drug/amiodarone/stable vt) 150 mg IV over 10 min → 1 mg/min × 6h → 0.5 mg/min\n• [Procainamide](#/drug/procainamide/stable vt) 20–50 mg/min until arrhythmia suppresses, hypotension, QRS widens >50%, or max 17 mg/kg\n• [Lidocaine](#/drug/lidocaine/stable vt) 1–1.5 mg/kg → 0.5–0.75 mg/kg q5–10 min → infusion 1–4 mg/min\n\n**Procainamide may be preferred** (2023 AHA) — higher termination rates than amiodarone for hemodynamically stable VT [8].\n\n**⚠️ Avoid** if prolonged QTc at baseline → risk of Torsades.',
+    body: '**Monomorphic stable VT — IV antiarrhythmic.**\n\n**First-line options:**\n• [Amiodarone](#/drug/amiodarone/stable vt) 150 mg IV over 10 min → 1 mg/min × 6h → 0.5 mg/min\n• [Procainamide](#/drug/procainamide/stable vt) 20–50 mg/min until arrhythmia suppresses, hypotension, QRS widens >50%, or max 17 mg/kg\n• [Lidocaine](#/drug/lidocaine/stable vt) 1–1.5 mg/kg → 0.5–0.75 mg/kg q5–10 min → infusion 1–4 mg/min\n\n**Procainamide may be preferred** (2025 AHA: procainamide Class IIa vs amiodarone Class IIb) — higher termination rates and fewer major cardiac adverse events than amiodarone for hemodynamically stable VT (PROCAMIO) [8].\n\n**⚠️ Avoid procainamide** if prolonged QTc at baseline (Torsades risk) **or in CHF / significantly impaired LV function** — amiodarone is preferred in these patients (2025 AHA).',
     citation: [2, 3, 5, 7, 8],
     next: 'vt-mono-response',
 
-    summary: 'Amiodarone 150mg/10min OR procainamide (may be preferred per 2023 AHA); avoid if prolonged QTc',
+    summary: 'Amiodarone 150mg/10min OR procainamide (preferred per 2025 AHA IIa vs IIb); avoid procainamide if prolonged QTc or CHF/impaired LV → use amiodarone',
     safetyLevel: 'warning',
   },
 
@@ -325,7 +325,7 @@ export const VENTRICULAR_TACHYCARDIA_MODULE_LABELS: string[] = [
 
 export const VENTRICULAR_TACHYCARDIA_CITATIONS: Citation[] = [
   { num: 1, text: 'Farkas J. Ventricular Tachycardia. EMCrit Internet Book of Critical Care. https://emcrit.org/ibcc/vt/' },
-  { num: 2, text: 'Panchal AR, et al. 2023 AHA Focused Update on Advanced Cardiovascular Life Support. Circulation. 2023.' },
+  { num: 2, text: 'American Heart Association. 2025 Guidelines for CPR and ECC — Part 9: Adult Advanced Life Support. Circulation. 2025. (Supersedes Panchal AR, et al. 2023 AHA Focused Update on ACLS.)' },
   { num: 3, text: 'Al-Khatib SM, et al. 2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death. Circulation. 2018;138(13):e272-e391.' },
   { num: 4, text: 'Soar J, et al. European Resuscitation Council Guidelines 2021: Advanced Life Support. Resuscitation. 2021;161:115-151.' },
   { num: 5, text: 'First10EM. Wide Complex Tachycardia. https://first10em.com/' },

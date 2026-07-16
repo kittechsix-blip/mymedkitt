@@ -174,14 +174,14 @@ export const ADULT_UTI_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Uncomplicated Cystitis',
-    body: '**Uncomplicated cystitis** = lower UTI in non-pregnant premenopausal woman with no complicating factors. [1][2]\n\n**Criteria (ALL must be met):**\n• Female\n• Non-pregnant\n• No structural/functional urinary tract abnormalities\n• No recent instrumentation\n• Not immunocompromised\n• Lower urinary tract symptoms only (no fever/flank pain)\n\n**First-Line Treatment Options:**\n\n**1. Nitrofurantoin** (PREFERRED)\n• 100mg BID x 5 days\n• Excellent E. coli coverage\n• Low resistance rates\n• Avoid if CrCl <30\n\n**2. TMP-SMX**\n• 1 DS tab BID x 3 days\n• Use only if local resistance <20%\n• Avoid if recent TMP-SMX use\n\n**3. Fosfomycin**\n• 3g single dose\n• Slightly lower efficacy\n• Good for compliance concerns\n\n**AVOID for uncomplicated cystitis:**\n• Fluoroquinolones (reserve for complicated/pyelo)\n• Beta-lactams (lower cure rates)',
+    body: '**Uncomplicated cystitis** = lower UTI in non-pregnant premenopausal woman with no complicating factors. [1][2]\n\n**Criteria (ALL must be met):**\n• Female\n• Non-pregnant\n• No structural/functional urinary tract abnormalities\n• No recent instrumentation\n• Not immunocompromised\n• Lower urinary tract symptoms only (no fever/flank pain)\n\n**First-Line Treatment Options:**\n\n**1. Nitrofurantoin** (PREFERRED)\n• 100mg BID x 5 days\n• Excellent E. coli coverage\n• Low resistance rates\n• Avoid if CrCl <30\n\n**2. TMP-SMX**\n• 1 DS tab BID x 3 days\n• Use only if local resistance <20%\n• Avoid if recent TMP-SMX use\n\n**3. Fosfomycin**\n• 3g single dose\n• Slightly lower efficacy\n• Good for compliance concerns\n\n**4. Pivmecillinam** (Pivya — FDA-approved Apr 2024)\n• 185mg PO TID x 3–7 days\n• First-line per IDSA; minimal collateral damage to gut flora\n• Useful when other first-line agents unsuitable (allergy, resistance)\n\n**AVOID for uncomplicated cystitis:**\n• Fluoroquinolones (reserve for complicated/pyelo)\n• Beta-lactams other than pivmecillinam (lower cure rates)',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'crcl-cockcroft-gault', label: 'CrCl Calculator' },
     ],
     next: 'uti-uncomplicated-treatment',
 
-    summary: 'Nitrofurantoin 100mg BID x5d preferred, TMP-SMX x3d if resistance <20%, fosfomycin single dose — avoid FQ for cystitis',
+    summary: 'Nitrofurantoin 100mg BID x5d preferred, TMP-SMX x3d if resistance <20%, fosfomycin single dose, pivmecillinam 185mg TID x3-7d — avoid FQ for cystitis',
   },
 
   {
