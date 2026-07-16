@@ -529,6 +529,12 @@ const TOOLBAR_CONFIGS = {
         { id: 'hip-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'hip-rescue' },
         { id: 'hip-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hip-imaging' },
     ],
+    'painless-scrotal-swelling-hub': [
+        { id: 'psm-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
+        { id: 'psm-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'psm-triage' },
+        { id: 'psm-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'psm-rescue' },
+        { id: 'psm-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'psm-imaging' },
+    ],
     'dysuria-hub': [
         { id: 'dys-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
         { id: 'dys-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'dys-triage' },

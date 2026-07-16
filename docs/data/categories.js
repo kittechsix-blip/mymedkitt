@@ -944,6 +944,17 @@ export const DEFAULT_CATEGORIES = [
                 displayCategoryId: 'urology',
             },
             {
+                id: 'painless-scrotal-swelling-hub',
+                title: 'Painless Scrotal Swelling Hub',
+                subtitle: 'Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'psm-sick-check',
+                type: 'hub',
+                displayCategoryId: 'urology',
+            },
+            {
                 id: 'seizure-hub',
                 title: 'Seizure Hub',
                 subtitle: 'Sick Check → Time-Critical Exclusions → Initial Bundle → Imaging → Dispo',
@@ -4073,6 +4084,17 @@ export const DEFAULT_CATEGORIES = [
         name: 'Urology',
         icon: 'urology.png',
         decisionTrees: [
+            {
+                id: 'painless-scrotal-swelling-hub',
+                title: 'Painless Scrotal Swelling Hub',
+                subtitle: 'Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 28,
+                entryNodeId: 'psm-sick-check',
+                type: 'hub',
+                displayCategoryId: 'urology',
+            },
             {
                 id: 'dysuria-hub',
                 title: 'Dysuria Hub',
