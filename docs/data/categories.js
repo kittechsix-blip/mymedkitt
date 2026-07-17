@@ -3494,11 +3494,11 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'chest-tube',
                 title: 'Tube Thoracostomy',
-                subtitle: 'Preparation \u2192 Insertion \u2192 Management',
+                subtitle: 'Indications \u2192 Preparation \u2192 Insertion \u2192 Management',
                 categoryId: 'procedures',
                 version: '1.0',
-                nodeCount: 23,
-                entryNodeId: 'ctube-anatomy',
+                nodeCount: 40,
+                entryNodeId: 'ctube-start',
             },
             {
                 id: 'thoracotomy-procedure',
