@@ -2322,11 +2322,11 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'effusion', label: 'Effusion', icon: '💧', action: 'overlay', target: 'pna-effusion-info' },
   ],
   'svt': [
-    { id: 'valsalva', label: 'Valsalva', icon: '💨', action: 'overlay', target: 'svt-valsalva' },
-    { id: 'adenosine', label: 'Adenosine', icon: '💉', action: 'overlay', target: 'svt-adenosine-info' },
-    { id: 'diltiazem', label: 'Diltiazem', icon: '💊', action: 'overlay', target: 'svt-diltiazem' },
-    { id: 'cardiovert', label: 'Cardiovert', icon: '⚡', action: 'overlay', target: 'svt-cardiovert' },
-    { id: 'wpw', label: 'WPW', icon: '⚠️', action: 'overlay', target: 'svt-wpw' },
+    { id: 'valsalva', label: 'Valsalva', icon: '💨', action: 'jump', target: 'svt-valsalva' },
+    { id: 'adenosine', label: 'Adenosine', icon: '💉', action: 'jump', target: 'svt-adenosine' },
+    { id: 'diltiazem', label: 'Diltiazem', icon: '💊', action: 'jump', target: 'svt-diltiazem' },
+    { id: 'cardiovert', label: 'Cardiovert', icon: '⚡', action: 'jump', target: 'svt-cardiovert-result' },
+    { id: 'wpw', label: 'WPW', icon: '⚠️', action: 'jump', target: 'svt-wpw-assess' },
   ],
   'gallbladder': [
     { id: 'murphy', label: "Murphy's", icon: '👆', action: 'overlay', target: 'gb-murphy' },
