@@ -283,6 +283,22 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/seizure-hub.js');
             return { nodes: m.SEIZURE_HUB_NODES, entryNodeId: 'sz-start', categoryId: 'emergency-medicine', moduleLabels: m.SEIZURE_HUB_MODULE_LABELS, citations: m.SEIZURE_HUB_CITATIONS, criticalActions: m.SEIZURE_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'generalized-pruritus-hub': async () => {
+            const m = await import('../data/trees/generalized-pruritus-hub.js');
+            return { nodes: m.GENERALIZED_PRURITUS_HUB_NODES, entryNodeId: 'prur-sick-check', categoryId: 'emergency-medicine', moduleLabels: m.GENERALIZED_PRURITUS_HUB_MODULE_LABELS, citations: m.GENERALIZED_PRURITUS_HUB_CITATIONS, criticalActions: m.GENERALIZED_PRURITUS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'proximal-weakness-hub': async () => {
+            const m = await import('../data/trees/proximal-weakness-hub.js');
+            return { nodes: m.PROXIMAL_WEAKNESS_HUB_NODES, entryNodeId: 'pmw-sick-check', categoryId: 'emergency-medicine', moduleLabels: m.PROXIMAL_WEAKNESS_HUB_MODULE_LABELS, citations: m.PROXIMAL_WEAKNESS_HUB_CITATIONS, criticalActions: m.PROXIMAL_WEAKNESS_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'behavior-change-hub': async () => {
+            const m = await import('../data/trees/behavior-change-hub.js');
+            return { nodes: m.BEHAVIOR_CHANGE_HUB_NODES, entryNodeId: 'beh-sick-check', categoryId: 'emergency-medicine', moduleLabels: m.BEHAVIOR_CHANGE_HUB_MODULE_LABELS, citations: m.BEHAVIOR_CHANGE_HUB_CITATIONS, criticalActions: m.BEHAVIOR_CHANGE_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
+        'otalgia-hub': async () => {
+            const m = await import('../data/trees/otalgia-hub.js');
+            return { nodes: m.OTALGIA_HUB_NODES, entryNodeId: 'otalgia-sick-check', categoryId: 'emergency-medicine', moduleLabels: m.OTALGIA_HUB_MODULE_LABELS, citations: m.OTALGIA_HUB_CITATIONS, criticalActions: m.OTALGIA_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'hemoptysis-hub': async () => {
             const m = await import('../data/trees/hemoptysis-hub.js');
             return { nodes: m.HEMOPTYSIS_HUB_NODES, entryNodeId: 'hmp-start', categoryId: 'emergency-medicine', moduleLabels: m.HEMOPTYSIS_HUB_MODULE_LABELS, citations: m.HEMOPTYSIS_HUB_CITATIONS, criticalActions: m.HEMOPTYSIS_HUB_CRITICAL_ACTIONS, type: 'hub' };

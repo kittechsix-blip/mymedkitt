@@ -585,6 +585,30 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'dys-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'dys-rescue' },
     { id: 'dys-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'dys-imaging' },
   ],
+  'generalized-pruritus-hub': [
+    { id: 'prur-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
+    { id: 'prur-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'prur-triage' },
+    { id: 'prur-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'prur-rescue' },
+    { id: 'prur-imaging-btn', label: 'Labs', icon: '🔬', action: 'jump', target: 'prur-imaging' },
+  ],
+  'proximal-weakness-hub': [
+    { id: 'pmw-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
+    { id: 'pmw-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'pmw-triage' },
+    { id: 'pmw-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'pmw-rescue' },
+    { id: 'pmw-imaging-btn', label: 'Labs', icon: '🔬', action: 'jump', target: 'pmw-imaging' },
+  ],
+  'behavior-change-hub': [
+    { id: 'beh-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
+    { id: 'beh-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'beh-triage' },
+    { id: 'beh-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'beh-rescue' },
+    { id: 'beh-imaging-btn', label: 'Labs', icon: '🔬', action: 'jump', target: 'beh-imaging' },
+  ],
+  'otalgia-hub': [
+    { id: 'otalgia-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
+    { id: 'otalgia-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'otalgia-triage' },
+    { id: 'otalgia-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'otalgia-rescue' },
+    { id: 'otalgia-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'otalgia-imaging' },
+  ],
   'acute-jaundice-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'aj-steps' },
     { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'aj-exclusions' },
