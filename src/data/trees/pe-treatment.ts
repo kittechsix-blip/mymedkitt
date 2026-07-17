@@ -88,7 +88,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Reperfusion Strategy',
-    body: '**Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) — no bolus if thrombolysis imminent; low-dose infusion ≤500 U/hr\n• UFH preferred (can be stopped if hemorrhage)\n\n**Systemic thrombolysis** — only intervention with mortality benefit data (foundational massive/submassive PE management).\n\n**Dosing options:**\n• Standard: [Alteplase](#/drug/alteplase/pulmonary) **100 mg IV over 2h** (0.6 mg/kg up to 50 mg over first 15 min, remainder over next 1h45min)\n• Reduced-dose: **50 mg IV** over 2h (emerging — less bleeding, equivalent efficacy; HI-PEITHO 2026)\n• Cardiac arrest: **50 mg IV bolus** + sustained CPR\n• **Tenecteplase (alternative, off-label):** weight-based single bolus — 30 mg (<60 kg), 35 mg (60–69), 40 mg (70–79), 45 mg (80–89), 50 mg (≥90 kg). Single bolus advantage; mortality similar to alteplase.\n\n**2026 update:** Mechanical thrombectomy now preferred over CDT for stable-enough patients (PEERLESS-I trial). STRATIFY (2026) shows peripheral 20 mg tPA over 6h equivalent to CDT.',
+    body: '**Anticoagulation** — start immediately:\n• [UFH](#/drug/ufh/pe) — no bolus if thrombolysis imminent; low-dose infusion ≤500 U/hr\n• UFH preferred (can be stopped if hemorrhage)\n\n**Systemic thrombolysis** — only intervention with mortality benefit data (foundational massive/submassive PE management).\n\n**Dosing options:**\n• Standard: [Alteplase](#/drug/alteplase/pulmonary) **100 mg IV over 2h** (0.6 mg/kg up to 50 mg over first 15 min, remainder over next 1h45min)\n• Reduced-dose: **50 mg IV** over 2h (emerging — less bleeding, equivalent efficacy; HI-PEITHO 2026)\n• Cardiac arrest: **50 mg IV bolus** + sustained CPR\n• **Tenecteplase (alternative, off-label):** weight-based single bolus — 30 mg (<60 kg), 35 mg (60–69), 40 mg (70–79), 45 mg (80–89), 50 mg (≥90 kg). Single bolus advantage; mortality similar to alteplase.\n\n**2026 update:** Mechanical thrombectomy and catheter-directed lysis are both reasonable for stable-enough patients — the 2026 AHA/ACC guideline does NOT prefer one over the other (Class 2b); choose based on operator experience, clot location, and bleeding risk (PEERLESS showed no mortality or major-bleeding difference). STRATIFY (2026) shows peripheral 20 mg tPA over 6h equivalent to CDT.',
     citation: [1, 2, 3, 6, 7, 8, 11, 12],
     calculatorLinks: [
       { id: 'alteplase-pe-dosing', label: 'Alteplase Dosing' },
@@ -169,7 +169,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'High-Risk Category C',
-    body: 'Multiple risk factors: RV dysfunction + elevated biomarkers + lactate elevation.\n\n**Management:**\n• [UFH](#/drug/ufh/pe) preferred (allows rapid escalation)\n• **ICU monitoring** — watch for decompensation\n• **Activate PERT** for multidisciplinary planning\n\n**2026 update:** For stable Category C patients, **mechanical thrombectomy now preferred over CDT** (PEERLESS trial — lower ICU admission, lower deterioration rate).\n\n**If decompensation occurs:**\n• Reduced-dose alteplase 25-50 mg IV over 2-6h\n• Or mechanical thrombectomy if PERT/IR available',
+    body: 'Multiple risk factors: RV dysfunction + elevated biomarkers + lactate elevation.\n\n**Management:**\n• [UFH](#/drug/ufh/pe) preferred (allows rapid escalation)\n• **ICU monitoring** — watch for decompensation\n• **Activate PERT** for multidisciplinary planning\n\n**2026 update:** For stable Category C patients, **mechanical thrombectomy and CDT are both reasonable** — the 2026 AHA/ACC guideline does not prefer one over the other (Class 2b). PEERLESS showed lower ICU admission and deterioration with thrombectomy but no mortality or major-bleeding difference; individualize by operator experience, clot location, and bleeding risk.\n\n**If decompensation occurs:**\n• Reduced-dose alteplase 25-50 mg IV over 2-6h\n• Or mechanical thrombectomy if PERT/IR available',
     citation: [1, 6, 8],
     treatment: {
       firstLine: {
@@ -204,7 +204,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
       },
     ],
 
-    summary: 'UFH + ICU monitoring; PERT activation; mechanical thrombectomy preferred if intervention needed (PEERLESS)',
+    summary: 'UFH + ICU monitoring; PERT activation; mechanical thrombectomy OR CDT if intervention needed — both reasonable, individualize (PEERLESS: no mortality/bleeding difference)',
     safetyLevel: 'warning',
   },
 
@@ -247,7 +247,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Advanced Interventions',
-    body: '**2026 update:** For patients stable enough for procedure, **mechanical thrombectomy is now preferred over catheter-directed lysis** (PEERLESS trial).\n\n**PEERLESS trial results (N=550):**\n• Mechanical thrombectomy vs CDT for intermediate-risk PE\n• Lower clinical deterioration: 1.8% vs 5.4%\n• Lower ICU admission: 41.6% vs 98.6%\n• Lower 30-day readmission: 3.2% vs 7.9%\n• No difference in mortality or major bleeding\n\n**Options by clinical scenario:**',
+    body: '**2026 update:** For patients stable enough for procedure, **mechanical thrombectomy and catheter-directed lysis are both reasonable options** — the 2026 AHA/ACC guideline does NOT prefer one over the other (Class 2b). Choose based on operator experience, clot location, urgency, and bleeding risk.\n\n**PEERLESS trial results (N=550):**\n• Mechanical thrombectomy vs CDT for intermediate-risk PE\n• Lower clinical deterioration: 1.8% vs 5.4%\n• Lower ICU admission: 41.6% vs 98.6%\n• Lower 30-day readmission: 3.2% vs 7.9%\n• No difference in mortality or major bleeding\n\n**Options by clinical scenario:**',
     citation: [6, 8],
     options: [
       {
@@ -273,7 +273,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
       },
     ],
 
-    summary: 'Mechanical thrombectomy now preferred over CDT (PEERLESS); VA-ECMO for refractory shock; surgical embolectomy as backup',
+    summary: 'Mechanical thrombectomy and CDT both reasonable — guideline does not prefer either (PEERLESS: no mortality/bleeding difference); VA-ECMO for refractory shock; surgical embolectomy as backup',
     safetyLevel: 'warning',
   },
 
@@ -589,7 +589,7 @@ export const PE_TREATMENT_CRITICAL_ACTIONS = [
   { text: 'Activate PERT immediately for Category D-E (Class 1 recommendation, 2026 AHA/ACC)', nodeId: 'pe-crashing-resus' },
   { text: 'UFH without bolus if thrombolysis imminent; give alteplase BEFORE heparin to reduce bleeding', nodeId: 'pe-crashing-reperfusion' },
   { text: 'Thrombolysis: alteplase 100 mg over 2h (standard) or 50 mg bolus (reduced-dose/cardiac arrest)', nodeId: 'pe-crashing-reperfusion' },
-  { text: 'Mechanical thrombectomy preferred over CDT for stable intermediate-risk (PEERLESS trial)', nodeId: 'pe-advanced-interventions' },
+  { text: 'Mechanical thrombectomy and CDT both reasonable for stable intermediate-risk — guideline does not prefer either (PEERLESS: no mortality/bleeding difference)', nodeId: 'pe-advanced-interventions' },
   { text: 'Bradycardia (HR <40) is most ominous sign — harbinger of brady-asystolic arrest', nodeId: 'pe-crashing' },
 ];
 
@@ -601,7 +601,7 @@ export const PE_TREATMENT_CITATIONS: Citation[] = [
   { num: 5, text: 'Warkentin TE, Greinacher A, Gruel Y, et al. Heparin-Induced Thrombocytopenia in the Cardiovascular Patient. Circulation. 2021;144(5):e1-e22.' },
   { num: 6, text: 'Creager MA, Barnes GD, Giri J, et al. 2026 AHA/ACC/ACCP/ACEP/CHEST/SCAI/SHM/SIR/SVM/SVN Guideline for the Evaluation and Management of Acute Pulmonary Embolism in Adults. Circulation. 2026 Feb 19. doi:10.1161/CIR.0000000000001415.' },
   { num: 7, text: 'Weingart S. EMCrit Episode 424 — Crashing PE Update. EMCrit.org. 2026.' },
-  { num: 8, text: 'Toma C, Jaber WA, Engelman Z, et al. PEERLESS Trial: Mechanical Thrombectomy vs Catheter-Directed Lysis for Intermediate-Risk PE. JACC. 2024.' },
+  { num: 8, text: 'Jaber WA, Gonsalves CF, Stortecky S, et al. PEERLESS Trial: Large-Bore Mechanical Thrombectomy vs Catheter-Directed Thrombolysis for Intermediate-Risk PE. Circulation. 2025 Feb;151(4):260-273. doi:10.1161/CIRCULATIONAHA.124.072364. (No mortality or major-bleeding difference.)' },
   { num: 9, text: 'Piazza G, Hohlfelder B, Jaff MR, et al. OPTALYSE PE: Ultrasound-Assisted Catheter-Directed Thrombolysis. JACC Cardiovasc Interv. 2015;8(11):1382-92.' },
   { num: 10, text: 'Corsi F, Lebreton G, Aubert S, et al. ECMO for Massive Pulmonary Embolism. Ann Thorac Surg. 2017;103(1):188-194.' },
   { num: 11, text: 'HI-PEITHO Investigators. Reduced-Dose Tissue Plasminogen Activator with Ultrasound-Facilitated Catheter-Directed Thrombolysis vs Anticoagulation Alone for Intermediate-High Risk PE. 2026.' },

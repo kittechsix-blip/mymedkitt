@@ -178,6 +178,7 @@ export const TREE_REGISTRY = {
   'serotonin-syndrome': { prefix: 'SEROTONIN_SYNDROME', entryNodeId: 'ss-start',         categoryId: 'toxicology' },
   'lithium-toxicity': { prefix: 'LITHIUM_TOXICITY',    entryNodeId: 'lith-start',        categoryId: 'toxicology' },
   'digoxin-toxicity': { prefix: 'DIGOXIN_TOXICITY',    entryNodeId: 'dig-start',          categoryId: 'toxicology' },
+  'toxic-alcohols':   { prefix: 'TOXIC_ALCOHOLS',      entryNodeId: 'tox-alc-start',      categoryId: 'toxicology' },
   'beta-blocker-od':  { prefix: 'BETA_BLOCKER_OD',     entryNodeId: 'bb-start',           categoryId: 'toxicology' },
   'ccb-od':           { prefix: 'CCB_OD',              entryNodeId: 'ccb-start',          categoryId: 'toxicology' },
   'iron-od':          { prefix: 'IRON_OD',             entryNodeId: 'iron-start',         categoryId: 'toxicology' },
