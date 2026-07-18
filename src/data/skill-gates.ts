@@ -31,6 +31,14 @@
 //     crystals-do-not-exclude-septic-arthritis, normal-urate-does-not-exclude-gout,
 //     normal-cxr-does-not-exclude-dissection, normal-disc-does-not-exclude-optic-neuritis.
 //   GATE SET COMPLETE for this scaffold: 16 gates + 1 cross-reference, all signed.
+//   2026-07-18 — SHIP APPROVED (Andy, via conversation): promote fresh 351-consult
+//     build to docs/skill/ (served Jun-23 build was missing 17 consults incl.
+//     toxic-alcohols and carried superseded torsades Mg dosing + EXTRIP thresholds).
+//     Gate set unchanged (16/16 byte-identical served vs fresh). The 17 newly
+//     carried consults + 46 changed consults ship under the existing universal
+//     gates. DEEP GATE-COVERAGE REVIEW of the 43 consults added/changed since
+//     2026-05-29 sign-off is DUE ≤2026-07-25 (Bedside Proof plan, WS1) —
+//     risk-tier first: torsion, limb-ischemia, hemoptysis, palpitations hubs.
 
 export interface SkillGate {
   id: string;

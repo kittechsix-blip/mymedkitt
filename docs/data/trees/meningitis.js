@@ -143,8 +143,8 @@ export const MENINGITIS_NODES = [
         type: 'info',
         module: 2,
         title: 'Lumbar Puncture & CSF Collection',
-        body: '[CSF Interpretation Guide](#/info/mening-csf-guide) \u2014 reference for interpreting results.\n\n**Position:** Lateral decubitus if opening pressure measurement desired.\n\n**Collect 4 tubes (up to 15 mL safely):** [14,23]\n\u2022 **Tube 1:** WBC and RBC count\n\u2022 **Tube 2:** Protein, glucose, lactate, PCR\n\u2022 **Tube 3:** Gram stain, cultures, antigen tests, additional PCR\n\u2022 **Tube 4:** WBC and RBC count (compare to Tube 1 for traumatic tap)\n\n**Larger volumes increase sensitivity** of diagnostic tests. CSF is produced at 22 mL/hr. [14]\n\n**Traumatic tap?** Use the [CSF Traumatic Tap Correction](#/calculator/csf-correction) calculator to determine predicted WBC from RBC contamination.\n\n**Opening pressure:**\n\u2022 Normal: <20 cm H\u2082O\n\u2022 Elevated in bacterial meningitis; >40 cm H\u2082O in 39% of ABM cases [5,14]',
-        citation: [5, 14, 23],
+        body: '[CSF Interpretation Guide](#/info/mening-csf-guide) \u2014 reference for interpreting results.\n\n**Position:** Lateral decubitus if opening pressure measurement desired.\n\n**Collect 4 tubes (up to 15 mL safely):** [14,23]\n\u2022 **Tube 1:** WBC and RBC count\n\u2022 **Tube 2:** Protein, glucose, lactate, PCR\n\u2022 **Tube 3:** Gram stain, cultures, antigen tests, additional PCR\n\u2022 **Tube 4:** WBC and RBC count (compare to Tube 1 for traumatic tap)\n\n**Larger volumes increase sensitivity** of diagnostic tests. CSF is produced at 22 mL/hr. [14]\n\n**Traumatic tap?** Use the [CSF Traumatic Tap Correction](#/calculator/csf-correction) calculator to determine predicted WBC from RBC contamination.\n\n**Opening pressure:**\n\u2022 Normal: <20 cm H\u2082O\n\u2022 Elevated in bacterial meningitis; >40 cm H\u2082O in 39% of ABM cases [5,14]\n\n**Pre-LP platelet floor:** Transfuse platelets before LP only if count **<20,000/\u00b5L** (AABB/ICTMG 2025, strong recommendation \u2014 restrictive threshold lowered from prior <50,000; spinal-hematoma risk near-zero above this). Never delay antibiotics for platelet correction. [26]',
+        citation: [5, 14, 23, 26],
         calculatorLinks: [{ id: 'csf-correction', label: 'CSF Traumatic Tap Correction' }],
         next: 'mening-empiric-timing',
         summary: '4 tubes up to 15mL — larger volumes improve yield',
@@ -564,4 +564,5 @@ export const MENINGITIS_CITATIONS = [
     { num: 23, text: 'Nigrovic LE, Kuppermann N, Macias CG, et al. Clinical prediction rule for identifying children with cerebrospinal fluid pleocytosis at very low risk of bacterial meningitis. JAMA. 2007;297(1):52-60.' },
     { num: 24, text: 'Hasbun R. Update and advances in community acquired bacterial meningitis. Curr Opin Infect Dis. 2019;32(3):233-238.' },
     { num: 25, text: 'Bardak-Ozcem S, Sipahi OR. An updated approach to healthcare-associated meningitis. Expert Rev Anti Infect Ther. 2014;12(3):333-342.' },
+    { num: 26, text: 'Metcalf RA, Nahirniak S, Guyatt G, et al. Platelet Transfusion: 2025 AABB and ICTMG International Clinical Practice Guidelines. JAMA. 2025 (published online May 29). Recommendation 1.3: pre-lumbar-puncture platelet transfusion threshold <20,000/uL (strong recommendation, moderate-certainty evidence).' },
 ];
