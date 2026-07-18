@@ -11,7 +11,8 @@
     "dev": "electrobun dev",
     "build:skill": "bun scripts/build-skill/build.ts",
     "build:skill:check": "bun scripts/build-skill/check.ts",
-    "build:skill:eval": "bun scripts/build-skill/eval.ts"
+    "build:skill:eval": "bun scripts/build-skill/eval.ts",
+    "build:skill:drift": "bun scripts/build-skill/drift-check.ts"
   },
   "dependencies": {
     "electrobun": "1.14.4",

@@ -66,6 +66,42 @@ const GENERATOR_VERSION = "1";
 const SCHEMA_VERSION = "1";
 
 // ---------------------------------------------------------------------------
+// Provenance (STANDARDS rule 21) — every build stamps WHEN it was built and
+// from WHICH app state. A build from a working tree with uncommitted changes
+// to any skill-source path is stamped dirty:true; the /deploy drift sentinel
+// treats dirty builds as unshippable (the SHA would not equal actual content).
+// ---------------------------------------------------------------------------
+
+// Paths whose uncommitted changes make skill provenance untrustworthy.
+const SKILL_SOURCE_PATHS = [
+  "src/data/trees/",
+  "src/data/skill-gates.ts",
+  "src/data/categories.ts",
+  "src/data/medical-disclaimer.ts",
+  "src/data/info-pages.ts",
+  "scripts/tree-registry.mjs",
+  "scripts/build-skill/",
+];
+
+function git(...args: string[]): string {
+  const p = Bun.spawnSync({ cmd: ["git", ...args], cwd: REPO_ROOT });
+  // trimEnd only — porcelain lines are position-sensitive (' M path'), a full
+  // trim() would eat the first line's leading status column.
+  return p.exitCode === 0 ? new TextDecoder().decode(p.stdout).trimEnd() : "";
+}
+
+const BUILD_DATE = new Date().toISOString().slice(0, 10);
+const APP_COMMIT = git("rev-parse", "HEAD");
+const APP_COMMIT_SHORT = APP_COMMIT.slice(0, 7);
+const DIRTY_FILES = git("status", "--porcelain", "--", ...SKILL_SOURCE_PATHS)
+  .split("\n")
+  .filter(Boolean)
+  .map((l) => l.slice(3));
+const DIRTY = DIRTY_FILES.length > 0;
+// Monotonic, self-describing build version: base + date + commit (+dirty flag).
+const BUILD_VERSION = `${SKILL_VERSION}+${BUILD_DATE.replace(/-/g, "")}.${APP_COMMIT_SHORT || "nogit"}${DIRTY ? ".dirty" : ""}`;
+
+// ---------------------------------------------------------------------------
 // Tree-export access (mirror of supabase-push.mjs prefix→export mapping)
 // ---------------------------------------------------------------------------
 
@@ -471,6 +507,11 @@ async function build() {
     .digest("hex");
   const meta = {
     skillVersion: SKILL_VERSION,
+    buildVersion: BUILD_VERSION,
+    buildDate: BUILD_DATE,
+    appCommit: APP_COMMIT,
+    dirty: DIRTY,
+    dirtyFiles: DIRTY_FILES,
     shape: "coordinator",
     disclaimerVersion: DISCLAIMER_VERSION,
     disclaimerEffectiveDate: DISCLAIMER_EFFECTIVE_DATE,
@@ -510,7 +551,12 @@ async function build() {
 
   console.log("");
   console.log(`✅ Built: ${archivePath}`);
-  console.log(`   ${emittedConsults.length}/${allIds.length} consults · contentHash ${contentHash.slice(0, 12)}…`);
+  console.log(`   ${emittedConsults.length}/${allIds.length} consults · contentHash ${contentHash.slice(0, 12)}… · ${BUILD_VERSION}`);
+  if (DIRTY) {
+    console.log(`   🚨 DIRTY BUILD — uncommitted changes in skill-source paths (provenance SHA does not match content):`);
+    for (const f of DIRTY_FILES.slice(0, 10)) console.log(`        - ${f}`);
+    console.log(`   Commit or revert these before promoting to docs/skill/ — the /deploy sentinel will refuse a dirty build.`);
+  }
   if (skipped.length) {
     console.log(`   ⚠️  ${skipped.length} consult(s) skipped (recorded in skill-meta.json):`);
     for (const s of skipped.slice(0, 12)) console.log(`        - ${s.treeId}: ${s.reason.slice(0, 80)}`);

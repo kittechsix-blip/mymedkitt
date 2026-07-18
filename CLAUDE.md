@@ -8,8 +8,8 @@
 <!--
   WingMan import (above): pairs this app with the Kittech WingMan skill family.
   myMedKitt's WingMan skills (coordinator + flagship deep-solo) are planned —
-  see ~/Desktop/kittech-wingman/registry/registry.md for current status.
-  When you start the build, follow ~/Desktop/kittech-wingman/NEW-SKILL-CHECKLIST.md.
+  see ~/Desktop/_assets/kittech-wingman/registry/registry.md for current status.
+  When you start the build, follow ~/Desktop/_assets/kittech-wingman/NEW-SKILL-CHECKLIST.md.
 -->
 
 ---

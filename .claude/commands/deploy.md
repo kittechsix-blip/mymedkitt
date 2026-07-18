@@ -111,6 +111,44 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
 
    **Skip this step** if no new consult was added.
 
+5b. **MANDATORY — WingMan skill freshness gate (Bedside Proof phase, 2026-07-18):**
+   The served Claude skill at `docs/skill/` is generated from the same clinical
+   source as the app. A deploy that updates the app but not the skill ships
+   stale medicine to skill users (this happened Jun 23 → Jul 18: half-dose
+   torsades Mg, missing toxic-alcohols consult).
+
+   **Run the drift sentinel UNCONDITIONALLY on every deploy** (it is cheap and
+   also catches drift from pushes that bypassed /deploy):
+   ```bash
+   bun run build:skill:drift
+   ```
+
+   - **Exit 0** — served skill matches current source. Continue to step 6.
+   - **Exit 1 (DRIFT)** — rebuild and promote before continuing:
+     ```bash
+     bun run build:skill:check   # full build + release gate; ABORT deploy on failure
+     cp dist/skill/myMedKitt.skill dist/skill/skill-meta.json docs/skill/
+     cp dist/skill/myMedKitt/SKILL.md docs/skill/SKILL.md
+     bun run build:skill:drift   # must now exit 0
+     git add docs/skill/
+     ```
+   - **Exit 2 (DIRTY)** — uncommitted changes in skill-source paths. STOP and
+     ping Andy: clinical content commits are his call. Do NOT promote a dirty
+     build; its provenance SHA doesn't match its content.
+   - **Exit 3** — build/infrastructure failure. ABORT the deploy, report the
+     error with the fix path. Do NOT bypass by pushing without /deploy.
+
+   **Break-glass (emergencies only):** `DEPLOY_SKIP_SKILL_REBUILD=1` may skip
+   this gate, but you MUST then write a red flag line into
+   `~/Desktop/claude-brain/memory/inbox.md` ("WingMan skill gate SKIPPED on
+   deploy <date> — served skill may be stale, rebuild required") so the next
+   briefing surfaces it. A skipped gate must be loud, never silent.
+
+   **Audit-agent autopilots (Dr. K / Louis Litt / Flow Rider):** this gate is
+   part of your deploy pipeline. On exit 1, do the rebuild+promote yourself
+   (it is mechanical). On exit 2/3, STOP and ping Andy — never push without
+   /deploy to get around it.
+
 6. **Verify docs/sw.js has content:**
    ```bash
    wc -l docs/sw.js

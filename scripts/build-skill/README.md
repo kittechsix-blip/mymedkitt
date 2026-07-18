@@ -2,7 +2,7 @@
 
 Generates the **`myMedKitt`** WingMan companion skill from the app's source of truth.
 This is the first **Coordinator**-shape WingMan skill (vs. vertigo's Linear). It follows
-the WingMan doctrine in `~/Desktop/kittech-wingman/STANDARDS.md` (rules 16–23).
+the WingMan doctrine in `~/Desktop/_assets/kittech-wingman/STANDARDS.md` (rules 16–23).
 
 ## Commands (from repo root)
 
