@@ -2277,11 +2277,33 @@ body.critical-actions-open {
   font-size: inherit;
   font-family: inherit;
   cursor: pointer;
-  padding: 0;
   text-decoration: underline;
   text-decoration-style: dotted;
   text-underline-offset: 2px;
   -webkit-tap-highlight-color: transparent;
+  /* Inline drug/monograph link: grow the tap target vertically to the 44px
+     touch-target minimum without disturbing inline text flow. Vertical
+     padding expands the hit area; the negative margin cancels the visual
+     line-height impact so surrounding prose stays put. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 2px;
+  margin: -10px 0;
+  vertical-align: middle;
+}
+
+/* Reference comparison tables render many inline links in tight cells where
+   a 44px min-height would blow out row height. Keep those inline/compact —
+   they are reference lookups, not primary tap actions. */
+.info-page-comparison-cell .body-inline-link,
+.info-page-comparison-cell--drug .body-inline-link,
+.info-page-comparison-drug-dose .body-inline-link {
+  display: inline;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
 }
 
 /* Image lightbox */
@@ -3423,7 +3445,17 @@ body.critical-actions-open {
   font-family: var(--font-mono);
   cursor: pointer;
   text-decoration: underline;
-  padding: 0;
+  /* Inline dose link: grow the tap target vertically to meet the 44px
+     touch-target minimum without disturbing inline text flow. Vertical
+     padding expands the hit area; the negative margin cancels the visual
+     line-height impact so surrounding prose stays put. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 4px;
+  margin: -10px 0;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Broselow Tape */
