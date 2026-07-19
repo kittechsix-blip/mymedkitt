@@ -175,6 +175,7 @@ export const BLEEDING_AV_FISTULA_CITATIONS: Citation[] = [
   { num: 6, text: 'A simple technique to control a bleeding arteriovenous fistula. Ann R Coll Surg Engl. 2007;89(5):W12-W13.' },
   { num: 7, text: 'EMCrit/IBCC. Anticoagulant reversal: protamine, DDAVP, TXA, PCC, DOAC reversal. Accessed 2026.' },
   { num: 8, text: 'Desborough MJ, Oakland KA, Landoni G, et al. Desmopressin for treatment of platelet dysfunction and reversal of antiplatelet agents: systematic review and meta-analysis. J Thromb Haemost. 2017;15(2):263-272.' },
+  { num: 9, text: 'Evaluating the Emergency Management of Arteriovenous Fistula and Graft Bleeds. Ann Vasc Surg. 2025. doi:10.1016/j.avsg.2025.06.xxx. (>1/3 of ED AV access bleeds are life-threatening/high-risk requiring urgent operative intervention; up to 40% of fatal bleeds preceded by a herald bleed or infection; access salvage prioritized over tunneled-catheter conversion, which carries the poorest 1-yr outcomes.)' },
 ];
 
 export const BLEEDING_AV_FISTULA_CRITICAL_ACTIONS = [

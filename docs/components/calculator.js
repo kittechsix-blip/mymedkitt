@@ -40917,7 +40917,83 @@ const CVS_ROME_IV_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// PERICARDITIS CALCULATORS (added 2026-07-19 — fixes dead calculatorLinks)
+// -------------------------------------------------------------------
+const PERICARDITIS_DIAGNOSTIC_CALCULATOR = {
+    id: 'pericarditis-diagnostic',
+    title: 'Acute Pericarditis Criteria',
+    subtitle: 'Diagnostic Criteria (\u22652 of 4)',
+    description: 'Diagnosis of acute pericarditis requires at least 2 of 4 criteria per the 2015 ESC guidelines. Supporting findings (elevated inflammatory markers, pericardial inflammation on imaging) increase diagnostic confidence.',
+    fields: [
+        { name: 'chest-pain', label: 'Pleuritic/positional chest pain (better sitting forward)', type: 'toggle', points: 1, description: 'Sharp, pleuritic, relieved leaning forward \u2014 ~85-90% of cases' },
+        { name: 'friction-rub', label: 'Pericardial friction rub', type: 'toggle', points: 1, description: 'Scratchy 3-component rub, best at LLSB leaning forward \u2014 ~30%' },
+        { name: 'ecg', label: 'New widespread ST elevation or PR depression', type: 'toggle', points: 1, description: 'Diffuse ST elevation with PR depression \u2014 ~60%' },
+        { name: 'effusion', label: 'New or worsening pericardial effusion', type: 'toggle', points: 1, description: 'On echo \u2014 ~60%' },
+    ],
+    results: [
+        { min: 0, max: 1, label: 'Criteria Not Met', risk: '<2 criteria present', mortality: 'Does not meet diagnostic threshold. Consider alternative diagnoses (ACS, PE, aortic dissection, myopericarditis) before attributing symptoms to pericarditis.', colorVar: '--color-warning' },
+        { min: 2, max: 4, label: 'Acute Pericarditis Confirmed', risk: '\u22652 of 4 criteria present', mortality: 'Meets 2015 ESC diagnostic criteria. Proceed to high-risk stratification and etiology workup.', colorVar: '--color-primary' },
+    ],
+    thresholdNote: 'Diagnosis requires \u22652 of 4 criteria. Supporting evidence: elevated CRP/ESR/WBC, or pericardial inflammation on CT/CMR. Elevated troponin suggests myopericarditis.',
+    citations: [
+        'Adler Y, Charron P, Imazio M, et al. 2015 ESC Guidelines for the diagnosis and management of pericardial diseases. Eur Heart J. 2015;36(42):2921-2964.',
+        'Imazio M, Gaita F, LeWinter M. Evaluation and Treatment of Pericarditis: A Systematic Review. JAMA. 2015;314(14):1498-1506.',
+    ],
+};
+const PERICARDITIS_RISK_CALCULATOR = {
+    id: 'pericarditis-risk',
+    title: 'Pericarditis High-Risk Features',
+    subtitle: 'Admission Risk Stratification',
+    description: 'Predictors of a complicated course in acute pericarditis (2015 ESC guidelines). Any MAJOR feature \u2192 admit. MINOR features warrant consideration of admission based on the overall clinical picture.',
+    fields: [
+        { name: 'fever', label: 'MAJOR: Fever >38\u00B0C (100.4\u00B0F)', type: 'toggle', points: 2 },
+        { name: 'subacute', label: 'MAJOR: Subacute onset (days\u2013weeks)', type: 'toggle', points: 2 },
+        { name: 'large-effusion', label: 'MAJOR: Large effusion >20mm', type: 'toggle', points: 2 },
+        { name: 'tamponade', label: 'MAJOR: Cardiac tamponade', type: 'toggle', points: 2 },
+        { name: 'nsaid-failure', label: 'MAJOR: No response to NSAIDs after 1 week', type: 'toggle', points: 2 },
+        { name: 'myopericarditis', label: 'MINOR: Myopericarditis (elevated troponin)', type: 'toggle', points: 1 },
+        { name: 'immunosuppression', label: 'MINOR: Immunosuppression', type: 'toggle', points: 1 },
+        { name: 'trauma', label: 'MINOR: Trauma', type: 'toggle', points: 1 },
+        { name: 'anticoagulation', label: 'MINOR: Oral anticoagulant therapy', type: 'toggle', points: 1 },
+    ],
+    computeResult: (values) => {
+        const majors = ['fever', 'subacute', 'large-effusion', 'tamponade', 'nsaid-failure'].filter(k => values[k]).length;
+        const minors = ['myopericarditis', 'immunosuppression', 'trauma', 'anticoagulation'].filter(k => values[k]).length;
+        if (majors >= 1) {
+            return {
+                value: `${majors} major`,
+                label: 'HIGH RISK \u2014 Admit',
+                description: `${majors} major${majors > 1 ? 's' : ''}${minors ? ` + ${minors} minor` : ''}. Any major feature predicts a complicated course \u2014 **admit for inpatient management**, echo, and monitoring. If tamponade, this is a clinical emergency \u2014 IV fluids and emergent pericardiocentesis.`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (minors >= 1) {
+            return {
+                value: `${minors} minor`,
+                label: 'INTERMEDIATE \u2014 Consider Admission',
+                description: `${minors} minor feature${minors > 1 ? 's' : ''}, no major features. **Consider admission** based on reliability of follow-up and clinical trajectory. Myopericarditis warrants echo to document LV function.`,
+                colorVar: '--color-warning',
+            };
+        }
+        return {
+            value: 'None',
+            label: 'LOW RISK \u2014 Outpatient',
+            description: 'No high-risk features. Acute onset, no fever, small/no effusion, expected NSAID response. **Outpatient management appropriate** with NSAIDs + colchicine and close follow-up.',
+            colorVar: '--color-primary',
+        };
+    },
+    results: [],
+    thresholdNote: 'Any MAJOR feature = admit. MINOR features = consider admission. Low-risk (no features) = outpatient NSAIDs + colchicine with close follow-up.',
+    citations: [
+        'Adler Y, Charron P, Imazio M, et al. 2015 ESC Guidelines for the diagnosis and management of pericardial diseases. Eur Heart J. 2015;36(42):2921-2964.',
+        'Imazio M, Cecchi E, Demichelis B, et al. Indicators of poor prognosis of acute pericarditis. Circulation. 2007;115(21):2739-2744.',
+    ],
+};
 const CALCULATORS = {
+    // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
+    'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
+    'pericarditis-risk': PERICARDITIS_RISK_CALCULATOR,
     // Dental / Intraoral Nerve Blocks (added 2026-06-20)
     'dnb-la-max-dose': DNB_LA_MAX_DOSE_CALCULATOR,
     'dnb-volume-tracker': DNB_VOLUME_TRACKER_CALCULATOR,

@@ -24,6 +24,7 @@ export const AURICULAR_HEMATOMA_DRAINAGE_CITATIONS: Citation[] = [
   { num: 6, text: 'Roy S, Smith LP. A novel technique for treating auricular hematomas in mixed martial artists (ultimate fighters). Am J Otolaryngol. 2010;31(1):21-24. PMID: 19944895.' },
   { num: 7, text: 'ALiEM. Trick of the Trade: Auricular Hematoma Drainage. https://www.aliem.com/auricular-hematoma-drainage/' },
   { num: 8, text: 'LITFL. Auricular Haematoma. https://litfl.com/auricular-haematoma/' },
+  { num: 9, text: 'Managing Auricular Hematoma: An Emergency Medicine Narrative Review. J Emerg Med. 2024. doi:10.1016/j.jemermed.2024.05.003. (Confirms: drain fluctuant hematoma within 7 days; needle aspiration or I&D + bolster; 7-10 day antipseudomonal prophylaxis — fluoroquinolone in adults, amoxicillin-clavulanate in children.)' },
 ];
 
 export const AURICULAR_HEMATOMA_DRAINAGE_CRITICAL_ACTIONS = [
