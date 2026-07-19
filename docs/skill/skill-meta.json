@@ -1,8 +1,8 @@
 {
   "skillVersion": "v0.1",
-  "buildVersion": "v0.1+20260719.328a2aa",
+  "buildVersion": "v0.1+20260719.84c1ac1",
   "buildDate": "2026-07-19",
-  "appCommit": "328a2aad6890d9a8aa6bcd761ec08dc21f4c3637",
+  "appCommit": "84c1ac1d75a15c08e86a96c9ba2446c3f5c78b08",
   "dirty": false,
   "dirtyFiles": [],
   "shape": "coordinator",
@@ -10,7 +10,7 @@
   "disclaimerEffectiveDate": "2026-05-29",
   "generatorVersion": "1",
   "schemaVersion": "1",
-  "contentHash": "362681d60187ceb1d243b6da72bc2f108746a059fe51d56cbe1df78a056a3700",
+  "contentHash": "5f77edbb7d8d0b86a025e564a708367c8de4277744a8bfbf4beb1de16692f3fb",
   "consultCount": 351,
   "registeredConsults": 351,
   "skippedConsults": [],
@@ -195,7 +195,7 @@
   "crossReferences": [
     "seizure-hyponatremia"
   ],
-  "fidelity": "baseline (safety gates + critical-actions spine + entry framing + Stop pitfalls + citations per consult); deep per-node branch/disposition carry pending consult-by-consult expansion",
+  "fidelity": "baseline per consult (safety gates + critical-actions spine + entry framing + Stop pitfalls + citations WHERE PRESENT — each consult's footer lists what it actually carries; thin consults flagged); deep per-node branch/disposition carry pending consult-by-consult expansion",
   "conformance": {
     "rule16_fidelity": "baseline/partial — spine + framing + Stop pages carried; branch-decision & disposition-gate reasoning not yet",
     "rule17_disambiguations": "77-registered — ~18 more candidate traps identified, pending physician sign-off",
