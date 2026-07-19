@@ -190,13 +190,6 @@ export const FISHHOOK_REMOVAL_NODES = [
         title: 'String-Yank Technique',
         body: '**Highly effective, minimally traumatic, often requires no anesthesia.** [1,4,7]\n\n**CONTRAINDICATION:**\n• **Free-floating body parts** (earlobe, nose, lip)\n• Must have stable surface to press against\n\n**EQUIPMENT:**\n• 0-silk suture, fishing line, or umbilical tape (~18 inches)\n• Eye protection for all personnel\n\n**TECHNIQUE:**\n1. Wrap string around bend of hook at midpoint\n2. Wind string around index finger for secure grip\n3. Stabilize skin surface (press against table/flat surface)\n4. **Apply firm downward pressure on hook shank** (to disengage barb)\n5. While maintaining shank pressure, **jerk string parallel to shank** in one quick motion\n6. **WARNING:** Hook will fly — ensure clear trajectory\n\n**SUCCESS RATE:** 65-90%\n\n**ADVANTAGES:**\n• Often no anesthesia needed\n• No new wound created\n• Can be done in field\n• Least painful technique',
         citation: [1, 4, 7],
-        images: [
-            {
-                src: 'images/fishhook/string-yank.png',
-                alt: 'String-yank technique diagram showing string wrapped around hook bend, downward pressure on shank, and parallel jerk direction',
-                caption: 'String-yank technique: Wrap string at bend, press shank down to disengage barb, jerk parallel to shank in quick motion.',
-            },
-        ],
         next: 'fh-post-removal',
         summary: 'Wrap string at bend; press shank down; jerk parallel to shank; NOT for earlobes; 65-90% success',
     },
@@ -207,13 +200,6 @@ export const FISHHOOK_REMOVAL_NODES = [
         title: 'Advance-and-Cut Technique',
         body: '**Almost always successful, even for large hooks. Best when barb is near skin surface.** [1,5,6]\n\n**INDICATIONS:**\n• Large hooks\n• Barb visible near skin surface\n• String-yank failed or contraindicated\n• Multiple-barbed hooks\n\n**ANESTHESIA:** Always required — local infiltration at exit point\n\n**TECHNIQUE FOR SINGLE-BARBED HOOKS:**\n1. Anesthetize skin where barb will exit\n2. Grasp shank with needle driver/hemostat\n3. Advance hook forward through tissue until barb exits skin\n4. Cut barb off with wire cutters\n5. Back remaining hook out through entry wound\n\n**TECHNIQUE FOR TREBLE/MULTIPLE HOOKS:**\n1. Advance hook until barb exits\n2. Cut shank at entry point (not the barb)\n3. Pull entire hook through in direction of advancement\n4. Avoids backing barb through tissue\n\n**SUCCESS RATE:** >95%\n\n**DISADVANTAGE:** Creates second wound (exit point)',
         citation: [1, 5, 6],
-        images: [
-            {
-                src: 'images/fishhook/advance-cut.png',
-                alt: 'Advance-and-cut technique showing hook being pushed through until barb exits, then cut and backed out',
-                caption: 'Advance-and-cut: Push hook through until barb exits skin, cut off barb, back out remainder. Almost always successful.',
-            },
-        ],
         next: 'fh-post-removal',
         summary: 'Push through until barb exits; cut barb; back out remainder; >95% success; creates second wound',
     },
@@ -224,13 +210,6 @@ export const FISHHOOK_REMOVAL_NODES = [
         title: 'Needle-Cover Technique',
         body: '**More technically difficult but useful for sensitive areas where advance-and-cut is undesirable.** [1,5,7]\n\n**INDICATIONS:**\n• Face, ear, nose (where new wound undesirable)\n• Large hooks with prominent barbs\n• Single-barbed hooks only\n\n**EQUIPMENT:**\n• 18-gauge needle (or larger for big hooks)\n• Local anesthesia required\n\n**TECHNIQUE:**\n1. Anesthetize thoroughly around hook\n2. Insert 18G needle along entry tract, **bevel facing hook curve**\n3. Advance needle to cover the barb\n4. Once barb is sheathed, advance hook slightly to engage barb in needle lumen\n5. Back out hook and needle together as a unit\n6. Rotate/twist to help engage barb in needle\n\n**SUCCESS RATE:** 60-70%\n\n**CHALLENGES:**\n• Requires dexterity\n• Difficult to engage barb blind\n• Works best with superficially embedded hooks\n\n**MODIFICATION:**\nSome authors use #11 scalpel blade to create small nick for needle entry',
         citation: [1, 5, 7],
-        images: [
-            {
-                src: 'images/fishhook/needle-cover.png',
-                alt: 'Needle-cover technique showing 18G needle inserted to cover barb, then both withdrawn together',
-                caption: 'Needle-cover: Insert 18G needle bevel toward hook curve to cover barb; back out together.',
-            },
-        ],
         next: 'fh-post-removal',
         summary: 'Insert 18G needle to cover barb; back out together; technically difficult; 60-70% success',
     },

@@ -24,13 +24,6 @@ export const PACEMAKER_NODES = [
         calculatorLinks: [
             { id: 'pm-device-id', label: 'Device ID' },
         ],
-        images: [
-            {
-                src: 'images/pacemaker/device-types.png',
-                alt: 'Comparison of pacemaker, ICD, and CRT device appearances on chest X-ray',
-                caption: 'Device types: Single-chamber pacemaker (1 lead), dual-chamber (2 leads), CRT (3 leads), ICD (thick shock coil visible on lead).',
-            },
-        ],
         next: 'pm-nbg-code',
         summary: 'Systematic approach: identify device type (pacemaker/ICD/CRT), assess for malfunction on ECG, determine stability, know when to use magnet',
         skippable: true,
@@ -44,13 +37,6 @@ export const PACEMAKER_NODES = [
         citation: [1, 3],
         calculatorLinks: [
             { id: 'pm-nbg-decoder', label: 'NBG Decoder' },
-        ],
-        images: [
-            {
-                src: 'images/pacemaker/nbg-code.png',
-                alt: 'NBG pacemaker code diagram showing the 5 positions and their meanings',
-                caption: 'NBG Code: Position I = paced chamber, II = sensed chamber, III = response, IV = rate modulation, V = multisite.',
-            },
         ],
         next: 'pm-indications',
         summary: 'NBG code: I=paced, II=sensed, III=response; common modes VVI (basic), DDD (most versatile), VOO/DOO (asynchronous magnet mode)',
@@ -182,13 +168,6 @@ export const PACEMAKER_NODES = [
         title: 'Failure to Pace',
         body: '**No pacing spikes when heart rate is below programmed lower rate.**\n\n**Causes:**\n• **Lead fracture** - most common hardware cause\n• **Lead dislodgment**\n• **Battery depletion** (check magnet rate)\n• **Oversensing** - device thinks heart is beating\n• **Generator failure**\n• **Loose set screw** (connection at header)\n\n**Workup:**\n1. **Chest X-ray** - look for lead fracture, dislodgment\n2. **Apply magnet** - will it pace in asynchronous mode?\n3. **Check magnet rate** - low rate = depleted battery\n4. **Device interrogation** - definitive\n\n**If Magnet Restores Pacing:**\n→ Likely oversensing (magnet bypasses sensing)\n→ Keep magnet on, arrange interrogation\n\n**If Magnet Does NOT Restore Pacing:**\n→ Lead fracture, severe battery depletion, or generator failure\n→ Transcutaneous pacing as bridge [2][5][6]',
         citation: [2, 5, 6],
-        images: [
-            {
-                src: 'images/pacemaker/lead-fracture-xray.png',
-                alt: 'Chest X-ray showing pacemaker lead fracture at clavicle-first rib junction',
-                caption: 'Lead fracture: Classic location at clavicle-first rib junction (subclavian crush). Look for discontinuity or kinking.',
-            },
-        ],
         next: 'pm-malfunction-management',
         summary: 'Failure to pace: lead fracture, dislodgment, battery depletion, oversensing — apply magnet (if restores pacing = oversensing), check CXR for lead issues',
     },
@@ -202,13 +181,6 @@ export const PACEMAKER_NODES = [
         calculatorLinks: [
             { id: 'pm-capture-causes', label: 'Capture Causes' },
         ],
-        images: [
-            {
-                src: 'images/pacemaker/fail-capture-ecg.png',
-                alt: 'ECG showing pacing spikes without capture - spikes present but no QRS follows',
-                caption: 'Failure to capture: Pacing spikes (arrows) without subsequent QRS complexes. Note underlying slow escape rhythm.',
-            },
-        ],
         next: 'pm-malfunction-management',
         summary: 'Failure to capture: ALWAYS CHECK POTASSIUM (K>7 classic cause), also acidosis/hypoxia/ischemia; treat hyperkalemia aggressively, TCP if unstable',
         safetyLevel: 'critical',
@@ -220,13 +192,6 @@ export const PACEMAKER_NODES = [
         title: 'Failure to Sense (Undersensing)',
         body: '**Pacing spikes occurring regardless of intrinsic rhythm.**\n\n**ECG Pattern:**\n• Pacing spikes falling during or after native QRS\n• Pacing that ignores intrinsic beats\n• "Competition" between device and native rhythm\n\n**⚠️ DANGER: May pace on T wave → R-on-T → VF ⚠️**\n\n**Causes:**\n• Sensitivity programmed too low\n• Lead dislodgment\n• Lead fracture\n• Inadequate intrinsic signal amplitude\n• Fibrosis at lead-tissue interface\n• New bundle branch block (changes signal)\n\n**Management:**\n1. **Apply magnet** - converts to asynchronous (will still pace, but at least consistent)\n2. **Reprogram sensitivity** (interrogation needed)\n3. If causing hemodynamic issues, may need lead revision\n\n**Note:** Magnet does NOT fix undersensing - it just makes pacing asynchronous. The danger is that the device IS pacing when it shouldn\'t. [2][5]',
         citation: [2, 5],
-        images: [
-            {
-                src: 'images/pacemaker/undersensing-ecg.png',
-                alt: 'ECG showing undersensing with pacing spikes falling on native QRS complexes',
-                caption: 'Undersensing: Pacing spikes (arrows) occurring despite intrinsic beats. Note spikes falling on or near native QRS - risk of R-on-T.',
-            },
-        ],
         next: 'pm-malfunction-management',
         summary: 'Undersensing: paces regardless of intrinsic rhythm — DANGER of R-on-T triggering VF; magnet converts to asynchronous but does NOT fix the problem',
         safetyLevel: 'critical',
@@ -238,13 +203,6 @@ export const PACEMAKER_NODES = [
         title: 'Oversensing',
         body: '**Device is inhibited by signals it mistakes for cardiac activity.**\n\n**ECG Pattern:**\n• Pauses without pacing when pacing should occur\n• Intermittent failure to pace\n• Often position-dependent or activity-related\n\n**What Is Being Oversensed?**\n• **Myopotentials** - skeletal muscle (pectoralis)\n• **T-wave sensing** - large T waves mistaken for QRS\n• **EMI** - electromagnetic interference\n• **Lead fracture noise** - random signals\n• **Cross-talk** - atrial spike sensed by ventricular lead\n\n**Clues:**\n• Symptoms with arm movement (myopotentials)\n• Near certain equipment (EMI)\n• Erratic sensing on interrogation (lead fracture)\n\n**Management:**\n1. **Apply magnet** - bypasses sensing, restores pacing\n2. Keep magnet in place until interrogation\n3. **Reprogram sensitivity** or **blanking periods**\n4. Lead repair if fractured\n\n**Magnet is the definitive treatment until reprogramming!** [2][5]',
         citation: [2, 5],
-        images: [
-            {
-                src: 'images/pacemaker/oversensing-ecg.png',
-                alt: 'ECG showing oversensing with inappropriate pauses in pacing',
-                caption: 'Oversensing: Long pause without pacing. Device is inhibited by non-cardiac signals. Magnet application restores pacing.',
-            },
-        ],
         next: 'pm-malfunction-management',
         summary: 'Oversensing: device inhibited by non-cardiac signals (myopotentials, T-waves, EMI, lead fracture noise) — magnet bypasses sensing and restores pacing',
     },
@@ -255,13 +213,6 @@ export const PACEMAKER_NODES = [
         title: 'Pacemaker-Mediated Tachycardia',
         body: '**PMT (Endless Loop Tachycardia) - DDD pacemakers only.**\n\n**Mechanism:**\n1. PVC or loss of atrial capture\n2. Retrograde conduction to atrium\n3. Atrial lead senses retrograde P wave\n4. Triggers ventricular pacing\n5. Ventricular pace conducts retrograde to atrium\n6. Cycle repeats → tachycardia at upper tracking rate\n\n**ECG Pattern:**\n• Regular tachycardia at or near **upper tracking rate** (usually 110-130 bpm)\n• Ventricular paced morphology\n• Often starts after a PVC\n\n**Treatment:**\n\n**1. Apply Magnet:**\n• Converts to asynchronous mode (VOO/DOO)\n• Breaks the loop immediately\n• Simple and effective\n\n**2. Adenosine:**\n• Blocks AV node, interrupts retrograde conduction\n• Works but less elegant than magnet\n\n**3. Reprogramming:**\n• Extend PVARP (post-ventricular atrial refractory period)\n• Enable PMT termination algorithms\n\n**Key:** Magnet is diagnostic AND therapeutic. [5][7]',
         citation: [5, 7],
-        images: [
-            {
-                src: 'images/pacemaker/pmt-ecg.png',
-                alt: 'ECG showing pacemaker-mediated tachycardia at upper tracking rate with ventricular paced morphology',
-                caption: 'PMT: Regular tachycardia at upper tracking rate. Note ventricular paced morphology. Magnet application terminates immediately.',
-            },
-        ],
         next: 'pm-malfunction-management',
         summary: 'PMT in DDD pacemakers: retrograde conduction creates endless loop at upper tracking rate — magnet breaks loop immediately, also try adenosine',
     },
@@ -356,13 +307,6 @@ export const PACEMAKER_NODES = [
         calculatorLinks: [
             { id: 'pm-ecg-pattern', label: 'ECG Pattern' },
         ],
-        images: [
-            {
-                src: 'images/pacemaker/paced-rhythm-ecg.png',
-                alt: 'Normal dual-chamber paced rhythm showing atrial and ventricular spikes with LBBB morphology',
-                caption: 'Normal DDD pacing: Atrial spike → P wave, ventricular spike → wide QRS with LBBB pattern. Note discordant ST-T changes.',
-            },
-        ],
         next: 'pm-ecg-patterns',
         summary: 'Pacing spikes: vertical deflections; RV pacing = LBBB + LAD morphology; discordant ST-T normal; concordant ST changes = concerning for ischemia',
         skippable: true,
@@ -374,13 +318,6 @@ export const PACEMAKER_NODES = [
         title: 'Pacing Patterns by Mode',
         body: '**Recognize Normal Pacing Patterns:**\n\n**AAI (Atrial Only):**\n• Atrial spike → P wave → native QRS\n• QRS is NARROW (native conduction)\n• Used when AV conduction intact\n\n**VVI (Ventricular Only):**\n• Ventricular spike → wide QRS\n• No relationship to P waves\n• AV dissociation may be present\n\n**DDD (Dual Chamber):**\n• Can show 4 patterns:\n  1. **A-sense, V-sense** - no spikes, native rhythm\n  2. **A-pace, V-sense** - atrial spike only\n  3. **A-sense, V-pace** - ventricular spike only\n  4. **A-pace, V-pace** - both spikes\n\n**Fusion Beats:**\n• Native activation + paced activation occur simultaneously\n• Intermediate morphology\n• Normal finding, not malfunction\n\n**Pseudofusion:**\n• Spike falls on native QRS but doesn\'t contribute\n• QRS identical to native beat\n• Also normal [3][9]',
         citation: [3, 9],
-        images: [
-            {
-                src: 'images/pacemaker/fusion-pseudofusion.png',
-                alt: 'ECG showing fusion and pseudofusion beats compared to fully paced and native beats',
-                caption: 'Beat types: (A) Fully paced, (B) Fusion - intermediate morphology, (C) Pseudofusion - spike on native QRS, (D) Native beat.',
-            },
-        ],
         next: 'pm-ecg-stemi',
         summary: 'DDD shows 4 patterns (A-sense/V-sense to A-pace/V-pace); fusion beats = intermediate morphology (normal); pseudofusion = spike on native QRS (normal)',
         skippable: true,
@@ -396,13 +333,6 @@ export const PACEMAKER_NODES = [
         citation: [9, 10],
         calculatorLinks: [
             { id: 'pm-sgarbossa', label: 'Sgarbossa' },
-        ],
-        images: [
-            {
-                src: 'images/pacemaker/sgarbossa-criteria.png',
-                alt: 'Sgarbossa criteria diagrams showing concordant STE, concordant STD in V1-V3, and excessive discordant STE',
-                caption: 'Sgarbossa criteria: (1) Concordant STE ≥1mm, (2) Concordant STD V1-V3 ≥1mm, (3) Discordant STE ≥25% of S wave depth.',
-            },
         ],
         options: [
             {
@@ -421,13 +351,6 @@ export const PACEMAKER_NODES = [
         title: 'Magnet Application Basics',
         body: '**⚠️ CRITICAL: Magnets affect PACEMAKERS and ICDs DIFFERENTLY! ⚠️**\n\n| Device | Magnet Effect |\n|--------|---------------|\n| **PACEMAKER** | Switches to **asynchronous pacing** (VOO/DOO) |\n| **ICD** | **Disables shock therapy** ONLY (pacing unchanged) |\n\n**Pacemaker + Magnet:**\n• Bypasses sensing → paces regardless of intrinsic rhythm\n• Paces at "magnet rate" (indicates battery status)\n• Useful for: oversensing, PMT, battery check\n\n**ICD + Magnet:**\n• Disables VT/VF detection and shock delivery\n• **Pacing function is UNCHANGED**\n• Useful for: inappropriate shocks, ICD storm, end of life\n• Tones often heard when applied (varies by manufacturer)\n\n**Magnet Placement:**\n• Directly over generator\n• Tape in place if needed to keep effect continuous\n\n**Remove Magnet:**\n• Device returns to programmed mode (usually) [5][11]',
         citation: [5, 11],
-        images: [
-            {
-                src: 'images/pacemaker/magnet-application.png',
-                alt: 'Proper magnet placement directly over pacemaker generator in left pectoral region',
-                caption: 'Magnet placement: Apply directly over generator. Can tape in place. Effect persists only while magnet is in place.',
-            },
-        ],
         next: 'pm-magnet-rates',
         summary: 'CRITICAL difference: magnet on PACEMAKER = asynchronous pacing (VOO/DOO); magnet on ICD = disables SHOCKS only (pacing unchanged)',
         safetyLevel: 'critical',
@@ -622,13 +545,6 @@ export const PACEMAKER_NODES = [
         title: 'Pad Placement with Devices',
         body: '**Optimal Pad Placement:**\n\n**Preferred: Anterior-Posterior**\n• Avoids generator entirely\n• Current path away from leads\n• Best option when possible\n\n**Anterior-Lateral (Standard Position):**\n• Place pads **at least 8 cm (3 inches)** from generator\n• If device is left-sided:\n  - Move left (apex) pad more lateral or inferior\n  - Or use A-P position\n\n**Do NOT:**\n• Place pad directly over generator\n• Delay defibrillation to find generator\n\n**Energy Level:**\n• Use standard energy (biphasic 120-200J, monophasic 360J)\n• No need to reduce energy due to pacemaker\n\n**External Cardioversion:**\n• Same pad placement considerations\n• Synchronized cardioversion as usual [2][5][14]',
         citation: [2, 5, 14],
-        images: [
-            {
-                src: 'images/pacemaker/defib-pad-placement.png',
-                alt: 'Defibrillator pad placement options avoiding pacemaker generator',
-                caption: 'Pad placement: A-P preferred. If anterior-lateral, keep pads ≥8cm from generator. Avoid directly over device.',
-            },
-        ],
         next: 'pm-shock-post',
         summary: 'A-P pad placement preferred (avoids generator); if anterior-lateral, pads ≥8cm from device; standard energy, no need to reduce for pacemaker',
     },
@@ -670,13 +586,6 @@ export const PACEMAKER_NODES = [
         calculatorLinks: [
             { id: 'pm-tcp-settings', label: 'TCP Settings' },
         ],
-        images: [
-            {
-                src: 'images/pacemaker/tcp-capture.png',
-                alt: 'ECG strip showing transcutaneous pacing with capture - pacer spikes followed by wide QRS complexes',
-                caption: 'TCP with capture: Large pacing artifact followed by wide QRS. Confirm with pulse palpation, not just monitor.',
-            },
-        ],
         next: 'pm-tcp-troubleshoot',
         summary: 'TCP: A-P pads ≥8cm from device, start 30-50mA increase by 5-10 until capture (typical 50-100mA), set 1.25x threshold; confirm with pulse not just monitor',
     },
@@ -697,13 +606,6 @@ export const PACEMAKER_NODES = [
         title: 'Transvenous Pacing',
         body: '**TVP - Definitive Temporary Pacing:**\n\n**Indications:**\n• TCP failure or poor capture\n• Prolonged pacing needed (>30 min)\n• Overdrive pacing for torsades\n• More reliable pacing required\n\n**Access Site (Preference Order):**\n1. **Right IJ** - straight path to RV, highest success\n2. **Left subclavian** - reserve for permanent site if possible\n3. **Femoral** - higher infection/thrombosis, patient can\'t sit up\n\n**Equipment:**\n• 5-6 Fr introducer sheath\n• Balloon-tipped pacing catheter\n• Pacing generator\n\n**Procedure Overview:**\n1. Place sheath (ultrasound-guided)\n2. Advance catheter to ~20 cm\n3. Inflate balloon, float to RV\n4. Confirm position: ECG (injury current), POCUS, or fluoro\n5. Deflate balloon, test pacing\n\n**Settings:**\n• Rate: 60-80 ppm\n• Output: Determine threshold, set 2-3x threshold [2][8][15]',
         citation: [2, 8, 15],
-        images: [
-            {
-                src: 'images/pacemaker/tvp-position.png',
-                alt: 'Transvenous pacemaker catheter position in right ventricle on fluoroscopy',
-                caption: 'TVP catheter position: Tip in RV apex. Can confirm with fluoroscopy, POCUS, or ECG (injury current when in contact).',
-            },
-        ],
         next: 'pm-pharm-bridge',
         summary: 'TVP: right IJ preferred (straight path to RV), balloon-tipped catheter ~20cm, confirm with injury current/POCUS/fluoro; set output 2-3x threshold',
     },
@@ -752,13 +654,6 @@ export const PACEMAKER_NODES = [
         summary: 'Pocket infection: blood cultures, may need complete extraction + IV abx; Twiddler syndrome: leads coiled on CXR; lead fracture at subclavian crush site',
         body: '**Non-Malfunction Complications:**\n\n**Generator Pocket Infection:**\n• Erythema, warmth, discharge, erosion\n• Systemic signs (fever, bacteremia)\n• **Management:**\n  - Blood cultures x 3\n  - Superficial only (<30 days, no systemic signs): Trial oral abx\n  - True pocket infection: **Complete device extraction** + IV abx 10-14 days\n  - With endocarditis: Extraction + 4-6 weeks IV abx\n\n**Twiddler Syndrome:**\n• Patient manipulates generator in pocket\n• Leads coil around generator on X-ray\n• Causes malfunction, lead dislodgment\n• **Treatment:** Lead repositioning, secure generator to fascia\n\n**Lead Fracture:**\n• At clavicle-first rib junction (subclavian crush)\n• X-ray: Discontinuity or kinking of lead\n• Causes failure to capture, oversensing (noise)\n• **Treatment:** Lead replacement\n\n**Pacemaker Syndrome:**\n• Symptoms from loss of AV synchrony (VVI mode)\n• Fatigue, dyspnea, palpitations, hypotension\n• **Treatment:** Upgrade to DDD pacing [5][16][17]',
         citation: [5, 16, 17],
-        images: [
-            {
-                src: 'images/pacemaker/twiddler-xray.png',
-                alt: 'Chest X-ray showing Twiddler syndrome with leads coiled around generator',
-                caption: 'Twiddler syndrome: Leads coiled around generator from patient manipulation. Note lead retraction from heart.',
-            },
-        ],
         options: [
             {
                 label: 'Return to Start',

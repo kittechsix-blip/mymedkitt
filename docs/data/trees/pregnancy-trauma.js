@@ -79,9 +79,6 @@ export const PREGNANCY_TRAUMA_NODES = [
         title: 'Left Uterine Displacement',
         body: '**CRITICAL after 20 weeks gestation:**\n\n**Why?**\n• Gravid uterus compresses IVC and aorta when supine\n• Can reduce cardiac output by **25-30%**\n• Causes supine hypotension syndrome\n\n---\n\n**METHODS:**\n\n**1. Manual displacement (preferred during CPR):**\n• Stand at patient\'s right side\n• Place hands on right side of uterus\n• Push uterus to the LEFT and upward\n• Maintain throughout resuscitation\n\n**2. Left lateral tilt (if not in arrest):**\n• Tilt entire patient 15-30° to the left\n• Place wedge or rolled towels under right hip/back\n• If on backboard: tilt entire board\n\n---\n\n**⚠️ Do NOT compromise CPR quality for positioning**\nManual displacement allows supine CPR with effective compressions. [1][2][4]',
         citation: [1, 2, 4],
-        images: [
-            { src: 'images/pregnancy-trauma/left-displacement.png', alt: 'Manual left uterine displacement technique showing hands pushing uterus to the left', caption: 'Manual left uterine displacement: push uterus to the left and upward from patient\'s right side.' },
-        ],
         next: 'preg-trauma-labs',
         summary: 'Manual displacement: push uterus LEFT from patient\'s right side. Or tilt 15-30° left.',
         safetyLevel: 'critical',
@@ -243,9 +240,6 @@ export const PREGNANCY_TRAUMA_NODES = [
         title: 'Resuscitative Hysterotomy Technique',
         body: '**Formerly "perimortem cesarean section"**\n\n**INDICATION:** Maternal cardiac arrest with uterus ≥20 weeks (fundus at/above umbilicus) and no ROSC within 4 minutes.\n\n**GOAL:** Relieve aortocaval compression. Primary benefit is MATERNAL.\n\n---\n\n**EQUIPMENT:**\n• Scalpel (#10 blade)\n• Mayo scissors\n• Hemostats/clamps (for cord)\n• Bulb suction\n• Towels for packing\n• Neonatal resuscitation ready\n\n---\n\n**STEP-BY-STEP:**\n\n**1. Vertical midline incision** — umbilicus to pubic symphysis\n• Cut through skin, subcutaneous tissue, fascia\n• Bluntly dissect rectus muscles\n\n**2. Enter peritoneum** — identify uterus\n\n**3. Vertical uterine incision** — low segment to fundus\n• Avoid bladder (inferior)\n• If anterior placenta: cut through it\n\n**4. Insert fingers** — lift uterine wall away from fetus\n\n**5. Extend incision** with Mayo scissors\n\n**6. Deliver fetus head-first**\n• Clamp and cut cord\n• Hand off to neonatal team\n\n**7. Remove placenta** — pack uterus with towels\n\n**8. Continue maternal resuscitation**\n\n---\n\n**Maternal survival documented at 15 min. Neonatal survival at 30 min.** Do not give up early. [4][9][10]',
         citation: [4, 9, 10],
-        images: [
-            { src: 'images/pregnancy-trauma/resuscitative-hysterotomy.png', alt: 'Resuscitative hysterotomy incision diagram showing vertical midline abdominal incision and vertical uterine incision', caption: 'Resuscitative hysterotomy: Vertical midline skin incision, vertical uterine incision. Deliver fetus within 5 minutes of arrest.' },
-        ],
         next: 'preg-trauma-post-rhyst',
         summary: 'Vertical midline skin + vertical uterus. Begin at 4 min, deliver by 5 min. Primary benefit is maternal.',
         safetyLevel: 'critical',

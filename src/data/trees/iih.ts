@@ -83,13 +83,6 @@ export const IIH_NODES: DecisionNode[] = [
     title: 'ONSD Measurement Technique',
     body: '**Equipment:**\n• High-frequency linear probe (7.5-12 MHz)\n• Tegaderm over closed eye (optional)\n• Generous ultrasound gel\n\n**Technique — "Remember 3×5":**\n\n1. Patient supine, eyes closed, looking straight ahead\n2. Place probe gently on closed eyelid (transverse)\n3. Identify optic nerve as hypoechoic stripe behind globe\n4. Measure **3 mm posterior** to the globe\n5. Measure inner edge to inner edge of sheath\n6. Repeat in **both eyes**, take **average**\n\n**Interpretation:**\n\n| ONSD | Interpretation |\n|------|----------------|\n| **<5 mm** | Normal |\n| **5-6 mm** | Indeterminate — correlate clinically |\n| **>6 mm** | Elevated ICP (>20 mmHg) |\n\n**Diagnostic Accuracy (ONSD >5 mm):**\n• Sensitivity: 88-100%\n• Specificity: 63-95%\n\n⚠️ **Measure both eyes** — unilateral findings may be artifact',
     citation: [5, 6, 7],
-    images: [
-      {
-        src: 'images/iih/onsd-measurement.png',
-        alt: 'Optic nerve sheath diameter measurement showing 3mm posterior to globe with calipers measuring inner to inner edge',
-        caption: 'ONSD measurement: 3mm behind globe, inner edge to inner edge. Normal <5mm.',
-      },
-    ],
     next: 'iih-onsd-result',
     summary: 'ONSD technique: 3mm behind globe, measure inner to inner. <5mm normal, 5-6mm indeterminate, >6mm elevated ICP. Check both eyes.',
     skippable: true,

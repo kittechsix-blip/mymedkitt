@@ -35,13 +35,6 @@ export const OCULAR_POCUS_NODES = [
         title: 'Probe Selection & Technique',
         body: '**Equipment:**\n• **High-frequency linear probe** (7.5-15 MHz)\n• Higher frequency = better resolution for superficial structures\n• Acoustic standoff: thick layer of gel or Tegaderm over closed lid\n\n**Patient Position:**\n• Supine with eyes closed\n• Ask patient to look straight ahead (reduces movement artifact)\n• May ask to look in different directions to assess detachments\n\n**Scanning Technique:**\n\n| Plane | Orientation | Purpose |\n|-------|-------------|--------|\n| **Transverse** | Marker temporal | Standard view, assess globe |\n| **Longitudinal** | Marker superior | Sagittal view, ONSD measurement |\n\n**Probe Pressure:**\n• **MINIMAL pressure** — rest probe on gel, not on lid\n• Excessive pressure can compress the globe and alter measurements\n• If trauma: use extra gel as standoff, absolutely no pressure\n\n**Depth:** Start at 4-5 cm to see entire globe and orbit. [1][2][3]',
         citation: [1, 2, 3],
-        images: [
-            {
-                src: 'images/ocular-pocus/probe-position.png',
-                alt: 'Linear probe position for ocular ultrasound with thick gel layer over closed eyelid',
-                caption: 'Probe position: Linear probe with copious gel over closed lid. Minimal pressure. Marker temporal for transverse view.',
-            },
-        ],
         next: 'opocus-systematic',
         summary: 'High-frequency linear probe 7.5-15 MHz, copious gel standoff, MINIMAL pressure, transverse (marker temporal) and longitudinal planes, depth 4-5cm',
     },
@@ -68,13 +61,6 @@ export const OCULAR_POCUS_NODES = [
         title: 'Normal Ocular Anatomy',
         body: '**Normal Sonographic Appearance:**\n\n**Anterior Structures (superficial to deep):**\n• **Eyelid:** Thin hyperechoic line\n• **Cornea:** Thin curved hyperechoic line\n• **Anterior Chamber:** Anechoic space between cornea and iris\n• **Iris:** Echogenic structure surrounding pupil\n• **Lens:** Biconvex, hypoechoic with hyperechoic capsule\n\n**Globe:**\n• **Vitreous:** **Completely anechoic** (dark/black)\n• Any echoes in vitreous = abnormal (hemorrhage, detachment, debris)\n• Globe diameter: ~24 mm (adult)\n\n**Posterior Structures:**\n• **Retina:** Normally adherent to posterior globe wall — NOT visible separately\n• **Optic Nerve:** Hypoechoic band extending posteriorly\n• **Optic Nerve Sheath:** Hyperechoic borders around nerve\n\n**Key Normal Finding:** Vitreous should be completely anechoic. Any echogenicity is abnormal. [1][3][4]',
         citation: [1, 3, 4],
-        images: [
-            {
-                src: 'images/ocular-pocus/normal-anatomy.png',
-                alt: 'Normal ocular ultrasound showing anechoic vitreous, lens position, and posterior globe with labeled structures',
-                caption: 'Normal eye: Anechoic vitreous, biconvex lens, anterior chamber. Note hyperechoic optic nerve sheath posteriorly.',
-            },
-        ],
         next: 'opocus-pathology-decision',
         summary: 'Normal: anechoic vitreous, biconvex lens, retina adherent to wall — any echogenicity in vitreous is abnormal',
         skippable: true,
@@ -136,13 +122,6 @@ export const OCULAR_POCUS_NODES = [
         title: 'Retinal Detachment Findings',
         body: '**Retinal Detachment (RD) — SURGICAL EMERGENCY:**\n\n**Classic Appearance:**\n• **V-shaped or tent-shaped** membrane in vitreous\n• **Tethered at optic disc** — does not float freely\n• **Thick, hyperechoic** compared to vitreous\n• May see undulating movement but anchored posteriorly\n\n**Types:**\n\n| Type | Description |\n|------|------------|\n| **Partial RD** | V-shape or fold, attached to disc |\n| **Total RD** | Complete "funnel" or "morning glory" appearance |\n| **Macula-on** | Macula still attached — EMERGENT (preserve central vision) |\n| **Macula-off** | Macula detached — urgent but timing less critical |\n\n**Key Feature:** The retina CANNOT move past the optic disc — it is anatomically tethered.\n\n**Dynamic Test:**\n• Have patient look left/right rapidly\n• RD: Membrane moves but remains attached to disc\n• Movement is restricted, "leashed"\n\n**Sensitivity:** 97-100% | **Specificity:** 83-100% [1][2][5][6]',
         citation: [1, 2, 5, 6],
-        images: [
-            {
-                src: 'images/ocular-pocus/retinal-detachment.png',
-                alt: 'Ocular ultrasound showing V-shaped retinal detachment tethered at the optic disc',
-                caption: 'Retinal Detachment: V-shaped hyperechoic membrane tethered at optic disc. Does NOT float freely — this is pathognomonic.',
-            },
-        ],
         next: 'opocus-pvd-findings',
         summary: 'RD: V-shaped/tent-shaped, tethered at optic disc, thick hyperechoic, restricted movement — macula-on = emergent surgery within 24h',
         safetyLevel: 'critical',
@@ -154,13 +133,6 @@ export const OCULAR_POCUS_NODES = [
         title: 'Posterior Vitreous Detachment',
         body: '**Posterior Vitreous Detachment (PVD) — Usually Benign:**\n\n**What Is PVD?**\n• Separation of vitreous gel from retina\n• Normal aging process (50% by age 50, 75% by age 75)\n• Symptomatic: floaters, flashes\n• Usually benign, but can be associated with RD in 10-15%\n\n**Sonographic Appearance:**\n• **Thin, undulating membrane** in posterior vitreous\n• **NOT tethered to optic disc** — floats freely\n• **"Seaweed in water"** or "kelp" motion\n• Less hyperechoic than RD (thinner membrane)\n\n**Dynamic Test (Critical):**\n• Have patient look side-to-side rapidly, then stop\n• PVD: **Membrane continues to undulate after eye stops moving**\n• RD: Membrane stops when eye stops (tethered)\n\n**Clinical Pearl:**\n"If it floats freely like a jellyfish, it\'s PVD. If it\'s leashed to the disc like a dog on a chain, it\'s RD."\n\n**Still Needs Outpatient F/U:** 10-15% of PVD have concurrent RD, and PVD increases RD risk. [1][3][5]',
         citation: [1, 3, 5],
-        images: [
-            {
-                src: 'images/ocular-pocus/pvd.png',
-                alt: 'Posterior vitreous detachment showing freely floating membrane not attached to optic disc',
-                caption: 'PVD: Thin membrane floating freely in vitreous. Not tethered to disc. Undulates like "seaweed in water" with eye movement.',
-            },
-        ],
         next: 'opocus-rd-pvd-comparison',
         summary: 'PVD: thin undulating membrane NOT tethered to disc, "seaweed in water" motion, continues moving after eye stops — usually benign but 10-15% have concurrent RD',
     },
@@ -173,13 +145,6 @@ export const OCULAR_POCUS_NODES = [
         citation: [1, 2, 5, 6],
         calculatorLinks: [
             { id: 'opocus-rd-vs-pvd', label: 'RD vs PVD' },
-        ],
-        images: [
-            {
-                src: 'images/ocular-pocus/rd-vs-pvd.png',
-                alt: 'Side-by-side comparison of retinal detachment (V-shaped, tethered) versus PVD (floating freely)',
-                caption: 'RD (left): V-shaped, tethered to disc. PVD (right): Floating freely, undulating membrane.',
-            },
         ],
         next: 'opocus-vitreous-hemorrhage',
         summary: 'Key: RD tethered to disc (leashed), PVD floats freely (jellyfish); uncertain = treat as RD and consult ophthalmology',
@@ -195,13 +160,6 @@ export const OCULAR_POCUS_NODES = [
         title: 'Vitreous Hemorrhage',
         body: '**Vitreous Hemorrhage — Blood in the Vitreous Cavity:**\n\n**Causes:**\n• Diabetic retinopathy (most common)\n• Trauma\n• Retinal tear with vessel disruption\n• Posterior vitreous detachment\n• Age-related macular degeneration\n• Retinal vein occlusion\n\n**Sonographic Appearance:**\n• **Diffuse echogenic particles** throughout vitreous\n• "Snowstorm" or "starry sky" pattern\n• **Swirling motion** with eye movement ("washing machine sign")\n• May layer inferiorly if large/dense\n• Obscures view of posterior structures\n\n**Grading:**\n\n| Grade | Description |\n|-------|------------|\n| Mild | Scattered echoes, can see retina |\n| Moderate | Dense echoes, partial retinal view |\n| Severe | Complete obscuration of posterior segment |\n\n**Clinical Importance:**\n• Cannot see retina = cannot rule out RD\n• Dense VH + acute vision loss → ophthalmology consult\n• Need to rule out concurrent retinal tear/detachment [1][3][5]',
         citation: [1, 3, 5],
-        images: [
-            {
-                src: 'images/ocular-pocus/vitreous-hemorrhage.png',
-                alt: 'Vitreous hemorrhage showing diffuse echogenic particles in vitreous cavity with swirling pattern',
-                caption: 'Vitreous Hemorrhage: Diffuse echogenic debris in vitreous. Swirls with eye movement. May obscure retinal view.',
-            },
-        ],
         next: 'opocus-other-pathology',
         summary: 'VH: diffuse echogenic particles "snowstorm" pattern, swirling with eye movement — cannot see retina = cannot rule out RD, consult ophthalmology',
     },
@@ -212,13 +170,6 @@ export const OCULAR_POCUS_NODES = [
         title: 'Other Ocular Pathology',
         body: '**Additional Findings to Recognize:**\n\n**Lens Dislocation:**\n• Lens not in normal biconvex position\n• May be posterior (in vitreous), anterior, or subluxed\n• Associated with Marfan syndrome, homocystinuria, trauma\n• Can cause acute glaucoma or visual axis obstruction\n\n**Intraocular Foreign Body (IOFB):**\n• Hyperechoic structure with posterior shadowing (metal)\n• May see reverberation artifact (glass, metal)\n• Document location, size, and any associated globe injury\n• Do NOT use MRI if metallic FB suspected\n\n**Globe Rupture Signs:**\n• Irregular globe contour\n• Decreased globe volume\n• Intraocular air (bright echoes)\n• Vitreous hemorrhage (often seen)\n• **If suspected — STOP scanning, protect eye, consult**\n\n**Choroidal Detachment:**\n• Thick, smooth dome-shaped elevations\n• Do NOT extend to optic disc (vs. RD)\n• May be serous (post-surgery) or hemorrhagic (trauma) [1][2][7]',
         citation: [1, 2, 7],
-        images: [
-            {
-                src: 'images/ocular-pocus/lens-dislocation.png',
-                alt: 'Posterior lens dislocation with lens visible in vitreous cavity behind normal position',
-                caption: 'Posterior lens dislocation: Lens (arrow) displaced into vitreous. Can cause visual axis obstruction or secondary glaucoma.',
-            },
-        ],
         next: 'opocus-onsd-indication',
         summary: 'Additional findings: lens dislocation (Marfan, trauma), IOFB (hyperechoic with shadow, no MRI if metallic), choroidal detachment (dome-shaped, not to disc)',
     },
@@ -245,13 +196,6 @@ export const OCULAR_POCUS_NODES = [
         citation: [1, 4, 8, 9],
         calculatorLinks: [
             { id: 'opocus-onsd-calc', label: 'ONSD Calculator' },
-        ],
-        images: [
-            {
-                src: 'images/ocular-pocus/onsd-measurement.png',
-                alt: 'ONSD measurement technique showing caliper placement 3mm behind globe measuring outer edge to outer edge',
-                caption: 'ONSD Measurement: Calipers 3mm behind globe, outer edge to outer edge. Normal <5.0 mm (adult). >5.0 mm suggests elevated ICP.',
-            },
         ],
         next: 'opocus-onsd-interpret',
         summary: 'Measure 3mm behind globe, outer edge to outer edge, bilateral average — adult >5.0mm, child >4.5mm, infant >4.0mm = elevated ICP',
@@ -383,13 +327,6 @@ export const OCULAR_POCUS_NODES = [
         title: 'Traumatic Findings',
         body: '**Post-Trauma Ocular Pathology:**\n\n**Hyphema:**\n• Blood in anterior chamber\n• Layering red cells with fluid level\n• May completely fill AC (8-ball hyphema)\n• Risk: secondary hemorrhage, glaucoma\n\n**Lens Dislocation:**\n• Posterior dislocation — lens in vitreous\n• Anterior dislocation — lens in AC (can cause pupil block)\n• Subluxation — partial displacement\n• Associated with zonular damage\n\n**Intraocular Foreign Body:**\n• Hyperechoic with posterior acoustic shadow (metal)\n• Reverberation artifact (glass, metal)\n• Document: location, size, trajectory\n• CT orbit if metallic (no MRI)\n\n**Traumatic Retinal Detachment:**\n• Same appearance as spontaneous RD\n• V-shaped, tethered to disc\n• May have associated VH\n\n**Globe Rupture Findings (if you see this — already scanned too much):**\n• Irregular contour\n• Collapsed globe\n• Loss of normal spherical shape [1][2][7]',
         citation: [1, 2, 7],
-        images: [
-            {
-                src: 'images/ocular-pocus/hyphema-us.png',
-                alt: 'Hyphema on ocular ultrasound showing blood layering in anterior chamber',
-                caption: 'Hyphema: Blood layering in anterior chamber. Can layer inferiorly with gravity. Risk of IOP elevation.',
-            },
-        ],
         next: 'opocus-crao',
         summary: 'Traumatic findings: hyphema (blood in AC), lens dislocation, IOFB (CT if metallic, no MRI), traumatic RD — globe rupture on US = already scanned too much',
     },

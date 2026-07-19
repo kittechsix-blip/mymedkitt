@@ -210,13 +210,6 @@ export const VAFEI_NODES: DecisionNode[] = [
     module: 4,
     title: 'Procedure — Step by Step',
     body: '**THE TECHNIQUE:** [1]\n\n**STEP 1: VL INSERTION**\n• VL operator inserts blade, obtains laryngeal view\n• Maintains position with LEFT hand\n• Keeps suction ready in RIGHT hand\n• "Sets the table" for FE operator\n\n**STEP 2: FE INSERTION**\n• FE operator looks INTO patient\'s mouth (direct vision)\n• Advances scope to tip of VL blade under direct view\n• Then looks at VL SCREEN to guide scope to cords\n\n**STEP 3: CORD PASSAGE**\n• Spray lidocaine on cords via FE channel (if awake)\n• Advance FE through vocal cords\n• Use VL screen OR FE screen (whichever view is better)\n• Continue until CARINA is visualized\n\n**STEP 4: TUBE DELIVERY**\n• FE operator holds scope steady\n• Assistant (or VL operator) railroads ETT over scope\n• Advance until ETT tip visible on FE screen\n• Position just proximal to carina\n\n**KEY PEARL:**\n"The right speed is SLOWER than your instincts." [1]',
-    images: [
-      {
-        src: 'images/vafei/vafei-positioning.png',
-        alt: 'Operator positioning: VL operator at left shoulder, FE operator at head, patient semi-Fowler',
-        caption: 'Positioning: VL operator at left shoulder, FE operator behind head, patient semi-Fowler, split-screen monitor above.',
-      },
-    ],
     citation: [1],
     next: 'vafei-railroad',
     summary: 'VL obtains view → FE advances to blade tip → guides through cords on VL screen → carina → railroad ETT',

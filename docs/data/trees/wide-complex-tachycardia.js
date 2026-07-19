@@ -166,7 +166,6 @@ export const WIDE_COMPLEX_TACHYCARDIA_NODES = [
         citation: [1, 7],
         next: 'wct-other-features',
         summary: 'Pathognomonic VT: AV dissociation, fusion beats, capture beats. If present = confirmed VT.',
-        images: [{ src: 'images/ecg/av-dissociation.png', alt: 'AV dissociation in VT', caption: 'AV dissociation — P waves march independently of QRS' }],
     },
     {
         id: 'wct-other-features',
@@ -203,7 +202,6 @@ export const WIDE_COMPLEX_TACHYCARDIA_NODES = [
         citation: [4, 6, 9],
         next: 'wct-brugada-result',
         summary: 'Brugada: 4 steps — no RS in precordials, RS >100ms, AV dissociation, morphology criteria. Any YES = VT.',
-        images: [{ src: 'images/ecg/brugada-algorithm.png', alt: 'Brugada algorithm flowchart', caption: 'Brugada 4-step algorithm for WCT differentiation' }],
     },
     {
         id: 'wct-brugada-result',
@@ -227,7 +225,6 @@ export const WIDE_COMPLEX_TACHYCARDIA_NODES = [
         citation: [7],
         next: 'wct-vereckei-result',
         summary: 'Vereckei: aVR only — initial R, initial r/q >40ms, notched downstroke, Vi/Vt ≤1. Any YES = VT.',
-        images: [{ src: 'images/ecg/vereckei-avr.png', alt: 'Vereckei aVR algorithm', caption: 'Vereckei aVR algorithm — single lead analysis' }],
     },
     {
         id: 'wct-vereckei-result',

@@ -139,9 +139,6 @@ export const PEDS_FB_NODES: DecisionNode[] = [
     module: 3,
     title: 'Airway FB — Imaging Strategy',
     body: '**Standard:** PA + lateral chest X-ray [4,7]\n\n**Findings (any/none):**\n- Radiopaque FB (rare — most are food/plastic)\n- Unilateral hyperinflation (ball-valve obstruction, expiratory air trapping)\n- Atelectasis distal to FB\n- Mediastinal shift\n- Consolidation (post-obstructive pneumonia)\n\n**Specialized views to detect air trapping** when standard CXR is normal but suspicion high:\n- **Inspiratory + expiratory CXR** (if child cooperates) — air trapping on expiration = ball valve\n- **Bilateral decubitus films** in younger child — dependent lung normally collapses; affected side stays inflated\n- **Fluoroscopy** if available — dynamic air trapping\n\n**CT chest** — high sensitivity but radiation + sedation in young child. Reserve for diagnostic uncertainty when bronchoscopy not immediately available. [4]\n\n**Bottom line:** Normal imaging in a child with witnessed choking event still warrants ENT/pulm consultation for diagnostic rigid bronchoscopy. [4,9]',
-    images: [
-      { src: 'images/peds-fb/airway-hyperinflation.png', alt: 'Pediatric chest X-ray showing right-sided hyperinflation from foreign body aspiration', caption: 'Unilateral hyperinflation from ball-valve obstruction — affected (right) lung remains expanded on expiratory film. Open-source educational image.' },
-    ],
     citation: [4, 7, 9],
     next: 'peds-fb-airway-disposition',
     summary: 'CXR may be normal; insp/exp or decubitus to detect air trapping; CT only if rigid bronch unavailable; high suspicion → bronch',

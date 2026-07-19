@@ -56,7 +56,6 @@ export const CRICOTHYROTOMY_NODES = [
         citation: [1, 2, 4],
         next: 'cric-equipment',
         summary: 'CTM = 9mm × 30mm between thyroid and cricoid; use laryngeal handshake from notch DOWN; ignore bleeding — this is tactile',
-        images: [{ src: 'images/cric/ctm-anatomy.png', alt: 'Cricothyroid membrane anatomy showing thyroid cartilage, cricoid cartilage, and CTM location', caption: 'Cricothyroid membrane location — between thyroid and cricoid cartilage' }],
     },
     // =====================================================================
     // MODULE 3: PREPARATION

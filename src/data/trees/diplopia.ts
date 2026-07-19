@@ -214,13 +214,6 @@ export const DIPLOPIA_NODES: DecisionNode[] = [
     title: 'CN III Palsy Overview',
     body: '**CN III (Oculomotor) controls most eye movement + pupil.**\n\n**CN III Functions:**\n• Superior rectus (upgaze)\n• Inferior rectus (downgaze)\n• Medial rectus (adduction)\n• Inferior oblique (upgaze in adduction)\n• Levator palpebrae (lid elevation)\n• **Pupillary constriction**\n\n**Complete CN III Palsy:**\n• **"Down and out"** eye position\n• **Ptosis** (complete)\n• **Dilated pupil** (if pupil-involving)\n• Loss of accommodation\n\n**⚠️ CRITICAL DISTINCTION:**\n\n| | Pupil-INVOLVING | Pupil-SPARING |\n|---|-----------------|---------------|\n| Pupil | Fixed, dilated | Normal, reactive |\n| Classic cause | **Compressive (aneurysm)** | Microvascular |\n| Urgency | **EMERGENT** | Urgent |\n\n**BUT: This "rule" is NOT absolute!** [3][4][6]',
     citation: [3, 4, 6],
-    images: [
-      {
-        src: 'images/diplopia/cn3-palsy.png',
-        alt: 'CN III palsy showing ptosis and "down and out" eye position with dilated pupil',
-        caption: 'Complete CN III palsy: Ptosis, "down and out" position, dilated unreactive pupil.',
-      },
-    ],
     next: 'diplopia-cn3-pupil',
   
     summary: 'CN III Palsy Overview — review key clinical information before proceeding',
@@ -368,13 +361,6 @@ export const DIPLOPIA_NODES: DecisionNode[] = [
     title: 'CN IV Palsy Overview',
     body: '**CN IV (Trochlear) - Superior Oblique Muscle**\n\n**Unique Features:**\n• Longest intracranial course of any CN\n• Only CN that exits dorsally from brainstem\n• Only CN that crosses to supply contralateral muscle\n• **Most vulnerable to trauma**\n\n**Function:**\n• Depression in adduction (looking down and in)\n• Intorsion (rotates top of eye toward nose)\n\n**Clinical Presentation:**\n• **Vertical diplopia** (images stacked)\n• **Compensatory head tilt** to opposite shoulder\n• Trouble reading, going downstairs\n• Hypertropia (affected eye higher)\n\n**Common Causes:**\n1. **Trauma** - most common acquired cause\n2. **Microvascular** - diabetes, HTN\n3. **Congenital** - decompensated childhood palsy\n4. Mass lesion (rare) [5][7]',
     citation: [5, 7],
-    images: [
-      {
-        src: 'images/diplopia/cn4-head-tilt.png',
-        alt: 'Patient with CN IV palsy showing compensatory head tilt to opposite shoulder',
-        caption: 'CN IV palsy: Compensatory head tilt to opposite shoulder to minimize vertical diplopia.',
-      },
-    ],
     next: 'diplopia-cn4-exam',
   
     summary: 'CN IV Palsy Overview — review key clinical information before proceeding',
@@ -389,13 +375,6 @@ export const DIPLOPIA_NODES: DecisionNode[] = [
     citation: [5, 7],
     calculatorLinks: [
       { id: 'diplopia-3step', label: '3-Step Test' },
-    ],
-    images: [
-      {
-        src: 'images/diplopia/bielschowsky-test.png',
-        alt: 'Bielschowsky head tilt test demonstrating worsening hypertropia with ipsilateral head tilt',
-        caption: 'Bielschowsky test: Hypertropia worsens when head tilts toward affected side.',
-      },
     ],
     next: 'diplopia-cn4-workup',
   
@@ -442,13 +421,6 @@ export const DIPLOPIA_NODES: DecisionNode[] = [
     title: 'CN VI Palsy Overview',
     body: '**CN VI (Abducens) - Lateral Rectus Muscle**\n\n**Function:**\n• Abduction ONLY (looking outward)\n\n**Clinical Presentation:**\n• **Horizontal diplopia** (worse at distance)\n• **Esotropia** - affected eye turned IN\n• Cannot abduct affected eye past midline\n• **Face turn toward affected side** (to minimize diplopia)\n\n**Unique Feature - False Localizing Sign:**\n• CN VI has the **longest intracranial course**\n• Tethered at Dorello\'s canal (petrous apex)\n• **Stretched by downward brainstem displacement**\n• Can be "false localizing sign" of elevated ICP\n\n**⚠️ Always check for papilledema in isolated CN VI palsy!**\n\n**Common Causes:**\n1. Microvascular (most common in adults)\n2. **Elevated ICP** (check fundoscopy!)\n3. Trauma\n4. Tumor\n5. Infection/inflammation [3][8]',
     citation: [3, 8],
-    images: [
-      {
-        src: 'images/diplopia/cn6-palsy.png',
-        alt: 'CN VI palsy showing esotropia and inability to abduct the affected eye',
-        caption: 'CN VI palsy: Esotropia with inability to abduct affected eye past midline.',
-      },
-    ],
     next: 'diplopia-cn6-workup',
   
     summary: 'CN VI Palsy Overview — review key clinical information before proceeding',
@@ -581,13 +553,6 @@ export const DIPLOPIA_NODES: DecisionNode[] = [
     title: 'Internuclear Ophthalmoplegia (INO)',
     body: '**INO - Medial Longitudinal Fasciculus Lesion**\n\n**Anatomy:**\n• MLF connects CN VI nucleus to contralateral CN III nucleus\n• Coordinates conjugate horizontal gaze\n\n**Clinical Findings:**\n• **Impaired ADDUCTION** of ipsilateral eye\n• **Nystagmus of ABDUCTING** (contralateral) eye\n• Convergence usually preserved (different pathway)\n• Name INO by side with impaired adduction\n\n**Example - Left INO:**\n• Looking RIGHT: Left eye cannot adduct, right eye has nystagmus\n• Convergence: Both eyes can adduct\n\n**Etiology by Age:**\n\n| Age | Most Likely Cause | Laterality |\n|-----|-------------------|------------|\n| Young | **Multiple Sclerosis** | Often bilateral |\n| Older | **Stroke** | Usually unilateral |\n\n**Stats:**\n• ~33% MS, ~33% stroke\n• INO present in ~23% of MS patients\n• Most common ocular movement abnormality in MS [9][10]',
     citation: [9, 10],
-    images: [
-      {
-        src: 'images/diplopia/ino.png',
-        alt: 'Internuclear ophthalmoplegia showing adduction deficit with contralateral abducting nystagmus',
-        caption: 'INO: Adduction deficit of ipsilateral eye with nystagmus of abducting contralateral eye.',
-      },
-    ],
     next: 'diplopia-ino-workup',
   
     summary: 'Internuclear Ophthalmoplegia (INO) — review key clinical information before proceeding',
@@ -660,13 +625,6 @@ export const DIPLOPIA_NODES: DecisionNode[] = [
     title: 'Myasthenia Gravis',
     body: '**Myasthenia Gravis - Fluctuating Diplopia:**\n\n**Key Features:**\n• **Fluctuating** ptosis and diplopia\n• **Fatigable** weakness (worse with sustained use)\n• **Worse in evening** or with fatigue\n• >50% present with isolated ocular symptoms initially\n\n**Bedside Tests:**\n\n**Ice Pack Test:**\n1. Apply ice pack to closed eyelid for 2-5 minutes\n2. Positive: Ptosis improves ≥2mm\n3. **Sensitivity ~77%, Specificity ~98%** (no false-positives in myasthenic-diplopia study); sensitivity drops in complete or very mild ptosis — a negative test does NOT exclude MG\n4. Cold inhibits acetylcholinesterase\n\n**Sustained Upgaze Test:**\n• Have patient look up for 60 seconds\n• Positive: Ptosis worsens or develops\n\n**Confirmatory Testing:**\n• AChR antibodies: 50-70% sensitive in ocular MG\n• Single fiber EMG: ~95% sensitive\n• Anti-MuSK antibodies if AChR negative\n\n**⚠️ Red Flag - Myasthenic Crisis:**\n• Respiratory weakness (FVC <1L or <15 mL/kg)\n• Bulbar symptoms (dysphagia, dysarthria)\n• Requires ICU admission [12][13]',
     citation: [12, 13],
-    images: [
-      {
-        src: 'images/diplopia/ice-pack-test.png',
-        alt: 'Ice pack test for myasthenia gravis showing improvement of ptosis after 2-5 minutes of ice application',
-        caption: 'Ice pack test: Apply ice to ptotic lid for 2-5 min. Improvement ≥2mm = positive for MG.',
-      },
-    ],
     next: 'diplopia-mg-disposition',
   
     summary: 'Myasthenia Gravis — review key clinical information before proceeding',
