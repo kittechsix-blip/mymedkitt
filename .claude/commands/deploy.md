@@ -49,6 +49,25 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    ```
    (The gate prints a reminder listing which baseline IDs now resolve.)
 
+0c. **MANDATORY — Lint broken IMAGE references (ratchet):**
+   ```bash
+   node scripts/lint-image-refs.mjs --gate
+   ```
+   This asserts every image a consult references (`images: [{ src: 'images/...' }]` on a tree node) actually exists as a file under `docs/`. A dangling src = an empty/broken figure in production (the `<img>` renders with no content). This is the exact bug class that let the pericarditis ECG figure ship EMPTY (2026-07-19) — the node pointed at `images/pericarditis/pericarditis-ecg.png`, a file that never existed.
+
+   **Ratchet behaviour:** same as the calculator gate. Fails ONLY on NEW broken image refs (not in `scripts/lint-image-refs.baseline.json`). The 66 pre-existing broken images (frozen in the baseline 2026-07-19) print as a warning but do NOT block deploys while they are triaged. No NEW empty figure can ship.
+
+   **If this step fails**, you introduced a new broken figure. Fix before shipping:
+   - Add the image file under `docs/<path>` (with a `MANIFEST.json` license entry), OR
+   - Correct the `src` in the consult, OR
+   - Remove the `images:` entry from the node.
+
+   **When you FIX one of the baseline broken images**, tighten the ratchet:
+   ```bash
+   node scripts/lint-image-refs.mjs --update-baseline
+   git add scripts/lint-image-refs.baseline.json
+   ```
+
 1. **Compile TypeScript:**
    ```bash
    bunx tsc --skipLibCheck --noUnusedLocals false
