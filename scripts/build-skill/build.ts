@@ -301,8 +301,17 @@ function renderConsult(
   }
 
   lines.push("---");
+  // Truthful footer: advertise only the components this consult actually carries
+  // (no false "Stop pitfalls" / "spine" claim on a thin or Stop-less ref).
+  const carried: string[] = [];
+  if (gates.length > 0) carried.push("safety gates");
+  if (criticalActions.length > 0) carried.push("critical-actions spine");
+  if (entry?.body) carried.push("entry framing");
+  if (stop) carried.push("Stop pitfalls");
+  if (citations.length > 0) carried.push("citations");
+  const carriedStr = carried.length > 0 ? carried.join(" + ") : "entry framing only";
   lines.push(
-    `*Baseline coordinator reference (safety gates + critical-actions spine + entry framing + Stop pitfalls + citations). Full per-node decision detail, calculators, weight-based drug dosing, and images live in the myMedKitt app — hand off there for execution.*`,
+    `*Baseline coordinator reference (${carriedStr}). Full per-node decision detail, calculators, weight-based drug dosing, and images live in the myMedKitt app — hand off there for execution.*`,
   );
   return { md: lines.join("\n"), entryMismatch, thin, hasStop: !!stop };
 }
@@ -527,7 +536,7 @@ async function build() {
     requiredDisambiguations: REQUIRED_DISAMBIGUATIONS.map((r) => `${r.treeId}/${r.nodeId}`),
     gates: Object.keys(SKILL_GATES),
     crossReferences: CROSS_REFERENCES.map((x) => x.id),
-    fidelity: "baseline (safety gates + critical-actions spine + entry framing + Stop pitfalls + citations per consult); deep per-node branch/disposition carry pending consult-by-consult expansion",
+    fidelity: "baseline per consult (safety gates + critical-actions spine + entry framing + Stop pitfalls + citations WHERE PRESENT — each consult's footer lists what it actually carries; thin consults flagged); deep per-node branch/disposition carry pending consult-by-consult expansion",
     conformance: {
       rule16_fidelity: "baseline/partial — spine + framing + Stop pages carried; branch-decision & disposition-gate reasoning not yet",
       rule17_disambiguations: `${REQUIRED_DISAMBIGUATIONS.length}-registered — ~18 more candidate traps identified, pending physician sign-off`,
