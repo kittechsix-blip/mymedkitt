@@ -30,6 +30,25 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
 
    Carried recommendation across 6 Louis Litt audits. Closed 2026-05-12 — initial enforcement caught 266 broken nodeIds across 54 files.
 
+0b. **MANDATORY — Lint dangling CALCULATOR references (ratchet):**
+   ```bash
+   node scripts/lint-calculator-refs.mjs --gate
+   ```
+   This asserts every calculator ID a consult points at (via `calculatorLinks`, toolbar `action:'calculator' target`, or an in-body `#/calculator/<id>` link) actually exists as a key in the `CALCULATORS` registry in `src/components/calculator.ts`. A dangling ID = a button that silently hits the "calculator not found" screen. This is the exact bug class that let the pericarditis high-risk calculator ship broken (2026-07-19) — Flow Rider's click-through audit missed it because it never clicked that specific button.
+
+   **Ratchet behaviour:** the gate fails ONLY on NEW dangling IDs (not in `scripts/lint-calculator-refs.baseline.json`). The 54 pre-existing dead buttons (frozen in the baseline 2026-07-19) are printed as a warning but do NOT block deploys while they are triaged. The check goes live immediately without blocking every deploy, while guaranteeing no NEW dead calculator button can ship.
+
+   **If this step fails**, you introduced a new dead calculator button. Fix before shipping:
+   - Add the missing calculator to the `CALCULATORS` registry, OR
+   - Correct the referenced ID in the consult.
+
+   **When you FIX one of the baseline dead buttons**, tighten the ratchet so it can never regress:
+   ```bash
+   node scripts/lint-calculator-refs.mjs --update-baseline
+   git add scripts/lint-calculator-refs.baseline.json
+   ```
+   (The gate prints a reminder listing which baseline IDs now resolve.)
+
 1. **Compile TypeScript:**
    ```bash
    bunx tsc --skipLibCheck --noUnusedLocals false
