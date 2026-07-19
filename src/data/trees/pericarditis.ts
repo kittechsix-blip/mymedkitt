@@ -59,7 +59,7 @@ export const PERICARDITIS_NODES: DecisionNode[] = [
     module: 1,
     title: 'ECG in Pericarditis',
     body: '**Classic 4-stage ECG evolution:** [1][4]\n\n| Stage | Timing | Findings |\n|-------|--------|----------|\n| **I** | Hours-days | Diffuse concave ST elevation + PR depression (reciprocal ST depression + PR elevation in aVR) |\n| **II** | Days | ST/PR normalization |\n| **III** | Days-weeks | Diffuse T-wave inversions |\n| **IV** | Weeks-months | T-wave normalization |\n\n**Key distinguishing features from STEMI:**\n• **Diffuse** ST elevation (not territorial)\n• **Concave** (\"smiley face\") ST morphology\n• **PR depression** — most specific finding\n• **No reciprocal ST depression** (except aVR)\n• ST/T ratio >0.25 in V6 suggests pericarditis\n\n**Spodick sign:** Downsloping TP segment — highly specific but low sensitivity\n\n**PR depression in lead II** — most sensitive single finding',
-    images: [{ src: 'images/pericarditis/pericarditis-ecg.png', alt: 'ECG showing diffuse ST elevation with PR depression characteristic of acute pericarditis', caption: 'Acute pericarditis ECG: diffuse concave ST elevation with PR depression. Note reciprocal changes in aVR.' }],
+    images: [{ src: 'images/myocarditis/pericarditis-myocarditis-ecg.jpg', alt: '12-lead ECG showing diffuse concave ST elevation with PR depression characteristic of acute pericarditis', caption: 'Acute pericarditis ECG: diffuse concave ST elevation with PR depression. Note reciprocal changes in aVR. Wikimedia Commons, James Heilman MD, CC BY-SA 4.0.' }],
     citation: [1, 4],
     next: 'pericarditis-labs',
     summary: 'Stage I: diffuse concave ST elevation + PR depression; PR depression in II most sensitive; Spodick sign = downsloping TP',
