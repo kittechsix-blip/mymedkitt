@@ -62,7 +62,11 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
 ]);
 
 const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'hemoptysis-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hemoptysis-hub-stop' },
+  ],
   'hyperemesis': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hyperemesis-stop' },
     { id: 'hyp-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hyperemesis-summary', pinned: true },
     { id: 'hyp-puqe', label: 'PUQE', icon: '🧮', action: 'calculator', target: 'puqe', pinned: true },
     { id: 'hyp-cvs', label: 'Rome IV CVS', icon: '🔁', action: 'calculator', target: 'cvs-rome-iv', pinned: true },
@@ -98,6 +102,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'teg-stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'teg-stop' },
   ],
   'hepatitis': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hepatitis-stop' },
     { id: 'r-factor', label: 'R-Factor', icon: '🧮', action: 'calculator', target: 'hep-r-factor', pinned: true },
     { id: 'ggt', label: 'GGT', icon: '🧪', action: 'calculator', target: 'hep-ggt-source', pinned: true },
     { id: 'serology', label: 'Serology', icon: '🦠', action: 'calculator', target: 'hep-viral-serology', pinned: true },
@@ -532,6 +537,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hh-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hh-imaging' },
   ],
   'unilateral-facial-pain-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'unilateral-facial-pain-hub-stop' },
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ufp-steps', pinned: true },
     { id: 'red', label: 'Red', icon: '🚩', action: 'jump', target: 'ufp-red-flags', pinned: true },
     { id: 'diff', label: 'Diff', icon: '🧩', action: 'overlay', target: 'ufp-differential-guide', pinned: true },
@@ -554,12 +560,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ap-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'ap-imaging' },
   ],
   'anorectal-bleeding-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'anorectal-bleeding-hub-stop' },
     { id: 'arb-oakland', label: 'Oakland', icon: '🧮', action: 'calculator', target: 'oakland-score', pinned: true },
     { id: 'arb-triage', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'arb-triage' },
     { id: 'arb-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'arb-rescue' },
     { id: 'arb-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'arb-imaging' },
   ],
   'hip-pain-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hip-pain-hub-stop' },
     { id: 'hip-kocher', label: 'Kocher', icon: '🧮', action: 'calculator', target: 'kocher-criteria', pinned: true },
     { id: 'hip-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa' },
     { id: 'hip-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'hip-triage' },
@@ -567,12 +575,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hip-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'hip-imaging' },
   ],
   'painless-scrotal-swelling-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'painless-scrotal-swelling-hub-stop' },
     { id: 'psm-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
     { id: 'psm-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'psm-triage' },
     { id: 'psm-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'psm-rescue' },
     { id: 'psm-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'psm-imaging' },
   ],
   'unilateral-leg-swelling-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'unilateral-leg-swelling-hub-stop' },
     { id: 'uls-wells', label: 'Wells DVT', icon: '🧮', action: 'calculator', target: 'wells-dvt', pinned: true },
     { id: 'uls-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa' },
     { id: 'uls-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'uls-triage' },
@@ -580,6 +590,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'uls-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'uls-imaging' },
   ],
   'dysuria-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'dysuria-hub-stop' },
     { id: 'dys-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
     { id: 'dys-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'dys-triage' },
     { id: 'dys-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'dys-rescue' },
@@ -598,12 +609,14 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pmw-imaging-btn', label: 'Labs', icon: '🔬', action: 'jump', target: 'pmw-imaging' },
   ],
   'behavior-change-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'behavior-change-hub-stop' },
     { id: 'beh-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
     { id: 'beh-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'beh-triage' },
     { id: 'beh-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'beh-rescue' },
     { id: 'beh-imaging-btn', label: 'Labs', icon: '🔬', action: 'jump', target: 'beh-imaging' },
   ],
   'otalgia-hub': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'otalgia-hub-stop' },
     { id: 'otalgia-qsofa', label: 'qSOFA', icon: '🧮', action: 'calculator', target: 'qsofa', pinned: true },
     { id: 'otalgia-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'otalgia-triage' },
     { id: 'otalgia-rescue-btn', label: 'Bundle', icon: '💉', action: 'jump', target: 'otalgia-rescue' },
@@ -1135,6 +1148,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pitfalls', label: 'Pitfalls', icon: '⚠️', action: 'overlay', target: 'hypoglycemia-pitfalls' },
   ],
   'dementia': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'dementia-stop' },
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dementia-steps', pinned: true },
     { id: 'diff', label: 'Diff', icon: '🧩', action: 'overlay', target: 'dementia-differential-guide', pinned: true },
     { id: 'dx', label: 'Dx', icon: '🧠', action: 'overlay', target: 'dementia-diagnosis-guide', pinned: true },
@@ -2498,6 +2512,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'treatment', label: 'Rx', icon: '💊', action: 'jump', target: 'ap-treatment' },
   ],
   'dystonic-reaction': [
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'dystonic-reaction-stop' },
     { id: 'treat', label: 'Treat', icon: '💉', action: 'jump', target: 'adr-treatment-first-line', pinned: true },
     { id: 'airway', label: 'Airway', icon: '🫁', action: 'jump', target: 'adr-airway', pinned: true },
     { id: 'culprits', label: 'Culprits', icon: '💊', action: 'jump', target: 'adr-culprit-incidence', pinned: true },

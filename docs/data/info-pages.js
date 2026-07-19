@@ -28059,7 +28059,540 @@ const HYPEREMESIS_PROKINETICS_PAGE = {
         { num: 13, text: 'Camilleri M, et al. ACG Clinical Guideline: Gastroparesis. Am J Gastroenterol. 2022;117(8):1197-1220.' },
     ],
 };
+// ------------------------------------------------------------------
+// Missing Stop / Do-NOT pages (deep gate review 2026-07-18, Andy-signed)
+// ------------------------------------------------------------------
+const PAINLESS_SCROTAL_SWELLING_HUB_STOP_PAGE = {
+    id: "painless-scrotal-swelling-hub-stop",
+    title: "Painless Scrotal Swelling — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT call it a benign hydrocele until torsion is excluded",
+            body: "**\"Painless\" is a trap.** Intermittent torsion/detorsion presents as recurrent, waxing-waning swelling, and malignancy is classically painless — labeling the mass benign on first look is how testes and diagnoses are lost. [Run the Sick Check first](#/node/psm-sick-check).",
+        },
+        {
+            heading: "🛑 Do NOT delay the OR for imaging when the torsion exam is convincing",
+            body: "A high TWIST score, an abnormal lie, or an absent cremasteric reflex is a straight-to-OR situation. Salvage falls off sharply after **~6 hours** of ischemia, and a Doppler that delays exploration costs the testis. [Emergent urology + manual detorsion](#/node/psm-torsion-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT rely on Prehn sign to rule out torsion",
+            body: "Epididymo-orchitis is the main torsion mimic, and a **positive Prehn sign or a preserved cremasteric reflex does NOT exclude torsion.** When you cannot confidently exclude it, get a Doppler and urology — a missed torsion loses the testis. [When in doubt, image](#/node/psm-epidi-excluded).",
+        },
+        {
+            heading: "🛑 Do NOT wait for imaging in suspected Fournier gangrene",
+            body: "**Pain out of proportion plus systemic toxicity, crepitus, or dusky skin is a surgical emergency** — mortality rises with every hour to debridement. Resuscitate and get surgery to the bedside; CT only if it will not delay the OR. [Emergent debridement](#/node/psm-fournier-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT attempt taxis on a hernia with strangulation signs",
+            body: "A single gentle reduction is reasonable **only when there are NO signs of strangulation.** Severe tenderness, skin change, or toxicity means reducing dead bowel back into the abdomen — that is dangerous; go to emergent surgery, not manual pressure. [Reduce / surgery gate](#/node/psm-hernia-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT biopsy a solid intratesticular mass transscrotally",
+            body: "A firm, non-transilluminating intratesticular mass is a **tumor until proven otherwise.** Transscrotal biopsy violates lymphatic planes and seeds tumor — the standard is scrotal US + AFP/beta-hCG/LDH and urgent urology for radical inguinal orchiectomy. [Tumor pathway](#/node/psm-tumor-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT dismiss a persistent erection as mere swelling",
+            body: "**Ischemic (low-flow) priapism is time-critical for erectile function** — a rigid, painful erection >4 h needs corporal aspiration and intracavernosal phenylephrine, not observation. The same urgency applies to any constricting object or paraphimosis. [Time-critical detumescence](#/node/psm-priapism-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT discharge a new adult hydrocele or right-sided varicocele without ultrasound",
+            body: "A new or tense adult hydrocele can hide an underlying tumor, and a **new right-sided or non-decompressing varicocele can signal a retroperitoneal/renal mass.** Reassure only after imaging excludes these. [Outpatient ultrasound](#/node/psm-benign-verdict).",
+        },
+    ],
+};
+const HEMOPTYSIS_HUB_STOP_PAGE = {
+    id: "hemoptysis-hub-stop",
+    title: "Hemoptysis — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT lay a massively bleeding patient flat/supine",
+            body: "Patients with massive hemoptysis die of **asphyxiation, not exsanguination** — supine positioning soils both lungs and drowns the good one. Position **bleeding-lung-DOWN** and secure the airway early with a large ETT. [Massive hemoptysis airway priorities](#/node/hmp-exc-massive).",
+        },
+        {
+            heading: "🛑 Do NOT delay IR embolization or bronchoscopy chasing a perfect diagnosis",
+            body: "In massive bleeding, definitive control comes from **bronchial artery embolization (~90% effective)** and rigid bronchoscopy — waiting for a tidy diagnosis lets the patient bleed into the airway. Call IR and thoracics NOW; CTA localizes once stable. [Control the airway and the vessel first](#/node/hmp-exc-massive).",
+        },
+        {
+            heading: "🛑 Do NOT leave a suspected-TB patient in an open ED bay",
+            body: "Hemoptysis with fever, weight loss, or night sweats is **active pulmonary TB until excluded**, and an unmasked patient in an open bay exposes every staff member and patient nearby. Airborne-isolate first (N95, negative pressure, mask the patient), diagnose second. [Isolate before you work it up](#/node/hmp-exc-tb).",
+        },
+        {
+            heading: "🛑 Do NOT anticoagulate a confirmed PE into a massive pulmonary bleed",
+            body: "Minor infarct-related hemoptysis does not preclude anticoagulation, but **massive/brisk hemoptysis flips the calculus** — full anticoagulation into a life-threatening lung bleed can be fatal. Treat the bleeding first, weigh clot burden, and consider an IVC filter. [When massive bleeding contraindicates anticoagulation](#/node/hmp-exc-pe).",
+        },
+        {
+            heading: "🛑 Do NOT reverse anticoagulation for blood-tinged sputum",
+            body: "Reversal is for **life-threatening bleeding only** — reflexively reversing minor streaking exposes a mechanical valve, recent VTE, or fresh stent to catastrophic thrombosis. Weigh thrombotic risk, and never stop at the blood thinner: the amplifier is not the diagnosis, so still work the source. [Reserve reversal for the life-threat](#/node/hmp-exc-coag).",
+        },
+        {
+            heading: "🛑 Do NOT call it \"just bronchitis\" in a smoker ≥40 or with weight loss",
+            body: "Bronchitis is the commonest cause of mild hemoptysis, but a smoker ≥40, weight loss, or recurrent bleeding demands imaging and follow-up to **exclude malignancy** — anchoring on bronchitis misses lung cancer. [Image and arrange follow-up before you reassure](#/node/hmp-exc-infection).",
+        },
+        {
+            heading: "🛑 Do NOT work up a GI bleed as hemoptysis",
+            body: "Misattributed hematemesis (dark, coffee-ground, acidic, preceded by nausea) sent down the pulmonary pathway **delays endoscopy and transfusion**. Confirm the blood is truly pulmonary — bright, frothy, alkaline, coughed — before committing; always ask \"vomited or coughed?\" [Exclude pseudohemoptysis first](#/node/hmp-exc-pseudo).",
+        },
+        {
+            heading: "🛑 Do NOT discharge on a normal chest X-ray alone",
+            body: "**Malignancy can present with a single small bleed and a normal CXR** — a benign film does not exclude a serious cause. Discharge only trivial, stopped, low-risk bleeding with reliable follow-up, and complete the outpatient CT if any risk feature is present. [Safe-discharge criteria and return precautions](#/node/hmp-dispo-discharge).",
+        },
+    ],
+};
+const UNILATERAL_LEG_SWELLING_HUB_STOP_PAGE = {
+    id: "unilateral-leg-swelling-hub-stop",
+    title: "Unilateral Leg Swelling — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT anchor on \"it's probably a DVT\"",
+            body: "A swollen leg hides limb- and life-threats that share the presentation: acute ischemia, phlegmasia, necrotizing infection, compartment syndrome, and DVT with PE. A **cold pulseless limb, a dusky tense limb, or pain out of proportion overrides the DVT reflex** — work the limb-threat first. [Sick Check first](#/node/uls-sick-check).",
+        },
+        {
+            heading: "🛑 Do NOT wait for imaging before calling surgery in a necrotizing infection",
+            body: "\"Cellulitis\" that hurts far more than it looks, with toxicity, crepitus, or dusky/bullous skin, is a necrotizing soft-tissue infection and a **surgical emergency**. Mortality rises with every hour of delay — a convincing exam goes straight to the OR for debridement, not to the CT scanner. [Emergent debridement, do not wait for imaging](#/node/uls-necfasc-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT wait for a pulseless limb to diagnose compartment syndrome",
+            body: "Pulselessness is a **LATE finding** — rising compartment pressure strangles muscle and nerve within hours while pulses are still present. Act on a tense compartment with pain on passive stretch and paresthesia; fasciotomy is time-critical. [Do not wait for pulselessness](#/node/uls-compartment-entry).",
+        },
+        {
+            heading: "🛑 Do NOT elevate or apply cold to an ischemic limb",
+            body: "In acute limb ischemia, elevation and cold both **drop perfusion pressure and worsen the ischemia**. Keep the limb dependent and warm, anticoagulate with heparin, and get emergent vascular surgery — salvage is time-dependent. [Keep the limb warm and dependent](#/node/uls-ischemia-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT wait for the leg ultrasound when chest symptoms suggest PE",
+            body: "A swollen leg with pleuritic chest pain, dyspnea, or hypoxia is a **pulmonary embolism until excluded**. Start anticoagulation and work up the PE (CTPA, assess stability) now — do not delay treatment waiting on the leg ultrasound. [Work up the PE now](#/node/uls-pe-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT blame asymmetric edema on the heart and miss a superimposed DVT",
+            body: "Heart failure can present asymmetrically, but a failing, immobile patient is **prothrombotic** — cardiac edema and DVT coexist. Do not anchor on \"cardiac edema\" and skip the DVT workup in the asymmetric leg. [Still exclude a superimposed DVT](#/node/uls-rhf-entry).",
+        },
+        {
+            heading: "🛑 Do NOT trust a single negative ultrasound when DVT suspicion is high",
+            body: "A negative initial compression ultrasound can **miss a propagating calf-vein thrombus**. If clinical suspicion remains high, arrange a repeat ultrasound in about one week rather than clearing the patient outright. [Repeat US in ~1 week if suspicion is high](#/node/uls-dvt-excluded).",
+        },
+        {
+            heading: "🛑 Do NOT treat \"cellulitis\" with pain out of proportion as benign",
+            body: "Cellulitis can be early necrotizing infection and can hide a coexisting DVT. Mark the border and reassess — **pain out of proportion, toxicity, crepitus, or rapid spread sends you back to surgery**, and prominent swelling warrants excluding a DVT. [Keep the necrotizing and DVT safety nets up](#/node/uls-cellulitis-verdict).",
+        },
+    ],
+};
+const HIP_PAIN_HUB_STOP_PAGE = {
+    id: "hip-pain-hub-stop",
+    title: "Hip Pain — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT clear a hip on a normal X-ray when the patient cannot bear weight",
+            body: "A **normal or subtle plain film does NOT rule out an occult or insufficiency fracture** in the elderly/osteoporotic patient with groin pain who cannot walk. Missed fractures displace with continued weight-bearing and lead to AVN and immobility — get **MRI (detects within hours) or CT** before calling it safe. [Occult fracture — advanced imaging](#/node/hip-occult-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT dismiss an adolescent's knee or thigh pain",
+            body: "**Up to a quarter of SCFE cases present with knee/thigh pain and NO hip complaint** — the classic trap. An obese teen 8-15 with out-toeing and obligate external rotation on passive flexion needs a frog-leg lateral of both hips, not a knee workup. [SCFE — adolescent gate](#/node/hip-scfe-entry).",
+        },
+        {
+            heading: "🛑 Do NOT let a suspected SCFE keep bearing weight",
+            body: "Continued weight-bearing can **convert a stable slip into an unstable one**, which carries a far higher risk of **avascular necrosis**. Make the patient strictly non-weight-bearing immediately (wheelchair, not crutches) and get urgent ortho for in-situ pinning; do not attempt reduction in the ED. [SCFE — non-weight-bearing + ortho](#/node/hip-scfe-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT delay antibiotics in a septic-looking hip",
+            body: "Arthrocentesis before antibiotics is ideal, but a hip usually needs image-guided aspiration — **do NOT let that delay abx in a toxic/septic-appearing patient**. The joint is destroyed within ~24-48 h; give empiric vancomycin + gram-negative coverage and get emergent ortho for washout. [Septic hip — aspirate + treat](#/node/hip-septic-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT wait for imaging to call surgery in necrotizing infection",
+            body: "**Pain out of proportion + systemic toxicity** is the alarm for nec-fasc. If the exam is convincing, **do NOT wait for imaging to consult surgery** — start broad-spectrum abx (vanc + pip-tazo + clinda), resuscitate aggressively, and get to emergent operative debridement. [Deep infection — source control](#/node/hip-necfasc-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT label it transient synovitis without excluding septic arthritis",
+            body: "**Transient synovitis is a diagnosis of exclusion.** If the child cannot bear weight, is febrile, or has any inflammatory-marker bump, do not clear the hip — Kocher-stratify, image, and aspirate before reassuring. Discharge only with strict return precautions for fever, worsening pain, or non-weight-bearing. [Transient synovitis — exclusion diagnosis](#/node/hip-peds-excluded).",
+        },
+        {
+            heading: "🛑 Do NOT exclude AVN on a normal early X-ray",
+            body: "In a patient with **steroids, alcohol, sickle cell, or SLE**, plain films are often normal before subchondral collapse — **a normal X-ray does NOT exclude osteonecrosis**. MRI is the most sensitive test; outcome is stage-dependent, so early diagnosis and referral matter. [AVN — risk gate](#/node/hip-avn-entry).",
+        },
+        {
+            heading: "🛑 Do NOT discharge a patient who cannot bear weight without advanced imaging",
+            body: "Do NOT send home anyone who **cannot bear weight with a normal plain film and no MRI/CT**, any fever or systemic sign, an unexcluded septic joint, or an un-imaged possible SCFE. Counsel that a normal X-ray does not rule out a hip fracture or early AVN — they need an MRI first. [Discharge — universal checklist](#/node/hip-dispo-discharge).",
+        },
+    ],
+};
+const BEHAVIOR_CHANGE_HUB_STOP_PAGE = {
+    id: "behavior-change-hub-stop",
+    title: "Acute Behavior Change — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT anchor on \"psych\" before a glucose and a focal exam",
+            body: "\"He's not acting right\" is a **medical complaint until proven psychiatric** — anchoring on psych is how patients die of hypoglycemia, meningitis, or sepsis in the waiting room. Check a **point-of-care glucose on everyone, first**, and treat abnormal vitals, a focal deficit, age >40 with new symptoms, or visual hallucinations as pointing AWAY from a primary psychiatric cause. [Sick Check first](#/node/beh-sick-check).",
+        },
+        {
+            heading: "🛑 Do NOT wait for the LP or CT to give antibiotics",
+            body: "Fever plus new behavior change is **meningitis/encephalitis until excluded**, and every hour of delayed antibiotics costs lives. Give empiric ceftriaxone + vancomycin (+ ampicillin if >50/immunocompromised) with dexamethasone, and add acyclovir for possible HSV encephalitis, the moment you suspect it. [Treat empirically now](#/node/beh-cns-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT clear for psychiatry with any organic red flag remaining",
+            body: "Abnormal vitals, a focal deficit, new symptoms after age 40, visual hallucinations, disorientation, or an acute fluctuating course all mean the patient is **NOT medically cleared**. Do not transfer to a psychiatric facility or anchor on \"psych\" until the medical workup is complete. [Not cleared — keep working it up](#/node/beh-psych-excluded).",
+        },
+        {
+            heading: "🛑 Do NOT give benzodiazepines for delirium",
+            body: "Benzodiazepines **worsen delirium** and prolong confusion in the elderly — reserve them for alcohol/sedative withdrawal only. Use non-pharmacologic measures first and reserve low-dose antipsychotics for agitation that threatens safety. [Delirium management](#/node/beh-delirium-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT give glucose before thiamine in the malnourished or alcoholic patient",
+            body: "Administering dextrose first can precipitate **Wernicke encephalopathy** in the thiamine-depleted patient. Give thiamine before (or with) glucose whenever malnutrition or alcohol use is suspected. [Give thiamine first](#/node/beh-hypo-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT start insulin before replacing potassium in DKA",
+            body: "Insulin drives potassium intracellularly and can trigger **fatal hypokalemia** — do NOT start the insulin infusion if K+ is <3.3 mEq/L until it is replaced. Resuscitate with fluids first, then insulin with careful potassium repletion. [DKA sequence](#/node/beh-dka-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT delay steroids for confirmatory testing in adrenal crisis",
+            body: "Adrenal crisis is rapidly fatal and steroids are the only lifesaving intervention — give **hydrocortisone 100 mg IV immediately** and do not wait on cortisol results. Draw a cortisol first only if it will not delay treatment. [Steroids now](#/node/beh-adrenal-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT discharge an unexplained acute behavior change",
+            body: "An acute behavior change without an identified cause is an undiagnosed emergency, not a disposition — observe or admit for serial exams and completion of the workup. Treat the driver before any discharge. [Observe / admit for workup](#/node/beh-dispo-observe).",
+        },
+    ],
+};
+const HYPEREMESIS_STOP_PAGE = {
+    id: "hyperemesis-stop",
+    title: "Hyperemesis — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT give dextrose before thiamine",
+            body: "In any patient with prolonged poor intake, glucose in a thiamine-deficient state precipitates **Wernicke encephalopathy**. Give **thiamine 100 mg IV first**, then dextrose-containing fluids. [Thiamine before dextrose](#/node/hg-iv).",
+        },
+        {
+            heading: "🛑 Do NOT call it a functional syndrome when there are red flags",
+            body: "**Bilious or bloody vomiting** means obstruction or GI bleed; **headache + focal deficit** means raised ICP; **shock + hyponatremia/hyperkalemia** means adrenal crisis until proven otherwise. CVS/CHS/functional vomiting are diagnoses of exclusion — screen and resuscitate first. [Red-flag screen](#/node/hyperemesis-redflags).",
+        },
+        {
+            heading: "🛑 Do NOT anchor on a GI cause",
+            body: "Vomiting can be the sole presenting sign of **DKA, raised ICP, or adrenal crisis** — miss these and the patient decompensates while you treat nausea. Check ketones/VBG, image the head when neuro signs are present, and consider empiric hydrocortisone. [Target the organic cause](#/node/hyperemesis-organic).",
+        },
+        {
+            heading: "🛑 Do NOT skip the βhCG",
+            body: "Every **reproductive-age woman** needs a βhCG **before imaging or teratogen exposure** — it changes the workup, the antiemetic choices, and prevents fetal harm. [βhCG in every reproductive-age woman](#/node/hyperemesis-start).",
+        },
+        {
+            heading: "🛑 Do NOT give opioids for gastroparesis or CHS",
+            body: "Opioids **slow gastric emptying** and perpetuate the vomiting cycle in both gastroparesis and cannabinoid hyperemesis. Use prokinetics, antiemetics, and cause-directed therapy instead. [Avoid opioids](#/node/gp-management).",
+        },
+        {
+            heading: "🛑 Do NOT expect standard antiemetics to work in CHS",
+            body: "In cannabinoid hyperemesis, ondansetron and opioids typically **fail** — the effective agents are **topical capsaicin, haloperidol/droperidol, and cannabis cessation**. Recognize the triad plus hot-water bathing and route to the dedicated pathway. [Standard antiemetics fail in CHS](#/node/chs-bridge).",
+        },
+        {
+            heading: "🛑 Do NOT give steroids or ondansetron before 10 weeks gestation",
+            body: "**Methylprednisolone** for refractory HG and early **ondansetron** both carry an association with **orofacial clefts** if used before 10 weeks — reserve steroids as last-resort and counsel on the ondansetron signal via shared decision-making. [Avoid steroids before 10 weeks](#/node/hg-refractory).",
+        },
+        {
+            heading: "🛑 Do NOT stack QT-prolongers without checking the QTc",
+            body: "Ondansetron, haloperidol, droperidol, and promethazine all prolong the QT — layering them without a **baseline ECG** risks torsades. Check QTc before stacking, and cap metoclopramide duration to avoid tardive dyskinesia. [QTc before stacking antiemetics](#/node/hyperemesis-safety).",
+        },
+    ],
+};
+const DYSURIA_HUB_STOP_PAGE = {
+    id: "dysuria-hub-stop",
+    title: "Dysuria — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT anchor on \"just a UTI\"",
+            body: "Dysuria is undifferentiated, and the lethal misses hide behind the same symptom: obstructive urosepsis, an untreated STI, acute bacterial prostatitis, retention, and priapism. Run the Sick Check and screen every one before you reach for an antibiotic script. [Sick Check first](#/node/dys-start).",
+        },
+        {
+            heading: "🛑 Do NOT treat an obstructed, infected kidney with antibiotics alone",
+            body: "Infection **plus** obstruction is pus under pressure — a urologic emergency that decompensates fast. Antibiotics will not save it; the patient needs emergent source control (ureteral stent or percutaneous nephrostomy) alongside the sepsis bundle. [Resuscitate + decompress](#/node/dys-urosepsis-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT let a normal urinalysis rule out an STI",
+            body: "A clean UA does not reassure — sterile pyuria with discharge in a young, sexually active patient is gonorrhea/chlamydia until NAAT says otherwise. Miss it and you seed PID and epididymo-orchitis; keep a low threshold to send NAAT. [Normal UA is not enough](#/node/dys-sti-entry).",
+        },
+        {
+            heading: "🛑 Do NOT vigorously massage a tender prostate",
+            body: "In suspected acute bacterial prostatitis, aggressive prostate massage can precipitate bacteremia. Do a gentle DRE only, and remember the UA can be normal — the exam, not the dipstick, makes this diagnosis. [Gentle exam only](#/node/dys-prostatitis-entry).",
+        },
+        {
+            heading: "🛑 Do NOT miss cauda equina behind urinary retention",
+            body: "Retention can be the presenting sign of a neurologic catastrophe. Screen for saddle anesthesia, bilateral leg symptoms, and fecal incontinence — red flags mean emergent MRI and spine consult, not just a catheter. [Screen cauda equina](#/node/dys-retention-entry).",
+        },
+        {
+            heading: "🛑 Do NOT sit on a painful erection lasting over 4 hours",
+            body: "Ischemic (low-flow) priapism is time-critical and threatens erectile function the longer it persists. This is not a next-day urology problem — confirm the type, then aspirate and give intracavernosal phenylephrine with urology on the phone. [Time-critical detumescence](#/node/dys-priapism-entry).",
+        },
+        {
+            heading: "🛑 Do NOT forget post-obstructive diuresis after decompression",
+            body: "Draining a large-volume retention can trigger brisk diuresis and dangerous electrolyte shifts. Monitor urine output, check a BMP for post-renal AKI and hyperkalemia, and replace fluids/electrolytes when the output runs high. [Watch after draining](#/node/dys-retention-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT call it uncomplicated cystitis when a red flag is present",
+            body: "Fever, flank pain, pregnancy, a male patient, discharge, or obstruction risk means this is no longer simple cystitis. Do not hand out a short antibiotic course — re-triage to the upper-tract, STI, prostatitis, or retention branch. [Re-triage the complicated patient](#/node/dys-cystitis-excluded).",
+        },
+    ],
+};
+const OTALGIA_HUB_STOP_PAGE = {
+    id: "otalgia-hub-stop",
+    title: "Otalgia — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT let a normal ear exam end the visit",
+            body: "Ear pain with a **normal ear is referred pain until proven otherwise** — and jaw/ear pain can be an **anginal equivalent**. Do not let a clean canal falsely reassure you; get an [ECG and troponin in the at-risk patient](#/node/otalgia-referred-cardiac).",
+        },
+        {
+            heading: "🛑 Do NOT dismiss severe pain out of proportion as swimmer's ear",
+            body: "In a **diabetic or immunocompromised** host, deep unrelenting pain (worse at night) with **canal granulation ± a facial-nerve palsy** is **necrotizing otitis externa — skull-base osteomyelitis**, not routine external otitis, and it will not respond to topical drops. Image, start systemic anti-pseudomonal therapy, and call ENT via the [necrotizing OE gate](#/node/otalgia-moe-entry).",
+        },
+        {
+            heading: "🛑 Do NOT just re-dose drops when a high-risk host fails to improve",
+            body: "Pain out of proportion, granulation tissue, or a diabetic/immunocompromised host means this is **not simple otitis externa** — re-dosing topical antibiotics only delays a skull-base infection. [Loop back to the necrotizing gate, image, and consult ENT](#/node/otalgia-oe-excluded).",
+        },
+        {
+            heading: "🛑 Do NOT overlook post-auricular swelling or a protruding auricle",
+            body: "**Post-auricular swelling/erythema with a protruding auricle and fever is mastoiditis** — a suppurative complication of otitis media that can extend to a subperiosteal abscess or intracranial spread (meningitis, sinus thrombosis, brain abscess). Get a contrast CT, start IV antibiotics, and consult ENT via the [post-auricular gate](#/node/otalgia-mastoid-entry).",
+        },
+        {
+            heading: "🛑 Do NOT irrigate or delay a button battery or insect in the canal",
+            body: "A **button battery in the canal is an emergency** — liquefactive/alkaline injury demands emergent removal, and irrigation is contraindicated for a battery, a live insect, or organic material that swells. Immobilize an insect first and act now on the [time-sensitive trauma pathway](#/node/otalgia-trauma-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT wait for vesicles before treating Ramsay Hunt",
+            body: "Zoster oticus has **worse facial-nerve recovery than Bell palsy**, and the **vesicles can lag the pain** while the palsy may follow — waiting to confirm the rash costs the nerve. Reassess and [treat early with antivirals + steroids](#/node/otalgia-ramsay-excluded) when vesicles or a facial droop appear.",
+        },
+        {
+            heading: "🛑 Do NOT put ototoxic drops in a possibly perforated TM",
+            body: "With an open or possibly perforated tympanic membrane, **ototoxic drops can damage the inner ear** — choose TM-safe agents. Verify TM integrity before prescribing on the [otitis externa treatment node](#/node/otalgia-oe-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT discharge without complication return precautions",
+            body: "Benign-looking otitis can evolve into a dangerous complication, so every discharge needs explicit red-flag counseling — **severe worsening pain (esp. diabetic), post-auricular swelling, facial droop, high fever, or neck stiffness/headache**. Give the [necrotizing/mastoiditis return precautions and named follow-up](#/node/otalgia-dispo-discharge).",
+        },
+    ],
+};
+const ANORECTAL_BLEEDING_HUB_STOP_PAGE = {
+    id: "anorectal-bleeding-hub-stop",
+    title: "Anorectal Bleeding — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT anchor on \"just hemorrhoids\"",
+            body: "Hemorrhoids and a colorectal cancer can coexist — a visible benign source does not clear the bleed. **New rectal bleeding at age >=50, or any alarm feature (weight loss, iron-deficiency anemia, altered bowel habits, a mass), still needs a documented colonoscopy plan.** [Benign is a diagnosis of exclusion](#/node/arb-benign-excluded).",
+        },
+        {
+            heading: "🛑 Do NOT assume bright-red blood per rectum is a lower source",
+            body: "A brisk upper-GI bleed can present as maroon stool or even BRBPR, and ~10-15% of severe \"lower\" bleeds are actually upper. **Melena, hematemesis, a BUN:creatinine ratio >30, or varices/ulcer risk means treat as UGIB until excluded** — IV PPI, endoscopy, and hemodynamics drive it, not the color of the blood. [Chase the upper source](#/node/arb-ugib-entry).",
+        },
+        {
+            heading: "🛑 Do NOT send an unstable, actively bleeding patient to a prolonged prep",
+            body: "A brisk bleeder cannot tolerate hours of bowel prep before colonoscopy — you lose the window to control hemorrhage. **Resuscitate first; if too brisk or unstable for scope, go to CT angiography and IR embolization.** [Match the study to the phenotype](#/node/arb-imaging).",
+        },
+        {
+            heading: "🛑 Do NOT give empiric antibiotics when EHEC is suspected",
+            body: "Shiga-toxin-producing E. coli plus antibiotics raises the risk of hemolytic uremic syndrome. **Hold empiric abx in suspected EHEC, and check CBC/smear/renal function for HUS** while you work the infectious-colitis pathway. [Stool studies and rehydration first](#/node/arb-colitis-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT reflexively transfuse platelets or reach for FFP",
+            body: "Platelet transfusion is generally NOT beneficial for antiplatelet-associated GI bleeding, and FFP is second-line for warfarin. **Match reversal to the agent: 4-factor PCC + vitamin K for warfarin, idarucizumab for dabigatran, andexanet/PCC for factor-Xa inhibitors.** [Agent-specific reversal](#/node/arb-anticoag-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT reduce-and-forget a rectal prolapse",
+            body: "Reduce the prolapse early to prevent incarceration, but a **non-reducible, dusky, or strangulated prolapse is a surgical emergency** — not a bedside discharge. Assess viability and get colorectal surgery involved. [Reduce, assess, refer](#/node/arb-benign-verdict).",
+        },
+        {
+            heading: "🛑 Do NOT discharge a patient who is not truly stable and low-risk",
+            body: "Ongoing or high-volume bleeding, orthostasis, a dropping or low Hb, a high Oakland score (>10), an undocumented source in a high-risk patient, or anticoagulation with a significant bleed all forbid discharge. **Only send home the self-limited, non-orthostatic, Oakland <=10 patient with reliable follow-up, written return precautions, and a colonoscopy plan for age >=50 or alarm features.** [Meet every discharge criterion](#/node/arb-dispo-discharge).",
+        },
+    ],
+};
+const UNILATERAL_FACIAL_PAIN_HUB_STOP_PAGE = {
+    id: "unilateral-facial-pain-hub-stop",
+    title: "Unilateral Facial Pain — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT anchor on \"sinus\" or \"TMJ\"",
+            body: "Unilateral facial pain alone does **not** diagnose bacterial rhinosinusitis — dental disease, migraine, trigeminal neuralgia, cluster/TAC, HZO, and eye emergencies all masquerade as \"sinus\" pain. Bacterial sinusitis requires >10 days without improvement, double-worsening, or severe purulence with fever before you label it. Screen the dangerous lanes first in the [sinus/ear pattern](#/node/ufp-sinus-ear-lane).",
+        },
+        {
+            heading: "🛑 Do NOT wait for biopsy or ultrasound before steroids in suspected GCA",
+            body: "In age >50 with jaw claudication, scalp tenderness, or visual symptoms, delaying glucocorticoids risks permanent, irreversible vision loss. Normal ESR/CRP lowers but does not exclude giant cell arteritis when the story is high-risk. Start steroids when suspicion is meaningful in the [GCA lane](#/node/ufp-gca).",
+        },
+        {
+            heading: "🛑 Do NOT let a normal facial or dental exam close a dissection story",
+            body: "Unilateral face/head/neck pain with partial Horner syndrome, transient monocular vision loss, TIA/stroke symptoms, or recent neck trauma/manipulation is a carotid/vertebral dissection until CTA head/neck says otherwise. A clean mouth exam does not rule out a vascular catastrophe. Work it through the [neurovascular lane](#/node/ufp-neurovascular).",
+        },
+        {
+            heading: "🛑 Do NOT discharge an eye red flag without visual acuity and an ophthalmology plan",
+            body: "Red painful eye, halos, vision loss, proptosis, or painful/restricted EOM signals AACG, orbital cellulitis, or HZO — all time-sensitive and sight-threatening. Never send these home on assumption. Document acuity and secure ophthalmology in the [eye/orbit lane](#/node/ufp-eye-orbital).",
+        },
+        {
+            heading: "🛑 Do NOT send an airway-risk deep-space infection supine to CT without an airway plan",
+            body: "Trismus, muffled voice, drooling, dysphagia, or floor-of-mouth elevation means Ludwig angina or deep neck infection — laying the patient flat can lose the airway. Prioritize airway before imaging. See the [deep-space infection lane](#/node/ufp-deep-infection).",
+        },
+        {
+            heading: "🛑 Do NOT withhold antivirals in zoster just because it is beyond 72 hours",
+            body: "Ocular involvement, immunocompromise, new lesions, or severe disease still warrant antiviral therapy past the 72-hour window. Pre-eruptive zoster mimics trigeminal neuralgia or dental pain — recheck skin and eye and give return precautions if no rash yet. Details in the [zoster lane](#/node/ufp-zoster).",
+        },
+        {
+            heading: "🛑 Do NOT give antibiotics for uncomplicated pulpitis",
+            body: "Uncomplicated pulpitis or localized apical periodontitis without systemic involvement needs dental source control and analgesia, not empiric antibiotics. Reserve antibiotics for spreading cellulitis, deep-space concern, or systemic illness. Rules in the [dental/odontogenic lane](#/node/ufp-dental-lane).",
+        },
+        {
+            heading: "🛑 Do NOT discharge a first severe facial pain with a vague benign label",
+            body: "Without a confident benign phenotype, a documented negative danger screen, pain control, and specific follow-up, discharge is unsafe — use observation or targeted imaging instead. \"Return if worse\" is not a plan. Meet every criterion in the [discharge lane](#/node/ufp-dispo-discharge).",
+        },
+    ],
+};
+const DEMENTIA_STOP_PAGE = {
+    id: "dementia-stop",
+    title: "Dementia — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT diagnose dementia during an acute or fluctuating change",
+            body: "Acute onset, fluctuation, inattention, or sudden loss of baseline function is **delirium or medical illness until proven otherwise** — dementia is a risk factor, but delirium is the actionable emergency. Check glucose, oxygenation, meds/toxins, retention, and focal deficits before ever labeling this cognitive decline. [Delirium first](#/node/dementia-delirium-first).",
+        },
+        {
+            heading: "🛑 Do NOT anchor on a UTI to explain confusion",
+            body: "Confusion alone is not a UTI diagnosis — IDSA recommends assessment for other causes, not antibiotics, for bacteriuria without urinary symptoms or systemic infection signs. The reflex UA → positive culture → antibiotics loop lets the real cause go untreated. [Infection edge case](#/node/dementia-infection-edge).",
+        },
+        {
+            heading: "🛑 Do NOT give haloperidol or risperidone in suspected Lewy body dementia",
+            body: "Fluctuating cognition, visual hallucinations, REM sleep behavior disorder, or parkinsonism signal **marked neuroleptic sensitivity** — high-potency dopamine blockers can cause severe, even life-threatening reactions. Favor nonpharmacologic de-escalation and the lowest-risk option. [Lewy body / Parkinson pattern](#/node/dementia-lewy-body).",
+        },
+        {
+            heading: "🛑 Do NOT reach for antipsychotics or restraint before screening triggers",
+            body: "Agitation is a symptom, not the diagnosis — pain, retention, constipation, hypoxia, hypoglycemia, infection, withdrawal, or head injury may be driving it, and antipsychotics carry a boxed-warning mortality risk in elderly dementia. Screen medical triggers and de-escalate first, unless immediate danger blocks essential care. [Agitation trigger screen](#/node/dementia-agitation-bridge).",
+        },
+        {
+            heading: "🛑 Do NOT discharge the diagnosis instead of the safety situation",
+            body: "A cognitive label is not a disposition — recurrent falls, unsafe gait, no reliable caregiver, medication mismanagement, poor intake, wandering, or suspected neglect all mandate protected disposition, not a routine discharge. Discharge the actual safety situation, not the chart problem. [Disposition decision](#/node/dementia-disposition).",
+        },
+        {
+            heading: "🛑 Do NOT assume a dementia diagnosis removes capacity",
+            body: "Capacity is **decision-specific**, and a dementia diagnosis alone does not strip it — assess whether the patient can understand, appreciate, reason, and communicate a stable choice for the exact decision at hand. Overriding a capable refusal, or honoring an incapable one, both cause harm. [Capacity and safety](#/node/dementia-capacity-safety).",
+        },
+        {
+            heading: "🛑 Do NOT diagnose dementia from a single ED screen without collateral",
+            body: "An abnormal Mini-Cog or MoCA during delirium, pain, hearing loss, or a language mismatch does not diagnose dementia, and a normal brief screen does not rule out early disease. Collateral history and objective loss of ADL/IADL independence are required. [Collateral and function](#/node/dementia-collateral-function).",
+        },
+        {
+            heading: "🛑 Do NOT miss the time-sensitive mimics before calling it progression",
+            body: "Stroke, ICH/subdural, CNS infection, nonconvulsive seizure, hyponatremia, hypercalcemia, B12/thyroid disease, and rapidly progressive dementia can masquerade as decline — a new gait disorder with urinary symptoms may be treatable NPH. Escalate imaging and neurology for red flags. [Time-sensitive mimics](#/node/dementia-acute-mimics).",
+        },
+    ],
+};
+const DYSTONIC_REACTION_STOP_PAGE = {
+    id: "dystonic-reaction-stop",
+    title: "Acute Dystonic Reaction — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT call stridor or a strained voice \"anxiety\"",
+            body: "Laryngeal dystonia is rare but obstructs the airway, and a terrified, hyperventilating patient invites the wrong label. Do not dismiss it as panic until it improves after anticholinergic and the airway is clearly safe — treat now and set up for RSI. [Airway screen: laryngeal dystonia](#/node/adr-airway).",
+        },
+        {
+            heading: "🛑 Do NOT keep anchoring on dystonia when the anticholinergic fails",
+            body: "Adequate diphenhydramine or benztropine should improve true dystonia in 5-30 min; no response means the diagnosis is wrong. Reset the differential and hunt for seizure, NMS/serotonin syndrome, tetanus, hypocalcemia, CNS infection, or stroke. [No response: reset the differential](#/node/adr-no-response).",
+        },
+        {
+            heading: "🛑 Do NOT give more dopamine blocker for the nausea or agitation",
+            body: "Piling on another antiemetic or antipsychotic to settle the patient feeds the exact drug that caused the reaction and can worsen it. Stop the offending agent instead of redosing it. [First-line ED treatment](#/node/adr-treatment-first-line).",
+        },
+        {
+            heading: "🛑 Do NOT redose an antipsychotic when NMS is on the table",
+            body: "Fever, altered mental status, or generalized lead-pipe rigidity point to NMS, not focal dystonia, and more D2 blockade is dangerous. Stop the dopamine blocker, cool, and escalate. [Dystonia vs NMS vs serotonin syndrome](#/node/adr-nms-ss).",
+        },
+        {
+            heading: "🛑 Do NOT treat true angioedema as buccolingual dystonia",
+            body: "A tongue that feels swollen may be dystonia, but visible progressive lip/tongue/uvula swelling, urticaria, wheeze, or hypotension is anaphylaxis — give epinephrine first. Diphenhydramine does not treat shock or bronchospasm. [Allergy / angioedema mimic](#/node/adr-allergy-mimic).",
+        },
+        {
+            heading: "🛑 Do NOT send them home without an oral anticholinergic course",
+            body: "The culprit dopamine blocker outlasts a single dose of IV/IM diphenhydramine or benztropine, so symptoms recur after the antidote wears off. Continue oral anticholinergic 24-72 h to prevent relapse. [Prevent recurrence](#/node/adr-relapse-prevention).",
+        },
+        {
+            heading: "🛑 Do NOT discharge with any lingering airway symptom",
+            body: "Voice change, dysphagia, or laryngeal involvement — even if improved — carries recurrence and aspiration risk and needs 12-24 h of monitoring. Discharge only after full airway-safe resolution. [Observe / admit](#/node/adr-observe-admit).",
+        },
+        {
+            heading: "🛑 Do NOT rechallenge without documenting the exact drug and phenotype",
+            body: "A vague \"allergy\" note lets the same dopamine blocker get reordered, and prior reaction plus re-exposure is the highest-risk setup. Record drug, dose, route, and phenotype, and avoid close D2-blocking relatives. [Avoid rechallenge](#/node/adr-avoid-rechallenge).",
+        },
+    ],
+};
+const HEPATITIS_STOP_PAGE = {
+    id: "hepatitis-stop",
+    title: "Hepatitis / Acute Liver Failure — Do NOT",
+    subtitle: "Critical pitfalls to avoid",
+    citations: [],
+    sections: [
+        {
+            heading: "🛑 Do NOT start a leisurely LFT workup before screening for acute liver failure",
+            body: "ALF is time-critical and easy to miss when you anchor on the R-factor pattern. **INR >=1.5 + any altered mentation, without known cirrhosis, is ALF until proven otherwise** — check coags, ammonia, glucose, and mental status up front. [Screen ALF first](#/node/hep-alf-gate).",
+        },
+        {
+            heading: "🛑 Do NOT wait for King's College Criteria before transferring to a transplant center",
+            body: "The criteria are highly specific (~90%) but only modestly sensitive, so a patient who does not yet meet them can still be dying. **Transfer early — do not wait for criteria to be fully met.** [Transfer thresholds and timing](#/node/hep-alf-kings).",
+        },
+        {
+            heading: "🛑 Do NOT reflexively correct the INR in acute liver failure",
+            body: "The INR is a key prognostic trend and a King's College input; blindly reversing it with FFP/vitamin K masks the trajectory clinicians and the transplant team need. **Correct coagulopathy only for active bleeding or a procedure.** [ALF supportive care](#/node/hep-alf-management).",
+        },
+        {
+            heading: "🛑 Do NOT withhold N-acetylcysteine or miss an acetaminophen ingestion",
+            body: "APAP toxicity can hide in a med/supplement list and drive massive transaminitis; **Hy's law** (hepatocellular injury + bilirubin >2x ULN, no other cause) flags ~10% mortality. Stop the offending agent and give NAC — it also helps early non-APAP ALF. [DILI and NAC](#/node/hep-dili).",
+        },
+        {
+            heading: "🛑 Do NOT give corticosteroids for severe alcohol-associated hepatitis before excluding sepsis and GI bleed",
+            body: "Steroids in an infected or bleeding patient worsen outcomes. Reserve them for Maddrey >=32 **only after sepsis and GI bleed are excluded**. [Alcohol-hepatitis management](#/node/hep-management).",
+        },
+        {
+            heading: "🛑 Do NOT launch a full liver workup for an isolated high ALP without checking GGT",
+            body: "A high ALP with a **normal GGT** is not hepatobiliary — it points to bone, growth, or placenta, and a liver workup is a wasted, misdirecting chase. Confirm the source before treating it as liver disease. [Isolated ALP, normal GGT](#/node/hep-ggt-nonhepatic).",
+        },
+        {
+            heading: "🛑 Do NOT discharge obstructive cholestasis without imaging the ducts",
+            body: "A cholestatic pattern with high GGT can be stones, stricture, or malignancy — and **ascending cholangitis (fever + jaundice + RUQ pain +/- shock/AMS) is an emergency**. Get an RUQ ultrasound first, escalate to MRCP/ERCP. [Image the ducts](#/node/hep-extrahepatic).",
+        },
+        {
+            heading: "🛑 Do NOT discharge rapidly rising LFTs or any ALF feature",
+            body: "Mild stable transaminitis can go home with a timed recheck, but **ALF features, severe symptoms, obstruction, or uncertain rapidly climbing LFTs require admission.** Premature discharge here misses a decompensating liver. [Disposition criteria](#/node/hep-disposition).",
+        },
+    ],
+};
 export const INFO_PAGES = {
+    // Deep gate-review Stop pages (2026-07-18)
+    "painless-scrotal-swelling-hub-stop": PAINLESS_SCROTAL_SWELLING_HUB_STOP_PAGE,
+    "hemoptysis-hub-stop": HEMOPTYSIS_HUB_STOP_PAGE,
+    "unilateral-leg-swelling-hub-stop": UNILATERAL_LEG_SWELLING_HUB_STOP_PAGE,
+    "hip-pain-hub-stop": HIP_PAIN_HUB_STOP_PAGE,
+    "behavior-change-hub-stop": BEHAVIOR_CHANGE_HUB_STOP_PAGE,
+    "hyperemesis-stop": HYPEREMESIS_STOP_PAGE,
+    "dysuria-hub-stop": DYSURIA_HUB_STOP_PAGE,
+    "otalgia-hub-stop": OTALGIA_HUB_STOP_PAGE,
+    "anorectal-bleeding-hub-stop": ANORECTAL_BLEEDING_HUB_STOP_PAGE,
+    "unilateral-facial-pain-hub-stop": UNILATERAL_FACIAL_PAIN_HUB_STOP_PAGE,
+    "dementia-stop": DEMENTIA_STOP_PAGE,
+    "dystonic-reaction-stop": DYSTONIC_REACTION_STOP_PAGE,
+    "hepatitis-stop": HEPATITIS_STOP_PAGE,
     // Recurrent & Cyclical Vomiting (hyperemesis consult, added 2026-07-03)
     'hyperemesis-summary': HYPEREMESIS_SUMMARY_PAGE,
     'hyperemesis-mimics': HYPEREMESIS_MIMICS_PAGE,
