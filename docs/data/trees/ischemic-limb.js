@@ -3,7 +3,7 @@ export const ISCHEMIC_LIMB_CRITICAL_ACTIONS = [
     { text: 'Start IV unfractionated heparin immediately unless contraindicated — do NOT wait for imaging', nodeId: 'il-heparin' },
     { text: 'Rutherford category drives urgency: IIb = emergent revascularization, III = primary amputation', nodeId: 'il-rutherford' },
     { text: 'Emergent vascular surgery / endovascular consult for any Rutherford IIa/IIb/III; transfer if no vascular service', nodeId: 'il-dispo' },
-    { text: 'After revascularization watch for reperfusion syndrome: hyperkalemia, rhabdo/AKI, and compartment syndrome (fasciotomy if >30 mmHg)', nodeId: 'il-reperfusion' },
+    { text: 'After revascularization watch for reperfusion syndrome: hyperkalemia, rhabdo/AKI, and compartment syndrome — a CLINICAL diagnosis; if pressures are measured, fasciotomy for delta pressure (diastolic BP minus compartment pressure) <30 mmHg, not an absolute >30', nodeId: 'il-reperfusion' },
     { text: 'Do NOT reperfuse a nonviable (Rutherford III) limb — lethal reperfusion; primary amputation pathway', nodeId: 'il-cat3' },
 ];
 export const ISCHEMIC_LIMB_NODES = [

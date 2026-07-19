@@ -418,6 +418,7 @@ export const HIP_PAIN_HUB_CRITICAL_ACTIONS = [
   { text: 'Septic hip \u2192 image-guided arthrocentesis (gold standard) + empiric IV abx + EMERGENT ortho washout. Do not delay abx in a septic patient.', nodeId: 'hip-septic-entry' },
   { text: 'Adolescent with hip OR knee/thigh pain + out-toeing \u2192 SCFE: strict non-weight-bearing NOW + urgent ortho. Up to 25% present as knee pain.', nodeId: 'hip-scfe-entry' },
   { text: 'Elderly + can\u2019t-weight-bear + normal X-ray \u2192 occult hip fracture until MRI/CT excludes it. A normal film does NOT rule it out.', nodeId: 'hip-occult-entry' },
+  { text: 'AVN of femoral head \u2014 groin pain + steroids / alcohol / sickle cell / SLE / trauma \u2192 work it up. Plain films are often normal early; MRI is most sensitive. A normal X-ray does NOT exclude it.', nodeId: 'hip-avn-entry' },
 ];
 
 export const HIP_PAIN_HUB_CITATIONS: Citation[] = [

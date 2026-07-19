@@ -6,6 +6,8 @@ export const DEMENTIA_CRITICAL_ACTIONS = [
     { text: 'Do not treat asymptomatic bacteriuria as the cause of confusion without urinary symptoms, systemic infection signs, or a compelling source gap.', nodeId: 'dementia-infection-edge' },
     { text: 'Agitation in dementia requires a medical trigger screen and least-restrictive safety plan before antipsychotics or restraint, unless immediate danger prevents essential care.', nodeId: 'dementia-agitation-bridge' },
     { text: 'Unsafe discharge, wandering, inability to manage meds or ADLs, caregiver failure, suspected neglect, or lack of reliable supervision needs protected disposition planning.', nodeId: 'dementia-disposition' },
+    { text: 'Screen for Lewy body or Parkinson disease dementia before giving any antipsychotic. Fluctuating cognition, recurrent visual hallucinations, REM sleep behavior disorder, or parkinsonism signals neuroleptic sensitivity; avoid high-potency dopamine blockers such as haloperidol and risperidone and de-escalate nonpharmacologically first.', nodeId: 'dementia-lewy-body' },
+    { text: 'Obtain urgent ED neuroimaging for red flags rather than deferring to outpatient MRI: acute neurologic deficit, severe headache, seizure, head trauma or fall, anticoagulation, rapid decline, cancer or immunosuppression, fever or meningismus, papilledema, new gait or urinary symptoms, or a young, atypical, focal, or rapidly progressive course.', nodeId: 'dementia-imaging' },
 ];
 export const DEMENTIA_NODES = [
     {

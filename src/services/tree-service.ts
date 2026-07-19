@@ -584,7 +584,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'hepatitis': async () => {
       const m = await import('../data/trees/hepatitis.js');
-      return { nodes: m.HEPATITIS_NODES, entryNodeId: 'hepatitis-start', categoryId: 'gastroenterology', moduleLabels: m.HEPATITIS_MODULE_LABELS, citations: m.HEPATITIS_CITATIONS };
+      return { nodes: m.HEPATITIS_NODES, entryNodeId: 'hepatitis-start', categoryId: 'gastroenterology', moduleLabels: m.HEPATITIS_MODULE_LABELS, citations: m.HEPATITIS_CITATIONS, criticalActions: m.HEPATITIS_CRITICAL_ACTIONS };
     },
     'thyroid': async () => {
       const m = await import('../data/trees/thyroid.js');

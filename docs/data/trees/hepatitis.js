@@ -308,6 +308,13 @@ export const HEPATITIS_NODES = [
         safetyLevel: 'critical',
     },
 ];
+export const HEPATITIS_CRITICAL_ACTIONS = [
+    { text: 'Screen for acute liver failure first — INR ≥1.5 + any encephalopathy without known cirrhosis is time-critical.', nodeId: 'hep-alf-gate' },
+    { text: 'Acetaminophen/drug injury: stop the offending agent and give N-acetylcysteine for APAP toxicity.', nodeId: 'hep-dili' },
+    { text: 'In ALF give NAC (APAP + early non-APAP), watch for cerebral edema (grade III/IV HE), and correct coagulopathy only for bleeding/procedures.', nodeId: 'hep-alf-management' },
+    { text: 'Apply King’s College Criteria and transfer early to a transplant center — don’t wait for criteria to be fully met.', nodeId: 'hep-alf-kings' },
+    { text: 'Admit ALF features, severe symptomatic hepatitis, and cholangitis/obstruction needing intervention.', nodeId: 'hep-disposition' },
+];
 export const HEPATITIS_MODULE_LABELS = [
     'Pattern Classification',
     'Hepatocellular',
