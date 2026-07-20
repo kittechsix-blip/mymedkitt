@@ -474,12 +474,12 @@ export const CRITICAL_CARE_DRIPS_NODES = [
         type: 'info',
         module: 7,
         title: 'DKA Insulin Protocol',
-        body: '**DIABETIC KETOACIDOSIS INSULIN DRIP**\n\n**Starting:**\n- Bolus: 0.1 U/kg IV (optional, can omit)\n- **Infusion: 0.1 U/kg/hr** (range 0.07-0.14)\n- Max for nursing: 15 U/hr (notify provider if higher needed)\n\n**Titration Goal:**\n- Glucose drop: 50-70 mg/dL/hr\n- Too fast → reduce rate\n- Not dropping → increase q1-2h\n\n**WHEN GLUCOSE REACHES 250:**\n- **DO NOT STOP INSULIN** (need to clear ketoacidosis)\n- Reduce rate to 0.05 U/kg/hr\n- Add D5-1/2 NS at 150 mL/hr\n\n**DKA Resolution Criteria:**\n- pH >7.3\n- Anion gap ≤12\n- Bicarb ≥18 mEq/L OR BHB <0.6 mmol/L\n\n**Transition to SQ:**\n- Estimate: (current U/hr) x 24 = daily SQ dose\n- Give first SQ dose, continue drip 1-2h overlap\n- Stop drip 2h after SQ given\n\n**CRITICAL - POTASSIUM:**\n- **Cannot give insulin if K <2.5** (fatal arrhythmias)\n- Replete K aggressively before/during insulin',
+        body: '**DIABETIC KETOACIDOSIS INSULIN DRIP**\n\n**Starting:**\n- Bolus: 0.1 U/kg IV (optional, can omit)\n- **Infusion: 0.1 U/kg/hr** (range 0.07-0.14)\n- Max for nursing: 15 U/hr (notify provider if higher needed)\n\n**Titration Goal:**\n- Glucose drop: 50-70 mg/dL/hr\n- Too fast → reduce rate\n- Not dropping → increase q1-2h\n\n**WHEN GLUCOSE REACHES 250:**\n- **DO NOT STOP INSULIN** (need to clear ketoacidosis)\n- Reduce rate to 0.05 U/kg/hr\n- Add D5-1/2 NS at 150 mL/hr\n\n**DKA Resolution Criteria:**\n- pH >7.3\n- Anion gap ≤12\n- Bicarb ≥18 mEq/L OR BHB <0.6 mmol/L\n\n**Transition to SQ:**\n- Estimate: (current U/hr) x 24 = daily SQ dose\n- Give first SQ dose, continue drip 1-2h overlap\n- Stop drip 2h after SQ given\n\n**CRITICAL - POTASSIUM (2024 ADA consensus):**\n- **HOLD insulin if K <3.5 mmol/L** — give KCl 10 mmol/hr first, restart insulin once K >3.5 (insulin drives K intracellularly → fatal hypokalemia/arrhythmia)\n- Start K replacement once serum K <5.0 mmol/L; target 4-5 mmol/L\n- Recheck K at baseline, 2h after insulin, then q4h\n- Total-body K deficit 3-6 mmol/kg even when serum K looks normal/high',
         citation: [11],
         options: [
             { label: 'Back to Endocrine Overview', next: 'ccd-endocrine-overview' },
         ],
-        summary: 'DKA: insulin 0.1 U/kg/hr; at glucose 250 REDUCE rate (don\'t stop) + add dextrose; K must be >2.5',
+        summary: 'DKA: insulin 0.1 U/kg/hr; at glucose 250 REDUCE rate (don\'t stop) + add dextrose; HOLD insulin if K <3.5 (2024 ADA), KCl first',
     },
     {
         id: 'ccd-adrenal-crisis',
@@ -617,7 +617,7 @@ export const CRITICAL_CARE_DRIPS_CITATIONS = [
     { num: 8, text: 'EMCrit Project. Analgesia and Sedation for Critically Ill. emcrit.org/ibcc/pain' },
     { num: 9, text: 'Hughes CG, et al. Dexmedetomidine vs Propofol in Sepsis. NEJM 2021;385:2302-2311.' },
     { num: 10, text: 'Perbet S, et al. Ketamine in the ICU: Hemodynamic Effects. Anaesthesia 2011;66:368-377.' },
-    { num: 11, text: 'Kitabchi AE, et al. Hyperglycemic Crises in Adult Patients. Diabetes Care 2009;32:1335-1343.' },
+    { num: 11, text: 'Umpierrez GE, Davis GM, ElSayed NA, et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report. Diabetes Care. 2024;47(8):1257-1275. (Holds insulin if K <3.5 mmol/L, KCl 10 mmol/hr first; start K replacement when K <5.0, target 4-5.)' },
     { num: 12, text: 'Bornstein SR, et al. Adrenal Crisis Management. JCEM 2016;101:364-389.' },
     { num: 13, text: 'Link MS, et al. 2018 AHA Focused Update on ACLS. Circulation 2018;138:e731-e739.' },
     { num: 14, text: 'Kudenchuk PJ, et al. Amiodarone vs Lidocaine in Cardiac Arrest. NEJM 2016;374:1711-1722.' },

@@ -1,6 +1,6 @@
 // MedKitt — PEA Arrest
 // PEA Recognition + POCUS → No Cardiac Activity → QRS Width Analysis → Treatable Causes → CPR & Medications → ROSC / TOR
-// EMCrit IBCC, AHA 2023 Focused Update, RUSH Exam. 6 modules, ~22 nodes.
+// EMCrit IBCC, AHA 2025 Part 9 ALS, PARAMEDIC-2 (NEJM 2018), RUSH Exam. 6 modules, ~22 nodes.
 export const PEA_ARREST_CRITICAL_ACTIONS = [
     { text: 'POCUS at first pulse check — cardiac activity present?', nodeId: 'pea-pocus' },
     { text: 'Wide complex PEA → NaHCO₃ 1-2 mEq/kg IV push immediately', nodeId: 'pea-wide' },
@@ -8,7 +8,7 @@ export const PEA_ARREST_CRITICAL_ACTIONS = [
     { text: 'Pericardial effusion + RV collapse → emergent pericardiocentesis', nodeId: 'pea-tamponade' },
     { text: 'RV dilation + McConnell sign → tPA 50mg IV push', nodeId: 'pea-massive-pe' },
     { text: 'Collapsed IVC → 1-2L rapid IV bolus', nodeId: 'pea-hypovolemia' },
-    { text: 'True PEA (PRES): Epi 1mg IV/IO q3-5 min after 1st CPR cycle, limit to ≤3 doses (PARAMEDIC-2). In pseudo-PEA (PREM) do NOT give 1mg epi - use titratable vasopressors (norepi, push-dose epi 5-20 mcg, vasopressin)', nodeId: 'pea-epi' },
+    { text: 'True PEA (PRES): Epi 1mg IV/IO q3-5 min, give EARLY (PEA is non-shockable → epi ASAP, AHA 2025 COR 2a). No formal dose cap, but higher cumulative doses linked to worse neuro outcomes — do not prolong futile resus. In pseudo-PEA (PREM) do NOT give 1mg epi - use titratable vasopressors (norepi, push-dose epi 5-20 mcg, vasopressin)', nodeId: 'pea-epi' },
     { text: 'No cardiac activity on POCUS after adequate resus = futility marker', nodeId: 'pea-no-activity' },
 ];
 export const PEA_ARREST_NODES = [
@@ -342,10 +342,10 @@ export const PEA_ARREST_NODES = [
         type: 'info',
         module: 5,
         title: 'Epinephrine in PEA Arrest',
-        body: '**[Epinephrine](#/drug/epinephrine/cardiac arrest) 1 mg IV/IO:**\n\n• Give **as soon as possible** after 1st CPR cycle in true PEA (PRES)\n• Repeat every **3-5 minutes**\n• **Consider limiting to ≤3 total doses** — higher cumulative doses associated with worse neurological outcomes (PARAMEDIC-2)\n\n**Administration:**\n• IV/IO push followed by 20 mL flush\n• Elevate extremity briefly after push\n\n**⚠️ Epinephrine harm in PEA:**\n• Beta-adrenergic effects (tachycardia, ↑ O₂ demand) may worsen ischemia\n• Higher total epi doses associated with worse neurologically intact survival\n• In **pseudo-PEA (PREM)** — do NOT give 1mg epi. Use titratable vasopressors instead (norepi infusion, push-dose epi 5-20 mcg, or vasopressin)\n\n**If EMS has already given ≥3 doses:** consider withholding further epi in the ED and focusing on cause-specific treatment.',
-        citation: [5, 7, 9],
+        body: '**[Epinephrine](#/drug/epinephrine/cardiac arrest) 1 mg IV/IO:**\n\n• Give **as soon as feasible** — PEA is non-shockable, so epi early (AHA 2025 Part 9, COR 2a)\n• Repeat every **3-5 minutes** (operationally, every second CPR cycle after the first dose)\n• **No formal cumulative-dose ceiling** in AHA 2025 — but observational data associate higher cumulative doses (esp. in PEA/asystole) with worse neurologically-intact survival. Give early, avoid prolonging futile resuscitation.\n\n**Administration:**\n• IV/IO push followed by 20 mL flush\n• Elevate extremity briefly after push\n\n**⚠️ Epinephrine harm in PEA:**\n• Beta-adrenergic effects (tachycardia, ↑ O₂ demand) may worsen ischemia\n• Higher total epi doses associated with worse neurologically intact survival (observational; PARAMEDIC-2 showed epi ↑ ROSC & 30-day survival but ↑ severe neuro disability — it did NOT set a dose cap)\n• Do NOT use high-dose epi or substitute vasopressin for epi (AHA 2025, COR 3: No Benefit)\n• In **pseudo-PEA (PREM)** — do NOT give 1mg epi. Use titratable vasopressors instead (norepi infusion, push-dose epi 5-20 mcg, or vasopressin)',
+        citation: [1, 5, 7, 9, 16],
         next: 'pea-rosc-check',
-        summary: 'Epi 1mg IV/IO q3-5min in true PEA; limit to 3 doses (PARAMEDIC-2); in pseudo-PEA use titratable vasopressors instead',
+        summary: 'Epi 1mg IV/IO q3-5min in true PEA, give early (non-shockable); no formal dose cap but higher cumulative dose = worse neuro; pseudo-PEA use titratable vasopressors',
         safetyLevel: 'warning',
     },
     // =====================================================================
@@ -442,4 +442,5 @@ export const PEA_ARREST_CITATIONS = [
     { num: 13, text: 'Paradis NA et al. Aortic pressure during human cardiac arrest: identification of pseudo-electromechanical dissociation. Chest. 1992;101:123-128.' },
     { num: 14, text: 'Weingart S. Pulseless Electrical Activity is Stupid. EMCrit. https://emcrit.org/emcrit/pea-is-stupid/' },
     { num: 15, text: 'Bergman R. Wide vs Narrow QRS Complex Approach to PEA Arrest. Resuscitation. 2016;109:e13.' },
+    { num: 16, text: 'Perkins GD, Ji C, Deakin CD, et al. A Randomized Trial of Epinephrine in Out-of-Hospital Cardiac Arrest (PARAMEDIC-2). N Engl J Med. 2018;379(8):711-721. Epi improved 30-day survival (3.2% vs 2.4%) but increased severe neurologic disability; packs contained 10 doses — trial did NOT set a cumulative dose cap.' },
 ];

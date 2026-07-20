@@ -1,13 +1,13 @@
 // MedKitt — Amniotic Fluid Embolism (AFE)
 // Peripartum cardiovascular collapse + hypoxemia + DIC. Clinical diagnosis of exclusion.
 // 6 modules: Recognition → Resuscitation → Perimortem C/S → Pharmacologic Rx → Hemodynamic + DIC → Post-ROSC
-// 17 nodes. Source: SMFM Clinical Guideline #9 (2016), SMFM Checklist (2021), Rezai A-O-K (2017), AHA Pregnancy Arrest (2015), Pacheco (2020)
+// 17 nodes. Source: SMFM Clinical Guideline #9 (2016), SMFM Checklist (2021), AHA Pregnancy Arrest (2015) + AHA 2025 hysterotomy ≥20wk, Pacheco (2020), Pacheco A-O-K caution (Obstet Gynecol 2025)
 export const AFE_CRITICAL_ACTIONS = [
     { text: 'Call CODE: OB, anesthesia, critical care, NICU, blood bank — activate MTP now', nodeId: 'afe-call' },
     { text: 'Manual left uterine displacement if fundus ≥ umbilicus', nodeId: 'afe-lud' },
     { text: 'High-quality CPR with pregnancy-modified ACLS — standard hand position, standard joules', nodeId: 'afe-acls' },
-    { text: 'Perimortem C/S at 4 minutes of arrest if ≥23 wk (AHA/SMFM)', nodeId: 'afe-pmcd' },
-    { text: 'A-O-K: Atropine 0.2 mg + Ondansetron 8 mg + Ketorolac 15 mg IV simultaneously', nodeId: 'afe-pharm-branch' },
+    { text: 'Resuscitative hysterotomy at 4 min of arrest if ≥20 wk / fundus ≥ umbilicus (AHA 2025) — 4-min is a prompt, not a rigid deadline', nodeId: 'afe-pmcd' },
+    { text: 'A-O-K NOT recommended (Pacheco 2025, harm risk) — mainstay is supportive care', nodeId: 'afe-pharm-branch' },
     { text: 'Activate MTP 1:1:1 — keep fibrinogen >150–200 mg/dL', nodeId: 'afe-mtp' },
     { text: 'TXA 1 g IV over 10 min — repeat once in 30 min if bleeding (<3 h from onset)', nodeId: 'afe-txa' },
     { text: 'Consider VA-ECMO early — survival 60–80% vs ~30% without', nodeId: 'afe-ecmo' },
@@ -107,14 +107,14 @@ export const AFE_NODES = [
         type: 'question',
         module: 3,
         title: 'Perimortem C-Section Decision',
-        body: '**Is the patient in cardiac arrest AND at ≥23 weeks gestation (or fundus ≥ umbilicus)?**\n\n**The 4-Minute Rule (AHA/SMFM):** if ROSC not achieved by 4 minutes of arrest, **start resuscitative hysterotomy at minute 4 — deliver by minute 5.** [7][8][9]\n\n**Why it works:**\n• Relieves aortocaval compression → improves maternal venous return and CPR effectiveness\n• Cardiac output in pregnancy CPR is only ~30% of non-pregnant; emptying the uterus restores it\n• **The primary goal is maternal survival** — not fetal rescue\n\n**Where:** at bedside. Do NOT transport to OR.\n**How:** midline vertical skin + vertical uterine incision; no anesthesia (patient in arrest); continue CPR throughout.\n\n→ Full procedural walkthrough: **[Resuscitative Hysterotomy consult](#/tree/resuscitative-hysterotomy)**',
+        body: '**Is the patient in cardiac arrest AND at ≥20 weeks gestation (or fundus ≥ umbilicus)?**\n\n**The 4-Minute Rule (AHA 2025):** if ROSC not achieved by 4 minutes of arrest, **start resuscitative hysterotomy at minute 4 — deliver by minute 5.** The 4-minute mark is a *prompt to act*, not a rigid deadline — hysterotomy still benefits maternal resuscitation beyond that window, and earlier delivery-from-arrest = better outcomes. Prepare at the moment of arrest. [7][8][9]\n\n**Why it works:**\n• Relieves aortocaval compression → improves maternal venous return and CPR effectiveness\n• Cardiac output in pregnancy CPR is only ~30% of non-pregnant; emptying the uterus restores it\n• **The primary goal is maternal survival** — not fetal rescue\n\n**Where:** at bedside. Do NOT transport to OR.\n**How:** midline vertical skin + vertical uterine incision; no anesthesia (patient in arrest); continue CPR throughout.\n\n→ Full procedural walkthrough: **[Resuscitative Hysterotomy consult](#/tree/resuscitative-hysterotomy)**',
         citation: [7, 8, 9],
         options: [
-            { label: 'Arrest + ≥23 wk — perform hysterotomy', next: 'afe-pmcd', urgency: 'critical' },
+            { label: 'Arrest + ≥20 wk — perform hysterotomy', next: 'afe-pmcd', urgency: 'critical' },
             { label: 'Shock without arrest — continue resuscitation', description: 'Defer hysterotomy unless deterioration', next: 'afe-pharm-branch' },
             { label: '<20 wk or no fundus palpable', description: 'Hysterotomy not indicated — standard adult ACLS', next: 'afe-pharm-branch' },
         ],
-        summary: '4-min rule: arrest >4 min + >=23 wk = start hysterotomy, deliver by 5 min — at bedside',
+        summary: '4-min rule (AHA 2025): arrest + ≥20 wk = start hysterotomy, deliver by 5 min — at bedside; 4-min is a prompt, benefit extends beyond',
         safetyLevel: 'critical',
     },
     {
@@ -136,10 +136,10 @@ export const AFE_NODES = [
         type: 'info',
         module: 4,
         title: 'Pharmacologic Adjuncts — A-O-K',
-        body: '**A-O-K protocol** (Rezai 2017) — blocks three pulmonary vasoconstriction/platelet pathways simultaneously. Case-report evidence; not standard of care but reasonable adjunct to ACLS. [4]\n\n**Give all three together, IV push within 1 minute of recognition:**\n\n• **[Atropine](#/drug/atropine/amniotic fluid embolism) 0.2 mg IV** — vagolytic, reverses pulmonary reflex bradycardia/hypotension\n• **[Ondansetron](#/drug/ondansetron/amniotic fluid embolism) 8 mg IV** — 5-HT3 block → reduces pulmonary vasoconstriction\n• **[Ketorolac](#/drug/ketorolac/amniotic fluid embolism) 15 mg IV** — COX inhibition → blocks thromboxane, preserves platelets\n\n**Full protocol:** [A-O-K + Anaphylactoid Therapy Guide](#/info/afe-aok)\n\n**Alternative: "50-50-500"** (older anaphylactoid hypothesis, still reasonable):\n• [Diphenhydramine](#/drug/diphenhydramine/amniotic fluid embolism) 50 mg IV\n• [Famotidine](#/drug/famotidine/amniotic fluid embolism) 50 mg IV (or 20 mg — hospital formulary)\n• [Hydrocortisone](#/drug/hydrocortisone/amniotic fluid embolism) 500 mg IV\n\n**These are adjuncts — do not substitute for ACLS, MTP, pressors, or hysterotomy.**',
-        citation: [4],
+        body: '**A-O-K protocol** (Rezai 2017) — proposed to block three pulmonary vasoconstriction/platelet pathways simultaneously.\n\n**⚠️ NOT recommended as of 2025.** Pacheco et al. (Obstet Gynecol 2025;147:780-784) reviewed the evidence — case reports only — and **cautions AGAINST A-O-K** for suspected AFE, citing potential harms: worsening coagulopathy/bleeding (ketorolac antiplatelet effect in a DIC-prone patient), kidney injury, and cardiac complications. AWHONN 2025 concurs: no proposed pharmacologic therapy is evidence-supported.\n\n**Mainstay remains supportive:** high-quality CPR, oxygenation, BP support, RV/heart-failure management, and coagulopathy correction.\n\nIf A-O-K is used at all (individual clinician judgment in a refractory case), the originally described doses are **Atropine 1 mg + Ondansetron 8 mg + Ketorolac 30 mg IV** — do NOT let it delay or substitute for ACLS, MTP, pressors, or hysterotomy. [4][13]\n\n**Alternative: "50-50-500"** (older anaphylactoid hypothesis, equally low evidence):\n• [Diphenhydramine](#/drug/diphenhydramine/amniotic fluid embolism) 50 mg IV\n• [Famotidine](#/drug/famotidine/amniotic fluid embolism) 50 mg IV (or 20 mg — hospital formulary)\n• [Hydrocortisone](#/drug/hydrocortisone/amniotic fluid embolism) 500 mg IV\n\n**These are adjuncts — do not substitute for ACLS, MTP, pressors, or hysterotomy.**',
+        citation: [4, 13],
         next: 'afe-hemo',
-        summary: 'A-O-K: Atropine 0.2mg + Ondansetron 8mg + Ketorolac 15mg IV — give simultaneously within 1 min',
+        summary: 'A-O-K NOT recommended (Pacheco 2025, case-reports only, harm risk) — mainstay is supportive: CPR, O2, BP, RV support, coagulopathy correction',
     },
     // =====================================================================
     // MODULE 5: HEMODYNAMIC SUPPORT + DIC / MTP
@@ -241,7 +241,7 @@ export const AFE_MODULE_LABELS = [
     'Post-ROSC',
 ];
 // -------------------------------------------------------------------
-// Citations (12 references)
+// Citations (13 references)
 // -------------------------------------------------------------------
 export const AFE_CITATIONS = [
     { num: 1, text: 'Pacheco LD, Saade G, Hankins GDV, Clark SL. SMFM Clinical Guideline #9: Amniotic fluid embolism — diagnosis and management. Am J Obstet Gynecol. 2016;215(2):B16-24. PMID: 26987420. https://pubmed.ncbi.nlm.nih.gov/26987420/' },
@@ -256,4 +256,5 @@ export const AFE_CITATIONS = [
     { num: 10, text: 'WOMAN Trial Collaborators. Effect of early tranexamic acid administration on mortality, hysterectomy, and other morbidities in women with post-partum haemorrhage (WOMAN): an international, randomised, double-blind, placebo-controlled trial. Lancet. 2017;389(10084):2105-16. PMID: 28456509.' },
     { num: 11, text: 'Leighton BL, Wall MH, Lockhart EM, Phillips LE, Zatta AJ. Use of recombinant factor VIIa in patients with amniotic fluid embolism: a systematic review of case reports. Anesthesiology. 2011;115(6):1201-8. PMID: 22037642.' },
     { num: 12, text: 'Andonotopo W, Bachnas MA, et al. Amniotic fluid embolism: comprehensive review of diagnosis and management. J Perinat Med. 2025. PMID: 40842297. https://pubmed.ncbi.nlm.nih.gov/40842297/' },
+    { num: 13, text: 'Pacheco LD, Clark SM, Bauer ME, Clark SL. Use of Atropine, Ondansetron, and Ketorolac in Suspected Amniotic Fluid Embolism. Obstet Gynecol. 2025;147(6):780-784. Cautions AGAINST A-O-K (case-report evidence only; risk of worsening coagulopathy, kidney injury, cardiac complications). DOI: 10.1097/AOG.0000000000006095.' },
 ];
