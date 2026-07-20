@@ -330,6 +330,18 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/abdominal-pain-hub.js');
       return { nodes: m.ABDOMINAL_PAIN_HUB_NODES, entryNodeId: 'ap-start', categoryId: 'emergency-medicine', moduleLabels: m.ABDOMINAL_PAIN_HUB_MODULE_LABELS, citations: m.ABDOMINAL_PAIN_HUB_CITATIONS, criticalActions: m.ABDOMINAL_PAIN_HUB_CRITICAL_ACTIONS, type: 'hub' };
     },
+    'acute-dyspepsia-epigastric-hub': async () => {
+      const m = await import('../data/trees/acute-dyspepsia-epigastric-hub.js');
+      return { nodes: m.ACUTE_DYSPEPSIA_EPIGASTRIC_HUB_NODES, entryNodeId: 'dysp-start', categoryId: 'emergency-medicine', moduleLabels: m.ACUTE_DYSPEPSIA_EPIGASTRIC_HUB_MODULE_LABELS, citations: m.ACUTE_DYSPEPSIA_EPIGASTRIC_HUB_CITATIONS, criticalActions: m.ACUTE_DYSPEPSIA_EPIGASTRIC_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'lymphadenopathy-hub': async () => {
+      const m = await import('../data/trees/lymphadenopathy-hub.js');
+      return { nodes: m.LYMPHADENOPATHY_HUB_NODES, entryNodeId: 'lad-start', categoryId: 'emergency-medicine', moduleLabels: m.LYMPHADENOPATHY_HUB_MODULE_LABELS, citations: m.LYMPHADENOPATHY_HUB_CITATIONS, criticalActions: m.LYMPHADENOPATHY_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
+    'nonspecific-unwell-elderly-hub': async () => {
+      const m = await import('../data/trees/nonspecific-unwell-elderly-hub.js');
+      return { nodes: m.NONSPECIFIC_UNWELL_ELDERLY_HUB_NODES, entryNodeId: 'unwell-start', categoryId: 'emergency-medicine', moduleLabels: m.NONSPECIFIC_UNWELL_ELDERLY_HUB_MODULE_LABELS, citations: m.NONSPECIFIC_UNWELL_ELDERLY_HUB_CITATIONS, criticalActions: m.NONSPECIFIC_UNWELL_ELDERLY_HUB_CRITICAL_ACTIONS, type: 'hub' };
+    },
     'anorectal-bleeding-hub': async () => {
       const m = await import('../data/trees/anorectal-bleeding-hub.js');
       return { nodes: m.ANORECTAL_BLEEDING_HUB_NODES, entryNodeId: 'arb-start', categoryId: 'emergency-medicine', moduleLabels: m.ANORECTAL_BLEEDING_HUB_MODULE_LABELS, citations: m.ANORECTAL_BLEEDING_HUB_CITATIONS, criticalActions: m.ANORECTAL_BLEEDING_HUB_CRITICAL_ACTIONS, type: 'hub' };
