@@ -33,6 +33,7 @@ export const TREE_REGISTRY = {
   'unilateral-facial-pain-hub': { prefix: 'UNILATERAL_FACIAL_PAIN_HUB', entryNodeId: 'ufp-start', categoryId: 'emergency-medicine' },
   'chest-pain-hub': { prefix: 'CHEST_PAIN_HUB', entryNodeId: 'cp-start', categoryId: 'emergency-medicine' },
   'dyspnea-hub': { prefix: 'DYSPNEA_HUB', entryNodeId: 'dysp-start', categoryId: 'emergency-medicine' },
+  'acute-cyanosis-hypoxemia-hub': { prefix: 'ACUTE_CYANOSIS_HYPOXEMIA_HUB', entryNodeId: 'cyanosis-start', categoryId: 'emergency-medicine' },
   'altered-mental-status-hub': { prefix: 'AMS_HUB', entryNodeId: 'ams-start', categoryId: 'emergency-medicine' },
   'generalized-weakness-hub': { prefix: 'GENERALIZED_WEAKNESS_HUB', entryNodeId: 'gw-start', categoryId: 'emergency-medicine' },
   'dizziness-hub': { prefix: 'DIZZINESS_HUB', entryNodeId: 'diz-start', categoryId: 'emergency-medicine' },

@@ -671,6 +671,18 @@ const TOOLBAR_CONFIGS = {
         { id: 'dysp-rescue-btn', label: 'Rescue', icon: '💉', action: 'jump', target: 'dysp-rescue' },
         { id: 'dysp-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'dysp-imaging' },
     ],
+    'acute-cyanosis-hypoxemia-hub': [
+        { id: 'cyanosis-wells-pe', label: 'Wells PE', icon: '🧮', action: 'calculator', target: 'wells-pe', pinned: true },
+        { id: 'cyanosis-geneva', label: 'Geneva', icon: '🧮', action: 'calculator', target: 'revised-geneva' },
+        { id: 'cyanosis-pesi', label: 'PESI', icon: '📊', action: 'calculator', target: 'pesi' },
+        { id: 'cyanosis-curb65', label: 'CURB-65', icon: '🫁', action: 'calculator', target: 'curb-65' },
+        { id: 'cyanosis-psi', label: 'PSI/PORT', icon: '🫁', action: 'calculator', target: 'psi-port' },
+        { id: 'cyanosis-qsofa', label: 'qSOFA', icon: '⚠️', action: 'calculator', target: 'qsofa' },
+        { id: 'cyanosis-triage-btn', label: 'Rule In/Out', icon: '🚩', action: 'jump', target: 'cyanosis-triage' },
+        { id: 'cyanosis-rescue-btn', label: 'Rescue', icon: '💉', action: 'jump', target: 'cyanosis-rescue' },
+        { id: 'cyanosis-imaging-btn', label: 'Imaging', icon: '🔬', action: 'jump', target: 'cyanosis-imaging' },
+        { id: 'cyanosis-dispo-btn', label: 'Disposition', icon: '🚪', action: 'jump', target: 'cyanosis-disposition' },
+    ],
     'altered-mental-status-hub': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ams-steps' },
         { id: 'exclusions', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'ams-exclusions' },

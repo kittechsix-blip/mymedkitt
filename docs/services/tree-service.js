@@ -351,6 +351,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/dyspnea-hub.js');
             return { nodes: m.DYSPNEA_HUB_NODES, entryNodeId: 'dysp-start', categoryId: 'emergency-medicine', moduleLabels: m.DYSPNEA_HUB_MODULE_LABELS, citations: m.DYSPNEA_HUB_CITATIONS, criticalActions: m.DYSPNEA_HUB_CRITICAL_ACTIONS, type: 'hub' };
         },
+        'acute-cyanosis-hypoxemia-hub': async () => {
+            const m = await import('../data/trees/acute-cyanosis-hypoxemia-hub.js');
+            return { nodes: m.ACUTE_CYANOSIS_HYPOXEMIA_HUB_NODES, entryNodeId: 'cyanosis-start', categoryId: 'emergency-medicine', moduleLabels: m.ACUTE_CYANOSIS_HYPOXEMIA_HUB_MODULE_LABELS, citations: m.ACUTE_CYANOSIS_HYPOXEMIA_HUB_CITATIONS, criticalActions: m.ACUTE_CYANOSIS_HYPOXEMIA_HUB_CRITICAL_ACTIONS, type: 'hub' };
+        },
         'altered-mental-status-hub': async () => {
             const m = await import('../data/trees/altered-mental-status-hub.js');
             return { nodes: m.AMS_HUB_NODES, entryNodeId: 'ams-start', categoryId: 'emergency-medicine', moduleLabels: m.AMS_HUB_MODULE_LABELS, citations: m.AMS_HUB_CITATIONS, criticalActions: m.AMS_HUB_CRITICAL_ACTIONS, type: 'hub' };
