@@ -469,7 +469,8 @@ export const MASSIVE_TRANSFUSION_NODES = [
         type: 'info',
         module: 5,
         title: 'Jehovah\'s Witness in MTP',
-        body: '**Immediate priorities:**\n• Establish patient\'s specific wishes (some accept certain fractions)\n• Document clearly in chart\n• Obtain ethics/legal consultation if unclear\n\n**Acceptable to many Jehovah\'s Witnesses:**\n• Albumin\n• Clotting factors (some accept PCC, fibrinogen concentrate)\n• Immunoglobulins\n• Cell saver (if circuit remains connected to patient)\n• EPO (erythropoietin)\n• Iron infusion\n\n**Usually NOT accepted:**\n• Whole blood\n• pRBCs\n• Plasma/FFP\n• Platelets\n• Cryoprecipitate\n\n**Non-blood interventions:**\n• Aggressive surgical hemostasis\n• TXA 1 g IV\n• IV iron (ferric carboxymaltose 1 g)\n• EPO (darbepoetin 500 mcg)\n• Minimize phlebotomy\n• Accept lower Hgb threshold (some tolerate Hgb 3-4 g/dL)\n• Hyperbaric oxygen (limited availability)\n\n**Document everything:** Patient\'s specific wishes and your discussion.',
+        body: '**Immediate priorities:**\n• Establish patient\'s specific wishes (some accept certain fractions)\n• Document clearly in chart\n• Obtain ethics/legal consultation if unclear\n\n**Acceptable to many Jehovah\'s Witnesses:**\n• Albumin\n• Clotting factors (some accept PCC, fibrinogen concentrate)\n• Immunoglobulins\n• Cell saver (if circuit remains connected to patient)\n• EPO (erythropoietin)\n• Iron infusion\n\n**Usually NOT accepted:**\n• Whole blood\n• pRBCs\n• Plasma/FFP\n• Platelets\n• Cryoprecipitate\n\n**Non-blood interventions:**\n• Aggressive surgical hemostasis [2]\n• TXA 1 g IV [8,11]\n• IV iron (ferric carboxymaltose 1 g)\n• EPO (darbepoetin 500 mcg)\n• Minimize phlebotomy\n• Accept lower Hgb threshold (some tolerate Hgb 3-4 g/dL)\n• Hyperbaric oxygen (limited availability)\n\n**Document everything:** Patient\'s specific wishes and your discussion.',
+        citation: [2, 8, 11],
         next: 'mtp-special-pops',
     },
 ];
