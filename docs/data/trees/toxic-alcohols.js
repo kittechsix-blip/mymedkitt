@@ -253,15 +253,15 @@ export const TOXIC_ALCOHOLS_NODES = [
         type: 'question',
         module: 5,
         title: 'Hemodialysis Indications',
-        body: '**EXTRIP guidelines for hemodialysis [1][4]:**\n\n**METHANOL — Dialysis recommended if:**\n• Methanol >70 mg/dL (or >50 mg/dL with severe acidosis)\n• Vision changes\n• Coma or seizures\n• Renal dysfunction\n• Severe metabolic acidosis despite treatment\n\n**ETHYLENE GLYCOL — Dialysis recommended if:**\n• EG >310 mg/dL (even with fomepizole)\n• Severe metabolic acidosis\n• Renal dysfunction\n• End-organ damage\n\n**ISOPROPANOL:**\n• Generally NOT indicated (acetone not toxic)\n• Consider only if: persistent hypotension, serum level >500 mg/dL\n\n**Dialysis modality:**\n• Intermittent HD preferred (more efficient)\n• CRRT acceptable if hemodynamically unstable\n• Use high-flux, large surface area dialyzer\n\nDoes the patient meet dialysis criteria?',
-        citation: [1, 4],
+        body: '**EXTRIP guidelines for hemodialysis [1][4]:**\n\n**METHANOL — Dialysis recommended if:**\n• Methanol >70 mg/dL (or >50 mg/dL with severe acidosis)\n• Vision changes\n• Coma or seizures\n• Renal dysfunction\n• Severe metabolic acidosis despite treatment\n\n**ETHYLENE GLYCOL — use the newest EXTRIP criteria:**\n• **Recommend ECTR if glycolate >12 mmol/L or anion gap >27 mmol/L** when there is credible EG exposure\n• **Suggest ECTR if glycolate is 8-12 mmol/L or anion gap is 23-27 mmol/L**\n• **Recommend ECTR for coma, seizures, or KDIGO stage 2-3 AKI**, regardless of the parent EG level\n• EG >310 mg/dL remains a valid concentration trigger when fomepizole is being used, but do not wait for an EG level when glycolate, anion gap, or severe clinical features meet criteria\n\n**ISOPROPANOL:**\n• Generally NOT indicated (acetone not toxic)\n• Consider only if: persistent hypotension, serum level >500 mg/dL\n\n**Dialysis modality:**\n• Intermittent HD preferred (more efficient)\n• CRRT acceptable if hemodynamically unstable\n• Use high-flux, large surface area dialyzer\n\nDoes the patient meet dialysis criteria?',
+        citation: [1, 4, 7],
         calculatorLinks: [{ id: 'tox-alc-dialysis-criteria', label: 'Dialysis Criteria' }],
         options: [
             { label: 'Yes — meets dialysis criteria', description: 'Consult nephrology urgently', next: 'tox-alc-dialysis-info', urgency: 'critical' },
             { label: 'No — fomepizole alone may suffice', description: 'Continue fomepizole, close monitoring', next: 'tox-alc-cofactors' },
             { label: 'Borderline — unsure', description: 'Consult toxicology and/or nephrology', next: 'tox-alc-dialysis-info', urgency: 'urgent' },
         ],
-        summary: 'HD for methanol >50-70 mg/dL or vision/coma; EG >310 or renal failure; isopropanol rarely needs HD',
+        summary: 'HD for methanol >50-70 mg/dL or vision/coma; EG: glycolate/anion-gap or severe-feature criteria plus EG level; isopropanol rarely needs HD',
         safetyLevel: 'warning',
     },
     {
@@ -430,7 +430,7 @@ export const TOXIC_ALCOHOLS_CRITICAL_ACTIONS = [
     { text: 'Fomepizole 15 mg/kg IV load for methanol or EG — blocks alcohol dehydrogenase', nodeId: 'tox-alc-fomepizole' },
     { text: 'Fomepizole Q4H during hemodialysis (auto-induces metabolism)', nodeId: 'tox-alc-fome-dialysis' },
     { text: 'Dialysis for methanol >50-70 mg/dL, vision changes, or severe acidosis', nodeId: 'tox-alc-dialysis' },
-    { text: 'Dialysis for ethylene glycol >310 mg/dL or renal failure', nodeId: 'tox-alc-dialysis' },
+    { text: 'EG dialysis: glycolate >12 or anion gap >27 (recommend); 8-12 or 23-27 (suggest); coma, seizures, or stage 2-3 AKI (recommend)', nodeId: 'tox-alc-dialysis' },
     { text: 'Folic acid 50 mg IV Q4-6H for methanol (enhances formate metabolism)', nodeId: 'tox-alc-cofactors' },
     { text: 'Thiamine 100 mg + Pyridoxine 100 mg IV Q6H for ethylene glycol (reduces oxalate)', nodeId: 'tox-alc-cofactors' },
     { text: 'Isopropanol: supportive care only — fomepizole NOT indicated (acetone not toxic)', nodeId: 'tox-alc-isopropanol-tx' },
@@ -445,4 +445,5 @@ export const TOXIC_ALCOHOLS_CITATIONS = [
     { num: 4, text: 'Brent J, McMartin K, Phillips S, et al. Fomepizole for the treatment of ethylene glycol poisoning. N Engl J Med. 1999;340(11):832-838.' },
     { num: 5, text: 'Slaughter RJ, Mason RW, Beasley DM, et al. Isopropanol poisoning. Clin Toxicol. 2014;52(5):470-478.' },
     { num: 6, text: 'Zar T, Graeber C, Perazella MA. Recognition, treatment, and prevention of propylene glycol toxicity. Semin Dial. 2007;20(3):217-219.' },
+    { num: 7, text: 'Ghannoum M et al. Extracorporeal treatment for ethylene glycol poisoning: systematic review and recommendations from the EXTRIP workgroup. Crit Care. 2023;27:56. doi:10.1186/s13054-022-04227-2.' },
 ];

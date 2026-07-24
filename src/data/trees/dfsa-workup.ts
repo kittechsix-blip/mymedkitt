@@ -614,7 +614,7 @@ export const DFSA_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Initiate Hepatitis B Vaccine',
-    body: '**Hep B vaccine dose 1 today.** Schedule doses 2 and 3:\n• Dose 2: 1 month\n• Dose 3: 6 months\n\n**If source is known HBV-positive:**\n• Add **HBIG** (Hepatitis B Immune Globulin) 0.06 mL/kg IM\n• Administer at different injection site from vaccine\n• HBIG most effective within 24h of exposure, up to 7 days',
+    body: '**Hep B vaccine dose 1 today.** Schedule doses 2 and 3:\n• Dose 2: 1 month\n• Dose 3: 6 months\n\n**If source is known HBV-positive:**\n• Add **HBIG** (Hepatitis B Immune Globulin) 0.06 mL/kg IM\n• Administer at different injection site from vaccine\n• HBIG most effective within 24h of exposure; for sexual exposure the effective interval is up to 14 days (7 days for percutaneous exposures)',
     citation: [4],
     next: 'dfsa-hiv-pep',
   
@@ -649,7 +649,7 @@ export const DFSA_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'HIV PEP — Initiate Now',
-    body: '**PEP must be started within 72 hours** of exposure. Earlier is better.\n\nFor full PEP workup including regimen selection, baseline labs, and 28-day follow-up schedule:\n\n[PEP Consult](#/tree/pep)\n\n**Key points:**\n• Preferred regimen: Biktarvy (BIC/TAF/FTC) × 28 days\n• Start ASAP — do not delay for source testing\n• Baseline: HIV Ag/Ab, CBC, CMP, Hep B/C\n• Follow-up HIV testing at 4-6 weeks and 3 months',
+    body: '**PEP must be started within 72 hours** of exposure — ideally within 24 hours (CDC 2025). Earlier is better.\n\nFor full PEP workup including regimen selection, baseline labs, and 28-day follow-up schedule:\n\n[PEP Consult](#/tree/pep)\n\n**Key points:**\n• Preferred regimen (CDC 2025): Biktarvy (BIC/TAF/FTC) × 28 days, or dolutegravir + (TAF or TDF)/(FTC or 3TC)\n• Start ASAP — do not delay for source testing\n• Baseline: HIV Ag/Ab, CBC, CMP, Hep B/C\n• Follow-up HIV testing at 4-6 weeks and 3 months',
     citation: [11],
     next: 'dfsa-safe-discharge',
   
@@ -726,7 +726,7 @@ export const DFSA_WORKUP_CITATIONS: Citation[] = [
   { num: 8, text: 'Violence Against Women Reauthorization Act of 2013, 42 USC §3796gg-4.' },
   { num: 9, text: 'Hurley M, Parker H, Wells DL. The Epidemiology of Drug Facilitated Sexual Assault. J Clin Forensic Med. 2006;13(4):181-185.' },
   { num: 10, text: 'Juhascik MP, Negrusz A, Faugno D, et al. An Estimate of the Proportion of Drug-Facilitation of Sexual Assault in Four U.S. Localities. J Forensic Sci. 2007;52(6):1396-1400.' },
-  { num: 11, text: 'Centers for Disease Control and Prevention. Updated Guidelines for Antiretroviral Postexposure Prophylaxis After Sexual, Injection-Drug Use, or Other Nonoccupational Exposure to HIV. 2016 (updated 2025).' },
+  { num: 11, text: 'Centers for Disease Control and Prevention. Antiretroviral Postexposure Prophylaxis After Sexual, Injection-Drug Use, or Other Nonoccupational Exposure to HIV — United States, 2025. MMWR Recomm Rep. 2025;74(1):1-56.' },
   { num: 12, text: 'Linden JA. Clinical Practice: Care of the Adult Patient After Sexual Assault. N Engl J Med. 2011;365(9):834-841.' },
   { num: 13, text: 'RAINN (Rape, Abuse & Incest National Network). What to Expect at the Hospital. https://www.rainn.org/articles/rape-kit. 2024.' },
   { num: 14, text: 'American College of Emergency Physicians. Evaluation and Management of the Sexually Assaulted or Sexually Abused Patient. 2nd ed. Dallas, TX: ACEP; 2013.' },

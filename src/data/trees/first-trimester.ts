@@ -14,7 +14,7 @@ export const FIRST_TRIMESTER_CRITICAL_ACTIONS = [
   { text: 'STAT transvaginal ultrasound for all pregnant patients with bleeding', nodeId: 'ft-stable-branch' },
   { text: 'Quantitative hCG + ultrasound to localize pregnancy', nodeId: 'ft-us-eval' },
   { text: 'Methotrexate for stable ectopic (no free fluid, hCG <5000)', nodeId: 'ft-ectopic-medical' },
-  { text: 'Rho(D) immune globulin for all Rh-negative patients with bleeding', nodeId: 'ft-rh-rhogam' },
+  { text: 'Rh-negative pregnancy loss: use the <12-week ACOG shared-decision pathway; RhIg remains indicated for ≥12 weeks and selected ectopic/instrumentation cases', nodeId: 'ft-rh-rhogam' },
 ];
 
 export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
@@ -343,8 +343,8 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Nonviable Pregnancy — Management Options',
-    body: '**OB consultation** for definitive management plan.\n\nOptions for the stable patient (no clear superiority among them): [17]\n\n**If visible products in cervix:** Remove at bedside with ring forceps. Consider sending to pathology (especially in recurrent miscarriage).\n\n**Surgical management is MANDATORY** for patients with significant hemorrhage or hemodynamic instability.',
-    citation: [17, 18],
+    body: '**OB consultation** for definitive management plan.\n\nOptions for the stable patient should be individualized based on symptoms, diagnosis, preferences, access to follow-up, and local OB resources. [17, 18, 42]\n\n**If visible products in cervix:** Remove at bedside with ring forceps. Consider sending to pathology (especially in recurrent miscarriage).\n\n**Surgical management is MANDATORY** for patients with significant hemorrhage or hemodynamic instability.',
+    citation: [17, 18, 42],
     options: [
       {
         label: 'Expectant management',
@@ -353,7 +353,7 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
       },
       {
         label: 'Medical management',
-        description: 'Misoprostol 800 mcg intravaginal (91% effective in 7 days)',
+        description: 'Preferred when available: mifepristone 200 mg PO, then misoprostol 800 mcg vaginally 24h later; misoprostol-only remains an option',
         next: 'ft-medical-miscarriage',
       },
       {
@@ -363,7 +363,7 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
-    summary: 'Expectant (50-80% complete in 7-10d), medical (misoprostol 91%), or surgical (D&C) — OB decides',
+    summary: 'Expectant, medical, or surgical management — when available, mifepristone 200 mg followed 24h later by misoprostol 800 mcg is more effective than misoprostol alone',
   },
 
   {
@@ -382,18 +382,18 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
     id: 'ft-medical-miscarriage',
     type: 'info',
     module: 3,
-    title: 'Medical Management — Misoprostol',
-    body: '[Misoprostol](#/drug/misoprostol/miscarriage) **800 mcg intravaginally** — single dose.\n\n**Efficacy:** 91% effective within 7 days. [18]\n\nHigh patient satisfaction rates when compared to surgical management.\n\nUp to 40% may require unplanned admission or surgical management. [19]\n\n**Contraindications:**\n• Hemodynamic instability (needs surgical evacuation)\n• Septic abortion\n• Confirmed ectopic pregnancy\n\n**Counsel patient:** Expect significant cramping and bleeding. Return precautions for heavy bleeding, fever, or worsening pain.\n\n[Miscarriage Discharge Instructions](#/info/ft-miscarriage-discharge)',
-    citation: [17, 18, 19],
+    title: 'Medical Management — Mifepristone + Misoprostol',
+    body: '**Preferred regimen when mifepristone is available:** mifepristone 200 mg PO, followed 24 hours later by [misoprostol](#/drug/misoprostol/miscarriage) 800 mcg intravaginally. This combination is more effective than misoprostol alone. [42]\n\n**If mifepristone is unavailable:** misoprostol 800 mcg intravaginally, with one repeat dose as needed, no earlier than 3 hours after the first dose and typically within 7 days if there is no response. [42]\n\n**Contraindications:**\n• Hemodynamic instability (needs surgical evacuation)\n• Septic abortion\n• Confirmed ectopic pregnancy\n\n**Counsel patient:** Expect significant cramping and bleeding. Return precautions for heavy bleeding, fever, or worsening pain. Arrange follow-up in 7-14 days with ultrasound or serial hCG to confirm complete passage.\n\n[Miscarriage Discharge Instructions](#/info/ft-miscarriage-discharge)',
+    citation: [17, 18, 19, 42],
     next: 'ft-rh-rhogam',
     treatment: {
       firstLine: {
-        drug: 'Misoprostol',
-        dose: '800 mcg',
-        route: 'Intravaginal',
-        frequency: 'Single dose',
-        duration: 'One-time; may repeat x1 in 24-48h if incomplete',
-        notes: 'Insert tablets high in posterior vaginal fornix. Patient may lie supine 30 min after insertion. Expect cramping and bleeding within 2-6 hours.',
+        drug: 'Mifepristone + Misoprostol',
+        dose: 'Mifepristone 200 mg PO, then misoprostol 800 mcg',
+        route: 'PO, then intravaginal',
+        frequency: 'Mifepristone once; misoprostol 24 hours later',
+        duration: 'One treatment course; repeat misoprostol dose as needed per OB protocol',
+        notes: 'Preferred when mifepristone is available. Expect cramping and bleeding. Confirm complete passage in 7-14 days.',
       },
       alternative: {
         drug: 'Misoprostol (buccal)',
@@ -405,7 +405,7 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
       },
       monitoring: 'OB follow-up in 7-14 days with ultrasound to confirm complete passage. Return to ED for soaking >1 pad/hour for 2+ hours, fever >100.4F, or severe pain.',
     },
-    summary: 'Misoprostol 800mcg intravaginally — 91% effective in 7 days, expect significant cramping',
+    summary: 'Preferred: mifepristone 200 mg PO then misoprostol 800 mcg vaginally 24h later; misoprostol-only is an alternative',
     skippable: true,
   },
 
@@ -458,8 +458,8 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Rh Status & Anti-D Immune Globulin',
-    body: '**Check Rh status** in all patients with first trimester vaginal bleeding or miscarriage.\n\nACOG 2017: Whether to administer anti-D immune globulin in threatened miscarriage **at or before 12 weeks is controversial** — no evidence-based recommendation can be made. [20]\n\n**Reasonable approach:**\n• **Minimal bleeding, early first trimester:** May withhold\n• **Heavy bleeding or near 12 weeks:** Consider administration\n• **Discuss with your hospital OB department** for institutional policy\n\n**If indicated:**\n• [Rh(D) Immune Globulin](#/drug/rh-immune-globulin/first trimester) 50 mcg IM within 72 hours\n• If 50 mcg unavailable, 300 mcg dose can be substituted\n\n**Only for Rh(D)-negative AND unsensitized patients.**',
-    citation: [20],
+    body: '**Rh(D)-negative and unsensitized patients:** apply the clinical scenario and current local OB policy.\n\n**Pregnancy loss or abortion <12 weeks:** ACOG 2024 suggests that routine Rh testing and RhIg prophylaxis can be forgone; RhIg may still be offered after shared decision-making. SMFM remains more cautious and supports testing/RhIg when feasible.\n\n**Do not use the <12-week pathway for:**\n• Ectopic pregnancy\n• Uterine aspiration, sharp curettage, or other uterine instrumentation\n• Abdominal trauma or other events with meaningful fetomaternal hemorrhage risk\n\nFor these situations, discuss/administer RhIg with OB according to local policy. **At ≥12 weeks after pregnancy loss or abortion, RhIg is recommended.**\n\n**If indicated:**\n• [Rh(D) Immune Globulin](#/drug/rh-immune-globulin/first trimester) 50 mcg IM within 72 hours when a first-trimester dose is appropriate\n• If 50 mcg is unavailable, 300 mcg can be substituted\n\nFor isolated threatened bleeding with a viable pregnancy, follow local OB guidance because the 2024 ACOG update specifically addresses abortion and pregnancy loss.',
+    citation: [20, 43, 44],
     next: 'ft-dispo-miscarriage',
     treatment: {
       firstLine: {
@@ -467,8 +467,8 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
         dose: '50 mcg (250 IU)',
         route: 'IM',
         frequency: 'Single dose',
-        duration: 'One-time, within 72 hours of bleeding event',
-        notes: 'First trimester dose. Only for Rh(D)-negative, unsensitized patients. Confirm negative antibody screen before administration.',
+        duration: 'When indicated, within 72 hours of the qualifying event',
+        notes: 'Use when indicated after considering gestational age and clinical scenario. Only for Rh(D)-negative, unsensitized patients. Confirm negative antibody screen before administration.',
       },
       alternative: {
         drug: 'Rh(D) Immune Globulin (standard dose)',
@@ -478,9 +478,9 @@ export const FIRST_TRIMESTER_NODES: DecisionNode[] = [
         duration: 'One-time, within 72 hours',
         notes: 'Use if 50 mcg dose unavailable. Standard dose provides adequate coverage for first trimester.',
       },
-      monitoring: 'Document Rh status and antibody screen in chart. Ensure OB aware for repeat dosing at 28 weeks if pregnancy continues.',
+      monitoring: 'Document Rh status, antibody screen, gestational age, clinical scenario, and shared decision/local OB rationale. Ensure OB aware for repeat dosing at 28 weeks if pregnancy continues.',
     },
-    summary: 'RhoGAM for Rh-negative patients with bleeding — 50mcg IM for first trimester, within 72h',
+    summary: 'RhIg is not routine for pregnancy loss/abortion <12 weeks under ACOG 2024, but remains recommended at ≥12 weeks and relevant for ectopic/instrumentation or other higher-risk events',
     safetyLevel: 'warning',
   },
 
@@ -841,4 +841,7 @@ export const FIRST_TRIMESTER_CITATIONS: Citation[] = [
   { num: 39, text: 'Nyberg DA, Hughes MP, Mack LA, Wang KY. Extrauterine findings of ectopic pregnancy at transvaginal US: importance of echogenic fluid. Radiology. 1991;178(3):823-826.' },
   { num: 40, text: 'Ackerman TE, Levi CS, Dashefsky SM, et al. Interstitial line: sonographic finding in interstitial (cornual) ectopic pregnancy. Radiology. 1993;189(1):83-87.' },
   { num: 41, text: 'Mehta TS, Levine D, Beckwith B. Treatment of ectopic pregnancy: is a human chorionic gonadotropin level of 2,000 mIU/mL a reasonable threshold? Radiology. 1997;205(2):569-573.' },
+  { num: 42, text: 'American College of Obstetricians and Gynecologists. Practice Bulletin No. 200: Early Pregnancy Loss (interim update). Obstet Gynecol. 2018;132:e197-e207.' },
+  { num: 43, text: 'American College of Obstetricians and Gynecologists. Clinical Practice Update: Rh D Immune Globulin Administration After Abortion or Pregnancy Loss at Less Than 12 Weeks of Gestation. Obstet Gynecol. 2024;144:e140-e143. doi:10.1097/AOG.0000000000005733.' },
+  { num: 44, text: 'Society for Maternal-Fetal Medicine. RhD immune globulin after spontaneous or induced abortion at less than 12 weeks of gestation. Am J Obstet Gynecol. 2024;230(5):B2-B5.' },
 ];

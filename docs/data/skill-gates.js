@@ -1584,7 +1584,7 @@ export const REQUIRED_DISAMBIGUATIONS = [
 export const CROSS_REFERENCES = [
     {
         id: "seizure-hyponatremia",
-        consults: ["status-epilepticus", "sodium"],
+        consults: ["status-epilepticus", "sodium", "seizure-hub"],
         interaction: "Seizure driven by (or co-existing with) hyponatremia",
         note: "Hyponatremia is a reversible cause of seizure/status — check sodium early in any seizure workup. If hyponatremia is the driver, the seizure may be refractory to benzodiazepines/antiseizure meds until sodium is corrected, and acute symptomatic hyponatremic seizures warrant hypertonic saline. BUT respect the correction-rate ceiling (osmotic demyelination / ODS risk) once the seizure is controlled — the emergent bolus for active seizures is the exception, not license to overcorrect. Coordinate the status-epilepticus and sodium pathways together.",
         signedOff: true,
