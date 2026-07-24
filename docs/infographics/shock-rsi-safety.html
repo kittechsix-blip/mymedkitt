@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Physiologically Difficult Airway: Before, During, After - InfoKitt</title>
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src 'self';"
+  >
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f7f4;
+      --surface: #ffffff;
+      --ink: #172026;
+      --muted: #56636b;
+      --line: #d9dfdf;
+      --airway: #3d4f5f;
+      --airway-dark: #263540;
+      --danger: #b3261e;
+      --danger-bg: #fff0ee;
+      --caution: #a85b00;
+      --caution-bg: #fff4df;
+      --safe: #247247;
+      --safe-bg: #eaf6ee;
+      --blue: #1565c0;
+      --blue-bg: #eaf2fb;
+      --shadow: 0 1px 2px rgba(20, 30, 36, 0.08), 0 5px 16px rgba(20, 30, 36, 0.07);
+      --mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #15191c;
+        --surface: #20262a;
+        --ink: #f3f5f4;
+        --muted: #b1bbc0;
+        --line: #394247;
+        --airway: #7890a1;
+        --airway-dark: #c2d0d9;
+        --danger: #ff8d86;
+        --danger-bg: #3d2020;
+        --caution: #f1b35a;
+        --caution-bg: #392a16;
+        --safe: #78c994;
+        --safe-bg: #183225;
+        --blue: #76b7ff;
+        --blue-bg: #172c42;
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 7px 18px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.35;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      touch-action: manipulation;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .rsi-shell {
+      width: min(100%, 920px);
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 12px 12px 28px;
+    }
+
+    .rsi-header {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 4px 2px 10px;
+      border-bottom: 2px solid var(--airway);
+    }
+
+    .rsi-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background: var(--airway);
+      color: #ffffff;
+      font: 800 17px/1 var(--mono);
+      box-shadow: var(--shadow);
+    }
+
+    .rsi-title {
+      margin: 0;
+      color: var(--airway-dark);
+      font-size: 21px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .rsi-subtitle {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .rsi-alert {
+      margin: 10px 0;
+      padding: 9px 10px;
+      border: 1px solid var(--danger);
+      border-left-width: 5px;
+      border-radius: 6px;
+      background: var(--danger-bg);
+      color: var(--danger);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .rsi-alert strong {
+      color: var(--ink);
+    }
+
+    .stage-tabs {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5px;
+      padding: 6px 0;
+      background: var(--bg);
+    }
+
+    .stage-tab {
+      min-height: 52px;
+      padding: 5px 3px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .stage-tab b,
+    .stage-tab small {
+      display: block;
+      letter-spacing: 0;
+    }
+
+    .stage-tab b {
+      font-size: 14px;
+    }
+
+    .stage-tab small {
+      margin-top: 2px;
+      font-size: 10px;
+      font-weight: 650;
+    }
+
+    .stage-tab[aria-selected="true"] {
+      border-color: var(--airway);
+      background: var(--airway);
+      color: #ffffff;
+    }
+
+    .stage-panel {
+      margin-top: 5px;
+    }
+
+    .stage-panel[hidden] {
+      display: none;
+    }
+
+    .stage-heading {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      margin: 5px 0 8px;
+    }
+
+    .stage-number {
+      display: grid;
+      place-items: center;
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--airway);
+      color: #ffffff;
+      font: 800 14px/1 var(--mono);
+    }
+
+    .stage-heading h2 {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+
+    .stage-heading p {
+      margin: 1px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 650;
+    }
+
+    .action-list {
+      display: grid;
+      gap: 6px;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 8px;
+      min-height: 58px;
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .action-key {
+      color: var(--airway-dark);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .action-copy {
+      font-size: 12px;
+    }
+
+    .action-copy strong {
+      font-weight: 800;
+    }
+
+    .action-copy span {
+      color: var(--muted);
+    }
+
+    .mini-callout {
+      margin-top: 7px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      font-size: 12px;
+    }
+
+    .mini-callout strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 12px;
+    }
+
+    .mini-callout.caution {
+      border-color: var(--caution);
+      background: var(--caution-bg);
+    }
+
+    .mini-callout.danger {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+    }
+
+    .mini-callout.safe {
+      border-color: var(--safe);
+      background: var(--safe-bg);
+    }
+
+    .bridge-dose {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2px 8px;
+      align-items: baseline;
+      margin-top: 7px;
+      padding: 9px 10px;
+      border: 1px solid var(--caution);
+      border-left-width: 5px;
+      border-radius: 7px;
+      background: var(--caution-bg);
+    }
+
+    .bridge-dose b {
+      font-size: 12px;
+    }
+
+    .bridge-dose output {
+      color: var(--caution);
+      font: 800 16px/1 var(--mono);
+      text-align: right;
+    }
+
+    .bridge-dose small {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .weight-control,
+    .winter-control {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 7px;
+      align-items: center;
+      margin-bottom: 7px;
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--blue-bg);
+    }
+
+    .weight-control label,
+    .winter-control label {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .weight-control small,
+    .winter-control small {
+      display: block;
+      margin-top: 1px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 500;
+    }
+
+    .weight-control input,
+    .winter-control input {
+      width: 74px;
+      min-height: 40px;
+      padding: 5px 7px;
+      border: 1px solid var(--blue);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--ink);
+      font: 800 17px/1 var(--mono);
+      text-align: center;
+    }
+
+    .dose-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .dose-band {
+      min-height: 88px;
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .dose-band.wide {
+      grid-column: 1 / -1;
+      min-height: 72px;
+    }
+
+    .dose-band b,
+    .dose-band small,
+    .dose-band output {
+      display: block;
+    }
+
+    .dose-band b {
+      font-size: 12px;
+    }
+
+    .dose-band output {
+      margin: 4px 0 2px;
+      color: var(--blue);
+      font: 800 18px/1.1 var(--mono);
+    }
+
+    .dose-band small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .evidence-nudge {
+      margin-top: 7px;
+      padding: 8px 9px;
+      border: 1px solid var(--blue);
+      border-radius: 7px;
+      background: var(--blue-bg);
+      font-size: 11px;
+    }
+
+    .evidence-nudge strong {
+      color: var(--blue);
+    }
+
+    .after-grid {
+      display: grid;
+      gap: 6px;
+    }
+
+    .after-band {
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .after-band h3 {
+      margin: 0 0 4px;
+      color: var(--airway-dark);
+      font-size: 12px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .after-band ul {
+      margin: 0;
+      padding-left: 17px;
+      font-size: 11px;
+    }
+
+    .after-band li {
+      margin: 3px 0;
+    }
+
+    .winter-result {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px;
+      align-items: center;
+      margin-top: 6px;
+      padding: 7px 8px;
+      border-radius: 6px;
+      background: var(--danger-bg);
+    }
+
+    .winter-result span {
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .winter-result output {
+      color: var(--danger);
+      font: 850 17px/1 var(--mono);
+    }
+
+    .stop-line {
+      margin: 9px 0 0;
+      padding: 9px 10px;
+      border: 1px solid var(--danger);
+      border-radius: 7px;
+      background: var(--danger-bg);
+      color: var(--danger);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      margin-top: 9px;
+    }
+
+    .quick-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 6px 8px;
+      border: 1px solid var(--blue);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: var(--shadow);
+    }
+
+    details {
+      margin-top: 10px;
+      border-top: 1px solid var(--line);
+    }
+
+    summary {
+      min-height: 44px;
+      padding: 10px 2px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .citations {
+      margin: 0;
+      padding: 0 0 4px 20px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .citations li {
+      margin: 6px 0;
+    }
+
+    .footer-note {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 9px;
+      text-align: center;
+    }
+
+    @media (min-width: 700px) {
+      .rsi-shell {
+        padding: 18px 18px 36px;
+      }
+
+      .stage-tabs {
+        position: static;
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .stage-panels {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        align-items: start;
+      }
+
+      .stage-panel,
+      .stage-panel[hidden] {
+        display: block;
+      }
+
+      .stage-panel {
+        min-width: 0;
+      }
+
+      .action-row {
+        grid-template-columns: 70px 1fr;
+      }
+    }
+
+    @media print {
+      .rsi-shell {
+        width: 100%;
+        max-width: none;
+      }
+
+      .stage-tabs {
+        display: none;
+      }
+
+      .stage-panels {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .stage-panel,
+      .stage-panel[hidden] {
+        display: block;
+      }
+
+      .quick-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="rsi-shell">
+    <header class="rsi-header">
+      <div class="rsi-mark" aria-hidden="true">RSI</div>
+      <div>
+        <h1 class="rsi-title">Physiologically Difficult Airway</h1>
+        <p class="rsi-subtitle">Before, during, and after the tube</p>
+      </div>
+    </header>
+
+    <div class="rsi-alert" role="alert">
+      <strong>Paralysis removes compensation.</strong>
+      Fix shock, oxygenation, acidosis, RV strain, hyperkalemia, and cerebral perfusion before induction whenever time allows.
+    </div>
+
+    <nav class="stage-tabs" aria-label="RSI phase">
+      <button class="stage-tab" type="button" data-stage-button="before" aria-selected="true">
+        <b>1. Before</b>
+        <small>resuscitate</small>
+      </button>
+      <button class="stage-tab" type="button" data-stage-button="during" aria-selected="false">
+        <b>2. During</b>
+        <small>dose + oxygenate</small>
+      </button>
+      <button class="stage-tab" type="button" data-stage-button="after" aria-selected="false">
+        <b>3. After</b>
+        <small>match physiology</small>
+      </button>
+    </nav>
+
+    <div class="stage-panels">
+      <section class="stage-panel" data-stage-panel="before">
+        <div class="stage-heading">
+          <span class="stage-number">1</span>
+          <div>
+            <h2>Before induction</h2>
+            <p>Build reserve before you remove it.</p>
+          </div>
+        </div>
+
+        <div class="action-list">
+          <div class="action-row">
+            <div class="action-key">Shock</div>
+            <div class="action-copy">
+              <strong>Support MAP before the push.</strong>
+              <span> Treat the shock phenotype, confirm reliable access, and have the indicated vasopressor infusion running. Do not give a routine fluid bolus unless fluid responsiveness or hypovolemia is likely.</span>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <div class="action-key">Oxygen</div>
+            <div class="action-copy">
+              <strong>Head-up preoxygenation.</strong>
+              <span> Use NIPPV for severe hypoxemia; use medication-assisted preoxygenation if agitation prevents an effective mask seal. Prepare two-person BVM, PEEP valve, suction, and rescue airway.</span>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <div class="action-key">Acidosis</div>
+            <div class="action-copy">
+              <strong>Record the compensation.</strong>
+              <span> Note respiratory rate, tidal volume, ETCO2, PaCO2, and HCO3. Avoid intubation when the patient is still ventilating adequately and the cause can be rapidly reversed.</span>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <div class="action-key">Brain + K</div>
+            <div class="action-copy">
+              <strong>Prevent the second hit.</strong>
+              <span> In TBI, avoid hypoxemia and hypotension. Check potassium and screen for burn, denervation, major trauma, upper motor neuron injury, immobility, or myopathy before choosing succinylcholine.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bridge-dose">
+          <b>Push-dose epinephrine bridge</b>
+          <output>5-20 mcg IV</output>
+          <small>
+            10 mcg/mL concentration = 0.5-2 mL. Prefer a pharmacy-prepared or prefilled syringe. If bedside dilution is allowed, independently verify the stock concentration and final label. Bridge only, not a substitute for an infusion. Never give the 1 mg arrest dose to a patient with a pulse.
+          </small>
+        </div>
+
+        <div class="mini-callout caution">
+          <strong>Evidence limit</strong>
+          SCCM found insufficient evidence that peri-intubation vasopressors are superior to IV fluid in hypotensive critically ill adults. Use shock physiology and local protocol, not a universal prophylactic bolus.
+        </div>
+      </section>
+
+      <section class="stage-panel" data-stage-panel="during" hidden>
+        <div class="stage-heading">
+          <span class="stage-number">2</span>
+          <div>
+            <h2>During induction</h2>
+            <p>Reduce hypnotic burden. Keep paralysis effective.</p>
+          </div>
+        </div>
+
+        <div class="weight-control">
+          <label for="weight-input">
+            Dosing weight
+            <small>Adult estimate for this bedside card</small>
+          </label>
+          <input id="weight-input" type="number" min="30" max="200" step="1" value="70" inputmode="decimal" aria-label="Dosing weight in kilograms">
+        </div>
+
+        <div class="dose-grid">
+          <a class="dose-band" href="#/drug/etomidate/RSI induction">
+            <b>Etomidate</b>
+            <output data-dose="etomidate">21 mg</output>
+            <small>0.3 mg/kg IV. Reasonable in profound shock.</small>
+          </a>
+
+          <a class="dose-band" href="#/drug/ketamine/RSI induction">
+            <b>Ketamine</b>
+            <output data-dose="ketamine">35-70 mg</output>
+            <small>0.5-1 mg/kg IV, titrated to physiology.</small>
+          </a>
+
+          <a class="dose-band wide" href="#/drug/rocuronium/RSI">
+            <b>Rocuronium - full RSI dose</b>
+            <output data-dose="rocuronium">84 mg</output>
+            <small>1.2 mg/kg IV. Do not underdose the paralytic because the patient is shocked.</small>
+          </a>
+        </div>
+
+        <div class="evidence-nudge">
+          <strong>Ketamine nuance:</strong>
+          Ketamine is not contraindicated solely because of TBI or elevated ICP. It is also not guaranteed to be hemodynamically neutral. In the 2025 RSI trial, cardiovascular collapse occurred more often with ketamine than etomidate (22.1% vs 17.0%), with no 28-day mortality advantage.
+        </div>
+
+        <div class="mini-callout danger">
+          <strong>No succinylcholine when hyperkalemia risk is present</strong>
+          Avoid with known hyperkalemia, skeletal muscle myopathy, or after the acute phase of major burns, multiple trauma, extensive denervation, or upper motor neuron injury. Use rocuronium.
+        </div>
+
+        <div class="mini-callout safe">
+          <strong>Ventilate between induction and laryngoscopy when appropriate</strong>
+          Two-person BVM with an airway adjunct, PEEP 5-10 cm H2O, about 10 breaths/min, and the smallest volume that produces chest rise reduced severe hypoxemia in PreVent. The trial excluded patients considered at very high aspiration risk.
+        </div>
+      </section>
+
+      <section class="stage-panel" data-stage-panel="after" hidden>
+        <div class="stage-heading">
+          <span class="stage-number">3</span>
+          <div>
+            <h2>After the tube</h2>
+            <p>The procedure is not over at waveform capture.</p>
+          </div>
+        </div>
+
+        <div class="after-grid">
+          <div class="after-band">
+            <h3>First 2 minutes</h3>
+            <ul>
+              <li>Confirm continuous waveform ETCO2 and tube depth.</li>
+              <li>Cycle BP every minute; treat MAP below 65 and reassess the shock cause.</li>
+              <li>Start analgesia and sedation immediately.</li>
+              <li>Check bilateral ventilation, PEEP, plateau pressure, and auto-PEEP risk.</li>
+            </ul>
+          </div>
+
+          <div class="after-band">
+            <h3>DKA / severe metabolic acidosis</h3>
+            <ul>
+              <li>Use 6-8 mL/kg predicted body weight.</li>
+              <li>Set respiratory rate and flow to approximate the pre-intubation minute ventilation.</li>
+              <li>Do not default to RR 12. Get an urgent ABG and use ETCO2 trends.</li>
+            </ul>
+
+            <div class="winter-control">
+              <label for="hco3-input">
+                Serum HCO3
+                <small>Winter target = 1.5 x HCO3 + 8, +/-2</small>
+              </label>
+              <input id="hco3-input" type="number" min="2" max="24" step="1" value="8" inputmode="decimal" aria-label="Serum bicarbonate">
+            </div>
+
+            <div class="winter-result" aria-live="polite">
+              <span>Expected PaCO2 range</span>
+              <output data-winter-result>18-22 mmHg</output>
+            </div>
+          </div>
+
+          <div class="after-band">
+            <h3>TBI / elevated ICP</h3>
+            <ul>
+              <li>Avoid hypotension: SBP at least 100 mmHg at age 50-69; at least 110 mmHg at age 15-49 or over 70.</li>
+              <li>Target PaCO2 about 35-45 mmHg and avoid hypoxemia.</li>
+              <li>Do not use prolonged prophylactic hyperventilation. Temporary hyperventilation is a bridge only for active herniation while definitive therapy is mobilized.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="stop-line">
+      Pause before paralysis, if time permits, when oxygenation is not optimized, shock is unsupported, or severe metabolic acidosis is still being maintained by extreme spontaneous ventilation.
+    </div>
+
+    <nav class="quick-links" aria-label="Related myMedKitt resources">
+      <a class="quick-link" href="#/tree/hop-killers">Full HOP Killers consult</a>
+      <a class="quick-link" href="#/tree/push-dose-pressors">Push-dose pressors</a>
+      <a class="quick-link" href="#/tree/dka">DKA pathway</a>
+      <a class="quick-link" href="#/tree/brain-herniation">Brain herniation</a>
+    </nav>
+
+    <details>
+      <summary>Evidence and source links</summary>
+      <ol class="citations">
+        <li>
+          <a href="https://www.sccm.org/clinical-resources/guidelines/guidelines/guidelines-rapid-sequence-intubation" target="_blank" rel="noopener">
+            Acquisto NM, et al. SCCM Clinical Practice Guidelines for RSI in the Critically Ill Adult. Crit Care Med. 2023;51:1411-1430.
+          </a>
+        </li>
+        <li>
+          <a href="https://www.nejm.org/doi/10.1056/NEJMoa2511420" target="_blank" rel="noopener">
+            Casey JD, et al. Ketamine or Etomidate for Tracheal Intubation of Critically Ill Adults. N Engl J Med. 2025.
+          </a>
+        </li>
+        <li>
+          <a href="https://www.nejm.org/doi/10.1056/NEJMoa1812405" target="_blank" rel="noopener">
+            Casey JD, et al. Bag-Mask Ventilation during Tracheal Intubation of Critically Ill Adults. N Engl J Med. 2019;380:811-821.
+          </a>
+        </li>
+        <li>
+          <a href="https://www.nejm.org/doi/10.1056/NEJMoa2313680" target="_blank" rel="noopener">
+            Gibbs KW, et al. Noninvasive Ventilation for Preoxygenation during Emergency Intubation. N Engl J Med. 2024.
+          </a>
+        </li>
+        <li>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/35707974/" target="_blank" rel="noopener">
+            Janz DR, et al. Fluid Bolus Administration and Cardiovascular Collapse during Tracheal Intubation. JAMA. 2022.
+          </a>
+        </li>
+        <li>
+          <a href="https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=53e064bb-f71c-485f-b466-58a0739e7753&amp;type=display" target="_blank" rel="noopener">
+            U.S. prescribing information: Succinylcholine Chloride Injection. DailyMed.
+          </a>
+        </li>
+        <li>
+          <a href="https://braintrauma.org/coma/guidelines/severe-tbi" target="_blank" rel="noopener">
+            Brain Trauma Foundation. Guidelines for the Management of Severe TBI, 4th Edition.
+          </a>
+        </li>
+        <li>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/24515638/" target="_blank" rel="noopener">
+            Zeiler FA, et al. The ketamine effect on ICP in traumatic brain injury. Neurocrit Care. 2014;21:163-173.
+          </a>
+        </li>
+      </ol>
+    </details>
+
+    <p class="footer-note">
+      Adult emergency airway decision support. Verify local concentrations, formulary, equipment, and RSI policy. Evidence reviewed 2026-07-24.
+    </p>
+  </main>
+
+  <script>
+    (function () {
+      var stageButtons = Array.prototype.slice.call(document.querySelectorAll("[data-stage-button]"));
+      var stagePanels = Array.prototype.slice.call(document.querySelectorAll("[data-stage-panel]"));
+      var weightInput = document.getElementById("weight-input");
+      var hco3Input = document.getElementById("hco3-input");
+
+      function selectStage(stage) {
+        stageButtons.forEach(function (button) {
+          button.setAttribute("aria-selected", button.getAttribute("data-stage-button") === stage ? "true" : "false");
+        });
+        stagePanels.forEach(function (panel) {
+          panel.hidden = panel.getAttribute("data-stage-panel") !== stage;
+        });
+      }
+
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+      }
+
+      function roundDose(value) {
+        if (value < 10) return Math.round(value * 10) / 10;
+        return Math.round(value);
+      }
+
+      function renderWeightDoses() {
+        var weight = clamp(Number(weightInput.value) || 70, 30, 200);
+        weightInput.value = String(weight);
+        document.querySelector("[data-dose=etomidate]").textContent = roundDose(weight * 0.3) + " mg";
+        document.querySelector("[data-dose=ketamine]").textContent =
+          roundDose(weight * 0.5) + "-" + roundDose(weight) + " mg";
+        document.querySelector("[data-dose=rocuronium]").textContent = roundDose(weight * 1.2) + " mg";
+      }
+
+      function renderWinterTarget() {
+        var hco3 = clamp(Number(hco3Input.value) || 8, 2, 24);
+        hco3Input.value = String(hco3);
+        var center = 1.5 * hco3 + 8;
+        var low = Math.round(center - 2);
+        var high = Math.round(center + 2);
+        document.querySelector("[data-winter-result]").textContent = low + "-" + high + " mmHg";
+      }
+
+      stageButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          selectStage(button.getAttribute("data-stage-button"));
+        });
+      });
+
+      weightInput.addEventListener("input", renderWeightDoses);
+      weightInput.addEventListener("change", renderWeightDoses);
+      hco3Input.addEventListener("input", renderWinterTarget);
+      hco3Input.addEventListener("change", renderWinterTarget);
+
+      renderWeightDoses();
+      renderWinterTarget();
+    }());
+  </script>
+</body>
+</html>

@@ -278,6 +278,7 @@ export const INFOGRAPHIC_CONSULTS = new Set([
     'sepsis',
     'septic-arthritis',
     'serotonin-syndrome',
+    'shock-rsi-safety',
     'shoulder-dislocation',
     'shoulder-dystocia',
     'sickle-cell',

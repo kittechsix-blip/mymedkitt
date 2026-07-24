@@ -47,6 +47,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'anisocoria',
   'hypoglycemia',
   'dementia',
+  'hop-killers',
   'unilateral-facial-pain-hub',
   'thrombocytopenia',
   'dental-extraction-complications',
@@ -1872,6 +1873,7 @@ const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'gout-vs-septic', label: 'vs Septic', icon: '🦠', action: 'calculator', target: 'gout-vs-septic' },
   ],
   'hop-killers': [
+    { id: 'hop-rsi-card', label: 'RSI Card', icon: '🛡️', action: 'infographic', target: 'shock-rsi-safety', pinned: true },
     { id: 'hop-hypotensive', label: 'Hypotensive', icon: '💉', action: 'calculator', target: 'hop-hypotensive-intubation' },
     { id: 'hop-hypoxic', label: 'Hypoxic', icon: '🫁', action: 'calculator', target: 'hop-hypoxic-intubation' },
     { id: 'hop-acidotic', label: 'Acidotic', icon: '⚗️', action: 'calculator', target: 'hop-acidotic-intubation' },

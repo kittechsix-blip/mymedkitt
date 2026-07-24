@@ -279,6 +279,7 @@ export const INFOGRAPHIC_CONSULTS: ReadonlySet<string> = new Set([
   'sepsis',
   'septic-arthritis',
   'serotonin-syndrome',
+  'shock-rsi-safety',
   'shoulder-dislocation',
   'shoulder-dystocia',
   'sickle-cell',
