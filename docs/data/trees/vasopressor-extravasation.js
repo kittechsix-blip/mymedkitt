@@ -216,6 +216,7 @@ export const VASOPRESSOR_EXTRAVASATION_NODES = [
         module: 4,
         title: 'Disposition / Follow-Up',
         body: 'What is the current clinical course?',
+        citation: [2],
         options: [
             {
                 label: 'Resolved or clearly improving',

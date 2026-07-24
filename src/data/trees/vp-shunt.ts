@@ -12,8 +12,8 @@ export const VP_SHUNT_CRITICAL_ACTIONS = [
   { text: 'Compare ventricular size to prior imaging', nodeId: 'vps-imaging-interpretation' },
   { text: 'Emergent ICP reduction if herniation signs present', nodeId: 'vps-emergent-icp' },
   { text: 'Neurosurgery consult for all suspected malfunctions', nodeId: 'vps-nsgy-consult' },
-  { text: 'Blood cultures before antibiotics for suspected infection', nodeId: 'vps-infection-workup' },
-  { text: 'Shunt tap only by neurosurgery', nodeId: 'vps-shunt-tap-technique' },
+  { text: 'Blood cultures before antibiotics for suspected infection', nodeId: 'vps-infection-labs' },
+  { text: 'Shunt tap only by neurosurgery', nodeId: 'vps-shunt-tap-indications' },
 ];
 
 export const VP_SHUNT_NODES: DecisionNode[] = [
@@ -377,7 +377,7 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     module: 6,
     title: 'Intubation Considerations',
     body: '**When intubation is needed:**\n- GCS <8 or declining mental status\n- Inability to protect airway\n- Respiratory failure\n- Need for emergent surgical intervention\n\n**RSI considerations for elevated ICP:**\n\n**Goals:**\n- Minimize ICP spikes during laryngoscopy\n- Maintain cerebral perfusion pressure\n- Avoid hypoxia and hypercapnia\n\n**Pre-treatment (optional, controversial):**\n- Lidocaine 1.5 mg/kg IV (blunts ICP response)\n- Fentanyl 1-3 mcg/kg (blunts sympathetic response)\n\n**Induction agents:**\n- [Propofol](#/drug/propofol/rsi induction) 1-2 mg/kg: Reduces ICP, but causes hypotension\n- [Etomidate](#/drug/etomidate/rsi induction) 0.3 mg/kg: Hemodynamically stable, minimal ICP effect\n- [Ketamine](#/drug/ketamine/rsi induction) 1-2 mg/kg: Previously avoided but now considered safe for ICP\n\n**Paralytic:**\n- Rocuronium 1.2 mg/kg (preferred for rapid onset)\n- Succinylcholine 1.5 mg/kg (OK unless concern for hyperkalemia)\n\n**Post-intubation:**\n- Verify placement\n- Target normocapnia (pCO2 35-40) or mild hypocapnia (30-35)\n- Continue sedation to prevent coughing/straining\n- Elevate HOB 30 degrees',
-    citation: [1, 10, 11],
+    citation: [1, 10, 11, 17],
     next: 'vps-disposition',
 
     summary: 'RSI for elevated ICP: etomidate for hemodynamic stability, rocuronium 1.2mg/kg; target normocapnia post-intubation',
@@ -459,7 +459,7 @@ export const VP_SHUNT_NODES: DecisionNode[] = [
     body: '**Key Takeaways:**\n\n**1. High index of suspicion:**\n- Pediatric shunts have high early complication and revision burden\n- Symptoms may be subtle or intermittent\n- Caregiver concern for "acting like previous malfunction" is valuable\n\n**2. Normal imaging does NOT exclude malfunction:**\n- Chronically shunted ventricles may not dilate\n- Clinical assessment may be more reliable than imaging\n- Consult neurosurgery if suspicion remains high\n\n**3. Differentiate malfunction from infection:**\n- Infection may present as malfunction alone\n- Fever, recent surgery, elevated inflammatory markers, abdominal tenderness, wound change, or CSF leak suggest infection\n- Hardware source control is usually required for infected shunts\n\n**4. ICP management is a bridge:**\n- Hypertonic saline is commonly preferred for herniation physiology, especially when hypotension or volume depletion is a concern\n- Definitive treatment requires neurosurgery\n- Early consultation is essential\n\n**5. Shunt tap:**\n- Ideally performed by neurosurgery\n- ED tap is reserved for peri-arrest/impending herniation when neurosurgery is unavailable and local policy supports it\n- Provides pressure measurement and CSF for analysis\n\n**6. All suspected malfunction requires neurosurgery consultation.**',
     recommendation: 'Maintain high suspicion for shunt malfunction in any patient with VP shunt presenting with headache, vomiting, or altered mental status. Normal imaging does not exclude obstruction. Consult neurosurgery early. Use hypertonic saline for ICP management. Differentiate malfunction from infection. All patients require admission unless cleared by neurosurgery.',
     confidence: 'recommended',
-    citation: [1, 2, 3, 4],
+    citation: [1, 2, 3, 4, 10, 11],
   },
 
 ];
@@ -501,4 +501,5 @@ export const VP_SHUNT_CITATIONS: Citation[] = [
   { num: 14, text: 'Children\'s Minnesota. Suspected Shunt Malfunction or Infection ED Guideline. Revised 2025; expires 2028.' },
   { num: 15, text: 'Jayanth A, Benabbas R, Chao J, Sinert R. Diagnostic modalities to determine ventriculoperitoneal shunt malfunction: systematic review and meta-analysis. Am J Emerg Med. 2021;39:180-189.' },
   { num: 16, text: 'Meyer A, et al. Distended abdomen due to a pseudocyst around a ventriculoperitoneal shunt. Wien Klin Wochenschr. 2022;134:822-823. Open access CC BY 4.0.' },
+  { num: 17, text: 'Brown CA 3rd, Sakles JC, Mick NW, eds. The Walls Manual of Emergency Airway Management. 5th ed. Wolters Kluwer; 2018. (RSI agent and paralytic dosing.)' },
 ];

@@ -2,7 +2,7 @@
 // Recognition of xylazine-adulterated opioid use, OA2A toxidrome management,
 // wound assessment and staging, acute supportive care, withdrawal management, and disposition.
 // 6 modules: Recognition → Wound Assessment → Acute Management → Wound Care → Withdrawal → Disposition
-// 32 nodes total.
+// 27 nodes total.
 export const XYLAZINE_TOXICITY_CRITICAL_ACTIONS = [
     { text: 'STILL give naloxone - 95% of xylazine ODs involve fentanyl co-ingestion', nodeId: 'xyl-naloxone' },
     { text: 'Titrate naloxone to RR >12, NOT wakefulness - avoid precipitating withdrawal with aspiration risk', nodeId: 'xyl-naloxone' },
@@ -23,8 +23,8 @@ export const XYLAZINE_TOXICITY_NODES = [
         type: 'question',
         module: 1,
         title: 'Xylazine Toxicity — Initial Assessment',
-        body: '**Xylazine Quick Reference** — key facts at a glance.\n\n**What is Xylazine ("Tranq")?**\n• **Alpha-2 adrenergic agonist** (same class as clonidine, dexmedetomidine)\n• FDA-approved for veterinary use ONLY — not approved for humans\n\n**The epidemic (2025 update):**\n• **MEDETOMIDINE now dominant** in some markets — detected in **72% of Philadelphia samples** (Oct-Dec 2024), while xylazine dropped from 98% to 31% [CDC MMWR April 2025]\n• Medetomidine is **10x more potent** than xylazine — expect more severe sedation and bradycardia\n• Same management principles apply (alpha-2 agonist toxidrome)\n\n**Critical point:** These drugs are **NOT reversed by naloxone** — they are not opioids. However, **still give naloxone** because 95% of exposures involve fentanyl co-ingestion [1][2].\n\nWhat is the patient\'s current presentation?',
-        citation: [1, 2],
+        body: '**Xylazine Quick Reference** — key facts at a glance.\n\n**What is Xylazine ("Tranq")?**\n• **Alpha-2 adrenergic agonist** (same class as clonidine, dexmedetomidine)\n• FDA-approved for veterinary use ONLY — not approved for humans\n\n**The epidemic (2025 update):**\n• **MEDETOMIDINE now dominant** in some markets — detected in **72% of Philadelphia samples** (Oct-Dec 2024), while xylazine dropped from 98% to 31% [8]\n• Medetomidine is **10x more potent** than xylazine — expect more severe sedation and bradycardia\n• Same management principles apply (alpha-2 agonist toxidrome)\n\n**Critical point:** These drugs are **NOT reversed by naloxone** — they are not opioids. However, **still give naloxone** because 95% of exposures involve fentanyl co-ingestion [1][2].\n\nWhat is the patient\'s current presentation?',
+        citation: [1, 2, 8],
         calculatorLinks: [
             { id: 'xyl-wound-staging', label: 'Xylazine Wound Staging' },
             { id: 'xyl-withdrawal-comparison', label: 'Tranq vs Opioid Withdrawal' },
@@ -114,7 +114,7 @@ export const XYLAZINE_TOXICITY_NODES = [
         module: 2,
         title: 'Stage 3A — Severe XAW with Function',
         body: '**Philadelphia Consensus Classification [3]:**\n• Severe tissue necrosis\n• **Exposed bone** — osteomyelitis likely\n• **Function PRESERVED** — limb salvage possible\n\n**Management:**\n1. **Surgical consult** for serial debridement\n2. Aggressive wound care with **biologic templates (BTM)** if abstinent\n3. IV antibiotics until infection controlled\n4. Consider **amputation ONLY if fails conservative management**\n\n**Workup:**\n• X-ray for osteomyelitis\n• MRI if osteomyelitis suspected and X-ray negative\n• Blood cultures\n• Wound cultures (deep tissue > swab)\n\n**Antibiotics:**\n• [Vancomycin](#/drug/vancomycin/xylazine) + [Piperacillin-Tazobactam](#/drug/piperacillin-tazobactam/sepsis empiric)\n• Duration: 6 weeks if osteomyelitis confirmed [3][4]',
-        citation: [3, 4],
+        citation: [3, 4, 9],
         treatment: {
             firstLine: {
                 drug: 'Vancomycin + Piperacillin-Tazobactam',
@@ -136,7 +136,7 @@ export const XYLAZINE_TOXICITY_NODES = [
         module: 2,
         title: 'Stage 3B — Severe XAW without Function',
         body: '**Philadelphia Consensus Classification [3]:**\n• Severe tissue necrosis with exposed bone\n• Osteomyelitis present\n• **NO meaningful function preserved**\n\n**Recommendation: Amputation** [3]\n• Limb salvage unlikely to succeed\n• Ongoing infection risk\n• Quality of life considerations\n\n**Patient-centered approach:**\n• Discuss goals of care\n• Some patients may prefer limb preservation despite poor function\n• Document shared decision-making\n\n**Pre-operative:**\n• IV antibiotics\n• Optimize nutrition\n• Pain control\n• Addiction medicine consultation for perioperative MOUD',
-        citation: [3, 4],
+        citation: [3, 4, 9],
         treatment: {
             firstLine: {
                 drug: 'Vancomycin + Piperacillin-Tazobactam',
@@ -465,4 +465,6 @@ export const XYLAZINE_TOXICITY_CITATIONS = [
     { num: 5, text: 'Silverstein SM, et al. Medetomidine-Associated Withdrawal Requiring ICU Admission. Am J Psychiatry. 2025;182(2):194-198.' },
     { num: 6, text: 'SAMHSA. Overdose Prevention and Response Toolkit. Substance Abuse and Mental Health Services Administration. 2023.' },
     { num: 7, text: 'Philadelphia Department of Public Health. Xylazine (Tranq) Wound Best Practices. PennCAMP. 2023.' },
+    { num: 8, text: 'Huo S, London K, Murphy L, et al. Notes from the Field: Suspected Medetomidine Withdrawal Syndrome Among Fentanyl-Exposed Patients — Philadelphia, Pennsylvania, September 2024–January 2025. MMWR Morb Mortal Wkly Rep. 2025;74(15):266-268. doi:10.15585/mmwr.mm7415a2' },
+    { num: 9, text: 'Rybak MJ, et al. Therapeutic monitoring of vancomycin for serious methicillin-resistant Staphylococcus aureus infections: a revised consensus guideline of ASHP, IDSA, PIDS, and SIDP. Am J Health Syst Pharm. 2020;77(11):835-864.' },
 ];

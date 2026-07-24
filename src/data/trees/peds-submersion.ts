@@ -1,6 +1,6 @@
 // MedKitt — Pediatric Submersion Injuries
 // ED evaluation, resuscitation, and disposition for drowning/near-drowning
-// 6 modules: Scene/Rescue → Initial Assessment → Resuscitation → Complications → Special Populations → Disposition
+// 6 modules: Scene/Rescue → Resuscitation → Post-Arrest/Critical → AMS/Respiratory → Asymptomatic → Disposition
 // Based on ILCOR/AHA 2020 Guidelines and pediatric drowning literature
 
 import type { DecisionNode } from '../../models/types.js';
@@ -17,7 +17,7 @@ export const PEDS_SUBMERSION_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Warm hypothermic patients before declaring death', nodeId: 'submersion-severe-hypothermia' },
   { text: 'Obtain chest X-ray for all symptomatic submersion patients', nodeId: 'submersion-resp-symptoms' },
   { text: 'Observe all symptomatic patients for minimum 4-8 hours', nodeId: 'submersion-observation-ed' },
-  { text: 'Admit patients with hypoxia, altered mental status, or respiratory distress', nodeId: 'submersion-disposition-critical' },
+  { text: 'Admit patients with hypoxia, altered mental status, or respiratory distress', nodeId: 'submersion-observation-admit' },
   { text: 'Consider child abuse in submersion injuries <1 year or with inconsistent history', nodeId: 'submersion-scene-info' },
   { text: 'Provide family support and anticipatory guidance', nodeId: 'submersion-disposition-critical' },
 ];
@@ -136,7 +136,7 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
     module: 2,
     title: 'Termination Considerations',
     body: '**Consider termination when:**\n\n**Multiple poor prognostic factors present:**\n• Warm water submersion >25 minutes\n• Normothermic CPR >25 minutes without ROSC\n• Asystole as initial rhythm (without hypothermia)\n• pH <6.75 on initial ABG\n• Serum K+ >10 mEq/L\n\n**Do NOT terminate if:**\n• Core temperature <30°C (continue until rewarmed)\n• ECMO available and transfer possible\n• Any signs of life during resuscitation\n\n**Family communication:**\n• Involve family early when prognosis poor\n• Allow witnessed resuscitation if appropriate\n• Provide clear, compassionate explanation\n\n**Organ donation consideration if appropriate**',
-    citation: [2, 6],
+    citation: [2, 5, 6],
     next: undefined,
   },
 
@@ -196,8 +196,8 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'AMS Management Pathway',
-    body: '**Assess severity and trajectory:**\n\n**Improving mental status:**\n• Serial neuro exams Q15-30 min\n• Continuous monitoring\n• Supportive care\n\n**Static or worsening:**\n• Intubation for airway protection\n• Consider head CT\n• ICU admission\n\n**Key interventions:**\n• High-flow O2 or intubation if needed\n• Treat seizures: [Lorazepam](#/drug/lorazepam/seizure) + AED load\n• Avoid hyperthermia\n• Correct glucose abnormalities\n\nWhat is the clinical trajectory?',
-    citation: [3, 7],
+    body: '**Assess severity and trajectory:**\n\n**Improving mental status:**\n• Serial neuro exams Q15-30 min\n• Continuous monitoring\n• Supportive care\n\n**Static or worsening:**\n• Intubation for airway protection\n• Consider head CT\n• ICU admission\n\n**Key interventions:**\n• High-flow O2 or intubation if needed\n• Treat seizures: [Lorazepam](#/drug/lorazepam/seizure) + AED load [11]\n• Avoid hyperthermia\n• Correct glucose abnormalities\n\nWhat is the clinical trajectory?',
+    citation: [3, 7, 11],
     options: [
       { label: 'Improving/Stable GCS >8', description: 'Observation with close monitoring', next: 'submersion-observation-admit' },
       { label: 'GCS ≤8 or worsening', description: 'Intubate, ICU admission', next: 'submersion-post-arrest' },
@@ -210,7 +210,7 @@ export const PEDS_SUBMERSION_NODES: DecisionNode[] = [
     module: 4,
     title: 'Seizure Management',
     body: '**Post-submersion seizures:**\n\n**First-line:** [Lorazepam](#/drug/lorazepam/seizure)\n• 0.1 mg/kg IV (max 4 mg)\n• May repeat x1 in 5 minutes\n\n**Second-line:** [Levetiracetam](#/drug/levetiracetam/seizure)\n• 60 mg/kg IV (max 4500 mg)\n• OR fosphenytoin 20 mg PE/kg\n\n**Refractory status:**\n• Intubate if not already\n• Midazolam or propofol infusion\n• Neurology consultation\n\n**Important considerations:**\n• Seizures may be due to hypoxic-ischemic injury\n• Also consider: hypoglycemia, hyponatremia, trauma\n• Aggressive treatment — seizures worsen brain injury\n• Continuous EEG monitoring in ICU',
-    citation: [7],
+    citation: [7, 11],
     next: 'submersion-post-arrest',
   },
   {
@@ -305,6 +305,7 @@ export const PEDS_SUBMERSION_CITATIONS: Citation[] = [
   { num: 8, text: 'Brenner RA, et al. The epidemiology of drowning. Pediatrics. 2003;112(2):440-445.' },
   { num: 9, text: 'Causey AL, et al. Predicting discharge in uncomplicated near-drowning. Am J Emerg Med. 2000;18(1):9-11.' },
   { num: 10, text: 'Cohen N, et al. Duration of observation after submersion injury. Ann Emerg Med. 2021;77(6):651-659.' },
+  { num: 11, text: 'Glauser T, et al. Evidence-based guideline: treatment of convulsive status epilepticus in children and adults. Report of the Guideline Committee of the American Epilepsy Society. Epilepsy Curr. 2016;16(1):48-61.' },
 ];
 
 export const PEDS_SUBMERSION_NODE_COUNT = PEDS_SUBMERSION_NODES.length;

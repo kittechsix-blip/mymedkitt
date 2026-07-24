@@ -54,7 +54,7 @@ export const SJS_TEN_NODES = [
         body: '**EM is not on the SJS/TEN spectrum.** It is driven by infection — **HSV is the dominant trigger** (also Mycoplasma) — not drugs.\n\n**Recognize it:** *typical* target lesions = 3 concentric zones (central dusky/bullous → pale edematous ring → outer erythema), <3 cm, well-defined, **acral** (dorsal hands/feet) spreading proximally. **Nikolsky-negative.** Self-limiting over 1–2 weeks.\n\n**EM minor** = no/minimal mucosa, no systemic symptoms. **EM major** = significant mucosal involvement + fever/arthralgia — still EM, not SJS.\n\n[See an EM target lesion](#/info/sjs-ten-images).',
         recommendation: 'Erythema multiforme: infection-driven (HSV most common), acral typical targets, Nikolsky-negative, self-limiting. Treat trigger (e.g., aciclovir for HSV-associated/recurrent EM), supportive care. This is NOT SJS/TEN — different pathophysiology, distribution, and prognosis.',
         confidence: 'recommended',
-        citation: [1, 7],
+        citation: [1, 7, 16],
         summary: 'EM = HSV-driven acral typical targets, Nikolsky-neg, self-limiting — not SJS',
     },
     {
@@ -77,7 +77,7 @@ export const SJS_TEN_NODES = [
         module: 3,
         title: 'Identify & Stop the Culprit',
         body: '**STOP the culprit drug immediately** — earlier withdrawal of short-half-life culprits lowers mortality. Review **all** drugs started in the prior **4–8 weeks** (typical latency **4–28 days**; anticonvulsants up to ~8 weeks).\n\n[High-risk culprit drugs](#/info/sjs-ten-culprits) — full list with notoriety.\n\n**Highest-risk (RegiSCAR/EuroSCAR):** allopurinol, carbamazepine, lamotrigine, phenytoin, phenobarbital, **sulfonamide antibiotics (TMP-SMX)**, sulfasalazine, nevirapine, oxicam NSAIDs, abacavir.\n\nUse the **ALDEN algorithm** for formal causality when multiple drugs are in play. Then risk-stratify.',
-        citation: [4, 6, 10],
+        citation: [4, 5, 6, 10],
         next: 'sjs-ten-scorten-node',
         summary: 'Stop the drug now; review last 4–8 weeks; allopurinol/anticonvulsants/sulfa/NSAIDs',
         safetyLevel: 'critical',
@@ -164,5 +164,6 @@ export const SJS_TEN_CITATIONS = [
     { num: 13, text: 'Wang CW, Yang LY, Chen CB, et al. Randomized, controlled trial of a TNF-α antagonist (etanercept) in severe cutaneous adverse reactions. J Clin Invest. 2018;128(3):985-996.' },
     { num: 14, text: 'Zimmermann S, Sekula P, Venhoff M, et al. Systemic immunomodulating therapies for Stevens-Johnson syndrome and toxic epidermal necrolysis: a systematic review and meta-analysis. JAMA Dermatol. 2017;153(6):514-522.' },
     { num: 15, text: 'Sekula P, Dunant A, Mockenhaupt M, et al. (RegiSCAR). Comprehensive survival analysis of a cohort of patients with Stevens-Johnson syndrome and toxic epidermal necrolysis. J Invest Dermatol. 2013;133(5):1197-1204.' },
+    { num: 16, text: 'Sokumbi O, Wetter DA. Clinical features, diagnosis, and treatment of erythema multiforme: a review for the practicing dermatologist. Int J Dermatol. 2012;51(8):889-902.' },
 ];
 export const SJS_TEN_NODE_COUNT = SJS_TEN_NODES.length;

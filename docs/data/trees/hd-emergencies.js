@@ -1,11 +1,12 @@
 // MedKitt — Hemodialysis Emergencies
 // ED management of ESRD complications using AEIOU framework
-// 5 modules: Triage → Electrolytes → Access → Fluid/Infection → Special Situations
+// 5 modules: AEIOU Triage → Electrolytes → Access → Infection/Overload → Uremia
+// 22 nodes total.
 // Based on KDOQI Guidelines and nephrology literature
 export const HD_EMERGENCIES_CRITICAL_ACTIONS = [
     { text: 'Use AEIOU framework to triage HD emergencies', nodeId: 'hd-start' },
-    { text: 'Check potassium immediately and get EKG if elevated', nodeId: 'hd-hyperkalemia' },
-    { text: 'Give calcium gluconate 1-2g IV for severe hyperkalemia with EKG changes', nodeId: 'hd-hyperkalemia' },
+    { text: 'Check potassium immediately and get EKG if elevated', nodeId: 'hd-hyperkalemia-severe' },
+    { text: 'Give calcium gluconate 1-2g IV for severe hyperkalemia with EKG changes', nodeId: 'hd-hyperkalemia-severe' },
     { text: 'Arrange emergent dialysis for refractory hyperkalemia, pulmonary edema, or uremic emergency', nodeId: 'hd-overload-main' },
     { text: 'Preserve vascular access at all costs (avoid blood draws, BP cuffs on access arm)', nodeId: 'hd-access-main' },
     { text: 'Give antibiotics early for suspected catheter-related sepsis', nodeId: 'hd-infection-main' },
@@ -83,7 +84,7 @@ export const HD_EMERGENCIES_NODES = [
         module: 2,
         title: 'Severe Hyperkalemia Protocol',
         body: '**🚨 SEVERE HYPERKALEMIA — ECG changes present**\n\n**1. CARDIAC MEMBRANE STABILIZATION (Immediate):**\n• **Calcium gluconate 1-2 g IV** over 2-3 min\n• Onset: 1-3 minutes\n• Duration: 30-60 minutes\n• May repeat if ECG changes persist\n• Alternative: Calcium chloride 500-1000 mg (central line preferred)\n\n**2. SHIFT K+ INTRACELLULARLY:**\n• **Insulin 10 units regular IV + D50 25g**\n  — Onset: 15-30 min, duration 4-6 hr\n  — Monitor glucose q1h\n• **Albuterol 10-20 mg nebulized** (additive effect)\n  — Onset: 30 min, duration 2 hr\n\n**3. EMERGENT DIALYSIS:**\n• **Call nephrology STAT**\n• Only definitive treatment in ESRD\n• Removes 25-50 mEq K+/hour\n\n**⚠️ NOT emergent therapy:**\n• Kayexalate — hours to work, GI complications\n• Patiromer/SZC — not for acute use',
-        citation: [3, 4],
+        citation: [3, 4, 18],
         calculatorLinks: [
             { id: 'hd-hyperkalemia', label: 'Hyperkalemia Protocol' },
         ],
@@ -97,7 +98,7 @@ export const HD_EMERGENCIES_NODES = [
         module: 2,
         title: 'Moderate Hyperkalemia',
         body: '**K+ 5.5-6.5, no ECG changes:**\n\n**Management:**\n\n**1. Continuous cardiac monitoring**\n\n**2. Shift therapy:**\n• Insulin 10 units IV + D50 25g\n• Albuterol 10-20 mg nebulized (additive)\n\n**3. Contact nephrology:**\n• Arrange urgent dialysis\n• May need same-day HD\n\n**Consider calcium gluconate if:**\n• K+ trending up\n• Recent missed dialysis\n• High-risk patient\n\n**Repeat K+ in 1-2 hours**\n\n**Do NOT delay dialysis** — shift therapy is temporary',
-        citation: [3, 4],
+        citation: [3, 4, 18],
         next: 'hd-electrolyte-disposition',
         summary: 'Insulin 10U + D50 1 amp, kayexalate controversial, arrange urgent dialysis within hours',
     },
@@ -130,8 +131,8 @@ export const HD_EMERGENCIES_NODES = [
         type: 'question',
         module: 3,
         title: 'Access Complication Type',
-        body: '**Access is the patient\'s lifeline — preserve if possible.**\n\n**Access types:**\n• **AVF (arteriovenous fistula)** — preferred, lowest complication rate\n• **AVG (arteriovenous graft)** — synthetic conduit\n• **Tunneled catheter (Permacath)** — highest infection risk\n• **Non-tunneled catheter** — temporary only\n\nWhat type of access complication?',
-        citation: [5],
+        body: '**Access is the patient\'s lifeline — preserve at all costs.**\n\n**Access-arm precautions (KDOQI/ESVS):**\n• No venipuncture or blood draws from the access extremity\n• No IV placement in the access extremity\n• No BP cuff on the access arm\n• No constricting bands, restraints, or tourniquets proximal to the access\n\n**Access types:**\n• **AVF (arteriovenous fistula)** — preferred, lowest complication rate\n• **AVG (arteriovenous graft)** — synthetic conduit\n• **Tunneled catheter (Permacath)** — highest infection risk\n• **Non-tunneled catheter** — temporary only\n\nWhat type of access complication?',
+        citation: [5, 6],
         options: [
             { label: 'Bleeding from access', description: 'Post-dialysis or spontaneous', next: 'hd-access-bleeding' },
             { label: 'Thrombosed access', description: 'No thrill/bruit, unable to use', next: 'hd-access-clotted' },
@@ -219,7 +220,7 @@ export const HD_EMERGENCIES_NODES = [
         module: 4,
         title: 'Volume Overload / Pulmonary Edema',
         body: '**Volume overload in ESRD:**\n\n**⚠️ Diuretics often ineffective (no UOP)**\n\n**EMERGENT DIALYSIS is definitive treatment**\n\n**Temporizing measures:**\n\n**Oxygenation:**\n• High-flow O₂\n• NIPPV (BiPAP preferred)\n• Intubation if failing\n\n**Reduce preload:**\n• Nitrates (NTG 400 mcg SL → drip 50-200 mcg/min)\n• Positioning (upright)\n\n**Diuretics?**\n• Generally ineffective in ESRD\n• High-dose furosemide (160-200 mg IV) MAY work if residual function\n• Do not delay dialysis waiting for diuretics\n\n**HTN emergency with overload:**\n• Nitroprusside or nicardipine drip\n• Target 20-25% MAP reduction in first hour\n• Avoid fluid boluses',
-        citation: [9, 10],
+        citation: [9, 10, 15, 16],
         next: 'hd-overload-disposition',
         summary: 'Fluid overload in missed dialysis: BiPAP, nitroglycerin, arrange emergent dialysis for ultrafiltration',
     },
@@ -257,7 +258,7 @@ export const HD_EMERGENCIES_NODES = [
         module: 5,
         title: 'Uremic Encephalopathy',
         body: '**Uremic Encephalopathy:**\n\n**Presentation:**\n• Confusion, disorientation\n• Asterixis (metabolic flap)\n• Myoclonus\n• Seizures\n• Progresses to coma\n\n**Differential (rule out):**\n• Hypoglycemia\n• Electrolyte abnormalities\n• Sepsis\n• Stroke\n• Drug toxicity\n\n**Management:**\n• **EMERGENT DIALYSIS** is definitive\n• Treat seizures if present:\n  — [Lorazepam](#/drug/lorazepam/seizure) 0.1 mg/kg IV\n  — [Levetiracetam](#/drug/levetiracetam/seizure) 20-40 mg/kg IV\n\n**⚠️ Dialysis Disequilibrium Syndrome (DDS):**\n• Risk: first HD, high BUN, pediatric, elderly\n• Prevent: slow, gentle initial dialysis\n• Target BUN reduction <40% first session',
-        citation: [11, 12],
+        citation: [11, 12, 17],
         calculatorLinks: [
             { id: 'hd-dds-prevention', label: 'DDS Prevention' },
         ],
@@ -306,16 +307,20 @@ export const HD_EMERGENCIES_CITATIONS = [
     { num: 2, text: 'KDOQI Clinical Practice Guidelines for Hemodialysis Adequacy. Am J Kidney Dis. 2015;66(5):884-930.' },
     { num: 3, text: 'Clase CM, et al. Potassium homeostasis and management of dyskalemia in kidney diseases. Kidney Int. 2020;97(1):42-61.' },
     { num: 4, text: 'Palmer BF. Managing hyperkalemia caused by inhibitors of the renin-angiotensin-aldosterone system. N Engl J Med. 2004;351(6):585-592.' },
-    { num: 5, text: 'KDOQI Clinical Practice Guidelines for Vascular Access. Am J Kidney Dis. 2019;75(4 Suppl 2):S1-S164.' },
+    { num: 5, text: 'Schmidli J, et al. Editor\'s Choice — Vascular Access: 2018 Clinical Practice Guidelines of the European Society for Vascular Surgery (ESVS). Eur J Vasc Endovasc Surg. 2018;55(6):757-818.' },
     { num: 6, text: 'Lok CE, et al. KDOQI Clinical Practice Guideline for Vascular Access: 2019 Update. Am J Kidney Dis. 2020;75(4 Suppl 2):S1-S164.' },
     { num: 7, text: 'Mermel LA, et al. IDSA Guidelines for Intravascular Catheter-Related Infection. Clin Infect Dis. 2009;49(1):1-45.' },
     { num: 8, text: 'Vanholder R, et al. Diagnosis, prevention and treatment of haemodialysis catheter-related bloodstream infections. Nephrol Dial Transplant. 2010;25(6):1761-1773.' },
     { num: 9, text: 'Kalantar-Zadeh K, et al. Fluid retention is associated with cardiovascular mortality in chronic kidney disease. Circulation. 2009;119(5):671-679.' },
-    { num: 10, text: 'Jhund PS, et al. Diuretic strategies in patients with acute decompensated heart failure. N Engl J Med. 2011;364(9):797-805.' },
+    { num: 10, text: 'Felker GM, et al. Diuretic strategies in patients with acute decompensated heart failure (DOSE). N Engl J Med. 2011;364(9):797-805.' },
     { num: 11, text: 'Meyer TW, Hostetter TH. Uremia. N Engl J Med. 2007;357(13):1316-1325.' },
     { num: 12, text: 'Patel N, et al. Dialysis disequilibrium syndrome: a narrative review. Semin Dial. 2008;21(4):493-498.' },
     { num: 13, text: 'Alpert MA, Ravenscraft MD. Pericardial involvement in end-stage renal disease. Am J Med Sci. 2003;325(4):228-236.' },
     { num: 14, text: 'Hedges SJ, et al. Evidence-based treatment recommendations for uremic bleeding. Nat Clin Pract Nephrol. 2007;3(3):138-153.' },
+    { num: 15, text: 'Cotter G, et al. Randomised trial of high-dose isosorbide dinitrate plus low-dose furosemide versus high-dose furosemide plus low-dose isosorbide dinitrate in severe pulmonary oedema. Lancet. 1998;351(9100):389-393.' },
+    { num: 16, text: 'van den Born BH, et al. ESC Council on Hypertension position document on the management of hypertensive emergencies. Eur Heart J Cardiovasc Pharmacother. 2019;5(1):37-46.' },
+    { num: 17, text: 'Glauser T, et al. Evidence-based guideline: treatment of convulsive status epilepticus in children and adults. Report of the Guideline Committee of the American Epilepsy Society. Epilepsy Curr. 2016;16(1):48-61.' },
+    { num: 18, text: 'Lindner G, et al. Acute hyperkalemia in the emergency department: a summary from a Kidney Disease: Improving Global Outcomes conference. Eur J Emerg Med. 2020;27(5):329-337.' },
 ];
 export const HD_EMERGENCIES_NODE_COUNT = HD_EMERGENCIES_NODES.length;
 export const HD_EMERGENCIES_MODULE_LABELS = ['AEIOU Triage', 'Electrolytes', 'Access', 'Infection/Overload', 'Uremia'];

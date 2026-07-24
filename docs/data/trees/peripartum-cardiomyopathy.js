@@ -141,7 +141,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 duration: 'Until hemodynamically stable',
                 notes: 'Start at 2.5 mcg/kg/min, titrate to effect. May cause hypotension.',
             },
-            alternatives: {
+            alternative: {
                 drug: 'Norepinephrine',
                 dose: '0.1-0.5 mcg/kg/min',
                 route: 'IV infusion',
@@ -181,6 +181,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 next: 'ppcm-diuretics',
             },
         ],
+        citation: [1, 2],
         summary: 'Pregnancy status determines medication safety — ACEi/ARB contraindicated before delivery',
     },
     {
@@ -270,7 +271,7 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
                 duration: 'Until delivery, then switch to ACEi/ARB',
                 notes: 'Hydralazine 10-20 mg IV q4-6h for acute use. Avoid if SBP <100.',
             },
-            alternatives: {
+            alternative: {
                 drug: 'Nitroglycerin',
                 dose: '10-200 mcg/min',
                 route: 'IV infusion',
@@ -437,8 +438,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_NODES = [
         type: 'question',
         module: 5,
         title: 'Delivery Considerations',
-        body: '**If patient is still pregnant, coordinate with OB/MFM and cardiology.**\n\n**Timing of delivery:**\n- Hemodynamically stable: attempt to stabilize mother, optimize gestational age\n- Hemodynamically unstable: urgent/emergent delivery after maternal stabilization\n- Inotrope-dependent or mechanical support: urgent delivery indicated\n\n**Mode of delivery:**\n- **Vaginal delivery preferred** if hemodynamically stable\n- C-section for obstetric indications only\n- C-section higher risk: hemorrhage, infection, thromboembolism\n\n**Anesthesia:**\n- Epidural analgesia preferred for vaginal delivery (reduces catecholamine surge)\n- Neuraxial for C-section (epidural > single-shot spinal due to slower onset)\n- General anesthesia: avoid if possible (hemodynamic swings) [1][2][3]',
-        citation: [1, 2, 3],
+        body: '**If patient is still pregnant, coordinate with OB/MFM and cardiology.**\n\n**Timing of delivery:**\n- Hemodynamically stable: attempt to stabilize mother, optimize gestational age\n- Hemodynamically unstable: urgent/emergent delivery after maternal stabilization\n- Inotrope-dependent or mechanical support: urgent delivery indicated\n\n**Mode of delivery:**\n- **Vaginal delivery preferred** if hemodynamically stable\n- C-section for obstetric indications only\n- C-section higher risk: hemorrhage, infection, thromboembolism\n\n**Anesthesia:**\n- Epidural analgesia preferred for vaginal delivery (reduces catecholamine surge)\n- Neuraxial for C-section (epidural > single-shot spinal due to slower onset)\n- General anesthesia: avoid if possible (hemodynamic swings) [1][2][3]\n\n**Analgesia caution:**\n- **Avoid NSAIDs** — sodium/fluid retention and increased afterload worsen heart failure; they are not recommended in patients with HFrEF [1][2][10]',
+        citation: [1, 2, 3, 10],
         options: [
             {
                 label: 'Hemodynamically stable - plan delivery',
@@ -580,8 +581,8 @@ export const PERIPARTUM_CARDIOMYOPATHY_CRITICAL_ACTIONS = [
     { text: 'Avoid NSAIDs (worsen heart failure and increase afterload)', nodeId: 'ppcm-delivery-considerations' },
     { text: 'Deliver at 37 weeks if LVEF <30% (increased risk of decompensation)', nodeId: 'ppcm-urgent-delivery' },
     { text: 'Bromocriptine suppresses lactation — discuss as shared decision (ESC IIb); enables full GDMT but is not mandatory for every patient', nodeId: 'ppcm-bromocriptine' },
-    { text: 'Dobutamine or milrinone for cardiogenic shock (low-dose vasopressin if refractory)', nodeId: 'ppcm-unstable' },
-    { text: 'Contraception essential - subsequent pregnancy with unrecovered LVEF (<50%) carries high relapse risk and substantial mortality (~15-25%); counsel against pregnancy until recovery', nodeId: 'ppcm-disposition' },
+    { text: 'Dobutamine or milrinone for cardiogenic shock (low-dose vasopressin if refractory)', nodeId: 'ppcm-shock-meds' },
+    { text: 'Contraception essential - subsequent pregnancy with unrecovered LVEF (<50%) carries high relapse risk and substantial mortality (~15-25%); counsel against pregnancy until recovery', nodeId: 'ppcm-postpartum-management' },
 ];
 // =====================================================================
 // CITATIONS
@@ -622,5 +623,9 @@ export const PERIPARTUM_CARDIOMYOPATHY_CITATIONS = [
     {
         num: 9,
         text: 'Medscape. Peripartum (Postpartum) Cardiomyopathy Treatment & Management. 2024.',
+    },
+    {
+        num: 10,
+        text: 'Heidenreich PA, et al. 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure. J Am Coll Cardiol. 2022;79(17):e263-e421. (NSAIDs may cause sodium/fluid retention and worsen heart failure.)',
     },
 ];

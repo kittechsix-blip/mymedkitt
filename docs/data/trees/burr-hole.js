@@ -1,15 +1,15 @@
 // MedKitt — Emergency Burr Hole Craniostomy
 // Life-saving decompression for extra-axial hematoma when neurosurgery unavailable
-// Sources: Roberts & Hedges 7th Ed, WikEM, LITFL, EMCrit, Joint Trauma System CPG
-// 6 modules: Indications → Anatomy → Equipment → Technique → Complications → Post-Procedure
-// ~38 nodes
+// Sources: Roberts & Hedges 7th Ed, WikEM, LITFL, EMCrit, Brain Trauma Foundation, Scand J Trauma 2012, Joint Trauma System CPG
+// 6 modules: Indications → Anatomy → Equipment → Technique → Closure & Complications → Post-Procedure
+// 30 nodes total.
 export const BURR_HOLE_CRITICAL_ACTIONS = [
     { text: 'Use CLUTCH drill bit — auto-disengages at inner table, prevents brain injury', nodeId: 'bh-drill-technique' },
     { text: 'Stay ≥3 cm lateral to midline — avoids sagittal sinus', nodeId: 'bh-anatomy-landmarks' },
     { text: 'Ipsilateral to dilated pupil — correct side in >85% of cases', nodeId: 'bh-side-selection' },
     { text: 'DO NOT tamponade bleeding — loose dressing only (tight packing increases ICP)', nodeId: 'bh-wound-closure' },
     { text: 'This is a BRIDGE, not a cure — patient still requires definitive neurosurgical craniotomy', nodeId: 'bh-post-procedure' },
-    { text: 'Time-critical: Outcomes significantly worsen if drainage >70-90 min from herniation signs', nodeId: 'bh-indications' },
+    { text: 'Time-critical: Outcomes significantly worsen if drainage >70-90 min from herniation signs', nodeId: 'bh-start' },
     { text: 'If no blood found — DO NOT explore further, close and transport immediately', nodeId: 'bh-no-blood' },
 ];
 export const BURR_HOLE_NODES = [
@@ -159,7 +159,7 @@ export const BURR_HOLE_NODES = [
         type: 'info',
         module: 3,
         title: 'The Clutch Mechanism — Critical Safety',
-        body: '**The Clutch is the Most Important Safety Feature**\n\n**How It Works:**\n• Drill bit automatically DISENGAGES when it penetrates the inner table\n• Detects the sudden drop in resistance\n• Prevents "plunging" into brain tissue\n\n**This is What Allows Non-Neurosurgeons to Perform This Procedure**\n\n**Proper Clutch Drill Technique:**\n1. Position drill perpendicular to skull\n2. Apply firm, STEADY downward pressure\n3. Drill CONTINUOUSLY until spindle stops\n4. ⚠️ **DO NOT stop and restart** — difficult to re-engage clutch\n5. Irrigate with saline during drilling\n\n**Common Clutch Bits:**\n• Codman 26-1221 (14mm perforator)\n• Midas Rex perforator\n• Aesculap perforator\n\n**If Clutch Bit Unavailable:**\n• See [No Clutch Technique](#bh-no-clutch-technique)\n• Much higher risk — requires two-bit technique [1][6]',
+        body: '**The Clutch is the Most Important Safety Feature**\n\n**How It Works:**\n• Drill bit automatically DISENGAGES when it penetrates the inner table\n• Detects the sudden drop in resistance\n• Prevents "plunging" into brain tissue\n\n**This is What Allows Non-Neurosurgeons to Perform This Procedure**\n\n**Proper Clutch Drill Technique:**\n1. Position drill perpendicular to skull\n2. Apply firm, STEADY downward pressure\n3. Drill CONTINUOUSLY until spindle stops\n4. ⚠️ **DO NOT stop and restart** — difficult to re-engage clutch\n5. Irrigate with saline during drilling\n\n**Common Clutch Bits:**\n• Codman 26-1221 (14mm perforator)\n• Midas Rex perforator\n• Aesculap perforator\n\n**If Clutch Bit Unavailable:**\n• See [No Clutch Technique](#/node/bh-no-clutch-technique)\n• Much higher risk — requires two-bit technique [1][6]',
         citation: [1, 6],
         next: 'bh-pre-procedure',
         summary: 'Do NOT stop/restart — continuous drill until spindle stops',
@@ -370,8 +370,8 @@ export const BURR_HOLE_NODES = [
         type: 'info',
         module: 6,
         title: 'Post-Procedure Care',
-        body: '**Immediate Post-Procedure:**\n\n**Remember: This is a BRIDGE, Not a Cure**\n\nPatient still requires:\n• Definitive neurosurgical craniotomy\n• ICU-level care\n• Ongoing ICP management\n\n**Immediate Actions:**\n\n1. **Antibiotics:**\n   • Continue cefazolin 2g IV q8h or ceftriaxone 1g IV q24h\n   • Meningitis prophylaxis\n\n2. **Arrange Immediate Transport:**\n   • Neurosurgical center\n   • Air transport if available and faster\n   • Pre-notify receiving facility\n\n3. **Neuroprotection Bundle:**\n   • Head elevated 30°, midline\n   • MAP >80-90 mmHg\n   • SpO₂ >94%\n   • Normocapnia (EtCO₂ 35-40)\n   • Normothermia\n   • Glucose 140-180 mg/dL\n\n4. **Seizure Prophylaxis:**\n   • Levetiracetam 500mg IV BID\n   • For supratentorial injuries [3][4]',
-        citation: [3, 4],
+        body: '**Immediate Post-Procedure:**\n\n**Remember: This is a BRIDGE, Not a Cure**\n\nPatient still requires:\n• Definitive neurosurgical craniotomy\n• ICU-level care\n• Ongoing ICP management\n\n**Immediate Actions:**\n\n1. **Antibiotics:**\n   • Continue cefazolin 2g IV q8h or ceftriaxone 1g IV q24h\n   • Meningitis prophylaxis\n\n2. **Arrange Immediate Transport:**\n   • Neurosurgical center\n   • Air transport if available and faster\n   • Pre-notify receiving facility\n\n3. **Neuroprotection Bundle:**\n   • Head elevated 30°, midline\n   • MAP >80-90 mmHg\n   • SpO₂ >94%\n   • Normocapnia (EtCO₂ 35-40)\n   • Normothermia\n   • Glucose 140-180 mg/dL\n\n4. **Seizure Prophylaxis:**\n   • Levetiracetam 500mg IV BID\n   • For supratentorial injuries [3][4][9]',
+        citation: [3, 4, 9],
         next: 'bh-monitoring',
         summary: 'BRIDGE not cure — needs definitive craniotomy',
     },
@@ -413,4 +413,5 @@ export const BURR_HOLE_CITATIONS = [
     { num: 6, text: 'Springer. Emergency burr holes: "How to do it". Scand J Trauma Resusc Emerg Med. 2012;20:24.' },
     { num: 7, text: 'EMCrit. Intraosseous Device Burr Holes with Marc Grossman. https://emcrit.org/emcrit/burr-holes-craniotomy/. 2019.' },
     { num: 8, text: 'Joint Trauma System. Emergency Cranial Procedures by Non-Neurosurgeons. Clinical Practice Guideline. 2025.' },
+    { num: 9, text: 'Szaflarski JP, et al. Prospective, randomized, single-blinded comparative trial of intravenous levetiracetam versus phenytoin for seizure prophylaxis. Neurocrit Care. 2010;12(2):165-172.' },
 ];

@@ -25,6 +25,7 @@ export const ANTICOAG_REVERSAL_NODES = [
         module: 1,
         title: 'What Is the Clinical Scenario?',
         body: 'Determine urgency based on bleeding severity and clinical need.',
+        citation: [1, 14],
         options: [
             {
                 label: 'Life-threatening or major bleeding',
@@ -58,8 +59,8 @@ export const ANTICOAG_REVERSAL_NODES = [
         type: 'question',
         module: 2,
         title: 'Identify the Anticoagulant',
-        body: '**Act fast.** For ICH on warfarin, give PCC immediately — do NOT wait for INR result. [1,15]\n\n⚠️ **Massive hemorrhage on unknown anticoagulant:** activate **MTP (1:1:1)** and give **empiric 4-factor PCC 25–50 units/kg** while you identify the specific agent and last dose. Do not delay PCC waiting for agent confirmation in life-threatening bleeding. [1,15]\n\nReview all medications affecting coagulation. Determine last dose and timing.',
-        citation: [1, 15],
+        body: '**Act fast.** For ICH on warfarin, give PCC immediately — do NOT wait for INR result. [1,15]\n\n⚠️ **Massive hemorrhage on unknown anticoagulant:** activate **MTP (1:1:1)** [19] and give **empiric 4-factor PCC 25–50 units/kg** while you identify the specific agent and last dose. Do not delay PCC waiting for agent confirmation in life-threatening bleeding. [1,15]\n\nReview all medications affecting coagulation. Determine last dose and timing.',
+        citation: [1, 15, 19],
         options: [
             {
                 label: 'Warfarin (Coumadin)',
@@ -257,8 +258,8 @@ export const ANTICOAG_REVERSAL_NODES = [
         type: 'result',
         module: 3,
         title: 'tPA / Thrombolytic Reversal',
-        body: '**Act immediately — don\'t wait for labs in an actively bleeding patient.**\n\n**Essential interventions:**\n**[1]** Antifibrinolytic — choose whichever is faster to obtain:\n• [Tranexamic acid (Cyklokapron)](#/drug/tranexamic-acid/tpa reversal) 1 g IV over 10 min, then 1 g over next hour\n• [Aminocaproic acid (Amicar)](#/drug/aminocaproic-acid/tpa reversal) 4-5 g IV load, then 1 g/hour\n\n**[2]** Cryoprecipitate 10 units initially (two 5-unit pools)\n• Target fibrinogen **>150-200 mg/dL** (>200 for ICH) [8]\n• Each 10 units raises fibrinogen ~50 mg/dL\n\n**Optional:**\n• FFP ~2 units (may help with fibrinogen degradation product coagulopathy)\n• Platelet transfusion if thrombocytopenic or on antiplatelet agents\n\n**Follow-up labs:** CBC, INR, PTT, fibrinogen (± TEG). Repeat and treat deficiencies.\n• If TEG shows ongoing hyperfibrinolysis → additional antifibrinolytic\n• If INR >1.6 → FFP\n\n**Key:** tPA has very short half-life (gone in minutes) but clotting factor depletion (especially fibrinogen) persists much longer. [16]',
-        citation: [8, 14, 16],
+        body: '**Act immediately — don\'t wait for labs in an actively bleeding patient.**\n\n**Essential interventions:**\n**[1]** Antifibrinolytic — choose whichever is faster to obtain:\n• [Tranexamic acid (Cyklokapron)](#/drug/tranexamic-acid/tpa reversal) 1 g IV over 10 min, then 1 g over next hour\n• [Aminocaproic acid (Amicar)](#/drug/aminocaproic-acid/tpa reversal) 4-5 g IV load, then 1 g/hour\n\n**[2]** Cryoprecipitate 10 units initially (two 5-unit pools)\n• Target fibrinogen **>150-200 mg/dL** (>200 for ICH) [8,18]\n• Each 10 units raises fibrinogen ~50 mg/dL [18]\n\n**Optional:**\n• FFP ~2 units (may help with fibrinogen degradation product coagulopathy)\n• Platelet transfusion if thrombocytopenic or on antiplatelet agents\n\n**Follow-up labs:** CBC, INR, PTT, fibrinogen (± TEG). Repeat and treat deficiencies.\n• If TEG shows ongoing hyperfibrinolysis → additional antifibrinolytic\n• If INR >1.6 → FFP\n\n**Key:** tPA has very short half-life (gone in minutes) but clotting factor depletion (especially fibrinogen) persists much longer. [16]',
+        citation: [8, 14, 16, 18],
         treatment: {
             firstLine: {
                 drug: 'Tranexamic Acid (TXA)',
@@ -284,8 +285,8 @@ export const ANTICOAG_REVERSAL_NODES = [
         type: 'result',
         module: 3,
         title: 'Antiplatelet Agent Reversal',
-        body: '**Rx #1 (front-line): [DDAVP](#/drug/desmopressin/antiplatelet reversal)** 0.3-0.4 mcg/kg IV over 20-30 min\n• Improves platelet function including P2Y12 inhibitors [10,11]\n• AHA 2022: level 2B recommendation for ICH on antiplatelets [1]\n• Usually single dose (tachyphylaxis with repeated dosing — depletes vWF stores)\n\n**Rx #2:** Consider **higher fibrinogen target** (>200 mg/dL)\n• Platelets cooperate with fibrinogen — increased fibrinogen may compensate [16]\n\n**Rx #3: Generally AVOID platelet transfusion**\n• **PATCH trial:** No benefit in ICH on antiplatelets — worse neurologic outcomes, trend toward more bleeding [16]\n• Exception conditions (ALL must be met): permanent platelet inhibitor + >3 half-lives since last dose + laboratory evidence of inhibition + active bleeding + low platelets\n• **Ticagrelor (Brilinta) is reversible** → platelet transfusion will NOT work (new platelets get inhibited) [14]\n\n**Rx #4 (desperate): [TXA (Cyklokapron)](#/drug/tranexamic-acid/antiplatelet reversal)** — inhibits plasmin-mediated platelet GPIb degradation [16]',
-        citation: [1, 10, 11, 14, 16],
+        body: '**Rx #1 (front-line): [DDAVP](#/drug/desmopressin/antiplatelet reversal)** 0.3-0.4 mcg/kg IV over 20-30 min\n• Improves platelet function including P2Y12 inhibitors [10,11]\n• AHA 2022: level 2B recommendation for ICH on antiplatelets [1]\n• Usually single dose (tachyphylaxis with repeated dosing — depletes vWF stores)\n\n**Rx #2:** Consider **higher fibrinogen target** (>200 mg/dL)\n• Platelets cooperate with fibrinogen — increased fibrinogen may compensate [16]\n\n**Rx #3: Generally AVOID platelet transfusion**\n• **PATCH trial:** No benefit in ICH on antiplatelets — worse neurologic outcomes, trend toward more bleeding [16,20]\n• Exception conditions (ALL must be met): permanent platelet inhibitor + >3 half-lives since last dose + laboratory evidence of inhibition + active bleeding + low platelets\n• **Ticagrelor (Brilinta) is reversible** → platelet transfusion will NOT work (new platelets get inhibited) [14]\n\n**Rx #4 (desperate): [TXA (Cyklokapron)](#/drug/tranexamic-acid/antiplatelet reversal)** — inhibits plasmin-mediated platelet GPIb degradation [16]',
+        citation: [1, 10, 11, 14, 16, 20],
         treatment: {
             firstLine: {
                 drug: 'Desmopressin (DDAVP)',
@@ -323,6 +324,7 @@ export const ANTICOAG_REVERSAL_NODES = [
         module: 3,
         title: 'Supratherapeutic — Which Agent?',
         body: 'No active bleeding, but anticoagulant levels are above therapeutic range.',
+        citation: [5, 7],
         options: [
             {
                 label: 'Warfarin / Coumadin (elevated INR)',
@@ -406,8 +408,8 @@ export const ANTICOAG_REVERSAL_NODES = [
         type: 'result',
         module: 5,
         title: 'Common Pitfalls',
-        body: '**Mistakes to avoid:**\n\n• **PCC or FFP alone for warfarin** → INR rebounds when they wear off (6-8h). **Always give Vitamin K simultaneously.** [2,16]\n\n• **Vitamin K subcutaneously** → erratic absorption. IM → hematoma risk. **Always IV for emergent reversal.** [16]\n\n• **FFP to push INR below 1.7** → impossible (FFP contains factors at normal plasma concentration, not concentrated). Futile and dangerous (volume overload, TRALI). [8,16]\n\n• **DOAC + new renal failure** → patient is silently supratherapeutic with no screaming INR to alert you. Dabigatran (Pradaxa) half-life doubles if GFR <30. [3,4]\n\n• **Aggressive reversal for minor procedures** → CVC, thoracentesis, and paracentesis are low-risk. The bigger danger is arterial injury from poor technique, not the anticoagulant. [9]\n\n• **Platelet transfusion for antiplatelet reversal** → PATCH trial showed no benefit and possible harm. DDAVP is first-line. [1,10,16]',
-        citation: [1, 2, 3, 4, 8, 9, 10, 16],
+        body: '**Mistakes to avoid:**\n\n• **PCC or FFP alone for warfarin** → INR rebounds when they wear off (6-8h). **Always give Vitamin K simultaneously.** [2,16]\n\n• **Vitamin K subcutaneously** → erratic absorption. IM → hematoma risk. **Always IV for emergent reversal.** [16]\n\n• **FFP to push INR below 1.7** → impossible (FFP contains factors at normal plasma concentration, not concentrated). Futile and dangerous (volume overload, TRALI). [8,16]\n\n• **DOAC + new renal failure** → patient is silently supratherapeutic with no screaming INR to alert you. Dabigatran (Pradaxa) half-life doubles if GFR <30. [3,4]\n\n• **Aggressive reversal for minor procedures** → CVC, thoracentesis, and paracentesis are low-risk. The bigger danger is arterial injury from poor technique, not the anticoagulant. [9]\n\n• **Platelet transfusion for antiplatelet reversal** → PATCH trial showed no benefit and possible harm. DDAVP is first-line. [1,10,16,20]',
+        citation: [1, 2, 3, 4, 8, 9, 10, 16, 20],
     },
 ];
 // -------------------------------------------------------------------
@@ -450,4 +452,7 @@ export const ANTICOAG_REVERSAL_CITATIONS = [
     { num: 15, text: 'ESO/EANS Joint Guidelines Committee. European Stroke Organisation and European Association of Neurosurgical Societies guideline on stroke due to spontaneous ICH. Eur Stroke J. 2025;10(4):1007-1086. doi:10.1177/23969873251327397' },
     { num: 16, text: 'Farkas J. Anticoagulant Reversal. Internet Book of Critical Care (IBCC). Updated April 25, 2025. EMCrit Project.' },
     { num: 17, text: 'Connolly SJ, Sharma M, Cohen AT, et al. Andexanet for Factor Xa Inhibitor-Associated Acute Intracerebral Hemorrhage (ANNEXA-I). N Engl J Med. 2024;390(19):1745-1755. doi:10.1056/NEJMoa2313040' },
+    { num: 18, text: 'Levy JH, Goodnough LT. How I use fibrinogen replacement therapy in acquired bleeding. Blood. 2015;125(9):1387-1393. doi:10.1182/blood-2014-08-552000 (cryoprecipitate dosing and fibrinogen targets).' },
+    { num: 19, text: 'Holcomb JB, Tilley BC, Baraniuk S, et al. Transfusion of plasma, platelets, and red blood cells in a 1:1:1 versus a 1:1:2 ratio and mortality in patients with severe trauma: the PROPPR randomized clinical trial. JAMA. 2015;313(5):471-482. doi:10.1001/jama.2015.12' },
+    { num: 20, text: 'Baharoglu MI, Cordonnier C, Al-Shahi Salman R, et al. Platelet transfusion versus standard care after acute stroke due to spontaneous cerebral haemorrhage associated with antiplatelet therapy (PATCH): a randomised, open-label, phase 3 trial. Lancet. 2016;387(10038):2605-2613. doi:10.1016/S0140-6736(16)30392-0' },
 ];
