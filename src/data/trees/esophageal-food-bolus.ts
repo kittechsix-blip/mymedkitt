@@ -122,7 +122,7 @@ export const ESOPHAGEAL_FOOD_BOLUS_NODES: DecisionNode[] = [
     id: 'efb-timing',
     type: 'info',
     module: 3,
-    title: 'Timing & ASGE Windows',
+    title: 'Timing & ASGE/ESGE Windows',
     body: 'Timing drives urgency (ASGE/ESGE):\n\n- **Complete obstruction (cannot manage secretions):** endoscopy **emergently, within ~6 hours** — aspiration risk.\n- **Partial obstruction / food bolus without complete obstruction:** endoscopy **urgently, within 24 hours**.\n- A bolus should **not** be left impacted **beyond 24 hours** — prolonged contact causes pressure necrosis, ulceration, and perforation risk.\n\nDo not delay definitive endoscopy waiting for a pharmacologic agent to work in a patient with complete obstruction.',
     citation: [1, 2, 6],
     next: 'efb-pharm',
@@ -134,7 +134,7 @@ export const ESOPHAGEAL_FOOD_BOLUS_NODES: DecisionNode[] = [
     module: 3,
     title: 'Pharmacologic Bridge (Optional, Low-Yield)',
     body: 'Pharmacology is an **adjunct**, not a substitute for endoscopy. Success rates are low and it must never delay scope in complete obstruction.\n\n**Glucagon** ([glucagon](#/drug/glucagon/esophageal food bolus)) relaxes lower esophageal sphincter smooth muscle:\n- 1 mg IV slow push; may repeat once after ~10-20 min if no response.\n- Common: nausea/vomiting (which can occasionally dislodge the bolus, but also raises aspiration/Boerhaave concern); warn the patient.\n- Avoid in pheochromocytoma/insulinoma.\n\n**Do NOT use:**\n- **Papain / meat tenderizer** — contraindicated; associated with esophageal perforation and severe mucosal injury.\n- **Effervescent/gas-forming agents** in a *complete* obstruction — gas trapped above a complete block raises perforation risk.\n\nIf the bolus does not pass promptly, proceed to endoscopy within the timing window above.',
-    citation: [3, 7, 8],
+    citation: [1, 2, 3, 7, 8],
     next: 'efb-endoscopy',
     summary: 'Glucagon 1 mg IV (low-yield, may vomit). NO papain. No effervescent in complete obstruction.',
     safetyLevel: 'warning',
@@ -184,7 +184,8 @@ export const ESOPHAGEAL_FOOD_BOLUS_CRITICAL_ACTIONS = [
   { text: 'Screen for perforation (crepitus, severe pain, fever) before any pharmacology — if present, NPO + water-soluble CT, no push.', nodeId: 'efb-perforation' },
   { text: 'Exclude a button battery / sharp object / magnet; route those to the GI Foreign Body pathway.', nodeId: 'efb-object-check' },
   { text: 'Never leave a food bolus impacted beyond 24 hours.', nodeId: 'efb-timing' },
-  { text: 'Do NOT use papain/meat tenderizer; biopsy for eosinophilic esophagitis at endoscopy and start a PPI.', nodeId: 'efb-cause' },
+  { text: 'Do NOT use papain/meat tenderizer.', nodeId: 'efb-pharm' },
+  { text: 'Biopsy for eosinophilic esophagitis at endoscopy and start a PPI.', nodeId: 'efb-cause' },
 ];
 
 export const ESOPHAGEAL_FOOD_BOLUS_CITATIONS: Citation[] = [

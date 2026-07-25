@@ -9,7 +9,7 @@ export const SEDATION_OPTIONS_MODULE_LABELS = [
   'Visual Comparison',
   'Procedure Strategy',
   'Agitation Strategy',
-  'ICU / Airway Strategy',
+  'ICU / Withdrawal Strategy',
   'Special Populations',
   'Drug Pearls',
 ];
@@ -23,7 +23,7 @@ export const SEDATION_OPTIONS_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Etomidate has short hemodynamic-neutral hypnosis but no analgesia, frequent myoclonus, and adrenal suppression signal', nodeId: 'sedopt-etomidate' },
   { text: 'QT risk: do not delay lifesaving control, but avoid repeated butyrophenones when QTc >500 ms or major torsades risks are present', nodeId: 'sedopt-qt' },
   { text: 'ICU ventilator sedation generally favors propofol or dexmedetomidine over benzodiazepine infusions when feasible', nodeId: 'sedopt-icu' },
-  { text: 'Withdrawal physiology needs benzodiazepine or phenobarbital effect; dexmedetomidine is adjunct only and does not prevent seizures', nodeId: 'sedopt-phenobarb' },
+  { text: 'Withdrawal physiology needs benzodiazepine or phenobarbital effect; dexmedetomidine is adjunct only and does not prevent seizures', nodeId: 'sedopt-withdrawal' },
 ];
 
 export const SEDATION_OPTIONS_CITATIONS: Citation[] = [
@@ -37,7 +37,7 @@ export const SEDATION_OPTIONS_CITATIONS: Citation[] = [
   },
   {
     num: 3,
-    text: 'American College of Emergency Physicians. Clinical Policy: Critical Issues in the Evaluation and Management of Adult Out-of-Hospital or ED Patients Presenting With Severe Agitation. Ann Emerg Med. 2024;83:e1-e30.',
+    text: 'American College of Emergency Physicians Clinical Policies Subcommittee on Severe Agitation. Clinical Policy: Critical Issues in the Evaluation and Management of Adult Out-of-Hospital or ED Patients Presenting With Severe Agitation. Ann Emerg Med. 2024;83(1):e1-e30. doi:10.1016/j.annemergmed.2023.09.010.',
   },
   {
     num: 4,
@@ -65,7 +65,7 @@ export const SEDATION_OPTIONS_CITATIONS: Citation[] = [
   },
   {
     num: 10,
-    text: 'Punia V, et al. Phenobarbital for alcohol withdrawal management in the emergency department: systematic review of direct evidence. Acad Emerg Med. 2024.',
+    text: 'Punia K, Scott W, Manuja K, et al. SAEM GRACE: Phenobarbital for alcohol withdrawal management in the emergency department: a systematic review of direct evidence. Acad Emerg Med. 2024;31(5):481-492. doi:10.1111/acem.14788.',
   },
   {
     num: 11,
@@ -78,6 +78,14 @@ export const SEDATION_OPTIONS_CITATIONS: Citation[] = [
   {
     num: 13,
     text: 'American Heart Association. Adult and Pediatric Special Circumstances of Resuscitation: sympathomimetic poisoning. CPR and ECC Guidelines. Accessed 2026-06-07.',
+  },
+  {
+    num: 14,
+    text: 'American College of Emergency Physicians. Sub-Dissociative Dose Ketamine for Analgesia. ACEP policy statement (joint with ENA and SEMPA) and accompanying Policy Resource and Education Paper; protocolized IV analgesic range 0.1-0.3 mg/kg. Ann Emerg Med. 2018. doi:10.1016/j.annemergmed.2018.01.026. Accessed 2026-07-25.',
+  },
+  {
+    num: 15,
+    text: 'DailyMed. INAPSINE (droperidol) injection prescribing information, including boxed warning for QT prolongation and torsades de pointes and the 2.5 mg maximum recommended initial adult dose. US National Library of Medicine. Accessed 2026-07-25.',
   },
 ];
 
@@ -278,7 +286,7 @@ Avoid/caution:
       monitoring: 'Airway-ready monitoring, suction, emesis plan, SpO2, ETCO2 when available, BP/HR, post-dose reassessment.',
     },
     confidence: 'recommended',
-    citation: [2, 3, 6, 7, 11],
+    citation: [2, 3, 6, 7, 11, 12, 14],
     next: 'sedopt-side-effects',
     summary: 'Ketamine: dissociation plus analgesia, IV onset <1 min, IM 3-5 min, watch saliva/emesis/laryngospasm and post-dose airway risk.',
     safetyLevel: 'critical',
@@ -471,13 +479,13 @@ Avoid/caution:
         route: 'IM/IV',
         frequency: 'Once, reassess in 10-15 min',
         duration: 'Single dose with reassessment',
-        notes: 'Often paired with midazolam 2-5 mg for severe agitation. Use lower doses in older/frail.',
+        notes: 'Often paired with midazolam 2-5 mg for severe agitation. Use lower doses in older/frail. Regulatory note: droperidol carries an FDA boxed warning for QT prolongation and torsades, and the labeled maximum initial adult dose is 2.5 mg; agitation dosing above that is off-label use supported by the cited ACEP severe-agitation policy and Project BETA consensus.',
         confidence: 'caution',
       },
       monitoring: 'ECG when safe in high-risk QT patients, electrolytes, sedation depth, airway/respiratory monitoring when combined.',
     },
     confidence: 'recommended',
-    citation: [3, 4, 8],
+    citation: [3, 4, 8, 15],
     next: 'sedopt-qt',
     summary: 'Droperidol: fast ED agitation drug, 2-4 h duration, QT/EPS cautions, often paired with midazolam.',
     safetyLevel: 'warning',

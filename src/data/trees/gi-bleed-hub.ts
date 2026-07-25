@@ -1,7 +1,10 @@
 // GI Bleed Hub — Hub Consult Pattern v2
 // Chief Complaint Hub for undifferentiated GI bleeding (hematemesis, melena, hematochezia).
-// Triage hub only — clinical content lives in deep-dive splits (upper-gi-bleed, lower-gi-bleed, etc.).
+// Triage-first hub. It carries the initial resuscitation/stabilization bundle (PPI, octreotide +
+// ceftriaxone, transfusion threshold, reversal overview); definitive source-specific management
+// lives in the deep-dive splits (upper-gi-bleed, lower-gi-bleed, anticoag-reversal, etc.).
 // R8: hub links INTO splits; splits never link back.
+// 19 nodes (3 question / 16 info / 0 result), 5 modules, 20 citations.
 
 import type { DecisionNode } from '../../models/types.js';
 
@@ -15,7 +18,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 1,
     title: 'GI Bleed Hub — Sick Check First',
     body: '**\u26A0\uFE0F 5 DO NOT MISS:**\n1. **Hemorrhagic shock / massive bleed** \u2014 shock index >1, ongoing hematemesis; activate MTP.\n2. **Variceal hemorrhage** \u2014 cirrhosis stigmata; octreotide + antibiotics + early endoscopy.\n3. **Aortoenteric fistula** \u2014 prior aortic graft + GI bleed = catastrophic until excluded.\n4. **Brisk upper bleed presenting as hematochezia** \u2014 10\u201315%, more shocky; place an NG/assess.\n5. **Anticoagulant/antiplatelet-driven bleed** \u2014 identify agent; reverse where indicated.\n\nWalk into the room. Before any source-finding, sort sick vs not-sick.\n\nOpen first:\n\n- [Hub Steps Summary](#/info/gib-steps)\n- [Hub Stop / Pitfalls](#/info/gib-stop)\n\n**Scan in 30 seconds:** [1, 2]\n\n- **General appearance** — pale, diaphoretic, end-of-bed ill, altered, vomiting blood at the door?\n- **Vitals trend** (not single snapshot) — tachycardia, hypotension, narrow pulse pressure, orthostatic drop, hypoxia\n- **Shock index** = HR / SBP — >1.0 = ongoing blood loss, >1.4 = massive hemorrhage posture\n- **Mental status** — confused / drowsy = hypoperfusion or hepatic encephalopathy\n- **Skin / stigmata** — jaundice, spider angiomata, caput, palmar erythema (cirrhosis), purpura (coag), Telangiectasias (HHT)\n- **Abdomen at the door** — distended (ascites), tender (perforation/ischemia), pulsatile mass (AAA aortoenteric fistula)\n- **Rectal exam early** — confirms melena vs hematochezia vs occult vs nothing\n\n**If ANY of:** hypotension, ongoing hematemesis, melena + tachycardia, altered, lactate >4, end-of-life appearance — **start resus parallel to workup.** Bay 1, IV × 2 large-bore (16 g+), monitor, type and cross 4-6 units, lactate, [Massive Transfusion Protocol](#/tree/massive-transfusion) ready. Permissive hypotension target SBP 90-100 until source controlled.\n\n**Four-question screen** (drives Module 2):\n\n1. **Hematemesis or coffee-grounds?** → upper source until proven otherwise\n2. **Melena (black, tarry, foul)?** → upper source ~90% of the time (transit >14 h)\n3. **Hematochezia (bright red blood per rectum)?** → lower source usually, BUT brisk upper bleed can present as hematochezia in 10-15% (more shocky)\n4. **Cirrhosis, varices, alcohol use, recent NSAID/anticoag/antiplatelet?** → variceal vs PUD vs anticoag-driven changes management\n\n**Continue → Time-Critical Exclusions**',
-    citation: [1, 2],
+    citation: [1, 2, 3],
     summary: 'Look, count, feel — then commit. Shock index >1 = ongoing loss. Rectal exam now.',
     safetyLevel: 'critical',
     next: 'gib-exclusions',
@@ -120,7 +123,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 2,
     title: 'Lower GI Bleed Pathway',
     body: 'Open [Lower GI Bleed](#/tree/lower-gi-bleed) consult. Oakland score for triage, CTA vs colonoscopy timing, embolization decision.\n\n**Red flag — brisk upper bleed presenting as hematochezia:** 10-15% of hematochezia in shocky patients is upper source. Check the four-question screen before committing to lower pathway:\n\n1. Hemodynamically unstable + hematochezia? → suspect brisk upper, place NG and/or send for urgent EGD before colonoscopy\n2. Coffee-ground emesis or hematemesis ever during this episode? → upper\n3. Known varices, cirrhosis, recent NSAID/ASA/anticoag? → upper more likely\n4. BUN/Cr ratio >30? → upper\n\n**Next 5 minutes:** [6]\n\n- CBC, CMP, coags, type and cross 2-4 units\n- 2 large-bore IVs, NPO\n- Oakland score (age, sex, prior LGIB, DRE findings, HR, SBP, Hgb) — ≤8 = outpatient candidate, >8 = admit\n- Massive hematochezia + shock → CTA first, then IR embolization or urgent colonoscopy depending on findings\n- Stable → colonoscopy within 24 h with bowel prep\n\n**Disposition:** ICU if shock or active bleeding. Floor if stable for colonoscopy. Outpatient only if Oakland ≤8 + reliable follow-up.',
-    citation: [6, 7],
+    citation: [2, 6],
     summary: 'Open [Lower GI Bleed](#/tree/lower-gi-bleed) — Oakland score, but rule out brisk upper first if shocky.',
     safetyLevel: 'critical',
   },
@@ -130,7 +133,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 2,
     title: 'Anticoag/Antiplatelet + GI Bleed',
     body: 'Open [Anticoagulation Reversal](#/tree/anticoag-reversal) consult in parallel with source workup. Reversal is independent of source identification — bleeding patient + therapeutic anticoagulant = reverse.\n\n**Identify the agent first** — reversal differs by class:\n\n- **Warfarin** → 4-factor PCC (Kcentra) by INR/weight + vitamin K 10 mg IV\n- **Dabigatran** → idarucizumab (Praxbind) 5 g IV\n- **Apixaban / rivaroxaban** → andexanet alfa OR 4-factor PCC 50 U/kg (off-label, often used due to cost/availability)\n- **Edoxaban** → 4-factor PCC 50 U/kg\n- **DAPT (ASA + P2Y12)** → platelet transfusion is controversial (PATCH trial: harm in ICH; less data in GI bleed). DDAVP can be considered for ASA-induced platelet dysfunction in life-threatening bleeding.\n- **Heparin/LMWH** → protamine (full reversal for UFH; partial for LMWH)\n\n**Restart timing:** balance ongoing bleed risk vs thrombotic risk (mechanical valve, recent VTE, AF + high CHA₂DS₂-VASc). GI bleed alone is rarely sufficient to permanently discontinue — restart in 1-7 days post hemostasis depending on indication.\n\n**Parallel:** transfuse to Hgb 7 (8 in cardiac), platelets >50k for active bleed, fibrinogen >150 for ongoing hemorrhage.',
-    citation: [8, 9],
+    citation: [7, 8, 9, 20],
     summary: 'Open [Anticoag Reversal](#/tree/anticoag-reversal) — reverse the agent, then work the source. Reversal is independent.',
     safetyLevel: 'critical',
   },
@@ -140,7 +143,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 2,
     title: 'Massive GI Hemorrhage',
     body: 'Activate [Massive Transfusion Protocol](#/tree/massive-transfusion). Shock index >1.4, ongoing exsanguination, or anticipated need for >10 units in 24 h.\n\n**Targets:** [10]\n\n- 1:1:1 RBC:plasma:platelets ratio (start with the first balanced cooler)\n- TXA 1 g IV over 10 min (within 3 h of bleed onset) + 1 g over 8 h — strongest data in trauma, reasonable extrapolation to non-trauma massive hemorrhage per HALT-IT trial caveats (HALT-IT did NOT show benefit in GI bleed specifically, but TXA remains low-harm)\n- Calcium replacement (citrate chelation from transfused blood causes hypocalcemia — give CaCl 1 g IV every 4 units)\n- Permissive hypotension SBP 90-100 mmHg until source controlled (do not over-resuscitate before hemostasis)\n- Avoid hypothermia (lethal triad)\n- Avoid acidosis (lactic acid + dilutional)\n- Empirical IR / endoscopy / surgery activation — do not wait for stability\n\n**Source-specific:**\n\n- Variceal: octreotide + ceftriaxone + emergent EGD with banding or balloon tamponade (Blakemore/Minnesota tube) as bridge\n- Non-variceal upper: pantoprazole drip + EGD with clip/cautery/epinephrine\n- Lower: CTA + IR embolization OR urgent colonoscopy\n- Aorto-enteric fistula: emergent vascular surgery + CT angiography\n\n**HALT-IT note:** the 12,009-patient HALT-IT trial (2020 Lancet) showed TXA did not reduce death from bleeding in upper or lower GI bleed and INCREASED venous thromboembolic events. Use TXA selectively in true massive hemorrhage with hemodynamic instability; do NOT give TXA to every GI bleeder.',
-    citation: [10, 11],
+    citation: [5, 10, 11],
     summary: 'Activate [MTP](#/tree/massive-transfusion). 1:1:1 ratio. TXA selectively (HALT-IT cautions in GI bleed). Permissive hypotension until source control.',
     safetyLevel: 'critical',
   },
@@ -170,7 +173,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 2,
     title: 'IBD Flare with Bleeding',
     body: 'Open [IBD Flare](#/tree/ibd-flare) consult. UC and Crohn flares can present with significant lower GI bleed; severe UC flare is its own emergency.\n\n**Recognize severe flare (Truelove-Witts):** [16]\n\n- ≥6 bloody stools/day\n- AND any of: temp >37.8°C, HR >90, Hgb <10.5 g/dL, ESR >30\n\n**Workup:**\n\n- CBC, CMP, ESR, CRP, lactate, blood cultures if febrile\n- Stool studies: C. diff PCR + bacterial pathogens + ova/parasites (C. diff coinfection up to 5% in severe flare)\n- KUB or CT to assess for toxic megacolon (transverse colon >6 cm), perforation\n- Gastroenterology + colorectal surgery consult for severe flare\n\n**Treatment in ED:**\n\n- IV methylprednisolone 60 mg IV once daily (or hydrocortisone 100 mg IV q6h) — equivalent regimens per ACG severe UC guideline; methylprednisolone is dosed as a 60 mg/day total, NOT q6h\n- IV fluids, transfuse if Hgb <7 (8 in cardiac)\n- Empirical antibiotics if febrile or perforation suspected (ceftriaxone + metronidazole)\n- Hold all anti-motility agents (loperamide, diphenoxylate, anticholinergics) — can precipitate toxic megacolon\n- DVT prophylaxis (IBD flare carries high VTE risk even with active bleeding — controversial but recommended in stable bleeding per ACG)\n\n**Refractory:** infliximab or cyclosporine rescue within 3-5 days; colectomy if no response.',
-    citation: [16, 17],
+    citation: [16, 17, 20],
     summary: 'Open [IBD Flare](#/tree/ibd-flare) consult. Truelove-Witts for severity. Hold anti-motility. C. diff coinfection always.',
     safetyLevel: 'critical',
   },
@@ -194,7 +197,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 3,
     title: 'Initial Bundle (Stable, Undifferentiated)',
     body: '**Bundle for the stable, undifferentiated GI bleeder.** Use while waiting for the source pattern to declare.\n\n**Resus:**\n\n- 2 large-bore IVs (16 g+), NPO\n- Type and cross 2-4 units\n- Initial fluid bolus 500-1000 mL LR (avoid over-resuscitation; dilutes coag factors)\n- Permissive hypotension (SBP 90-100) until hemostasis\n\n**Labs:** [4, 6]\n\n- CBC (baseline Hgb may UNDER-estimate active bleed before hemodilution)\n- BMP/CMP (BUN/Cr ratio >30 suggests upper)\n- INR/PTT, fibrinogen\n- Lactate (perfusion + ischemia)\n- Type and cross 2-4 units\n- LFTs (cirrhotic vs not)\n- Lipase (if abdominal pain)\n- Troponin + ECG (demand ischemia in anemic patients, esp. age >50)\n\n**Meds while waiting:**\n\n- Pantoprazole 80 mg IV bolus + 8 mg/h drip (any presumed UGIB)\n- Octreotide 50 mcg IV bolus + 50 mcg/h drip + ceftriaxone 1 g IV — if any concern for variceal bleed\n- Hold NSAIDs, antiplatelets, anticoagulants pending reversal decision\n- Antiemetic (ondansetron 4-8 mg IV) — vomiting can worsen variceal bleed\n\n**Risk stratification scores:**\n\n- Glasgow-Blatchford (UGIB) — ≤1 → outpatient consideration\n- Oakland (LGIB) — ≤8 → outpatient consideration\n- Rockall (UGIB post-endoscopy)\n- Shock index = HR/SBP — >1 = ongoing loss\n\n**Continue → Reassess at 30-60 minutes**',
-    citation: [4, 6],
+    citation: [4, 5, 6],
     summary: 'Bundle = IVs + NPO + T&C + PPI + octreotide if cirrhotic + risk score. Permissive hypotension until hemostasis.',
     safetyLevel: 'critical',
     next: 'gib-rescue-reassess',
@@ -205,6 +208,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 3,
     title: 'Reassess at 30-60 Minutes',
     body: 'Reassess vitals, mental status, ongoing bleed activity (NG aspirate, repeat DRE, stool log), labs returning.\n\n**Pattern changes the plan:**',
+    citation: [4, 6],
     options: [
       {
         label: 'Ongoing bleed / dropping vitals / Hgb falling',
@@ -244,7 +248,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 4,
     title: 'Imaging + Source Control Strategy',
     body: '**Match imaging to phenotype — don\'t shotgun.**\n\n**Upper source suspected:**\n\n- Endoscopy (EGD) — within 24 h for stable, 12 h for cirrhotic, ASAP for shock or active bleed [4]\n- CT angiography if endoscopy non-diagnostic or unable\n\n**Lower source suspected, stable:**\n\n- Colonoscopy within 24 h with bowel prep [6]\n- CT angiography if active bleed and unable to prep\n\n**Lower source suspected, unstable / massive bleed:**\n\n- CTA first (~85-95% sens for active bleed)\n- IR embolization if active extravasation localized\n- Urgent colonoscopy if CTA negative but bleeding ongoing\n- Surgery if both fail (rare)\n\n**Aorto-enteric fistula suspected:**\n\n- CTA arterial + delayed phases\n- Vascular surgery NOW\n\n**Mesenteric ischemia suspected:**\n\n- CTA arterial + portal venous phases\n- Vascular surgery + IR\n\n**Capsule endoscopy / push enteroscopy:**\n\n- For obscure GI bleed (negative EGD + colonoscopy)\n- Inpatient or outpatient depending on stability\n\n**Tagged RBC scan / nuclear scintigraphy:**\n\n- Slow intermittent bleeding (>0.1 mL/min)\n- Less useful in acute setting; can localize roughly\n\n**Continue → Disposition**',
-    citation: [4, 5, 6, 7],
+    citation: [2, 4, 5, 6],
     summary: 'Phenotype drives imaging. EGD for upper, colonoscopy for lower stable, CTA for unstable lower, CTA + vascular for AEF/mesenteric.',
     safetyLevel: 'critical',
     next: 'gib-dispo',
@@ -259,6 +263,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 5,
     title: 'Disposition',
     body: 'Match disposition to stability, source pattern, scope availability, and follow-up.',
+    citation: [4, 6],
     options: [
       {
         label: 'ICU — shock, ongoing bleed, MTP, cirrhotic with high-risk lesion',
@@ -289,7 +294,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 5,
     title: 'ICU Admit',
     body: '**ICU criteria:**\n\n- Hemodynamic instability (SBP <90, shock index >1)\n- Ongoing active bleed\n- Massive transfusion activation\n- Cirrhotic with variceal bleed (high mortality)\n- Forrest Ia/Ib lesion post-endoscopy\n- Aorto-enteric fistula\n- Mesenteric ischemia\n\n**ICU bundle:**\n\n- Arterial line, central line if pressors needed\n- Continuous monitoring, serial Hgb q4-6h\n- Standing PPI drip + octreotide if variceal\n- Ceftriaxone 1 g IV daily for cirrhotic (SBP prophylaxis x 7 days)\n- Coordinated GI + IR + surgery on call\n- DVT prophylaxis decision: mechanical (SCDs) safe; pharmacologic held until 24-48 h hemostatic\n\n[Massive Transfusion Protocol](#/tree/massive-transfusion) if criteria still met.',
-    citation: [4, 6, 10],
+    citation: [4, 5, 6, 10],
     summary: 'ICU for shock, ongoing bleed, MTP, variceal cirrhotic, AEF, mesenteric. Bundle includes PPI drip + octreotide + ceftriaxone if variceal.',
     safetyLevel: 'critical',
   },
@@ -299,7 +304,7 @@ export const GI_BLEED_HUB_NODES: DecisionNode[] = [
     module: 5,
     title: 'Floor Admit',
     body: '**Floor criteria:**\n\n- Hemodynamically stable\n- Bleeding source identified and low-risk (Forrest IIc/III, post-banding, post-cautery)\n- Transfused 1-3 units, stable post-transfusion\n- Oakland >8 OR Glasgow-Blatchford >1\n- Comorbidities requiring inpatient monitoring (CHF, CKD, severe anemia)\n\n**Floor bundle:**\n\n- Telemetry, serial Hgb q12h initially\n- PPI BID PO + step-down from drip if stable >24 h\n- Diet advancement per GI (clears → full liquids → soft → regular)\n- Anticoag restart decision per primary team (typically 1-7 days post hemostasis)\n- GI follow-up in 2-4 weeks (H. pylori testing, repeat scope per pathology)',
-    citation: [4, 6],
+    citation: [4, 6, 7],
     summary: 'Floor: stable post-endoscopy with low-risk lesion. Telemetry, PPI BID, diet advance, anticoag restart per team.',
   },
   {
@@ -350,6 +355,7 @@ export const GI_BLEED_HUB_CITATIONS = [
   { num: 17, text: 'Truelove SC, Witts LJ. Cortisone in ulcerative colitis; final report on a therapeutic trial. Br Med J. 1955;2(4947):1041-1048.' },
   { num: 18, text: 'Romano C, Oliva S, Martellossi S, et al. Pediatric gastrointestinal bleeding: Perspectives from the Italian Society of Pediatric Gastroenterology. World J Gastroenterol. 2017;23(8):1328-1337.' },
   { num: 19, text: 'Pai AK, Fox VL. Gastrointestinal Bleeding and Management. Pediatr Clin North Am. 2017;64(3):543-561.' },
+  { num: 20, text: 'Villanueva C, Colomo A, Bosch A, et al. Transfusion Strategies for Acute Upper Gastrointestinal Bleeding. N Engl J Med. 2013;368(1):11-21.' },
 ];
 
 export const GI_BLEED_HUB_CRITICAL_ACTIONS = [
@@ -363,7 +369,7 @@ export const GI_BLEED_HUB_CRITICAL_ACTIONS = [
   { text: 'Anticoagulant reversal is independent of source identification — reverse the agent while working source', nodeId: 'gib-exc-anticoag' },
   { text: 'Cirrhotic / variceal suspicion → octreotide + ceftriaxone 1 g IV (mortality benefit, SBP prophylaxis)', nodeId: 'gib-exc-ugib' },
   { text: 'HALT-IT: TXA did NOT reduce GI bleed mortality and INCREASED VTE — use selectively, not reflexively', nodeId: 'gib-exc-massive' },
-  { text: 'BUN/Cr ratio >30 supports upper source (digested protein bolus)', nodeId: 'gib-exclusions' },
+  { text: 'BUN/Cr ratio >30 supports upper source (digested protein bolus)', nodeId: 'gib-exc-melena' },
   { text: 'Hold anti-motility agents in IBD flare — can precipitate toxic megacolon', nodeId: 'gib-exc-ibd' },
   { text: 'Pediatric GI bleed has its own age-based differential — adult algorithms don\'t apply directly', nodeId: 'gib-exc-peds' },
   { text: 'Glasgow-Blatchford ≤1 (UGIB) and Oakland ≤8 (LGIB) define low-risk outpatient pathway candidates', nodeId: 'gib-dispo' },

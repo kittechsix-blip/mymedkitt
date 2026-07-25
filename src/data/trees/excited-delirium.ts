@@ -10,7 +10,7 @@ export const EXCITED_DELIRIUM_MODULE_LABELS = [
   'Sedation Strategy',
   'Physiology Rescue',
   'Complications',
-  'Special Populations',
+  'Special Populations & QT Risk',
   'Disposition',
 ];
 
@@ -28,11 +28,11 @@ export const EXCITED_DELIRIUM_CRITICAL_ACTIONS: CriticalAction[] = [
 export const EXCITED_DELIRIUM_CITATIONS: Citation[] = [
   {
     num: 1,
-    text: 'American College of Emergency Physicians. Clinical Policy: Critical Issues in the Evaluation and Management of Adult Out-of-Hospital or ED Patients Presenting With Severe Agitation. Ann Emerg Med. 2024.',
+    text: 'American College of Emergency Physicians Clinical Policies Subcommittee (Writing Committee) on Severe Agitation. Clinical Policy: Critical Issues in the Evaluation and Management of Adult Out-of-Hospital or Emergency Department Patients Presenting With Severe Agitation. Approved by the ACEP Board of Directors October 6, 2023. Ann Emerg Med. 2024;83(1):e1-e30. doi:10.1016/j.annemergmed.2023.09.010. PMID: 38105109.',
   },
   {
     num: 2,
-    text: 'ACEP Task Force Report on Hyperactive Delirium with Severe Agitation in Emergency Settings. American College of Emergency Physicians. Accessed 2026-06-07.',
+    text: 'ACEP Task Force Report on Hyperactive Delirium with Severe Agitation in Emergency Settings. American College of Emergency Physicians. Approved by the ACEP Board of Directors June 23, 2021. https://www.acep.org/siteassets/new-pdfs/education/acep-task-force-report-on-hyperactive-delirium-final.pdf. Accessed 2026-06-07.',
   },
   {
     num: 3,
@@ -74,6 +74,14 @@ export const EXCITED_DELIRIUM_CITATIONS: Citation[] = [
     num: 12,
     text: 'American Geriatrics Society 2023 updated AGS Beers Criteria for potentially inappropriate medication use in older adults. J Am Geriatr Soc. 2023;71(7):2052-2081.',
   },
+  {
+    num: 13,
+    text: 'American College of Emergency Physicians. ACEP Reaffirms Positions on Hyperactive Delirium: ACEP has withdrawn its approval of the 2009 White Paper Report on Excited Delirium Syndrome as outdated, and does not recognize use of the term "excited delirium" in clinical settings. ACEP Council vote October 8, 2023; confirmed by the ACEP Board of Directors October 12, 2023. https://www.acep.org/news/acep-newsroom-articles/aceps-position-on-hyperactive-delirium',
+  },
+  {
+    num: 14,
+    text: 'American Medical Association. New AMA policy opposes "excited delirium" diagnosis. Adopted at the AMA Special Meeting of the House of Delegates, June 14, 2021. Current evidence does not support "excited delirium" or "excited delirium syndrome" as a medical diagnosis. https://www.ama-assn.org/press-center/ama-press-releases/new-ama-policy-opposes-excited-delirium-diagnosis',
+  },
 ];
 
 export const EXCITED_DELIRIUM_NODES: DecisionNode[] = [
@@ -84,8 +92,10 @@ export const EXCITED_DELIRIUM_NODES: DecisionNode[] = [
     title: 'State of Extreme Agitation with Aggression: First Screen',
     body: `This consult is for severe hyperactive delirium with dangerous agitation, especially when paired with hyperthermia, acidosis, stimulant toxidrome, prolonged struggle, restraint, or physiologic collapse.
 
-Use the term "excited delirium" for searchability, not as a final diagnosis. Treat the physiology first, then find the cause.`,
-    citation: [1, 2, 3],
+Use the term "excited delirium" for searchability, not as a final diagnosis. Treat the physiology first, then find the cause.
+
+Terminology note: the AMA adopted policy in 2021 stating that current evidence does not support "excited delirium" as a medical diagnosis, and ACEP withdrew its 2009 Excited Delirium Syndrome white paper in 2023. ACEP's accepted descriptive term is hyperactive delirium with severe agitation. Do not use "excited delirium" as a diagnosis, as a cause of death, or as expert-witness terminology.`,
+    citation: [1, 2, 3, 13, 14],
     options: [
       {
         label: 'Immediate threat, prolonged struggle, or physiologic danger',
@@ -632,6 +642,7 @@ Bicarbonate:
     module: 3,
     title: 'Need Airway or ICU Sedation Now?',
     body: 'Decide early. Intubation can be lifesaving, but it can also cause arrest if ventilation, acidemia, potassium, and shock are not anticipated.',
+    citation: [5, 6, 11],
     options: [
       {
         label: 'Yes: airway failure, exhaustion, severe acidosis, shock, or repeated deep sedation',
@@ -911,6 +922,7 @@ Do not:
     module: 6,
     title: 'Disposition',
     body: 'Disposition is driven by physiology, complication burden, repeated sedation, and ability to identify and reverse the cause.',
+    citation: [2, 4],
     options: [
       {
         label: 'ICU',
@@ -991,10 +1003,10 @@ Reasonable criteria:
 - No clinically important acidosis, rhabdomyolysis, AKI, electrolyte threat, dysrhythmia, or organ injury.
 - Sedation effects are understood and the patient can participate when clinically appropriate.
 
-Document the medical reasoning. Do not label the event as "excited delirium" and stop the diagnostic workup.`,
+Document the medical reasoning. Do not label the event as "excited delirium" and stop the diagnostic workup. That term has been withdrawn by ACEP (2023) and opposed by the AMA (2021) as a diagnosis and as a cause of death; document the actual physiologic findings instead.`,
     recommendation: 'Move to psychiatric assessment only after medical danger and physiologic complications have been addressed.',
     confidence: 'recommended',
-    citation: [2, 3, 4],
+    citation: [2, 3, 4, 13, 14],
     summary: 'Psych pathway is appropriate only after dangerous medical causes and complications are resolved or excluded.',
     safetyLevel: 'warning',
   },
