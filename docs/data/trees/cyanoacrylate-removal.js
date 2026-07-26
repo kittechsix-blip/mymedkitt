@@ -18,7 +18,7 @@ export const CYANOACRYLATE_REMOVAL_NODES = [
         type: 'info',
         module: 1,
         title: 'Super Glue (Cyanoacrylate) Removal \u2014 Eye / Eyelid / Skin',
-        body: 'Cyanoacrylate exposure is alarming but usually benign. **Two rules: NEVER use acetone near the eye, and NEVER force glued eyelids apart \u2014 both cause injury. Most exposures self-resolve in hours to days.**\n\nTools (open first):\n- [Procedure Steps Summary](#/info/cya-steps)\n- [Eye vs Eyelid vs Skin Triage Card](#/info/cya-triage)\n- [Topical Anesthetic Options](#/info/cya-anesthetic)\n- [Fluorescein / Corneal-Abrasion Check](#/info/cya-fluorescein)\n- [Do-NOT: Acetone Near Eye](#/info/cya-stop)',
+        body: 'Cyanoacrylate exposure is alarming but usually benign. **Two rules: NEVER use acetone near the eye, and NEVER force glued eyelids apart \u2014 both cause injury. Most exposures self-resolve without intervention \u2014 but tell the patient it takes days, not hours (typically 1\u20134 days for lids, longer in some series).**\n\nTools (open first):\n- [Procedure Steps Summary](#/info/cya-steps)\n- [Eye vs Eyelid vs Skin Triage Card](#/info/cya-triage)\n- [Topical Anesthetic Options](#/info/cya-anesthetic)\n- [Fluorescein / Corneal-Abrasion Check](#/info/cya-fluorescein)\n- [Do-NOT: Acetone Near Eye](#/info/cya-stop)',
         citation: [1, 2],
         next: 'cya-triage',
         summary: 'Never acetone near eye, never force lids; most cyanoacrylate exposures self-resolve.',
@@ -76,7 +76,7 @@ export const CYANOACRYLATE_REMOVAL_NODES = [
         options: [
             {
                 label: 'Antibiotic-ointment dwell (passive, reassuring)',
-                description: 'Apply erythromycin or bacitracin ophthalmic ointment liberally along the glued lid margin; it softens/loosens the glue over hours. Reapply; the lids gradually separate on their own. Best for stable patients who can wait.',
+                description: 'Apply erythromycin or bacitracin ophthalmic ointment liberally along the glued lid margin. It lubricates and protects the cornea rather than dissolving the glue; lids separate as lashes shed, typically over 1\u20134 days (sometimes up to a week). Best for stable patients who can wait.',
                 next: 'cya-eyelid-ointment',
                 urgency: 'routine',
             },
@@ -96,10 +96,10 @@ export const CYANOACRYLATE_REMOVAL_NODES = [
         type: 'info',
         module: 2,
         title: 'Antibiotic-Ointment Dwell',
-        body: '1. Instill topical anesthetic for comfort.\n2. Apply [Bacitracin](#/drug/bacitracin/eyelid glue removal) or erythromycin ophthalmic ointment generously along and into the glued lid margin/lashes.\n3. Have the patient reapply every few hours; the petrolatum base softens cyanoacrylate and the lids separate over hours to a couple of days.\n4. Do not pull. As the glue loosens, lashes release; trim any persistently glued lashes with scissors rather than yanking.\n5. Recheck the cornea once the lids open (next step).',
-        citation: [1, 4],
+        body: '1. Instill topical anesthetic for comfort.\n2. Apply [Bacitracin](#/drug/bacitracin/eyelid glue removal) or erythromycin ophthalmic ointment generously along and into the glued lid margin/lashes.\n3. Have the patient reapply every few hours.\n\n\u26a0\ufe0f **Mechanism honesty:** ointment does **NOT** dissolve cyanoacrylate. In vitro, bacitracin, K-Y jelly, baby shampoo, and water were all no better than control; only acetone dissolved the polymer, and acetone is contraindicated near the eye. [6] Ointment works by **lubricating the lid margin, protecting the cornea, and letting normal lash shedding and epithelial turnover release the bond.**\n\n4. **Expected time course:** first-aid guidance quotes 1\u20134 days, but controlled/observational data run longer \u2014 mean \u22486 days in vitro-correlated series and a mean of 8.5 days (range 5\u201312) in a pediatric series. Set expectations accordingly so the patient does not return frustrated on day 2.\n5. Do not pull. As the bond loosens, lashes release; trim any persistently glued lashes with scissors rather than yanking.\n6. \ud83d\udeab **Never apply cotton or wool to wet/uncured adhesive** \u2014 cyanoacrylate reacts exothermically with cotton fibers and causes thermal burns.\n7. Recheck the cornea once the lids open (next step).',
+        citation: [1, 4, 6],
         next: 'cya-reassess',
-        summary: 'Ophthalmic ointment along glued margin, reapply q few h, let lids release; trim, don\u2019t pull.',
+        summary: 'Ointment lubricates (does NOT dissolve glue); lids release over 1\u20134 d up to ~1 wk; trim, don\u2019t pull; no cotton on wet glue.',
     },
     {
         id: 'cya-eyelid-hook',
@@ -117,7 +117,7 @@ export const CYANOACRYLATE_REMOVAL_NODES = [
         type: 'info',
         module: 2,
         title: 'Skin-Only De-adhesion',
-        body: 'For glue on fingers, lips, or other non-ocular skin:\n1. Soak in warm soapy water.\n2. Apply a petroleum-based product (petrolatum, mineral oil, or a petroleum-based hand cleaner) and gently roll the skin apart \u2014 do not rip glued skin surfaces apart.\n3. Acetone may be used for skin AWAY from the eye and mucous membranes, but petroleum is gentler and preferred; never use acetone near the eye, lips margins, or mucosa.\n4. Glued lips: warm water + gentle peeling from inside the mouth; reassure that the bond releases.\n5. Most skin bonds release within minutes to hours.',
+        body: 'For glue on fingers, lips, or other non-ocular skin:\n1. Soak in warm soapy water.\n2. Apply a petroleum-based product (petrolatum, mineral oil, or a petroleum-based hand cleaner) and gently roll the skin apart \u2014 do not rip glued skin surfaces apart.\n3. Acetone may be used for skin AWAY from the eye and mucous membranes, but petroleum is gentler and preferred; never use acetone near the eye, lips margins, or mucosa.\n4. Glued lips: warm water + gentle peeling from inside the mouth; reassure that the bond releases.\n5. \ud83d\udeab **Never use cotton, wool, gauze with cotton fill, or cotton clothing on wet/uncured adhesive** \u2014 cyanoacrylate polymerizes exothermically on contact with cotton fibers and can cause a thermal burn. [5]\n6. Most skin bonds release within minutes to hours.',
         citation: [2, 5],
         next: 'cya-reassess',
         summary: 'Skin: warm soapy soak + petroleum, roll apart gently; acetone only far from eye/mucosa.',
@@ -152,15 +152,17 @@ export const CYANOACRYLATE_REMOVAL_CRITICAL_ACTIONS = [
     { text: 'NEVER use acetone near the eye, lid margins, or mucous membranes \u2014 it causes chemical injury.', nodeId: 'cya-start' },
     { text: 'NEVER force glued eyelids apart with traction \u2014 it tears lid skin and can injure the cornea.', nodeId: 'cya-eyelid' },
     { text: 'Rule out globe injury and check visual acuity before any periocular manipulation.', nodeId: 'cya-globe-check' },
-    { text: 'Use ophthalmic ointment dwell or a gentle hook to release lashes; trim stubborn lashes rather than pulling.', nodeId: 'cya-eyelid-ointment' },
+    { text: 'Use ophthalmic ointment dwell or a gentle hook to release lashes; trim stubborn lashes rather than pulling. Ointment lubricates \u2014 it does not dissolve the glue.', nodeId: 'cya-eyelid-ointment' },
+    { text: 'NEVER apply cotton or wool to wet/uncured cyanoacrylate \u2014 the exothermic reaction causes thermal burns.', nodeId: 'cya-skin' },
     { text: 'Fluorescein-check the cornea after de-adhesion; residual ocular-surface glue self-detaches over days \u2014 don\u2019t force it.', nodeId: 'cya-reassess' },
 ];
 export const CYANOACRYLATE_REMOVAL_CITATIONS = [
-    { num: 1, text: 'McLean CJ. Ocular superglue injury. J Accid Emerg Med. 1997;14(1):40-41.' },
+    { num: 1, text: 'McLean CJ. Ocular superglue injury. J Accid Emerg Med. 1997;14(1):40-41. PMID 9023623.' },
     { num: 2, text: 'EMRA. The Superglued Eye: management of ocular cyanoacrylate exposure. emra.org.' },
     { num: 3, text: 'Roberts JR, Custalow CB, Thomsen TW. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care \u2014 ophthalmologic procedures (domain comparator only).' },
-    { num: 4, text: 'Getting hooked: a technique for removal of cyanoacrylate adhesive from the eyelids. J Emerg Med. 2016 (PMID 27745915). (See also ALiEM Trick of the Trade: antibiotic ointment for eyelid glue.)' },
-    { num: 5, text: 'Donaldson RI, et al. Cyanoacrylate skin and tissue adhesive exposures: dissolution and removal. (Petroleum/acetone dissolution principles.)' },
+    { num: 4, text: 'Jijelava K, Le H, Parker J, Yee J. Getting Hooked: A Simple Technique for the Treatment of Adhesive Injuries to the Eyelids. J Emerg Med. 2017;52(1):74-76. PMID 27745915.' },
+    { num: 5, text: 'Carstairs SD, Koh C, Qian L, et al. Sticky situations: cyanoacrylate exposures reported to a poison control system. Clin Toxicol (Phila). 2017;55(9):1001-1003. PMID 28535077.' },
+    { num: 6, text: 'Prouty H, Adams DS, Heard K. Treatment of cyanoacrylate adhesive ocular exposure: an in vitro study. Cutan Ocul Toxicol. 2008;27(1):11-14. PMID 18330829. (No treatment except acetone outperformed control for dissolution.)' },
 ];
 export const CYANOACRYLATE_REMOVAL_NODE_COUNT = CYANOACRYLATE_REMOVAL_NODES.length;
 export const CYANOACRYLATE_REMOVAL_MODULE_LABELS = ['Triage Location', 'De-adhesion Technique', 'Reassess + Disposition'];
