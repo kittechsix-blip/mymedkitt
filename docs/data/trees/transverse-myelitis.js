@@ -50,7 +50,7 @@ export const TRANSVERSE_MYELITIS_NODES = [
         module: 1,
         title: 'Clinical Presentation & Localization',
         body: '**Map the deficit:**\n- **Sensory level** — test pinprick/temperature ascending up the trunk until it normalizes; that dermatome localizes the lesion (thoracic most common).\n- **Weakness** — bilateral, often initially flaccid (spinal shock) then spastic with hyperreflexia + Babinski over days.\n- **Bladder/bowel** — urinary retention or incontinence; **always check a post-void residual.**\n- **Back pain** at the level in ~one third.\n\n**What pushes you toward URGENT structural cause (get MRI now):**\n- Severe focal back pain, fever, immunosuppression, IVDU → epidural **abscess**\n- Anticoagulation, recent procedure → epidural **hematoma**\n- Known cancer, weight loss → **metastatic compression**\n- Saddle anesthesia + retention + areflexia → **cauda equina**\n\nEvery one of these is a neurosurgical clock. The next step is the same for all: image the cord.',
-        citation: [1, 2, 6],
+        citation: [1, 2, 13],
         options: [
             {
                 label: 'Bilateral weakness + sensory level ± retention',
@@ -96,7 +96,7 @@ export const TRANSVERSE_MYELITIS_NODES = [
                 alt: 'Side-by-side schematic: compressive lesion displacing the cord versus intrinsic T2 signal within the cord.',
                 caption: 'Compression displaces the cord (surgical); intrinsic inflammation shows signal within the cord (medical). MRI distinguishes them. (Original schematic.)'
             }],
-        citation: [1, 2, 3, 6],
+        citation: [1, 2, 3, 13],
         options: [
             {
                 label: 'COMPRESSION found (abscess / hematoma / tumor / disc)',
@@ -121,7 +121,7 @@ export const TRANSVERSE_MYELITIS_NODES = [
         body: '**This is not transverse myelitis. This is a surgical spinal emergency.**\n\n**Immediate actions by lesion:**\n- **Epidural abscess** — blood cultures, broad-spectrum abx covering MRSA (vancomycin) + gram-negatives; emergent neurosurgery for decompression. Do NOT wait for cultures.\n- **Epidural hematoma** — reverse anticoagulation, emergent neurosurgery.\n- **Metastatic cord compression** — dexamethasone 10 mg IV then 4 mg q6h, emergent radiation-oncology + neurosurgery, MRI whole spine for other deposits.\n- **Cauda equina** — emergent surgical decompression (best outcomes <48 h).\n\n**Time is cord.** Neurologic recovery tracks tightly with time to decompression.',
         recommendation: 'Compressive myelopathy is a neurosurgical emergency, not inflammatory myelitis. Consult neurosurgery immediately. For abscess: empiric vancomycin + gram-negative coverage and source control. For mets: high-dose dexamethasone + rad-onc. Do not give high-dose steroids for presumed inflammation until compression and infection are addressed.',
         confidence: 'definitive',
-        citation: [1, 6, 12],
+        citation: [1, 12, 13],
         summary: 'Compression = surgical emergency. Abscess → abx + decompress; hematoma → reverse + decompress; mets → dex + rad-onc.',
         safetyLevel: 'critical',
     },
@@ -157,7 +157,7 @@ export const TRANSVERSE_MYELITIS_NODES = [
         module: 4,
         title: 'Etiology Buckets',
         body: '**Classify the cause — it drives long-term treatment:**\n\n**Demyelinating / autoimmune**\n- Multiple sclerosis (usually short-segment, <2 segments, partial)\n- NMOSD (AQP4-IgG; longitudinally extensive, ≥3 segments)\n- MOGAD (MOG-IgG; often LETM, conus involvement, better recovery)\n\n**Parainfectious / post-infectious** (commonest in kids)\n- After viral illness or vaccination — immune-mediated\n\n**Direct infection**\n- HSV, VZV, enterovirus (incl. AFM in children), HIV, syphilis, West Nile, TB\n\n**Systemic autoimmune**\n- SLE, Sjögren, sarcoidosis, Behçet, antiphospholipid syndrome\n\n**Paraneoplastic** (rare) — anti-CRMP5, amphiphysin\n\n**Idiopathic** — after the above are excluded.\n\n**Lesion length is a fast clue:** short central lesion → think MS; longitudinally extensive (≥3 segments) → think NMOSD/MOGAD/sarcoid/infection.',
-        citation: [2, 4, 5, 7],
+        citation: [2, 4, 5, 6, 7],
         next: 'tm-treatment',
         summary: 'Buckets: demyelinating (MS/NMOSD/MOGAD), para/post-infectious, direct infection, systemic autoimmune, paraneoplastic, idiopathic. Lesion length triages MS vs NMOSD.',
     },
@@ -170,7 +170,7 @@ export const TRANSVERSE_MYELITIS_NODES = [
         module: 5,
         title: 'Acute Treatment',
         body: '**First line — high-dose IV corticosteroids:**\n- **Methylprednisolone 1 g IV daily x 3-5 days** (pediatric 30 mg/kg/day, max 1 g).\n- Start once compression is excluded and active untreated infection is reasonably considered/covered.\n\n**Steroids-before-infection caveat (FLAGGED — confirm locally):** if epidural abscess or active CNS infection (e.g., HSV myelitis) is plausible, treat/cover the infection and discuss timing with neurology/ID before immunosuppressing. For HSV-suspected myelitis, empiric acyclovir is reasonable while awaiting PCR.\n\n**Second line — plasma exchange (PLEX):**\n- 5-7 exchanges over 10-14 days for **steroid-refractory** disease or severe attacks.\n- Lower threshold to start PLEX early in **AQP4+ NMOSD** (responds well to apheresis; earlier PLEX = better outcomes).\n\n**Third line / disease-specific:** IVIG (selected cases, esp. MOGAD/parainfectious), cyclophosphamide or rituximab for severe NMOSD as directed by neurology.\n\n**Supportive:** bladder management (catheter for retention), DVT prophylaxis, pressure-injury prevention, pain control (neuropathic agents), early PT/OT.',
-        citation: [1, 2, 5, 8],
+        citation: [1, 2, 5, 8, 14, 15],
         next: 'tm-differential',
         summary: 'IV methylpred 1 g/day x3-5d first line; PLEX for refractory/severe NMOSD (start early if AQP4+). Cover infection before steroids if plausible.',
         safetyLevel: 'warning',
@@ -203,7 +203,7 @@ export const TRANSVERSE_MYELITIS_NODES = [
                 alt: 'Timeline showing stroke (seconds-minutes), transverse myelitis (hours to 21 days), and B12/DAVF/tumor (weeks to months).',
                 caption: 'Tempo is the first triage: hyperacute = infarct, days = TM, weeks = degenerative/compressive. (Original schematic.)'
             }],
-        citation: [2, 6, 9, 10],
+        citation: [2, 9, 10, 13],
         next: 'tm-disposition',
         summary: 'Mimics: compression (surgical), cord infarct (nadir <12h, no enhancement), GBS (no level), cauda equina, DAVF, B12. Tempo + MRI + CSF separate them.',
     },
@@ -231,7 +231,7 @@ export const TRANSVERSE_MYELITIS_NODES = [
         body: '**Rule of thirds (idiopathic ATM):**\n- ~1/3 good/full recovery\n- ~1/3 moderate residual deficit\n- ~1/3 poor recovery / severe disability\n\n**Recovery usually begins within 1-3 months; most gains by 3-6 months,** continuing up to 2 years.\n\n**Worse prognosis:**\n- Rapid progression to nadir / hyperacute onset\n- Complete (vs partial) cord syndrome; spinal shock with flaccidity\n- Longitudinally extensive lesion (LETM), AQP4+ NMOSD\n- Need for ventilation\n\n**Better prognosis:**\n- Partial syndromes, MOGAD, earlier treatment\n\n**Recurrence risk:** idiopathic monophasic TM rarely recurs; recurrence should trigger a hunt for NMOSD/MOGAD/MS and long-term immunosuppression.',
         recommendation: 'Exclude compression with emergent MRI, establish a sensory level and post-void residual, send LP + serum AQP4-IgG/MOG-IgG, and start IV methylprednisolone 1 g/day x 3-5 days once compression is excluded and infection considered/covered. PLEX for refractory or severe NMOSD-related disease (start early if AQP4+). Admit all; ICU for cervical/respiratory/autonomic risk. Recurrence mandates an antibody-driven diagnosis and long-term therapy.',
         confidence: 'recommended',
-        citation: [1, 2, 5],
+        citation: [1, 2, 5, 6, 8, 15],
         summary: 'Rule of thirds for recovery; most gains by 3-6 months. LETM/AQP4+/complete syndromes do worse. Recurrence → hunt NMOSD/MOGAD/MS.',
     },
 ];
@@ -255,14 +255,17 @@ export const TRANSVERSE_MYELITIS_MODULE_LABELS = [
 export const TRANSVERSE_MYELITIS_CITATIONS = [
     { num: 1, text: 'Beh SC, Greenberg BM, Frohman T, Frohman EM. Transverse Myelitis. Neurol Clin. 2013;31(1):79-138.' },
     { num: 2, text: 'Simone CG, Emmady PD. Transverse Myelitis. StatPearls. Updated 2023.' },
-    { num: 3, text: 'EMCrit/IBCC (Farkas J). Myelopathy and Transverse Myelitis. Internet Book of Critical Care.' },
+    { num: 3, text: 'Farkas J. Acute Demyelinating Disorders. Internet Book of Critical Care (EMCrit/IBCC). https://emcrit.org/ibcc/myelin/ (see also Spinal Cord: https://emcrit.org/ibcc/cord/)' },
     { num: 4, text: 'Transverse Myelitis Consortium Working Group. Proposed diagnostic criteria and nosology of acute transverse myelitis. Neurology. 2002;59(4):499-505.' },
     { num: 5, text: 'Wingerchuk DM, et al. International consensus diagnostic criteria for neuromyelitis optica spectrum disorders. Neurology. 2015;85(2):177-189.' },
-    { num: 6, text: 'Mariano R, et al. Comparison of clinical outcomes of transverse myelitis subtypes. JAMA Netw Open. 2019;2(10):e1912732.' },
-    { num: 7, text: 'Goh C, Desmond PM, Phal PM. MRI in transverse myelitis. J Magn Reson Imaging. 2014;40(6):1267-1279.' },
-    { num: 8, text: 'Greenberg BM, et al. Idiopathic transverse myelitis: corticosteroids, plasma exchange, or cyclophosphamide. Neurology. 2007;68(19):1614-1617.' },
-    { num: 9, text: 'Zalewski NL, et al. Characteristics of spontaneous spinal cord infarction. JAMA Neurol. 2019;76(1):56-63.' },
-    { num: 10, text: 'Vargas MI, et al. Spinal cord ischemia: imaging insights. RadioGraphics. 2015;35(3):825-844.' },
-    { num: 11, text: 'Neurocritical Care Society. Emergency Neurological Life Support (ENLS): Acute Spinal Cord Disorders.' },
+    { num: 6, text: 'Mariano R, Messina S, Kumar K, et al. Comparison of Clinical Outcomes of Transverse Myelitis Among Adults With Myelin Oligodendrocyte Glycoprotein Antibody vs Aquaporin-4 Antibody Disease. JAMA Netw Open. 2019;2(10):e1912732. doi:10.1001/jamanetworkopen.2019.12732' },
+    { num: 7, text: 'Goh C, Desmond PM, Phal PM. MRI in transverse myelitis. J Magn Reson Imaging. 2014;40(6):1267-1279. doi:10.1002/jmri.24563' },
+    { num: 8, text: 'Greenberg BM, Thomas KP, Krishnan C, Kaplin AI, Calabresi PA, Kerr DA. Idiopathic transverse myelitis: corticosteroids, plasma exchange, or cyclophosphamide. Neurology. 2007;68(19):1614-1617. doi:10.1212/01.wnl.0000260970.63493.c8' },
+    { num: 9, text: 'Zalewski NL, Rabinstein AA, Krecke KN, et al. Characteristics of Spontaneous Spinal Cord Infarction and Proposed Diagnostic Criteria. JAMA Neurol. 2019;76(1):56-63.' },
+    { num: 10, text: 'Vargas MI, Gariani J, Sztajzel R, et al. Spinal Cord Ischemia: Practical Imaging Tips, Pearls, and Pitfalls. AJNR Am J Neuroradiol. 2015;36(5):825-830. doi:10.3174/ajnr.A4118' },
+    { num: 11, text: 'O\'Phelan KH, Bunney EB, Kuluz JW. Emergency Neurologic Life Support: Spinal Cord Compression. Neurocrit Care. 2015;23(Suppl 2):129-135. doi:10.1007/s12028-015-0166-1' },
     { num: 12, text: 'Darouiche RO. Spinal Epidural Abscess. N Engl J Med. 2006;355(19):2012-2020.' },
+    { num: 13, text: 'Ropper AE, Ropper AH. Acute Spinal Cord Compression. N Engl J Med. 2017;376(14):1358-1369. doi:10.1056/NEJMra1516539' },
+    { num: 14, text: 'Weinshenker BG, O\'Brien PC, Petterson TM, et al. A randomized trial of plasma exchange in acute central nervous system inflammatory demyelinating disease. Ann Neurol. 1999;46(6):878-886. PMID: 10589540' },
+    { num: 15, text: 'Bonnan M, Valentino R, Debeugny S, et al. Short delay to initiate plasma exchange is the strongest predictor of outcome in severe attacks of NMO spectrum disorders. J Neurol Neurosurg Psychiatry. 2018;89(4):346-351. doi:10.1136/jnnp-2017-316286' },
 ];

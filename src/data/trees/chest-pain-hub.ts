@@ -1,14 +1,15 @@
 // MedKitt - Chest Pain Hub
 // Rule-in / rule-out engine. Each differential walks its validated decision
 // instrument to an explicit verdict. Scoring tools live in the bottom toolbar.
+// 29 nodes (12 question / 3 info / 14 result), 5 modules, 17 citations.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
 export const CHEST_PAIN_HUB_CRITICAL_ACTIONS = [
   { text: 'ECG reviewed within 10 minutes of arrival for any acute chest pain', nodeId: 'cp-start' },
-  { text: 'Do not anticoagulate until aortic dissection is considered when the story fits', nodeId: 'cp-aortic-entry' },
-  { text: 'HEART score alone never overrides a positive troponin or an ischemic ECG', nodeId: 'cp-acs-entry' },
+  { text: 'Do not anticoagulate until aortic dissection is considered when the story fits', nodeId: 'cp-aortic-verdict' },
+  { text: 'HEART score alone never overrides a positive troponin or an ischemic ECG', nodeId: 'cp-acs-heart' },
   { text: 'Tension pneumothorax is decompressed clinically before imaging', nodeId: 'cp-ptx-verdict' },
 ];
 
@@ -228,7 +229,7 @@ export const CHEST_PAIN_HUB_NODES: DecisionNode[] = [
     title: 'PE - Ruled Out',
     body: 'PE is excluded by this validated pathway. **Document the pathway** (Wells tier + PERC or age-adjusted D-dimer) so the reasoning is independently reviewable.\n\nReturn to the hub and rule in/out the next differential if chest pain is unexplained.',
     recommendation: 'PE excluded by validated pathway; document and pursue alternate cause.',
-    citation: [6, 7],
+    citation: [5, 6, 7],
     next: 'cp-triage',
     safetyLevel: 'warning',
     confidence: 'definitive',
@@ -246,7 +247,7 @@ export const CHEST_PAIN_HUB_NODES: DecisionNode[] = [
       { label: 'POCUS/CXR positive, hemodynamically stable', description: 'Size-based management', next: 'cp-ptx-verdict', urgency: 'urgent' },
       { label: 'Lung sliding present / no lung point', description: 'Pneumothorax effectively excluded', next: 'cp-triage', urgency: 'routine' },
     ],
-    citation: [12],
+    citation: [12, 16, 17],
     summary: 'Absent sliding + lung point rules in PTX; present sliding rules it out. Tension is clinical.',
     safetyLevel: 'critical',
   },
@@ -257,7 +258,7 @@ export const CHEST_PAIN_HUB_NODES: DecisionNode[] = [
     title: 'Pneumothorax - Treat',
     body: 'Open [Pneumothorax](#/tree/pneumothorax).\n\n- **Tension physiology (hypotension, severe distress, tracheal shift):** immediate needle/finger decompression, then tube \u2014 **do not wait for imaging.**\n- **Stable:** size and symptom-based management per BTS (observation, aspiration, or small-bore drain).\n\n**Pitfall:** a post-procedure or ventilated patient with sudden chest pain/hypotension is tension pneumothorax until proven otherwise.',
     recommendation: 'Tension is decompressed clinically before imaging; stable PTX is size-based.',
-    citation: [12],
+    citation: [12, 16],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -439,4 +440,6 @@ export const CHEST_PAIN_HUB_CITATIONS: Citation[] = [
   { num: 13, text: 'Adler Y, Charron P, Imazio M, et al. 2015 ESC Guidelines for the diagnosis and management of pericardial diseases. Eur Heart J. 2015;36(42):2921-2964. doi:10.1093/eurheartj/ehv318' },
   { num: 14, text: 'Ammirati E, Frigerio M, Adler ED, et al. Management of acute myocarditis and chronic inflammatory cardiomyopathy: an expert consensus document. Circ Heart Fail. 2020;13(11):e007405. doi:10.1161/CIRCHEARTFAILURE.120.007405' },
   { num: 15, text: 'Brinster CJ, Singhal S, Lee L, et al. Evolving options in the management of esophageal perforation. Ann Thorac Surg. 2004;77(4):1475-1483. doi:10.1016/j.athoracsur.2003.08.037' },
+  { num: 16, text: 'Roberts ME, Rahman NM, Maskell NA, et al; BTS Pleural Guideline Development Group. British Thoracic Society Guideline for pleural disease. Thorax. 2023;78(Suppl 3):s1-s42. doi:10.1136/thorax-2022-219784' },
+  { num: 17, text: 'Lichtenstein D, Meziere G, Biderman P, Gepner A. The "lung point": an ultrasound sign specific to pneumothorax. Intensive Care Med. 2000;26(10):1434-1440. doi:10.1007/s001340000627' },
 ];
