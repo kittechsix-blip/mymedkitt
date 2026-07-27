@@ -27,7 +27,7 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     module: 1,
     title: 'Salicylate Toxicity — Initial Assessment',
     body: '[Salicylate Toxicity Steps Summary](#/info/sal-steps-summary) — quick-reference pathway.\n\n**Order labs:** Salicylate level, ABG/VBG, BMP (Na, Cl, HCO3, K, Cr, glucose), lactate, acetaminophen level (common co-ingestant).\n\n**Clinical suspicion triggers:** Unexplained tachypnea/hyperpnea, tinnitus, altered mental status, unexplained anion gap metabolic acidosis, mixed respiratory alkalosis + metabolic acidosis.\n\n[Level Interpretation & Monitoring](#/info/sal-level-interpretation)\n\nWhat type of salicylate exposure?',
-    citation: [1, 2, 3, 4],
+    citation: [1, 2, 3, 4, 15, 22],
     calculatorLinks: [
       { id: 'sal-tox-guide', label: 'Sal Tox Guide' },
       { id: 'anion-gap', label: 'Anion Gap' },
@@ -56,8 +56,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Acute Ingestion — Dose Estimation',
-    body: 'Estimate the ingested dose (mg/kg) from history. If uncertain, assume worst case.\n\n**Oil of wintergreen warning:** 1 mL of methyl salicylate = ~1,400 mg aspirin. A single teaspoon (~5 mL) = ~7,000 mg — potentially lethal in a child. [1][3]\n\n**Enteric-coated tablets:** Peak absorption may be delayed 12-24 hours. Extended observation required.\n\nEstimated dose:',
-    citation: [1, 3, 9],
+    body: 'Estimate the ingested dose (mg/kg) from history. If uncertain, assume worst case.\n\n**Oil of wintergreen warning:** 1 mL of methyl salicylate = ~1,400 mg aspirin. A single teaspoon (~5 mL) = ~7,000 mg — potentially lethal in a child. [1][3][15][22]\n\n**Enteric-coated tablets:** Peak absorption may be delayed 12-24 hours. Extended observation required. [18][22]\n\nEstimated dose:',
+    citation: [1, 3, 9, 15, 18, 22],
     options: [
       {
         label: '< 150 mg/kg (minimal risk)',
@@ -83,8 +83,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Chronic Salicylate Toxicity',
-    body: '**Chronic toxicity is underrecognized and more lethal than acute toxicity at the same serum levels.** [2][4]\n\nCommonly elderly patients on chronic aspirin or salicylate-containing products (Pepto-Bismol, topical products, combination cold medicines). Often misdiagnosed as sepsis, CHF exacerbation, dementia, or delirium.\n\n[Chronic Toxicity Recognition](#/info/sal-chronic-recognition)\n\n**Key point:** The Done nomogram does NOT apply to chronic toxicity (and is no longer recommended even for acute ingestion). A level of 40 mg/dL in chronic toxicity can be as dangerous as >100 mg/dL in acute overdose. [14]',
-    citation: [2, 4, 13, 14],
+    body: '**Chronic toxicity is underrecognized and more lethal than acute toxicity at the same serum levels.** [2][4]\n\nCommonly elderly patients on chronic aspirin or salicylate-containing products (Pepto-Bismol, topical products, combination cold medicines). Often misdiagnosed as sepsis, CHF exacerbation, dementia, or delirium.\n\n[Chronic Toxicity Recognition](#/info/sal-chronic-recognition)\n\n**Key point:** The Done nomogram does NOT apply to chronic toxicity (and is no longer recommended even for acute ingestion). A level of 40 mg/dL in chronic toxicity can be as dangerous as >100 mg/dL in acute overdose. [9][14][21]',
+    citation: [2, 4, 9, 13, 14, 21],
     next: 'sal-chronic-assess',
 
     summary: 'Chronic toxicity is underrecognized and more lethal at same levels — Done nomogram does NOT apply',
@@ -96,8 +96,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Chronic Toxicity — Severity Assessment',
-    body: 'Clinical status is more important than serum level in chronic toxicity.\n\nAssess for signs of severe toxicity:',
-    citation: [2, 13],
+    body: 'Clinical status is more important than serum level in chronic toxicity. [9][15][21]\n\nAssess for signs of severe toxicity:',
+    citation: [2, 9, 13, 15, 21],
     options: [
       {
         label: 'Mild (tinnitus, nausea, no altered mental status)',
@@ -118,8 +118,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Low-Risk Acute Ingestion (< 150 mg/kg)',
-    body: 'Minimal symptoms expected at this dose. [1]\n\n• Observe minimum **6 hours** (children and adults)\n• Repeat salicylate level at **2 and 4 hours**\n• **Enteric-coated tablets:** Observe minimum **12 hours** (delayed absorption)\n• If levels declining and patient remains asymptomatic → observation pathway\n• If levels rising → reassess risk category',
-    citation: [1, 3],
+    body: 'Minimal symptoms expected at this dose. [1][18]\n\n• Observe minimum **6 hours** (children and adults) [18]\n• Repeat salicylate level at **2 and 4 hours** [18]\n• **Enteric-coated tablets:** Observe minimum **12 hours** (delayed absorption) [18][22]\n• If levels declining and patient remains asymptomatic → observation pathway\n• If levels rising → reassess risk category',
+    citation: [1, 3, 15, 18, 22],
     next: 'sal-monitor',
 
     summary: 'Observe 6hr minimum (12hr enteric-coated), repeat levels at 2hr and 4hr — reassess if rising',
@@ -131,8 +131,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Moderate Risk (150-300 mg/kg)',
-    body: 'Expect symptomatic toxicity: tachypnea, tinnitus, nausea/vomiting. [1]\n\n• Start alkalinization early\n• GI decontamination if within window\n• Check acetaminophen level (common co-ingestant in intentional OD)\n• Serial salicylate levels q2h\n• Volume resuscitate — **NEVER with normal saline** (acidifying). Use D5W or LR.',
-    citation: [1, 2, 3],
+    body: 'Expect symptomatic toxicity: tachypnea, tinnitus, nausea/vomiting. [1][18]\n\n• Start alkalinization early [6][15]\n• GI decontamination if within window [7]\n• Check acetaminophen level (common co-ingestant in intentional OD) [15]\n• Serial salicylate levels q2h [15][18]\n• Volume resuscitate — **NEVER with normal saline** (acidifying). Use D5W or LR. [2][15]',
+    citation: [1, 2, 3, 6, 7, 15, 18],
     next: 'sal-resus-assess',
 
     summary: 'Start alkalinization early, GI decon, NEVER use normal saline — serial levels q2h',
@@ -143,8 +143,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Severe/Massive Ingestion (> 300 mg/kg)',
-    body: '**Life-threatening ingestion.** > 500 mg/kg is potentially lethal. [1][3]\n\n• **EARLY nephrology consult** for hemodialysis — do not wait for clinical deterioration\n• Anticipate rapid deterioration: metabolic acidosis, altered mental status, seizures\n• Start alkalinization immediately\n• Activated charcoal if within window and airway protected\n• Volume resuscitate with D5W or LR — **NEVER normal saline**',
-    citation: [1, 2, 3],
+    body: '**Life-threatening ingestion.** > 500 mg/kg is potentially lethal. [1][3][18]\n\n• **EARLY nephrology consult** for hemodialysis — do not wait for clinical deterioration [5][12][15]\n• Anticipate rapid deterioration: metabolic acidosis, altered mental status, seizures [15]\n• Start alkalinization immediately [6][15]\n• Activated charcoal if within window and airway protected [7]\n• Volume resuscitate with D5W or LR — **NEVER normal saline** [2][15]',
+    citation: [1, 2, 3, 5, 6, 7, 12, 15, 18],
     next: 'sal-resus-assess',
 
     summary: 'Life-threatening >300mg/kg — consult nephrology EARLY for HD, anticipate rapid deterioration',
@@ -156,8 +156,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Unknown Timing — Worst-Case Approach',
-    body: 'Treat as moderate-severe until proven otherwise. [2]\n\n• Serial salicylate levels q2h — determine if rising (acute with delayed absorption) or plateauing (chronic)\n• If level rising: may indicate enteric-coated, bezoar, or recent large ingestion\n• If level elevated with acidemia out of proportion: consider chronic toxicity\n• Start alkalinization if symptomatic or level > 30 mg/dL',
-    citation: [1, 2],
+    body: 'Treat as moderate-severe until proven otherwise. [2][15]\n\n• Serial salicylate levels q2h — determine if rising (acute with delayed absorption) or plateauing (chronic) [15][18]\n• If level rising: may indicate enteric-coated, bezoar, or recent large ingestion [18][22]\n• If level elevated with acidemia out of proportion: consider chronic toxicity [9][21]\n• Start alkalinization if symptomatic or level > 30 mg/dL [6][18]',
+    citation: [1, 2, 6, 9, 15, 18, 21, 22],
     next: 'sal-resus-assess',
 
     summary: 'Treat as moderate-severe until proven otherwise — serial levels q2h to determine trajectory',
@@ -172,8 +172,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Resuscitation Assessment',
-    body: '**Volume resuscitate** — patients are often 4-6L depleted (diaphoresis, tachypnea, vomiting, diarrhea). [2]\n• Use **isotonic bicarbonate** (if pH < 7.5) or **LR/Plasmalyte** (if at target pH). **NEVER normal saline.** [2]\n• Check fingerstick glucose — give [Dextrose](#/drug/dextrose/neuroglycopenia) D50W empirically for any AMS, even with normal serum glucose (neuroglycopenia). [2][4]\n\nAssess for immediate threats:',
-    citation: [1, 2, 3, 4],
+    body: '**Volume resuscitate** — patients are often 4-6L depleted (diaphoresis, tachypnea, vomiting, diarrhea). [2]\n• Use **isotonic bicarbonate** (if pH < 7.5) or **LR/Plasmalyte** (if at target pH). **NEVER normal saline.** [2]\n• Check fingerstick glucose — give [Dextrose](#/drug/dextrose/neuroglycopenia) D50W empirically for any AMS, even with normal serum glucose (neuroglycopenia). [2][4][17]\n\nAssess for immediate threats:',
+    citation: [1, 2, 3, 4, 15, 17, 22],
     treatment: {
       firstLine: {
         drug: 'Isotonic Sodium Bicarbonate',
@@ -219,8 +219,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Seizures / Severe Altered Mental Status',
-    body: '**Benzodiazepines first-line for seizures:**\n• [Lorazepam](#/drug/lorazepam/status epilepticus) 0.1 mg/kg IV (max 4 mg)\n• [Midazolam](#/drug/midazolam/status epilepticus) 0.2 mg/kg IM (max 10 mg) if no IV access\n\n**Empiric dextrose:** [Dextrose](#/drug/dextrose/neuroglycopenia) D50W 50 mL IV — even with NORMAL serum glucose. Salicylate uncouples oxidative phosphorylation, causing massive CNS glucose consumption (**neuroglycopenia**). CSF glucose drops before serum glucose. [2][4]\n\n**Seizures in salicylate toxicity = severe poisoning.** This patient almost certainly needs hemodialysis.',
-    citation: [1, 2, 3, 4],
+    body: '**Benzodiazepines first-line for seizures:**\n• [Lorazepam](#/drug/lorazepam/status epilepticus) 0.1 mg/kg IV (max 4 mg)\n• [Midazolam](#/drug/midazolam/status epilepticus) 0.2 mg/kg IM (max 10 mg) if no IV access\n\n**Empiric dextrose:** [Dextrose](#/drug/dextrose/neuroglycopenia) D50W 50 mL IV — even with NORMAL serum glucose. Salicylate uncouples oxidative phosphorylation, causing massive CNS glucose consumption (**neuroglycopenia**). CSF glucose drops before serum glucose. [2][4][17]\n\n**Seizures in salicylate toxicity = severe poisoning.** This patient almost certainly needs hemodialysis. [5][15]',
+    citation: [1, 2, 3, 4, 5, 15, 17, 22],
 
     summary: 'BZD for seizures, empiric D50W even with normal glucose (neuroglycopenia) — seizures = severe, needs HD',
     safetyLevel: 'critical',
@@ -252,8 +252,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'THE DANGEROUS AIRWAY',
-    body: '**CRITICAL WARNING: Intubation in salicylate toxicity is EXTREMELY DANGEROUS and frequently causes cardiac arrest.** [2][3][4]\n\n[The Dangerous Airway — Death Spiral](#/info/sal-death-spiral)\n\nThe patient\'s compensatory hyperventilation (often RR 30-40) is the ONLY thing maintaining their pH. If you eliminate this compensation during intubation, pH crashes precipitously → more non-ionized salicylate crosses the BBB → brainstem depression → cardiac arrest.\n\n**HFNC may help** blow off CO2 and reduce work of breathing without the risks of intubation. Discontinue as serum bicarbonate rises to avoid excessive alkalemia. [2]\n\nCan intubation be avoided?',
-    citation: [2, 3, 4],
+    body: '**CRITICAL WARNING: Intubation in salicylate toxicity is EXTREMELY DANGEROUS and frequently causes cardiac arrest.** [2][3][4][15][16]\n\n[The Dangerous Airway — Death Spiral](#/info/sal-death-spiral)\n\nThe patient\'s compensatory hyperventilation (often RR 30-40) is the ONLY thing maintaining their pH. If you eliminate this compensation during intubation, pH crashes precipitously → more non-ionized salicylate crosses the BBB → brainstem depression → cardiac arrest. [8][16]\n\n**HFNC may help** blow off CO2 and reduce work of breathing without the risks of intubation. Discontinue as serum bicarbonate rises to avoid excessive alkalemia. [2]\n\nCan intubation be avoided?',
+    citation: [2, 3, 4, 8, 15, 16],
     options: [
       {
         label: 'Must Intubate (refractory seizures, apnea, active vomiting with aspiration risk)',
@@ -275,9 +275,9 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'result',
     module: 2,
     title: 'Intubation Protocol — Call for EMERGENT Hemodialysis',
-    body: '**If intubation is unavoidable:** [2][3][4]\n\n• **Pre-intubation:** Bolus [Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity) 1-2 mEq/kg IV. Give >5-10 minutes before paralysis to allow CO2 blow-off from infused bicarb.\n• **Intubation:** Most experienced operator. Rapid sequence. Consider ketamine (maintains respiratory drive longest).\n• **Post-intubation ventilator settings:** TV 8 mL/kg, **RR 30-35** (match pre-intubation minute ventilation). Target **pH, NOT pCO2.** ABG within 10 minutes.\n• Continue NaHCO3 boluses. Switch to spontaneous mode ASAP.\n\n**This patient REQUIRES EMERGENT HEMODIALYSIS.** A patient who needs intubation for salicylate toxicity almost certainly needs HD too. Intubation without HD has very high mortality.',
+    body: '**If intubation is unavoidable:** [2][3][4][15][16]\n\n• **Pre-intubation:** Bolus [Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity) 1-2 mEq/kg IV. Give >5-10 minutes before paralysis to allow CO2 blow-off from infused bicarb.\n• **Intubation:** Most experienced operator. Rapid sequence. Consider ketamine (maintains respiratory drive longest).\n• **Post-intubation ventilator settings:** TV 8 mL/kg, **RR 30-35** (match pre-intubation minute ventilation). Target **pH, NOT pCO2.** ABG within 10 minutes. [16]\n• Continue NaHCO3 boluses. Switch to spontaneous mode ASAP.\n\n**This patient REQUIRES EMERGENT HEMODIALYSIS.** A patient who needs intubation for salicylate toxicity almost certainly needs HD too. Intubation without HD has very high mortality. [5][12][15][16]',
     recommendation: 'EMERGENT: Call nephrology STAT for hemodialysis. Continue NaHCO3 infusion. Vent settings: TV 8 mL/kg, RR 30-35, target pH not pCO2. ABG q15min initially.',
-    citation: [2, 3, 4],
+    citation: [2, 3, 4, 5, 12, 15, 16],
     treatment: {
       firstLine: {
         drug: 'Sodium Bicarbonate 8.4%',
@@ -304,8 +304,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Non-Cardiogenic Pulmonary Edema',
-    body: 'Occurs in severe toxicity from direct capillary leak injury. NOT volume overload. [1][2][3]\n\n• BiPAP/CPAP may temporize — avoid intubation if possible\n• Volume-restrict (despite general hypovolemia)\n• **This is an indication for EMERGENT hemodialysis** [5]\n• If progressing to respiratory failure requiring intubation, see airway warning',
-    citation: [1, 2, 3, 5],
+    body: 'Occurs in severe toxicity from direct capillary leak injury. NOT volume overload. [1][2][3][13][22]\n\n• BiPAP/CPAP may temporize — avoid intubation if possible [15][16]\n• Volume-restrict (despite general hypovolemia) [2][15]\n• **This is an indication for EMERGENT hemodialysis** [5][15]\n• If progressing to respiratory failure requiring intubation, see airway warning',
+    citation: [1, 2, 3, 5, 13, 15, 16, 22],
     next: 'sal-airway-warning',
 
     summary: 'Non-cardiogenic pulmonary edema from capillary leak — BiPAP to temporize, this is HD indication',
@@ -320,8 +320,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'GI Decontamination',
-    body: 'Activated charcoal effectively adsorbs salicylate. Salicylate\'s delayed gastric emptying may extend the window of efficacy. [1][3][7]\n\nDo NOT induce emesis. Gastric lavage is rarely indicated.\n\nTime since ingestion and formulation:',
-    citation: [1, 3, 7],
+    body: 'Activated charcoal effectively adsorbs salicylate. Salicylate\'s delayed gastric emptying may extend the window of efficacy. [1][3][7]\n\nDo NOT induce emesis. Gastric lavage is rarely indicated. [7][15][18]\n\nTime since ingestion and formulation:',
+    citation: [1, 3, 7, 15, 18, 19, 20],
     options: [
       {
         label: 'Within 1-2 Hours, Alert Patient',
@@ -345,8 +345,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Single-Dose Activated Charcoal',
-    body: '[Activated Charcoal](#/drug/activated-charcoal/salicylate) 1 g/kg PO (max 50g). [7]\n\nMost effective within 1 hour, but consider up to **2-4 hours** for salicylates (delayed gastric emptying in overdose, bezoar formation). [1]\n\n**Contraindications:** Unprotected airway, bowel obstruction/perforation, caustic co-ingestion.\n\nA second dose of charcoal may be given 4 hours later if salicylate levels continue to rise. [1]',
-    citation: [1, 3, 7],
+    body: '[Activated Charcoal](#/drug/activated-charcoal/salicylate) 1 g/kg PO (max 50g). [7]\n\nMost effective within 1 hour, but consider up to **2-4 hours** for salicylates (delayed gastric emptying in overdose, bezoar formation). [1][18][22]\n\n**Contraindications:** Unprotected airway, bowel obstruction/perforation, caustic co-ingestion. [7]\n\nA second dose of charcoal may be given 4 hours later if salicylate levels continue to rise. [1][15][19]',
+    citation: [1, 3, 7, 15, 18, 19, 22],
 
     summary: 'Activated charcoal 1g/kg (max 50g) — extended window for salicylates, may repeat in 4hr if levels rising',
 
@@ -369,8 +369,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Multi-Dose Charcoal / Whole Bowel Irrigation',
-    body: 'For enteric-coated formulations or massive ingestions with suspected bezoar: [1][3]\n\n**Multi-dose activated charcoal (MDAC):** [Activated Charcoal](#/drug/activated-charcoal/salicylate) 25g q2-4h for 3-4 additional doses. Monitor for obstipation.\n\n**Whole bowel irrigation (WBI):** PEG-electrolyte solution (GoLYTELY) via NG at 1.5-2 L/hr (adults). Consider for confirmed bezoar on imaging or persistently rising levels despite charcoal. May require intubation for airway protection (use extreme caution — see airway warning).',
-    citation: [1, 3],
+    body: 'For enteric-coated formulations or massive ingestions with suspected bezoar: [1][3]\n\n**Multi-dose activated charcoal (MDAC):** [Activated Charcoal](#/drug/activated-charcoal/salicylate) 25g q2-4h for 3-4 additional doses. Monitor for obstipation. [19]\n\n**Whole bowel irrigation (WBI):** PEG-electrolyte solution (GoLYTELY) via NG at 1.5-2 L/hr (adults). Consider for confirmed bezoar on imaging or persistently rising levels despite charcoal. May require intubation for airway protection (use extreme caution — see airway warning). [20]',
+    citation: [1, 3, 19, 20],
 
     summary: 'MDAC 25g q2-4h or whole bowel irrigation for enteric-coated/bezoar — monitor for obstipation',
 
@@ -405,8 +405,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Alkalinization — Cornerstone of Treatment',
-    body: '**Urinary alkalinization is the CORNERSTONE of salicylate management.** [1][2][3][4]\n\n[Alkalinization Protocol Detail](#/info/sal-alkalinize-protocol)\n\n**Mechanism:** Alkaline urine ionizes salicylic acid → trapped in renal tubules → cannot be reabsorbed. Urine pH 8.0 increases renal clearance **10-fold** vs pH 6.0. [2][6][8]\n\n**Even if the patient is already alkalemic** from respiratory alkalosis (pH up to 7.55), bicarbonate is still beneficial — the goal is **urinary** alkalinization, not serum. [2]\n\n[Acid-Base Patterns in Salicylate Toxicity](#/info/sal-acid-base) — classic mixed respiratory alkalosis + anion-gap metabolic acidosis. [10]\n\nIs alkalinization indicated?',
-    citation: [1, 2, 3, 4, 6, 8, 10],
+    body: '**Urinary alkalinization is the CORNERSTONE of salicylate management.** [1][2][3][4][15][22]\n\n[Alkalinization Protocol Detail](#/info/sal-alkalinize-protocol)\n\n**Mechanism:** Alkaline urine ionizes salicylic acid → trapped in renal tubules → cannot be reabsorbed. Urine pH 8.0 increases renal clearance **10-fold** vs pH 6.0. [2][6][8]\n\n**Even if the patient is already alkalemic** from respiratory alkalosis (pH up to 7.55), bicarbonate is still beneficial — the goal is **urinary** alkalinization, not serum. [2][6][15]\n\n[Acid-Base Patterns in Salicylate Toxicity](#/info/sal-acid-base) — classic mixed respiratory alkalosis + anion-gap metabolic acidosis. [10]\n\nIs alkalinization indicated?',
+    citation: [1, 2, 3, 4, 6, 8, 10, 15, 22],
     calculatorLinks: [
       { id: 'anion-gap', label: 'Anion Gap' },
       { id: 'winters-formula', label: "Winter's Formula" },
@@ -430,8 +430,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'NaHCO3 — Bolus + Infusion',
-    body: '[Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity)\n\n**Bolus:** 1-2 mEq/kg IV (typically 2-3 amps of 8.4% NaHCO3). [2][3]\n\n**Infusion:** 150 mEq (3 amps 8.4%) in 1L **D5W** at 150-200 mL/hr. [2]\n• D5W carrier provides CNS glucose support\n• **NEVER use normal saline** as carrier — acidifying (SID = 0) [2]\n\n**Targets:** [2]\n• Serum pH: 7.45-7.55 (check q2h)\n• Urine pH: 7.5-8.0 (check hourly via Foley)\n• Do NOT exceed serum pH > 7.60\n\n**CONTRAINDICATED:** Acetazolamide — lowers serum pH AND displaces salicylate from albumin, increasing free (toxic) levels. [2][11][13]',
-    citation: [2, 3, 6, 11, 13],
+    body: '[Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity)\n\n**Bolus:** 1-2 mEq/kg IV (typically 2-3 amps of 8.4% NaHCO3). [2][3][6][15]\n\n**Infusion:** 150 mEq (3 amps 8.4%) in 1L **D5W** at 150-200 mL/hr. [2][6][15][22]\n• D5W carrier provides CNS glucose support\n• **NEVER use normal saline** as carrier — acidifying (SID = 0) [2]\n\n**Targets:** [2][6][15]\n• Serum pH: 7.45-7.55 (check q2h)\n• Urine pH: 7.5-8.0 (check hourly via Foley)\n• Do NOT exceed serum pH > 7.60\n\n**CONTRAINDICATED:** Acetazolamide — lowers serum pH AND displaces salicylate from albumin, increasing free (toxic) levels. [2][11][13][22]',
+    citation: [2, 3, 6, 11, 13, 15, 22],
 
     summary: 'NaHCO3 bolus 1-2 mEq/kg then infusion in D5W — target urine pH 7.5-8.0; NEVER use NS carrier; acetazolamide CONTRAINDICATED',
     safetyLevel: 'critical',
@@ -455,8 +455,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'CRITICAL — Potassium Repletion',
-    body: '**Hypokalemia BLOCKS urinary alkalinization. You CANNOT achieve alkaline urine without adequate K+.** [1][2][3]\n\nWhen K+ is low, the distal tubule reabsorbs K+ and excretes H+ instead — producing **acidic urine** despite systemic alkalosis. No amount of bicarbonate will overcome this.\n\n[KCl IV](#/drug/potassium-chloride-iv/severe) 20-40 mEq/hr IV (with cardiac monitoring for rates > 20 mEq/hr). [2]\n\n**Add 20-40 mEq KCl per liter** of bicarbonate infusion. [2]\n\n**Target K+ ≥ 4.0-4.5 mEq/L.** [2]\n\nBicarbonate infusion tends to drop K+ further — preemptive repletion is essential.',
-    citation: [1, 2, 3],
+    body: '**Hypokalemia BLOCKS urinary alkalinization. You CANNOT achieve alkaline urine without adequate K+.** [1][2][3][6]\n\nWhen K+ is low, the distal tubule reabsorbs K+ and excretes H+ instead — producing **acidic urine** despite systemic alkalosis. No amount of bicarbonate will overcome this. [6][22]\n\n[KCl IV](#/drug/potassium-chloride-iv/severe) 20-40 mEq/hr IV (with cardiac monitoring for rates > 20 mEq/hr). [2]\n\n**Add 20-40 mEq KCl per liter** of bicarbonate infusion. [2][6][15]\n\n**Target K+ ≥ 4.0-4.5 mEq/L.** [2][15]\n\nBicarbonate infusion tends to drop K+ further — preemptive repletion is essential. [6]',
+    citation: [1, 2, 3, 6, 15, 22],
 
     summary: 'Hypokalemia BLOCKS urinary alkalinization — replete K+ to 4.0-4.5 mEq/L; add 20-40 mEq KCl per liter of bicarb',
     safetyLevel: 'critical',
@@ -488,8 +488,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Dextrose for Neuroglycopenia',
-    body: '[Dextrose](#/drug/dextrose/neuroglycopenia) **D50W 50 mL IV** for any AMS or declining mental status — even with **NORMAL serum glucose.** [2][4]\n\nSalicylate uncouples oxidative phosphorylation in CNS mitochondria → massive local glucose consumption → CSF glucose drops critically low while serum glucose remains normal. This **neuroglycopenia** causes altered mental status and seizures that may respond to dextrose. [4]\n\n• Add D5W to all maintenance IV fluids (bicarb infusion already uses D5W carrier)\n• Check fingerstick glucose q1h\n• Target moderate hyperglycemia (~150-200 mg/dL) in severe toxicity [2]',
-    citation: [2, 4],
+    body: '[Dextrose](#/drug/dextrose/neuroglycopenia) **D50W 50 mL IV** for any AMS or declining mental status — even with **NORMAL serum glucose.** [2][4][15]\n\nSalicylate uncouples oxidative phosphorylation in CNS mitochondria → massive local glucose consumption → CSF glucose drops critically low while serum glucose remains normal. This **neuroglycopenia** causes altered mental status and seizures that may respond to dextrose. [4][17]\n\n• Add D5W to all maintenance IV fluids (bicarb infusion already uses D5W carrier)\n• Check fingerstick glucose q1h\n• Target moderate hyperglycemia (~150-200 mg/dL) in severe toxicity [2][15]',
+    citation: [2, 4, 15, 17],
 
     summary: 'D50W empirically for any AMS even with normal serum glucose — CSF glucose drops before serum from uncoupled oxidative phosphorylation',
     safetyLevel: 'warning',
@@ -521,8 +521,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Alkalinization Monitoring',
-    body: '**Monitor q1-2h:** ABG/VBG, BMP (K+, HCO3, glucose), salicylate level, urine pH. [1][2][3]\n\n[Level Interpretation & Monitoring](#/info/sal-level-interpretation)\n\n**Warning signs during monitoring:**\n• Declining tachypnea (losing compensation — death spiral risk)\n• Persistent acidic urine despite bicarb (check K+)\n• Rising salicylate levels (ongoing absorption, bezoar)\n• Worsening mental status (tissue redistribution)\n\nAssess response:',
-    citation: [1, 2, 3],
+    body: '**Monitor q1-2h:** ABG/VBG, BMP (K+, HCO3, glucose), salicylate level, urine pH. [1][2][3][6][15]\n\n[Level Interpretation & Monitoring](#/info/sal-level-interpretation)\n\n**Warning signs during monitoring:**\n• Declining tachypnea (losing compensation — death spiral risk) [15]\n• Persistent acidic urine despite bicarb (check K+) [6]\n• Rising salicylate levels (ongoing absorption, bezoar) [18]\n• Worsening mental status (tissue redistribution) [15]\n\nAssess response:',
+    citation: [1, 2, 3, 6, 15, 18],
     calculatorLinks: [
       { id: 'sal-tox-guide', label: 'Sal Tox Guide' },
       { id: 'anion-gap', label: 'Anion Gap' },
@@ -551,8 +551,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Alkalinization Working — Continue',
-    body: 'Continue infusion until: [1][2]\n\n• Salicylate level **< 30 mg/dL** AND trending down on serial levels\n• Patient clinically improving (resolving tachypnea, normal mental status)\n• Acid-base normalizing\n\n**Do NOT stop based on a single level** — redistribution from tissue stores can cause rebound. [2]\n\nTaper bicarb slowly — sudden discontinuation can cause rebound acidosis. Continue K+ repletion throughout.',
-    citation: [1, 2],
+    body: 'Continue infusion until: [1][2][15][18]\n\n• Salicylate level **< 30 mg/dL** AND trending down on serial levels\n• Patient clinically improving (resolving tachypnea, normal mental status)\n• Acid-base normalizing\n\n**Do NOT stop based on a single level** — redistribution from tissue stores can cause rebound. [2][15]\n\nTaper bicarb slowly — sudden discontinuation can cause rebound acidosis. Continue K+ repletion throughout. [6][15]',
+    citation: [1, 2, 6, 15, 18],
     next: 'sal-monitor',
 
     summary: 'Continue infusion until level <30 declining x2 — do NOT stop on single level, taper slowly to avoid rebound acidosis',
@@ -563,8 +563,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Alkalinization Not Working',
-    body: 'If urine pH remains < 7.0 despite adequate bicarbonate infusion: [1][2][3]\n\n**#1 — Check K+.** Hypokalemia is the most common cause of alkalinization failure. Replete aggressively.\n\n**#2 — Assess renal function.** AKI prevents renal excretion of both acid and salicylate.\n\n**#3 — Volume status.** Hypovolemia → increased renal bicarbonate reabsorption.\n\n**Alkalinization failure is itself an indication for hemodialysis.** [2][5]\n\n**Absolutely CONTRAINDICATED:** Acetazolamide to directly alkalinize urine — lowers serum pH AND displaces salicylate from protein binding. [2][13]',
-    citation: [1, 2, 3, 5, 13],
+    body: 'If urine pH remains < 7.0 despite adequate bicarbonate infusion: [1][2][3][6]\n\n**#1 — Check K+.** Hypokalemia is the most common cause of alkalinization failure. Replete aggressively. [6][15]\n\n**#2 — Assess renal function.** AKI prevents renal excretion of both acid and salicylate. [5][15]\n\n**#3 — Volume status.** Hypovolemia → increased renal bicarbonate reabsorption. [6]\n\n**Alkalinization failure is itself an indication for hemodialysis.** [2][5][15]\n\n**Absolutely CONTRAINDICATED:** Acetazolamide to directly alkalinize urine — lowers serum pH AND displaces salicylate from protein binding. [2][13][22]',
+    citation: [1, 2, 3, 5, 6, 13, 15, 22],
     next: 'sal-hd-indications',
 
     summary: 'Check K+ first (most common cause), then renal function and volume — alkalinization failure itself indicates HD',
@@ -580,8 +580,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Hemodialysis Indications (EXTRIP)',
-    body: '**Hemodialysis is extremely effective for salicylate toxicity** — removes salicylate AND corrects acidosis simultaneously. [2][5]\n\n[EXTRIP Hemodialysis Indications](#/info/sal-extrip-hd)\n\n**Consult nephrology early.** HD takes time to arrange (access, setup). Patients who need emergent HD often deteriorate faster than logistics allow. [2]\n\n**EXTRIP Recommended — regardless of level:** [5]\n• Altered mental status\n• ARDS / non-cardiogenic pulmonary edema requiring supplemental O2\n• Standard therapy failing / clinical deterioration despite treatment\n• pH ≤ 7.20 despite resuscitation\n• Impaired kidney function limiting clearance\n\n**EXTRIP By level — regardless of symptoms:** [5]\n• Salicylate > 100 mg/dL (7.2 mmol/L) → **recommended** [1D]\n• Salicylate > 90 mg/dL (6.5 mmol/L) → **suggested** [2D]\n• Lower threshold **> 80 mg/dL (5.8 mmol/L)** applies if impaired kidney function\n\n*Note: "acute vs chronic" is less important than the EXTRIP anchors above — the low 80 mg/dL threshold is tied to renal impairment (common in elderly/chronic toxicity).*\n\nDoes the patient meet HD criteria?',
-    citation: [2, 5, 12],
+    body: '**Hemodialysis is extremely effective for salicylate toxicity** — removes salicylate AND corrects acidosis simultaneously. [2][5][12][15]\n\n[EXTRIP Hemodialysis Indications](#/info/sal-extrip-hd)\n\n**Consult nephrology early.** HD takes time to arrange (access, setup). Patients who need emergent HD often deteriorate faster than logistics allow. [2][12][15]\n\n**EXTRIP Recommended — regardless of level:** [5]\n• Altered mental status\n• ARDS / non-cardiogenic pulmonary edema requiring supplemental O2\n• Standard therapy failing / clinical deterioration despite treatment\n• pH ≤ 7.20 despite resuscitation\n• Impaired kidney function limiting clearance\n\n**EXTRIP By level — regardless of symptoms:** [5]\n• Salicylate > 100 mg/dL (7.2 mmol/L) → **recommended** [1D]\n• Salicylate > 90 mg/dL (6.5 mmol/L) → **suggested** [2D]\n• Lower threshold **> 80 mg/dL (5.8 mmol/L)** applies if impaired kidney function\n\n*Note: "acute vs chronic" is less important than the EXTRIP anchors above — the low 80 mg/dL threshold is tied to renal impairment (common in elderly/chronic toxicity).*\n\nDoes the patient meet HD criteria?',
+    citation: [2, 5, 12, 15],
     calculatorLinks: [
       { id: 'sal-tox-guide', label: 'Sal Tox Guide' },
     ],
@@ -609,8 +609,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Hemodialysis Protocol',
-    body: '**Standard intermittent HD preferred** over CRRT — much higher clearance rate. Even in hypotension (since fluid isn\'t being removed, HD doesn\'t worsen hemodynamics). [2][5]\n\n• Continue [Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity) infusion **DURING and AFTER** HD\n• HD removes salicylate from blood but tissue stores redistribute after HD\n• Typical duration: 4-6 hours\n• Continue K+ repletion\n• Continue glucose monitoring and D5W infusion',
-    citation: [2, 5],
+    body: '**Standard intermittent HD preferred** over CRRT — much higher clearance rate. Even in hypotension (since fluid isn\'t being removed, HD doesn\'t worsen hemodynamics). [2][5][15]\n\n• Continue [Sodium Bicarbonate](#/drug/sodium-bicarbonate/salicylate toxicity) infusion **DURING and AFTER** HD [5][15]\n• HD removes salicylate from blood but tissue stores redistribute after HD [5][15]\n• Typical duration: 4-6 hours\n• Continue K+ repletion\n• Continue glucose monitoring and D5W infusion',
+    citation: [2, 5, 15],
 
     summary: 'Standard intermittent HD preferred over CRRT — continue NaHCO3 during and after HD; expect tissue rebound',
 
@@ -641,8 +641,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Post-HD Rebound Monitoring',
-    body: '**Rebound is expected.** Salicylate redistributes from tissue stores to blood after HD. [2][5]\n\n• Recheck salicylate level **2 hours post-HD**\n• If level rebounds > 30 mg/dL or symptoms recur → **repeat HD**\n• Continue alkalinization between and after HD sessions\n• Some patients with massive ingestions need **2-3 HD sessions**\n• Follow salicylate levels and clinical status after each session',
-    citation: [2, 5],
+    body: '**Rebound is expected.** Salicylate redistributes from tissue stores to blood after HD. [2][5][15]\n\n• Recheck salicylate level **2 hours post-HD** [5][15]\n• If level rebounds > 30 mg/dL or symptoms recur → **repeat HD** [5][15]\n• Continue alkalinization between and after HD sessions [15]\n• Some patients with massive ingestions need **2-3 HD sessions**\n• Follow salicylate levels and clinical status after each session',
+    citation: [2, 5, 15],
     next: 'sal-monitor',
 
     summary: 'Recheck level 2hr post-HD — if rebounds >30 or symptoms recur, repeat HD; some need 2-3 sessions',
@@ -653,8 +653,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Early Nephrology Consult',
-    body: '**Consult nephrology EARLY — before the patient meets strict indications.** [2]\n\nHD takes time to arrange:\n• Vascular access (dialysis catheter placement)\n• Dialysis nursing and equipment setup\n• May take 1-2+ hours from consult to running\n\nIt is better to have nephrology at bedside and cancel if not needed than to need emergent HD without access.\n\nContinue alkalinization while awaiting HD decision.',
-    citation: [2],
+    body: '**Consult nephrology EARLY — before the patient meets strict indications.** [2][12][15]\n\nHD takes time to arrange:\n• Vascular access (dialysis catheter placement)\n• Dialysis nursing and equipment setup\n• May take 1-2+ hours from consult to running\n\nIt is better to have nephrology at bedside and cancel if not needed than to need emergent HD without access. Hemodialysis is documented to be underutilized and delayed in salicylate poisoning. [12]\n\nContinue alkalinization while awaiting HD decision. [5][15]',
+    citation: [2, 5, 12, 15],
     next: 'sal-alkalinize-start',
 
     summary: 'Consult nephrology early — HD setup takes 1-2hr; better to have them at bedside and cancel if unneeded',
@@ -670,8 +670,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 6,
     title: 'Monitoring & Lab Cycling',
-    body: '**Serial lab monitoring:** [1][2][3]\n• Salicylate level q2h until peaked and declining x2, then q4h\n• ABG/VBG q2-4h (acid-base status)\n• BMP q4h (K+, HCO3, glucose, creatinine)\n• Urine pH hourly during alkalinization\n• Fingerstick glucose q1h if AMS or on dextrose\n• Creatine kinase if rhabdomyolysis suspected [1]\n\n[Level Interpretation & Monitoring](#/info/sal-level-interpretation)\n\n**When to stop alkalinization:** [2]\n• Two consecutive levels showing decline\n• Salicylate level < 30 mg/dL\n• Asymptomatic with normal respiratory rate\n• After stopping: follow labs for 2-4 additional hours (rebound risk, especially chronic) [2]\n\nCurrent trajectory:',
-    citation: [1, 2, 3],
+    body: '**Serial lab monitoring:** [1][2][3][15][18]\n• Salicylate level q2h until peaked and declining x2, then q4h [18]\n• ABG/VBG q2-4h (acid-base status) [15]\n• BMP q4h (K+, HCO3, glucose, creatinine) [6][15]\n• Urine pH hourly during alkalinization [6]\n• Fingerstick glucose q1h if AMS or on dextrose [15][17]\n• Creatine kinase if rhabdomyolysis suspected [1]\n\n[Level Interpretation & Monitoring](#/info/sal-level-interpretation)\n\n**When to stop alkalinization:** [2][15][18]\n• Two consecutive levels showing decline\n• Salicylate level < 30 mg/dL\n• Asymptomatic with normal respiratory rate\n• After stopping: follow labs for 2-4 additional hours (rebound risk, especially chronic) [2][15]\n\nCurrent trajectory:',
+    citation: [1, 2, 3, 6, 15, 17, 18],
     options: [
       {
         label: 'Levels Declining + Clinically Improving',
@@ -696,8 +696,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 6,
     title: 'Disposition',
-    body: 'All symptomatic patients require admission. [1]\n\nIntentional ingestion requires **psychiatric evaluation** when medically cleared.\n\nChronic toxicity: lower threshold for ICU admission (higher mortality, more insidious course). [2]\n\nClinical course:',
-    citation: [1, 2, 3],
+    body: 'All symptomatic patients require admission. [1][18]\n\nIntentional ingestion requires **psychiatric evaluation** when medically cleared.\n\nChronic toxicity: lower threshold for ICU admission (higher mortality, more insidious course). [2][9][21]\n\nClinical course:',
+    citation: [1, 2, 3, 9, 15, 18, 21],
     options: [
       {
         label: 'Required HD, Intubation, or Ongoing Alkalinization',
@@ -721,9 +721,9 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'ICU Admission',
-    body: '**ICU admission for:** [1][2]\n• Any patient who received hemodialysis\n• Required intubation\n• Seizures\n• Pulmonary edema\n• Persistent acidemia (pH < 7.30)\n• Ongoing alkalinization infusion\n• Altered mental status\n\nContinue serial labs q2-4h. Watch for rebound after HD.\n\n**Psychiatric evaluation** when medically stable if intentional ingestion.\n\n**Poison Control:** 1-800-222-1222',
+    body: '**ICU admission for:** [1][2][15]\n• Any patient who received hemodialysis [5]\n• Required intubation [16]\n• Seizures [15]\n• Pulmonary edema [13][15]\n• Persistent acidemia (pH < 7.30) [15]\n• Ongoing alkalinization infusion [6]\n• Altered mental status [15]\n\nContinue serial labs q2-4h. Watch for rebound after HD. [5][15]\n\n**Psychiatric evaluation** when medically stable if intentional ingestion.\n\n**Poison Control:** 1-800-222-1222',
     recommendation: 'ICU admission. Continue serial salicylate levels, ABG, BMP. Watch for post-HD rebound. Psychiatric evaluation when medically cleared for intentional ingestions.',
-    citation: [1, 2, 3],
+    citation: [1, 2, 3, 5, 6, 13, 15, 16],
   },
 
   {
@@ -731,9 +731,9 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'Floor / Monitored Bed Admission',
-    body: 'Symptomatic with improving trajectory. [1][2]\n\n• Continue serial salicylate levels q4h\n• May need continued alkalinization — transfer to ICU if worsening\n• Transition to [KCl PO](#/drug/potassium-chloride-oral/mild) for ongoing K+ repletion\n• Continue D5W-based IV fluids\n\n**Psychiatric evaluation** if intentional ingestion.\n\n**Poison Control:** 1-800-222-1222',
+    body: 'Symptomatic with improving trajectory. [1][2][15][18]\n\n• Continue serial salicylate levels q4h [18]\n• May need continued alkalinization — transfer to ICU if worsening [6][15]\n• Transition to [KCl PO](#/drug/potassium-chloride-oral/mild) for ongoing K+ repletion [6]\n• Continue D5W-based IV fluids [15][17]\n\n**Psychiatric evaluation** if intentional ingestion.\n\n**Poison Control:** 1-800-222-1222',
     recommendation: 'Admit to monitored bed. Serial salicylate levels q4h. Continue alkalinization if needed. Psychiatric evaluation for intentional ingestions.',
-    citation: [1, 2],
+    citation: [1, 2, 6, 15, 17, 18],
   },
 
   {
@@ -741,9 +741,9 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'Observation / Discharge Criteria',
-    body: 'Low-risk ingestion with two consecutive declining levels below 25 mg/dL and asymptomatic. [1][3]\n\n**Minimum observation periods:**\n• Standard tablets: 6 hours\n• **Enteric-coated tablets: 12 hours minimum** (delayed absorption)\n• Accidental pediatric ingestion < 150 mg/kg: 6 hours with serial levels [1]\n\n**Discharge criteria:**\n• Asymptomatic\n• Two consecutive declining levels in therapeutic range (< 25 mg/dL)\n• Normal acid-base status\n• Tolerating PO\n\n**Return precautions:** Tinnitus, rapid breathing, confusion, persistent nausea/vomiting.\n\n**Psychiatric evaluation** mandatory for intentional ingestions before discharge.\n\n**Poison Control:** 1-800-222-1222',
+    body: 'Low-risk ingestion with two consecutive declining levels below 25 mg/dL and asymptomatic. [1][3][18]\n\n**Minimum observation periods:**\n• Standard tablets: 6 hours [18]\n• **Enteric-coated tablets: 12 hours minimum** (delayed absorption) [18][22]\n• Accidental pediatric ingestion < 150 mg/kg: 6 hours with serial levels [1][18]\n\n**Discharge criteria:** [18][22]\n• Asymptomatic\n• Two consecutive declining levels in therapeutic range (< 25 mg/dL)\n• Normal acid-base status\n• Tolerating PO\n\n**Return precautions:** Tinnitus, rapid breathing, confusion, persistent nausea/vomiting.\n\n**Psychiatric evaluation** mandatory for intentional ingestions before discharge.\n\n**Poison Control:** 1-800-222-1222',
     recommendation: 'Discharge if asymptomatic with two declining levels < 25 mg/dL and normal acid-base. Psychiatric evaluation mandatory for intentional ingestions. Return for tinnitus, rapid breathing, confusion.',
-    citation: [1, 3],
+    citation: [1, 3, 15, 18, 22],
   },
 
 ];
@@ -761,17 +761,25 @@ export const SALICYLATE_CRITICAL_ACTIONS = [
 
 export const SALICYLATE_CITATIONS: Citation[] = [
   { num: 1, text: 'Long N. Salicylate Toxicity. Life in the Fast Lane (LITFL). 2020. https://litfl.com/salicylate-toxicity/' },
-  { num: 2, text: 'Farkas J. Salicylate Intoxication. Internet Book of Critical Care (IBCC). EMCrit. 2025. https://emcrit.org/ibcc/salicylate/' },
+  { num: 2, text: 'Farkas J. Salicylate Intoxication. Internet Book of Critical Care (IBCC). EMCrit Project. Updated September 18, 2025. https://emcrit.org/ibcc/salicylates/' },
   { num: 3, text: 'Salicylate Toxicity. WikEM. 2026. https://wikem.org/wiki/Salicylate_toxicity' },
-  { num: 4, text: 'Swaminathan A, Berger M. Salicylate Toxicity. REBEL EM. 2018. https://rebelem.com/salicylate-toxicity/' },
-  { num: 5, text: 'Juurlink DN, et al. Extracorporeal Treatment for Salicylate Poisoning: Systematic Review and Recommendations from the EXTRIP Workgroup. Ann Emerg Med. 2015;66(2):165-181.' },
-  { num: 6, text: 'Proudfoot AT, et al. Position Paper on Urine Alkalinization. J Toxicol Clin Toxicol. 2004;42(1):1-26.' },
-  { num: 7, text: 'Chyka PA, et al. Position Paper: Single-Dose Activated Charcoal. Clin Toxicol. 2005;43(2):61-87.' },
-  { num: 8, text: 'Hill JB. Salicylate Intoxication. N Engl J Med. 1973;288(21):1110-1113.' },
-  { num: 9, text: 'Temple AR. Acute and Chronic Effects of Aspirin Toxicity and Their Treatment. Arch Intern Med. 1981;141(3):364-369.' },
-  { num: 10, text: 'Gabow PA, et al. Acid-Base Disturbances in Salicylate Intoxication in Adults. Arch Intern Med. 1978;138(10):1481-1484.' },
-  { num: 11, text: 'Murray BP, Carpenter J. Medical Toxicology. Oxford University Press. 2024.' },
-  { num: 12, text: 'Fertel BS, et al. The Underutilization of Hemodialysis in Patients with Salicylate Poisoning. Kidney Int. 2009;75(12):1349-1353.' },
-  { num: 13, text: 'Palmer BF, Clegg DJ. Salicylate Toxicity. N Engl J Med. 2020;382(26):2544-2555.' },
-  { num: 14, text: 'Done AK. Salicylate Intoxication: Significance of Measurements of Salicylate in Blood in Cases of Acute Ingestion. Pediatrics. 1960;26:800-807.' },
+  { num: 4, text: 'Swaminathan A. Salicylate Toxicity. REBEL EM (REBEL Core). May 17, 2018. https://rebelem.com/salicylate-toxicity/' },
+  { num: 5, text: 'Juurlink DN, Gosselin S, Kielstein JT, Ghannoum M, Lavergne V, Nolin TD, Hoffman RS; EXTRIP Workgroup. Extracorporeal Treatment for Salicylate Poisoning: Systematic Review and Recommendations From the EXTRIP Workgroup. Ann Emerg Med. 2015;66(2):165-181. doi:10.1016/j.annemergmed.2015.03.031. PMID 25986310.' },
+  { num: 6, text: 'Proudfoot AT, Krenzelok EP, Vale JA. Position Paper on Urine Alkalinization (AACT/EAPCCT). J Toxicol Clin Toxicol. 2004;42(1):1-26. doi:10.1081/CLT-120028740. PMID 15083932.' },
+  { num: 7, text: 'Chyka PA, Seger D, Krenzelok EP, Vale JA; AACT/EAPCCT. Position Paper: Single-Dose Activated Charcoal. Clin Toxicol (Phila). 2005;43(2):61-87. doi:10.1081/CLT-200051867. PMID 15822758.' },
+  { num: 8, text: 'Hill JB. Salicylate Intoxication. N Engl J Med. 1973;288(21):1110-1113. doi:10.1056/NEJM197305242882107. PMID 4572648.' },
+  { num: 9, text: 'Temple AR. Acute and Chronic Effects of Aspirin Toxicity and Their Treatment. Arch Intern Med. 1981;141(3 Spec No):364-369. doi:10.1001/archinte.1981.00340030096017. PMID 7469627.' },
+  { num: 10, text: 'Gabow PA, Anderson RJ, Potts DE, Schrier RW. Acid-Base Disturbances in the Salicylate-Intoxicated Adult. Arch Intern Med. 1978;138(10):1481-1484. doi:10.1001/archinte.1978.03630350019008. PMID 708168.' },
+  { num: 11, text: 'Murray BP, Carpenter J, eds. Medical Toxicology (What Do I Do Now: Emergency Medicine). Oxford University Press; 2024. Ch. 2, Severe Complications of Salicylate Overdose. ISBN 978-0-19-763551-3.' },
+  { num: 12, text: 'Fertel BS, Nelson LS, Goldfarb DS. The Underutilization of Hemodialysis in Patients with Salicylate Poisoning. Kidney Int. 2009;75(12):1349-1353. doi:10.1038/ki.2008.443. PMID 18716600.' },
+  { num: 13, text: 'Palmer BF, Clegg DJ. Salicylate Toxicity. N Engl J Med. 2020;382(26):2544-2555. doi:10.1056/NEJMra2010852. PMID 32579814.' },
+  { num: 14, text: 'Done AK. Salicylate Intoxication: Significance of Measurements of Salicylate in Blood in Cases of Acute Ingestion. Pediatrics. 1960;26(5):800-807. doi:10.1542/peds.26.5.800. PMID 13723722.' },
+  { num: 15, text: 'American College of Medical Toxicology (ACMT). Guidance Document: Management Priorities in Salicylate Toxicity. J Med Toxicol. 2015;11(1):149-152. doi:10.1007/s13181-013-0362-3. PMID 25715929. PMCID PMC4371029.' },
+  { num: 16, text: 'Stolbach AI, Hoffman RS, Nelson LS. Mechanical Ventilation Was Associated with Acidemia in a Case Series of Salicylate-Poisoned Patients. Acad Emerg Med. 2008;15(9):866-869. doi:10.1111/j.1553-2712.2008.00205.x. PMID 18821862.' },
+  { num: 17, text: 'Thurston JH, Pollock PG, Warren SK, Jones EM. Reduced Brain Glucose with Normal Plasma Glucose in Salicylate Poisoning. J Clin Invest. 1970;49(11):2139-2145. doi:10.1172/JCI106431. PMID 4319971. PMCID PMC535789.' },
+  { num: 18, text: 'Dargan PI, Wallace CI, Jones AL. An Evidence Based Flowchart to Guide the Management of Acute Salicylate (Aspirin) Overdose. Emerg Med J. 2002;19(3):206-209. doi:10.1136/emj.19.3.206. PMID 11971828. PMCID PMC1725844.' },
+  { num: 19, text: 'American Academy of Clinical Toxicology; European Association of Poisons Centres and Clinical Toxicologists. Position Statement and Practice Guidelines on the Use of Multi-Dose Activated Charcoal in the Treatment of Acute Poisoning. J Toxicol Clin Toxicol. 1999;37(6):731-751. doi:10.1081/CLT-100102451. PMID 10584586.' },
+  { num: 20, text: 'Thanacoody R, Caravati EM, Troutman B, et al. Position Paper Update: Whole Bowel Irrigation for Gastrointestinal Decontamination of Overdose Patients. Clin Toxicol (Phila). 2015;53(1):5-12. doi:10.3109/15563650.2014.989326. PMID 25511637.' },
+  { num: 21, text: 'Dugandzic RM, Tierney MG, Dickinson GE, Dolan MC, McKnight DR. Evaluation of the Validity of the Done Nomogram in the Management of Acute Salicylate Intoxication. Ann Emerg Med. 1989;18(11):1186-1190. doi:10.1016/S0196-0644(89)80057-5. PMID 2817562.' },
+  { num: 22, text: 'Nelson LS, Howland MA, Lewin NA, Smith SW, Goldfrank LR, Hoffman RS, eds. Goldfrank\'s Toxicologic Emergencies. 11th ed. McGraw-Hill Education; 2019. Ch. 39, Salicylates. ISBN 978-1-259-85961-8.' },
 ];

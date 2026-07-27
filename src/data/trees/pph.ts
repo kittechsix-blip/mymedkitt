@@ -3,13 +3,15 @@
 // 4 T's Differential → Uterotonic Ladder → Advanced Interventions → Disposition.
 // 35 nodes, 6 modules. Cross-listed: OB/GYN + Emergency Medicine.
 // Primary sources:
-//   - ACOG Practice Bulletin No. 183: Postpartum Hemorrhage (2017, reaffirmed 2023)
-//   - WHO Recommendations for the Prevention and Treatment of Postpartum Haemorrhage (2012, 2017 update)
-//   - SMFM Consult Series No. 44: Management of bleeding in the late preterm period (2018)
+//   - ACOG Practice Bulletin No. 183: Postpartum Hemorrhage (2017, reaffirmed 2024)
+//   - WHO/FIGO/ICM Consolidated Guidelines for the Prevention, Diagnosis and Treatment of
+//     Postpartum Haemorrhage (Geneva: WHO; 2025) — supersedes WHO 2012 + 2017 TXA update
 //   - California Maternal Quality Care Collaborative (CMQCC) OB Hemorrhage Toolkit v3.0 (2022)
 //   - WOMAN Trial (Lancet 2017) — TXA in PPH
 //   - Bienstock JL, Eke AC, Hueppchen NA. NEJM. 2021;384:1635-45 — Postpartum Hemorrhage review
-//   - SOAP Consensus Statement on Obstetric Hemorrhage (2019)
+//   - National Partnership for Maternal Safety / AIM Consensus Bundle on Obstetric Hemorrhage
+//     (Main EK, et al. Anesth Analg. 2015;121(1):142-148)
+//   - ACOG Clinical Practice Update: Nonsurgical Hemorrhage-Control Devices (2025)
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
@@ -113,8 +115,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Access, Labs & Blood',
-    body: '**VASCULAR ACCESS**\n• 2 large-bore IVs (16-18g) minimum — IO if peripheral access fails\n• Arterial line if ongoing resuscitation\n\n**LABS (send STAT)**\n• CBC with platelets, fibrinogen, PT/PTT, INR\n• **Type & crossmatch 4-6 units pRBC** (if not already typed, draw and send)\n• Basic metabolic panel, LFTs, lactate\n• Ionized calcium (hypocalcemia from citrated blood worsens coagulopathy)\n• ABG if unstable\n\n**FIBRINOGEN IS CRITICAL** — in pregnancy, baseline fibrinogen is elevated (400-600 mg/dL at term). A "normal" 300 mg/dL actually indicates consumption. **Fibrinogen <200 mg/dL** is the earliest lab marker of severe PPH and predicts massive hemorrhage. [1][6]\n\n**BLOOD PRODUCTS — ORDER EARLY**\n• 2 units pRBC emergency release (O-negative or type-specific if known)\n• For MTP: 1:1:1 ratio of pRBC : FFP : platelets [See Massive Transfusion consult](#/tree/massive-transfusion)\n• **Cryoprecipitate 10 units** if fibrinogen <200 mg/dL (target >200 mg/dL) [6]\n\n**Consider Rh status** — document and plan for [Rh Immune Globulin (RhoGAM)](#/drug/rh-immune-globulin/rh negative postpartum) if Rh-negative mother.',
-    citation: [1, 6],
+    body: '**VASCULAR ACCESS**\n• 2 large-bore IVs (16-18g) minimum — IO if peripheral access fails\n• Arterial line if ongoing resuscitation\n\n**LABS (send STAT)**\n• CBC with platelets, fibrinogen, PT/PTT, INR\n• **Type & crossmatch 4-6 units pRBC** (if not already typed, draw and send)\n• Basic metabolic panel, LFTs, lactate\n• Ionized calcium (hypocalcemia from citrated blood worsens coagulopathy)\n• ABG if unstable\n\n**FIBRINOGEN IS CRITICAL** — in pregnancy, baseline fibrinogen is elevated (400-600 mg/dL at term). A "normal" 300 mg/dL actually indicates consumption. **Fibrinogen <200 mg/dL** is the earliest lab marker of severe PPH and predicts massive hemorrhage. [1][6]\n\n**BLOOD PRODUCTS — ORDER EARLY**\n• 2 units pRBC emergency release (O-negative or type-specific if known)\n• For MTP: 1:1:1 ratio of pRBC : FFP : platelets [See Massive Transfusion consult](#/tree/massive-transfusion)\n• **Cryoprecipitate 10 units** if fibrinogen <200 mg/dL (target >200 mg/dL) [6]\n\n**Consider Rh status** — document and plan for [Rh Immune Globulin (RhoGAM)](#/drug/rh-immune-globulin/rh negative postpartum) if Rh-negative mother. [23]',
+    citation: [1, 6, 9, 23],
     next: 'pph-massage-fundus',
     summary: '2 IVs, CBC/fibrinogen/coags/T&C 4-6u. Fibrinogen <200 = severe PPH. Early blood products.',
   },
@@ -139,8 +141,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Tranexamic Acid (TXA) — Within 3 Hours',
-    body: '**Give [Tranexamic Acid](#/drug/tranexamic-acid/postpartum hemorrhage) 1 g IV over 10 minutes as soon as PPH is diagnosed.**\n\n**EVIDENCE — WOMAN TRIAL (Lancet 2017)** [7]\n• 20,060 women with PPH, 21 countries\n• TXA vs placebo within 3 hours of delivery\n• **Death from bleeding: 1.5% vs 1.9%** (RR 0.81, p=0.045)\n• **Best effect when given within 1 hour** (RR 0.69 for death from bleeding)\n• **NO BENEFIT if given >3 hours post-delivery** — do not give late\n\n**DOSE**\n• 1 g IV over 10 minutes (infuse at 1 mL/min — faster infusion causes hypotension)\n• **Repeat 1 g IV at 30 minutes** if bleeding continues or restarts within 24 hours\n\n**NO DELAY FOR LABS OR FIBRINOGEN.** TXA is safe at standard obstetric doses — no increase in thromboembolic events in the WOMAN trial.\n\n**CONTRAINDICATIONS**\n• Known hypersensitivity\n• Acquired defective color vision\n• Active thromboembolic disease (rare to be true CI in active hemorrhage)\n\n**DO NOT DELAY uterotonics or mechanical measures to give TXA** — it is an adjunct, not a substitute. [7]',
-    citation: [7],
+    body: '**Give [Tranexamic Acid](#/drug/tranexamic-acid/postpartum hemorrhage) 1 g IV over 10 minutes as soon as PPH is diagnosed.**\n\n**EVIDENCE — WOMAN TRIAL (Lancet 2017)** [7]\n• 20,060 women with PPH, 21 countries\n• TXA vs placebo within 3 hours of delivery\n• **Death from bleeding: 1.5% vs 1.9%** (RR 0.81, p=0.045)\n• **Best effect when given within 1 hour** (RR 0.69 for death from bleeding)\n• **NO BENEFIT if given >3 hours post-delivery** — do not give late\n\n**DOSE**\n• 1 g IV over 10 minutes (infuse at 1 mL/min — faster infusion causes hypotension)\n• **Repeat 1 g IV at 30 minutes** if bleeding continues or restarts within 24 hours\n\n**NO DELAY FOR LABS OR FIBRINOGEN.** TXA is safe at standard obstetric doses — no increase in thromboembolic events in the WOMAN trial.\n\n**CONTRAINDICATIONS**\n• Known hypersensitivity\n• Acquired defective color vision\n• Active thromboembolic disease (rare to be true CI in active hemorrhage)\n\n**DO NOT DELAY uterotonics or mechanical measures to give TXA** — it is an adjunct, not a substitute. [1][7][8]',
+    citation: [1, 7, 8],
     next: 'pph-bimanual-compression',
     summary: 'TXA 1g IV within 3h of delivery (WOMAN trial) — faster is better, repeat at 30 min if ongoing.',
     safetyLevel: 'warning',
@@ -185,7 +187,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Primary Cause?',
-    body: 'Based on the exam, what is the most likely primary cause of bleeding?\n\n**Tone = boggy/soft uterus**\n**Trauma = firm uterus, active bleeding from canal, or signs of inversion/rupture**\n**Tissue = incomplete placenta or persistent bleeding despite firm uterus and no lacerations**\n**Thrombin = generalized oozing (IV sites, mucosa) or known coagulopathy/Amniotic Fluid Embolism**\n\nIf unclear, default to **Tone** — it is the most common and uterotonics buy time.',
+    body: 'Based on the exam, what is the most likely primary cause of bleeding?\n\n**Tone = boggy/soft uterus**\n**Trauma = firm uterus, active bleeding from canal, or signs of inversion/rupture**\n**Tissue = incomplete placenta or persistent bleeding despite firm uterus and no lacerations**\n**Thrombin = generalized oozing (IV sites, mucosa) or known coagulopathy/Amniotic Fluid Embolism**\n\nIf unclear, default to **Tone** — it is the most common and uterotonics buy time. [1][2]',
+    citation: [1, 2],
     options: [
       {
         label: 'Tone — Boggy uterus',
@@ -216,7 +219,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Trauma — Which Injury?',
-    body: '**Firm uterus + active bleeding = trauma.** Speculum exam under adequate light and analgesia.\n\n**Inspect systematically:**\n• Cervix — grasp with ring forceps, walk around every quadrant\n• Vagina — sidewalls and posterior fornix\n• Perineum — 1st–4th degree laceration grading\n• Vulvar/paravaginal mass — hematoma\n• Fundus — appears indented or absent abdominally = uterine inversion\n\n**Uterine rupture** (prior C-section, trauma, extreme multiparity) — severe pain, loss of fetal station, abdominal tenderness, hemodynamic collapse.',
+    body: '**Firm uterus + active bleeding = trauma.** Speculum exam under adequate light and analgesia.\n\n**Inspect systematically:**\n• Cervix — grasp with ring forceps, walk around every quadrant\n• Vagina — sidewalls and posterior fornix\n• Perineum — 1st–4th degree laceration grading\n• Vulvar/paravaginal mass — hematoma\n• Fundus — appears indented or absent abdominally = uterine inversion\n\n**Uterine rupture** (prior C-section, trauma, extreme multiparity) — severe pain, loss of fetal station, abdominal tenderness, hemodynamic collapse. [1][2][12]',
+    citation: [1, 2, 12],
     options: [
       {
         label: 'Cervical / vaginal / perineal laceration',
@@ -381,7 +385,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Second-Line — HTN / Preeclampsia?',
-    body: '**Before giving methylergonovine**, screen for the key contraindication:\n\n**METHYLERGONOVINE CONTRAINDICATIONS**\n• Hypertension (any SBP ≥140 or DBP ≥90)\n• Preeclampsia, eclampsia, HELLP\n• Coronary artery disease (vasoconstriction risk)\n• Raynaud\'s phenomenon\n\nMethylergonovine causes significant vasoconstriction and has triggered MI, CVA, and severe hypertensive emergencies when misused in these patients.',
+    body: '**Before giving methylergonovine**, screen for the key contraindication:\n\n**METHYLERGONOVINE CONTRAINDICATIONS**\n• Hypertension (any SBP ≥140 or DBP ≥90)\n• Preeclampsia, eclampsia, HELLP\n• Coronary artery disease (vasoconstriction risk)\n• Raynaud\'s phenomenon\n\nMethylergonovine causes significant vasoconstriction and has triggered MI, CVA, and severe hypertensive emergencies when misused in these patients.\n\n**BASIS FOR THIS SCREEN:** Hypertension and toxemia of pregnancy (preeclampsia) are listed contraindications in the FDA-approved Methergine prescribing information; ACOG Practice Bulletin No. 183 likewise identifies hypertensive disease as the limiting factor for ergot alkaloids in PPH. Review the primary sources before acting. [1][25]',
+    citation: [1, 25],
     options: [
       {
         label: 'No HTN, no preeclampsia, no CAD — safe to give',
@@ -402,8 +407,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Methylergonovine (Methergine)',
-    body: '**[Methylergonovine (Methergine)](#/drug/methylergonovine/postpartum hemorrhage)** — ergot alkaloid uterotonic.\n\n**DOSE**\n• **0.2 mg IM** — onset 2-5 minutes, duration 3 hours\n• May **repeat every 2-4 hours** as needed, maximum 5 doses (1 mg total)\n• **NEVER give IV** — severe hypertensive reactions, MI, CVA reported\n\n**CONTRAINDICATIONS** (re-verify)\n• Hypertension / preeclampsia / eclampsia\n• CAD, recent MI, CVA\n• Raynaud\'s\n• Sepsis (risk of vasospasm, gangrene)\n\n**ADVERSE EFFECTS**\n• Nausea, vomiting (give antiemetic prophylactically)\n• Transient HTN (expected; significant HTN is pathologic)\n• Coronary vasospasm → chest pain\n\n**ASSESS IN 5-10 MINUTES**\n• Uterus firm + bleeding controlled → monitor\n• Still bleeding → **escalate to Carboprost (Hemabate)**. May also repeat methylergonovine q2-4h as adjunct.',
-    citation: [1, 8],
+    body: '**[Methylergonovine (Methergine)](#/drug/methylergonovine/postpartum hemorrhage)** — ergot alkaloid uterotonic.\n\n**DOSE**\n• **0.2 mg IM** — onset 2-5 minutes, duration 3 hours\n• May **repeat every 2-4 hours** as needed, maximum 5 doses (1 mg total)\n• **NEVER give IV** — severe hypertensive reactions, MI, CVA reported\n\n**CONTRAINDICATIONS** (re-verify) [1][25]\n• Hypertension / preeclampsia / eclampsia\n• CAD, recent MI, CVA\n• Raynaud\'s\n• Sepsis (risk of vasospasm, gangrene)\n\n**ADVERSE EFFECTS**\n• Nausea, vomiting (give antiemetic prophylactically)\n• Transient HTN (expected; significant HTN is pathologic)\n• Coronary vasospasm → chest pain\n\n**ASSESS IN 5-10 MINUTES**\n• Uterus firm + bleeding controlled → monitor\n• Still bleeding → **escalate to Carboprost (Hemabate)**. May also repeat methylergonovine q2-4h as adjunct.',
+    citation: [1, 8, 25],
     next: 'pph-carboprost-check',
     summary: '0.2 mg IM, may repeat q2-4h (max 5 doses). NEVER IV. Reassess in 5-10 min.',
     treatment: {
@@ -425,7 +430,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Third-Line — Asthma / Pulmonary HTN?',
-    body: '**Before giving carboprost (Hemabate)**, screen for the key contraindication:\n\n**CARBOPROST CONTRAINDICATIONS**\n• **Asthma (active or history) — absolute CI** (causes bronchospasm, can trigger fatal attack)\n• Pulmonary hypertension\n• Significant cardiac, renal, or hepatic disease\n• Active pelvic inflammatory disease\n\nCarboprost is a PGF2α analog. Bronchoconstriction is the most dangerous adverse effect.',
+    body: '**Before giving carboprost (Hemabate)**, screen for the key contraindication:\n\n**CARBOPROST CONTRAINDICATIONS**\n• **Asthma (active or history) — absolute CI** (causes bronchospasm, can trigger fatal attack)\n• Pulmonary hypertension\n• Significant cardiac, renal, or hepatic disease\n• Active pelvic inflammatory disease\n\nCarboprost is a PGF2α analog. Bronchoconstriction is the most dangerous adverse effect.\n\n**BASIS FOR THIS SCREEN:** ACOG Practice Bulletin No. 183 identifies asthma as the contraindication governing carboprost use in PPH. The FDA-approved Hemabate labeling lists acute pelvic inflammatory disease and active cardiac, pulmonary, renal, or hepatic disease among its contraindications and carries a specific warning for use in patients with asthma. Review the primary sources before acting. [1][26]',
+    citation: [1, 26],
     options: [
       {
         label: 'No asthma, no pulmonary HTN — safe to give',
@@ -446,8 +452,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Carboprost (Hemabate)',
-    body: '**[Carboprost (Hemabate)](#/drug/carboprost/postpartum hemorrhage)** — 15-methyl PGF2α analog.\n\n**DOSE**\n• **0.25 mg (250 mcg) IM** — into the deltoid or vastus lateralis\n• **May repeat every 15-90 minutes** to a maximum of **8 doses (2 mg total)**\n• Onset: 3-5 minutes; duration ~2 hours\n• **Intramyometrial dosing** (by OB during laparotomy) also effective — 0.25 mg directly into the myometrium\n\n**CONTRAINDICATIONS** (re-verify)\n• **Asthma (any history) — absolute**\n• Pulmonary hypertension\n• Active hepatic, pulmonary, cardiac, or renal disease\n\n**ADVERSE EFFECTS (~20-30% of patients)**\n• **Bronchospasm** (stop immediately if wheezing develops)\n• Nausea, vomiting, diarrhea (common — premedicate with antiemetic and antidiarrheal)\n• Fever and flushing\n• Hypertension\n• Uterine hyperstimulation\n\n**ASSESS IN 15 MINUTES**\n• Bleeding controlled → monitor and continue scheduled doses as needed\n• Still bleeding despite uterotonics → **escalate to misoprostol + advanced interventions ([Bakri balloon](#/node/pph-bakri))**. [1][8]',
-    citation: [1, 8],
+    body: '**[Carboprost (Hemabate)](#/drug/carboprost/postpartum hemorrhage)** — 15-methyl PGF2α analog.\n\n**DOSE**\n• **0.25 mg (250 mcg) IM** — into the deltoid or vastus lateralis\n• **May repeat every 15-90 minutes** to a maximum of **8 doses (2 mg total)**\n• Onset: 3-5 minutes; duration ~2 hours\n• **Intramyometrial dosing** (by OB during laparotomy) also effective — 0.25 mg directly into the myometrium\n\n**CONTRAINDICATIONS** (re-verify) [1][26]\n• **Asthma (any history) — absolute**\n• Pulmonary hypertension\n• Active hepatic, pulmonary, cardiac, or renal disease\n\n**ADVERSE EFFECTS (~20-30% of patients)**\n• **Bronchospasm** (stop immediately if wheezing develops)\n• Nausea, vomiting, diarrhea (common — premedicate with antiemetic and antidiarrheal)\n• Fever and flushing\n• Hypertension\n• Uterine hyperstimulation\n\n**ASSESS IN 15 MINUTES**\n• Bleeding controlled → monitor and continue scheduled doses as needed\n• Still bleeding despite uterotonics → **escalate to misoprostol + advanced interventions ([Bakri balloon](#/node/pph-bakri))**. [1][8]',
+    citation: [1, 8, 26],
     next: 'pph-misoprostol',
     summary: '0.25 mg IM q15-90 min (max 8 doses = 2 mg). ABSOLUTE CI: asthma. Causes GI side effects.',
     treatment: {
@@ -495,7 +501,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Reassess — Bleeding Controlled?',
-    body: 'After mechanical measures + TXA + targeted 4T\'s treatment, reassess:\n\n**CONTROLLED**\n• Uterus firm\n• Bleeding <100 mL in last 15 minutes\n• Vital signs stabilizing or normalized\n• No expanding hematoma\n\n**UNCONTROLLED / ONGOING**\n• Any of: persistent heavy bleeding, worsening shock, cumulative EBL ≥1500 mL, ongoing transfusion need, falling fibrinogen\n• Escalate to **advanced interventions**.',
+    body: 'After mechanical measures + TXA + targeted 4T\'s treatment, reassess:\n\n**CONTROLLED**\n• Uterus firm\n• Bleeding <100 mL in last 15 minutes\n• Vital signs stabilizing or normalized\n• No expanding hematoma\n\n**UNCONTROLLED / ONGOING**\n• Any of: persistent heavy bleeding, worsening shock, cumulative EBL ≥1500 mL, ongoing transfusion need, falling fibrinogen\n• Escalate to **advanced interventions**. [1][5][9]',
+    citation: [1, 5, 9],
     options: [
       {
         label: 'Controlled — bleeding has stopped',
@@ -517,8 +524,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Bakri Balloon — Intrauterine Tamponade',
-    body: '[Bakri Balloon Placement Guide](#/info/pph-bakri-technique) — detailed step-by-step.\n\n**Bakri balloon** is the first-line advanced intervention when uterotonics fail. Success rate **75-86%** for atony, reducing the need for hysterectomy. [16]\n\n**INDICATIONS**\n• Persistent uterine atony despite maximal medical therapy\n• Bleeding from lower uterine segment (placental site after previa)\n• Temporizing measure during transport to OR or IR\n\n**CONTRAINDICATIONS**\n• Known uterine anomaly preventing balloon placement\n• Uterine rupture\n• Active uterine infection\n\n**TECHNIQUE (SUMMARY)**\n1. Empty bladder (Foley)\n2. Visualize cervix with speculum\n3. Insert deflated Bakri into uterine cavity under ultrasound guidance\n4. **Inflate with 300-500 mL sterile saline** (max 500 mL — Bakri)\n5. Apply gentle downward traction on drainage port and secure balloon stem to thigh\n6. **Monitor drainage port** — >100 mL/hr of ongoing bloody drainage = tamponade failure → escalate\n7. Continue oxytocin infusion\n8. Antibiotics (ampicillin-sulbactam or cefazolin)\n9. **Leave in place 12-24 hours**, then deflate in a controlled setting\n\n**NO BAKRI AVAILABLE?** → **[Condom Catheter (Akhter method) — step-by-step](#/info/pph-condom-catheter)**. Foley + condom + IV saline, assembled at bedside in 2–3 min. 85–95% success, WHO-endorsed, standard of care in LMIC settings.\n\n**Other alternatives:** Foley alone (30-60 mL balloon, weakest), Sengstaken-Blakemore tube, or manually-packed gauze.\n\n**If bleeding continues despite tamponade → OR / Interventional Radiology.** [1][16]',
-    citation: [1, 16],
+    body: '[Bakri Balloon Placement Guide](#/info/pph-bakri-technique) — detailed step-by-step.\n\n**Bakri balloon** is the first-line advanced intervention when uterotonics fail. Success rate **75-86%** for atony, reducing the need for hysterectomy. [16]\n\n**INDICATIONS**\n• Persistent uterine atony despite maximal medical therapy\n• Bleeding from lower uterine segment (placental site after previa)\n• Temporizing measure during transport to OR or IR\n\n**CONTRAINDICATIONS**\n• Known uterine anomaly preventing balloon placement\n• Uterine rupture\n• Active uterine infection\n\n**TECHNIQUE (SUMMARY)**\n1. Empty bladder (Foley)\n2. Visualize cervix with speculum\n3. Insert deflated Bakri into uterine cavity under ultrasound guidance\n4. **Inflate with 300-500 mL sterile saline** (max 500 mL — Bakri)\n5. Apply gentle downward traction on drainage port and secure balloon stem to thigh\n6. **Monitor drainage port** — >100 mL/hr of ongoing bloody drainage = tamponade failure → escalate\n7. Continue oxytocin infusion\n8. Antibiotics (ampicillin-sulbactam or cefazolin)\n9. **Leave in place 12-24 hours**, then deflate in a controlled setting\n\n**NO BAKRI AVAILABLE?** → **[Condom Catheter (Akhter method) — step-by-step](#/info/pph-condom-catheter)**. Foley + condom + IV saline, assembled at bedside in 2–3 min. 85–95% success, WHO-endorsed, standard of care in LMIC settings.\n\n**Other alternatives:** Foley alone (30-60 mL balloon, weakest), Sengstaken-Blakemore tube, or manually-packed gauze.\n\n**If bleeding continues despite tamponade → OR / Interventional Radiology.** [1][16][24]',
+    citation: [1, 16, 24],
     next: 'pph-mtp',
     summary: 'Bakri 300-500 mL saline under US — 75-86% success. >100 mL/hr drainage = failure.',
     safetyLevel: 'warning',
@@ -541,8 +548,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Surgical & Interventional Options',
-    body: '**If bleeding persists despite uterotonics + Bakri + MTP → definitive intervention.**\n\n**INTERVENTIONAL RADIOLOGY**\n• **Uterine artery embolization (UAE)** — fertility-preserving; ideal for stable-enough-to-transport patient\n• Success rate ~80-90%\n• Requires rapid access to IR suite — not a solution for the crashing patient\n\n**SURGICAL (in OR with OB)**\n• **B-Lynch compression suture** — vertical suture compresses uterine body; preserves fertility; 80%+ success for atony\n• **Uterine artery ligation (O\'Leary)** — stepwise ligation of uterine → utero-ovarian → internal iliac arteries\n• **Hypogastric (internal iliac) artery ligation** — reduces pelvic pulse pressure ~85%\n• **Hysterectomy** — **definitive** treatment when above fail; **indicated without delay** for placenta accreta spectrum, catastrophic rupture, or refractory atony\n\n**DECISION POINT**\n• Stable, transportable, fertility-preserving desired → **IR / B-Lynch**\n• Unstable, catastrophic, or accreta → **hysterectomy** — do not delay out of fertility preservation at the cost of maternal life\n\n**Call early.** OR and IR both have setup times measured in tens of minutes. Activating them before the patient is in extremis saves lives. [1][8][17]',
-    citation: [1, 8, 17],
+    body: '**If bleeding persists despite uterotonics + Bakri + MTP → definitive intervention.**\n\n**INTERVENTIONAL RADIOLOGY**\n• **Uterine artery embolization (UAE)** — fertility-preserving; ideal for stable-enough-to-transport patient\n• Success rate ~80-90%\n• Requires rapid access to IR suite — not a solution for the crashing patient\n\n**SURGICAL (in OR with OB)**\n• **B-Lynch compression suture** — vertical suture compresses uterine body; preserves fertility; 80%+ success for atony\n• **Uterine artery ligation (O\'Leary)** — stepwise ligation of uterine → utero-ovarian → internal iliac arteries\n• **Hypogastric (internal iliac) artery ligation** — reduces pelvic pulse pressure ~85%\n• **Hysterectomy** — **definitive** treatment when above fail; **indicated without delay** for placenta accreta spectrum, catastrophic rupture, or refractory atony\n\n**DECISION POINT**\n• Stable, transportable, fertility-preserving desired → **IR / B-Lynch**\n• Unstable, catastrophic, or accreta → **hysterectomy** — do not delay out of fertility preservation at the cost of maternal life\n\n**Call early.** OR and IR both have setup times measured in tens of minutes. Activating them before the patient is in extremis saves lives. [1][8][17][20][21]',
+    citation: [1, 8, 17, 20, 21],
     next: 'pph-massive-reassess',
     summary: 'IR (UAE) for stable; B-Lynch, O\'Leary, hypogastric ligation; hysterectomy for refractory/accreta.',
     images: [
@@ -559,7 +566,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Definitive Control?',
-    body: 'After escalation to surgical or interventional management, reassess:\n\n**CONTROLLED**\n• Bleeding stopped\n• Hemodynamics improving\n• Transfusion requirements decreasing\n\n**REFRACTORY**\n• Ongoing bleeding despite uterotonics + Bakri + MTP + IR/OR\n• **Proceed to hysterectomy** — this is the final life-saving step',
+    body: 'After escalation to surgical or interventional management, reassess:\n\n**CONTROLLED**\n• Bleeding stopped\n• Hemodynamics improving\n• Transfusion requirements decreasing\n\n**REFRACTORY**\n• Ongoing bleeding despite uterotonics + Bakri + MTP + IR/OR\n• **Proceed to hysterectomy** — this is the final life-saving step [1][5][22]',
+    citation: [1, 5, 22],
     options: [
       {
         label: 'Bleeding controlled after intervention',
@@ -581,8 +589,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Peripartum Hysterectomy',
-    body: '**Peripartum hysterectomy — the final life-saving step.**\n\nIncidence: ~1 in 1000 deliveries; the most common indication is **placenta accreta spectrum**, followed by refractory atony, rupture, and lacerations. [17]\n\n**INDICATIONS (any one triggers operative discussion)**\n• Refractory hemorrhage despite all conservative and fertility-preserving measures\n• Placenta accreta / increta / percreta\n• Uterine rupture with extensive injury\n• Broad ligament or cervical lacerations not amenable to repair\n\n**OPTIONS**\n• **Supracervical (subtotal)** — faster, less morbidity; reserves when patient is crashing\n• **Total hysterectomy** — required for cervical or lower segment bleeding\n\n**COUNSELING** (when time permits)\n• Loss of fertility — confirm patient understanding if conscious\n• Document the indication clearly — imminent mortality without surgery\n• In unconscious/unstable patients: proceed based on life-saving indication with two-physician consent per institutional policy\n\n**DO NOT DELAY** peripartum hysterectomy out of inappropriate attachment to fertility preservation when the patient\'s life is threatened. Maternal mortality rises sharply with every additional hour of uncontrolled hemorrhage. [17][18]',
-    citation: [17, 18],
+    body: '**Peripartum hysterectomy — the final life-saving step.**\n\nIncidence: ~1 in 1000 deliveries; the most common indication is **placenta accreta spectrum**, followed by refractory atony, rupture, and lacerations. [22]\n\n**INDICATIONS (any one triggers operative discussion)**\n• Refractory hemorrhage despite all conservative and fertility-preserving measures\n• Placenta accreta / increta / percreta\n• Uterine rupture with extensive injury\n• Broad ligament or cervical lacerations not amenable to repair\n\n**OPTIONS**\n• **Supracervical (subtotal)** — faster, less morbidity; reserves when patient is crashing\n• **Total hysterectomy** — required for cervical or lower segment bleeding\n\n**COUNSELING** (when time permits)\n• Loss of fertility — confirm patient understanding if conscious\n• Document the indication clearly — imminent mortality without surgery\n• In unconscious/unstable patients: proceed based on life-saving indication with two-physician consent per institutional policy\n\n**DO NOT DELAY** peripartum hysterectomy out of inappropriate attachment to fertility preservation when the patient\'s life is threatened. Maternal mortality rises sharply with every additional hour of uncontrolled hemorrhage. [17][18]',
+    citation: [13, 17, 18, 22],
     next: 'pph-uncontrolled',
     summary: 'Final step when all else fails. Supracervical faster; total needed for lower-segment bleeding.',
     safetyLevel: 'critical',
@@ -608,8 +616,8 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Rh Status & Other Postpartum Care',
-    body: '**RH IMMUNE GLOBULIN (RhoGAM)**\n• All **Rh-negative mothers with Rh-positive or unknown newborn** should receive **[Rh Immune Globulin](#/drug/rh-immune-globulin/rh negative postpartum) 300 mcg IM within 72 hours of delivery**\n• Even if mother was previously sensitized, standard of care is to give — consult OB\n• Larger doses if large fetomaternal hemorrhage suspected (Kleihauer-Betke test guides dosing)\n\n**ANTIBIOTIC PROPHYLAXIS**\n• Following manual placental extraction, uterine exploration, Bakri balloon, or laceration repair\n• Single dose cefazolin or ampicillin-sulbactam, or extend for 24 hours if instrumentation\n\n**THROMBOPROPHYLAXIS**\n• Pregnancy is hypercoagulable; PPH + immobility + large transfusion dramatically increases VTE risk\n• **Mechanical (SCDs)** immediately\n• **Pharmacologic (enoxaparin)** — start once hemostasis confirmed and fibrinogen ≥200, typically 12-24 hours post-bleeding\n\n**MENTAL HEALTH**\n• Severe PPH is associated with post-traumatic stress and postpartum depression\n• Acknowledge the experience with the patient when she is awake and stable\n• Lactation support; newborn bonding often disrupted — coordinate with pediatrics and nursing',
-    citation: [1, 5, 19],
+    body: '**RH IMMUNE GLOBULIN (RhoGAM)**\n• All **Rh-negative mothers with Rh-positive or unknown newborn** should receive **[Rh Immune Globulin](#/drug/rh-immune-globulin/rh negative postpartum) 300 mcg IM within 72 hours of delivery** [23]\n• Even if mother was previously sensitized, standard of care is to give — consult OB\n• Larger doses if large fetomaternal hemorrhage suspected (Kleihauer-Betke test guides dosing) [23]\n\n**ANTIBIOTIC PROPHYLAXIS**\n• Following manual placental extraction, uterine exploration, Bakri balloon, or laceration repair\n• Single dose cefazolin or ampicillin-sulbactam, or extend for 24 hours if instrumentation\n\n**THROMBOPROPHYLAXIS**\n• Pregnancy is hypercoagulable; PPH + immobility + large transfusion dramatically increases VTE risk\n• **Mechanical (SCDs)** immediately\n• **Pharmacologic (enoxaparin)** — start once hemostasis confirmed and fibrinogen ≥200, typically 12-24 hours post-bleeding\n\n**MENTAL HEALTH**\n• Severe PPH is associated with post-traumatic stress and postpartum depression\n• Acknowledge the experience with the patient when she is awake and stable\n• Lactation support; newborn bonding often disrupted — coordinate with pediatrics and nursing',
+    citation: [1, 5, 19, 23],
     next: 'pph-controlled',
     summary: 'RhoGAM if Rh-neg mom w/in 72h; abx after instrumentation; mechanical VTE prophylaxis immediately.',
     skippable: true,
@@ -659,25 +667,30 @@ export const PPH_MODULE_LABELS = [
 // -------------------------------------------------------------------
 
 export const PPH_CITATIONS: Citation[] = [
-  { num: 1, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186. Reaffirmed 2023. https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2017/10/postpartum-hemorrhage' },
-  { num: 2, text: 'Bienstock JL, Eke AC, Hueppchen NA. Postpartum Hemorrhage. N Engl J Med. 2021;384(17):1635-1645. https://www.nejm.org/doi/full/10.1056/NEJMra1513247' },
-  { num: 3, text: 'El Ayadi AM, et al. Combined Analysis of the Predictive Accuracy of the Shock Index in Postpartum Hemorrhage. PLoS One. 2016;11(2):e0148729.' },
-  { num: 4, text: 'Sohn CH, et al. Prognostic value of the shock index for postpartum hemorrhage. Int J Gynaecol Obstet. 2013;123(2):116-120.' },
-  { num: 5, text: 'California Maternal Quality Care Collaborative (CMQCC). Obstetric Hemorrhage Toolkit Version 3.0. 2022. https://www.cmqcc.org/resources-tool-kits/toolkits/ob-hemorrhage-toolkit' },
-  { num: 6, text: 'Collins PW, et al. Fibrinogen in Postpartum Hemorrhage. Blood. 2014;124(11):1727-1736.' },
-  { num: 7, text: 'WOMAN Trial Collaborators. Effect of early tranexamic acid administration on mortality, hysterectomy, and other morbidities in women with post-partum haemorrhage (WOMAN): an international, randomised, double-blind, placebo-controlled trial. Lancet. 2017;389(10084):2105-2116. https://pubmed.ncbi.nlm.nih.gov/28456509/' },
-  { num: 8, text: 'WHO Recommendations for the Prevention and Treatment of Postpartum Haemorrhage. World Health Organization; 2012, 2017 update. https://www.who.int/publications/i/item/9789241548502' },
-  { num: 9, text: 'Society for Obstetric Anesthesia and Perinatology (SOAP) Consensus Statement on Obstetric Hemorrhage. Anesth Analg. 2019;129(2):458-465.' },
-  { num: 10, text: 'Leal RF, et al. Acute Postpartum Uterine Inversion: A Review. Obstet Gynecol Surv. 2014;69(10):589-598.' },
-  { num: 11, text: 'Rani PR, Begum J. Recent Advances in the Management of Major Postpartum Haemorrhage — A Review. J Clin Diagn Res. 2017;11(2):QE01-QE05.' },
-  { num: 12, text: 'ACOG Practice Bulletin No. 205: Vaginal Birth After Cesarean Delivery. Obstet Gynecol. 2019;133(2):e110-e127.' },
-  { num: 13, text: 'Jauniaux E, et al. FIGO Consensus Guidelines on Placenta Accreta Spectrum Disorders. Int J Gynaecol Obstet. 2018;140(3):291-298.' },
-  { num: 14, text: 'Pacheco LD, et al. Amniotic Fluid Embolism: Diagnosis and Management. Am J Obstet Gynecol. 2016;215(2):B16-B24.' },
-  { num: 15, text: 'Blum J, et al. Treatment of Postpartum Hemorrhage with Sublingual Misoprostol versus Oxytocin in Women Not Exposed to Oxytocin During Labour. Lancet. 2010;375(9710):217-223.' },
-  { num: 16, text: 'Aibar L, et al. Bakri Balloon for the Management of Postpartum Hemorrhage. Acta Obstet Gynecol Scand. 2013;92(4):465-467.' },
-  { num: 17, text: 'B-Lynch C, et al. The B-Lynch Surgical Technique for the Control of Massive Postpartum Haemorrhage. Br J Obstet Gynaecol. 1997;104(3):372-375.' },
-  { num: 18, text: 'Shields LE, et al. Comprehensive Maternal Hemorrhage Protocols Reduce the Use of Blood Products and Improve Patient Safety. Am J Obstet Gynecol. 2015;212(3):272-280.' },
-  { num: 19, text: 'ACOG Committee Opinion No. 736: Optimizing Postpartum Care. Obstet Gynecol. 2018;131(5):e140-e150.' },
-  { num: 20, text: 'Poujade O, et al. Uterine Artery Embolization for Postpartum Hemorrhage: Fertility and Pregnancy Outcomes. Hum Reprod. 2010;25(11):2655-61. https://pubmed.ncbi.nlm.nih.gov/20729538/' },
-  { num: 21, text: 'Joshi VM, Otiv SR, Majumder R, et al. Internal Iliac Artery Ligation for Arresting Postpartum Haemorrhage. BJOG. 2007;114(3):356-361.' },
+  { num: 1, text: 'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186. Reaffirmed 2024. doi:10.1097/AOG.0000000000002351. PMID 28937571. https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2017/10/postpartum-hemorrhage' },
+  { num: 2, text: 'Bienstock JL, Eke AC, Hueppchen NA. Postpartum Hemorrhage. N Engl J Med. 2021;384(17):1635-1645. doi:10.1056/NEJMra1513247. PMID 33913640. https://www.nejm.org/doi/full/10.1056/NEJMra1513247' },
+  { num: 3, text: 'El Ayadi AM, Nathan HL, Seed PT, et al. Vital Sign Prediction of Adverse Maternal Outcomes in Women with Hypovolemic Shock: The Role of Shock Index. PLoS One. 2016;11(2):e0148729. doi:10.1371/journal.pone.0148729. PMID 26901161. https://pubmed.ncbi.nlm.nih.gov/26901161/' },
+  { num: 4, text: 'Sohn CH, Kim WY, Kim SR, et al. An increase in initial shock index is associated with the requirement for massive transfusion in emergency department patients with primary postpartum hemorrhage. Shock. 2013;40(2):101-105. doi:10.1097/SHK.0b013e31829b1778. PMID 23707978. https://pubmed.ncbi.nlm.nih.gov/23707978/' },
+  { num: 5, text: 'Lagrew D, McNulty J, Sakowski C, Cape V, McCormick E, Morton CH. Improving Health Care Response to Obstetric Hemorrhage, Version 3.0: A California Quality Improvement Toolkit. California Maternal Quality Care Collaborative (CMQCC); 2022 (July 2022 errata). https://www.cmqcc.org/resources-tool-kits/toolkits/ob-hemorrhage-toolkit' },
+  { num: 6, text: 'Collins PW, Lilley G, Bruynseels D, et al. Fibrin-based clot formation as an early and rapid biomarker for progression of postpartum hemorrhage: a prospective study. Blood. 2014;124(11):1727-1736. doi:10.1182/blood-2014-04-567891. PMID 25024304. https://pubmed.ncbi.nlm.nih.gov/25024304/' },
+  { num: 7, text: 'WOMAN Trial Collaborators. Effect of early tranexamic acid administration on mortality, hysterectomy, and other morbidities in women with post-partum haemorrhage (WOMAN): an international, randomised, double-blind, placebo-controlled trial. Lancet. 2017;389(10084):2105-2116. doi:10.1016/S0140-6736(17)30638-4. PMID 28456509. https://pubmed.ncbi.nlm.nih.gov/28456509/' },
+  { num: 8, text: 'World Health Organization, FIGO, ICM. Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage. Geneva: WHO; 2025. ISBN 978-92-4-011563-7. https://www.who.int/publications/i/item/9789240115637 (supersedes WHO 2012 recommendations and the 2017 TXA update)' },
+  { num: 9, text: 'Main EK, Goffman D, Scavone BM, et al; National Partnership for Maternal Safety, Council on Patient Safety in Women\'s Health Care. National Partnership for Maternal Safety: Consensus Bundle on Obstetric Hemorrhage. Obstet Gynecol. 2015;126(1):155-162. doi:10.1097/AOG.0000000000000869. PMID 26241269. (Co-published: Anesth Analg. 2015;121(1):142-148, PMID 26091046; J Midwifery Womens Health. 2015;60(4):458-464, PMID 26059199.) https://pubmed.ncbi.nlm.nih.gov/26241269/' },
+  { num: 10, text: 'Wendel MP, Shnaekel KL, Magann EF. Uterine Inversion: A Review of a Life-Threatening Obstetrical Emergency. Obstet Gynecol Surv. 2018;73(7):411-417. doi:10.1097/OGX.0000000000000580. PMID 30062382. https://pubmed.ncbi.nlm.nih.gov/30062382/' },
+  { num: 11, text: 'Rani PR, Begum J. Recent Advances in the Management of Major Postpartum Haemorrhage — A Review. J Clin Diagn Res. 2017;11(2):QE01-QE05. doi:10.7860/JCDR/2017/22659.9463. PMID 28384942. https://pubmed.ncbi.nlm.nih.gov/28384942/' },
+  { num: 12, text: 'ACOG Practice Bulletin No. 205: Vaginal Birth After Cesarean Delivery. Obstet Gynecol. 2019;133(2):e110-e127. Reaffirmed 2024. doi:10.1097/AOG.0000000000003078. PMID 30681543. https://pubmed.ncbi.nlm.nih.gov/30681543/' },
+  { num: 13, text: 'Sentilhes L, Kayem G, Chandraharan E, Palacios-Jaraquemada J, Jauniaux E; FIGO Placenta Accreta Diagnosis and Management Expert Consensus Panel. FIGO consensus guidelines on placenta accreta spectrum disorders: Conservative management. Int J Gynaecol Obstet. 2018;140(3):291-298. doi:10.1002/ijgo.12410. PMID 29405320. https://pubmed.ncbi.nlm.nih.gov/29405320/' },
+  { num: 14, text: 'Pacheco LD, Saade G, Hankins GDV, Clark SL; Society for Maternal-Fetal Medicine. Amniotic fluid embolism: diagnosis and management (SMFM Clinical Guideline No. 9). Am J Obstet Gynecol. 2016;215(2):B16-B24. doi:10.1016/j.ajog.2016.03.012. PMID 26987420. https://pubmed.ncbi.nlm.nih.gov/26987420/' },
+  { num: 15, text: 'Blum J, Winikoff B, Raghavan S, et al. Treatment of post-partum haemorrhage with sublingual misoprostol versus oxytocin in women receiving prophylactic oxytocin: a double-blind, randomised, non-inferiority trial. Lancet. 2010;375(9710):217-223. doi:10.1016/S0140-6736(09)61923-1. PMID 20060162. https://pubmed.ncbi.nlm.nih.gov/20060162/' },
+  { num: 16, text: 'Aibar L, Aguilar MT, Puertas A, Valverde M. Bakri balloon for the management of postpartum hemorrhage. Acta Obstet Gynecol Scand. 2013;92(4):465-467. doi:10.1111/j.1600-0412.2012.01497.x. PMID 22762694. https://pubmed.ncbi.nlm.nih.gov/22762694/' },
+  { num: 17, text: 'B-Lynch C, Coker A, Lawal AH, Abu J, Cowen MJ. The B-Lynch surgical technique for the control of massive postpartum haemorrhage: an alternative to hysterectomy? Five cases reported. Br J Obstet Gynaecol. 1997;104(3):372-375. doi:10.1111/j.1471-0528.1997.tb11471.x. PMID 9091019. https://pubmed.ncbi.nlm.nih.gov/9091019/' },
+  { num: 18, text: 'Shields LE, Wiesner S, Fulton J, Pelletreau B. Comprehensive maternal hemorrhage protocols reduce the use of blood products and improve patient safety. Am J Obstet Gynecol. 2015;212(3):272-280. doi:10.1016/j.ajog.2014.07.012. PMID 25025944. https://pubmed.ncbi.nlm.nih.gov/25025944/' },
+  { num: 19, text: 'ACOG Committee Opinion No. 736: Optimizing Postpartum Care. Obstet Gynecol. 2018;131(5):e140-e150. doi:10.1097/AOG.0000000000002633. PMID 29683911. https://pubmed.ncbi.nlm.nih.gov/29683911/' },
+  { num: 20, text: 'Sentilhes L, Gromez A, Clavier E, Resch B, Verspyck E, Marpeau L. Fertility and pregnancy following pelvic arterial embolisation for postpartum haemorrhage. BJOG. 2010;117(1):84-93. doi:10.1111/j.1471-0528.2009.02381.x. PMID 19832826. https://pubmed.ncbi.nlm.nih.gov/19832826/' },
+  { num: 21, text: 'Joshi VM, Otiv SR, Majumder R, Nikam YA, Shrivastava M. Internal iliac artery ligation for arresting postpartum haemorrhage. BJOG. 2007;114(3):356-361. doi:10.1111/j.1471-0528.2006.01235.x. PMID 17261120. https://pubmed.ncbi.nlm.nih.gov/17261120/' },
+  { num: 22, text: 'Bateman BT, Mhyre JM, Callaghan WM, Kuklina EV. Peripartum hysterectomy in the United States: nationwide 14 year experience. Am J Obstet Gynecol. 2012;206(1):63.e1-63.e8. doi:10.1016/j.ajog.2011.07.030. PMID 21982025. https://pubmed.ncbi.nlm.nih.gov/21982025/' },
+  { num: 23, text: 'ACOG Practice Bulletin No. 181: Prevention of Rh D Alloimmunization. Obstet Gynecol. 2017;130(2):e57-e70. Reaffirmed 2021. doi:10.1097/AOG.0000000000002232. PMID 28742673. https://pubmed.ncbi.nlm.nih.gov/28742673/' },
+  { num: 24, text: 'ACOG Clinical Practice Update: Use of Nonsurgical Hemorrhage-Control Devices for Postpartum Hemorrhage Management. Obstet Gynecol. 2025;146(4):569-571. doi:10.1097/AOG.0000000000006024. https://www.acog.org/clinical/clinical-guidance/clinical-practice-update' },
+  { num: 25, text: 'Methergine (methylergonovine maleate) tablets/injection — US FDA Prescribing Information. Novartis Pharmaceuticals; revised 2012. Contraindications: hypertension, toxemia/preeclampsia, hypersensitivity. https://www.accessdata.fda.gov/drugsatfda_docs/label/2012/006035s078lbl.pdf' },
+  { num: 26, text: 'Hemabate (carboprost tromethamine) injection — US FDA Prescribing Information. Pharmacia & Upjohn/Pfizer; revised 2019. Contraindications include acute pelvic inflammatory disease and active cardiac, pulmonary, renal, or hepatic disease; Warnings: use with caution in asthma. https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/017989s039lbl.pdf' },
 ];

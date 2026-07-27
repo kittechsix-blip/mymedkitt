@@ -222,8 +222,8 @@ export const STROKE_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Extended IVT Window (4.5\u20139h)',
-    body: 'Perfusion imaging is required to determine eligibility.\n\nSee [Stroke Imaging Guide](#/info/stroke-imaging) for details on CT perfusion and MRI protocols.\n\n**EXTEND trial criteria (alteplase 4.5\u20139h):**\n\u2022 DWI-FLAIR (diffusion-weighted imaging / fluid-attenuated inversion recovery) mismatch on MRI (DWI+, FLAIR\u2212 suggests <4.5h)\n\u2022 OR CT perfusion showing salvageable tissue\n\u2022 Ischemic core <70 mL\n\u2022 Penumbra/core mismatch ratio >1.2\n\n**TRACE-III (2024) / TIMELESS:** Tenecteplase 0.25 mg/kg also supported in extended window 4.5\u201324h with perfusion mismatch when EVT not available \u2014 2026 AHA/ASA Class IIb.',
-    citation: [5, 8, 14],
+    body: 'Perfusion imaging is required to determine eligibility.\n\nSee [Stroke Imaging Guide](#/info/stroke-imaging) for details on CT perfusion and MRI protocols.\n\n**EXTEND trial criteria (alteplase 4.5\u20139h):**\n\u2022 DWI-FLAIR (diffusion-weighted imaging / fluid-attenuated inversion recovery) mismatch on MRI (DWI+, FLAIR\u2212 suggests <4.5h)\n\u2022 OR CT perfusion showing salvageable tissue\n\u2022 Ischemic core <70 mL\n\u2022 Penumbra/core mismatch ratio >1.2\n\n**TRACE-III (2024) / TIMELESS:** Tenecteplase 0.25 mg/kg also supported in extended window 4.5\u201324h with perfusion mismatch when EVT not available \u2014 2026 AHA/ASA Class IIb.\n\n**Evidence basis (for independent review):** TRACE-III [14] was positive (mRS 0\u20131 at 90 days 33% vs 24%) in patients who largely did NOT undergo thrombectomy. TIMELESS [19] was neutral \u2014 tenecteplase did not improve functional outcome vs placebo, and most TIMELESS patients did go on to thrombectomy. Review both before applying the extended window.',
+    citation: [5, 8, 14, 19],
     options: [
       {
         label: 'Salvageable tissue present',
@@ -246,8 +246,8 @@ export const STROKE_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'EVT Eligibility (6\u201324h)',
-    body: '**Anterior circulation (DAWN/DEFUSE-3 criteria):**\n\u2022 NIHSS \u22656\n\u2022 ICA or M1 occlusion on CTA\n\u2022 Small ischemic core on CT perfusion (<70 mL at 6\u201316h; <21 mL at 16\u201324h)\n\u2022 Large penumbra with mismatch ratio >1.8\n\n**Large-core (SELECT2/ANGEL-ASPECT):** EVT benefit extends to large ischemic cores (ASPECTS 3\u20135 or core \u226550 mL) in selected patients up to 24h.\n\n**Posterior circulation (basilar artery):**\n\u2022 NIHSS \u226510\n\u2022 Basilar artery occlusion on CTA\n\u2022 PC-ASPECTS \u22656\n\u2022 Up to 24h from onset (ATTENTION trial)',
-    citation: [6, 7, 8, 15],
+    body: '**Anterior circulation (DAWN/DEFUSE-3 criteria):**\n\u2022 NIHSS \u22656\n\u2022 ICA or M1 occlusion on CTA\n\u2022 Small ischemic core on CT perfusion (<70 mL at 6\u201316h; <21 mL at 16\u201324h)\n\u2022 Large penumbra with mismatch ratio >1.8\n\n**Large-core (SELECT2/ANGEL-ASPECT):** EVT benefit extends to large ischemic cores (ASPECTS 3\u20135 or core \u226550 mL) in selected patients up to 24h.\n\n**Posterior circulation (basilar artery):**\n\u2022 NIHSS \u226510\n\u2022 Basilar artery occlusion on CTA\n\u2022 PC-ASPECTS \u22656\n\u2022 Up to 24h from onset (ATTENTION [16] randomised within 12h; the 6\u201324h basilar window rests on BAOCHE [17])',
+    citation: [6, 7, 8, 15, 16, 17, 18],
     options: [
       {
         label: 'Meets EVT criteria',
@@ -270,10 +270,10 @@ export const STROKE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Activate Neurointerventional Team',
-    body: '**Endovascular thrombectomy (EVT) indicated.**\n\nGoal: arterial puncture within 60 minutes of arrival.\n\n\u2022 Bridging IVT: If within 4.5h and no IVT contraindications, administer [Tenecteplase](#/drug/tenecteplase/stroke) or [Alteplase](#/drug/alteplase/stroke) before/during transfer to angio suite \u2014 do NOT delay EVT for thrombolytic infusion to complete\n\u2022 NPO for sedation/general anesthesia\n\u2022 Continuous BP monitoring (arterial line)\n\u2022 Goal BP post-recanalization: <180/105 (same as post-IVT)\n\nHERMES meta-analysis: EVT achieved functional independence in 46% vs 27% with medical therapy alone (NNT ~5).',
+    body: '**Endovascular thrombectomy (EVT) indicated.**\n\nGoal: arterial puncture within 60 minutes of arrival.\n\n\u2022 Bridging IVT: If within 4.5h and no IVT contraindications, administer [Tenecteplase](#/drug/tenecteplase/stroke) or [Alteplase](#/drug/alteplase/stroke) before/during transfer to angio suite \u2014 do NOT delay EVT for thrombolytic infusion to complete\n\u2022 NPO for sedation/general anesthesia\n\u2022 Continuous BP monitoring (arterial line)\n\u2022 Goal BP post-recanalization: <180/105 (same as post-IVT)\n\nHERMES meta-analysis: EVT achieved functional independence in 46% vs 27% with medical therapy alone (NNT ~5).\n\n**Evidence basis for the post-recanalization BP target (for independent review):** ENCHANTED2/MT [26] randomised a systolic target of <120 mmHg vs 140\u2013180 mmHg after thrombectomy and found worse 90-day functional outcomes with the intensive target (common OR 1.37). BP-TARGET [27] randomised 100\u2013129 mmHg vs 130\u2013185 mmHg and found no reduction in intraparenchymal hemorrhage. Neither trial tested a 140 mmHg threshold directly.',
     recommendation: 'Activate neurointerventional team immediately. Administer bridging IVT if within window and no contraindications. Target door-to-puncture <60 min.',
     confidence: 'definitive',
-    citation: [6, 7],
+    citation: [1, 6, 7, 26, 27],
     treatment: {
       firstLine: {
         drug: 'Tenecteplase (bridging)',
@@ -318,7 +318,7 @@ export const STROKE_NODES: DecisionNode[] = [
     module: 4,
     title: 'Minor Stroke Workup',
     body: 'NIHSS 0\u20135, nondisabling deficit.\n\nMRI with DWI is preferred (identifies small infarcts missed on CT).\n\n**ABCD2 Score** (TIA risk stratification):\nAge \u226560 (+1), BP \u2265140/90 (+1), Clinical features: unilateral weakness (+2) or speech impairment (+1), Duration \u226560min (+2) or 10\u201359min (+1), Diabetes (+1).\n\nInfarct on imaging or ABCD2 \u22654 = higher risk of recurrent stroke.',
-    citation: [3, 9],
+    citation: [3, 9, 20],
     options: [
       {
         label: 'ABCD2 \u22654 or infarct on imaging',
@@ -496,7 +496,7 @@ export const STROKE_NODES: DecisionNode[] = [
     body: '**DOAC (direct oral anticoagulant) preferred over warfarin** (unless mechanical valve or moderate-severe mitral stenosis).\n\nRecommended agents:\n\u2022 [Apixaban](#/drug/apixaban/atrial fibrillation) 5 mg BID (preferred for stroke prevention, ARISTOTLE trial)\n\u2022 [Rivaroxaban](#/drug/rivaroxaban/atrial fibrillation) 20 mg daily with food\n\n**Timing of anticoagulation initiation** (based on stroke severity):\n\u2022 TIA: 1\u20133 days\n\u2022 Minor stroke (NIHSS <8): 4\u20137 days\n\u2022 Moderate stroke (NIHSS 8\u201315): 7\u201314 days\n\u2022 Severe stroke (NIHSS >15 or large infarct): \u226514 days\n\n**Do NOT bridge with heparin** \u2014 no benefit over delayed DOAC, increases bleeding.\n\nDiscontinue antiplatelet when DOAC initiated (unless concurrent ACS/stent).',
     recommendation: 'Start DOAC based on stroke severity timing. Do not bridge with heparin. Ensure rate/rhythm control of AF.',
     confidence: 'definitive',
-    citation: [1, 2, 11],
+    citation: [1, 2, 11, 21],
     treatment: {
       firstLine: {
         drug: 'Apixaban',
@@ -526,7 +526,7 @@ export const STROKE_NODES: DecisionNode[] = [
     body: '**Antiplatelet:**\n\u2022 [Aspirin](#/drug/aspirin/stroke) 325 mg daily (or DAPT \u00D7 21\u201390 days for intracranial stenosis)\n\n**Statin:**\n\u2022 High-intensity statin ([Atorvastatin](#/drug/atorvastatin/stroke) 40\u201380 mg or rosuvastatin 20\u201340 mg)\n\u2022 Target LDL <70 mg/dL\n\n**Carotid stenosis management:**\n\u2022 Symptomatic 70\u201399% stenosis: CEA (carotid endarterectomy) within 2 weeks (Class I)\n\u2022 Symptomatic 50\u201369%: CEA is reasonable (Class IIa)\n\u2022 CEA preferred over CAS (carotid artery stenting) for most patients\n\n**Intracranial stenosis 70\u201399%:**\n\u2022 DAPT (aspirin + [clopidogrel](#/drug/clopidogrel/stroke)) \u00D7 90 days\n\u2022 Then single antiplatelet\n\u2022 Aggressive risk factor management (BP <140/90, LDL <70)',
     recommendation: 'Aspirin + high-intensity statin. Refer for CEA within 2 weeks if symptomatic carotid stenosis 70\u201399%. DAPT \u00D7 90d for intracranial stenosis.',
     confidence: 'definitive',
-    citation: [1, 2],
+    citation: [1, 2, 11, 22],
     treatment: {
       firstLine: {
         drug: 'Aspirin + Atorvastatin',
@@ -556,7 +556,7 @@ export const STROKE_NODES: DecisionNode[] = [
     body: '**Antiplatelet:**\n\u2022 [Aspirin](#/drug/aspirin/stroke) 81 mg daily\n\n**Statin:**\n\u2022 High-intensity statin regardless of baseline LDL\n\n**Blood pressure:**\n\u2022 Target <130/80 mmHg (after acute phase)\n\u2022 Initiate antihypertensive before discharge if stable\n\n**Extended cardiac monitoring:**\n\u2022 If cryptogenic: 14\u201330 day ambulatory cardiac monitor\n\u2022 Detects paroxysmal AF in ~12% of cryptogenic strokes\n\u2022 If AF detected: transition to anticoagulation\n\n**PFO closure:**\n\u2022 Consider if age <60, PFO with atrial septal aneurysm or large shunt, and cryptogenic stroke\n\u2022 Refer cardiology for RESPECT/CLOSE trial-based evaluation\n\n**Lifestyle:**\n\u2022 Smoking cessation\n\u2022 Exercise: moderate intensity \u226540 min, 3\u20134x/week\n\u2022 Mediterranean or DASH diet\n\u2022 Weight management (BMI <25)',
     recommendation: 'Aspirin 81 mg + high-intensity statin. BP target <130/80. Extended cardiac monitoring for cryptogenic. PFO closure if criteria met.',
     confidence: 'recommended',
-    citation: [1, 2, 11],
+    citation: [1, 2, 11, 23, 24, 25],
     treatment: {
       firstLine: {
         drug: 'Aspirin + High-intensity Statin',
@@ -591,12 +591,12 @@ export const STROKE_MODULE_LABELS = [
 // -------------------------------------------------------------------
 
 export const STROKE_CITATIONS: Citation[] = [
-  { num: 1, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press]. doi:10.1161/STR.0000000000000513' },
+  { num: 1, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57. Published online January 26, 2026. doi:10.1161/STR.0000000000000513. Full text: https://www.ahajournals.org/doi/10.1161/STR.0000000000000513' },
   { num: 2, text: 'Mendelson SJ, Prabhakaran S. Diagnosis and Management of TIA and Acute Ischemic Stroke: A Review. JAMA. 2021;325(11):1088-1098.' },
   { num: 3, text: 'Johnston SC, et al. Clopidogrel and Aspirin in Acute Ischemic Stroke and High-Risk TIA (POINT). N Engl J Med. 2018;379(3):215-225.' },
   { num: 4, text: 'Menon BK, et al. Intravenous tenecteplase compared with alteplase for acute ischaemic stroke in Canada (AcT): a pragmatic, multicentre, open-label, registry-linked, randomised, controlled, non-inferiority trial. Lancet. 2022;400(10347):161-169.' },
   { num: 5, text: 'Ma H, et al. Thrombolysis Guided by Perfusion Imaging up to 9 Hours after Onset of Stroke (EXTEND). N Engl J Med. 2019;380(19):1795-1803.' },
-  { num: 6, text: 'Goyal M, et al. Endovascular Thrombectomy after Large-Vessel Ischaemic Stroke: A Meta-analysis (HERMES). Lancet. 2016;387(10029):1723-1731.' },
+  { num: 6, text: 'Goyal M, Menon BK, van Zwam WH, et al; HERMES collaborators. Endovascular thrombectomy after large-vessel ischaemic stroke: a meta-analysis of individual patient data from five randomised trials. Lancet. 2016;387(10029):1723-1731. doi:10.1016/S0140-6736(16)00163-X. PMID:26898852' },
   { num: 7, text: 'Nogueira RG, et al. Thrombectomy 6 to 24 Hours after Stroke with a Mismatch between Deficit and Infarct (DAWN). N Engl J Med. 2018;378(1):11-21.' },
   { num: 8, text: 'Albers GW, et al. Thrombectomy for Stroke at 6 to 16 Hours with Selection by Perfusion Imaging (DEFUSE-3). N Engl J Med. 2018;378(8):708-718.' },
   { num: 9, text: 'Wang Y, et al. Clopidogrel with Aspirin in Acute Minor Stroke or TIA (CHANCE). N Engl J Med. 2013;369(1):11-19.' },
@@ -604,8 +604,20 @@ export const STROKE_CITATIONS: Citation[] = [
   { num: 11, text: 'Kleindorfer DO, et al. 2021 Guideline for the Prevention of Stroke in Patients with Stroke and TIA. Stroke. 2021;52(7):e364-e467.' },
   { num: 12, text: 'Wang Y, et al. Ticagrelor versus Clopidogrel in CYP2C19 Loss-of-Function Carriers with Stroke or TIA (CHANCE-2). N Engl J Med. 2021;385(27):2520-2530.' },
   { num: 13, text: 'Powers WJ, Rabinstein AA, Ackerson T, et al. Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418. [Superseded by the 2026 AHA/ASA guideline (reference 1); retained for historical context.]' },
-  { num: 14, text: 'Xiong Y, Campbell BCV, Schwamm LH, et al. Tenecteplase for Ischemic Stroke at 4.5 to 24 Hours without Thrombectomy (TRACE-III). N Engl J Med. 2024;391(3):203-212.' },
-  { num: 15, text: 'Sarraj A, et al. Trial of Endovascular Thrombectomy for Large Ischemic Strokes (SELECT2). N Engl J Med. 2023;388(14):1259-1271.' },
+  { num: 14, text: 'Xiong Y, Campbell BCV, Schwamm LH, et al; TRACE-III Investigators. Tenecteplase for Ischemic Stroke at 4.5 to 24 Hours without Thrombectomy (TRACE-III). N Engl J Med. 2024;391(3):203-212. doi:10.1056/NEJMoa2402980' },
+  { num: 15, text: 'Sarraj A, et al; SELECT2 Investigators. Trial of Endovascular Thrombectomy for Large Ischemic Strokes (SELECT2). N Engl J Med. 2023;388(14):1259-1271. doi:10.1056/NEJMoa2214403. PMID:36762865' },
+  { num: 16, text: 'Tao C, Nogueira RG, Zhu Y, et al; ATTENTION Investigators. Trial of Endovascular Treatment of Acute Basilar-Artery Occlusion. N Engl J Med. 2022;387(15):1361-1372. doi:10.1056/NEJMoa2206317. PMID:36239644. [Scope note: ATTENTION randomised patients within 12 hours of estimated basilar occlusion time, not 24 hours.]' },
+  { num: 17, text: 'Jovin TG, Li C, Wu L, et al; BAOCHE Investigators. Trial of Thrombectomy 6 to 24 Hours after Stroke Due to Basilar-Artery Occlusion. N Engl J Med. 2022;387(15):1373-1384. doi:10.1056/NEJMoa2207576. [Basis for the 6-24 hour basilar thrombectomy window.]' },
+  { num: 18, text: 'Huo X, Ma G, Tong X, et al; ANGEL-ASPECT Investigators. Trial of Endovascular Therapy for Acute Ischemic Stroke with Large Infarct. N Engl J Med. 2023;388(14):1272-1283. doi:10.1056/NEJMoa2213379. PMID:36762852' },
+  { num: 19, text: 'Albers GW, Jumaa M, Purdon B, et al; TIMELESS Investigators. Tenecteplase for Stroke at 4.5 to 24 Hours with Perfusion-Imaging Selection (TIMELESS). N Engl J Med. 2024;390(8):701-711. doi:10.1056/NEJMoa2310392. PMID:38329148. [Result note: TIMELESS was neutral - tenecteplase did not improve functional outcome vs placebo; most enrolled patients also underwent thrombectomy. The extended-window tenecteplase position rests on TRACE-III (reference 14), not on TIMELESS.]' },
+  { num: 20, text: 'Johnston SC, Rothwell PM, Nguyen-Huynh MN, et al. Validation and refinement of scores to predict very early stroke risk after transient ischaemic attack (derivation of the ABCD2 score). Lancet. 2007;369(9558):283-292. doi:10.1016/S0140-6736(07)60150-0. PMID:17258668' },
+  { num: 21, text: 'Granger CB, Alexander JH, McMurray JJV, et al; ARISTOTLE Committees and Investigators. Apixaban versus Warfarin in Patients with Atrial Fibrillation (ARISTOTLE). N Engl J Med. 2011;365(11):981-992. doi:10.1056/NEJMoa1107039. PMID:21870978' },
+  { num: 22, text: 'Chimowitz MI, Lynn MJ, Derdeyn CP, et al; SAMMPRIS Trial Investigators. Stenting versus Aggressive Medical Therapy for Intracranial Arterial Stenosis (SAMMPRIS). N Engl J Med. 2011;365(11):993-1003. doi:10.1056/NEJMoa1105335. PMID:21899409. [Source of the aspirin 325 mg + clopidogrel 75 mg x 90 day regimen and the LDL <70 mg/dL target for intracranial stenosis.]' },
+  { num: 23, text: 'Sanna T, Diener HC, Passman RS, et al; CRYSTAL AF Investigators. Cryptogenic Stroke and Underlying Atrial Fibrillation (CRYSTAL AF). N Engl J Med. 2014;370(26):2478-2486. doi:10.1056/NEJMoa1313600. PMID:24963567. [Source of the prolonged-monitoring atrial fibrillation detection rate in cryptogenic stroke.]' },
+  { num: 24, text: 'Saver JL, Carroll JD, Thaler DE, et al; RESPECT Investigators. Long-Term Outcomes of Patent Foramen Ovale Closure or Medical Therapy after Stroke (RESPECT). N Engl J Med. 2017;377(11):1022-1032. doi:10.1056/NEJMoa1610057. PMID:28902590' },
+  { num: 25, text: 'Mas JL, Derumeaux G, Guillon B, et al; CLOSE Investigators. Patent Foramen Ovale Closure or Anticoagulation vs. Antiplatelets after Stroke (CLOSE). N Engl J Med. 2017;377(11):1011-1021. doi:10.1056/NEJMoa1705915. PMID:28902593. [Enrolled ages 16-60 with atrial septal aneurysm or large right-to-left shunt.]' },
+  { num: 26, text: 'Yang P, Song L, Zhang Y, et al; ENCHANTED2/MT Investigators. Intensive blood pressure control after endovascular thrombectomy for acute ischaemic stroke (ENCHANTED2/MT): a multicentre, open-label, blinded-endpoint, randomised controlled trial. Lancet. 2022;400(10363):1585-1596. doi:10.1016/S0140-6736(22)01882-7. PMID:36341753. [Systolic target <120 mmHg produced worse functional outcomes than 140-180 mmHg after thrombectomy.]' },
+  { num: 27, text: 'Mazighi M, Richard S, Lapergue B, et al; BP-TARGET Investigators. Safety and efficacy of intensive blood pressure lowering after successful endovascular therapy in acute ischaemic stroke (BP-TARGET): a multicentre, open-label, randomised controlled trial. Lancet Neurol. 2021;20(4):265-274. doi:10.1016/S1474-4422(20)30483-X. PMID:33647246. [Systolic target 100-129 mmHg did not reduce intraparenchymal haemorrhage vs 130-185 mmHg.]' },
 ];
 
 export const STROKE_CRITICAL_ACTIONS = [
@@ -615,7 +627,7 @@ export const STROKE_CRITICAL_ACTIONS = [
   { text: 'Tenecteplase 0.25 mg/kg single bolus preferred over alteplase 60-min infusion', nodeId: 'stroke-ivt-treat' },
   { text: 'Activate cath lab for LVO on CTA - EVT within 24h for select patients', nodeId: 'stroke-evt-eligible' },
   { text: 'DAPT x21 days only for minor stroke (NIHSS 0-5) with high risk features', nodeId: 'stroke-dapt' },
-  { text: 'Avoid aggressive BP lowering to <140 systolic post-EVT — may worsen outcomes (2026 AHA/ASA)', nodeId: 'stroke-post-treatment' },
+  { text: 'Avoid aggressive BP lowering to <140 systolic post-EVT — may worsen outcomes (2026 AHA/ASA)', nodeId: 'stroke-evt-eligible' },
   { text: 'Do NOT bridge with heparin when starting DOAC for cardioembolic stroke', nodeId: 'stroke-afib' },
   { text: 'Post-tPA: BP <180/105 x24h, neuro checks q15min x2h, no antiplatelets x24h', nodeId: 'stroke-post-treatment' },
 ];
@@ -625,7 +637,7 @@ export const STROKE_CRITICAL_ACTIONS = [
 // -------------------------------------------------------------------
 
 export const STROKE_CLINICAL_NOTES: string[] = [
-  '[Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg single IV bolus is now preferred over alteplase 60-min infusion per 2024 AcT trial evidence — equivalent efficacy with simpler administration.',
+  '[Tenecteplase](#/drug/tenecteplase/stroke) 0.25 mg/kg single IV bolus is now preferred over alteplase 60-min infusion per the 2022 AcT non-inferiority trial (Lancet 2022;400:161-169) — equivalent efficacy with simpler administration.',
   'Door-to-needle time goal: <45 minutes. Every 15-minute reduction in onset-to-treatment time saves ~4 weeks of disability-free life.',
   'CTA should be obtained alongside initial NCCT but should NOT delay thrombolysis — start tPA/TNK first, then review CTA.',
   'EVT extends the treatment window to 24 hours for select patients with LVO and favorable perfusion imaging. HERMES meta-analysis: NNT ~5 for functional independence.',

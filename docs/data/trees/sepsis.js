@@ -11,9 +11,9 @@ export const SEPSIS_NODES = [
         type: 'question',
         module: 1,
         title: 'Sepsis — Initial Assessment',
-        body: '[Sepsis Steps Summary](#/info/sepsis-summary)\n\n**Sepsis-3 Definition:** Life-threatening organ dysfunction caused by a dysregulated host response to infection. Clinically identified as suspected infection with **SOFA score increase ≥2**. [1]\n\n**Septic Shock:** Vasopressor requirement to maintain MAP ≥65 mmHg AND lactate >2 mmol/L despite adequate fluid resuscitation. Mortality ≥40%. [1][3]\n\n**Key Principle:** Early recognition → aggressive resuscitation → source control → antibiotics within 1 hour. [2][20]\n\n[CMS SEP-1 Bundle Requirements](#/info/sepsis-sep1-bundle)\n\nAssess hemodynamic status:',
+        body: '[Sepsis Steps Summary](#/info/sepsis-summary)\n\n**Sepsis-3 Definition:** Life-threatening organ dysfunction caused by a dysregulated host response to infection. Clinically identified as suspected infection with **SOFA score increase ≥2**. [1]\n\n**Septic Shock:** Vasopressor requirement to maintain MAP ≥65 mmHg AND lactate >2 mmol/L despite adequate fluid resuscitation. Mortality ≥40%. [1][3]\n\n**Key Principle:** Early recognition → aggressive resuscitation → source control → antibiotics within 1 hour. [2][20]\n\n**Guideline currency:** Recommendations in this consult are anchored to Surviving Sepsis Campaign 2021 [2]. SSC published an updated adult guideline in 2026 [26]; where the 2026 document restates or revises a position relevant to a node, that position is disclosed at the node.\n\n**qSOFA basis note:** SSC recommends AGAINST using qSOFA alone as a single screening tool for sepsis. SSC 2026 reaffirms that qSOFA remains useful for identifying clinical deterioration but is not recommended alone for screening, and that sepsis remains a clinical diagnosis that cannot be ruled in or out by a single score or biomarker. [2][26]\n\n[CMS SEP-1 Bundle Requirements](#/info/sepsis-sep1-bundle)\n\nAssess hemodynamic status:',
         images: [{ src: 'images/sepsis/sepsis-steps.png', alt: 'Teaching diagram showing SIRS → Sepsis → Severe Sepsis → Septic Shock continuum with criteria at each stage', caption: 'Sepsis recognition spectrum — SIRS criteria, sepsis-3 organ dysfunction markers, and septic shock definition. (CC BY-SA 4.0)' }],
-        citation: [1, 2, 3, 20],
+        citation: [1, 2, 3, 20, 26],
         calculatorLinks: [
             { id: 'qsofa', label: 'qSOFA Score' },
             { id: 'map-calculator', label: 'MAP Calculator' },
@@ -121,8 +121,8 @@ export const SEPSIS_NODES = [
         type: 'info',
         module: 2,
         title: 'Airway & Breathing Stabilization',
-        body: '**Supplemental O₂** for all patients with hypoxia. Target SpO₂ 90-96%. [24]\n\n**Intubation indications:**\n• Airway protection (encephalopathy, depressed consciousness)\n• Refractory hypoxemia despite high-flow O₂\n• Respiratory failure / increased work of breathing\n• Facilitating procedures (source control)\n\n**Peri-intubation risks in sepsis:**\n• Hemodynamic collapse is common — **optimize MAP before intubation**\n• Push-dose [Phenylephrine](#/drug/phenylephrine/sepsis push dose) 100-200 mcg IV or start [Norepinephrine](#/drug/norepinephrine/septic shock) infusion first\n• Avoid prolonged apnea — use RSI with preoxygenation\n• Consider ketamine for induction (hemodynamically stable)\n\n**Note:** Pulse oximetry may overestimate SpO₂ in patients with darker skin pigmentation. [24]',
-        citation: [24],
+        body: '**Supplemental O₂** for all patients with hypoxia. Target SpO₂ 90-96%. [24]\n\n**Intubation indications:**\n• Airway protection (encephalopathy, depressed consciousness)\n• Refractory hypoxemia despite high-flow O₂\n• Respiratory failure / increased work of breathing\n• Facilitating procedures (source control)\n\n**Peri-intubation risks in sepsis:**\n• Hemodynamic collapse is common — **optimize MAP before intubation**\n• Push-dose [Phenylephrine](#/drug/phenylephrine/sepsis push dose) 100-200 mcg IV or start [Norepinephrine](#/drug/norepinephrine/septic shock) infusion first [24][32]\n• Avoid prolonged apnea — use RSI with preoxygenation\n• Consider ketamine for induction (hemodynamically stable)\n\n**Note:** Pulse oximetry may overestimate SpO₂ in patients with darker skin pigmentation. [24]',
+        citation: [24, 32],
         summary: 'Optimize MAP before intubation — push-dose phenylephrine or start norepinephrine first; ketamine for induction',
         safetyLevel: 'critical',
         treatment: {
@@ -151,8 +151,8 @@ export const SEPSIS_NODES = [
         type: 'info',
         module: 2,
         title: 'IV Fluid Resuscitation',
-        body: '**30 mL/kg IV crystalloid** — start within 1 hour, complete within 3 hours [2][24]\n\n**Fluid choice:** Balanced crystalloid preferred (Lactated Ringer\'s) [24]\n• SMART trial: lower composite of death, new RRT, and persistent renal dysfunction vs 0.9% NaCl [24]\n• **Avoid HES** — 6S trial: increased mortality (51 vs 43%) and RRT (22 vs 16%) [10]\n• **No benefit to albumin** vs crystalloid (SAFE trial) [24]\n\n**Administration:** Boluses of 500 mL, reassess between each [24]\n• Stop if pulmonary edema develops or no further response\n• CLOVERS trial: restrictive vs liberal fluid strategy for sepsis-induced hypotension showed no significant difference in 90-day mortality [8]\n\n**Special populations:**\n• **Obesity (BMI >30):** Use ideal body weight for calculation [24]\n• **Heart failure / ESRD:** Smaller initial bolus acceptable — CMS allows <30 mL/kg if documented [24]\n• **Pneumonia with mild hypotension:** Fluid-conservative approach + early vasopressors may be better [23]\n\n**After initial resuscitation:** Restrict further fluids — most IV crystalloid extravasates (~95% leaves vasculature). [23]\n\n[Fluid Resuscitation Guide](#/info/sepsis-fluid-guide)',
-        citation: [2, 8, 9, 10, 23, 24],
+        body: '**30 mL/kg IV crystalloid** — start within 1 hour, complete within 3 hours [2][24]\n\n**Fluid choice:** Balanced crystalloid preferred (Lactated Ringer\'s) [24]\n• SMART trial: lower composite of death, new RRT, and persistent renal dysfunction vs 0.9% NaCl [24][27]\n• **Avoid HES** — 6S trial: increased mortality (51 vs 43%) and RRT (22 vs 16%) [10]\n• **No benefit to albumin** vs crystalloid (SAFE trial) [24][28]\n\n**Administration:** Boluses of 500 mL, reassess between each [24]\n• Stop if pulmonary edema develops or no further response\n• CLOVERS trial: restrictive vs liberal fluid strategy for sepsis-induced hypotension showed no significant difference in 90-day mortality [8]\n\n**Special populations:**\n• **Obesity (BMI >30):** Use ideal body weight for calculation [24]\n• **Heart failure / ESRD:** Smaller initial bolus acceptable — CMS allows <30 mL/kg if documented [24]\n• **Pneumonia with mild hypotension:** Fluid-conservative approach + early vasopressors may be better [23]\n\n**After initial resuscitation:** Restrict further fluids — most IV crystalloid extravasates (~95% leaves vasculature). [23]\n\n**Guideline currency:** SSC 2026 retains the suggestion to give at least 30 mL/kg IV crystalloid in the first 3 hours for sepsis-induced hypoperfusion or septic shock (conditional recommendation, low certainty of evidence), with frequent reassessment to avoid under- or over-resuscitation. The 2026 panel specifies weight-based volume using actual body weight, or adjusted/ideal body weight if BMI >30 kg/m². After the initial 30 mL/kg with persistent hypoperfusion, either a liberal or a restrictive strategy is suggested based on individual patient and health-system factors. [26]\n\n[Fluid Resuscitation Guide](#/info/sepsis-fluid-guide)',
+        citation: [2, 8, 9, 10, 23, 24, 26, 27, 28],
         summary: '30 mL/kg LR within 3hr in 500mL boluses — avoid HES (increased mortality); restrict fluids after initial resuscitation',
         treatment: {
             firstLine: {
@@ -180,8 +180,8 @@ export const SEPSIS_NODES = [
         type: 'question',
         module: 2,
         title: 'Empiric Antibiotic Selection',
-        body: '**Administer within 1 hour** of sepsis recognition. Each hour of delay increases mortality. [2][20]\n\n**Beta-lactam FIRST** when also giving vancomycin (improved survival). [24]\n\n**Beta-lactam backbone** (choose one): [23][24]\n• [Piperacillin-Tazobactam](#/drug/piperacillin-tazobactam/sepsis empiric) 4.5g IV q6h (extended infusion 4h) — broadest anaerobic coverage\n• [Cefepime](#/drug/cefepime/sepsis empiric) 2g IV q8h — antipseudomonal, less anaerobic coverage\n• [Meropenem](#/drug/meropenem/sepsis empiric) 1g IV q8h — reserve for MDR risk or severe PCN allergy\n\n**Add atypical coverage for CAP:**\n• [Doxycycline](#/drug/doxycycline/CAP atypical) 100 mg IV q12h (preferred) OR [Azithromycin](#/drug/azithromycin/CAP atypical) 500 mg IV [23]\n\n**C. difficile:** Oral vancomycin 125 mg QID +/- IV [Metronidazole](#/drug/metronidazole/C. difficile) 500 mg q8h [23]\n\n[Empiric Antibiotic Selection Table](#/info/sepsis-abx-table)\n\nDoes the patient need **MRSA coverage**?',
-        citation: [2, 20, 23, 24],
+        body: '**Administer within 1 hour** of sepsis recognition. Each hour of delay increases mortality. [2][20]\n\n**Beta-lactam FIRST** when also giving vancomycin (improved survival). [24]\n\n**Beta-lactam backbone** (choose one): [23][24]\n• [Piperacillin-Tazobactam](#/drug/piperacillin-tazobactam/sepsis empiric) 4.5g IV q6h (extended infusion 4h) — broadest anaerobic coverage\n• [Cefepime](#/drug/cefepime/sepsis empiric) 2g IV q8h — antipseudomonal, less anaerobic coverage\n• [Meropenem](#/drug/meropenem/sepsis empiric) 1g IV q8h — reserve for MDR risk or severe PCN allergy\n\n**Add atypical coverage for CAP:**\n• [Doxycycline](#/drug/doxycycline/CAP atypical) 100 mg IV q12h (preferred) OR [Azithromycin](#/drug/azithromycin/CAP atypical) 500 mg IV [23][29]\n\n**C. difficile:** Oral vancomycin 125 mg QID +/- IV [Metronidazole](#/drug/metronidazole/C. difficile) 500 mg q8h [23][30]\n\n**Guideline currency:** SSC 2026 retains immediate antimicrobials, ideally within 1 hour of recognition, for septic shock or definite/probable sepsis; for *possible* sepsis without shock a brief period of evaluation is permitted (the tiered 1-hour vs 3-hour framework from 2021 persists). Blood cultures should be obtained as soon as possible, ideally before antimicrobials, but must not delay treatment. [26]\n\n[Empiric Antibiotic Selection Table](#/info/sepsis-abx-table)\n\nDoes the patient need **MRSA coverage**?',
+        citation: [2, 20, 23, 24, 26, 29, 30],
         options: [
             {
                 label: 'Yes — MRSA Risk Factors Present',
@@ -202,8 +202,8 @@ export const SEPSIS_NODES = [
         type: 'info',
         module: 2,
         title: 'MRSA Coverage',
-        body: '**MRSA risk factors:** [24]\n• Soft tissue infection (especially abscesses)\n• Central line infection / hemodialysis\n• Recent hospitalization or long-term care\n• IV drug use\n• Known MRSA colonization\n• Nosocomial / surgical site infection\n\n**First-line:** [Vancomycin](#/drug/vancomycin/sepsis MRSA) 25-30 mg/kg IV loading dose, then 15-20 mg/kg q8-12h [24]\n• Administer AFTER beta-lactam (beta-lactam first improves survival) [24]\n\n**Alternatives if vancomycin contraindicated:**\n• [Linezolid](#/drug/linezolid/MRSA sepsis) 600 mg IV q12h — covers MRSA pneumonia (unlike daptomycin)\n• [Daptomycin](#/drug/daptomycin/MRSA bacteremia) 6-10 mg/kg IV q24h — for bacteremia/endocarditis, **NOT for pneumonia** (inactivated by pulmonary surfactant) [24]\n\n**De-escalate:** Discontinue vancomycin if no MRSA cultured within 48 hours [24]',
-        citation: [24],
+        body: '**MRSA risk factors:** [24]\n• Soft tissue infection (especially abscesses)\n• Central line infection / hemodialysis\n• Recent hospitalization or long-term care\n• IV drug use\n• Known MRSA colonization\n• Nosocomial / surgical site infection\n\n**First-line:** [Vancomycin](#/drug/vancomycin/sepsis MRSA) 25-30 mg/kg IV loading dose, then 15-20 mg/kg q8-12h [24][31]\n• Administer AFTER beta-lactam (beta-lactam first improves survival) [24]\n\n**Alternatives if vancomycin contraindicated:**\n• [Linezolid](#/drug/linezolid/MRSA sepsis) 600 mg IV q12h — covers MRSA pneumonia (unlike daptomycin)\n• [Daptomycin](#/drug/daptomycin/MRSA bacteremia) 6-10 mg/kg IV q24h — for bacteremia/endocarditis, **NOT for pneumonia** (inactivated by pulmonary surfactant) [24]\n\n**De-escalate:** Discontinue vancomycin if no MRSA cultured within 48 hours [24]\n\n**Basis note (therapeutic monitoring):** The 2020 ASHP/IDSA/PIDS/SIDP revised consensus guideline recommends AUC-guided vancomycin dosing and monitoring (AUC/MIC target 400-600) for serious MRSA infections, rather than trough-only monitoring. The 2009 trough target of 15-20 mcg/mL is no longer the guideline-preferred target and has been associated with higher nephrotoxicity. Follow your local pharmacy dosing protocol. [31]',
+        citation: [24, 31],
         summary: 'Vancomycin 25-30 mg/kg load AFTER beta-lactam — discontinue if no MRSA cultured at 48hr',
         treatment: {
             firstLine: {
@@ -266,8 +266,8 @@ export const SEPSIS_NODES = [
         type: 'info',
         module: 3,
         title: 'Vasopressor Initiation — Norepinephrine',
-        body: '**[Norepinephrine](#/drug/norepinephrine/septic shock)** is the **first-line vasopressor** for septic shock. [2][11][24]\n\n**Dosing:** Start 0.05 mcg/kg/min (4-6 mcg/min), titrate by 0.02-0.05 mcg/kg/min to MAP ≥65 mmHg [24]\n\n**Mechanism:** Predominantly alpha-1 agonist (vasoconstriction) with some beta-1 (supports cardiac function). Reduces endothelial permeability. [23]\n\n**Can start peripherally** for <6 hours while obtaining central access (SSC 2021). [2][24]\n\n**Why NOT dopamine?** SOAP-II trial (n=1679): dopamine associated with **increased arrhythmias and mortality** vs norepinephrine. [11]\n\n**MAP target:** ≥65 mmHg initially. [2]\n• 65-Trial: MAP goal >60 mmHg safe in elderly patients [18]\n• SEPSISPAM: MAP 80-85 improved renal outcomes in chronic HTN but increased AF [19]\n\n**Diastolic BP <40 mmHg** strongly suggests vasoplegia — start vasopressor immediately. [23]\n\n[Vasopressor Comparison](#/info/sepsis-vp-comparison)',
-        citation: [2, 11, 18, 19, 23, 24],
+        body: '**[Norepinephrine](#/drug/norepinephrine/septic shock)** is the **first-line vasopressor** for septic shock. [2][11][24]\n\n**Dosing:** Start 0.05 mcg/kg/min (4-6 mcg/min), titrate by 0.02-0.05 mcg/kg/min to MAP ≥65 mmHg [24]\n\n**Mechanism:** Predominantly alpha-1 agonist (vasoconstriction) with some beta-1 (supports cardiac function). Reduces endothelial permeability. [23]\n\n**Can start peripherally** for <6 hours while obtaining central access (SSC 2021). [2][24]\n\n**Why NOT dopamine?** SOAP-II trial (n=1679): dopamine associated with **increased arrhythmias and mortality** vs norepinephrine. [11]\n\n**MAP target:** ≥65 mmHg initially. [2]\n• 65-Trial: MAP goal >60 mmHg safe in elderly patients [18]\n• SEPSISPAM: MAP 80-85 improved renal outcomes in chronic HTN but increased AF [19]\n• **Guideline currency:** SSC 2026 suggests an initial MAP target of 60-65 mmHg (rather than higher) for adults with septic shock aged 65 and older. [26]\n\n**Diastolic BP <40 mmHg** strongly suggests vasoplegia — start vasopressor immediately. [23]\n\n[Vasopressor Comparison](#/info/sepsis-vp-comparison)',
+        citation: [2, 11, 18, 19, 23, 24, 26],
         summary: 'Norepinephrine first-line vasopressor — start 0.05 mcg/kg/min, can start peripherally for <6hr; NOT dopamine (more arrhythmias)',
         treatment: {
             firstLine: {
@@ -392,8 +392,8 @@ export const SEPSIS_NODES = [
         type: 'question',
         module: 3,
         title: 'Refractory Shock',
-        body: '**If shock persists despite fluids + norepinephrine + vasopressin +/- inotrope:** [23]\n\n**Reassess for:**\n• Missed or inadequately treated source of infection\n• Incorrect diagnosis (sepsis mimics — adrenal crisis, thyroid storm, PE, hemorrhage)\n• Inadequate antibiotic coverage\n• Undrained abscess or infected hardware\n• Pneumothorax from central line placement\n• Septic cardiomyopathy\n\n**[Methylene Blue](#/drug/methylene-blue/refractory septic shock)** — salvage vasopressor [21][23]\n• 1-2 mg/kg IV bolus, then 0.5 mg/kg/h infusion\n• Ibarra-Estrada 2023 RCT: shorter time to vasopressor discontinuation, more vasopressor-free days [21]\n• Inhibits NO synthase → restores vascular tone\n• **SSC 2026: insufficient evidence for survival benefit — hemodynamic improvement only**\n• Consider when on multiple vasopressors + glucocorticoids [23]\n\n**Corticosteroids** if not yet started → [24]\n\nIs the patient on stress-dose steroids?',
-        citation: [21, 23, 24],
+        body: '**If shock persists despite fluids + norepinephrine + vasopressin +/- inotrope:** [23]\n\n**Reassess for:**\n• Missed or inadequately treated source of infection\n• Incorrect diagnosis (sepsis mimics — adrenal crisis, thyroid storm, PE, hemorrhage)\n• Inadequate antibiotic coverage\n• Undrained abscess or infected hardware\n• Pneumothorax from central line placement\n• Septic cardiomyopathy\n\n**[Methylene Blue](#/drug/methylene-blue/refractory septic shock)** — salvage vasopressor [21][23]\n• 1-2 mg/kg IV bolus, then 0.5 mg/kg/h infusion\n• Ibarra-Estrada 2023 RCT: shorter time to vasopressor discontinuation, more vasopressor-free days [21]\n• Inhibits NO synthase → restores vascular tone\n• **SSC 2026: insufficient evidence for survival benefit — hemodynamic improvement only** — the 2026 guideline makes no recommendation for or against IV methylene blue in refractory septic shock with escalating vasopressor requirements; panel remark: it may improve blood pressure, but evidence is insufficient to determine whether rescue use improves survival. 69% of panelists reported never or almost never using it. [26]\n• Consider when on multiple vasopressors + glucocorticoids [23]\n\n**Corticosteroids** if not yet started → [24]\n\nIs the patient on stress-dose steroids?',
+        citation: [21, 23, 24, 26],
         treatment: {
             firstLine: {
                 drug: 'Methylene Blue',
@@ -427,8 +427,8 @@ export const SEPSIS_NODES = [
         type: 'info',
         module: 4,
         title: 'Corticosteroid Therapy',
-        body: '**For patients on vasopressors for septic shock:** [2][14][15]\n\n**[Hydrocortisone](#/drug/hydrocortisone/septic shock)** 50 mg IV q6h OR 200 mg/day continuous infusion [2]\n\n**Evidence:**\n• **ADRENAL trial** (n=3800): Steroids reduce time on vasopressors, ICU LOS, and duration of intubation. No increase in superinfection. [14]\n• **APROCCHSS trial** (n=1241): Hydrocortisone + [Fludrocortisone](#/drug/fludrocortisone/septic shock) 50 mcg PO daily × 7 days reduced 90-day mortality (43% vs 49.1%) [15]\n• Meta-analyses confirm: shorter shock duration, earlier vasopressor weaning. Mortality benefit debated but possible if started early in sickest patients. [14][15]\n\n**Risks:**\n• Hyperglycemia (monitor and treat)\n• Steroid myopathy risk in paralyzed patients\n• No increased superinfection risk (debunked by ADRENAL) [14]\n\n**Timing:** Consider early initiation — antibiotics can trigger Jarisch-Herxheimer reaction; front-loaded steroids may blunt this. [23]\n\n**Taper:** When vasopressors discontinued, taper over 2-3 days (do not stop abruptly).',
-        citation: [2, 14, 15, 23],
+        body: '**For patients on vasopressors for septic shock:** [2][14][15]\n\n**[Hydrocortisone](#/drug/hydrocortisone/septic shock)** 50 mg IV q6h OR 200 mg/day continuous infusion [2]\n\n**Evidence:**\n• **ADRENAL trial** (n=3800): Steroids reduce time on vasopressors, ICU LOS, and duration of intubation. No increase in superinfection. [14]\n• **APROCCHSS trial** (n=1241): Hydrocortisone + [Fludrocortisone](#/drug/fludrocortisone/septic shock) 50 mcg PO daily × 7 days reduced 90-day mortality (43% vs 49.1%) [15]\n• Meta-analyses confirm: shorter shock duration, earlier vasopressor weaning. Mortality benefit debated but possible if started early in sickest patients. [14][15]\n\n**Risks:**\n• Hyperglycemia (monitor and treat)\n• Steroid myopathy risk in paralyzed patients\n• No increased superinfection risk (debunked by ADRENAL) [14]\n\n**Timing:** Consider early initiation — antibiotics can trigger Jarisch-Herxheimer reaction; front-loaded steroids may blunt this. [23]\n\n**Taper:** When vasopressors discontinued, taper over 2-3 days (do not stop abruptly).\n\n**Guideline currency:** SSC 2026 suggests IV corticosteroids for adults with septic shock. [26]',
+        citation: [2, 14, 15, 23, 26],
         summary: 'Hydrocortisone 50mg IV q6h for vasopressor-dependent shock — reduces shock duration; taper over 2-3 days when off pressors',
         treatment: {
             firstLine: {
@@ -562,7 +562,7 @@ export const SEPSIS_NODES = [
         body: '**ICU admission indicated for:** [24]\n• Vasopressor requirement\n• Mechanical ventilation\n• Multiple organ dysfunction\n• Lactate ≥4 mmol/L despite resuscitation\n• Escalating hemodynamic instability\n• Need for continuous renal replacement therapy\n• Anticipated source control requiring close monitoring\n\n**Risk factors for progression to shock** (consider ICU consultation): [24]\n• Intermittent hypotension\n• Lactate 2-4 mmol/L with incomplete clearance\n• Multiple organ involvement\n• Immunocompromised host',
         recommendation: 'Admit to ICU for vasopressor-dependent septic shock, mechanical ventilation, or multiorgan dysfunction. Low threshold for ICU consultation when risk factors for deterioration are present.',
         confidence: 'definitive',
-        citation: [24],
+        citation: [2, 24, 25, 26],
     },
     {
         id: 'sepsis-dispo-floor',
@@ -572,7 +572,7 @@ export const SEPSIS_NODES = [
         body: '**Floor admission appropriate when:**\n• Sepsis without shock\n• Responding to initial fluid resuscitation\n• No vasopressor requirement\n• Source identified and controlled (or being addressed)\n• Stable on oral or IV antibiotics\n• Lactate trending toward normal\n• Adequate mentation and organ function\n\n**Continue monitoring:**\n• Vital signs q4-6h\n• Daily labs (CBC, BMP, lactate if indicated)\n• Antibiotic de-escalation at 48-72h\n• Procalcitonin trending for pneumonia\n• Low threshold for ICU transfer if deterioration',
         recommendation: 'Admit to monitored floor bed for sepsis without shock that is responding to initial resuscitation. Continue antibiotics, monitor closely, and plan for de-escalation.',
         confidence: 'recommended',
-        citation: [2, 24],
+        citation: [2, 24, 25, 26],
     },
     {
         id: 'sepsis-dispo-obs',
@@ -582,7 +582,7 @@ export const SEPSIS_NODES = [
         body: '**ED observation may be appropriate for:**\n• Low-risk sepsis (e.g., young, no comorbidities, single organ involvement)\n• Rapid response to 1-2L IV fluids\n• Lactate normalizing (<2 mmol/L on repeat)\n• Source identified and treatable (e.g., uncomplicated pyelonephritis)\n• Reliable follow-up within 24-48 hours\n• Normal mentation\n• No vasopressor requirement at any point\n\n**Ensure before discharge:**\n• Source identified\n• Appropriate oral antibiotic prescribed\n• Return precautions reviewed\n• Close follow-up arranged',
         recommendation: 'Consider ED observation for low-risk sepsis with rapid response to resuscitation, normalizing lactate, and reliable follow-up.',
         confidence: 'recommended',
-        citation: [2],
+        citation: [2, 24, 25],
     },
     {
         id: 'sepsis-post-care',
@@ -633,7 +633,7 @@ export const SEPSIS_CITATIONS = [
     },
     {
         num: 3,
-        text: 'Meyer NJ, Prescott HC. Sepsis and Septic Shock. N Engl J Med. 2024;391(22):2133-2146.',
+        text: 'Meyer NJ, Prescott HC. Sepsis and Septic Shock. N Engl J Med. 2024;391(22):2133-2146. doi:10.1056/NEJMra2403213. PMID: 39774315.',
     },
     {
         num: 4,
@@ -689,7 +689,7 @@ export const SEPSIS_CITATIONS = [
     },
     {
         num: 17,
-        text: 'ANDROMEDA-SHOCK-2 Investigators, Hernandez G, et al. Personalized Hemodynamic Resuscitation Targeting Capillary Refill Time in Early Septic Shock. JAMA. 2025;334(22):1988-1999.',
+        text: 'Hernandez G, Ospina-Tascon GA, Kattan E, et al; ANDROMEDA-SHOCK-2 Investigators. Personalized Hemodynamic Resuscitation Targeting Capillary Refill Time in Early Septic Shock: The ANDROMEDA-SHOCK-2 Randomized Clinical Trial. JAMA. 2025;334(22):1988-1999. doi:10.1001/jama.2025.20402. PMID: 41159835.',
     },
     {
         num: 18,
@@ -705,7 +705,7 @@ export const SEPSIS_CITATIONS = [
     },
     {
         num: 21,
-        text: 'Ibarra-Estrada MA, Kattan E, Aguilera-Gonzalez P, et al. Early Adjunctive Methylene Blue in Patients with Septic Shock: A Randomized Controlled Trial. Crit Care. 2023;27(1):110.',
+        text: 'Ibarra-Estrada M, Kattan E, Aguilera-Gonzalez P, et al. Early Adjunctive Methylene Blue in Patients with Septic Shock: A Randomized Controlled Trial. Crit Care. 2023;27(1):110. doi:10.1186/s13054-023-04397-7. PMID: 36915146.',
     },
     {
         num: 22,
@@ -713,14 +713,42 @@ export const SEPSIS_CITATIONS = [
     },
     {
         num: 23,
-        text: 'Farkas J. Septic Shock. Internet Book of Critical Care (IBCC). EMCrit. Nov 2025.',
+        text: 'Farkas J. Septic Shock. Internet Book of Critical Care (IBCC). EMCrit. Updated Nov 2025. https://emcrit.org/ibcc/sepsis/',
     },
     {
         num: 24,
-        text: 'Schmidt GA, Mandel J, Bell TD. Evaluation and Management of Suspected Sepsis and Septic Shock in Adults. UpToDate. Jan 2026.',
+        text: 'Schmidt GA, Mandel J. Evaluation and Management of Suspected Sepsis and Septic Shock in Adults. In: Post TW, ed. UpToDate. Waltham, MA: UpToDate; accessed Jan 2026. https://www.uptodate.com/contents/evaluation-and-management-of-suspected-sepsis-and-septic-shock-in-adults',
     },
     {
         num: 25,
-        text: 'Hwang EHW, Hwang CW, Augustin B, Guirgis FW, Black LP. Updates and Controversies in the Early Management of Sepsis and Septic Shock. Emergency Medicine Practice (EB Medicine). Aug 2025.',
+        text: 'Hwang EHW, Hwang CW, Augustin B, Guirgis FW, Black LP. Updates and Controversies in the Early Management of Sepsis and Septic Shock. Emerg Med Pract. 2025;27(8):1-28. PMID: 40679861.',
+    },
+    {
+        num: 26,
+        text: 'Prescott HC, Antonelli M, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026. Crit Care Med. 2026;54(4):725-812. doi:10.1097/CCM.0000000000007075. Concurrently published: Intensive Care Med. 2026. doi:10.1007/s00134-026-08361-1.',
+    },
+    {
+        num: 27,
+        text: 'Semler MW, Self WH, Wanderer JP, et al; SMART Investigators and the Pragmatic Critical Care Research Group. Balanced Crystalloids versus Saline in Critically Ill Adults (SMART). N Engl J Med. 2018;378(9):829-839. doi:10.1056/NEJMoa1711584. PMID: 29485925.',
+    },
+    {
+        num: 28,
+        text: 'Finfer S, Bellomo R, Boyce N, et al; SAFE Study Investigators. A Comparison of Albumin and Saline for Fluid Resuscitation in the Intensive Care Unit (SAFE). N Engl J Med. 2004;350(22):2247-2256. doi:10.1056/NEJMoa040232. PMID: 15163774.',
+    },
+    {
+        num: 29,
+        text: 'Metlay JP, Waterer GW, Long AC, et al. Diagnosis and Treatment of Adults with Community-acquired Pneumonia. An Official Clinical Practice Guideline of the American Thoracic Society and Infectious Diseases Society of America. Am J Respir Crit Care Med. 2019;200(7):e45-e67. doi:10.1164/rccm.201908-1581ST. PMID: 31573350.',
+    },
+    {
+        num: 30,
+        text: 'Johnson S, Lavergne V, Skinner AM, et al. Clinical Practice Guideline by the Infectious Diseases Society of America (IDSA) and Society for Healthcare Epidemiology of America (SHEA): 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults. Clin Infect Dis. 2021;73(5):e1029-e1044. doi:10.1093/cid/ciab549.',
+    },
+    {
+        num: 31,
+        text: 'Rybak MJ, Le J, Lodise TP, et al. Therapeutic Monitoring of Vancomycin for Serious Methicillin-Resistant Staphylococcus aureus Infections: A Revised Consensus Guideline and Review by the American Society of Health-System Pharmacists, the Infectious Diseases Society of America, the Pediatric Infectious Diseases Society, and the Society of Infectious Diseases Pharmacists. Am J Health Syst Pharm. 2020;77(11):835-864. doi:10.1093/ajhp/zxaa036. PMID: 32191793.',
+    },
+    {
+        num: 32,
+        text: 'Weingart S. Push-Dose Pressors for Immediate Blood Pressure Control. Clin Exp Emerg Med. 2015;2(2):131-132. doi:10.15441/ceem.15.010. PMID: 27752585.',
     },
 ];

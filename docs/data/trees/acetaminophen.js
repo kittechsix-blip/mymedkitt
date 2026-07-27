@@ -81,8 +81,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'question',
         module: 2,
         title: 'Acute Ingestion — APAP Level & Timing',
-        body: '**Draw serum APAP level at 4 hours post-ingestion** (or immediately if >4 hours since ingestion). Plot on the Rumack-Matthew nomogram. [4][6]\n\n[Rumack-Matthew Nomogram Guide](#/info/apap-nomogram)\n\n**Treatment line:** 150 mcg/mL at 4h (US uses this line; original Rumack line was 200)\n**High-risk line:** 300 mcg/mL at 4h (indicates massive overdose)\n\nIf level drawn <4h: An undetectable concentration after >2h typically excludes significant ingestion, but repeat at ≥4h to confirm. [6]\n\n**Labs to order:** APAP level, AST/ALT, INR/PT, BMP (Cr, glucose, bicarb), lipase, bilirubin, CBC, salicylate level, lactate, VBG/ABG. [1]',
-        citation: [4, 6],
+        body: '**Draw serum APAP level at 4 hours post-ingestion** (or immediately if >4 hours since ingestion). Plot on the Rumack-Matthew nomogram. [4][6][18]\n\n[Rumack-Matthew Nomogram Guide](#/info/apap-nomogram)\n\n**Treatment line:** 150 mcg/mL at 4h (US uses this line; original Rumack line was 200) [4][18]\n**High-risk line:** 300 mcg/mL at 4h (indicates massive overdose)\n\nIf level drawn <4h: An undetectable concentration after >2h typically excludes significant ingestion, but repeat at ≥4h to confirm. [6]\n\n**Labs to order:** APAP level, AST/ALT, INR/PT, BMP (Cr, glucose, bicarb), lipase, bilirubin, CBC, salicylate level, lactate, VBG/ABG. [1]',
+        citation: [1, 4, 6, 18],
         calculatorLinks: [
             { id: 'rumack-matthew', label: 'Rumack-Matthew Nomogram' },
         ],
@@ -179,10 +179,10 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'result',
         module: 2,
         title: 'Chronic Ingestion — Low Risk',
-        body: '**Low risk of hepatotoxicity.**\n\nALT is normal, APAP is undetectable, and (ALT)(APAP) product <1,500.\n\n• Counsel on safe acetaminophen use: max 4g/day (2g/day with chronic alcohol use)\n• Avoid combining multiple APAP-containing products\n• If risk factors present (chronic alcohol, malnutrition), consider lower observation threshold\n• **Poison Control: 1-800-222-1222**\n\nConsult toxicology if any clinical uncertainty.',
+        body: '**Low risk of hepatotoxicity.**\n\nALT is normal, APAP is undetectable, and (ALT)(APAP) product <1,500. The <1,500 mcg/mL × IU/L cut-point derives from the paracetamol-aminotransferase product literature, not from the Rumack-Matthew nomogram. [6][17]\n\n• Counsel on safe acetaminophen use: max 4g/day (2g/day with chronic alcohol use)\n• Avoid combining multiple APAP-containing products\n• If risk factors present (chronic alcohol, malnutrition), consider lower observation threshold\n• **Poison Control: 1-800-222-1222**\n\nConsult toxicology if any clinical uncertainty.',
         recommendation: 'Low-risk chronic ingestion — consider discharge after counseling on safe APAP use',
         confidence: 'recommended',
-        citation: [6],
+        citation: [6, 17],
         summary: 'Low-risk chronic ingestion — normal ALT, undetectable APAP, (ALT)(APAP) <1500',
     },
     {
@@ -190,8 +190,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'question',
         module: 2,
         title: 'Below Treatment Line',
-        body: 'APAP level is **below the treatment line** on the Rumack-Matthew nomogram. Low risk of hepatotoxicity **if this is a reliable acute single ingestion**. [4][6]\n\n**However, consider:**\n• Extended-release or coingestant → serial levels needed (see above)\n• Risk factors (CYP2E1 inducers, alcoholism, malnutrition) → lower threshold to treat\n• Any doubt about history reliability → empiric NAC\n\nIf <4 hours since ingestion, GI decontamination with activated charcoal may still be beneficial.\n\n**If any doubt → give NAC.** It is extremely safe. [2]',
-        citation: [2, 4, 6],
+        body: 'APAP level is **below the treatment line** on the Rumack-Matthew nomogram. Low risk of hepatotoxicity **if this is a reliable acute single ingestion**. [4][6][18]\n\n**However, consider:**\n• Extended-release or coingestant → serial levels needed (see above)\n• Risk factors (CYP2E1 inducers, alcoholism, malnutrition) → lower threshold to treat\n• Any doubt about history reliability → empiric NAC\n\nIf <4 hours since ingestion, GI decontamination with activated charcoal may still be beneficial.\n\n**If any doubt → give NAC.** It is extremely safe. [2]',
+        citation: [2, 4, 6, 18],
         options: [
             {
                 label: 'Confident in Low Risk',
@@ -214,8 +214,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 3,
         title: 'GI Decontamination — Activated Charcoal',
-        body: '[Activated Charcoal](#/drug/activated-charcoal/acetaminophen toxicity) **1 g/kg PO (max 50g)**\n\n**Timing:** Within **4 hours** of ingestion (2023 US/Canada consensus extends traditional 1-2h window). [6]\n\n**Massive ingestion (>30g):** Consider activated charcoal even **>4 hours** post-ingestion — greatest benefit in massive poisoning where standard NAC may be inadequate. [9]\n\n**Extended-release formulations:** May benefit beyond 4h if evidence of ongoing absorption (rising APAP levels). [6]\n\n**Contraindications:**\n• Unprotected airway or altered mental status (aspiration risk)\n• Caustic coingestant\n• GI perforation or obstruction\n\n⚠️ **Do NOT delay NAC** for charcoal administration. Give charcoal and start NAC concurrently if indicated. [6]',
-        citation: [6, 9],
+        body: '[Activated Charcoal](#/drug/activated-charcoal/acetaminophen toxicity) **1 g/kg PO (max 50g)**\n\n**Timing:** Within **4 hours** of ingestion (2023 US/Canada consensus extends traditional 1-2h window). [6]\n\n**Massive ingestion (>30g):** Consider activated charcoal even **>4 hours** post-ingestion — greatest benefit in massive poisoning where standard NAC may be inadequate. [9]\n\n**Extended-release formulations:** May benefit beyond 4h if evidence of ongoing absorption (rising APAP levels). [6]\n\n**Contraindications:**\n• Unprotected airway or altered mental status (aspiration risk)\n• Caustic coingestant\n• GI perforation or obstruction\n\n⚠️ **Do NOT delay NAC** for charcoal administration. Give charcoal and start NAC concurrently if indicated. [6]\n\n**Evidence note:** A Cochrane review of paracetamol-overdose interventions found activated charcoal reduces absorption but is supported by limited-quality trial evidence; the 4-hour window reflects consensus rather than randomised outcome data. [21]',
+        citation: [6, 9, 21],
         treatment: {
             firstLine: {
                 drug: 'Activated Charcoal',
@@ -235,8 +235,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'question',
         module: 3,
         title: 'NAC — Route Selection',
-        body: '**N-Acetylcysteine (NAC)** is the definitive antidote. [2][3]\n\n[NAC Protocol Comparison](#/info/apap-nac-comparison)\n\n**Indications for NAC:**\n• APAP level above treatment line on nomogram\n• Time of ingestion unknown and APAP level detectable\n• Elevated transaminases with history of APAP ingestion\n• Ingestion >150 mg/kg and level won\'t be available within 8 hours\n• **Any doubt → give NAC** (minimal side effects, potentially life-saving) [6]\n\n**Pregnancy is NOT a contraindication** — NAC is safe and beneficial. Delayed treatment increases risk of miscarriage/fetal death. IV preferred in pregnancy. [10]\n\nSelect route:',
-        citation: [2, 3, 6, 10],
+        body: '**N-Acetylcysteine (NAC)** is the definitive antidote. [2][3]\n\n[NAC Protocol Comparison](#/info/apap-nac-comparison)\n\n**Indications for NAC:**\n• APAP level above treatment line on nomogram\n• Time of ingestion unknown and APAP level detectable\n• Elevated transaminases with history of APAP ingestion\n• Ingestion >150 mg/kg and level won\'t be available within 8 hours\n• **Any doubt → give NAC** (minimal side effects, potentially life-saving) [6]\n\n**Pregnancy is NOT a contraindication** — NAC is safe and beneficial. Delayed treatment increases risk of miscarriage/fetal death. IV preferred in pregnancy. [6][24]\n\nSelect route:',
+        citation: [2, 3, 6, 24],
         calculatorLinks: [
             { id: 'nac-dosing', label: 'NAC IV Dosing Calculator' },
         ],
@@ -264,8 +264,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 3,
         title: 'IV NAC — 21-Hour Protocol (Preferred)',
-        body: '[N-Acetylcysteine](#/drug/n-acetylcysteine/acetaminophen iv)\n\n**Standard 3-Bag IV Protocol:**\n\n**Bag 1 (Loading):** 150 mg/kg IV in 200 mL D5W over **60 minutes**\n**Bag 2:** 50 mg/kg IV in 500 mL D5W over **4 hours** (12.5 mg/kg/hr)\n**Bag 3:** 100 mg/kg IV in 1000 mL D5W over **16 hours** (6.25 mg/kg/hr)\n\n**Total: 300 mg/kg over 21 hours** [3][6]\n\n**Cap dose at 100 kg** for morbid obesity. [6]\n\n**Anaphylactoid reactions** (flushing, urticaria, bronchospasm) most common during Bag 1. These are histamine-mediated (NOT IgE allergy). Slow or pause infusion; treat with antihistamines. **Do NOT permanently stop NAC.** [11]\n\nNAC itself may cause mild INR prolongation — do not confuse with hepatic synthetic failure.',
-        citation: [3, 6, 11],
+        body: '[N-Acetylcysteine](#/drug/n-acetylcysteine/acetaminophen iv)\n\n**Standard 3-Bag IV Protocol:**\n\n**Bag 1 (Loading):** 150 mg/kg IV in 200 mL D5W over **60 minutes**\n**Bag 2:** 50 mg/kg IV in 500 mL D5W over **4 hours** (12.5 mg/kg/hr)\n**Bag 3:** 100 mg/kg IV in 1000 mL D5W over **16 hours** (6.25 mg/kg/hr)\n\n**Total: 300 mg/kg over 21 hours** [3][6][19]\n\n**Cap dose at 100 kg** for morbid obesity. [6]\n\n**Anaphylactoid reactions** (flushing, urticaria, bronchospasm) most common during Bag 1. These are histamine-mediated (NOT IgE allergy). Slow or pause infusion; treat with antihistamines. **Do NOT permanently stop NAC.** [11][20]\n\nExtending treatment beyond 21 hours by repeating Bag 3 when stopping criteria are not met is an explicit position of the American College of Medical Toxicology. [25]\n\nNAC itself may cause mild INR prolongation — do not confuse with hepatic synthetic failure.',
+        citation: [3, 6, 11, 19, 20, 25],
         treatment: {
             firstLine: {
                 drug: 'N-Acetylcysteine (NAC)',
@@ -285,8 +285,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 3,
         title: 'Oral NAC — 72-Hour Protocol',
-        body: '[N-Acetylcysteine](#/drug/n-acetylcysteine/acetaminophen oral)\n\n**Oral NAC Protocol:** [2]\n\n**Loading:** 140 mg/kg PO\n**Maintenance:** 70 mg/kg PO every 4 hours × 17 additional doses\n**Total: 1,330 mg/kg over 72 hours**\n\nMix with **cola or juice** to improve palatability (oral NAC has a terrible smell and taste).\nIf patient **vomits within 1 hour** of dose → repeat the dose.\nConsider [Ondansetron](#/drug/ondansetron/nausea) 30 minutes prior to reduce vomiting. [2]\n\n**Advantages:** No IV access needed, no anaphylactoid risk, higher hepatic first-pass delivery.\n**Disadvantages:** 72-hour duration, vomiting, low systemic bioavailability (4-10%). Activated charcoal may reduce oral NAC absorption — IV preferred when both are given.',
-        citation: [2],
+        body: '[N-Acetylcysteine](#/drug/n-acetylcysteine/acetaminophen oral)\n\n**Oral NAC Protocol:** [2]\n\n**Loading:** 140 mg/kg PO\n**Maintenance:** 70 mg/kg PO every 4 hours × 17 additional doses\n**Total: 1,330 mg/kg over 72 hours**\n\nMix with **cola or juice** to improve palatability (oral NAC has a terrible smell and taste).\nIf patient **vomits within 1 hour** of dose → repeat the dose.\nConsider [Ondansetron](#/drug/ondansetron/nausea) 30 minutes prior to reduce vomiting. [6]\n\n**Advantages:** No IV access needed, no anaphylactoid risk, higher hepatic first-pass delivery.\n**Disadvantages:** 72-hour duration, vomiting, low systemic bioavailability (4-10%). Activated charcoal may reduce oral NAC absorption — IV preferred when both are given. [6]\n\nA Cochrane systematic review found no clear difference in outcome between oral and intravenous acetylcysteine; route selection is driven by access, tolerance, and local protocol. [21]',
+        citation: [2, 6, 21],
         treatment: {
             firstLine: {
                 drug: 'N-Acetylcysteine (NAC)',
@@ -307,8 +307,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 3,
         title: 'Two-Bag Modified Prescott Protocol',
-        body: '**Simplified 2-bag regimen** (used in Australia/New Zealand): [7][13]\n\n**Bag 1:** 200 mg/kg IV in D5W over **4 hours**\n**Bag 2:** 100 mg/kg IV in D5W over **16 hours**\n**Total: 300 mg/kg over 20 hours**\n\n**Lower rate of anaphylactoid reactions** compared to the standard 3-bag protocol — the slower initial infusion rate reduces histamine release. [7]\n\nSame total dose as the standard protocol. To avoid dosing errors, use the protocol your pharmacy is familiar with.\n\n[NAC Protocol Comparison](#/info/apap-nac-comparison)',
-        citation: [7, 13],
+        body: '**Simplified 2-bag regimen** (used in Australia/New Zealand): [7][13][22]\n\n**Bag 1:** 200 mg/kg IV in D5W over **4 hours**\n**Bag 2:** 100 mg/kg IV in D5W over **16 hours**\n**Total: 300 mg/kg over 20 hours**\n\n**Lower rate of anaphylactoid reactions** compared to the standard 3-bag protocol — the slower initial infusion rate reduces histamine release. [7][22]\n\n**Evidence base:** Wong & Graudins found fewer adverse drug reactions after simplifying the 3-bag regimen [7]; the 2NAC study reported the same signal prospectively [22]; a systematic review of 2-bag regimens found consistently fewer adverse reactions with no evidence of reduced efficacy, though the underlying studies are observational [23].\n\nSame total dose as the standard protocol. To avoid dosing errors, use the protocol your pharmacy is familiar with.\n\n[NAC Protocol Comparison](#/info/apap-nac-comparison)',
+        citation: [7, 13, 22, 23],
         treatment: {
             firstLine: {
                 drug: 'N-Acetylcysteine (NAC)',
@@ -329,8 +329,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 3,
         title: 'Anaphylactoid Reaction Management',
-        body: '[NAC Anaphylactoid Reaction Management](#/info/apap-anaphylactoid)\n\n**NOT a true allergy** — histamine-mediated, not IgE. Usually within first 2 hours, almost always within 6 hours. In a study of **6,455 NAC treatment courses**, no deaths were attributed to anaphylactoid reactions. [11]\n\n**Graded response:**\n\n**Flushing only** → Continue NAC, monitor closely\n\n**Urticaria** → [Diphenhydramine](#/drug/diphenhydramine/angioedema) 1 mg/kg IV (max 50 mg). Consider steroid. **Continue NAC.**\n\n**Angioedema** → Diphenhydramine + steroid. **Hold NAC for 1 hour**, then resume at slower rate.\n\n**Respiratory symptoms or hypotension** → Diphenhydramine + steroid + [Epinephrine](#/drug/epinephrine/anaphylaxis) IM. Hold NAC for 1 hour, then resume.\n\n⚠️ **NEVER permanently discontinue NAC.** Liver failure from stopping NAC is far more dangerous than the anaphylactoid reaction. Previous reaction is NOT a contraindication to future use — can pre-treat with antihistamines. [11]',
-        citation: [11],
+        body: '[NAC Anaphylactoid Reaction Management](#/info/apap-anaphylactoid)\n\n**NOT a true allergy** — histamine-mediated, not IgE. Usually within first 2 hours, almost always within 6 hours. In a Canadian cohort of **6,455 NAC treatment courses**, an anaphylactoid reaction was documented in 528 (8.2%), 75.4% were purely cutaneous, and 95.4% occurred within the first 5 hours; no deaths were attributed to anaphylactoid reactions. [11]\n\n**Graded response** (Bailey & McGuigan severity-tiered approach): [20]\n\n**Flushing only** → Continue NAC, monitor closely\n\n**Urticaria** → [Diphenhydramine](#/drug/diphenhydramine/angioedema) 1 mg/kg IV (max 50 mg). Consider steroid. **Continue NAC.**\n\n**Angioedema** → Diphenhydramine + steroid. **Hold NAC for 1 hour**, then resume at slower rate.\n\n**Respiratory symptoms or hypotension** → Diphenhydramine + steroid + [Epinephrine](#/drug/epinephrine/anaphylaxis) IM. Hold NAC for 1 hour, then resume.\n\n⚠️ **NEVER permanently discontinue NAC.** Liver failure from stopping NAC is far more dangerous than the anaphylactoid reaction. Previous reaction is NOT a contraindication to future use — can pre-treat with antihistamines. [11][20]',
+        citation: [11, 20],
         treatment: {
             firstLine: {
                 drug: 'Diphenhydramine',
@@ -359,8 +359,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'question',
         module: 3,
         title: 'When to Stop NAC',
-        body: '**Continue NAC until ALL stopping criteria are met:** [6][13]\n\n✅ **1.** APAP level <10 mcg/mL (undetectable)\n✅ **2.** INR <2\n✅ **3.** AST/ALT meets ONE of:\n   • Normal\n   • At patient\'s baseline\n   • Decreased **>25-50% from peak** value\n✅ **4.** Clinically well\n\n**Note:** Small fluctuations in ALT (±20 IU/L or ±10%) are common and do not necessarily indicate ongoing injury, especially if the ALT level is low. [13]\n\nIf criteria are NOT met → continue NAC by **repeating the 3rd bag** (100 mg/kg over 16 hours) indefinitely.',
-        citation: [6, 13],
+        body: '**Continue NAC until ALL stopping criteria are met:** [6][13]\n\n✅ **1.** APAP level <10 mcg/mL (undetectable)\n✅ **2.** INR <2\n✅ **3.** AST/ALT meets ONE of:\n   • Normal\n   • At patient\'s baseline\n   • Decreased **>25-50% from peak** value\n✅ **4.** Clinically well\n\n**Note:** Small fluctuations in ALT (±20 IU/L or ±10%) are common and do not necessarily indicate ongoing injury, especially if the ALT level is low. [13]\n\nIf criteria are NOT met → continue NAC by **repeating the 3rd bag** (100 mg/kg over 16 hours) indefinitely. [6][25]',
+        citation: [6, 13, 25],
         options: [
             {
                 label: 'Criteria Met — Stop NAC',
@@ -441,8 +441,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 4,
         title: 'Fomepizole — CYP2E1 Inhibition',
-        body: '[Fomepizole](#/drug/fomepizole/massive acetaminophen)\n\n**Mechanism:** Inhibits CYP2E1 → **prevents conversion of acetaminophen to toxic NAPQI**. Complementary to NAC (which detoxifies NAPQI after it forms). [15]\n\n**Dosing:** 15 mg/kg IV over 30 minutes (loading) → 10 mg/kg IV q12h for 48 hours or until APAP level is undetectable. [15]\n\nFomepizole has shown benefit in animal models, primary human hepatocytes, and a human volunteer study (reduced toxic metabolite generation). [15]\n\n**Generally safe.** Main drawback is cost. Headache, nausea, dizziness are common but mild. Transient transaminase elevation in ~20%.\n\n**Indications:** Established high-risk/massive acetaminophen ingestion. Use alongside high-dose NAC. [14][15]\n\nConsult toxicology/poison control for all massive ingestions.',
-        citation: [14, 15],
+        body: '[Fomepizole](#/drug/fomepizole/massive acetaminophen)\n\n**Mechanism:** Inhibits CYP2E1 → **prevents conversion of acetaminophen to toxic NAPQI**. Complementary to NAC (which detoxifies NAPQI after it forms). [15]\n\n**Dosing:** 15 mg/kg IV over 30 minutes (loading) → 10 mg/kg IV q12h for 48 hours or until APAP level is undetectable. [6][15]\n\n⚠️ **Basis disclosure:** Fomepizole is **off-label** for acetaminophen poisoning. There is no randomised outcome trial. The dosing above is extrapolated from the FDA-approved toxic-alcohol regimen and is addressed as an adjunct in the 2023 US/Canada consensus statement. [6][14]\n\nFomepizole has shown benefit in animal models, primary human hepatocytes, and a human volunteer study (reduced toxic metabolite generation). [15]\n\n**Generally safe.** Main drawback is cost. Headache, nausea, dizziness are common but mild. Transient transaminase elevation in ~20%.\n\n**Indications:** Established high-risk/massive acetaminophen ingestion. Use alongside high-dose NAC. [14][15]\n\nConsult toxicology/poison control for all massive ingestions.',
+        citation: [6, 14, 15],
         treatment: {
             firstLine: {
                 drug: 'Fomepizole',
@@ -461,7 +461,7 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 4,
         title: 'Hemodialysis — EXTRIP Guidelines',
-        body: 'Hemodialysis removes both **APAP and toxic NAPQI metabolites**. May be beneficial in massive poisoning where NAC alone is inadequate. [9]\n\n**EXTRIP indications for extracorporeal treatment:** [9]\n• APAP level **>900 mcg/mL**\n• Altered mental status + lactate >3 + **pH <7.1**\n• Clinical deterioration despite adequate NAC\n• Mitochondrial dysfunction (early lactic acidosis, altered consciousness)\n\n⚠️ **Hemodialysis is NOT a substitute for NAC.** Patients on dialysis require **HIGHER NAC doses** because HD removes ~50% of NAC. Minimum 12.5 mg/kg/hr during intermittent HD. [6][9]\n\n**Coordinate with nephrology early** for massive ingestions. Continuous renal replacement therapy (CRRT) is an alternative if hemodynamically unstable.',
+        body: 'Hemodialysis removes both **APAP and toxic NAPQI metabolites**. May be beneficial in massive poisoning where NAC alone is inadequate. [9]\n\n**EXTRIP indications for extracorporeal treatment:** [9]\n• APAP level **>900 mcg/mL**\n• Altered mental status + lactate >3 + **pH <7.1**\n• Clinical deterioration despite adequate NAC\n• Mitochondrial dysfunction (early lactic acidosis, altered consciousness)\n\n⚠️ **Hemodialysis is NOT a substitute for NAC.** Patients on dialysis require **HIGHER NAC doses** because HD removes ~50% of NAC. Minimum 12.5 mg/kg/hr during intermittent HD. [6][9]\n\n**Coordinate with nephrology early** for massive ingestions. Continuous renal replacement therapy (CRRT) is an alternative if hemodynamically unstable.\n\n⚠️ **Basis disclosure — read the source before acting.** EXTRIP states these as *conditional* recommendations, all graded **1D (very low quality evidence)**, derived from 24 articles (1 RCT, 1 observational study, 2 PK studies, 20 case reports/series). EXTRIP\'s concentration thresholds are explicitly conditioned on whether NAC has been given and on the presence of mitochondrial dysfunction: >1000 mg/L if NAC not administered; >700 mg/L with signs of mitochondrial dysfunction if NAC not administered; >900 mg/L with signs of mitochondrial dysfunction if NAC is administered. Intermittent hemodialysis is the preferred modality. Confirm the applicable threshold against citation 9 and discuss with toxicology/poison control before initiating ECTR. [9]',
         citation: [6, 9],
         next: 'apap-hepatic-failure',
     },
@@ -473,8 +473,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 5,
         title: 'Established Hepatic Failure — Management',
-        body: '[Four Stages of Acetaminophen Toxicity](#/info/apap-stages)\n\n[N-Acetylcysteine](#/drug/n-acetylcysteine/hepatic failure)\n\n**Continue IV NAC indefinitely** — repeat Bag 3 (100 mg/kg over 16 hours) until the patient recovers or dies. [5][10]\n\nNAC provides benefit **even in established hepatic failure** — proven **28% mortality benefit** in an RCT of patients with acetaminophen-induced fulminant hepatic failure (Keays 1991). [10]\n\n⚠️ **Do NOT allow the NAC infusion to stop** until the liver is clearly improving AND the APAP level is zero.\n\n**Assess for transplant referral immediately:**',
-        citation: [5, 10],
+        body: '[Four Stages of Acetaminophen Toxicity](#/info/apap-stages)\n\n[N-Acetylcysteine](#/drug/n-acetylcysteine/hepatic failure)\n\n**Continue IV NAC indefinitely** — repeat Bag 3 (100 mg/kg over 16 hours) until the patient recovers or dies. [5][10]\n\nNAC provides benefit **even in established hepatic failure** — proven **28% mortality benefit** in an RCT of patients with acetaminophen-induced fulminant hepatic failure (Keays 1991). [10]\n\n*Source detail:* Keays randomised 50 patients with paracetamol-induced fulminant hepatic failure. Survival was 48% (12/25) with acetylcysteine versus 20% (5/25) with 5% dextrose (p = 0.037; 95% CI for the difference 3% to 53%) — a 28-percentage-point absolute survival difference. The acetylcysteine arm also had less cerebral oedema (40% vs 68%) and less inotrope-requiring hypotension (48% vs 80%). The infusion was continued until recovery from encephalopathy or death. [10][25]\n\n⚠️ **Do NOT allow the NAC infusion to stop** until the liver is clearly improving AND the APAP level is zero.\n\n**Assess for transplant referral immediately:**',
+        citation: [5, 10, 25],
         calculatorLinks: [
             { id: 'kings-college', label: "King's College Criteria" },
         ],
@@ -485,8 +485,8 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'info',
         module: 5,
         title: "King's College Criteria — Transplant Referral",
-        body: "**APAP-induced acute liver failure — transplant referral criteria:** [5]\n\n**pH <7.30** after adequate fluid resuscitation (regardless of encephalopathy grade) — **alone is sufficient**\n\n**OR all three:**\n• INR **>6.5** (PT >100 sec)\n• Creatinine **>3.4 mg/dL**\n• Grade **III-IV** hepatic encephalopathy\n\n**Additional poor prognostic markers:**\n• Lactate >3.5 mmol/L after resuscitation\n• Phosphate >3.75 mg/dL at 48-96 hours\n\n**Contact transplant center EARLY** — do not wait for full criteria to be met. Patients with severe liver injury (encephalopathy, pH <7.3, INR >3, renal failure) should be discussed with a transplant team. [5]\n\nPatients with acute hepatic failure **CAN be transplant candidates** even after recent suicidal ingestion.",
-        citation: [5],
+        body: "**APAP-induced acute liver failure — transplant referral criteria:** [5]\n\n**pH <7.30** after adequate fluid resuscitation (regardless of encephalopathy grade) — **alone is sufficient**\n\n**OR all three:**\n• INR **>6.5** (PT >100 sec)\n• Creatinine **>3.4 mg/dL**\n• Grade **III-IV** hepatic encephalopathy\n\n**Additional poor prognostic markers** (not part of the original O'Grady criteria — later additions): [12]\n• Lactate >3.5 mmol/L after resuscitation\n• Phosphate >3.75 mg/dL at 48-96 hours\n\n**Contact transplant center EARLY** — do not wait for full criteria to be met. Patients with severe liver injury (encephalopathy, pH <7.3, INR >3, renal failure) should be discussed with a transplant team. [5]\n\nPatients with acute hepatic failure **CAN be transplant candidates** even after recent suicidal ingestion.",
+        citation: [5, 12],
         calculatorLinks: [
             { id: 'kings-college', label: "King's College Criteria" },
         ],
@@ -547,10 +547,10 @@ export const ACETAMINOPHEN_OD_NODES = [
         type: 'result',
         module: 6,
         title: 'Discharge Criteria',
-        body: '**Safe to discharge if ALL of the following are met:** [1][6]\n\n✅ APAP level below treatment line at ≥4 hours post-ingestion\n✅ Normal AST/ALT\n✅ Normal INR\n✅ Normal creatinine\n✅ 4-6 hour observation complete\n✅ Asymptomatic\n\n⚠️ **Psychiatric evaluation is MANDATORY for ALL intentional ingestions** before discharge. [1]\n\n**Discharge counseling:**\n• Safe acetaminophen use: max 4g/day (2g/day with chronic alcohol use or liver disease)\n• Avoid combining multiple APAP-containing products\n• Read labels — APAP is in >600 products\n• Return for: RUQ pain, nausea/vomiting, jaundice, dark urine, confusion\n\n**Poison Control: 1-800-222-1222**',
+        body: '**Safe to discharge if ALL of the following are met:** [1][6]\n\n✅ APAP level below treatment line at ≥4 hours post-ingestion [18]\n✅ Normal AST/ALT\n✅ Normal INR\n✅ Normal creatinine\n✅ 4-6 hour observation complete\n✅ Asymptomatic\n\n⚠️ **Psychiatric evaluation is MANDATORY for ALL intentional ingestions** before discharge. [1]\n\n**Discharge counseling:**\n• Safe acetaminophen use: max 4g/day (2g/day with chronic alcohol use or liver disease)\n• Avoid combining multiple APAP-containing products\n• Read labels — APAP is in >600 products\n• Return for: RUQ pain, nausea/vomiting, jaundice, dark urine, confusion\n\n**Poison Control: 1-800-222-1222**',
         recommendation: 'Discharge after observation if all labs normal, asymptomatic, and psychiatric clearance obtained for intentional ingestions.',
         confidence: 'definitive',
-        citation: [1, 6],
+        citation: [1, 6, 18],
     },
 ];
 export const ACETAMINOPHEN_OD_NODE_COUNT = ACETAMINOPHEN_OD_NODES.length;
@@ -563,7 +563,7 @@ export const ACETAMINOPHEN_OD_MODULE_LABELS = [
     'Disposition',
 ];
 export const ACETAMINOPHEN_OD_CRITICAL_ACTIONS = [
-    { text: 'N-acetylcysteine (NAC) within 8 hours for APAP level >150 mcg/mL at 4h (nearly 100% effective)', nodeId: 'apap-nac-iv' },
+    { text: 'N-acetylcysteine (NAC) within 8 hours for APAP level >150 mcg/mL at 4h (nearly 100% effective)', nodeId: 'apap-above-line' },
     { text: 'Activated charcoal 1 g/kg PO (max 50 g) if <4 hours since ingestion', nodeId: 'apap-gi-decon' },
     { text: 'NAC IV protocol: Bag 1: 150 mg/kg over 1h, Bag 2: 50 mg/kg over 4h, Bag 3: 100 mg/kg over 16h', nodeId: 'apap-nac-iv' },
     { text: 'Check APAP level at 4 hours post-ingestion and plot on Rumack-Matthew nomogram', nodeId: 'apap-acute-strat' },
@@ -580,15 +580,23 @@ export const ACETAMINOPHEN_OD_CITATIONS = [
     { num: 4, text: 'Rumack BH. Acetaminophen hepatotoxicity: the first 35 years. J Toxicol Clin Toxicol. 2002;40(1):3-20. PMID 11990202' },
     { num: 5, text: "O'Grady JG, et al. Early indicators of prognosis in fulminant hepatic failure. Gastroenterology. 1989;97(2):439-445. PMID 2490426" },
     { num: 6, text: 'Dart RC, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023;6(8):e2327739. PMID 37552484' },
-    { num: 7, text: 'Wong A, et al. Comparison of two- versus three-bag IV acetylcysteine protocols. Clin Toxicol. 2013;51(7):676-679.' },
+    { num: 7, text: 'Wong A, Graudins A. Simplification of the standard three-bag intravenous acetylcysteine regimen for paracetamol poisoning results in a lower incidence of adverse drug reactions. Clin Toxicol (Phila). 2016;54(2):115-119. PMID 26594846' },
     { num: 8, text: 'Hendrickson RG. What is the most appropriate dose of N-acetylcysteine after massive acetaminophen overdose? Clin Toxicol. 2019;57(8):686-691. PMID 30777470' },
     { num: 9, text: 'Gosselin S, et al. Extracorporeal treatment for acetaminophen poisoning: recommendations from the EXTRIP workgroup. Clin Toxicol. 2014;52(8):856-867. PMID 25133498' },
     { num: 10, text: 'Keays R, et al. Intravenous acetylcysteine in paracetamol induced fulminant hepatic failure: a prospective controlled trial. BMJ. 1991;303(6809):1026-1029. PMID 1954453' },
     { num: 11, text: 'Yarema M, et al. Anaphylactoid Reactions to Intravenous N-Acetylcysteine during Treatment for Acetaminophen Poisoning. J Med Toxicol. 2018;14(2):120-127. PMID 29423816' },
-    { num: 12, text: 'Bunchorntavakul C, Reddy KR. Acetaminophen and Acute Liver Failure. Clin Liver Dis. 2018;22(2):325-346. PMID 29605069' },
+    { num: 12, text: 'Bunchorntavakul C, Reddy KR. Acetaminophen (APAP or N-Acetyl-p-Aminophenol) and Acute Liver Failure. Clin Liver Dis. 2018;22(2):325-346. PMID 29605069' },
     { num: 13, text: 'Chiew AL, et al. Updated guidelines for the management of paracetamol poisoning in Australia and New Zealand. Med J Aust. 2020;212(4):175-183. PMID 31786822' },
     { num: 14, text: 'Chiew AL, Buckley NA. Acetaminophen Poisoning. Crit Care Clin. 2021;37(3):543-561. PMID 34053705' },
     { num: 15, text: 'Kang AM, et al. The effect of 4-methylpyrazole on oxidative metabolism of acetaminophen in human volunteers. J Med Toxicol. 2020;16(2):169-176. PMID 31768936' },
     { num: 16, text: 'Fisher ES, Curry SC. Evaluation and treatment of acetaminophen toxicity. Adv Pharmacol. 2019;85:263-272. PMID 31307590' },
     { num: 17, text: 'Chidiac AS, et al. Paracetamol (acetaminophen) overdose and hepatotoxicity: mechanism, treatment, prevention measures, and estimates of burden of disease. Expert Opin Drug Metab Toxicol. 2023;19(5):297-317. PMID 37436926' },
+    { num: 18, text: 'Rumack BH, Matthew H. Acetaminophen poisoning and toxicity. Pediatrics. 1975;55(6):871-876. PMID 1134886' },
+    { num: 19, text: 'Prescott LF, Park J, Ballantyne A, Adriaenssens P, Proudfoot AT. Treatment of paracetamol (acetaminophen) poisoning with N-acetylcysteine. Lancet. 1977;2(8035):432-434. PMID 70646' },
+    { num: 20, text: 'Bailey B, McGuigan MA. Management of anaphylactoid reactions to intravenous N-acetylcysteine. Ann Emerg Med. 1998;31(6):710-715. PMID 9624310' },
+    { num: 21, text: 'Chiew AL, Gluud C, Brok J, Buckley NA. Interventions for paracetamol (acetaminophen) overdose. Cochrane Database Syst Rev. 2018;2(2):CD003328. PMID 29473717' },
+    { num: 22, text: 'Wong A, Isbister G, McNulty R, et al. Efficacy of a two bag acetylcysteine regimen to treat paracetamol overdose (2NAC study). EClinicalMedicine. 2020;20:100288. PMID 32211597' },
+    { num: 23, text: 'Cole JB, Oakland CL, Lee SC, et al. Is Two Better Than Three? A Systematic Review of Two-bag Intravenous N-acetylcysteine Regimens for Acetaminophen Poisoning. West J Emerg Med. 2023;24(6):1131-1145. PMID 38165196' },
+    { num: 24, text: 'Riggs BS, Bronstein AC, Kulig K, Hebert PR, Rumack BH. Acute acetaminophen overdose during pregnancy. Obstet Gynecol. 1989;74(2):247-253. PMID 2748061' },
+    { num: 25, text: 'American College of Medical Toxicology. ACMT Position Statement: Duration of Intravenous Acetylcysteine Therapy Following Acetaminophen Overdose. J Med Toxicol. 2017;13(1):126-127. PMID 26957510' },
 ];
