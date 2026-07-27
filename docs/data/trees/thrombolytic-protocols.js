@@ -165,7 +165,7 @@ export const THROMBOLYTIC_PROTOCOLS_NODES = [
 ];
 export const THROMBOLYTIC_PROTOCOLS_MODULE_LABELS = ['Screen', 'Stroke/STEMI', 'PE', 'Bleeding'];
 export const THROMBOLYTIC_PROTOCOLS_CITATIONS = [
-    { num: 1, text: 'Powers WJ, et al. 2019 Update to 2018 AHA/ASA Guidelines for Early Management of Acute Ischemic Stroke. Stroke. 2019;50:e344-e418.' },
+    { num: 1, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press]. doi:10.1161/STR.0000000000000513' },
     { num: 2, text: 'O\'Gara PT, et al. 2013 ACCF/AHA Guideline for STEMI. Circulation. 2013;127:e362-e425.' },
     { num: 3, text: 'Konstantinides SV, et al. 2019 ESC Guidelines for Diagnosis and Management of Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603.' },
     { num: 4, text: 'EMCrit/IBCC. Pulmonary embolism, thrombolysis, and anticoagulant reversal chapters. Accessed 2026.' },

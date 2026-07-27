@@ -591,7 +591,7 @@ export const STROKE_MODULE_LABELS = [
 // -------------------------------------------------------------------
 
 export const STROKE_CITATIONS: Citation[] = [
-  { num: 1, text: 'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.' },
+  { num: 1, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press]. doi:10.1161/STR.0000000000000513' },
   { num: 2, text: 'Mendelson SJ, Prabhakaran S. Diagnosis and Management of TIA and Acute Ischemic Stroke: A Review. JAMA. 2021;325(11):1088-1098.' },
   { num: 3, text: 'Johnston SC, et al. Clopidogrel and Aspirin in Acute Ischemic Stroke and High-Risk TIA (POINT). N Engl J Med. 2018;379(3):215-225.' },
   { num: 4, text: 'Menon BK, et al. Intravenous tenecteplase compared with alteplase for acute ischaemic stroke in Canada (AcT): a pragmatic, multicentre, open-label, registry-linked, randomised, controlled, non-inferiority trial. Lancet. 2022;400(10347):161-169.' },
@@ -603,7 +603,7 @@ export const STROKE_CITATIONS: Citation[] = [
   { num: 10, text: 'Johnston SC, et al. Ticagrelor and Aspirin or Aspirin Alone in Acute Ischemic Stroke or TIA (THALES). N Engl J Med. 2020;383(3):207-217.' },
   { num: 11, text: 'Kleindorfer DO, et al. 2021 Guideline for the Prevention of Stroke in Patients with Stroke and TIA. Stroke. 2021;52(7):e364-e467.' },
   { num: 12, text: 'Wang Y, et al. Ticagrelor versus Clopidogrel in CYP2C19 Loss-of-Function Carriers with Stroke or TIA (CHANCE-2). N Engl J Med. 2021;385(27):2520-2530.' },
-  { num: 13, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press].' },
+  { num: 13, text: 'Powers WJ, Rabinstein AA, Ackerson T, et al. Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418. [Superseded by the 2026 AHA/ASA guideline (reference 1); retained for historical context.]' },
   { num: 14, text: 'Xiong Y, Campbell BCV, Schwamm LH, et al. Tenecteplase for Ischemic Stroke at 4.5 to 24 Hours without Thrombectomy (TRACE-III). N Engl J Med. 2024;391(3):203-212.' },
   { num: 15, text: 'Sarraj A, et al. Trial of Endovascular Thrombectomy for Large Ischemic Strokes (SELECT2). N Engl J Med. 2023;388(14):1259-1271.' },
 ];

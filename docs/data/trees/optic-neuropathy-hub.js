@@ -294,7 +294,7 @@ export const OPTIC_NEUROPATHY_HUB_CITATIONS = [
     { num: 13, text: 'Beck RW, Cleary PA, Anderson MM Jr, et al. Optic Neuritis Treatment Trial (ONTT). N Engl J Med. 1992;326(9):581-588.' },
     { num: 14, text: 'Toosy AT, Mason DF, Miller DH. Optic neuritis. Lancet Neurol. 2014;13(1):83-99.' },
     { num: 15, text: 'Fugate JE, Rabinstein AA. Posterior reversible encephalopathy syndrome (PRES). Lancet Neurol. 2015;14(9):914-925.' },
-    { num: 16, text: 'Powers WJ, Rabinstein AA, Ackerson T, et al. 2019 AHA/ASA Update to the Guidelines for Early Management of Acute Ischemic Stroke. Stroke. 2019;50:e344-e418.' },
+    { num: 16, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press]. doi:10.1161/STR.0000000000000513' },
     { num: 17, text: 'Wall M, McDermott MP, Kieburtz KD, et al. Idiopathic Intracranial Hypertension Treatment Trial (IIHTT). JAMA. 2014;311(16):1641-1651.' },
     { num: 18, text: 'Mollan SP, Davies B, Silver NC, et al. Idiopathic intracranial hypertension: consensus guidelines on management. J Neurol Neurosurg Psychiatry. 2018;89(10):1088-1100.' },
     { num: 19, text: 'Mac Grory B, Schrag M, Biousse V, et al. Management of central retinal artery occlusion: scientific statement from the AHA. Stroke. 2021;52(6):e282-e294.' },

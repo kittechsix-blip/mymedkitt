@@ -421,7 +421,7 @@ export const NONSPECIFIC_UNWELL_ELDERLY_HUB_CITATIONS: Citation[] = [
   { num: 2, text: 'Rosen T, Connors S, Clark S, et al. Assessment and Management of the Geriatric Patient in the Emergency Department. Emerg Med Clin North Am. 2016;34(3):499-522.' },
   { num: 3, text: 'Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021. Crit Care Med. 2021;49(11):e1063-e1143.' },
   { num: 4, text: 'Amsterdam EA, Wenger NK, Brindis RG, et al. 2014 AHA/ACC Guideline for the Management of Patients With Non-ST-Elevation Acute Coronary Syndromes. Circulation. 2014;130(25):e344-e426.' },
-  { num: 5, text: 'Powers WJ, Rabinstein AA, Ackerson T, et al. Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.' },
+  { num: 5, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press]. doi:10.1161/STR.0000000000000513' },
   { num: 6, text: 'American Geriatrics Society. Clinical Practice Guideline for Postoperative Delirium in Older Adults. J Am Geriatr Soc. 2015;63(1):142-150.' },
   { num: 7, text: 'Spasovski G, Vanholder R, Allolio B, et al. Clinical practice guideline on diagnosis and treatment of hyponatraemia. Eur J Endocrinol. 2014;170(3):G1-G47.' },
   { num: 8, text: 'American College of Surgeons Committee on Trauma. ACS TQIP Geriatric Trauma Management Guidelines. 2015.' },

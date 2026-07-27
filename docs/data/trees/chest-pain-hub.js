@@ -81,7 +81,7 @@ export const CHEST_PAIN_HUB_NODES = [
         title: 'STEMI / OMI - Activate + Treat',
         body: 'Open [STEMI Management](#/tree/stemi).\n\n**Next 5 minutes:** cath activation for STEMI or OMI-equivalent pattern; aspirin if not given; heparin and P2Y12 per local protocol; defib pads; treat ventricular dysrhythmia or cardiogenic shock in parallel.\n\n**Do not miss:** posterior MI (posterior leads), right-sided/RV MI (avoid nitrate-induced crash), de Winter, hyperacute T waves, new LBBB with a convincing ischemic story.',
         recommendation: 'Activate cath workflow when STEMI/OMI criteria are met or strongly suspected.',
-        citation: [1, 2],
+        citation: [1, 2, 18],
         safetyLevel: 'critical',
         confidence: 'definitive',
     },
@@ -92,7 +92,7 @@ export const CHEST_PAIN_HUB_NODES = [
         title: 'NSTE-ACS / High-Risk Ischemia - Treat',
         body: 'Open [NSTEMI Management](#/tree/nstemi) or [Wellens Syndrome](#/tree/wellens-syndrome).\n\n**Next 5 minutes:** repeat ECG during pain, high-sensitivity troponin pathway, aspirin, anticoagulation if ACS remains likely and dissection is not suspected, pain control, cardiology for dynamic ECG or high-risk story. Consider **TIMI** (toolbar) to time the invasive strategy.\n\n**Pitfall:** Wellens with pain resolved is NOT reassuring. Do not stress test; it needs urgent cardiology/cath planning.',
         recommendation: 'Serial ECG/troponin + ACS therapy; early invasive for high-risk/dynamic features.',
-        citation: [1, 2],
+        citation: [1, 2, 18],
         safetyLevel: 'critical',
         confidence: 'recommended',
     },
@@ -424,4 +424,5 @@ export const CHEST_PAIN_HUB_CITATIONS = [
     { num: 15, text: 'Brinster CJ, Singhal S, Lee L, et al. Evolving options in the management of esophageal perforation. Ann Thorac Surg. 2004;77(4):1475-1483. doi:10.1016/j.athoracsur.2003.08.037' },
     { num: 16, text: 'Roberts ME, Rahman NM, Maskell NA, et al; BTS Pleural Guideline Development Group. British Thoracic Society Guideline for pleural disease. Thorax. 2023;78(Suppl 3):s1-s42. doi:10.1136/thorax-2022-219784' },
     { num: 17, text: 'Lichtenstein D, Meziere G, Biderman P, Gepner A. The "lung point": an ultrasound sign specific to pneumothorax. Intensive Care Med. 2000;26(10):1434-1440. doi:10.1007/s001340000627' },
+    { num: 18, text: 'Rao SV, O\'Donoghue ML, Ruel M, et al. 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes. Circulation. 2025;151(13):e771-e862. doi:10.1161/CIR.0000000000001309' },
 ];

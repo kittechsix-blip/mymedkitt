@@ -217,7 +217,7 @@ export const GENERALIZED_WEAKNESS_HUB_CITATIONS: Citation[] = [
   { num: 1, text: 'EMCrit/IBCC. Approach to altered mental status, shock, electrolyte emergencies, and toxicologic physiology. https://emcrit.org/ibcc/' },
   { num: 2, text: 'Narayanaswami P, et al. Muscle Weakness in Adults: Evaluation and Differential Diagnosis. Am Fam Physician. 2020;101(2):95-108.' },
   { num: 3, text: 'Saguil A. Evaluation of the Patient with Muscle Weakness. Am Fam Physician. 2005;71(7):1327-1336.' },
-  { num: 4, text: 'Powers WJ, Rabinstein AA, Ackerson T, et al. 2019 AHA/ASA update to guidelines for early management of acute ischemic stroke. Stroke. 2019;50:e344-e418.' },
+  { num: 4, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press]. doi:10.1161/STR.0000000000000513' },
   { num: 5, text: 'Greenberg SM, Ziai WC, Cordonnier C, et al. 2022 AHA/ASA guideline for spontaneous intracerebral hemorrhage. Stroke. 2022;53:e282-e361.' },
   { num: 6, text: 'Nelson LS, Howland MA, Lewin NA, et al. Goldfrank\'s Toxicologic Emergencies. 12th ed. McGraw Hill; 2023.' },
   { num: 7, text: 'Surviving Sepsis Campaign. International guidelines for management of sepsis and septic shock. Intensive Care Med. 2021;47:1181-1247.' },

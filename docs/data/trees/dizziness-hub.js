@@ -234,7 +234,7 @@ export const DIZZINESS_HUB_CITATIONS = [
     { num: 2, text: 'Newman-Toker DE, Edlow JA. TiTrATE: A Novel Approach to Diagnosing Acute Dizziness and Vertigo. Neurol Clin. 2015;33(3):577-599. https://pmc.ncbi.nlm.nih.gov/articles/PMC4522574/' },
     { num: 3, text: 'Kattah JC, Talkad AV, Wang DZ, Hsieh YH, Newman-Toker DE. HINTS to diagnose stroke in acute vestibular syndrome. Stroke. 2009;40(11):3504-3510. PMID: 19762709.' },
     { num: 4, text: 'Bhattacharyya N, Gubbels SP, Schwartz SR, et al. Clinical Practice Guideline: Benign Paroxysmal Positional Vertigo (Update). Otolaryngol Head Neck Surg. 2017;156(3_suppl):S1-S47. PMID: 28248609.' },
-    { num: 5, text: 'Powers WJ, Rabinstein AA, Ackerson T, et al. 2019 AHA/ASA update to guidelines for early management of acute ischemic stroke. Stroke. 2019;50:e344-e418. PMID: 31662037.' },
+    { num: 5, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press]. doi:10.1161/STR.0000000000000513' },
     { num: 6, text: 'Shen WK, Sheldon RS, Benditt DG, et al. 2017 ACC/AHA/HRS guideline for evaluation and management of patients with syncope. J Am Coll Cardiol. 2017;70:e39-e110. PMID: 28286221.' },
     { num: 7, text: 'American Diabetes Association Professional Practice Committee. Glycemic Goals, Hypoglycemia, and Hyperglycemic Crises: Standards of Care in Diabetes - 2026. Diabetes Care. 2026;49(Suppl 1):S132-S149.' },
     { num: 8, text: 'Nelson LS, Howland MA, Lewin NA, et al. Goldfrank\'s Toxicologic Emergencies. 12th ed. McGraw Hill; 2023.' },
