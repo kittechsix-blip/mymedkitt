@@ -125,8 +125,13 @@ export function showShareModal(): void {
 
   function closeModal(): void {
     document.removeEventListener('keydown', onKey);
+    window.removeEventListener('hashchange', closeModal);
     overlay.remove();
   }
+
+  // Close on any navigation — the overlay is on document.body, outside the routed
+  // view, so it would otherwise persist over the next screen (FlowRider 2026-07-28).
+  window.addEventListener('hashchange', closeModal);
 
   document.body.appendChild(overlay);
 }

@@ -117,7 +117,13 @@ export function renderDrugList(container) {
 // -------------------------------------------------------------------
 let overlayEl = null;
 function destroyOverlay() {
-    overlayEl?.remove();
+    if (overlayEl) {
+        const navHandler = overlayEl._navHandler;
+        if (navHandler) {
+            window.removeEventListener('hashchange', navHandler);
+        }
+        overlayEl.remove();
+    }
     overlayEl = null;
 }
 /** Show a drug detail modal. Optional indicationHint scrolls to a matching dosing card. */
@@ -135,6 +141,12 @@ export function showDrugModal(drugId, indicationHint) {
         if (e.target === overlayEl)
             destroyOverlay();
     });
+    // Close on any navigation. The overlay lives on document.body, outside the routed
+    // view, so without this it survives every route change until the user taps the X
+    // (FlowRider 2026-07-28).
+    const navHandler = () => destroyOverlay();
+    window.addEventListener('hashchange', navHandler);
+    overlayEl._navHandler = navHandler;
     // Panel
     const panel = document.createElement('div');
     panel.className = 'modal-content info-modal-panel';

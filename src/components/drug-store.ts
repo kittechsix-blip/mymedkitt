@@ -163,7 +163,13 @@ export function renderDrugList(container: HTMLElement): void {
 let overlayEl: HTMLElement | null = null;
 
 function destroyOverlay(): void {
-  overlayEl?.remove();
+  if (overlayEl) {
+    const navHandler = (overlayEl as unknown as { _navHandler?: () => void })._navHandler;
+    if (navHandler) {
+      window.removeEventListener('hashchange', navHandler);
+    }
+    overlayEl.remove();
+  }
   overlayEl = null;
 }
 
@@ -183,6 +189,13 @@ export function showDrugModal(drugId: string, indicationHint?: string): boolean 
   overlayEl.addEventListener('click', (e) => {
     if (e.target === overlayEl) destroyOverlay();
   });
+
+  // Close on any navigation. The overlay lives on document.body, outside the routed
+  // view, so without this it survives every route change until the user taps the X
+  // (FlowRider 2026-07-28).
+  const navHandler = (): void => destroyOverlay();
+  window.addEventListener('hashchange', navHandler);
+  (overlayEl as unknown as { _navHandler: typeof navHandler })._navHandler = navHandler;
 
   // Panel
   const panel = document.createElement('div');

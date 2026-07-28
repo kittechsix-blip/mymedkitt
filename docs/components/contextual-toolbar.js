@@ -141,6 +141,8 @@ function dispatchToolbarAction(item, controller) {
 let infographicEscHandler = null;
 /** Close and remove the infographic overlay. */
 function closeInfographic() {
+    // Detach the navigation guard (no-op when it was never attached).
+    window.removeEventListener('hashchange', closeInfographic);
     if (infographicEscHandler) {
         document.removeEventListener('keydown', infographicEscHandler);
         infographicEscHandler = null;
@@ -251,6 +253,9 @@ function openInfographicOverlay(consultId) {
     panel.appendChild(frame);
     overlay.appendChild(panel);
     document.body.appendChild(overlay);
+    // Close on any navigation — body-level overlay, outside the routed view
+    // (FlowRider 2026-07-28).
+    window.addEventListener('hashchange', closeInfographic);
     infographicEl = overlay;
     infographicEscHandler = (e) => {
         if (e.key === 'Escape')
@@ -262,6 +267,8 @@ function openInfographicOverlay(consultId) {
 // Tools drawer — bottom sheet, separate from the Decision Map
 // -------------------------------------------------------------------
 function closeToolsSheet() {
+    // Detach the navigation guard (no-op when it was never attached).
+    window.removeEventListener('hashchange', closeToolsSheet);
     if (toolsSheetEl) {
         toolsSheetEl.remove();
         toolsSheetEl = null;
@@ -316,6 +323,9 @@ function toggleToolsSheet(consultId, items, controller) {
     sheet.appendChild(list);
     overlay.appendChild(sheet);
     document.body.appendChild(overlay);
+    // Close on any navigation — body-level overlay, outside the routed view
+    // (FlowRider 2026-07-28).
+    window.addEventListener('hashchange', closeToolsSheet);
     toolsSheetEl = overlay;
 }
 /** Collect ALL nodes grouped by module with real label names */
@@ -339,6 +349,8 @@ function collectAllNodesByModule(controller, moduleLabels) {
 }
 /** Close and remove the Decision Map overlay */
 function closeDecisionMap() {
+    // Detach the navigation guard (no-op when it was never attached).
+    window.removeEventListener('hashchange', closeDecisionMap);
     if (decisionMapEl) {
         decisionMapEl.remove();
         decisionMapEl = null;
@@ -451,6 +463,9 @@ function toggleDecisionMap(controller, moduleLabels) {
     map.appendChild(scroller);
     overlay.appendChild(map);
     document.body.appendChild(overlay);
+    // Close on any navigation — body-level overlay, outside the routed view
+    // (FlowRider 2026-07-28).
+    window.addEventListener('hashchange', closeDecisionMap);
     decisionMapEl = overlay;
     // Auto-scroll to current node
     requestAnimationFrame(() => {

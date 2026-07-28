@@ -168,6 +168,8 @@ let infographicEscHandler: ((e: KeyboardEvent) => void) | null = null;
 
 /** Close and remove the infographic overlay. */
 function closeInfographic(): void {
+  // Detach the navigation guard (no-op when it was never attached).
+  window.removeEventListener('hashchange', closeInfographic);
   if (infographicEscHandler) {
     document.removeEventListener('keydown', infographicEscHandler);
     infographicEscHandler = null;
@@ -278,6 +280,9 @@ function openInfographicOverlay(consultId: string): void {
   panel.appendChild(frame);
   overlay.appendChild(panel);
   document.body.appendChild(overlay);
+  // Close on any navigation — body-level overlay, outside the routed view
+  // (FlowRider 2026-07-28).
+  window.addEventListener('hashchange', closeInfographic);
   infographicEl = overlay;
 
   infographicEscHandler = (e: KeyboardEvent) => {
@@ -291,6 +296,8 @@ function openInfographicOverlay(consultId: string): void {
 // -------------------------------------------------------------------
 
 function closeToolsSheet(): void {
+  // Detach the navigation guard (no-op when it was never attached).
+  window.removeEventListener('hashchange', closeToolsSheet);
   if (toolsSheetEl) {
     toolsSheetEl.remove();
     toolsSheetEl = null;
@@ -354,6 +361,9 @@ function toggleToolsSheet(
 
   overlay.appendChild(sheet);
   document.body.appendChild(overlay);
+  // Close on any navigation — body-level overlay, outside the routed view
+  // (FlowRider 2026-07-28).
+  window.addEventListener('hashchange', closeToolsSheet);
   toolsSheetEl = overlay;
 }
 
@@ -394,6 +404,8 @@ function collectAllNodesByModule(
 
 /** Close and remove the Decision Map overlay */
 function closeDecisionMap(): void {
+  // Detach the navigation guard (no-op when it was never attached).
+  window.removeEventListener('hashchange', closeDecisionMap);
   if (decisionMapEl) {
     decisionMapEl.remove();
     decisionMapEl = null;
@@ -535,6 +547,9 @@ function toggleDecisionMap(
   map.appendChild(scroller);
   overlay.appendChild(map);
   document.body.appendChild(overlay);
+  // Close on any navigation — body-level overlay, outside the routed view
+  // (FlowRider 2026-07-28).
+  window.addEventListener('hashchange', closeDecisionMap);
   decisionMapEl = overlay;
 
   // Auto-scroll to current node

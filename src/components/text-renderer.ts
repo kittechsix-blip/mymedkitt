@@ -181,9 +181,16 @@ function showImageLightbox(imageSrc: string, caption: string): void {
   overlay.appendChild(captionEl);
   document.body.appendChild(overlay);
 
-  const dismiss = (): void => overlay.remove();
+  const dismiss = (): void => {
+    window.removeEventListener('hashchange', dismiss);
+    overlay.remove();
+  };
   closeBtn.addEventListener('click', dismiss);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) dismiss(); });
+
+  // Close on any navigation — the lightbox is on document.body, outside the routed
+  // view, so it would otherwise persist over the next consult (FlowRider 2026-07-28).
+  window.addEventListener('hashchange', dismiss);
 }
 
 /** Handle clicks on inline links via event delegation (most reliable on iOS Safari).
@@ -281,6 +288,7 @@ function showInlineDoseCalc(
   activeDosePopup = overlay;
 
   const dismiss = (): void => {
+    window.removeEventListener('hashchange', dismiss);
     overlay.remove();
     activeDosePopup = null;
   };
@@ -289,6 +297,10 @@ function showInlineDoseCalc(
   overlay.addEventListener('click', (e) => {
     if (e.target === overlay) dismiss();
   });
+
+  // Close on any navigation — the popup is on document.body, outside the routed view,
+  // so it would otherwise persist over the next consult (FlowRider 2026-07-28).
+  window.addEventListener('hashchange', dismiss);
 
   // Auto-focus the weight input
   const firstInput = calcPanel.querySelector('input') as HTMLInputElement | null;

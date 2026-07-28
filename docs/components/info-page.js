@@ -248,6 +248,10 @@ function destroyOverlay() {
         if (keyHandler) {
             document.removeEventListener('keydown', keyHandler);
         }
+        const navHandler = overlayEl._navHandler;
+        if (navHandler) {
+            window.removeEventListener('hashchange', navHandler);
+        }
         const prev = overlayEl._previouslyFocused;
         overlayEl.remove();
         overlayEl = null;
@@ -382,8 +386,15 @@ export function showInfoModal(pageId, anchorId) {
         }
     };
     document.addEventListener('keydown', keyHandler);
+    // Close on any navigation. The overlay is attached to document.body, outside the
+    // consult flow container, so a route change (to another consult, Home, or a
+    // calculator) would otherwise leave this info page displayed over the newly
+    // navigated view — unbounded, until the user found the X (FlowRider 2026-07-28).
+    const navHandler = () => destroyOverlay();
+    window.addEventListener('hashchange', navHandler);
     overlayEl.setAttribute('data-restore-focus', previouslyFocused ? 'yes' : 'no');
     overlayEl._keyHandler = keyHandler;
+    overlayEl._navHandler = navHandler;
     overlayEl._previouslyFocused = previouslyFocused;
     // Panel
     const panel = document.createElement('div');

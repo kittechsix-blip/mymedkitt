@@ -7,6 +7,8 @@ let currentPanel: HTMLElement | null = null;
 
 /** Hide the current overlay panel */
 export function hideOverlayPanel(): void {
+  // Detach the navigation guard (no-op when it was never attached).
+  window.removeEventListener('hashchange', hideOverlayPanel);
   currentBackdrop?.remove();
   currentPanel?.remove();
   currentBackdrop = null;
@@ -56,6 +58,11 @@ export function showOverlayPanel(title?: string): HTMLElement {
 
   document.body.appendChild(panel);
   currentPanel = panel;
+
+  // Close on any navigation. The panel lives on document.body, outside the routed
+  // view, so without this it survives every route change until the user taps the X
+  // (FlowRider 2026-07-28).
+  window.addEventListener('hashchange', hideOverlayPanel);
 
   return body;
 }

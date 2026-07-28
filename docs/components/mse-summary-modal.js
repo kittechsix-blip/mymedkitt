@@ -5,6 +5,8 @@
 import { buildMseDictation, MSE_BUILDER_DOMAINS } from '../services/mse-dictation.js';
 let overlayEl = null;
 function destroyOverlay() {
+    // Detach the navigation guard (no-op when it was never attached).
+    window.removeEventListener('hashchange', destroyOverlay);
     overlayEl?.remove();
     overlayEl = null;
 }
@@ -158,4 +160,8 @@ export function showMseSummaryModal(answers) {
     panel.appendChild(footer);
     overlayEl.appendChild(panel);
     document.body.appendChild(overlayEl);
+    // Close on any navigation. The overlay lives on document.body, outside the routed
+    // view, so without this it survives every route change until the user taps the X
+    // (FlowRider 2026-07-28).
+    window.addEventListener('hashchange', destroyOverlay);
 }

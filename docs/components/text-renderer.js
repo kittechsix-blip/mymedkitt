@@ -171,10 +171,16 @@ function showImageLightbox(imageSrc, caption) {
     overlay.appendChild(img);
     overlay.appendChild(captionEl);
     document.body.appendChild(overlay);
-    const dismiss = () => overlay.remove();
+    const dismiss = () => {
+        window.removeEventListener('hashchange', dismiss);
+        overlay.remove();
+    };
     closeBtn.addEventListener('click', dismiss);
     overlay.addEventListener('click', (e) => { if (e.target === overlay)
         dismiss(); });
+    // Close on any navigation — the lightbox is on document.body, outside the routed
+    // view, so it would otherwise persist over the next consult (FlowRider 2026-07-28).
+    window.addEventListener('hashchange', dismiss);
 }
 /** Handle clicks on inline links via event delegation (most reliable on iOS Safari).
  *  Attach to a container element — handles drug, calculator, tree, node, and info link types.
@@ -261,6 +267,7 @@ function showInlineDoseCalc(_anchor, dosePerKg, unit, timeSuffix) {
     document.body.appendChild(overlay);
     activeDosePopup = overlay;
     const dismiss = () => {
+        window.removeEventListener('hashchange', dismiss);
         overlay.remove();
         activeDosePopup = null;
     };
@@ -269,6 +276,9 @@ function showInlineDoseCalc(_anchor, dosePerKg, unit, timeSuffix) {
         if (e.target === overlay)
             dismiss();
     });
+    // Close on any navigation — the popup is on document.body, outside the routed view,
+    // so it would otherwise persist over the next consult (FlowRider 2026-07-28).
+    window.addEventListener('hashchange', dismiss);
     // Auto-focus the weight input
     const firstInput = calcPanel.querySelector('input');
     if (firstInput) {
