@@ -1,4 +1,12 @@
 // MedKitt - Pelvic Pain, Female Hub
+//
+// EVIDENTIARY BASIS (FDA 21st Century Cures Act CDS exemption, Prong 4):
+// Every recommendation node below carries a citation array indexing
+// PELVIC_PAIN_FEMALE_HUB_CITATIONS at the bottom of this file. Each reference
+// carries a DOI, PMID, or resolvable URL so the treating clinician can
+// independently retrieve and review the basis for the recommendation.
+// This tool supports, and does not replace, independent clinical judgment.
+// Last legal audit: 2026-07-28 (Prong-4 citation verification).
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
@@ -6,7 +14,7 @@ import type { Citation } from './neurosyphilis.js';
 export const PELVIC_PAIN_FEMALE_HUB_CRITICAL_ACTIONS = [
   { text: 'Pregnancy test and hemodynamic status drive the first split in reproductive-age pelvic pain', nodeId: 'ppf-start' },
   { text: 'Normal Doppler flow does not rule out ovarian/adnexal torsion when the story fits', nodeId: 'ppf-torsion' },
-  { text: 'PID/TOA, ectopic pregnancy, torsion, appendicitis, and ruptured cyst can overlap clinically; do not anchor on one lane too early', nodeId: 'ppf-exclusions' },
+  { text: 'PID/TOA, ectopic pregnancy, torsion, appendicitis, and ruptured cyst can overlap clinically; do not anchor on one lane too early', nodeId: 'ppf-start' },
 ];
 
 export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
@@ -16,7 +24,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     module: 1,
     title: 'Pelvic Pain, Female Hub - Sick Check First',
     body: '**\u26A0\uFE0F 5 DO NOT MISS:**\n1. **Ruptured ectopic pregnancy** \u2014 positive \u03B2-hCG + pain/shock; pregnancy test on everyone.\n2. **Ovarian torsion** \u2014 sudden severe unilateral pain, nausea, adnexal mass.\n3. **Tubo-ovarian abscess / severe PID** \u2014 fever, CMT, sepsis.\n4. **Hemorrhagic ovarian cyst with hemoperitoneum** \u2014 sudden pain, free fluid, falling H/H.\n5. **Non-gyn surgical abdomen (appendicitis, obstructing stone, pyelonephritis)** \u2014 do not anchor on \"gyn.\"\n\nOpen first:\n- [Hub Steps Summary](#/info/ppf-steps)\n- [Hub Stop / Pitfalls](#/info/ppf-stop)\n\n**First 60 seconds:**\n- Vitals, shock index, pain trajectory, syncope/presyncope, fever/toxicity.\n- Pregnancy test now for reproductive potential. Do not rely on history alone.\n- LMP, gestational age if pregnant, contraception/IUD, fertility treatment, prior ectopic, recent procedure, postpartum status.\n- Pain phenotype: sudden/maximal, unilateral, colicky, migratory, cyclic, dyspareunia, urinary/GI symptoms.\n- Bleeding/discharge: vaginal bleeding, purulent discharge, cervical motion tenderness, STI risk.\n- Focused abdominal, pelvic, CVA, and peritoneal exam when appropriate.\n\nPelvic pain in female patients is a branching chief complaint: hemorrhage/ectopic, torsion, infection, surgical abdomen, urinary disease, and gynecologic pain can look similar early.',
-    citation: [1, 2, 3, 4],
+    citation: [1, 2, 3, 4, 9],
     next: 'ppf-exclusions',
     summary: 'Vitals, pregnancy test, hemorrhage risk, torsion/PID/TOA, surgical abdomen, and urinary causes first.',
     safetyLevel: 'critical',
@@ -37,7 +45,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
       { label: 'Postpartum or recent gynecologic procedure with pain, bleeding, fever, or sepsis physiology', description: 'Postpartum/procedural complication', next: 'ppf-postpartum-procedure', urgency: 'critical' },
       { label: 'No immediate exclusion hit', description: 'Initial pelvic pain bundle and reassess', next: 'ppf-rescue' },
     ],
-    citation: [1, 2, 3, 4, 5],
+    citation: [1, 2, 3, 4, 5, 9],
     summary: 'Pregnancy/ectopic, torsion, PID/TOA, ruptured cyst, surgical abdomen, urinary disease, and postpartum/procedure complications are first exclusions.',
     safetyLevel: 'critical',
   },
@@ -48,7 +56,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Pregnant Until Ectopic Is Excluded',
     body: 'Open [First Trimester Emergencies](#/tree/first-trimester) when early pregnancy is possible.\n\n**Immediate actions:** IV access, type and screen/cross if unstable, CBC, quantitative beta-hCG, Rh status, bedside pelvic US when available, formal transvaginal US, OB/GYN early when unstable or ectopic suspected.\n\n**Key ED rule:** an indeterminate ultrasound does not exclude ectopic pregnancy. Do not use beta-hCG below a discriminatory zone to reassure yourself when symptoms are concerning.',
     recommendation: 'Pain plus positive pregnancy test is ectopic until safely explained.',
-    citation: [4, 5],
+    citation: [4, 5, 9],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -59,7 +67,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Ovarian / Adnexal Torsion',
     body: '**Classic pattern:** sudden unilateral pelvic pain, nausea/vomiting, adnexal tenderness or mass, intermittent episodes, pregnancy, cyst, fertility treatment, or adolescent patient. Fever and leukocytosis may be absent.\n\n**Imaging:** transvaginal/transabdominal pelvic ultrasound with Doppler is first line, but normal arterial/venous flow does not rule out torsion. ACOG emphasizes Doppler flow alone should not guide decision-making. If CT already suggests torsion, do not delay surgical consultation waiting for ultrasound.\n\n**Action:** NPO, analgesia/antiemetic, pregnancy test, OB/GYN early. Definitive diagnosis and treatment are surgical.',
     recommendation: 'High-suspicion torsion gets OB/GYN consultation even with Doppler flow present.',
-    citation: [1, 3],
+    citation: [1, 3, 8],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -81,7 +89,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Ruptured Hemorrhagic Cyst / Hemoperitoneum',
     body: 'Sudden unilateral pain, pain after exertion/intercourse, peritoneal irritation, free pelvic fluid, anticoagulation, or falling hemoglobin suggests hemorrhagic cyst rupture or another bleeding source.\n\n**Actions:** pregnancy test to exclude ectopic, IV access, CBC trend, type and screen if significant pain/free fluid/instability, analgesia, pelvic ultrasound, OB/GYN if unstable, persistent peritoneal signs, large hemoperitoneum, anticoagulated, or falling Hgb.',
     recommendation: 'Rule out ectopic and trend physiology before calling this benign cyst pain.',
-    citation: [1, 4, 5],
+    citation: [1, 4, 5, 9],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -92,7 +100,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Appendicitis / Surgical Abdomen / GI Mimics',
     body: 'Appendicitis, diverticulitis, bowel obstruction, perforation, and inflammatory bowel complications can present as pelvic pain. Migration, anorexia, peritoneal signs, persistent vomiting, focal RLQ/LLQ tenderness, or systemic illness should pull the workup beyond gynecology.\n\n**Imaging:** choose US first when pregnancy/gynecologic source is likely; CT abdomen/pelvis with IV contrast is appropriate when non-gynecologic surgical disease is likely and pregnancy is excluded or risk/benefit supports imaging.',
     recommendation: 'A pelvic exam diagnosis should not override peritoneal signs or surgical-abdomen physiology.',
-    citation: [1, 6],
+    citation: [1, 6, 7],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -103,7 +111,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Urinary / Renal Lane',
     body: 'Open [UTI-Adult](#/tree/adult-uti) when infection fits.\n\n**Consider:** pyelonephritis, infected stone, renal colic, urinary retention, urethritis/cervicitis overlap. Fever with obstruction, solitary kidney, pregnancy, AKI, uncontrolled pain/vomiting, or sepsis physiology needs escalation.\n\nUA can be contaminated by vaginal bleeding/discharge. Interpret with symptoms, microscopy, culture, and imaging when stone/obstruction is plausible.',
     recommendation: 'Do not miss infected obstructing stone or pyelonephritis masquerading as pelvic pain.',
-    citation: [1],
+    citation: [1, 10],
     safetyLevel: 'warning',
     confidence: 'recommended',
   },
@@ -114,7 +122,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Postpartum / Post-Procedure Pain',
     body: 'Recent delivery, miscarriage management, abortion, IUD procedure, hysteroscopy, laparoscopy, or pelvic surgery changes the differential.\n\n**Danger lanes:** hemorrhage, retained products, endometritis, septic pelvic thrombophlebitis, uterine perforation, bowel/bladder injury, ovarian vein thrombosis, wound/abscess, and PE/vascular disease.\n\nUse vitals, bleeding amount, fever, peritoneal signs, lactate if ill, CBC, pregnancy status as relevant, pelvic ultrasound, and CT when surgical complication is plausible. Involve OB/GYN early for unstable or septic patients.',
     recommendation: 'Postpartum or procedural pelvic pain deserves a lower threshold for OB/GYN involvement and imaging.',
-    citation: [1, 6],
+    citation: [1, 7, 11],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -124,7 +132,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     module: 3,
     title: 'Rescue / Initial Bundle + Reassess',
     body: '**Default ED bundle:**\n- Pregnancy test, vitals trend, IV access if moderate/severe pain or any bleeding/instability.\n- Analgesia and antiemetic early. Pain response does not rule out torsion, ectopic, or surgical disease.\n- CBC, CMP as indicated; UA/culture by urinary symptoms; GC/CT testing and wet prep when PID/cervicitis possible.\n- Pelvic exam when it changes care and patient consents.\n- Bedside US for free fluid/IUP when skilled; formal pelvic US for suspected gynecologic etiology.\n\n**Reassess:** pain trajectory, peritoneal signs, vitals, ability to tolerate PO, and whether pregnancy/torsion/infection/surgical abdomen has been safely handled.',
-    citation: [1, 2, 4],
+    citation: [1, 2, 4, 7],
     next: 'ppf-reassess',
     summary: 'Pregnancy test, analgesia, targeted labs, pelvic exam when useful, ultrasound/CT by lane, then repeat exam.',
     safetyLevel: 'warning',
@@ -140,7 +148,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
       { label: 'Stable but diagnosis still uncertain or imaging needed', description: 'Use imaging strategy', next: 'ppf-imaging' },
       { label: 'Clear low-risk diagnosis, improving, tolerating PO, follow-up available', description: 'Disposition checklist', next: 'ppf-disposition' },
     ],
-    citation: [1, 6],
+    citation: [1, 6, 7],
     summary: 'Persistent or worsening pain after initial care should widen the differential, not narrow it.',
   },
   {
@@ -149,7 +157,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     module: 4,
     title: 'Imaging Strategy',
     body: '**Pregnancy positive or pregnancy possible:** pelvic US first for IUP/ectopic/free fluid; OB involvement for indeterminate but concerning cases.\n\n**Gynecologic source likely, beta-hCG negative:** transabdominal plus transvaginal pelvic US with Doppler is usually first-line. Do not use normal Doppler flow to exclude torsion when suspicion is high.\n\n**Non-gynecologic source likely:** CT abdomen/pelvis with IV contrast is often appropriate when appendicitis, diverticulitis, bowel pathology, abscess, or urinary obstruction is the active question.\n\n**MRI:** useful when ultrasound is nondiagnostic and radiation avoidance matters, especially pregnancy or selected young patients.',
-    citation: [1, 3, 5, 6],
+    citation: [1, 3, 5, 6, 8, 10],
     next: 'ppf-disposition',
     summary: 'US first for pregnancy/gynecologic suspicion, CT for non-gynecologic surgical disease, MRI selectively.',
     safetyLevel: 'warning',
@@ -165,7 +173,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
       { label: 'Stable but diagnosis uncertain, serial exams/labs/imaging needed', description: 'Observation / repeat exam', next: 'ppf-dispo-observe' },
       { label: 'Benign diagnosis clear, improving, no red flags, follow-up reliable', description: 'Discharge checklist', next: 'ppf-dispo-discharge' },
     ],
-    citation: [1, 2, 4],
+    citation: [1, 2, 4, 9],
     summary: 'Admit dangerous physiology or surgical/OB/GYN concerns. Discharge only with diagnosis, improvement, and return precautions.',
   },
   {
@@ -175,7 +183,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Admit / Consult / Transfer',
     body: 'Admit, transfer, or consult urgently for suspected ectopic pregnancy, torsion, TOA/severe PID, sepsis, surgical abdomen, large hemoperitoneum, unstable vitals, pregnancy complication, immunocompromise with infection, failed outpatient therapy, inability to tolerate PO, uncontrolled pain, or persistent diagnostic uncertainty with concerning exam.',
     recommendation: 'Do not discharge unresolved high-risk pelvic pain just because initial imaging is equivocal.',
-    citation: [1, 2, 3, 4],
+    citation: [1, 2, 3, 4, 8, 9],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -186,7 +194,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Observation / Serial Exam',
     body: 'Observe when pain is improving but diagnosis remains uncertain, ultrasound is pending/equivocal, hemoglobin or vitals require trend, pregnancy of unknown location needs a plan, or serial abdominal exams will determine CT/surgical consultation.',
     recommendation: 'Observation is appropriate when the initial snapshot does not safely explain the pain.',
-    citation: [1, 4, 5],
+    citation: [1, 4, 5, 9],
     safetyLevel: 'warning',
     confidence: 'recommended',
   },
@@ -197,7 +205,7 @@ export const PELVIC_PAIN_FEMALE_HUB_NODES: DecisionNode[] = [
     title: 'Discharge Checklist',
     body: 'Discharge only when vitals are stable, pregnancy/ectopic risk has an explicit plan, pain is controlled, PO tolerated, abdominal/pelvic exam is non-peritoneal, dangerous causes have been addressed, and follow-up is realistic.\n\n**Return now for:** worsening pain, syncope, shoulder pain, heavy bleeding, fever, vomiting, new discharge, positive pregnancy test without follow-up, dizziness, or inability to tolerate PO.',
     recommendation: 'Document pregnancy status, repeat exam, diagnostic lane, follow-up timing, and return precautions.',
-    citation: [4, 5, 6],
+    citation: [4, 5, 6, 7, 9],
     safetyLevel: 'warning',
     confidence: 'recommended',
   },
@@ -214,10 +222,15 @@ export const PELVIC_PAIN_FEMALE_HUB_MODULE_LABELS = [
 ];
 
 export const PELVIC_PAIN_FEMALE_HUB_CITATIONS: Citation[] = [
-  { num: 1, text: 'American College of Radiology. ACR Appropriateness Criteria: Acute Pelvic Pain in the Reproductive Age Group, 2023 update. J Am Coll Radiol. 2024;21:S238-S257.' },
-  { num: 2, text: 'CDC. Sexually Transmitted Infections Treatment Guidelines: Pelvic Inflammatory Disease. https://www.cdc.gov/std/treatment-guidelines/pid.htm' },
-  { num: 3, text: 'ACOG Committee Opinion No. 783. Adnexal Torsion in Adolescents. Obstet Gynecol. 2019;134:e56-e63.' },
-  { num: 4, text: 'ACEP Clinical Policy: Critical Issues in the Initial Evaluation and Management of Patients Presenting to the Emergency Department in Early Pregnancy. Ann Emerg Med. 2012;60:381-390.' },
-  { num: 5, text: 'NICE Guideline NG126. Ectopic pregnancy and miscarriage: diagnosis and initial management. Updated 2023. https://www.nice.org.uk/guidance/ng126' },
-  { num: 6, text: 'Kruszka PS, Kruszka SJ. Evaluation of acute pelvic pain in women. Am Fam Physician. 2010;82:141-147.' },
+  { num: 1, text: 'Expert Panel on GYN and OB Imaging; Brook OR, Dadour JR, Robbins JB, et al. ACR Appropriateness Criteria: Acute Pelvic Pain in the Reproductive Age Group: 2023 Update. J Am Coll Radiol. 2024;21(6S):S3-S20. doi:10.1016/j.jacr.2024.02.014. PMID: 38823952.' },
+  { num: 2, text: 'Workowski KA, Bachmann LH, Chan PA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021 (current edition) - Pelvic Inflammatory Disease. MMWR Recomm Rep. 2021;70(4):1-187. doi:10.15585/mmwr.rr7004a1. PID chapter: https://www.cdc.gov/std/treatment-guidelines/pid.htm' },
+  { num: 3, text: 'American College of Obstetricians and Gynecologists. Adnexal Torsion in Adolescents. ACOG Committee Opinion No. 783. Obstet Gynecol. 2019;134(2):e56-e63. doi:10.1097/AOG.0000000000003373. PMID: 31348225. (Scope: adolescents; source of the statement that Doppler flow alone should not guide clinical decision making. For adult-inclusive Doppler test-accuracy data see reference 8.)' },
+  { num: 4, text: 'Hahn SA, Promes SB, Brown MD, et al; ACEP Clinical Policies Subcommittee on Early Pregnancy. Clinical Policy: Critical Issues in the Initial Evaluation and Management of Patients Presenting to the Emergency Department in Early Pregnancy. Ann Emerg Med. 2017;69(2):241-250.e20. doi:10.1016/j.annemergmed.2016.11.002. PMID: 28126120. (Current version; supersedes the 2012 policy, Ann Emerg Med. 2012;60:381-390, PMID: 22921048. Erratum: Ann Emerg Med. 2017;70(5):758.) Level B: do not use the beta-hCG value to exclude ectopic pregnancy when the ultrasound result is indeterminate.' },
+  { num: 5, text: 'National Institute for Health and Care Excellence. Ectopic pregnancy and miscarriage: diagnosis and initial management. NICE guideline NG126. Published 17 April 2019; last updated 17 June 2026. https://www.nice.org.uk/guidance/ng126' },
+  { num: 6, text: 'SUPERSEDED - Kruszka PS, Kruszka SJ. Evaluation of acute pelvic pain in women. Am Fam Physician. 2010;82(2):141-147. PMID: 20642266. Superseded by reference 7; retained for historical attribution of the diagnostic figures.' },
+  { num: 7, text: 'Bhavsar AK, Gelner EJ, Shorma T. Common Questions About the Evaluation of Acute Pelvic Pain. Am Fam Physician. 2016;93(1):41-48. https://www.aafp.org/pubs/afp/issues/2016/0101/p41.html (Current AFP review; replaces reference 6.)' },
+  { num: 8, text: 'Wattar B, Rimmer M, Rogozinska E, Macmillian M, Khan KS, Al Wattar BH. Accuracy of imaging modalities for adnexal torsion: a systematic review and meta-analysis. BJOG. 2021;128(1):37-44. doi:10.1111/1471-0528.16371. PMID: 32570294. (Pooled ultrasound sensitivity 0.79; adding Doppler did not improve diagnostic performance - normal flow does not exclude torsion.)' },
+  { num: 9, text: 'American College of Obstetricians and Gynecologists Committee on Practice Bulletins-Gynecology. ACOG Practice Bulletin No. 193: Tubal Ectopic Pregnancy. Obstet Gynecol. 2018;131(3):e91-e103. doi:10.1097/AOG.0000000000002560. PMID: 29470343. (Correction: Obstet Gynecol. 2019;133(5):1059, PMID: 31022116.)' },
+  { num: 10, text: 'Expert Panel on Urological Imaging; Smith AD, Nikolaidis P, Khatri G, et al. ACR Appropriateness Criteria: Acute Pyelonephritis: 2022 Update. J Am Coll Radiol. 2022;19(11S):S224-S239. doi:10.1016/j.jacr.2022.09.017. (Supersedes the 2018 version, J Am Coll Radiol. 2018;15:S232-S239.)' },
+  { num: 11, text: 'Yuzuk N, Bove J, Desai R. Managing Postpartum Complications in the Emergency Department. Emerg Med Pract. 2022;24(3):1-24. PMID: 35195979. https://www.ebmedicine.net/topics/gynecologic-obstetric/emergency-medicine-postpartum-complications' },
 ];

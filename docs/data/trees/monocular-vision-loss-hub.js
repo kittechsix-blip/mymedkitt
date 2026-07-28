@@ -1,8 +1,22 @@
 // MedKitt - Monocular Vision Loss Hub
+//
+// EVIDENTIARY BASIS DISCLOSURE (FDA 21st Century Cures Act CDS exemption, Prong 4):
+// Every recommendation node in this hub carries a citation array indexing
+// MONOCULAR_VISION_LOSS_HUB_CITATIONS below. Each reference is listed with authors,
+// journal, year, volume/pages, and a machine-readable identifier (DOI, PMID, or a
+// resolvable URL) so a clinician can independently retrieve and review the basis for
+// every recommendation. This hub is a triage/navigation aid; definitive diagnosis and
+// treatment remain the responsibility of the treating clinician and consulting
+// ophthalmology/neurology services.
+//
+// Citation audit: Louis Litt (General Counsel), 2026-07-28. Refs 6, 7, and 9 were
+// corrected/replaced after source verification; refs 11-13 added to source directives
+// that previously rested on tertiary summaries.
 export const MONOCULAR_VISION_LOSS_HUB_CRITICAL_ACTIONS = [
     { text: 'Sudden painless monocular vision loss is retinal ischemia or retinal detachment until proven otherwise', nodeId: 'mvl-start' },
     { text: 'Age >=50 with acute vision symptoms needs GCA screen and empiric steroids when suspicion is high', nodeId: 'mvl-gca' },
-    { text: 'Painful red eye, high IOP, or open-globe concern needs immediate eye-protective pathway', nodeId: 'mvl-exclusions' },
+    { text: 'Painful red eye with halos, vomiting, mid-dilated pupil, or high IOP is an eye-pressure emergency: treat and call ophthalmology now', nodeId: 'mvl-glaucoma' },
+    { text: 'Suspected open globe or orbital compartment syndrome: protect the globe first and do not perform pressure-based testing if rupture is possible', nodeId: 'mvl-trauma' },
 ];
 export const MONOCULAR_VISION_LOSS_HUB_NODES = [
     {
@@ -11,7 +25,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         module: 1,
         title: 'Monocular Vision Loss Hub - Sick Check First',
         body: '**\u26A0\uFE0F 5 DO NOT MISS:**\n1. **Central retinal artery occlusion** \u2014 sudden painless loss; a stroke-equivalent, treat fast.\n2. **Giant cell arteritis** \u2014 age >50, jaw claudication, scalp tenderness, high ESR/CRP \u2192 steroids now.\n3. **Retinal detachment** \u2014 flashes, floaters, curtain; needs urgent ophthalmology.\n4. **Acute angle-closure glaucoma** \u2014 painful red eye, mid-dilated pupil, high IOP.\n5. **Optic neuritis / pituitary apoplexy** \u2014 pain on eye movement + RAPD, or sudden loss + headache + ophthalmoplegia.\n\nOpen first:\n- [Hub Steps Summary](#/info/mvl-steps)\n- [Hub Stop / Pitfalls](#/info/mvl-stop)\n\n**First 60 seconds:**\n- Confirm monocular vs binocular: test each eye separately.\n- Document last-known-normal and onset: sudden seconds/minutes vs progressive hours/days.\n- Check visual acuity in each eye, pupils/RAPD, visual fields by confrontation, EOM, external eye, fluorescein/slit lamp if available, IOP when open globe is not suspected.\n- Look for pain, red eye, trauma, headache, jaw claudication, scalp tenderness, neuro deficits, anticoagulants, diabetes, immunosuppression.\n- If stroke-like retinal ischemia is possible, do not wait for a perfect fundus exam.\n\nMonocular vision loss is a high-stakes chief complaint. Separate vascular, GCA, globe/pressure, retinal, optic nerve, infection, and trauma lanes early.',
-        citation: [1, 2, 3],
+        citation: [1, 2, 3, 5, 8, 9],
         next: 'mvl-exclusions',
         summary: 'Confirm one eye, document onset, check VA/pupils/RAPD/fields/IOP when safe, then split vascular/GCA/eye emergency lanes.',
         safetyLevel: 'critical',
@@ -33,7 +47,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
             { label: 'Orbital pain/swelling, ophthalmoplegia, fever, proptosis, immunocompromised', description: 'Orbital cellulitis, endophthalmitis, invasive infection', next: 'mvl-infection', urgency: 'critical' },
             { label: 'No immediate exclusion hit', description: 'Initial eye bundle and reassess', next: 'mvl-rescue' },
         ],
-        citation: [1, 2, 3, 4, 5],
+        citation: [1, 2, 3, 4, 5, 8, 9],
         summary: 'CRAO/TMVL, GCA, glaucoma, trauma, retinal detachment, optic neuritis, and infection are first-pass exclusions.',
         safetyLevel: 'critical',
     },
@@ -55,7 +69,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         title: 'Transient Monocular Vision Loss / Amaurosis Fugax',
         body: 'Open [Amaurosis Fugax](#/tree/amaurosis-fugax).\n\n**Next steps:** treat as retinal TIA. Confirm monocular history, screen GCA if age >=50, ECG/telemetry, vascular imaging of head/neck or carotids per local stroke pathway, brain MRI-DWI when available, secondary prevention after hemorrhage/contraindications considered.\n\n**Pitfall:** complete recovery does not make this benign. Retinal TIA can precede brain stroke, especially early after the event.',
         recommendation: 'TMVL gets urgent TIA/stroke workup, not routine outpatient eye follow-up only.',
-        citation: [2, 7],
+        citation: [1, 2, 7],
         safetyLevel: 'critical',
         confidence: 'recommended',
     },
@@ -88,7 +102,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         title: 'Open Globe / Ocular Trauma / Compartment',
         body: 'Open [Ocular Trauma](#/tree/ocular-trauma) or [Globe Rupture](#/tree/globe-rupture).\n\n**Next 5 minutes:** rigid shield, NPO, antiemetic/analgesia, tetanus/antibiotics per open globe pathway, avoid pressure on the eye, avoid ultrasound/tonometry if open globe possible, CT orbit when stable. If proptosis, tight lids, RAPD, high IOP, and acute vision loss after trauma/surgery, consider orbital compartment syndrome and lateral canthotomy pathway.\n\n**Pitfall:** no patch and no eye pressure for suspected open globe.',
         recommendation: 'Protect the globe first. Do not perform pressure-based testing if rupture is possible.',
-        citation: [3, 4],
+        citation: [3, 4, 13],
         safetyLevel: 'critical',
         confidence: 'definitive',
     },
@@ -99,7 +113,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         title: 'Retinal Detachment / Vitreous Hemorrhage',
         body: 'Open [Ocular POCUS](#/tree/ocular-pocus) when ultrasound is safe.\n\n**Clues:** flashes, floaters, curtain/shadow, peripheral field loss, high myopia, prior eye surgery, trauma, diabetic retinopathy or anticoagulation. Bedside ocular ultrasound can help when the view is limited, but do not ultrasound suspected open globe. Ophthalmology timing depends on macula status, detachment suspicion, and vision threat.\n\n**Pitfall:** a normal ED ultrasound does not clear small retinal tears or subtle macula-threatening disease.',
         recommendation: 'Use POCUS as an adjunct, not a rule-out test, and arrange urgent ophthalmology when the history fits.',
-        citation: [3, 4],
+        citation: [3, 4, 12],
         safetyLevel: 'warning',
         confidence: 'recommended',
     },
@@ -110,7 +124,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         title: 'Optic Neuritis / Optic Neuropathy',
         body: 'Open [Multiple Sclerosis](#/tree/multiple-sclerosis) for optic neuritis pathway.\n\n**Clues:** subacute unilateral loss, pain with eye movement, reduced color saturation, RAPD, young adult, prior demyelinating symptoms. Consider atypical features: severe bilateral loss, older age, no pain, optic disc hemorrhage, systemic symptoms, infection risk, NMO/MOG concern.\n\n**Pitfall:** do not give oral prednisone alone for typical optic neuritis. Follow neuro-ophthalmology/neurology pathway.',
         recommendation: 'Optic neuritis needs ophthalmology/neurology strategy and MRI planning, not empiric oral prednisone alone.',
-        citation: [3, 10],
+        citation: [3, 10, 11],
         safetyLevel: 'warning',
         confidence: 'recommended',
     },
@@ -131,7 +145,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         module: 3,
         title: 'Rescue / Initial Eye Bundle + Reassess',
         body: '**Default bundle when no killer has declared itself:**\n- Visual acuity each eye.\n- Pupils/RAPD, EOM, confrontational fields.\n- External exam: red eye, cornea, hyphema, proptosis, lid swelling, vesicles.\n- Fluorescein/slit lamp when available.\n- IOP if open globe is not suspected.\n- Fundus/photo when available, but do not require it to activate vascular or ophthalmology pathways.\n- Glucose, ECG, neuro exam, ESR/CRP/CBC if age >=50 or GCA concern.\n- POCUS only when open globe is not suspected.\n\nReassess vision, pain, pupil findings, and the need for urgent ophthalmology/stroke pathway after the first targeted tests.',
-        citation: [3, 4],
+        citation: [3, 4, 5, 8],
         next: 'mvl-reassess',
         summary: 'VA, pupils/RAPD, fields, EOM, slit lamp/fluorescein, IOP when safe, fundus/photo, targeted vascular/GCA workup.',
         safetyLevel: 'critical',
@@ -147,7 +161,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
             { label: 'Improving but diagnosis uncertain or exam incomplete', description: 'Use imaging/consult strategy', next: 'mvl-imaging' },
             { label: 'Benign anterior finding, normal vision, no red flags, follow-up secured', description: 'Disposition checklist', next: 'mvl-disposition' },
         ],
-        citation: [3, 4],
+        citation: [3, 4, 5],
         summary: 'Persistent or unexplained monocular vision loss needs a specialist/stroke/eye emergency pathway.',
     },
     {
@@ -156,7 +170,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         module: 4,
         title: 'Imaging / Testing Strategy',
         body: '**Image/test by the threatened structure:**\n- **Stroke/retinal ischemia:** brain MRI-DWI, CTA/MRA head/neck or carotid imaging, ECG/telemetry, echo per stroke pathway.\n- **GCA:** ESR/CRP/CBC now, temporal artery biopsy/ultrasound after treatment plan.\n- **Retinal detachment/vitreous hemorrhage:** ocular POCUS when globe intact; ophthalmology definitive exam.\n- **Open globe/IOFB/orbital trauma:** CT orbit/face, no ultrasound/tonometry if rupture possible.\n- **Orbital cellulitis/deep infection:** CT orbit/face with contrast when stable.\n- **Optic neuritis/neurologic optic neuropathy:** MRI brain/orbits with contrast per neurology/ophthalmology.\n\nTesting should not delay time-critical treatment for CRAO pathway, GCA, AACG, open globe, or orbital infection.',
-        citation: [1, 2, 3, 4, 8],
+        citation: [1, 2, 3, 4, 8, 12],
         next: 'mvl-disposition',
         summary: 'Stroke imaging for retinal ischemia, CT orbit for trauma/infection, POCUS for retina when safe, MRI orbits for optic neuritis.',
         safetyLevel: 'critical',
@@ -182,7 +196,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         title: 'Admit / Transfer / Emergent Specialty',
         body: 'Admit/transfer/emergent consult for CRAO or retinal ischemia requiring stroke pathway, suspected GCA with vision symptoms, acute angle closure, open globe, orbital compartment syndrome, orbital cellulitis/endophthalmitis/invasive infection, severe persistent loss, or unreliable urgent follow-up.',
         recommendation: 'When the eye, retina, optic nerve, or brain is actively threatened, disposition is emergent specialty pathway.',
-        citation: [1, 2, 3, 4],
+        citation: [1, 2, 3, 4, 9, 13],
         safetyLevel: 'critical',
         confidence: 'definitive',
     },
@@ -193,7 +207,7 @@ export const MONOCULAR_VISION_LOSS_HUB_NODES = [
         title: 'Urgent Ophthalmology / Neuro Follow-Up',
         body: 'Urgent same-day or next-day ophthalmology is typical for retinal detachment/tear concern, vitreous hemorrhage with decreased view, optic neuritis, unexplained persistent visual symptoms, hyphema, significant corneal ulcer, or diagnostic uncertainty. Neurology/stroke follow-up is added for vascular or optic neuritis pathways.',
         recommendation: 'Give a specific specialist destination and timeframe, not vague "eye follow-up."',
-        citation: [3, 4],
+        citation: [3, 4, 12],
         safetyLevel: 'warning',
         confidence: 'recommended',
     },
@@ -218,14 +232,17 @@ export const MONOCULAR_VISION_LOSS_HUB_MODULE_LABELS = [
     'Disposition',
 ];
 export const MONOCULAR_VISION_LOSS_HUB_CITATIONS = [
-    { num: 1, text: 'Mac Grory B, et al. Management of Central Retinal Artery Occlusion: A Scientific Statement From the American Heart Association. Stroke. 2021;52:e282-e294.' },
-    { num: 2, text: 'American Academy of Ophthalmology. Retinal and Ophthalmic Artery Occlusions Preferred Practice Pattern, 2024.' },
-    { num: 3, text: 'Merck Manual Professional Edition. Acute Vision Loss. Updated 2025. https://www.merckmanuals.com/professional/eye-disorders/symptoms-of-ophthalmic-disorders/acute-vision-loss' },
-    { num: 4, text: 'Emergency Care BC. Acute Vision Loss clinical summary. https://emergencycarebc.ca/clinical_resource/clinical-summary/acute-vision-loss/' },
-    { num: 5, text: 'Cleveland Clinic Journal of Medicine. Acute monocular vision loss: Don\'t lose sight of the differential. 2017;84:779-787.' },
-    { num: 6, text: 'Shahjouei S, et al. Thrombolysis for central retinal artery occlusion: individual participant meta-analysis. Int J Stroke. 2024;19:176-186.' },
-    { num: 7, text: 'Foroozan R, et al. Transient Monocular Visual Loss: How Does Age Impact Diagnosis? Ophthalmol Ther. 2024;13:1235-1251.' },
-    { num: 8, text: 'Maz M, et al. 2021 ACR/Vasculitis Foundation guideline for management of giant cell arteritis and Takayasu arteritis. Arthritis Rheumatol. 2021;73:1349-1365.' },
-    { num: 9, text: 'American Academy of Ophthalmology EyeWiki. Acute angle closure glaucoma and retinal artery occlusion topic reviews, accessed 2026.' },
-    { num: 10, text: 'Optic Neuritis Study Group. Visual function 15 years after optic neuritis. Ophthalmology. 2008;115:1079-1082.' },
+    { num: 1, text: 'Mac Grory B, Schrag M, Biousse V, Furie KL, Gerhard-Herman M, Lavin PJ, Sobrin L, Tjoumakaris SI, Weyand CM, Yaghi S; American Heart Association Stroke Council; Council on Arteriosclerosis, Thrombosis and Vascular Biology; Council on Hypertension; Council on Peripheral Vascular Disease. Management of Central Retinal Artery Occlusion: A Scientific Statement From the American Heart Association. Stroke. 2021;52(6):e282-e294. doi:10.1161/STR.0000000000000366. PMID: 33677974. https://www.ahajournals.org/doi/10.1161/STR.0000000000000366' },
+    { num: 2, text: 'Kovach JL, Bailey ST, Kim SJ, Lim JI, Vemulakonda GA, Ying GS, Flaxel CJ; American Academy of Ophthalmology Preferred Practice Pattern Retina/Vitreous Committee. Retinal and Ophthalmic Artery Occlusions Preferred Practice Pattern. Ophthalmology. Published online February 7, 2025. doi:10.1016/j.ophtha.2024.12.024. PMID: 39918522. https://www.aao.org/education/preferred-practice-pattern/retinal-ophthalmic-artery-occlusions-ppp' },
+    { num: 3, text: 'Brady CJ. Acute Vision Loss. Merck Manual Professional Edition. Reviewed/revised October 2025. https://www.merckmanuals.com/professional/eye-disorders/symptoms-of-ophthalmic-disorders/acute-vision-loss' },
+    { num: 4, text: 'Lindsay H. Acute Vision Loss. Emergency Care BC clinical summary. Last updated August 23, 2018. https://emergencycarebc.ca/clinical_resource/clinical-summary/acute-vision-loss/' },
+    { num: 5, text: 'Abbatemarco JR, Patell R, Buccola J, Willis MA. Acute monocular vision loss: Don\'t lose sight of the differential. Cleve Clin J Med. 2017;84(10):779-787. doi:10.3949/ccjm.84a.16096. PMID: 28985173. https://www.ccjm.org/content/84/10/779' },
+    { num: 6, text: 'Shahjouei S, Bavarsad Shahripour R, Dumitrascu OM. Thrombolysis for central retinal artery occlusion: an individual participant-level meta-analysis. Int J Stroke. 2024;19(1):29-39. doi:10.1177/17474930231189352. PMID: 37424312.' },
+    { num: 7, text: 'Douglas VP, Rachapudi SS, Davila-Siliezar P, Laylani NAR, Lee AG. Transient Monocular Visual Loss (Amaurosis Fugax): How Does Age Impact Diagnosis? Ophthalmol Ther. 2024;13(6):1417-1425. doi:10.1007/s40123-024-00932-z. https://link.springer.com/article/10.1007/s40123-024-00932-z' },
+    { num: 8, text: 'Maz M, Chung SA, Abril A, Langford CA, Gorelik M, Guyatt G, et al. 2021 American College of Rheumatology/Vasculitis Foundation Guideline for the Management of Giant Cell Arteritis and Takayasu Arteritis. Arthritis Rheumatol. 2021;73(8):1349-1365. doi:10.1002/art.41774. Free full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC12344528/' },
+    { num: 9, text: 'Gedde SJ, Chopra V, Vinod K, Bowden EC, Kolomeyer NN, Challa P, Budenz DL; American Academy of Ophthalmology Preferred Practice Pattern Glaucoma Committee. Primary Angle-Closure Disease Preferred Practice Pattern. Ophthalmology. 2026;133(4):P153-P201. doi:10.1016/j.ophtha.2025.12.030. PMID: 41665581. https://www.aao.org/education/preferred-practice-pattern/primary-angle-closure-disease-ppp (SUPERSEDED - prior edition: Gedde SJ, Chen PP, Muir KW, et al. Ophthalmology. 2021;128(1):P30-P70. doi:10.1016/j.ophtha.2020.10.021)' },
+    { num: 10, text: 'Optic Neuritis Study Group. Visual function 15 years after optic neuritis: a final follow-up report from the Optic Neuritis Treatment Trial. Ophthalmology. 2008;115(6):1079-1082.e5. doi:10.1016/j.ophtha.2007.08.004. PMID: 17976727.' },
+    { num: 11, text: 'Beck RW, Cleary PA, Anderson MM Jr, Keltner JL, Shults WT, Kaufman DI, et al.; Optic Neuritis Study Group. A randomized, controlled trial of corticosteroids in the treatment of acute optic neuritis. N Engl J Med. 1992;326(9):581-588. doi:10.1056/NEJM199202273260901. PMID: 1734247. (Basis for "no oral prednisone alone": standard-dose oral prednisone alone was ineffective and increased the rate of new optic neuritis attacks.)' },
+    { num: 12, text: 'Propst SL, Kirschner JM, Strachan CC, Roumpf SK, Menard LM, Sarmiento EJ, Hunter BR. Ocular Point-of-Care Ultrasonography to Diagnose Posterior Chamber Abnormalities: A Systematic Review and Meta-analysis. JAMA Netw Open. 2020;3(2):e1921460. doi:10.1001/jamanetworkopen.2019.21460. PMID: 32074291. https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2761259' },
+    { num: 13, text: 'Rowh AD, Ufberg JW, Chan TC, Vilke GM, Harrigan RA. Lateral canthotomy and cantholysis: emergency management of orbital compartment syndrome. J Emerg Med. 2015;48(3):325-330. doi:10.1016/j.jemermed.2014.11.002. PMID: 25524455.' },
 ];

@@ -1,4 +1,21 @@
 // MedKitt - Generalized Weakness Hub
+//
+// EVIDENTIARY BASIS DISCLOSURE (FDA 21st Century Cures Act CDS exemption, Prong 4):
+// Every recommendation node in this hub carries a citation array resolving to the
+// GENERALIZED_WEAKNESS_HUB_CITATIONS export below. Each reference there carries a
+// DOI, PMID, ISBN, or resolvable URL so a clinician can independently retrieve and
+// review the basis for the recommendation. This hub is a triage/routing layer: the
+// dose- and threshold-level basis for each lane lives in the linked consult tree.
+//
+// Prong-4 audit 2026-07-28 (Louis Litt): ref 2 author attribution corrected
+// (was misattributed to Narayanaswami P, the myasthenia-gravis guideline author;
+// actual authors Larson ST, Wilbur J); ref 4 page range and PMID resolved from
+// "[in press]"; ref 6 edition/year corrected to the edition matching its editor
+// roster; refs 3, 7, 9 marked SUPERSEDED with current versions added; DOIs/PMIDs
+// added to refs 2, 4, 5, 7, 8, 9, 10, 11; refs 12-19 added so that neuromuscular
+// respiratory thresholds, hyperkalemia, hyponatremia, adrenal crisis, and the
+// ED-specific weakness literature are cited by the sources that actually
+// establish them rather than by a tertiary blog reference.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
@@ -16,7 +33,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     module: 1,
     title: 'Weakness Hub - Sick Check First',
     body: '**\u26A0\uFE0F 5 DO NOT MISS:**\n1. **Neuromuscular respiratory failure (GBS, myasthenic crisis, botulism)** \u2014 single-breath count, NIF/FVC.\n2. **Hyperkalemia / severe electrolyte derangement** \u2014 ECG now.\n3. **Acute coronary syndrome / occult sepsis** \u2014 weakness as an atypical presentation in elderly/diabetic.\n4. **Stroke / cord compression** \u2014 localize: asymmetry, sensory level, bowel/bladder.\n5. **Adrenal crisis / profound hypoglycemia / tox (beta-blocker, CCB, digoxin)** \u2014 glucose, cortisol context, med review.\n\nOpen first:\n- [Hub Steps Summary](#/info/gw-steps)\n- [Hub Stop / Pitfalls](#/info/gw-stop)\n\n**First 60 seconds:**\n- Is this true motor weakness, fatigue, dizziness, pain-limited movement, or altered mental status?\n- Airway/breathing: voice strength, single breath count if neuromuscular concern, work of breathing, aspiration risk.\n- Vitals trend: fever, hypotension, tachy/brady, hypoxia, hypothermia/hyperthermia.\n- Fingerstick glucose now.\n- ECG early: hyperkalemia/hypokalemia, ischemia, dysrhythmia, QRS/QTc toxicity.\n- Quick neuro localization: face/arm/leg asymmetry, speech, gaze, pupils, reflexes, gait if safe.\n- Medication/toxin scan: sedatives, beta-blocker/CCB, insulin/sulfonylurea, statin, diuretic, lithium, alcohol/withdrawal.\n\nGeneralized weakness is a trap complaint. Stabilize physiology and localize before labeling it benign.',
-    citation: [1, 2, 3],
+    citation: [1, 2, 3, 12, 13, 14, 16],
     next: 'gw-exclusions',
     summary: 'Glucose, ECG, vitals, airway/respiratory strength, meds/tox, and localization first.',
     safetyLevel: 'critical',
@@ -37,7 +54,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
       { label: 'Sedation, overdose, acidosis, osm gap, CO exposure, medication change', description: 'Toxicologic or medication-induced weakness', next: 'gw-tox', urgency: 'critical' },
       { label: 'No immediate exclusion hit', description: 'Initial weakness bundle and reassess', next: 'gw-rescue' },
     ],
-    citation: [1, 2, 3, 4, 5, 6],
+    citation: [1, 2, 3, 4, 5, 6, 12, 13],
     summary: 'Shock, stroke, neuromuscular respiratory risk, electrolytes, endocrine, cardiac/anemia, and tox are the first exclusions.',
     safetyLevel: 'critical',
   },
@@ -48,7 +65,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     title: 'Shock / Sepsis / Volume Problem',
     body: 'Open [Sepsis Management](#/tree/sepsis) when infection physiology is plausible.\n\n**Next 5 minutes:** monitor, IV/IO, glucose, ECG, lactate if ill, cultures if they do not delay antibiotics, crystalloid if hypoperfused, pressor early if persistent hypotension, POCUS heart/lungs/IVC when physiology is unclear.\n\n**Pitfall:** older adults may present with isolated weakness and no fever. Hypotension, tachypnea, confusion, or rigors should move weakness into a resuscitation lane.',
     recommendation: 'Treat physiology first. Weakness with shock is not a benign chief complaint.',
-    citation: [1, 7],
+    citation: [1, 7, 19],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -70,7 +87,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     title: 'GBS / Myasthenia / Neuromuscular Respiratory Risk',
     body: 'Open [Guillain-Barre Syndrome](#/tree/guillain-barre) or [Myasthenia Gravis](#/tree/myasthenia-gravis).\n\n**Next 5 minutes:** assess bulbar symptoms, cough, secretion handling, neck flexion, single breath count or bedside respiratory mechanics if available, cardiac monitoring for dysautonomia, avoid premature discharge even if pulse ox is normal.\n\n**Danger signs:** rapidly progressive weakness, inability to walk, facial/bulbar weakness, autonomic instability, weak cough, rising CO2, or fatigue with repeated exam.\n\n**Differential for progressive weakness (each competitor breaks one GBS pillar \u2014 ascending, symmetric, areflexic, sensation spared):**\n- **[Transverse myelitis](#/tree/transverse-myelitis)** \u2014 fever, faster onset, early bladder/bowel dysfunction, a sensory level. *Clear it:* map a sensory level, screen for retention; MRI cord confirms.\n- **Cauda equina / cord compression** \u2014 back pain at a level, saddle anesthesia, retention, often asymmetric. *Clear it:* rectal tone, saddle sensation, post-void residual.\n- **[Myasthenia gravis](#/tree/myasthenia-gravis)** \u2014 insidious, ocular/bulbar onset, fatigable; **reflexes preserved**. *Clear it:* sustained upgaze/fatigability, ice-pack test. Intact reflexes is the key separator.\n- **[Botulism](#/tree/botulism)** \u2014 **descending** weakness, early bulbar palsy, dilated/poorly reactive pupils. *Clear it:* direction of progression + pupil exam; source hx (canned food, wound, infant honey).\n- **[Tick paralysis](#/tree/tick-paralysis)** \u2014 ascending and areflexic too (a true mimic), but CSF is normal. *Clear it:* full skin/scalp/hairline exam to find and remove the tick \u2014 removal reverses it.\n- **[Lambert-Eaton (LEMS)](#/tree/lambert-eaton)** \u2014 proximal weakness that **improves with use**, dry mouth, paraneoplastic. *Clear it:* facilitation history, reflexes augment post-exercise; hunt for small cell lung cancer.\n- **Vascular (cord infarct / brainstem stroke)** \u2014 usually painful, asymmetric, UMN signs, crossed/cranial-nerve findings, +/- absent pulses. *Clear it:* hyperreflexia, Babinski, CN crossing; MRI confirms.\n- **[B12 deficiency](#/tree/b12-deficiency) / neuropathy / B1 deficiency** \u2014 prominent **sensory** deficits, dorsal-column signs (proprioception/vibration loss), brisk reflexes if SCD; GBS sensation is often near-normal. *Clear it:* sensory level, B12/folate labs.\n\n**Two cheap moves that prevent the embarrassing misses:** actually look for a tick, and check the potassium.',
     recommendation: 'Normal SpO2 does not clear neuromuscular respiratory failure. Trend ventilation and bulbar safety.',
-    citation: [8, 9],
+    citation: [8, 9, 12, 13, 16, 17],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -81,7 +98,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     title: 'Electrolyte Paralysis / Weakness',
     body: 'Open [Sodium Disorders](#/tree/sodium), [Calcium Disorders](#/tree/calcium-disorders), [Phosphorous Disorders](#/tree/phosphorus-disorders), or [Magnesium Disorders](#/tree/magnesium-disorders).\n\n**Next 5 minutes:** ECG first, BMP/Mg/Phos/Ca, renal function, CK if rhabdo concern. Treat unstable ECG hyperkalemia immediately with calcium. Severe symptomatic hyponatremia with seizure/coma follows hypertonic saline pathway. Severe hypoK/hypoPhos/hypoMg can present as profound weakness or respiratory failure.\n\n**Pitfall:** do not wait for the full lab panel when ECG shows dangerous potassium physiology.',
     recommendation: 'ECG-dangerous electrolyte disorders are treated before complete diagnostic certainty.',
-    citation: [1, 2],
+    citation: [1, 2, 14, 15],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -92,7 +109,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     title: 'Endocrine / Metabolic Weakness',
     body: 'Open [DKA](#/tree/dka), [Adrenal Insufficiency](#/tree/adrenal-insufficiency), [Thyroid Disorders](#/tree/thyroid), or [Heat Stroke](#/tree/heat-stroke) when the phenotype fits.\n\n**Next 5 minutes:** VBG/chemistry/ketones for DKA/HHS, potassium before insulin, temperature, TSH/free T4 if thyroid storm/myxedema clues, empiric hydrocortisone if adrenal crisis is plausible with shock/hypoglycemia/hyponatremia.\n\n**Pitfall:** fatigue plus hypotension/hypoglycemia/hyponatremia after steroid exposure or adrenal disease is adrenal crisis until proven otherwise.',
     recommendation: 'Correct the life-threatening physiology while the endocrine workup runs.',
-    citation: [10],
+    citation: [10, 18],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -124,7 +141,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     module: 3,
     title: 'Rescue / Initial Bundle + Reassess',
     body: '**Default bundle when no killer has declared itself:**\n- Glucose, ECG, monitor if ill.\n- CBC, CMP, Mg, Phos, Ca, CK when myopathy/rhabdo possible.\n- UA/CXR/cultures only when infection clues exist; do not shotgun without exam signal.\n- Orthostatic vitals and ambulation test when safe.\n- Medication reconciliation, recent illness, tick/travel, exertion, dialysis, insulin/sulfonylurea, diuretics.\n- Focused neuro exam repeated after fluids, glucose correction, analgesia, or rest.\n\n**Reassess in 30-60 minutes:** ability to stand/walk, symmetric strength, reflexes, bulbar/respiratory symptoms, vitals, ECG/lab changes.',
-    citation: [1, 2, 3],
+    citation: [1, 2, 3, 12, 13],
     next: 'gw-reassess',
     summary: 'Glucose/ECG/labs, meds, focused neuro, orthostatics/ambulation, then reassess.',
     safetyLevel: 'warning',
@@ -140,7 +157,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
       { label: 'Improving but not baseline or cause remains unclear', description: 'Use imaging/observation strategy', next: 'gw-imaging' },
       { label: 'Back to baseline with clear benign/reversible cause', description: 'Disposition checklist', next: 'gw-disposition' },
     ],
-    citation: [1, 2],
+    citation: [1, 2, 12, 13],
     summary: 'Worsening or inability to walk is not benign weakness.',
   },
   {
@@ -149,7 +166,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     module: 4,
     title: 'Imaging Decision',
     body: '**Image by localization and physiology:**\n- **CT/CTA head/neck:** focal deficit, aphasia, gaze deviation, severe headache, anticoagulated fall, or stroke window question.\n- **MRI brain/spine:** progressive neurologic deficit, myelopathy, cord/root syndrome, suspected demyelination, or persistent unexplained neuro weakness after CT.\n- **CXR:** infection, CHF, hypoxia, dyspnea, or occult pneumonia in older adults.\n- **CT abdomen/pelvis or bedside aorta ultrasound:** abdominal/back pain, hypotension, older vascular-risk patient, suspected AAA/bleed.\n\nDo not image vague weakness reflexively. Image the diagnosis you are willing to act on.',
-    citation: [1, 4, 5],
+    citation: [1, 4, 5, 12, 13],
     next: 'gw-disposition',
     summary: 'CT/CTA for focal neuro, MRI for cord/progressive neuro, CXR/CT/US when physiology points there.',
     safetyLevel: 'warning',
@@ -165,7 +182,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
       { label: 'Improving but not baseline, unclear cause, needs serial exam or repeat labs', description: 'Observe/admit', next: 'gw-dispo-observe' },
       { label: 'Baseline function restored, benign cause clear, safe support', description: 'Discharge checklist', next: 'gw-dispo-discharge' },
     ],
-    citation: [1, 2],
+    citation: [1, 2, 12, 13],
     summary: 'Discharge requires baseline function, clear cause, stable vitals, and safe ambulation/support.',
   },
   {
@@ -175,7 +192,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     title: 'Admit / ICU / Transfer',
     body: 'Admit/ICU for shock, sepsis, stroke/bleed, ACS/dysrhythmia, dangerous electrolyte/endocrine derangement, progressive weakness, inability to ambulate, respiratory/bulbar weakness, suspected GBS/MG crisis, rhabdomyolysis with renal risk, unsafe environment, or persistent unexplained true weakness.',
     recommendation: 'Persistent true weakness is not a discharge diagnosis until dangerous localization is excluded.',
-    citation: [1, 2, 8, 9],
+    citation: [1, 2, 8, 9, 12, 13, 16, 17],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -186,7 +203,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     title: 'Observation / Serial Exam',
     body: 'Observe when symptoms are improving but not baseline, orthostasis/dehydration needs treatment response, electrolytes require repeat checks, postictal/toxic/metabolic effect may recur, or gait/safety cannot be assessed immediately.',
     recommendation: 'Use repeat neuro exam, ambulation, vitals, ECG, and targeted labs before discharge.',
-    citation: [1, 2],
+    citation: [1, 2, 12, 13],
     safetyLevel: 'warning',
     confidence: 'recommended',
   },
@@ -197,7 +214,7 @@ export const GENERALIZED_WEAKNESS_HUB_NODES: DecisionNode[] = [
     title: 'Discharge Checklist',
     body: 'Discharge only when: back to baseline strength/function, walking safely or baseline mobility restored, vitals stable, glucose/electrolytes/ECG reassuring or corrected, no focal/bulbar/respiratory signs, no concerning medication/tox recurrence, and reliable follow-up/support.\n\n**Return precautions:** worsening weakness, inability to walk, dyspnea, trouble swallowing/speaking, syncope, chest pain, fever, confusion, new numbness, bowel/bladder changes, or recurrent low/high glucose symptoms.',
     recommendation: 'Document repeat exam, ambulation status, and why dangerous causes are unlikely.',
-    citation: [1, 2],
+    citation: [1, 2, 12, 13],
     safetyLevel: 'warning',
     confidence: 'recommended',
   },
@@ -214,15 +231,23 @@ export const GENERALIZED_WEAKNESS_HUB_MODULE_LABELS = [
 ];
 
 export const GENERALIZED_WEAKNESS_HUB_CITATIONS: Citation[] = [
-  { num: 1, text: 'EMCrit/IBCC. Approach to altered mental status, shock, electrolyte emergencies, and toxicologic physiology. https://emcrit.org/ibcc/' },
-  { num: 2, text: 'Narayanaswami P, et al. Muscle Weakness in Adults: Evaluation and Differential Diagnosis. Am Fam Physician. 2020;101(2):95-108.' },
-  { num: 3, text: 'Saguil A. Evaluation of the Patient with Muscle Weakness. Am Fam Physician. 2005;71(7):1327-1336.' },
-  { num: 4, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57:e[in press]. doi:10.1161/STR.0000000000000513' },
-  { num: 5, text: 'Greenberg SM, Ziai WC, Cordonnier C, et al. 2022 AHA/ASA guideline for spontaneous intracerebral hemorrhage. Stroke. 2022;53:e282-e361.' },
-  { num: 6, text: 'Nelson LS, Howland MA, Lewin NA, et al. Goldfrank\'s Toxicologic Emergencies. 12th ed. McGraw Hill; 2023.' },
-  { num: 7, text: 'Surviving Sepsis Campaign. International guidelines for management of sepsis and septic shock. Intensive Care Med. 2021;47:1181-1247.' },
-  { num: 8, text: 'Leonhard SE, Mandarakas MR, Gondim FAA, et al. Diagnosis and management of Guillain-Barre syndrome in ten steps. Nat Rev Neurol. 2019;15:671-683.' },
-  { num: 9, text: 'Sanders DB, Wolfe GI, Benatar M, et al. International consensus guidance for management of myasthenia gravis: executive summary. Neurology. 2016;87:419-425.' },
-  { num: 10, text: 'American Diabetes Association. Hyperglycemic crises in adults with diabetes consensus report. Diabetes Care. 2024.' },
-  { num: 11, text: 'Gulati M, Levy PD, Mukherjee D, et al. 2021 AHA/ACC guideline for the evaluation and diagnosis of chest pain. J Am Coll Cardiol. 2021;78:e187-e285.' },
+  { num: 1, text: 'Farkas J, ed. The Internet Book of Critical Care (IBCC). EMCrit Project. Chapters on hyperkalemia, undifferentiated shock, and toxicologic physiology. https://emcrit.org/ibcc/ (accessed 2026-07-28). BASIS DISCLOSURE: expert-authored open tertiary reference, not peer-reviewed primary literature. Peer-reviewed primary sources for each recommendation in this hub are cited separately below (refs 12-19).' },
+  { num: 2, text: 'Larson ST, Wilbur J. Muscle Weakness in Adults: Evaluation and Differential Diagnosis. Am Fam Physician. 2020;101(2):95-108. PMID:31939642. https://www.aafp.org/pubs/afp/issues/2020/0115/p95.html' },
+  { num: 3, text: 'SUPERSEDED - Saguil A. Evaluation of the Patient with Muscle Weakness. Am Fam Physician. 2005;71(7):1327-1336. PMID:15832536. https://www.aafp.org/pubs/afp/issues/2005/0401/p1327.html Superseded by ref 2 (Larson/Wilbur, AFP 2020); retained for its diagnostic tables, which the 2020 article reproduces.' },
+  { num: 4, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2026;57(8):e316-e436. doi:10.1161/STR.0000000000000513. PMID:41582814' },
+  { num: 5, text: 'Greenberg SM, Ziai WC, Cordonnier C, et al. 2022 Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage: A Guideline From the American Heart Association/American Stroke Association. Stroke. 2022;53(7):e282-e361. doi:10.1161/STR.0000000000000407. PMID:35579034' },
+  { num: 6, text: 'Nelson LS, Howland MA, Lewin NA, Smith SW, Goldfrank LR, Hoffman RS, eds. Goldfrank\'s Toxicologic Emergencies. 11th ed. McGraw Hill; 2019. ISBN 9781259859618. (A 12th edition edited by Hoffman RS, Biary R, Gosselin S, Howland MA, Lewin NA, Nelson LS, Smith SW, Goldfrank LR is now published, ISBN 9781266963261; the 11th edition is cited here because its content is the verified basis for the tox recommendations in this hub.)' },
+  { num: 7, text: 'SUPERSEDED - Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: international guidelines for management of sepsis and septic shock 2021. Intensive Care Med. 2021;47(11):1181-1247. doi:10.1007/s00134-021-06506-y. PMID:34599691. Superseded by ref 19 (Surviving Sepsis Campaign 2026).' },
+  { num: 8, text: 'Leonhard SE, Mandarakas MR, Gondim FAA, et al. Diagnosis and management of Guillain-Barre syndrome in ten steps. Nat Rev Neurol. 2019;15(11):671-683. doi:10.1038/s41582-019-0250-9. PMID:31541214. PMCID:PMC6821638' },
+  { num: 9, text: 'SUPERSEDED - Sanders DB, Wolfe GI, Benatar M, et al. International consensus guidance for management of myasthenia gravis: executive summary. Neurology. 2016;87(4):419-425. doi:10.1212/WNL.0000000000002790. PMID:27358333. Superseded by ref 17 (2020 Update).' },
+  { num: 10, text: 'Umpierrez GE, Davis GM, ElSayed NA, et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report. Diabetes Care. 2024;47(8):1257-1275. doi:10.2337/dci24-0032. PMID:39052901. Co-published: Diabetologia. 2024;67(8):1455-1479. PMID:38907161' },
+  { num: 11, text: 'Gulati M, Levy PD, Mukherjee D, et al. 2021 AHA/ACC/ASE/CHEST/SAEM/SCCT/SCMR Guideline for the Evaluation and Diagnosis of Chest Pain. J Am Coll Cardiol. 2021;78(22):e187-e285. doi:10.1016/j.jacc.2021.07.053. PMID:34756653' },
+  { num: 12, text: 'Ganti L, Rastogi V. Acute Generalized Weakness. Emerg Med Clin North Am. 2016;34(4):795-809. doi:10.1016/j.emc.2016.06.006. PMID:27741989' },
+  { num: 13, text: 'Sams W, Hassan N, Meurer WJ. General Approach to Weakness. Emerg Med Clin North Am. 2026;44(1):219-226. doi:10.1016/j.emc.2025.08.013. PMID:41260854' },
+  { num: 14, text: 'Lindner G, Burdmann EA, Clase CM, et al. Acute hyperkalemia in the emergency department: a summary from a Kidney Disease: Improving Global Outcomes conference. Eur J Emerg Med. 2020;27(5):329-337. doi:10.1097/MEJ.0000000000000691. PMID:32852924. PMCID:PMC7448835' },
+  { num: 15, text: 'Verbalis JG, Goldsmith SR, Greenberg A, et al. Diagnosis, evaluation, and treatment of hyponatremia: expert panel recommendations. Am J Med. 2013;126(10 Suppl 1):S1-S42. doi:10.1016/j.amjmed.2013.07.006. PMID:24074529' },
+  { num: 16, text: 'Lawn ND, Fletcher DD, Henderson RD, Wolter TD, Wijdicks EFM. Anticipating mechanical ventilation in Guillain-Barre syndrome. Arch Neurol. 2001;58(6):893-898. doi:10.1001/archneur.58.6.893. PMID:11405803. Source of the 20/30/40 rule (vital capacity <20 mL/kg, maximal inspiratory pressure <30 cmH2O, maximal expiratory pressure <40 cmH2O). Single-center retrospective cohort (1976-1996); should not be the sole trigger for intubation.' },
+  { num: 17, text: 'Narayanaswami P, Sanders DB, Wolfe G, et al. International Consensus Guidance for Management of Myasthenia Gravis: 2020 Update. Neurology. 2021;96(3):114-122. doi:10.1212/WNL.0000000000011124. PMID:33144515' },
+  { num: 18, text: 'Bornstein SR, Allolio B, Arlt W, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline. J Clin Endocrinol Metab. 2016;101(2):364-389. doi:10.1210/jc.2015-1710. PMID:26760044. PMCID:PMC4880116' },
+  { num: 19, text: 'Prescott HC, Antonelli M, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2026. Crit Care Med. 2026;54(4):725-812. doi:10.1097/CCM.0000000000007075. PMID:41869847. Current version; supersedes ref 7.' },
 ];

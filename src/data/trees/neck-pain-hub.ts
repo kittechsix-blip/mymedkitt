@@ -1,4 +1,13 @@
 // MedKitt - Neck Pain Hub
+//
+// EVIDENTIARY BASIS (FDA 21st Century Cures Act CDS exemption, Prong 4):
+// Every recommendation node in this hub carries a citation array indexing
+// NECK_PAIN_HUB_CITATIONS below. Each reference is listed with a DOI, PMID, or
+// resolvable URL so a clinician can independently retrieve and review the basis
+// for the recommendation. This hub is a routing/triage layer: it states no drug
+// doses and no numeric thresholds. All dosing and definitive management live in
+// the linked deep-dive consults, which carry their own sourcing.
+// Legal audit: Louis Litt, 2026-07-28.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
@@ -6,7 +15,11 @@ import type { Citation } from './neurosyphilis.js';
 export const NECK_PAIN_HUB_CRITICAL_ACTIONS = [
   { text: 'Neck pain plus neuro deficit, fever, airway symptoms, or trauma is not routine neck pain', nodeId: 'np-start' },
   { text: 'Dissection, meningitis, deep neck infection, spine infection, and cord compression are first-pass exclusions', nodeId: 'np-exclusions' },
-  { text: 'Do not manipulate, discharge myelopathy, or delay antibiotics/airway planning for deep neck/CNS infection', nodeId: 'np-dispo-admit' },
+  { text: 'Do not delay empiric antibiotics for CT/LP logistics when CNS infection is plausible', nodeId: 'np-meningitis' },
+  { text: 'Airway plan before supine CT when deep neck infection has airway features', nodeId: 'np-deep-neck' },
+  { text: 'Do not discharge myelopathy - MRI and spine/neuro pathway', nodeId: 'np-myelopathy' },
+  { text: 'Do not manipulate the neck while dissection, fracture/instability, myelopathy, or spine infection remains possible', nodeId: 'np-rescue' },
+  { text: 'Admit airway threat, CNS/spine infection, dissection/stroke, fracture/instability, and myelopathy', nodeId: 'np-dispo-admit' },
 ];
 
 export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
@@ -16,7 +29,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     module: 1,
     title: 'Neck Pain Hub - Sick Check First',
     body: '**\u26A0\uFE0F 5 DO NOT MISS:**\n1. **Cervical artery dissection** \u2014 sudden neck/occipital pain, Horner, focal deficit.\n2. **Meningitis** \u2014 fever + meningismus + photophobia.\n3. **Epidural abscess / spinal infection** \u2014 fever, IVDU/immunosuppression, midline tenderness, deficit.\n4. **Deep space neck infection (Ludwig, retropharyngeal)** \u2014 airway threat: drooling, trismus, muffled voice.\n5. **Cervical cord compression / unstable fracture** \u2014 myelopathy, trauma, anticoagulation.\n\nOpen first:\n- [Hub Steps Summary](#/info/np-steps)\n- [Hub Stop / Pitfalls](#/info/np-stop)\n\n**First 60 seconds:**\n- General appearance: toxic, tripod, drooling, muffled voice, meningismus, severe distress?\n- Airway/swallow: stridor, trismus, odynophagia, neck swelling, floor-of-mouth elevation.\n- Neuro: headache, Horner syndrome, diplopia, ataxia, dysarthria, unilateral weakness/numbness, gait, hand clumsiness, hyperreflexia.\n- Trauma/strain/strangulation/manipulation: mechanism, anticoagulation, midline tenderness.\n- Infection risk: fever, IVDU, immunosuppression, diabetes, recent bacteremia/procedure, dental/oropharyngeal source.\n- Vascular/cardiac clues: sudden posterior headache/neck pain, chest pain, jaw/arm symptoms, pulse/BP deficit.\n\nNeck pain is often benign, but the dangerous misses are clustered: airway, CNS infection, dissection, cord, and spine infection.',
-    citation: [1, 2, 3],
+    citation: [1, 2, 3, 4, 6, 7, 9],
     next: 'np-exclusions',
     summary: 'Airway/swallow, neuro, trauma, infection risk, and vascular clues first.',
     safetyLevel: 'critical',
@@ -37,7 +50,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
       { label: 'Chest pressure, dyspnea, jaw/arm pain, ischemic ECG, tearing pain', description: 'ACS or aortic dissection presenting as neck pain', next: 'np-cardiovascular', urgency: 'critical' },
       { label: 'No immediate exclusion hit', description: 'Initial neck pain bundle and reassess', next: 'np-rescue' },
     ],
-    citation: [1, 2, 3, 4, 5, 6],
+    citation: [1, 2, 3, 4, 6, 7, 9, 10, 11],
     summary: 'Exclude trauma, meningitis, dissection, deep neck infection, SEA/NVO, myelopathy, and cardiac/aortic causes.',
     safetyLevel: 'critical',
   },
@@ -48,7 +61,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     title: 'Trauma / C-Spine Injury',
     body: 'Open [Cervical Spine Injuries](#/tree/cervical-spine).\n\n**Next 5 minutes:** immobilize if unstable mechanism or neuro deficit, document neuro exam before analgesia/sedation if possible, CT C-spine by validated trauma criteria/local protocol, CTA neck if blunt cerebrovascular injury risk, spine consult for fracture/instability/neuro deficit.\n\n**Pitfall:** elderly ground-level falls, anticoagulation, intoxication, and distracting injury can hide clinically important cervical injury.',
     recommendation: 'Treat traumatic neck pain with neurologic or high-risk mechanism features as C-spine injury until cleared.',
-    citation: [1],
+    citation: [1, 12, 13, 14],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -59,7 +72,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     title: 'Meningitis / Encephalitis',
     body: 'Open [Meningitis / Encephalitis](#/tree/meningitis).\n\n**Next 5 minutes:** droplet precautions if meningococcal concern, blood cultures if they do not delay therapy, empiric antibiotics plus dexamethasone when bacterial meningitis plausible, acyclovir when encephalitis plausible. CT-before-LP only when indicated, but treatment should not wait for CT/LP logistics.\n\n**Pitfall:** absence of classic triad does not exclude meningitis.',
     recommendation: 'When CNS infection is plausible, empiric therapy is time-sensitive.',
-    citation: [4],
+    citation: [4, 17],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -70,7 +83,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     title: 'Cervical Artery Dissection',
     body: 'Open [Cervical Artery Dissection](#/tree/cervical-artery-dissection) and [Acute Ischemic Stroke](#/tree/stroke) if focal deficits are present.\n\n**Next 5 minutes:** focused posterior circulation exam, Horner check, CTA head/neck if suspicion is meaningful, avoid neck manipulation, stroke alert if deficits/window. Ask about manipulation, minor trauma, coughing/vomiting, sports, and strangulation.\n\n**Pitfall:** young patient with posterior headache/neck pain and dizziness/ataxia is not automatically benign vertigo or muscle strain.',
     recommendation: 'CTA head/neck when neck pain plus neuro/Horner/posterior circulation features fit.',
-    citation: [5, 7],
+    citation: [5, 7, 15, 16],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -92,7 +105,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     title: 'Spinal Epidural Abscess / Vertebral Osteomyelitis',
     body: 'Open [Cervical Spine Pain - Non-Traumatic](#/tree/cervical-spine-nontraumatic).\n\n**Next 5 minutes:** neuro exam, ESR/CRP, blood cultures if febrile or high suspicion, MRI cervical spine with and without contrast; consider whole-spine MRI when symptoms do not localize or risk is high. Start antibiotics after cultures when sepsis/neuro deficit; do not delay treatment in unstable patients.\n\n**Pitfall:** fever is absent in many SEA cases. IVDU, bacteremia, immunosuppression, diabetes, recent spine procedure, or focal percussion tenderness should raise suspicion.',
     recommendation: 'MRI is the key test when spine infection or epidural abscess is plausible.',
-    citation: [3, 8],
+    citation: [3, 8, 18],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -103,7 +116,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     title: 'Myelopathy / Radiculopathy / Cord Compression',
     body: 'Open [Cervical Spine Pain - Non-Traumatic](#/tree/cervical-spine-nontraumatic).\n\n**Next 5 minutes:** document strength/reflexes/sensation/gait, check for Hoffman/clonus/hyperreflexia, look for urinary symptoms, avoid manipulation, MRI when myelopathy/progressive deficit/cord compression is suspected.\n\n**Pitfall:** bilateral hand clumsiness, gait instability, and hyperreflexia are not routine radiculopathy.',
     recommendation: 'Myelopathy signs need MRI and spine/neuro pathway, not routine discharge.',
-    citation: [1, 9],
+    citation: [1, 9, 15],
     safetyLevel: 'critical',
     confidence: 'recommended',
   },
@@ -124,7 +137,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     module: 3,
     title: 'Rescue / Initial Bundle + Reassess',
     body: '**Default bundle when no killer has declared itself:**\n- Analgesia: acetaminophen/NSAID when safe; avoid masking evolving neuro deficits with heavy sedation.\n- Gentle range-of-motion only when trauma, infection, myelopathy, dissection, and airway infection are not suspected.\n- Focused repeat neuro exam: strength, sensation, reflexes, gait, cranial nerves when headache/dizziness.\n- Infection screen when risk exists: temp, CBC, ESR/CRP, blood cultures if febrile/high suspicion.\n- Avoid chiropractic/manipulation advice when dissection, myelopathy, fracture, or instability is possible.\n\n**Reassess in 30-60 minutes:** pain trajectory, neck mobility, swallowing/voice, neuro exam, vitals, and ability to function safely.',
-    citation: [1, 2],
+    citation: [1, 2, 15],
     next: 'np-reassess',
     summary: 'Analgesia, repeat neuro/airway/swallow exam, infection screen by risk, then reassess.',
     safetyLevel: 'warning',
@@ -149,7 +162,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     module: 4,
     title: 'Imaging Decision',
     body: '**Choose imaging by suspected threat:**\n- **CT C-spine:** trauma/high-risk mechanism, elderly fall, midline tenderness, intoxication, neuro deficit per trauma criteria.\n- **CTA head/neck:** dissection suspicion, Horner, posterior circulation symptoms, strangulation/manipulation with neuro symptoms.\n- **CT neck with IV contrast:** deep neck infection, abscess, Lemierre concern, airway-safe patient.\n- **MRI cervical spine with/without contrast:** myelopathy, cord compression, epidural abscess, vertebral osteomyelitis, malignancy, progressive neurologic deficit.\n- **No routine imaging:** uncomplicated acute mechanical neck pain without red flags usually does not need advanced imaging in the ED.\n\nImage the danger you are willing to act on; do not image to replace the airway/neuro exam.',
-    citation: [1, 3, 6],
+    citation: [1, 3, 6, 7, 12, 13, 14, 18],
     next: 'np-disposition',
     summary: 'CT trauma, CTA dissection, CT neck contrast infection, MRI cord/spine infection/malignancy/progressive neuro.',
     safetyLevel: 'warning',
@@ -175,7 +188,7 @@ export const NECK_PAIN_HUB_NODES: DecisionNode[] = [
     title: 'Admit / ICU / Transfer',
     body: 'Admit/ICU/transfer for deep neck infection with airway concern, meningitis/encephalitis, dissection/stroke, unstable C-spine injury, epidural abscess/vertebral osteomyelitis, myelopathy/progressive deficit, suspected malignancy cord compression, uncontrolled pain with red flags, or unsafe follow-up.',
     recommendation: 'Use the deep-dive consult and involve airway/ENT/neuro/spine early based on the threat.',
-    citation: [1, 3, 4, 6],
+    citation: [1, 3, 4, 6, 7, 9],
     safetyLevel: 'critical',
     confidence: 'definitive',
   },
@@ -214,15 +227,22 @@ export const NECK_PAIN_HUB_MODULE_LABELS = [
 ];
 
 export const NECK_PAIN_HUB_CITATIONS: Citation[] = [
-  { num: 1, text: 'ACR Appropriateness Criteria. Cervical Neck Pain or Cervical Radiculopathy: 2024 Update. J Am Coll Radiol. 2025;22:S50-S67.' },
-  { num: 2, text: 'Cohen SP, Hooten WM. Advances in the diagnosis and management of neck pain. BMJ. 2017;358:j3221.' },
-  { num: 3, text: 'Berbari EF, Kanj SS, Kowalski TJ, et al. IDSA clinical practice guideline for native vertebral osteomyelitis in adults. Clin Infect Dis. 2015;61:e26-e46.' },
-  { num: 4, text: 'van de Beek D, Cabellos C, Dzupova O, et al. ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22:S37-S62.' },
-  { num: 5, text: 'Engelter ST, Traenka C, Gensicke H, et al. Aspirin versus anticoagulation in cervical artery dissection: CADISS and TREAT-CAD evidence base. Lancet Neurol. 2015 and 2021.' },
-  { num: 6, text: 'Vieira F, Allen SM, Stocks RM, Thompson JW. Deep neck infections. Otolaryngol Clin North Am. 2008;41:459-483.' },
-  { num: 7, text: 'EMCrit/IBCC. Cervical artery dissection and posterior circulation stroke reviews. https://emcrit.org/ibcc/' },
-  { num: 8, text: 'Davis DP, Wold RM, Patel RJ, et al. Clinical presentation and impact of diagnostic delays on ED patients with spinal epidural abscess. J Emerg Med. 2004;26:285-291.' },
-  { num: 9, text: 'Fehlings MG, Tetreault LA, Riew KD, et al. Clinical practice guideline for degenerative cervical myelopathy. Global Spine J. 2017;7(3 Suppl):70S-83S.' },
-  { num: 10, text: 'Gulati M, Levy PD, Mukherjee D, et al. 2021 AHA/ACC guideline for evaluation and diagnosis of chest pain. J Am Coll Cardiol. 2021;78:e187-e285.' },
-  { num: 11, text: 'Isselbacher EM, Preventza O, Hamilton Black J, et al. 2022 ACC/AHA guideline for diagnosis and management of aortic disease. Circulation. 2022;146:e334-e482.' },
+  { num: 1, text: 'Expert Panel on Neurological Imaging; Eldaya RW, Parsons MS, Hutchins TA, et al. ACR Appropriateness Criteria Cervical Pain or Cervical Radiculopathy: 2024 Update. J Am Coll Radiol. 2025;22(5S):S136-S162. doi:10.1016/j.jacr.2025.02.035. PMID: 40409873' },
+  { num: 2, text: 'Cohen SP, Hooten WM. Advances in the diagnosis and management of neck pain. BMJ. 2017;358:j3221. doi:10.1136/bmj.j3221. PMID: 28807894' },
+  { num: 3, text: 'Berbari EF, Kanj SS, Kowalski TJ, et al; Infectious Diseases Society of America. 2015 Infectious Diseases Society of America (IDSA) clinical practice guidelines for the diagnosis and treatment of native vertebral osteomyelitis in adults. Clin Infect Dis. 2015;61(6):e26-e46. doi:10.1093/cid/civ482. PMID: 26229122' },
+  { num: 4, text: 'van de Beek D, Cabellos C, Dzupova O, et al; ESCMID Study Group for Infections of the Brain (ESGIB). ESCMID guideline: diagnosis and treatment of acute bacterial meningitis. Clin Microbiol Infect. 2016;22(Suppl 3):S37-S62. doi:10.1016/j.cmi.2016.01.007. PMID: 27062097' },
+  { num: 5, text: 'Engelter ST, Traenka C, Gensicke H, et al. Aspirin versus anticoagulation in cervical artery dissection (TREAT-CAD): an open-label, randomised, non-inferiority trial. Lancet Neurol. 2021;20(5):341-350. doi:10.1016/S1474-4422(21)00044-2. PMID: 33765420' },
+  { num: 6, text: 'Vieira F, Allen SM, Stocks RM, Thompson JW. Deep neck infection. Otolaryngol Clin North Am. 2008;41(3):459-483. doi:10.1016/j.otc.2008.01.002. PMID: 18435993' },
+  { num: 7, text: 'Yaghi S, Engelter S, Del Brutto VJ, et al; American Heart Association Stroke Council. Treatment and outcomes of cervical artery dissection in adults: a scientific statement from the American Heart Association. Stroke. 2024;55(3):e91-e106. doi:10.1161/STR.0000000000000457. PMID: 38299330' },
+  { num: 8, text: 'Davis DP, Wold RM, Patel RJ, et al. The clinical presentation and impact of diagnostic delays on emergency department patients with spinal epidural abscess. J Emerg Med. 2004;26(3):285-291. doi:10.1016/j.jemermed.2003.11.013. PMID: 15028325' },
+  { num: 9, text: 'Fehlings MG, Tetreault LA, Riew KD, et al. A clinical practice guideline for the management of patients with degenerative cervical myelopathy: recommendations for patients with mild, moderate, and severe disease and nonmyelopathic patients with evidence of cord compression. Global Spine J. 2017;7(3 Suppl):70S-83S. doi:10.1177/2192568217701914. PMID: 29164035' },
+  { num: 10, text: 'Gulati M, Levy PD, Mukherjee D, et al. 2021 AHA/ACC/ASE/CHEST/SAEM/SCCT/SCMR guideline for the evaluation and diagnosis of chest pain: a report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines. J Am Coll Cardiol. 2021;78(22):e187-e285. doi:10.1016/j.jacc.2021.07.053. PMID: 34756653' },
+  { num: 11, text: 'Isselbacher EM, Preventza O, Hamilton Black J 3rd, et al. 2022 ACC/AHA guideline for the diagnosis and management of aortic disease. Circulation. 2022;146(24):e334-e482. doi:10.1161/CIR.0000000000001106. PMID: 36322642' },
+  { num: 12, text: 'Hoffman JR, Mower WR, Wolfson AB, Todd KH, Zucker MI; National Emergency X-Radiography Utilization Study Group. Validity of a set of clinical criteria to rule out injury to the cervical spine in patients with blunt trauma (NEXUS). N Engl J Med. 2000;343(2):94-99. doi:10.1056/NEJM200007133430203. PMID: 10891516' },
+  { num: 13, text: 'Stiell IG, Wells GA, Vandemheen KL, et al. The Canadian C-Spine Rule for radiography in alert and stable trauma patients. JAMA. 2001;286(15):1841-1848. doi:10.1001/jama.286.15.1841. PMID: 11597285' },
+  { num: 14, text: 'Kim DY, Biffl W, Bokhari F, et al. Evaluation and management of blunt cerebrovascular injury: a practice management guideline from the Eastern Association for the Surgery of Trauma. J Trauma Acute Care Surg. 2020;88(6):875-887. doi:10.1097/TA.0000000000002668. PMID: 32176167. SUPERSEDES Bromberg WJ, et al. J Trauma. 2010;68(2):471-477' },
+  { num: 15, text: 'Biller J, Sacco RL, Albuquerque FC, et al; American Heart Association Stroke Council. Cervical arterial dissections and association with cervical manipulative therapy: a statement for healthcare professionals from the American Heart Association/American Stroke Association. Stroke. 2014;45(10):3155-3174. doi:10.1161/STR.0000000000000016. PMID: 25104849' },
+  { num: 16, text: 'CADISS trial investigators; Markus HS, Hayter E, Levi C, Feldman A, Venables G, Norris J. Antiplatelet treatment compared with anticoagulation treatment for cervical artery dissection (CADISS): a randomised trial. Lancet Neurol. 2015;14(4):361-367. doi:10.1016/S1474-4422(15)70018-9. PMID: 25684164' },
+  { num: 17, text: 'Hasbun R, Abrahams J, Jekel J, Quagliarello VJ. Computed tomography of the head before lumbar puncture in adults with suspected meningitis. N Engl J Med. 2001;345(24):1727-1733. doi:10.1056/NEJMoa010399. PMID: 11742046' },
+  { num: 18, text: 'Tande AJ, Currier BL, Osmon DR. Spinal epidural abscess. N Engl J Med. 2026;394(16):1621-1633. doi:10.1056/NEJMra2412728. PMID: 42019020' },
 ];

@@ -16,9 +16,27 @@
 //   - Mental (± incisive) — mandibular premolars to midline, lower lip/chin
 //
 // Evidence base: Roberts & Hedges' Clinical Procedures in Emergency Medicine and
-// Acute Care (8th ed.), Ch. 64 "Regional Nerve Blocks of the Head and Neck" and
-// Ch. 30 "Local and Topical Anesthesia"; Malamed SF, Handbook of Local Anesthesia
-// (7th ed.); Tintinalli's Emergency Medicine (9th ed.) oral/dental emergencies.
+// Acute Care (8th ed., Birnbaumer DM ed., Elsevier 2025), Ch. 30 "Regional Anesthesia
+// of the Head and Neck" and Ch. 29 "Local and Topical Anesthesia"; Malamed SF,
+// Handbook of Local Anesthesia (7th ed., Mosby/Elsevier 2020); Tintinalli's Emergency
+// Medicine (9th ed.) Ch. 36 "Local and Regional Anesthesia" and Ch. 245 "Oral and
+// Dental Emergencies"; ASRA LAST checklist (2020 version) for lipid-emulsion rescue;
+// FDA prescribing information (dental lidocaine + epinephrine, articaine, bupivacaine)
+// and the AAPD Best Practice on local anesthesia for the maximum-dose ceilings used by
+// the Max LA Dose / Cartridge Tracker tools.
+//
+// BASIS DISCLOSURE (FDA 21st Century Cures Act §520(o)(1)(E), Prong 4): every
+// recommendation node in this tree carries a numbered citation into the reference list
+// below so the treating clinician can independently review the basis for it. This
+// consult does not replace independent clinical judgment.
+//
+// LEGAL/CITATION AUDIT 2026-07-28 (Louis Litt): reference 1 and 3 previously credited
+// the 7th-edition editors (Roberts JR, Custalow CB, Thomsen TW), a 2023 publication
+// year, and a nonexistent "Ch. 64, Regional Nerve Blocks of the Head and Neck" — the
+// real 8th ed. (Elsevier, 2025) is edited by Diane M. Birnbaumer with Ch. 29/Ch. 30.
+// Reference 5 (Cochrane CD006581) was withdrawn from the Cochrane Library in 2015 and
+// is now marked WITHDRAWN with a live replacement (ref 17). Reference 4 (ASRA 2018) is
+// marked SUPERSEDED for LAST management by the 2020 ASRA checklist (ref 16).
 //
 // IMAGES: per project CLAUDE.md commercial-license rule (CC0 / PD / US-Gov-Work
 // ONLY), image hooks are intentionally OMITTED from this initial build pending
@@ -38,7 +56,7 @@ export const DENTAL_NERVE_BLOCKS_NODES = [
         module: 1,
         title: 'Dental / Intraoral Nerve Blocks — ED Procedure',
         body: 'Intraoral regional anesthesia controls odontogenic (toothache) pain, anesthetizes for dental fracture/avulsion management, and enables repair of intraoral and dentoalveolar lacerations — often more effective and humane than systemic analgesia alone.\n\nKey principle: the maxillary teeth (V2) are usually anesthetized by SUPRAPERIOSTEAL infiltration or superior-alveolar blocks because maxillary bone is porous; the mandibular teeth (V3) require an INFERIOR ALVEOLAR NERVE BLOCK because dense cortical bone blocks infiltration.\n\nOpen first:\n- [Contraindications + pre-procedure checks](#/node/dnb-contra)\n- [Shared technique for all intraoral blocks](#/node/dnb-shared-technique)\n- [Procedure Steps Summary](#/info/dnb-steps)\n- [Stop / Pitfalls](#/info/dnb-stop)\n- Tools: [Max LA Dose](#/calculator/dnb-la-max-dose) and [Block Selector](#/calculator/dnb-block-selector) in the toolbar\n\nThen select which tooth or region needs anesthesia.',
-        citation: [1, 2],
+        citation: [1, 2, 6],
         next: 'dnb-region',
         summary: 'Maxillary teeth (V2) = supraperiosteal/superior-alveolar (porous bone). Mandibular teeth (V3) = inferior alveolar block (dense bone).',
         safetyLevel: 'warning',
@@ -117,7 +135,7 @@ export const DENTAL_NERVE_BLOCKS_NODES = [
         module: 2,
         title: 'Contraindications + Pre-procedure Checks',
         body: 'Absolute:\n- Active infection/cellulitis at the planned injection site (do not inject through infected tissue — risks spreading infection and the block often fails in acidic infected tissue)\n- Known true allergy to the local anesthetic class\n- Patient unable to cooperate / protect the airway with an anesthetized tongue and floor of mouth\n\nRelative — weigh risk/benefit:\n- Therapeutic anticoagulation (intraoral blocks are mostly superficial/low-risk except deep IANB where the inferior alveolar vessels run with the nerve — aspirate, apply pressure)\n- Bisphosphonate/antiresorptive use (caution with any dentoalveolar trauma; coordinate with dentistry)\n- Trismus limiting access for an IANB\n\nConfirm before any block:\n1. Informed consent (transient numbness of lip/tongue, self-inflicted bite injury while numb, failed/partial block, hematoma, vascular injection, transient facial nerve palsy with a misdirected IANB).\n2. Allergies (LA, latex, antiseptic, topical benzocaine).\n3. Anticoagulation status.\n4. Calculate the [maximum safe LA dose](#/calculator/dnb-la-max-dose) BEFORE drawing up. Dental cartridges are 1.8 mL — track cartridge count.\n5. Apply topical anesthetic (benzocaine 20% or lidocaine gel) to the dried mucosa for 1–2 min to reduce needle-stick pain.\n6. Aspirate before every injection.',
-        citation: [1, 4],
+        citation: [1, 3, 4, 16, 18, 19, 20, 21],
         next: 'dnb-region',
         summary: 'No infection at site, no LA allergy; topical first; verify max LA dose (1.8 mL/cartridge); aspirate (esp. IANB — vessels with nerve).',
         safetyLevel: 'critical',
@@ -127,8 +145,8 @@ export const DENTAL_NERVE_BLOCKS_NODES = [
         type: 'info',
         module: 2,
         title: 'Shared Technique — All Intraoral Blocks',
-        body: 'Equipment:\n- 3 mL syringe (or dental aspirating syringe), 25–27 gauge needle (1 inch for infiltration; 1.5 inch/“long” for IANB)\n- Topical benzocaine 20% gel on a cotton applicator\n- 2x2 gauze to dry mucosa and retract\n- Good light + suction\n\nAgent (choose one):\n- [Lidocaine 2% with epinephrine 1:100,000](#/drug/lidocaine/dental nerve block) — standard dental concentration; fast onset, ~60 min pulpal / 3–4 h soft-tissue; epinephrine prolongs and reduces bleeding (intraoral end-arteries are not a concern).\n- [Bupivacaine 0.5% with epinephrine](#/drug/bupivacaine/dental nerve block) — slower onset, long duration (good for prolonged pain control / overnight relief).\n- Articaine 4% (dental) is widely used by dentistry for superior diffusion; lidocaine is the default ED agent.\n- Buffer lidocaine 9:1 with sodium bicarbonate to reduce sting.\n\nUniversal steps:\n1. Dry mucosa, apply topical for 1–2 min.\n2. Retract the lip/cheek; keep the tissue taut.\n3. Insert with bevel toward bone; advance to the target depth.\n4. ASPIRATE (rotate 90° and re-aspirate for the IANB).\n5. Inject SLOWLY (≥1 min per cartridge — slow = less pain and safer).\n6. Wait for onset (3–5 min infiltration; 5–10 min IANB) and TEST before proceeding.',
-        citation: [1, 2, 5],
+        body: 'Equipment:\n- 3 mL syringe (or dental aspirating syringe), 25–27 gauge needle (1 inch for infiltration; 1.5 inch/“long” for IANB)\n- Topical benzocaine 20% gel on a cotton applicator\n- 2x2 gauze to dry mucosa and retract\n- Good light + suction\n\nAgent (choose one):\n- [Lidocaine 2% with epinephrine 1:100,000](#/drug/lidocaine) — standard dental concentration; fast onset, ~60 min pulpal / 3–4 h soft-tissue; epinephrine prolongs and reduces bleeding (intraoral end-arteries are not a concern).\n- [Bupivacaine 0.5% with epinephrine](#/drug/bupivacaine) — slower onset, long duration (good for prolonged pain control / overnight relief).\n- Articaine 4% (dental) is widely used by dentistry for superior diffusion; lidocaine is the default ED agent.\n- Buffer lidocaine 9:1 with sodium bicarbonate to reduce sting.\n\nUniversal steps:\n1. Dry mucosa, apply topical for 1–2 min.\n2. Retract the lip/cheek; keep the tissue taut.\n3. Insert with bevel toward bone; advance to the target depth.\n4. ASPIRATE (rotate 90° and re-aspirate for the IANB).\n5. Inject SLOWLY (≥1 min per cartridge — slow = less pain and safer).\n6. Wait for onset (3–5 min infiltration; 5–10 min IANB) and TEST before proceeding.',
+        citation: [1, 2, 3, 5, 17, 18, 19, 20],
         next: 'dnb-region',
         summary: 'Topical first; 25–27 ga (long needle for IANB); lidocaine 2% w/ epi standard; bevel to bone; aspirate (double for IANB); inject slowly; test.',
     },
@@ -268,7 +286,7 @@ export const DENTAL_NERVE_BLOCKS_NODES = [
         module: 5,
         title: 'Rescue a Partial / Failed Block',
         body: 'Common causes of failure:\n- **IANB:** too anterior/low, or not deep enough — the most commonly missed block. Re-confirm the coronoid notch and that you contacted bone ~20–25 mm in. Accessory innervation (mylohyoid nerve) can supply lower molars — add a buccal-floor infiltration.\n- **Maxillary:** tip below the apex (soft tissue only, no pulp), or absent MSA for premolars.\n- Insufficient wait (bupivacaine 8–10 min), too little volume, or block attempted in acidic infected tissue.\n\nRescue options:\n1. Re-confirm the landmark and re-inject (aspirate first).\n2. Add a supraperiosteal infiltration over the specific deficient maxillary tooth, or a buccal/palatal injection for soft-tissue gaps.\n3. For a failed IANB, consider repeating with attention to depth/bone contact, or an alternative mandibular technique.\n4. ALWAYS re-check the running total against the [max LA dose](#/calculator/dnb-la-max-dose) before adding more.',
-        citation: [1, 4],
+        citation: [1, 2, 4, 18, 21],
         next: 'dnb-complications',
         summary: 'IANB fails most (too low/shallow or accessory mylohyoid) — re-confirm bone contact. Maxillary: tip-below-apex or absent MSA. Re-block / infiltrate / recheck max dose.',
     },
@@ -277,8 +295,8 @@ export const DENTAL_NERVE_BLOCKS_NODES = [
         type: 'info',
         module: 5,
         title: 'Complications + Recognition',
-        body: 'Common / minor:\n- Failed/partial block (especially IANB)\n- Self-inflicted bite/burn injury of the numb lip, cheek, or tongue — WARN every patient, especially children\n- Transient pain on injection (palatal blocks worst)\n- Trismus / soreness at the IANB site\n\nUncommon but important:\n- **Hematoma** — highest risk with the PSA block (pterygoid venous plexus → rapid facial swelling) and the IANB (inferior alveolar vessels). Aspirate before injecting; apply pressure; ice + reassurance for most.\n- **Transient facial nerve (CN VII) palsy** — from an IANB needle placed too deep/posterior into the parotid gland; presents as ipsilateral facial droop and inability to close the eye. Self-limited (resolves as LA wears off); protect the eye, reassure. Prevent by contacting bone before injecting.\n- **Intravascular injection** — aspirate before EVERY injection; the IANB and PSA are highest-risk.\n- **Nerve injury / persistent paresthesia** — deposit beside, not into, the foramen; stop if the patient reports an electric shock.\n- **Needle breakage** — rare; never bend the needle or insert to the hub; use a long needle for the IANB.\n\n**Local anesthetic systemic toxicity (LAST):** perioral numbness, tinnitus, metallic taste → seizures, cardiac collapse. If suspected → stop injecting, O2, manage airway, treat seizures (benzodiazepine), and give 20% **lipid emulsion** 1.5 mL/kg bolus then infusion. Keep total dose under the calculated maximum.',
-        citation: [1, 4, 15],
+        body: 'Common / minor:\n- Failed/partial block (especially IANB)\n- Self-inflicted bite/burn injury of the numb lip, cheek, or tongue — WARN every patient, especially children\n- Transient pain on injection (palatal blocks worst)\n- Trismus / soreness at the IANB site\n\nUncommon but important:\n- **Hematoma** — highest risk with the PSA block (pterygoid venous plexus → rapid facial swelling) and the IANB (inferior alveolar vessels). Aspirate before injecting; apply pressure; ice + reassurance for most.\n- **Transient facial nerve (CN VII) palsy** — from an IANB needle placed too deep/posterior into the parotid gland; presents as ipsilateral facial droop and inability to close the eye. Self-limited (resolves as LA wears off); protect the eye, reassure. Prevent by contacting bone before injecting.\n- **Intravascular injection** — aspirate before EVERY injection; the IANB and PSA are highest-risk.\n- **Nerve injury / persistent paresthesia** — deposit beside, not into, the foramen; stop if the patient reports an electric shock.\n- **Needle breakage** — rare; never bend the needle or insert to the hub; use a long needle for the IANB.\n\n**Local anesthetic systemic toxicity (LAST):** perioral numbness, tinnitus, metallic taste → seizures, cardiac collapse. If suspected → stop injecting, O2, manage airway, treat seizures (benzodiazepine), and give 20% **lipid emulsion** 1.5 mL/kg bolus then infusion. Keep total dose under the calculated maximum.\n\nTools + basis for the LAST regimen: [LAST Rescue — lipid emulsion dosing](#/calculator/dnb-last-lipid) · [Intralipid / lipid-rescue consult](#/tree/intralipid) · [Cartridge / toxicity tracker](#/calculator/dnb-volume-tracker). The lipid-emulsion regimen above is drawn from the ASRA Local Anesthetic Systemic Toxicity Checklist, 2020 version (reference 16) and Weinberg 2012 (reference 15) — review both before deviating.',
+        citation: [1, 2, 4, 12, 15, 16],
         next: 'dnb-doc',
         summary: 'Bite injury (warn!), hematoma (PSA pterygoid plexus, IANB vessels — aspirate), transient CN VII palsy (IANB too deep), intravascular injection, LAST → lipid emulsion.',
         safetyLevel: 'warning',
@@ -291,7 +309,7 @@ export const DENTAL_NERVE_BLOCKS_NODES = [
         body: '**Procedure:** [Supraperiosteal infiltration / ASA-infraorbital / MSA / PSA / greater palatine / nasopalatine / inferior alveolar / long buccal / mental] block, [tooth #/region], [right/left/bilateral].\n**Indication:** [Odontogenic pain / dental fracture / dentoalveolar or intraoral laceration repair / abscess management] at [site].\n**Consent:** Verbal informed consent obtained; risks of transient lip/tongue numbness, self-inflicted bite injury, failed/partial block, hematoma, intravascular injection, and (for IANB) transient facial palsy discussed; patient agrees.\n**Allergies / anticoagulation:** [documented].\n**Agent / dose:** [Lidocaine 2% with epinephrine 1:100,000 / Bupivacaine 0.5%], [X] cartridges = [X] mL ([X] mg) total — confirmed under maximum weight-based dose ([X] mg/kg).\n**Topical:** Benzocaine 20% applied to dried mucosa prior to injection.\n**Landmarks:** [mucobuccal fold at apex / infraorbital foramen / greater palatine foramen / incisive papilla / coronoid notch with bone contact / mental foramen], identified by palpation.\n**Technique:** Negative aspiration before each injection (double-aspiration for IANB); slow injection adjacent to (not into) the foramen.\n**Effect:** Adequate anesthesia confirmed at [X] min ([lower-lip numbness for IANB]); procedure performed.\n**Tolerance / complications:** Tolerated well; no hematoma, intravascular injection, facial palsy, or LAST.\n**Disposition:** [dental follow-up, bite-precaution and return instructions given].',
         recommendation: 'Document block type, tooth/region, indication, consent (incl. bite-injury warning), agent/dose (cartridges → mg, under max), landmarks with bone contact for IANB, aspiration, confirmed effect, and dental follow-up.',
         confidence: 'definitive',
-        citation: [1],
+        citation: [1, 2, 4, 16, 18, 21],
         summary: 'Note must capture: block type, tooth/region, indication, consent w/ bite warning, agent/dose (cartridges→mg, under max), landmarks, aspiration, confirmed effect, dental f/u.',
     },
 ];
@@ -300,27 +318,36 @@ export const DENTAL_NERVE_BLOCKS_CRITICAL_ACTIONS = [
     { text: 'Calculate the maximum weight-based LA dose before drawing up — dental cartridges are 1.8 mL; track cartridge count and convert to mg.', nodeId: 'dnb-contra' },
     { text: 'ASPIRATE before every injection; double-aspirate (rotate 90°) for the inferior alveolar block — the IA artery/vein run with the nerve.', nodeId: 'dnb-shared-technique' },
     { text: 'For the IANB, advance until you GENTLY contact bone before injecting — no bone contact risks parotid injection and transient facial-nerve palsy.', nodeId: 'dnb-ianb' },
-    { text: 'Deposit anesthetic ADJACENT to the foramen, never INTO it — intraneural injection causes persistent paresthesia.', nodeId: 'dnb-shared-technique' },
+    // Re-anchored 2026-07-28 (Louis Litt): previously pointed at 'dnb-shared-technique',
+    // whose body contains no foramen/adjacent directive at all. 'dnb-complications' carries
+    // both halves verbatim ("deposit beside, not into, the foramen" + persistent paresthesia).
+    { text: 'Deposit anesthetic ADJACENT to the foramen, never INTO it — intraneural injection causes persistent paresthesia.', nodeId: 'dnb-complications' },
     { text: 'Warn every patient (especially children) not to bite or burn the numb lip, cheek, or tongue.', nodeId: 'dnb-complications' },
     { text: 'Wait for onset and TEST the territory (lower-lip numbness for IANB) before starting the procedure.', nodeId: 'dnb-test' },
     { text: 'Suspected LAST → stop, O2, treat seizures, give 20% lipid emulsion 1.5 mL/kg.', nodeId: 'dnb-complications' },
 ];
 export const DENTAL_NERVE_BLOCKS_CITATIONS = [
-    { num: 1, text: 'Roberts JR, Custalow CB, Thomsen TW, eds. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Philadelphia: Elsevier; 2023. Ch. 64, Regional Nerve Blocks of the Head and Neck.' },
-    { num: 2, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis: Elsevier; 2020. Techniques of Maxillary and Mandibular Anesthesia.' },
-    { num: 3, text: 'Roberts JR, Custalow CB, Thomsen TW, eds. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Philadelphia: Elsevier; 2023. Ch. 30, Local and Topical Anesthesia.' },
-    { num: 4, text: 'Neal JM, Barrington MJ, Fettiplace MR, et al. The Third American Society of Regional Anesthesia and Pain Medicine Practice Advisory on Local Anesthetic Systemic Toxicity: Executive Summary 2017. Reg Anesth Pain Med. 2018;43(2):113-123.' },
-    { num: 5, text: 'Cepeda MS, Tzortzopoulou A, Thackrey M, et al. Adjusting the pH of lidocaine for reducing pain on injection. Cochrane Database Syst Rev. 2010;(12):CD006581.' },
-    { num: 6, text: 'Tintinalli JE, et al., eds. Tintinalli\u2019s Emergency Medicine: A Comprehensive Study Guide. 9th ed. New York: McGraw-Hill; 2020. Oral and Dental Emergencies; Local and Regional Anesthesia.' },
-    { num: 7, text: 'Lynch MT, Syverud SA, Schwab RA, Jenkins JM, Edlich R. Comparison of intraoral and percutaneous approaches for infraorbital nerve block. Acad Emerg Med. 1994;1(6):514-519.' },
-    { num: 8, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis: Elsevier; 2020. Middle Superior Alveolar Nerve Block (MSA absent in 30\u201350%).' },
-    { num: 9, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis: Elsevier; 2020. Posterior Superior Alveolar Nerve Block and pterygoid plexus hematoma risk.' },
-    { num: 10, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis: Elsevier; 2020. Greater (Anterior) Palatine Nerve Block.' },
-    { num: 11, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis: Elsevier; 2020. Nasopalatine Nerve Block.' },
-    { num: 12, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis: Elsevier; 2020. Inferior Alveolar Nerve Block; transient facial nerve palsy from over-insertion.' },
-    { num: 13, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis: Elsevier; 2020. (Long) Buccal Nerve Block.' },
-    { num: 14, text: 'Syverud SA, Jenkins JM, Schwab RA, Lynch MT, Knoop K, Trott A. A comparative study of the percutaneous versus intraoral technique for mental nerve block. Acad Emerg Med. 1994;1(6):509-513.' },
-    { num: 15, text: 'Weinberg GL. Lipid emulsion infusion: resuscitation for local anesthetic and other drug overdose. Anesthesiology. 2012;117(1):180-187.' },
+    { num: 1, text: 'Birnbaumer DM, ed. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Philadelphia, PA: Elsevier; 2025. Section V, Ch. 30, Regional Anesthesia of the Head and Neck. ISBN 978-0-323-77922-7. https://shop.elsevier.com/books/roberts-and-hedges-clinical-procedures-in-emergency-medicine-and-acute-care/birnbaumer/978-0-323-77922-7' },
+    { num: 2, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis, MO: Mosby/Elsevier; 2020 (published June 2019, \u00a9 2020). Techniques of Maxillary Anesthesia; Techniques of Mandibular Anesthesia. ISBN 978-0-323-58207-0. https://shop.elsevier.com/books/handbook-of-local-anesthesia/malamed/978-0-323-58207-0' },
+    { num: 3, text: 'Birnbaumer DM, ed. Roberts and Hedges\u2019 Clinical Procedures in Emergency Medicine and Acute Care. 8th ed. Philadelphia, PA: Elsevier; 2025. Section V, Ch. 29, Local and Topical Anesthesia. ISBN 978-0-323-77922-7.' },
+    { num: 4, text: 'SUPERSEDED \u2014 for LAST management use the 2020 ASRA checklist (ref 16). Neal JM, Barrington MJ, Fettiplace MR, Gitman M, Memtsoudis SG, M\u00f6rwald EE, Rubin DS, Weinberg G. The Third American Society of Regional Anesthesia and Pain Medicine Practice Advisory on Local Anesthetic Systemic Toxicity: Executive Summary 2017. Reg Anesth Pain Med. 2018;43(2):113-123. doi:10.1097/AAP.0000000000000720. PMID: 29356773. https://pubmed.ncbi.nlm.nih.gov/29356773/' },
+    { num: 5, text: 'WITHDRAWN \u2014 withdrawn from the Cochrane Library in 2015 (commercial-sponsorship policy); for the lidocaine-buffering claim use ref 17. Cepeda MS, Tzortzopoulou A, Thackrey M, Hudcova J, Arora Gandhi P, Schumann R. Adjusting the pH of lidocaine for reducing pain on injection. Cochrane Database Syst Rev. 2010;(12):CD006581. doi:10.1002/14651858.CD006581.pub2. PMID: 21154371. https://pubmed.ncbi.nlm.nih.gov/21154371/' },
+    { num: 6, text: 'Tintinalli JE, Ma OJ, Yealy DM, Meckler GD, Stapczynski JS, Cline DM, Thomas SH, eds. Tintinalli\u2019s Emergency Medicine: A Comprehensive Study Guide. 9th ed. New York, NY: McGraw-Hill Education; 2020. Ch. 36, Local and Regional Anesthesia; Ch. 245, Oral and Dental Emergencies. ISBN 978-1-260-01993-3. https://accessemergencymedicine.mhmedical.com/book.aspx?bookid=2353' },
+    { num: 7, text: 'Lynch MT, Syverud SA, Schwab RA, Jenkins JM, Edlich R. Comparison of intraoral and percutaneous approaches for infraorbital nerve block. Acad Emerg Med. 1994;1(6):514-519. doi:10.1111/j.1553-2712.1994.tb02543.x. PMID: 7600397. https://pubmed.ncbi.nlm.nih.gov/7600397/' },
+    { num: 8, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis, MO: Mosby/Elsevier; 2020. Middle Superior Alveolar Nerve Block (MSA nerve absent in \u224830\u201350%). ISBN 978-0-323-58207-0.' },
+    { num: 9, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis, MO: Mosby/Elsevier; 2020. Posterior Superior Alveolar Nerve Block and pterygoid plexus hematoma risk. ISBN 978-0-323-58207-0.' },
+    { num: 10, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis, MO: Mosby/Elsevier; 2020. Greater (Anterior) Palatine Nerve Block. ISBN 978-0-323-58207-0.' },
+    { num: 11, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis, MO: Mosby/Elsevier; 2020. Nasopalatine Nerve Block. ISBN 978-0-323-58207-0.' },
+    { num: 12, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis, MO: Mosby/Elsevier; 2020. Inferior Alveolar Nerve Block; transient facial nerve palsy from over-insertion. ISBN 978-0-323-58207-0.' },
+    { num: 13, text: 'Malamed SF. Handbook of Local Anesthesia. 7th ed. St. Louis, MO: Mosby/Elsevier; 2020. (Long) Buccal Nerve Block. ISBN 978-0-323-58207-0.' },
+    { num: 14, text: 'Syverud SA, Jenkins JM, Schwab RA, Lynch MT, Knoop K, Trott A. A comparative study of the percutaneous versus intraoral technique for mental nerve block. Acad Emerg Med. 1994;1(6):509-513. doi:10.1111/j.1553-2712.1994.tb02542.x. PMID: 7600396. https://pubmed.ncbi.nlm.nih.gov/7600396/' },
+    { num: 15, text: 'Weinberg GL. Lipid emulsion infusion: resuscitation for local anesthetic and other drug overdose. Anesthesiology. 2012;117(1):180-187. doi:10.1097/ALN.0b013e31825ad8de. PMID: 22627464. https://pubmed.ncbi.nlm.nih.gov/22627464/' },
+    { num: 16, text: 'CURRENT ASRA LAST GUIDANCE \u2014 Neal JM, Neal EJ, Weinberg GL. American Society of Regional Anesthesia and Pain Medicine Local Anesthetic Systemic Toxicity Checklist: 2020 Version. Reg Anesth Pain Med. 2021;46(1):81-82. doi:10.1136/rapm-2020-101986. PMID: 33148630. https://pubmed.ncbi.nlm.nih.gov/33148630/ (free checklist/poster: https://www.asra.com/guidelines-articles/guidelines/guideline-item/guidelines/2020/11/01/checklist-for-treatment-of-local-anesthetic-systemic-toxicity)' },
+    { num: 17, text: 'Christoph RA, Buchanan L, Begalla K, Schwartz S. Pain reduction in local anesthetic administration through pH buffering. Ann Emerg Med. 1988;17(2):117-120. doi:10.1016/S0196-0644(88)80293-2. PMID: 2827545. https://pubmed.ncbi.nlm.nih.gov/2827545/' },
+    { num: 18, text: 'US Food and Drug Administration. 2% Xylocaine Dental with epinephrine (lidocaine HCl and epinephrine injection) \u2014 full prescribing information (NDA 021381). Basis for the adult and pediatric weight-based maximum-dose ceilings for dental lidocaine with epinephrine used by the Max LA Dose tool. https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/021381s006lbl.pdf' },
+    { num: 19, text: 'US Food and Drug Administration / DailyMed. SEPTOCAINE (articaine hydrochloride and epinephrine injection) \u2014 full prescribing information (NDA 020971). Basis for the articaine weight-based maximum-dose ceiling and the mandibular-block paresthesia postmarketing warning. https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=0eba0bd2-ccb6-4f7e-8d0c-e4b4e6cdce03' },
+    { num: 20, text: 'US Food and Drug Administration / DailyMed. MARCAINE (bupivacaine HCl and epinephrine 1:200,000 injection), dental cartridge \u2014 full prescribing information. Basis for the per-appointment maximum-dose ceiling and the pediatric age restriction for dental bupivacaine. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3e196aa4-0b01-44db-9267-98a995b54743' },
+    { num: 21, text: 'American Academy of Pediatric Dentistry. Use of local anesthesia for pediatric dental patients. In: The Reference Manual of Pediatric Dentistry. Chicago, IL: American Academy of Pediatric Dentistry; 2023 revision (carried forward in the 2025\u20132026 Reference Manual). Basis for the more conservative pediatric weight-based maxima and the pediatric age restrictions for articaine and bupivacaine. https://www.aapd.org/media/Policies_Guidelines/BP_LocalAnesthesia.pdf' },
 ];
 export const DENTAL_NERVE_BLOCKS_NODE_COUNT = DENTAL_NERVE_BLOCKS_NODES.length;
 export const DENTAL_NERVE_BLOCKS_MODULE_LABELS = ['Region', 'Pre-procedure', 'Maxillary Blocks', 'Mandibular Blocks', 'Verify & Document'];

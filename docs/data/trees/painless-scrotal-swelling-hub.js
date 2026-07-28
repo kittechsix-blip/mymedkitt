@@ -12,6 +12,24 @@
 // EBM-only citations. qSOFA (Fournier / sepsis screen) lives in the bottom toolbar.
 // Consult gaps handled as plain-text result nodes: incarcerated inguinoscrotal hernia,
 // epididymitis/epididymo-orchitis, testicular tumor / mass, hydrocele/varicocele workup.
+//
+// BASIS DISCLOSURE (FDA 21st Century Cures Act CDS exemption, Prong 4 — the clinician must be
+// able to independently review the basis for every recommendation):
+// Every recommendation, threshold, and critical action in this hub is traceable to a numbered
+// source in PAINLESS_SCROTAL_MASS_HUB_CITATIONS below. Each reference carries a DOI, PMID, or a
+// resolvable URL so it can be retrieved and read independently. The evidentiary base is:
+//   [1] AFP scrotal-mass review (2022; supersedes the 2014 edition) + Tintinalli 9e
+//   [2] AFP testicular torsion review + Sheth TWIST-score validation (J Urol 2016)
+//   [3] Fournier gangrene review (Ther Adv Urol 2015) + IDSA SSTI guideline (2014)
+//   [4] CDC STI Treatment Guidelines 2021 (epididymitis) — CURRENT edition
+//   [5] HerniaSurge international groin hernia guidelines (2018, updated 2023)
+//   [6] Penile emergencies review (Emerg Med Clin North Am 2011)
+//   [7] AUA/SMSNA Acute Ischemic Priapism Guideline (2021)
+//   [8] AUA early-stage testicular cancer guideline (2019, amended 2023) + EAU 2023
+//   [9] ACR Appropriateness Criteria — acute scrotal pain (2024) + palpable scrotal mass (2022)
+//  [10] Sepsis-3 / qSOFA (JAMA 2016)
+// This hub is decision SUPPORT. It does not replace clinical judgement, and every recommendation
+// is intended to be independently verifiable against the cited source before it is acted upon.
 export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
     // ============================================================
     // Module 1 — Sick Check
@@ -22,7 +40,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         module: 1,
         title: 'Painless Scrotal Swelling — Sick Check First',
         body: '**"Painless" is a trap — do NOT label a hydrocele until you have excluded the masqueraders.** Torsion can be intermittent and only intermittently painful, malignancy is famously painless, and a constricting object or an incarcerated hernia can devastate the testis or bowel while the presenting complaint is just "swelling."\n\n**⚠️ 5 DO-NOT-MISS diagnoses**\n1. **Missed / intermittent testicular torsion** — a painless or waxing-waning scrotum with a horizontal or high-riding testis, absent cremasteric reflex; the salvage window is short.\n2. **Fournier gangrene** — a necrotizing infection of the perineum/scrotum: systemic toxicity, pain out of proportion, crepitus, dusky skin. A surgical emergency.\n3. **Incarcerated inguinoscrotal hernia** — a tender, non-reducible scrotal mass with GI symptoms; risks bowel strangulation and ischemia.\n4. **Constricting object / paraphimosis / zipper entrapment** — a tourniquet on the penis or scrotum threatens tissue.\n5. **Priapism with scrotal/penile involvement** — a persistent erection is a GU emergency masquerading as "swelling."\n\n**First 60 seconds:** vitals (fever/toxicity → screen sepsis with qSOFA in the toolbar; think Fournier), inspect and palpate — testicular lie, cremasteric reflex, transillumination, reducibility, skin changes/crepitus, and whether the mass is separate from or part of the testis. **Any acute or intermittent pain, or an abnormal lie → treat as torsion until Doppler proves otherwise.**',
-        citation: [1],
+        citation: [1, 2, 3, 5, 6, 7, 10],
         next: 'psm-triage',
         safetyLevel: 'critical',
     },
@@ -43,7 +61,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Young + sexually active + epididymal tenderness / discharge', description: 'Epididymo-orchitis / STI', next: 'psm-epidi-entry', urgency: 'urgent' },
             { label: 'Soft, transilluminating, separate from testis, non-tender', description: 'Benign hydrocele / varicocele / cyst', next: 'psm-benign-entry', urgency: 'routine' },
         ],
-        citation: [1],
+        citation: [1, 2, 3, 5, 6, 7],
         summary: 'Six-branch triage: torsion / Fournier / incarcerated hernia / constriction-priapism / epididymo-orchitis / benign.',
     },
     // -------------------- MISSED / INTERMITTENT TORSION --------------------
@@ -57,7 +75,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Abnormal lie / high TWIST / reduced flow on Doppler', description: 'Treat as torsion', next: 'psm-torsion-verdict', urgency: 'critical' },
             { label: 'Normal lie, normal cremasteric, normal Doppler flow', description: 'Torsion unlikely \u2014 move on', next: 'psm-torsion-excluded', urgency: 'routine' },
         ],
-        citation: [2],
+        citation: [1, 2, 9],
         summary: 'Painless/intermittent still needs torsion excluded. TWIST + abnormal lie; high probability = OR, do not wait for imaging.',
         safetyLevel: 'critical',
     },
@@ -68,7 +86,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Torsion — Emergent Urology + Manual Detorsion',
         body: 'Open [Testicular Torsion](#/tree/testicular-torsion) for the full pathway.\n\n**Next steps:**\n- **Emergent urology consult for surgical exploration** \u2014 salvage falls off sharply after ~6 hours of ischemia. Do NOT wait for imaging if the exam is convincing.\n- **Attempt manual detorsion** while arranging the OR (classically "open book" \u2014 medial-to-lateral rotation of the affected testis); relief of pain and normalization of lie suggests success but does NOT replace surgery.\n- Analgesia, NPO, IV access.\n- Color Doppler ultrasound only if it will not delay definitive care.',
         recommendation: 'Emergent urology for exploration + attempt manual detorsion; do not delay surgery for imaging. Salvage is time-dependent.',
-        citation: [2],
+        citation: [1, 2, 9],
         safetyLevel: 'critical',
         confidence: 'definitive',
     },
@@ -79,7 +97,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Torsion — Unlikely',
         body: 'A normal testicular lie, an intact cremasteric reflex, and preserved Doppler flow make torsion unlikely right now. **Intermittent torsion can still be the cause of recurrent painless swelling** \u2014 counsel the patient about recurrence and arrange urology follow-up; recurrent episodes may warrant elective orchidopexy.\n\nReturn to the hub for the next differential.',
         recommendation: 'Torsion unlikely with normal lie/flow; consider intermittent torsion for recurrent swelling and refer to urology.',
-        citation: [2],
+        citation: [1, 2, 9],
         next: 'psm-triage',
         safetyLevel: 'warning',
         confidence: 'recommended',
@@ -95,7 +113,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Toxicity + crepitus / dusky skin / pain out of proportion', description: 'Resuscitate + emergent surgery', next: 'psm-fournier-verdict', urgency: 'critical' },
             { label: 'No toxicity, benign skin, localized non-tender swelling', description: 'Fournier unlikely \u2014 move on', next: 'psm-fournier-excluded', urgency: 'routine' },
         ],
-        citation: [3],
+        citation: [3, 10],
         summary: 'Pain out of proportion + toxicity + crepitus/dusky skin = Fournier; resuscitate + emergent debridement.',
         safetyLevel: 'critical',
     },
@@ -106,7 +124,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Fournier Gangrene — Resuscitate + Emergent Debridement',
         body: 'Open [Necrotizing Fasciitis](#/tree/necrotizing-fasciitis) \u2014 Fournier is a necrotizing infection and follows the same pathway.\n\n**Next steps:**\n- **Emergent surgical consult for operative debridement \u2014 do NOT wait for imaging.** Source control is the definitive treatment; mortality rises with every hour of delay.\n- **Broad-spectrum antibiotics:** cover gram-positives, gram-negatives, and anaerobes (e.g., vancomycin + piperacillin-tazobactam) **plus clindamycin for toxin suppression**.\n- **Aggressive resuscitation** \u2014 run the [Sepsis](#/tree/sepsis) pathway (IV fluids, blood cultures, lactate); qSOFA in the toolbar.\n- CT can map extent if it will not delay surgery, but a convincing exam goes straight to the OR.',
         recommendation: 'Emergent operative debridement (do not wait for imaging) + broad-spectrum abx with clindamycin + aggressive sepsis resuscitation.',
-        citation: [3],
+        citation: [3, 10],
         safetyLevel: 'critical',
         confidence: 'definitive',
     },
@@ -117,7 +135,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Fournier — Unlikely',
         body: 'No systemic toxicity, benign overlying skin, and localized non-tender swelling make Fournier gangrene unlikely right now. **It evolves fast** \u2014 if toxicity, crepitus, spreading erythema, or skin necrosis appears on reassessment, resuscitate and consult surgery immediately.\n\nReturn to the hub for the next differential.',
         recommendation: 'Fournier unlikely without toxicity/skin signs; re-examine and escalate immediately if necrotizing features evolve.',
-        citation: [3],
+        citation: [3, 10],
         next: 'psm-triage',
         safetyLevel: 'warning',
         confidence: 'recommended',
@@ -133,7 +151,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Non-reducible + tender \u00B1 GI symptoms / obstruction', description: 'Treat as incarcerated \u00B1 strangulated', next: 'psm-hernia-verdict', urgency: 'urgent' },
             { label: 'Reducible, non-tender, no GI symptoms', description: 'Not incarcerated \u2014 move on', next: 'psm-hernia-excluded', urgency: 'routine' },
         ],
-        citation: [1],
+        citation: [1, 5],
         summary: 'Non-reducible + tender + GI sx = incarcerated hernia, risk of strangulation; reducible = not an emergency.',
         safetyLevel: 'warning',
     },
@@ -144,7 +162,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Incarcerated Hernia — Reduce / Surgery',
         body: '**Incarcerated inguinoscrotal hernia** (no dedicated consult yet \u2014 manage here):\n\n- **A single gentle taxis (manual reduction) attempt is reasonable** for an incarcerated hernia WITHOUT signs of strangulation (Trendelenburg, analgesia, gentle sustained pressure). **Do NOT attempt reduction if there is any concern for strangulation** (severe tenderness, skin changes, systemic toxicity) \u2014 reducing dead bowel is dangerous.\n- **Emergent general-surgery consult** for irreducible or strangulated hernias.\n- **If bowel ischemia is suspected** (pain out of proportion, acidosis, peritonism), resuscitate and work it up on the [Mesenteric Ischemia](#/tree/mesenteric-ischemia) pathway; obtain labs (lactate) and imaging (CT).\n- NPO, IV fluids, analgesia, antiemetics; NG tube if obstructed.\n- (Consult gap \u2014 managed in-hub.)',
         recommendation: 'One gentle taxis only if NO strangulation signs; otherwise emergent surgery. Suspected ischemia → mesenteric-ischemia workup. NPO/IV/analgesia.',
-        citation: [1],
+        citation: [5],
         safetyLevel: 'warning',
         confidence: 'recommended',
     },
@@ -155,7 +173,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Incarcerated Hernia — Excluded',
         body: 'A reducible, non-tender inguinoscrotal bulge without GI symptoms is not incarcerated. Refer to general surgery for elective repair and counsel on incarceration warning signs (a non-reducible, painful, or discolored bulge with vomiting → return immediately).\n\nReturn to the hub for the next differential.',
         recommendation: 'Reducible hernia is not an emergency; elective surgical referral + strict incarceration return precautions.',
-        citation: [1],
+        citation: [5],
         next: 'psm-triage',
         safetyLevel: 'warning',
         confidence: 'recommended',
@@ -172,7 +190,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Persistent painful erection >4 h', description: 'Priapism pathway', next: 'psm-priapism-verdict', urgency: 'critical' },
             { label: 'No constriction / no priapism', description: 'Excluded \u2014 move on', next: 'psm-constrict-excluded', urgency: 'routine' },
         ],
-        citation: [1],
+        citation: [6, 7],
         summary: 'Constricting object / paraphimosis / priapism = time-critical GU emergencies; release / reduce / detumesce.',
         safetyLevel: 'critical',
     },
@@ -183,7 +201,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Constriction / Zipper / Paraphimosis — Relieve Now',
         body: '**Relieve the constriction immediately \u2014 tissue is ischemic while it is on.**\n\n- **Zipper entrapment:** open [Penile Zipper Release](#/tree/penile-zipper-release) (mineral oil, cut the median bar, or unzip after lubrication).\n- **Constricting ring / hair tourniquet:** remove with lubrication, ring cutter, or careful incision of a hair tourniquet under magnification; check for a deep/embedded strand.\n- **Paraphimosis:** reduce it \u2014 compress the edematous glans (manual, osmotic sugar, ice), then reduce the foreskin over the glans; dorsal slit / urology if it fails.\n- Analgesia / local block; urology if any measure fails or tissue looks compromised.',
         recommendation: 'Immediate release of the constricting object / reduction of paraphimosis; analgesia; urology if it fails or tissue is compromised.',
-        citation: [1],
+        citation: [6],
         safetyLevel: 'critical',
         confidence: 'definitive',
     },
@@ -194,7 +212,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Priapism — Time-Critical Detumescence',
         body: 'Open [Priapism](#/tree/priapism) for the full pathway. **Ischemic (low-flow) priapism is time-critical for erectile function.**\n\n- Confirm ischemic vs non-ischemic with corporal aspirate blood gas \u00B1 Doppler.\n- **Ischemic:** corporal aspiration \u00B1 irrigation, then **intracavernosal phenylephrine** with cardiovascular monitoring; surgical shunt if refractory. **Urgent urology.**\n- Treat the trigger (sickle cell, drugs); analgesia throughout.',
         recommendation: 'Confirm ischemic type, then aspiration + intracavernosal phenylephrine + urgent urology; treat the underlying trigger.',
-        citation: [1],
+        citation: [6, 7],
         next: 'psm-triage',
         safetyLevel: 'critical',
         confidence: 'definitive',
@@ -206,7 +224,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Constriction / Priapism — Excluded',
         body: 'No constricting object, no paraphimosis, and no persistent erection \u2014 a genital-constriction emergency is not the driver here.\n\nReturn to the hub for the next differential.',
         recommendation: 'Constriction/priapism excluded; reassess if an entrapment or persistent erection develops.',
-        citation: [1],
+        citation: [6, 7],
         next: 'psm-triage',
         safetyLevel: 'warning',
         confidence: 'recommended',
@@ -222,7 +240,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Epididymal tenderness + STI/UTI risk, torsion excluded', description: 'Treat as epididymo-orchitis', next: 'psm-epidi-verdict', urgency: 'urgent' },
             { label: 'Not the picture / torsion not excluded', description: 'Reassess \u2014 move on', next: 'psm-epidi-excluded', urgency: 'routine' },
         ],
-        citation: [4],
+        citation: [1, 2, 4],
         summary: 'Epididymo-orchitis mimics torsion (Prehn +, cremasteric preserved). NAAT if young; enteric if older. Exclude torsion first.',
         safetyLevel: 'warning',
     },
@@ -233,7 +251,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Epididymo-Orchitis — Test + Empiric Antibiotics',
         body: '**Epididymo-orchitis** (no dedicated consult yet \u2014 manage here). If STI features, open [STI Comprehensive](#/tree/sti-comprehensive) for the full workup.\n\n- **Send UA + culture and NAAT for GC/CT** (and consider enteric coverage in older men or those with obstruction).\n- **Empiric antibiotics per current CDC guidance:** for likely STI \u2014 ceftriaxone + doxycycline; for enteric organisms (older men, insertive anal sex, or GU obstruction) \u2014 a fluoroquinolone or add appropriate gram-negative coverage.\n- Supportive care: scrotal elevation, NSAIDs, ice, analgesia.\n- **If you cannot confidently exclude torsion, get a Doppler ultrasound.**\n- Urology follow-up; return precautions for worsening pain/swelling or systemic symptoms; consider abscess if not improving.\n- (Consult gap \u2014 managed in-hub.)',
         recommendation: 'NAAT + UA/culture; empiric CDC-guided abx (STI vs enteric by risk); scrotal support/NSAIDs; Doppler if torsion not confidently excluded.',
-        citation: [4],
+        citation: [4, 9],
         safetyLevel: 'warning',
         confidence: 'recommended',
     },
@@ -244,7 +262,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Epididymo-Orchitis — Not the Picture',
         body: 'The exam and risk profile do not fit epididymo-orchitis \u2014 or torsion has not yet been confidently excluded. **When in doubt between torsion and epididymo-orchitis, the safe move is Doppler ultrasound and urology input**, because a missed torsion loses the testis.\n\nReturn to the hub for the next differential.',
         recommendation: 'If epididymo-orchitis does not fit or torsion is not excluded, get Doppler + urology \u2014 do not under-triage.',
-        citation: [4],
+        citation: [2, 4, 9],
         next: 'psm-triage',
         safetyLevel: 'warning',
         confidence: 'recommended',
@@ -260,7 +278,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Soft, transilluminating, separate from testis \u2014 clearly benign', description: 'Reassure + outpatient workup', next: 'psm-benign-verdict', urgency: 'routine' },
             { label: 'Solid mass on the testis / does not transilluminate / new firm mass', description: 'Treat as possible tumor', next: 'psm-tumor-verdict', urgency: 'urgent' },
         ],
-        citation: [1],
+        citation: [1, 8, 9],
         summary: 'Characterize benign lesions by transillumination/location; a solid intratesticular mass is a tumor until proven otherwise.',
     },
     {
@@ -270,7 +288,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Benign Scrotal Mass — Reassure + Follow-Up',
         body: '**A soft, transilluminating mass separate from the testis (hydrocele, spermatocele, epididymal cyst, simple varicocele)** in a well patient is benign.\n\n- Reassure; no emergent intervention needed.\n- **Get a scrotal ultrasound as an outpatient** for a new/tense adult hydrocele, a new right-sided or non-decompressing varicocele, or any diagnostic uncertainty \u2014 to exclude an underlying tumor or retroperitoneal cause.\n- Urology follow-up; return precautions for acute pain, rapid enlargement, a firm/solid area, or systemic symptoms.\n- (Deep-dive consult gap \u2014 managed in-hub.)',
         recommendation: 'Reassure benign transilluminating lesions; outpatient ultrasound for new/atypical hydrocele or right-sided varicocele; urology follow-up.',
-        citation: [1],
+        citation: [1, 9],
         next: 'psm-disposition',
         confidence: 'recommended',
     },
@@ -281,7 +299,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Possible Testicular Tumor — Ultrasound + Markers + Urology',
         body: '**A solid, firm intratesticular mass that does NOT transilluminate is a testicular tumor until proven otherwise** \u2014 painless is the classic presentation, and germ-cell tumors are the most common solid malignancy in young men (no dedicated consult yet \u2014 manage here):\n\n- **Scrotal ultrasound** (the key test to characterize an intratesticular mass).\n- **Serum tumor markers: AFP, beta-hCG, LDH** before any intervention.\n- **Urgent urology referral** \u2014 do NOT biopsy transscrotally; the standard is radical inguinal orchiectomy for diagnosis/treatment.\n- Consider staging (chest imaging) per urology/oncology; check for bulky disease or metastatic symptoms.\n- Counsel and arrange timely follow-up \u2014 this is a highly curable cancer when caught early.\n- (Consult gap \u2014 managed in-hub.)',
         recommendation: 'Solid intratesticular mass = tumor until proven otherwise: scrotal US + AFP/beta-hCG/LDH + urgent urology (radical inguinal orchiectomy; no transscrotal biopsy).',
-        citation: [1],
+        citation: [1, 8, 9],
         next: 'psm-disposition',
         safetyLevel: 'warning',
         confidence: 'recommended',
@@ -295,7 +313,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         module: 3,
         title: 'Initial Bundle',
         body: '**The scrotal-swelling work-up bundle (scale to acuity):**\n- **Focused exam:** testicular lie, cremasteric reflex, Prehn sign, transillumination, reducibility, skin changes/crepitus, and whether the mass is intratesticular or separate.\n- **Color Doppler ultrasound** is the workhorse \u2014 but **do NOT let imaging delay the OR for a convincing torsion or Fournier.**\n- **Vitals + qSOFA** if any toxicity; resuscitate and screen for Fournier/sepsis.\n- **UA + culture + NAAT for GC/CT** when epididymo-orchitis/STI is on the table.\n- **Tumor markers (AFP, beta-hCG, LDH)** for a solid intratesticular mass.\n- Analgesia; NPO + IV access for anyone potentially heading to the OR.',
-        citation: [1],
+        citation: [1, 2, 4, 8, 9, 10],
         next: 'psm-reassess',
     },
     {
@@ -308,7 +326,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Torsion / Fournier / strangulation / toxic', description: 'Escalate: OR + source control + admit', next: 'psm-imaging', urgency: 'critical' },
             { label: 'Stable, cause identified, benign or treatable', description: 'Move to disposition', next: 'psm-disposition', urgency: 'routine' },
         ],
-        citation: [1],
+        citation: [1, 2, 3, 5],
         summary: 'Torsion/Fournier/strangulation → escalate to OR + admit; stable + diagnosed → disposition.',
     },
     // ============================================================
@@ -320,7 +338,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         module: 4,
         title: 'Imaging',
         body: '**Match the study to the question:**\n- **Color Doppler scrotal ultrasound** \u2014 the primary test: assesses testicular flow (torsion), characterizes masses (cystic vs solid, intra- vs extratesticular), and evaluates the epididymis. **Do NOT delay definitive surgery for a convincing torsion or Fournier.**\n- **CT / MRI of the perineum and pelvis** \u2014 to map necrotizing infection extent or an incarcerated/obstructing hernia, if it will not delay the OR.\n- **Retroperitoneal/renal imaging** \u2014 for a new right-sided or non-decompressing varicocele.\n- Imaging is generally NOT needed for a classic, clearly benign transilluminating hydrocele in a well patient (outpatient US suffices).',
-        citation: [1],
+        citation: [1, 3, 5, 9],
         next: 'psm-disposition',
     },
     // ============================================================
@@ -337,7 +355,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
             { label: 'Treated but needs monitoring / borderline / uncertain', description: 'Observe / urology in ED', next: 'psm-dispo-observe', urgency: 'urgent' },
             { label: 'Benign lesion / epididymo-orchitis treated / constriction relieved', description: 'Discharge with follow-up', next: 'psm-dispo-discharge', urgency: 'routine' },
         ],
-        citation: [1],
+        citation: [1, 2, 3, 5],
         summary: 'OR/admit the surgical emergencies; observe the borderline; discharge benign/treated with urology follow-up.',
     },
     {
@@ -347,7 +365,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Admit / OR',
         body: '**To the OR / admit** the surgical emergency.\n\n- **Torsion \u2192 emergent scrotal exploration** (detorsion + bilateral orchidopexy or orchiectomy).\n- **Fournier \u2192 emergent debridement**, broad-spectrum antibiotics, ICU-level resuscitation as needed.\n- **Strangulated hernia \u2192 emergent repair \u00B1 bowel resection.**\n- Ongoing resuscitation, analgesia, and specialty (urology / general surgery) management; ICU for septic/unstable patients.',
         recommendation: 'OR for torsion / Fournier / strangulation; broad-spectrum abx + resuscitation; ICU if unstable.',
-        citation: [1],
+        citation: [2, 3, 5, 10],
         safetyLevel: 'critical',
         confidence: 'definitive',
     },
@@ -358,7 +376,7 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Observe / Urology in the ED',
         body: '**Observation / ED urology consult** for the borderline patient \u2014 e.g., torsion not fully excluded despite reassuring Doppler, a reduced hernia needing a period of observation, or a new solid mass needing expedited workup.\n\n- Serial exams, repeat Doppler if the picture changes, and specialist input before disposition.\n- Ensure reliable, timely follow-up before any discharge; treat pain.',
         recommendation: 'Short observation + specialist input, serial exams / repeat Doppler, then admit or discharge with tight follow-up.',
-        citation: [1],
+        citation: [1, 2, 5, 9],
         safetyLevel: 'warning',
         confidence: 'recommended',
     },
@@ -369,21 +387,29 @@ export const PAINLESS_SCROTAL_MASS_HUB_NODES = [
         title: 'Discharge',
         body: '**Discharge** the well patient with a clear plan.\n\n- **Benign lesion (hydrocele/varicocele/cyst):** reassurance, outpatient scrotal ultrasound if new/atypical, urology follow-up.\n- **Epididymo-orchitis:** empiric antibiotics given, scrotal support/NSAIDs, partner therapy if STI, follow-up, and **strict return precautions** (worsening pain/swelling, fever, or new severe pain \u2014 reconsider torsion/abscess).\n- **Constriction relieved:** wound care and follow-up.\n- Written return precautions and a named follow-up; explicit torsion/tumor red-flag counseling.',
         recommendation: 'Discharge benign/treated patients with outpatient US as needed, antibiotics + partner therapy if STI, and explicit torsion/tumor return precautions.',
-        citation: [1],
+        citation: [1, 2, 4, 6, 9],
         confidence: 'recommended',
     },
 ];
 export const PAINLESS_SCROTAL_MASS_HUB_CRITICAL_ACTIONS = [
     { text: 'Sick Check first — "painless" does not exclude torsion, Fournier, incarceration, or tumor', nodeId: 'psm-sick-check' },
-    { text: 'Abnormal lie / intermittent pain / high TWIST → treat as torsion: emergent urology + manual detorsion, do not wait for imaging', nodeId: 'psm-torsion-entry' },
-    { text: 'Toxicity + crepitus + pain out of proportion → Fournier gangrene: resuscitate + emergent debridement, do not wait for imaging', nodeId: 'psm-fournier-entry' },
-    { text: 'Solid intratesticular mass that does not transilluminate → testicular tumor: US + AFP/beta-hCG/LDH + urgent urology, no transscrotal biopsy', nodeId: 'psm-benign-entry' },
+    { text: 'Abnormal lie / intermittent pain / high TWIST → treat as torsion; a convincing exam goes straight to the OR — do not delay for imaging', nodeId: 'psm-torsion-entry' },
+    { text: 'Confirmed torsion: emergent urology for exploration + attempt manual detorsion while arranging the OR — salvage is time-dependent', nodeId: 'psm-torsion-verdict' },
+    { text: 'Toxicity + crepitus + pain out of proportion = Fournier gangrene — do not wait for imaging to consult surgery', nodeId: 'psm-fournier-entry' },
+    { text: 'Fournier gangrene: emergent operative debridement + broad-spectrum antibiotics with clindamycin + aggressive sepsis resuscitation', nodeId: 'psm-fournier-verdict' },
+    { text: 'Solid intratesticular mass that does not transilluminate → testicular tumor: scrotal US + AFP/beta-hCG/LDH + urgent urology, no transscrotal biopsy', nodeId: 'psm-tumor-verdict' },
 ];
 export const PAINLESS_SCROTAL_MASS_HUB_CITATIONS = [
-    { num: 1, text: 'Crawford P, Crop JA. Evaluation of Scrotal Masses. Am Fam Physician. 2014;89(9):723-727; Tintinalli\u2019s Emergency Medicine, Male Genital Problems chapter, 9th ed.' },
-    { num: 2, text: 'Sharp VJ, Kieran K, Arlen AM. Testicular Torsion: Diagnosis, Evaluation, and Management. Am Fam Physician. 2013;88(12):835-840; Sheth KR, et al. TWIST score validation. J Urol. 2016.' },
-    { num: 3, text: 'Chennamsetty A, et al. Contemporary Diagnosis and Management of Fournier Gangrene. Ther Adv Urol. 2015;7(4):203-215; Stevens DL, et al. IDSA Practice Guidelines for Skin and Soft Tissue Infections. Clin Infect Dis. 2014;59(2):e10-e52.' },
-    { num: 4, text: 'Workowski KA, Bachmann LH, et al. CDC Sexually Transmitted Infections Treatment Guidelines, 2021 (epididymitis). MMWR Recomm Rep. 2021;70(4):1-187; McConaghy JR, Panchal B. Epididymitis: An Overview. Am Fam Physician. 2016;94(9):723-726.' },
+    { num: 1, text: 'Langan RC, Puente ME. Scrotal Masses. Am Fam Physician. 2022;106(2):184-189. https://www.aafp.org/pubs/afp/issues/2022/0800/scrotal-masses.html \u2014 SUPERSEDED prior edition: Crawford P, Crop JA. Evaluation of Scrotal Masses. Am Fam Physician. 2014;89(9):723-727. PMID 24784335. Background text: Tintinalli JE, et al., eds. Tintinalli\u2019s Emergency Medicine: A Comprehensive Study Guide. 9th ed. McGraw-Hill; 2020 (Male Genital Problems chapter).' },
+    { num: 2, text: 'Sharp VJ, Kieran K, Arlen AM. Testicular Torsion: Diagnosis, Evaluation, and Management. Am Fam Physician. 2013;88(12):835-840. PMID 24364548. https://www.aafp.org/pubs/afp/issues/2013/1215/p835.html \u2014 TWIST score validation: Sheth KR, Keays M, Grimsby GM, et al. Diagnosing Testicular Torsion before Urological Consultation and Imaging: Validation of the TWIST Score. J Urol. 2016;195(6):1870-1876. doi:10.1016/j.juro.2016.01.101. PMID 26835833.' },
+    { num: 3, text: 'Chennamsetty A, Khourdaji I, Burks F, Killinger KA. Contemporary Diagnosis and Management of Fournier\u2019s Gangrene. Ther Adv Urol. 2015;7(4):203-215. doi:10.1177/1756287215584740. PMID 26445600. \u2014 Antibiotic and necrotizing-infection guidance: Stevens DL, Bisno AL, Chambers HF, et al. Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections: 2014 Update by the Infectious Diseases Society of America. Clin Infect Dis. 2014;59(2):e10-e52 (print executive summary paginated 59(2):147-159). doi:10.1093/cid/ciu296. PMID 24947530 [correction: Clin Infect Dis. 2015;60(9):1448]. https://academic.oup.com/cid/article/59/2/e10/2895845' },
+    { num: 4, text: 'Workowski KA, Bachmann LH, Chan PA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021 (Epididymitis section). MMWR Recomm Rep. 2021;70(4):1-187. doi:10.15585/mmwr.rr7004a1. PMID 34292926. https://www.cdc.gov/std/treatment-guidelines/STI-Guidelines-2021.pdf \u2014 CURRENT CDC edition. Narrative review: McConaghy JR, Panchal B. Epididymitis: An Overview. Am Fam Physician. 2016;94(9):723-726. PMID 27929243.' },
+    { num: 5, text: 'HerniaSurge Group. International Guidelines for Groin Hernia Management (incarceration, taxis, and emergency repair). Hernia. 2018;22(1):1-165. doi:10.1007/s10029-017-1668-x. PMID 29330835. \u2014 Current update: Stabilini C, van Veenendaal N, Aasvang E, et al. Update of the International HerniaSurge Guidelines for Groin Hernia Management. BJS Open. 2023;7(5):zrad080. doi:10.1093/bjsopen/zrad080.' },
+    { num: 6, text: 'Dubin J, Davis JE. Penile Emergencies (paraphimosis, constriction/entrapment injury, zipper injury, priapism). Emerg Med Clin North Am. 2011;29(3):485-499. doi:10.1016/j.emc.2011.04.006. https://www.emed.theclinics.com/article/S0733-8627(11)00040-X/abstract' },
+    { num: 7, text: 'Bivalacqua TJ, Allen BK, Brock G, et al. Acute Ischemic Priapism: An AUA/SMSNA Guideline. J Urol. 2021;206(5):1114-1121. doi:10.1097/JU.0000000000002236. https://www.auanet.org/guidelines-and-quality/guidelines/acute-ischemic-priapism' },
+    { num: 8, text: 'Stephenson A, Eggener SE, Bass EB, et al. Diagnosis and Treatment of Early Stage Testicular Cancer: AUA Guideline (serum AFP/beta-hCG/LDH before orchiectomy; radical inguinal orchiectomy; avoid transscrotal biopsy). J Urol. 2019;202(2):272-281. doi:10.1097/JU.0000000000000318. PMID 31059667 \u2014 amended 2023: Stephenson A, Bass EB, Bixler BR, et al. J Urol. 2023. doi:10.1097/JU.0000000000003694. \u2014 European counterpart: Patrikidou A, Cazzaniga W, Berney D, et al. European Association of Urology Guidelines on Testicular Cancer: 2023 Update. Eur Urol. 2023;84(3):289-301. PMID 37183161.' },
+    { num: 9, text: 'Expert Panel on Urological Imaging; Gerena M, Allen BC, Turkbey B, et al. ACR Appropriateness Criteria\u00AE Acute Onset of Scrotal Pain \u2014 Without Trauma, Without Antecedent Mass: 2024 Update. J Am Coll Radiol. 2024;21(11S):S364-S371. doi:10.1016/j.jacr.2024.08.011. PMID 39488348. \u2014 Painless/palpable mass pathway: Expert Panel on Urological Imaging; Lyshchik A, Nikolaidis P, Khatri G, et al. ACR Appropriateness Criteria\u00AE Newly Diagnosed Palpable Scrotal Abnormality. J Am Coll Radiol. 2022;19(5S):S114-S120. doi:10.1016/j.jacr.2022.02.018. PMID 35550796.' },
+    { num: 10, text: 'Singer M, Deutschman CS, Seymour CW, et al. The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3) \u2014 qSOFA criteria. JAMA. 2016;315(8):801-810. doi:10.1001/jama.2016.0287. PMID 26903338. PMCID PMC4968574.' },
 ];
 export const PAINLESS_SCROTAL_MASS_HUB_NODE_COUNT = PAINLESS_SCROTAL_MASS_HUB_NODES.length;
 export const PAINLESS_SCROTAL_MASS_HUB_MODULE_LABELS = [
