@@ -68,8 +68,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Necrotizing Fasciitis Management',
-    body: '**Necrotizing fasciitis is a SURGICAL EMERGENCY. >75% require amputation.**\n\n**Immediate actions:**\n1. **Aggressive fluid resuscitation** - often requires >6L in first 6 hours\n2. **Broad-spectrum antibiotics STAT:**\n   - Vancomycin 25-30 mg/kg IV load\n   - PLUS Piperacillin-tazobactam 4.5g IV q6h\n   - PLUS Clindamycin 900mg IV q8h (toxin suppression)\n3. **Emergent surgical consultation** - do NOT delay for imaging\n4. **ICU admission**\n5. **Serial lactate monitoring**\n\n**Surgical principles:**\n- Bedside debridement if OR delayed\n- Wide fasciotomy and debridement\n- "Finger test" - lack of tissue resistance on digital exploration\n- Plan for repeat OR in 24-48h\n- Amputation if non-viable limb\n\n**LRINEC score can support diagnosis but should NOT delay surgery:**\n- CRP >150: 4 pts | WBC >15k: 1 pt, >25k: 2 pts\n- Hgb <13.5: 1 pt, <11: 2 pts | Na <135: 2 pts\n- Cr >1.6: 2 pts | Glucose >180: 1 pt\n- Score >=6: Highly suspicious for nec fasc [3][4]',
-    citation: [3, 4],
+    body: '**Necrotizing fasciitis is a SURGICAL EMERGENCY. >75% require amputation.**\n\n**Immediate actions:**\n1. **Aggressive fluid resuscitation** - often requires >6L in first 6 hours\n2. **Broad-spectrum antibiotics STAT:**\n   - Vancomycin 25-30 mg/kg IV load\n   - PLUS Piperacillin-tazobactam 4.5g IV q6h\n   - PLUS Clindamycin 900mg IV q8h (toxin suppression)\n3. **Emergent surgical consultation** - do NOT delay for imaging\n4. **ICU admission**\n5. **Serial lactate monitoring**\n\n**Surgical principles:**\n- Bedside debridement if OR delayed\n- Wide fasciotomy and debridement\n- "Finger test" - lack of tissue resistance on digital exploration\n- Plan for repeat OR in 24-48h\n- Amputation if non-viable limb\n\n**LRINEC score can support diagnosis but should NOT delay surgery:**\n- CRP >150: 4 pts | WBC >15k: 1 pt, >25k: 2 pts\n- Hgb <13.5: 1 pt, <11: 2 pts | Na <135: 2 pts\n- Cr >1.6: 2 pts | Glucose >180: 1 pt\n- Score >=6: Highly suspicious for nec fasc [3][4][18]',
+    citation: [3, 4, 18],
     treatment: {
       firstLine: {
         drug: 'Vancomycin + Piperacillin-tazobactam + Clindamycin',
@@ -252,7 +252,7 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     module: 2,
     title: 'Grade 2 - Mild Infection (Outpatient)',
     body: '**Mild DFI can be managed as outpatient with oral antibiotics.**\n\n**Target pathogens:** Gram-positive cocci (Staph aureus, Streptococcus)\n\n**First-line oral regimens (7-14 days):**\n\n| Antibiotic | Dose |\n|------------|------|\n| Cephalexin | 500 mg QID |\n| Dicloxacillin | 500 mg QID |\n| Amoxicillin-clavulanate | 875/125 mg BID |\n| Clindamycin | 300-450 mg TID |\n\n**If MRSA suspected (add or substitute):**\n| Antibiotic | Dose |\n|------------|------|\n| TMP-SMX | 1-2 DS tabs BID |\n| Doxycycline | 100 mg BID |\n| Clindamycin | 300-450 mg TID |\n\n**MRSA risk factors:**\n- Prior MRSA infection/colonization\n- Recent hospitalization/antibiotics\n- Nursing home, hemodialysis\n- Failed outpatient therapy\n\n**Outpatient criteria (ALL must be met):**\n- No systemic toxicity\n- No deep abscess requiring I&D\n- Adequate home support\n- Access to follow-up in 48-72 hours\n- Can obtain antibiotics [9][11]',
-    citation: [9, 11],
+    citation: [1, 9, 11],
     treatment: {
       firstLine: {
         drug: 'Cephalexin',
@@ -286,7 +286,7 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     module: 2,
     title: 'Grade 3 - Moderate Infection',
     body: '**Moderate DFI often requires hospitalization for IV antibiotics and close monitoring.**\n\n**Target pathogens:** Staph aureus, Streptococcus, Enterobacteriaceae, anaerobes\n\n**Oral options (if can discharge):**\n| Regimen | Notes |\n|---------|-------|\n| Amox-clav 875/125 BID | Good broad coverage |\n| Levofloxacin 750 daily + Clindamycin 450 TID | FQ + anaerobic |\n| Moxifloxacin 400 daily | Monotherapy option |\n\n**IV regimens (if admitted):**\n| Regimen | Notes |\n|---------|-------|\n| Ampicillin-sulbactam 3g q6h | First-line |\n| Piperacillin-tazobactam 4.5g q8h | Broader gram-negative |\n| Ceftriaxone 1-2g daily + Metronidazole 500mg q8h | Alternative |\n| Ertapenem 1g daily | Once-daily option |\n\n**Add vancomycin 15-20 mg/kg q8-12h if MRSA risk.**\n\n**Admission criteria (ANY warrants hospitalization):**\n- Deep abscess requiring I&D\n- Gangrene\n- Osteomyelitis requiring surgery\n- Critical limb ischemia\n- Need for IV antibiotics\n- Inadequate home support\n\n**Duration:** 1-2 weeks (up to 4 weeks if severe PAD or slow healing) [9][11]',
-    citation: [9, 11],
+    citation: [1, 9, 11],
     treatment: {
       firstLine: {
         drug: 'Ampicillin-sulbactam',
@@ -320,7 +320,7 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     module: 2,
     title: 'Grade 4 - Severe Infection',
     body: '**Severe DFI requires hospitalization, broad-spectrum IV antibiotics, and often surgery.**\n\n**Target pathogens:** MRSA, Pseudomonas (if risk factors), Enterobacteriaceae, anaerobes\n\n**Empiric regimen:**\n| Drug | Dose |\n|------|------|\n| [Vancomycin](#/drug/vancomycin/mrsa coverage) | 15-20 mg/kg q8-12h (target trough 15-20) |\n| **PLUS one of:** | |\n| Piperacillin-tazobactam | 4.5 g q6h |\n| Meropenem | 1 g q8h |\n| Cefepime + Metronidazole | 2g q8h + 500mg q8h |\n\n**Pseudomonas risk factors:**\n- Prior Pseudomonas infection\n- Water exposure\n- Chronic wounds with maceration\n- Failed prior antibiotics\n\n**Cultures:**\n- Obtain tissue culture (preferred) or deep swab BEFORE antibiotics if possible\n- Blood cultures x2\n- Bone culture if osteomyelitis (gold standard)\n\n**Surgical consultation STAT if:**\n- Deep abscess\n- Necrotizing infection suspected\n- Wet gangrene\n- Compartment syndrome\n- Extensive necrotic tissue\n\n**Duration:** 10 days with debridement. 6 weeks if osteomyelitis without resection. [9][11]',
-    citation: [9, 11],
+    citation: [1, 9, 11],
     treatment: {
       firstLine: {
         drug: 'Vancomycin + Piperacillin-tazobactam',
@@ -506,8 +506,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Charcot Foot: A Commonly Missed Diagnosis',
-    body: '**Charcot neuroarthropathy (CN) is a MEDICAL EMERGENCY that can lead to irreversible deformity.**\n\n**Prevalence:** Up to 13% of diabetics with neuropathy\n\n**CRITICAL FACT: 25% of acute Charcot is MISDIAGNOSED** (as cellulitis, gout, DVT, sprain)\n\n**Average delay to diagnosis: 7 months**\n\n**Risk factors:**\n- Diabetes with peripheral neuropathy (most common)\n- Long-standing diabetes (>10 years)\n- Tight glycemic control (relative)\n- Prior foot surgery or trauma\n- Obesity\n- Renal transplant patients\n\n**Pathophysiology:**\n- Autonomic neuropathy → increased blood flow → bone resorption\n- Sensory neuropathy → continued weight-bearing despite injury\n- Motor neuropathy → abnormal biomechanics\n- Result: Progressive bone destruction, fragmentation, deformity\n\n**Most common location:** Midfoot (tarsometatarsal joints - Lisfranc area) [14][15]',
-    citation: [14, 15],
+    body: '**Charcot neuroarthropathy (CN) is a MEDICAL EMERGENCY that can lead to irreversible deformity.**\n\n**Prevalence:** Up to 13% of diabetics with neuropathy\n\n**CRITICAL FACT: 25% of acute Charcot is MISDIAGNOSED** (as cellulitis, gout, DVT, sprain)\n\n**Average delay to diagnosis: 7 months**\n\n**Risk factors:**\n- Diabetes with peripheral neuropathy (most common)\n- Long-standing diabetes (>10 years)\n- Tight glycemic control (relative)\n- Prior foot surgery or trauma\n- Obesity\n- Renal transplant patients\n\n**Pathophysiology:**\n- Autonomic neuropathy → increased blood flow → bone resorption\n- Sensory neuropathy → continued weight-bearing despite injury\n- Motor neuropathy → abnormal biomechanics\n- Result: Progressive bone destruction, fragmentation, deformity\n\n**Most common location:** Midfoot (tarsometatarsal joints - Lisfranc area) [14][15][17]',
+    citation: [14, 15, 17],
     next: 'dfw-charcot-presentation',
     images: [
       {
@@ -524,8 +524,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Acute Charcot: Clinical Presentation',
-    body: '**Classic triad of acute Charcot:**\n1. **Unilateral swollen foot/ankle**\n2. **Warmth** (2-8°C difference vs. contralateral)\n3. **Erythema**\n\n**Key distinguishing features from infection:**\n| Feature | Acute Charcot | Osteomyelitis/Cellulitis |\n|---------|---------------|-------------------------|\n| Open wound | Usually ABSENT | Usually PRESENT |\n| Fever | Absent | May be present |\n| WBC | Normal | Often elevated |\n| ESR/CRP | Mildly elevated | Significantly elevated |\n| Pain | Minimal (neuropathy) | Variable |\n| Pulses | Often bounding | Variable |\n\n**Red flags for Charcot:**\n- Diabetic >40 years with neuropathy\n- Red, hot, swollen foot WITHOUT open wound\n- Minimal or no pain despite appearance\n- History of minor or unrecalled trauma\n- Normal systemic vitals and labs\n- Patient walking on affected foot without complaint\n\n**Diagnostic approach:**\n1. Compare temperature to contralateral foot\n2. Weight-bearing X-rays (may be normal early)\n3. MRI if X-ray normal but high clinical suspicion\n4. Labs: CBC, BMP, ESR, CRP (to help r/o infection) [14][15]',
-    citation: [14, 15],
+    body: '**Classic triad of acute Charcot:**\n1. **Unilateral swollen foot/ankle**\n2. **Warmth** (2-8°C difference vs. contralateral)\n3. **Erythema**\n\n**Key distinguishing features from infection:**\n| Feature | Acute Charcot | Osteomyelitis/Cellulitis |\n|---------|---------------|-------------------------|\n| Open wound | Usually ABSENT | Usually PRESENT |\n| Fever | Absent | May be present |\n| WBC | Normal | Often elevated |\n| ESR/CRP | Mildly elevated | Significantly elevated |\n| Pain | Minimal (neuropathy) | Variable |\n| Pulses | Often bounding | Variable |\n\n**Red flags for Charcot:**\n- Diabetic >40 years with neuropathy\n- Red, hot, swollen foot WITHOUT open wound\n- Minimal or no pain despite appearance\n- History of minor or unrecalled trauma\n- Normal systemic vitals and labs\n- Patient walking on affected foot without complaint\n\n**Diagnostic approach:**\n1. Compare temperature to contralateral foot\n2. Weight-bearing X-rays (may be normal early)\n3. MRI if X-ray normal but high clinical suspicion\n4. Labs: CBC, BMP, ESR, CRP (to help r/o infection) [14][15][17]',
+    citation: [14, 15, 17],
     next: 'dfw-charcot-staging',
     images: [
       {
@@ -542,8 +542,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Eichenholtz Staging',
-    body: '**Eichenholtz Classification (Stages 0-3):**\n\n| Stage | Name | Clinical | Radiographic |\n|-------|------|----------|---------------|\n| 0 | Pre-clinical | Warm, swollen, painful | Normal X-ray, marrow edema on MRI |\n| 1 | Development/Fragmentation | Red, hot, swollen | Osteopenia, fragmentation, subluxation |\n| 2 | Coalescence | Decreased warmth/swelling | Absorption of debris, sclerosis |\n| 3 | Reconstruction | No inflammation | Remodeling, fusion, stable deformity |\n\n**Stage 0 is critical to recognize:**\n- X-ray is NORMAL\n- MRI shows bone marrow edema\n- Clinical suspicion drives diagnosis\n- Early treatment prevents deformity\n\n**Progression:**\n- Without treatment: Stage 1 → rocker-bottom deformity → ulceration → amputation\n- With early treatment: Can arrest progression and preserve function\n\n**Treatment varies by stage:**\n- Acute (0-1): Strict offloading, immobilization\n- Coalescence (2): Gradual weight-bearing\n- Reconstruction (3): Custom orthotics, possibly surgery for deformity [14][15]',
-    citation: [14, 15],
+    body: '**Eichenholtz Classification (Stages 0-3):**\n\n| Stage | Name | Clinical | Radiographic |\n|-------|------|----------|---------------|\n| 0 | Pre-clinical | Warm, swollen, painful | Normal X-ray, marrow edema on MRI |\n| 1 | Development/Fragmentation | Red, hot, swollen | Osteopenia, fragmentation, subluxation |\n| 2 | Coalescence | Decreased warmth/swelling | Absorption of debris, sclerosis |\n| 3 | Reconstruction | No inflammation | Remodeling, fusion, stable deformity |\n\n**Stage 0 is critical to recognize:**\n- X-ray is NORMAL\n- MRI shows bone marrow edema\n- Clinical suspicion drives diagnosis\n- Early treatment prevents deformity\n\n**Progression:**\n- Without treatment: Stage 1 → rocker-bottom deformity → ulceration → amputation\n- With early treatment: Can arrest progression and preserve function\n\n**Treatment varies by stage:**\n- Acute (0-1): Strict offloading, immobilization\n- Coalescence (2): Gradual weight-bearing\n- Reconstruction (3): Custom orthotics, possibly surgery for deformity [14][15][17]',
+    citation: [14, 15, 17],
     next: 'dfw-charcot-management',
   
     summary: 'Eichenholtz Staging — review key clinical information before proceeding',
@@ -555,8 +555,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Acute Charcot ED Management',
-    body: '**Acute Charcot is a LIMB-THREATENING condition requiring immediate intervention.**\n\n**ED Management:**\n\n**1. Immediate offloading:**\n- CAM boot or wheelchair\n- **Strict non-weight-bearing**\n- Do NOT use splint that patient might not follow up to remove\n\n**2. Patient education:**\n- Emphasize this is a MEDICAL EMERGENCY\n- Continued walking will cause permanent deformity\n- May require months of immobilization\n\n**3. Glycemic control:**\n- Optimize glucose management\n- Poor control worsens bone resorption\n\n**4. Urgent referral:**\n- Podiatry or foot/ankle orthopedics within 24-48 hours\n- Do NOT discharge without clear follow-up plan\n\n**5. Consider admission if:**\n- Unable to comply with non-weight-bearing\n- Inadequate social support\n- Concurrent infection\n- Severe deformity with skin compromise\n\n**Total Contact Cast (TCC):**\n- Gold standard for offloading\n- Applied by trained specialist\n- Not typically done in ED\n- Referral should be for TCC application [14][15]',
-    citation: [14, 15],
+    body: '**Acute Charcot is a LIMB-THREATENING condition requiring immediate intervention.**\n\n**ED Management:**\n\n**1. Immediate offloading:**\n- CAM boot or wheelchair\n- **Strict non-weight-bearing**\n- Do NOT use splint that patient might not follow up to remove\n\n**2. Patient education:**\n- Emphasize this is a MEDICAL EMERGENCY\n- Continued walking will cause permanent deformity\n- May require months of immobilization\n\n**3. Glycemic control:**\n- Optimize glucose management\n- Poor control worsens bone resorption\n\n**4. Urgent referral:**\n- Podiatry or foot/ankle orthopedics within 24-48 hours\n- Do NOT discharge without clear follow-up plan\n\n**5. Consider admission if:**\n- Unable to comply with non-weight-bearing\n- Inadequate social support\n- Concurrent infection\n- Severe deformity with skin compromise\n\n**Total Contact Cast (TCC):**\n- Gold standard for offloading\n- Applied by trained specialist\n- Not typically done in ED\n- Referral should be for TCC application [14][15][17]',
+    citation: [14, 15, 17],
     next: 'dfw-charcot-vs-infection',
   
     summary: 'Acute Charcot ED Management — review key clinical information before proceeding',
@@ -567,8 +567,8 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Differentiating Charcot from Infection',
-    body: '**This is one of the most challenging diagnostic dilemmas in DFU management.**\n\n**Clinical clues favoring Charcot:**\n- No open wound or ulcer\n- Bilateral warmth (sometimes)\n- Pain minimal or absent\n- Normal WBC\n- ESR/CRP mildly elevated (<40)\n- Patient afebrile\n- Bounding pulses\n\n**Clinical clues favoring infection:**\n- Open wound or ulcer present\n- Unilateral warmth with wound\n- Pain present (unless severe neuropathy)\n- Elevated WBC\n- ESR/CRP significantly elevated (>70)\n- Fever or systemic symptoms\n- Purulent drainage\n\n**When both coexist:**\n- Treat the infection AND offload for Charcot\n- More common than isolated Charcot\n- Worse prognosis\n\n**MRI findings:**\n- Charcot: Diffuse marrow edema, often bilateral, no focal bone destruction\n- Osteomyelitis: Focal bone destruction adjacent to ulcer, cortical disruption\n\n**When uncertain:** Treat for BOTH until proven otherwise. Better to offload unnecessarily than miss Charcot. [14][15]',
-    citation: [14, 15],
+    body: '**This is one of the most challenging diagnostic dilemmas in DFU management.**\n\n**Clinical clues favoring Charcot:**\n- No open wound or ulcer\n- Bilateral warmth (sometimes)\n- Pain minimal or absent\n- Normal WBC\n- ESR/CRP mildly elevated (<40)\n- Patient afebrile\n- Bounding pulses\n\n**Clinical clues favoring infection:**\n- Open wound or ulcer present\n- Unilateral warmth with wound\n- Pain present (unless severe neuropathy)\n- Elevated WBC\n- ESR/CRP significantly elevated (>70)\n- Fever or systemic symptoms\n- Purulent drainage\n\n**When both coexist:**\n- Treat the infection AND offload for Charcot\n- More common than isolated Charcot\n- Worse prognosis\n\n**MRI findings:**\n- Charcot: Diffuse marrow edema, often bilateral, no focal bone destruction\n- Osteomyelitis: Focal bone destruction adjacent to ulcer, cortical disruption\n\n**When uncertain:** Treat for BOTH until proven otherwise. Better to offload unnecessarily than miss Charcot. [14][15][17]',
+    citation: [14, 15, 17],
     next: 'dfw-treatment-overview',
   
     summary: 'Differentiating Charcot from Infection — review key clinical information before proceeding',
@@ -692,7 +692,7 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     module: 6,
     title: 'Diabetic Foot Wounds: Key Pearls',
     body: '**10 Key Clinical Pearls:**\n\n1. **25% of acute Charcot is misdiagnosed.** Think of it in any diabetic with a red, hot, swollen foot and normal labs.\n\n2. **ABI is unreliable in diabetics.** Use TBI instead due to medial arterial calcification.\n\n3. **Positive PTB + positive X-ray = osteomyelitis very likely.** Don\'t delay treatment for MRI.\n\n4. **Don\'t treat uninfected ulcers with antibiotics** - even if osteomyelitis is present on imaging. Wait for cultures.\n\n5. **Offloading is as important as antibiotics.** A TCC heals 90% of neuropathic ulcers in 12 weeks.\n\n6. **Wet gangrene is an emergency.** Dry gangrene can wait for demarcation.\n\n7. **Necrotizing fasciitis: early pain is out of proportion, late pain is absent** (due to nerve destruction).\n\n8. **MRSA nasal PCR has >95% negative predictive value.** Use it to de-escalate.\n\n9. **MRI cannot always distinguish osteomyelitis from acute Charcot.** Clinical context matters.\n\n10. **Multidisciplinary care improves outcomes.** ID, vascular, podiatry, wound care, and endocrine.',
-    citation: [1, 2, 9],
+    citation: [1, 2, 9, 19],
     next: 'dfw-start',
   
     summary: 'Diabetic Foot Wounds: Key Pearls — review key clinical information before proceeding',
@@ -704,7 +704,7 @@ export const DIABETIC_FOOT_WOUNDS_NODES: DecisionNode[] = [
     module: 6,
     title: 'Antibiotic Summary by IDSA Grade',
     body: '**Quick Reference: Empiric Antibiotics by Severity**\n\n**Grade 2 (Mild) - Oral, 7-14 days:**\n- Cephalexin 500mg QID OR Amox-clav 875/125 BID\n- Add TMP-SMX 1-2 DS BID if MRSA risk\n\n**Grade 3 (Moderate) - Oral or IV, 1-2 weeks:**\n- Oral: Amox-clav 875/125 BID OR Levofloxacin 750 daily + Clinda 450 TID\n- IV: Amp-sulbactam 3g q6h OR Pip-tazo 4.5g q8h\n- Add Vanc 15-20 mg/kg q8-12h if MRSA risk\n\n**Grade 4 (Severe) - IV, 10 days (6 weeks if osteo):**\n- Vancomycin 15-20 mg/kg q8-12h (trough 15-20)\n- PLUS Pip-tazo 4.5g q6h OR Meropenem 1g q8h\n\n**Osteomyelitis duration:**\n- With surgical resection + negative margins: 3 weeks\n- With surgical resection + positive margins: 6 weeks\n- Without surgery: 6+ weeks\n\n**MRSA de-escalation:** If MRSA nasal PCR negative, can stop MRSA coverage (>95% NPV)',
-    citation: [9, 11],
+    citation: [1, 9, 11, 19],
     calculatorLinks: [
       { id: 'dfw-abx-selector', label: 'Antibiotic Selector' },
     ],
@@ -727,20 +727,23 @@ export const DIABETIC_FOOT_WOUNDS_MODULE_LABELS = [
 ];
 
 export const DIABETIC_FOOT_WOUNDS_CITATIONS: Citation[] = [
-  { num: 1, text: 'Lipsky BA, et al. IWGDF/IDSA 2023 Guidelines on the Diagnosis and Treatment of Diabetes-Related Foot Infections. Clin Infect Dis. 2023. PMID: 37713519' },
-  { num: 2, text: 'IWGDF 2023 Practical Guidelines on Prevention and Management of Diabetes-Related Foot Disease. iwgdfguidelines.org' },
-  { num: 3, text: 'Ramirez-Acuna JM, et al. Necrotizing Fasciitis in Diabetic Foot: Clinical Characteristics and Outcomes. PMC. 2023. PMID: 37214578' },
+  { num: 1, text: 'Senneville \u00C9, Albalawi Z, van Asten SA, et al. IWGDF/IDSA Guidelines on the Diagnosis and Treatment of Diabetes-related Foot Infections (IWGDF/IDSA 2023). Clin Infect Dis. 2023 Oct 2. PMID: 37779457' },
+  { num: 2, text: 'Schaper NC, van Netten JJ, Apelqvist J, et al. Practical guidelines on the prevention and management of diabetes-related foot disease (IWGDF 2023 update). Diabetes Metab Res Rev. 2024;40(3):e3657. PMID: 37243927' },
+  { num: 3, text: 'Stevens DL, Bisno AL, Chambers HF, et al. Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections: 2014 Update by the Infectious Diseases Society of America. Clin Infect Dis. 2014;59(2):e10-e52. PMID: 24973422' },
   { num: 4, text: 'Wong CH, et al. The LRINEC (Laboratory Risk Indicator for Necrotizing Fasciitis) score: a tool for distinguishing necrotizing fasciitis from other soft tissue infections. Crit Care Med. 2004;32(7):1535-1541. PMID: 15241098' },
   { num: 5, text: 'Mills JL, et al. Society for Vascular Surgery Lower Extremity Guidelines Committee. The Society for Vascular Surgery Lower Extremity Threatened Limb Classification System: Risk stratification based on Wound, Ischemia, and foot Infection (WIfI). J Vasc Surg. 2014;59(1):220-234. PMID: 24126108' },
-  { num: 6, text: 'IWGDF 2019 Guideline on the Diagnosis, Prognosis and Management of Peripheral Artery Disease in Patients with Foot Ulcers in Diabetes. iwgdfguidelines.org' },
-  { num: 7, text: 'Monteiro-Soares M, et al. Diabetic foot ulcer classifications: A critical review. Diabetes Metab Res Rev. 2020;36 Suppl 1:e3272. PMID: 31830360' },
+  { num: 6, text: 'Fitridge R, Chuter V, Mills J, et al. The intersocietal IWGDF, ESVS, SVS guidelines on peripheral artery disease in people with diabetes and a foot ulcer. Diabetes Metab Res Rev. 2024;40(3):e3686. PMID: 37726988 (supersedes IWGDF 2019 PAD guideline)' },
+  { num: 7, text: 'Monteiro-Soares M, Boyko EJ, Jeffcoate W, et al. Diabetic foot ulcer classifications: A critical review. Diabetes Metab Res Rev. 2020;36 Suppl 1:e3272. PMID: 32176449' },
   { num: 8, text: 'Ince P, et al. Use of the SINBAD Classification System and Score in Comparing Outcome of Foot Ulcer Management on Three Continents. Diabetes Care. 2008;31(5):964-967. PMID: 18299441' },
-  { num: 9, text: 'Lipsky BA, et al. IDSA Clinical Practice Guideline for the Diagnosis and Treatment of Diabetic Foot Infections. Clin Infect Dis. 2012;54(12):e132-e173. PMID: 22619242' },
-  { num: 10, text: 'Bus SA, et al. IWGDF Guideline on Offloading Foot Ulcers in Persons with Diabetes. Diabetes Metab Res Rev. 2020;36 Suppl 1:e3274. PMID: 31845420' },
-  { num: 11, text: 'Lipsky BA, et al. Treating Diabetic Foot Infections: What Works? AAFP. 2021. aafp.org' },
+  { num: 9, text: 'Lipsky BA, Berendt AR, Cornia PB, et al. 2012 Infectious Diseases Society of America Clinical Practice Guideline for the Diagnosis and Treatment of Diabetic Foot Infections. Clin Infect Dis. 2012;54(12):e132-e173. PMID: 22619242 (superseded for infection management by the IWGDF/IDSA 2023 guideline, ref 1; retained for the original IDSA severity-grading framework)' },
+  { num: 10, text: 'Bus SA, Armstrong DG, Crews RT, et al. Guidelines on offloading foot ulcers in persons with diabetes (IWGDF 2023 update). Diabetes Metab Res Rev. 2024;40(3):e3647. PMID: 37226568 (supersedes IWGDF 2019 offloading update, PMID 32176441)' },
+  { num: 11, text: 'Matheson EM, Bragg SW, Blackwelder RS. Diabetes-Related Foot Infections: Diagnosis and Treatment. Am Fam Physician. 2021;104(4):386-394. PMID: 34652105' },
   { num: 12, text: 'Lam K, et al. Diagnostic Accuracy of Probe to Bone to Detect Osteomyelitis in the Diabetic Foot: A Systematic Review. Clin Infect Dis. 2016;63(7):944-948. PMID: 27369321' },
   { num: 13, text: 'Berendt AR, et al. Diabetic foot osteomyelitis: a progress report on diagnosis and a systematic review of treatment. Diabetes Metab Res Rev. 2008;24 Suppl 1:S145-S161. PMID: 18442163' },
-  { num: 14, text: 'Rogers LC, et al. The Charcot Foot in Diabetes. Diabetes Care. 2011;34(9):2123-2129. PMID: 21868778' },
+  { num: 14, text: 'Rogers LC, Frykberg RG, Armstrong DG, et al. The Charcot foot in diabetes. Diabetes Care. 2011;34(9):2123-2129. PMID: 21868781' },
   { num: 15, text: 'Milne TE, et al. Developing an evidence-based clinical pathway for the assessment, diagnosis and management of acute Charcot neuro-arthropathy. J Foot Ankle Res. 2013;6:30. PMID: 23898912' },
-  { num: 16, text: 'IWGDF 2019 Guideline on Interventions to Enhance Healing of Foot Ulcers in Persons with Diabetes. iwgdfguidelines.org' },
+  { num: 16, text: 'Chen P, Vilorio NC, Dhatariya K, et al. Guidelines on interventions to enhance healing of foot ulcers in people with diabetes (IWGDF 2023 update). Diabetes Metab Res Rev. 2024;40(3):e3644. PMID: 37232034 (supersedes IWGDF 2019 wound-healing guideline)' },
+  { num: 17, text: 'Wukich DK, Schaper NC, Gooday C, et al. Guidelines on the diagnosis and treatment of active Charcot neuro-osteoarthropathy in persons with diabetes mellitus (IWGDF 2023). Diabetes Metab Res Rev. 2024;40(3):e3646. PMID: 37218537' },
+  { num: 18, text: 'Fernando SM, Tran A, Cheng W, et al. Necrotizing Soft Tissue Infection: Diagnostic Accuracy of Physical Examination, Imaging, and LRINEC Score: A Systematic Review and Meta-analysis. Ann Surg. 2019;269(1):58-65. PMID: 29672405' },
+  { num: 19, text: 'Coye TL, Foote C, Stasko P, et al. Predictive Value of Methicillin-Resistant Staphylococcus aureus Nares Colonization in Diabetic Foot Infections: A Systematic Review and Bivariate Random Effects Meta-Analysis. J Foot Ankle Surg. 2023;62(3):576-582. PMID: 36922315. doi: 10.1053/j.jfas.2022.06.006' },
 ];
