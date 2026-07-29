@@ -105,7 +105,7 @@ export const PSYCH_TRIAGE_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Withdrawal Pathway',
-    body: '**→ [Alcohol Withdrawal Consult](#/tree/alcohol-withdrawal)**\n\n**Early treatment prevents:**\n• Withdrawal seizures (peak 12-48h)\n• Delirium tremens (peak 48-96h, mortality 5-15%)\n\n**Which substance?**\n• **Alcohol/Benzos:** CIWA-Ar, benzodiazepines, phenobarbital\n• **Opioids:** COWS score, buprenorphine initiation, clonidine\n• **Stimulants:** Supportive care, benzos for agitation\n\n**High-risk features:** Prior seizures/DTs, PAWSS ≥4, prolonged heavy use',
+    body: '**→ [Alcohol Withdrawal Consult](#/tree/alcohol-withdrawal)**\n\n**Early treatment prevents:**\n• Withdrawal seizures (peak 12-48h)\n• Delirium tremens (peak 48-96h)\n\n**DT mortality — say the number correctly:** untreated DTs historically carried 15-37% mortality. With modern ICU care, aggressive benzodiazepine/phenobarbital treatment, and correction of electrolytes, mortality is roughly **1-4%**. Quote the low number only for the patient who is actually being treated.\n\n**Which substance?**\n• **Alcohol/Benzos:** CIWA-Ar, benzodiazepines, phenobarbital\n• **Opioids:** COWS score, buprenorphine initiation, clonidine\n• **Stimulants:** Supportive care, benzos for agitation\n\n**High-risk features:** Prior seizures/DTs, PAWSS ≥4, prolonged heavy use',
     citation: [6],
     next: 'pst-end',
     summary: 'Withdrawal — route to Alcohol Withdrawal consult for CIWA-Ar and benzo protocols.',
@@ -138,10 +138,10 @@ export const PSYCH_TRIAGE_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Eating Disorder Pathway',
-    body: '**Eating disorder emergency — focus on medical stability:**\n\n**Check immediately:**\n• Electrolytes: K+, PO4, Mg2+ (refeeding risk)\n• ECG: QTc prolongation, bradycardia\n• Glucose\n• Vitals: Bradycardia, orthostatic hypotension\n\n**MARSIPAN criteria for admission:**\n• BMI <13 or rapid weight loss >1 kg/week\n• K+ <3.0 or PO4 <0.5\n• HR <40 or BP <90 systolic\n• QTc >450 ms\n• Syncope\n• Hypoglycemia\n\n**Refeeding syndrome risk:** Start feeding slowly, monitor PO4/K+/Mg2+ daily × 3 days',
+    body: '**Eating disorder emergency — focus on medical stability:**\n\n**Check immediately:**\n• Electrolytes: K+, PO4, Mg2+ (refeeding risk)\n• ECG: QTc prolongation, bradycardia\n• Glucose\n• Vitals: Bradycardia, orthostatic hypotension\n\n**High-risk features that should trigger admission (legacy MARSIPAN 2014 thresholds):**\n• BMI <13 or rapid weight loss >1 kg/week\n• K+ <3.0 or PO4 <0.5\n• HR <40 or BP <90 systolic\n• QTc >450 ms\n• Syncope\n• Hypoglycemia\n\n⚠️ **Guideline update — MARSIPAN is retired.** The Royal College of Psychiatrists replaced MARSIPAN (CR189) and Junior MARSIPAN (CR168) with **MEED — Medical Emergencies in Eating Disorders, College Report CR233 (May 2022)**. MEED deliberately moves away from single absolute cutoffs like BMI and instead uses a **red / amber / green risk matrix** across BMI/weight trajectory, cardiovascular status, hydration, muscle power (sit-up–squat–stand), ECG, biochemistry, and engagement. **Any one RED item, or two or more AMBER items, marks a high-risk patient who warrants urgent medical admission** — a patient can be high risk at a BMI well above 13. Use the numbers above as a floor, not a ceiling, and check the current MEED matrix for the case in front of you.\n\n**Refeeding syndrome risk:** Start feeding slowly, monitor PO4/K+/Mg2+ daily × 3 days',
     citation: [10],
     next: 'pst-end',
-    summary: 'Eating disorder — check electrolytes, ECG, vitals. Refeeding syndrome risk.',
+    summary: 'Eating disorder — check electrolytes, ECG, vitals. MEED CR233 risk matrix (any red or 2+ amber = admit). Refeeding syndrome risk.',
   },
 
   {
@@ -163,16 +163,16 @@ export const PSYCH_TRIAGE_MODULE_LABELS = [
 ];
 
 export const PSYCH_TRIAGE_CITATIONS: Citation[] = [
-  { num: 1, text: 'ACEP Clinical Policy: Adult Psychiatric Emergencies. Annals of Emergency Medicine 2021.' },
-  { num: 2, text: 'ACEP Clinical Policy: Severe Agitation in ED Patients. Annals of Emergency Medicine 2024.' },
+  { num: 1, text: 'ACEP Clinical Policies Subcommittee. Clinical Policy: Critical Issues in the Diagnosis and Management of the Adult Psychiatric Patient in the Emergency Department. Ann Emerg Med. 2017;69(4):480-498. doi:10.1016/j.annemergmed.2017.01.036. PMID: 28335913. (See also ACEP policy statement "Adult Psychiatric Emergencies," Ann Emerg Med. 2021 — a policy statement, not a clinical policy.)' },
+  { num: 2, text: 'ACEP Clinical Policies Subcommittee. Clinical Policy: Critical Issues in the Evaluation and Management of Adult Out-of-Hospital or Emergency Department Patients Presenting With Severe Agitation. Ann Emerg Med. 2024;83(1):e1-e30. doi:10.1016/j.annemergmed.2023.09.010. PMID: 38105109.' },
   { num: 3, text: 'Joint Commission National Patient Safety Goal NPSG 15.01.01: Suicide Prevention. 2024.' },
-  { num: 4, text: 'AAEP Task Force on Medical Clearance of Adult Psychiatric Patients. Western Journal of Emergency Medicine 2017.' },
+  { num: 4, text: 'Wilson MP, Nordstrom K, Anderson EL, et al. American Association for Emergency Psychiatry Task Force on Medical Clearance of Adult Psychiatric Patients. Part II: Controversies over Medical Assessment, and Consensus Recommendations. West J Emerg Med. 2017;18(4):640-646. doi:10.5811/westjem.2017.3.32259.' },
   { num: 5, text: 'Dalmau J, et al. Anti-NMDA-receptor encephalitis: case series and analysis of the effects of antibodies. Lancet Neurol 2008;7:1091-8.' },
   { num: 6, text: 'ASAM Clinical Practice Guideline on Alcohol Withdrawal Management. 2020.' },
   { num: 7, text: 'Sienaert P, et al. A Clinical Review of the Treatment of Catatonia. Front Psychiatry 2014;5:181.' },
   { num: 8, text: 'Berman BD. Neuroleptic malignant syndrome: a review for neurohospitalists. Neurohospitalist 2011;1:41-7.' },
   { num: 9, text: 'Boyer EW, Shannon M. The serotonin syndrome. N Engl J Med 2005;352:1112-20.' },
-  { num: 10, text: 'MARSIPAN: Management of Really Sick Patients with Anorexia Nervosa. Royal College of Psychiatrists 2014.' },
+  { num: 10, text: 'Royal College of Psychiatrists. Medical Emergencies in Eating Disorders (MEED): Guidance on Recognition and Management. College Report CR233. May 2022. (Supersedes MARSIPAN CR189 and Junior MARSIPAN CR168.) https://www.rcpsych.ac.uk/improving-care/campaigning-for-better-mental-health-policy/college-reports/2022-college-reports/cr233' },
 ];
 
 export const PSYCH_TRIAGE_NODE_COUNT = PSYCH_TRIAGE_NODES.length;

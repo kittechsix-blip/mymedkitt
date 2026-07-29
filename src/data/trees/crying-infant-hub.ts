@@ -47,7 +47,7 @@ export const CRYING_INFANT_HUB_NODES: DecisionNode[] = [
     type: 'result',
     module: 2,
     title: 'Fever / Toxic / Young Infant',
-    body: 'Open [Fever < 6 Months](#/tree/peds-fever).\n\n**High-risk signs:** age <60 days with fever, hypothermia, ill appearance, lethargy, poor feeding, abnormal perfusion, respiratory distress, petechiae/purpura, bulging fontanelle, seizure, or caregiver report that the infant is not acting right.\n\nFollow age-based febrile infant pathway and local protocols. Do not let a transiently consolable exam override abnormal vitals or a high-risk age group.',
+    body: 'Open [Fever < 6 Months](#/tree/peds-fever).\n\n**High-risk signs:** age <60 days with fever, hypothermia, ill appearance, lethargy, poor feeding, abnormal perfusion, respiratory distress, petechiae/purpura, bulging fontanelle, seizure, or caregiver report that the infant is not acting right.\n\nFollow age-based febrile infant pathway and local protocols. Do not let a transiently consolable exam override abnormal vitals or a high-risk age group.\n\n⚠️ **Know the limits of the AAP guideline.** Pantell 2021 applies only to **well-appearing** infants **8-60 days**. It explicitly does NOT cover neonates **0-7 days**, ill-appearing infants, prematurity <37 weeks, or infants with focal infection, congenital/chromosomal abnormality, or an indwelling device. Those infants get full evaluation — blood, urine, and CSF — plus empiric antibiotics and admission, no matter how reassuring the risk-stratification labs look.',
     recommendation: 'Fever or toxic appearance in a young infant is an infectious workup lane, not a colic lane.',
     citation: [1, 3, 5],
     safetyLevel: 'critical',
