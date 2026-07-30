@@ -21155,8 +21155,11 @@ const TGA_STEPS_SUMMARY = {
         },
     ],
     citations: [
-        { num: 1, text: 'Hodges JR, Warlow CP. The aetiology of transient global amnesia. Brain. 1990.' },
-        { num: 2, text: 'Arena JE, Bhattacharyya KB. Transient Global Amnesia. Lancet Neurol. 2021.' },
+        { num: 1, text: 'Hodges JR, Warlow CP. Syndromes of transient amnesia: towards a classification. A study of 153 cases. J Neurol Neurosurg Psychiatry. 1990;53(10):834-843. PMID 2266362.' },
+        { num: 2, text: 'Hodges JR, Warlow CP. The aetiology of transient global amnesia. A case-control study of 114 cases with prospective follow-up. Brain. 1990;113(Pt 3):639-657. PMID 2194627.' },
+        { num: 3, text: 'Arena JE, Rabinstein AA. Transient global amnesia. Mayo Clin Proc. 2015;90(2):264-272. PMID 25659242.' },
+        { num: 4, text: 'Sander D, Bartsch T, Connolly F, et al. Guideline "Transient Global Amnesia (TGA)" of the German Society of Neurology: S1-guideline. Neurol Res Pract. 2023;5(1):15. PMID 37076927.' },
+        { num: 5, text: 'Arena JE, Brown RD, Mandrekar J, Rabinstein AA. Long-term outcome in patients with transient global amnesia: a population-based study. Mayo Clin Proc. 2017;92(3):399-405. PMID 28185658. [Recurrence 5.4% at median 4.2 years; see also Hernandez MA, et al. Neurol Clin Pract. 2022;12(4):e35-e48, PMID 36382126, pooled recurrence 12.73%.]' },
     ],
 };
 // -------------------------------------------------------------------

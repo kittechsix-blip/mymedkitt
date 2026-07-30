@@ -1545,7 +1545,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'transient-global-amnesia': async () => {
             const m = await import('../data/trees/transient-global-amnesia.js');
-            return { nodes: m.TRANSIENT_GLOBAL_AMNESIA_NODES, entryNodeId: 'tga-start', categoryId: 'neurology', moduleLabels: m.TRANSIENT_GLOBAL_AMNESIA_MODULE_LABELS, citations: m.TRANSIENT_GLOBAL_AMNESIA_CITATIONS };
+            return { nodes: m.TRANSIENT_GLOBAL_AMNESIA_NODES, entryNodeId: 'tga-start', categoryId: 'neurology', moduleLabels: m.TRANSIENT_GLOBAL_AMNESIA_MODULE_LABELS, citations: m.TRANSIENT_GLOBAL_AMNESIA_CITATIONS, criticalActions: m.TRANSIENT_GLOBAL_AMNESIA_CRITICAL_ACTIONS };
         },
         'mammalian-bite': async () => {
             const m = await import('../data/trees/mammalian-bite.js');
