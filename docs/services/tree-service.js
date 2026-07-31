@@ -595,6 +595,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/cord-emergencies.js');
             return { nodes: m.CORD_EMERGENCIES_NODES, entryNodeId: 'cord-start', categoryId: 'ob-gyn', moduleLabels: m.CORD_EMERGENCIES_MODULE_LABELS, citations: m.CORD_EMERGENCIES_CITATIONS, criticalActions: m.CORD_EMERGENCIES_CRITICAL_ACTIONS };
         },
+        'resuscitative-hysterotomy': async () => {
+            const m = await import('../data/trees/resuscitative-hysterotomy.js');
+            return { nodes: m.RESUSCITATIVE_HYSTEROTOMY_NODES, entryNodeId: 'rh-start', categoryId: 'ob-gyn', moduleLabels: m.RESUSCITATIVE_HYSTEROTOMY_MODULE_LABELS, citations: m.RESUSCITATIVE_HYSTEROTOMY_CITATIONS, criticalActions: m.RESUSCITATIVE_HYSTEROTOMY_CRITICAL_ACTIONS };
+        },
         'neonatal-resus': async () => {
             const m = await import('../data/trees/neonatal-resus.js');
             return { nodes: m.NEONATAL_RESUS_NODES, entryNodeId: 'nrp-start', categoryId: 'pediatrics', moduleLabels: m.NEONATAL_RESUS_MODULE_LABELS, citations: m.NEONATAL_RESUS_CITATIONS, criticalActions: m.NEONATAL_RESUS_CRITICAL_ACTIONS };
