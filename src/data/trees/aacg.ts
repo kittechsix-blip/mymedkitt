@@ -610,7 +610,7 @@ export const AACG_MODULE_LABELS = [
 
 export const AACG_CRITICAL_ACTIONS = [
   { text: 'Ophthalmology consult FIRST - do NOT delay for treatment (they need to assess for laser iridotomy)', nodeId: 'aacg-start' },
-  { text: 'Tonometry to measure IOP (normal 10-21 mmHg; AACG usually 50-80+ mmHg)', nodeId: 'aacg-iop' },
+  { text: 'Tonometry to measure IOP (normal 10-21 mmHg; AACG usually 50-80+ mmHg)', nodeId: 'aacg-iop-assess' },
   { text: 'Acetazolamide 500 mg IV/PO + timolol 0.5% 1 drop + apraclonidine 1% 1 drop immediately', nodeId: 'aacg-reduce-production' },
   { text: 'Mannitol 1-2 g/kg IV over 30-45 min if IOP >40 despite initial therapy', nodeId: 'aacg-osmotic' },
   { text: 'Pilocarpine 1-2% AFTER IOP <40 (ineffective when IOP very high)', nodeId: 'aacg-pilocarpine' },

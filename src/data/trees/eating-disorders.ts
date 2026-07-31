@@ -443,8 +443,8 @@ export const EATING_DISORDERS_MODULE_LABELS = [
 
 export const EATING_DISORDERS_CRITICAL_ACTIONS = [
   { text: 'MARSIPAN Risk Assessment for medical severity stratification', nodeId: 'ed-start' },
-  { text: 'Check BMI - severe AN defined as BMI <15 (extreme <13)', nodeId: 'bmi-severity' },
-  { text: 'Screen for refeeding syndrome risk: phosphate <0.6, K+ <2.5, Mg <1.4, or rapid weight loss', nodeId: 'refeeding-risk' },
+  { text: 'Check BMI - severe AN defined as BMI <15 (extreme <13)', nodeId: 'ed-bmi-classification' },
+  { text: 'Screen for refeeding syndrome risk: phosphate <0.6, K+ <2.5, Mg <1.4, or rapid weight loss', nodeId: 'ed-refeeding' },
   { text: 'Start prophylactic thiamine 100-300 mg IV/PO BEFORE nutrition if at refeeding risk', nodeId: 'ed-refeeding-protocol' },
   { text: 'Initial feeding: 10-20 kcal/kg/day for high-risk, increase 200 kcal every 3-4 days', nodeId: 'ed-refeeding-protocol' },
   { text: 'Check phosphate, K+, Mg, glucose daily during first week of refeeding', nodeId: 'ed-electrolytes' },

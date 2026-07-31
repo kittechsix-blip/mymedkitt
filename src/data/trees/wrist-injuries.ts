@@ -21,7 +21,7 @@ export const WRIST_INJURIES_NODES: DecisionNode[] = [
       { label: 'Perilunate/lunate dislocation', description: '', next: 'wrist-peri-lunate' },
       { label: 'DRUJ dislocation', description: '', next: 'wrist-druj' },
       { label: 'Ligament injury (TFCC, scapholunate)', description: '', next: 'wrist-ligament' },
-      { label: 'Soft tissue injury / uncertain', description: '', next: 'wrist-imaging\n\n**What type of wrist injury?**' },
+      { label: 'Soft tissue injury / uncertain', description: '', next: 'wrist-imaging' },
     ],
     citation: [1, 2],
 
@@ -54,7 +54,7 @@ export const WRIST_INJURIES_NODES: DecisionNode[] = [
     options: [
       { label: 'Colles (dorsal angulation)', description: '', next: 'wrist-colles' },
       { label: 'Smith (volar angulation)', description: '', next: 'wrist-smith' },
-      { label: 'Barton (rim fracture + carpal dislocation)', description: '', next: 'wrist-barton\n\n**Fracture pattern?**' },
+      { label: 'Barton (rim fracture + carpal dislocation)', description: '', next: 'wrist-barton' },
     ],
     citation: [1],
 
@@ -108,7 +108,7 @@ export const WRIST_INJURIES_NODES: DecisionNode[] = [
       { label: 'Scaphoid (snuffbox tenderness)', description: '', next: 'wrist-scaphoid' },
       { label: 'Triquetrum (dorsal ulnar pain)', description: '', next: 'wrist-triquetrum' },
       { label: 'Lunate (central wrist pain)', description: '', next: 'wrist-lunate' },
-      { label: 'Hamate (hypothenar pain)', description: '', next: 'wrist-hamate\n\n**Which carpal bone is fractured (or suspected)?**' },
+      { label: 'Hamate (hypothenar pain)', description: '', next: 'wrist-hamate' },
     ],
     citation: [7],
 
@@ -210,7 +210,7 @@ export const WRIST_INJURIES_NODES: DecisionNode[] = [
     body: '**Two major ligamentous injuries:**\n\n**1. Scapholunate Dissociation**\n• Disruption of scapholunate interosseous ligament\n• Radial-sided wrist pain\n• "Terry Thomas sign" (gap >5mm on PA X-ray)\n• Progressive SLAC wrist if untreated\n\n**2. TFCC (Triangular Fibrocartilage Complex) Tear**\n• Ulnar-sided wrist pain\n• Clicking with forearm rotation\n• Associated with DRUJ instability\n• Often requires MRI or arthroscopy for diagnosis\n\nBoth can be occult on plain films. Clinical suspicion guides management [21][22]',
     options: [
       { label: 'Scapholunate dissociation (radial pain, widened gap)', description: '', next: 'wrist-sl-dissoc' },
-      { label: 'TFCC tear (ulnar pain, clicking, DRUJ instability)', description: '', next: 'wrist-tfcc\n\n**Which ligament injury is suspected?**' },
+      { label: 'TFCC tear (ulnar pain, clicking, DRUJ instability)', description: '', next: 'wrist-tfcc' },
     ],
     citation: [21, 22],
 

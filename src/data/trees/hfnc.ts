@@ -402,10 +402,10 @@ export const HFNC_NODE_COUNT = 23;
 // =====================================================================
 
 export const HFNC_CRITICAL_ACTIONS = [
-  { text: 'Starting flow: 30-60 LPM (start at 40 LPM, titrate to comfort)', nodeId: 'hfnc-settings' },
-  { text: 'FiO₂: start at minimum needed for SpO₂ 92-96% (avoid excessive oxygen)', nodeId: 'hfnc-settings' },
+  { text: 'Starting flow: 30-60 LPM (start at 40 LPM, titrate to comfort)', nodeId: 'hfnc-setup' },
+  { text: 'FiO₂: start at minimum needed for SpO₂ 92-96% (avoid excessive oxygen)', nodeId: 'hfnc-setup' },
   { text: 'ROX Index q2h: (SpO₂/FiO₂) / RR. ROX <3.85 at 2-6h predicts HFNC failure', nodeId: 'hfnc-rox-monitoring' },
-  { text: 'Escalate to NIV/intubation if ROX declining, RR >30, work of breathing worsening, or pH <7.25', nodeId: 'hfnc-escalation' },
+  { text: 'Escalate to NIV/intubation if ROX declining, RR >30, work of breathing worsening, or pH <7.25', nodeId: 'hfnc-escalation-options' },
   { text: 'Best evidence for hypoxemic respiratory failure (COVID, pneumonia, ARDS)', nodeId: 'hfnc-hypoxemic' },
   { text: 'Avoid in pure hypercarbic respiratory failure (COPD, obesity hypoventilation) - use NIV instead', nodeId: 'hfnc-copd' },
   { text: 'Monitor for aerosol generation risk - use airborne precautions for COVID/TB', nodeId: 'hfnc-setup' },

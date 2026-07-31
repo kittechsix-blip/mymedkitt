@@ -82,10 +82,43 @@ for (const file of treeFiles) {
     refNodeIds.push(m[1]);
   }
 
-  // Extract all node ids defined in NODES
+  // Extract all node ids defined in NODES.
+  //
+  // MUST be line-anchored. The previous pattern was /\bid:\s*['"]...['"]/g,
+  // which matched ANY `id:` anywhere inside the NODES array — including the
+  // INLINE ones on non-node objects, e.g.
+  //     calculatorLinks: [{ id: 'hfnc-settings', label: 'Initial Settings Guide' }]
+  // That silently registered every calculator/link id as if it were a node id,
+  // so a CRITICAL_ACTIONS nodeId pointing at a calculator id could never fail.
+  // This gate is MANDATORY in deploy.md and it was returning a false PASS for
+  // that entire class since it shipped.
+  //
+  // Found 2026-07-31 (Flow Rider): 9 dead critical actions across aacg /
+  // eating-disorders / hfnc / hypothermia all sailed through `--strict`.
+  // Verified: restoring the known-broken hfnc.ts still printed
+  // "PASS — 351 trees checked".
+  //
+  // Real node ids sit on their own line (`    id: 'foo',`), so anchoring to
+  // line start keeps them and drops the inline impostors.
+  //
+  // Scanned over the WHOLE FILE (comments stripped), not just the _NODES array
+  // literal, because ~several trees use a "const-aggregator" pattern where each
+  // node is a top-level const and _NODES is just a list of references:
+  //     const SAH_CT: DecisionNode = { id: 'sah-ct', ... };
+  //     export const SAH_NODES: DecisionNode[] = [ SAH_CT, ... ];
+  // Under the old loose regex those files only passed because someone hand-
+  // wrote a `// id: 'sah-ct', ...` comment manifest inside the array — the
+  // regex was matching ids in COMMENTS. That manifest is unverified prose that
+  // can silently drift from the real nodes, so comments are stripped here and
+  // the actual definitions are matched instead.
+  const codeOnly = src
+    .split('\n')
+    .filter(line => !line.trim().startsWith('//'))
+    .join('\n');
+
   const defNodeIds = new Set();
-  const defRegex = /\bid:\s*['"]([^'"]+)['"]/g;
-  while ((m = defRegex.exec(nodesMatch[1])) !== null) {
+  const defRegex = /^\s*id:\s*['"]([^'"]+)['"]/gm;
+  while ((m = defRegex.exec(codeOnly)) !== null) {
     defNodeIds.add(m[1]);
   }
 

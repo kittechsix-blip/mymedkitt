@@ -5,9 +5,9 @@
 export const HYPOTHERMIA_CRITICAL_ACTIONS = [
     { text: 'Measure core temperature with esophageal or rectal probe', nodeId: 'hypo-start' },
     { text: 'Remember: "No one is dead until they are WARM and dead"', nodeId: 'hypo-start' },
-    { text: 'Remove wet clothing and prevent further heat loss immediately', nodeId: 'hypo-rewarming' },
-    { text: 'Give warm IV fluids (40-42°C) via Level 1 or Ranger', nodeId: 'hypo-rewarming' },
-    { text: 'Start active rewarming with Bair Hugger, warm blankets, heated humidified O2', nodeId: 'hypo-rewarming' },
+    { text: 'Remove wet clothing and prevent further heat loss immediately', nodeId: 'hypo-moderate-mgmt' },
+    { text: 'Give warm IV fluids (40-42°C) via Level 1 or Ranger', nodeId: 'hypo-moderate-mgmt' },
+    { text: 'Start active rewarming with Bair Hugger, warm blankets, heated humidified O2', nodeId: 'hypo-moderate-mgmt' },
     { text: 'Avoid defibrillation if temp <30°C (J-wave VF is refractory)', nodeId: 'hypo-arrest-decision' },
     { text: 'Continue CPR during rewarming (may need hours of CPR)', nodeId: 'hypo-arrest-cpr' },
     { text: 'Activate ECMO for cardiac arrest with temp <28°C (best survival)', nodeId: 'hypo-arrest-ecmo-decision' },
