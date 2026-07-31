@@ -1588,7 +1588,7 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'hypotension-workup': async () => {
       const m = await import('../data/trees/hypotension-workup.js');
-      return { nodes: m.HYPOTENSION_WORKUP_NODES, entryNodeId: 'hypo-start', categoryId: 'critical-care', moduleLabels: m.HYPOTENSION_WORKUP_MODULE_LABELS, citations: m.HYPOTENSION_WORKUP_CITATIONS, criticalActions: m.HYPOTENSION_WORKUP_CRITICAL_ACTIONS };
+      return { nodes: m.HYPOTENSION_WORKUP_NODES, entryNodeId: 'hypotension-start', categoryId: 'critical-care', moduleLabels: m.HYPOTENSION_WORKUP_MODULE_LABELS, citations: m.HYPOTENSION_WORKUP_CITATIONS, criticalActions: m.HYPOTENSION_WORKUP_CRITICAL_ACTIONS };
     },
     'peripheral-neuropathy': async () => {
       const m = await import('../data/trees/peripheral-neuropathy.js');

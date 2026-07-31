@@ -390,6 +390,7 @@ export const RESUSCITATIVE_HYSTEROTOMY_NODES = [
         confidence: 'recommended',
         citation: [1, 18],
         calculatorLinks: [{ id: 'apgar', label: 'APGAR Calculator' }],
+        next: 'rh-maternal-outcome',
     },
     {
         id: 'rh-neonate-resus',
@@ -420,6 +421,7 @@ export const RESUSCITATIVE_HYSTEROTOMY_NODES = [
             },
             monitoring: 'HR, respirations, tone, color, APGAR at 1/5/10 min. Pulse ox on right hand (preductal).',
         },
+        next: 'rh-maternal-outcome',
     },
     {
         id: 'rh-maternal-outcome',

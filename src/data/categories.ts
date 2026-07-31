@@ -473,7 +473,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         categoryId: 'critical-care',
         version: '1.0',
         nodeCount: 22,
-        entryNodeId: 'hypo-start',
+        entryNodeId: 'hypotension-start',
       },
       {
         id: 'dic',
