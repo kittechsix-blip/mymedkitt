@@ -408,7 +408,7 @@ export const METHEMOGLOBINEMIA_CRITICAL_ACTIONS = [
 
 export const METHEMOGLOBINEMIA_CITATIONS: Citation[] = [
   { num: 1, text: 'Farkas J. Methemoglobinemia. Internet Book of Critical Care (IBCC). EMCrit. 2025.' },
-  { num: 2, text: 'Cortazzo JA, Lichtman AD. Methemoglobinemia: a review and recommendations for management. J Cardiothorac Vasc Anesth. 2014;28(4):1043-1047. PMID 24035060' },
+  { num: 2, text: 'Cortazzo JA, Lichtman AD. Methemoglobinemia: a review and recommendations for management. J Cardiothorac Vasc Anesth. 2014;28(4):1043-1047. PMID 23953868' },
   { num: 3, text: 'Feiner JR, Bickler PE, Mannheimer PD. Accuracy of methemoglobin detection by pulse CO-oximetry during hypoxia. Anesth Analg. 2010;111(1):143-148. PMID 20442260' },
   { num: 4, text: 'Toker I, Yesilaras M, Tur FC, Toktas R. Methemoglobinemia caused by dapsone overdose: Which treatment is best? Turk J Emerg Med. 2016;15(4):182-184. PMID 27239626' },
   { num: 5, text: 'Skold A, Cosco DL, Klein R. Methemoglobinemia: pathogenesis, diagnosis, and management. South Med J. 2011;104(11):757-761. PMID 22024786' },

@@ -490,7 +490,7 @@ export const OXYGEN_DELIVERY_CITATIONS: Citation[] = [
   { num: 3, text: 'Kallstrom TJ. AARC Clinical Practice Guideline: Oxygen Therapy for Adults. Respir Care. 2002;47(6):717-720.' },
   { num: 4, text: 'Roca O, et al. High-Flow Oxygen Therapy in Acute Respiratory Failure. Crit Care Med. 2016;44(10):1766-1773.' },
   { num: 5, text: 'Rochwerg B, et al. Official ERS/ATS Clinical Practice Guidelines: Noninvasive Ventilation for Acute Respiratory Failure. Eur Respir J. 2017;50(2):1602426.' },
-  { num: 6, text: 'Roca O, et al. ROX Index Predicts Intubation in Patients with Acute Hypoxemic Respiratory Failure. Am J Respir Crit Care Med. 2019;199(10):1368-1376.' },
+  { num: 6, text: 'Roca O, Caralt B, Messika J, et al. An Index Combining Respiratory Rate and Oxygenation to Predict Outcome of Nasal High-Flow Therapy (ROX index). Am J Respir Crit Care Med. 2019;199(11):1368-1376. PMID: 30576221' },
   { num: 7, text: 'Masip J, et al. Non-invasive Ventilation in Acute Cardiogenic Pulmonary Edema. Intensive Care Med. 2005;31(7):882-891.' },
   { num: 8, text: 'Weingart SD, Levitan RM. Preoxygenation and Prevention of Desaturation During Emergency Airway Management. Ann Emerg Med. 2012;59(3):165-175.' },
   { num: 9, text: 'Chu DK, et al. Mortality and Morbidity in Acutely Ill Adults Treated with Liberal versus Conservative Oxygen Therapy: A Systematic Review and Meta-analysis. Lancet. 2018;391(10131):1693-1705.' },
