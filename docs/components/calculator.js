@@ -41656,6 +41656,27 @@ export function getAllCalculators() {
         .map(c => ({ id: c.id, title: c.title, subtitle: c.subtitle }))
         .sort((a, b) => a.title.localeCompare(b.title));
 }
+/**
+ * Every id that `#/calculator/<id>` can actually resolve — i.e. the REGISTRY
+ * KEYS, which is exactly what renderCalculator() looks up via CALCULATORS[id].
+ *
+ * This is deliberately NOT the same as getAllCalculators().map(c => c.id).
+ * Several calculators are registered under multiple alias keys pointing at one
+ * definition object, e.g.:
+ *     'ecmo-ecpr-criteria': ECMO_ECPR_CRITERIA_CALCULATOR,
+ *     'ecpr-criteria':      ECMO_ECPR_CRITERIA_CALCULATOR,
+ * Because the shared object's internal `.id` is 'ecmo-ecpr-criteria', mapping
+ * over values SILENTLY DROPS the 'ecpr-criteria' alias — so link validators
+ * built on getAllCalculators() report working buttons as broken.
+ *
+ * That false-positive class is dangerous: it was false positives that caused
+ * earlier lint versions to exclude a whole reference channel, which is how the
+ * pericarditis calculator shipped broken (2026-07-19). Validators must use this
+ * function so they match the router's real resolution behaviour.
+ */
+export function getCalculatorIds() {
+    return Object.keys(CALCULATORS).sort();
+}
 // -------------------------------------------------------------------
 // Render: Calculator List (Medical Calculators category)
 // -------------------------------------------------------------------

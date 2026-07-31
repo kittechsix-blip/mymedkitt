@@ -74,6 +74,31 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    ```
    Verify zero errors (ignore bun-types lib conflicts).
 
+1b. **MANDATORY — Validate ALL cross-links (ratchet):**
+   ```bash
+   node scripts/validate-cross-links.mjs --gate
+   ```
+   Runs AFTER the compile (unlike gates 0a–0c) because it imports the compiled `docs/` output — it validates exactly what ships, not what's in `src/`.
+
+   This is the broadest gate. It checks every reference channel the other linters don't:
+   - `#/info/<id>` → `INFO_PAGES` ∪ `STOP_PAGES`
+   - `#/drug/<id>` → `ALL_DRUGS`
+   - `#/tree/<id>` → `TREE_REGISTRY`
+   - `#/node/<id>` → node ids in the owning tree
+   - toolbar `action: 'jump' | 'overlay' | 'route' | 'calculator'` → matching registry
+
+   **Why this went in (2026-07-30 UX audit):** the script was written 2026-05-22 and `PLAN.md` claimed it ran as a deploy pre-flight, but **it was never actually wired in** and sat dark for ~2 months. In that window 221 real broken references accumulated, including 75 dead `#/info/` ids verified unreachable on live production. Worse, `TOOLBAR_CONFIGS` was module-private, so the validator silently `warn`ed and skipped **all ~1,264 toolbar targets** — that blind spot is the root cause of the 2026-07-27 dead-toolbar-button CRITICAL. Both are now fixed: the export is public, and a missing export is a hard `fail`, not a warning.
+
+   **Ratchet behaviour:** same as gates 0b/0c. Fails ONLY on NEW broken refs (not in `scripts/validate-cross-links.baseline.json`). The 221 pre-existing breaks (frozen 2026-07-30) print as a warning but do NOT block deploys while they are triaged.
+
+   **If this step fails**, you introduced a new broken link. Fix the ref, or add the missing target.
+
+   **When you FIX baseline entries**, tighten the ratchet:
+   ```bash
+   node scripts/validate-cross-links.mjs --update-baseline
+   git add scripts/validate-cross-links.baseline.json
+   ```
+
 2. **Copy CSS to docs:**
    ```bash
    cp src/views/style.css docs/style.css

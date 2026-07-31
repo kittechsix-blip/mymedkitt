@@ -145,7 +145,10 @@ function dispatchToolbarAction(
   if (item.action === 'calculator' && item.target) {
     router.navigate(`/calculator/${item.target}`);
   } else if (item.action === 'overlay' && item.target) {
-    showInfoModal(item.target);
+    // See text-renderer.ts — dead overlay targets were silent no-ops.
+    if (!showInfoModal(item.target)) {
+      console.error(`[dead-link] toolbar overlay "${item.target}" not found — button "${item.label}" is a no-op`);
+    }
   } else if (item.action === 'jump' && item.target) {
     controller.jumpToNode(item.target);
     window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: item.target }));
@@ -217,7 +220,9 @@ function handleInfographicLink(e: MouseEvent): void {
     } else if (linkType === 'tree') {
       router.navigate(`/tree/${linkId}`);
     } else if (linkType === 'info') {
-      showInfoModal(linkId);
+      if (!showInfoModal(linkId)) {
+        console.error(`[dead-link] info page "${linkId}" not found — overlay link is a no-op`);
+      }
     } else {
       // Unknown internal type — fall back to a hash route rather than silently dropping.
       window.location.hash = href;

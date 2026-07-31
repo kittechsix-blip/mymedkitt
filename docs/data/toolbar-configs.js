@@ -25,7 +25,11 @@ export const TOOLBAR_OVERFLOW = new Set([
     'hyperemesis',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
-const TOOLBAR_CONFIGS = {
+// Exported so scripts/validate-cross-links.mjs can validate every toolbar
+// action target. Was module-private until 2026-07-30, which silently disabled
+// toolbar validation entirely (the validator warned and skipped ~1,264 targets)
+// and is the root cause of the 2026-07-27 dead-toolbar-button CRITICAL.
+export const TOOLBAR_CONFIGS = {
     'hemoptysis-hub': [
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hemoptysis-hub-stop' },
     ],
@@ -885,9 +889,9 @@ const TOOLBAR_CONFIGS = {
         { id: 'size', label: 'Size', icon: '\uD83D\uDCCF', action: 'jump', target: 'stable-ptx-management' },
     ],
     'echo-views': [
-        { id: 'effusion', label: 'Effusion', icon: '\uD83E\uDEC0', action: 'jump', target: 'pericardial-effusion' },
-        { id: 'rv-strain', label: 'RV Strain', icon: '\uD83E\uDEC1', action: 'jump', target: 'rv-strain' },
-        { id: 'ivc', label: 'IVC', icon: '\uD83D\uDCA7', action: 'jump', target: 'ivc-assessment' },
+        { id: 'effusion', label: 'Effusion', icon: '\uD83E\uDEC0', action: 'jump', target: 'echo-subcostal-assess' },
+        { id: 'rv-strain', label: 'RV Strain', icon: '\uD83E\uDEC1', action: 'jump', target: 'echo-a4c-assess' },
+        { id: 'ivc', label: 'IVC', icon: '\uD83D\uDCA7', action: 'jump', target: 'echo-ivc' },
     ],
     'echo-epss': [
         { id: 'interpret', label: 'Interpret', icon: '\uD83D\uDCCA', action: 'jump', target: 'epss-interpret' },
@@ -1124,9 +1128,9 @@ const TOOLBAR_CONFIGS = {
     ],
     'le-fort-fracture': [
         { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'lefort-summary' },
-        { id: 'classify', label: 'Classify', icon: '🦴', action: 'jump', target: 'lefort-classification' },
+        { id: 'classify', label: 'Classify', icon: '🦴', action: 'jump', target: 'lefort-type-question' },
         { id: 'airway', label: 'Airway', icon: '💨', action: 'jump', target: 'lefort-airway-decision' },
-        { id: 'bleed', label: 'Hemorrhage', icon: '🩸', action: 'jump', target: 'lefort-hemorrhage-initial' },
+        { id: 'bleed', label: 'Hemorrhage', icon: '🩸', action: 'jump', target: 'lefort-hemorrhage-check' },
         { id: 'consults', label: 'Consults', icon: '📞', action: 'jump', target: 'lefort-consults' },
     ],
     'diabetes-management': [
@@ -2215,7 +2219,7 @@ const TOOLBAR_CONFIGS = {
         { id: 'timing', label: 'Timing', icon: '⏱️', action: 'overlay', target: 'peds-fb-timing-table' },
         { id: 'honey', label: 'BB Honey', icon: '🍯', action: 'overlay', target: 'peds-fb-honey-protocol' },
         { id: 'choking', label: 'PALS Choke', icon: '🫁', action: 'overlay', target: 'peds-fb-pals-choking' },
-        { id: 'bb-cross', label: 'BB Consult', icon: '🔋', action: 'jump', target: 'battery-start' },
+        { id: 'bb-cross', label: 'BB Consult', icon: '🔋', action: 'jump', target: 'peds-fb-bb' },
         { id: 'pals-wt', label: 'PALS Wt', icon: '⚖️', action: 'calculator', target: 'broselow-weight' },
     ],
     'blood-culture-stewardship': [
