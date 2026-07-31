@@ -28137,7 +28137,7 @@ const HEMOPTYSIS_HUB_STOP_PAGE = {
         },
         {
             heading: "🛑 Do NOT delay IR embolization or bronchoscopy chasing a perfect diagnosis",
-            body: "In massive bleeding, definitive control comes from **bronchial artery embolization (~90% effective)** and rigid bronchoscopy — waiting for a tidy diagnosis lets the patient bleed into the airway. Call IR and thoracics NOW; CTA localizes once stable. [Control the airway and the vessel first](#/node/hmp-exc-massive).",
+            body: "In massive bleeding, definitive control comes from **bronchial artery embolization** and rigid bronchoscopy — waiting for a tidy diagnosis lets the patient bleed into the airway. Call IR and thoracics NOW; CTA localizes once stable. But do not oversell the embolization: **technical success is 81-100% and immediate clinical success 70-99%, yet 10-58% rebleed**, and spinal cord infarction from non-target embolization occurs in **0.2-6.5%**. It buys time; it does not cure the cause. [Control the airway and the vessel first](#/node/hmp-exc-massive).",
         },
         {
             heading: "🛑 Do NOT leave a suspected-TB patient in an open ED bay",
