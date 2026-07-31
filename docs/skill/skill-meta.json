@@ -1,8 +1,8 @@
 {
   "skillVersion": "v0.1",
-  "buildVersion": "v0.1+20260729.66acf76",
-  "buildDate": "2026-07-29",
-  "appCommit": "66acf76b300b01b619c9f120477eb242da2a7192",
+  "buildVersion": "v0.1+20260731.6049750",
+  "buildDate": "2026-07-31",
+  "appCommit": "6049750fac8fcac4748dd10762b1c033e7d4fe53",
   "dirty": false,
   "dirtyFiles": [],
   "shape": "coordinator",
@@ -10,7 +10,7 @@
   "disclaimerEffectiveDate": "2026-05-29",
   "generatorVersion": "1",
   "schemaVersion": "1",
-  "contentHash": "84768c3e4c90ba9d37ec92ab41a09a0c95116eff565b28c74432e31979373fe4",
+  "contentHash": "cfda21977190c79400e734a85abf2edf59b9b21621e0f57ad4f0c5e1b0de45da",
   "consultCount": 355,
   "registeredConsults": 355,
   "skippedConsults": [],
@@ -24,7 +24,6 @@
     "neck-trauma",
     "altitude-sickness",
     "ibd-flare",
-    "transient-global-amnesia",
     "mammalian-bite"
   ],
   "requiredDisambiguations": [
