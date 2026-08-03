@@ -1182,7 +1182,7 @@ const CALCIUM_GLUCONATE = {
         'Chronic renal failure without ECG changes: risk of calciphylaxis — may withhold',
     ],
     monitoring: 'Continuous cardiac monitoring during infusion. Repeat ECG after dose. Check ionized calcium — avoid iCa >3 mM.',
-    notes: 'First-line for hyperkalemia with ECG changes. Use calcium gluconate for PERIPHERAL access (less tissue necrosis risk than calcium chloride). Contains ~270 mg elemental calcium per 10 mL (1 gram). For isolated peaked T-waves without other ECG changes, use is controversial.',
+    notes: 'First-line for hyperkalemia with ECG changes. Use calcium gluconate for PERIPHERAL access (less tissue necrosis risk than calcium chloride). Contains ~93 mg elemental calcium per 10 mL (1 gram) = 4.65 mEq. NOT interchangeable gram-for-gram with calcium chloride, which carries ~273 mg elemental calcium per gram (13.6 mEq) — about 3x more. To match 1 g of calcium chloride you need roughly 3 g of calcium gluconate. For isolated peaked T-waves without other ECG changes, use is controversial.',
     citations: [
         'Palmer BF, Clegg DJ. Hyperkalemia treatment standard. Nephrol Dial Transplant. 2024;39(7):1097-1104.',
         'Rossignol P, et al. Emergency management of severe hyperkalemia. Pharmacol Res. 2016;113(Pt A):585-591.',
