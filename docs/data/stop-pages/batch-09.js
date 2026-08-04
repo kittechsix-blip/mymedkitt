@@ -18,7 +18,7 @@ export const STOP_PAGES_09 = {
             },
             {
                 heading: '🛑 Do NOT give amiodarone in magnesium-responsive VF',
-                body: 'If TdP or hypomagnesemia is suspected, give magnesium sulfate 2 g IV first. Amiodarone is appropriate for VF/pVT but is contraindicated in TdP — always verify QTc and exclude torsades before choosing amiodarone. [See antiarrhythmic selection node](#/node/rvf-amio-lido).',
+                body: 'If TdP or hypomagnesemia is suspected, give magnesium sulfate 2 g IV first, followed by a continuous magnesium infusion. Amiodarone is appropriate for VF/pVT but is contraindicated in TdP — always verify QTc and exclude torsades before choosing amiodarone. [See antiarrhythmic selection node](#/node/rvf-amio-lido).',
             },
             {
                 heading: '🛑 Do NOT withhold esmolol out of fear of bradycardia',

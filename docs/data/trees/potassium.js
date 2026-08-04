@@ -4,7 +4,7 @@
 // 24 nodes total.
 export const POTASSIUM_CRITICAL_ACTIONS = [
     { text: 'Calcium 3g IV (or CaCl 1g central) over 10 min for ECG changes - onset <5 min', nodeId: 'k-hyper-calcium' },
-    { text: 'Regular insulin 5 units IV + D10W 500 mL over 4h (less hypoglycemia than D50W)', nodeId: 'k-hyper-insulin' },
+    { text: 'Insulin 5 units IV (10 units only if normal renal function AND adequate glucose) + 25 g dextrose - recheck glucose at 30/60/120/240 min', nodeId: 'k-hyper-insulin' },
     { text: 'Terbutaline 0.5 mg SQ preferred over albuterol (logistically superior)', nodeId: 'k-hyper-beta2' },
     { text: 'Isotonic bicarbonate (3 amp in 1L D5W) AS resuscitative fluid if bicarb <22', nodeId: 'k-hyper-bicarb' },
     { text: 'Diuretic + replace losses with LR - simple, scalable, effective kaliuresis', nodeId: 'k-hyper-step3' },
@@ -156,28 +156,28 @@ export const POTASSIUM_NODES = [
         type: 'info',
         module: 3,
         title: 'Insulin + Dextrose \u2014 K+ Shift',
-        body: '**[Regular Insulin](#/drug/regular-insulin) 5 units IV bolus** (must be IV, NOT subcutaneous).\n\n**Dextrose co-administration:**\n\u2022 Glucose < 250 mg/dL \u2192 **D50W 2 ampules** (100 mL total) OR **D10W 500 mL over 4 hours** (preferred \u2014 less rebound hypoglycemia)\n\u2022 Glucose 180-250 \u2192 half-dose dextrose (25g)\n\u2022 Glucose > 250 \u2192 no dextrose needed\n\n**Monitor fingerstick glucose q1h for 4-6 hours.** If glucose < 70 \u2192 give additional dextrose.\n\n**Effect:** Onset 15-30 min. K+ reduction: 0.5-1.2 mEq/L. Duration: ~4 hours \u2014 plan for redosing or definitive therapy.',
+        body: '**[Regular Insulin](#/drug/regular-insulin) IV \u2014 dose by hypoglycemia risk** (must be IV, NOT subcutaneous). Give WITH **25 g dextrose (D50W 50 mL)** unless glucose >250 mg/dL.\n\n\u2022 **5 units** (or 0.1 units/kg, max 10) \u2014 eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes\n\u2022 **10 units** \u2014 normal renal function AND adequate glucose\n\n**Check glucose at 30, 60, 120 and 240 minutes.** If glucose < 70 \u2192 give additional dextrose.\n\n**Dextrose delivery:** D50W 50 mL (25 g) IV is the standard co-administration. **D10W 500 mL over 4 hours** is an acceptable alternative with less rebound hypoglycemia. Glucose > 250 mg/dL \u2192 no dextrose needed.\n\n**Effect:** Onset 15-30 min. K+ reduction: 0.5-1.2 mEq/L. Duration: ~4 hours \u2014 plan for redosing or definitive therapy.',
         citation: [1, 3, 4],
-        summary: 'Insulin 5 units IV + D10W 500mL over 4h preferred — monitor glucose q1h for 4-6h, K+ drops 0.5-1.2',
+        summary: 'Insulin 5 units IV (10 units if normal renal function AND adequate glucose) + 25 g dextrose — glucose at 30/60/120/240 min, K+ drops 0.5-1.2',
         safetyLevel: 'warning',
         treatment: {
             firstLine: {
                 drug: 'Regular Insulin + Dextrose',
-                dose: '5 units Regular Insulin + D10W 500 mL',
+                dose: '5 units (10 units if normal renal function AND adequate glucose) + 25 g dextrose (D50W 50 mL)',
+                route: 'IV bolus (both) - insulin must be IV, NOT subcutaneous',
+                frequency: 'Once, may redose in 4 hours',
+                duration: '4 hours effect',
+                notes: 'Use 5 units (or 0.1 units/kg, max 10) if eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes. Skip dextrose if glucose >250.',
+            },
+            alternative: {
+                drug: 'Regular Insulin + D10W infusion',
+                dose: '5 units (10 units if normal renal function AND adequate glucose) + D10W 500 mL over 4 hours',
                 route: 'IV bolus (insulin) + IV infusion (D10W)',
                 frequency: 'Once, may redose in 4 hours',
                 duration: '4 hours effect',
-                notes: 'D10W over 4 hours preferred over D50W (less rebound hypoglycemia). Skip dextrose if glucose >250.',
+                notes: 'Prolonged dextrose delivery - less rebound hypoglycemia than a single D50W bolus. Skip dextrose if glucose >250.',
             },
-            alternative: {
-                drug: 'Regular Insulin + D50W',
-                dose: '5 units Regular Insulin + 2 ampules D50W (50g)',
-                route: 'IV bolus (both)',
-                frequency: 'Once, may redose in 4 hours',
-                duration: '4 hours effect',
-                notes: 'Higher risk of rebound hypoglycemia. Half-dose dextrose if glucose 180-250.',
-            },
-            monitoring: 'Fingerstick glucose q1h for 4-6 hours. Give additional dextrose if glucose <70.',
+            monitoring: 'Fingerstick glucose at 30, 60, 120 and 240 minutes. Give additional dextrose if glucose <70.',
         },
         next: 'k-hyper-beta2',
     },
@@ -560,7 +560,7 @@ export const POTASSIUM_CITATIONS = [
 // Clinical Notes (for reference table)
 // -------------------------------------------------------------------
 export const POTASSIUM_CLINICAL_NOTES = [
-    'Regular insulin 5 units IV (not 10) with mandatory dextrose reduces hypoglycemia from 15-20% to <5% while maintaining similar K-lowering effect.',
+    'Regular insulin dosing is branch-explicit, not a single number: 5 units IV (or 0.1 units/kg, max 10) when hypoglycemia risk is high — eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes; 10 units when renal function is normal AND glucose is adequate. Give WITH 25 g dextrose (D50W 50 mL) unless glucose >250 mg/dL, and check glucose at 30, 60, 120 and 240 minutes. Evidence: 5 units roughly halves hypoglycemia — 19.5% vs 28.6% (LaRue 2017); pooled OR 0.55, 10 studies, n=3437 (Moussavi 2021) — but does NOT eliminate it. No published series reports a rate under 5%. K-lowering was equal in LaRue and in the Moussavi pooled analysis, but 10 units lowered K+ more in Finder 2022 (-0.9 vs -0.63 mmol/L, p=0.001) and Pierce 2020 (-1.11 vs -0.94 mmol/L, p=0.008). UKKA 2023 specifies 10 units in 25 g glucose with no renal reduction; KDIGO specifies 5 units and concedes the data are limited.',
     'Terbutaline 0.5 mg SQ is logistically superior to nebulized albuterol \u2014 single injection vs. 4-8 back-to-back nebs with similar efficacy.',
     'Normal saline worsens hyperkalemia via renal tubular chloride-bicarbonate exchange. Use LR or Plasmalyte.',
     'Kayexalate has NO role in acute hyperkalemia management. Risk of colonic necrosis supersedes any theoretical benefit.',

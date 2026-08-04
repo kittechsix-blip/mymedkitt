@@ -1812,7 +1812,7 @@ const K_SUMMARY: InfoPage = {
     },
     {
       heading: '2. Severe HyperK — Temporize (all simultaneously)',
-      body: '• [IV Calcium (Gluconate 3g or Chloride 1g) — membrane stabilization](#/node/k-hyper-calcium)\n• [Regular Insulin 5 units IV + Dextrose — intracellular K+ shift](#/node/k-hyper-insulin)\n• [Terbutaline 0.5 mg SQ or Albuterol 10–20 mg neb — K+ shift](#/node/k-hyper-beta2)',
+      body: '• [IV Calcium (Gluconate 3g or Chloride 1g) — membrane stabilization](#/node/k-hyper-calcium)\n• [Regular Insulin 5 units IV (10 units if normal renal function AND adequate glucose) + 25 g dextrose — K+ shift; check glucose at 30/60/120/240 min](#/node/k-hyper-insulin)\n• [Terbutaline 0.5 mg SQ or Albuterol 10–20 mg neb — K+ shift](#/node/k-hyper-beta2)',
     },
     {
       heading: '3. Volume Resuscitate',
@@ -19961,7 +19961,7 @@ const WCT_SUMMARY: InfoPage = {
     },
     {
       heading: '5. Treatment',
-      body: '• **Stable monomorphic VT:** Procainamide 20-50 mg/min (PROCAMIO > amiodarone)\n• **Torsades (polymorphic + long QT):** Magnesium 2-4g IV — NOT amiodarone\n• **Polymorphic + normal QT:** Treat as ACS, cath lab\n• **If antiarrhythmic fails:** Cardioversion',
+      body: '• **Stable monomorphic VT:** Procainamide 20-50 mg/min (PROCAMIO > amiodarone)\n• **Torsades (polymorphic + long QT):** Magnesium 2g IV then infusion — NOT amiodarone\n• **Polymorphic + normal QT:** Treat as ACS, cath lab\n• **If antiarrhythmic fails:** Cardioversion',
     },
     {
       heading: '6. When In Doubt',
@@ -20780,7 +20780,7 @@ const KCLINF_DKA_TOOL: InfoPage = {
   sections: [
     {
       heading: 'DKA/HHS',
-      body: '- K <3.3 mEq/L: hold insulin; give K 20-30 mEq/hr until K >=3.3\n- K 3.3-5.2: add 20-30 mEq K per liter IV fluid while insulin runs\n- K >5.2: hold K initially; recheck q2h and start when K falls\n- Consider chloride/phosphate/acetate mix based on phosphate and acid-base status',
+      body: '- K <3.3 mEq/L: hold insulin; give K 10 mEq/hr until K >=3.3 (10-20 mEq/hr only via central line with cardiac monitoring)\n- K 3.3-5.2: add 20-30 mEq K per LITRE of IV fluid while insulin runs (concentration, not rate)\n- K >5.2: hold K initially; recheck q2h and start when K falls\n- Consider chloride/phosphate/acetate mix based on phosphate and acid-base status',
     },
   ],
   citations: [
@@ -22552,7 +22552,7 @@ const TLS_MANAGEMENT_BUNDLE_PAGE: InfoPage = {
     },
     {
       heading: 'Step 3 \u2014 Manage Electrolyte Derangements',
-      body: '**Hyperkalemia:**\n\u2022 [Calcium gluconate](#/drug/calcium-gluconate/hyperkalemia) 1-2g IV (membrane stabilization, no effect on K)\n\u2022 [Insulin regular](#/drug/insulin-regular/hyperkalemia) 10 units IV + D50 25g (or D10 250 mL drip if glucose <250)\n\u2022 [Albuterol](#/drug/albuterol/hyperkalemia) 10-20 mg nebulized (additive)\n\u2022 [Sodium polystyrene sulfonate](#/drug/sodium-polystyrene-sulfonate/hyperkalemia) or [patiromer](#/drug/patiromer/hyperkalemia) for elimination\n\u2022 RRT if K >6.5 refractory\n\n**Hyperphosphatemia:**\n\u2022 [Sevelamer](#/drug/sevelamer/hyperphosphatemia) 800-1600 mg PO TID with meals (preferred; doesn\'t add Ca)\n\u2022 Aluminum hydroxide acutely (short-term only)\n\u2022 RRT for PO4 >10 or rapidly rising with symptoms\n\n**Hypocalcemia:**\n\u2022 Treat ONLY if symptomatic (paresthesias, tetany, seizure, QT prolongation, arrhythmia)\n\u2022 [Calcium gluconate](#/drug/calcium-gluconate/hypocalcemia) 1-2g IV slowly\n\u2022 **CAUTION:** if Ca \u00d7 PO4 product >60 \u2192 calcium phosphate crystal precipitation worsens. Lower phos first if possible.\n\n**Hyperuricemia:** rasburicase as above',
+      body: '**Hyperkalemia:**\n\u2022 [Calcium gluconate](#/drug/calcium-gluconate/hyperkalemia) 1-2g IV (membrane stabilization, no effect on K)\n\u2022 [Insulin regular](#/drug/insulin-regular/hyperkalemia) 5 units IV, or 0.1 units/kg (max 10), if eGFR <60, dialysis-dependent, glucose <150, weight <60 kg, or no diabetes \u2014 10 units if normal renal function AND adequate glucose. Give with 25 g dextrose (D50W 50 mL, or D10 250 mL drip) unless glucose >250. Check glucose at 30, 60, 120, 240 min\n\u2022 [Albuterol](#/drug/albuterol/hyperkalemia) 10-20 mg nebulized (additive)\n\u2022 [Sodium polystyrene sulfonate](#/drug/sodium-polystyrene-sulfonate/hyperkalemia) or [patiromer](#/drug/patiromer/hyperkalemia) for elimination\n\u2022 RRT if K >6.5 refractory\n\n**Hyperphosphatemia:**\n\u2022 [Sevelamer](#/drug/sevelamer/hyperphosphatemia) 800-1600 mg PO TID with meals (preferred; doesn\'t add Ca)\n\u2022 Aluminum hydroxide acutely (short-term only)\n\u2022 RRT for PO4 >10 or rapidly rising with symptoms\n\n**Hypocalcemia:**\n\u2022 Treat ONLY if symptomatic (paresthesias, tetany, seizure, QT prolongation, arrhythmia)\n\u2022 [Calcium gluconate](#/drug/calcium-gluconate/hypocalcemia) 1-2g IV slowly\n\u2022 **CAUTION:** if Ca \u00d7 PO4 product >60 \u2192 calcium phosphate crystal precipitation worsens. Lower phos first if possible.\n\n**Hyperuricemia:** rasburicase as above',
     },
     {
       heading: 'Step 4 \u2014 RRT Indications',

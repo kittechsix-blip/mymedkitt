@@ -98,7 +98,7 @@ export const STOP_PAGES_04 = {
             },
             {
                 heading: '🛑 Do NOT give bicarbonate routinely',
-                body: 'Bicarbonate administration in DKA is not beneficial and may worsen intracellular acidosis and cerebral edema. It is reserved for severe acidosis (pH <6.9) with hemodynamic instability. Insulin and fluids are the treatment. [See DKA severity assess](#/node/dka-severity-assess).',
+                body: 'Bicarbonate administration in DKA is not beneficial and may worsen intracellular acidosis and cerebral edema. The 2024 ADA/EASD consensus reserves it for severe acidosis (pH <7.0) — superseding the 2009 pH <6.9 threshold — and even then no benefit has been demonstrated. Insulin and fluids are the treatment. [See DKA severity assess](#/node/dka-severity-assess).',
             },
             {
                 heading: '🛑 Do NOT intubate a DKA patient without careful planning',

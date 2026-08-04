@@ -68,6 +68,22 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    git add scripts/lint-image-refs.baseline.json
    ```
 
+0d. **MANDATORY — Lint citation references:**
+   ```bash
+   node scripts/lint-citation-refs.mjs --gate
+   ```
+   Asserts that every `[N]` a consult uses — both in a node's `citation: [...]` array and inline in its body prose — resolves to a `{ num: N }` entry in that tree's CITATIONS array.
+
+   **Why this went in (2026-08-03):** a legal-compliance audit run added `*Basis:*` paragraphs and rewrote each node's citation array to point at its sources — but in `chs`, `gallbladder` and `lambert-eaton` it referenced **46 numbers it never appended to those files**. The CHS QTc node cited `[2]` (SAEM GRACE-4, a real entry) before the run and `[15, 17, 18, 22]` after it, none of which resolve. An audit whose entire purpose is that every recommendation be independently reviewable had made three consults *less* reviewable than before.
+
+   It ships silently: `reference-table.ts:184` does `citations.find(c => c.num === num)` and the miss path is `if (!cite) continue`. A dangling reference renders as **nothing at all** — no error, no placeholder, no gap in the UI.
+
+   **The baseline is legitimately EMPTY.** Measured at the commit before that audit: 353 consults, 4,772 declared citations, 32,172 references, **zero dangling**. Unlike gates 0b/0c/1b there is no pre-existing debt to ratchet down, so this gate runs at full strength.
+
+   **Coverage is itself ratcheted.** The baseline records `coverage: { trees, declared }` and the gate FAILS if either falls. This is not belt-and-braces: on the day it was written, a repair script inserted entries into the `Citation[]` *type annotation* instead of the array literal, three trees stopped parsing entirely, and because their references stopped being collected along with their declarations the gate reported **"✅ no NEW dangling references"** on a file that no longer compiled. A gate must fail when it can no longer SEE its subject, not only when the subject is absent.
+
+   **If this step fails**, append the entry to that tree's CITATIONS array, or point the node at a reference that exists. **Do not invent a citation to close the gap** — a fabricated reference in a clinical app is worse than the dangling number it replaces.
+
 1. **Compile TypeScript:**
    ```bash
    bunx tsc --skipLibCheck --noUnusedLocals false

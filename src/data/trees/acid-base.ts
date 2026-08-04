@@ -581,12 +581,12 @@ export const ACID_BASE_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Treatment Considerations',
-    body: '**Sodium Bicarbonate:**\n[Sodium Bicarbonate](#/drug/sodium-bicarbonate/metabolic acidosis) — indications, dosing, and evidence.\n\n**Indications for bicarbonate:** [12][17][19]\n• pH ≤ 7.20 with moderate-to-severe AKI — reasonable, but recent evidence tempers the benefit. BICAR-ICU (2018) suggested a mortality signal in the AKI subgroup; the confirmatory BICARICU-2 trial (JAMA 2025, n=627) found NO day-90 mortality difference (62.1% vs 61.7%). The consistent benefit is RRT-sparing (dialysis in 35% vs 50%). Use to buy time / reduce dialysis, not as a proven mortality intervention.\n• TCA overdose (sodium channel blockade)\n• Salicylate toxicity (urinary alkalinization)\n• Life-threatening hyperkalemia\n• Bicarbonate-losing conditions (severe diarrhea, RTA)\n\n**Note:** Both BICAR-ICU trials enrolled pH ≤ 7.20 + moderate-to-severe AKI. The pH < 6.9 threshold is ADA guidance for DKA specifically.\n\n**NOT recommended:** [3][17]\n• Routine cardiac arrest or CPR\n• Routine DKA (unless pH < 6.9 per ADA)\n• Routine lactic acidosis (no hemodynamic benefit proven)\n\n[Fluid Selection Guide](#/info/ab-fluids-guide) — NS vs balanced crystalloids.',
+    body: '**Sodium Bicarbonate:**\n[Sodium Bicarbonate](#/drug/sodium-bicarbonate/metabolic acidosis) — indications, dosing, and evidence.\n\n**Indications for bicarbonate:** [12][17][19]\n• pH ≤ 7.20 with moderate-to-severe AKI — reasonable, but recent evidence tempers the benefit. BICAR-ICU (2018) suggested a mortality signal in the AKI subgroup; the confirmatory BICARICU-2 trial (JAMA 2025, n=627) found NO day-90 mortality difference (62.1% vs 61.7%). The consistent benefit is RRT-sparing (dialysis in 35% vs 50%). Use to buy time / reduce dialysis, not as a proven mortality intervention.\n• TCA overdose (sodium channel blockade)\n• Salicylate toxicity (urinary alkalinization)\n• Life-threatening hyperkalemia\n• Bicarbonate-losing conditions (severe diarrhea, RTA)\n\n**Note:** Both BICAR-ICU trials enrolled pH ≤ 7.20 + moderate-to-severe AKI. For DKA specifically the current threshold is pH < 7.0 (2024 ADA/EASD/JBDS/AACE/DTS consensus); pH < 6.9 was the superseded 2009 ADA figure. Neither number rests on outcome data. [20]\n\n**NOT recommended:** [3][17]\n• Routine cardiac arrest or CPR\n• Routine DKA (consider only if pH < 7.0 per the 2024 ADA/EASD consensus; no proven benefit) [20]\n• Routine lactic acidosis (no hemodynamic benefit proven)\n\n[Fluid Selection Guide](#/info/ab-fluids-guide) — NS vs balanced crystalloids.',
     calculatorLinks: [
       { id: 'anion-gap', label: 'Anion Gap' },
       { id: 'stewart-sig', label: 'Stewart SID/SIG' },
     ],
-    citation: [1, 2, 3, 12, 13, 17, 19],
+    citation: [1, 2, 3, 12, 13, 17, 19, 20],
     next: 'ab-disposition',
 
     summary: 'Bicarb for pH≤7.20 with AKI (RRT-sparing, no mortality benefit per BICARICU-2), TCA OD, salicylate tox, severe hyperK — NOT routine in DKA or lactic acidosis',
@@ -649,7 +649,7 @@ export const ACID_BASE_CRITICAL_ACTIONS = [
   { text: 'Osmolar gap >10 suggests toxic alcohol (methanol, ethylene glycol, isopropanol)', nodeId: 'ab-stew-osm' },
   { text: 'Urine anion gap for non-AG metabolic acidosis: UAG = (Na + K) - Cl. Positive = RTA, Negative = GI losses', nodeId: 'ab-nagma' },
   { text: 'Stewart approach: SID, A- tot (weak acids), PCO2. SID <35 = acidosis, >38 = alkalosis', nodeId: 'ab-stew-assess' },
-  { text: 'Treat underlying cause, NOT the pH (bicarbonate indicated if pH ≤7.20 + AKI per BICAR-ICU, or pH <6.9 in DKA)', nodeId: 'ab-treatment' },
+  { text: 'Treat underlying cause, NOT the pH (bicarbonate indicated if pH ≤7.20 + AKI per BICAR-ICU; in DKA consider only if pH <7.0 per 2024 ADA/EASD)', nodeId: 'ab-treatment' },
   { text: 'VBG sufficient for most ED acid-base assessment (pH 0.04 lower than ABG)', nodeId: 'ab-start' },
   { text: 'Mixed disorders common: check for compensation, delta-delta, and clinical picture', nodeId: 'ab-mixed-result' },
 ];
@@ -677,4 +677,5 @@ export const ACID_BASE_CITATIONS: Citation[] = [
   { num: 17, text: 'Forsythe SM, Schmidt GA. Sodium bicarbonate for the treatment of lactic acidosis. Chest. 2000;117(1):260-267.' },
   { num: 18, text: 'Ai-Ping C, Lee KH, Lim TK. In-hospital and 5-year mortality of patients treated in the ICU for acute exacerbation of COPD. Chest. 2005;128(2):518-524.' },
   { num: 19, text: 'Jaber S, Cinotti R, Futier E, et al. Sodium bicarbonate for severe metabolic acidemia and acute kidney injury (BICARICU-2): a randomized clinical trial. JAMA. 2025;334(22). No day-90 mortality difference (62.1% vs 61.7%); reduced renal replacement therapy (35% vs 50%).' },
+  { num: 20, text: 'Umpierrez GE, Davis GM, ElSayed NA, et al. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (ADA/EASD/JBDS/AACE/DTS). Diabetes Care. 2024;47(8):1257-1275. Routine bicarbonate administration is not recommended; bicarbonate should be considered if the acidosis is severe (i.e., pH <7.0). Supersedes the 2009 pH <6.9 threshold.' },
 ];

@@ -227,7 +227,7 @@ export const PEA_ARREST_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Hyperkalemia in Arrest',
-    body: '**Hyperkalemia — membrane stabilization + potassium shifting:**\n\n**1. Calcium (membrane stabilizer):**\n• [Calcium Gluconate](#/drug/calcium-gluconate/hyperkalemia) 1g IV over 2-3 min\n• [Calcium Chloride](#/drug/calcium-chloride/hyperkalemia) 1g IV (central preferred — 3× more elemental Ca²⁺)\n\n**2. Insulin + Dextrose (shift K⁺ intracellular):**\n• Regular insulin 10 units IV\n• D50 50 mL IV\n\n**3. Albuterol (shift K⁺):**\n• 10-20 mg nebulized (continuous)\n\n**4. NaHCO₃ (if acidotic):**\n• 50-100 mEq IV\n\n**Continue high-quality CPR throughout.**',
+    body: '**Hyperkalemia — membrane stabilization + potassium shifting:**\n\n**1. Calcium (membrane stabilizer):**\n• [Calcium Gluconate](#/drug/calcium-gluconate/hyperkalemia) 1g IV over 2-3 min\n• [Calcium Chloride](#/drug/calcium-chloride/hyperkalemia) 1g IV (central preferred — 3× more elemental Ca²⁺)\n\n**2. Insulin + Dextrose (shift K⁺ intracellular):**\n• Regular insulin IV — dose by hypoglycemia risk\n  - **5 units** (or 0.1 units/kg, max 10) — eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes\n  - **10 units** — normal renal function AND adequate glucose\n• D50 50 mL (25 g dextrose) IV with the insulin unless glucose >250 mg/dL\n• Check glucose at 30, 60, 120 and 240 min after the dose\n\n**3. Albuterol (shift K⁺):**\n• 10-20 mg nebulized (continuous)\n\n**4. NaHCO₃ (if acidotic):**\n• 50-100 mEq IV\n\n**Continue high-quality CPR throughout.**',
     citation: [5, 10],
     next: 'pea-cpr',
 

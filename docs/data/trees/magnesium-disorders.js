@@ -52,7 +52,7 @@ export const MAGNESIUM_DISORDERS_NODES = [
         type: 'info',
         module: 2,
         title: 'Torsades / Seizure Mg',
-        body: '[Magnesium Sulfate](#/drug/magnesium-sulfate/Torsades de pointes) 2 g IV over 5-15 min for torsades or unstable polymorphic VT; repeat or continue infusion per rhythm response and local protocol. Give even if serum magnesium is normal when torsades is present.\n\nCorrect K to high-normal, stop QT-prolonging drugs, treat bradycardia with overdrive pacing/isoproterenol when appropriate, and defibrillate unstable sustained/pulseless rhythms.',
+        body: '[Magnesium Sulfate](#/drug/magnesium-sulfate/Torsades de pointes) 2 g IV over 5-15 min for torsades or unstable polymorphic VT (push over 1-2 min if pulseless/unstable); repeat 2 g at 5-15 min if it persists, then start a continuous infusion - a bolus alone wears off over hours and torsades recurs. Give even if serum magnesium is normal when torsades is present.\n\nCorrect K to high-normal, stop QT-prolonging drugs, treat bradycardia with overdrive pacing/isoproterenol when appropriate, and defibrillate unstable sustained/pulseless rhythms.',
         citation: [1, 5],
         next: 'mg-hypo-workup',
         summary: 'Torsades: Mg sulfate 2 g IV rapidly, correct K, stop QT drugs, manage bradycardia and defibrillate unstable rhythms.',

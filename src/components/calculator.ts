@@ -13338,7 +13338,7 @@ const BB_AGENT_GUIDE_CALCULATOR: CalculatorDefinition = {
       return {
         value: 'SOTALOL',
         label: 'High Risk - QT Prolongation',
-        description: '**Sotalol Toxicity:**\n\n**Unique Dangers:**\n- Class III antiarrhythmic (blocks K+ channels)\n- QT prolongation, Torsades de Pointes\n- Renally cleared - prolonged in AKI\n\n**Treatment Additions:**\n- Magnesium 2-4g IV\n- Isoproterenol or pacing to overdrive\n- Avoid QT-prolonging drugs\n- Hemodialysis can remove (if refractory)\n\n**Standard Treatment + Mg + Watch for TdP**',
+        description: '**Sotalol Toxicity:**\n\n**Unique Dangers:**\n- Class III antiarrhythmic (blocks K+ channels)\n- QT prolongation, Torsades de Pointes\n- Renally cleared - prolonged in AKI\n\n**Treatment Additions:**\n- Magnesium 2g IV, repeat at 5-15 min if TdP persists, then infusion\n- Isoproterenol or pacing to overdrive\n- Avoid QT-prolonging drugs\n- Hemodialysis can remove (if refractory)\n\n**Standard Treatment + Mg + Watch for TdP**',
         colorVar: '--color-danger',
       };
     }
@@ -18436,7 +18436,7 @@ const HD_EMERGENCY_TRIAGE_CALCULATOR: CalculatorDefinition = {
 
     const managementByCategory: Record<number, string> = {
       1: `**ACCESS EMERGENCY**\n\n**Bleeding from access:**\n• Direct pressure 15-20 min\n• Do NOT use tourniquet proximal to fistula\n• Avoid excessive compression (thrombosis risk)\n• Suturing rarely needed\n\n**Clotted access:**\n• Time-sensitive — call vascular/IR urgently\n• tPA may be attempted (consult nephrology)\n• DO NOT use for dialysis until declotted\n\n**Steal syndrome:**\n• Pale, cool hand distal to access\n• Pain worse during dialysis\n• Emergent vascular surgery consult if severe`,
-      2: `**ELECTROLYTE EMERGENCY — HYPERKALEMIA LIKELY**\n\n**Immediate ECG** — Look for:\n• Peaked T waves (earliest)\n• PR prolongation\n• QRS widening\n• Loss of P waves\n• Sine wave (pre-arrest)\n\n**Management:**\n1. **Cardiac membrane stabilization:**\n   • Calcium gluconate 1-2 g IV (onset 1-3 min)\n   • Repeat if persistent ECG changes\n\n2. **Shift K+ intracellularly:**\n   • Insulin 10 units IV + D50 25g\n   • Albuterol 10-20 mg nebulized\n\n3. **EMERGENT DIALYSIS**\n   • Only definitive treatment in ESRD\n   • Call nephrology STAT\n\n**⚠️ Kayexalate is NOT emergent therapy**`,
+      2: `**ELECTROLYTE EMERGENCY — HYPERKALEMIA LIKELY**\n\n**Immediate ECG** — Look for:\n• Peaked T waves (earliest)\n• PR prolongation\n• QRS widening\n• Loss of P waves\n• Sine wave (pre-arrest)\n\n**Management:**\n1. **Cardiac membrane stabilization:**\n   • Calcium gluconate 1-2 g IV (onset 1-3 min)\n   • Repeat if persistent ECG changes\n\n2. **Shift K+ intracellularly:**\n   • Insulin 5 units IV + D50 25g (dialysis-dependent — 5 units, not 10)\n   • Fingerstick glucose at 30 min, 1 h, 2 h, 4 h and 6 h — delayed hypoglycemia is common in ESRD\n   • Albuterol 10-20 mg nebulized\n\n3. **EMERGENT DIALYSIS**\n   • Only definitive treatment in ESRD\n   • Call nephrology STAT\n\n**⚠️ Kayexalate is NOT emergent therapy**`,
       3: `**INFECTION/SEPSIS**\n\n**Catheter-related bloodstream infection:**\n• Blood cultures × 2 (peripheral + catheter)\n• Remove tunneled catheter if: septic shock, persistent bacteremia, metastatic infection\n\n**Empiric antibiotics (IDSA):**\n• Vancomycin 25 mg/kg (dosed after HD) PLUS\n• Cefepime 2g IV or gentamicin\n\n**HD-specific dosing:**\n• Vanc: 25 mg/kg, redose per level\n• Most antibiotics dosed AFTER dialysis\n\n**Consider endocarditis workup:**\n• S. aureus bacteremia → TTE +/- TEE\n• Prolonged bacteremia\n• New murmur`,
       4: `**VOLUME OVERLOAD / PULMONARY EDEMA**\n\n**Severe/Refractory cases:**\n• **EMERGENT DIALYSIS** is definitive\n• Contact nephrology immediately\n\n**Temporizing measures:**\n• High-flow O2 or NIPPV (BiPAP)\n• Nitrates (NTG 400 mcg SL, then drip)\n• Positioning (upright)\n\n**Diuretics?**\n• Generally ineffective in ESRD (no urine output)\n• High-dose furosemide MAY work if residual function\n\n**HTN Emergency:**\n• Nitroprusside or nicardipine drip\n• Target 20-25% MAP reduction in first hour\n• Avoid fluid boluses (worsen overload)`,
       5: `**UREMIC EMERGENCY**\n\n**Uremic encephalopathy:**\n• AMS, asterixis, myoclonus, seizures\n• EMERGENT DIALYSIS indicated\n• Avoid excessive ultrafiltration (DDS risk)\n\n**Uremic pericarditis:**\n• Chest pain, friction rub, ECG changes\n• DO NOT anticoagulate (hemorrhagic effusion risk)\n• Emergent dialysis WITHOUT heparin\n• Echo for tamponade assessment\n\n**Uremic bleeding:**\n• Platelet dysfunction\n• DDAVP 0.3 mcg/kg IV\n• Consider conjugated estrogens for prolonged effect\n• Emergent dialysis`,
@@ -18508,8 +18508,10 @@ const HD_HYPERKALEMIA_CALCULATOR: CalculatorDefinition = {
       protocol += `• Onset: 1-3 minutes, duration 30-60 min\n`;
       protocol += `• May repeat if persistent ECG changes\n\n`;
       protocol += `**2. SHIFT K+ INTRACELLULARLY:**\n`;
-      protocol += `• Regular insulin 10 units IV + D50 25g\n`;
+      protocol += `• Regular insulin 5 units IV + D50 25g\n`;
+      protocol += `  (5 units — dialysis-dependent; 10 units only with normal renal function AND adequate glucose)\n`;
       protocol += `  (Onset 15-30 min, duration 4-6 hr)\n`;
+      protocol += `• Fingerstick glucose at 30, 60, 120 and 240 min\n`;
       protocol += `• Albuterol 10-20 mg nebulized\n`;
       protocol += `  (Onset 30 min, duration 2 hr)\n\n`;
       protocol += `**3. EMERGENT DIALYSIS:**\n`;
@@ -18525,7 +18527,9 @@ const HD_HYPERKALEMIA_CALCULATOR: CalculatorDefinition = {
       protocol = `**⚠️ MODERATE HYPERKALEMIA (K+ ${k} mEq/L)**\n\n`;
       protocol += `**1. CONTINUOUS CARDIAC MONITORING**\n\n`;
       protocol += `**2. SHIFT THERAPY:**\n`;
-      protocol += `• Regular insulin 10 units IV + D50 25g\n`;
+      protocol += `• Regular insulin 5 units IV + D50 25g\n`;
+      protocol += `  (5 units — dialysis-dependent; 10 units only with normal renal function AND adequate glucose)\n`;
+      protocol += `• Fingerstick glucose at 30, 60, 120 and 240 min\n`;
       protocol += `• Albuterol 10-20 mg nebulized (additive)\n\n`;
       protocol += `**3. CONTACT NEPHROLOGY:**\n`;
       protocol += `• Arrange urgent dialysis\n`;
@@ -28706,11 +28710,13 @@ const HOP_METABOLIC_INTUBATION_CALCULATOR: CalculatorDefinition = {
 |--------------|------|-------|
 | **Calcium gluconate** | 1-2 g IV over 5-10 min | 1-3 min |
 | **Calcium chloride** | 1 g IV (central) | 1-3 min |
-| **Regular insulin** | 10 units IV | 15-30 min |
-| **D50** | 50 mL (25g) IV | -- |
+| **Regular insulin** | 5 units IV — 10 units only if normal renal function AND adequate glucose | 15-30 min |
+| **D50** | 50 mL (25g) IV with the insulin unless glucose >250 mg/dL | -- |
 | **Albuterol** | 10-20 mg neb | 15-30 min |
 
 **Give calcium FIRST** - membrane stabilization is immediate.
+
+**Insulin dose by hypoglycemia risk:** 5 units (or 0.1 units/kg, max 10) if eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes. Recheck glucose at 30, 60, 120 and 240 min.
 
 **Paralytic Selection:**
 | Agent | Dose | Notes |

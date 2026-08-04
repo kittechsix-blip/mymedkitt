@@ -55,7 +55,7 @@ export const POTASSIUM_INFUSION_NODES = [
         type: 'info',
         module: 2,
         title: 'DKA / HHS Potassium Rules',
-        body: 'Potassium determines whether insulin can safely start.\n\nDKA/HHS rules:\n- K <3.3 mEq/L: hold insulin; give [Potassium chloride IV](#/drug/potassium-chloride-iv/DKA severe hypokalemia) 20-30 mEq/hr until K >=3.3\n- K 3.3-5.2 mEq/L: give 20-30 mEq potassium per liter of IV fluid while insulin runs\n- K >5.2 mEq/L: do not give potassium initially; recheck q2h and start replacement when K falls into range\n\nUse a mix of potassium chloride and potassium phosphate/acetate when phosphate deficit or hyperchloremia is relevant per protocol.',
+        body: 'Potassium determines whether insulin can safely start.\n\nDKA/HHS rules:\n- K <3.3 mEq/L: hold insulin; give [Potassium chloride IV](#/drug/potassium-chloride-iv/DKA severe hypokalemia) 10 mEq/hr until K >=3.3 (10-20 mEq/hr only with central access + continuous cardiac monitoring)\n- K 3.3-5.2 mEq/L: give 20-30 mEq potassium per LITRE of IV fluid while insulin runs — a concentration in the bag, not an hourly rate\n- K >5.2 mEq/L: do not give potassium initially; recheck q2h and start replacement when K falls into range\n\nUse a mix of potassium chloride, [potassium phosphate](#/drug/potassium-phosphate/DKA phosphate repletion), and [potassium acetate](#/drug/potassium-acetate/DKA) when phosphate deficit or hyperchloremia is relevant per protocol. Potassium phosphate delivers 1.47 mEq potassium per mmol of phosphorus — count it in the hourly potassium total.',
         citation: [4, 5],
         next: 'kclinf-monitor',
         summary: 'In DKA/HHS, hold insulin when K <3.3 and replace before insulin.',

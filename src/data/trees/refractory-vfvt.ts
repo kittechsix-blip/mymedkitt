@@ -119,7 +119,7 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Hyperkalemia Treatment Stack',
-    body: '**During cardiac arrest:**\n\n1. **[Calcium chloride](#/drug/calcium-chloride/hyperK)** 1g IV (or Calcium gluconate 3g IV) — membrane stabilization\n2. **[Regular insulin](#/drug/regular-insulin/hyperK)** 10 units + **D50** 50 mL IV — intracellular shift\n3. **[Albuterol](#/drug/albuterol-neb/hyperK)** 10-20 mg nebulized — intracellular shift\n4. **[Sodium bicarbonate](#/drug/sodium-bicarbonate/hyperK)** 50-100 mEq IV if acidotic\n5. **Dialysis** if refractory\n\n**Continue ACLS** while treating hyperkalemia [2]',
+    body: '**During cardiac arrest:**\n\n1. **[Calcium chloride](#/drug/calcium-chloride/hyperK)** 1g IV (or Calcium gluconate 3g IV) — membrane stabilization\n2. **[Regular insulin](#/drug/regular-insulin/hyperK)** + **D50** 50 mL (25 g dextrose) IV unless glucose >250 mg/dL — intracellular shift\n  - **5 units** (or 0.1 units/kg, max 10) — eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes\n  - **10 units** — normal renal function AND adequate glucose\n  - Check glucose at 30, 60, 120 and 240 min after the dose\n3. **[Albuterol](#/drug/albuterol-neb/hyperK)** 10-20 mg nebulized — intracellular shift\n4. **[Sodium bicarbonate](#/drug/sodium-bicarbonate/hyperK)** 50-100 mEq IV if acidotic\n5. **Dialysis** if refractory\n\n**Continue ACLS** while treating hyperkalemia [2]',
     citation: [2],
     next: 'rvf-vector-change',
     treatment: {
@@ -133,13 +133,13 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
       },
       alternative: {
         drug: 'Insulin + D50',
-        dose: 'Regular insulin 10 units + D50 50 mL',
+        dose: 'Regular insulin 5 units (10 units if normal renal function) + D50 50 mL (25 g dextrose)',
         route: 'IV',
         frequency: 'Once',
         duration: 'Single dose',
         notes: 'Intracellular K shift. Add albuterol 10-20 mg neb.',
       },
-      monitoring: 'Continue ACLS, check K when ROSC',
+      monitoring: 'Continue ACLS, check K when ROSC. Check glucose at 30, 60, 120 and 240 min after insulin.',
     },
 
     summary: 'Calcium chloride 1g IV for membrane stabilization, then insulin/D50 and albuterol for K shift',
@@ -344,7 +344,7 @@ export const REFRACTORY_VFVT_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Other Pharmacologic Options',
-    body: '**Magnesium Sulfate:**\n• **Torsades de Pointes:** [Magnesium](#/drug/magnesium-sulfate/torsades) 2g IV over 2 min\n• **Routine refractory VF:** NOT recommended [2]\n\n**Sodium Bicarbonate:**\n• Severe acidosis (pH <7.2): 1 mEq/kg IV\n• Hyperkalemia: 50-100 mEq IV\n• TCA overdose: 1-2 mEq/kg IV\n• **Routine use:** NOT recommended [2]\n\n**Procainamide:**\n• 20 mg/min up to 17 mg/kg\n• Used for stable VT, uncertain in arrest',
+    body: '**Magnesium Sulfate:**\n• **Torsades de Pointes:** [Magnesium](#/drug/magnesium-sulfate/torsades) 2g IV over 2 min, repeat 2g at 5-15 min if it persists, then a continuous infusion\n• **Routine refractory VF:** NOT recommended [2]\n\n**Sodium Bicarbonate:**\n• Severe acidosis (pH <7.2): 1 mEq/kg IV\n• Hyperkalemia: 50-100 mEq IV\n• TCA overdose: 1-2 mEq/kg IV\n• **Routine use:** NOT recommended [2]\n\n**Procainamide:**\n• 20 mg/min up to 17 mg/kg\n• Used for stable VT, uncertain in arrest',
     citation: [2],
     next: 'rvf-esmolol-consider',
 

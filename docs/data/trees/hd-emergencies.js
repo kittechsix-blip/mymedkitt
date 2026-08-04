@@ -83,7 +83,7 @@ export const HD_EMERGENCIES_NODES = [
         type: 'info',
         module: 2,
         title: 'Severe Hyperkalemia Protocol',
-        body: '**🚨 SEVERE HYPERKALEMIA — ECG changes present**\n\n**1. CARDIAC MEMBRANE STABILIZATION (Immediate):**\n• **Calcium gluconate 1-2 g IV** over 2-3 min\n• Onset: 1-3 minutes\n• Duration: 30-60 minutes\n• May repeat if ECG changes persist\n• Alternative: Calcium chloride 500-1000 mg (central line preferred)\n\n**2. SHIFT K+ INTRACELLULARLY:**\n• **Insulin 10 units regular IV + D50 25g**\n  — Onset: 15-30 min, duration 4-6 hr\n  — Monitor glucose q1h\n• **Albuterol 10-20 mg nebulized** (additive effect)\n  — Onset: 30 min, duration 2 hr\n\n**3. EMERGENT DIALYSIS:**\n• **Call nephrology STAT**\n• Only definitive treatment in ESRD\n• Removes 25-50 mEq K+/hour\n\n**⚠️ NOT emergent therapy:**\n• Kayexalate — hours to work, GI complications\n• Patiromer/SZC — not for acute use',
+        body: '**🚨 SEVERE HYPERKALEMIA — ECG changes present**\n\n**1. CARDIAC MEMBRANE STABILIZATION (Immediate):**\n• **Calcium gluconate 1-2 g IV** over 2-3 min\n• Onset: 1-3 minutes\n• Duration: 30-60 minutes\n• May repeat if ECG changes persist\n• Alternative: Calcium chloride 500-1000 mg (central line preferred)\n\n**2. SHIFT K+ INTRACELLULARLY:**\n• **Regular insulin IV — dose by hypoglycemia risk**\n  — Give WITH **25 g dextrose (D50 50 mL)** unless glucose >250 mg/dL\n  — **5 units** (or 0.1 units/kg, max 10) — eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes\n  — **10 units** — normal renal function AND adequate glucose\n  — **Dialysis patients meet the 5-unit criterion → give 5 units**\n  — Onset: 15-30 min, duration 4-6 hr\n  — Check glucose at 30, 60, 120 and 240 min (insulin is renally cleared — hypoglycemia is often delayed)\n• **Albuterol 10-20 mg nebulized** (additive effect)\n  — Onset: 30 min, duration 2 hr\n\n**3. EMERGENT DIALYSIS:**\n• **Call nephrology STAT**\n• Only definitive treatment in ESRD\n• Removes 25-50 mEq K+/hour\n\n**⚠️ NOT emergent therapy:**\n• Kayexalate — hours to work, GI complications\n• Patiromer/SZC — not for acute use',
         citation: [3, 4, 18],
         calculatorLinks: [
             { id: 'hd-hyperkalemia', label: 'Hyperkalemia Protocol' },
@@ -97,10 +97,10 @@ export const HD_EMERGENCIES_NODES = [
         type: 'info',
         module: 2,
         title: 'Moderate Hyperkalemia',
-        body: '**K+ 5.5-6.5, no ECG changes:**\n\n**Management:**\n\n**1. Continuous cardiac monitoring**\n\n**2. Shift therapy:**\n• Insulin 10 units IV + D50 25g\n• Albuterol 10-20 mg nebulized (additive)\n\n**3. Contact nephrology:**\n• Arrange urgent dialysis\n• May need same-day HD\n\n**Consider calcium gluconate if:**\n• K+ trending up\n• Recent missed dialysis\n• High-risk patient\n\n**Repeat K+ in 1-2 hours**\n\n**Do NOT delay dialysis** — shift therapy is temporary',
+        body: '**K+ 5.5-6.5, no ECG changes:**\n\n**Management:**\n\n**1. Continuous cardiac monitoring**\n\n**2. Shift therapy:**\n• Regular insulin IV + **25 g dextrose (D50 50 mL)** — **5 units** (or 0.1 units/kg, max 10) if dialysis-dependent, eGFR <60, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes; **10 units** only with normal renal function AND adequate glucose. Dialysis patients → **5 units**.\n• Albuterol 10-20 mg nebulized (additive)\n\n**3. Contact nephrology:**\n• Arrange urgent dialysis\n• May need same-day HD\n\n**Consider calcium gluconate if:**\n• K+ trending up\n• Recent missed dialysis\n• High-risk patient\n\n**Repeat K+ in 1-2 hours**\n\n**Fingerstick glucose at 30 min, 1 h, 2 h, 4 h and 6 h** — insulin is renally cleared, so in dialysis patients hypoglycemia is common and frequently delayed past the ~4 h K+ effect. If glucose <70 mg/dL, give additional dextrose.\n\n**Do NOT delay dialysis** — shift therapy is temporary',
         citation: [3, 4, 18],
         next: 'hd-electrolyte-disposition',
-        summary: 'Insulin 10U + D50 1 amp, kayexalate controversial, arrange urgent dialysis within hours',
+        summary: 'Insulin 5 u (10 u if normal renal function) + 25 g dextrose, kayexalate controversial, arrange urgent dialysis within hours',
     },
     {
         id: 'hd-hyperkalemia-mild',

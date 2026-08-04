@@ -1,7 +1,16 @@
 // MedKitt — Video-Assisted Flexible Endoscopic Intubation (VAFEI) Consult
 // Indications → Preparation → Topicalization → Procedure → Troubleshooting
-// Category: Anesthesia/Airway. 5 modules, ~25 nodes.
-// Sources: ACEP Now (Strayer/Caputo 2022), PMC, UpToDate, EMCrit, LITFL
+// Category: Anesthesia/Airway. 5 modules, 21 nodes.
+// Evidence base (rebuilt 2026-07-31, Louis Litt FDA CDS Prong-4 audit, Batch 40):
+//   Guidelines — Difficult Airway Society ATI 2020 (PMID 31729018); ASA Difficult Airway 2022 (PMID 34762729);
+//     Higgs, critically ill tracheal intubation 2018 (PMID 29406182); ASRA LAST checklist 2020 (PMID 33148630).
+//   Registry/trial — NEAR awake intubations (PMID 34062317); NEAR ketamine-only (PMID 33308912);
+//     VAFI randomised trial (PMID 42043501); atomised lidocaine 2% vs 4% (PMID 17845648).
+//   Reviews — Managing Awake Intubation (PMID 39480375); Merelman ketamine (PMID 31123547);
+//     Rao airway anaesthesia/sedation (PMID 37314139); Sandefur needs assessment (PMID 38765706).
+//   Drug labels — Ketalar, glycopyrrolate, dexmedetomidine (DailyMed setids in VAFEI_CITATIONS).
+//   Retained tertiary (scope-limited, no machine identifier) — ACEP Now Strayer/Caputo 2022; EMCrit 247.
+// Prior header claimed "ACEP Now, PMC, UpToDate, EMCrit, LITFL" — a zero-identifier tertiary-only base.
 export const VAFEI_MODULE_LABELS = [
     'Indications & Contraindications',
     'Preparation & Equipment',
@@ -10,15 +19,26 @@ export const VAFEI_MODULE_LABELS = [
     'Troubleshooting & Confirmation',
 ];
 export const VAFEI_CITATIONS = [
-    { num: 1, text: 'Strayer RJ, Caputo N. How to Use Video-Assisted Flexible Endoscopic Intubation. ACEP Now. 2022 Nov.' },
-    { num: 2, text: 'Sandefur BJ, et al. Flexible endoscopic intubation in emergency medicine: A mixed-methods needs assessment. AEM Educ Train. 2024;8(3):e10992.' },
-    { num: 3, text: 'Stolz AJ. Managing Awake Intubation. Ann Emerg Med. 2024.' },
-    { num: 4, text: 'Weingart SD. EMCrit 247: The Dissociated Awake Intubation with Ketamine. EMCrit. 2018.' },
-    { num: 5, text: 'Driver BE, et al. Alternatives to Rapid Sequence Intubation: Contemporary Airway Management with Ketamine. West J Emerg Med. 2019;20(3):461-471.' },
-    { num: 6, text: 'Benumof JL. Management of the Difficult Adult Airway. Anesthesiology. 1991;75(6):1087-1110.' },
-    { num: 7, text: 'Ahmad I, et al. Difficult Airway Society guidelines for awake tracheal intubation. Anaesthesia. 2020;75(4):509-528.' },
-    { num: 8, text: 'UpToDate. Flexible scope intubation for anesthesia. 2024.' },
-    { num: 9, text: 'Higgs A, et al. Guidelines for the management of tracheal intubation in critically ill adults. Br J Anaesth. 2018;120(2):323-352.' },
+    { num: 1, text: 'Strayer RJ, Caputo N. How To Use Video-Assisted Flexible Endoscopic Intubation. ACEP Now. 2022 Nov 11. https://www.acepnow.com/article/how-to-use-video-assisted-flexible-endoscopic-intubation/ — SCOPE NOTE: narrative expert technique description in a membership magazine; not peer-reviewed, no trial data, no machine identifier (no PMID/DOI). Supports procedural sequence and operator-ergonomics detail only; it is not an evidence basis for success rates, dosing, or patient-selection thresholds.' },
+    { num: 2, text: 'Sandefur BJ, Shappell EF, Campbell RL, Brown CA 3rd, Driver BE, Carlson JN, et al. Flexible endoscopic intubation in emergency medicine: A mixed-methods needs assessment. AEM Educ Train. 2024 Jun;8(3):e10992. PMID: 38765706. PMCID: PMC11099701. doi:10.1002/aet2.10992' },
+    { num: 3, text: 'Sandefur BJ, Driver BE, Long B. Managing Awake Intubation. Ann Emerg Med. 2025 Jan;85(1):21-30. PMID: 39480375. doi:10.1016/j.annemergmed.2024.07.017 — SCOPE NOTE: narrative review; corrected in audit from a prior entry that attributed this article to "Stolz AJ, 2024" (no such author/year exists).' },
+    { num: 4, text: 'Weingart SD. EMCrit 247 — The Dissociated Awake Intubation with my buddy, Ketamine. EMCrit. 2019 May 16. https://emcrit.org/emcrit/dissociated-awake-intubation/ — SCOPE NOTE: expert opinion podcast/blog, no machine identifier; year corrected in audit from 2018. Supports the aliquot-titration technique description only.' },
+    { num: 5, text: 'Merelman AH, Perlmutter MC, Strayer RJ. Alternatives to Rapid Sequence Intubation: Contemporary Airway Management with Ketamine. West J Emerg Med. 2019 May;20(3):466-471. PMID: 31123547. PMCID: PMC6526883. doi:10.5811/westjem.2019.4.42753 — SCOPE NOTE: author string and page range corrected in audit (previously "Driver BE, et al." and "461-471").' },
+    { num: 6, text: 'Benumof JL. Management of the difficult adult airway. With special emphasis on awake tracheal intubation. Anesthesiology. 1991 Dec;75(6):1087-1110. PMID: 1824555. doi:10.1097/00000542-199112000-00021 — SCOPE NOTE: foundational 1991 review; predates video laryngoscopy and single-use flexible endoscopes. Supports difficult-airway patient-selection concepts, not contemporary device technique.' },
+    { num: 7, text: 'Ahmad I, El-Boghdadly K, Bhagrath R, Hodzovic I, McNarry AF, Mir F, et al. Difficult Airway Society guidelines for awake tracheal intubation (ATI) in adults. Anaesthesia. 2020 Apr;75(4):509-528. PMID: 31729018. PMCID: PMC7078877. doi:10.1111/anae.14904' },
+    { num: 8, text: 'Apfelbaum JL, Hagberg CA, Connis RT, Abdelmalak BB, Agarkar M, Dutton RP, et al. 2022 American Society of Anesthesiologists Practice Guidelines for Management of the Difficult Airway. Anesthesiology. 2022 Jan 1;136(1):31-81. PMID: 34762729. doi:10.1097/ALN.0000000000004002 — SCOPE NOTE: replaces a prior unidentifiable entry ("UpToDate. Flexible scope intubation for anesthesia. 2024.") that carried no PMID, DOI, topic ID, version, or access date and could not be independently reviewed.' },
+    { num: 9, text: 'Higgs A, McGrath BA, Goddard C, Rangasami J, Suntharalingam G, Gale R, et al. Guidelines for the management of tracheal intubation in critically ill adults. Br J Anaesth. 2018 Feb;120(2):323-352. PMID: 29406182. doi:10.1016/j.bja.2017.10.021' },
+    { num: 10, text: 'Kaisler MC, Hyde RJ, Sandefur BJ, Kaji AH, Campbell RL, Driver BE, Brown CA 3rd. Awake intubations in the emergency department: A report from the National Emergency Airway Registry. Am J Emerg Med. 2021 Nov;49:48-51. PMID: 34062317. doi:10.1016/j.ajem.2021.05.038 — NEAR registry, 19,071 encounters; awake technique on first attempt in 82 (0.4%); angioedema 32% and non-angioedema obstruction 31% were the commonest indications; flexible endoscope was the initial device in 78%; first-attempt success 85% (95% CI 76-95%), peri-intubation complications 16% (95% CI 9-26%).' },
+    { num: 11, text: 'Driver BE, Prekker ME, Reardon RF, Sandefur BJ, April MD, Walls RM, Brown CA 3rd. Success and Complications of the Ketamine-Only Intubation Method in the Emergency Department. J Emerg Med. 2021 Mar;60(3):265-272. PMID: 33308912. doi:10.1016/j.jemermed.2020.10.042 — NEAR analysis, 12,511 encounters; unadjusted first-attempt success 61% ketamine-only vs 85% topical anaesthesia vs 90% RSI; >=1 adverse event 32% vs 19% vs 14%.' },
+    { num: 12, text: 'Jain K, Nair R, Goyal A, Makkar JK, Singla K, Arora S, Bhatia N. Videolaryngoscope-assisted fibreoptic intubation in anticipated difficult airways of maxillofacial trauma: a prospective randomised comparison with videolaryngoscope-guided nasotracheal intubation. Eur J Trauma Emerg Surg. 2026 Apr 27;52(1):147. PMID: 42043501. doi:10.1007/s00068-026-03191-8 — randomised trial of the combined videolaryngoscope + flexible scope technique (n=60, 30 per arm); first-pass success 90% vs 60% (unadjusted p=0.015, Bonferroni-adjusted p=0.092), intubation time 57 s vs 120 s, epistaxis 3.3% vs 30%. SCOPE NOTE: elective operating-theatre nasotracheal intubation in maxillofacial trauma; small single-centre trial whose primary endpoint did not survive multiplicity adjustment.' },
+    { num: 13, text: 'Neal JM, Neal EJ, Weinberg GL. American Society of Regional Anesthesia and Pain Medicine Local Anesthetic Systemic Toxicity checklist: 2020 version. Reg Anesth Pain Med. 2021 Jan;46(1):81-82. PMID: 33148630. doi:10.1136/rapm-2020-101986' },
+    { num: 14, text: 'Rao PN, Soffin EM, Beckman JD. Comparative review of airway anesthesia and sedation methods for awake intubation. Curr Opin Anaesthesiol. 2023 Oct 1;36(5):547-559. PMID: 37314139. doi:10.1097/ACO.0000000000001273' },
+    { num: 15, text: 'KETALAR (ketamine hydrochloride) injection — US FDA Prescribing Information. Par Health USA, LLC. DailyMed setid: 14e8f864-8b8a-4e7e-8439-e510d3107063. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=14e8f864-8b8a-4e7e-8439-e510d3107063 — SCOPE NOTE: the FDA label does not carry an awake-intubation or dissociated-awake-intubation indication; the doses used in this consult are off-label emergency-airway practice.' },
+    { num: 16, text: 'Glycopyrrolate injection, solution — US FDA Prescribing Information. Piramal Critical Care Inc. DailyMed setid: 83d70378-011b-4ce3-e053-2991aa0a22be. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=83d70378-011b-4ce3-e053-2991aa0a22be' },
+    { num: 17, text: 'Dexmedetomidine hydrochloride injection, solution — US FDA Prescribing Information. Mylan Institutional LLC. DailyMed setid: f140de5a-f13d-46b4-a742-049c63e474f5. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f140de5a-f13d-46b4-a742-049c63e474f5' },
+    { num: 18, text: 'Miyajima S, Takahashi K, Matsuba S. Effective Use of a Combined Video Laryngoscope and Bronchoscope System in the Emergency Department for a Patient With Severe Upper Airway Obstruction Due to Angioedema: A Case Report. Cureus. 2024 Dec 23;16(12):e76285. PMID: 39850167. PMCID: PMC11754421. doi:10.7759/cureus.76285 — SCOPE NOTE: single case report; lowest tier of evidence, hypothesis-generating only.' },
+    { num: 19, text: 'Pelagatti L, Marabotti A, Batacchi S, Vanni S, Nazerian P. Awake intubation with a flexible bronchoscope in the emergency department: Expanding the emergency physician\'s airway toolkit. Am J Emerg Med. 2025 Dec;98:408-412. PMID: 40783315. doi:10.1016/j.ajem.2025.08.004 — SCOPE NOTE: three-patient case series; descriptive only.' },
+    { num: 20, text: 'Wieczorek PM, Schricker T, Vinet B, Backman SB. Airway topicalisation in morbidly obese patients using atomised lidocaine: 2% compared with 4%. Anaesthesia. 2007 Oct;62(10):984-8. PMID: 17845648. doi:10.1111/j.1365-2044.2007.05179.x — randomised comparison in morbidly obese patients (n=27); peak plasma lidocaine 6.5 (1.0) microg/mL with 4% vs 2.8 (0.8) microg/mL with 2% (p<0.05), with comparable intubating conditions.' },
 ];
 export const VAFEI_CRITICAL_ACTIONS = [
     { text: 'Video-Assisted Flexible Endoscopic Intubation preserves spontaneous breathing - ideal for "can\'t paralyze" airways', nodeId: 'vafei-start' },
@@ -27,6 +47,16 @@ export const VAFEI_CRITICAL_ACTIONS = [
     { text: 'VL operator suctions aggressively - soiled airway obscures both views', nodeId: 'vafei-procedure' },
     { text: 'The right speed is SLOWER than your instincts - do not rush', nodeId: 'vafei-procedure' },
     { text: 'Confirm carina visualization before railroading ETT', nodeId: 'vafei-railroad' },
+    // --- Surfaced 2026-07-31 (Louis Litt Prong-4 audit, Batch 40). Each of the following
+    // --- already existed verbatim in a node body below; none introduces new clinical instruction.
+    { text: 'Waveform capnography is MANDATORY - no capnography = not confirmed', nodeId: 'vafei-confirm' },
+    { text: 'Desaturation: STOP the procedure, remove FE and VL, BVM ventilate with 100% O2', nodeId: 'vafei-trouble-desat' },
+    { text: 'If cannot oxygenate, this is a CICO situation - go to surgical airway (cricothyrotomy)', nodeId: 'vafei-trouble-desat' },
+    { text: 'DO NOT FORCE the ETT - forceful advancement can cause tracheal injury', nodeId: 'vafei-trouble-tube' },
+    { text: 'If the patient deteriorates during the attempt, abort and go to a rescue airway', nodeId: 'vafei-contraindications' },
+    { text: 'Have standard airway backup AND a cricothyrotomy kit at the bedside before starting', nodeId: 'vafei-prep-awake' },
+    { text: 'If lidocaine toxicity is suspected, stop lidocaine immediately and support airway/breathing', nodeId: 'vafei-lidocaine-calc' },
+    { text: 'Over-sedation defeats the purpose of awake intubation - start low, titrate slowly', nodeId: 'vafei-sedation' },
 ];
 export const VAFEI_NODES = [
     // =====================================================================
@@ -37,8 +67,8 @@ export const VAFEI_NODES = [
         type: 'info',
         module: 1,
         title: 'Video-Assisted Flexible Endoscopic Intubation — Overview',
-        body: '**Video-Assisted Flexible Endoscopic Intubation** combines video laryngoscopy to expose the airway with flexible endoscopy to guide tube delivery. [1]\n\n**WHY THIS TECHNIQUE?**\nCombines the best of both:\n• VL clears path through mouth, lifts epiglottis\n• FE provides continuous visualization through cords\n• No nasal route needed (avoids epistaxis)\n• Allows awake/breathing approach\n\n**KEY ADVANTAGES:**\n• Maintains spontaneous ventilation\n• Continuous visualization during tube passage\n• Two operators = two sets of eyes\n• Works when VL alone fails to pass tube\n\n**SUCCESS RATES:**\n• Awake flexible endoscopic intubation: 92% first-pass (nasal), 57% (oral) [3]\n• Combined video + flexible endoscopic technique addresses oral route challenges by using VL to guide the scope',
-        citation: [1, 2, 3],
+        body: '**Video-Assisted Flexible Endoscopic Intubation** combines video laryngoscopy to expose the airway with flexible endoscopy to guide tube delivery. [1]\n\n**WHY THIS TECHNIQUE?**\nCombines the best of both:\n• VL clears path through mouth, lifts epiglottis\n• FE provides continuous visualization through cords\n• No nasal route needed (avoids epistaxis)\n• Allows awake/breathing approach\n\n**KEY ADVANTAGES:**\n• Maintains spontaneous ventilation\n• Continuous visualization during tube passage\n• Two operators = two sets of eyes\n• Works when VL alone fails to pass tube\n\n**SUCCESS RATES:**\n• Awake flexible endoscopic intubation: 92% first-pass (nasal), 57% (oral) [3]\n• Combined video + flexible endoscopic technique addresses oral route challenges by using VL to guide the scope\n\n*Basis:* The strongest data for the combined videolaryngoscope + flexible scope technique is a single randomised trial in maxillofacial trauma (n=60): first-pass success 90% vs 60% for videolaryngoscope-guided nasotracheal intubation, intubation time 57 s vs 120 s, epistaxis 3.3% vs 30%. The primary endpoint did not survive Bonferroni adjustment (p=0.092), and the setting was the elective operating theatre, not the ED. [12] In the ED, National Emergency Airway Registry data on awake intubation (82 of 19,071 encounters) show 85% first-attempt success (95% CI 76-95%) with a flexible endoscope as the initial device in 78%. [10] ED experience with the combined system is limited to case-level reports. [18,19] The procedural sequence and operator-ergonomics detail on this page derive from a narrative expert article, not from trial data. [1]',
+        citation: [1, 2, 3, 10, 12, 18, 19],
         next: 'vafei-indications',
         summary: 'Video laryngoscopy + flexible endoscope combined; VL clears path, FE guides tube through cords; maintains breathing',
     },
@@ -47,8 +77,8 @@ export const VAFEI_NODES = [
         type: 'info',
         module: 1,
         title: 'Indications',
-        body: '**PRIMARY INDICATIONS:** [2,6,7]\n\n**Anatomically Difficult/Distorted Airways:**\n• Angioedema (most common indication)\n• Ludwig angina / deep neck infection\n• Oropharyngeal abscess / hematoma\n• Laryngeal or orofacial trauma\n• Airway tumors / masses\n• Prior surgery or radiation to head/neck\n\n**Intrinsic Difficult Airway Features:**\n• Micrognathia / retrognathia\n• Limited mouth opening (trismus)\n• Morbid obesity\n• Failed 3-3-2 rule\n• Mallampati IV\n• History of difficult intubation\n\n**Clinical Scenarios:**\n• "Scared to paralyze" - anticipated CICO risk\n• Failed VL intubation (can oxygenate)\n• Cervical spine immobility + predicted difficult airway\n• Need for continuous visualization (laryngeal trauma)',
-        citation: [2, 6, 7],
+        body: '**PRIMARY INDICATIONS:** [2,6,7]\n\n**Anatomically Difficult/Distorted Airways:**\n• Angioedema (most common indication)\n• Ludwig angina / deep neck infection\n• Oropharyngeal abscess / hematoma\n• Laryngeal or orofacial trauma\n• Airway tumors / masses\n• Prior surgery or radiation to head/neck\n\n**Intrinsic Difficult Airway Features:**\n• Micrognathia / retrognathia\n• Limited mouth opening (trismus)\n• Morbid obesity\n• Failed 3-3-2 rule\n• Mallampati IV\n• History of difficult intubation\n\n**Clinical Scenarios:**\n• "Scared to paralyze" - anticipated CICO risk\n• Failed VL intubation (can oxygenate)\n• Cervical spine immobility + predicted difficult airway\n• Need for continuous visualization (laryngeal trauma)\n\n*Basis:* The ranking of indications is anchored in National Emergency Airway Registry data: among ED awake intubation attempts, angioedema (32%) and non-angioedema upper airway obstruction (31%) were the two commonest indications. [10] The anatomic and intrinsic difficult-airway predictors listed here are the patient-selection criteria of the Difficult Airway Society awake tracheal intubation guideline and the ASA difficult airway guideline, both of which are consensus/Delphi products rather than prospectively validated decision rules. [7,8] The "scared to paralyze" category is expert framing, not a validated criterion. [6]',
+        citation: [2, 6, 7, 8, 10],
         next: 'vafei-contraindications',
         summary: 'Angioedema, Ludwig, trauma, tumors, morbid obesity, failed VL, "scared to paralyze" patients',
     },
@@ -57,8 +87,8 @@ export const VAFEI_NODES = [
         type: 'info',
         module: 1,
         title: 'Relative Contraindications',
-        body: '**RELATIVE CONTRAINDICATIONS:** [6,8]\n\n**Visualization Barriers:**\n• Massive upper airway bleeding (obscures scope)\n• Profuse secretions / vomiting\n• Complete upper airway obstruction\n\n**Time Constraints:**\n• Severely diminished ventilation / impending arrest\n• Cannot preoxygenate adequately\n• Rapidly deteriorating airway with no time\n\n**Patient Factors:**\n• Severely uncooperative / combative (for awake approach)\n• Severe hypoxemia not responsive to BVM\n\n**IMPORTANT NOTES:**\n• Most contraindications are RELATIVE\n• Aggressive suctioning can address secretions\n• VL operator must clear blood/secretions\n• If patient deteriorates during attempt → abort → rescue airway',
-        citation: [6, 8],
+        body: '**RELATIVE CONTRAINDICATIONS:** [6,8]\n\n**Visualization Barriers:**\n• Massive upper airway bleeding (obscures scope)\n• Profuse secretions / vomiting\n• Complete upper airway obstruction\n\n**Time Constraints:**\n• Severely diminished ventilation / impending arrest\n• Cannot preoxygenate adequately\n• Rapidly deteriorating airway with no time\n\n**Patient Factors:**\n• Severely uncooperative / combative (for awake approach)\n• Severe hypoxemia not responsive to BVM\n\n**IMPORTANT NOTES:**\n• Most contraindications are RELATIVE\n• Aggressive suctioning can address secretions\n• VL operator must clear blood/secretions\n• If patient deteriorates during attempt → abort → rescue airway\n\n*Basis:* No contraindication on this page is derived from a trial. Each is expert-consensus guidance drawn from the ASA difficult airway guideline and the guideline for tracheal intubation in critically ill adults, which both direct that an awake/spontaneously breathing plan be abandoned for a rescue strategy when oxygenation cannot be maintained or the airway is deteriorating faster than the technique can be completed. [8,9] The Difficult Airway Society awake tracheal intubation guideline caps attempts at three, with one further attempt by a more experienced operator (3 + 1), and directs a declared failed-ATI plan beyond that point. [7] The classification of these as RELATIVE rather than absolute is expert judgement. [6]',
+        citation: [6, 7, 8, 9],
         next: 'vafei-approach-branch',
         summary: 'Relative CIs: massive bleeding, complete obstruction, impending arrest, severely uncooperative',
     },
@@ -67,7 +97,8 @@ export const VAFEI_NODES = [
         type: 'question',
         module: 1,
         title: 'Select Approach',
-        body: 'Choose intubation approach based on patient status and airway assessment.',
+        body: 'Choose intubation approach based on patient status and airway assessment.\n\n*Basis:* These three approaches are NOT of equal measured performance. In the National Emergency Airway Registry analysis of 12,511 ED intubations, unadjusted first-attempt success was 61% for ketamine-only, 85% for topical anaesthesia (with or without low-dose sedation), and 90% for RSI; at least one adverse event occurred in 32%, 19%, and 14% respectively. The difference in first-pass success between the ketamine-only and topical groups was -24% (95% CI -37% to -12%), favouring topical anaesthesia. These are observational, unadjusted comparisons with substantial confounding by indication (the ketamine-only and topical groups together were only 1.4% of encounters and were selected precisely because they were expected to be difficult), so they cannot be read as causal. [11] Selecting among these approaches is a clinician judgement made under the ASA and Difficult Airway Society difficult-airway frameworks, not an algorithmic output. [7,8]',
+        citation: [7, 8, 11],
         options: [
             {
                 label: 'Awake/Breathing approach',

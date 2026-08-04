@@ -52,8 +52,8 @@ export const PHOSPHORUS_DISORDERS_NODES = [
         type: 'info',
         module: 2,
         title: 'Severe Hypophosphatemia',
-        body: 'Use IV phosphate when phos <1 mg/dL, severe symptoms, inability to take PO, respiratory failure, myocardial dysfunction, rhabdomyolysis, hemolysis, or critical illness.\n\nTypical adult IV strategy: 0.2-0.6 mmol/kg over about 6 hours, with the higher end for phos <1 mg/dL and normal renal function. Reduce dose by about 50% in renal dysfunction.\n\nUse potassium phosphate only if potassium is low/normal and renal function allows. Use sodium phosphate when K is high, renal function is impaired, or potassium load is unsafe.',
-        citation: [1, 2],
+        body: 'Use IV phosphate when phos <1 mg/dL, severe symptoms, inability to take PO, respiratory failure, myocardial dysfunction, rhabdomyolysis, hemolysis, or critical illness.\n\nTypical adult IV strategy — dose is elemental phosphorus and is the same for either salt, infused over about 6 hours:\n- Phos 1.7-2.2 mg/dL: 0.2 mmol/kg\n- Phos 1.0-1.7 mg/dL: 0.4 mmol/kg\n- Phos <1.0 mg/dL: 0.6 mmol/kg\nReduce dose by about 50% in renal dysfunction. Do not exceed 45 mmol phosphorus in a single dose.\n\nUse [potassium phosphate](#/drug/potassium-phosphate/Severe hypophosphatemia) only if potassium is low/normal (label threshold: serum K below 4 mEq/L) and renal function allows. It carries a fixed 1.47 mEq of potassium per mmol of phosphorus — 30 mmol P = 44 mEq K, 45 mmol P = 66 mEq K. Count that against every other potassium the patient is receiving.\n\nUse [sodium phosphate](#/drug/sodium-phosphate/Severe hypophosphatemia) when K is high, renal function is impaired, or potassium load is unsafe. It carries 1.33 mEq sodium per mmol phosphorus.\n\nRate for potassium phosphate is limited by the potassium: 6.8 mmol/hr phosphorus peripherally (10 mEq/hr K), 15 mmol/hr centrally (22 mEq/hr K), continuous ECG above 10 mEq/hr K. Do not run phosphate through a line carrying calcium.',
+        citation: [1, 2, 7, 8, 9],
         next: 'phos-monitoring',
         summary: 'IV phosphate for phos <1 or symptomatic; choose NaPhos vs KPhos by potassium and renal function.',
         safetyLevel: 'critical',
@@ -130,7 +130,7 @@ export const PHOSPHORUS_DISORDERS_NODES = [
         type: 'result',
         module: 4,
         title: 'STOP: Phosphate Pitfalls',
-        body: '- Do not give IV phosphate without checking potassium and renal function.\n- Do not use potassium phosphate when hyperkalemic, anuric, or high-risk for potassium accumulation.\n- Do not give repeated IV calcium for asymptomatic hypocalcemia from severe hyperphosphatemia/TLS; treat phosphate and clinical instability.\n- Do not ignore magnesium; phosphate depletion and phosphate replacement can both worsen Mg problems.\n- Do not discharge severe, symptomatic, recurrent, renal-failure, TLS, rhabdo, DKA, or refeeding-risk phosphate disorders without a monitoring plan.',
+        body: '- Do not give IV phosphate without checking potassium and renal function.\n- Do not use potassium phosphate when hyperkalemic, anuric, or high-risk for potassium accumulation — it delivers a fixed 1.47 mEq of potassium per mmol of phosphorus (30 mmol P = 44 mEq K), and the FDA label restricts it to serum K below 4 mEq/L.\n- Do not run phosphate through a line carrying calcium (lactated Ringer, calcium gluconate), and do not exceed 6.8 mmol/hr peripherally or 15 mmol/hr centrally — rapid infusion causes transient hyperphosphatemia, acute hypocalcemia and precipitation.\n- Do not give repeated IV calcium for asymptomatic hypocalcemia from severe hyperphosphatemia/TLS; treat phosphate and clinical instability.\n- Do not ignore magnesium; phosphate depletion and phosphate replacement can both worsen Mg problems.\n- Do not discharge severe, symptomatic, recurrent, renal-failure, TLS, rhabdo, DKA, or refeeding-risk phosphate disorders without a monitoring plan.',
         recommendation: 'Phosphate therapy is paired-electrolyte therapy: recheck Ca/Mg/K/Cr and treat the driver.',
         citation: [1, 2, 3, 5],
         confidence: 'recommended',
@@ -149,5 +149,8 @@ export const PHOSPHORUS_DISORDERS_CITATIONS = [
     { num: 4, text: 'KDIGO CKD-MBD Update Work Group. KDIGO 2017 Clinical Practice Guideline Update for CKD-MBD. Kidney Int Suppl. 2017;7:1-59.' },
     { num: 5, text: 'Howard SC, Jones DP, Pui CH. The Tumor Lysis Syndrome. N Engl J Med. 2011;364:1844-1854. doi:10.1056/NEJMra0904569.' },
     { num: 6, text: 'Farkas J. Refeeding syndrome. Internet Book of Critical Care (IBCC). EMCrit. Updated 2024. https://emcrit.org/ibcc/refeeding/' },
+    { num: 7, text: 'Geerse DA, Bindels AJ, Kuiper MA, Roos AN, Spronk PE, Schultz MJ. Treatment of hypophosphatemia in the intensive care unit: a review. Crit Care. 2010;14(4):R147.' },
+    { num: 8, text: 'Potassium Phosphates Injection, USP. FDA prescribing information. Fresenius Kabi USA. DailyMed. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fbbd8380-9848-4862-8c73-2f53fcdf7120' },
+    { num: 9, text: 'Sodium Phosphates Injection, USP, 3 mM P/mL. FDA prescribing information. Hospira/Pfizer. DailyMed. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e6169d3b-39d2-47f9-8d5b-b53ec069a722' },
 ];
 export const PHOSPHORUS_DISORDERS_NODE_COUNT = PHOSPHORUS_DISORDERS_NODES.length;

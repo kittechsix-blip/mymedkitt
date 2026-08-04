@@ -178,7 +178,7 @@ export const STOP_PAGES_11 = {
         sections: [
             {
                 heading: '🛑 Do NOT give amiodarone for Torsades de Pointes',
-                body: 'Polymorphic VT with prolonged QTc is Torsades — and amiodarone prolongs the QT interval, making it directly contraindicated. The correct treatment is magnesium sulfate 2g IV. Confusing TdP with standard VF/VT and giving amiodarone can be fatal. [See this node](#/node/ca-tdp-link).',
+                body: 'Polymorphic VT with prolonged QTc is Torsades — and amiodarone prolongs the QT interval, making it directly contraindicated. The correct treatment is magnesium sulfate 2g IV, repeated at 5-15 minutes if it persists, then a continuous infusion. Confusing TdP with standard VF/VT and giving amiodarone can be fatal. [See this node](#/node/ca-tdp-link).',
             },
             {
                 heading: '🛑 Do NOT interrupt CPR for >10 seconds',

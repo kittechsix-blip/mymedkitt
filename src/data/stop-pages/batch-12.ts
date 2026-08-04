@@ -116,7 +116,7 @@ const WIDE_COMPLEX_TACHYCARDIA_STOP: InfoPage = {
     },
     {
       heading: '🛑 Do NOT give amiodarone or procainamide for Torsades',
-      body: '**Torsades de Pointes (polymorphic VT + long QT) requires MAGNESIUM** — 2-4g IV over 15 minutes. Amiodarone and procainamide both prolong the QT interval, which worsens Torsades and can be lethal. If Torsades recurs → overdrive pacing.',
+      body: '**Torsades de Pointes (polymorphic VT + long QT) requires MAGNESIUM** — 2 g IV over 5-15 minutes, repeated at 5-15 minutes if it persists, then a continuous infusion. Amiodarone and procainamide both prolong the QT interval, which worsens Torsades and can be lethal. If Torsades recurs → overdrive pacing.',
     },
     {
       heading: '🛑 Do NOT give antiarrhythmics for sodium channel blocker toxicity',

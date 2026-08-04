@@ -1,0 +1,8 @@
+{
+  "generated": "run --update-baseline to regenerate",
+  "coverage": {
+    "trees": 353,
+    "declared": 4772
+  },
+  "keys": []
+}

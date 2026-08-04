@@ -228,7 +228,7 @@ INSERT INTO decision_nodes (id, tree_id, type, module, title, body, citation, op
 • **Fluids:** [Normal saline](#/drug/saline-0.9%) 500-1000 mL IV bolus over 30-60 min. Reassess HR, BP, perfusion.
 • **Insulin:** Consider 10 U IV bolus IF: serum K <5.3 AND pH <6.9 AND delay to insulin drip. Otherwise start drip immediately (see Module 5). [1]
 • **Potassium:** Check K level STAT. If <3.3, HOLD insulin and replete K first (critical). If 3.3-5.3, start K repletion concurrent with insulin. [1]
-• **Bicarbonate:** Consider IV bicarbonate if pH <6.9 and BOHB >15 — risk of cardiovascular collapse. Hypertonic 8.4% bicarb: 100 mL IV over 5-10 min, recheck pH in 2-4 hrs. [2]
+• **Bicarbonate:** NOT routine at any pH — fluids, insulin and potassium are definitive and no trial has shown benefit. The 2024 ADA/EASD/JBDS/AACE/DTS consensus considers bicarbonate only if acidosis is severe (pH <7.0), superseding the 2009 pH <6.9 threshold. If given: **100 mmol (100 mL of 8.4%) in 400 mL sterile water — an ISOTONIC infusion — q2h until pH >7.0.** Do NOT push undiluted 8.4%. [1,12]
 
 **Disposition:** ICU admission mandatory.
 **Monitoring:** Reassess labs q1-2h initially.',
@@ -259,7 +259,7 @@ INSERT INTO decision_nodes (id, tree_id, type, module, title, body, citation, op
 • Continuous fetal monitoring
 • Obstetric & endocrinology co-management
 • Insulin demand increases significantly in third trimester — may need 10-20 U/kg/day
-• Avoid bicarb if pH >6.9
+• Avoid bicarbonate — not routine at any pH; consider only if pH <7.0 (2024 ADA/EASD), and then only as the isotonic 100 mmol-in-400 mL preparation
 
 **Insulin pump users:**
 • Rapid onset — often severe at presentation
@@ -813,7 +813,7 @@ INSERT INTO decision_nodes (id, tree_id, type, module, title, body, citation, op
 • Continue insulin, K repletion, fluids
 • Often can transition off drip once HCO3 >18
 
-**Controversial:** Some experts avoid routine bicarb unless pH <7.0; others use when HCO3 <10. Use clinical judgment.',
+**Controversial — note the scope:** this node is about hyperchloremic NAGMA during DKA recovery, not the ketoacidosis itself. For the ketoacidosis, bicarbonate is not routine at any pH and the 2024 ADA/EASD consensus considers it only if pH <7.0 (superseding the 2009 pH <6.9). Practice for NAGMA varies (some treat at HCO3 <10, some not at all) and no outcome data support either. Use clinical judgment. [1]',
  '[1,2,5,9]'::jsonb, '[]'::jsonb, '[]'::jsonb, 'dka-stopping-criteria', NULL, NULL, NULL, '[]'::jsonb, '[]'::jsonb, 29)
 ;
 
@@ -908,7 +908,7 @@ INSERT INTO decision_nodes (id, tree_id, type, module, title, body, citation, op
 
 **Preoperative management:**
 • AGGRESSIVE pre-intubation resuscitation — 1-2L fluid bolus if not already given
-• [Intravenous bicarbonate](#/drug/sodium-bicarbonate/DKA): Consider if pH <6.9 prior to intubation
+• [Intravenous bicarbonate](#/drug/sodium-bicarbonate/DKA): Not routine — consider only if pH <7.0 (2024 ADA/EASD, superseding the 2009 pH <6.9), given as 100 mmol in 400 mL sterile water (isotonic), not an undiluted push
 • Correct severe hyperkalemia (K >6.5) with insulin bolus
 
 **Drug selection:**
@@ -1057,7 +1057,7 @@ INSERT INTO decision_nodes (id, tree_id, type, module, title, body, citation, op
 • [Normal saline or balanced crystalloid](#/drug/saline-0.9/): IV bolus then maintenance (or switch to D10W once glucose <300)
 • [Magnesium sulfate](#/drug/magnesium/DKA): 1-2 g IV once if Mg <1.5
 • [Thiamine](#/drug/thiamine/DKA): 100 mg IV on admission
-• Consider [sodium bicarbonate](#/drug/sodium-bicarbonate/DKA) if pH <6.9 (250 mL isotonic or ampules)
+• [Sodium bicarbonate](#/drug/sodium-bicarbonate/DKA) is NOT routine — consider only if pH <7.0 (2024 ADA/EASD): 100 mmol in 400 mL sterile water (isotonic) q2h until pH >7.0
 
 **Consultations:**
 • Endocrinology (mandatory)

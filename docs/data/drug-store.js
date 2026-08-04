@@ -1469,7 +1469,7 @@ const DEXTROSE = {
         },
         {
             indication: 'Hyperkalemia — With Insulin',
-            regimen: 'D50W 50 mL (25g) IV with 10 units regular insulin IV. Dextrose prevents insulin-induced hypoglycemia. Monitor glucose q30min for 4 hours. Some protocols give D50W first, then insulin.',
+            regimen: 'D50W 50 mL (25g) IV given WITH IV regular insulin for K+ shift. Dextrose prevents insulin-induced hypoglycemia; omit only if glucose >250 mg/dL. The insulin dose is NOT set here — it is branch-dependent (5 units, or 10 units only with normal renal function AND adequate glucose): see [Regular Insulin](#/drug/regular-insulin/hyperkalemia). Some protocols give D50W first, then insulin. Monitor fingerstick glucose at 30 min, 1 h, 2 h, 4 h and 6 h (UKKA 2023) — hypoglycemia is frequently delayed past the ~4 h K+ effect.',
         },
         {
             indication: 'High-dose insulin euglycemia therapy',
@@ -3423,7 +3423,7 @@ const MAGNESIUM_SULFATE = {
         },
         {
             indication: 'Torsades de pointes',
-            regimen: 'EMCrit/Farkas protocol:\n\u2022 Bolus: 4 g IV over 20 min (or faster if unstable/pulseless)\n\u2022 Infusion: 1 g/hr \u00d7 4 hours, then 0.5 g/hr \u00d7 20 hours\n\u2022 Target serum Mg: 3.5\u20135.0 mg/dL (much higher than standard repletion)\n\u2022 Give EVEN IF serum Mg is normal \u2014 intracellular stores are depleted\n\u2022 Rationale: covers drug washout period (e.g., dofetilide t\u00bd = 10h) and repletes intracellular Mg.\nAntidote for Mg toxicity: Calcium gluconate 1 g IV.',
+            regimen: '**2 g IV** \u2014 the guideline dose (Tzivoni 1988; 2020 AHA lists magnesium COR 2b for TdP and states no dose; 1\u20132 g is ACLS operational teaching).\n\u2022 Pulseless or unstable: 2 g diluted in 10 mL D5W/NS, IV/IO push over 1\u20132 min\n\u2022 Perfusing rhythm: 2 g in 50\u2013100 mL D5W/NS over 5\u201315 min\n\u2022 Repeat 2 g at 5\u201315 min if the rhythm persists\n\u2022 **THEN START AN INFUSION \u2014 1\u20134 g/hr, titrated to rhythm.** A bolus alone lets the level fall over hours; recurrence at 2\u20134 h in a monitored bed is the predictable miss. Tzivoni: 9 of 12 patients required a 7\u201348 h infusion.\n\u2022 Give regardless of the serum magnesium \u2014 intracellular stores are depleted and levels were normal in every measured patient in the trial that established this.\n\n**Alternative (EMCrit/IBCC front-load, NOT the guideline number):** 4 g IV over 20 min, then 1 g/hr \u00d7 4 h, then 0.5 g/hr \u00d7 20 h\n\u2022 Target serum Mg: 3.5\u20135.0 mg/dL (much higher than standard repletion)\n\u2022 Give EVEN IF serum Mg is normal \u2014 intracellular stores are depleted\n\u2022 Rationale: covers drug washout period (e.g., dofetilide t\u00bd = 10h) and repletes intracellular Mg.\nAntidote for Mg toxicity: Calcium gluconate 1 g IV.',
         },
         {
             indication: 'TCA Overdose — Ventricular Arrhythmia',
@@ -3459,9 +3459,14 @@ const MAGNESIUM_SULFATE = {
     monitoring: 'Serum magnesium levels every 6-8 hours during infusion. Deep tendon reflexes. Respiratory rate. Renal function.',
     notes: 'Excellent safety profile \u2014 one meta-analysis detected no reported adverse events. Blocks slow calcium channels in SA and AV nodes. Even when cardioversion does not occur, magnesium reduces heart rate and augments efficacy of other antiarrhythmics and DC cardioversion. In one RCT, continuous magnesium infusion was superior to amiodarone for new-onset AF. The combination of aggressive magnesium loading plus amiodarone achieved 90% cardioversion rate in critically ill patients.',
     citations: [
-        'Joglar JA, et al. 2023 ACC/AHA/ACCP/HRS Guideline for AF. J Am Coll Cardiol. 2024;83(1):109-279.',
-        'Moran JL, et al. Parenteral MgSO4 vs Amiodarone for Atrial Tachyarrhythmias. Crit Care Med. 1995;23(11):1816-24.',
-        'Bosch NA, et al. Atrial Fibrillation in the ICU. Chest. 2018;154(6):1424-1434.',
+        'Tzivoni D, et al. Treatment of torsade de pointes with magnesium sulfate. Circulation. 1988;77(2):392-397.',
+        'Panchal AR, et al. Part 3: Adult Basic and Advanced Life Support. 2020 AHA Guidelines for CPR and ECC. Circulation. 2020;142(16_suppl_2):S366-S468.',
+        'Al-Khatib SM, et al. 2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death. Circulation. 2018;138(13):e272-e391.',
+        'Kalus JS. Torsades de Pointes. StatPearls [Internet]. StatPearls Publishing; NBK459388.',
+        'Farkas J. Torsade de Pointes. EMCrit Internet Book of Critical Care. emcrit.org/ibcc/storm',
+        'Joglar JA, et al. 2023 ACC/AHA/ACCP/HRS Guideline for AF. J Am Coll Cardiol. 2024;83(1):109-279. (A-Fib adjunctive card)',
+        'Moran JL, et al. Parenteral MgSO4 vs Amiodarone for Atrial Tachyarrhythmias. Crit Care Med. 1995;23(11):1816-24. (A-Fib adjunctive card)',
+        'Bosch NA, et al. Atrial Fibrillation in the ICU. Chest. 2018;154(6):1424-1434. (A-Fib adjunctive card)',
     ],
 };
 const MAGNESIUM_SULFATE_ASTHMA = {
@@ -4915,6 +4920,87 @@ const PIPERACILLIN_TAZOBACTAM = {
         'Chanderraj R, et al. Mortality of Patients With Sepsis Administered Piperacillin-Tazobactam vs Cefepime. JAMA Intern Med. 2024;184(7):769.',
     ],
 };
+const POTASSIUM_PHOSPHATE = {
+    id: 'potassium-phosphate',
+    name: 'Potassium Phosphate (IV)',
+    genericName: 'Potassium phosphates injection, USP',
+    drugClass: 'Electrolyte supplement',
+    route: 'IV',
+    indications: ['Severe hypophosphatemia (adult IV repletion)', 'DKA phosphate repletion', 'Refeeding syndrome phosphate repletion'],
+    dosing: [
+        {
+            indication: 'Severe hypophosphatemia — adult IV repletion',
+            regimen: 'Dose is ELEMENTAL PHOSPHORUS and is identical for either salt. Weight-based, infused over about 6 hours:\n\nPhos 1.7-2.2 mg/dL: 0.2 mmol/kg\nPhos 1.0-1.7 mg/dL: 0.4 mmol/kg\nPhos <1.0 mg/dL: 0.6 mmol/kg\n\nDose on actual body weight. Reduce by about 50% in renal impairment or AKI.\n\nMAXIMUM initial or single dose 45 mmol phosphorus (= 66 mEq potassium). Severe deficits often need 60-90 mmol total — recheck and redose rather than exceeding the cap in one order.\n\nDilute in 100-250 mL NS or D5W for adults and patients 12 years and older. NEVER give undiluted or by IV push.',
+        },
+        {
+            indication: 'DKA phosphate repletion',
+            regimen: 'Replete when phosphate <1.5 mg/dL, or for respiratory/cardiac dysfunction, rhabdomyolysis or hemolysis. Routine phosphate repletion in DKA has not shown outcome benefit.\n\nEvery mmol of phosphorus given as this salt carries 1.47 mEq of potassium. Count it against the DKA potassium infusion (up to 40 mEq/hr) before ordering — the two orders do not know about each other.',
+        },
+    ],
+    contraindications: [
+        'Hyperkalemia',
+        'Serum potassium 4 mEq/L or higher — the FDA label restricts this product to serum potassium below 4 mEq/L; use sodium phosphate instead',
+        'Severe renal failure with anuria',
+        'Hyperphosphatemia',
+        'Untreated Addison disease',
+    ],
+    cautions: [
+        'POTASSIUM CONTENT IS FIXED AND NOT ADJUSTABLE: phosphorus 3 mmol + potassium 4.4 mEq per mL = 1.47 mEq K per mmol P. 15 mmol P = 22 mEq K; 30 mmol P = 44 mEq K; 45 mmol P = 66 mEq K',
+        'Maximum infusion rate is set by the potassium, not the phosphate: phosphorus 6.8 mmol/hr peripherally (potassium 10 mEq/hr), phosphorus 15 mmol/hr centrally (potassium 22 mEq/hr)',
+        'Continuous ECG monitoring for rates above potassium 10 mEq/hr in adults and patients 20 kg or greater, or 0.5 mEq/kg/hr in smaller pediatric patients',
+        'Do NOT infuse with calcium-containing IV fluids (lactated Ringer, calcium gluconate) — calcium-phosphate precipitation. Use a separate line or flush between',
+        'Check serum potassium AND calcium before administration and normalize the calcium first; rapid infusion causes transient hyperphosphatemia then acute hypocalcemia, tetany and QT prolongation',
+        'Switch to sodium phosphate when K is 4 mEq/L or higher, renal function is impaired, or potassium is being released by tumor lysis, rhabdomyolysis or hemolysis',
+        'Correct magnesium in parallel — hypomagnesemia makes both potassium and phosphate repletion refractory',
+        'Oral phosphate products do NOT share this ratio (K-Phos Neutral and Phospha 250 Neutral supply about 250 mg phosphorus with only 1.1 mEq potassium and 13 mEq sodium per tablet). Read the specific product label before assuming a potassium load',
+    ],
+    monitoring: 'Serum phosphorus, potassium, calcium (ionized where available), magnesium and creatinine before the dose and 2-4 hours after the infusion completes. Continuous cardiac monitoring for high potassium rates or any concurrent potassium infusion. In refeeding, check phosphate, potassium and magnesium q6-12h for the first 72 hours.',
+    notes: 'Potassium phosphate is a potassium product that happens to carry phosphate — the potassium rides along and cannot be dialled down independently. Worked example: an 80 kg adult given the top-of-range 0.6 mmol/kg receives 48 mmol phosphorus = 70 mEq potassium, above the labelled single-dose maximum. Split the dose or use sodium phosphate.',
+    citations: [
+        'Potassium Phosphates Injection, USP — FDA prescribing information. Fresenius Kabi USA. DailyMed. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fbbd8380-9848-4862-8c73-2f53fcdf7120',
+        'Geerse DA, Bindels AJ, Kuiper MA, Roos AN, Spronk PE, Schultz MJ. Treatment of hypophosphatemia in the intensive care unit: a review. Crit Care. 2010;14(4):R147.',
+        'Taylor BE, Huey WY, Buchman TG, Boyle WA, Coopersmith CM. Treatment of hypophosphatemia using a protocol based on patient weight and serum phosphorus level in a surgical intensive care unit. J Am Coll Surg. 2004;198(2):198-204.',
+    ],
+};
+const SODIUM_PHOSPHATE = {
+    id: 'sodium-phosphate',
+    name: 'Sodium Phosphate (IV)',
+    genericName: 'Sodium phosphates injection, USP (3 mmol phosphorus/mL)',
+    drugClass: 'Electrolyte supplement',
+    route: 'IV',
+    indications: ['Severe hypophosphatemia when a potassium load is unsafe', 'Hypophosphatemia with hyperkalemia or renal impairment', 'Phosphorus source in parenteral nutrition'],
+    dosing: [
+        {
+            indication: 'Severe hypophosphatemia — adult IV repletion',
+            regimen: 'Dose is ELEMENTAL PHOSPHORUS and is identical to potassium phosphate — only the counter-ion changes. Weight-based, infused over about 6 hours:\n\nPhos 1.7-2.2 mg/dL: 0.2 mmol/kg\nPhos 1.0-1.7 mg/dL: 0.4 mmol/kg\nPhos <1.0 mg/dL: 0.6 mmol/kg\n\nFixed-dose alternative: 15 mmol over 2 hours if phosphate >1.5 mg/dL; 30-45 mmol over 4 hours if phosphate <1.5 mg/dL.\n\nReduce by about 50% in renal impairment. MUST BE DILUTED before IV use — never undiluted, never IV push.',
+        },
+        {
+            indication: 'Parenteral nutrition phosphorus source',
+            regimen: 'Approximately 10-15 mmol phosphorus per litre of TPN is usually adequate for adults. Infants on TPN: 1.5-2 mmol/kg/day.',
+        },
+    ],
+    contraindications: [
+        'Hyperphosphatemia',
+        'Hypocalcemia — correct calcium first',
+        'Hypernatremia',
+        'Severe renal failure with anuria',
+    ],
+    cautions: [
+        'SODIUM CONTENT: phosphorus 3 mmol + sodium 4 mEq per mL = 1.33 mEq Na per mmol P. 45 mmol phosphorus delivers 60 mEq sodium',
+        'Infuse slowly to avoid phosphate intoxication — 7.5 mmol/hr is the conservative standard and is as effective as faster rates; up to 15 mmol/hr is used in monitored ICU settings',
+        'Rapid infusion causes transient hyperphosphatemia leading to hypocalcemic tetany, QT prolongation, arrhythmia and hypotension',
+        'Do NOT infuse with calcium-containing IV fluids (lactated Ringer, calcium gluconate) — calcium-phosphate precipitation',
+        'Avoid or split the deficit when a sodium load is unsafe: decompensated heart failure, cirrhosis with ascites, severe hypernatremia',
+        'Aluminum toxicity risk with prolonged administration in renal impairment and in premature neonates',
+    ],
+    monitoring: 'Serum calcium, sodium, inorganic phosphate, magnesium and renal function before and after the infusion. Recheck phosphorus 2-4 hours after the infusion completes.',
+    notes: 'This is the salt to use when the patient cannot take a potassium load: serum potassium 4 mEq/L or higher, renal impairment or AKI, adrenal insufficiency, concurrent ACE inhibitor / ARB / potassium-sparing diuretic / trimethoprim, or ongoing cell lysis (tumor lysis, rhabdomyolysis, hemolysis, crush). The phosphorus dose is unchanged.',
+    citations: [
+        'Sodium Phosphates Injection, USP, 3 mM P/mL — FDA prescribing information. Hospira/Pfizer. DailyMed. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e6169d3b-39d2-47f9-8d5b-b53ec069a722',
+        'Geerse DA, Bindels AJ, Kuiper MA, Roos AN, Spronk PE, Schultz MJ. Treatment of hypophosphatemia in the intensive care unit: a review. Crit Care. 2010;14(4):R147.',
+        'Charron T, Bernard F, Skrobik Y, Simoneau N, Gagnon N, Leblanc M. Intravenous phosphate in the intensive care unit: more aggressive repletion regimens for moderate and severe hypophosphatemia. Intensive Care Med. 2003;29(8):1273-8.',
+    ],
+};
 const POTASSIUM_ACETATE = {
     id: 'potassium-acetate',
     name: 'Potassium Acetate (IV)',
@@ -4925,7 +5011,7 @@ const POTASSIUM_ACETATE = {
     dosing: [
         {
             indication: 'DKA — preferred potassium salt',
-            regimen: '20-40 mEq/hr IV with continuous cardiac monitoring.\n\nPreferred over KCl in DKA to reduce chloride load and prevent hyperchloremic non-anion gap metabolic acidosis (NAGMA).\n\nGoal: Maintain K >5 mEq/L during acute DKA.\nCheck K q1-2h × 6 hours, then q4h minimum.\n\nIf K <3.3: 40 mEq/hr — HOLD insulin until K >3.3.',
+            regimen: '20-30 mEq per LITRE of IV fluid — a CONCENTRATION in the bag, not an hourly rate. Separate RATE ceiling: 10 mEq/hr peripheral, 10-20 mEq/hr only via central line with continuous cardiac monitoring.\n\nPreferred over KCl in DKA to reduce chloride load and prevent hyperchloremic non-anion gap metabolic acidosis (NAGMA).\n\nGoal: Maintain K 4-5 mEq/L; withhold potassium once K >5.0 mEq/L.\nCheck K q1-2h × 6 hours, then q4h minimum.\n\nIf K <3.3: 10 mEq/hr (10-20 mEq/hr only via central line with cardiac monitoring) — HOLD insulin until K >3.3.',
         },
         {
             indication: 'DKA — hemodialysis patient',
@@ -4959,11 +5045,11 @@ const POTASSIUM_CHLORIDE_IV = {
     dosing: [
         {
             indication: 'DKA — K+ <3.3 (HOLD insulin)',
-            regimen: '40 mEq/hr IV with continuous cardiac monitoring. HOLD insulin until K+ >3.3 — fatal arrhythmias if K falls further with insulin.\n\nGoal: Bring K to 3.3-3.5 before starting insulin.\nCheck K q1-2h during repletion — often need 40-80 mEq to raise K by 0.5-1 mEq/L.\n\nAlternative: Potassium acetate preferred to reduce chloride load and NAGMA risk.',
+            regimen: '10 mEq/hr IV — a RATE, not a bag concentration. Up to 10-20 mEq/hr ONLY with central venous access + continuous cardiac monitoring; peripheral ceiling is 10 mEq/hr at max 40 mEq/L. HOLD insulin until K+ >3.3 — fatal arrhythmias if K falls further with insulin.\n\nGoal: Bring K to 3.3-3.5 before starting insulin.\nCheck K q1-2h during repletion — often need 40-80 mEq to raise K by 0.5-1 mEq/L.\n\nAlternative: Potassium acetate preferred to reduce chloride load and NAGMA risk.',
         },
         {
             indication: 'DKA — K+ 3.3-5.3 (concurrent with insulin)',
-            regimen: '20-40 mEq/hr IV. Goal: Maintain K >5 mEq/L during acute DKA.\n\nGive concurrently with insulin drip — insulin rapidly shifts K intracellularly.\nCheck K q1-2h × 6 hours, then q4h minimum.',
+            regimen: '20-30 mEq of potassium per LITRE of IV fluid — a CONCENTRATION in the bag, not an hourly rate. Separate RATE ceiling: 10 mEq/hr peripheral, 10-20 mEq/hr only via central line with cardiac monitoring. Goal: Maintain K 4-5 mEq/L; withhold potassium once K >5.0 mEq/L.\n\nGive concurrently with insulin drip — insulin rapidly shifts K intracellularly.\nCheck K q1-2h × 6 hours, then q4h minimum.',
         },
         {
             indication: 'Severe hypokalemia (life-threatening)',
@@ -5274,11 +5360,12 @@ const REGULAR_INSULIN = {
         },
         {
             indication: 'Hyperkalemia',
-            regimen: '5 units regular insulin IV bolus (NOT subcutaneous). Must give with dextrose unless glucose >250 mg/dL.',
+            regimen: 'Regular insulin IV bolus (NOT subcutaneous) — dose by hypoglycemia risk. Give WITH 25 g dextrose (D50W 50 mL) unless glucose >250 mg/dL.\n\n• 5 units (or 0.1 units/kg, max 10) — eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes\n• 10 units — normal renal function AND adequate glucose\n\nCheck glucose at 30, 60, 120 and 240 minutes.',
+            weightCalc: { dosePerKg: 0.1, unit: 'units', maxDose: 10, label: 'Weight-based alternative (adult low-risk-dose branch)' },
         },
         {
             indication: 'Dextrose co-administration',
-            regimen: 'If glucose <250: D50W 2 ampules (100 mL total, 50g dextrose) OR D10W 500 mL over 4 hours. If glucose 180-250: half-dose dextrose (25g). If glucose >250: no dextrose needed.',
+            regimen: 'Give 25 g dextrose with the hyperkalemia insulin dose unless glucose >250 mg/dL: D50W 50 mL (1 ampule) IV push, OR D10W 250 mL infusion (same 25 g, less rebound hypoglycemia and less venous irritation). If glucose >250 mg/dL: no dextrose needed.\n\nInsulin dose is branch-specific — see the Hyperkalemia entry above; do not infer it from the dextrose volume.',
         },
     ],
     contraindications: [
@@ -5286,7 +5373,7 @@ const REGULAR_INSULIN = {
     ],
     cautions: [
         'Must be given IV — subcutaneous absorption is unpredictable in critical illness',
-        '5 units (not 10) reduces hypoglycemia risk from 15-20% to <5% with similar K-lowering effect',
+        'Dose by hypoglycemia risk, not by habit: 5 units (or 0.1 units/kg, max 10) if eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes; 10 units if renal function is normal AND glucose is adequate. 5 units roughly halves the odds of hypoglycemia — 19.5% vs 28.6% (LaRue 2017, renal insufficiency); pooled OR 0.55, 10 studies, n=3437 (Moussavi 2021) — but does NOT eliminate it; no series reports under 5%. 10 units lowered K+ more in Finder 2022 (-0.9 vs -0.63 mmol/L, p=0.001) and Pierce 2020 (-1.11 vs -0.94 mmol/L, p=0.008); UKKA 2023 specifies 10 units in 25 g glucose with no renal reduction, KDIGO specifies 5 units and concedes the data are limited.',
         'Potassium shift lasts ~4 hours — may need redosing',
         'Risk factors for hypoglycemia: renal dysfunction, no diabetes, low baseline glucose, low body weight, female sex',
     ],
@@ -6932,7 +7019,7 @@ const SODIUM_BICARBONATE = {
     contraindications: ['Metabolic alkalosis', 'Severe pulmonary edema / uncontrolled volume overload (significant sodium load)', 'Severe hypernatremia without overriding benefit', 'Primary respiratory acidosis without ventilation correction', 'Hypochloremia'],
     cautions: [
         'NOT recommended for routine cardiac arrest or CPR (AHA/ERC guidelines) — unless confirmed hyperkalemia or TCA overdose',
-        'NOT recommended for routine DKA — insulin and fluids are definitive therapy. Use only if pH < 6.9',
+        'NOT recommended for routine DKA — insulin and fluids are definitive therapy. The 2024 ADA/EASD consensus considers it only if pH < 7.0 (superseding the 2009 pH < 6.9), given as 100 mmol in 400 mL sterile water (isotonic), never as an undiluted push',
         'Causes acute hypokalemia — K+ shifts intracellularly with alkalinization. Monitor K+ closely',
         'Ionized calcium drops with alkalinization — can precipitate tetany or seizures in hypocalcemic patients',
         'Paradoxical CNS acidosis possible with rapid bolus — CO2 crosses the blood-brain barrier faster than HCO3',
@@ -11942,7 +12029,8 @@ const INSULIN_REGULAR = {
         },
         {
             indication: 'Severe hyperkalemia (acute)',
-            regimen: '10 units IV regular insulin WITH 25 g dextrose (50 mL of D50W) IV — give dextrose first or simultaneously to prevent hypoglycemia. Onset 15–30 min, duration 4–6 hours.\n\nIn renal failure or persistent K elevation, the 10 unit/25 g protocol may cause hypoglycemia in up to 20% of patients — consider 5 units IV with 25 g dextrose, especially if baseline glucose <150 mg/dL or AKI/CKD. Recheck glucose at 30 min, 1 hr, 2 hr, and 4–6 hr.\n\nNOT a standalone treatment — combine with calcium gluconate (membrane stabilization), bicarbonate (if acidosis), beta-2 agonist (albuterol nebulizer), and definitive K removal (lokelma/SZC, patiromer, dialysis).',
+            regimen: 'Regular insulin IV — dose by hypoglycemia risk. Give WITH 25 g dextrose (50 mL of D50W) IV, first or simultaneously, unless glucose >250 mg/dL.\n\n• 5 units (or 0.1 units/kg, max 10) — eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes\n• 10 units — normal renal function AND adequate glucose\n\nOnset 15–30 min, duration 4–6 hours. Check glucose at 30, 60, 120 and 240 minutes.\n\nNOT a standalone treatment — combine with calcium gluconate (membrane stabilization), bicarbonate (if acidosis), beta-2 agonist (albuterol nebulizer), and definitive K removal (lokelma/SZC, patiromer, dialysis).',
+            weightCalc: { dosePerKg: 0.1, unit: 'units', maxDose: 10, label: 'Weight-based alternative (adult low-risk-dose branch)' },
         },
         {
             indication: 'Hyperglycemia (general SC)',
@@ -11964,7 +12052,7 @@ const INSULIN_REGULAR = {
         'In SGLT2-induced euglycemic DKA, glucose is normal but anion gap is wide — the diagnosis is missed without checking pH, bicarb, and ketones',
     ],
     monitoring: 'Hourly fingerstick glucose during IV infusion. Electrolytes (K, Mg, PO4) q2–4 hr in DKA/HHS. Anion gap q2–4 hr (treatment endpoint). Bicarbonate. pH. Mental status (especially pediatric — cerebral edema). Urine output. For hyperK: glucose at 30 min, 1 hr, 2 hr, 4 hr after dose.',
-    notes: 'In DKA, the endpoint is anion gap closure and bicarbonate ≥18, NOT glucose normalization. Stopping insulin when glucose hits 200 mg/dL while the anion gap is still wide leads to rebound ketoacidosis. Always add dextrose to fluids when glucose <200 to allow continued insulin therapy. SGLT2-induced euglycemic DKA is a growing problem — flozins (canagliflozin, dapagliflozin, empagliflozin) cause DKA with normal glucose; diagnosis requires checking pH/anion gap/ketones in any flozin user with vomiting or abdominal pain. For severe hyperkalemia, modern protocols favor 5 units IV with 25 g dextrose (vs. traditional 10 units) in renal-impaired or low-glucose patients to reduce hypoglycemia risk.',
+    notes: 'In DKA, the endpoint is anion gap closure and bicarbonate ≥18, NOT glucose normalization. Stopping insulin when glucose hits 200 mg/dL while the anion gap is still wide leads to rebound ketoacidosis. Always add dextrose to fluids when glucose <200 to allow continued insulin therapy. SGLT2-induced euglycemic DKA is a growing problem — flozins (canagliflozin, dapagliflozin, empagliflozin) cause DKA with normal glucose; diagnosis requires checking pH/anion gap/ketones in any flozin user with vomiting or abdominal pain. For severe hyperkalemia, dose regular insulin by hypoglycemia risk and give it WITH 25 g dextrose (D50W 50 mL) unless glucose >250 mg/dL: 5 units (or 0.1 units/kg, max 10) if eGFR <60, dialysis-dependent, pre-treatment glucose <150 mg/dL, weight <60 kg, or no diabetes; 10 units if normal renal function AND adequate glucose. Check glucose at 30, 60, 120 and 240 minutes. 5 units lowers K+ as much with less hypoglycemia (LaRue 2017; Moussavi 2021), while 10 units lowers K+ more (Finder 2022; Pierce 2020) — hence the branch.',
     citations: [
         'ADA. Hyperglycemic Crises in Adults With Diabetes: A Consensus Report by the American Diabetes Association. 2024.',
         'Kitabchi AE, et al. Hyperglycemic crises in adult patients with diabetes. Diabetes Care. 2009;32(7):1335-1343.',
@@ -12679,6 +12767,8 @@ export const ALL_DRUGS = [
     POTASSIUM_ACETATE,
     POTASSIUM_CHLORIDE_IV,
     POTASSIUM_CHLORIDE_ORAL,
+    POTASSIUM_PHOSPHATE,
+    SODIUM_PHOSPHATE,
     PRASUGREL,
     PREDNISOLONE,
     PREDNISONE,
@@ -12946,6 +13036,8 @@ const NAME_TO_ID = [
     [/phentolamine/i, 'phentolamine'],
     [/phenylephrine/i, 'phenylephrine'],
     [/physostigmine|antilirium/i, 'physostigmine'],
+    [/potassium\s*phosphate|sodium\s*\/\s*potassium\s*phosphate|k-?phos\b|kphos|k2po4|kh2po4/i, 'potassium-phosphate'],
+    [/sodium\s*phosphate|na-?phos\b|naphos/i, 'sodium-phosphate'],
     [/kcl\s*iv|potassium\s*chloride.*iv|iv\s*potassium/i, 'potassium-chloride-iv'],
     [/kcl\s*oral|potassium\s*chloride.*oral|oral\s*potassium|k-dur|klor-con/i, 'potassium-chloride-oral'],
     [/procainamide|pronestyl/i, 'procainamide'],
