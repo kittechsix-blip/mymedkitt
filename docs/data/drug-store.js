@@ -409,6 +409,186 @@ const AMITRIPTYLINE = {
     ],
 };
 // Added 2026-07-03 for the Recurrent & Cyclical Vomiting (hyperemesis) consult
+const SERTRALINE = {
+    id: 'sertraline',
+    name: 'Sertraline (Zoloft)',
+    genericName: 'Sertraline hydrochloride',
+    drugClass: 'Selective serotonin reuptake inhibitor (SSRI)',
+    route: 'PO',
+    indications: ['PTSD (FDA-approved)', 'Major depressive disorder (FDA-approved)', 'Panic disorder', 'OCD (including ages 6–17)', 'Social anxiety disorder', 'PMDD'],
+    dosing: [
+        {
+            indication: 'PTSD',
+            regimen: '**START 25 mg PO once daily × 1 week**, then increase to 50 mg once daily.\n\n**TARGET 50–200 mg/day.** If response is inadequate, titrate in **25–50 mg increments no more often than once weekly**. **Labeled maximum 200 mg/day.**\n\n**FDA-APPROVED for PTSD** and one of three agents carrying a strong recommendation in the 2023 VA/DoD CPG (with paroxetine and venlafaxine ER). VA target range for PTSD: 50–200 mg/day.\n\n**PEDIATRIC:** **not established for PTSD.** The only pediatric approval is OCD, ages 6–17 (25 mg/day start for ages 6–12; 50 mg/day for ages 13–17).\n\n**COUNSEL BEFORE THEY LEAVE:**\n• Full effect takes **4–6 weeks**. The commonest failure mode is a patient who quits at day 10 because it "is not working."\n• Transient activation, anxiety, and insomnia in the first 1–2 weeks — expected, and it passes.\n• Sexual dysfunction is common. Say so up front; patients surprised by it stop the drug and do not come back.\n\n**NOT FOR THE ACUTE STRESS DISORDER WINDOW (<1 month post-trauma).** The SSRI evidence is in chronic PTSD; acute-window pharmacoprevention has failed in trials.\n\n**ED CLINICIANS TYPICALLY DEFER INITIATION** unless outpatient follow-up is already arranged. Starting an SSRI with no follow-up plan is worse than not starting one.',
+        },
+        {
+            indication: 'Major depressive disorder (depression)',
+            regimen: '**START 50 mg PO once daily.** Titrate in 25–50 mg increments no more often than once weekly. **Range 50–200 mg/day; labeled maximum 200 mg/day.**\n\nSame 4–6 week onset counseling, same C-SSRS discipline at initiation.',
+        },
+    ],
+    contraindications: [
+        'Concurrent MAO inhibitor, or within 14 days of stopping one (includes linezolid and IV methylene blue)',
+        'Concurrent pimozide',
+        'Known hypersensitivity to sertraline',
+        'Concurrent disulfiram — oral solution only (contains alcohol)',
+    ],
+    cautions: [
+        'Boxed warning: increased suicidal thoughts and behaviors in pediatric and young adult patients — pair initiation with a safety plan and a C-SSRS screen',
+        'Serotonin syndrome, particularly with triptans, tramadol, linezolid, or other serotonergic agents',
+        'Hyponatremia / SIADH, especially in the elderly',
+        'Bleeding risk, additive with NSAIDs and anticoagulants',
+        'Discontinuation syndrome if stopped abruptly — taper',
+        'Mild QTc prolongation at higher doses',
+    ],
+    monitoring: 'C-SSRS at initiation and at follow-up. Sodium in elderly patients at 2–4 weeks. Response assessed at 4–6 weeks, not sooner.',
+    notes: 'The best-tolerated of the three first-line PTSD agents and the usual default, with the fewest interactions of the SSRIs. Fluoxetine was REMOVED from the recommended list in the 2023 VA/DoD CPG update after a negative clinician-rated trial — do not substitute it out of habit.',
+    citations: [
+        'ZOLOFT (sertraline hydrochloride) tablets prescribing information. Viatris Specialty. DailyMed SETID fda754f6-d0f3-4dce-a17a-927d64f912f7.',
+        'US Department of Veterans Affairs / Department of Defense. VA/DoD Clinical Practice Guideline for the Management of Posttraumatic Stress Disorder and Acute Stress Disorder. Version 4.0; 2023. Recommendation 15.',
+        'National Center for PTSD. Clinician guide to medications for PTSD. ptsd.va.gov (target range sertraline 50–200 mg/day).',
+    ],
+};
+const PAROXETINE = {
+    id: 'paroxetine',
+    name: 'Paroxetine (Paxil)',
+    genericName: 'Paroxetine hydrochloride',
+    drugClass: 'Selective serotonin reuptake inhibitor (SSRI)',
+    route: 'PO',
+    indications: ['PTSD (FDA-approved)', 'Major depressive disorder', 'Panic disorder', 'Generalized anxiety disorder', 'OCD', 'Social anxiety disorder'],
+    dosing: [
+        {
+            indication: 'PTSD',
+            regimen: '**LABELED START: 20 mg PO once daily.** Labeled range **20–50 mg/day**, maximum 50 mg/day; the label notes no added benefit above 20 mg/day in PTSD trials. VA target range 20–60 mg/day.\n\n**IF STARTING AT 10 mg** — as the consult suggests — understand what that is: 10 mg once daily is the **labeled starting dose for panic disorder and for elderly, debilitated, or severe renal/hepatic impairment** (maximum 40 mg/day in those patients). It is a legitimate tolerability-driven start, not the labeled PTSD starting dose. Step up to 20 mg after about a week.\n\n**TITRATE** in 10 mg steps at intervals of at least 1 week.\n\n**PEDIATRIC: NOT ESTABLISHED. Paroxetine is not approved for use in any pediatric patient.**\n\n**THE TRADE-OFFS THAT MATTER WHEN CHOOSING IT OVER SERTRALINE:**\n• **Shortest half-life of the SSRIs** — the worst discontinuation syndrome of the class. Two missed doses can make a patient genuinely ill (dizziness, electric-shock sensations, irritability). Never stop it abruptly; the label tapers by 10 mg/day at weekly intervals, then a week at 20 mg/day.\n• **Most anticholinergic SSRI** — sedation, constipation, dry mouth. Poor choice in the elderly.\n• **Most weight gain** of the class.\n• **Potent CYP2D6 inhibitor** — real interaction burden (tamoxifen, metoprolol, tricyclics, codeine, tramadol).\n\nSame counseling as sertraline: 4–6 week onset, early activation, sexual dysfunction, safety plan.',
+        },
+    ],
+    contraindications: [
+        'Concurrent MAO inhibitor, or within 14 days of stopping one (includes linezolid and IV methylene blue)',
+        'Concurrent thioridazine or pimozide',
+        'Known hypersensitivity to paroxetine or to any inactive ingredient',
+    ],
+    cautions: [
+        'Boxed warning: increased suicidal thoughts and behaviors in pediatric and young adult patients',
+        'PREGNANCY — embryofetal toxicity, including cardiovascular malformations, in the WARNINGS section (it is NOT a labeled contraindication). Prefer sertraline if an SSRI is needed in pregnancy or in a patient who may become pregnant.',
+        'Most severe discontinuation syndrome of the SSRIs — taper slowly',
+        'Potent CYP2D6 inhibition: reduces tamoxifen efficacy, raises metoprolol and TCA levels, blocks codeine and tramadol activation',
+        'Anticholinergic burden — avoid in the elderly and in narrow-angle glaucoma',
+        'Weight gain',
+        'Serotonin syndrome, hyponatremia, and bleeding risk as class effects',
+    ],
+    monitoring: 'C-SSRS at initiation and follow-up. Sodium in the elderly. Weight. A full interaction review before prescribing, particularly in oncology and cardiology patients.',
+    notes: 'Effective and FDA-approved for PTSD, but the pharmacokinetics make it the harder drug to live with. Reserve it for the patient who has failed or not tolerated sertraline, or who is already established on it.',
+    citations: [
+        'PAXIL (paroxetine hydrochloride) tablets prescribing information. Apotex/GSK. DailyMed SETID ef3b5cbe-f9e1-c1ac-79da-cfe14e3a7e7e.',
+        'US Department of Veterans Affairs / Department of Defense. VA/DoD Clinical Practice Guideline for the Management of Posttraumatic Stress Disorder and Acute Stress Disorder. Version 4.0; 2023. Recommendation 15.',
+        'National Center for PTSD. Clinician guide to medications for PTSD. ptsd.va.gov (target range paroxetine 20–60 mg/day).',
+    ],
+};
+const VENLAFAXINE_XR = {
+    id: 'venlafaxine-xr',
+    name: 'Venlafaxine XR (Effexor XR)',
+    genericName: 'Venlafaxine hydrochloride extended-release',
+    drugClass: 'Serotonin-norepinephrine reuptake inhibitor (SNRI)',
+    route: 'PO',
+    indications: ['PTSD (off-label, guideline-recommended)', 'Major depressive disorder', 'Generalized anxiety disorder', 'Social anxiety disorder', 'Panic disorder'],
+    dosing: [
+        {
+            indication: 'PTSD (off-label)',
+            regimen: '**START 37.5 mg PO once daily**, with food. Titrate in 37.5–75 mg steps at intervals of at least 1 week (the label allows dose increases no more often than every 4 days).\n\n**TARGET 75–225 mg/day. 225 mg/day is the FDA-labeled maximum** for every approved indication (MDD, GAD, panic disorder; social anxiety disorder is capped at 75 mg/day).\n\n**ABOVE 225 mg/day IS ABOVE THE LABEL.** The 2023 VA/DoD CPG and the VA clinician medication guide give a PTSD target range of **75–300 mg/day**, and the PTSD registration trials titrated to 300 mg/day. **PTSD is not an FDA-approved indication for venlafaxine at any dose**, and 226–300 mg/day exceeds the labeled ceiling — a deliberate, documented, psychiatry-owned decision, not an ED titration.\n\n**THE BLOOD PRESSURE CAVEAT:** the label reports dose-related increases in systolic and diastolic pressure and cases of sustained hypertension (1.4% vs 0.9% on placebo met the sustained-elevation definition). **Check a baseline BP and recheck at every titration step.** Do not choose this agent for a patient with poorly controlled hypertension.\n\n**PEDIATRIC: NOT ESTABLISHED — not approved for use in pediatric patients.**\n\n**DISCONTINUATION SYNDROME IS SEVERE**, comparable to or worse than paroxetine. Taper over weeks, never stop abruptly, and confirm the patient can actually refill it.\n\nSame 4–6 week onset counseling as the SSRIs.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to venlafaxine, to desvenlafaxine, or to any excipient',
+        'Concurrent MAO inhibitor, or within 14 days of stopping one (includes linezolid and IV methylene blue)',
+    ],
+    cautions: [
+        'Boxed warning: increased suicidal thoughts and behaviors in pediatric and young adult patients',
+        'DOSE-DEPENDENT BLOOD PRESSURE RISE — measure BP at baseline and at every dose increase; the effect is most relevant above roughly 150 mg/day',
+        'Angle-closure glaucoma — a labeled WARNING (not a contraindication); avoid in untreated anatomically narrow angles',
+        'Severe discontinuation syndrome — a missed refill is a clinical event',
+        'More dangerous in overdose than the SSRIs (seizures, cardiotoxicity, serotonin syndrome) — weigh this in a population with elevated suicide risk',
+        'Nausea on initiation is common; take with food',
+        'Renal and hepatic impairment require dose reduction',
+        'Serotonin syndrome, hyponatremia, bleeding risk',
+    ],
+    monitoring: 'Blood pressure at baseline and at every dose increase. C-SSRS at initiation and follow-up. Sodium in the elderly. Response at 4–6 weeks.',
+    notes: 'Dual serotonergic and noradrenergic action, useful when comorbid depression or chronic pain is prominent. Two facts should drive the choice: it raises blood pressure at higher doses, and it is meaningfully more toxic in overdose than an SSRI.',
+    citations: [
+        'EFFEXOR XR (venlafaxine hydrochloride) extended-release capsules prescribing information. Viatris Specialty. DailyMed SETID c848a5d8-ba94-4c84-80e3-0bf35fb8e32e (labeled maximum 225 mg/day; PTSD not an approved indication).',
+        'US Department of Veterans Affairs / Department of Defense. VA/DoD Clinical Practice Guideline for the Management of Posttraumatic Stress Disorder and Acute Stress Disorder. Version 4.0; 2023. Recommendation 15.',
+        'National Center for PTSD. Clinician guide to medications for PTSD. ptsd.va.gov (target range venlafaxine 75–300 mg/day).',
+    ],
+};
+const MIRTAZAPINE = {
+    id: 'mirtazapine',
+    name: 'Mirtazapine (Remeron)',
+    genericName: 'Mirtazapine',
+    drugClass: 'Noradrenergic and specific serotonergic antidepressant (NaSSA)',
+    route: 'PO',
+    indications: ['Major depressive disorder (labeled)', 'Insomnia with comorbid depression (off-label)', 'Depression with weight loss or anorexia'],
+    dosing: [
+        {
+            indication: 'Depression with prominent insomnia / appetite loss',
+            regimen: '**SLEEP-DIRECTED (OFF-LABEL): 7.5–30 mg PO at bedtime.** This is the range the consult states; there is no FDA-approved insomnia indication for mirtazapine. 7.5 mg is a generic-only tablet strength — brand Remeron film-coated tablets are 15 mg and 30 mg (RemeronSolTab 15/30/45 mg).\n\n**LABELED ANTIDEPRESSANT DOSE: start 15 mg PO once daily in the evening before sleep; maximum 45 mg/day. Do not change the dose at intervals of less than 1–2 weeks.**\n\n**THE COUNTERINTUITIVE DOSE-RESPONSE — read the caveat.** It is widely taught that **lower doses are more sedating**, because at 7.5–15 mg the antihistamine effect dominates and rising noradrenergic activity offsets it at higher doses. **This is pharmacologic rationale, not a labeled statement and not a trial finding** — the prescribing information says nothing of the kind. Treat "raise the dose to fix the grogginess" as a hypothesis to discuss with the prescribing clinician, not a rule.\n\n**BEST WHEN:** comorbid depression, weight loss, or anorexia — the appetite stimulation and weight gain are a therapeutic advantage in that patient and a liability in everyone else.\n\n**FOR PTSD SPECIFICALLY:** a 2024 network meta-analysis found **no PTSD-specific benefit.** It is an effective hypnotic in non-PTSD insomnia. Choose it for the comorbidity, not for the PTSD.\n\n**PEDIATRIC: NOT ESTABLISHED.** Safety and effectiveness have not been established in pediatric patients and mirtazapine is not approved for pediatric use.',
+        },
+    ],
+    contraindications: [
+        'Taking, or within 14 days of stopping, an MAO inhibitor — including linezolid and intravenous methylene blue — because of the risk of serotonin syndrome',
+        'Known hypersensitivity to mirtazapine or to any excipient',
+    ],
+    cautions: [
+        'BOXED WARNING: increased risk of suicidal thoughts and behavior in pediatric and young adult patients taking antidepressants. Mirtazapine is NOT approved for use in pediatric patients.',
+        'WEIGHT GAIN and increased appetite — often substantial. A benefit in the cachectic patient, a dealbreaker in most others. Discuss before prescribing.',
+        'Agranulocytosis and severe neutropenia — sore throat, fever, stomatitis, or other signs of infection with a low WBC means stop the drug and monitor closely',
+        'Sedation, most pronounced at low doses (pharmacologic rationale; not a labeled claim)',
+        'QT prolongation',
+        'Orthostatic hypotension',
+        'Serotonin syndrome with other serotonergic agents',
+    ],
+    monitoring: 'Weight at every visit. CBC if fever, sore throat, stomatitis, or other infection signs. Mood and suicidality. Sedation and next-day function.',
+    notes: 'Blocks presynaptic alpha-2 autoreceptors (raising noradrenergic and serotonergic tone) plus 5-HT2, 5-HT3, and H1. The H1 blockade is what sedates. The orally disintegrating tablet is useful in a patient who cannot swallow.',
+    citations: [
+        'Remeron / RemeronSolTab (mirtazapine) prescribing information. Organon LLC. DailyMed SETID 98ad1917-a094-44f5-a28f-a64a8cfcd887.',
+        'US Department of Veterans Affairs / Department of Defense. VA/DoD Clinical Practice Guideline for the Management of Posttraumatic Stress Disorder and Acute Stress Disorder. Version 4.0; 2023.',
+    ],
+};
+const TRAZODONE = {
+    id: 'trazodone',
+    name: 'Trazodone (Desyrel)',
+    genericName: 'Trazodone hydrochloride',
+    drugClass: 'Serotonin antagonist and reuptake inhibitor (SARI)',
+    route: 'PO',
+    indications: ['Insomnia (off-label)', 'PTSD-related sleep disruption and nightmares (off-label)', 'Major depressive disorder (FDA-approved, at much higher doses)'],
+    dosing: [
+        {
+            indication: 'Insomnia / PTSD sleep disruption (off-label)',
+            regimen: '**25–200 mg PO at bedtime. START 25–50 mg; most patients land at 50–150 mg.**\n\n**OFF-LABEL. There is no FDA-approved insomnia indication and no labeled hypnotic dose.** The only labeled indication is major depressive disorder in adults, where the label starts at 150 mg/day in divided doses. The hypnotic dose is a fraction of an antidepressant dose and is not an antidepressant dose.\n\n**PTSD-SPECIFIC DATA (Warner, Pharmacopsychiatry 2001 — Palo Alto VA survey, n=74):** among those who tolerated it, 72% reported reduced nightmares and 92% improved sleep onset, at an effective range of 50–200 mg nightly. Observational, not randomized, but it is the best PTSD-specific signal among the sleep bridges.\n\n**WARN EVERY MALE PATIENT ABOUT PRIAPISM.** In that same survey **9 of 74 patients (12%) reported priapism.** Say the words at the time of prescribing and **ask directly at follow-up** — patients will not raise it. Instruct: any erection lasting more than 4 hours is a surgical emergency, go to an ED immediately.\n\n**PEDIATRIC: NOT ESTABLISHED** — safety and effectiveness in pediatric patients have not been established.\n\n**AVOID FOR SLEEP IN PTSD:** Z-drugs (zolpidem, eszopiclone) — network meta-analysis found them ineffective here and they carry dependence and parasomnia risk. Benzodiazepines: no.',
+        },
+        {
+            indication: 'Major depressive disorder (FDA-labeled)',
+            regimen: '**150 mg/day PO in divided doses** to start; may increase by 50 mg/day every 3 to 4 days. **Outpatient maximum 400 mg/day; inpatient maximum 600 mg/day.**',
+        },
+    ],
+    contraindications: [
+        'Concurrent MAO inhibitor, or within 14 days of stopping one (includes linezolid and IV methylene blue)',
+        'Known hypersensitivity to trazodone',
+    ],
+    cautions: [
+        'PRIAPISM — the current label describes painful erections lasting more than 6 hours but gives NO incidence figure; the 12% figure above is from the Palo Alto VA PTSD survey, not from labeling. Counsel explicitly and document that you did.',
+        'Boxed warning: increased suicidal thoughts and behaviors in pediatric and young adult patients',
+        'Orthostatic hypotension and falls, particularly in the elderly',
+        'QT prolongation',
+        'Next-day sedation and psychomotor impairment — counsel about driving',
+        'Serotonin syndrome with other serotonergic agents',
+        'Additive sedation with alcohol and opioids',
+    ],
+    monitoring: 'Ask directly about priapism at follow-up. Orthostatic vitals in older patients. Sedation and next-day function. ECG if QT risk factors.',
+    notes: 'At low doses the effect is predominantly H1 and 5-HT2A antagonism, which is why it sedates without the dependence profile of a hypnotic. The priapism counseling is the non-negotiable part of prescribing it.',
+    citations: [
+        'Trazodone hydrochloride tablets prescribing information. Teva. DailyMed SETID 9c4da6ad-d4d1-4e8c-918d-8ac48512a93f.',
+        'Warner MD, Dorn MR, Peabody CA. Survey on the usefulness of trazodone in patients with PTSD with insomnia or nightmares. Pharmacopsychiatry. 2001;34(4):128-131. PMID 11518472.',
+        'US Department of Veterans Affairs / Department of Defense. VA/DoD Clinical Practice Guideline for the Management of Posttraumatic Stress Disorder and Acute Stress Disorder. Version 4.0; 2023.',
+    ],
+};
 const APREPITANT = {
     id: 'aprepitant',
     name: 'Aprepitant (Emend)',
@@ -1275,6 +1455,104 @@ const CEFEPIME = {
         'Tunkel AR, et al. IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.',
     ],
 };
+const CEFOXITIN = {
+    id: 'cefoxitin',
+    name: 'Cefoxitin (Mefoxin)',
+    genericName: 'Cefoxitin sodium',
+    drugClass: 'Second-generation cephamycin (cephalosporin class) with anaerobic coverage',
+    route: 'IV / IM',
+    indications: ['Pelvic inflammatory disease \u2014 inpatient parenteral therapy', 'Intra-abdominal infection', 'Surgical prophylaxis (colorectal, appendectomy, hysterectomy)'],
+    dosing: [
+        {
+            indication: 'Pelvic inflammatory disease \u2014 inpatient',
+            regimen: '**2 g IV every 6 hours**\n**PLUS** [doxycycline](#/drug/doxycycline/pid) 100 mg PO or IV every 12 hours.\n\n**This is one of the three CDC 2021 RECOMMENDED parenteral regimens**, alongside [cefotetan](#/drug/cefotetan/pid) 2 g IV q12h + doxycycline, and ceftriaxone 1 g IV q24h + doxycycline + metronidazole. Metronidazole is not required during the cephamycin phase \u2014 cefoxitin covers anaerobes.\n\n**PREFER ORAL DOXYCYCLINE** when the patient tolerates it \u2014 IV doxycycline is painful and offers no bioavailability advantage.\n\n**TRANSITION TO ORAL:** within 24-48 hours of clinical improvement (afebrile, decreasing pain, decreasing tenderness). Complete a **14-day total** course with doxycycline 100 mg PO BID **plus metronidazole 500 mg PO BID**.\n\n**TUBO-OVARIAN ABSCESS:** metronidazole must be continued with doxycycline for the full oral course.',
+        },
+        {
+            indication: 'Intra-abdominal infection',
+            regimen: 'Usual adult range **1-2 g IV q6-8h**; 1 g q4h or 2 g q6-8h for moderately severe to severe infection. **Maximum 12 g/day.**\n\nIncreasingly limited by Bacteroides fragilis resistance \u2014 check your local antibiogram before choosing it over piperacillin-tazobactam or a carbapenem for a sick patient.',
+        },
+        {
+            indication: 'Pediatric (\u22653 months)',
+            regimen: '**80 to 160 mg/kg/day IV divided into four to six equal doses.** Use the higher end for severe infection. **Total daily dose must not exceed 12 g.**\n\n**Below 3 months of age the dose is not established** \u2014 involve pediatrics/ID.\n\n(Pediatric surgical-prophylaxis dosing is on the Surgical prophylaxis card, not here.)',
+            weightCalc: [
+                { dosePerKg: 80, unit: 'mg', dailyDivided: 4, maxDose: 3000, label: 'Pediatric \u22653 months \u2014 lower end, 80 mg/kg/day \u00f7 q6h' },
+                { dosePerKg: 160, unit: 'mg', dailyDivided: 4, maxDose: 3000, label: 'Pediatric \u22653 months \u2014 severe infection, 160 mg/kg/day \u00f7 q6h' },
+            ],
+        },
+        {
+            indication: 'Surgical prophylaxis',
+            regimen: '**2 g IV just prior to incision** (within 60 minutes). Label allows 2 g q6h for no more than 24 hours postoperatively; current prophylaxis guidance is a single preoperative dose with **intraoperative redosing every 2 hours** or after significant blood loss \u2014 cefoxitin\'s half-life is only about 45 minutes, which is why the redose interval is that short.\n\nCesarean section: single 2 g dose at cord clamping, or 2 g at cord clamping then at 4 and 8 hours.\n\n**PEDIATRIC:** 30-40 mg/kg per dose.',
+        },
+        {
+            indication: 'Renal adjustment',
+            regimen: 'After a loading dose of 1-2 g:\n\u2022 **CrCl 50-30:** 1-2 g q8-12h\n\u2022 **CrCl 29-10:** 1-2 g q12-24h\n\u2022 **CrCl 9-5:** 0.5-1 g q12-24h\n\u2022 **CrCl <5 (essentially no function):** 0.5-1 g q24-48h\n\u2022 **Hemodialysis:** give a loading dose after each session, then maintenance as above.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to cefoxitin or to the cephalosporin group of antibiotics',
+        'History of anaphylaxis, angioedema, or SJS/TEN with any beta-lactam',
+    ],
+    cautions: [
+        'Cross-reactivity with penicillin allergy is low (<2%) but not zero. A reported penicillin allergy without an anaphylaxis history is generally not a barrier.',
+        'A strong inducer of AmpC beta-lactamase \u2014 can drive resistance in Enterobacter, Citrobacter, Serratia',
+        'Increasing B. fragilis resistance limits reliability in serious intra-abdominal infection',
+        'Q6h dosing is a real adherence problem on a busy floor; confirm the order interval is right',
+        'C. difficile risk',
+        'No boxed warning',
+    ],
+    monitoring: 'Clinical response (fever curve, pain, cervical motion tenderness), renal function, CBC. Reassess PID patients at 72 hours \u2014 failure to improve should prompt imaging for tubo-ovarian abscess.',
+    notes: 'A cephamycin, not a true second-generation cephalosporin \u2014 the 7-alpha-methoxy group buys anaerobic activity and beta-lactamase stability, which is exactly why it works for polymicrobial PID. Paired with doxycycline it covers gonorrhea, chlamydia, anaerobes, and enteric gram-negatives.',
+    citations: [
+        'Workowski KA, Bachmann LH, Chan PA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187.',
+        'Cefoxitin for injection prescribing information. Current DailyMed label, SPL setid 2a9d1e7b-96ee-4e6c-a1e8-47b76b924422.',
+    ],
+};
+const CEFOTETAN = {
+    id: 'cefotetan',
+    name: 'Cefotetan (Cefotan)',
+    genericName: 'Cefotetan disodium',
+    drugClass: 'Second-generation cephamycin (cephalosporin class) with anaerobic coverage',
+    route: 'IV / IM',
+    indications: ['Pelvic inflammatory disease — inpatient parenteral therapy', 'Intra-abdominal infection', 'Surgical prophylaxis (gynecologic, colorectal)'],
+    dosing: [
+        {
+            indication: 'Pelvic inflammatory disease — inpatient',
+            regimen: '**2 g IV every 12 hours**\n**PLUS** [doxycycline](#/drug/doxycycline/pid) 100 mg PO or IV every 12 hours.\n\n**One of the three CDC 2021 RECOMMENDED parenteral regimens** — the others being [cefoxitin](#/drug/cefoxitin/pid) 2 g IV q6h + doxycycline, and ceftriaxone 1 g IV q24h + doxycycline + metronidazole. Metronidazole is not required during the cephamycin phase; cefotetan covers anaerobes.\n\n**The q12h interval is the practical advantage over cefoxitin q6h** — same coverage, half the doses, better real-world adherence.\n\n**TRANSITION TO ORAL:** within 24-48 hours of clinical improvement. Complete **14 days total** with doxycycline 100 mg PO BID **plus metronidazole 500 mg PO BID** — the metronidazole is required in the oral phase even though it was not in the IV phase.',
+        },
+        {
+            indication: 'Intra-abdominal infection',
+            regimen: '**1-3 g IV q12h** by severity (2 g q12h for severe). **Maximum 6 g/day.**',
+        },
+        {
+            indication: 'Pediatric — not established',
+            regimen: '**NOT ESTABLISHED.** The label states safety and effectiveness in pediatric patients have not been established, and gives no pediatric dose.\n\nIf a cephamycin is needed in a child, [cefoxitin](#/drug/cefoxitin/pid) is the one with labeled pediatric dosing (80-160 mg/kg/day divided q4-6h, ≥3 months).',
+        },
+        {
+            indication: 'Renal adjustment',
+            regimen: '• **CrCl >30:** usual dose q12h\n• **CrCl 10-30:** usual dose q24h\n• **CrCl <10:** usual dose q48h\n• **Hemodialysis:** one-quarter the usual dose every 24 hours on days between dialysis, and one-half the usual dose on the day of dialysis.',
+        },
+    ],
+    contraindications: [
+        'Known allergy to the cephalosporin group of antibiotics',
+        'Prior cephalosporin-associated hemolytic anemia — an explicit label contraindication',
+        'History of anaphylaxis, angioedema, or SJS/TEN with any beta-lactam',
+    ],
+    cautions: [
+        'SEVERE HEMOLYTIC ANEMIA, INCLUDING FATALITIES, has been reported with cefotetan. The label states this in capitals. Check a hemoglobin if the patient becomes anemic, jaundiced, or unexpectedly tachycardic on therapy.',
+        'N-methylthiotetrazole (NMTT) side chain: fall in prothrombin activity and possible bleeding, especially with malnutrition, renal impairment, or prolonged therapy. Give vitamin K if the PT rises.',
+        'DISULFIRAM-LIKE REACTION with alcohol ingested **within 72 hours** of a dose — flushing, sweating, headache, tachycardia. Say the 72 hours out loud at discharge.',
+        'AVAILABILITY — cefotetan supply has been intermittent in the US and it is not stocked everywhere. Confirm your pharmacy carries it before writing the order; cefoxitin is the fallback.',
+        'Penicillin cross-reactivity low (<2%) but not zero',
+        'C. difficile risk',
+        'No boxed warning',
+    ],
+    monitoring: 'Clinical response, PT/INR on prolonged therapy (NMTT effect), CBC with attention to hemoglobin (immune hemolysis), renal function. Reassess PID at 72 hours.',
+    notes: 'Pharmacologically near-identical to cefoxitin for PID, with a longer half-life permitting q12h dosing. The NMTT side chain is the differentiator and the reason for the coagulopathy and alcohol warnings. Where both are stocked, either is CDC-recommended; where only one is stocked, that is your answer. Where the patient is a child, it is cefoxitin — cefotetan has no established pediatric dose.',
+    citations: [
+        'Workowski KA, Bachmann LH, Chan PA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187.',
+        'Cefotetan for injection prescribing information. Current DailyMed label, SPL setid bd22c66b-8a1c-44c8-b5b6-3ab0ce5c800e.',
+    ],
+};
 const CEFTRIAXONE = {
     id: 'ceftriaxone',
     name: 'Ceftriaxone',
@@ -2127,6 +2405,50 @@ const DIMENHYDRINATE = {
         'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
     ],
 };
+const CYPROHEPTADINE = {
+    id: 'cyproheptadine',
+    name: 'Cyproheptadine (Periactin)',
+    genericName: 'Cyproheptadine hydrochloride',
+    drugClass: 'First-generation antihistamine with 5-HT2A antagonist activity',
+    route: 'PO/NG (no parenteral form exists)',
+    indications: ['Serotonin syndrome, moderate to severe — adjunctive, off-label'],
+    dosing: [
+        {
+            indication: 'Serotonin syndrome — adult',
+            regimen: '**INITIAL:** 12 mg PO, or crushed and given via NG/OG tube.\n\n**THEN:** 2 mg PO/NG every 2 hours while symptoms continue.\n\n**AFTER IMPROVEMENT:** 4–8 mg PO/NG every 6 hours for 24–48 hours (Boyer specifies 8 mg q6h).\n\n**CEILING: 32 mg in 24 hours.** At that exposure roughly 85–95% of 5-HT2A receptors are occupied — and 32 mg/day is also the maximum daily dose the product label itself permits for any indication.\n\n**ORDER OF OPERATIONS — do not invert:**\n• Stop every serotonergic agent.\n• Benzodiazepines for agitation, rigidity, and clonus. These do more than cyproheptadine does.\n• Aggressive external cooling. **Antipyretics do not work** — the hyperthermia is muscular, not hypothalamic.\n• Cyproheptadine as adjunct.\n• Hyperthermia > 41.5°C not controlled by sedation: intubate, paralyze with a **non-depolarizing** agent (avoid succinylcholine — rhabdomyolysis and hyperkalemia), and cool. Do not reach for cyproheptadine here; it is oral-only and far too slow.\n\n**OFF-LABEL.** There is no FDA-approved indication for serotonin syndrome and no society guideline that publishes a dose. This regimen comes from a review article and case series.',
+        },
+        {
+            indication: 'Serotonin syndrome — pediatric',
+            regimen: '**0.25 mg/kg/day PO/NG divided every 6 hours, maximum 12 mg/day** (that is a **3 mg per-dose cap** at q6h). The label permits up to 16 mg/day for ages 7–14; 12 mg/day is the ceiling for ages 2–6 and is the conservative cap used here.\n\n**Adolescents and patients at adult weight use the adult regimen above.**\n\n**Provenance — read it.** 0.25 mg/kg/day is the *labeled pediatric allergy* dose, extrapolated to serotonin toxicity. **No pediatric serotonin-syndrome dose has been established** in any label, trial, or guideline. Benzodiazepines and cooling remain the interventions that change outcome.\n\n**Contraindicated in neonates and premature infants.**',
+            weightCalc: { dosePerKg: 0.25, unit: 'mg', maxDose: 3, dailyDivided: 4, label: 'Pediatric 0.25 mg/kg/day divided q6h (per-dose cap 3 mg = 12 mg/day)' },
+        },
+    ],
+    contraindications: [
+        'Newborn and premature infants',
+        'Nursing mothers',
+        'Hypersensitivity to cyproheptadine or structurally similar antihistamines',
+        'Angle-closure glaucoma',
+        'Stenosing peptic ulcer, pyloroduodenal obstruction, symptomatic prostatic hypertrophy, bladder-neck obstruction',
+        'Elderly or debilitated patients (a stated label contraindication; in life-threatening serotonin syndrome treat it as relative and weigh it against the severity)',
+        'No IV formulation exists — with no protected airway and no NG/OG access the drug cannot be delivered at all',
+    ],
+    cautions: [
+        '**MAOI caveat — read this before withholding the drug.** The label contraindicates cyproheptadine in patients *receiving* MAOI therapy — an interaction warning written for the allergy indication. MAOI-associated serotonin toxicity is one of the classic settings in which cyproheptadine is used. Once the MAOI is stopped and the patient is in serotonin syndrome, that label line is not by itself a reason to withhold the antidote. Involve toxicology.',
+        '**PO/NG ONLY.** In an intubated or obtunded patient it has to go down a tube. If you cannot deliver it, move on — benzodiazepines and cooling are the treatment that matters.',
+        'Sedating and anticholinergic — will confound the serial mental-status and clonus exam that is your severity marker',
+        'Anticholinergic load blocks sweating and can worsen hyperthermia — never a substitute for active cooling',
+        'Antihistamine overdose, particularly in infants and young children, can produce hallucinations, CNS depression, convulsions, respiratory and cardiac arrest, and death — respect the daily ceiling',
+        'Additive CNS depression with alcohol and other CNS depressants',
+        'Evidence base is case reports and small series. No randomized trial. Benefit is plausible and unproven.',
+    ],
+    monitoring: 'Continuous core temperature (not oral), clonus and rigidity on serial exam, mental status, CK for rhabdomyolysis, creatinine, LFTs, and coagulation studies if hyperthermic.',
+    notes: 'Competes with serotonin at 5-HT2A, the receptor most implicated in the hyperthermic and neuromuscular phenotype. Its role is genuinely adjunctive: what changes outcome is stopping the offending agent, benzodiazepines, aggressive cooling, and — in the severe case — paralysis and ventilation. Do not let a cyproheptadine order become the reason cooling was late. Dosing here is aligned with the Serotonin Syndrome consult and the Cyproheptadine Dosing calculator already in this app.',
+    citations: [
+        'Boyer EW, Shannon M. The serotonin syndrome. N Engl J Med. 2005;352(11):1112-1120. (Errata: N Engl J Med. 2007;356(23):2437 and 2009;361(17):1714.)',
+        'Graudins A, Stearman A, Chan B. Treatment of the serotonin syndrome with cyproheptadine. J Emerg Med. 1998;16(4):615-619.',
+        'Cyproheptadine hydrochloride tablets prescribing information. Amneal Pharmaceuticals of New York. DailyMed SPL setid 80e13d3f-f4db-4bb4-95d5-5ac1afa70e7e.',
+    ],
+};
 const DIPHENHYDRAMINE = {
     id: 'diphenhydramine',
     name: 'Diphenhydramine',
@@ -2178,6 +2500,52 @@ const DIPHENHYDRAMINE = {
     notes: 'Alternative second-line antiemetic for NVP. Generally considered safe in pregnancy. The active antihistamine component of dimenhydrinate.',
     citations: [
         'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.',
+    ],
+};
+const HYDROXYZINE = {
+    id: 'hydroxyzine',
+    name: 'Hydroxyzine (Vistaril, Atarax)',
+    genericName: 'Hydroxyzine pamoate / hydroxyzine hydrochloride',
+    drugClass: 'First-generation antihistamine (H1 antagonist) with anxiolytic effect',
+    route: 'PO / IM',
+    indications: ['Anxiety and tension — short-term symptomatic relief', 'Sleep-onset insomnia in PTSD / acute stress disorder (off-label)', 'Pruritus due to allergic conditions', 'Pre- and post-anesthetic sedation'],
+    dosing: [
+        {
+            indication: 'Anxiety / sleep bridge in PTSD or acute stress disorder',
+            regimen: '**SLEEP BRIDGE (OFF-LABEL): 25–100 mg PO at bedtime.** There is no FDA-approved insomnia indication for hydroxyzine and no Tier 1 guideline dose — this range is the Harvard South Shore PTSD algorithm and VA practice literature (Tier 4), and it is the range the consult already states.\n\n**START LOW — 25 mg** — and titrate. 100 mg produces a sedation hangover in many patients.\n\n**LABELED ANXIETY DOSE (adults): 50–100 mg PO four times daily.** The sedation makes QID dosing impractical for most working patients, which is why the bedtime-only schedule is what gets prescribed.\n\n**FIRST-LINE SLEEP-ONSET AGENT in the Harvard South Shore PTSD algorithm.** The reason it leads is not potency — it is that it is **non-habit-forming** in a population where benzodiazepines cause real harm.\n\n**AVOID BENZODIAZEPINES IN PTSD.** They worsen outcomes, interfere with trauma-focused therapy, and carry dependence risk in a high-risk population. That is the whole point of this drug being on the list.\n\n**Effectiveness beyond 4 months has not been assessed** — this is a bridge, not a plan.',
+        },
+        {
+            indication: 'Pruritus due to allergic conditions (labeled)',
+            regimen: 'Adults: 25 mg PO three to four times daily.',
+        },
+        {
+            indication: 'Pediatric anxiety or pruritus (labeled)',
+            regimen: '**Children under 6 years: 50 mg PO daily in divided doses.**\n**Children over 6 years: 50–100 mg PO daily in divided doses.**\n\nThere is no established pediatric dose for insomnia or PTSD-related sleep — that use is off-label in adults and unstudied in children.',
+        },
+        {
+            indication: 'Pediatric pre- and post-operative sedation (labeled)',
+            regimen: '0.6 mg/kg PO as a single dose.',
+            weightCalc: { dosePerKg: 0.6, unit: 'mg', label: 'Pediatric sedation (labeled, 0.6 mg/kg single dose)' },
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to hydroxyzine, or to cetirizine or levocetirizine',
+        'Early pregnancy — fetal abnormalities in animal studies',
+        'Prolonged QT interval',
+    ],
+    cautions: [
+        'QT PROLONGATION and Torsade de Pointes have been reported post-marketing. Use caution with other QT-prolonging agents.',
+        'ANTICHOLINERGIC — caution in the elderly (delirium, falls, urinary retention, constipation), narrow-angle glaucoma, and BPH. Start at the low end of the range in older patients; sedating drugs cause confusion and over-sedation in the elderly.',
+        'Additive sedation with alcohol, opioids, and other CNS depressants',
+        'Next-day sedation at higher doses',
+        'IM injection is painful and must be deep intramuscular only',
+        'Effectiveness for use longer than 4 months has not been assessed by systematic clinical studies',
+    ],
+    monitoring: 'Sedation and next-day function. ECG if other QT-prolonging drugs are on board. In older patients, reassess cognition and fall risk at follow-up.',
+    notes: 'Central H1 blockade produces sedation and mild anxiolysis without GABAergic dependence. Its role in PTSD is a bridge while trauma-focused therapy and, where indicated, an SSRI take effect — not a long-term plan.',
+    citations: [
+        'Hydroxyzine pamoate capsules prescribing information. Amneal Pharmaceuticals of New York LLC. DailyMed SETID bc82aaaf-30c7-4afe-a908-d138ea1268ef.',
+        'US Department of Veterans Affairs / Department of Defense. VA/DoD Clinical Practice Guideline for the Management of Posttraumatic Stress Disorder and Acute Stress Disorder. Version 4.0; 2023.',
     ],
 };
 const DOBUTAMINE = {
@@ -2880,6 +3248,122 @@ const LIDOCAINE = {
     notes: 'For penile block, NEVER use formulations containing epinephrine. The penis is supplied by end-arteries \u2014 epinephrine can cause ischemic necrosis.',
     citations: [
         'Burnett AL, Sharlip ID. Standard Operating Procedures for Priapism. J Sex Med. 2013;10(1):180-94.',
+    ],
+};
+const LET_GEL = {
+    id: 'let-gel',
+    name: 'LET gel (lidocaine-epinephrine-tetracaine)',
+    genericName: 'Lidocaine 4% / epinephrine 0.1% / tetracaine 0.5% topical gel',
+    drugClass: 'Topical local anesthetic combination (compounded — no FDA-approved product)',
+    route: 'Topical (open wound only)',
+    indications: ['Topical anesthesia for simple laceration repair, particularly face and scalp in children'],
+    dosing: [
+        {
+            indication: 'Topical anesthesia — laceration repair',
+            regimen: '**Apply 1-3 mL of gel directly into and over the open wound** — enough to fill the wound bed, no more. Cover with an occlusive dressing or hold with a gauze pledget.\n\n**CONTACT TIME: 20-30 minutes.** A single 30-minute application is as effective as repeated applications.\n\n**BLANCHING OF THE WOUND EDGES IS THE ENDPOINT** — it confirms epinephrine effect and predicts adequate anesthesia. No blanching means not ready. Test with a needle before you start suturing.\n\n**BEST FOR:** face and scalp lacerations under about 5 cm, low tension, in children. It frequently avoids infiltration entirely.\n\n**IF INCOMPLETE:** supplement with small-volume buffered [lidocaine](#/drug/lidocaine/laceration-repair) infiltrated through the already-anesthetized wound edge with a 30-gauge needle. The LET makes that injection far less painful.\n\n**NO FDA LABEL EXISTS.** This is a compounded preparation. The volume and contact time above are emergency-medicine practice standards, not label instructions, and the concentrations your pharmacy supplies may differ — check the bottle.',
+        },
+        {
+            indication: 'Dose ceiling in a small child',
+            regimen: '**There is no mg/kg dose for LET. Cap it by VOLUME.**\n\nDo the arithmetic once and it explains the cap: **3 mL of standard LET contains 120 mg lidocaine, 15 mg tetracaine, and 3 mg epinephrine.** Absorption across an open wound bed is a fraction of that, which is why the preparation is safe in routine use — but in a 10 kg toddler, the exact patient this drug exists for, the fully-absorbed lidocaine load would be 12 mg/kg, well above the 4.5 mg/kg infiltration ceiling.\n\n**So: use the smallest volume that fills the wound, do not exceed 3 mL, and do not use it on large or multiple wounds where cumulative absorption stops being predictable.**',
+        },
+        {
+            indication: 'Where NOT to put it',
+            regimen: '**DO NOT APPLY TO:**\n• **End-arterial territory** — digits, nose tip, ears, penis. The epinephrine is the concern, and unlike infiltrated lidocaine-with-epi in digits, topical LET on an end-artery has no supporting safety data.\n• **Mucous membranes** — rapid systemic absorption of tetracaine, with reported toxicity including seizures.\n• **Contaminated or grossly dirty wounds** before irrigation.\n• **Intact skin** — it does not penetrate; it works through the open wound bed only.\n• **Eyes** — irrigate immediately if it gets in.',
+        },
+    ],
+    contraindications: [
+        'Application to digits, nose tip, ears, or penis (end-arterial territory)',
+        'Application to mucous membranes',
+        'Known hypersensitivity to amide or ester local anesthetics',
+        'Application to intact skin (ineffective, not dangerous)',
+    ],
+    cautions: [
+        'NO FDA-APPROVED PRODUCT — compounded. Formulation, concentration, expiry, and storage vary between pharmacies. Know what your ED stocks.',
+        'Volume is the dose ceiling: 3 mL delivers 120 mg lidocaine, 15 mg tetracaine, and 3 mg epinephrine. Use the least that fills the wound.',
+        'Tetracaine is an ESTER anesthetic; lidocaine is an AMIDE. A patient with a documented ester allergy should not receive this.',
+        'Absorption is far higher across mucosa than across a wound bed — the mucous-membrane restriction is a real toxicity issue, not a formality',
+        'Not reliable for high-tension wounds, extremities, or lacerations over about 5 cm',
+        'Keep away from the eye',
+    ],
+    monitoring: 'Wound-edge blanching before instrumenting. Test anesthesia with a needle before the first suture. Observe for systemic anesthetic toxicity if a large volume was used or the wound was extensive.',
+    notes: 'Replaced TAC (tetracaine-adrenaline-cocaine) with equivalent efficacy and none of the cocaine control, cost, or toxicity problems. In pediatric laceration repair it is often the difference between a calm procedure and a papoose. Gel and solution formulations perform comparably; the gel stays where you put it, which is why it is the usual stock item. It is a distinct product, not a route — do not substitute the lidocaine monograph\'s mg/kg infiltration numbers for it.',
+    citations: [
+        'Resch K, Schilling C, Borchert BD, Klatzko M, Uden D. Topical anesthesia for pediatric lacerations: a randomized trial of lidocaine-epinephrine-tetracaine solution versus gel. Ann Emerg Med. 1998;32(6):693-697.',
+        'Schilling CG, Bank DE, Borchert BA, Klatzko MD, Uden DL. Tetracaine, epinephrine (adrenalin), and cocaine (TAC) versus lidocaine, epinephrine, and tetracaine (LET) for anesthesia of lacerations in children. Ann Emerg Med. 1995;25(2):203-208.',
+    ],
+};
+const PROPARACAINE = {
+    id: 'proparacaine',
+    name: 'Proparacaine 0.5% (Alcaine, Ophthaine)',
+    genericName: 'Proparacaine hydrochloride 0.5% ophthalmic solution',
+    drugClass: 'Topical ophthalmic ester anesthetic',
+    route: 'Topical ophthalmic',
+    indications: ['Corneal foreign body removal', 'Corneal abrasion examination', 'Tonometry and gonioscopy', 'Short corneal and conjunctival procedures'],
+    dosing: [
+        {
+            indication: 'Corneal foreign body removal / examination',
+            regimen: '**1-2 drops (single instillation) in the affected eye before operating.**\n\n**ONSET within about 30 seconds. DURATION approximately 10-20 minutes** per the label.\n\n**FOR A LONGER OR DEEPER PROCEDURE** the label gives a second regimen: **1 drop every 5 to 10 minutes for 5 to 7 doses.** Use that when the foreign body is embedded and the first drop is wearing off mid-procedure.\n\n**PREFERRED OVER TETRACAINE FOR THE FIRST DROP** — it stings substantially less, which matters when the patient is already in pain and you need cooperation for the exam.\n\n**REFRIGERATE at 2-8 °C and protect from light.** Proparacaine degrades at room temperature and the solution discolors — a yellowed bottle gets discarded, not used.\n\n**PEDIATRIC:** safety and effectiveness in children are established. Same 1-2 drops.',
+        },
+        {
+            indication: 'NEVER for home use',
+            regimen: '**DO NOT PRESCRIBE OR DISPENSE TOPICAL ANESTHETIC FOR HOME USE.**\n\nThe label states it directly: *"Prolonged use of a topical ocular anesthetic is not recommended. It may produce permanent corneal opacification with accompanying visual loss."* Repeated instillation causes epithelial toxicity, arrested healing, stromal infiltrates, corneal melting, and secondary infection. It is a recognized sentinel patient-safety event and it can cost the patient the eye.\n\nAlso: it abolishes the protective blink and pain response, so the patient can sustain further injury without knowing.\n\n**Counsel the patient explicitly** and document that you did. Send them home with a cycloplegic and oral analgesia instead.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to any component of the preparation (ester-type local anesthetics)',
+        'Injection into the eye — topical ophthalmic use only',
+        'Dispensing for outpatient/home use (absolute practice rule; the label frames it as a warning against prolonged use)',
+    ],
+    cautions: [
+        'A dilated pupil after a "numbing drop" means the wrong bottle was picked up — check the label',
+        'Transient stinging and conjunctival hyperemia',
+        'Interferes with corneal cultures if obtained afterward — culture first if keratitis is suspected',
+        'Ester anesthetic: caution with documented ester (e.g. benzocaine, tetracaine) allergy',
+        'Rare hypersensitivity keratitis with repeated use',
+        'Discard a discolored bottle — it means the cold chain was broken',
+        'No boxed warning',
+    ],
+    monitoring: 'Visual acuity documented BEFORE and AFTER any procedure, both eyes, with correction and with pinhole if reduced. That is the single most important documentation point in this encounter and it protects you medicolegally.',
+    notes: 'Blocks sodium channels in corneal sensory nerve endings. Diagnostic and procedural use only. The temptation to send the drop home with a patient in genuine agony is the recurring error, and it is why the warning appears twice in this entry.',
+    citations: [
+        'Proparacaine hydrochloride ophthalmic solution 0.5% prescribing information. Bausch & Lomb. Current DailyMed label, SPL setid b699f838-8b69-4bac-953b-ea8822ec19fc.',
+        'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
+    ],
+};
+const TETRACAINE = {
+    id: 'tetracaine',
+    name: 'Tetracaine 0.5% ophthalmic',
+    genericName: 'Tetracaine hydrochloride 0.5% ophthalmic solution',
+    drugClass: 'Topical ophthalmic ester anesthetic',
+    route: 'Topical ophthalmic',
+    indications: ['Corneal foreign body removal', 'Corneal abrasion examination', 'Tonometry', 'Short ophthalmic procedures'],
+    dosing: [
+        {
+            indication: 'Corneal foreign body removal / examination',
+            regimen: '**1 drop in the affected eye, repeat as needed** (the label reads "one drop topically in the eye(s) as needed"; 1-2 drops is common practice).\n\n**ONSET: maximum effect within 10-20 SECONDS.** **DURATION: 10-20 minutes.**\n\n**IT DOES NOT LAST LONGER THAN PROPARACAINE.** Both labels give 10-20 minutes. If you have been choosing tetracaine for extra working time, that reason does not exist.\n\n**THE REAL DIFFERENCES:**\n• **Tetracaine stings considerably more on instillation.** [Proparacaine](#/drug/proparacaine/corneal-fb) is the gentler first drop, and in a patient who is already in pain that decides the exam.\n• **Tetracaine stores at room temperature** (15-25 °C, protect from light). Proparacaine must be refrigerated. If the bottle in your pocket has been warm all shift, it is this one.\n\nReach for tetracaine when proparacaine is unavailable or has broken its cold chain.\n\n**PEDIATRIC:** safety demonstrated in pediatric clinical trials; efficacy extrapolated from adult data.',
+        },
+        {
+            indication: 'NEVER for home use',
+            regimen: '**DO NOT PRESCRIBE OR DISPENSE FOR HOME USE.** Same absolute rule as proparacaine.\n\nThe label states that **prolonged use or abuse may lead to corneal epithelial toxicity, manifesting as epithelial defects which may progress to permanent corneal damage.** Repeated instillation also causes non-healing defects, ring infiltrates, corneal melting, and perforation. Loss of the blink reflex and the pain warning permits further unrecognized injury.\n\nDischarge analgesia is a cycloplegic plus oral NSAID/acetaminophen, not a bottle of anesthetic.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to any component of the preparation (ester-type local anesthetics — cross-reacts with benzocaine, procaine, proparacaine)',
+        'Dispensing for outpatient/home use (absolute practice rule; the label frames it as a warning against prolonged use or abuse)',
+    ],
+    cautions: [
+        'More irritating on instillation than proparacaine — warn the patient or you lose their cooperation for the exam',
+        'No duration advantage over proparacaine — both are labeled 10-20 minutes',
+        'Ester class: highest cross-reactivity potential of the ophthalmic anesthetics',
+        'Interferes with corneal culture yield — culture before anesthetizing if you suspect infectious keratitis',
+        'Transient epithelial punctate keratopathy even after single use',
+        'No boxed warning',
+    ],
+    monitoring: 'Visual acuity documented before and after the procedure, both eyes. Fluorescein examination after foreign-body removal to size the residual epithelial defect and exclude a Seidel-positive perforation.',
+    notes: 'Equivalent in speed and duration to proparacaine by their respective labels; the honest clinical decision between them is comfort on instillation and what your department has stocked and stored correctly. The decision that actually matters is never letting either drug leave the department with the patient.',
+    citations: [
+        'Tetracaine hydrochloride ophthalmic solution USP 0.5% prescribing information. Bausch & Lomb. Current DailyMed label, SPL setid 8352a2c8-15e7-4719-ac06-df10ff6b0568.',
+        'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
     ],
 };
 const LINEZOLID = {
@@ -3934,6 +4418,49 @@ const METOCLOPRAMIDE = {
         'Pedigo R. First Trimester Pregnancy Emergencies. Emergency Medicine Practice. 2019;21(1):1-28.',
     ],
 };
+const FIDAXOMICIN = {
+    id: 'fidaxomicin',
+    name: 'Fidaxomicin (Dificid)',
+    genericName: 'Fidaxomicin',
+    drugClass: 'Macrocyclic antibiotic (narrow-spectrum, minimally absorbed)',
+    route: 'PO',
+    indications: ['Clostridioides difficile infection — first episode, non-severe or severe', 'Recurrent C. difficile infection', 'CDI in adults and pediatric patients ≥6 months'],
+    dosing: [
+        {
+            indication: 'C. difficile — initial episode, adult (non-severe or severe)',
+            regimen: '**200 mg PO twice daily × 10 days.**\n\n**PREFERRED FIRST-LINE (IDSA/SHEA 2021).** Preferred over oral vancomycin on the strength of lower recurrence, not higher initial cure — sustained response is the endpoint that matters.\n\n**Alternative:** [vancomycin](#/drug/vancomycin/c difficile) 125 mg PO four times daily × 10 days, if fidaxomicin is unavailable or unaffordable.\n\n**Metronidazole is NOT first-line** for any severity in current guidance. Use it only when neither of the above can be obtained.\n\n**STOP THE INCITING ANTIBIOTIC** if at all possible. That single act does more for recurrence risk than the choice between these two drugs.',
+        },
+        {
+            indication: 'C. difficile — pediatric (≥6 months)',
+            regimen: '**Labeled down to 6 months of age.** Fixed weight-band dosing, **twice daily × 10 days**, using the 40 mg/mL reconstituted oral suspension:\n\n• **4 to <7 kg** — 80 mg (2 mL) PO BID\n• **7 to <9 kg** — 120 mg (3 mL) PO BID\n• **9 to <12.5 kg** — 160 mg (4 mL) PO BID\n• **≥12.5 kg** — 200 mg (5 mL) PO BID, **or** one 200 mg tablet PO BID\n\nUse an oral dosing syringe. **Below 4 kg / under 6 months there is no established dose.**\n\nThis table is absent from the C. difficile consult — do not extrapolate the adult 200 mg BID down to a toddler.',
+        },
+        {
+            indication: 'C. difficile — recurrence',
+            regimen: '**First recurrence:** 200 mg PO BID × 10 days.\n\n**Extended-pulsed alternative (IDSA/SHEA 2021, from the EXTEND trial — NOT an FDA-labeled regimen):** 200 mg PO BID on days 1-5, then 200 mg PO once every other day on days 7-25.\n\n**Multiple recurrences:** consider bezlotoxumab as an adjunct to standard-of-care antibiotic, or refer for fecal microbiota transplantation.',
+        },
+        {
+            indication: 'NOT for fulminant disease',
+            regimen: '**Fulminant CDI (hypotension, shock, ileus, or megacolon) is not a fidaxomicin problem.**\n\n• [Vancomycin](#/drug/vancomycin/c difficile) **500 mg PO/NG four times daily**\n• **PLUS** [metronidazole](#/drug/metronidazole/c difficile) 500 mg IV q8h\n• Vancomycin retention enema if ileus\n• **Surgical consultation** — colectomy can be lifesaving\n\nThere is no established fidaxomicin regimen for fulminant disease.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to fidaxomicin',
+    ],
+    cautions: [
+        'COST. This is the practical barrier — a 10-day course runs into the thousands and prior authorization is common. Verify coverage before discharging a patient on a prescription they cannot fill; a filled vancomycin course beats an unfilled fidaxomicin one.',
+        'Not for systemic infection — minimal absorption is the point, and the limitation',
+        'No role in fulminant disease',
+        'No established dose below 4 kg or under 6 months of age',
+        'Nausea, vomiting, abdominal pain',
+        'No boxed warning',
+    ],
+    monitoring: 'Stool frequency and consistency, WBC, creatinine, volume status. Do NOT send a test of cure — C. difficile PCR stays positive in colonized patients long after clinical resolution and will only generate unnecessary re-treatment.',
+    notes: 'Inhibits bacterial RNA polymerase. Its advantage is narrowness: it spares the anaerobic colonic flora that vancomycin flattens, which is the mechanistic reason recurrence rates are lower. Head-to-head trials show comparable initial clinical cure and superior sustained response.',
+    citations: [
+        'Johnson S, Lavergne V, Skinner AM, et al. Clinical Practice Guideline by IDSA and SHEA: 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults. Clin Infect Dis. 2021;73(5):e1029-e1044.',
+        'Dificid (fidaxomicin) tablets and for oral suspension prescribing information. Merck. Current DailyMed label, SPL setid dd966338-c820-4270-b704-09ef75fa3ceb.',
+    ],
+};
 const METRONIDAZOLE = {
     id: 'metronidazole',
     name: 'Metronidazole (Flagyl)',
@@ -4326,6 +4853,53 @@ const NITROFURANTOIN = {
         'Gupta K, et al. IDSA Guidelines for Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women. Clin Infect Dis. 2011;52(5):e103-e120.',
         'ACOG Committee Opinion No. 717: Sulfonamides, Nitrofurantoin, and Risk of Birth Defects. Obstet Gynecol. 2017;130(3):e150-e152.',
         'Kazemier BM, et al. Maternal and neonatal consequences of treated and untreated asymptomatic bacteriuria in pregnancy. Lancet Infect Dis. 2015;15(11):1324-1333.',
+    ],
+};
+const NITROPRUSSIDE = {
+    id: 'nitroprusside',
+    name: 'Sodium nitroprusside (Nipride RTU)',
+    genericName: 'Sodium nitroprusside',
+    drugClass: 'Direct arterial and venous vasodilator (nitric oxide donor)',
+    route: 'IV infusion (dedicated line, infusion pump, arterial line)',
+    indications: ['Hypertensive emergency — refractory, last-line', 'Acute afterload reduction (severe mitral or aortic regurgitation, acute decompensated heart failure)'],
+    dosing: [
+        {
+            indication: 'Pediatric hypertensive emergency',
+            regimen: '**START 0.3 mcg/kg/min IV.** That is the label initial rate, and it applies to children as well as adults — pediatric efficacy is established below 17 years at the same starting rate.\n\n**TITRATE:** evaluate blood pressure for **at least 5 minutes** before each rate change. Do not chase the number faster than that.\n\n**MAXIMUM 10 mcg/kg/min.** The current label does not set a fixed clock at the ceiling; it states that a patient\'s ability to buffer cyanide **will be exceeded in LESS THAN ONE HOUR at 10 mcg/kg/min**, and to limit time at the maximum rate to as short a duration as possible. (Legacy Nitropress labeling said "never more than 10 minutes at the maximum rate" — a sound bedside rule, but it is superseded text, not the current instruction.)\n\n**RENAL CAPS — the numbers most often missed, and most pediatric hypertensive emergencies are renal:**\n• **eGFR <30 mL/min/1.73 m² → keep the MEAN infusion rate below 3 mcg/kg/min.**\n• **Anuric → keep the MEAN infusion rate at 1 mcg/kg/min.**\n\n**BP TARGET:** reduce by ≤25% in the first 8 hours, then normalize gradually over 24-48 hours. Faster correction causes watershed infarction, and children autoregulate at a different set point than adults.\n\n**LAST LINE.** [Nicardipine](#/drug/nicardipine/peds-htn-emergency) 0.5-3 mcg/kg/min is the preferred first-line titratable agent, then [labetalol](#/drug/labetalol/peds-htn-emergency), then [clevidipine](#/drug/clevidipine/peds-htn-emergency). Reach for nitroprusside when those have failed.',
+        },
+        {
+            indication: 'Adult hypertensive emergency',
+            regimen: '**Start 0.3 mcg/kg/min. Titrate no faster than every 5 minutes. Maximum 10 mcg/kg/min.** Same renal caps apply — mean rate <3 mcg/kg/min if eGFR <30, 1 mcg/kg/min if anuric.\n\nHypotension resolves within **1-10 minutes** of stopping the infusion. That short off-time is the drug\'s only remaining advantage.\n\nIn adults, nicardipine, clevidipine, and labetalol have displaced nitroprusside for nearly every indication. Its remaining niche is refractory hypertension where rapid on/off titration is essential.',
+        },
+        {
+            indication: 'Cyanide toxicity — recognize it',
+            regimen: '**Each nitroprusside molecule liberates 5 cyanide ions.** Risk rises with dose, duration, renal impairment (thiocyanate accumulation), and hepatic impairment (reduced detoxification). At the 10 mcg/kg/min ceiling the label states buffering capacity is exceeded in **under one hour**.\n\n**SUSPECT CYANIDE TOXICITY IF:** worsening metabolic acidosis, rising lactate, unexplained tachyphylaxis to the infusion, altered mental status, or a narrowing arteriovenous oxygen difference.\n\n**ACT:** stop the infusion. Give [hydroxocobalamin](#/drug/hydroxocobalamin/cyanide) or sodium thiosulfate. Do not wait for a level.\n\n**PREVENT:** keep the mean rate low, respect the renal caps, keep total duration short.',
+        },
+    ],
+    contraindications: [
+        'Concomitant sildenafil, tadalafil, vardenafil, or riociguat — profound hypotension',
+        'Diseases with compensatory hypertension (aortic coarctation, arteriovenous shunting) where the pressure is maintaining perfusion',
+        'Congenital (Leber) optic atrophy or tobacco amblyopia',
+        'Inadequate cerebral circulation, or moribund patients (ASA Class 5E) presenting for emergency surgery',
+        'Acute heart failure with reduced peripheral vascular resistance (e.g. high-output sepsis)',
+    ],
+    cautions: [
+        'BOXED WARNING (A) EXCESSIVE HYPOTENSION: can cause precipitous decreases in blood pressure leading to irreversible ischemic injury or death. Use only with continuous blood pressure monitoring.',
+        'BOXED WARNING (B) CYANIDE TOXICITY: metabolism produces dose-related cyanide, which can be lethal. Buffering capacity is exceeded in less than one hour at 10 mcg/kg/min — limit time at the maximum rate to as short a duration as possible.',
+        'RENAL CAPS: mean infusion rate <3 mcg/kg/min if eGFR <30 mL/min/1.73 m²; 1 mcg/kg/min if anuric',
+        'RAISES INTRACRANIAL PRESSURE — avoid in elevated ICP, head injury, or hypertensive encephalopathy with cerebral edema',
+        'Coronary steal in ischemic heart disease',
+        'Light-sensitive — the bag and tubing must be shielded',
+        'Requires arterial line and continuous monitoring; precipitous hypotension is easy to cause',
+        'Rebound hypertension on abrupt discontinuation',
+    ],
+    monitoring: 'Continuous invasive arterial blood pressure. Acid-base status and lactate at least q6h on prolonged infusion. Thiocyanate level if infusion >48 hours or renal impairment (toxic >10 mg/dL). Mental status. Methemoglobin if cumulative dose is large.',
+    notes: 'Nitric-oxide-mediated arterial and venous dilation with near-instantaneous on and off kinetics — the reason it survives at all in a formulary that otherwise has better options. In children the drug is titrated to the same targets as adults but the therapeutic window is narrower and the ICP effect matters more. The trap in pediatrics is that the commonest cause of hypertensive emergency is renal, and renal impairment is exactly where the cyanide/thiocyanate caps bite. Modern pediatric practice reserves nitroprusside for refractory cases; nicardipine is the workhorse.',
+    citations: [
+        'Nipride RTU (sodium nitroprusside in 0.9% sodium chloride) injection prescribing information. Current DailyMed label, SPL setid 5acf0836-93ff-4064-b888-3f560e8a558d.',
+        'Sodium nitroprusside injection prescribing information. Current DailyMed label, SPL setid 72a9b7df-3a2f-4c16-93a9-b645bc0e8143.',
+        'Flynn JT, Kaelber DC, Baker-Smith CM, et al. Clinical Practice Guideline for Screening and Management of High Blood Pressure in Children and Adolescents. Pediatrics. 2017;140(3):e20171904.',
+        'Chandar J, Zilleruelo G. Hypertensive crisis in children. Pediatr Nephrol. 2012;27(5):741-751.',
     ],
 };
 const NITROGLYCERIN = {
@@ -5596,6 +6170,50 @@ const SEMAGLUTIDE = {
         'Wilding JPH, et al. Once-Weekly Semaglutide in Adults with Overweight or Obesity. N Engl J Med. 2021;384(11):989-1002.',
     ],
 };
+const TOCILIZUMAB = {
+    id: 'tocilizumab',
+    name: 'Tocilizumab (Actemra)',
+    genericName: 'Tocilizumab',
+    drugClass: 'IL-6 receptor antagonist (monoclonal antibody)',
+    route: 'IV',
+    indications: ['CAR-T / bispecific antibody cytokine release syndrome (CRS)', 'Severe or life-threatening CRS in adults and pediatric patients ≥2 years'],
+    dosing: [
+        {
+            indication: 'Cytokine release syndrome — patient ≥30 kg',
+            regimen: '**8 mg/kg IV over 60 minutes.** Doses exceeding **800 mg per infusion** are not recommended in CRS.\n\n**REPEAT:** may repeat if signs and symptoms do not improve. **Minimum 8 hours between consecutive doses.**\n\n**CEILING:** the initial dose plus **up to 3 additional doses — 4 doses total.** At the 8-hour minimum interval that works out to no more than 3 doses in any 24 hours; the 4-dose total is the label ceiling, the 3-in-24h figure is just the arithmetic.\n\n**BY CRS GRADE (ASTCT):**\n• **Grade 1:** supportive. Consider tocilizumab only for persistent fever >3 days.\n• **Grade 2:** tocilizumab 8 mg/kg. Add [dexamethasone](#/drug/dexamethasone/crs) 10 mg IV if no response at 24 h.\n• **Grade 3:** ICU. Tocilizumab + dexamethasone 10 mg IV q6h.\n• **Grade 4:** ICU. Tocilizumab + methylprednisolone 1000 mg IV daily × 3 days, then taper. Anakinra 100 mg SC daily if refractory (off-label).\n\n**CULTURE AND COVER FIRST.** CRS and neutropenic sepsis are clinically indistinguishable. Pan-culture and start empiric broad-spectrum antibiotics ([cefepime](#/drug/cefepime/febrile-neutropenia) 2 g IV q8h) before or alongside tocilizumab — never instead of.',
+            weightCalc: { dosePerKg: 8, unit: 'mg', maxDose: 800, label: 'CRS, weight ≥30 kg' },
+        },
+        {
+            indication: 'Cytokine release syndrome — patient <30 kg',
+            regimen: '**12 mg/kg IV over 60 minutes**, still capped at 800 mg per infusion.\n\nSame repeat rule: minimum 8 hours between doses, initial dose plus up to 3 additional doses.\n\n**THIS BAND IS MISSING FROM THE CRS LADDERS IN THIS APP.** Every CRS node states 8 mg/kg with no weight qualifier. CAR-T is licensed for pediatric B-ALL, so a patient under 30 kg in grade-2 CRS is a real patient, and 8 mg/kg underdoses them by a third. Check the weight before you write the order.\n\n**AGE:** approved down to **2 years**. Safety and effectiveness **below 2 years are not established** — discuss with the treating cellular-therapy service.',
+            weightCalc: { dosePerKg: 12, unit: 'mg', maxDose: 800, label: 'CRS, weight <30 kg' },
+        },
+        {
+            indication: 'ICANS — what tocilizumab does NOT do',
+            regimen: '**Tocilizumab does NOT treat ICANS.** It does not meaningfully cross the blood-brain barrier, and by raising serum IL-6 it may theoretically worsen neurotoxicity.\n\n**ICANS treatment is corticosteroid:** [dexamethasone](#/drug/dexamethasone/icans) 10 mg IV q6h for grade 2-3; methylprednisolone 1000 mg IV daily for grade 4.\n\n**Give tocilizumab in the ICANS patient ONLY to treat concurrent CRS**, not the neurotoxicity itself.',
+        },
+    ],
+    contraindications: [
+        'Active untreated serious infection (relative — in CRS you often cannot exclude sepsis, so treat both)',
+        'Known hypersensitivity to tocilizumab',
+    ],
+    cautions: [
+        'BOXED WARNING: RISK OF SERIOUS INFECTIONS — including active tuberculosis, invasive fungal disease, and bacterial, viral, and other opportunistic infections leading to hospitalization or death',
+        'GI perforation risk, particularly with diverticulitis history',
+        'Transaminitis and hepatotoxicity',
+        'Blunts CRP and fever for days afterward — you lose your two easiest sepsis markers, so keep culturing',
+        'Neutropenia and thrombocytopenia',
+        'Does not treat ICANS; steroids do',
+        'Safety and effectiveness below 2 years of age are not established',
+    ],
+    monitoring: 'Continuous vitals and telemetry, LFTs, CBC with differential, blood cultures, ferritin and fibrinogen (HLH/MAS overlap), echocardiogram plus troponin and BNP for any hypotension or dyspnea (CAR-T myocarditis is recognized), D-dimer for cytokine-driven DIC.',
+    notes: 'Blocks both membrane-bound and soluble IL-6 receptors, interrupting the IL-6 amplification loop that drives CRS. Response is often dramatic and fast — fever and hypotension improve within hours. The mental trap is anchoring: CRS looks exactly like neutropenic sepsis, and the two coexist. Culture and cover every time. The second trap is weight: the 12 mg/kg band under 30 kg is easy to miss because the ladders do not print it.',
+    citations: [
+        'Actemra (tocilizumab) injection prescribing information. Genentech, Inc. Current DailyMed label, SPL setid 2e5365ff-cb2a-4b16-b2c7-e35c6bf2de13.',
+        'Lee DW, Santomasso BD, Locke FL, et al. ASTCT Consensus Grading for Cytokine Release Syndrome and Neurologic Toxicity Associated with Immune Effector Cells. Biol Blood Marrow Transplant. 2019;25(4):625-638.',
+        'Santomasso BD, Nastoupil LJ, Adkins S, et al. Management of Immune-Related Adverse Events in Patients Treated With Chimeric Antigen Receptor T-Cell Therapy: ASCO Guideline. J Clin Oncol. 2021;39(35):3978-3992.',
+    ],
+};
 const RASBURICASE = {
     id: 'rasburicase',
     name: 'Rasburicase (Elitek)',
@@ -5742,6 +6360,88 @@ const RITUXIMAB_TTP = {
     citations: [
         'Scully M, et al. Rituximab in TTP. Blood. 2011;118(7):1746-1753.',
         'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.',
+    ],
+};
+const PATIROMER = {
+    id: 'patiromer',
+    name: 'Patiromer (Veltassa)',
+    genericName: 'Patiromer sorbitex calcium',
+    drugClass: 'Potassium binder (non-absorbed cation exchange polymer)',
+    route: 'PO',
+    indications: ['Hyperkalemia — subacute and chronic management (adjunct)'],
+    dosing: [
+        {
+            indication: 'Hyperkalemia — adult',
+            regimen: '**8.4 g PO once daily.** Titrate at intervals of **at least one week** in 8.4 g increments to a maximum of **25.2 g once daily**.\n\n**ADMINISTRATION:** mix the powder in water. **Do NOT take it dry. Do NOT heat it** or add it to hot liquid. It may be taken **with or without food** — the old "take with food" instruction is no longer in the label.\n\n**NOT AN EMERGENCY DRUG.** The label states plainly that it should not be used as emergency treatment for life-threatening hyperkalemia because of its delayed onset — roughly 7 hours to a measurable effect, and the effect is small (about 0.2 mEq/L at 7 hours).\n\n**WHAT ACTUALLY TREATS ACUTE HYPERKALEMIA:**\n• [Calcium gluconate](#/drug/calcium-gluconate/hyperkalemia) — membrane stabilization, first, if any ECG change.\n• [Insulin regular](#/drug/insulin-regular/hyperkalemia) + dextrose — intracellular shift.\n• [Albuterol](#/drug/albuterol-neb/hyperkalemia) 10-20 mg nebulized — additive shift.\n• **Dialysis** — the only reliable elimination route in the anuric patient.\n\nPatiromer is for the elimination phase and for chronic outpatient control, particularly to let a patient stay on a RAAS inhibitor.',
+        },
+        {
+            indication: 'Hyperkalemia — pediatric',
+            regimen: '**12 to <18 years: 4 g PO once daily.** Titrate by **4 g** at intervals of at least one week, to the same **25.2 g** maximum.\n\n**BELOW 12 YEARS: NOT ESTABLISHED.** Safety and efficacy have not been established under age 12. A pediatric study in patients 6 to <12 years did not show a reduction in serum potassium at 2 weeks, and the label gives no dosing recommendation for that group.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to patiromer or any component',
+    ],
+    cautions: [
+        'Do NOT rely on it for acute severe hyperkalemia and do NOT let it delay dialysis — the label says so explicitly',
+        'Avoid in severe constipation, bowel obstruction, or impaction (label Warning, not a contraindication)',
+        'BINDS OTHER ORAL DRUGS — give other oral medications at least 3 hours before or 3 hours after patiromer',
+        'Binds magnesium: hypomagnesemia is common, check a level and monitor it',
+        'Contains calcium (not sodium) — an advantage over sodium-based binders in volume-overloaded patients, a consideration in hypercalcemia',
+        'Constipation, diarrhea, abdominal discomfort',
+        'Do not heat the powder or add it to hot liquid; do not take it in dry form',
+        'No boxed warning (the original 6-hour drug-separation boxed warning was removed when the interval was shortened to 3 hours)',
+    ],
+    monitoring: 'Serum potassium and serum magnesium. Review the full medication list for oral drugs requiring 3-hour separation.',
+    notes: 'Exchanges calcium for potassium in the colonic lumen. Compared with sodium zirconium cyclosilicate it is slower and somewhat weaker acutely (~0.2 mEq/L at 7 h vs SZC ~0.2 mEq/L at 4 h and ~0.4 mEq/L at 24 h), but it avoids the sodium load. Both are far safer than sodium polystyrene sulfonate. See [Lokelma](#/drug/sodium-zirconium-cyclosilicate/acute hyperkalemia).',
+    citations: [
+        'Veltassa (patiromer) for oral suspension prescribing information. Current DailyMed label, SPL setid bf002984-d6c9-46df-aecb-a07733f763c1.',
+        'Palmer BF, Clegg DJ. Hyperkalemia treatment standard. Nephrol Dial Transplant. 2024;39(7):1097-1104.',
+    ],
+};
+const SODIUM_POLYSTYRENE_SULFONATE = {
+    id: 'sodium-polystyrene-sulfonate',
+    name: 'Sodium polystyrene sulfonate (Kayexalate, SPS)',
+    genericName: 'Sodium polystyrene sulfonate',
+    drugClass: 'Potassium binder (sodium cation-exchange resin) — legacy agent',
+    route: 'PO / PR',
+    indications: ['Hyperkalemia — legacy agent, NOT first-line'],
+    dosing: [
+        {
+            indication: 'Hyperkalemia — oral',
+            regimen: '**15 g PO one to four times daily** (label average total daily dose 15-60 g), as the powder suspended in water.\n\n**PREFER A NEWER BINDER.** [Sodium zirconium cyclosilicate (Lokelma)](#/drug/sodium-zirconium-cyclosilicate/acute hyperkalemia) 10 g PO q8h or [patiromer (Veltassa)](#/drug/patiromer/hyperkalemia) 8.4 g PO daily are both more effective and dramatically safer. Use SPS only when neither is available.\n\n**DO NOT CO-ADMINISTER WITH SORBITOL.** The label states that cases of intestinal necrosis, some fatal, have been reported, the majority involving concomitant sorbitol, and that concomitant sorbitol use is **not recommended**.\n\n**SODIUM LOAD:** each 15 g dose contains **1,500 mg (60 mEq) of sodium** — about 4 mEq per gram. In heart failure, cirrhosis, or advanced CKD that is a real volume insult, and it is the reason to choose a calcium- or zirconium-based binder instead.\n\n**NOT AN EMERGENCY DRUG.** Onset is hours. It does nothing for the patient with a widened QRS.',
+        },
+        {
+            indication: 'Hyperkalemia — retention enema',
+            regimen: '**30-50 g PR every 6 hours**, retained 30-60 minutes, followed by a cleansing enema.\n\n**Higher GI-injury risk than the oral route.** I would not use this in the ED. Dialysis is the answer for the patient sick enough to be considered for it.',
+        },
+        {
+            indication: 'Pediatric — not established',
+            regimen: '**NOT ESTABLISHED.** The label states that studies in children have not been conducted, and **oral administration is contraindicated in neonates**.\n\nThe historical pediatric approach was to dose against the resin\'s exchange ratio of roughly 1 mEq potassium per gram, but that has never been validated and it does not appear as a dosing recommendation in the label. If a binder is genuinely needed in a child, involve pediatric nephrology and use a newer agent.',
+        },
+    ],
+    contraindications: [
+        'Hypersensitivity to polystyrene sulfonate resins',
+        'Obstructive bowel disease',
+        'Neonates with reduced gut motility',
+        'Oral administration in neonates',
+    ],
+    cautions: [
+        'FATAL INTESTINAL NECROSIS — intestinal necrosis, some fatal, plus ischemic colitis, GI bleeding, and perforation are reported. In the published systematic review the colon was involved in ~76% of GI-injury cases, transmural necrosis was the commonest histopathology (~62%), and mortality among those cases was ~33%.',
+        'SODIUM LOAD — 1,500 mg (60 mEq) sodium per 15 g dose',
+        'Avoid in postoperative patients before bowel function has returned, and in anyone with ileus or reduced gut motility — that is where the injury reports cluster',
+        'Binds other oral drugs — give them at least 3 hours before or 3 hours after (6 hours in gastroparesis)',
+        'Monitor for severe hypokalemia; also hypomagnesemia and hypocalcemia with repeated dosing',
+        'Efficacy data are weak — the historical evidence for potassium lowering never met a modern standard',
+        'Risk is highest in post-op patients, transplant recipients, uremic patients, and anyone with impaired motility',
+        'No boxed warning, but the intestinal-necrosis language sits in Warnings and the FDA has warned specifically against concomitant sorbitol',
+    ],
+    monitoring: 'Serum potassium, sodium, magnesium, calcium. Abdominal examination and bowel function every shift while dosed. Stop immediately for abdominal pain, distension, or bleeding.',
+    notes: 'A 1950s-era resin that exchanges sodium for potassium in the gut. It is in this drug store because consults still reference it, not because it should be prescribed. In 2026 the correct sequence for acute hyperkalemia is calcium for membrane stabilization, insulin/dextrose and beta-agonist for shift, and dialysis for elimination in the anuric patient — with SZC or patiromer as the oral binder when a binder is indicated at all.',
+    citations: [
+        'Sodium polystyrene sulfonate for suspension prescribing information. Current DailyMed label, SPL setid 2017bfbe-cda8-46f1-b4f1-9c086c3249a9.',
+        'Harel Z, Harel S, Shah PS, Wald R, Perl J, Bell CM. Gastrointestinal adverse events with sodium polystyrene sulfonate (Kayexalate) use: a systematic review. Am J Med. 2013;126(3):264.e9-264.e24.',
+        'Palmer BF, Clegg DJ. Hyperkalemia treatment standard. Nephrol Dial Transplant. 2024;39(7):1097-1104.',
     ],
 };
 const SODIUM_ZIRCONIUM_CYCLOSILICATE = {
@@ -5893,6 +6593,47 @@ const TAMSULOSIN = {
         'McNeill SA, et al. Alfuzosin once daily facilitates return to voiding in patients in acute urinary retention. J Urol. 2004;171(6 Pt 1):2316-2320.',
         'Fitzpatrick JM, et al. Management of acute urinary retention: a worldwide survey of 6074 men with BPH. BJU Int. 2012;109(1):88-95.',
         'Parsons JK, et al. Treatment of acute urinary retention. Nat Rev Urol. 2018;15(5):276-284.',
+    ],
+};
+const PRAZOSIN = {
+    id: 'prazosin',
+    name: 'Prazosin (Minipress)',
+    genericName: 'Prazosin hydrochloride',
+    drugClass: 'Alpha-1 adrenergic antagonist',
+    route: 'PO',
+    indications: ['PTSD-related nightmares and sleep disruption (off-label)', 'Hypertension (FDA-approved)'],
+    dosing: [
+        {
+            indication: 'PTSD nightmares — Raskind titration protocol (off-label)',
+            regimen: '**START 1 mg PO at bedtime × 2 nights.**\n**THEN 2 mg PO at bedtime × 5 nights.**\n**THEN titrate weekly** until nightmares are absent or the ceiling is reached.\n\n**MAXIMUM TOTAL DAILY DOSE (Raskind PACT, NEJM 2018): 20 mg/day in men, 12 mg/day in women**, in divided doses — confirmed against the trial protocol.\n\n**PRACTICAL BEDTIME CAPS (Harvard South Shore 2024–25):** about 15 mg qhs in men, 10 mg qhs in women. If daytime hyperarousal persists, add a mid-morning dose of roughly one third of the bedtime dose.\n\n**OLDER ADULTS:** mean effective dose is around 5 mg qhs, generally tolerated without meaningful BP impact.\n\n**PEDIATRIC: NOT ESTABLISHED** — safety and effectiveness in children have not been established for any indication.\n\n**OFF-LABEL.** The only labeled indication is hypertension. PTSD nightmares is guideline-supported off-label use.\n\n**COUNSEL BEFORE THE FIRST DOSE:**\n• **First-dose orthostasis and syncope** — take it at bedtime, sit up slowly.\n• Hold the next dose if dizzy, and call.\n• **Check a blood pressure before initiating.** Do not start it in a symptomatically hypotensive patient.\n• Additive hypotension with PDE5 inhibitors (sildenafil, tadalafil) and any antihypertensive.',
+        },
+        {
+            indication: 'What the evidence actually supports',
+            regimen: '**IT TREATS THE NIGHTMARES, NOT THE PTSD.**\n\n• **PACT trial (Raskind, NEJM 2018):** 26-week, 12-site VA RCT in clinically stable veterans; **no significant difference from placebo on any of the three 10-week primary outcomes** (CAPS item B2, Pittsburgh Sleep Quality Index, CGIC). Likely underpowered and over-selected, but negative.\n• **2025 meta-analysis (10 RCTs, n=648):** improves insomnia (SMD -0.654) and nightmares (SMD -0.641); **does NOT improve overall PTSD symptoms.**\n• **2023 VA/DoD CPG:** weak recommendation FOR prazosin for PTSD nightmares (Rec 32); **suggests AGAINST** prazosin for overall PTSD symptoms (Rec 18).\n\nSet the expectation accordingly: a targeted sleep and nightmare intervention, not a treatment for the disorder.',
+        },
+        {
+            indication: 'Hypertension (FDA-labeled, PO)',
+            regimen: '**1 mg PO two or three times daily** to start. Usual maintenance **6–15 mg/day in divided doses**; doses above 20 mg/day usually add no efficacy, though some patients are reported to benefit up to 40 mg/day. Reduce to 1–2 mg three times daily and re-titrate when adding another antihypertensive.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to prazosin or to other quinazolines',
+        'Symptomatic hypotension (clinical contraindication per the consult — not a labeled one)',
+    ],
+    cautions: [
+        'FIRST-DOSE PHENOMENON — syncope within 30 to 90 minutes of the first dose or after a dose increase, reported in about 1% of patients started on 2 mg or more. Always start at 1 mg, always at bedtime.',
+        'Additive hypotension with PDE5 inhibitors and antihypertensives',
+        'Intraoperative floppy iris syndrome — the patient must disclose it before cataract surgery',
+        'Priapism — an erection lasting more than 4 hours needs immediate care to avoid permanent loss of potency',
+        'Tolerance and rebound nightmares if stopped abruptly',
+        'Nasal congestion, headache, dizziness',
+    ],
+    monitoring: 'Blood pressure before initiation and after each titration step, sitting and standing. Nightmare frequency, which is the actual therapeutic endpoint. Daytime dizziness and falls, particularly in older adults.',
+    notes: 'Blocks central alpha-1 receptors, dampening the noradrenergic surge implicated in trauma nightmares; lipophilic enough to cross the blood-brain barrier, which is why it works where peripherally selective alpha blockers do not. Despite the negative PACT trial it remains first-line for PTSD-related sleep impairment in most algorithms — the discipline is being honest with the patient about what it will and will not fix.',
+    citations: [
+        'Raskind MA, Peskind ER, Chow B, et al. Trial of Prazosin for Post-Traumatic Stress Disorder in Military Veterans (PACT). N Engl J Med. 2018;378(6):507-517. PMID 29414272.',
+        'Prazosin hydrochloride capsules prescribing information. Teva. DailyMed SETID 7293cef3-ef9e-40dc-9995-875ef047f693.',
+        'US Department of Veterans Affairs / Department of Defense. VA/DoD Clinical Practice Guideline for the Management of Posttraumatic Stress Disorder and Acute Stress Disorder. Version 4.0; 2023. Recommendations 18 and 32.',
     ],
 };
 const TENECTEPLASE = {
@@ -6242,6 +6983,183 @@ const BACITRACIN = {
     cautions: ['Not effective for deep partial or full thickness burns — use silver-based dressings', 'Avoid large surface area application (nephrotoxicity with systemic absorption, rare)'],
     notes: 'First-line topical for superficial partial thickness burns and all facial burns. Preferred over silver sulfadiazine for superficial burns — SSD delays epithelialization. OTC availability makes it ideal for outpatient burn care.',
     citations: ['Wasiak J et al. Dressings for Superficial and Partial Thickness Burns. Cochrane. 2013;(3):CD002106.'],
+};
+const CIPROFLOXACIN_OPHTHALMIC = {
+    id: 'ciprofloxacin-ophthalmic',
+    name: 'Ciprofloxacin 0.3% ophthalmic (Ciloxan)',
+    genericName: 'Ciprofloxacin hydrochloride 0.3% ophthalmic solution/ointment',
+    drugClass: 'Fluoroquinolone antibiotic — topical ophthalmic',
+    route: 'Topical ophthalmic',
+    indications: ['Corneal abrasion in a contact lens wearer — Pseudomonas coverage', 'Bacterial keratitis / corneal ulcer', 'Bacterial conjunctivitis'],
+    dosing: [
+        {
+            indication: 'Contact lens-associated abrasion — keratitis prophylaxis',
+            regimen: '**1 drop to the affected eye four times daily × 5–7 days.**\n\n**This QID prophylaxis schedule is OFF-LABEL** — Ciloxan has no labeled abrasion-prophylaxis regimen. It is the standard practice interval (AFP 2013: topical antibiotics for abrasion "are generally dosed four times a day and continued until the patient is asymptomatic for 24 hours").\n\n**MANDATORY FOR CONTACT LENS WEARERS.** A contact-lens-associated abrasion carries genuine Pseudomonas risk and can progress to a sight-threatening ulcer within 24 hours. Erythromycin and polymyxin B/trimethoprim do NOT cover this adequately.\n\n**NO CONTACT LENSES** until cleared by ophthalmology. Say it, write it, document it.\n\n**MANDATORY 24-HOUR OPHTHALMOLOGY FOLLOW-UP** for any contact lens wearer with an epithelial defect.',
+        },
+        {
+            indication: 'Bacterial keratitis / corneal ulcer (established infiltrate) — labeled regimen',
+            regimen: '**Day 1: 2 drops every 15 minutes for the first 6 hours, then 2 drops every 30 minutes for the remainder of the day.**\n**Day 2: 2 drops hourly.**\n**Days 3–14: 2 drops every 4 hours.**\n\n**A corneal infiltrate is an ophthalmology emergency, not an ED discharge.** Do not start this regimen and send the patient home — call ophthalmology.',
+        },
+        {
+            indication: 'Bacterial conjunctivitis — labeled regimen',
+            regimen: '1–2 drops into the conjunctival sac every 2 hours while awake × 2 days, then 1–2 drops every 4 hours while awake × 5 days.',
+        },
+    ],
+    contraindications: [
+        'History of hypersensitivity to ciprofloxacin or any other component of the medication',
+    ],
+    cautions: [
+        'WHITE CRYSTALLINE PRECIPITATE on the corneal surface occurred in ~17% of corneal-ulcer patients in the labeling trials, typically within 24 hours to 7 days of starting therapy. It did not affect outcome or vision. It is the drug — do not mistake it for a worsening infiltrate.',
+        'PEDIATRICS: safety and effectiveness in patients below 1 year of age have not been established. Use moxifloxacin 0.5% (labeled in all ages) in an infant.',
+        'Culture BEFORE starting therapy if there is any infiltrate',
+        'Systemic fluoroquinolone boxed warnings (tendinopathy, neuropathy, CNS effects) do not appear in the ophthalmic labeling',
+        'Emerging fluoroquinolone resistance among ocular staphylococci; moxifloxacin has broader gram-positive activity',
+    ],
+    monitoring: 'Daily ophthalmology review while an epithelial defect persists in a contact lens wearer. Visual acuity, size of the defect on fluorescein, and presence or absence of an infiltrate or hypopyon.',
+    notes: 'Strong Pseudomonas activity is the reason this is the contact-lens drug. The distinction that matters clinically: an ABRASION gets QID prophylaxis, an INFILTRATE gets the labeled loading regimen and an ophthalmologist tonight.',
+    citations: [
+        'Ciloxan (ciprofloxacin hydrochloride ophthalmic solution 0.3%) prescribing information. DailyMed SETID 91bd0351-f33c-43ca-bd77-7da97969985b.',
+        'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
+        'Lin A, Rhee MK, Akpek EK, et al. Bacterial Keratitis Preferred Practice Pattern. Ophthalmology. 2019;126(1):P1-P55.',
+    ],
+};
+const MOXIFLOXACIN_OPHTHALMIC = {
+    id: 'moxifloxacin-ophthalmic',
+    name: 'Moxifloxacin 0.5% ophthalmic (Vigamox)',
+    genericName: 'Moxifloxacin hydrochloride 0.5% ophthalmic solution',
+    drugClass: 'Fourth-generation fluoroquinolone — topical ophthalmic',
+    route: 'Topical ophthalmic',
+    indications: ['Corneal abrasion in a contact lens wearer — Pseudomonas coverage', 'Bacterial keratitis', 'Bacterial conjunctivitis (labeled)'],
+    dosing: [
+        {
+            indication: 'Contact lens-associated abrasion — keratitis prophylaxis',
+            regimen: '**1 drop to the affected eye four times daily × 5–7 days.**\n\n**This QID prophylaxis schedule is OFF-LABEL** — Vigamox has one labeled regimen (bacterial conjunctivitis, 1 drop 3 times daily × 7 days). QID is the practice interval for abrasion prophylaxis and is what the consult states.\n\nInterchangeable with [ciprofloxacin 0.3%](#/drug/ciprofloxacin-ophthalmic/contact-lens-keratitis) for this indication. Advantages: **self-preserved — the formulation contains no benzalkonium chloride** (inactives are boric acid, sodium chloride, and purified water), so it stings less and is gentler on a damaged epithelium; broader gram-positive coverage; and **safety and effectiveness are established in ALL ages including neonates**, where ciprofloxacin ophthalmic is not established below 1 year. Disadvantage: cost.\n\nSame two non-negotiables as any contact-lens abrasion: **no lenses until cleared**, and **ophthalmology within 24 hours**.\n\n**A corneal infiltrate or hypopyon is an emergency referral, not a prescription.**',
+        },
+        {
+            indication: 'Bacterial conjunctivitis (labeled regimen)',
+            regimen: '**1 drop in the affected eye 3 times a day for 7 days.**\n\n**PEDIATRIC:** same dose, no adjustment. Safety and effectiveness are established in **all ages including neonates**.',
+        },
+    ],
+    contraindications: [
+        'History of hypersensitivity to moxifloxacin, to other quinolones, or to any component of the medication',
+    ],
+    cautions: [
+        'No boxed warning — the systemic fluoroquinolone tendinopathy, neuropathy, and aortic warnings do not appear in the ophthalmic labeling',
+        'Higher cost than ciprofloxacin — check coverage before discharging a prescription the patient cannot fill',
+        'Culture before starting if an infiltrate is present',
+        'Serious hypersensitivity reactions including anaphylaxis have been reported with systemic quinolones; discontinue at the first sign of an allergic reaction',
+        'Prolonged use may cause overgrowth of resistant organisms including fungi',
+        'Patients should not wear contact lenses while they have signs or symptoms of bacterial conjunctivitis',
+        'Does not precipitate on the cornea the way ciprofloxacin can, which makes serial examination cleaner',
+        'A corneal infiltrate or hypopyon is an emergency referral, not a prescription',
+    ],
+    monitoring: 'Same as ciprofloxacin ophthalmic: daily review while the defect persists in a lens wearer, visual acuity, fluorescein defect size, infiltrate.',
+    notes: 'Fourth-generation quinolone with better gram-positive coverage than ciprofloxacin while retaining Pseudomonas activity, and free of benzalkonium chloride. For a painful, freshly de-epithelialized cornea the absence of BAK is a genuine comfort advantage. Note the id: the plain `moxifloxacin` entry in this store is the systemic TB drug — different drug, different route, must not be aliased.',
+    citations: [
+        'Vigamox (moxifloxacin hydrochloride ophthalmic solution) 0.5% prescribing information. Novartis Pharmaceuticals Corporation. DailyMed SETID ad783689-2b59-448c-b0d6-e8b70cf8b062.',
+        'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
+        'Lin A, Rhee MK, Akpek EK, et al. Bacterial Keratitis Preferred Practice Pattern. Ophthalmology. 2019;126(1):P1-P55.',
+    ],
+};
+const ERYTHROMYCIN_OINTMENT = {
+    id: 'erythromycin-ointment',
+    name: 'Erythromycin 0.5% ophthalmic ointment',
+    genericName: 'Erythromycin 0.5% ophthalmic ointment',
+    drugClass: 'Macrolide antibiotic — topical ophthalmic',
+    route: 'Topical ophthalmic',
+    indications: ['Corneal abrasion prophylaxis', 'Superficial ocular infection of the conjunctiva and/or cornea', 'Neonatal ophthalmia prophylaxis (N. gonorrhoeae, C. trachomatis)'],
+    dosing: [
+        {
+            indication: 'Corneal abrasion prophylaxis',
+            regimen: '**Apply a ribbon approximately 1 cm long inside the lower lid four times daily × 3–5 days**, or until the epithelial defect has healed and the patient has been asymptomatic for 24 hours.\n\n**The label reads "approximately 1 cm in length … up to six times daily, depending on the severity of the infection."** QID is the practice interval for abrasion prophylaxis (AFP 2013), which is why the consult says qid — the label permits up to 6× daily if you want it.\n\n**FIRST-LINE for the NON-contact-lens wearer.** Cheap, gentle, and the ointment vehicle lubricates, which by itself reduces pain with blinking.\n\n**NOT ADEQUATE FOR CONTACT LENS WEARERS** — they need Pseudomonas coverage. Use [ciprofloxacin 0.3%](#/drug/ciprofloxacin-ophthalmic/contact-lens-keratitis) or [moxifloxacin 0.5%](#/drug/moxifloxacin-ophthalmic/contact-lens-keratitis) instead.\n\n**BLURS VISION** for several minutes after each application — dose it at bedtime plus three daytime applications, and tell the patient not to drive right after.\n\n**NO PATCHING.** Cochrane found no benefit and possible harm.',
+        },
+        {
+            indication: 'Neonatal ophthalmia prophylaxis',
+            regimen: '**A ribbon approximately 1 cm long instilled into EACH lower conjunctival sac, once. Do not flush the ointment from the eye afterward. Use a new tube for each infant.**\n\nCDC/AAP practice is to give it **within 1 hour of birth** — that timing is the public-health recommendation, not label text.\n\nErythromycin 0.5% ointment is the only agent currently available in the US for this indication. **Topical prophylaxis alone is inadequate for an infant born to a mother with clinical gonorrhea** — that infant needs systemic penicillin G / ceftriaxone.',
+        },
+    ],
+    contraindications: [
+        'History of hypersensitivity to erythromycin',
+    ],
+    cautions: [
+        'No Pseudomonas coverage — inadequate for contact lens wearers or for any wound with vegetative material',
+        'Transient blurred vision after application',
+        'Does not treat established bacterial keratitis; an infiltrate needs ophthalmology and fortified antibiotics',
+        'Effectiveness against penicillinase-producing N. gonorrhoeae is not established',
+        'Rising macrolide resistance among staphylococci limits it to prophylaxis rather than treatment',
+    ],
+    monitoring: 'Recheck visual acuity at follow-up. Return precautions: worsening pain, decreasing vision, purulent discharge, increasing photophobia — any of which suggests infectious keratitis.',
+    notes: 'The default corneal-abrasion prophylaxis in most EDs on cost and tolerability. Its job is preventing secondary infection of an epithelial defect, nothing more. Note the id: the plain `erythromycin` entry in this store is the PROKINETIC (gastroparesis) drug — these are different drugs given different ways and must not be aliased.',
+    citations: [
+        'Erythromycin ophthalmic ointment USP 0.5% prescribing information. Bausch & Lomb Incorporated. DailyMed SETID 061ddd20-94a6-4e3c-ba84-1ebd8529eea6.',
+        'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
+        'Lin A, Rhee MK, Akpek EK, et al. Bacterial Keratitis Preferred Practice Pattern. Ophthalmology. 2019;126(1):P1-P55.',
+    ],
+};
+const POLYMYXIN_TRIMETHOPRIM = {
+    id: 'polymyxin-trimethoprim',
+    name: 'Polymyxin B / trimethoprim ophthalmic (Polytrim)',
+    genericName: 'Polymyxin B sulfate 10,000 units/mL and trimethoprim 1 mg/mL ophthalmic solution',
+    drugClass: 'Combination topical ophthalmic antibiotic',
+    route: 'Topical ophthalmic',
+    indications: ['Corneal abrasion prophylaxis (off-label)', 'Acute bacterial conjunctivitis and blepharoconjunctivitis (FDA-labeled)'],
+    dosing: [
+        {
+            indication: 'Corneal abrasion prophylaxis (off-label)',
+            regimen: '**1 drop to the affected eye four times daily × 3–5 days**, or until the epithelium has healed.\n\n**OFF-LABEL INTERVAL.** The labeled interval is every 3 hours (see the conjunctivitis card below); QID is the pragmatic abrasion-prophylaxis schedule and is what the consult recommends.\n\n**First-line alternative to erythromycin ointment** for a non-contact-lens wearer: it is a solution, so it does not blur vision — the better choice for a patient who has to drive or work.\n\n**NOT ADEQUATE FOR CONTACT LENS WEARERS.** Polymyxin B has gram-negative activity but is not reliable enough for Pseudomonas — use a fluoroquinolone ([ciprofloxacin 0.3%](#/drug/ciprofloxacin-ophthalmic/contact-lens-keratitis) or [moxifloxacin 0.5%](#/drug/moxifloxacin-ophthalmic/contact-lens-keratitis)).',
+        },
+        {
+            indication: 'Acute bacterial conjunctivitis / blepharoconjunctivitis (FDA-labeled)',
+            regimen: '**1 drop in the affected eye(s) every 3 hours — maximum 6 doses per day — for 7 to 10 days** (mild to moderate infection). This is the labeled regimen.\n\n**PEDIATRIC:** same dosing from **2 months of age**. Safety and effectiveness **are not established below 2 months** — the label does not approve it in that age group.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to polymyxin B, to trimethoprim, or to any component of the solution',
+        'Infants under 2 months of age — not approved (safety and effectiveness not established)',
+    ],
+    cautions: [
+        'Not reliable for Pseudomonas despite the polymyxin component — do not use it as contact-lens-wearer coverage',
+        'Contains benzalkonium chloride 0.004% — can sting on a de-epithelialized cornea and is absorbed by soft contact lenses',
+        'Local burning and stinging on instillation',
+        'Does not treat established keratitis — an infiltrate needs ophthalmology, not a prophylaxis drop',
+        'Aminoglycoside-free, which is an advantage — gentamicin and tobramycin drops are epithelial-toxic and slow healing',
+    ],
+    monitoring: 'Visual acuity at follow-up. Standard abrasion return precautions: worsening pain, vision loss, purulent discharge, photophobia.',
+    notes: 'Trimethoprim covers the gram-positives, polymyxin B covers most gram-negatives, and neither is epithelial-toxic the way an aminoglycoside is. The drop-form alternative when a patient cannot tolerate ointment blur.',
+    citations: [
+        'Polymyxin B sulfate and trimethoprim ophthalmic solution prescribing information. DailyMed SETID 87999254-1857-4d3c-817a-cb8f6a5b0cf7.',
+        'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
+    ],
+};
+const CYCLOPENTOLATE = {
+    id: 'cyclopentolate',
+    name: 'Cyclopentolate 1% (Cyclogyl)',
+    genericName: 'Cyclopentolate hydrochloride ophthalmic solution 0.5% / 1% / 2%',
+    drugClass: 'Topical anticholinergic cycloplegic / mydriatic',
+    route: 'Topical ophthalmic',
+    indications: ['Traumatic iritis — ciliary spasm', 'Corneal abrasion with severe photophobia (off-label, evidence does NOT support routine use)', 'Cycloplegic refraction'],
+    dosing: [
+        {
+            indication: 'Corneal abrasion with severe photophobia / traumatic iritis — ciliary spasm',
+            regimen: '**⚠️ THE EVIDENCE IS AGAINST ROUTINE USE IN ABRASION.** Wipperman AFP 2013 — the same source this consult cites — states: *"Topical cycloplegics and mydriatics do not relieve pain in uncomplicated corneal abrasions and are not recommended"* (SORT evidence rating B). **Reserve it for traumatic iritis, or for an abrasion with photophobia severe enough that the patient cannot open the eye. Do not give it reflexively.**\n\n**DOSE (labeled): 1–2 drops of 0.5%, 1%, or 2% to the affected eye, repeated in 5–10 minutes if necessary.** Heavily pigmented irides may need the higher strength. Any at-home continuation (the consult suggests BID × 1–2 days) is off-label symptom management, not a labeled regimen.\n\n**INFANTS AND SMALL CHILDREN: use 0.5% ONLY, ONE drop per eye**, then apply pressure over the nasolacrimal sac for **2–3 minutes** to limit systemic absorption, and **observe the child for at least 30 minutes** after instillation.\n\n**ONSET / DURATION:** maximal cycloplegia at 25–75 minutes. **Complete recovery of accommodation takes 6–24 hours, and complete recovery from mydriasis may take several days.**\n\n**THE DISCHARGE ANALGESIC IS ORAL, NOT TOPICAL** — [acetaminophen](#/drug/acetaminophen/general) and/or [ibuprofen](#/drug/ibuprofen/general). Never a topical anesthetic for home use.\n\n**DOCUMENT THAT THE PUPIL WAS PHARMACOLOGICALLY DILATED** — otherwise the next examiner reads it as a neurologic emergency.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to cyclopentolate or any component of the preparation (the only contraindication in the label)',
+    ],
+    cautions: [
+        'Mydriatics may produce a transient elevation of intraocular pressure. Patients with untreated narrow-angle glaucoma or anatomically narrow angles may be susceptible to ANGLE CLOSURE. Assess anterior chamber depth before dilating. (This is a labeled WARNING, not a labeled contraindication.)',
+        'CNS DISTURBANCES, especially in younger age groups — psychotic reactions and behavioral disturbances including hallucinations, seizures, ataxia, restlessness and disorientation. Risk rises with concentration; use 0.5% in infants and small children.',
+        'Blurred near vision — accommodation may not fully recover for 6–24 hours and the pupil may stay dilated for days. The patient must not drive and should be told so.',
+        'Photophobia INCREASES from the dilation itself; sunglasses help',
+        'Evidence does not support cycloplegics for pain in uncomplicated corneal abrasion — the pupillary dilation and blurred vision are a real cost with no proven analgesic benefit',
+    ],
+    monitoring: 'Visual acuity before instillation (dilation will change it). Intraocular pressure if any suspicion of narrow angles. Observe infants and small children for at least 30 minutes. Document pharmacologic dilation prominently in the chart and tell the patient to mention it if they are seen again.',
+    notes: 'Relaxes the ciliary body and iris sphincter. The theory — that ciliary spasm drives abrasion pain — is sound pharmacology that did not survive testing: trials show no analgesic benefit in uncomplicated abrasion. Keep it for traumatic iritis and for the outlier patient whose photophobia is disabling. Homatropine is the longer-acting alternative for iritis. Whatever you use, warn the patient the eye will look and feel strange for a day or more.',
+    citations: [
+        'Cyclogyl (cyclopentolate hydrochloride ophthalmic solution, USP) prescribing information. Alcon. DailyMed SETID 1d008c76-7210-4ace-90fa-7cd22762e12e.',
+        'Wipperman JL, Dorsch JN. Evaluation and management of corneal abrasions. Am Fam Physician. 2013;87(2):114-120.',
+    ],
 };
 const CALCIUM_GLUCONATE_GEL = {
     id: 'calcium-gluconate-gel',
@@ -7974,6 +8892,10 @@ const TMP_SMX = {
             regimen: '1 DS tablet (160/800 mg) PO daily OR 1 DS tablet PO 3x/week. Continue until CD4 >200 for 3+ months on ART.',
         },
         {
+            indication: 'PJP prophylaxis — prolonged corticosteroids (irAE, transplant, autoimmune)',
+            regimen: '**One double-strength (DS) tablet (160 mg TMP / 800 mg SMX) PO once daily.**\n\n**Equally acceptable:** one DS tablet three times weekly, or one single-strength tablet daily. The three-times-weekly schedule has the lowest adverse-event rate.\n\n**WHEN TO START:** prednisone-equivalent **≥20 mg daily for >4 weeks** — the threshold used in the irAE and transplant literature and the trigger this consult uses.\n\n**WHEN TO STOP:** when the taper drops below 20 mg prednisone-equivalent per day.\n\n**PEDIATRIC (labeled, BSA-based — no weight calculator):** 150 mg/m²/day trimethoprim with 750 mg/m²/day sulfamethoxazole PO in two equally divided doses, **on 3 consecutive days per week**. Do not convert this to mg/kg.\n\n**SULFA ALLERGY ALTERNATIVES:** atovaquone 1500 mg PO daily, dapsone 100 mg PO daily (check G6PD first), or inhaled pentamidine 300 mg monthly.\n\n**WATCH THE INTERACTIONS, NOT THE DRUG:** hyperkalemia (trimethoprim blocks the distal tubular sodium channel — worse with ACE inhibitors, ARBs, spironolactone, CKD), a creatinine rise without a true GFR change, sharp INR climb on warfarin, and additive antifolate toxicity with methotrexate. **Contraindicated with dofetilide.**',
+        },
+        {
             indication: 'MRSA SSTI / cellulitis (purulent)',
             regimen: '1-2 DS tablets (160/800 mg) PO BID × 5-10 days. First-line oral MRSA SSTI per IDSA 2014 SSTI guidelines. 2 DS BID for moderate-severe or larger lesions. Adjunctive to incision/drainage for abscess. Pediatric: 8-12 mg/kg/day TMP component divided BID.',
         },
@@ -8404,6 +9326,47 @@ const HALOPERIDOL = {
     citations: [
         'Nassisi D, et al. Managing Delirium in the Emergency Department. Emergency Medicine Practice (EB Medicine).',
         'Farkas J. Antipsychotic Pharmacology. Internet Book of Critical Care (IBCC). 2024.',
+    ],
+};
+const ARIPIPRAZOLE = {
+    id: 'aripiprazole',
+    name: 'Aripiprazole (Abilify)',
+    genericName: 'Aripiprazole',
+    drugClass: 'Second-generation antipsychotic — dopamine D2 partial agonist',
+    route: 'PO',
+    indications: ['First-episode psychosis / schizophrenia', 'Adolescent schizophrenia (13–17 years)', 'Bipolar I mania', 'Adjunct in major depressive disorder'],
+    dosing: [
+        {
+            indication: 'First-episode psychosis — adult',
+            regimen: '**PRACTICE DOSE (matches the consult table): start 5–10 mg PO once daily, target 10–15 mg/day.**\n\n**THE LABEL STARTS HIGHER.** Abilify labeling gives an adult schizophrenia starting dose of **10–15 mg/day**, a recommended dose of 10–15 mg/day, and a **maximum of 30 mg/day**. Starting at 5 mg is deliberately below label — it is the first-episode convention, not the labeled start. There is no efficacy advantage above 15 mg/day in most trials.\n\n**FIRST-EPISODE PATIENTS NEED LOWER DOSES than chronically treated patients** — they are more responsive and far more sensitive to extrapyramidal effects. Do not start a drug-naive patient where you would start someone who has been on antipsychotics for a decade.\n\n**WHY IT IS OFTEN CHOSEN FIRST:** the most favorable metabolic profile of the commonly used second-generation agents, minimal prolactin elevation, and weight-neutral relative to olanzapine.\n\n**AKATHISIA IS THE CHARACTERISTIC PROBLEM** — more common with aripiprazole than most SGAs, and patients describe it as unbearable inner restlessness. It is frequently misread as worsening agitation and treated with more antipsychotic, which makes it worse. Treat with dose reduction, propranolol, or a benzodiazepine.\n\n**BASELINE BEFORE STARTING:** weight, BMI, waist circumference, fasting glucose, lipid panel, ECG for QTc.',
+        },
+        {
+            indication: 'Schizophrenia — adolescent 13–17 years (labeled pediatric dose)',
+            regimen: '**Start 2 mg PO once daily. Recommended dose 10 mg/day. Maximum 30 mg/day.**\n\nTitrate 2 mg → 5 mg after 2 days → 10 mg after 2 more days; any further increase in 5 mg increments.\n\nAripiprazole is one of the few second-generation antipsychotics carrying pediatric schizophrenia labeling. **Do not extrapolate the adult start to an adolescent** — the labeled adolescent start is 2 mg, one-fifth of the adult figure.',
+        },
+        {
+            indication: 'Acute agitation — why IM aripiprazole is NOT an option',
+            regimen: '**DO NOT PLAN AROUND IM ARIPIPRAZOLE.** The immediate-release intramuscular product (9.75 mg/1.3 mL) is no longer marketed in the US, and the **agitation IM dosing section was removed from the Abilify label in January 2025.** It will not be in your pyxis.\n\n**For acute agitation use** [droperidol](#/drug/droperidol/acute agitation), [haloperidol](#/drug/haloperidol/acute agitation) + [lorazepam](#/drug/lorazepam/agitation), [midazolam](#/drug/midazolam/acute agitation), [olanzapine](#/drug/olanzapine/agitation), or [ketamine](#/drug/ketamine/agitation).\n\n**Abilify Maintena and Abilify Asimtufii are long-acting maintenance injectables**, not rescue drugs. They have no role in the agitated patient in front of you.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to aripiprazole — reactions have ranged from pruritus/urticaria to anaphylaxis',
+    ],
+    cautions: [
+        'BOXED WARNING: increased mortality in elderly patients with dementia-related psychosis. Aripiprazole is not approved for dementia-related psychosis.',
+        'BOXED WARNING: increased risk of suicidal thinking and behavior in children, adolescents, and young adults taking antidepressants — applies to the MDD-adjunct use',
+        'AKATHISIA — the signature adverse effect. Ask about it directly; patients rarely volunteer it in usable words.',
+        'Impulse-control disorders — pathological gambling, hypersexuality, compulsive eating. Uncommon, well documented, easily missed.',
+        'Neuroleptic malignant syndrome',
+        'Tardive dyskinesia with prolonged use',
+        'Orthostatic hypotension on initiation',
+        'Known CYP2D6 poor metabolizers: half the usual dose. Strong CYP2D6 OR strong CYP3A4 inhibitors: half the usual dose. Strong CYP3A4 inducers: double the usual dose over 1–2 weeks.',
+    ],
+    monitoring: 'Baseline and periodic weight, BMI, waist circumference, fasting glucose, lipids. ECG for QTc. AIMS examination for tardive dyskinesia on maintenance. Ask about akathisia at every visit.',
+    notes: 'A D2 partial agonist rather than a pure antagonist — it stabilizes dopaminergic tone rather than shutting it down, which explains both the low prolactin effect and the akathisia. In the ED the realistic role is initiating maintenance therapy for a first-episode patient with confirmed psychiatric follow-up, not managing the agitated patient in front of you.',
+    citations: [
+        'Abilify (aripiprazole) tablets prescribing information. Otsuka America Pharmaceutical, Inc. DailyMed SETID c040bd1d-45b7-49f2-93ea-aed7220b30ac (agitation IM section removed 1/2025).',
+        'Keepers GA, Fochtmann LJ, Anzia JM, et al. The American Psychiatric Association Practice Guideline for the Treatment of Patients With Schizophrenia. Am J Psychiatry. 2020;177(9):868-872.',
     ],
 };
 const OLANZAPINE = {
@@ -9672,6 +10635,74 @@ const DEXMEDETOMIDINE = {
         'Devlin JW, et al. Clinical Practice Guidelines for the Prevention and Management of Pain, Agitation/Sedation, Delirium, Immobility, and Sleep Disruption in Adult Patients in the ICU. Crit Care Med. 2018;46(9):e825-e873.',
     ],
 };
+const PRALIDOXIME = {
+    id: 'pralidoxime',
+    name: 'Pralidoxime (2-PAM, Protopam Chloride)',
+    genericName: 'Pralidoxime chloride',
+    drugClass: 'Antidote — cholinesterase reactivator (oxime)',
+    route: 'IV/IM',
+    indications: ['Organophosphate pesticide poisoning with anticholinesterase activity', 'Nerve agent exposure (sarin, VX, soman, tabun)', 'Overdose of anticholinesterase drugs used in myasthenia gravis (neostigmine, pyridostigmine, ambenonium)'],
+    dosing: [
+        {
+            indication: 'Organophosphate poisoning — adult IV',
+            regimen: '**GIVE ATROPINE FIRST.** Atropine is the life-saving drug; pralidoxime is the adjunct for the nicotinic limb. Never delay atropine, decontamination, or airway management to mix pralidoxime.\n\n**LABEL REGIMEN:** 1,000–2,000 mg IV in 100 mL normal saline over **15–30 minutes**. A second 1,000–2,000 mg dose may be indicated after about 1 hour if muscle weakness has not been relieved. Additional doses may be given **every 10–12 hours** while weakness persists.\n\n**CONTINUOUS-INFUSION ALTERNATIVE (Eddleston, Lancet 2008):** 2 g IV over 20–30 minutes, then **0.5–1 g/hr** by continuous infusion. The label notes that a load followed by continuous infusion maintains therapeutic levels longer than intermittent dosing. The WHO states the same approach weight-based: 30 mg/kg load, then an hourly infusion (see the calculator below and the Notes).\n\n**CONTINUE** until the patient has needed no atropine for 12–24 hours and is weaned from ventilatory support.\n\n**RATE LIMITS — too fast causes harm.** Intermittent infusion must not exceed **200 mg/min**. Rapid administration causes tachycardia, laryngospasm, muscle rigidity or paralysis, and cardiac arrest. If IV infusion is not feasible, or if pulmonary edema is present, give slowly over not less than 5 minutes as a 50 mg/mL solution.\n\n**TIMING:** generally little is accomplished if pralidoxime is given more than 36 hours after exposure ends. After ingestion, continued absorption from the lower bowel causes relapse — re-dose every 3–8 hours as long as signs of poisoning recur, and observe for 48–72 hours.',
+            weightCalc: { dosePerKg: 30, unit: 'mg', maxDose: 2000, label: 'WHO/Eddleston alternative load (30 mg/kg, capped at the 2 g label maximum single dose)' },
+        },
+        {
+            indication: 'Organophosphate poisoning — pediatric IV load (≤ 16 years)',
+            regimen: '**LOAD: 20–50 mg/kg IV, not to exceed 2,000 mg per dose, over 15–30 minutes.**\n\nThe label gives a range, not a point dose — **the calculator below shows both ends of it.** Titrate to weakness and to the clinical picture; the higher end is for severe poisoning.\n\nIf infusion is impractical, or if pulmonary edema is present, give the dose slowly over not less than 5 minutes as a 50 mg/mL solution.\n\nAtropine first, always.',
+            weightCalc: [
+                { dosePerKg: 20, unit: 'mg', maxDose: 2000, label: 'Pediatric load — low end of labeled range (20 mg/kg, cap 2 g)' },
+                { dosePerKg: 50, unit: 'mg', maxDose: 2000, label: 'Pediatric load — high end of labeled range (50 mg/kg, cap 2 g)' },
+            ],
+        },
+        {
+            indication: 'Organophosphate poisoning — pediatric IV maintenance (≤ 16 years)',
+            regimen: '**After the load, EITHER:**\n• **Continuous infusion: 10–20 mg/kg/hr**, OR\n• **Intermittent: repeat 20–50 mg/kg (max 2 g/dose) after about 1 hour** if muscle weakness persists, then every 10–12 hours as needed.\n\nSame endpoint as adults: continue until the patient has been atropine-free for 12–24 hours and is weaned from ventilation.\n\nRate-titrated infusions are not calculated here — set the pump from the load weight and titrate to weakness.',
+        },
+        {
+            indication: 'Nerve agent — IM / autoinjector',
+            regimen: '**DuoDote / ATNAA:** atropine 2.1 mg + pralidoxime chloride 600 mg per injector, IM into the mid-lateral thigh (injects through clothing). **Mark I NAAK:** atropine 2 mg + pralidoxime 600 mg as two separate injectors.\n\n**MILD symptoms (two or more):** give ONE injection, then wait 10–15 minutes. If mild symptoms persist, give a second; if they still persist after another 15 minutes, a third may be given. Maximum 3 injections = 1,800 mg pralidoxime.\n\n**SEVERE symptoms: give THREE injections in RAPID SUCCESSION — do NOT space them 15 minutes apart.** If severe symptoms appear at any point after a first mild-symptom dose, immediately give two more in rapid succession.\n\n**PERSISTENT symptoms:** the 3-injection course may be repeated beginning about 1 hour after the last injection.\n\n**PEDIATRIC IM (Protopam vials, not the autoinjector):** under 40 kg → **15 mg/kg per injection**, maximum **45 mg/kg per 3-injection course**. At or above 40 kg → adult dosing (600 mg per injection, 1,800 mg per course). Inject into the anterolateral thigh. **DuoDote safety and effectiveness have not been established at or below 41 kg (90 lb).**\n\nExpect moderate injection-site pain 40–60 minutes after IM administration.',
+            weightCalc: [
+                { dosePerKg: 15, unit: 'mg', label: 'Pediatric IM under 40 kg — dose per injection' },
+                { dosePerKg: 45, unit: 'mg', label: 'Pediatric IM under 40 kg — maximum per 3-injection course' },
+            ],
+        },
+        {
+            indication: 'Anticholinesterase drug overdose (myasthenia gravis agents)',
+            regimen: '**1,000–2,000 mg IV, then 250 mg increments every 5 minutes** as an antagonist to neostigmine, pyridostigmine, or ambenonium overdose.',
+        },
+        {
+            indication: 'When NOT to give it',
+            regimen: '**CARBAMATES — the label warns against it.** Pralidoxime is **not indicated** for carbamate-class pesticide poisoning **because it may increase the toxicity of carbaryl.** Carbamate-inhibited cholinesterase reactivates spontaneously within hours; atropine alone is the treatment.\n\n**NOT EFFECTIVE** for poisoning by phosphorus, inorganic phosphates, or organophosphates that lack anticholinesterase activity.\n\n**AGED ENZYME:** once the organophosphate–enzyme bond has aged (hours for most agents, roughly 2 minutes for soman), pralidoxime cannot reactivate it. Give it early or the window closes.\n\n**EVIDENCE CAVEAT:** the placebo-controlled trial of the WHO regimen showed no clinical benefit and a trend toward harm, and the Cochrane review found the evidence insufficient to support or refute oximes. Practice is still to give it — but never at the expense of atropine, decontamination, or the airway.',
+        },
+    ],
+    contraindications: [
+        'No known absolute contraindications — the label lists only relative ones',
+        'Relative: known hypersensitivity to pralidoxime, and any situation in which the risk clearly outweighs the possible benefit',
+    ],
+    cautions: [
+        '**ATROPINE FIRST** — pralidoxime does not treat the muscarinic crisis that is killing the patient. Atropine should not be given during significant hypoxia (risk of atropine-induced ventricular fibrillation) — improve oxygenation first.',
+        '**Do not push it.** Intermittent infusion must not exceed 200 mg/min. Rapid IV causes tachycardia, cardiac arrest, laryngospasm, and muscle rigidity or paralysis; in children, also fasciculations, apnea, and convulsions.',
+        '**Carbamates: the label states it may increase the toxicity of carbaryl** — this is a labeled warning, not merely "unnecessary"',
+        'Renally excreted — reduce the dose in renal impairment',
+        'Use with great caution in myasthenia gravis — **may precipitate myasthenic crisis**',
+        'Signs of atropinization (flush, mydriasis, tachycardia, dry mouth) appear earlier than expected when pralidoxime and atropine are given together — do not misread this as atropine toxicity',
+        'Decontaminate the patient AND protect staff — remove clothing, wash skin and hair; secondary exposure through skin and clothing is real',
+        'Intermediate syndrome (proximal weakness, respiratory failure) appears 24–96 hours post-exposure regardless of oxime therapy — plan for prolonged ventilation',
+        'Transient AST/ALT and creatine phosphokinase elevations occur after IM dosing and resolve over about 2 weeks',
+        'Avoid morphine, theophylline, aminophylline, reserpine, and phenothiazines in organophosphate poisoning; use barbiturates cautiously and succinylcholine with caution (prolonged paralysis)',
+    ],
+    monitoring: 'Tracheobronchial secretions (the atropine titration endpoint — not heart rate), respiratory effort and vital capacity, red-cell and plasma cholinesterase if available (may be normal despite clinically significant poisoning), renal function, continuous ECG. Observe for at least 48–72 hours; recurrence after apparent improvement is well described.',
+    notes: 'Pralidoxime cleaves the organophosphate off acetylcholinesterase and restores the enzyme, addressing the nicotinic limb — weakness, fasciculation, respiratory muscle failure — that atropine cannot touch. Its value depends entirely on reaching the enzyme before it ages. The WHO continuous-infusion regimen is 30 mg/kg loading dose followed by 8 mg/kg per hour; the 2 g cap on the calculator above is the label\'s maximum single dose, not a WHO figure. Reconstitution: 1,000 mg vial + 20 mL Sterile Water = 50 mg/mL; dilute in normal saline to 10–20 mg/mL for IV infusion, or reconstitute to approximately 300 mg/mL for IM use. All doses are expressed as pralidoxime **chloride** — other salts (methanesulfonate, iodide) are not interchangeable milligram-for-milligram. Pediatric efficacy is extrapolated from adults; there are no adequate controlled pediatric trials.',
+    citations: [
+        'PROTOPAM Chloride (pralidoxime chloride) for injection prescribing information. Baxter Healthcare Corporation. DailyMed SPL setid 2741d8fd-51c2-46be-880b-99f2b20a6137 (effective 2026-04-01).',
+        'DuoDote (atropine and pralidoxime chloride injection) auto-injector prescribing information. Meridian Medical Technologies. DailyMed SPL setid 241f42a0-1a33-40e8-8221-201767d999e5.',
+        'Eddleston M, Buckley NA, Eyer P, Dawson AH. Management of acute organophosphorus pesticide poisoning. Lancet. 2008;371(9612):597-607.',
+        'World Health Organization. Clinical management of acute pesticide intoxication: prevention of suicidal behaviours. Geneva: WHO; 2008.',
+        'Buckley NA, Eddleston M, Li Y, Bevan M, Robertson J. Oximes for acute organophosphate pesticide poisoning. Cochrane Database Syst Rev. 2011;(2):CD005085.',
+    ],
+};
 const PHYSOSTIGMINE = {
     id: 'physostigmine',
     name: 'Physostigmine (Antilirium)',
@@ -10311,38 +11342,50 @@ const ADENOSINE = {
 };
 const ANDEXANET_ALFA = {
     id: 'andexanet',
-    name: 'Andexanet Alfa',
-    genericName: 'Coagulation Factor Xa (recombinant), Inactivated-zhzo',
-    drugClass: 'Factor Xa decoy / DOAC reversal agent',
-    route: 'IV (bolus then infusion)',
-    indications: ['Apixaban or rivaroxaban reversal in life-threatening bleeding'],
+    name: 'Andexanet Alfa (Andexxa)',
+    genericName: 'Coagulation factor Xa (recombinant), inactivated-zhzo',
+    drugClass: 'Antidote — recombinant modified factor Xa decoy',
+    route: 'IV',
+    indications: ['Apixaban or rivaroxaban reversal — life-threatening or uncontrolled bleeding', 'Apixaban- or rivaroxaban-associated intracranial hemorrhage'],
     dosing: [
         {
-            indication: 'DOAC reversal — life-threatening bleeding',
-            regimen: '**Low-dose (most patients):** 400 mg IV bolus at 30 mg/min, then 4 mg/min × 120 min (total 480 mg infusion).\n**High-dose:** 800 mg IV bolus at 30 mg/min, then 8 mg/min × 120 min (total 960 mg infusion).\n\n**High-dose criteria:**\n• Apixaban >5 mg dose taken within 8 hr (or unknown timing)\n• Rivaroxaban >10 mg taken within 8 hr (or unknown timing)\n• Otherwise use low-dose.',
+            indication: 'DOAC reversal — LOW DOSE',
+            regimen: '**400 mg IV bolus at a target rate of 30 mg/min, then 4 mg/min for 120 minutes (480 mg).**\nTotal 880 mg = 5 vials (2 bolus + 3 infusion).\n\n**USE LOW DOSE WHEN:**\n• Rivaroxaban last dose ≤ 10 mg, OR\n• Apixaban last dose ≤ 5 mg, OR\n• **Last dose was ≥ 8 hours ago — the ≥ 8-hour column of the label table is LOW dose for every row, regardless of how much was taken.**\n\n**Start the follow-on infusion within 2 minutes of finishing the bolus.** Give through a 0.2 or 0.22 micron in-line polyethersulfone (low protein-binding) filter.\n\nThe safety and effectiveness of more than one dose have not been evaluated.',
         },
         {
-            indication: 'Epistaxis (severe DOAC-associated)',
-            regimen: 'Same dosing as above. Reserve for refractory bleeding not controlled by anterior/posterior packing — most epistaxis stops with packing alone even on DOACs.',
+            indication: 'DOAC reversal — HIGH DOSE',
+            regimen: '**800 mg IV bolus at a target rate of 30 mg/min, then 8 mg/min for 120 minutes (960 mg).**\nTotal 1,760 mg = 9 vials (4 bolus + 5 infusion).\n\n**USE HIGH DOSE ONLY WHEN THE LAST DOSE WAS < 8 HOURS AGO OR THE TIMING IS UNKNOWN, AND:**\n• Rivaroxaban last dose > 10 mg or unknown, OR\n• Apixaban last dose > 5 mg or unknown\n\nIf ≥ 8 hours have elapsed, use LOW dose — do not escalate on dose size alone.',
         },
         {
-            indication: 'Massive hemorrhage / MTP — DOAC reversal',
-            regimen: 'Same dosing. Co-administer with PCC if mixed anticoagulants or unclear DOAC. **Cost: ~$25,000-50,000/dose** — confirm DOAC ingestion + life-threatening bleed before dosing.',
+            indication: 'Xa-associated intracranial hemorrhage',
+            regimen: '**Dose by the low/high algorithm above.** AHA/ASA 2022 gives a Class 1 recommendation for andexanet in Xa-inhibitor-associated ICH where it is on formulary.\n\n**ANNEXA-I (NEJM 2024; 263 andexanet vs 267 usual care, mostly 4-factor PCC):**\n• Hemostatic efficacy 67.0% vs 53.1%; trial stopped early for efficacy.\n• Anti-FXa activity reduction 94.5% vs 26.9%.\n• **Thrombotic events 10.3% vs 5.6%; ischemic stroke 6.5% vs 1.5%.**\n• **No significant difference in 30-day mortality or disability.**\n\n**PRACTICAL:** most US centers default to 4-factor PCC (Kcentra) on cost and availability (~$25,000–50,000 vs ~$5,000). Reserve andexanet for ICH with the drug on formulary and no acute thrombotic contraindication.',
+        },
+        {
+            indication: 'Not indicated — do NOT give for these',
+            regimen: '**Label Limitations of Use: andexanet has not been shown to be effective for, and is not indicated for, bleeding related to any factor Xa inhibitor other than apixaban or rivaroxaban.**\n\n• **Edoxaban, betrixaban, fondaparinux — NOT indicated.** Use 4-factor PCC (Kcentra).\n• **Dabigatran — wrong agent.** Use idarucizumab (Praxbind).\n• **Unfractionated heparin or LMWH — this is NOT a heparin antidote.** Use of andexanet as an antidote for heparin has not been established; use protamine for heparin.\n• Bleeding that is controllable by local measures.\n\n**Do not give andexanet immediately before planned heparinization.** If anticoagulation is needed afterward, use an agent other than heparin.',
         },
     ],
-    contraindications: ['No absolute contraindications in life-threatening bleeding'],
+    contraindications: [
+        'None per label — no absolute contraindication in life-threatening apixaban- or rivaroxaban-associated bleeding',
+    ],
     cautions: [
-        'Thromboembolic risk: ~10% within 30 days (DVT, PE, MI, stroke)',
-        'Resume anticoagulation as soon as clinically safe',
-        'Effect lasts ~2 hr after infusion — anticoagulant effect may rebound',
-        'Will interfere with heparin assays if heparin given subsequently',
-        'Cost: ~$25,000-50,000/dose — institutional approval often required',
+        '**BOXED WARNING — thromboembolic risks, ischemic risks, cardiac arrest, and sudden deaths.** Arterial and venous thromboembolic events; ischemic events including myocardial infarction and ischemic stroke; cardiac arrest; sudden death.',
+        'Thrombotic events occurred in 10.7% within 30 days in ANNEXA-4 (median 10 days to first event; 17 of 45 events within 3 days)',
+        'Resume anticoagulant therapy as soon as medically appropriate — the untreated post-reversal window is the highest-risk period',
+        '**Unresponsiveness to unfractionated heparin** (non-prolongation of activated clotting time) with serious thrombotic events has occurred after andexanet — this matters if the patient needs cardiopulmonary bypass, ECMO, or urgent endovascular therapy',
+        'Current commercial anti-FXa activity assays are **unsuitable** for measuring FXa activity after andexanet — do not titrate to or judge reversal by an anti-Xa level',
+        'Anti-FXa activity returns toward placebo levels roughly 2 hours after the bolus or the infusion ends — re-elevation and incomplete reversal both occur',
+        'Approved under accelerated approval on an anti-FXa surrogate endpoint; the label still states that an improvement in hemostasis has not been established',
+        'Safety not evaluated in patients with a thromboembolic event or DIC within the prior 2 weeks, or who received PCC, recombinant factor VIIa, or whole blood within the prior 7 days',
+        'Cost and formulary stocking are real constraints — know your institution\'s supply before the patient arrives',
     ],
-    monitoring: 'Anti-Xa level (poor correlation with bleeding endpoint — clinical assessment primary). Re-bleeding risk 12-24 hr post-infusion.',
-    notes: 'Specific antidote for apixaban and rivaroxaban (also some activity against edoxaban, betrixaban, enoxaparin). Mechanism: recombinant decoy Xa molecule binds and sequesters Xa inhibitors. PCC (Kcentra) is a reasonable alternative when andexanet unavailable or cost-prohibitive — though no head-to-head trials show superiority.',
+    monitoring: 'Serial neurologic exams and repeat head CT for ICH. Continuous telemetry. Monitor for arterial and venous thromboembolic events, ischemic events, and cardiac arrest for at least 30 days. **Do NOT use anti-FXa levels to judge adequacy of reversal** — commercial assays are unsuitable after andexanet. Reversal is assessed clinically and radiographically.',
+    notes: 'A catalytically inactive recombinant factor Xa decoy — the active-site serine is replaced by alanine and the Gla domain is removed, so it binds and sequesters apixaban and rivaroxaban without generating thrombin itself. It also inhibits tissue factor pathway inhibitor, which contributes both to the procoagulant effect and to the thrombotic signal. Because it adds no clotting factor, it will not correct anticoagulation from any non-Xa mechanism and will not change a factor assay. **Safety and efficacy in pediatric patients have not been studied — no pediatric dose is established.**',
     citations: [
-        'Connolly SJ et al. Andexanet for Factor Xa Inhibitor-Associated Acute Major Bleeding. NEJM. 2016;375(12):1131-1141.',
-        'Tomaselli GF et al. 2020 ACC Expert Consensus on Management of Bleeding in Patients on Oral Anticoagulants. JACC. 2020;76(5):594-622.',
+        'ANDEXXA (coagulation factor Xa [recombinant], inactivated-zhzo) prescribing information. AstraZeneca/Alexion; revised 03/2025. DailyMed SPL setid 2d9d90a6-63e6-46ef-96ff-dd6519ae7b6c (effective 2025-05-23).',
+        'Connolly SJ, Sharma M, Cohen AT, et al. Andexanet for Factor Xa Inhibitor-Associated Acute Intracerebral Hemorrhage (ANNEXA-I). N Engl J Med. 2024;390(19):1745-1755.',
+        'Connolly SJ, Crowther M, Eikelboom JW, et al. Full Study Report of Andexanet Alfa for Bleeding Associated with Factor Xa Inhibitors (ANNEXA-4). N Engl J Med. 2019;380(14):1326-1335.',
+        'Greenberg SM, Ziai WC, Cordonnier C, et al. 2022 Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage. Stroke. 2022;53(7):e282-e361.',
     ],
 };
 const MANNITOL = {
@@ -10511,6 +11554,46 @@ const NAPROXEN = {
     citations: [
         'FitzGerald JD et al. 2020 ACR Guideline for the Management of Gout. Arthritis Care Res. 2020;72(6):744-760.',
         'Smolen JS et al. EULAR recommendations for the management of rheumatoid arthritis: 2022 update. Ann Rheum Dis. 2023;82(1):3-18.',
+    ],
+};
+const DICLOFENAC = {
+    id: 'diclofenac',
+    name: 'Diclofenac 1% topical gel (Voltaren)',
+    genericName: 'Diclofenac sodium 1% topical gel',
+    drugClass: 'NSAID (non-selective COX inhibitor) — topical',
+    route: 'Topical (oral formulations also exist)',
+    indications: ['Mechanical / myofascial neck pain (off-label site)', 'Cervical radiculopathy — adjunctive analgesia (off-label site)', 'Osteoarthritis of hand, wrist, elbow, foot, ankle, knee (labeled)'],
+    dosing: [
+        {
+            indication: 'MSK / musculoskeletal / myofascial pain — topical',
+            regimen: '**Apply four times daily** (approximately every 6 hours).\n\n**HOW MUCH:** **2 g** per application to an upper-body site (hand, wrist, elbow); **4 g** per application to a lower-body site (foot, ankle, knee). Measure it on the enclosed dosing card — 2.25 inches of gel is 2 g, 4.5 inches is 4 g.\n\n**CEILINGS:** maximum **8 g/day per joint** for upper-body sites, **16 g/day per joint** for lower-body sites, and **not more than 32 g/day total across all sites.** The OTC product additionally says: no more than **2 body areas at once**, and no more than **21 days** without seeing a clinician.\n\n**⚠️ NECK USE IS OFF-LABEL.** The Rx Voltaren Gel label states: *"Voltaren Gel has not been evaluated for use on the spine, hip, or shoulder,"* and the OTC label restricts use to hand/wrist/elbow and foot/ankle/knee. **The cervical spine is not a labeled application site.** Topical NSAIDs for acute musculoskeletal pain have Cochrane support in general, but applying this gel to the neck is an off-label extension — know that when you recommend it, and there is no labeled gram-per-application figure for a neck site (2 g, the upper-body figure, is the pragmatic amount).\n\n**RUB IN THOROUGHLY. WASH YOUR HANDS AFTERWARD** (unless the hands are the treated site). **Avoid showering or bathing for at least 1 hour.** Do NOT apply an occlusive dressing or external heat (heating pad) over treated skin.\n\n**WHY TOPICAL IS THE RIGHT CHOICE HERE:** with normal topical use (4 × 4 g daily to one knee), systemic exposure is approximately **6%** of the plasma level from a single oral dose — so the GI, renal, and cardiovascular risks that make oral NSAIDs a problem in older patients are substantially reduced.\n\n**COMBINE WITH:** [naproxen](#/drug/naproxen/MSK) 500 mg BID or [ibuprofen](#/drug/ibuprofen/MSK) 600 mg TID plus scheduled [acetaminophen](#/drug/acetaminophen/MSK) 1 g q6h. **Do not stack topical and oral diclofenac** — that is a single systemic dose ceiling, not two.',
+        },
+        {
+            indication: 'Oral formulation',
+            regimen: 'Immediate-release 50 mg PO BID–TID (maximum 150 mg/day). Carries the full oral NSAID risk profile with no analgesic advantage over naproxen or ibuprofen for musculoskeletal pain. **The topical form is the reason this drug is in these consults** — if you want an oral NSAID, use naproxen or ibuprofen.',
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to diclofenac',
+        'Prior asthma, urticaria, or allergic-type reaction to aspirin or other NSAIDs',
+        'Peri-operative pain in the setting of coronary artery bypass graft (CABG) surgery',
+        'Application to open wounds, broken skin, infected skin, dermatitis, eyes, or mucous membranes',
+    ],
+    cautions: [
+        'BOXED WARNING (class): NSAIDs may increase the risk of serious cardiovascular thrombotic events, MI, and stroke, which can be fatal, and cause an increased risk of serious GI bleeding, ulceration, and perforation, which can occur at any time and without warning. Attenuated but not eliminated by topical use.',
+        'THE CERVICAL SPINE IS NOT A LABELED SITE — Voltaren Gel "has not been evaluated for use on the spine, hip, or shoulder"',
+        'DO NOT STACK topical with oral NSAIDs; the daily ceiling is cumulative',
+        'Application-site dermatitis is the commonest adverse effect',
+        'No external heat and no occlusive dressing over treated skin; avoid showering for 1 hour after application',
+        'Pregnancy: avoid from 20 weeks (fetal renal dysfunction / oligohydramnios) and avoid from 30 weeks (premature closure of the ductus arteriosus)',
+        'Avoid in CKD stage 4–5, decompensated heart failure, active peptic ulcer disease, and on anticoagulants where an oral NSAID would be avoided',
+    ],
+    monitoring: 'Application-site skin integrity. Renal function and blood pressure if used extensively, chronically, or in a patient with risk factors. GI symptoms.',
+    notes: 'The clinical argument for topical diclofenac in neck pain is favorable systemic risk, not superior efficacy — it lets you add an NSAID for an older patient in whom a systemic NSAID would be a poor idea. Pair it with the non-pharmacologic advice that actually drives outcome in mechanical neck pain: no bed rest, early gentle range of motion, no prolonged soft collar, and physical therapy within 1–2 weeks.',
+    citations: [
+        'Voltaren Gel (diclofenac sodium topical gel) 1% prescribing information. DailyMed SETID 1940300f-2b4a-4016-a1bb-21f821797a89.',
+        'Voltaren Arthritis Pain (diclofenac sodium topical gel 1%) OTC Drug Facts labeling. Haleon US Holdings LLC. DailyMed SETID 30a94282-0892-442a-aa10-6525cbd4fe88.',
+        'Derry S, Moore RA, Gaskell H, McIntyre M, Wiffen PJ. Topical NSAIDs for acute musculoskeletal pain in adults. Cochrane Database Syst Rev. 2015;(6):CD007402.',
     ],
 };
 const VALACYCLOVIR = {
@@ -12134,6 +13217,44 @@ const STONEFISH_ANTIVENOM = {
         'Goldfrank LR, et al. Goldfrank’s Toxicologic Emergencies. 11th ed. Marine envenomations chapter.',
     ],
 };
+const PAPAVERINE = {
+    id: 'papaverine',
+    name: 'Papaverine',
+    genericName: 'Papaverine hydrochloride',
+    drugClass: 'Direct smooth-muscle vasodilator (non-specific phosphodiesterase inhibitor)',
+    route: 'Intra-arterial (selective SMA catheter) — off-label; labeled routes are IV and IM',
+    indications: ['Non-occlusive mesenteric ischemia (NOMI) — selective SMA vasodilation (off-label)'],
+    dosing: [
+        {
+            indication: 'NOMI — selective SMA infusion',
+            regimen: '**OFF-LABEL. There is no FDA-approved dose for this indication** — the papaverine label carries no mesenteric indication and no intra-arterial dosing. Everything below comes from the ESVS guideline and published series.\n\n**BOLUS (optional, at angiography):** 60 mg into the SMA.\n\n**INFUSION:** **30-60 mg/hour** continuous into the SMA catheter, diluted to **1 mg/mL in normal saline**, via a controlled infusion pump.\n\n**PUBLISHED ALTERNATIVE (Winzer 2020, the largest modern series):** 50 mg in 50 mL saline over the first hour, then **150 mg in 50 mL over 6 hours (= 25 mg/h)**, repeated if there is no clinical improvement. Mean total infusion time in that series was 26 hours.\n\n**DURATION:** continue at least 24 hours, then repeat angiography. Restart for further 24-hour blocks until the vasoconstriction and the clinical picture resolve.\n\n**THIS IS AN IR PROCEDURE, NOT AN ED INFUSION.** It requires selective SMA catheterization. Interventional radiology places and manages the line.\n\n**FIRST, FIX THE CAUSE:** optimize cardiac output, resuscitate volume, and **stop or minimize vasopressors** — NOMI is usually driven by splanchnic vasoconstriction from pressors, cardiogenic shock, sepsis, or post-cardiac-surgery low-output state. Papaverine treats the artery; it does not treat the reason the artery clamped down.',
+        },
+        {
+            indication: 'Line safety — read before starting',
+            regimen: '**INCOMPATIBLE WITH HEPARIN in the same line.** Papaverine and heparin precipitate. Systemic heparin is usually running concurrently in NOMI — it needs a separate line.\n\n**CATHETER DISLODGEMENT INTO THE AORTA CAUSES PROFOUND HYPOTENSION.** Confirm catheter position radiographically before and during the infusion. Any unexplained hypotension on this infusion means check the catheter first.\n\n**IF YOU EVER GIVE IT IV** (not the NOMI route): the label requires slow injection **over 1 to 2 minutes**. Rapid IV push causes arrhythmia and apnea.',
+        },
+    ],
+    contraindications: [
+        'Complete atrioventricular heart block (this is the label contraindication for intravenous papaverine)',
+        'Known hypersensitivity to papaverine',
+        'Peritonitis or radiographic bowel infarction — that patient needs a laparotomy, not a vasodilator',
+    ],
+    cautions: [
+        'No boxed warning, but there is also no labeled dose for this indication — the intra-arterial regimen is entirely off-label',
+        'Intra-arterial administration should be performed only by clinicians trained in the technique',
+        'Hypotension if the catheter refluxes into the aorta',
+        'Hepatotoxicity with prolonged use — follow LFTs',
+        'Arrhythmia and AV conduction effects; apnea and arrhythmia with rapid IV injection',
+        'Mortality in NOMI remains 70-90% even with optimal treatment. Set expectations with the family early.',
+    ],
+    monitoring: 'Continuous arterial blood pressure, catheter position on serial imaging, lactate trend, serial abdominal examinations, LFTs, ECG.',
+    notes: 'Non-specific phosphodiesterase inhibition relaxes mesenteric arterial smooth muscle, interrupting the vasoconstriction that defines NOMI. The evidence is observational — retrospective series report improved survival and fewer laparotomies with local intra-arterial vasodilator infusion. No randomized trial exists and none is likely. Serial angiography, not the infusion itself, is what tells you whether you are winning.',
+    citations: [
+        'Bjorck M, Koelemay M, Acosta S, et al. Editor\'s Choice - Management of the Diseases of Mesenteric Arteries and Veins: ESVS Clinical Practice Guidelines. Eur J Vasc Endovasc Surg. 2017;53(4):460-510.',
+        'Winzer R, Fedders D, Backes M, et al. Local Intra-arterial Vasodilator Infusion in Non-Occlusive Mesenteric Ischemia Significantly Increases Survival Rate. Cardiovasc Intervent Radiol. 2020;43(8):1148-1155.',
+        'Papaverine hydrochloride injection prescribing information. Current DailyMed label, SPL setid 9e5e2ce4-7a57-4c61-a826-64c8d11d038e. (No mesenteric indication; supports the AV-block contraindication and the slow-IV requirement only.)',
+    ],
+};
 const TERLIPRESSIN = {
     id: 'terlipressin',
     name: 'Terlipressin',
@@ -12883,6 +14004,33 @@ export const ALL_DRUGS = [
     CARBAMAZEPINE,
     OXCARBAZEPINE,
     LAMOTRIGINE,
+    ARIPIPRAZOLE,
+    CEFOTETAN,
+    CEFOXITIN,
+    CYPROHEPTADINE,
+    FIDAXOMICIN,
+    LET_GEL,
+    NITROPRUSSIDE,
+    PAPAVERINE,
+    PATIROMER,
+    PRALIDOXIME,
+    PROPARACAINE,
+    SODIUM_POLYSTYRENE_SULFONATE,
+    TETRACAINE,
+    TOCILIZUMAB,
+    CIPROFLOXACIN_OPHTHALMIC,
+    MOXIFLOXACIN_OPHTHALMIC,
+    ERYTHROMYCIN_OINTMENT,
+    POLYMYXIN_TRIMETHOPRIM,
+    CYCLOPENTOLATE,
+    HYDROXYZINE,
+    SERTRALINE,
+    PAROXETINE,
+    VENLAFAXINE_XR,
+    MIRTAZAPINE,
+    TRAZODONE,
+    PRAZOSIN,
+    DICLOFENAC,
 ];
 const DRUG_MAP = {};
 for (const drug of ALL_DRUGS) {
@@ -12910,6 +14058,8 @@ const NAME_TO_ID = [
     [/aminocaproic.*acid|amicar/i, 'aminocaproic-acid'],
     [/ampicillin/i, 'ampicillin'],
     [/amphotericin|ambisome/i, 'amphotericin-b'],
+    [/andexanet|andexxa/i, 'andexanet'],
+    [/aripiprazole|abilify/i, 'aripiprazole'],
     [/apixaban/i, 'apixaban'],
     [/aspirin|ASA|acetylsalicylic/i, 'aspirin'],
     [/atazanavir|reyataz/i, 'atazanavir'],
@@ -12934,15 +14084,20 @@ const NAME_TO_ID = [
     [/cryoprecipitate|cryo/i, 'cryoprecipitate'],
     [/cefazolin|ancef/i, 'cefazolin'],
     [/cefepime|maxipime/i, 'cefepime'],
+    [/cefotetan|cefotan/i, 'cefotetan'],
+    [/cefoxitin|mefoxin/i, 'cefoxitin'],
     [/ceftriaxone/i, 'ceftriaxone'],
     [/cephalexin|keflex/i, 'cephalexin'],
     [/cetirizine|zyrtec/i, 'cetirizine'],
     [/cholestyramine|questran/i, 'cholestyramine'],
     [/chlorothiazide|diuril/i, 'chlorothiazide'],
+    [/ciprofloxacin\s*0\.3\s*%|cipro(?:floxacin)?\s*(?:ophthalmic|eye\s*drops?)|ciloxan/i, 'ciprofloxacin-ophthalmic'],
+    [/cyclopentolate|cyclogyl/i, 'cyclopentolate'],
     [/ciprofloxacin|cipro/i, 'ciprofloxacin'],
     [/clevidipine|cleviprex/i, 'clevidipine'],
     [/clopidogrel|plavix/i, 'clopidogrel'],
     [/conjugated.*estrogen|premarin|CEE/i, 'conjugated-estrogen'],
+    [/cyproheptadine|periactin/i, 'cyproheptadine'],
     [/dabigatran/i, 'dabigatran'],
     [/darunavir|prezista/i, 'darunavir'],
     [/dexamethasone|decadron/i, 'dexamethasone'],
@@ -12952,6 +14107,7 @@ const NAME_TO_ID = [
     [/diazepam|valium/i, 'diazepam'],
     [/digifab|digoxin.*immune.*fab|digoxin.*antibod/i, 'digifab'],
     [/digoxin|digitalis|lanoxin/i, 'digoxin'],
+    [/diclofenac|voltaren/i, 'diclofenac'],
     [/diltiazem|cardizem/i, 'diltiazem'],
     [/dimenhydrinate|dramamine|gravol/i, 'dimenhydrinate'],
     [/diphenhydramine|benadryl/i, 'diphenhydramine'],
@@ -12962,11 +14118,14 @@ const NAME_TO_ID = [
     [/edoxaban/i, 'edoxaban'],
     [/ecallantide|kalbitor/i, 'ecallantide'],
     [/enoxaparin|LMWH|low.molecular/i, 'enoxaparin'],
+    [/lidocaine.?epinephrine.?tetracaine|\bL\.?E\.?T\.?\s*(gel|solution)\b/i, 'let-gel'],
     [/epinephrine|adrenaline/i, 'epinephrine'],
     [/esmolol|brevibloc/i, 'esmolol'],
     [/etomidate|amidate/i, 'etomidate'],
+    [/erythromycin\s*(?:0\.5\s*%\s*)?(?:ophthalmic|eye|ointment)/i, 'erythromycin-ointment'],
     [/famotidine|pepcid/i, 'famotidine'],
     [/fentanyl|sublimaze/i, 'fentanyl'],
+    [/fidaxomicin|dificid/i, 'fidaxomicin'],
     [/fludrocortisone|florinef/i, 'fludrocortisone'],
     [/fluconazole|diflucan/i, 'fluconazole'],
     [/flucytosine|5-?fc|ancobon/i, 'flucytosine'],
@@ -12981,6 +14140,7 @@ const NAME_TO_ID = [
     [/hypertonic.*saline|3%.*saline|3%.*nacl/i, 'hypertonic-saline'],
     [/hydrocortisone|solu-?cortef|cortef/i, 'hydrocortisone'],
     [/hydroxocobalamin|cyanokit/i, 'hydroxocobalamin'],
+    [/hydroxyzine|vistaril|atarax/i, 'hydroxyzine'],
     [/idarucizumab|praxbind/i, 'idarucizumab'],
     [/icatibant|firazyr/i, 'icatibant'],
     [/isoproterenol|isuprel/i, 'isoproterenol'],
@@ -13013,6 +14173,8 @@ const NAME_TO_ID = [
     [/metoprolol|lopressor|toprol/i, 'metoprolol'],
     [/midazolam|versed/i, 'midazolam'],
     [/misoprostol|cytotec/i, 'misoprostol'],
+    [/mirtazapine|remeron/i, 'mirtazapine'],
+    [/moxifloxacin\s*0\.5\s*%|moxifloxacin\s*(?:ophthalmic|eye\s*drops?)|vigamox|moxeza/i, 'moxifloxacin-ophthalmic'],
     [/morphine/i, 'morphine'],
     [/n-?acetylcysteine|nac(?!l)|mucomyst|acetylcysteine/i, 'n-acetylcysteine'],
     [/nacl.*tab|salt.*tab|sodium\s*chloride.*tab/i, 'nacl-tablets'],
@@ -13021,11 +14183,14 @@ const NAME_TO_ID = [
     [/nicardipine|cardene/i, 'nicardipine'],
     [/nimodipine|nymalize|nimotop/i, 'nimodipine'],
     [/nitrofurantoin|macrobid|macrodantin/i, 'nitrofurantoin'],
+    [/nitroprusside|nipride|nitropress/i, 'nitroprusside'],
     [/nitroglycerin|nitro|glyceryl trinitrate|NTG/i, 'nitroglycerin'],
     [/ondansetron|zofran/i, 'ondansetron'],
     [/oxymetazoline|afrin/i, 'oxymetazoline'],
     [/oxytocin|pitocin/i, 'oxytocin'],
     [/pantoprazole|protonix/i, 'pantoprazole'],
+    [/papaverine/i, 'papaverine'],
+    [/patiromer|veltassa/i, 'patiromer'],
     [/oral.*urea|ure-na/i, 'oral-urea'],
     [/aqueous.*penicillin|penicillin G.*IV|crystalline.*penicillin/i, 'penicillin-g-iv'],
     [/packed.*red|pRBC|red.*blood.*cell/i, 'packed-rbcs'],
@@ -13036,15 +14201,20 @@ const NAME_TO_ID = [
     [/phentolamine/i, 'phentolamine'],
     [/phenylephrine/i, 'phenylephrine'],
     [/physostigmine|antilirium/i, 'physostigmine'],
+    [/pralidoxime|2-?PAM\b|protopam|duodote|atnaa/i, 'pralidoxime'],
     [/potassium\s*phosphate|sodium\s*\/\s*potassium\s*phosphate|k-?phos\b|kphos|k2po4|kh2po4/i, 'potassium-phosphate'],
     [/sodium\s*phosphate|na-?phos\b|naphos/i, 'sodium-phosphate'],
     [/kcl\s*iv|potassium\s*chloride.*iv|iv\s*potassium/i, 'potassium-chloride-iv'],
     [/kcl\s*oral|potassium\s*chloride.*oral|oral\s*potassium|k-dur|klor-con/i, 'potassium-chloride-oral'],
+    [/paroxetine|paxil|pexeva|brisdelle/i, 'paroxetine'],
+    [/polytrim|polymyxin.*trimethoprim|trimethoprim.*polymyxin/i, 'polymyxin-trimethoprim'],
+    [/prazosin|minipress/i, 'prazosin'],
     [/procainamide|pronestyl/i, 'procainamide'],
     [/procaine.*penicillin/i, 'procaine-penicillin'],
     [/prochlorperazine|compazine/i, 'prochlorperazine'],
     [/promethazine|phenergan/i, 'promethazine'],
     [/propofol|diprivan/i, 'propofol'],
+    [/proparacaine|alcaine|ophthaine|parcaine/i, 'proparacaine'],
     [/propranolol|inderal/i, 'propranolol'],
     [/propylthiouracil|PTU/i, 'ptu'],
     [/protamine/i, 'protamine'],
@@ -13067,21 +14237,27 @@ const NAME_TO_ID = [
     [/rocuronium|zemuron|roc/i, 'rocuronium'],
     [/ruconest|conestat/i, 'ruconest'],
     [/rh.*immune.*globulin|rhogam|rhophylac|micrhogam|anti.?D/i, 'rh-immune-globulin'],
+    [/sertraline|zoloft/i, 'sertraline'],
     [/silver\s*sulfadiazine|silvadene|SSD/i, 'silver-sulfadiazine'],
     [/sodium\s*bicarbonate|sodium\s*bicarb|nahco3|bicarb(?!onate)/i, 'sodium-bicarbonate'],
+    [/sodium\s*polystyrene|kayexalate|kionex|\bSPS\s*(resin|suspension|powder)\b/i, 'sodium-polystyrene-sulfonate'],
     [/sski|lugol|potassium\s*iodide/i, 'sski'],
     [/succinylcholine|anectine|sux/i, 'succinylcholine'],
+    [/trazodone|desyrel|oleptro/i, 'trazodone'],
     [/tenecteplase|TNKase/i, 'tenecteplase'],
     [/tenofovir.*emtricitabine|truvada|TDF\/FTC/i, 'tdf-ftc'],
     [/terbutaline|brethine/i, 'terbutaline'],
+    [/tetracaine|pontocaine|altacaine|tetcaine/i, 'tetracaine'],
     [/thiamine|vitamin\s*b1/i, 'thiamine'],
     [/tmp-?smx|bactrim|sulfamethoxazole|trimethoprim/i, 'tmp-smx'],
     [/thiopental|pentothal/i, 'thiopental'],
     [/ticagrelor|brilinta/i, 'ticagrelor'],
+    [/tocilizumab|actemra/i, 'tocilizumab'],
     [/tranexamic.*acid|TXA/i, 'tranexamic-acid'],
     [/ulipristal|ella(?:\s|$)/i, 'ulipristal'],
     [/unfractionated heparin|^UFH$|heparin sodium/i, 'ufh'],
     [/valproate|valproic|depacon|depakote|depakene/i, 'valproate'],
+    [/\bvenlafaxine|effexor/i, 'venlafaxine-xr'],
     [/vancomycin|vancocin/i, 'vancomycin'],
     [/verapamil|calan|isoptin/i, 'verapamil'],
     [/vitamin\s*k|phytonadione/i, 'vitamin-k'],
