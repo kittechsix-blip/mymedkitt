@@ -39,3 +39,9 @@ npm-debug.log*
 
 # Generated Supabase SQL (regenerated from source via generate-supabase-sql.mjs)
 supabase-*-insert.sql
+
+# claudex writes loop state into whatever directory it is invoked from; a copy
+# landed in src/data/trees/ and made the skill build-gate see the trees dir as
+# dirty on every run. Tool artifact, not clinical source.
+src/data/trees/.claude/
+**/.claude/claudex/
