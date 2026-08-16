@@ -2463,7 +2463,7 @@ export const DEFAULT_CATEGORIES = [
                 subtitle: 'Assessment → Preparation → Labor → Delivery → Placenta & Postpartum',
                 categoryId: 'ob-gyn',
                 version: '1.0',
-                nodeCount: 20,
+                nodeCount: 21,
                 entryNodeId: 'precip-start',
             },
             {
