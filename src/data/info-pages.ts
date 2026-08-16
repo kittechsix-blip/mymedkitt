@@ -1637,6 +1637,36 @@ const PRECIP_DELIVERY_SUMMARY: InfoPage = {
   ],
 };
 
+const PRECIP_ACTIVE_LABOR: InfoPage = {
+  id: 'precip-active-labor',
+  title: 'Active Labor',
+  subtitle: 'Definition for the precipitous-delivery transfer decision',
+  sections: [
+    {
+      heading: 'Obstetric definition',
+      body: 'Labor is regular uterine contractions that produce cervical effacement and dilation. ACOG recommends considering **6 cm cervical dilation the start of the active phase of the first stage of labor**. Cervical dilation **at or beyond 6 cm** is therefore active-phase labor; complete dilation at **10 cm** marks the transition to the second stage and delivery efforts.',
+    },
+    {
+      heading: 'What 6 cm does and does not mean',
+      body: 'The 6-cm threshold identifies the phase of labor; it does **not** by itself mean that delivery is imminent or that transfer is automatically unsafe. Also assess contraction pattern, rate of cervical change, effacement, fetal station and presentation, pushing or crowning, rupture of membranes, bleeding, maternal status, fetal status, and the time required for a safe transfer.',
+    },
+    {
+      heading: 'EMTALA transfer distinction',
+      body: 'Under EMTALA, a pregnant patient having contractions has an emergency medical condition when there is inadequate time to complete a safe transfer before delivery or when transfer may threaten the health or safety of the patient or unborn child. Confirm an accepting facility with appropriate obstetric capability. If delivery is imminent or transfer cannot be completed safely, prepare for local delivery and activate OB and neonatal support.',
+    },
+  ],
+  citations: [
+    {
+      num: 1,
+      text: 'American College of Obstetricians and Gynecologists, Clinical Practice Guideline No. 8: First and Second Stage Labor Management. January 2024. ACOG recommends considering 6 cm the start of the active phase of labor. https://www.acog.org/clinical/clinical-guidance/clinical-practice-guideline/articles/2024/01/first-and-second-stage-labor-management',
+    },
+    {
+      num: 2,
+      text: '42 C.F.R. § 489.24(b), (d), and (e): definitions of labor and emergency medical condition, stabilizing treatment, and transfer requirements. https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-489/section-489.24',
+    },
+  ],
+};
+
 // -------------------------------------------------------------------
 // Shoulder Dystocia — Steps Summary
 // -------------------------------------------------------------------
@@ -30232,6 +30262,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'bronch-parent-en': BRONCH_PARENT_EN,
   'bronch-parent-es': BRONCH_PARENT_ES,
   'precip-delivery-summary': PRECIP_DELIVERY_SUMMARY,
+  'precip-active-labor': PRECIP_ACTIVE_LABOR,
   // Amniotic Fluid Embolism (AFE)
   'afe-steps-summary': AFE_STEPS_SUMMARY,
   'afe-criteria': AFE_CRITERIA,
