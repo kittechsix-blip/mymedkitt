@@ -1518,6 +1518,147 @@ const PRECIP_ACTIVE_LABOR = {
     ],
 };
 // -------------------------------------------------------------------
+// Possible Rupture of Membranes / PPROM
+// -------------------------------------------------------------------
+const PPROM_STEPS = {
+    id: 'pprom-steps',
+    title: 'PROM / PPROM Diagnostic Steps',
+    subtitle: 'Triage -> sterile speculum -> targeted testing -> OB disposition',
+    sections: [
+        {
+            heading: '1. Triage the emergency first',
+            body: 'Assess maternal vital signs, fetal heart rate, bleeding, uterine tenderness, contractions, cord prolapse, fetal movement, and whether delivery is imminent. Call OB/L&D immediately for instability, suspected abruption, nonreassuring fetal status, suspected intra-amniotic infection, active labor, or imminent birth. Do not delay definitive care for an ROM test.',
+        },
+        {
+            heading: '2. History and sterile speculum examination',
+            body: 'Clarify the time and character of leakage, gestational age, contractions, bleeding, fever, fetal movement, urinary leakage, vaginal infection symptoms, intercourse/semen exposure, GBS status, cerclage, and prior PPROM. Perform a sterile speculum examination to look for pooling, fluid from the cervical os, blood, purulence, and cord. Avoid digital examination unless delivery is imminent or OB directs it. [Speculum examination](#/node/pprom-speculum)',
+        },
+        {
+            heading: '3. Confirm or clarify ROM',
+            body: 'Frank pooling or fluid passing through the cervical os supports a clinical diagnosis and does not require an additional ROM test. If pooling is absent or equivocal, use the local biochemical test and/or ferning. At Dell Seton, order **Rupture of Fetal Membranes** for AmniSure/PAMG-1. Ultrasound can support the diagnosis when fluid is low, but normal fluid does not exclude a small or intermittent leak. [AmniSure](#/info/pprom-amnisure) | [Ferning](#/info/pprom-ferning)',
+        },
+        {
+            heading: '4. Route by gestational age and condition',
+            body: 'Term PROM, PPROM, and previable/periviable PPROM have different OB pathways. Confirmed ROM generally needs an OB/L&D plan, not routine ED discharge. Infection, abruption, active labor, maternal deterioration, or fetal compromise can override gestational-age-based expectant management. [Disposition](#/node/pprom-gestation)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 217: Prelabor Rupture of Membranes. Obstet Gynecol. 2020;135(3):e80-e97. Reaffirmed 2023. PubMed PMID: 32080050. https://pubmed.ncbi.nlm.nih.gov/32080050/' },
+        { num: 2, text: 'NICE. Preterm labour and birth (NG25), recommendation 1.3.1. Updated 2022. https://www.nice.org.uk/guidance/ng25/chapter/Recommendations' },
+        { num: 3, text: 'American College of Obstetricians and Gynecologists. Premature Rupture of Membranes (PROM) Evaluation. https://www.acog.org/education-and-events/creog/curriculum-resources/cases-in-high-value-care/premature-rupture-of-membranes-prom-evaluation' },
+    ],
+};
+const PPROM_FERNING = {
+    id: 'pprom-ferning',
+    title: 'Ferning: What a Positive Pattern Looks Like',
+    subtitle: 'Arborization of dried amniotic fluid on microscopy',
+    image: {
+        src: 'images/pprom/ferning-amniotic-fluid.jpg',
+        alt: 'Three microscopic fields showing branching fern-like arborization from dried amniotic fluid, with arrows marking positive ferning',
+        caption: 'Positive ferning fields with arrows marking characteristic arborization. U.S. Department of Health and Human Services, CDC, Provider Performed Microscopy Procedures, Appendix L4, July 2026. U.S. Government work.',
+    },
+    sections: [
+        {
+            heading: 'How to collect',
+            body: 'During the sterile speculum examination, collect fluid from the posterior fornix or visible pooling site. Smear a thin sample on a clean glass slide and allow it to air-dry before microscopy. Do not interpret a wet preparation as the final fern result. [Speculum examination](#/node/pprom-speculum)',
+        },
+        {
+            heading: 'What supports a positive result',
+            body: 'Fine, branching, leaf-like arborization across the dried specimen supports the presence of amniotic fluid. Ferning is an adjunct to the history and examination, not a substitute for assessing maternal and fetal status.',
+        },
+        {
+            heading: 'False positives and false negatives',
+            body: 'Cervical mucus and semen can create branching patterns. Blood, scant fluid, a dry swab, technical error, or contamination can obscure or prevent arborization. Ferning is less reliable when the patient is not in labor, so a negative slide does not overrule ongoing high suspicion. [Reassess](#/node/pprom-reassess)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Jamil M, et al. Comparison between Amnisure placental alpha microglobulin-1 rapid immunoassay and standard diagnostic methods for detection of rupture of membranes. BioMed Res Int. 2013;2013:588980. PMCID: PMC3773890. https://pmc.ncbi.nlm.nih.gov/articles/PMC3773890/' },
+        { num: 2, text: 'Centers for Disease Control and Prevention. Provider Performed Microscopy Procedures, Appendix L4: Fern Test. July 2026. U.S. Department of Health and Human Services. https://www.cdc.gov/lab-quality/media/pdfs/2025/07/PPMP_2025_Final-508c.pdf' },
+    ],
+};
+const PPROM_AMNISURE = {
+    id: 'pprom-amnisure',
+    title: 'Dell Seton AmniSure Workflow',
+    subtitle: 'Order: Rupture of Fetal Membranes',
+    sections: [
+        {
+            heading: 'The local order',
+            body: 'When the sterile speculum examination does not establish ROM, search the Dell Seton order menu for **Rupture of Fetal Membranes**. This is the local order used for the AmniSure/PAMG-1 immunoassay. Confirm the current order name and collection instructions in the live EHR if the menu changes.',
+        },
+        {
+            heading: 'What the assay measures',
+            body: 'AmniSure detects placental alpha-microglobulin-1 (PAMG-1) in cervicovaginal fluid. A positive result supports that amniotic fluid is present. Diagnostic studies generally show higher sensitivity than nitrazine or ferning, but performance varies with the population, sampling, and reference standard. [Evidence](#/info/pprom-steps)',
+        },
+        {
+            heading: 'How to interpret it safely',
+            body: 'A positive result does not diagnose intra-amniotic infection, abruption, labor, fetal compromise, or imminent delivery. A negative result lowers the likelihood but does not rule out a small/intermittent leak or a poorly collected sample. Correlate with history, sterile speculum findings, gestational age, maternal condition, and fetal monitoring. Persistent high suspicion requires reassessment and OB/MFM input. [High suspicion](#/node/pprom-reassess)',
+        },
+        {
+            heading: 'What it does not replace',
+            body: 'AmniSure does not replace the emergency triage, fetal monitoring, sterile speculum examination, infection assessment, or OB/L&D disposition plan. Never delay treatment of cord prolapse, hemorrhage, suspected infection, fetal compromise, active labor, or imminent delivery while waiting for the result.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'American College of Obstetricians and Gynecologists. Premature Rupture of Membranes (PROM) Evaluation. https://www.acog.org/education-and-events/creog/curriculum-resources/cases-in-high-value-care/premature-rupture-of-membranes-prom-evaluation' },
+        { num: 2, text: 'Jamil M, et al. BioMed Res Int. 2013;2013:588980. PMCID: PMC3773890. https://pmc.ncbi.nlm.nih.gov/articles/PMC3773890/' },
+    ],
+};
+const PPROM_DIFFERENTIAL = {
+    id: 'pprom-differential',
+    title: 'Wetness Differential and Test Pitfalls',
+    subtitle: 'Do not mistake a contaminant or mimic for ROM',
+    sections: [
+        {
+            heading: 'Common mimics',
+            body: '• Urinary incontinence or urine leakage\n• Physiologic leukorrhea of pregnancy\n• Cervical mucus or mucus plug\n• Semen after intercourse\n• Bacterial vaginosis, candidiasis, or cervicitis\n• Vaginal bleeding or blood-tinged discharge\n• Sweating or fluid from cleansing products',
+        },
+        {
+            heading: 'Nitrazine limitations',
+            body: 'Amniotic fluid is more alkaline than normal vaginal fluid, but nitrazine can be falsely positive with blood, semen, urine, cervical mucus, vaginitis, and alkaline antiseptics. Do not use pH alone to establish ROM.',
+        },
+        {
+            heading: 'Ferning limitations',
+            body: 'Cervical mucus and semen can mimic arborization. Blood, scant fluid, a dry swab, or poor slide technique can cause a false-negative or uninterpretable result. [Ferning photo](#/info/pprom-ferning)',
+        },
+        {
+            heading: 'Ultrasound limitations',
+            body: 'Oligohydramnios supports the diagnosis in the right clinical context. A normal amniotic-fluid volume does not exclude a recent, small, or intermittent membrane leak.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 217: Prelabor Rupture of Membranes. Obstet Gynecol. 2020;135(3):e80-e97. Reaffirmed 2023. PubMed PMID: 32080050. https://pubmed.ncbi.nlm.nih.gov/32080050/' },
+        { num: 2, text: 'ACOG. Premature Rupture of Membranes (PROM) Evaluation. https://www.acog.org/education-and-events/creog/curriculum-resources/cases-in-high-value-care/premature-rupture-of-membranes-prom-evaluation' },
+        { num: 3, text: 'Jamil M, et al. BioMed Res Int. 2013;2013:588980. PMCID: PMC3773890. https://pmc.ncbi.nlm.nih.gov/articles/PMC3773890/' },
+    ],
+};
+const PPROM_STOP = {
+    id: 'pprom-stop',
+    title: 'PROM / PPROM - Do NOT',
+    subtitle: 'Critical diagnostic and disposition pitfalls',
+    sections: [
+        {
+            heading: 'Do NOT perform a routine digital cervical examination',
+            body: 'Use a sterile speculum when ROM is suspected. Avoid digital examination unless delivery is imminent or OB directs it because examination can increase infection exposure and shorten latency in PPROM. [Speculum examination](#/node/pprom-speculum)',
+        },
+        {
+            heading: 'Do NOT delay an obstetric emergency for testing',
+            body: 'Cord prolapse, heavy bleeding/abruption, suspected intra-amniotic infection, nonreassuring fetal status, maternal instability, active labor, and imminent birth outrank AmniSure, ferning, nitrazine, and ultrasound.',
+        },
+        {
+            heading: 'Do NOT call a single negative test definitive',
+            body: 'A negative result can occur with scant or intermittent leakage or poor sampling. If the history remains convincing, reassess the specimen and involve OB/MFM. [Reassess](#/node/pprom-reassess)',
+        },
+        {
+            heading: 'Do NOT use test results as a substitute for disposition',
+            body: 'A positive ROM test does not assess fetal status, infection, abruption, labor, or neonatal capability. Route by gestational age and maternal/fetal condition, with an explicit OB/L&D plan. [Gestational-age routing](#/node/pprom-gestation)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Practice Bulletin No. 217: Prelabor Rupture of Membranes. Obstet Gynecol. 2020;135(3):e80-e97. Reaffirmed 2023. PubMed PMID: 32080050. https://pubmed.ncbi.nlm.nih.gov/32080050/' },
+        { num: 2, text: 'NICE. Preterm labour and birth (NG25), recommendation 1.3.1. Updated 2022. https://www.nice.org.uk/guidance/ng25/chapter/Recommendations' },
+    ],
+};
+// -------------------------------------------------------------------
 // Shoulder Dystocia — Steps Summary
 // -------------------------------------------------------------------
 const SD_SUMMARY = {
@@ -29034,6 +29175,11 @@ export const INFO_PAGES = {
     'bronch-parent-es': BRONCH_PARENT_ES,
     'precip-delivery-summary': PRECIP_DELIVERY_SUMMARY,
     'precip-active-labor': PRECIP_ACTIVE_LABOR,
+    'pprom-steps': PPROM_STEPS,
+    'pprom-ferning': PPROM_FERNING,
+    'pprom-amnisure': PPROM_AMNISURE,
+    'pprom-differential': PPROM_DIFFERENTIAL,
+    'pprom-stop': PPROM_STOP,
     // Amniotic Fluid Embolism (AFE)
     'afe-steps-summary': AFE_STEPS_SUMMARY,
     'afe-criteria': AFE_CRITERIA,

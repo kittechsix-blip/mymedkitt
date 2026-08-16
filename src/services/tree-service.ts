@@ -650,6 +650,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/precip-delivery.js');
       return { nodes: m.PRECIP_DELIVERY_NODES, entryNodeId: 'precip-start', categoryId: 'ob-gyn', moduleLabels: m.PRECIP_DELIVERY_MODULE_LABELS, citations: m.PRECIP_DELIVERY_CITATIONS, criticalActions: m.PRECIP_DELIVERY_CRITICAL_ACTIONS };
     },
+    'pprom': async () => {
+      const m = await import('../data/trees/pprom.js');
+      return { nodes: m.PPROM_NODES, entryNodeId: 'pprom-start', categoryId: 'ob-gyn', moduleLabels: m.PPROM_MODULE_LABELS, citations: m.PPROM_CITATIONS, criticalActions: m.PPROM_CRITICAL_ACTIONS };
+    },
     'afe': async () => {
       const m = await import('../data/trees/afe.js');
       return { nodes: m.AFE_NODES, entryNodeId: 'afe-start', categoryId: 'ob-gyn', moduleLabels: m.AFE_MODULE_LABELS, citations: m.AFE_CITATIONS, criticalActions: m.AFE_CRITICAL_ACTIONS };

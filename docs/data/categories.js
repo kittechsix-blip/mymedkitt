@@ -2467,6 +2467,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'precip-start',
             },
             {
+                id: 'pprom',
+                title: 'Rupture of Membranes / PPROM',
+                subtitle: 'Triage → Sterile Speculum → Ferning / AmniSure → Gestational-Age Disposition',
+                categoryId: 'ob-gyn',
+                version: '1.0',
+                nodeCount: 17,
+                entryNodeId: 'pprom-start',
+            },
+            {
                 id: 'afe',
                 title: 'Amniotic Fluid Embolism',
                 subtitle: 'Recognition → Resuscitation → Perimortem C/S → A-O-K → DIC/MTP → Post-ROSC',

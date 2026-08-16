@@ -23,6 +23,7 @@ export const TOOLBAR_OVERFLOW = new Set([
     'lithium-toxicity',
     'teg',
     'hyperemesis',
+    'pprom',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 // Exported so scripts/validate-cross-links.mjs can validate every toolbar
@@ -172,6 +173,15 @@ export const TOOLBAR_CONFIGS = {
         { id: 'deliver', label: 'Deliver', icon: '\uD83D\uDC76', action: 'jump', target: 'precip-head' },
         { id: 'cord', label: 'Cord', icon: '\uD83D\uDD17', action: 'jump', target: 'precip-cord' },
         { id: 'oxytocin', label: 'Oxytocin', icon: '\uD83D\uDC89', action: 'jump', target: 'precip-oxytocin' },
+    ],
+    'pprom': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'pprom-steps', pinned: true },
+        { id: 'speculum', label: 'Speculum', icon: '🔍', action: 'jump', target: 'pprom-speculum', pinned: true },
+        { id: 'ferning', label: 'Ferning', icon: '🔬', action: 'overlay', target: 'pprom-ferning', pinned: true },
+        { id: 'amnisure', label: 'AmniSure', icon: '🧪', action: 'overlay', target: 'pprom-amnisure', pinned: true },
+        { id: 'stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'pprom-stop', pinned: true },
+        { id: 'differential', label: 'Differential', icon: '🎯', action: 'overlay', target: 'pprom-differential' },
+        { id: 'disposition', label: 'Dispo', icon: '🏁', action: 'jump', target: 'pprom-gestation' },
     ],
     'afe': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'afe-steps-summary' },

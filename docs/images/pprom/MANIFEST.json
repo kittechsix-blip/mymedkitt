@@ -1,0 +1,11 @@
+{
+  "ferning-amniotic-fluid.jpg": {
+    "source_url": "https://www.cdc.gov/lab-quality/media/pdfs/2025/07/PPMP_2025_Final-508c.pdf",
+    "license_tag": "PD-USGov-HHS-CDC",
+    "license_evidence_url": "https://www.cdc.gov/lab-quality/php/ppmp/index.html",
+    "retrieval_timestamp": "2026-08-16T00:00:00Z",
+    "andy_approval_commit": "approved-in-chat-2026-08-16-pprom-ferning-cdc",
+    "attribution": "U.S. Department of Health and Human Services, CDC, Provider Performed Microscopy Procedures, Appendix L4, July 2026. U.S. Government work.",
+    "sha256": "2e39176635ae535c3710a2a02a71b9a3b9dae535c72a8c7783c7f4443288c0bc"
+  }
+}
