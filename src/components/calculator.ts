@@ -5147,8 +5147,8 @@ const QRS_RISK_CALCULATOR: CalculatorDefinition = {
 const BICARB_DOSE_CALCULATOR: CalculatorDefinition = {
   id: 'bicarb-dose',
   title: 'NaHCO₃ Dose Calculator',
-  subtitle: 'Sodium Bicarbonate Dosing for TCA Overdose',
-  description: 'Calculates bolus and infusion dosing of 8.4% sodium bicarbonate for sodium channel blockade in TCA overdose.',
+  subtitle: 'Sodium Bicarbonate Dosing for Sodium Channel Blockade',
+  description: 'Calculates bolus and infusion dosing of 8.4% sodium bicarbonate for sodium channel blocker toxicity — tricyclic antidepressants (TCAs), cocaine, flecainide, diphenhydramine, bupropion, and the other agents in AHA 2023 Table 3. The 2023 AHA adult bolus range is 50–150 mEq (1–3 mEq/kg in a child); the weight-based figure below sits inside that range.',
   fields: [
     {
       name: 'weight',
@@ -5163,6 +5163,8 @@ const BICARB_DOSE_CALCULATOR: CalculatorDefinition = {
   thresholdNote: '1 amp = 50 mEq/50 mL of 8.4% NaHCO₃ (1 mEq/mL, 1000 mOsm/L)',
   citations: [
     'Woolf AD, et al. Tricyclic antidepressant poisoning: an evidence-based consensus guideline. Clin Toxicol. 2007;45(3):203-233.',
+    'Lavonas EJ, et al. 2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning. Circulation. 2023;148(16):e149-e184. PMID 37721023',
+    'Buckley NA, et al. The limited utility of electrocardiography variables used to predict arrhythmia in psychotropic drug overdose. Crit Care. 2003;7(5):R101-R107. PMID 12974977',
     'Farkas J. Sodium Channel Blocker Toxicity. IBCC. 2025.',
   ],
   computeResult: (values: Record<string, number>) => {
@@ -5190,16 +5192,215 @@ const BICARB_DOSE_CALCULATOR: CalculatorDefinition = {
         '   Repeat q3-5 min until QRS narrows\n\n' +
         '▸ INFUSION: 150 mEq (3 amps) in 1L D5W\n' +
         '   Rate: 150-250 mL/hr\n\n' +
-        '▸ GOALS:\n' +
-        '   • Serum pH 7.50-7.55\n' +
-        '   • QRS < 100 ms\n' +
-        '   • Serum Na ≤ 155 mEq/L\n\n' +
+        '▸ ENDPOINTS (these are HARD STOPS, not targets to chase):\n' +
+        '   • Serum pH 7.55 — stop, do not push past\n' +
+        '   • Serum Na 155 mEq/L — stop, do not push past\n' +
+        '   • Narrowing QRS and a stable rhythm — the real goal\n\n' +
+        '▸ A NORMAL QRS IS NOT THE ENDPOINT. Some poisoned QRS complexes\n' +
+        '   never fully narrow. QRS width alone poorly predicts arrhythmia:\n' +
+        '   QRS ≥100 ms appeared in 82% of psychotropic-overdose patients who\n' +
+        '   arrhythmied but also 76% of those who did not; QRS ≥160 ms was only\n' +
+        '   13% sensitive (Buckley 2003). Treat the patient, not the number.\n\n' +
         '▸ MONITOR:\n' +
         '   • ABG/VBG q30-60 min\n' +
         '   • K+ (hypokalemia from alkalosis — replete simultaneously)\n' +
         '   • Ionized Ca²⁺ (drops with alkalosis)\n' +
         '   • Serial ECGs q15-30 min',
       colorVar: '--color-decision-active',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Sodium Channel Blockade Pattern (Wide Complex Tachycardia)
+// Added 2026-08-20 — closes the procainamide trap in the WCT consult.
+// Deliberately NOT a validated score: no wide-complex-tachycardia
+// algorithm has ever been derived or tested in a poisoned population.
+// -------------------------------------------------------------------
+
+const WCT_NA_BLOCKADE_CALCULATOR: CalculatorDefinition = {
+  id: 'wct-na-blockade',
+  title: 'Sodium Channel Blockade Pattern',
+  subtitle: 'Wide Complex Tachycardia — Poisoned or VT?',
+  description:
+    'Sorts a wide complex tachycardia (WCT — any rhythm with QRS >120 ms and rate >100 bpm) into "looks like sodium channel blocker poisoning" versus "looks like ventricular tachycardia (VT)".\n\n' +
+    'This matters because the two treatments are opposites. VT gets procainamide. Sodium channel blocker poisoning gets sodium bicarbonate, and procainamide is another sodium channel blocker — giving it stacks a second blockade on top of the poison.\n\n' +
+    'Pattern aid only, NOT a validated score. Every published WCT algorithm (Brugada, Vereckei) was derived in patients whose diagnosis was proven by electrophysiology study, which structurally excludes poisoned patients. None has ever been tested in overdose.',
+  fields: [
+    {
+      name: 'qrs',
+      label: 'QRS duration',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'ms',
+      description: 'Widest QRS on the 12-lead',
+    },
+    {
+      name: 'rate',
+      label: 'Ventricular rate',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'bpm',
+    },
+    {
+      name: 'avr-r',
+      label: 'Terminal R wave in lead aVR \u2265 3 mm',
+      type: 'toggle',
+      points: 0,
+      description: 'The final upward deflection in aVR, 3 small boxes tall or more. In tricyclic overdose: 81% sensitive, 73% specific. At 5 mm or more it becomes 97% specific but only 50% sensitive (Liebelt 1995).',
+    },
+    {
+      name: 'avr-rs',
+      label: 'R/S ratio in lead aVR > 0.7',
+      type: 'toggle',
+      points: 0,
+      description: 'Height of the R wave divided by the depth of the S wave in aVR. 75% sensitive in tricyclic overdose (Liebelt 1995); odds ratio 16 for serious arrhythmia across psychotropic overdose, 14.5 in the tricyclic-only subset (Buckley 2003).',
+    },
+    {
+      name: 'p-waves',
+      label: 'A P wave in front of every QRS',
+      type: 'toggle',
+      points: 0,
+      description: 'The rhythm is sinus with a wide QRS — the ventricle is not driving it, so this is not VT',
+    },
+    {
+      name: 'prior-narrow',
+      label: 'An earlier ECG on this patient was narrow',
+      type: 'toggle',
+      points: 0,
+      description: 'QRS has widened since — acquired blockade, not a baseline bundle branch block',
+    },
+    {
+      name: 'tox-context',
+      label: 'Toxicologic context',
+      type: 'toggle',
+      points: 0,
+      description: 'Overdose history, pill bottles, anticholinergic toxidrome (dry, hot, dilated, confused), seizure, cocaine or stimulant use, or metabolic acidosis',
+    },
+  ],
+  results: [],
+  thresholdNote:
+    'Send a potassium and take a core temperature on every one of these. Hyperkalemia and hypothermia both produce a wide, slow rhythm that looks identical, and the ECG cannot reliably tell them apart — physician sensitivity for hyperkalemia on ECG is roughly 0.4.',
+  citations: [
+    'Boehnert MT, Lovejoy FH Jr. Value of the QRS duration versus the serum drug level in predicting seizures and ventricular arrhythmias after an acute overdose of tricyclic antidepressants. N Engl J Med. 1985;313(8):474-479. PMID 4022081',
+    'Liebelt EL, Francis PD, Woolf AD. ECG lead aVR versus QRS interval in predicting seizures and arrhythmias in acute tricyclic antidepressant toxicity. Ann Emerg Med. 1995;26(2):195-201. PMID 7618783',
+    'Buckley NA, et al. The limited utility of electrocardiography variables used to predict arrhythmia in psychotropic drug overdose. Crit Care. 2003;7(5):R101-R107. PMID 12974977',
+    'Bailey B, Buckley NA, Amre DK. A meta-analysis of prognostic indicators to predict seizures, arrhythmias or death after tricyclic antidepressant overdose. J Toxicol Clin Toxicol. 2004;42(6):877-888. PMID 15533027',
+    'Lavonas EJ, et al. 2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning. Circulation. 2023;148(16):e149-e184. PMID 37721023',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const qrs = values['qrs'] || 0;
+    const rate = values['rate'] || 0;
+    const avrR = values['avr-r'] || 0;
+    const avrRS = values['avr-rs'] || 0;
+    const pWaves = values['p-waves'] || 0;
+    const priorNarrow = values['prior-narrow'] || 0;
+    const tox = values['tox-context'] || 0;
+
+    if (qrs === 0 || rate === 0) {
+      return {
+        value: '\u2014',
+        label: 'Enter QRS and Rate',
+        description: 'Enter the QRS duration in milliseconds and the ventricular rate in beats per minute to compare them.',
+        colorVar: '--color-text-secondary',
+      };
+    }
+
+    const avrPositive = avrR === 1 || avrRS === 1;
+    const wideForRate = qrs >= 160 && rate < 130;
+    const veryWide = qrs >= 200;
+    const slowAndWide = rate < 100 && qrs >= 120;
+    const supporting =
+      (wideForRate ? 1 : 0) + (pWaves ? 1 : 0) + (priorNarrow ? 1 : 0) + (tox ? 1 : 0);
+
+    // Plain-language read of the QRS-versus-rate relationship.
+    let disproportion: string;
+    if (qrs >= 160 && rate < 130) {
+      disproportion = `QRS ${qrs} ms at only ${rate} bpm \u2014 **wide out of proportion to the rate.** True VT this wide is usually faster. This is the classic poisoned pattern.`;
+    } else if (qrs >= 160) {
+      disproportion = `QRS ${qrs} ms at ${rate} bpm \u2014 very wide, but fast enough that VT remains fully in play.`;
+    } else if (qrs >= 120) {
+      disproportion = `QRS ${qrs} ms at ${rate} bpm \u2014 wide complex, no striking mismatch between width and rate.`;
+    } else {
+      disproportion = `QRS ${qrs} ms at ${rate} bpm \u2014 QRS is not wide by the usual 120 ms cutoff. In poisoning, treat anything over 100 ms as abnormal: the number that matters is the change from this patient's own baseline.`;
+    }
+
+    const slowWarning = slowAndWide
+      ? '\n\n\uD83D\uDEA8 **WIDE AND SLOW IS WORSE, NOT BETTER.** A rate under 100 with a wide QRS after a sodium channel blocker overdose is a pre-terminal rhythm, not a rhythm that is settling down. Poisoned conduction slows toward asystole. Escalate now — do not observe.'
+      : '';
+
+    const mimicLine =
+      '\n\n**Rule out the three mimics first:** potassium (hyperkalemia), core temperature (hypothermia), and an irregular/very fast rhythm (pre-excited atrial fibrillation — the one place procainamide is still the right drug).';
+
+    // HIGH — an aVR finding plus at least one supporting feature.
+    if (avrPositive && supporting >= 1) {
+      return {
+        value: 'SODIUM CHANNEL BLOCKADE',
+        label: 'High Concern \u2014 Bicarbonate, NOT Procainamide',
+        description:
+          disproportion +
+          slowWarning +
+          '\n\n\uD83D\uDED1 **DO NOT GIVE PROCAINAMIDE OR AMIODARONE.** Both block sodium channels. In a patient already blocked by a poison you are adding a second blocker to a failing conduction system.\n\n' +
+          '\u25B8 **TREAT:** Sodium bicarbonate 50\u2013150 mEq IV push in an adult (1\u20133 mEq/kg in a child), repeat every 3\u20135 minutes while the QRS is still wide.\n' +
+          '\u25B8 **THEN:** 150 mEq in 1 L D5W, run at 1\u20133 mL/kg/h, with 20\u201340 mEq KCl per litre.\n' +
+          '\u25B8 **HARD STOPS:** pH 7.55 and sodium 155 mEq/L. Those are the endpoints — not a QRS number. Some poisoned QRS complexes never fully narrow. Case reports describe profound alkalemia (pH >7.60) when bicarbonate is stacked on top of hyperventilation in an intubated patient, and severe alkalemia is associated with higher mortality in other settings. Watch for hypernatremia, hypokalemia, and hypochloremia.\n\n' +
+          '**Class 1, Level B-NR** \u2014 sodium bicarbonate for life-threatening cardiotoxicity from tricyclic or tetracyclic antidepressant poisoning. **Class 2a, C-LD** for every other sodium channel blocker and for cocaine (AHA 2023).' +
+          mimicLine,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // HIGH-ish — no aVR finding but the clinical picture is loud.
+    if (!avrPositive && supporting >= 3) {
+      return {
+        value: 'SODIUM CHANNEL BLOCKADE',
+        label: 'High Concern \u2014 Clinical Picture Overrides a Clean aVR',
+        description:
+          disproportion +
+          slowWarning +
+          '\n\nNo aVR finding, but the clinical picture is doing the work: multiple supporting features are present. A clean aVR lowers the odds, it does not close the door — and in a poisoning the history outranks the tracing.\n\n' +
+          '\uD83D\uDED1 Withhold procainamide and amiodarone.\n' +
+          '\u25B8 Sodium bicarbonate 50\u2013150 mEq IV push (1\u20133 mEq/kg in a child), repeat q3\u20135 min.\n' +
+          '\u25B8 Hard stops: pH 7.55, sodium 155 mEq/L.' +
+          mimicLine,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // LOW — nothing pointing at poison.
+    if (!avrPositive && supporting === 0 && !veryWide) {
+      return {
+        value: 'UNLIKELY',
+        label: 'Sodium Channel Blockade Unlikely',
+        description:
+          disproportion +
+          '\n\nNo aVR findings, no toxicologic context, and no mismatch between QRS width and rate.\n\n' +
+          '**How good is this reassurance?** In a study of psychotropic (tricyclic or thioridazine) overdose, an R/S ratio in aVR at or below 0.7 carried a negative predictive value around 95% — the single most defensible rule-out in this space. That still leaves roughly 1 in 20, and the positive predictive value was only 41% (Buckley 2003).\n\n' +
+          '\u2192 Continue down the standard wide complex tachycardia pathway. Procainamide is not blocked by this result.\n\n' +
+          '\u26A0\uFE0F Recheck if anything changes. A poisoned QRS widens over hours as the drug distributes. One reassuring ECG is not a clearance.' +
+          mimicLine,
+        colorVar: '--color-decision-active',
+      };
+    }
+
+    // INTERMEDIATE — everything else.
+    return {
+      value: 'CANNOT EXCLUDE',
+      label: 'Intermediate \u2014 Default to Bicarbonate',
+      description:
+        disproportion +
+        slowWarning +
+        '\n\nSome features present, not enough to be confident either way.\n\n' +
+        '**Break the tie toward bicarbonate.** The two errors are not equal:\n' +
+        '\u2022 Bicarbonate given to a VT patient: a sodium and pH load, monitored and reversible.\n' +
+        '\u2022 Procainamide given to a poisoned patient: mechanistically stacks a second sodium channel blockade on a failing conduction system.\n\n' +
+        '\u25B8 Give sodium bicarbonate 50\u2013150 mEq IV push (1\u20133 mEq/kg in a child) and re-read the ECG in 3\u20135 minutes. **A QRS that narrows after bicarbonate is itself diagnostic** — and it is a safer test than committing to procainamide.\n' +
+        '\u25B8 If the rhythm is unstable, cardiovert. Electricity is safe in both diagnoses.\n\n' +
+        '**Honest limits:** in psychotropic overdose, QRS \u2265100 ms appeared in 82% of patients who went on to a serious arrhythmia — but also in 76% of those who did not. QRS \u2265160 ms was only 13% sensitive. The authors concluded that using either 100 ms or 160 ms to predict arrhythmia "is not supported by our study" (Buckley 2003). QRS width alone does not sort these patients.' +
+        mimicLine,
+      colorVar: '--color-warning',
     };
   },
 };
@@ -42768,6 +42969,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'syphilis-serology': SYPHILIS_SEROLOGY_CALCULATOR,
   'scd-triage': SCD_TRIAGE_CALCULATOR,
   'qrs-risk': QRS_RISK_CALCULATOR,
+  'wct-na-blockade': WCT_NA_BLOCKADE_CALCULATOR,
   'bicarb-dose': BICARB_DOSE_CALCULATOR,
   'rumack-matthew': RUMACK_MATTHEW_CALCULATOR,
   'nac-dosing': NAC_DOSING_CALCULATOR,

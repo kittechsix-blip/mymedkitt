@@ -252,10 +252,10 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'wide-complex-tachycardia',
                 title: 'Wide Complex Tachycardia',
-                subtitle: 'VT vs SVT Differentiation → Brugada/Vereckei → Treatment → Disposition',
+                subtitle: 'Sodium Channel Blockade Screen → VT vs SVT → Brugada/Vereckei → Treatment → Disposition',
                 categoryId: 'cardiology',
-                version: '1.0',
-                nodeCount: 28,
+                version: '1.1',
+                nodeCount: 43,
                 entryNodeId: 'wct-start',
             },
             {
@@ -1277,10 +1277,10 @@ export const DEFAULT_CATEGORIES = [
             {
                 id: 'wide-complex-tachycardia',
                 title: 'Wide Complex Tachycardia',
-                subtitle: 'VT vs SVT Differentiation → Brugada/Vereckei → Treatment → Disposition',
+                subtitle: 'Sodium Channel Blockade Screen → VT vs SVT → Brugada/Vereckei → Treatment → Disposition',
                 categoryId: 'emergency-medicine',
-                version: '1.0',
-                nodeCount: 28,
+                version: '1.1',
+                nodeCount: 43,
                 entryNodeId: 'wct-start',
             },
             {

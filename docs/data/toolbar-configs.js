@@ -2356,6 +2356,18 @@ export const TOOLBAR_CONFIGS = {
         { id: 'cardiovert', label: 'Cardiovert', icon: '⚡', action: 'jump', target: 'svt-cardiovert-result' },
         { id: 'wpw', label: 'WPW', icon: '⚠️', action: 'jump', target: 'svt-wpw-assess' },
     ],
+    'wide-complex-tachycardia': [
+        { id: 'na-screen', label: 'Na-Blocker', icon: '🚨', action: 'jump', target: 'wct-na-screen', pinned: true },
+        { id: 'na-calc', label: 'Na Pattern', icon: '🧮', action: 'calculator', target: 'wct-na-blockade', pinned: true },
+        { id: 'bicarb', label: 'NaHCO\u2083', icon: '💉', action: 'jump', target: 'wct-na-treatment', pinned: true },
+        { id: 'bicarb-calc', label: 'Bicarb Dose', icon: '🧪', action: 'calculator', target: 'bicarb-dose' },
+        { id: 'proc-gate', label: 'Procainamide', icon: '🛑', action: 'jump', target: 'wct-procainamide-gate' },
+        { id: 'unstable', label: 'Unstable', icon: '⚡', action: 'jump', target: 'wct-unstable-tx' },
+        { id: 'brugada', label: 'Brugada', icon: '📈', action: 'jump', target: 'wct-brugada' },
+        { id: 'torsades', label: 'Torsades', icon: '🌀', action: 'jump', target: 'wct-torsades' },
+        { id: 'hyperk', label: 'Hyper-K', icon: '🧬', action: 'jump', target: 'wct-hyperkalemia' },
+        { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'wct-disposition' },
+    ],
     'gallbladder': [
         { id: 'murphy', label: "Murphy's", icon: '👆', action: 'overlay', target: 'gb-murphy' },
         { id: 'tokyo', label: 'Tokyo', icon: '📊', action: 'overlay', target: 'gb-tokyo' },
