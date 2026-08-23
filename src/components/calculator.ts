@@ -42864,6 +42864,930 @@ const PERICARDITIS_RISK_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Wave C — Tier 1 arithmetic calculators (added 2026-08-23)
+// Backfills nine dead calculatorLinks IDs. All Pattern B (formula), results: [].
+// Spec + anti-fabrication audit: .research/calc-backfill/tier1-arithmetic.md
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+// Gestational Age Calculator
+// -------------------------------------------------------------------
+
+const GESTATIONAL_AGE_CALCULATOR: CalculatorDefinition = {
+  id: 'gestational-age',
+  title: 'Gestational Age Calculator',
+  subtitle: 'LMP, first-trimester CRL, or known EDD',
+  description: 'Estimates gestational age in completed weeks and days, and calls the ED decision thresholds that hang off it — RhoGAM dosing at 12 weeks, fetal viability at 20 and 24 weeks.',
+  fields: [
+    {
+      name: 'method',
+      label: 'Which dating input do you have?',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'LMP (last menstrual period)', points: 1 },
+        { label: 'First-trimester CRL (ultrasound)', points: 2 },
+        { label: 'Known EDD / due date', points: 3 },
+      ],
+    },
+    { name: 'days-since-lmp', label: 'Days since LMP', type: 'number', points: 0, valueIsPoints: true, unit: 'days', description: 'Count from the FIRST day of the last menstrual period. Use only if cycles are regular.' },
+    { name: 'crl', label: 'Crown-rump length', type: 'number', points: 0, valueIsPoints: true, unit: 'mm', description: 'MILLIMETRES, 10–84 mm (≈7 0/7 to 13 6/7 wk). A CRL entered in cm is a two-trimester error.' },
+    { name: 'days-to-edd', label: 'Days until EDD', type: 'number', points: 0, valueIsPoints: true, unit: 'days', allowNegative: true, description: 'Negative if the patient is past her due date.' },
+  ],
+  results: [],
+  thresholdNote: 'Estimates only. Do not use for delivery planning, steroid timing, or termination limits — those require formal ultrasound dating. The CRL formula is valid only for CRL 10–84 mm (roughly 7 0/7 to 13 6/7 weeks); beyond 84 mm use biparietal diameter, which this tool does not compute. LMP dating is unreliable with irregular cycles, recent hormonal contraception, or lactation. Once an EDD is established by the earliest accurate ultrasound, it is not changed by later scans. In trauma, fundal height and the decision to monitor take priority over precise dating.',
+  citations: [
+    'Committee on Obstetric Practice, AIUM, SMFM. Committee Opinion No. 700: Methods for Estimating the Due Date. Obstet Gynecol. 2017;129(5):e150-e154. PMID 28426621.',
+    'Robinson HP, Fleming JE. A critical evaluation of sonar crown-rump length measurements. Br J Obstet Gynaecol. 1975;82(9):702-710. PMID 1182090.',
+    'ACOG. Prevention of Rh D Alloimmunization: Clinical Practice Update. Obstet Gynecol. 2024;144(6):e152-e158. PMID 39255498.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const method = values['method'] || 1;
+    const lmpDays = values['days-since-lmp'] || 0;
+    const crl = values['crl'] || 0;
+    const toEdd = values['days-to-edd'] || 0;
+
+    const muted = (label: string, description: string) => ({
+      value: '--', label, description, colorVar: '--color-text-muted',
+    });
+
+    // Hard reject: CRL out of the formula's validated range. Do not silently compute.
+    if (method === 2) {
+      if (crl <= 0) {
+        return muted('Enter crown-rump length', 'Enter the CRL in **millimetres** (10–84 mm).\n\nFirst-trimester CRL is the most accurate dating method available.');
+      }
+      if (crl < 10 || crl > 84) {
+        return {
+          value: '⚠',
+          label: 'CRL out of range',
+          description: `**${crl} mm is outside the validated range (10–84 mm).**\n\n• If you entered centimetres, re-enter in **millimetres** — 4.5 cm is **45 mm**. This mistake shifts the estimate by two trimesters and changes the RhoGAM dose.\n• If the CRL is genuinely **>84 mm**, the fetus is past ~13 6/7 weeks and CRL is no longer valid — dating requires **biparietal diameter**, which this tool does not compute.\n• If the CRL is genuinely **<10 mm**, dating is unreliable this early; use gestational sac appearance and serial hCG with OB input.`,
+          colorVar: '--color-danger',
+        };
+      }
+    }
+    if (method === 1 && lmpDays <= 0) {
+      return muted('Enter days since LMP', 'Count from the **first day** of the last menstrual period, not from conception — conception dating runs ~14 days behind menstrual dating.\n\nAssumes regular 28-day cycles.');
+    }
+    if (method === 3 && toEdd === 0) {
+      return muted('Enter days until EDD', 'Enter the number of days until the estimated due date. Use a **negative** number if the patient is post-dates.');
+    }
+
+    let gaDays: number;
+    let sourceLine: string;
+    if (method === 2) {
+      // Robinson-Fleming
+      gaDays = 8.052 * Math.sqrt(crl * 1.037) + 23.73;
+      sourceLine = `Robinson-Fleming from CRL **${crl} mm**`;
+    } else if (method === 3) {
+      gaDays = 280 - toEdd;
+      sourceLine = `From a known EDD **${toEdd} day${Math.abs(toEdd) === 1 ? '' : 's'} away**`;
+    } else {
+      gaDays = lmpDays;
+      sourceLine = `Naegele from LMP **${lmpDays} days ago**`;
+    }
+
+    if (gaDays < 0) {
+      return muted('Check the inputs', 'That combination produces a negative gestational age. Re-check the units and the sign on "days until EDD".');
+    }
+
+    const wk = Math.floor(gaDays / 7);
+    const d = Math.floor(gaDays % 7);
+    const daysToEdd = Math.round(280 - gaDays);
+
+    // Threshold matching — the whole point of this calculator at 3am.
+    let thisPatient: string;
+    let colorVar: string;
+    if (wk >= 24) {
+      thisPatient = '**≥24 weeks** — RhoGAM 300 mcg. Potentially viable: continuous fetal monitoring for at least 4 hours after trauma, and resuscitative hysterotomy is on the table in maternal arrest.';
+      colorVar = '--color-decision-active';
+    } else if (wk >= 20) {
+      thisPatient = '**20–24 weeks** — RhoGAM 300 mcg. Viability grey zone: OB at the bedside, monitoring decisions are individualized.';
+      colorVar = '--color-warning';
+    } else if (wk >= 12) {
+      thisPatient = '**12–20 weeks** — RhoGAM 300 mcg. Fetus is not viable: resuscitate the mother, and the mother only.';
+      colorVar = '--color-primary';
+    } else {
+      thisPatient = '**<12 weeks** — RhoGAM 50 mcg is sufficient (300 mcg is also acceptable and is what most EDs stock). Fetus is not viable.';
+      colorVar = '--color-primary';
+    }
+
+    // ACOG CO 700 Table 1 redating rule — only meaningful when both LMP and CRL are present.
+    let redating = '';
+    if (method === 1 && crl >= 10 && crl <= 84) {
+      const crlDays = 8.052 * Math.sqrt(crl * 1.037) + 23.73;
+      const discrepancy = Math.abs(crlDays - lmpDays);
+      const lmpWk = lmpDays / 7;
+      let allowed: number;
+      if (lmpWk < 9) allowed = 5;
+      else if (lmpWk < 16) allowed = 7;
+      else if (lmpWk < 22) allowed = 10;
+      else if (lmpWk < 28) allowed = 14;
+      else allowed = 21;
+      const crlWk = Math.floor(crlDays / 7);
+      const crlD = Math.floor(crlDays % 7);
+      redating = discrepancy > allowed
+        ? `\n\n**REDATE TO THE ULTRASOUND (ACOG CO 700).**\nCRL gives **${crlWk} ${crlD}/7 weeks**; the LMP gives ${wk} ${d}/7. The discrepancy is **${Math.round(discrepancy)} days**, which exceeds the ${allowed}-day limit for this gestational age. **Use the ultrasound date.**`
+        : `\n\n**KEEP THE LMP DATE (ACOG CO 700).**\nCRL gives ${crlWk} ${crlD}/7 weeks — a **${Math.round(discrepancy)}-day** discrepancy, within the ${allowed}-day limit for this gestational age. The LMP date stands.`;
+    }
+
+    return {
+      value: `${wk} ${d}/7 wk`,
+      label: wk >= 24 ? 'Potentially viable — monitor' : wk >= 20 ? 'Viability grey zone' : 'Previable',
+      description: `${sourceLine}. **EDD in ${daysToEdd} days.**${redating}\n\n**THIS PATIENT:**\n${thisPatient}\n\n**ALL DECISION THRESHOLDS:**\n• **<12 weeks** — RhoGAM 50 mcg (300 mcg also acceptable)\n• **≥12 weeks** — RhoGAM 300 mcg\n• **<20 weeks** — fetus not viable; resuscitate the mother only\n• **20–24 weeks** — viability grey zone; OB at the bedside\n• **≥24 weeks** — continuous fetal monitoring ≥4 h; resuscitative hysterotomy on the table\n\n**DATING QUALITY:**\n• First-trimester CRL is the most accurate method available\n• LMP dating assumes regular 28-day cycles and accurate recall\n• A pregnancy with no ultrasound confirming or revising the EDD before 22 0/7 weeks is **suboptimally dated** (ACOG)\n\n**IN TRAUMA, DO NOT WAIT FOR DATING:**\nFundus at the umbilicus ≈ **20 weeks**. Fundus at the xiphoid ≈ **36 weeks**. If the fundus is at or above the umbilicus, treat as **≥20 weeks** and monitor.`,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Pediatric ETT Size Calculator
+// -------------------------------------------------------------------
+
+const PEDS_ETT_SIZE_CALCULATOR: CalculatorDefinition = {
+  id: 'peds-ett-size',
+  title: 'Pediatric ETT Size',
+  subtitle: 'Cuffed and uncuffed tube size, depth, and kit',
+  description: 'Age-based endotracheal tube sizing using the PALS cuffed formula (age/4) + 3.5, with insertion depth, suction catheter size, and blade size. Under 1 year the formula does not apply and fixed neonatal/infant sizes are used instead.',
+  fields: [
+    { name: 'age-years', label: 'Age', type: 'number', points: 0, valueIsPoints: true, unit: 'years', description: 'Whole years. Use 0 for infants under 12 months and fill in the months field.' },
+    { name: 'age-months', label: 'Age if under 1 year', type: 'number', points: 0, valueIsPoints: true, unit: 'months', description: 'Only if under 1 year old. Leave at 0 otherwise.' },
+  ],
+  results: [],
+  thresholdNote: 'Formulas are estimates for children 1 year and older. Under 1 year use the fixed neonatal/infant sizes shown, not the formula — (age/4)+3.5 extrapolates to nonsense below 1 year. Length-based resuscitation tape (Broselow) outperforms age-based formulas and is preferred when available. Two cuffed formulas are in the literature: PALS/AHA uses (age/4)+3.5; Khine et al. (1997) proposed (age/4)+3.0 and it is still quoted by some references — this app follows PALS, matching the consult. Depth by 3 × ID misplaces the tube in roughly 15–25% of children, so waveform capnography plus a post-intubation chest film are mandatory regardless of what this calculator says. In craniofacial anomalies, subglottic stenosis, Down syndrome, or prior prolonged intubation, all formulas fail — size down and have ENT available.',
+  citations: [
+    'Topjian AA, Raymond TT, Atkins D, et al. Part 4: Pediatric Basic and Advanced Life Support: 2020 AHA Guidelines for CPR and ECC. Circulation. 2020;142(16_suppl_2):S469-S523. PMID 33081526.',
+    'Khine HH, Corddry DH, Kettrick RG, et al. Comparison of cuffed and uncuffed endotracheal tubes in young children during general anesthesia. Anesthesiology. 1997;86(3):627-631. PMID 9066329.',
+    'Cole F. Pediatric formulas for the anesthesiologist. AMA J Dis Child. 1957;94(6):672-673. PMID 13478296.',
+    'Phipps LM, Thomas NJ, Gilmore RK, et al. Prospective assessment of guidelines for determining appropriate depth of endotracheal tube placement in children. Pediatr Crit Care Med. 2005;6(5):519-522. PMID 16148809.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const years = values['age-years'] || 0;
+    const months = values['age-months'] || 0;
+
+    const commonTail = '\n\n**CUFF PRESSURE:** keep **<20–25 cm H₂O**. Measure it with a manometer — do not palpate the pilot balloon.\n\n**CONFIRM PLACEMENT:**\n• **Waveform capnography — mandatory, not optional**\n• Bilateral breath sounds, symmetric chest rise\n• CXR: tip between the clavicles and the carina\n\n**LENGTH-BASED TAPE BEATS AGE FORMULAS.** If a Broselow tape is available, use it and treat this as a cross-check only.';
+
+    if (years <= 0 && months <= 0) {
+      return {
+        value: '--',
+        label: 'Enter the age',
+        description: 'Enter age in **whole years**, or — if the child is under 1 year — enter **months** and leave years at 0.\n\nThe formula (age/4) + 3.5 is not valid below 1 year and will oversize the tube.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Hard reject: fractional years under 1. A 6-month-old entered as "6" computes a 5.0 mm
+    // tube — grossly oversized, and forcing it causes subglottic injury.
+    if (years > 0 && years < 1) {
+      return {
+        value: '⚠',
+        label: 'Use the months field',
+        description: `**${years} in the YEARS field is under 1 year.**\n\nThe formula does not work below 1 year. Set **years to 0** and enter the age in the **months** field instead.\n\nThis matters: a 6-month-old entered as "6" years computes a **5.0 mm** tube. That is grossly oversized for an infant, and forcing it causes subglottic injury.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (years < 1) {
+      // Fixed neonatal/infant table — NOT formula-derived.
+      const neonate = months < 1;
+      const cuffed = neonate ? '3.0' : '3.5';
+      const uncuffed = neonate ? '3.0–3.5' : '3.5–4.0';
+      const depth = neonate ? '9–10' : '10–11';
+      return {
+        value: `${cuffed} mm`,
+        label: neonate ? 'Term neonate — fixed size' : 'Infant 1–11 months — fixed size',
+        description: `**CUFFED ETT ${cuffed} mm ID** — fixed size, **not** formula-derived.\n\n**UNCUFFED (if cuffed unavailable):** ${uncuffed} mm\n**DEPTH AT THE LIP:** **${depth} cm**\n\n**WHY NO FORMULA:** (age/4) + 3.5 extrapolates to 3.5 mm at birth and is simply wrong below 1 year. Infant sizing comes from a fixed table.\n\n**KIT:**\n• Suction catheter: **6–8 Fr**\n• Laryngoscope blade: **Miller 0–1** (straight blade preferred in infants)\n• Stylet, and one size above and below open at the bedside${commonTail}`,
+        colorVar: '--color-decision-active',
+      };
+    }
+
+    const cuffedID = Math.round(((years / 4) + 3.5) * 2) / 2;
+    const uncuffedID = Math.round(((years / 4) + 4.0) * 2) / 2;
+    const depthCm = Math.round(cuffedID * 3 * 10) / 10;
+    const altDepth = Math.round(((years / 2) + 12) * 10) / 10;
+    const suctionFr = Math.round(cuffedID * 2);
+    const blade = years <= 2 ? 'Miller 1 / Mac 1' : years <= 8 ? 'Miller 2 / Mac 2' : 'Miller 2 / Mac 3';
+
+    const altLine = years > 2
+      ? `\n• Cross-check: (age/2) + 12 = **${altDepth} cm**`
+      : '\n• The (age/2) + 12 cross-check is for age >2 years only — not applicable here';
+
+    return {
+      value: `${cuffedID.toFixed(1)} mm`,
+      label: `Age ${years} — cuffed ETT`,
+      description: `**PRIMARY: ${cuffedID.toFixed(1)} mm cuffed** — (age/4) + 3.5\n**BACKUP:** have **${(cuffedID - 0.5).toFixed(1)}** and **${(cuffedID + 0.5).toFixed(1)}** open at the bedside\n\n**UNCUFFED (if cuffed unavailable):** ${uncuffedID.toFixed(1)} mm — (age/4) + 4\n\n**DEPTH AT THE LIP: ${depthCm} cm** (3 × tube ID)${altLine}\n• **This estimate is wrong 15–25% of the time.** Confirm every time.\n• This is **lip** depth. Nasal placement runs 2–3 cm deeper.\n\n**KIT:**\n• Suction catheter: **${suctionFr} Fr** (2 × tube ID — French, not mm)\n• Laryngoscope blade: **${blade}**\n• Stylet, bougie, and one size above and below\n\n**TWO FORMULAS EXIST.** PALS/AHA uses (age/4) + 3.5, which is what this consult teaches. Khine (1997) proposed (age/4) + 3.0 and is still quoted by some references — a half-size difference.${commonTail}`,
+      colorVar: '--color-decision-active',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// I:E Ratio Calculator
+// -------------------------------------------------------------------
+
+const IE_RATIO_CALCULATOR: CalculatorDefinition = {
+  id: 'ie-ratio',
+  title: 'I:E Ratio Calculator',
+  subtitle: 'Inspiratory-to-expiratory ratio from rate and Ti',
+  description: 'Computes the I:E ratio from the set respiratory rate and inspiratory time, and checks it against the 1:4 to 1:5 target for severe obstructive physiology.',
+  fields: [
+    { name: 'resp-rate', label: 'Respiratory rate', type: 'number', points: 0, valueIsPoints: true, unit: 'breaths/min', description: 'The SET rate, not the patient\'s total triggered rate.' },
+    { name: 'insp-time', label: 'Inspiratory time (Ti)', type: 'number', points: 0, valueIsPoints: true, unit: 'seconds', description: 'SECONDS, not %Ti. If your vent is set by flow, read Ti off the displayed waveform.' },
+  ],
+  results: [],
+  thresholdNote: 'Applies to controlled mechanical ventilation in obstructive physiology. The ratio is meaningless in a spontaneously breathing or heavily triggering patient — the patient\'s own effort sets the real timing, so deepen sedation and consider paralysis before trusting this number. Diminishing returns: once minute ventilation is at or below ~10 L/min, further rate reduction buys very little (plateau fell only ~2 cm H₂O going from 18 to 12 and again from 12 to 6 breaths/min in Leatherman\'s series) — at that point the problem is bronchospasm, not ventilator settings. Do NOT use in ARDS, where the target ratio and the entire management logic are different. This calculator does not measure auto-PEEP; a "target" I:E does not exclude dangerous hyperinflation. Perform an expiratory hold.',
+  citations: [
+    'Leatherman J. Mechanical ventilation for severe asthma. Chest. 2015;147(6):1671-1680. PMID 26033128.',
+    'Leatherman JW, McArthur C, Shapiro RS. Effect of prolongation of expiratory time on dynamic hyperinflation in mechanically ventilated patients with severe asthma. Crit Care Med. 2004;32(7):1542-1545. PMID 15241100.',
+    'Tuxen DV, Lane S. The effects of ventilatory pattern on hyperinflation, airway pressures, and circulation in mechanical ventilation of patients with severe air-flow obstruction. Am Rev Respir Dis. 1987;136(4):872-879. PMID 3662241.',
+    'Global Initiative for Asthma. Global Strategy for Asthma Management and Prevention. 2024 update.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const rr = values['resp-rate'] || 0;
+    const ti = values['insp-time'] || 0;
+
+    if (rr <= 0 || ti <= 0) {
+      return {
+        value: '--',
+        label: 'Enter rate and Ti',
+        description: 'Enter the **set** respiratory rate and the inspiratory time in **seconds**.\n\nTarget in severe asthma/COPD is **1:4 to 1:5**.\n\nTypical starting point: rate 10, Ti 1.0 s → 1:5.0.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // A Ti entered as a percentage (e.g. "33") rather than seconds produces garbage.
+    if (ti > 5) {
+      return {
+        value: '⚠',
+        label: 'Ti looks like a percentage',
+        description: `**${ti} seconds is not a plausible inspiratory time.**\n\nMany ventilators display inspiratory time as **%Ti** of the cycle. If your vent reads "33", that is 33 **percent**, not 33 seconds.\n\nEnter Ti in **seconds** — typically **0.6 to 1.5 s** in an adult.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    const tct = Math.round((60 / rr) * 100) / 100;
+    const te = Math.round((tct - ti) * 100) / 100;
+
+    const lengthenBlock = '\n\n**TO LENGTHEN EXPIRATION — IN THIS ORDER:**\n1. **Drop the respiratory rate first** (8–12/min, go as low as 8). Highest yield by far.\n2. **Increase inspiratory flow to 60–80 L/min** — shortens Ti, lengthens Te. Accepts a higher peak pressure, which is fine.\n3. **Reduce tidal volume** to 6 mL/kg IBW. Lowest yield of the three.\n\n**NEVER invert the ratio in obstruction.** Inverse-ratio ventilation is an ARDS manoeuvre and will kill an asthmatic.\n\n**WATCH THE PLATEAU, NOT THE PEAK:**\n• **Plateau <30 cm H₂O** — this is the number that predicts barotrauma\n• **Auto-PEEP <10 cm H₂O** — measure it with an expiratory hold\n• High peak with a normal plateau = airway resistance, expected in asthma, do not chase it\n\n**IF THE PATIENT SUDDENLY DECOMPENSATES:**\nDisconnect from the circuit and let them exhale for 30–60 s while you compress the chest. Then look for pneumothorax. Breath-stacking and tension pneumothorax present identically.\n\n**PERMISSIVE HYPERCAPNIA IS THE POINT.** pH >7.2 is acceptable. Do not increase the rate to fix the CO₂.';
+
+    if (te <= 0) {
+      return {
+        value: 'IMPOSSIBLE',
+        label: 'Ti exceeds the cycle time',
+        description: `**Ti ${ti} s does not fit inside a ${tct} s cycle at rate ${rr}.**\n\nThere is no expiratory time left. This is an inverse-ratio setting and it is lethal in obstructive physiology.\n\n**Drop the rate or shorten Ti immediately.**${lengthenBlock}`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    const ratio = Math.round((te / ti) * 10) / 10;
+
+    let verdict: string;
+    let label: string;
+    let colorVar: string;
+    if (ratio < 2.0) {
+      label = 'Critically short expiratory time';
+      verdict = '**CRITICALLY SHORT EXPIRATORY TIME.** This is the classic breath-stacking setup. Drop the rate now.';
+      colorVar = '--color-danger';
+    } else if (ratio < 4.0) {
+      label = 'Below target for obstruction';
+      verdict = '**BELOW TARGET FOR OBSTRUCTION.** Acceptable for normal lungs, too short for severe asthma or COPD. Lengthen expiration.';
+      colorVar = '--color-warning';
+    } else if (ratio <= 6.0) {
+      label = 'Target for severe asthma/COPD';
+      verdict = '**IN TARGET for severe asthma/COPD.** Now confirm with an expiratory hold that auto-PEEP is <10 cm H₂O — a target I:E does not exclude hyperinflation.';
+      colorVar = '--color-primary';
+    } else {
+      label = 'Very long expiratory time';
+      verdict = '**VERY LONG EXPIRATION.** Acceptable in severe obstruction, but check that minute ventilation is still adequate and the pH is above 7.2.';
+      colorVar = '--color-decision-active';
+    }
+
+    return {
+      value: `1 : ${ratio.toFixed(1)}`,
+      label,
+      description: `**TOTAL CYCLE TIME:** ${tct} s  |  **INSPIRATORY:** ${ti} s  |  **EXPIRATORY: ${te} s**\n\n**TARGET IN SEVERE ASTHMA/COPD: 1:4 to 1:5**\n\n${verdict}${lengthenBlock}`,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// LVOT VTI / Stroke Volume Calculator
+// -------------------------------------------------------------------
+
+const VTI_CALCULATOR: CalculatorDefinition = {
+  id: 'vti-calculator',
+  title: 'LVOT VTI / Stroke Volume',
+  subtitle: 'Stroke volume, cardiac output, and passive leg raise response',
+  description: 'Computes stroke volume and cardiac output from LVOT diameter and velocity-time integral, and interprets the passive leg raise change against the published measurement noise floor.',
+  fields: [
+    { name: 'lvot-diameter', label: 'LVOT diameter', type: 'number', points: 0, valueIsPoints: true, unit: 'cm', description: 'CENTIMETRES. Parasternal long axis, mid-systole, inner-edge to inner-edge. Typically 1.8–2.4 cm.' },
+    { name: 'vti-baseline', label: 'Baseline LVOT VTI', type: 'number', points: 0, valueIsPoints: true, unit: 'cm', description: 'The VTI (a distance, cm) — NOT peak velocity (cm/s). Apical 5-chamber, PW gate at the LVOT, average 3 beats (5 if AF).' },
+    { name: 'heart-rate', label: 'Heart rate', type: 'number', points: 0, valueIsPoints: true, unit: 'bpm', description: 'At the time of the VTI trace.' },
+    { name: 'vti-plr', label: 'LVOT VTI after passive leg raise', type: 'number', points: 0, valueIsPoints: true, unit: 'cm', description: 'Optional. Measure 60–90 seconds after the leg raise.' },
+  ],
+  results: [],
+  thresholdNote: 'Invalid in significant aortic stenosis, subaortic obstruction/LVOT gradient, aortic regurgitation, or a mechanical/prosthetic aortic valve — the LVOT area assumption fails. Unreliable in atrial fibrillation unless at least 5 consecutive beats are averaged. Passive leg raise is invalid with raised intra-abdominal pressure, lower-extremity amputation, pelvic or long-bone fracture, unstable spine, or raised intracranial pressure. The PW Doppler beam must be within ~20° of the flow axis or VTI is systematically underestimated. This calculator does NOT compute cardiac index — there is no BSA input — so do not use its cardiac output to titrate an inotrope against an index target. Single measurements are far less useful than trends in the same patient by the same operator.',
+  citations: [
+    'Monnet X, Marik P, Teboul JL. Passive leg raising for predicting fluid responsiveness: a systematic review and meta-analysis. Intensive Care Med. 2016;42(12):1935-1947. PMID 26825952.',
+    'Jozwiak M, Mercado P, Teboul JL, et al. What is the lowest change in cardiac output that transthoracic echocardiography can detect? Crit Care. 2019;23(1):116. PMID 30971306.',
+    'Cherpanath TGV, Hirsch A, Geerts BF, et al. Predicting fluid responsiveness by passive leg raising: a systematic review and meta-analysis of 23 clinical trials. Crit Care Med. 2016;44(5):981-991. PMID 26741579.',
+    'Mitchell C, Rahko PS, Blauwet LA, et al. Guidelines for Performing a Comprehensive Transthoracic Echocardiographic Examination in Adults: Recommendations from the ASE. J Am Soc Echocardiogr. 2019;32(1):1-64. PMID 30282592.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const d = values['lvot-diameter'] || 0;
+    const vti = values['vti-baseline'] || 0;
+    const hr = values['heart-rate'] || 0;
+    const vtiPlr = values['vti-plr'] || 0;
+
+    if (d <= 0 || vti <= 0) {
+      return {
+        value: '--',
+        label: 'Enter LVOT diameter and VTI',
+        description: 'Enter the **LVOT diameter in cm** (typically 1.8–2.4) and the **baseline VTI in cm** (typically 18–22).\n\nVTI is the velocity-time **integral** — a distance. Do not enter peak velocity.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Hard reject: diameter is squared, so a cm/mm mix-up produces a 100x error in CSA.
+    if (d < 1.4 || d > 3.0) {
+      return {
+        value: '⚠',
+        label: 'LVOT diameter out of range',
+        description: `**${d} is outside the plausible adult LVOT range of 1.4–3.0 cm.**\n\nIf you entered **millimetres** (e.g. 20 instead of 2.0), the area is inflated **100-fold** and the cardiac output would read around 480 L/min.\n\n**The diameter is squared** — this is the single highest-harm input in this calculator. Re-enter in **centimetres**.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // VTI is a distance in cm, typically 15-25. Peak velocity is 80-120 cm/s.
+    if (vti > 60) {
+      return {
+        value: '⚠',
+        label: 'That looks like peak velocity',
+        description: `**A VTI of ${vti} cm is not physiologic.**\n\nYou have most likely traced **peak velocity** (Vmax, typically 80–120 **cm/s**) instead of the velocity-time **integral** (typically 15–25 **cm**).\n\nThe VTI is the *area under* the Doppler envelope, not its height. Using Vmax gives a roughly fivefold-high stroke volume.`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    const csa = Math.round(Math.PI * Math.pow(d / 2, 2) * 100) / 100;
+    const sv = Math.round(vti * csa * 10) / 10;
+    const co = hr > 0 ? Math.round((sv * hr / 1000) * 10) / 10 : null;
+
+    let band: string;
+    if (vti < 14) band = 'markedly low stroke volume';
+    else if (vti < 18) band = 'low';
+    else if (vti <= 22) band = 'normal';
+    else band = 'high-output / vasoplegic state';
+
+    let plrBlock = '';
+    let verdict = '';
+    let colorVar = '--color-primary';
+    let label = `VTI ${vti} cm — ${band}`;
+
+    if (vtiPlr > 0) {
+      const delta = Math.round(((vtiPlr - vti) / vti) * 1000) / 10;
+      if (delta >= 15) {
+        verdict = '**FLUID RESPONDER.** The change exceeds the 14% between-operator least significant change, so this is a real signal, not noise.';
+        colorVar = '--color-primary';
+        label = 'Fluid responder';
+      } else if (delta >= 12) {
+        verdict = '**PROBABLE RESPONDER — but only if the same operator took both traces.** This change clears the 11% same-operator LSC but not the 14% between-operator LSC.';
+        colorVar = '--color-warning';
+        label = 'Probable responder';
+      } else if (delta >= 0) {
+        verdict = '**INDETERMINATE — inside measurement error.** This is *not* a negative test. A change under 12% cannot be distinguished from noise. Repeat with the same operator, or use a different test.';
+        colorVar = '--color-warning';
+        label = 'Indeterminate — inside the noise floor';
+      } else {
+        verdict = '**NOT A FLUID RESPONDER.** The VTI fell with the leg raise. Giving fluid is unlikely to increase output and may cause harm.';
+        colorVar = '--color-danger';
+        label = 'Not a fluid responder';
+      }
+      plrBlock = `\n\n**PASSIVE LEG RAISE: ${delta > 0 ? '+' : ''}${delta}% CHANGE** (${vti} → ${vtiPlr} cm)\n\n${verdict}`;
+    }
+
+    const coLine = co !== null
+      ? `**CARDIAC OUTPUT: ${co} L/min** (SV ${sv} mL × HR ${hr})`
+      : '**CARDIAC OUTPUT:** enter a heart rate to compute';
+
+    return {
+      value: `${sv} mL`,
+      label,
+      description: `**STROKE VOLUME ${sv} mL**\n${coLine}\n\n**LVOT AREA:** ${csa} cm² (from ${d} cm diameter)\n**BASELINE VTI: ${vti} cm** — ${band}${plrBlock}\n\n**THE NOISE FLOOR — READ THIS:**\n• Least significant change for VTI is **11% for the same operator** and **14% between operators**\n• A change under **12%** cannot be distinguished from measurement error\n• The commonly quoted "10% = responder" threshold sits **inside the noise**\n• Same operator, same window, average 3 beats (5 in AF), or the number means nothing\n\n**HOW TO DO THE PLR PROPERLY:**\n• Start semi-recumbent at 45°, then lower the trunk flat and raise the legs to 45°\n• **Move the bed, not the patient** — pain or arousal invalidates the test\n• Measure at **60–90 seconds**. The effect fades by 2–3 minutes.\n\n**LVOT DIAMETER IS SQUARED.** A 2 mm error in diameter produces a ~20% error in stroke volume. For serial trending, measure the diameter **once**, then track VTI alone and hold the area fixed.\n\n**FLUID RESPONSIVENESS IS NOT FLUID NEED.** Roughly half of all healthy people are fluid responsive. Give fluid only if the patient is also hypoperfused.`,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Vasopressor Dose Equivalence Calculator
+// -------------------------------------------------------------------
+
+const VASOPRESSOR_EQUIVALENCE_CALCULATOR: CalculatorDefinition = {
+  id: 'vasopressor-equivalence',
+  title: 'Vasopressor Dose Equivalence',
+  subtitle: 'Norepinephrine-equivalent burden — for severity, NOT for substitution',
+  description: 'Expresses total vasopressor burden as a single norepinephrine-equivalent dose for shock severity scoring and trending. This is a research standardization instrument. It is NOT a bedside substitution table and must never be used to swap one agent for another.',
+  fields: [
+    {
+      name: 'formula',
+      label: 'Conversion set',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'Goradia 2021 (scoping-review consensus)', points: 1 },
+        { label: 'Kotani 2023 NEE (ICU severity)', points: 2 },
+      ],
+    },
+    { name: 'norepinephrine', label: 'Norepinephrine', type: 'number', points: 0, valueIsPoints: true, unit: 'mcg/kg/min', description: 'Norepinephrine BASE equivalent. Base and bitartrate differ 2-fold — read the vial.' },
+    { name: 'epinephrine', label: 'Epinephrine', type: 'number', points: 0, valueIsPoints: true, unit: 'mcg/kg/min' },
+    { name: 'phenylephrine', label: 'Phenylephrine', type: 'number', points: 0, valueIsPoints: true, unit: 'mcg/kg/min', description: 'Usually ordered in mcg/min — divide by the weight in kg FIRST.' },
+    { name: 'dopamine', label: 'Dopamine', type: 'number', points: 0, valueIsPoints: true, unit: 'mcg/kg/min', description: 'A dose, not the pump rate in mL/hr.' },
+    { name: 'vasopressin', label: 'Vasopressin', type: 'number', points: 0, valueIsPoints: true, unit: 'units/min', description: 'Fixed dose, NOT weight-based. Usually 0.03–0.04 U/min. If your pump reads U/hr, divide by 60.' },
+    { name: 'angiotensin2', label: 'Angiotensin II', type: 'number', points: 0, valueIsPoints: true, unit: 'ng/kg/min', description: 'NANOgrams per kg per min — a thousand-fold below the catecholamines. Usual 5–20 ng/kg/min.' },
+    { name: 'metaraminol', label: 'Metaraminol', type: 'number', points: 0, valueIsPoints: true, unit: 'mcg/kg/min', description: 'Not marketed in the US. Goradia formula only.' },
+  ],
+  results: [],
+  thresholdNote: 'Use for severity scoring, trending, and research reporting ONLY. Do not use to convert one vasopressor to another at the bedside — the underlying conversion factors are derived from heterogeneous trials with wide ranges (the phenylephrine factor alone spans 1.1 to 16.3) and are not validated for equipotent substitution. Vasopressin is dosed in units/min, fixed, not weight-based; entering it as a weight-based number is a common and serious error. Norepinephrine has two labelled forms — base and tartrate (1 mg/mL vs 2 mg/mL); doses must be expressed as norepinephrine BASE or the equivalent is off by a factor of 2. Angiotensin II is dosed in ng/kg/min, three orders of magnitude below the catecholamines. Metaraminol is not marketed in the US. The number has no meaning if the infusion is not actually reaching the patient — confirm line patency before treating a rising NEE as clinical deterioration.',
+  citations: [
+    'Goradia S, Abu Sardaneh A, Narayan SW, Penm J, Patanwala AE. Vasopressor dose equivalence: A scoping review and suggested formula. J Crit Care. 2021;61:233-240. PMID 33220576.',
+    'Kotani Y, Di Gioia A, Landoni G, Belletti A, Khanna AK. An updated "norepinephrine equivalent" score in intensive care as a marker of shock severity. Crit Care. 2023;27(1):29. PMID 36670410. (See Correction: Crit Care. 2025;29:104.)',
+    'Russell JA, Walley KR, Singer J, et al. Vasopressin versus norepinephrine infusion in patients with septic shock (VASST). N Engl J Med. 2008;358(9):877-887. PMID 18305265.',
+    'Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021. Crit Care Med. 2021;49(11):e1063-e1143. PMID 34605781.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const useKotani = (values['formula'] || 1) === 2;
+    const ne = values['norepinephrine'] || 0;
+    const epi = values['epinephrine'] || 0;
+    const phenyl = values['phenylephrine'] || 0;
+    const dopa = values['dopamine'] || 0;
+    const vaso = values['vasopressin'] || 0;
+    const ang2 = values['angiotensin2'] || 0;
+    const meta = values['metaraminol'] || 0;
+
+    const doNotSwap = '\n\n**⚠ THIS IS NOT A SUBSTITUTION TABLE.**\nThis number expresses total vasopressor **burden** for severity scoring and trending. It does **not** tell you what dose of one drug equals another at the bedside. Published conversion factors vary enormously — the phenylephrine factor alone ranges from **1.1 to 16.3** across source trials. **Never use this to switch agents.**';
+
+    if (ne <= 0 && epi <= 0 && phenyl <= 0 && dopa <= 0 && vaso <= 0 && ang2 <= 0 && meta <= 0) {
+      return {
+        value: '--',
+        label: 'Enter the current infusions',
+        description: `Enter every agent the patient is currently on. Leave the rest at 0.\n\n**Mind the units** — they are not the same across agents:\n• Catecholamines and phenylephrine: **mcg/kg/min**\n• Vasopressin: **units/min**, fixed, not weight-based\n• Angiotensin II: **ng/kg/min**${doNotSwap}`,
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const contributions: Array<[string, number, string]> = [];
+    const add = (name: string, dose: number, contrib: number, unit: string) => {
+      if (dose > 0) contributions.push([name, contrib, `${dose} ${unit}`]);
+    };
+
+    let nee: number;
+    if (useKotani) {
+      add('Norepinephrine', ne, ne, 'mcg/kg/min');
+      add('Epinephrine', epi, epi, 'mcg/kg/min');
+      add('Phenylephrine', phenyl, 0.06 * phenyl, 'mcg/kg/min');
+      add('Dopamine', dopa, 0.01 * dopa, 'mcg/kg/min');
+      add('Vasopressin', vaso, 2.5 * vaso, 'units/min');
+      add('Angiotensin II', ang2, 0.0025 * ang2, 'ng/kg/min');
+      nee = ne + epi + 0.06 * phenyl + 0.01 * dopa + 2.5 * vaso + 0.0025 * ang2;
+    } else {
+      add('Norepinephrine', ne, ne, 'mcg/kg/min');
+      add('Epinephrine', epi, epi, 'mcg/kg/min');
+      add('Phenylephrine', phenyl, phenyl / 10, 'mcg/kg/min');
+      add('Dopamine', dopa, dopa / 100, 'mcg/kg/min');
+      add('Metaraminol', meta, meta / 8, 'mcg/kg/min');
+      add('Vasopressin', vaso, 2.5 * vaso, 'units/min');
+      add('Angiotensin II', ang2, 10 * ang2, 'ng/kg/min');
+      nee = ne + epi + phenyl / 10 + dopa / 100 + meta / 8 + 2.5 * vaso + 10 * ang2;
+    }
+    nee = Math.round(nee * 1000) / 1000;
+
+    const breakdown = contributions
+      .map(([name, contrib, dose]) => `• ${name} ${dose} → **${Math.round(contrib * 1000) / 1000}**`)
+      .join('\n');
+
+    let label: string;
+    let colorVar: string;
+    let bandBlock: string;
+    if (nee < 0.1) {
+      label = 'Low-dose vasopressor support';
+      colorVar = '--color-primary';
+      bandBlock = '**LOW-DOSE SUPPORT.** Reassess volume status and the underlying cause; many patients at this burden are simply underfilled.';
+    } else if (nee < 0.3) {
+      label = 'Moderate-dose vasopressor support';
+      colorVar = '--color-warning';
+      bandBlock = '**MODERATE DOSE.** At **>0.25–0.5 mcg/kg/min**, add vasopressin 0.03–0.04 U/min fixed as the second agent rather than climbing norepinephrine alone.';
+    } else if (nee < 1.0) {
+      label = 'High-dose — escalate and re-diagnose';
+      colorVar = '--color-danger';
+      bandBlock = '**HIGH DOSE.** Add an adjunct agent and actively hunt for a missed cause. At **>0.5**, give stress-dose hydrocortisone 200 mg/day and re-check the diagnosis.';
+    } else {
+      label = 'Refractory shock';
+      colorVar = '--color-danger';
+      bandBlock = '**REFRACTORY SHOCK.** Mortality exceeds 80% in most series. Consider angiotensin II, methylene blue, and mechanical support. Get another set of eyes on this patient now.';
+    }
+
+    const formulaLine = useKotani
+      ? '**FORMULA:** Kotani 2023 NEE. Goradia 2021 uses a slightly different phenylephrine coefficient (÷10 vs ×0.06); both agree on vasopressin (×2.5).'
+      : '**FORMULA:** Goradia 2021 scoping-review consensus. Kotani 2023 NEE uses a slightly different phenylephrine coefficient (×0.06 vs ÷10); both agree on vasopressin (×2.5).';
+
+    return {
+      value: `${nee}`,
+      label,
+      description: `**NOREPINEPHRINE EQUIVALENT: ${nee} mcg/kg/min**\n\n${bandBlock}\n\n**BREAKDOWN:**\n${breakdown}${doNotSwap}\n\n**WHAT TO DO AT THIS BURDEN:**\n• **>0.25–0.5 mcg/kg/min** — add **vasopressin 0.03–0.04 U/min fixed** as the second agent (VASST/VANISH)\n• **>0.5** — stress-dose hydrocortisone 200 mg/day; recheck the diagnosis\n• **>1.0** — refractory. Consider angiotensin II, methylene blue, mechanical support.\n\n**BEFORE YOU ESCALATE, EXCLUDE:**\n• Occult hypovolaemia — reassess volume status\n• Tension pneumothorax, tamponade, obstructive shock\n• Untreated adrenal insufficiency\n• Acidaemia blunting catecholamine response (pH <7.2)\n• Extravasation or a disconnected/infiltrated line — **check that the drug is actually going in**\n\n${formulaLine}`,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Norepinephrine Infusion Calculator
+// -------------------------------------------------------------------
+
+const NOREPI_CALCULATOR: CalculatorDefinition = {
+  id: 'norepi-calc',
+  title: 'Norepinephrine Infusion',
+  subtitle: 'Weight-based dose to pump rate (mL/hr)',
+  description: 'Converts a weight-based norepinephrine dose (mcg/kg/min) to a pump rate in mL/hr for the selected bag concentration, and echoes the mcg/min equivalent as a sanity check.',
+  fields: [
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'ACTUAL body weight (not ideal body weight).' },
+    {
+      name: 'concentration',
+      label: 'Bag concentration',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      description: 'Confirm against the physical bag label.',
+      selectOptions: [
+        { label: '16 mcg/mL (4 mg in 250 mL)', points: 16 },
+        { label: '32 mcg/mL (8 mg in 250 mL)', points: 32 },
+        { label: '64 mcg/mL (16 mg in 250 mL)', points: 64 },
+        { label: '8 mcg/mL (4 mg in 500 mL)', points: 8 },
+      ],
+    },
+    { name: 'dose', label: 'Dose', type: 'number', points: 0, valueIsPoints: true, unit: 'mcg/kg/min', description: 'Weight-based. Typical start 0.05, titrate to MAP ≥65.' },
+  ],
+  results: [],
+  thresholdNote: 'Dosed in mcg/kg/min in this tool. Many institutions order norepinephrine in mcg/min (non-weight-based) — confirm which convention your order set uses before entering a number, because the two differ by roughly the patient\'s weight. Titrate to MAP, not to a fixed rate, and reassess volume status before every escalation. Not a substitute for treating the cause: exclude tamponade, tension pneumothorax, pulmonary embolism, adrenal insufficiency, and occult haemorrhage. In peripartum cardiomyopathy, norepinephrine addresses pressure, not output — do not titrate it against a cardiac-index target. Verify the bag concentration against the label every time; this calculator is only as correct as the concentration you select.',
+  citations: [
+    'Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021. Crit Care Med. 2021;49(11):e1063-e1143. PMID 34605781.',
+    'De Backer D, Biston P, Devriendt J, et al. Comparison of dopamine and norepinephrine in the treatment of shock. N Engl J Med. 2010;362(9):779-789. PMID 20200382.',
+    'Bauersachs J, König T, van der Meer P, et al. Pathophysiology, diagnosis and management of peripartum cardiomyopathy: a position statement from the HFA of the ESC. Eur J Heart Fail. 2019;21(7):827-843. PMID 31243866.',
+    'ASHP/ISMP. Standardize 4 Safety Initiative — Adult Continuous Infusion Standards.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const wt = values['weight'] || 0;
+    const conc = values['concentration'] || 16;
+    const dose = values['dose'] || 0;
+
+    const commonTail = '\n\n**IN PERIPARTUM CARDIOMYOPATHY SPECIFICALLY:**\n• Norepinephrine is for **MAP <65**, not for low output\n• The failing peripartum ventricle needs **inotropy** — pair with dobutamine or milrinone\n• Afterload from pure vasoconstriction can worsen forward flow in a dilated ventricle\n• Avoid bromocriptine plus a vasoconstrictor without cardiology input\n\n**ACCESS:**\n• Central line preferred. **Do not delay starting it for central access** — peripheral norepinephrine through a well-sited proximal IV for a short period is acceptable and safer than sustained hypotension.\n• Extravasation: stop, aspirate, leave the cannula in, **phentolamine 5–10 mg in 10–15 mL saline** infiltrated locally. Nitroglycerin paste is an alternative.\n\n**⚠ TWO NOREPINEPHRINE PRODUCTS EXIST** — norepinephrine **base** and norepinephrine **bitartrate** (1 mg/mL vs 2 mg/mL). **Read the vial, not the shelf label.** A mix-up doubles or halves every dose.';
+
+    if (wt <= 0 || dose <= 0) {
+      return {
+        value: '--',
+        label: 'Enter weight and dose',
+        description: `Enter **actual body weight** in kg and the dose in **mcg/kg/min**.\n\n• Usual start **0.05 mcg/kg/min**, titrate q2–5 min to **MAP ≥65**\n• Usual working range **0.05–0.5 mcg/kg/min**\n\nThe selected concentration is **${conc} mcg/mL** — confirm it against the bag.`,
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const mcgPerMin = Math.round(dose * wt * 100) / 100;
+    const mcgPerHr = Math.round(mcgPerMin * 60);
+    const mlPerHr = Math.round((mcgPerMin * 60 / conc) * 10) / 10;
+
+    let label: string;
+    let colorVar: string;
+    let volumeFlag = '';
+    if (dose > 1.0) {
+      label = 'Refractory-shock dose';
+      colorVar = '--color-danger';
+    } else if (dose > 0.5) {
+      label = 'High dose — add a second agent';
+      colorVar = '--color-danger';
+    } else {
+      label = 'Standard vasopressor range';
+      colorVar = '--color-decision-active';
+    }
+    if (mlPerHr > 100) {
+      colorVar = '--color-danger';
+      volumeFlag = `\n\n**⚠ ${mlPerHr} mL/hr is a large fluid volume** — roughly ${Math.round(mlPerHr * 24 / 100) / 10} L/day. **Concentrate the bag** rather than volume-load the patient, especially in cardiomyopathy or renal failure.`;
+    }
+
+    return {
+      value: `${mlPerHr} mL/hr`,
+      label,
+      description: `**${dose} mcg/kg/min × ${wt} kg = ${mcgPerMin} mcg/min = ${mcgPerHr} mcg/hr**\n**Concentration: ${conc} mcg/mL**${volumeFlag}\n\n**DOSE RANGE:**\n• **Start 0.05 mcg/kg/min**, titrate q2–5 min to **MAP ≥65**\n• Usual working range **0.05–0.5 mcg/kg/min**\n• **>0.5** — add vasopressin 0.03–0.04 U/min and reassess the diagnosis\n• **>1.0** — refractory shock${commonTail}`,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Dobutamine Infusion Calculator
+// -------------------------------------------------------------------
+
+const DOBUTAMINE_CALCULATOR: CalculatorDefinition = {
+  id: 'dobutamine-calc',
+  title: 'Dobutamine Infusion',
+  subtitle: 'Weight-based inotrope dose to pump rate (mL/hr)',
+  description: 'Converts a weight-based dobutamine dose (mcg/kg/min) to a pump rate in mL/hr for the selected bag concentration. Dobutamine is an inotrope, not a vasopressor — it frequently lowers MAP.',
+  fields: [
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'ACTUAL body weight (not ideal body weight).' },
+    {
+      name: 'concentration',
+      label: 'Bag concentration',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      description: 'Three concentrations are in common use and they differ 4-fold. Read the bag.',
+      selectOptions: [
+        { label: '4000 mcg/mL (1 g in 250 mL) — ASHP standard', points: 4000 },
+        { label: '2000 mcg/mL (500 mg in 250 mL)', points: 2000 },
+        { label: '1000 mcg/mL (250 mg in 250 mL)', points: 1000 },
+      ],
+    },
+    { name: 'dose', label: 'Dose', type: 'number', points: 0, valueIsPoints: true, unit: 'mcg/kg/min', description: 'Start 2–3, titrate to perfusion every 10–15 min. Usual ceiling 20.' },
+  ],
+  results: [],
+  thresholdNote: 'An inotrope, not a vasopressor — it does not treat vasodilatory shock and it frequently LOWERS MAP. Do not use as the sole agent in undifferentiated hypotension. Avoid in hypertrophic obstructive cardiomyopathy (worsens outflow obstruction) and use extreme caution in severe aortic stenosis. Correct hypovolaemia before starting; dobutamine in an underfilled ventricle just produces tachycardia. Blunted effect in patients on chronic beta-blockers — consider milrinone instead. Titrate against cardiac index and perfusion markers, not against MAP. Standard concentrations vary between institutions; the 4000 mcg/mL option is the ASHP Standardize 4 Safety standard, but 2000 mcg/mL premixes are widespread — read the bag. Dobutamine and dopamine are look-alike, sound-alike drugs dosed in the same units with completely different haemodynamics.',
+  citations: [
+    'van Diepen S, Katz JN, Albert NM, et al. Contemporary Management of Cardiogenic Shock: A Scientific Statement From the American Heart Association. Circulation. 2017;136(16):e232-e268. PMID 28923988.',
+    'Kapur NK, Kanwar M, Sinha SS, et al. 2025 ACC Concise Clinical Guidance on the Evaluation and Management of Cardiogenic Shock. J Am Coll Cardiol. 2025. PMID 40100174.',
+    'Bauersachs J, König T, van der Meer P, et al. Pathophysiology, diagnosis and management of peripartum cardiomyopathy: HFA of the ESC position statement. Eur J Heart Fail. 2019;21(7):827-843. PMID 31243866.',
+    'Heidenreich PA, Bozkurt B, Aguilar D, et al. 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure. Circulation. 2022;145(18):e895-e1032. PMID 35363499.',
+    'ASHP/ISMP. Standardize 4 Safety Initiative — Adult Continuous Infusion Standards (dobutamine 4,000 mcg/mL).',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const wt = values['weight'] || 0;
+    const conc = values['concentration'] || 4000;
+    const dose = values['dose'] || 0;
+
+    const commonTail = '\n\n**TITRATE TO PERFUSION, NOT TO BLOOD PRESSURE:**\n• Lactate clearance, mentation, urine output, mixed venous saturation, cardiac index\n• **Dobutamine will often drop the MAP** — beta-2 vasodilation. That is expected, not failure.\n• If the MAP falls below 65, add norepinephrine. Do not abandon the inotrope.\n\n**IN PERIPARTUM CARDIOMYOPATHY:**\n• First-line inotrope in cardiogenic shock from PPCM\n• Alternative: **milrinone 0.375–0.75 mcg/kg/min** — better if the patient is on a beta-blocker, but it is renally cleared with a long half-life\n• Escalate early to mechanical support and a shock team. PPCM often recovers if you bridge it.\n\n**WATCH FOR:**\n• Tachycardia and new atrial or ventricular arrhythmia\n• Chest pain or ischaemic ECG change\n• **Tachyphylaxis after 24–72 h** — receptor downregulation\n• **Blunted response on chronic beta-blockade** — switch to milrinone rather than escalating dobutamine\n\n**DOBUTAMINE IS NOT A VASOPRESSOR.** It will not fix vasoplegia.';
+
+    if (wt <= 0 || dose <= 0) {
+      return {
+        value: '--',
+        label: 'Enter weight and dose',
+        description: `Enter **actual body weight** in kg and the dose in **mcg/kg/min**.\n\n• **Start 2–3 mcg/kg/min**, titrate every 10–15 min\n• Usual range **2–20 mcg/kg/min**\n\nThe selected concentration is **${conc} mcg/mL** — confirm it against the bag.`,
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const mcgPerMin = Math.round(dose * wt * 10) / 10;
+    const mlPerHr = Math.round((mcgPerMin * 60 / conc) * 10) / 10;
+
+    let label: string;
+    let colorVar: string;
+    let band: string;
+    if (dose < 2) {
+      label = 'Below the usual therapeutic range';
+      colorVar = '--color-text-muted';
+      band = '**BELOW THE USUAL RANGE.** Little inotropic effect is expected under 2 mcg/kg/min.';
+    } else if (dose <= 10) {
+      label = 'Standard inotropic range';
+      colorVar = '--color-primary';
+      band = '**STANDARD INOTROPIC RANGE.** Titrate every 10–15 min against perfusion markers, not against MAP.';
+    } else if (dose <= 15) {
+      label = 'Higher range — watch for tachyarrhythmia';
+      colorVar = '--color-warning';
+      band = '**HIGHER RANGE.** Watch closely for tachycardia and new arrhythmia. Reassess whether the problem is inotropy or filling.';
+    } else if (dose <= 20) {
+      label = 'High — arrhythmia and ischaemia risk';
+      colorVar = '--color-danger';
+      band = '**HIGH DOSE.** Above 15 mcg/kg/min, arrhythmia and myocardial ischaemia risk climbs sharply for very little added output. Consider adding or switching to milrinone, and escalate to mechanical support.';
+    } else {
+      label = 'Above the usual ceiling';
+      colorVar = '--color-danger';
+      band = '**ABOVE THE USUAL CEILING of 20 mcg/kg/min.** Further escalation buys tachyarrhythmia, not output. This patient needs mechanical support and a shock team, not more dobutamine.';
+    }
+
+    return {
+      value: `${mlPerHr} mL/hr`,
+      label,
+      description: `**${dose} mcg/kg/min × ${wt} kg = ${mcgPerMin} mcg/min**\n**Concentration: ${conc} mcg/mL**\n\n${band}\n\n**DOSING:**\n• **Start 2–3 mcg/kg/min**, titrate every **10–15 min**\n• Usual range **2–20 mcg/kg/min**\n• Above 15, tachyarrhythmia and ischaemia risk climbs sharply for little added output${commonTail}`,
+      colorVar,
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Esmolol Calculator
+// -------------------------------------------------------------------
+
+const ESMOLOL_CALCULATOR: CalculatorDefinition = {
+  id: 'esmolol-calc',
+  title: 'Esmolol Dosing',
+  subtitle: 'Refractory VF salvage vs standard rate control — two different regimens',
+  description: 'Computes the 500 mcg/kg esmolol bolus and infusion rate. In refractory VF/pVT this is SALVAGE THERAPY supported by two small retrospective studies, not standard ACLS. The rate-control regimen is different — select the correct indication.',
+  fields: [
+    { name: 'weight', label: 'Weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg', description: 'Actual body weight.' },
+    {
+      name: 'indication',
+      label: 'Indication',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      description: 'The regimen differs substantially between these two.',
+      selectOptions: [
+        { label: 'Refractory VF / electrical storm (SALVAGE)', points: 1 },
+        { label: 'Rate control (AF, SVT, thyroid storm)', points: 2 },
+      ],
+    },
+    {
+      name: 'concentration',
+      label: 'Bag concentration',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      description: 'Esmolol is supplied in mg/mL — NOT mcg/mL like the pressors.',
+      selectOptions: [
+        { label: '10 mg/mL (peripheral) — ASHP standard', points: 10 },
+        { label: '20 mg/mL (central) — ASHP standard', points: 20 },
+      ],
+    },
+    { name: 'infusion-dose', label: 'Infusion dose', type: 'number', points: 0, valueIsPoints: true, unit: 'mcg/kg/min', description: 'Refractory VF: 0–100. Rate control: 50–200. This is the INFUSION rate, not the bolus.' },
+  ],
+  results: [],
+  thresholdNote: 'In refractory VF/pVT this is SALVAGE THERAPY, not standard ACLS. The supporting evidence is two small retrospective studies totalling 22 exposed patients, with low to very low GRADE certainty and an inconclusive trial sequential analysis. Use only after ≥3 shocks, ≥3 mg epinephrine, and ≥300 mg amiodarone have failed, and only where high-quality CPR and reversible causes have been addressed. Never let esmolol delay ECPR where it is available. The refractory-VF regimen and the rate-control regimen are different — select the correct indication. Avoid in cocaine or sympathomimetic toxicity (unopposed alpha), decompensated heart failure not driven by the storm, and high-grade AV block. Hypotension is the dose-limiting toxicity; the ~9 minute half-life means it reverses quickly on discontinuation, which is the principal safety argument for attempting it.',
+  citations: [
+    'Driver BE, Debaty G, Plummer DW, Smith SW. Use of esmolol after failure of standard cardiopulmonary resuscitation to treat patients with refractory ventricular fibrillation. Resuscitation. 2014;85(10):1337-1341. PMID 24992872.',
+    'Lee YH, Lee KJ, Min YH, et al. Refractory ventricular fibrillation treated with esmolol. Resuscitation. 2016;107:150-155. PMID 27523955.',
+    'Miguel LA, Fernández LI, Gaviria RB, et al. Esmolol for refractory ventricular fibrillation: a systematic review and meta-analysis. Am J Emerg Med. 2020. PMID 32777667.',
+    'Panchal AR, Bartos JA, Cabañas JG, et al. Part 3: Adult Basic and Advanced Life Support: 2020 AHA Guidelines for CPR and ECC. Circulation. 2020;142(16_suppl_2):S366-S468. PMID 33081529.',
+    'Nademanee K, Taylor R, Bailey WE, et al. Treating electrical storm: sympathetic blockade versus advanced cardiac life support-guided therapy. Circulation. 2000;102(7):742-747. PMID 10942741.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const wt = values['weight'] || 0;
+    const refractoryVF = (values['indication'] || 1) === 1;
+    const conc = values['concentration'] || 10;
+    const infDose = values['infusion-dose'] || 0;
+
+    if (wt <= 0) {
+      return {
+        value: '--',
+        label: 'Enter the weight',
+        description: `Enter actual body weight in kg.\n\n**Bolus is 500 mcg/kg** in both indications.\n\n**Infusion differs:**\n• Refractory VF / electrical storm: **0–100 mcg/kg/min**\n• Rate control: **50–200 mcg/kg/min**\n\nSelected concentration: **${conc} mg/mL** — note esmolol is **mg/mL**, not mcg/mL.`,
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Hard reject: the bolus (500 mcg/kg) and the infusion (mcg/kg/min) sit adjacent and
+    // differ only by "/min". 500 run as an infusion rate is a 5-fold overdose.
+    const ceiling = refractoryVF ? 100 : 200;
+    if (infDose > ceiling) {
+      return {
+        value: '⚠',
+        label: 'Infusion dose above the published ceiling',
+        description: `**${infDose} mcg/kg/min exceeds the ${ceiling} mcg/kg/min ceiling for this indication.**\n\n${infDose >= 400 ? '**Did you enter the BOLUS in the infusion field?** The bolus is **500 mcg/kg** — a one-time dose. The infusion is **mcg/kg/**_**min**_. Running 500 mcg/kg/min is a 5-fold overdose over the maximum.\n\n' : ''}Published ranges:\n• **Refractory VF / electrical storm: 0–100 mcg/kg/min** — the therapeutic effect is attributed largely to the bolus sympatholysis, and many reports start the infusion at 0\n• **Rate control: 50–200 mcg/kg/min**, increased by 50 every 4 minutes`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    const bolusMg = Math.round(0.5 * wt * 10) / 10;
+    const bolusMl = Math.round((bolusMg / conc) * 10) / 10;
+    const mcgPerMin = Math.round(infDose * wt);
+    const mgPerHr = Math.round((mcgPerMin * 60 / 1000) * 10) / 10;
+    const mlPerHr = Math.round((mgPerHr / conc) * 10) / 10;
+
+    const fortyMgNote = Math.abs(bolusMg - 40) < 2.5
+      ? '\n*At this weight the weight-based bolus is essentially the same as the 40 mg fixed dose used in the source studies.*'
+      : '\n*Fixed-dose alternative used in the source studies: **40 mg IV**.*';
+
+    if (refractoryVF) {
+      return {
+        value: `${bolusMg} mg`,
+        label: '⚠ SALVAGE THERAPY — NOT STANDARD ACLS',
+        description: `**⚠ SALVAGE THERAPY — NOT STANDARD ACLS**\n\n**BOLUS: ${bolusMg} mg IV = ${bolusMl} mL** (500 mcg/kg × ${wt} kg)${fortyMgNote}\n\n**INFUSION: ${mlPerHr} mL/hr** — ${infDose} mcg/kg/min = ${mcgPerMin} mcg/min = ${mgPerHr} mg/hr, at ${conc} mg/mL\n*Published range in refractory VF: **0–100 mcg/kg/min***\n\n**GIVE THIS ONLY IF ALL OF THESE ARE TRUE:**\n• **≥3 defibrillation attempts** and still in VF/pVT\n• **≥3 mg epinephrine** given\n• **≥300 mg amiodarone** given\n• CPR is high quality and reversible causes have been addressed\n\n**THE EVIDENCE — READ IT HONESTLY:**\n• **Two small retrospective studies.** Driver 2014: 6 esmolol vs 19 control. Lee 2016: 16 vs 25.\n• Driver: survival to discharge **50% vs 16%**, favourable neuro **50% vs 11%** (RR 4.8, 95% CI 1.0–22)\n• Pooled meta-analysis: 66 patients total, **trial sequential analysis inconclusive**, GRADE low to very low\n• AHA mentions it favourably in refractory VF. ERC declines to comment.\n• **This is a reasonable last resort, not a standard step.**\n\n**WHY IT MIGHT WORK:**\nRepeated epinephrine drives beta-adrenergic overdrive that sustains the fibrillation. Esmolol blocks it. That is why it is given *after* the epinephrine, not instead of it — and why the bolus matters more than the infusion.\n\n**PRACTICAL:**\n• Half-life **~9 minutes** — if it is the wrong call, it self-corrects fast. That is the main safety argument for trying it.\n• Metabolised by red-cell esterases; **no dose change for renal or hepatic failure**\n• **Do not let this delay ECPR** if that is available — run both paths in parallel\n\n**CONTRAINDICATED / AVOID:**\n• Severe bradycardia or high-grade AV block as the rhythm\n• Decompensated heart failure not caused by the storm itself\n• **Cocaine or sympathomimetic toxicity** — unopposed alpha\n• Severe bronchospasm (relative; esmolol is beta-1 selective but selectivity is dose-dependent)`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    return {
+      value: `${mlPerHr} mL/hr`,
+      label: 'Standard rate control',
+      description: `**BOLUS: ${bolusMg} mg IV over 1 min = ${bolusMl} mL** (500 mcg/kg × ${wt} kg)\n\n**INFUSION: ${mlPerHr} mL/hr** — ${infDose} mcg/kg/min = ${mcgPerMin} mcg/min = ${mgPerHr} mg/hr, at ${conc} mg/mL\n\n**STANDARD RATE-CONTROL TITRATION:**\n• Load **500 mcg/kg over 1 min**, then **50 mcg/kg/min for 4 min**\n• If the rate is not controlled, **repeat the 500 mcg/kg load** and increase by **50 mcg/kg/min**\n• Repeat every 4 min. Usual maximum **200 mcg/kg/min**.\n\n**THIS IS A DIFFERENT REGIMEN FROM THE REFRACTORY-VF USE.** Do not carry the arrest protocol over to rate control or vice versa.\n\n**WATCH:** hypotension is the dose-limiting effect and is common. Half-life ~9 min, so it resolves quickly on stopping.\n\n**UNITS:** esmolol is supplied in **mg/mL**, unlike the pressors, which are mcg/mL. The bolus is **mcg/kg** (a one-time dose); the infusion is **mcg/kg/min**.`,
+      colorVar: '--color-decision-active',
+    };
+  },
+};
+
+// -------------------------------------------------------------------
+// Avulsed Tooth Extraoral Time Calculator
+// -------------------------------------------------------------------
+
+const EXTRAORAL_TIME_CALCULATOR: CalculatorDefinition = {
+  id: 'extraoral-time',
+  title: 'Avulsed Tooth Extraoral Time',
+  subtitle: 'IADT 2020 periodontal ligament viability category',
+  description: 'Classifies an avulsed permanent tooth into the three IADT 2020 periodontal ligament viability categories from extraoral DRY time and storage medium, and gives the matching replantation and splinting plan.',
+  fields: [
+    { name: 'dry-time', label: 'Extraoral DRY time', type: 'number', points: 0, valueIsPoints: true, unit: 'minutes', description: 'Time the tooth spent DRY — not the total time out of the socket. This is the variable that decides the category.' },
+    {
+      name: 'storage-medium',
+      label: 'Storage medium since',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      description: 'What has the tooth been in since it came out?',
+      selectOptions: [
+        { label: 'Replanted at the scene', points: 1 },
+        { label: 'Milk', points: 2 },
+        { label: 'HBSS / Save-a-Tooth', points: 3 },
+        { label: 'Saliva (in the mouth or a cup)', points: 4 },
+        { label: 'Saline', points: 5 },
+        { label: 'Tap water', points: 6 },
+        { label: 'Nothing — dry the whole time', points: 7 },
+      ],
+    },
+    { name: 'wet-time', label: 'Time in that medium', type: 'number', points: 0, valueIsPoints: true, unit: 'minutes', description: 'MINUTES. Milk 6 h = 360 min, HBSS 24 h = 1440 min. Leave 0 if dry throughout.' },
+    { name: 'primary-tooth', label: 'Primary (baby) tooth', type: 'toggle', points: 0, description: 'Turn ON only if this is a deciduous tooth. Primary teeth are never replanted.' },
+  ],
+  results: [],
+  thresholdNote: 'Permanent teeth only. Never replant an avulsed primary tooth — replantation risks injuring the permanent successor. The decisive variable is extraoral DRY time, not total time out of the socket; storage medium preserves the periodontal ligament only for the wet interval. Dry time >60 minutes means the PDL cells are non-viable regardless of what medium the tooth was placed in afterwards — subsequent storage does not reset the clock. Do not use tap water at any point; it is hypotonic and lyses PDL cells within minutes. The percentages shown are prognostic estimates from case series, not a validated score, and should not be used to refuse replantation — replantation is still generally indicated in Category 3 to preserve alveolar bone. Contraindications to replantation include severe periodontal disease, an uncooperative patient, and severe medical compromise. Endodontic treatment is required for mature teeth and is usually started 7-10 days after replantation.',
+  citations: [
+    'Fouad AF, Abbott PV, Tsilingaridis G, et al. International Association of Dental Traumatology guidelines for the management of traumatic dental injuries: 2. Avulsion of permanent teeth. Dent Traumatol. 2020;36(4):331-342. PMID 32460393.',
+    'Day PF, Flores MT, O\'Connell AC, et al. International Association of Dental Traumatology guidelines for the management of traumatic dental injuries: 3. Injuries in the primary dentition. Dent Traumatol. 2020;36(4):343-359. PMID 32458553.',
+    'De Brier N, O Dochartaigh D, Borra V, et al. Storage of an avulsed tooth prior to replantation: A systematic review and meta-analysis. Dent Traumatol. 2020;36(5):453-476. PMID 32460440.',
+    'Andreasen JO, Borum MK, Jacobsen HL, Andreasen FM. Replantation of 400 avulsed permanent incisors. 4. Factors related to periodontal ligament healing. Endod Dent Traumatol. 1995;11(2):76-89. PMID 7641622.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const dry = values['dry-time'] || 0;
+    const medium = values['storage-medium'] || 1;
+    const wet = values['wet-time'] || 0;
+    const isPrimary = (values['primary-tooth'] || 0) > 0;
+
+    // Step 0 — the primary-tooth override short-circuits everything else.
+    if (isPrimary) {
+      return {
+        value: 'DO NOT REPLANT',
+        label: 'Primary (baby) tooth',
+        description: '**DO NOT REPLANT A PRIMARY TOOTH.**\n\nReplantation risks damaging the developing permanent tooth bud beneath. This is the one avulsion where doing nothing is the correct answer.\n\n**DO INSTEAD:**\n• Control bleeding with gauze pressure\n• Analgesia\n• Check for the tooth — if it is not accounted for, consider aspiration or intrusion and image accordingly\n• Arrange dental follow-up\n• Reassure the family: the permanent successor is unaffected if the socket is left alone\n\n**Tetanus status** as for any contaminated wound.',
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (dry <= 0 && wet <= 0) {
+      return {
+        value: '--',
+        label: 'Enter the dry time',
+        description: 'Enter the **extraoral DRY time in minutes** — the time the tooth actually spent dry, **not** the total time out of the socket.\n\nA tooth out for 90 minutes but dry for only 10 of them is **Category 1–2**, not Category 3. Entering the wrong number wrongly condemns a salvageable tooth.\n\nIf this is a **primary (baby) tooth**, turn on the toggle — the answer is different.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const mediumNames = ['', 'Replanted at the scene', 'Milk', 'HBSS / Save-a-Tooth', 'Saliva', 'Saline', 'Tap water', 'Nothing — dry throughout'];
+    const mediumName = mediumNames[medium] || 'Unknown';
+
+    // Step 1 — category. Dry time >60 min is decisive regardless of subsequent storage.
+    let category: number;
+    if (dry > 60) category = 3;
+    else if (dry <= 15 && (medium === 1 || medium === 2 || medium === 3 || medium === 4)) category = 1;
+    else category = 2;
+
+    // Step 2 — medium time limits (advisory; does not change the category).
+    const flags: string[] = [];
+    if (medium === 3 && wet > 1440) flags.push('**HBSS beyond 24 h** — past its documented preservation window.');
+    if (medium === 2 && wet > 360) flags.push('**Milk beyond 6 h** — past its documented preservation window.');
+    if (medium === 4 && wet > 60) flags.push('**Saliva beyond 60 min** — saliva is hypotonic and bacterially contaminated; acceptable only for 30–60 min.');
+    if (medium === 5 && wet > 60) flags.push('**Saline beyond 60 min** — saline is a last-resort medium and does not maintain cell metabolism.');
+    if (medium === 6) flags.push('**TAP WATER — never acceptable.** It is hypotonic and lyses PDL cells within minutes. Treat the whole tap-water interval as effectively dry time.');
+    if (medium === 7 && dry <= 60) flags.push('**No storage medium at all.** The whole extraoral interval counts as dry time.');
+    const flagBlock = flags.length ? `\n\n**MEDIUM WARNINGS:**\n${flags.map(f => '• ' + f).join('\n')}` : '';
+
+    const splint = dry > 60 ? '**4 weeks** (dry time >60 min)' : '**2 weeks flexible**';
+
+    let catLabel: string;
+    let replant: string;
+    let catBlock: string;
+    let colorVar: string;
+    if (category === 1) {
+      catLabel = 'PDL cells likely viable';
+      replant = 'YES';
+      colorVar = '--color-primary';
+      catBlock = '**PDL CELLS LIKELY VIABLE.** Rinse gently with saline. **Handle by the crown only — never touch the root surface.** Replant with gentle digital pressure. Verify position clinically and radiographically. This is the best achievable outcome.';
+    } else if (category === 2) {
+      catLabel = 'PDL cells viable but compromised';
+      replant = 'YES';
+      colorVar = '--color-warning';
+      catBlock = '**PDL CELLS VIABLE BUT COMPROMISED.** Remove debris from the root by **irrigating** with saline — do not scrub or scrape. Irrigate the socket with saline. Replant with gentle pressure. There is an increased risk of external root resorption; the tooth needs close follow-up.';
+    } else {
+      catLabel = 'PDL cells likely non-viable';
+      replant = 'YES, WITH POOR PROGNOSIS';
+      colorVar = '--color-danger';
+      catBlock = '**PDL CELLS LIKELY NON-VIABLE.** Replantation is **still indicated in most cases** — it maintains alveolar bone and buys time until growth is complete — but expect **ankylosis and replacement resorption**. **Soak in HBSS or saline for ~30 min before replanting.** Remove necrotic soft tissue from the root surface with gauze. **Splint 4 weeks.** Counsel the family up front that the tooth will likely be lost eventually, and discuss decoronation and long-term restorative planning early.';
+    }
+
+    return {
+      value: `Category ${category}`,
+      label: catLabel,
+      description: `**DRY TIME: ${dry} min**  |  **MEDIUM: ${mediumName}**  |  **WET TIME: ${wet} min**${flagBlock}\n\n**REPLANT: ${replant}**\n\n${catBlock}\n\n**SPLINT: ${splint}**\n\n**PROGNOSIS BY DRY TIME:**\n• <5 min — ~**95%** PDL survival\n• 15 min — ~**80%**\n• 30 min — ~**50%**\n• >60 min — **poor; expect ankylosis and replacement resorption**\n\n**IT IS THE DRY TIME THAT DECIDES.** Time in milk or HBSS does not count against the 60 minutes. Time on the pavement does.\n\n**STORAGE MEDIA, IN ORDER (IADT 2020):**\n• **Milk** — first choice, most available, good for ~6 h\n• **HBSS / Save-a-Tooth** — best cell preservation, ~24 h\n• **Saliva** — acceptable up to 30–60 min\n• **Saline** — last resort\n• **Tap water — never.** Hypotonic, lyses the PDL cells within minutes.\n\n**ALWAYS, REGARDLESS OF CATEGORY:**\n• Tetanus status\n• Systemic antibiotics — doxycycline where staining is not a concern, otherwise amoxicillin or penicillin V\n• Dental follow-up within **2 weeks**; root canal is usually needed at **7–10 days** for a mature tooth\n• Chlorhexidine 0.12% rinse twice daily, soft diet\n• **Never replant a primary (baby) tooth** — it damages the permanent successor bud`,
+      colorVar,
+    };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
   'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
@@ -43526,6 +44450,16 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Recurrent & Cyclical Vomiting (hyperemesis consult, added 2026-07-03)
   'puqe': PUQE_CALCULATOR,
   'cvs-rome-iv': CVS_ROME_IV_CALCULATOR,
+  // Wave C — Tier 1 arithmetic (added 2026-08-23 — backfills dead calculatorLinks)
+  'gestational-age': GESTATIONAL_AGE_CALCULATOR,
+  'peds-ett-size': PEDS_ETT_SIZE_CALCULATOR,
+  'ie-ratio': IE_RATIO_CALCULATOR,
+  'vti-calculator': VTI_CALCULATOR,
+  'vasopressor-equivalence': VASOPRESSOR_EQUIVALENCE_CALCULATOR,
+  'norepi-calc': NOREPI_CALCULATOR,
+  'dobutamine-calc': DOBUTAMINE_CALCULATOR,
+  'esmolol-calc': ESMOLOL_CALCULATOR,
+  'extraoral-time': EXTRAORAL_TIME_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
