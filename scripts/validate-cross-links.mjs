@@ -175,6 +175,43 @@ async function loadTreeModule(treeId) {
   };
 }
 
+// ---------------------------------------------------------------------
+// Cross-tree node index
+//
+// Needed because two reference channels are no longer confined to one consult:
+//   • `calculatorLinks` entries with `kind:'tree'` + `node:` deep-link into a
+//     DIFFERENT consult's node, so the target must be checked against that
+//     consult's nodes, not the linking one's.
+//   • bare `#/node/<id>` body links now resolve globally at runtime via the
+//     `/node/:nodeId` route (src/services/node-resolver.ts), so a link into a
+//     sibling consult is valid, not broken.
+// Built by loading every registered tree once and caching the result — the
+// per-tree pass reuses the same cache, so this costs one extra sweep at most.
+// ---------------------------------------------------------------------
+const treeModuleCache = new Map();
+async function getTreeModule(treeId) {
+  if (!treeModuleCache.has(treeId)) {
+    treeModuleCache.set(treeId, await loadTreeModule(treeId).catch(() => null));
+  }
+  return treeModuleCache.get(treeId);
+}
+
+/** nodeId -> owning treeId, first writer wins (mirrors the runtime map). */
+let globalNodeOwner = null;
+async function getGlobalNodeOwner() {
+  if (globalNodeOwner) return globalNodeOwner;
+  globalNodeOwner = new Map();
+  for (const treeId of Object.keys(TREE_REGISTRY)) {
+    const t = await getTreeModule(treeId);
+    for (const n of t?.nodes ?? []) {
+      if (typeof n?.id === 'string' && !globalNodeOwner.has(n.id)) {
+        globalNodeOwner.set(n.id, treeId);
+      }
+    }
+  }
+  return globalNodeOwner;
+}
+
 function extractLinks(text) {
   if (typeof text !== 'string') return [];
   // Match #/tree/<id>, #/info/<id>, #/node/<id>, #/drug/<id>[/<hint>], #/calculator/<id>
@@ -205,8 +242,11 @@ function validateLink(treeId, nodeId, ownTreeNodeIds, link) {
       }
       break;
     case 'node':
-      if (!ownTreeNodeIds.has(link.target)) {
-        fail(treeId, nodeId, `Broken #/node/${link.target} — not a node in tree "${treeId}"`);
+      // Own consult first (the authoring norm), then any consult — the runtime
+      // `/node/:nodeId` route resolves globally, so a sibling-consult target is a
+      // working link, not a break. Only an id that exists NOWHERE is a dead end.
+      if (!ownTreeNodeIds.has(link.target) && !globalNodeOwner?.has(link.target)) {
+        fail(treeId, nodeId, `Broken #/node/${link.target} — not a node in any consult`);
       }
       break;
     case 'drug':
@@ -230,7 +270,9 @@ function validateLink(treeId, nodeId, ownTreeNodeIds, link) {
 }
 
 async function validateTree(treeId) {
-  const t = await loadTreeModule(treeId);
+  // getTreeModule (not loadTreeModule) so a tree loaded while building the
+  // cross-consult index isn't re-imported — and a missing file isn't reported twice.
+  const t = await getTreeModule(treeId);
   if (!t) return;
   const nodeIds = new Set(t.nodes.map(n => n.id));
 
@@ -253,10 +295,34 @@ async function validateTree(treeId) {
         }
       }
     }
-    // calculatorLinks array on nodes (button-style links)
+    // calculatorLinks array on nodes (button-style links).
+    //
+    // `kind` selects which registry the id must live in — see the doc comment on
+    // DecisionNode.calculatorLinks in src/models/types.ts. Before that field
+    // existed every entry was assumed to be a calculator and the renderer
+    // hardcoded the /calculator/ route, so buttons pointing at reference content
+    // that lives as a TREE or INFO page dead-ended on "Calculator Not Found".
+    // Validating against the wrong registry here would re-introduce that bug from
+    // the other direction: correctly-wired tree/info buttons flagged as broken.
     if (Array.isArray(node.calculatorLinks)) {
       for (const cl of node.calculatorLinks) {
-        if (typeof cl?.id === 'string' && calcIds.size > 0 && !calcIds.has(cl.id)) {
+        if (typeof cl?.id !== 'string') continue;
+        const kind = cl.kind ?? 'calculator';
+        if (kind === 'tree') {
+          if (!allTreeIds.has(cl.id)) {
+            fail(treeId, node.id, `Broken calculatorLinks kind:'tree' id "${cl.id}" — not in TREE_REGISTRY`);
+          } else if (typeof cl.node === 'string') {
+            const target = await getTreeModule(cl.id);
+            const targetNodeIds = new Set((target?.nodes ?? []).map(n => n.id));
+            if (targetNodeIds.size > 0 && !targetNodeIds.has(cl.node)) {
+              fail(treeId, node.id, `Broken calculatorLinks deep-link "${cl.id}" → node "${cl.node}" — not a node in that consult`);
+            }
+          }
+        } else if (kind === 'info') {
+          if (!infoIds.has(cl.id) && !stopIds.has(cl.id)) {
+            fail(treeId, node.id, `Broken calculatorLinks kind:'info' id "${cl.id}" — not in INFO_PAGES or STOP_PAGES`);
+          }
+        } else if (calcIds.size > 0 && !calcIds.has(cl.id)) {
           fail(treeId, node.id, `Broken calculatorLinks id "${cl.id}" — not in CALCULATORS`);
         }
       }
@@ -332,7 +398,7 @@ async function validateToolbars() {
   for (const [treeId, items] of Object.entries(map)) {
     if (!Array.isArray(items)) continue;
     // Per-tree node id set for `jump` validation
-    const t = await loadTreeModule(treeId).catch(() => null);
+    const t = await getTreeModule(treeId);
     const nodeIds = new Set(t?.nodes?.map(n => n.id) ?? []);
     for (const item of items) {
       if (!item?.target) continue;
@@ -369,6 +435,11 @@ async function validateToolbars() {
 // ---------------------------------------------------------------------
 
 await loadRegistries();
+
+// Build the cross-consult node index BEFORE any tree is validated. It is always
+// built over the full registry, even when --tree narrows the run, because a
+// single consult's links can legitimately point into any other consult.
+await getGlobalNodeOwner();
 
 const treesToCheck = targetIds.length > 0 ? targetIds : Object.keys(TREE_REGISTRY);
 console.log(`\n🔍 Validating cross-links across ${treesToCheck.length} tree(s)...\n`);

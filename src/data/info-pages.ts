@@ -13015,7 +13015,7 @@ const VF_DSD: InfoPage = {
   sections: [
     {
       heading: 'When to Use',
-      body: '• VF refractory to **3+ standard shocks** with optimal CPR\n• After vector change (AP pad repositioning) has been attempted\n• Requires two defibrillators and four pads\n• DOSE-VF Trial: 30.4% survival with DSD vs 13.3% standard care',
+      body: '• VF refractory to **3 consecutive standard (anterolateral) shocks** with optimal CPR\n• **DSD is applied directly at that point.** DOSE-VF did NOT require a vector-change attempt first — vector change was a separate, parallel randomisation arm, not a prior step. Do not delay DSD to trial VC.\n• Requires two defibrillators and four pads\n• **If a second defibrillator is not available, vector change alone also beat standard care** (21.7% vs 13.3%) — it is an evidence-supported option in its own right, not a consolation prize',
     },
     {
       heading: 'Pad Placement',
@@ -13027,12 +13027,13 @@ const VF_DSD: InfoPage = {
     },
     {
       heading: 'Evidence (DOSE-VF Trial, NEJM 2022)',
-      body: '• **N=405** patients with refractory shockable OHCA\n• 3 arms: standard, vector change only, DSD\n• **Survival to discharge:** DSD 30.4% vs standard 13.3% (p=0.009)\n• **Vector change alone:** 21.7% (also superior to standard)\n• Favorable neurological outcome: DSD 27.4% vs standard 11.2%\n\n**Bottom line:** DSD should be attempted in all refractory VF when a second defibrillator is available.',
+      body: '• **N=405**, refractory shockable OHCA, 6 Ontario paramedic services\n• **Cluster-randomised, open-label, 3-group crossover:** standard AL shocks vs vector change (VC) vs DSED, applied after 3 consecutive standard shocks\n\n| Outcome | DSED | Standard |\n|---------|------|----------|\n| Survival to discharge | **30.4%** — RR 2.21 (95% CI 1.33-3.67) | 13.3% |\n| Good neuro outcome (mRS ≤2) | **27.4%** — RR 2.21 (1.26-3.88) | 11.2% |\n| ROSC | **46.4%** — RR 1.72 (1.22-2.42) | 26.5% |\n| VF termination | **84.0%** — RR 1.25 (1.09-1.44) | 67.6% |\n\nVector change alone: survival 21.7%, RR 1.71 (1.01-2.88).\n\n**⚠️ What the trial did NOT show — read before generalising:**\n• **Stopped early** because COVID disrupted enrolment; it never reached its planned sample size\n• The **as-treated analysis was much weaker: RR 1.38 (0.90-2.11)** — the confidence interval crosses 1. The headline effect comes from the intention-to-treat and per-protocol analyses.\n• Open-label, single EMS system, cluster-randomised — not blinded\n• No data on the optimal number of DSED attempts, or on in-hospital arrest\n\n**Guideline positioning:** ILCOR (Nov 2023) — DSED **"may be considered"; weak recommendation, low-certainty evidence.** 2025 AHA — usefulness **"not established."** This is a reasonable thing to do in refractory VF, not a standard of care.',
     },
   ],
   citations: [
-    { num: 1, text: 'Cheskes S et al. DOSE-VF Trial: Defibrillation Strategies for Refractory VF. NEJM. 2022;387:1947-1956.' },
-    { num: 2, text: 'Myerburg RJ et al. Double Sequential External Defibrillation for Refractory VF. J Am Coll Cardiol. 2019.' },
+    { num: 1, text: 'Cheskes S, Verbeek PR, Drennan IR, et al. Defibrillation Strategies for Refractory Ventricular Fibrillation. N Engl J Med. 2022;387(21):1947-1956. doi:10.1056/NEJMoa2207304. PMID 36342151.' },
+    { num: 2, text: 'International Liaison Committee on Resuscitation (ILCOR). 2023 Consensus on Science with Treatment Recommendations — double sequential external defibrillation. Weak recommendation, low-certainty evidence.' },
+    { num: 3, text: 'Myerburg RJ et al. Double Sequential External Defibrillation for Refractory VF. J Am Coll Cardiol. 2019.' },
   ],
 };
 
@@ -29995,7 +29996,219 @@ const HEPATITIS_STOP_PAGE: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Tier-4b reference pages (calculator-backfill wave B)
+// -------------------------------------------------------------------
+
+const SCI_MAP_GOALS_PAGE: InfoPage = {
+  id: 'sci-map-goals',
+  title: 'MAP Goals in Acute Spinal Cord Injury',
+  subtitle: 'What the Evidence Actually Supports — 2024 Guideline Update',
+  sections: [
+    {
+      heading: 'The Target (2024 Update)',
+      body: "| Parameter | 2013 AANS/CNS | 2024 AO Spine / Praxis |\n|-----------|---------------|------------------------|\n| **MAP lower bound** | 85–90 mmHg | **75–80 mmHg** |\n| **MAP upper bound** | (none stated) | **90–95 mmHg** |\n| **Duration** | 7 days | **3–7 days** |\n| **Strength** | Level III | **Suggested — treatment option** |\n\nThe 2024 guideline **widened** the window deliberately: a 5-mmHg band (85–90) is not practically maintainable at the bedside, and chasing it drives vasopressor escalation without demonstrated benefit. [1,2]",
+    },
+    {
+      heading: 'How Strong Is This, Really?',
+      body: "Weak. This is one of the softest standard-of-care numbers in neurotrauma.\n\n• The 85–90 mmHg figure traces to small observational cohorts and a single prospective series — **no randomized trial has ever compared MAP targets in acute SCI**. [1,2]\n• The 2024 guideline graded its own recommendation as a **suggestion**, not a standard. [1]\n• Evidence was judged **insufficient** to recommend any spinal cord perfusion pressure (SCPP) target, despite SCPP being mechanistically more sensible than MAP. [1]\n• Observational data associate **both** MAP <75 and MAP >95 mmHg with worse neurologic outcomes and more adverse events — this is why an upper bound now exists. Over-augmentation is not benign. [1]\n\n**Bottom line:** aim 75–95 mmHg. Do not escalate pressors aggressively to defend 85–90 specifically. Treat a MAP of 82 as on target, not as a failure.",
+    },
+    {
+      heading: 'Vasopressor Choice',
+      body: "**No vasopressor has been shown superior in acute SCI.** The 2024 guideline found **no included study evaluating norepinephrine** for safety or effectiveness in this population. [1]\n\n| Agent | Comment |\n|-------|---------|\n| **Norepinephrine** | Common first choice on **expert consensus** — α + β activity supports both MAP and chronotropy in neurogenic shock. Not guideline-validated. |\n| **Dopamine** | **Associated with increased complications**, particularly in patients **>55 years**. Avoid. [1] |\n| **Phenylephrine** | Pure α — may worsen reflex bradycardia in high cervical injury. |\n\nNeurogenic shock is **a diagnosis of exclusion in trauma.** Rule out hemorrhage before attributing hypotension to cord injury.",
+    },
+    {
+      heading: 'Practical Bedside Points',
+      body: "• Arterial line — cuff pressures are inadequate for titrating a narrow window.\n• Start the clock at **injury**, not at ICU arrival.\n• **3 days is an acceptable duration.** The 2024 range is 3–7 days; 7 days is not mandatory and each additional pressor-day carries risk.\n• Bradycardia from unopposed vagal tone in cervical cord injury may need atropine or chronotropic support independent of MAP.\n• Treat the correctable causes of low MAP first (hemorrhage, tension pneumothorax, tamponade) before crediting the cord.",
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Kwon BK, Tetreault LA, Martin AR, et al. A Clinical Practice Guideline for the Management of Patients With Acute Spinal Cord Injury: Recommendations on Hemodynamic Management. Global Spine J. 2024;14(3_suppl):187S-211S. doi:10.1177/21925682231202348. PMID 38526923.' },
+    { num: 2, text: 'Ryken TC, Hurlbert RJ, Hadley MN, et al. The acute cardiopulmonary management of patients with cervical spinal cord injuries. Neurosurgery. 2013;72(Suppl 2):84-92. [Original 85–90 mmHg / 7-day Level III recommendation — superseded by ref 1.]' },
+  ],
+};
+
+const LARYNGEAL_TRAUMA_AIRWAY_PAGE: InfoPage = {
+  id: 'laryngeal-trauma-airway',
+  title: 'Airway Management in Laryngeal Trauma',
+  subtitle: 'Why the Usual Rescue Manoeuvres Fail',
+  sections: [
+    {
+      heading: 'The Core Problem',
+      body: "A fractured or disrupted larynx is a **structurally unstable conduit**. Every standard airway manoeuvre assumes the airway is a tube that holds its shape. Here it does not.\n\nTwo failure modes drive everything below:\n\n1. **False passage** — a blindly advanced tube or bougie dissects through disrupted mucosa into the paratracheal soft tissue. The airway is now lost and the neck is filling with air and blood.\n2. **Completing a partial separation** — a partially transected larynx or cricotracheal junction is held in continuity by remaining soft tissue. Instrumentation, or the distal end retracting into the mediastinum, converts it to complete separation.",
+    },
+    {
+      heading: 'Why Blind / Unguided Intubation Is Hazardous',
+      body: "• The tube follows the path of least resistance, which in a fractured larynx is **through the fracture**, not through the glottis. [1,2]\n• Mucosal disruption, submucosal haematoma and oedema obliterate the normal landmarks — a cords-visible impression can be a mucosal flap.\n• Passing a tube can displace fracture fragments distally.\n• **Paralysis abolishes the patient's own compensation.** A patient maintaining a marginal airway with tone and positioning may lose it entirely at induction, with no reliable rescue below. [1]",
+    },
+    {
+      heading: 'Why Cricothyrotomy Is Not the Rescue Here',
+      body: "This is the counterintuitive point.\n\n• Cricothyrotomy enters **at the cricothyroid membrane — inside the zone of injury.** In laryngeal fracture you are cutting into the fractured structure itself. [1,2]\n• In **complete laryngotracheal separation, cricothyrotomy serves little purpose and can convert a partial separation into a complete one.** The distal trachea has already retracted; the cricothyroid membrane no longer leads anywhere useful. [1,2]\n• **Laryngeal fracture and laryngotracheal disruption are relative contraindications to cricothyrotomy** — one of the few settings where the surgical-airway-always-works heuristic is false.\n• Cricotracheal separation carries reported mortality **~27–40%**, much of it airway-related. [2]",
+    },
+    {
+      heading: 'What Is Correct',
+      body: "| Approach | Role |\n|----------|------|\n| **Awake tracheostomy under local, distal to the injury** | **First choice** in significant laryngeal trauma. Enters below the injured segment, preserves spontaneous ventilation, no paralysis. Use a **cuffed, non-fenestrated** tube. |\n| **Awake flexible fiberoptic intubation** | Reasonable when the airway is stable and you need to visualise before committing. Blood and secretions frequently defeat it — have the trach set open. |\n| **Endotracheal intubation** | Acceptable **only** if Schaefer's criteria are met (below). |\n| **RSI / direct laryngoscopy** | Avoid. |\n| **Cricothyrotomy** | Last-ditch CICO only, accepting it may fail or worsen the injury. |\n\n**Never leave the bedside.** These airways deteriorate over hours as oedema progresses. An airway that looks adequate on arrival may not be at hour 4.",
+    },
+    {
+      heading: "Schaefer's Criteria — When Intubation Is Acceptable",
+      body: "Intubation may be considered in laryngeal trauma **only when all three hold**: [1]\n\n1. The **larynx and trachea are clearly intact and in continuity**\n2. The **airway is visualised by direct endoscopic inspection**\n3. The operator is **highly experienced**\n\nIf any one is uncertain, the answer is a tracheostomy distal to the injury.",
+    },
+    {
+      heading: 'Red Flags for Significant Injury',
+      body: "• Subcutaneous emphysema (especially expanding)\n• Hoarseness, voice change, aphonia\n• Stridor\n• Haemoptysis\n• Loss of palpable thyroid cartilage prominence / palpable step-off\n• Odynophagia, dysphagia\n• Anterior neck tenderness or ecchymosis over the larynx\n\n**Any of these mandates airway planning before imaging.** A CT is only for patients you are confident will keep breathing while inside the scanner.",
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Schaefer SD. Management of acute blunt and penetrating external laryngeal trauma. Laryngoscope. 2014;124(1):233-244.' },
+    { num: 2, text: 'Jewett BS, Shockley WW, Rutledge R. External laryngeal trauma analysis of 392 patients. Arch Otolaryngol Head Neck Surg. 1999;125(8):877-880.' },
+  ],
+};
+
+const RUSH_EXAM_PAGE: InfoPage = {
+  id: 'rush-exam',
+  title: 'RUSH Exam',
+  subtitle: 'Rapid Ultrasound for Shock and Hypotension — Pump, Tank, Pipes',
+  sections: [
+    {
+      heading: 'Two Mnemonics, One Exam',
+      body: "**HI-MAP** — the original five windows: **H**eart, **I**VC, **M**orison's (FAST), **A**orta, **P**neumothorax. Memory aid: the patient has a low MAP, you want a HI-MAP.\n\n**Pump / Tank / Pipes** — Perera's expanded framing, which adds pleural effusion, interstitial (B-line) assessment, and lower-extremity DVT. [1]\n\nSame protocol, different scaffolding. This app's hypotension consult uses HI-MAP at the bedside; the physiologic grouping below is how to *think* about the findings. Target time: **2–5 minutes.**",
+    },
+    {
+      heading: 'PUMP — the Heart',
+      body: "Four windows: parasternal long, parasternal short, apical 4-chamber, subxiphoid.\n\n| Finding | Points to |\n|---------|-----------|\n| **Pericardial effusion + RA/RV diastolic collapse** | **Tamponade** — obstructive |\n| **Hyperdynamic, small, kissing LV** | Hypovolaemic or distributive |\n| **Poor LV contractility, dilated LV** | **Cardiogenic** |\n| **RV ≥ LV, septal flattening (D-sign), McConnell's** | **Massive PE** — obstructive |\n\nGlobal contractility by eyeball is enough. Do not chase EF numbers in a crashing patient.",
+    },
+    {
+      heading: 'TANK — Volume and Its Container',
+      body: "**Fullness — IVC (subxiphoid long axis, 2 cm from RA junction)**\n\n| IVC | Suggests |\n|-----|----------|\n| Small (<2 cm), >50% respiratory collapse | Low CVP — **volume responsive** |\n| Plump (>2 cm), minimal collapse | High CVP — volume is not the answer |\n\n**Leakiness — FAST + thoracic windows**\nFree fluid in Morison's, splenorenal, pelvis → haemorrhage or third-spacing. In RUSH, slide the RUQ/LUQ probe **superiorly** to look above the diaphragm for pleural effusion / haemothorax. [1]\n\n**Compromise — lungs**\n• Absent lung sliding + lung point → **pneumothorax** (obstructive)\n• Diffuse B-lines → **interstitial oedema** — the tank is overfilled or leaking",
+    },
+    {
+      heading: 'PIPES — Arteries and Veins',
+      body: "**Arterial:** abdominal aorta from epigastrium to bifurcation.\n• Outer-wall-to-outer-wall **>3 cm = aneurysm**. In a hypotensive patient with a AAA, assume rupture and stop scanning.\n• Intimal flap → dissection. Also check the proximal aorta on parasternal long.\n\n**Venous:** two-point compression of femoral and popliteal veins.\n• Non-compressible vein + RV strain = **PE** with a confirmed source.",
+    },
+    {
+      heading: 'Putting It Together',
+      body: "| Shock type | Pump | Tank | Pipes |\n|-----------|------|------|-------|\n| **Hypovolaemic** | Hyperdynamic, small LV | Flat IVC ± free fluid | AAA / aortic rupture |\n| **Cardiogenic** | Poor contractility, dilated LV | Plump IVC, B-lines, effusions | Normal |\n| **Obstructive** | Effusion + collapse, or RV strain | Plump IVC; PTX if no sliding | DVT if PE |\n| **Distributive** | Hyperdynamic early, depressed late | Normal/flat IVC, peritoneal fluid if source | Normal |",
+    },
+    {
+      heading: 'Limitations',
+      body: "• **RUSH classifies shock; it does not exclude a diagnosis.** A normal RUSH does not rule out PE, sepsis, or adrenal crisis.\n• Operator-dependent. Meta-analytic accuracy is good for obstructive and hypovolaemic shock, weakest for distributive. [2,3]\n• **Mixed shock is common** and defeats a single-category read. Treat the finding in front of you and rescan after intervention.\n• IVC assessment is unreliable in mechanical ventilation, raised intra-abdominal pressure, and isolated RV failure.",
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Perera P, Mailhot T, Riley D, Mandavia D. The RUSH exam: Rapid Ultrasound in SHock in the evaluation of the critically ill. Emerg Med Clin North Am. 2010;28(1):29-56. doi:10.1016/j.emc.2009.09.010. PMID 19945597.' },
+    { num: 2, text: 'Keikha M, Salehi-Marzijarani M, Soldoozi Nejat R, et al. Diagnostic Accuracy of Rapid Ultrasound in Shock (RUSH) Exam; A Systematic Review and Meta-analysis. Bull Emerg Trauma. 2018;6(4):271-278.' },
+    { num: 3, text: 'Stickles SP, Carpenter CR, Gekle R, et al. The diagnostic accuracy of a point-of-care ultrasound protocol for shock etiology. CJEM. 2019;21(3):406-417.' },
+    { num: 4, text: 'ACEP Sonoguide — Rapid Ultrasound for Shock and Hypotension. https://www.acep.org/sonoguide/advanced/rush' },
+  ],
+};
+
+const PEDS_VITAL_SIGNS_PAGE: InfoPage = {
+  id: 'peds-vital-signs',
+  title: 'Pediatric Vital Signs by Age',
+  subtitle: 'Normal Ranges and Hypotension Thresholds',
+  shareable: true,
+  sections: [
+    {
+      heading: 'The Number That Matters in Trauma',
+      body: "**Hypotension thresholds — systolic BP below which a child is hypotensive:** [1,2]\n\n| Age | Hypotension if SBP < |\n|-----|----------------------|\n| Term neonate (0–28 d) | **60 mmHg** |\n| Infant (1–12 mo) | **70 mmHg** |\n| Child (1–10 y) | **70 + (2 × age in years)** |\n| >10 y | **90 mmHg** |\n\nWorked: a 4-year-old is hypotensive below **78 mmHg** (70 + 8).\n\n⚠️ **This is the 5th-percentile floor, not a goal.** It is the number below which a child is unambiguously abnormal — not a resuscitation target. A child sitting one point above it is not reassuring.\n\n⚠️ **Hypotension in a child is a LATE finding.** Children compensate by tachycardia and vasoconstriction and can lose **30–45% of blood volume before SBP falls.** By the time the number is abnormal, the child is in decompensated shock. Tachycardia, narrowed pulse pressure, cool mottled extremities, delayed capillary refill and altered mental status all precede it. [2]",
+    },
+    {
+      heading: 'Heart Rate by Age',
+      body: "| Age | Awake | Sleeping |\n|-----|-------|----------|\n| Neonate (0–28 d) | 100–205 | 90–160 |\n| Infant (1–12 mo) | 100–180 | 90–160 |\n| Toddler (1–3 y) | 98–140 | 80–120 |\n| Preschool (3–5 y) | 80–120 | 65–100 |\n| School age (6–12 y) | 75–118 | 58–90 |\n| Adolescent (12–21 y) | 60–100 | 50–90 |\n\n**Bradycardia in a child is a peri-arrest sign** until proven otherwise — usually hypoxia. Oxygenate and ventilate before you reach for atropine. Compressions at HR <60 with poor perfusion. [1]",
+    },
+    {
+      heading: 'Respiratory Rate by Age',
+      body: "| Age | Breaths/min |\n|-----|-------------|\n| Infant (<1 y) | 30–60 |\n| Toddler (1–3 y) | 24–40 |\n| Preschool (3–5 y) | 22–34 |\n| School age (6–12 y) | 18–30 |\n| Adolescent (≥12 y) | 12–18 |\n\nA **normalising** respiratory rate in a previously tachypneic distressed child is an ominous sign, not an improving one — it usually means fatigue.",
+    },
+    {
+      heading: 'Systolic BP — Lower Limits of Normal',
+      body: "| Age | SBP lower limit |\n|-----|-----------------|\n| Term neonate (0–28 d) | 60 |\n| Infant (1–12 mo) | 70 |\n| 1–10 y | 70 + (2 × age) |\n| >10 y | 90 |\n\nUse an **appropriately sized cuff** — a cuff that is too small reads falsely high and will mask shock.",
+    },
+    {
+      heading: 'Caveats',
+      body: "• These bands come from **healthy resting children**; they are consensus values, not strongly evidence-based, and they overlap widely with illness.\n• **Fever, pain, fear, crying and a strange room all raise HR and RR.** Interpret a single set of numbers with the child, not instead of the child.\n• **Trends beat snapshots.** A serially rising HR at rest is more meaningful than one out-of-range value.\n• Use a **length-based resuscitation tape** for weight-based dosing rather than age estimates.\n• Chronic conditions, congenital heart disease and beta-blockade invalidate the bands entirely.",
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Topjian AA, Raymond TT, Atkins D, et al. Part 4: Pediatric Basic and Advanced Life Support: 2020 American Heart Association Guidelines for CPR and Emergency Cardiovascular Care. Circulation. 2020;142(16_suppl_2):S469-S523. (Vital-sign reference tables, PALS Provider Manual 2020.)' },
+    { num: 2, text: 'American College of Surgeons Committee on Trauma. Advanced Trauma Life Support (ATLS) Student Course Manual. 10th ed. (Pediatric hypotension threshold and compensated-shock physiology.)' },
+  ],
+};
+
+const SALTER_HARRIS_PAGE: InfoPage = {
+  id: 'salter-harris',
+  title: 'Salter-Harris Classification',
+  subtitle: 'Physeal Fractures — Types, Growth Arrest Risk, and Follow-up',
+  sections: [
+    {
+      heading: 'The Classification (SALTR)',
+      body: "| Type | Mnemonic | Fracture line |\n|------|----------|---------------|\n| **I** | **S** — Slipped | Through the physis only |\n| **II** | **A** — Above | Physis + **metaphysis** (Thurston-Holland fragment). **Most common (~75%)** |\n| **III** | **L** — Lower | Physis + **epiphysis**, into the joint |\n| **IV** | **T** — Through | Metaphysis + physis + epiphysis |\n| **V** | **R** — Rammed | **Crush** of the physis |\n\nPhyseal fractures are **15–30% of all paediatric bony injuries.** The physis is weaker than the surrounding ligament, so the mechanism that sprains an adult ankle fractures a child's physis. [1,2]",
+    },
+    {
+      heading: 'Growth Arrest Risk',
+      body: "| Type | Arrest risk | Why |\n|------|-------------|-----|\n| **I** | Low | Line runs through the hypertrophic zone; germinal and proliferative layers spared |\n| **II** | Low | Same plane as I; metaphyseal fragment does not involve germinal layer |\n| **III** | **Higher** | Crosses the germinal layer **and** the articular surface |\n| **IV** | **Higher** | Crosses the germinal layer, articular surface, **and** risks a bony bridge across the physis |\n| **V** | **Highest / worst prognosis** | Germinal layer crushed. Usually **diagnosed retrospectively** — initial films are often normal |\n\nOverall physeal complication rate is roughly **2–14%.** [1,2]\n\n⚠️ **Important caveat — do not counsel families off the type alone.** **Salter-Harris type has poor predictive value for growth arrest compared with the fracture's anatomic location.** [2] Distal tibia is the clearest example: reported premature physeal closure ranges from **2% to 43%** depending on the series, largely independent of type. A distal radius SH II and a distal tibia SH II are not the same injury.",
+    },
+    {
+      heading: 'Management',
+      body: "**Types I and II** — usually closed reduction and immobilisation.\n• Accept some residual displacement; remodelling potential is high in the young.\n• Avoid repeated forceful reduction attempts — **each attempt is another insult to the physis.** One good reduction beats three mediocre ones.\n\n**Types III and IV** — these are **intra-articular**.\n• **≥2 mm displacement or articular step-off → surgical fixation.**\n• <2 mm may be managed non-operatively with close radiographic follow-up.\n• Fixation principle: **screws placed transversely within the epiphysis**, parallel to and not crossing the physis. If the physis must be crossed, use **smooth pins or wires** and remove them early.\n\n**Type V** — often unrecognised acutely. Immobilise, avoid weight-bearing, counsel the family that arrest is likely, and arrange orthopaedic follow-up.",
+    },
+    {
+      heading: 'Named Variants',
+      body: "• **Tillaux fracture** — SH III of the **anterolateral distal tibial epiphysis**, in adolescents whose medial physis has already closed.\n• **Triplane fracture** — SH IV of the distal tibia; appears as SH III on AP and SH II on lateral. **CT is usually required** to define it.\n\nBoth are transitional fractures of late adolescence and both are intra-articular — the ≥2 mm rule applies.",
+    },
+    {
+      heading: 'Follow-up — Non-Negotiable',
+      body: "**Every physeal fracture, including type I, needs orthopaedic follow-up until skeletal maturity or until documented normal growth.**\n\n• Growth arrest is **not** apparent at the time of injury. It presents months to years later as angular deformity or limb length discrepancy.\n• Serial radiographs assess for **physeal bar formation.**\n• Counsel the family at discharge that a simple growth plate fracture requires long-term monitoring — this is the single most commonly missed step.\n• **A normal radiograph does not exclude a SH I or SH V.** Point tenderness over a physis after an appropriate mechanism is treated as a fracture.",
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Salter RB, Harris WR. Injuries involving the epiphyseal plate. J Bone Joint Surg Am. 1963;45(3):587-622. (Original description.)' },
+    { num: 2, text: 'Levine RH, Thomas A, Nezwek TA, Waseem M. Salter-Harris Fractures. StatPearls. NCBI Bookshelf. (Source for the 2–14% complication rate, the 2–43% distal tibia premature-closure range, and the poor-predictive-value-versus-anatomic-location caveat.)' },
+  ],
+};
+
+const TOOTH_ID_PAGE: InfoPage = {
+  id: 'tooth-id',
+  title: 'Tooth Identification',
+  subtitle: 'Universal Numbering System — Permanent 1–32, Primary A–T',
+  shareable: true,
+  sections: [
+    {
+      heading: 'Why It Matters in the ED',
+      body: "Your consultant will ask which tooth, and will not accept the front one on the top left. Getting the number right the first time is the difference between a five-minute call and a photograph exchange.\n\nThe **Universal Tooth Designation System** is the ADA standard in the United States (adopted 1968), also called the American system. [1]\n\nTwo systems you may encounter but should not use in a US chart:\n• **FDI (ISO 3950)** — two-digit; permanent 11–18/21–28/31–38/41–48, primary 51–55/61–65/71–75/81–85. Standard internationally.\n• **Palmer** — quadrant bracket + number 1–8. UK, Australia.",
+    },
+    {
+      heading: 'Permanent Teeth — 1 to 32',
+      body: "**The path:** start at the patient's **upper right third molar (#1)**, run across the upper arch to the **upper left third molar (#16)**, drop straight down to the **lower left third molar (#17)**, and run back across the lower arch to the **lower right third molar (#32)**. A single continuous loop. [1]\n\n**Upper (maxillary) — patient's right to left**\n\n| # | Tooth | # | Tooth |\n|---|-------|---|-------|\n| 1 | R 3rd molar (wisdom) | 9 | **L central incisor** |\n| 2 | R 2nd molar | 10 | L lateral incisor |\n| 3 | R 1st molar | 11 | L canine |\n| 4 | R 2nd premolar | 12 | L 1st premolar |\n| 5 | R 1st premolar | 13 | L 2nd premolar |\n| 6 | R canine | 14 | L 1st molar |\n| 7 | R lateral incisor | 15 | L 2nd molar |\n| 8 | **R central incisor** | 16 | L 3rd molar (wisdom) |\n\n**Lower (mandibular) — patient's left to right**\n\n| # | Tooth | # | Tooth |\n|---|-------|---|-------|\n| 17 | L 3rd molar (wisdom) | 25 | **L central incisor** |\n| 18 | L 2nd molar | 26 | R central incisor |\n| 19 | L 1st molar | 27 | R canine |\n| 20 | L 2nd premolar | 28 | R 1st premolar |\n| 21 | L 1st premolar | 29 | R 2nd premolar |\n| 22 | L canine | 30 | R 1st molar |\n| 23 | L lateral incisor | 31 | R 2nd molar |\n| 24 | L central incisor | 32 | R 3rd molar (wisdom) |\n\n**Landmarks worth memorising:**\n• **1, 16, 17, 32** = the four wisdom teeth (the corners of the loop)\n• **8 and 9** = the two upper central incisors — **the teeth most commonly avulsed in trauma**\n• **24 and 25** = the two lower central incisors\n• **1–16** upper, **17–32** lower",
+    },
+    {
+      heading: 'Primary Teeth — A to T',
+      body: "Primary (deciduous) teeth are **lettered, always uppercase.** Same loop, 20 teeth. [1]\n\n**Upper:** **A** = upper right 2nd molar → **J** = upper left 2nd molar\n**Lower:** **K** = lower left 2nd molar → **T** = lower right 2nd molar\n\n| Upper | Tooth | Lower | Tooth |\n|-------|-------|-------|-------|\n| A | R 2nd molar | K | L 2nd molar |\n| B | R 1st molar | L | L 1st molar |\n| C | R canine | M | L canine |\n| D | R lateral incisor | N | L lateral incisor |\n| E | **R central incisor** | O | **L central incisor** |\n| F | **L central incisor** | P | **R central incisor** |\n| G | L lateral incisor | Q | R lateral incisor |\n| H | L canine | R | R canine |\n| I | L 1st molar | S | R 1st molar |\n| J | L 2nd molar | T | R 2nd molar |\n\n**Letters versus numbers immediately tell the consultant whether the tooth is primary or permanent** — which in avulsion is the single most consequential distinction, because **avulsed primary teeth are never replanted.**",
+    },
+    {
+      heading: 'Practical Points',
+      body: "• **Chart orientation is from the dentist's view, facing the patient** — the patient's right appears on the **left** of the chart. When you say #8, say the patient's right upper central incisor as well. Redundancy costs nothing.\n• Missing, unerupted and extracted teeth **still hold their number.** The count never shifts.\n• **Supernumerary permanent teeth** are numbered **51–82**, following the same loop (#51 sits beside #1; #82 beside #32).\n• A **mixed dentition** (roughly ages 6–12) will have both numbers and letters in the same mouth. Chart what you actually see.\n• **Count, don't guess.** Start from the midline and work outward: central incisor, lateral incisor, canine, 1st premolar, 2nd premolar, 1st molar, 2nd molar, 3rd molar.",
+    },
+    {
+      heading: 'Documentation Template',
+      body: "Record all four:\n\n1. **Number or letter** (e.g. #8, or E)\n2. **Plain-language name** (upper right central incisor)\n3. **Permanent vs primary**\n4. **Injury and extraoral dry time** (e.g. avulsed, 25 min dry, transported in milk)\n\nExample: **#8 — permanent upper right central incisor — avulsed, 25 min extraoral dry time, transported in milk, replanted at 32 min, flexible splint applied.**",
+    },
+  ],
+  citations: [
+    { num: 1, text: 'American Dental Association. Universal Tooth Designation System — Value Set (July 2024). https://www.ada.org/publications/cdt' },
+    { num: 2, text: 'Fouad AF, Abbott PV, Tsilingaridis G, et al. International Association of Dental Traumatology guidelines for the management of traumatic dental injuries: 2. Avulsion of permanent teeth. Dent Traumatol. 2020;36(4):331-342. PMID 32460393.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
+  // Tier-4b reference pages (calculator-backfill wave B, 2026-08-23)
+  'sci-map-goals': SCI_MAP_GOALS_PAGE,
+  'laryngeal-trauma-airway': LARYNGEAL_TRAUMA_AIRWAY_PAGE,
+  'rush-exam': RUSH_EXAM_PAGE,
+  'peds-vital-signs': PEDS_VITAL_SIGNS_PAGE,
+  'salter-harris': SALTER_HARRIS_PAGE,
+  'tooth-id': TOOTH_ID_PAGE,
+
   // Deep gate-review Stop pages (2026-07-18)
   "painless-scrotal-swelling-hub-stop": PAINLESS_SCROTAL_SWELLING_HUB_STOP_PAGE,
   "hemoptysis-hub-stop": HEMOPTYSIS_HUB_STOP_PAGE,

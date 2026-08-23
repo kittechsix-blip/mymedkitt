@@ -129,7 +129,7 @@ export const BRUE_NODES: DecisionNode[] = [
     recommendation: 'DISCHARGE HOME with close PCP follow-up in 24-48 hours. Provide infant CPR resources. No routine testing needed.',
     confidence: 'definitive',
     citation: [1, 4],
-    calculatorLinks: [{ id: 'brue-risk', label: 'BRUE Risk Calculator' }],
+    calculatorLinks: [{ id: 'brue-risk-calc', label: 'BRUE Risk Stratification', kind: 'info' }],
   },
 
   // =====================================================================
@@ -193,7 +193,7 @@ export const BRUE_NODES: DecisionNode[] = [
     recommendation: 'ADMIT for continuous monitoring and hypothesis-driven workup. Social work consult if any NAT concern. Subspecialty consults based on clinical suspicion.',
     confidence: 'recommended',
     citation: [3, 6],
-    calculatorLinks: [{ id: 'brue-risk', label: 'BRUE Risk Calculator' }],
+    calculatorLinks: [{ id: 'brue-risk-calc', label: 'BRUE Risk Stratification', kind: 'info' }],
     next: 'brue-disposition',
   },
 

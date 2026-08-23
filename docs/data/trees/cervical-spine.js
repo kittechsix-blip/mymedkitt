@@ -6,7 +6,7 @@
 export const CERVICAL_SPINE_CRITICAL_ACTIONS = [
     { text: 'Assume C-spine injury until cleared in all trauma patients — immobilize early', nodeId: 'cspine-start' },
     { text: 'CCR > NEXUS for clinical clearance — sensitivity 99% vs 94%', nodeId: 'cspine-ccr' },
-    { text: 'MAP 85-90 mmHg for 3-7 days improves SCI outcomes — norepinephrine first-line', nodeId: 'cspine-sci-resuscitation' },
+    { text: 'MAP 75-95 mmHg for 3-7 days (2024 AO Spine) — vasopressor choice is consensus, not evidence', nodeId: 'cspine-sci-resuscitation' },
     { text: 'NO STEROIDS — methylprednisolone is STRONGLY discouraged for acute SCI', nodeId: 'cspine-steroids' },
     { text: 'Hangman\'s Type IIa: NO TRACTION — flexion injury worsens with distraction', nodeId: 'cspine-hangman' },
     { text: 'Central cord syndrome has BEST prognosis — upper extremity > lower extremity weakness', nodeId: 'cspine-central-cord' },
@@ -173,9 +173,6 @@ export const CERVICAL_SPINE_NODES = [
             { label: 'Atlanto-occipital dislocation', description: 'Often fatal', next: 'cspine-aod' },
         ],
         citation: [7],
-        calculatorLinks: [
-            { id: 'cspine-injury-id', label: 'Injury Identifier' },
-        ],
         summary: '50% of cervical fractures at C1-C2 — always check both levels when one is injured',
     },
     {
@@ -323,13 +320,13 @@ export const CERVICAL_SPINE_NODES = [
         type: 'info',
         module: 7,
         title: 'SCI Resuscitation',
-        body: '**Spinal Cord Injury Resuscitation**\n\n**Blood Pressure Targets:**\n\n| Parameter | Target | Duration |\n|-----------|--------|----------|\n| **MAP** | **85-90 mmHg** | 3-7 days |\n| SBP | 90-100 mmHg minimum | Continuous |\n\n**Evidence:** Higher MAP associated with improved neurologic outcomes. Strongest evidence for first 72 hours.\n\n**Vasopressor:**\n✅ **Norepinephrine first-line** (α + β activity)\n\n**Neurogenic Shock:**\n• Hypotension + bradycardia (distinguish from hypovolemic)\n• Initial: IV fluids (often sufficient)\n• ❌ **Avoid phenylephrine alone** (pure α1 → reflex bradycardia worsens)\n• For bradycardia: Atropine or glycopyrrolate\n\n**Airway:**\n• C2-C4 injuries: High risk for respiratory failure\n• Monitor for delayed deterioration (edema peaks days 3-6)\n• Consider early tracheostomy [1][15]',
-        citation: [1, 15],
+        body: '**Spinal Cord Injury Resuscitation**\n\n**Blood Pressure Targets:**\n\n| Parameter | Target | Duration |\n|-----------|--------|----------|\n| **MAP** | **75-95 mmHg** | 3-7 days |\n| SBP | 90-100 mmHg minimum | Continuous |\n\n**Evidence:** 2024 AO Spine/Praxis CPG *suggests* 75-95 mmHg for 3-7 days — a deliberately WIDER window than the 2013 AANS/CNS 85-90 mmHg figure, which was Level III and practically unmaintainable. Evidence is observational only; both MAP <75 and MAP >95 associate with worse outcomes. Treat a MAP of 82 as on target, not a failure. Evidence was insufficient for any SCPP target. See MAP Goals for the full 2013-vs-2024 comparison [20].\n\n**Vasopressor:**\n⚠️ **Norepinephrine is the consensus choice** (α + β activity) — but NO study in the 2024 guideline evaluated norepinephrine for safety or effectiveness in SCI. This is expert practice, not guideline-supported evidence.\n\n**Neurogenic Shock:**\n• Hypotension + bradycardia (distinguish from hypovolemic)\n• Initial: IV fluids (often sufficient)\n• ❌ **Avoid phenylephrine alone** (pure α1 → reflex bradycardia worsens)\n• For bradycardia: Atropine or glycopyrrolate\n\n**Airway:**\n• C2-C4 injuries: High risk for respiratory failure\n• Monitor for delayed deterioration (edema peaks days 3-6)\n• Consider early tracheostomy [1][15]',
+        citation: [1, 15, 20],
         calculatorLinks: [
-            { id: 'cspine-map-goals', label: 'MAP Goals' },
+            { id: 'sci-map-goals', label: 'MAP Goals', kind: 'info' },
         ],
         next: 'cspine-steroids',
-        summary: 'MAP 85-90 mmHg for 3-7 days — NE first-line, AVOID phenylephrine alone',
+        summary: 'MAP 75-95 mmHg for 3-7 days (2024) — NE by consensus, AVOID phenylephrine alone',
         safetyLevel: 'warning',
     },
     {
@@ -390,10 +387,10 @@ export const CERVICAL_SPINE_NODES = [
         type: 'info',
         module: 8,
         title: 'ICU Admission Checklist',
-        body: '**ICU Admission for C-Spine/SCI**\n\n**Orders:**\n□ Continuous arterial line monitoring\n□ MAP goal 85-90 mmHg\n□ Norepinephrine infusion PRN\n□ Foley catheter (neurogenic bladder)\n□ NG tube if high cervical (ileus common)\n□ DVT prophylaxis within 72 hours\n□ Respiratory monitoring (PFTs if C2-C4)\n□ Q1h neuro checks\n\n**Consults:**\n□ Neurosurgery or Orthopedic Spine\n□ PM&R for rehab planning\n□ Respiratory therapy\n\n**Avoid:**\n❌ Phenylephrine alone (worsens bradycardia)\n❌ Steroids\n❌ Excessive fluids (pulmonary edema)',
+        body: '**ICU Admission for C-Spine/SCI**\n\n**Orders:**\n□ Continuous arterial line monitoring\n□ MAP goal 75-95 mmHg\n□ Norepinephrine infusion PRN\n□ Foley catheter (neurogenic bladder)\n□ NG tube if high cervical (ileus common)\n□ DVT prophylaxis within 72 hours\n□ Respiratory monitoring (PFTs if C2-C4)\n□ Q1h neuro checks\n\n**Consults:**\n□ Neurosurgery or Orthopedic Spine\n□ PM&R for rehab planning\n□ Respiratory therapy\n\n**Avoid:**\n❌ Phenylephrine alone (worsens bradycardia)\n❌ Steroids\n❌ Excessive fluids (pulmonary edema)',
         citation: [1],
         next: undefined,
-        summary: 'Arterial line, MAP 85-90, NE infusion, Foley, NG tube, DVT prophylaxis, q1h neuro checks',
+        summary: 'Arterial line, MAP 75-95, NE infusion, Foley, NG tube, DVT prophylaxis, q1h neuro checks',
     },
     {
         id: 'cspine-floor-checklist',
@@ -446,4 +443,5 @@ export const CERVICAL_SPINE_CITATIONS = [
     { num: 17, text: 'Fehlings MG, et al. Early versus Delayed Decompression for Traumatic Cervical SCI. PLOS ONE. 2012;7(2):e32037.' },
     { num: 18, text: 'Leonard JC, et al. PECARN Cervical Spine Injury Prediction Rule. Lancet Child Adolesc Health. 2024.' },
     { num: 19, text: 'Pang D. Spinal Cord Injury Without Radiographic Abnormality (SCIWORA). Childs Nerv Syst. 2004;20(11-12):765-86.' },
+    { num: 20, text: 'Kwon BK, Tetreault LA, Martin AR, et al. A Clinical Practice Guideline for the Management of Patients With Acute Spinal Cord Injury: Recommendations on Hemodynamic Management. Global Spine J. 2024;14(3_suppl):187S-211S. PMID 38526923.' },
 ];

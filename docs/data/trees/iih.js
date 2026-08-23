@@ -254,7 +254,7 @@ export const IIH_NODES = [
         title: 'Acetazolamide Dosing Protocol',
         body: '**Starting & Titration:**\n\n**Week 1:** 500 mg PO BID (1 g/day)\n**Week 2:** Increase to 750 mg BID (1.5 g/day) if tolerated\n**Week 3-4:** Increase to 1 g BID (2 g/day)\n**Beyond:** Increase by 250-500 mg/week to max 4 g/day\n\n**IIHTT Tolerability:**\n• 89.5% tolerated ≥1 g/day\n• 44% tolerated max dose (4 g/day)\n• Mean tolerated dose: 2.5 g/day\n\n**Contraindications:**\n❌ Sulfonamide allergy (cross-reactivity possible)\n❌ Severe hepatic/renal disease\n❌ Hypokalemia (uncorrected)\n❌ Adrenal insufficiency\n\n**Monitoring:**\n• BMP at 2-4 weeks (potassium, bicarb)\n• Replete potassium as needed\n• Watch for metabolic acidosis\n\n**Alternatives:**\n• Topiramate 25-100 mg BID (also causes weight loss)\n• Furosemide 20-40 mg daily (less effective)',
         citation: [10, 11],
-        calculatorLinks: [{ id: 'acetazolamide-iih', label: 'Acetazolamide Dosing' }],
+        calculatorLinks: [{ id: 'iih-acetazolamide-guide', label: 'Acetazolamide Dosing', kind: 'info' }],
         next: 'iih-discharge-mild',
         summary: 'Start 500mg BID, titrate by 250-500mg/week to 2-4g/day. Check BMP in 2-4 weeks. 89% tolerate ≥1g/day per IIHTT.',
         skippable: true,
@@ -306,7 +306,7 @@ export const IIH_NODES = [
         recommendation: 'DISCHARGE with acetazolamide 500mg BID. Close ophthalmology (1-2 weeks) and neurology (2-4 weeks) follow-up. Weight loss counseling. Return for vision changes.',
         confidence: 'definitive',
         citation: [1, 9, 10],
-        calculatorLinks: [{ id: 'acetazolamide-iih', label: 'Acetazolamide Dosing' }],
+        calculatorLinks: [{ id: 'iih-acetazolamide-guide', label: 'Acetazolamide Dosing', kind: 'info' }],
     },
     {
         id: 'iih-disposition-moderate',

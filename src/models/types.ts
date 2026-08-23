@@ -56,8 +56,32 @@ export interface DecisionNode {
   confidence?: Confidence;
   /** Optional images to display (e.g., ultrasound reference images) */
   images?: NodeImage[];
-  /** Optional calculator links to show as buttons (e.g., PESI, sPESI) */
-  calculatorLinks?: { id: string; label: string }[];
+  /**
+   * Optional links rendered as buttons under the node (e.g., PESI, sPESI).
+   *
+   * `kind` selects the route the button navigates to:
+   *   'calculator' (default) → #/calculator/{id}   — src/components/calculator.ts CALCULATORS
+   *   'tree'                 → #/tree/{id}         — src/data/trees/{id}.ts
+   *   'info'                 → #/info/{id}         — src/data/info-pages.ts
+   *
+   * `node` (only with kind:'tree') deep-links to a specific node via the
+   * existing #/tree/{id}/node/{node} route. Use it to jump to a pathway the
+   * consult ALREADY contains instead of sending the clinician to a second
+   * consult that covers the same ground — one source of truth per pathway.
+   *
+   * WHY THIS EXISTS: several consults linked reference content that lives as a
+   * TREE or INFO page (e.g. resuscitative-hysterotomy, tetanus, anticoag-reversal)
+   * through this array. Because the renderer used to hardcode the /calculator/
+   * route, every one of those buttons dead-ended on "Calculator Not Found".
+   * scripts/lint-calculator-refs.mjs validates each entry against the registry
+   * matching its `kind`, so a bad tree/info id cannot hide behind the new field.
+   */
+  calculatorLinks?: {
+    id: string;
+    label: string;
+    kind?: 'calculator' | 'tree' | 'info';
+    node?: string;
+  }[];
   /** Feature 2: Progressive disclosure - When to use this node */
   whenToUse?: string;
   /** Feature 2: Progressive disclosure - Clinical pearls */

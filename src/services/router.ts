@@ -39,8 +39,22 @@ class Router {
     this.resolve();
   }
 
-  /** Programmatic navigation — sets the hash which triggers hashchange */
-  navigate(path: string): void {
+  /**
+   * Programmatic navigation — sets the hash which triggers hashchange.
+   *
+   * `replace: true` swaps the current history entry instead of pushing a new one,
+   * and re-resolves manually because `history.replaceState` does not fire
+   * hashchange. Used by redirect-only routes (e.g. the bare `#/node/:nodeId`
+   * resolver): without it, Back returns to the redirecting URL, which immediately
+   * redirects forward again and traps the user.
+   */
+  navigate(path: string, options?: { replace?: boolean }): void {
+    if (options?.replace && typeof window.history?.replaceState === 'function') {
+      const { pathname, search } = window.location;
+      window.history.replaceState(null, '', `${pathname}${search}#${path}`);
+      this.resolve();
+      return;
+    }
     window.location.hash = '#' + path;
   }
 

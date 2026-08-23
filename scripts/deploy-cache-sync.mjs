@@ -346,19 +346,27 @@ if (!skipSW) {
 // ---------------------------------------------------------------------------
 console.log('\n=== Step 4.5: Regenerating in-app search node index ===\n');
 
+// node-tree-map.json backs the bare `#/node/<id>` route (src/services/node-resolver.ts).
+// It MUST be regenerated alongside the search index: a consult renamed or a node id
+// changed without rebuilding it turns working in-body links back into dead ends.
+// Runs before Step 5 so the fresh file lands in the regenerated SW precache list.
+const generatedIndexes = [
+  ['search index', 'node scripts/build-search-node-index.mjs'],
+  ['node→consult map', 'node scripts/build-node-tree-map.mjs'],
+];
+
 if (!dryRun) {
-  try {
-    const out = execSync('node scripts/build-search-node-index.mjs', {
-      cwd: projectRoot,
-      encoding: 'utf-8',
-    });
-    // Trim and prefix each line so the wrap is obvious in deploy logs.
-    out.trim().split('\n').forEach(line => console.log('  ' + line));
-  } catch (e) {
-    console.error('⚠  search-node-index regen failed (non-fatal):', e.message);
+  for (const [label, cmd] of generatedIndexes) {
+    try {
+      const out = execSync(cmd, { cwd: projectRoot, encoding: 'utf-8' });
+      // Trim and prefix each line so the wrap is obvious in deploy logs.
+      out.trim().split('\n').forEach(line => console.log('  ' + line));
+    } catch (e) {
+      console.error(`⚠  ${label} regen failed (non-fatal):`, e.message);
+    }
   }
 } else {
-  console.log('📝 Would run: node scripts/build-search-node-index.mjs');
+  for (const [, cmd] of generatedIndexes) console.log(`📝 Would run: ${cmd}`);
 }
 
 // ---------------------------------------------------------------------------

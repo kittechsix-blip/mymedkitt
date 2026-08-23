@@ -35,10 +35,10 @@ export const DENTAL_AVULSION_NODES: DecisionNode[] = [
     ],
     citation: [1, 2],
     calculatorLinks: [
-      { id: 'tooth-id', label: 'Tooth Identification' },
+      { id: 'tooth-id', label: 'Tooth Identification', kind: 'info' },
       { id: 'extraoral-time', label: 'Extraoral Time Calculator' },
-      { id: 'splint-technique', label: 'Splinting Guide' },
-      { id: 'tetanus-status', label: 'Tetanus Prophylaxis' },
+      { id: 'dental-avulsion', label: 'Splinting Guide', kind: 'tree', node: 'avulsion-splint' },
+      { id: 'tetanus', label: 'Tetanus Prophylaxis', kind: 'tree' },
     ],
     next: 'avulsion-tooth-type',
   

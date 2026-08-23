@@ -30,7 +30,7 @@ export const LARYNGEAL_TRAUMA_NODES: DecisionNode[] = [
     citation: [1, 2],
     calculatorLinks: [
       { id: 'schaefer-fuhrman', label: 'Schaefer-Fuhrman Grading' },
-      { id: 'laryngeal-airway', label: 'Airway Decision Tool' },
+      { id: 'laryngeal-trauma-airway', label: 'Airway Decision Tool', kind: 'info' },
     ],
     next: 'larynx-mechanism',
     summary: 'Laryngeal trauma: airway loss can be rapid and unpredictable — prepare for surgical airway immediately',

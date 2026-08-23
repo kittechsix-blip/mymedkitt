@@ -38,7 +38,7 @@ export const PEDS_TRAUMA_NODES: DecisionNode[] = [
     citation: [1, 2],
     calculatorLinks: [
       { id: 'broselow-weight', label: 'Broselow Weight Estimation' },
-      { id: 'peds-vital-signs', label: 'Pediatric Vital Signs by Age' },
+      { id: 'peds-vital-signs', label: 'Pediatric Vital Signs by Age', kind: 'info' },
     ],
     next: 'peds-trauma-weight',
 
@@ -343,7 +343,7 @@ export const PEDS_TRAUMA_NODES: DecisionNode[] = [
     body: '**SALTR mnemonic for physeal fractures:**\n\n| Type | Description | Mnemonic | Prognosis |\n|------|-------------|----------|-----------|\n| I | Through physis only | **S**lipped | Good |\n| II | Through physis + metaphysis | **A**bove | Good |\n| III | Through physis + epiphysis (intra-articular) | **L**ower | Guarded |\n| IV | Through metaphysis + physis + epiphysis | **T**hrough | Poor |\n| V | Crush injury to physis | c**R**ush | Poor |\n\n**Management principles:**\n- **Type I & II:** Usually closed reduction, casting. Good prognosis.\n- **Type III & IV:** Often require ORIF. Risk of growth arrest, angular deformity.\n- **Type V:** Diagnosed retrospectively when growth arrest occurs. High risk of deformity.\n\n**Key points:**\n- X-rays may initially appear normal in Type I and V --> clinical diagnosis\n- Compare to contralateral side if uncertain\n- Follow up in 10-14 days if high suspicion with negative initial films\n- Parents should be counseled about risk of growth disturbance in higher grades [11]',
     citation: [11],
     calculatorLinks: [
-      { id: 'salter-harris', label: 'Salter-Harris Classification Guide' },
+      { id: 'salter-harris', label: 'Salter-Harris Classification Guide', kind: 'info' },
     ],
     next: 'peds-trauma-compartment',
 

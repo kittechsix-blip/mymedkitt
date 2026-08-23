@@ -25,6 +25,7 @@ import { addSharedConsult, markOrganicVisit, hasFullAccess } from './services/sh
 import { showSplashScreen } from './components/splash-screen.js';
 import { removeContextualToolbar, hasContextualToolbar } from './components/contextual-toolbar.js';
 import { showInfoModal } from './components/info-page.js';
+import { resolveNodeTreeId, setCurrentTreeId } from './services/node-resolver.js';
 
 // -------------------------------------------------------------------
 // Service Worker Registration
@@ -159,6 +160,7 @@ function handleCategory(params: RouteParams): void {
 function handleTree(params: RouteParams): void {
   hideGlobalTabBar();
   const id = params['id'] ?? 'unknown';
+  setCurrentTreeId(id);
   const main = clearMain();
   void renderConsultFlow(main, id);
 }
@@ -167,8 +169,32 @@ function handleTreeNode(params: RouteParams): void {
   hideGlobalTabBar();
   const treeId = params['id'] ?? 'unknown';
   const nodeId = params['nodeId'] ?? 'unknown';
+  setCurrentTreeId(treeId);
   const main = clearMain();
   void renderConsultFlow(main, treeId, { jumpToNodeId: nodeId });
+}
+
+/**
+ * Bare node deep-link: `#/node/<nodeId>` with no consult in the path.
+ *
+ * ~3,200 in-body markdown links across consults, stop pages and info pages are
+ * authored this way. No route ever matched them, so they all fell through to the
+ * not-found handler and left the clinician on a blank screen mid-consult (verified
+ * live in production 2026-08-23). We resolve the owning consult and redirect to the
+ * canonical /tree/:id/node/:nodeId so there is still exactly one real node route.
+ */
+function handleBareNode(params: RouteParams): void {
+  const nodeId = params['nodeId'] ?? '';
+  void resolveNodeTreeId(nodeId).then((treeId) => {
+    // The user may have navigated away while the map was fetching. Only act if
+    // the hash still points at the link we were asked to resolve.
+    if (!window.location.hash.includes(`/node/${nodeId}`)) return;
+    if (treeId) {
+      router.navigate(`/tree/${treeId}/node/${nodeId}`, { replace: true });
+    } else {
+      handleNotFound();
+    }
+  });
 }
 
 function handleReference(params: RouteParams): void {
@@ -338,6 +364,10 @@ async function init(): Promise<void> {
   router.on('/category/:id', handleCategory);
   router.on('/tree/:id', handleTree);
   router.on('/tree/:id/node/:nodeId', handleTreeNode);
+  // Bare node deep-link used by ~3,200 in-body markdown links across consults,
+  // stop pages and info pages. Resolves the owning consult, then redirects to the
+  // canonical /tree/:id/node/:nodeId above. See handleBareNode.
+  router.on('/node/:nodeId', handleBareNode);
   // Legacy URL compatibility: /consult/:id used by old QR codes/links → redirect to /tree/:id
   router.on('/consult/:id', (params) => {
     router.navigate('/tree/' + params.id);

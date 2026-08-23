@@ -38,10 +38,10 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'RUSH Exam — Bedside POCUS',
-    body: '[RUSH Exam Guide](#/info/rush-exam)\n\n**RUSH (Rapid Ultrasound in Shock) — HI-MAP:**\n\n**H — Heart:**\n• EF (hyperdynamic vs depressed)\n• Pericardial effusion / tamponade\n• RV dilatation (D-sign) → PE\n• Wall motion abnormalities → MI\n\n**I — IVC:**\n• <2 cm + >50% collapse → hypovolemic\n• >2 cm + minimal collapse → cardiogenic/obstructive\n\n**M — Morrison\'s / FAST:**\n• Free fluid → hemorrhage, rupture\n\n**A — Aorta:**\n• AAA (>3 cm), dissection flap\n\n**P — Pneumothorax:**\n• Absent lung slide → tension PTX\n\n**Complete RUSH exam in 2-5 minutes.** Improves diagnostic accuracy from 60% to 85%.',
+    body: '**RUSH (Rapid Ultrasound in Shock) — HI-MAP:**\n\n**H — Heart:**\n• EF (hyperdynamic vs depressed)\n• Pericardial effusion / tamponade\n• RV dilatation (D-sign) → PE\n• Wall motion abnormalities → MI\n\n**I — IVC:**\n• <2 cm + >50% collapse → hypovolemic\n• >2 cm + minimal collapse → cardiogenic/obstructive\n\n**M — Morrison\'s / FAST:**\n• Free fluid → hemorrhage, rupture\n\n**A — Aorta:**\n• AAA (>3 cm), dissection flap\n\n**P — Pneumothorax:**\n• Absent lung slide → tension PTX\n\n**Complete RUSH exam in 2-5 minutes.** Improves diagnostic accuracy from 60% to 85%.',
     citation: [3, 4],
     calculatorLinks: [
-      { id: 'rush-checklist', label: 'RUSH Checklist' },
+      { id: 'rush-exam', label: 'RUSH Exam Guide', kind: 'info' },
     ],
     next: 'hypotension-pocus-findings',
 

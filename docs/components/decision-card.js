@@ -505,7 +505,14 @@ function renderCalcLinks(container, node) {
         const btn = document.createElement('button');
         btn.className = 'btn-secondary wizard-calc-link';
         btn.textContent = link.label;
-        btn.addEventListener('click', () => router.navigate(`/calculator/${link.id}`));
+        // `kind` defaults to 'calculator', so every pre-existing link keeps its
+        // exact current behaviour. Only entries that opt in route anywhere else.
+        const route = link.kind === 'tree' ? 'tree' : link.kind === 'info' ? 'info' : 'calculator';
+        // `node` deep-links into a tree via the existing /tree/:id/node/:nodeId route.
+        const href = route === 'tree' && link.node
+            ? `/tree/${link.id}/node/${link.node}`
+            : `/${route}/${link.id}`;
+        btn.addEventListener('click', () => router.navigate(href));
         linkRow.appendChild(btn);
     }
     container.appendChild(linkRow);

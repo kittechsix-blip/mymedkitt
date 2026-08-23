@@ -36,7 +36,7 @@ export const XYLAZINE_TOXICITY_NODES: DecisionNode[] = [
     citation: [1, 2, 8],
     calculatorLinks: [
       { id: 'xyl-wound-staging', label: 'Xylazine Wound Staging' },
-      { id: 'xyl-withdrawal-comparison', label: 'Tranq vs Opioid Withdrawal' },
+      { id: 'xylazine-toxicity', label: 'Tranq vs Opioid Withdrawal', kind: 'tree', node: 'xyl-withdrawal-comparison' },
     ],
     options: [
       { label: 'Acute overdose presentation', description: 'Respiratory depression, altered mental status, recent use', next: 'xyl-oa2a' },

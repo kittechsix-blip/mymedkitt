@@ -15,7 +15,7 @@ export const MASSIVE_HEMOPTYSIS_NODES = [
         citation: [1, 2, 4],
         calculatorLinks: [
             { id: 'txa-hemoptysis', label: 'TXA Dosing Calculator' },
-            { id: 'coag-reversal', label: 'Coagulopathy Reversal' },
+            { id: 'massive-hemoptysis', label: 'Coagulopathy Reversal', kind: 'tree', node: 'hemo-coag-reversal' },
         ],
         summary: 'Life-threatening hemoptysis: death is from drowning, not exsanguination — adult airway holds only 150-200 mL',
         next: 'hemo-etiology',

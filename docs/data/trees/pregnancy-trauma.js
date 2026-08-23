@@ -28,7 +28,7 @@ export const PREGNANCY_TRAUMA_NODES = [
         calculatorLinks: [
             { id: 'gestational-age', label: 'Gestational Age' },
             { id: 'rhig-calculator', label: 'RhIg Dosing' },
-            { id: 'resuscitative-hysterotomy', label: 'Resuscitative Hysterotomy' },
+            { id: 'resuscitative-hysterotomy', label: 'Resuscitative Hysterotomy', kind: 'tree' },
         ],
         summary: 'Mother first — fetal survival depends on maternal survival. Blood volume ↑50%, can lose 30% before shock.',
         safetyLevel: 'critical',
@@ -229,7 +229,7 @@ export const PREGNANCY_TRAUMA_NODES = [
         body: '**Modified ACLS with pregnancy-specific considerations:**\n\n**KEY MODIFICATIONS:**\n\n1. **Manual left uterine displacement** — assign team member\n2. **Defibrillation** — same doses, remove fetal monitors\n3. **Chest compressions** — may need slightly higher on sternum\n4. **IV access** — above diaphragm preferred (IVC compression)\n5. **Intubation** — smaller ETT (6.0-7.0), increased aspiration risk\n6. **No modification to medications** — standard ACLS drugs\n\n---\n\n**THE 4-MINUTE RULE:**\n\nIf no ROSC by **4 minutes** and uterus is ≥20 weeks:\n→ **Begin resuscitative hysterotomy**\n→ Goal: delivery by **5 minutes** of arrest\n\n**Purpose:** Relieve aortocaval compression to improve maternal resuscitation.\n\n[Resuscitative Hysterotomy Procedure](#/info/preg-resuscitative-hysterotomy) — step-by-step technique.\n\n**Do NOT move to OR.** Perform at bedside. Continue CPR throughout. [4][9]',
         citation: [4, 9],
         next: 'preg-trauma-rhyst',
-        calculatorLinks: [{ id: 'resuscitative-hysterotomy', label: 'Resuscitative Hysterotomy Guide' }],
+        calculatorLinks: [{ id: 'resuscitative-hysterotomy', label: 'Resuscitative Hysterotomy Guide', kind: 'tree' }],
         summary: 'Manual LUD, same defib doses. No ROSC by 4 min + ≥20 weeks = begin resuscitative hysterotomy.',
         safetyLevel: 'critical',
     },

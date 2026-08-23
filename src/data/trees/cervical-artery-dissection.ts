@@ -33,7 +33,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES: DecisionNode[] = [
     calculatorLinks: [
       { id: 'nihss-calculator', label: 'NIH Stroke Scale' },
       { id: 'strangulation-danger', label: 'Strangulation Danger Score' },
-      { id: 'neck-injury-signs', label: 'Neck Injury Assessment' },
+      { id: 'cervical-artery-dissection', label: 'Neck Injury Assessment', kind: 'tree', node: 'cad-strangulation' },
       { id: 'ipv-safety-plan', label: 'IPV Safety Planning' },
     ],
     next: 'cad-mechanism',

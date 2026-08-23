@@ -178,9 +178,6 @@ export const PACEMAKER_NODES = [
         title: 'Failure to Capture',
         body: '**⚠️ Pacing spikes present WITHOUT subsequent P wave or QRS. ⚠️**\n\n**Causes:**\n\n**Lead-Related:**\n• Lead dislodgment (most common early post-implant)\n• Lead fracture\n• Lead perforation\n\n**Threshold-Related:**\n• **Hyperkalemia** - K+ >7 mEq/L classic cause\n• Acidosis\n• Hypoxia\n• Ischemia\n• Exit block (fibrosis at lead tip - late)\n\n**Medication-Related:**\n• Flecainide, propafenone\n• Class I antiarrhythmics\n\n**Device:**\n• Battery depletion\n• Output programmed too low\n\n**⚠️ ALWAYS CHECK POTASSIUM ⚠️**\n\n**Acute Management:**\n1. **Check K+** - treat hyperkalemia aggressively\n2. **Increase output** (if able to reprogram)\n3. **Transcutaneous pacing** if unstable\n4. **Magnet** may help (higher output in some devices) [2][5][6]',
         citation: [2, 5, 6],
-        calculatorLinks: [
-            { id: 'pm-capture-causes', label: 'Capture Causes' },
-        ],
         next: 'pm-malfunction-management',
         summary: 'Failure to capture: ALWAYS CHECK POTASSIUM (K>7 classic cause), also acidosis/hypoxia/ischemia; treat hyperkalemia aggressively, TCP if unstable',
         safetyLevel: 'critical',

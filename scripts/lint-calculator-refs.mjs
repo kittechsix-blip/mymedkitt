@@ -92,13 +92,30 @@ if (registered.size === 0) {
 //    Each ref: { id, source }  for actionable error output.
 // ---------------------------------------------------------------------------
 const refs = [];
+/** calculatorLinks entries that opt out of the /calculator/ route via `kind`. */
+const nonCalcRefs = [];
 
 function scanFile(path, label) {
   const src = readFileSync(path, 'utf8');
-  // Channel 1: calculatorLinks: [{ id: '<id>', ... }]
+  // Channel 1: calculatorLinks: [{ id: '<id>', kind?: '<kind>' }]
+  //
+  // Parsed OBJECT BY OBJECT rather than with a loose global `id:` scan, so each
+  // entry's id stays paired with its own kind. An entry with kind:'tree' or
+  // kind:'info' is NOT a calculator reference; it is validated against the tree
+  // and info registries instead (section 3b). That way a typo'd tree id still
+  // fails the gate rather than escaping validation through the new field.
   for (const m of src.matchAll(/calculatorLinks\s*:\s*\[([\s\S]*?)\]/g)) {
-    for (const idm of m[1].matchAll(/id\s*:\s*'([a-z0-9-]+)'/g)) {
-      refs.push({ id: idm[1], source: `${label} (calculatorLinks)` });
+    for (const objm of m[1].matchAll(/\{([^{}]*)\}/g)) {
+      const body = objm[1];
+      const idm = body.match(/id\s*:\s*'([a-z0-9-]+)'/);
+      if (!idm) continue;
+      const kindm = body.match(/kind\s*:\s*'(calculator|tree|info)'/);
+      const kind = kindm ? kindm[1] : 'calculator';
+      if (kind === 'calculator') {
+        refs.push({ id: idm[1], source: `${label} (calculatorLinks)` });
+      } else {
+        nonCalcRefs.push({ id: idm[1], kind, source: `${label} (calculatorLinks kind:'${kind}')` });
+      }
     }
   }
   // Channel 2: action: 'calculator', target: '<id>'
@@ -116,6 +133,34 @@ scanFile(TOOLBAR_FILE, 'toolbar-configs.ts');
 // Every tree file
 for (const f of readdirSync(TREES_DIR)) {
   if (f.endsWith('.ts')) scanFile(join(TREES_DIR, f), `trees/${f}`);
+}
+
+// ---------------------------------------------------------------------------
+// 3b. Validate calculatorLinks entries that opted into a non-calculator route.
+//
+// These are checked from SOURCE (tree filenames + info/stop page id literals)
+// so this script stays build-free like the rest of its checks. They are NOT
+// eligible for the baseline: `kind` is a new field, so nothing using it can be
+// pre-existing debt, and a broken one must block immediately.
+// ---------------------------------------------------------------------------
+const badKindRefs = [];
+if (nonCalcRefs.length) {
+  const treeIds = new Set(
+    readdirSync(TREES_DIR)
+      .filter(f => f.endsWith('.ts') && f !== 'index.ts')
+      .map(f => f.slice(0, -3)),
+  );
+  const pageIds = new Set();
+  for (const rel of ['src/data/info-pages.ts', 'src/data/info-pages-learn.ts', 'src/data/stop-pages.ts']) {
+    const p = join(ROOT, rel);
+    if (!existsSync(p)) continue;
+    for (const m of readFileSync(p, 'utf8').matchAll(/^\s*id:\s*'([a-z0-9-]+)'/gm)) pageIds.add(m[1]);
+  }
+  for (const r of nonCalcRefs) {
+    const pool = r.kind === 'tree' ? treeIds : pageIds;
+    if (!pool.has(r.id)) badKindRefs.push(r);
+  }
+  console.log(`   kind:'tree'/'info' refs : ${nonCalcRefs.length} (${badKindRefs.length} broken)`);
 }
 
 // ---------------------------------------------------------------------------
@@ -183,6 +228,13 @@ if (gate) {
     console.warn(`   (fixed: ${fixed.join(', ')})`);
     console.warn('');
   }
+  if (badKindRefs.length) {
+    console.error(`❌ ${badKindRefs.length} calculatorLinks entry(ies) with kind:'tree'/'info' point at a target that does not exist:\n`);
+    for (const r of badKindRefs) console.error(`   '${r.id}' (kind:'${r.kind}')\n       ← ${r.source}`);
+    console.error('');
+    console.error("FIX: correct the id, or drop the `kind` field if it really is a calculator.");
+    process.exit(1);
+  }
   if (newlyBroken.length === 0) {
     console.log('✅ No NEW dangling calculator references. Deploy gate passes.');
     process.exit(0);
@@ -197,7 +249,12 @@ if (gate) {
 }
 
 // --- Mode: default (full report) -------------------------------------------
-if (danglingIds.length === 0) {
+if (badKindRefs.length) {
+  console.error(`❌ ${badKindRefs.length} calculatorLinks entry(ies) with kind:'tree'/'info' point at a missing target:\n`);
+  for (const r of badKindRefs) console.error(`   '${r.id}' (kind:'${r.kind}')\n       ← ${r.source}`);
+  console.error('');
+}
+if (danglingIds.length === 0 && badKindRefs.length === 0) {
   console.log('✅ All calculator references resolve to a registered calculator.');
   process.exit(0);
 }

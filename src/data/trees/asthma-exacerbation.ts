@@ -23,7 +23,7 @@ export const ASTHMA_EXACERBATION_NODES: DecisionNode[] = [
     citation: [1, 2, 3],
     calculatorLinks: [
       { id: 'pef-predicted', label: 'PEF % Predicted' },
-      { id: 'asthma-severity-score', label: 'Severity Score' },
+      { id: 'asthma-severity', label: 'Severity Score' },
     ],
     next: 'asthma-severity',
 

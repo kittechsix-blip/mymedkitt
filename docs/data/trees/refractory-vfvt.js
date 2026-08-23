@@ -27,7 +27,7 @@ export const REFRACTORY_VFVT_NODES = [
         citation: [1, 2],
         calculatorLinks: [
             { id: 'ecpr-criteria', label: 'ECPR Criteria Checklist' },
-            { id: 'dsd-setup', label: 'DSD Setup Guide' },
+            { id: 'vf-dsd', label: 'DSD Setup Guide', kind: 'info' },
             { id: 'esmolol-calc', label: 'Esmolol Calculator' },
         ],
         next: 'rvf-optimize',
