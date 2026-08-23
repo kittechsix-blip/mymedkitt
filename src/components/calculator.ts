@@ -26403,6 +26403,227 @@ const REVISED_GENEVA_CALCULATOR: CalculatorDefinition = {
   ],
 };
 
+const YEARS_ALGORITHM_CALCULATOR: CalculatorDefinition = {
+  id: 'years-algorithm',
+  title: 'Pregnancy-Adapted YEARS',
+  subtitle: 'PE Diagnostic Algorithm in Pregnancy (ARTEMIS)',
+  description: 'Three clinical items plus a D-dimer with a criteria-dependent threshold. Prospectively validated in the ARTEMIS study (498 pregnant women, all trimesters): CT pulmonary angiography was avoided in 39% overall (65% in the first trimester, 32% in the third) with a 3-month VTE failure rate of 0.21%. Use ONLY in the hemodynamically stable patient.',
+  fields: [
+    {
+      name: 'dvt-signs',
+      label: 'Clinical signs of DVT',
+      type: 'toggle',
+      points: 0,
+      description: 'Unilateral leg pain, swelling, or tenderness over the deep veins',
+    },
+    {
+      name: 'hemoptysis',
+      label: 'Hemoptysis',
+      type: 'toggle',
+      points: 0,
+    },
+    {
+      name: 'pe-most-likely',
+      label: 'PE is the most likely diagnosis',
+      type: 'toggle',
+      points: 0,
+      description: 'Clinical gestalt — PE sits at the top of your differential',
+    },
+    {
+      name: 'ddimer',
+      label: 'D-dimer',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'ng/mL FEU',
+      description: 'Enter in ng/mL FEU. If your lab reports mg/L FEU, multiply by 1000 (0.5 mg/L FEU = 500 ng/mL FEU). Assays reporting D-dimer units (DDU) are NOT interchangeable — confirm your assay units before applying these thresholds.',
+    },
+  ],
+  results: [],
+  thresholdNote: 'STABLE PATIENTS ONLY — hemodynamic instability calls for bedside echo and immediate CTPA or empiric therapy, not an algorithm. The thresholds are FIXED at every gestational age (1000 ng/mL FEU with 0 criteria, 500 ng/mL FEU with ≥1 criterion); do NOT substitute trimester-adjusted cutoffs. Validated across all three trimesters. The postpartum period was not studied in ARTEMIS. If DVT signs are present, compression ultrasound of the symptomatic leg comes first — a positive study means treat and skip chest imaging.',
+  citations: [
+    'van der Pol LM, et al. Pregnancy-Adapted YEARS Algorithm for Diagnosis of Suspected Pulmonary Embolism. N Engl J Med. 2019;380(12):1139-1149. PMID: 30893534.',
+    'van der Hulle T, et al. Simplified diagnostic management of suspected pulmonary embolism (the YEARS study): a prospective, multicentre, cohort study. Lancet. 2017;390(10091):289-297. PMID: 28549662.',
+    'Konstantinides SV, et al. 2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism. Eur Heart J. 2020;41(4):543-603. PMID: 31504429.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const dvt = values['dvt-signs'] ? 1 : 0;
+    const hemoptysis = values['hemoptysis'] ? 1 : 0;
+    const likely = values['pe-most-likely'] ? 1 : 0;
+    const criteria = dvt + hemoptysis + likely;
+    const dd = values['ddimer'] || 0;
+
+    const cusStep = dvt
+      ? '\n\n**FIRST — COMPRESSION ULTRASOUND:**\n• DVT signs are present, so compression ultrasound of the symptomatic leg comes FIRST\n• Positive CUS → treat for VTE and skip chest imaging\n• Negative CUS → continue the algorithm with the D-dimer below'
+      : '';
+
+    const criteriaList = criteria === 0
+      ? '• None of the three items present'
+      : [
+          dvt ? '• Clinical signs of DVT' : '',
+          hemoptysis ? '• Hemoptysis' : '',
+          likely ? '• PE is the most likely diagnosis' : '',
+        ].filter(Boolean).join('\n');
+
+    if (dd <= 0) {
+      return {
+        value: `${criteria}/3`,
+        label: 'Enter D-dimer',
+        description: `**YEARS CRITERIA MET:** **${criteria} of 3**\n${criteriaList}${cusStep}\n\n**NEXT STEP:**\n• Enter the D-dimer above, in ng/mL FEU\n• Threshold with 0 criteria: <1000 ng/mL FEU\n• Threshold with ≥1 criterion: <500 ng/mL FEU`,
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const threshold = criteria === 0 ? 1000 : 500;
+    const excluded = dd < threshold;
+    const ddText = `**D-DIMER:** **${dd} ng/mL FEU** — threshold at ${criteria} criteria is <${threshold} ng/mL FEU`;
+
+    if (excluded) {
+      return {
+        value: `${criteria}/3`,
+        label: 'PE EXCLUDED',
+        description: `**YEARS CRITERIA MET:** **${criteria} of 3**\n${criteriaList}${cusStep}\n\n${ddText}\n\n**RESULT — PE IS EXCLUDED:**\n• No CT pulmonary angiography or V/Q scan needed\n• ARTEMIS 3-month VTE failure rate after a negative algorithm: 0.21%\n\n**STILL DO:**\n• Document the criteria met and the D-dimer value that excluded PE\n• Give strict return precautions — new or worsening dyspnea, pleuritic pain, hemoptysis, syncope, or leg swelling\n• Look for the alternative diagnosis that explains the presentation\n\n**DO NOT APPLY IF:**\n• The patient is hemodynamically unstable\n• The D-dimer assay does not report ng/mL FEU`,
+        colorVar: '--color-decision-active',
+      };
+    }
+
+    return {
+      value: `${criteria}/3`,
+      label: 'IMAGING REQUIRED',
+      description: `**YEARS CRITERIA MET:** **${criteria} of 3**\n${criteriaList}${cusStep}\n\n${ddText}\n\n**RESULT — PE IS NOT EXCLUDED:**\n• D-dimer is at or above the threshold for this criteria count\n• Proceed to chest imaging\n\n**IMAGING CHOICE:**\n• CTPA — first line; higher maternal breast dose, lower fetal dose\n• V/Q or perfusion-only scan — reasonable when the chest x-ray is normal; lower maternal breast dose, slightly higher fetal dose\n• Either study is far safer than a missed PE — both sit well below the 50 mGy fetal threshold for deterministic harm\n\n**WHILE AWAITING IMAGING:**\n• If imaging will be delayed and bleeding risk is acceptable, consider empiric [enoxaparin](#/drug/enoxaparin/pregnancy) 1 mg/kg SC\n• Reassess hemodynamics — instability changes the pathway entirely`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
+const LMWH_PREGNANCY_DOSING_CALCULATOR: CalculatorDefinition = {
+  id: 'lmwh-dosing',
+  title: 'LMWH Dosing in Pregnancy',
+  subtitle: 'Weight-based enoxaparin / dalteparin for VTE in pregnancy',
+  description: 'Calculates weight-based low-molecular-weight heparin dosing for VTE treatment or prophylaxis in pregnancy, with anti-Xa targets, peripartum hold timing, and neuraxial anesthesia windows. LMWH is the anticoagulant of choice in pregnancy — warfarin is teratogenic and DOACs are not recommended.',
+  fields: [
+    {
+      name: 'weight',
+      label: 'Weight',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: 'kg',
+      description: 'Use current (actual) body weight; re-dose as pregnancy weight gain accrues',
+    },
+    {
+      name: 'regimen',
+      label: 'Regimen',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      description: 'Twice-daily therapeutic dosing is preferred in pregnancy — clearance is increased and once-daily troughs run low',
+      selectOptions: [
+        { label: 'Enoxaparin 1 mg/kg SC BID (therapeutic, preferred)', points: 1 },
+        { label: 'Enoxaparin 1.5 mg/kg SC daily (therapeutic, less preferred)', points: 2 },
+        { label: 'Dalteparin 100 U/kg SC BID (therapeutic)', points: 3 },
+        { label: 'Dalteparin 200 U/kg SC daily (therapeutic)', points: 4 },
+        { label: 'Enoxaparin 40 mg SC daily (prophylactic, fixed dose)', points: 5 },
+      ],
+    },
+  ],
+  results: [],
+  thresholdNote: 'Therapeutic LMWH runs through the remainder of pregnancy and for at least 6 weeks postpartum, for a minimum of 3 months total. Hold 24 h before planned delivery or induction. Neuraxial anesthesia: 24 h after the last therapeutic dose, 12 h after the last prophylactic dose (ASRA). Reduce the dose and monitor anti-Xa if CrCl < 30 mL/min. Warfarin is teratogenic; DOACs are not recommended in pregnancy or lactation.',
+  citations: [
+    'ACOG Practice Bulletin No. 196: Thromboembolism in Pregnancy. Obstet Gynecol. 2018;132(1):e1-e17. PMID: 29939938.',
+    'Royal College of Obstetricians and Gynaecologists. Thromboembolic Disease in Pregnancy and the Puerperium: Acute Management. Green-top Guideline No. 37b. 2015.',
+    'Bates SM, et al. VTE, Thrombophilia, Antithrombotic Therapy, and Pregnancy: ACCP Evidence-Based Clinical Practice Guidelines. Chest. 2012;141(2 Suppl):e691S-e736S. PMID: 22315276.',
+    'Horlocker TT, et al. Regional Anesthesia in the Patient Receiving Antithrombotic or Thrombolytic Therapy: ASRA Evidence-Based Guidelines (Fourth Edition). Reg Anesth Pain Med. 2018;43(3):263-309. PMID: 29561531.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const weight = values['weight'] || 0;
+    const regimen = values['regimen'] || 1;
+
+    const monitoring = '\n\n**MONITORING:**\n• Draw the anti-Xa level at 4 hours post-dose\n• Recheck monthly and after any significant weight change\n• Re-dose as pregnancy weight gain accrues — a first-trimester dose is usually wrong by the third\n• Baseline CBC; recheck platelets if HIT is suspected';
+
+    const peripartum = '\n\n**PERIPARTUM:**\n• Hold LMWH 24 h before planned delivery or induction\n• Convert to UFH near term if delivery timing is unpredictable\n• Restart 4–6 h after vaginal delivery or 6–12 h after cesarean, once hemostasis is secure\n\n**NEURAXIAL ANESTHESIA (ASRA):**\n• After a therapeutic dose, wait 24 hours\n• After a prophylactic dose, wait 12 hours';
+
+    const cautions = '\n\n**CAUTIONS:**\n• Reduce the dose and monitor anti-Xa if CrCl < 30 mL/min\n• Pregnancy usually raises CrCl, so a low value is itself a red flag\n• Do not use warfarin in pregnancy — it is teratogenic\n• DOACs are not recommended in pregnancy or lactation\n• Round to available syringe sizes and confirm the final dose with pharmacy';
+
+    // Fixed-dose prophylaxis needs no weight.
+    if (regimen === 5) {
+      return {
+        value: '40 mg',
+        label: 'Prophylactic — Fixed Dose',
+        description: `**REGIMEN:** [Enoxaparin](#/drug/enoxaparin/pregnancy) **40 mg SC once daily**\n\n**TOTAL DAILY DOSE:** **40 mg/day**\n\n**INDICATION:**\n• VTE prophylaxis — not treatment\n• Do NOT use this dose for a diagnosed PE or DVT\n\n**ANTI-XA TARGET:** **0.2–0.6 U/mL** at 4 h post-dose\n\n**PROPHYLACTIC MONITORING:**\n• Routine monitoring is not required at prophylactic doses\n• Consider checking at the extremes of body weight${peripartum}${cautions}`,
+        colorVar: '--color-primary',
+      };
+    }
+
+    if (weight <= 0) {
+      return {
+        value: '--',
+        label: 'Enter weight',
+        description: '**NEXT STEP:**\n• Enter the patient weight in kg to calculate the dose\n• Use current (actual) body weight, not pre-pregnancy weight',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    let drug: string;
+    let perDose: number;
+    let unit: string;
+    let freq: string;
+    let dosesPerDay: number;
+    let perKg: string;
+    let antiXa: string;
+
+    if (regimen === 1) {
+      drug = 'Enoxaparin';
+      // Enoxaparin: report to 0.1 mg.
+      perDose = Math.round(weight * 1.0 * 10) / 10;
+      unit = 'mg';
+      freq = 'SC q12h';
+      dosesPerDay = 2;
+      perKg = '1 mg/kg';
+      antiXa = '**0.6–1.0 U/mL** at 4 h post-dose (twice-daily target)';
+    } else if (regimen === 2) {
+      drug = 'Enoxaparin';
+      perDose = Math.round(weight * 1.5 * 10) / 10;
+      unit = 'mg';
+      freq = 'SC once daily';
+      dosesPerDay = 1;
+      perKg = '1.5 mg/kg';
+      antiXa = '**1.0–2.0 U/mL** at 4 h post-dose (once-daily target)';
+    } else if (regimen === 3) {
+      drug = 'Dalteparin';
+      // Dalteparin: round to the nearest 100 units (syringe granularity).
+      perDose = Math.round((weight * 100) / 100) * 100;
+      unit = 'units';
+      freq = 'SC q12h';
+      dosesPerDay = 2;
+      perKg = '100 U/kg';
+      antiXa = '**0.6–1.0 U/mL** at 4 h post-dose (twice-daily target)';
+    } else {
+      drug = 'Dalteparin';
+      // Dalteparin: round to the nearest 100 units (syringe granularity).
+      perDose = Math.round((weight * 200) / 100) * 100;
+      unit = 'units';
+      freq = 'SC once daily';
+      dosesPerDay = 1;
+      perKg = '200 U/kg';
+      antiXa = '**1.0–2.0 U/mL** at 4 h post-dose (once-daily target)';
+    }
+
+    const total = Math.round(perDose * dosesPerDay * 10) / 10;
+    const drugLink = drug === 'Enoxaparin' ? '[Enoxaparin](#/drug/enoxaparin/pregnancy)' : 'Dalteparin';
+    const preferNote = regimen === 2
+      ? '\n\n**NOTE:** Once-daily enoxaparin is **less preferred in pregnancy** — increased clearance and increased volume of distribution drive troughs low. Twice-daily dosing is the guideline-preferred regimen.'
+      : '';
+
+    return {
+      value: `${perDose} ${unit}`,
+      label: `${drug} ${perKg} ${dosesPerDay === 2 ? 'BID' : 'daily'}`,
+      description: `**REGIMEN:** ${drugLink} **${perDose} ${unit} ${freq}**\n• ${perKg} × ${weight} kg\n\n**TOTAL DAILY DOSE:** **${total} ${unit}/day**\n\n**ANTI-XA TARGET:** ${antiXa}${preferNote}${monitoring}\n\n**DURATION:**\n• Continue through the remainder of pregnancy\n• Continue at least 6 weeks postpartum\n• Minimum total treatment duration 3 months${peripartum}${cautions}`,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
 const HEART_SCORE_CALCULATOR: CalculatorDefinition = {
   id: 'heart-score',
   title: 'HEART Score',
@@ -43068,6 +43289,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'wells-pe': WELLS_PE_CALCULATOR,
   'perc-rule': PERC_RULE_CALCULATOR,
   'revised-geneva': REVISED_GENEVA_CALCULATOR,
+  'years-algorithm': YEARS_ALGORITHM_CALCULATOR,
+  'lmwh-dosing': LMWH_PREGNANCY_DOSING_CALCULATOR,
   'heart-score': HEART_SCORE_CALCULATOR,
   'alvarado-score': ALVARADO_SCORE_CALCULATOR,
   // Pediatric Trauma

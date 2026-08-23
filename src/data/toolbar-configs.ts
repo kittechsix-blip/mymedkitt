@@ -1618,7 +1618,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'massive', label: 'Massive PE', icon: '🚨', action: 'jump', target: 'pep-massive' },
     { id: 'lysis', label: 'Lysis', icon: '💉', action: 'jump', target: 'pep-thrombolysis' },
     { id: 'lmwh', label: 'LMWH Rx', icon: '💊', action: 'jump', target: 'pep-lmwh-dosing' },
-    { id: 'pesi', label: 'PESI', icon: '📊', action: 'calculator', target: 'pesi' },
+    { id: 'years', label: 'YEARS', icon: '📊', action: 'calculator', target: 'years-algorithm' },
   ],
   'peds-osteomyelitis': [
     { id: 'kocher', label: 'Kocher', icon: '📊', action: 'calculator', target: 'kocher-criteria' },

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-19",
+  "generated": "2026-08-23",
   "dangling": [
     "acetazolamide-iih",
     "asthma-severity-score",
@@ -23,7 +23,6 @@
     "ie-ratio",
     "ipv-safety-plan",
     "laryngeal-airway",
-    "lmwh-dosing",
     "neck-injury-signs",
     "norepi-calc",
     "ohss-fluid",
@@ -33,7 +32,6 @@
     "pericarditis-nsaid-dose",
     "pid-criteria",
     "pm-capture-causes",
-    "pregnancy-wells",
     "prognostic-disclosure",
     "rapid-goc-framework",
     "resuscitative-hysterotomy",
@@ -53,7 +51,6 @@
     "vera-screen",
     "vti-calculator",
     "xyl-withdrawal-comparison",
-    "xyl-wound-antibiotics",
-    "years-algorithm"
+    "xyl-wound-antibiotics"
   ]
 }

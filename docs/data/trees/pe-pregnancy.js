@@ -14,9 +14,9 @@ export const PE_PREGNANCY_NODES = [
         body: '**PE is a leading cause of maternal mortality** — responsible for ~10% of maternal deaths in developed countries.\n\n**Pregnancy is a hypercoagulable state:**\n• 5-10x increased VTE risk vs. non-pregnant\n• Risk persists 6 weeks postpartum\n• Highest risk in 3rd trimester and postpartum\n\n**Challenges:**\n• Symptoms overlap with normal pregnancy (dyspnea, edema, tachycardia)\n• D-dimer normally elevated in pregnancy\n• Concern about radiation exposure (often overstated)\n\n**Key Concept:** Missing PE is more dangerous than diagnostic radiation. [1][2]',
         citation: [1, 2],
         calculatorLinks: [
-            { id: 'pregnancy-wells', label: 'Modified Wells Score' },
+            { id: 'wells-pe', label: 'Wells PE Score (not validated in pregnancy)' },
             { id: 'perc-rule', label: 'PERC Rule' },
-            { id: 'years-algorithm', label: 'YEARS Algorithm' },
+            { id: 'years-algorithm', label: 'Pregnancy-Adapted YEARS' },
             { id: 'lmwh-dosing', label: 'LMWH Pregnancy Dosing' },
         ],
         next: 'pep-presentation',
