@@ -1,7 +1,7 @@
 {
   "_comment": "Accepted pre-existing broken cross-references. --gate blocks only NEW entries. Work this list DOWN and re-run --update-baseline; the ratchet only turns one way.",
   "generated": "2026-08-24",
-  "count": 124,
+  "count": 122,
   "accepted": [
     "acute-agitation|agit-start|Broken #/info/agit-steps — not in INFO_PAGES or STOP_PAGES",
     "adult-pharyngitis|ap-start|Broken #/info/ap-steps-summary — not in INFO_PAGES or STOP_PAGES",
@@ -90,8 +90,6 @@
     "peds-ssti|pssti-pocus|Broken #/info/pssti-nonpurulent — not in INFO_PAGES or STOP_PAGES",
     "peds-ssti|pssti-pocus|Broken #/info/pssti-purulent — not in INFO_PAGES or STOP_PAGES",
     "pericarditis|pericarditis-start|Broken #/info/pericarditis-steps — not in INFO_PAGES or STOP_PAGES",
-    "pericarditis|pericarditis-treatment|Broken calculatorLinks id \"colchicine-dosing\" — not in CALCULATORS",
-    "pericarditis|pericarditis-treatment|Broken calculatorLinks id \"pericarditis-nsaid-dose\" — not in CALCULATORS",
     "pid|pid-outpatient-tx|Broken #/info/pid-treatment — not in INFO_PAGES or STOP_PAGES",
     "pid|pid-partner-tx|Broken #/info/pid-partner — not in INFO_PAGES or STOP_PAGES",
     "pid|pid-risk-assessment|Broken #/info/pid-admission — not in INFO_PAGES or STOP_PAGES",

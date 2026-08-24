@@ -43269,6 +43269,442 @@ const GIFB_OBJECT_RISK_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// Wave D — Tier 3 dosing calculators, batch A (pericarditis pair)
+// Built from .research/calc-backfill/tier3-dosing.md sections 1-2.
+//
+// DISCIPLINE APPLIED: the spec's own discrepancy register (#1-#9) flagged
+// several numbers in these two sections as UNSOURCED. Every one of them has
+// been OMITTED here rather than shipped. In each case the clinical
+// recommendation the number was propping up stands on its own sourced
+// footing, so nothing a clinician acts on changed — only the fabricated
+// justification is gone.
+//
+//   #4  "10.2% mortality with concomitant clarithromycin"  -> OMITTED.
+//       FDA-label qualitative warning retained ("life-threatening and fatal
+//       toxicity at therapeutic doses"), which is what drives the hard stop.
+//   #5  "fatalities after 7 mg cumulative over 4 days", ">0.5 mg/kg"
+//       -> OMITTED. "Narrow therapeutic index, no antidote, GI upset is the
+//       first sign — stop, do not dose through" retained.
+//   #6  COPPS-2 citation unverified and not used for any dose -> OMITTED
+//       from the citation list entirely.
+//   #7  Naproxen 500 mg q12h is not in the ESC first-line table -> KEPT but
+//       labelled inline as extrapolated, so the user sees the weaker footing.
+//   #9a Prednisone "max ~25 mg/day" cap -> OMITTED. The sourced weight-based
+//       range (0.25-0.5 mg/kg/day) is retained.
+//
+// DISCREPANCY #1 (0.5 mg EU vs 0.6 mg US tablets) is resolved per the spec's
+// own recommendation (a): display BOTH strengths on every dose line. 0.5 mg
+// tablets are not marketed in the US, and silent unit-switching at the
+// reduced-dose end is a 20% overdose in exactly the FDA's warned population.
+//
+// DISCREPANCY #2 (renal bands: consult tree vs drug-store.ts disagree) is
+// UNRESOLVED and still needs an owner ruling. This calculator uses the
+// conservative intersection and says so on screen, so a clinician can see
+// that the app is being deliberately cautious rather than quoting a guideline.
+// -------------------------------------------------------------------
+const COLCHICINE_DOSING_CALCULATOR = {
+    id: 'colchicine-dosing',
+    title: 'Colchicine Dosing',
+    subtitle: 'Pericarditis \u2014 dose, duration, renal and interaction adjustment',
+    description: 'Colchicine dosing for acute and recurrent pericarditis, with the renal and CYP3A4/P-gp interaction adjustments that drive its fatal-toxicity cases. Colchicine is always adjunctive to an NSAID or aspirin, never monotherapy. Doses are shown in both the 0.5 mg strength used by ESC and every Imazio trial, and the 0.6 mg strength actually marketed in the US.',
+    fields: [
+        { name: 'body-weight', label: 'Body weight', type: 'number', points: 0, unit: 'kg' },
+        {
+            name: 'episode-type',
+            label: 'Clinical scenario',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select scenario \u2014', points: 0 },
+                { label: 'First episode of acute pericarditis — Index presentation', points: 1 },
+                { label: 'First recurrence — One prior episode', points: 2 },
+                { label: 'Multiple recurrences (\u22652 prior) — CORP-2 population', points: 3 },
+                { label: 'Myopericarditis — Troponin elevation with pericarditis', points: 4 },
+            ],
+        },
+        { name: 'creatinine-clearance', label: 'Creatinine clearance', type: 'number', points: 0, unit: 'mL/min' },
+        {
+            name: 'interacting-drug',
+            label: 'Interacting drug',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Not yet screened \u2014', points: 0 },
+                { label: 'None \u2014 screened, no interacting drug', points: 1 },
+                { label: 'Strong CYP3A4 and/or P-gp inhibitor — Clarithromycin, itraconazole, ketoconazole, ritonavir and other PIs (except fosamprenavir), nefazodone, cyclosporine, posaconazole', points: 2 },
+                { label: 'Moderate CYP3A4 inhibitor — Diltiazem, verapamil, erythromycin, fluconazole, grapefruit juice', points: 3 },
+                { label: 'P-gp inhibitor only — Ranolazine, amiodarone, quinidine', points: 4 },
+                { label: 'Statin — Simvastatin, atorvastatin \u2014 myopathy risk, not a dose change', points: 5 },
+            ],
+        },
+        { name: 'hepatic-impairment', label: 'Severe hepatic impairment (Child-Pugh C)', type: 'toggle', points: 1 },
+        { name: 'on-dialysis', label: 'On dialysis', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'Colchicine has a narrow therapeutic index and no antidote. **Absolute stop:** dialysis, or combined renal and hepatic impairment. **Do not co-prescribe** with a strong CYP3A4/P-gp inhibitor in anyone with renal or hepatic impairment \u2014 the FDA label reports life-threatening and fatal toxicity at ordinary therapeutic doses in exactly that combination. Reduce for CrCl <50 and for any moderate or strong inhibitor even with normal organ function. GI upset (diarrhea, cramping) is the first sign of toxicity \u2014 stop the drug, do not dose through it. Colchicine is always adjunctive to an NSAID or aspirin, never monotherapy.',
+    citations: [
+        'Adler Y, Charron P, Imazio M, et al. 2015 ESC Guidelines for the diagnosis and management of pericardial diseases. Eur Heart J. 2015;36(42):2921-2964. PMID 26320112.',
+        'Imazio M, Brucato A, Cemin R, et al. A randomized trial of colchicine for acute pericarditis (ICAP). N Engl J Med. 2013;369(16):1522-1528. PMID 23992557.',
+        'Imazio M, Brucato A, Cemin R, et al. Colchicine for recurrent pericarditis (CORP): a randomized trial. Ann Intern Med. 2011;155(7):409-414. PMID 21873705.',
+        'Imazio M, Belli R, Brucato A, et al. Colchicine for multiple recurrences of pericarditis (CORP-2). Lancet. 2014;383(9936):2232-2237. PMID 24694983.',
+        'Imazio M, Bobbio M, Cecchi E, et al. Colchicine in addition to conventional therapy for acute pericarditis (COPE). Circulation. 2005;112(13):2012-2016. PMID 16186437.',
+        'Imazio M, Bobbio M, Cecchi E, et al. Colchicine as first-choice therapy for recurrent pericarditis (CORE). Arch Intern Med. 2005;165(17):1987-1991. PMID 16186468.',
+        'FDA prescribing information, colchicine (Colcrys / Mitigare / Gloperba) \u2014 CYP3A4 and P-gp interaction tables, renal and hepatic contraindications.',
+    ],
+    computeResult: (values) => {
+        const weight = Number(values['body-weight']) || 0;
+        const crcl = Number(values['creatinine-clearance']) || 0;
+        const episode = Number(values['episode-type']) || 0;
+        const interaction = Number(values['interacting-drug']) || 0;
+        const hepatic = !!values['hepatic-impairment'];
+        const dialysis = !!values['on-dialysis'];
+        const crclKnown = crcl > 0;
+        const renalImpaired = crclKnown && crcl < 60;
+        // ---- HARD STOPS (do not require weight or scenario) ----
+        const stop = (reason, extra) => ({
+            value: 'STOP',
+            label: 'DO NOT GIVE COLCHICINE',
+            description: '**DO NOT GIVE COLCHICINE**\n\n' +
+                '**REASON:** ' + reason + '\n\n' +
+                extra + '\n\n' +
+                '**OPTIONS:**\n' +
+                '\u2022 If the trigger is an interacting drug, substitute it (azithromycin for clarithromycin) and reassess\n' +
+                '\u2022 Treat with a full anti-inflammatory dose NSAID or aspirin plus a PPI alone\n' +
+                '\u2022 If colchicine is judged essential, get cardiology or rheumatology input first\n\n' +
+                '**IF ALREADY GIVEN:** stop it now. Watch for diarrhea, myopathy, neuropathy, cytopenias and multi-organ failure.',
+            colorVar: '--color-danger',
+        });
+        if (dialysis) {
+            return stop('On dialysis', '**CONTRAINDICATED.** Colchicine is not dialysable and accumulates. Dialysis appears in the contraindication list on the FDA label and in this app\u2019s own drug record.');
+        }
+        if (hepatic && renalImpaired) {
+            return stop('Severe hepatic impairment (Child-Pugh C) with CrCl **' + crcl + ' mL/min**', '**FDA LABEL:** colchicine must not be administered to patients with both renal and hepatic impairment. There is no safe reduced dose in this combination.');
+        }
+        if (interaction === 2 && (renalImpaired || hepatic)) {
+            return stop('Strong CYP3A4/P-gp inhibitor with ' + (renalImpaired ? 'CrCl **' + crcl + ' mL/min**' : 'severe hepatic impairment'), '**FDA LABEL:** patients with renal or hepatic impairment must not receive colchicine together with a P-gp or strong CYP3A4 inhibitor. **Life-threatening and fatal colchicine toxicity has been reported at therapeutic doses** in this exact combination.');
+        }
+        // ---- Input guards ----
+        if (weight <= 0 || episode === 0) {
+            const missing = [];
+            if (weight <= 0)
+                missing.push('body weight');
+            if (episode === 0)
+                missing.push('clinical scenario');
+            return {
+                value: '\u2014',
+                label: 'Enter ' + missing.join(' and '),
+                description: 'No hard stop triggered on the inputs entered so far. Enter ' +
+                    missing.join(' and ') +
+                    ' to get a dose.\n\n**HARD STOPS SCREENED SO FAR:** dialysis, combined renal + hepatic impairment, and a strong CYP3A4/P-gp inhibitor with organ impairment. None are present.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        // ---- Dose frequency as a rank; always take the most restrictive ----
+        // 3 = BID, 2 = once daily, 1 = every other day
+        let rank = weight >= 70 ? 3 : 2;
+        const baseRank = rank;
+        const reductions = [];
+        let renalLine;
+        if (!crclKnown) {
+            renalLine =
+                '**RENAL:** creatinine clearance not entered. Colchicine is renally cleared and its fatal-toxicity cases cluster in unrecognised renal impairment \u2014 **calculate a CrCl before prescribing.**';
+        }
+        else if (crcl >= 50) {
+            renalLine = '**RENAL:** CrCl **' + crcl + ' mL/min** \u2014 no adjustment needed.';
+        }
+        else if (crcl >= 30) {
+            rank = Math.min(rank, 2);
+            reductions.push('CrCl ' + crcl + ' mL/min');
+            renalLine =
+                '**RENAL:** CrCl **' + crcl + ' mL/min** \u2014 reduce to **once daily regardless of weight.** Monitor CBC and CK.';
+        }
+        else {
+            rank = Math.min(rank, 1);
+            reductions.push('CrCl ' + crcl + ' mL/min');
+            renalLine =
+                '**RENAL:** CrCl **' + crcl + ' mL/min** \u2014 **avoid colchicine for a 3-6 month course.** If it is used at all: every-other-day dosing, weekly CBC and CK, and cardiology or rheumatology input.';
+        }
+        let interactionLine;
+        if (interaction === 0) {
+            interactionLine =
+                '**INTERACTIONS:** not yet screened. Screen for clarithromycin, azole antifungals, protease inhibitors, cyclosporine, diltiazem, verapamil, amiodarone and grapefruit **before every refill** \u2014 these interactions, not the starting dose, are what kills people on colchicine.';
+        }
+        else if (interaction === 1) {
+            interactionLine = '**INTERACTIONS:** screened, none present. Re-screen at every refill and whenever a new drug is started.';
+        }
+        else if (interaction === 2) {
+            rank = Math.min(rank, 1);
+            reductions.push('strong CYP3A4/P-gp inhibitor');
+            interactionLine =
+                '**INTERACTIONS:** strong CYP3A4 and/or P-gp inhibitor \u2014 reduce to **every other day**, or better, substitute the interacting drug (azithromycin for clarithromycin).';
+        }
+        else if (interaction === 3) {
+            rank = Math.min(rank, 2);
+            reductions.push('moderate CYP3A4 inhibitor');
+            interactionLine =
+                '**INTERACTIONS:** moderate CYP3A4 inhibitor (diltiazem, verapamil and similar) \u2014 reduce to **once daily.**';
+        }
+        else if (interaction === 4) {
+            rank = Math.max(1, Math.min(rank, rank - 1));
+            reductions.push('P-gp inhibitor');
+            interactionLine = '**INTERACTIONS:** P-gp inhibitor \u2014 halve the dose and monitor CBC and CK.';
+        }
+        else {
+            interactionLine =
+                '**INTERACTIONS:** statin \u2014 **no colchicine dose change.** Counsel on myalgia and check a CK if the patient becomes symptomatic; the risk here is additive myopathy, not colchicine accumulation.';
+        }
+        const doseText = {
+            3: 'Colchicine **0.5 mg PO twice daily**  \u00b7  US strength: **0.6 mg PO twice daily**',
+            2: 'Colchicine **0.5 mg PO once daily**  \u00b7  US strength: **0.6 mg PO once daily**',
+            1: 'Colchicine **0.5 mg PO every other day**  \u00b7  US strength: **0.3 mg PO once daily**',
+        };
+        const shortCode = { 3: '0.5 BID', 2: '0.5 QD', 1: '0.5 QOD' };
+        const durations = {
+            1: '**3 months** (first episode of acute pericarditis \u2014 ICAP, ESC 2015 Class I)',
+            2: '**6 months** (first recurrence \u2014 CORP, ESC 2015)',
+            3: '**at least 6 months** (multiple recurrences \u2014 CORP-2). Some authors continue 12-24 months after the last recurrence with a gradual taper (ESC 2015 addenda).',
+            4: '**3 months**, plus **activity restriction for 6 months** (myopericarditis)',
+        };
+        const efficacy = episode === 3
+            ? '**EFFICACY:** CORP-2 \u2014 recurrence 21.6% vs 42.5% with placebo, NNT 5.'
+            : '**EFFICACY:** ICAP \u2014 incessant or recurrent pericarditis 16.7% vs 37.5% with placebo. CORP-2 \u2014 recurrence 21.6% vs 42.5%, NNT 5.';
+        let body = '**DOSE:** ' + doseText[rank] + '\n\n' +
+            '**DURATION:** ' + durations[episode] + '\n\n' +
+            '**NO LOADING DOSE** \u2014 loading is not used in pericarditis (ESC 2015, explicit).\n\n' +
+            renalLine + '\n\n' +
+            interactionLine + '\n\n';
+        if (rank < baseRank) {
+            body +=
+                '**WHY THIS IS BELOW THE STANDARD DOSE:** ' +
+                    reductions.join(' and ') +
+                    '. Where more than one reduction applies, the most restrictive one is used.\n\n';
+        }
+        body +=
+            '**BOTH STRENGTHS ARE SHOWN ON PURPOSE:** ESC and every Imazio trial dosed 0.5 mg tablets, which are **not marketed in the United States**. US products are 0.6 mg. Substituting 0.6 for 0.5 at full dose is an accepted 20% overshoot; substituting it at a *reduced* dose is a 20% overdose in the population the FDA warns about. Read the strength, not just the number.\n\n' +
+                '**ALWAYS COMBINE WITH:** a full anti-inflammatory dose NSAID or aspirin plus a PPI. Colchicine is adjunctive, never monotherapy.\n\n' +
+                '**TAPERING:** not mandatory. If tapering, drop to 0.5 mg every other day (<70 kg) or 0.5 mg once daily (\u226570 kg) over the final weeks (ESC 2015).\n\n' +
+                '**MONITOR:** CBC and CK at baseline and again if myalgia develops. **Stop for diarrhea or cramping** \u2014 GI upset is the first sign of toxicity, not a side effect to push through.\n\n' +
+                efficacy + '\n\n' +
+                '**RENAL BAND PROVENANCE:** the CrCl thresholds above are the conservative intersection of this app\u2019s two internal sources, which do not agree with each other. They are deliberately cautious rather than quoted from a single guideline.';
+        const colorVar = rank < baseRank || (crclKnown && crcl < 50) || interaction === 0
+            ? '--color-warning'
+            : '--color-primary';
+        return {
+            value: shortCode[rank],
+            label: rank < baseRank
+                ? 'Reduced dose \u2014 ' + reductions.join(', ')
+                : 'Standard dose',
+            description: body,
+            colorVar,
+        };
+    },
+};
+const PERICARDITIS_NSAID_DOSE_CALCULATOR = {
+    id: 'pericarditis-nsaid-dose',
+    title: 'NSAID Dosing Guide',
+    subtitle: 'Pericarditis \u2014 agent selection, anti-inflammatory dose and taper',
+    description: 'Anti-inflammatory dosing for pericarditis. Agent selection is rule-driven \u2014 post-MI and Dressler pericarditis require aspirin, because non-aspirin NSAIDs impair infarct scar formation and ibuprofen blocks aspirin\u2019s antiplatelet effect. Taper is triggered by symptom resolution plus CRP normalisation, not by the calendar. Every regimen pairs with colchicine and a PPI.',
+    fields: [
+        {
+            name: 'clinical-context',
+            label: 'Clinical context',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select context \u2014', points: 0 },
+                { label: 'Idiopathic or viral acute pericarditis', points: 1 },
+                { label: 'Post-MI pericarditis or Dressler syndrome — Aspirin only \u2014 non-aspirin NSAIDs impair infarct healing', points: 2 },
+                { label: 'Already on aspirin for CAD or another antiplatelet indication — Escalate the aspirin rather than layering an NSAID on top', points: 3 },
+                { label: 'Post-pericardiotomy', points: 4 },
+                { label: 'Myopericarditis — Lower NSAID doses; activity restriction 6 months', points: 5 },
+            ],
+        },
+        {
+            name: 'preferred-agent',
+            label: 'Preferred agent',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select agent \u2014', points: 0 },
+                { label: 'Aspirin', points: 1 },
+                { label: 'Ibuprofen', points: 2 },
+                { label: 'Naproxen', points: 3 },
+                { label: 'Indomethacin', points: 4 },
+            ],
+        },
+        { name: 'creatinine-clearance', label: 'Creatinine clearance', type: 'number', points: 0, unit: 'mL/min' },
+        {
+            name: 'treatment-phase',
+            label: 'Phase of treatment',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select phase \u2014', points: 0 },
+                { label: 'Initial high-dose (weeks 1-2)', points: 1 },
+                { label: 'Taper (symptoms resolved AND CRP normalised)', points: 2 },
+            ],
+        },
+        { name: 'gi-risk', label: 'High GI risk', type: 'toggle', points: 1 },
+        { name: 'pregnancy-20wk', label: 'Pregnancy \u226520 weeks', type: 'toggle', points: 1 },
+        {
+            name: 'absolute-contraindication',
+            label: 'Active GI bleed, severe HF (NYHA III-IV), or CABG within 30 days',
+            type: 'toggle',
+            points: 1,
+        },
+    ],
+    results: [],
+    thresholdNote: '**Post-MI and Dressler pericarditis require aspirin, not an NSAID** \u2014 ibuprofen and indomethacin impair infarct scar formation and ibuprofen blocks aspirin\u2019s antiplatelet effect. **Do not use any NSAID or high-dose aspirin** with active GI bleeding, CrCl <30 mL/min, severe heart failure (NYHA III-IV), CABG within 30 days, or pregnancy \u226520 weeks (oligohydramnios; ductal closure \u226530 weeks). **Aspirin \u2264100 mg/day has no anti-inflammatory effect** \u2014 a cardiac-dose aspirin does not treat pericarditis. Gastric protection is part of the prescription, not an add-on. Taper on symptom resolution plus CRP normalisation, not on the calendar. Every regimen pairs with colchicine \u2014 the NSAID treats this episode, colchicine is what prevents the next one.',
+    citations: [
+        'Adler Y, Charron P, Imazio M, et al. 2015 ESC Guidelines for the diagnosis and management of pericardial diseases. Eur Heart J. 2015;36(42):2921-2964. PMID 26320112. \u2014 source of the aspirin, ibuprofen and indomethacin dose and taper rows.',
+        'Imazio M, Brucato A, Cemin R, et al. A randomized trial of colchicine for acute pericarditis (ICAP). N Engl J Med. 2013;369(16):1522-1528. PMID 23992557.',
+        'Imazio M, Bobbio M, Cecchi E, et al. Colchicine in addition to conventional therapy for acute pericarditis (COPE). Circulation. 2005;112(13):2012-2016. PMID 16186437.',
+        '2025 ACC Concise Clinical Guidance on the evaluation and management of pericarditis. J Am Coll Cardiol. 2025. doi:10.1016/j.jacc.2025.05.023. \u2014 cited for the second-line ladder only (IL-1 antagonists preferred over corticosteroids in the inflammatory phenotype).',
+    ],
+    computeResult: (values) => {
+        const context = Number(values['clinical-context']) || 0;
+        const agent = Number(values['preferred-agent']) || 0;
+        const phase = Number(values['treatment-phase']) || 0;
+        const crcl = Number(values['creatinine-clearance']) || 0;
+        const crclKnown = crcl > 0;
+        const giRisk = !!values['gi-risk'];
+        const pregnant = !!values['pregnancy-20wk'];
+        const absContra = !!values['absolute-contraindication'];
+        // ---- HARD STOP ----
+        if (absContra || pregnant || (crclKnown && crcl < 30)) {
+            const reasons = [];
+            if (absContra)
+                reasons.push('active GI bleed, severe heart failure (NYHA III-IV), or CABG within 30 days');
+            if (pregnant)
+                reasons.push('pregnancy \u226520 weeks (oligohydramnios risk; ductal closure at \u226530 weeks)');
+            if (crclKnown && crcl < 30)
+                reasons.push('CrCl ' + crcl + ' mL/min');
+            return {
+                value: 'NO NSAID',
+                label: 'No NSAID or high-dose aspirin',
+                description: '**DO NOT USE AN NSAID OR HIGH-DOSE ASPIRIN**\n\n' +
+                    '**REASON:** ' + reasons.join('; ') + '\n\n' +
+                    '**ALTERNATIVE PATHWAY:**\n' +
+                    '\u2022 **Colchicine** \u2014 dose it on its own merits, and check the renal band; see the Colchicine Dosing calculator\n' +
+                    '\u2022 **\u00b1 Low-dose prednisone 0.25-0.5 mg/kg/day** if colchicine alone is not enough, with a **very slow taper over 3-6 months**\n' +
+                    '\u2022 **Involve cardiology.** Steroid-first pericarditis has a higher recurrence rate, so this is a considered trade-off, not a default\n\n' +
+                    '**IF PREGNANT:** low-dose aspirin and prednisone are the usual anti-inflammatory options after 20 weeks; colchicine use in pregnancy needs obstetric input. Do not improvise this alone.\n\n' +
+                    '**STILL DO:** gastric protection if any anti-inflammatory is given, and reassess for effusion and tamponade physiology.',
+                colorVar: '--color-danger',
+            };
+        }
+        // ---- Input guards ----
+        if (context === 0 || agent === 0 || phase === 0) {
+            const missing = [];
+            if (context === 0)
+                missing.push('clinical context');
+            if (agent === 0)
+                missing.push('preferred agent');
+            if (phase === 0)
+                missing.push('phase of treatment');
+            return {
+                value: '\u2014',
+                label: 'Enter ' + missing.join(', '),
+                description: 'No absolute contraindication triggered on the inputs entered so far. Enter ' +
+                    missing.join(', ') +
+                    ' to get a regimen.\n\n**SCREENED SO FAR:** active GI bleed, severe heart failure, recent CABG, pregnancy \u226520 weeks and CrCl <30 mL/min. None are present.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const aspirinForced = context === 2 || context === 3;
+        const override = aspirinForced && agent !== 1;
+        const effectiveAgent = aspirinForced ? 1 : agent;
+        const agentNames = { 1: 'Aspirin', 2: 'Ibuprofen', 3: 'Naproxen', 4: 'Indomethacin' };
+        const initialDose = {
+            1: '**750-1000 mg PO every 8 hours** for 1-2 weeks',
+            2: '**600 mg PO every 8 hours** for 1-2 weeks',
+            3: '**500 mg PO every 12 hours** for 1-2 weeks',
+            4: '**25-50 mg PO every 8 hours** for 1-2 weeks',
+        };
+        const maxDose = {
+            1: '**3000 mg per day**',
+            2: '**2400 mg per day** for pericarditis (ESC). The product label permits up to 3200 mg/day for other indications \u2014 ESC\u2019s lower ceiling is the one used here.',
+            3: '**1000 mg per day**',
+            4: '**150 mg per day**',
+        };
+        const taperStep = {
+            1: 'decrease by **250-500 mg every 1-2 weeks**',
+            2: 'decrease by **200-400 mg every 1-2 weeks**',
+            3: 'decrease by **250 mg every 1-2 weeks**',
+            4: 'decrease by **25 mg every 1-2 weeks**',
+        };
+        const shortCode = { 1: 'ASA 1 G', 2: 'IBU 600', 3: 'NAP 500', 4: 'INDO 50' };
+        const name = agentNames[effectiveAgent];
+        let body = '';
+        if (override) {
+            body +=
+                '**AGENT OVERRIDDEN \u2192 ASPIRIN.** You selected ' + agentNames[agent] + ', but ' +
+                    (context === 2
+                        ? 'in post-MI and Dressler pericarditis non-aspirin NSAIDs impair infarct scar formation, and ibuprofen additionally blocks the antiplatelet effect of aspirin.'
+                        : 'this patient is already on aspirin for a vascular indication \u2014 escalate that aspirin to an anti-inflammatory dose rather than layering a second NSAID on top of it.') +
+                    ' **Aspirin is the anti-inflammatory of choice here.**\n\n';
+        }
+        body +=
+            '**AGENT:** ' + name + (aspirinForced ? ' \u2014 **required** in this context' : '') + '\n\n';
+        if (phase === 2) {
+            body +=
+                '**PHASE: TAPER.** ' + taperStep[effectiveAgent] + '\n\n' +
+                    '**TAPER ONLY IF BOTH ARE TRUE:** symptoms have resolved **and** CRP has normalised. Duration is symptom- and CRP-guided, never calendar-driven. If symptoms recur during the taper, go back to the last effective dose rather than pushing on.\n\n' +
+                    '**FULL DOSE FOR REFERENCE:** ' + initialDose[effectiveAgent] + '\n\n';
+        }
+        else {
+            body +=
+                '**DOSE:** ' + initialDose[effectiveAgent] + '\n\n' +
+                    '**MAX:** ' + maxDose[effectiveAgent] + '\n\n' +
+                    '**TAPER (only after symptoms resolve AND CRP normalises):** ' + taperStep[effectiveAgent] + '\n\n';
+        }
+        if (effectiveAgent === 3) {
+            body +=
+                '**NAPROXEN PROVENANCE:** naproxen is **not in the ESC 2015 first-line table.** The 500 mg q12h regimen is extrapolated from its general anti-inflammatory dosing, not taken from a pericarditis trial. Aspirin, ibuprofen and indomethacin all have direct guideline dose rows \u2014 prefer one of those if there is no specific reason to use naproxen.\n\n';
+        }
+        if (context === 5) {
+            body +=
+                '**MYOPERICARDITIS:** use the lower end of the dose range \u2014 the NSAID is being used for pain, and there is a theoretical concern about NSAIDs in myocardial inflammation. **Activity restriction for 6 months** is the intervention that matters most here.\n\n';
+        }
+        if (crclKnown && crcl < 60) {
+            body +=
+                '**RENAL:** CrCl **' + crcl + ' mL/min** \u2014 use the lowest effective dose, **recheck creatinine at 3-5 days**, and prefer aspirin if it is already indicated for another reason.\n\n';
+        }
+        else if (!crclKnown) {
+            body += '**RENAL:** creatinine clearance not entered. Check renal function before a 1-2 week high-dose NSAID course.\n\n';
+        }
+        body +=
+            '**GI PROTECTION:** a PPI for the entire course \u2014 ' +
+                (giRisk
+                    ? '**mandatory here**, and consider shortening the high-dose phase. High GI risk plus a 1-2 week full-dose NSAID is the combination that bleeds.'
+                    : '**required, not optional** (ESC Class I, "with gastric protection").') +
+                '\n\n' +
+                '**ADD COLCHICINE:** 0.5 mg BID (\u226570 kg) or 0.5 mg once daily (<70 kg). **Colchicine is what prevents recurrence; the NSAID only treats the current episode.** Use the Colchicine Dosing calculator for the renal and interaction adjustments.\n\n' +
+                '**NOT ANTI-INFLAMMATORY:** aspirin 81-100 mg/day. A cardiac-dose aspirin does not treat pericarditis \u2014 ESC is explicit about this.\n\n' +
+                '**STOP AND REASSESS IF:** fever >38\u00b0C, effusion >20 mm, tamponade physiology, or no response after one week of full-dose therapy.';
+        const colorVar = override
+            ? '--color-danger'
+            : (crclKnown && crcl < 60) || giRisk
+                ? '--color-warning'
+                : '--color-primary';
+        return {
+            value: override ? 'USE ASA' : phase === 2 ? 'TAPER' : shortCode[effectiveAgent],
+            label: override
+                ? 'Aspirin required \u2014 ' + agentNames[agent] + ' is not appropriate here'
+                : phase === 2
+                    ? name + ' \u2014 taper'
+                    : name + ' \u2014 initial high dose',
+            description: body,
+            colorVar,
+        };
+    },
+};
 const CALCULATORS = {
     // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
     'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
@@ -43950,6 +44386,9 @@ const CALCULATORS = {
     'pid-criteria': PID_CRITERIA_CALCULATOR,
     'ohss-vte': OHSS_VTE_CALCULATOR,
     'gifb-object-risk': GIFB_OBJECT_RISK_CALCULATOR,
+    // Wave D — Tier 3 dosing batch A (added 2026-08-24)
+    'colchicine-dosing': COLCHICINE_DOSING_CALCULATOR,
+    'pericarditis-nsaid-dose': PERICARDITIS_NSAID_DOSE_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
