@@ -42271,6 +42271,1004 @@ const EXTRAORAL_TIME_CALCULATOR = {
         };
     },
 };
+// ===================================================================
+// Wave D — Tier 2 scores/classifications (added 2026-08-24)
+// Backfills dead calculatorLinks IDs. Spec: .research/calc-backfill/tier2-scores.md
+//
+// NOT BUILT (deliberate): 'strangulation-danger' — no such instrument exists.
+// Blocked on owner decision re: DA-5 substitution + licensing.
+// ===================================================================
+// -------------------------------------------------------------------
+// Pre-Endoscopy (Clinical) Rockall Score — id: 'rockall'
+// Tree: upper-gi-bleed.ts → ugib-risk-stratify
+// Pattern B so the full interpretation body can render; value is the sum.
+// -------------------------------------------------------------------
+const ROCKALL_CALCULATOR = {
+    id: 'rockall',
+    title: 'Pre-Endoscopy Rockall Score',
+    subtitle: 'Clinical Rockall — 30-day mortality in upper GI bleeding',
+    description: 'The clinical (pre-endoscopy) Rockall score uses age, shock, and comorbidity to predict 30-day mortality after acute upper gastrointestinal haemorrhage. The full Rockall (0-11) additionally requires endoscopic diagnosis and stigmata of recent haemorrhage, which are not available to an ED clinician.',
+    fields: [
+        {
+            name: 'age',
+            label: 'Age',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: '< 60 years', points: 0 },
+                { label: '60-79 years', points: 1 },
+                { label: '\u2265 80 years', points: 2 },
+            ],
+        },
+        {
+            name: 'shock',
+            label: 'Shock',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No shock \u2014 SBP \u2265100 and HR <100', points: 0 },
+                { label: 'Tachycardia \u2014 SBP \u2265100 and HR \u2265100', points: 1 },
+                { label: 'Hypotension \u2014 SBP <100', points: 2 },
+            ],
+        },
+        {
+            name: 'comorbidity',
+            label: 'Comorbidity',
+            type: 'select',
+            points: 0,
+            selectOptions: [
+                { label: 'No major comorbidity', points: 0 },
+                { label: 'CHF, ischemic heart disease, or any other major comorbidity', points: 2 },
+                { label: 'Renal failure, liver failure, or disseminated malignancy', points: 3 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Derived from 4,185 UK patients with acute UGIB (1993 national audit) and validated in a further 1,625; validated again by Vreeburg 1999 (n=1,882). Validated for NON-VARICEAL UGIB \u2014 its role in acute variceal bleeding is contested. Do NOT use this pre-endoscopy version in a patient who has already had endoscopy \u2014 use the full Rockall. Rockall predicts MORTALITY, not need for intervention, and performs poorly for rebleeding (Vreeburg 1999). Pre-endoscopy Rockall should NOT be used alone to select outpatient endoscopy: in one cohort 10.8% were labelled low risk yet 35.7% of those required intervention or died. The ABC score (AUROC 0.78) and GBS outperform clinical Rockall (AUROC 0.64) for 30-day mortality in modern comparisons.',
+    citations: [
+        'Rockall TA, Logan RF, Devlin HB, Northfield TC. Risk assessment after acute upper gastrointestinal haemorrhage. Gut. 1996;38(3):316-321. PMID 8675081. doi:10.1136/gut.38.3.316 \u2014 derivation',
+        'Vreeburg EM, Terwee CB, Snel P, et al. Validation of the Rockall risk scoring system in upper gastrointestinal bleeding. Gut. 1999;44(3):331-335. PMID 10026316 \u2014 validation',
+        'Laine L, Barkun AN, Saltzman JR, Martel M, Leontiadis GI. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. Am J Gastroenterol. 2021;116(5):899-917',
+    ],
+    computeResult: (values) => {
+        const age = values['age'] || 0;
+        const shock = values['shock'] || 0;
+        const comorbidity = values['comorbidity'] || 0;
+        const score = age + shock + comorbidity;
+        // Rockall 1996 derivation cohort, n=4,185
+        const mortality = ['0.2', '2.4', '5.6', '11.0', '24.6', '39.6', '48.9', '50.0'];
+        const bands = [
+            'Very Low Risk',
+            'Low Risk',
+            'Low-Moderate Risk',
+            'Moderate Risk',
+            'High Risk',
+            'High Risk',
+            'Very High Risk',
+            'Very High Risk',
+        ];
+        const idx = Math.min(Math.max(score, 0), 7);
+        const pct = mortality[idx];
+        const band = bands[idx];
+        let colorVar = '--color-primary';
+        if (score >= 4)
+            colorVar = '--color-danger';
+        else if (score >= 2)
+            colorVar = '--color-warning';
+        let body = '**PRE-ENDOSCOPY ROCKALL SCORE: ' + score + '/7**\n\n';
+        body += '**30-DAY MORTALITY: ' + pct + '%**\n\n';
+        body += '**INTERPRETATION**\n';
+        body += '\u2022 ' + band + '\n';
+        body += '\u2022 Clinical (pre-endoscopy) Rockall uses age, shock, and comorbidity only\n';
+        body += '\u2022 Full Rockall (0-11) adds endoscopic diagnosis and stigmata of recent haemorrhage\n\n';
+        body += '**DISPOSITION**\n';
+        body += '\u2022 Score 0: lowest-mortality group \u2014 consider early discharge with outpatient endoscopy **only in combination with GBS 0-1**\n';
+        body += '\u2022 Score \u22653: admit, urgent GI consultation, endoscopy within 24 h\n';
+        body += '\u2022 Score \u22655: consider ICU-level monitoring\n\n';
+        body += '**PREFERRED ED TOOL**\n';
+        body += '\u2022 **Glasgow-Blatchford Score outperforms clinical Rockall for the ED decision** (need for intervention). ACG 2021 recommends GBS \u22641 to identify very-low-risk patients for outpatient management.\n';
+        body += '\u2022 GBS is already available in this app.';
+        return {
+            value: score + '/7',
+            label: band + ' \u2014 30-day mortality ' + pct + '%',
+            description: body,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// Forrest Classification — id: 'forrest'
+// Tree: upper-gi-bleed.ts → ugib-post-egd
+// Descriptive endoscopic classification. NOT a score. Never summed.
+// -------------------------------------------------------------------
+const FORREST_CALCULATOR = {
+    id: 'forrest',
+    title: 'Forrest Classification',
+    subtitle: 'Endoscopic stigmata of recent haemorrhage \u2014 classification, not a score',
+    description: 'Descriptive endoscopic classification of peptic-ulcer stigmata of recent haemorrhage. Requires direct endoscopic visualization. This is a classification, not a point score \u2014 there is no total.',
+    fields: [
+        {
+            name: 'forrest-class',
+            label: 'Endoscopic stigmata of recent haemorrhage',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select endoscopic finding \u2014', points: 0 },
+                { label: 'Ia \u2014 Active spurting arterial bleeding', points: 1 },
+                { label: 'Ib \u2014 Active oozing bleeding', points: 2 },
+                { label: 'IIa \u2014 Non-bleeding visible vessel', points: 3 },
+                { label: 'IIb \u2014 Adherent clot', points: 4 },
+                { label: 'IIc \u2014 Flat pigmented spot', points: 5 },
+                { label: 'III \u2014 Clean ulcer base', points: 6 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Descriptive endoscopic classification of peptic-ulcer stigmata of recent haemorrhage (Forrest 1974). Rebleed percentages are from UNTREATED historical cohorts (Laine & Peterson 1994) and substantially overstate risk in the modern era of endoscopic hemostasis plus high-dose PPI. Requires direct endoscopic visualization \u2014 not usable by an ED clinician pre-endoscopy. Interobserver reliability among endoscopists is a documented weakness. Not validated for variceal bleeding, Dieulafoy lesions, or malignancy.',
+    citations: [
+        'Forrest JA, Finlayson ND, Shearman DJ. Endoscopy in gastrointestinal bleeding. Lancet. 1974;2(7877):394-397. PMID 4136718 \u2014 original classification',
+        'Laine L, Peterson WL. Bleeding peptic ulcer. N Engl J Med. 1994;331(11):717-727. PMID 8058080 \u2014 pooled untreated rebleed rates',
+        'Laine L, Freeman M, Cohen H. Lack of uniformity in evaluation of endoscopic prognostic features of bleeding ulcers. Gastrointest Endosc. 1994;40(4):411-417. PMID 7926528 \u2014 interobserver reliability',
+        'de Groot NL, van Oijen MG, Kessels K, et al. Reassessment of the predictive value of the Forrest classification for peptic ulcer rebleeding and mortality. Endoscopy. 2014;46(1):46-52. PMID 24218308',
+        'Laine L, Barkun AN, Saltzman JR, et al. ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding. Am J Gastroenterol. 2021;116(5):899-917',
+    ],
+    computeResult: (values) => {
+        const sel = values['forrest-class'] || 0;
+        if (sel === 0) {
+            return {
+                value: '\u2014',
+                label: 'Select the endoscopic finding',
+                description: '**FORREST CLASSIFICATION**\n\nSelect the endoscopic stigmata of recent haemorrhage seen at EGD.\n\n**NOTE**\n\u2022 Forrest is a **descriptive endoscopic classification, not a validated score**. It cannot be summed or totalled.\n\u2022 It requires direct endoscopic visualization \u2014 it cannot be applied pre-endoscopy.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const data = {
+            1: {
+                cls: 'Ia', rebleed: '~55-90',
+                appearance: 'Active spurting arterial bleeding',
+                therapy: '**Endoscopic hemostasis** \u2014 dual therapy (injection plus thermal or mechanical)',
+                ppi: '**IV PPI infusion for 72 h** after successful hemostasis',
+                dispo: 'Admit; monitored bed. Highest rebleed risk of any class.',
+                colorVar: '--color-danger',
+            },
+            2: {
+                cls: 'Ib', rebleed: '~50',
+                appearance: 'Active oozing bleeding',
+                therapy: '**Endoscopic hemostasis** \u2014 dual therapy',
+                ppi: '**IV PPI infusion for 72 h** after successful hemostasis',
+                dispo: 'Admit; monitored bed.',
+                colorVar: '--color-danger',
+            },
+            3: {
+                cls: 'IIa', rebleed: '~40-50',
+                appearance: 'Non-bleeding visible vessel',
+                therapy: '**Endoscopic hemostasis** \u2014 dual therapy',
+                ppi: '**IV PPI infusion for 72 h** after successful hemostasis',
+                dispo: 'Admit; monitored bed.',
+                colorVar: '--color-danger',
+            },
+            4: {
+                cls: 'IIb', rebleed: '~20-30',
+                appearance: 'Adherent clot',
+                therapy: 'Clot removal and treatment of the underlying lesion (**controversial**), or high-dose PPI alone',
+                ppi: 'High-dose PPI; IV infusion if the clot is removed and a high-risk stigma is found underneath',
+                dispo: 'Admit.',
+                colorVar: '--color-warning',
+            },
+            5: {
+                cls: 'IIc', rebleed: '~7-10',
+                appearance: 'Flat pigmented spot',
+                therapy: '**No endoscopic therapy indicated**',
+                ppi: 'Oral PPI',
+                dispo: 'Early feeding; consider early discharge.',
+                colorVar: '--color-primary',
+            },
+            6: {
+                cls: 'III', rebleed: '~3-5',
+                appearance: 'Clean ulcer base',
+                therapy: '**No endoscopic therapy indicated**',
+                ppi: 'Oral PPI',
+                dispo: 'Early feeding and early discharge.',
+                colorVar: '--color-primary',
+            },
+        };
+        const d = data[sel];
+        let body = '**FORREST CLASS ' + d.cls + '**\n\n';
+        body += '**UNTREATED REBLEED RISK: ' + d.rebleed + '%**\n\n';
+        body += '**DESCRIPTION**\n\u2022 ' + d.appearance + '\n\n';
+        body += '**MANAGEMENT**\n';
+        body += '\u2022 ' + d.therapy + '\n';
+        body += '\u2022 ' + d.ppi + '\n';
+        body += '\u2022 ' + d.dispo + '\n\n';
+        body += '**CAVEAT**\n';
+        body += '\u2022 Forrest is a **descriptive endoscopic classification, not a validated score**. It cannot be summed or totalled.\n';
+        body += '\u2022 Interobserver agreement between endoscopists is modest.\n';
+        body += '\u2022 A 397-patient reassessment found the ordinal Ib > IIa > IIb > IIc ranking does NOT hold \u2014 Ib through IIc carried similar rebleed odds \u2014 and proposed collapsing to high (Ia) / increased (Ib-IIc) / low (III).\n';
+        body += '\u2022 Rebleed percentages are from **untreated** historical cohorts and overstate risk in the era of endoscopic hemostasis plus high-dose PPI.';
+        return {
+            value: 'CLASS ' + d.cls,
+            label: 'Forrest ' + d.cls + ' \u2014 untreated rebleed ' + d.rebleed + '%',
+            description: body,
+            colorVar: d.colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// PECARN Cervical Spine Rule — id: 'cspine-pecarn'
+// Tree: cervical-spine.ts → cspine-pediatric
+// HIERARCHICAL TIERED RULE, NOT A SUM. One high-risk factor overrides
+// any number of intermediate factors.
+// -------------------------------------------------------------------
+const CSPINE_PECARN_CALCULATOR = {
+    id: 'cspine-pecarn',
+    title: 'PECARN C-Spine Rule',
+    subtitle: 'Cervical spine imaging in children after blunt trauma (Leonard 2024)',
+    description: 'Hierarchical imaging rule for cervical spine injury in children aged 0-17 after blunt trauma. This is NOT a point score \u2014 any single high-risk factor overrides any number of intermediate factors.',
+    fields: [
+        { name: 'gcs-3-8', label: 'HIGH RISK \u2014 GCS 3-8', type: 'toggle', points: 1 },
+        { name: 'unresponsive', label: 'HIGH RISK \u2014 Unresponsive on AVPU (U)', type: 'toggle', points: 1 },
+        { name: 'abc-abnormal', label: 'HIGH RISK \u2014 Abnormal airway, breathing, or circulation findings', type: 'toggle', points: 1 },
+        { name: 'focal-deficit', label: 'HIGH RISK \u2014 Focal neurologic deficit', type: 'toggle', points: 1, description: 'Paresthesia, numbness, or weakness' },
+        { name: 'neck-pain', label: 'INTERMEDIATE \u2014 Neck pain', type: 'toggle', points: 1 },
+        { name: 'altered-ms', label: 'INTERMEDIATE \u2014 Altered mental status', type: 'toggle', points: 1, description: 'GCS 9-14, AVPU V or P, or other signs of AMS' },
+        { name: 'substantial-head', label: 'INTERMEDIATE \u2014 Substantial head injury', type: 'toggle', points: 1, description: 'Substantial = requiring inpatient admission or surgical intervention' },
+        { name: 'substantial-torso', label: 'INTERMEDIATE \u2014 Substantial torso injury', type: 'toggle', points: 1, description: 'Substantial = requiring inpatient admission or surgical intervention' },
+        { name: 'midline-tender', label: 'INTERMEDIATE \u2014 Midline neck tenderness', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'Derived and validated in 22,430 children aged 0-17 evaluated for blunt trauma at 18 PECARN EDs (Leonard 2024); CSI prevalence 1.9%. NO EXTERNAL VALIDATION YET \u2014 derivation and validation cohorts came from the same dataset. Do NOT apply to: penetrating-only trauma; children with predisposing conditions (trisomy 21, Klippel-Feil, achondroplasia, other congenital or acquired cervical spine anomalies); or suspected non-accidental trauma (not validated). Performance is lower when factors are assessed by EMS prehospital (sensitivity 88.5%). "Substantial" head or torso injury means injury requiring inpatient admission or surgical intervention. In the intermediate tier, plain radiographs \u2014 not CT \u2014 are the recommended first study. Not the same rule as PECARN head injury (Kuppermann 2009) or NEXUS. "Diving", "axial load", and "predisposing condition" appear in the 2011 case-control precursor and are NOT variables in the final 2024 rule.',
+    citations: [
+        'Leonard JC, Harding M, Cook LJ, et al. PECARN prediction rule for cervical spine imaging of children presenting to the emergency department with blunt trauma: a multicentre prospective observational study. Lancet Child Adolesc Health. 2024;8(7):482-490. PMID 38843852. (Erratum: Lancet Child Adolesc Health. 2024;8(12):e17) \u2014 derivation and validation',
+        'Leonard JC, Kuppermann N, Olsen C, et al. Factors associated with cervical spine injury in children after blunt trauma. Ann Emerg Med. 2011;58(2):145-155. PMID 21035905 \u2014 precursor case-control study (superseded)',
+        'Patel MB, Humble SS, Cullinane DC, et al. Cervical spine collar clearance in the obtunded adult blunt trauma patient: a systematic review and practice management guideline from EAST. J Trauma Acute Care Surg. 2015;78(2):430-441. PMID 25757133',
+    ],
+    computeResult: (values) => {
+        const high = [
+            ['gcs-3-8', 'GCS 3-8'],
+            ['unresponsive', 'Unresponsive on AVPU (U)'],
+            ['abc-abnormal', 'Abnormal airway, breathing, or circulation findings'],
+            ['focal-deficit', 'Focal neurologic deficit'],
+        ];
+        const inter = [
+            ['neck-pain', 'Neck pain'],
+            ['altered-ms', 'Altered mental status'],
+            ['substantial-head', 'Substantial head injury'],
+            ['substantial-torso', 'Substantial torso injury'],
+            ['midline-tender', 'Midline neck tenderness'],
+        ];
+        const highPresent = high.filter((f) => values[f[0]]).map((f) => f[1]);
+        const interPresent = inter.filter((f) => values[f[0]]).map((f) => f[1]);
+        let tier;
+        let risk;
+        let imaging;
+        let colorVar;
+        if (highPresent.length > 0) {
+            tier = 'HIGH RISK';
+            risk = '12.1';
+            imaging = '**CT cervical spine**';
+            colorVar = '--color-danger';
+        }
+        else if (interPresent.length > 0) {
+            tier = 'INTERMEDIATE RISK';
+            risk = '2.8';
+            imaging = '**Plain cervical radiographs** \u2014 CT only if the radiographs are abnormal or technically inadequate';
+            colorVar = '--color-warning';
+        }
+        else {
+            tier = 'LOW RISK';
+            risk = '0.2';
+            imaging = '**No imaging** \u2014 clinical clearance';
+            colorVar = '--color-primary';
+        }
+        let factors = '';
+        if (highPresent.length > 0) {
+            factors += '\u2022 **High risk:** ' + highPresent.join(', ') + '\n';
+        }
+        if (interPresent.length > 0) {
+            factors += '\u2022 **Intermediate:** ' + interPresent.join(', ') + '\n';
+        }
+        if (factors === '') {
+            factors = '\u2022 None selected \u2014 confirm you have assessed all nine variables before clearing the collar\n';
+        }
+        let body = '**PECARN C-SPINE RULE: ' + tier + '**\n\n';
+        body += '**CERVICAL SPINE INJURY RISK: ' + risk + '%**\n\n';
+        body += '**RECOMMENDED IMAGING**\n\u2022 ' + imaging + '\n\n';
+        body += '**FACTORS PRESENT**\n' + factors + '\n';
+        body += '**RULE PERFORMANCE**\n';
+        body += '\u2022 Sensitivity **94.3%** \u00b7 Specificity **60.4%** \u00b7 NPV **99.9%**\n';
+        body += '\u2022 Derived and validated in **22,430 children aged 0-17** at 18 PECARN emergency departments; 433 (1.9%) had cervical spine injury\n\n';
+        body += '**IMPORTANT**\n';
+        body += '\u2022 This is a **hierarchical rule, not a point score** \u2014 a single high-risk factor overrides any number of intermediate factors.\n';
+        body += '\u2022 Not the same as the PECARN head injury rule or NEXUS.\n';
+        body += '\u2022 No external validation yet \u2014 derivation and validation cohorts came from the same dataset.';
+        return {
+            value: tier === 'HIGH RISK' ? 'CT' : tier === 'INTERMEDIATE RISK' ? 'XR' : 'NO IMAGING',
+            label: tier + ' \u2014 CSI risk ' + risk + '%',
+            description: body,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// CAM-ICU — id: 'cam-icu'
+// Tree: organic-vs-psych.ts → ovp-elderly
+// RASS is a hard gate. Binary branching algorithm, not a score.
+// -------------------------------------------------------------------
+const CAM_ICU_CALCULATOR = {
+    id: 'cam-icu',
+    title: 'CAM-ICU',
+    subtitle: 'Confusion Assessment Method for the ICU \u2014 delirium screen',
+    description: 'Two-step delirium screen: RASS first, then four features. Delirium = Feature 1 AND Feature 2 AND (Feature 3 OR Feature 4). This is a screen, not a diagnosis, and it does not identify the etiology.',
+    fields: [
+        {
+            name: 'rass',
+            label: 'Step 1 \u2014 RASS (Richmond Agitation-Sedation Scale)',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select RASS \u2014', points: 0 },
+                { label: '+4 Combative', points: 1 },
+                { label: '+3 Very agitated', points: 2 },
+                { label: '+2 Agitated', points: 3 },
+                { label: '+1 Restless', points: 4 },
+                { label: '0 Alert and calm', points: 5 },
+                { label: '-1 Drowsy', points: 6 },
+                { label: '-2 Light sedation', points: 7 },
+                { label: '-3 Moderate sedation', points: 8 },
+                { label: '-4 Deep sedation', points: 9 },
+                { label: '-5 Unarousable', points: 10 },
+            ],
+        },
+        {
+            name: 'feature1',
+            label: 'Feature 1 \u2014 Acute change OR fluctuating course of mental status',
+            type: 'toggle',
+            points: 1,
+            description: 'Acute change from baseline, OR fluctuation over the past 24 h (including fluctuating RASS or GCS)',
+        },
+        {
+            name: 'feature2',
+            label: 'Feature 2 \u2014 Inattention',
+            type: 'toggle',
+            points: 1,
+            description: 'Attention Screening Exam: read 10 letters "S-A-V-E-A-H-A-A-R-T"; patient squeezes on each A. POSITIVE if fewer than 8 of 10 correct.',
+        },
+        {
+            name: 'feature3',
+            label: 'Feature 3 \u2014 Altered level of consciousness',
+            type: 'toggle',
+            points: 1,
+            description: 'Current RASS anything other than 0',
+        },
+        {
+            name: 'feature4',
+            label: 'Feature 4 \u2014 Disorganized thinking',
+            type: 'toggle',
+            points: 1,
+            description: '4 yes/no questions plus a 2-step command. POSITIVE if more than 1 error. Q: Will a stone float on water? Are there fish in the sea? Does 1 pound weigh more than 2? Can you use a hammer to pound a nail? Command: hold up 2 fingers, now do the same with the other hand.',
+        },
+    ],
+    results: [],
+    thresholdNote: 'Derived and validated in MECHANICALLY VENTILATED ADULT ICU PATIENTS (Ely 2001, n=96 with n=38 validation). NOT validated in the general emergency department population \u2014 the ED-validated adaptation is the bCAM (Brief CAM, Han et al.), which Geriatric ED Guidelines 2.0 lists alongside 4AT, mCAM, AMT-4 and RASS as acceptable ED screens. RASS must be assessed FIRST: at RASS -4 or -5 the patient is unassessable and the result is INDETERMINATE, not negative. Delirium is missed in roughly 76% of elderly ED patients without systematic screening (Han 2009). Delirium prevalence in older ED patients is 8-17% (pooled ~15%; up to 40% from nursing homes) \u2014 not the frequently quoted 20-30%. CAM-ICU is a screen, not a diagnosis; a negative screen does not exclude delirium and it does not identify the cause.',
+    citations: [
+        'Ely EW, Inouye SK, Bernard GR, et al. Delirium in mechanically ventilated patients: validity and reliability of the Confusion Assessment Method for the Intensive Care Unit (CAM-ICU). JAMA. 2001;286(21):2703-2710. PMID 11730446 \u2014 derivation and validation',
+        'Ely EW, Margolin R, Francis J, et al. Evaluation of delirium in critically ill patients: validation of the CAM-ICU. Crit Care Med. 2001;29(7):1370-1379. PMID 11445689 \u2014 companion validation',
+        'Sessler CN, Gosnell MS, Grap MJ, et al. The Richmond Agitation-Sedation Scale: validity and reliability in adult intensive care unit patients. Am J Respir Crit Care Med. 2002;166(10):1338-1344. PMID 12421743 \u2014 RASS',
+        'Inouye SK, van Dyck CH, Alessi CA, et al. Clarifying confusion: the Confusion Assessment Method. Ann Intern Med. 1990;113(12):941-948. PMID 2240918 \u2014 parent CAM',
+        'Han JH, Wilson A, Vasilevskis EE, et al. Diagnosing delirium in older emergency department patients: validity and reliability of the delirium triage screen and the brief confusion assessment method. Ann Emerg Med. 2013;62(5):457-465. PMID 23916018 \u2014 bCAM, the ED-validated variant',
+        'Lee S, Carpenter CR, Han JH, et al. Geriatric Emergency Department Guidelines 2.0. Acad Emerg Med. 2026. PMID 41146403. doi:10.1111/acem.70167',
+        'Carpenter CR, et al. Delirium detection in the emergency department: diagnostic accuracy meta-analysis. Acad Emerg Med. 2024;31(5):488-506. doi:10.1111/acem.14935',
+    ],
+    computeResult: (values) => {
+        const rass = values['rass'] || 0;
+        const f1 = !!values['feature1'];
+        const f2 = !!values['feature2'];
+        const f3 = !!values['feature3'];
+        const f4 = !!values['feature4'];
+        const rassLabels = ['', '+4 Combative', '+3 Very agitated', '+2 Agitated', '+1 Restless', '0 Alert and calm', '-1 Drowsy', '-2 Light sedation', '-3 Moderate sedation', '-4 Deep sedation', '-5 Unarousable'];
+        if (rass === 0) {
+            return {
+                value: '\u2014',
+                label: 'Assess RASS first',
+                description: '**CAM-ICU**\n\n**RASS IS A HARD GATE.** Score the Richmond Agitation-Sedation Scale before assessing any feature.\n\n\u2022 **RASS -4 or -5** \u2192 the patient is unassessable. The result is **indeterminate, not negative**. Reassess later.\n\u2022 **RASS \u2265 -3** \u2192 proceed to Features 1-4.\n\n**ED NOTE**\n\u2022 CAM-ICU was validated in mechanically ventilated ICU patients. The **ED-validated variant is the bCAM** (Han 2013).',
+                colorVar: '--color-text-muted',
+            };
+        }
+        if (rass >= 9) {
+            return {
+                value: 'UNABLE',
+                label: 'UNABLE TO ASSESS \u2014 reassess when RASS \u2265 -3',
+                description: '**CAM-ICU: UNABLE TO ASSESS**\n\n**RASS: ' + rassLabels[rass] + '**\n\nThe patient is too deeply sedated or unarousable to complete the attention and thinking assessments.\n\n**THIS IS NOT A NEGATIVE SCREEN.** It is an indeterminate result.\n\n**NEXT STEPS**\n\u2022 Reassess when RASS improves to -3 or better\n\u2022 Review sedating medications and consider whether sedation is contributing\n\u2022 Continue to search for a medical cause of the depressed level of consciousness',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const positive = f1 && f2 && (f3 || f4);
+        const yn = (b) => (b ? 'present' : 'absent');
+        let body = '**CAM-ICU: ' + (positive ? 'POSITIVE' : 'NEGATIVE') + '**\n\n';
+        body += '**RASS: ' + rassLabels[rass] + '**\n\n';
+        body += '**FEATURES**\n';
+        body += '\u2022 Feature 1 (acute change / fluctuating course): ' + yn(f1) + '\n';
+        body += '\u2022 Feature 2 (inattention): ' + yn(f2) + '\n';
+        body += '\u2022 Feature 3 (altered LOC): ' + yn(f3) + '\n';
+        body += '\u2022 Feature 4 (disorganized thinking): ' + yn(f4) + '\n\n';
+        body += '**ALGORITHM**\n';
+        body += '\u2022 Delirium = **Feature 1 AND Feature 2 AND (Feature 3 OR Feature 4)**\n\n';
+        if (positive) {
+            body += '**NEXT STEPS**\n';
+            body += '\u2022 Search for the medical cause \u2014 **delirium is a symptom, not a diagnosis**\n';
+            body += '\u2022 Review medications, infection, metabolic derangement, hypoxia, urinary retention, pain\n';
+            body += '\u2022 Non-pharmacologic measures first; avoid new anticholinergics and benzodiazepines except in withdrawal, sympathomimetic toxicity, or catatonia\n\n';
+        }
+        else {
+            body += '**A NEGATIVE SCREEN IS NOT REASSURANCE**\n';
+            body += '\u2022 Delirium fluctuates \u2014 a single negative screen does not exclude it. Re-screen if the picture changes.\n';
+            body += '\u2022 Hypoactive delirium is the most commonly missed subtype.\n\n';
+        }
+        if (rass !== 5 && !f3) {
+            body += '**CHECK**\n\u2022 RASS is ' + rassLabels[rass] + ', which is not 0 \u2014 Feature 3 (altered level of consciousness) is by definition **present**. Confirm the Feature 3 toggle.\n\n';
+        }
+        body += '**PERFORMANCE**\n';
+        body += '\u2022 Sensitivity **93-100%**, specificity **89-100%** vs. reference-standard psychiatric evaluation\n';
+        body += '\u2022 Validated in mechanically ventilated ICU patients \u2014 the **ED-validated variant is the bCAM** (Han 2013)';
+        return {
+            value: positive ? 'POSITIVE' : 'NEGATIVE',
+            label: positive ? 'CAM-ICU POSITIVE \u2014 DELIRIUM PRESENT' : 'CAM-ICU NEGATIVE \u2014 criteria not met',
+            description: body,
+            colorVar: positive ? '--color-danger' : '--color-primary',
+        };
+    },
+};
+// -------------------------------------------------------------------
+// Schaefer-Fuhrman Classification — id: 'schaefer-fuhrman'
+// Tree: laryngeal-trauma.ts → larynx-start
+// Descriptive anatomic classification. NOT a score.
+// -------------------------------------------------------------------
+const SCHAEFER_FUHRMAN_CALCULATOR = {
+    id: 'schaefer-fuhrman',
+    title: 'Schaefer-Fuhrman Classification',
+    subtitle: 'External laryngeal trauma severity \u2014 classification, not a score',
+    description: 'Descriptive anatomic classification of external laryngeal trauma severity. Groups I-IV are Schaefer; Group V was added by Fuhrman. Accurate grading requires laryngoscopic or endoscopic visualization plus CT.',
+    fields: [
+        {
+            name: 'grade',
+            label: 'Laryngeal injury findings',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select injury findings \u2014', points: 0 },
+                { label: 'Group I \u2014 Minor endolaryngeal hematoma or laceration, no detectable fracture', points: 1 },
+                { label: 'Group II \u2014 Edema, hematoma, minor mucosal disruption without exposed cartilage; nondisplaced fracture', points: 2 },
+                { label: 'Group III \u2014 Massive edema, large mucosal lacerations, exposed cartilage, displaced fractures, vocal cord immobility', points: 3 },
+                { label: 'Group IV \u2014 Group III plus more than 2 fracture lines or massive mucosal trauma; anterior commissure involved', points: 4 },
+                { label: 'Group V \u2014 Complete laryngotracheal separation', points: 5 },
+            ],
+        },
+    ],
+    results: [],
+    thresholdNote: 'Descriptive classification of external laryngeal trauma severity. Groups I-IV derive from Schaefer\u2019s single-institution series (139 patients over 27 years at a tertiary otolaryngology referral center); GROUP V WAS ADDED SEPARATELY BY FUHRMAN 1990 and is frequently mis-cited to Schaefer. This is not a validated prediction score \u2014 no derivation cohort, no sensitivity or specificity, no external validation. Accurate grading requires direct laryngoscopic or endoscopic visualization plus CT; a purely external ED assessment cannot reliably assign a group. Applies to blunt and penetrating external laryngeal trauma; not for post-intubation injury, caustic injury, or thermal airway injury. A 2025 Laryngoscope series suggests some Group III+ penetrating injuries do well without ORIF \u2014 this does not change current operative recommendations.',
+    citations: [
+        'Schaefer SD. The acute management of external laryngeal trauma: a 27-year experience. Arch Otolaryngol Head Neck Surg. 1992;118(6):598-604. PMID 1637537 \u2014 Groups I-IV',
+        'Schaefer SD. Primary management of laryngeal trauma. Ann Otol Rhinol Laryngol. 1982;91(4 Pt 1):399-402. PMID 7114716 \u2014 original series',
+        'Fuhrman GM, Stieg FH 3rd, Buerk CA. Blunt laryngeal trauma: classification and management protocol. J Trauma. 1990;30(1):87-92. PMID 2296073 \u2014 Group V',
+        'Jewett BS, Shockley WW, Rutledge R. External laryngeal trauma analysis of 392 patients. Arch Otolaryngol Head Neck Surg. 1999;125(8):877-880. PMID 10448735',
+    ],
+    computeResult: (values) => {
+        const grade = values['grade'] || 0;
+        if (grade === 0) {
+            return {
+                value: '\u2014',
+                label: 'Select the injury findings',
+                description: '**SCHAEFER-FUHRMAN CLASSIFICATION**\n\nSelect the laryngeal injury findings to see management.\n\n**AIRWAY \u2014 READ FIRST**\n\u2022 **RSI is contraindicated in significant laryngeal trauma.** Blind orotracheal intubation risks completing a partial transection and retracting the distal trachea into the thorax.\n\u2022 Preferred: **awake tracheostomy under local anesthesia**.\n\n**NOTE**\n\u2022 Schaefer-Fuhrman is a **descriptive anatomic classification, not a point score**.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const data = {
+            1: {
+                roman: 'I',
+                descriptor: 'Minor endolaryngeal hematoma or laceration, no detectable fracture',
+                mgmt: [
+                    'Observation, humidified air, voice rest, head-of-bed elevation',
+                    'Serial flexible laryngoscopy',
+                    'Airway observation 24-48 h',
+                    '**Approximately 52% of laryngeal injuries fall in this group.**',
+                ],
+                colorVar: '--color-primary',
+            },
+            2: {
+                roman: 'II',
+                descriptor: 'Edema, hematoma, minor mucosal disruption without exposed cartilage; nondisplaced fracture',
+                mgmt: [
+                    '**Dexamethasone 10 mg IV q8h**, nebulized steroids',
+                    'Humidified air, voice rest, serial flexible laryngoscopy',
+                    'ICU observation 24-48 h',
+                    'Direct laryngoscopy and esophagoscopy to fully evaluate',
+                    '**Approximately 37-45% of laryngeal injuries fall in this group.**',
+                ],
+                colorVar: '--color-warning',
+            },
+            3: {
+                roman: 'III',
+                descriptor: 'Massive edema, large mucosal lacerations, exposed cartilage, displaced fractures, vocal cord immobility',
+                mgmt: [
+                    '**Tracheostomy**',
+                    '**Operative exploration and repair within 24-48 h**',
+                ],
+                colorVar: '--color-danger',
+            },
+            4: {
+                roman: 'IV',
+                descriptor: 'Group III plus more than 2 fracture lines or massive laryngeal mucosal trauma; anterior commissure involved',
+                mgmt: [
+                    '**Tracheostomy**',
+                    '**Open repair; a stent is commonly required** because the anterior commissure is involved',
+                ],
+                colorVar: '--color-danger',
+            },
+            5: {
+                roman: 'V',
+                descriptor: 'Complete laryngotracheal separation',
+                mgmt: [
+                    '**IMMEDIATE SURGICAL AIRWAY**',
+                    '**RSI IS CONTRAINDICATED** \u2014 intubation may complete the transection and allow the distal trachea to retract into the thorax',
+                ],
+                colorVar: '--color-danger',
+            },
+        };
+        const d = data[grade];
+        let body = '**SCHAEFER-FUHRMAN GROUP ' + d.roman + '**\n\n';
+        body += '**' + d.descriptor + '**\n\n';
+        body += '**MANAGEMENT**\n';
+        for (const m of d.mgmt)
+            body += '\u2022 ' + m + '\n';
+        body += '\n**AIRWAY**\n';
+        body += '\u2022 **RSI is contraindicated in significant laryngeal trauma.** Blind orotracheal intubation risks completing a partial transection and retracting the distal trachea into the thorax.\n';
+        body += '\u2022 Preferred: **awake tracheostomy under local anesthesia**.\n';
+        body += '\u2022 Intubation is acceptable ONLY if the larynx is intact and in continuity, directly visualized endoscopically, by an experienced operator, with a surgical airway immediately available.\n\n';
+        body += '**OUTCOMES BY TIMING**\n';
+        body += '\u2022 Repair within 24-48 h: **58% good voice, 87% good airway**\n';
+        body += '\u2022 Delayed repair: **22% good voice, 55% good airway**\n\n';
+        body += '**ASSOCIATED INJURIES**\n';
+        body += '\u2022 Intracranial 13-15% \u00b7 Skull base or facial fracture 21% \u00b7 **C-spine fracture 8%** \u00b7 Esophageal or pharyngeal 3%\n';
+        body += '\u2022 Hoarseness is the most common sign (**85%**)\n\n';
+        body += '**NOTE**\n';
+        body += '\u2022 Schaefer-Fuhrman is a **descriptive anatomic classification, not a point score**. Groups I-IV are Schaefer 1992; **Group V was added by Fuhrman 1990.**';
+        return {
+            value: 'GROUP ' + d.roman,
+            label: 'Schaefer-Fuhrman Group ' + d.roman,
+            description: body,
+            colorVar: d.colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// CDC PID Diagnostic Criteria — id: 'pid-criteria'
+// Tree: pid.ts → pid-start
+// CRITERIA CHECKLIST. No points. No total. Never summed.
+// -------------------------------------------------------------------
+const PID_CRITERIA_CALCULATOR = {
+    id: 'pid-criteria',
+    title: 'CDC PID Criteria',
+    subtitle: 'Pelvic inflammatory disease \u2014 diagnostic criteria, not a score',
+    description: 'CDC 2021 STI Treatment Guidelines diagnostic criteria for pelvic inflammatory disease. There is no total and no cut-point. Additional criteria raise specificity; they are not required for treatment.',
+    fields: [
+        { name: 'sexually-active', label: 'MINIMUM \u2014 Sexually active young woman or woman at risk for STI', type: 'toggle', points: 1 },
+        { name: 'pelvic-pain', label: 'MINIMUM \u2014 Pelvic or lower abdominal pain', type: 'toggle', points: 1 },
+        { name: 'no-other-cause', label: 'MINIMUM \u2014 No other cause identified for the illness', type: 'toggle', points: 1 },
+        { name: 'cmt', label: 'MINIMUM \u2014 Cervical motion tenderness', type: 'toggle', points: 1, description: 'At least one of the three tenderness findings is required' },
+        { name: 'uterine-tender', label: 'MINIMUM \u2014 Uterine tenderness', type: 'toggle', points: 1, description: 'At least one of the three tenderness findings is required' },
+        { name: 'adnexal-tender', label: 'MINIMUM \u2014 Adnexal tenderness', type: 'toggle', points: 1, description: 'At least one of the three tenderness findings is required' },
+        { name: 'fever', label: 'ADDITIONAL \u2014 Oral temperature >101\u00b0F (>38.3\u00b0C)', type: 'toggle', points: 1 },
+        { name: 'cervical-dc', label: 'ADDITIONAL \u2014 Mucopurulent cervical or vaginal discharge, or cervical friability', type: 'toggle', points: 1 },
+        { name: 'wbc-microscopy', label: 'ADDITIONAL \u2014 Abundant WBC on saline microscopy of vaginal fluid', type: 'toggle', points: 1 },
+        { name: 'esr', label: 'ADDITIONAL \u2014 Elevated ESR', type: 'toggle', points: 1 },
+        { name: 'crp', label: 'ADDITIONAL \u2014 Elevated C-reactive protein', type: 'toggle', points: 1 },
+        { name: 'gc-ct', label: 'ADDITIONAL \u2014 Lab documentation of cervical N. gonorrhoeae or C. trachomatis', type: 'toggle', points: 1 },
+        { name: 'endometrial-bx', label: 'DEFINITIVE \u2014 Endometrial biopsy with histopathologic endometritis', type: 'toggle', points: 1 },
+        { name: 'imaging', label: 'DEFINITIVE \u2014 TVUS or MRI showing thickened fluid-filled tubes, or tubo-ovarian complex', type: 'toggle', points: 1, description: 'With or without free pelvic fluid; or Doppler suggesting pelvic infection' },
+        { name: 'laparoscopy', label: 'DEFINITIVE \u2014 Laparoscopic findings consistent with PID', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'CDC 2021 STI Treatment Guidelines criteria (Workowski 2021, MMWR Recomm Rep 70(4):1-187) \u2014 still current; no replacement published. THESE ARE DIAGNOSTIC CRITERIA, NOT A VALIDATED POINT SCORE; there is no total and no threshold. CDC deliberately sets a LOW diagnostic threshold because the sequelae of missed PID are severe. Minimum criteria alone have sensitivity of roughly 65% versus laparoscopic diagnosis \u2014 a negative checklist does not exclude PID. Do not apply this checklist to: pregnant patients with abdominal pain (rule out ectopic first \u2014 pregnancy test on every patient), postmenopausal women, or patients with an alternative surgical diagnosis (appendicitis, ovarian torsion, ruptured ovarian cyst). Absence of cervical discharge together with absence of WBC on wet mount makes PID unlikely and should prompt a search for other causes, but does not exclude it.',
+    citations: [
+        'Workowski KA, Bachmann LH, Chan PA, et al. Sexually Transmitted Infections Treatment Guidelines, 2021. MMWR Recomm Rep. 2021;70(4):1-187. PMID 34292926. doi:10.15585/mmwr.rr7004a1 \u2014 current criteria and treatment',
+        'Peipert JF, Ness RB, Blume J, et al. Clinical predictors of endometritis in women with symptoms and signs of pelvic inflammatory disease. Am J Obstet Gynecol. 2001;184(5):856-864. PMID 11303192 \u2014 sensitivity and specificity of clinical criteria',
+        'Ness RB, Soper DE, Holley RL, et al. Effectiveness of inpatient and outpatient treatment strategies for women with pelvic inflammatory disease: results from the PEACH randomized trial. Am J Obstet Gynecol. 2002;186(5):929-937. PMID 12015517',
+    ],
+    computeResult: (values) => {
+        const gate = !!values['sexually-active'] && !!values['pelvic-pain'] && !!values['no-other-cause'];
+        const tenderness = [
+            ['cmt', 'Cervical motion tenderness'],
+            ['uterine-tender', 'Uterine tenderness'],
+            ['adnexal-tender', 'Adnexal tenderness'],
+        ];
+        const tenderPresent = tenderness.filter((f) => values[f[0]]).map((f) => f[1]);
+        const additional = [
+            ['fever', 'Oral temperature >101\u00b0F'],
+            ['cervical-dc', 'Mucopurulent cervical/vaginal discharge or friability'],
+            ['wbc-microscopy', 'Abundant WBC on saline microscopy'],
+            ['esr', 'Elevated ESR'],
+            ['crp', 'Elevated CRP'],
+            ['gc-ct', 'Documented cervical gonorrhea or chlamydia'],
+        ];
+        const addPresent = additional.filter((f) => values[f[0]]).map((f) => f[1]);
+        const definitive = [
+            ['endometrial-bx', 'Endometrial biopsy with endometritis'],
+            ['imaging', 'TVUS/MRI findings of PID or tubo-ovarian complex'],
+            ['laparoscopy', 'Laparoscopic findings consistent with PID'],
+        ];
+        const defPresent = definitive.filter((f) => values[f[0]]).map((f) => f[1]);
+        const minimumMet = gate && tenderPresent.length > 0;
+        let status;
+        let label;
+        let colorVar;
+        if (defPresent.length > 0) {
+            status = 'DEFINITIVE PID';
+            label = 'DEFINITIVE PID \u2014 treat';
+            colorVar = '--color-danger';
+        }
+        else if (minimumMet && addPresent.length > 0) {
+            status = 'PID \u2014 MINIMUM CRITERIA MET';
+            label = 'Minimum criteria met, specificity enhanced \u2014 treat empirically';
+            colorVar = '--color-warning';
+        }
+        else if (minimumMet) {
+            status = 'PID \u2014 MINIMUM CRITERIA MET';
+            label = 'Minimum criteria met \u2014 TREAT EMPIRICALLY';
+            colorVar = '--color-warning';
+        }
+        else {
+            status = 'MINIMUM CRITERIA NOT MET';
+            label = 'Minimum criteria not met \u2014 this does not exclude PID';
+            colorVar = '--color-text-muted';
+        }
+        let minLine;
+        if (minimumMet) {
+            minLine = '\u2022 **Met** \u2014 tenderness findings present: ' + tenderPresent.join(', ');
+        }
+        else if (gate && tenderPresent.length === 0) {
+            minLine = '\u2022 **Not met** \u2014 the three gate items are present but no pelvic tenderness finding is selected. At least one of cervical motion, uterine, or adnexal tenderness is required.';
+        }
+        else {
+            const missing = [];
+            if (!values['sexually-active'])
+                missing.push('at risk for STI');
+            if (!values['pelvic-pain'])
+                missing.push('pelvic/lower abdominal pain');
+            if (!values['no-other-cause'])
+                missing.push('no other cause identified');
+            minLine = '\u2022 **Not met** \u2014 missing: ' + missing.join(', ') + (tenderPresent.length === 0 ? '; and no pelvic tenderness finding' : '');
+        }
+        let body = '**CDC PID CRITERIA: ' + status + '**\n\n';
+        body += '**MINIMUM CRITERIA**\n' + minLine + '\n\n';
+        body += '**ADDITIONAL CRITERIA PRESENT: ' + addPresent.length + '/6**\n';
+        body += addPresent.length > 0 ? '\u2022 ' + addPresent.join('\n\u2022 ') + '\n\n' : '\u2022 None\n\n';
+        body += '**DEFINITIVE CRITERIA PRESENT: ' + defPresent.length + '/3**\n';
+        body += defPresent.length > 0 ? '\u2022 ' + defPresent.join('\n\u2022 ') + '\n\n' : '\u2022 None\n\n';
+        body += '**ACTION**\n';
+        body += '\u2022 **Treat empirically once minimum criteria are met.** CDC explicitly favors a low diagnostic threshold \u2014 the consequences of missed PID (infertility, ectopic pregnancy, chronic pelvic pain) outweigh the cost of empiric treatment.\n';
+        body += '\u2022 Test for gonorrhea, chlamydia, HIV, syphilis, and trichomonas.\n';
+        body += '\u2022 **Pregnancy test on every patient.**\n';
+        body += '\u2022 Consider imaging for tubo-ovarian abscess if there is an adnexal mass, severe illness, or failure to improve at 72 h.\n\n';
+        body += '**NOTE**\n';
+        body += '\u2022 These are **diagnostic criteria, not a score**. There is no total and no cut-point. Additional criteria raise specificity; they are not required for treatment.\n';
+        body += '\u2022 Sensitivity of the minimum criteria alone is approximately **65%** \u2014 **a checklist that does not trigger does not exclude PID.** Do not withhold treatment if clinical suspicion remains high.';
+        return {
+            value: defPresent.length > 0 ? 'DEFINITIVE' : minimumMet ? 'MET' : 'NOT MET',
+            label,
+            description: body,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// OHSS Thromboprophylaxis Criteria — id: 'ohss-vte'
+// Tree: ohss.ts → ohss-start
+// NOT A SCORE. No validated VTE risk score exists for OHSS.
+// Guideline-derived criteria (RCOG Green-top 5, consensus Grade C).
+// -------------------------------------------------------------------
+const OHSS_VTE_CALCULATOR = {
+    id: 'ohss-vte',
+    title: 'OHSS Thromboprophylaxis Criteria',
+    subtitle: 'Guideline-derived criteria \u2014 there is no validated VTE score for OHSS',
+    description: 'RCOG Green-top Guideline No. 5 thromboprophylaxis criteria for ovarian hyperstimulation syndrome. RCOG states explicitly that no comparative studies exist and grades the recommendation as consensus (Grade C). This is a criteria checklist, not a score \u2014 there is no total and no cut-point.',
+    fields: [
+        { name: 'severe-critical-ohss', label: 'PRIMARY \u2014 Severe or critical OHSS', type: 'toggle', points: 1 },
+        { name: 'admitted', label: 'PRIMARY \u2014 OHSS requiring hospital admission', type: 'toggle', points: 1 },
+        { name: 'outpatient-severe', label: 'PRIMARY \u2014 Outpatient severe OHSS', type: 'toggle', points: 1 },
+        { name: 'pregnancy', label: 'MODIFIER \u2014 Conception achieved / pregnancy ongoing', type: 'toggle', points: 1 },
+        { name: 'reduced-mobility', label: 'MODIFIER \u2014 Reduced mobility or bed rest', type: 'toggle', points: 1 },
+        { name: 'thrombophilia', label: 'MODIFIER \u2014 Known thrombophilia or personal/family history of VTE', type: 'toggle', points: 1 },
+        { name: 'hemoconcentration', label: 'MODIFIER \u2014 Hct >45% or WBC >15,000', type: 'toggle', points: 1 },
+        { name: 'obesity', label: 'MODIFIER \u2014 BMI >30', type: 'toggle', points: 1 },
+        { name: 'age-35', label: 'MODIFIER \u2014 Age >35', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'NOT A VALIDATED SCORE. These are guideline-derived criteria from RCOG Green-top Guideline No. 5 and ASRM; RCOG states explicitly that no comparative studies of thromboprophylaxis strategies in OHSS exist and grades the recommendation as consensus (Grade C). There is no derivation cohort, no AUC, and no validated cut-point. Applies to women with OHSS following controlled ovarian stimulation; not derived or validated in any other population. ASRM\u2019s 2024 document is prevention-only and dropped the treatment component \u2014 treatment-phase anticoagulation guidance traces to ASRM 2016. Thrombosis in OHSS characteristically involves UPPER-BODY veins (internal jugular, subclavian, axillary) and may present days to weeks after the acute phase; a negative lower-extremity study does not exclude it. Diuretics are contraindicated in the hemoconcentrated, volume-depleted patient. Do not use in place of formal obstetric risk assessment once pregnancy is established \u2014 use RCOG GTG 37a.',
+    citations: [
+        'Royal College of Obstetricians and Gynaecologists. Green-top Guideline No. 5: The Management of Ovarian Hyperstimulation Syndrome. (Current iteration: Hamoda H, et al. BJOG. 2026. doi:10.1111/1471-0528.70195) \u2014 thromboprophylaxis criteria, Grade C consensus',
+        'Practice Committee of the American Society for Reproductive Medicine. Prevention of moderate and severe ovarian hyperstimulation syndrome: a guideline. Fertil Steril. 2024;121(2):230-245. PMID 38099867 \u2014 prevention only',
+        'Practice Committee of ASRM. Prevention and treatment of moderate and severe ovarian hyperstimulation syndrome: a guideline. Fertil Steril. 2016;106(7):1634-1647. PMID 27678032 \u2014 treatment-phase anticoagulation',
+        'Rova K, Passmark H, Lindqvist PG. Venous thromboembolism in relation to in vitro fertilization: an approach to determining the incidence and increase in risk in successful cycles. Fertil Steril. 2012;97(1):95-100. PMID 22118992 \u2014 the 0.2 / 0.8 / 16.8 per 1,000 figures',
+        'Royal College of Obstetricians and Gynaecologists. Green-top Guideline No. 37a: Reducing the Risk of Venous Thromboembolism during Pregnancy and the Puerperium \u2014 the only scored tool that assigns OHSS points',
+    ],
+    computeResult: (values) => {
+        const primary = [
+            ['severe-critical-ohss', 'Severe or critical OHSS'],
+            ['admitted', 'OHSS requiring hospital admission'],
+            ['outpatient-severe', 'Outpatient severe OHSS'],
+        ];
+        const modifiers = [
+            ['pregnancy', 'Conception achieved / pregnancy ongoing'],
+            ['reduced-mobility', 'Reduced mobility or bed rest'],
+            ['thrombophilia', 'Known thrombophilia or personal/family history of VTE'],
+            ['hemoconcentration', 'Hct >45% or WBC >15,000'],
+            ['obesity', 'BMI >30'],
+            ['age-35', 'Age >35'],
+        ];
+        const primPresent = primary.filter((f) => values[f[0]]).map((f) => f[1]);
+        const modPresent = modifiers.filter((f) => values[f[0]]).map((f) => f[1]);
+        let status;
+        let label;
+        let colorVar;
+        if (primPresent.length > 0) {
+            status = 'INDICATED';
+            label = 'THROMBOPROPHYLAXIS INDICATED';
+            colorVar = '--color-danger';
+        }
+        else if (modPresent.length >= 2) {
+            status = 'CONSIDER';
+            label = 'CONSIDER THROMBOPROPHYLAXIS \u2014 individualize';
+            colorVar = '--color-warning';
+        }
+        else {
+            status = 'NOT ROUTINELY INDICATED';
+            label = 'Routine prophylaxis not indicated \u2014 reassess if OHSS worsens or pregnancy is confirmed';
+            colorVar = '--color-primary';
+        }
+        let body = '**OHSS THROMBOPROPHYLAXIS: ' + status + '**\n\n';
+        body += '**CRITERIA PRESENT**\n';
+        body += primPresent.length > 0 ? '\u2022 **Primary trigger:** ' + primPresent.join(', ') + '\n' : '\u2022 No primary trigger\n';
+        body += modPresent.length > 0 ? '\u2022 **Modifiers (' + modPresent.length + '):** ' + modPresent.join(', ') + '\n\n' : '\u2022 No additional modifiers\n\n';
+        body += '**REGIMEN**\n';
+        body += '\u2022 **Enoxaparin 40 mg SC daily** (LMWH), dose-adjusted for weight and renal function\n';
+        body += '\u2022 **NO diuretics** in the hemoconcentrated, intravascularly depleted patient \u2014 they worsen depletion and thrombosis risk\n\n';
+        body += '**DURATION**\n';
+        body += '\u2022 Continue while OHSS features and hemoconcentration persist\n';
+        body += '\u2022 **If conception occurs: continue at least through the end of the first trimester** \u2014 the majority of OHSS-associated VTE events occur in that window\n';
+        body += '\u2022 Individualize beyond that per RCOG GTG 37a obstetric risk assessment\n\n';
+        body += '**MAGNITUDE OF RISK** (Swedish national registry, n=964,532 births including 19,162 IVF)\n';
+        body += '\u2022 First-trimester VTE, non-IVF pregnancy: **0.2 per 1,000**\n';
+        body += '\u2022 IVF pregnancy without OHSS: **0.8 per 1,000** (OR 4.8, 95% CI 2.7-8.7)\n';
+        body += '\u2022 **IVF pregnancy with OHSS: 16.8 per 1,000** (OR 99.7, 95% CI 61.6-161.1)\n\n';
+        body += '**IMPORTANT**\n';
+        body += '\u2022 **There is no validated VTE risk score for OHSS.** RCOG Green-top Guideline No. 5 states that no comparative studies exist; the recommendation is consensus, Grade C.\n';
+        body += '\u2022 Thrombosis in OHSS is characteristically **upper-body** \u2014 internal jugular, subclavian, axillary. **A normal lower-extremity Doppler does not exclude it.**\n';
+        body += '\u2022 Arterial events also occur and are not prevented by prophylactic LMWH.';
+        return {
+            value: status === 'INDICATED' ? 'YES' : status === 'CONSIDER' ? 'CONSIDER' : 'NO',
+            label,
+            description: body,
+            colorVar,
+        };
+    },
+};
+// -------------------------------------------------------------------
+// GI Foreign Body Triage — id: 'gifb-object-risk'
+// Tree: gi-foreign-body.ts → gifb-start
+// ESGE 2016 / ASGE timing categories. Guideline consensus, NOT a score.
+// -------------------------------------------------------------------
+const GIFB_OBJECT_RISK_CALCULATOR = {
+    id: 'gifb-object-risk',
+    title: 'GI Foreign Body Triage',
+    subtitle: 'ESGE endoscopy timing categories \u2014 guideline consensus, not a score',
+    description: 'Endoscopy timing triage for ingested foreign bodies based on object type and location. These are guideline consensus categories \u2014 there is no derivation cohort and no predictive statistic.',
+    fields: [
+        {
+            name: 'object-type',
+            label: 'Object type',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select object type \u2014', points: 0 },
+                { label: 'Button/disc battery', points: 1 },
+                { label: 'Sharp-pointed object (bone, needle, blade, toothpick)', points: 2 },
+                { label: 'Multiple magnets, or single magnet + metal', points: 3 },
+                { label: 'Food bolus / blunt object', points: 4 },
+                { label: 'Long object (>5-6 cm)', points: 5 },
+                { label: 'Large object (>2-2.5 cm diameter)', points: 6 },
+                { label: 'Narcotic packet (body packer)', points: 7 },
+            ],
+        },
+        {
+            name: 'location',
+            label: 'Location on imaging',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select location \u2014', points: 0 },
+                { label: 'Esophagus', points: 1 },
+                { label: 'Stomach', points: 2 },
+                { label: 'Beyond the pylorus (duodenum or distal)', points: 3 },
+            ],
+        },
+        {
+            name: 'complete-obstruction',
+            label: 'Complete esophageal obstruction',
+            type: 'toggle',
+            points: 1,
+            description: 'Drooling, unable to handle secretions',
+        },
+        {
+            name: 'symptomatic',
+            label: 'Symptomatic',
+            type: 'toggle',
+            points: 1,
+            description: 'Pain, vomiting, fever, GI bleeding, or peritoneal signs',
+        },
+    ],
+    results: [],
+    thresholdNote: 'ESGE 2016 and ASGE timing categories are GUIDELINE CONSENSUS RECOMMENDATIONS, NOT A VALIDATED RISK SCORE \u2014 there is no derivation cohort and no predictive statistic. Pediatric thresholds differ from adult: gastric button batteries are removed if \u226520 mm diameter OR age <5 years OR symptomatic; smaller batteries in asymptomatic children \u22655 may be observed with a repeat radiograph at 48 h. Honey and sucralfate are BRIDGING AGENTS ONLY \u2014 they must never delay emergent endoscopy, and honey is contraindicated below 12 months of age (infant botulism). Do not apply the observation pathway to any battery or to multiple magnets regardless of size or symptoms. Body packers require a separate protocol \u2014 endoscopic retrieval is contraindicated because of packet rupture risk.',
+    citations: [
+        'Birk M, Bauerfeind P, Deprez PH, et al. Removal of foreign bodies in the upper gastrointestinal tract in adults: European Society of Gastrointestinal Endoscopy (ESGE) Clinical Guideline. Endoscopy. 2016;48(5):489-496. PMID 26862844. doi:10.1055/s-0042-100456 \u2014 current ESGE guideline',
+        'ASGE Standards of Practice Committee. Management of ingested foreign bodies and food impactions. Gastrointest Endosc. 2011;73(6):1085-1091. PMID 21628009',
+        'ASGE Standards of Practice Committee. Update on the management of ingested foreign bodies and food impactions. Gastrointest Endosc. 2025;101(4):702-732. doi:10.1016/j.gie.2025.02.010',
+        'Kramer RE, Lerner DG, Lin T, et al. Management of ingested foreign bodies in children: a clinical report of the NASPGHAN Endoscopy Committee. J Pediatr Gastroenterol Nutr. 2015;60(4):562-574. PMID 25611037',
+        'Mubarak A, Benninga MA, Broekaert I, et al. Diagnosis, management, and prevention of button battery ingestion in childhood: ESPGHAN position paper. J Pediatr Gastroenterol Nutr. 2021;73(1):129-136. PMID 33720094',
+        'National Capital Poison Center. Button Battery Ingestion Triage and Treatment Guideline. 2024',
+    ],
+    computeResult: (values) => {
+        const obj = values['object-type'] || 0;
+        const loc = values['location'] || 0;
+        const obstruction = !!values['complete-obstruction'];
+        const symptomatic = !!values['symptomatic'];
+        const objLabels = ['', 'Button/disc battery', 'Sharp-pointed object', 'Multiple magnets or magnet + metal', 'Food bolus / blunt object', 'Long object (>5-6 cm)', 'Large object (>2-2.5 cm)', 'Narcotic packet (body packer)'];
+        const locLabels = ['', 'Esophagus', 'Stomach', 'Beyond the pylorus'];
+        if (obj === 0 || loc === 0) {
+            return {
+                value: '\u2014',
+                label: 'Select object type and location',
+                description: '**GI FOREIGN BODY TRIAGE**\n\nSelect the object type and its location on imaging.\n\n**NEVER OBSERVE**\n\u2022 **Any esophageal button battery** \u2014 endoscopy within 2 hours\n\u2022 **Multiple magnets, or a magnet plus ferrous metal** \u2014 regardless of size or symptoms\n\n**IMAGING**\n\u2022 Plain radiographs neck to pelvis. **Double-ring / halo sign = button battery**, not a coin.\n\u2022 CT if perforation is suspected or the object is radiolucent.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        let tier;
+        let timing;
+        let colorVar;
+        const actions = [];
+        if (obj === 7) {
+            tier = 'BODY PACKER \u2014 SEPARATE PROTOCOL';
+            timing = 'do NOT attempt endoscopic retrieval';
+            colorVar = '--color-danger';
+            actions.push('**Endoscopic retrieval is contraindicated** \u2014 packet rupture risk');
+            actions.push('Whole-bowel irrigation and observation per toxicology protocol; surgical retrieval if a packet ruptures or obstructs');
+            actions.push('Consult toxicology and surgery early');
+        }
+        else if (obj === 3 && loc === 3) {
+            tier = 'SURGICAL EMERGENCY';
+            timing = 'immediate surgical consultation';
+            colorVar = '--color-danger';
+            actions.push('**Multiple magnets beyond endoscopic reach** \u2014 pressure necrosis, fistula, and perforation occur between the magnets across bowel loops');
+            actions.push('Immediate surgical consultation; serial radiographs at best, laparotomy/laparoscopy if not progressing or symptomatic');
+        }
+        else if (symptomatic && loc === 3) {
+            tier = 'SURGICAL EMERGENCY';
+            timing = 'immediate surgical consultation';
+            colorVar = '--color-danger';
+            actions.push('**Symptomatic foreign body beyond endoscopic reach** \u2014 assume perforation or obstruction until proven otherwise');
+            actions.push('CT abdomen/pelvis; immediate surgical consultation');
+        }
+        else if (obj === 1 && loc === 1) {
+            tier = 'EMERGENT';
+            timing = 'endoscopy preferably within 2 h, at the latest within 6 h';
+            colorVar = '--color-danger';
+            actions.push('**Esophageal button battery is a surgical emergency.** Liquefactive necrosis begins within 2 h');
+            actions.push('Mobilize endoscopy now. Nothing else by mouth');
+        }
+        else if (obstruction) {
+            tier = 'EMERGENT';
+            timing = 'endoscopy preferably within 2 h, at the latest within 6 h';
+            colorVar = '--color-danger';
+            actions.push('**Complete esophageal obstruction** \u2014 the patient cannot handle secretions; aspiration risk');
+            actions.push('Mobilize endoscopy now; protect the airway');
+        }
+        else if (obj === 2 && loc === 1) {
+            tier = 'EMERGENT';
+            timing = 'endoscopy preferably within 2 h, at the latest within 6 h';
+            colorVar = '--color-danger';
+            actions.push('**Sharp-pointed object in the esophagus** \u2014 highest perforation risk site');
+            actions.push('Mobilize endoscopy now');
+        }
+        else if (loc === 1) {
+            tier = 'URGENT';
+            timing = 'endoscopy within 24 h';
+            colorVar = '--color-warning';
+            actions.push('Any esophageal foreign body should be removed within 24 h \u2014 impaction beyond that raises perforation risk');
+            actions.push('Keep NPO; reassess for progression to complete obstruction');
+        }
+        else if (loc === 2 && (obj === 1 || obj === 2 || obj === 3 || obj === 5 || obj === 6)) {
+            tier = 'URGENT';
+            timing = 'endoscopy within 24 h';
+            colorVar = '--color-warning';
+            actions.push('**Gastric ' + objLabels[obj].toLowerCase() + '** \u2014 will not safely pass, or carries unacceptable risk if it does');
+            actions.push('Endoscopic retrieval within 24 h');
+        }
+        else if (loc === 2) {
+            tier = 'NON-URGENT';
+            timing = 'endoscopy within 72 h';
+            colorVar = '--color-primary';
+            actions.push('Medium-sized blunt object in the stomach \u2014 retrieve within 72 h if it has not passed');
+            actions.push('Repeat radiograph to confirm progression before committing to endoscopy');
+        }
+        else if (obj === 1 || obj === 3) {
+            tier = 'URGENT';
+            timing = 'urgent surgical/GI consultation';
+            colorVar = '--color-warning';
+            actions.push('**Batteries and magnets are never simply observed.** Beyond the pylorus, involve surgery and follow with serial radiographs');
+            actions.push('Intervene for any symptom or for failure to progress');
+        }
+        else if (obj === 2) {
+            tier = 'CLOSE FOLLOW-UP';
+            timing = 'daily radiographs while the object is in transit';
+            colorVar = '--color-warning';
+            actions.push('Sharp object beyond endoscopic reach \u2014 **perforation risk up to 35%** if allowed to pass');
+            actions.push('Daily radiographs; surgical consultation if it fails to progress over 3 days or the patient develops symptoms');
+        }
+        else {
+            tier = 'OBSERVE';
+            timing = 'outpatient observation';
+            colorVar = '--color-primary';
+            actions.push('Asymptomatic blunt object beyond the pylorus \u2014 **95% pass spontaneously**');
+            actions.push('Strain stools; repeat radiograph if no progression over 3 days or if symptoms develop');
+        }
+        let body = '**' + tier + ': ' + timing + '**\n\n';
+        body += '**OBJECT: ' + objLabels[obj] + ' \u00b7 LOCATION: ' + locLabels[loc] + '**\n';
+        if (obstruction)
+            body += '\u2022 Complete esophageal obstruction present\n';
+        if (symptomatic)
+            body += '\u2022 Symptomatic\n';
+        body += '\n**ACTION**\n';
+        for (const a of actions)
+            body += '\u2022 ' + a + '\n';
+        body += '\n**BUTTON BATTERY \u2014 ESOPHAGEAL**\n';
+        body += '\u2022 **Surgical emergency. Endoscopic removal within 2 hours.** Liquefactive necrosis begins within 2 h; tracheoesophageal and aorto-esophageal fistula are described.\n';
+        body += '\u2022 **Honey 10 mL PO q10min, up to 6 doses**, ONLY if less than 12 h since ingestion, the battery is esophageal, and age \u226512 months (botulism risk below 12 months).\n';
+        body += '\u2022 Sucralfate 10 mL (1 g) q10min is an alternative if honey is unavailable (**NCPC 2024 lists up to 3 doses**).\n';
+        body += '\u2022 **Nothing else by mouth. Do NOT induce vomiting.** Neither agent delays endoscopy.\n\n';
+        body += '**MAGNETS**\n';
+        body += '\u2022 **\u22652 magnets, or 1 magnet + ferrous metal = surgical emergency** (pressure necrosis, fistula, perforation). A single magnet alone is low risk.\n\n';
+        body += '**SHARP OBJECTS**\n';
+        body += '\u2022 Perforation or complication risk up to **35%** if allowed to pass. Remove endoscopically whenever within reach.\n\n';
+        body += '**SIZE THRESHOLDS FOR SPONTANEOUS PASSAGE**\n';
+        body += '\u2022 Passes the pylorus if **<2-2.5 cm wide and <5-6 cm long**\n';
+        body += '\u2022 **95% of objects past the stomach pass spontaneously** \u2014 strain stools; intervene if no progression over 3 days or symptoms develop\n\n';
+        body += '**IMAGING**\n';
+        body += '\u2022 Plain radiographs neck to pelvis. **Double-ring / halo sign = button battery**, not a coin.\n';
+        body += '\u2022 CT if perforation is suspected or the object is radiolucent.\n\n';
+        body += '**NOTE**\n';
+        body += '\u2022 These are **guideline triage categories, not a validated score.**\n';
+        body += '\u2022 Pediatric thresholds differ: gastric button batteries are removed if \u226520 mm OR age <5 years OR symptomatic.';
+        const shortMap = {
+            'BODY PACKER \u2014 SEPARATE PROTOCOL': 'TOX/SURG',
+            'SURGICAL EMERGENCY': 'SURGERY',
+            'CLOSE FOLLOW-UP': 'SERIAL XR',
+            'EMERGENT': '\u2264 2 H',
+            'URGENT': '\u2264 24 H',
+            'NON-URGENT': '\u2264 72 H',
+            'OBSERVE': 'OBSERVE',
+        };
+        return {
+            value: shortMap[tier] || tier,
+            label: tier + ' \u2014 ' + timing,
+            description: body,
+            colorVar,
+        };
+    },
+};
 const CALCULATORS = {
     // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
     'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
@@ -42943,6 +43941,15 @@ const CALCULATORS = {
     'dobutamine-calc': DOBUTAMINE_CALCULATOR,
     'esmolol-calc': ESMOLOL_CALCULATOR,
     'extraoral-time': EXTRAORAL_TIME_CALCULATOR,
+    // Wave D — Tier 2 scores/classifications (added 2026-08-24 — backfills dead calculatorLinks)
+    'rockall': ROCKALL_CALCULATOR,
+    'forrest': FORREST_CALCULATOR,
+    'cspine-pecarn': CSPINE_PECARN_CALCULATOR,
+    'cam-icu': CAM_ICU_CALCULATOR,
+    'schaefer-fuhrman': SCHAEFER_FUHRMAN_CALCULATOR,
+    'pid-criteria': PID_CRITERIA_CALCULATOR,
+    'ohss-vte': OHSS_VTE_CALCULATOR,
+    'gifb-object-risk': GIFB_OBJECT_RISK_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {
