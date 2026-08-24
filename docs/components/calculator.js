@@ -43705,6 +43705,494 @@ const PERICARDITIS_NSAID_DOSE_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// Wave D — Tier 3 dosing calculators, batch B
+// Built from .research/calc-backfill/tier3-dosing.md sections 3-4.
+//
+// Same discipline as batch A. Where two sourced positions disagree, BOTH
+// are displayed with their source named, rather than the app silently
+// picking one and inventing an undocumented third standard:
+//
+//   #10 Phosphate bands — the consult tree and drug-store.ts publish
+//       different mmol/kg bands. Both are shown, each labelled. The
+//       shared safety rules (45 mmol cap, 1.47 mEq K per mmol P, salt
+//       choice, no calcium co-infusion) apply to either and are stated once.
+//   #11 Refeeding + feeding timing — NICE says replace electrolytes and
+//       DO NOT delay feeding; ASPEN says hold nutrition if severely low.
+//       Both are shown as a named guideline conflict, because this is a
+//       real disagreement between two current guidelines and the app has
+//       no standing to resolve it.
+//   #12 Magnesium units — the consult text mixes mg/dL, mEq/L and mmol/L.
+//       The field is fixed to mg/dL and the conversions are printed.
+//   #13 The 1000 mg nebulized TXA load is IBCC expert opinion, not the
+//       Wand 2018 trial regimen. Both are shown, each with its evidence
+//       tag, and the trial's "no loading dose" is stated explicitly.
+//   #14 IV TXA — trial-derived (Bellam) and the consult's 500 mg TID are
+//       shown separately with provenance.
+//   #15a IV renal dosing bands were UNSOURCED. No numbers are hard-coded;
+//       the output routes to pharmacy instead of inventing a band.
+// -------------------------------------------------------------------
+const ELECTROLYTE_REPLACEMENT_CALCULATOR = {
+    id: 'electrolyte-replacement',
+    title: 'Electrolyte Replacement Guide',
+    subtitle: 'Refeeding syndrome \u2014 thiamine \u2192 Mg \u2192 K \u2192 phosphate \u2192 calories',
+    description: 'Ordered replacement protocol for the malnourished or eating-disorder patient at risk of refeeding syndrome. The sequence is the safety-critical output: thiamine goes in before any dextrose, and potassium will not correct until magnesium is repleted. Deliberately rendered as one linear protocol rather than separate panels, so the magnesium step cannot be skipped on the way to the potassium step.',
+    fields: [
+        { name: 'body-weight', label: 'Body weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+        { name: 'serum-potassium', label: 'Serum potassium', type: 'number', points: 0, valueIsPoints: true, unit: 'mEq/L' },
+        {
+            name: 'serum-magnesium',
+            label: 'Serum magnesium (mg/dL)',
+            type: 'number',
+            points: 0,
+            valueIsPoints: true,
+            unit: 'mg/dL',
+            description: 'Normal 1.7-2.4 mg/dL = 1.4-2.0 mEq/L = 0.7-1.0 mmol/L. Enter mg/dL.',
+        },
+        { name: 'serum-phosphorus', label: 'Serum phosphorus', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL' },
+        {
+            name: 'refeeding-risk',
+            label: 'Refeeding risk category',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select risk category \u2014', points: 0 },
+                { label: 'Not high risk', points: 1 },
+                {
+                    label: 'High risk \u2014 NICE: any one of BMI <16, >15% weight loss in 3-6 mo, negligible intake >10 d, low pre-feed K/Phos/Mg; or any two of BMI <18.5, >10% loss, negligible intake >5 d, alcohol/insulin/chemo/diuretic/antacid history',
+                    points: 2,
+                },
+                { label: 'Extreme risk \u2014 BMI <13 (MEED), or BMI <14 with negligible intake >15 d (NICE)', points: 3 },
+            ],
+        },
+        { name: 'central-access', label: 'Central venous access available', type: 'toggle', points: 1 },
+        { name: 'cardiac-monitoring', label: 'On continuous cardiac monitoring', type: 'toggle', points: 1 },
+        { name: 'renal-impairment', label: 'AKI or CrCl <30 mL/min', type: 'toggle', points: 1 },
+        { name: 'thiamine-given', label: 'Thiamine already given', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: '**Order matters and is not optional: thiamine \u2192 magnesium \u2192 potassium \u2192 phosphate \u2192 calories.** Thiamine goes in before any dextrose or feeding \u2014 glucose first can precipitate Wernicke encephalopathy. Potassium will not correct until magnesium is repleted. **Potassium >10 mEq/hr requires central access and continuous cardiac monitoring**; the peripheral ceiling is 10 mEq/hr. Potassium phosphate carries **1.47 mEq of potassium per mmol of phosphorus** \u2014 the phosphate order and the potassium order do not know about each other, so add them yourself. Use sodium phosphate if K \u22654 mEq/L or renal function is impaired. **Maximum 45 mmol phosphorus in a single dose.** Never infuse phosphate through a line carrying calcium. Reduce all doses by about 50% in AKI or CrCl <30. Serum magnesium is entered in **mg/dL** (normal 1.7-2.4 mg/dL = 1.4-2.0 mEq/L). A fall of >30% in phosphorus, potassium or magnesium within 5 days of reintroducing calories is severe refeeding syndrome \u2014 halve the calories.',
+    citations: [
+        'da Silva JSV, Seres DS, Sabino K, et al. ASPEN Consensus Recommendations for Refeeding Syndrome. Nutr Clin Pract. 2020;35(2):178-195. PMID 32115791. Erratum Nutr Clin Pract. 2020;35(3):584-585, PMID 32383800 (corrects Tables 3 and 5).',
+        'NICE CG32. Nutrition support for adults: oral nutrition support, enteral tube feeding and parenteral nutrition. 2006, updated 2017. \u2014 risk criteria, the 10 and 5 kcal/kg/day starts, thiamine 200-300 mg, and the K 2-4 / phosphate 0.3-0.6 / magnesium 0.2-0.4 mmol/kg/day maintenance figures.',
+        'Royal College of Psychiatrists. Medical Emergencies in Eating Disorders (MEED), CR233. 2022. (Replaced MARSIPAN CR189, 2014.)',
+        'NICE NG69. Eating Disorders: Recognition and Treatment. 2017, updated 2020.',
+        'Mehler PS, Andersen AE. Eating Disorders: A Guide to Medical Care and Complications. 3rd ed. 2017.',
+        'Kim MJ, et al. Potassium Disorders: Hypokalemia and Hyperkalemia. Am Fam Physician. 2023;107(1):59-70.',
+        'FDA prescribing information, potassium phosphates injection USP \u2014 potassium content per mmol phosphorus, the 45 mmol single-dose cap, and the serum K <4 mEq/L restriction.',
+    ],
+    computeResult: (values) => {
+        const wt = Number(values['body-weight']) || 0;
+        const k = Number(values['serum-potassium']) || 0;
+        const mg = Number(values['serum-magnesium']) || 0;
+        const p = Number(values['serum-phosphorus']) || 0;
+        const risk = Number(values['refeeding-risk']) || 0;
+        const central = !!values['central-access'];
+        const monitored = !!values['cardiac-monitoring'];
+        const renal = !!values['renal-impairment'];
+        const thiamineGiven = !!values['thiamine-given'];
+        if (wt <= 0 && k === 0 && mg === 0 && p === 0) {
+            return {
+                value: '\u2014',
+                label: 'Enter weight and electrolytes',
+                description: 'Enter body weight and at least one of potassium, magnesium or phosphorus to build the protocol.\n\n**REGARDLESS OF THE NUMBERS \u2014 THIAMINE FIRST.** Thiamine **100-200 mg IV** goes in before any dextrose or feeding. Giving glucose to a thiamine-deplete patient can precipitate Wernicke encephalopathy, and that decision does not wait for labs.',
+                colorVar: '--color-text-muted',
+            };
+        }
+        const round = (n) => Math.round(n * 10) / 10;
+        const parts = [];
+        let step = 1;
+        // ---- STEP: THIAMINE ----
+        if (!thiamineGiven) {
+            parts.push('**STEP ' + step++ + ' \u2014 THIAMINE, BEFORE ANY CARBOHYDRATE**\n' +
+                'Thiamine **100-200 mg IV now**, before any dextrose or feeding, then **200-300 mg PO daily for 10 days** (NICE CG32).\n' +
+                '\u2022 ASPEN 2020: at least 100 mg IV before any dextrose-containing solution\n' +
+                '\u2022 Paediatric: 2 mg/kg, max 100-200 mg/day (ASPEN 2020)\n' +
+                '\u2022 Giving glucose first can precipitate Wernicke encephalopathy. Routine thiamine levels have limited value \u2014 treat, do not measure.');
+        }
+        else {
+            parts.push('**STEP ' + step++ + ' \u2014 THIAMINE: GIVEN.** Continue **200-300 mg PO daily through the first 10 days of feeding** (NICE CG32).');
+        }
+        // ---- STEP: MAGNESIUM ----
+        let mgLine;
+        if (mg === 0) {
+            mgLine =
+                '**Magnesium not entered.** Check it before repleting potassium \u2014 hypokalaemia is refractory until magnesium is corrected, and this is the step most often skipped.';
+        }
+        else if (mg < 1.8) {
+            mgLine =
+                'Mg **' + mg + ' mg/dL** (' + round(mg * 0.8226) + ' mEq/L) \u2014 **low.** Give **magnesium sulfate 2 g IV over 2 hours**.' +
+                    (renal ? ' **Renal impairment: halve the dose and recheck before redosing.**' : '') +
+                    '\n\u2022 **Potassium will not correct until magnesium is repleted.** Do this before or alongside the potassium, not after.\n' +
+                    '\u2022 Recheck magnesium 6-12 hours after the infusion.';
+        }
+        else if (mg <= 2.4) {
+            mgLine =
+                'Mg **' + mg + ' mg/dL** \u2014 within the normal range (1.7-2.4 mg/dL).' +
+                    (risk >= 2
+                        ? ' Because refeeding risk is elevated, still give **magnesium oxide 400-800 mg PO daily** and continue prophylaxis through feeding.'
+                        : ' No acute repletion needed.');
+        }
+        else {
+            mgLine = 'Mg **' + mg + ' mg/dL** \u2014 above the normal range. Do not replete; look for a cause (renal impairment, exogenous magnesium).';
+        }
+        parts.push('**STEP ' + step++ + ' \u2014 MAGNESIUM FIRST**\n' + mgLine);
+        // ---- STEP: POTASSIUM ----
+        let kLine;
+        if (k === 0) {
+            kLine = '**Potassium not entered.**';
+        }
+        else if (renal) {
+            kLine =
+                'K **' + k + ' mEq/L**, but **AKI or CrCl <30 is recorded.** Potassium repletion is contraindicated in anuria and hazardous in AKI. **Do not start a potassium infusion on this pathway** \u2014 get nephrology input and recheck, then replete cautiously with frequent levels if it is genuinely low.';
+        }
+        else if (k < 2.5) {
+            kLine =
+                'K **' + k + ' mEq/L** \u2014 **HIGH ARRHYTHMIA RISK**\n';
+            if (central && monitored) {
+                kLine +=
+                    '\u2022 Central access and continuous monitoring are both present: **KCl up to 20 mEq/hr via the central line**\n';
+            }
+            else {
+                const missing = [];
+                if (!central)
+                    missing.push('central access');
+                if (!monitored)
+                    missing.push('continuous cardiac monitoring');
+                kLine +=
+                    '\u2022 **Rate capped at 10 mEq/hr peripheral** \u2014 ' +
+                        (missing.length === 2 ? 'neither central access nor continuous cardiac monitoring is recorded' : 'no ' + missing[0]) +
+                        '. Rates above 10 mEq/hr require **both** a central line and continuous cardiac monitoring. Arrange ' + missing.join(' and ') + ' to correct faster.\n';
+            }
+            kLine +=
+                '\u2022 Peripheral maximum concentration **40 mEq/L**\n' +
+                    '\u2022 Carrier fluid must be **glucose-free** \u2014 dextrose drives potassium intracellularly\n' +
+                    '\u2022 Recheck potassium **every 1-2 hours**';
+        }
+        else if (k < 3.0) {
+            kLine =
+                'K **' + k + ' mEq/L** \u2014 **IV KCl 10 mEq/hr peripherally** (max concentration 40 mEq/L) plus oral potassium.\n' +
+                    '\u2022 Carrier fluid must be **glucose-free**\n' +
+                    '\u2022 Recheck after each 20-40 mEq';
+        }
+        else if (k < 3.5) {
+            kLine = 'K **' + k + ' mEq/L** \u2014 **oral KCl 40-80 mEq/day in divided doses.** IV is not required at this level.';
+        }
+        else if (k <= 5.0) {
+            kLine =
+                'K **' + k + ' mEq/L** \u2014 normal.' +
+                    (risk >= 2
+                        ? ' Refeeding risk is elevated, so give prophylactic potassium from the start of feeding (see the maintenance block below) and recheck on the monitoring schedule.'
+                        : '');
+        }
+        else {
+            kLine = 'K **' + k + ' mEq/L** \u2014 elevated. Do not replete. Treat hyperkalaemia on its own pathway.';
+        }
+        if (k > 0 && k < 3.5) {
+            kLine += '\n\u2022 Serum K falls roughly 0.3 mEq/L per 100 mEq of total-body deficit \u2014 highly variable, so recheck rather than predicting.';
+        }
+        parts.push('**STEP ' + step++ + ' \u2014 POTASSIUM**\n' + kLine);
+        // ---- STEP: PHOSPHATE ----
+        let pLine;
+        if (p === 0) {
+            pLine = '**Phosphorus not entered.** It is the classic refeeding electrolyte \u2014 check it before feeding.';
+        }
+        else if (p >= 2.5) {
+            pLine =
+                'Phos **' + p + ' mg/dL** \u2014 normal (2.5-4.5).' +
+                    (risk >= 2
+                        ? ' With elevated refeeding risk, give prophylaxis from the start of feeding: **0.3-0.6 mmol/kg/day** (NICE CG32)' +
+                            (wt > 0 ? ' = **' + round(wt * 0.3) + '-' + round(wt * 0.6) + ' mmol/day**' : '') +
+                            '.'
+                        : '');
+        }
+        else if (wt <= 0) {
+            pLine =
+                'Phos **' + p + ' mg/dL** \u2014 low, but **body weight is needed** to calculate the mmol/kg dose. Enter weight.';
+        }
+        else {
+            const cap = (n) => Math.min(round(n), 45);
+            const capped = (n) => (round(n) > 45 ? ' (capped from ' + round(n) + ')' : '');
+            pLine = 'Phos **' + p + ' mg/dL**, weight **' + wt + ' kg**.\n';
+            // The two published band sets disagree. Show BOTH, each labelled.
+            let consultDose;
+            if (p >= 2.0)
+                consultDose = 'oral Neutra-Phos **250-500 mg TID** (no IV band at this level)';
+            else if (p >= 1.0)
+                consultDose =
+                    '**0.16-0.32 mmol/kg IV over 6 h** = **' + cap(wt * 0.16) + '-' + cap(wt * 0.32) + ' mmol**' + capped(wt * 0.32);
+            else
+                consultDose = '**0.5 mmol/kg IV over 6 h** = **' + cap(wt * 0.5) + ' mmol**' + capped(wt * 0.5);
+            let storeDose;
+            if (p >= 2.2)
+                storeDose = 'no band published at this level';
+            else if (p >= 1.7)
+                storeDose = '**0.2 mmol/kg IV** = **' + cap(wt * 0.2) + ' mmol**' + capped(wt * 0.2);
+            else if (p >= 1.0)
+                storeDose = '**0.4 mmol/kg IV** = **' + cap(wt * 0.4) + ' mmol**' + capped(wt * 0.4);
+            else
+                storeDose = '**0.6 mmol/kg IV** = **' + cap(wt * 0.6) + ' mmol**' + capped(wt * 0.6);
+            pLine +=
+                '\u2022 **Consult-tree protocol:** ' + consultDose + '\n' +
+                    '\u2022 **Drug-store protocol:** ' + storeDose + '\n' +
+                    '\u2022 **These two sources disagree and the app does not pick between them.** Both are shown so you can choose deliberately. The safety rules below apply to either.\n' +
+                    '\u2022 **MAX 45 mmol phosphorus in a single dose.** Severe deficits often need 60-90 mmol in total \u2014 recheck and redose rather than exceeding the cap in one order\n';
+            // Salt choice depends on the potassium.
+            if (k > 0 && k >= 4.0) {
+                pLine +=
+                    '\u2022 **SALT: use sodium phosphate.** K is ' + k + ' mEq/L and the FDA label restricts the potassium salt to serum K <4 mEq/L\n';
+            }
+            else if (renal) {
+                pLine += '\u2022 **SALT: use sodium phosphate** \u2014 renal impairment is recorded\n';
+            }
+            else if (k > 0) {
+                const mmolShown = p < 1.0 ? cap(wt * 0.5) : cap(wt * 0.32);
+                pLine +=
+                    '\u2022 **SALT: potassium phosphate is acceptable** (K ' + k + ' mEq/L). It carries **1.47 mEq K per mmol P** \u2014 about **' +
+                        Math.round(mmolShown * 1.47) + ' mEq K** at the consult dose above. **Count that against your potassium order**, which does not know about it\n';
+            }
+            else {
+                pLine +=
+                    '\u2022 **SALT:** potassium phosphate carries **1.47 mEq K per mmol P**. Use **sodium phosphate** if K \u22654 mEq/L, renal impairment, or potassium is being released by tumour lysis, rhabdomyolysis or haemolysis\n';
+            }
+            pLine +=
+                '\u2022 **Rate ceiling is set by the potassium, not the phosphate:** 6.8 mmol P/hr peripheral (= 10 mEq K/hr), 15 mmol P/hr central (= 22 mEq K/hr)\n' +
+                    '\u2022 **Never co-infuse with a calcium-containing fluid** (lactated Ringer, calcium gluconate) \u2014 calcium-phosphate precipitation. Separate line, or flush between\n' +
+                    '\u2022 **Check and normalise calcium first** \u2014 rapid infusion causes transient hyperphosphataemia, then acute hypocalcaemia, tetany and QT prolongation\n' +
+                    '\u2022 Dilute in 100-250 mL NS or D5W. **Never undiluted, never IV push**\n' +
+                    '\u2022 Dose is **elemental phosphorus** on **actual body weight**, over about **6 hours**, identical for either salt' +
+                    (renal ? '\n\u2022 **Renal impairment: reduce by about 50%**' : '');
+        }
+        parts.push('**STEP ' + step++ + ' \u2014 PHOSPHATE**\n' + pLine);
+        // ---- STEP: CALORIES ----
+        let calLine;
+        if (risk === 0) {
+            calLine = '**Refeeding risk category not selected.** Caloric initiation depends on it \u2014 select a category.';
+        }
+        else if (wt <= 0) {
+            calLine = 'Enter body weight to compute the starting calorie target.';
+        }
+        else if (risk === 3) {
+            calLine =
+                '**Extreme risk.** Consult/MEED: **5-10 kcal/kg/day = ' + Math.round(wt * 5) + '-' + Math.round(wt * 10) +
+                    ' kcal/day**, advance **+5 kcal/kg every 2-3 days**.\n' +
+                    '\u2022 **NICE CG32:** start at **5 kcal/kg/day** with **continuous cardiac rhythm monitoring**\n' +
+                    '\u2022 **ASPEN 2020:** 100-150 g dextrose or 10-20 kcal/kg in the first 24 h, then advance by about 33% of goal every 1-2 days\n' +
+                    '\u2022 These three frameworks genuinely disagree. The consult/MEED numbers are shown as the default so the calculator cannot contradict the tree.';
+        }
+        else if (risk === 2) {
+            calLine =
+                '**High risk.** Consult/MEED: **10-20 kcal/kg/day = ' + Math.round(wt * 10) + '-' + Math.round(wt * 20) +
+                    ' kcal/day**, advance **+200 kcal/day**.\n' +
+                    '\u2022 **NICE CG32** caps the start at **10 kcal/kg/day = ' + Math.round(wt * 10) + ' kcal/day** \u2014 lower than the top of the consult range\n' +
+                    '\u2022 **ASPEN 2020:** 100-150 g dextrose or 10-20 kcal/kg in the first 24 h, then +about 33% of goal every 1-2 days, reaching goal by days 4-7\n' +
+                    '\u2022 These three frameworks genuinely disagree. The consult/MEED numbers are shown as the default so the calculator cannot contradict the tree.';
+        }
+        else {
+            calLine =
+                '**Not high risk.** Standard caloric initiation. Still check phosphorus, potassium and magnesium before feeding \u2014 risk scoring is imperfect and the labs are the backstop.';
+        }
+        parts.push('**STEP ' + step++ + ' \u2014 CALORIES**\n' + calLine);
+        // ---- STEP: MONITOR + RESCUE ----
+        parts.push('**STEP ' + step++ + ' \u2014 MONITOR AND RESCUE**\n' +
+            '\u2022 Measure P, K and Mg before feeding, then **every 6-12 hours for 72 hours** (the consult\u2019s interval; ASPEN says q12h for 3 days \u2014 the tighter one is used here)\n' +
+            '\u2022 **ASPEN severity grading**, for a fall within 5 days of reintroducing calories in any 1-3 of phosphorus, potassium or magnesium: **10-20% mild \u00b7 20-30% moderate \u00b7 >30% or organ dysfunction = severe**\n' +
+            '\u2022 **Rescue:** if electrolytes become hard to manage or drop significantly, **cut calories and dextrose by 50%**, then re-advance about 33% of goal every 1-2 days (ASPEN)\n' +
+            '\u2022 **GUIDELINE CONFLICT \u2014 read this before holding feeds.** ASPEN says hold nutrition until severely low electrolytes are corrected. **NICE CG32 says replace the electrolytes and do NOT delay feeding**, and this app\u2019s own eating-disorder consult agrees with NICE: correct and feed simultaneously. Two current guidelines disagree; the app does not resolve it for you. In practice the disagreement bites hardest at the severe end \u2014 decide explicitly, and document which one you followed.');
+        // ---- Maintenance ----
+        if (wt > 0) {
+            parts.push('**ONGOING REPLACEMENT DURING FEEDING (NICE CG32)**\n' +
+                '\u2022 Potassium **2-4 mmol/kg/day** = ' + Math.round(wt * 2) + '-' + Math.round(wt * 4) + ' mmol/day\n' +
+                '\u2022 Phosphate **0.3-0.6 mmol/kg/day** = ' + round(wt * 0.3) + '-' + round(wt * 0.6) + ' mmol/day\n' +
+                '\u2022 Magnesium **0.2 mmol/kg/day IV** = ' + round(wt * 0.2) + ' mmol/day, or **0.4 mmol/kg/day PO** = ' + round(wt * 0.4) + ' mmol/day\n' +
+                '\u2022 1 mmol K = 1 mEq K.');
+        }
+        const critical = (k > 0 && k < 2.5) || (p > 0 && p < 1.0) || (mg > 0 && mg < 1.2);
+        const anyLow = (k > 0 && k < 3.5) || (p > 0 && p < 2.5) || (mg > 0 && mg < 1.7);
+        const colorVar = critical
+            ? '--color-danger'
+            : anyLow || risk >= 2 || (k === 0 && mg === 0 && p === 0)
+                ? '--color-warning'
+                : '--color-primary';
+        const noLabs = k === 0 && mg === 0 && p === 0;
+        const value = critical
+            ? 'CRITICAL'
+            : anyLow
+                ? 'REPLETE'
+                : noLabs
+                    ? 'NO LABS'
+                    : risk >= 2
+                        ? 'AT RISK'
+                        : 'MONITOR';
+        const label = critical
+            ? 'Critical electrolyte \u2014 replete before feeding'
+            : anyLow
+                ? 'Replacement needed \u2014 follow the order'
+                : noLabs
+                    ? 'No electrolytes entered \u2014 cannot clear for feeding'
+                    : risk >= 2
+                        ? 'Labs acceptable \u2014 refeeding risk elevated'
+                        : 'Labs acceptable \u2014 standard initiation';
+        return { value, label, description: parts.join('\n\n'), colorVar };
+    },
+};
+const TXA_HEMOPTYSIS_CALCULATOR = {
+    id: 'txa-hemoptysis',
+    title: 'TXA Dosing Calculator',
+    subtitle: 'Hemoptysis \u2014 route-specific dose with its evidence tag',
+    description: 'Tranexamic acid dosing for hemoptysis. Route changes both the regimen and the strength of evidence behind it, so each dose is shown with its provenance: trial-derived regimens are separated from the expert-opinion regimens carried in this consult. TXA is a temporising adjunct \u2014 it never substitutes for airway control, lung isolation, bronchoscopy or bronchial artery embolisation.',
+    fields: [
+        {
+            name: 'route',
+            label: 'Route',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: '\u2014 Select route \u2014', points: 0 },
+                { label: 'Nebulized \u2014 preferred if the patient can expectorate', points: 1 },
+                { label: 'IV \u2014 if nebulization impairs expectoration, or the patient is intubated', points: 2 },
+                { label: 'Bronchoscopic instillation \u2014 by the proceduralist', points: 3 },
+            ],
+        },
+        { name: 'creatinine-clearance', label: 'Creatinine clearance', type: 'number', points: 0, valueIsPoints: true, unit: 'mL/min' },
+        {
+            name: 'massive-bleed',
+            label: 'Massive / life-threatening hemoptysis',
+            type: 'toggle',
+            points: 1,
+            description: '\u2265200 mL in a single episode, \u2265100 mL/hr, \u2265600 mL/24h, or any volume causing airway obstruction, respiratory failure or haemodynamic instability.',
+        },
+        { name: 'active-thrombosis', label: 'Active VTE or arterial thrombosis', type: 'toggle', points: 1 },
+        { name: 'upper-tract-hematuria', label: 'Gross hematuria of upper urinary tract origin', type: 'toggle', points: 1 },
+        { name: 'seizure-history', label: 'Seizure disorder', type: 'toggle', points: 1 },
+        { name: 'dic-suspected', label: 'DIC suspected', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: '**Only the nebulized 500 mg TID and the IV 1 g load + 1 g over 8 h regimens come from randomized trials.** The 1000 mg nebulized loading dose and the 500 mg IV TID regimen carried in this consult are expert-opinion extrapolations and are labelled as such on screen. **Neither trial enrolled massive hemoptysis** \u2014 Wand 2018 explicitly excluded >200 mL/24 h and haemodynamically or respiratorily unstable patients, which is the population this consult is written for. TXA is a temporising adjunct; it never substitutes for airway control, lung isolation, rigid bronchoscopy or bronchial artery embolisation. **Do not give with active thromboembolism, or DIC with thrombosis.** Reduce the IV dose in CrCl <50 mL/min \u2014 consult pharmacy for the banded regimen rather than estimating it. Seizure risk is dose-related and reported mainly with high-dose IV.',
+    citations: [
+        'Wand O, Guber E, Guber A, Epstein Shochet G, Israeli-Shani L, Shitrit D. Inhaled Tranexamic Acid for Hemoptysis Treatment: A Randomized Controlled Trial. Chest. 2018;154(6):1379-1384. PMID 30321510. NCT01496196.',
+        'Bellam BL, Dhibar DP, Suri V, et al. Efficacy of tranexamic acid in haemoptysis: a randomized, controlled pilot study. Pulm Pharmacol Ther. 2016;40:80-83. PMID 27470681.',
+        'Farkas J. Severe Hemoptysis. Internet Book of Critical Care (IBCC). December 2024. \u2014 source of the 1000 mg nebulized load and the 500 mg IV TID regimen. Expert opinion, not trial-derived.',
+        'Radchenko C, et al. A Systematic Approach to the Management of Massive Hemoptysis. J Thorac Dis. 2017;9(Suppl 10):S1069-S1086.',
+    ],
+    computeResult: (values) => {
+        const route = Number(values['route']) || 0;
+        const crcl = Number(values['creatinine-clearance']) || 0;
+        const crclKnown = crcl > 0;
+        const massive = !!values['massive-bleed'];
+        const thrombosis = !!values['active-thrombosis'];
+        const hematuria = !!values['upper-tract-hematuria'];
+        const seizure = !!values['seizure-history'];
+        const dic = !!values['dic-suspected'];
+        const adjunct = '**TXA IS AN ADJUNCT, NOT A PLAN.** It does not replace bleeding-side-down positioning, a large ETT (\u22658.5 mm ID), lung isolation, rigid bronchoscopy, or emergent bronchial artery embolisation. **Do not let a TXA order delay the IR call.**\n\n' +
+            '**AVOID COUGH SUPPRESSANTS** \u2014 retained blood obstructs the airway.';
+        if (thrombosis) {
+            return {
+                value: 'STOP',
+                label: 'Contraindicated \u2014 active thrombosis',
+                description: '**DO NOT GIVE TRANEXAMIC ACID**\n\n' +
+                    '**REASON:** active venous or arterial thrombosis' + (dic ? ', with DIC suspected' : '') + '. TXA is an antifibrinolytic \u2014 giving it here propagates the clot.\n\n' +
+                    '**GET HAEMATOLOGY INVOLVED NOW.** Competing thrombosis and life-threatening haemorrhage is not a decision to make alone.\n\n' +
+                    (massive
+                        ? '**MASSIVE HEMOPTYSIS IS STILL THE IMMEDIATE THREAT.** Airway first: bleeding side down, large ETT, lung isolation, rigid bronchoscopy, and call interventional radiology for bronchial artery embolisation. **Embolisation is the definitive treatment and does not depend on TXA.**\n\n'
+                        : '') +
+                    adjunct,
+                colorVar: '--color-danger',
+            };
+        }
+        if (route === 0) {
+            return {
+                value: '\u2014',
+                label: 'Select a route',
+                description: 'Select a route \u2014 the regimen and the strength of evidence behind it both change with it.\n\n' +
+                    (massive
+                        ? '**MASSIVE HEMOPTYSIS.** Airway first: bleeding side down, large ETT (\u22658.5 mm ID), lung isolation, rigid bronchoscopy, and call interventional radiology for bronchial artery embolisation. TXA is an adjunct to that, never a substitute.\n\n'
+                        : '') +
+                    '**No absolute contraindication triggered so far.** Screened: active venous or arterial thrombosis.',
+                colorVar: massive ? '--color-danger' : '--color-text-muted',
+            };
+        }
+        let body = '';
+        let value;
+        let label;
+        if (massive) {
+            body +=
+                '**\u26a0 MASSIVE HEMOPTYSIS \u2014 AIRWAY AND EMBOLISATION FIRST.** Bleeding side down, large ETT (\u22658.5 mm ID), lung isolation, rigid bronchoscopy, and **call interventional radiology now** for bronchial artery embolisation. Everything below is adjunctive to that.\n\n';
+        }
+        if (route === 1) {
+            value = 'NEB';
+            label = 'Nebulized tranexamic acid \u2014 see both regimens below';
+            body +=
+                '**ROUTE:** Nebulized\n\n' +
+                    '**DOSE \u2014 TRIAL-DERIVED (Wand 2018 RCT):** tranexamic acid **500 mg in 5 mL of 100 mg/mL, nebulized three times daily.** **The trial used no loading dose.**\n\n' +
+                    '**DOSE \u2014 EXPERT OPINION (IBCC, Dec 2024; not trial-derived):** **1000 mg nebulized once as a load**, then **500 mg nebulized every 8 hours.** This is the regimen carried in this consult. It is expert practice, not trial evidence. An alternative expert regimen is 250-500 mg every 6-12 hours.\n\n' +
+                    '**RENAL:** no adjustment is established for the nebulized route. Systemic exposure after nebulization is low, but no dose-adjustment data exist \u2014 that is an absence of evidence, not evidence of safety.\n\n' +
+                    '**\u26a0 EVIDENCE BOUNDARY:** Wand 2018 **excluded massive hemoptysis (>200 mL/24 h), haemodynamic or respiratory instability, pregnancy, renal or hepatic failure, and coagulopathy.** n=47 (25 TXA / 22 placebo), mean age 66, single-centre, methodologically weak. **There is no randomized evidence for TXA in the unstable population this consult is written for.**\n\n' +
+                    '**WHAT THE TRIAL SHOWED (in its own, milder population):** resolution within 5 days 96% vs 50% (P<.0005); reduced expectorated volume from day 2; length of stay 5.7\u00b12.5 vs 7.8\u00b14.6 days (P=.046); interventional bronchoscopy or embolisation 0% vs 18.2% (P=.041); lower 1-year recurrence (P=.009).\n\n' +
+                    '**SEIZURE RISK:** not reported with the nebulized route.\n\n';
+        }
+        else if (route === 2) {
+            value = 'IV';
+            label = 'IV tranexamic acid \u2014 see both regimens below';
+            body +=
+                '**ROUTE:** IV\n\n' +
+                    '**DOSE \u2014 TRIAL-DERIVED (Bellam 2016 pilot, sub-massive hemoptysis, n=66, single-blinded):** **1 g IV load, then 1 g over 8 hours.**\n\n' +
+                    '**DOSE \u2014 EXPERT/FORMULARY PRACTICE (not from that trial):** **500 mg IV three times daily.** This is the regimen carried in this consult; it is expert practice, not trial evidence.\n\n' +
+                    '**TRAUMA-DERIVED ALTERNATIVE (CRASH-2 regimen, already in this app\u2019s drug store):** 1 g IV over 10 minutes, then 1 g over 8 hours. Same numbers as Bellam, different derivation population.\n\n';
+            if (crclKnown && crcl < 50) {
+                body +=
+                    '**RENAL \u2014 CrCl ' + crcl + ' mL/min:** TXA is renally cleared and **the IV dose must be reduced.** Banded renal dosing exists on the US IV label but **could not be verified in the research behind this calculator, so no numbers are printed here. Ask pharmacy for the band** rather than estimating it. Printing an unverified renal dose would be worse than printing none.\n\n';
+            }
+            else if (!crclKnown) {
+                body += '**RENAL:** creatinine clearance not entered. TXA is renally cleared \u2014 **reduce the IV dose if CrCl <50 mL/min**, and ask pharmacy for the specific band.\n\n';
+            }
+            else {
+                body += '**RENAL:** CrCl ' + crcl + ' mL/min \u2014 no reduction indicated. Reduce if it falls below 50.\n\n';
+            }
+            body +=
+                '**SEIZURE RISK:** dose-related, reported mainly with **high-dose IV (>2 g)** and predominantly in cardiac surgery' +
+                    (seizure ? '. **This patient has a seizure disorder** \u2014 favour the nebulized route if they can expectorate, and avoid stacking IV doses.' : '.') +
+                    '\n\n' +
+                    '**\u26a0 EVIDENCE BOUNDARY:** Bellam 2016 enrolled **sub-massive** hemoptysis. There is no randomized evidence for IV TXA in massive hemoptysis.\n\n';
+        }
+        else {
+            value = 'BRONCH';
+            label = 'Bronchoscopic instillation \u2014 by the proceduralist';
+            body +=
+                '**ROUTE:** Bronchoscopic instillation\n\n' +
+                    '**DOSE:** **500 mg in 5-15 mL normal saline**, instilled at the bleeding segment by the proceduralist.\n\n' +
+                    '**PROVENANCE:** Wand 2018 used 500 mg in 5 mL for *nebulization*. **The 15 mL dilution carried in this consult is practice-derived, not trial-derived.** There is no randomized trial of bronchoscopic instillation dosing.\n\n' +
+                    '**THIS IS A PROCEDURALIST\u2019S DOSE.** It is delivered during a bronchoscopy that is itself the therapeutic intervention \u2014 the scope is doing more than the drug.\n\n';
+        }
+        // Cautions
+        const cautions = [];
+        if (dic)
+            cautions.push('**DIC suspected** \u2014 no active thrombosis recorded, so this is not an absolute stop, but get haematology input before giving an antifibrinolytic in DIC.');
+        if (hematuria)
+            cautions.push('**Gross hematuria of upper urinary tract origin** \u2014 TXA risks ureteral clot retention and obstruction. Weigh that against the pulmonary bleed; it is a relative, not absolute, contraindication.');
+        if (seizure && route !== 2)
+            cautions.push('**Seizure disorder** \u2014 the dose-related seizure signal is with high-dose IV; it has not been reported with the nebulized route.');
+        if (cautions.length) {
+            body += '**CAUTIONS FOR THIS PATIENT:**\n\u2022 ' + cautions.join('\n\u2022 ') + '\n\n';
+        }
+        body +=
+            adjunct + '\n\n' +
+                '**CONTRAINDICATED:** active venous or arterial thrombosis, DIC with thrombosis, known hypersensitivity.\n' +
+                '**CAUTION:** gross hematuria of upper urinary tract origin (ureteral clot obstruction); seizure disorder with high-dose IV.';
+        const colorVar = massive
+            ? '--color-danger'
+            : (route === 2 && crclKnown && crcl < 50) || hematuria || seizure || dic
+                ? '--color-warning'
+                : '--color-primary';
+        if (route === 2 && crclKnown && crcl < 50) {
+            value = 'IV RENAL';
+            label = 'IV tranexamic acid \u2014 renal dose reduction required, ask pharmacy';
+        }
+        return { value, label, description: body, colorVar };
+    },
+};
 const CALCULATORS = {
     // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
     'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
@@ -44389,6 +44877,9 @@ const CALCULATORS = {
     // Wave D — Tier 3 dosing batch A (added 2026-08-24)
     'colchicine-dosing': COLCHICINE_DOSING_CALCULATOR,
     'pericarditis-nsaid-dose': PERICARDITIS_NSAID_DOSE_CALCULATOR,
+    // Wave D — Tier 3 dosing batch B (added 2026-08-24)
+    'electrolyte-replacement': ELECTROLYTE_REPLACEMENT_CALCULATOR,
+    'txa-hemoptysis': TXA_HEMOPTYSIS_CALCULATOR,
 };
 /** Get all available calculators sorted alphabetically by title */
 export function getAllCalculators() {

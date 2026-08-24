@@ -1,7 +1,7 @@
 {
   "_comment": "Accepted pre-existing broken cross-references. --gate blocks only NEW entries. Work this list DOWN and re-run --update-baseline; the ratchet only turns one way.",
   "generated": "2026-08-24",
-  "count": 122,
+  "count": 118,
   "accepted": [
     "acute-agitation|agit-start|Broken #/info/agit-steps — not in INFO_PAGES or STOP_PAGES",
     "adult-pharyngitis|ap-start|Broken #/info/ap-steps-summary — not in INFO_PAGES or STOP_PAGES",
@@ -29,9 +29,6 @@
     "culture-positive-results-ed|cpr-urine-symp|Broken #/info/cpr-uti-treat — not in INFO_PAGES or STOP_PAGES",
     "culture-positive-results-ed|cpr-wound-context|Broken #/info/cpr-ssti-treat — not in INFO_PAGES or STOP_PAGES",
     "dexmedetomidine||Tree id \"dexmedetomidine\" not in scripts/tree-registry.mjs",
-    "eating-disorders|ed-bn-assessment|Broken calculatorLinks id \"electrolyte-replacement\" — not in CALCULATORS",
-    "eating-disorders|ed-electrolyte-replacement|Broken calculatorLinks id \"electrolyte-replacement\" — not in CALCULATORS",
-    "eating-disorders|ed-electrolytes|Broken calculatorLinks id \"electrolyte-replacement\" — not in CALCULATORS",
     "febrile-seizure|febsz-start|Broken #/info/febsz-disposition-complex — not in INFO_PAGES or STOP_PAGES",
     "gallbladder|gb-antibiotics|Broken #/info/gb-abx — not in INFO_PAGES or STOP_PAGES",
     "gallbladder|gb-cholangitis-assess|Broken #/info/gb-cholangitis — not in INFO_PAGES or STOP_PAGES",
@@ -60,7 +57,6 @@
     "lower-gi-bleed|lgib-start|Broken #/info/lgib-steps — not in INFO_PAGES or STOP_PAGES",
     "lumbar-puncture|lp-paramedian-steps|Broken #/info/lp-paramedian-insertion — not in INFO_PAGES or STOP_PAGES",
     "lumbar-puncture|lp-paramedian-steps|Broken #/info/lp-paramedian-start — not in INFO_PAGES or STOP_PAGES",
-    "massive-hemoptysis|hemo-start|Broken calculatorLinks id \"txa-hemoptysis\" — not in CALCULATORS",
     "medical-clearance-psych|mcp-start|Broken #/info/mcp-steps — not in INFO_PAGES or STOP_PAGES",
     "nms|nms-start|Broken #/info/nms-steps — not in INFO_PAGES or STOP_PAGES",
     "ohss|ohss-start|Broken calculatorLinks id \"ohss-fluid\" — not in CALCULATORS",
