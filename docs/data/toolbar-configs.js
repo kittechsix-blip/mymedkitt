@@ -41,6 +41,7 @@ export const TOOLBAR_CONFIGS = {
         { id: 'hyp-cvs', label: 'Rome IV CVS', icon: '🔁', action: 'calculator', target: 'cvs-rome-iv', pinned: true },
         { id: 'hyp-antiemetics', label: 'Antiemetics', icon: '💊', action: 'overlay', target: 'hyperemesis-antiemetics', pinned: true },
         { id: 'hyp-mimics', label: "Can't-Miss", icon: '🎯', action: 'overlay', target: 'hyperemesis-mimics', pinned: true },
+        { id: 'hyp-algorithm', label: 'HG Algorithm', icon: '🗺️', action: 'overlay', target: 'hyperemesis-algorithm' },
         { id: 'hyp-anion-gap', label: 'Anion Gap', icon: '🧪', action: 'calculator', target: 'anion-gap' },
         { id: 'hyp-prokinetics', label: 'Prokinetics', icon: '⚙️', action: 'overlay', target: 'hyperemesis-prokinetics' },
         { id: 'hyp-chs', label: 'CHS Consult', icon: '🌿', action: 'route', target: 'chs' },

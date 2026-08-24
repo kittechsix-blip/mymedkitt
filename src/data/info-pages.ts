@@ -29429,6 +29429,35 @@ const HYPEREMESIS_ANTIEMETICS_PAGE: InfoPage = {
   ],
 };
 
+const HYPEREMESIS_ALGORITHM_PAGE: InfoPage = {
+  id: 'hyperemesis-algorithm',
+  title: 'Hyperemesis Treatment Algorithm',
+  subtitle: 'Historical visual reference - use the current pathway for dosing and safety gates',
+  image: {
+    src: 'images/hyperemesis/hyperemesis-treatment-algorithm.jpg',
+    alt: 'Flowchart for treatment of nausea and vomiting in pregnancy, progressing from nonpharmacologic care to oral antiemetics, intravenous fluid replacement, and refractory treatment',
+    caption: 'User-provided reference image. Original algorithm: Levichek et al., Can Fam Physician. 2002;48:267-268, 277. Verify reuse permission before public distribution.',
+  },
+  sections: [
+    {
+      body: 'Use this chart as a visual map of escalation from nonpharmacologic measures to antiemetics, rehydration, and refractory-care options. It is a historical reference, not a stand-alone current dosing protocol. Follow the active Hyperemesis pathway and local obstetric policy for the patient in front of you. [1][2]',
+    },
+    {
+      heading: 'Safety gates that remain essential',
+      body: '• Exclude surgical, infectious, metabolic, neurologic, and molar-pregnancy mimics before labeling symptoms hyperemesis.\n• Give thiamine before dextrose when prolonged vomiting or poor intake creates deficiency risk.\n• Reassess volume status, electrolytes, renal function, QTc risk, oral tolerance, and disposition after each treatment step. [2][3]',
+    },
+    {
+      heading: 'How to use the visual',
+      body: 'The chart shows medication options and escalation branches from its original publication. Formulations, pregnancy-safety evidence, dosing conventions, and local protocols evolve. Do not stack QT-prolonging or sedating agents without reassessing risk, and do not let the image replace the consult’s current exclusion and disposition pathway.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Levichek Z, et al. Nausea and vomiting of pregnancy: evidence-based treatment algorithm. Can Fam Physician. 2002;48:267-268, 277. PMID 11889884; PMCID PMC2213975.' },
+    { num: 2, text: 'ACOG Practice Bulletin No. 189: Nausea and Vomiting of Pregnancy. Obstet Gynecol. 2018;131(1):e15-e30.' },
+    { num: 3, text: 'Oudman E, et al. Wernicke encephalopathy in hyperemesis gravidarum: a systematic review. Eur J Obstet Gynecol Reprod Biol. 2019;236:84-93.' },
+  ],
+};
+
 const HYPEREMESIS_PROKINETICS_PAGE: InfoPage = {
   id: 'hyperemesis-prokinetics',
   title: 'Gastroparesis Prokinetics',
@@ -30227,6 +30256,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'hyperemesis-summary': HYPEREMESIS_SUMMARY_PAGE,
   'hyperemesis-mimics': HYPEREMESIS_MIMICS_PAGE,
   'hyperemesis-antiemetics': HYPEREMESIS_ANTIEMETICS_PAGE,
+  'hyperemesis-algorithm': HYPEREMESIS_ALGORITHM_PAGE,
   'hyperemesis-prokinetics': HYPEREMESIS_PROKINETICS_PAGE,
 
   // Dental / Intraoral Nerve Blocks (added 2026-06-20)
