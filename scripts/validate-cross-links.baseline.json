@@ -1,7 +1,7 @@
 {
   "_comment": "Accepted pre-existing broken cross-references. --gate blocks only NEW entries. Work this list DOWN and re-run --update-baseline; the ratchet only turns one way.",
   "generated": "2026-08-24",
-  "count": 118,
+  "count": 115,
   "accepted": [
     "acute-agitation|agit-start|Broken #/info/agit-steps — not in INFO_PAGES or STOP_PAGES",
     "adult-pharyngitis|ap-start|Broken #/info/ap-steps-summary — not in INFO_PAGES or STOP_PAGES",
@@ -59,7 +59,6 @@
     "lumbar-puncture|lp-paramedian-steps|Broken #/info/lp-paramedian-start — not in INFO_PAGES or STOP_PAGES",
     "medical-clearance-psych|mcp-start|Broken #/info/mcp-steps — not in INFO_PAGES or STOP_PAGES",
     "nms|nms-start|Broken #/info/nms-steps — not in INFO_PAGES or STOP_PAGES",
-    "ohss|ohss-start|Broken calculatorLinks id \"ohss-fluid\" — not in CALCULATORS",
     "oncological-emergencies|onc-ici-recognize|Broken #/drug/sulfamethoxazole-trimethoprim — not in ALL_DRUGS",
     "optic-neuritis|on-confirm|Broken #/info/optic-neuritis-steps — not in INFO_PAGES or STOP_PAGES",
     "optic-neuritis|on-confirm|Broken #/info/optic-neuritis-stop — not in INFO_PAGES or STOP_PAGES",
@@ -118,8 +117,6 @@
     "toxic-alcohols|tox-alc-cofactors|Broken #/drug/leucovorin — not in ALL_DRUGS",
     "toxic-alcohols|tox-alc-methanol-severe|Broken #/drug/folic-acid — not in ALL_DRUGS",
     "toxic-alcohols|tox-alc-start|Broken #/info/tox-alc-summary — not in INFO_PAGES or STOP_PAGES",
-    "urinary-sphincter||Toolbar action:'overlay' → target \"cauda-equina-red-flags\" not in INFO_PAGES/STOP_PAGES",
-    "xylazine-toxicity|xyl-wound-assess|Broken calculatorLinks id \"xyl-wound-antibiotics\" — not in CALCULATORS",
-    "xylazine-toxicity|xyl-wound-stage2|Broken calculatorLinks id \"xyl-wound-antibiotics\" — not in CALCULATORS"
+    "urinary-sphincter||Toolbar action:'overlay' → target \"cauda-equina-red-flags\" not in INFO_PAGES/STOP_PAGES"
   ]
 }

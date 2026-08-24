@@ -45799,6 +45799,619 @@ const TXA_HEMOPTYSIS_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// ---------------------------------------------------------------------------
+// Wave D — Tier 3 dosing batch C (added 2026-08-24)
+//
+// Governing discipline (same as batches A and B): every number the research
+// pass flagged UNSOURCED is OMITTED, and the qualitative warning that number
+// was propping up is RETAINED. Where two sourced positions genuinely disagree,
+// BOTH are shown with their sources named. Nothing is silently split.
+//
+// xyl-wound-antibiotics — discrepancies handled:
+//   #16 "56% MRSA / 37% GAS" -> the exact percentages are OMITTED. No
+//       peer-reviewed culture series was located; the probable source is a
+//       Philadelphia DPH municipal document. The clinical consequence the
+//       figures propped up — polymicrobial, cover MRSA AND GAS — is RETAINED
+//       and rests on IDSA 2014 instead.
+//   #17 Philadelphia Consensus is cited as SurgiColl 2025;3(2), which is what
+//       it is. It is NOT cited as Annals of Surgery, and its non-PubMed-indexed
+//       status is stated on screen wherever the staging drives a decision.
+//   #18 OFID 2025 daptomycin-over-vancomycin is a RECOMMENDATION-LEVEL change
+//       awaiting owner sign-off. It is therefore presented as a named,
+//       sourced consideration — NOT as the app's instruction, and NOT as the
+//       default regimen. No daptomycin dose is printed: the OFID paper's own
+//       stated dose was not verified in the research pass.
+//   Tedizolid and dalbavancin are NAMED with no doses, per the same rule.
+//
+// ohss-fluid — discrepancies handled:
+//   #19 No haematocrit/creatinine/urine-output threshold triggers albumin.
+//       The calculator computes NO albumin trigger. Albumin is positioned as
+//       an option with its RCOG level-4 and ASRM Grade-C weakness on screen.
+//   #20 The "1-2 L bolus", "2-3 L/day", "NS or LR" and "avoid dextrose" have
+//       NO located source -> ALL OMITTED (spec option (a)). Output says
+//       "titrated to urine output and haematocrit" with no volume and no
+//       fluid type, and carries RCOG's warning that vigorous crystalloid
+//       worsens ascites. RCOG's actual position — oral fluid to thirst is
+//       first-line — leads the fluid block.
+//   #21 Diuretics: absolute prohibition headlined, RCOG's narrow
+//       multidisciplinary exception in fine print. No diuretic field exists
+//       and no diuretic dose is ever computed.
+//   #22/#23 Every creatinine band is attributed to Navot 1992, not to RCOG.
+//       RCOG Table 3 contains no creatinine criterion.
+//   #23e CVP 8-12 mmHg -> OMITTED. It appears in no OHSS guideline.
+//   #24 The app previously cited Hum Reprod Update 2016;22(6):682-698, which
+//       does not exist; the correct citation is Hum Reprod 2016;31(9):1997-2004.
+//       Both RCOG editions are cited and the anchor edition is named on screen.
+//   #26 No paracentesis volume, no rate, no post-drainage g/L figure. RCOG's
+//       observed volumes are shown as observations, explicitly not targets.
+//
+// Also deliberately absent, because each is a plausible-looking fabrication a
+// future contributor may try to add: any haematocrit-to-volume-deficit
+// formula, any new named score, any early-vs-late OHSS split, dopamine, HES,
+// furosemide, mannitol.
+// ---------------------------------------------------------------------------
+
+const XYL_WOUND_ANTIBIOTICS_CALCULATOR: CalculatorDefinition = {
+  id: 'xyl-wound-antibiotics',
+  title: 'Xylazine Wound Antibiotic Guide',
+  subtitle: 'Stage \u00d7 infection signs \u2014 including the "no antibiotics" answer',
+  description:
+    'Decides whether a xylazine-associated wound needs systemic antibiotics at all, and if so which regimen. The most important output is the **no antibiotics indicated** branch: xylazine wounds commonly are not infected early, and a static reference page would be read as an antibiotic menu.',
+  fields: [
+    {
+      name: 'wound-stage',
+      label: 'Wound stage',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      description:
+        'Philadelphia Consensus staging (SurgiColl 2025;3(2), doi:10.58616/001c.140602). Note this consensus is not PubMed-indexed.',
+      selectOptions: [
+        { label: '\u2014 Select stage \u2014', points: 0 },
+        { label: 'Stage 1 \u2014 superficial: partial or full thickness skin loss, no exposed tendon, muscle or bone; function preserved', points: 1 },
+        { label: 'Stage 2 \u2014 moderate: exposed or compromised muscle/tendon, function preserved', points: 2 },
+        { label: 'Stage 3A \u2014 severe: exposed bone, osteomyelitis likely, limb salvage possible', points: 3 },
+        { label: 'Stage 3B \u2014 severe: exposed bone with osteomyelitis, no meaningful function', points: 4 },
+      ],
+    },
+    {
+      name: 'infection-signs',
+      label: 'Signs of infection',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: '\u2014 Select \u2014', points: 0 },
+        { label: 'None \u2014 colonized wound only: no erythema beyond the wound edge, no purulence, no systemic signs', points: 1 },
+        { label: 'Local infection \u2014 erythema >1 cm from the wound edge, purulence, warmth, tenderness', points: 2 },
+        { label: 'Systemic signs \u2014 fever, tachycardia, leukocytosis, SIRS', points: 3 },
+        { label: 'Sepsis or necrotizing features \u2014 hypotension, crepitus, pain out of proportion, rapid progression, bullae, skin sloughing', points: 4 },
+      ],
+    },
+    { name: 'sulfa-allergy', label: 'Sulfa allergy', type: 'toggle', points: 1 },
+    { name: 'renal-impairment', label: 'AKI or CrCl <30 mL/min', type: 'toggle', points: 1 },
+    {
+      name: 'prior-pseudomonas',
+      label: 'Prior Pseudomonas isolate, or recent broad-spectrum / healthcare exposure',
+      type: 'toggle',
+      points: 1,
+    },
+    {
+      name: 'discharge-risk',
+      label: 'High likelihood of patient-directed discharge',
+      type: 'toggle',
+      points: 1,
+    },
+    { name: 'body-weight', label: 'Body weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+  ],
+  results: [],
+  thresholdNote:
+    '**Most xylazine wounds are not infected early \u2014 the default answer is wound care, not antibiotics.** Give systemic antibiotics only for erythema >1 cm beyond the wound edge, purulence, or systemic signs. Cover MRSA **and** group A Streptococcus when cellulitis is present: TMP-SMX and tetracyclines have unreliable streptococcal coverage and must not be used alone unless purulence is present (IDSA 2014). **Do not aggressively debride** \u2014 chronic xylazine wounds mimic necrotizing fasciitis and aggressive debridement worsens outcomes; islands of healthy tissue carry healing potential. Exposed bone means assume osteomyelitis: debride bone, obtain **bone culture**, avoid hardware, treat **6 weeks**. Sepsis or true necrotizing features is a **surgical emergency** \u2014 antibiotics do not substitute for source control. Antibiotics never heal the wound: recurrence is near-certain without substance use disorder treatment, and definitive coverage or reconstruction should follow **3+ months of abstinence**, inside addiction management rather than acute care.',
+  citations: [
+    'Yang WT, Meisner JA, Maguire C, et al. Multidisciplinary Guidance to Care for Persons With Xylazine-Associated Wounds. Open Forum Infect Dis. 2025;12(6):ofaf299. PMID 40453883. PMC12125673.',
+    'Stevens DL, Bisno AL, Chambers HF, et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by the IDSA. Clin Infect Dis. 2014;59(2):e10-e52. PMID 24947530. Erratum Clin Infect Dis. 2015;60(9):1448.',
+    'Ilyas AM, Ramtin S, Ilyas EN, et al. Philadelphia Consensus on the Surgical Management of Xylazine-Associated Wounds in People Who Use Drugs. SurgiColl. 2025;3(2). doi:10.58616/001c.140602. \u2014 source of the staging system used here. NOT published in Annals of Surgery and NOT PubMed-indexed.',
+    'Rybak MJ, et al. Therapeutic monitoring of vancomycin for serious MRSA infections: revised consensus guideline of ASHP, IDSA, PIDS and SIDP. Am J Health Syst Pharm. 2020;77(11):835-864.',
+    'Philadelphia Department of Public Health. Xylazine (Tranq) Wound Best Practices. PennCAMP. 2023. \u2014 municipal guidance, not a peer-reviewed culture series.',
+  ],
+  computeResult: (values) => {
+    const stage = Number(values['wound-stage']) || 0;
+    const signs = Number(values['infection-signs']) || 0;
+    const sulfa = !!values['sulfa-allergy'];
+    const renal = !!values['renal-impairment'];
+    const pseudo = !!values['prior-pseudomonas'];
+    const dischargeRisk = !!values['discharge-risk'];
+    const wt = Number(values['body-weight']) || 0;
+
+    if (stage === 0 || signs === 0) {
+      const missing: string[] = [];
+      if (stage === 0) missing.push('wound stage');
+      if (signs === 0) missing.push('signs of infection');
+      return {
+        value: '\u2014',
+        label: 'Select stage and infection signs',
+        description:
+          'Missing: **' + missing.join('** and **') + '**.\n\n' +
+          'Antibiotic need in a xylazine wound is decided by **stage \u00d7 infection signs together.** Stage alone does not indicate antibiotics \u2014 a Stage 3 wound with no infection signs still does not get systemic antibiotics.\n\n' +
+          '**REGARDLESS OF THE ANSWER:** do not aggressively debride, and refer to addiction medicine. Antibiotics do not heal this wound.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    // Shared closing block, present on every non-guard output.
+    const closing =
+      '**ANTIBIOTICS DO NOT HEAL THIS WOUND.** They treat superinfection only. Definitive coverage or reconstruction should follow **3+ months of abstinence**, and surgical intervention belongs inside addiction management rather than acute care \u2014 recurrence risk without treating the substance use disorder is high.\n\n' +
+      '**DO NOT AGGRESSIVELY DEBRIDE.** Chronic xylazine wounds are routinely mistaken for necrotizing fasciitis. Islands of healthy tissue are healing potential.\n\n' +
+      '**THE REAL INTERVENTION:** addiction medicine referral and low-barrier wound clinic follow-up.';
+
+    // Osteomyelitis block for exposed bone, appended wherever it applies.
+    const osteo =
+      stage >= 3
+        ? '**EXPOSED BONE \u2014 ASSUME OSTEOMYELITIS**\n' +
+          '\u2022 Debride bone and obtain a **bone culture** \u2014 do not treat off a wound swab\n' +
+          '\u2022 **Avoid hardware**\n' +
+          '\u2022 Treat **6 weeks**\n' +
+          '\u2022 A synthetic dermal substitute can temporize the wound bed and may delay or prevent amputation\n' +
+          '\u2022 Staging is from the Philadelphia Consensus (SurgiColl 2025), which is **not PubMed-indexed** \u2014 weigh it as consensus, not as trial evidence\n\n'
+        : '';
+
+    // ---- BRANCH 0: no infection signs, any stage -> no systemic antibiotics ----
+    if (signs === 1) {
+      return {
+        value: 'NO ABX',
+        label: 'No systemic antibiotics indicated',
+        description:
+          '**NO SYSTEMIC ANTIBIOTICS INDICATED**\n\n' +
+          'Stage ' + (stage === 4 ? '3B' : stage === 3 ? '3A' : String(stage)) + ' wound with **no signs of infection.** Xylazine-associated wounds commonly are not infected in the early stage. Reflexive antibiotics drive resistance and do not accelerate healing.\n\n' +
+          '**WOUND CARE:**\n' +
+          '\u2022 Cleanse with soap and water or normal saline\n' +
+          '\u2022 Non-adherent dressing \u2014 **Xeroform** for a drier bed, **Adaptic** for a moist bed\n' +
+          '\u2022 **Silver sulfadiazine 1%** if the bed is contaminated; petroleum ointment (Aquaphor, A&D) if it is clean\n' +
+          '\u2022 Daily dressing changes, **autolytic debridement**\n' +
+          '\u2022 **AVOID AGGRESSIVE DEBRIDEMENT**\n\n' +
+          '**START ANTIBIOTICS ONLY IF:** erythema extends >1 cm from the wound edge, purulence appears, or systemic signs develop.\n\n' +
+          osteo +
+          closing,
+        colorVar: stage >= 3 ? '--color-warning' : '--color-primary',
+      };
+    }
+
+    // ---- BRANCH 3: sepsis or necrotizing features -> surgical ----
+    if (signs === 4) {
+      return {
+        value: 'SURGERY',
+        label: 'Surgical emergency \u2014 antibiotics do not substitute for source control',
+        description:
+          '**THIS IS A SURGICAL PROBLEM \u2014 CALL SURGERY NOW**\n\n' +
+          'Antibiotics do not substitute for source control. Start broad IV antibiotics **and** obtain immediate surgical consultation in parallel; neither waits for the other.\n\n' +
+          '**BROAD IV COVER:**\n' +
+          '\u2022 **Vancomycin 25-30 mg/kg IV load**' +
+          (wt > 0 ? ' = **' + Math.round(wt * 25) + '-' + Math.round(wt * 30) + ' mg** at ' + wt + ' kg' : '') +
+          ', then dose to levels (ASHP/IDSA 2020)\n' +
+          '\u2022 **Piperacillin-tazobactam 4.5 g IV q8h** (extended infusion) \u2014 gram-negative and anaerobic cover' +
+          (pseudo ? ' \u2014 this already covers Pseudomonas' : '') +
+          '\n' +
+          '\u2022 If necrotizing infection is genuinely suspected, add **clindamycin 900 mg IV q8h** for the antitoxin effect\n\n' +
+          '**\u26a0 COUNTER-WARNING, IN THE SAME BREATH:** do **not** misdiagnose a chronic xylazine wound as necrotizing fasciitis. These wounds mimic it. Aggressive debridement of a chronic xylazine wound worsens outcomes. The features that should make you believe it is genuinely necrotizing are **crepitus, pain out of proportion, rapid progression over hours, bullae and skin sloughing with systemic toxicity** \u2014 not the chronic appearance of the wound bed itself.\n\n' +
+          (renal
+            ? '**RENAL IMPAIRMENT RECORDED:** vancomycin plus piperacillin-tazobactam carries a well-described additive nephrotoxicity signal. Involve pharmacy; do not simply proceed on the standard pairing.\n\n'
+            : '') +
+          osteo +
+          closing,
+        colorVar: '--color-danger',
+      };
+    }
+
+    // ---- BRANCH 2: systemic signs, or stage 3A/3B with any infection -> IV ----
+    if (signs === 3 || stage >= 3) {
+      let body = '**REGIMEN \u2014 INPATIENT IV**\n\n';
+      body +=
+        signs === 3
+          ? 'Systemic signs are present.\n\n'
+          : 'Stage ' + (stage === 4 ? '3B' : '3A') + ' with infection \u2014 exposed bone plus infection is an inpatient problem.\n\n';
+
+      if (renal) {
+        body +=
+          '**CONSULT REGIMEN (renal impairment recorded):** **vancomycin** dosed to levels **plus ceftriaxone**.\n' +
+          '\u2022 **\u26a0 Be explicit about what ceftriaxone does not cover:** it gives **no anaerobic and no pseudomonal cover.** If either matters in this wound, ceftriaxone is the wrong partner drug.\n';
+        if (pseudo) {
+          body += '\u2022 **Prior Pseudomonas / broad-spectrum exposure recorded \u2014 substitute cefepime 2 g IV q8h for ceftriaxone.**\n';
+        }
+        body += '\u2022 Vancomycin in AKI needs pharmacy dosing and level-guided adjustment, not a fixed schedule.\n\n';
+      } else {
+        body +=
+          '**CONSULT REGIMEN:** **vancomycin 25-30 mg/kg IV load**' +
+          (wt > 0 ? ' = **' + Math.round(wt * 25) + '-' + Math.round(wt * 30) + ' mg** at ' + wt + ' kg' : '') +
+          ', then per levels (ASHP/IDSA 2020), **plus piperacillin-tazobactam 4.5 g IV q8h** by extended infusion.\n' +
+          '\u2022 Covers MRSA, group A Strep, gram-negatives and anaerobes\n' +
+          (pseudo ? '\u2022 **Prior Pseudomonas / broad-spectrum exposure recorded** \u2014 piperacillin-tazobactam already covers Pseudomonas; no change needed\n' : '') +
+          '\n';
+      }
+
+      body +=
+        '**CONSIDERATION FROM OFID 2025 \u2014 NOT THIS APP\u2019S RECOMMENDATION, AND NOT YET ADOPTED HERE:**\n' +
+        'The multidisciplinary xylazine-wound guidance (Open Forum Infect Dis 2025;12(6):ofaf299, PMID 40453883) recommends preferring **IV daptomycin over vancomycin in people who use drugs**, specifically to avoid the repeated phlebotomy that vancomycin therapeutic drug monitoring requires. That is a change to what is recommended, not a formatting change, so it is surfaced here with its source rather than applied silently. **No daptomycin dose is printed** \u2014 the dose stated in that paper was not verified in the research behind this calculator. If you choose daptomycin, take the dose from your formulary, not from this screen.\n\n';
+
+      if (dischargeRisk) {
+        body +=
+          '**HIGH LIKELIHOOD OF PATIENT-DIRECTED DISCHARGE \u2014 BUILD THE CONTINGENCY BEFORE SHE LEAVES, NOT AFTER**\n' +
+          '\u2022 **Linezolid 600 mg PO BID** is the oral option with a dose this calculator can source\n' +
+          '\u2022 **Tedizolid** and **dalbavancin** are also named in OFID 2025 as options in this exact scenario. **Their doses were not verified in the research behind this calculator and are deliberately not printed** \u2014 get them from pharmacy\n' +
+          '\u2022 Write the plan, the follow-up and the prescription **now.** A patient who leaves at 3 a.m. with no script gets nothing\n\n';
+      }
+
+      body += osteo;
+      body +=
+        '**DURATION:** driven by the infection, not by the wound. ' +
+        (stage >= 3 ? 'With exposed bone, plan **6 weeks** for osteomyelitis.' : 'Reassess at 48-72 hours and de-escalate on culture.') +
+        '\n\n';
+      body += closing;
+
+      return {
+        value: 'IV',
+        label: stage === 4 ? 'Inpatient IV \u2014 Stage 3B, involve surgery early' : 'Inpatient IV antibiotics',
+        description: body,
+        colorVar: stage === 4 ? '--color-danger' : '--color-warning',
+      };
+    }
+
+    // ---- BRANCH 1: local infection, stage 1 or 2 -> outpatient oral ----
+    let body = '**REGIMEN \u2014 OUTPATIENT, LOCAL INFECTION**\n\n';
+
+    if (sulfa) {
+      body +=
+        '**SULFA ALLERGY RECORDED \u2014 TMP-SMX IS OUT.** Two options:\n' +
+        '\u2022 **Doxycycline 100 mg PO BID** for MRSA, **plus a \u03b2-lactam** (cephalexin 500 mg PO QID, or amoxicillin 500 mg PO TID) for group A Strep\n' +
+        '\u2022 **or clindamycin 300-450 mg PO QID** as single-agent MRSA + GAS cover (IDSA 2014)\n\n';
+    } else {
+      body +=
+        '**MRSA:** **TMP-SMX 1-2 DS (160/800 mg) PO BID** \u2014 2 DS BID for larger or moderate-severe lesions.\n' +
+        (wt > 0
+          ? '\u2022 Paediatric equivalent, if this is a child: 8-12 mg/kg/day of the TMP component divided BID = **' +
+            Math.round(wt * 8) + '-' + Math.round(wt * 12) + ' mg/day TMP** at ' + wt + ' kg\n'
+          : '') +
+        '**GAS:** add an oral \u03b2-lactam \u2014 **cephalexin 500 mg PO QID** or amoxicillin 500 mg PO TID.\n\n';
+    }
+
+    body +=
+      '**WHY BOTH DRUGS:** xylazine wound infections are commonly polymicrobial, with both MRSA and group A Streptococcus represented. **IDSA 2014:** TMP-SMX and the tetracyclines have **unreliable streptococcal coverage** and should not be used alone unless purulence is present. Clindamycin is the exception \u2014 it covers both, which is why it stands alone above.\n' +
+      '\u2022 *Provenance note:* a specific MRSA-versus-group-A-Strep percentage breakdown for Philadelphia xylazine wounds is widely quoted in talks and handouts. **No peer-reviewed culture series supporting those figures was located**; the probable source is a municipal health-department document. The percentages are therefore not printed here. The recommendation to cover both organisms does not depend on them \u2014 it rests on IDSA 2014.\n\n';
+
+    body +=
+      '**TOPICAL:** silver sulfadiazine 1% (active 72+ hours). Mupirocin for decolonization.\n\n' +
+      '**DURATION:** **7-10 days.**\n\n';
+
+    if (renal) {
+      body +=
+        '**AKI OR CrCl <30 RECORDED:** TMP-SMX needs renal dose adjustment and carries a hyperkalaemia and creatinine-rise signal in renal impairment. Involve pharmacy, and recheck potassium and creatinine.\n\n';
+    }
+    if (pseudo) {
+      body +=
+        '**PRIOR PSEUDOMONAS / BROAD-SPECTRUM EXPOSURE RECORDED:** none of the oral regimens above cover Pseudomonas. If Pseudomonas is genuinely in play in an infected wound, that is an argument for culture and for reconsidering outpatient oral management.\n\n';
+    }
+    if (dischargeRisk) {
+      body +=
+        '**HIGH LIKELIHOOD OF PATIENT-DIRECTED DISCHARGE:** give the prescription in hand before the patient leaves, and arrange low-barrier wound clinic follow-up rather than a standard clinic appointment.\n\n';
+    }
+
+    body +=
+      '**WOUND CARE CONTINUES ALONGSIDE:** cleanse, non-adherent dressing, daily changes, autolytic debridement.\n\n' +
+      '**ESCALATE IF:** systemic signs develop, the erythema advances on treatment, or bone becomes exposed.\n\n' +
+      closing;
+
+    return {
+      value: 'ORAL',
+      label: 'Outpatient oral \u2014 cover MRSA and group A Strep',
+      description: body,
+      colorVar: '--color-primary',
+    };
+  },
+};
+
+const OHSS_FLUID_CALCULATOR: CalculatorDefinition = {
+  id: 'ohss-fluid',
+  title: 'OHSS Fluid & Electrolyte Guide',
+  subtitle: 'Oral first \u00b7 never diuretics \u00b7 no invented volumes',
+  description:
+    'Fluid and electrolyte management in ovarian hyperstimulation syndrome. **She looks wet and is intravascularly dry.** This calculator deliberately prints no IV bolus volume, no albumin trigger, no paracentesis volume and no CVP target, because no guideline source for any of them was located \u2014 see the notes on each block.',
+  fields: [
+    { name: 'body-weight', label: 'Body weight', type: 'number', points: 0, valueIsPoints: true, unit: 'kg' },
+    {
+      name: 'hematocrit',
+      label: 'Haematocrit',
+      type: 'number',
+      points: 0,
+      valueIsPoints: true,
+      unit: '%',
+      description: 'Enter as a percentage (45), not a fraction (0.45). RCOG Green-top 5 writes it in fraction notation; this field wants percent.',
+    },
+    { name: 'creatinine', label: 'Creatinine', type: 'number', points: 0, valueIsPoints: true, unit: 'mg/dL' },
+    {
+      name: 'severity',
+      label: 'OHSS severity',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      description: 'RCOG Green-top 5 Table 3 categories, verbatim.',
+      selectOptions: [
+        { label: '\u2014 Select severity \u2014', points: 0 },
+        { label: 'Mild \u2014 abdominal bloating, mild abdominal pain, ovaries usually <8 cm', points: 1 },
+        { label: 'Moderate \u2014 moderate abdominal pain, nausea \u00b1 vomiting, ultrasound evidence of ascites, ovaries usually 8-12 cm', points: 2 },
+        { label: 'Severe \u2014 clinical ascites \u00b1 hydrothorax, oliguria, haematocrit >0.45, sodium <135, osmolality <282, potassium >5, albumin <35 g/l, ovaries usually >12 cm', points: 3 },
+        { label: 'Critical \u2014 tense ascites or large hydrothorax, haematocrit >0.55, WCC >25,000, oliguria or anuria, thromboembolism, ARDS', points: 4 },
+      ],
+    },
+    {
+      name: 'urine-output',
+      label: 'Urine output',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: '\u2014 Select urine output \u2014', points: 0 },
+        { label: '\u2265 0.5 mL/kg/hr \u2014 adequate', points: 1 },
+        { label: '< 0.5 mL/kg/hr but \u2265 30 mL/hr', points: 2 },
+        { label: 'Oliguria \u2014 < 30 mL/hr or < 300 mL/24 h (RCOG severe-OHSS threshold)', points: 3 },
+        { label: 'Anuria (RCOG critical-OHSS criterion)', points: 4 },
+        { label: 'Not yet measured', points: 9 },
+      ],
+    },
+    {
+      name: 'oral-intake-tolerated',
+      label: 'Tolerating oral intake',
+      type: 'toggle',
+      points: 1,
+      description:
+        'Able to drink to thirst and keep it down. RCOG: oral replacement guided by thirst is the most physiological approach; IV crystalloid is for women who cannot maintain adequate oral intake.',
+    },
+  ],
+  results: [],
+  thresholdNote:
+    '**OHSS ascites is not volume overload \u2014 she looks wet and is intravascularly dry.** VEGF-mediated capillary leak means total body water is high while circulating volume is low. **Never give diuretics for OHSS ascites**: they deplete intravascular volume further, drive the haematocrit up, worsen hemoconcentration, convert prerenal azotaemia into AKI, and increase an already high arterial and venous thrombotic risk. RCOG allows one narrow exception \u2014 persistent oliguria despite adequate fluid replacement **and** drainage of ascites, **in a multidisciplinary setting only.** **Oral fluid guided by thirst is first-line**, at least ~1 litre/day; IV crystalloid is for women who cannot maintain oral intake, and vigorous crystalloid can worsen the ascites. **No guideline specifies an IV bolus volume in OHSS.** Albumin 25% 50-100 g over 4 hours, repeatable 4- to 12-hourly, is **RCOG evidence level 4 and ASRM Grade C** \u2014 an option rather than a mandate, and **no published threshold triggers it.** Haematocrit >45% is severe and >55% is critical (RCOG Table 3); **the creatinine bands come from Navot 1992, not from RCOG \u2014 RCOG Table 3 has no creatinine criterion.** Paracentesis is indicated for tense painful ascites, respiratory compromise, or oliguria despite adequate volume replacement \u2014 ultrasound-guided, with **no guideline-specified volume or rate.** No NSAIDs. VTE prophylaxis for all moderate-severe OHSS.',
+  citations: [
+    'Royal College of Obstetricians and Gynaecologists. The Management of Ovarian Hyperstimulation Syndrome. Green-top Guideline No. 5. February 2016. \u2014 the edition this calculator is anchored to. Source of Table 3, the oral-first fluid recommendation (level 3), the diuretic prohibition and its exception (level 3), albumin 50-100 g over 4 h repeated 4-12 hourly (level 4), the paracentesis indications (level 3), the HES withdrawal, the NSAID prohibition, and the monitoring and admission criteria. All verbatim quotations here are from this document.',
+    'Hamoda H, et al. The Management of Ovarian Hyperstimulation Syndrome (Green-top Guideline No. 5, updated edition). BJOG. 2026. doi:10.1111/1471-0528.70195. \u2014 supersedes the February 2016 edition. This calculator still quotes the 2016 text; re-anchoring to the updated edition is an open decision.',
+    'Practice Committee of the ASRM. Prevention and treatment of moderate and severe ovarian hyperstimulation syndrome: a guideline. Fertil Steril. 2016;106(7):1634-1647. PMID 27678032. \u2014 Grade B: fluid resuscitation and prophylactic anticoagulation are the mainstay. Grade C: insufficient evidence for volume expanders alone.',
+    'Practice Committee of the ASRM. Prevention of moderate and severe ovarian hyperstimulation syndrome: a guideline. Fertil Steril. 2024;121(2):230-245. PMID 38099867. \u2014 the 2024 revision dropped treatment from its scope and cannot be cited for any treatment recommendation.',
+    'Navot D, Bergh PA, Laufer N. Ovarian hyperstimulation syndrome in novel reproductive technologies: prevention and treatment. Fertil Steril. 1992;58(2):249-261. PMID 1633889. \u2014 sole source of every creatinine band in this app (severe 1.0-1.5 mg/dL, critical >1.6 mg/dL) and of the WBC >15,000 severe threshold.',
+    'Youssef MA, Mourad S. Volume expanders for the prevention of ovarian hyperstimulation syndrome. Cochrane Database Syst Rev. 2016;2016(8):CD001302. PMID 27577848. \u2014 9 RCTs, 1867 women. Albumin Peto OR 0.67 (0.47-0.95), I\u00b2=69%, very low quality; possible detrimental effect on pregnancy Peto OR 0.72 (0.55-0.94). Prevention only, no live-birth data. There is no systematic review of albumin as treatment for established OHSS.',
+    'Humaidan P, Nelson SM, Devroey P, et al. Ovarian hyperstimulation syndrome: review and new classification criteria for reporting in clinical trials. Hum Reprod. 2016;31(9):1997-2004. PMID 27343272.',
+    'Abramov Y, Fatum M, Abrahamov D, Schenker JG. Hydroxyethylstarch versus human albumin for the treatment of severe ovarian hyperstimulation syndrome: a preliminary report. Fertil Steril. 2001;75(6):1228-30. PMID 11384657. \u2014 predates the HES withdrawal; must not be used to justify HES.',
+    'Renal blood flow alteration after paracentesis in women with ovarian hyperstimulation. Obstet Gynecol. 2004;104(2):321-6. PMID 15292006.',
+    'White DA, et al. STOP-OHSS trial protocol. BMJ Open. 2024;14(1):e076434. PMID 38262643. \u2014 protocol states colloid should be considered after large-volume drainage and deliberately sets no volume threshold and no mandatory albumin replacement.',
+  ],
+  computeResult: (values) => {
+    const wt = Number(values['body-weight']) || 0;
+    const hct = Number(values['hematocrit']) || 0;
+    const cr = Number(values['creatinine']) || 0;
+    const severity = Number(values['severity']) || 0;
+    const uop = Number(values['urine-output']) || 0;
+    const oral = !!values['oral-intake-tolerated'];
+
+    const reject = (label: string, description: string) => ({
+      value: 'CHECK UNITS',
+      label,
+      description,
+      colorVar: '--color-danger',
+    });
+
+    // ---- HARD REJECTS -------------------------------------------------------
+    // ENGINEERING GUARDS, NOT CLINICAL THRESHOLDS. None of the cutoffs below
+    // carry a citation and none should ever be read as evidence-derived. They
+    // exist only to catch unit-entry errors.
+    if (hct > 0 && hct < 1) {
+      return reject(
+        'Check the haematocrit units',
+        '**CHECK THE HAEMATOCRIT UNITS**\n\nYou entered **' + hct + '**. Enter haematocrit as a percentage: **' + Math.round(hct * 100) + '**.\n\nRCOG Green-top 5 writes haematocrit in fraction notation (>0.45 severe, >0.55 critical). This field expects percent.',
+      );
+    }
+    if (hct > 0 && (hct < 15 || hct > 70)) {
+      return reject(
+        'Haematocrit outside a plausible range',
+        '**CHECK THE HAEMATOCRIT**\n\nYou entered **' + hct + '%**, which is outside the range this calculator will act on (15-70%). Re-check the value and the units before proceeding.',
+      );
+    }
+    if (wt > 200) {
+      return reject(
+        'Check the weight units',
+        '**CHECK THE WEIGHT UNITS**\n\nYou entered **' + wt + '**. That looks like pounds. Enter kilograms (lb \u00f7 2.205 \u2248 **' + Math.round(wt / 2.205) + ' kg**).',
+      );
+    }
+    if (wt > 0 && wt < 35) {
+      return reject(
+        'Weight outside this population',
+        '**CHECK THE WEIGHT**\n\nYou entered **' + wt + ' kg**, which is outside the post-ART adult population this consult describes. Re-check the value.',
+      );
+    }
+    if (cr > 20) {
+      return reject(
+        'Check the creatinine units',
+        '**CHECK THE CREATININE UNITS**\n\nYou entered **' + cr + '**. That looks like \u00b5mol/L. Enter mg/dL (\u00b5mol/L \u00f7 88.4 \u2248 **' + (cr / 88.4).toFixed(2) + ' mg/dL**).',
+      );
+    }
+
+    // ---- GUARD --------------------------------------------------------------
+    if (severity === 0 || hct <= 0 || wt <= 0) {
+      const missing: string[] = [];
+      if (severity === 0) missing.push('severity');
+      if (hct <= 0) missing.push('haematocrit');
+      if (wt <= 0) missing.push('weight');
+      return {
+        value: '\u2014',
+        label: 'Enter severity, haematocrit and weight',
+        description:
+          '**ENTER SEVERITY, HAEMATOCRIT AND WEIGHT**\n\nMissing: **' + missing.join('**, **') + '**.\n\n' +
+          'This calculator will not produce a partial fluid plan. OHSS fluid decisions turn on the haematocrit and the urine output together; either one alone is misleading.\n\n' +
+          '**REGARDLESS OF THE NUMBERS \u2014 NO DIURETICS.** OHSS ascites is not volume overload. That decision does not wait for labs.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const sevName = severity === 4 ? 'CRITICAL' : severity === 3 ? 'SEVERE' : severity === 2 ? 'MODERATE' : 'MILD';
+    const uopMeasured = uop !== 0 && uop !== 9;
+    const oliguric = uopMeasured && uop >= 3;
+    const anuric = uopMeasured && uop === 4;
+
+    const parts: string[] = [];
+
+    // ---- HEADER LINE --------------------------------------------------------
+    const hdr: string[] = [];
+    hdr.push('Haematocrit **' + hct + '%**' + (hct > 55 ? ' (RCOG **critical** >55%)' : hct > 45 ? ' (RCOG **severe** >45%)' : ' (below the RCOG severe threshold of 45%)'));
+    if (cr > 0) {
+      hdr.push(
+        'Creatinine **' + cr + ' mg/dL**' +
+          (cr > 1.6
+            ? ' (**Navot 1992 critical band >1.6** \u2014 not an RCOG criterion)'
+            : cr >= 1.0
+              ? ' (**Navot 1992 severe band 1.0-1.5** \u2014 not an RCOG criterion)'
+              : ''),
+      );
+    }
+    if (uopMeasured) {
+      hdr.push(
+        'Urine output: **' +
+          (uop === 4 ? 'anuria' : uop === 3 ? 'oliguria <30 mL/hr' : uop === 2 ? '<0.5 mL/kg/hr but \u226530 mL/hr' : 'adequate \u22650.5 mL/kg/hr') +
+          '**' +
+          (uop === 1 && wt > 0 ? ' (\u2265 ' + Math.round(wt * 0.5) + ' mL/hr at ' + wt + ' kg)' : ''),
+      );
+    }
+    hdr.push('Weight **' + wt + ' kg**');
+    parts.push(hdr.join(' \u00b7 '));
+
+    // ---- STEP 1: DISPOSITION ------------------------------------------------
+    let dispo: string;
+    if (severity === 4) {
+      dispo =
+        '**CRITICAL OHSS \u2014 ADMIT, ALWAYS.** Critical OHSS is an absolute admission criterion (RCOG). Involve the fertility team and critical care.';
+    } else if (severity === 3) {
+      dispo =
+        '**SEVERE OHSS.** RCOG: outpatient management is appropriate for mild or moderate OHSS **and in selected cases of severe OHSS.** Admit if she cannot achieve satisfactory pain control, cannot maintain adequate fluid intake because of nausea, is worsening despite outpatient intervention, or cannot attend regular outpatient follow-up.' +
+        (oral ? '' : ' **She is not tolerating oral intake \u2014 that is an admission criterion in itself.**');
+    } else {
+      dispo =
+        '**' + sevName + ' OHSS.** Outpatient management is appropriate (RCOG, evidence level 3-4). Admit if pain control fails, oral intake fails, she worsens despite outpatient intervention, or she cannot attend follow-up.';
+    }
+    parts.push('**STEP 1 \u2014 DISPOSITION**\n' + dispo);
+
+    // ---- STEP 2: FLUID ROUTE ------------------------------------------------
+    let fluid = '';
+    if (oral) {
+      fluid =
+        '**ORAL IS FIRST-LINE. This is the correction most fluid plans get wrong.**\n' +
+        '\u2022 RCOG: *"Fluid replacement by the oral route, guided by thirst, is the most physiological approach to correcting intravascular dehydration."*\n' +
+        '\u2022 *"Fluid intake of at least 1 litre a day should be advised"* \u2014 and *"it appears reasonable to encourage patients to drink to thirst rather than a set amount."*\n' +
+        '\u2022 She is tolerating oral intake, so **IV fluid is not the recommended default \u2014 even in severe OHSS.**\n' +
+        '\u2022 **RCOG warning:** *"Vigorous intravenous fluid therapy with crystalloids has the potential of worsening ascites in the presence of increased capillary permeability."*';
+    } else {
+      fluid =
+        '**SHE CANNOT MAINTAIN ORAL INTAKE \u2014 THIS IS WHY IV IS ON THE TABLE, AND THE ONLY REASON.**\n' +
+        '\u2022 RCOG: *"Crystalloids are useful for the initial correction of dehydration in women who are unable to maintain adequate oral intake."* Frame it as **correction of dehydration**, not as a resuscitation target.\n' +
+        '\u2022 Give **IV crystalloid titrated to urine output and haematocrit.**\n' +
+        '\u2022 **\u26a0 NO VOLUME IS RECOMMENDED HERE, DELIBERATELY.** No OHSS guideline specifies an IV bolus volume, a daily volume, or even a fluid type. The "1-2 L bolus" and "2-3 L/day" carried elsewhere in this consult have **no located OHSS-specific source** and are indistinguishable from a generic adult resuscitation bolus. RCOG names **no volume and no crystalloid** anywhere in the document.\n' +
+        '\u2022 **RCOG warning:** *"Vigorous intravenous fluid therapy with crystalloids has the potential of worsening ascites in the presence of increased capillary permeability."* Over-resuscitating her makes the ascites worse.\n' +
+        '\u2022 Return her to oral fluid guided by thirst as soon as she can keep it down.';
+    }
+    if (!uopMeasured) {
+      fluid +=
+        '\n\u2022 **\u26a0 URINE OUTPUT IS NOT BEING MEASURED.** It is the single most useful bedside variable in OHSS. Place a catheter or start hourly measurement **before** deciding on escalation \u2014 every escalation branch in this calculator is suppressed until you do.';
+    }
+    parts.push('**STEP 2 \u2014 FLUID ROUTE**\n' + fluid);
+
+    // ---- STEP 3: DIURETICS (always fires) -----------------------------------
+    parts.push(
+      '**STEP 3 \u2014 DO NOT GIVE DIURETICS**\n' +
+        '**She looks fluid-overloaded and she is intravascularly dry.** VEGF-driven capillary leak has moved fluid into the peritoneum and pleura: total body water is high, circulating volume is low. **OHSS ascites is not volume overload.**\n' +
+        '\u2022 Diuresis raises the haematocrit further, worsens hemoconcentration, converts prerenal azotaemia into **acute kidney injury**, and increases an already elevated **arterial and venous** thrombotic risk\n' +
+        '\u2022 RCOG (level 3): *"Diuretics should be avoided as they further deplete intravascular volume."*\n' +
+        '\u2022 *Fine print, and no wider than this:* they *"may have a role in a multidisciplinary setting if oliguria persists despite adequate fluid replacement and drainage of ascites."* That means fertility plus nephrology or critical care \u2014 **not a solo ED or ward decision**, and not before ascites has been drained.',
+    );
+
+    // ---- STEP 4: ALBUMIN ----------------------------------------------------
+    let alb =
+      '**ALBUMIN IS AN OPTION, NOT A MANDATE \u2014 AND THIS CALCULATOR WILL NOT TELL YOU WHEN TO GIVE IT.**\n' +
+      '\u2022 **25% albumin 50-100 g IV over 4 hours, repeatable every 4-12 hours** (RCOG). ' +
+      '\u2022 **RCOG grades this evidence level 4 \u2014 expert opinion, the weakest level in the document.**\n' +
+      '\u2022 **ASRM (Grade C):** *"There is insufficient evidence to support the use of volume expanders alone in treatment of OHSS."*\n' +
+      '\u2022 The only systematic review (Cochrane CD001302) is a **prevention** review, graded **very low quality**, and signals a possible **detrimental effect on pregnancy** (Peto OR 0.72, 95% CI 0.55-0.94). **There is no systematic review of albumin as treatment for established OHSS.**\n' +
+      '\u2022 **\u26a0 THERE IS NO PUBLISHED HAEMATOCRIT, CREATININE OR URINE-OUTPUT THRESHOLD THAT TRIGGERS ALBUMIN.** This calculator deliberately computes none. The trigger is clinical and multidisciplinary: severe or critical OHSS with **oliguria persisting despite adequate fluid replacement.**\n' +
+      '\u2022 **Do not use HES** \u2014 withdrawn in the UK for increased mortality in critically ill and septic patients. The one head-to-head OHSS study predates that withdrawal and must not be used to resurrect it.';
+    if (severity <= 2) {
+      alb += '\n\u2022 At ' + sevName.toLowerCase() + ' severity, albumin is not part of the conversation.';
+    }
+    parts.push('**STEP 4 \u2014 ALBUMIN**\n' + alb);
+
+    // ---- STEP 5: PARACENTESIS ----------------------------------------------
+    let para: string;
+    if (severity >= 3) {
+      const indicated = oliguric && !oral;
+      para =
+        '**INDICATIONS (RCOG, level 3) \u2014 any one:**\n' +
+        '\u2022 Severe abdominal distension and abdominal pain secondary to ascites\n' +
+        '\u2022 Shortness of breath and respiratory compromise\n' +
+        '\u2022 Oliguria despite adequate volume replacement' +
+        (oliguric ? ' \u2014 **this one is present on the inputs given**' : '') +
+        '\n' +
+        '\u2022 Concern for abdominal compartment syndrome \u2014 *standard critical-care practice, not an RCOG indication*\n\n' +
+        (indicated
+          ? '**On these inputs, paracentesis is on the table now:** she is oliguric and not maintaining oral intake.\n\n'
+          : '') +
+        '**TECHNIQUE (RCOG):** *"Paracentesis should be carried out under ultrasound guidance and can be performed abdominally or vaginally."* *"Abdominal paracentesis allows the insertion of an indwelling catheter and this may minimise the need for repeat paracentesis."* Renal blood flow improves after paracentesis in OHSS (PMID 15292006).\n\n' +
+        '**\u26a0 NO VOLUME AND NO RATE ARE PRINTED, DELIBERATELY.** RCOG specifies neither. It reports volumes only **descriptively**, from case series \u2014 mean 2155 mL, range 500-4500 mL, with a single case of 7.5 L over 3 hours. **Those are observations, not recommendations, and not targets.** The "1-2 L at a time", "typically 1-3 L" and "up to 4-5 L" figures carried elsewhere in this consult have no located source. **Volume is the proceduralist\u2019s call.**\n\n' +
+        '**AFTER LARGE-VOLUME DRAINAGE:** RCOG says only *"intravenous colloid therapy should be considered for women who have large volumes of fluid removed by paracentesis"* \u2014 **with no grams-per-litre figure and no volume threshold.** The "6-8 g per litre removed" rule carried elsewhere is the **AASLD cirrhosis large-volume-paracentesis rule extrapolated to OHSS**, where the mechanism is not the same. The STOP-OHSS protocol deliberately set no volume threshold and no mandatory albumin replacement.';
+    } else {
+      para =
+        'Not indicated at ' + sevName.toLowerCase() + ' severity. The RCOG indications are tense painful ascites, respiratory compromise, or oliguria despite adequate volume replacement \u2014 all of which sit in severe or critical OHSS.';
+    }
+    parts.push('**STEP 5 \u2014 PARACENTESIS**\n' + para);
+
+    // ---- STEP 6: LAB BANDS --------------------------------------------------
+    parts.push(
+      '**STEP 6 \u2014 WHICH NUMBERS MEAN WHAT, AND WHERE THEY COME FROM**\n' +
+        '**RCOG Green-top 5 Table 3:** haematocrit **>45%** severe, **>55%** critical \u00b7 sodium **<135 mmol/l** \u00b7 potassium **>5 mmol/l** \u00b7 serum albumin **<35 g/l** \u00b7 osmolality **<282 mOsm/kg** \u00b7 WCC **>25,000/ml** critical \u00b7 urine output **<300 mL/day or <30 mL/hour** \u00b7 ovaries usually **>12 cm**.\n' +
+        '**Navot 1992 (PMID 1633889), NOT RCOG:** creatinine **1.0-1.5 mg/dL** severe and **>1.6 mg/dL** critical \u00b7 creatinine clearance **<50 mL/min** critical \u00b7 WCC **>15,000** severe.\n' +
+        '\u2022 **RCOG Table 3 contains no creatinine criterion at all.** Every creatinine number in this app traces to Navot, and is labelled that way above so you can weigh it accordingly.\n' +
+        '\u2022 **No CVP target is shown.** CVP 8-12 mmHg appears in no OHSS guideline located, and CVP as a volume-responsiveness target is broadly discredited in general critical care.\n' +
+        '\u2022 **No fluid deficit is calculated from the haematocrit.** There is no validated haematocrit-to-volume-deficit equation in OHSS, and capillary leak invalidates the usual hemoconcentration arithmetic. A weight \u00d7 \u0394haematocrit number would look legitimate and would be invented.',
+    );
+
+    // ---- STEP 7: MONITORING -------------------------------------------------
+    parts.push(
+      '**STEP 7 \u2014 MONITORING**\n' +
+        '**RCOG, verbatim:** *"Body weight, abdominal girth, and fluid intake and output should be measured on a daily basis, along with full blood count, haematocrit, serum electrolytes, osmolality and liver function tests."* Inpatients *"should be assessed at least once daily."* Outpatient *"review every 2-3 days is likely to be adequate."*\n' +
+        '\u2022 The more intensive schedule carried elsewhere in this consult \u2014 haematocrit q6-12h, hourly urine output, daily weights \u2014 is **practice-derived, not RCOG-sourced.** It is defensible ICU-level practice for critical OHSS; it is not a guideline requirement.' +
+        (uopMeasured
+          ? ''
+          : '\n\u2022 **Start measuring urine output.** Every escalation decision below severity 4 turns on it.'),
+    );
+
+    // ---- STEP 8: ALWAYS-ON --------------------------------------------------
+    parts.push(
+      '**STEP 8 \u2014 ALWAYS, AT EVERY SEVERITY**\n' +
+        '\u2022 **VTE prophylaxis** for all moderate-severe OHSS. RCOG defers the detail to Green-top 37a; the specific **enoxaparin 40 mg SC daily** carried in this consult was **not independently verified against 37a** in the research behind this calculator \u2014 treat it as this consult\u2019s number, and check it against your local thromboprophylaxis guidance.\n' +
+        '\u2022 **NO NSAIDs.** RCOG: *"Analgesia with paracetamol and opiates, if required, is appropriate, while NSAIDs should be avoided as they may compromise renal function."*\n' +
+        '\u2022 **Unilateral pain in an enlarged ovary is torsion until disproved.**\n' +
+        '\u2022 **No dopamine dose is offered.** RCOG describes only *"small nonrandomised studies"*, and only *"in the multidisciplinary setting under close monitoring."*',
+    );
+
+    // ---- BADGE + COLOR ------------------------------------------------------
+    const colorVar =
+      severity === 4 || hct > 55 || anuric
+        ? '--color-danger'
+        : severity === 3 || hct > 45 || oliguric || cr >= 1.0 || !oral
+          ? '--color-warning'
+          : '--color-primary';
+
+    const label =
+      severity === 4
+        ? 'Critical OHSS \u2014 admit'
+        : severity === 3
+          ? 'Severe OHSS' + (oral ? ' \u2014 oral fluid first' : ' \u2014 admit, not tolerating oral intake')
+          : sevName.charAt(0) + sevName.slice(1).toLowerCase() + ' OHSS \u2014 oral fluid guided by thirst';
+
+    return { value: sevName, label, description: parts.join('\n\n'), colorVar };
+  },
+};
+
 const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
   'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
@@ -46486,6 +47099,9 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // Wave D — Tier 3 dosing batch B (added 2026-08-24)
   'electrolyte-replacement': ELECTROLYTE_REPLACEMENT_CALCULATOR,
   'txa-hemoptysis': TXA_HEMOPTYSIS_CALCULATOR,
+  // Wave D — Tier 3 dosing batch C (added 2026-08-24)
+  'xyl-wound-antibiotics': XYL_WOUND_ANTIBIOTICS_CALCULATOR,
+  'ohss-fluid': OHSS_FLUID_CALCULATOR,
 };
 
 // -------------------------------------------------------------------
