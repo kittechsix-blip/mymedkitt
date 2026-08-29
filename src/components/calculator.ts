@@ -1123,7 +1123,7 @@ function renderIvtConsentInfographic(
   const styleEl = document.createElement('style');
   styleEl.textContent = `
     .ivt-consent {
-      color: var(--color-text-primary, #1A1A1A);
+      color: var(--color-text-primary, #000000);
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -1143,12 +1143,12 @@ function renderIvtConsentInfographic(
       top: 0;
       z-index: 2;
       padding: 8px 0;
-      background: var(--color-bg, #FAFAF5);
+      background: var(--color-bg, #FFFFFF);
     }
     .ivt-consent-tab {
       border: 1px solid var(--color-border, #E0E0DA);
       background: var(--color-surface-card, #fff);
-      color: var(--color-text-secondary, #5A5A5A);
+      color: var(--color-text-secondary, #5E6A74);
       border-radius: 8px;
       min-height: 44px;
       padding: 8px 6px;
@@ -1171,7 +1171,7 @@ function renderIvtConsentInfographic(
       font-size: 14px;
       font-weight: 800;
       margin-bottom: 8px;
-      color: var(--color-text-primary, #1A1A1A);
+      color: var(--color-text-primary, #000000);
     }
     .ivt-consent-summary {
       display: grid;
@@ -1183,7 +1183,7 @@ function renderIvtConsentInfographic(
       border-radius: 8px;
       padding: 10px 8px;
       min-height: 86px;
-      background: var(--color-bg, #FAFAF5);
+      background: var(--color-bg, #FFFFFF);
     }
     .ivt-consent-metric-value {
       font-size: 22px;
@@ -1196,7 +1196,7 @@ function renderIvtConsentInfographic(
     .ivt-consent-metric-label {
       font-size: 11px;
       line-height: 1.25;
-      color: var(--color-text-secondary, #5A5A5A);
+      color: var(--color-text-secondary, #5E6A74);
       font-weight: 650;
     }
     .ivt-consent-pictos {
@@ -1230,7 +1230,7 @@ function renderIvtConsentInfographic(
       flex-direction: column;
       gap: 4px;
       font-size: 12px;
-      color: var(--color-text-secondary, #5A5A5A);
+      color: var(--color-text-secondary, #5E6A74);
     }
     .ivt-consent-legend-row {
       display: flex;
@@ -1262,7 +1262,7 @@ function renderIvtConsentInfographic(
     .ivt-consent-note {
       font-size: 13px;
       line-height: 1.45;
-      color: var(--color-text-secondary, #5A5A5A);
+      color: var(--color-text-secondary, #5E6A74);
     }
     .ivt-consent-script {
       display: grid;
@@ -1270,7 +1270,7 @@ function renderIvtConsentInfographic(
       gap: 8px;
     }
     .ivt-consent-script-item {
-      background: var(--color-bg, #FAFAF5);
+      background: var(--color-bg, #FFFFFF);
       border: 1px solid var(--color-border, #E0E0DA);
       border-radius: 8px;
       padding: 10px;
@@ -1282,7 +1282,7 @@ function renderIvtConsentInfographic(
       font-size: 11px;
       font-weight: 900;
       text-transform: uppercase;
-      color: var(--color-text-secondary, #5A5A5A);
+      color: var(--color-text-secondary, #5E6A74);
       margin-bottom: 4px;
     }
     @media (max-width: 640px) {
@@ -26016,11 +26016,11 @@ const QT_DRUG_CHECKER_CALCULATOR: CalculatorDefinition = {
 
     // Search input — pearl white theme
     const searchWrap = document.createElement('div');
-    searchWrap.style.cssText = 'position:sticky;top:0;z-index:2;padding:12px 16px;background:var(--color-bg, #FAFAF5);border-bottom:1px solid rgba(0,0,0,0.1);';
+    searchWrap.style.cssText = 'position:sticky;top:0;z-index:2;padding:12px 16px;background:var(--color-bg, #FFFFFF);border-bottom:1px solid rgba(0,0,0,0.1);';
     const searchInput = document.createElement('input');
     searchInput.type = 'text';
     searchInput.placeholder = 'Search generic or trade name...';
-    searchInput.style.cssText = 'width:100%;padding:12px 16px;border-radius:10px;border:2px solid rgba(0,0,0,0.15);background:#fff;color:var(--color-text-primary, #1A1A1A);font-size:16px;outline:none;min-height:44px;box-sizing:border-box;';
+    searchInput.style.cssText = 'width:100%;padding:12px 16px;border-radius:10px;border:2px solid rgba(0,0,0,0.15);background:#fff;color:var(--color-text-primary, #000000);font-size:16px;outline:none;min-height:44px;box-sizing:border-box;';
     searchInput.addEventListener('focus', () => { searchInput.style.borderColor = 'var(--color-decision-active, #3CB371)'; });
     searchInput.addEventListener('blur', () => { searchInput.style.borderColor = 'rgba(0,0,0,0.15)'; });
     searchWrap.appendChild(searchInput);
@@ -26039,7 +26039,7 @@ const QT_DRUG_CHECKER_CALCULATOR: CalculatorDefinition = {
       const left = document.createElement('div');
       left.style.cssText = 'flex:1;min-width:0;margin-right:8px;';
       const nameEl = document.createElement('div');
-      nameEl.style.cssText = 'font-weight:600;font-size:15px;color:var(--color-text-primary, #1A1A1A);';
+      nameEl.style.cssText = 'font-weight:600;font-size:15px;color:var(--color-text-primary, #000000);';
       nameEl.textContent = drug.name;
       left.appendChild(nameEl);
 
@@ -26051,7 +26051,7 @@ const QT_DRUG_CHECKER_CALCULATOR: CalculatorDefinition = {
       }
 
       const classEl = document.createElement('div');
-      classEl.style.cssText = 'font-size:12px;color:var(--color-text-secondary, #5A5A5A);margin-top:2px;';
+      classEl.style.cssText = 'font-size:12px;color:var(--color-text-secondary, #5E6A74);margin-top:2px;';
       classEl.textContent = drug.drugClass;
       if (drug.note) classEl.textContent += ` \u2014 ${drug.note}`;
       left.appendChild(classEl);
@@ -26081,8 +26081,8 @@ const QT_DRUG_CHECKER_CALCULATOR: CalculatorDefinition = {
         const details = document.createElement('details');
         details.style.cssText = 'margin-bottom:8px;';
         const summary = document.createElement('summary');
-        summary.style.cssText = 'padding:10px 12px;border-radius:8px;background:rgba(0,0,0,0.05);cursor:pointer;font-weight:600;font-size:14px;color:var(--color-text-primary, #1A1A1A);list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:44px;';
-        summary.innerHTML = `${catName} <span style="font-weight:400;font-size:12px;color:var(--color-text-secondary, #5A5A5A);">${drugs.length} drugs</span>`;
+        summary.style.cssText = 'padding:10px 12px;border-radius:8px;background:rgba(0,0,0,0.05);cursor:pointer;font-weight:600;font-size:14px;color:var(--color-text-primary, #000000);list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:44px;';
+        summary.innerHTML = `${catName} <span style="font-weight:400;font-size:12px;color:var(--color-text-secondary, #5E6A74);">${drugs.length} drugs</span>`;
         details.appendChild(summary);
         const content = document.createElement('div');
         content.style.cssText = 'padding:8px 0 0;';
@@ -26094,7 +26094,7 @@ const QT_DRUG_CHECKER_CALCULATOR: CalculatorDefinition = {
 
       // Footer
       const footer = document.createElement('div');
-      footer.style.cssText = 'text-align:center;padding:16px 0 8px;font-size:11px;color:var(--color-text-secondary, #5A5A5A);';
+      footer.style.cssText = 'text-align:center;padding:16px 0 8px;font-size:11px;color:var(--color-text-secondary, #5E6A74);';
       footer.textContent = `${QT_DRUG_DATABASE.length} drugs \u2022 Data from CredibleMeds.org`;
       resultsContainer.appendChild(footer);
     }
@@ -26134,7 +26134,7 @@ const QT_DRUG_CHECKER_CALCULATOR: CalculatorDefinition = {
         noResult.appendChild(msg);
 
         const sub = document.createElement('div');
-        sub.style.cssText = 'font-size:13px;color:var(--color-text-secondary, #5A5A5A);';
+        sub.style.cssText = 'font-size:13px;color:var(--color-text-secondary, #5E6A74);';
         sub.textContent = `"${query}" not found in CredibleMeds QT drug database. This does not guarantee zero risk \u2014 always check electrolytes and clinical context.`;
         noResult.appendChild(sub);
 
@@ -26143,7 +26143,7 @@ const QT_DRUG_CHECKER_CALCULATOR: CalculatorDefinition = {
       }
 
       const countEl = document.createElement('div');
-      countEl.style.cssText = 'padding:4px 12px 8px;font-size:12px;color:var(--color-text-secondary, #5A5A5A);';
+      countEl.style.cssText = 'padding:4px 12px 8px;font-size:12px;color:var(--color-text-secondary, #5E6A74);';
       countEl.textContent = `${matches.length} result${matches.length !== 1 ? 's' : ''}`;
       resultsContainer.appendChild(countEl);
 

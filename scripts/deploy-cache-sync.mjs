@@ -403,7 +403,7 @@ console.log('\n=== Step 5: Regenerating SW precache asset list ===\n');
       // Skip the SW itself — caching it would shadow updates
       if (rel === 'sw.js') continue;
       // Only cache app-relevant types
-      if (!/\.(html|css|js|json|png|jpg|jpeg|webp|svg)$/i.test(entry)) continue;
+      if (!/\.(html|css|js|json|png|jpg|jpeg|webp|svg|woff2)$/i.test(entry)) continue;
       results.push('./' + rel);
     }
     return results;

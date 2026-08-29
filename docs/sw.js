@@ -502,6 +502,8 @@ const ASSETS_TO_CACHE = [
   './data/tricks-registry.js',
   './icons/favicon-16.png',
   './icons/favicon-32.png',
+  './fonts/EBGaramond-400.woff2',
+  './fonts/EBGaramond-400i.woff2',
   './icons/icon-180.png',
   './icons/icon-192.png',
   './icons/icon-512.png',
