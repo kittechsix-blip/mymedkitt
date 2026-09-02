@@ -199,6 +199,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/difficult-vascular-access.js');
             return { nodes: m.DIFFICULT_VASCULAR_ACCESS_NODES, entryNodeId: 'dva-start', categoryId: 'procedures', moduleLabels: m.DIFFICULT_VASCULAR_ACCESS_MODULE_LABELS, citations: m.DIFFICULT_VASCULAR_ACCESS_CITATIONS, criticalActions: m.DIFFICULT_VASCULAR_ACCESS_CRITICAL_ACTIONS };
         },
+        'blood-draw': async () => {
+            const m = await import('../data/trees/blood-draw.js');
+            return { nodes: m.BLOOD_DRAW_NODES, entryNodeId: 'bd-start', categoryId: 'procedures', moduleLabels: m.BLOOD_DRAW_MODULE_LABELS, citations: m.BLOOD_DRAW_CITATIONS, criticalActions: m.BLOOD_DRAW_CRITICAL_ACTIONS, type: 'procedure' };
+        },
         'paracentesis': async () => {
             const m = await import('../data/trees/paracentesis.js');
             return { nodes: m.PARACENTESIS_NODES, entryNodeId: 'para-start', categoryId: 'procedures', moduleLabels: m.PARACENTESIS_MODULE_LABELS, citations: m.PARACENTESIS_CITATIONS, criticalActions: m.PARACENTESIS_CRITICAL_ACTIONS };

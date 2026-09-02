@@ -17,6 +17,7 @@ export const TREE_REGISTRY = {
   'procedural-sedation': { prefix: 'PROCEDURAL_SEDATION', entryNodeId: 'ps-start', categoryId: 'procedures' },
   'joint-arthrocentesis': { prefix: 'JOINT_ARTHROCENTESIS', entryNodeId: 'arth-start', categoryId: 'procedures' },
   'difficult-vascular-access': { prefix: 'DIFFICULT_VASCULAR_ACCESS', entryNodeId: 'dva-start', categoryId: 'procedures' },
+  'blood-draw': { prefix: 'BLOOD_DRAW', entryNodeId: 'bd-start', categoryId: 'procedures' },
   'paracentesis': { prefix: 'PARACENTESIS', entryNodeId: 'para-start', categoryId: 'procedures' },
   'occipital-nerve-block': { prefix: 'OCCIPITAL_NERVE_BLOCK', entryNodeId: 'onb-start', categoryId: 'procedures' },
   'facial-nerve-block': { prefix: 'FACIAL_NERVE_BLOCK', entryNodeId: 'fnb-start', categoryId: 'procedures' },

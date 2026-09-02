@@ -24,6 +24,7 @@ export const TOOLBAR_OVERFLOW = new Set([
     'teg',
     'hyperemesis',
     'pprom',
+    'blood-draw',
     // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 // Exported so scripts/validate-cross-links.mjs can validate every toolbar
@@ -481,6 +482,21 @@ export const TOOLBAR_CONFIGS = {
         { id: 'io-sites', label: 'IO Sites', icon: '🦴', action: 'overlay', target: 'dva-io-sites' },
         { id: 'confirm', label: 'Confirm', icon: '✅', action: 'overlay', target: 'dva-confirm' },
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'dva-stop' },
+    ],
+    'blood-draw': [
+        { id: 'blue', label: 'Blue', icon: '🔵', action: 'jump', target: 'bd-blue', pinned: true },
+        { id: 'red', label: 'Red', icon: '🔴', action: 'jump', target: 'bd-serum', pinned: true },
+        { id: 'gold', label: 'Gold', icon: '🟡', action: 'jump', target: 'bd-serum', pinned: true },
+        { id: 'green', label: 'Green', icon: '🟢', action: 'jump', target: 'bd-green', pinned: true },
+        { id: 'lavender', label: 'Lavender/Purple', icon: '🟣', action: 'jump', target: 'bd-edta', pinned: true },
+        { id: 'light-green', label: 'Light Green', icon: '🟢', action: 'jump', target: 'bd-green' },
+        { id: 'pink', label: 'Pink', icon: '🌸', action: 'jump', target: 'bd-edta' },
+        { id: 'gray', label: 'Gray', icon: '⚪', action: 'jump', target: 'bd-gray' },
+        { id: 'yellow', label: 'Yellow', icon: '🟨', action: 'jump', target: 'bd-yellow-specialty' },
+        { id: 'cultures', label: 'Cultures', icon: '🧫', action: 'jump', target: 'bd-cultures' },
+        { id: 'vbg', label: 'VBG', icon: '🩸', action: 'jump', target: 'bd-vbg' },
+        { id: 'technique', label: 'Technique', icon: '🩹', action: 'jump', target: 'bd-technique' },
+        { id: 'order', label: 'Order', icon: '📋', action: 'jump', target: 'bd-order' },
     ],
     'paracentesis': [
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'para-steps' },

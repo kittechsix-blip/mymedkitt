@@ -3625,6 +3625,16 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'dva-start',
       },
       {
+        id: 'blood-draw',
+        title: 'Blood Draw',
+        subtitle: 'Rainbow? -> Order Of Draw -> Tube Additives -> Cultures -> VBG -> Verify',
+        categoryId: 'procedures',
+        version: '1.0',
+        nodeCount: 16,
+        entryNodeId: 'bd-start',
+        type: 'procedure',
+      },
+      {
         id: 'paracentesis',
         title: 'Diagnostic & Therapeutic Paracentesis',
         subtitle: 'Indication \u2192 Ultrasound Site \u2192 Tap \u2192 Fluid Interpretation \u2192 Albumin',

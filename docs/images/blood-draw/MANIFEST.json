@@ -1,0 +1,20 @@
+{
+  "blood-draw-venipuncture.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Blood_Draw_130504-A-PF724-001.jpg",
+    "license_tag": "PD-USGov",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-USGov",
+    "retrieval_timestamp": "2026-09-01T00:00:00Z",
+    "andy_approval_commit": "approved-in-chat-2026-09-01-blood-draw-open-source-images",
+    "attribution": "U.S. Army photo, public domain.",
+    "sha256": "040c2d35f9fd50f916e165586c65a6701e9638f2718a1d9f89f47e05c928fc40"
+  },
+  "collection-tube.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Blood_collection_renal_function_test_tube.jpg",
+    "license_tag": "CC0",
+    "license_evidence_url": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "retrieval_timestamp": "2026-09-01T00:00:00Z",
+    "andy_approval_commit": "approved-in-chat-2026-09-01-blood-draw-open-source-images",
+    "attribution": "Fumikas Sagisavas, CC0.",
+    "sha256": "ad8d9fba1884b6ab4c05cb14038836c0d899ab0aec346af07e454430879f388d"
+  }
+}
