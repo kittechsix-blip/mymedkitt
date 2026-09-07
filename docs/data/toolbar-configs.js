@@ -291,6 +291,18 @@ export const TOOLBAR_CONFIGS = {
         { id: 'dress', label: 'Dress', icon: '\uD83E\uDE79', action: 'overlay', target: 'burns-dressing-guide' },
         { id: 'chemical', label: 'Chemical', icon: '\uD83E\uDDEA', action: 'overlay', target: 'burns-chemical-detail' },
     ],
+    'electrocution': [
+        { id: 'steps', label: 'Steps', icon: '\uD83D\uDCCB', action: 'overlay', target: 'electrocution-summary', pinned: true },
+        { id: 'admit', label: 'Admit?', icon: '\uD83D\uDECF\uFE0F', action: 'calculator', target: 'electrical-monitoring-criteria', pinned: true },
+        { id: 'qtc', label: 'QTc', icon: '\uD83D\uDCC8', action: 'calculator', target: 'qtc-calculator', pinned: true },
+        { id: 'rhabdo', label: 'Rhabdo', icon: '\uD83D\uDCAA', action: 'calculator', target: 'mcmahon-rhabdo', pinned: true },
+        { id: 'lightning', label: 'Lightning', icon: '\u26A1', action: 'jump', target: 'elec-lightning-start', pinned: true },
+        { id: 'tbsa', label: 'TBSA', icon: '\uD83D\uDD25', action: 'calculator', target: 'tbsa-adult' },
+        { id: 'lightning-exam', label: 'Lightning Exam', icon: '\uD83D\uDC42', action: 'calculator', target: 'lightning-exam-checklist' },
+        { id: 'cordbite', label: 'Cord Bite', icon: '\uD83D\uDC76', action: 'overlay', target: 'electrocution-peds-cord-bite' },
+        { id: 'transfer', label: 'Transfer', icon: '\uD83D\uDE91', action: 'jump', target: 'elec-dispo' },
+        { id: 'stop', label: 'Stop', icon: '\uD83D\uDED1', action: 'overlay', target: 'electrocution-stop' },
+    ],
     'stroke': [
         { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
         { id: 'syndrome-calc', label: 'Syn Calc', icon: '\uD83E\uDDED', action: 'calculator', target: 'stroke-syndrome-calculator' },

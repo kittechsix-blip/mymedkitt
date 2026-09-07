@@ -44737,6 +44737,172 @@ const OHSS_FLUID_CALCULATOR = {
         return { value: sevName, label, description: parts.join('\n\n'), colorVar };
     },
 };
+// -------------------------------------------------------------------
+// Electrocution & Lightning — Monitoring Criteria Checklist
+// -------------------------------------------------------------------
+const ELECTRICAL_MONITORING_CRITERIA_CALCULATOR = {
+    id: 'electrical-monitoring-criteria',
+    title: 'Electrical Injury: Admit or Discharge?',
+    subtitle: 'Cardiac Monitoring Criteria',
+    description: 'Toggle every feature present. A normal 12-lead ECG with none of these features has zero delayed malignant arrhythmias across 480- and 465-patient cohorts and a 1,234-patient systematic review — discharge without telemetry. Any feature = 24 h monitoring.',
+    fields: [
+        { name: 'high-voltage', label: 'High voltage (≥1000 V) or lightning', type: 'toggle', points: 0, description: 'Burn center + 24 h telemetry' },
+        { name: 'arrest', label: 'Cardiac or respiratory arrest at any point', type: 'toggle', points: 0, description: 'ICU' },
+        { name: 'loc', label: 'Loss of consciousness (any duration)', type: 'toggle', points: 0 },
+        { name: 'abnormal-ecg', label: 'Abnormal ECG (arrhythmia, ischemia, QTc prolongation, new AF)', type: 'toggle', points: 0 },
+        { name: 'chest-pain', label: 'Chest pain, dyspnea, or palpitations', type: 'toggle', points: 0, description: 'Add troponin ± echo' },
+        { name: 'cardiac-history', label: 'Known cardiac disease or prior arrhythmia', type: 'toggle', points: 0 },
+        { name: 'high-risk-path', label: 'Wet contact, transthoracic path (hand-to-hand / hand-to-foot), tetany, or prolonged contact', type: 'toggle', points: 0 },
+        { name: 'pregnancy', label: 'Pregnant', type: 'toggle', points: 0, description: 'Fetal monitoring ≥4 h if ≥20 wk + OB consult' },
+    ],
+    results: [],
+    thresholdNote: 'A 12-lead ECG is required on every patient before using this tool. Troponin is only indicated for chest pain, instability, or ischemic ECG changes.',
+    citations: [
+        'Corrall S, Laws S, Rice A. Low-voltage electrical injuries and the electrocardiogram: a systematic review. Br Paramed J. 2023;8(3):27-36.',
+        'Pilecky D, et al. Risk of cardiac arrhythmias after electrical accident: a single-center study of 480 patients. Clin Res Cardiol. 2019;108(8):901-908.',
+        'Ahmed J, et al. Patient outcomes after electrical injury — a retrospective study. Scand J Trauma Resusc Emerg Med. 2021;29:114.',
+        'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. 2022.',
+        'Smith I, et al. Assessment and Management of Electrical Injuries in Adults in the Emergency Department. Cureus. 2026;18(4):e107162.',
+    ],
+    computeResult: (values) => {
+        const hv = values['high-voltage'] || 0;
+        const arrest = values['arrest'] || 0;
+        const loc = values['loc'] || 0;
+        const ecg = values['abnormal-ecg'] || 0;
+        const chest = values['chest-pain'] || 0;
+        const cardiac = values['cardiac-history'] || 0;
+        const path = values['high-risk-path'] || 0;
+        const preg = values['pregnancy'] || 0;
+        const present = [];
+        if (hv)
+            present.push('High voltage or lightning');
+        if (arrest)
+            present.push('Cardiac / respiratory arrest');
+        if (loc)
+            present.push('Loss of consciousness');
+        if (ecg)
+            present.push('Abnormal ECG');
+        if (chest)
+            present.push('Chest pain / dyspnea / palpitations');
+        if (cardiac)
+            present.push('Known cardiac disease');
+        if (path)
+            present.push('Wet / transthoracic / tetany / prolonged contact');
+        if (preg)
+            present.push('Pregnancy');
+        let value;
+        let label;
+        let colorVar;
+        let plan;
+        if (arrest || hv) {
+            value = 'ADMIT — BURN CENTER / ICU';
+            label = arrest ? 'Post-arrest' : 'High voltage or lightning';
+            colorVar = '--color-danger';
+            plan = '**DISPOSITION:** Admit — burn ICU for high voltage, post-arrest, rhabdomyolysis, or compartment findings; burn center consult for all\n\n**MONITORING:**\n• Continuous telemetry **24 h** from injury\n• Repeat ECG at 24 h\n• CK and BMP q6 h; urinalysis for myoglobin\n• Hourly compartment checks and urine output (target **1 mL/kg/h**, 1–2 if myoglobinuria)';
+        }
+        else if (loc || ecg || chest || cardiac || path || preg) {
+            value = 'MONITOR 24 H';
+            label = `${present.length} criterion${present.length > 1 ? 'a' : ''} present`;
+            colorVar = '--color-warning';
+            plan = '**DISPOSITION:** Admit to telemetry or burn step-down\n\n**MONITORING:**\n• Continuous telemetry **24 h** from injury\n• Repeat ECG at 24 h and with any symptom\n• Correct potassium and magnesium';
+            if (chest || ecg)
+                plan += '\n• **Troponin** now and at 6 h; echocardiography if positive; cardiology consult';
+            if (preg)
+                plan += '\n• **Fetal monitoring ≥4 h** if ≥20 weeks (24 h if contractions, bleeding, pain, or abnormal tracing); OB consult before discharge';
+        }
+        else {
+            value = 'DISCHARGE FROM ED';
+            label = 'No monitoring criteria';
+            colorVar = '--color-primary';
+            plan = '**DISPOSITION:** Discharge after wound care — **no telemetry, no troponin, no observation period**\n\n**REQUIRED BEFORE DISCHARGE:**\n• 12-lead ECG normal with normal QTc (documented)\n• Wound care and tetanus status addressed\n• Burn center follow-up visit arranged (ABA) to screen for delayed symptoms and vision change\n• Return precautions: chest pain, palpitations, syncope, dark urine, limb pain/swelling, numbness or weakness, visual change';
+        }
+        let description = `**CRITERIA PRESENT:**\n${present.length ? present.map(p => '• ' + p).join('\n') : '• None'}\n\n${plan}`;
+        description += '\n\n**EVIDENCE:** Zero delayed malignant arrhythmias in patients with a normal admission ECG across 480 (Pilecky 2019) and 465 (Ahmed 2021) patients and a 1,234-patient systematic review (Corrall 2023).';
+        return { value, label, description, colorVar };
+    },
+};
+// -------------------------------------------------------------------
+// Lightning Injury — Secondary Exam Checklist
+// -------------------------------------------------------------------
+const LIGHTNING_EXAM_CHECKLIST_CALCULATOR = {
+    id: 'lightning-exam-checklist',
+    title: 'Lightning Exam Checklist',
+    subtitle: 'WMS 2014 Secondary Survey',
+    description: 'Tracks the organ-system exam every lightning victim needs. Toggle each exam as completed and flag positive findings — findings that change disposition are highlighted.',
+    fields: [
+        { name: 'ecg', label: '12-lead ECG obtained', type: 'toggle', points: 1 },
+        { name: 'ecg-abnormal', label: 'ECG abnormal or arrest at any point', type: 'toggle', points: 0, description: 'FINDING — 24 h telemetry' },
+        { name: 'tm', label: 'Otoscopy — both tympanic membranes examined', type: 'toggle', points: 1, description: 'Mandatory: TM rupture in 50–80%' },
+        { name: 'tm-rupture', label: 'TM rupture, hearing loss, or vertigo', type: 'toggle', points: 0, description: 'FINDING — ENT follow-up' },
+        { name: 'eyes', label: 'Eye exam — acuity, pupils, hyphema, cornea, fundus', type: 'toggle', points: 1 },
+        { name: 'eye-finding', label: 'Hyphema, visual change, or corneal injury', type: 'toggle', points: 0, description: 'FINDING — ophthalmology now' },
+        { name: 'neuro', label: 'Full neurologic exam documented (GCS, motor, sensory, gait if able)', type: 'toggle', points: 1 },
+        { name: 'neuro-finding', label: 'Altered mental status, focal deficit, seizure, or non-resolving paralysis', type: 'toggle', points: 0, description: 'FINDING — CT head ± spine, neurology' },
+        { name: 'keraunoparalysis', label: 'Keraunoparalysis (cold, mottled, pulseless limb) — improving', type: 'toggle', points: 0, description: 'Expected: observe, NO fasciotomy' },
+        { name: 'spine', label: 'Spine assessed — cleared or immobilized', type: 'toggle', points: 1 },
+        { name: 'skin', label: 'Full skin survey — contact burns under metal, scalp, feet; Lichtenberg figures photographed', type: 'toggle', points: 1 },
+        { name: 'deep-burn', label: 'Deep (partial/full-thickness) contact burns present', type: 'toggle', points: 0, description: 'FINDING — burn care, fluids to UOP' },
+        { name: 'blast', label: 'Blast / blunt trauma survey (chest, abdomen, long bones)', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'Fixed dilated pupils after lightning are NOT a death sign. Never perform fasciotomy for keraunoparalysis alone. All lightning injuries meet ABA burn center referral criteria.',
+    citations: [
+        'Davis C, Engeln A, Johnson EL, et al. Wilderness Medical Society Practice Guidelines for the Prevention and Treatment of Lightning Injuries: 2014 Update. Wilderness Environ Med. 2014;25(4 Suppl):S86-S95.',
+        'Jensen JD, Thurman J, Vincent AL. Lightning Injuries. StatPearls. 2023.',
+    ],
+    computeResult: (values) => {
+        const exams = ['ecg', 'tm', 'eyes', 'neuro', 'spine', 'skin', 'blast'];
+        const done = exams.filter(e => values[e]).length;
+        const total = exams.length;
+        const findings = [];
+        if (values['ecg-abnormal'])
+            findings.push('Abnormal ECG / arrest — 24 h telemetry');
+        if (values['tm-rupture'])
+            findings.push('TM rupture / hearing loss — ENT follow-up, keep ear dry');
+        if (values['eye-finding'])
+            findings.push('Ocular injury — ophthalmology now; counsel on delayed cataract');
+        if (values['neuro-finding'])
+            findings.push('Neurologic finding — CT head, CT spine if paralysis or fall, neurology consult');
+        if (values['deep-burn'])
+            findings.push('Deep contact burns — burn wound care, fluids titrated to urine output');
+        let value;
+        let colorVar;
+        if (findings.length > 0) {
+            value = 'FINDINGS — ACT';
+            colorVar = '--color-danger';
+        }
+        else if (done >= total) {
+            value = 'Exam Complete';
+            colorVar = '--color-primary';
+        }
+        else {
+            value = 'Exam Incomplete';
+            colorVar = '--color-warning';
+        }
+        let description = `**EXAM COMPLETION:** ${done}/${total}\n\n`;
+        if (findings.length) {
+            description += `**POSITIVE FINDINGS:**\n${findings.map(f => '• ' + f).join('\n')}\n\n`;
+        }
+        if (values['keraunoparalysis']) {
+            description += '**KERAUNOPARALYSIS:** Expected — vasospasm resolves over hours (up to 24 h). Observe, document serial pulses and motor exam. **Do NOT fasciotomy** unless a compartment is tense or a pressure is measured.\n\n';
+        }
+        description += '**CHECKLIST:**\n';
+        description += `${values['ecg'] ? '[X]' : '[ ]'} 12-lead ECG${values['ecg-abnormal'] ? ' — **ABNORMAL**' : ''}\n`;
+        description += `${values['tm'] ? '[X]' : '[ ]'} Otoscopy both TMs${values['tm-rupture'] ? ' — **RUPTURE**' : ''}\n`;
+        description += `${values['eyes'] ? '[X]' : '[ ]'} Eye exam${values['eye-finding'] ? ' — **FINDING**' : ''}\n`;
+        description += `${values['neuro'] ? '[X]' : '[ ]'} Neurologic exam${values['neuro-finding'] ? ' — **FINDING**' : ''}\n`;
+        description += `${values['spine'] ? '[X]' : '[ ]'} Spine cleared / immobilized\n`;
+        description += `${values['skin'] ? '[X]' : '[ ]'} Skin survey${values['deep-burn'] ? ' — **DEEP BURNS**' : ''}\n`;
+        description += `${values['blast'] ? '[X]' : '[ ]'} Blast / blunt trauma survey\n\n`;
+        description += '**ALL LIGHTNING INJURIES:** burn center consultation (ABA 2022); ophthalmology baseline before discharge; counsel on delayed cataract, neuropathy, and neuropsychiatric symptoms.';
+        return {
+            value,
+            label: `${done}/${total} exams`,
+            description,
+            colorVar,
+        };
+    },
+};
 const CALCULATORS = {
     // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
     'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
@@ -44799,6 +44965,9 @@ const CALCULATORS = {
     'tia-canadian-score': TIA_CANADIAN_SCORE_CALCULATOR,
     'tia-dot-score': TIA_DOT_SCORE_CALCULATOR,
     'tia-workup-checklist': TIA_WORKUP_CHECKLIST_CALCULATOR,
+    // Electrocution & Lightning
+    'electrical-monitoring-criteria': ELECTRICAL_MONITORING_CRITERIA_CALCULATOR,
+    'lightning-exam-checklist': LIGHTNING_EXAM_CHECKLIST_CALCULATOR,
     'tia-dapt-protocol': TIA_DAPT_PROTOCOL_CALCULATOR,
     'tia-disposition': TIA_DISPOSITION_CALCULATOR,
     // Peripartum Cardiomyopathy

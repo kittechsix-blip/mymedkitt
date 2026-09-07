@@ -519,6 +519,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'anaph-start',
             },
             {
+                id: 'electrocution',
+                title: 'Electrocution & Lightning Injury',
+                subtitle: 'Scene \u2192 Classify \u2192 Cardiac \u2192 High-Voltage \u2192 Lightning \u2192 Special Populations \u2192 Disposition',
+                categoryId: 'emergency-medicine',
+                version: '1.0',
+                nodeCount: 30,
+                entryNodeId: 'electrocution-start',
+            },
+            {
                 id: 'sjs-ten',
                 title: 'Stevens-Johnson Syndrome / TEN',
                 subtitle: 'Recognition → EM vs SJS/TEN → Culprit → SCORTEN → Supportive care → Disposition',

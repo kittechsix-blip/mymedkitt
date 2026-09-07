@@ -28997,6 +28997,153 @@ const TOOTH_ID_PAGE = {
         { num: 2, text: 'Fouad AF, Abbott PV, Tsilingaridis G, et al. International Association of Dental Traumatology guidelines for the management of traumatic dental injuries: 2. Avulsion of permanent teeth. Dent Traumatol. 2020;36(4):331-342. PMID 32460393.' },
     ],
 };
+// -------------------------------------------------------------------
+// Electrocution & Lightning Injury Info Pages
+// -------------------------------------------------------------------
+const ELECTROCUTION_SUMMARY = {
+    id: 'electrocution-summary',
+    title: 'Electrocution & Lightning — Steps Summary',
+    subtitle: 'Quick Reference',
+    sections: [
+        {
+            body: 'One-screen checklist for electrical and lightning injury. Tap any step to jump to that decision in the consult.',
+        },
+        {
+            heading: '1. Scene & Resuscitation',
+            body: '• [Power off first — confirm the source is de-energized before anyone touches the patient](#/node/electrocution-start)\n• [Pulseless? Reverse triage in lightning — treat the apparently dead first](#/node/elec-arrest)\n• [Ventilate after ROSC — respiratory center recovers after the heart; prolonged CPR is reasonable](#/node/elec-resus)\n• [C-spine precautions, IV access, baseline neurovascular exam, find every contact point](#/node/elec-primary)',
+        },
+        {
+            heading: '2. Classify the Exposure',
+            body: '• [Pregnant or pediatric cord bite? Route first](#/node/elec-special)\n• [Low voltage <1000 V / high voltage ≥1000 V / lightning / CEW](#/node/elec-classify)\n• [Low voltage: AC tetany, transthoracic path, wet contact, prolonged contact, LOC](#/node/elec-exposure)',
+        },
+        {
+            heading: '3. Cardiac Evaluation',
+            body: '• [12-lead ECG on everyone; measure QTc; troponin only if chest pain, instability, or ischemic ECG](#/node/elec-ecg)\n• [Normal ECG + no criteria = discharge without telemetry](#/node/elec-monitor-decision)\n• [Any criterion (high voltage, LOC, abnormal ECG, arrest, chest pain, cardiac history, high-risk path, pregnancy) = 24 h telemetry](#/node/elec-monitor)',
+        },
+        {
+            heading: '4. High-Voltage Deep Tissue Injury',
+            body: '• [Skin is the tip of the iceberg — TBSA underestimates](#/node/elec-hv-start)\n• [CK, urine myoglobin, BMP q6 h, lactate; trauma imaging by mechanism](#/node/elec-hv-labs)\n• [LR titrated to UOP 1 mL/kg/h (1–2 if myoglobinuria) — not Parkland; no diuretics until resuscitated](#/node/elec-hv-fluids)\n• [Hourly compartment checks — 5 Ps unreliable](#/node/elec-hv-compartment)\n• [Emergent fasciotomy / escharotomy](#/node/elec-hv-fasciotomy)\n• [Posterior shoulder dislocation, spine fractures; Tdap ± TIG; opioid + ketamine, no NSAIDs](#/node/elec-hv-trauma)',
+        },
+        {
+            heading: '5. Lightning',
+            body: '• [Flashover, not deep burn — no burn-formula fluids; Lichtenberg figures fade in 24 h](#/node/elec-lightning-start)\n• [Keraunoparalysis vs real neurologic injury](#/node/elec-lightning-neuro)\n• [CT head for AMS / deficit / seizure; CT spine for persistent paralysis or fall](#/node/elec-lightning-ct)\n• [Otoscopy on everyone (TM rupture 50–80%); eye exam and cataract counseling; check under metal](#/node/elec-lightning-exam)',
+        },
+        {
+            heading: '6. Special Populations',
+            body: '• [Pregnancy: fetal monitoring ≥4 h at ≥20 wk, OB consult, watch for abruption](#/node/elec-pregnancy)\n• [Cord bite: labial artery bleed 5–21 days in up to 25% — teach pinch compression, plastics/ENT in 1 wk](#/node/elec-cord-bite)\n• [CEW: asymptomatic awake patient needs no ECG, labs, or monitoring](#/node/elec-cew)\n• [Probe removal; eye / genital / neck probes to specialist; assess the fall](#/node/elec-cew-probes)',
+        },
+        {
+            heading: '7. Disposition',
+            body: '• [ABA: all high-voltage and lightning to burn center; low-voltage gets follow-up; wound care; tetanus](#/node/elec-wound)\n• [Discharge / telemetry admit / burn ICU](#/node/elec-dispo)\n• [Discharge counseling: neuropathy, neuropsychiatric symptoms, cataracts, return precautions](#/node/elec-dispo-discharge)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Davis C, Engeln A, Johnson EL, et al. WMS Practice Guidelines for the Prevention and Treatment of Lightning Injuries: 2014 Update. Wilderness Environ Med. 2014;25(4 Suppl):S86-S95.' },
+        { num: 2, text: 'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. 2022.' },
+        { num: 3, text: 'Corrall S, Laws S, Rice A. Low-voltage electrical injuries and the electrocardiogram: a systematic review. Br Paramed J. 2023;8(3):27-36.' },
+    ],
+};
+const ELECTROCUTION_PEDS_CORD_BITE = {
+    id: 'electrocution-peds-cord-bite',
+    title: 'Electrical Burn to the Lip — Parent Instructions',
+    subtitle: 'Oral commissure (cord-bite) burn: what to watch for at home',
+    shareable: true,
+    sections: [
+        {
+            body: 'Your child has an electrical burn at the corner of the mouth from biting or sucking on an electrical cord or plug. These burns look small and are usually not painful at first, but they heal slowly and can bleed suddenly days or weeks later. This sheet tells you what to expect and exactly what to do.',
+        },
+        {
+            heading: 'What to expect over the next 3 weeks',
+            body: '• **Days 1–3:** the lip swells and the burn turns gray-white. This is normal.\n• **Days 3–10:** a firm scab (eschar) forms over the burn.\n• **Days 5–21:** the scab loosens and falls off. **This is when bleeding can happen.** A small artery in the lip sits right under the scab and can bleed heavily — it happens in roughly 1 in 4 to 1 in 10 children with this injury. It is most common in the second week.',
+        },
+        {
+            heading: 'IF THE LIP BLEEDS — do this immediately',
+            body: '1. **Pinch the lip firmly between your thumb and index finger** — one finger inside the mouth, one outside — squeezing the bleeding spot from both directions. Use a folded piece of gauze or a clean cloth if you have one.\n2. **Hold constant pressure for a full 10 minutes by the clock.** Do not peek. Do not let go early.\n3. **Call 911 or go to the nearest emergency department while holding pressure.** Do not wait to see if it stops. Even if the bleeding stops, your child still needs to be seen the same day.\n4. Keep your child sitting upright and leaning slightly forward so blood is not swallowed.',
+        },
+        {
+            heading: 'Daily care',
+            body: '• Keep the area clean. Gently dab with water after meals; do not scrub.\n• Apply a thin layer of the antibiotic ointment you were given, as instructed.\n• **Do not pick, pull, or rub the scab** — let it fall off on its own.\n• Soft, cool foods. Avoid hard, sharp, hot, or salty foods that irritate the burn. A cup or spoon is easier than a bottle nipple or straw.\n• Pain medicine as directed (acetaminophen or ibuprofen by weight).\n• Keep the follow-up appointment with the plastic surgeon or ENT — usually within 1 week. Some children need a small mouth splint to prevent the corner of the mouth from tightening as it heals.',
+        },
+        {
+            heading: 'Return to the emergency department for',
+            body: '• **Any bleeding from the lip** (see above)\n• Difficulty breathing, drooling, or trouble swallowing\n• Refusing to drink, or fewer wet diapers than usual\n• Fever, spreading redness, pus, or a bad smell from the burn\n• Increasing swelling of the lip, tongue, or face',
+        },
+        {
+            heading: 'Preventing the next one',
+            body: 'Unplug cords when not in use, use outlet covers, keep cords out of reach, and replace frayed cords. Toddlers explore with their mouths — this injury is common and is not a reflection on your parenting.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hoffman KA, Trigger CC. Pediatric Oral Commissure Burn. Clin Pract Cases Emerg Med. 2017;1(1):59-60.' },
+        { num: 2, text: 'Emergency Medicine Residents\' Association. Electrical Injuries in Children. EM Resident.' },
+        { num: 3, text: 'Zemaitis MR, Guirguis M, Cindass R. Electrical Injuries. StatPearls. Updated July 2025.' },
+    ],
+};
+const ELECTROCUTION_STOP = {
+    id: 'electrocution-stop',
+    title: 'Electrocution & Lightning — Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        {
+            heading: '🛑 Do NOT touch the patient until the power is confirmed off',
+            body: 'A rescuer who contacts an energized patient or the ground near a downed high-voltage line becomes the second casualty. Utility confirmation or a trained rescuer with insulated tools — then approach. [Scene safety](#/node/electrocution-start).',
+        },
+        {
+            heading: '🛑 Do NOT triage lightning casualties normally',
+            body: 'Standard triage abandons the pulseless. In lightning, the pulseless victim is the one who can be saved and the walking wounded will survive without you. Reverse triage — treat the apparently dead first. [Resuscitation](#/node/elec-resus).',
+        },
+        {
+            heading: '🛑 Do NOT stop ventilating after ROSC, and do NOT call death on fixed pupils',
+            body: 'The medullary respiratory center stays paralyzed after cardiac automaticity returns; an unventilated post-ROSC patient re-arrests from hypoxia. Fixed dilated pupils after lightning are autonomic, not a death sign. [Resuscitation](#/node/elec-resus).',
+        },
+        {
+            heading: '🛑 Do NOT admit a low-voltage patient with a normal ECG to telemetry "just in case"',
+            body: 'Zero delayed malignant arrhythmias in 480- and 465-patient cohorts and a 1,234-patient systematic review. Routine monitoring and routine troponin add cost and delay with no yield. Reserve telemetry for the listed criteria. [Monitoring decision](#/node/elec-monitor-decision).',
+        },
+        {
+            heading: '🛑 Do NOT resuscitate a high-voltage injury by TBSA / Parkland',
+            body: 'The skin burn is a fraction of the injured tissue. Formula volumes underestimate; titrate LR to urine output 1 mL/kg/h (1–2 if myoglobinuria). [Fluids](#/node/elec-hv-fluids).',
+        },
+        {
+            heading: '🛑 Do NOT give diuretics or bicarbonate before volume is restored',
+            body: 'Mannitol and furosemide in a hypovolemic rhabdomyolysis patient mask under-resuscitation and worsen AKI. These are burn-attending decisions after resuscitation. [Fluids](#/node/elec-hv-fluids).',
+        },
+        {
+            heading: '🛑 Do NOT rely on the 5 Ps to exclude compartment syndrome',
+            body: 'Paresthesias come from nerve injury and pulselessness is a late sign. A tense compartment or pain with passive stretch is enough — call surgery. Check every hour. [Compartment checks](#/node/elec-hv-compartment).',
+        },
+        {
+            heading: '🛑 Do NOT perform fasciotomy for keraunoparalysis',
+            body: 'The cold, mottled, pulseless limb after lightning is vasospasm and resolves within hours. Cutting it open converts a self-limited phenomenon into a surgical wound. Reserve fasciotomy for a tense compartment or measured pressure. [Lightning neuro](#/node/elec-lightning-neuro).',
+        },
+        {
+            heading: '🛑 Do NOT run a burn-formula resuscitation on a lightning victim',
+            body: 'Flashover burns are superficial; aggressive volume causes cerebral edema in an already injured brain. Maintenance fluids unless deep burns, hypotension, or myoglobinuria. [Lightning](#/node/elec-lightning-start).',
+        },
+        {
+            heading: '🛑 Do NOT skip otoscopy and the eye exam after lightning',
+            body: 'TM rupture in 50–80%; cataracts develop later and are only compensable if documented absent at baseline. Both exams are WMS 1C recommendations. [Lightning exam](#/node/elec-lightning-exam).',
+        },
+        {
+            heading: '🛑 Do NOT discharge a cord-bite child without teaching pinch compression',
+            body: 'The labial artery bleeds 5–21 days later in up to 25% of cases, at home, at night. Parents must know the bidirectional pinch and to come straight back. [Cord bite](#/node/elec-cord-bite).',
+        },
+        {
+            heading: '🛑 Do NOT order ECG, labs, or monitoring for an awake, asymptomatic CEW patient — and do NOT pull a probe from the eye, genitals, or neck',
+            body: 'CEW current causes no arrhythmia or troponin rise; the injuries are the probes and the fall. Sensitive-site probes go to the specialist. [CEW](#/node/elec-cew-probes).',
+        },
+        {
+            heading: '🛑 Do NOT give NSAIDs to a high-voltage injury',
+            body: 'AKI risk with rhabdomyolysis plus pending operative intervention. Opioids and sub-dissociative ketamine instead. [Analgesia](#/node/elec-hv-trauma).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Davis C, Engeln A, Johnson EL, et al. WMS Practice Guidelines for the Prevention and Treatment of Lightning Injuries: 2014 Update. Wilderness Environ Med. 2014;25(4 Suppl):S86-S95.' },
+        { num: 2, text: 'Corrall S, Laws S, Rice A. Low-voltage electrical injuries and the electrocardiogram: a systematic review. Br Paramed J. 2023;8(3):27-36.' },
+        { num: 3, text: 'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. 2022.' },
+        { num: 4, text: 'Vilke G, Chan T, Bozeman WP, Childers R. Emergency Department Evaluation After Conducted Energy Weapon Use. J Emerg Med. 2019;57(5):740-746.' },
+    ],
+};
 export const INFO_PAGES = {
     // Tier-4b reference pages (calculator-backfill wave B, 2026-08-23)
     'sci-map-goals': SCI_MAP_GOALS_PAGE,
@@ -29469,6 +29616,10 @@ export const INFO_PAGES = {
     'rabies-dx-guide': RABIES_DX_GUIDE,
     'rabies-patient-info': RABIES_PATIENT_INFO,
     'burns-summary': BURNS_SUMMARY,
+    // Electrocution & Lightning
+    'electrocution-summary': ELECTROCUTION_SUMMARY,
+    'electrocution-peds-cord-bite': ELECTROCUTION_PEDS_CORD_BITE,
+    'electrocution-stop': ELECTROCUTION_STOP,
     'burns-depth-guide': BURNS_DEPTH_GUIDE,
     'burns-prehospital': BURNS_PREHOSPITAL,
     'burns-dsmc-protocol': BURNS_DSMC_PROTOCOL,

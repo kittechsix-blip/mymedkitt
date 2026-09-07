@@ -12495,6 +12495,57 @@ const TETANUS_IMMUNE_GLOBULIN = {
         'CDC. Tetanus: For Clinicians — Wound Management. Centers for Disease Control and Prevention. 2020 (updated).',
     ],
 };
+const TDAP = {
+    id: 'tdap',
+    name: 'Tdap / Td (Tetanus Toxoid Booster)',
+    genericName: 'Tetanus toxoid, reduced diphtheria toxoid, and acellular pertussis vaccine (Tdap); tetanus and diphtheria toxoids (Td)',
+    drugClass: 'Inactivated toxoid vaccine (active immunization)',
+    route: 'IM',
+    indications: [
+        'Tetanus-prone wound (burns, electrical injury, crush, puncture, contaminated, devitalized tissue, >6 h old) with last tetanus toxoid dose >5 years ago or unknown',
+        'Clean minor wound with last dose >10 years ago',
+        'Unvaccinated or incompletely vaccinated (<3 doses) — first dose of catch-up series, given with TIG for tetanus-prone wounds',
+        'Routine adult booster every 10 years (Tdap once, then Td or Tdap)',
+        'Pregnancy — one dose of Tdap during each pregnancy, ideally 27–36 weeks',
+    ],
+    dosing: [
+        {
+            indication: 'Wound management — tetanus-prone wound (burn, electrical injury, contaminated), adult and child ≥7 years',
+            regimen: '0.5 mL IM × 1 dose (deltoid) if last tetanus toxoid dose >5 years ago or unknown. Prefer Tdap if the patient has never received Tdap; otherwise Td or Tdap. If <3 prior doses or unknown history: give Tdap AND Tetanus Immune Globulin 250 units IM in a DIFFERENT limb, then complete the primary series (second dose at 4 weeks, third at 6–12 months).',
+        },
+        {
+            indication: 'Wound management — clean minor wound',
+            regimen: '0.5 mL IM × 1 dose if last dose >10 years ago. TIG not indicated regardless of vaccination history.',
+        },
+        {
+            indication: 'Children <7 years',
+            regimen: 'DTaP 0.5 mL IM (not Tdap) per age-appropriate schedule; same wound-based timing rules. DT if pertussis component contraindicated.',
+        },
+        {
+            indication: 'Pregnancy',
+            regimen: 'Tdap 0.5 mL IM once per pregnancy, optimally 27–36 weeks; give immediately for a tetanus-prone wound at any gestation if otherwise due.',
+        },
+    ],
+    contraindications: [
+        'Anaphylaxis to a prior dose of any tetanus-, diphtheria-, or pertussis-containing vaccine or to a vaccine component',
+        'Tdap only: encephalopathy (coma, prolonged seizures, decreased consciousness) within 7 days of a prior pertussis-containing vaccine not attributable to another cause — use Td instead',
+    ],
+    cautions: [
+        'Guillain-Barré syndrome within 6 weeks of a prior tetanus-toxoid vaccine — weigh benefit; for a tetanus-prone wound the benefit usually outweighs the risk',
+        'Arthus-type hypersensitivity after a prior tetanus- or diphtheria-toxoid dose — defer routine boosters until ≥10 years have elapsed; still give for a tetanus-prone wound if >5 years',
+        'Progressive or unstable neurologic disorder (Tdap) — defer until stabilized; use Td for wound management',
+        'Moderate or severe acute illness — defer routine dosing; do not defer for wound management',
+        'Give in a DIFFERENT limb from TIG and never in the same syringe — TIG inactivates the toxoid',
+        'Local reactions (pain, erythema, swelling) are common; fever and myalgia occur in a minority; syncope after vaccination — observe seated 15 minutes',
+    ],
+    monitoring: 'Observe 15 minutes for syncope or hypersensitivity. Document product, lot, site, and date; give the patient a record. Arrange completion of the primary series for unvaccinated patients.',
+    notes: 'Per CDC / ACIP wound management: tetanus-prone wounds include burns of any mechanism — electrical and lightning contact wounds are tetanus-prone. Patients with ≥3 prior toxoid doses need only a booster (if >5 years for tetanus-prone, >10 years for clean wounds) and do NOT need TIG. Patients with <3 doses or unknown status need Tdap plus TIG (tetanus-prone) or Tdap alone (clean). Immunocompromised and HIV-infected patients with tetanus-prone wounds should receive TIG regardless of vaccination history. Tdap is preferred over Td whenever the patient has not previously received Tdap, and is safe in pregnancy.',
+    citations: [
+        'Liang JL, Tiwari T, Moro P, et al. Prevention of Pertussis, Tetanus, and Diphtheria with Vaccines in the United States: Recommendations of the Advisory Committee on Immunization Practices (ACIP). MMWR Recomm Rep. 2018;67(2):1-44.',
+        'Havers FP, Moro PL, Hunter P, Hariri S, Bernstein H. Use of Tetanus Toxoid, Reduced Diphtheria Toxoid, and Acellular Pertussis Vaccines: Updated Recommendations of the ACIP — United States, 2019. MMWR Morb Mortal Wkly Rep. 2020;69(3):77-83.',
+        'CDC. Tetanus: For Clinicians — Wound Management. Centers for Disease Control and Prevention. 2020 (updated).',
+    ],
+};
 const INDOMETHACIN = {
     id: 'indomethacin',
     name: 'Indomethacin',
@@ -13996,6 +14047,7 @@ export const ALL_DRUGS = [
     STONEFISH_ANTIVENOM,
     TERLIPRESSIN,
     TETANUS_IMMUNE_GLOBULIN,
+    TDAP,
     TIZANIDINE,
     SUMATRIPTAN,
     ZOLMITRIPTAN,

@@ -117,6 +117,7 @@ export const TREE_REGISTRY = {
   'syphilis':         { prefix: 'SYPHILIS',            entryNodeId: 'syph-start',         categoryId: 'infectious-disease' },
   'rabies':           { prefix: 'RABIES',              entryNodeId: 'rabies-start',       categoryId: 'infectious-disease' },
   'burns':            { prefix: 'BURNS',               entryNodeId: 'burn-start',        categoryId: 'trauma-surg' },
+  'electrocution':    { prefix: 'ELECTROCUTION',       entryNodeId: 'electrocution-start', categoryId: 'emergency-medicine' },
   'sjs-ten':          { prefix: 'SJS_TEN',             entryNodeId: 'sjs-ten-start',     categoryId: 'emergency-medicine' },
   'ich':              { prefix: 'ICH',                 entryNodeId: 'ich-start',          categoryId: 'neurology' },
   'aub':              { prefix: 'AUB',                 entryNodeId: 'aub-start',          categoryId: 'ob-gyn' },

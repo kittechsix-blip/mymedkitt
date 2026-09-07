@@ -635,6 +635,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/burns.js');
             return { nodes: m.BURNS_NODES, entryNodeId: 'burn-start', categoryId: 'trauma-surg', moduleLabels: m.BURNS_MODULE_LABELS, citations: m.BURNS_CITATIONS, criticalActions: m.BURNS_CRITICAL_ACTIONS };
         },
+        'electrocution': async () => {
+            const m = await import('../data/trees/electrocution.js');
+            return { nodes: m.ELECTROCUTION_NODES, entryNodeId: 'electrocution-start', categoryId: 'emergency-medicine', moduleLabels: m.ELECTROCUTION_MODULE_LABELS, citations: m.ELECTROCUTION_CITATIONS, criticalActions: m.ELECTROCUTION_CRITICAL_ACTIONS };
+        },
         'sjs-ten': async () => {
             const m = await import('../data/trees/sjs-ten.js');
             return { nodes: m.SJS_TEN_NODES, entryNodeId: 'sjs-ten-start', categoryId: 'emergency-medicine', moduleLabels: m.SJS_TEN_MODULE_LABELS, citations: m.SJS_TEN_CITATIONS };
