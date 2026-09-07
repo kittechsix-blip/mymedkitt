@@ -30272,7 +30272,7 @@ const ELECTROCUTION_SUMMARY: InfoPage = {
   ],
   citations: [
     { num: 1, text: 'Davis C, Engeln A, Johnson EL, et al. WMS Practice Guidelines for the Prevention and Treatment of Lightning Injuries: 2014 Update. Wilderness Environ Med. 2014;25(4 Suppl):S86-S95.' },
-    { num: 2, text: 'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. 2022.' },
+    { num: 2, text: 'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. Revised July 2026.' },
     { num: 3, text: 'Corrall S, Laws S, Rice A. Low-voltage electrical injuries and the electrocardiogram: a systematic review. Br Paramed J. 2023;8(3):27-36.' },
   ],
 };
@@ -30375,7 +30375,7 @@ const ELECTROCUTION_STOP: InfoPage = {
   citations: [
     { num: 1, text: 'Davis C, Engeln A, Johnson EL, et al. WMS Practice Guidelines for the Prevention and Treatment of Lightning Injuries: 2014 Update. Wilderness Environ Med. 2014;25(4 Suppl):S86-S95.' },
     { num: 2, text: 'Corrall S, Laws S, Rice A. Low-voltage electrical injuries and the electrocardiogram: a systematic review. Br Paramed J. 2023;8(3):27-36.' },
-    { num: 3, text: 'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. 2022.' },
+    { num: 3, text: 'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. Revised July 2026.' },
     { num: 4, text: 'Vilke G, Chan T, Bozeman WP, Childers R. Emergency Department Evaluation After Conducted Energy Weapon Use. J Emerg Med. 2019;57(5):740-746.' },
   ],
 };

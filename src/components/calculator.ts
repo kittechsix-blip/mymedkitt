@@ -46437,7 +46437,7 @@ const ELECTRICAL_MONITORING_CRITERIA_CALCULATOR: CalculatorDefinition = {
     'Corrall S, Laws S, Rice A. Low-voltage electrical injuries and the electrocardiogram: a systematic review. Br Paramed J. 2023;8(3):27-36.',
     'Pilecky D, et al. Risk of cardiac arrhythmias after electrical accident: a single-center study of 480 patients. Clin Res Cardiol. 2019;108(8):901-908.',
     'Ahmed J, et al. Patient outcomes after electrical injury — a retrospective study. Scand J Trauma Resusc Emerg Med. 2021;29:114.',
-    'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. 2022.',
+    'Vanderbilt University Medical Center Burn Center. Electrical Injury Practice Management Guideline. Revised July 2026.',
     'Smith I, et al. Assessment and Management of Electrical Injuries in Adults in the Emergency Department. Cureus. 2026;18(4):e107162.',
   ],
   computeResult: (values: Record<string, number>) => {
