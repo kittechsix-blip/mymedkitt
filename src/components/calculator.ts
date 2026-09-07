@@ -46472,7 +46472,7 @@ const ELECTRICAL_MONITORING_CRITERIA_CALCULATOR: CalculatorDefinition = {
       plan = '**DISPOSITION:** Admit — burn ICU for high voltage, post-arrest, rhabdomyolysis, or compartment findings; burn center consult for all\n\n**MONITORING:**\n• Continuous telemetry **24 h** from injury\n• Repeat ECG at 24 h\n• CK and BMP q6 h; urinalysis for myoglobin\n• Hourly compartment checks and urine output (target **1 mL/kg/h**, 1–2 if myoglobinuria)';
     } else if (loc || ecg || chest || cardiac || path || preg) {
       value = 'MONITOR 24 H';
-      label = `${present.length} criterion${present.length > 1 ? 'a' : ''} present`;
+      label = `${present.length} ${present.length > 1 ? 'criteria' : 'criterion'} present`;
       colorVar = '--color-warning';
       plan = '**DISPOSITION:** Admit to telemetry or burn step-down\n\n**MONITORING:**\n• Continuous telemetry **24 h** from injury\n• Repeat ECG at 24 h and with any symptom\n• Correct potassium and magnesium';
       if (chest || ecg) plan += '\n• **Troponin** now and at 6 h; echocardiography if positive; cardiology consult';
