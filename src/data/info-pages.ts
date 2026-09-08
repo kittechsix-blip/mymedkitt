@@ -30380,6 +30380,211 @@ const ELECTROCUTION_STOP: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Hidradenitis Suppurativa Info Pages
+// -------------------------------------------------------------------
+
+const HS_SUMMARY: InfoPage = {
+  id: 'hs-summary',
+  title: 'Hidradenitis Suppurativa — Steps Summary',
+  subtitle: 'Quick Reference',
+  sections: [
+    {
+      body: 'One-screen checklist for the HS patient. Tap any step to jump to that decision in the consult.',
+    },
+    {
+      heading: '1. Recognize It',
+      body: '• [The "fifth recurrent abscess" in the same fold is HS — average 7–10 year diagnostic delay](#/node/hs-start)\n• [Three criteria: typical lesions + typical sites + ≥2 flares in 6 months](#/node/hs-criteria)\n• [First or second episode in a fold: document "possible HS" and refer](#/node/hs-possible-early)',
+    },
+    {
+      heading: '2. Differential & Red Flags',
+      body: '• [Toxic perineal patient, pain out of proportion, crepitus = Fournier / NSTI](#/node/hs-redflags)\n• [Fournier: emergent surgery, IV antibiotics within 1 h, LRINEC unreliable with chronic inflammation](#/node/hs-fournier)\n• [Chronic non-healing ulcer or mass in Hurley III = SCC until biopsied](#/node/hs-scc)\n• [Mimics: simple abscess, Crohn, pilonidal, Bartholin, epidermoid cyst, LGV / granuloma inguinale](#/node/hs-ddx)',
+    },
+    {
+      heading: '3. Stage & Score',
+      body: '• [Hurley I no tunnels / scars; II tunnels + scars, separated; III diffuse interconnected](#/node/hs-stage)\n• [IHS4 = nodules + 2 × abscesses + 4 × draining tunnels; mild ≤ 3, moderate 4–10, severe ≥ 11](#/node/hs-ihs4)',
+    },
+    {
+      heading: '4. Acute Flare',
+      body: '• [Abscess → drain; nodule → inject; sick → workup; chronic → ladder](#/node/hs-flare)\n• [I&D is rescue only (recurrence ~100%); punch debridement preferred](#/node/hs-procedure-choice)\n• [Punch debridement: field block, 5–7 mm punch removes roof + follicular unit, leave open, no packing](#/node/hs-punch)\n• [Simple I&D: small linear incision, no packing, counsel that it does not treat the disease](#/node/hs-iandd)\n• [Inflamed nodule < 2 cm: triamcinolone 10 mg/mL, 0.5–1 mL intralesional](#/node/hs-il-steroid)\n• [NSAID + acetaminophen, opioid ≤ 3 days only if needed; culture only for systemic signs, cellulitis, immunosuppression, atypical pattern](#/node/hs-analgesia)\n• [Systemic signs: labs, ultrasound, culture, empiric antibiotics for true secondary infection](#/node/hs-workup)',
+    },
+    {
+      heading: '5. Medical Ladder',
+      body: '• [Choose the rung by Hurley / IHS4](#/node/hs-ladder)\n• [Mild: topical clindamycin BID + antiseptic wash, doxycycline or minocycline × 8–12 wk, smoking cessation](#/node/hs-ladder-mild)\n• [Moderate: clindamycin 300 + rifampin 300 BID × 10–12 wk (contraceptive failure), spironolactone / metformin, name the biologic](#/node/hs-ladder-moderate)\n• [Severe: adalimumab, secukinumab, or bimekizumab via dermatology in 2–4 wk; bridge; surgical referral in parallel](#/node/hs-ladder-severe)',
+    },
+    {
+      heading: '6. Comorbidities',
+      body: '• [Screen: metabolic syndrome / T2DM, PCOS, IBD, depression and suicide risk, anemia, arthritis, smoking](#/node/hs-comorbid)\n• [Complications: fistulae, lymphedema, contractures, amyloidosis, SCC, chronic pain](#/node/hs-complications)',
+    },
+    {
+      heading: '7. Disposition',
+      body: '• [Discharge / surgical referral / admit](#/node/hs-dispo)\n• [Discharge: diagnosis on paper, dated derm referral, ladder scripts, written flare plan, return precautions](#/node/hs-dispo-discharge)\n• [Surgical referral: deroofing for Hurley II tunnels, wide excision for Hurley III](#/node/hs-dispo-surgical)\n• [Admit: sepsis, Fournier, extensive cellulitis, uncontrolled pain, IV antibiotics; inpatient derm + surgery](#/node/hs-dispo-admit)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Okun MM, Flamm A, Werley EB, Kirby JS. Hidradenitis Suppurativa: Diagnosis and Management in the Emergency Department. J Emerg Med. 2022;63(5):636-644.' },
+    { num: 2, text: 'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Parts I and II. J Am Acad Dermatol. 2019;81(1):76-101.' },
+    { num: 3, text: 'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.' },
+  ],
+};
+
+const HS_PROCEDURE_GUIDE: InfoPage = {
+  id: 'hs-procedure-guide',
+  title: 'HS Procedures — I&D vs Punch Debridement vs Deroofing',
+  subtitle: 'Which procedure, how, and why no packing',
+  sections: [
+    {
+      body: 'Every incision in an HS patient either treats the lesion or becomes part of the tunnel network. Match the procedure to the lesion and the setting.',
+    },
+    {
+      heading: 'Comparison',
+      body: 'The four options at a glance:',
+      comparisonTable: {
+        columns: [
+          { key: 'procedure', label: 'Procedure' },
+          { key: 'lesion', label: 'Lesion' },
+          { key: 'setting', label: 'Setting' },
+          { key: 'recurrence', label: 'Same-site recurrence' },
+        ],
+        rows: [
+          { cells: { procedure: 'Intralesional triamcinolone 10 mg/mL', lesion: 'Inflamed nodule < 2 cm, not fluctuant', setting: 'ED, minutes', recurrence: 'Treats today\'s nodule; disease continues' } },
+          { cells: { procedure: 'Simple I&D', lesion: 'Tense fluctuant abscess needing decompression', setting: 'ED, minutes', recurrence: 'Approaches 100%' } },
+          { cells: { procedure: 'Punch debridement / mini-deroofing', lesion: 'Abscess or nodule with short tunnel, single or few lesions', setting: 'ED or office, 10–15 min', recurrence: 'Low for the treated lesion' } },
+          { cells: { procedure: 'Formal deroofing', lesion: 'Established tunnels, Hurley II', setting: 'Dermatology / surgery office, local anesthesia', recurrence: 'Low (~15%)' } },
+          { cells: { procedure: 'Wide excision', lesion: 'Hurley III region', setting: 'OR, general anesthesia', recurrence: 'Lowest; highest morbidity' } },
+        ],
+      },
+    },
+    {
+      heading: 'Local anesthesia',
+      body: 'Inflamed tissue is acidic and neutralizes local anesthetic. **Field block**, not direct injection: infiltrate 1% [lidocaine with epinephrine](#/drug/lidocaine/hidradenitis) (buffered 9:1 with 8.4% bicarbonate) in a ring 1–2 cm outside the erythema and beneath the lesion, then wait 5–10 minutes. Add or substitute 0.25% [bupivacaine](#/drug/bupivacaine/local infiltration) for 4–8 h of post-procedure analgesia. Stay under maximum doses — 7 mg/kg lidocaine with epinephrine, 2.5 mg/kg bupivacaine — when treating several sites. Consider procedural sedation or intranasal analgesia for extensive Hurley III drainage.',
+    },
+    {
+      heading: 'Punch debridement — step by step',
+      body: '1. Prep and drape; mark the lesion and any tunnel opening you can probe\n2. Field block as above\n3. Center a **5–7 mm disposable biopsy punch** on the lesion; twist down through dermis into the cavity — or unroof with iris scissors / electrocautery for a larger lesion\n4. Remove the plug: this takes the roof **and** the folliculopilosebaceous unit, which is the source of the lesion\n5. Blunt-probe the cavity; unroof any short communicating tunnel by cutting along the probe\n6. Curette or gauze-scrub the gelatinous base; irrigate with saline\n7. Hemostasis with pressure, aluminum chloride, or light cautery\n8. **Leave open.** Petrolatum gauze or an absorbent foam dressing; no wick\n\nHealing by secondary intention over 2–4 weeks with a flat scar. Send the patient home with a written wound-care sheet and the treatment ladder — this procedure buys time; it does not replace systemic therapy.',
+    },
+    {
+      heading: 'Simple I&D — when you must',
+      body: 'Reserve for the tense abscess when a punch is not feasible (no equipment, patient cannot tolerate, extensive disease going to the OR anyway). Smallest effective linear incision along skin tension lines over maximal fluctuance; express; irrigate; **no packing**; non-adherent dressing. Say out loud that this will likely recur and that the fix is the ladder plus dermatology.',
+    },
+    {
+      heading: 'Why no packing',
+      body: 'A randomized trial of simple cutaneous abscesses found packing increased pain and analgesic use with no reduction in treatment failure or recurrence (O\'Malley 2009); a pediatric trial found the same (Kessler 2012). In HS the packing strip also sits inside a tunnel network and keeps it open. North American guidelines recommend against packing HS wounds. Daily showers, gentle irrigation, and an absorbent dressing are the standard.',
+    },
+    {
+      heading: 'Refer rather than cut',
+      body: '• Multiple interconnected tunnels or a whole Hurley III region — wide excision in the OR\n• Perineal, perianal, or genital tunnels — colorectal, urology, or plastic surgery; fistula and sphincter risk\n• Lesions overlying neurovascular structures in the axilla or groin\n• Chronic non-healing ulcer or mass — biopsy by dermatology, not an ED punch through inflamed tissue\n• Any patient on a biologic with an infected lesion — coordinate with the prescriber; procedures are usually still appropriate',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Part I: Diagnosis, evaluation, and the use of complementary and procedural management. J Am Acad Dermatol. 2019;81(1):76-90.' },
+    { num: 2, text: 'van der Zee HH, Prens EP, Boer J. Deroofing: a tissue-saving surgical technique for the treatment of mild to moderate hidradenitis suppurativa lesions. J Am Acad Dermatol. 2010;63(3):475-480.' },
+    { num: 3, text: 'O\'Malley GF, Dominici P, Giraldo P, et al. Routine packing of simple cutaneous abscesses is painful and probably unnecessary. Acad Emerg Med. 2009;16(5):470-473.' },
+    { num: 4, text: 'Kessler DO, Krantz A, Mojica M. Randomized trial comparing wound packing to no wound packing following incision and drainage of superficial skin abscesses in the pediatric emergency department. Pediatr Emerg Care. 2012;28(6):514-517.' },
+    { num: 5, text: 'Okun MM, Flamm A, Werley EB, Kirby JS. Hidradenitis Suppurativa: Diagnosis and Management in the Emergency Department. J Emerg Med. 2022;63(5):636-644.' },
+  ],
+};
+
+const HS_REFERRAL_CRITERIA: InfoPage = {
+  id: 'hs-referral-criteria',
+  title: 'HS Referral & Disposition Criteria',
+  subtitle: 'Who goes where, and how fast',
+  sections: [
+    {
+      heading: 'Dermatology — everyone, urgency by stage',
+      body: '• **Hurley I / IHS4 ≤ 3:** routine, 6–12 weeks; start topicals and a tetracycline course from the ED\n• **Hurley II / IHS4 4–10:** 4–6 weeks; start clindamycin + rifampin or a tetracycline; name the biologic\n• **Hurley III / IHS4 ≥ 11, or failed ≥ 1 antibiotic course:** 2–4 weeks; biologic candidate; bridge\n• **Adolescent (≥ 12 y):** adalimumab and secukinumab are approved from age 12 — refer pediatric dermatology early; tetracyclines only ≥ 8 years\n• **Pregnant or breastfeeding:** topical clindamycin and washes; tetracyclines, rifampin, spironolactone, and methotrexate are contraindicated; adalimumab can be continued in pregnancy under dermatology / MFM guidance; refer within 2–4 weeks\n\nWrite the referral with Hurley stage, IHS4, sites, prior treatments, and comorbidity screen — it shortens the path to a biologic.',
+    },
+    {
+      heading: 'Surgery — deroofing or excision',
+      body: '• Recurrent disease at the same site despite ≥ 8–12 weeks of medical therapy\n• Established tunnels (Hurley II) — deroofing\n• Whole-region Hurley III involvement — wide excision\n• Contracture limiting motion, chronic lymphedema, fistula\n• **Urgent (1–2 weeks):** suspected squamous cell carcinoma — chronic non-healing ulcer, verrucous mass, new bleeding or induration in long-standing gluteal / perineal disease',
+    },
+    {
+      heading: 'Other referrals triggered in the ED',
+      body: '• **Gastroenterology:** perianal fistula, chronic diarrhea, weight loss, blood in stool — Crohn overlap\n• **Colorectal / urology:** anal, rectal, urethral, or vaginal fistula\n• **Behavioral health:** positive depression screen; **emergency psychiatric evaluation** for suicidal ideation\n• **Primary care:** metabolic syndrome, diabetes, PCOS, anemia, smoking cessation, weight management\n• **Pain or addiction medicine:** chronic opioid use',
+    },
+    {
+      heading: 'Admit',
+      body: '• Sepsis or systemic toxicity\n• Fournier gangrene or necrotizing infection — surgical service\n• Extensive cellulitis, failed outpatient antibiotics, or infection in an immunosuppressed patient (biologic, diabetes, HIV)\n• Pain uncontrolled with oral multimodal analgesia\n• Need for IV antibiotics, operative drainage or deroofing under general anesthesia, or perineal disease preventing self-care\n• Positive suicide screen with inadequate safety plan\n\nOrder an inpatient dermatology consult on every HS admission — it is the visit that finally stages the disease and starts definitive therapy.',
+    },
+    {
+      heading: 'Discharge checklist',
+      body: '• Diagnosis, Hurley stage, and IHS4 written on the discharge paperwork\n• Dermatology referral with a date or a phone number, urgency as above\n• Prescriptions from the treatment ladder (topical clindamycin + wash for all; the 8–12-week oral course for moderate disease)\n• Analgesia plan: scheduled NSAID + acetaminophen; opioid ≤ 3 days only if required\n• Wound care sheet: daily showers, absorbent dressing, no packing\n• Written flare plan and return precautions\n• Smoking cessation offered; comorbidity screen forwarded',
+    },
+    {
+      heading: 'Return precautions',
+      body: 'Fever or rigors; rapidly spreading redness; pain out of proportion or a dusky, numb, or crepitant area in the groin or perineum; pain not controlled by the plan; feculent, urinary, or vaginal drainage from a skin lesion; a lesion that ulcerates and will not heal; suicidal thoughts.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Parts I and II. J Am Acad Dermatol. 2019;81(1):76-101.' },
+    { num: 2, text: 'Alhusayen R, Dienes S, Lam M, et al. North American clinical practice guidelines for the medical management of hidradenitis suppurativa in special patient populations. J Am Acad Dermatol. 2025;92(4):825-852.' },
+    { num: 3, text: 'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.' },
+    { num: 4, text: 'Okun MM, Flamm A, Werley EB, Kirby JS. Hidradenitis Suppurativa: Diagnosis and Management in the Emergency Department. J Emerg Med. 2022;63(5):636-644.' },
+  ],
+};
+
+const HS_STOP: InfoPage = {
+  id: 'hs-stop',
+  title: 'Hidradenitis Suppurativa — Do NOT',
+  subtitle: 'Critical pitfalls to avoid',
+  sections: [
+    {
+      heading: '🛑 Do NOT discharge a recurrent fold abscess as "abscess"',
+      body: 'Two or more flares in 6 months in the axilla, groin, inframammary, perineal, or gluteal skin is hidradenitis suppurativa. Every visit that ends without the diagnosis adds to a 7–10 year delay. [Recognize it](#/node/hs-start).',
+    },
+    {
+      heading: '🛑 Do NOT assume the toxic perineal patient "just has an HS flare"',
+      body: 'HS rarely causes systemic illness. Fever, hypotension, pain out of proportion, crepitus, or rapid spread in perineal or genital disease is Fournier gangrene until surgery says otherwise — and chronic scarring hides the early skin changes. [Red flags](#/node/hs-redflags).',
+    },
+    {
+      heading: '🛑 Do NOT trust a low LRINEC in an HS patient',
+      body: 'Chronic inflammation raises CRP and WBC at baseline, so the score is neither sensitive nor specific here. Exam and surgical consultation drive the decision. [Fournier](#/node/hs-fournier).',
+    },
+    {
+      heading: '🛑 Do NOT dismiss a non-healing ulcer or new mass in Hurley III',
+      body: 'Squamous cell carcinoma arises in 1–4% of long-standing severe disease, mostly gluteal and perineal, mostly men, and is usually diagnosed late. Urgent referral for biopsy. [SCC](#/node/hs-scc).',
+    },
+    {
+      heading: '🛑 Do NOT pack the wound',
+      body: 'Packing increases pain without reducing failure or recurrence in simple abscesses, and in HS it keeps the tunnel network open. Leave the cavity open with an absorbent dressing and daily showers. [I&D](#/node/hs-iandd).',
+    },
+    {
+      heading: '🛑 Do NOT reach for the scalpel on a non-fluctuant nodule',
+      body: 'An inflamed nodule under 2 cm is injected with triamcinolone 10 mg/mL, not incised. Cutting it creates a scar and a future tunnel and does not shorten the flare. [Intralesional steroid](#/node/hs-il-steroid).',
+    },
+    {
+      heading: '🛑 Do NOT treat HS with a 7-day antibiotic course',
+      body: 'HS lesions are sterile or polymicrobial; a short course neither treats the disease nor prevents the next flare. Disease-modifying regimens are 8–12 weeks of a tetracycline or clindamycin + rifampin, prescribed as such. [Ladder](#/node/hs-ladder).',
+    },
+    {
+      heading: '🛑 Do NOT prescribe rifampin without counseling on contraceptive failure',
+      body: 'Rifampin induces CYP3A4 and renders oral, patch, ring, and implant contraception unreliable, and drops levels of DOACs, warfarin, antiretrovirals, and many others. Backup contraception for the course and 4 weeks after. [Moderate rung](#/node/hs-ladder-moderate).',
+    },
+    {
+      heading: '🛑 Do NOT give tetracyclines, rifampin, or spironolactone in pregnancy',
+      body: 'Tetracyclines stain fetal teeth and bone; rifampin and spironolactone are contraindicated. Pregnant and breastfeeding patients get topical clindamycin, antiseptic washes, and an expedited dermatology referral. [Mild rung](#/node/hs-ladder-mild).',
+    },
+    {
+      heading: '🛑 Do NOT skip the suicide question',
+      body: 'Depression affects a third or more of HS patients and completed suicide risk is roughly doubled. Ask directly at every visit; a positive answer changes the disposition. [Comorbidity screen](#/node/hs-comorbid).',
+    },
+    {
+      heading: '🛑 Do NOT tell a patient on a biologic to stop it because they have a flare',
+      body: 'Flares occur on therapy and stopping causes rebound. Ask the timing of the last dose, treat the lesion, and route infection concerns through the prescribing dermatologist. [Severe rung](#/node/hs-ladder-severe).',
+    },
+    {
+      heading: '🛑 Do NOT write an open-ended opioid prescription',
+      body: 'HS pain is chronic and recurrent; chronic opioid use and opioid use disorder are over-represented. Scheduled NSAID + acetaminophen, a short opioid course (≤ 3 days) only when needed, and a single prescriber. [Analgesia](#/node/hs-analgesia).',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Okun MM, Flamm A, Werley EB, Kirby JS. Hidradenitis Suppurativa: Diagnosis and Management in the Emergency Department. J Emerg Med. 2022;63(5):636-644.' },
+    { num: 2, text: 'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Parts I and II. J Am Acad Dermatol. 2019;81(1):76-101.' },
+    { num: 3, text: 'Alhusayen R, Dienes S, Lam M, et al. North American clinical practice guidelines for the medical management of hidradenitis suppurativa in special patient populations. J Am Acad Dermatol. 2025;92(4):825-852.' },
+    { num: 4, text: 'O\'Malley GF, Dominici P, Giraldo P, et al. Routine packing of simple cutaneous abscesses is painful and probably unnecessary. Acad Emerg Med. 2009;16(5):470-473.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   // Tier-4b reference pages (calculator-backfill wave B, 2026-08-23)
   'sci-map-goals': SCI_MAP_GOALS_PAGE,
@@ -30868,6 +31073,11 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'electrocution-summary': ELECTROCUTION_SUMMARY,
   'electrocution-peds-cord-bite': ELECTROCUTION_PEDS_CORD_BITE,
   'electrocution-stop': ELECTROCUTION_STOP,
+  // Hidradenitis Suppurativa
+  'hs-summary': HS_SUMMARY,
+  'hs-procedure-guide': HS_PROCEDURE_GUIDE,
+  'hs-referral-criteria': HS_REFERRAL_CRITERIA,
+  'hs-stop': HS_STOP,
   'burns-depth-guide': BURNS_DEPTH_GUIDE,
   'burns-prehospital': BURNS_PREHOSPITAL,
   'burns-dsmc-protocol': BURNS_DSMC_PROTOCOL,

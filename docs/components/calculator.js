@@ -44903,6 +44903,207 @@ const LIGHTNING_EXAM_CHECKLIST_CALCULATOR = {
         };
     },
 };
+// -------------------------------------------------------------------
+// Hidradenitis Suppurativa — Hurley Stage
+// -------------------------------------------------------------------
+const HS_HURLEY_CALCULATOR = {
+    id: 'hs-hurley',
+    title: 'Hurley Stage',
+    subtitle: 'Hidradenitis Suppurativa — Static Severity',
+    description: 'Select the stage that best describes the WORST involved region. Hurley stage describes permanent anatomic damage (tunnels, scarring) and sets the treatment ladder and referral urgency. It does not measure today\'s inflammatory activity — pair it with IHS4. Reference photographs of Hurley II and III are on the Hurley Stage card in the consult.',
+    fields: [
+        {
+            name: 'stage',
+            label: 'Worst involved region',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Hurley I — abscess(es) or nodules, NO sinus tracts, NO scarring', points: 1 },
+                { label: 'Hurley II — recurrent abscesses WITH tunnels and scarring; lesions separated by normal skin', points: 2 },
+                { label: 'Hurley III — diffuse involvement, multiple INTERCONNECTED tunnels and abscesses across a region', points: 3 },
+            ],
+        },
+        { name: 'multi-site', label: 'Two or more anatomic regions involved', type: 'toggle', points: 0 },
+        { name: 'perineal', label: 'Perineal, perianal, or genital involvement', type: 'toggle', points: 0, description: 'Fournier risk, fistula risk, SCC risk' },
+        { name: 'failed-abx', label: 'Failed or relapsed after ≥1 oral antibiotic course (≥8 weeks)', type: 'toggle', points: 0, description: 'Biologic candidate' },
+    ],
+    results: [],
+    thresholdNote: 'Hurley stage is static — it does not improve with medical therapy and does not capture flare activity. Use IHS4 for the dynamic score.',
+    citations: [
+        'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Part I. J Am Acad Dermatol. 2019;81(1):76-90.',
+        'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Part II. J Am Acad Dermatol. 2019;81(1):91-101.',
+        'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.',
+    ],
+    computeResult: (values) => {
+        const stage = values['stage'] || 1;
+        const multi = values['multi-site'] || 0;
+        const perineal = values['perineal'] || 0;
+        const failed = values['failed-abx'] || 0;
+        let value;
+        let label;
+        let colorVar;
+        let plan;
+        if (stage === 1) {
+            value = 'HURLEY I';
+            label = 'Mild — no tunnels or scarring';
+            colorVar = '--color-primary';
+            plan = '**LADDER:**\n• Topical clindamycin 1% BID + chlorhexidine or benzoyl peroxide wash\n• Doxycycline 100 mg daily–BID or minocycline 100 mg BID × 8–12 weeks\n• Intralesional triamcinolone 10 mg/mL to inflamed nodules\n• Smoking cessation, weight reduction\n\n**REFERRAL:** Dermatology, routine (6–12 weeks). Name the diagnosis on the discharge paperwork.';
+        }
+        else if (stage === 2) {
+            value = 'HURLEY II';
+            label = 'Moderate — tunnels and scars, lesions separated';
+            colorVar = '--color-warning';
+            plan = '**LADDER:**\n• Everything from Hurley I, plus\n• Clindamycin 300 mg + rifampin 300 mg PO BID × 10–12 weeks (contraceptive failure — counsel)\n• Spironolactone 25–100 mg daily (women) and/or metformin\n• Name the biologic — adalimumab, secukinumab, or bimekizumab if antibiotics fail\n\n**PROCEDURE:** punch debridement or deroofing over simple I&D\n\n**REFERRAL:** Dermatology within 4–6 weeks; surgical referral for deroofing of established tunnels.';
+        }
+        else {
+            value = 'HURLEY III';
+            label = 'Severe — diffuse interconnected tunnels';
+            colorVar = '--color-danger';
+            plan = '**LADDER:**\n• Biologic-level disease — adalimumab (160/80/40 mg weekly), secukinumab (300 mg weekly × 5 then q4w), or bimekizumab (320 mg q2w to week 16 then q4w), started by dermatology after TB / hepatitis / HIV screening\n• Bridge: clindamycin + rifampin, intralesional triamcinolone, analgesia\n\n**SURGERY:** wide excision of Hurley III regions in parallel — biologics do not remove tunnels\n\n**REFERRAL:** Dermatology within 2–4 weeks AND surgical referral. Screen for SCC in any chronic non-healing ulcer.';
+        }
+        let description = `**STAGE:** ${label}\n\n${plan}`;
+        const flags = [];
+        if (multi)
+            flags.push('Multi-region disease — raises the case for systemic therapy at any stage');
+        if (perineal)
+            flags.push('Perineal / genital disease — examine the whole perineum; low threshold for Fournier workup if toxic; anaerobic coverage if infected; fistula and SCC surveillance');
+        if (failed)
+            flags.push('Antibiotic failure — biologic candidate; dermatology within 2–4 weeks regardless of stage');
+        if (flags.length)
+            description += `\n\n**MODIFIERS:**\n${flags.map(f => '• ' + f).join('\n')}`;
+        description += '\n\n**DOCUMENT:** "Hidradenitis suppurativa, Hurley ' + ['I', 'II', 'III'][stage - 1] + ', IHS4 __" — not "recurrent abscess."';
+        return { value, label, description, colorVar };
+    },
+};
+// -------------------------------------------------------------------
+// Hidradenitis Suppurativa — IHS4 (International HS Severity Score System)
+// -------------------------------------------------------------------
+const HS_IHS4_CALCULATOR = {
+    id: 'hs-ihs4',
+    title: 'IHS4',
+    subtitle: 'International HS Severity Score System',
+    description: 'Count TODAY\'s inflammatory lesions across ALL body sites. Nodules count 1 point each, abscesses 2, draining tunnels 4. Validated dynamic score (Zouboulis 2017) that tracks response to therapy and defines biologic eligibility. Scars, comedones, and non-draining tunnels do not count.',
+    fields: [
+        { name: 'nodules', label: 'Inflammatory nodules', type: 'number', points: 0, unit: 'count', description: 'Tender, red, deep nodules — × 1' },
+        { name: 'abscesses', label: 'Abscesses', type: 'number', points: 0, unit: 'count', description: 'Fluctuant collections — × 2' },
+        { name: 'tunnels', label: 'Draining tunnels (sinus tracts)', type: 'number', points: 0, unit: 'count', description: 'Actively discharging tracts — × 4' },
+    ],
+    results: [],
+    thresholdNote: 'Mild ≤ 3 • Moderate 4–10 • Severe ≥ 11. Record alongside Hurley stage.',
+    citations: [
+        'Zouboulis CC, Tzellos T, Kyrgidis A, et al. Development and validation of the International Hidradenitis Suppurativa Severity Score System (IHS4). Br J Dermatol. 2017;177(5):1401-1409.',
+        'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.',
+    ],
+    computeResult: (values) => {
+        const n = Math.max(0, values['nodules'] || 0);
+        const a = Math.max(0, values['abscesses'] || 0);
+        const t = Math.max(0, values['tunnels'] || 0);
+        const score = n * 1 + a * 2 + t * 4;
+        let label;
+        let colorVar;
+        let plan;
+        if (score <= 3) {
+            label = 'Mild';
+            colorVar = '--color-primary';
+            plan = '**TREATMENT:**\n• Topical clindamycin 1% BID + antiseptic wash\n• Tetracycline course (doxycycline 100 mg daily–BID or minocycline 100 mg BID) × 8–12 weeks if recurrent\n• Intralesional triamcinolone 10 mg/mL to inflamed nodules\n• Smoking cessation, weight reduction\n\n**REFERRAL:** dermatology, routine.';
+        }
+        else if (score <= 10) {
+            label = 'Moderate';
+            colorVar = '--color-warning';
+            plan = '**TREATMENT:**\n• Clindamycin 300 mg + rifampin 300 mg PO BID × 10–12 weeks (or tetracycline course)\n• Spironolactone (women) / metformin adjuncts\n• Punch debridement or deroofing for drainable lesions\n• Biologic if antibiotics fail — name it for the patient\n\n**REFERRAL:** dermatology within 4–6 weeks.';
+        }
+        else {
+            label = 'Severe';
+            colorVar = '--color-danger';
+            plan = '**TREATMENT:**\n• Biologic candidate — adalimumab, secukinumab, or bimekizumab via dermatology\n• Bridge with clindamycin + rifampin, intralesional triamcinolone, multimodal analgesia\n• Surgical referral for deroofing / wide excision in parallel\n\n**REFERRAL:** dermatology within 2–4 weeks.';
+        }
+        const description = `**COUNT:**\n• Nodules ${n} × 1 = ${n}\n• Abscesses ${a} × 2 = ${a * 2}\n• Draining tunnels ${t} × 4 = ${t * 4}\n\n**IHS4 = ${score}** (${label}: mild ≤ 3, moderate 4–10, severe ≥ 11)\n\n${plan}\n\n**DOCUMENT:** IHS4 ${score} with Hurley stage in the note — the dermatologist uses both to justify a biologic.`;
+        return { value: String(score), label, description, colorVar };
+    },
+};
+// -------------------------------------------------------------------
+// Hidradenitis Suppurativa — Comorbidity Screen
+// -------------------------------------------------------------------
+const HS_COMORBIDITY_SCREEN_CALCULATOR = {
+    id: 'hs-comorbidity-screen',
+    title: 'HS Comorbidity Screen',
+    subtitle: 'Screening checklist for the ED visit',
+    description: 'HS is a systemic inflammatory disease. Toggle each positive screen. The output lists what to order or document today and what to hand to dermatology and primary care — several of these comorbidities are more dangerous than the skin disease.',
+    fields: [
+        { name: 'smoking', label: 'Current tobacco / nicotine use', type: 'toggle', points: 0, description: '70–90% of HS patients; cessation is disease-modifying' },
+        { name: 'obesity', label: 'BMI ≥ 30 or central obesity', type: 'toggle', points: 0 },
+        { name: 'metabolic', label: 'Known diabetes, prediabetes, hypertension, or dyslipidemia', type: 'toggle', points: 0, description: 'Metabolic syndrome in ~50%' },
+        { name: 'pcos', label: 'Irregular menses, hirsutism, or known PCOS (women)', type: 'toggle', points: 0 },
+        { name: 'ibd', label: 'Chronic diarrhea, blood in stool, weight loss, or perianal fistula / fissure', type: 'toggle', points: 0, description: 'Crohn disease overlap' },
+        { name: 'depression', label: 'Depressed mood or anhedonia most days (PHQ-2 positive)', type: 'toggle', points: 0 },
+        { name: 'suicidal', label: 'Suicidal thoughts on direct questioning', type: 'toggle', points: 0, description: 'Suicide risk ~2× in HS — ASK' },
+        { name: 'anemia', label: 'Fatigue, pallor, or hemoglobin below normal on today\'s CBC', type: 'toggle', points: 0 },
+        { name: 'arthritis', label: 'Inflammatory back pain, joint swelling, or enthesitis', type: 'toggle', points: 0, description: 'Spondyloarthropathy' },
+        { name: 'fistula', label: 'Feculent, urinary, or vaginal drainage from a skin lesion', type: 'toggle', points: 0, description: 'Anal / urethral / vaginal fistula' },
+        { name: 'ulcer', label: 'Chronic non-healing ulcer or new mass in long-standing disease', type: 'toggle', points: 0, description: 'SCC until biopsied' },
+        { name: 'opioid', label: 'Chronic opioid use or multiple opioid prescribers', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'Ask the suicide question directly in every HS patient. Document the screen and forward it to dermatology — biologic initiation needs it.',
+    citations: [
+        'Okun MM, Flamm A, Werley EB, Kirby JS. Hidradenitis Suppurativa: Diagnosis and Management in the Emergency Department. J Emerg Med. 2022;63(5):636-644.',
+        'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Part I. J Am Acad Dermatol. 2019;81(1):76-90.',
+        'Ballard K, Shuman VL. Hidradenitis Suppurativa. StatPearls. 2023.',
+    ],
+    computeResult: (values) => {
+        const actions = [];
+        const urgent = [];
+        if (values['suicidal'])
+            urgent.push('**Suicidal ideation** — full suicide risk assessment now (Suicide Risk Assessment consult); do not discharge until safety is addressed');
+        if (values['ulcer'])
+            urgent.push('**Possible SCC** — urgent dermatology / surgical oncology referral for biopsy within 1–2 weeks; photograph and document');
+        if (values['fistula'])
+            urgent.push('**Fistula** — MRI pelvis or fistulogram; colorectal or urology referral; exclude Crohn disease');
+        if (values['smoking'])
+            actions.push('Offer cessation pharmacotherapy today (varenicline or NRT) — document counseling');
+        if (values['obesity'])
+            actions.push('Weight-management referral; document BMI');
+        if (values['metabolic'])
+            actions.push('Glucose today; A1c and lipid panel if not done in 12 months; primary care follow-up');
+        if (values['pcos'])
+            actions.push('Supports spironolactone ± metformin; refer to primary care / gynecology for PCOS evaluation');
+        if (values['ibd'])
+            actions.push('CBC, CRP, fecal calprotectin if available; GI referral — anti-TNF (adalimumab) would treat both, IL-17 blockers may worsen IBD');
+        if (values['depression'])
+            actions.push('PHQ-9; primary care or behavioral health referral; screen for suicidal ideation if not already done');
+        if (values['anemia'])
+            actions.push('CBC, ferritin, iron studies; anemia of chronic disease vs iron deficiency; primary care follow-up');
+        if (values['arthritis'])
+            actions.push('Rheumatology referral; note for dermatology — anti-TNF and IL-17 agents treat both');
+        if (values['opioid'])
+            actions.push('Single-prescriber plan; check PDMP; multimodal non-opioid analgesia; pain or addiction medicine referral');
+        const count = urgent.length + actions.length;
+        let value;
+        let colorVar;
+        if (urgent.length) {
+            value = 'ACT NOW';
+            colorVar = '--color-danger';
+        }
+        else if (actions.length) {
+            value = `${count} POSITIVE`;
+            colorVar = '--color-warning';
+        }
+        else {
+            value = 'SCREEN NEGATIVE';
+            colorVar = '--color-primary';
+        }
+        let description = '';
+        if (urgent.length)
+            description += `**URGENT:**\n${urgent.map(u => '• ' + u).join('\n')}\n\n`;
+        if (actions.length)
+            description += `**TODAY / AT DISCHARGE:**\n${actions.map(a => '• ' + a).join('\n')}\n\n`;
+        if (!count)
+            description += '**SCREEN:** No comorbidity flags selected — confirm the suicide question was asked directly, then document a negative screen.\n\n';
+        description += '**HAND-OFF:** Forward the screen to dermatology and primary care. Biologic initiation requires TB, hepatitis B/C, and HIV screening — flag any positive infectious history now.';
+        return { value, label: `${count} of 12 positive`, description, colorVar };
+    },
+};
 const CALCULATORS = {
     // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
     'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
@@ -44968,6 +45169,10 @@ const CALCULATORS = {
     // Electrocution & Lightning
     'electrical-monitoring-criteria': ELECTRICAL_MONITORING_CRITERIA_CALCULATOR,
     'lightning-exam-checklist': LIGHTNING_EXAM_CHECKLIST_CALCULATOR,
+    // Hidradenitis Suppurativa
+    'hs-hurley': HS_HURLEY_CALCULATOR,
+    'hs-ihs4': HS_IHS4_CALCULATOR,
+    'hs-comorbidity-screen': HS_COMORBIDITY_SCREEN_CALCULATOR,
     'tia-dapt-protocol': TIA_DAPT_PROTOCOL_CALCULATOR,
     'tia-disposition': TIA_DISPOSITION_CALCULATOR,
     // Peripartum Cardiomyopathy

@@ -328,6 +328,17 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'dress', label: 'Dress', icon: '\uD83E\uDE79', action: 'overlay', target: 'burns-dressing-guide' },
     { id: 'chemical', label: 'Chemical', icon: '\uD83E\uDDEA', action: 'overlay', target: 'burns-chemical-detail' },
   ],
+  'hidradenitis-suppurativa': [
+    { id: 'steps', label: 'Steps', icon: '\uD83D\uDCCB', action: 'overlay', target: 'hs-summary', pinned: true },
+    { id: 'hurley', label: 'Hurley', icon: '\uD83E\uDE7A', action: 'calculator', target: 'hs-hurley', pinned: true },
+    { id: 'ihs4', label: 'IHS4', icon: '\uD83D\uDD22', action: 'calculator', target: 'hs-ihs4', pinned: true },
+    { id: 'procedure', label: 'Procedure', icon: '\uD83D\uDD2A', action: 'overlay', target: 'hs-procedure-guide', pinned: true },
+    { id: 'ladder', label: 'Ladder', icon: '\uD83D\uDC8A', action: 'jump', target: 'hs-ladder', pinned: true },
+    { id: 'comorbid', label: 'Comorbid', icon: '\uD83E\uDDEA', action: 'calculator', target: 'hs-comorbidity-screen' },
+    { id: 'referral', label: 'Referral', icon: '\uD83D\uDCC5', action: 'overlay', target: 'hs-referral-criteria' },
+    { id: 'lrinec', label: 'LRINEC', icon: '\u26A0\uFE0F', action: 'calculator', target: 'lrinec' },
+    { id: 'stop', label: 'Stop', icon: '\uD83D\uDED1', action: 'overlay', target: 'hs-stop' },
+  ],
   'electrocution': [
     { id: 'steps', label: 'Steps', icon: '\uD83D\uDCCB', action: 'overlay', target: 'electrocution-summary', pinned: true },
     { id: 'admit', label: 'Admit?', icon: '\uD83D\uDECF\uFE0F', action: 'calculator', target: 'electrical-monitoring-criteria', pinned: true },

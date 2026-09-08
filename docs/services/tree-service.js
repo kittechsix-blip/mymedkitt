@@ -639,6 +639,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/electrocution.js');
             return { nodes: m.ELECTROCUTION_NODES, entryNodeId: 'electrocution-start', categoryId: 'emergency-medicine', moduleLabels: m.ELECTROCUTION_MODULE_LABELS, citations: m.ELECTROCUTION_CITATIONS, criticalActions: m.ELECTROCUTION_CRITICAL_ACTIONS };
         },
+        'hidradenitis-suppurativa': async () => {
+            const m = await import('../data/trees/hidradenitis-suppurativa.js');
+            return { nodes: m.HIDRADENITIS_SUPPURATIVA_NODES, entryNodeId: 'hs-start', categoryId: 'dermatology', moduleLabels: m.HIDRADENITIS_SUPPURATIVA_MODULE_LABELS, citations: m.HIDRADENITIS_SUPPURATIVA_CITATIONS, criticalActions: m.HIDRADENITIS_SUPPURATIVA_CRITICAL_ACTIONS };
+        },
         'sjs-ten': async () => {
             const m = await import('../data/trees/sjs-ten.js');
             return { nodes: m.SJS_TEN_NODES, entryNodeId: 'sjs-ten-start', categoryId: 'emergency-medicine', moduleLabels: m.SJS_TEN_MODULE_LABELS, citations: m.SJS_TEN_CITATIONS };

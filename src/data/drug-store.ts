@@ -303,6 +303,10 @@ const AMOXICILLIN_CLAVULANATE: DrugEntry = {
       indication: 'Adult UTI / cystitis',
       regimen: '500/125 mg PO BID × 5-7 days. Alternative for uncomplicated cystitis when first-line agents (nitrofurantoin, fosfomycin, TMP-SMX) contraindicated or resistance suspected. Pregnancy-safe. IDSA 2011.',
     },
+    {
+      indication: 'Hidradenitis suppurativa — perianal / perineal / gluteal secondary infection (adult)',
+      regimen: '875/125 mg PO BID for 5–7 days for spreading cellulitis or secondary infection of perineal HS lesions (adds anaerobic and gram-negative coverage). Not disease-modifying — pair with the 8–12-week HS regimen and dermatology referral. Reduce for CrCl <30; diarrhea common.',
+    },
   ],
   contraindications: [
     'IgE-mediated penicillin allergy',
@@ -1750,6 +1754,10 @@ const CEPHALEXIN: DrugEntry = {
       regimen: '\u226428 days: 75 mg/kg/day divided q8h. \u226529 days: 100 mg/kg/day divided q6h.',
       weightCalc: [{ dosePerKg: 75, unit: 'mg', dailyDivided: 3, label: '\u226428 days (q8h)' }, { dosePerKg: 100, unit: 'mg', dailyDivided: 4, label: '\u226529 days (q6h)' }],
     },
+    {
+      indication: 'Cellulitis / non-purulent SSTI (adult) — including secondary cellulitis around hidradenitis lesions',
+      regimen: '500 mg PO QID (or 1 g BID) for 5–7 days; extend if slow response. Covers streptococci and MSSA; add TMP-SMX or doxycycline if purulent or MRSA risk. In HS this treats true secondary infection only — the disease-modifying course is a tetracycline or clindamycin + rifampin for 8–12 weeks.',
+    },
   ],
   contraindications: [
     'IgE-mediated cephalosporin allergy',
@@ -2246,6 +2254,14 @@ const CLINDAMYCIN: DrugEntry = {
     {
       indication: 'Skin/soft tissue infection',
       regimen: '300-450 mg PO q6-8h × 7-10 days.\n\nAlternative MRSA coverage for uncomplicated SSTIs when TMP-SMX or doxycycline not appropriate.',
+    },
+    {
+      indication: 'Hidradenitis suppurativa — oral, with rifampin (moderate disease / bridge to biologic)',
+      regimen: '300 mg PO BID for 10–12 weeks, combined with rifampin 300 mg PO BID. Best-studied oral combination for Hurley II; may be repeated. C. difficile risk — counsel to stop and return for significant diarrhea. Rifampin causes contraceptive failure — see rifampin entry. Topical clindamycin 1% solution/lotion BID is used at all stages.',
+    },
+    {
+      indication: 'Hidradenitis suppurativa — inpatient flare with cellulitis or systemic signs',
+      regimen: '600–900 mg IV q8h as a short course (typically 3–5 days) for the admitted patient with secondary infection, then step down to the oral HS regimen (clindamycin + rifampin or a tetracycline). Broaden to NSTI coverage (vancomycin + piperacillin-tazobactam + clindamycin) if Fournier gangrene or necrotizing infection is a concern.',
     },
   ],
   contraindications: [
@@ -2808,6 +2824,10 @@ const DOXYCYCLINE: DrugEntry = {
       regimen: '4.4 mg/kg/day PO divided BID (max 100 mg/dose) × 10-14 days. Acceptable in children of any age for short courses (≤21 days) per AAP 2019 — tooth staining concern minimal. <8 yr: amoxicillin preferred when feasible.',
       weightCalc: { dosePerKg: 4.4, unit: 'mg', maxDose: 100, dailyDivided: 2 },
     },
+    {
+      indication: 'Hidradenitis suppurativa — mild to moderate (Hurley I–II), adult and adolescent ≥12 yr',
+      regimen: '100 mg PO daily to BID for 8–12 weeks; may be repeated intermittently. Anti-inflammatory course, not a 7-day infection course — prescribe the full duration or a bridge to the dermatology visit. Contraindicated in pregnancy, breastfeeding, and age <8 yr. Photosensitivity; take upright with water to avoid esophagitis.',
+    },
   ],
   contraindications: [
     'Pregnancy \u2014 tetracyclines cause fetal bone/teeth abnormalities',
@@ -3348,6 +3368,10 @@ const LIDOCAINE: DrugEntry = {
     {
       indication: 'Cardiac arrest — VF/pVT (ACLS)',
       regimen: '1-1.5 mg/kg IV/IO push. May repeat 0.5-0.75 mg/kg q5-10 min (max 3 mg/kg total). Post-ROSC maintenance: 1-4 mg/min infusion. Give after 3rd shock if amiodarone unavailable. 2025 AHA: target trial emulation suggests lidocaine may have higher prehospital ROSC rates.',
+    },
+    {
+      indication: 'Hidradenitis suppurativa — field block for punch debridement / I&D',
+      regimen: '1% lidocaine with epinephrine (buffered 9:1 with 8.4% sodium bicarbonate), infiltrated in a ring 1–2 cm outside the erythema and beneath the lesion; wait 5–10 min. Inflamed acidic tissue blunts the block — inject around, not into, the lesion. Maximum 7 mg/kg with epinephrine (4.5 mg/kg plain); count total volume when treating multiple sites. Add 0.25% bupivacaine for prolonged post-procedure analgesia.',
     },
   ],
   contraindications: [
@@ -6250,6 +6274,10 @@ const METFORMIN: DrugEntry = {
     {
       indication: 'Type 2 Diabetes - renal dosing',
       regimen: 'eGFR >45: No dose adjustment.\neGFR 30-45: Use caution, do not initiate, may continue at reduced dose.\neGFR <30: Contraindicated.\n\nHold 48 hours before and after IV contrast in patients with eGFR <60.',
+    },
+    {
+      indication: 'Hidradenitis suppurativa — metabolic adjunct (insulin resistance, PCOS, obesity)',
+      regimen: '500 mg PO daily with food, increase by 500 mg weekly as tolerated to 1,500–2,000 mg/day in divided doses (extended-release once daily improves GI tolerance). Hold for eGFR <30, contrast studies, or acute illness with hypoperfusion. Benefit is modest and adjunctive; safe in pregnancy.',
     },
   ],
   contraindications: [
@@ -9462,6 +9490,10 @@ const RIFAMPIN: DrugEntry = {
       regimen: '10 mg/kg PO daily (max 600 mg) × 3 months with isoniazid.',
       weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 600 },
     },
+    {
+      indication: 'Hidradenitis suppurativa — moderate (Hurley II) or bridge to biologic, with clindamycin',
+      regimen: '300 mg PO BID for 10–12 weeks, combined with clindamycin 300 mg PO BID. Potent CYP3A4 inducer: oral, patch, ring, and implant contraception FAIL — backup method for the course and 4 weeks after; reduces DOACs, warfarin, antiretrovirals, many others. Orange discoloration of urine, tears, contact lenses. Baseline and periodic LFTs.',
+    },
   ],
   contraindications: [
     'Concurrent use of protease inhibitors or certain antiretrovirals (major CYP3A4 inducer)',
@@ -12411,6 +12443,10 @@ const SPIRONOLACTONE: DrugEntry = {
       indication: 'Hypokalemia (refractory or chronic)',
       regimen: '25–100 mg PO daily as K-sparing adjunct. Useful in diuretic-induced hypokalemia, Bartter/Gitelman syndromes, or hyperaldosteronism.',
     },
+    {
+      indication: 'Hidradenitis suppurativa — hormonal adjunct (women)',
+      regimen: '25–100 mg PO daily (start 25–50 mg, titrate), particularly with premenstrual flares, PCOS, or acne. Response assessed at 3 months. Teratogenic (feminization of male fetus) — reliable contraception required; check potassium at baseline and 4 weeks, especially with ACE-I / ARB or renal impairment.',
+    },
   ],
   contraindications: [
     'Hyperkalemia (K >5.0–5.5 mEq/L at baseline)',
@@ -14127,6 +14163,205 @@ const TOPIRAMATE: DrugEntry = {
   ],
 };
 
+const ADALIMUMAB: DrugEntry = {
+  id: 'adalimumab',
+  name: 'Adalimumab (Humira and biosimilars)',
+  genericName: 'Adalimumab',
+  drugClass: 'Anti-TNF-alpha monoclonal antibody (biologic)',
+  route: 'SC',
+  indications: [
+    'Moderate-to-severe hidradenitis suppurativa (Hurley II–III / IHS4 ≥ 4 failing conventional therapy) — adults and adolescents ≥12 years, ≥30 kg (FDA 2015; adolescent 2018)',
+    'Crohn disease, ulcerative colitis, rheumatoid arthritis, psoriatic arthritis, ankylosing spondylitis, plaque psoriasis, uveitis (dermatology / rheumatology / GI-initiated)',
+  ],
+  dosing: [
+    {
+      indication: 'Hidradenitis suppurativa — adult, and adolescent ≥12 years weighing ≥60 kg',
+      regimen: '160 mg SC on Day 1 (as four 40 mg injections in one day or two 40 mg injections on each of two consecutive days), then 80 mg SC on Day 15, then 40 mg SC EVERY WEEK (or 80 mg every other week) starting Day 29. Continue indefinitely if responding at 12 weeks. Initiated by dermatology after TB, hepatitis B / C, and HIV screening — the ED names the option and refers.',
+    },
+    {
+      indication: 'Hidradenitis suppurativa — adolescent ≥12 years weighing 30 kg to <60 kg',
+      regimen: '80 mg SC on Day 1, then 40 mg SC every other week starting Day 8.',
+    },
+  ],
+  contraindications: [
+    'Active serious infection, including active tuberculosis and untreated latent TB',
+    'Prior serious hypersensitivity to adalimumab or excipients',
+    'Do not combine with other biologics or JAK inhibitors',
+  ],
+  cautions: [
+    'BOXED WARNING: serious infections (TB, invasive fungal, bacterial, viral, opportunistic) and malignancy (lymphoma including hepatosplenic T-cell lymphoma in young patients on concurrent azathioprine / 6-MP)',
+    'Hepatitis B reactivation — screen before starting; treat carriers under specialist guidance',
+    'Moderate-to-severe heart failure (NYHA III–IV) — worsening reported; avoid',
+    'Demyelinating disease (MS, optic neuritis, Guillain-Barré) — avoid or use with caution',
+    'Live vaccines contraindicated during therapy; update vaccines before starting',
+    'Pregnancy: crosses the placenta in the third trimester; may be continued in HS when benefit outweighs risk (special-populations guideline); infants exposed in utero should not receive live vaccines for 6 months',
+    'ED flare or infection in a patient on adalimumab: do NOT tell the patient to stop the drug; ask timing of last dose, treat the lesion or infection, and contact the prescriber — hold the next dose only for serious infection and only with the prescriber',
+  ],
+  monitoring: 'Before initiation: TB (IGRA or TST), hepatitis B and C serologies, HIV, CBC, LFTs. During therapy: infection surveillance, periodic CBC / LFTs, skin cancer screening. HS response assessed at 12 weeks (HiSCR / IHS4).',
+  notes: 'First FDA-approved biologic for HS (2015; PIONEER I and II trials) and the one with the most experience — SORT A. Weekly dosing is required in HS (higher than the every-other-week psoriasis / RA regimen). Also treats concomitant Crohn disease and inflammatory arthritis, which favors it over IL-17 blockers in patients with IBD. Biosimilars (adalimumab-adbm, -adaz, -bwwd, etc.) use the same regimen.',
+  citations: [
+    'HUMIRA (adalimumab) injection, for subcutaneous use. Prescribing Information. AbbVie Inc. 2018 revision (adolescent HS dosing). https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/125057s410lbl.pdf',
+    'Kimball AB, Okun MM, Williams DA, et al. Two Phase 3 Trials of Adalimumab for Hidradenitis Suppurativa (PIONEER I and II). N Engl J Med. 2016;375(5):422-434.',
+    'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Part II. J Am Acad Dermatol. 2019;81(1):91-101.',
+    'Alhusayen R, Dienes S, Lam M, et al. North American clinical practice guidelines for the medical management of hidradenitis suppurativa in special patient populations. J Am Acad Dermatol. 2025;92(4):825-852.',
+  ],
+};
+
+const SECUKINUMAB: DrugEntry = {
+  id: 'secukinumab',
+  name: 'Secukinumab (Cosentyx)',
+  genericName: 'Secukinumab',
+  drugClass: 'Anti-IL-17A monoclonal antibody (biologic)',
+  route: 'SC',
+  indications: [
+    'Moderate-to-severe hidradenitis suppurativa in adults (FDA October 2023) and patients ≥12 years',
+    'Plaque psoriasis, psoriatic arthritis, ankylosing spondylitis, non-radiographic axial spondyloarthritis, enthesitis-related arthritis (specialist-initiated)',
+  ],
+  dosing: [
+    {
+      indication: 'Hidradenitis suppurativa — adult',
+      regimen: '300 mg SC at Weeks 0, 1, 2, 3, and 4 (weekly × 5 loading doses), then 300 mg SC EVERY 4 WEEKS. If response is inadequate, the maintenance interval may be shortened to every 2 weeks. Initiated by dermatology after TB screening — the ED names the option and refers.',
+    },
+    {
+      indication: 'Hidradenitis suppurativa — adolescent ≥12 years',
+      regimen: 'Weight-based dosing per current prescribing information (label expanded to ≥12 years); pediatric dermatology initiates.',
+    },
+  ],
+  contraindications: [
+    'Serious hypersensitivity to secukinumab or excipients',
+    'Active serious infection including active TB',
+  ],
+  cautions: [
+    'Inflammatory bowel disease — new onset and exacerbations of Crohn disease and ulcerative colitis reported with IL-17 blockade; avoid in patients with active IBD and monitor for GI symptoms (prefer adalimumab when HS coexists with IBD)',
+    'Infections — upper respiratory infections common; mucocutaneous candidiasis; evaluate for TB before starting',
+    'Hypersensitivity including anaphylaxis; latex-sensitive patients — needle cap of some presentations contains natural rubber',
+    'Live vaccines contraindicated during therapy',
+    'Pregnancy / lactation: limited data; discuss with dermatology and MFM',
+    'ED flare or infection on secukinumab: do NOT stop the drug unilaterally; treat, and coordinate with the prescriber',
+  ],
+  monitoring: 'TB screening before initiation; hepatitis B serologies per local practice; monitor for infection and new or worsening GI symptoms. HS response assessed at 16 weeks.',
+  notes: 'Second FDA-approved biologic for HS (SUNSHINE and SUNRISE phase 3 trials, HiSCR at week 16). Alternative when adalimumab fails, is contraindicated (heart failure, demyelinating disease), or loses effect. Anti-IL-17 agents do not treat IBD and may unmask it.',
+  citations: [
+    'COSENTYX (secukinumab) injection, for subcutaneous use. Prescribing Information. Novartis Pharmaceuticals Corporation. HS indication October 2023.',
+    'Kimball AB, Jemec GBE, Alavi A, et al. Secukinumab in moderate-to-severe hidradenitis suppurativa (SUNSHINE and SUNRISE): week 16 and week 52 results of two identical, multicentre, randomised, placebo-controlled, double-blind phase 3 trials. Lancet. 2023;401(10378):747-761.',
+    'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.',
+  ],
+};
+
+const BIMEKIZUMAB: DrugEntry = {
+  id: 'bimekizumab',
+  name: 'Bimekizumab (Bimzelx)',
+  genericName: 'Bimekizumab-bkzx',
+  drugClass: 'Anti-IL-17A / IL-17F monoclonal antibody (biologic)',
+  route: 'SC',
+  indications: [
+    'Moderate-to-severe hidradenitis suppurativa in adults (FDA November 2024)',
+    'Plaque psoriasis, psoriatic arthritis, ankylosing spondylitis, non-radiographic axial spondyloarthritis (specialist-initiated)',
+  ],
+  dosing: [
+    {
+      indication: 'Hidradenitis suppurativa — adult',
+      regimen: '320 mg SC (two 160 mg injections) EVERY 2 WEEKS at Weeks 0, 2, 4, 6, 8, 10, 12, 14, and 16, then 320 mg SC EVERY 4 WEEKS. Initiated by dermatology after TB screening — the ED names the option and refers.',
+    },
+  ],
+  contraindications: [
+    'Serious hypersensitivity to bimekizumab or excipients',
+    'Active serious infection including active TB',
+  ],
+  cautions: [
+    'Suicidal ideation and behavior — reported in clinical trials; screen for depression and suicidality before and during therapy (relevant in HS, where baseline suicide risk is already elevated); advise patients and caregivers to report changes in mood',
+    'Inflammatory bowel disease — new onset or exacerbation with IL-17 blockade; avoid in active IBD',
+    'Oral candidiasis — common (dual IL-17A / F blockade); usually mild, treated topically without interruption',
+    'Infections and TB — evaluate before starting; hepatitis B per local practice',
+    'Liver enzyme elevations — check LFTs at baseline and periodically',
+    'Live vaccines contraindicated during therapy',
+    'Pregnancy / lactation: no adequate data; discuss with dermatology and MFM',
+    'ED flare or infection on bimekizumab: do NOT stop the drug unilaterally; treat, and coordinate with the prescriber',
+  ],
+  monitoring: 'Baseline TB screening, LFTs, depression / suicidality screen; monitor LFTs, mood, GI symptoms, and oral candidiasis. HS response assessed at 16 weeks.',
+  notes: 'Third FDA-approved biologic for HS (BE HEARD I and II phase 3 trials, HiSCR50 at week 16 with response sustained to week 48). Dual IL-17A / IL-17F blockade. Alternative for adalimumab or secukinumab failure. The combination of a suicidality warning and HS\'s baseline risk makes the ED comorbidity screen part of safe prescribing.',
+  citations: [
+    'BIMZELX (bimekizumab-bkzx) injection, for subcutaneous use. Prescribing Information. UCB, Inc. HS indication November 2024. https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/761151s010lbl.pdf',
+    'Kimball AB, Jemec GBE, Sayed CJ, et al. Efficacy and safety of bimekizumab in patients with moderate-to-severe hidradenitis suppurativa (BE HEARD I and BE HEARD II): two 48-week, randomised, double-blind, placebo-controlled, multicentre phase 3 trials. Lancet. 2024;403(10443):2504-2519.',
+    'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.',
+  ],
+};
+
+const TRIAMCINOLONE: DrugEntry = {
+  id: 'triamcinolone',
+  name: 'Triamcinolone Acetonide (Intralesional)',
+  genericName: 'Triamcinolone acetonide injectable suspension (Kenalog-10 / Kenalog-40)',
+  drugClass: 'Intermediate-acting corticosteroid (intralesional / intra-articular)',
+  route: 'Intralesional',
+  indications: [
+    'Hidradenitis suppurativa — acute inflamed nodule or early abscess (< 2 cm, non-fluctuant)',
+    'Inflamed epidermoid cyst, keloid / hypertrophic scar, alopecia areata, localized inflammatory dermatoses (dermatology use)',
+  ],
+  dosing: [
+    {
+      indication: 'Hidradenitis suppurativa — intralesional flare treatment',
+      regimen: 'Triamcinolone acetonide 10 mg/mL: inject approximately 0.5–1 mL into the center of each inflamed nodule with a 27–30 gauge needle until the lesion blanches slightly; multiple nodules may be treated per visit (keep total ≤ 20–40 mg per session). Dilute with lidocaine or saline to 5 mg/mL for thin skin or superficial lesions. May repeat at 3–4 week intervals. Do NOT inject into a fluctuant abscess — drain it instead. Pain and size typically improve within 24–48 h.',
+    },
+  ],
+  contraindications: [
+    'Injection into a fluctuant abscess or through cellulitic skin without drainage',
+    'Systemic fungal infection; hypersensitivity to triamcinolone or benzyl alcohol',
+  ],
+  cautions: [
+    'Local atrophy, hypopigmentation (more visible in darker skin), telangiectasia — warn the patient; higher risk with 40 mg/mL or superficial injection',
+    'Transient flare of pain at injection for 24 h',
+    'Repeated high cumulative doses can produce systemic corticosteroid effects (hyperglycemia in diabetics, adrenal suppression)',
+    'Not a substitute for systemic therapy — treats the injected lesion only',
+  ],
+  monitoring: 'Check glucose in diabetics receiving repeated injections; inspect for atrophy or hypopigmentation at follow-up.',
+  notes: 'Recommended by North American (Part II) and European S2k guidelines for acute HS flares. The Riis 2016 case series showed reduced erythema, edema, suppuration, and size within days; a small RCT (Fajgenbaum 2020) found modest benefit over saline. Cheap, fast, and avoids the scar and future tunnel that an incision leaves.',
+  citations: [
+    'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Part II: Topical, intralesional, and systemic medical management. J Am Acad Dermatol. 2019;81(1):91-101.',
+    'Riis PT, Boer J, Prens EP, et al. Intralesional triamcinolone for flares of hidradenitis suppurativa (HS): A case series. J Am Acad Dermatol. 2016;75(6):1151-1155.',
+    'Fajgenbaum K, Crouse L, Dong L, Zeng D, Sayed C. Intralesional Triamcinolone May Not Be Beneficial for Treating Acute Hidradenitis Suppurativa Lesions: A Double-Blind, Randomized, Placebo-Controlled Trial. Dermatol Surg. 2020;46(5):685-689.',
+    'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.',
+  ],
+};
+
+const MINOCYCLINE: DrugEntry = {
+  id: 'minocycline',
+  name: 'Minocycline',
+  genericName: 'Minocycline',
+  drugClass: 'Tetracycline antibiotic (anti-inflammatory dosing)',
+  route: 'PO',
+  indications: [
+    'Hidradenitis suppurativa — mild-to-moderate (Hurley I–II), 8–12 week anti-inflammatory course (alternative to doxycycline)',
+    'Moderate-to-severe acne vulgaris (dermatology use)',
+  ],
+  dosing: [
+    {
+      indication: 'Hidradenitis suppurativa — adult and adolescent ≥12 years',
+      regimen: '100 mg PO BID (or 50–100 mg BID by tolerance) for 8–12 weeks; may be repeated intermittently. Take with a full glass of water; food reduces GI upset with minimal effect on absorption. Prescribe the full course — this is anti-inflammatory therapy, not a 7-day infection course.',
+    },
+  ],
+  contraindications: [
+    'Pregnancy and breastfeeding (fetal tooth discoloration, bone growth inhibition)',
+    'Children < 8 years',
+    'Hypersensitivity to tetracyclines',
+  ],
+  cautions: [
+    'Vestibular toxicity (dizziness, vertigo, ataxia) — more common than with doxycycline, especially in women; usually resolves on stopping',
+    'Drug-induced lupus, autoimmune hepatitis, and DRESS / hypersensitivity syndrome with prolonged use — counsel to stop and return for fever, rash, arthralgia',
+    'Blue-gray hyperpigmentation of skin, scars, nails, and teeth with cumulative dosing',
+    'Benign intracranial hypertension (pseudotumor cerebri) — headache with visual change, particularly with concomitant isotretinoin',
+    'Photosensitivity (less than doxycycline); esophagitis — remain upright after dosing',
+    'Chelation — separate from calcium, iron, antacids, dairy by 2 h',
+    'Reduces efficacy of oral contraceptives modestly; counsel on backup',
+  ],
+  monitoring: 'Clinical response at 8–12 weeks (IHS4). For repeated or prolonged courses: LFTs, ANA if arthralgia or rash.',
+  notes: 'SORT B evidence for tetracyclines in HS (AAFP 2019); the North American guidelines list doxycycline and minocycline as first-line oral agents for mild-to-moderate disease. Doxycycline is generally preferred for its lower rate of vestibular and autoimmune adverse effects; minocycline is the alternative when doxycycline is not tolerated.',
+  citations: [
+    'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Part II. J Am Acad Dermatol. 2019;81(1):91-101.',
+    'Wipperman J, Bragg DA, Litzner B. Hidradenitis Suppurativa: Rapid Evidence Review. Am Fam Physician. 2019;100(9):562-569.',
+    'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.',
+  ],
+};
+
 export const ALL_DRUGS: DrugEntry[] = [
   ACAMPROSATE,
   ACETAMINOPHEN,
@@ -14429,6 +14664,11 @@ export const ALL_DRUGS: DrugEntry[] = [
   TERLIPRESSIN,
   TETANUS_IMMUNE_GLOBULIN,
   TDAP,
+  ADALIMUMAB,
+  SECUKINUMAB,
+  BIMEKIZUMAB,
+  TRIAMCINOLONE,
+  MINOCYCLINE,
   TIZANIDINE,
   SUMATRIPTAN,
   ZOLMITRIPTAN,

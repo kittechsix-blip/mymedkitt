@@ -118,6 +118,7 @@ export const TREE_REGISTRY = {
   'rabies':           { prefix: 'RABIES',              entryNodeId: 'rabies-start',       categoryId: 'infectious-disease' },
   'burns':            { prefix: 'BURNS',               entryNodeId: 'burn-start',        categoryId: 'trauma-surg' },
   'electrocution':    { prefix: 'ELECTROCUTION',       entryNodeId: 'electrocution-start', categoryId: 'emergency-medicine' },
+  'hidradenitis-suppurativa': { prefix: 'HIDRADENITIS_SUPPURATIVA', entryNodeId: 'hs-start', categoryId: 'dermatology' },
   'sjs-ten':          { prefix: 'SJS_TEN',             entryNodeId: 'sjs-ten-start',     categoryId: 'emergency-medicine' },
   'ich':              { prefix: 'ICH',                 entryNodeId: 'ich-start',          categoryId: 'neurology' },
   'aub':              { prefix: 'AUB',                 entryNodeId: 'aub-start',          categoryId: 'ob-gyn' },
