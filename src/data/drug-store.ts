@@ -14214,7 +14214,7 @@ const SECUKINUMAB: DrugEntry = {
   drugClass: 'Anti-IL-17A monoclonal antibody (biologic)',
   route: 'SC',
   indications: [
-    'Moderate-to-severe hidradenitis suppurativa in adults (FDA October 2023) and patients ≥12 years',
+    'Moderate-to-severe hidradenitis suppurativa in adults (FDA October 2023) and pediatric patients ≥12 years weighing ≥30 kg (FDA March 2026)',
     'Plaque psoriasis, psoriatic arthritis, ankylosing spondylitis, non-radiographic axial spondyloarthritis, enthesitis-related arthritis (specialist-initiated)',
   ],
   dosing: [
@@ -14223,8 +14223,8 @@ const SECUKINUMAB: DrugEntry = {
       regimen: '300 mg SC at Weeks 0, 1, 2, 3, and 4 (weekly × 5 loading doses), then 300 mg SC EVERY 4 WEEKS. If response is inadequate, the maintenance interval may be shortened to every 2 weeks. Initiated by dermatology after TB screening — the ED names the option and refers.',
     },
     {
-      indication: 'Hidradenitis suppurativa — adolescent ≥12 years',
-      regimen: 'Weight-based dosing per current prescribing information (label expanded to ≥12 years); pediatric dermatology initiates.',
+      indication: 'Hidradenitis suppurativa — pediatric ≥12 years, ≥30 kg',
+      regimen: 'Weight-based: 30 kg to <90 kg — 150 mg SC; ≥90 kg — 300 mg SC. Given at Weeks 0, 1, 2, 3, and 4, then every 4 weeks (same schedule as adults). Pediatric dermatology initiates after TB screening and vaccine catch-up.',
     },
   ],
   contraindications: [
@@ -14242,7 +14242,7 @@ const SECUKINUMAB: DrugEntry = {
   monitoring: 'TB screening before initiation; hepatitis B serologies per local practice; monitor for infection and new or worsening GI symptoms. HS response assessed at 16 weeks.',
   notes: 'Second FDA-approved biologic for HS (SUNSHINE and SUNRISE phase 3 trials, HiSCR at week 16). Alternative when adalimumab fails, is contraindicated (heart failure, demyelinating disease), or loses effect. Anti-IL-17 agents do not treat IBD and may unmask it.',
   citations: [
-    'COSENTYX (secukinumab) injection, for subcutaneous use. Prescribing Information. Novartis Pharmaceuticals Corporation. HS indication October 2023.',
+    'COSENTYX (secukinumab) injection, for subcutaneous use. Prescribing Information. Novartis Pharmaceuticals Corporation. HS indication October 2023 (adults); pediatric ≥12 years, ≥30 kg March 2026. Revised 8/2026.',
     'Kimball AB, Jemec GBE, Alavi A, et al. Secukinumab in moderate-to-severe hidradenitis suppurativa (SUNSHINE and SUNRISE): week 16 and week 52 results of two identical, multicentre, randomised, placebo-controlled, double-blind phase 3 trials. Lancet. 2023;401(10378):747-761.',
     'Zouboulis CC, Bechara FG, Benhadou F, et al. European S2k guidelines for hidradenitis suppurativa/acne inversa part 2: Treatment. J Eur Acad Dermatol Venereol. 2025;39(5):899-941.',
   ],
@@ -14314,7 +14314,7 @@ const TRIAMCINOLONE: DrugEntry = {
     'Not a substitute for systemic therapy — treats the injected lesion only',
   ],
   monitoring: 'Check glucose in diabetics receiving repeated injections; inspect for atrophy or hypopigmentation at follow-up.',
-  notes: 'Recommended by North American (Part II) and European S2k guidelines for acute HS flares. The Riis 2016 case series showed reduced erythema, edema, suppuration, and size within days; a small RCT (Fajgenbaum 2020) found modest benefit over saline. Cheap, fast, and avoids the scar and future tunnel that an incision leaves.',
+  notes: 'Recommended by North American (Part II) and European S2k guidelines for acute HS flares. The Riis 2016 case series showed reduced erythema, edema, suppuration, and size within days; the one small placebo-controlled RCT (Fajgenbaum 2020; 32 patients, 67 lesions; 10 mg/mL vs 40 mg/mL vs saline) found no significant difference from saline for days to clearance, pain at day 5, or satisfaction, so the evidence base is expert consensus and case series. Cheap, fast, and avoids the scar and future tunnel that an incision leaves.',
   citations: [
     'Alikhan A, Sayed C, Alavi A, et al. North American clinical management guidelines for hidradenitis suppurativa: Part II: Topical, intralesional, and systemic medical management. J Am Acad Dermatol. 2019;81(1):91-101.',
     'Riis PT, Boer J, Prens EP, et al. Intralesional triamcinolone for flares of hidradenitis suppurativa (HS): A case series. J Am Acad Dermatol. 2016;75(6):1151-1155.',

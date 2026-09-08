@@ -29253,7 +29253,7 @@ const HS_REFERRAL_CRITERIA = {
     sections: [
         {
             heading: 'Dermatology — everyone, urgency by stage',
-            body: '• **Hurley I / IHS4 ≤ 3:** routine, 6–12 weeks; start topicals and a tetracycline course from the ED\n• **Hurley II / IHS4 4–10:** 4–6 weeks; start clindamycin + rifampin or a tetracycline; name the biologic\n• **Hurley III / IHS4 ≥ 11, or failed ≥ 1 antibiotic course:** 2–4 weeks; biologic candidate; bridge\n• **Adolescent (≥ 12 y):** adalimumab and secukinumab are approved from age 12 — refer pediatric dermatology early; tetracyclines only ≥ 8 years\n• **Pregnant or breastfeeding:** topical clindamycin and washes; tetracyclines, rifampin, spironolactone, and methotrexate are contraindicated; adalimumab can be continued in pregnancy under dermatology / MFM guidance; refer within 2–4 weeks\n\nWrite the referral with Hurley stage, IHS4, sites, prior treatments, and comorbidity screen — it shortens the path to a biologic.',
+            body: '• **Hurley I / IHS4 ≤ 3:** routine, 6–12 weeks; start topicals and a tetracycline course from the ED\n• **Hurley II / IHS4 4–10:** 4–6 weeks; start clindamycin + rifampin or a tetracycline; name the biologic\n• **Hurley III / IHS4 ≥ 11, or failed ≥ 1 antibiotic course:** 2–4 weeks; biologic candidate; bridge\n• **Adolescent (≥ 12 y):** adalimumab (≥ 30 kg, 2018) and secukinumab (≥ 30 kg, March 2026) are FDA-approved from age 12 — refer pediatric dermatology early; tetracyclines only ≥ 8 years\n• **Pregnant or breastfeeding:** topical clindamycin and washes; tetracyclines, rifampin, spironolactone, and methotrexate are contraindicated; adalimumab can be continued in pregnancy under dermatology / MFM guidance; refer within 2–4 weeks\n\nWrite the referral with Hurley stage, IHS4, sites, prior treatments, and comorbidity screen — it shortens the path to a biologic.',
         },
         {
             heading: 'Surgery — deroofing or excision',
@@ -29326,7 +29326,7 @@ const HS_STOP = {
         },
         {
             heading: '🛑 Do NOT skip the suicide question',
-            body: 'Depression affects a third or more of HS patients and completed suicide risk is roughly doubled. Ask directly at every visit; a positive answer changes the disposition. [Comorbidity screen](#/node/hs-comorbid).',
+            body: 'Depression affects roughly one in four HS patients and completed suicide risk is roughly doubled. Ask directly at every visit; a positive answer changes the disposition. [Comorbidity screen](#/node/hs-comorbid).',
         },
         {
             heading: '🛑 Do NOT tell a patient on a biologic to stop it because they have a flare',
