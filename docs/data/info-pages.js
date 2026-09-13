@@ -29345,6 +29345,122 @@ const HS_STOP = {
     ],
 };
 export const INFO_PAGES = {
+    'asystole-steps': {
+        "id": "asystole-steps",
+        "title": "Asystole: bedside steps",
+        "subtitle": "Adult nonshockable arrest",
+        "sections": [
+            {
+                "body": "1. CPR and oxygen; attach pads.\n2. Early epinephrine 1 mg IV/IO, then every 3–5 min.\n3. Confirm signal, another ECG vector and adequate gain without extending rhythm checks.\n4. VF: shock. True asystole: no shock; continue CPR.\n5. Treat reversible causes; reassess every 2 min.\n6. ROSC care or individualized team reassessment. [1,2]"
+            }
+        ],
+        "citations": [
+            {
+                "num": 1,
+                "text": "American Heart Association. 2025 Adult Advanced Life Support. https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-advanced-life-support"
+            },
+            {
+                "num": 2,
+                "text": "European Resuscitation Council. 2025 Adult Advanced Life Support, manual defibrillation strategy, p18. https://www.erc.edu/media/vedoa2ga/gl2025-05-als-e.pdf"
+            }
+        ]
+    },
+    'asystole-fine-vf': {
+        "id": "asystole-fine-vf",
+        "title": "Fine VF or asystole?",
+        "subtitle": "Connections → vector → gain → rhythm",
+        "sections": [
+            {
+                "body": "**Check the patient and the signal while CPR continues.** Confirm cable connections, pads/electrode adhesion, and absence of a lead-off message. A disconnected lead is not asystole.\n\n**At the scheduled brief rhythm check:** inspect a second available ECG vector and increase display gain/size if the trace is very small. Keep interruption under 10 seconds; resume compressions promptly. Prepare settings during CPR. [1,3]\n\n**Fine VF:** irregular, chaotic electrical activity without organized QRS complexes. Confirmed VF is shockable even when low amplitude. **True asystole:** no ventricular electrical activity after checking signal quality and another vector. P waves without QRS indicate ventricular standstill, not complete electrical silence. Organized complexes without a pulse indicate PEA. [1,2]\n\nGain enlarges both signal AND artifact. Do not diagnose VF from compression/movement artifact or a filtered CPR waveform alone. A flat second lead does not guarantee VF is excluded. [2,3]\n\n**Still genuinely uncertain?** ERC 2025 specifically advises a shock when an ALS provider remains unsure between fine VF and asystole. AHA 2025 classifies VF/pVT as shockable and asystole/PEA as nonshockable but does not give that same explicit uncertainty rule. Use trained team assessment and the applicable resuscitation protocol; never prolong hands-off time to debate the tracing. Do not apply an uncertainty exception to confirmed asystole. [1,2]"
+            }
+        ],
+        "citations": [
+            {
+                "num": 1,
+                "text": "American Heart Association. 2025 Adult Advanced Life Support. https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-advanced-life-support"
+            },
+            {
+                "num": 2,
+                "text": "European Resuscitation Council. 2025 Adult Advanced Life Support, manual defibrillation strategy, p18. https://www.erc.edu/media/vedoa2ga/gl2025-05-als-e.pdf"
+            },
+            {
+                "num": 3,
+                "text": "Physio-Control / Stryker. LIFEPAK 15 Operating Instructions (2019), pp24–25, 50–51. https://www.stryker.com/content/dam/stryker/ems/resources/operating-instructions/lifepak_15_operating_instructions_en.pdf"
+            }
+        ]
+    },
+    'asystole-lifepak': {
+        "id": "asystole-lifepak",
+        "title": "LIFEPAK 15: Lead & Gain",
+        "subtitle": "Model-specific controls; preserve CPR",
+        "image": {
+            "src": "images/asystole/lifepak-controls.png",
+            "alt": "LIFEPAK 15 LEAD and SIZE control buttons",
+            "caption": "Physio-Control / Stryker, LIFEPAK 15 manual p24. Manufacturer figure; not an open-license image."
+        },
+        "sections": [
+            {
+                "heading": "1. Change ECG vector",
+                "body": "**LIFEPAK 15 only.** Check your model before using these controls. Leave therapy pads connected; another limb-lead vector requires an ECG cable and attached electrodes.\n\n1. Press **LEAD**. The initial press switches between PADDLES and Lead II depending on the current display.\n2. While the menu is open, press **LEAD** again or rotate the **SPEED DIAL** to another available lead, e.g. I or III with the appropriate cable.\n3. Confirm the displayed lead label and assess signal quality. Dashed lines mean the electrodes are not connected. Available leads depend on the cable.\n\nAlternative: use **SPEED DIAL → CHANNEL 1 → LEAD → desired lead**, then press the dial. When VF/VT ALARM is ON, Channel 1 is limited to PADDLES or II; use an available additional ECG channel/vector per device configuration. Do not remove pads to change the displayed ECG. [3]",
+                "image": {
+                    "src": "images/asystole/lifepak-lead.png",
+                    "alt": "LIFEPAK 15 ECG lead selection menu",
+                    "caption": "Physio-Control / Stryker, manual p50. Available leads depend on attached ECG cable."
+                }
+            },
+            {
+                "heading": "2. Increase display size",
+                "body": "1. Press **SIZE**.\n2. While its menu is open, press SIZE again or rotate **SPEED DIAL** to a larger size. The manual displays options **0.25, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0**. Increase from 1.0 to 2.0 or 4.0 as needed to inspect a low-amplitude tracing.\n3. Confirm the displayed size and avoid clipping. This changes display gain, NOT shock energy.\n\nAlternative: **SPEED DIAL → CHANNEL 1 → SIZE → desired size**, then press the dial. Prepare controls during CPR and assess the underlying rhythm during the scheduled brief check. Increased gain cannot distinguish noise from VF by itself. [3]",
+                "image": {
+                    "src": "images/asystole/lifepak-size.png",
+                    "alt": "LIFEPAK 15 ECG size menu from 0.25 to 4.0",
+                    "caption": "Physio-Control / Stryker, manual p51. Display size, not shock energy."
+                }
+            },
+            {
+                "body": "[Open the original LIFEPAK 15 manual](https://www.stryker.com/content/dam/stryker/ems/resources/operating-instructions/lifepak_15_operating_instructions_en.pdf). Figures © Physio-Control / Stryker. [3]"
+            }
+        ],
+        "citations": [
+            {
+                "num": 1,
+                "text": "American Heart Association. 2025 Adult Advanced Life Support. https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-advanced-life-support"
+            },
+            {
+                "num": 2,
+                "text": "European Resuscitation Council. 2025 Adult Advanced Life Support, manual defibrillation strategy, p18. https://www.erc.edu/media/vedoa2ga/gl2025-05-als-e.pdf"
+            },
+            {
+                "num": 3,
+                "text": "Physio-Control / Stryker. LIFEPAK 15 Operating Instructions (2019), pp24–25, 50–51. https://www.stryker.com/content/dam/stryker/ems/resources/operating-instructions/lifepak_15_operating_instructions_en.pdf"
+            }
+        ]
+    },
+    'awake-ez-spray': {
+        "id": "awake-ez-spray",
+        "title": "EZ-Spray: topical lidocaine",
+        "subtitle": "4% aqueous lidocaine · O₂ 7–10 L/min",
+        "image": {
+            "src": "images/awake-intubation/ez-spray.jpg",
+            "alt": "Pulmodyne EZ-Spray powered atomizer producing a mist",
+            "caption": "Pulmodyne EZ-Spray manufacturer photograph. Oxygen-powered atomization at 7–10 L/min; not syringe-powered MAD."
+        },
+        "sections": [
+            {
+                "body": "**4% aqueous lidocaine = 40 mg/mL.** Select and document the planned dose before filling the reservoir; bottle capacity is NOT a recommended dose.\n\n1. Assemble EZ-Spray and connect its oxygen tubing to the oxygen source per the device instructions.\n2. Set the oxygen flowmeter to **7–10 L/min**. This setting powers EZ-Spray; it is not a universal nebulizer/MAD setting or a substitute for patient oxygenation.\n3. Position the directional tip toward the upper pharynx and use brief applications, reassessing topical anesthesia and tolerance. Follow the supplied device instructions for actuation. Avoid a continuous unmeasured dose.\n4. Record cumulative lidocaine across ALL topical routes. **Do not exceed 9 mg/kg LEAN body weight** (DAS maximum, not a target); use a lower dose where patient factors or local policy require. Maintain spontaneous ventilation, monitoring and an oxygenation/rescue plan.\n\n[Manufacturer instructions](https://www.pulmodyne.com/wp-content/uploads/2022/11/4142DFU.pdf). A syringe-powered MAD does not use an oxygen flow setting. [1,2]"
+            }
+        ],
+        "citations": [
+            {
+                "num": 1,
+                "text": "Pulmodyne. EZ-Spray powered atomization device and DFU. https://www.pulmodyne.com/product/ez-spray"
+            },
+            {
+                "num": 2,
+                "text": "Difficult Airway Society. Awake tracheal intubation guideline. https://das.uk.com/guidelines/das-guidelines-for-awake-tracheal-intubation-ati-in-adults/"
+            }
+        ]
+    },
     // Tier-4b reference pages (calculator-backfill wave B, 2026-08-23)
     'sci-map-goals': SCI_MAP_GOALS_PAGE,
     'laryngeal-trauma-airway': LARYNGEAL_TRAUMA_AIRWAY_PAGE,

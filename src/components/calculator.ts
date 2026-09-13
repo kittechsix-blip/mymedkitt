@@ -31566,11 +31566,12 @@ Option B — Nebulized lidocaine:
 const AWAKE_ATOMIZED_RECIPE_CALCULATOR: CalculatorDefinition = {
   id: 'awake-atomized-recipe',
   title: 'Atomized Anesthesia Recipe',
-  subtitle: 'MAD & Nebulizer Techniques',
+  subtitle: 'EZ-Spray, MAD & Nebulizer Techniques',
   description: 'Specific instructions for atomized and nebulized lidocaine delivery. Includes equipment setup and dosing.',
   results: [],
   thresholdNote: '',
   citations: [
+    "Pulmodyne. EZ-Spray manufacturer instructions: https://www.pulmodyne.com/product/ez-spray",
     'Difficult Airway Society. Guidelines for awake tracheal intubation. Anaesthesia. 2020;75:509-528.',
     'NYSORA. Airway Topical Anesthesia. 2024.',
   ],
@@ -31581,6 +31582,7 @@ const AWAKE_ATOMIZED_RECIPE_CALCULATOR: CalculatorDefinition = {
       type: 'select',
       points: 0,
       selectOptions: [
+        { label: 'EZ-Spray (Oxygen Powered)', points: 4 },
         { label: 'MAD (Mucosal Atomizer)', points: 1 },
         { label: 'Nebulizer', points: 2 },
         { label: 'Both (MAD + Nebulizer)', points: 3 },
@@ -31597,7 +31599,9 @@ const AWAKE_ATOMIZED_RECIPE_CALCULATOR: CalculatorDefinition = {
     const technique = values['technique'] || 1;
     const hasMad = values['has-mad'];
 
-    let instructions = '';
+    let instructions = '**TOTAL LIDOCAINE SAFETY**\n\n4% = 40 mg/mL. Count every route; do not exceed 9 mg/kg LEAN body weight (DAS maximum, not a target). Do not automatically add every listed regional volume.\n\n[EZ-Spray device photo and setup](#/info/awake-ez-spray)\n\n';
+    if (technique === 4) { instructions += "**4% aqueous lidocaine = 40 mg/mL.** Select and document the planned dose before filling the reservoir; bottle capacity is NOT a recommended dose.\n\n1. Assemble EZ-Spray and connect its oxygen tubing to the oxygen source per the device instructions.\n2. Set the oxygen flowmeter to **7–10 L/min**. This setting powers EZ-Spray; it is not a universal nebulizer/MAD setting or a substitute for patient oxygenation.\n3. Position the directional tip toward the upper pharynx and use brief applications, reassessing topical anesthesia and tolerance. Follow the supplied device instructions for actuation. Avoid a continuous unmeasured dose.\n4. Record cumulative lidocaine across ALL topical routes. **Do not exceed 9 mg/kg LEAN body weight** (DAS maximum, not a target); use a lower dose where patient factors or local policy require. Maintain spontaneous ventilation, monitoring and an oxygenation/rescue plan.\n\n[Manufacturer instructions](https://www.pulmodyne.com/wp-content/uploads/2022/11/4142DFU.pdf). A syringe-powered MAD does not use an oxygen flow setting. [1,2]"; }
+
 
     if (technique === 1 || technique === 3) {
       instructions += `**MAD (MUCOSAL ATOMIZER DEVICE)**
@@ -31607,29 +31611,12 @@ const AWAKE_ATOMIZED_RECIPE_CALCULATOR: CalculatorDefinition = {
 • 10 mL syringe
 • 4% Lidocaine solution
 
-**Preparation:**
-1. Draw up 5-10 mL of 4% lidocaine
-2. Attach MAD to syringe (remove needle)
-3. Prime MAD with small amount
-
-**Technique:**
-1. **Nasal** (if nasal route planned):
-   - 2-3 mL each nostril, aim superiorly
-   - Wait 30 sec between nostrils
-
-2. **Oropharyngeal**:
-   - Open mouth wide, tongue out
-   - Spray soft palate: 2-3 mL
-   - Spray posterior tongue: 2 mL
-   - Spray tonsillar pillars: 1-2 mL
-   - Have patient say "ahhh" during spray
-
-3. **Glottic** (advanced):
-   - Use angled MAD or laryngoscope to visualize
-   - Spray directly at cords: 2-3 mL
-   - Patient will cough briefly
-
-**Dose per area: ~40-80 mg per spray**\n\n`;
+**Preparation and dose budget:**
+1. Calculate the patient-specific remaining lidocaine allowance BEFORE drawing up medication: planned maximum minus all prior lidocaine doses.
+2. Use measured small aliquots of 4% aqueous lidocaine (40 mg/mL), attach the syringe-powered atomizer and prime per its instructions.
+3. Topicalize only the route and surfaces required: nasal mucosa for a nasal approach, oropharynx and, with appropriate visualization, larynx.
+4. Reassess anesthesia and tolerance between applications. Do not prescribe additive fixed volumes for every anatomical region.
+5. Record each delivered amount and deduct it from the remaining allowance; stop at effective topicalization or the dose limit.\n\n`;
     }
 
     if (technique === 2 || technique === 3) {
@@ -31641,14 +31628,14 @@ const AWAKE_ATOMIZED_RECIPE_CALCULATOR: CalculatorDefinition = {
 
 **Preparation:**
 1. Add 4 mL of 4% lidocaine to nebulizer
-2. Connect to O2 at 6-8 L/min
+2. Connect oxygen at the flow specified for the nebulizer in use (separate from EZ-Spray: 7–10 L/min)
 3. Use mouthpiece (not mask for better distribution)
 
 **Technique:**
 1. Patient breathes normally through mouthpiece
 2. Total nebulization time: 10-15 minutes
 3. Have patient take occasional deep breaths
-4. Can add glycopyrrolate 0.2 mg to nebulizer
+4. Count the nebulized dose toward the same cumulative lidocaine allowance. Do not add an antisialagogue to the nebulizer mixture.
 
 **Advantages:**
 • Excellent supraglottic + glottic distribution
@@ -31670,7 +31657,7 @@ const AWAKE_ATOMIZED_RECIPE_CALCULATOR: CalculatorDefinition = {
     }
 
     return {
-      value: technique === 1 ? 'MAD' : technique === 2 ? 'Nebulizer' : 'MAD + Nebulizer',
+      value: technique === 4 ? 'EZ-Spray · O₂ 7–10 L/min' : technique === 1 ? 'MAD' : technique === 2 ? 'Nebulizer' : 'MAD + Nebulizer',
       label: technique === 3 ? 'Combination Technique' : 'Single Technique',
       description: instructions,
       colorVar,

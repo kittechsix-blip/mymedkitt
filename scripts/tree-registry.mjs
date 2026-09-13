@@ -3,6 +3,7 @@
 // When adding a new consult, ADD IT HERE (and only here).
 
 export const TREE_REGISTRY = {
+  'asystole': { prefix: 'ASYSTOLE', entryNodeId: 'asystole-start', categoryId: 'emergency-medicine' },
   'delayed-sequence-intubation': { prefix: 'DELAYED_SEQUENCE_INTUBATION', entryNodeId: 'dsi-start', categoryId: 'anesthesia-airway' },
   'difficult-airway-bougie': { prefix: 'DIFFICULT_AIRWAY_BOUGIE', entryNodeId: 'dab-start', categoryId: 'anesthesia-airway' },
   'supraglottic-airway': { prefix: 'SUPRAGLOTTIC_AIRWAY', entryNodeId: 'sga-start', categoryId: 'anesthesia-airway' },

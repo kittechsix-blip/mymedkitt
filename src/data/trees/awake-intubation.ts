@@ -635,13 +635,15 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
     id: 'awake-mad-spray',
     type: 'info',
     module: 3,
-    title: 'MAD Spray: Epiglottis & Cords',
+    title: 'Topical Spray: EZ-Spray or MAD',
     body: `**Final topicalization step: direct anesthesia of larynx.**
 
-**Equipment:**
+**EZ-Spray option:** [Open device photo and setup](#/info/awake-ez-spray). Use **4% aqueous lidocaine (40 mg/mL)** with **oxygen 7–10 L/min** to power the atomizer. This is a different device from syringe-powered MAD. Track cumulative lidocaine from every route; DAS maximum is **9 mg/kg lean body weight**, not a target. [3,10]
+
+**Syringe-powered MAD equipment:**
 - 10 mL Luer-lock syringe
 - MADgic atomizer device
-- 4-6 mL of **4% aqueous lidocaine**
+- Measured **4% aqueous lidocaine (40 mg/mL)** within the remaining cumulative dose budget
 
 **Technique:**
 1. Attach MAD device to syringe
@@ -649,11 +651,11 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 3. Aim at epiglottis (visible with tongue depressor)
 4. Quick spray — patient will cough
 5. Wait 30-60 seconds
-6. Repeat spray to vocal cords if possible
+6. Reassess effect and remaining dose allowance before any additional measured application
 
 **Alternative: Spray-as-you-go**
 - Spray through fiberscope channel during procedure
-- 2-3 mL aliquots as you advance
+- Use measured, titrated aliquots from the SAME remaining lidocaine allowance as you advance
 - Allows real-time anesthesia of tissues you're about to touch
 
 **Safety:**
@@ -661,8 +663,12 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Watch total lidocaine dose (add to prior doses)
 
 **Proceed to sedation →** [4]`,
-    citation: [4],
-    images: [{ src: 'images/awake-intubation/larynx-anatomy.png', alt: 'Diagram of human larynx anatomy', caption: 'Larynx anatomy: epiglottis, arytenoids, and vocal cords — key landmarks for awake intubation topicalization and scope navigation (Wikimedia Commons, CC BY-SA 4.0)' }],
+    citation: [3,4,10],
+    images: [{
+  "src": "images/awake-intubation/ez-spray.jpg",
+  "alt": "Pulmodyne EZ-Spray powered atomizer producing a mist",
+  "caption": "Pulmodyne EZ-Spray manufacturer photograph. Oxygen-powered atomization at 7–10 L/min; not syringe-powered MAD."
+}, { src: 'images/awake-intubation/larynx-anatomy.png', alt: 'Diagram of human larynx anatomy', caption: 'Larynx anatomy: epiglottis, arytenoids, and vocal cords — key landmarks for awake intubation topicalization and scope navigation (Wikimedia Commons, CC BY-SA 4.0)' }],
     calculatorLinks: [
       { id: 'awake-atomized-recipe', label: 'Atomized Recipe' },
     ],
@@ -1303,6 +1309,7 @@ export const AWAKE_INTUBATION_MODULE_LABELS = [
 ];
 
 export const AWAKE_INTUBATION_CITATIONS: Citation[] = [
+  { num: 10, text: "Pulmodyne. EZ-Spray: powered atomization device, oxygen 7–10 L/min. https://www.pulmodyne.com/product/ez-spray" },
   { num: 1, text: 'Weingart S. EMCrit 145 — Awake Intubation Lecture from SMACC. EMCrit Blog. 2015. https://emcrit.org/emcrit/awakeintubation/' },
   { num: 2, text: 'Sandefur BJ, Driver BE, Long B. Managing Awake Intubation. Ann Emerg Med. 2025;85(1):21-30. doi:10.1016/j.annemergmed.2024.07.017. PMID: 39480375' },
   { num: 3, text: 'Ahmad I, et al. Difficult Airway Society Guidelines for Awake Tracheal Intubation (ATI) in Adults. Anaesthesia. 2020;75(4):509-528. PMID: 31729018' },

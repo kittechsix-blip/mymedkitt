@@ -1278,6 +1278,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/torsades-de-pointes.js');
       return { nodes: m.TORSADES_DE_POINTES_NODES, entryNodeId: 'tdp-start', categoryId: 'cardiology', moduleLabels: m.TORSADES_DE_POINTES_MODULE_LABELS, citations: m.TORSADES_DE_POINTES_CITATIONS, criticalActions: m.TORSADES_DE_POINTES_CRITICAL_ACTIONS };
     },
+    'asystole': async () => {
+      const m = await import('../data/trees/asystole.js');
+      return { nodes: m.ASYSTOLE_NODES, entryNodeId: 'asystole-start', categoryId: 'emergency-medicine', moduleLabels: m.ASYSTOLE_MODULE_LABELS, citations: m.ASYSTOLE_CITATIONS, criticalActions: m.ASYSTOLE_CRITICAL_ACTIONS };
+    },
     'cardiac-arrest': async () => {
       const m = await import('../data/trees/cardiac-arrest.js');
       return { nodes: m.CARDIAC_ARREST_NODES, entryNodeId: 'ca-start', categoryId: 'emergency-medicine', moduleLabels: m.CARDIAC_ARREST_MODULE_LABELS, citations: m.CARDIAC_ARREST_CITATIONS, criticalActions: m.CARDIAC_ARREST_CRITICAL_ACTIONS };

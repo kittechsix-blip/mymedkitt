@@ -1533,6 +1533,7 @@ export const TOOLBAR_CONFIGS = {
         { id: 'hypo-transport', label: 'ECMO Transport', icon: '🚑', action: 'calculator', target: 'hypo-ecmo-transport' },
     ],
     'awake-intubation': [
+        { id: 'awake-ez-spray', label: 'EZ-Spray', icon: '💨', action: 'overlay', target: 'awake-ez-spray' },
         { id: 'awake-who', label: 'Who Needs?', icon: '❓', action: 'calculator', target: 'awake-who-needs' },
         { id: 'awake-topical', label: 'Topical Prep', icon: '💊', action: 'calculator', target: 'awake-topical-prep' },
         { id: 'awake-atomized', label: 'Atomized', icon: '💨', action: 'calculator', target: 'awake-atomized-recipe' },
@@ -2066,6 +2067,50 @@ export const TOOLBAR_CONFIGS = {
     // ---------------------------------------------------------------
     // Cardiac Arrest Suite
     // ---------------------------------------------------------------
+    'asystole': [
+        {
+            "id": "steps",
+            "label": "Steps",
+            "icon": "📋",
+            "action": "overlay",
+            "target": "asystole-steps"
+        },
+        {
+            "id": "fine-vf",
+            "label": "Fine VF",
+            "icon": "⚡",
+            "action": "overlay",
+            "target": "asystole-fine-vf"
+        },
+        {
+            "id": "lifepak",
+            "label": "LIFEPAK",
+            "icon": "📟",
+            "action": "overlay",
+            "target": "asystole-lifepak"
+        },
+        {
+            "id": "epi",
+            "label": "Epinephrine",
+            "icon": "💉",
+            "action": "jump",
+            "target": "asystole-cpr"
+        },
+        {
+            "id": "causes",
+            "label": "Hs & Ts",
+            "icon": "🔍",
+            "action": "jump",
+            "target": "asystole-causes"
+        },
+        {
+            "id": "rosc",
+            "label": "ROSC",
+            "icon": "🫀",
+            "action": "jump",
+            "target": "asystole-rosc"
+        }
+    ],
     'cardiac-arrest': [
         { id: 'vf', label: 'VF', icon: '⚡', action: 'jump', target: 'ca-vf-link' },
         { id: 'vt', label: 'VT', icon: '🫀', action: 'jump', target: 'ca-pvt-link' },

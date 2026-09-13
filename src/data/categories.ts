@@ -512,6 +512,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     name: 'EM',
     icon: 'em.png',
     decisionTrees: [
+{
+  "id": "asystole",
+  "title": "Asystole",
+  "subtitle": "Confirm rhythm · Fine VF · LIFEPAK lead/gain · CPR · Reversible causes",
+  "categoryId": "emergency-medicine",
+  "version": "1.0",
+  "nodeCount": 12,
+  "entryNodeId": "asystole-start"
+},
       {
         id: 'anaphylaxis',
         title: 'Anaphylaxis Management',

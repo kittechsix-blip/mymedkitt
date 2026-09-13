@@ -1,0 +1,22 @@
+{
+  "source": "https://www.stryker.com/content/dam/stryker/ems/resources/operating-instructions/lifepak_15_operating_instructions_en.pdf",
+  "copyright": "Physio-Control / Stryker, 2019; manufacturer instructional excerpts, no open license asserted",
+  "approved": "Andy approved outline and previews 2026-09-13",
+  "files": [
+    {
+      "src": "images/asystole/lifepak-controls.png",
+      "alt": "LIFEPAK 15 LEAD and SIZE control buttons",
+      "caption": "Physio-Control / Stryker, LIFEPAK 15 manual p24. Manufacturer figure; not an open-license image."
+    },
+    {
+      "src": "images/asystole/lifepak-lead.png",
+      "alt": "LIFEPAK 15 ECG lead selection menu",
+      "caption": "Physio-Control / Stryker, manual p50. Available leads depend on attached ECG cable."
+    },
+    {
+      "src": "images/asystole/lifepak-size.png",
+      "alt": "LIFEPAK 15 ECG size menu from 0.25 to 4.0",
+      "caption": "Physio-Control / Stryker, manual p51. Display size, not shock energy."
+    }
+  ]
+}
