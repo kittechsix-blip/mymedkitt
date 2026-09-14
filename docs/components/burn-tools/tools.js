@@ -183,9 +183,10 @@ export function mountFluids(container, session = burnSession, initialTab = 'dell
     <output data-result class="bk-card" aria-live="polite"></output>
     <details data-source><summary>Dell Seton protocol and source</summary>
     <p>Institutional protocol transcribed in myMedKitt’s Burns → Dell-Seton (DSMC-UT) Burn Protocol, attributed to Jayson D. Aydelotte, MD, FACS, Burn Medical Director.</p>
-    <p><strong>20–&lt;40%:</strong> 1 unit FFP on arrival, then LR at Rule of 10s. Adjust hourly by 20% to UOP goal. At 15 mL × %TBSA × kg cumulative volume, switch all fluid to FFP. At 20 mL × %TBSA × kg, do not increase the hourly rate further; assess bladder pressure, place trialysis, and consult nephrology for CRRT.</p>
-    <p><strong>≥40%:</strong> Start FFP only at Rule of 10s; no crystalloid. Place trialysis. Same 20× cumulative trigger and CRRT pathway. Once CRRT starts, FFP 125 mL/hr regardless of UOP.</p>
-    <p>The source explicitly describes 15× and 20× as cumulative mL thresholds, not hourly rates. Rule of 10s adds 100 mL/hr per complete 10 kg above 80 kg. This is an initial estimate, not the current titrated infusion rate.</p></details>
+    <p><strong>&lt;20%:</strong> No protocol-driven burn fluid resuscitation. Assess other hydration needs separately.</p>
+    <p><strong>20–&lt;40%:</strong> 1 unit FFP on arrival, then LR at 10 × %TBSA mL/hr (30% → 300 mL/hr LR). Adjust hourly by 20% to UOP goal. At 15 mL × %TBSA × kg cumulative volume, switch all fluid to FFP. At 20 mL × %TBSA × kg, do not increase the hourly rate further; assess bladder pressure, place trialysis, and consult nephrology for CRRT.</p>
+    <p><strong>≥40%:</strong> Start FFP only at 10 × %TBSA mL/hr (50% → 500 mL/hr FFP); no crystalloid. Place trialysis. Same 20× cumulative trigger and CRRT pathway. Once CRRT starts, FFP 125 mL/hr regardless of UOP.</p>
+    <p>The source explicitly describes 15× and 20× as cumulative mL thresholds, not hourly rates. Initial tiers clarified by Dr. Andrew Kitlowski on September 14, 2026: no weight adjustment to the Dell Seton starting rate. This is an initial estimate, not the current titrated infusion rate.</p></details>
   `);
     let tab = initialTab;
     const weight = root.querySelector('[data-weight]'), tbsa = root.querySelector('[data-tbsa]'), volume = root.querySelector('[data-volume]'), hours = root.querySelector('[data-hours]'), crrt = root.querySelector('[data-crrt]'), multiplier = root.querySelector('[data-multiplier]'), result = root.querySelector('[data-result]');
@@ -215,14 +216,14 @@ export function mountFluids(container, session = burnSession, initialTab = 'dell
         if (tab === 'dell-seton') {
             const d = dellSeton(w, t, v, crrt.checked);
             if (!d.tier) {
-                result.innerHTML = '<h3>Below this protocol’s ≥20% TBSA entry threshold</h3><p>No Dell Seton formula rate calculated. Assess fluid needs and burn-center referral individually.</p>';
+                result.innerHTML = '<h3>TBSA &lt;20%: no protocol-driven burn resuscitation</h3><p>No LR or FFP burn-resuscitation rate indicated by this protocol. Assess fluid needs and burn-center referral individually.</p>';
                 return;
             }
             result.innerHTML = `<h3>Tier ${d.tier} · ${d.tier === 1 ? '20–&lt;40%' : '≥40%'} TBSA</h3>
-      <div class="bk-result">${d.crrtRate !== null ? '125 mL/hr FFP' : v > 0 ? d.fluid : `${fmt(d.initialRate)} mL/hr`}</div>
+      <div class="bk-result">${d.crrtRate !== null ? '125 mL/hr FFP' : v > 0 ? d.fluid : `${fmt(d.initialRate)} mL/hr ${d.tier === 1 ? 'LR' : 'FFP'}`}</div>
       <p><strong>${d.crrtRate !== null ? 'After CRRT starts' : v > 0 ? 'Continue from the actual titrated rate' : `Initial ${d.tier === 1 ? 'LR' : 'FFP only'} starting rate`}</strong></p>
-      ${d.crrtRate !== null ? '<p>CRRT is marked started: decrease FFP to <strong>125 mL/hr regardless of UOP</strong>.</p>' : `<p>Initial estimate before titration: <strong>${fmt(d.initialRate)} mL/hr ${d.tier === 1 ? 'LR' : 'FFP'}</strong>. Rule of 10s: ${fmt(t)} × 10${w >= 90 ? ` + ${fmt(Math.floor((w - 80) / 10) * 100)} weight adjustment` : ''}. Titrate from the actual infusion rate; this initial estimate is not a catch-up rate.</p>`}
-      ${d.tier === 1 ? '<p><strong>On arrival: administer 1 unit FFP.</strong> Start LR, then switch all fluid to FFP at the cumulative trigger below.</p>' : '<p><strong>FFP ONLY — no crystalloid.</strong> Place a trialysis catheter and consult nephrology.</p>'}
+      ${d.crrtRate !== null ? '<p>CRRT is marked started: decrease FFP to <strong>125 mL/hr regardless of UOP</strong>.</p>' : `<p>Initial estimate before titration: <strong>${fmt(d.initialRate)} mL/hr ${d.tier === 1 ? 'LR' : 'FFP'}</strong>. Dell Seton: ${fmt(t)}% × 10. No weight adjustment. Titrate from the actual infusion rate; this initial estimate is not a catch-up rate.</p>`}
+      ${d.tier === 1 ? '<p><strong>1. On arrival: administer 1 unit FFP.</strong> <strong>2. Then start LR at the rate above.</strong> then switch all fluid to FFP at the cumulative trigger below.</p>' : '<p><strong>FFP ONLY — no crystalloid.</strong> Place a trialysis catheter and consult nephrology.</p>'}
       ${d.tier === 1 ? `<p><strong>Switch to FFP:</strong> ${fmt(d.switchVolume)} mL cumulative (15 × ${fmt(t)} × ${fmt(w)}).</p>` : ''}
       <p><strong>Stop further rate increases:</strong> ${fmt(d.ceilingVolume)} mL cumulative (20 × ${fmt(t)} × ${fmt(w)}).</p>
       <p><strong>Already given:</strong> ${fmt(v)} mL since burn. ${d.crrtRate !== null ? 'CRRT pathway active.' : `Current protocol fluid: <strong>${d.fluid}</strong>.`}</p>

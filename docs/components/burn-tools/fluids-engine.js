@@ -1,4 +1,5 @@
 /** Dell Seton source: myMedKitt BURNS_DSMC_PROTOCOL, info-pages.ts.
+ * Initial tiers clarified by Dr. Andrew Kitlowski, 2026-09-14: 10 × %TBSA, no weight adjustment.
  * 15 and 20 mL × percent-number × kg are cumulative volumes in that source.
  * They are NOT hourly rates. Keep the source's explicit institutional scope.
  */
@@ -18,7 +19,7 @@ export function dellSeton(weight, tbsa, cumulative, crrt) {
     const ceilingVolume = 20 * tbsa * weight;
     return { tier, switchVolume, ceilingVolume, ceilingReached: cumulative >= ceilingVolume,
         fluid: tier === 2 || cumulative >= switchVolume || crrt ? 'FFP only' : 'LR',
-        initialRate: ruleOf10(tbsa, weight), crrtRate: crrt ? 125 : null,
+        initialRate: tier === 0 ? 0 : tbsa * 10, crrtRate: crrt ? 125 : null,
         adultUop: .5 * weight, pediatricUop: weight };
 }
 export function parkland(weight, tbsa, hours, given, multiplier) {

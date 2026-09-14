@@ -331,11 +331,11 @@ export const BURNS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Dell-Seton Protocol — TBSA 20-39%',
-    body: "[Dell-Seton (DSMC-UT) Burn Protocol](#/info/burns-dsmc-protocol)\n\n**Dell-Seton (DSMC-UT): TBSA 20–<40%**\n\n• **On arrival: 1 unit FFP.**\n• Start **LR at Rule of 10s** (%TBSA × 10 mL/hr; add 100 mL/hr per complete 10 kg above 80 kg).\n• Reassess UOP hourly; adjust the current infusion rate up or down by **20%**.\n• **UOP goal:** 0.5 mL/kg/hr (adult), 1 mL/kg/hr (pediatric; specialist-directed care).\n• At **15 mL × %TBSA × kg cumulative volume since burn**, switch **ALL fluid to FFP**.\n• At **20 mL × %TBSA × kg cumulative volume**, do **not increase the hourly rate further**, regardless of UOP. Check bladder pressure, place trialysis and consult nephrology for CRRT.\n• **Once CRRT starts: FFP 125 mL/hr regardless of UOP.**\n\nThe 15× and 20× thresholds are cumulative volumes, not hourly rates. Use the Fluids tool and full institutional protocol for the calculation.",
+    body: "[Dell-Seton (DSMC-UT) Burn Protocol](#/info/burns-dsmc-protocol)\n\n**Dell-Seton (DSMC-UT): TBSA 20–<40%**\n\n• **On arrival: 1 unit FFP.**\n• Start **LR at 10 × %TBSA mL/hr**. No weight adjustment. Example: 30% TBSA → **300 mL/hr LR**, after the arrival unit of FFP.\n• Reassess UOP hourly; adjust the current infusion rate up or down by **20%**.\n• **UOP goal:** 0.5 mL/kg/hr (adult), 1 mL/kg/hr (pediatric; specialist-directed care).\n• At **15 mL × %TBSA × kg cumulative volume since burn**, switch **ALL fluid to FFP**.\n• At **20 mL × %TBSA × kg cumulative volume**, do **not increase the hourly rate further**, regardless of UOP. Check bladder pressure, place trialysis and consult nephrology for CRRT.\n• **Once CRRT starts: FFP 125 mL/hr regardless of UOP.**\n\nThe 15× and 20× thresholds are cumulative volumes, not hourly rates. Use the Fluids tool and full institutional protocol for the calculation.",
     calculatorLinks: [{ id: 'burn-dell-seton', label: 'Dell-Seton Calculator' }],
     citation: [18],
     next: 'burn-fluids-monitoring',
-    summary: "Dell Seton: arrival FFP, LR then cumulative FFP switch; CRRT 125 mL/hr",
+    summary: "Dell Seton 20–<40%: 1 unit FFP, then LR 10 × %TBSA mL/hr",
   },
 
   {
@@ -343,11 +343,11 @@ export const BURNS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Dell-Seton Protocol — TBSA ≥40%',
-    body: "[Dell-Seton (DSMC-UT) Burn Protocol](#/info/burns-dsmc-protocol)\n\n**Dell-Seton (DSMC-UT): TBSA ≥40%**\n\n• Start **FFP ONLY at Rule of 10s** (%TBSA × 10 mL/hr; add 100 mL/hr per complete 10 kg above 80 kg). **No crystalloid.**\n• Reassess UOP hourly; adjust the current FFP rate up or down by **20%**.\n• **UOP goal:** 0.5 mL/kg/hr (adult), 1 mL/kg/hr (pediatric; specialist-directed care).\n• Place a **trialysis catheter** and consult nephrology.\n• At **20 mL × %TBSA × kg cumulative volume since burn**, do **not increase the hourly rate further**, regardless of UOP.\n• **Once CRRT starts: FFP 125 mL/hr regardless of UOP.**\n\nThe 20× threshold is a cumulative volume, not an hourly rate. Use the Fluids tool and full institutional protocol for the calculation.",
+    body: "[Dell-Seton (DSMC-UT) Burn Protocol](#/info/burns-dsmc-protocol)\n\n**Dell-Seton (DSMC-UT): TBSA ≥40%**\n\n• Start **FFP ONLY at 10 × %TBSA mL/hr**. No weight adjustment. Example: 50% TBSA → **500 mL/hr FFP**. **No crystalloid.**\n• Reassess UOP hourly; adjust the current FFP rate up or down by **20%**.\n• **UOP goal:** 0.5 mL/kg/hr (adult), 1 mL/kg/hr (pediatric; specialist-directed care).\n• Place a **trialysis catheter** and consult nephrology.\n• At **20 mL × %TBSA × kg cumulative volume since burn**, do **not increase the hourly rate further**, regardless of UOP.\n• **Once CRRT starts: FFP 125 mL/hr regardless of UOP.**\n\nThe 20× threshold is a cumulative volume, not an hourly rate. Use the Fluids tool and full institutional protocol for the calculation.",
     calculatorLinks: [{ id: 'burn-dell-seton', label: 'Dell-Seton Calculator' }],
     citation: [18],
     next: 'burn-fluids-monitoring',
-    summary: "Dell Seton >=40%: FFP only; trialysis and CRRT pathway",
+    summary: "Dell Seton ≥40%: FFP only at 10 × %TBSA mL/hr; no crystalloid",
   },
 
   {

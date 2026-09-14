@@ -2822,18 +2822,22 @@ const BURNS_PREHOSPITAL = {
 const BURNS_DSMC_PROTOCOL = {
     id: 'burns-dsmc-protocol',
     title: 'Dell-Seton (DSMC-UT) Burn Protocol',
-    subtitle: 'Institutional Resuscitation Protocol',
+    subtitle: 'Institutional Resuscitation Protocol · Initial tiers clarified September 14, 2026',
     sections: [
         {
-            body: 'The Dell-Seton Medical Center (DSMC-UT) burn resuscitation protocol uses a two-tier system based on TBSA to minimize crystalloid overload ("fluid creep") by introducing early fresh frozen plasma (FFP). All calculations begin from **time of burn**, not time of arrival.',
+            body: 'The Dell-Seton Medical Center (DSMC-UT) burn resuscitation protocol uses TBSA thresholds based on TBSA to minimize crystalloid overload ("fluid creep") by introducing early fresh frozen plasma (FFP). Initial tiers clarified by Dr. Andrew Kitlowski, September 14, 2026. All calculations begin from **time of burn**, not time of arrival.',
         },
         {
-            heading: 'Tier 1: TBSA 20-39%',
-            body: '**1.** Administer **1 unit of FFP** upon arrival\n**2.** Initial fluid: **Lactated Ringer\'s** at Rule of 10\'s rate (%TBSA \u00d7 10 = mL/hr)\n**3.** Titrate LR **up or down by 20%** every hour based on UOP goal\n**4.** **UOP goal:** 0.5 cc/kg/hr (adults), 1 cc/kg/hr (peds)\n**5.** At cumulative volume of **15 cc \u00d7 %TBSA \u00d7 kg** \u2192 **switch ALL fluid to FFP**\n**6.** At cumulative volume of **20 cc \u00d7 %TBSA \u00d7 kg** \u2192 **do NOT increase hourly rate further** regardless of UOP\n**7.** Check **bladder pressure** (abdominal compartment syndrome screening)\n**8.** Place a **trialysis catheter** (IJ or subclavian preferred)\n**9.** Consult **nephrology for CRRT** — once started, decrease FFP to **125 cc/hr** regardless of UOP',
+            heading: 'TBSA <20%: no protocol-driven burn resuscitation',
+            body: 'No formula-based LR or FFP resuscitation under this institutional protocol. Assess other hydration needs separately.',
+        },
+        {
+            heading: 'Tier 1: TBSA 20–<40%',
+            body: '**1.** Administer **1 unit of FFP** upon arrival\n**2.** Initial fluid: **Lactated Ringer\'s** at **10 × %TBSA mL/hr**, after the FFP unit. **30% TBSA → 300 mL/hr LR. No weight adjustment.**\n**3.** Titrate LR **up or down by 20%** every hour based on UOP goal\n**4.** **UOP goal:** 0.5 cc/kg/hr (adults), 1 cc/kg/hr (peds)\n**5.** At cumulative volume of **15 cc \u00d7 %TBSA \u00d7 kg** \u2192 **switch ALL fluid to FFP**\n**6.** At cumulative volume of **20 cc \u00d7 %TBSA \u00d7 kg** \u2192 **do NOT increase hourly rate further** regardless of UOP\n**7.** Check **bladder pressure** (abdominal compartment syndrome screening)\n**8.** Place a **trialysis catheter** (IJ or subclavian preferred)\n**9.** Consult **nephrology for CRRT** — once started, decrease FFP to **125 cc/hr** regardless of UOP',
         },
         {
             heading: 'Tier 2: TBSA \u226540%',
-            body: '**1.** Initial fluid: **FFP ONLY** at Rule of 10\'s rate (NO crystalloid)\n**2.** Titrate FFP **up or down by 20%** every hour based on UOP goal\n**3.** Place a **triple lumen dialysis catheter (trialysis)**\n**4.** At cumulative volume of **20 cc \u00d7 %TBSA \u00d7 kg** \u2192 **do NOT increase hourly rate further**\n**5.** Consult **nephrology** — once CRRT started, decrease FFP to **125 cc/hr** regardless of UOP',
+            body: '**1.** Initial fluid: **FFP ONLY** at **10 × %TBSA mL/hr** (NO crystalloid). **50% TBSA → 500 mL/hr FFP. No weight adjustment.**\n**2.** Titrate FFP **up or down by 20%** every hour based on UOP goal\n**3.** Place a **triple lumen dialysis catheter (trialysis)**\n**4.** At cumulative volume of **20 cc \u00d7 %TBSA \u00d7 kg** \u2192 **do NOT increase hourly rate further**\n**5.** Consult **nephrology** — once CRRT started, decrease FFP to **125 cc/hr** regardless of UOP',
         },
         {
             heading: 'Rationale',
