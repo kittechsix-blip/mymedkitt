@@ -40,3 +40,7 @@ Rules and patterns extracted from mistakes. Review at session start.
 - Run `git diff --cached --stat`.
 - Commit with `git commit -m "..."; git push`.
 - If Desktop git fails with EDEADLK, then discuss fallback rather than calling the helper reflexively.
+
+
+## 2026-09-14: Keep Dell Seton initial rates separate from Rule of 10s
+The Dell Seton starting rate is exactly 10 × numeric %TBSA mL/hr, without the generic Rule of 10s weight adjustment. Below 20% has no protocol-driven resuscitation; 20–<40% gets 1 unit FFP then LR; ≥40% gets FFP only. Test the 20/40 boundaries and weights above 80 kg in both BurnKitt and the myMedKitt port. Preserve separate later titration rules and distinguish starting rates from current infusion rates. Source: Dr. Kitlowski clarification, September 14, 2026.
