@@ -77,3 +77,25 @@ GRANT SELECT, DELETE ON TABLE public.app_events TO service_role;
 
 REVOKE ALL ON FUNCTION public.app_events_props_ok(jsonb) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION public.app_events_props_ok(jsonb) TO anon, service_role;
+
+-- Beacon ingest: browsers closing a page can only send a CORS-simple request
+-- (navigator.sendBeacon, text/plain, key in the URL). PostgREST hands the raw
+-- body of a single unnamed text parameter to this function. SECURITY INVOKER:
+-- it runs as anon, so the INSERT-only grant, the CHECKs and the RLS policy
+-- above all still apply. At most 50 rows per call, body at most 64 KB.
+CREATE OR REPLACE FUNCTION public.app_events_ingest(text)
+RETURNS void
+LANGUAGE sql SECURITY INVOKER
+SET search_path = ''
+AS $$
+  INSERT INTO public.app_events (ts, app, event, screen_id, feature_id, install_id, session_id, app_version, platform, props)
+  SELECT (r->>'ts')::timestamptz, r->>'app', r->>'event', r->>'screen_id', r->>'feature_id',
+         r->>'install_id', r->>'session_id', r->>'app_version', r->>'platform', coalesce(r->'props', '{}'::jsonb)
+  FROM jsonb_array_elements(CASE WHEN octet_length($1) <= 65536 THEN $1::jsonb ELSE '[]'::jsonb END) AS r
+  LIMIT 50
+$$;
+
+REVOKE ALL ON FUNCTION public.app_events_ingest(text) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION public.app_events_ingest(text) TO anon;
+
+NOTIFY pgrst, 'reload schema';
