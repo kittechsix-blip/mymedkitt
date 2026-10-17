@@ -1,6 +1,9 @@
 // MedKitt — Hash-Based SPA Router
 // Matches URL patterns and calls registered handlers on navigation.
 
+import { sinkTrack } from './kittmd-analytics.js';
+import { msBucket } from './telemetry.js';
+
 /** Parsed route parameters extracted from the URL pattern */
 export interface RouteParams {
   [key: string]: string;
@@ -72,12 +75,17 @@ class Router {
     for (const route of this.routes) {
       const params = this.match(route.segments, pathSegments);
       if (params !== null) {
+        const started = performance.now();
+        sinkTrack('screen_view', { screen_id: path === '/' ? 'home' : path });
         route.handler(params);
+        const ms = performance.now() - started;
+        if (ms > 1000) sinkTrack('slow_render', { screen_id: path === '/' ? 'home' : path, props: { ms_bucket: msBucket(ms) } });
         return;
       }
     }
 
     // No route matched
+    sinkTrack('not_found', { props: { kind: 'route' } });
     if (this.notFoundHandler) {
       this.notFoundHandler({});
     }

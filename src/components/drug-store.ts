@@ -179,7 +179,7 @@ export function showDrugModal(drugId: string, indicationHint?: string): boolean 
   if (!drug) return false;
 
   // Track drug view for KittMD analytics
-  trackDrugView(drug.name);
+  trackDrugView(drug.name, undefined, drugId);
 
   destroyOverlay();
 

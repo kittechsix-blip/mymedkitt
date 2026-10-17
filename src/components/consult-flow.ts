@@ -199,7 +199,7 @@ function renderFlow(container: HTMLElement): void {
         const nextNode = controller.selectOption(i);
         // Track node visit for KittMD analytics
         if (nextNode && currentTreeId) {
-          trackNodeVisit(currentTreeId, nextNode.id);
+          trackNodeVisit(currentTreeId, nextNode.id, nextNode);
         }
         renderFlow(container);
         // Auto-scroll to new card
@@ -216,7 +216,7 @@ function renderFlow(container: HTMLElement): void {
         const nextNode = controller.continueToNext();
         // Track node visit for KittMD analytics
         if (nextNode && currentTreeId) {
-          trackNodeVisit(currentTreeId, nextNode.id);
+          trackNodeVisit(currentTreeId, nextNode.id, nextNode);
         }
         renderFlow(container);
         requestAnimationFrame(() => {
@@ -231,7 +231,7 @@ function renderFlow(container: HTMLElement): void {
         if (!controller) return;
         const nextNode = controller.continueWithInput(values);
         if (nextNode && currentTreeId) {
-          trackNodeVisit(currentTreeId, nextNode.id);
+          trackNodeVisit(currentTreeId, nextNode.id, nextNode);
         }
         renderFlow(container);
         requestAnimationFrame(() => {

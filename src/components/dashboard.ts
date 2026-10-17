@@ -11,6 +11,8 @@ import { getAllCalculators } from './calculator.js';
 import { buildSearchIndex, search, type SearchResult } from '../services/search-service.js';
 import { showDrugModal } from './drug-store.js';
 import { showShareModal } from './share-modal.js';
+import { sinkTrack } from '../services/kittmd-analytics.js';
+import { rankBucket, resultBucket } from '../services/telemetry.js';
 
 /** Tool categories route to special pages instead of category view */
 const TOOL_ROUTES: Record<string, { route: string; getCount: () => number; unit: string }> = {
@@ -115,7 +117,13 @@ export function renderDashboard(container: HTMLElement): void {
   heroSearch.appendChild(resultsList);
   dashboard.appendChild(heroSearch);
 
+  // Data Dog: result-count bucket after typing settles, and the rank picked. Never the query.
+  let lastResults: SearchResult[] = [];
+  let searchTimer: ReturnType<typeof setTimeout> | undefined;
+
   function navigateToResult(r: SearchResult): void {
+    const rank = lastResults.indexOf(r) + 1;
+    if (rank > 0) sinkTrack('search_select', { screen_id: 'home', props: { surface: 'hero', rank_bucket: rankBucket(rank) } });
     searchInput.value = '';
     resultsList.hidden = true;
     resultsList.innerHTML = '';
@@ -128,11 +136,17 @@ export function renderDashboard(container: HTMLElement): void {
 
   function renderResults(query: string): void {
     if (!query.trim()) {
+      clearTimeout(searchTimer);
       resultsList.hidden = true;
       resultsList.innerHTML = '';
       return;
     }
     const results = search(query).slice(0, 12);
+    lastResults = results;
+    clearTimeout(searchTimer);
+    if (query.trim().length >= 2) {
+      searchTimer = setTimeout(() => sinkTrack('search', { screen_id: 'home', props: { surface: 'hero', result_bucket: resultBucket(results.length) } }), 800);
+    }
     resultsList.innerHTML = '';
     if (results.length === 0) {
       const empty = document.createElement('li');
