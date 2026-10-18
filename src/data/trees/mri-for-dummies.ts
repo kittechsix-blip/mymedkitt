@@ -319,7 +319,7 @@ export const MRI_NODES: DecisionNode[] = [
     body: '**ORDER:** MRI **whole spine** (cervical, thoracic, lumbar) — without contrast is enough for compression; with and without if infection or leptomeningeal spread is a concern\n\n**CONTRAST:** Optional.\n\n**WHY:** Disease is often at more than one level, so image the whole spine to find levels you did not suspect. NICE: whole-spine MRI **within 24 h** if there are neurologic symptoms or signs, and within a week for suspicious back pain alone. CT if MRI is contraindicated.\n\n**WATCH OUT:** Back pain in a patient with cancer plus any neurologic sign = MRI now, and start treatment per [Cord Emergencies](#/tree/cord-emergencies).',
     citation: [7, 8],
     next: 'mri-next',
-    summary: 'Whole-spine MRI; immediately if neuro signs; multiple levels common',
+    summary: 'Whole-spine MRI; within 24 h if neuro signs; multiple levels common',
   },
 
   {
@@ -465,7 +465,7 @@ export const MRI_NODES: DecisionNode[] = [
     images: [
       { src: 'images/mri/flair-axial-brain.jpg', alt: 'Normal axial FLAIR brain MRI with the CSF in the lateral ventricles suppressed to black', caption: 'Normal axial FLAIR: the CSF is dark, so anything bright next to it stands out. 511KeV, CC BY-SA 4.0, via Wikimedia Commons.' },
     ],
-    citation: [30],
+    citation: [30, 45],
     next: 'mri-seq-dwi',
     summary: 'FLAIR: CSF dark, edema and sulcal blood bright',
   },
@@ -492,7 +492,7 @@ export const MRI_NODES: DecisionNode[] = [
     title: 'SWI / GRE — The Blood Finder',
     body: '**DARK:** blood products, calcium, and iron — black and **"blooming"** (they look bigger than they really are)\n\n**USE IT FOR:** hemorrhage, microbleeds, diffuse axonal injury, hemorrhagic transformation of a stroke, and clot inside an artery or venous sinus.\n\n**ONE THING TO KNOW:** a black dot can be blood or calcium. The SWI phase image or a CT tells them apart.',
     images: [
-      { src: 'images/mri/swi-microbleeds.jpg', alt: 'Four axial brain MRI panels, T2, T1, FLAIR and SWI, of the same slice; multiple black microbleeds in the thalami and basal ganglia are visible only on the SWI panel', caption: 'Same slice on T2 (top left), T1 (top right), FLAIR (bottom left), and SWI (bottom right): the hypertensive microbleeds in the thalami and basal ganglia are visible only on SWI as black dots. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+      { src: 'images/mri/swi-microbleeds.jpg', alt: 'Four axial brain MRI panels, T2, T1, FLAIR and SWI, of the same slice; multiple black microbleeds in the thalami and basal ganglia are visible only on the SWI panel', caption: 'Same slice on T2 (top left), T1 (top right), FLAIR (bottom left), and SWI (bottom right): the hypertensive microbleeds in the thalami and basal ganglia are far easier to see on SWI as black dots. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
     ],
     citation: [27],
     next: 'mri-seq-stir',
@@ -623,7 +623,7 @@ export const MRI_NODES: DecisionNode[] = [
     module: 5,
     title: 'Common Traps',
     body: '• **Motion** — blurred or ghosted images; repeat or sedate rather than over-read\n• **T2 shine-through** — bright DWI with bright ADC is not acute\n• **Partial volume** — a structure only partly in the slice looks like a lesion; check the next slice and another plane\n• **Flow** — fast flow is a normal black void; slow flow can look like clot on MRV and like occlusion on TOF MRA\n• **Metal** — dental work, clips, and hardware make black holes and distortion; DWI and SWI are the worst affected\n• **Sulcal FLAIR signal** from high-flow oxygen or recent gadolinium can mimic SAH',
-    citation: [30],
+    citation: [30, 45],
     next: 'mri-gallery',
     summary: 'Motion, shine-through, partial volume, flow, metal, oxygen on FLAIR',
   },
@@ -658,7 +658,7 @@ export const MRI_NODES: DecisionNode[] = [
     title: 'Pattern: Acute Ischemic Stroke',
     body: '**LOOK FOR:** bright DWI + dark ADC in an **arterial territory** (MCA, ACA, PCA, PICA, AICA, SCA).\n\n**EXTRAS:** FLAIR still normal = likely <4.5 h old; a black clot in the artery on SWI; bleeding into the infarct (hemorrhagic transformation).\n\n**POSTERIOR STROKES** in the lateral medulla and cerebellum are small and easy to miss on thick slices.',
     images: [
-      { src: 'images/mri/dwi-adc-pica-stroke.jpg', alt: 'Four MRI panels of an acute left PICA cerebellar infarct: axial DWI bright, axial ADC, axial T2, and sagittal FLAIR', caption: 'Acute partial left PICA infarct in the inferior cerebellum: bright on DWI (top left) with matching ADC (top right); axial T2 (bottom left) and sagittal FLAIR (bottom right). Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+      { src: 'images/mri/dwi-adc-pica-stroke.jpg', alt: 'Four MRI panels of an acute left PICA cerebellar infarct: axial DWI bright, axial ADC, axial T2, and sagittal FLAIR', caption: 'Acute partial left PICA infarct in the inferior cerebellum: bright on DWI (top left) with the corresponding ADC map (top right); axial T2 (bottom left) and sagittal FLAIR (bottom right). Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
     ],
     citation: [3, 28, 31],
     next: 'mri-gallery',
@@ -684,7 +684,7 @@ export const MRI_NODES: DecisionNode[] = [
     type: 'info',
     module: 6,
     title: 'Pattern: HSV Encephalitis',
-    body: '**LOOK FOR:** bright FLAIR/T2 (often DWI too) in the **medial temporal lobes, insula, and cingulate** — usually both sides, one worse than the other. Later it can bleed (black on SWI).\n\n**VS MCA STROKE:** HSV spares the basal ganglia and does not follow an arterial territory.',
+    body: '**LOOK FOR:** bright FLAIR/T2 (often DWI too) in the **medial temporal lobes, insula, and cingulate** — often both sides, one worse than the other; early disease can be one-sided. Later it can bleed (black on SWI).\n\n**VS MCA STROKE:** HSV spares the basal ganglia and does not follow an arterial territory.',
     images: [
       { src: 'images/mri/hsv-encephalitis-t2-coronal.jpg', alt: 'Coronal T2 brain MRI with high signal in both temporal lobes, hippocampi and insulae, worse on one side', caption: 'PCR-confirmed HSV encephalitis, coronal T2: bright signal in both temporal lobes, hippocampi, and insulae, worse on one side. Dr Laughlin Dawes, CC BY 3.0, via Wikimedia Commons.' },
     ],
@@ -714,7 +714,7 @@ export const MRI_NODES: DecisionNode[] = [
     title: 'Pattern: Venous Sinus Thrombosis',
     body: '**LOOK FOR:**\n• A sinus missing on MRV\n• Clot in the sinus: black and blooming on SWI/GRE; bright on T1 once subacute\n• **Empty delta sign** on post-contrast images: the enhancing sinus wall around a dark clot\n\n**THE BRAIN:** venous infarcts that do not match an arterial territory, often with bleeding — near the midline at the top of the head (superior sagittal sinus) or in the temporal lobe (transverse sinus).',
     images: [
-      { src: 'images/mri/cvst-mrv-occlusion.jpg', alt: 'Axial MR venogram projection with absent flow signal in the left transverse and sigmoid sinuses', caption: 'MR venogram: no flow in the left transverse and sigmoid sinuses (right side of the image). P Thomas et al., CC BY 2.0, via Wikimedia Commons.' },
+      { src: 'images/mri/cvst-mrv-occlusion.jpg', alt: 'Axial MR venogram projection with absent flow signal in the left transverse and sigmoid sinuses', caption: 'MR venogram: no flow in the left transverse and sigmoid sinuses (right side of the image). On a non-contrast MRV alone, a small (hypoplastic) left transverse sinus can look the same — confirm with SWI/GRE, T1 or contrast. P Thomas et al., CC BY 2.0, via Wikimedia Commons.' },
       { src: 'images/mri/cvst-multisequence.jpg', alt: 'Six labeled MRI panels of right transverse sinus thrombosis with the clot outlined on T2, T1, DWI, FLAIR and post-contrast T1 axial and coronal images', caption: 'Right transverse sinus thrombosis (outlined): subacute clot bright on T1 and FLAIR; post-contrast T1 ("T1 KM") shows the filling defect. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
     ],
     citation: [10],
@@ -742,9 +742,6 @@ export const MRI_NODES: DecisionNode[] = [
     module: 6,
     title: 'Pattern: Cord Compression',
     body: '**LOOK FOR:** a vertebral body that is **dark on T1** (fatty marrow replaced by tumor) and bright on STIR; soft tissue or a fracture fragment pushing into the canal and flattening the cord; bright cord signal on T2 (cord edema).\n\n**CLUES TO TUMOR** over osteoporotic collapse: a bulging back wall of the vertebral body and involvement of the pedicle.\n\n**CHECK THE WHOLE SPINE** — other levels are common.',
-    images: [
-      { src: 'images/mri/metastatic-cord-compression.jpg', alt: 'Thoracic spine images: sagittal CT, sagittal T2 and T1 MRI, and three axial T2 slices showing severe narrowing of the thecal sac', caption: 'Thoracic cord compression from a pathologic metastatic fracture plus epidural fat overgrowth: sagittal CT, sagittal T2 and T1, and axial T2 slices. Mixed cause — not a pure metastasis case. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
-    ],
     citation: [7],
     next: 'mri-gallery',
     summary: 'Dark T1 vertebra, epidural tumor, cord flattening; check whole spine',
@@ -898,4 +895,5 @@ export const MRI_CITATIONS: Citation[] = [
   { num: 42, text: 'Cortes-Albornoz MC, Clifford B, Lo WC, Yee S, et al. A 3-minute ultrafast MRI and MRA protocol for screening of acute ischemic stroke. J Am Coll Radiol. 2025;22(3):366-375.' },
   { num: 43, text: 'Expert Panel on Neurologic Imaging; Burns J, Policeni B, Bykowski J, et al. ACR Appropriateness Criteria Neuroendocrine Imaging. J Am Coll Radiol. 2019;16(5S):S161-S173.' },
   { num: 44, text: 'Expert Panel on GYN and OB Imaging; Brook OR, Dadour JR, Robbins JB, et al. ACR Appropriateness Criteria Acute Pelvic Pain in the Reproductive Age Group: 2023 Update. J Am Coll Radiol. 2024;21(6S):S3-S20.' },
+  { num: 45, text: 'Frigon C, Jardine DS, Weinberger E, Heckbert SR, Shaw DW. Fraction of inspired oxygen in relation to cerebrospinal fluid hyperintensity on FLAIR MR imaging of the brain in children and young adults undergoing anesthesia. AJR Am J Roentgenol. 2002;179(3):791-796.' },
 ];

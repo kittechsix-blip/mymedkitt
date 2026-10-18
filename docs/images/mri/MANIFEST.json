@@ -1,0 +1,213 @@
+{
+  "brain-abscess-multisequence.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Ausgedehnte_Hirnabszesse_-_verschiedene_Wichtungen_in_der_MRT_3M_-_MR_-_001_-_Annotation.jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Ausgedehnte_Hirnabszesse_-_verschiedene_Wichtungen_in_der_MRT_3M_-_MR_-_001_-_Annotation.jpg",
+    "author": "Hellerhoff",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "b6d84ee45e524f8a7823d5f7dbfbdf09f8232e5da1c6c56d37241cdccbe15fe5"
+  },
+  "brain-abscess-t1-post-gad.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Brain_abscess_-_MRI_T1_KM_axial.jpg",
+    "license_tag": "CC-BY-SA-3.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Brain_abscess_-_MRI_T1_KM_axial.jpg",
+    "author": "Hellerhoff",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "bab9f575d0033ff21cd8e2f58724bf29ee99a21a5adc5bd4aaf9b7e77abda170"
+  },
+  "cvst-mrv-occlusion.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Behcet.JPG",
+    "license_tag": "CC-BY-2.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Behcet.JPG",
+    "author": "P Thomas, A Keightley, R Kamble, N Gunasekera, M R Johnson",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "d66bd6518e00ee48f0b83145ace86ead6c680eb2e83cac1ad023670cb5562a2f"
+  },
+  "cvst-multisequence.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Sinusthrombose_rechts_Sinus_transversalis_76W_-_MR_-_001_-_Annotation.jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Sinusthrombose_rechts_Sinus_transversalis_76W_-_MR_-_001_-_Annotation.jpg",
+    "author": "Hellerhoff",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "632aba0492df41d4eef1629d39ebca590af523c40f2aba25a9efc4c2ca9a0695"
+  },
+  "dwi-adc-pica-stroke.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Akuter_PICA-Teilinfarkt_links_83W_-_MR_-_001.jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Akuter_PICA-Teilinfarkt_links_83W_-_MR_-_001.jpg",
+    "author": "Hellerhoff",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "6030c2210e0953f14f3dd06c3434224bc4573c32cc5d25b576698eaeef1807b0"
+  },
+  "dwi-adc-tof-aca-stroke.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Unilateraler_Anteriorinfarkt_70M_-_MR_DWI_ADC_TOF_-_001.jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Unilateraler_Anteriorinfarkt_70M_-_MR_DWI_ADC_TOF_-_001.jpg",
+    "author": "Hellerhoff",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "743abcaa41937b994bc8c61ce8987fa0cf04555448fcb6458a3d194f80a6c282"
+  },
+  "flair-axial-brain.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Mri_Brain_Flair_Axial_(12).jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Mri_Brain_Flair_Axial_(12).jpg",
+    "author": "511KeV",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "07c822ac1bbf8ab3fe135255d850418e16ec37c9fbd8ad7822dbb38ed81d693b"
+  },
+  "hsv-encephalitis-t2-coronal.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Hsv_encephalitis.jpg",
+    "license_tag": "CC-BY-3.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Hsv_encephalitis.jpg",
+    "author": "Dr Laughlin Dawes",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "d0be59d8af67151d1adcb8daa13519ecb379fdc04aeeb8a3b01ec7f42c4fd3b5"
+  },
+  "ich-t2star.png": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Frontale_Kontusionsblutung_MRT_HAEM_01.png",
+    "license_tag": "CC-BY-SA-3.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Frontale_Kontusionsblutung_MRT_HAEM_01.png",
+    "author": "Hellerhoff",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "12d85883a4e734869d76b3cd4270b936465751c017f5490ae91918d42a962a32"
+  },
+  "lumbar-disc-herniation-t2-sagittal.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Bandscheibenvorfall_LWS.jpg",
+    "license_tag": "CC-BY-SA-3.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Bandscheibenvorfall_LWS.jpg",
+    "author": "Michael-W",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "5517bf0d31554edd0eac7bbb351348df8cf02263bb5c91133730b5248ad0cc50"
+  },
+  "metastatic-cord-compression.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Epidurale_Lipomatose_BWS_mit_Myelonkompression_bei_Metastasen_und_Fraktur_70W_-_CT_MR_-_001.jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Epidurale_Lipomatose_BWS_mit_Myelonkompression_bei_Metastasen_und_Fraktur_70W_-_CT_MR_-_001.jpg",
+    "author": "Hellerhoff",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "dec4e6304d04f9d63dea097f8517e6be866693e206f3f1849d39365e25752bb8"
+  },
+  "mra-tof-circle-of-willis.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Mra-mip.jpg",
+    "license_tag": "CC-BY-SA-3.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Mra-mip.jpg",
+    "author": "SBarnes",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "fef882c3aee611c4329ad791ed7deec8e7922f656facdaa9e707bbe88f6f0147"
+  },
+  "mri-blood-age-chart.svg": {
+    "source_url": "original diagram, myMedKitt (ZERP build 2026-10-17)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "n/a \u2014 original work",
+    "retrieval_timestamp": "2026-10-17T19:50:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17; first shipped in 18bab622",
+    "sha256": "394a72d788ebc9314fea459e13f020904ee257b5d73616124eb885059ab364dc"
+  },
+  "mri-dwi-adc-true-vs-shine-through.svg": {
+    "source_url": "original diagram, myMedKitt (ZERP build 2026-10-17)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "n/a \u2014 original work",
+    "retrieval_timestamp": "2026-10-17T19:50:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17; first shipped in 18bab622",
+    "sha256": "f93b87bf29186d039330005ffe005096fff6f3a93f5dfe5abb9488963da84ae0"
+  },
+  "mri-read-order.svg": {
+    "source_url": "original diagram, myMedKitt (ZERP build 2026-10-17)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "n/a \u2014 original work",
+    "retrieval_timestamp": "2026-10-17T19:50:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17; first shipped in 18bab622",
+    "sha256": "93e4e4247ad0c92a37de5f8520798fd9d6100548118e3112dffc99035b1bbe40"
+  },
+  "mri-safety-zones.svg": {
+    "source_url": "original diagram, myMedKitt (ZERP build 2026-10-17)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "n/a \u2014 original work",
+    "retrieval_timestamp": "2026-10-17T19:50:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17; first shipped in 18bab622",
+    "sha256": "86350573bd20c4af6cd5f2add4969e8919a7a4fc05b25bff8b9c0c4ab52c73e0"
+  },
+  "mri-scanner-photo.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:MRI-Philips.JPG",
+    "license_tag": "CC-BY-3.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:MRI-Philips.JPG",
+    "author": "Jan Ainali",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "fd656a1280507511fbb3d50c0d33c73aa9eff4e062b12042fa9ebbeb720501da"
+  },
+  "mri-sequence-cheatsheet.svg": {
+    "source_url": "original diagram, myMedKitt (ZERP build 2026-10-17)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "n/a \u2014 original work",
+    "retrieval_timestamp": "2026-10-17T19:50:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17; first shipped in 18bab622",
+    "sha256": "850e422608a34dac17fb2e6750979769235988aacc7944f7a6979e754ab10589"
+  },
+  "pres-t2-axial.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Posterior_reversible_encephalopathy_syndrome_MRI.jpg",
+    "license_tag": "CC-BY-3.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Posterior_reversible_encephalopathy_syndrome_MRI.jpg",
+    "author": "Rashmi Chawla, Daniel Smith and Paul E Marik",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "38b3880ce8dcdab6bd4096bcf87206df1563dae4161fdb992627240f9dfc8b15"
+  },
+  "spinal-epidural-abscess.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:MRI_of_the_lumbar_spine_with_abscess_in_the_posterior_epidural_space,_causing_cauda_equina_syndrome.jpg",
+    "license_tag": "CC-BY-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:MRI_of_the_lumbar_spine_with_abscess_in_the_posterior_epidural_space,_causing_cauda_equina_syndrome.jpg",
+    "author": "Jing Jing Chan and Jen Jen Oh",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "9f2449c245e525c3f895c36434c71f9bd785b183a85fec7b991d7e279d74c3a2"
+  },
+  "stir-spine-sagittal.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:SAGITTAL-FAST-STIR_MRI.jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:SAGITTAL-FAST-STIR_MRI.jpg",
+    "author": "Ptrump16",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "77757adcb740df94b5a290882dd8d8e3f943a094c637f5e2df3695b59bb550cf"
+  },
+  "swi-microbleeds.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Zahlreiche_zerebrale_Mikroblutungen_vorwiegend_Thalamus_73M_-_MR_axial_-_001.jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Zahlreiche_zerebrale_Mikroblutungen_vorwiegend_Thalamus_73M_-_MR_axial_-_001.jpg",
+    "author": "Hellerhoff",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "5adf9b5666cba50fa4d3533c72fe9125915bb1ea57679bde97fa522de7e8f5be"
+  },
+  "t1-axial-brain.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:MRI_Brain_T1_Axial_(12).jpg",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:MRI_Brain_T1_Axial_(12).jpg",
+    "author": "511KeV",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "5f1b509b72aca092b36577bbdfb9f63ac89cdda11d2da5b4f0176b51a4355dfb"
+  },
+  "t2-axial-brain.png": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Brain-T2-axial.png",
+    "license_tag": "CC-BY-SA-4.0",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/File:Brain-T2-axial.png",
+    "author": "Sean Novak",
+    "retrieval_timestamp": "2026-10-17T19:51:00Z",
+    "andy_approval_commit": "Outline approved by Andy 2026-10-17 (allows CC BY / CC BY-SA); first shipped in 18bab622",
+    "sha256": "d5c5b0ebc69b6d2f692fbcee762a2ddd0f0437bf3707b6d62a525cf31185b291"
+  }
+}

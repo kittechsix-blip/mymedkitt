@@ -45934,8 +45934,8 @@ const MRI_SAFETY_CHECKLIST_CALCULATOR: CalculatorDefinition = {
     const clear: string[] = [];
     const notes: string[] = [];
 
-    if (v('orbit-fb')) stop.push('Possible orbital metal — **orbit X-ray or CT must clear it first**; a moving fragment can blind the patient');
-    if (v('unstable')) stop.push('Unstable or no monitoring/resuscitation plan — **you cannot run a code in Zone IV**; stabilize or use CT');
+    if (v('orbit-fb')) stop.push('Possible orbital metal — orbit X-ray or CT must clear it first; a moving fragment can blind the patient');
+    if (v('unstable')) stop.push('Unstable or no monitoring/resuscitation plan — you cannot run a code in Zone IV; stabilize or use CT');
 
     if (v('cied-legacy')) clear.push('Non-conditional or unknown cardiac device — EP + radiology decision; scan only under a formal protocol (HRS 2017)');
     if (v('cied-conditional')) clear.push('MR-conditional cardiac device — device reprogramming before, monitoring during, check after');
@@ -45947,7 +45947,7 @@ const MRI_SAFETY_CHECKLIST_CALCULATOR: CalculatorDefinition = {
 
     if (v('external-device')) notes.push('Remove pumps, sensors, and patches with metal before entering Zone IV (bring a replacement plan for the pump)');
     if (v('pregnant') && !v('gad-planned')) notes.push('Pregnancy: non-contrast MRI is safe in any trimester — tell radiology the gestational age');
-    if (v('renal') && v('gad-planned')) notes.push('eGFR <30 / AKI / dialysis: use a **group II** agent; do not withhold a needed scan. Hemodialysis: scan shortly before a scheduled session when practical; do not start or change dialysis for the dose');
+    if (v('renal') && v('gad-planned')) notes.push('eGFR <30 / AKI / dialysis: use a group II agent; do not withhold a needed scan. Hemodialysis: scan shortly before a scheduled session when practical; do not start or change dialysis for the dose');
     if (v('claustro')) notes.push('Claustrophobia: non-drug steps, shortest protocol, then [Lorazepam](#/drug/lorazepam/mri anxiolysis) PO or [Midazolam](#/drug/midazolam/mri anxiolysis) IV with MR-conditional monitoring');
 
     let value: string;
@@ -45961,10 +45961,17 @@ const MRI_SAFETY_CHECKLIST_CALCULATOR: CalculatorDefinition = {
       value = 'NEEDS RADIOLOGY CLEARANCE';
       label = `${clear.length} item${clear.length > 1 ? 's' : ''} to clear`;
       colorVar = '--color-warning';
+    } else if (!Object.values(values).some(x => (x || 0) > 0)) {
+      return {
+        value: '—',
+        label: 'Toggle what the screen found',
+        description: '**HOW TO USE:** toggle every item the written MRI screening form turned up. With nothing toggled, this tool has not cleared anyone.\n\n**REMEMBER:** unknown = not cleared. The magnet is always on.',
+        colorVar: '--color-text-secondary',
+      };
     } else {
       value = 'GO';
       label = 'No barriers on this screen';
-      colorVar = '--color-primary';
+      colorVar = '--color-safe';
     }
 
     let description = '';

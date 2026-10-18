@@ -317,8 +317,8 @@ export const TOOLBAR_CONFIGS = {
     ],
     'mri-for-dummies': [
         { id: 'steps', label: 'Steps', icon: '\uD83D\uDCCB', action: 'overlay', target: 'mri-summary', pinned: true },
-        { id: 'sequence', label: 'Sequences', icon: '\uD83E\uDDE0', action: 'overlay', target: 'mri-sequence-cheatsheet', pinned: true },
-        { id: 'blood', label: 'Blood Age', icon: '\uD83E\uDE78', action: 'calculator', target: 'mri-blood-age', pinned: true },
+        { id: 'sequence', label: 'Sequences', icon: '\uD83E\uDDE0', action: 'overlay', target: 'mri-sequence-cheatsheet' },
+        { id: 'blood', label: 'Blood Age', icon: '\uD83E\uDE78', action: 'calculator', target: 'mri-blood-age' },
         { id: 'safety', label: 'Safety', icon: '\uD83E\uDDF2', action: 'calculator', target: 'mri-safety-checklist', pinned: true },
         { id: 'order', label: 'Order', icon: '\uD83D\uDCDD', action: 'jump', target: 'mri-protocol', pinned: true },
         { id: 'gadolinium', label: 'Gad & Kidney', icon: '\uD83E\uDED8', action: 'overlay', target: 'mri-gadolinium-egfr' },

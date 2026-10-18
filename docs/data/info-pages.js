@@ -29396,7 +29396,6 @@ const MRI_SEQUENCE_CHEATSHEET = {
     id: 'mri-sequence-cheatsheet',
     title: 'MRI Sequence Cheat Sheet',
     subtitle: 'What is bright, what is dark, what it is for',
-    image: { src: 'images/mri/mri-sequence-cheatsheet.svg', alt: 'Table of nine MRI sequences with grey swatches showing how fat and water look on each', caption: 'Swatches are schematic. Original diagram, myMedKitt.' },
     sections: [
         {
             body: 'Bright = hyperintense. Dark = hypointense. Iso = same as normal brain. Two anchors: **T1 = fat bright**, **T2 = H2O bright**.',
@@ -29512,7 +29511,7 @@ const MRI_FOR_DUMMIES_STOP = {
     sections: [
         {
             heading: '🛑 Do NOT send an unstable patient to MRI',
-            body: 'You cannot resuscitate in Zone IV, and scans take 15–60 minutes. Stabilize, or use CT. [CT or MRI?](#/node/mri-vs-ct)',
+            body: 'You cannot resuscitate in Zone IV, and scans take 5–60 minutes or more. Stabilize, or use CT. [CT or MRI?](#/node/mri-vs-ct)',
         },
         {
             heading: '🛑 Do NOT let MRI delay a stroke treatment decision',
@@ -29536,7 +29535,7 @@ const MRI_FOR_DUMMIES_STOP = {
         },
         {
             heading: '🛑 Do NOT order an MRI brain alone for dissection or CVST',
-            body: 'The brain images do not show the neck vessels or venous sinuses. Add MRA with T1 fat-sat, or MRV. [When a negative MRI does not clear](#/node/mri-negative)',
+            body: 'The brain images do not show the neck vessels or venous sinuses. Add MRA with T1 fat-sat, or MRV. [Dissection order card](#/node/mri-ord-dissection) · [CVST order card](#/node/mri-ord-cvst)',
         },
         {
             heading: '🛑 Do NOT withhold a needed contrast MRI for low eGFR',

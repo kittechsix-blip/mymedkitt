@@ -14376,7 +14376,7 @@ const GADOBUTROL: DrugEntry = {
   genericName: 'Gadobutrol',
   drugClass: 'Gadolinium-based contrast agent — macrocyclic, nonionic (ACR group II)',
   route: 'IV',
-  indications: ['MRI contrast — brain, spine, MRA, body, breast, cardiac'],
+  indications: ['MRI contrast — CNS (brain, spine), breast, MRA (supra-aortic and renal arteries), cardiac'],
   dosing: [
     {
       indication: 'MRI contrast — adult and pediatric (including term neonates)',
