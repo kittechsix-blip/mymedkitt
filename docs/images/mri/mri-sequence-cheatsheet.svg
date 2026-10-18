@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="900" height="700" role="img" aria-labelledby="title desc">
+  <title id="title">MRI Sequence Cheat Sheet: What Is Bright, What Is Dark</title>
+  <desc id="desc">Table of nine MRI sequences. For each, a grey-scale swatch shows how fat and how water or CSF look, followed by what lights up and what the sequence is used for. T1: fat bright, CSF dark. T2: fat bright, CSF bright. FLAIR: CSF dark, edema bright. DWI: CSF dark, acute infarct and pus bright. ADC: CSF bright, true restriction dark. SWI or GRE: blood and calcium black and blooming. STIR or fat-sat: fat dark, fluid and edema bright. T1 post-gadolinium: enhancing tissue bright. Time-of-flight MRA: flowing arterial blood bright.</desc>
+  <style>
+    .bg { fill: #FFF8F2; }
+    .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .sub { font: 400 13px system-ui, -apple-system, sans-serif; fill: #5A5A5A; }
+    .head { font: 700 13px system-ui, -apple-system, sans-serif; fill: #FFFFFF; }
+    .seq { font: 700 16px system-ui, -apple-system, sans-serif; fill: #BF5700; }
+    .seq-sub { font: 400 11px system-ui, -apple-system, sans-serif; fill: #5A5A5A; }
+    .cell { font: 400 13px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .cell-b { font: 700 13px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .sw-label { font: 600 10px system-ui, -apple-system, sans-serif; }
+    .na { font: 400 12px system-ui, -apple-system, sans-serif; fill: #8A8A8A; }
+    .row-a { fill: #FFFFFF; }
+    .row-b { fill: #FBF1E8; }
+    .grid { stroke: #E6D9CC; stroke-width: 1; }
+    .sw { stroke: #5A5A5A; stroke-width: 1; }
+    .sw-na { fill: none; stroke: #B8B0A8; stroke-width: 1; stroke-dasharray: 4 3; }
+  </style>
+  <rect class="bg" width="900" height="700"/>
+  <text class="title" x="20" y="36">MRI sequences: what is bright, what is dark</text>
+  <text class="sub" x="20" y="58">Bright = hyperintense. Dark = hypointense. Swatches are schematic, not measured signal.</text>
+
+  <!-- header -->
+  <rect x="20" y="72" width="860" height="34" rx="6" fill="#BF5700"/>
+  <text class="head" x="32" y="94">Sequence</text>
+  <text class="head" x="192" y="94">Fat</text>
+  <text class="head" x="272" y="94">Water / CSF</text>
+  <text class="head" x="378" y="94">What lights up</text>
+  <text class="head" x="652" y="94">Use it for</text>
+
+  <!-- rows: y starts 110, height 64 -->
+  <!-- T1 -->
+  <rect class="row-a" x="20" y="110" width="860" height="64"/>
+  <text class="seq" x="32" y="138">T1</text><text class="seq-sub" x="32" y="156">anatomy</text>
+  <rect class="sw" x="186" y="122" width="56" height="40" rx="4" fill="#F5F5F5"/>
+  <rect class="sw" x="282" y="122" width="56" height="40" rx="4" fill="#1C1C1C"/>
+  <text class="cell" x="378" y="138">Fat, subacute blood (methemoglobin),</text>
+  <text class="cell" x="378" y="156">gadolinium, melanin, protein</text>
+  <text class="cell" x="652" y="138">Anatomy, marrow (fat replaced</text>
+  <text class="cell" x="652" y="156">= dark), baseline before contrast</text>
+
+  <!-- T2 -->
+  <rect class="row-b" x="20" y="174" width="860" height="64"/>
+  <text class="seq" x="32" y="202">T2</text><text class="seq-sub" x="32" y="220">"T2 = H2O"</text>
+  <rect class="sw" x="186" y="186" width="56" height="40" rx="4" fill="#D9D9D9"/>
+  <rect class="sw" x="282" y="186" width="56" height="40" rx="4" fill="#FFFFFF"/>
+  <text class="cell" x="378" y="202">Water: CSF, edema, pus, cysts,</text>
+  <text class="cell" x="378" y="220">most pathology</text>
+  <text class="cell" x="652" y="202">Edema and fluid; spine canal,</text>
+  <text class="cell" x="652" y="220">cord, discs (sagittal T2)</text>
+
+  <!-- FLAIR -->
+  <rect class="row-a" x="20" y="238" width="860" height="64"/>
+  <text class="seq" x="32" y="266">FLAIR</text><text class="seq-sub" x="32" y="284">T2 with CSF darkened</text>
+  <rect class="sw" x="186" y="250" width="56" height="40" rx="4" fill="#D9D9D9"/>
+  <rect class="sw" x="282" y="250" width="56" height="40" rx="4" fill="#1C1C1C"/>
+  <text class="cell" x="378" y="266">Edema next to dark CSF; blood or pus</text>
+  <text class="cell" x="378" y="284">in sulci (SAH, meningitis); MS plaques</text>
+  <text class="cell" x="652" y="266">Edema, SAH, HSV, PRES,</text>
+  <text class="cell" x="652" y="284">demyelination, lesion age</text>
+
+  <!-- DWI -->
+  <rect class="row-b" x="20" y="302" width="860" height="64"/>
+  <text class="seq" x="32" y="330">DWI</text><text class="seq-sub" x="32" y="348">diffusion (b1000)</text>
+  <rect class="sw-na" x="186" y="314" width="56" height="40" rx="4"/><text class="na" x="207" y="339">–</text>
+  <rect class="sw" x="282" y="314" width="56" height="40" rx="4" fill="#1C1C1C"/>
+  <text class="cell-b" x="378" y="330">Restricted water = bright:</text>
+  <text class="cell" x="378" y="348">acute infarct, pus, epidermoid, lymphoma</text>
+  <text class="cell" x="652" y="330">Acute stroke (minutes), abscess.</text>
+  <text class="cell" x="652" y="348">Always check the ADC.</text>
+
+  <!-- ADC -->
+  <rect class="row-a" x="20" y="366" width="860" height="64"/>
+  <text class="seq" x="32" y="394">ADC</text><text class="seq-sub" x="32" y="412">diffusion map</text>
+  <rect class="sw-na" x="186" y="378" width="56" height="40" rx="4"/><text class="na" x="207" y="403">–</text>
+  <rect class="sw" x="282" y="378" width="56" height="40" rx="4" fill="#FFFFFF"/>
+  <text class="cell-b" x="378" y="394">True restriction = dark</text>
+  <text class="cell" x="378" y="412">(bright DWI + dark ADC)</text>
+  <text class="cell" x="652" y="394">Confirms DWI; bright ADC under a</text>
+  <text class="cell" x="652" y="412">bright DWI = T2 shine-through</text>
+
+  <!-- SWI -->
+  <rect class="row-b" x="20" y="430" width="860" height="64"/>
+  <text class="seq" x="32" y="458">SWI / GRE</text><text class="seq-sub" x="32" y="476">susceptibility</text>
+  <rect class="sw-na" x="186" y="442" width="56" height="40" rx="4"/><text class="na" x="207" y="467">–</text>
+  <rect class="sw-na" x="282" y="442" width="56" height="40" rx="4"/><text class="na" x="303" y="467">–</text>
+  <text class="cell-b" x="378" y="458">Blood and calcium = black,</text>
+  <text class="cell" x="378" y="476">"blooming" larger than the real lesion</text>
+  <text class="cell" x="652" y="458">Hemorrhage, microbleeds, DAI,</text>
+  <text class="cell" x="652" y="476">clot in a vessel or sinus</text>
+
+  <!-- STIR -->
+  <rect class="row-a" x="20" y="494" width="860" height="64"/>
+  <text class="seq" x="32" y="522">STIR / fat-sat</text><text class="seq-sub" x="32" y="540">fat switched off</text>
+  <rect class="sw" x="186" y="506" width="56" height="40" rx="4" fill="#1C1C1C"/>
+  <rect class="sw" x="282" y="506" width="56" height="40" rx="4" fill="#FFFFFF"/>
+  <text class="cell" x="378" y="522">Marrow edema, soft-tissue edema,</text>
+  <text class="cell" x="378" y="540">fluid collections</text>
+  <text class="cell" x="652" y="522">Occult fracture, osteomyelitis,</text>
+  <text class="cell" x="652" y="540">ligament injury, spine infection</text>
+
+  <!-- T1 post -->
+  <rect class="row-b" x="20" y="558" width="860" height="64"/>
+  <text class="seq" x="32" y="586">T1 + gadolinium</text><text class="seq-sub" x="32" y="604">post-contrast</text>
+  <rect class="sw" x="186" y="570" width="56" height="40" rx="4" fill="#F5F5F5"/>
+  <rect class="sw" x="282" y="570" width="56" height="40" rx="4" fill="#1C1C1C"/>
+  <text class="cell" x="378" y="586">Enhancement (leaky blood-brain barrier,</text>
+  <text class="cell" x="378" y="604">inflamed or vascular tissue) = bright</text>
+  <text class="cell" x="652" y="586">Abscess rim, tumor, meningitis,</text>
+  <text class="cell" x="652" y="604">epidural abscess, osteomyelitis</text>
+
+  <!-- MRA -->
+  <rect class="row-a" x="20" y="622" width="860" height="64"/>
+  <text class="seq" x="32" y="650">MRA / MRV</text><text class="seq-sub" x="32" y="668">time-of-flight</text>
+  <rect class="sw-na" x="186" y="634" width="56" height="40" rx="4"/><text class="na" x="207" y="659">–</text>
+  <rect class="sw" x="282" y="634" width="56" height="40" rx="4" fill="#1C1C1C"/>
+  <text class="cell" x="378" y="650">Flowing blood = bright; still tissue dark.</text>
+  <text class="cell" x="378" y="668">Missing vessel = occlusion or slow flow</text>
+  <text class="cell" x="652" y="650">Occlusion, stenosis, aneurysm,</text>
+  <text class="cell" x="652" y="668">dissection, venous sinus clot</text>
+
+  <line class="grid" x1="176" y1="110" x2="176" y2="686"/>
+  <line class="grid" x1="262" y1="110" x2="262" y2="686"/>
+  <line class="grid" x1="364" y1="110" x2="364" y2="686"/>
+  <line class="grid" x1="640" y1="110" x2="640" y2="686"/>
+  <rect x="20" y="110" width="860" height="576" fill="none" stroke="#E6D9CC"/>
+</svg>

@@ -29348,6 +29348,209 @@ const HS_STOP = {
         { num: 4, text: 'O\'Malley GF, Dominici P, Giraldo P, et al. Routine packing of simple cutaneous abscesses is painful and probably unnecessary. Acad Emerg Med. 2009;16(5):470-473.' },
     ],
 };
+// -------------------------------------------------------------------
+// MRI for Dummies
+// -------------------------------------------------------------------
+const MRI_SUMMARY = {
+    id: 'mri-summary',
+    title: 'MRI for Dummies — Steps Summary',
+    subtitle: 'What to order · How to read it · Seeing blood',
+    sections: [
+        {
+            body: 'The whole consult on one screen. Tap any step to jump to it.',
+        },
+        {
+            heading: '1. Before You Order',
+            body: '• [Unstable or bleed screen = CT first; stable + brainstem, cord, marrow, infection question = MRI](#/node/mri-vs-ct)\n• [Run the safety screen before Zone IV](#/node/mri-safety)\n• [Devices, orbital metal, implants](#/node/mri-safety-device)\n• [Pregnancy: non-contrast MRI is fine; avoid gadolinium](#/node/mri-preg)\n• [Claustrophobia and the critically ill](#/node/mri-sedation)\n• [Group II gadolinium can be given at any eGFR when needed](#/node/mri-gad)',
+        },
+        {
+            heading: '2. What to Order',
+            body: '• [Protocol picker — region, emergency, exact order](#/node/mri-protocol)\n• [Stroke/TIA: MRI brain without + MRA head and neck](#/node/mri-ord-stroke)\n• [Dizzy: thin posterior fossa DWI — central HINTS outranks a negative early DWI](#/node/mri-ord-avs)\n• [Cauda equina: MRI L-spine without, emergently](#/node/mri-ord-ces)\n• [Epidural abscess: whole spine with and without](#/node/mri-ord-sea)',
+        },
+        {
+            heading: '3. The Sequences',
+            body: '• [T1 = fat bright (anatomy); T2 = water bright (pathology)](#/node/mri-seq-overview)\n• [DWI bright + ADC dark = true restriction](#/node/mri-seq-dwi)\n• [SWI/GRE: blood black and blooming](#/node/mri-seq-swi)\n• [T1 post-contrast: ring patterns](#/node/mri-seq-t1post)',
+        },
+        {
+            heading: '4. Seeing Blood',
+            body: '• [SWI most sensitive, FLAIR for SAH, CT still first](#/node/mri-blood)\n• [It Be, Iddy Biddy, Baby Doody](#/node/mri-blood-age)',
+        },
+        {
+            heading: '5. How to Read It',
+            body: '• [Step 0: right patient, right sequence label](#/node/mri-read-start)\n• [Brain: DWI/ADC → FLAIR/T2 → SWI → T1 post](#/node/mri-read-brain)\n• [Spine: sagittal T2 → STIR → axial T2 → T1](#/node/mri-read-spine)\n• [Traps: motion, shine-through, partial volume, flow, metal](#/node/mri-read-traps)',
+        },
+        {
+            heading: '6. Pattern Gallery',
+            body: '• [Stroke, abscess, HSV, PRES, CVST, epidural abscess, cord compression](#/node/mri-gallery)',
+        },
+        {
+            heading: '7. Pitfalls & Disposition',
+            body: '• [Your read is not the final read; how to talk to radiology](#/node/mri-pitfalls)\n• [When a negative MRI does not clear the patient](#/node/mri-negative)\n• [Disposition by finding](#/node/mri-dispo)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACR Appropriateness Criteria. American College of Radiology. https://acsearch.acr.org/list' },
+    ],
+};
+const MRI_SEQUENCE_CHEATSHEET = {
+    id: 'mri-sequence-cheatsheet',
+    title: 'MRI Sequence Cheat Sheet',
+    subtitle: 'What is bright, what is dark, what it is for',
+    image: { src: 'images/mri/mri-sequence-cheatsheet.svg', alt: 'Table of nine MRI sequences with grey swatches showing how fat and water look on each', caption: 'Swatches are schematic. Original diagram, myMedKitt.' },
+    sections: [
+        {
+            body: 'Bright = hyperintense. Dark = hypointense. Iso = same as normal brain. Two anchors: **T1 = fat bright**, **T2 = H2O bright**.',
+        },
+        {
+            heading: 'Bright and dark by sequence',
+            body: '',
+            comparisonTable: {
+                columns: [
+                    { key: 'seq', label: 'Sequence' },
+                    { key: 'bright', label: 'Bright' },
+                    { key: 'dark', label: 'Dark' },
+                    { key: 'use', label: 'Use it for' },
+                ],
+                rows: [
+                    { cells: { seq: 'T1', bright: 'Fat, subacute blood, gadolinium, melanin, protein', dark: 'CSF, water, edema', use: 'Anatomy, marrow, pre-contrast baseline' } },
+                    { cells: { seq: 'T2', bright: 'CSF, edema, pus, cysts; fat fairly bright', dark: 'Flow voids, hemosiderin, calcium, cortical bone', use: 'Edema, fluid, spine canal' } },
+                    { cells: { seq: 'FLAIR', bright: 'Edema, sulcal blood or pus, MS plaques', dark: 'Normal CSF', use: 'Edema, SAH, HSV, PRES, stroke timing' } },
+                    { cells: { seq: 'DWI', bright: 'Restricted water: acute infarct, pus, epidermoid, lymphoma', dark: 'CSF', use: 'Acute stroke, abscess' } },
+                    { cells: { seq: 'ADC', bright: 'CSF, vasogenic edema, shine-through', dark: 'True restriction', use: 'Confirming DWI' } },
+                    { cells: { seq: 'SWI / GRE', bright: '—', dark: 'Blood, calcium, iron (blooming)', use: 'Hemorrhage, microbleeds, clot' } },
+                    { cells: { seq: 'STIR / fat-sat', bright: 'Marrow and soft-tissue edema, fluid', dark: 'Fat', use: 'Occult fracture, osteomyelitis, spine infection' } },
+                    { cells: { seq: 'T1 + gadolinium', bright: 'Enhancing tissue', dark: 'CSF', use: 'Abscess rim, tumor, meningitis' } },
+                    { cells: { seq: 'MRA / MRV (TOF)', bright: 'Flowing blood', dark: 'Still tissue', use: 'Occlusion, stenosis, dissection, sinus clot' } },
+                ],
+            },
+        },
+        {
+            heading: 'DWI vs ADC',
+            image: { src: 'images/mri/mri-dwi-adc-true-vs-shine-through.svg', alt: 'Schematic comparing true restriction with T2 shine-through', caption: 'Original diagram, myMedKitt.' },
+            body: '**Bright DWI + dark ADC** = true restriction (acute infarct, pus). **Bright DWI + bright ADC** = T2 shine-through (not acute). [Open the DWI card](#/node/mri-seq-dwi).',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Schaefer PW, Grant PE, Gonzalez RG. Diffusion-weighted MR imaging of the brain. Radiology. 2000;217(2):331-345.' },
+    ],
+};
+const MRI_GADOLINIUM_EGFR = {
+    id: 'mri-gadolinium-egfr',
+    title: 'Gadolinium & the Kidneys',
+    subtitle: 'Group II agents, eGFR, dialysis, reactions, retention',
+    sections: [
+        {
+            heading: 'The short version',
+            body: 'Modern **group II** agents carry a risk of nephrogenic systemic fibrosis (NSF) so low that the ACR and National Kidney Foundation (2021) say a clinically needed scan should **not be withheld** because of kidney function — including eGFR <30, AKI, and dialysis. [1,2]',
+        },
+        {
+            heading: 'ACR groups',
+            body: '',
+            comparisonTable: {
+                columns: [
+                    { key: 'group', label: 'ACR group' },
+                    { key: 'agents', label: 'Examples' },
+                    { key: 'risk', label: 'NSF risk / use in eGFR <30' },
+                ],
+                rows: [
+                    { cells: { group: 'Group I', agents: 'Older linear agents (gadodiamide, gadopentetate, gadoversetamide)', risk: 'Highest — most NSF cases; avoid in AKI or eGFR <30' } },
+                    { cells: { group: 'Group II', agents: '[Gadobutrol](#/drug/gadobutrol/mri contrast), [Gadoterate](#/drug/gadoterate/mri contrast), gadoteridol, gadobenate', risk: 'Very low — eGFR screening optional; do not withhold a needed scan' } },
+                    { cells: { group: 'Group III', agents: 'Liver-specific agent (gadoxetate)', risk: 'Limited data; radiology decides' } },
+                ],
+            },
+        },
+        {
+            heading: 'Dialysis and AKI',
+            body: '• **Hemodialysis patients:** when practical, time the scan shortly before a scheduled dialysis session; otherwise dialyze on the usual schedule. Do not start or change dialysis because of the gadolinium dose. [2]\n• **AKI or eGFR <30:** use a group II agent; do not withhold or delay a needed scan. [2]',
+        },
+        {
+            heading: 'Prior reaction',
+            body: 'Reactions are uncommon. A prior reaction to a gadolinium agent → radiology chooses a different agent and decides on premedication per its contrast-reaction protocol. [1]',
+        },
+        {
+            heading: 'Retention',
+            body: 'Small amounts of gadolinium stay in the brain, bone, and skin after exposure (FDA class warning, December 2017). No harm has been proven, and macrocyclic agents retain less — but give contrast only when it adds diagnostic value. [1]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACR Committee on Drugs and Contrast Media. ACR Manual on Contrast Media. American College of Radiology; 2024.' },
+        { num: 2, text: 'Weinreb JC, Rodby RA, Yee J, et al. Use of intravenous gadolinium-based contrast media in patients with kidney disease: consensus statements from the American College of Radiology and the National Kidney Foundation. Radiology. 2021;298(1):28-35.' },
+    ],
+};
+const MRI_PREGNANCY = {
+    id: 'mri-pregnancy',
+    title: 'Pregnancy & MRI',
+    subtitle: 'Non-contrast MRI is safe; gadolinium only if it changes management',
+    sections: [
+        {
+            heading: 'MRI without contrast',
+            body: 'Safe in **any trimester** — no ionizing radiation and no reported harmful fetal effects. It is the preferred cross-sectional test after ultrasound (appendicitis, other abdominal pain) and should not be delayed or withheld because of pregnancy. [1,2]',
+        },
+        {
+            heading: 'Gadolinium',
+            body: 'Crosses the placenta. In a population study of over 1.4 million births (Ray 2016), **first-trimester MRI without gadolinium** showed no significant increase in stillbirth or neonatal death, anomalies, cancer, or vision or hearing loss; **gadolinium at any point in pregnancy** was associated with more rheumatologic, inflammatory, or infiltrative skin conditions (adjusted HR 1.36) and with stillbirth or neonatal death (adjusted RR 3.70, based on few events). Use it only when it will clearly change management, after discussion with radiology. [1,2]',
+        },
+        {
+            heading: 'Breastfeeding',
+            body: 'Very little gadolinium reaches the infant. **Breastfeeding should not be interrupted** after gadolinium (ACOG); a mother who still prefers to can pump and discard for 12–24 h (ACR). [1,3]',
+        },
+        {
+            heading: 'Practical steps',
+            body: '• Tell radiology the gestational age\n• Document the indication and the discussion with the patient\n• Order the specific protocol without gadolinium unless the radiologist advises otherwise\n• [Appendicitis in pregnancy order card](#/node/mri-ord-appy-preg)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'ACOG Committee Opinion No. 723: Guidelines for diagnostic imaging during pregnancy and lactation. Obstet Gynecol. 2017;130(4):e210-e216.' },
+        { num: 2, text: 'Ray JG, Vermeulen MJ, Bharatha A, Montanera WJ, Park AL. Association between MRI exposure during pregnancy and fetal and childhood outcomes. JAMA. 2016;316(9):952-961.' },
+        { num: 3, text: 'ACR Committee on Drugs and Contrast Media. ACR Manual on Contrast Media. American College of Radiology; 2024.' },
+    ],
+};
+const MRI_FOR_DUMMIES_STOP = {
+    id: 'mri-for-dummies-stop',
+    title: 'MRI for Dummies — Do NOT',
+    subtitle: 'Critical pitfalls to avoid',
+    sections: [
+        {
+            heading: '🛑 Do NOT send an unstable patient to MRI',
+            body: 'You cannot resuscitate in Zone IV, and scans take 15–60 minutes. Stabilize, or use CT. [CT or MRI?](#/node/mri-vs-ct)',
+        },
+        {
+            heading: '🛑 Do NOT let MRI delay a stroke treatment decision',
+            body: 'In a stroke code, non-contrast CT ± CTA is the default unless your center runs a rapid MRI pathway. [Stroke order card](#/node/mri-ord-stroke)',
+        },
+        {
+            heading: '🛑 Do NOT send a patient into Zone IV without a completed screen',
+            body: 'Unknown device, unknown implant, or possible orbital metal = not cleared. Oxygen tanks, IV poles and monitors become projectiles. [Safety screen](#/node/mri-safety)',
+        },
+        {
+            heading: '🛑 Do NOT be reassured by a negative early DWI in a dizzy patient with a central exam',
+            body: 'Early DWI misses up to half of small brainstem strokes in the first 48 hours. The exam wins. [Posterior stroke order card](#/node/mri-ord-avs)',
+        },
+        {
+            heading: '🛑 Do NOT wait for MRI to start acyclovir',
+            body: 'Suspected HSV encephalitis gets acyclovir immediately; early MRI can be normal. [HSV order card](#/node/mri-ord-hsv)',
+        },
+        {
+            heading: '🛑 Do NOT delay surgery for MRI in suspected necrotizing infection',
+            body: 'Pain out of proportion, rapid spread, gas, or shock goes to the operating room. [Infection order card](#/node/mri-ord-osteo)',
+        },
+        {
+            heading: '🛑 Do NOT order an MRI brain alone for dissection or CVST',
+            body: 'The brain images do not show the neck vessels or venous sinuses. Add MRA with T1 fat-sat, or MRV. [When a negative MRI does not clear](#/node/mri-negative)',
+        },
+        {
+            heading: '🛑 Do NOT withhold a needed contrast MRI for low eGFR',
+            body: 'Group II gadolinium agents can be given at any eGFR, including dialysis, when the scan is needed. [Contrast and the kidneys](#/node/mri-gad)',
+        },
+        {
+            heading: '🛑 Do NOT discharge on your own read',
+            body: 'Act on your read; discharge on the radiologist\'s. [Your read is not the final read](#/node/mri-pitfalls)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Pedrosa I, Altman DA, Dillman JR, Hoff MN, et al. American College of Radiology Manual on MR Safety: 2024 Update and Revisions. Radiology. 2025;315(1):e241405.' },
+    ],
+};
 export const INFO_PAGES = {
     'asystole-steps': {
         "id": "asystole-steps",
@@ -29940,6 +30143,11 @@ export const INFO_PAGES = {
     'electrocution-summary': ELECTROCUTION_SUMMARY,
     'electrocution-peds-cord-bite': ELECTROCUTION_PEDS_CORD_BITE,
     'electrocution-stop': ELECTROCUTION_STOP,
+    'mri-summary': MRI_SUMMARY,
+    'mri-sequence-cheatsheet': MRI_SEQUENCE_CHEATSHEET,
+    'mri-gadolinium-egfr': MRI_GADOLINIUM_EGFR,
+    'mri-pregnancy': MRI_PREGNANCY,
+    'mri-for-dummies-stop': MRI_FOR_DUMMIES_STOP,
     // Hidradenitis Suppurativa
     'hs-summary': HS_SUMMARY,
     'hs-procedure-guide': HS_PROCEDURE_GUIDE,

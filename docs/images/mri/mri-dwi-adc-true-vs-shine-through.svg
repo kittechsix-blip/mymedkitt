@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="900" height="440" role="img" aria-labelledby="title desc">
+  <title id="title">DWI and ADC: True Restriction Versus T2 Shine-Through</title>
+  <desc id="desc">Two schematic panels. Left, true restriction: the lesion is bright on DWI and dark on the ADC map, meaning water truly cannot move, as in acute infarct or pus. Right, T2 shine-through: the lesion is bright on DWI but also bright on ADC, meaning the DWI brightness is carried over from T2 signal and is not acute restriction, as in an old infarct or vasogenic edema.</desc>
+  <style>
+    .bg { fill: #FFF8F2; }
+    .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .panel-title { font: 700 17px system-ui, -apple-system, sans-serif; }
+    .lbl { font: 700 14px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .cap { font: 400 13px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .cap-b { font: 700 13px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .card { fill: #FFFFFF; stroke: #E6D9CC; stroke-width: 1.2; }
+    .skull { fill: #2B2B2B; stroke: #8A8A8A; stroke-width: 3; }
+    .ventricle-dwi { fill: #151515; }
+    .ventricle-adc { fill: #EDEDED; }
+    .arrow { stroke: #BF5700; stroke-width: 2.4; fill: none; marker-end: url(#ah); }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#BF5700"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="900" height="440"/>
+  <text class="title" x="20" y="36">Is the bright spot on DWI real? Check the ADC.</text>
+
+  <!-- LEFT PANEL: true restriction -->
+  <rect class="card" x="20" y="54" width="420" height="370" rx="12"/>
+  <text class="panel-title" x="40" y="84" fill="#B22222">TRUE RESTRICTION</text>
+  <!-- DWI brain -->
+  <text class="lbl" x="88" y="112">DWI</text>
+  <ellipse class="skull" cx="105" cy="200" rx="72" ry="84"/>
+  <ellipse fill="#5E5E5E" cx="105" cy="200" rx="62" ry="74"/>
+  <path class="ventricle-dwi" d="M92 172 q-12 28 0 56 q13 -6 13 -28 q0 -22 -13 -28z M118 172 q12 28 0 56 q-13 -6 -13 -28 q0 -22 13 -28z"/>
+  <ellipse fill="#FFFFFF" cx="68" cy="214" rx="18" ry="22"/>
+  <!-- ADC brain -->
+  <text class="lbl" x="296" y="112">ADC</text>
+  <ellipse class="skull" cx="315" cy="200" rx="72" ry="84"/>
+  <ellipse fill="#9A9A9A" cx="315" cy="200" rx="62" ry="74"/>
+  <path class="ventricle-adc" d="M302 172 q-12 28 0 56 q13 -6 13 -28 q0 -22 -13 -28z M328 172 q12 28 0 56 q-13 -6 -13 -28 q0 -22 13 -28z"/>
+  <ellipse fill="#1A1A1A" cx="278" cy="214" rx="18" ry="22"/>
+  <path class="arrow" d="M190 200 L222 200"/>
+  <text class="cap-b" x="40" y="320">Bright on DWI + DARK on ADC</text>
+  <text class="cap" x="40" y="342">Water is truly stuck. It is real.</text>
+  <text class="cap" x="40" y="364">Acute infarct (minutes to ~7–10 days),</text>
+  <text class="cap" x="40" y="386">abscess pus, epidermoid, lymphoma,</text>
+  <text class="cap" x="40" y="408">HSV encephalitis, CJD.</text>
+
+  <!-- RIGHT PANEL: shine-through -->
+  <rect class="card" x="460" y="54" width="420" height="370" rx="12"/>
+  <text class="panel-title" x="480" y="84" fill="#BF5700">T2 SHINE-THROUGH</text>
+  <text class="lbl" x="528" y="112">DWI</text>
+  <ellipse class="skull" cx="545" cy="200" rx="72" ry="84"/>
+  <ellipse fill="#5E5E5E" cx="545" cy="200" rx="62" ry="74"/>
+  <path class="ventricle-dwi" d="M532 172 q-12 28 0 56 q13 -6 13 -28 q0 -22 -13 -28z M558 172 q12 28 0 56 q-13 -6 -13 -28 q0 -22 13 -28z"/>
+  <ellipse fill="#E8E8E8" cx="508" cy="214" rx="18" ry="22"/>
+  <text class="lbl" x="736" y="112">ADC</text>
+  <ellipse class="skull" cx="755" cy="200" rx="72" ry="84"/>
+  <ellipse fill="#9A9A9A" cx="755" cy="200" rx="62" ry="74"/>
+  <path class="ventricle-adc" d="M742 172 q-12 28 0 56 q13 -6 13 -28 q0 -22 -13 -28z M768 172 q12 28 0 56 q-13 -6 -13 -28 q0 -22 13 -28z"/>
+  <ellipse fill="#F2F2F2" cx="718" cy="214" rx="18" ry="22"/>
+  <path class="arrow" d="M630 200 L662 200"/>
+  <text class="cap-b" x="480" y="320">Bright on DWI + BRIGHT (or same) on ADC</text>
+  <text class="cap" x="480" y="342">The T2 brightness is "shining through."</text>
+  <text class="cap" x="480" y="364">Not acute restriction: old infarct,</text>
+  <text class="cap" x="480" y="386">vasogenic edema, gliosis.</text>
+  <text class="cap" x="480" y="408">Schematic diagram, not a real scan.</text>
+</svg>

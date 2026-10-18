@@ -44276,6 +44276,151 @@ const LIGHTNING_EXAM_CHECKLIST_CALCULATOR = {
     },
 };
 // -------------------------------------------------------------------
+// MRI for Dummies — Safety Checklist
+// -------------------------------------------------------------------
+const MRI_SAFETY_CHECKLIST_CALCULATOR = {
+    id: 'mri-safety-checklist',
+    title: 'MRI Safety Checklist',
+    subtitle: 'Go / Needs Radiology Clearance / Not Safe',
+    description: 'Toggle everything the screening turned up. The output is a bedside triage of the screen — the radiologist or MR safety officer always makes the final call. Unknown = not cleared.',
+    fields: [
+        { name: 'orbit-fb', label: 'Possible metal in the eye', type: 'toggle', points: 0, description: 'Grinding, welding, metalwork, blast — orbit X-ray or CT first' },
+        { name: 'unstable', label: 'Unstable, or no plan to monitor and resuscitate outside Zone IV', type: 'toggle', points: 0, description: 'Needs constant hands-on care, no MR-conditional ventilator/pumps/monitor' },
+        { name: 'cied-legacy', label: 'Pacemaker / ICD — not MR-conditional, unknown, abandoned or epicardial leads', type: 'toggle', points: 0 },
+        { name: 'cied-conditional', label: 'Pacemaker / ICD — confirmed MR-conditional system', type: 'toggle', points: 0, description: 'Generator and leads conditional as a set' },
+        { name: 'implant', label: 'Other implant of unknown or MR-unsafe type', type: 'toggle', points: 0, description: 'Aneurysm clip, cochlear implant, neurostimulator, programmable shunt, implanted pump' },
+        { name: 'bullet', label: 'Bullet or shrapnel', type: 'toggle', points: 0, description: 'Near eye, cord, or major vessel matters most' },
+        { name: 'screen-incomplete', label: 'Screening cannot be completed', type: 'toggle', points: 0, description: 'Unresponsive, no history, no family — radiology screening protocol' },
+        { name: 'external-device', label: 'Insulin pump, glucose sensor, medication patch with metal, or other removable device', type: 'toggle', points: 0 },
+        { name: 'pregnant', label: 'Pregnant or possibly pregnant', type: 'toggle', points: 0 },
+        { name: 'gad-planned', label: 'Gadolinium contrast planned', type: 'toggle', points: 0 },
+        { name: 'renal', label: 'eGFR <30, AKI, or dialysis', type: 'toggle', points: 0 },
+        { name: 'gad-reaction', label: 'Prior reaction to gadolinium', type: 'toggle', points: 0 },
+        { name: 'claustro', label: 'Claustrophobic or cannot lie still', type: 'toggle', points: 0 },
+    ],
+    results: [],
+    thresholdNote: 'Bedside triage only. Every patient still completes the department\'s written MRI screening form; the radiologist or MR safety officer makes the final decision.',
+    citations: [
+        'Indik JH, Gimbel JR, Abe H, et al. 2017 HRS expert consensus statement on magnetic resonance imaging and radiation exposure in patients with cardiovascular implantable electronic devices. Heart Rhythm. 2017;14(7):e97-e153.',
+        'Pedrosa I, Altman DA, Dillman JR, Hoff MN, et al. American College of Radiology Manual on MR Safety: 2024 Update and Revisions. Radiology. 2025;315(1):e241405.',
+        'Weinreb JC, Rodby RA, Yee J, et al. Use of intravenous gadolinium-based contrast media in patients with kidney disease: consensus statements from the American College of Radiology and the National Kidney Foundation. Radiology. 2021;298(1):28-35.',
+        'ACOG Committee Opinion No. 723: Guidelines for diagnostic imaging during pregnancy and lactation. Obstet Gynecol. 2017;130(4):e210-e216.',
+    ],
+    computeResult: (values) => {
+        const v = (k) => (values[k] || 0) > 0;
+        const stop = [];
+        const clear = [];
+        const notes = [];
+        if (v('orbit-fb'))
+            stop.push('Possible orbital metal — **orbit X-ray or CT must clear it first**; a moving fragment can blind the patient');
+        if (v('unstable'))
+            stop.push('Unstable or no monitoring/resuscitation plan — **you cannot run a code in Zone IV**; stabilize or use CT');
+        if (v('cied-legacy'))
+            clear.push('Non-conditional or unknown cardiac device — EP + radiology decision; scan only under a formal protocol (HRS 2017)');
+        if (v('cied-conditional'))
+            clear.push('MR-conditional cardiac device — device reprogramming before, monitoring during, check after');
+        if (v('implant'))
+            clear.push('Implant — identify exact make and model and its MR conditions');
+        if (v('bullet'))
+            clear.push('Bullet or shrapnel — radiology decides based on location');
+        if (v('screen-incomplete'))
+            clear.push('Incomplete screen — radiology screening protocol (scar check, X-ray screening)');
+        if (v('gad-reaction') && v('gad-planned'))
+            clear.push('Prior gadolinium reaction — radiology chooses agent and premedication');
+        if (v('pregnant') && v('gad-planned'))
+            clear.push('Gadolinium in pregnancy — only if it will clearly change management; document the discussion');
+        if (v('external-device'))
+            notes.push('Remove pumps, sensors, and patches with metal before entering Zone IV (bring a replacement plan for the pump)');
+        if (v('pregnant') && !v('gad-planned'))
+            notes.push('Pregnancy: non-contrast MRI is safe in any trimester — tell radiology the gestational age');
+        if (v('renal') && v('gad-planned'))
+            notes.push('eGFR <30 / AKI / dialysis: use a **group II** agent; do not withhold a needed scan. Hemodialysis: scan shortly before a scheduled session when practical; do not start or change dialysis for the dose');
+        if (v('claustro'))
+            notes.push('Claustrophobia: non-drug steps, shortest protocol, then [Lorazepam](#/drug/lorazepam/mri anxiolysis) PO or [Midazolam](#/drug/midazolam/mri anxiolysis) IV with MR-conditional monitoring');
+        let value;
+        let label;
+        let colorVar;
+        if (stop.length) {
+            value = 'NOT SAFE NOW';
+            label = `${stop.length} hard stop${stop.length > 1 ? 's' : ''}`;
+            colorVar = '--color-danger';
+        }
+        else if (clear.length) {
+            value = 'NEEDS RADIOLOGY CLEARANCE';
+            label = `${clear.length} item${clear.length > 1 ? 's' : ''} to clear`;
+            colorVar = '--color-warning';
+        }
+        else {
+            value = 'GO';
+            label = 'No barriers on this screen';
+            colorVar = '--color-primary';
+        }
+        let description = '';
+        if (stop.length)
+            description += `**HARD STOPS:**\n${stop.map(s => '• ' + s).join('\n')}\n\n`;
+        if (clear.length)
+            description += `**NEEDS CLEARANCE:**\n${clear.map(s => '• ' + s).join('\n')}\n\n`;
+        if (notes.length)
+            description += `**BEFORE THE SCAN:**\n${notes.map(s => '• ' + s).join('\n')}\n\n`;
+        if (!stop.length && !clear.length)
+            description += '**NEXT:** complete the written screening form, remove all metal, and send the patient with the order card from the consult.\n\n';
+        description += '**REMEMBER:** unknown = not cleared. The magnet is always on.';
+        return { value, label, description, colorVar };
+    },
+};
+// -------------------------------------------------------------------
+// MRI for Dummies — Age of Blood on MRI
+// -------------------------------------------------------------------
+const MRI_BLOOD_AGE_TABLE = '**THE TABLE (parenchymal blood):**\n• Hyperacute, <24 h — oxyhemoglobin — T1 iso, T2 bright ("It Be")\n• Acute, 1–3 days — deoxyhemoglobin — T1 iso, T2 dark ("Iddy")\n• Early subacute, 3–7 days — intracellular methemoglobin — T1 bright, T2 dark ("Biddy")\n• Late subacute, 1–4 weeks — extracellular methemoglobin — T1 bright, T2 bright ("Baby")\n• Chronic, weeks to years — hemosiderin — T1 dark, T2 dark ("Doody")';
+const MRI_BLOOD_AGE_CALCULATOR = {
+    id: 'mri-blood-age',
+    title: 'Blood Age on MRI',
+    subtitle: 'T1 + T2 signal → likely age of a hematoma',
+    description: 'Pick the signal of the hematoma compared with normal brain on T1 and on T2. Mnemonic: "It Be, Iddy Biddy, Baby Doody" — T1 letter first, then T2; I = iso, B = bright, D = dark.',
+    fields: [
+        { name: 't1', label: 'T1 signal of the hematoma', type: 'select', points: 0, hideOptionPoints: true, selectOptions: [
+                { label: 'Select…', points: 0 },
+                { label: 'Iso (same as brain) or slightly dark', points: 1 },
+                { label: 'Bright', points: 2 },
+                { label: 'Dark', points: 3 },
+            ] },
+        { name: 't2', label: 'T2 signal of the hematoma', type: 'select', points: 0, hideOptionPoints: true, selectOptions: [
+                { label: 'Select…', points: 0 },
+                { label: 'Iso (same as brain)', points: 1 },
+                { label: 'Bright', points: 2 },
+                { label: 'Dark', points: 3 },
+            ] },
+    ],
+    results: [],
+    thresholdNote: 'Estimates only: stages overlap, and clot size, field strength, and oxygenation shift the timing. Subarachnoid and subdural blood do not follow this table well. Non-contrast CT remains the first test for acute hemorrhage in the ED.',
+    citations: [
+        'Bradley WG Jr. MR appearance of hemorrhage in the brain. Radiology. 1993;189(1):15-26.',
+    ],
+    computeResult: (values) => {
+        const t1 = values['t1'] || 0;
+        const t2 = values['t2'] || 0;
+        if (!t1 || !t2) {
+            return { value: '—', label: 'Pick T1 and T2', description: MRI_BLOOD_AGE_TABLE, colorVar: '--color-text-secondary' };
+        }
+        const key = `${t1}${t2}`;
+        const stages = {
+            '12': { value: 'HYPERACUTE', label: '< 24 hours', detail: '**PRODUCT:** oxyhemoglobin inside intact red cells\n\n**MNEMONIC:** "It Be" — T1 iso, T2 bright\n\n**NOTE:** a hyperacute bleed can look like any other T2-bright lesion — SWI/GRE (dark rim) and CT confirm it is blood.' },
+            '13': { value: 'ACUTE', label: '1–3 days', detail: '**PRODUCT:** deoxyhemoglobin inside intact red cells\n\n**MNEMONIC:** "Iddy" — T1 iso to slightly dark, T2 dark' },
+            '23': { value: 'EARLY SUBACUTE', label: '3–7 days', detail: '**PRODUCT:** methemoglobin inside red cells\n\n**MNEMONIC:** "Biddy" — T1 bright, T2 dark\n\n**NOTE:** T1 brightness starts at the edge of the clot and moves inward.' },
+            '22': { value: 'LATE SUBACUTE', label: '1–4 weeks', detail: '**PRODUCT:** methemoglobin released from burst red cells\n\n**MNEMONIC:** "Baby" — T1 bright, T2 bright' },
+            '33': { value: 'CHRONIC', label: 'Weeks to years', detail: '**PRODUCT:** hemosiderin and ferritin (often a dark rim around a fluid cavity)\n\n**MNEMONIC:** "Doody" — T1 dark, T2 dark\n\n**NOTE:** acute blood (deoxyhemoglobin) can also be T1 slightly dark and T2 dark — if the history fits an acute event, read it as acute and compare with CT.' },
+        };
+        const hit = stages[key];
+        if (hit) {
+            return { value: hit.value, label: hit.label, description: `${hit.detail}\n\n${MRI_BLOOD_AGE_TABLE}`, colorVar: '--color-primary' };
+        }
+        let why = 'This combination does not match a standard stage of parenchymal blood.';
+        if (key === '32')
+            why = 'T1 dark + T2 bright is the pattern of **water** (edema, CSF, cyst), not a typical blood stage. Check SWI/GRE: if it is not dark there, it is probably not blood.';
+        return { value: 'NO MATCH', label: 'Not a typical blood pattern', description: `**WHY:** ${why}\n\n${MRI_BLOOD_AGE_TABLE}`, colorVar: '--color-warning' };
+    },
+};
+// -------------------------------------------------------------------
 // Hidradenitis Suppurativa — Hurley Stage
 // -------------------------------------------------------------------
 const HS_HURLEY_CALCULATOR = {
@@ -44541,6 +44686,9 @@ const CALCULATORS = {
     // Electrocution & Lightning
     'electrical-monitoring-criteria': ELECTRICAL_MONITORING_CRITERIA_CALCULATOR,
     'lightning-exam-checklist': LIGHTNING_EXAM_CHECKLIST_CALCULATOR,
+    // MRI for Dummies
+    'mri-safety-checklist': MRI_SAFETY_CHECKLIST_CALCULATOR,
+    'mri-blood-age': MRI_BLOOD_AGE_CALCULATOR,
     // Hidradenitis Suppurativa
     'hs-hurley': HS_HURLEY_CALCULATOR,
     'hs-ihs4': HS_IHS4_CALCULATOR,

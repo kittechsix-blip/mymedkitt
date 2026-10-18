@@ -7986,7 +7986,7 @@ const MIDAZOLAM: DrugEntry = {
   genericName: 'Midazolam hydrochloride',
   drugClass: 'Benzodiazepine (short-acting)',
   route: 'IV/IN/IM',
-  indications: ['Burns anxiolysis', 'Procedural sedation adjunct', 'Seizures', 'Status epilepticus', 'Refractory SE', 'Acute agitation / delirium', 'TCA overdose seizure'],
+  indications: ['Burns anxiolysis', 'Procedural sedation adjunct', 'Seizures', 'Status epilepticus', 'Refractory SE', 'Acute agitation / delirium', 'TCA overdose seizure', 'MRI anxiolysis / claustrophobia'],
   dosing: [
     {
       indication: 'TCA Overdose — Seizure (no IV access)',
@@ -8017,6 +8017,10 @@ const MIDAZOLAM: DrugEntry = {
       indication: 'Acute agitation / delirium',
       regimen: '2.5-5 mg IM (onset 5 min) or 2.5 mg IV push. May repeat q5-10 min to effect. Preferred for intoxication/withdrawal-related agitation. For excited delirium: 5 mg IM, repeat as needed. DO NOT combine with IM/IV olanzapine (respiratory depression risk).',
       weightCalc: { dosePerKg: 0.05, unit: 'mg', maxDose: 5 },
+    },
+    {
+      indication: 'MRI anxiolysis / claustrophobia',
+      regimen: '0.5–1 mg IV just before the scan; repeat 0.5–1 mg every 2–3 min to effect (usual total 1–2.5 mg; age ≥60 or frail: ≤1.5 mg total). Minimal sedation only — the patient must still hold still and follow breath-hold commands. MR-conditional pulse oximetry required and a nurse accompanies the patient.',
     },
     {
       indication: 'Procedural sedation — cardioversion',
@@ -8798,7 +8802,7 @@ const LORAZEPAM: DrugEntry = {
   genericName: 'Lorazepam',
   drugClass: 'Benzodiazepine (intermediate-acting)',
   route: 'IV/IM',
-  indications: ['Status epilepticus (first-line IV)', 'Seizure disorders', 'Acute agitation (intoxication/withdrawal)', 'TCA overdose seizure', 'Alcohol withdrawal (severe cirrhosis)'],
+  indications: ['Status epilepticus (first-line IV)', 'Seizure disorders', 'Acute agitation (intoxication/withdrawal)', 'TCA overdose seizure', 'Alcohol withdrawal (severe cirrhosis)', 'MRI anxiolysis / claustrophobia'],
   dosing: [
     {
       indication: 'TCA Overdose — Seizure',
@@ -8822,6 +8826,10 @@ const LORAZEPAM: DrugEntry = {
     {
       indication: 'Alcohol Withdrawal — Severe cirrhosis',
       regimen: '2-4 mg IV q15-20 min when CIWA-Ar ≥8. Preferred over diazepam in severe liver disease — shorter half-life, no active metabolites, less risk of accumulation. High doses may cause propylene glycol toxicity — monitor osmol gap, consider switching to diazepam or phenobarbital if cumulative dose is high.',
+    },
+    {
+      indication: 'MRI anxiolysis / claustrophobia',
+      regimen: '0.5–1 mg PO 30–60 min before the scan (or 0.5–1 mg IV just before). Age ≥65 or frail: 0.5 mg. Minimal sedation only — the patient must still follow commands. Needs an escort home and no driving; MR-conditional pulse oximetry if given IV or combined with opioids.',
     },
   ],
   contraindications: [
@@ -14362,6 +14370,74 @@ const MINOCYCLINE: DrugEntry = {
   ],
 };
 
+const GADOBUTROL: DrugEntry = {
+  id: 'gadobutrol',
+  name: 'Gadobutrol (Gadavist)',
+  genericName: 'Gadobutrol',
+  drugClass: 'Gadolinium-based contrast agent — macrocyclic, nonionic (ACR group II)',
+  route: 'IV',
+  indications: ['MRI contrast — brain, spine, MRA, body, breast, cardiac'],
+  dosing: [
+    {
+      indication: 'MRI contrast — adult and pediatric (including term neonates)',
+      regimen: '0.1 mL/kg IV (= 0.1 mmol/kg; solution is 1.0 mmol/mL) as a bolus, given by the MRI team, followed by a saline flush. Contrast-enhanced MRA uses the same weight-based dose.\n\nACR group II agent: risk of nephrogenic systemic fibrosis is so low that a needed scan should not be withheld for kidney function, including eGFR <30 and dialysis (ACR–NKF 2021).',
+      weightCalc: [
+        { dosePerKg: 0.1, unit: 'mL', label: 'Volume (1.0 mmol/mL)' },
+        { dosePerKg: 0.1, unit: 'mmol', label: 'Gadolinium dose' },
+      ],
+    },
+  ],
+  contraindications: ['History of severe hypersensitivity reaction to gadobutrol'],
+  cautions: [
+    'Hypersensitivity reactions are uncommon but can be severe — prior reaction to any gadolinium agent: radiology chooses the agent and premedication',
+    'Nephrogenic systemic fibrosis: extremely rare with group II agents. Hemodialysis patients: when practical, scan shortly before a scheduled session; do not start or change dialysis because of the dose (ACR–NKF 2021)',
+    'Gadolinium retention in brain, bone, and skin (FDA 2017 class warning) — no proven harm, but give only when it adds diagnostic value',
+    'Pregnancy: crosses the placenta — use only if it will clearly change management (ACOG)',
+    'Breastfeeding does not need to be interrupted (ACR, ACOG)',
+  ],
+  monitoring: 'Observe for hypersensitivity reaction during and shortly after injection. Check the IV site for extravasation.',
+  notes: 'Ordered as part of an MRI "with contrast" protocol — the ED physician decides with/without contrast; the MRI team selects and gives the agent. See the MRI for Dummies consult order cards for which emergency MRIs need contrast.',
+  citations: [
+    'Gadavist (gadobutrol) injection. Prescribing information. Bayer HealthCare Pharmaceuticals.',
+    'ACR Committee on Drugs and Contrast Media. ACR Manual on Contrast Media. American College of Radiology; 2024.',
+    'Weinreb JC, Rodby RA, Yee J, et al. Use of intravenous gadolinium-based contrast media in patients with kidney disease: consensus statements from the American College of Radiology and the National Kidney Foundation. Radiology. 2021;298(1):28-35.',
+  ],
+};
+
+const GADOTERATE: DrugEntry = {
+  id: 'gadoterate',
+  name: 'Gadoterate meglumine (Dotarem, Clariscan)',
+  genericName: 'Gadoterate meglumine',
+  drugClass: 'Gadolinium-based contrast agent — macrocyclic, ionic (ACR group II)',
+  route: 'IV',
+  indications: ['MRI contrast — brain, spine, and associated tissues'],
+  dosing: [
+    {
+      indication: 'MRI contrast — adult and pediatric (including term neonates)',
+      regimen: '0.2 mL/kg IV (= 0.1 mmol/kg; solution is 0.5 mmol/mL) as a bolus, given by the MRI team, followed by a saline flush.\n\nACR group II agent: risk of nephrogenic systemic fibrosis is so low that a needed scan should not be withheld for kidney function, including eGFR <30 and dialysis (ACR–NKF 2021).',
+      weightCalc: [
+        { dosePerKg: 0.2, unit: 'mL', label: 'Volume (0.5 mmol/mL)' },
+        { dosePerKg: 0.1, unit: 'mmol', label: 'Gadolinium dose' },
+      ],
+    },
+  ],
+  contraindications: ['History of severe hypersensitivity reaction to gadoterate'],
+  cautions: [
+    'Hypersensitivity reactions are uncommon but can be severe — prior reaction to any gadolinium agent: radiology chooses the agent and premedication',
+    'Nephrogenic systemic fibrosis: extremely rare with group II agents. Hemodialysis patients: when practical, scan shortly before a scheduled session; do not start or change dialysis because of the dose (ACR–NKF 2021)',
+    'Gadolinium retention in brain, bone, and skin (FDA 2017 class warning) — no proven harm, but give only when it adds diagnostic value',
+    'Pregnancy: crosses the placenta — use only if it will clearly change management (ACOG)',
+    'Breastfeeding does not need to be interrupted (ACR, ACOG)',
+  ],
+  monitoring: 'Observe for hypersensitivity reaction during and shortly after injection. Check the IV site for extravasation.',
+  notes: 'Note the different concentration from gadobutrol: 0.5 mmol/mL, so the volume per kg is double for the same gadolinium dose.',
+  citations: [
+    'Dotarem (gadoterate meglumine) injection. Prescribing information. Guerbet LLC.',
+    'ACR Committee on Drugs and Contrast Media. ACR Manual on Contrast Media. American College of Radiology; 2024.',
+    'Weinreb JC, Rodby RA, Yee J, et al. Use of intravenous gadolinium-based contrast media in patients with kidney disease: consensus statements from the American College of Radiology and the National Kidney Foundation. Radiology. 2021;298(1):28-35.',
+  ],
+};
+
 export const ALL_DRUGS: DrugEntry[] = [
   ACAMPROSATE,
   ACETAMINOPHEN,
@@ -14704,6 +14780,8 @@ export const ALL_DRUGS: DrugEntry[] = [
   TRAZODONE,
   PRAZOSIN,
   DICLOFENAC,
+  GADOBUTROL,
+  GADOTERATE,
 ];
 
 const DRUG_MAP: Record<string, DrugEntry> = {};

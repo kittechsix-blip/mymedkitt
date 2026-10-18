@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340" role="img" aria-labelledby="title desc">
+  <title id="title">ACR Four-Zone MRI Safety Model</title>
+  <desc id="desc">Four nested zones leading to the magnet. Zone one is open to the public. Zone two is the reception and patient interview area where screening happens. Zone three is restricted to screened people and trained staff under MR personnel control, and contains the control room. Zone four is the magnet room itself; the magnet is always on, and nothing ferromagnetic, including oxygen tanks, IV poles, monitors or scissors, may enter unless labeled MR safe or MR conditional.</desc>
+  <style>
+    .bg { fill: #FFF8F2; }
+    .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .z { font: 700 16px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .zt { font: 400 13px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .zw { font: 700 16px system-ui, -apple-system, sans-serif; fill: #FFFFFF; }
+    .zwt { font: 400 13px system-ui, -apple-system, sans-serif; fill: #FFFFFF; }
+    .foot { font: 400 13px system-ui, -apple-system, sans-serif; fill: #5A5A5A; }
+  </style>
+  <rect class="bg" width="900" height="340"/>
+  <text class="title" x="20" y="36">MRI safety zones (ACR)</text>
+  <rect x="20" y="56" width="860" height="236" rx="14" fill="#FFFFFF" stroke="#E6D9CC"/>
+  <rect x="226" y="72" width="640" height="204" rx="12" fill="#FBF1E8" stroke="#E6D9CC"/>
+  <rect x="432" y="88" width="420" height="172" rx="10" fill="#F2D3B6" stroke="#BF5700"/>
+  <rect x="638" y="104" width="200" height="140" rx="8" fill="#B22222"/>
+  <text class="z" x="36" y="96">ZONE I</text>
+  <text class="zt" x="36" y="120">Public areas.</text>
+  <text class="zt" x="36" y="140">Anyone may enter.</text>
+  <text class="z" x="242" y="112">ZONE II</text>
+  <text class="zt" x="242" y="136">Reception and interview.</text>
+  <text class="zt" x="242" y="156">Screening happens here.</text>
+  <text class="z" x="448" y="128">ZONE III</text>
+  <text class="zt" x="448" y="152">Screened people only,</text>
+  <text class="zt" x="448" y="172">MR staff control access.</text>
+  <text class="zt" x="448" y="192">Control room.</text>
+  <text class="zw" x="654" y="144">ZONE IV</text>
+  <text class="zwt" x="654" y="168">Magnet room.</text>
+  <text class="zwt" x="654" y="188">The magnet is ALWAYS on.</text>
+  <text class="zwt" x="654" y="208">MR Safe / MR Conditional</text>
+  <text class="zwt" x="654" y="226">equipment only.</text>
+  <text class="foot" x="20" y="318">Oxygen cylinders, IV poles, monitors, scissors and pens become projectiles in Zone IV. Use MR-conditional monitors and pumps.</text>
+</svg>

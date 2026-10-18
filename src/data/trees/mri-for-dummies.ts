@@ -1,0 +1,901 @@
+// MedKitt — MRI for Dummies
+// What to order · How to read it · Seeing blood
+// 7 modules: Before You Order → What to Order → The Sequences → Seeing Blood → How to Read It → Pattern Gallery → Pitfalls & Disposition
+
+import type { DecisionNode } from '../../models/types.js';
+import type { CriticalAction } from '../../services/tree-service.js';
+import type { Citation } from './neurosyphilis.js';
+
+export const MRI_CRITICAL_ACTIONS: CriticalAction[] = [
+  { text: 'Unstable or screening for acute bleeding: CT first, not MRI', nodeId: 'mri-vs-ct' },
+  { text: 'Complete the MRI safety screen before the patient enters Zone IV', nodeId: 'mri-safety' },
+  { text: 'Order the exact protocol: body part, contrast, and MRA/MRV when the vessel is the question', nodeId: 'mri-protocol' },
+  { text: 'A central HINTS exam outranks a negative early DWI', nodeId: 'mri-ord-avs' },
+  { text: 'A negative MRI does not clear a patient whose exam is still worrying', nodeId: 'mri-negative' },
+];
+
+export const MRI_NODES: DecisionNode[] = [
+
+  // =====================================================================
+  // MODULE 1: BEFORE YOU ORDER
+  // =====================================================================
+
+  {
+    id: 'mri-start',
+    type: 'info',
+    module: 1,
+    title: 'MRI for Dummies',
+    body: '[MRI for Dummies Steps Summary](#/info/mri-summary) — the whole consult on one screen.\n\n**MRI in plain words:** a strong magnet plus radio waves make the water and fat in the body give off signal. Each **sequence** is a different recipe that makes different tissues bright or dark. **No radiation.**\n\n**The trade-off:** MRI sees brainstem, spinal cord, marrow, infection and early stroke far better than CT. It is also slow, far from the resus bay, and the magnet is **always on**.\n\n**This consult walks you through:** should this be MRI at all → is it safe → exactly what to order → what each sequence shows → seeing blood → how to read it → patterns you should recognize → what to do with the result.',
+    citation: [26, 28],
+    next: 'mri-vs-ct',
+    summary: 'MRI = magnet + radio waves, no radiation; better soft tissue, slower and farther away than CT',
+  },
+
+  {
+    id: 'mri-vs-ct',
+    type: 'question',
+    module: 1,
+    title: 'CT or MRI?',
+    body: '**CT is still the right first test when:**\n• The patient is **unstable** or needs constant hands-on care\n• You are screening for **acute bleeding** (head trauma, thunderclap headache, anticoagulated head strike)\n• **Time** is the treatment — a stroke code runs on non-contrast CT ± CTA unless your center has a rapid MRI pathway\n• MRI is unsafe or not available\n\n**MRI beats CT when the question is:** brainstem or cerebellar stroke, spinal cord or cauda equina, spinal infection, marrow (occult fracture, osteomyelitis), encephalitis, PRES, venous sinus thrombosis, or imaging in pregnancy.\n\n**Typical table time** (approximate — varies by scanner and institution; add transport and screening):\n• Fast stroke protocol (DWI ± FLAIR/SWI): **~5–15 min** (ultrafast protocols ~3 min)\n• Full brain with and without contrast: **~30–45 min**\n• One spine region: **~20–30 min**\n• Whole spine with and without: **~60 min or more**',
+    citation: [1, 2, 27, 28, 42],
+    options: [
+      { label: 'Unstable, or screening for acute bleeding', description: 'Trauma, thunderclap headache, needs resuscitation', next: 'mri-ct-first', urgency: 'critical' },
+      { label: 'Stable, and MRI answers the question better', next: 'mri-safety' },
+    ],
+    summary: 'Unstable or bleed screen = CT; stable + brainstem, cord, marrow, infection question = MRI',
+  },
+
+  {
+    id: 'mri-ct-first',
+    type: 'result',
+    module: 1,
+    title: 'Go With CT First',
+    body: 'Stabilize and scan with CT. Use [CT Decision Support](#/tree/ct-decision-support) for the validated rules.\n\nMRI can follow once the patient is stable and CT has not answered the question — for example a negative CT with a persistent focal deficit, or a CT showing a lesion that needs characterizing.',
+    recommendation: 'Non-contrast CT (± CTA) now. Reconsider MRI once the patient is stable and the question is still open.',
+    confidence: 'recommended',
+    citation: [1, 27],
+    summary: 'CT now; MRI later if still needed',
+  },
+
+  {
+    id: 'mri-safety',
+    type: 'question',
+    module: 1,
+    title: 'Is It Safe? The Screen',
+    body: 'Every patient completes a written MRI screening form before entering **Zone IV** (the magnet room). Run it with the **MRI Safety** checklist in the toolbar — it gives go / needs radiology clearance / not safe.\n\nWhat did the screen turn up?',
+    images: [
+      { src: 'images/mri/mri-safety-zones.svg', alt: 'Diagram of the four ACR MRI safety zones nested around the magnet room, Zone IV', caption: 'ACR four-zone model: screening happens in Zone II; only screened people enter Zone III; Zone IV is the magnet room. Original diagram, myMedKitt.' },
+      { src: 'images/mri/mri-scanner-photo.jpg', alt: 'A 1.5 tesla MRI scanner with its patient table in a hospital scanner room', caption: 'A 1.5 T clinical scanner (Zone IV). Jan Ainali, CC BY 3.0, via Wikimedia Commons.' },
+    ],
+    calculatorLinks: [{ id: 'mri-safety-checklist', label: 'MRI Safety Checklist' }],
+    citation: [25, 26],
+    options: [
+      { label: 'Nothing — screen is clear', next: 'mri-gad' },
+      { label: 'Cardiac device, metal, implant, or pump', next: 'mri-safety-device', urgency: 'urgent' },
+      { label: 'Pregnant, or might be', next: 'mri-preg' },
+      { label: 'Claustrophobic, agitated, or critically ill', next: 'mri-sedation' },
+    ],
+    summary: 'Written screen before Zone IV; devices, metal, pregnancy, claustrophobia change the plan',
+  },
+
+  {
+    id: 'mri-safety-device',
+    type: 'info',
+    module: 1,
+    title: 'Devices, Metal, Implants',
+    body: '**Pacemaker / ICD:**\n• **MR-conditional system** (generator AND leads labeled conditional as a set): scan within the manufacturer’s conditions, with device reprogramming before, monitoring during, and a check after.\n• **Non-conditional (legacy) device:** not an automatic no. HRS 2017 says scanning is reasonable when MRI is the best test and the center has a formal protocol with a designated MR physician and device physician. Abandoned, fractured, or epicardial leads fall outside that recommendation (too little data) — EP and radiology decide case by case.\n• **Either way:** pacing-dependent patients are programmed to asynchronous pacing, ICD tachy therapies are turned off, and ACLS-trained staff watch ECG and pulse oximetry throughout.\n• **Unknown device:** device card, chest X-ray, and interrogation identify it. See [Pacemaker](#/tree/pacemaker).\n\n**Metal in the eye:** grinding, welding, metalwork, or blast injury → orbit X-ray or CT first. A ferromagnetic fragment can move and blind the patient.\n\n**Bullets and shrapnel:** location matters more than composition — near the eye, spinal cord, or a major vessel is a radiology decision.\n\n**Implants and pumps:** aneurysm clips (older clips can be ferromagnetic), cochlear implants, neurostimulators, programmable VP shunts (re-check setting after), insulin pumps and glucose sensors (remove). Get the exact make and model.\n\n**Rule: unknown = not cleared.** The radiologist or MR safety officer makes the final call.',
+    citation: [25, 26],
+    next: 'mri-gad',
+    summary: 'MR-conditional device = scan with protocol; legacy device needs EP; orbit metal must be cleared first',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'mri-preg',
+    type: 'info',
+    module: 1,
+    title: 'Pregnancy',
+    body: '**MRI without gadolinium is safe in any trimester.** No radiation, no proven fetal harm. Do not delay a needed MRI because of pregnancy.\n\n**Avoid gadolinium** unless it will clearly change management — it crosses the placenta.\n\nTell radiology the gestational age and document the discussion. Details and the evidence: [Pregnancy & MRI](#/info/mri-pregnancy).',
+    citation: [20, 24],
+    next: 'mri-gad',
+    summary: 'Non-contrast MRI fine in any trimester; avoid gadolinium unless it changes management',
+  },
+
+  {
+    id: 'mri-sedation',
+    type: 'info',
+    module: 1,
+    title: 'Claustrophobia, Agitation, Critical Illness',
+    body: '**Claustrophobia first steps:** explain the noise and the length, earplugs, eyes closed or prism glasses, feet-first, wide-bore or open scanner, and ask radiology for the shortest protocol that answers the question.\n\n**Anxiolysis** (minimal sedation — the patient must still hold still and follow breath-hold commands):\n• [Lorazepam](#/drug/lorazepam/mri anxiolysis) by mouth 30–60 min before, or\n• [Midazolam](#/drug/midazolam/mri anxiolysis) IV in small steps just before the scan\n\nAnyone given IV sedation needs **MR-conditional monitoring** (pulse oximetry, ECG, capnography) and a nurse who goes with them. Deeper sedation or a combative patient → anesthesia.\n\n**Critically ill:** ventilator, pumps and monitors must be MR-conditional (or run on long lines from outside the room), and the team travels with the patient. **You cannot run a code in Zone IV** — the plan is to pull the patient out to Zone III first. If that plan does not exist, the scan is not safe today.',
+    citation: [26],
+    next: 'mri-gad',
+    summary: 'Non-drug steps first; lorazepam PO or midazolam IV for anxiolysis; no codes in Zone IV',
+  },
+
+  {
+    id: 'mri-gad',
+    type: 'info',
+    module: 1,
+    title: 'Contrast and the Kidneys',
+    body: '**Do you need contrast at all?** Each order card in the next module says yes or no. Many emergency MRIs — stroke, cauda equina, occult fracture, pregnancy — are **without**.\n\n**If contrast is needed:** modern **group II** agents such as [Gadobutrol](#/drug/gadobutrol/mri contrast) and [Gadoterate](#/drug/gadoterate/mri contrast) carry a risk of nephrogenic systemic fibrosis (NSF) so low that the ACR and National Kidney Foundation say a needed scan should not be withheld for kidney function — including eGFR <30 and dialysis.\n\n**Group I** (older linear) agents are the ones linked to NSF; they should not be used in AKI or eGFR <30.\n\nDialysis timing, prior reactions, and retention: [Gadolinium & Kidneys](#/info/mri-gadolinium-egfr).',
+    citation: [22, 23],
+    next: 'mri-protocol',
+    summary: 'Many ED MRIs need no contrast; group II gadolinium is safe enough to give at any eGFR when needed',
+  },
+
+  // =====================================================================
+  // MODULE 2: WHAT TO ORDER (PROTOCOL PICKER)
+  // =====================================================================
+
+  {
+    id: 'mri-protocol',
+    type: 'question',
+    module: 2,
+    title: 'What to Order',
+    body: 'Pick the region, then the emergency. Each **order card** gives the exact wording, whether to give contrast, and why — grounded in the ACR Appropriateness Criteria and society guidelines.\n\nThe card is what you tell radiology. A wrong body part, wrong contrast choice, or a missing MRA/MRV means a second trip to the scanner.',
+    citation: [1, 6],
+    options: [
+      { label: 'Brain and head/neck vessels', next: 'mri-pick-brain' },
+      { label: 'Spine', next: 'mri-pick-spine' },
+      { label: 'Bones, joints, soft tissue', next: 'mri-pick-msk' },
+      { label: 'Abdomen / pregnancy', next: 'mri-pick-body' },
+    ],
+    summary: 'Protocol picker — region, then emergency, then the exact order',
+  },
+
+  {
+    id: 'mri-pick-brain',
+    type: 'question',
+    module: 2,
+    title: 'Brain and Vessels',
+    body: 'What are you worried about?',
+    options: [
+      { label: 'Acute stroke or TIA', next: 'mri-ord-stroke', urgency: 'critical' },
+      { label: 'Dizzy: acute vestibular syndrome / posterior stroke', next: 'mri-ord-avs', urgency: 'urgent' },
+      { label: 'Cervical artery dissection', next: 'mri-ord-dissection' },
+      { label: 'Cerebral venous sinus thrombosis', next: 'mri-ord-cvst' },
+      { label: 'PRES', next: 'mri-ord-pres' },
+      { label: 'HSV encephalitis', next: 'mri-ord-hsv' },
+      { label: 'Pituitary apoplexy', next: 'mri-ord-pituitary' },
+      { label: 'Optic neuritis / MS', next: 'mri-ord-optic' },
+    ],
+    summary: 'Brain emergencies: stroke, posterior stroke, dissection, CVST, PRES, HSV, apoplexy, optic neuritis',
+  },
+
+  {
+    id: 'mri-pick-spine',
+    type: 'question',
+    module: 2,
+    title: 'Spine',
+    body: 'What are you worried about?',
+    options: [
+      { label: 'Cauda equina syndrome', next: 'mri-ord-ces', urgency: 'critical' },
+      { label: 'Cord compression / metastatic disease', next: 'mri-ord-mscc', urgency: 'critical' },
+      { label: 'Spinal epidural abscess', next: 'mri-ord-sea', urgency: 'critical' },
+    ],
+    summary: 'Spine emergencies: cauda equina, metastatic cord compression, epidural abscess',
+  },
+
+  {
+    id: 'mri-pick-msk',
+    type: 'question',
+    module: 2,
+    title: 'Bones, Joints, Soft Tissue',
+    body: 'What are you worried about?',
+    options: [
+      { label: 'Osteomyelitis / septic arthritis / deep infection', next: 'mri-ord-osteo' },
+      { label: 'Occult hip fracture', next: 'mri-ord-hip' },
+      { label: 'Occult scaphoid fracture', next: 'mri-ord-scaphoid' },
+    ],
+    summary: 'MSK: infection, occult hip and scaphoid fractures',
+  },
+
+  {
+    id: 'mri-pick-body',
+    type: 'question',
+    module: 2,
+    title: 'Abdomen / Pregnancy',
+    body: 'What are you worried about?',
+    options: [
+      { label: 'Appendicitis in pregnancy', next: 'mri-ord-appy-preg' },
+      { label: 'Common bile duct stone', next: 'mri-ord-mrcp' },
+    ],
+    summary: 'Body: appendicitis in pregnancy, choledocholithiasis',
+  },
+
+  // --- Brain order cards ---
+
+  {
+    id: 'mri-ord-stroke',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Acute Stroke / TIA',
+    body: '**ORDER:** MRI brain without IV contrast (stroke protocol: DWI/ADC, FLAIR, SWI or GRE) **+** MRA head without IV contrast **+** MRA neck without and with IV contrast\n\n**CONTRAST:** No for the brain or the head MRA (time-of-flight). The neck MRA is best with contrast; time-of-flight is the fallback if contrast is not possible.\n\n**WHY:** DWI turns bright within minutes of infarction and is far more sensitive than CT for acute ischemia, especially small and posterior strokes. MRA finds the occlusion or stenosis that drives treatment and secondary prevention.\n\n**WATCH OUT:**\n• Never let MRI delay a thrombolysis or thrombectomy decision\n• **TIA:** get DWI within 24 h when possible — a DWI lesion means it was a stroke, and the patient is at higher early risk\n• Unknown onset: a lesion bright on DWI but not yet on FLAIR is likely <4.5 h old (DWI–FLAIR mismatch)\n\n→ [Stroke](#/tree/stroke) · [TIA Workup](#/tree/tia-workup)',
+    citation: [1, 2, 28, 31, 32],
+    next: 'mri-next',
+    summary: 'MRI brain without + MRA head, contrast MRA neck; DWI within 24 h for TIA; never delay lytics',
+  },
+
+  {
+    id: 'mri-ord-avs',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Dizzy — Posterior Stroke',
+    body: '**ORDER:** MRI brain without IV contrast with **thin-slice (3 mm) axial DWI through the posterior fossa** **+** MRA head and neck\n\n**CONTRAST:** No.\n\n**WHY:** CT misses most posterior fossa strokes. Thin (3 mm) axial DWI through the brainstem and cerebellum catches small lesions that standard 5 mm slices skip.\n\n**WATCH OUT — early DWI can be falsely negative:**\n• In the first 24–48 h, DWI misses about **1 in 8** strokes presenting as acute vestibular syndrome (Kattah 2009)\n• Small brainstem strokes are missed far more often — about **half** in the first 48 h (Saber Tehrani 2014)\n• DWI sensitivity is highest about 3–4 days after the stroke\n• **A central HINTS exam (or a patient who cannot walk) outranks a negative early DWI.** Treat as stroke, admit, and repeat the MRI after 48–72 h.',
+    calculatorLinks: [{ id: 'vertigo', label: 'HINTS Exam (Vertigo)', kind: 'tree', node: 'vert-hints-check' }],
+    citation: [3, 4, 5, 33, 34],
+    next: 'mri-next',
+    summary: 'Thin posterior fossa DWI + MRA; early DWI misses up to half of small brainstem strokes',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'mri-ord-dissection',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Cervical Artery Dissection',
+    body: '**ORDER:** MRA neck without and with IV contrast (+ MRA head) **+ axial T1 fat-saturated images of the neck** (ask for a "dissection protocol") **+** MRI brain DWI\n\n**CONTRAST:** Yes, preferred. Non-contrast MRA is also acceptable (ACR). **CTA neck is an equal first-line choice** and usually faster.\n\n**WHY:** The T1 fat-sat images show the **intramural hematoma** — a bright crescent in the vessel wall around a narrowed lumen — even when the lumen looks nearly normal. DWI finds silent infarcts.\n\n**WATCH OUT:** The wall hematoma turns bright on T1 as methemoglobin forms — over days, not hours — so a very early negative fat-sat image does not exclude dissection.\n\n→ [Cervical Artery Dissection](#/tree/cervical-artery-dissection)',
+    citation: [1, 9, 29, 37],
+    next: 'mri-next',
+    summary: 'Contrast MRA head/neck + axial T1 fat-sat for wall hematoma; CTA equally good',
+  },
+
+  {
+    id: 'mri-ord-cvst',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Venous Sinus Thrombosis',
+    body: '**ORDER:** MRI brain without and with IV contrast **+ MR venogram** (contrast-enhanced MRV preferred; time-of-flight MRV if no contrast)\n\n**CONTRAST:** Yes, preferred.\n\n**WHY:** MRI shows the clot itself (dark and blooming on SWI/GRE) and the venous infarcts or hemorrhage it causes; MRV shows the missing flow. CT venography is an equal alternative.\n\n**WATCH OUT:**\n• A normal non-contrast CT never excludes CVST\n• On time-of-flight MRV, a small (hypoplastic) transverse sinus can look like clot, and subacute clot (bright on T1) can look like flow — confirm with SWI/GRE or contrast MRV\n\n→ [CVST](#/tree/cvst)',
+    citation: [1, 10],
+    next: 'mri-next',
+    summary: 'MRI with/without + MRV; normal CT never excludes CVST; TOF MRV has mimics',
+  },
+
+  {
+    id: 'mri-ord-pres',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: PRES',
+    body: '**ORDER:** MRI brain without and with IV contrast (without is enough if contrast is a problem)\n\n**CONTRAST:** Optional.\n\n**WHY:** FLAIR shows the swelling (vasogenic edema) in the back of the brain that defines PRES. CT is often normal or subtle.\n\n**WATCH OUT:**\n• Triggers: severe hypertension, eclampsia, kidney failure, immunosuppressive and chemotherapy drugs, sepsis\n• Pregnant or postpartum with seizure or headache = eclampsia until proven otherwise — [Eclampsia](#/tree/eclampsia)',
+    citation: [11],
+    next: 'mri-next',
+    summary: 'MRI brain (contrast optional); FLAIR shows posterior edema; think eclampsia if pregnant/postpartum',
+  },
+
+  {
+    id: 'mri-ord-hsv',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: HSV Encephalitis',
+    body: '**ORDER:** MRI brain without and with IV contrast\n\n**CONTRAST:** Yes, preferred.\n\n**WHY:** FLAIR, T2 and DWI turn bright in the temporal lobes, insula and cingulate earlier and more reliably than CT.\n\n**WATCH OUT:**\n• Start [Acyclovir](#/drug/acyclovir/encephalitis) the moment you suspect it — never wait for MRI or LP results\n• Very early MRI can be normal; CSF HSV PCR makes the diagnosis\n\n→ [Meningitis](#/tree/meningitis)',
+    citation: [12],
+    next: 'mri-next',
+    summary: 'MRI with/without; acyclovir before imaging; early MRI can be normal',
+  },
+
+  {
+    id: 'mri-ord-pituitary',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Pituitary Apoplexy',
+    body: '**ORDER:** MRI pituitary (sella) without and with IV contrast — dedicated thin-slice protocol\n\n**CONTRAST:** Preferred (non-contrast sella MRI is also acceptable). Dedicated pituitary CT if MRI is contraindicated.\n\n**WHY:** Shows bleeding or infarction in a pituitary adenoma and whether it presses on the optic chiasm or invades the cavernous sinus. MRI confirms far more cases than CT.\n\n**WATCH OUT:**\n• Thunderclap headache + vision loss or eye-movement palsy: non-contrast CT first to exclude SAH, then MRI\n• Hypotension or hyponatremia = adrenal crisis — give [Hydrocortisone](#/drug/hydrocortisone/adrenal crisis) before imaging',
+    citation: [13, 43],
+    next: 'mri-next',
+    summary: 'Dedicated pituitary MRI with/without; treat adrenal crisis first',
+  },
+
+  {
+    id: 'mri-ord-optic',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Optic Neuritis / MS',
+    body: '**ORDER:** MRI orbits without and with IV contrast **+** MRI brain without and with IV contrast\n\n**CONTRAST:** Yes.\n\n**WHY:** Fat-suppressed post-contrast orbit images show a swollen, enhancing optic nerve — this is the study the ACR rates for a suspected optic nerve problem. The brain images add white-matter lesions, the strongest predictor of later multiple sclerosis.\n\n**WATCH OUT:** Painless loss, both eyes, no recovery, or age over 50 → think of other causes (ischemic optic neuropathy, giant cell arteritis, NMOSD or MOG antibody disease).\n\n→ [Optic Neuritis](#/tree/optic-neuritis)',
+    citation: [14, 38],
+    next: 'mri-next',
+    summary: 'MRI orbits + brain with/without; atypical features = look for other causes',
+  },
+
+  // --- Spine order cards ---
+
+  {
+    id: 'mri-ord-ces',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Cauda Equina Syndrome',
+    body: '**ORDER:** MRI lumbar spine without IV contrast — **emergently**, not next day\n\n**CONTRAST:** No (add contrast only if infection or tumor is suspected).\n\n**WHY:** Shows the disc or mass squeezing the cauda equina. No exam finding, including post-void residual, reliably rules it out.\n\n**WATCH OUT:**\n• Do not wait for urinary retention — the best outcomes come from decompressing incomplete CES\n• If MRI is impossible (unsafe device), discuss CT myelography with radiology and spine surgery\n\n→ [Cauda Equina](#/tree/cauda-equina)',
+    images: [
+      { src: 'images/mri/lumbar-disc-herniation-t2-sagittal.jpg', alt: 'Sagittal T2 MRI of the lumbar spine with a circled L5-S1 disc herniation pushing into the spinal canal', caption: 'Sagittal T2, lumbar spine: L5–S1 disc herniation (circled) pushing back into the bright CSF of the canal. Michael-W, CC BY-SA 3.0, via Wikimedia Commons.' },
+    ],
+    citation: [6],
+    next: 'mri-next',
+    summary: 'Emergent MRI L-spine without; do not wait for retention',
+  },
+
+  {
+    id: 'mri-ord-mscc',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Metastatic Cord Compression',
+    body: '**ORDER:** MRI **whole spine** (cervical, thoracic, lumbar) — without contrast is enough for compression; with and without if infection or leptomeningeal spread is a concern\n\n**CONTRAST:** Optional.\n\n**WHY:** Disease is often at more than one level, so image the whole spine to find levels you did not suspect. NICE: whole-spine MRI **within 24 h** if there are neurologic symptoms or signs, and within a week for suspicious back pain alone. CT if MRI is contraindicated.\n\n**WATCH OUT:** Back pain in a patient with cancer plus any neurologic sign = MRI now, and start treatment per [Cord Emergencies](#/tree/cord-emergencies).',
+    citation: [7, 8],
+    next: 'mri-next',
+    summary: 'Whole-spine MRI; immediately if neuro signs; multiple levels common',
+  },
+
+  {
+    id: 'mri-ord-sea',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Spinal Epidural Abscess',
+    body: '**ORDER:** MRI spine without and with IV contrast — the symptomatic region at minimum; **whole spine** when symptoms have lasted ≥7 days, there is infection elsewhere, ESR >95, or the exam does not localize\n\n**CONTRAST:** Yes.\n\n**WHY:** Contrast separates a drainable abscess (rim-enhancing collection) from phlegmon and shows discitis–osteomyelitis. Skip lesions at a second, separate level occur in about 1 in 10.\n\n**WATCH OUT:** The classic triad (fever, back pain, neuro deficit) is present in a minority. Injection drug use, diabetes, recent spine procedure, or bacteremia + back pain = low threshold. If contrast cannot be given, a non-contrast MRI still shows most abscesses.',
+    citation: [35, 36],
+    next: 'mri-next',
+    summary: 'Spine MRI with/without, whole spine if risk of skip lesions; triad often absent',
+  },
+
+  // --- MSK order cards ---
+
+  {
+    id: 'mri-ord-osteo',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Bone, Joint, Deep Infection',
+    body: '**ORDER:** MRI [body part] without and with IV contrast\n\n**CONTRAST:** Yes (without contrast still helps if contrast is not possible).\n\n**WHY:** Radiographs first. Then marrow edema on STIR/T2 plus dark marrow on T1 = osteomyelitis; contrast outlines abscesses and sinus tracts.\n\n**WATCH OUT:**\n• **Do not let imaging delay surgery in suspected necrotizing soft-tissue infection** — pain out of proportion, rapid spread, gas, or shock gets an immediate surgical consult and the OR; clinical judgment, not MRI, makes this diagnosis — [Necrotizing Fasciitis](#/tree/necrotizing-fasciitis)\n• Septic arthritis is diagnosed by joint aspiration, not MRI — [Septic Arthritis](#/tree/septic-arthritis)',
+    citation: [15, 16],
+    next: 'mri-next',
+    summary: 'MRI with/without; never delay OR for necrotizing infection; tap the joint',
+    safetyLevel: 'warning',
+  },
+
+  {
+    id: 'mri-ord-hip',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Occult Hip Fracture',
+    body: '**ORDER:** MRI hip (or pelvis) without IV contrast — after negative radiographs\n\n**CONTRAST:** No.\n\n**WHY:** T1 shows the fracture line (a dark line through bright fatty marrow) and STIR shows the surrounding marrow edema. MRI is the most sensitive test; CT is an acceptable alternative when MRI is not available but can miss non-displaced fractures in osteoporotic bone.\n\n**WATCH OUT:** Older patient + fall + cannot bear weight + normal X-ray = occult fracture until proven otherwise.\n\n→ [Hip Pain](#/tree/hip-pain-hub)',
+    citation: [17],
+    next: 'mri-next',
+    summary: 'MRI hip without after negative X-ray; T1 fracture line + STIR edema',
+  },
+
+  {
+    id: 'mri-ord-scaphoid',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Occult Scaphoid Fracture',
+    body: '**ORDER:** MRI wrist without IV contrast — when radiographs are negative and scaphoid tenderness persists\n\n**CONTRAST:** No.\n\n**WHY:** Finds occult scaphoid and other carpal fractures early, avoiding both weeks of unneeded splinting and a missed fracture that goes on to nonunion or avascular necrosis.\n\n**WATCH OUT:** Thumb spica splint until imaged. Repeat radiographs at 10–14 days or CT are acceptable alternatives. MRI is usually arranged within days, not overnight.\n\n→ [Wrist Injuries](#/tree/wrist-injuries)',
+    citation: [18],
+    next: 'mri-next',
+    summary: 'MRI wrist without after negative films; splint until imaged',
+  },
+
+  // --- Body order cards ---
+
+  {
+    id: 'mri-ord-appy-preg',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Appendicitis in Pregnancy',
+    body: '**ORDER:** Ultrasound first (fast, at the bedside). If it is non-diagnostic: **MRI abdomen and pelvis without IV contrast** (appendicitis protocol). ACR rates both as appropriate first tests.\n\n**CONTRAST:** **No** — no gadolinium in pregnancy for this question.\n\n**WHY:** No radiation, high accuracy, and it also finds the other causes of pain in pregnancy (ovarian torsion, degenerating fibroid, pyelonephritis, kidney obstruction).\n\n**WATCH OUT:** If the picture is clearly appendicitis, imaging must not delay surgery — perforation is what harms the fetus.\n\n→ [Appendicitis](#/tree/adult-appendicitis)',
+    citation: [19, 20, 44],
+    next: 'mri-next',
+    summary: 'Ultrasound first, then MRI abdomen/pelvis without contrast',
+  },
+
+  {
+    id: 'mri-ord-mrcp',
+    type: 'info',
+    module: 2,
+    title: 'Order Card: Common Bile Duct Stone',
+    body: '**ORDER:** MRCP (MRI abdomen without IV contrast with MRCP; radiology may add contrast)\n\n**CONTRAST:** Not needed for the duct images.\n\n**WHY:** A non-invasive look at the bile ducts for patients at **intermediate risk** (ASGE 2019): abnormal liver tests, age over 55, or a dilated duct on ultrasound. ASGE accepts MRCP or endoscopic ultrasound here.\n\n**WATCH OUT:**\n• **High risk → skip MRCP and go to ERCP:** stone seen on ultrasound, cholangitis, or bilirubin >4 mg/dL with a dilated duct\n• Small stones (<5 mm) can be missed; endoscopic ultrasound is the alternative',
+    citation: [21, 39],
+    next: 'mri-next',
+    summary: 'MRCP for intermediate risk; high risk or cholangitis goes straight to ERCP',
+  },
+
+  {
+    id: 'mri-next',
+    type: 'question',
+    module: 2,
+    title: 'Where Next?',
+    body: 'Order placed. Pick what you need next.',
+    options: [
+      { label: 'Another order card', next: 'mri-protocol' },
+      { label: 'Learn the sequences', next: 'mri-seq-overview' },
+      { label: 'Seeing blood on MRI', next: 'mri-blood' },
+      { label: 'How to read it', next: 'mri-read-start' },
+      { label: 'Pattern gallery', next: 'mri-gallery' },
+      { label: 'Pitfalls and disposition', next: 'mri-pitfalls' },
+    ],
+    summary: 'Jump to sequences, blood, reading, gallery, or disposition',
+  },
+
+  // =====================================================================
+  // MODULE 3: THE SEQUENCES IN PLAIN WORDS
+  // =====================================================================
+
+  {
+    id: 'mri-seq-overview',
+    type: 'info',
+    module: 3,
+    title: 'Sequences: The Two Anchors',
+    body: '**Three words:** hyperintense = **bright**, hypointense = **dark**, isointense = **same as normal brain**.\n\nEvery sequence is just a different rule for what glows. Learn two anchors and the rest are variations:\n• **T1 = fat bright** → anatomy\n• **T2 = H2O bright** → pathology (water = swelling, pus, fluid)\n\nThe **Sequences** button in the toolbar opens this cheat sheet any time.',
+    images: [
+      { src: 'images/mri/mri-sequence-cheatsheet.svg', alt: 'Table of nine MRI sequences with grey swatches showing how fat and water look on each, what lights up, and what each is used for', caption: 'Bright and dark on each sequence. Swatches are schematic. Original diagram, myMedKitt.' },
+    ],
+    citation: [30],
+    next: 'mri-seq-t1',
+    summary: 'T1 = fat bright (anatomy); T2 = water bright (pathology)',
+  },
+
+  {
+    id: 'mri-seq-t1',
+    type: 'info',
+    module: 3,
+    title: 'T1 — The Anatomy Picture',
+    body: '**BRIGHT:** fat, subacute blood (methemoglobin), gadolinium, melanin, protein-rich fluid\n\n**DARK:** water — CSF, edema, most disease\n\n**USE IT FOR:** anatomy (grey matter looks darker than white matter, like an anatomy atlas), bone marrow (normal adult marrow is fatty and bright; tumor or infection replaces it and turns it dark), and as the "before" picture for contrast.\n\n**ONE THING TO KNOW:** anything bright on T1 *before* contrast is fat, blood, or protein — not enhancement.',
+    images: [
+      { src: 'images/mri/t1-axial-brain.jpg', alt: 'Normal axial T1-weighted brain MRI at the level of the lateral ventricles with dark CSF and white matter brighter than grey matter', caption: 'Normal axial T1: CSF in the ventricles is dark; white matter is brighter than grey matter. 511KeV, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [30],
+    next: 'mri-seq-t2',
+    summary: 'T1: fat bright, water dark; marrow replacement turns dark',
+  },
+
+  {
+    id: 'mri-seq-t2',
+    type: 'info',
+    module: 3,
+    title: 'T2 — "T2 = H2O"',
+    body: '**BRIGHT:** water — CSF, edema, pus, cysts, most disease. Fat is also fairly bright on modern T2.\n\n**DARK:** fast-flowing blood (flow voids), old blood (hemosiderin), calcium, cortical bone, air\n\n**USE IT FOR:** finding swelling and fluid; in the spine, sagittal T2 works like a myelogram — bright CSF outlines the cord and roots.\n\n**ONE THING TO KNOW:** normal arteries are black **flow voids** on T2. A vessel that should be black but is grey or bright may be occluded or clotted.',
+    images: [
+      { src: 'images/mri/t2-axial-brain.png', alt: 'Normal axial T2-weighted brain MRI with bright CSF in the ventricles and sulci', caption: 'Normal axial T2: CSF in the ventricles and sulci is bright. Sean Novak, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [30],
+    next: 'mri-seq-flair',
+    summary: 'T2: water bright; flow voids black',
+  },
+
+  {
+    id: 'mri-seq-flair',
+    type: 'info',
+    module: 3,
+    title: 'FLAIR — T2 With the CSF Turned Off',
+    body: '**BRIGHT:** edema and disease, now easy to see because the CSF next to it is dark; blood or pus in the sulci (SAH, meningitis); MS plaques\n\n**DARK:** normal CSF\n\n**USE IT FOR:** edema next to the ventricles and cortex, subarachnoid blood, encephalitis, PRES, and timing a stroke.\n\n**ONE THING TO KNOW:** bright signal in the sulci is not always blood — meningitis, recent gadolinium, and patients breathing high-flow oxygen can all do it.',
+    images: [
+      { src: 'images/mri/flair-axial-brain.jpg', alt: 'Normal axial FLAIR brain MRI with the CSF in the lateral ventricles suppressed to black', caption: 'Normal axial FLAIR: the CSF is dark, so anything bright next to it stands out. 511KeV, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [30],
+    next: 'mri-seq-dwi',
+    summary: 'FLAIR: CSF dark, edema and sulcal blood bright',
+  },
+
+  {
+    id: 'mri-seq-dwi',
+    type: 'info',
+    module: 3,
+    title: 'DWI + ADC — Is Water Stuck?',
+    body: '**PLAIN WORDS:** DWI measures how freely water moves. When cells swell (acute stroke) or fluid is thick (pus), water gets stuck.\n\n**THE RULE:** bright DWI **+ dark ADC** = true restriction.\n• Acute infarct: bright within minutes; ADC recovers (pseudonormalizes) after about 1–2 weeks\n• Pus: abscesses restrict, while the dead center of a tumor usually does not\n• Also: epidermoid cyst, lymphoma, HSV, CJD\n\n**THE TRAP — T2 shine-through:** bright DWI with a bright ADC is not acute. The DWI is just carrying over T2 brightness from an old infarct or edema.',
+    images: [
+      { src: 'images/mri/mri-dwi-adc-true-vs-shine-through.svg', alt: 'Schematic comparing true restriction, bright on DWI and dark on ADC, with T2 shine-through, bright on both', caption: 'Check the ADC under every bright DWI spot. Original diagram, myMedKitt.' },
+      { src: 'images/mri/dwi-adc-tof-aca-stroke.jpg', alt: 'Three axial panels of an acute left anterior cerebral artery stroke: bright DWI, dark ADC, and a time-of-flight MRA with reduced flow in the left ACA marked by an arrow', caption: 'Acute left ACA infarct: bright on DWI (left), dark on ADC (middle) = true restriction; TOF MRA (right) shows reduced flow in the left ACA (arrow). Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [28, 30],
+    next: 'mri-seq-swi',
+    summary: 'Bright DWI + dark ADC = real restriction; bright ADC = shine-through',
+  },
+
+  {
+    id: 'mri-seq-swi',
+    type: 'info',
+    module: 3,
+    title: 'SWI / GRE — The Blood Finder',
+    body: '**DARK:** blood products, calcium, and iron — black and **"blooming"** (they look bigger than they really are)\n\n**USE IT FOR:** hemorrhage, microbleeds, diffuse axonal injury, hemorrhagic transformation of a stroke, and clot inside an artery or venous sinus.\n\n**ONE THING TO KNOW:** a black dot can be blood or calcium. The SWI phase image or a CT tells them apart.',
+    images: [
+      { src: 'images/mri/swi-microbleeds.jpg', alt: 'Four axial brain MRI panels, T2, T1, FLAIR and SWI, of the same slice; multiple black microbleeds in the thalami and basal ganglia are visible only on the SWI panel', caption: 'Same slice on T2 (top left), T1 (top right), FLAIR (bottom left), and SWI (bottom right): the hypertensive microbleeds in the thalami and basal ganglia are visible only on SWI as black dots. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [27],
+    next: 'mri-seq-stir',
+    summary: 'SWI/GRE: blood and calcium black and blooming',
+  },
+
+  {
+    id: 'mri-seq-stir',
+    type: 'info',
+    module: 3,
+    title: 'STIR / Fat-Sat — Fat Switched Off',
+    body: '**DARK:** fat (suppressed)\n\n**BRIGHT:** water — marrow edema, soft-tissue edema, fluid collections\n\n**USE IT FOR:** occult fracture, osteomyelitis, ligament injury, spine infection, and metastases.\n\n**ONE THING TO KNOW:** STIR is sensitive but not specific — bruise, fracture, infection, and tumor all light up. T1 tells them apart (fracture line vs marrow replacement).',
+    images: [
+      { src: 'images/mri/stir-spine-sagittal.jpg', alt: 'Sagittal STIR MRI of the lumbar spine with fat suppressed dark and CSF in the thecal sac bright', caption: 'Sagittal STIR, lumbar spine: fat is dark and CSF is bright, so any marrow edema would stand out as bright bone. No acute marrow edema here (post-surgical degenerative spine). Ptrump16, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [15, 17],
+    next: 'mri-seq-mra',
+    summary: 'STIR: fat dark, edema bright; sensitive, not specific',
+  },
+
+  {
+    id: 'mri-seq-mra',
+    type: 'info',
+    module: 3,
+    title: 'MRA / MRV — The Vessels',
+    body: '**PLAIN WORDS:** time-of-flight (TOF) makes **flowing blood bright** and still tissue dark — no contrast needed. Contrast-enhanced MRA/MRV uses gadolinium instead.\n\n**USE IT FOR:** arterial occlusion and stenosis, aneurysm, dissection, and venous sinus thrombosis (MRV).\n\n**ONE THING TO KNOW:** TOF overcalls stenosis — slow or turbulent flow drops out and can mimic an occlusion. Contrast-enhanced MRA or CTA settles it.',
+    images: [
+      { src: 'images/mri/mra-tof-circle-of-willis.jpg', alt: 'Time-of-flight MR angiogram maximum-intensity projection of a normal circle of Willis seen from above', caption: 'Normal circle of Willis, TOF MRA (maximum-intensity projection). SBarnes, CC BY-SA 3.0, via Wikimedia Commons.' },
+    ],
+    citation: [1],
+    next: 'mri-seq-t1post',
+    summary: 'TOF MRA: flowing blood bright, no contrast; overcalls stenosis',
+  },
+
+  {
+    id: 'mri-seq-t1post',
+    type: 'info',
+    module: 3,
+    title: 'T1 Post-Contrast — What Lights Up',
+    body: '**BRIGHT:** tissue that takes up gadolinium — a leaky blood–brain barrier, inflammation, or very vascular tissue\n\n**PATTERNS:**\n• Thin, smooth ring → abscess\n• Thick, irregular ring → tumor\n• Lining of the sulci (leptomeningeal) → meningitis or cancer spread\n• Rim around an epidural collection → epidural abscess\n\n**ONE THING TO KNOW:** always compare with the pre-contrast T1. Fat-suppressed post-contrast images help in the orbits, spine, and bone.',
+    images: [
+      { src: 'images/mri/brain-abscess-t1-post-gad.jpg', alt: 'Axial post-contrast T1 brain MRI with a round left posterior lesion surrounded by a thin smooth enhancing ring and surrounding edema', caption: 'Brain abscess on post-contrast T1: thin, smooth enhancing ring with surrounding swelling. Hellerhoff, CC BY-SA 3.0, via Wikimedia Commons.' },
+    ],
+    citation: [30],
+    next: 'mri-blood',
+    summary: 'Thin smooth ring = abscess; thick irregular ring = tumor; compare with pre-contrast',
+  },
+
+  // =====================================================================
+  // MODULE 4: SEEING BLOOD ON MRI
+  // =====================================================================
+
+  {
+    id: 'mri-blood',
+    type: 'info',
+    module: 4,
+    title: 'Seeing Blood on MRI',
+    body: '**PLAIN WORDS:** blood changes chemistry as it ages, and each chemical looks different on MRI.\n\n**BEST SEQUENCES:**\n• **SWI/GRE** — the most sensitive for any blood; catches microbleeds CT cannot see\n• **FLAIR + GRE together** for subarachnoid blood — bright in the dark sulci on FLAIR, dark on GRE\n\n**CT STAYS FIRST in the ED for acute bleeding.** MRI with GRE matched CT for acute intracerebral hemorrhage, but CT is faster, safer for sick patients, always available, and what neurosurgery acts on. Suspected SAH follows the CT/LP pathway.\n\n**WHERE MRI ADDS VALUE:** microbleeds, diffuse axonal injury, bleeding into a tumor or venous infarct, hemorrhagic transformation, and estimating a bleed’s age.',
+    images: [
+      { src: 'images/mri/ich-t2star.png', alt: 'Axial T2-star gradient-echo brain MRI with a right frontal hemorrhagic contusion showing a dark blooming rim', caption: 'T2* (GRE): right frontal hemorrhagic contusion after head trauma with a dark, blooming rim of blood products. Hellerhoff, CC BY-SA 3.0, via Wikimedia Commons.' },
+    ],
+    citation: [27, 40, 41],
+    next: 'mri-blood-age',
+    summary: 'SWI/GRE most sensitive, FLAIR for SAH; CT still first for acute bleeds',
+  },
+
+  {
+    id: 'mri-blood-age',
+    type: 'info',
+    module: 4,
+    title: 'How Old Is the Blood?',
+    body: 'Match the **T1** and **T2** signal of the hematoma to a stage — or open **Blood Age** in the toolbar and pick them.\n\n**MNEMONIC:** "**It Be, Iddy Biddy, Baby Doody**" — first letter is T1, second is T2; **I** = iso, **B** = bright, **D** = dark.\n\n**CAVEATS:** stages overlap; clot size, field strength, and oxygenation shift the timing; subarachnoid and subdural blood do not follow the table well. Use it to estimate, not to date a bleed on its own.',
+    images: [
+      { src: 'images/mri/mri-blood-age-chart.svg', alt: 'Chart of five hemorrhage stages, hyperacute through chronic, with T1 and T2 signal swatches, timing, blood product and mnemonic', caption: 'Age of parenchymal blood on T1 and T2. Times are approximate. Original diagram, myMedKitt.' },
+    ],
+    calculatorLinks: [{ id: 'mri-blood-age', label: 'Blood Age on MRI' }],
+    citation: [29],
+    next: 'mri-read-start',
+    summary: 'It Be, Iddy Biddy, Baby Doody — T1 then T2, iso/bright/dark',
+  },
+
+  // =====================================================================
+  // MODULE 5: HOW TO READ IT
+  // =====================================================================
+
+  {
+    id: 'mri-read-start',
+    type: 'question',
+    module: 5,
+    title: 'How to Read It',
+    body: '**STEP 0, every time:** right patient, right date, right body part. Read the label on each series (T1? T2? FLAIR? post-contrast?) and the plane (axial, sagittal, coronal) before you interpret anything.\n\nWhich are you reading?',
+    images: [
+      { src: 'images/mri/mri-read-order.svg', alt: 'Two four-step ladders showing the read order for brain MRI, DWI and ADC then FLAIR and T2 then SWI then T1 post-contrast, and spine MRI, sagittal T2 then STIR then axial T2 then T1 post-contrast', caption: 'Read in the same order every time. Original diagram, myMedKitt.' },
+    ],
+    citation: [30],
+    options: [
+      { label: 'Brain', next: 'mri-read-brain' },
+      { label: 'Spine', next: 'mri-read-spine' },
+    ],
+    summary: 'Confirm patient and sequence labels, then brain or spine order',
+  },
+
+  {
+    id: 'mri-read-brain',
+    type: 'info',
+    module: 5,
+    title: 'Reading a Brain MRI',
+    body: '**1. DWI + ADC** — any bright DWI? Confirm it is dark on ADC. Arterial territory = stroke; ring with bright center = abscess; temporal cortex = encephalitis.\n\n**2. FLAIR, then T2** — edema, blood in the sulci, mass effect, midline shift, ventricle size, herniation.\n\n**3. SWI / GRE** — hematoma, microbleeds, clot in an artery or sinus.\n\n**4. T1 post-contrast** (if given) — ring, mass, meninges, sinus filling defect.\n\n**5. MRA / MRV** (if done) — a missing vessel = occlusion; compare left with right.\n\n**Scroll every slice** from the top of the head to the foramen magnum — the brainstem and cerebellum are where ED misses live.',
+    citation: [30],
+    next: 'mri-read-traps',
+    summary: 'DWI/ADC → FLAIR/T2 → SWI → T1 post → MRA; check the posterior fossa',
+  },
+
+  {
+    id: 'mri-read-spine',
+    type: 'info',
+    module: 5,
+    title: 'Reading a Spine MRI',
+    body: '**1. Sagittal T2** — the whole canal in one picture: cord signal (bright = cord edema or injury), level of compression, discs, epidural collections, and where the cord ends (normally around L1–L2).\n\n**2. Sagittal STIR** — marrow edema: fracture, discitis–osteomyelitis (disc plus both neighboring endplates bright), metastasis.\n\n**3. Axial T2 at the level of concern** — how tight is it? Is the cord flattened? Is there any CSF left around the cauda equina roots?\n\n**4. T1 (before and after contrast)** — dark marrow = replaced by tumor or infection; a rim-enhancing epidural collection = abscess.\n\n**Count levels** from a fixed landmark (C2 or the sacrum) — wrong-level calls happen.',
+    citation: [6, 7, 35],
+    next: 'mri-read-traps',
+    summary: 'Sagittal T2 → STIR → axial T2 at the level → T1; count levels from a landmark',
+  },
+
+  {
+    id: 'mri-read-traps',
+    type: 'info',
+    module: 5,
+    title: 'Common Traps',
+    body: '• **Motion** — blurred or ghosted images; repeat or sedate rather than over-read\n• **T2 shine-through** — bright DWI with bright ADC is not acute\n• **Partial volume** — a structure only partly in the slice looks like a lesion; check the next slice and another plane\n• **Flow** — fast flow is a normal black void; slow flow can look like clot on MRV and like occlusion on TOF MRA\n• **Metal** — dental work, clips, and hardware make black holes and distortion; DWI and SWI are the worst affected\n• **Sulcal FLAIR signal** from high-flow oxygen or recent gadolinium can mimic SAH',
+    citation: [30],
+    next: 'mri-gallery',
+    summary: 'Motion, shine-through, partial volume, flow, metal, oxygen on FLAIR',
+  },
+
+  // =====================================================================
+  // MODULE 6: PATTERN GALLERY
+  // =====================================================================
+
+  {
+    id: 'mri-gallery',
+    type: 'question',
+    module: 6,
+    title: 'Pattern Gallery',
+    body: 'Seven patterns every emergency physician should recognize. Pick one.',
+    options: [
+      { label: 'Acute ischemic stroke', next: 'mri-pat-stroke' },
+      { label: 'Brain abscess', next: 'mri-pat-abscess' },
+      { label: 'HSV encephalitis', next: 'mri-pat-hsv' },
+      { label: 'PRES', next: 'mri-pat-pres' },
+      { label: 'Venous sinus thrombosis', next: 'mri-pat-cvst' },
+      { label: 'Spinal epidural abscess', next: 'mri-pat-sea' },
+      { label: 'Cord compression', next: 'mri-pat-mscc' },
+      { label: 'Done — pitfalls and disposition', next: 'mri-pitfalls' },
+    ],
+    summary: 'Stroke, abscess, HSV, PRES, CVST, epidural abscess, cord compression',
+  },
+
+  {
+    id: 'mri-pat-stroke',
+    type: 'info',
+    module: 6,
+    title: 'Pattern: Acute Ischemic Stroke',
+    body: '**LOOK FOR:** bright DWI + dark ADC in an **arterial territory** (MCA, ACA, PCA, PICA, AICA, SCA).\n\n**EXTRAS:** FLAIR still normal = likely <4.5 h old; a black clot in the artery on SWI; bleeding into the infarct (hemorrhagic transformation).\n\n**POSTERIOR STROKES** in the lateral medulla and cerebellum are small and easy to miss on thick slices.',
+    images: [
+      { src: 'images/mri/dwi-adc-pica-stroke.jpg', alt: 'Four MRI panels of an acute left PICA cerebellar infarct: axial DWI bright, axial ADC, axial T2, and sagittal FLAIR', caption: 'Acute partial left PICA infarct in the inferior cerebellum: bright on DWI (top left) with matching ADC (top right); axial T2 (bottom left) and sagittal FLAIR (bottom right). Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [3, 28, 31],
+    next: 'mri-gallery',
+    summary: 'DWI bright, ADC dark, arterial territory; posterior strokes are small',
+  },
+
+  {
+    id: 'mri-pat-abscess',
+    type: 'info',
+    module: 6,
+    title: 'Pattern: Brain Abscess',
+    body: '**LOOK FOR:** a **thin, smooth enhancing ring** on post-contrast T1 **+ bright DWI / dark ADC in the center** (pus restricts).\n\n**VS NECROTIC TUMOR:** thick, irregular ring and a center that does not restrict.\n\n**ACT:** neurosurgery, blood cultures, and empiric antibiotics — see [Meningitis](#/tree/meningitis) for CNS antibiotic choices.',
+    images: [
+      { src: 'images/mri/brain-abscess-multisequence.jpg', alt: 'Eight labeled axial MRI panels of large right-sided brain abscesses: T2, T1, DWI, SWI, FLAIR, post-contrast T1, ADC and SWI minimum-intensity projection', caption: 'Multiloculated right brain abscesses: ring enhancement on post-contrast T1 ("T1 KM"), bright centers on DWI and dark on ADC — pus restricts. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [30],
+    next: 'mri-gallery',
+    summary: 'Thin ring + restricting center = abscess',
+  },
+
+  {
+    id: 'mri-pat-hsv',
+    type: 'info',
+    module: 6,
+    title: 'Pattern: HSV Encephalitis',
+    body: '**LOOK FOR:** bright FLAIR/T2 (often DWI too) in the **medial temporal lobes, insula, and cingulate** — usually both sides, one worse than the other. Later it can bleed (black on SWI).\n\n**VS MCA STROKE:** HSV spares the basal ganglia and does not follow an arterial territory.',
+    images: [
+      { src: 'images/mri/hsv-encephalitis-t2-coronal.jpg', alt: 'Coronal T2 brain MRI with high signal in both temporal lobes, hippocampi and insulae, worse on one side', caption: 'PCR-confirmed HSV encephalitis, coronal T2: bright signal in both temporal lobes, hippocampi, and insulae, worse on one side. Dr Laughlin Dawes, CC BY 3.0, via Wikimedia Commons.' },
+    ],
+    citation: [12],
+    next: 'mri-gallery',
+    summary: 'Medial temporal + insula FLAIR/T2, spares basal ganglia',
+  },
+
+  {
+    id: 'mri-pat-pres',
+    type: 'info',
+    module: 6,
+    title: 'Pattern: PRES',
+    body: '**LOOK FOR:** **symmetric** bright FLAIR/T2 in the **parieto-occipital** white matter and cortex. DWI is usually not restricted (ADC bright = vasogenic edema).\n\n**VARIANTS:** frontal, cerebellar, brainstem, and hemorrhagic forms exist.\n\n**MEANING:** reversible when the cause is treated; restriction on DWI suggests infarction and a worse outcome.',
+    images: [
+      { src: 'images/mri/pres-t2-axial.jpg', alt: 'Axial T2 brain MRI with bilateral, symmetric high signal in the occipital lobes', caption: 'PRES on axial T2: symmetric bright edema in both occipital lobes. Rashmi Chawla, Daniel Smith and Paul E Marik, CC BY 3.0, via Wikimedia Commons.' },
+    ],
+    citation: [11],
+    next: 'mri-gallery',
+    summary: 'Symmetric posterior vasogenic edema; usually no restriction',
+  },
+
+  {
+    id: 'mri-pat-cvst',
+    type: 'info',
+    module: 6,
+    title: 'Pattern: Venous Sinus Thrombosis',
+    body: '**LOOK FOR:**\n• A sinus missing on MRV\n• Clot in the sinus: black and blooming on SWI/GRE; bright on T1 once subacute\n• **Empty delta sign** on post-contrast images: the enhancing sinus wall around a dark clot\n\n**THE BRAIN:** venous infarcts that do not match an arterial territory, often with bleeding — near the midline at the top of the head (superior sagittal sinus) or in the temporal lobe (transverse sinus).',
+    images: [
+      { src: 'images/mri/cvst-mrv-occlusion.jpg', alt: 'Axial MR venogram projection with absent flow signal in the left transverse and sigmoid sinuses', caption: 'MR venogram: no flow in the left transverse and sigmoid sinuses (right side of the image). P Thomas et al., CC BY 2.0, via Wikimedia Commons.' },
+      { src: 'images/mri/cvst-multisequence.jpg', alt: 'Six labeled MRI panels of right transverse sinus thrombosis with the clot outlined on T2, T1, DWI, FLAIR and post-contrast T1 axial and coronal images', caption: 'Right transverse sinus thrombosis (outlined): subacute clot bright on T1 and FLAIR; post-contrast T1 ("T1 KM") shows the filling defect. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [10],
+    next: 'mri-gallery',
+    summary: 'Missing sinus on MRV, clot on SWI/T1, empty delta, non-arterial infarcts',
+  },
+
+  {
+    id: 'mri-pat-sea',
+    type: 'info',
+    module: 6,
+    title: 'Pattern: Spinal Epidural Abscess',
+    body: '**LOOK FOR:** a collection in the epidural space, bright on T2/STIR, with a **rim of enhancement** on post-contrast T1. Often next to discitis–osteomyelitis (the disc and both neighboring endplates bright on STIR and enhancing).\n\n**ACT:** any cord or cauda equina compression is a surgical emergency — spine surgery now.',
+    images: [
+      { src: 'images/mri/spinal-epidural-abscess.jpg', alt: 'Sagittal fluid-sensitive lumbar spine MRI with a posterior epidural abscess and a disc bulge compressing the thecal sac', caption: 'Posterior epidural abscess in the lower lumbar spine (with a disc bulge) compressing the thecal sac and causing cauda equina syndrome; sagittal fluid-sensitive image. Jing Jing Chan and Jen Jen Oh, CC BY 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [35, 36],
+    next: 'mri-gallery',
+    summary: 'Rim-enhancing epidural collection, often with discitis; compression = surgery',
+  },
+
+  {
+    id: 'mri-pat-mscc',
+    type: 'info',
+    module: 6,
+    title: 'Pattern: Cord Compression',
+    body: '**LOOK FOR:** a vertebral body that is **dark on T1** (fatty marrow replaced by tumor) and bright on STIR; soft tissue or a fracture fragment pushing into the canal and flattening the cord; bright cord signal on T2 (cord edema).\n\n**CLUES TO TUMOR** over osteoporotic collapse: a bulging back wall of the vertebral body and involvement of the pedicle.\n\n**CHECK THE WHOLE SPINE** — other levels are common.',
+    images: [
+      { src: 'images/mri/metastatic-cord-compression.jpg', alt: 'Thoracic spine images: sagittal CT, sagittal T2 and T1 MRI, and three axial T2 slices showing severe narrowing of the thecal sac', caption: 'Thoracic cord compression from a pathologic metastatic fracture plus epidural fat overgrowth: sagittal CT, sagittal T2 and T1, and axial T2 slices. Mixed cause — not a pure metastasis case. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+    ],
+    citation: [7],
+    next: 'mri-gallery',
+    summary: 'Dark T1 vertebra, epidural tumor, cord flattening; check whole spine',
+  },
+
+  // =====================================================================
+  // MODULE 7: PITFALLS & DISPOSITION
+  // =====================================================================
+
+  {
+    id: 'mri-pitfalls',
+    type: 'info',
+    module: 7,
+    title: 'Your Read Is Not the Final Read',
+    body: '**Use your read to act faster** — call the surgeon, start acyclovir, keep the patient — **never to discharge on.** The radiologist’s report is the final read.\n\n**HOW TO TALK TO RADIOLOGY:**\n• Give the clinical question, not "rule out pathology" — e.g. "sudden vertigo 6 h, central HINTS, rule out PICA stroke, please add thin posterior fossa DWI"\n• Say what you need ruled out and how urgent it is\n• Flag safety issues up front: device, eGFR, pregnancy, sedation needs\n• Ask for a call-back with the result',
+    citation: [5, 26],
+    next: 'mri-negative',
+    summary: 'Act on your read, never discharge on it; give radiology a clinical question',
+  },
+
+  {
+    id: 'mri-negative',
+    type: 'info',
+    module: 7,
+    title: 'When a Negative MRI Does Not Clear the Patient',
+    body: '• **Posterior stroke in the first 48 h** — early DWI misses many; a central exam wins\n• **TIA** — most have a normal DWI; it is still a TIA with real early stroke risk\n• **Dissection** — an MRI brain alone does not look at the neck vessels; needs MRA or CTA plus T1 fat-sat\n• **CVST** — a routine MRI without MRV can miss it\n• **SAH** — MRI is not the rule-out test; follow the CT/LP pathway\n• **HSV encephalitis** — very early MRI can be normal; keep the acyclovir and get the LP\n• **Spine infection** — very early disease can be subtle; re-image if fever, pain, and inflammatory markers persist\n\n**Treat the patient, not the picture.**',
+    citation: [3, 4, 9, 10, 12, 32, 41],
+    next: 'mri-dispo',
+    summary: 'Early DWI, TIA, dissection without MRA, CVST without MRV, SAH, early HSV',
+    safetyLevel: 'critical',
+  },
+
+  {
+    id: 'mri-dispo',
+    type: 'question',
+    module: 7,
+    title: 'Disposition by Finding',
+    body: 'What did the MRI show?',
+    options: [
+      { label: 'Surgical or neuro emergency', description: 'Cord or cauda compression, epidural abscess, large-vessel stroke, brain abscess, apoplexy with vision loss', next: 'mri-dispo-emergent', urgency: 'critical' },
+      { label: 'A diagnosis that needs admission', description: 'Stroke, CVST, PRES, encephalitis, osteomyelitis, dissection', next: 'mri-dispo-admit', urgency: 'urgent' },
+      { label: 'Negative, but I am still worried', next: 'mri-dispo-negative-high' },
+      { label: 'Negative or benign, low concern', next: 'mri-dispo-discharge' },
+    ],
+    summary: 'Emergency / admit / negative but worried / discharge',
+  },
+
+  {
+    id: 'mri-dispo-emergent',
+    type: 'result',
+    module: 7,
+    title: 'Call From the Scanner',
+    body: 'Call the specialist as soon as you see it — do not wait for the final report:\n• **Cord compression, cauda equina, epidural abscess** → spine surgery or neurosurgery for decompression\n• **Large-vessel stroke** → stroke team and neurointerventional\n• **Brain abscess** → neurosurgery\n• **Pituitary apoplexy with vision loss** → neurosurgery and endocrinology\n\nStart time-critical treatment in parallel using the matching consult ([Cord Emergencies](#/tree/cord-emergencies), [Stroke](#/tree/stroke), [Cauda Equina](#/tree/cauda-equina)).',
+    recommendation: 'Emergency consult now; start time-critical treatment while the final read is pending.',
+    confidence: 'definitive',
+    citation: [2, 6, 7, 13],
+    summary: 'Call surgery/stroke team immediately; treat in parallel',
+  },
+
+  {
+    id: 'mri-dispo-admit',
+    type: 'result',
+    module: 7,
+    title: 'Admit to the Owning Service',
+    body: 'Admit to the service that owns the diagnosis and hand off the exact images and sequences that made it.\n• Stroke or dissection → stroke unit or neurology — [Stroke](#/tree/stroke), [Cervical Artery Dissection](#/tree/cervical-artery-dissection)\n• CVST → neurology — [CVST](#/tree/cvst)\n• PRES or HSV encephalitis → medicine/ICU with neurology\n• Osteomyelitis or deep infection → medicine or orthopedics, with surgery if there is an abscess',
+    recommendation: 'Admit with the specific diagnosis and imaging handoff.',
+    confidence: 'recommended',
+    citation: [1, 9, 10, 11, 12, 15],
+    summary: 'Admit to the owning service with the imaging handoff',
+  },
+
+  {
+    id: 'mri-dispo-negative-high',
+    type: 'result',
+    module: 7,
+    title: 'Negative MRI, Still Worried',
+    body: 'Do not discharge on a negative MRI when the exam still points to danger.\n• Admit or observe and get neurology involved\n• Get the complementary test the MRI did not answer: MRA or CTA, MRV, or LP\n• Posterior stroke suspected: repeat MRI with thin posterior fossa DWI after 48–72 h',
+    recommendation: 'Observe or admit; obtain the missing test; repeat MRI when early DWI was the reason it was negative.',
+    confidence: 'recommended',
+    citation: [3, 4, 33],
+    summary: 'Admit or observe, get the missing test, repeat MRI if early DWI',
+  },
+
+  {
+    id: 'mri-dispo-discharge',
+    type: 'result',
+    module: 7,
+    title: 'Discharge',
+    body: '**Before discharge:**\n• The radiologist’s final read is back and matches the clinical picture\n• The result is explained to the patient and documented\n• Follow-up is arranged with the team that ordered or will act on the study\n\n**Return now for:** new weakness, numbness, speech or vision change, worsening headache, fever with back pain, bladder or bowel change, or new trouble walking.',
+    recommendation: 'Discharge only with a final read, clear follow-up, and specific return precautions.',
+    confidence: 'recommended',
+    citation: [26],
+    summary: 'Final read back, follow-up arranged, return precautions',
+  },
+];
+
+export const MRI_NODE_COUNT = MRI_NODES.length;
+
+export const MRI_MODULE_LABELS = [
+  'Before You Order',
+  'What to Order',
+  'The Sequences',
+  'Seeing Blood',
+  'How to Read It',
+  'Pattern Gallery',
+  'Pitfalls & Disposition',
+];
+
+export const MRI_CITATIONS: Citation[] = [
+  { num: 1, text: 'Expert Panel on Neurological Imaging; Pannell JS, Corey AS, et al. ACR Appropriateness Criteria Cerebrovascular Diseases-Stroke and Stroke-Related Conditions. J Am Coll Radiol. 2024;21(6S):S21-S64. https://acsearch.acr.org/docs/3149012/Narrative/' },
+  { num: 2, text: 'Prabhakaran S, Gonzalez NR, Zachrison KS, et al. 2026 Guideline for the Early Management of Patients With Acute Ischemic Stroke: a guideline from the American Heart Association/American Stroke Association. Stroke. 2026;57(8):e316-e436.' },
+  { num: 3, text: 'Kattah JC, Talkad AV, Wang DZ, Hsieh YH, Newman-Toker DE. HINTS to diagnose stroke in the acute vestibular syndrome: three-step bedside oculomotor examination more sensitive than early MRI diffusion-weighted imaging. Stroke. 2009;40(11):3504-3510.' },
+  { num: 4, text: 'Saber Tehrani AS, Kattah JC, Mantokoudis G, et al. Small strokes causing severe vertigo: frequency of false-negative MRIs and nonlacunar mechanisms. Neurology. 2014;83(2):169-173.' },
+  { num: 5, text: 'Edlow JA, Carpenter C, Akhter M, et al. Guidelines for reasonable and appropriate care in the emergency department 3 (GRACE-3): acute dizziness and vertigo in the emergency department. Acad Emerg Med. 2023;30(5):442-486.' },
+  { num: 6, text: 'Expert Panel on Neurological Imaging; Hutchins TA, Peckham M, Shah LM, et al. ACR Appropriateness Criteria Low Back Pain: 2021 Update. J Am Coll Radiol. 2021;18(11S):S361-S379. https://acsearch.acr.org/docs/69483/Narrative' },
+  { num: 7, text: 'National Institute for Health and Care Excellence. Spinal metastases and metastatic spinal cord compression (NG234). London: NICE; 2023.' },
+  { num: 8, text: 'Expert Panel on Neurological Imaging; Peckham M, Hutchins TA, Amrhein TJ, et al. ACR Appropriateness Criteria Myelopathy: 2026 Update. J Am Coll Radiol. 2026;23(9):1870-1883. https://acsearch.acr.org/docs/69484/Narrative/' },
+  { num: 9, text: 'Yaghi S, Engelter S, Del Brutto VJ, et al. Treatment and outcomes of cervical artery dissection in adults: a scientific statement from the American Heart Association. Stroke. 2024;55(3):e91-e106.' },
+  { num: 10, text: 'Saposnik G, Bushnell C, Coutinho JM, et al. Diagnosis and management of cerebral venous thrombosis: a scientific statement from the American Heart Association. Stroke. 2024;55(3):e77-e90.' },
+  { num: 11, text: 'Fugate JE, Rabinstein AA. Posterior reversible encephalopathy syndrome: clinical and radiological manifestations, pathophysiology, and outstanding questions. Lancet Neurol. 2015;14(9):914-925.' },
+  { num: 12, text: 'Tunkel AR, Glaser CA, Bloch KC, et al. The management of encephalitis: clinical practice guidelines by the Infectious Diseases Society of America. Clin Infect Dis. 2008;47(3):303-327.' },
+  { num: 13, text: 'Rajasekaran S, Vanderpump M, Baldeweg S, et al. UK guidelines for the management of pituitary apoplexy. Clin Endocrinol (Oxf). 2011;74(1):9-20.' },
+  { num: 14, text: 'Expert Panel on Neurological Imaging; Friedman ER, Juliano AF, Hagiwara M, et al. ACR Appropriateness Criteria Vision Loss. J Am Coll Radiol. 2025;22(11S):S738-S765. https://acsearch.acr.org/docs/3196640/Narrative' },
+  { num: 15, text: 'Expert Panel on Musculoskeletal Imaging; Pierce JL, Perry MT, Wessell DE, et al. ACR Appropriateness Criteria Suspected Osteomyelitis, Septic Arthritis, or Soft Tissue Infection (Excluding Spine and Diabetic Foot): 2022 Update. J Am Coll Radiol. 2022;19(11S):S473-S487. https://acsearch.acr.org/docs/3094201/Narrative/' },
+  { num: 16, text: 'Stevens DL, Bisno AL, Chambers HF, et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by the Infectious Diseases Society of America. Clin Infect Dis. 2014;59(2):e10-e52.' },
+  { num: 17, text: 'Expert Panel on Musculoskeletal Imaging; Bartolotta RJ, Ha AS, et al. ACR Appropriateness Criteria Acute Hip Pain: 2024 Update. J Am Coll Radiol. 2025;22(5S):S3-S13. https://acsearch.acr.org/docs/3082587/Narrative' },
+  { num: 18, text: 'Expert Panel on Musculoskeletal Imaging; Torabi M, Lenchik L, Beaman FD, et al. ACR Appropriateness Criteria Acute Hand and Wrist Trauma. J Am Coll Radiol. 2019;16(5S):S7-S17. https://acsearch.acr.org/docs/69418/Narrative/' },
+  { num: 19, text: 'Expert Panel on Gastrointestinal Imaging; Kambadakone AR, Santillan CS, Kim DH, et al. ACR Appropriateness Criteria Right Lower Quadrant Pain: 2022 Update. J Am Coll Radiol. 2022;19(11S):S445-S461. https://acsearch.acr.org/docs/69357/Narrative/' },
+  { num: 20, text: 'ACOG Committee Opinion No. 723: Guidelines for diagnostic imaging during pregnancy and lactation. Obstet Gynecol. 2017;130(4):e210-e216.' },
+  { num: 21, text: 'ASGE Standards of Practice Committee; Buxbaum JL, Abbas Fehmi SM, Sultan S, et al. ASGE guideline on the role of endoscopy in the evaluation and management of choledocholithiasis. Gastrointest Endosc. 2019;89(6):1075-1105.e15.' },
+  { num: 22, text: 'ACR Committee on Drugs and Contrast Media. ACR Manual on Contrast Media. Reston, VA: American College of Radiology; 2024.' },
+  { num: 23, text: 'Weinreb JC, Rodby RA, Yee J, et al. Use of intravenous gadolinium-based contrast media in patients with kidney disease: consensus statements from the American College of Radiology and the National Kidney Foundation. Radiology. 2021;298(1):28-35.' },
+  { num: 24, text: 'Ray JG, Vermeulen MJ, Bharatha A, Montanera WJ, Park AL. Association between MRI exposure during pregnancy and fetal and childhood outcomes. JAMA. 2016;316(9):952-961.' },
+  { num: 25, text: 'Indik JH, Gimbel JR, Abe H, et al. 2017 HRS expert consensus statement on magnetic resonance imaging and radiation exposure in patients with cardiovascular implantable electronic devices. Heart Rhythm. 2017;14(7):e97-e153.' },
+  { num: 26, text: 'Pedrosa I, Altman DA, Dillman JR, Hoff MN, et al. American College of Radiology Manual on MR Safety: 2024 Update and Revisions. Radiology. 2025;315(1):e241405.' },
+  { num: 27, text: 'Kidwell CS, Chalela JA, Saver JL, et al. Comparison of MRI and CT for detection of acute intracerebral hemorrhage. JAMA. 2004;292(15):1823-1830.' },
+  { num: 28, text: 'Chalela JA, Kidwell CS, Nentwich LM, et al. Magnetic resonance imaging and computed tomography in emergency assessment of patients with suspected acute stroke: a prospective comparison. Lancet. 2007;369(9558):293-298.' },
+  { num: 29, text: 'Bradley WG Jr. MR appearance of hemorrhage in the brain. Radiology. 1993;189(1):15-26.' },
+  { num: 30, text: 'Schaefer PW, Grant PE, Gonzalez RG. Diffusion-weighted MR imaging of the brain. Radiology. 2000;217(2):331-345.' },
+  { num: 31, text: 'Thomalla G, Simonsen CZ, Boutitie F, et al. MRI-guided thrombolysis for stroke with unknown time of onset. N Engl J Med. 2018;379(7):611-622.' },
+  { num: 32, text: 'Easton JD, Saver JL, Albers GW, et al. Definition and evaluation of transient ischemic attack: a scientific statement for healthcare professionals from the American Heart Association/American Stroke Association. Stroke. 2009;40(6):2276-2293.' },
+  { num: 33, text: 'Saber Tehrani AS, Kattah JC, Kerber KA, et al. Diagnosing stroke in acute dizziness and vertigo: pitfalls and pearls. Stroke. 2018;49(3):788-795.' },
+  { num: 34, text: 'Lozano RJ, Shareef F, Neupane A, et al. Detectability of acute ischemic stroke with thin (3 mm) axial versus thin (3 mm) coronal DWI in ED patients with acute dizziness. Emerg Radiol. 2025;32(2):225-231.' },
+  { num: 35, text: 'Expert Panel on Neurological Imaging; Ortiz AO, Levitt A, Shah LM, et al. ACR Appropriateness Criteria Suspected Spine Infection. J Am Coll Radiol. 2021;18(11S):S488-S501. https://acsearch.acr.org/docs/3148734/Narrative/' },
+  { num: 36, text: 'Ju KL, Kim SD, Melikian R, Bono CM, et al. Predicting patients with concurrent noncontiguous spinal epidural abscess lesions. Spine J. 2015;15(1):95-101.' },
+  { num: 37, text: 'Gelal FM, Kitis O, Calli C, Yunten N, Dirim Vidinli B, Uygur M. Craniocervical artery dissection: diagnosis and follow-up with MR imaging and MR angiography. Med Sci Monit. 2004;10(10):MT109-116.' },
+  { num: 38, text: 'Optic Neuritis Study Group. Multiple sclerosis risk after optic neuritis: final optic neuritis treatment trial follow-up. Arch Neurol. 2008;65(6):727-732.' },
+  { num: 39, text: 'Expert Panel on Gastrointestinal Imaging; Russo GK, Zaheer A, Kamel IR, et al. ACR Appropriateness Criteria Right Upper Quadrant Pain: 2022 Update. J Am Coll Radiol. 2023;20(5S):S211-S223.' },
+  { num: 40, text: 'Mitchell P, Wilkinson ID, Hoggard N, et al. Detection of subarachnoid haemorrhage with magnetic resonance imaging. J Neurol Neurosurg Psychiatry. 2001;70(2):205-211.' },
+  { num: 41, text: 'Hoh BL, Ko NU, Amin-Hanjani S, et al. 2023 Guideline for the Management of Patients With Aneurysmal Subarachnoid Hemorrhage: a guideline from the American Heart Association/American Stroke Association. Stroke. 2023;54(7):e314-e370.' },
+  { num: 42, text: 'Cortes-Albornoz MC, Clifford B, Lo WC, Yee S, et al. A 3-minute ultrafast MRI and MRA protocol for screening of acute ischemic stroke. J Am Coll Radiol. 2025;22(3):366-375.' },
+  { num: 43, text: 'Expert Panel on Neurologic Imaging; Burns J, Policeni B, Bykowski J, et al. ACR Appropriateness Criteria Neuroendocrine Imaging. J Am Coll Radiol. 2019;16(5S):S161-S173.' },
+  { num: 44, text: 'Expert Panel on GYN and OB Imaging; Brook OR, Dadour JR, Robbins JB, et al. ACR Appropriateness Criteria Acute Pelvic Pain in the Reproductive Age Group: 2023 Update. J Am Coll Radiol. 2024;21(6S):S3-S20.' },
+];

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" width="900" height="470" role="img" aria-labelledby="title desc">
+  <title id="title">How to Read an Emergency MRI: Brain and Spine Order</title>
+  <desc id="desc">Two read-order ladders. Step zero for both: confirm the right patient, date and sequence labels. Brain: one, DWI with ADC for acute stroke or pus; two, FLAIR and T2 for edema, SAH and mass effect; three, SWI or GRE for blood; four, T1 post-contrast for enhancement such as abscess rim, tumor or meningitis. Spine: one, sagittal T2 for the whole canal, cord signal and compression level; two, sagittal STIR for marrow and soft-tissue edema; three, axial T2 at the level of concern for the cord, cauda equina and roots; four, T1 post-contrast for epidural abscess or tumor.</desc>
+  <style>
+    .bg { fill: #FFF8F2; }
+    .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .col-title { font: 700 18px system-ui, -apple-system, sans-serif; fill: #BF5700; }
+    .step0 { font: 600 13px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .num { font: 700 18px system-ui, -apple-system, sans-serif; fill: #FFFFFF; }
+    .seq { font: 700 15px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .why { font: 400 13px system-ui, -apple-system, sans-serif; fill: #5A5A5A; }
+    .card { fill: #FFFFFF; stroke: #E6D9CC; stroke-width: 1.2; }
+    .zero { fill: #FBF1E8; stroke: #BF5700; stroke-width: 1.2; stroke-dasharray: 5 3; }
+    .link { stroke: #BF5700; stroke-width: 2; }
+  </style>
+  <rect class="bg" width="900" height="470"/>
+  <text class="title" x="20" y="36">Read it in the same order every time</text>
+
+  <rect class="zero" x="20" y="52" width="860" height="40" rx="8"/>
+  <text class="step0" x="36" y="77">STEP 0 — right patient, right date, right body part; read the sequence label on every series before you interpret it.</text>
+
+  <!-- BRAIN -->
+  <text class="col-title" x="20" y="124">BRAIN</text>
+  <line class="link" x1="48" y1="160" x2="48" y2="430"/>
+  <g>
+    <rect class="card" x="20" y="138" width="420" height="64" rx="10"/>
+    <circle cx="48" cy="170" r="16" fill="#BF5700"/><text class="num" x="42" y="176">1</text>
+    <text class="seq" x="76" y="164">DWI + ADC</text>
+    <text class="why" x="76" y="186">Acute stroke? Pus? Bright DWI must be dark on ADC.</text>
+  </g>
+  <g>
+    <rect class="card" x="20" y="212" width="420" height="64" rx="10"/>
+    <circle cx="48" cy="244" r="16" fill="#BF5700"/><text class="num" x="42" y="250">2</text>
+    <text class="seq" x="76" y="238">FLAIR, then T2</text>
+    <text class="why" x="76" y="260">Edema, SAH in sulci, mass effect, midline shift.</text>
+  </g>
+  <g>
+    <rect class="card" x="20" y="286" width="420" height="64" rx="10"/>
+    <circle cx="48" cy="318" r="16" fill="#BF5700"/><text class="num" x="42" y="324">3</text>
+    <text class="seq" x="76" y="312">SWI / GRE</text>
+    <text class="why" x="76" y="334">Blood: hemorrhage, microbleeds, clot in a sinus.</text>
+  </g>
+  <g>
+    <rect class="card" x="20" y="360" width="420" height="64" rx="10"/>
+    <circle cx="48" cy="392" r="16" fill="#BF5700"/><text class="num" x="42" y="398">4</text>
+    <text class="seq" x="76" y="386">T1 post-contrast (if given)</text>
+    <text class="why" x="76" y="408">Ring (abscess), mass (tumor), meninges, sinus filling.</text>
+  </g>
+
+  <!-- SPINE -->
+  <text class="col-title" x="460" y="124">SPINE</text>
+  <line class="link" x1="488" y1="160" x2="488" y2="430"/>
+  <g>
+    <rect class="card" x="460" y="138" width="420" height="64" rx="10"/>
+    <circle cx="488" cy="170" r="16" fill="#BF5700"/><text class="num" x="482" y="176">1</text>
+    <text class="seq" x="516" y="164">Sagittal T2</text>
+    <text class="why" x="516" y="186">Whole canal: cord signal, level of compression.</text>
+  </g>
+  <g>
+    <rect class="card" x="460" y="212" width="420" height="64" rx="10"/>
+    <circle cx="488" cy="244" r="16" fill="#BF5700"/><text class="num" x="482" y="250">2</text>
+    <text class="seq" x="516" y="238">Sagittal STIR</text>
+    <text class="why" x="516" y="260">Marrow edema: fracture, infection, metastasis.</text>
+  </g>
+  <g>
+    <rect class="card" x="460" y="286" width="420" height="64" rx="10"/>
+    <circle cx="488" cy="318" r="16" fill="#BF5700"/><text class="num" x="482" y="324">3</text>
+    <text class="seq" x="516" y="312">Axial T2 at the level of concern</text>
+    <text class="why" x="516" y="334">Cord, cauda equina, roots, how tight is the canal.</text>
+  </g>
+  <g>
+    <rect class="card" x="460" y="360" width="420" height="64" rx="10"/>
+    <circle cx="488" cy="392" r="16" fill="#BF5700"/><text class="num" x="482" y="398">4</text>
+    <text class="seq" x="516" y="386">T1 post-contrast (if given)</text>
+    <text class="why" x="516" y="408">Epidural abscess, discitis, tumor enhancement.</text>
+  </g>
+  <text class="why" x="20" y="458">Your read guides the next step. The radiologist's read is the final read.</text>
+</svg>

@@ -4243,6 +4243,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 38,
                 entryNodeId: 'ct-start',
+            },
+            {
+                id: 'mri-for-dummies',
+                title: 'MRI for Dummies',
+                subtitle: 'What to order \u00B7 How to read it \u00B7 Seeing blood',
+                categoryId: 'us-rads',
+                version: '1.0',
+                nodeCount: 60,
+                entryNodeId: 'mri-start',
             }
         ],
         isCustom: false,

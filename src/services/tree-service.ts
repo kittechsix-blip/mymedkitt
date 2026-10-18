@@ -1378,6 +1378,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/ct-decision-support.js');
       return { nodes: m.CT_DECISION_SUPPORT_NODES, entryNodeId: 'ct-start', categoryId: 'us-rads', moduleLabels: m.CT_DECISION_SUPPORT_MODULE_LABELS, citations: m.CT_DECISION_SUPPORT_CITATIONS, criticalActions: m.CT_DECISION_SUPPORT_CRITICAL_ACTIONS };
     },
+    'mri-for-dummies': async () => {
+      const m = await import('../data/trees/mri-for-dummies.js');
+      return { nodes: m.MRI_NODES, entryNodeId: 'mri-start', categoryId: 'us-rads', moduleLabels: m.MRI_MODULE_LABELS, citations: m.MRI_CITATIONS, criticalActions: m.MRI_CRITICAL_ACTIONS };
+    },
     'dfsa-workup': async () => {
       const m = await import('../data/trees/dfsa-workup.js');
       return { nodes: m.DFSA_WORKUP_NODES, entryNodeId: 'dfsa-start', categoryId: 'emergency-medicine', moduleLabels: m.DFSA_WORKUP_MODULE_LABELS, citations: m.DFSA_WORKUP_CITATIONS, criticalActions: m.DFSA_WORKUP_CRITICAL_ACTIONS };

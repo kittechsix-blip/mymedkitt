@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520" role="img" aria-labelledby="title desc">
+  <title id="title">Age of Blood on MRI: T1 and T2 Signal by Stage</title>
+  <desc id="desc">Five stages of intraparenchymal hemorrhage. Hyperacute, under 24 hours, oxyhemoglobin: T1 isointense, T2 bright. Acute, 1 to 3 days, deoxyhemoglobin: T1 isointense, T2 dark. Early subacute, 3 to 7 days, intracellular methemoglobin: T1 bright, T2 dark. Late subacute, 1 to 4 weeks, extracellular methemoglobin: T1 bright, T2 bright. Chronic, weeks to years, hemosiderin: T1 dark, T2 dark. Mnemonic: It Be, Iddy Biddy, Baby Doody, where I is iso, B is bright and D is dark, T1 letter first then T2. SWI or GRE shows blood as dark and blooming from the first hours onward.</desc>
+  <style>
+    .bg { fill: #FFF8F2; }
+    .title { font: 700 22px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .sub { font: 400 13px system-ui, -apple-system, sans-serif; fill: #5A5A5A; }
+    .head { font: 700 13px system-ui, -apple-system, sans-serif; fill: #FFFFFF; }
+    .stage { font: 700 15px system-ui, -apple-system, sans-serif; fill: #BF5700; }
+    .cell { font: 400 13px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .mn { font: 700 16px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .sw-t { font: 700 11px system-ui, -apple-system, sans-serif; }
+    .row-a { fill: #FFFFFF; }
+    .row-b { fill: #FBF1E8; }
+    .sw { stroke: #5A5A5A; stroke-width: 1; }
+    .note { font: 400 13px system-ui, -apple-system, sans-serif; fill: #1A1A1A; }
+    .note-b { font: 700 13px system-ui, -apple-system, sans-serif; fill: #B22222; }
+  </style>
+  <rect class="bg" width="900" height="520"/>
+  <text class="title" x="20" y="36">How old is the blood? (brain parenchyma)</text>
+  <text class="sub" x="20" y="58">Signal compared with normal brain. Times are approximate and overlap.</text>
+
+  <rect x="20" y="72" width="860" height="34" rx="6" fill="#BF5700"/>
+  <text class="head" x="32" y="94">Stage</text>
+  <text class="head" x="196" y="94">Time</text>
+  <text class="head" x="300" y="94">Blood product</text>
+  <text class="head" x="520" y="94">T1</text>
+  <text class="head" x="616" y="94">T2</text>
+  <text class="head" x="712" y="94">Mnemonic</text>
+
+  <!-- Hyperacute -->
+  <rect class="row-a" x="20" y="110" width="860" height="62"/>
+  <text class="stage" x="32" y="146">Hyperacute</text>
+  <text class="cell" x="196" y="146">&lt; 24 h</text>
+  <text class="cell" x="300" y="146">Oxyhemoglobin (in cells)</text>
+  <rect class="sw" x="502" y="120" width="70" height="42" rx="4" fill="#8C8C8C"/><text class="sw-t" x="524" y="146" fill="#FFFFFF">ISO</text>
+  <rect class="sw" x="598" y="120" width="70" height="42" rx="4" fill="#F7F7F7"/><text class="sw-t" x="612" y="146" fill="#1A1A1A">BRIGHT</text>
+  <text class="mn" x="712" y="146">It Be</text>
+
+  <!-- Acute -->
+  <rect class="row-b" x="20" y="172" width="860" height="62"/>
+  <text class="stage" x="32" y="208">Acute</text>
+  <text class="cell" x="196" y="208">1–3 days</text>
+  <text class="cell" x="300" y="208">Deoxyhemoglobin (in cells)</text>
+  <rect class="sw" x="502" y="182" width="70" height="42" rx="4" fill="#8C8C8C"/><text class="sw-t" x="524" y="208" fill="#FFFFFF">ISO</text>
+  <rect class="sw" x="598" y="182" width="70" height="42" rx="4" fill="#1C1C1C"/><text class="sw-t" x="617" y="208" fill="#FFFFFF">DARK</text>
+  <text class="mn" x="712" y="208">Iddy</text>
+
+  <!-- Early subacute -->
+  <rect class="row-a" x="20" y="234" width="860" height="62"/>
+  <text class="stage" x="32" y="270">Early subacute</text>
+  <text class="cell" x="196" y="270">3–7 days</text>
+  <text class="cell" x="300" y="270">Methemoglobin (in cells)</text>
+  <rect class="sw" x="502" y="244" width="70" height="42" rx="4" fill="#F7F7F7"/><text class="sw-t" x="516" y="270" fill="#1A1A1A">BRIGHT</text>
+  <rect class="sw" x="598" y="244" width="70" height="42" rx="4" fill="#1C1C1C"/><text class="sw-t" x="617" y="270" fill="#FFFFFF">DARK</text>
+  <text class="mn" x="712" y="270">Biddy</text>
+
+  <!-- Late subacute -->
+  <rect class="row-b" x="20" y="296" width="860" height="62"/>
+  <text class="stage" x="32" y="332">Late subacute</text>
+  <text class="cell" x="196" y="332">1–4 weeks</text>
+  <text class="cell" x="300" y="332">Methemoglobin (cells burst)</text>
+  <rect class="sw" x="502" y="306" width="70" height="42" rx="4" fill="#F7F7F7"/><text class="sw-t" x="516" y="332" fill="#1A1A1A">BRIGHT</text>
+  <rect class="sw" x="598" y="306" width="70" height="42" rx="4" fill="#F7F7F7"/><text class="sw-t" x="612" y="332" fill="#1A1A1A">BRIGHT</text>
+  <text class="mn" x="712" y="332">Baby</text>
+
+  <!-- Chronic -->
+  <rect class="row-a" x="20" y="358" width="860" height="62"/>
+  <text class="stage" x="32" y="394">Chronic</text>
+  <text class="cell" x="196" y="394">Weeks–years</text>
+  <text class="cell" x="300" y="394">Hemosiderin / ferritin</text>
+  <rect class="sw" x="502" y="368" width="70" height="42" rx="4" fill="#1C1C1C"/><text class="sw-t" x="521" y="394" fill="#FFFFFF">DARK</text>
+  <rect class="sw" x="598" y="368" width="70" height="42" rx="4" fill="#1C1C1C"/><text class="sw-t" x="617" y="394" fill="#FFFFFF">DARK</text>
+  <text class="mn" x="712" y="394">Doody</text>
+
+  <rect x="20" y="110" width="860" height="310" fill="none" stroke="#E6D9CC"/>
+
+  <text class="note" x="20" y="452">Mnemonic: <tspan font-weight="700">I</tspan> = iso, <tspan font-weight="700">B</tspan> = bright, <tspan font-weight="700">D</tspan> = dark. First letter is T1, second is T2 ("It Be" = T1 iso, T2 bright).</text>
+  <text class="note" x="20" y="476">SWI / GRE: dark and "blooming" from the first hours on — the most sensitive sequence for blood.</text>
+  <text class="note-b" x="20" y="500">In the ED, non-contrast CT is still the first test for acute bleeding.</text>
+</svg>

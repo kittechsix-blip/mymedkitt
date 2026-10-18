@@ -259,6 +259,7 @@ export const TREE_REGISTRY = {
   'right-heart-failure': { prefix: 'RHF',              entryNodeId: 'rhf-start',          categoryId: 'cardiology' },
   'ocular-trauma':    { prefix: 'OCULAR_TRAUMA',      entryNodeId: 'oct-start',          categoryId: 'ophthalmology' },
   'ct-decision-support': { prefix: 'CT_DECISION_SUPPORT', entryNodeId: 'ct-start',    categoryId: 'em' },
+  'mri-for-dummies':  { prefix: 'MRI',                 entryNodeId: 'mri-start',          categoryId: 'us-rads' },
   'dfsa-workup':      { prefix: 'DFSA_WORKUP',         entryNodeId: 'dfsa-start',         categoryId: 'em' },
   'hypothermia':      { prefix: 'HYPOTHERMIA',         entryNodeId: 'hypo-start',         categoryId: 'em' },
   'awake-intubation': { prefix: 'AWAKE_INTUBATION',    entryNodeId: 'awake-start',       categoryId: 'anesthesia-airway' },
