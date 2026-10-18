@@ -54,7 +54,7 @@ export const MRI_NODES = [
         body: 'Every patient completes a written MRI screening form before entering **Zone IV** (the magnet room). Run it with the **MRI Safety** checklist in the toolbar — it gives go / needs radiology clearance / not safe.\n\nWhat did the screen turn up?',
         images: [
             { src: 'images/mri/mri-safety-zones.svg', alt: 'Diagram of the four ACR MRI safety zones nested around the magnet room, Zone IV', caption: 'ACR four-zone model: screening happens in Zone II; only screened people enter Zone III; Zone IV is the magnet room. Original diagram, myMedKitt.' },
-            { src: 'images/mri/mri-scanner-photo.jpg', alt: 'A 1.5 tesla MRI scanner with its patient table in a hospital scanner room', caption: 'A 1.5 T clinical scanner (Zone IV). Jan Ainali, CC BY 3.0, via Wikimedia Commons.' },
+            { src: 'images/mri/mri-scanner-photo.jpg', alt: 'A 1.5 tesla MRI scanner with its patient table in a hospital scanner room', caption: 'A 1.5 T clinical scanner (Zone IV). Jan Ainali, CC BY 3.0, via Wikimedia Commons, resized.' },
         ],
         calculatorLinks: [{ id: 'mri-safety-checklist', label: 'MRI Safety Checklist' }],
         citation: [25, 26],
@@ -272,7 +272,7 @@ export const MRI_NODES = [
         title: 'Order Card: Cauda Equina Syndrome',
         body: '**ORDER:** MRI lumbar spine without IV contrast — **emergently**, not next day\n\n**CONTRAST:** No (add contrast only if infection or tumor is suspected).\n\n**WHY:** Shows the disc or mass squeezing the cauda equina. No exam finding, including post-void residual, reliably rules it out.\n\n**WATCH OUT:**\n• Do not wait for urinary retention — the best outcomes come from decompressing incomplete CES\n• If MRI is impossible (unsafe device), discuss CT myelography with radiology and spine surgery\n\n→ [Cauda Equina](#/tree/cauda-equina)',
         images: [
-            { src: 'images/mri/lumbar-disc-herniation-t2-sagittal.jpg', alt: 'Sagittal T2 MRI of the lumbar spine with a circled L5-S1 disc herniation pushing into the spinal canal', caption: 'Sagittal T2, lumbar spine: L5–S1 disc herniation (circled) pushing back into the bright CSF of the canal. Michael-W, CC BY-SA 3.0, via Wikimedia Commons.' },
+            { src: 'images/mri/lumbar-disc-herniation-t2-sagittal.jpg', alt: 'Sagittal T2 MRI of the lumbar spine with a circled L5-S1 disc herniation pushing into the spinal canal', caption: 'Sagittal T2, lumbar spine: L5–S1 disc herniation (circled) pushing back into the bright CSF of the canal. Michael-W, CC BY-SA 3.0, via Wikimedia Commons, resized.' },
         ],
         citation: [6],
         next: 'mri-next',
@@ -390,7 +390,7 @@ export const MRI_NODES = [
         title: 'T1 — The Anatomy Picture',
         body: '**BRIGHT:** fat, subacute blood (methemoglobin), gadolinium, melanin, protein-rich fluid\n\n**DARK:** water — CSF, edema, most disease\n\n**USE IT FOR:** anatomy (grey matter looks darker than white matter, like an anatomy atlas), bone marrow (normal adult marrow is fatty and bright; tumor or infection replaces it and turns it dark), and as the "before" picture for contrast.\n\n**ONE THING TO KNOW:** anything bright on T1 *before* contrast is fat, blood, or protein — not enhancement.',
         images: [
-            { src: 'images/mri/t1-axial-brain.jpg', alt: 'Normal axial T1-weighted brain MRI at the level of the lateral ventricles with dark CSF and white matter brighter than grey matter', caption: 'Normal axial T1: CSF in the ventricles is dark; white matter is brighter than grey matter. 511KeV, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/t1-axial-brain.jpg', alt: 'Normal axial T1-weighted brain MRI at the level of the lateral ventricles with dark CSF and white matter brighter than grey matter', caption: 'Normal axial T1: CSF in the ventricles is dark; white matter is brighter than grey matter. 511KeV, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [30],
         next: 'mri-seq-t2',
@@ -403,7 +403,7 @@ export const MRI_NODES = [
         title: 'T2 — "T2 = H2O"',
         body: '**BRIGHT:** water — CSF, edema, pus, cysts, most disease. Fat is also fairly bright on modern T2.\n\n**DARK:** fast-flowing blood (flow voids), old blood (hemosiderin), calcium, cortical bone, air\n\n**USE IT FOR:** finding swelling and fluid; in the spine, sagittal T2 works like a myelogram — bright CSF outlines the cord and roots.\n\n**ONE THING TO KNOW:** normal arteries are black **flow voids** on T2. A vessel that should be black but is grey or bright may be occluded or clotted.',
         images: [
-            { src: 'images/mri/t2-axial-brain.png', alt: 'Normal axial T2-weighted brain MRI with bright CSF in the ventricles and sulci', caption: 'Normal axial T2: CSF in the ventricles and sulci is bright. Sean Novak, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/t2-axial-brain.png', alt: 'Normal axial T2-weighted brain MRI with bright CSF in the ventricles and sulci', caption: 'Normal axial T2: CSF in the ventricles and sulci is bright. Sean Novak, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [30],
         next: 'mri-seq-flair',
@@ -416,7 +416,7 @@ export const MRI_NODES = [
         title: 'FLAIR — T2 With the CSF Turned Off',
         body: '**BRIGHT:** edema and disease, now easy to see because the CSF next to it is dark; blood or pus in the sulci (SAH, meningitis); MS plaques\n\n**DARK:** normal CSF\n\n**USE IT FOR:** edema next to the ventricles and cortex, subarachnoid blood, encephalitis, PRES, and timing a stroke.\n\n**ONE THING TO KNOW:** bright signal in the sulci is not always blood — meningitis, recent gadolinium, and patients breathing high-flow oxygen can all do it.',
         images: [
-            { src: 'images/mri/flair-axial-brain.jpg', alt: 'Normal axial FLAIR brain MRI with the CSF in the lateral ventricles suppressed to black', caption: 'Normal axial FLAIR: the CSF is dark, so anything bright next to it stands out. 511KeV, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/flair-axial-brain.jpg', alt: 'Normal axial FLAIR brain MRI with the CSF in the lateral ventricles suppressed to black', caption: 'Normal axial FLAIR: the CSF is dark, so anything bright next to it stands out. 511KeV, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [30, 45],
         next: 'mri-seq-dwi',
@@ -430,7 +430,7 @@ export const MRI_NODES = [
         body: '**PLAIN WORDS:** DWI measures how freely water moves. When cells swell (acute stroke) or fluid is thick (pus), water gets stuck.\n\n**THE RULE:** bright DWI **+ dark ADC** = true restriction.\n• Acute infarct: bright within minutes; ADC recovers (pseudonormalizes) after about 1–2 weeks\n• Pus: abscesses restrict, while the dead center of a tumor usually does not\n• Also: epidermoid cyst, lymphoma, HSV, CJD\n\n**THE TRAP — T2 shine-through:** bright DWI with a bright ADC is not acute. The DWI is just carrying over T2 brightness from an old infarct or edema.',
         images: [
             { src: 'images/mri/mri-dwi-adc-true-vs-shine-through.svg', alt: 'Schematic comparing true restriction, bright on DWI and dark on ADC, with T2 shine-through, bright on both', caption: 'Check the ADC under every bright DWI spot. Original diagram, myMedKitt.' },
-            { src: 'images/mri/dwi-adc-tof-aca-stroke.jpg', alt: 'Three axial panels of an acute left anterior cerebral artery stroke: bright DWI, dark ADC, and a time-of-flight MRA with reduced flow in the left ACA marked by an arrow', caption: 'Acute left ACA infarct: bright on DWI (left), dark on ADC (middle) = true restriction; TOF MRA (right) shows reduced flow in the left ACA (arrow). Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/dwi-adc-tof-aca-stroke.jpg', alt: 'Three axial panels of an acute left anterior cerebral artery stroke: bright DWI, dark ADC, and a time-of-flight MRA with reduced flow in the left ACA marked by an arrow', caption: 'Acute left ACA infarct: bright on DWI (left), dark on ADC (middle) = true restriction; TOF MRA (right) shows reduced flow in the left ACA (arrow). Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [28, 30],
         next: 'mri-seq-swi',
@@ -443,7 +443,7 @@ export const MRI_NODES = [
         title: 'SWI / GRE — The Blood Finder',
         body: '**DARK:** blood products, calcium, and iron — black and **"blooming"** (they look bigger than they really are)\n\n**USE IT FOR:** hemorrhage, microbleeds, diffuse axonal injury, hemorrhagic transformation of a stroke, and clot inside an artery or venous sinus.\n\n**ONE THING TO KNOW:** a black dot can be blood or calcium. The SWI phase image or a CT tells them apart.',
         images: [
-            { src: 'images/mri/swi-microbleeds.jpg', alt: 'Four axial brain MRI panels, T2, T1, FLAIR and SWI, of the same slice; multiple black microbleeds in the thalami and basal ganglia are visible only on the SWI panel', caption: 'Same slice on T2 (top left), T1 (top right), FLAIR (bottom left), and SWI (bottom right): the hypertensive microbleeds in the thalami and basal ganglia are far easier to see on SWI as black dots. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/swi-microbleeds.jpg', alt: 'Four axial brain MRI panels, T2, T1, FLAIR and SWI, of the same slice; multiple black microbleeds in the thalami and basal ganglia are visible only on the SWI panel', caption: 'Same slice on T2 (top left), T1 (top right), FLAIR (bottom left), and SWI (bottom right): the hypertensive microbleeds in the thalami and basal ganglia are far easier to see on SWI as black dots. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [27],
         next: 'mri-seq-stir',
@@ -456,7 +456,7 @@ export const MRI_NODES = [
         title: 'STIR / Fat-Sat — Fat Switched Off',
         body: '**DARK:** fat (suppressed)\n\n**BRIGHT:** water — marrow edema, soft-tissue edema, fluid collections\n\n**USE IT FOR:** occult fracture, osteomyelitis, ligament injury, spine infection, and metastases.\n\n**ONE THING TO KNOW:** STIR is sensitive but not specific — bruise, fracture, infection, and tumor all light up. T1 tells them apart (fracture line vs marrow replacement).',
         images: [
-            { src: 'images/mri/stir-spine-sagittal.jpg', alt: 'Sagittal STIR MRI of the lumbar spine with fat suppressed dark and CSF in the thecal sac bright', caption: 'Sagittal STIR, lumbar spine: fat is dark and CSF is bright, so any marrow edema would stand out as bright bone. No acute marrow edema here (post-surgical degenerative spine). Ptrump16, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/stir-spine-sagittal.jpg', alt: 'Sagittal STIR MRI of the lumbar spine with fat suppressed dark and CSF in the thecal sac bright', caption: 'Sagittal STIR, lumbar spine: fat is dark and CSF is bright, so any marrow edema would stand out as bright bone. No acute marrow edema here (post-surgical degenerative spine). Ptrump16, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [15, 17],
         next: 'mri-seq-mra',
@@ -469,7 +469,7 @@ export const MRI_NODES = [
         title: 'MRA / MRV — The Vessels',
         body: '**PLAIN WORDS:** time-of-flight (TOF) makes **flowing blood bright** and still tissue dark — no contrast needed. Contrast-enhanced MRA/MRV uses gadolinium instead.\n\n**USE IT FOR:** arterial occlusion and stenosis, aneurysm, dissection, and venous sinus thrombosis (MRV).\n\n**ONE THING TO KNOW:** TOF overcalls stenosis — slow or turbulent flow drops out and can mimic an occlusion. Contrast-enhanced MRA or CTA settles it.',
         images: [
-            { src: 'images/mri/mra-tof-circle-of-willis.jpg', alt: 'Time-of-flight MR angiogram maximum-intensity projection of a normal circle of Willis seen from above', caption: 'Normal circle of Willis, TOF MRA (maximum-intensity projection). SBarnes, CC BY-SA 3.0, via Wikimedia Commons.' },
+            { src: 'images/mri/mra-tof-circle-of-willis.jpg', alt: 'Time-of-flight MR angiogram maximum-intensity projection of a normal circle of Willis seen from above', caption: 'Normal circle of Willis, TOF MRA (maximum-intensity projection). SBarnes, CC BY-SA 3.0, via Wikimedia Commons, resized.' },
         ],
         citation: [1],
         next: 'mri-seq-t1post',
@@ -482,7 +482,7 @@ export const MRI_NODES = [
         title: 'T1 Post-Contrast — What Lights Up',
         body: '**BRIGHT:** tissue that takes up gadolinium — a leaky blood–brain barrier, inflammation, or very vascular tissue\n\n**PATTERNS:**\n• Thin, smooth ring → abscess\n• Thick, irregular ring → tumor\n• Lining of the sulci (leptomeningeal) → meningitis or cancer spread\n• Rim around an epidural collection → epidural abscess\n\n**ONE THING TO KNOW:** always compare with the pre-contrast T1. Fat-suppressed post-contrast images help in the orbits, spine, and bone.',
         images: [
-            { src: 'images/mri/brain-abscess-t1-post-gad.jpg', alt: 'Axial post-contrast T1 brain MRI with a round left posterior lesion surrounded by a thin smooth enhancing ring and surrounding edema', caption: 'Brain abscess on post-contrast T1: thin, smooth enhancing ring with surrounding swelling. Hellerhoff, CC BY-SA 3.0, via Wikimedia Commons.' },
+            { src: 'images/mri/brain-abscess-t1-post-gad.jpg', alt: 'Axial post-contrast T1 brain MRI with a round left posterior lesion surrounded by a thin smooth enhancing ring and surrounding edema', caption: 'Brain abscess on post-contrast T1: thin, smooth enhancing ring with surrounding swelling. Hellerhoff, CC BY-SA 3.0, via Wikimedia Commons, resized.' },
         ],
         citation: [30],
         next: 'mri-blood',
@@ -498,7 +498,7 @@ export const MRI_NODES = [
         title: 'Seeing Blood on MRI',
         body: '**PLAIN WORDS:** blood changes chemistry as it ages, and each chemical looks different on MRI.\n\n**BEST SEQUENCES:**\n• **SWI/GRE** — the most sensitive for any blood; catches microbleeds CT cannot see\n• **FLAIR + GRE together** for subarachnoid blood — bright in the dark sulci on FLAIR, dark on GRE\n\n**CT STAYS FIRST in the ED for acute bleeding.** MRI with GRE matched CT for acute intracerebral hemorrhage, but CT is faster, safer for sick patients, always available, and what neurosurgery acts on. Suspected SAH follows the CT/LP pathway.\n\n**WHERE MRI ADDS VALUE:** microbleeds, diffuse axonal injury, bleeding into a tumor or venous infarct, hemorrhagic transformation, and estimating a bleed’s age.',
         images: [
-            { src: 'images/mri/ich-t2star.png', alt: 'Axial T2-star gradient-echo brain MRI with a right frontal hemorrhagic contusion showing a dark blooming rim', caption: 'T2* (GRE): right frontal hemorrhagic contusion after head trauma with a dark, blooming rim of blood products. Hellerhoff, CC BY-SA 3.0, via Wikimedia Commons.' },
+            { src: 'images/mri/ich-t2star.png', alt: 'Axial T2-star gradient-echo brain MRI with a right frontal hemorrhagic contusion showing a dark blooming rim', caption: 'T2* (GRE): right frontal hemorrhagic contusion after head trauma with a dark, blooming rim of blood products. Hellerhoff, CC BY-SA 3.0, via Wikimedia Commons, resized.' },
         ],
         citation: [27, 40, 41],
         next: 'mri-blood-age',
@@ -595,7 +595,7 @@ export const MRI_NODES = [
         title: 'Pattern: Acute Ischemic Stroke',
         body: '**LOOK FOR:** bright DWI + dark ADC in an **arterial territory** (MCA, ACA, PCA, PICA, AICA, SCA).\n\n**EXTRAS:** FLAIR still normal = likely <4.5 h old; a black clot in the artery on SWI; bleeding into the infarct (hemorrhagic transformation).\n\n**POSTERIOR STROKES** in the lateral medulla and cerebellum are small and easy to miss on thick slices.',
         images: [
-            { src: 'images/mri/dwi-adc-pica-stroke.jpg', alt: 'Four MRI panels of an acute left PICA cerebellar infarct: axial DWI bright, axial ADC, axial T2, and sagittal FLAIR', caption: 'Acute partial left PICA infarct in the inferior cerebellum: bright on DWI (top left) with the corresponding ADC map (top right); axial T2 (bottom left) and sagittal FLAIR (bottom right). Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/dwi-adc-pica-stroke.jpg', alt: 'Four MRI panels of an acute left PICA cerebellar infarct: axial DWI bright, axial ADC, axial T2, and sagittal FLAIR', caption: 'Acute partial left PICA infarct in the inferior cerebellum: bright on DWI (top left) with the corresponding ADC map (top right); axial T2 (bottom left) and sagittal FLAIR (bottom right). Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [3, 28, 31],
         next: 'mri-gallery',
@@ -608,7 +608,7 @@ export const MRI_NODES = [
         title: 'Pattern: Brain Abscess',
         body: '**LOOK FOR:** a **thin, smooth enhancing ring** on post-contrast T1 **+ bright DWI / dark ADC in the center** (pus restricts).\n\n**VS NECROTIC TUMOR:** thick, irregular ring and a center that does not restrict.\n\n**ACT:** neurosurgery, blood cultures, and empiric antibiotics — see [Meningitis](#/tree/meningitis) for CNS antibiotic choices.',
         images: [
-            { src: 'images/mri/brain-abscess-multisequence.jpg', alt: 'Eight labeled axial MRI panels of large right-sided brain abscesses: T2, T1, DWI, SWI, FLAIR, post-contrast T1, ADC and SWI minimum-intensity projection', caption: 'Multiloculated right brain abscesses: ring enhancement on post-contrast T1 ("T1 KM"), bright centers on DWI and dark on ADC — pus restricts. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/brain-abscess-multisequence.jpg', alt: 'Eight labeled axial MRI panels of large right-sided brain abscesses: T2, T1, DWI, SWI, FLAIR, post-contrast T1, ADC and SWI minimum-intensity projection', caption: 'Multiloculated right brain abscesses: ring enhancement on post-contrast T1 ("T1 KM"), bright centers on DWI and dark on ADC — pus restricts. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [30],
         next: 'mri-gallery',
@@ -621,7 +621,7 @@ export const MRI_NODES = [
         title: 'Pattern: HSV Encephalitis',
         body: '**LOOK FOR:** bright FLAIR/T2 (often DWI too) in the **medial temporal lobes, insula, and cingulate** — often both sides, one worse than the other; early disease can be one-sided. Later it can bleed (black on SWI).\n\n**VS MCA STROKE:** HSV spares the basal ganglia and does not follow an arterial territory.',
         images: [
-            { src: 'images/mri/hsv-encephalitis-t2-coronal.jpg', alt: 'Coronal T2 brain MRI with high signal in both temporal lobes, hippocampi and insulae, worse on one side', caption: 'PCR-confirmed HSV encephalitis, coronal T2: bright signal in both temporal lobes, hippocampi, and insulae, worse on one side. Dr Laughlin Dawes, CC BY 3.0, via Wikimedia Commons.' },
+            { src: 'images/mri/hsv-encephalitis-t2-coronal.jpg', alt: 'Coronal T2 brain MRI with high signal in both temporal lobes, hippocampi and insulae, worse on one side', caption: 'PCR-confirmed HSV encephalitis, coronal T2: bright signal in both temporal lobes, hippocampi, and insulae, worse on one side. Dr Laughlin Dawes, CC BY 3.0, via Wikimedia Commons, resized.' },
         ],
         citation: [12],
         next: 'mri-gallery',
@@ -634,7 +634,7 @@ export const MRI_NODES = [
         title: 'Pattern: PRES',
         body: '**LOOK FOR:** **symmetric** bright FLAIR/T2 in the **parieto-occipital** white matter and cortex. DWI is usually not restricted (ADC bright = vasogenic edema).\n\n**VARIANTS:** frontal, cerebellar, brainstem, and hemorrhagic forms exist.\n\n**MEANING:** reversible when the cause is treated; restriction on DWI suggests infarction and a worse outcome.',
         images: [
-            { src: 'images/mri/pres-t2-axial.jpg', alt: 'Axial T2 brain MRI with bilateral, symmetric high signal in the occipital lobes', caption: 'PRES on axial T2: symmetric bright edema in both occipital lobes. Rashmi Chawla, Daniel Smith and Paul E Marik, CC BY 3.0, via Wikimedia Commons.' },
+            { src: 'images/mri/pres-t2-axial.jpg', alt: 'Axial T2 brain MRI with bilateral, symmetric high signal in the occipital lobes', caption: 'PRES on axial T2: symmetric bright edema in both occipital lobes. Rashmi Chawla, Daniel Smith and Paul E Marik, CC BY 3.0, via Wikimedia Commons, resized.' },
         ],
         citation: [11],
         next: 'mri-gallery',
@@ -647,8 +647,8 @@ export const MRI_NODES = [
         title: 'Pattern: Venous Sinus Thrombosis',
         body: '**LOOK FOR:**\n• A sinus missing on MRV\n• Clot in the sinus: black and blooming on SWI/GRE; bright on T1 once subacute\n• **Empty delta sign** on post-contrast images: the enhancing sinus wall around a dark clot\n\n**THE BRAIN:** venous infarcts that do not match an arterial territory, often with bleeding — near the midline at the top of the head (superior sagittal sinus) or in the temporal lobe (transverse sinus).',
         images: [
-            { src: 'images/mri/cvst-mrv-occlusion.jpg', alt: 'Axial MR venogram projection with absent flow signal in the left transverse and sigmoid sinuses', caption: 'MR venogram: no flow in the left transverse and sigmoid sinuses (right side of the image). On a non-contrast MRV alone, a small (hypoplastic) left transverse sinus can look the same — confirm with SWI/GRE, T1 or contrast. P Thomas et al., CC BY 2.0, via Wikimedia Commons.' },
-            { src: 'images/mri/cvst-multisequence.jpg', alt: 'Six labeled MRI panels of right transverse sinus thrombosis with the clot outlined on T2, T1, DWI, FLAIR and post-contrast T1 axial and coronal images', caption: 'Right transverse sinus thrombosis (outlined): subacute clot bright on T1 and FLAIR; post-contrast T1 ("T1 KM") shows the filling defect. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/cvst-mrv-occlusion.jpg', alt: 'Axial MR venogram projection with absent flow signal in the left transverse and sigmoid sinuses', caption: 'MR venogram: no flow in the left transverse and sigmoid sinuses (right side of the image). On a non-contrast MRV alone, a small (hypoplastic) left transverse sinus can look the same — confirm with SWI/GRE, T1 or contrast. P Thomas et al., CC BY 2.0, via Wikimedia Commons, resized.' },
+            { src: 'images/mri/cvst-multisequence.jpg', alt: 'Six labeled MRI panels of right transverse sinus thrombosis with the clot outlined on T2, T1, DWI, FLAIR and post-contrast T1 axial and coronal images', caption: 'Right transverse sinus thrombosis (outlined): subacute clot bright on T1 and FLAIR; post-contrast T1 ("T1 KM") shows the filling defect. Hellerhoff, CC BY-SA 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [10],
         next: 'mri-gallery',
@@ -661,7 +661,7 @@ export const MRI_NODES = [
         title: 'Pattern: Spinal Epidural Abscess',
         body: '**LOOK FOR:** a collection in the epidural space, bright on T2/STIR, with a **rim of enhancement** on post-contrast T1. Often next to discitis–osteomyelitis (the disc and both neighboring endplates bright on STIR and enhancing).\n\n**ACT:** any cord or cauda equina compression is a surgical emergency — spine surgery now.',
         images: [
-            { src: 'images/mri/spinal-epidural-abscess.jpg', alt: 'Sagittal fluid-sensitive lumbar spine MRI with a posterior epidural abscess and a disc bulge compressing the thecal sac', caption: 'Posterior epidural abscess in the lower lumbar spine (with a disc bulge) compressing the thecal sac and causing cauda equina syndrome; sagittal fluid-sensitive image. Jing Jing Chan and Jen Jen Oh, CC BY 4.0, via Wikimedia Commons.' },
+            { src: 'images/mri/spinal-epidural-abscess.jpg', alt: 'Sagittal fluid-sensitive lumbar spine MRI with a posterior epidural abscess and a disc bulge compressing the thecal sac', caption: 'Posterior epidural abscess in the lower lumbar spine (with a disc bulge) compressing the thecal sac and causing cauda equina syndrome; sagittal fluid-sensitive image. Jing Jing Chan and Jen Jen Oh, CC BY 4.0, via Wikimedia Commons, resized.' },
         ],
         citation: [35, 36],
         next: 'mri-gallery',

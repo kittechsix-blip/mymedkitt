@@ -30629,10 +30629,98 @@ const MRI_SUMMARY: InfoPage = {
       heading: '7. Pitfalls & Disposition',
       body: '• [Your read is not the final read; how to talk to radiology](#/node/mri-pitfalls)\n• [When a negative MRI does not clear the patient](#/node/mri-negative)\n• [Disposition by finding](#/node/mri-dispo)',
     },
+    {
+      heading: 'Image Credits',
+      body: '• [Authors, sources and licenses for every scan and photo](#/info/mri-image-credits)',
+    },
   ],
   citations: [
     { num: 1, text: 'ACR Appropriateness Criteria. American College of Radiology. https://acsearch.acr.org/list' },
   ],
+};
+
+const MRI_IMAGE_CREDITS: InfoPage = {
+  id: 'mri-image-credits',
+  title: 'MRI for Dummies — Image Credits',
+  subtitle: 'Title · Author · Source · License for every photo and scan',
+  sections: [
+    {
+      body: 'The real MRI scans and the scanner photo in this consult come from Wikimedia Commons under Creative Commons licenses (CC BY or CC BY-SA). Each is credited below with its title, author, source page, and license. All were resized for this app. The diagrams (safety zones, sequence cheat sheet, DWI/ADC schematic, blood-age chart, read order) are original myMedKitt work.',
+    },
+    {
+      heading: 'Ausgedehnte Hirnabszesse - verschiedene Wichtungen in der MRT 3M - MR - 001 - Annotation.jpg',
+      body: '\u2022 **Author:** Hellerhoff\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Ausgedehnte_Hirnabszesse_-_verschiedene_Wichtungen_in_der_MRT_3M_-_MR_-_001_-_Annotation.jpg)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** brain-abscess-multisequence.jpg',
+    },
+    {
+      heading: 'Brain abscess - MRI T1 KM axial.jpg',
+      body: '\u2022 **Author:** Hellerhoff\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Brain_abscess_-_MRI_T1_KM_axial.jpg)\n\u2022 **License:** [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** brain-abscess-t1-post-gad.jpg',
+    },
+    {
+      heading: 'Behcet.JPG',
+      body: '\u2022 **Author:** P Thomas, A Keightley, R Kamble, N Gunasekera, M R Johnson\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Behcet.JPG)\n\u2022 **License:** [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** cvst-mrv-occlusion.jpg',
+    },
+    {
+      heading: 'Sinusthrombose rechts Sinus transversalis 76W - MR - 001 - Annotation.jpg',
+      body: '\u2022 **Author:** Hellerhoff\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Sinusthrombose_rechts_Sinus_transversalis_76W_-_MR_-_001_-_Annotation.jpg)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** cvst-multisequence.jpg',
+    },
+    {
+      heading: 'Akuter PICA-Teilinfarkt links 83W - MR - 001.jpg',
+      body: '\u2022 **Author:** Hellerhoff\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Akuter_PICA-Teilinfarkt_links_83W_-_MR_-_001.jpg)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** dwi-adc-pica-stroke.jpg',
+    },
+    {
+      heading: 'Unilateraler Anteriorinfarkt 70M - MR DWI ADC TOF - 001.jpg',
+      body: '\u2022 **Author:** Hellerhoff\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Unilateraler_Anteriorinfarkt_70M_-_MR_DWI_ADC_TOF_-_001.jpg)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** dwi-adc-tof-aca-stroke.jpg',
+    },
+    {
+      heading: 'Mri Brain Flair Axial (12).jpg',
+      body: '\u2022 **Author:** 511KeV\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Mri_Brain_Flair_Axial_%2812%29.jpg)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** flair-axial-brain.jpg',
+    },
+    {
+      heading: 'Hsv encephalitis.jpg',
+      body: '\u2022 **Author:** Dr Laughlin Dawes\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Hsv_encephalitis.jpg)\n\u2022 **License:** [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** hsv-encephalitis-t2-coronal.jpg',
+    },
+    {
+      heading: 'Frontale Kontusionsblutung MRT HAEM 01.png',
+      body: '\u2022 **Author:** Hellerhoff\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Frontale_Kontusionsblutung_MRT_HAEM_01.png)\n\u2022 **License:** [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** ich-t2star.png',
+    },
+    {
+      heading: 'Bandscheibenvorfall LWS.jpg',
+      body: '\u2022 **Author:** Michael-W\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Bandscheibenvorfall_LWS.jpg)\n\u2022 **License:** [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** lumbar-disc-herniation-t2-sagittal.jpg',
+    },
+    {
+      heading: 'Mra-mip.jpg',
+      body: '\u2022 **Author:** SBarnes\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Mra-mip.jpg)\n\u2022 **License:** [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** mra-tof-circle-of-willis.jpg',
+    },
+    {
+      heading: 'MRI-Philips.JPG',
+      body: '\u2022 **Author:** Jan Ainali\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:MRI-Philips.JPG)\n\u2022 **License:** [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** mri-scanner-photo.jpg',
+    },
+    {
+      heading: 'Posterior reversible encephalopathy syndrome MRI.jpg',
+      body: '\u2022 **Author:** Rashmi Chawla, Daniel Smith and Paul E Marik\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Posterior_reversible_encephalopathy_syndrome_MRI.jpg)\n\u2022 **License:** [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** pres-t2-axial.jpg',
+    },
+    {
+      heading: 'MRI of the lumbar spine with abscess in the posterior epidural space, causing cauda equina syndrome.jpg',
+      body: '\u2022 **Author:** Jing Jing Chan and Jen Jen Oh\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:MRI_of_the_lumbar_spine_with_abscess_in_the_posterior_epidural_space,_causing_cauda_equina_syndrome.jpg)\n\u2022 **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** spinal-epidural-abscess.jpg',
+    },
+    {
+      heading: 'SAGITTAL-FAST-STIR MRI.jpg',
+      body: '\u2022 **Author:** Ptrump16\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:SAGITTAL-FAST-STIR_MRI.jpg)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** stir-spine-sagittal.jpg',
+    },
+    {
+      heading: 'Zahlreiche zerebrale Mikroblutungen vorwiegend Thalamus 73M - MR axial - 001.jpg',
+      body: '\u2022 **Author:** Hellerhoff\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Zahlreiche_zerebrale_Mikroblutungen_vorwiegend_Thalamus_73M_-_MR_axial_-_001.jpg)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** swi-microbleeds.jpg',
+    },
+    {
+      heading: 'MRI Brain T1 Axial (12).jpg',
+      body: '\u2022 **Author:** 511KeV\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:MRI_Brain_T1_Axial_%2812%29.jpg)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** t1-axial-brain.jpg',
+    },
+    {
+      heading: 'Brain-T2-axial.png',
+      body: '\u2022 **Author:** Sean Novak\n\u2022 **Source:** [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Brain-T2-axial.png)\n\u2022 **License:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)\n\u2022 **Changes:** Resized for this app.\n\u2022 **Shown in app as:** t2-axial-brain.png',
+    },
+  ],
+  citations: [],
 };
 
 const MRI_SEQUENCE_CHEATSHEET: InfoPage = {
@@ -31407,6 +31495,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'mri-gadolinium-egfr': MRI_GADOLINIUM_EGFR,
   'mri-pregnancy': MRI_PREGNANCY,
   'mri-for-dummies-stop': MRI_FOR_DUMMIES_STOP,
+  'mri-image-credits': MRI_IMAGE_CREDITS,
   // Hidradenitis Suppurativa
   'hs-summary': HS_SUMMARY,
   'hs-procedure-guide': HS_PROCEDURE_GUIDE,

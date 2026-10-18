@@ -24,6 +24,12 @@
 //   PD-old-100, PD-USGov, PD-USGov-NIH-NIAID, PD-USGov-HHS-CDC, PD-1923, CC0,
 //   PD-self, US-Federal-Work, PD-art, PD-NL-PD.
 //
+// Andy-approved exception (2026-10-18, MRI for Dummies only): a CC-BY-* or
+// CC-BY-SA-* entry passes ONLY if it carries exactly
+//   "attribution_exception": "Andy 2026-10-18: keep with full credit"
+// AND a non-empty `author`. NC/ND licenses never pass. See
+// ~/Desktop/claude-brain/decisions/2026-10-18-mymedkitt-cc-by-image-exception.md
+//
 // Usage:
 //   node scripts/validate-image-manifests.mjs            # all tree image dirs
 //   node scripts/validate-image-manifests.mjs <tree-id>  # one tree
@@ -52,6 +58,13 @@ const ACCEPTABLE_LICENSES = new Set([
   'PD-art',
   'PD-NL-PD',
 ]);
+
+const ATTRIBUTION_EXCEPTION = 'Andy 2026-10-18: keep with full credit';
+const ATTRIBUTION_LICENSE_RE = /^CC-BY(-SA)?-\d\.\d$/;
+const isAttributionException = entry =>
+  ATTRIBUTION_LICENSE_RE.test(entry.license_tag) &&
+  entry.attribution_exception === ATTRIBUTION_EXCEPTION &&
+  typeof entry.author === 'string' && entry.author.trim() !== '';
 
 const IMAGE_EXT_RE = /\.(png|jpe?g|svg|webp|gif)$/i;
 const argTreeId = process.argv.slice(2).find(a => !a.startsWith('--'));
@@ -103,7 +116,7 @@ function validateTreeDir(treeDir) {
     }
     if (!entry.license_tag) {
       errFor(`${treeId}/${f}`, 'Manifest entry missing `license_tag`');
-    } else if (!ACCEPTABLE_LICENSES.has(entry.license_tag)) {
+    } else if (!ACCEPTABLE_LICENSES.has(entry.license_tag) && !isAttributionException(entry)) {
       errFor(`${treeId}/${f}`, `License "${entry.license_tag}" is NOT in the commercial-safe set. Allowed: ${[...ACCEPTABLE_LICENSES].join(', ')}`);
     }
     if (!entry.retrieval_timestamp) {

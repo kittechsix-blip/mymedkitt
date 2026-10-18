@@ -363,6 +363,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ct', label: 'CT Decision', icon: '\u2622\uFE0F', action: 'route', target: 'ct-decision-support' },
     { id: 'gallery', label: 'Gallery', icon: '\uD83D\uDDBC\uFE0F', action: 'jump', target: 'mri-gallery' },
     { id: 'stop', label: 'Stop', icon: '\uD83D\uDED1', action: 'overlay', target: 'mri-for-dummies-stop' },
+    { id: 'image-credits', label: 'Image Credits', icon: '\u00A9\uFE0F', action: 'overlay', target: 'mri-image-credits' },
   ],
   'stroke': [
     { id: 'nihss', label: 'NIHSS', icon: '\uD83E\uDDE0', action: 'calculator', target: 'nihss' },
