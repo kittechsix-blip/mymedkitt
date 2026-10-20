@@ -192,10 +192,6 @@ export const STOP_PAGES_07: Record<string, InfoPage> = {
         body: 'Eclampsia patients are at high risk for pulmonary edema. Limit resuscitation to 1–2L max unless there is hemorrhage. POCUS-guided fluid management is strongly preferred. [See stabilization node](#/node/eclampsia-stabilization).',
       },
       {
-        heading: '🛑 Do NOT anticoagulate uremic pericarditis (HD patients)',
-        body: 'While this applies to the HD-emergencies consult, eclampsia patients with HELLP syndrome also develop pericardial effusion — anticoagulation risks hemorrhagic tamponade when platelets are already critically low. [See HELLP node](#/node/eclampsia-hellp).',
-      },
-      {
         heading: '🛑 Do NOT delay delivery for seizure control alone',
         body: 'Definitive treatment of eclampsia is delivery. Seizure control and BP management are bridges — once the patient is stabilized, delivery planning must begin immediately with OB. [See delivery decision node](#/node/eclampsia-delivery-decision).',
       },
