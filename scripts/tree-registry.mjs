@@ -194,6 +194,7 @@ export const TREE_REGISTRY = {
   'toxic-alcohols':   { prefix: 'TOXIC_ALCOHOLS',      entryNodeId: 'tox-alc-start',      categoryId: 'toxicology' },
   'beta-blocker-od':  { prefix: 'BETA_BLOCKER_OD',     entryNodeId: 'bb-start',           categoryId: 'toxicology' },
   'ccb-od':           { prefix: 'CCB_OD',              entryNodeId: 'ccb-start',          categoryId: 'toxicology' },
+  'isoniazid-toxicity': { prefix: 'ISONIAZID_TOXICITY', entryNodeId: 'inh-start', categoryId: 'toxicology' },
   'iron-od':          { prefix: 'IRON_OD',             entryNodeId: 'iron-start',         categoryId: 'toxicology' },
   'co-toxicity':      { prefix: 'CO_TOXICITY',         entryNodeId: 'co-start',           categoryId: 'toxicology' },
   'guillain-barre':   { prefix: 'GUILLAIN_BARRE',      entryNodeId: 'gbs-start',          categoryId: 'neurology' },

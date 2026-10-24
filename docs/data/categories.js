@@ -3955,6 +3955,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'ccb-start',
             },
             {
+                id: 'isoniazid-toxicity',
+                title: 'INH (Isoniazid) Toxicity',
+                subtitle: 'Seizures → Pyridoxine → GABA mechanism → Monitoring',
+                categoryId: 'toxicology',
+                version: '1.0',
+                nodeCount: 11,
+                entryNodeId: 'inh-start',
+            },
+            {
                 id: 'iron-od',
                 title: 'Iron Overdose',
                 subtitle: 'Recognition → Stages → Workup → Decontamination → Deferoxamine → Disposition',

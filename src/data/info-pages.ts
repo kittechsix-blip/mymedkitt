@@ -1,3 +1,4 @@
+import { INH_INFO_PAGES } from './inh-info-pages.js';
 // MedKitt — Info Page Data (Hardcoded Fallback)
 // Static info page definitions used as tier-3 fallback when Supabase and IndexedDB are unavailable.
 // Rendering logic lives in components/info-page.ts.
@@ -30886,6 +30887,7 @@ const MRI_FOR_DUMMIES_STOP: InfoPage = {
 };
 
 export const INFO_PAGES: Record<string, InfoPage> = {
+  ...Object.fromEntries(INH_INFO_PAGES.map(page => [page.id, page])),
   'asystole-steps': {
   "id": "asystole-steps",
   "title": "Asystole: bedside steps",

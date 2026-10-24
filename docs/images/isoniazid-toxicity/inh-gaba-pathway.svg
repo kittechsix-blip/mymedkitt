@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="900" viewBox="0 0 960 900" role="img" aria-labelledby="title desc">
+<title id="title">INH toxicity: loss of inhibitory GABA</title>
+<desc id="desc">INH disrupts vitamin B6 availability and activation. Reduced active PLP impairs the conversion of glutamate into GABA. Pyridoxine supports synthesis and benzodiazepines enhance GABA-A receptor activity.</desc>
+<defs>
+<linearGradient id="bg" x2="0" y2="1"><stop stop-color="#14273b"/><stop offset="1" stop-color="#081522"/></linearGradient>
+<linearGradient id="red" x2="0" y2="1"><stop stop-color="#8e3349"/><stop offset="1" stop-color="#522339"/></linearGradient>
+<linearGradient id="green" x2="0" y2="1"><stop stop-color="#155b60"/><stop offset="1" stop-color="#123a46"/></linearGradient>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#8baec8"/></marker>
+</defs>
+<rect width="960" height="900" rx="32" fill="url(#bg)"/>
+<g font-family="Arial,Helvetica,sans-serif" text-anchor="middle">
+<text x="480" y="62" fill="#d2e6f3" font-size="18" letter-spacing="3">ISONIAZID OVERDOSE</text>
+<text x="480" y="110" fill="white" font-size="38" font-weight="700">Loss of inhibitory GABA</text>
+<rect x="70" y="151" width="820" height="107" rx="20" fill="url(#red)" stroke="#da8797"/>
+<text x="480" y="192" fill="white" font-size="30" font-weight="700">INH disrupts vitamin B6</text>
+<text x="480" y="229" fill="#ffe5eb" font-size="25">Reduced availability and activation</text>
+<path d="M480 265V302" stroke="#8baec8" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="150" y="320" width="660" height="96" rx="18" fill="#223b50" stroke="#6d92ad"/>
+<text x="480" y="359" fill="white" font-size="29" font-weight="700">Less active PLP</text>
+<text x="480" y="395" fill="#d7e8f5" font-size="23">Pyridoxal-5-phosphate: a required cofactor</text>
+<path d="M480 423V459" stroke="#8baec8" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="70" y="477" width="820" height="115" rx="20" fill="#20364b" stroke="#6d92ad"/>
+<text x="480" y="522" fill="white" font-size="33" font-weight="700">Glutamate → GABA ↓</text>
+<text x="480" y="565" fill="#d7e8f5" font-size="24">Impaired PLP-dependent glutamate decarboxylase</text>
+<text x="480" y="641" fill="#ffd6df" font-size="30" font-weight="700">Reduced inhibition → seizures</text>
+<rect x="45" y="686" width="425" height="142" rx="20" fill="url(#green)" stroke="#60b7b4"/>
+<rect x="490" y="686" width="425" height="142" rx="20" fill="url(#green)" stroke="#60b7b4"/>
+<text x="257" y="729" fill="white" font-size="29" font-weight="700">Pyridoxine</text>
+<text x="257" y="769" fill="#d0f5ed" font-size="24">Supports restoration</text>
+<text x="257" y="802" fill="#d0f5ed" font-size="24">of GABA synthesis</text>
+<text x="702" y="729" fill="white" font-size="29" font-weight="700">Benzodiazepines</text>
+<text x="702" y="769" fill="#d0f5ed" font-size="24">Enhance GABA-A</text>
+<text x="702" y="802" fill="#d0f5ed" font-size="24">receptor activity</text>
+<text x="480" y="868" fill="#a9c1d3" font-size="18">Original MedKitt schematic · IPCS PIM 288; Chen et al., 2016</text>
+</g></svg>

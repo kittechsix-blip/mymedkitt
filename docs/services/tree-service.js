@@ -963,6 +963,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/ccb-od.js');
             return { nodes: m.CCB_OD_NODES, entryNodeId: 'ccb-start', categoryId: 'toxicology', moduleLabels: m.CCB_OD_MODULE_LABELS, citations: m.CCB_OD_CITATIONS, criticalActions: m.CCB_OD_CRITICAL_ACTIONS };
         },
+        'isoniazid-toxicity': async () => {
+            const m = await import('../data/trees/isoniazid-toxicity.js');
+            return { nodes: m.ISONIAZID_TOXICITY_NODES, entryNodeId: 'inh-start', categoryId: 'toxicology', moduleLabels: m.ISONIAZID_TOXICITY_MODULE_LABELS, citations: m.ISONIAZID_TOXICITY_CITATIONS, criticalActions: m.ISONIAZID_TOXICITY_CRITICAL_ACTIONS };
+        },
         'iron-od': async () => {
             const m = await import('../data/trees/iron-od.js');
             return { nodes: m.IRON_OD_NODES, entryNodeId: 'iron-start', categoryId: 'toxicology', moduleLabels: m.IRON_OD_MODULE_LABELS, citations: m.IRON_OD_CITATIONS, criticalActions: m.IRON_OD_CRITICAL_ACTIONS };

@@ -1,0 +1,14 @@
+{
+  "inh-gaba-pathway.svg": {
+    "origin": "original",
+    "creator": "MedKitt",
+    "source_url": "original://medkitt/inh-gaba-pathway",
+    "license_tag": "Original-MedKitt",
+    "attribution": "Original MedKitt clinical schematic; no third-party image copied. Mechanism references: IPCS PIM 288 and Chen et al. 2016, doi:10.1111/bcp.12720.",
+    "clinical_source_urls": [
+      "https://www.inchem.org/documents/pims/pharm/pim288.htm",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC4767205/"
+    ],
+    "sha256": "8bdecd5dcce7b28cb575b1c57d0b978b0137b65b127e12b1038513d82a5b3f9b"
+  }
+}

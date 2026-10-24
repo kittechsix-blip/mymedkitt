@@ -8829,7 +8829,7 @@ const PYRIDOXINE = {
     dosing: [
         {
             indication: 'INH toxicity — seizure antidote',
-            regimen: 'Gram-for-gram replacement of INH ingested. If amount unknown: 5 g IV over 5 min. May repeat 5 g IV q5-10 min until seizures stop (max total 70 mg/kg). INH depletes pyridoxine → GABA synthesis fails → refractory seizures. Standard ASMs are ineffective without pyridoxine.',
+            regimen: 'Initial IV dose: known INH amount, replace mg-for-mg up to 5 g (children: also cap initial dose at 70 mg/kg). Unknown amount: adults 5 g; children 70 mg/kg, maximum 5 g. During seizures give at about 0.5 g/min with benzodiazepines and airway support. If seizures stop early, infuse the remainder over 1-2 hours. Repeat dosing requires Poison Control/toxicology guidance; 70 mg/kg is NOT a universal cumulative ceiling. Use the INH pyridoxine calculator and verify pharmacy stock immediately.',
         },
         {
             indication: 'Pyridoxine-dependent epilepsy (neonatal/infant)',
@@ -8844,12 +8844,14 @@ const PYRIDOXINE = {
         'Known hypersensitivity to pyridoxine',
     ],
     cautions: [
-        'Rapid IV push in large doses may cause transient sensory neuropathy',
+        'Use a controlled IV infusion with cardiorespiratory monitoring; high-dose or prolonged exposure can cause peripheral neuropathy',
         'IV formulation may not be readily available — check pharmacy stock proactively in suspected INH ingestion',
     ],
     monitoring: 'Seizure cessation. Mental status improvement. ABG for acidosis correction.',
-    notes: 'Critical antidote for INH-induced seizures. INH inhibits pyridoxal kinase, depleting active pyridoxine (pyridoxal 5\'-phosphate), which is an essential cofactor for glutamic acid decarboxylase — the enzyme that converts glutamate to GABA. Without GABA synthesis, seizures are refractory to all standard anticonvulsants. Always give pyridoxine when INH toxicity is suspected — benzodiazepines alone will not terminate the seizures.',
+    notes: 'Critical antidote for INH-induced seizures. INH inhibits pyridoxal kinase, depleting active pyridoxine (pyridoxal 5\'-phosphate), which is an essential cofactor for glutamic acid decarboxylase — the enzyme that converts glutamate to GABA. GABA depletion can make seizures resistant to usual antiseizure treatment. Give pyridoxine promptly for suspected INH-induced seizures together with benzodiazepines; do not wait for a drug level or failure of successive antiseizure agents.',
     citations: [
+        'Queensland Poisons Information Centre. Pyridoxine. https://www.poisonsinfo.health.qld.gov.au/for-health-professionals/antidote-stocking-recommendations/pyridoxine',
+        'Chen HY, Albertson TE, Olson KR. Treatment of drug-induced seizures. Br J Clin Pharmacol. 2016;81:412-419. https://pmc.ncbi.nlm.nih.gov/articles/PMC4767205/',
         'Betjemann JP, et al. Status Epilepticus. Emergency Medicine Practice. 2025;27(9).',
     ],
 };

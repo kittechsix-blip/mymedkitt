@@ -1,0 +1,116 @@
+export const ISONIAZID_TOXICITY_CRITICAL_ACTIONS = [
+    { text: 'Suspected INH seizures: give IV pyridoxine and a benzodiazepine immediately; do not wait for laboratory confirmation.', nodeId: 'inh-seizure' },
+    { text: 'Unknown amount: adult pyridoxine 5 g IV; child 70 mg/kg IV, maximum 5 g initially.', nodeId: 'inh-antidote' },
+    { text: 'Known amount: replace INH mg-for-mg with pyridoxine; initial adult cap 5 g, pediatric cap 70 mg/kg or 5 g, whichever is lower.', nodeId: 'inh-antidote' },
+    { text: 'Do not substitute phenytoin for pyridoxine. Obtain urgent toxicology advice for refractory seizures or unavailable antidote.', nodeId: 'inh-rescue' },
+];
+export const ISONIAZID_TOXICITY_NODES = [
+    {
+        id: 'inh-start', type: 'question', module: 1,
+        title: 'Isoniazid Toxicity: Seizing or Unstable?',
+        summary: 'Refractory seizures, coma and high-anion-gap acidosis after INH exposure require immediate antidote treatment.',
+        body: '[INH Steps Summary](#/info/inh-summary)\n\n**RECOGNIZE THE PATTERN**\n\nSuspect INH in unexplained recurrent seizures with coma and metabolic acidosis, especially with access to tuberculosis medication. Symptoms can develop rapidly; absence of the complete triad does not exclude poisoning. [3][5]\n\n**FIRST ACTIONS**\n\nAirway and ventilation, glucose, IV/IO access, continuous ECG/oxygen monitoring. Obtain the medication package, time, maximum possible amount, weight and coingestants. Ask pharmacy to locate IV pyridoxine immediately. Call US Poison Control **1-800-222-1222**. Do not wait for an INH concentration. [3][5]',
+        safetyLevel: 'critical', citation: [3, 5],
+        calculatorLinks: [{ id: 'inh-pyridoxine', label: 'Pyridoxine Dose' }, { id: 'weight-dose', label: 'Weight-Based Dose' }],
+        options: [
+            { label: 'Seizure, coma or instability', next: 'inh-seizure', urgency: 'critical' },
+            { label: 'Currently awake and stable', next: 'inh-assessment' },
+        ],
+    },
+    {
+        id: 'inh-seizure', type: 'info', module: 2,
+        title: 'Treat Seizures: Pyridoxine + Benzodiazepine',
+        summary: 'Give IV pyridoxine now alongside benzodiazepine treatment and airway support.',
+        body: '**ANTIDOTE FIRST, IN PARALLEL WITH RESUSCITATION**\n\nGive **IV pyridoxine immediately** (next card / Pyridoxine calculator) while administering a benzodiazepine using the local status-epilepticus protocol. Benzodiazepines alone may fail because GABA stores are depleted. [1][2]\n\nCorrect hypoglycemia. Provide oxygen and assisted ventilation; prepare intubation for persistent seizures, inadequate ventilation or inability to protect the airway. Neuromuscular blockade stops visible movement, not cerebral seizure activity: arrange continuous EEG when indicated. [3]\n\nDo not delay pyridoxine while cycling through conventional antiseizure agents.',
+        citation: [1, 2, 3], safetyLevel: 'critical',
+        calculatorLinks: [{ id: 'inh-pyridoxine', label: 'Pyridoxine Dose' }],
+        next: 'inh-antidote',
+    },
+    {
+        id: 'inh-antidote', type: 'info', module: 2,
+        title: 'IV Pyridoxine: Initial Rescue Dose',
+        summary: 'Known INH: mg-for-mg; unknown adult: 5 g. Children: cap at 70 mg/kg and 5 g.',
+        body: "Calculate the initial **IV pyridoxine** dose using the ingested amount and, for children, weight. Confirm concentration with pharmacy. [1][2][7]\n\nOpen [Seizure rescue](#/info/inh-seizures) for dosing, infusion rate, remaining-dose administration and toxicologist-directed repeats. Use the **Pyridoxine Dose** calculator below; do not substitute routine vitamin dosing.",
+        citation: [1, 2, 7], safetyLevel: 'critical',
+        calculatorLinks: [{ id: 'inh-pyridoxine', label: 'Pyridoxine Dose' }],
+        next: 'inh-response',
+    },
+    {
+        id: 'inh-response', type: 'question', module: 3,
+        title: 'Seizures Controlled and Mental Status Improving?',
+        summary: 'Persistent coma may reflect ongoing seizures, residual INH toxicity, sedation or another cause.',
+        body: 'Reassess airway, motor activity, glucose, consciousness and acid-base status. Do not interpret paralysis as seizure control. Persistent coma requires reassessment and consideration of EEG. Additional pyridoxine may be needed even after convulsions stop, under toxicology direction. [3][6]',
+        citation: [3, 6],
+        options: [
+            { label: 'No: persistent seizure or coma', next: 'inh-rescue', urgency: 'critical' },
+            { label: 'Yes: improving', next: 'inh-support' },
+        ],
+    },
+    {
+        id: 'inh-rescue', type: 'info', module: 3,
+        title: 'Refractory Seizures or No IV Pyridoxine',
+        summary: 'Escalate antidote procurement and GABA-directed seizure care; dialysis is an exceptional rescue, not routine.',
+        body: '**URGENT TOXICOLOGY + ICU**\n\nConfirm the pyridoxine dose was delivered. Discuss repeat antidote, continued benzodiazepines and anesthetic seizure control with airway support and EEG. **Do not use phenytoin/fosphenytoin as a substitute for pyridoxine**; sodium-channel therapy does not correct the GABA deficit. [5]\n\n**ANTIDOTE SHORTAGE**\n\nMobilize nearby supplies/transfer. Enteral pyridoxine is a toxicologist-directed fallback when IV stock is unavailable, with airway protection; it must not delay resuscitation. [1][2]\n\n**DIALYSIS**\n\nEXTRIP suggests **against routine extracorporeal treatment** added to standard care. The narrow exception is inability to administer standard-dose pyridoxine **and seizures refractory to GABA-A receptor modulators**. Evidence is very low quality; involve toxicology and nephrology urgently. [4]',
+        citation: [1, 2, 4, 5], safetyLevel: 'critical', next: 'inh-support',
+    },
+    {
+        id: 'inh-assessment', type: 'info', module: 1,
+        title: 'Stable Exposure: Assess and Prevent Deterioration',
+        summary: 'A reassuring initial examination or reported dose cannot independently clear an INH exposure.',
+        body: 'Obtain glucose, electrolytes/bicarbonate, renal function, blood gas and lactate; check hepatic tests, ECG and relevant coingestant testing. CK/urinalysis are useful after sustained seizures. Treat the patient rather than awaiting a drug level. [3][5]\n\nDiscuss **preemptive pyridoxine** for a potentially toxic recent ingestion with Poison Control; do not wait for seizures in a high-risk exposure. [7]\n\nConsider activated charcoal only for an appropriate early ingestion after toxicology advice and with a protected airway. Abrupt seizures create aspiration risk. No induced emesis. [5]\n\nIf seizures, reduced consciousness or instability develop, return immediately to the seizure pathway.',
+        citation: [3, 5, 7], safetyLevel: 'warning', next: 'inh-mechanism',
+    },
+    {
+        id: 'inh-mechanism', type: 'info', module: 3,
+        title: 'Mechanism: Functional B6 Deficiency → Low GABA',
+        summary: 'INH depletes active vitamin B6, reducing GABA synthesis and producing difficult-to-control seizures.',
+        body: "INH reduces active vitamin B6 availability, impairing GABA synthesis. This is why pyridoxine is the specific antidote and conventional seizure treatment alone may fail. [8]\n\n[Mechanism of overdose and antidote action](#/info/inh-moa)",
+        citation: [8], skippable: true, next: 'inh-support',
+    },
+    {
+        id: 'inh-support', type: 'info', module: 3,
+        title: 'Reassess Acidosis and Complications',
+        summary: 'Follow ventilation, consciousness, blood gas/lactate, renal function and complications after seizure control.',
+        body: 'Continue cardiopulmonary monitoring. Repeat glucose, electrolytes, blood gas/lactate and renal function according to severity. Follow CK, temperature and urine output after prolonged seizures. Evaluate aspiration, rhabdomyolysis and coingestants. [3][5]\n\nTreat hypoxia, hypoventilation, seizures and shock first. Bicarbonate is not an antidote; discuss severe persistent acidemia with toxicology/critical care rather than using it instead of pyridoxine. [5]\n\nKeep a record of cumulative pyridoxine and sedative doses, seizure recurrence and neurologic recovery for handoff.',
+        citation: [3, 5], next: 'inh-disposition',
+    },
+    {
+        id: 'inh-disposition', type: 'question', module: 4,
+        title: 'Choose the Monitoring Destination',
+        summary: 'Seizures, coma, acidosis or instability require admission; stable exposures need individualized toxicology clearance.',
+        body: 'Disposition depends on symptoms, reliable exposure timing, coingestants, laboratory trends, antidote requirement and access to rescue care. There is **no automatic discharge based on a reported dose or a single normal examination**. [3][5]',
+        citation: [3, 5],
+        options: [
+            { label: 'Seizures, coma, acidosis or instability', next: 'inh-icu', urgency: 'critical' },
+            { label: 'Asymptomatic / stable exposure', next: 'inh-observe' },
+        ],
+    },
+    {
+        id: 'inh-icu', type: 'result', module: 4,
+        title: 'Admit: ICU / PICU for Significant Toxicity',
+        summary: 'Admit significant toxicity with monitored antidote access and neurologic reassessment.',
+        body: 'Arrange ICU/PICU for seizures, persistent altered mental status, respiratory support, significant acidosis or hemodynamic instability. Continue toxicology-directed antidote/resuscitation and EEG when clinically indicated. A brief response to pyridoxine does not establish discharge readiness. [3][6]',
+        recommendation: 'Admit significant INH toxicity to a monitored critical-care setting with toxicology support.',
+        confidence: 'recommended', citation: [3, 6], safetyLevel: 'critical',
+    },
+    {
+        id: 'inh-observe', type: 'result', module: 4,
+        title: 'Observe Until Poison-Centre Clearance',
+        summary: 'Document an individualized observation period and explicit clearance criteria with Poison Control.',
+        body: 'Agree on observation duration with Poison Control using time of ingestion, certainty of history, symptoms, treatment and coingestants. Unknown timing or evolving symptoms requires longer monitoring. Do not use this card as a fixed-hour discharge rule. [3][5]\n\nBefore discharge: sustained normal examination, no recurrent symptoms, reassuring investigations when indicated, toxicology agreement and safe follow-up. Assess intent and safeguarding; intentional exposures need behavioral-health evaluation after medical stabilization. Provide return precautions for confusion, seizure, vomiting or other deterioration.',
+        recommendation: 'Continue supervised observation until medically cleared with Poison Control; address intent and safe medication storage.',
+        confidence: 'recommended', citation: [3, 5],
+    },
+];
+export const ISONIAZID_TOXICITY_NODE_COUNT = ISONIAZID_TOXICITY_NODES.length;
+export const ISONIAZID_TOXICITY_MODULE_LABELS = ['Recognize', 'Antidote & Seizures', 'Reassess', 'Disposition'];
+export const ISONIAZID_TOXICITY_CITATIONS = [
+    { num: 1, text: 'Queensland Poisons Information Centre. Pyridoxine: antidote dosing, infusion and shortage guidance. https://www.poisonsinfo.health.qld.gov.au/for-health-professionals/antidote-stocking-recommendations/pyridoxine' },
+    { num: 2, text: 'Atlantic Canada Poison Centre. Pyridoxine: Pediatric antidote manual. https://atlanticcanadapoisoncentre.ca/pyridoxine-pediatric.html' },
+    { num: 3, text: 'American College of Emergency Physicians, Toxicology Section. INH Toxicity simulation and teaching note. https://www.acep.org/toxicology/cases/simulation-cases/inh-toxicity' },
+    { num: 4, text: 'Mowry JB, et al. Extracorporeal treatments for isoniazid poisoning: systematic review and recommendations from the EXTRIP workgroup. Pharmacotherapy. 2021. doi:10.1002/phar.2519. Recommendations: https://www.extrip-workgroup.org/isoniazid' },
+    { num: 5, text: 'StatPearls. Toxicity of Antitubercular Drugs. NCBI Bookshelf NBK531488. Presentation and supportive care; accessed October 24, 2026. https://www.ncbi.nlm.nih.gov/books/NBK531488/' },
+    { num: 8, text: 'International Programme on Chemical Safety (IPCS). Isoniazid, Poison Information Monograph 288. Section 7: mode of action and toxicodynamics. https://www.inchem.org/documents/pims/pharm/pim288.htm' },
+    { num: 7, text: 'New Jersey Poison Information and Education System. Antidote Use Guidelines, 2023: pyridoxine known-ingestion dosing, pediatric initial cap and preemptive therapy. https://www.njpies.org/wp-content/uploads/2024/04/Antidote-Use-Guidelines-_-2023.pdf' },
+    { num: 6, text: 'Brent J, Vo N, Kulig K, Rumack BH. Reversal of prolonged isoniazid-induced coma by pyridoxine. Arch Intern Med. 1990;150:1751-1753. PMID:2152443. https://pubmed.ncbi.nlm.nih.gov/2152443/' },
+];

@@ -1,6 +1,4 @@
-// MedKitt — Info Page Data (Hardcoded Fallback)
-// Static info page definitions used as tier-3 fallback when Supabase and IndexedDB are unavailable.
-// Rendering logic lives in components/info-page.ts.
+import { INH_INFO_PAGES } from './inh-info-pages.js';
 // -------------------------------------------------------------------
 // DOAC for PE
 // -------------------------------------------------------------------
@@ -29638,6 +29636,7 @@ const MRI_FOR_DUMMIES_STOP = {
     ],
 };
 export const INFO_PAGES = {
+    ...Object.fromEntries(INH_INFO_PAGES.map(page => [page.id, page])),
     'asystole-steps': {
         "id": "asystole-steps",
         "title": "Asystole: bedside steps",

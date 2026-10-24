@@ -1279,6 +1279,12 @@ export const TOOLBAR_CONFIGS = {
         { id: 'ccb-pressors', label: 'Pressors', icon: '📈', action: 'calculator', target: 'ccb-pressors' },
         { id: 'ccb-intralipid', label: 'Intralipid', icon: '🧴', action: 'calculator', target: 'ccb-intralipid' },
     ],
+    'isoniazid-toxicity': [
+        { id: 'inh-seizures', label: 'Seizures', icon: '⚡', action: 'overlay', target: 'inh-seizures', pinned: true },
+        { id: 'inh-dose', label: 'B6 Dose', icon: '🧮', action: 'calculator', target: 'inh-pyridoxine', pinned: true },
+        { id: 'inh-moa', label: 'MOA', icon: '🧠', action: 'overlay', target: 'inh-moa', pinned: true },
+        { id: 'inh-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'inh-summary' },
+    ],
     'iron-od': [
         { id: 'iron-calc', label: 'Iron Calc', icon: '🧮', action: 'calculator', target: 'iron-calc' },
         { id: 'iron-level', label: 'Level', icon: '📊', action: 'calculator', target: 'iron-level' },
