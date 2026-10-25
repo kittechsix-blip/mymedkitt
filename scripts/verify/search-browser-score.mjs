@@ -24,7 +24,7 @@ const keys = (x) => {
   if (x.type === 'drug') return ['drug:' + x.drugId];
   if (m) return m[2] ? ['node:' + m[1] + '/' + m[2], 'tree:' + m[1]] : ['tree:' + m[1]];
   const c = x.route.match(/^\/calculator\/(.+)$/); if (c) return ['calc:' + c[1]];
-  const i = x.route.match(/^\/info\/([^/]+)/); if (i) return ['info:' + i[1]];
+  const i = x.route.match(/^\/info\/([^/]+)(?:\/at\/(.+))?$/); if (i) return i[2] ? ['info:' + i[1], 'sec:' + i[1] + '#' + i[2]] : ['info:' + i[1]];
   const t = x.route.match(/^\/tricks\/[^/]+\/trick\/trick-(.+)$/); if (t) return ['trick:' + t[1]];
   return [x.route];
 };
