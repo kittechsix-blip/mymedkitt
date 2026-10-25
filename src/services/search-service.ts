@@ -7,6 +7,8 @@ import { getAllCategories } from './category-service.js';
 import { getAllDrugs } from './drug-service.js';
 import { getAllCalculators } from '../components/calculator.js';
 import { sanitizeSearchInput } from './sanitize.js';
+import { CLINICAL_SYNONYMS, DRUG_SYNONYMS } from './search-synonyms.js';
+import { buildQuestionDocs, createQuestionIndex, drugInput, previewFor, routeFor, type BuildInput, type QDoc, type QResult, type QuestionIndex } from './question-search.js';
 // Types imported from data services directly
 
 // ===================================================================
@@ -32,12 +34,16 @@ export interface SearchDoc {
 }
 
 export interface SearchResult {
-  type: 'category' | 'consult' | 'drug' | 'calculator' | 'node' | 'trick';
+  type: 'category' | 'consult' | 'drug' | 'calculator' | 'node' | 'trick' | 'info';
   label: string;
   sublabel: string;
   route: string;
   drugId?: string;
   score?: number;
+  /** drug results: the dosing indication the pharmacy modal scrolls to */
+  indication?: string;
+  /** question results: the app's own words that answer the question (verbatim, never generated) */
+  preview?: string;
 }
 
 // Fuse.js types (loaded from CDN)
@@ -81,6 +87,15 @@ let trickDocs: SearchDoc[] = [];
 let nodeIndexLoading = false;
 let nodeIndexLoaded = false;
 
+// Question search (question-search.ts) reads the same node index plus the answer index
+// (info-page sections, whole pages, nodes of consults the node scrape cannot read).
+let rawNodes: NodeIndexEntry[] = [];
+let rawTricks: NodeTrickEntry[] = [];
+let answerIndex: AnswerIndexFile | null = null;
+let answerIndexLoading = false;
+let questionIndex: QuestionIndex | null = null;
+let questionIndexStale = true;
+
 interface NodeIndexEntry {
   id: string;
   treeId: string;
@@ -100,53 +115,18 @@ interface NodeTrickEntry {
   blurb: string;
 }
 
+interface AnswerIndexFile {
+  info: { p: string; a: string; h: string; pt: string; t: string }[];
+  pages: { p: string; t: string; s: string; x: string }[];
+  extraNodes: NodeIndexEntry[];
+}
+
 interface NodeIndexFile {
   generated: string;
   count: number;
   nodes: NodeIndexEntry[];
   tricks?: NodeTrickEntry[];
 }
-
-/** Clinical synonyms for common queries */
-const CLINICAL_SYNONYMS: Record<string, string[]> = {
-  'afib-rvr': ['afib', 'a-fib', 'atrial fibrillation', 'rvr', 'rapid ventricular', 'rate control', 'cardioversion'],
-  'pe-treatment': ['pe', 'pulmonary embolism', 'dvt', 'anticoagulation', 'clot', 'thrombus'],
-  'pneumothorax': ['pneumo', 'ptx', 'collapsed lung', 'chest tube', 'needle decompression'],
-  'burns': ['burn', 'thermal burn', 'scald', 'flame burn', 'eschar', 'escharotomy', 'circumferential burn', 'compartment syndrome', 'inhalation injury', 'carbon monoxide', 'cyanide', 'tbsa', 'parkland', 'rule of nines', 'hydrofluoric acid', 'hydroflouric acid', 'hydrofloric acid', 'hf burn', 'hf acid', 'fluoride burn', 'calcium gluconate burn', 'chemical burn', 'burn center'],
-  'sepsis': ['septic', 'infection', 'bacteremia', 'lactate', 'qsofa', 'sofa'],
-  'stroke': ['cva', 'tpa', 'thrombectomy', 'nihss', 'ischemic', 'hemorrhagic'],
-  'stemi': ['mi', 'myocardial infarction', 'heart attack', 'pci', 'cath lab'],
-  'nstemi': ['mi', 'acs', 'acute coronary', 'troponin'],
-  'intubation': ['rsi', 'airway', 'etomidate', 'rocuronium', 'tube'],
-  'dka': ['diabetic ketoacidosis', 'hyperglycemia', 'insulin', 'bicarb'],
-  'hypoglycemia': ['low blood sugar', 'low glucose', 'dextrose', 'd50', 'd10', 'glucagon', 'sulfonylurea', 'glipizide', 'glyburide', 'glimepiride', 'octreotide', 'insulin overdose', 'recurrent hypoglycemia', 'diabetes', 'endocrine', 'critical sample'],
-  'dementia': ['memory loss', 'memory problem', 'cognitive decline', 'cognitive impairment', 'new dementia', 'suspected dementia', 'major neurocognitive disorder', 'mild cognitive impairment', 'mci', 'alzheimer', 'alzheimers', 'alzheimer disease', 'vascular dementia', 'lewy body', 'frontotemporal dementia', 'nph', 'wandering', 'caregiver', 'caregiver failure', 'unsafe home', 'delirium first', 'confusion chronic', 'agitation dementia'],
-  'dementia-agitation': ['dementia agitation', 'agitated dementia', 'behavior crisis dementia', 'lewy body agitation', 'parkinson dementia agitation', 'capacity dementia', 'wandering agitation', 'sundowning'],
-  'thrombocytopenia': ['low platelets', 'platelets low', 'platelet count', 'thrombocytopaenia', 'petechiae', 'purpura', 'mucosal bleeding', 'itp', 'immune thrombocytopenia', 'ttp', 'thrombotic thrombocytopenic purpura', 'tma', 'thrombotic microangiopathy', 'schistocytes', 'plasmic', 'dic', 'disseminated intravascular coagulation', 'hit', 'heparin induced thrombocytopenia', '4ts', 'platelet transfusion', 'drug induced thrombocytopenia', 'pseudothrombocytopenia', 'hellp', 'acute leukemia', 'marrow failure'],
-  'unilateral-facial-pain-hub': ['facial pain-unilateral', 'facial pain unilateral', 'facial pain', 'unilateral facial pain', 'face pain', 'jaw pain', 'cheek pain', 'temple pain', 'orbital pain', 'eye pain', 'trigeminal neuralgia', 'tic douloureux', 'cluster headache', 'tac', 'trigeminal autonomic cephalalgia', 'dental pain', 'tooth pain', 'odontogenic infection', 'sinus pain', 'rhinosinusitis', 'zoster', 'hzo', 'herpes zoster ophthalmicus', 'ramsay hunt', 'tmj', 'temporal arteritis', 'giant cell arteritis', 'gca', 'carotid dissection', 'vertebral dissection', 'horner', 'red eye', 'aacg'],
-  'dental-extraction-complications': ['dental extraction', 'tooth extraction', 'post extraction', 'post-extraction', 'post extraction bleeding', 'socket bleeding', 'dry socket', 'alveolar osteitis', 'oral bleeding', 'post extraction infection', 'odontogenic infection', 'gelfoam', 'surgicel', 'tranexamic acid', 'txa', 'tea bag', 'oroantral communication', 'sinus communication', 'dental box', 'extraction complications'],
-  'syncope': ['passed out', 'fainted', 'loss of consciousness', 'loc'],
-  'meningitis': ['meningeal', 'lumbar puncture', 'lp', 'csf'],
-  'syphilis': ['neurosyphilis', 'treponemal', 'rpr', 'vdrl'],
-  'status-epilepticus': ['seizure', 'convulsion', 'epilepsy', 'benzodiazepine'],
-};
-
-/** Drug synonyms */
-const DRUG_SYNONYMS: Record<string, string[]> = {
-  'metoprolol': ['lopressor', 'beta blocker', 'bb'],
-  'diltiazem': ['cardizem', 'calcium channel blocker', 'ccb'],
-  'amiodarone': ['cordarone', 'antiarrhythmic'],
-  'heparin': ['anticoagulant', 'blood thinner'],
-  'enoxaparin': ['lovenox', 'lmwh', 'anticoagulant'],
-  'fentanyl': ['pain', 'opioid', 'narcotic', 'sedation'],
-  'ketamine': ['sedation', 'dissociative', 'psi'],
-  'propofol': ['diprivan', 'sedation', 'induction'],
-  'rocuronium': ['paralytic', 'nmb', 'rsi'],
-  'succinylcholine': ['sux', 'paralytic', 'depolarizing'],
-  'norepinephrine': ['levophed', 'norepi', 'pressor', 'vasopressor'],
-  'epinephrine': ['epi', 'adrenaline', 'pressor'],
-  'magnesium': ['mag', 'torsades', 'eclampsia'],
-};
 
 /** Focused search entries for high-yield subtools that clinicians expect by name. */
 const ADDITIONAL_SEARCH_DOCS: SearchDoc[] = [
@@ -198,16 +178,72 @@ async function loadNodeIndex(): Promise<void> {
       specialtyId: t.specialtyId,
       anchorId: t.anchorId,
     }));
+    rawNodes = data.nodes;
+    rawTricks = data.tricks ?? [];
+    questionIndexStale = true;
     nodeIndexLoaded = true;
     console.log(`[SearchService] Loaded ${nodeDocs.length} node docs + ${trickDocs.length} trick docs from search-node-index.json`);
     // Rebuild index so subsequent searches include node hits.
     buildSearchIndex();
+    scheduleQuestionIndex();
   } catch (e) {
     // Non-fatal — search still works against titles/synonyms. Log once.
     console.warn('[SearchService] Could not load search-node-index.json:', e);
   } finally {
     nodeIndexLoading = false;
   }
+}
+
+/** Lazy-load the answer index (docs/data/search-answer-index.json). Non-fatal: question search just has less to read. */
+async function loadAnswerIndex(): Promise<void> {
+  if (answerIndex || answerIndexLoading) return;
+  answerIndexLoading = true;
+  try {
+    const res = await fetch('data/search-answer-index.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    answerIndex = (await res.json()) as AnswerIndexFile;
+    questionIndexStale = true;
+    scheduleQuestionIndex();
+  } catch (e) {
+    console.warn('[SearchService] Could not load search-answer-index.json:', e);
+  } finally {
+    answerIndexLoading = false;
+  }
+}
+
+/** Build the question index off the typing path once both indexes are in. */
+function scheduleQuestionIndex(): void {
+  if (!nodeIndexLoaded || !answerIndex) return; // wait for both files; a question typed sooner builds it on demand
+  const idle = (globalThis as { requestIdleCallback?: (cb: () => void) => void }).requestIdleCallback;
+  const run = () => { if (questionIndexStale) ensureQuestionIndex(); };
+  if (idle) idle(run);
+  else setTimeout(run, 50);
+}
+
+/** The question index over everything the app can answer from. Rebuilt when an index file lands. */
+function ensureQuestionIndex(): QuestionIndex {
+  if (questionIndex && !questionIndexStale) return questionIndex;
+  const seen = new Set<string>();
+  const consults: BuildInput['consults'] = [];
+  for (const cat of getAllCategories()) {
+    for (const tree of cat.decisionTrees) {
+      if (seen.has(tree.id)) continue;
+      seen.add(tree.id);
+      consults.push({ id: tree.id, title: tree.title, subtitle: tree.subtitle, synonyms: CLINICAL_SYNONYMS[tree.id] ?? [] });
+    }
+  }
+  const docs = buildQuestionDocs({
+    consults,
+    nodes: [...rawNodes, ...(answerIndex?.extraNodes ?? [])],
+    tricks: rawTricks,
+    info: answerIndex?.info ?? [],
+    pages: answerIndex?.pages ?? [],
+    drugs: getAllDrugs().map(d => drugInput(d, DRUG_SYNONYMS[d.name.toLowerCase()] ?? [])),
+    calcs: getAllCalculators().map(c => ({ id: c.id, title: c.title, subtitle: c.subtitle })),
+  });
+  questionIndex = createQuestionIndex(docs);
+  questionIndexStale = false;
+  return questionIndex;
 }
 
 /** Build search index from all content */
@@ -305,6 +341,7 @@ export function buildSearchIndex(): void {
   if (!nodeIndexLoaded && !nodeIndexLoading) {
     void loadNodeIndex();
   }
+  void loadAnswerIndex();
 }
 
 /**
@@ -329,6 +366,11 @@ export function search(query: string): SearchResult[] {
 
   const q = sanitized.toLowerCase();
   const prefixResults = alphabeticalPrefixSearch(q);
+
+  // Questions ("what are risks for ectopic pregnancy") and multi-word topics ("dka fluids")
+  // are answered by the question index; single words and title-style queries fall through unchanged.
+  const asked = searchQuestion(q, prefixResults);
+  if (asked) return asked;
 
   // Single-character queries: prefix-only to avoid fuzzing whole index.
   // Plenty of prefix hits: skip Fuse cost.
@@ -356,6 +398,69 @@ export function search(query: string): SearchResult[] {
     merged.push(r);
   }
   return merged;
+}
+
+const compactKey = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '');
+
+/** Merge two result lists, first occurrence wins (a drug row is identified by drugId + route). */
+function dedupe(list: SearchResult[]): SearchResult[] {
+  const seen = new Set<string>();
+  return list.filter(r => {
+    const key = (r.drugId ?? '') + '|' + r.route;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+/**
+ * Question path. Returns null when the query is a plain title / single word
+ * (the caller then runs the unchanged prefix + Fuse search) or the question index finds nothing.
+ */
+function searchQuestion(q: string, prefixResults: SearchResult[]): SearchResult[] | null {
+  if (q.length < 3) return null;
+  const { parsed, results } = ensureQuestionIndex().rank(q, 40);
+  if (!parsed.active && !parsed.wide) return null;
+  if (results.length === 0) return null;
+  const mapped = results.map((r, i) => questionToResult(r, i < PREVIEW_COUNT ? parsed : null));
+  if (parsed.active) {
+    // a query that IS a title ("Dose Adjustment") still opens that title first
+    const exact = prefixResults.filter(p => compactKey(p.label) === compactKey(q));
+    return dedupe([...exact, ...mapped, ...prefixResults]);
+  }
+  // a topic typed as a title ("pelvic inflammatory disease") keeps the title-first order
+  return dedupe([...prefixResults, ...mapped]);
+}
+
+const PREVIEW_COUNT = 3;
+
+function questionToResult(r: QResult, previewFor_: Parameters<typeof previewFor>[1] | null): SearchResult {
+  const d: QDoc = r.doc;
+  const out: SearchResult = { type: 'consult', label: d.title, sublabel: d.subtitle, route: routeFor(d), score: r.score };
+  switch (d.kind) {
+    case 'consult': out.type = 'consult'; break;
+    case 'node': out.type = 'node'; break;
+    case 'info': out.type = 'info'; break;
+    case 'trick': out.type = 'trick'; break;
+    case 'calc': out.type = 'calculator'; break;
+    case 'drug':
+      out.type = 'drug';
+      out.drugId = d.drugId;
+      if (r.indication) {
+        out.indication = r.indication;
+        out.sublabel = `${d.subtitle} \u00B7 ${r.indication}`;
+      }
+      break;
+  }
+  if (previewFor_ && d.kind !== 'consult') {
+    // the dosing line for the indication asked about, else the best sentence of the card's own text
+    const text = d.kind === 'drug' && r.indication ? d.text?.split(' \u2022 ').find(t => t.startsWith(r.indication + ':')) : d.text;
+    // a whole page opens at its top: only show a sentence that really mentions the question, else its own subtitle
+    const wholePage = d.kind === 'info' && !d.anchor;
+    const p = previewFor(text, previewFor_, 170, wholePage) || (wholePage && d.subtitle && d.subtitle !== d.title ? d.subtitle : '');
+    if (p) out.preview = p;
+  }
+  return out;
 }
 
 /** Map an indexed SearchDoc to a routable SearchResult. */
@@ -398,7 +503,7 @@ function docToResult(doc: SearchDoc): SearchResult | null {
 // Feature 4: Faceted Search with Type Filters
 // ===================================================================
 
-export type SearchFilterType = 'category' | 'consult' | 'drug' | 'calculator' | 'node' | 'trick';
+export type SearchFilterType = 'category' | 'consult' | 'drug' | 'calculator' | 'node' | 'trick' | 'info';
 
 /** Search with optional type filters */
 export function searchWithFilters(query: string, filters?: SearchFilterType[]): SearchResult[] {

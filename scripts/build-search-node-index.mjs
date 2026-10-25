@@ -150,9 +150,9 @@ function extractNodesFromTree(src, treeId) {
     const recommendation = captureField(block, 'recommendation') || '';
     const body = captureField(block, 'body') || '';
 
-    // Body and recommendation can be very long. Pull only first ~400 chars
+    // Body and recommendation can be very long. Pull only first ~600 chars
     // after cleaning — enough for keyword hits without blowing index size.
-    const cleanBody = cleanForSearch(body).slice(0, 400);
+    const cleanBody = cleanForSearch(body).slice(0, 600);
     const cleanRecommendation = cleanForSearch(recommendation).slice(0, 240);
     const cleanSummary = cleanForSearch(summary).slice(0, 240);
     const cleanTitle = cleanForSearch(title);

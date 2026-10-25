@@ -72,8 +72,8 @@ export function renderDashboard(container) {
     const searchInput = document.createElement('input');
     searchInput.className = 'dashboard-hero-search__input';
     searchInput.type = 'search';
-    searchInput.placeholder = 'Search consults, drugs, calculators…';
-    searchInput.setAttribute('aria-label', 'Search consults, drugs, and calculators');
+    searchInput.placeholder = 'Search or ask: risks for ectopic pregnancy…';
+    searchInput.setAttribute('aria-label', 'Search consults, drugs, and calculators, or ask a clinical question');
     searchInput.autocomplete = 'off';
     searchInput.autocapitalize = 'off';
     searchInput.spellcheck = false;
@@ -98,7 +98,7 @@ export function renderDashboard(container) {
         resultsList.hidden = true;
         resultsList.innerHTML = '';
         if (r.type === 'drug' && r.drugId) {
-            showDrugModal(r.drugId);
+            showDrugModal(r.drugId, r.indication);
             return;
         }
         router.navigate(r.route);
@@ -144,6 +144,13 @@ export function renderDashboard(container) {
                 sub.className = 'dashboard-hero-search__sublabel';
                 sub.textContent = r.sublabel;
                 labelWrap.appendChild(sub);
+            }
+            // Question answers: the app's own words that answer it (verbatim, from the card itself)
+            if (r.preview) {
+                const preview = document.createElement('span');
+                preview.className = 'dashboard-hero-search__preview';
+                preview.textContent = r.preview;
+                labelWrap.appendChild(preview);
             }
             li.appendChild(badge);
             li.appendChild(labelWrap);

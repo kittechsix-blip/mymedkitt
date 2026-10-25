@@ -352,6 +352,9 @@ console.log('\n=== Step 4.5: Regenerating in-app search node index ===\n');
 // Runs before Step 5 so the fresh file lands in the regenerated SW precache list.
 const generatedIndexes = [
   ['search index', 'node scripts/build-search-node-index.mjs'],
+  // Question search: info-page sections, whole pages, and nodes the scrape above cannot read.
+  // Reads the COMPILED docs/ modules, so it must run after the playbook's compile step (it always does).
+  ['search answer index', 'node scripts/build-search-answer-index.mjs'],
   ['node→consult map', 'node scripts/build-node-tree-map.mjs'],
 ];
 

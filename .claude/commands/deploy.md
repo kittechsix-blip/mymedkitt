@@ -115,6 +115,14 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
    git add scripts/validate-cross-links.baseline.json
    ```
 
+1c. **MANDATORY — Home question-search gate:**
+   ```bash
+   bun run test
+   ```
+   Runs `scripts/search-gold.test.ts` (and the telemetry test). It builds the search documents from the freshly compiled `docs/` plus the two generated indexes and fails the deploy if the Home question search regresses: gold set rank 1 >= 90 % and top 3 = 100 %, held-out floor, every consult title still opens its consult first, previews are verbatim, median query < 50 ms. Run it AFTER step 3 (cache sync regenerates `docs/data/search-*.json`) on any deploy that touches trees, nodes, info pages, drugs, calculators or search code; running it on every deploy is cheap (~2 s).
+
+   **If a pinned page no longer exists** (consult renamed/removed), update the pin in `scripts/search-gold.ts`; never loosen the thresholds. The held-out file `scripts/search-heldout.ts` is sealed: never tune the ranker against it.
+
 2. **Copy CSS to docs:**
    ```bash
    cp src/views/style.css docs/style.css

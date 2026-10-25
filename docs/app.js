@@ -362,6 +362,14 @@ async function init() {
             handleNotFound();
         }
     });
+    // Search-result deep link: same overlay, scrolled to and flashed on one section of the page.
+    router.on('/info/:id/at/:anchor', (params) => {
+        const main = document.getElementById('main-content');
+        if (!main || main.children.length === 0)
+            handleHome({});
+        if (!showInfoModal(params.id, params.anchor))
+            handleNotFound();
+    });
     router.on('/learn', handleLearnHome);
     router.on('/hubs', handleHubsHome);
     router.on('/tricks', handleTricksHome);

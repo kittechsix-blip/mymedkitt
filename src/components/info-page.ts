@@ -622,7 +622,11 @@ export function showInfoModal(pageId: string, anchorId?: string): boolean {
     requestAnimationFrame(() => {
       const target = overlayEl?.querySelector<HTMLElement>(`#${CSS.escape(anchorId)}`);
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // keep the section heading clear of the sticky modal header
+        const sticky = overlayEl?.querySelector<HTMLElement>('.modal-header');
+        if (sticky) target.style.scrollMarginTop = `${sticky.getBoundingClientRect().height + 8}px`;
+        // instant, not smooth: a smooth scroll lands short while the modal is still laying out
+        target.scrollIntoView({ behavior: 'auto', block: 'start' });
         target.classList.add('cite-highlight');
         setTimeout(() => target.classList.remove('cite-highlight'), 1500);
       }

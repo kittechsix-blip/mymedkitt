@@ -139,6 +139,9 @@ export async function renderConsultFlow(
       const activeCard = container.querySelector('.decision-card--active');
       if (activeCard) {
         scrollCardBelowHeader(activeCard);
+        // Briefly mark where a search result landed so the eye finds the answer
+        activeCard.classList.add('search-landing-flash');
+        setTimeout(() => activeCard.classList.remove('search-landing-flash'), 2200);
       }
     });
   }

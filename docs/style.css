@@ -5130,6 +5130,30 @@ body.critical-actions-open {
   text-overflow: ellipsis;
 }
 
+.dashboard-hero-search__preview {
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--color-text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: normal;
+}
+
+/* A search result landed here: a brief wayfinding ring (umber = where you are), entrance-only */
+@keyframes search-landing-flash {
+  0% { box-shadow: 0 0 0 4px var(--color-umber); }
+  100% { box-shadow: 0 0 0 4px transparent; }
+}
+.search-landing-flash {
+  animation: search-landing-flash 2s ease-out 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .search-landing-flash { animation: none; outline: 3px solid var(--color-umber); outline-offset: 2px; }
+}
+
 .dashboard-hero-search__empty {
   padding: 16px;
   text-align: center;
