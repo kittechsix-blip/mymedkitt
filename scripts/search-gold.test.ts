@@ -44,7 +44,7 @@ test('gold set: expected page at rank 1 for >= 90 %, in the top 3 for 100 %', ()
 // The held-out questions were written before any ranking code and are never tuned on.
 // Target 70 % / 90 %. The floor below is the measured result minus a small margin so a
 // regression fails the deploy; raise it as the ranker earns it, never lower it to pass.
-const HELDOUT_FLOOR = { rank1: 0.6, top3: 0.76 };
+const HELDOUT_FLOOR = { rank1: 0.68, top3: 0.88 };
 test('held-out set does not regress below its floor', () => {
   const s = score(HELDOUT);
   console.log(`held-out: rank1 ${s.r1}/${s.n} (${Math.round((100 * s.r1) / s.n)}%), top3 ${s.t3}/${s.n} (${Math.round((100 * s.t3) / s.n)}%)`);

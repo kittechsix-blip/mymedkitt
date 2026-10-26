@@ -140,6 +140,9 @@ function extractNodesFromTree(src, treeId) {
   if (!arrayMatch) return [];
   const arrayBody = arrayMatch[1];
   const objectBlocks = splitTopLevelObjects(arrayBody);
+  // The consult's own section names ("Severe HyperK Rx"): each node's `module: N` points at one. Searched as parent context.
+  const labelsMatch = src.match(/export const \w+_MODULE_LABELS(?:\s*:\s*[^=]+?)?\s*=\s*\[([\s\S]*?)\]/);
+  const moduleLabels = labelsMatch ? [...labelsMatch[1].matchAll(/'((?:\\.|[^'\\])*)'|"((?:\\.|[^"\\])*)"/g)].map((m) => cleanForSearch(m[1] ?? m[2])) : [];
 
   const docs = [];
   for (const block of objectBlocks) {
@@ -160,6 +163,8 @@ function extractNodesFromTree(src, treeId) {
     // Skip noise nodes with no searchable content
     if (!cleanTitle && !cleanBody && !cleanSummary && !cleanRecommendation) continue;
 
+    const modNum = Number((block.match(/\bmodule\s*:\s*(\d+)/) ?? [])[1]);
+    const ml = modNum >= 1 ? moduleLabels[modNum - 1] : undefined;
     docs.push({
       id,
       treeId,
@@ -167,6 +172,7 @@ function extractNodesFromTree(src, treeId) {
       summary: cleanSummary,
       body: cleanBody,
       recommendation: cleanRecommendation,
+      ...(ml ? { ml } : {}),
     });
   }
   return docs;

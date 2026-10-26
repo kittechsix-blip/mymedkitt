@@ -1,0 +1,18 @@
+{
+  "_readme": [
+    "Bedside question set: real questions asked the way they are asked on shift. Scored by scripts/verify/bedside-score.mjs.",
+    "Per question:",
+    "  q        the question, verbatim, messy and abbreviated is the point. NO patient identifiers.",
+    "  expect   pin keys, any one at rank N counts (same format as scripts/search-heldout.ts: tree:<id>, node:<tree>/<node>, info:<id>, sec:<page>#<anchor>, drug:<id>, calc:<id>).",
+    "  answer   optional. Regex sources (case-insensitive); ALL must match the first result's preview for 'answer visible without a tap' to count.",
+    "  covered  false = the app has no answer; the right behaviour is to say so, not guess. Leave expect empty.",
+    "  pending  true = page not yet confirmed. Not scored; --propose prints the top 3 so the pin can be confirmed.",
+    "Never tune synonyms or boosts against a question here; fix the general rule that failed, or leave it failing and report it."
+  ],
+  "questions": [
+    { "q": "what is max dose of lidocaine in doing awake intubation", "expect": ["info:vafei-topicalization-guide", "sec:vafei-topicalization-guide#trick-maximum-lidocaine-dose"], "answer": ["\\d\\s*mg/kg"], "note": "Andy pinned the Airway Topicalization info page. OPEN CONTENT CONFLICT: that page says 7 mg/kg, the nasal/oral topicalization nodes say 9 mg/kg. Needs Andy/Dr. K to pick one before the answer regex is tightened to a number." },
+    { "q": "I have post exposure prophylaxis patient, what is cheapest treatment regimen", "expect": ["node:pep/pep-regimen"], "answer": ["dolutegravir"], "note": "Andy: the 28-Day Regimen node is the answer; the alternative (TDF/FTC + dolutegravir) is the cheaper regimen and the one used at Dell Seton. The app has no cost wording anywhere, so the node alone does not say which is cheaper (content idea for Andy, not a search fix)." },
+    { "q": "K 6.8 with peaked T waves what do I give", "expect": ["node:potassium/k-hyper-step1"], "answer": ["calcium", "insulin"], "note": "Andy: should land on the hyperkalemia treatment node (potassium consult, Step 1: Temporizing Measures)." },
+    { "q": "HINTS exam normal but can't walk", "expect": ["node:vertigo/vert-hints-check"], "note": "Andy: the vertigo consult's HINTS check node. Today an info page (vertigo-hints-guide) ranks above it." }
+  ]
+}

@@ -103,6 +103,8 @@ interface NodeIndexEntry {
   summary: string;
   body: string;
   recommendation: string;
+  /** the consult's own name for the section this node sits in */
+  ml?: string;
 }
 
 interface NodeTrickEntry {

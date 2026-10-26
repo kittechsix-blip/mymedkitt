@@ -40,6 +40,10 @@ export interface QDoc {
   specialtyId?: string;
   /** node: the consult title; info section: the page title (the subtitle also carries it) */
   parentTitle?: string;
+  /** node: the consult's own name for the section the node sits in ("Severe HyperK Rx"), matched as parent context */
+  moduleLabel?: string;
+  /** info section: the page's own subtitle ("Lidocaine Technique for Awake Intubation"), matched as parent context but never shown */
+  parentSubtitle?: string;
   /** drug only: the dosing indications, used to scroll the pharmacy modal to the right card */
   doseIndications?: string[];
 }
@@ -133,7 +137,7 @@ const INTENTS: readonly IntentDef[] = [
   { id: 'workup', strength: WEAK, title: /workup|work up|\blabs?\b|laborator|evaluation|assessment|interpret|result|level|test/, triggers: ['work up', 'workup', 'what to order', 'which labs', 'labs', 'investigation', 'evaluation', 'evaluate', 'interpret', 'interpretation'] },
   { id: 'presentation', strength: MEDIUM, tight: /\bsigns?\b|symptom/, title: /\bsigns?\b|symptom|presentation|findings?|recogni|clinical|clue|suspect|look/, triggers: ['sign', 'symptom', 'presentation', 'presents', 'clinical feature', 'feature', 'finding', 'clue', 'look like', 'looks like'] },
   { id: 'ddx', strength: STRONG, title: /differential|mimic|ddx/, triggers: ['ddx', 'differential', 'mimic', 'what else'] },
-  { id: 'treatment', strength: WEAK, tight: /regimen|treatment/, title: /treatment|management|therapy|protocol|regimen|\btx\b|first.?line|second.?line|rescue/, triggers: ['treatment', 'treat', 'therapy', 'management', 'manage', 'managing', 'tx', 'regimen', 'first line', 'second line'] },
+  { id: 'treatment', strength: WEAK, tight: /regimen|treatment/, title: /treatment|management|therapy|protocol|regimen|\btx\b|first.?line|second.?line|rescue/, triggers: ['treatment', 'treat', 'therapy', 'management', 'manage', 'managing', 'tx', 'regimen', 'first line', 'second line', 'what do i give', 'what should i give', 'what can i give', 'what to give', 'what do i do', 'what should i do', 'what to do', 'what do i start', 'what to start'] },
   { id: 'antidote', strength: STRONG, tight: /antidote|reversal/, title: /antidote|revers|rescue|counteract/, kinds: { drug: 0.1 }, triggers: ['antidote', 'reversal', 'reverse', 'reversing', 'counteract'] },
   { id: 'followup', strength: MEDIUM, tight: /follow|discharge|dispo/, title: /follow|discharge|dispo|admit|return|monitor|surveillance|repeat|observation/, triggers: ['follow up', 'followup', 'disposition', 'dispo', 'admit', 'discharge', 'return precaution', 'monitor', 'monitoring', 'recheck'] },
   { id: 'procedure', strength: MEDIUM, title: /procedure|technique|step by step|placement|insertion|how to|maneuver/, triggers: ['maneuver', 'how to place', 'how do i place', 'how to perform', 'how do i perform', 'how to do', 'how do i do', 'technique', 'procedure', 'step by step', 'placement', 'insert', 'insertion', 'perform'] },
@@ -143,7 +147,7 @@ const INTENTS: readonly IntentDef[] = [
 
 /** Dropped outright: words that make a sentence a question, not a topic. */
 const FILLER: ReadonlySet<string> = new Set(
-  "what whats what's are is the for of in how do does did i should which why can could would may might my to on at if it me you we about there any be was were will tell show please pls and or with vs versus from that this these those into by as so just am have has your our give gives need needed want use using get when where who whom whose".split(' '),
+  "what whats what's are is the for of in how do does did i should which why can could would may might my to on at if it me you we about there any be was were will tell show please pls and or with vs versus from that this these those into by as so just am have has your our give gives need needed want use using get when where who whom whose doing best cheap cheaper cheapest easiest simplest quickest really actually basically".split(' '),
 );
 
 /** Kept, but never required for a match. */
@@ -241,8 +245,28 @@ function rewriteBigrams(ws: string[]): string[] {
   return out;
 }
 
+/**
+ * Bedside lab shorthand ("K 6.8", "Na 118") names the condition the value implies. The value is a reading, not a topic word,
+ * so it is replaced by the condition. Cut-offs are the usual definitions of the condition, used only to read the question.
+ */
+const LABS: readonly { name: RegExp; low?: [number, string]; high?: [number, string] }[] = [
+  { name: /^(k|k\+|potassium)$/, low: [3.5, 'hypokalemia'], high: [5.0, 'hyperkalemia'] },
+  { name: /^(na|na\+|sodium)$/, low: [135, 'hyponatremia'], high: [145, 'hypernatremia'] },
+];
+
+function rewriteLabs(raw: string): string {
+  return raw.replace(/\b(k\+?|na\+?|potassium|sodium)\s*(?:of|is|was|at|=|:)?\s*(\d{1,3}(?:\.\d+)?)\b(?!\s*(?:mg|mcg|g|ml|%|mmol\/min))/gi, (all, analyte: string, num: string) => {
+    const lab = LABS.find((l) => l.name.test(analyte.toLowerCase()));
+    const v = Number(num);
+    if (!lab || !Number.isFinite(v)) return all;
+    if (lab.low && v < lab.low[0]) return lab.low[1];
+    if (lab.high && v > lab.high[0]) return lab.high[1];
+    return all;
+  });
+}
+
 export function parseQuestion(raw: string): ParsedQuestion {
-  const ws = rewriteBigrams(words(raw));
+  const ws = rewriteBigrams(words(rewriteLabs(raw)));
   const sts = ws.map(stem);
   const intents = new Set<IntentId>();
   const tokens: QuestionToken[] = [];
@@ -276,7 +300,7 @@ export function parseQuestion(raw: string): ParsedQuestion {
 
 function intentLift(doc: QDoc, intents: readonly IntentId[]): number {
   if (!intents.length) return 0;
-  const t = words(doc.title).join(' ');
+  const t = words(doc.title).concat(doc.moduleLabel ? words(doc.moduleLabel).map((w) => LABEL_SHORTHAND[w] ?? w) : []).join(' ');
   let best = 0;
   let n = 0;
   for (const id of intents) {
@@ -309,7 +333,15 @@ interface Prep {
   parent: Set<string>;
   ctx: Set<string>;
   text: Set<string>;
+  /** the page subtitle an info section lives under: completes a match, never lifts one */
+  psub: Set<string>;
 }
+
+/** Shorthand the consult authors use in section names ("Severe HyperK Rx"), spelled the way people search. */
+const LABEL_SHORTHAND: Readonly<Record<string, string>> = {
+  hyperk: 'hyperkalemia', hypok: 'hypokalemia', hypona: 'hyponatremia', hyperna: 'hypernatremia', rx: 'treatment', tx: 'treatment', dx: 'diagnosis', ddx: 'differential', sx: 'symptoms', abx: 'antibiotic',
+};
+const labelStems = (label: string | undefined): string[] => (label ? words(label).map((w) => stem(LABEL_SHORTHAND[w] ?? w)) : []);
 
 /** "A-Fib" is typed "afib", "Pre-eclampsia" is typed "preeclampsia": hyphenated parts also count joined. */
 function titleStems(title: string): string[] {
@@ -328,17 +360,22 @@ const LOC_TITLE = 1;
 const LOC_PARENT = 0.85;
 const LOC_CTX = 0.6;
 const LOC_TEXT = 0.35;
+const LOC_SUBTITLE = 0.3;
 const MIN_COVERAGE = 0.6;
 const FALLBACK_BELOW = 3;
 const FALLBACK_COVERAGE = 0.3;
 const COVERAGE_WEIGHT = 0.4;
 const CONTEXT_BONUS = 0.12;
 const RARE_WEIGHT = 4;
+/** Ceiling for a typed word that only ever appears in body text (see match). */
+const CHATTER_WEIGHT = 1.5;
 const SUBJECT_WEIGHT = 1.8;
 
 const TYPE_PENALTY: Readonly<Record<QKind, number>> = { consult: 0, calc: 0.03, drug: 0.04, info: 0.06, trick: 0.07, node: 0.08 };
 const QUESTION_TYPE_SCALE = 0.4;
 const QUESTION_CONSULT_PENALTY = 0.05;
+/** The question asks for a facet ("treatment", "dose") and one of the consult's own nodes answers it: the overview row steps aside. */
+const FACET_CONSULT_PENALTY = 0.15;
 const EXTRA_WORD_PENALTY = 0.006;
 const EXTRA_WORD_CAP = 6;
 const DO_NOT_PENALTY = 0.15;
@@ -358,6 +395,8 @@ const FOREIGN_LIFT_SCALE = 0.5;
 const PAGE_TIE_BONUS = 0.01;
 /** Pediatric-only cards yield a little unless the question says pediatric. */
 const PEDS_PENALTY = 0.04;
+/** A pediatric consult's id says so ("peds-dka", "neonatal-sepsis"): its nodes are pediatric cards even when a node title does not. */
+const PEDS_CONSULT = /^(peds?|pediatric|paeds|neonat\w*)-/;
 const PEDS_WORDS = /\b(pediatric|peds|paediatric|child|children|neonat\w*|infant|infants)\b/;
 
 export interface QuestionIndex {
@@ -388,22 +427,26 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     return {
       seq: stems(d.title),
       title: new Set(titleStems(d.title)),
-      parent: new Set(HAS_PARENT.has(d.kind) ? [...sub, ...(d.parentTitle ? titleStems(d.parentTitle) : [])] : []),
+      parent: new Set(HAS_PARENT.has(d.kind) ? [...sub, ...(d.parentTitle ? titleStems(d.parentTitle) : []), ...labelStems(d.moduleLabel)] : []),
       ctx: new Set([...(HAS_PARENT.has(d.kind) ? [] : sub), ...kw].filter((w) => !KIND_WORDS.has(w))),
       text: new Set(d.text ? stems(d.text) : []),
+      psub: new Set((d.parentSubtitle ? stems(d.parentSubtitle) : []).filter((w) => !KIND_WORDS.has(w))),
     };
   });
 
   const postings = new Map<string, number[]>();
   /** stem -> docs carrying it at each level: title, parent, context, text */
-  const byLevel: Map<string, number[]>[] = [new Map(), new Map(), new Map(), new Map()];
+  const byLevel: Map<string, number[]>[] = [new Map(), new Map(), new Map(), new Map(), new Map()];
   const byConsult = new Map<string, number[]>();
   prep.forEach((x, i) => {
-    [x.title, x.parent, x.ctx, x.text].forEach((set, k) => {
+    [x.title, x.parent, x.ctx, x.text, x.psub].forEach((set, k) => {
       for (const w of set) {
-        const list = postings.get(w);
-        if (!list) postings.set(w, [i]);
-        else if (list[list.length - 1] !== i) list.push(i);
+        // the subtitle level only completes matches: it must not shift word-frequency weights or the vocabulary
+        if (k < 4) {
+          const list = postings.get(w);
+          if (!list) postings.set(w, [i]);
+          else if (list[list.length - 1] !== i) list.push(i);
+        }
         const lv = byLevel[k].get(w);
         if (!lv) byLevel[k].set(w, [i]);
         else lv.push(i);
@@ -558,6 +601,13 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     return out;
   }
 
+  /** Docs whose page subtitle carries the word (info sections only). Used only to complete a match, see match(). */
+  function subtitleLocations(e: Set<string>): Float32Array {
+    const out = new Float32Array(docs.length);
+    for (const w of e) for (const i of byLevel[4].get(w) ?? []) out[i] = LOC_SUBTITLE;
+    return out;
+  }
+
   function extraTitleWords(x: Prep, exps: { e: Set<string>; alts: Set<string>[][] }[]): number {
     let extra = 0;
     for (const w of x.title) {
@@ -592,13 +642,18 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     });
     const n = docs.length;
     const locArr = exps.map((p) => locations(p.e, p.alts, p.viaAlias, p.viaAcronym));
+    const subArr = exps.map((p) => subtitleLocations(p.e));
     const weight = exps.map((p, ti) => {
       let df = 0;
       for (const w of p.e) df += (postings.get(w) ?? []).length;
       df = Math.min(df, n);
       if (df === 0) for (let i = 0; i < n; i++) if (locArr[ti][i] > 0) df++;
       const subject = drugWords.has(stem(toks[ti].word)) ? SUBJECT_WEIGHT : 1;
-      return df === 0 ? 0 : Math.log(1 + n / df) * (toks[ti].context ? 1 : subject);
+      const w = df === 0 ? 0 : Math.log(1 + n / df) * (toks[ti].context ? 1 : subject);
+      // A word no title, heading, parent or keyword in the app ever uses ("doing", "cheapest") is chatter, not a topic:
+      // being rare in body text must not make it count for more than an ordinary word, or it sinks every page that lacks it.
+      const named = [...p.e].some((x) => byLevel[0].has(x) || byLevel[1].has(x) || byLevel[2].has(x)) || p.alts.length > 0 || p.viaAlias.size > 0 || p.viaAcronym.size > 0;
+      return named || subject > 1 ? w : Math.min(w, CHATTER_WEIGHT);
     });
     toks.forEach((t, ti) => {
       if (t.context === 'in' && weight[ti] >= RARE_WEIGHT) required[ti] = true;
@@ -611,13 +666,19 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     const weak: Hit[] = [];
     for (let index = 0; index < n; index++) {
       let any = false;
-      for (let ti = 0; ti < locArr.length; ti++) if (locArr[ti][index] > 0) { any = true; break; }
+      // the page subtitle may complete a section whose own heading already matches a typed word, never start a match
+      let titleHit = false;
+      for (let ti = 0; ti < locArr.length; ti++) {
+        const l = locArr[ti][index];
+        if (l > 0) any = true;
+        if (l >= LOC_TITLE) titleHit = true;
+      }
       if (!any) continue;
       let cov = 0;
       let loc = 0;
       let ctxLoc = 0;
       for (let ti = 0; ti < locArr.length; ti++) {
-        const v = locArr[ti][index];
+        const v = titleHit ? Math.max(locArr[ti][index], subArr[ti][index]) : locArr[ti][index];
         if (!required[ti]) ctxLoc += weight[ti] * v;
         else {
           if (v > 0) cov += weight[ti];
@@ -716,6 +777,14 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     // or whose title carries every topic word. Their nodes are the topic's own cards.
     const home = new Set<string>(named);
     for (const h of hits) if (docs[h.index].kind === 'consult' && h.loc >= CONSULT_IS_TOPIC_LOC) home.add(docs[h.index].consultId!);
+    // consults with a node whose heading answers the asked-for facet and that covers the question well
+    const answered = new Set<string>();
+    if (parsed.active && parsed.intents.length) {
+      for (const h of hits) {
+        const d = docs[h.index];
+        if (d.kind === 'node' && d.consultId && h.cov >= MIN_COVERAGE && intentLift(d, parsed.intents) > 0) answered.add(d.consultId);
+      }
+    }
     const askedPeds = PEDS_WORDS.test(fold(query)) || parsed.tokens.some((t) => PEDS_WORDS.test(t.word));
     const homeIds = [...home];
     const belongs = (doc: QDoc) =>
@@ -728,11 +797,12 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       if (inHome) score -= HOME_BONUS * Math.min(1, Math.max(0, (h.loc - 0.5) / 0.5));
       else if (foreign) score += FOREIGN_PENALTY;
       if (doc.kind === 'info' && !doc.anchor && h.loc >= CONSULT_IS_TOPIC_LOC) score -= PAGE_TIE_BONUS;
-      if (!askedPeds && PEDS_WORDS.test(fold(doc.title))) score += PEDS_PENALTY;
+      if (!askedPeds && (PEDS_WORDS.test(fold(doc.title)) || PEDS_CONSULT.test(doc.consultId ?? ''))) score += PEDS_PENALTY;
       if (isDoNot(doc.title) && !parsed.intents.includes('contra') && !parsed.intents.includes('avoid') && !/\b(not|avoid|never|dont|pitfall)\b/.test(fold(query))) score += DO_NOT_PENALTY;
       if (parsed.active) {
         score += EXTRA_WORD_PENALTY * Math.min(h.extra, EXTRA_WORD_CAP);
         if (doc.kind === 'consult' && h.loc < CONSULT_IS_TOPIC_LOC) score += QUESTION_CONSULT_PENALTY;
+        if (doc.kind === 'consult' && doc.consultId && answered.has(doc.consultId)) score += FACET_CONSULT_PENALTY;
         const lift = intentLift(doc, parsed.intents) * (foreign ? FOREIGN_LIFT_SCALE : 1);
         if (lift) score -= lift * liftShare(h.loc) * Math.min(1, h.cov / MIN_COVERAGE) ** 2;
       }
@@ -839,7 +909,7 @@ export function drugInput(d: { id: string; name: string; genericName: string; dr
 
 export interface BuildInput {
   consults: { id: string; title: string; subtitle: string; synonyms: string[] }[];
-  nodes: { id: string; treeId: string; title: string; summary: string; body: string; recommendation: string }[];
+  nodes: { id: string; treeId: string; title: string; summary: string; body: string; recommendation: string; /** the consult's section name for this node ("Severe HyperK Rx") */ ml?: string }[];
   tricks: { id: string; infoPageId: string; specialtyId: string; specialtyLabel: string; anchorId: string; title: string; blurb: string }[];
   info: { p: string; a: string; h: string; pt: string; t: string }[];
   pages?: { p: string; t: string; s: string; x: string }[];
@@ -861,6 +931,7 @@ export function buildQuestionDocs(input: BuildInput): QDoc[] {
       title: n.title || n.id,
       subtitle: `In: ${treeTitle.get(n.treeId) ?? n.treeId.replace(/-/g, ' ')}`,
       parentTitle: treeTitle.get(n.treeId),
+      moduleLabel: n.ml,
       keywords: [],
       text: [n.summary, n.body, n.recommendation].filter(Boolean).join(' '),
       consultId: n.treeId,
@@ -871,9 +942,10 @@ export function buildQuestionDocs(input: BuildInput): QDoc[] {
     docs.push({ id: `${t.infoPageId}#${t.anchorId}`, kind: 'trick', title: t.title, subtitle: `Trick — ${t.specialtyLabel}`, keywords: [], text: t.blurb, specialtyId: t.specialtyId, anchor: t.anchorId, pageId: t.infoPageId });
   }
   const trickKeys = new Set(input.tricks.map((t) => `${t.infoPageId}#${t.anchorId}`));
+  const pageSubtitle = new Map((input.pages ?? []).map((g) => [g.p, g.s]));
   for (const s of input.info) {
     if (trickKeys.has(`${s.p}#${s.a}`)) continue; // a trick is already a doc with its own landing
-    docs.push({ id: `${s.p}#${s.a}`, kind: 'info', title: s.h, subtitle: s.pt, parentTitle: s.pt, keywords: [], text: s.t, pageId: s.p, anchor: s.a });
+    docs.push({ id: `${s.p}#${s.a}`, kind: 'info', title: s.h, subtitle: s.pt, parentTitle: s.pt, parentSubtitle: pageSubtitle.get(s.p), keywords: [], text: s.t, pageId: s.p, anchor: s.a });
   }
   for (const g of input.pages ?? []) {
     docs.push({ id: `page:${g.p}`, kind: 'info', title: g.t, subtitle: g.s, keywords: [], text: g.x, pageId: g.p });
