@@ -23,8 +23,9 @@ export interface Corpus {
 
 let cached: Promise<Corpus> | undefined;
 
-export function loadCorpus(): Promise<Corpus> {
-  cached ??= (async () => {
+/** The app's search input exactly as the app builds it at runtime (the adapter every bedside-search port has; see the skill's references/contract.md). */
+export async function loadInput(): Promise<BuildInput> {
+  {
     const cats = await imp('data/categories.js');
     const calcMod = await imp('components/calculator.js');
     const drugMod = await imp('data/drug-store.js');
@@ -48,6 +49,14 @@ export function loadCorpus(): Promise<Corpus> {
       drugs: drugMod.ALL_DRUGS.map((d: Parameters<typeof drugInput>[0]) => drugInput(d, DRUG_SYNONYMS[d.name.toLowerCase()] ?? [])),
       calcs: calcMod.getAllCalculators().map((c: { id: string; title: string; subtitle: string }) => ({ id: c.id, title: c.title, subtitle: c.subtitle })),
     };
+    return input;
+  }
+}
+
+export function loadCorpus(): Promise<Corpus> {
+  cached ??= (async () => {
+    const input = await loadInput();
+    const consults = input.consults;
     const docs = buildQuestionDocs(input);
     const keys = new Set<string>();
     for (const c of consults) keys.add(`tree:${c.id}`);

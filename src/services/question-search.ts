@@ -1,3 +1,6 @@
+// @bedside-search-engine 1.0.0
+// @engine-sha256 9b53c64cefac18707dec7225d2c6bbec8932ab2cdd2aec8c19ada4acc73d34a7
+// Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
  *
@@ -965,16 +968,24 @@ export function buildQuestionDocs(input: BuildInput): QDoc[] {
   return docs;
 }
 
-/** The route a result opens (matches app.ts). */
-export function routeFor(doc: QDoc): string {
-  switch (doc.kind) {
-    case 'consult': return `/tree/${doc.consultId}`;
-    case 'node': return `/tree/${doc.consultId}/node/${doc.nodeId}`;
-    case 'info': return doc.anchor ? `/info/${doc.pageId}/at/${doc.anchor}` : `/info/${doc.pageId}`;
-    case 'trick': return `/tricks/${doc.specialtyId}/trick/${doc.anchor}`;
-    case 'drug': return '/drugs';
-    case 'calc': return `/calculator/${doc.calcId}`;
-  }
+/**
+ * Per-kind route builders. Each app passes the routes its own router understands; anything not given falls back to
+ * DEFAULT_ROUTES (myMedKitt's hash routes), so an app only overrides the kinds whose URLs differ.
+ */
+export type RouteMap = Partial<Record<QKind, (doc: QDoc) => string>>;
+
+export const DEFAULT_ROUTES: Required<RouteMap> = {
+  consult: (d) => `/tree/${d.consultId}`,
+  node: (d) => `/tree/${d.consultId}/node/${d.nodeId}`,
+  info: (d) => (d.anchor ? `/info/${d.pageId}/at/${d.anchor}` : `/info/${d.pageId}`),
+  trick: (d) => `/tricks/${d.specialtyId}/trick/${d.anchor}`,
+  drug: () => '/drugs',
+  calc: (d) => `/calculator/${d.calcId}`,
+};
+
+/** The route a result opens. */
+export function routeFor(doc: QDoc, routes: RouteMap = {}): string {
+  return (routes[doc.kind] ?? DEFAULT_ROUTES[doc.kind])(doc);
 }
 
 /** Pin keys a result satisfies (see scripts/search-heldout.ts). */
