@@ -539,14 +539,14 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - Leave 1-2 min, then advance to 32-36 French if possible
 - Prepare BOTH nares
 
-**Max Lidocaine: 9 mg/kg lean body weight** [3][4][9]`,
+**Max Lidocaine: 9 mg/kg lean body weight (DAS ceiling); 7 mg/kg conservative target.** Toxicity has been reported at 6.0–9.3 mg/kg lean body weight. [3][4][9]`,
     citation: [3, 4, 9],
     calculatorLinks: [
       { id: 'awake-topical-prep', label: 'Topical Prep Recipe' },
     ],
     next: 'awake-mad-spray',
 
-    summary: 'Nasal: nebulized lido → viscous gargle → oxymetazoline → nasal lido → serial NPA dilation; max 9mg/kg lidocaine',
+    summary: 'Nasal: nebulized lido → viscous gargle → oxymetazoline → nasal lido → serial NPA dilation; max 9 mg/kg LBW (DAS), 7 mg/kg conservative target',
     safetyLevel: 'warning',
   },
 
@@ -584,14 +584,14 @@ Give antisialagogue NOW, then proceed to topicalization in 10-15 minutes. [3][4]
 - May need to prevent patient biting scope
 - Place after adequate anesthesia
 
-**Max Lidocaine: 9 mg/kg lean body weight** [3][4]`,
+**Max Lidocaine: 9 mg/kg lean body weight (DAS ceiling); 7 mg/kg conservative target.** Toxicity has been reported at 6.0–9.3 mg/kg lean body weight. [3][4]`,
     citation: [3, 4],
     calculatorLinks: [
       { id: 'awake-topical-prep', label: 'Topical Prep Recipe' },
     ],
     next: 'awake-mad-spray',
 
-    summary: 'Oral: nebulized lido → dry mouth → viscous lido gargle → MAD spray to cords; bite block needed; max 9mg/kg',
+    summary: 'Oral: nebulized lido → dry mouth → viscous lido gargle → MAD spray to cords; bite block needed; max 9 mg/kg LBW (DAS), 7 mg/kg conservative target',
     safetyLevel: 'warning',
   },
 

@@ -42,7 +42,7 @@ export const VAFEI_CITATIONS = [
 ];
 export const VAFEI_CRITICAL_ACTIONS = [
     { text: 'Video-Assisted Flexible Endoscopic Intubation preserves spontaneous breathing - ideal for "can\'t paralyze" airways', nodeId: 'vafei-start' },
-    { text: 'Maximum lidocaine dose 7 mg/kg - calculate before topicalization', nodeId: 'vafei-topical' },
+    { text: 'Maximum lidocaine dose 9 mg/kg lean body weight (DAS ceiling); 7 mg/kg conservative target - calculate before topicalization', nodeId: 'vafei-topical' },
     { text: 'Always have paralytic drawn and ready - laryngospasm can occur', nodeId: 'vafei-ketamine' },
     { text: 'VL operator suctions aggressively - soiled airway obscures both views', nodeId: 'vafei-procedure' },
     { text: 'The right speed is SLOWER than your instincts - do not rush', nodeId: 'vafei-procedure' },
@@ -169,20 +169,20 @@ export const VAFEI_NODES = [
         type: 'info',
         module: 3,
         title: 'Topical Airway Anesthesia',
-        body: '**TOPICALIZATION TECHNIQUE:** [3,7,8]\n\n**MAXIMUM LIDOCAINE DOSE: 7 mg/kg** — calculate before starting!\n\n**NEBULIZED LIDOCAINE:**\n• 4% lidocaine via nebulizer\n• Low flow rate (4-8 L/min)\n• 4-5 mL over 10-15 minutes\n• Anesthetizes entire upper airway\n\n**ATOMIZED LIDOCAINE:**\n• MAD (Mucosal Atomization Device) or LMA MAD\n• 4% lidocaine in 10 mL syringe\n• Spray tonsillar pillars, posterior pharynx\n• Spray base of tongue, vallecula\n\n**VISCOUS LIDOCAINE:**\n• 2% viscous on tongue depressor\n• Drip down posterior pharynx\n• Patient swallows small amounts\n\n**DIRECT CORD SPRAY (via scope):**\n• 2-3 mL of 4% lidocaine through FE working channel\n• Spray directly onto vocal cords before advancing\n• "Spray as you go" technique',
+        body: '**TOPICALIZATION TECHNIQUE:** [3,7,8]\n\n**MAXIMUM LIDOCAINE DOSE: 9 mg/kg lean body weight (DAS ceiling); 7 mg/kg conservative target** — calculate before starting!\n\n**NEBULIZED LIDOCAINE:**\n• 4% lidocaine via nebulizer\n• Low flow rate (4-8 L/min)\n• 4-5 mL over 10-15 minutes\n• Anesthetizes entire upper airway\n\n**ATOMIZED LIDOCAINE:**\n• MAD (Mucosal Atomization Device) or LMA MAD\n• 4% lidocaine in 10 mL syringe\n• Spray tonsillar pillars, posterior pharynx\n• Spray base of tongue, vallecula\n\n**VISCOUS LIDOCAINE:**\n• 2% viscous on tongue depressor\n• Drip down posterior pharynx\n• Patient swallows small amounts\n\n**DIRECT CORD SPRAY (via scope):**\n• 2-3 mL of 4% lidocaine through FE working channel\n• Spray directly onto vocal cords before advancing\n• "Spray as you go" technique',
         citation: [3, 7, 8],
         next: 'vafei-lidocaine-calc',
-        summary: 'Max lidocaine 7 mg/kg; nebulize + atomize + viscous; spray cords through scope channel',
+        summary: 'Max lidocaine 9 mg/kg LBW (DAS), 7 mg/kg conservative target; nebulize + atomize + viscous; spray cords through scope channel',
     },
     {
         id: 'vafei-lidocaine-calc',
         type: 'info',
         module: 3,
         title: 'Lidocaine Dose Calculation',
-        body: '**LIDOCAINE TOXICITY PREVENTION:** [3]\n\n**MAXIMUM DOSE: 7 mg/kg**\n\n**QUICK CALCULATION:**\n• 70 kg patient: max 490 mg\n• 4% lidocaine = 40 mg/mL\n• 490 mg ÷ 40 mg/mL = ~12 mL of 4%\n\n**TYPICAL DISTRIBUTION:**\n• Nebulizer: 4-5 mL (160-200 mg)\n• Atomizer to pharynx: 3-4 mL (120-160 mg)\n• Through scope to cords: 2-3 mL (80-120 mg)\n• Total: ~9-12 mL (360-480 mg)\n\n**LIDOCAINE TOXICITY SIGNS:**\n• Perioral numbness, metallic taste\n• Tinnitus, visual disturbances\n• Lightheadedness, confusion\n• Seizures, cardiac arrhythmias\n\n**IF TOXICITY SUSPECTED:**\n• Stop lidocaine immediately\n• Support airway/breathing\n• Consider lipid emulsion for severe toxicity',
+        body: '**LIDOCAINE TOXICITY PREVENTION:** [3]\n\n**MAXIMUM DOSE: 9 mg/kg lean body weight (DAS ceiling); 7 mg/kg conservative target**\n\n**QUICK CALCULATION (70 kg lean body weight):**\n• 7 mg/kg: max 490 mg\n• 9 mg/kg: max 630 mg\n• 4% lidocaine = 40 mg/mL\n• 490 mg ÷ 40 mg/mL = ~12 mL of 4% (630 mg = ~16 mL)\n\n**TYPICAL DISTRIBUTION:**\n• Nebulizer: 4-5 mL (160-200 mg)\n• Atomizer to pharynx: 3-4 mL (120-160 mg)\n• Through scope to cords: 2-3 mL (80-120 mg)\n• Total: ~9-12 mL (360-480 mg)\n\n**LIDOCAINE TOXICITY SIGNS:**\n• Perioral numbness, metallic taste\n• Tinnitus, visual disturbances\n• Lightheadedness, confusion\n• Seizures, cardiac arrhythmias\n\n**IF TOXICITY SUSPECTED:**\n• Stop lidocaine immediately\n• Support airway/breathing\n• Consider lipid emulsion for severe toxicity',
         citation: [3],
         next: 'vafei-sedation',
-        summary: '7 mg/kg max; 70kg patient = ~12 mL of 4% lidocaine total; watch for toxicity signs',
+        summary: '9 mg/kg LBW max (DAS), 7 mg/kg conservative; 70 kg = ~12 mL (7 mg/kg) to ~16 mL (9 mg/kg) of 4% lidocaine; watch for toxicity signs',
     },
     {
         id: 'vafei-sedation',

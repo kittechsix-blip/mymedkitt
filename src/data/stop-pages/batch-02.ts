@@ -389,7 +389,7 @@ export const STOP_PAGES_02: Record<string, InfoPage> = {
       },
       {
         heading: '🛑 Do NOT give calcium gluconate via peripheral IV at rapid rates without monitoring',
-        body: 'Calcium gluconate in hyperkalemia should be given over 5–10 minutes with continuous cardiac monitoring. Too-rapid infusion causes bradycardia and cardiac arrest. Calcium chloride requires a large-bore or central line due to high risk of tissue necrosis with extravasation. [See this node](#/node/k-hyper-calcium).',
+        body: 'Calcium gluconate in hyperkalemia (3 g IV) should be given over 10 minutes with continuous cardiac monitoring. Too-rapid infusion causes bradycardia and cardiac arrest. Calcium chloride requires a large-bore or central line due to high risk of tissue necrosis with extravasation. [See this node](#/node/k-hyper-calcium).',
       },
     ],
     citations: [],
