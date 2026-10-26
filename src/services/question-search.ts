@@ -1,5 +1,5 @@
-// @bedside-search-engine 1.0.0
-// @engine-sha256 9b53c64cefac18707dec7225d2c6bbec8932ab2cdd2aec8c19ada4acc73d34a7
+// @bedside-search-engine 1.2.0
+// @engine-sha256 4a5fc5232785981e8aa9ef45c27a4355a2b5fb55be6c8b0e26f9fbc37dd4332b
 // Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
@@ -56,6 +56,8 @@ export interface QResult {
   score: number;
   /** drug only: dosing indication to scroll to */
   indication?: string;
+  /** share of the question's required words this document carries (0-1); low means it merely shares a word or two */
+  cov?: number;
   /** score breakdown (only when ranking with debug on) */
   why?: string;
 }
@@ -387,6 +389,10 @@ const LIFT_FULL_AT_LOC = 0.7;
 const liftShare = (loc: number) => Math.min(1, Math.max(0, (loc - LIFT_FROM_LOC) / (LIFT_FULL_AT_LOC - LIFT_FROM_LOC)));
 const CONSULT_IS_TOPIC_LOC = 0.95;
 const WIDE_PENALTY = 0.03;
+/** `answer` abstains unless the app knows at least this share of the question's content words, and a top result carries at least this share (see assess). */
+const ANSWER_MIN_KNOWN = 0.5;
+const ANSWER_MIN_MATCHED = 0.5;
+const ANSWER_TOP = 5;
 /** Candidates that get the full scoring pass. */
 const POOL = 400;
 /** A consult whose title carries every topic word is the topic's home: its own nodes outrank a foreign node with a nicer heading. */
@@ -411,6 +417,12 @@ export interface QuestionIndex {
    * single-word path (Fuse) still has to run: only for 'plain' queries, or when nothing matched.
    */
   search(query: string, limit?: number, debug?: boolean): { parsed: ParsedQuestion; results: QResult[]; mode: 'question' | 'topic' | 'plain' };
+  /** Ranked results for any non-empty text, including one word (which `rank` leaves to a legacy search). */
+  lookup(query: string, limit?: number, debug?: boolean): { parsed: ParsedQuestion; results: QResult[] };
+  /** `search`, plus the ranked lookup for plain queries: the whole Home search for an app with no legacy search. */
+  find(query: string, limit?: number, debug?: boolean): { parsed: ParsedQuestion; results: QResult[]; mode: 'question' | 'topic' | 'plain' };
+  /** `find`, but empty (covered = false) when nothing really answers the question. Use this for the Home search of an app that wants an honest "not covered here". */
+  answer(query: string, limit?: number, debug?: boolean): { parsed: ParsedQuestion; results: QResult[]; mode: 'question' | 'topic' | 'plain'; covered: boolean };
 }
 
 const compact = (s: string) => fold(s).replace(/[^a-z0-9]+/g, '');
@@ -770,9 +782,9 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     return consultNames.filter((c) => c.parts.some((p) => p.every((w) => have.has(w)))).map((c) => c.id);
   }
 
-  function rank(query: string, limit = 40, debug = false): { parsed: ParsedQuestion; results: QResult[] } {
+  function rank(query: string, limit = 40, debug = false, force = false): { parsed: ParsedQuestion; results: QResult[] } {
     const parsed = parseQuestion(query);
-    if (!parsed.active && !parsed.wide) return { parsed, results: [] };
+    if (!parsed.active && !parsed.wide && !force) return { parsed, results: [] };
     const results: QResult[] = [];
     const named = new Set<string>(namedConsults(parsed));
     const hits = match(parsed, named);
@@ -809,7 +821,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
         const lift = intentLift(doc, parsed.intents) * (foreign ? FOREIGN_LIFT_SCALE : 1);
         if (lift) score -= lift * liftShare(h.loc) * Math.min(1, h.cov / MIN_COVERAGE) ** 2;
       }
-      const r: QResult = { doc, score };
+      const r: QResult = { doc, score, cov: h.cov };
       if (debug) r.why = `base=${h.base.toFixed(3)} loc=${h.loc.toFixed(2)} cov=${h.cov.toFixed(2)} extra=${h.extra} home=${inHome} foreign=${foreign} lift=${intentLift(doc, parsed.intents).toFixed(2)}`;
       if (doc.kind === 'drug') r.indication = pickIndication(doc, parsed);
       results.push(r);
@@ -843,7 +855,75 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     return { parsed, results: out.slice(0, limit), mode } as const;
   }
 
-  return { size: docs.length, rank, search };
+  const docIndex = new Map<QDoc, number>(docs.map((d, i) => [d, i]));
+
+  /**
+   * Does anything in the top results answer the question, or do they only share a word with it? Coverage cannot tell: it is measured over
+   * words the app knows, so a question full of words found nowhere in the app can score 1.00 on one stray word. Answer only when
+   *   (a) the app knows at least half of the question's content words (a question of words found nowhere in the app is out of scope), and
+   *   (b) some top result carries at least half of them AND names at least one in a title, parent or context, not only in passing in body text.
+   * Calibrated on 59 real questions and 16 out-of-scope ones (my-vertigo-app): 0 of 16 answered, 2 of 59 abstained (both already weak).
+   */
+  function assess(q: ParsedQuestion, results: readonly QResult[]): boolean {
+    const hard = q.tokens.filter((t) => !t.soft);
+    const toks = hard.length ? hard : q.tokens;
+    if (!toks.length) return results.length > 0;
+    const per = toks.map((t) => ({ e: expand(t.word), alts: alternatives(t.word) }));
+    let known = 0;
+    for (const p of per) {
+      let df = 0;
+      for (const w of p.e) df += (postings.get(w) ?? []).length;
+      if (df > 0 || p.alts.length > 0) known++;
+    }
+    if (known / toks.length < ANSWER_MIN_KNOWN) return false;
+    for (const r of results.slice(0, ANSWER_TOP)) {
+      const i = docIndex.get(r.doc);
+      if (i === undefined) continue;
+      const x = prep[i];
+      const named = new Set<string>([...x.title, ...x.parent, ...x.ctx]);
+      const anywhere = new Set<string>([...named, ...x.text, ...x.psub]);
+      const hasAlt = (phrases: Set<string>[][], where: Set<string>) => phrases.some((ph) => ph.every((es) => [...es].some((w) => where.has(w))));
+      let matched = 0;
+      let names = 0;
+      for (const p of per) {
+        const inNamed = [...p.e].some((w) => named.has(w)) || hasAlt(p.alts, named);
+        if (inNamed) names++;
+        if (inNamed || [...p.e].some((w) => anywhere.has(w)) || hasAlt(p.alts, anywhere)) matched++;
+      }
+      if (matched / toks.length >= ANSWER_MIN_MATCHED && names > 0) return true;
+    }
+    return false;
+  }
+
+  /**
+   * `find`, but an honest one: when nothing in the app really answers the question the result list is empty and `covered` is false,
+   * so a UI can say "not covered here" instead of showing cards that merely share a word. Title-prefix hits (a pathway typed by name) always count.
+   */
+  function answer(query: string, limit = 40, debug = false) {
+    const first = find(query, limit, debug);
+    if (first.results.some((r) => r.cov === undefined)) return { ...first, covered: first.results.length > 0 };
+    const covered = assess(first.parsed, first.results);
+    return { ...first, results: covered ? first.results : [], covered };
+  }
+
+  /** Ranked results for any non-empty text, including a single word ("yacovino") that `rank` leaves to a legacy search. */
+  function lookup(query: string, limit = 40, debug = false) {
+    return rank(query, limit, debug, true);
+  }
+
+  /**
+   * The whole Home search for an app with no legacy search of its own: `search`, and for a plain query (one word or a title
+   * prefix) the prefix hits first, then the ranked lookup. Same result shape as `search`.
+   */
+  function find(query: string, limit = 40, debug = false) {
+    const first = search(query, limit, debug);
+    if (first.mode !== 'plain') return first;
+    const seen = new Set<QDoc>(first.results.map((r) => r.doc));
+    const more = lookup(query, limit, debug).results.filter((r) => !seen.has(r.doc));
+    return { ...first, results: [...first.results, ...more].slice(0, limit) };
+  }
+
+  return { size: docs.length, rank, search, lookup, find, answer };
 }
 
 // ===================================================================
