@@ -213,3 +213,62 @@ Signoff (Dr. Kitlowski): The ARDS ventilator and oxygenation content is largely 
 - `src/data/new-content/drugs-ards-bct.ts` ropivacaine: "Surgical anesthesia (label)" row corrected to label Table 1 (lumbar epidural 0.5% 75-150 mg; 0.75% 113-188 mg; 1% 150-200 mg). Epidural row: "Label MRHD 770 mg/24 h" reworded to "well tolerated" (note: label Section 8.1 also uses "MRHD of 770 mg/24 hours for epidural use"; left as a flag for Dr. K).
 - Cisatracurium ICU row: "re-bolus before starting the infusion" reworded to conditional, per label ("it may be necessary to re-administer a bolus dose").
 - `src/data/trees/ards.ts`: draft and sign-off wording removed from node text and header. Source conflicts (starting VT, blockade) are still shown, not resolved. No number changed.
+
+## Applied recommendations (2026-10-27)
+
+Scope: this consult's rows from `research/new-content/RECOMMENDATIONS.md` (ARDS 1 to 5 and 9 to 11). Rows 6 to 8 (cisatracurium drug entry) belong to the drugs agent; the NMB node links to `#/drug/cisatracurium/ARDS neuromuscular blockade` once that entry exists.
+
+Primary-source access: Firecrawl had no credits in this pass. Sources below are the ones read; where only a secondary summary was read, it is stated.
+
+| Row | Item | Result | Source read |
+|---|---|---|---|
+| 1 | Starting VT | **applied**. Default 6 mL/kg PBW (ARDSNet 2000 trial arm). ESICM 2023 is shown as 4 to 8 mL/kg PBW, not as the source of the 6. The 2008 protocol summary (start 8, step to 6) stays as a shown alternative. | ARDSNet 2000 abstract (earlier pass). ESICM 2023 4 to 8 mL/kg PBW from a JAMA summary (secondary; primary text not opened). |
+| 2 | Plateau below 25 | **applied**. Node and calculator now read "ARDSNet protocol increases VT by 1 mL/kg PBW until plateau above 25 or VT 6 (clinician judgment)". | ARDSNet 2008 protocol PDF (fetched in the 2026-10-27 audit pass). |
+| 3 | NMB | **applied**. Node, critical action, blockade check, info page show ESICM "against routine" (strong), ATS 2024 conditional suggestion in early severe ARDS (low certainty), ROSE no mortality benefit. | ATS 2024 (PMC, fetched in the audit pass). ESICM and ROSE as in the earlier pass. |
+| 4 | ESICM "8.1" | **applied-with-change**. Written as "Recommendation 8" everywhere in `ards.ts`. Strength wording kept from the audit quote. | ESICM 2023 secondary quotes (audit pass). Springer text not reopened. |
+| 5 | EOLIA gate | **applied-with-change, partly removed-unverified**. P/F below 50 (>3 h), below 80 (>6 h), pH below 7.25 with PaCO2 ≥60 (>6 h) kept. The FiO2 above 0.8 condition was NOT added: a search summary of Combes 2018 states FiO2 ≥0.8 is in the control-arm protocol, not an entry rule. PaCO2 is ≥60 per the row; other summaries say above 60, so the boundary is unconfirmed. ECMO cross-reference added (the ECMO consult uses a single P/F below 80 on FiO2 1.0). | WebSearch summaries (criticalcarereviews.com, thebottomline.org.uk). NEJM primary not opened. Andy or a primary read decides the FiO2 and PaCO2 boundaries. |
+| 9 | P/F on CPAP or NIV | **applied**. Label now "Cannot classify beyond mild (non-invasive)". The 27% invasive-cohort figure is removed from that path. Non-intubated grading is attributed to the global definition in the calculator and in `ards-global-2023`. | Berlin (earlier pass); global definition (Matthay 2024, earlier pass). |
+| 10 | Prone wording | **applied**. "Severe ARDS (P/F <150, FiO2 ≥0.6, PEEP ≥5), invasive ventilation" in the prone node option, prone-result body and recommendation, critical action 4, calculator PRONE ENTRY line, and the info pages. ESICM session length wording in the calculator corrected to "16 consecutive hours or more" to match the node. | PROSEVA (earlier pass). |
+| 11 | Other open items | **applied as read**. No driving-pressure cutoff added (node still says the app sets none). The lower-PEEP / higher-FiO2 protocol pairs are kept because the audit pass verified them against ARDSNet 2008; this is an interpretation of "no PEEP table", not a removal. Non-intubated grading is labelled "global definition". | ARDSNet 2008 (audit pass). Andy to confirm the PEEP-table reading. |
+
+Not changed: `ards-prone-result` ESICM bullet still reads "moderate to severe" (source-accurate); the F11 population question for the session-length statement stays with Andy. The asthma IBW pages (C2) and the ECMO tree itself are untouched.
+
+Verification in this pass: `node --test --test-name-pattern="ARDS" scripts/new-calculators.test.mjs` passes 9 of 9. `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` shows no ARDS errors. Grep finds no "8.1", "under review", or "may raise" wording in the ARDS files.
+
+## Applied recommendations (2026-10-27), drugs pass
+Source file: `src/data/new-content/drugs-ards-bct.ts`.
+- Row 6 re-bolus: **already applied** (conditional wording, per label text read this pass: "it may be necessary to re-administer a bolus dose").
+- Row 7 Nimbex set: **applied-with-change**. Citation now cites DailyMed set 3db3b76c-3e5a-456e-46a8-456fde1e6195, Revised 10/2022, version 1496 (newest set found). The older set d90090b6 (10/2019, version 10) has the same ICU wording. Both show marketing end dates (2021 and 2023), so confirm local stock. Source: both DailyMed pages opened 2026-10-27.
+- Row 8 unverified details: **applied**. Removed the ROSE "serious cardiovascular adverse events 14 vs 4 (P=0.02)" count and the ACURASYS open-label rescue bolus (20 mg for plateau >32 cmH2O). The qualitative ROSE CV-event caution stays (verified in this sign-off's earlier read). ACURASYS 31.6% vs 40.7% and ROSE 42.5% vs 42.8% kept (verified via PMC tables earlier this sign-off).
+- Not applied: none in the drugs rows.
+
+## Dr. Kitlowski re-audit after Andy's rulings (2026-10-27): verdict REVISE
+
+Scope: `src/data/trees/ards.ts`, `src/data/new-content/ards-info.ts`, `src/data/new-content/ards-toolbar.ts`, `src/components/ards-pf-berlin.ts`, `src/data/new-content/drugs-ards-bct.ts` (cisatracurium only), this signoff. Acute pancreatitis not in scope for this consult.
+
+### Applied in this pass
+None. The ARDS rows of `research/new-content/RECOMMENDATIONS.md` (rows 1 to 5 and 9 to 11) were already applied in the earlier 2026-10-27 pass above. I re-read the live text and it matches the table: default 6 mL/kg PBW with the 8 mL/kg protocol start shown as the alternative (row 1); the ARDSNet "increases VT by 1 mL/kg" wording (row 2); ESICM "against" plus ATS 2024 conditional plus ROSE in the blockade node (row 3); "Recommendation 8" with no "8.1" anywhere in the ARDS files (row 4); prone wording in the node, critical action, calculator and info pages (row 10); CPAP/NIV label and no 27% figure on that path (row 9). Row 11 kept as read.
+
+### Row 5 (EOLIA gate): NOT verified against primary, flagged
+- Primary text not reachable this pass. NEJM (DOI 10.1056/NEJMoa1800385) returned HTTP 403; PubMed returned a bot-check page; Firecrawl had no credits. Only secondary summaries were read.
+- The tree states three entry gates: P/F below 50 for more than 3 h; P/F below 80 for more than 6 h; pH below 7.25 with PaCO2 at or above 60 for more than 6 h. A secondary summary (thebottomline/WikiJournalClub) also describes the first two as applying at FiO2 above 0.8 and a plateau pressure limit below 32 cmH2O. Another summary (Allina slides) lists the P/F below 80 gate without an FiO2 requirement. Sources conflict.
+- The FiO2 and plateau conditions were NOT added (correct per the rule: unconfirmed numbers are not added). The PaCO2 boundary (at or above 60 vs above 60) is also unconfirmed.
+- Also unsourced: the rescue-ordering line in `ards-rescue-check` ("Only after protective ventilation, prone (if eligible), and conservative fluids have been tried"). The EOLIA control protocol included rescue measures before ECMO, but the tree's exact ordering is not in the text I read. Treat as practice until the full text is read.
+- Required before APPROVE: open the full NEJM methods (or the Lancet/NEJM supplement) and confirm the three gates, the FiO2 condition, the PaCO2 boundary, and the plateau condition. Then either add them or keep the current text with a stated "boundary not confirmed" note.
+
+### Other open items carried forward (no change this pass)
+- **F10 (calculator, Andy decision):** a P/F of 80 on CPAP still reads "mild" in the label set. The row 9 change removed the 27% figure from that path, so the mild-capped branch now shows no mortality number. Confirm the label wording.
+- **F11 (prone wording, Andy decision):** `ards-prone-result` body says "moderate to severe" for ESICM and the node says "severe" for the directive. The row 10 wording now uses "severe" in the directive. Confirm.
+- **C5, C6, C7, C10:** driving-pressure cutoff, PEEP table, non-intubated severity grades, ECMO threshold alignment with `ecmo.ts` (single P/F below 80 on FiO2 1.0). Not changed.
+- **ESICM 2023 citation gate:** ESICM 2023 is not in `~/Desktop/claude-brain/wikis/emergency-medicine/guideline-versions.md`. The "Recommendation 8" strength wording is therefore FLAGGED, not auto-confirmed.
+
+### Checks run this pass
+- `bun -e` import of `ards-info.ts` succeeds (INFO_PAGES_ARDS has `ards-stop` and `ards-steps`; no template-literal fault; an earlier visual read was a display truncation).
+- `node --test --test-name-pattern="ARDS" scripts/new-calculators.test.mjs`: 9 of 9 pass.
+- Citation numbers used in `ards.ts` and `ards-info.ts` (1 to 10, 12 to 14) are all defined in `ARDS_CITATIONS` or in the info-page citation lists. No "8.1" or "may raise" wording remains in the ARDS files.
+- Draft tags remain only in source-code header comments (not clinician-facing text).
+
+### Verdict
+**REVISE.** Nothing in the clinician-facing text is currently known to be wrong against the sources read. Remaining patient-safety gap: the ECMO referral gate (row 5) is not confirmed against the primary trial text, and the FiO2 and plateau conditions that secondary sources attach to it are unresolved. Flags for Andy: (1) EOLIA gate boundaries, primary text needed; (2) F10 label on the mild-capped result; (3) F11 prone population wording. Move to APPROVE once (1) is closed; (2) and (3) are wording decisions.
+
+Signoff (Dr. Kitlowski, 2026-10-27): The ventilation, prone, and blockade content now matches the sources I could open. The ECMO gate is still on secondary summaries, and I will not approve a referral threshold I cannot read in the trial itself.

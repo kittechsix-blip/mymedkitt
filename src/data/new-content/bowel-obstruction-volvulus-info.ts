@@ -1,5 +1,5 @@
 // MedKitt - Bowel Obstruction & Volvulus info pages
-// DRAFT for physician sign-off. Register INFO_PAGES_SBOV into INFO_PAGES after review.
+// Register INFO_PAGES_SBOV into INFO_PAGES (already wired; see toolbar file).
 // Stop page: "Do NOT" items, each linking to the node that explains it.
 // Steps page: sequence summary, each bullet linking to its node.
 
@@ -20,7 +20,7 @@ const SBOV_STEPS_PAGE: InfoPage = {
     },
     {
       heading: '3. Partial adhesive SBO: non-operative trial',
-      body: '- [Tube decompression and water-soluble contrast](#/node/bowel-obstruction-volvulus-nom-entry)\n- [Checkpoints: fever, WBC, 72 hours, day-3 drainage](#/node/bowel-obstruction-volvulus-nom-check)\n- [Contrast in colon within 24 hours](#/node/bowel-obstruction-volvulus-nom-resolving)',
+      body: '- [Tube decompression and water-soluble contrast](#/node/bowel-obstruction-volvulus-nom-entry)\n- [Checkpoints: fever, peritonitis markers, 72 hours, day-3 drainage](#/node/bowel-obstruction-volvulus-nom-check)\n- [Contrast in colon within 24 hours](#/node/bowel-obstruction-volvulus-nom-resolving)',
     },
     {
       heading: '4. Surgery triggers',
@@ -32,7 +32,7 @@ const SBOV_STEPS_PAGE: InfoPage = {
     },
     {
       heading: '6. Closed loop, cecal, large bowel, hernia',
-      body: '- [Closed loop: treat as strangulation](#/node/bowel-obstruction-volvulus-closed-loop)\n- [Cecal volvulus: surgical pathway](#/node/bowel-obstruction-volvulus-cecal)\n- [Malignant large bowel obstruction: stent](#/node/bowel-obstruction-volvulus-lbo)\n- [Incarcerated hernia with obstruction](#/node/bowel-obstruction-volvulus-hernia)',
+      body: '- [Closed loop: surgical consult now](#/node/bowel-obstruction-volvulus-closed-loop)\n- [Cecal volvulus: surgical pathway](#/node/bowel-obstruction-volvulus-cecal)\n- [Malignant large bowel obstruction: stent](#/node/bowel-obstruction-volvulus-lbo)\n- [Incarcerated hernia with obstruction](#/node/bowel-obstruction-volvulus-hernia)',
     },
     {
       heading: '7. Disposition',
@@ -65,11 +65,11 @@ const SBOV_STOP_PAGE: InfoPage = {
     },
     {
       heading: '🛑 Do NOT continue a non-operative trial past its checkpoints',
-      body: 'WBC above 10,000/mm3 (WSES 2017), 72 hours without resolution, or drainage above 500 mL on day 3 ends the trial. Fever is a draft stop criterion pending sign-off. [Checkpoints](#/node/bowel-obstruction-volvulus-nom-check)',
+      body: 'Strangulation signs go to surgery. At 72 hours without resolution, or with drainage above 500 mL on day 3, consider surgery. WBC above 10,000/mm3 is a peritonitis marker with low sensitivity and specificity. [Checkpoints](#/node/bowel-obstruction-volvulus-nom-check)',
     },
     {
       heading: '🛑 Do NOT read contrast in the colon as cure',
-      body: 'Contrast reaching the colon within 24 hours predicts resolution. It does not change recurrence. [Resolving SBO](#/node/bowel-obstruction-volvulus-nom-resolving)',
+      body: 'Contrast reaching the colon within 24 hours predicts resolution. It does not establish recurrence risk. [Resolving SBO](#/node/bowel-obstruction-volvulus-nom-resolving)',
     },
     {
       heading: '🛑 Do NOT attempt sigmoid endoscopy with ischemia or peritonitis',
@@ -85,11 +85,11 @@ const SBOV_STOP_PAGE: InfoPage = {
     },
     {
       heading: '🛑 Do NOT give water-soluble contrast without safety checks',
-      body: 'Confirm NG position and aspiration precautions, check allergy, and watch for anaphylactoid reaction. Lethal aspiration is reported. Do NOT give if strangulation, peritonitis or perforation is suspected. [Trial node](#/node/bowel-obstruction-volvulus-nom-entry)',
+      body: 'Confirm NG position and aspiration precautions, check allergy, and watch for anaphylactoid reaction. Lethal aspiration is reported. The NG route is off-label (label: oral or rectal only). Do NOT give if strangulation, peritonitis or perforation is suspected. [Trial node](#/node/bowel-obstruction-volvulus-nom-entry)',
     },
     {
       heading: '🛑 Do NOT discharge from the ED on the basis of this pathway',
-      body: 'No discharge pathway for obstruction is sourced in this draft. Admit and reassess. [Disposition](#/node/bowel-obstruction-volvulus-dispo)',
+      body: 'No discharge pathway for obstruction is sourced here. Admit and reassess. [Disposition](#/node/bowel-obstruction-volvulus-dispo)',
     },
   ],
   citations: [

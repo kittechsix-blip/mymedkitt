@@ -8,13 +8,13 @@ const CITATIONS = BCT_CITATIONS.map(c => ({ num: c.num, text: c.text }));
 
 const BCT_STOP: InfoPage = {
   id: 'blunt-chest-trauma-stop',
-  title: 'Blunt Chest Trauma — Do NOT',
+  title: 'Blunt Chest Trauma - Do NOT',
   subtitle: 'Critical pitfalls to avoid',
   citations: CITATIONS,
   sections: [
     {
-      heading: '🛑 Contusion without shock: guide fluid by exam and oxygenation',
-      body: 'With hemorrhagic shock or bleeding, hemorrhage resuscitation still governs. Without shock, the restrictive-fluid data are observational and do not justify a reflex volume target. Volume overload can worsen oxygenation. [Contusion management](#/node/blunt-chest-trauma-contusion).',
+      heading: '🛑 Contusion without shock: avoid reflex large-volume fluid',
+      body: 'With hemorrhagic shock or bleeding, hemorrhage resuscitation still governs. In non-shocked contusion, avoid reflex large-volume fluid (expert opinion). The restrictive-fluid data are observational. Volume overload can worsen oxygenation (consensus). [Contusion management](#/node/blunt-chest-trauma-contusion).',
     },
     {
       heading: '🛑 Do NOT clear a patient on a low RibScore or a normal first film',
@@ -26,15 +26,15 @@ const BCT_STOP: InfoPage = {
     },
     {
       heading: '🛑 Do NOT give an NSAID before bleeding and renal review',
-      body: 'Anticoagulation, bleeding risk and reduced renal function change the risk. Check all three before any NSAID. [Systemic ladder](#/node/blunt-chest-trauma-multimodal).',
+      body: 'Anticoagulation, bleeding risk and reduced renal function change the risk. Check all three before any NSAID. The ketorolac label lists advanced renal impairment, renal-failure risk from volume depletion, and suspected or confirmed bleeding as contraindications [21]. [Systemic ladder](#/node/blunt-chest-trauma-multimodal).',
     },
     {
       heading: '🛑 Do NOT promise a pneumonia benefit from non-flail fixation',
-      body: 'The pooled signal is mixed-design and mostly non-flail Asian cohorts; the single non-flail RCT does not report pneumonia in its abstract. Refer to thoracic or trauma surgery; the ED does not decide fixation. [Surgical evidence](#/node/blunt-chest-trauma-surgery).',
+      body: 'The pooled signal is mixed-design and mostly non-flail Asian cohorts; the single non-flail controlled trial (partly randomized, 23 of 110) does not report pneumonia in its abstract. Refer to thoracic or trauma surgery; the ED does not decide fixation. [Surgical evidence](#/node/blunt-chest-trauma-surgery).',
     },
     {
-      heading: '🛑 Do NOT ventilate a flail chest without reassessing after each change',
-      body: 'Positive-pressure ventilation can make a flail segment worse. Reassess work of breathing and oxygenation after every change in support. [Flail chest](#/node/blunt-chest-trauma-flail).',
+      heading: '🛑 Do NOT change ventilator support without reassessing oxygenation',
+      body: 'Reassess oxygenation after every ventilator change, and reassess work of breathing with it. [Flail chest](#/node/blunt-chest-trauma-flail).',
     },
     {
       heading: '🛑 Do NOT discharge with an unresolved anticoagulation or bleeding question',
@@ -49,7 +49,7 @@ const BCT_STOP: InfoPage = {
 
 const BCT_STEPS: InfoPage = {
   id: 'blunt-chest-trauma-steps',
-  title: 'Blunt Chest Trauma — Steps Summary',
+  title: 'Blunt Chest Trauma - Steps Summary',
   subtitle: 'Tap a step to jump to it',
   citations: CITATIONS,
   shareable: true,

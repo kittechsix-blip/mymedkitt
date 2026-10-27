@@ -368,6 +368,6 @@ export const TREE_REGISTRY = {
   'hypertensive-emergency-adult': { prefix: 'HTNE', entryNodeId: 'hypertensive-emergency-adult-start', categoryId: 'cardiology' },
   'ards': { prefix: 'ARDS', entryNodeId: 'ards-start', categoryId: 'critical-care' },
   'blunt-chest-trauma': { prefix: 'BCT', entryNodeId: 'blunt-chest-trauma-start', categoryId: 'trauma-surg' },
-  'bowel-obstruction-volvulus': { prefix: 'SBOV', entryNodeId: 'sbov-start', categoryId: 'gastroenterology' },
-  'scad-vasospasm': { prefix: 'SCADV', entryNodeId: 'scadv-start', categoryId: 'cardiology' },
+  'bowel-obstruction-volvulus': { prefix: 'SBOV', entryNodeId: 'bowel-obstruction-volvulus-start', categoryId: 'gastroenterology' },
+  'scad-vasospasm': { prefix: 'SCADV', entryNodeId: 'scad-vasospasm-start', categoryId: 'cardiology' },
 };

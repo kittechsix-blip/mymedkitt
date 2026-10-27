@@ -16,8 +16,7 @@ const PHENOXYBENZAMINE: DrugEntry = {
   dosing: [
     {
       indication: 'Pheochromocytoma preoperative alpha blockade',
-      regimen: 'Start 10 mg PO BID. Increase every other day as BP allows. Label: initially 10 mg BID, then usually 20-40 mg 2-3 times/day to optimal BP control. Endocrine Society (Lenders 2014, as cited): final dose 1 mg/kg/day. SOURCE CONFLICT, both shown, no pick: the label Carcinogenesis section (generic phenoxybenzamine capsules, DailyMed) calls 20 mg BID the maximum recommended human dosage, and the label titration range (20-40 mg 2-3 times/day) and the 1 mg/kg/day guideline figure do not reconcile. Preop goal per Endocrine Society: seated BP <130/80, standing SBP >90. Give with high-sodium diet and fluids. Label: daily-dose effects are cumulative for nearly a week, so this is a pre-op plan, not an ED drug.',
-      weightCalc: { dosePerKg: 1, unit: 'mg', dailyDivided: 2, label: 'Endocrine Society final dose (1 mg/kg/day, divided BID). No maxDose set: label maximum 20 mg BID conflicts; see regimen text' },
+      regimen: 'Start low, titrate, specialist-directed. Label: initial 10 mg PO BID; the label Carcinogenesis section gives 20 mg BID as the maximum recommended human dosage (generic phenoxybenzamine capsules, DailyMed). Give with high-sodium diet and fluids. Label: daily-dose effects are cumulative for nearly a week, so this is a pre-op plan, not an ED drug.',
     },
   ],
   contraindications: [
@@ -31,7 +30,7 @@ const PHENOXYBENZAMINE: DrugEntry = {
     'Use with caution in marked cerebral or coronary arteriosclerosis or renal damage. May worsen symptoms of respiratory infection.',
     'Long-term use not recommended (carcinogenicity signal in animals and case reports in humans).',
   ],
-  monitoring: 'Seated and standing BP and HR daily during titration. Target per Endocrine Society: seated BP <130/80, standing SBP >90; HR 60-70 seated, 70-80 standing. Watch for orthostasis, volume depletion, and tachycardia.',
+  monitoring: 'Seated and standing BP and HR daily during titration. Watch for orthostasis, volume depletion, and tachycardia.',
   notes: 'Oral preoperative agent for pheochromocytoma. Not an acute ED drug. For an acute pheo hypertensive crisis, give IV phentolamine first (see phentolamine entry); beta-blockade only after alpha blockade. Label status: the Dibenzyline brand set on DailyMed shows a marketing end date of 02/29/2024; generic phenoxybenzamine capsules are the listed product. Confirm local stock.',
   citations: [
     'Dibenzyline (phenoxybenzamine hydrochloride capsules, USP) Prescribing Information. FDA application 008708, supplement 25 (WellSpring Pharmaceutical, rev. 03/08). accessdata.fda.gov/drugsatfda_docs/label/2008/008708s025lbl.pdf. Read 2026-10-27; dosing and contraindication wording checked against this text.',
@@ -49,7 +48,7 @@ export const ADDITIONS_HTN_PHEO: { drugId: string; dosing: DrugDose[]; indicatio
     dosing: [
       {
         indication: 'Hypertensive emergency (titratable IV, oral not feasible)',
-        regimen: 'Start 1-2 mg/h IV. Double the rate every 90 seconds until BP nears goal, then increase by less than double every 5-10 minutes. Usual maintenance 4-6 mg/h. Severe hypertension may need up to 32 mg/h (limited experience; most patients max 16 mg/h). Lipid limit: no more than 1000 mL, or an average of 21 mg/h, per 24 h. Use the same start rate in hepatic or renal impairment. Sources agree (label; 2017 ACC/AHA Table 19).',
+        regimen: 'Start 1-2 mg/h IV. Double the rate every 90 seconds until BP nears goal, then increase by less than double every 5-10 minutes. Usual maintenance 4-6 mg/h. Maximum 21 mg/h (2025 AHA/ACC Table 26; maximum duration 72 h). Label (Cleviprex): up to 32 mg/h may be needed with limited experience; most patients reach 16 mg/h or less. Lipid limit: no more than 1000 mL per 24 h. Use the same start rate in hepatic or renal impairment.',
       },
     ],
   },
@@ -67,8 +66,7 @@ export const ADDITIONS_HTN_PHEO: { drugId: string; dosing: DrugDose[]; indicatio
     dosing: [
       {
         indication: 'Hypertensive emergency (IV bolus or infusion)',
-        regimen: 'Label: 0.25 mg/kg IV (max 20 mg) over 2 min. Repeat 20-80 mg IV every 10 min until BP at goal. Or infusion at 2 mg/min, titrated. Label: safety of total dose above 300 mg is not established. SOURCE CONFLICT: 2017 ACC/AHA Table 19 gives 0.3-1.0 mg/kg IV (max 20 mg) every 10 min, or infusion 0.4-1.0 mg/kg/h up to 3 mg/kg/h, cumulative up to 300 mg. Both shown; the calc uses the label value. Contraindicated: bronchial asthma, overt heart failure, second- or third-degree heart block, cardiogenic shock, severe bradycardia. Label warns of paradoxical BP rise in pheochromocytoma.',
-        weightCalc: { dosePerKg: 0.25, unit: 'mg', maxDose: 20, label: 'Label IV bolus (ACC/AHA range 0.3-1.0 mg/kg, max 20 mg)' },
+        regimen: 'Label (labetalol HCl injection): 20 mg IV over 2 minutes first. Then 40-80 mg IV at 10-minute intervals until BP at goal, to a cumulative maximum of 300 mg. Contraindicated: bronchial asthma, overt heart failure, second- or third-degree heart block, cardiogenic shock, severe bradycardia. Label warns of paradoxical BP rise in pheochromocytoma.',
       },
     ],
   },

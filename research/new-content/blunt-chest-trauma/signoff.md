@@ -191,3 +191,92 @@ F12. Epidural branch (C4) is unchanged. Galvagno conditionally recommends epidur
 ## Fixed after Dr. K audit (2026-10-27, mechanical only)
 - Shared ropivacaine entry (`src/data/new-content/drugs-ards-bct.ts`) corrected as listed in ards/signoff.md: label Table 1 surgical-anesthesia row, epidural "well tolerated" wording, conditional cisatracurium re-bolus.
 - `src/data/trees/blunt-chest-trauma.ts`: header comment no longer says DRAFT. No node text changed.
+
+## Applied recommendations (2026-10-27)
+
+Source for this section: `research/new-content/RECOMMENDATIONS.md`, BCT rows 1, 2, 8-12. Rows 3-7 belong to the drugs agent and are not in this consult's files.
+
+- **Row 1, positive pressure and flail: applied.** Removed the direction claim from the flail node, the flail "Do NOT" card and the stop-page wording; now "Reassess oxygenation after every ventilator change." Source: none needed (neutral wording).
+- **Row 2, non-shock volume: applied.** Contusion node, critical action 3 and the contusion "Do NOT" card now read "avoid reflex large-volume fluid in non-shocked contusion (expert opinion)." Hu 2026 (#10) remains cited only for the shock cohort. Source: Hu 2026 abstract, re-read.
+- **Row 8, fixation industry funding: applied (no change needed).** Funding and conflicts are in citation #3 only; the node bodies do not mention them. Source: He 2023 PubMed record.
+- **Row 9, Dehghan numbers: applied.** Removed the ventilator-free-day, mortality, subgroup and enrollment numbers from the flail node and from citation #15. Result is described as unpublished conference data. Source: none (removal).
+- **Row 10, epidural option: applied with change.** Added a third analgesia option ("severe pain not controlled by the systemic ladder", epidural as a conditional option) and an epidural paragraph in Regional Blocks. EAST 2016 (citation #16) wording opened: "We conditionally recommend epidural analgesia and multimodal analgesia as options for patients with blunt thoracic trauma ... very low-quality evidence ... high value on patient preferences." Mukherjee 2023 (citation #20) wording opened: "We offer no recommendation for or against ketamine, epidural, or other locoregional analgesia" (older adults). Epidural dosing is not coded; linked to the local protocol.
+- **Row 11, page ranges and erratum: applied.** Verified against PubMed efetch 2026-10-27: #16 Galvagno 2016;81(5):936-951 (page range added); #20 Mukherjee 2023;94(3):398-407 (verified); #5 Sanchez article number e26.00233 added; #3, #4, #6, #13, #14, #17, #18, #19 pages checked, no change. Mukherjee has an ErratumIn record (J Trauma Acute Care Surg 2023;95(3):e23, doi 10.1097/TA.0000000000004101, PMID 37608454). Its title line removes the Chest Wall Injury Society co-sponsorship, so #20 now uses the EAST-only title and cites the erratum. The erratum body text was not read beyond the title line; Andy should confirm the erratum wording.
+- **Row 12, unsourced qualitative lines: applied.** NSAID line in the analgesia and multimodal nodes and the NSAID "Do NOT" card now cite the ketorolac label (new citation #21): contraindications for advanced renal impairment, renal-failure risk from volume depletion, and suspected or confirmed bleeding or high bleeding risk; anticoagulants raise bleeding risk. Source: ketorolac tromethamine injection US PI (Hospira, DailyMed 8accbb78-fc64-45d5-69b0-35c23a1d2a2e), opened 2026-10-27. Note: the label file reads "Revised: 11/2024" (LAB-0894-10.0), not 06/2024 as the earlier entry in this file said; the citation uses 11/2024. All other unsourced lines are labelled "(consensus)" in the node text.
+- **Rows 3-7: not applied here.** Drug entries (ropivacaine, acetaminophen, ibuprofen, bupivacaine, lipid rescue) belong to the drugs agent. The tree links to drug entries and does not copy any drug numbers.
+
+Reference integrity (run after edits): citation numbers used in the tree and info module are 1, 3, 4, 5, 6, 10, 13-21, all defined in the citations module; none undefined or unused. Type check (`bunx tsc --noEmit --skipLibCheck --noUnusedLocals false`) shows no errors in the blunt-chest files. No draft tags added to clinician-facing text.
+
+Not changed: `src/components/ribscore.ts`, `src/components/calculator.ts`, `src/data/toolbar-configs.ts`, any us-iv files, docs/, deploy, git.
+
+## Applied recommendations (2026-10-27), drugs pass
+Source files: `src/data/new-content/drugs-ards-bct.ts`, `src/data/drug-store.ts`. Existing-entry changes: `research/new-content/drug-store-changes.md`.
+- Row 3 ropivacaine ceiling: **applied**. Default 3 mg/kg, max 200 mg plain (250 mg with epinephrine); label 300 mg per major nerve block (0.75%) shown as the label maximum. Source: Naropin US PI (cb6583ff-cde4-4280-aa5b-0bea2b844792) and El-Boghdadly 2018 Table 1.
+- Row 4 acetaminophen: **applied-with-change**. Added the <50 kg IV row (15 mg/kg q6h, max 75 mg/kg/day). Removed the 2000 mg/24 h hepatic/alcohol cap; the Ofirmev label says caution, not a cap. Source: Ofirmev US PI (9a38f63a-8852-6dab-e053-2a95a90a90d6). Existing-entry edit, Andy's OK.
+- Row 5 ibuprofen: **applied**. 400 mg q4-6 h, max 3200 mg/day, boxed-warning line added. Source: Ibuprofen Rx US PI (0fa4cd66-66ad-4ec9-b38c-6b5840df39df). The boxed text was not re-read line by line this run (fetch blocked). Existing-entry edit, Andy's OK.
+- Row 6 bupivacaine: **applied**. 400 mg per 24 h total limit added. Source: Marcaine US PI (67578b56-7540-487e-1fba-481255620e78).
+- Row 7 lipid rescue: **applied-with-change**. The bupivacaine lipid dose is replaced by a pointer to the local LAST checklist (ASRA 2017). No dose in any entry. Existing-entry edit, Andy's OK.
+- Not applied in this pass: none in the drugs rows.
+
+## Dr. Kitlowski re-audit (2026-10-27, after Andy's rulings and applied recommendations)
+
+Verdict: **REVISE.** One patient-safety item remains open (F-PS1). Nothing else blocks deploy once Andy decides the flags below.
+
+### Primary sources opened this pass
+- PubMed efetch (abstracts): 26683395 (RibScore), 37317861 (Meyer), 37868848 (He), 31804414 (NONFLAIL), 42715400 (Sanchez), 23923989 (Blanco), 42528643 (Hu), 36730672 (Mukherjee), 37608454 (Mukherjee erratum), 23114485 (Clancy), 34756305 (Azizi), 28975363 (Goh), 27533913 (Galvagno), 40802491 (CWIS 2025 metadata).
+- DailyMed SPL XML: Ofirmev 9a38f63a-8852-6dab-e053-2a95a90a90d6; Marcaine 67578b56-7540-487e-1fba-481255620e78; Ibuprofen Rx 0fa4cd66-66ad-4ec9-b38c-6b5840df39df; Ketorolac injection (Hospira) 8accbb78-fc64-45d5-69b0-35c23a1d2a2e; Naropin cb6583ff-cde4-4280-aa5b-0bea2b844792.
+- El-Boghdadly 2018 Table 1 (PMC6087022): ropivacaine 3 mg/kg (200 mg) plain, 3 mg/kg (250 mg) with epinephrine; bupivacaine 2 mg/kg (175 mg) plain, 3 mg/kg (225 mg) with epinephrine.
+- PubMed esearch for the Dehghan 2021 flail-chest trial: zero records.
+
+### Number-by-number check (all matched the primary text)
+- RibScore: 385 patients; AUC 0.71 / 0.71 / 0.75.
+- Meyer 2023: 84 randomized (42/42); hospital LOS RR 1.48 (1.17 to 1.88); ICU LOS and ventilator days similar; no QoL benefit to 6 months. Inclusion criteria in the node match the abstract.
+- He 2023: 12 studies, n=2,440; ventilation MD -5.23 (-9.64 to -0.81); 4-week pain SMD -2.24; pneumonia RR 0.46 (0.23 to 0.95); atelectasis RR 0.44 (0.29 to 0.65); mortality RR 0.94 (0.37 to 2.41).
+- NONFLAIL: 110 enrolled; 23 randomized, 87 observation; 2-week NPS 2.9 vs 4.5 (p<0.01); pleural complications 0% vs 10.2% (p=0.02).
+- Sanchez 2026: 12,513 identified; 984 surgical vs 3,921 nonsurgical after matching; OR 1.67 (pneumonia), 2.00 (PE), 3.07 (tracheostomy) at 30 days.
+- Hu 2026: 100 per group; ARDS 16% vs 34%; 28-day survival 95% vs 82% (P=0.003); authors call it hypothesis-generating; hemorrhagic shock only.
+- Galvagno 2016: conditional recommendations for epidural and multimodal analgesia as options; very low quality; pages 936-951 confirmed.
+- Mukherjee 2023: NIPPV conditional in patients without risk of airway loss; IS informs ICU status; no recommendation for or against routine ICU admission; ketamine no significant pain-score reduction with a trend to less opioid use; epidural and locoregional did not affect pneumonia, ventilator days, LOS or mortality. Erratum (PMID 37608454) title is EAST-only, which matches citation 20.
+- Clancy 2012: admission ECG plus troponin I; BCI ruled out only when both normal; echo reserved for hypotension or arrhythmia; sternal fracture alone does not predict BCI.
+- Azizi 2021 and Goh 2018: populations and directions in the life-threat node match the abstracts. No numbers are coded.
+- Blanco 2013: four volunteers; fat-suppression MRI and three-dimensional reconstructions.
+- Drug entries (verified against the labels): acetaminophen 1000 mg q6h or 650 mg q4h to 4000 mg/day for 50 kg and over; 15 mg/kg q6h or 12.5 mg/kg q4h to 75 mg/kg/day under 50 kg; hepatic, alcoholism, malnutrition, severe hypovolemia are "use caution" with no 2 g cap (the removal in row 4 is correct); ibuprofen 400 mg q4-6 h for mild to moderate pain, max 3200 mg/day, boxed CV and GI warning, peri-CABG contraindication; bupivacaine 400 mg in 24 h total (Table 3 text); ketorolac single and multiple dose regimens and the 5-day limit; ropivacaine Naropin 300 mg brachial-plexus caution (5.7), 770 mg/24 h cumulative, >70 h caution, lumbar and major nerve block ranges.
+
+### Auto-fixed this pass (consult files only; wording and citation metadata)
+1. `src/data/trees/blunt-chest-trauma.ts`, ventilation node: "units as reported in the full paper" changed to "units not stated in the abstract". The full paper was not read, so the earlier wording claimed something unverified.
+2. `src/data/trees/blunt-chest-trauma.ts`, multimodal ladder: the ibuprofen hint `#/drug/ibuprofen/pain` scrolled to the first card containing "pain", which is the pediatric BACM row (10 mg/kg). Hint changed to `#/drug/ibuprofen/pain fever adult`, which matches the adult "Pain / Fever (Adult)" row. The hint matcher (drug-store.ts, lines 409 to 416) matches on the dosing indication attribute and every space-separated word, so the adult row is the only match.
+3. `src/data/new-content/blunt-chest-trauma-citations.ts`, citation 5: author list was missing "Luo X" (present in the PubMed record).
+4. `src/data/new-content/blunt-chest-trauma-info.ts`, stop page: "the single non-flail RCT" changed to "the single non-flail controlled trial (partly randomized, 23 of 110)". NONFLAIL is partly observational (87 of 110 by patient choice).
+5. `src/data/new-content/blunt-chest-trauma-info.ts`, page titles: two em dashes replaced with hyphens (house rule: no em dashes in clinician-facing text from this audit).
+
+Type check (`bunx tsc --noEmit --skipLibCheck --noUnusedLocals false`): no errors in blunt-chest-trauma files. Node ids, `next` targets and citation numbers (1, 3, 4, 5, 6, 10, 13 to 21) were not changed; every number used is defined and every defined number is used.
+
+### FLAGGED for Andy (not changed)
+
+**F-PS1 (patient safety, open): epidural branch has no anticoagulation or coagulopathy check.** The analgesia node offers epidural as a conditional option for severe pain (Andy's row 10), and the regional-block node says only "credentialing and the local epidural protocol." Neither says to check anticoagulant or antiplatelet status, INR or platelets, or timing before a neuraxial catheter. The node already requires this check before an NSAID, so the gap is specific to neuraxial placement. Needed: a neuraxial bleeding-and-anticoagulation check line with its own source (the ASRA neuraxial anticoagulation guideline, not yet opened in this consult). Adding a new warning is a flagged change under the Dr. K authority rules, so it is not applied here. Recommended text, pending the source read: "Before any neuraxial catheter, check anticoagulant and antiplatelet status, coagulation and platelet count, and the timing of the last dose against the ASRA checklist."
+
+**F-1 Dehghan 2021 (citation 15): unverifiable.** PubMed search returned no record. The flail node still cites [15] for "evidence is mixed" and for the claim that randomized outcomes exist only as conference data, which cannot be checked. Recommend removing the Dehghan bullet and citation 15. This is Andy's open question 8, so it is not changed here.
+
+**F-2 Ropivacaine is not linked from the consult.** The regional-block node says local anesthetic dosing "comes from the drug entry" and links only bupivacaine (2 mg/kg, 175 mg plain). The ropivacaine rib-block ceiling (3 mg/kg, 200 mg plain, 250 mg with epinephrine) is in drugs-ards-bct.ts, which is not yet registered, so a link would not resolve. Add the link when the entry is registered. Also: the bupivacaine entry gives a 2 mg/kg plain ceiling that clinicians may apply to a rib block, and the consult does not say which agent the ceiling belongs to.
+
+**F-3 Acetaminophen entry (drug-store.ts, shared file, not my file): "max 750 mg/dose" in the IV cautions.** The Ofirmev label gives 15 mg/kg per dose and 75 mg/kg/day for under 50 kg, with no 750 mg per-dose limit. The 750 mg figure is only 15 mg/kg at 50 kg. Remove or label as arithmetic.
+
+**F-4 Ketorolac entry (drugs-ards-bct.ts, shared file): administration rule missing.** The label requires the IV bolus over at least 15 seconds. The row also says "contraindicated with hypovolemia not corrected," but the label says hypovolemia should be corrected before administration (dosing section), not as a contraindication. Add the 15-second rule; reword the hypovolemia line.
+
+**F-5 Unverified descriptive claims.** (a) He 2023 "mixed study designs" (open question 2, not checked against the full text). (b) CWIS 2025 (citation 13) is cited as covering "indications, contraindications and timing." The title supports this; the full text was not read. (c) Galvagno "paravertebral, intrapleural and intercostal ... no conditional recommendation" is consistent with the abstract (two recommendations only) but was not read in the full text.
+
+**F-6 Earlier flags, status unchanged.** C1 (needle site), C2 (catheter length), C3 (hemothorax thresholds with an unsourced chest-tube consult), C4 (epidural branch, now partly addressed by F-PS1), C5 and C6 (surgical wording, now consistent with the abstracts), C7 (restrictive fluid, observational), and open questions 5 to 14 remain Andy's.
+
+### Scope note
+The acute-pancreatitis Ranson additions were not in this consult's file list and were not audited in this pass.
+
+### Checklist update for Dr. Kitlowski (re-audit)
+- [x] Every number in the tree and citations checked against the primary abstract or label (above).
+- [x] Acetaminophen 2 g cap removal confirmed correct against the Ofirmev label.
+- [x] Ibuprofen 400 mg q4-6 h and boxed warning confirmed against the Rx label.
+- [x] Bupivacaine 400 mg per 24 h confirmed against the Marcaine label.
+- [x] Ketorolac doses and 5-day limit confirmed against the Hospira label.
+- [x] Ropivacaine ceiling and Naropin 300 mg brachial-plexus caution confirmed.
+- [ ] F-PS1 neuraxial anticoagulation check: open (patient safety).
+- [ ] F-1 Dehghan citation: Andy's decision.
+- [ ] F-3 and F-4 drug-entry wording: Andy's decision (shared drug files).

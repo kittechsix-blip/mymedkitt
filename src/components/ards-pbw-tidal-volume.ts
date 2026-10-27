@@ -96,7 +96,7 @@ function plateauLine(action: PlateauAction, vtKgPbw: number | null): string {
     case 'above-30-at-floor':
       return '• Above 30 at the 4 mL/kg PBW floor: **do not cut VT further**. Look for a bedside cause and escalate.';
     case 'below-25-increase':
-      return '• Below 25 with VT under 6: **may raise VT by 1 mL/kg PBW** until plateau is above 25 or VT is 6 mL/kg PBW';
+      return '• Below 25 with VT under 6: **ARDSNet protocol increases VT by 1 mL/kg PBW** until plateau is above 25 or VT is 6 mL/kg PBW (clinician judgment)';
     case 'within-target':
       return '• At or below 30: **within ARDSNet target**';
     default:
@@ -171,7 +171,7 @@ export const ARDS_PBW_TIDAL_VOLUME_CALCULATOR: CalculatorDefinition = {
     },
   ],
   results: [],
-  thresholdNote: 'Starting VT is an open conflict: 6 mL/kg PBW (ARDSNet trial arm) vs 8 mL/kg PBW stepping to 6 (2008 ARDSNet protocol summary). Keep plateau at or below 30 cmH2O. Floor 4 mL/kg PBW. Driving pressure is associated with survival, but no validated bedside cutoff is set in this calculator. Verify inputs against the ventilator before changing settings.',
+  thresholdNote: 'Start 6 mL/kg PBW (ARDSNet 2000 trial arm). The 2008 ARDSNet protocol summary starts at 8 mL/kg PBW and steps down to 6; ESICM 2023 and ATS 2024 give 4 to 8 mL/kg PBW. Keep plateau at or below 30 cmH2O. Floor 4 mL/kg PBW. Driving pressure is associated with survival, but no validated bedside cutoff is set in this calculator. Verify inputs against the ventilator before changing settings.',
   citations: [
     'ARDS Network. Ventilation with lower tidal volumes as compared with traditional tidal volumes for acute lung injury and the acute respiratory distress syndrome. N Engl J Med. 2000;342(18):1301-1308.',
     'NHLBI ARDS Clinical Network. Mechanical Ventilation Protocol Summary (July 2008 update). ardsnet.org/files/ventilator_protocol_2008-07.pdf',

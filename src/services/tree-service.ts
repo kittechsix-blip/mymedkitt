@@ -932,11 +932,11 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
     },
     'bowel-obstruction-volvulus': async () => {
       const m = await import('../data/trees/bowel-obstruction-volvulus.js');
-      return { nodes: m.SBOV_NODES, entryNodeId: 'sbov-start', categoryId: 'gastroenterology', moduleLabels: m.SBOV_MODULE_LABELS, citations: m.SBOV_CITATIONS, criticalActions: m.SBOV_CRITICAL_ACTIONS };
+      return { nodes: m.SBOV_NODES, entryNodeId: 'bowel-obstruction-volvulus-start', categoryId: 'gastroenterology', moduleLabels: m.SBOV_MODULE_LABELS, citations: m.SBOV_CITATIONS, criticalActions: m.SBOV_CRITICAL_ACTIONS };
     },
     'scad-vasospasm': async () => {
       const m = await import('../data/trees/scad-vasospasm.js');
-      return { nodes: m.SCADV_NODES, entryNodeId: 'scadv-start', categoryId: 'cardiology', moduleLabels: m.SCADV_MODULE_LABELS, citations: m.SCADV_CITATIONS, criticalActions: m.SCADV_CRITICAL_ACTIONS };
+      return { nodes: m.SCADV_NODES, entryNodeId: 'scad-vasospasm-start', categoryId: 'cardiology', moduleLabels: m.SCADV_MODULE_LABELS, citations: m.SCADV_CITATIONS, criticalActions: m.SCADV_CRITICAL_ACTIONS };
     },
     'hypoglycemia': async () => {
       const m = await import('../data/trees/hypoglycemia.js');

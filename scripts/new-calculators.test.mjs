@@ -11,10 +11,12 @@ import { scoreRanson, ransonBand } from '../src/components/ranson.ts';
 
 const near = (a, b, tol = 0.01) => assert.ok(Math.abs(a - b) <= tol, `${a} != ${b}`);
 
-test('HTNE BP target: MAP, guideline SBP floor, draft MAP floors', () => {
-  // 2017 ACC/AHA sec 11.2: SBP reduced by no more than 25% in the first hour -> floor = 0.75 x SBP.
+test('HTNE BP target: MAP and guideline SBP floor', () => {
+  // 2025 AHA/ACC sec 6.2: SBP reduced by no more than 25% in the first hour -> floor = 0.75 x SBP.
   const a = computeHtneBpTarget({ sbp: 200, dbp: 120 });
-  near(a.map, 146.67); near(a.sbpFloor25, 150); near(a.mapFloor25, 110); near(a.mapFloor20, 117.33);
+  near(a.map, 146.67); near(a.sbpFloor25, 150);
+  assert.equal(a.mapFloor25, undefined, 'MAP-percentage floors are not computed');
+  assert.equal(a.mapFloor20, undefined, 'MAP-percentage floors are not computed');
   // Hypertensive emergency inequality (guideline): SBP > 180 and/or DBP > 120.
   const above = computeHtneBpTarget({ sbp: 181, dbp: 100 });
   assert.equal(above.severeRange, true, 'SBP 181 is above 180');
@@ -25,7 +27,7 @@ test('HTNE BP target: MAP, guideline SBP floor, draft MAP floors', () => {
   const normal = computeHtneBpTarget({ sbp: 120, dbp: 80 });
   near(normal.map, 93.33); assert.equal(normal.severeRange, false);
   const preg = computeHtneBpTarget({ sbp: 160, dbp: 90, pregnant: true });
-  assert.equal(preg.severeRange, true, 'pregnancy threshold SBP >=160');
+  assert.equal(preg.severeRange, null, 'pregnancy severe range is not computed here (ACOG CO 767 not read)');
   assert.equal(preg.compelling, true, 'pregnancy is a compelling condition');
 });
 
@@ -103,10 +105,14 @@ test('ARDS Berlin calculator: support mode gates the grade and the prone line', 
   // PaO2 100 on FiO2 50 gives P/F 200 exactly.
   assert.equal(calc({ pao2: 100, fio2: 50, peep: 5, support: 0 }).value, '--', 'support not set shows entry prompt');
   assert.equal(calc({ pao2: 100, fio2: 50, peep: 5, support: 1 }).label, 'Moderate ARDS (Berlin)', 'invasive at P/F 200 is moderate');
-  assert.match(calc({ pao2: 100, fio2: 50, peep: 5, support: 2 }).label, /^Mild ARDS \(Berlin\), capped/, 'CPAP or NIV at P/F 200 is capped at mild');
+  const nonInvasive = calc({ pao2: 100, fio2: 50, peep: 5, support: 2 });
+  assert.equal(nonInvasive.label, 'Cannot classify beyond mild (non-invasive)', 'CPAP or NIV at P/F 200 cannot be graded beyond mild');
+  assert.doesNotMatch(nonInvasive.description, /27%/, 'invasive-cohort mild mortality is not shown on the non-invasive result');
+  assert.doesNotMatch(nonInvasive.label + nonInvasive.description, /Mild ARDS \(Berlin\)/, 'no "Mild ARDS" label on the non-invasive path');
   assert.equal(calc({ pao2: 100, fio2: 50, peep: 5, support: 3 }).label, 'Not a Berlin support mode', 'high-flow only is not graded');
-  // P/F 140 on FiO2 100 and PEEP 5 meets prone entry on invasive support only.
-  assert.match(calc({ pao2: 140, fio2: 100, peep: 5, support: 1 }).description, /PRONE ENTRY/);
+  // P/F 140 on FiO2 100 and PEEP 5 meets prone entry on invasive support only, with the agreed wording.
+  const proneInvasive = calc({ pao2: 140, fio2: 100, peep: 5, support: 1 }).description;
+  assert.match(proneInvasive, /PRONE ENTRY:\*\* Severe ARDS \(P\/F <150, FiO2 ≥0\.6, PEEP ≥5\), invasive ventilation/);
   assert.doesNotMatch(calc({ pao2: 140, fio2: 100, peep: 5, support: 2 }).description, /PRONE ENTRY/, 'no prone entry on CPAP or NIV');
 });
 

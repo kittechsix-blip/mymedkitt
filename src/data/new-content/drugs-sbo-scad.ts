@@ -29,7 +29,7 @@ const DIATRIZOATE: DrugEntry = {
         '**Off-label TRIAL REGIMEN for adhesive SBO (not label dosing):** the Cochrane review (Abbas, Bissett, Parry; CD004651; full text read via PMC6465054) describes trials giving **100 mL** Gastrografin orally or by NG tube, with the NG tube **clamped for 60 minutes** afterward. Its discussion gives an abdominal radiograph window of 4-24 h. Serial films over 24 h predicted non-operative resolution (pooled sensitivity 0.97, specificity 0.96).\n\n' +
         '**CONFLICT, both shown, no pick:** the trial volume of 100 mL is above the label oral adult maximum of 90 mL.\n\n' +
         '**Route:** NG use is off-label. The label states oral or rectal administration only. Its warnings say that if the agent is given by NG tube, tube position in the stomach must be verified first.\n\n' +
-        '**Timing:** per local protocol.',
+        '**No default volume.** Label 30-90 mL; trial 100 mL (off-label). The choice is clinician-directed.\n\n**Timing:** per local protocol.',
     },
     {
       indication: 'GI radiography (label, adult oral dose)',
@@ -79,16 +79,14 @@ const AMLODIPINE: DrugEntry = {
   dosing: [
     {
       indication: 'Vasospastic angina (Prinzmetal / variant)',
-      regimen:
-        '5-10 mg PO once daily. Label angina section: "The recommended dose for chronic stable or vasospastic angina is 5-10 mg, with the lower dose suggested in the elderly and in patients with hepatic insufficiency." ' +
-        'The angina section gives no 2.5 mg start. The 2.5 mg start is from the label hypertension section (dosing 2.1): small, fragile, or elderly patients, or hepatic insufficiency may start at 2.5 mg daily. Adult hypertension start 5 mg; max 10 mg/day.',
+      regimen: 'Name only: dose per cardiology.',
     },
   ],
   contraindications: ['Known sensitivity to amlodipine (label)'],
   cautions: [
     'Hypotension, additive with nitrates and other vasodilators',
     'Peripheral edema (common)',
-    'Hepatic insufficiency, elderly, small or fragile patients: 2.5 mg start is from the label hypertension section, not the angina section (label)',
+    'Hepatic insufficiency, elderly, small or fragile patients: dose per cardiology.',
   ],
   monitoring: 'BP and heart rate at each dose change. Reassess anginal symptoms and ECG response.',
   notes:
@@ -112,10 +110,7 @@ const ISOSORBIDE_MONONITRATE: DrugEntry = {
   dosing: [
     {
       indication: 'Vasospastic angina (second-line add-on to calcium channel blocker)',
-      regimen:
-        'CONFLICT, both shown, no pick. 2023 AHA/ACC Table 17 example: 10 mg PO BID. ' +
-        'Label (IR tablets): recommended regimen 20 mg PO BID, doses 7 h apart, leaving a 17 h nitrate-free interval. ' +
-        'Small stature: start 5 mg, increase to at least 10 mg by day 2-3. Doses above 20 mg BID not studied.',
+      regimen: 'Name only: second-line add-on to a calcium channel blocker for vasospastic angina. Dose per cardiology.',
     },
   ],
   contraindications: [
@@ -125,7 +120,7 @@ const ISOSORBIDE_MONONITRATE: DrugEntry = {
   cautions: [
     'Hypotension and syncope',
     'Headache (common)',
-    'Tolerance with continuous dosing. Use the asymmetric 7 h schedule (label).',
+    'Tolerance with continuous dosing.',
   ],
   monitoring: 'BP and symptoms after each dose change. Confirm the PDE-5 washout before first dose.',
   notes:
@@ -150,11 +145,7 @@ export const ADDITIONS_SBO_SCAD: { drugId: string; dosing: DrugDose[]; indicatio
     dosing: [
       {
         indication: 'Vasospastic angina (coronary artery spasm), oral IR tablets',
-        regimen:
-          'Oral (Cardizem tablets). Label indication: "chronic stable angina and angina due to coronary artery spasm." ' +
-          'Start 30 mg PO four times daily, before meals and at bedtime. Increase gradually at 1-2 day intervals until optimal response. ' +
-          'Average optimal range 180-360 mg/day in divided doses. No data for renal or hepatic impairment; titrate with caution. ' +
-          'Guideline: first-line calcium channel blocker for vasospasm (2023 AHA/ACC Table 17, no diltiazem example named).',
+        regimen: 'Named as a calcium channel blocker option for vasospastic angina. Dose per cardiology. The 2023 AHA/ACC Table 17 does not name diltiazem.',
       },
     ],
   },
@@ -164,11 +155,7 @@ export const ADDITIONS_SBO_SCAD: { drugId: string; dosing: DrugDose[]; indicatio
     dosing: [
       {
         indication: 'Vasospastic (Prinzmetal) angina, oral IR tablets',
-        regimen:
-          'Oral IR tablets. Label lists vasospastic (Prinzmetal\'s variant) angina under angina at rest. ' +
-          'Usual dose 80-120 mg PO three times daily. 40 mg TID may be warranted with increased response (decreased hepatic function, elderly). ' +
-          'Titrate on efficacy and safety about 8 h after dosing; increase at daily (unstable angina) or weekly intervals. ' +
-          'CONFLICT: 2023 AHA/ACC Table 17 gives "verapamil 40 mg BID uptitrated" as the first-line example. Both shown, no pick.',
+        regimen: 'Named as a calcium channel blocker option for vasospastic (Prinzmetal) angina. Dose per cardiology.',
       },
     ],
   },

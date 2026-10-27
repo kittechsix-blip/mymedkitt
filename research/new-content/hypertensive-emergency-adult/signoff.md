@@ -264,3 +264,108 @@ Dissection first-hour target RULED: SBP <120 mm Hg in the first hour (2025 AHA/A
 
 ### Ruling 7 (Andy, 2026-10-27)
 '2025 target only': first-hour node and BP calculator now follow 2025 AHA/ACC section 6.2 + Table 27 exactly: dissection SBP <=120 within 20 min (beta-blocker first); most other compelling conditions SBP <140 in the first hour; pheochromocytoma not an indication for immediate <120/<140; no compelling indication: ~25% SBP reduction in hour 1 then gradual over 24-48 h; avoid SBP 110-139 early without dissection/pheo, esp. SBP >220 (AKI risk). The 2017 '160/100 at 2-6 h' step is removed. NOTE: the 25% rule remains in 2025 for the no-compelling-indication group; so '2025 only' keeps a 25% rule there. Calculator citation [1] is now the 2025 guideline. Still open: MAP-percentage lines (no source), stroke thresholds, drug doses.
+
+## Applied recommendations (2026-10-27), drugs pass
+Sources: `src/data/new-content/drugs-htn.ts`, `src/data/drug-store.ts`. Existing-entry changes: `research/new-content/drug-store-changes.md`.
+- Row 3 clevidipine: **applied**. Shows 21 mg/h (2025 AHA/ACC Table 26, maximum duration 72 h) and 32 mg/h (Cleviprex label, limited experience). Contraindications (severe aortic stenosis, defective lipid metabolism / pancreatitis with hyperlipidemia, soy/egg) are already in the drug-store entry; no change needed there. **Caveat:** the 2025 guideline pages (publisher and Hypertension journal) returned 403 this run, so Table 26 was not re-opened; the value is from the earlier read recorded above (F3). Re-verify before deploy.
+- Row 4 labetalol: **applied**. Label: 20 mg IV over 2 min, then 40-80 mg at 10-minute intervals, cumulative max 300 mg. weightCalc dropped. Source: labetalol HCl injection label (abfc6b75-1ed5-41f1-0484-4597488237bc), read earlier this sign-off.
+- Row 5 hydralazine: **applied-with-change**. Hypertensive-emergency row: 10 mg IV, max initial 20 mg, repeat q4-6 h (Table 26; re-open blocked this run, see caveat). The q20-30 min repeat and 40 mg cap are removed. The Table 26 cumulative 200 mg/24 h limit is NOT added; Andy to decide. Pregnancy row: ACOG CO 767 could not be read, so its numbers are **removed-unverified** and replaced by "dose not stated". Existing-entry edit, Andy's OK.
+- Row 6 phentolamine and cocaine: **applied-with-change**. Phentolamine entry gains "catecholamine excess including cocaine toxicity: 5 mg IV, repeat every 10 min, cumulative max 50 mg per 24 h" (Table 26, same caveat). The tree-side "benzodiazepine first" wording is a consult-tree change and is not in this drug pass. Existing-entry edit, Andy's OK.
+- Row 14 phenoxybenzamine (drug part): **applied**. 1 mg/kg/day weightCalc and Endocrine 1 mg/kg/day figure removed; "start low, titrate, specialist-directed"; label maximum 20 mg BID shown; unverified monitoring targets removed.
+- Not applied in this pass: ACOG CO 767 pregnancy numbers (not readable); 2025 Table 26 cumulative 200 mg/24 h for hydralazine (Andy's decision).
+
+---
+
+## Applied recommendations (2026-10-27)
+
+Source of RECOMMENDATIONS.md rows applied to this consult. Read first: `research/new-content/RECOMMENDATIONS.md`. Status key: applied / applied-with-change / removed-unverified / not applied.
+
+### Sources read in this pass
+- **2025 AHA/ACC guideline, Circulation (doi:10.1161/CIR.0000000000001356), section 6.2 synopsis, supportive text 1-4, Tables 26 and 27, and section 5.3.9.2 (acute ischemic stroke).** Read from the publisher HTML rendering. The recommendation table cells (COR/LOE wording for recs 1-3) are images and are not in the text read.
+- **Cleviprex (clevidipine) label, DailyMed setid a6826aa3-fabb-4ff1-a7a3-cd4c34e3a330.** Read sections 2.2 and 4.1-4.3 via a summarized fetch. The label revision date is not consistent across the page (11/2016 vs 11/2022).
+- **Not readable this pass:** JACC 2025 page (HTTP 403), AHA Powers 2019 page (HTTP 403, so Table 5 unread), ACOG CO 767 (the guessed acog.org URL returned 404; search not completed), Elsevier/DOI page for the Isselbacher citation (redirect returned a bare "Redirecting" page, title not confirmed). Firecrawl credits were exhausted mid-pass.
+
+### Row status
+- **Row 1, 24-48 h target: applied-with-change.** The verbatim sentence used is the 2025 section 6.2 supportive text for rec 3: "strategies to reduce BP should be more conservative to achieve 25% reduction in the first hour, followed by gradual further reduction within 24 to 48 hours." Its wording is used in the first-hour node, the summary, the Steps page, and the calculator. The word "normal" is gone. NOT applied: the "130 to 140 mm Hg" target and the "<160/100 within 2-6 hours" step from Dr. K's F1 quote. The rec 3 COR/LOE text itself was not readable, so those numbers are not confirmed. Andy's Ruling 7 already removed the 2-6 h step. Needed: Andy and Dr. K confirm the rec 3 sentence against the full text before deploy.
+- **Row 2, ICU disposition: not applied (could not confirm).** The COR 1 ICU recommendation text is not in the readable material. The existing ICU branch for ongoing titration, arterial monitoring, and exceptions is unchanged. Needed: rec 1 text from the 2025 guideline.
+- **Row 3, clevidipine (node text only): applied-with-change.**
+  - Maximum: 21 mg/h (2025 Table 26) shown. The label figure "32 mg/h" is removed because I could not confirm it. The label states "most patients were treated with maximum doses of 16 mg/hour or less," and that sentence is shown.
+  - Contraindications (label 4.1-4.3, and 2025 Table 26 for 4.1 and 4.2): soy or egg allergy; defective lipid metabolism (pathologic hyperlipemia, lipoid nephrosis, acute pancreatitis accompanied by hyperlipidemia); severe aortic stenosis. Dihydropyridine hypersensitivity removed (not on the label or in Table 26).
+  - Node text changed in the nicardipine/clevidipine node and the pitfalls node. Drug entry untouched (drugs agent).
+- **Row 6, cocaine node text: applied-with-change.** Phentolamine 5 mg IV, repeat every 10 minutes, cumulative maximum 50 mg per 24 hours, and cocaine toxicity as a listed catecholamine-excess cause: 2025 Table 26 (verified). "Name benzodiazepine first": NOT applied. No benzodiazepine statement appears in the 2025 Tables 26-27 or the sections read, so I did not write it. Needed: a source and Andy's decision. The phentolamine entry's IM route and repeat interval belong to the drugs agent.
+- **Row 8, beta-blocker contraindications: applied.** 2025 Table 27 (ACS row): moderate-to-severe LV failure with pulmonary edema, HR <60, SBP <100, poor peripheral perfusion, second- or third-degree heart block, reactive airways disease. Table 27 (acute pulmonary edema row): beta blockers contraindicated. Labetalol line in pitfalls aligned to Table 26.
+- **Row 9, nitrates and nitroprusside: applied.** Nitroglycerin: "Do not use in volume-depleted patients" (Table 26). Nitroprusside: "should be avoided in acute cerebrovascular disease unless other agents are not available" (Table 26). The "raises intracranial pressure [9]" claim is removed from the nitroprusside node, the agent-by-organ node, the pitfalls node, and the Do-NOT page.
+- **Row 11, citations: partially applied.**
+  - Isselbacher DOI: NOT changed. The DOI 10.1016/j.jacc.2022.08.004 redirects to Elsevier PII S0735109722057692, which I could not identify. Needed: confirm the correct DOI.
+  - ACOG CO 767: not read. The numeric severe-range thresholds (SBP >=160 or DBP >=110) and the 30-60 minute window are removed from the pregnancy node, the recommendation, the summary, and the calculator. The calculator's pregnancy severe-range value is now null, and the test is updated. First-line agents (IV labetalol, IV hydralazine, immediate-release oral nifedipine) are kept and cited [4,10]; 2025 Table 27 lists hydralazine, labetalol, nicardipine, and nifedipine for eclampsia or preeclampsia, which is consistent. Needed: read ACOG CO 767 to restore thresholds, and decide on nicardipine.
+- **Row 12, stroke thresholds: applied-with-change.** 2025 section 5.3.9.2 (read): the alteplase RCTs required SBP <185 and DBP <110 mm Hg before treatment, and SBP <180 and DBP <105 mm Hg for the first 24 hours after. The ischemic-stroke node now states these and links the stroke consult nodes `stroke-ivt-check` (BP <185/110 before IVT) and `stroke-post-treatment` (BP <180/105 x 24 h). Powers 2019 Table 5 NOT read (HTTP 403). Secondary sources disagree on whether the pre-lysis 185/110 threshold was removed in 2019; this is open. Needed: Table 5 read directly.
+- **Row 13, MAP-percentage lines: applied.** Removed the MAP-25% and MAP-20% floors from `computeHtneBpTarget` (no `mapFloor25` or `mapFloor20` returned), from the calculator lines, and from the tests. The threshold note now cites only the 25% SBP limit. Draft tags ("source pending", "not confirmed", "see signoff") removed from calculator and Steps-page text.
+- **Row 14, pheochromocytoma node text: applied-with-change.** Added "Start low, titrate, and direct it with a specialist." Alpha-before-beta is kept and still cites [7] (Lenders 2014, not read). Monitoring targets are not in this node. The 1 mg/kg/day weightCalc is the drugs agent's.
+
+### Other edits in this pass (not row-specific, for review)
+- First-hour summary and Steps page: the "160/100 at 2-6 hours" step is removed, consistent with Ruling 7. The MAP-percentage sentence is removed.
+- Citation [10] text in the consult now says Tables 26-27 and section 5.3.9.2 were read. It no longer claims rec 3 wording was read.
+- Stop page: the Do-NOT headings for nitroprusside, labetalol, and cocaine are reworded to match the sourced text.
+- Checks: `node --test --test-name-pattern="HTNE" scripts/new-calculators.test.mjs` 3/3 pass. `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` clean.
+- No commit, push, deploy, or Supabase action.
+
+---
+
+## Dr. Kitlowski re-audit, 2026-10-27 (after Rulings 6-7 and the applied recommendations)
+
+Scope: tree `hypertensive-emergency-adult.ts`, `hypertensive-emergency-adult-info.ts`, `htne-bp-target.ts` calculator, `drugs-htn.ts` additions and the drug-store entries the tree links (clevidipine, nicardipine, labetalol, esmolol, nitroglycerin, nitroprusside, phentolamine, hydralazine, phenoxybenzamine). Acute pancreatitis Ranson additions are not part of this consult and were not audited here.
+
+### Primary sources this run
+- 2025 AHA/ACC HBP guideline (CIR.0000000000001356): section 6.2, rec 1-3 and Tables 26-27 were read in full in the earlier Dr. K pass (F1-F9 above). Publisher re-open this run was not possible (HTTP 403).
+- Cleviprex and DailyMed label re-fetch this run: no dosing text extracted (HTML shell). Not re-verified.
+- Firecrawl credits exhausted; no new scrape possible this run.
+- Citation gate: `~/Desktop/claude-brain/wikis/emergency-medicine/guideline-versions.md` (2025 HBP row, ACOG CO 767 row, Powers 2019 row, 2022 aortic row, all DOI-fetched 2026-10-27).
+
+### Auto-fixes applied this run (wording, citations, and removal of a source that contradicts Ruling 7)
+1. `src/data/trees/hypertensive-emergency-adult.ts`, first-hour node: removed the "Marik & Varon (2007) [2]" paragraph that gave a second first-hour goal (DBP down 10-15% or to about 110 over 30-60 min). Ruling 7 set the first-hour node to the 2025 target only; this paragraph contradicted it.
+2. `src/components/htne-bp-target.ts`: removed the "MARIK & VARON 2007" output line for the same reason (Ruling 7). The line also carried an unsourced "not outside an ICU-monitored setting" claim.
+3. `src/data/trees/hypertensive-emergency-adult.ts`, pitfalls summary: "nitroprusside with raised ICP" changed to "nitroprusside in acute cerebrovascular disease" (matches Row 9; the ICP claim was removed from the node text but not the summary).
+4. Citation [4] (ACOG CO 767): DOI 10.1097/AOG.0000000000003075 added (wiki row, fetched 2026-10-27).
+5. Citation [6] (2022 ACC/AHA aortic guideline): DOI replaced with the Circulation DOI 10.1161/CIR.0000000000001106, Circulation 2022;146(24), per the wiki row. The JACC DOI 10.1016/j.jacc.2022.08.004 is not used.
+
+Checks after edits: `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` clean. `node --test --test-name-pattern="HTNE" scripts/new-calculators.test.mjs` 3/3 pass.
+
+### Remaining flags (not changed; each needs Andy's decision or a primary source)
+
+**Patient safety, directive text**
+- **P1. Disposition (2025 rec 1, COR 1, LOE B-NR, read in full earlier):** ICU admission is recommended for hypertensive emergency. The dispo node still sends "stable after the first hour, organ injury treated" to admit or observe, and the ICU branch names "ICU or step-down" (step-down is not in the guideline). Row 2 was not applied. Andy to decide the branch.
+- **P2. Cocaine or sympathomimetic branch:** the node now names phentolamine 5 mg IV, repeat every 10 min, max 50 mg per 24 h (Table 26). No benzodiazepine or other first-line step is stated, because no source was read for it. Cocaine-associated hypertension is a toxicology decision. Andy and toxicology to decide the first step and whether the phentolamine branch stays in the first position. Until then the branch is incomplete for a clinician acting on it.
+- **P3. Labetalol pregnancy entry (`drug-store.ts`, labetalol, indication "Severe hypertension pregnancy"):** still shows the ACOG escalating protocol (20 mg, 40 mg, 80 mg, 80 mg, max 300 mg) and target BP 140-150/90-100. ACOG CO 767 was not read, so these numbers are unverified. Under the removal rule (RECOMMENDATIONS, citation gate and the hydralazine pregnancy precedent) they should be removed or verified. This is a titration number, so it is flagged, not removed.
+- **P4. Clevidipine "usual maintenance 4-6 mg/h"** (drug-store acute stroke, ICH and SAH rows, and the drugs-htn hypertensive-emergency addition): not verified against the label or Table 26 this run. Verify or remove.
+- **P5. Nitroglycerin ACS start "5-10 mcg/min"** (drug-store): Table 26 gives a start of 5 mcg/min, titrated by 5 mcg/min every 3-5 min, max 200 mcg/min. The existing entry is an existing-entry edit that needs Andy's OK. Conservative default is the 5 mcg/min start.
+- **P6. Dispo, first-hour, and compelling-condition goals** (F1, F7, F8 above): the first-hour node follows Ruling 7. The 2025 "<140 mmHg for most compelling conditions" goal is stated for "most other compelling conditions" without naming them. Andy to confirm which conditions the <140 goal covers.
+- **P7. Nicardipine drugs-htn text** says "Sources agree (Cardene IV label; 2017 ACC/AHA Table 19)". The 2017 guideline is superseded (see C1 below). Dose content matches the label (F16). Change the citation to the label plus 2025 Table 26 once Andy approves.
+- **P8. Nitroprusside drug entry**: the cyanide threshold text ("buffering capacity exceeded in under one hour at 10 mcg/kg/min") is not reconciled with Table 26 (infusion ≥3 mcg/kg/min and/or ≥3 days). Both thresholds should be shown or the entry checked against the label. Not verified this run.
+- **P9. Phentolamine entry**: "5 mg IV or IM" is kept. The IM route is label-based for pheochromocytoma (not re-read this run); the repeat interval and cap are from Table 26.
+
+**Citation gate (guideline-versions.md), flagged, not applied**
+- **C1. Tree citation [1] and info-page citation [1] are the 2017 ACC/AHA HBP guideline.** The wiki lists it as superseded by the 2025 guideline. The gate says FLAG. The tree uses [1] for definitions and general statements; the calculator uses [1] for the 2025 guideline, so the same number means different documents in two places. Andy to decide: renumber the tree to the 2025 guideline [10] everywhere the statement is still supported, or keep [1] as a labelled historical source.
+- **C2. Citation [5] (Greenberg 2022, ICH), [7] (Lenders 2014, pheochromocytoma), [9] (Varon 2008), [3] (Rhoney 2009):** none appear in guideline-versions.md. The ICH branch and the "alpha before beta" claim rest on [5] and [7]. The gate says flag. Keep or remove after the primary source is read.
+- **C3. Citation [2] (Marik and Varon 2007):** not a guideline, so the gate does not apply directly. The text was read from a third-party copy in an earlier pass. Confirm against the CHEST publisher copy before deploy.
+- **C4. Citation [8] (Powers 2019):** in the wiki table. Table 5 (the pre-lysis 185/110 table) was not read. The consult now cites [10] section 5.3.9.2 for the thresholds, which was read. Read Table 5 to close this.
+- **C5. Isselbacher DOI:** corrected above (auto-fix 5). The earlier sign-off note that the JACC DOI was unrelated is contradicted by the 2026-10-27 wiki row. Use the Circulation DOI.
+
+**Consistency**
+- **K1. Stroke thresholds (tree stroke node, calculator line, drug-store nicardipine and labetalol rows):** 185/110 before alteplase and 180/105 for 24 h after, from 2025 section 5.3.9.2 (read). The 2019 Table 5 pre-lysis check is still open (C4).
+- **K2. Pregnancy severe-range threshold:** removed from the node and calculator (Row 11). The drug-store pregnancy rows still state "SBP ≥160 or DBP ≥110" in the labetalol and nifedipine entries (P3 covers labetalol). Keep the threshold out of every entry until ACOG CO 767 is read.
+
+### Re-derived numbers (primary text read in the earlier pass, unchanged this run)
+- Definition: SBP >180 and/or DBP >120 with acute target-organ damage (2025 section 6.2 synopsis, rec 1). Matches the tree and the calculator.
+- Dissection: SBP ≤120 mmHg within 20 min, beta-blocker first (2025 Table 27; Ruling 6).
+- Most other compelling conditions: SBP <140 mmHg in the first hour (2025 rec 2, read in full earlier).
+- General case: SBP reduced by no more than 25% in the first hour, then gradual reduction over 24-48 h (2025 rec 3 supportive text; Ruling 7).
+- Labetalol IV: 20 mg over 2 min, then 40-80 mg every 10 min, cumulative max 300 mg (label, abfc6b75). Matches the drugs-htn addition.
+- Nicardipine IV: 5 mg/h, +2.5 mg/h every 5-15 min, max 15 mg/h; contraindicated in advanced aortic stenosis (label). Matches.
+- Esmolol: loading 500 mcg/kg over 1 min, 50 mcg/kg/min, max 300 mcg/kg/min for hypertension (label). Matches. The beta-blocker contraindication line is from Table 26, not the label.
+- Hydralazine (emergency row): 10 mg IV, max initial 20 mg, repeat every 4-6 h (Table 26, read earlier). The cumulative 200 mg per 24 h limit is not added; Andy's decision (open from the earlier pass).
+- Phentolamine (catecholamine excess, including cocaine): 5 mg IV, repeat every 10 min, cumulative max 50 mg per 24 h (Table 26, read earlier).
+- Phenoxybenzamine: label maximum 20 mg BID shown beside the 1 mg/kg/day Endocrine figure, unresolved (F13). No maxDose set.
+
+### Verdict
+**REVISE.** Not safe to deploy. Open patient-safety items: P1 (ICU disposition against 2025 rec 1), P2 (cocaine branch with no first-line step), P3 (unverified labetalol pregnancy titration numbers), P4 (clevidipine maintenance not re-verified), P5 (nitroglycerin start). Each needs Andy's ruling, a primary source, or both. The citation-gate items C1 to C4 must be resolved before the consult is signed. Deploy only after Andy rules on P1 to P5 and C1, and this audit is re-run.
+

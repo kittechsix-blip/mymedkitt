@@ -255,3 +255,72 @@ Verdict: REVISE. The SCAD content is well sourced for the parts that are settled
 ## Fixed after Dr. K audit (2026-10-27, mechanical only)
 - Amlodipine (`src/data/new-content/drugs-sbo-scad.ts`): the 2.5 mg start is now attributed to the label hypertension section (dosing 2.1). The angina section gives only "5-10 mg, with the lower dose suggested in the elderly and in patients with hepatic insufficiency". Label checked on DailyMed setid abd6a2ca, 2026-10-27.
 - `src/data/trees/scad-vasospasm.ts`: draft, sign-off and "Andy to rule" wording removed from node text, options and summaries. The beta-blocker node now reads as evidence with no directive. Conflicts are still shown. No number changed.
+
+## Applied recommendations (2026-10-27)
+
+Source: `research/new-content/RECOMMENDATIONS.md`, SCAD rows 4-12. Files changed: `src/data/trees/scad-vasospasm.ts`, `src/data/new-content/scad-vasospasm-info.ts` (citation lists kept identical). No deploy, commit, or push.
+
+- **Row 4 (nitrate link): applied.** Spasm treatment node now links `[isosorbide mononitrate](#/drug/isosorbide-mononitrate/vasospastic-angina)`. The hint matches the indication string in `drugs-sbo-scad.ts` ("Vasospastic angina (second-line add-on to calcium channel blocker)"). The link stays dead until the drugs agent registers the entry in `drug-store.ts`. The ISDN link is removed from this consult.
+- **Row 5 (CCB and ISMN doses): applied.** Diltiazem, amlodipine, and verapamil are named with no doses, and ISMN is named with "dose per cardiology." Source: 2023 AHA/ACC Table 17 (ref 3), the verapamil example text is kept as the table's named example.
+- **Row 6 (spasm threshold): applied-with-change, number removed (unverified).** Beltrame 2017 full text could not be opened. The journal page returned HTTP 429 and the search excerpt only reproduces the ">90%" wording through a guideline table. Per the rule, the number is removed. Both spasm definitions now read "marked focal constriction" (ref 6). The fallback "about 90%" was also not confirmed, so it is not used.
+- **Row 7 (PDE-5 windows): applied-with-change.** The 24 h sildenafil/vardenafil window is removed: the sildenafil (Viagra) label (labeling.pfizer.com, set 652) says nitrates are contraindicated and that the safe interval is unknown, so no 24 h figure is supported. Tadalafil keeps a 48 h figure from the Cialis label (Lilly medical information page and label excerpt): nitrates contraindicated, allowed only in a life-threatening situation, at least 48 h after the last dose. ACC/AHA CCD 2023 was not used for the window. The ACC/AHA-cited 2011 review (old ref 9) is replaced by the Cialis label (new ref 7). Label versions still need pinning at sign-off.
+- **Row 8 (monitoring duration): applied.** All "3 to 5 days" numbers removed (critical action 5, conservative node, monitored-admission node and recommendation, admission summary, Do-NOT admission item). Wording is "monitored admission; duration with cardiology." The earlier contradiction between the critical action and the node is also resolved.
+- **Row 9 (contraception): applied.** The option list (vasectomy, tubal ligation, LNG-IUD) is deleted. The line now reads "discuss future-pregnancy risk with cardiology and OB." The general avoid-pregnancy and exogenous-hormone sentence is kept, as the row did not ask for its removal.
+- **Row 10 (takotsubo and myocarditis): applied.** Kept as labelled "(expert opinion)" with no numbers and no citation. The takotsubo consensus citation (old ref 7) is removed.
+- **Row 11 (citations): applied within the consult.** Final list is 1-6 unchanged (draft tags stripped from the text), plus 7 = Cialis label, 8 = sildenafil label, 9 = ESC e-journal summary (old 9, 10, 11 renumbered). Old refs 7, 8 (Ong 2014 ACh study) and 12 (JCS 2023) are removed from the text and lists. Their claims are carried by ref 3 or dropped. The guideline-versions.md rows for refs 1-3 are NOT done here (other agent owns that file).
+- **Row 12 (toolbar registration): already applied, no edit.** `TOOLBAR_SCADV` is imported and registered as `'scad-vasospasm': TOOLBAR_SCADV` in `src/data/toolbar-configs.ts` (present in HEAD). The toolbar's targets exist.
+
+Verification after edits: citation numbers used are 1-9 and all defined. `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` exits 0.
+
+Still open (not in the rows): "not sourced here" status notes in the recurrence, anticoagulation, and admission nodes; the DAPT, beta-blocker, and PCI decisions in the C-list above; Dr. K's F-items.
+
+## Applied recommendations (2026-10-27), drugs pass
+Source: `src/data/new-content/drugs-sbo-scad.ts`.
+- Row 5 drug doses: **applied**. Diltiazem, amlodipine, verapamil and isosorbide mononitrate now name the drug with "dose per cardiology" and no dose. Doses were removed because the label and the 2023 AHA/ACC Table 17 do not agree for these drugs (verapamil 40 mg BID in the table versus 80-120 mg TID in the label; diltiazem and amlodipine not named as vasospasm doses in the table). ISMN's asymmetric 7 h schedule line also removed.
+- Row 4 nitrate link: **not in drugs scope**. The tree link is a consult-tree change; the ISMN entry is registered (`isosorbide-mononitrate`), so the tree can be repointed by the tree owner.
+- Rows 6-12: not in drugs scope (citation and tree changes).
+- Nitroglycerin SL addition untouched.
+
+## Dr. Kitlowski RE-AUDIT (2026-10-27, after Andy's rulings and applied recommendations)
+
+**Verdict: REVISE.** Not safe to deploy. One wiring defect blocks any load, and several items remain open for Andy.
+
+### Primary sources opened this run
+- ESC-ACCA 2018 (Adlam, Eur Heart J 39:3353, doi 10.1093/eurheartj/ehy080), journal full text via WebFetch: "Thrombolysis is therefore contraindicated for the acute management of SCAD." CONFIRMED. The paper does not mention heparin. It says "most authors advocate acute dual antiplatelet therapy (usually with aspirin and clopidogrel)" and that anticoagulation "should probably be limited to acute administration during revascularization procedures". It describes beta-blocker treatment with a reduced risk of recurrence as a non-randomized finding.
+- Sildenafil (Viagra) US PI, labeling.pfizer.com set 652, Section 4.1: nitrates contraindicated; "After patients have taken VIAGRA, it is unknown when nitrates, if necessary, can be safely administered." CONFIRMED for the "interval unknown" statement. No 24 h window is stated.
+- Tadalafil (Cialis) PI: PDF was unreadable in WebFetch; DailyMed search returned no result. The 48 h interval is NOT confirmed. Per the sourcing rule the number was removed (see edits below).
+- Firecrawl credits exhausted this run; WebFetch used instead.
+- Not re-opened: Beltrame 2017 (spasm threshold; the number was already removed per Row 6), Table 17 (2023 AHA/ACC), ISMN and verapamil labels (no change this run).
+
+### Edits made in this re-audit (consult files only)
+1. `src/data/trees/scad-vasospasm.ts`, node `scad-vasospasm-stabilise`: the ESC attribution changed from the ESC secondary summary to ESC-ACCA 2018 primary wording ("most authors advocate acute dual antiplatelet therapy, usually aspirin and clopidogrel") [2]. The pre-angiography ACS directive is unchanged (Andy ruling C1).
+2. `scad-vasospasm.ts`, node `scad-vasospasm-scad-beta`: "The ESC summary recommends them in all patients" now carries the attribution to the secondary summary [9]. ESC-ACCA 2018 [2] is added and describes the recurrence finding as non-randomized. The directive "suggest a beta-blocker" is unchanged (Andy ruling C4). Node citation array changed from [4,1,9] to [4,1,2,9].
+3. `scad-vasospasm.ts`, node `scad-vasospasm-spasm-treat`, and the same text in `scad-vasospasm-info.ts` (Do-NOT admission/discharge item): the tadalafil "at least 48 hours after the last dose" number is REMOVED because it could not be confirmed. Text now reads "The tadalafil label contraindicates nitrates. The post-dose interval is not confirmed in this review; do not give a nitrate without a documented PDE-5 washout set by pharmacy or cardiology." This is a safety-window change. Andy must confirm the window from the label before a number is reinstated.
+4. Ref 7 (both files): the "48 hours" text is removed; now "Nitrates contraindicated. Time interval after the last dose not confirmed." The two citation lists remain identical.
+Typecheck: `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` printed no errors.
+
+### Blocking (not auto-fixed; shared files, integrator or Andy)
+- **B1. Entry node id mismatch (blocks load).** `src/services/tree-service.ts` (scad-vasospasm loader) and `src/data/categories.ts` (line ~2104) both set `entryNodeId: 'scadv-start'`. The tree's start node is `scad-vasospasm-start`. Starting the consult would target a node that does not exist. Fix: change both to `'scad-vasospasm-start'`. Not edited here because these are shared registration files.
+- **B2. Cross-file gate.** The fallback tree-service nodeCount/citation wiring cannot be verified until B1 is fixed and the consult is run.
+
+### Open flags for Andy (not changed; directive or sourcing decisions)
+- **F-A. Stop anticoagulation wording.** The critical action and stabilise node say "stop systemic anticoagulation ... once SCAD is confirmed." AHA 2018 says "consider stopping." Andy ruled C1 as "stop", so the ruling is kept, but the cited source is weaker. Andy to confirm the stronger wording is intended.
+- **F-B. Pregnancy and hormone line (followup node and Do-NOT item).** "Patients with SCAD are generally advised to avoid both pregnancy and exogenous hormones" is cited to [1] and has not been confirmed in the AHA 2018 text. Row 9 asked only for the contraception option list to be deleted. Andy to keep or source it.
+- **F-C. Cardiac rehab and statin lines (followup node).** "discussed in AHA 2018, with individualized exercise thresholds" and "no association with recurrence was found" are cited to [1] and not re-verified in this pass. Source or label as expert opinion.
+- **F-D. DAPT attribution (antithrombotic node).** "described as generally accepted in the ESC summary [9]" remains a secondary-summary attribution. The ESC-ACCA primary [2] says "most authors advocate acute DAPT". Andy to decide whether to switch attribution.
+- **F-E. Tadalafil PDE-5 window.** See edit 3. The window needs a label read before the nitrate steps go live.
+- **F-F. Citation gate.** guideline-versions.md still has no rows for refs 1-9. Under the gate, all remain FLAGGED until DOIs are fetched and rows are added by the table owner.
+- **F-G. Spasm threshold.** Row 6 removed the ">90%" number. Beltrame 2017 was not re-opened (no primary text retrieved). Diagnostic criterion remains "marked focal constriction" until Andy or a re-read decides.
+- **F-H. Empiric treatment with no testing (spasm-provocation option).** Unsourced; flagged for local protocol.
+- **F-I. Drug links.** `#/drug/isosorbide-mononitrate/vasospastic-angina` resolves to a registered entry (confirmed in drugs-sbo-scad.ts and the drug-store merge loop). The `aspirin/acs`, `clopidogrel/acs`, and `nitroglycerin/acs` links open ACS loading rows inside a SCAD node. Andy's ruling on antiplatelets covers the node text; the links still show ACS loading doses. Andy to confirm or remove them.
+
+### Checks passed this re-audit
+- No em dashes in the tree, info, toolbar, or drugs-sbo-scad files.
+- Node ids (21) match categories.ts nodeCount (21). All internal `#/node/` links resolve to existing ids.
+- Citation numbers 1-9 are defined in both lists and used in the tree. The two lists are identical.
+- Toolbar targets (`scad-vasospasm-steps`, `-route`, `-spasm-recognition`, `-scad-stratify`, `-disposition`) exist. Toolbar is registered in toolbar-configs.ts.
+- INFO_PAGES_SCADV is spread into info-pages.ts; stop and steps pages present.
+- Andexanet and anticoag-reversal were not in scope and were not touched.
+
+### Dr. Kitlowski signoff (re-audit)
+REVISE. Fibrinolysis contraindication and the "suggest beta-blocker" directive are now sourced to the primary text as far as the sources allow. Blocker B1 (entry node id) must be fixed before any deploy. F-A through F-I need Andy's decision or a source read before APPROVE.

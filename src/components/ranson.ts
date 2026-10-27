@@ -42,8 +42,8 @@ export interface RansonResult {
 }
 
 /**
- * Band cutoffs 0-2 / 3-4 / 5-6 / 7 or more follow a reference summary of Ranson 1974
- * (primary table not reviewed). The top band is 7 or more (maximum 11 or 10).
+ * Commonly used bands 0-2 / 3-4 / 5-6 / 7 or more (not a sourced cutoff set).
+ * The top band is 7 or more (maximum 11 or 10).
  */
 export function ransonBand(total: number): RansonBand {
   if (total <= 2) return 'low';
@@ -156,12 +156,12 @@ const ADMISSION_FIELDS: RansonCalcField[] = [
   { name: 'wbc', label: 'WBC over cutoff', description: 'Non-gallstone >16,000/mm3; gallstone >18,000/mm3', points: 1, type: 'toggle' },
   { name: 'glucose', label: 'Glucose over cutoff', description: 'Non-gallstone >200 mg/dL; gallstone >220 mg/dL', points: 1, type: 'toggle' },
   { name: 'ldh', label: 'LDH over cutoff', description: 'Non-gallstone >350 IU/L; gallstone >400 IU/L', points: 1, type: 'toggle' },
-  { name: 'ast', label: 'AST over cutoff', description: 'Non-gallstone >250 (1976 abstract gives Sigma-Frankel units per 100 mL; not converted to IU/L). Gallstone cutoff and units are less firmly sourced: provisional.', points: 1, type: 'toggle' },
+  { name: 'ast', label: 'AST over cutoff', description: 'Non-gallstone >250 Sigma-Frankel units/100 mL (1976 abstract; convert per lab). Gallstone cutoff: provisional.', points: 1, type: 'toggle' },
 ];
 
 const H48_FIELDS: RansonCalcField[] = [
   { name: 'hematocritFall', label: 'Hematocrit fall >10% (48 h)', points: 1, type: 'toggle' },
-  { name: 'bunRise', label: 'BUN rise after IV fluid (48 h)', description: 'Non-gallstone >5 mg/dL (1976 abstract). Gallstone >2 mg/dL: value and operator not confirmed in the sources reviewed.', points: 1, type: 'toggle' },
+  { name: 'bunRise', label: 'BUN rise after IV fluid (48 h)', description: 'Non-gallstone >5 mg/dL (1976 abstract). Gallstone >2 mg/dL: provisional, not confirmed against the primary text.', points: 1, type: 'toggle' },
   { name: 'calcium', label: 'Serum calcium <8 mg/dL (48 h)', points: 1, type: 'toggle' },
   { name: 'pao2', label: 'PaO2 <60 mmHg (48 h, non-gallstone only)', points: 1, type: 'toggle' },
   { name: 'baseDeficit', label: 'Base deficit >4 mEq/L (48 h)', description: 'Non-gallstone >4 mEq/L. Gallstone: one reference >4, other teaching >5; the sources differ. Provisional in gallstone mode.', points: 1, type: 'toggle' },
@@ -177,14 +177,14 @@ export const RANSON_CALCULATOR: RansonCalculatorDef = {
   subtitle: 'Acute pancreatitis: admission and 48-hour score',
   description: 'Score the five admission items on arrival. Score the 48-hour items at 48 hours. Turn on the gallstone switch for gallstone cutoffs (provisional). The final score needs the admission items and every 48-hour item resulted.',
   fields: [
-    { name: 'gallstone', label: 'Gallstone etiology (gallstone cutoffs)', points: 0, type: 'toggle', description: 'Switch, adds no points. Off = non-gallstone cutoffs. On = gallstone set, provisional.' },
+    { name: 'gallstone', label: 'Gallstone etiology (gallstone cutoffs)', points: 0, type: 'toggle', description: 'Switch, adds no points. On only when a biliary cause is confirmed; otherwise off (non-gallstone cutoffs, including unknown etiology). On = gallstone set, provisional.' },
     ...ADMISSION_FIELDS,
     { name: 'h48Resulted', label: '48-hour items with a result back (count)', description: 'Enter how many of the 48-hour items below have a result (6 non-gallstone, 5 gallstone). The final score appears only when all have a result; an item with no result is NOT the same as No.', points: 0, type: 'number' },
     ...H48_FIELDS,
   ],
   results: [],
   thresholdNote:
-    '**THE SCORE IS INCOMPLETE BEFORE 48 HOURS.**\n\n**BANDS (cutoffs from a reference summary of Ranson 1974; primary table not reviewed):**\n• **0-2:** lowest band\n• **3-4:** commonly taught as severe (teaching convention, not sourced)\n• **5-6:** band only\n• **7 or more:** top band (maximum 11 non-gallstone, 10 gallstone)\n\n**CAVEAT:** Ranson predicts risk. It does not direct therapy. Use with BISAP and Atlanta organ-failure status.',
+    '**THE SCORE IS INCOMPLETE BEFORE 48 HOURS.**\n\n**BANDS (commonly used bands, not a sourced cutoff set):**\n• **0-2:** lowest band\n• **3-4:** commonly taught as severe (teaching convention, not sourced)\n• **5-6:** band only\n• **7 or more:** top band (maximum 11 non-gallstone, 10 gallstone)\n\n**CAVEAT:** Ranson predicts risk. It does not direct therapy. Use with BISAP and Atlanta organ-failure status.',
   citations: [
     'Ranson JH, Rifkind KM, Roses DF, Fink SD, Eng K, Spencer FC. Prognostic signs and the role of operative management in acute pancreatitis. Surg Gynecol Obstet. 1974;139(1):69-81 (PMID 4834279).',
     'Ranson JH, Rifkind KM, Turner JW. Prognostic signs and nonoperative peritoneal lavage in acute pancreatitis. Surg Gynecol Obstet. 1976;143(2):209-219 (PMID 941075).',

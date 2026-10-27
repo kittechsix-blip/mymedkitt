@@ -130,3 +130,56 @@ F2 RULED: existing critical action reworded to 'BISAP >=3 = high risk, ICU candi
 
 ### Ruling 5 (Andy, 2026-10-27)
 F1 RULED: Ranson calculator now takes a count of 48-hour items resulted; final score only when all are resulted, otherwise INCOMPLETE with the count shown (an unmeasured item no longer counts as No). 18/18 calculator tests pass.
+
+## Applied recommendations (2026-10-27)
+
+Rows 3-10 of `research/new-content/RECOMMENDATIONS.md` (Ranson). Files changed: `src/data/new-content/acute-pancreatitis-ranson-nodes.ts`, `src/components/ranson.ts`. Tree wiring and the test file were not changed (no row required it). Sources read this session: PubMed 941075 (Ranson 1976, abstract read); PubMed 4834279 (Ranson 1974, record only, no abstract); PubMed 7051819 (Ranson 1982, record only, no abstract). Gallstone numbers were checked only against secondary calculator pages in search snippets, not against the primary text.
+
+- Row 3, AST units: **applied.** Non-gallstone shows ">250 Sigma-Frankel units/100 mL (1976 abstract; convert per lab)". Gallstone uses the same unit wording. No IU/L conversion. Source: 941075 abstract ("over 250 Sigma Frankel units per cent").
+- Row 4, gallstone base deficit: **applied.** Both values shown (>4 in one reference, >5 in another); the gallstone 48-hour block is labelled provisional. Non-gallstone >4 matches 941075. Gallstone values: not primary-verified (7051819 has no abstract).
+- Row 5, BUN operator: **applied.** Non-gallstone ">5 mg/dL" matches 941075 ("increase over 5 mg%"). Gallstone ">2 mg/dL" kept and labelled provisional. Not primary-verified.
+- Row 6, band cutoffs: **applied-with-change.** [22] and [24] removed from all band nodes and band citation arrays (now [3] only, for the Atlanta statements). Bands are called "commonly used bands, not a sourced cutoff set". Calculator banding text updated to match. Source for the removed attribution: 4834279 has no abstract, so the attribution could not be confirmed.
+- Row 7, gallstone cutoffs citing [24]: **applied (keep, provisional).** Gallstone mode is kept and labelled provisional in the variant node, the gallstone admission node, the gallstone 48-hour block and the calculator switch text. Caveat for Andy: the primary 1982 review (7051819) has no retrievable abstract, so the gallstone AST, WBC, glucose, LDH, age, base-deficit and BUN values remain unconfirmed against the primary text. Per the rule "if you cannot confirm a number, remove it", these were NOT removed because row 7 explicitly directs keeping gallstone mode. Andy should decide whether to hide the gallstone branch.
+- Row 8, draft tags in text: **already applied.** Grep of both files finds no draft, TODO, DRAFT or patch tags.
+- Row 9, unknown etiology: **applied.** Rule now reads: use the gallstone set only when a biliary cause is confirmed; otherwise the non-gallstone set, including unknown etiology. Option labels and the calculator switch text updated to match.
+- Row 10, unsourced [3]: **applied.** [3] removed from "Ranson does not direct therapy" in the start node.
+
+Rows not applied: none removed. No row was left unapplied.
+
+Verification: `node --experimental-strip-types --test scripts/new-calculators.test.mjs` passes all five Ranson tests. Filtered `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` shows no errors in Ranson or acute-pancreatitis files. Citations 22-24 are still referenced from the start, admission and 48-hour nodes, so each [n] remains used and defined.
+
+## Dr. Kitlowski re-audit after rulings and applied recommendations (2026-10-27), Ranson additions only
+
+Verdict: **REVISE. Not safe to deploy yet.** Remaining flags below need Andy's decision. One wording fix was applied (auto-fix class, citation attribution); no number changed.
+
+### Primary sources re-opened this run (PubMed efetch)
+- PMID 941075 (Ranson 1976): abstract re-read. Non-gallstone set matches the node and calculator: age >55, glucose >200, WBC >16,000, LDH >350, AST >250 Sigma Frankel units per cent; 48 h: Hct fall >10 points, calcium <8, base deficit >4 mEq/L, BUN increase >5 mg%, sequestered fluid >6 L, PaO2 <60. Early-sign association: 24 of 38 with three or more signs seriously ill or died, 1 of 162 with fewer than three. "Serious illness" is not defined in the abstract. The 1976 cohort was mixed etiology (207 alcoholic, 51 biliary, 42 other), so it does not source a gallstone set.
+- PMID 4834279 (Ranson 1974) and PMID 7051819 (Ranson 1982): PubMed records only, no abstract. Band cutoffs and every gallstone number remain unverified against primary text.
+- PMID 23100216 (Banks 2013, parent #3): re-read. Persistent organ failure is organ failure >48 h. Matches ranson-result-low and ranson-start.
+- Web search for the 1982 gallstone cutoffs returned only secondary pages that disagree with each other (parameter counts, gallstone thresholds). No primary text was reachable. Firecrawl credits were exhausted, so no further scrape was possible.
+
+### Auto-fix applied (this run)
+- `src/data/new-content/acute-pancreatitis-ranson-nodes.ts`, gallstone admission node (`acute-pancreatitis-ranson-admit-gs`): the AST bullet attributed Sigma-Frankel units to the gallstone set by pointing at the 1976 abstract. The 1976 units belong to the non-gallstone set. Wording changed to "units not verified for this set". Number unchanged (>250).
+
+### Still open (flags for Andy, patient-safety tier)
+- **R1 Band cutoffs 0-2 / 3-4 / 5-6 / 7 or more.** Clinician-facing numbers with no primary source. Labels in the result nodes ("commonly taught as severe" for 3-4, "top band" for 7+) and the calculator BAND_TEXT depend on them. The rule for unverifiable numbers is removal. Andy decides: keep as labelled provisional (current state) or remove the banding and show totals only. Blocks APPROVE.
+- **R2 Gallstone set provisional numbers.** Admission (age >70, WBC >18,000, glucose >220, LDH >400, AST >250), 48-hour (BUN >2, base deficit >4 vs >5, sequestered fluid >4 L) rest on 7051819, which has no abstract. Row 7 kept gallstone mode per Andy's approval, which overrides the remove-if-unconfirmed default for this set only. Andy decides whether to hide the gallstone branch until full text is read. Blocks APPROVE.
+- **R3 Critical action vs node wording.** Parent critical action (`ACUTE_PANCREATITIS_CRITICAL_ACTIONS`, `ap-severity`) reads "Ranson ≥3 flags severe disease" (Andy's ruling text). The start and 3-4 nodes say the same threshold is "commonly taught as severe, not a sourced cutoff". The 1976 association supports "associated with serious illness or death", not a severity band. Not edited (Andy's ruling). Andy confirms he wants this exact wording or a version closer to the 1976 association. Does not by itself block if Andy confirms.
+- **R4 AST units (non-gallstone).** Node shows ">250 Sigma-Frankel units/100 mL (convert per lab)". Primary-supported. Clinician-facing IU/L conversion is intentionally absent. Residual risk: lab AST reported in IU/L will be compared against a Sigma-Frankel number. Andy confirms the convert-per-lab wording is acceptable. Non-blocking.
+- **R5 Etiology switch.** Rule is now "gallstone set only when biliary cause confirmed; otherwise non-gallstone". Matches the Ranson 1976 cohort split. Not sourced to a rule, which is workflow, Andy's call. Non-blocking.
+
+### Drug-store
+No drug-store entries are linked from the Ranson nodes or the acute-pancreatitis consult. `research/new-content/drug-store-changes.md` has no acute-pancreatitis rows. Nothing to re-audit.
+
+### Verified as matching
+- Calculator bands 0-2 / 3-4 / 5-6 / 7+ match the node bands. Max totals 11 non-gallstone, 10 gallstone.
+- Calculator registration `ranson` (calculator.ts) and toolbar `ranson` present. Calculator final score requires all 48-hour items resulted (Andy ruling F1).
+- Node ids referenced from Ranson nodes exist: `acute-pancreatitis-ranson-start`, `ap-complications-q`, `ap-severe-resus`, `ap-dispo-complicated`. Citation numbers 3, 4, 22, 23, 24 are all defined (RANSON_CITATIONS plus parent).
+
+### Path to APPROVE
+1. Andy decides R1 (keep bands provisional, or remove banding).
+2. Andy decides R2 (gallstone branch: keep provisional or hide).
+3. Andy confirms R3 wording.
+Then re-audit once more. R4 and R5 do not block.
+
+Firecrawl credit notice (verbatim from the tool): https://firecrawl.dev/pricing

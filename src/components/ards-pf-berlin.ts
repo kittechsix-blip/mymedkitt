@@ -132,7 +132,7 @@ export const ARDS_PF_BERLIN_CALCULATOR: CalculatorDefinition = {
     // PROSEVA enrolled intubated patients only. Prone entry is not shown for non-invasive support.
     const prone = support === 'invasive' && meetsProneEntry(pf, fio2, peep);
     const proneLine = prone
-      ? '\n\n**PRONE ENTRY:** meets PROSEVA-type criteria (P/F below 150, FiO2 0.6 or more, PEEP 5 or more). Start prone. Session length: see the prone node (ESICM more than 16 h/day; ATS more than 12 h/day).'
+      ? '\n\n**PRONE ENTRY:** Severe ARDS (P/F <150, FiO2 ≥0.6, PEEP ≥5), invasive ventilation. Start prone after screening. Session length: see the prone node (ESICM 16 consecutive hours or more; ATS more than 12 h/day in severe ARDS).'
       : '';
 
     let label: string;
@@ -156,9 +156,9 @@ export const ARDS_PF_BERLIN_CALCULATOR: CalculatorDefinition = {
         body = '**MORTALITY (BERLIN COHORT):** 27% (95% CI 24 to 30)\n\n**MANAGEMENT:**\n• Protective VT at 6 mL/kg PBW, plateau at or below 30\n• Reassess the ratio on set PEEP as the picture changes';
         break;
       case 'mild-capped':
-        label = 'Mild ARDS (Berlin), capped on non-invasive support';
+        label = 'Cannot classify beyond mild (non-invasive)';
         colorVar = '--color-warning';
-        body = '**CAPPED AT MILD:** Berlin grades moderate or severe only on invasive ventilation with PEEP of 5 or more. This ratio is 200 or below, so the grade is capped at mild on CPAP or NIV.\n\n**NEXT:**\n• Reassess after an ABG on invasive settings if intubated\n• Mortality cohort figure for mild (invasive Berlin cohort): 27% (95% CI 24 to 30)';
+        body = '**CANNOT CLASSIFY BEYOND MILD:** Berlin grades moderate or severe only on invasive ventilation with PEEP of 5 or more. This ratio is 200 or below on CPAP or NIV, so no severity grade beyond mild is assigned.\n\n**NEXT:**\n• Reassess after an ABG on invasive settings if intubated\n• Non-intubated patients: the 2023 global definition sets the diagnosis; this app assigns no grade beyond mild';
         break;
       case 'peep-below-5':
         label = 'PEEP below 5';

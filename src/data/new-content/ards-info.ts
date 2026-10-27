@@ -35,11 +35,11 @@ export const INFO_PAGES_ARDS: Record<string, InfoPage> = {
       },
       {
         heading: '\u{1F6D1} Do NOT start continuous paralysis as routine',
-        body: `ESICM 2023 strongly recommends against routine continuous neuromuscular blockade in moderate to severe non-COVID ARDS. ROSE showed no mortality benefit from early continuous blockade. Treat the dyssynchrony cause first. [7,10] [Blockade check](#/node/ards-nmb-check) | [Blockade](#/node/ards-nmb)`,
+        body: `ESICM 2023 strongly recommends against routine continuous neuromuscular blockade in moderate to severe non-COVID ARDS. ATS 2024 conditionally suggests it in early severe ARDS. ROSE showed no mortality benefit from early continuous blockade. Treat the dyssynchrony cause first. [7,8,10] [Blockade check](#/node/ards-nmb-check) | [Blockade](#/node/ards-nmb)`,
       },
       {
         heading: '\u{1F6D1} Do NOT delay prone when the entry ratio is met',
-        body: `Prone ventilation reduced 28-day mortality in severe ARDS when sessions were long enough. Check screening, then turn. [6,7,8] [Prone criteria](#/node/ards-prone) | [Prone schedule](#/node/ards-prone-result)`,
+        body: `Prone ventilation reduced 28-day mortality in severe ARDS (P/F <150, FiO2 ≥0.6, PEEP ≥5) on invasive ventilation when sessions were long enough. Check screening, then turn. [6,7,8] [Prone criteria](#/node/ards-prone) | [Prone schedule](#/node/ards-prone-result)`,
       },
       {
         heading: '\u{1F6D1} Do NOT treat ECMO as a proven survival step',
@@ -71,7 +71,7 @@ export const INFO_PAGES_ARDS: Record<string, InfoPage> = {
       },
       {
         heading: 'Stabilize',
-        body: `- [Size VT on predicted body weight; starting VT is an open conflict (6 trial, 8 protocol)](#/node/ards-vent-set)
+        body: `- [Size VT on predicted body weight; start 6 mL/kg PBW (2008 protocol summary starts at 8)](#/node/ards-vent-set)
 - [Keep plateau at or below 30 cmH2O](#/node/ards-vt-check)
 - [Reduce VT in 1 mL/kg steps to a 4 mL/kg floor](#/node/ards-reduce-vt)
 - [Permissive hypercapnia: rate first, VT only below pH 7.15](#/node/ards-acidosis)
@@ -80,9 +80,9 @@ export const INFO_PAGES_ARDS: Record<string, InfoPage> = {
       },
       {
         heading: 'Ventilate',
-        body: `- [Prone when P/F is below 150 on FiO2 0.6 or more with PEEP 5 or more](#/node/ards-prone)
+        body: `- [Prone for severe ARDS (P/F <150, FiO2 ≥0.6, PEEP ≥5), invasive ventilation](#/node/ards-prone)
 - [Prone session length per ESICM and ATS](#/node/ards-prone-result)
-- [No routine continuous neuromuscular blockade for non-COVID ARDS; treat dyssynchrony cause first](#/node/ards-nmb-check)`,
+- [No routine continuous neuromuscular blockade for non-COVID ARDS (ATS 2024 conditional in early severe ARDS); treat dyssynchrony cause first](#/node/ards-nmb-check)`,
       },
       {
         heading: 'Rescue',

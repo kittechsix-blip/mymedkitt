@@ -132,7 +132,12 @@ const ACETAMINOPHEN: DrugEntry = {
   dosing: [
     {
       indication: 'Headache / Analgesia',
-      regimen: '1000 mg PO or IV every 6 hours. Max 4000 mg/24h (2000 mg/24h in hepatic impairment or chronic alcohol use). IV administered over 15 minutes.',
+      regimen: '1000 mg PO or IV every 6 hours. Max 4000 mg/24h. IV administered over 15 minutes.',
+    },
+    {
+      indication: 'Analgesia - adult IV under 50 kg (Ofirmev label)',
+      regimen: '15 mg/kg IV every 6 hours (or 12.5 mg/kg every 4 hours). Max 75 mg/kg/day. For 50 kg and above, the adult dosing above applies.',
+      weightCalc: { dosePerKg: 15, unit: 'mg', maxDose: 750, label: 'IV, under 50 kg, per dose (q6h); 750 mg is 15 mg/kg x 50 kg (arithmetic cap, not a label figure)' },
     },
     {
       indication: 'Pregnancy-safe headache analgesia',
@@ -145,10 +150,13 @@ const ACETAMINOPHEN: DrugEntry = {
     },
   ],
   contraindications: ['Severe hepatic impairment or active liver disease', 'Known hypersensitivity'],
-  cautions: ['Hepatotoxicity at supratherapeutic doses (>4 g/day)', 'Reduce max dose to 2 g/day in chronic alcohol use or hepatic impairment', 'IV formulation: weight-based dosing for patients <50 kg (15 mg/kg, max 750 mg/dose)'],
+  cautions: ['Hepatotoxicity at supratherapeutic doses (>4 g/day)', 'Hepatic impairment, chronic alcohol use, malnutrition, severe hypovolemia: use caution (Ofirmev label; no fixed dose cap stated)', 'IV formulation: weight-based dosing for patients <50 kg (15 mg/kg, max 750 mg/dose)'],
   monitoring: 'LFTs if prolonged use or hepatic risk factors. Serum level if overdose suspected.',
   notes: 'First-line analgesic for SAH-associated headache. Preferred over NSAIDs (impair platelet function) and opioids (confound neurologic examination). IV onset 5-10 min vs PO 30-60 min. In thyroid storm: use for hyperthermia management. AVOID aspirin and NSAIDs — they displace T4 from thyroxine-binding globulin, increasing free (active) thyroid hormone levels.',
-  citations: ['Connolly ES Jr, et al. AHA/ASA Guidelines for management of aneurysmal subarachnoid hemorrhage. Stroke. 2012;43(6):1711-1737.'],
+  citations: [
+    'Connolly ES Jr, et al. AHA/ASA Guidelines for management of aneurysmal subarachnoid hemorrhage. Stroke. 2012;43(6):1711-1737.',
+    'Ofirmev (acetaminophen injection) US Prescribing Information. DailyMed setid 9a38f63a-8852-6dab-e053-2a95a90a90d6 (IV dosing by weight, cautions; read 2026-10-27).',
+  ],
 };
 
 const ACYCLOVIR: DrugEntry = {
@@ -1244,7 +1252,8 @@ const BUPIVACAINE: DrugEntry = {
     'IV regional anesthesia (Bier block) — bupivacaine cardiotoxicity makes it unsuitable',
   ],
   cautions: [
-    'Higher cardiotoxicity than lidocaine — accidental intravascular injection can cause refractory ventricular arrhythmia. Treatment: lipid emulsion 20% 1.5 mL/kg bolus + 0.25 mL/kg/min infusion.',
+    'Higher cardiotoxicity than lidocaine — accidental intravascular injection can cause refractory ventricular arrhythmia. Lipid rescue: follow the local LAST checklist (ASRA 2017); dose per checklist.',
+    'Total dose limit: 400 mg per 24 hours (Marcaine label, total daily maximum).',
     'Max plain dose: **2 mg/kg** (cap ~175 mg). With epi (NOT for occipital): 3 mg/kg.',
     'Always aspirate before injecting peripheral blocks — palpate occipital artery before needle insertion.',
     'Pregnancy: Category C — use with caution; lidocaine preferred when feasible.',
@@ -2088,15 +2097,15 @@ const CLEVIDIPINE: DrugEntry = {
   dosing: [
     {
       indication: 'Acute stroke BP management',
-      regimen: 'Start 1\u20132 mg/hr IV. Double dose every 90 seconds until target BP achieved. Usual maintenance: 4\u20136 mg/hr. Max 21 mg/hr (or 1000 mL per 24h due to lipid load).',
+      regimen: 'Start 1\u20132 mg/hr IV. Double dose every 90 seconds until target BP achieved. Usual maintenance: 4\u20136 mg/hr. Maximum 21 mg/hr (2025 AHA/ACC Table 26); label allows up to 32 mg/hr with limited experience (most patients need 16 mg/hr or less). Lipid limit 1000 mL per 24h.',
     },
     {
       indication: 'ICH blood pressure control (target SBP 130\u2013150)',
-      regimen: 'Start 1\u20132 mg/hr IV. Double every 90 sec until SBP 130\u2013150 mmHg. Usual maintenance 4\u20136 mg/hr. Max 21 mg/hr. Smoothest titration agent \u2014 ultra-short t\u00BD (~1 min). Avoid SBP <130 or drops >70 mmHg in first hour.',
+      regimen: 'Start 1\u20132 mg/hr IV. Double every 90 sec until SBP 130\u2013150 mmHg. Usual maintenance 4\u20136 mg/hr. Maximum 21 mg/hr (2025 AHA/ACC Table 26); label allows up to 32 mg/hr with limited experience. Smoothest titration agent \u2014 ultra-short t\u00BD (~1 min). Avoid SBP <130 or drops >70 mmHg in first hour.',
     },
     {
       indication: 'SAH blood pressure control (target SBP <160)',
-      regimen: 'Start 1-2 mg/hr IV. Double every 90 sec until SBP <160 mmHg. Usual maintenance 4-6 mg/hr. Max 21 mg/hr. Ultra-short t\u00BD (~1 min) allows precise titration.',
+      regimen: 'Start 1-2 mg/hr IV. Double every 90 sec until SBP <160 mmHg. Usual maintenance 4-6 mg/hr. Maximum 21 mg/hr (2025 AHA/ACC Table 26); label allows up to 32 mg/hr with limited experience. Ultra-short t\u00BD (~1 min) allows precise titration.',
     },
   ],
   contraindications: [
@@ -2115,6 +2124,7 @@ const CLEVIDIPINE: DrugEntry = {
   citations: [
     'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.',
     'Pollack CV, et al. Clevidipine for Acute Hypertension: A Systematic Review and Meta-Analysis. Crit Care Med. 2019.',
+    '2025 AHA/ACC High Blood Pressure Guideline, Table 26 (doi:10.1016/j.jacc.2025.05.007).',
   ],
 };
 
@@ -5956,7 +5966,7 @@ const PHENTOLAMINE: DrugEntry = {
     },
     {
       indication: 'Pheochromocytoma hypertensive episode',
-      regimen: '5 mg IV or IM for adults; pediatric dosing requires specialist guidance. This is not the extravasation rescue dose.',
+      regimen: '5 mg IV or IM for adults; pediatric dosing requires specialist guidance. This is not the extravasation rescue dose. Catecholamine excess including cocaine toxicity (2025 AHA/ACC Table 26): 5 mg IV bolus, repeat every 10 minutes, cumulative maximum 50 mg per 24 hours.',
     },
   ],
   contraindications: [
@@ -5972,6 +5982,7 @@ const PHENTOLAMINE: DrugEntry = {
   notes: 'Primary pharmacologic rescue for alpha-adrenergic vasopressor extravasation. Labeled indication is prevention/treatment of dermal necrosis and sloughing following norepinephrine extravasation. Use with immediate local measures: stop infusion, leave catheter initially, aspirate residual drug, do not flush, elevate, warm compresses, and serial neurovascular exams.',
   citations: [
     'DailyMed. Phentolamine Mesylate for Injection prescribing information. Hikma Pharmaceuticals USA Inc. Revised May 2022.',
+    '2025 AHA/ACC High Blood Pressure Guideline, Table 26 (doi:10.1016/j.jacc.2025.05.007).',
     'Wang Y, et al. Summary of best evidence for safe management of vasopressors through peripheral intravenous catheters. BMC Nurs. 2025;24:1050.',
     'Plum M, Moukhachen O. Alternative Pharmacological Management of Vasopressor Extravasation in the Absence of Phentolamine. P T. 2017;42(9):581-592.',
   ],
@@ -7730,7 +7741,7 @@ const HYDRALAZINE: DrugEntry = {
   dosing: [
     {
       indication: 'Severe hypertension pregnancy (SBP ≥160 or DBP ≥110)',
-      regimen: 'ACOG protocol: 5–10 mg IV over 2 min → wait 20 min → 10 mg IV → wait 20 min → switch to labetalol 20 mg IV. Max cumulative 30 mg before switching. Onset 10–20 min, duration 4–6 h. Pre-load 500 mL NS if volume-depleted — prevents abrupt hypotension. May cause reflex tachycardia. Avoid in CAD.',
+      regimen: 'Dose not stated in this entry. The ACOG Committee Opinion 767 protocol previously shown here is not verified against its source; follow the obstetric severe-hypertension protocol.',
     },
     {
       indication: 'VAD hypertension',
@@ -7738,7 +7749,7 @@ const HYDRALAZINE: DrugEntry = {
     },
     {
       indication: 'Hypertensive emergency',
-      regimen: '10-20 mg IV over 1-2 minutes. May repeat q20-30 min PRN. Maximum cumulative dose 40 mg. Onset: 10-20 min IV, 20-30 min PO. Duration: 2-6 hours.',
+      regimen: '10 mg IV slowly. Maximum initial dose 20 mg. Repeat every 4-6 hours as needed (2025 AHA/ACC Table 26). Onset: 10-20 min IV, 20-30 min PO. Duration: 2-6 hours.',
     },
   ],
   contraindications: [
@@ -7756,6 +7767,7 @@ const HYDRALAZINE: DrugEntry = {
   notes: 'Preferred oral antihypertensive for VAD patients because it reduces afterload (SVR) without negative inotropic effects. In VAD physiology, elevated afterload directly reduces pump flow — lowering MAP improves forward flow. Avoid IV beta-blockers in VAD patients (reduce native contractility). For acute severe hypertension in VAD, IV nicardipine or clevidipine infusions provide more predictable control.',
   citations: [
     'AHA Scientific Statement: Management of Hypertension in Patients with VADs. Circ Heart Fail. 2020;13:e000074.',
+    '2025 AHA/ACC High Blood Pressure Guideline, Table 26 (hypertensive emergency; J Am Coll Cardiol, doi:10.1016/j.jacc.2025.05.007; Hypertension, doi:10.1161/HYP.0000000000000249).',
     'HFSA/SAEM/ISHLT Consensus: Emergency Management of VAD Patients. J Heart Lung Transplant. 2019;38(7):677-698.',
   ],
 };
@@ -7775,7 +7787,7 @@ const IBUPROFEN: DrugEntry = {
     },
     {
       indication: 'Pain / Fever (Adult)',
-      regimen: '400-600 mg PO q6-8h PRN (max 3200 mg/day). Take with food to reduce GI upset.',
+      regimen: '400 mg PO every 4-6 hours PRN for mild-to-moderate pain (Rx label). Max 3200 mg/day. Take with food to reduce GI upset.',
     },
     {
       indication: 'Dysmenorrhea',
@@ -7790,6 +7802,7 @@ const IBUPROFEN: DrugEntry = {
     'Post-CABG surgery (within 10-14 days)',
   ],
   cautions: [
+    'BOXED WARNING (Rx label): serious cardiovascular thrombotic events (MI, stroke) and serious GI bleeding, ulceration, and perforation, which can be fatal. Contraindicated for peri-CABG pain.',
     'Dehydration (increased renal risk)',
     'Heart failure (fluid retention)',
     'Concurrent anticoagulation (increased bleeding risk)',
@@ -7802,6 +7815,7 @@ const IBUPROFEN: DrugEntry = {
   citations: [
     'Rosenberg T, et al. Management and outcome of benign acute childhood myositis in pediatric emergency department. Ital J Pediatr. 2021;47:54.',
     'Magee CC, et al. Benign acute childhood myositis: a retrospective cohort study. Front Pediatr. 2025;13:1653651.',
+    'Ibuprofen tablets, Rx (US Prescribing Information). DailyMed setid 0fa4cd66-66ad-4ec9-b38c-6b5840df39df (dosing and boxed warning; read 2026-10-27).',
   ],
 };
 

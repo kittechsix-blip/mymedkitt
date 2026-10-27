@@ -2094,7 +2094,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         categoryId: 'gastroenterology',
         version: '1.0',
         nodeCount: 23,
-        entryNodeId: 'sbov-start',
+        entryNodeId: 'bowel-obstruction-volvulus-start',
       },
       {
         id: 'scad-vasospasm',
@@ -2103,7 +2103,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
         categoryId: 'cardiology',
         version: '1.0',
         nodeCount: 21,
-        entryNodeId: 'scadv-start',
+        entryNodeId: 'scad-vasospasm-start',
       },
       {
         id: 'rhabdomyolysis',

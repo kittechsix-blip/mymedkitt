@@ -245,3 +245,76 @@ The core SBO logic is mostly sound. The sigmoid pathway matches WSES 2023 closel
 ## Fixed after Dr. K audit (2026-10-27, mechanical only)
 - Diatrizoate (Gastrografin) entry in `src/data/new-content/drugs-sbo-scad.ts` rewritten to show only sourced numbers. Label oral adult dose 30-90 mL (DailyMed setid 8c2340e4, read 2026-10-27) and, as a labelled off-label trial regimen, Cochrane CD004651 (100 mL, NG clamped 60 min, radiograph window 4-24 h; full text via PMC6465054). The 100 mL vs 90 mL label maximum conflict is shown, not resolved. The unsourced "4-6 h film", "2-3 h clamp" and Bologna colon-at-24-h claims were removed. NG use is flagged off-label (label: oral or rectal only). Timing per local protocol.
 - `src/data/trees/bowel-obstruction-volvulus.ts`: draft and sign-off wording removed from node text and the stop-criteria list. "Fever" is described as clinical judgment, not a sourced threshold. No number changed.
+
+## Applied recommendations (2026-10-27)
+
+Source read this pass: WSES 2017 (ten Broek 2018, wjes.biomedcentral.com/articles/10.1186/s13017-018-0185-2) full text, Table 5 (full-size table page), and Fig. 2 (algorithm image, read directly). Tian 2023 (WSES 2023) was read by Dr. Kitlowski in the 2026-10-27 audit above and was not re-opened here.
+
+- **Row 2, NG use: applied-with-change.** Nom-entry and the water-soluble contrast stop item now say the NG route is off-label (label: oral or rectal only). Contrast wording is "per local protocol". Source: DailyMed label, as read in the Dr. K pass.
+- **Row 3, WBC above 10,000: applied.** Demoted to a peritonitis marker with low sensitivity and specificity, not a stop rule. Removed from the strangulation option, the surgery triggers and the critical action. Source: WSES 2017 lab section ("CRP > 75 and WBC > 10.000/mm3 ... sensitivity and specificity relatively low"). Note: Fig. 2 lists WBC 10.000/mm3 inside its failure box, so the figure and text differ. The text wording was used.
+- **Row 4, 72 h: applied-with-change.** Now "consider surgery if no resolution by 72 hours", not a hard stop. Source: WSES 2017 Table 5 Level IIB ("trial of non-operative management can be continued safely for 72 h") and the non-operative section. Note: Fig. 2 labels "persistent obstruction >72 hours" as a failure criterion. The row's wording was applied, so the figure and the row differ.
+- **Row 5, day-3 drainage above 500 mL: applied-with-change (kept, attributed).** Kept as a failure criterion, cited to WSES 2017 Fig. 2 ("Drainage volume >500ml on 3rd day"). It is not in the 2017 text body. Source: Fig. 2 read directly.
+- **Row 6, fever and CPK: applied.** Fever kept as a clinical sign that needs surgical review (no numeric threshold). CPK bullet removed from the surgery node. Source: WSES 2017 text, no CPK or creatine kinase match. Fig. 2 does not list fever.
+- **Row 7, closed loop: applied-with-change.** Now "closed-loop signs: surgical consult now", citing the WSES 2017 CT section ("signs of a closed loop ... suggest the need for surgery without delay"). Okumura (cite 4) conflict is kept and shown. The "Treat as Strangulation" title became "Surgical Consult Now". Source: WSES 2017 CT section, read this pass.
+- **Row 8, ICU node grade: applied.** "definitive" changed to "recommended".
+- **Row 9, admit-all and ICU criteria: applied.** Labelled "(consensus)" in the disposition node.
+- **Row 10, sigmoid surgery grade: applied.** Result node "definitive" changed to "recommended" (WSES 2023, Rec 5, 1C). Not changed, and flagged: the endoscopy node still reads "strong recommendation, low-quality evidence". Dr. K's correction to "low- or very-low-quality evidence, 1C" was not in row 10, so it was left alone.
+- **Row 11, non-candidate list: applied (removed four items).** Kept peritonitis, strangulation and bowel ischemia, per WSES 2017 ("unless there are signs of peritonitis, strangulation, or bowel ischemia") and Table 5 Level IIC. Removed "surgery within 6 weeks", "irreducible hernia", "signs of resolution at admission" and "complete obstruction with no colonic air". None of the four is in the 2017 text as read. Note: "complete obstruction with no colonic air" still appears as a CT surgery predictor in the CT node. That is not part of this row and is unsourced. Flagged for Andy.
+- **Row 15, integration state: confirmed, no change.** Registered in `src/data/categories.ts`, `src/data/info-pages.ts`, `src/data/trees/index.ts`, `src/services/tree-service.ts`, and via `src/data/new-content/bowel-obstruction-volvulus-toolbar.ts` in `src/data/toolbar-configs.ts`. The tree contains no `#/drug/` link. Calculator `anion-gap` exists in `calculator.ts`.
+
+Not applied by this pass (outside the assigned rows):
+- Row 1 (diatrizoate volume) and rows 12-13 (Ranson): other agents own these. No `#/drug/diatrizoate` link was added.
+- Row 14 (citation rows in `guideline-versions.md`): not in this consult's assigned rows and not in an owned file. Still needs an owner.
+
+Text edits (tree and info files): `tsc --noEmit --skipLibCheck --noUnusedLocals false` passed after the edits. No commit, push, or deploy.
+
+## Applied recommendations (2026-10-27), drugs pass
+Source: `src/data/new-content/drugs-sbo-scad.ts`. The entry stays unlinked from the consult.
+- Row 1 diatrizoate volume: **applied**. Label 30-90 mL (oral, GI radiography; not an SBO indication) and off-label trial 100 mL shown side by side, with "no default volume; clinician-directed." Off-label NG use is stated. Source: Gastrografin DailyMed setid 8c2340e4-2b42-45dc-8fac-9960e8172547 (read earlier this sign-off); Cochrane CD004651 (full text via PMC6465054).
+- Row 2 NG use: **already applied** (off-label stated in the entry).
+- Not applied: no other rows in the drugs scope. Consult-tree rows are outside this pass.
+
+## Applied recommendations (2026-10-27), re-audit pass
+Scope: RECOMMENDATIONS.md rows 1-15 for this consult. Sources opened in this pass are listed with each row.
+
+- **Row 1, diatrizoate volume: applied (drugs pass, carried forward).** Label 30-90 mL and off-label trial 100 mL shown side by side, no default. Not re-opened in this pass.
+- **Row 2, NG use: applied-with-change.** Off-label route stated in the nom-entry node and the stop page. Not changed in this pass.
+- **Row 3, WBC above 10,000/mm3: applied (completed this pass).** The earlier pass said WBC was removed from the surgery triggers, but the surgery node still listed it as a trigger bullet. This pass removed that bullet and added a separate sentence: peritonitis marker, low sensitivity and specificity, not a trigger on its own. Source: WSES 2017 lab section (ten Broek 2018, read in the prior pass).
+- **Row 4, 72 h: applied-with-change.** Unchanged in this pass. Source: WSES 2017 text (prior pass).
+- **Row 5, day-3 drainage above 500 mL: applied-with-change (kept, attributed to Fig. 2).** Fig. 2 was not viewed again in this pass. Still open for Andy (see F5 below).
+- **Row 6, fever and CPK: applied.** Re-checked: no CPK text remains in the tree or info pages.
+- **Row 7, closed loop: applied-with-change (completed this pass).** The strangulation node still said "also treat as strangulation" for closed-loop pattern, which conflicted with the closed-loop node. Now: closed-loop pattern means surgical consult now, no non-operative trial. Okumura 2025 (cite 4) verified this pass in the full text (PMC12653211, Table 5): closed loop OR 0.895, 95% CI 0.153-5.22, p = 0.902, not significant. The same full text shows absent bowel wall enhancement as the only independent indicator (OR 19.71), and ascites and mesenteric edema lacking specificity. Both are now stated in the CT node.
+- **Row 8, ICU node grade: applied.** "recommended".
+- **Row 9, admit-all and ICU criteria: applied.** Labelled consensus.
+- **Row 10, sigmoid surgery grade: applied. Endoscopy grade corrected this pass.** The endoscopy node now reads "strong recommendation, based on low- or very-low-quality evidence, 1C", matching WSES 2023 Rec 4 (Tian 2023, PMC10186802, full text read this pass; the same "low- or very-low-quality evidence, 1C" wording appears for Rec 2 and Rec 5). Result node stays "recommended" (Rec 5, 1C).
+- **Row 11, non-candidate list: applied.** Four items removed. "Complete obstruction with no colonic air" remains as a CT surgery predictor in the CT node. Not in the 2017 text as read. Flagged (F13).
+- **Row 12-13, Ranson gallstone items: not applicable to this consult.** Grep confirms the consult tree has no Ranson node, calculator or link. Those rows belong to the acute-pancreatitis consult.
+- **Row 14, citation rows in guideline-versions.md: already present and verified.** WSES 2017, WSES 2023 and ESGE 2020 rows exist with DOI status "fetched 2026-10-27". Crossref was re-checked this pass for Tian 2023 (volume 18, article 34, matches cite 9). The citation gate is cleared for these three.
+- **Row 15, integration state: confirmed.** Registered via categories, info pages, tree index, tree service and the toolbar file. The tree has no drug link.
+
+### Numbers added this pass (sourced, gate cleared by the row 14 table entries)
+- Sigmoid detorsion effective in 60-95%; morbidity about 4%; mortality about 3% (WSES 2023 text, PMC10186802).
+- Upfront colectomy in 5-25% of presentations with ischemia, perforation, peritonitis or septic shock (WSES 2023).
+- Long-term recurrence after endoscopic detorsion 43-75% (WSES 2023).
+- Megacolon series of 29 patients (Morrissey, cited in WSES 2023): overall recurrence 36%; 6% sigmoid-only vs 82% with megacolon (p = .005); no recurrence after subtotal colectomy.
+- LBO perforation: 6.8% stent (100/1467) vs 7.5% transanal tube (13/173), Kitaguchi 2026 Bayesian NMA (Colorectal Dis 28:e70498; abstract read this pass). The "(not re-verified)" tag is removed.
+
+### Removed this pass (unverified claims)
+- "Contrast does not change recurrence or recurrence-related surgery [1]" removed from the nom-entry node. Also removed the "[1]" attribution from "Recurrence is not changed by contrast" (nom-resolving) and "does not prove recurrence risk is lower" (nom-check). The same sentence was removed from the Resolving info page. The 2017 text as searched does not contain it. Cochrane abstract does not either. Replaced with "not sourced here".
+
+### Re-audit result (Dr. Kitlowski, 2026-10-27, second pass)
+**Verdict: REVISE.** `tsc --noEmit --skipLibCheck --noUnusedLocals false` passes (rc 0). Citation numbers used in the tree (1-6, 8, 9, 11, 12, 14-16) are all defined; 7, 10 and 13 are not used. All internal link targets resolve except as already listed in the prior pass. Crossref confirms DOIs for cites 3, 5, 6, 8, 9, 11, 12, 14, 15, 16 this pass.
+
+Remaining patient-safety flags (Andy decides):
+- **F1. Gastrografin dose.** Label 30-90 mL vs off-label trial 100 mL. Both shown, no default (row 1). The Cochrane trial volume is still not verified from full text. Andy confirms he accepts "no default, clinician-directed" wording before any drug link is added.
+- **F5. Day-3 drainage above 500 mL as a failure criterion.** Cited to WSES 2017 Fig. 2 (read in the prior pass). The figure is not in the 2017 body text. Andy confirms the figure reading before deploy.
+- **F13. "Complete obstruction with no colonic air" as a CT surgery predictor** (CT node, surgery-predictor option, routes to the surgery node). Unsourced. Keep as labelled consensus, source it, or remove it.
+- **F10. ICU node** antibiotic and fluid choices are unsourced (labelled as not sourced). Andy decides whether the node stays graded "recommended" with that gap.
+- **F16. Crohn cross-link** (`ibd-flare` node `ibd-obstruction`): its steroid and imaging advice differs from this consult. Andy and the ibd-flare owner decide.
+- **Stop page "Lethal aspiration is reported"**: qualitative, no source in this pass. Source it or soften it.
+
+Not re-verified this pass (no change, flagged): cites 3 and 5 (abstract titles match; numeric content not read), 6, 14, 15 and 16 (DOIs only), and WSES 2017 Table 5 and Fig. 2 (prior pass).
+
+Verified this pass with no change needed: Zielinski 2010 (cite 2) is a 100-consecutive-patient cohort, and its predictors are free intraperitoneal fluid, mesenteric edema, absent small-bowel feces sign and vomiting, as the tree states. Emmett and Narins 1977 anion-gap citation and corrected-AG formula in `calculator.ts` are consistent with the standard formula.
+
+Approve path: decide F1, F5, F13 and the stop-page aspiration wording. Then re-run this audit; the remaining items are small.
