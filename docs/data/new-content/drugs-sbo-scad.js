@@ -19,19 +19,8 @@ const DIATRIZOATE = {
     ],
     dosing: [
         {
-            indication: 'Adhesive SBO: water-soluble contrast (predicts non-operative resolution)',
-            regimen: '**Label (oral, GI radiography; not an SBO indication):** adult oral dose 30-90 mL (11-33 g iodine), depending on exam and patient size. Oral or rectal use only. Not for parenteral use. Discard unused portion.\n\n' +
-                '**Off-label TRIAL REGIMEN for adhesive SBO (not label dosing):** the Cochrane review (Abbas, Bissett, Parry; CD004651; full text read via PMC6465054) describes trials giving **100 mL** Gastrografin orally or by NG tube, with the NG tube **clamped for 60 minutes** afterward. Its discussion gives an abdominal radiograph window of 4-24 h. Serial films over 24 h predicted non-operative resolution (pooled sensitivity 0.97, specificity 0.96).\n\n' +
-                '**CONFLICT, both shown, no pick:** the trial volume of 100 mL is above the label oral adult maximum of 90 mL.\n\n' +
-                '**Route:** NG use is off-label. The label states oral or rectal administration only. Its warnings say that if the agent is given by NG tube, tube position in the stomach must be verified first.\n\n' +
-                '**No default volume.** Label 30-90 mL; trial 100 mL (off-label). The choice is clinician-directed.\n\n**Timing:** per local protocol.',
-        },
-        {
             indication: 'GI radiography (label, adult oral dose)',
-            regimen: 'Label: adult oral dose 30-90 mL (11-33 g iodine), depending on exam and patient size. ' +
-                'Children under 5 y: 30 mL. Children 5-10 y: 60 mL. ' +
-                'Pediatric doses may be used in dehydrated and/or debilitated adults. A 1:1 dilution is recommended for elderly cachectic individuals; pediatric doses may be diluted 1:1 if desired. ' +
-                'Oral or rectal only. Not for parenteral use. Discard unused portion.',
+            regimen: 'Label adult oral dose: 30-90 mL (11-33 g iodine), depending on the nature of the examination and the size of the patient. Oral or rectal use only. Not for parenteral use. Discard unused portion.',
         },
     ],
     contraindications: [
@@ -49,7 +38,9 @@ const DIATRIZOATE = {
     ],
     monitoring: 'Serial abdominal exams. Abdominal film at 4-6 h and at 24 h. Watch volume status, BP, and electrolytes with large volumes or prolonged NG use. No contrast in the colon at 24 h: go to the surgical decision per the SBO tree.',
     notes: 'Off-label for SBO; the label covers GI radiography only. Cochrane (Abbas 2007): colon contrast at 24 h predicted resolution with pooled sensitivity 0.97 and specificity 0.96. ' +
-        'Gastrografin does not itself resolve SBO. It reduced hospital stay in patients managed without surgery. Recurrence is not changed.',
+        'Gastrografin does not itself resolve SBO. It reduced hospital stay in patients managed without surgery. Recurrence is not changed. ' +
+        'Label pediatric doses (moved out of the dosing field): under 5 y 30 mL; 5-10 y 60 mL. ' +
+        'Off-label trial regimen (Cochrane CD004651 full text via PMC6465054): 100 mL orally or via NG, NG clamped 60 minutes; NG route is off-label per the label.',
     citations: [
         'GASTROGRAFIN (diatrizoate meglumine and diatrizoate sodium solution) oral solution. Prescribing information. DailyMed setid 8c2340e4-2b42-45dc-8fac-9960e8172547; Rev. August 2019; DailyMed page "Updated October 4, 2021" (read 2026-10-27). Only the DailyMed version was read.',
         'Abbas S, Bissett IP, Parry BR. Oral water soluble contrast for the management of adhesive small bowel obstruction. Cochrane Database Syst Rev. 2007;(3):CD004651. doi:10.1002/14651858.CD004651.pub3. Full text read via PMC6465054.',

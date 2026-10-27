@@ -3909,7 +3909,7 @@ const LABETALOL = {
         },
         {
             indication: 'ACS / Cocaine-Associated',
-            regimen: '10-20 mg IV over 2 minutes. May repeat or double dose q10 min (max 300 mg total).\n\nPreferred beta-blocker in cocaine-associated STEMI due to combined alpha/beta blockade (avoids unopposed alpha stimulation).\n\nAvoid pure beta-blockers (metoprolol, atenolol) in acute cocaine-associated ACS.',
+            regimen: 'Evidence conflicts. Benzodiazepine and a vasodilator come first. Avoid pure beta-blockers (propranolol, metoprolol, esmolol) in acute cocaine toxicity. Mixed alpha/beta agents such as labetalol are not first line.',
         },
     ],
     contraindications: [
@@ -7660,6 +7660,8 @@ const KETOROLAC = {
         'Use with caution in dehydrated patients',
         'Monitor renal function \u2014 SCD patients have baseline nephropathy risk',
         'GI bleeding risk increases with concurrent anticoagulants or steroids',
+        'IV bolus must be given over no less than 15 seconds (Hospira ketorolac injection label, rev 11/2024)',
+        'Hypovolemia should be corrected prior to administration (same label, Dosage and Administration)',
     ],
     monitoring: 'BMP (renal function), bleeding signs. Limit to 5-day max course.',
     notes: 'First-line NSAID for SCD pain crisis. Reduces opioid requirements when used as part of multimodal analgesia. NHLBI and ASH guidelines recommend NSAIDs for VOC pain management. Administer early alongside opioids. Avoid in patients with known SCD nephropathy or renal impairment.',
