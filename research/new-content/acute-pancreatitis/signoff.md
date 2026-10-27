@@ -122,3 +122,7 @@ The Ranson additions and the pre-existing `acute-pancreatitis` consult have no d
 ## Fixed after Dr. K audit (2026-10-27, mechanical only)
 - Removed draft and sign-off tags (patch C1/C2/C3/C6/C8, "pending sign-off", "unsourced") from clinician-facing text in `src/data/new-content/acute-pancreatitis-ranson-nodes.ts` and the Ranson calculator descriptions in `src/components/ranson.ts`. Caveats are kept as plain clinical wording. No number was changed.
 - Header comments in both files no longer say DRAFT. Tags remain only in this file.
+
+
+### Ruling 4 (Andy, 2026-10-27)
+F2 RULED: existing critical action reworded to 'BISAP >=3 = high risk, ICU candidate. Ranson >=3 flags severe disease (needs 48 h of data); it does not decide ICU on its own.' (acute-pancreatitis.ts, FINAL critical action; only existing-text change in this build, per Andy).

@@ -461,7 +461,7 @@ export const ACUTE_PANCREATITIS_MODULE_LABELS = [
 
 export const ACUTE_PANCREATITIS_CRITICAL_ACTIONS = [
   { text: 'Diagnosis requires 2 of 3: characteristic pain, lipase >3x ULN, imaging findings', nodeId: 'ap-start' },
-  { text: 'BISAP score ≥3 or Ranson ≥3 = severe pancreatitis (ICU candidate)', nodeId: 'ap-severity' },
+  { text: 'BISAP score ≥3 = high risk, ICU candidate. Ranson ≥3 flags severe disease (needs 48 h of data); it does not decide ICU on its own', nodeId: 'ap-severity' },
   { text: 'MODERATE fluid resuscitation: LR 5-10 mL/kg/hr (NOT aggressive 20 mL/kg - increases mortality)', nodeId: 'ap-moderate-resus' },
   { text: 'Goal-directed resuscitation: reassess q6h, target UOP 0.5-1 mL/kg/hr, HR <120, MAP 65-85', nodeId: 'ap-moderate-resus' },
   { text: 'Early feeding within 24h if tolerated (oral > enteral > parenteral)', nodeId: 'ap-mild-resus' },
