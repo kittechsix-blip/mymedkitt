@@ -918,6 +918,26 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/diabetes-management.js');
       return { nodes: m.DIABETES_MANAGEMENT_NODES, entryNodeId: 'dm-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.DIABETES_MANAGEMENT_MODULE_LABELS, citations: m.DIABETES_MANAGEMENT_CITATIONS, criticalActions: m.DIABETES_MANAGEMENT_CRITICAL_ACTIONS };
     },
+    'hypertensive-emergency-adult': async () => {
+      const m = await import('../data/trees/hypertensive-emergency-adult.js');
+      return { nodes: m.HTNE_NODES, entryNodeId: 'hypertensive-emergency-adult-start', categoryId: 'cardiology', moduleLabels: m.HTNE_MODULE_LABELS, citations: m.HTNE_CITATIONS, criticalActions: m.HTNE_CRITICAL_ACTIONS };
+    },
+    'ards': async () => {
+      const m = await import('../data/trees/ards.js');
+      return { nodes: m.ARDS_NODES, entryNodeId: 'ards-start', categoryId: 'critical-care', moduleLabels: m.ARDS_MODULE_LABELS, citations: m.ARDS_CITATIONS, criticalActions: m.ARDS_CRITICAL_ACTIONS };
+    },
+    'blunt-chest-trauma': async () => {
+      const m = await import('../data/trees/blunt-chest-trauma.js');
+      return { nodes: m.BCT_NODES, entryNodeId: 'blunt-chest-trauma-start', categoryId: 'trauma-surg', moduleLabels: m.BCT_MODULE_LABELS, citations: m.BCT_CITATIONS, criticalActions: m.BCT_CRITICAL_ACTIONS };
+    },
+    'bowel-obstruction-volvulus': async () => {
+      const m = await import('../data/trees/bowel-obstruction-volvulus.js');
+      return { nodes: m.SBOV_NODES, entryNodeId: 'sbov-start', categoryId: 'gastroenterology', moduleLabels: m.SBOV_MODULE_LABELS, citations: m.SBOV_CITATIONS, criticalActions: m.SBOV_CRITICAL_ACTIONS };
+    },
+    'scad-vasospasm': async () => {
+      const m = await import('../data/trees/scad-vasospasm.js');
+      return { nodes: m.SCADV_NODES, entryNodeId: 'scadv-start', categoryId: 'cardiology', moduleLabels: m.SCADV_MODULE_LABELS, citations: m.SCADV_CITATIONS, criticalActions: m.SCADV_CRITICAL_ACTIONS };
+    },
     'hypoglycemia': async () => {
       const m = await import('../data/trees/hypoglycemia.js');
       return { nodes: m.HYPOGLYCEMIA_NODES, entryNodeId: 'hypoglycemia-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.HYPOGLYCEMIA_MODULE_LABELS, citations: m.HYPOGLYCEMIA_CITATIONS, criticalActions: m.HYPOGLYCEMIA_CRITICAL_ACTIONS };

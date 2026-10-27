@@ -365,4 +365,9 @@ export const TREE_REGISTRY = {
   'adult-pharyngitis': { prefix: 'ADULT_PHARYNGITIS', entryNodeId: 'ap-start', categoryId: 'infectious-disease' },
   'peds-ssti': { prefix: 'PEDS_SSTI', entryNodeId: 'pssti-start', categoryId: 'pediatrics' },
   'penile-zipper-release': { prefix: 'PENILE_ZIPPER_RELEASE', entryNodeId: 'pzr-start', categoryId: 'procedures' },
+  'hypertensive-emergency-adult': { prefix: 'HTNE', entryNodeId: 'hypertensive-emergency-adult-start', categoryId: 'cardiology' },
+  'ards': { prefix: 'ARDS', entryNodeId: 'ards-start', categoryId: 'critical-care' },
+  'blunt-chest-trauma': { prefix: 'BCT', entryNodeId: 'blunt-chest-trauma-start', categoryId: 'trauma-surg' },
+  'bowel-obstruction-volvulus': { prefix: 'SBOV', entryNodeId: 'sbov-start', categoryId: 'gastroenterology' },
+  'scad-vasospasm': { prefix: 'SCADV', entryNodeId: 'scadv-start', categoryId: 'cardiology' },
 };

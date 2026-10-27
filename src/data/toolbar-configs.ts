@@ -2,6 +2,11 @@
 // Maps consult IDs to their contextual toolbar items.
 
 import { hasInfographic } from './infographic-registry.js';
+import { TOOLBAR_HTNE } from './new-content/hypertensive-emergency-adult-toolbar.js';
+import { TOOLBAR_ARDS } from './new-content/ards-toolbar.js';
+import { TOOLBAR_BCT } from './new-content/blunt-chest-trauma-toolbar.js';
+import { TOOLBAR_SBOV } from './new-content/bowel-obstruction-volvulus-toolbar.js';
+import { TOOLBAR_SCADV } from './new-content/scad-vasospasm-toolbar.js';
 
 export interface ToolbarItem {
   id: string;
@@ -1241,6 +1246,11 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'insulin-dc', label: 'Insulin DC', icon: '📄', action: 'overlay', target: 'dm-insulin-discharge' },
     { id: 'oral-dc', label: 'Oral DC', icon: '💊', action: 'overlay', target: 'dm-oral-discharge' },
   ],
+  'hypertensive-emergency-adult': TOOLBAR_HTNE,
+  'ards': TOOLBAR_ARDS,
+  'blunt-chest-trauma': TOOLBAR_BCT,
+  'bowel-obstruction-volvulus': TOOLBAR_SBOV,
+  'scad-vasospasm': TOOLBAR_SCADV,
   'hypoglycemia': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'hypoglycemia-steps', pinned: true },
     { id: 'diff', label: 'Diff', icon: '🧩', action: 'overlay', target: 'hypoglycemia-differential-guide', pinned: true },
@@ -1275,6 +1285,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'atlanta', label: 'Atlanta', icon: '📋', action: 'calculator', target: 'atlanta-severity' },
     { id: 'mctsi', label: 'MCTSI', icon: '🩻', action: 'calculator', target: 'mctsi' },
     { id: 'fluid', label: 'Fluids', icon: '💧', action: 'calculator', target: 'ap-fluid-rate' },
+    { id: 'ranson', label: 'Ranson', icon: '📊', action: 'calculator', target: 'ranson' },
   ],
   'upper-gi-bleed': [
     { id: 'summary', label: 'Steps', icon: '📋', action: 'overlay', target: 'ugib-summary' },
