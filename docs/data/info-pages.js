@@ -1,4 +1,9 @@
 import { INH_INFO_PAGES } from './inh-info-pages.js';
+import { INFO_PAGES_HTNE } from './new-content/hypertensive-emergency-adult-info.js';
+import { INFO_PAGES_ARDS } from './new-content/ards-info.js';
+import { INFO_PAGES_BCT } from './new-content/blunt-chest-trauma-info.js';
+import { INFO_PAGES_SBOV } from './new-content/bowel-obstruction-volvulus-info.js';
+import { INFO_PAGES_SCADV } from './new-content/scad-vasospasm-info.js';
 // -------------------------------------------------------------------
 // DOAC for PE
 // -------------------------------------------------------------------
@@ -29637,6 +29642,11 @@ const MRI_FOR_DUMMIES_STOP = {
 };
 export const INFO_PAGES = {
     ...Object.fromEntries(INH_INFO_PAGES.map(page => [page.id, page])),
+    ...INFO_PAGES_HTNE,
+    ...INFO_PAGES_ARDS,
+    ...INFO_PAGES_BCT,
+    ...INFO_PAGES_SBOV,
+    ...INFO_PAGES_SCADV,
     'asystole-steps': {
         "id": "asystole-steps",
         "title": "Asystole: bedside steps",

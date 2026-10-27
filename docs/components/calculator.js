@@ -1,4 +1,9 @@
 import { US_IV_CALCULATOR } from './us-iv.js';
+import { HTNE_BP_TARGET_CALCULATOR } from './htne-bp-target.js';
+import { ARDS_PBW_TIDAL_VOLUME_CALCULATOR } from './ards-pbw-tidal-volume.js';
+import { ARDS_PF_BERLIN_CALCULATOR } from './ards-pf-berlin.js';
+import { RIBSCORE_CALCULATOR } from './ribscore.js';
+import { RANSON_CALCULATOR } from './ranson.js';
 import { INH_PYRIDOXINE_CALCULATOR } from '../data/inh-pyridoxine.js';
 // MedKitt — Clinical Calculator Component
 // Standalone calculators for scoring systems (PESI, sPESI, etc.)
@@ -44633,6 +44638,11 @@ const HS_COMORBIDITY_SCREEN_CALCULATOR = {
 };
 const CALCULATORS = {
     'us-iv': US_IV_CALCULATOR,
+    'htne-bp-target': HTNE_BP_TARGET_CALCULATOR,
+    'ards-pbw-tidal-volume': ARDS_PBW_TIDAL_VOLUME_CALCULATOR,
+    'ards-pf-berlin': ARDS_PF_BERLIN_CALCULATOR,
+    'ribscore': RIBSCORE_CALCULATOR,
+    'ranson': RANSON_CALCULATOR,
     'inh-pyridoxine': INH_PYRIDOXINE_CALCULATOR,
     // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
     'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
