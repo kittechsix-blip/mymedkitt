@@ -1,3 +1,4 @@
+import { US_IV_CALCULATOR } from './us-iv.js';
 import { INH_PYRIDOXINE_CALCULATOR } from '../data/inh-pyridoxine.js';
 // MedKitt — Clinical Calculator Component
 // Standalone calculators for scoring systems (PESI, sPESI, etc.)
@@ -46233,6 +46234,7 @@ const HS_COMORBIDITY_SCREEN_CALCULATOR: CalculatorDefinition = {
 };
 
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  'us-iv': US_IV_CALCULATOR,
   'inh-pyridoxine': INH_PYRIDOXINE_CALCULATOR,
   // Pericarditis (added 2026-07-19 — fixes dead calculatorLinks)
   'pericarditis-diagnostic': PERICARDITIS_DIAGNOSTIC_CALCULATOR,
