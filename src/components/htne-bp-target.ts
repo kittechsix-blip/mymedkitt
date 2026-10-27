@@ -59,12 +59,12 @@ export function computeHtneBpTarget(input: HtneBpInput): HtneBpOutput | null {
   lines.push(`**MAP:** ${r(map)} mmHg (DBP + (SBP - DBP) / 3). Arithmetic, not a sourced rule.`);
   lines.push(severeLine);
   if (compelling) {
-    lines.push('**COMPELLING CONDITION SELECTED:** the general first-hour rule below is not the target. Dissection, pregnancy, and pheochromocytoma use the consult goals. The compelling-condition goal is pending sign-off. [1]');
+    lines.push('**COMPELLING CONDITION SELECTED:** the general rule below is not the target. Aortic dissection: SBP ≤120 mmHg, within 20 minutes, beta-blocker first. Most other compelling conditions: SBP <140 mmHg in the first hour. Pheochromocytoma is not an indication for immediate reduction to <120 or <140. Pregnancy and stroke have their own targets (see the consult branches). [1]');
   }
-  lines.push(`**FIRST-HOUR LIMIT (general case, no compelling condition):**\n• Guideline [1]: lower SBP by no more than 25% in the first hour. SBP floor **${r(sbpFloor25)} mmHg**.\n• Then, if stable: 160/100 mmHg within the next 2 to 6 hours, then cautiously to normal over 24 to 48 hours. [1]`);
+  lines.push(`**FIRST-HOUR LIMIT (hypertensive emergency with no compelling indication):**\n• Guideline [1]: be conservative, with a 25% SBP reduction in the first hour. SBP floor **${r(sbpFloor25)} mmHg**.\n• Then reduce further gradually within 24 to 48 hours. [1]`);
   lines.push(`**MARIK & VARON 2007 [2]:** in hypertensive emergency, the immediate goal is to reduce DBP by 10-15% or to about 110 mmHg over 30-60 minutes. Rapid-acting IV agents should not be used outside an ICU-monitored setting.`);
   lines.push(`**DRAFT MAP RULES (NOT CONFIRMED):**\n• MAP-25% rule, attributed in the draft to Marik & Varon: MAP floor **${r(mapFloor25)} mmHg** (0.75 x MAP). The percentage is not in the 2007 text checked for this draft.\n• MAP-20% reference: MAP floor **${r(mapFloor20)} mmHg** (0.80 x MAP). No confirmed source.\n• Do not dose to these numbers until signoff.md is resolved.`);
-  lines.push('**AFTER THE FIRST HOUR:** reduce further gradually if stable and not hypoperfused. Guideline [1] gives 160/100 mmHg at 2 to 6 hours.');
+  lines.push('**AFTER THE FIRST HOUR:** reduce further gradually over 24 to 48 hours if stable and not hypoperfused. [1]');
 
   if (input.dissection) lines.push('**AORTIC DISSECTION:** the general rule is not the target. Beta-blocker is first-line. [1] SBP and HR goals come from the dissection consult. Sources conflict (see signoff.md).');
   if (input.ischemicStroke) lines.push('**ISCHEMIC STROKE:** BP thresholds are stroke-specific and set in the stroke consult. Do not apply the general rule before the thrombolysis decision. [3]');
@@ -96,7 +96,7 @@ export const HTNE_BP_TARGET_CALCULATOR = {
   results: [] as Array<{ min: number; max: number; label: string; risk: string; mortality: string; colorVar: string }>,
   thresholdNote: 'Decision support, not an order. The first-hour SBP limit (no more than 25%) is from the 2017 ACC/AHA guideline [1]. The Marik & Varon MAP percentages are draft rules, not confirmed in the primary text. Compelling-condition goals and exception targets come from their consults. Confirm doses and targets on the drug entry and primary source before acting.',
   citations: [
-    'Whelton PK, Carey RM, Aronow WS, et al. 2017 ACC/AHA/AAPA/ABC/ACPM/AGS/APhA/ASH/ASPC/NMA/PCNA Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults. Hypertension. 2018;71(6):e13-e115. Section 11.2.',
+    '2025 AHA/ACC/AANP/AAPA/ABC/ACCP/ACPM/AGS/AMA/ASPC/NMA/PCNA/SGIM Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults. Circulation. 2025. Section 6.2 and Table 27. doi:10.1161/CIR.0000000000001356.',
     'Marik PE, Varon J. Hypertensive crises: challenges and management. Chest. 2007;131(6):1949-1962. doi:10.1378/chest.06-2490.',
     'Powers WJ, Rabinstein AA, Ackerson T, et al. Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update to the 2018 Guidelines. Stroke. 2019;50:e344-e418. doi:10.1161/STR.0000000000000211.',
   ],

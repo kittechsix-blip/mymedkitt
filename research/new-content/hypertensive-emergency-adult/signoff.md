@@ -261,3 +261,6 @@ REVISE. The consult is not safe to deploy as written. It gives a 24-48 hour "nor
 
 ### Ruling 6 (Andy, 2026-10-27)
 Dissection first-hour target RULED: SBP <120 mm Hg in the first hour (2025 AHA/ACC section 6.2, text re-read), HR control first. Added to exc-dissection node with citation [10]. NOTE for re-audit: the same 6.2 sentence says '<140 mm Hg for most other conditions' in the first hour, which differs from the drafted 'SBP no more than 25% in the first hour' general rule; re-check the exact 2025 wording and reconcile with Dr. K before deploy.
+
+### Ruling 7 (Andy, 2026-10-27)
+'2025 target only': first-hour node and BP calculator now follow 2025 AHA/ACC section 6.2 + Table 27 exactly: dissection SBP <=120 within 20 min (beta-blocker first); most other compelling conditions SBP <140 in the first hour; pheochromocytoma not an indication for immediate <120/<140; no compelling indication: ~25% SBP reduction in hour 1 then gradual over 24-48 h; avoid SBP 110-139 early without dissection/pheo, esp. SBP >220 (AKI risk). The 2017 '160/100 at 2-6 h' step is removed. NOTE: the 25% rule remains in 2025 for the no-compelling-indication group; so '2025 only' keeps a 25% rule there. Calculator citation [1] is now the 2025 guideline. Still open: MAP-percentage lines (no source), stroke thresholds, drug doses.
