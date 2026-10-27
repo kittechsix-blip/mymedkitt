@@ -149,10 +149,10 @@ Status: DRAFT for Andy's sign-off, then Dr. Kitlowski's clinical audit. Nothing 
 ## Sign-off checklist
 
 **Andy**
-- [ ] C1: decide the pre-angiography antithrombotic rule when SCAD is not yet excluded
-- [ ] C2: decide the default antiplatelet plan and duration after conservative SCAD and after stenting
+- [x] C1: RULED by Andy 2026-10-27: treat as ACS before angiography, stop systemic anticoagulation once SCAD is confirmed, no fibrinolysis (applied to stabilise node + critical action 2)
+- [x] C2: RULED by Andy 2026-10-27: aspirin default; DAPT shown as the cardiology option; no durations as orders (applied to scad-antithrombotic node; ACS loading links removed)
 - [ ] C3: confirm fibrinolysis wording ("contraindicated", ESC-ACCA 2018)
-- [ ] C4: decide the SCAD beta-blocker directive (observational HR 0.36 vs AHA "selective" language vs ESC "recommended in all")
+- [x] C4: RULED by Andy 2026-10-27: suggest a beta-blocker, no HR number, selection with cardiology (applied)
 - [ ] C4: decide whether the existing MINOCA line ("beta-blockers worsen spasm") stays
 - [ ] C5: choose the CCB and long-acting nitrate names (verapamil / isosorbide mononitrate / diltiazem / amlodipine) and the linked drug entries
 - [ ] C6: decide whether any doses are added (2023 table doses are listed above; none in the app)
