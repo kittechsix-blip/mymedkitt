@@ -109,7 +109,8 @@ test('ARDS Berlin calculator: support mode gates the grade and the prone line', 
   assert.equal(calc({ pao2: 100, fio2: 50, peep: 5, support: 0 }).value, '--', 'support not set shows entry prompt');
   assert.equal(calc({ pao2: 100, fio2: 50, peep: 5, support: 1 }).label, 'Moderate ARDS (Berlin)', 'invasive at P/F 200 is moderate');
   const nonInvasive = calc({ pao2: 100, fio2: 50, peep: 5, support: 2 });
-  assert.equal(nonInvasive.label, 'Cannot classify beyond mild (non-invasive)', 'CPAP or NIV at P/F 200 cannot be graded beyond mild');
+  assert.equal(nonInvasive.label, 'Non-invasive: severity cannot be classified (Berlin needs PEEP >=5 on invasive ventilation for moderate/severe)', 'CPAP or NIV at P/F 200 is not labelled mild or graded');
+  assert.doesNotMatch(nonInvasive.description, /MORTALITY/, 'no mortality percentage on the non-invasive capped path');
   assert.doesNotMatch(nonInvasive.description, /27%/, 'invasive-cohort mild mortality is not shown on the non-invasive result');
   assert.doesNotMatch(nonInvasive.label + nonInvasive.description, /Mild ARDS \(Berlin\)/, 'no "Mild ARDS" label on the non-invasive path');
   assert.equal(calc({ pao2: 100, fio2: 50, peep: 5, support: 3 }).label, 'Not a Berlin support mode', 'high-flow only is not graded');

@@ -369,3 +369,10 @@ Checks after edits: `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` cl
 ### Verdict
 **REVISE.** Not safe to deploy. Open patient-safety items: P1 (ICU disposition against 2025 rec 1), P2 (cocaine branch with no first-line step), P3 (unverified labetalol pregnancy titration numbers), P4 (clevidipine maintenance not re-verified), P5 (nitroglycerin start). Each needs Andy's ruling, a primary source, or both. The citation-gate items C1 to C4 must be resolved before the consult is signed. Deploy only after Andy rules on P1 to P5 and C1, and this audit is re-run.
 
+
+## Patch 2026-10-27 (cocaine and beta-blocker conflict)
+
+- Tree `exc-cocaine` node, summary, recommendation, exceptions list, the beta-blocker node, and the BP-target calculator line (`htne-bp-target.ts`) now say the same thing: benzodiazepine first; avoid pure beta-blockers (propranolol, metoprolol, esmolol) in acute cocaine toxicity; mixed alpha/beta agents (labetalol, carvedilol) are evidence-conflicted and not first line. Phentolamine stays second-line as already written. Citation [11] (McCord 2008) is cited where the statement sits.
+- The beta-blocker node now carries a cocaine warning and cites [11]. Its esmolol recommendation is unchanged for non-cocaine heart-rate control.
+- Not changed, outside the listed files: the learn cards in `src/data/learn-cards-conditions.ts` (line 574, 581) and stop pages in `src/data/stop-pages/batch-09.ts` (lines 39, 121) say "avoid beta-blockers in cocaine" without the mixed-agent distinction. Andy to decide whether those are patched in a follow-up.
+- Note: [11] was read as metadata only (per its citation text), not as full text. The mixed-agent "evidence conflicts" wording rests on the sources already cited for the labetalol drug entry, which are not re-read here.

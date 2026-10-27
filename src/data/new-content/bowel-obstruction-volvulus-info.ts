@@ -20,7 +20,7 @@ const SBOV_STEPS_PAGE: InfoPage = {
     },
     {
       heading: '3. Partial adhesive SBO: non-operative trial',
-      body: '- [Tube decompression and water-soluble contrast](#/node/bowel-obstruction-volvulus-nom-entry)\n- [Checkpoints: fever, peritonitis markers, 72 hours, day-3 drainage](#/node/bowel-obstruction-volvulus-nom-check)\n- [Contrast in colon within 24 hours](#/node/bowel-obstruction-volvulus-nom-resolving)',
+      body: '- [Tube decompression and water-soluble contrast](#/node/bowel-obstruction-volvulus-nom-entry)\n- [Checkpoints: fever, peritonitis markers, 72 hours](#/node/bowel-obstruction-volvulus-nom-check)\n- [Contrast in colon within 24 hours](#/node/bowel-obstruction-volvulus-nom-resolving)',
     },
     {
       heading: '4. Surgery triggers',
@@ -65,7 +65,7 @@ const SBOV_STOP_PAGE: InfoPage = {
     },
     {
       heading: '🛑 Do NOT continue a non-operative trial past its checkpoints',
-      body: 'Strangulation signs go to surgery. At 72 hours without resolution, or with drainage above 500 mL on day 3, consider surgery. WBC above 10,000/mm3 is a peritonitis marker with low sensitivity and specificity. [Checkpoints](#/node/bowel-obstruction-volvulus-nom-check)',
+      body: 'Strangulation signs go to surgery. At 72 hours without resolution, reassess for surgery; WSES 2017 calls 72 hours a safe trial length and longer is debated. WBC above 10,000/mm3 is a peritonitis marker with low sensitivity and specificity, not a stop rule. [Checkpoints](#/node/bowel-obstruction-volvulus-nom-check)',
     },
     {
       heading: '🛑 Do NOT read contrast in the colon as cure',

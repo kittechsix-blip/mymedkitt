@@ -63,3 +63,23 @@ Source for each change is the primary text read for the consult signoff (see the
 
 ### Not changed in this pass (outside the named files)
 - src/data/new-content/drugs-htn.ts still carries the clevidipine "21 mg/h Table 26 maximum" text. Re-word it to the label text above in the next pass.
+
+## Patch 2026-10-27 (Andy-approved)
+
+### labetalol (LABETALOL), indication "ACS / Cocaine-Associated"
+1. Regimen. Old: "10-20 mg IV over 2 minutes. May repeat or double dose q10 min (max 300 mg total). Preferred beta-blocker in cocaine-associated STEMI due to combined alpha/beta blockade ... Avoid pure beta-blockers (metoprolol, atenolol) in acute cocaine-associated ACS." New: "Evidence conflicts. Benzodiazepine and a vasodilator come first. Avoid pure beta-blockers (propranolol, metoprolol, esmolol) in acute cocaine toxicity. Mixed alpha/beta agents such as labetalol are not first line." Source for the wording: Andy's patch instruction (evidence conflict stated as such; no primary source asserted for the new sentence).
+2. Dose removed. Old "10-20 mg IV over 2 minutes; repeat or double q10 min, max 300 mg" is NOT label-supported. Labetalol HCl injection label (DailyMed setid abfc6b75-1ed5-41f1-0484-4597488237bc, read 2026-10-27) gives 20 mg IV over 2 minutes, then 40 or 80 mg at 10-minute intervals, cumulative max 300 mg. Not written into this row (per instruction: remove unsupported dose). Andy may decide whether to restate the label dose here.
+3. Indication string unchanged: 'ACS / Cocaine-Associated'. Link check: `#/drug/labetalol/acs` (src/data/trees/stemi.ts, cocaine-associated STEMI bullet) still matches.
+4. CONFLICT NOT FIXED (tree, not owned): stemi.ts cocaine bullet still says "consider [Labetalol](#/drug/labetalol/acs) if beta-blockade needed", which the new row now calls not first line. Tree owner must reconcile.
+
+### diatrizoate (DIATRIZOATE, drugs-sbo-scad.ts)
+1. Dosing field. Old: two rows, an SBO row (label 30-90 mL plus 100 mL off-label NG-clamp trial, with conflict text) and a GI-radiography row (label 30-90 mL plus pediatric doses). New: one row, "GI radiography (label, adult oral dose)": "Label adult oral dose: 30-90 mL (11-33 g iodine), depending on the nature of the examination and the size of the patient. Oral or rectal use only. Not for parenteral use. Discard unused portion." Source: GASTROGRAFIN Prescribing information, DailyMed setid 8c2340e4-2b42-45dc-8fac-9960e8172547 (re-opened 2026-10-27; Adult oral dosage section confirmed 30 to 90 mL).
+2. Moved to notes. "Off-label trial regimen (Cochrane CD004651 full text via PMC6465054): 100 mL orally or via NG, NG clamped 60 minutes; NG route is off-label per the label." Pediatric label doses (under 5 y 30 mL; 5-10 y 60 mL) also moved from the dosing field to notes so no label text is lost. Source: same label.
+3. Unlinked: no `#/drug/diatrizoate` link exists in src/. Unchanged.
+4. Indication "Adhesive SBO: water-soluble contrast ... (OFF-LABEL)" stays in the indications list (no dosing row for it now).
+
+### ketorolac (KETOROLAC, drug-store.ts and BCT acute-pain row in drugs-ards-bct.ts)
+1. BCT acute-pain row, regimen. Added: "The IV bolus must be given over no less than 15 seconds." Source: Ketorolac tromethamine injection, Hospira US PI (DailyMed setid 8accbb78-fc64-45d5-69b0-35c23a1d2a2e, re-read 2026-10-27, Dosage and Administration).
+2. BCT acute-pain row, boxed-warning sentence. Old: "Contraindicated with hypovolemia not corrected, labor and delivery, ..." New: "Hypovolemia should be corrected prior to administration. Contraindicated in labor and delivery, ...". Source: same label. Verified: the label's Dosage and Administration states "Hypovolemia should be corrected prior to the administration of ketorolac tromethamine injection". Uncorrected hypovolemia is NOT listed as a contraindication in the label; the label's contraindication about volume is "advanced renal impairment and ... risk of renal failure due to volume depletion" (Boxed Warning / Contraindications).
+3. Existing ketorolac entry (drug-store.ts), cautions. Added two lines: "IV bolus must be given over no less than 15 seconds (Hospira ketorolac injection label, rev 11/2024)" and "Hypovolemia should be corrected prior to administration (same label, Dosage and Administration)". Source: same label. No existing dose changed (SCD 0.5 mg/kg row and migraine 15-30 mg row untouched).
+4. Not changed: the BCT row's boxed-warning list (GI, CV, renal, bleeding) and the "Single dose / Multiple dose" label doses; those were not in the patch scope and were already label-consistent on re-read.

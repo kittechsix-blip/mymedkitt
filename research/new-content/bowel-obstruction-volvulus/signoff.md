@@ -318,3 +318,15 @@ Not re-verified this pass (no change, flagged): cites 3 and 5 (abstract titles m
 Verified this pass with no change needed: Zielinski 2010 (cite 2) is a 100-consecutive-patient cohort, and its predictors are free intraperitoneal fluid, mesenteric edema, absent small-bowel feces sign and vomiting, as the tree states. Emmett and Narins 1977 anion-gap citation and corrected-AG formula in `calculator.ts` are consistent with the standard formula.
 
 Approve path: decide F1, F5, F13 and the stop-page aspiration wording. Then re-run this audit; the remaining items are small.
+
+## Patch 2026-10-27 (CT surgery predictors, WSES wording, 72 h, WBC)
+
+Source: Bologna ASBO guideline, WSES 2017 (ten Broek et al., World J Emerg Surg 2018;13:24; PMC6006983), full text read. Fig. 2 (algorithm) and Table 5 are images or a table not read in text.
+
+- **Rule conflict resolved.** The CT node sent any single surgery predictor to the surgery node, which required three together. WSES 2017 does not state a count. It states that closed loop, bowel ischemia and free fluid "suggest the need for surgery without delay", and that Zielinski's mesenteric edema, absent small-bowel feces sign and obstipation correlate with need for surgery (validated score, concordance 0.77) without requiring all three. Both nodes now use the conservative rule: any one strangulation sign or CT predictor means urgent surgical consult now. This is conservative wording, not WSES wording; it is labelled as such in the tree.
+- **Acidosis attribution removed.** WSES 2017 lists peritonitis, strangulation and ischemia as contraindications to non-operative management. It does not name metabolic acidosis. The stabilise node no longer cites [1] for acidosis; acidosis stays in the strangulation red-flag list as clinical consensus, labelled as not in [1].
+- **72 h.** WSES 2017 says a non-operative trial "can be continued safely for 72 h" (Table 5, Level IIB), and that longer continuation with persistent high tube output but no deterioration "remains subject to debate". The tree now says this. "No resolution at 72 hours: consider surgery" is now "reassess for surgery".
+- **Day-3 drainage above 500 mL: removed.** The number is attributed to WSES Fig. 2. Fig. 2 was not read in text, so the volume is not traced to an opened source. Removed from the tree and from the info page. Andy to check Fig. 2 and decide whether to restore it with a verified source.
+- **WBC above 10,000/mm3.** WSES 2017 lists WBC above 10,000/mm3 and CRP above 75 as peritonitis laboratory values with low sensitivity and specificity, in the laboratory section (not Fig. 2). Wording is now "peritonitis marker, low sensitivity and specificity, not a stop rule".
+- **Fever.** Not listed in WSES as a surgery trigger in the text read. Now labelled as clinical consensus, not [1].
+- **Open for Andy.** The CT node's "complete obstruction with no colonic air" predictor is consult-authored and not in the WSES text read. It is kept, labelled as not WSES-sourced, and it routes to surgery under the conservative rule.

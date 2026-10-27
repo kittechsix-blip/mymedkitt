@@ -324,3 +324,7 @@ Typecheck: `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` printed no 
 
 ### Dr. Kitlowski signoff (re-audit)
 REVISE. Fibrinolysis contraindication and the "suggest beta-blocker" directive are now sourced to the primary text as far as the sources allow. Blocker B1 (entry node id) must be fixed before any deploy. F-A through F-I need Andy's decision or a source read before APPROVE.
+
+## Patch 2026-10-27 (alteplase link)
+
+- `scad-vasospasm.ts` antithrombotic node: the `[alteplase](#/drug/alteplase/stemi)` link is replaced with plain text ("alteplase or other fibrinolytics"), with a note that STEMI lytic dosing is deliberately not linked. No fibrinolytic dosing opens inside SCAD. No other alteplase or STEMI-lytic link exists in the SCAD tree or info page.

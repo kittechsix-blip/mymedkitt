@@ -156,9 +156,9 @@ export const ARDS_PF_BERLIN_CALCULATOR: CalculatorDefinition = {
         body = '**MORTALITY (BERLIN COHORT):** 27% (95% CI 24 to 30)\n\n**MANAGEMENT:**\n• Protective VT at 6 mL/kg PBW, plateau at or below 30\n• Reassess the ratio on set PEEP as the picture changes';
         break;
       case 'mild-capped':
-        label = 'Cannot classify beyond mild (non-invasive)';
+        label = 'Non-invasive: severity cannot be classified (Berlin needs PEEP >=5 on invasive ventilation for moderate/severe)';
         colorVar = '--color-warning';
-        body = '**CANNOT CLASSIFY BEYOND MILD:** Berlin grades moderate or severe only on invasive ventilation with PEEP of 5 or more. This ratio is 200 or below on CPAP or NIV, so no severity grade beyond mild is assigned.\n\n**NEXT:**\n• Reassess after an ABG on invasive settings if intubated\n• Non-intubated patients: the 2023 global definition sets the diagnosis; this app assigns no grade beyond mild';
+        body = '**SEVERITY NOT ASSIGNED:** This ratio is 200 or below on CPAP or NIV. Berlin moderate and severe grades need invasive ventilation with PEEP of 5 or more, so no mortality figure is shown and no grade is assigned.\n\n**NEXT:**\n• Reassess after an ABG on invasive settings if intubated\n• Non-intubated patients: the 2023 global definition sets the diagnosis; this app assigns no severity grade here';
         break;
       case 'peep-below-5':
         label = 'PEEP below 5';

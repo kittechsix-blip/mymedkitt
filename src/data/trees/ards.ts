@@ -385,14 +385,16 @@ This screening list is expert practice, not taken from a cited trial. Confirm it
 
 **Only after protective ventilation, prone (if eligible), and conservative fluids have been tried.**
 
-**EOLIA entry, despite optimal ventilation (any one):** [13]
+**EOLIA trial enrollment criteria, despite optimal ventilation (any one):** [13]
 - P/F below 50 for more than 3 h
 - P/F below 80 for more than 6 h
 - pH below 7.25 with PaCO2 ≥60 mmHg for more than 6 h
 
-**Trial caveat:** EOLIA did not significantly reduce 60-day mortality against conventional management (35% vs 46%, P=0.09), and it stopped for futility. ECMO is a referral decision, not a proven survival step.
+These are the trial's enrollment gates, not a complete list of referral indications.
 
-**Cross-check:** the ECMO consult lists a different VV-ECMO threshold (single P/F below 80 on FiO2 1.0). Use the ECMO consult for the indication and this node for the EOLIA-type trial gates.`,
+**ECMO referral indications: see the [ECMO consult](#/tree/ecmo).** The ECMO consult uses a single P/F threshold (below 80 on FiO2 1.0); read the two together.
+
+**Trial caveat:** EOLIA did not significantly reduce 60-day mortality against conventional management (35% vs 46%, P=0.09), and it stopped for futility. ECMO is a referral decision, not a proven survival step.`,
     citation: [13],
     options: [
       { label: 'Meets EOLIA-type gates', description: 'Refer for ECMO evaluation now', next: 'ards-ecmo-referral', urgency: 'critical' },
@@ -409,7 +411,9 @@ This screening list is expert practice, not taken from a cited trial. Confirm it
     type: 'result',
     module: 4,
     title: 'Refer for ECMO Evaluation',
-    body: `**Call the ECMO center early when EOLIA-type gates are met.** [13] See [ECMO](#/tree/ecmo).
+    body: `**Call the ECMO center early when EOLIA trial enrollment criteria are met.** [13]
+
+**ECMO referral indications: see the [ECMO consult](#/tree/ecmo).** That consult uses a single P/F threshold (below 80 on FiO2 1.0); read the two together.
 
 **Have ready before the call:**
 - Ventilator settings: PEEP, FiO2, plateau pressure, driving pressure, and the ABG time
@@ -418,7 +422,7 @@ This screening list is expert practice, not taken from a cited trial. Confirm it
 - Contraindications and goals of care
 
 **Trial caveat:** EOLIA showed a non-significant mortality difference (35% vs 46%, P=0.09). Referral buys expert assessment, not a guaranteed survival gain.`,
-    recommendation: 'Refer for ECMO evaluation when EOLIA-type gates are met despite optimal ventilation. The trial did not show a significant mortality benefit, so the referral rests on the individual patient.',
+    recommendation: 'Refer for ECMO evaluation when EOLIA trial enrollment criteria are met despite optimal ventilation (ECMO referral indications: see the ECMO consult). The trial did not show a significant mortality benefit, so the referral rests on the individual patient.',
     citation: [13],
     confidence: 'consider',
     summary: 'Early referral for assessment; the trial did not prove a mortality benefit.',
