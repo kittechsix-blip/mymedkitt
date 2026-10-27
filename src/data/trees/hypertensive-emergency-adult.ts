@@ -231,7 +231,7 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Aortic Dissection',
-    body: '**Suspected aortic dissection** is managed in the [Aortic dissection consult](#/tree/aortic-dissection) and in the ICU.\n\n**Beta-blocker is first-line** for dissection under the 2022 ACC/AHA guideline. [6]\n\n**SBP and heart-rate goals are NOT written on this page.** Summaries of the guideline disagree on the numbers. Use the dissection consult and the primary guideline. [6]',
+    body: '**Suspected aortic dissection** is managed in the [Aortic dissection consult](#/tree/aortic-dissection) and in the ICU.\n\n**Beta-blocker is first-line** for dissection under the 2022 ACC/AHA guideline. [6]\n\n**Lower SBP to <120 mm Hg during the first hour.** [10] Control heart rate first with the beta-blocker, then add a vasodilator if needed. [6] The heart-rate goal is set in the dissection consult and the primary guideline [6]; it is not restated here.',
     recommendation: 'Beta-blocker first-line for suspected dissection. SBP and heart-rate goals come from the aortic dissection consult.',
     citation: [6],
     confidence: 'recommended',
@@ -388,4 +388,5 @@ export const HTNE_CITATIONS: Citation[] = [
   { num: 7, text: 'Lenders JWM, et al. Pheochromocytoma and Paraganglioma: Endocrine Society clinical practice guideline. J Clin Endocrinol Metab. 2014;99(6):1915-1942. doi:10.1210/jc.2014-1498.' },
   { num: 8, text: 'Powers WJ, et al. 2019 Update to Guidelines for Early Management of Acute Ischemic Stroke. Stroke. 2019;50:e344-e418. doi:10.1161/STR.0000000000000211.' },
   { num: 9, text: 'Varon J. Treatment of acute severe hypertension: current and newer agents. Drugs. 2008. PMID 18257607.' },
+  { num: 10, text: '2025 AHA/ACC/AANP/AAPA/ABC/ACCP/ACPM/AGS/AMA/ASPC/NMA/PCNA/SGIM Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults. Circulation. 2025. Section 6.2, Hypertensive Emergencies and Severe Hypertension in Nonpregnant and Nonstroke Patients. doi:10.1161/CIR.0000000000001356 (SBP <120 mm Hg in aortic dissection during the first hour, text read 2026-10-27).' },
 ];

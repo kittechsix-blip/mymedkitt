@@ -257,3 +257,7 @@ REVISE. The consult is not safe to deploy as written. It gives a 24-48 hour "nor
 ## Fixed after Dr. K audit (2026-10-27, mechanical only)
 - Phenoxybenzamine (`src/data/new-content/drugs-htn.ts`): label maximum 20 mg BID (generic phenoxybenzamine capsules, DailyMed setid 0be6a394, read 2026-10-27, Carcinogenesis section) now shown beside the 1 mg/kg/day Endocrine Society figure. No maxDose was set; the conflict is shown, not resolved. Unsourced "1-2 week pre-operative" duration removed from the entry and from `src/data/trees/hypertensive-emergency-adult.ts`.
 - Draft and sign-off wording removed from node text and header in `src/data/trees/hypertensive-emergency-adult.ts`. No number changed.
+
+
+### Ruling 6 (Andy, 2026-10-27)
+Dissection first-hour target RULED: SBP <120 mm Hg in the first hour (2025 AHA/ACC section 6.2, text re-read), HR control first. Added to exc-dissection node with citation [10]. NOTE for re-audit: the same 6.2 sentence says '<140 mm Hg for most other conditions' in the first hour, which differs from the drafted 'SBP no more than 25% in the first hour' general rule; re-check the exact 2025 wording and reconcile with Dr. K before deploy.
