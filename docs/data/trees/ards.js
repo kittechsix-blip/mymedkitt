@@ -379,7 +379,7 @@ This screening list is expert practice, not taken from a cited trial. Confirm it
 
 These are the trial's enrollment gates, not a complete list of referral indications.
 
-**ECMO referral indications: see the [ECMO consult](#/tree/ecmo).** The ECMO consult uses a single P/F threshold (below 80 on FiO2 1.0); read the two together.
+**ECMO referral trigger (commonly used, P/F below 80): see the [ECMO consult](#/tree/ecmo).** The ECMO consult sets out the same two statements side by side, with sources: the EOLIA trial enrollment criteria above, and the referral trigger. They are not the same rule.
 
 **Trial caveat:** EOLIA did not significantly reduce 60-day mortality against conventional management (35% vs 46%, P=0.09), and it stopped for futility. ECMO is a referral decision, not a proven survival step.`,
         citation: [13],
@@ -398,9 +398,9 @@ These are the trial's enrollment gates, not a complete list of referral indicati
         type: 'result',
         module: 4,
         title: 'Refer for ECMO Evaluation',
-        body: `**Call the ECMO center early when EOLIA trial enrollment criteria are met.** [13]
+        body: `**Call the ECMO center early when P/F is below 80 despite optimal medical management, including a prone trial** (ELSO 2021 referral trigger). [15] The EOLIA trial enrollment criteria are listed in the ECMO consult.
 
-**ECMO referral indications: see the [ECMO consult](#/tree/ecmo).** That consult uses a single P/F threshold (below 80 on FiO2 1.0); read the two together.
+**ECMO referral trigger (commonly used, P/F below 80): see the [ECMO consult](#/tree/ecmo).** That consult sets out the EOLIA trial criteria and the referral trigger side by side, with sources.
 
 **Have ready before the call:**
 - Ventilator settings: PEEP, FiO2, plateau pressure, driving pressure, and the ABG time
@@ -409,8 +409,8 @@ These are the trial's enrollment gates, not a complete list of referral indicati
 - Contraindications and goals of care
 
 **Trial caveat:** EOLIA showed a non-significant mortality difference (35% vs 46%, P=0.09). Referral buys expert assessment, not a guaranteed survival gain.`,
-        recommendation: 'Refer for ECMO evaluation when EOLIA trial enrollment criteria are met despite optimal ventilation (ECMO referral indications: see the ECMO consult). The trial did not show a significant mortality benefit, so the referral rests on the individual patient.',
-        citation: [13],
+        recommendation: 'Refer for ECMO evaluation when P/F is below 80 despite optimal medical management including a prone trial (ELSO 2021). The ECMO consult shows this referral trigger and the EOLIA enrollment criteria side by side. The trial did not show a significant mortality benefit, so the referral rests on the individual patient.',
+        citation: [13, 15],
         confidence: 'consider',
         summary: 'Early referral for assessment; the trial did not prove a mortality benefit.',
         safetyLevel: 'critical',
@@ -462,5 +462,6 @@ export const ARDS_CITATIONS = [
     { num: 10, text: 'Moss M, Huang DT, Brower RG, et al. Early Neuromuscular Blockade in the Acute Respiratory Distress Syndrome. N Engl J Med. 2019;380(21):1997-2008. doi:10.1056/NEJMoa1901686.' },
     { num: 12, text: 'Wiedemann HP, Wheeler AP, Bernard GR, et al. Comparison of two fluid-management strategies in acute lung injury. N Engl J Med. 2006;354(24):2564-2575.' },
     { num: 13, text: 'Combes A, Hajage D, Capellier G, et al. Extracorporeal membrane oxygenation for severe acute respiratory distress syndrome. N Engl J Med. 2018;378(21):1965-1975. doi:10.1056/NEJMoa1800385.' },
+    { num: 15, text: 'Tonna JE, Abrams D, Brodie D, et al. Management of Adult Patients Supported with Venovenous Extracorporeal Membrane Oxygenation (VV ECMO): Guideline from the Extracorporeal Life Support Organization (ELSO). ASAIO J. 2021;67(6):601-610. PMID 33965970.' },
     { num: 14, text: 'Brower RG, Lanken PN, MacIntyre N, et al. Higher versus lower positive end-expiratory pressures in patients with the acute respiratory distress syndrome. N Engl J Med. 2004;351(4):327-336.' },
 ];

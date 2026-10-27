@@ -53,7 +53,7 @@ export const ICH_NODES = [
             },
             {
                 label: 'Xa Inhibitor (apixaban, rivaroxaban, edoxaban)',
-                description: 'Factor Xa inhibitor — andexanet alfa or PCC',
+                description: 'Factor Xa inhibitor — 4-factor PCC (andexanet alfa no longer marketed in the US)',
                 next: 'ich-xa-rev',
                 urgency: 'critical',
             },
@@ -137,7 +137,7 @@ export const ICH_NODES = [
         type: 'info',
         module: 2,
         title: 'Xa Inhibitor Reversal',
-        body: '**Applies to: apixaban, rivaroxaban, edoxaban**\n\n**Option 1: [4-Factor PCC](#/drug/pcc-4factor/doac ich)**\n• 50 IU/kg IV\n• Most widely available option\n• Onset: 15–30 minutes\n\n**Option 2: Andexanet alfa (Andexxa)**\n• Specific Xa inhibitor reversal agent\n• Dosing depends on agent and time since last dose\n• Note: recently withdrawn from US market due to thrombotic concerns — availability varies\n\n**If last dose within 2h (intubated patient):**\n• Activated charcoal 50 g via OG/NG tube\n\n**Monitoring:**\n• Anti-Xa levels if available (not required before treatment)\n• Repeat CT at 6h to assess for expansion\n• Watch for thrombotic complications post-reversal\n\n**Basis for the 50 IU/kg PCC dose:** Neurocritical Care Society / SCCM antithrombotic reversal guideline [5], AHA/ASA 2022 [1], ESO/EANS 2025 [2], and the 2020 ACC bleeding decision pathway [4].\n\n**Basis for the andexanet availability note (harm signal):** ANNEXA-4 (n=352, single-arm) reported excellent/good hemostasis in 82% at 12h [19]. The randomized ANNEXA-I trial (n=530, Xa-inhibitor-associated ICH) showed better hematoma-expansion control than usual care but more thrombotic events — ≥1 thrombotic event 10.3% vs 5.6%, ischemic stroke 6.5% vs 1.5%, MI 4.2% vs 1.5% [20]. FDA concluded from post-marketing data that risks outweighed benefits (30-day thrombosis 14.6% vs 6.9%; thrombosis-related death 2.5% vs 0.9%), and andexanet alfa ceased US commercial availability on 22 Dec 2025; it remains available in the EU, UK, and Japan (Ondexxya) [21].',
+        body: '**Applies to: apixaban, rivaroxaban, edoxaban**\n\n**Option 1 (first-line in the US): [4-Factor PCC](#/drug/pcc-4factor/doac ich)**\n• 50 IU/kg IV\n• Available in the US; andexanet alfa is no longer marketed here\n• Onset: 15–30 minutes\n\n**Option 2: Andexanet alfa (Andexxa) — NO LONGER MARKETED IN THE US** (US sales ended 12/22/2025)\n• Where available outside the US: specific Xa inhibitor reversal agent\n• Dosing depends on agent and time since last dose\n• Not an option for US patients — use 4-factor PCC\n\n**If last dose within 2h (intubated patient):**\n• Activated charcoal 50 g via OG/NG tube\n\n**Monitoring:**\n• Anti-Xa levels if available (not required before treatment)\n• Repeat CT at 6h to assess for expansion\n• Watch for thrombotic complications post-reversal\n\n**Basis for the 50 IU/kg PCC dose:** Neurocritical Care Society / SCCM antithrombotic reversal guideline [5], AHA/ASA 2022 [1], ESO/EANS 2025 [2], and the 2020 ACC bleeding decision pathway [4].\n\n**Basis for the andexanet availability note (harm signal):** ANNEXA-4 (n=352, single-arm) reported excellent/good hemostasis in 82% at 12h [19]. The randomized ANNEXA-I trial (n=530, Xa-inhibitor-associated ICH) showed better hematoma-expansion control than usual care but more thrombotic events — ≥1 thrombotic event 10.3% vs 5.6%, ischemic stroke 6.5% vs 1.5%, MI 4.2% vs 1.5% [20]. FDA concluded from post-marketing data that risks outweighed benefits (30-day thrombosis 14.6% vs 6.9%; thrombosis-related death 2.5% vs 0.9%), and andexanet alfa ceased US commercial availability on 22 Dec 2025; it remains available in the EU, UK, and Japan (Ondexxya) [21].',
         citation: [1, 2, 4, 5, 19, 20, 21],
         treatment: {
             firstLine: {
@@ -149,17 +149,17 @@ export const ICH_NODES = [
                 notes: 'Most widely available. Onset 15-30 min. Consider activated charcoal 50 g via OG/NG if last dose within 2h (intubated only).',
             },
             alternative: {
-                drug: 'Andexanet alfa (Andexxa)',
-                dose: 'Varies by agent and time since last dose',
+                drug: 'Andexanet alfa (Andexxa) — NOT marketed in the US',
+                dose: 'Varies by agent and time since last dose (historical reference)',
                 route: 'IV',
                 frequency: 'Bolus then infusion',
                 duration: 'Per protocol',
-                notes: 'Specific Xa reversal agent. Limited availability. Watch for thrombotic complications.',
+                notes: 'US sales ended 12/22/2025. Where available outside the US only. Watch for thrombotic complications.',
             },
             monitoring: 'Anti-Xa levels if available (not required before treatment). Repeat CT at 6h. Monitor for thrombotic complications post-reversal.',
         },
         next: 'ich-bp',
-        summary: 'Andexanet alfa or 4-factor PCC 50 IU/kg for Xa inhibitor reversal — PCC if andexanet unavailable',
+        summary: '4-factor PCC 50 IU/kg for Xa inhibitor reversal — andexanet alfa is no longer marketed in the US',
         safetyLevel: 'critical',
     },
     {

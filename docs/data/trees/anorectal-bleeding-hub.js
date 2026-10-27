@@ -146,8 +146,8 @@ export const ANORECTAL_BLEEDING_HUB_NODES = [
         type: 'result',
         module: 2,
         title: 'Anticoagulated / Coagulopathic — Reverse + Treat',
-        body: 'Open [Anticoagulation Reversal](#/tree/anticoag-reversal) (inherited factor deficiency \u2192 [Hemophilia](#/tree/hemophilia)).\n\n**Match reversal to the agent:**\n- **Warfarin** \u2014 **4-factor PCC** (weight/INR-dosed) + IV vitamin K 10 mg; FFP only if PCC unavailable.\n- **Dabigatran** \u2014 **idarucizumab**.\n- **Apixaban / rivaroxaban** \u2014 **andexanet alfa** where available, otherwise 4-factor PCC.\n- **Antiplatelet** \u2014 platelet transfusion is generally NOT beneficial for GI bleed (contrast with intracranial); hold the agent.\n- **Liver disease** \u2014 vitamin K, correct fibrinogen (cryoprecipitate), targeted product; the INR overestimates bleeding risk.\n- **Hemophilia / VWD** \u2014 factor VIII/IX concentrate or desmopressin/VWF per type; hematology now.\n\nResuscitate in parallel (type and cross, restrictive transfusion) and address the anatomic source once corrected.',
-        recommendation: 'Agent-specific reversal: PCC+vit K (warfarin), idarucizumab (dabigatran), andexanet/PCC (Xa), factor replacement (hemophilia). Then treat the source.',
+        body: 'Open [Anticoagulation Reversal](#/tree/anticoag-reversal) (inherited factor deficiency \u2192 [Hemophilia](#/tree/hemophilia)).\n\n**Match reversal to the agent:**\n- **Warfarin** \u2014 **4-factor PCC** (weight/INR-dosed) + IV vitamin K 10 mg; FFP only if PCC unavailable.\n- **Dabigatran** \u2014 **idarucizumab**.\n- **Apixaban / rivaroxaban** — **4-factor PCC** (andexanet alfa is no longer marketed in the US; where available outside the US only).\n- **Antiplatelet** \u2014 platelet transfusion is generally NOT beneficial for GI bleed (contrast with intracranial); hold the agent.\n- **Liver disease** \u2014 vitamin K, correct fibrinogen (cryoprecipitate), targeted product; the INR overestimates bleeding risk.\n- **Hemophilia / VWD** \u2014 factor VIII/IX concentrate or desmopressin/VWF per type; hematology now.\n\nResuscitate in parallel (type and cross, restrictive transfusion) and address the anatomic source once corrected.',
+        recommendation: 'Agent-specific reversal: PCC+vit K (warfarin), idarucizumab (dabigatran), 4-factor PCC (Xa), factor replacement (hemophilia). Then treat the source.',
         citation: [3, 5, 15],
         safetyLevel: 'warning',
         confidence: 'definitive',
@@ -375,7 +375,7 @@ export const ANORECTAL_BLEEDING_HUB_CRITICAL_ACTIONS = [
     { text: 'Melena / hematemesis / BUN:Cr >30 \u2192 treat as upper-GI bleed until excluded.', nodeId: 'arb-ugib-entry' },
     { text: 'Upper-GI source \u2192 IV PPI \u00B1 octreotide/ceftriaxone if cirrhotic, urgent endoscopy.', nodeId: 'arb-ugib-verdict' },
     { text: 'New rectal bleeding age \u226550 or any alarm feature \u2192 never clear as hemorrhoids alone; arrange colonoscopy.', nodeId: 'arb-malig-verdict' },
-    { text: 'Anticoagulated bleeder \u2192 match reversal to the agent: 4-factor PCC + IV vitamin K (warfarin), idarucizumab (dabigatran), andexanet alfa or 4F-PCC (apixaban/rivaroxaban).', nodeId: 'arb-anticoag-verdict' },
+    { text: 'Anticoagulated bleeder \u2192 match reversal to the agent: 4-factor PCC + IV vitamin K (warfarin), idarucizumab (dabigatran), 4F-PCC (apixaban/rivaroxaban; andexanet alfa no longer marketed in the US).', nodeId: 'arb-anticoag-verdict' },
     { text: 'Avoid empiric antibiotics if EHEC (Shiga-toxin) is suspected \u2014 they raise the HUS risk; check CBC/smear/renal function.', nodeId: 'arb-colitis-verdict' },
 ];
 export const ANORECTAL_BLEEDING_HUB_CITATIONS = [

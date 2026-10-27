@@ -33,8 +33,8 @@ export const STOP_PAGES_09 = {
                 body: 'Double sequential defibrillation requires two defibrillators and two operators delivering near-simultaneous shocks (<1 second apart). One operator attempting both machines in sequence negates the benefit and risks equipment damage. [See DSD setup node](#/node/rvf-dsd-setup).',
             },
             {
-                heading: '🛑 Do NOT use beta-blockers in cocaine-associated VF',
-                body: 'Cocaine causes unopposed alpha-adrenergic vasoconstriction when beta receptors are blocked, precipitating severe hypertension, coronary spasm, and worsening VF. Use benzodiazepines and sodium bicarbonate instead. [See toxin-induced VF node](#/node/rvf-toxin).',
+                heading: '🛑 Do NOT use pure beta-blockers in cocaine-associated VF',
+                body: 'Cocaine causes unopposed alpha-adrenergic vasoconstriction when beta receptors are blocked, precipitating severe hypertension, coronary spasm, and worsening VF. Avoid pure beta-blockers (propranolol, metoprolol, esmolol). Mixed alpha/beta agents (labetalol, carvedilol) have conflicting evidence and are not first line. Benzodiazepine comes first, then sodium bicarbonate. [See toxin-induced VF node](#/node/rvf-toxin).',
             },
         ],
         citations: [],
@@ -113,8 +113,8 @@ export const STOP_PAGES_09 = {
                 body: 'Statin-induced rhabdomyolysis is severely worsened by fibrate combinations, CYP3A4 inhibitors (cyclosporine, macrolides, azoles), and high-intensity formulations. Stop the statin immediately and screen for drug interactions. [See drug-induced node](#/node/rhabdo-drug-induced).',
             },
             {
-                heading: '🛑 Do NOT give beta-blockers in cocaine-induced rhabdomyolysis',
-                body: 'Cocaine-associated sympathomimetic excess causes rhabdomyolysis through hyperthermia and vasoconstriction. Beta-blockers cause unopposed alpha-adrenergic vasoconstriction, worsening both the cocaine toxidrome and muscle ischemia. Benzodiazepines and aggressive cooling are the correct approach. [See drug-induced node](#/node/rhabdo-drug-induced).',
+                heading: '🛑 Do NOT give pure beta-blockers in cocaine-induced rhabdomyolysis',
+                body: 'Cocaine-associated sympathomimetic excess causes rhabdomyolysis through hyperthermia and vasoconstriction. Pure beta-blockers (propranolol, metoprolol, esmolol) cause unopposed alpha-adrenergic vasoconstriction, worsening both the cocaine toxidrome and muscle ischemia. Mixed alpha/beta agents (labetalol, carvedilol) have conflicting evidence and are not first line. Benzodiazepines and aggressive cooling are the correct approach. [See drug-induced node](#/node/rhabdo-drug-induced).',
             },
         ],
         citations: [],

@@ -106,7 +106,7 @@ export const STOP_PAGES_08 = {
             },
             {
                 heading: '🛑 Do NOT forget to reverse anticoagulation immediately',
-                body: 'Anticoagulated patients need urgent reversal: warfarin → 4F-PCC + Vitamin K; dabigatran → idarucizumab; Xa inhibitors → andexanet alfa or 4F-PCC. Vitamin K alone is insufficient — it takes 6-12 hours and must be paired with PCC. [See coagulopathy assessment](#/node/hemo-coag-reversal).',
+                body: 'Anticoagulated patients need urgent reversal: warfarin → 4F-PCC + Vitamin K; dabigatran → idarucizumab; Xa inhibitors → 4F-PCC (andexanet alfa is no longer marketed in the US). Vitamin K alone is insufficient — it takes 6-12 hours and must be paired with PCC. [See coagulopathy assessment](#/node/hemo-coag-reversal).',
             },
             {
                 heading: '🛑 Do NOT skip bronchial artery embolization for definitive control',

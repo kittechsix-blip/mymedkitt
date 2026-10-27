@@ -11405,7 +11405,7 @@ const ADENOSINE = {
 };
 const ANDEXANET_ALFA = {
     id: 'andexanet',
-    name: 'Andexanet Alfa (Andexxa)',
+    name: 'Andexanet Alfa (Andexxa) — No longer marketed in the US',
     genericName: 'Coagulation factor Xa (recombinant), inactivated-zhzo',
     drugClass: 'Antidote — recombinant modified factor Xa decoy',
     route: 'IV',
@@ -11421,7 +11421,7 @@ const ANDEXANET_ALFA = {
         },
         {
             indication: 'Xa-associated intracranial hemorrhage',
-            regimen: '**Dose by the low/high algorithm above.** AHA/ASA 2022 gives a Class 1 recommendation for andexanet in Xa-inhibitor-associated ICH where it is on formulary.\n\n**ANNEXA-I (NEJM 2024; 263 andexanet vs 267 usual care, mostly 4-factor PCC):**\n• Hemostatic efficacy 67.0% vs 53.1%; trial stopped early for efficacy.\n• Anti-FXa activity reduction 94.5% vs 26.9%.\n• **Thrombotic events 10.3% vs 5.6%; ischemic stroke 6.5% vs 1.5%.**\n• **No significant difference in 30-day mortality or disability.**\n\n**PRACTICAL:** most US centers default to 4-factor PCC (Kcentra) on cost and availability (~$25,000–50,000 vs ~$5,000). Reserve andexanet for ICH with the drug on formulary and no acute thrombotic contraindication.',
+            regimen: '**Dose by the low/high algorithm above.** AHA/ASA 2022 gave a Class 1 recommendation for andexanet in Xa-inhibitor-associated ICH where it was available (historical; not marketed in the US since 12/22/2025).\n\n**ANNEXA-I (NEJM 2024; 263 andexanet vs 267 usual care, mostly 4-factor PCC):**\n• Hemostatic efficacy 67.0% vs 53.1%; trial stopped early for efficacy.\n• Anti-FXa activity reduction 94.5% vs 26.9%.\n• **Thrombotic events 10.3% vs 5.6%; ischemic stroke 6.5% vs 1.5%.**\n• **No significant difference in 30-day mortality or disability.**\n\n**PRACTICAL:** most US centers default to 4-factor PCC (Kcentra) on cost and availability (~$25,000–50,000 vs ~$5,000). Reserve andexanet for ICH with the drug on formulary and no acute thrombotic contraindication.',
         },
         {
             indication: 'Not indicated — do NOT give for these',
@@ -11432,6 +11432,7 @@ const ANDEXANET_ALFA = {
         'None per label — no absolute contraindication in life-threatening apixaban- or rivaroxaban-associated bleeding',
     ],
     cautions: [
+        '**No longer marketed in the US (sales ended 12/22/2025) — confirm availability locally.** The dosing below is kept for historical reference only. Where available outside the US, use as labeled.',
         '**BOXED WARNING — thromboembolic risks, ischemic risks, cardiac arrest, and sudden deaths.** Arterial and venous thromboembolic events; ischemic events including myocardial infarction and ischemic stroke; cardiac arrest; sudden death.',
         'Thrombotic events occurred in 10.7% within 30 days in ANNEXA-4 (median 10 days to first event; 17 of 45 events within 3 days)',
         'Resume anticoagulant therapy as soon as medically appropriate — the untreated post-reversal window is the highest-risk period',
@@ -11445,6 +11446,7 @@ const ANDEXANET_ALFA = {
     monitoring: 'Serial neurologic exams and repeat head CT for ICH. Continuous telemetry. Monitor for arterial and venous thromboembolic events, ischemic events, and cardiac arrest for at least 30 days. **Do NOT use anti-FXa levels to judge adequacy of reversal** — commercial assays are unsuitable after andexanet. Reversal is assessed clinically and radiographically.',
     notes: 'A catalytically inactive recombinant factor Xa decoy — the active-site serine is replaced by alanine and the Gla domain is removed, so it binds and sequesters apixaban and rivaroxaban without generating thrombin itself. It also inhibits tissue factor pathway inhibitor, which contributes both to the procoagulant effect and to the thrombotic signal. Because it adds no clotting factor, it will not correct anticoagulation from any non-Xa mechanism and will not change a factor assay. **Safety and efficacy in pediatric patients have not been studied — no pediatric dose is established.**',
     citations: [
+        'US Food and Drug Administration safety communication (December 18-19, 2025) and AstraZeneca voluntary withdrawal of the Andexxa biologics license; US commercial sales ended 12/22/2025. Reported by TCTMD (2025-12-22, https://www.tctmd.com/news/andexanet-alfa-pulled-us-market) and AABB (2025-12-23, https://www.aabb.org/news-resources/news/article/2025/12/23/astrazeneca-withdraws-factor-xa-reversal-agent-from-u.s.-market).',
         'ANDEXXA (coagulation factor Xa [recombinant], inactivated-zhzo) prescribing information. AstraZeneca/Alexion; revised 03/2025. DailyMed SPL setid 2d9d90a6-63e6-46ef-96ff-dd6519ae7b6c (effective 2025-05-23).',
         'Connolly SJ, Sharma M, Cohen AT, et al. Andexanet for Factor Xa Inhibitor-Associated Acute Intracerebral Hemorrhage (ANNEXA-I). N Engl J Med. 2024;390(19):1745-1755.',
         'Connolly SJ, Crowther M, Eikelboom JW, et al. Full Study Report of Andexanet Alfa for Bleeding Associated with Factor Xa Inhibitors (ANNEXA-4). N Engl J Med. 2019;380(14):1326-1335.',
@@ -11516,7 +11518,7 @@ const KCENTRA = {
         },
         {
             indication: 'Massive hemoptysis / DOAC reversal (off-label)',
-            regimen: '**50 units/kg** IV (max 5,000 units) for life-threatening DOAC-associated bleed when andexanet unavailable. Less effective than andexanet for Xa inhibitors but reasonable alternative.',
+            regimen: '**50 units/kg** IV (max 5,000 units) for life-threatening DOAC-associated bleed when andexanet unavailable. Andexanet alfa is no longer marketed in the US, so this is a reasonable US alternative for Xa inhibitors.',
             weightCalc: { dosePerKg: 50, unit: 'units', maxDose: 5000, label: 'DOAC reversal (off-label)' },
         },
     ],
@@ -11533,7 +11535,7 @@ const KCENTRA = {
         'Recheck INR 30 min post-infusion to confirm reversal',
     ],
     monitoring: 'INR pre and 30 min post-infusion. Repeat at 6-12 hr. Watch for thromboembolic events. Hemoglobin trend.',
-    notes: 'First-line for warfarin reversal in major bleeding (faster, smaller volume than FFP, no thawing needed). For DOACs: andexanet preferred for apixaban/rivaroxaban; idarucizumab for dabigatran; PCC is alternative when those unavailable.',
+    notes: 'First-line for warfarin reversal in major bleeding (faster, smaller volume than FFP, no thawing needed). For DOACs: andexanet alfa is no longer marketed in the US, so 4-factor PCC is the US option for apixaban/rivaroxaban; idarucizumab for dabigatran.',
     citations: [
         'Frontera JA et al. Guideline for Reversal of Antithrombotics in Intracranial Hemorrhage. Neurocrit Care. 2016;24(1):6-46.',
         'Sarode R et al. Efficacy and safety of a 4-factor PCC in patients on vitamin K antagonists presenting with major bleeding. Circulation. 2013;128(11):1234-1243.',
@@ -12201,7 +12203,7 @@ const CARVEDILOL = {
         'Diabetes — non-selective beta-blockade can mask hypoglycemia symptoms and impair glucose recovery (use beta-1 selective if possible, but carvedilol has favorable metabolic profile vs metoprolol)',
         'Peripheral vascular disease — alpha-blockade may help, but β2 blockade can worsen claudication',
         'Pheochromocytoma — must alpha-block FIRST before any beta-blocker (unopposed alpha)',
-        'Cocaine/sympathomimetic chest pain — historical caution about unopposed alpha; modern data support beta-blockers, but avoid in acute cocaine intoxication',
+        'Cocaine/sympathomimetic chest pain — historical caution about unopposed alpha; observational data have supported beta-blockers, but the evidence is conflicting. Benzodiazepine comes first, and pure beta-blockers (propranolol, metoprolol, esmolol) are avoided in acute cocaine toxicity. Mixed alpha/beta agents such as carvedilol are not first line',
         'Abrupt discontinuation — taper over 1–2 weeks to avoid rebound tachycardia, ischemia, hypertension',
         'Surgery — generally continue perioperatively if on chronic therapy',
         'CYP2D6 poor metabolizers — increased exposure',
