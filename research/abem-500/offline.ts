@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import { loadCorpus } from '../../scripts/search-corpus.ts';
+const Q = JSON.parse(fs.readFileSync('research/abem-500/q500.json', 'utf8')).slice(0, 500);
+const { index } = await loadCorpus();
+const shape = (r: any) => ({ t: r.doc.title, s: r.doc.parentTitle ? 'In: ' + r.doc.parentTitle : (r.doc.subtitle ?? ''), k: r.doc.kind });
+const out = Q.map((q: any) => { const f = (index as any).find(q.q, 6); const a = (index as any).answer(q.q, 6); return { id: q.id, q: q.q, covered: a.covered, res: f.results.map(shape) }; });
+fs.writeFileSync(process.argv[2] ?? 'research/abem-500/offline-find.json', JSON.stringify(out));
+const exp = Q.filter((q: any) => q.kw), oos = Q.filter((q: any) => !q.kw);
+const cov = new Map(out.map((o: any) => [o.id, o.covered]));
+console.log(`abstain: expected-answerable ${exp.filter((q: any) => !cov.get(q.id)).length}/${exp.length} (false abstains); expected-OOS ${oos.filter((q: any) => !cov.get(q.id)).length}/${oos.length} (correct)`);

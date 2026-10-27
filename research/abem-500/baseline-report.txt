@@ -1,0 +1,178 @@
+answerable-expected 429 rank1 374/429 (87%) top3 405/429 (94%) none/miss 16
+expected-out-of-scope 71 returned zero results 0 returned cards anyway 71
+  cardiovascular               r1 49/55 (89%)  t3 52/55 (95%)
+  respiratory                  r1 27/32 (84%)  t3 30/32 (94%)
+  gastrointestinal             r1 34/36 (94%)  t3 34/36 (94%)
+  neuro                        r1 49/52 (94%)  t3 51/52 (98%)
+  endocrine_renal_metabolic    r1 32/38 (84%)  t3 37/38 (97%)
+  id_heme_immune               r1 46/51 (90%)  t3 50/51 (98%)
+  tox                          r1 33/38 (87%)  t3 35/38 (92%)
+  trauma_procedures_airway     r1 40/45 (89%)  t3 41/45 (91%)
+  ob_gyn                       r1 24/27 (89%)  t3 26/27 (96%)
+  eent_derm_msk_peds           r1 26/39 (67%)  t3 34/39 (87%)
+  psych_behavioral_misc        r1 14/16 (88%)  t3 15/16 (94%)
+MISS | HEART score components
+     want heart score|chest pain
+     got Risk Stratification — Oakland Score [In: Lower GI Bleed] || Hypoplastic Left Heart Syndrome [In: Congenital Heart Disease] || ARDS-Related Cor Pulmonale [In: Right Heart Failure]
+2 | sympathetic crashing acute pulmonary edema treatment
+     want scape
+     got HFNC in CHF / Pulmonary Edema [In: High-Flow Nasal Cannula] || Isosorbide Dinitrate [Long-acting organic nitrate (venous + arterial vasodilator) · Acute pulmonary edema / SCAPE (off-label high-dose)] || Is This SCAPE? [In: CHF Exacerbation]
+6 | hypertensive emergency blood pressure goal
+     want hypertensive
+     got Blood Pressure Management [In: TIA Workup] || Blood Pressure & CPP Targets [In: Brain Herniation Syndromes] || Clevidipine (Cleviprex) [Ultra-short-acting dihydropyridine CCB · ICH blood pressure control (target SBP 130–150)]
+2 | empiric antibiotics for endocarditis
+     want endocarditis
+     got Ceftriaxone [Third-generation cephalosporin · Pediatric Meningitis (empiric first ED dose)] || Vancomycin [Glycopeptide · Infective endocarditis empiric] || Native-Valve Empiric Therapy [In: Infectious Endocarditis]
+MISS | right ventricular failure management
+     want right-heart|right heart|rv
+     got 🛑 Do NOT miss right ventricular failure as the etiology [Cardiogenic Shock — Do NOT] || Right Ventricular Involvement [In: STEMI Management] || Echo Positive [In: Infectious Endocarditis]
+3 | electrical alternans on ECG
+     want tamponade|alternans
+     got Electrical Instability [In: Myocarditis] || Conducted Electrical Weapon (TASER) [In: Electrocution & Lightning Injury] || Cardiac Tamponade [In: Undifferentiated Hypotension]
+3 | chest tube size for hemothorax
+     want chest-tube|chest tube
+     got Tube Size Selection [In: Pneumothorax Management] || Hemothorax [In: Pneumothorax Management] || Bilateral Finger Thoracostomies / Chest Tubes [In: Traumatic Arrest]
+MISS | acute respiratory distress syndrome ventilator settings
+     want ards|vent
+     got ICU / Airway-Capable Setting [In: Acute Dystonic Reaction] || Chest Escharotomy [In: Burns Management] || Pneumonia Type [In: Pneumonia]
+MISS | pulmonary embolism in pregnancy
+     want pe-pregnancy|pregnan
+     got Massive Pulmonary Embolism [In: Undifferentiated Hypotension] || Massive Pulmonary Embolism [In: PEA Arrest] || Pulmonary Embolism & Syncope [In: Syncope Evaluation]
+3 | pleural effusion thoracentesis
+     want chest|thoracent|pleural
+     got Admit - ICU [In: Ovarian Hyperstimulation Syndrome] || PD-Related Hydrothorax [In: Peritoneal Dialysis Complications] || Diagnostic Thoracentesis [Parapneumonic Effusion Assessment]
+3 | pulmonary hypertension crisis ED management
+     want right-heart|pulmonary hypertension
+     got ACS with Hypertension [In: Critical Care Drips] || Fentanyl [Opioid analgesic (synthetic) · SCD pain crisis IV] || Acute-on-Chronic PAH Crisis [In: Right Heart Failure]
+MISS | Ranson criteria
+     want pancreatitis|ranson
+     got Resuscitation Criteria [When NOT to Resuscitate] || Anthonisen Criteria [COPD Antibiotic Decision] || Newman Criteria [Adult Septic Arthritis Diagnosis]
+4 | abdominal pain approach by location
+     want abdominal-pain|abdominal pain
+     got Discharge — Pregnancy of Unknown Location [In: First Trimester Emergencies] || Pacemaker Emergencies: Overview [In: Pacemaker & ICD Emergencies] || Discharge Checklist [In: Pelvic Pain, Female Hub]
+MISS | blood pressure target before thrombolysis stroke
+     want stroke|thrombolytic
+     got Clevidipine (Cleviprex) [Ultra-short-acting dihydropyridine CCB · ICH blood pressure control (target SBP 130–150)] || Labetalol [Combined alpha-1 and beta-adrenergic blocker · ICH blood pressure control (target SBP 130–150)] || Nicardipine (Cardene) [Dihydropyridine calcium channel blocker · ICH blood pressure control (target SBP 130–150)]
+3 | myasthenic crisis management
+     want myasthenia
+     got Myasthenic Crisis — Airway + Immunotherapy [In: Proximal Weakness Hub] || Myasthenic Crisis [Crisis Differentiator] || Myasthenic Crisis [In: Myasthenia Gravis]
+3 | Dix-Hallpike and Epley maneuver
+     want vertigo|dizziness
+     got Epley Maneuver — Treatment [Dix-Hallpike & Epley Technique] || Dix-Hallpike & Epley Technique [Step-by-step positioning for posterior canal BPPV] || Posterior Canal BPPV — Epley Maneuver [In: Vertigo]
+2 | hypokalemia replacement rate
+     want potassium
+     got Hypokalemia Replacement [In: Electrolyte Emergencies (Peds)] || Severe / Symptomatic Hypokalemia [In: Potassium Infusion Protocol] || Potassium Replacement [In: High Dose Insulin Protocol]
+MISS | hypophosphatemia replacement
+     want phosphorus
+     got Hypophosphatemia Severity [In: Phosphorous Disorders] || Stable Hypophosphatemia [In: Phosphorous Disorders] || Electrolyte Derangements [In: Eating Disorders Emergency]
+2 | dialysis patient missed session hyperkalemia
+     want hd-emergencies|dialysis
+     got Three Mimics of Drug-Induced Sodium Channel Blockade [In: Wide Complex Tachycardia] || Mild Hyperkalemia [In: Hemodialysis Emergencies] || Electrolyte Emergency Disposition [In: Hemodialysis Emergencies]
+2 | urinary retention catheter placement
+     want urinary-retention|urinary retention
+     got Catheterization Technique [In: Urinary Sphincter Emergencies] || Acute Urinary Retention [Assessment → Catheterization → Failed Cath → POD → Medications & Dispo] || Acute Urinary Retention — Decompress + Find the Cause [In: Dysuria Hub]
+2 | Fournier gangrene
+     want necrotizing
+     got Fournier Gangrene [NSTI Classification by Microbiology] || Fournier Gangrene — Perineal NSTI [In: Necrotizing Fasciitis (NSTI)] || Fournier Gangrene — Resuscitate + Emergent Debridement [In: Painless Scrotal Swelling Hub]
+2 | hyperthermia differential malignant hyperthermia
+     want hyperthermia
+     got Differential Diagnosis [In: Neuroleptic Malignant Syndrome] || Neuroleptic Malignant Syndrome [In: Hyperthermia Hub] || Differential Diagnosis [Precipitants & Differential Diagnosis]
+2 | qSOFA and SIRS criteria
+     want sepsis
+     got Parenchymal - Rule In (Pneumonia / ARDS) [In: Cyanosis / Hypoxaemia Hub] || Occult Sepsis — Source & Physiology Gate [In: Generally Unwell Elderly Hub] || qSOFA Score [Quick Sequential Organ Failure Assessment]
+2 | cellulitis versus abscess treatment MRSA
+     want peds-ssti|ssti|abscess
+     got Orbital Cellulitis (Compressive Mimicker) [In: Optic Neuropathy Hub] || TMP-SMX (Bactrim) [Sulfonamide antibiotic combination · MRSA SSTI / cellulitis (purulent)] || Abscess Culture Result [In: Culture Positive Results in ED]
+2 | acute chest syndrome
+     want sickle
+     got Acute Chest Syndrome [SCD Management Steps Summary] || Acute Chest Syndrome (ACS) [In: Sickle Cell Disease] || ACS Recognition & Management [Acute chest syndrome — up to 25% of SCD deaths]
+6 | DOAC reversal andexanet idarucizumab
+     want anticoag|idarucizumab|andexanet
+     got DOAC Reversal [In: Coagulation Cascade] || Dabigatran Reversal [In: Intracerebral Hemorrhage] || DOAC Reversal [In: Massive Hemoptysis]
+2 | TTP plasma exchange PLASMIC score
+     want ttp
+     got TPE Volume Calculator [Plasma Exchange Volume] || Thrombotic Thrombocytopenic Purpura (TTP) [Recognition → PLASMIC Score → ADAMTS13 → Plasma Exchange → Caplacizumab → Disposition] || Therapeutic Plasma Exchange (TPE) [TTP Treatment Summary]
+4 | tricyclic antidepressant overdose sodium bicarbonate
+     want tca
+     got Tricyclic Antidepressants [Agents That Block Sodium Channels] || Before Procainamide — Sodium Channel Blockade Check [In: Wide Complex Tachycardia] || Sodium Channel Blockade — Diagnostic Criteria [In: Wide Complex Tachycardia]
+MISS | delirium tremens treatment
+     want alcohol-withdrawal
+     got Intoxication / Withdrawal Syndromes [In: Delirium] || Treatment Escalation [In: Delirium] || Treatment Response [In: Delirium]
+3 | excited delirium ketamine
+     want excited-delirium|excited delirium
+     got Midazolam (Versed) [Benzodiazepine (short-acting) · Ketamine emergence prophylaxis] || Pharmacological Management [Delirium Steps Summary] || Immediate Threat: Ketamine Dissociation [In: State of Extreme Agitation with Aggression]
+MISS | tar burn removal
+     want tar-burn|tar burn
+     got Tar / Asphalt Burn Removal [Cool → Dissolve (don’t peel) → Reassess Depth → Disposition] || Tar / Asphalt Burn — Dissolve, Don\u2019t Peel [In: Tar / Asphalt Burn Removal] || Step 4 — Reassess Burn Depth [In: Tar / Asphalt Burn Removal]
+3 | electrical injury workup
+     want electrocution
+     got Electrical Injury: Admit or Discharge? [Cardiac Monitoring Criteria] || Electrical Burns [In: Burns Management] || Electrical Injury in Pregnancy [In: Electrocution & Lightning Injury]
+2 | traumatic cardiac arrest
+     want traumatic-arrest|traumatic arrest
+     got Cardiac Arrest — Scene Assessment [In: Cardiac Arrest — General Approach] || POCUS During Traumatic Arrest [In: Traumatic Arrest] || Blunt Arrest: Consider Thoracotomy Only If Selected [In: Traumatic Arrest]
+5 | cervical spine clearance NEXUS Canadian rule
+     want cervical-spine|cervical spine
+     got 🛑 Do NOT use NEXUS instead of Canadian C-Spine Rule when both apply [CT Decision Support — Do NOT] || Canadian C-Spine Rule — Step 1 [In: CT Scan Decision Support] || C-spine clearance on field [Head Injury Red Flags]
+4 | CT decision support head injury rules
+     want ct-decision
+     got Canadian CT Head Rule — Eligibility [In: CT Scan Decision Support] || Canadian C-Spine Rule — Step 1 [In: CT Scan Decision Support] || Canadian C-Spine Rule — Step 2 [In: CT Scan Decision Support]
+5 | difficult IV access ultrasound guided
+     want difficult-vascular|vascular access
+     got Gel-Free Ultrasound-Guided Peripheral IV [Trick — Procedures & Access] || Cut IV Tubing for a 2-Person Ultrasound Nerve Block [Trick — Procedures & Access] || Ultrasound-Guided Supraclavicular Subclavian Line [Trick — Procedures & Access]
+MISS | MRI basics
+     want mri
+     got Basic Echo Views [PLAX → PSAX → A4C → Subxiphoid → IVC] || TGA — Workup Strategy [In: Transient Global Amnesia] || TEG Basics — When to Use & Limits [Whole-blood viscoelastic testing at the point of care]
+MISS | pulmonary embolism pregnancy
+     want pe-pregnancy
+     got When to activate PERT (Pulmonary Embolism Response Team) [Disposition & PERT Activation] || E — Embolism [BEAU-CHOPS — Reversible Causes] || Massive Pulmonary Embolism [In: Undifferentiated Hypotension]
+2 | postpartum hypertension
+     want htn-pregnancy
+     got Postpartum Hypertension [HTN in Pregnancy — Classification] || Postpartum Hypertension [In: Hypertension in Pregnancy] || Hypertension in Pregnancy [Recognition → Workup → Severe-Range BP → Preeclampsia Spectrum → HELLP → Postpartum & Prevention]
+2 | sexual assault exam DFSA
+     want dfsa
+     got Drug-Facilitated Sexual Assault [Assessment → Consent → Specimens → Drug Panel → SANE → Prophylaxis] || Sexual Assault - Link to DFSA [In: STI Comprehensive] || Drug-Facilitated Sexual Assault — ED Workup [In: Drug-Facilitated Sexual Assault]
+3 | hyphema management
+     want ocular-trauma|ocular
+     got Standard medical management (non-sickle) [Hyphema Management] || Hyphema Management [Grading, sickle screen, treatment, and re-bleed prevention] || Hyphema — Management [In: Ocular Trauma]
+2 | otitis externa
+     want otalgia|ear
+     got Otitis Externa Treatment [Topical and oral options] || Otitis Media vs Otitis Externa [Ear Infection Overview] || Malignant Otitis Externa — Skull-Base Gate [In: Otalgia Hub]
+6 | pediatric fever without source
+     want peds-fever
+     got Ceftazidime [3rd-generation cephalosporin (antipseudomonal) · Pediatric — serious gram-negative infection / Pseudomonas] || Pediatric UTI — Use the Peds Pathway [In: Dysuria Hub] || Labs — When They Help [In: Febrile Seizure]
+MISS | pediatric asthma exacerbation
+     want peds-asthma
+     got Asthma Exacerbation [Severity → Maximize Therapy → BiPAP/Sedation → Intubation → Ventilator → Disposition] || Acute Asthma [Triage/PRAM → Mild-Moderate Tx → Severe Escalation → Disposition → Mimics] || Pediatric Acute Asthma Exacerbation [In: Acute Asthma]
+MISS | hemolytic uremic syndrome STEC
+     want peds-stec
+     got Shiga Toxin E. coli / Hemolytic Uremic Syndrome (STEC/HUS) [Recognition → Workup → STEC Management → HUS Treatment → Disposition] || Admission for STEC Monitoring [In: Shiga Toxin E. coli / Hemolytic Uremic Syndrome (STEC/HUS)] || STEC Colitis Management [In: Shiga Toxin E. coli / Hemolytic Uremic Syndrome (STEC/HUS)]
+MISS | pediatric hypertensive emergency
+     want peds-hypertensive
+     got Hypertensive Emergency (Peds) [Definitions → Workup → Secondary Causes → IV/PO Treatment → Disposition] || Pediatric Hypertensive Emergency Overview [In: Hypertensive Emergency (Peds)] || Treatment: Hypertensive Emergency (IV) [In: Hypertensive Emergency (Peds)]
+2 | congenital heart disease cyanotic spell
+     want chd
+     got Congenital Heart Disease [Blue Babies vs Shocked → 5 T's → PGE1 → Tet Spells → Disposition] || The 5 T's of Cyanotic CHD [In: Congenital Heart Disease] || Tetralogy of Fallot [In: Congenital Heart Disease]
+MISS | pediatric electrolyte emergencies
+     want peds-electrolyte
+     got Electrolyte Emergencies (Peds) [Triage → Identify → Na/K/Ca/Glucose Pathways → Disposition] || Pediatric Electrolyte Emergencies Overview [In: Electrolyte Emergencies (Peds)] || Disposition [In: Electrolyte Emergencies (Peds)]
+2 | pediatric UTI diagnosis
+     want uti-peds|peds uti
+     got Pediatric UTI — Use the Peds Pathway [In: Dysuria Hub] || VCUG Criteria [In: UTI (First Febrile) / Neonatal] || Steps Summary [In: Pediatric Appendicitis (PAS Pathway)]
+2 | pediatric constipation
+     want peds-constipation
+     got Pediatric Constipation Red Flags [Warning signs for organic disease] || Pediatric Constipation [In: Constipation & Disimpaction] || Constipation & Disimpaction [Assessment → Red Flags → PEG/Enemas → Maintenance → Disposition]
+2 | pediatric sedation dosing
+     want sedation
+     got Fentanyl [Opioid analgesic (synthetic) · Burns — pediatric intranasal] || Hydroxyzine (Vistaril, Atarax) [First-generation antihistamine (H1 antagonist) with anxiolytic effect · Pediatric pre- and post-operative sedation (labeled)] || Pediatric Procedural Sedation [In: Dexmedetomidine (Precedex)]
+2 | pediatric head trauma PECARN
+     want ct-decision|pecarn
+     got Pediatric Head Trauma: Overview [In: Pediatric Trauma] || PECARN Head CT Decision Rule [In: Pediatric Trauma] || 3. Head Trauma [Pediatric Trauma Steps Summary]
+2 | burn depth classification
+     want burns
+     got Burn Depth Classification [Five-Tier Assessment Guide] || Burn Depth Assessment [In: Burns Management] || Assessment Tips [Burn Depth Classification]
+3 | involuntary hold criteria Texas
+     want psych
+     got Involuntary Hold [In: Suicidal Patient] || Involuntary Treatment Considerations [In: Eating Disorders Emergency] || Psychiatric Admission / Hold Pathway [In: New Onset Psychosis Hub]
+MISS | ethics of refusing treatment against medical advice
+     want capacity|ama
+     got Ethical frame [Ethics / Disposition] || When discharge is not safe [Ethics / Disposition] || Medical Admission [In: Dementia & Agitation]

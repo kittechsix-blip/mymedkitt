@@ -1,0 +1,1113 @@
+[
+ {
+  "name": "Ranson criteria / pancreatitis severity scores",
+  "area": "GI",
+  "status": "COVERED (consult/calc)",
+  "hits": {
+   "consult": [],
+   "calc": [
+    "BISAP Score"
+   ],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Pancreatitis — Atlanta + BISAP Gate"
+   ]
+  }
+ },
+ {
+  "name": "ARDS / lung-protective ventilation",
+  "area": "Respiratory",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT delay securing the airway in stridor or respiratory distress",
+    "🛑 Do NOT delay HFNC for severe respiratory distress"
+   ],
+   "node": [
+    "Parenchymal - Rule In (Pneumonia / ARDS)",
+    "ARDS-Related Cor Pulmonale"
+   ]
+  }
+ },
+ {
+  "name": "Adult hypertensive emergency (BP goals, nicardipine/clevidipine)",
+  "area": "Cardiovascular",
+  "status": "COVERED (consult/calc)",
+  "hits": {
+   "consult": [
+    "Hypertensive Emergency"
+   ],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Hypertensive Emergency",
+    "Pediatric Hypertensive Emergency Overview",
+    "Treatment: Hypertensive Emergency (IV)"
+   ]
+  }
+ },
+ {
+  "name": "Andexanet alfa",
+  "area": "Heme/Reversal",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Hypertrophic cardiomyopathy",
+  "area": "Cardiovascular",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Hypertrophic Cardiomyopathy (HCM)"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "Takotsubo",
+  "area": "Cardiovascular",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Neurogenic Stunned Myocardium (Takotsubo)"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "Spontaneous coronary artery dissection (SCAD)",
+  "area": "Cardiovascular",
+  "status": "COVERED (consult/calc)",
+  "hits": {
+   "consult": [
+    "Coagulation Cascade"
+   ],
+   "calc": [
+    "Treatment Cascade"
+   ],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Coagulation Cascade — Pattern over Memorization",
+    "Simplified Cascade Map"
+   ]
+  }
+ },
+ {
+  "name": "Prinzmetal / vasospastic angina",
+  "area": "Cardiovascular",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Kawasaki disease",
+  "area": "Peds",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Pediatric — Adenitis vs Kawasaki Gate",
+    "Kawasaki Disease Suspected — Urgent"
+   ]
+  }
+ },
+ {
+  "name": "Sarcoidosis",
+  "area": "Respiratory/Rheum",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Giant-Cell / Eosinophilic / Sarcoid Concern"
+   ]
+  }
+ },
+ {
+  "name": "Pertussis",
+  "area": "ID/Peds",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Pertussis Consideration"
+   ]
+  }
+ },
+ {
+  "name": "Pulmonary contusion / blunt chest trauma (rib fractures, flail)",
+  "area": "Trauma",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Small bowel obstruction",
+  "area": "GI/Surgery",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Bowel Obstruction"
+   ],
+   "node": [
+    "Small Bowel Obstruction"
+   ]
+  }
+ },
+ {
+  "name": "Sigmoid / cecal volvulus",
+  "area": "GI/Surgery",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Perianal abscess I&D",
+  "area": "GI/Procedures",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Diverticulitis (adult consult)",
+  "area": "GI",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Diverticulitis / Colonic — LLQ Gate",
+    "Complicated Diverticulitis / Colonic Emergency — Treat",
+    "Uncomplicated Diverticulitis — Outpatient"
+   ]
+  }
+ },
+ {
+  "name": "Abdominal compartment syndrome",
+  "area": "Critical care",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Acute kidney injury",
+  "area": "Renal",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Dialysis and AKI",
+    "🛑 Do NOT continue aggressive diuresis in worsening AKI",
+    "🛑 Do NOT start metformin in patients with AKI, contrast exposure, or sepsis"
+   ],
+   "node": [
+    "Mild AKI — Cardiorenal Syndrome",
+    "Severe AKI — Consider RRT",
+    "Rhabdomyolysis / AKI"
+   ]
+  }
+ },
+ {
+  "name": "Renal colic / nephrolithiasis consult",
+  "area": "Renal/GU",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "IV Lidocaine Rescue for Renal Colic",
+    "🛑 Do NOT miss ectopic/radiolucent kidney stones in PI-treated patients"
+   ],
+   "node": [
+    "Renal Colic — Imaging Guidance"
+   ]
+  }
+ },
+ {
+  "name": "Pheochromocytoma / catecholamine crisis",
+  "area": "Endocrine",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Toxic shock syndrome",
+  "area": "ID",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Mixed / Unknown Cardiotoxic Shock"
+   ]
+  }
+ },
+ {
+  "name": "Lyme disease consult",
+  "area": "ID",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Lyme Arthritis",
+    "Lyme Endemic Area?",
+    "Lyme Arthritis Management"
+   ]
+  }
+ },
+ {
+  "name": "Rocky Mountain spotted fever / rickettsial",
+  "area": "ID",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT wait for rickettsial serology before treating"
+   ],
+   "node": [
+    "Rickettsial Infections"
+   ]
+  }
+ },
+ {
+  "name": "COVID-19",
+  "area": "ID",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT skip airborne precautions for COVID or TB patients on HFNC"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "Influenza",
+  "area": "ID",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "H. influenzae Postexposure Prophylaxis",
+    "🛑 Do NOT withhold oseltamivir in confirmed influenza myositis"
+   ],
+   "node": [
+    "Influenza Pneumonia",
+    "MERS / Avian Influenza",
+    "Influenza-Associated Myositis"
+   ]
+  }
+ },
+ {
+  "name": "Cyanide toxicity consult",
+  "area": "Tox",
+  "status": "COVERED (consult/calc)",
+  "hits": {
+   "consult": [],
+   "calc": [
+    "CO + Cyanide"
+   ],
+   "drug": [],
+   "info": [
+    "Cyanide — Clinical Diagnosis",
+    "Cyanide Treatment",
+    "🛑 Do NOT miss cyanide toxicity in structure fires"
+   ],
+   "node": [
+    "Cyanide Poisoning Assessment",
+    "Cyanide Poisoning Treatment",
+    "Fire / Smoke Inhalation — Cyanide Co-Exposure"
+   ]
+  }
+ },
+ {
+  "name": "Organophosphate / nerve agent toxicity consult",
+  "area": "Tox",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT keep anchoring on dystonia when the anticholinergic fails",
+    "🛑 Do NOT send them home without an oral anticholinergic course",
+    "Large Pupil: Anticholinergic Block"
+   ],
+   "node": [
+    "Anticholinergic Delirium",
+    "Severe Anticholinergic Agitation",
+    "Response After Anticholinergic"
+   ]
+  }
+ },
+ {
+  "name": "Opioid overdose / naloxone consult",
+  "area": "Tox",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Dilute Naloxone for a Titrated Opioid Reversal",
+    "Nebulized Naloxone for a Gentle, IV-Free Opioid Reversal",
+    "Do NOT push naloxone"
+   ],
+   "node": [
+    "Naloxone-Precipitated Withdrawal",
+    "Naloxone Administration",
+    "Naloxone Response"
+   ]
+  }
+ },
+ {
+  "name": "Sympathomimetic / cocaine toxicity consult",
+  "area": "Tox",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Large Pupil: Adrenergic / Sympathomimetic",
+    "Sympathomimetic",
+    "🛑 Do NOT give anticholinergics, antihistamines, or sympathomimetics"
+   ],
+   "node": [
+    "Sympathomimetic / Undifferentiated Agitation",
+    "Sympathomimetic Crisis"
+   ]
+  }
+ },
+ {
+  "name": "Anticholinergic toxidrome consult",
+  "area": "Tox",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT keep anchoring on dystonia when the anticholinergic fails",
+    "🛑 Do NOT send them home without an oral anticholinergic course",
+    "Large Pupil: Anticholinergic Block"
+   ],
+   "node": [
+    "Anticholinergic Delirium",
+    "Severe Anticholinergic Agitation",
+    "Response After Anticholinergic"
+   ]
+  }
+ },
+ {
+  "name": "Clonidine / alpha-2 agonist overdose",
+  "area": "Tox",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Non-Opioid (Clonidine/Gabapentin)"
+   ],
+   "node": [
+    "Clonidine"
+   ]
+  }
+ },
+ {
+  "name": "Synthetic cannabinoids",
+  "area": "Tox",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Lead poisoning / heavy metals",
+  "area": "Tox",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Mushroom poisoning (amatoxin)",
+  "area": "Tox",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Henoch-Schonlein purpura / IgA vasculitis",
+  "area": "Peds",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "HSP (IgA Vasculitis) Arthritis"
+   ]
+  }
+ },
+ {
+  "name": "Pressure injury staging",
+  "area": "Derm",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Urticaria",
+  "area": "Derm",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT treat angioedema without urticaria as routine anaphylaxis"
+   ],
+   "node": [
+    "Acute Urticaria — Isolated vs Systemic Gate",
+    "Acute Urticaria — Antihistamines + Trigger Avoidance",
+    "Not Simple Urticaria — Reassess"
+   ]
+  }
+ },
+ {
+  "name": "Retinal detachment (consult)",
+  "area": "Eye",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Retinal Detachment / Vitreous Hemorrhage",
+    "Retinal Detachment Findings",
+    "Retinal Detachment Disposition"
+   ]
+  }
+ },
+ {
+  "name": "Sinusitis",
+  "area": "ENT",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Sudden sensorineural hearing loss",
+  "area": "ENT",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT attribute acute unilateral hearing loss + vertigo to \"labyrinthitis\""
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "Compartment syndrome (limb)",
+  "area": "MSK/Trauma",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT wait for a pulseless limb to diagnose compartment syndrome",
+    "Paracanthal “One-Snip” Decompression for Orbital Compartment Syndrome",
+    "🛑 Do NOT rely on the 5 Ps to exclude compartment syndrome"
+   ],
+   "node": [
+    "Reperfusion Injury & Compartment Syndrome",
+    "Recognize Orbital Compartment Syndrome",
+    "Orbital Compartment Syndrome — Lateral Canthotomy + Cantholysis NOW"
+   ]
+  }
+ },
+ {
+  "name": "Central line placement procedure",
+  "area": "Procedures",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Bubble Study to Confirm Central Line Placement at the Bedside",
+    "Angiocatheter-First Central Line to Skip a Seldinger Step",
+    "Serial Venous Lactate Clearance Instead of a Central Line in Sepsis"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "FAST exam",
+  "area": "POCUS",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Trauma — eFAST Protocol"
+   ]
+  }
+ },
+ {
+  "name": "Lung ultrasound",
+  "area": "POCUS",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Step 2: B-Lines",
+    "🛑 Do NOT dismiss B-lines on the ipsilateral side"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "Rapid sequence intubation (RSI) consult",
+  "area": "Airway",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Pre-RSI optimization (the most important step)",
+    "🛑 Do NOT use succinylcholine for RSI in open globe",
+    "🛑 Do NOT attempt RSI without a surgical airway plan"
+   ],
+   "node": [
+    "Awake Intubation: When RSI Is Too Risky",
+    "Standard RSI Appropriate",
+    "Abort Criteria — Convert to RSI"
+   ]
+  }
+ },
+ {
+  "name": "Laceration repair",
+  "area": "Procedures",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Fingertip Shave Laceration — LET + Tourniquet + Glue",
+    "Sterile Gel for Bloody Scalp Lacerations",
+    "Silk-Suture Retraction for a Squirmy Tongue Laceration"
+   ],
+   "node": [
+    "Canal Laceration Management",
+    "Laceration Repair",
+    "Facial Lacerations"
+   ]
+  }
+ },
+ {
+  "name": "Bartholin abscess",
+  "area": "OB/GYN",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Jacobi Ring Catheter for a Bartholin Abscess"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "Endometritis / postpartum infection",
+  "area": "OB/GYN",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Placental abruption / previa (dedicated)",
+  "area": "OB/GYN",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Do NOT do a digital exam in late pregnancy bleeding before previa is excluded",
+    "4. Vasa Previa",
+    "🛑 Do NOT rupture membranes if vasa previa is known or suspected"
+   ],
+   "node": [
+    "Vasa Previa — Known Antenatal Diagnosis?",
+    "Known Vasa Previa — Delivery Plan",
+    "Acute Vasa Previa — STAT C-Section"
+   ]
+  }
+ },
+ {
+  "name": "Mastitis",
+  "area": "OB/GYN",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Menopause / hormone therapy",
+  "area": "OB/GYN",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Neonatal jaundice / hyperbilirubinemia",
+  "area": "Peds",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Elder abuse",
+  "area": "Social/Legal",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Intimate partner violence",
+  "area": "Social/Legal",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "IPV / Domestic Violence"
+   ]
+  }
+ },
+ {
+  "name": "Geriatric falls",
+  "area": "Geriatrics",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Pitfalls + Safety",
+    "Pearls and pitfalls",
+    "Pitfalls"
+   ],
+   "node": [
+    "Common Pitfalls",
+    "STOP: Calcium Pitfalls",
+    "Common ED Pitfalls"
+   ]
+  }
+ },
+ {
+  "name": "Palliative care / goals of care",
+  "area": "Ethics/Pall",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "Prognosis & Goals of Care",
+    "Palliative Care Approach"
+   ]
+  }
+ },
+ {
+  "name": "Mass casualty / disaster triage",
+  "area": "Disaster/EMS",
+  "status": "COVERED (consult/calc)",
+  "hits": {
+   "consult": [
+    "Psych Triage"
+   ],
+   "calc": [
+    "Cervical Neck Pain Red Flag Triage",
+    "GI Foreign Body Triage",
+    "HD Emergency Triage",
+    "SCD Complication Triage"
+   ],
+   "drug": [],
+   "info": [
+    "Step 4 — Triage the syndrome",
+    "1. Triage by Dominant Complaint",
+    "Step 1: Triage by Chief Complaint"
+   ],
+   "node": [
+    "TBSA-Based Triage",
+    "Positive Culture Callback — Source Triage",
+    "Not Simple Cystitis — Re-Triage"
+   ]
+  }
+ },
+ {
+  "name": "EMS / medical direction",
+  "area": "EMS",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "🛑 Do NOT ignore EMS epinephrine dose count"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "EMTALA",
+  "area": "Admin/Legal",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "EMTALA transfer distinction"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "Biostatistics / EBM",
+  "area": "Research",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "High-Sensitivity Troponin Advantages",
+    "Red Flags (High Specificity)",
+    "High Specificity for PNES"
+   ],
+   "node": [
+    "High Specificity VT Features"
+   ]
+  }
+ },
+ {
+  "name": "Hazmat decontamination / radiation (dedicated)",
+  "area": "Disaster",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Fetal Radiation Doses",
+    "Module 3 — Decontamination",
+    "4. GI Decontamination"
+   ],
+   "node": [
+    "GI Decontamination — Activated Charcoal",
+    "Radiation Burns",
+    "GI Decontamination"
+   ]
+  }
+ },
+ {
+  "name": "Decompression sickness / dysbarism",
+  "area": "Environmental",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Ice-Water Slurry to the Face to Break Infant SVT (Diving Reflex)"
+   ],
+   "node": []
+  }
+ },
+ {
+  "name": "Bioterrorism (anthrax, smallpox)",
+  "area": "Disaster",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Quality improvement / patient safety",
+  "area": "Admin",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "ED crowding / throughput",
+  "area": "Admin",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Physician wellness / impairment",
+  "area": "Professionalism",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [
+    "Renal Impairment",
+    "Renal / Hepatic Impairment"
+   ],
+   "node": [
+    "DVT with Renal Impairment",
+    "Renal or Hepatic Impairment",
+    "Renal Impairment"
+   ]
+  }
+ },
+ {
+  "name": "Telemedicine",
+  "area": "Admin",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Minor consent",
+  "area": "Legal",
+  "status": "COVERED (consult/calc)",
+  "hits": {
+   "consult": [],
+   "calc": [
+    "IVT Consent Infographic",
+    "IVT Consent Infographic",
+    "IVT Consent Infographic"
+   ],
+   "drug": [],
+   "info": [
+    "1. Decide & consent",
+    "Minor Transient Risk Factor",
+    "No or minor bleeding"
+   ],
+   "node": [
+    "Minor Withdrawal — Outpatient Management",
+    "Minor Bleeding Management",
+    "Minor Burn Fluid Management"
+   ]
+  }
+ },
+ {
+  "name": "Lung cancer / SVC syndrome (dedicated)",
+  "area": "Onc",
+  "status": "PARTIAL (section/drug only)",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": [
+    "SVC Syndrome — Recognition",
+    "SVC — Life-Threatening (Yale 4)",
+    "SVC — Workup Before Empiric Treatment"
+   ]
+  }
+ },
+ {
+  "name": "Flumazenil / benzodiazepine reversal",
+  "area": "Tox",
+  "status": "MISSING",
+  "hits": {
+   "consult": [],
+   "calc": [],
+   "drug": [],
+   "info": [],
+   "node": []
+  }
+ },
+ {
+  "name": "Lightning injury",
+  "area": "Environmental",
+  "status": "COVERED (consult/calc)",
+  "hits": {
+   "consult": [
+    "Electrocution & Lightning Injury"
+   ],
+   "calc": [
+    "Lightning Exam Checklist"
+   ],
+   "drug": [],
+   "info": [
+    "5. Lightning",
+    "🛑 Do NOT triage lightning casualties normally",
+    "🛑 Do NOT run a burn-formula resuscitation on a lightning victim"
+   ],
+   "node": [
+    "Electrocution & Lightning: Scene Safety",
+    "Lightning — A Different Disease",
+    "Ears, Eyes, Skin — The Lightning Exam"
+   ]
+  }
+ }
+]

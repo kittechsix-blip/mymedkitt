@@ -1,5 +1,5 @@
-// @bedside-search-engine 1.2.0
-// @engine-sha256 4a5fc5232785981e8aa9ef45c27a4355a2b5fb55be6c8b0e26f9fbc37dd4332b
+// @bedside-search-engine 1.3.0
+// @engine-sha256 ef718132a121b6cb41adeef3af23d35755ce84badfd060f0e4d4a68ef7f314df
 // Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
@@ -157,7 +157,7 @@ const FILLER: ReadonlySet<string> = new Set(
 
 /** Kept, but never required for a match. */
 const SOFT: ReadonlySet<string> = new Set(
-  'after before during patient patients pt pts common okay option options no not without adult adults ed emergency'.split(' '),
+  'after before during patient patients pt pts common okay option options no not without adult adults ed emergency components component elements element parts items details information info overview summary'.split(' '),
 );
 
 /**
@@ -348,9 +348,18 @@ const LABEL_SHORTHAND: Readonly<Record<string, string>> = {
 };
 const labelStems = (label: string | undefined): string[] => (label ? words(label).map((w) => stem(LABEL_SHORTHAND[w] ?? w)) : []);
 
+/** Abbreviations that mean different things in different consults (ACS: acute coronary vs acute chest syndrome): never expanded in a title. */
+const AMBIGUOUS_ABBREV: ReadonlySet<string> = new Set(['acs', 'od', 'ten', 'hit', 'map', 'us']);
+
 /** "A-Fib" is typed "afib", "Pre-eclampsia" is typed "preeclampsia": hyphenated parts also count joined. */
-function titleStems(title: string): string[] {
+function titleStems(title: string, expandAbbrev = false): string[] {
   const out = stems(title);
+  // "PE in Pregnancy" is asked as "pulmonary embolism in pregnancy": an upper-case abbreviation in a consult title also carries its spelled-out words
+  // (not in node, section or calculator titles: there it lifted every "PEP" / "IVT" section, and "ICH Score" for "bleeding after thrombolysis", above the answer)
+  for (const m of title.matchAll(/\b[A-Z][A-Z0-9]{1,5}\b/g)) {
+    const key = m[0].toLowerCase();
+    if (expandAbbrev && !AMBIGUOUS_ABBREV.has(key) && ALTS[key]) out.push(...stems(ALTS[key][0]));
+  }
   for (const m of fold(title).matchAll(/([a-z0-9]+)-([a-z0-9]+)/g)) out.push(stem(m[1] + m[2]));
   return out;
 }
@@ -404,6 +413,8 @@ const FOREIGN_LIFT_SCALE = 0.5;
 const PAGE_TIE_BONUS = 0.01;
 /** Pediatric-only cards yield a little unless the question says pediatric. */
 const PEDS_PENALTY = 0.04;
+/** A question that says pediatric / child / infant prefers the pediatric consult row over the adult one that shares its words. Consult rows only: giving it to nodes lifted them above info pages that carry the same answer. */
+const PEDS_BONUS = 0.1;
 /** A pediatric consult's id says so ("peds-dka", "neonatal-sepsis"): its nodes are pediatric cards even when a node title does not. */
 const PEDS_CONSULT = /^(peds?|pediatric|paeds|neonat\w*)-/;
 const PEDS_WORDS = /\b(pediatric|peds|paediatric|child|children|neonat\w*|infant|infants)\b/;
@@ -441,7 +452,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     const kw = d.keywords.filter((k) => k.length <= 80).flatMap(stems);
     return {
       seq: stems(d.title),
-      title: new Set(titleStems(d.title)),
+      title: new Set(titleStems(d.title, d.kind === 'consult')),
       parent: new Set(HAS_PARENT.has(d.kind) ? [...sub, ...(d.parentTitle ? titleStems(d.parentTitle) : []), ...labelStems(d.moduleLabel)] : []),
       ctx: new Set([...(HAS_PARENT.has(d.kind) ? [] : sub), ...kw].filter((w) => !KIND_WORDS.has(w))),
       text: new Set(d.text ? stems(d.text) : []),
@@ -813,6 +824,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       else if (foreign) score += FOREIGN_PENALTY;
       if (doc.kind === 'info' && !doc.anchor && h.loc >= CONSULT_IS_TOPIC_LOC) score -= PAGE_TIE_BONUS;
       if (!askedPeds && (PEDS_WORDS.test(fold(doc.title)) || PEDS_CONSULT.test(doc.consultId ?? ''))) score += PEDS_PENALTY;
+      else if (askedPeds && doc.kind === 'consult' && PEDS_CONSULT.test(doc.consultId ?? '')) score -= PEDS_BONUS;
       if (isDoNot(doc.title) && !parsed.intents.includes('contra') && !parsed.intents.includes('avoid') && !/\b(not|avoid|never|dont|pitfall)\b/.test(fold(query))) score += DO_NOT_PENALTY;
       if (parsed.active) {
         score += EXTRA_WORD_PENALTY * Math.min(h.extra, EXTRA_WORD_CAP);

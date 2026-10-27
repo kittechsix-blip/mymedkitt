@@ -5,6 +5,7 @@
 
 /** Clinical synonyms for common queries */
 export const CLINICAL_SYNONYMS: Record<string, string[]> = {
+  'alcohol-withdrawal': ['delirium tremens', 'dts', 'alcohol detox', 'etoh withdrawal', 'ciwa', 'alcohol withdrawal seizure'],
   'afib-rvr': ['afib', 'a-fib', 'atrial fibrillation', 'rvr', 'rapid ventricular', 'rate control', 'cardioversion'],
   'pe-treatment': ['pe', 'pulmonary embolism', 'dvt', 'anticoagulation', 'clot', 'thrombus'],
   'pneumothorax': ['pneumo', 'ptx', 'collapsed lung', 'chest tube', 'needle decompression'],
