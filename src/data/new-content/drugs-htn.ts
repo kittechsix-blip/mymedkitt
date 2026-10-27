@@ -48,7 +48,7 @@ export const ADDITIONS_HTN_PHEO: { drugId: string; dosing: DrugDose[]; indicatio
     dosing: [
       {
         indication: 'Hypertensive emergency (titratable IV, oral not feasible)',
-        regimen: 'Start 1-2 mg/h IV. Double the rate every 90 seconds until BP nears goal, then increase by less than double every 5-10 minutes. Usual maintenance 4-6 mg/h. Maximum 21 mg/h (2025 AHA/ACC Table 26; maximum duration 72 h). Label (Cleviprex): up to 32 mg/h may be needed with limited experience; most patients reach 16 mg/h or less. Lipid limit: no more than 1000 mL per 24 h. Use the same start rate in hepatic or renal impairment.',
+        regimen: 'Start 1-2 mg/h IV. Double the rate every 90 seconds until BP nears goal, then increase by less than double every 5-10 minutes. Usual maintenance 4-6 mg/h. Label (Cleviprex, DailyMed 2025-11): most patients received 16 mg/h or less; limited experience up to 32 mg/h; lipid-load limit of 1000 mL or an average of 21 mg/h per 24 h; little experience beyond 72 h. Guideline value (2025 AHA/ACC Table 26): 21 mg/h. These are not the same statement. Label (Cleviprex): up to 32 mg/h may be needed with limited experience; most patients reach 16 mg/h or less. Lipid limit: no more than 1000 mL per 24 h. Use the same start rate in hepatic or renal impairment.',
       },
     ],
   },

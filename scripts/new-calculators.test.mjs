@@ -27,7 +27,10 @@ test('HTNE BP target: MAP and guideline SBP floor', () => {
   const normal = computeHtneBpTarget({ sbp: 120, dbp: 80 });
   near(normal.map, 93.33); assert.equal(normal.severeRange, false);
   const preg = computeHtneBpTarget({ sbp: 160, dbp: 90, pregnant: true });
-  assert.equal(preg.severeRange, null, 'pregnancy severe range is not computed here (ACOG CO 767 not read)');
+  assert.equal(preg.severeRange, true, 'pregnancy severe range SBP >=160 (ACOG CO 767)');
+  assert.equal(computeHtneBpTarget({ sbp: 140, dbp: 110, pregnant: true }).severeRange, true, 'pregnancy severe range DBP >=110');
+  assert.equal(computeHtneBpTarget({ sbp: 159, dbp: 109, pregnant: true }).severeRange, false, 'pregnancy just below both thresholds is not severe');
+  assert.equal(computeHtneBpTarget({ sbp: 170, dbp: 110, pregnant: false }).severeRange, false, 'non-pregnant 170/110 is not above 180/120');
   assert.equal(preg.compelling, true, 'pregnancy is a compelling condition');
 });
 

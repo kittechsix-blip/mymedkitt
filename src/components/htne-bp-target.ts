@@ -1,7 +1,7 @@
 // Hypertensive emergency BP target calculator (adult).
 // Pure math lives in computeHtneBpTarget (testable). Inputs are ephemeral and never persisted.
 // Bracket numbers printed here are the index+1 of `citations` in HTNE_BP_TARGET_CALCULATOR.
-// Calculator numbering: [1] 2025 AHA/ACC guideline, [2] Marik & Varon 2007, [3] Powers 2019.
+// Calculator numbering: [1] 2025 AHA/ACC guideline, [2] Marik & Varon 2007, [3] Powers 2019, [4] ACOG CO 767 (2019).
 
 export interface HtneBpInput {
   sbp: number;
@@ -17,8 +17,8 @@ export interface HtneBpInput {
 
 export interface HtneBpOutput {
   map: number;
-  /** Non-pregnant: SBP >180 and/or DBP >120. Null for pregnancy (thresholds are in the obstetric guidance, not computed here). */
-  severeRange: boolean | null;
+  /** Non-pregnant: SBP >180 and/or DBP >120. Pregnancy or postpartum: SBP >=160 and/or DBP >=110 (ACOG CO 767). */
+  severeRange: boolean;
   /** A compelling condition (dissection, pregnancy, pheochromocytoma) changes the first-hour goal. */
   compelling: boolean;
   /** SBP reduced by no more than 25% in the first hour (2025 AHA/ACC section 6.2). Floor = 0.75 x SBP (unrounded). */
@@ -34,12 +34,15 @@ export function computeHtneBpTarget(input: HtneBpInput): HtneBpOutput | null {
   if (!Number.isFinite(sbp) || !Number.isFinite(dbp) || sbp <= 0 || dbp <= 0 || sbp <= dbp) return null;
   const map = dbp + (sbp - dbp) / 3;
   // Non-pregnant: hypertensive emergency is BP above 180/120 mm Hg with acute target-organ damage [1].
-  const severeRange = input.pregnant ? null : (sbp > 180 || dbp > 120);
+  // Pregnancy or postpartum: severe range is SBP >=160 or DBP >=110, persistent; treat within 30-60 minutes [4].
+  const severeRange = input.pregnant ? (sbp >= 160 || dbp >= 110) : (sbp > 180 || dbp > 120);
   const sbpFloor25 = 0.75 * sbp;
   const compelling = Boolean(input.dissection || input.pregnant || input.pheo);
 
   const severeLine = input.pregnant
-    ? '**SEVERE RANGE:** not calculated here. Use the pregnancy branch and obstetric guidance.'
+    ? (severeRange
+      ? '**SEVERE RANGE:** YES. Pregnancy threshold SBP >=160 or DBP >=110 mmHg, persistent. [4]'
+      : '**SEVERE RANGE:** NO. Below the pregnancy threshold (SBP <160 and DBP <110 mmHg). [4]')
     : (severeRange
       ? '**SEVERE RANGE:** YES. SBP >180 and/or DBP >120 mmHg. [1]'
       : '**SEVERE RANGE:** NO. Not above SBP 180 and not above DBP 120 mmHg. [1]');
@@ -56,9 +59,9 @@ export function computeHtneBpTarget(input: HtneBpInput): HtneBpOutput | null {
   if (input.dissection) lines.push('**AORTIC DISSECTION:** the general rule is not the target. Beta-blocker is first-line. [1] SBP and heart-rate goals come from the dissection consult.');
   if (input.ischemicStroke) lines.push('**ISCHEMIC STROKE:** the alteplase trials required SBP <185 and DBP <110 mmHg before treatment, and SBP <180 and DBP <105 mmHg for 24 hours after. [1] The stroke consult governs. Do not apply the general rule before the thrombolysis decision.');
   if (input.ich) lines.push('**INTRACEREBRAL HEMORRHAGE:** the general rule does not apply. The SBP target and timing are set in the ICH consult.');
-  if (input.pregnant) lines.push('**PREGNANCY OR POSTPARTUM:** treat with the pregnancy branch. First-line agents: IV labetalol, IV hydralazine, or immediate-release oral nifedipine. Never give nifedipine sublingually.');
+  if (input.pregnant) lines.push('**PREGNANCY OR POSTPARTUM:** severe range is SBP >=160 or DBP >=110 mmHg, persistent. Treat within 30-60 minutes with IV labetalol, IV hydralazine, or immediate-release oral nifedipine. Never give nifedipine sublingually. [4]');
   if (input.pheo) lines.push('**PHEOCHROMOCYTOMA:** alpha-blockade first, beta-blockade only after adequate alpha-blockade.');
-  if (input.cocaine) lines.push('**COCAINE OR SYMPATHOMIMETIC:** phentolamine is listed for catecholamine excess, including cocaine toxicity: 5 mg IV, repeat every 10 minutes as needed, cumulative maximum 50 mg per 24 hours. [1] Toxicology and the chest pain hub govern.');
+  if (input.cocaine) lines.push('**COCAINE OR SYMPATHOMIMETIC:** benzodiazepine first, and avoid beta-blockers in acute cocaine toxicity. Phentolamine is a second-line option for catecholamine excess, including cocaine toxicity: 5 mg IV, repeat every 10 minutes as needed, cumulative maximum 50 mg per 24 hours. [1] Toxicology and the chest pain hub govern.');
   if (input.scape) lines.push('**SCAPE:** follow the SCAPE pathway. Nitrate dosing is in the SCAPE consult.');
 
   return { map, severeRange, compelling, sbpFloor25, lines };
@@ -86,6 +89,7 @@ export const HTNE_BP_TARGET_CALCULATOR = {
     '2025 AHA/ACC/AANP/AAPA/ABC/ACCP/ACPM/AGS/AMA/ASPC/NMA/PCNA/SGIM Guideline for the Prevention, Detection, Evaluation and Management of High Blood Pressure in Adults. Circulation. 2025. Section 6.2 and Tables 26-27; Section 5.3.9.2. doi:10.1161/CIR.0000000000001356.',
     'Marik PE, Varon J. Hypertensive crises: challenges and management. Chest. 2007;131(6):1949-1962. doi:10.1378/chest.06-2490.',
     'Powers WJ, Rabinstein AA, Ackerson T, et al. Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update to the 2018 Guidelines. Stroke. 2019;50:e344-e418. doi:10.1161/STR.0000000000000211.',
+    'American College of Obstetricians and Gynecologists. Committee Opinion No. 767: Emergent Therapy for Acute-Onset, Severe Hypertension During Pregnancy and the Postpartum Period. Obstet Gynecol. 2019;133(2):e174-e180. doi:10.1097/AOG.0000000000003075.',
   ],
   computeResult(values: Record<string, number>): { value: string; label: string; description: string; colorVar: string } {
     const out = computeHtneBpTarget({

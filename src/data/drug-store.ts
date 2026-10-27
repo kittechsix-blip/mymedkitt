@@ -2097,15 +2097,15 @@ const CLEVIDIPINE: DrugEntry = {
   dosing: [
     {
       indication: 'Acute stroke BP management',
-      regimen: 'Start 1\u20132 mg/hr IV. Double dose every 90 seconds until target BP achieved. Usual maintenance: 4\u20136 mg/hr. Maximum 21 mg/hr (2025 AHA/ACC Table 26); label allows up to 32 mg/hr with limited experience (most patients need 16 mg/hr or less). Lipid limit 1000 mL per 24h.',
+      regimen: 'Start 1\u20132 mg/hr IV. Double dose every 90 seconds until target BP achieved. Usual maintenance: 4\u20136 mg/hr. Label maximum: most patients have received 16 mg/hr or less; limited short-term experience as high as 32 mg/hr. Label lipid limit: no more than 1000 mL, or an average of 21 mg/hr, per 24 hours; little experience beyond 72 hours. Guideline value (2025 AHA/ACC Table 26): 21 mg/hr. The label does not state 21 mg/hr as a maximum rate, so these are not the same statement.',
     },
     {
       indication: 'ICH blood pressure control (target SBP 130\u2013150)',
-      regimen: 'Start 1\u20132 mg/hr IV. Double every 90 sec until SBP 130\u2013150 mmHg. Usual maintenance 4\u20136 mg/hr. Maximum 21 mg/hr (2025 AHA/ACC Table 26); label allows up to 32 mg/hr with limited experience. Smoothest titration agent \u2014 ultra-short t\u00BD (~1 min). Avoid SBP <130 or drops >70 mmHg in first hour.',
+      regimen: 'Start 1\u20132 mg/hr IV. Double every 90 sec until SBP 130\u2013150 mmHg. Usual maintenance 4\u20136 mg/hr. Label maximum: most patients have received 16 mg/hr or less; limited short-term experience as high as 32 mg/hr. Label lipid limit: no more than 1000 mL, or an average of 21 mg/hr, per 24 hours. Guideline value (2025 AHA/ACC Table 26): 21 mg/hr, not the label maximum. Smoothest titration agent \u2014 ultra-short t\u00BD (~1 min). Avoid SBP <130 or drops >70 mmHg in first hour.',
     },
     {
       indication: 'SAH blood pressure control (target SBP <160)',
-      regimen: 'Start 1-2 mg/hr IV. Double every 90 sec until SBP <160 mmHg. Usual maintenance 4-6 mg/hr. Maximum 21 mg/hr (2025 AHA/ACC Table 26); label allows up to 32 mg/hr with limited experience. Ultra-short t\u00BD (~1 min) allows precise titration.',
+      regimen: 'Start 1-2 mg/hr IV. Double every 90 sec until SBP <160 mmHg. Usual maintenance 4-6 mg/hr. Label maximum: most patients have received 16 mg/hr or less; limited short-term experience as high as 32 mg/hr. Label lipid limit: no more than 1000 mL, or an average of 21 mg/hr, per 24 hours. Guideline value (2025 AHA/ACC Table 26): 21 mg/hr, not the label maximum. Ultra-short t\u00BD (~1 min) allows precise titration.',
     },
   ],
   contraindications: [
@@ -2124,6 +2124,7 @@ const CLEVIDIPINE: DrugEntry = {
   citations: [
     'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.',
     'Pollack CV, et al. Clevidipine for Acute Hypertension: A Systematic Review and Meta-Analysis. Crit Care Med. 2019.',
+    'Cleviprex (clevidipine) injectable emulsion, US Prescribing Information. Chiesi USA. DailyMed setid f9290625-b723-4eda-bab8-a97bef6041f6 (version 26, published 2025-11-17; read 2026-10-27). Sections 2.2 (maximum dose), 2.3 (use within 12 hours of puncture).',
     '2025 AHA/ACC High Blood Pressure Guideline, Table 26 (doi:10.1016/j.jacc.2025.05.007).',
   ],
 };
@@ -7741,7 +7742,7 @@ const HYDRALAZINE: DrugEntry = {
   dosing: [
     {
       indication: 'Severe hypertension pregnancy (SBP ≥160 or DBP ≥110)',
-      regimen: 'Dose not stated in this entry. The ACOG Committee Opinion 767 protocol previously shown here is not verified against its source; follow the obstetric severe-hypertension protocol.',
+      regimen: 'ACOG protocol: 5–10 mg IV over 2 min → wait 20 min → 10 mg IV → wait 20 min → switch to labetalol 20 mg IV. Max cumulative 30 mg before switching. Onset 10–20 min, duration 4–6 h. Pre-load 500 mL NS if volume-depleted — prevents abrupt hypotension. May cause reflex tachycardia. Avoid in CAD.',
     },
     {
       indication: 'VAD hypertension',

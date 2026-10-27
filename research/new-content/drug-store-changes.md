@@ -43,3 +43,23 @@ Source for each change is the primary text read for the consult signoff (see the
 - drugs-htn.ts: phenoxybenzamine (regimen rewritten, weightCalc removed, Endocrine 1 mg/kg/day and monitoring targets removed); clevidipine and labetalol additions as above.
 - drugs-ards-bct.ts: ropivacaine label 300 mg shown as label maximum; lipid pointer; cisatracurium Nimbex set and ROSE/ACURASYS details.
 - drugs-sbo-scad.ts: diatrizoate "no default volume" line; ISMN, amlodipine, diltiazem, verapamil doses removed (name only, dose per cardiology); ISMN asymmetric 7 h schedule line removed.
+
+## 2026-10-27 safety-gap pass (Andy directed; sources checked as noted)
+
+### hydralazine (HYDRALAZINE)
+1. Pregnancy row, indication "Severe hypertension pregnancy (SBP ≥160 or DBP ≥110)". Regimen restored verbatim from commit 2a46c6ef (pre-session text: "ACOG protocol: 5–10 mg IV over 2 min → wait 20 min → 10 mg IV → wait 20 min → switch to labetalol 20 mg IV ..."). Replaces the "Dose not stated ... not verified" wording. Source: ACOG Committee Opinion No. 767, PubMed PMID 30575639 (metadata and abstract checked; the dosing table was not read in full this pass). Andy directed the restore.
+2. The indication string is unchanged. The htn-pregnancy deep link `#/drug/hydralazine/severe hypertension pregnancy` matches this row by word match.
+3. The non-pregnancy hypertensive-emergency row (10 mg IV, Table 26) is not touched in this pass.
+
+### labetalol (LABETALOL)
+- The pregnancy row "Severe hypertension pregnancy (SBP ≥160 or DBP ≥110)" (ACOG escalating protocol: 20 mg IV, 40 mg, 80 mg, 80 mg; max 300 mg) is already identical to commit 2a46c6ef. No change was needed. Verified by diff.
+
+### clevidipine (CLEVIDIPINE)
+1. Three dosing rows (acute stroke, ICH, SAH). Old: "Maximum 21 mg/hr (2025 AHA/ACC Table 26); label allows up to 32 mg/hr with limited experience ..." New: label wording. Source: Cleviprex (clevidipine) injectable emulsion, Chiesi USA, DailyMed setid f9290625-b723-4eda-bab8-a97bef6041f6, version 26, published 2025-11-17, read 2026-10-27, section 2.2.
+   - Label text: "Most patients have received maximum doses of 16 mg/hour or less. There is limited experience with short-term dosing as high as 32 mg/hour. Because of lipid load restrictions, no more than 1000 mL or an average of 21 mg/hour of Cleviprex infusion is recommended per 24 hour period. There is little experience beyond 72 hours at any dose."
+   - Comparison: the label does NOT state 21 mg/h as a maximum infusion rate. Its 21 mg/h is a 24-hour average under a lipid-load limit (1000 mL per 24 h). It is not a storage limit. The "21 mg/h (2025 AHA/ACC Table 26)" value and the label figure are recorded side by side and are not presented as the same statement.
+2. Citation added: the Cleviprex US Prescribing Information (DailyMed setid above).
+3. Discard rule ("use within 12 hours of puncture", label section 2.3) is already in cautions; no change.
+
+### Not changed in this pass (outside the named files)
+- src/data/new-content/drugs-htn.ts still carries the clevidipine "21 mg/h Table 26 maximum" text. Re-word it to the label text above in the next pass.
