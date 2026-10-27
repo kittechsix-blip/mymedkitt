@@ -571,19 +571,19 @@ const CONDITION_CARDS: StudentCard[] = [
     oneBreathReframe: 'A chronic relapsing disorder where intoxication mimics mania/sympathetic surge and withdrawal produces profound dysphoria + suicidality + hyperphagia — no FDA-approved medication treatment, behavioral interventions are first-line.',
     sayOnRounds: '[Age]-y/o with stimulant use disorder, [substance + route + frequency], last use [time]. Currently [intoxicated / withdrawing / in psychosis]. CV exam, EKG, troponin — chest pain workup. Plan: contingency management + CBT (best evidence), no FDA-approved meds; bupropion/mirtazapine/topiramate explored. Treat psychosis with antipsychotic.',
     doNotMiss: [
-      '**Avoid beta-blockers in cocaine chest pain** — unopposed alpha effect worsens vasospasm. Use benzodiazepines, nitrates, calcium-channel blockers.',
+      '**Benzodiazepine first in cocaine chest pain; avoid pure beta-blockers** (propranolol, metoprolol, esmolol) — unopposed alpha effect worsens vasospasm. Mixed alpha/beta agents (labetalol, carvedilol): evidence conflicts, not first line. Nitrates and calcium-channel blockers are alternatives.',
       'Stimulant-induced psychosis can persist beyond intoxication — admit if needed.',
       'Withdrawal dysphoria is severe — suicide risk during the "crash" (24-72h post-binge).',
       'Methamphetamine + sleep deprivation = paranoid psychosis indistinguishable from schizophrenia at baseline.',
       'Pregnancy: cocaine → placental abruption, IUGR; methamphetamine → similar plus neurodevelopmental effects.',
     ],
     pimpPrep: [
-      { question: 'Why no beta-blockers in cocaine chest pain?', answer: 'Cocaine-induced alpha-adrenergic vasoconstriction — unopposed alpha after beta-blockade worsens coronary vasospasm. Use benzos, nitrates, CCBs.', tag: 'mechanism' },
+      { question: 'Why avoid pure beta-blockers in cocaine chest pain?', answer: 'Cocaine-induced alpha-adrenergic vasoconstriction — unopposed alpha after pure beta-blockade worsens coronary vasospasm. Benzos first; nitrates, CCBs as alternatives. Labetalol and carvedilol: evidence conflicts, not first line.', tag: 'mechanism' },
       { question: 'First-line treatment for stimulant use disorder?', answer: 'Contingency management + CBT — strongest evidence. No FDA-approved meds; bupropion, mirtazapine, topiramate, modafinil show modest signals.', tag: 'next-step' },
       { question: 'Stimulant withdrawal timeline?', answer: 'Crash within hours: dysphoria, hypersomnia, hyperphagia, agitation, anhedonia. Suicidality peaks 24-72h. Symptoms 1-2 weeks.', tag: 'pearl' },
     ],
     shelfHighYield: [
-      'Cocaine chest pain — benzodiazepines first-line; avoid beta-blockers.',
+      'Cocaine chest pain — benzodiazepines first-line; avoid pure beta-blockers; labetalol/carvedilol evidence conflicts.',
       'Stimulant-induced psychosis treats like schizophrenia (atypical AP) but often resolves.',
       'No FDA-approved pharmacotherapy — contingency management + CBT.',
       'Methamphetamine + meth-induced psychosis confer schizophrenia-like long-term risk.',

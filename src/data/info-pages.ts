@@ -3256,7 +3256,7 @@ const ICH_SUMMARY: InfoPage = {
     },
     {
       heading: '2. Coagulation Optimization',
-      body: '• [Identify anticoagulant \u2014 do NOT wait for labs before reversing](#/node/ich-anticoag)\n• [Warfarin \u2192 4-Factor PCC + Vitamin K 10 mg IV](#/node/ich-warfarin-rev)\n• [Dabigatran \u2192 Idarucizumab 5 g IV](#/node/ich-dabi-rev)\n• [Xa inhibitor \u2192 4-Factor PCC 50 IU/kg or andexanet alfa](#/node/ich-xa-rev)\n• [Heparin/LMWH \u2192 Protamine sulfate](#/node/ich-heparin-rev)',
+      body: '• [Identify anticoagulant \u2014 do NOT wait for labs before reversing](#/node/ich-anticoag)\n• [Warfarin \u2192 4-Factor PCC + Vitamin K 10 mg IV](#/node/ich-warfarin-rev)\n• [Dabigatran \u2192 Idarucizumab 5 g IV](#/node/ich-dabi-rev)\n• [Xa inhibitor \u2192 4-Factor PCC 50 IU/kg](#/node/ich-xa-rev)\n• [Heparin/LMWH \u2192 Protamine sulfate](#/node/ich-heparin-rev)',
     },
     {
       heading: '3. Blood Pressure Control',
@@ -13875,7 +13875,7 @@ const COAG_STEPS_SUMMARY: InfoPage = {
     },
     {
       heading: '5. Reversible Treatments',
-      body: '\u2022 **Vitamin K / warfarin** \u2014 vitamin K 10 mg IV + 4F-PCC 25-50 u/kg if bleeding\n\u2022 **Dabigatran** \u2014 idarucizumab 5 g IV (RE-VERSE AD)\n\u2022 **FXa-DOAC** \u2014 andexanet (ANNEXA-I) or 4F-PCC 50 u/kg\n\u2022 **Heparin** \u2014 protamine 1 mg per 100 units\n\u2022 **Low fibrinogen** \u2014 cryo 10 units (or 0.06 u/kg) raises 0.5-1 g/L\n\u2022 **Hemophilia A/B** \u2014 recombinant factor concentrate; DDAVP for mild hem A\n\u2022 **vWD** \u2014 DDAVP (type 1) or vWF/FVIII concentrate\n\u2022 **Hyperfibrinolysis** \u2014 tranexamic acid 1 g IV',
+      body: '\u2022 **Vitamin K / warfarin** \u2014 vitamin K 10 mg IV + 4F-PCC 25-50 u/kg if bleeding\n\u2022 **Dabigatran** \u2014 idarucizumab 5 g IV (RE-VERSE AD)\n\u2022 **FXa-DOAC** \u2014 4F-PCC 50 u/kg (andexanet alfa is no longer marketed in the US)\n\u2022 **Heparin** \u2014 protamine 1 mg per 100 units\n\u2022 **Low fibrinogen** \u2014 cryo 10 units (or 0.06 u/kg) raises 0.5-1 g/L\n\u2022 **Hemophilia A/B** \u2014 recombinant factor concentrate; DDAVP for mild hem A\n\u2022 **vWD** \u2014 DDAVP (type 1) or vWF/FVIII concentrate\n\u2022 **Hyperfibrinolysis** \u2014 tranexamic acid 1 g IV',
     },
     {
       heading: '6. Special Populations',
@@ -21507,7 +21507,7 @@ const AVFB_DRUGS_TOOL: InfoPage = {
     },
     {
       heading: 'Platelet dysfunction / heparin / anticoagulants',
-      body: '- [Desmopressin](#/drug/desmopressin/uremic bleeding) 0.3-0.4 mcg/kg IV over 20-30 min for suspected uremic platelet dysfunction, antiplatelet-associated major bleeding, or refractory diffuse oozing; monitor sodium and restrict free water\n- [Protamine](#/drug/protamine/heparin reversal) if recent UFH/dialysis heparin is contributing to major bleeding: 1 mg per 100 units UFH in prior 2-3 hr, max 50 mg, slow IV\n- Warfarin life-threatening bleed: [4F-PCC](#/drug/pcc-4factor/warfarin reversal) + [Vitamin K](#/drug/vitamin-k/warfarin reversal)\n- Dabigatran: [Idarucizumab](#/drug/idarucizumab/dabigatran reversal); dialysis can remove dabigatran if needed\n- Xa inhibitors: [Andexanet alfa](#/drug/andexanet/reversal) or 4F-PCC per local protocol',
+      body: '- [Desmopressin](#/drug/desmopressin/uremic bleeding) 0.3-0.4 mcg/kg IV over 20-30 min for suspected uremic platelet dysfunction, antiplatelet-associated major bleeding, or refractory diffuse oozing; monitor sodium and restrict free water\n- [Protamine](#/drug/protamine/heparin reversal) if recent UFH/dialysis heparin is contributing to major bleeding: 1 mg per 100 units UFH in prior 2-3 hr, max 50 mg, slow IV\n- Warfarin life-threatening bleed: [4F-PCC](#/drug/pcc-4factor/warfarin reversal) + [Vitamin K](#/drug/vitamin-k/warfarin reversal)\n- Dabigatran: [Idarucizumab](#/drug/idarucizumab/dabigatran reversal); dialysis can remove dabigatran if needed\n- Xa inhibitors: 4F-PCC per local protocol (andexanet alfa is no longer marketed in the US)',
     },
   ],
   citations: [
@@ -23129,7 +23129,7 @@ const OCT_LATERAL_CANTHOTOMY_PAGE: InfoPage = {
     },
     {
       heading: 'After',
-      body: '• Recheck IOP — should drop to < 30 mmHg\n• Apply topical antibiotic ointment to wound\n• Place rigid Fox shield over globe (NOT pressure patch)\n• Ice to forehead (reduces ongoing bleeding/swelling)\n• Reverse anticoagulation if applicable (PCC, vit K, andexanet alfa, idarucizumab)\n• CT orbits without contrast to confirm/characterize cause\n• Urgent ophthalmology and oculoplastics consult\n• Lid heals well; oculoplastics will close the wound when stable',
+      body: '• Recheck IOP — should drop to < 30 mmHg\n• Apply topical antibiotic ointment to wound\n• Place rigid Fox shield over globe (NOT pressure patch)\n• Ice to forehead (reduces ongoing bleeding/swelling)\n• Reverse anticoagulation if applicable (PCC, vit K, idarucizumab; andexanet alfa is no longer marketed in the US)\n• CT orbits without contrast to confirm/characterize cause\n• Urgent ophthalmology and oculoplastics consult\n• Lid heals well; oculoplastics will close the wound when stable',
     },
     {
       heading: 'Pearls and pitfalls',
@@ -24687,7 +24687,7 @@ const GIB_STOP_PAGE: InfoPage = {
     },
     {
       heading: '🛑 Do NOT delay anticoagulation reversal for "confirming" the bleed',
-      body: 'In any actively bleeding anticoagulated patient with hemodynamic compromise, reversal happens in parallel with resus — not after confirming source. 4F-PCC for VKA, andexanet alfa or 4F-PCC for FXa inhibitors (ANNEXA-4), idarucizumab for dabigatran. Time to reversal = time saved.',
+      body: 'In any actively bleeding anticoagulated patient with hemodynamic compromise, reversal happens in parallel with resus — not after confirming source. 4F-PCC for VKA and for FXa inhibitors (andexanet alfa is no longer marketed in the US), idarucizumab for dabigatran. Time to reversal = time saved.',
     },
     {
       heading: '🛑 Do NOT use the hub as the treatment playbook',
@@ -29858,7 +29858,7 @@ const ANORECTAL_BLEEDING_HUB_STOP_PAGE: InfoPage = {
     },
     {
       heading: "🛑 Do NOT reflexively transfuse platelets or reach for FFP",
-      body: "Platelet transfusion is generally NOT beneficial for antiplatelet-associated GI bleeding, and FFP is second-line for warfarin. **Match reversal to the agent: 4-factor PCC + vitamin K for warfarin, idarucizumab for dabigatran, andexanet/PCC for factor-Xa inhibitors.** [Agent-specific reversal](#/node/arb-anticoag-verdict).",
+      body: "Platelet transfusion is generally NOT beneficial for antiplatelet-associated GI bleeding, and FFP is second-line for warfarin. **Match reversal to the agent: 4-factor PCC + vitamin K for warfarin, idarucizumab for dabigatran, 4-factor PCC for factor-Xa inhibitors (andexanet alfa is no longer marketed in the US).** [Agent-specific reversal](#/node/arb-anticoag-verdict).",
     },
     {
       heading: "🛑 Do NOT reduce-and-forget a rectal prolapse",

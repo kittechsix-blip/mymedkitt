@@ -166,8 +166,8 @@ export const ANTICOAG_REVERSAL_NODES: DecisionNode[] = [
     type: 'result',
     module: 2,
     title: 'Factor Xa Inhibitor Reversal',
-    body: '**Apixaban (Eliquis), Rivaroxaban (Xarelto), Edoxaban (Savaysa), Fondaparinux (Arixtra)**\n\n**[1] [4-Factor PCC (Kcentra)](#/drug/pcc-4factor/doac reversal)** — default first-line at most US centers\n• CNS bleeding: 50 units/kg (max 5,000 units) [5,6]\n• Non-CNS: 25 units/kg (max 2,500) or **fixed 2,000 units** (simplest, best evidence) [5]\n• ⚠️ PCC will NOT change the anti-Xa level (anti-Xa measures DOAC in the body, not clotting factor levels)\n\n**[2] [Andexanet alfa (Andexxa)](#/drug/andexanet/doac reversal)** — specific Xa antidote, AHA/ASA Class I for ICH if available [1]\n• **Low dose** (rivaroxaban ≤10 mg or apixaban ≤5 mg, OR last dose ≥8h ago): 400 mg IV bolus + 4 mg/min × 120 min\n• **High dose** (rivaroxaban >10 mg, apixaban >5 mg, OR unknown dose within 8h): 800 mg IV bolus + 8 mg/min × 120 min\n• ANNEXA-I (NEJM 2024, n=530): superior hemostatic efficacy vs usual care (mostly PCC) in Xa-associated ICH, stopped early [17]\n• ⚠️ **Thrombotic events 10.3% vs 5.6%** (ischemic stroke 6.5% vs 1.5%) with andexanet vs usual care; no mortality benefit (30-day death 27.8% vs 25.5%) [17]\n• ⚠️ NOT shown superior outside ICH; cost ~$25,000+ per dose vs ~$5,000 for PCC\n• Practical: most US centers default to PCC; reserve andexanet for ICH with andexanet on formulary and no acute thrombotic contraindication\n\n**[3] If ingested <2h:** [Activated Charcoal](#/drug/activated-charcoal/doac decontamination) 50 g\n\n**[4] If INR elevated:** [Vitamin K](#/drug/vitamin-k/warfarin reversal) 10 mg IV — exclude concurrent vitamin K deficiency\n\n**NOT dialyzable:** Apixaban/Eliquis (~90% protein bound), Rivaroxaban/Xarelto (~95%). Edoxaban/Savaysa (~50% bound) is somewhat dialyzable.\n\n**Monitoring:**\n• Normal INR argues against significant Xa inhibitor level but doesn\'t exclude it [4]\n• Anti-Xa level correlates well with drug level; normal anti-Xa excludes clinically relevant Xa inhibitors\n• ⚠️ Anti-Xa assays are **unreliable after andexanet** (drug interferes with assay) — do not use to gauge reversal [17]\n• Follow INR after PCC, then q6h (rebounding INR may indicate waning PCC effect) [5]',
-    citation: [1, 3, 4, 5, 6, 17],
+    body: '**Apixaban (Eliquis), Rivaroxaban (Xarelto), Edoxaban (Savaysa), Fondaparinux (Arixtra)**\n\n**[1] [4-Factor PCC (Kcentra)](#/drug/pcc-4factor/doac reversal)** — first-line in the US, where andexanet alfa is no longer marketed [21]\n• CNS bleeding: 50 units/kg (max 5,000 units) [5,6]\n• Non-CNS: 25 units/kg (max 2,500) or **fixed 2,000 units** (simplest, best evidence) [5]\n• ⚠️ PCC will NOT change the anti-Xa level (anti-Xa measures DOAC in the body, not clotting factor levels)\n\n**[2] [Andexanet alfa (Andexxa)](#/drug/andexanet/doac reversal) — NO LONGER MARKETED IN THE US** (US sales ended 12/22/2025 [21]). Where available outside the US: specific Xa antidote, AHA/ASA Class I for ICH [1]\n• **Low dose** (rivaroxaban ≤10 mg or apixaban ≤5 mg, OR last dose ≥8h ago): 400 mg IV bolus + 4 mg/min × 120 min\n• **High dose** (rivaroxaban >10 mg, apixaban >5 mg, OR unknown dose within 8h): 800 mg IV bolus + 8 mg/min × 120 min\n• ANNEXA-I (NEJM 2024, n=530): superior hemostatic efficacy vs usual care (mostly PCC) in Xa-associated ICH, stopped early [17]\n• ⚠️ **Thrombotic events 10.3% vs 5.6%** (ischemic stroke 6.5% vs 1.5%) with andexanet vs usual care; no mortality benefit (30-day death 27.8% vs 25.5%) [17]\n• ⚠️ NOT shown superior outside ICH; cost ~$25,000+ per dose vs ~$5,000 for PCC\n• Practical: in the US, use 4-factor PCC; andexanet is not available here. Where andexanet is available outside the US, reserve it for ICH with no acute thrombotic contraindication\n\n**[3] If ingested <2h:** [Activated Charcoal](#/drug/activated-charcoal/doac decontamination) 50 g\n\n**[4] If INR elevated:** [Vitamin K](#/drug/vitamin-k/warfarin reversal) 10 mg IV — exclude concurrent vitamin K deficiency\n\n**NOT dialyzable:** Apixaban/Eliquis (~90% protein bound), Rivaroxaban/Xarelto (~95%). Edoxaban/Savaysa (~50% bound) is somewhat dialyzable.\n\n**Monitoring:**\n• Normal INR argues against significant Xa inhibitor level but doesn\'t exclude it [4]\n• Anti-Xa level correlates well with drug level; normal anti-Xa excludes clinically relevant Xa inhibitors\n• ⚠️ Anti-Xa assays are **unreliable after andexanet** (drug interferes with assay) — do not use to gauge reversal [17]\n• Follow INR after PCC, then q6h (rebounding INR may indicate waning PCC effect) [5]',
+    citation: [1, 3, 4, 5, 6, 17, 21],
     treatment: {
       firstLine: {
         drug: '4-Factor PCC (Kcentra)',
@@ -175,15 +175,15 @@ export const ANTICOAG_REVERSAL_NODES: DecisionNode[] = [
         route: 'IV',
         frequency: 'Once',
         duration: 'Single dose',
-        notes: 'Default first-line at most US centers (cost, availability, thrombotic profile). PCC will NOT change anti-Xa level.',
+        notes: 'First-line in the US: andexanet alfa is no longer marketed in the US (US sales ended 12/22/2025). PCC will NOT change anti-Xa level.',
       },
       alternative: {
-        drug: 'Andexanet alfa (Andexxa)',
-        dose: 'Low dose: 400 mg IV bolus + 4 mg/min × 120 min | High dose: 800 mg IV bolus + 8 mg/min × 120 min (see body for dose criteria)',
+        drug: 'Andexanet alfa (Andexxa) — NOT marketed in the US',
+        dose: 'Low dose: 400 mg IV bolus + 4 mg/min × 120 min | High dose: 800 mg IV bolus + 8 mg/min × 120 min (see body for dose criteria). Historical reference only.',
         route: 'IV',
         frequency: 'Once',
         duration: '~2 hours',
-        notes: 'AHA/ASA Class I for ICH if available. ANNEXA-I 2024: superior hemostasis vs usual care, no mortality benefit, higher thrombotic risk (10.3% vs 5.6%; ischemic stroke 6.5% vs 1.5%). Reserve for Xa-ICH with andexanet on formulary and no acute thrombotic contraindication.',
+        notes: 'US sales ended 12/22/2025. Where available outside the US only: AHA/ASA Class I for ICH if available. ANNEXA-I 2024: superior hemostasis vs usual care, no mortality benefit, higher thrombotic risk (10.3% vs 5.6%; ischemic stroke 6.5% vs 1.5%). Reserve for Xa-ICH with no acute thrombotic contraindication.',
       },
       monitoring: 'INR after PCC, then q6h. Anti-Xa level if available — but UNRELIABLE after andexanet (assay interference). Rebounding INR may indicate waning PCC effect.',
     },
@@ -443,7 +443,7 @@ export const ANTICOAG_REVERSAL_MODULE_LABELS = [
 
 export const ANTICOAG_REVERSAL_CRITICAL_ACTIONS = [
   { text: 'Warfarin reversal: 10 mg IV vitamin K + 4-factor PCC 25-50 units/kg (based on INR)', nodeId: 'acr-warfarin-critical' },
-  { text: 'Apixaban/rivaroxaban: 4-factor PCC 50 units/kg or andexanet alfa 400-800 mg IV', nodeId: 'acr-xa-critical' },
+  { text: 'Apixaban/rivaroxaban: 4-factor PCC 50 units/kg (andexanet alfa no longer marketed in the US)', nodeId: 'acr-xa-critical' },
   { text: 'Dabigatran: idarucizumab 5 g IV (2 vials of 2.5 g) - specific reversal agent', nodeId: 'acr-dabigatran-critical' },
   { text: 'Heparin: protamine 1 mg per 100 units heparin (max 50 mg, infuse slowly)', nodeId: 'acr-ufh-reversal' },
   { text: 'Enoxaparin: protamine 1 mg per 1 mg enoxaparin (within 8h: 100% dose, 8-12h: 50% dose)', nodeId: 'acr-lmwh-reversal' },
@@ -476,4 +476,5 @@ export const ANTICOAG_REVERSAL_CITATIONS: { num: number; text: string }[] = [
   { num: 18, text: 'Levy JH, Goodnough LT. How I use fibrinogen replacement therapy in acquired bleeding. Blood. 2015;125(9):1387-1393. doi:10.1182/blood-2014-08-552000 (cryoprecipitate dosing and fibrinogen targets).' },
   { num: 19, text: 'Holcomb JB, Tilley BC, Baraniuk S, et al. Transfusion of plasma, platelets, and red blood cells in a 1:1:1 versus a 1:1:2 ratio and mortality in patients with severe trauma: the PROPPR randomized clinical trial. JAMA. 2015;313(5):471-482. doi:10.1001/jama.2015.12' },
   { num: 20, text: 'Baharoglu MI, Cordonnier C, Al-Shahi Salman R, et al. Platelet transfusion versus standard care after acute stroke due to spontaneous cerebral haemorrhage associated with antiplatelet therapy (PATCH): a randomised, open-label, phase 3 trial. Lancet. 2016;387(10038):2605-2613. doi:10.1016/S0140-6736(16)30392-0' },
+  { num: 21, text: 'US Food and Drug Administration safety communication (December 18-19, 2025) on andexanet alfa (Andexxa): risks considered to outweigh benefits; AstraZeneca requested voluntary withdrawal of the biologics license for commercial reasons; US commercial sales ended December 22, 2025. Verified via TCTMD, "Andexanet Alfa Pulled From US Market," December 22, 2025, https://www.tctmd.com/news/andexanet-alfa-pulled-us-market and AABB, "AstraZeneca Withdraws Factor Xa Reversal Agent From U.S. Market," December 23, 2025, https://www.aabb.org/news-resources/news/article/2025/12/23/astrazeneca-withdraws-factor-xa-reversal-agent-from-u.s.-market' },
 ];

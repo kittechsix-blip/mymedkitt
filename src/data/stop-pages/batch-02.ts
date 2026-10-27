@@ -119,7 +119,7 @@ export const STOP_PAGES_02: Record<string, InfoPage> = {
       },
       {
         heading: '🛑 Do NOT use dabigatran reversal agents for Xa inhibitors',
-        body: 'Idarucizumab reverses only dabigatran. For rivaroxaban and apixaban, use andexanet alfa or 4-factor PCC — giving the wrong reversal agent wastes time and money. Confirm the specific agent before ordering reversal. [See this node](#/node/ich-dabi-rev).',
+        body: 'Idarucizumab reverses only dabigatran. For rivaroxaban and apixaban, use 4-factor PCC (andexanet alfa is no longer marketed in the US) — giving the wrong reversal agent wastes time and money. Confirm the specific agent before ordering reversal. [See this node](#/node/ich-dabi-rev).',
       },
       {
         heading: '🛑 Do NOT under-treat cerebellar ICH',
