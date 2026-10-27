@@ -1,5 +1,5 @@
 # MedKitt Scrapling Pipeline - Dependencies
-# Install with: pip install -r scraper/requirements.txt
+# Install with: pip install --require-hashes -r scraper/requirements.lock
 
 # Core scraping framework
 scrapling>=0.2.0
@@ -18,7 +18,7 @@ biopython>=1.81
 
 # Data comparison
 deepdiff>=6.6.0
-difflib
+# difflib is included in Python; do not install a PyPI lookalike.
 
 # Configuration
 pyyaml>=6.0.1

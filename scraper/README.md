@@ -31,15 +31,30 @@ scraper/
 ## Installation
 
 ```bash
-cd ~/Desktop/medkitt-dev
+cd ~/Desktop/myMedKitt
 
 # Create virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
 # Install dependencies
-pip install -r scraper/requirements.txt
+pip install --require-hashes -r scraper/requirements.lock
 ```
+
+The checked-in lock was resolved and tested with Python 3.14. It pins all 41
+packages and their hashes. `requirements.txt` remains the input specification;
+`difflib` comes with Python and must not be installed from PyPI.
+
+To refresh the lock deliberately (then rerun the offline tests):
+
+```bash
+uv pip compile scraper/requirements.txt --upgrade --python-version 3.14 --generate-hashes -o scraper/requirements.lock
+python -m pytest scraper/tests -q
+```
+
+Dependency verification does not start the scraper, send notifications, or enable
+its scheduler. Browser-backed scraping and live-source ingestion require separate
+integration verification.
 
 ## Configuration
 
