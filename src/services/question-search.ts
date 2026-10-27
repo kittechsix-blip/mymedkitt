@@ -1,3 +1,6 @@
+// @bedside-search-engine 1.3.0
+// @engine-sha256 ef718132a121b6cb41adeef3af23d35755ce84badfd060f0e4d4a68ef7f314df
+// Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
  *
@@ -53,6 +56,8 @@ export interface QResult {
   score: number;
   /** drug only: dosing indication to scroll to */
   indication?: string;
+  /** share of the question's required words this document carries (0-1); low means it merely shares a word or two */
+  cov?: number;
   /** score breakdown (only when ranking with debug on) */
   why?: string;
 }
@@ -152,7 +157,7 @@ const FILLER: ReadonlySet<string> = new Set(
 
 /** Kept, but never required for a match. */
 const SOFT: ReadonlySet<string> = new Set(
-  'after before during patient patients pt pts common okay option options no not without adult adults ed emergency'.split(' '),
+  'after before during patient patients pt pts common okay option options no not without adult adults ed emergency components component elements element parts items details information info overview summary'.split(' '),
 );
 
 /**
@@ -343,9 +348,18 @@ const LABEL_SHORTHAND: Readonly<Record<string, string>> = {
 };
 const labelStems = (label: string | undefined): string[] => (label ? words(label).map((w) => stem(LABEL_SHORTHAND[w] ?? w)) : []);
 
+/** Abbreviations that mean different things in different consults (ACS: acute coronary vs acute chest syndrome): never expanded in a title. */
+const AMBIGUOUS_ABBREV: ReadonlySet<string> = new Set(['acs', 'od', 'ten', 'hit', 'map', 'us']);
+
 /** "A-Fib" is typed "afib", "Pre-eclampsia" is typed "preeclampsia": hyphenated parts also count joined. */
-function titleStems(title: string): string[] {
+function titleStems(title: string, expandAbbrev = false): string[] {
   const out = stems(title);
+  // "PE in Pregnancy" is asked as "pulmonary embolism in pregnancy": an upper-case abbreviation in a consult title also carries its spelled-out words
+  // (not in node, section or calculator titles: there it lifted every "PEP" / "IVT" section, and "ICH Score" for "bleeding after thrombolysis", above the answer)
+  for (const m of title.matchAll(/\b[A-Z][A-Z0-9]{1,5}\b/g)) {
+    const key = m[0].toLowerCase();
+    if (expandAbbrev && !AMBIGUOUS_ABBREV.has(key) && ALTS[key]) out.push(...stems(ALTS[key][0]));
+  }
   for (const m of fold(title).matchAll(/([a-z0-9]+)-([a-z0-9]+)/g)) out.push(stem(m[1] + m[2]));
   return out;
 }
@@ -384,6 +398,10 @@ const LIFT_FULL_AT_LOC = 0.7;
 const liftShare = (loc: number) => Math.min(1, Math.max(0, (loc - LIFT_FROM_LOC) / (LIFT_FULL_AT_LOC - LIFT_FROM_LOC)));
 const CONSULT_IS_TOPIC_LOC = 0.95;
 const WIDE_PENALTY = 0.03;
+/** `answer` abstains unless the app knows at least this share of the question's content words, and a top result carries at least this share (see assess). */
+const ANSWER_MIN_KNOWN = 0.5;
+const ANSWER_MIN_MATCHED = 0.5;
+const ANSWER_TOP = 5;
 /** Candidates that get the full scoring pass. */
 const POOL = 400;
 /** A consult whose title carries every topic word is the topic's home: its own nodes outrank a foreign node with a nicer heading. */
@@ -395,6 +413,8 @@ const FOREIGN_LIFT_SCALE = 0.5;
 const PAGE_TIE_BONUS = 0.01;
 /** Pediatric-only cards yield a little unless the question says pediatric. */
 const PEDS_PENALTY = 0.04;
+/** A question that says pediatric / child / infant prefers the pediatric consult row over the adult one that shares its words. Consult rows only: giving it to nodes lifted them above info pages that carry the same answer. */
+const PEDS_BONUS = 0.1;
 /** A pediatric consult's id says so ("peds-dka", "neonatal-sepsis"): its nodes are pediatric cards even when a node title does not. */
 const PEDS_CONSULT = /^(peds?|pediatric|paeds|neonat\w*)-/;
 const PEDS_WORDS = /\b(pediatric|peds|paediatric|child|children|neonat\w*|infant|infants)\b/;
@@ -408,6 +428,12 @@ export interface QuestionIndex {
    * single-word path (Fuse) still has to run: only for 'plain' queries, or when nothing matched.
    */
   search(query: string, limit?: number, debug?: boolean): { parsed: ParsedQuestion; results: QResult[]; mode: 'question' | 'topic' | 'plain' };
+  /** Ranked results for any non-empty text, including one word (which `rank` leaves to a legacy search). */
+  lookup(query: string, limit?: number, debug?: boolean): { parsed: ParsedQuestion; results: QResult[] };
+  /** `search`, plus the ranked lookup for plain queries: the whole Home search for an app with no legacy search. */
+  find(query: string, limit?: number, debug?: boolean): { parsed: ParsedQuestion; results: QResult[]; mode: 'question' | 'topic' | 'plain' };
+  /** `find`, but empty (covered = false) when nothing really answers the question. Use this for the Home search of an app that wants an honest "not covered here". */
+  answer(query: string, limit?: number, debug?: boolean): { parsed: ParsedQuestion; results: QResult[]; mode: 'question' | 'topic' | 'plain'; covered: boolean };
 }
 
 const compact = (s: string) => fold(s).replace(/[^a-z0-9]+/g, '');
@@ -426,7 +452,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     const kw = d.keywords.filter((k) => k.length <= 80).flatMap(stems);
     return {
       seq: stems(d.title),
-      title: new Set(titleStems(d.title)),
+      title: new Set(titleStems(d.title, d.kind === 'consult')),
       parent: new Set(HAS_PARENT.has(d.kind) ? [...sub, ...(d.parentTitle ? titleStems(d.parentTitle) : []), ...labelStems(d.moduleLabel)] : []),
       ctx: new Set([...(HAS_PARENT.has(d.kind) ? [] : sub), ...kw].filter((w) => !KIND_WORDS.has(w))),
       text: new Set(d.text ? stems(d.text) : []),
@@ -767,9 +793,9 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     return consultNames.filter((c) => c.parts.some((p) => p.every((w) => have.has(w)))).map((c) => c.id);
   }
 
-  function rank(query: string, limit = 40, debug = false): { parsed: ParsedQuestion; results: QResult[] } {
+  function rank(query: string, limit = 40, debug = false, force = false): { parsed: ParsedQuestion; results: QResult[] } {
     const parsed = parseQuestion(query);
-    if (!parsed.active && !parsed.wide) return { parsed, results: [] };
+    if (!parsed.active && !parsed.wide && !force) return { parsed, results: [] };
     const results: QResult[] = [];
     const named = new Set<string>(namedConsults(parsed));
     const hits = match(parsed, named);
@@ -798,6 +824,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       else if (foreign) score += FOREIGN_PENALTY;
       if (doc.kind === 'info' && !doc.anchor && h.loc >= CONSULT_IS_TOPIC_LOC) score -= PAGE_TIE_BONUS;
       if (!askedPeds && (PEDS_WORDS.test(fold(doc.title)) || PEDS_CONSULT.test(doc.consultId ?? ''))) score += PEDS_PENALTY;
+      else if (askedPeds && doc.kind === 'consult' && PEDS_CONSULT.test(doc.consultId ?? '')) score -= PEDS_BONUS;
       if (isDoNot(doc.title) && !parsed.intents.includes('contra') && !parsed.intents.includes('avoid') && !/\b(not|avoid|never|dont|pitfall)\b/.test(fold(query))) score += DO_NOT_PENALTY;
       if (parsed.active) {
         score += EXTRA_WORD_PENALTY * Math.min(h.extra, EXTRA_WORD_CAP);
@@ -806,7 +833,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
         const lift = intentLift(doc, parsed.intents) * (foreign ? FOREIGN_LIFT_SCALE : 1);
         if (lift) score -= lift * liftShare(h.loc) * Math.min(1, h.cov / MIN_COVERAGE) ** 2;
       }
-      const r: QResult = { doc, score };
+      const r: QResult = { doc, score, cov: h.cov };
       if (debug) r.why = `base=${h.base.toFixed(3)} loc=${h.loc.toFixed(2)} cov=${h.cov.toFixed(2)} extra=${h.extra} home=${inHome} foreign=${foreign} lift=${intentLift(doc, parsed.intents).toFixed(2)}`;
       if (doc.kind === 'drug') r.indication = pickIndication(doc, parsed);
       results.push(r);
@@ -840,7 +867,75 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     return { parsed, results: out.slice(0, limit), mode } as const;
   }
 
-  return { size: docs.length, rank, search };
+  const docIndex = new Map<QDoc, number>(docs.map((d, i) => [d, i]));
+
+  /**
+   * Does anything in the top results answer the question, or do they only share a word with it? Coverage cannot tell: it is measured over
+   * words the app knows, so a question full of words found nowhere in the app can score 1.00 on one stray word. Answer only when
+   *   (a) the app knows at least half of the question's content words (a question of words found nowhere in the app is out of scope), and
+   *   (b) some top result carries at least half of them AND names at least one in a title, parent or context, not only in passing in body text.
+   * Calibrated on 59 real questions and 16 out-of-scope ones (my-vertigo-app): 0 of 16 answered, 2 of 59 abstained (both already weak).
+   */
+  function assess(q: ParsedQuestion, results: readonly QResult[]): boolean {
+    const hard = q.tokens.filter((t) => !t.soft);
+    const toks = hard.length ? hard : q.tokens;
+    if (!toks.length) return results.length > 0;
+    const per = toks.map((t) => ({ e: expand(t.word), alts: alternatives(t.word) }));
+    let known = 0;
+    for (const p of per) {
+      let df = 0;
+      for (const w of p.e) df += (postings.get(w) ?? []).length;
+      if (df > 0 || p.alts.length > 0) known++;
+    }
+    if (known / toks.length < ANSWER_MIN_KNOWN) return false;
+    for (const r of results.slice(0, ANSWER_TOP)) {
+      const i = docIndex.get(r.doc);
+      if (i === undefined) continue;
+      const x = prep[i];
+      const named = new Set<string>([...x.title, ...x.parent, ...x.ctx]);
+      const anywhere = new Set<string>([...named, ...x.text, ...x.psub]);
+      const hasAlt = (phrases: Set<string>[][], where: Set<string>) => phrases.some((ph) => ph.every((es) => [...es].some((w) => where.has(w))));
+      let matched = 0;
+      let names = 0;
+      for (const p of per) {
+        const inNamed = [...p.e].some((w) => named.has(w)) || hasAlt(p.alts, named);
+        if (inNamed) names++;
+        if (inNamed || [...p.e].some((w) => anywhere.has(w)) || hasAlt(p.alts, anywhere)) matched++;
+      }
+      if (matched / toks.length >= ANSWER_MIN_MATCHED && names > 0) return true;
+    }
+    return false;
+  }
+
+  /**
+   * `find`, but an honest one: when nothing in the app really answers the question the result list is empty and `covered` is false,
+   * so a UI can say "not covered here" instead of showing cards that merely share a word. Title-prefix hits (a pathway typed by name) always count.
+   */
+  function answer(query: string, limit = 40, debug = false) {
+    const first = find(query, limit, debug);
+    if (first.results.some((r) => r.cov === undefined)) return { ...first, covered: first.results.length > 0 };
+    const covered = assess(first.parsed, first.results);
+    return { ...first, results: covered ? first.results : [], covered };
+  }
+
+  /** Ranked results for any non-empty text, including a single word ("yacovino") that `rank` leaves to a legacy search. */
+  function lookup(query: string, limit = 40, debug = false) {
+    return rank(query, limit, debug, true);
+  }
+
+  /**
+   * The whole Home search for an app with no legacy search of its own: `search`, and for a plain query (one word or a title
+   * prefix) the prefix hits first, then the ranked lookup. Same result shape as `search`.
+   */
+  function find(query: string, limit = 40, debug = false) {
+    const first = search(query, limit, debug);
+    if (first.mode !== 'plain') return first;
+    const seen = new Set<QDoc>(first.results.map((r) => r.doc));
+    const more = lookup(query, limit, debug).results.filter((r) => !seen.has(r.doc));
+    return { ...first, results: [...first.results, ...more].slice(0, limit) };
+  }
+
+  return { size: docs.length, rank, search, lookup, find, answer };
 }
 
 // ===================================================================
@@ -965,16 +1060,24 @@ export function buildQuestionDocs(input: BuildInput): QDoc[] {
   return docs;
 }
 
-/** The route a result opens (matches app.ts). */
-export function routeFor(doc: QDoc): string {
-  switch (doc.kind) {
-    case 'consult': return `/tree/${doc.consultId}`;
-    case 'node': return `/tree/${doc.consultId}/node/${doc.nodeId}`;
-    case 'info': return doc.anchor ? `/info/${doc.pageId}/at/${doc.anchor}` : `/info/${doc.pageId}`;
-    case 'trick': return `/tricks/${doc.specialtyId}/trick/${doc.anchor}`;
-    case 'drug': return '/drugs';
-    case 'calc': return `/calculator/${doc.calcId}`;
-  }
+/**
+ * Per-kind route builders. Each app passes the routes its own router understands; anything not given falls back to
+ * DEFAULT_ROUTES (myMedKitt's hash routes), so an app only overrides the kinds whose URLs differ.
+ */
+export type RouteMap = Partial<Record<QKind, (doc: QDoc) => string>>;
+
+export const DEFAULT_ROUTES: Required<RouteMap> = {
+  consult: (d) => `/tree/${d.consultId}`,
+  node: (d) => `/tree/${d.consultId}/node/${d.nodeId}`,
+  info: (d) => (d.anchor ? `/info/${d.pageId}/at/${d.anchor}` : `/info/${d.pageId}`),
+  trick: (d) => `/tricks/${d.specialtyId}/trick/${d.anchor}`,
+  drug: () => '/drugs',
+  calc: (d) => `/calculator/${d.calcId}`,
+};
+
+/** The route a result opens. */
+export function routeFor(doc: QDoc, routes: RouteMap = {}): string {
+  return (routes[doc.kind] ?? DEFAULT_ROUTES[doc.kind])(doc);
 }
 
 /** Pin keys a result satisfies (see scripts/search-heldout.ts). */

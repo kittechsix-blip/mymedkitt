@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+const Q = JSON.parse(fs.readFileSync('q500.json','utf8')).slice(0,500);
+const file = process.argv[2] || 'browser-results.jsonl';
+const rows0 = file.endsWith('.json') ? JSON.parse(fs.readFileSync(file,'utf8')) : fs.readFileSync(file,'utf8').trim().split('\n').map(l=>JSON.parse(l));
+const R = new Map(rows0.map(r=>[r.id,r]));
+const TITLES = JSON.parse(fs.readFileSync('consult-titles.json','utf8'));
+const norm = s => s.toLowerCase().replace(/[^a-z0-9]+/g,' ');
+const rows = Q.map(q => { const r = R.get(q.id); const res = r?.res ?? [];
+  const kws = q.kw ? q.kw.split('|').flatMap(k => { const t=TITLES[k.trim()]; return t ? [norm(k), norm(t)] : [norm(k)]; }) : [];
+  const hay = res.map(x => norm(x.t+' '+x.s)); const sq = h => h.replace(/ /g,'');
+  const rank = kws.length ? hay.findIndex(h => kws.some(k => h.includes(k.trim()) || sq(h).includes(sq(k)))) + 1 : 0;
+  return { ...q, n: res.length, rank, top: res.slice(0,3).map(x=>`${x.t} [${x.s}]`) }; });
+const exp = rows.filter(r=>r.kw), oos = rows.filter(r=>!r.kw);
+const pct=(a,b)=>`${a}/${b} (${Math.round(100*a/b)}%)`;
+console.log('answerable-expected', exp.length, 'rank1', pct(exp.filter(r=>r.rank===1).length,exp.length), 'top3', pct(exp.filter(r=>r.rank>=1&&r.rank<=3).length,exp.length), 'none/miss', exp.filter(r=>r.rank===0).length);
+console.log('expected-out-of-scope', oos.length, 'returned zero results', oos.filter(r=>r.n===0).length, 'returned cards anyway', oos.filter(r=>r.n>0).length);
+const byD = {}; for (const r of exp) { (byD[r.d] ??= []).push(r); }
+for (const [d,a] of Object.entries(byD)) console.log(' ', d.padEnd(28), 'r1', pct(a.filter(r=>r.rank===1).length,a.length).padEnd(12), 't3', pct(a.filter(r=>r.rank>=1&&r.rank<=3).length,a.length));
+fs.writeFileSync(process.argv[3]||'judged.json', JSON.stringify(rows,null,1));
+if (process.argv.includes('--miss')) for (const r of exp.filter(r=>r.rank!==1)) console.log(`${r.rank||'MISS'} | ${r.q}\n     want ${r.kw}\n     got ${r.top.join(' || ')}`);

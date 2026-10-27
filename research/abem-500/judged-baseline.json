@@ -1,0 +1,6499 @@
+[
+ {
+  "q": "next step in management of unstable atrial fibrillation with RVR",
+  "kw": "afib|atrial fib",
+  "d": "cardiovascular",
+  "id": 0,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Atrial Fibrillation / Flutter (incl. Pre-Excited AF) [In: Palpitations Hub]",
+   "WPW + A-Fib Management [In: A-Fib RVR]",
+   "Synchronized Cardioversion Protocol [In: A-Fib RVR]"
+  ]
+ },
+ {
+  "q": "rate control drug for afib with rapid ventricular response",
+  "kw": "afib|atrial fib|diltiazem",
+  "d": "cardiovascular",
+  "id": 1,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Rate Control Assessment [In: A-Fib RVR]",
+   "Refractory Rate Control [In: A-Fib RVR]",
+   "HFrEF Rate Control Assessment [In: A-Fib RVR]"
+  ]
+ },
+ {
+  "q": "stable SVT not responding to vagal maneuvers what do I give",
+  "kw": "svt|supraventricular|adenosine",
+  "d": "cardiovascular",
+  "id": 2,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Vagal Maneuver Selection [In: Supraventricular Tachycardia (SVT)]",
+   "Carotid Sinus Massage [In: Supraventricular Tachycardia (SVT)]",
+   "Modified Valsalva Technique (REVERT) [In: Supraventricular Tachycardia (SVT)]"
+  ]
+ },
+ {
+  "q": "adenosine dose for SVT",
+  "kw": "adenosine|svt",
+  "d": "cardiovascular",
+  "id": 3,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Adenosine [Endogenous purine nucleoside (Class V antiarrhythmic) · Adult SVT]",
+   "Adenosine Administration [In: Supraventricular Tachycardia (SVT)]",
+   "Adenosine Response [In: Supraventricular Tachycardia (SVT)]"
+  ]
+ },
+ {
+  "q": "wide complex tachycardia procainamide vs amiodarone",
+  "kw": "wide-complex|wide complex|ventricular tach",
+  "d": "cardiovascular",
+  "id": 4,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Wide-Complex Tachycardia — VT Until Proven Otherwise [In: Palpitations Hub]",
+   "🛑 Do NOT give amiodarone or procainamide for Torsades [Wide Complex Tachycardia — Do NOT]",
+   "Torsades de Pointes [In: Wide Complex Tachycardia]"
+  ]
+ },
+ {
+  "q": "management of torsades de pointes",
+  "kw": "torsades",
+  "d": "cardiovascular",
+  "id": 5,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Response to Full Treatment [In: Torsades de Pointes]",
+   "⚠️ Congenital LQTS — OPPOSITE Treatment [In: Torsades de Pointes]",
+   "Torsades de Pointes (TdP) [In: Torsades de Pointes]"
+  ]
+ },
+ {
+  "q": "magnesium dose for torsades",
+  "kw": "torsades|magnesium",
+  "d": "cardiovascular",
+  "id": 6,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Magnesium Sulfate [Electrolyte / Antiarrhythmic adjunct · Torsades de pointes]",
+   "Torsades / Seizure Mg [In: Magnesium Disorders]",
+   "🛑 Do NOT give IV magnesium to MG patients [Myasthenia Gravis — Do NOT]"
+  ]
+ },
+ {
+  "q": "Wellens syndrome ECG findings",
+  "kw": "wellens",
+  "d": "cardiovascular",
+  "id": 7,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Wellens Syndrome [In: Wellens Syndrome]",
+   "History Check [In: Wellens Syndrome]",
+   "Active ACS / Possible OMI [In: Wellens Syndrome]"
+  ]
+ },
+ {
+  "q": "STEMI criteria on ECG",
+  "kw": "stemi",
+  "d": "cardiovascular",
+  "id": 8,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "LBBB / Paced Rhythm \\u2014 Sgarbossa Criteria [In: STEMI Management]",
+   "Step 1: Confirm STEMI [Reperfusion Decision Pathway]",
+   "Suspect STEMI [In: STEMI Management]"
+  ]
+ },
+ {
+  "q": "posterior MI ECG leads",
+  "kw": "stemi|posterior",
+  "d": "cardiovascular",
+  "id": 9,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Evaluate for Posterior STEMI [In: STEMI Management]",
+   "ECG Patterns [STEMI Management Steps]",
+   "STEMI Confirmed \\u2014 Activate Cath Lab [In: STEMI Management]"
+  ]
+ },
+ {
+  "q": "NSTEMI risk stratification and anticoagulation",
+  "kw": "nstemi",
+  "d": "cardiovascular",
+  "id": 10,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Emergent Catheterization (<2 hours) [In: NSTEMI Management]",
+   "Conservative (Ischemia-Guided) Strategy [In: NSTEMI Management]",
+   "TIMI Risk Score Stratification [In: NSTEMI Management]"
+  ]
+ },
+ {
+  "q": "heparin dosing for ACS",
+  "kw": "heparin|nstemi|acs",
+  "d": "cardiovascular",
+  "id": 11,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "ACS / STEMI Adjunct [In: Unfractionated Heparin Infusion Protocol]",
+   "Unfractionated Heparin (UFH) [Unfractionated heparin (indirect thrombin/Xa inhibitor) · ACS / NSTEMI]",
+   "Common ACS regimen [UFH for ACS / STEMI]"
+  ]
+ },
+ {
+  "q": "HEART score components",
+  "kw": "heart score|chest pain",
+  "d": "cardiovascular",
+  "id": 12,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Risk Stratification — Oakland Score [In: Lower GI Bleed]",
+   "Hypoplastic Left Heart Syndrome [In: Congenital Heart Disease]",
+   "ARDS-Related Cor Pulmonale [In: Right Heart Failure]"
+  ]
+ },
+ {
+  "q": "acute decompensated heart failure management",
+  "kw": "chf|heart failure",
+  "d": "cardiovascular",
+  "id": 13,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Reduced EF / Heart Failure — Avoid Beta-Blockers [In: Thyroid Disorders]",
+   "Post-MI Heart Failure Management [In: NSTEMI Management]",
+   "Enalaprilat [ACE inhibitor (intravenous) · Acute decompensated heart failure (limited use)]"
+  ]
+ },
+ {
+  "q": "nitroglycerin infusion for SCAPE",
+  "kw": "scape|nitroglycerin",
+  "d": "cardiovascular",
+  "id": 14,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Nitroglycerin Dose [High-dose SCAPE range]",
+   "Nitroglycerin [Organic nitrate (vasodilator) · SCAPE high-dose]",
+   "High-Dose Nitroglycerin [In: SCAPE High-Dose Nitroglycerin]"
+  ]
+ },
+ {
+  "q": "sympathetic crashing acute pulmonary edema treatment",
+  "kw": "scape",
+  "d": "cardiovascular",
+  "id": 15,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "HFNC in CHF / Pulmonary Edema [In: High-Flow Nasal Cannula]",
+   "Isosorbide Dinitrate [Long-acting organic nitrate (venous + arterial vasodilator) · Acute pulmonary edema / SCAPE (off-label high-dose)]",
+   "Is This SCAPE? [In: CHF Exacerbation]"
+  ]
+ },
+ {
+  "q": "cardiogenic shock vasopressor choice",
+  "kw": "cardiogenic",
+  "d": "cardiovascular",
+  "id": 16,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Norepinephrine (Levophed) [Vasopressor / Catecholamine (alpha > beta) · Cardiogenic shock (first-line vasopressor)]",
+   "Vasopressors and Inotropes [In: Cardiogenic Shock]",
+   "🛑 Do NOT intubate cardiogenic shock without vasopressor coverage [Cardiogenic Shock — Do NOT]"
+  ]
+ },
+ {
+  "q": "pericarditis ECG findings and treatment",
+  "kw": "pericarditis",
+  "d": "cardiovascular",
+  "id": 17,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Activity Restriction [In: Pericarditis]",
+   "ECG in Pericarditis [In: Pericarditis]",
+   "Pericarditis — Diagnostic Criteria [In: Pericarditis]"
+  ]
+ },
+ {
+  "q": "myocarditis diagnosis in young adult with troponin elevation",
+  "kw": "myocarditis",
+  "d": "cardiovascular",
+  "id": 18,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Myocarditis — ED Recognition [In: Myocarditis]",
+   "Immune Checkpoint Inhibitor Myocarditis [In: Myocarditis]",
+   "Likely Viral / Idiopathic Myocarditis [In: Myocarditis]"
+  ]
+ },
+ {
+  "q": "aortic dissection imaging and blood pressure targets",
+  "kw": "aortic-dissection|aortic dissection|dissection",
+  "d": "cardiovascular",
+  "id": 19,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Immediate Management Goals [In: Aortic Dissection]",
+   "🛑 Do NOT measure only one arm blood pressure [Aortic Dissection — Do NOT]",
+   "Aortic Dissection Overview [In: Aortic Dissection]"
+  ]
+ },
+ {
+  "q": "esmolol dosing for aortic dissection",
+  "kw": "dissection|esmolol",
+  "d": "cardiovascular",
+  "id": 20,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Aortic Dissection Protocol [In: Critical Care Drips]",
+   "Aortic Dissection - Confirm + Treat [In: Chest Pain Hub]",
+   "Type B Uncomplicated Disposition [In: Aortic Dissection]"
+  ]
+ },
+ {
+  "q": "abdominal aortic aneurysm ruptured management",
+  "kw": "aortic-aneurysm|aneurysm",
+  "d": "cardiovascular",
+  "id": 21,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ruptured AAA - Resuscitation [In: Aortic Aneurysm ED Management]",
+   "Ruptured AAA - Surgical Options [In: Aortic Aneurysm ED Management]",
+   "Aortic Emergency - Presentation [In: Aortic Aneurysm ED Management]"
+  ]
+ },
+ {
+  "q": "hypertensive emergency blood pressure goal",
+  "kw": "hypertensive",
+  "d": "cardiovascular",
+  "id": 22,
+  "n": 6,
+  "rank": 6,
+  "top": [
+   "Blood Pressure Management [In: TIA Workup]",
+   "Blood Pressure & CPP Targets [In: Brain Herniation Syndromes]",
+   "Clevidipine (Cleviprex) [Ultra-short-acting dihydropyridine CCB · ICH blood pressure control (target SBP 130–150)]"
+  ]
+ },
+ {
+  "q": "nicardipine dosing hypertensive emergency",
+  "kw": "nicardipine|hypertensive",
+  "d": "cardiovascular",
+  "id": 23,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Nicardipine (Cardene) [Dihydropyridine calcium channel blocker]",
+   "Labetalol [Combined alpha-1 and beta-adrenergic blocker]",
+   "Sodium nitroprusside (Nipride RTU) [Direct arterial and venous vasodilator (nitric oxide donor) · Pediatric hypertensive emergency]"
+  ]
+ },
+ {
+  "q": "syncope risk stratification San Francisco rule",
+  "kw": "syncope",
+  "d": "cardiovascular",
+  "id": 24,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "San Francisco Syncope Rule [SFSR — 7-Day Serious Outcome Prediction]",
+   "Risk Stratification [In: Syncope Evaluation]",
+   "Risk Stratification [In: Brugada Syndrome]"
+  ]
+ },
+ {
+  "q": "pacemaker malfunction evaluation",
+  "kw": "pacemaker",
+  "d": "cardiovascular",
+  "id": 25,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pacemaker Malfunction Types [In: Pacemaker & ICD Emergencies]",
+   "Stable Pacemaker Malfunction [In: Pacemaker & ICD Emergencies]",
+   "Unstable Pacemaker Malfunction [In: Pacemaker & ICD Emergencies]"
+  ]
+ },
+ {
+  "q": "magnet use on pacemaker or ICD",
+  "kw": "pacemaker|icd",
+  "d": "cardiovascular",
+  "id": 26,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pacemaker & ICD Emergencies [Device Basics → Malfunction → ECG Interpretation → Magnet Use → ICD Emergencies → Defibrillation → Temp Pacing]",
+   "ICD Magnet Specifics [In: Pacemaker & ICD Emergencies]",
+   "Magnet Application Basics [In: Pacemaker & ICD Emergencies]"
+  ]
+ },
+ {
+  "q": "LVAD patient in the ED cardiac arrest",
+  "kw": "vad|lvad",
+  "d": "cardiovascular",
+  "id": 27,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Post-LVAD or Post-Cardiac-Surgery RV Failure [In: Right Heart Failure]",
+   "VAD Echo Findings [Bedside Echocardiography in LVAD Patients]",
+   "Norepinephrine (Levophed) [Vasopressor / Catecholamine (alpha > beta) · Post-cardiac arrest hemodynamic support]"
+  ]
+ },
+ {
+  "q": "symptomatic bradycardia atropine dose",
+  "kw": "bradycard|atropine",
+  "d": "cardiovascular",
+  "id": 28,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Atropine [Anticholinergic (muscarinic antagonist) · Symptomatic bradycardia (ACLS)]",
+   "Bradycardia Management [In: Neurogenic Shock & Spinal Shock]",
+   "Bradycardia Management [In: Xylazine Toxicity (\"Tranq\")]"
+  ]
+ },
+ {
+  "q": "bradycardia refractory to atropine next step",
+  "kw": "bradycard",
+  "d": "cardiovascular",
+  "id": 29,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Bradycardia Management [In: Neurogenic Shock & Spinal Shock]",
+   "Ciguatera Bradycardia [In: Ciguatera Fish Poisoning]",
+   "Treatment Overview [In: Digoxin Toxicity]"
+  ]
+ },
+ {
+  "q": "ACLS cardiac arrest algorithm epinephrine timing",
+  "kw": "cardiac-arrest|cardiac arrest",
+  "d": "cardiovascular",
+  "id": 30,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "VAD Arrest Algorithm [VAD Cardiac Arrest Protocol]",
+   "Epinephrine [Non-selective adrenergic agonist (alpha + beta) · VAD cardiac arrest]",
+   "Cardiac Arrest — Modified ACLS [In: Beta Blocker Overdose]"
+  ]
+ },
+ {
+  "q": "asystole management",
+  "kw": "asystole",
+  "d": "cardiovascular",
+  "id": 31,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Asystole [Confirm rhythm · Fine VF · LIFEPAK lead/gain · CPR · Reversible causes]",
+   "Asystole: bedside steps [Adult nonshockable arrest]",
+   "Fine VF or asystole? [Connections → vector → gain → rhythm]"
+  ]
+ },
+ {
+  "q": "post ROSC care targeted temperature",
+  "kw": "post-rosc|rosc",
+  "d": "cardiovascular",
+  "id": 32,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Post-ROSC Management [In: Refractory VF/VT]",
+   "ROSC Achieved [In: Cardiac Arrest — General Approach]",
+   "Following Commands — Standard Care [In: Post-Cardiac Arrest Care]"
+  ]
+ },
+ {
+  "q": "refractory ventricular fibrillation double sequential defibrillation",
+  "kw": "refractory|vfvt|vf",
+  "d": "cardiovascular",
+  "id": 33,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Double Sequential Defibrillation (DSD) [Technique, Evidence, and Setup for Refractory VF]",
+   "Double Sequential Defibrillation (DSD) [In: Refractory VF/VT]",
+   "Refractory Pulseless VT [In: Ventricular Tachycardia]"
+  ]
+ },
+ {
+  "q": "infective endocarditis Duke criteria",
+  "kw": "endocarditis",
+  "d": "cardiovascular",
+  "id": 34,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Duke-ISCVID Criteria [In: Infectious Endocarditis]",
+   "Endocarditis Workup [In: Fever of Unknown Origin]",
+   "U/S Identification [In: Infectious Endocarditis]"
+  ]
+ },
+ {
+  "q": "empiric antibiotics for endocarditis",
+  "kw": "endocarditis",
+  "d": "cardiovascular",
+  "id": 35,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Ceftriaxone [Third-generation cephalosporin · Pediatric Meningitis (empiric first ED dose)]",
+   "Vancomycin [Glycopeptide · Infective endocarditis empiric]",
+   "Native-Valve Empiric Therapy [In: Infectious Endocarditis]"
+  ]
+ },
+ {
+  "q": "peripartum cardiomyopathy ED management",
+  "kw": "peripartum",
+  "d": "cardiovascular",
+  "id": 36,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Peripartum Cardiomyopathy [In: Peripartum Cardiomyopathy]",
+   "Diuretics [In: Peripartum Cardiomyopathy]",
+   "Postpartum Management [In: Peripartum Cardiomyopathy]"
+  ]
+ },
+ {
+  "q": "right ventricular failure management",
+  "kw": "right-heart|right heart|rv",
+  "d": "cardiovascular",
+  "id": 37,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "🛑 Do NOT miss right ventricular failure as the etiology [Cardiogenic Shock — Do NOT]",
+   "Right Ventricular Involvement [In: STEMI Management]",
+   "Echo Positive [In: Infectious Endocarditis]"
+  ]
+ },
+ {
+  "q": "acute limb ischemia management",
+  "kw": "ischemic-limb|ischemic limb|limb",
+  "d": "cardiovascular",
+  "id": 38,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Acute Limb Ischemia — Recognize It Fast [In: Acute Limb Ischemia & PAD]",
+   "Anticoagulation — The Cornerstone [In: Acute Limb Ischemia & PAD]",
+   "Rutherford Acute Limb Ischemia Category [Sensory + motor + Doppler → category & urgency]"
+  ]
+ },
+ {
+  "q": "deep vein thrombosis Wells score",
+  "kw": "dvt|wells",
+  "d": "cardiovascular",
+  "id": 39,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Wells Score (DVT) [Pre-test probability of deep vein thrombosis]",
+   "Deep Vein Thrombosis (DVT) [In: dvt]",
+   "Wells Score for DVT [In: dvt]"
+  ]
+ },
+ {
+  "q": "DOAC choice for DVT treatment",
+  "kw": "dvt|apixaban|rivaroxaban",
+  "d": "cardiovascular",
+  "id": 40,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "DOAC Options for DVT [In: dvt]",
+   "Outpatient DVT Treatment [In: dvt]",
+   "Anticoagulant Selection [In: dvt]"
+  ]
+ },
+ {
+  "q": "hypotension workup in the ED undifferentiated shock",
+  "kw": "hypotension|shock",
+  "d": "cardiovascular",
+  "id": 41,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Undifferentiated Hypotension — Initial Assessment [In: Undifferentiated Hypotension]",
+   "Cath Lab or IR [In: Undifferentiated Hypotension]",
+   "Fluid Responsiveness Assessment [In: Undifferentiated Hypotension]"
+  ]
+ },
+ {
+  "q": "push dose epinephrine preparation",
+  "kw": "push-dose|push dose",
+  "d": "cardiovascular",
+  "id": 42,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Push-Dose Epinephrine - Preparation [In: Push-Dose Pressors]",
+   "Push-Dose Prep [Epinephrine & vasopressin preparation]",
+   "Push-Dose Phenylephrine - Preparation [In: Push-Dose Pressors]"
+  ]
+ },
+ {
+  "q": "norepinephrine starting dose",
+  "kw": "norepinephrine|vasopressor",
+  "d": "cardiovascular",
+  "id": 43,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Peripheral Norepinephrine - Safety Evidence [In: Push-Dose Pressors]",
+   "Push-Dose Norepinephrine - Overview [In: Push-Dose Pressors]",
+   "Push-Dose Norepinephrine - Preparation & Dosing [In: Push-Dose Pressors]"
+  ]
+ },
+ {
+  "q": "digoxin toxicity treatment digifab dose",
+  "kw": "digoxin|digifab",
+  "d": "cardiovascular",
+  "id": 44,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "DigiFab Dosing [In: Digoxin Toxicity]",
+   "DigiFab Dosing — Empiric [In: Digoxin Toxicity]",
+   "DigiFab Dosing — Known Ingestion [In: Digoxin Toxicity]"
+  ]
+ },
+ {
+  "q": "beta blocker overdose glucagon",
+  "kw": "beta-blocker|beta blocker",
+  "d": "cardiovascular",
+  "id": 45,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Beta-Blocker Overdose Steps Summary [Recognize → Stabilize → Glucagon/Ca → HIET → Pressors → Lipid → Rescue]",
+   "Glucagon — First-Line Therapy [In: Beta Blocker Overdose]",
+   "Beta-Blocker Overdose [In: Intralipid / Lipid Emulsion Therapy]"
+  ]
+ },
+ {
+  "q": "calcium channel blocker overdose high dose insulin",
+  "kw": "ccb|calcium channel|high-dose",
+  "d": "cardiovascular",
+  "id": 46,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "High-Dose Insulin Therapy (HIET) [In: Calcium Channel Blocker Overdose]",
+   "HIET — Onset and Monitoring [In: Calcium Channel Blocker Overdose]",
+   "HIET Dosing Protocol [In: Calcium Channel Blocker Overdose]"
+  ]
+ },
+ {
+  "q": "electrical alternans on ECG",
+  "kw": "tamponade|alternans",
+  "d": "cardiovascular",
+  "id": 47,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "Electrical Instability [In: Myocarditis]",
+   "Conducted Electrical Weapon (TASER) [In: Electrocution & Lightning Injury]",
+   "Cardiac Tamponade [In: Undifferentiated Hypotension]"
+  ]
+ },
+ {
+  "q": "hyperkalemia ECG changes",
+  "kw": "hyperk|potassium",
+  "d": "cardiovascular",
+  "id": 48,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hyperkalemia — ECG Assessment [In: Hemodialysis Emergencies]",
+   "Early Changes (K+ 5.5-6.5 mEq/L) [Hyperkalemia ECG Findings]",
+   "Moderate Changes (K+ 6.5-7.5 mEq/L) [Hyperkalemia ECG Findings]"
+  ]
+ },
+ {
+  "q": "long QT causes and management",
+  "kw": "qt|torsades",
+  "d": "cardiovascular",
+  "id": 49,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Long QT Syndrome [High-Risk ECG Findings in Syncope]",
+   "Long QT Syndrome [ECG Screening in BRUE]",
+   "Torsades de Pointes / Long QT [In: Palpitations Hub]"
+  ]
+ },
+ {
+  "q": "carotid sinus massage technique",
+  "kw": "svt|vagal",
+  "d": "cardiovascular",
+  "id": 50,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Carotid Sinus Massage [In: Supraventricular Tachycardia (SVT)]",
+   "Carotid Sinus Massage [In: Syncope Evaluation]",
+   "Vagal Maneuver Selection [In: Supraventricular Tachycardia (SVT)]"
+  ]
+ },
+ {
+  "q": "cardioversion energy for atrial fibrillation",
+  "kw": "afib|cardioversion",
+  "d": "cardiovascular",
+  "id": 51,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Synchronized Cardioversion [Procedure for Atrial Fibrillation / Flutter]",
+   "3. Energy & Synchronization [Synchronized Cardioversion]",
+   "Synchronized Cardioversion Protocol [In: A-Fib RVR]"
+  ]
+ },
+ {
+  "q": "anticoagulation before cardioversion CHA2DS2-VASc",
+  "kw": "afib|cha",
+  "d": "cardiovascular",
+  "id": 52,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "5. Anticoagulation [A-Fib RVR Management Steps]",
+   "AF Onset Assessment [In: A-Fib RVR]",
+   "AFib in Thyroid Storm [In: Thyroid Disorders]"
+  ]
+ },
+ {
+  "q": "unstable bradycardia transcutaneous pacing settings",
+  "kw": "bradycard|pacing",
+  "d": "cardiovascular",
+  "id": 53,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Transcutaneous Pacing [In: Bradycardic Arrest]",
+   "Transcutaneous Pacing [In: Pacemaker & ICD Emergencies]",
+   "TCP Settings [Transcutaneous pacing parameters]"
+  ]
+ },
+ {
+  "q": "aortic stenosis syncope management",
+  "kw": "syncope|aortic",
+  "d": "cardiovascular",
+  "id": 54,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Classifications of Syncope [Syncope Differential Diagnosis]",
+   "Cardiac Syncope — Structural [Historical Features Suggesting Etiology]",
+   "Cardiac Syncope Suspected [In: Syncope Evaluation]"
+  ]
+ },
+ {
+  "q": "hypertrophic cardiomyopathy ED considerations",
+  "kw": "",
+  "d": "cardiovascular",
+  "id": 55,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Hypertrophic Cardiomyopathy (HCM) [High-Risk ECG Findings in Syncope]",
+   "Dobutamine [Inotrope (beta-1 adrenergic agonist)]",
+   "Digoxin [Cardiac glycoside]"
+  ]
+ },
+ {
+  "q": "coronary artery dissection spontaneous in young woman",
+  "kw": "",
+  "d": "cardiovascular",
+  "id": 56,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Atypical Presentations [In: Aortic Dissection]",
+   "MINOCA \\u2014 Non-Obstructive Coronaries [In: NSTEMI Management]",
+   "🛑 Do NOT forget IPV screening in spontaneous dissection [Cervical Artery Dissection — Do NOT]"
+  ]
+ },
+ {
+  "q": "Prinzmetal vasospastic angina",
+  "kw": "",
+  "d": "cardiovascular",
+  "id": 57,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Ludwig Angina Criteria [Clinical Diagnosis]",
+   "Epiglottitis & Ludwig Angina [In: Adult Pharyngitis (Strep Throat)]",
+   "Ludwig Angina [In: Deep Neck Space Infections]"
+  ]
+ },
+ {
+  "q": "Kawasaki disease diagnosis and IVIG",
+  "kw": "",
+  "d": "cardiovascular",
+  "id": 58,
+  "n": 5,
+  "rank": 0,
+  "top": [
+   "Kawasaki Disease Suspected — Urgent [In: Lymphadenopathy Hub]",
+   "Pediatric — Adenitis vs Kawasaki Gate [In: Lymphadenopathy Hub]",
+   "Admit [In: Lymphadenopathy Hub]"
+  ]
+ },
+ {
+  "q": "asthma exacerbation severe treatment magnesium",
+  "kw": "asthma",
+  "d": "respiratory",
+  "id": 59,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Treatment Response [In: Asthma Exacerbation]",
+   "IV Magnesium Sulfate [In: Asthma Exacerbation]",
+   "Epinephrine [In: Asthma Exacerbation]"
+  ]
+ },
+ {
+  "q": "status asthmaticus intubation ventilator settings",
+  "kw": "asthma|vent",
+  "d": "respiratory",
+  "id": 60,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Asthma Exacerbation [In: Asthma Exacerbation]",
+   "Ventilator Settings [In: Asthma Exacerbation]",
+   "Post-Intubation Ventilator Strategy [In: HOP Killers]"
+  ]
+ },
+ {
+  "q": "COPD exacerbation BiPAP indications",
+  "kw": "copd",
+  "d": "respiratory",
+  "id": 61,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "NIV (BiPAP) Indications [In: COPD Exacerbation]",
+   "Antibiotic Indications [In: COPD Exacerbation]",
+   "BiPAP Management [In: COPD Exacerbation]"
+  ]
+ },
+ {
+  "q": "community acquired pneumonia empiric treatment",
+  "kw": "pneumonia",
+  "d": "respiratory",
+  "id": 62,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Inpatient CAP — MRSA/Pseudomonas Risk [In: Pneumonia]",
+   "MRSA Risk Assessment [In: Pneumonia]",
+   "Pseudomonas Risk Assessment [In: Pneumonia]"
+  ]
+ },
+ {
+  "q": "CURB-65 score",
+  "kw": "pneumonia|curb",
+  "d": "respiratory",
+  "id": 63,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "CURB-65 [CAP Severity & Disposition (BTS/IDSA)]",
+   "Parenchymal - Treat [In: Cyanosis / Hypoxaemia Hub]",
+   "Pneumonia - Disposition + Treat [In: Shortness of Breath Hub]"
+  ]
+ },
+ {
+  "q": "PSI PORT score",
+  "kw": "pneumonia|psi",
+  "d": "respiratory",
+  "id": 64,
+  "n": 4,
+  "rank": 1,
+  "top": [
+   "PSI / PORT Score [Pneumonia Severity Index (Fine Score)]",
+   "Pneumonia - Rule In + Severity [In: Shortness of Breath Hub]",
+   "HACE — Treatment [In: Altitude Sickness]"
+  ]
+ },
+ {
+  "q": "pneumothorax needle decompression location",
+  "kw": "pneumothorax|chest tube",
+  "d": "respiratory",
+  "id": 65,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Immediate Needle Decompression [In: Pneumothorax POCUS]",
+   "Pneumothorax POCUS [Technique → Lung Sliding → A’ Profile → Lung Point]",
+   "Normal: Pneumothorax Excluded [In: Pneumothorax POCUS]"
+  ]
+ },
+ {
+  "q": "tension pneumothorax treatment",
+  "kw": "pneumothorax",
+  "d": "respiratory",
+  "id": 66,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Signs of Tension? [In: Pneumothorax POCUS]",
+   "T - Tension pneumothorax [HOTT Bundle]",
+   "Tension Pneumothorax [In: Undifferentiated Hypotension]"
+  ]
+ },
+ {
+  "q": "chest tube size for hemothorax",
+  "kw": "chest-tube|chest tube",
+  "d": "respiratory",
+  "id": 67,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "Tube Size Selection [In: Pneumothorax Management]",
+   "Hemothorax [In: Pneumothorax Management]",
+   "Bilateral Finger Thoracostomies / Chest Tubes [In: Traumatic Arrest]"
+  ]
+ },
+ {
+  "q": "tranexamic acid nebulized for hemoptysis",
+  "kw": "hemoptysis|tranexamic",
+  "d": "respiratory",
+  "id": 68,
+  "n": 4,
+  "rank": 1,
+  "top": [
+   "Tranexamic Acid (TXA) [In: Massive Hemoptysis]",
+   "Tranexamic Acid (TXA) Protocol [In: Post-Tonsillectomy Hemorrhage]",
+   "Hemostatic Intervention [In: Post-Tonsillectomy Hemorrhage]"
+  ]
+ },
+ {
+  "q": "high flow nasal cannula settings",
+  "kw": "hfnc|high flow",
+  "d": "respiratory",
+  "id": 69,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "High-Flow Nasal Cannula [Indications → Settings → ROX Index → Escalation → Special Populations → Disposition]",
+   "High-Flow Nasal Cannula: Initial Assessment [In: High-Flow Nasal Cannula]",
+   "HFNC Device Setup & Initial Settings [In: High-Flow Nasal Cannula]"
+  ]
+ },
+ {
+  "q": "noninvasive ventilation contraindications",
+  "kw": "niv|bipap|hfnc|noninvasive",
+  "d": "respiratory",
+  "id": 70,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "🛑 Do NOT intubate before maximizing non-invasive options [Asthma Exacerbation — Do NOT]",
+   "Low-Dose Opioids for Air Hunger on Noninvasive Ventilation [Trick — General & Diagnostics]",
+   "Enalaprilat [ACE inhibitor (intravenous)]"
+  ]
+ },
+ {
+  "q": "acute respiratory distress syndrome ventilator settings",
+  "kw": "ards|vent",
+  "d": "respiratory",
+  "id": 71,
+  "n": 4,
+  "rank": 0,
+  "top": [
+   "ICU / Airway-Capable Setting [In: Acute Dystonic Reaction]",
+   "Chest Escharotomy [In: Burns Management]",
+   "Pneumonia Type [In: Pneumonia]"
+  ]
+ },
+ {
+  "q": "tracheostomy emergency dislodged tube",
+  "kw": "trach",
+  "d": "respiratory",
+  "id": 72,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Tracheostomy Tube Types [In: Tracheostomy Emergencies]",
+   "Step 2: Remove Tracheostomy [Utley Maneuver]",
+   "Emergent Tracheostomy [In: Laryngeal Trauma]"
+  ]
+ },
+ {
+  "q": "PERC rule for pulmonary embolism",
+  "kw": "pe|perc",
+  "d": "respiratory",
+  "id": 73,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pulmonary Embolism & Syncope [In: Syncope Evaluation]",
+   "PESI Score [Pulmonary Embolism Severity Index]",
+   "sPESI Score [Simplified Pulmonary Embolism Severity Index]"
+  ]
+ },
+ {
+  "q": "Wells score for pulmonary embolism",
+  "kw": "wells|pe",
+  "d": "respiratory",
+  "id": 74,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Wells PE Score [Pulmonary Embolism Pre-Test Probability]",
+   "Pulmonary Embolism & Syncope [In: Syncope Evaluation]",
+   "PESI Score [Pulmonary Embolism Severity Index]"
+  ]
+ },
+ {
+  "q": "submassive pulmonary embolism treatment",
+  "kw": "pe-treatment|pulmonary embol",
+  "d": "respiratory",
+  "id": 75,
+  "n": 4,
+  "rank": 1,
+  "top": [
+   "Reperfusion Strategy [In: PE Treatment]",
+   "PE Risk Stratification (2026) [In: PE Treatment]",
+   "Disposition — When to Call PERT / PH Team / Transfer [In: Right Heart Failure]"
+  ]
+ },
+ {
+  "q": "pulmonary embolism in pregnancy",
+  "kw": "pe-pregnancy|pregnan",
+  "d": "respiratory",
+  "id": 76,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Massive Pulmonary Embolism [In: Undifferentiated Hypotension]",
+   "Massive Pulmonary Embolism [In: PEA Arrest]",
+   "Pulmonary Embolism & Syncope [In: Syncope Evaluation]"
+  ]
+ },
+ {
+  "q": "dyspnea differential diagnosis workup",
+  "kw": "dyspnea",
+  "d": "respiratory",
+  "id": 77,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Toxic / Metabolic Dyspnea - Rule In [In: Shortness of Breath Hub]",
+   "ACS as Dyspnea - ECG First [In: Shortness of Breath Hub]",
+   "Other Mimics [Differential Diagnosis]"
+  ]
+ },
+ {
+  "q": "acute hypoxemia cyanosis causes",
+  "kw": "cyanosis|hypoxemia",
+  "d": "respiratory",
+  "id": 78,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Cyanosis / Hypoxaemia Hub [Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo]",
+   "Which Cause Are You Working Up? [In: Cyanosis / Hypoxaemia Hub]",
+   "Cyanosis / Hypoxaemia Hub - Sick Check First [In: Cyanosis / Hypoxaemia Hub]"
+  ]
+ },
+ {
+  "q": "methemoglobinemia treatment methylene blue",
+  "kw": "methemoglobin",
+  "d": "respiratory",
+  "id": 79,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Methylene Blue Protocol [In: Methemoglobinemia]",
+   "Response to Methylene Blue [In: Methemoglobinemia]",
+   "Rebound Methemoglobinemia [In: Methemoglobinemia]"
+  ]
+ },
+ {
+  "q": "carbon monoxide poisoning hyperbaric oxygen indication",
+  "kw": "co-toxicity|carbon monoxide",
+  "d": "respiratory",
+  "id": 80,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Contacting Hyperbaric Center [In: Carbon Monoxide Toxicity]",
+   "Carbon Monoxide Toxicity [Recognition → Severity → Oxygen Therapy → HBO Criteria → Special Populations → DNS]",
+   "Admission for Observation [In: Carbon Monoxide Toxicity]"
+  ]
+ },
+ {
+  "q": "anaphylaxis airway edema management",
+  "kw": "anaphylaxis",
+  "d": "respiratory",
+  "id": 81,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Airway Assessment [In: Anaphylaxis Management]",
+   "🛑 Do NOT delay intubation for worsening airway edema [Anaphylaxis — Do NOT]",
+   "Critical Airway — Intubation Preparation [In: Anaphylaxis Management]"
+  ]
+ },
+ {
+  "q": "ECMO indications",
+  "kw": "ecmo",
+  "d": "respiratory",
+  "id": 82,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "VA-ECMO Indications [In: Extracorporeal Membrane Oxygenation (ECMO)]",
+   "VV-ECMO Indications [In: Extracorporeal Membrane Oxygenation (ECMO)]",
+   "ECMO Contraindications [In: Extracorporeal Membrane Oxygenation (ECMO)]"
+  ]
+ },
+ {
+  "q": "oxygen delivery devices FiO2 table",
+  "kw": "oxygen",
+  "d": "respiratory",
+  "id": 83,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Venturi Mask — Precise FiO2 [In: Oxygen Delivery Systems]",
+   "Configure Device Settings [In: Oxygen Delivery Systems]",
+   "Mild Hypoxemia — Low-Flow Devices [In: Oxygen Delivery Systems]"
+  ]
+ },
+ {
+  "q": "pleural effusion thoracentesis",
+  "kw": "chest|thoracent|pleural",
+  "d": "respiratory",
+  "id": 84,
+  "n": 4,
+  "rank": 3,
+  "top": [
+   "Admit - ICU [In: Ovarian Hyperstimulation Syndrome]",
+   "PD-Related Hydrothorax [In: Peritoneal Dialysis Complications]",
+   "Diagnostic Thoracentesis [Parapneumonic Effusion Assessment]"
+  ]
+ },
+ {
+  "q": "sarcoidosis presentation",
+  "kw": "",
+  "d": "respiratory",
+  "id": 85,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Lymphadenopathy/Splenomegaly Workup [In: Fever of Unknown Origin]",
+   "Rash/Skin Findings Workup [In: Fever of Unknown Origin]",
+   "Autoimmune/Inflammatory (~20%) [FUO Etiologies by Category]"
+  ]
+ },
+ {
+  "q": "pulmonary hypertension crisis ED management",
+  "kw": "right-heart|pulmonary hypertension",
+  "d": "respiratory",
+  "id": 86,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "ACS with Hypertension [In: Critical Care Drips]",
+   "Fentanyl [Opioid analgesic (synthetic) · SCD pain crisis IV]",
+   "Acute-on-Chronic PAH Crisis [In: Right Heart Failure]"
+  ]
+ },
+ {
+  "q": "spontaneous pneumothorax outpatient management",
+  "kw": "pneumothorax",
+  "d": "respiratory",
+  "id": 87,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "PSP \\u2014 Conservative Management [In: Pneumothorax Management]",
+   "Primary Spontaneous Pneumothorax [In: Pneumothorax Management]",
+   "Secondary Spontaneous Pneumothorax [In: Pneumothorax Management]"
+  ]
+ },
+ {
+  "q": "flash pulmonary edema nitrates",
+  "kw": "scape|pulmonary edema",
+  "d": "respiratory",
+  "id": 88,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Isosorbide Dinitrate [Long-acting organic nitrate (venous + arterial vasodilator) · Acute pulmonary edema / SCAPE (off-label high-dose)]",
+   "Immediate sequence [SCAPE Steps]",
+   "SCAPE Steps [NIV plus high-dose nitroglycerin]"
+  ]
+ },
+ {
+  "q": "severe croup dexamethasone and racemic epinephrine",
+  "kw": "croup",
+  "d": "respiratory",
+  "id": 89,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Moderate Croup — Dexamethasone + Epinephrine [In: Croup]",
+   "Repeat Nebulized Epinephrine [In: Croup]",
+   "Severe Croup — Aggressive Treatment [In: Croup]"
+  ]
+ },
+ {
+  "q": "bronchiolitis supportive care",
+  "kw": "bronchiolitis",
+  "d": "respiratory",
+  "id": 90,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Mild Bronchiolitis — Supportive Care [In: Bronchiolitis]",
+   "Bronchiolitis [Assessment → Supportive Care → HFNC → Disposition]",
+   "Admit \\u2014 Acute Care Unit [In: Bronchiolitis]"
+  ]
+ },
+ {
+  "q": "foreign body aspiration child",
+  "kw": "peds-foreign|foreign body",
+  "d": "respiratory",
+  "id": 91,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pediatric Foreign Body — Overview [In: Foreign Body (Airway + Esophageal)]",
+   "Esophageal Foreign Body [In: GI Foreign Body]",
+   "Foreign Body (Airway + Esophageal) [Recognition → BLS → Rigid Bronch → Esoph Triage → Button Battery → Disposition]"
+  ]
+ },
+ {
+  "q": "pertussis treatment",
+  "kw": "",
+  "d": "respiratory",
+  "id": 92,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Pertussis Consideration [In: BRUE (Brief Resolved Unexplained Event)]",
+   "Management by Risk [BRUE Risk Stratification]",
+   "Low-Risk Workup [In: BRUE (Brief Resolved Unexplained Event)]"
+  ]
+ },
+ {
+  "q": "pulmonary contusion management",
+  "kw": "",
+  "d": "respiratory",
+  "id": 93,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "PE Treatment Selector [Risk-Stratified Anticoagulation for Acute Pulmonary Embolism]",
+   "Pulmonary [SIAD Causes & Diagnosis]",
+   "Pulmonary [HIV System-Based Complications]"
+  ]
+ },
+ {
+  "q": "acute appendicitis diagnosis imaging adults",
+  "kw": "appendicitis",
+  "d": "gastrointestinal",
+  "id": 94,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Adult Appendicitis — Recognition [In: Adult Appendicitis]",
+   "Appendicitis — Image + Treat [In: Abdominal Pain Hub]",
+   "Appendicitis Imaging Algorithm [Imaging Safety in Pregnancy]"
+  ]
+ },
+ {
+  "q": "Alvarado score",
+  "kw": "appendicitis|alvarado",
+  "d": "gastrointestinal",
+  "id": 95,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Alvarado Score [MANTRELS — classic appendicitis screen]",
+   "Alvarado Score [Appendicitis Prediction (MANTRELS)]",
+   "Alvarado Score — Appendicitis [In: CT Scan Decision Support]"
+  ]
+ },
+ {
+  "q": "acute pancreatitis fluid resuscitation",
+  "kw": "pancreatitis",
+  "d": "gastrointestinal",
+  "id": 96,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Acute Pancreatitis [In: Acute Pancreatitis]",
+   "Acute Pancreatitis — Complete [In: Acute Pancreatitis]",
+   "Acute Pancreatitis [Diagnosis → Severity → Resuscitation → Complications → Intervention]"
+  ]
+ },
+ {
+  "q": "Ranson criteria",
+  "kw": "pancreatitis|ranson",
+  "d": "gastrointestinal",
+  "id": 97,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Resuscitation Criteria [When NOT to Resuscitate]",
+   "Anthonisen Criteria [COPD Antibiotic Decision]",
+   "Newman Criteria [Adult Septic Arthritis Diagnosis]"
+  ]
+ },
+ {
+  "q": "gallstone pancreatitis ERCP timing",
+  "kw": "pancreatitis|gallbladder",
+  "d": "gastrointestinal",
+  "id": 98,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Gallstone Pancreatitis [In: Acute Pancreatitis]",
+   "🛑 Do NOT delay ERCP in gallstone pancreatitis with cholangitis [Acute Pancreatitis — Do NOT]",
+   "3. Etiology & Workup [Acute Pancreatitis Steps Summary]"
+  ]
+ },
+ {
+  "q": "ascending cholangitis Tokyo criteria",
+  "kw": "gallbladder|cholangitis",
+  "d": "gastrointestinal",
+  "id": 99,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ascending Cholangitis — Charcot / Reynolds [In: Acute Jaundice Hub]",
+   "Cholangitis Assessment [In: Gallbladder Disease]",
+   "Cholangitis Severity Grading [In: Gallbladder Disease]"
+  ]
+ },
+ {
+  "q": "upper GI bleed Glasgow-Blatchford score",
+  "kw": "upper-gi|gi bleed|blatchford",
+  "d": "gastrointestinal",
+  "id": 100,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Glasgow-Blatchford Score [Upper GI Bleed Risk Stratification]",
+   "Upper GI Bleed — Glasgow-Blatchford Gate [In: Epigastric Pain / Dyspepsia Hub]",
+   "GI Bleed — Glasgow-Blatchford Gate [In: Abdominal Pain Hub]"
+  ]
+ },
+ {
+  "q": "variceal bleeding octreotide",
+  "kw": "upper-gi|varice|gi-bleed",
+  "d": "gastrointestinal",
+  "id": 101,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Octreotide (Variceal Bleeding) [In: Critical Care Drips]",
+   "5. Variceal Bleeding [Upper GI Bleed Steps Summary]",
+   "Octreotide Protocol [In: Upper GI Bleed]"
+  ]
+ },
+ {
+  "q": "PPI infusion for upper GI bleed",
+  "kw": "upper-gi|ppi",
+  "d": "gastrointestinal",
+  "id": 102,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "PPI Therapy [In: Upper GI Bleed]",
+   "Upper GI Bleed Pathway [In: GI Bleed Hub]",
+   "Post-Endoscopy Management [In: Upper GI Bleed]"
+  ]
+ },
+ {
+  "q": "lower GI bleed workup",
+  "kw": "lower-gi",
+  "d": "gastrointestinal",
+  "id": 103,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Lower GI Bleed — Initial Assessment [In: Lower GI Bleed]",
+   "Hemodynamically Unstable LGIB [In: Lower GI Bleed]",
+   "Oakland Score Result [In: Lower GI Bleed]"
+  ]
+ },
+ {
+  "q": "massive transfusion for GI bleed",
+  "kw": "transfusion|gi bleed",
+  "d": "gastrointestinal",
+  "id": 104,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Massive Transfusion Protocol [DIC Blood Product Thresholds]",
+   "GI Bleed Hub — Steps Summary [Sick check → source pattern → initial bundle → imaging/source control → dispo]",
+   "GI Bleed — Resuscitate + Treat [In: Abdominal Pain Hub]"
+  ]
+ },
+ {
+  "q": "volvulus sigmoid treatment",
+  "kw": "",
+  "d": "gastrointestinal",
+  "id": 105,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Malrotation with Midgut Volvulus [In: THE MISFITS - Sick Neonate]",
+   "Red Flags Present? [In: Constipation, Impaction, Ileus & Ogilvie]",
+   "Complicated Diverticulitis / Colonic Emergency — Treat [In: Abdominal Pain Hub]"
+  ]
+ },
+ {
+  "q": "mesenteric ischemia diagnosis",
+  "kw": "mesenteric",
+  "d": "gastrointestinal",
+  "id": 106,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Acute Mesenteric Ischemia [In: Mesenteric Ischemia]",
+   "CTA Result [In: Mesenteric Ischemia]",
+   "Laboratory Studies [In: Mesenteric Ischemia]"
+  ]
+ },
+ {
+  "q": "ischemic colitis presentation",
+  "kw": "mesenteric|colitis",
+  "d": "gastrointestinal",
+  "id": 107,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Infectious / Ischemic Colitis — Pattern Gate [In: Rectal Bleeding Hub]",
+   "Colitis — Unlikely [In: Rectal Bleeding Hub]",
+   "Colitis — Work Up + Treat [In: Rectal Bleeding Hub]"
+  ]
+ },
+ {
+  "q": "inflammatory bowel disease flare treatment",
+  "kw": "ibd",
+  "d": "gastrointestinal",
+  "id": 108,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Severe Crohn's Flare — Admit [In: IBD Flare]",
+   "Small Bowel Obstruction [In: IBD Flare]",
+   "Indomethacin [Nonsteroidal anti-inflammatory drug (NSAID, non-selective COX inhibitor) · Acute gout flare]"
+  ]
+ },
+ {
+  "q": "toxic megacolon management",
+  "kw": "ibd|megacolon",
+  "d": "gastrointestinal",
+  "id": 109,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Toxic Megacolon — Emergency [In: IBD Flare]",
+   "ED Workup [In: IBD Flare]",
+   "Mild IBD Flare — Treatment [In: IBD Flare]"
+  ]
+ },
+ {
+  "q": "esophageal food bolus impaction glucagon",
+  "kw": "esophageal|food bolus",
+  "d": "gastrointestinal",
+  "id": 110,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Esophageal Food Bolus [Secretion Triage → Perforation Stop → Timing → Glucagon Bridge → Endoscopy → EoE Biopsy]",
+   "Glucagon + Fizzy Drink + Water to Flush an Esophageal Food Bolus [Trick — General & Diagnostics]",
+   "Esophageal Food Bolus [In: GI Foreign Body]"
+  ]
+ },
+ {
+  "q": "swallowed foreign body coin esophagus",
+  "kw": "foreign body|gi-foreign",
+  "d": "gastrointestinal",
+  "id": 111,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Esophageal Coin [In: Foreign Body (Airway + Esophageal)]",
+   "Magnet(s) — Single vs Multiple [In: Foreign Body (Airway + Esophageal)]",
+   "Blunt Object [In: GI Foreign Body]"
+  ]
+ },
+ {
+  "q": "caustic ingestion management",
+  "kw": "caustic",
+  "d": "gastrointestinal",
+  "id": 112,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Grade 2a - Observation [In: Caustic Ingestion]",
+   "Supportive Care Measures [In: Caustic Ingestion]",
+   "Grade 0-1 - Supportive Care [In: Caustic Ingestion]"
+  ]
+ },
+ {
+  "q": "acute hepatitis workup",
+  "kw": "hepatitis",
+  "d": "gastrointestinal",
+  "id": 113,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Viral Hepatitis Serology Interpreter [Hep B & C panels → acute / chronic / immune / cleared]",
+   "Interpreting Viral Serology [In: Hepatitis / Elevated Liver Enzymes]",
+   "Acute Liver Failure Screen [In: Hepatitis / Elevated Liver Enzymes]"
+  ]
+ },
+ {
+  "q": "acetaminophen overdose N-acetylcysteine",
+  "kw": "acetaminophen",
+  "d": "gastrointestinal",
+  "id": 114,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "N-Acetylcysteine (NAC, Mucomyst) [Antidote / Glutathione precursor · Massive acetaminophen overdose (high-dose NAC)]",
+   "Established Hepatic Failure — Management [In: Acetaminophen Overdose]",
+   "High-Dose NAC — Hendrickson Protocol [In: Acetaminophen Overdose]"
+  ]
+ },
+ {
+  "q": "Rumack-Matthew nomogram",
+  "kw": "acetaminophen",
+  "d": "gastrointestinal",
+  "id": 115,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Rumack-Matthew Nomogram [Acetaminophen Toxicity Risk Stratification]",
+   "Rumack-Matthew Nomogram [Prerequisites, interpretation, and confounders]",
+   "🛑 Do NOT apply the Rumack-Matthew nomogram to chronic ingestions [Acetaminophen Overdose — Do NOT]"
+  ]
+ },
+ {
+  "q": "hepatic encephalopathy lactulose",
+  "kw": "hepatic|encephalopathy|paracentesis",
+  "d": "gastrointestinal",
+  "id": 116,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hepatic Encephalopathy — Caution [In: Alcohol Withdrawal]",
+   "🛑 Do NOT give phenobarbital to a patient with hepatic encephalopathy [Alcohol Withdrawal — Do NOT]",
+   "Medical Cause [In: Catatonia]"
+  ]
+ },
+ {
+  "q": "spontaneous bacterial peritonitis diagnosis paracentesis",
+  "kw": "paracentesis|sbp",
+  "d": "gastrointestinal",
+  "id": 117,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Albumin [Plasma protein / volume expander · Large-volume paracentesis]",
+   "SBP Treatment Pathway [In: Diagnostic & Therapeutic Paracentesis]",
+   "Atypical Fluid / Secondary Cause [In: Diagnostic & Therapeutic Paracentesis]"
+  ]
+ },
+ {
+  "q": "acute jaundice approach",
+  "kw": "jaundice",
+  "d": "gastrointestinal",
+  "id": 118,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Acute Jaundice Hub [Sick Check → Time-Critical Exclusions → Initial Bundle → Imaging → Dispo]",
+   "Acute Jaundice Hub — Steps Summary [Sick check → time-critical exclusions → initial bundle → imaging → dispo]",
+   "Acute Jaundice Hub — Sick Check First [In: Acute Jaundice Hub]"
+  ]
+ },
+ {
+  "q": "abdominal pain approach by location",
+  "kw": "abdominal-pain|abdominal pain",
+  "d": "gastrointestinal",
+  "id": 119,
+  "n": 6,
+  "rank": 4,
+  "top": [
+   "Discharge — Pregnancy of Unknown Location [In: First Trimester Emergencies]",
+   "Pacemaker Emergencies: Overview [In: Pacemaker & ICD Emergencies]",
+   "Discharge Checklist [In: Pelvic Pain, Female Hub]"
+  ]
+ },
+ {
+  "q": "epigastric pain dyspepsia workup",
+  "kw": "dyspepsia|epigastric",
+  "d": "gastrointestinal",
+  "id": 120,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Epigastric Pain / Dyspepsia — Sick Check First [In: Epigastric Pain / Dyspepsia Hub]",
+   "Mesenteric Ischemia — Pretest Probability Gate [In: Epigastric Pain / Dyspepsia Hub]",
+   "Observe — Partial Response or Pending Workup [In: Epigastric Pain / Dyspepsia Hub]"
+  ]
+ },
+ {
+  "q": "hyperemesis gravidarum treatment",
+  "kw": "hyperemesis",
+  "d": "gastrointestinal",
+  "id": 121,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "HG Treatment Ladder [In: Recurrent & Cyclical Vomiting]",
+   "Step 4 — Admit (Hyperemesis Gravidarum) [NVP Stepwise Treatment Pathway]",
+   "Hyperemesis Gravidarum — Admit [In: First Trimester Emergencies]"
+  ]
+ },
+ {
+  "q": "diarrhea workup and when to culture",
+  "kw": "diarrhea",
+  "d": "gastrointestinal",
+  "id": 122,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Acute Traveler's Diarrhea [In: Traveler Infections]",
+   "Resuscitation [In: Acute Diarrhea]",
+   "Red Flag Evaluation [Acute Diarrhea Steps Summary]"
+  ]
+ },
+ {
+  "q": "Clostridioides difficile treatment",
+  "kw": "diarrhea|difficile",
+  "d": "gastrointestinal",
+  "id": 123,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Fidaxomicin (Dificid) [Macrocyclic antibiotic (narrow-spectrum, minimally absorbed) · C. difficile — initial episode, adult (non-severe or severe)]",
+   "Healthcare-Associated [Diarrhea Etiology Guide]",
+   "C. difficile Treatment [In: Acute Diarrhea]"
+  ]
+ },
+ {
+  "q": "rectal prolapse reduction",
+  "kw": "rectal-prolapse|rectal prolapse",
+  "d": "gastrointestinal",
+  "id": 124,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Rectal Prolapse Reduction [Recognition → Viability Gate → Sugar Technique → Manual Reduction → Pediatric → Disposition]",
+   "Rectal Prolapse Reduction: Bedside Review [In: Rectal Prolapse Reduction]",
+   "Pediatric Rectal Prolapse [In: Rectal Prolapse Reduction]"
+  ]
+ },
+ {
+  "q": "anorectal bleeding hemorrhoids",
+  "kw": "anorectal",
+  "d": "gastrointestinal",
+  "id": 125,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Benign Anorectal — Conservative Management [In: Rectal Bleeding Hub]",
+   "Benign Anorectal — Exam Gate [In: Rectal Bleeding Hub]",
+   "Anorectal Bleeding — Do NOT [Critical pitfalls to avoid]"
+  ]
+ },
+ {
+  "q": "perianal abscess drainage",
+  "kw": "",
+  "d": "gastrointestinal",
+  "id": 126,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Perianal / Perineal Infections [In: Skin and Soft Tissue Infections]",
+   "Differential Diagnosis [In: Hidradenitis Suppurativa]",
+   "Fournier Gangrene [NSTI Classification by Microbiology]"
+  ]
+ },
+ {
+  "q": "H. pylori eradication regimen",
+  "kw": "h-pylori|pylori",
+  "d": "gastrointestinal",
+  "id": 127,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "H. pylori — Regimens [Current adult eradication options]",
+   "Initial Eradication Regimen [In: H. pylori]",
+   "H. pylori — Steps [Testing, eradication, and test-of-cure]"
+  ]
+ },
+ {
+  "q": "diverticulitis outpatient treatment",
+  "kw": "",
+  "d": "gastrointestinal",
+  "id": 128,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Uncomplicated Diverticulitis — Outpatient [In: Abdominal Pain Hub]",
+   "Diverticulitis / Colonic — LLQ Gate [In: Abdominal Pain Hub]",
+   "Complicated Diverticulitis / Colonic Emergency — Treat [In: Abdominal Pain Hub]"
+  ]
+ },
+ {
+  "q": "incarcerated hernia reduction",
+  "kw": "",
+  "d": "gastrointestinal",
+  "id": 129,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Incarcerated Hernia — Reduce / Surgery [In: Painless Scrotal Swelling Hub]",
+   "Incarcerated Hernia — Excluded [In: Painless Scrotal Swelling Hub]",
+   "Incarcerated Inguinoscrotal Hernia — Reducibility Gate [In: Painless Scrotal Swelling Hub]"
+  ]
+ },
+ {
+  "q": "gastroparesis ED management",
+  "kw": "",
+  "d": "gastrointestinal",
+  "id": 130,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Gastroparesis — ED Flare & Management [In: Recurrent & Cyclical Vomiting]",
+   "Gastroparesis Prokinetics [Prokinetic options and limits (ACG 2022)]",
+   "Gastroparesis — Recognition [In: Recurrent & Cyclical Vomiting]"
+  ]
+ },
+ {
+  "q": "cyclic vomiting cannabinoid hyperemesis",
+  "kw": "chs|cannabinoid",
+  "d": "gastrointestinal",
+  "id": 131,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Cannabinoid Hyperemesis Syndrome [In: Recurrent & Cyclical Vomiting]",
+   "Cannabinoid Hyperemesis Syndrome [In: Cannabinoid Hyperemesis Syndrome]",
+   "Recurrent & Cyclical Vomiting [In: Recurrent & Cyclical Vomiting]"
+  ]
+ },
+ {
+  "q": "ondansetron QT concerns",
+  "kw": "ondansetron",
+  "d": "gastrointestinal",
+  "id": 132,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ondansetron (Zofran) [5-HT3 receptor antagonist / Antiemetic]",
+   "Initial Bundle — Undifferentiated Abdominal Pain [In: Abdominal Pain Hub]",
+   "Initial Bundle — Undifferentiated Dyspepsia [In: Epigastric Pain / Dyspepsia Hub]"
+  ]
+ },
+ {
+  "q": "abdominal compartment syndrome",
+  "kw": "",
+  "d": "gastrointestinal",
+  "id": 133,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Paracanthal “One-Snip” Decompression for Orbital Compartment Syndrome [Trick — Ophthalmology]",
+   "Compartment Syndrome — Emergent Fasciotomy [In: Unilateral Leg Swelling Hub]",
+   "Compartment Syndrome — Pressure Gate [In: Unilateral Leg Swelling Hub]"
+  ]
+ },
+ {
+  "q": "appendicitis in pregnancy",
+  "kw": "appendicitis|pregnan",
+  "d": "gastrointestinal",
+  "id": 134,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Appendicitis in Pregnancy [In: First Trimester Emergencies]",
+   "Order Card: Appendicitis in Pregnancy [In: MRI for Dummies]",
+   "Appendicitis Imaging Algorithm [Imaging Safety in Pregnancy]"
+  ]
+ },
+ {
+  "q": "pediatric appendicitis scoring",
+  "kw": "peds-appendicitis|appendicitis",
+  "d": "gastrointestinal",
+  "id": 135,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pediatric Appendicitis Score (PAS) [In: Pediatric Appendicitis (PAS Pathway)]",
+   "Pediatric Appendicitis Score (PAS) [Samuel 2002 — 10-point pediatric appendicitis risk]",
+   "Pediatric Appendicitis Overview [In: Pediatric Appendicitis (PAS Pathway)]"
+  ]
+ },
+ {
+  "q": "acute ischemic stroke tPA window",
+  "kw": "stroke|thrombolytic",
+  "d": "neuro",
+  "id": 136,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Thrombolysis Contraindication Checklist [IV thrombolysis screen — acute ischemic stroke]",
+   "Administer Thrombolysis [In: Acute Ischemic Stroke]",
+   "Post-Thrombolysis Management [In: Acute Ischemic Stroke]"
+  ]
+ },
+ {
+  "q": "contraindications to alteplase",
+  "kw": "thrombolytic|stroke|contra",
+  "d": "neuro",
+  "id": 137,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "🛑 Do NOT give tPA with BP ≥185/110 [Stroke — Do NOT]",
+   "🛑 Do NOT neglect post-tPA monitoring [Stroke — Do NOT]",
+   "🛑 Do NOT give tPA beyond the 4.5-hour window [CRAO — Do NOT]"
+  ]
+ },
+ {
+  "q": "tenecteplase dose for stroke",
+  "kw": "tenecteplase|stroke",
+  "d": "neuro",
+  "id": 138,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Tenecteplase (TNKase) [Thrombolytic (tissue plasminogen activator) · Acute ischemic stroke]",
+   "Common regimens [Stroke Lytics]",
+   "Acute Ischemic Stroke [In: Thrombolytic Protocols]"
+  ]
+ },
+ {
+  "q": "blood pressure target before thrombolysis stroke",
+  "kw": "stroke|thrombolytic",
+  "d": "neuro",
+  "id": 139,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Clevidipine (Cleviprex) [Ultra-short-acting dihydropyridine CCB · ICH blood pressure control (target SBP 130–150)]",
+   "Labetalol [Combined alpha-1 and beta-adrenergic blocker · ICH blood pressure control (target SBP 130–150)]",
+   "Nicardipine (Cardene) [Dihydropyridine calcium channel blocker · ICH blood pressure control (target SBP 130–150)]"
+  ]
+ },
+ {
+  "q": "NIHSS score",
+  "kw": "nihss|stroke",
+  "d": "neuro",
+  "id": 140,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "NIHSS [NIH Stroke Scale]",
+   "4. Minor Stroke (NIHSS 0–5) [Ischemic Stroke Steps Summary]",
+   "RULE IN \\u2014 Image First, Open the Deep-Dive [In: Headache Hub]"
+  ]
+ },
+ {
+  "q": "large vessel occlusion thrombectomy criteria",
+  "kw": "stroke|lvo",
+  "d": "neuro",
+  "id": 141,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Large Vessel Occlusion? [In: Acute Ischemic Stroke]",
+   "🛑 Do NOT withhold large vessel occlusion workup [Stroke — Do NOT]",
+   "What Are the Benefits? [Stroke IV Thrombolysis Consent]"
+  ]
+ },
+ {
+  "q": "reversal of warfarin in intracranial hemorrhage",
+  "kw": "anticoag|ich",
+  "d": "neuro",
+  "id": 142,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Warfarin Reversal [In: Intracerebral Hemorrhage]",
+   "Warfarin Reversal Algorithm [Vitamin K Pathway]",
+   "Warfarin Reversal [In: Massive Hemoptysis]"
+  ]
+ },
+ {
+  "q": "subarachnoid hemorrhage CT sensitivity and LP",
+  "kw": "sah",
+  "d": "neuro",
+  "id": 143,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "CT Result [In: Subarachnoid Hemorrhage]",
+   "CT Negative Within 6 Hours [In: Subarachnoid Hemorrhage]",
+   "LP Interpretation [In: Subarachnoid Hemorrhage]"
+  ]
+ },
+ {
+  "q": "Ottawa SAH rule",
+  "kw": "sah|ottawa",
+  "d": "neuro",
+  "id": 144,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ottawa SAH Rule [Ottawa Subarachnoid Hemorrhage Rule]",
+   "Ottawa SAH Rule [In: Subarachnoid Hemorrhage]",
+   "Ottawa Rule Negative — Low Risk [In: Subarachnoid Hemorrhage]"
+  ]
+ },
+ {
+  "q": "nimodipine dose SAH",
+  "kw": "sah|nimodipine",
+  "d": "neuro",
+  "id": 145,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Nimodipine (Nymalize) [Dihydropyridine calcium channel blocker · SAH vasospasm prevention]",
+   "Vasospasm Prevention — Nimodipine [In: Subarachnoid Hemorrhage]",
+   "🛑 Do NOT start nimodipine before confirming no hemorrhagic contraindication [SAH — Do NOT]"
+  ]
+ },
+ {
+  "q": "status epilepticus benzodiazepine dosing",
+  "kw": "status-epilepticus|status epilepticus",
+  "d": "neuro",
+  "id": 146,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "RSE — Continuous Infusion Selection [In: Status Epilepticus]",
+   "Diazepam (Valium) [Benzodiazepine (long-acting) · Status Epilepticus — IV]",
+   "Lorazepam (Ativan) [Benzodiazepine (intermediate-acting) · Status Epilepticus — IV (first-line)]"
+  ]
+ },
+ {
+  "q": "second line agent for status epilepticus levetiracetam",
+  "kw": "status|levetiracetam",
+  "d": "neuro",
+  "id": 147,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Second-Line ASM Selection [In: Status Epilepticus]",
+   "Levetiracetam (Keppra) [In: Status Epilepticus]",
+   "Disposition & Ongoing Management [In: Status Epilepticus]"
+  ]
+ },
+ {
+  "q": "refractory status epilepticus ketamine",
+  "kw": "status|ketamine",
+  "d": "neuro",
+  "id": 148,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "RSE — Continuous Infusion Selection [In: Status Epilepticus]",
+   "Midazolam (Versed) [Benzodiazepine (short-acting) · Status Epilepticus — IM (no IV access)]",
+   "Thiopental [Barbiturate anesthetic · Refractory SE — continuous infusion]"
+  ]
+ },
+ {
+  "q": "febrile seizure management",
+  "kw": "febrile-seizure|febrile seizure",
+  "d": "neuro",
+  "id": 149,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Active Seizure on Arrival? [In: Febrile Seizure]",
+   "Disposition — Complex Febrile Seizure [In: Febrile Seizure]",
+   "Disposition — Simple Febrile Seizure [In: Febrile Seizure]"
+  ]
+ },
+ {
+  "q": "eclampsia magnesium regimen",
+  "kw": "eclampsia|magnesium",
+  "d": "neuro",
+  "id": 150,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Magnesium Maintenance [In: Eclampsia]",
+   "Magnesium Toxicity [In: Eclampsia]",
+   "Magnesium Loading Dose [In: Eclampsia]"
+  ]
+ },
+ {
+  "q": "psychogenic nonepileptic seizures features",
+  "kw": "pnes",
+  "d": "neuro",
+  "id": 151,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Functional Seizures (PNES) [In: Functional Seizures (PNES)]",
+   "Communicating the Diagnosis [In: Functional Seizures (PNES)]",
+   "Not SE — Differential Diagnosis [In: Status Epilepticus]"
+  ]
+ },
+ {
+  "q": "meningitis empiric antibiotics and dexamethasone",
+  "kw": "meningitis",
+  "d": "neuro",
+  "id": 152,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Empiric: Immunocompetent <50y [In: Meningitis/Encephalitis]",
+   "Empiric: Listeria Coverage [In: Meningitis/Encephalitis]",
+   "Ceftriaxone [Third-generation cephalosporin · Pediatric Meningitis (empiric first ED dose)]"
+  ]
+ },
+ {
+  "q": "when to do CT before lumbar puncture",
+  "kw": "lumbar-puncture|lumbar puncture|meningitis",
+  "d": "neuro",
+  "id": 153,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Lumbar Puncture — Indications [In: Lumbar Puncture]",
+   "SAH Workup — CT-Negative [In: Lumbar Puncture]",
+   "LP Indication [In: Lumbar Puncture]"
+  ]
+ },
+ {
+  "q": "lumbar puncture technique",
+  "kw": "lumbar-puncture|lumbar puncture",
+  "d": "neuro",
+  "id": 154,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Coagulation Assessment [In: Lumbar Puncture]",
+   "Coagulation Status [In: Lumbar Puncture]",
+   "Consent & Preparation [In: Lumbar Puncture]"
+  ]
+ },
+ {
+  "q": "migraine abortive treatment in the ED",
+  "kw": "migraine",
+  "d": "neuro",
+  "id": 155,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Migraine Treatment Algorithm [ED Abortive Therapy Protocol]",
+   "Sumatriptan (Imitrex) [Serotonin (5-HT 1B/1D) receptor agonist (triptan) · Cyclic vomiting syndrome (CVS) — abortive]",
+   "CVS — Rome IV Criteria [In: Recurrent & Cyclical Vomiting]"
+  ]
+ },
+ {
+  "q": "cluster headache high flow oxygen",
+  "kw": "cluster",
+  "d": "neuro",
+  "id": 156,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Cluster Headache [Recognition → Red Flags → O₂/Triptan → Bridge → Verapamil + ECG → Refractory → Dispo]",
+   "Acute Rx — First-Line: 100% O₂ [In: Cluster Headache]",
+   "Cluster / TAC Pattern [In: Facial Pain-Unilateral]"
+  ]
+ },
+ {
+  "q": "headache red flags SNNOOP10",
+  "kw": "headache",
+  "d": "neuro",
+  "id": 157,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Any Red Flag Present? [In: Cluster Headache]",
+   "Red Flag Positive — Pursue Secondary Workup [In: Cluster Headache]",
+   "SNOOP10 Red Flags [Secondary Headache Screen (AHS 2019 update)]"
+  ]
+ },
+ {
+  "q": "trigeminal neuralgia carbamazepine",
+  "kw": "trigeminal",
+  "d": "neuro",
+  "id": 158,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "BEFORE Starting Carbamazepine — HLA-B*1502 Screen [In: Trigeminal Neuralgia]",
+   "Carbamazepine — First-Line Dosing [In: Trigeminal Neuralgia]",
+   "Carbamazepine (Tegretol) [Sodium-channel blocker / anticonvulsant · Trigeminal Neuralgia — first-line (1L)]"
+  ]
+ },
+ {
+  "q": "occipital nerve block technique",
+  "kw": "occipital",
+  "d": "neuro",
+  "id": 159,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Greater Occipital Nerve Block — ED Procedure [In: Greater Occipital Nerve Block]",
+   "Anatomy — GON, LON, Occipital Artery [In: Greater Occipital Nerve Block]",
+   "Complications + Recognition [In: Greater Occipital Nerve Block]"
+  ]
+ },
+ {
+  "q": "cerebral venous sinus thrombosis treatment",
+  "kw": "cvst",
+  "d": "neuro",
+  "id": 160,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Assess for Escalation [In: Cerebral Venous Sinus Thrombosis]",
+   "Decompressive Craniectomy [In: Cerebral Venous Sinus Thrombosis]",
+   "Duration of Anticoagulation [In: Cerebral Venous Sinus Thrombosis]"
+  ]
+ },
+ {
+  "q": "TIA ABCD2 score and disposition",
+  "kw": "tia",
+  "d": "neuro",
+  "id": 161,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "ABCD2 Score [In: TIA Workup]",
+   "ABCD2 Score [TIA Risk Stratification]",
+   "🛑 Do NOT use ABCD2 score alone to discharge TIA patients [TIA Workup — Do NOT]"
+  ]
+ },
+ {
+  "q": "Guillain-Barre syndrome FVC monitoring",
+  "kw": "guillain",
+  "d": "neuro",
+  "id": 162,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Disposition [In: Guillain-Barré Syndrome]",
+   "Respiratory Status Assessment [In: Guillain-Barré Syndrome]",
+   "Respiratory Monitoring - The 20/30/40 Rule [In: Guillain-Barré Syndrome]"
+  ]
+ },
+ {
+  "q": "myasthenic crisis management",
+  "kw": "myasthenia",
+  "d": "neuro",
+  "id": 163,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "Myasthenic Crisis — Airway + Immunotherapy [In: Proximal Weakness Hub]",
+   "Myasthenic Crisis [Crisis Differentiator]",
+   "Myasthenic Crisis [In: Myasthenia Gravis]"
+  ]
+ },
+ {
+  "q": "botulism antitoxin",
+  "kw": "botulism",
+  "d": "neuro",
+  "id": 164,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Antitoxin Administration [In: Botulism]",
+   "Antitoxin Treatment - Time Critical [In: Botulism]",
+   "Botulism [Recognition → Types → DDx → Antitoxin → Supportive Care → Public Health]"
+  ]
+ },
+ {
+  "q": "tick paralysis removal",
+  "kw": "tick-paralysis|tick paralysis",
+  "d": "neuro",
+  "id": 165,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Tick Paralysis [Recognition → Find the Tick → Removal → Monitor → Geography → Differential → Disposition]",
+   "Remove the Tick — Definitive Treatment [In: Tick Paralysis]",
+   "Disposition [In: Tick Paralysis]"
+  ]
+ },
+ {
+  "q": "transverse myelitis workup",
+  "kw": "transverse",
+  "d": "neuro",
+  "id": 166,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Transverse Myelitis Consortium Criteria (2002) [In: Acute Transverse Myelitis]",
+   "Acute Transverse Myelitis [In: Acute Transverse Myelitis]",
+   "Inflammatory Workup (after compression excluded) [In: Acute Transverse Myelitis]"
+  ]
+ },
+ {
+  "q": "spinal cord compression oncology steroids",
+  "kw": "oncological|cord compression",
+  "d": "neuro",
+  "id": 167,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Spinal Cord Compression [In: Urinary Sphincter Emergencies]",
+   "Fracture / Malignancy / Metastatic Cord Compression [In: Back Pain Hub]",
+   "Admission — Emergent Pathology [In: Low Back Pain Decision Support]"
+  ]
+ },
+ {
+  "q": "multiple sclerosis relapse steroids",
+  "kw": "multiple-sclerosis|multiple sclerosis",
+  "d": "neuro",
+  "id": 168,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "High-Dose Steroid Protocol [In: Multiple Sclerosis]",
+   "Response to Steroids [In: Multiple Sclerosis]",
+   "Steroid Precautions & Side Effects [In: Multiple Sclerosis]"
+  ]
+ },
+ {
+  "q": "Parkinson disease missed medication in ED",
+  "kw": "parkinson",
+  "d": "neuro",
+  "id": 169,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Parkinson Disease in the ED [In: Parkinson Disease ED Management]",
+   "Off-State or Hyperpyrexic Crisis? [In: Parkinson Disease ED Management]",
+   "Restarting Levodopa After NPO / Withdrawal [In: Parkinson Disease ED Management]"
+  ]
+ },
+ {
+  "q": "vertigo HINTS exam",
+  "kw": "vertigo|dizziness",
+  "d": "neuro",
+  "id": 170,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "HINTS Exam — Patient Appropriate? [In: Vertigo]",
+   "HINTS Exam Technique [Head Impulse, Nystagmus, Test of Skew — and how to get it right]",
+   "5. HINTS Pathway (AVS) [Vertigo Steps Summary]"
+  ]
+ },
+ {
+  "q": "Dix-Hallpike and Epley maneuver",
+  "kw": "vertigo|dizziness",
+  "d": "neuro",
+  "id": 171,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "Epley Maneuver — Treatment [Dix-Hallpike & Epley Technique]",
+   "Dix-Hallpike & Epley Technique [Step-by-step positioning for posterior canal BPPV]",
+   "Posterior Canal BPPV — Epley Maneuver [In: Vertigo]"
+  ]
+ },
+ {
+  "q": "posterior circulation stroke missed presentation",
+  "kw": "stroke|vertigo",
+  "d": "neuro",
+  "id": 172,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Posterior Circulation Stroke — Evidence Summary [DWI sensitivity data, HINTS vs MRI, and the missed-stroke problem]",
+   "Binocular = Posterior Circulation [In: Amaurosis Fugax (TMVL)]",
+   "Missed posterior stroke epidemiology [Posterior Circulation Stroke — Evidence Summary]"
+  ]
+ },
+ {
+  "q": "altered mental status approach",
+  "kw": "altered-mental|altered mental",
+  "d": "neuro",
+  "id": 173,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Altered Mental Status Hub [Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo]",
+   "Altered Mental Status Hub - Steps Summary [Airway, glucose, tox, neuro, infection, seizure, metabolic, disposition]",
+   "Altered Mental Status Hub - Sick Check First [In: Altered Mental Status Hub]"
+  ]
+ },
+ {
+  "q": "delirium assessment CAM-ICU",
+  "kw": "delirium",
+  "d": "neuro",
+  "id": 174,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "CAM-ICU [Confusion Assessment Method for the ICU — delirium screen]",
+   "Delirium Screening & Subtype Assessment [In: Delirium]",
+   "Initial Assessment [Delirium Steps Summary]"
+  ]
+ },
+ {
+  "q": "dementia agitation treatment",
+  "kw": "dementia",
+  "d": "neuro",
+  "id": 175,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Dementia & Agitation [In: Dementia & Agitation]",
+   "Open Dementia Agitation Consult [In: Dementia]",
+   "Rescue Medication Route [In: Dementia & Agitation]"
+  ]
+ },
+ {
+  "q": "VP shunt malfunction evaluation",
+  "kw": "vp-shunt|shunt",
+  "d": "neuro",
+  "id": 176,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "VP Shunt Malfunction Risk [Clinical Likelihood Assessment]",
+   "Shunt Infection Evaluation [In: VP Shunt Complications]",
+   "Laboratory Workup for Infection [In: VP Shunt Complications]"
+  ]
+ },
+ {
+  "q": "brain herniation hypertonic saline mannitol",
+  "kw": "herniation|hypertonic",
+  "d": "neuro",
+  "id": 177,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hypertonic Saline 3% Administration [In: Brain Herniation Syndromes]",
+   "Hypertonic Saline Protocol [Herniation -> Hyponatremia -> Sodium Limits -> Access -> Disposition]",
+   "🚨 EMERGENCY — Treat Herniation NOW [In: Brain Herniation Syndromes]"
+  ]
+ },
+ {
+  "q": "neurogenic shock versus spinal shock",
+  "kw": "neurogenic",
+  "d": "neuro",
+  "id": 178,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Neurogenic Shock & Spinal Shock [Recognition → Rule Out Hemorrhage → Vasopressors → Bradycardia → MAP Goals → Spinal Shock]",
+   "Neurogenic Shock vs Spinal Shock [In: Neurogenic Shock & Spinal Shock]",
+   "Neurogenic Shock Pathophysiology [In: Neurogenic Shock & Spinal Shock]"
+  ]
+ },
+ {
+  "q": "Lambert-Eaton syndrome",
+  "kw": "lambert",
+  "d": "neuro",
+  "id": 179,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Lambert-Eaton Myasthenic Syndrome (LEMS) [Recognition → Triad → vs MG → Diagnosis → Cancer Search → Drugs to Avoid → Respiratory → Treatment → Disposition]",
+   "Lambert-Eaton Myasthenic Syndrome (LEMS) [In: Lambert-Eaton Myasthenic Syndrome (LEMS)]",
+   "Diagnosis [In: Lambert-Eaton Myasthenic Syndrome (LEMS)]"
+  ]
+ },
+ {
+  "q": "peripheral neuropathy workup",
+  "kw": "peripheral-neuropathy|neuropathy",
+  "d": "neuro",
+  "id": 180,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Peripheral Neuropathy — ED Evaluation [In: Peripheral Neuropathy]",
+   "Emergent Workup — Acute Neuropathy [In: Peripheral Neuropathy]",
+   "GBS Mimic Workup [In: Peripheral Neuropathy]"
+  ]
+ },
+ {
+  "q": "Bell palsy treatment steroids",
+  "kw": "",
+  "d": "neuro",
+  "id": 181,
+  "n": 3,
+  "rank": 0,
+  "top": [
+   "Sugar Test for Bell’s Palsy (CN VII Taste) [Trick — Neurology]",
+   "Ramsay Hunt — Vesicles + Facial-Nerve Gate [In: Otalgia Hub]",
+   "🛑 Do NOT wait for vesicles before treating Ramsay Hunt [Otalgia — Do NOT]"
+  ]
+ },
+ {
+  "q": "normal pressure hydrocephalus",
+  "kw": "",
+  "d": "neuro",
+  "id": 182,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Normal Pressure Hydrocephalus Pattern [In: Dementia]",
+   "Opening Pressure — Interpretation [In: Lumbar Puncture]",
+   "2. Put the differential before the label [Dementia Steps]"
+  ]
+ },
+ {
+  "q": "Wernicke encephalopathy thiamine",
+  "kw": "alcohol|wernicke|thiamine",
+  "d": "neuro",
+  "id": 183,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Thiamine (Vitamin B1) [Vitamin · Wernicke encephalopathy]",
+   "T — Temperature / Trauma / Thiamine [AEIOU-TIPS Mnemonic]",
+   "Thiamine (Vitamin B1) [Supportive Care]"
+  ]
+ },
+ {
+  "q": "neuroleptic malignant syndrome dantrolene",
+  "kw": "nms",
+  "d": "neuro",
+  "id": 184,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Neuroleptic Malignant Syndrome [Recognition → Levenson Criteria → Dantrolene → Bromocriptine → NMS vs SS → ICU]",
+   "Dantrolene [In: Neuroleptic Malignant Syndrome]",
+   "Neuroleptic Malignant Syndrome [In: Hyperthermia Hub]"
+  ]
+ },
+ {
+  "q": "serotonin syndrome Hunter criteria",
+  "kw": "serotonin",
+  "d": "neuro",
+  "id": 185,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hunter Criteria Result [In: Serotonin Syndrome]",
+   "Hunter Serotonin Toxicity Criteria [In: Serotonin Syndrome]",
+   "Hunter Criteria [Hunter Serotonin Toxicity Criteria]"
+  ]
+ },
+ {
+  "q": "epidural hematoma lucid interval",
+  "kw": "",
+  "d": "neuro",
+  "id": 186,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Indications for Emergency Burr Hole [In: Emergency Burr Hole]",
+   "Epidural Hematoma Drainage [In: Emergency Burr Hole]",
+   "Step 4: Evacuate Hematoma [In: Emergency Burr Hole]"
+  ]
+ },
+ {
+  "q": "burr hole for epidural hematoma",
+  "kw": "burr-hole|burr hole",
+  "d": "neuro",
+  "id": 187,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Epidural Hematoma Drainage [In: Emergency Burr Hole]",
+   "Emergency Burr Hole — Indications [In: Emergency Burr Hole]",
+   "Indications for Emergency Burr Hole [In: Emergency Burr Hole]"
+  ]
+ },
+ {
+  "q": "generalized weakness approach",
+  "kw": "generalized-weakness|weakness",
+  "d": "neuro",
+  "id": 188,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Weakness Hub [Sick Check → Time-Critical Exclusions → Rescue/Reassess → Imaging → Dispo]",
+   "Class II — Mild Generalized [MGFA Classification]",
+   "Class III — Moderate Generalized [MGFA Classification]"
+  ]
+ },
+ {
+  "q": "proximal muscle weakness causes",
+  "kw": "proximal-weakness|proximal",
+  "d": "neuro",
+  "id": 189,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Myopathic / Systemic Mimic — Muscle + Systemic Gate [In: Proximal Weakness Hub]",
+   "Acute Proximal Weakness — Sick Check First [In: Proximal Weakness Hub]",
+   "Botulism — Descending Paralysis Gate [In: Proximal Weakness Hub]"
+  ]
+ },
+ {
+  "q": "Todd paralysis versus stroke",
+  "kw": "seizure|stroke",
+  "d": "neuro",
+  "id": 190,
+  "n": 4,
+  "rank": 1,
+  "top": [
+   "When to Consider CT First [Febrile Seizure Imaging Decision]",
+   "Simple vs Complex [In: Febrile Seizure]",
+   "Red Flags Demanding Workup [In: Febrile Seizure]"
+  ]
+ },
+ {
+  "q": "DKA fluid and insulin protocol",
+  "kw": "dka",
+  "d": "endocrine_renal_metabolic",
+  "id": 191,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pump Suspended — IV Insulin Protocol [In: Diabetic Ketoacidosis]",
+   "Subcutaneous Insulin for Mild DKA [2024 Consensus Protocol]",
+   "Insulin Infusion Protocol [In: Diabetic Ketoacidosis]"
+  ]
+ },
+ {
+  "q": "potassium replacement in DKA",
+  "kw": "dka|potassium",
+  "d": "endocrine_renal_metabolic",
+  "id": 192,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "DKA / HHS Potassium Rules [In: Potassium Infusion Protocol]",
+   "Potassium Infusion Steps [High-alert IV replacement]",
+   "Escalation to IV Insulin [Subcutaneous Insulin for Mild DKA]"
+  ]
+ },
+ {
+  "q": "hyperosmolar hyperglycemic state treatment",
+  "kw": "dka|diabetes|hhs",
+  "d": "endocrine_renal_metabolic",
+  "id": 193,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Insulin Regular (Short-Acting) [Short-acting human insulin · HHS (Hyperosmolar Hyperglycemic State)]",
+   "HHS Management [In: Diabetes Management]",
+   "DKA Excluded — Alternative Diagnosis [In: Diabetic Ketoacidosis]"
+  ]
+ },
+ {
+  "q": "hypoglycemia treatment dextrose and glucagon",
+  "kw": "hypoglycemia",
+  "d": "endocrine_renal_metabolic",
+  "id": 194,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Severe Hypoglycemia Treatment [In: Hypoglycemia]",
+   "Recheck and Durability [In: Hypoglycemia]",
+   "Oral Treatment Route [In: Hypoglycemia]"
+  ]
+ },
+ {
+  "q": "sulfonylurea induced hypoglycemia octreotide",
+  "kw": "hypoglycemia|octreotide",
+  "d": "endocrine_renal_metabolic",
+  "id": 195,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Sulfonylurea-Induced Hypoglycemia [In: Diabetes Management]",
+   "Octreotide (Sandostatin) [Somatostatin analog · Sulfonylurea-induced hypoglycemia]",
+   "Hypoglycemia [Stabilize -> Differential -> Treatment -> Rebound Risk -> Critical Sample -> Disposition]"
+  ]
+ },
+ {
+  "q": "adrenal crisis hydrocortisone dose",
+  "kw": "adrenal",
+  "d": "endocrine_renal_metabolic",
+  "id": 196,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hydrocortisone (Solu-Cortef) [Corticosteroid (glucocorticoid + mineralocorticoid) · Adrenal crisis (adult)]",
+   "Crisis Prevention & Patient Education [In: Adrenal Insufficiency]",
+   "Medication-Related Crisis [In: Adrenal Insufficiency]"
+  ]
+ },
+ {
+  "q": "thyroid storm treatment",
+  "kw": "thyroid",
+  "d": "endocrine_renal_metabolic",
+  "id": 197,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Thyroid Storm — 8-Step Protocol [Thyroid Disorders Steps Summary]",
+   "Step 2 — Steroids [In: Thyroid Disorders]",
+   "Step 6 — Hyperthermia Management [In: Thyroid Disorders]"
+  ]
+ },
+ {
+  "q": "hyperkalemia treatment calcium insulin",
+  "kw": "potassium|hyperk",
+  "d": "endocrine_renal_metabolic",
+  "id": 198,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "IV Calcium \\u2014 Membrane Stabilization [In: Potassium Disorders]",
+   "Hyperkalemia Treatment Stack [In: Refractory VF/VT]",
+   "Pre-Intubation Hyperkalemia Treatment [In: HOP Killers]"
+  ]
+ },
+ {
+  "q": "calcium gluconate dose for hyperkalemia",
+  "kw": "potassium|calcium",
+  "d": "endocrine_renal_metabolic",
+  "id": 199,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Calcium Gluconate [Electrolyte / membrane stabilizer · Hyperkalemia (peripheral access)]",
+   "Calcium Gluconate 2.5% Gel [Electrolyte / antidote (topical)]",
+   "Calcium Gluconate Gel in a Glove for a Hydrofluoric Acid Hand Burn [Trick — Toxicology]"
+  ]
+ },
+ {
+  "q": "hypokalemia replacement rate",
+  "kw": "potassium",
+  "d": "endocrine_renal_metabolic",
+  "id": 200,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Hypokalemia Replacement [In: Electrolyte Emergencies (Peds)]",
+   "Severe / Symptomatic Hypokalemia [In: Potassium Infusion Protocol]",
+   "Potassium Replacement [In: High Dose Insulin Protocol]"
+  ]
+ },
+ {
+  "q": "hyponatremia correction rate osmotic demyelination",
+  "kw": "sodium|hyponatr",
+  "d": "endocrine_renal_metabolic",
+  "id": 201,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Correction Rate Limits [In: Sodium Disorders]",
+   "ODS Risk Factors [Osmotic Demyelination Syndrome]",
+   "What is ODS? [ODS Risk Factors]"
+  ]
+ },
+ {
+  "q": "hypertonic saline 3% bolus for symptomatic hyponatremia",
+  "kw": "sodium|hypertonic",
+  "d": "endocrine_renal_metabolic",
+  "id": 202,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hypertonic Saline [Hypertonic crystalloid · Severe symptomatic hyponatremia]",
+   "Hypertonic Saline 3% Administration [In: Brain Herniation Syndromes]",
+   "Severe Symptomatic Hyponatremia [In: Hypertonic Saline Protocol]"
+  ]
+ },
+ {
+  "q": "hypernatremia free water deficit",
+  "kw": "sodium|hypernatr",
+  "d": "endocrine_renal_metabolic",
+  "id": 203,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Free Water Deficit [Hypernatremia Correction]",
+   "Free Water Deficit & Replacement [In: Sodium Disorders]",
+   "5. Hypernatremia [Sodium Disorders Steps Summary]"
+  ]
+ },
+ {
+  "q": "hypocalcemia treatment",
+  "kw": "calcium",
+  "d": "endocrine_renal_metabolic",
+  "id": 204,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hypocalcemia Severity [In: Calcium Disorders]",
+   "Hypocalcemia Workup [In: Calcium Disorders]",
+   "Severe Hypocalcemia [In: Calcium Disorders]"
+  ]
+ },
+ {
+  "q": "hypomagnesemia replacement",
+  "kw": "magnesium",
+  "d": "endocrine_renal_metabolic",
+  "id": 205,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hypomagnesemia Severity [In: Magnesium Disorders]",
+   "Severe Hypomagnesemia [In: Magnesium Disorders]",
+   "Stable Hypomagnesemia [In: Magnesium Disorders]"
+  ]
+ },
+ {
+  "q": "hypophosphatemia replacement",
+  "kw": "phosphorus",
+  "d": "endocrine_renal_metabolic",
+  "id": 206,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Hypophosphatemia Severity [In: Phosphorous Disorders]",
+   "Stable Hypophosphatemia [In: Phosphorous Disorders]",
+   "Electrolyte Derangements [In: Eating Disorders Emergency]"
+  ]
+ },
+ {
+  "q": "anion gap metabolic acidosis mnemonic",
+  "kw": "acid-base|acid base",
+  "d": "endocrine_renal_metabolic",
+  "id": 207,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "High Anion Gap Metabolic Acidosis [In: Acid-Base Disturbances]",
+   "Anion Gap Metabolic Acidosis (MUDPILES) [Acid-Base Differential Diagnosis]",
+   "Non-Anion Gap (Hyperchloremic) Metabolic Acidosis [Acid-Base Differential Diagnosis]"
+  ]
+ },
+ {
+  "q": "Winter formula",
+  "kw": "acid-base|winter",
+  "d": "endocrine_renal_metabolic",
+  "id": 208,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Rule 5: Winter's Formula [Expected pCO2 for Metabolic Acidosis]",
+   "Winter's Formula [Respiratory Compensation for Metabolic Acidosis]",
+   "Winter's Formula — Respiratory Compensation [In: Acid-Base Disturbances]"
+  ]
+ },
+ {
+  "q": "sodium bicarbonate indications in acidosis",
+  "kw": "bicarbonate|acid-base",
+  "d": "endocrine_renal_metabolic",
+  "id": 209,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Sodium Bicarbonate Drip Protocol [In: Sodium Bicarbonate Drip Protocol]",
+   "Not Routine Bicarbonate Drip [In: Sodium Bicarbonate Drip Protocol]",
+   "Indication [In: Sodium Bicarbonate Drip Protocol]"
+  ]
+ },
+ {
+  "q": "rhabdomyolysis fluids and CK threshold",
+  "kw": "rhabdo",
+  "d": "endocrine_renal_metabolic",
+  "id": 210,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Rhabdomyolysis - Recognition [In: Rhabdomyolysis]",
+   "Severity Stratification by CK Level [In: Rhabdomyolysis]",
+   "Rhabdomyolysis Assessment [In: Heat Stroke]"
+  ]
+ },
+ {
+  "q": "dialysis patient missed session hyperkalemia",
+  "kw": "hd-emergencies|dialysis",
+  "d": "endocrine_renal_metabolic",
+  "id": 211,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Three Mimics of Drug-Induced Sodium Channel Blockade [In: Wide Complex Tachycardia]",
+   "Mild Hyperkalemia [In: Hemodialysis Emergencies]",
+   "Electrolyte Emergency Disposition [In: Hemodialysis Emergencies]"
+  ]
+ },
+ {
+  "q": "bleeding from AV fistula",
+  "kw": "av-fistula|fistula",
+  "d": "endocrine_renal_metabolic",
+  "id": 212,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Bleeding AV Fistula / Graft [Pressure → Tourniquet Criteria → Drugs/Reversal → Vascular Control → Disposition]",
+   "Bleeding AV Fistula / Graft [In: Bleeding AV Fistula / Graft]",
+   "Bleeding AV Fistula Steps [Dialysis access hemorrhage control]"
+  ]
+ },
+ {
+  "q": "peritoneal dialysis peritonitis",
+  "kw": "peritoneal",
+  "d": "endocrine_renal_metabolic",
+  "id": 213,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Peritoneal Dialysis Complications [Drain Procedure → Peritonitis → Catheter → Mechanical → Metabolic → Severe/Late → Disposition]",
+   "2. Peritonitis [Peritoneal Dialysis Steps Summary]",
+   "Diagnose PD-Associated Peritonitis [In: Peritoneal Dialysis Complications]"
+  ]
+ },
+ {
+  "q": "indications for emergent dialysis AEIOU",
+  "kw": "hd-emergencies|dialysis|toxic",
+  "d": "endocrine_renal_metabolic",
+  "id": 214,
+  "n": 3,
+  "rank": 1,
+  "top": [
+   "Hemodialysis Emergencies [In: Hemodialysis Emergencies]",
+   "U — Uremia [AEIOU-TIPS Mnemonic]",
+   "Primary Complaint Category [In: Hemodialysis Emergencies]"
+  ]
+ },
+ {
+  "q": "acute kidney injury evaluation",
+  "kw": "",
+  "d": "endocrine_renal_metabolic",
+  "id": 215,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "High Volume Retention [In: Acute Urinary Retention]",
+   "Furosemide [Loop diuretic]",
+   "Monitoring & Workup [Hyperactive Delirium With Hyperthermia]"
+  ]
+ },
+ {
+  "q": "urinary retention catheter placement",
+  "kw": "urinary-retention|urinary retention",
+  "d": "endocrine_renal_metabolic",
+  "id": 216,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Catheterization Technique [In: Urinary Sphincter Emergencies]",
+   "Acute Urinary Retention [Assessment → Catheterization → Failed Cath → POD → Medications & Dispo]",
+   "Acute Urinary Retention — Decompress + Find the Cause [In: Dysuria Hub]"
+  ]
+ },
+ {
+  "q": "kidney stone renal colic analgesia",
+  "kw": "",
+  "d": "endocrine_renal_metabolic",
+  "id": 217,
+  "n": 5,
+  "rank": 0,
+  "top": [
+   "Renal Colic — Imaging Guidance [In: CT Scan Decision Support]",
+   "Urinary / Renal Lane [In: Pelvic Pain, Female Hub]",
+   "ACEP CT-Specific Recommendations [Choosing Wisely — CT Recommendations]"
+  ]
+ },
+ {
+  "q": "obstructing stone with infection",
+  "kw": "",
+  "d": "endocrine_renal_metabolic",
+  "id": 218,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Urinary / Renal Lane [In: Pelvic Pain, Female Hub]",
+   "Cholestatic Pruritus — Obstruction + Infection Gate [In: Generalized Pruritus Hub]",
+   "Cholestasis — Image the Biliary Tree + Treat Infection [In: Generalized Pruritus Hub]"
+  ]
+ },
+ {
+  "q": "adult UTI antibiotic choice",
+  "kw": "adult-uti|uti",
+  "d": "endocrine_renal_metabolic",
+  "id": 219,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "UTI Classification [Uncomplicated vs Complicated]",
+   "Dental Extraction Medication Guide [Analgesia, antibiotics, anticoagulants, and dry socket medication choices]",
+   "Antibiotics [Dental Extraction Medication Guide]"
+  ]
+ },
+ {
+  "q": "pyelonephritis outpatient vs admit",
+  "kw": "adult-uti|uti",
+  "d": "endocrine_renal_metabolic",
+  "id": 220,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Disposition - Pyelonephritis [In: UTI-Adult]",
+   "Pyelonephritis Disposition [In: UTI-Adult]",
+   "Pyelonephritis in Pregnancy — Admit [In: First Trimester Emergencies]"
+  ]
+ },
+ {
+  "q": "testicular torsion detorsion",
+  "kw": "testicular",
+  "d": "endocrine_renal_metabolic",
+  "id": 221,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Testicular Torsion [Suspicion → TWIST → Imaging → Manual Detorsion → Pediatric → Atypical]",
+   "Intermittent torsion-detorsion [In: Testicular Torsion]",
+   "Acute scrotal pain — could this be testicular torsion? [In: Testicular Torsion]"
+  ]
+ },
+ {
+  "q": "painless scrotal swelling",
+  "kw": "scrotal",
+  "d": "endocrine_renal_metabolic",
+  "id": 222,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Painless Scrotal Swelling Hub [Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo]",
+   "Painless Scrotal Swelling — Sick Check First [In: Painless Scrotal Swelling Hub]",
+   "Painless Scrotal Swelling — Do NOT [Critical pitfalls to avoid]"
+  ]
+ },
+ {
+  "q": "epididymitis treatment",
+  "kw": "sti|epididymitis",
+  "d": "endocrine_renal_metabolic",
+  "id": 223,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Epididymitis - Enteric Organisms [In: STI Comprehensive]",
+   "Epididymitis - STI Etiology [In: STI Comprehensive]",
+   "Epididymitis - Age/Risk Based [In: STI Comprehensive]"
+  ]
+ },
+ {
+  "q": "Fournier gangrene",
+  "kw": "necrotizing",
+  "d": "endocrine_renal_metabolic",
+  "id": 224,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Fournier Gangrene [NSTI Classification by Microbiology]",
+   "Fournier Gangrene — Perineal NSTI [In: Necrotizing Fasciitis (NSTI)]",
+   "Fournier Gangrene — Resuscitate + Emergent Debridement [In: Painless Scrotal Swelling Hub]"
+  ]
+ },
+ {
+  "q": "paraphimosis reduction",
+  "kw": "",
+  "d": "endocrine_renal_metabolic",
+  "id": 225,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Osmotic “Sugar” Reduction of Paraphimosis [Trick — Urology]",
+   "Constriction / Zipper / Paraphimosis — Relieve Now [In: Painless Scrotal Swelling Hub]",
+   "Hyaluronidase Injection to Melt Paraphimosis Edema [Trick — Urology]"
+  ]
+ },
+ {
+  "q": "diabetes management insulin regimens inpatient",
+  "kw": "diabetes",
+  "d": "endocrine_renal_metabolic",
+  "id": 226,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Inpatient Insulin Regimen Selection [In: Diabetes Management]",
+   "IV Insulin Drip Protocol [In: Diabetes Management]",
+   "NPO Diabetic Patient Management [In: Diabetes Management]"
+  ]
+ },
+ {
+  "q": "hyperglycemia without DKA discharge",
+  "kw": "diabetes|dka",
+  "d": "endocrine_renal_metabolic",
+  "id": 227,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Euglycemic DKA Management [In: Diabetic Ketoacidosis]",
+   "Recurrent DKA (Prior Episode) [In: Diabetic Ketoacidosis]",
+   "Intubation in DKA — Avoid if Possible [In: Diabetic Ketoacidosis]"
+  ]
+ },
+ {
+  "q": "euglycemic DKA SGLT2 inhibitor",
+  "kw": "dka",
+  "d": "endocrine_renal_metabolic",
+  "id": 228,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Euglycemic DKA Management [In: Diabetic Ketoacidosis]",
+   "Insulin Regular (Short-Acting) [Short-acting human insulin · Euglycemic DKA (SGLT2 inhibitor)]",
+   "Empagliflozin (Jardiance) [SGLT2 Inhibitor]"
+  ]
+ },
+ {
+  "q": "pheochromocytoma crisis",
+  "kw": "",
+  "d": "endocrine_renal_metabolic",
+  "id": 229,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Differential Diagnosis [Precipitants & Differential Diagnosis]",
+   "Phentolamine [Nonselective alpha-adrenergic antagonist · Pheochromocytoma hypertensive episode]",
+   "Betahistine (Serc) [Histamine analog (H1 agonist / H3 antagonist)]"
+  ]
+ },
+ {
+  "q": "hypothermia rewarming",
+  "kw": "hypothermia",
+  "d": "endocrine_renal_metabolic",
+  "id": 230,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Accidental Hypothermia [Recognition → Resuscitation → Rewarming → ECMO → Disposition]",
+   "ECMO Rewarming [In: Accidental Hypothermia]",
+   "Invasive Rewarming (No ECMO) [In: Accidental Hypothermia]"
+  ]
+ },
+ {
+  "q": "heat stroke cooling",
+  "kw": "heat-stroke|heat stroke",
+  "d": "endocrine_renal_metabolic",
+  "id": 231,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Heat Stroke [Recognition → Rapid Cooling → Resuscitation → Complications → Disposition]",
+   "Cooling Endpoint & Overshoot Prevention [In: Heat Stroke]",
+   "Cooling Method Selection [In: Heat Stroke]"
+  ]
+ },
+ {
+  "q": "hyperthermia differential malignant hyperthermia",
+  "kw": "hyperthermia",
+  "d": "endocrine_renal_metabolic",
+  "id": 232,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Differential Diagnosis [In: Neuroleptic Malignant Syndrome]",
+   "Neuroleptic Malignant Syndrome [In: Hyperthermia Hub]",
+   "Differential Diagnosis [Precipitants & Differential Diagnosis]"
+  ]
+ },
+ {
+  "q": "altitude sickness HAPE acetazolamide dexamethasone",
+  "kw": "altitude",
+  "d": "endocrine_renal_metabolic",
+  "id": 233,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Admit Floor — Observation [In: Altitude Sickness]",
+   "HACE — Monitoring & Prognosis [In: Altitude Sickness]",
+   "Altitude Sickness [Lake Louise Score → AMS → HACE → HAPE → Treatment → Descent/Disposition]"
+  ]
+ },
+ {
+  "q": "sepsis bundle antibiotics within one hour",
+  "kw": "sepsis",
+  "d": "id_heme_immune",
+  "id": 234,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Empiric Antibiotic Selection [In: Sepsis Management]",
+   "Resuscitation Bundle (First 1-3 Hours) [Sepsis Steps Summary]",
+   "Septic Shock — Hour-1 Bundle [In: Undifferentiated Hypotension]"
+  ]
+ },
+ {
+  "q": "qSOFA and SIRS criteria",
+  "kw": "sepsis",
+  "d": "id_heme_immune",
+  "id": 235,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Parenchymal - Rule In (Pneumonia / ARDS) [In: Cyanosis / Hypoxaemia Hub]",
+   "Occult Sepsis — Source & Physiology Gate [In: Generally Unwell Elderly Hub]",
+   "qSOFA Score [Quick Sequential Organ Failure Assessment]"
+  ]
+ },
+ {
+  "q": "empiric antibiotics for septic shock",
+  "kw": "sepsis",
+  "d": "id_heme_immune",
+  "id": 236,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Empiric Antibiotic Selection [By Suspected Source — Sepsis & Septic Shock]",
+   "Empiric Antibiotics for Septic Arthritis [In: Arthritis]",
+   "Empiric Antibiotic Selection [In: Sepsis Management]"
+  ]
+ },
+ {
+  "q": "necrotizing fasciitis LRINEC",
+  "kw": "necrotizing",
+  "d": "id_heme_immune",
+  "id": 237,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Necrotizing Fasciitis Steps Summary [Quick Reference — Recognition → Surgery → Antibiotics → Monitoring]",
+   "LRINEC Score [Laboratory Risk Indicator for Necrotizing Fasciitis]",
+   "LRINEC Score — Adjunct Only [In: Necrotizing Fasciitis (NSTI)]"
+  ]
+ },
+ {
+  "q": "cellulitis versus abscess treatment MRSA",
+  "kw": "peds-ssti|ssti|abscess",
+  "d": "id_heme_immune",
+  "id": 238,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Orbital Cellulitis (Compressive Mimicker) [In: Optic Neuropathy Hub]",
+   "TMP-SMX (Bactrim) [Sulfonamide antibiotic combination · MRSA SSTI / cellulitis (purulent)]",
+   "Abscess Culture Result [In: Culture Positive Results in ED]"
+  ]
+ },
+ {
+  "q": "toxic shock syndrome",
+  "kw": "",
+  "d": "id_heme_immune",
+  "id": 239,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Severe Acidosis, Exhaustion, or Shock [In: State of Extreme Agitation with Aggression]",
+   "Irukandji Syndrome — Management [In: Marine Envenomation]",
+   "Complication Screen [State of Extreme Agitation with Aggression]"
+  ]
+ },
+ {
+  "q": "septic arthritis arthrocentesis findings",
+  "kw": "septic-arthritis|septic arthritis|arthrocentesis",
+  "d": "id_heme_immune",
+  "id": 240,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Septic Arthritis [In: Septic Arthritis]",
+   "Serial Arthrocentesis Protocol [In: Septic Arthritis]",
+   "Septic Arthritis vs Osteomyelitis [In: Osteomyelitis]"
+  ]
+ },
+ {
+  "q": "monoarthritis approach",
+  "kw": "monoarthritis",
+  "d": "id_heme_immune",
+  "id": 241,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Arthrocentesis & Imaging Decision [In: Acute Monoarthritis Hub]",
+   "Crystal Arthropathy — Confirm, Never Assume [In: Acute Monoarthritis Hub]",
+   "Arthritis Differential Summary [In: Approach to Arthritis]"
+  ]
+ },
+ {
+  "q": "osteomyelitis diagnosis ESR CRP",
+  "kw": "osteomyelitis",
+  "d": "id_heme_immune",
+  "id": 242,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Septic Arthritis vs Osteomyelitis [In: Osteomyelitis]",
+   "High ESR/CRP Workup [In: Fever of Unknown Origin]",
+   "Laboratory Workup [In: Osteomyelitis]"
+  ]
+ },
+ {
+  "q": "diabetic foot infection antibiotics",
+  "kw": "diabetic-foot|diabetic foot",
+  "d": "id_heme_immune",
+  "id": 243,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Diabetic Foot Infections [IDSA/IWGDF 2023 → Severity → Osteomyelitis → Antibiotics → Surgical Indications → Disposition]",
+   "Diabetic Foot Wounds: Key Pearls [In: Diabetic Foot Infections]",
+   "Antibiotic Summary by IDSA Grade [In: Diabetic Foot Infections]"
+  ]
+ },
+ {
+  "q": "malaria treatment severe artesunate",
+  "kw": "malaria",
+  "d": "id_heme_immune",
+  "id": 244,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Severe Malaria — IV Artesunate [In: Malaria]",
+   "IV Artesunate [Antimalarial — Artemisinin derivative · Severe malaria (adults and children ≥20 kg)]",
+   "IV Artesunate Dosing [Severe Malaria Treatment]"
+  ]
+ },
+ {
+  "q": "returning traveler fever workup",
+  "kw": "traveler",
+  "d": "id_heme_immune",
+  "id": 245,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "🛑 Do NOT delay malaria testing in any febrile returning traveler [Traveler Infections — Do NOT]",
+   "Typhoid Fever — Recognition [In: Typhoid Fever]",
+   "Malaria — Initial Assessment [In: Malaria]"
+  ]
+ },
+ {
+  "q": "typhoid fever treatment",
+  "kw": "typhoid",
+  "d": "id_heme_immune",
+  "id": 246,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Complicated/Severe Typhoid Treatment [In: Typhoid Fever]",
+   "XDR Typhoid Treatment — Azithromycin [In: Typhoid Fever]",
+   "MDR Typhoid Treatment — Ceftriaxone or Azithromycin [In: Typhoid Fever]"
+  ]
+ },
+ {
+  "q": "tetanus prophylaxis wound management",
+  "kw": "tetanus",
+  "d": "id_heme_immune",
+  "id": 247,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "TIG — Therapeutic Dosing [In: Tetanus]",
+   "Active Tetanus — Treatment Overview [In: Tetanus]",
+   "Bite Wounds — Tetanus Consideration [In: Tetanus]"
+  ]
+ },
+ {
+  "q": "tetanus immune globulin dosing",
+  "kw": "tetanus",
+  "d": "id_heme_immune",
+  "id": 248,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Tetanus Immune Globulin (TIG) [Human hyperimmune globulin (passive immunization)]",
+   "Rabies Immune Globulin (HRIG) [Passive immunization (hyperimmune globulin)]",
+   "Rh(D) Immune Globulin (RhoGAM) [Immune globulin]"
+  ]
+ },
+ {
+  "q": "HIV post-exposure prophylaxis regimen",
+  "kw": "pep|hiv",
+  "d": "id_heme_immune",
+  "id": 249,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Patient HIV Status [In: Post Exposure Prophylaxis]",
+   "Source HIV Status [In: Post Exposure Prophylaxis]",
+   "Post Exposure Prophylaxis [Exposure → HIV Assessment → Initiation → Follow-Up]"
+  ]
+ },
+ {
+  "q": "new HIV diagnosis ED management",
+  "kw": "hiv",
+  "d": "id_heme_immune",
+  "id": 250,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "New HIV Diagnosis — ED Management [In: HIV ED Management]",
+   "HIV Testing & Screening Guide [Universal Screening, Technologies & Window Periods]",
+   "HIV in the Emergency Department [In: HIV ED Management]"
+  ]
+ },
+ {
+  "q": "opportunistic infection prophylaxis CD4 counts",
+  "kw": "hiv",
+  "d": "id_heme_immune",
+  "id": 251,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "GI Opportunistic Infections [In: HIV ED Management]",
+   "HIV-Associated FUO Disposition [In: Fever of Unknown Origin]",
+   "CNS Opportunistic Infections [In: HIV ED Management]"
+  ]
+ },
+ {
+  "q": "syphilis staging and treatment",
+  "kw": "syphilis",
+  "d": "id_heme_immune",
+  "id": 252,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Syphilis Staging [Serology Interpreter]",
+   "Syphilis Staging [In: STI Comprehensive]",
+   "Syphilis ED Evaluation [Staging → Testing → Interpretation → Treatment → Disposition]"
+  ]
+ },
+ {
+  "q": "neurosyphilis diagnosis",
+  "kw": "neurosyphilis",
+  "d": "id_heme_immune",
+  "id": 253,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Neurosyphilis Unlikely [In: Neurosyphilis Workup]",
+   "Confirmed Neurosyphilis — Treat [In: Neurosyphilis Workup]",
+   "Probable Neurosyphilis — Treat [In: Neurosyphilis Workup]"
+  ]
+ },
+ {
+  "q": "pelvic inflammatory disease outpatient regimen",
+  "kw": "pid",
+  "d": "id_heme_immune",
+  "id": 254,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Outpatient Follow-Up [In: Pelvic Inflammatory Disease]",
+   "Outpatient Treatment — CDC 2021 [In: Pelvic Inflammatory Disease]",
+   "Partner Treatment [In: Pelvic Inflammatory Disease]"
+  ]
+ },
+ {
+  "q": "measles exposure and isolation",
+  "kw": "measles",
+  "d": "id_heme_immune",
+  "id": 255,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Assess Presumptive Immunity [In: Measles]",
+   "Consider Alternative Diagnoses [In: Measles]",
+   "Measles - Clinical Recognition [In: Measles]"
+  ]
+ },
+ {
+  "q": "fever of unknown origin",
+  "kw": "fuo",
+  "d": "id_heme_immune",
+  "id": 256,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Fever of Unknown Origin [Definition → Travel Stratification → Initial Workup → Advanced Diagnostics → Etiologies]",
+   "Fever of Unknown Origin [In: Fever of Unknown Origin]",
+   "Drug Fever Evaluation [In: Fever of Unknown Origin]"
+  ]
+ },
+ {
+  "q": "blood culture contamination and stewardship",
+  "kw": "blood-culture|blood culture",
+  "d": "id_heme_immune",
+  "id": 257,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Blood Culture Stewardship [Indications → High-Yield → Low-Yield → Contamination → Interpretation]",
+   "Blood Culture Stewardship — Overview [In: Blood Culture Stewardship]",
+   "Proceed with Blood Cultures [In: Blood Culture Stewardship]"
+  ]
+ },
+ {
+  "q": "pharyngitis Centor criteria",
+  "kw": "pharyngitis|sore-throat|sore throat",
+  "d": "id_heme_immune",
+  "id": 258,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Centor / McIsaac Score [In: Adult Pharyngitis (Strep Throat)]",
+   "Centor/McIsaac Stratification [In: Adult Pharyngitis (Strep Throat)]",
+   "Centor / McIsaac Score [Adult pharyngitis — GAS likelihood and testing/treatment decision]"
+  ]
+ },
+ {
+  "q": "peritonsillar abscess drainage",
+  "kw": "pta|peritonsillar",
+  "d": "id_heme_immune",
+  "id": 259,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Peritonsillar Abscess Drainage [Diagnosis → POCUS → Needle Aspiration → I&D → Medications → Disposition]",
+   "Peritonsillar Abscess — Diagnosis [In: Peritonsillar Abscess Drainage]",
+   "Peritonsillar Cellulitis — No Drainage [In: Peritonsillar Abscess Drainage]"
+  ]
+ },
+ {
+  "q": "epiglottitis",
+  "kw": "deep-neck|epiglott",
+  "d": "id_heme_immune",
+  "id": 260,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Epiglottitis: High-Risk Airway [In: awake intubation]",
+   "Epiglottitis & Ludwig Angina [In: adult pharyngitis]",
+   "Epiglottitis / Supraglottitis — Airway Emergency [In: sore throat hub]"
+  ]
+ },
+ {
+  "q": "otitis media treatment",
+  "kw": "ear-infection|ear infection|otalgia",
+  "d": "id_heme_immune",
+  "id": 261,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "AOM — Antibiotic Treatment [In: Ear Infection]",
+   "Pain Management [In: Ear Infection]",
+   "Otitis Media vs Otitis Externa [Ear Infection Overview]"
+  ]
+ },
+ {
+  "q": "orbital cellulitis",
+  "kw": "orbital",
+  "d": "id_heme_immune",
+  "id": 262,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Orbital vs Preseptal Cellulitis [Recognition → Differentiation → Imaging → Treatment → Disposition]",
+   "Chandler II: Orbital Cellulitis [In: Orbital vs Preseptal Cellulitis]",
+   "Orbital Cellulitis Suspected [In: Orbital vs Preseptal Cellulitis]"
+  ]
+ },
+ {
+  "q": "sickle cell pain crisis dosing",
+  "kw": "sickle",
+  "d": "id_heme_immune",
+  "id": 263,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Sickle Cell Trait Complications [SCT is NOT SCD — but has specific risks]",
+   "Vaso-Occlusive Crisis (VOC) [In: Sickle Cell Disease]",
+   "Sickle Cell - Osteomyelitis Considerations [In: Osteomyelitis]"
+  ]
+ },
+ {
+  "q": "acute chest syndrome",
+  "kw": "sickle",
+  "d": "id_heme_immune",
+  "id": 264,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Acute Chest Syndrome [SCD Management Steps Summary]",
+   "Acute Chest Syndrome (ACS) [In: Sickle Cell Disease]",
+   "ACS Recognition & Management [Acute chest syndrome — up to 25% of SCD deaths]"
+  ]
+ },
+ {
+  "q": "hemophilia bleeding factor replacement",
+  "kw": "hemophilia",
+  "d": "id_heme_immune",
+  "id": 265,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "ICH — Standard Factor Replacement [In: Hemophilia & Von Willebrand Disease]",
+   "Major Trauma — Standard Factor Replacement [In: Hemophilia & Von Willebrand Disease]",
+   "FACTOR IX (Hemophilia B) — 1 U/kg = +1% [Emergent Bleeding — Rapid Dose Card]"
+  ]
+ },
+ {
+  "q": "DOAC reversal andexanet idarucizumab",
+  "kw": "anticoag|idarucizumab|andexanet",
+  "d": "id_heme_immune",
+  "id": 266,
+  "n": 6,
+  "rank": 6,
+  "top": [
+   "DOAC Reversal [In: Coagulation Cascade]",
+   "Dabigatran Reversal [In: Intracerebral Hemorrhage]",
+   "DOAC Reversal [In: Massive Hemoptysis]"
+  ]
+ },
+ {
+  "q": "heparin induced thrombocytopenia 4T score",
+  "kw": "thrombocytopenia|hit",
+  "d": "id_heme_immune",
+  "id": 267,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Heparin-Induced Thrombocytopenia [In: Thrombocytopenia]",
+   "HIT (Heparin-Induced Thrombocytopenia) [Platelet Disorder Quick-Jump]",
+   "Heparin-Induced Thrombocytopenia (HIT) [In: Coagulation Cascade]"
+  ]
+ },
+ {
+  "q": "TTP plasma exchange PLASMIC score",
+  "kw": "ttp",
+  "d": "id_heme_immune",
+  "id": 268,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "TPE Volume Calculator [Plasma Exchange Volume]",
+   "Thrombotic Thrombocytopenic Purpura (TTP) [Recognition → PLASMIC Score → ADAMTS13 → Plasma Exchange → Caplacizumab → Disposition]",
+   "Therapeutic Plasma Exchange (TPE) [TTP Treatment Summary]"
+  ]
+ },
+ {
+  "q": "immune thrombocytopenia platelet threshold",
+  "kw": "thrombocytopenia",
+  "d": "id_heme_immune",
+  "id": 269,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Bleeding Severity and Platelet Threshold [In: Thrombocytopenia]",
+   "Likely Immune Thrombocytopenia (ITP) [In: Thrombocytopenia]",
+   "Thrombocytopenia [Confirm → Bleeding → TTP / DIC / HIT → Mechanism → Transfusion → Disposition]"
+  ]
+ },
+ {
+  "q": "DIC diagnosis and treatment",
+  "kw": "dic",
+  "d": "id_heme_immune",
+  "id": 270,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Emergency Treatment [APL-DIC ATRA Emergency]",
+   "DIC — Recognition [In: Disseminated Intravascular Coagulation (DIC)]",
+   "DIC Mimics — Differential [In: Disseminated Intravascular Coagulation (DIC)]"
+  ]
+ },
+ {
+  "q": "massive transfusion protocol ratio",
+  "kw": "massive-transfusion|massive transfusion|transfusion",
+  "d": "id_heme_immune",
+  "id": 271,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Massive Transfusion Protocol [In: Massive Transfusion Protocol]",
+   "Massive Transfusion Protocol [Activation → 1:1:1 Products → ABO/Rh → TEG/ROTEM → Termination]",
+   "Blood Product Ratios — 1:1:1 [In: Massive Transfusion Protocol]"
+  ]
+ },
+ {
+  "q": "oncologic emergencies tumor lysis syndrome",
+  "kw": "oncological",
+  "d": "id_heme_immune",
+  "id": 272,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Tumor Lysis Syndrome — Cairo-Bishop Criteria [In: Oncological Emergencies]",
+   "Oncologic Emergency — Stabilize [In: Lymphadenopathy Hub]",
+   "TLS — Admit ICU or Telemetry [In: Oncological Emergencies]"
+  ]
+ },
+ {
+  "q": "febrile neutropenia management",
+  "kw": "oncological|neutropen",
+  "d": "id_heme_immune",
+  "id": 273,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Febrile Neutropenia — Definition [In: Oncological Emergencies]",
+   "Low-Risk FN — Possible Outpatient Therapy [In: Oncological Emergencies]",
+   "MASCC Risk Stratification [In: Oncological Emergencies]"
+  ]
+ },
+ {
+  "q": "superior vena cava syndrome",
+  "kw": "oncological",
+  "d": "id_heme_immune",
+  "id": 274,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "SVC Syndrome — Recognition [In: Oncological Emergencies]",
+   "Anterior Circulation: MCA / ICA [Stroke Syndromes]",
+   "Cannabinoid Hyperemesis Syndrome [In: Recurrent & Cyclical Vomiting]"
+  ]
+ },
+ {
+  "q": "angioedema ACE inhibitor treatment",
+  "kw": "angioedema",
+  "d": "id_heme_immune",
+  "id": 275,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "ACE-Inhibitor Angioedema [Differential Diagnosis]",
+   "If You Were Taking an ACE Inhibitor [Angioedema Discharge Instructions]",
+   "Berinert [C1-INH Concentrate (plasma-derived) · Hereditary angioedema (acute attack)]"
+  ]
+ },
+ {
+  "q": "hereditary angioedema icatibant",
+  "kw": "angioedema",
+  "d": "id_heme_immune",
+  "id": 276,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Icatibant (Firazyr) [Bradykinin B2 Receptor Antagonist · Hereditary angioedema (acute attack)]",
+   "Berinert [C1-INH Concentrate (plasma-derived) · Hereditary angioedema (acute attack)]",
+   "Angioedema — Airway First, Then Treat by Mechanism [In: Generalized Pruritus Hub]"
+  ]
+ },
+ {
+  "q": "Stevens-Johnson syndrome",
+  "kw": "sjs",
+  "d": "id_heme_immune",
+  "id": 277,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Stevens-Johnson Syndrome / TEN [Recognition → EM vs SJS/TEN → Culprit → SCORTEN → Supportive care → Disposition]",
+   "Stevens-Johnson Syndrome [What It Looks Like]",
+   "Bedside Findings [In: Stevens-Johnson Syndrome / TEN]"
+  ]
+ },
+ {
+  "q": "snake envenomation antivenom",
+  "kw": "snake|envenomation",
+  "d": "id_heme_immune",
+  "id": 278,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Snake Bite Envenomation [Pit Viper vs Coral → Grading → Antivenom → Special Populations → Disposition]",
+   "Sea Snake Antivenom [Equine-derived polyclonal antivenom · Severe sea snake envenomation]",
+   "Coral Snake Envenomation [In: Snake Bite Envenomation]"
+  ]
+ },
+ {
+  "q": "black widow spider bite",
+  "kw": "terrestrial|envenomation",
+  "d": "id_heme_immune",
+  "id": 279,
+  "n": 5,
+  "rank": 1,
+  "top": [
+   "Black Widow (Latrodectism) [In: Terrestrial Envenomations]",
+   "Which Spider? [In: Terrestrial Envenomations]",
+   "Identify the Organism [In: Terrestrial Envenomations]"
+  ]
+ },
+ {
+  "q": "mammalian bite antibiotic prophylaxis",
+  "kw": "mammalian-bite|mammalian bite",
+  "d": "id_heme_immune",
+  "id": 280,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Antibiotic Prophylaxis [In: Mammalian Bite Management]",
+   "Antibiotics — Prophylaxis vs Treatment [In: Mammalian Bite Management]",
+   "Mammalian Bite Management [Animal Type → Wound Care → Antibiotics → Rabies PEP → Tetanus → Disposition]"
+  ]
+ },
+ {
+  "q": "marine envenomation jellyfish",
+  "kw": "marine",
+  "d": "id_heme_immune",
+  "id": 281,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Marine Envenomation [Assessment → Jellyfish → Fish → Other Marine → Systemic → Disposition]",
+   "Box Jellyfish — Emergency Management [In: Marine Envenomation]",
+   "Minor Jellyfish Stings [In: Marine Envenomation]"
+  ]
+ },
+ {
+  "q": "tick-borne illness Lyme disease treatment",
+  "kw": "",
+  "d": "id_heme_immune",
+  "id": 282,
+  "n": 5,
+  "rank": 0,
+  "top": [
+   "Doxycycline [Tetracycline antibiotic · Early Lyme disease (adult)]",
+   "Lyme Arthritis [In: Acute Monoarthritis Hub]",
+   "Etiology Framework [In: Myocarditis]"
+  ]
+ },
+ {
+  "q": "Rocky Mountain spotted fever doxycycline",
+  "kw": "",
+  "d": "id_heme_immune",
+  "id": 283,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "🛑 Do NOT wait for rickettsial serology before treating [Traveler Infections — Do NOT]",
+   "Rash/Skin Findings Workup [In: Fever of Unknown Origin]",
+   "Doxycycline [Tetracycline antibiotic]"
+  ]
+ },
+ {
+  "q": "infant fever under 28 days workup",
+  "kw": "peds-fever|fever",
+  "d": "id_heme_immune",
+  "id": 284,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "22–28 Day Febrile Infant with Viral Syndrome [In: Fever < 6 Months]",
+   "22–28 Days: Pathway Screening [In: Fever < 6 Months]",
+   "The Sick Neonate (0-28 Days) [In: THE MISFITS - Sick Neonate]"
+  ]
+ },
+ {
+  "q": "brief resolved unexplained event",
+  "kw": "brue",
+  "d": "id_heme_immune",
+  "id": 285,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "BRUE (Brief Resolved Unexplained Event) [Recognition → Risk Stratification → Low-Risk → High-Risk → Etiology → Disposition]",
+   "Brief Resolved Unexplained Event (BRUE) [In: BRUE (Brief Resolved Unexplained Event)]",
+   "Not a BRUE — Explained Event [In: BRUE (Brief Resolved Unexplained Event)]"
+  ]
+ },
+ {
+  "q": "bacterial meningitis in neonates",
+  "kw": "peds-fever|meningitis",
+  "d": "id_heme_immune",
+  "id": 286,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Bacterial Meningitis \\u2014 Tailored Management [In: Meningitis/Encephalitis]",
+   "Febrile Neonate with Viral Syndrome [In: Fever < 6 Months]",
+   "Bacterial Meningitis Pattern [CSF Interpretation Guide]"
+  ]
+ },
+ {
+  "q": "hepatitis B exposure prophylaxis",
+  "kw": "hepatitis",
+  "d": "id_heme_immune",
+  "id": 287,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Initiate Hepatitis B Vaccine [In: Drug-Facilitated Sexual Assault]",
+   "Follow-Up & Disposition [In: Post Exposure Prophylaxis]",
+   "PEP Not Indicated [In: Post Exposure Prophylaxis]"
+  ]
+ },
+ {
+  "q": "COVID-19 antiviral treatment",
+  "kw": "",
+  "d": "id_heme_immune",
+  "id": 288,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Community-Acquired Pneumonia [In: Traveler Infections]",
+   "Ramsay Hunt — Antivirals + Steroids + Eye Care [In: Otalgia Hub]",
+   "Incubation Period Guide [Travel-Associated Diseases by Region]"
+  ]
+ },
+ {
+  "q": "influenza oseltamivir indications",
+  "kw": "",
+  "d": "id_heme_immune",
+  "id": 289,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Oseltamivir (Tamiflu) [Neuraminidase inhibitor (antiviral) · Influenza treatment (Adult)]",
+   "Influenza Pneumonia [In: Pneumonia]",
+   "Influenza-Associated Myositis [In: Viral Myositis (BACM)]"
+  ]
+ },
+ {
+  "q": "unknown ingestion approach",
+  "kw": "unknown-ingestion|unknown ingestion",
+  "d": "tox",
+  "id": 290,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Unknown Ingestion Hub [Sick Check → Toxidrome Match → Resus/Decon/Antidote → Imaging → Disposition]",
+   "Unknown Timing — Worst-Case Approach [In: Salicylate Toxicity]",
+   "Salicylate Toxicity [In: Unknown Ingestion Hub]"
+  ]
+ },
+ {
+  "q": "salicylate toxicity alkalinization hemodialysis",
+  "kw": "salicylate",
+  "d": "tox",
+  "id": 291,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Salicylate Toxicity [Recognition → Resuscitation → Decontamination → Alkalinization → Hemodialysis → Disposition]",
+   "Alkalinization Not Working [In: Salicylate Toxicity]",
+   "Early Nephrology Consult [In: Salicylate Toxicity]"
+  ]
+ },
+ {
+  "q": "tricyclic antidepressant overdose sodium bicarbonate",
+  "kw": "tca",
+  "d": "tox",
+  "id": 292,
+  "n": 4,
+  "rank": 4,
+  "top": [
+   "Tricyclic Antidepressants [Agents That Block Sodium Channels]",
+   "Before Procainamide — Sodium Channel Blockade Check [In: Wide Complex Tachycardia]",
+   "Sodium Channel Blockade — Diagnostic Criteria [In: Wide Complex Tachycardia]"
+  ]
+ },
+ {
+  "q": "lithium toxicity dialysis indications",
+  "kw": "lithium",
+  "d": "tox",
+  "id": 293,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Dialysis Modality + Rebound [In: Lithium Toxicity]",
+   "ICU / Dialysis-Capable Setting [In: Lithium Toxicity]",
+   "No Dialysis Trigger: Monitoring Plan [In: Lithium Toxicity]"
+  ]
+ },
+ {
+  "q": "toxic alcohol fomepizole",
+  "kw": "toxic-alcohols|fomepizole",
+  "d": "tox",
+  "id": 294,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Fomepizole — First-Line Antidote [In: Toxic Alcohols]",
+   "Fomepizole During Hemodialysis [In: Toxic Alcohols]",
+   "Fomepizole (Antizol) [Alcohol dehydrogenase inhibitor / Antidote · Toxic alcohol ingestion]"
+  ]
+ },
+ {
+  "q": "isoniazid overdose pyridoxine",
+  "kw": "isoniazid",
+  "d": "tox",
+  "id": 295,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "INH (Isoniazid) Toxicity [Seizures → Pyridoxine → GABA mechanism → Monitoring]",
+   "IV Pyridoxine: Initial Rescue Dose [In: INH (Isoniazid) Toxicity]",
+   "Refractory Seizures or No IV Pyridoxine [In: INH (Isoniazid) Toxicity]"
+  ]
+ },
+ {
+  "q": "iron overdose deferoxamine",
+  "kw": "iron",
+  "d": "tox",
+  "id": 296,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Iron Overdose [Recognition → Stages → Workup → Decontamination → Deferoxamine → Disposition]",
+   "Deferoxamine - Duration & Monitoring [In: Iron Overdose]",
+   "Deferoxamine Dosing [In: Iron Overdose]"
+  ]
+ },
+ {
+  "q": "cyanide poisoning hydroxocobalamin",
+  "kw": "",
+  "d": "tox",
+  "id": 297,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Hydroxocobalamin (Cyanokit) [Antidote (cyanide) · Cyanide poisoning — adult]",
+   "Cyanide Poisoning Treatment [In: Burns Management]",
+   "Cyanide Treatment [CO & Cyanide Toxicity]"
+  ]
+ },
+ {
+  "q": "organophosphate poisoning atropine pralidoxime",
+  "kw": "",
+  "d": "tox",
+  "id": 298,
+  "n": 3,
+  "rank": 0,
+  "top": [
+   "Pralidoxime (2-PAM, Protopam Chloride) [Antidote — cholinesterase reactivator (oxime) · Organophosphate poisoning — adult IV]",
+   "Cholinergic / Organophosphate [In: Unknown Ingestion Hub]",
+   "Cholinergic [Unknown Ingestion - Toxidromes at a Glance]"
+  ]
+ },
+ {
+  "q": "opioid overdose naloxone dosing",
+  "kw": "",
+  "d": "tox",
+  "id": 299,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Naloxone (Narcan) [Opioid antagonist · Opioid toxicity / overdose]",
+   "How to Use Naloxone (Narcan) [Opioid Withdrawal Discharge Instructions]",
+   "Naloxone Administration [In: Xylazine Toxicity (\"Tranq\")]"
+  ]
+ },
+ {
+  "q": "buprenorphine precipitated withdrawal treatment",
+  "kw": "opioid-withdrawal|opioid",
+  "d": "tox",
+  "id": 300,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Buprenorphine Initiation [In: Opioid Withdrawal]",
+   "Buprenorphine Microdosing [In: Opioid Withdrawal]",
+   "Standard Buprenorphine Induction [In: Opioid Withdrawal]"
+  ]
+ },
+ {
+  "q": "opioid withdrawal COWS",
+  "kw": "opioid-withdrawal|opioid",
+  "d": "tox",
+  "id": 301,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Opioid Withdrawal [Recognition → COWS → Agonist Therapy → Adjuncts → Precipitated WD → Disposition]",
+   "Mild Withdrawal (COWS 5–12) [In: Opioid Withdrawal]",
+   "COWS Score Result [In: Opioid Withdrawal]"
+  ]
+ },
+ {
+  "q": "methadone in the ED",
+  "kw": "methadone",
+  "d": "tox",
+  "id": 302,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "ED Methadone Management [Scenarios → Verification → 72-Hour Rule → QTc Monitoring → OTP Linkage]",
+   "ED Methadone Steps Summary [Quick Reference - Bridging, 72-Hour Rule, OTP Linkage]",
+   "ED Methadone Management [In: ED Methadone Management]"
+  ]
+ },
+ {
+  "q": "delirium tremens treatment",
+  "kw": "alcohol-withdrawal",
+  "d": "tox",
+  "id": 303,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Intoxication / Withdrawal Syndromes [In: Delirium]",
+   "Treatment Escalation [In: Delirium]",
+   "Treatment Response [In: Delirium]"
+  ]
+ },
+ {
+  "q": "kratom withdrawal",
+  "kw": "kratom",
+  "d": "tox",
+  "id": 304,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Kratom Withdrawal [Recognition → Assessment → Buprenorphine vs Non-Opioid → Complications → Disposition]",
+   "Kratom Withdrawal [In: Kratom Withdrawal]",
+   "No Active Withdrawal [In: Kratom Withdrawal]"
+  ]
+ },
+ {
+  "q": "xylazine wounds and withdrawal",
+  "kw": "xylazine",
+  "d": "tox",
+  "id": 305,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Xylazine Toxicity (\"Tranq\") [Recognition → Wound Assessment → Acute Management → Wound Care → Withdrawal → Disposition]",
+   "Xylazine Wound Antibiotic Guide [Stage × infection signs — including the \"no antibiotics\" answer]",
+   "Disposition Assessment [In: Xylazine Toxicity (\"Tranq\")]"
+  ]
+ },
+ {
+  "q": "ciguatera poisoning",
+  "kw": "ciguatera",
+  "d": "tox",
+  "id": 306,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ciguatera Fish Poisoning [Recognition → Severity → Treatment → Mannitol → Disposition → Chronic Care]",
+   "Severe Ciguatera Poisoning [In: Ciguatera Fish Poisoning]",
+   "Ciguatera Fish Poisoning [In: Ciguatera Fish Poisoning]"
+  ]
+ },
+ {
+  "q": "intralipid emulsion dosing",
+  "kw": "intralipid",
+  "d": "tox",
+  "id": 307,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Administration Details [In: Intralipid / Lipid Emulsion Therapy]",
+   "CPR Modifications for LAST [In: Intralipid / Lipid Emulsion Therapy]",
+   "ILE Dosing Protocol [In: Intralipid / Lipid Emulsion Therapy]"
+  ]
+ },
+ {
+  "q": "high dose insulin euglycemia therapy dosing",
+  "kw": "high-dose-insulin|high dose insulin",
+  "d": "tox",
+  "id": 308,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "High-Dose Insulin Euglycemia Therapy (HIET) [In: Beta Blocker Overdose]",
+   "4. High-Dose Insulin Euglycemia (HIET) [Beta-Blocker Overdose Steps Summary]",
+   "4. High-Dose Insulin Euglycemia (HIET) [CCB Overdose Steps Summary]"
+  ]
+ },
+ {
+  "q": "sympathomimetic toxidrome cocaine chest pain",
+  "kw": "",
+  "d": "tox",
+  "id": 309,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Sympathomimetic [Unknown Ingestion - Toxidromes at a Glance]",
+   "Toxidrome look-alikes worth a separate mention [Unknown Ingestion - Toxidromes at a Glance]",
+   "Other Toxidromes [In: Opioid Withdrawal]"
+  ]
+ },
+ {
+  "q": "anticholinergic toxidrome physostigmine",
+  "kw": "",
+  "d": "tox",
+  "id": 310,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Anticholinergic Toxidrome [In: Hyperthermia Hub]",
+   "Anticholinergic Toxidrome [In: Unknown Ingestion Hub]",
+   "Anticholinergic [Unknown Ingestion - Toxidromes at a Glance]"
+  ]
+ },
+ {
+  "q": "digoxin immune fab",
+  "kw": "digoxin",
+  "d": "tox",
+  "id": 311,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "DigiFab (Digoxin Immune Fab) [Antidote — digoxin-specific antibody fragments]",
+   "5. DigiFab (Digoxin Immune Fab) [Digoxin Toxicity Steps Summary]",
+   "DigiFab — Indications [In: Digoxin Toxicity]"
+  ]
+ },
+ {
+  "q": "beta blocker toxicity",
+  "kw": "beta-blocker",
+  "d": "tox",
+  "id": 312,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Beta Blocker Overdose [Recognition → Stabilization → HIET → Vasopressors → Lipid Emulsion → Rescue]",
+   "Beta-Blocker Overdose — Initial Assessment [In: Beta Blocker Overdose]",
+   "Beta-Blocker Toxicity [In: High Dose Insulin Protocol]"
+  ]
+ },
+ {
+  "q": "clonidine overdose",
+  "kw": "",
+  "d": "tox",
+  "id": 313,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Diazepam (Valium) [Benzodiazepine (long-acting) · TCA Overdose — Seizure]",
+   "Clonidine [Alpha-2 adrenergic agonist (central)]",
+   "Xylazine Toxicity — Initial Assessment [In: Xylazine Toxicity (\"Tranq\")]"
+  ]
+ },
+ {
+  "q": "serotonin syndrome cyproheptadine",
+  "kw": "serotonin",
+  "d": "tox",
+  "id": 314,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "🛑 Do NOT rely on cyproheptadine alone in severe serotonin syndrome [Serotonin Syndrome — Do NOT]",
+   "Cyproheptadine Dosing [Serotonin Antagonist Dosing for Serotonin Syndrome]",
+   "Cyproheptadine (Periactin) [First-generation antihistamine with 5-HT2A antagonist activity · Serotonin syndrome — adult]"
+  ]
+ },
+ {
+  "q": "synthetic cannabinoid toxicity",
+  "kw": "",
+  "d": "tox",
+  "id": 315,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Cannabis Cessation Counseling [In: Cannabinoid Hyperemesis Syndrome]",
+   "Target Analytes [SOFT/ANSI Recommended Panel]",
+   "Drug-Induced Catatonia [In: Catatonia]"
+  ]
+ },
+ {
+  "q": "excited delirium ketamine",
+  "kw": "excited-delirium|excited delirium",
+  "d": "tox",
+  "id": 316,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "Midazolam (Versed) [Benzodiazepine (short-acting) · Ketamine emergence prophylaxis]",
+   "Pharmacological Management [Delirium Steps Summary]",
+   "Immediate Threat: Ketamine Dissociation [In: State of Extreme Agitation with Aggression]"
+  ]
+ },
+ {
+  "q": "acute agitation droperidol olanzapine",
+  "kw": "acute-agitation|agitation",
+  "d": "tox",
+  "id": 317,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Aripiprazole (Abilify) [Second-generation antipsychotic — dopamine D2 partial agonist · Acute agitation — why IM aripiprazole is NOT an option]",
+   "Antipsychotic + Benzo Combo [In: Acute Agitation]",
+   "Primary Psychiatric [In: Acute Agitation]"
+  ]
+ },
+ {
+  "q": "dystonic reaction benztropine",
+  "kw": "dystonic",
+  "d": "tox",
+  "id": 318,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Airway Screen: Laryngeal Dystonia [In: Acute Dystonic Reaction]",
+   "Discharge Criteria [In: Acute Dystonic Reaction]",
+   "Dystonia vs NMS vs Serotonin Syndrome [In: Acute Dystonic Reaction]"
+  ]
+ },
+ {
+  "q": "chemical burn irrigation",
+  "kw": "chemical-burn|chemical burn",
+  "d": "tox",
+  "id": 319,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Chemical Burn Irrigation Protocol [Irrigate at triage — before exam, before history, before VA]",
+   "Chemical Eye Burn [Recognition → Irrigation Protocol → Classification → Treatment Cascade → Disposition]",
+   "Chemical Burns — Agent-Specific [Decontamination & Antidote Reference]"
+  ]
+ },
+ {
+  "q": "hydrofluoric acid burn calcium gluconate",
+  "kw": "chemical|burn",
+  "d": "tox",
+  "id": 320,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Calcium Gluconate Gel in a Glove for a Hydrofluoric Acid Hand Burn [Trick — Toxicology]",
+   "Calcium Gluconate [Electrolyte / membrane stabilizer · HF acid burn — subcutaneous]",
+   "Calcium Gluconate 2.5% Gel [Electrolyte / antidote (topical) · HF acid burn — topical]"
+  ]
+ },
+ {
+  "q": "tar burn removal",
+  "kw": "tar-burn|tar burn",
+  "d": "tox",
+  "id": 321,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Tar / Asphalt Burn Removal [Cool → Dissolve (don’t peel) → Reassess Depth → Disposition]",
+   "Tar / Asphalt Burn — Dissolve, Don\\u2019t Peel [In: Tar / Asphalt Burn Removal]",
+   "Step 4 — Reassess Burn Depth [In: Tar / Asphalt Burn Removal]"
+  ]
+ },
+ {
+  "q": "electrical injury workup",
+  "kw": "electrocution",
+  "d": "tox",
+  "id": 322,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "Electrical Injury: Admit or Discharge? [Cardiac Monitoring Criteria]",
+   "Electrical Burns [In: Burns Management]",
+   "Electrical Injury in Pregnancy [In: Electrocution & Lightning Injury]"
+  ]
+ },
+ {
+  "q": "drowning submersion management",
+  "kw": "submersion",
+  "d": "tox",
+  "id": 323,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pediatric Submersion Injury [In: Submersion Injuries]",
+   "🛑 Do NOT start chest compressions before rescue breaths in drowning [Peds Submersion — Do NOT]",
+   "Cardiac Arrest Management [In: Submersion Injuries]"
+  ]
+ },
+ {
+  "q": "lead poisoning chelation",
+  "kw": "",
+  "d": "tox",
+  "id": 324,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Deferoxamine (Desferrioxamine) [Iron chelator (siderophore)]",
+   "Iron Overdose Steps Summary [GI injury → systemic toxicity → chelation → disposition]",
+   "1. Recognition & Toxicity [Iron Overdose Steps Summary]"
+  ]
+ },
+ {
+  "q": "mushroom poisoning amatoxin",
+  "kw": "",
+  "d": "tox",
+  "id": 325,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Acetaminophen Overdose [Assessment → Risk Stratification → NAC → Massive OD → Hepatic Failure → Disposition]",
+   "Beta Blocker Overdose [Recognition → Stabilization → HIET → Vasopressors → Lipid Emulsion → Rescue]",
+   "Calcium Channel Blocker Overdose [Recognition → Shock Phenotype → HIET → Vasopressors → Lipid Emulsion → Rescue]"
+  ]
+ },
+ {
+  "q": "sedation options for procedures",
+  "kw": "sedation",
+  "d": "tox",
+  "id": 326,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Procedural Sedation Strategy [In: Sedation Options]",
+   "Procedure [Sedation Options: Use-Case Selector]",
+   "Etomidate [In: Sedation Options]"
+  ]
+ },
+ {
+  "q": "ketamine dose for procedural sedation",
+  "kw": "procedural-sedation|ketamine|sedation",
+  "d": "tox",
+  "id": 327,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Low-Dose (Procedural Sedation) [Ketamine for Awake Intubation]",
+   "Ketamine [Dissociative anesthetic / NMDA antagonist · Burns — procedural sedation (dissociative)]",
+   "Ketamine Dosing [DSI Quick Reference]"
+  ]
+ },
+ {
+  "q": "dexmedetomidine dosing",
+  "kw": "dexmedetomidine",
+  "d": "tox",
+  "id": 328,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Loading Dose - To Load or Not to Load [In: Dexmedetomidine (Precedex)]",
+   "Full Loading Dose Protocol [In: Dexmedetomidine (Precedex)]",
+   "Reduced Loading Dose (0.5 mcg/kg) [In: Dexmedetomidine (Precedex)]"
+  ]
+ },
+ {
+  "q": "etomidate vs ketamine intubation",
+  "kw": "awake-intubation|rsi|intubation|ketamine",
+  "d": "tox",
+  "id": 329,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ketamine [Dissociative anesthetic / NMDA antagonist]",
+   "Delayed Sequence Intubation [In: Asthma Exacerbation]",
+   "Intubation in Severe Peds Asthma [In: Acute Asthma]"
+  ]
+ },
+ {
+  "q": "rocuronium dose for RSI",
+  "kw": "intubation|rocuronium",
+  "d": "tox",
+  "id": 330,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Rocuronium (Zemuron) [Non-depolarizing neuromuscular blocker · RSI — rapid sequence intubation]",
+   "🛑 Do NOT use standard rocuronium dosing [Myasthenia Gravis — Do NOT]",
+   "Delayed Sequence Intubation [In: Asthma Exacerbation]"
+  ]
+ },
+ {
+  "q": "local anesthetic systemic toxicity",
+  "kw": "intralipid|lidocaine",
+  "d": "tox",
+  "id": 331,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "LAST - Local Anesthetic Systemic Toxicity [In: Intralipid / Lipid Emulsion Therapy]",
+   "Intralipid 20% (Lipid Emulsion) [Antidote (lipid sink) / parenteral nutrition · LAST (Local Anesthetic Systemic Toxicity)]",
+   "Lipid Emulsion 20% (Intralipid) [Rescue antidote / Lipid sink · Local Anesthetic Systemic Toxicity (LAST)]"
+  ]
+ },
+ {
+  "q": "maximum lidocaine dose",
+  "kw": "lidocaine",
+  "d": "tox",
+  "id": 332,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Maximum Lidocaine Dose [Airway Topicalization]",
+   "Lidocaine Dose Calculation [In: Video-Assisted Flexible Endoscopic Intubation]",
+   "Lidocaine 1% (Without Epinephrine) [Amide local anesthetic / Class IB antiarrhythmic]"
+  ]
+ },
+ {
+  "q": "bupivacaine maximum dose",
+  "kw": "lidocaine|bupivacaine",
+  "d": "tox",
+  "id": 333,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Bupivacaine 0.5% (Plain) [Amide local anesthetic (long-acting)]",
+   "Patiromer (Veltassa) [Potassium binder (non-absorbed cation exchange polymer)]",
+   "Lidocaine 1% (Without Epinephrine) [Amide local anesthetic / Class IB antiarrhythmic]"
+  ]
+ },
+ {
+  "q": "sodium bicarbonate infusion preparation",
+  "kw": "sodium-bicarbonate|bicarbonate",
+  "d": "tox",
+  "id": 334,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Sodium Bicarbonate [Alkalinizing agent · Isotonic bicarbonate infusion]",
+   "Module 3: Sodium Bicarbonate Protocol [TCA Overdose Steps Summary]",
+   "Bicarbonate Infusion [In: TCA Overdose]"
+  ]
+ },
+ {
+  "q": "heparin drip protocol",
+  "kw": "heparin",
+  "d": "tox",
+  "id": 335,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Unfractionated Heparin Infusion Protocol [Indication -> Bolus Strategy -> Monitoring -> Reversal -> Transition]",
+   "Alteplase (tPA) [Thrombolytic (tissue plasminogen activator)]",
+   "Unfractionated Heparin (UFH) [Unfractionated heparin (indirect thrombin/Xa inhibitor)]"
+  ]
+ },
+ {
+  "q": "potassium infusion central line",
+  "kw": "potassium",
+  "d": "tox",
+  "id": 336,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Potassium Infusion Steps [High-alert IV replacement]",
+   "Central Monitored Infusion [In: Potassium Infusion Protocol]",
+   "Tourniquet Infusion to Upsize an IV [Trick — Procedures & Access]"
+  ]
+ },
+ {
+  "q": "difficult airway bougie technique",
+  "kw": "difficult-airway|bougie",
+  "d": "trauma_procedures_airway",
+  "id": 337,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Scalpel-Finger-Bougie Technique [In: Difficult Airway / Bougie-First]",
+   "Bougie Equipment Setup [In: Difficult Airway / Bougie-First]",
+   "Bougie Insertion — Step by Step [In: Difficult Airway / Bougie-First]"
+  ]
+ },
+ {
+  "q": "rapid sequence intubation drug doses",
+  "kw": "intubation",
+  "d": "trauma_procedures_airway",
+  "id": 338,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Rocuronium (Zemuron) [Non-depolarizing neuromuscular blocker · RSI — rapid sequence intubation]",
+   "Succinylcholine (Anectine) [Depolarizing neuromuscular blocker · RSI — rapid sequence intubation]",
+   "Anesthesia Considerations [In: Eclampsia]"
+  ]
+ },
+ {
+  "q": "awake intubation topical anesthesia",
+  "kw": "awake-intubation|awake intubation",
+  "d": "trauma_procedures_airway",
+  "id": 339,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Nasal Route: Topicalization Protocol [In: Awake Intubation]",
+   "Oral Route: Topicalization Protocol [In: Awake Intubation]",
+   "Topical Spray: EZ-Spray or MAD [In: Awake Intubation]"
+  ]
+ },
+ {
+  "q": "supraglottic airway placement",
+  "kw": "supraglottic",
+  "d": "trauma_procedures_airway",
+  "id": 340,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Insertion Attempt Result [In: Supraglottic Airway]",
+   "Prep: Suction, Lubrication, Backup [In: Supraglottic Airway]",
+   "Do NOT keep repeating the same failed insertion [Supraglottic Airway - Do NOT]"
+  ]
+ },
+ {
+  "q": "surgical cricothyrotomy steps",
+  "kw": "cricothyrotomy",
+  "d": "trauma_procedures_airway",
+  "id": 341,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Scalpel-Finger-Bougie Cricothyrotomy [Emergency surgical airway — step-by-step]",
+   "CICO — Emergency Cricothyrotomy [In: Difficult Airway / Bougie-First]",
+   "Module 6: Surgical Airway [Difficult Airway — Steps Summary]"
+  ]
+ },
+ {
+  "q": "vent settings after intubation",
+  "kw": "vent|vafei",
+  "d": "trauma_procedures_airway",
+  "id": 342,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Asthma Vent Settings [Post-Intubation Ventilator Management]",
+   "Post-Intubation Vent Settings [In: HOP Killers]",
+   "6. Vent Settings for Obstructive Physiology [Asthma Exacerbation]"
+  ]
+ },
+ {
+  "q": "ED extubation criteria",
+  "kw": "ed-extubation|extubation",
+  "d": "trauma_procedures_airway",
+  "id": 343,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "ED Extubation Protocol [Readiness → Airway Protection → SBT → Stridor Risk → Extubate → Rescue]",
+   "ED Extubation Protocol [In: ED Extubation Protocol]",
+   "Delay Extubation [In: ED Extubation Protocol]"
+  ]
+ },
+ {
+  "q": "traumatic cardiac arrest",
+  "kw": "traumatic-arrest|traumatic arrest",
+  "d": "trauma_procedures_airway",
+  "id": 344,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Cardiac Arrest — Scene Assessment [In: Cardiac Arrest — General Approach]",
+   "POCUS During Traumatic Arrest [In: Traumatic Arrest]",
+   "Blunt Arrest: Consider Thoracotomy Only If Selected [In: Traumatic Arrest]"
+  ]
+ },
+ {
+  "q": "resuscitative thoracotomy indications",
+  "kw": "thoracotomy",
+  "d": "trauma_procedures_airway",
+  "id": 345,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Resuscitative Thoracotomy: 2-Minute Review [In: Thoracotomy Procedure]",
+   "Resuscitative Thoracotomy: Indicated / Strongly Consider [In: Traumatic Arrest]",
+   "Thoracotomy Procedure - Do NOT [Critical pitfalls during resuscitative thoracotomy]"
+  ]
+ },
+ {
+  "q": "pelvic fracture binder and hemorrhage control",
+  "kw": "pelvic-fracture|pelvic fracture",
+  "d": "trauma_procedures_airway",
+  "id": 346,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "4. Hemorrhage Control (Unstable) [Pelvic Fracture Steps Summary]",
+   "Post-Damage Control — Staged ORIF [In: Pelvic Fracture Management]",
+   "Hemorrhage Control / MTP [In: Traumatic Arrest]"
+  ]
+ },
+ {
+  "q": "massive transfusion trauma",
+  "kw": "massive",
+  "d": "trauma_procedures_airway",
+  "id": 347,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "DIC / Massive Transfusion Targets [Obstetric DIC thresholds — higher than trauma]",
+   "Massive Transfusion Protocol [DIC Blood Product Thresholds]",
+   "DIC / Massive Transfusion [In: afe]"
+  ]
+ },
+ {
+  "q": "cervical spine clearance NEXUS Canadian rule",
+  "kw": "cervical-spine|cervical spine",
+  "d": "trauma_procedures_airway",
+  "id": 348,
+  "n": 6,
+  "rank": 5,
+  "top": [
+   "🛑 Do NOT use NEXUS instead of Canadian C-Spine Rule when both apply [CT Decision Support — Do NOT]",
+   "Canadian C-Spine Rule — Step 1 [In: CT Scan Decision Support]",
+   "C-spine clearance on field [Head Injury Red Flags]"
+  ]
+ },
+ {
+  "q": "CT decision support head injury rules",
+  "kw": "ct-decision",
+  "d": "trauma_procedures_airway",
+  "id": 349,
+  "n": 6,
+  "rank": 4,
+  "top": [
+   "Canadian CT Head Rule — Eligibility [In: CT Scan Decision Support]",
+   "Canadian C-Spine Rule — Step 1 [In: CT Scan Decision Support]",
+   "Canadian C-Spine Rule — Step 2 [In: CT Scan Decision Support]"
+  ]
+ },
+ {
+  "q": "laryngeal trauma airway",
+  "kw": "laryngeal",
+  "d": "trauma_procedures_airway",
+  "id": 350,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Airway Management in Laryngeal Trauma [Why the Usual Rescue Manoeuvres Fail]",
+   "Laryngeal Trauma [Recognition → Airway Decision → Schaefer-Fuhrman → Imaging → Management]",
+   "Laryngeal Trauma [In: Laryngeal Trauma]"
+  ]
+ },
+ {
+  "q": "pediatric trauma resuscitation",
+  "kw": "peds-trauma",
+  "d": "trauma_procedures_airway",
+  "id": 351,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Trauma Center Transfer [In: Pediatric Trauma]",
+   "🛑 Do NOT apply adult fluid resuscitation principles to pediatric shock [Pediatric Trauma — Do NOT]",
+   "Pediatric Trauma [Initial Assessment → Hemorrhage → Head Trauma → Thoracoabdominal → Orthopedic → Disposition]"
+  ]
+ },
+ {
+  "q": "Le Fort fracture",
+  "kw": "le-fort",
+  "d": "trauma_procedures_airway",
+  "id": 352,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Le Fort Fracture [Classification → Airway → Hemorrhage Control → Workup → Disposition]",
+   "Le Fort Fracture — Overview [In: Le Fort Fracture]",
+   "Le Fort Fracture — Summary [In: Le Fort Fracture]"
+  ]
+ },
+ {
+  "q": "burn escharotomy",
+  "kw": "burns",
+  "d": "trauma_procedures_airway",
+  "id": 353,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Burns Management [Assessment → TBSA → Resuscitation → Wound Care → Disposition]",
+   "6. Escharotomy [Burns — Steps Summary]",
+   "Escharotomy Technique [Decompression of Circumferential Burns]"
+  ]
+ },
+ {
+  "q": "resuscitative hysterotomy perimortem cesarean",
+  "kw": "resuscitative-hysterotomy|hysterotomy",
+  "d": "trauma_procedures_airway",
+  "id": 354,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Resuscitative Hysterotomy [In: Resuscitative Hysterotomy]",
+   "Resuscitative Hysterotomy Technique [In: Pregnancy in Trauma]",
+   "Start Resuscitative Hysterotomy NOW [In: afe]"
+  ]
+ },
+ {
+  "q": "shoulder dislocation reduction techniques",
+  "kw": "shoulder-dislocation|shoulder",
+  "d": "trauma_procedures_airway",
+  "id": 355,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Reduction Technique Selection [In: Shoulder Dislocation Reduction]",
+   "Cunningham Technique [In: Shoulder Dislocation Reduction]",
+   "Stimson Technique (Prone) [In: Shoulder Dislocation Reduction]"
+  ]
+ },
+ {
+  "q": "distal radius fracture splinting",
+  "kw": "distal-radius|splint",
+  "d": "trauma_procedures_airway",
+  "id": 356,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Thumb-to-the-Floor Traction to Hold a Distal Radius Reduction While Splinting [Trick — Orthopedics]",
+   "Distal Radius Fracture Reduction [Obtain & Maintain → Hematoma Block → TRAMP Reduction → Post-Reduction]",
+   "Finger-Trap Gravity Disimpaction for Distal Radius Fractures [Trick — Orthopedics]"
+  ]
+ },
+ {
+  "q": "wrist injuries scaphoid",
+  "kw": "wrist",
+  "d": "trauma_procedures_airway",
+  "id": 357,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Scaphoid Fracture Management [In: Wrist Injuries]",
+   "Wrist Injury Assessment [In: Wrist Injuries]",
+   "Wrist Injury Complications [In: Wrist Injuries]"
+  ]
+ },
+ {
+  "q": "fingertip injury management",
+  "kw": "fingertip|nail-bed|nail bed",
+  "d": "trauma_procedures_airway",
+  "id": 358,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Subungual: Hematoma vs Abscess [In: Fingertip Infections]",
+   "Complex Injuries [In: Nail Bed Injuries]",
+   "Tendon or Nerve Injury Suspected [In: Laceration Repair]"
+  ]
+ },
+ {
+  "q": "fishhook removal",
+  "kw": "fishhook",
+  "d": "trauma_procedures_airway",
+  "id": 359,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Fishhook Removal [Triage → Assessment → Technique Selection → Removal → Wound Care]",
+   "Fishhook Removal — Overview [In: Fishhook Removal]",
+   "Complications During Removal [In: Fishhook Removal]"
+  ]
+ },
+ {
+  "q": "penile zipper entrapment",
+  "kw": "zipper",
+  "d": "trauma_procedures_airway",
+  "id": 360,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Penile Zipper Entrapment Release [Triage → Pain Control → Technique Selector → Wound Care → Tetanus → Urology Criteria]",
+   "Penile Zipper Entrapment — Overview [In: Penile Zipper Entrapment Release]",
+   "Red Flags Before You Touch the Zipper [In: Penile Zipper Entrapment Release]"
+  ]
+ },
+ {
+  "q": "ring removal swollen finger",
+  "kw": "",
+  "d": "trauma_procedures_airway",
+  "id": 361,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Standard Ring Cutter [In: Ring Removal]",
+   "Glass Cleaner (Windex) as a Slick Lubricant for Ring Removal [Trick — Procedures & Access]",
+   "Rubber Tourniquet Wrap for Stuck Ring Removal [Trick — Procedures & Access]"
+  ]
+ },
+ {
+  "q": "ingrown toenail treatment",
+  "kw": "ingrown",
+  "d": "trauma_procedures_airway",
+  "id": 362,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ingrown Toenail: Avulsion + Phenol [Assess → Digital Block → Avulsion → Phenol Matrixectomy → Aftercare]",
+   "Ingrown Toenail — Avulsion + Phenol Matrixectomy [In: Ingrown Toenail: Avulsion + Phenol]",
+   "Perfusion + Phenol Safety [In: Ingrown Toenail: Avulsion + Phenol]"
+  ]
+ },
+ {
+  "q": "cyanoacrylate removal from skin or eye",
+  "kw": "cyanoacrylate",
+  "d": "trauma_procedures_airway",
+  "id": 363,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Super Glue (Cyanoacrylate) Removal \\u2014 Eye / Eyelid / Skin [In: Super Glue (Cyanoacrylate) Removal]",
+   "Steps Summary [Cyanoacrylate Eye / Eyelid / Skin Removal]",
+   "Skin-Only De-adhesion [In: Super Glue (Cyanoacrylate) Removal]"
+  ]
+ },
+ {
+  "q": "ear foreign body removal",
+  "kw": "ear-fb|ear fb|foreign",
+  "d": "trauma_procedures_airway",
+  "id": 364,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ear Foreign Body Removal [Triage • Classification • Technique Selection • Removal • ENT Referral]",
+   "Ear Foreign Body Removal [In: Ear Foreign Body Removal]",
+   "Foreign Body Type [In: Ear Foreign Body Removal]"
+  ]
+ },
+ {
+  "q": "epistaxis management posterior packing",
+  "kw": "epistaxis",
+  "d": "trauma_procedures_airway",
+  "id": 365,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Posterior Packing [In: Epistaxis (Nosebleed)]",
+   "Packing Assessment [In: Epistaxis (Nosebleed)]",
+   "Anterior Nasal Packing [In: Epistaxis (Nosebleed)]"
+  ]
+ },
+ {
+  "q": "post tonsillectomy bleed",
+  "kw": "post-tonsillectomy",
+  "d": "trauma_procedures_airway",
+  "id": 366,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Post-Tonsillectomy Hemorrhage [Primary vs Secondary -> Severity -> TXA -> Hemostasis -> ENT/OR Criteria]",
+   "Ingestion / Post-Tonsillectomy — Redirect [In: Sore Throat Hub]",
+   "Post-Tonsillectomy Hemorrhage [In: Post-Tonsillectomy Hemorrhage]"
+  ]
+ },
+ {
+  "q": "dental avulsion reimplantation",
+  "kw": "dental-avulsion|avulsion",
+  "d": "trauma_procedures_airway",
+  "id": 367,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Dental Avulsion [Recognition → Storage → Reimplantation → Splinting → Medications → Follow-up]",
+   "ED Reimplantation Technique [In: Dental Avulsion]",
+   "Post-Reimplantation Imaging [In: Dental Avulsion]"
+  ]
+ },
+ {
+  "q": "dental trauma classification",
+  "kw": "dental-trauma|dental trauma",
+  "d": "trauma_procedures_airway",
+  "id": 368,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Dental Trauma — Assessment [In: Dental Trauma (Comprehensive)]",
+   "Dental Trauma (Comprehensive) [Ellis Fractures → Luxations → Alveolar Fx → Avulsion → Splinting → Disposition]",
+   "2. Ellis Classification (Crown Fractures) [Dental Trauma Steps Summary]"
+  ]
+ },
+ {
+  "q": "dental nerve blocks",
+  "kw": "dental-nerve|dental",
+  "d": "trauma_procedures_airway",
+  "id": 369,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Dental / Intraoral Nerve Blocks [Tooth/region → Pre-procedure → Maxillary & Mandibular blocks → Verify & Document]",
+   "Dental / Intraoral Nerve Blocks — ED Procedure [In: Dental / Intraoral Nerve Blocks]",
+   "(Long) Buccal Nerve Block (V3) [In: Dental / Intraoral Nerve Blocks]"
+  ]
+ },
+ {
+  "q": "facial nerve block",
+  "kw": "facial-nerve|facial",
+  "d": "trauma_procedures_airway",
+  "id": 370,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Facial Peripheral Nerve Block [Region → Pre-procedure → Block (8 sites) → Verify & Document]",
+   "Facial Peripheral Nerve Block — ED Procedure [In: Facial Peripheral Nerve Block]",
+   "Auriculotemporal Nerve Block (V3) [In: Facial Peripheral Nerve Block]"
+  ]
+ },
+ {
+  "q": "difficult IV access ultrasound guided",
+  "kw": "difficult-vascular|vascular access",
+  "d": "trauma_procedures_airway",
+  "id": 371,
+  "n": 6,
+  "rank": 5,
+  "top": [
+   "Gel-Free Ultrasound-Guided Peripheral IV [Trick — Procedures & Access]",
+   "Cut IV Tubing for a 2-Person Ultrasound Nerve Block [Trick — Procedures & Access]",
+   "Ultrasound-Guided Supraclavicular Subclavian Line [Trick — Procedures & Access]"
+  ]
+ },
+ {
+  "q": "central line placement",
+  "kw": "",
+  "d": "trauma_procedures_airway",
+  "id": 372,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Bubble Study to Confirm Central Line Placement at the Bedside [Trick — Procedures & Access]",
+   "Angiocatheter-First Central Line to Skip a Seldinger Step [Trick — Procedures & Access]",
+   "Serial Venous Lactate Clearance Instead of a Central Line in Sepsis [Trick — General & Diagnostics]"
+  ]
+ },
+ {
+  "q": "intraosseous access",
+  "kw": "vascular access|intraosseous",
+  "d": "trauma_procedures_airway",
+  "id": 373,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Squeeze Test to Confirm Intraosseous Placement [Trick — Procedures & Access]",
+   "Vascular Access [In: THE MISFITS - Sick Neonate]",
+   "Dosing & Safety [Hematoma Block — Evidence & Technique]"
+  ]
+ },
+ {
+  "q": "blood draw difficult",
+  "kw": "blood-draw|blood draw",
+  "d": "trauma_procedures_airway",
+  "id": 374,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Blood Draw [Rainbow? -> Order Of Draw -> Tube Additives -> Cultures -> VBG -> Verify]",
+   "Blood Draw: Rainbow, Tubes, Cultures, VBG [In: Blood Draw]",
+   "Blood Cultures: Aseptic Collection [In: Blood Draw]"
+  ]
+ },
+ {
+  "q": "tendon sheath injection",
+  "kw": "tendon-sheath",
+  "d": "trauma_procedures_airway",
+  "id": 375,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Tendon-Sheath Injection: de Quervain + Trigger Finger [Diagnose → Select Target → Landmarks → Sheath Confirmation → Aftercare]",
+   "Tendon-Sheath Steroid Injection — de Quervain / Trigger Finger [In: Tendon-Sheath Injection: de Quervain + Trigger Finger]",
+   "High Resistance on Injection? [In: Tendon-Sheath Injection: de Quervain + Trigger Finger]"
+  ]
+ },
+ {
+  "q": "hidradenitis suppurativa management",
+  "kw": "hidradenitis",
+  "d": "trauma_procedures_airway",
+  "id": 376,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Treatment Ladder — Start the Right Rung [In: Hidradenitis Suppurativa]",
+   "Hidradenitis Suppurativa: Recognize It [In: Hidradenitis Suppurativa]",
+   "Simple I&D — Rescue Only [In: Hidradenitis Suppurativa]"
+  ]
+ },
+ {
+  "q": "nail bed laceration repair",
+  "kw": "nail-bed|nail bed",
+  "d": "trauma_procedures_airway",
+  "id": 377,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Nail Bed Repair Principles [In: Nail Bed Injuries]",
+   "Nail Bed Injuries [Anatomy → Assessment → Trephination & Removal → Repair → Disposition]",
+   "Hand & Digit Lacerations [In: Laceration Repair]"
+  ]
+ },
+ {
+  "q": "laceration repair suture selection",
+  "kw": "",
+  "d": "trauma_procedures_airway",
+  "id": 378,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Suture Selection [In: Laceration Repair]",
+   "Laceration Repair [In: Laceration Repair]",
+   "Laceration Repair [Closure Picker → Lido Max Dose → LET Topical → Site Specials → Tetanus + Antibiotics]"
+  ]
+ },
+ {
+  "q": "wound closure tetanus",
+  "kw": "tetanus",
+  "d": "trauma_procedures_airway",
+  "id": 379,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Bite Wounds — Tetanus Consideration [In: Tetanus]",
+   "Wound Care for Tetanus Prevention [In: Tetanus]",
+   "Clean Wound — Protected [In: Tetanus]"
+  ]
+ },
+ {
+  "q": "procedural sedation fasting",
+  "kw": "procedural-sedation|sedation",
+  "d": "trauma_procedures_airway",
+  "id": 380,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Efficacy vs Procedural Sedation [Hematoma Block — Evidence & Technique]",
+   "ED Procedural Sedation [Readiness → Airway Setup → Agent Choice → Monitoring → Recovery]",
+   "Low-Dose (Procedural Sedation) [Ketamine for Awake Intubation]"
+  ]
+ },
+ {
+  "q": "echocardiography views",
+  "kw": "echo-views|echo",
+  "d": "trauma_procedures_airway",
+  "id": 381,
+  "n": 4,
+  "rank": 1,
+  "top": [
+   "Emergency Echo Summary [In: Basic Echo Views]",
+   "EPSS < 7 mm — Normal Systolic Function [In: Echo-EPSS for Systolic Function]",
+   "Grey Zone + Fluid Overload — Likely Reduced EF [In: Echo-EPSS for Systolic Function]"
+  ]
+ },
+ {
+  "q": "EPSS measurement",
+  "kw": "echo-epss|epss",
+  "d": "trauma_procedures_airway",
+  "id": 382,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "EPSS Measurement [E-Point Septal Separation for LV Function]",
+   "Measure EPSS [In: Echo-EPSS for Systolic Function]",
+   "Full Consult [EPSS Measurement]"
+  ]
+ },
+ {
+  "q": "RV assessment ultrasound",
+  "kw": "rv-assessment|rv",
+  "d": "trauma_procedures_airway",
+  "id": 383,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pre-Intubation RV Assessment [Why RV Matters → Clinical Signs → POCUS → Pre-Optimization → Intubation → Post-Intubation]",
+   "PUMP — Cardiac Assessment [RUSH Exam in Cardiac Arrest]",
+   "Pre-Intubation RV Assessment [In: Pre-Intubation RV Assessment]"
+  ]
+ },
+ {
+  "q": "FAST exam interpretation",
+  "kw": "",
+  "d": "trauma_procedures_airway",
+  "id": 384,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "RUSH Exam [Rapid Ultrasound for Shock and Hypotension — Pump, Tank, Pipes]",
+   "RUSH Exam in Cardiac Arrest [Rapid Ultrasound in Shock — Pump, Tank, Pipes]",
+   "Two Mnemonics, One Exam [RUSH Exam]"
+  ]
+ },
+ {
+  "q": "lung ultrasound B lines",
+  "kw": "",
+  "d": "trauma_procedures_airway",
+  "id": 385,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "EPSS > 10 mm — Reduced Systolic Function [In: Echo-EPSS for Systolic Function]",
+   "EPSS 7–10 mm — Grey Zone Assessment [In: Echo-EPSS for Systolic Function]",
+   "Ultrasound-Guided Supraclavicular Subclavian Line [Trick — Procedures & Access]"
+  ]
+ },
+ {
+  "q": "MRI basics",
+  "kw": "mri",
+  "d": "trauma_procedures_airway",
+  "id": 386,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Basic Echo Views [PLAX → PSAX → A4C → Subxiphoid → IVC]",
+   "TGA — Workup Strategy [In: Transient Global Amnesia]",
+   "TEG Basics — When to Use & Limits [Whole-blood viscoelastic testing at the point of care]"
+  ]
+ },
+ {
+  "q": "ectopic pregnancy risk factors and workup",
+  "kw": "first-trimester|ectopic",
+  "d": "ob_gyn",
+  "id": 387,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Major Risk Factors [Ectopic Pregnancy Sites & Risk Factors]",
+   "Ectopic Pregnancy Sites & Risk Factors [Location Distribution & Clinical Risk Assessment]",
+   "Ectopic Pregnancy [First Trimester Emergency Steps]"
+  ]
+ },
+ {
+  "q": "methotrexate for ectopic",
+  "kw": "first-trimester|ectopic",
+  "d": "ob_gyn",
+  "id": 388,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Methotrexate for Ectopic Pregnancy [In: First Trimester Emergencies]",
+   "Methotrexate [Antimetabolite / Folic acid antagonist · Ectopic pregnancy — single-dose regimen]",
+   "Ectopic Pregnancy [First Trimester Emergency Steps]"
+  ]
+ },
+ {
+  "q": "RhoGAM dosing early pregnancy",
+  "kw": "rhogam",
+  "d": "ob_gyn",
+  "id": 389,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "RhoGAM Dosing & Administration [In: Early Pregnancy RhoGAM Guidelines]",
+   "Rh(D) Immune Globulin (RhoGAM) [Immune globulin]",
+   "Early Pregnancy RhoGAM Guidelines [In: Early Pregnancy RhoGAM Guidelines]"
+  ]
+ },
+ {
+  "q": "preeclampsia severe features",
+  "kw": "htn-pregnancy|preeclampsia",
+  "d": "ob_gyn",
+  "id": 390,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Severe Features of Preeclampsia [In: Hypertension in Pregnancy]",
+   "Preeclampsia Spectrum [In: Eclampsia]",
+   "Preeclampsia — Severe Features [HTN in Pregnancy — Classification]"
+  ]
+ },
+ {
+  "q": "eclampsia treatment",
+  "kw": "eclampsia",
+  "d": "ob_gyn",
+  "id": 391,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Blood Pressure in Eclampsia [In: Eclampsia]",
+   "Hydralazine Protocol [In: Eclampsia]",
+   "Labetalol Protocol [In: Eclampsia]"
+  ]
+ },
+ {
+  "q": "magnesium sulfate loading dose preeclampsia",
+  "kw": "eclampsia|magnesium",
+  "d": "ob_gyn",
+  "id": 392,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Magnesium Loading Dose [In: Eclampsia]",
+   "Magnesium Sulfate [Electrolyte / Antiarrhythmic adjunct]",
+   "Magnesium Sulfate (Asthma) [Bronchodilator (smooth muscle relaxant)]"
+  ]
+ },
+ {
+  "q": "postpartum hemorrhage uterotonics",
+  "kw": "pph",
+  "d": "ob_gyn",
+  "id": 393,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Postpartum Hemorrhage [Recognition → Immediate Measures → 4 T’s → Uterotonics → Advanced Interventions → Disposition]",
+   "Postpartum Hemorrhage [In: Postpartum Hemorrhage]",
+   "Carboprost (Hemabate) [In: Postpartum Hemorrhage]"
+  ]
+ },
+ {
+  "q": "carboprost contraindication",
+  "kw": "pph",
+  "d": "ob_gyn",
+  "id": 394,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "🛑 Do NOT give carboprost (Hemabate) in asthma [PPH — Do NOT]",
+   "Carboprost (Hemabate) [Prostaglandin F2α analog (uterotonic)]",
+   "Carboprost (Hemabate) [In: Postpartum Hemorrhage]"
+  ]
+ },
+ {
+  "q": "shoulder dystocia maneuvers",
+  "kw": "shoulder-dystocia",
+  "d": "ob_gyn",
+  "id": 395,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Last Resort Maneuvers [In: Shoulder Dystocia]",
+   "McRoberts Maneuver + Suprapubic Pressure [In: Shoulder Dystocia]",
+   "Wood's Screw & Rubin's Maneuver [In: Shoulder Dystocia]"
+  ]
+ },
+ {
+  "q": "precipitous delivery",
+  "kw": "precip",
+  "d": "ob_gyn",
+  "id": 396,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Precipitous Delivery [Assessment → Preparation → Labor → Delivery → Placenta & Postpartum]",
+   "Precipitous Delivery [In: Precipitous Delivery]",
+   "Delivery Steps Summary [Quick-reference checklist for ED precipitous delivery]"
+  ]
+ },
+ {
+  "q": "umbilical cord prolapse",
+  "kw": "cord",
+  "d": "ob_gyn",
+  "id": 397,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Umbilical Cord Prolapse [In: Cord Emergencies]",
+   "Assisted Vaginal Delivery [In: Cord Emergencies]",
+   "Bladder Filling (Vago Procedure) [In: Cord Emergencies]"
+  ]
+ },
+ {
+  "q": "PPROM management",
+  "kw": "pprom",
+  "d": "ob_gyn",
+  "id": 398,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Rupture of Membranes / PPROM [Triage → Sterile Speculum → Ferning / AmniSure → Gestational-Age Disposition]",
+   "PROM / PPROM Diagnostic Steps [Triage -> sterile speculum -> targeted testing -> OB disposition]",
+   "Previable or Periviable PPROM [In: Rupture of Membranes / PPROM]"
+  ]
+ },
+ {
+  "q": "amniotic fluid embolism",
+  "kw": "afe|amniotic",
+  "d": "ob_gyn",
+  "id": 399,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Amniotic Fluid Embolism [Recognition → Resuscitation → Perimortem C/S → A-O-K → DIC/MTP → Post-ROSC]",
+   "Amniotic Fluid Embolism Steps Summary [First-2-minute resuscitation checklist]",
+   "Amniotic Fluid Embolism Resuscitation Complete [In: afe]"
+  ]
+ },
+ {
+  "q": "vaginal bleeding nonpregnant workup",
+  "kw": "vaginal-bleeding|vaginal bleeding|aub",
+  "d": "ob_gyn",
+  "id": 400,
+  "n": 5,
+  "rank": 1,
+  "top": [
+   "Imaging / Workup Strategy [In: Vaginal Bleeding Hub]",
+   "Stable Nonpregnant Abnormal Uterine Bleeding [In: Vaginal Bleeding Hub]",
+   "Non-Pregnant Bleeding / AUB Lane [In: Pelvic Pain, Female Hub]"
+  ]
+ },
+ {
+  "q": "abnormal uterine bleeding treatment",
+  "kw": "aub",
+  "d": "ob_gyn",
+  "id": 401,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ongoing Unstable Bleeding [In: Abnormal Uterine Bleeding]",
+   "Combined OCP Regimen [In: Abnormal Uterine Bleeding]",
+   "Medical Management Selection [In: Abnormal Uterine Bleeding]"
+  ]
+ },
+ {
+  "q": "ovarian torsion ultrasound",
+  "kw": "pelvic-pain|torsion",
+  "d": "ob_gyn",
+  "id": 402,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ovarian Torsion [In: Ovarian Hyperstimulation Syndrome]",
+   "Differential Diagnosis [In: Ovarian Hyperstimulation Syndrome]",
+   "ED Management Principles [In: Ovarian Hyperstimulation Syndrome]"
+  ]
+ },
+ {
+  "q": "tubo-ovarian abscess",
+  "kw": "pid",
+  "d": "ob_gyn",
+  "id": 403,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "PID / Tubo-Ovarian Abscess [In: Pelvic Pain, Female Hub]",
+   "Tubo-Ovarian Abscess (TOA) [In: Pelvic Inflammatory Disease]",
+   "Additional Diagnostic Criteria [In: Pelvic Inflammatory Disease]"
+  ]
+ },
+ {
+  "q": "ovarian hyperstimulation syndrome",
+  "kw": "ohss",
+  "d": "ob_gyn",
+  "id": 404,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ovarian Hyperstimulation Syndrome [Recognition → Classification → Pathophysiology → ED Management → Complications → Disposition]",
+   "Ovarian Torsion [In: Ovarian Hyperstimulation Syndrome]",
+   "Admit - Floor/Telemetry [In: Ovarian Hyperstimulation Syndrome]"
+  ]
+ },
+ {
+  "q": "emergency contraception options",
+  "kw": "emergency-contraception",
+  "d": "ob_gyn",
+  "id": 405,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Emergency Contraception [Assessment → Method Selection → Oral EC → Copper IUD → Special Populations → Disposition]",
+   "Emergency Contraception [In: dfsa workup]",
+   "Emergency Contraception Ordered [In: dfsa workup]"
+  ]
+ },
+ {
+  "q": "hyperemesis in pregnancy",
+  "kw": "hyperemesis",
+  "d": "ob_gyn",
+  "id": 406,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hyperemesis Gravidarum — Admit [In: First Trimester Emergencies]",
+   "How to use the visual [Hyperemesis Treatment Algorithm]",
+   "Dimenhydrinate [Antihistamine / Antiemetic]"
+  ]
+ },
+ {
+  "q": "pulmonary embolism pregnancy",
+  "kw": "pe-pregnancy",
+  "d": "ob_gyn",
+  "id": 407,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "When to activate PERT (Pulmonary Embolism Response Team) [Disposition & PERT Activation]",
+   "E — Embolism [BEAU-CHOPS — Reversible Causes]",
+   "Massive Pulmonary Embolism [In: Undifferentiated Hypotension]"
+  ]
+ },
+ {
+  "q": "trauma in pregnancy",
+  "kw": "pregnancy-trauma",
+  "d": "ob_gyn",
+  "id": 408,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pregnancy in Trauma [Initial Assessment → Resuscitation → Fetal Monitoring → Pregnancy Injuries → Cardiac Arrest → Disposition]",
+   "Pregnancy in Trauma [In: Pregnancy in Trauma]",
+   "Imaging in Pregnancy [In: Pregnancy in Trauma]"
+  ]
+ },
+ {
+  "q": "neonatal resuscitation NRP",
+  "kw": "neonatal-resus|neonatal",
+  "d": "ob_gyn",
+  "id": 409,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Neonatal Resuscitation (NRP) [Initial Eval → PPV → CPR → Epinephrine → UVC → Post-Resuscitation]",
+   "Neonatal Resuscitation (NRP) [In: Neonatal Resuscitation (NRP)]",
+   "NRP Algorithm — Quick Reference [In: Neonatal Resuscitation (NRP)]"
+  ]
+ },
+ {
+  "q": "postpartum hypertension",
+  "kw": "htn-pregnancy",
+  "d": "ob_gyn",
+  "id": 410,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Postpartum Hypertension [HTN in Pregnancy — Classification]",
+   "Postpartum Hypertension [In: Hypertension in Pregnancy]",
+   "Hypertension in Pregnancy [Recognition → Workup → Severe-Range BP → Preeclampsia Spectrum → HELLP → Postpartum & Prevention]"
+  ]
+ },
+ {
+  "q": "medications safe in pregnancy",
+  "kw": "",
+  "d": "ob_gyn",
+  "id": 411,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Hydralazine + Nitrates (Pregnancy-Safe) [In: Peripartum Cardiomyopathy]",
+   "Your Medications [High Blood Pressure in Pregnancy]",
+   "PPCM Medication Guide [Pregnancy-safe vs postpartum medication selection]"
+  ]
+ },
+ {
+  "q": "sexual assault exam DFSA",
+  "kw": "dfsa",
+  "d": "ob_gyn",
+  "id": 412,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Drug-Facilitated Sexual Assault [Assessment → Consent → Specimens → Drug Panel → SANE → Prophylaxis]",
+   "Sexual Assault - Link to DFSA [In: STI Comprehensive]",
+   "Drug-Facilitated Sexual Assault — ED Workup [In: Drug-Facilitated Sexual Assault]"
+  ]
+ },
+ {
+  "q": "human trafficking screening",
+  "kw": "human-trafficking|trafficking",
+  "d": "ob_gyn",
+  "id": 413,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Human Trafficking Screening [Recognition → Red Flags → Safe Screening → Response → Resources → Documentation]",
+   "Human Trafficking Screening [In: Human Trafficking Screening]",
+   "Screening Questions [In: Human Trafficking Screening]"
+  ]
+ },
+ {
+  "q": "postpartum infection endometritis",
+  "kw": "",
+  "d": "ob_gyn",
+  "id": 414,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Postpartum / Post-Procedure Bleeding [In: Vaginal Bleeding Hub]",
+   "Mood Psychosis / Postpartum Risk [In: New Onset Psychosis Hub]",
+   "Bakri Balloon — Intrauterine Tamponade [In: Postpartum Hemorrhage]"
+  ]
+ },
+ {
+  "q": "molar pregnancy",
+  "kw": "",
+  "d": "ob_gyn",
+  "id": 415,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Molar Pregnancy [In: Early Pregnancy RhoGAM Guidelines]",
+   "🛑 Do NOT withhold RhoGAM for molar pregnancy [RhoGAM — Do NOT]",
+   "Pregnancy Confirmed — Consult Does Not Apply [In: Abnormal Uterine Bleeding]"
+  ]
+ },
+ {
+  "q": "placental abruption",
+  "kw": "",
+  "d": "ob_gyn",
+  "id": 416,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Placental Abruption [In: Pregnancy in Trauma]",
+   "P — Placental Catastrophes [BEAU-CHOPS — Reversible Causes]",
+   "3. Obstetric DIC [DIC Etiology Quick-Jump]"
+  ]
+ },
+ {
+  "q": "placenta previa bleeding",
+  "kw": "",
+  "d": "ob_gyn",
+  "id": 417,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "P — Placental Catastrophes [BEAU-CHOPS — Reversible Causes]",
+   "Previable or Periviable PPROM [In: Rupture of Membranes / PPROM]",
+   "B — Bleeding / DIC [BEAU-CHOPS — Reversible Causes]"
+  ]
+ },
+ {
+  "q": "vasa previa",
+  "kw": "",
+  "d": "ob_gyn",
+  "id": 418,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "4. Vasa Previa [Cord Emergencies Steps Summary]",
+   "Acute Vasa Previa — STAT C-Section [In: Cord Emergencies]",
+   "Known Vasa Previa — Delivery Plan [In: Cord Emergencies]"
+  ]
+ },
+ {
+  "q": "pregnancy of unknown location discriminatory zone",
+  "kw": "first-trimester|pregnancy",
+  "d": "ob_gyn",
+  "id": 419,
+  "n": 4,
+  "rank": 1,
+  "top": [
+   "Pregnancy of Unknown Location [In: First Trimester Emergencies]",
+   "No IUP Above Discriminatory Zone [In: First Trimester Emergencies]",
+   "Early Pregnancy Bleeding / Ectopic / Miscarriage [In: Vaginal Bleeding Hub]"
+  ]
+ },
+ {
+  "q": "menopause hormone therapy",
+  "kw": "",
+  "d": "ob_gyn",
+  "id": 420,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Calcitonin (Salmon) [Hormone (calcium-lowering)]",
+   "Levothyroxine (Synthroid) [Thyroid Hormone (synthetic T4)]",
+   "Liothyronine (Cytomel / Triostat) [Thyroid Hormone (synthetic T3)]"
+  ]
+ },
+ {
+  "q": "acute angle closure glaucoma treatment",
+  "kw": "aacg|angle",
+  "d": "eent_derm_msk_peds",
+  "id": 421,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Definitive Treatment [In: Acute Angle-Closure Glaucoma]",
+   "Immediate Actions [In: Acute Angle-Closure Glaucoma]",
+   "Phase 4: Pilocarpine [In: Acute Angle-Closure Glaucoma]"
+  ]
+ },
+ {
+  "q": "central retinal artery occlusion",
+  "kw": "crao",
+  "d": "eent_derm_msk_peds",
+  "id": 422,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Central Retinal Artery Occlusion [Recognition → Exam/Fundoscopy → GCA Evaluation → Treatment → Disposition]",
+   "Branch Retinal Artery Occlusion [In: Central Retinal Artery Occlusion]",
+   "Central Retinal Artery Occlusion (CRAO) [Fundoscopic Findings Atlas]"
+  ]
+ },
+ {
+  "q": "monocular vision loss approach",
+  "kw": "monocular",
+  "d": "eent_derm_msk_peds",
+  "id": 423,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Monocular Vision Loss Hub [Sick Check → Retinal Stroke/GCA/Glaucoma/Trauma → Rescue → Imaging → Dispo]",
+   "Monocular Vision Loss Hub - Steps Summary [Retinal ischemia, GCA, glaucoma, trauma, retina, optic nerve, infection]",
+   "Monocular Vision Loss Hub - Sick Check First [In: Monocular Vision Loss Hub]"
+  ]
+ },
+ {
+  "q": "globe rupture management",
+  "kw": "globe-rupture|globe",
+  "d": "eent_derm_msk_peds",
+  "id": 424,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "What NOT To Do [In: Globe Rupture / Open Globe]",
+   "Endophthalmitis Prophylaxis [In: Globe Rupture / Open Globe]",
+   "Immediate Protection [In: Globe Rupture / Open Globe]"
+  ]
+ },
+ {
+  "q": "corneal foreign body removal",
+  "kw": "corneal-fb|corneal",
+  "d": "eent_derm_msk_peds",
+  "id": 425,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Corneal Foreign Body Removal [Pre-Procedure Screen → Anesthesia & VA → Eyelid Eversion → Removal Ladder → Post-Removal Care → Follow-up]",
+   "Corneal Foreign Body Removal [In: Corneal Foreign Body Removal]",
+   "Bend the Needle Tip Into a “Spoon” for Corneal Foreign Body Removal [Trick — Ophthalmology]"
+  ]
+ },
+ {
+  "q": "optic neuritis",
+  "kw": "optic-neuritis|optic neuritis",
+  "d": "eent_derm_msk_peds",
+  "id": 426,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Optic Neuritis [Confirm → Subtype (MS/NMOSD/MOG/Neuroretinitis) → MRI → IV Methylpred → Dispo]",
+   "MS-Associated Optic Neuritis [In: Optic Neuritis]",
+   "Optic Neuritis - Confirm the Diagnosis [In: Optic Neuritis]"
+  ]
+ },
+ {
+  "q": "diplopia approach",
+  "kw": "diplopia",
+  "d": "eent_derm_msk_peds",
+  "id": 427,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Diplopia: Initial Approach [In: Diplopia (Double Vision)]",
+   "Diplopia (Double Vision) [Classification → CN III Palsy → CN IV Palsy → CN VI Palsy → INO & Brainstem → Red Flags & Dispo]",
+   "Diplopia Exam [Systematic examination checklist]"
+  ]
+ },
+ {
+  "q": "anisocoria workup",
+  "kw": "anisocoria",
+  "d": "eent_derm_msk_peds",
+  "id": 428,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Anisocoria [Sick Pupil → Light vs Dark → Large Pupil → Small Pupil → Disposition]",
+   "Anisocoria Steps [Sick pupil first, then light vs dark localization]",
+   "Anisocoria Stop Points [Do not miss these dangerous causes]"
+  ]
+ },
+ {
+  "q": "retinal detachment symptoms",
+  "kw": "",
+  "d": "eent_derm_msk_peds",
+  "id": 429,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Retinal Detachment Findings [In: Ocular POCUS]",
+   "Retinal Detachment Disposition [In: Ocular POCUS]",
+   "Retinal Detachment / Vitreous Hemorrhage [In: Monocular Vision Loss Hub]"
+  ]
+ },
+ {
+  "q": "hyphema management",
+  "kw": "ocular-trauma|ocular",
+  "d": "eent_derm_msk_peds",
+  "id": 430,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "Standard medical management (non-sickle) [Hyphema Management]",
+   "Hyphema Management [Grading, sickle screen, treatment, and re-bleed prevention]",
+   "Hyphema — Management [In: Ocular Trauma]"
+  ]
+ },
+ {
+  "q": "chemical eye injury irrigation",
+  "kw": "chemical-burn|chemical",
+  "d": "eent_derm_msk_peds",
+  "id": 431,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Chemical Eye Burn [Recognition → Irrigation Protocol → Classification → Treatment Cascade → Disposition]",
+   "Tip: irrigate during history [Chemical Burn Irrigation Protocol]",
+   "Chemical Eye Burn [In: Chemical Eye Burn]"
+  ]
+ },
+ {
+  "q": "otitis externa",
+  "kw": "otalgia|ear",
+  "d": "eent_derm_msk_peds",
+  "id": 432,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Otitis Externa Treatment [Topical and oral options]",
+   "Otitis Media vs Otitis Externa [Ear Infection Overview]",
+   "Malignant Otitis Externa — Skull-Base Gate [In: Otalgia Hub]"
+  ]
+ },
+ {
+  "q": "sinusitis antibiotics",
+  "kw": "",
+  "d": "eent_derm_msk_peds",
+  "id": 433,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "First-Line Antibiotics for Confirmed GAS [In: Adult Pharyngitis (Strep Throat)]",
+   "IV Antibiotic Regimen [In: Orbital vs Preseptal Cellulitis]",
+   "Cavernous Sinus Thrombosis [In: Diplopia (Double Vision)]"
+  ]
+ },
+ {
+  "q": "epistaxis tranexamic acid",
+  "kw": "epistaxis",
+  "d": "eent_derm_msk_peds",
+  "id": 434,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Tranexamic Acid (TXA) [Antifibrinolytic (lysine analog) · Epistaxis (topical)]",
+   "Topical TXA in Epistaxis [In: Epistaxis (Nosebleed)]",
+   "3. Tranexamic Acid (Within 3 Hours!) [MTP Steps Summary]"
+  ]
+ },
+ {
+  "q": "sore throat approach",
+  "kw": "sore-throat|sore throat",
+  "d": "eent_derm_msk_peds",
+  "id": 435,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Sore Throat Hub [Airway Check → Time-Critical Exclusions → Initial Bundle → Imaging → Dispo]",
+   "Initial Bundle — Sore Throat Without Airway Threat [In: Sore Throat Hub]",
+   "Severe Sore Throat Hub — Is the Airway Threatened? [In: Sore Throat Hub]"
+  ]
+ },
+ {
+  "q": "dental pain abscess management",
+  "kw": "dental-pain|dental pain",
+  "d": "eent_derm_msk_peds",
+  "id": 436,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Dental Pain Hub - Steps Summary [Deep infection, trauma, abscess, pulpitis, analgesia, follow-up]",
+   "Localized Dental Abscess [In: Dental Pain Hub]",
+   "Rescue / Initial Bundle + Reassess [In: Dental Pain Hub]"
+  ]
+ },
+ {
+  "q": "dental extraction complications dry socket",
+  "kw": "dental-extraction",
+  "d": "eent_derm_msk_peds",
+  "id": 437,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Dental Extraction Complications [Bleeding → Dry Socket → Infection → Dental Box → Tricks → Dispo]",
+   "Dental Extraction Complications - Steps [Bleeding, dry socket, infection, oroantral communication, meds, disposition]",
+   "Dental Extraction Complications - Sick Check [In: Dental Extraction Complications]"
+  ]
+ },
+ {
+  "q": "acute low back pain imaging red flags",
+  "kw": "low-back-pain|back-pain|back pain",
+  "d": "eent_derm_msk_peds",
+  "id": 438,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Low Back Pain Decision Support [Red Flag Screen → Neuro Exam → Imaging Decision → Treatment → Disposition]",
+   "Low Back Pain — Initial Assessment [In: Low Back Pain Decision Support]",
+   "Low Back Pain Red Flags [Screen for Emergent Conditions]"
+  ]
+ },
+ {
+  "q": "hip pain approach",
+  "kw": "hip-pain|hip pain",
+  "d": "eent_derm_msk_peds",
+  "id": 439,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Mechanical Hip Pain — Conservative Management [In: Hip Pain Hub]",
+   "Hip Pain Hub [Sick Check → Age-Anchored Exclusions → Initial Bundle → Imaging → Dispo]",
+   "Atraumatic Hip Pain — Sick Check First [In: Hip Pain Hub]"
+  ]
+ },
+ {
+  "q": "approach to polyarthritis",
+  "kw": "approach-to-arthritis|arthritis",
+  "d": "eent_derm_msk_peds",
+  "id": 440,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pseudogout (CPPD) [In: Approach to Arthritis]",
+   "Psoriatic Arthritis [In: Approach to Arthritis]",
+   "Rheumatoid Arthritis [In: Approach to Arthritis]"
+  ]
+ },
+ {
+  "q": "sports injuries ankle sprain Ottawa rules",
+  "kw": "sports",
+  "d": "eent_derm_msk_peds",
+  "id": 441,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Ankle injury — Ottawa Ankle Rule [In: Sports Injuries]",
+   "Ottawa Ankle Rule [Ankle / midfoot X-ray decision support]",
+   "Knee injury — Ottawa Knee Rule first [In: Sports Injuries]"
+  ]
+ },
+ {
+  "q": "compartment syndrome",
+  "kw": "",
+  "d": "eent_derm_msk_peds",
+  "id": 442,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Paracanthal “One-Snip” Decompression for Orbital Compartment Syndrome [Trick — Ophthalmology]",
+   "Compartment Syndrome — Emergent Fasciotomy [In: Unilateral Leg Swelling Hub]",
+   "Compartment Syndrome — Pressure Gate [In: Unilateral Leg Swelling Hub]"
+  ]
+ },
+ {
+  "q": "pediatric fever without source",
+  "kw": "peds-fever",
+  "d": "eent_derm_msk_peds",
+  "id": 443,
+  "n": 6,
+  "rank": 6,
+  "top": [
+   "Ceftazidime [3rd-generation cephalosporin (antipseudomonal) · Pediatric — serious gram-negative infection / Pseudomonas]",
+   "Pediatric UTI — Use the Peds Pathway [In: Dysuria Hub]",
+   "Labs — When They Help [In: Febrile Seizure]"
+  ]
+ },
+ {
+  "q": "pediatric asthma exacerbation",
+  "kw": "peds-asthma",
+  "d": "eent_derm_msk_peds",
+  "id": 444,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Asthma Exacerbation [Severity → Maximize Therapy → BiPAP/Sedation → Intubation → Ventilator → Disposition]",
+   "Acute Asthma [Triage/PRAM → Mild-Moderate Tx → Severe Escalation → Disposition → Mimics]",
+   "Pediatric Acute Asthma Exacerbation [In: Acute Asthma]"
+  ]
+ },
+ {
+  "q": "hemolytic uremic syndrome STEC",
+  "kw": "peds-stec",
+  "d": "eent_derm_msk_peds",
+  "id": 445,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Shiga Toxin E. coli / Hemolytic Uremic Syndrome (STEC/HUS) [Recognition → Workup → STEC Management → HUS Treatment → Disposition]",
+   "Admission for STEC Monitoring [In: Shiga Toxin E. coli / Hemolytic Uremic Syndrome (STEC/HUS)]",
+   "STEC Colitis Management [In: Shiga Toxin E. coli / Hemolytic Uremic Syndrome (STEC/HUS)]"
+  ]
+ },
+ {
+  "q": "pediatric hypertensive emergency",
+  "kw": "peds-hypertensive",
+  "d": "eent_derm_msk_peds",
+  "id": 446,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Hypertensive Emergency (Peds) [Definitions → Workup → Secondary Causes → IV/PO Treatment → Disposition]",
+   "Pediatric Hypertensive Emergency Overview [In: Hypertensive Emergency (Peds)]",
+   "Treatment: Hypertensive Emergency (IV) [In: Hypertensive Emergency (Peds)]"
+  ]
+ },
+ {
+  "q": "pediatric appendicitis ultrasound",
+  "kw": "peds-appendicitis",
+  "d": "eent_derm_msk_peds",
+  "id": 447,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pediatric Appendicitis (PAS Pathway) [Recognition → PAS Scoring → Workup → Imaging → Antibiotics → Disposition]",
+   "Pediatric Appendicitis Score (PAS) [Samuel 2002 — 10-point pediatric appendicitis risk]",
+   "Imaging Pathway — US First, CT Last [In: Pediatric Appendicitis (PAS Pathway)]"
+  ]
+ },
+ {
+  "q": "pediatric foreign body ingestion magnets",
+  "kw": "peds-foreign|foreign",
+  "d": "eent_derm_msk_peds",
+  "id": 448,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "GI Foreign Body [Object Identification → Location → Button Battery Protocol → Sharp Objects → Magnets → Disposition]",
+   "Gastric Foreign Body [In: GI Foreign Body]",
+   "GI Foreign Body — Object Identification [In: GI Foreign Body]"
+  ]
+ },
+ {
+  "q": "child abuse screening nonaccidental trauma",
+  "kw": "nat-screening|nat",
+  "d": "eent_derm_msk_peds",
+  "id": 449,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Fracture Patterns in Abuse [In: Non-Accidental Trauma Screening]",
+   "Non-Accidental Trauma — Recognition [In: Non-Accidental Trauma Screening]",
+   "Abusive Head Trauma (AHT) [In: Non-Accidental Trauma Screening]"
+  ]
+ },
+ {
+  "q": "congenital heart disease cyanotic spell",
+  "kw": "chd",
+  "d": "eent_derm_msk_peds",
+  "id": 450,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Congenital Heart Disease [Blue Babies vs Shocked → 5 T's → PGE1 → Tet Spells → Disposition]",
+   "The 5 T's of Cyanotic CHD [In: Congenital Heart Disease]",
+   "Tetralogy of Fallot [In: Congenital Heart Disease]"
+  ]
+ },
+ {
+  "q": "pediatric arthritis septic hip transient synovitis",
+  "kw": "pediatric-arthritis|pediatric arthritis",
+  "d": "eent_derm_msk_peds",
+  "id": 451,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hip Pain: The Classic Pediatric Dilemma [In: Arthritis]",
+   "Pediatric: Kocher Criteria [In: Septic Arthritis]",
+   "Low Risk Hip (0 Kocher Criteria) [In: Arthritis]"
+  ]
+ },
+ {
+  "q": "pediatric osteomyelitis",
+  "kw": "peds-osteomyelitis",
+  "d": "eent_derm_msk_peds",
+  "id": 452,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Pediatric Osteomyelitis - Clinical Recognition [In: Osteomyelitis]",
+   "Osteomyelitis [Recognition → Workup → Empiric Abx → Surgical → Oral Transition]",
+   "Peds Osteomyelitis — Do NOT [Critical pitfalls to avoid]"
+  ]
+ },
+ {
+  "q": "pediatric electrolyte emergencies",
+  "kw": "peds-electrolyte",
+  "d": "eent_derm_msk_peds",
+  "id": 453,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Electrolyte Emergencies (Peds) [Triage → Identify → Na/K/Ca/Glucose Pathways → Disposition]",
+   "Pediatric Electrolyte Emergencies Overview [In: Electrolyte Emergencies (Peds)]",
+   "Disposition [In: Electrolyte Emergencies (Peds)]"
+  ]
+ },
+ {
+  "q": "viral myositis in children",
+  "kw": "viral-myositis",
+  "d": "eent_derm_msk_peds",
+  "id": 454,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Adult Viral Myositis [In: Viral Myositis (BACM)]",
+   "Viral Myositis Assessment [In: Viral Myositis (BACM)]",
+   "Viral Myositis (BACM) [Assessment → Presentation → Workup → Risk Stratification → Treatment]"
+  ]
+ },
+ {
+  "q": "pediatric UTI diagnosis",
+  "kw": "uti-peds|peds uti",
+  "d": "eent_derm_msk_peds",
+  "id": 455,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Pediatric UTI — Use the Peds Pathway [In: Dysuria Hub]",
+   "VCUG Criteria [In: UTI (First Febrile) / Neonatal]",
+   "Steps Summary [In: Pediatric Appendicitis (PAS Pathway)]"
+  ]
+ },
+ {
+  "q": "pediatric constipation",
+  "kw": "peds-constipation",
+  "d": "eent_derm_msk_peds",
+  "id": 456,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Pediatric Constipation Red Flags [Warning signs for organic disease]",
+   "Pediatric Constipation [In: Constipation & Disimpaction]",
+   "Constipation & Disimpaction [Assessment → Red Flags → PEG/Enemas → Maintenance → Disposition]"
+  ]
+ },
+ {
+  "q": "pediatric sedation dosing",
+  "kw": "sedation",
+  "d": "eent_derm_msk_peds",
+  "id": 457,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Fentanyl [Opioid analgesic (synthetic) · Burns — pediatric intranasal]",
+   "Hydroxyzine (Vistaril, Atarax) [First-generation antihistamine (H1 antagonist) with anxiolytic effect · Pediatric pre- and post-operative sedation (labeled)]",
+   "Pediatric Procedural Sedation [In: Dexmedetomidine (Precedex)]"
+  ]
+ },
+ {
+  "q": "Henoch-Schonlein purpura",
+  "kw": "",
+  "d": "eent_derm_msk_peds",
+  "id": 458,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Thrombotic Thrombocytopenic Purpura (TTP) [Recognition → PLASMIC Score → ADAMTS13 → Plasma Exchange → Caplacizumab → Disposition]",
+   "Age >5 Years [Pathologic Lead Points by Age]",
+   "Lead Point Types [Pathologic Lead Points by Age]"
+  ]
+ },
+ {
+  "q": "pediatric head trauma PECARN",
+  "kw": "ct-decision|pecarn",
+  "d": "eent_derm_msk_peds",
+  "id": 459,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Pediatric Head Trauma: Overview [In: Pediatric Trauma]",
+   "PECARN Head CT Decision Rule [In: Pediatric Trauma]",
+   "3. Head Trauma [Pediatric Trauma Steps Summary]"
+  ]
+ },
+ {
+  "q": "generalized pruritus approach",
+  "kw": "pruritus",
+  "d": "eent_derm_msk_peds",
+  "id": 460,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Generalized Pruritus Hub [Sick Check → Rule In/Rule Out → Initial Bundle → Imaging → Dispo]",
+   "Cholestatic Pruritus — Obstruction + Infection Gate [In: Generalized Pruritus Hub]",
+   "Generalized Itching — Sick Check First [In: Generalized Pruritus Hub]"
+  ]
+ },
+ {
+  "q": "lymphadenopathy approach",
+  "kw": "lymphadenopathy",
+  "d": "eent_derm_msk_peds",
+  "id": 461,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Lymphadenopathy Hub [Sick Check → Rule In / Rule Out → Workup Bundle → Imaging → Dispo]",
+   "Genital Ulcer Differential [In: STI Comprehensive]",
+   "Acute Lymphadenopathy — Sick Check First [In: Lymphadenopathy Hub]"
+  ]
+ },
+ {
+  "q": "hidradenitis",
+  "kw": "hidradenitis",
+  "d": "eent_derm_msk_peds",
+  "id": 462,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Hidradenitis Suppurativa [Recognize → Red Flags → Stage & Score → Acute Flare → Ladder → Comorbidities → Disposition]",
+   "Hidradenitis Suppurativa: Recognize It [In: hidradenitis suppurativa]",
+   "Discharge — Referral + Written Flare Plan [In: hidradenitis suppurativa]"
+  ]
+ },
+ {
+  "q": "burn depth classification",
+  "kw": "burns",
+  "d": "eent_derm_msk_peds",
+  "id": 463,
+  "n": 6,
+  "rank": 2,
+  "top": [
+   "Burn Depth Classification [Five-Tier Assessment Guide]",
+   "Burn Depth Assessment [In: Burns Management]",
+   "Assessment Tips [Burn Depth Classification]"
+  ]
+ },
+ {
+  "q": "pressure ulcer staging",
+  "kw": "",
+  "d": "eent_derm_msk_peds",
+  "id": 464,
+  "n": 3,
+  "rank": 0,
+  "top": [
+   "Syphilis Staging [In: STI Comprehensive]",
+   "Chronic PAD Spectrum → CLTI [In: Acute Limb Ischemia & PAD]",
+   "Xylazine-Associated Wounds (XAW) [In: Xylazine Toxicity (\"Tranq\")]"
+  ]
+ },
+ {
+  "q": "shingles treatment",
+  "kw": "",
+  "d": "eent_derm_msk_peds",
+  "id": 465,
+  "n": 1,
+  "rank": 0,
+  "top": [
+   "Valacyclovir [Antiviral (nucleoside analog, prodrug of acyclovir) · Herpes zoster (shingles)]"
+  ]
+ },
+ {
+  "q": "suicide risk assessment",
+  "kw": "suicide",
+  "d": "psych_behavioral_misc",
+  "id": 466,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Suicide Risk Assessment [Screening → Risk Stratification → Safety Planning → Disposition → Special Populations]",
+   "Suicide Risk Assessment [In: Suicide Risk Assessment]",
+   "High-Risk Factor Assessment [In: Suicide Risk Assessment]"
+  ]
+ },
+ {
+  "q": "PTSD screening",
+  "kw": "ptsd",
+  "d": "psych_behavioral_misc",
+  "id": 467,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "PTSD Screening in the ED [Index Trauma → PC-PTSD-5/PCL-5 → ASD vs PTSD → Brief Intervention → Pharm Pearls → Referral]",
+   "PTSD Screening — ED Approach [In: PTSD Screening in the ED]",
+   "First-Line PTSD Pharmacotherapy [In: PTSD Screening in the ED]"
+  ]
+ },
+ {
+  "q": "acute psychosis workup",
+  "kw": "acute-psychosis|psychosis",
+  "d": "psych_behavioral_misc",
+  "id": 468,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Acute Psychosis Assessment [In: Acute Psychosis / First Break]",
+   "First-Break Psychosis Workup [In: Acute Psychosis / First Break]",
+   "Late-Onset Psychosis Workup [In: Acute Psychosis / First Break]"
+  ]
+ },
+ {
+  "q": "new onset psychosis medical causes",
+  "kw": "new-onset-psychosis|psychosis",
+  "d": "psych_behavioral_misc",
+  "id": 469,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "New Onset Psychosis Hub [Sick Check → Medical/Tox/Neuro/Autoimmune → Rescue → Workup → Dispo]",
+   "New Onset Psychosis Hub - Sick Check First [In: New Onset Psychosis Hub]",
+   "New Onset Psychosis Hub - Steps Summary [Safety, medical red flags, neuro/autoimmune, catatonia, workup, disposition]"
+  ]
+ },
+ {
+  "q": "capacity assessment",
+  "kw": "capacity",
+  "d": "psych_behavioral_misc",
+  "id": 470,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Capacity Assessment [Four Abilities → Understanding • Appreciation • Reasoning • Communication → Documentation]",
+   "Capacity Assessment [In: Capacity Assessment]",
+   "Capacity Determination [In: Capacity Assessment]"
+  ]
+ },
+ {
+  "q": "medical clearance of psychiatric patients",
+  "kw": "medical-clearance",
+  "d": "psych_behavioral_misc",
+  "id": 471,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Primary Psychiatric — Medical Clearance Gate [In: Behavior Change Hub]",
+   "Psychiatric History [In: Psych Medical Stability]",
+   "Disposition: Medical Admission [In: Organic vs Psychiatric Emergency]"
+  ]
+ },
+ {
+  "q": "psychiatric triage",
+  "kw": "psych-triage|psych",
+  "d": "psych_behavioral_misc",
+  "id": 472,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Psych Triage [In: Psych Triage]",
+   "Agitation Pathway [In: Psych Triage]",
+   "Altered Mental Status Pathway [In: Psych Triage]"
+  ]
+ },
+ {
+  "q": "catatonia lorazepam challenge",
+  "kw": "catatonia",
+  "d": "psych_behavioral_misc",
+  "id": 473,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Lorazepam Challenge [In: Catatonia]",
+   "No Lorazepam Response [In: Catatonia]",
+   "Partial Lorazepam Response [In: Catatonia]"
+  ]
+ },
+ {
+  "q": "eating disorders refeeding syndrome",
+  "kw": "eating-disorders|eating",
+  "d": "psych_behavioral_misc",
+  "id": 474,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Refeeding Syndrome [In: Eating Disorders Emergency]",
+   "Eating Disorders Emergency [Recognition → Medical Complications → MARSIPAN Risk → Refeeding → Psych Assessment → Disposition]",
+   "Eating Disorder Pathway [In: Psych Triage]"
+  ]
+ },
+ {
+  "q": "organic versus psychiatric causes of behavior change",
+  "kw": "organic-vs-psych|behavior-change|behavior",
+  "d": "psych_behavioral_misc",
+  "id": 475,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Acute Behavior Change — Sick Check First [In: Behavior Change Hub]",
+   "Primary Psychiatric — Cleared for Assessment [In: Behavior Change Hub]",
+   "Medical Conditions Mimicking Psychiatric Illness [Common organic causes by category]"
+  ]
+ },
+ {
+  "q": "involuntary hold criteria Texas",
+  "kw": "psych",
+  "d": "psych_behavioral_misc",
+  "id": 476,
+  "n": 6,
+  "rank": 3,
+  "top": [
+   "Involuntary Hold [In: Suicidal Patient]",
+   "Involuntary Treatment Considerations [In: Eating Disorders Emergency]",
+   "Psychiatric Admission / Hold Pathway [In: New Onset Psychosis Hub]"
+  ]
+ },
+ {
+  "q": "benzodiazepine withdrawal",
+  "kw": "alcohol-withdrawal|withdrawal",
+  "d": "psych_behavioral_misc",
+  "id": 477,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Alcohol Withdrawal [CIWA-Ar → PAWSS → Benzodiazepines → Phenobarbital → DTs → Wernicke]",
+   "Alcohol / Sedative Withdrawal — Benzodiazepines [In: Behavior Change Hub]",
+   "Stimulant, Withdrawal, or Hyperthermic Toxidrome: Benzodiazepines [In: State of Extreme Agitation with Aggression]"
+  ]
+ },
+ {
+  "q": "cannabis hyperemesis syndrome",
+  "kw": "chs",
+  "d": "psych_behavioral_misc",
+  "id": 478,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Cannabinoid Hyperemesis Syndrome [In: Cannabinoid Hyperemesis Syndrome]",
+   "Cannabinoid Hyperemesis Syndrome [In: Recurrent & Cyclical Vomiting]",
+   "Cannabis Cessation Counseling [In: Cannabinoid Hyperemesis Syndrome]"
+  ]
+ },
+ {
+  "q": "non-specific unwell elderly",
+  "kw": "nonspecific-unwell|unwell",
+  "d": "psych_behavioral_misc",
+  "id": 479,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Generally Unwell Elderly Hub [Sick Check → Source Hunt → Initial Bundle → Imaging → Dispo]",
+   "Adverse Drug Event — Address [In: Generally Unwell Elderly Hub]",
+   "The Generally Unwell Elder — Sick Check First [In: Generally Unwell Elderly Hub]"
+  ]
+ },
+ {
+  "q": "elder abuse screening",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 480,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Documentation Checklist for ED PTSD/ASD/SA/IPV Encounter [Trauma Resources & Hotlines]",
+   "NAT Screening in BRUE [TEN-4 FACES rule and abuse red flags]",
+   "Fracture Patterns in Abuse [In: Non-Accidental Trauma Screening]"
+  ]
+ },
+ {
+  "q": "intimate partner violence screening",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 481,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "IPV / Domestic Violence [In: PTSD Screening in the ED]",
+   "🛑 Do NOT forget IPV screening in spontaneous dissection [Cervical Artery Dissection — Do NOT]",
+   "Abdominal Trauma [In: Early Pregnancy RhoGAM Guidelines]"
+  ]
+ },
+ {
+  "q": "palliative care in the ED",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 482,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Palliative Care Approach [In: Rabies]",
+   "Transitions of Care [In: Rapid Code Status Conversation]",
+   "Disposition [In: Botulism]"
+  ]
+ },
+ {
+  "q": "mass casualty triage START",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 483,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Resuscitation — Reverse Triage [In: Electrocution & Lightning Injury]",
+   "🛑 Do NOT triage lightning casualties normally [Electrocution & Lightning — Do NOT]",
+   "2. Triage bleeding and procedure risk [Thrombocytopenia ED Steps]"
+  ]
+ },
+ {
+  "q": "EMS medical direction",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 484,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Critical History Elements [In: Organic vs Psychiatric Emergency]",
+   "Mandatory Reporting [In: Non-Accidental Trauma Screening]",
+   "Step 1 — Nystagmus Direction [HINTS Exam Technique]"
+  ]
+ },
+ {
+  "q": "EMTALA requirements",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 485,
+  "n": 5,
+  "rank": 0,
+  "top": [
+   "Federal Overlay [In: Dementia & Agitation]",
+   "Transfer to OB Facility [In: Precipitous Delivery]",
+   "EMTALA transfer distinction [Active Labor]"
+  ]
+ },
+ {
+  "q": "informed consent exceptions",
+  "kw": "capacity|consent",
+  "d": "psych_behavioral_misc",
+  "id": 486,
+  "n": 6,
+  "rank": 1,
+  "top": [
+   "Informed Consent Framework [In: Drug-Facilitated Sexual Assault]",
+   "1. Decide & consent [Procedure Steps]",
+   "Module 2: Consent & Safety [DFSA Workup]"
+  ]
+ },
+ {
+  "q": "biostatistics sensitivity specificity",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 487,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "2. Hunter Criteria Diagnosis [Serotonin Syndrome Steps Summary]",
+   "2. POCUS [PTA Drainage Steps Summary]",
+   "Additional Studies [SE Diagnostic Workup]"
+  ]
+ },
+ {
+  "q": "disaster preparedness radiation exposure",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 488,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Radiation Burns [In: Burns Management]",
+   "Key Dose Facts [Radiation Dose Reference Table]",
+   "Context [Choosing Wisely — CT Recommendations]"
+  ]
+ },
+ {
+  "q": "hazmat decontamination",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 489,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "4. GI Decontamination [Iron Overdose Steps Summary]",
+   "Module 3 — Decontamination [Salicylate Toxicity Steps Summary]",
+   "GI Decontamination [In: Calcium Channel Blocker Overdose]"
+  ]
+ },
+ {
+  "q": "quality improvement root cause analysis",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 490,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Prazosin (Minipress) [Alpha-1 adrenergic antagonist]",
+   "Ancillary Studies [Rabies Diagnostic Specimens & Interpretation]",
+   "Icatibant (Firazyr) [Bradykinin B2 Receptor Antagonist]"
+  ]
+ },
+ {
+  "q": "ED crowding boarding",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 491,
+  "n": 4,
+  "rank": 0,
+  "top": [
+   "Behavioral Plan [In: Dementia & Agitation]",
+   "ED Extubation Protocol [In: ED Extubation Protocol]",
+   "Immediate Safety [In: Dementia & Agitation]"
+  ]
+ },
+ {
+  "q": "ethics of refusing treatment against medical advice",
+  "kw": "capacity|ama",
+  "d": "psych_behavioral_misc",
+  "id": 492,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Ethical frame [Ethics / Disposition]",
+   "When discharge is not safe [Ethics / Disposition]",
+   "Medical Admission [In: Dementia & Agitation]"
+  ]
+ },
+ {
+  "q": "physician impairment reporting",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 493,
+  "n": 3,
+  "rank": 0,
+  "top": [
+   "Mandatory Reporting [In: Non-Accidental Trauma Screening]",
+   "Trauma / Non-Accidental Trauma [In: Crying Infant Hub]",
+   "Methadone Initiation Dosing [In: ED Methadone Management]"
+  ]
+ },
+ {
+  "q": "dysbarism decompression sickness",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 494,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Nitrous Oxide [In: Sedation Options]",
+   "Altitude Sickness [Lake Louise Score → AMS → HACE → HAPE → Treatment → Descent/Disposition]",
+   "Altitude Sickness — Steps [ED Evaluation & Management]"
+  ]
+ },
+ {
+  "q": "bioterrorism anthrax",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 495,
+  "n": 2,
+  "rank": 0,
+  "top": [
+   "Public Health Notification [In: Botulism]",
+   "🛑 Do NOT delay public health notification [Botulism — Do NOT]"
+  ]
+ },
+ {
+  "q": "nerve agent exposure",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 496,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Pralidoxime (2-PAM, Protopam Chloride) [Antidote — cholinesterase reactivator (oxime) · Nerve agent — IM / autoinjector]",
+   "Small Pupil: Miotic or Cholinergic [Pharmacologic Pupil]",
+   "Rule In / Rule Out — Pick the Thread [In: Proximal Weakness Hub]"
+  ]
+ },
+ {
+  "q": "radiation exposure acute radiation syndrome",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 497,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Radiation Burns [In: Burns Management]",
+   "Key Dose Facts [Radiation Dose Reference Table]",
+   "Advanced Imaging [In: dvt]"
+  ]
+ },
+ {
+  "q": "sedation reversal flumazenil",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 498,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Midazolam (Versed) [Benzodiazepine (short-acting) · Procedural sedation — cardioversion]",
+   "2. Sedation (Non-Intubated Patients) [Synchronized Cardioversion]",
+   "Midazolam (Versed) [In: Critical Care Drips]"
+  ]
+ },
+ {
+  "q": "telemedicine in emergency medicine",
+  "kw": "",
+  "d": "psych_behavioral_misc",
+  "id": 499,
+  "n": 6,
+  "rank": 0,
+  "top": [
+   "Admit — Neurosurgery or Medicine [In: Cervical Spine Pain (Non-Traumatic)]",
+   "Admit — Renal / Medicine [In: Peritoneal Dialysis Complications]",
+   "Nuclear Medicine Scan [In: Lower GI Bleed]"
+  ]
+ }
+]

@@ -4,6 +4,7 @@
 // 24 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
+import { RANSON_NODES, RANSON_CITATIONS } from '../new-content/acute-pancreatitis-ranson-nodes.js';
 
 interface Citation {
   num: number;
@@ -39,11 +40,12 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Severity Assessment',
-    body: '**Revised Atlanta Classification (2012):** [3]\n\nAssess for organ failure using Modified Marshall Score:\n• **Respiratory:** PaO₂/FiO₂ ratio\n• **Renal:** Creatinine\n• **Cardiovascular:** SBP (fluid-responsive vs vasopressor-dependent)\n\n**BISAP Score** (within 24h of admission): [4]\n• BUN >25 mg/dL\n• Impaired mental status (GCS <15)\n• SIRS (≥2 criteria)\n• Age >60 years\n• Pleural effusion\n\n**BISAP ≥3:** 12-30% mortality risk',
+    body: '**Revised Atlanta Classification (2012):** [3]\n\nAssess for organ failure using Modified Marshall Score:\n• **Respiratory:** PaO₂/FiO₂ ratio\n• **Renal:** Creatinine\n• **Cardiovascular:** SBP (fluid-responsive vs vasopressor-dependent)\n\n**BISAP Score** (within 24h of admission): [4]\n• BUN >25 mg/dL\n• Impaired mental status (GCS <15)\n• SIRS (≥2 criteria)\n• Age >60 years\n• Pleural effusion\n\n**BISAP ≥3:** 12-30% mortality risk\n\n**Ranson Criteria** (admission + 48 h): [Ranson Criteria](#/node/acute-pancreatitis-ranson-start)',
     citation: [3, 4],
     calculatorLinks: [
       { id: 'bisap', label: 'BISAP Score' },
       { id: 'modified-marshall', label: 'Modified Marshall Score' },
+      { id: 'ranson', label: 'Ranson Criteria' },
     ],
     options: [
       {
@@ -445,6 +447,7 @@ export const ACUTE_PANCREATITIS_NODES: DecisionNode[] = [
     recommendation: 'Management pathway complete. Ensure appropriate disposition and follow-up.',
   },
 
+  ...RANSON_NODES,
 ];
 
 export const ACUTE_PANCREATITIS_MODULE_LABELS = [
@@ -458,7 +461,7 @@ export const ACUTE_PANCREATITIS_MODULE_LABELS = [
 
 export const ACUTE_PANCREATITIS_CRITICAL_ACTIONS = [
   { text: 'Diagnosis requires 2 of 3: characteristic pain, lipase >3x ULN, imaging findings', nodeId: 'ap-start' },
-  { text: 'BISAP score ≥3 or Ranson ≥3 = severe pancreatitis (ICU candidate)', nodeId: 'ap-severity' },
+  { text: 'BISAP score ≥3 = high risk, ICU candidate. Ranson ≥3 flags severe disease (needs 48 h of data); it does not decide ICU on its own', nodeId: 'ap-severity' },
   { text: 'MODERATE fluid resuscitation: LR 5-10 mL/kg/hr (NOT aggressive 20 mL/kg - increases mortality)', nodeId: 'ap-moderate-resus' },
   { text: 'Goal-directed resuscitation: reassess q6h, target UOP 0.5-1 mL/kg/hr, HR <120, MAP 65-85', nodeId: 'ap-moderate-resus' },
   { text: 'Early feeding within 24h if tolerated (oral > enteral > parenteral)', nodeId: 'ap-mild-resus' },
@@ -491,4 +494,5 @@ export const ACUTE_PANCREATITIS_CITATIONS: Citation[] = [
   { num: 19, text: 'Wittau M, et al. Systematic review and meta-analysis of antibiotic prophylaxis in severe acute pancreatitis. Scand J Gastroenterol. 2011;46(3):261-270.' },
   { num: 20, text: 'Hollemans RA, et al. Superiority of Step-up Approach vs Open Necrosectomy in Long-term Follow-up of Patients With Necrotizing Pancreatitis. Gastroenterology. 2019;156(4):1016-1026.' },
   { num: 21, text: 'van Brunschot S, et al. Endoscopic or surgical step-up approach for infected necrotising pancreatitis: a multicentre randomised trial (TENSION). Lancet. 2018;391(10115):51-58.' },
+  ...RANSON_CITATIONS,
 ];
