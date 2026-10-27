@@ -514,6 +514,7 @@ export const TOOLBAR_CONFIGS = {
         { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'arth-stop' },
     ],
     'difficult-vascular-access': [
+        { id: 'us-iv', label: 'US IV', icon: '📐', action: 'calculator', target: 'us-iv', pinned: true },
         { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dva-steps' },
         { id: 'us-piv', label: 'US PIV', icon: '🩻', action: 'overlay', target: 'dva-us-piv' },
         { id: 'io-sites', label: 'IO Sites', icon: '🦴', action: 'overlay', target: 'dva-io-sites' },

@@ -7,7 +7,7 @@ const DB_VERSION = 4;
 
 // Bump this to force-clear all cached data on next app load.
 // Use when tree structure, drug data, or info pages change.
-export const DATA_VERSION = 743;
+export const DATA_VERSION = 744;
 const DATA_VERSION_KEY = 'medkitt-data-version';
 
 export type StoreName = 'drugs' | 'categories' | 'category_trees' | 'decision_nodes' | 'tree_citations' | 'sync_meta' | 'info_pages';

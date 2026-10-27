@@ -20,3 +20,8 @@ test('US IV discoverable in calculator search metadata with safeguards', () => {
   assert.ok(getAllCalculators().some(c=>c.id==='us-iv' && c.title==='US IV' && c.subtitle.includes('Ultrasound')));
   assert.match(US_IV_CALCULATOR.thresholdNote,/not a catheter-size recommendation/);
 });
+
+test('Difficult access pins US IV in its toolbar', async () => {
+ const { TOOLBAR_CONFIGS } = await import('../docs/data/toolbar-configs.js');
+ assert.ok(TOOLBAR_CONFIGS['difficult-vascular-access'].some(t => t.target === 'us-iv' && t.action === 'calculator' && t.pinned));
+});
