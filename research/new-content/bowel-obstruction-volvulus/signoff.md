@@ -127,3 +127,121 @@ Dr. Kitlowski (clinical audit):
 Flow Rider / reachability (when wired):
 - [ ] Every node reachable from start, zero orphans.
 - [ ] Toolbar and info-page references match the new citation numbers (7, 10, 13 retired).
+
+## Drug entries: diatrizoate (Gastrografin) for adhesive SBO (drugs-sbo-scad pass, 2026-10-27)
+
+Module `src/data/new-content/drugs-sbo-scad.ts`. Nothing wired, deployed, or pushed. The tree has no `#/drug/` link yet.
+
+**Source conflict on dose.**
+- Label (DailyMed setid 8c2340e4, SPL section dated August 2019): GI radiography only. Adult oral 30-90 mL. Oral or rectal only. Not for parenteral use.
+- Trial regimen (Cochrane Abbas 2007, CD004651.pub3): 100 mL orally or via NG, NG clamped 60 min (one trial 2-3 h), abdominal film at 4-6 h. 100 mL is above the label maximum.
+- Bologna 2018: contrast not in the colon at 24 h is highly indicative of failure. No volume stated in the text checked.
+- Cochrane pooled sensitivity 0.97, specificity 0.96 for 24 h colon contrast predicting resolution.
+
+**Decision needed (Andy):** consult dose (label 30-90 mL, or the 100 mL off-label trial dose) and NG clamp time (60 min or 2-3 h).
+
+**Safety items.**
+- Aspiration (label WARNINGS; Cochrane): empty stomach, NG drainage first, do not give to a patient who keeps vomiting.
+- "Do NOT give if strangulation, peritonitis, or perforation suspected": from the tree text, not a label item. Wording not re-verified against Bologna.
+- Label version: a Bracco ISI PDF dated 2024-10-02 exists. The DailyMed copy read is dated August 2019. Check for dosing or contraindication changes before signing.
+
+**Dr. Kitlowski (clinical audit).**
+- [ ] Confirm label version (2019 DailyMed vs 2024 Bracco ISI)
+- [ ] Confirm trial dose and clamp time against the Cochrane primary trials
+- [ ] Confirm strangulation / perforation exclusion wording
+
+---
+
+## Dr. Kitlowski audit (2026-10-27)
+
+**Verdict: REVISE. Not safe to deploy until the flagged items below are decided by Andy.** Andexanet is out of scope and was not touched. No commit, push, deploy, or supabase step was run. `tsc --noEmit --skipLibCheck --noUnusedLocals false` runs clean.
+
+### Primary sources opened this pass
+- ten Broek 2018 (WSES 2017 ASBO), full text: wjes.biomedcentral.com/articles/10.1186/s13017-018-0185-2. Read: lab section (CRP > 75, WBC > 10.000/mm3 as peritonitis markers, low sens/spec), water-soluble contrast section (24 h, "highly indicative of failure"), CT section (closed loop, ischemia, free fluid "suggest the need for surgery without delay"), non-operative section (72 h "safe and appropriate", duration "subject to debate", long tube vs NG). Table 5 and Fig. 2 (algorithm) are images or full-size tables not in the text; NOT verified.
+- Tian 2023 (WSES sigmoid volvulus), full text: wjes.biomedcentral.com/articles/10.1186/s13017-023-00502-x. Read Recs 2-10 and grades.
+- ESGE 2020 (van Hooft, Endoscopy 2020;52:389-407), Main Recommendations read from the Thieme page.
+- DailyMed Gastrografin label (setid 8c2340e4), read in full: page "Updated October 4, 2021", label Rev. August 2019.
+- Cochrane CD004651.pub3 (Abbas 2007): abstract only; full text paywalled.
+- Ranson 1976 (PMID 941075) abstract read in full. Ranson 1974 (PMID 4834279) and 1982 (PMID 7051819): PubMed metadata only, no abstract.
+- Crossref: all 13 consult DOIs resolve to the cited titles and years.
+- Secondary calculator pages (MDCalc snippet, medaptly) for Ranson gallstone cutoffs.
+
+### Auto-fixed in this pass
+1. **Strangulation vitals list, mis-attributed to [1]** (`src/data/trees/bowel-obstruction-volvulus.ts`, start node, strangulation node, nom-check node). The WSES 2017 text names peritonitis, strangulation and ischemia as trial contraindications. It does not list fever, tachycardia, leukocytosis, acidosis or continuous pain (grep of the full text: zero hits for each term). The directive is unchanged. The attribution now reads "clinical consensus; not listed in [1]". Andy still owns whether the list stays (see flagged items).
+2. **Gastrografin dilution, misread from the label** (`src/data/new-content/drugs-sbo-scad.ts`, GI radiography row). The old text said "dilute 1:1 for dehydrated or debilitated patients". The label says pediatric doses (30 or 60 mL) may be used in dehydrated or debilitated adults, 1:1 dilution is recommended for elderly cachectic patients, and pediatric doses may be diluted 1:1 if desired.
+3. **Thyroid caution, overstated** (same entry). The label reports thyroid storm after an intravascular agent and says a similar event could follow oral iodides. The entry said "reported with oral iodinated contrast".
+4. **IV line wording** (same entry). The label says an open IV line "may be advisable" in pediatric and severely debilitated patients. The entry said "maintain".
+5. **Aspiration and empty-stomach wording** (same entry). "Give only with an empty stomach" and "do not give to a patient who keeps vomiting" are not label text. They are now labelled as practice points with an unverified source.
+6. **Trial regimen marked UNVERIFIED** (same entry). The Cochrane abstract gives sensitivity 0.97, specificity 0.96 and the 24 h rule. It gives no volume, clamp time or film timing. The 100 mL, 60 min to 2-3 h and 4-6 h figures remain in the entry, labelled as drafted and not verified. They are NOT chosen here.
+7. **Label citation updated** to the DailyMed revision and update dates read this pass.
+
+### Verified, no change needed
+- Cochrane CD004651.pub3 abstract: 24 h colon contrast pooled sensitivity 0.97, specificity 0.96; no reduction in surgery (OR 0.81, p = 0.3); reduced hospital stay (WMD -1.83). The consult's Cochrane statement is accurate. Conflict C6 is partly resolved: the abstract is confirmed, the full text is not.
+- WSES 2023 Rec 4 (flexible endoscopy first-line when no ischemia or perforation; strong, low or very-low quality, 1C), Rec 5 (urgent resection for failed detorsion, non-viable or perforated colon; 5-25% present with ischemia, perforation, peritonitis or shock), Rec 6 (offer colectomy, as early as possible including index admission), Rec 7 (detorsion alone, sigmoidoplasty and mesosigmoidoplasty inferior and to be avoided), Rec 8 (endoscopic fixation for prohibitive risk; weak, 2C), Rec 9 (megacolon: subtotal colectomy). The tree's directives match these recommendations. Flat-tube after detorsion, abort criteria for ischemia, perforation or impending perforation, CT with IV contrast for ischemia, and the whirl sign are all confirmed. Mortality risk factors (age over 60, shock, prior episode) are confirmed (Bhatnagar, as cited in the 2023 text).
+- ESGE 2020 Recs 1, 2, 5 and 7: no prophylactic stent; stent only for symptomatic malignant LBO without perforation (strong, low quality); stent bridge to surgery as shared decision for curable left-sided cancer (strong, high-quality evidence); about 2 weeks before resection when bridging (weak, low quality); decompressing stoma valid if stenting expertise is unavailable (weak, low quality). The LBO node matches.
+- Ranson 1976 abstract confirms the non-gallstone admission cutoffs (age >55, glucose >200, WBC >16,000, LDH >350, AST >250 Sigma-Frankel) and the 48 h cutoffs (Hct fall >10 points, Ca <8, base deficit >4, BUN rise >5, sequestered fluid >6 L, PaO2 <60). The Ranson node and the calculator agree with it. No change needed.
+- PubMed metadata confirms the Ranson 1974, 1976 and 1982 PMIDs, journals, volumes and pages.
+- All 13 consult DOIs resolve in Crossref to the cited article.
+- Internal link targets: all node, tree, calculator and info links resolve, except the three acute-pancreatitis node IDs (ap-complications-q, ap-dispo-complicated, ap-severe-resus), which exist in `src/data/trees/acute-pancreatitis.ts`.
+
+### FLAGGED for Andy (not changed)
+
+**Patient-safety tier, decide before deploy:**
+- **F1. Gastrografin dose conflict.** Label oral adult dose is 30-90 mL. The trial dose in the drafted entry is 100 mL, which is above the label maximum. Two sources disagree, so Dr. K does not pick. The trial figure cannot be verified because the Cochrane full text is paywalled. Andy needs to supply or approve a source (full Cochrane text, or the primary trial).
+- **F2. Gastrografin route.** The label says oral or rectal only. NG use, which the trial regimen and the consult both describe, is off-label and not in the label. This needs an explicit decision and wording.
+- **F3. Surgery trigger, WBC 10,000 vs 15,000.** WSES 2017 gives WBC > 10.000/mm3 and CRP > 75 as peritonitis lab markers with low sensitivity and specificity. The text does not state them as non-operative failure criteria. Mapping them to a trial stop is an interpretation and a number clinicians act on. The 15,000 figure does not appear in the 2017 text. Andy decides.
+- **F4. 72 hours as a surgery trigger.** The 2017 text calls 72 h "safe and appropriate" and says duration is debated. It does not state "no resolution at 72 h means operate". Andy decides whether this stays a hard trigger.
+- **F5. Day-3 drainage above 500 mL.** Not found in the 2017 text. It may be in the algorithm figure (Fig. 2), which I could not read. Needs the figure checked by Andy.
+- **F6. Fever as stop and strangulation criterion** (C7, open Q1). Not in the 2017 text. Keep labelled, re-source, or remove.
+- **F7. CRP > 75 and free fluid > 500 mL.** Both are in the 2017 text (CRP as a peritonitis marker; free fluid without a number in the body). Add to the checkpoint or not.
+- **F8. Raised CPK predictor** (surgery node). Not in the 2017 text. Keep, source, or remove.
+- **F9. Closed loop directive** (treat as strangulation). The 2017 text says closed-loop signs "suggest the need for surgery without delay" with no grade. Okumura (cite 4) found no significance after adjustment. Andy owns the directive.
+- **F10. ICU node graded "definitive" with no source for its management.** Antibiotics and fluid volumes are unsourced. Grade inflation. Andy decides the grade and content.
+- **F11. Disposition directives** ("Admit for every obstruction managed here", ICU criteria, "do not discharge from ED") are unsourced clinical directives.
+- **F12. Sigmoid-surgery grading.** The result node is graded "definitive". WSES 2023 Rec 5 is strong but based on low or very-low quality evidence (1C). Andy decides whether to change the grade. I did not downgrade, per the Tier 1 rule.
+- **F13. Non-candidate list for non-operative trial** ("surgery within 6 weeks", "irreducible hernia", "signs of resolution at admission", "complete obstruction with no colonic air"). Not in the 2017 text as searched. Needs a source or removal.
+- **F14. "Recurrence is not changed by contrast" [1]** and Cochrane-related recurrence wording. Not found in the 2017 text passages checked, and not in the Cochrane abstract.
+- **F15. Cecal volvulus** has no cited management source. Keep as a labelled consensus directive, or source it.
+- **F16. Crohn cross-link** (`ibd-flare` node). Its IV steroid and imaging advice differs from this consult's SBO advice. Andy and the ibd-flare owner decide.
+
+**Citation gate (guideline-versions.md):** WSES 2017 (ten Broek 2018), WSES 2023 (Tian 2023) and ESGE 2020 are NOT in `~/Desktop/claude-brain/wikis/emergency-medicine/guideline-versions.md`. Under the gate I have not applied any new guideline-sourced number or grade change. Those items are below. DOIs were fetched this run (Crossref and the publisher pages): 10.1186/s13017-018-0185-2, 10.1186/s13017-023-00502-x, 10.1055/a-1140-3017. Andy or the table owner should add these rows before any guideline citation is auto-applied.
+
+**Verified numbers withheld pending gate clearance (apply only after Andy OKs the citation):**
+- Sigmoid: endoscopic detorsion effective in 60-95%, morbidity about 4%, mortality about 3% (WSES 2023). Long-term recurrence after endoscopic detorsion 43-75%. Upfront colectomy for presentation with ischemia, perforation, peritonitis or shock 5-25%.
+- Megacolon: 29-patient series, overall recurrence 36%; 6% if sigmoid-only versus 82% with megacolon (p = .005); no recurrence in the subtotal colectomy group.
+- Sigmoid grade for endoscopy: "strong recommendation based on low- or very-low-quality evidence, 1C". The consult currently says "low-quality evidence". Correct wording, flagged because of the gate.
+- Mortality risk factors for sigmoid volvulus: age over 60, shock on admission, prior episode (confirmed; already in consult).
+
+**Ranson (acute pancreatitis additions):**
+- **R1. Gallstone base deficit.** Nodes say ">4 mEq/L (one reference) vs >5 (other teaching)". The retrieved secondary calculators (MDCalc, medaptly) both give >5 mEq/L for gallstone. The 1982 primary review was not retrievable (no PubMed abstract). Andy decides. Calculator and nodes share the same conflict.
+- **R2. Gallstone admission and 48 h cutoffs** (age >70, WBC >18,000, glucose >220, LDH >400, Hct fall >10, BUN rise >2, Ca <8, sequestered fluid >4 L). Secondary sources agree; the primary 1982 review was not read. Mark provisional until read.
+- **R3. Gallstone AST cutoff** (C2) and the BUN ">2 after IV hydration" qualifier (C8). Unresolved.
+- **R4. Severe threshold at Ranson 3 or higher** ("commonly taught as severe"). Unsourced teaching point. Escalation threshold is Andy's call.
+- **R5. Non-gallstone set is now verified** against the 1976 abstract. Node text "verified against the 1976 abstract" is accurate.
+- **R6. "Do not de-escalate on the score alone"** (Ranson 0-2 result). A directive without its own source. Andy decides.
+
+**Drug entry and consult gaps:**
+- **D1. Diatrizoate (Gastrografin) entry is wired to nothing yet.** The consult has no `#/drug/` link. The entry needs an integrator decision (Andy) before registration.
+- **D2. Amlodipine, isosorbide mononitrate, and the diltiazem, verapamil and nitroglycerin additions** in `drugs-sbo-scad.ts` belong to the SCAD / vasospasm work. They were out of scope and NOT reviewed here.
+- **D3. Bracco ISI PDF dated 2024-10-02** not read. Dosing or contraindication changes since the 2019 and 2021 DailyMed text are unknown.
+
+**Other:**
+- **O1. Toolbar and info pages already appear wired** (`src/data/toolbar-configs.ts` imports `TOOLBAR_SBOV`; `src/data/categories.ts` and `info-pages.ts` reference the consult). The header still says "Not registered". Andy confirms which is live before deploy.
+- **O2. Not re-verified this pass:** cites 2, 3, 4, 5, 6, 14, 15 and 16 (only DOIs checked), cite 12 (6.8% and 7.5% perforation figures), Okumura's OR 0.895, and the Zielinski 2010 "100-patient cohort" claim.
+
+### Audit checklist status (Dr. Kitlowski items)
+- [x] Strangulation and surgery-trigger thresholds against the WSES 2017 text (results above; directives flagged F3-F8).
+- [x] Closed-loop directive and CT ischemia wording (CT wording matches the 2017 text; directive flagged F9).
+- [x] Non-operative trial checkpoint sequence (24 h film confirmed; 72 h softer than stated, F4; day-3 drainage not in the text, F5).
+- [x] Sigmoid pathway against WSES 2023 full text (matches; numbers withheld pending gate).
+- [x] Contrast safety wording (aspiration and do-not-give list; partly confirmed; route off-label, F2).
+- [x] Gastrografin label version (2019 Rev. with 2021 DailyMed update read; Bracco 2024 not read, D3).
+- [ ] Trial dose and clamp time against primary trials: NOT verified (F1).
+- [x] Strangulation and perforation exclusion wording: the perforation wording is a reasonable clinical extension; the 2017 text names peritonitis and ischemia, not perforation as such. Andy to confirm.
+
+### Signoff (Dr. Kitlowski)
+The core SBO logic is mostly sound. The sigmoid pathway matches WSES 2023 closely, the LBO stent guidance matches ESGE 2020, and the Ranson non-gallstone set is now primary-sourced. Three things stop me from calling this safe to deploy. The Gastrografin dose conflict (100 mL against a 30-90 mL label maximum) and the off-label NG route are patient-safety items I will not pick between. Several surgery-trigger numbers (72 h, 500 mL on day 3, fever, CPK) are not stated in the WSES 2017 text as written, so they are interpretations and need Andy's decision. The gallstone Ranson base-deficit cutoff conflicts across the sources I could reach. Once Andy decides F1 through F8 and R1, this can be re-audited quickly. The auto-fixes above only correct attributions and label wording to match the primary sources.
+
+## Fixed after Dr. K audit (2026-10-27, mechanical only)
+- Diatrizoate (Gastrografin) entry in `src/data/new-content/drugs-sbo-scad.ts` rewritten to show only sourced numbers. Label oral adult dose 30-90 mL (DailyMed setid 8c2340e4, read 2026-10-27) and, as a labelled off-label trial regimen, Cochrane CD004651 (100 mL, NG clamped 60 min, radiograph window 4-24 h; full text via PMC6465054). The 100 mL vs 90 mL label maximum conflict is shown, not resolved. The unsourced "4-6 h film", "2-3 h clamp" and Bologna colon-at-24-h claims were removed. NG use is flagged off-label (label: oral or rectal only). Timing per local protocol.
+- `src/data/trees/bowel-obstruction-volvulus.ts`: draft and sign-off wording removed from node text and the stop-criteria list. "Fever" is described as clinical judgment, not a sourced threshold. No number changed.

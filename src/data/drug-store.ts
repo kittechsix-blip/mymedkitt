@@ -2,6 +2,11 @@
 // Centralized drug data for all medications used across decision trees.
 // Each entry includes class, indications, dosing, contraindications, and citations.
 
+// New-content drug modules (type-only imports back into this file, so no runtime cycle).
+import { DRUGS_HTN_PHEO, ADDITIONS_HTN_PHEO } from './new-content/drugs-htn.js';
+import { DRUGS_ARDS_BCT, ADDITIONS_ARDS_BCT } from './new-content/drugs-ards-bct.js';
+import { DRUGS_SBO_SCAD, ADDITIONS_SBO_SCAD } from './new-content/drugs-sbo-scad.js';
+
 export interface WeightCalc {
   dosePerKg: number;       // dose per kg (e.g., 0.6 for 0.6 mg/kg)
   unit: string;            // "mg", "mcg", "units", etc.
@@ -14784,7 +14789,20 @@ export const ALL_DRUGS: DrugEntry[] = [
   DICLOFENAC,
   GADOBUTROL,
   GADOTERATE,
+  ...DRUGS_HTN_PHEO,
+  ...DRUGS_ARDS_BCT,
+  ...DRUGS_SBO_SCAD,
 ];
+
+// Additive dosing rows from the new-content modules. Existing doses are never edited or removed.
+for (const add of [...ADDITIONS_HTN_PHEO, ...ADDITIONS_ARDS_BCT, ...ADDITIONS_SBO_SCAD]) {
+  const target = ALL_DRUGS.find(d => d.id === add.drugId);
+  if (!target) throw new Error(`new-content dosing addition targets unknown drug id: ${add.drugId}`);
+  target.dosing.push(...add.dosing);
+  for (const ind of add.indications ?? []) {
+    if (!target.indications.includes(ind)) target.indications.push(ind);
+  }
+}
 
 const DRUG_MAP: Record<string, DrugEntry> = {};
 for (const drug of ALL_DRUGS) {
@@ -15029,6 +15047,12 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/carbamazepine|tegretol|carbatrol|equetro/i, 'carbamazepine'],
   [/oxcarbazepine|trileptal|oxtellar/i, 'oxcarbazepine'],
   [/lamotrigine|lamictal/i, 'lamotrigine'],
+  [/phenoxybenzamine|dibenzyline/i, 'phenoxybenzamine'],
+  [/cisatracurium|nimbex/i, 'cisatracurium'],
+  [/ropivacaine|naropin/i, 'ropivacaine'],
+  [/diatrizoate|gastrografin/i, 'diatrizoate'],
+  [/amlodipine|norvasc/i, 'amlodipine'],
+  [/isosorbide.?mononitrate|\bISMN\b|imdur|monoket/i, 'isosorbide-mononitrate'],
 ];
 
 /** Try to find a drug store ID from a drug name string. Returns undefined if no match. */

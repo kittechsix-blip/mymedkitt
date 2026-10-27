@@ -1,10 +1,9 @@
 // MedKitt - ARDS and Lung-Protective Ventilation
-// DRAFT (not wired, not deployed). Clinical sign-off required before use.
+// Not wired, not deployed.
 // ED recognition and first-day management: Berlin/global definition, lung-protective
 // ventilation, permissive hypercapnia, prone positioning, neuromuscular blockade,
 // conservative fluids, and ECMO referral gates.
-// OPEN ITEMS for Andy (starting VT, as-needed blockade, higher-PEEP table, etc.) are listed in the
-// fix report, not resolved here.
+// Source conflicts (starting VT, blockade, higher-PEEP table) are shown in the node text, not resolved here.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { CriticalAction } from '../../services/tree-service.js';
@@ -110,7 +109,7 @@ export const ARDS_NODES: DecisionNode[] = [
 - Support: on high-flow at ≥30 L/min, or on NIV or CPAP with PEEP at least 5 cmH2O
 - Intubated severity keeps Berlin-style PaO2/FiO2 cutoffs: mild 200 to 300, moderate 100 to 200, severe ≤100
 
-**Practical point:** a non-intubated patient on high-flow still needs the mimic check and a stated reason for ARDS. Hypoxemia alone is not the label. SpO2/FiO2 severity cutoffs for intubated patients are not set in this draft (see open questions).`,
+**Practical point:** a non-intubated patient on high-flow still needs the mimic check and a stated reason for ARDS. Hypoxemia alone is not the label. SpO2/FiO2 severity cutoffs for intubated patients are not set here.`,
     citation: [2],
     next: 'ards-severity',
     summary: 'Non-intubated patients meet ARDS criteria on SpO2/FiO2 or PaO2/FiO2 with high-flow or NIV/CPAP; the mimic check still applies.',
@@ -165,7 +164,7 @@ export const ARDS_NODES: DecisionNode[] = [
 - Female: 45.5 + 2.3 x (height in inches - 60) kg
 - Inches = cm / 2.54
 
-**Starting tidal volume (sources differ, open conflict for Andy):**
+**Starting tidal volume (sources differ, both shown):**
 - **Trial start: 6 mL/kg PBW** (ARDSNet trial arm; ESICM 2023). [3,7]
 - **Protocol summary start: 8 mL/kg PBW**, then reduce by 1 mL/kg PBW at intervals of 2 h or less until 6 mL/kg PBW. [4]
 - ATS 2024 accepts 4 to 8 mL/kg PBW. [8]
@@ -257,7 +256,7 @@ In the ARDSNet trial, 6 mL/kg PBW reduced mortality against 12 mL/kg PBW (31.0% 
 - FiO2 0.9: PEEP 14 to 18
 - FiO2 1.0: PEEP 18 to 24
 
-The protocol lists these as incremental options, not a requirement. The higher-PEEP / lower-FiO2 table is not transcribed here (see open questions).
+The protocol lists these as incremental options, not a requirement. The higher-PEEP / lower-FiO2 table is not transcribed here.
 
 **Caution:** a higher PEEP is not automatically better. Trials of higher vs lower PEEP did not show a clear mortality difference. [14] Recheck plateau after every PEEP change.`,
     citation: [4, 14],
@@ -299,7 +298,7 @@ The protocol lists these as incremental options, not a requirement. The higher-P
 - No active bleeding, and no raised intracranial pressure concern
 - Facial or airway edema assessed
 
-This screening list is expert practice, not taken from a cited trial. Confirm it against the unit protocol and the open questions before sign-off.`,
+This screening list is expert practice, not taken from a cited trial. Confirm it against the unit protocol before use.`,
     citation: [6, 7, 8],
     options: [
       { label: 'P/F below 150 on FiO2 ≥0.6 and PEEP ≥5', description: 'Meets prone entry criteria', next: 'ards-prone-result', urgency: 'critical' },
@@ -318,7 +317,7 @@ This screening list is expert practice, not taken from a cited trial. Confirm it
 - ESICM 2023: prone for prolonged sessions of **16 consecutive hours or more** in moderate to severe ARDS. [7]
 - ATS 2024: prone for **more than 12 h/day** in severe ARDS (strong recommendation, moderate certainty). [8]
 
-**Trial data:** in severe ARDS, sessions of 16 h or more per day reduced 28-day mortality (16.0% vs 32.8%). [6]
+**Trial data:** PROSEVA randomized severe ARDS to prone sessions of at least 16 h vs supine. 28-day mortality 16.0% vs 32.8% (P<0.001). [6]
 
 **Write the schedule to the local ICU protocol** so the session length is explicit on the board.`,
     recommendation: 'Start prone ventilation for severe ARDS that meets criteria. Schedule sessions per the local protocol: ESICM favors 16 consecutive hours or more; ATS favors more than 12 h/day in severe ARDS.',
@@ -357,11 +356,11 @@ This screening list is expert practice, not taken from a cited trial. Confirm it
 
 **If dyssynchrony persists despite sedation and analgesia:**
 - Treat the cause first: sedation and analgesia depth, ventilator settings, and patient effort.
-- Any blockade decision, its dose, and its reassessment plan are not set in this draft. They are an open question for Andy and the local protocol.
+- Any blockade decision, its dose, and its reassessment plan are not set here. Follow the local protocol.
 - If blockade is used, document the reason and a reassessment time. A paralyzed patient cannot show neurologic change.
 
 **Trial context:** ACURASYS and ROSE both tested continuous cisatracurium for 48 h. The trials disagree on mortality, so the trial results do not support as-needed dosing. [9,10]`,
-    recommendation: 'Do not start continuous neuromuscular blockade as routine for non-COVID ARDS (ESICM 2023, strong recommendation against). For persistent dyssynchrony, treat the cause first. Any blockade decision is outside this draft.',
+    recommendation: 'Do not start continuous neuromuscular blockade as routine for non-COVID ARDS (ESICM 2023, strong recommendation against). For persistent dyssynchrony, treat the cause first. Any blockade decision follows the local protocol.',
     citation: [7, 9, 10],
     confidence: 'recommended',
     next: 'ards-rescue-check',

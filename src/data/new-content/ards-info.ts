@@ -49,7 +49,7 @@ export const INFO_PAGES_ARDS: Record<string, InfoPage> = {
     citations: [
       { num: 1, text: 'ARDS Definition Task Force. Acute respiratory distress syndrome: the Berlin Definition. JAMA. 2012;307(23):2526-2533.' },
       { num: 3, text: 'ARDS Network. Ventilation with lower tidal volumes as compared with traditional tidal volumes for acute lung injury and the acute respiratory distress syndrome. N Engl J Med. 2000;342(18):1301-1308.' },
-      { num: 4, text: 'NHLBI ARDS Clinical Network. Mechanical Ventilation Protocol Summary (July 2008 update).' },
+      { num: 4, text: 'NHLBI ARDS Clinical Network. Mechanical Ventilation Protocol Summary (July 2008 update). ardsnet.org/files/ventilator_protocol_2008-07.pdf.' },
       { num: 6, text: 'Guerin C, Reignier J, Richard JC, et al. Prone positioning in severe acute respiratory distress syndrome. N Engl J Med. 2013;368(23):2159-2168.' },
       { num: 7, text: 'Grasselli G, et al. ESICM guidelines on acute respiratory distress syndrome: definition, phenotyping and respiratory support strategies. Intensive Care Med. 2023;49(7):727-759.' },
       { num: 8, text: 'Qadir N, Sahetya S, Munshi L, et al. An Update on Management of Adult Patients with Acute Respiratory Distress Syndrome: An Official American Thoracic Society Clinical Practice Guideline. Am J Respir Crit Care Med. 2024;209(1):24-36.' },
@@ -97,7 +97,7 @@ export const INFO_PAGES_ARDS: Record<string, InfoPage> = {
     citations: [
       { num: 1, text: 'ARDS Definition Task Force. Acute respiratory distress syndrome: the Berlin Definition. JAMA. 2012;307(23):2526-2533.' },
       { num: 3, text: 'ARDS Network. Ventilation with lower tidal volumes as compared with traditional tidal volumes for acute lung injury and the acute respiratory distress syndrome. N Engl J Med. 2000;342(18):1301-1308.' },
-      { num: 4, text: 'NHLBI ARDS Clinical Network. Mechanical Ventilation Protocol Summary (July 2008 update).' },
+      { num: 4, text: 'NHLBI ARDS Clinical Network. Mechanical Ventilation Protocol Summary (July 2008 update). ardsnet.org/files/ventilator_protocol_2008-07.pdf.' },
       { num: 6, text: 'Guerin C, Reignier J, Richard JC, et al. Prone positioning in severe acute respiratory distress syndrome. N Engl J Med. 2013;368(23):2159-2168.' },
       { num: 12, text: 'Wiedemann HP, Wheeler AP, Bernard GR, et al. Comparison of two fluid-management strategies in acute lung injury. N Engl J Med. 2006;354(24):2564-2575.' },
       { num: 7, text: 'Grasselli G, et al. ESICM guidelines on acute respiratory distress syndrome: definition, phenotyping and respiratory support strategies. Intensive Care Med. 2023;49(7):727-759.' },

@@ -155,3 +155,61 @@ Statements in the ARDS content that have no citation of their own or that are ex
 ## Open questions for the integrator
 - `calculator.ts` must register `ARDS_PF_BERLIN_CALCULATOR` and export the `CalculatorDefinition` interface. The file currently imports it, but that is another session's change; confirm it is wired.
 - The new `support` select uses points 0 to 3 with `hideOptionPoints: true`, the same pattern as `mma` and `hcy` in the B12 calculator. Confirm the renderer does not sum select points into a score for this calculator (`results` is empty; `computeResult` reads raw values).
+
+## Drug-entry conflicts added at wiring (2026-10-27, both sources shown, none resolved)
+Source: `src/data/new-content/drugs-ards-bct.ts`. Cisatracurium conflict is above; this adds the ropivacaine item and open-text gaps.
+- **Cisatracurium ICU rate:** label 3 mcg/kg/min (0.5-10.2) vs ACURASYS/ROSE fixed 37.5 mg/h. At 70 kg the fixed rate is 8.9 mcg/kg/min, about 3x the label typical 12.6 mg/h. Under about 61 kg it exceeds the label top rate. Both shown; no blockade dose is linked from the ARDS tree.
+- **ACURASYS and ROSE regimens** were confirmed from abstracts and summaries, not the full NEJM text. Open the full texts before sign-off.
+- **SCCM 2026 and ATS 2024 positions** come from secondary summaries, not full re-reads.
+
+## Dr. Kitlowski audit, 2026-10-27 (verdict: REVISE)
+
+Scope: `ards.ts`, `ards-info.ts`, `ards-toolbar.ts`, both ARDS calculators, the ARDS signoff, and the cisatracurium entry (the only ARDS-relevant drug entry added). Ropivacaine and the ketorolac addition belong to the blunt chest trauma consult and were not audited here. The ARDS tree links no drugs.
+
+### Auto-fixed in this pass
+1. `src/data/trees/ards.ts`, `ards-prone-result`, "Trial data" line: reworded to the PROSEVA design (prone sessions of at least 16 h vs supine; 28-day mortality 16.0% vs 32.8%). Numbers unchanged. [6]
+2. `src/data/new-content/ards-info.ts`, citation 4 (in `ards-stop` and `ards-steps`): added the ardsnet.org URL to match the full citation in `ARDS_CITATIONS`. Not a guideline in the citation gate table; URL fetched this run.
+
+No dose, threshold, directive, or guideline citation was changed.
+
+### Verified against primary or near-primary text this pass
+- **ARDSNet 2008 protocol summary (PDF, fetched):** initial VT 8 mL/kg PBW, reduce by 1 mL/kg at intervals of 2 h or less to 6; initial rate not above 35/min; plateau at or below 30 checked at least q4h and after each change; plateau above 30 reduce by 1 mL/kg to a minimum of 4; pH goal 7.30 to 7.45; pH 7.15 to 7.30 raise RR to a maximum of 35 until pH above 7.30 or PaCO2 below 25; pH below 7.15 RR to 35 then VT up in 1 mL/kg steps (plateau may exceed 30); "May give NaHCO3"; PaO2 55 to 80 or SpO2 88 to 95; minimum PEEP 5; lower-PEEP/higher-FiO2 pairs match the tree. **Open question 12 (bicarbonate) is resolved: the protocol says "may".**
+- **ARDSNet 2000 (PubMed abstract):** 6 vs 12 mL/kg PBW design; mortality 31.0% in the low-VT arm (comparator 39.8% not re-read).
+- **ATS 2024 (PMC, fetched):** VT 4 to 8 mL/kg PBW and plateau below 30 (strong, moderate certainty); prone more than 12 h/day in severe ARDS (strong, moderate certainty); neuromuscular blockade suggested in early severe ARDS (conditional, low certainty). The tree's ATS prone line matches.
+- **ESICM 2023 (secondary quotes of the primary, PMC/summaries):** prone for prolonged sessions of 16 consecutive hours or more in moderate to severe ARDS; "We recommend against the routine use of continuous infusions of NMBA ... moderate-to-severe ARDS not due to COVID-19" (listed as Recommendation 8, not 8.1). The ESICM VT statement is summarized as 4 to 8 mL/kg PBW.
+- **PROSEVA (NEJM 2013 abstract):** entry P/F below 150 on FiO2 0.6 or more, PEEP 5 or more, VT near 6; prone sessions of at least 16 h vs supine; 28-day mortality 16.0% vs 32.8% (P<0.001).
+- **Berlin (JAMA 2012 via PubMed):** mortality 27% (24 to 30), 32% (29 to 34), 45% (42 to 48). Cutoffs match the calculator. Mild can be delivered noninvasively; moderate and severe are not graded on noninvasive support.
+- **Global definition 2023 (Matthay 2024, PMC table; LITFL):** intubated mild 200 to 300, moderate 100 to 200, severe 100 or less match the tree. SpO2:FiO2 cutoffs exist in the source (mild 235 to 315, moderate 148 to 235, severe 148 or less when SpO2 at or below 97%); the tree says they are "not set" (omission, see flag F5).
+- **EOLIA (secondary summaries of NEJM 2018):** 60-day mortality 35% vs 46% (P=0.09); trial stopped early for futility (confirmed). Entry: P/F below 50 with FiO2 above 0.8 for more than 3 h; P/F below 80 for more than 6 h; pH below 7.25 with PaCO2 above 60 for more than 6 h.
+- **ACURASYS and ROSE (PMC tables):** ACURASYS 90-day mortality 56/177 (31.6%) vs 66/162 (40.7%); ROSE 213 (42.5%) vs 216 (42.8%). Matches the tree and drug entry.
+- **FACTT (NEJM 2006 abstract):** 60-day mortality 25.5% vs 28.4% (P=0.30). The ventilator-free-day and cumulative-balance figures were not re-read.
+- **Amato 2015 (PubMed abstract):** driving pressure was the ventilation variable most strongly associated with survival. The tree wording is accurate.
+- **Cisatracurium label (DailyMed set d90090b6-f8d6-ba32-018c-f4109ff43729, AbbVie, revised 10/2019, version 10):** ICU infusion 3 mcg/kg/min (range 0.5 to 10.2); "spontaneous recovery after the initial bolus" before infusion; no tachyphylaxis up to 3 h; ICU infusion up to 6 days; 10 mL multiple-dose vials with benzyl alcohol contraindicated under 1 month and in low-birth-weight infants. Citation setid matches.
+- **Arithmetic:** 3 mcg/kg/min at 70 kg = 12.6 mg/h. 37.5 mg/h at 70 kg = 8.9 mcg/kg/min. Fixed rate exceeds the label top (10.2) below about 61 kg.
+
+### Flagged for Andy (not changed; numbers or directives)
+- **F1. Starting VT attribution (C1).** `ards-vent-set` and critical action 2 attribute the 6 mL/kg PBW start to ESICM 2023 [7]. The ESICM summaries available here give 4 to 8 mL/kg PBW, not a start of 6. The 6 mL/kg start is the ARDSNet 2000 trial arm; the 8 mL/kg start is the 2008 protocol. The ESICM primary VT text was not re-read. Decision: which start is the default and how it is attributed. Calculator `thresholdNote`, severe/moderate/mild management bullets ("Protective VT at 6 mL/kg PBW"), and `ards-stop` follow the same question.
+- **F2. Plateau below 25 wording (`ards-vt-check`, `plateauLine` in the PBW calculator).** Tree says "may raise VT"; ARDSNet 2008 says "increase VT by 1 mL/kg until Pplat above 25 or VT 6." This is a titration directive, so it is flagged, not edited.
+- **F3. ATS 2024 neuromuscular blockade omitted (`ards-nmb`, `ards-nmb-check`).** ATS 2024 suggests NMB in early severe ARDS (conditional, low certainty). The tree says "not routine" and cites only ESICM. The conflict is real: the node directive should show both or state the ATS position. Andy decides.
+- **F4. ESICM recommendation number.** The tree and drug entry cite "Recommendation 8.1" (`ards-nmb-check`). The available text shows "Recommendation 8." The ESICM 2023 citation is not in `guideline-versions.md`, so the citation gate blocks auto-correction. Flagged.
+- **F5. EOLIA gate (`ards-rescue-check`, `ards-ecmo-referral`).** EOLIA's P/F below 50 gate requires FiO2 above 0.8; the tree omits this. The PaCO2 inequality (60 or more in tree, above 60 in the secondary summary) is not resolved. Flagged; also see C10 (ecmo.ts threshold).
+- **F6. Cisatracurium "re-bolus before starting the infusion" (drug entry, ICU rate row).** The label text retrieved says infusion may follow "spontaneous recovery after the initial bolus." It does not say to re-bolus. This is a dosing instruction; flagged for removal or confirmation.
+- **F7. Cisatracurium label set.** The cited set (d90090b6) is version 10, revised 10/2019. A second AbbVie NIMBEX set (3db3b76c-3e5a-456e-46a8-456fde1e6195) appeared in search. Confirm which is current before the citation is relied on.
+- **F8. Unverified drug-entry claims.** ROSE serious cardiovascular events 14 vs 4 (P=0.02) and ACURASYS rescue bolus 20 mg for plateau above 32 cmH2O for over 10 min were not found in the sources read. Verify against full NEJM text before sign-off.
+- **F9. Cisatracurium ICU rate conflict.** Label 3 mcg/kg/min vs trial fixed 37.5 mg/h remains open (as above). No blockade dose is linked from the ARDS tree; the node should not gain a dose without Andy's decision.
+- **F10. Mild-capped Berlin result (C8).** On CPAP or NIV with P/F 200 or below, the calculator labels the result "Mild ARDS" and shows the invasive-cohort mild mortality (27%). Berlin does not classify moderate or severe without invasive ventilation, but a patient with P/F 80 on CPAP is labelled mild. Andy decides the label and whether the 27% figure stays.
+- **F11. Prone gate (C9) and prone population wording (C3).** `ards-prone-result` body says "moderate to severe"; its `recommendation` says "severe". ESICM uses moderate to severe. Andy decides which wording the directive uses. The prone node does not restrict entry to invasive support; the calculator does.
+- **F12. Other open items unchanged:** C5 driving pressure cutoff, C6 PEEP table, C7 global severity grading for non-intubated patients, C10 ECMO threshold alignment with `ecmo.ts`, and the `ards-global-2023` SpO2:FiO2 omission (F5 above lists the cutoffs).
+
+### Unsourced statements
+The list above (in "Unsourced statements") is unchanged. Items checked this pass: the ARDSNet pH and bicarbonate statements are now sourced (resolved). The "stopped for futility" claim is now sourced. The "driving pressure most associated with survival" claim is now sourced.
+
+### Verdict and signoff
+**REVISE.** The numbers the consult states are, with two exceptions, traceable to the primary sources read here (ARDSNet 2008, ATS 2024, PROSEVA, Berlin, EOLIA, ACURASYS, ROSE, label). Not safe to deploy until Andy decides F1 (starting VT default and attribution), F3 (ATS NMB position), and F5 (EOLIA gate), and the cisatracurium "re-bolus" line (F6) is confirmed or removed. Once those decisions are recorded, this should move to APPROVE with the remaining flags tracked. No deploy was run in this pass.
+
+Signoff (Dr. Kitlowski): The ARDS ventilator and oxygenation content is largely right, and the ARDSNet protocol confirms it line by line. The starting tidal volume is attributed to the wrong guideline, and the blockade position omits a conditional recommendation from ATS. Those are Andy's calls, and I will not pick a number for him. Fix the re-bolus line, settle the 6 or 8 question, and bring the blockade and ECMO gates to me again. Then we can talk about APPROVE.
+
+## Fixed after Dr. K audit (2026-10-27, mechanical only)
+- `src/data/new-content/drugs-ards-bct.ts` ropivacaine: "Surgical anesthesia (label)" row corrected to label Table 1 (lumbar epidural 0.5% 75-150 mg; 0.75% 113-188 mg; 1% 150-200 mg). Epidural row: "Label MRHD 770 mg/24 h" reworded to "well tolerated" (note: label Section 8.1 also uses "MRHD of 770 mg/24 hours for epidural use"; left as a flag for Dr. K).
+- Cisatracurium ICU row: "re-bolus before starting the infusion" reworded to conditional, per label ("it may be necessary to re-administer a bolus dose").
+- `src/data/trees/ards.ts`: draft and sign-off wording removed from node text and header. Source conflicts (starting VT, blockade) are still shown, not resolved. No number changed.

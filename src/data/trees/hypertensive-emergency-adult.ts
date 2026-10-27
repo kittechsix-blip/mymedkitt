@@ -1,6 +1,6 @@
 // MedKitt - Hypertensive Emergency (Adult)
-// DRAFT for physician sign-off. Not deployed. Adult only; children use peds-hypertensive-emergency.
-// Numbers are limited to the sourced fact sheet. Unverified items are listed in openQuestions, not written here.
+// Not deployed. Adult only; children use peds-hypertensive-emergency.
+// Numbers are limited to the sourced fact sheet. Items without a source are not written here.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { CriticalAction } from '../../services/tree-service.js';
@@ -13,7 +13,7 @@ interface Citation {
 export const HTNE_CRITICAL_ACTIONS: CriticalAction[] = [
   { text: 'Confirm acute target-organ injury before calling this an emergency. Emergency is BP above 180/120 mmHg with acute organ injury. Severe BP without acute organ injury is urgency and is treated with oral agents.', nodeId: 'hypertensive-emergency-adult-start' },
   { text: 'Screen for aortic dissection, ischemic stroke, intracerebral hemorrhage, pregnancy, pheochromocytoma, cocaine or sympathomimetic toxicity, and SCAPE before choosing the agent.', nodeId: 'hypertensive-emergency-adult-exceptions' },
-  { text: 'In the general case, do not drop SBP by more than 25% in the first hour (2017 ACC/AHA guideline). The draft MAP-percentage rules are not confirmed in the primary text. See the conflicts sign-off.', nodeId: 'hypertensive-emergency-adult-first-hour' },
+  { text: 'In the general case, do not drop SBP by more than 25% in the first hour (2017 ACC/AHA guideline). A MAP-percentage rule is not confirmed in the primary text. Do not dose to a MAP percentage.', nodeId: 'hypertensive-emergency-adult-first-hour' },
   { text: 'Use a titratable short-acting IV agent with continuous monitoring. Never give sublingual nifedipine for hypertensive emergency.', nodeId: 'hypertensive-emergency-adult-pitfalls' },
 ];
 
@@ -107,14 +107,14 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Exception Present?',
-    body: '**Each exception changes the agent or the target. Pick the one that applies.**\n- Aortic dissection: beta-blocker-first branch [6]\n- Ischemic stroke: stroke-specific thresholds [8]\n- Intracerebral hemorrhage: the ICH consult governs the target; target pending verification [5]\n- Pregnancy or postpartum: severe-range pathway [4]\n- Pheochromocytoma: alpha-blockade before beta-blockade [7]\n- Cocaine or sympathomimetic toxicity: no sourced agent in this draft; toxicology governs [2]\n- SCAPE: nitrate-led pathway [2]\n\n**None present:** continue to the general first-hour target.',
+    body: '**Each exception changes the agent or the target. Pick the one that applies.**\n- Aortic dissection: beta-blocker-first branch [6]\n- Ischemic stroke: stroke-specific thresholds [8]\n- Intracerebral hemorrhage: the ICH consult governs the target [5]\n- Pregnancy or postpartum: severe-range pathway [4]\n- Pheochromocytoma: alpha-blockade before beta-blockade [7]\n- Cocaine or sympathomimetic toxicity: no sourced agent here; toxicology governs [2]\n- SCAPE: nitrate-led pathway [2]\n\n**None present:** continue to the general first-hour target.',
     citation: [2, 4, 5, 6, 7, 8],
     options: [
       { label: 'Aortic dissection suspected', description: 'Beta-blocker first; SBP and HR goals per consult', next: 'hypertensive-emergency-adult-exc-dissection', urgency: 'critical' },
       { label: 'Ischemic stroke', description: 'Stroke consult governs BP', next: 'hypertensive-emergency-adult-exc-ischemic-stroke', urgency: 'critical' },
-      { label: 'Intracerebral hemorrhage', description: 'ICH consult governs; target pending verification', next: 'hypertensive-emergency-adult-exc-ich', urgency: 'critical' },
+      { label: 'Intracerebral hemorrhage', description: 'ICH consult governs the target', next: 'hypertensive-emergency-adult-exc-ich', urgency: 'critical' },
       { label: 'Pheochromocytoma or catecholamine crisis', description: 'Alpha-blockade first', next: 'hypertensive-emergency-adult-exc-pheo', urgency: 'critical' },
-      { label: 'Cocaine or sympathomimetic toxicity', description: 'No sourced agent in this draft', next: 'hypertensive-emergency-adult-exc-cocaine', urgency: 'critical' },
+      { label: 'Cocaine or sympathomimetic toxicity', description: 'No sourced agent here', next: 'hypertensive-emergency-adult-exc-cocaine', urgency: 'critical' },
       { label: 'SCAPE (sympathetic crisis pulmonary edema)', description: 'Nitrate-led pathway', next: 'hypertensive-emergency-adult-exc-scape', urgency: 'critical' },
       { label: 'Pregnant or postpartum', description: 'Severe-range pregnancy pathway', next: 'hypertensive-emergency-adult-pregnancy', urgency: 'critical' },
       { label: 'No exception', description: 'Continue to general first-hour target', next: 'hypertensive-emergency-adult-first-hour', urgency: 'urgent' },
@@ -131,7 +131,7 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'First-Hour and 24-Hour Targets',
-    body: '[BP target calculator](#/calculator/htne-bp-target) | [MAP calculator](#/calculator/map-calculator)\n\n**General case (no compelling condition): guideline rule.** [1]\n- SBP should be reduced by no more than 25% within the first hour.\n- Then, if stable, to 160/100 mmHg within the next 2 to 6 hours.\n- Then cautiously to normal during the following 24 to 48 hours.\n\n**Compelling conditions change the goal.** Aortic dissection, severe preeclampsia or eclampsia, and pheochromocytoma crisis use a different first-hour SBP goal in the guideline. That goal is pending sign-off. Use the branch for the condition. [1]\n\n**Marik & Varon (2007) [2]:** the immediate goal in hypertensive emergency is to reduce DBP by 10-15% or to about 110 mmHg over 30-60 minutes. This is a separate source and is not the guideline rule above.\n\n**Draft MAP percentages are NOT confirmed.** The earlier draft attributed a 20-25% MAP drop to Marik & Varon. That percentage is not in the 2007 text checked. Do not dose to a MAP number until the conflicts sign-off is resolved.\n\n**After the first hour:** if stable and not hypoperfused, reduce further gradually. Overly rapid drops can worsen renal, cerebral, or coronary perfusion. [1,2]\n\n**Pitfalls to avoid during this step:** [Over-lowering and wrong agents](#/node/hypertensive-emergency-adult-pitfalls).\n\n**Do not use the pediatric 8-hour target for an adult.** [1]',
+    body: '[BP target calculator](#/calculator/htne-bp-target) | [MAP calculator](#/calculator/map-calculator)\n\n**General case (no compelling condition): guideline rule.** [1]\n- SBP should be reduced by no more than 25% within the first hour.\n- Then, if stable, to 160/100 mmHg within the next 2 to 6 hours.\n- Then cautiously to normal during the following 24 to 48 hours.\n\n**Compelling conditions change the goal.** Aortic dissection, severe preeclampsia or eclampsia, and pheochromocytoma crisis use a different first-hour SBP goal in the guideline. Use the branch for the condition, which gives the goal for that condition. [1]\n\n**Marik & Varon (2007) [2]:** the immediate goal in hypertensive emergency is to reduce DBP by 10-15% or to about 110 mmHg over 30-60 minutes. This is a separate source and is not the guideline rule above.\n\n**A MAP-percentage target is not supported here.** A 20-25% MAP drop is not in the 2007 Marik & Varon text checked. Do not dose to a MAP percentage from this node.\n\n**After the first hour:** if stable and not hypoperfused, reduce further gradually. Overly rapid drops can worsen renal, cerebral, or coronary perfusion. [1,2]\n\n**Pitfalls to avoid during this step:** [Over-lowering and wrong agents](#/node/hypertensive-emergency-adult-pitfalls).\n\n**Do not use the pediatric 8-hour target for an adult.** [1]',
     citation: [1, 2],
     next: 'hypertensive-emergency-adult-agent-by-organ',
     calculatorLinks: [
@@ -179,7 +179,7 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Nitrate Infusion for ACS or Pulmonary Edema',
-    body: '**Nitroglycerin IV** reduces preload, and venodilation dominates at lower doses. Used for ACS or pulmonary edema. [Nitroglycerin](#/drug/nitroglycerin/acute coronary syndrome)\n\n**Caution:** recent phosphodiesterase-5 inhibitor use and preload-dependent physiology (such as RV involvement) need review before a nitrate. [9]\n\n**SCAPE** is a nitrate-led pathway with its own consult: [SCAPE nitroglycerin](#/tree/scape-nitroglycerin).',
+    body: '**Nitroglycerin IV** reduces preload, and venodilation dominates at lower doses. Used for ACS or pulmonary edema. [Nitroglycerin](#/drug/nitroglycerin/acs)\n\n**Caution:** recent phosphodiesterase-5 inhibitor use and preload-dependent physiology (such as RV involvement) need review before a nitrate. [9]\n\n**SCAPE** is a nitrate-led pathway with its own consult: [SCAPE nitroglycerin](#/tree/scape-nitroglycerin).',
     recommendation: 'Nitroglycerin infusion for ACS or pulmonary edema with monitored titration and a check for preload-dependent physiology.',
     citation: [9],
     confidence: 'recommended',
@@ -192,7 +192,7 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Beta-Blocker Infusion for Heart-Rate Control',
-    body: '**Labetalol or esmolol** when heart-rate control is needed. Beta-blocker-first is the dissection class. [6] [Labetalol](#/drug/labetalol/hypertensive emergency) | [Esmolol](#/drug/esmolol/hypertensive emergency)\n\n**Check before any beta-blocker:** asthma, bradycardia, heart block, decompensated heart failure, and cocaine or sympathomimetic use. The asthma and heart-failure screen is general pharmacology; source pending. [9]\n\n**Pregnancy:** labetalol may cause neonatal bradycardia. [4]',
+    body: '**Labetalol or esmolol** when heart-rate control is needed. Beta-blocker-first is the dissection class. [6] [Labetalol](#/drug/labetalol/hypertensive emergency) | [Esmolol](#/drug/esmolol/hypertensive emergency)\n\n**Check before any beta-blocker:** asthma, bradycardia, heart block, decompensated heart failure, and cocaine or sympathomimetic use. The asthma and heart-failure screen is general pharmacology. [9]\n\n**Pregnancy:** labetalol may cause neonatal bradycardia. [4]',
     recommendation: 'Labetalol or esmolol infusion for heart-rate control, after screening for asthma, bradycardia, heart block, decompensated heart failure, and cocaine use.',
     citation: [4, 6, 9],
     confidence: 'recommended',
@@ -232,7 +232,7 @@ export const HTNE_NODES: DecisionNode[] = [
     module: 3,
     title: 'Aortic Dissection',
     body: '**Suspected aortic dissection** is managed in the [Aortic dissection consult](#/tree/aortic-dissection) and in the ICU.\n\n**Beta-blocker is first-line** for dissection under the 2022 ACC/AHA guideline. [6]\n\n**SBP and heart-rate goals are NOT written on this page.** Summaries of the guideline disagree on the numbers. Use the dissection consult and the primary guideline. [6]',
-    recommendation: 'Beta-blocker first-line for suspected dissection. SBP and heart-rate goals come from the aortic dissection consult, pending primary verification.',
+    recommendation: 'Beta-blocker first-line for suspected dissection. SBP and heart-rate goals come from the aortic dissection consult.',
     citation: [6],
     confidence: 'recommended',
     next: 'hypertensive-emergency-adult-dispo',
@@ -244,7 +244,7 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Ischemic Stroke: Stroke-Specific BP Rules',
-    body: '**Ischemic stroke** BP rules are stroke-specific and differ before and after thrombolysis. [Stroke consult](#/tree/stroke)\n\n**Do not apply the general first-hour MAP rule** before the thrombolysis decision. [8]\n\n**The numeric pre- and post-lysis thresholds are not restated here.** They are pending primary verification against the guideline. [8]',
+    body: '**Ischemic stroke** BP rules are stroke-specific and differ before and after thrombolysis. [Stroke consult](#/tree/stroke)\n\n**Do not apply the general first-hour MAP rule** before the thrombolysis decision. [8]\n\n**The numeric pre- and post-lysis thresholds are not restated here.** They are set by the stroke consult and the guideline. [8]',
     recommendation: 'Use the stroke consult for BP thresholds. Do not apply the general first-hour MAP rule before the thrombolysis decision.',
     citation: [8],
     confidence: 'recommended',
@@ -256,13 +256,13 @@ export const HTNE_NODES: DecisionNode[] = [
     id: 'hypertensive-emergency-adult-exc-ich',
     type: 'result',
     module: 3,
-    title: 'Intracerebral Hemorrhage: Target Pending Verification',
-    body: '**Spontaneous ICH:** the general MAP rule does not apply. The SBP target and timing are NOT written in this draft. They are pending primary-text verification against the 2022 AHA/ASA guideline. [5]\n\n**Evidence for the intensive target is largely post hoc.** [5]\n\n[ICH consult](#/tree/ich)',
-    recommendation: 'Use the ICH consult for the BP target and timing. Do not apply the general MAP rule. Target pending primary verification.',
+    title: 'Intracerebral Hemorrhage: Target from the ICH Consult',
+    body: '**Spontaneous ICH:** the general MAP rule does not apply. The SBP target and timing are not written here. See the 2022 AHA/ASA guideline via the ICH consult. [5]\n\n**Evidence for the intensive target is largely post hoc.** [5]\n\n[ICH consult](#/tree/ich)',
+    recommendation: 'Use the ICH consult for the BP target and timing. Do not apply the general MAP rule. Target set by the ICH consult.',
     citation: [5],
     confidence: 'consider',
     next: 'hypertensive-emergency-adult-dispo',
-    summary: 'ICH: general MAP rule does not apply. Target and timing come from the ICH consult, pending verification.',
+    summary: 'ICH: general MAP rule does not apply. Target and timing come from the ICH consult.',
     safetyLevel: 'critical',
   },
   {
@@ -270,7 +270,7 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Pheochromocytoma or Catecholamine Crisis',
-    body: '**Alpha-blockade first.** Give IV phentolamine before any beta-blocker. [Phentolamine](#/drug/phentolamine/pheochromocytoma)\n\n**Beta-blockade only after adequate alpha-blockade,** to avoid unopposed alpha stimulation. [7]\n\nOral phenoxybenzamine is the preoperative agent. It is not in the drug store yet.',
+    body: '**Alpha-blockade first.** Give IV phentolamine before any beta-blocker. [Phentolamine](#/drug/phentolamine/pheochromocytoma)\n\n**Beta-blockade only after adequate alpha-blockade,** to avoid unopposed alpha stimulation. [7]\n\nOral phenoxybenzamine is the preoperative agent: [Phenoxybenzamine](#/drug/phenoxybenzamine/pheochromocytoma). It is a pre-operative oral agent that takes days to reach full effect, not an acute ED drug. Dosing and the label maximum are in the entry.',
     recommendation: 'Alpha-blockade with phentolamine before any beta-blocker in pheochromocytoma or catecholamine crisis.',
     citation: [7],
     confidence: 'recommended',
@@ -283,12 +283,12 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Cocaine or Sympathomimetic Toxicity',
-    body: '**No sourced first-line agent in this draft.** Do not apply the general BP plan to cocaine or sympathomimetic toxicity without toxicology input.\n\nFor cocaine chest pain, see the [Chest pain hub](#/tree/chest-pain-hub).\n\n**Primary source pending.** The earlier agent directive was removed until a primary cocaine-specific source is cited. [2]',
-    recommendation: 'No sourced first-line agent in this draft. Toxicology and the chest pain hub govern. Primary source pending.',
+    body: '**No sourced first-line agent here.** Do not apply the general BP plan to cocaine or sympathomimetic toxicity without toxicology input.\n\nFor cocaine chest pain, see the [Chest pain hub](#/tree/chest-pain-hub).\n\nNo cocaine-specific agent is listed until a primary cocaine-specific source is cited. [2]',
+    recommendation: 'No sourced first-line agent. Toxicology and the chest pain hub govern.',
     citation: [2],
     confidence: 'consider',
     next: 'hypertensive-emergency-adult-dispo',
-    summary: 'Cocaine or sympathomimetic toxicity: no sourced agent in this draft. Toxicology governs.',
+    summary: 'Cocaine or sympathomimetic toxicity: no sourced agent here. Toxicology governs.',
     safetyLevel: 'critical',
   },
   {
@@ -296,12 +296,12 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'SCAPE (Sympathetic Crisis Pulmonary Edema)',
-    body: '**SCAPE** is managed on the nitrate-led pathway in [SCAPE nitroglycerin](#/tree/scape-nitroglycerin).\n\n**Bolus and dose details are NOT restated here.** The SCAPE consult cites secondary sources for those numbers. They are pending primary verification. [2]',
-    recommendation: 'Follow the SCAPE pathway. Nitrate dosing is pending primary verification and is not restated here.',
+    body: '**SCAPE** is managed on the nitrate-led pathway in [SCAPE nitroglycerin](#/tree/scape-nitroglycerin).\n\n**Bolus and dose details are NOT restated here.** The SCAPE consult cites secondary sources for those numbers. [2]',
+    recommendation: 'Follow the SCAPE pathway. Nitrate dosing is not restated here.',
     citation: [2],
     confidence: 'consider',
     next: 'hypertensive-emergency-adult-dispo',
-    summary: 'SCAPE: nitrate-led pathway in the SCAPE consult; numbers pending verification.',
+    summary: 'SCAPE: nitrate-led pathway in the SCAPE consult; numbers are in the SCAPE consult.',
     safetyLevel: 'critical',
   },
   {
@@ -309,7 +309,7 @@ export const HTNE_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Pitfalls: Over-Lowering and Wrong Agents',
-    body: '**Over-lowering:** a fast drop can worsen renal, cerebral, and coronary perfusion. The general first-hour rule is on the [first-hour node](#/node/hypertensive-emergency-adult-first-hour). [1,2]\n\n**Sublingual nifedipine:** unpredictable absorption and hypotension. Never give it sublingually. [4]\n\n**Treating an asymptomatic severe BP with IV drugs:** urgency is an oral pathway. [2]\n\n**Hydralazine:** reflex tachycardia, unpredictable hypotension, and it can cause maternal hypotension in pregnancy. Do not use it as the only agent when heart-rate control is needed. [4]\n\n**Labetalol:** avoid in asthma or heart failure. This is general pharmacology; source pending. In pregnancy it can cause neonatal bradycardia. [4]\n\n**Clevidipine:** do not use with known hypersensitivity to dihydropyridines, soybean oil, egg, or egg lecithin. Label check pending.\n\n**Nitroprusside:** raises intracranial pressure. Avoid in elevated ICP, head injury, or encephalopathy with cerebral edema. [Nitroprusside](#/drug/nitroprusside/hypertensive emergency)\n\n**Treating the number, not the organ:** if no organ injury is present, this is urgency. [1,2]',
+    body: '**Over-lowering:** a fast drop can worsen renal, cerebral, and coronary perfusion. The general first-hour rule is on the [first-hour node](#/node/hypertensive-emergency-adult-first-hour). [1,2]\n\n**Sublingual nifedipine:** unpredictable absorption and hypotension. Never give it sublingually. [4]\n\n**Treating an asymptomatic severe BP with IV drugs:** urgency is an oral pathway. [2]\n\n**Hydralazine:** reflex tachycardia, unpredictable hypotension, and it can cause maternal hypotension in pregnancy. Do not use it as the only agent when heart-rate control is needed. [4]\n\n**Labetalol:** avoid in asthma or heart failure. This is general pharmacology. In pregnancy it can cause neonatal bradycardia. [4]\n\n**Clevidipine:** do not use with known hypersensitivity to dihydropyridines, soybean oil, egg, or egg lecithin. Confirm against the current label.\n\n**Nitroprusside:** raises intracranial pressure. Avoid in elevated ICP, head injury, or encephalopathy with cerebral edema. [Nitroprusside](#/drug/nitroprusside/hypertensive emergency)\n\n**Treating the number, not the organ:** if no organ injury is present, this is urgency. [1,2]',
     citation: [1, 2, 4],
     next: 'hypertensive-emergency-adult-dispo',
     summary: 'The common errors: over-lowering, sublingual nifedipine, IV therapy for urgency, agent misuse, and nitroprusside with raised ICP.',

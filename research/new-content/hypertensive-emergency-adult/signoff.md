@@ -167,3 +167,93 @@ Dr. Kitlowski
 - [ ] Pregnancy thresholds and 30-60 minute window after reading ACOG CO 767 (C4)
 - [ ] Stroke BP thresholds for the stroke branch (Open question 3)
 - [ ] Verify the remaining citations 3-7 and 9 before any of them stay in the tree or info pages
+
+## Drug-entry conflicts added at wiring (2026-10-27, both sources shown, none resolved)
+Source: `src/data/new-content/drugs-htn.ts`. Shown in the drug entries; Dr. Kitlowski to rule.
+- **Labetalol IV bolus:** FDA label 0.25 mg/kg (max 20 mg) over 2 min, repeat 20-80 mg q10 min, total above 300 mg not established. 2017 ACC/AHA Table 19: 0.3-1.0 mg/kg (max 20 mg) q10 min, or infusion 0.4-1.0 mg/kg/h up to 3 mg/kg/h, cumulative up to 300 mg. The weightCalc uses the label value.
+- **Esmolol loading:** label (perioperative tachycardia and hypertension) 500 mcg/kg over 1 min, then 50 mcg/kg/min, max 300 mcg/kg/min. 2017 ACC/AHA Table 19: 500-1000 mcg/kg, max 200 mcg/kg/min. The dissection use is off-label relative to the label indication.
+- **Phenoxybenzamine final dose (preop, not ED):** Endocrine Society 2014 gives 1 mg/kg/day (start 10 mg BID 10-14 days pre-op). Label gives usually 20-40 mg 2-3 times/day, but its Carcinogenesis section names 20 mg BID as the maximum recommended human dose. The weightCalc uses the guideline value.
+- **Phenoxybenzamine stock:** Dibenzyline brand set shows marketing end 02/29/2024. The generic capsule label is the listed product. Confirm local stock.
+- **Hint fix (not a dose change):** the tree's nitroglycerin link hint changed from "acute coronary syndrome" to "acs" so it opens the ACS/NSTEMI card.
+
+---
+
+## Dr. Kitlowski audit, 2026-10-27 (verdict: REVISE, not safe to deploy until flagged items are cleared)
+
+Scope: tree `hypertensive-emergency-adult`, info and toolbar new-content, `htne-bp-target` calculator, and every drug entry the tree links (including the drugs-htn additions wired into `drug-store.ts`). Acute pancreatitis Ranson nodes not audited here.
+
+### Primary sources read this run
+- **2025 AHA/ACC High Blood Pressure Guideline, section 6.2 and Tables 26 and 27** (publisher page, jacc.org/doi/10.1016/j.jacc.2025.05.007). Recommendations 1 to 3 read in full, Tables 26 and 27 read in full, supportive text for rec 1 read. This settles most of C1, C2, C3 and C5 below.
+- **DailyMed / FDA labels:** Brevibloc (esmolol) setid 9a3e69ab-3ffe-33af-e053-2a95a90a6524; Cardene IV (nicardipine) setid a14a6a4d-232b-634f-e053-2a95a90a2323; Cleviprex (clevidipine) FDA 022156 s007; labetalol HCl injection setid abfc6b75-1ed5-41f1-0484-4597488237bc; Dibenzyline (phenoxybenzamine) FDA 008708 s025 (rev. 03/08).
+- **Not read this run:** ACOG CO 767 (pregnancy thresholds and first-line list), Powers 2019 Table 5, Greenberg 2022 (ICH), Isselbacher 2022, Lenders 2014 (Endocrine Society), Varon 2008 [9], the 2024 AHA scientific statement, hydralazine, nitroglycerin and phentolamine labels, and the Table 19 rows of the 2017 guideline. Those items stay flagged.
+
+### Citation gate (guideline-versions.md)
+- The 2025 AHA/ACC hypertension guideline is NOT in `~/Desktop/claude-brain/wikis/emergency-medicine/guideline-versions.md`. Per the gate it is not applied to any consult text in this audit. Proposed row for Andy to approve: JACC 2025, DOI 10.1016/j.jacc.2025.05.007 (fetched from the publisher page this run). The DOIs in this sign-off for the 2025 guideline (CIR.0000000000001356, HYP.0000000000000249) were NOT verified.
+- The 2017 Whelton guideline ([1] in the tree and calculator) is superseded by the 2025 guideline. Every use of [1] now needs Andy's decision.
+- Isselbacher 2022 DOI 10.1016/j.jacc.2022.08.004 is listed in the wiki as resolving to an unrelated paper. Citation [6] is unverified until a correct DOI is fetched.
+
+### Auto-fixes applied this run (wording and citations only, no number or directive changed)
+1. `drugs-htn.ts`, phenoxybenzamine contraindication: "would be undesirable" changed to "may be undesirable" (label wording, FDA 008708 s025).
+2. `drugs-htn.ts`, phenoxybenzamine citations: added the FDA accessdata label I read (008708s025, rev. 03/08) as citation 1. The two DailyMed setids and their "Rev. 11/23" and "7/2026" dates are still unverified and remain listed.
+3. `drugs-htn.ts`, esmolol source-conflict note: added the Brevibloc label caps (200 mcg/kg/min for tachycardia, 300 for hypertension). The 300 dose already in the entry is unchanged.
+4. `hypertensive-emergency-adult.ts`, pheochromocytoma node: "It is not in the drug store yet" was stale (phenoxybenzamine is wired into ALL_DRUGS). Replaced with a live link `[Phenoxybenzamine](#/drug/phenoxybenzamine/pheochromocytoma)`. The link hint matches the drug's indication.
+
+Typecheck: `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` clean after the edits. No commit, push, deploy or Supabase action.
+
+### Flagged for Andy (clinical numbers, directives, contraindications, or citation gate). Not changed.
+
+**F1. First-hour and 24-48 hour targets (conflict, C1 extended).** 2025 rec 3 (COR 1, LOE C-LD), full text read: "SBP should be reduced with oral or parenteral therapy by no more than 25% within the first hour; then, if stable, to <160/100 mm Hg within the next 2 to 6 hours; and then cautiously to 130 to 140 mm Hg during the next 24 to 48 hours." The draft (tree first-hour node, Steps and Do-NOT info pages, calculator line) says "cautiously to normal over 24 to 48 hours" from the 2017 rule. Both guidelines agree on the 25% SBP limit. They disagree on the 24-48 hour target (normal versus 130-140). Where the draft says "normal", the 2025 guideline gives 130-140. Andy to pick. Until then the consult should not say "normal".
+
+**F2. Disposition (structural).** 2025 rec 1 (COR 1, LOE B-NR): "In adults with a hypertensive emergency (BP >180 and/or >120 mm Hg and evidence of acute target organ damage), admission to an intensive care unit is recommended for continuous monitoring of BP and target organ damage." The draft's dispo node sends "stable after the first hour, organ injury treated" to admit or observe, and the ICU branch is limited to ongoing titration or exceptions. Step-down is not in the guideline. Andy to decide whether the disposition branch changes.
+
+**F3. Clevidipine (multiple).**
+- Maximum dose. The label allows up to 32 mg/h with limited experience and states most patients reach 16 mg/h or less. 2025 Table 26 gives "maximum dose 21 mg/h; maximum duration 72 h." The draft's line "Sources agree (label; 2017 ACC/AHA Table 19)" is inaccurate. Andy to pick the ceiling and show both values.
+- Contraindications. The draft lists "hypersensitivity to dihydropyridines, soybean oil, egg, or egg lecithin." Label Section 4 lists: (4.1) allergy to soybeans, soy products, eggs or egg products; (4.2) defective lipid metabolism (pathologic hyperlipemia, lipoid nephrosis, or acute pancreatitis accompanied by hyperlipidemia); (4.3) severe aortic stenosis. The draft omits 4.2 and 4.3. Dihydropyridine hypersensitivity is not on the label list. This is a safety omission. Add or confirm.
+- Duration. The 72-hour limit ("little experience beyond 72 hours") is missing from the drug addition.
+
+**F4. Labetalol IV bolus (titration number).** The draft says "Repeat 20-80 mg IV every 10 min." The label (Trandate-type injection, setid abfc6b75) says: initial 20 mg (corresponds to 0.25 mg/kg for an 80 kg patient) over 2 minutes, then additional 40 or 80 mg at 10-minute intervals, to a cumulative total of 300 mg. The 20 mg repeat is not in the label. The draft also says "label: safety of total dose above 300 mg is not established," which I could not find in the label text read. The 0.25 mg/kg weightCalc is a label equivalence for an 80 kg patient, not a weight-based label dose. Changing any of these changes a titrated number, so per Dr. K autopilot guardrail this is stopped for Andy. The ACC/AHA 2017 and 2025 table range is 0.3-1.0 mg/kg (max 20 mg), which the draft also shows.
+
+**F5. Hydralazine (existing drug-store entry, linked from the pregnancy node).** The entry's hypertensive-emergency regimen says "10-20 mg IV over 1-2 minutes, repeat q20-30 min PRN, maximum cumulative 40 mg." 2025 Table 26 (and 2017 Table 19) says initial 10 mg slow IV (maximum initial 20 mg), repeat every 4-6 hours as needed, cumulative cap 200 mg/24 h, and calls hydralazine an undesirable first-line agent. The repeat interval conflicts (20-30 min versus 4-6 h). The pregnancy 30 mg cap is unverified. Andy and the drug-store owner decide one ceiling per indication.
+
+**F6. Phentolamine and the cocaine branch (directive).** 2025 Table 26 gives phentolamine IV bolus 5 mg, repeat every 10 minutes, cumulative maximum 50 mg/24 h, and lists cocaine toxicity among catecholamine-excess causes. 2025 Table 27 lists phentolamine for acute catecholamine-excess states. The draft's cocaine branch says "no sourced first-line agent." That is now contradicted by the guideline. The existing phentolamine entry says "5 mg IV or IM," with no repeat interval or cap. The IM route is not in the guideline. Andy decides whether the cocaine branch names an agent, and whether the phentolamine entry gets the repeat interval and cap.
+
+**F7. Dissection goals (open question 2, partly sourced).** 2025 rec 2 (COR 1, LOE C-LD): for a compelling condition, SBP <140 mm Hg for most conditions and <120 mm Hg in aortic dissection during the first hour. Table 27: "Requires rapid lowering of SBP to ≤120 mm Hg... SBP ≤120 mm Hg should be achieved within 20 min"; beta-blockade should precede vasodilator. The draft prints no number. Adding the number changes a directive, so Andy and Dr. K decide. The beta-blocker-first order is already in the draft and is supported by Table 27.
+
+**F8. Compelling conditions other than dissection.** 2025 rec 2 gives SBP <140 mm Hg in the first hour for most compelling conditions (pregnancy-related, pheochromocytoma and others not named). The draft's flag and the calculator flag pregnancy and pheochromocytoma as compelling without a number. Andy confirms whether the <140 goal is added and which conditions it covers.
+
+**F9. Beta-blocker contraindications (new contraindication).** 2025 Table 27: "Acute pulmonary edema: beta blockers contraindicated." ACS contraindications to beta-blockers in the same table: moderate to severe LV failure with pulmonary edema, HR <60, SBP <100, poor peripheral perfusion, second- or third-degree heart block, reactive airways disease. The draft's beta-blocker node lists asthma, bradycardia, heart block, decompensated HF, and cocaine. Pulmonary edema is missing. Add.
+
+**F10. Nitrates.** The nitrate node's PDE-5 caution is supported by 2025 Table 27 ("nitrates given in the presence of PDE-5 inhibitors may induce profound hypotension"). Table 26 adds "Do not use in volume-depleted patients" for nitroglycerin, which the node omits. The existing nitroglycerin ACS entry starts at 5-10 mcg/min. Table 26 starts at 5 mcg/min, +5 every 3-5 min, max 200 mcg/min. Both caution lines need the 2025 citation, which is not yet in the gate table (see above).
+
+**F11. Nitroprusside.** The existing entry matches Table 26 (start 0.3 mcg/kg/min, max 10 mcg/kg/min, titrate every 5 min). The tree cites [9] (Varon 2008, unverified) for "raises intracranial pressure." The 2025 table gives a different reason: "should be avoided in acute cerebrovascular disease unless other agents are not available" (increased mortality). It also gives the cyanide threshold: infusion rate ≥3 mcg/kg/min and/or duration ≥3 days, with thiosulfate or cyanocobalamin for toxicity. Andy decides whether the wording changes and whether the threshold is added. The ICP claim itself is not verified in this pass.
+
+**F12. Pheochromocytoma.** Alpha before beta is still cited to Lenders 2014 (not read). Table 27 names phentolamine and clevidipine and nicardipine for catecholamine excess and does not state an order. The phenoxybenzamine 1 mg/kg/day figure is taken secondhand from a CVS Caremark PA document, which cites Lenders 2014. The Endocrine Society text was not read. The monitoring targets (seated BP <130/80, standing SBP >90) are unverified. Andy decides whether to keep the 1 mg/kg/day weightCalc.
+
+**F13. Phenoxybenzamine label conflict (kept as drafted).** The FDA label (008708 s025) says usual dose 20-40 mg 2-3 times a day, but its Carcinogenesis section names 20 mg BID as the "maximum recommended human dosage." The draft keeps both values and labels the conflict. Confirmed as drafted.
+
+**F14. Definition and C3 (confirmed).** 2025 section 6.2 synopsis and rec 1 use ">180/120 mm Hg" with target organ damage. The draft's >180 and/or >120 matches both guidelines. The 2024 AHA statement's 110-120 variant is not needed. Andy to close C3.
+
+**F15. MAP rules (C1 remainder).** Neither the 2017 nor the 2025 guideline has a MAP percentage. Both use SBP. The draft's MAP-25% and MAP-20% floors (calculator lines "DRAFT MAP RULES") have no source. Recommend removing them from the calculator output. Removal is a change to displayed numbers, so Andy decides.
+
+**F16. Nicardipine (confirmed).** Label (Cardene IV): start 5 mg/h, +2.5 mg/h every 5 min (rapid) to 15 min (gradual), maximum 15 mg/h, restart at 3-5 mg/h after hypotension, contraindicated in advanced aortic stenosis, titrate slowly in heart failure or hepatic or renal impairment. Matches the drug addition and 2025 Table 26. No change.
+
+**F17. Esmolol (confirmed, one note).** Label: loading 500 mcg/kg over 1 min, maintenance 50 mcg/kg/min, maximum 300 mcg/kg/min for hypertension. Matches the draft. The "contraindicated with concurrent beta-blocker therapy" line comes from 2025 Table 26, not the label. The label's contraindications are severe sinus bradycardia, heart block greater than first degree, decompensated HF, and cardiogenic shock. Dissection use is off-label, as the draft already says.
+
+**F18. Stroke thresholds (open question 3).** The 185/110 (pre-lysis) and 180/105 (post-lysis) values are unchanged. 2025 Table 27 points to section 5.3.9.2 for ischemic stroke, which I did not read. Powers 2019 Table 5 is still unread. Andy or Dr. K needs the primary source before the stroke branch is signed.
+
+**F19. Citations still unverified.** ACOG CO 767 [4] (pregnancy thresholds, 30-60 min window, first-line list, and the "never sublingual" line), Greenberg 2022 [5], Isselbacher 2022 [6] (DOI flagged), Lenders 2014 [7], Varon 2008 [9] (PMID 18257607), Rhoney 2009 [3] (not cited in any node text read). Keep or remove each after reading the source.
+
+**F20. Pregnancy and ACOG.** The severe-range threshold (SBP ≥160 or DBP ≥110) and the first-line agents stay unverified until ACOG CO 767 is read. The 2025 Table 27 preferred agents for eclampsia or preeclampsia (hydralazine, labetalol, nicardipine, nifedipine) are consistent with the draft.
+
+**F21. Lower-priority wording.** The labetalol contraindication "second- or third-degree heart block" matches 2025 Table 26, while the label says "greater than first degree heart block." Same meaning, no change made. The stroke citation title in the calculator ("2019 Update to the 2018 Guidelines") differs from the tree title ("2019 Update to Guidelines for Early Management..."). Harmonize after the stroke source is read.
+
+### What Dr. K signs for now
+- Dr. K can sign the wording and citation fixes above and the nicardipine, esmolol and phenoxybenzamine (label-based) content.
+- Dr. K cannot sign the first-hour target (F1), disposition (F2), clevidipine (F3), labetalol repeat (F4), hydralazine (F5), phentolamine and cocaine (F6), or dissection goals (F7) without Andy's decision.
+
+### Verdict
+REVISE. The consult is not safe to deploy as written. It gives a 24-48 hour "normal" target that the 2025 guideline does not give (F1), a disposition that does not follow the 2025 ICU recommendation (F2), and a clevidipine contraindication list that omits severe aortic stenosis and lipid disorders (F3). Once Andy clears F1 to F3, F9 and the citation gate row, the rest of the flagged list can be closed in one more pass.
+
+## Fixed after Dr. K audit (2026-10-27, mechanical only)
+- Phenoxybenzamine (`src/data/new-content/drugs-htn.ts`): label maximum 20 mg BID (generic phenoxybenzamine capsules, DailyMed setid 0be6a394, read 2026-10-27, Carcinogenesis section) now shown beside the 1 mg/kg/day Endocrine Society figure. No maxDose was set; the conflict is shown, not resolved. Unsourced "1-2 week pre-operative" duration removed from the entry and from `src/data/trees/hypertensive-emergency-adult.ts`.
+- Draft and sign-off wording removed from node text and header in `src/data/trees/hypertensive-emergency-adult.ts`. No number changed.

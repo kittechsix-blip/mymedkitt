@@ -1,0 +1,189 @@
+// MedKitt - drug entries for Bowel Obstruction (adhesive SBO) and SCAD / coronary vasospasm.
+// Sources read 2026-10-27. Doses come from the FDA labels on DailyMed, the 2023 AHA/ACC chronic coronary
+// disease guideline (Table 17), and the Cochrane SBO review. Where two sources disagree, both are shown
+// in the regimen text. Source conflicts are also logged in
+// research/new-content/scad-vasospasm/signoff.md and research/new-content/bowel-obstruction-volvulus/signoff.md.
+// drug-store.ts registers DRUGS_SBO_SCAD in ALL_DRUGS and merges ADDITIONS_SBO_SCAD into the target drug entries.
+
+import type { DrugDose, DrugEntry } from '../drug-store.js';
+
+// ---------------------------------------------------------------------------
+// NEW ENTRIES
+// ---------------------------------------------------------------------------
+
+const DIATRIZOATE: DrugEntry = {
+  id: 'diatrizoate',
+  name: 'Gastrografin (diatrizoate meglumine / diatrizoate sodium)',
+  genericName: 'Diatrizoate meglumine and diatrizoate sodium',
+  drugClass: 'Water-soluble iodinated oral contrast',
+  route: 'PO / NG (label: oral or rectal only)',
+  indications: [
+    'Adhesive SBO: water-soluble contrast to predict non-operative resolution (OFF-LABEL)',
+    'Radiographic exam of GI tract segments (label)',
+  ],
+  dosing: [
+    {
+      indication: 'Adhesive SBO: water-soluble contrast (predicts non-operative resolution)',
+      regimen:
+        '**Label (oral, GI radiography; not an SBO indication):** adult oral dose 30-90 mL (11-33 g iodine), depending on exam and patient size. Oral or rectal use only. Not for parenteral use. Discard unused portion.\n\n' +
+        '**Off-label TRIAL REGIMEN for adhesive SBO (not label dosing):** the Cochrane review (Abbas, Bissett, Parry; CD004651; full text read via PMC6465054) describes trials giving **100 mL** Gastrografin orally or by NG tube, with the NG tube **clamped for 60 minutes** afterward. Its discussion gives an abdominal radiograph window of 4-24 h. Serial films over 24 h predicted non-operative resolution (pooled sensitivity 0.97, specificity 0.96).\n\n' +
+        '**CONFLICT, both shown, no pick:** the trial volume of 100 mL is above the label oral adult maximum of 90 mL.\n\n' +
+        '**Route:** NG use is off-label. The label states oral or rectal administration only. Its warnings say that if the agent is given by NG tube, tube position in the stomach must be verified first.\n\n' +
+        '**Timing:** per local protocol.',
+    },
+    {
+      indication: 'GI radiography (label, adult oral dose)',
+      regimen:
+        'Label: adult oral dose 30-90 mL (11-33 g iodine), depending on exam and patient size. ' +
+        'Children under 5 y: 30 mL. Children 5-10 y: 60 mL. ' +
+        'Pediatric doses may be used in dehydrated and/or debilitated adults. A 1:1 dilution is recommended for elderly cachectic individuals; pediatric doses may be diluted 1:1 if desired. ' +
+        'Oral or rectal only. Not for parenteral use. Discard unused portion.',
+    },
+  ],
+  contraindications: [
+    'Known hypersensitivity to Gastrografin or any component (label)',
+    'Suspected strangulation, peritonitis, or perforation (SBO tree safety text; not a label item)',
+    'Esophagotracheal fistula: avoid use (label warning)',
+  ],
+  cautions: [
+    'ASPIRATION (label WARNINGS): aspiration can cause pulmonary edema, pneumonitis, or death. If given by NG, verify tube position in the stomach before administration (label). Empty stomach and no use in a patient who keeps vomiting are practice points, not label text; source not verified.',
+    'Anaphylactic reactions, including fatal cases (label). Medical personnel and resuscitation equipment must be available.',
+    'Hypovolemia, hypotension, and shock from the hypertonic osmotic load (label). Correct electrolytes before use. An open IV line may be advisable in pediatric and severely debilitated patients (label).',
+    'Hyperthyroidism, multinodular goiter: use with caution (label). The label reports thyroid storm after an intravascular iodinated agent and says a similar situation could follow oral iodides.',
+    'Iodine interferes with thyroid function tests for 6 months to 1 year (label).',
+    'Precipitate can mimic ulceration on film (label).',
+  ],
+  monitoring:
+    'Serial abdominal exams. Abdominal film at 4-6 h and at 24 h. Watch volume status, BP, and electrolytes with large volumes or prolonged NG use. No contrast in the colon at 24 h: go to the surgical decision per the SBO tree.',
+  notes:
+    'Off-label for SBO; the label covers GI radiography only. Cochrane (Abbas 2007): colon contrast at 24 h predicted resolution with pooled sensitivity 0.97 and specificity 0.96. ' +
+    'Gastrografin does not itself resolve SBO. It reduced hospital stay in patients managed without surgery. Recurrence is not changed.',
+  citations: [
+    'GASTROGRAFIN (diatrizoate meglumine and diatrizoate sodium solution) oral solution. Prescribing information. DailyMed setid 8c2340e4-2b42-45dc-8fac-9960e8172547; Rev. August 2019; DailyMed page "Updated October 4, 2021" (read 2026-10-27). Only the DailyMed version was read.',
+    'Abbas S, Bissett IP, Parry BR. Oral water soluble contrast for the management of adhesive small bowel obstruction. Cochrane Database Syst Rev. 2007;(3):CD004651. doi:10.1002/14651858.CD004651.pub3. Full text read via PMC6465054.',
+  ],
+};
+
+const AMLODIPINE: DrugEntry = {
+  id: 'amlodipine',
+  name: 'Amlodipine (Norvasc)',
+  genericName: 'Amlodipine besylate',
+  drugClass: 'Dihydropyridine calcium channel blocker',
+  route: 'PO',
+  indications: [
+    'Vasospastic angina (Prinzmetal / variant)',
+    'Chronic stable angina',
+    'Angiographically documented CAD (without HF or EF <40%)',
+    'Hypertension',
+  ],
+  dosing: [
+    {
+      indication: 'Vasospastic angina (Prinzmetal / variant)',
+      regimen:
+        '5-10 mg PO once daily. Label angina section: "The recommended dose for chronic stable or vasospastic angina is 5-10 mg, with the lower dose suggested in the elderly and in patients with hepatic insufficiency." ' +
+        'The angina section gives no 2.5 mg start. The 2.5 mg start is from the label hypertension section (dosing 2.1): small, fragile, or elderly patients, or hepatic insufficiency may start at 2.5 mg daily. Adult hypertension start 5 mg; max 10 mg/day.',
+    },
+  ],
+  contraindications: ['Known sensitivity to amlodipine (label)'],
+  cautions: [
+    'Hypotension, additive with nitrates and other vasodilators',
+    'Peripheral edema (common)',
+    'Hepatic insufficiency, elderly, small or fragile patients: 2.5 mg start is from the label hypertension section, not the angina section (label)',
+  ],
+  monitoring: 'BP and heart rate at each dose change. Reassess anginal symptoms and ECG response.',
+  notes:
+    'FDA label lists vasospastic angina as an indication. The 2023 AHA/ACC Table 17 vasospastic pathway names verapamil first and isosorbide mononitrate second, and does not name amlodipine for vasospasm (it appears for microvascular angina). Sources conflict on the vasospasm pathway; logged in research/new-content/scad-vasospasm/signoff.md. Not linked from the SCAD tree yet.',
+  citations: [
+    'NORVASC (amlodipine besylate) tablets. Prescribing information. Revised 1/2019. DailyMed setid abd6a2ca-40c2-485c-bc53-db1c652505ed (indications and dosing sections read).',
+    'Virani SS, Newby LK, Arnold SV, et al. 2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease. Circulation. 2023;148(9):e9-e119. doi:10.1161/CIR.0000000000001168 (Table 17 used for the conflict).',
+  ],
+};
+
+const ISOSORBIDE_MONONITRATE: DrugEntry = {
+  id: 'isosorbide-mononitrate',
+  name: 'Isosorbide Mononitrate (IR tablets)',
+  genericName: 'Isosorbide mononitrate',
+  drugClass: 'Long-acting organic nitrate',
+  route: 'PO',
+  indications: [
+    'Vasospastic angina (second-line add-on to calcium channel blocker)',
+    'Angina prevention, coronary artery disease',
+  ],
+  dosing: [
+    {
+      indication: 'Vasospastic angina (second-line add-on to calcium channel blocker)',
+      regimen:
+        'CONFLICT, both shown, no pick. 2023 AHA/ACC Table 17 example: 10 mg PO BID. ' +
+        'Label (IR tablets): recommended regimen 20 mg PO BID, doses 7 h apart, leaving a 17 h nitrate-free interval. ' +
+        'Small stature: start 5 mg, increase to at least 10 mg by day 2-3. Doses above 20 mg BID not studied.',
+    },
+  ],
+  contraindications: [
+    'PDE-5 inhibitors (sildenafil, tadalafil, vardenafil, avanafil): do not use. Severe hypotension, syncope, or ischemia (label).',
+    'Riociguat (sGC stimulator): do not use. Hypotension (label).',
+  ],
+  cautions: [
+    'Hypotension and syncope',
+    'Headache (common)',
+    'Tolerance with continuous dosing. Use the asymmetric 7 h schedule (label).',
+  ],
+  monitoring: 'BP and symptoms after each dose change. Confirm the PDE-5 washout before first dose.',
+  notes:
+    'Added for the SCAD / vasospasm long-acting nitrate step. The SCAD tree currently links isosorbide-dinitrate/angina, which is the stable-angina prophylaxis entry and not a vasospasm entry. Logged in research/new-content/scad-vasospasm/signoff.md.',
+  citations: [
+    'Isosorbide mononitrate tablets, USP. Prescribing information. DailyMed setid ae8f74f0-e600-4452-8557-958b603e2709; label revision 10/2022 (dosing and contraindications read).',
+    'Virani SS, Newby LK, Arnold SV, et al. 2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease. Circulation. 2023;148(9):e9-e119. doi:10.1161/CIR.0000000000001168. Table 17 text read via the AHA 2023 guideline slide set; journal table not reached this pass.',
+  ],
+};
+
+export const DRUGS_SBO_SCAD: DrugEntry[] = [DIATRIZOATE, AMLODIPINE, ISOSORBIDE_MONONITRATE];
+
+// ---------------------------------------------------------------------------
+// ADDITIONS: indication rows to merge into EXISTING drug-store entries.
+// Each row's indication text carries the hint used by consult links.
+// ---------------------------------------------------------------------------
+
+export const ADDITIONS_SBO_SCAD: { drugId: string; dosing: DrugDose[]; indications?: string[] }[] = [
+  {
+    drugId: 'diltiazem',
+    indications: ['Vasospastic angina (coronary artery spasm), oral'],
+    dosing: [
+      {
+        indication: 'Vasospastic angina (coronary artery spasm), oral IR tablets',
+        regimen:
+          'Oral (Cardizem tablets). Label indication: "chronic stable angina and angina due to coronary artery spasm." ' +
+          'Start 30 mg PO four times daily, before meals and at bedtime. Increase gradually at 1-2 day intervals until optimal response. ' +
+          'Average optimal range 180-360 mg/day in divided doses. No data for renal or hepatic impairment; titrate with caution. ' +
+          'Guideline: first-line calcium channel blocker for vasospasm (2023 AHA/ACC Table 17, no diltiazem example named).',
+      },
+    ],
+  },
+  {
+    drugId: 'verapamil',
+    indications: ['Vasospastic (Prinzmetal) angina, oral IR'],
+    dosing: [
+      {
+        indication: 'Vasospastic (Prinzmetal) angina, oral IR tablets',
+        regimen:
+          'Oral IR tablets. Label lists vasospastic (Prinzmetal\'s variant) angina under angina at rest. ' +
+          'Usual dose 80-120 mg PO three times daily. 40 mg TID may be warranted with increased response (decreased hepatic function, elderly). ' +
+          'Titrate on efficacy and safety about 8 h after dosing; increase at daily (unstable angina) or weekly intervals. ' +
+          'CONFLICT: 2023 AHA/ACC Table 17 gives "verapamil 40 mg BID uptitrated" as the first-line example. Both shown, no pick.',
+      },
+    ],
+  },
+  {
+    drugId: 'nitroglycerin',
+    indications: ['Vasospasm acute chest pain (SL)'],
+    dosing: [
+      {
+        indication: 'Vasospasm acute chest pain (SL)',
+        regimen:
+          'SL: 1 tablet under the tongue or in the buccal pouch at onset. May repeat every 5 min. Max 3 tablets within 15 min. ' +
+          'If pain persists after 3 tablets: seek emergency care (label). ' +
+          'Label indication is angina due to CAD; vasospasm use follows 2023 AHA/ACC Table 17 baseline (SL nitroglycerin as needed). ' +
+          'Contraindicated with PDE-5 inhibitors (avanafil, sildenafil, tadalafil, vardenafil) and sGC stimulators (label). Confirm no PDE-5 use before giving.',
+      },
+    ],
+  },
+];

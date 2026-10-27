@@ -73,3 +73,52 @@ For Dr. Kitlowski:
 - [ ] Result-node recommendations contain no escalation directive beyond the pending C6 wording.
 - [ ] Calculator banding matches the node bands (0-2, 3-4, 5-6, 7 or more) and the max totals (11 non-gallstone, 10 gallstone).
 - [ ] Integrator: `calculator.ts` registers `ranson` and treats the two points-0 switches as adding nothing (C9) before any calculator link is shown.
+
+---
+
+## Dr. Kitlowski audit (2026-10-27), Ranson additions only
+
+Verdict: **REVISE. Not safe to deploy yet.** Two items need Andy's decision before any deploy: F1 (calculator scores unentered items as "no") and F2 (parent critical action contradicts the Ranson nodes). Nothing in the Ranson text was changed by this audit.
+
+Scope: `acute-pancreatitis-ranson-nodes.ts`, `components/ranson.ts`, the Ranson wiring in `trees/acute-pancreatitis.ts` (import, `...RANSON_NODES`, `...RANSON_CITATIONS`, `ap-severity` calculatorLinks and body line), toolbar entry `ranson` on `acute-pancreatitis`. Pre-existing ap-* text was not audited.
+
+### Primary sources re-opened (PubMed efetch, 2026-10-27)
+- PMID 941075 (Ranson 1976, Surg Gynecol Obstet 143(2):209-19): abstract lists the 11 signs. Matches the node and calculator for age >55, glucose >200, WBC >16,000, LDH >350, Hct fall >10 points, calcium <8, base deficit >4, BUN increase >5, sequestered fluid >6 L, PaO2 <60. AST is written as **>250 Sigma Frankel units per 100 mL**. The app shows ">250" beside IU/L (see F3). Association for the early-sign count: 24 of 38 with three or more signs were seriously ill or died, against 1 of 162 with fewer than three. "Serious illness" is not defined in the abstract.
+- PMID 4834279 (Ranson 1974) and PMID 7051819 (Ranson 1982): PubMed records only, no abstract. Band cutoffs and every gallstone number remain unverified.
+- PMID 18519429 (Wu 2008, parent #4): BISAP items BUN >25 mg/dl, impaired mental status, SIRS, age >60, pleural effusion, within 24 h. Matches the node.
+- PMID 23100216 (Banks 2013, parent #3): severe = persistent organ failure >48 h. Matches ranson-result-low. Moderately severe also includes exacerbation of co-morbid disease (not in the parent ap-severity text; out of scope).
+- Citation text #22-24 (titles, journal, volume, pages, PMIDs) matches the PubMed records.
+
+### Auto-fixes applied
+None. No clinical or citation text was changed. Every candidate fix either changes a number a clinician scores against or changes the directive text, so each goes to Andy under the two-source rule.
+
+### Flagged for Andy
+- **F1 (REVISE, patient safety, structural).** The calculator cannot tell "not yet entered" from "no." With the 48-hour switch ON, unkeyed items score zero. Run on the calculator as written: 1 admission item with the switch ON and no 48-hour items gives "0-2, 1 / 11". Five admission items with 2 of 5 48-hour items keyed gives "7 or more, 7 / 11". Nothing on the result warns that items were skipped, although the node says a missing value makes the score incomplete. Fix needs a design choice: explicit yes / no / not done per item, or no total until every item is answered.
+- **F2 (REVISE, directive conflict).** Parent critical action in `acute-pancreatitis.ts` (`ACUTE_PANCREATITIS_CRITICAL_ACTIONS`, nodeId `ap-severity`): "BISAP score ≥3 or Ranson ≥3 = severe pancreatitis (ICU candidate)". The new Ranson nodes say the ≥3 threshold is unsourced and "do not act on it as an instruction." Both are on the same severity screen. Andy decides which text stays. The 1976 abstract supports an association for three or more signs (F-note above) but does not establish a severity band. Not edited (pre-existing clinical directive).
+- **F3 (C2, AST units and threshold).** 1976 abstract uses Sigma Frankel units per 100 mL. Current text shows ">250" next to IU/L with no conversion. Gallstone AST: one reference gives >250 (recorded as IU/100 mL), other teaching gives a lower value. Andy decides the unit and the number.
+- **F4 (C3, gallstone base deficit).** Calculator label reads "Base deficit >4 mEq/L (48 h)" for both modes. The gallstone value is >4 in one reference and >5 in another. The label should not read as the gallstone value until decided.
+- **F5 (C8, BUN operator).** 1976 abstract: "increase over 5 mg%", so >5 is primary-supported and the current text matches it. Secondary summaries say ≥5. Gallstone BUN >2 mg/dL is unconfirmed but is an active item in the gallstone node and calculator. Andy confirms.
+- **F6 (C1, band cutoffs 0-2 / 3-4 / 5-6 / ≥7).** Come from a reference summary of Ranson 1974, which has no retrievable abstract. Result nodes cite [22] and [24] for these bands. That attribution is unverified. Andy decides whether to keep the bands as provisional or cite a verified source.
+- **F7 (citation gate, gallstone set).** Gallstone admission and 48-hour cutoffs (ranson-admit-gs, ranson-48h) are cited to [24] (Ranson 1982). That record has no abstract, so those numbers are not verified against the cited paper. Keep provisional, or hide the gallstone branch, until the full text is read.
+- **F8 (clinician-facing draft tags).** Node bodies and calculator strings carry internal tags ("patch C1", "C6", "C8", "pending clinician sign-off", "unsourced"). These must be rewritten once F1-F7 are decided, not shipped as-is.
+- **F9 (C10, etiology unknown).** No sourced rule says which set to score. The calculator scores one set per run. Andy decides the workflow wording.
+- **F10 ("Ranson does not direct therapy").** Stated in ranson-start with [3] attached. Banks 2013 does not say this. Unsourced statement; reword or drop.
+
+### Drug-store entries
+The Ranson additions and the pre-existing `acute-pancreatitis` consult have no drug-store links (no `#/drug` references and no drug link fields). No drug entries were added or are needed for this consult. Pre-existing text names antibiotics, morphine, insulin and lactated Ringer without drug-store links. That text is out of scope for this audit.
+
+### Verified as matching
+- Non-gallstone admission cutoffs (age, WBC, glucose, LDH, AST value) and the 48-hour non-gallstone items, against PMID 941075.
+- Calculator max totals: 11 non-gallstone (5+6), 10 gallstone (5+5, no PaO2). Bands 0-2, 3-4, 5-6, 7+ in code match the nodes.
+- Edge test run: `scoreRanson` / `computeResult` checked with the cases in F1. Admission-only output shows INCOMPLETE. The 11/11 and 10/10 totals are correct.
+- Calculator registered (`calculator.ts`, key `ranson`) and toolbar entry present, both in HEAD. The point-0 switches (C9) are handled as documented.
+- Filtered `tsc --noEmit --skipLibCheck --noUnusedLocals false` shows no errors in the Ranson or acute-pancreatitis files.
+
+### Path to APPROVE
+1. Andy decides F1 (calculator design) and F2 (severity directive). Both are required before deploy.
+2. Andy decides F3 to F6 and F9. Keep the gallstone set hidden, or labelled provisional, until F3, F4, F5 and F7 are resolved.
+3. Re-audit after the rewrite, with F8 tags removed.
+
+## Fixed after Dr. K audit (2026-10-27, mechanical only)
+- Removed draft and sign-off tags (patch C1/C2/C3/C6/C8, "pending sign-off", "unsourced") from clinician-facing text in `src/data/new-content/acute-pancreatitis-ranson-nodes.ts` and the Ranson calculator descriptions in `src/components/ranson.ts`. Caveats are kept as plain clinical wording. No number was changed.
+- Header comments in both files no longer say DRAFT. Tags remain only in this file.

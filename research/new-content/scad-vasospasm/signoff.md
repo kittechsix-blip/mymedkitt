@@ -178,3 +178,80 @@ Status: DRAFT for Andy's sign-off, then Dr. Kitlowski's clinical audit. Nothing 
 - [ ] Confirm drug-link ids against the drug store (see Verification)
 - [ ] Confirm reachability: every node reachable from `scad-vasospasm-start` or a toolbar jump
 - [ ] Keep the citation list in the tree and in the info module in sync
+
+## Drug entries (drugs-sbo-scad pass, 2026-10-27)
+
+Module: `src/data/new-content/drugs-sbo-scad.ts` (new entries diatrizoate, amlodipine, isosorbide-mononitrate; additive rows for diltiazem, verapamil, nitroglycerin). Nothing merged, wired, or pushed.
+
+**Drug-link hints checked:** `aspirin/acs`, `clopidogrel/acs`, `nitroglycerin/acs`, `isosorbide-dinitrate/angina` resolve to existing rows. No heparin link exists in the tree. `alteplase/stemi` resolves (the tree says do not apply).
+
+**C5a. Calcium channel blocker for vasospasm (label vs guideline).**
+- Verapamil: label (DailyMed ebc9a09a) lists vasospastic (Prinzmetal) angina; 80-120 mg PO TID, 40 mg TID if increased response. 2023 AHA/ACC Table 17: "verapamil 40 mg BID uptitrated" (first line). Dose conflict. Andy to rule.
+- Diltiazem: oral Cardizem label (DailyMed f3e7ecef) indicates coronary artery spasm; start 30 mg QID, 180-360 mg/day. Table 17 names no diltiazem example. No conflict in the source text; the choice of drug is Andy's.
+- Amlodipine: Norvasc label (DailyMed abd6a2ca, Revised 1/2019) lists vasospastic angina; 5-10 mg daily. Table 17 does NOT name amlodipine for vasospasm (microvascular only). Source conflict. Andy to rule whether amlodipine stays in the consult.
+
+**C5b. Long-acting nitrate dose (label vs guideline).**
+- Isosorbide mononitrate: Table 17 example 10 mg BID. Label (DailyMed ae8f74f0, rev 10/2022) recommended regimen 20 mg BID, 7 h apart. Conflict. Andy to rule.
+- Isosorbide dinitrate link in the tree (`isosorbide-dinitrate/angina`) points at the stable-angina row, not vasospasm. Integrator should repoint to `isosorbide-mononitrate` once the entry is registered, or Andy keeps ISDN.
+
+**C5c. Nitroglycerin.** Vasospasm acute-pain row uses the Nitrostat label (DailyMed cc481829): 1 SL tablet, repeat q5 min, max 3 in 15 min. The label indication is angina due to CAD. Vasospasm use follows Table 17 baseline. PDE-5 contraindication from label; window timing (C8) not in label.
+
+**C6 (doses).** The 2023 table doses (verapamil 40 mg BID, ISMN 10 mg BID) are now in the drug entries as conflicts, not as the recommended dose. Andy must choose before any dose is shown as the default.
+
+**Provocation agents (no drug entries).** Acetylcholine and ergonovine are cath-lab provocation agents. Tree text should name "provocation testing" without a drug link. Do not link to `methylergonovine` (a different drug).
+
+**Aspirin and clopidogrel links.** `aspirin/acs` opens the ACS / STEMI loading row (162-325 mg), and `clopidogrel/acs` opens the ACS / NSTEMI 300/600 mg loading rows. Both conflict with C2 (SCAD antiplatelet is undecided). Flag before wiring; the links may show loading doses in a SCAD context.
+
+**Verification gaps.**
+- Cardizem and Calan/verapamil label revision dates were not captured on read. Dr. Kitlowski to confirm.
+- Table 17 was read from the AHA 2023 slide set (professional.heart.org), not the journal table.
+- Verapamil entry uses the generic verapamil IR label (setid ebc9a09a), not the Calan brand label.
+
+## Dr. Kitlowski clinical audit (2026-10-27)
+
+**Verdict: REVISE (not safe to deploy yet).** Nothing was auto-fixed. Every finding below is FLAGGED for Andy because each touches a directive, a number a clinician acts on, a source conflict, or a citation the gate does not allow me to apply.
+
+### Auto-fixes applied
+- None. The consult text was already conservative (no numeric vasospasm doses; conflicts stated as conflicts). No sourced number needed correcting in the files, and the only wording issues found (below) change clinical meaning or the duration, so they go to Andy.
+
+### Citation gate (guideline-versions.md)
+- `~/Desktop/claude-brain/wikis/emergency-medicine/guideline-versions.md` lists SSC, 2025 ACC/AHA ACS, and 2022 ACC chest-pain ECDP only. It has no row for: AHA 2018 SCAD statement (ref 1), ESC-ACCA 2018 (ref 2), 2023 AHA/ACC chronic coronary disease (ref 3), Saw 2017 (ref 4), Pasupathy 2015 (ref 5), Beltrame 2017 (ref 6), Ghadri 2018 (ref 7), Ong 2014 (ref 8), the PDE-5 review (ref 9), the sildenafil label (ref 10), the ESC e-journal page (ref 11), or JCS 2023 (ref 12).
+- Gate result: all 12 references are FLAGGED. None was added to the table (rows need a DOI fetched this run). Refs 7, 8, 9, 12 have no author/DOI verification; ref 9 has no author list and the text itself says "authors to confirm"; ref 12 is a PubMed ID only.
+- Ref 2 full text and ref 4 author list remain unverified (see open questions 3 and 4).
+
+### Flagged for Andy (clinical directive or number; no change made)
+1. **F1 - Pre-angiography heparin and antiplatelet (C1).** Node `scad-vasospasm-stabilise` and critical action 2 defer this to a conflict. The app shows no default. Patient-safety item: needs Andy's rule before deploy.
+2. **F2 - Conservative-SCAD DAPT (C2).** `scad-vasospasm-scad-antithrombotic` shows three positions. The drug links `[aspirin](#/drug/aspirin/acs)` and `[clopidogrel](#/drug/clopidogrel/acs)` open ACS loading rows (aspirin 162-325 mg; clopidogrel 300/600 mg). Those are ACS loading doses shown inside a SCAD node whose plan is unsettled. Recommend Andy either removes the links here or approves a SCAD-specific hint. Not changed.
+3. **F3 - Beta-blocker SCAD directive (C4, C7).** `scad-vasospasm-scad-beta` is labelled pending, which is correct. Two issues: (a) the body states "HR 0.36" from one observational series as the headline number; (b) the info-page Do-NOT item "Do NOT assume non-selective beta-blockers are safe" is expert opinion, and labetalol and carvedilol status is open. Andy to rule keep or delete.
+4. **F4 - Wrong nitrate drug link (C5).** `scad-vasospasm-spasm-treat` links `[isosorbide dinitrate](#/drug/isosorbide-dinitrate/angina)`. The entry's indication is stable-angina prophylaxis. The guideline example is isosorbide mononitrate. The mononitrate entry exists only in `src/data/new-content/drugs-sbo-scad.ts` (not registered). Andy to choose; the link should not stay on ISDN for vasospasm by default.
+5. **F5 - CCB agent and dose conflict (C5a, C6).** Verapamil label (80-120 mg TID for vasospastic angina) vs 2023 AHA/ACC Table 17 (40 mg BID, uptitrated). ISMN label (20 mg BID, 7 h apart) vs Table 17 (10 mg BID). Amlodipine has label support (5-10 mg daily) but is not in the guideline for vasospasm. Diltiazem label (30 mg QID start; 180-360 mg/day) has no guideline conflict. Andy to choose agents and whether any dose is shown. The consult currently shows no dose, which is safe as drafted. Do not add a dose without a ruling.
+6. **F6 - Spasm threshold (">90%" vs "90% or more").** `scad-vasospasm-spasm-recognition` and `scad-vasospasm-spasm-provocation` both say ">90%". Secondary snippets of the COVADIS / Beltrame criteria give ">90%" in one place. I could not open the primary abstract (PubMed 26245334 returned a scrape failure this run). This is a diagnostic cut-off, so it is flagged, not changed. Verify against the Beltrame 2017 text before sign-off.
+7. **F7 - PDE-5 windows (C8).** 24 h (sildenafil, vardenafil) and 48 h (tadalafil) come from the ACC/AHA-cited review (ref 9), which has no confirmed author list. The window is a safety number. The sildenafil label (ref 10) gives no window. Andy to confirm the windows and pin the label version before the nitrate steps go live.
+8. **F8 - Admission duration and ED discharge (C9).** Critical action 5 states "3 to 5 days ... is justified (AHA 2018)" as settled, while the admit node and the conservative node say "final duration pending". The critical action and the node disagree. Recommend Andy picks the wording. The ED-discharge rule is expert opinion.
+9. **F9 - Unsourced pregnancy and contraception detail.** `scad-vasospasm-followup` lists specific contraception options and says tubal ligation is "after DAPT is stopped." I did not confirm this against the AHA 2018 text. Flagged as unverified.
+10. **F10 - Takotsubo and myocarditis text (C10).** Mimics node: "discuss with cardiology before catecholamines or inotropes" is unsourced. Ref 7 is unverified. Andy to keep or source.
+
+### Drug entries (SCAD links)
+- Links that resolve in `src/data/drug-store.ts`: `alteplase/stemi`, `aspirin/acs`, `clopidogrel/acs`, `nitroglycerin/acs`, `isosorbide-dinitrate/angina` (hints match existing `indications`).
+- Not yet wired: the new drug entries live only in `src/data/new-content/drugs-sbo-scad.ts`. Entries for amlodipine and isosorbide-mononitrate are not registered in `drug-store.ts`, and the diltiazem and verapamil additions are not merged. Any link to them would be dead until the integrator registers them. This blocks deploy.
+- Diatrizoate entry (SBO) is outside this consult and was not audited here.
+- The consult does not link heparin (no heparin entry needed for the link set).
+- Each drug-entry dose above is recorded with its label source and the guideline conflict. None was resolved.
+
+### Structural and reachability
+- No em dashes found in the tree, info, or toolbar files.
+- No andexanet reference in scope.
+- Reachability and link checks were recorded as passing in the 2026-10-27 pass above; not re-run in this audit.
+- Toolbar `TOOLBAR_SCADV` is not registered in `toolbar-configs.ts` (integrator item).
+
+### Remains for Andy before deploy
+- F1 through F10 above, plus the open signoff checklist items C1-C10 and open questions 1-15.
+- Citation gate: add verified rows to guideline-versions.md (with DOIs fetched) for refs 1, 2, 3, or accept the FLAG per the gate rule.
+- Integrator: register drug entries and the toolbar; re-run the link and reachability check after registration.
+
+### Dr. Kitlowski signoff
+Verdict: REVISE. The SCAD content is well sourced for the parts that are settled, and the draft correctly declines to pick numbers it cannot verify. It is not safe to deploy yet. The antithrombotic defaults (F1, F2), the ACS aspirin and clopidogrel loading links inside a SCAD node (F2), the wrong nitrate link (F4), and the unresolved CCB and nitrate doses (F5) are all decisions Andy has to make. Two references (ref 9 and ref 12) cannot be cited as verified. The drug entries are not registered, so the links would fail. Once Andy rules on F1-F10 and the integrator registers the entries, I will re-audit the changed nodes.
+
+## Fixed after Dr. K audit (2026-10-27, mechanical only)
+- Amlodipine (`src/data/new-content/drugs-sbo-scad.ts`): the 2.5 mg start is now attributed to the label hypertension section (dosing 2.1). The angina section gives only "5-10 mg, with the lower dose suggested in the elderly and in patients with hepatic insufficiency". Label checked on DailyMed setid abd6a2ca, 2026-10-27.
+- `src/data/trees/scad-vasospasm.ts`: draft, sign-off and "Andy to rule" wording removed from node text, options and summaries. The beta-blocker node now reads as evidence with no directive. Conflicts are still shown. No number changed.
