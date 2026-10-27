@@ -126,3 +126,7 @@ The Ranson additions and the pre-existing `acute-pancreatitis` consult have no d
 
 ### Ruling 4 (Andy, 2026-10-27)
 F2 RULED: existing critical action reworded to 'BISAP >=3 = high risk, ICU candidate. Ranson >=3 flags severe disease (needs 48 h of data); it does not decide ICU on its own.' (acute-pancreatitis.ts, FINAL critical action; only existing-text change in this build, per Andy).
+
+
+### Ruling 5 (Andy, 2026-10-27)
+F1 RULED: Ranson calculator now takes a count of 48-hour items resulted; final score only when all are resulted, otherwise INCOMPLETE with the count shown (an unmeasured item no longer counts as No). 18/18 calculator tests pass.

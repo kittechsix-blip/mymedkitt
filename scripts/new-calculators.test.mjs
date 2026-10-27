@@ -158,3 +158,17 @@ test('Ranson bands: edges at 2/3, 4/5, 6/7; top band is 7 or more', () => {
   assert.equal(ransonBand(9), 'very-high');
   assert.equal(ransonBand(11), 'very-high');
 });
+
+test('Ranson calculator: final score only when every 48-hour item has a result', async () => {
+  const { RANSON_CALCULATOR } = await import('../src/components/ranson.ts');
+  const base = { gallstone: 0, age: 1, wbc: 1, glucose: 0, ldh: 0, ast: 0 };
+  const partial = RANSON_CALCULATOR.computeResult({ ...base, h48Resulted: 4, calcium: 1 });
+  assert.equal(partial.label, 'INCOMPLETE');
+  assert.match(partial.description, /4 of 6 resulted/);
+  const full = RANSON_CALCULATOR.computeResult({ ...base, h48Resulted: 6, calcium: 1 });
+  assert.equal(full.value, '3 / 11');
+  const gs = RANSON_CALCULATOR.computeResult({ ...base, gallstone: 1, h48Resulted: 5 });
+  assert.equal(gs.value, '2 / 10');
+  const gsPartial = RANSON_CALCULATOR.computeResult({ ...base, gallstone: 1, h48Resulted: 4 });
+  assert.equal(gsPartial.label, 'INCOMPLETE');
+});

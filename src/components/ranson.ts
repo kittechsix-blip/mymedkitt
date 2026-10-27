@@ -78,7 +78,7 @@ function toInput(values: Record<string, number>): RansonInput {
   const on = (k: string): boolean => values[k] === 1;
   return {
     gallstone: on('gallstone'),
-    h48Entered: on('h48Entered'),
+    h48Entered: (values.h48Resulted ?? 0) >= (on('gallstone') ? 5 : 6),
     admission: { age: on('age'), wbc: on('wbc'), glucose: on('glucose'), ldh: on('ldh'), ast: on('ast') },
     h48: {
       hematocritFall: on('hematocritFall'),
@@ -175,11 +175,11 @@ export const RANSON_CALCULATOR: RansonCalculatorDef = {
   id: 'ranson',
   title: 'Ranson Criteria',
   subtitle: 'Acute pancreatitis: admission and 48-hour score',
-  description: 'Score the five admission items on arrival. Score the 48-hour items at 48 hours. Turn on the gallstone switch for gallstone cutoffs (provisional). The final score needs both sets.',
+  description: 'Score the five admission items on arrival. Score the 48-hour items at 48 hours. Turn on the gallstone switch for gallstone cutoffs (provisional). The final score needs the admission items and every 48-hour item resulted.',
   fields: [
     { name: 'gallstone', label: 'Gallstone etiology (gallstone cutoffs)', points: 0, type: 'toggle', description: 'Switch, adds no points. Off = non-gallstone cutoffs. On = gallstone set, provisional.' },
     ...ADMISSION_FIELDS,
-    { name: 'h48Entered', label: '48-hour labs entered', description: 'Switch, adds no points. Final score only when ON. Leave OFF on arrival.', points: 0, type: 'toggle' },
+    { name: 'h48Resulted', label: '48-hour items with a result back (count)', description: 'Enter how many of the 48-hour items below have a result (6 non-gallstone, 5 gallstone). The final score appears only when all have a result; an item with no result is NOT the same as No.', points: 0, type: 'number' },
     ...H48_FIELDS,
   ],
   results: [],
@@ -198,7 +198,7 @@ export const RANSON_CALCULATOR: RansonCalculatorDef = {
       return {
         value: `${r.admissionScore} / 5 admission`,
         label: 'INCOMPLETE',
-        description: `**ADMISSION ITEMS:** ${admissionText} met\n\n**48-HOUR ITEMS:** not entered\n\n**STATUS:** the final score needs 48-hour data. Do not quote an admission-only total as the Ranson score.`,
+        description: `**ADMISSION ITEMS:** ${admissionText} met\n\n**48-HOUR ITEMS:** ${Math.max(0, Math.min(values.h48Resulted ?? 0, r.h48Max))} of ${r.h48Max} resulted\n\n**STATUS:** the final score needs every 48-hour item resulted. Do not quote a partial total as the Ranson score.`,
         colorVar: '--color-text-muted',
       };
     }
