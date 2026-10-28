@@ -232,7 +232,7 @@ export const COAG_CASCADE_NODES = [
         body: '[Vitamin K Pathway Overlay](#/info/coag-vitk-pathway)\n\n**Vitamin K-dependent factors: II, VII, IX, X (and protein C, S).** [4]\n\n**Half-lives (longest to shortest):**\n• Factor II (prothrombin) — 60 h\n• Factor X — 40 h\n• Factor IX — 24 h\n• Factor VII — 6 h ← **falls first in vitamin K deficiency**\n\n**Causes of vitamin K deficiency:** [4]\n• Warfarin or vitamin K antagonist\n• Malabsorption (cystic fibrosis, IBD, biliary obstruction, pancreatic insufficiency)\n• Prolonged broad-spectrum antibiotic use (kills gut flora that produce vitamin K)\n• Malnutrition / starvation\n• Newborn (give vitamin K 1 mg IM at birth)\n\n**Treatment:** [4]\n• **No bleeding, INR <4.5:** hold warfarin; recheck\n• **No bleeding, INR 4.5-10:** hold; vitamin K 1-2.5 mg PO if high bleeding risk\n• **No bleeding, INR >10:** hold; vitamin K 2.5-5 mg PO\n• **Active bleeding (any INR >1.5):** vitamin K 10 mg IV slow + 4F-PCC 25-50 units/kg\n• **Life-threatening bleed:** 4F-PCC + vitamin K immediately, hold further warfarin\n\n**4F-PCC dosing (Kcentra):** [12]\n• INR 2-4: 25 units/kg (max 2500)\n• INR 4-6: 35 units/kg (max 3500)\n• INR >6: 50 units/kg (max 5000)\n\n**FFP alternative if PCC unavailable:** 15-30 mL/kg, but slower onset and volume burden. [12]\n\n**Cross-link:** Full reversal pathway in [Anticoagulation Reversal tree](#/tree/anticoag-reversal).',
         citation: [4, 12],
         next: 'coag-pcc-vs-ffp',
-        summary: 'VitK factors II/VII/IX/X; FVII falls first (6h); active bleed → vitK 10mg IV + 4F-PCC 25-50 u/kg; FFP if PCC unavailable',
+        summary: 'VitK factors II/VII/IX/X; FVII falls first (6h); active bleed → vitK 10mg IV + 4F-PCC (fixed 1000 IU per PROPER-3, or INR-tiered 25-50 u/kg); FFP if PCC unavailable',
     },
     {
         id: 'coag-pcc-vs-ffp',
@@ -265,7 +265,7 @@ export const COAG_CASCADE_NODES = [
             { id: 'coag-doac-reversal', label: 'DOAC Reversal Selector' },
         ],
         next: 'coag-platelet-transfusion',
-        summary: 'Dabig→idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC→4F-PCC per local PCC protocol (off-label for DOACs; andexanet no longer marketed in US); LMWH→protamine partial; UFH→protamine 1mg per 100u',
+        summary: 'Dabig→idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC→4F-PCC 25-50 units/kg (off-label; higher end for life-threatening or intracranial bleeding; per institutional protocol; andexanet no longer marketed in US); LMWH→protamine partial; UFH→protamine 1mg per 100u',
     },
     {
         id: 'coag-platelet-transfusion',
@@ -408,8 +408,8 @@ export const COAG_CASCADE_CRITICAL_ACTIONS = [
     { text: 'First branch: bleeding-dominant vs thrombotic-dominant vs mixed (DIC/HIT/APS/TTP) — determines entire workup', nodeId: 'coag-bleeding-vs-clotting' },
     { text: 'Mixing study splits prolonged PT/PTT: corrects = factor deficiency, doesn\'t correct = inhibitor; incubation distinguishes lupus AC (immediate) vs factor inhibitor (time-dependent)', nodeId: 'coag-mixing-study' },
     { text: 'Mucosal bleeding = platelet or vWF problem; deep tissue/joint bleeding = factor problem (hemophilia)', nodeId: 'coag-mucosal-bleeding-pattern' },
-    { text: 'Active warfarin bleed: vitamin K 10 mg IV + 4F-PCC 25-50 u/kg; FFP only if PCC unavailable', nodeId: 'coag-vit-k' },
-    { text: 'Dabigatran reversal: idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC reversal: 4F-PCC per local PCC protocol (off-label for DOACs; andexanet no longer marketed in the US)', nodeId: 'coag-doac-reversal' },
+    { text: 'Active warfarin bleed: vitamin K 10 mg IV + 4F-PCC fixed 1000 IU (PROPER-3; not for intracranial bleeding) or INR-tiered 25-50 u/kg; FFP only if PCC unavailable', nodeId: 'coag-vit-k' },
+    { text: 'Dabigatran reversal: idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC reversal: 4F-PCC 25-50 units/kg IV bolus (off-label; higher end for life-threatening or intracranial bleeding; per institutional protocol; andexanet no longer marketed in the US)', nodeId: 'coag-doac-reversal' },
     { text: 'Cirrhosis has "rebalanced" hemostasis — PT/INR does NOT predict bleeding risk; do not transfuse FFP for labs alone', nodeId: 'coag-liver-disease' },
     { text: 'Pregnancy fibrinogen baseline is 4-6 g/L — treat <2 g/L (not <1) in obstetric DIC/PPH', nodeId: 'coag-pregnancy' },
     { text: 'HIT: 4Ts ≥4 → stop ALL heparin, NO platelet transfusion, start argatroban/bivalirudin/fondaparinux; bridge to warfarin only after platelet recovery', nodeId: 'coag-hit' },

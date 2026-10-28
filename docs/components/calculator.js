@@ -6806,6 +6806,8 @@ const PCC_DOSING_CALCULATOR = {
         'ESO/EANS 2025 Guideline on Stroke due to Spontaneous ICH. Eur Stroke J. 2025;10(4):1007-1086.',
         'Cuker A, et al. Reversal of DOACs: Anticoagulation Forum Guidance. Am J Hematol. 2019;94(6):697-709.',
         'Farkas J. Anticoagulant Reversal. IBCC. Updated April 25, 2025.',
+        'N Engl J Med 2026. Antidotes for Anticoagulation Reversal. doi:10.1056/NEJMra2506021',
+        'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose dosing for vitamin K antagonist-related bleeding (intracranial hemorrhage excluded).',
     ],
     computeResult: (values) => {
         const weight = values['weight'] || 0;
@@ -6821,6 +6823,7 @@ const PCC_DOSING_CALCULATOR = {
         let maxDose = 5000;
         let label = '';
         let description = '';
+        let valueText = '';
         if (indication === 1) {
             // Warfarin reversal — INR-based
             if (inrTier === 0) {
@@ -6834,7 +6837,7 @@ const PCC_DOSING_CALCULATOR = {
                 dose = maxDose;
             const tierLabel = { 15: 'INR 1.3-2', 25: 'INR 2-4', 35: 'INR 4-6', 50: 'INR >6' };
             label = `Warfarin Reversal (${tierLabel[unitsPerKg]})`;
-            description = `${unitsPerKg} units/kg × ${weight} kg = ${Math.round(weight * unitsPerKg)} units${dose < Math.round(weight * unitsPerKg) ? ` (capped at ${maxDose})` : ''}\n\nCo-administer: Vitamin K 10 mg IV over 30 min\nOnset: 10-15 min | Duration: 6-8h\nMonitor INR at 30 min, 6h, 24h`;
+            description = `Institutional weight-based protocol (INR-tiered): ${unitsPerKg} units/kg × ${weight} kg = ${Math.round(weight * unitsPerKg)} units${dose < Math.round(weight * unitsPerKg) ? ` (capped at ${maxDose})` : ''}\n\nFixed-dose option: 1000 IU (PROPER-3) or per institutional protocol\nPROPER-3 excluded intracranial bleeding; for ICH use the INR-tiered dose above.\n\nCo-administer: Vitamin K 10 mg IV over 30 min\nOnset: 10-15 min | Duration: 6-8h\nMonitor INR at 30 min, 6h, 24h`;
         }
         else if (indication === 2) {
             // Xa inhibitor — CNS bleeding
@@ -6845,13 +6848,16 @@ const PCC_DOSING_CALCULATOR = {
             description = `50 units/kg × ${weight} kg = ${Math.round(weight * 50)} units${dose < Math.round(weight * 50) ? ' (capped at 5,000)' : ''}\n\nPCC will NOT change anti-Xa level\nMonitor: INR after PCC, then q6h\nThese DOACs are NOT dialyzable`;
         }
         else {
-            // Xa inhibitor — non-CNS: the dose is not stated here (sources disagree); the consults say the same
+            // Xa inhibitor — non-CNS: 25-50 units/kg range, no cap (NEJM 2026 reference; dose verified by Andy)
+            const low = Math.round(weight * 25);
+            const high = Math.round(weight * 50);
             dose = 0;
             label = 'Xa Inhibitor Reversal (Non-CNS)';
-            description = `**DOSE PER LOCAL PCC PROTOCOL.** A non-CNS dose is not stated in this calculator.\n\n4F-PCC for factor Xa inhibitor reversal is off-label\nMay repeat if hemostasis not achieved\nPCC will NOT change anti-Xa level`;
+            description = `4F-PCC (off-label for DOACs): 25-50 units/kg IV bolus; use the higher end for life-threatening or intracranial bleeding (50 units/kg), maximum and repeat dosing per institutional protocol.\n\n25 units/kg × ${weight} kg = ${low.toLocaleString()} units (low end)\n50 units/kg × ${weight} kg = ${high.toLocaleString()} units (high end)\n\nPCC will NOT change anti-Xa level\nMay repeat if hemostasis not achieved`;
+            valueText = `${low.toLocaleString()}-${high.toLocaleString()} units`;
         }
         return {
-            value: dose > 0 ? `${dose.toLocaleString()} units` : 'Per local protocol',
+            value: valueText || (dose > 0 ? `${dose.toLocaleString()} units` : 'Per local protocol'),
             label,
             description,
             colorVar: '--color-danger',
@@ -33358,7 +33364,7 @@ const COAG_DOAC_REVERSAL_CALCULATOR = {
     results: [
         { min: 0, max: 2, label: 'Hold drug + supportive care', risk: 'Minor bleed, agent unknown or remote dose', mortality: 'Hold DOAC, mechanical hemostasis, monitor; specific reversal not indicated', colorVar: '--color-success' },
         { min: 2, max: 4, label: 'Hold + targeted hemostasis', risk: 'Apixaban/Xa class, minor-moderate bleed', mortality: 'Hold DOAC, supportive measures, charcoal if <2h ingestion; reserve specific reversal for major bleed', colorVar: '--color-warning' },
-        { min: 4, max: 6, label: '4F-PCC for Xa inhibitor (andexanet no longer marketed in US)', risk: 'Apixaban / rivaroxaban / edoxaban with major bleed', mortality: 'First-line in the US (off-label for DOACs): 4F-PCC, dose per local PCC protocol. Andexanet alfa is no longer marketed in the US (sales ended 12/22/2025); where available outside the US, dose by drug + timing. ANNEXA-I 2024 showed better hemostasis with more thrombotic events.', colorVar: '--color-danger' },
+        { min: 4, max: 6, label: '4F-PCC for Xa inhibitor (andexanet no longer marketed in US)', risk: 'Apixaban / rivaroxaban / edoxaban with major bleed', mortality: 'First-line in the US (off-label for DOACs): 4F-PCC 25-50 units/kg IV bolus; higher end (50 units/kg) for life-threatening or intracranial bleeding; maximum and repeat dosing per institutional protocol. Andexanet alfa is no longer marketed in the US (sales ended 12/22/2025); where available outside the US, dose by drug + timing. ANNEXA-I 2024 showed better hemostasis with more thrombotic events.', colorVar: '--color-danger' },
         { min: 6, max: 8, label: 'Idarucizumab for dabigatran', risk: 'Dabigatran with major or life-threatening bleed', mortality: 'Idarucizumab 5 g IV (two 2.5 g vials, no more than 15 min apart). Confirms reversal within minutes; redose if bleeding recurs and dabigatran detectable.', colorVar: '--color-danger' },
         { min: 8, max: Infinity, label: 'Specific antidote + multimodal hemostasis', risk: 'Life-threatening bleed, recent DOAC dose', mortality: 'Specific antidote (idarucizumab; andexanet alfa not marketed in the US) + TXA + targeted blood product replacement + source control. Hematology + surgical consultation.', colorVar: '--color-danger' },
     ],
@@ -33367,6 +33373,7 @@ const COAG_DOAC_REVERSAL_CALCULATOR = {
         'Connolly SJ, Sharma M, Cohen AT, et al. Andexanet for factor Xa inhibitor-associated acute intracerebral hemorrhage (ANNEXA-I). N Engl J Med. 2024;390:1745-1755.',
         'Pollack CV Jr, Reilly PA, Eikelboom J, et al. Idarucizumab for dabigatran reversal (RE-VERSE AD). N Engl J Med. 2017;377(5):431-441.',
         'Cuker A, Burnett A, Triller D, et al. Reversal of direct oral anticoagulants: guidance from the Anticoagulation Forum. Am J Hematol. 2019;94(6):697-709.',
+        'N Engl J Med 2026. Antidotes for Anticoagulation Reversal. doi:10.1056/NEJMra2506021',
     ],
 };
 // =====================================================================
