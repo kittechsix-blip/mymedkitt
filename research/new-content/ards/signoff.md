@@ -286,3 +286,11 @@ Signoff (Dr. Kitlowski, 2026-10-27): The ventilation, prone, and blockade conten
 - **Change in ecmo.ts.** The indication node and critical action now show the EOLIA enrollment criteria and the commonly used P/F below 80 referral trigger as two separate statements, with citations [5] and [11]. The trial-thresholds node is labelled as trial criteria, not a referral rule. Citation [11] (ELSO 2021) added.
 - **Change in ards.ts.** Only the ECMO cross-reference sentences in `ards-rescue-check` and `ards-ecmo-referral` were rewritten to point to the ECMO consult, which now carries both statements side by side. The EOLIA enrollment list and the recommendation text were not changed.
 - **Still open for Andy.** Whether the app should name one referral trigger. This patch keeps them separate and does not merge them into one invented threshold. The EOLIA primary text was read from the abstract only; the full-text gate boundaries (for example, FiO2 and PEEP conditions in the trial protocol) were not read.
+
+
+Audit fixes 2026-10-27
+- ECMO and ARDS: ELSO 2021 P/F below 80 referral trigger (after optimal management including a prone trial) separated from EOLIA enrollment criteria; pH wording set to below 7.25 with PaCO2 at least 60; unsourced FiO2 over 80 qualifier and the 77
+
+Audit fixes 2026-10-27
+- ECMO and ARDS: ELSO 2021 P/F below 80 referral trigger (after optimal management including a prone trial) separated from EOLIA enrollment criteria; pH wording set to below 7.25 with PaCO2 at least 60; unsourced FiO2 over 80 qualifier and the 77% vs 38% figures removed; "stopped for futility" removed (the EOLIA abstract does not say it).
+- Hypertensive emergency and cocaine: pure beta-blocker avoidance wording aligned across drug entry, tree and calculator; nitroglycerin named as the vasodilator; phentolamine dose figures removed because the 2025 guideline text could not be opened; McCord 2008 added as calculator citation [5] (metadata only).

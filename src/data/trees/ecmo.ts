@@ -16,7 +16,7 @@ export const ECMO_CRITICAL_ACTIONS = [
   { text: 'VV-ECMO provides oxygenation ONLY (no hemodynamic support) - patient must have adequate cardiac function', nodeId: 'ecmo-start' },
   { text: 'VA-ECMO provides oxygenation AND circulatory support - for cardiogenic shock and cardiac arrest', nodeId: 'ecmo-start' },
   { text: 'When in doubt between VV and VA, go VA - VA can support both heart and lungs, VV cannot support failing heart', nodeId: 'ecmo-selection-decision' },
-  { text: 'VV-ECMO: EOLIA trial criteria (P/F <50 for >3 h, P/F <80 for >6 h, pH <7.25 with PaCO2 >=60 for >6 h) are enrollment rules. The commonly used referral trigger is PaO2/FiO2 <80 despite optimal ventilator settings. See the ARDS consult for the same two statements', nodeId: 'ecmo-vv-indications' },
+  { text: 'VV-ECMO: EOLIA trial criteria (P/F <50 for >3 h, P/F <80 for >6 h, pH <7.25 with PaCO2 >=60 for >6 h) are enrollment rules. The ELSO 2021 referral trigger is PaO2/FiO2 <80 after optimal management including a prone trial. See the ARDS consult for the same two statements', nodeId: 'ecmo-vv-indications' },
   { text: 'VA-ECMO indication: lactate >4 and rising + CI <2.0 + MAP <65 despite high-dose pressors', nodeId: 'ecmo-va-indications' },
   { text: 'ECPR (cardiac arrest): CPR <60 min, witnessed arrest, bystander CPR, shockable rhythm best outcomes', nodeId: 'ecmo-ecpr' },
   { text: 'Absolute contraindication: severe aortic regurgitation for VA-ECMO (worsens with retrograde flow)', nodeId: 'ecmo-contraindications' },
@@ -119,14 +119,14 @@ export const ECMO_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'VV-ECMO Indications',
-    body: '[RESP Score Calculator](#/calculator/ecmo-resp-score) — VV-ECMO survival prediction.\n\n**VV-ECMO is indicated for severe, potentially REVERSIBLE respiratory failure** [1][2][5].\n\n**Classic indications:**\n\n**Hypoxemic respiratory failure: two statements, kept separate.**\n\n**EOLIA trial enrollment criteria** (any one, despite optimal ventilation) [5]:\n• P/F ratio <50 for >3 hours\n• P/F ratio <80 for >6 hours\n• pH <7.25 with PaCO₂ ≥60 mmHg for >6 hours\n\n**Commonly used referral trigger** (ELSO 2021 guideline) [11]:\n• PaO₂/FiO₂ <80 mmHg after optimal medical management, including a trial of prone positioning\n• Commonly used qualifier: FiO₂ >80% (local practice, not from the sources opened for this patch)\n\nThe trial criteria describe who was enrolled in EOLIA. The referral trigger describes when to call. They are not the same rule. The [ARDS consult](#/tree/ards) shows the same two statements side by side.\n\n**Hypercapnic respiratory failure:**\n• pH <7.20-7.25 with PaCO₂ >60 mmHg\n• Despite optimal ventilation and rescue therapies\n\n**Common etiologies:**\n• ARDS (viral, bacterial pneumonia)\n• COVID-19 ARDS\n• Aspiration pneumonitis\n• Trauma/contusion\n• Status asthmaticus (refractory)\n• Drowning/near-drowning\n• Massive air leak syndrome\n• Bridge to lung transplant\n\n**KEY: The lungs must be recoverable or the patient must be a transplant candidate** [2][5].',
+    body: '[RESP Score Calculator](#/calculator/ecmo-resp-score) — VV-ECMO survival prediction.\n\n**VV-ECMO is indicated for severe, potentially REVERSIBLE respiratory failure** [1][2][5].\n\n**Classic indications:**\n\n**Hypoxemic respiratory failure: two statements, kept separate.**\n\n**EOLIA trial enrollment criteria** (any one, despite optimal ventilation) [5]:\n• P/F ratio <50 for >3 hours\n• P/F ratio <80 for >6 hours\n• pH <7.25 with PaCO₂ ≥60 mmHg for >6 hours\n\n**ELSO 2021 referral trigger** [11]:\n• PaO₂/FiO₂ <80 mmHg after optimal medical management, including a trial of prone positioning\n\nThe trial criteria describe who was enrolled in EOLIA. The referral trigger describes when to call. They are not the same rule. The [ARDS consult](#/tree/ards) shows the same two statements side by side.\n\n**Hypercapnic respiratory failure:**\n• pH <7.25 with PaCO₂ ≥60 mmHg\n• Despite optimal ventilation and rescue therapies\n\n**Common etiologies:**\n• ARDS (viral, bacterial pneumonia)\n• COVID-19 ARDS\n• Aspiration pneumonitis\n• Trauma/contusion\n• Status asthmaticus (refractory)\n• Drowning/near-drowning\n• Massive air leak syndrome\n• Bridge to lung transplant\n\n**KEY: The lungs must be recoverable or the patient must be a transplant candidate** [2][5].',
     citation: [1, 2, 5],
     calculatorLinks: [
       { id: 'ecmo-resp-score', label: 'RESP Score' },
       { id: 'ecmo-murray-score', label: 'Murray Lung Injury Score' },
     ],
     next: 'ecmo-vv-timing',
-    summary: 'VV-ECMO: EOLIA trial criteria (enrollment) and the commonly used P/F <80 referral trigger, kept separate — lungs must be recoverable',
+    summary: 'VV-ECMO: EOLIA trial criteria (enrollment) and the ELSO 2021 P/F <80 referral trigger, kept separate — lungs must be recoverable',
   },
 
   {
@@ -134,10 +134,10 @@ export const ECMO_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'VV-ECMO — When to Call',
-    body: '**CALL THE ECMO CENTER EARLY** — don\'t wait until the patient is moribund [2][6].\n\n**Dr. Augustin\'s guidance (CV-EMCrit):**\n\n**Call for referral when:**\n• Young patient with single organ failure\n• Reversible cause of respiratory failure\n• Failing conventional management\n• Mechanical ventilation <7 days (ideally)\n\n**EOLIA/CESAR trial thresholds (trial criteria, not a referral rule; see the [ARDS consult](#/tree/ards)):**\n• P/F <80 despite optimization\n• pH <7.25 with rising PaCO₂\n• Murray score ≥3.0\n• Uncompensated hypercapnia with pH <7.20\n\n**Mortality increases sharply with:**\n• MV >7 days before ECMO: 77% mortality vs 38% if <7 days [6]\n• Pplat >30 + FiO₂ >90% for >7 days\n• Multi-organ failure\n\n**What to optimize before calling:**\n• Prone positioning (if not contraindicated)\n• Neuromuscular blockade\n• Conservative fluid management\n• Lung-protective ventilation\n\n**DON\'T delay the call waiting for everything to fail.**',
-    citation: [2, 5, 6],
+    body: '**CALL THE ECMO CENTER EARLY** — don\'t wait until the patient is moribund [2][6].\n\n**Dr. Augustin\'s guidance (CV-EMCrit):**\n\n**Call for referral when:**\n• Young patient with single organ failure\n• Reversible cause of respiratory failure\n• Failing conventional management\n• Mechanical ventilation <7 days (ideally)\n\n**ELSO 2021 referral trigger:** P/F below 80 after optimal management including a prone trial [11]\n\n**Trial enrollment criteria, not referral rules** (see the [ARDS consult](#/tree/ards)):\n• EOLIA [5]: P/F <50 for >3 h, P/F <80 for >6 h, or pH <7.25 with PaCO₂ ≥60 mmHg for >6 h\n• CESAR: Murray score above 3\n\n**Mortality increases with:**\n• Longer mechanical ventilation before ECMO: ELSO 2021 notes that increasing duration of ventilation before ECMO is associated with worse mortality after ECMO [11]\n• Pplat >30 + FiO₂ >90% for >7 days\n• Multi-organ failure\n\n**What to optimize before calling:**\n• Prone positioning (if not contraindicated)\n• Neuromuscular blockade\n• Conservative fluid management\n• Lung-protective ventilation\n\n**DON\'T delay the call waiting for everything to fail.**',
+    citation: [2, 5, 6, 11],
     next: 'ecmo-vv-flow',
-    summary: 'Call ECMO center EARLY — mortality doubles if MV >7 days before ECMO initiation',
+    summary: 'Call ECMO center EARLY — longer ventilation before ECMO is associated with worse mortality',
     safetyLevel: 'warning',
   },
 
@@ -495,7 +495,7 @@ export const ECMO_MODULE_LABELS = [
 
 export const ECMO_CITATIONS: Citation[] = [
   { num: 1, text: 'Farkas J. ECMO Manual. EMCrit IBCC. https://emcrit.org/ibcc/ecmo/' },
-  { num: 2, text: 'ELSO Guidelines for Adult Respiratory Failure. Extracorporeal Life Support Organization. 2017.' },
+  { num: 2, text: 'ELSO Guidelines for Adult Respiratory Failure. Extracorporeal Life Support Organization. 2017. Superseded by ELSO 2021 [11].' },
   { num: 3, text: 'Lorusso R, et al. ELSO Interim Guidelines for Venoarterial Extracorporeal Membrane Oxygenation in Adult Cardiac Patients. ASAIO J. 2021;67(8):827-844.' },
   { num: 4, text: 'Guglin M, et al. Venoarterial ECMO for Adults: JACC Scientific Expert Panel. J Am Coll Cardiol. 2019;73(6):698-716.' },
   { num: 5, text: 'Combes A, et al. Extracorporeal Membrane Oxygenation for Severe Acute Respiratory Distress Syndrome (EOLIA). N Engl J Med. 2018;378(21):1965-1975.' },

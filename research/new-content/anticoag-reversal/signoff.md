@@ -48,3 +48,43 @@ Decision needed: rewrite those live recommendations (PCC as the available option
 **Not changed (on purpose):** `src/data/trees/ich.ts` citation 21 text (already existed); `src/components/drug-store.ts` line 32 (code comment only); ANNEXA-I/ANNEXA-4 citations kept; drafts in `research/new-content/anticoag-reversal/drafts` untouched; `supabase-hotfix-update.sql` and other agents' edits (cocaine/beta-blocker, ecmo.ts, stemi.ts) untouched; no docs/ edits; nothing committed, pushed, or deployed.
 
 **Gates (2026-10-27):** `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` exit 0. `node scripts/lint-citation-refs.mjs --gate`: no new dangling refs. `node scripts/lint-critical-actions.mjs --strict`: PASS (363 trees).
+
+## Andexanet audit fixes 2026-10-27
+
+**Sources actually opened:**
+- FDA Safety Communication page: https://www.fda.gov/safety/medical-product-safety-information/update-safety-andexxa-astrazeneca-fda-safety-communication — communication dated 12/18/2025; "the FDA considers the risks of the product to outweigh its benefits"; "will end U.S. commercial sales today, December 22, 2025".
+- ANNEXA-I abstract (Connolly SJ et al., NEJM 2024;390:1745-1756; PMID 38749032), read via PubMed efetch: thrombotic events 27/263 (10.3%) vs 15/267 (5.6%); ischemic stroke 17 (6.5%) vs 4 (1.5%); "no appreciable differences ... in death within 30 days" (no death percentages in the abstract).
+
+**Could NOT open (403 / unavailable):** Greenberg SM et al. Stroke 2022 (AHA guideline, DOI 10.1161/STR.0000000000000407; PMID 35579034, no PMC copy); Tomaselli GF et al. 2020 ACC ECDP (JACC; DOI in our citation list did not resolve to it); Kcentra US label and dosing guide (CSL PDF unreadable; Drugs.com 403); the NEJM full text.
+
+**Edits (old -> new):**
+1. `src/data/trees/anticoag-reversal.ts` `acr-xa-critical` body, PCC option: "first-line in the US, where andexanet alfa is no longer marketed [21]" -> "first-line in the US (off-label for DOACs), where andexanet alfa is no longer marketed [21]".
+2. Same node, non-CNS line: "Non-CNS: 25 units/kg (max 2,500) or fixed 2,000 units (simplest, best evidence) [5]" -> "Non-CNS: dose per local PCC protocol (no non-CNS unit/kg figure verified against an opened source)". CNS 50 units/kg (max 5,000) kept; NOT verified against an opened source (see open items).
+3. Same node, andexanet option: "Where available outside the US: specific Xa antidote, AHA/ASA Class I for ICH [1]" -> "Where available outside the US: specific Xa antidote [1]" (class statement removed; could not open the guideline).
+4. Same node, andexanet dose bullets (low 400 mg + 4 mg/min; high 800 mg + 8 mg/min) -> "Not available in the US. Outside-US dosing per local product label." (body bullet also replaced, not only the treatment field).
+5. Same node, ANNEXA-I bullet: "no mortality benefit (30-day death 27.8% vs 25.5%)" -> "no appreciable difference in 30-day death". Thrombotic 10.3% vs 5.6% and ischemic stroke 6.5% vs 1.5% VERIFIED, unchanged. 27.8% / 25.5% could not be verified, removed.
+6. `treatment.firstLine` (acr-xa-critical): dose "CNS bleeding: 50 units/kg (max 5,000 units) | Non-CNS: 25 units/kg (max 2,500) or fixed 2,000 units" -> "CNS bleeding: 50 units/kg (max 5,000 units) | Non-CNS: dose per local PCC protocol"; notes add "(off-label for DOACs)".
+7. `treatment.alternative.dose`: andexanet 400/800 mg strings -> "Not available in the US. Outside-US dosing per local product label."; notes: "AHA/ASA Class I for ICH if available" removed.
+8. `ANTICOAG_REVERSAL_CRITICAL_ACTIONS`: "Apixaban/rivaroxaban: 4-factor PCC 50 units/kg (andexanet ...)" -> "Apixaban/rivaroxaban: 4-factor PCC (off-label for DOACs) - CNS bleed 50 units/kg; non-CNS dose per local PCC protocol (andexanet alfa no longer marketed in the US)".
+9. Citation 21 (anticoag-reversal.ts): now leads with the FDA safety communication URL above (Dec 18, 2025; risks outweigh benefits; US sales ended Dec 22, 2025); TCTMD and AABB kept as secondary.
+10. `acr-xa-critical` alternative-fallback PCC fondaparinux line (`acr-lmwh-reversal`, PCC alternative): "25-50 units/kg" -> "Dose per local PCC protocol" (fondaparinux is a factor Xa inhibitor; same no-verified-number rule).
+11. `src/data/trees/massive-hemoptysis.ts` DOAC node: "[4-Factor PCC] 50 units/kg [1] (first-line in the US)" -> "dose per local PCC protocol [1] (first-line in the US; off-label for DOACs)"; treatment dose "50 units/kg IV" -> "Dose per local PCC protocol"; notes add "off-label for DOACs".
+12. `src/data/trees/hemoptysis-hub.ts` ~line 140: "andexanet roughly doubles thrombotic events" -> "ANNEXA-I (andexanet no longer marketed in the US): thrombotic events roughly doubled."
+13. `src/data/trees/ich.ts` `ich-xa-rev` Option 1 header: added "(off-label for DOACs)". 50 IU/kg dose kept (intracranial scope; see open items). Paragraph "Basis for the andexanet availability note": removed figures I could not verify (ANNEXA-4 82% hemostasis; ANNEXA-I MI 4.2% vs 1.5%; FDA briefing 30-day thrombosis 14.6% vs 6.9%, thrombosis death 2.5% vs 0.9%); kept ANNEXA-I 10.3% vs 5.6% and 6.5% vs 1.5%; FDA sentence rewritten to cite the Dec 18, 2025 safety communication.
+14. `src/data/drug-store.ts` `ANDEXANET_ALFA` ICH regimen: "AHA/ASA 2022 gave a Class 1 recommendation ... (historical; ...)" -> "Historical reference only (not marketed in the US since 12/22/2025)." ANNEXA-I bullets: removed hemostatic 67.0% vs 53.1% and anti-FXa 94.5% vs 26.9% (not verified); "No significant difference in 30-day mortality or disability" -> "No appreciable difference in 30-day death". Andexanet dose strings in this entry kept, marked historical.
+15. `src/data/drug-store.ts` PCC entry "Massive hemoptysis / DOAC reversal (off-label)": "50 units/kg IV (max 5,000)" -> "Dose per local PCC protocol (off-label for DOACs)"; weightCalc (50 units/kg) removed so the calculator does not compute a number.
+16. `src/components/calculator.ts` ~34658 (4-6 bin): "First-line in the US: 4F-PCC 50 U/kg." -> "First-line in the US (off-label for DOACs): 4F-PCC, dose per local PCC protocol." Only that mortality text was edited; the 'us-iv' lines were not touched.
+17. `src/data/info-pages.ts` ~9888 (Xa inhibitor reversal): "Non-CNS → 25 u/kg or fixed 2,000 u" -> "Non-CNS → dose per local PCC protocol"; CNS 50 u/kg kept.
+18. `src/data/info-pages.ts` ~13878 (reversible treatments): "FXa-DOAC — 4F-PCC 50 u/kg" -> "4F-PCC per local PCC protocol (off-label for DOACs; ...)".
+19. `src/data/trees/coagulation-cascade.ts` ~298 summary and ~459 critical action: "FXa-DOAC→4F-PCC 50 u/kg" / "FXa-DOAC reversal: 4F-PCC 50 u/kg" -> "4F-PCC per local PCC protocol (off-label for DOACs; andexanet ... no longer marketed ...)".
+
+**Not changed (on purpose):** dabigatran/idarucizumab and warfarin lines (incl. anticoag-reversal dabigatran PCC alternative "50 units/kg", and warfarin INR-tier PCC doses). Hemoptysis warfarin table.
+
+**Gates (2026-10-27):** `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` exit 0. `node scripts/lint-citation-refs.mjs --gate`: no new dangling refs. `node scripts/lint-critical-actions.mjs --strict`: PASS (363 trees). `bun run test`: 19 pass, 0 fail.
+
+**Open items / could not verify (need Andy or Dr. K):**
+- CNS/intracranial 50 units/kg (max 5,000) is still printed in acr-xa-critical, ich.ts, drug-store ICH entry (8405), calculator. I could not open the ACC ECDP, ASH or Kcentra source, so this number is not traced to an opened source. Strictly it should be treated as unverified.
+- `src/components/calculator.ts` PCC_DOSING_CALCULATOR Xa branch (~7197 "50 units/kg" and ~7204 "fixed 2,000 units / 25 u/kg") NOT edited: it is a calculator output, outside the listed edit set. It still disagrees with the non-CNS placeholder. Needs a decision.
+- `src/data/trees/anticoag-reversal.ts` dabigatran PCC alternative "50 units/kg (max 5,000)" left (dabigatran lines excluded from scope).
+- drug-store ANDEXANET ANNEXA-I "$25,000-50,000 vs ~$5,000" cost text and the ich.ts ANNEXA-4 / FDA briefing citation text not re-verified.
+- AHA 2022 (Greenberg) class and level for FXa ICH reversal: NOT verified; statement removed everywhere in this pass.

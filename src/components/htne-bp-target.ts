@@ -1,7 +1,7 @@
 // Hypertensive emergency BP target calculator (adult).
 // Pure math lives in computeHtneBpTarget (testable). Inputs are ephemeral and never persisted.
 // Bracket numbers printed here are the index+1 of `citations` in HTNE_BP_TARGET_CALCULATOR.
-// Calculator numbering: [1] 2025 AHA/ACC guideline, [2] Marik & Varon 2007, [3] Powers 2019, [4] ACOG CO 767 (2019).
+// Calculator numbering: [1] 2025 AHA/ACC guideline, [2] Marik & Varon 2007, [3] Powers 2019, [4] ACOG CO 767 (2019), [5] McCord 2008 AHA cocaine statement.
 
 export interface HtneBpInput {
   sbp: number;
@@ -61,7 +61,7 @@ export function computeHtneBpTarget(input: HtneBpInput): HtneBpOutput | null {
   if (input.ich) lines.push('**INTRACEREBRAL HEMORRHAGE:** the general rule does not apply. The SBP target and timing are set in the ICH consult.');
   if (input.pregnant) lines.push('**PREGNANCY OR POSTPARTUM:** severe range is SBP >=160 or DBP >=110 mmHg, persistent. Treat within 30-60 minutes with IV labetalol, IV hydralazine, or immediate-release oral nifedipine. Never give nifedipine sublingually. [4]');
   if (input.pheo) lines.push('**PHEOCHROMOCYTOMA:** alpha-blockade first, beta-blockade only after adequate alpha-blockade.');
-  if (input.cocaine) lines.push('**COCAINE OR SYMPATHOMIMETIC:** benzodiazepine first. Avoid pure beta-blockers (propranolol, metoprolol, esmolol) in acute cocaine toxicity. Mixed alpha/beta agents (labetalol, carvedilol): evidence conflicts, not first line. [11] Phentolamine is a second-line option for catecholamine excess, including cocaine toxicity: 5 mg IV, repeat every 10 minutes as needed, cumulative maximum 50 mg per 24 hours. [1] Toxicology and the chest pain hub govern.');
+  if (input.cocaine) lines.push('**COCAINE OR SYMPATHOMIMETIC:** benzodiazepine first, then a vasodilator (nitroglycerin). Avoid pure beta-blockers (propranolol, metoprolol, esmolol) in acute cocaine toxicity. Mixed alpha/beta agents (labetalol, carvedilol): evidence conflicts, not first line. [5] Phentolamine is a second-line option; confirm the dose on the phentolamine drug entry and the primary source. Toxicology and the chest pain hub govern.');
   if (input.scape) lines.push('**SCAPE:** follow the SCAPE pathway. Nitrate dosing is in the SCAPE consult.');
 
   return { map, severeRange, compelling, sbpFloor25, lines };
@@ -90,6 +90,7 @@ export const HTNE_BP_TARGET_CALCULATOR = {
     'Marik PE, Varon J. Hypertensive crises: challenges and management. Chest. 2007;131(6):1949-1962. doi:10.1378/chest.06-2490.',
     'Powers WJ, Rabinstein AA, Ackerson T, et al. Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update to the 2018 Guidelines. Stroke. 2019;50:e344-e418. doi:10.1161/STR.0000000000000211.',
     'American College of Obstetricians and Gynecologists. Committee Opinion No. 767: Emergent Therapy for Acute-Onset, Severe Hypertension During Pregnancy and the Postpartum Period. Obstet Gynecol. 2019;133(2):e174-e180. doi:10.1097/AOG.0000000000003075.',
+    'McCord J, Jneid H, Hollander JE, et al. Management of cocaine-associated chest pain and myocardial infarction: a scientific statement from the American Heart Association Acute Cardiac Care Committee of the Council on Clinical Cardiology. Circulation. 2008;117(14):1897-1907. doi:10.1161/CIRCULATIONAHA.107.188950.',
   ],
   computeResult(values: Record<string, number>): { value: string; label: string; description: string; colorVar: string } {
     const out = computeHtneBpTarget({

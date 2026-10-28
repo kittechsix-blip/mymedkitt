@@ -121,7 +121,7 @@ export const RHABDOMYOLYSIS_NODES: DecisionNode[] = [
     citation: [1, 4],
     next: 'rhabdo-workup',
 
-    summary: 'Statin-induced: stop immediately (rechallenge later OK), cocaine: treat hyperthermia/avoid beta-blockers, NMS/SS: see specific consults',
+    summary: 'Statin-induced: stop immediately (rechallenge later OK), cocaine: treat hyperthermia/avoid pure beta-blockers, NMS/SS: see specific consults',
     skippable: true,
   },
 

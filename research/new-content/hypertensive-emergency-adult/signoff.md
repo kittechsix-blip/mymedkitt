@@ -376,3 +376,7 @@ Checks after edits: `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` cl
 - The beta-blocker node now carries a cocaine warning and cites [11]. Its esmolol recommendation is unchanged for non-cocaine heart-rate control.
 - Not changed, outside the listed files: the learn cards in `src/data/learn-cards-conditions.ts` (line 574, 581) and stop pages in `src/data/stop-pages/batch-09.ts` (lines 39, 121) say "avoid beta-blockers in cocaine" without the mixed-agent distinction. Andy to decide whether those are patched in a follow-up.
 - Note: [11] was read as metadata only (per its citation text), not as full text. The mixed-agent "evidence conflicts" wording rests on the sources already cited for the labetalol drug entry, which are not re-read here.
+
+
+Audit fixes 2026-10-27
+- Cocaine branch: benzodiazepine first, then nitroglycerin, then phentolamine second-line (cautions: reflex tachycardia, hypotension). Phentolamine dose figures removed pending the 2025 guideline text. Cocaine screen moved above the labetalol/esmolol recommendation. CCB alternative dropped from learn cards (not sourced from text read).
