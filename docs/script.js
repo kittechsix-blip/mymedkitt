@@ -226,6 +226,8 @@ function renderIdeas() {
 // ============================================
 
 function openIdeaModal() {
+    // #idea-modal is not in index.html (removed in 8f9a506e); no-op rather than throw
+    if (!ideaModal) return;
     ideaModal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -344,16 +346,16 @@ sortButtons.forEach(btn => {
 
 // Modal
 submitIdeaBtn.addEventListener('click', openIdeaModal);
-modalClose.addEventListener('click', closeIdeaModal);
+modalClose?.addEventListener('click', closeIdeaModal);
 
-ideaModal.addEventListener('click', (e) => {
+ideaModal?.addEventListener('click', (e) => {
     if (e.target === ideaModal) {
         closeIdeaModal();
     }
 });
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && ideaModal.classList.contains('active')) {
+    if (e.key === 'Escape' && ideaModal?.classList.contains('active')) {
         closeIdeaModal();
     }
 });
