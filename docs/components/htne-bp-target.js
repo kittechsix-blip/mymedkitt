@@ -40,7 +40,7 @@ export function computeHtneBpTarget(input) {
     if (input.pheo)
         lines.push('**PHEOCHROMOCYTOMA:** alpha-blockade first, beta-blockade only after adequate alpha-blockade.');
     if (input.cocaine)
-        lines.push('**COCAINE OR SYMPATHOMIMETIC:** benzodiazepine first, then a vasodilator (nitroglycerin). Avoid pure beta-blockers (propranolol, metoprolol, esmolol) in acute cocaine toxicity. Mixed alpha/beta agents (labetalol, carvedilol): evidence conflicts, not first line. [5] Phentolamine is a second-line option; confirm the dose on the phentolamine drug entry and the primary source. Toxicology and the chest pain hub govern.');
+        lines.push('**COCAINE OR SYMPATHOMIMETIC:** benzodiazepine first, then a vasodilator (nitroglycerin). Avoid pure beta-blockers (propranolol, metoprolol, esmolol) in acute cocaine toxicity. Mixed alpha/beta agents (labetalol, carvedilol): evidence conflicts, not first line. [5] Phentolamine is second-line: **5 mg IV bolus, repeat every 10 minutes, cumulative maximum 50 mg per 24 hours**. [1] Toxicology and the chest pain hub govern.');
     if (input.scape)
         lines.push('**SCAPE:** follow the SCAPE pathway. Nitrate dosing is in the SCAPE consult.');
     return { map, severeRange, compelling, sbpFloor25, lines };
