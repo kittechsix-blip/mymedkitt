@@ -9877,7 +9877,7 @@ const ACR_REVERSAL_SUMMARY: InfoPage = {
   sections: [
     {
       heading: 'Warfarin',
-      body: '**Reversal:** [Vitamin K](#/drug/vitamin-k/warfarin reversal) 10 mg IV over 30 min + [4-Factor PCC](#/drug/pcc-4factor/warfarin reversal)\n**PCC dose:** INR 2-4 → 25 u/kg | INR 4-6 → 35 u/kg | INR >6 → 50 u/kg (max 5,000 u)\n**Alt:** 4 units FFP if PCC unavailable\n**Monitor:** INR at 30 min, 6h, 24h\n**Pearl:** PCC + FFP wear off in 6-8h. ALWAYS give Vitamin K simultaneously or INR rebounds.',
+      body: '**Reversal:** [Vitamin K](#/drug/vitamin-k/warfarin reversal) 10 mg IV over 30 min + [4-Factor PCC](#/drug/pcc-4factor/warfarin reversal)\n**PCC dose:** fixed 1000 IU (PROPER-3) or per institutional protocol. INR-tiered weight-based: INR 2-4 → 25 u/kg | INR 4-6 → 35 u/kg | INR >6 → 50 u/kg (max 5,000 u). PROPER-3 excluded intracranial bleeding; for ICH use INR-tiered.\n**Alt:** 4 units FFP if PCC unavailable\n**Monitor:** INR at 30 min, 6h, 24h\n**Pearl:** PCC + FFP wear off in 6-8h. ALWAYS give Vitamin K simultaneously or INR rebounds.',
     },
     {
       heading: 'Dabigatran (Pradaxa)',
@@ -9885,7 +9885,7 @@ const ACR_REVERSAL_SUMMARY: InfoPage = {
     },
     {
       heading: 'Factor Xa Inhibitors (Apixaban, Rivaroxaban, Edoxaban)',
-      body: '**Reversal:** [4-Factor PCC](#/drug/pcc-4factor/doac reversal)\n**Dose:** CNS bleed → 50 u/kg (max 5,000) | Non-CNS → dose per local PCC protocol\n**If <2h ingestion:** Activated Charcoal 50 g\n**Monitor:** Anti-Xa level (best); INR after PCC, then q6h\n**Pearl:** PCC does NOT change anti-Xa level. These agents are NOT dialyzable (>90% protein bound).',
+      body: '**Reversal:** [4-Factor PCC](#/drug/pcc-4factor/doac reversal)\n**Dose:** 4F-PCC (off-label for DOACs): 25-50 units/kg IV bolus; use the higher end for life-threatening or intracranial bleeding (50 units/kg), maximum and repeat dosing per institutional protocol.\n**If <2h ingestion:** Activated Charcoal 50 g\n**Monitor:** Anti-Xa level (best); INR after PCC, then q6h\n**Pearl:** PCC does NOT change anti-Xa level. These agents are NOT dialyzable (>90% protein bound).',
     },
     {
       heading: 'Heparin (UFH)',
@@ -9930,7 +9930,7 @@ const ACR_INR_GUIDE: InfoPage = {
     },
     {
       heading: 'Urgent/Life-Threatening Bleeding (Any INR)',
-      body: '• [Vitamin K](#/drug/vitamin-k/warfarin reversal) **10 mg IV over 30 minutes** — ONE dose, ONE route\n• [4-Factor PCC](#/drug/pcc-4factor/warfarin reversal) simultaneously (INR-based dosing)\n• For ICH: give PCC immediately WITHOUT waiting for INR\n• Follow INR q3-6h for ICH\n• **FFP cannot achieve INR <1.7** — don\'t try',
+      body: '• [Vitamin K](#/drug/vitamin-k/warfarin reversal) **10 mg IV over 30 minutes** — ONE dose, ONE route\n• [4-Factor PCC](#/drug/pcc-4factor/warfarin reversal) simultaneously: fixed 1000 IU (PROPER-3) or per institutional protocol; INR-tiered weight-based dosing for ICH (PROPER-3 excluded intracranial bleeding)\n• For ICH: give PCC immediately WITHOUT waiting for INR\n• Follow INR q3-6h for ICH\n• **FFP cannot achieve INR <1.7** — don\'t try',
     },
     {
       heading: 'Vitamin K Route Matters',
@@ -13875,7 +13875,7 @@ const COAG_STEPS_SUMMARY: InfoPage = {
     },
     {
       heading: '5. Reversible Treatments',
-      body: '\u2022 **Vitamin K / warfarin** \u2014 vitamin K 10 mg IV + 4F-PCC 25-50 u/kg if bleeding\n\u2022 **Dabigatran** \u2014 idarucizumab 5 g IV (RE-VERSE AD)\n\u2022 **FXa-DOAC** \u2014 4F-PCC per local PCC protocol (off-label for DOACs; andexanet alfa is no longer marketed in the US)\n\u2022 **Heparin** \u2014 protamine 1 mg per 100 units\n\u2022 **Low fibrinogen** \u2014 cryo 10 units (or 0.06 u/kg) raises 0.5-1 g/L\n\u2022 **Hemophilia A/B** \u2014 recombinant factor concentrate; DDAVP for mild hem A\n\u2022 **vWD** \u2014 DDAVP (type 1) or vWF/FVIII concentrate\n\u2022 **Hyperfibrinolysis** \u2014 tranexamic acid 1 g IV',
+      body: '\u2022 **Vitamin K / warfarin** \u2014 vitamin K 10 mg IV + 4F-PCC (fixed 1000 IU per PROPER-3, or INR-tiered 25-50 u/kg) if bleeding\n\u2022 **Dabigatran** \u2014 idarucizumab 5 g IV (RE-VERSE AD)\n\u2022 **FXa-DOAC** \u2014 4F-PCC (off-label for DOACs): 25-50 units/kg IV bolus; use the higher end for life-threatening or intracranial bleeding (50 units/kg), maximum and repeat dosing per institutional protocol. Andexanet alfa is no longer marketed in the US.\n\u2022 **Heparin** \u2014 protamine 1 mg per 100 units\n\u2022 **Low fibrinogen** \u2014 cryo 10 units (or 0.06 u/kg) raises 0.5-1 g/L\n\u2022 **Hemophilia A/B** \u2014 recombinant factor concentrate; DDAVP for mild hem A\n\u2022 **vWD** \u2014 DDAVP (type 1) or vWF/FVIII concentrate\n\u2022 **Hyperfibrinolysis** \u2014 tranexamic acid 1 g IV',
     },
     {
       heading: '6. Special Populations',

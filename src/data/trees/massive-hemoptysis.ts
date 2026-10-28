@@ -242,18 +242,18 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'Warfarin Reversal',
-    body: '| Agent | Dose | Onset |\n|-------|------|-------|\n| [Vitamin K](#/drug/vitamin-k/hemoptysis) | 10 mg IV over 30 min | 6-12 hours |\n| [4-Factor PCC](#/drug/kcentra/hemoptysis) | 25-50 units/kg | Minutes |\n| FFP (if PCC unavailable) | 15 mL/kg | After thaw |\n\n**CRITICAL:** Give Vitamin K WITH PCC/FFP. PCC/FFP effect lasts ~8 hours; Vitamin K takes 6-12 hours to work [1]',
+    body: '| Agent | Dose | Onset |\n|-------|------|-------|\n| [Vitamin K](#/drug/vitamin-k/hemoptysis) | 10 mg IV over 30 min | 6-12 hours |\n| [4-Factor PCC](#/drug/kcentra/hemoptysis) | Fixed 1000 IU (PROPER-3) or INR-tiered 25-50 units/kg | Minutes |\n| FFP (if PCC unavailable) | 15 mL/kg | After thaw |\n\n**CRITICAL:** Give Vitamin K WITH PCC/FFP. PCC/FFP effect lasts ~8 hours; Vitamin K takes 6-12 hours to work [1]',
     recommendation: 'Reverse warfarin with 4F-PCC + Vitamin K. PCC provides immediate reversal; Vitamin K sustains it.',
     confidence: 'recommended',
-    citation: [1],
+    citation: [1, 8],
     treatment: {
       firstLine: {
         drug: '4-Factor PCC (Kcentra)',
-        dose: '25-50 units/kg IV (based on INR)',
+        dose: 'Fixed dose 1000 IU (PROPER-3) or per institutional protocol; institutional weight-based protocol (INR-tiered): 25-50 units/kg IV',
         route: 'IV',
         frequency: 'Once',
         duration: 'Single dose',
-        notes: 'INR 2-4: 25 u/kg; INR 4-6: 35 u/kg; INR >6: 50 u/kg',
+        notes: 'INR-tiered weight-based: INR 2-4: 25 u/kg; INR 4-6: 35 u/kg; INR >6: 50 u/kg. PROPER-3 excluded intracranial bleeding.',
       },
       alternative: {
         drug: 'Vitamin K (phytonadione)',
@@ -272,10 +272,10 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
     type: 'result',
     module: 3,
     title: 'DOAC Reversal',
-    body: '**Direct thrombin inhibitor (Dabigatran):**\n• [Idarucizumab](#/drug/idarucizumab/hemoptysis) (Praxbind) 5g IV\n\n**Factor Xa inhibitors (rivaroxaban, apixaban, edoxaban):**\n• [4-Factor PCC](#/drug/kcentra/hemoptysis) dose per local PCC protocol [1] (first-line in the US; off-label for DOACs)\n• Andexanet alfa is no longer marketed in the US (where available outside the US only)',
+    body: '**Direct thrombin inhibitor (Dabigatran):**\n• [Idarucizumab](#/drug/idarucizumab/hemoptysis) (Praxbind) 5g IV\n\n**Factor Xa inhibitors (rivaroxaban, apixaban, edoxaban):**\n• [4-Factor PCC](#/drug/kcentra/hemoptysis) (first-line in the US): 4F-PCC (off-label for DOACs): 25-50 units/kg IV bolus; use the higher end for life-threatening or intracranial bleeding (50 units/kg), maximum and repeat dosing per institutional protocol. [1,7]\n• Andexanet alfa is no longer marketed in the US (where available outside the US only)',
     recommendation: 'Reverse dabigatran with idarucizumab. For Xa inhibitors, use 4F-PCC (andexanet alfa is no longer marketed in the US).',
     confidence: 'recommended',
-    citation: [1],
+    citation: [1, 7],
     treatment: {
       firstLine: {
         drug: 'Idarucizumab (dabigatran)',
@@ -287,7 +287,7 @@ export const MASSIVE_HEMOPTYSIS_NODES: DecisionNode[] = [
       },
       alternative: {
         drug: '4-Factor PCC (Xa inhibitors)',
-        dose: 'Dose per local PCC protocol',
+        dose: '4F-PCC (off-label for DOACs): 25-50 units/kg IV bolus; use the higher end for life-threatening or intracranial bleeding (50 units/kg), maximum and repeat dosing per institutional protocol.',
         route: 'IV',
         frequency: 'Once',
         duration: 'Single dose',
@@ -465,4 +465,6 @@ export const MASSIVE_HEMOPTYSIS_CITATIONS: Citation[] = [
   { num: 4, text: 'ATS Scholar. ABCDE Approach for Massive Hemoptysis. American Thoracic Society. 2022.' },
   { num: 5, text: 'EM Cases. Hemoptysis ED Approach and Management. Emergency Medicine Cases. 2023.' },
   { num: 6, text: 'CIRSE. Standards of Practice in Bronchial Artery Embolization. Cardiovasc Intervent Radiol. 2021.' },
+  { num: 7, text: 'N Engl J Med 2026. Antidotes for Anticoagulation Reversal. doi:10.1056/NEJMra2506021' },
+  { num: 8, text: 'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose (weight- and INR-based) 4-factor PCC for vitamin K antagonist-related bleeding. Intracranial hemorrhage excluded from the trial.' },
 ];

@@ -92,3 +92,34 @@ Decision needed: rewrite those live recommendations (PCC as the available option
 
 ### Verified by Andy 2026-10-28
 Intracranial / life-threatening bleeding with factor Xa inhibitor: 4F-PCC 50 units/kg: dose verified by Andy (source not opened by agents). Non-CNS dose remains 'per local PCC protocol' (no verified value supplied).
+
+### Verified by Andy 2026-10-28: PCC doses (agent edit log)
+
+Owner instruction (Andy): (A) warfarin 4F-PCC fixed 1000 IU (PROPER-3) plus institutional protocol; (B) DOAC / factor Xa inhibitor bleeding (off-label 4F-PCC) 25-50 units/kg bolus. Doses taken as verified by Andy; agents did not open primary sources for the dose.
+
+**Citation status**
+- NEJM 2026 "Antidotes for Anticoagulation Reversal" (DOI 10.1056/NEJMra2506021): DOI taken from search-result link. Search summary reported authors Rocca B, ten Cate H; N Engl J Med 2026;394(22):2235-2254. NOT confirmed against the NEJM page (fetch unavailable, Firecrawl credits exhausted). Clinician-facing text uses the verbatim form "N Engl J Med 2026. Antidotes for Anticoagulation Reversal. doi:10.1056/NEJMra2506021". (metadata not confirmed by agent; dose verified by Andy)
+- PROPER-3: primary publication NOT located by agent. Clinician-facing citation is the trial name and design only (fixed 1,000 IU vs variable-dose 4F-PCC for VKA-related bleeding; intracranial hemorrhage excluded). Search surfaced a 2024 Crit Care Med systematic review/meta-analysis reporting PROPER-3 as similar outcomes in non-ICH patients; not added as a citation. (metadata not confirmed by agent; dose verified by Andy)
+
+**Edits (old -> new)**
+1. `src/data/trees/anticoag-reversal.ts` DOAC node body: "Non-CNS: dose per local PCC protocol (no non-CNS ... verified)" -> "Non-CNS and all DOAC bleeds: 4F-PCC (off-label for DOACs): 25-50 units/kg IV bolus; use the higher end for life-threatening or intracranial bleeding (50 units/kg), maximum and repeat dosing per institutional protocol. [22]". CNS line "50 units/kg (max 5,000)" kept. Citation array +22.
+2. Same file, DOAC node firstLine.dose: "CNS ...50 units/kg | Non-CNS: dose per local PCC protocol" -> exact DOAC text above. Citation array +22.
+3. Same file, fondaparinux alternative (LMWH node) dose: "Dose per local PCC protocol" -> exact DOAC text above (fondaparinux is off-label for this use).
+4. Same file, CRITICAL_ACTIONS apixaban/rivaroxaban entry: non-CNS placeholder -> exact DOAC text.
+5. Same file, warfarin node body/firstLine.dose: INR-tiered list kept under "Institutional weight-based protocol (INR-tiered)"; added first-listed "Warfarin reversal: 4F-PCC fixed dose 1000 IU (PROPER-3) or per institutional protocol" [23]; note that PROPER-3 excluded intracranial bleeding and that ICH uses INR-tiered dosing. Citation array +23. Vitamin K 10 mg IV unchanged.
+6. Same file, CRITICAL_ACTIONS warfarin entry: "4-factor PCC 25-50 units/kg (based on INR)" -> "4-factor PCC fixed 1000 IU (PROPER-3; not for intracranial bleeding) or institutional weight-based protocol (INR-tiered)".
+7. Same file, citations 22 (NEJM 2026) and 23 (PROPER-3) added.
+8. `src/data/trees/massive-hemoptysis.ts` DOAC body and alternative dose: "dose per local PCC protocol" -> exact DOAC text; citation [1] -> [1,7] (local refs 7 NEJM 2026 and 8 PROPER-3 appended to its list).
+9. Same file, warfarin table row and firstLine.dose: "25-50 units/kg" -> fixed 1000 IU (PROPER-3) or INR-tiered 25-50 units/kg; citation [1] -> [1,8]; notes keep INR-tiered list and add PROPER-3 ICH exclusion.
+10. `src/components/calculator.ts` PCC_DOSING_CALCULATOR, Xa non-CNS branch: "DOSE PER LOCAL PCC PROTOCOL" -> exact DOAC text + computed "25 units/kg x W kg = low units (low end)" and "50 units/kg x W kg = high units (high end)"; result value prints "low-high units" with no cap. CNS 50 units/kg branch and its 5,000 cap unchanged. Two citation strings added.
+11. `src/components/calculator.ts` warfarin branch: description now labels the INR-tiered dose and adds "Fixed-dose option: 1000 IU (PROPER-3) or per institutional protocol" plus "PROPER-3 excluded intracranial bleeding; for ICH use the INR-tiered dose above." Vitamin K 10 mg IV line kept. Two citation strings added to the calculator's citation list.
+12. `src/components/calculator.ts` coag-doac-reversal result bin (4-6): "dose per local PCC protocol" -> exact DOAC text. Citation string added.
+13. `src/data/drug-store.ts` KCENTRA: new first dosing row "Warfarin reversal, fixed dose (PROPER-3) or per institutional protocol": 1000 IU; existing INR-tiered rows kept. DOAC/hemoptysis row: "Dose per local PCC protocol" -> exact DOAC text; weightCalc restored as array [25 units "Low end", 50 units "High end"], no maxDose. Citations added.
+14. `src/data/info-pages.ts` warfarin summary (PCC dose line), DOAC summary (Dose line), warfarin body (simultaneously line), coag-steps reversible-treatments line: placeholders replaced; fixed-dose option added beside INR-tiered dosing.
+15. `src/data/trees/coagulation-cascade.ts` summary (FXa-DOAC), critical action (FXa-DOAC and warfarin), vitamin-K defect summary: placeholders replaced with the DOAC text or the fixed-dose option.
+
+**Deliberately NOT changed (flag for Andy)**
+- ICH warfarin node (`src/data/trees/ich.ts` ~line 90-95), drug-store PCC_4FACTOR ICH warfarin row, and ICH critical action: INR-tiered 25-50 IU/kg kept with NO fixed 1000 IU option. PROPER-3 excluded intracranial hemorrhage, so fixed 1000 IU is not supported for ICH. Andy to decide whether ICH should carry the fixed-dose option.
+- Other warfarin PCC unit/kg lines not in the edit set: `src/data/trees/massive-transfusion.ts` (~476, MTP anticoagulated, 25-50 units/kg), `src/data/trees/blood-transfusions.ts` (~441 summary), `src/data/trees/dic.ts` (~327, ~338 DIC VKA reversal), `src/data/trees/ich.ts` Xa ICH 50 IU/kg (CNS branch, kept per instruction).
+- Observational context (not used for dosing): a single-center comparison reported fixed 1000 IU reached target INR less often than weight-based dosing in non-CNS INR <=6 bleeds (57.5% vs 86.4%). Andy may want this weighed before the fixed-dose option is used as first line.
+- No PCC calculator test added: `calculator.ts` imports DOM/router modules and cannot load under `node --test`. Manual check: weight 80 kg non-CNS Xa -> "2,000-4,000 units".

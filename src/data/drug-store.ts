@@ -11836,6 +11836,10 @@ const KCENTRA: DrugEntry = {
   indications: ['Warfarin reversal in major bleeding', 'DOAC reversal (off-label, when andexanet unavailable)', 'Massive hemorrhage with coagulopathy'],
   dosing: [
     {
+      indication: 'Warfarin reversal — fixed dose (PROPER-3) or per institutional protocol',
+      regimen: '**4F-PCC fixed dose 1000 IU** IV (PROPER-3) or per institutional protocol. Co-administer Vitamin K 10 mg IV. PROPER-3 excluded intracranial bleeding; for ICH use the INR-tiered weight-based rows below (institutional weight-based protocol).',
+    },
+    {
       indication: 'Warfarin reversal — INR 2 to <4',
       regimen: '**25 units/kg** IV (max 2,500 units). Co-administer Vitamin K 10 mg IV. Onset within minutes; recheck INR 30 min post-infusion.',
       weightCalc: { dosePerKg: 25, unit: 'units', maxDose: 2500, label: 'INR 2-<4' },
@@ -11852,7 +11856,11 @@ const KCENTRA: DrugEntry = {
     },
     {
       indication: 'Massive hemoptysis / DOAC reversal (off-label)',
-      regimen: 'Dose per local PCC protocol (off-label for DOACs). Andexanet alfa is no longer marketed in the US, so this is a reasonable US alternative for Xa inhibitors.',
+      regimen: '4F-PCC (off-label for DOACs): 25-50 units/kg IV bolus; use the higher end for life-threatening or intracranial bleeding (50 units/kg), maximum and repeat dosing per institutional protocol. Andexanet alfa is no longer marketed in the US, so this is a reasonable US alternative for Xa inhibitors.',
+      weightCalc: [
+        { dosePerKg: 25, unit: 'units', label: 'Low end' },
+        { dosePerKg: 50, unit: 'units', label: 'High end' },
+      ],
     },
   ],
   contraindications: [
@@ -11872,6 +11880,8 @@ const KCENTRA: DrugEntry = {
   citations: [
     'Frontera JA et al. Guideline for Reversal of Antithrombotics in Intracranial Hemorrhage. Neurocrit Care. 2016;24(1):6-46.',
     'Sarode R et al. Efficacy and safety of a 4-factor PCC in patients on vitamin K antagonists presenting with major bleeding. Circulation. 2013;128(11):1234-1243.',
+    'N Engl J Med 2026. Antidotes for Anticoagulation Reversal. doi:10.1056/NEJMra2506021',
+    'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose dosing for vitamin K antagonist-related bleeding (intracranial hemorrhage excluded).',
   ],
 };
 
