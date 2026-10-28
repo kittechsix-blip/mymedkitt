@@ -380,3 +380,7 @@ Checks after edits: `bunx tsc --noEmit --skipLibCheck --noUnusedLocals false` cl
 
 Audit fixes 2026-10-27
 - Cocaine branch: benzodiazepine first, then nitroglycerin, then phentolamine second-line (cautions: reflex tachycardia, hypotension). Phentolamine dose figures removed pending the 2025 guideline text. Cocaine screen moved above the labetalol/esmolol recommendation. CCB alternative dropped from learn cards (not sourced from text read).
+
+
+### Verified by Andy 2026-10-28
+Phentolamine for catecholamine excess including cocaine toxicity: 5 mg IV bolus, repeat every 10 minutes, cumulative max 50 mg/24 h (2025 AHA/ACC Table 26): verified by Andy, numbers restored in the exc-cocaine node and the BP calculator (drug entry unchanged).

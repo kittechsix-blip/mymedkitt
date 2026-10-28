@@ -88,3 +88,7 @@ Decision needed: rewrite those live recommendations (PCC as the available option
 - `src/data/trees/anticoag-reversal.ts` dabigatran PCC alternative "50 units/kg (max 5,000)" left (dabigatran lines excluded from scope).
 - drug-store ANDEXANET ANNEXA-I "$25,000-50,000 vs ~$5,000" cost text and the ich.ts ANNEXA-4 / FDA briefing citation text not re-verified.
 - AHA 2022 (Greenberg) class and level for FXa ICH reversal: NOT verified; statement removed everywhere in this pass.
+
+
+### Verified by Andy 2026-10-28
+Intracranial / life-threatening bleeding with factor Xa inhibitor: 4F-PCC 50 units/kg: dose verified by Andy (source not opened by agents). Non-CNS dose remains 'per local PCC protocol' (no verified value supplied).
