@@ -6845,15 +6845,13 @@ const PCC_DOSING_CALCULATOR = {
             description = `50 units/kg × ${weight} kg = ${Math.round(weight * 50)} units${dose < Math.round(weight * 50) ? ' (capped at 5,000)' : ''}\n\nPCC will NOT change anti-Xa level\nMonitor: INR after PCC, then q6h\nThese DOACs are NOT dialyzable`;
         }
         else {
-            // Xa inhibitor — non-CNS
-            const weightBased = Math.round(weight * 25);
-            const capped = weightBased > 2500 ? 2500 : weightBased;
-            dose = 2000; // fixed dose has best evidence
+            // Xa inhibitor — non-CNS: the dose is not stated here (sources disagree); the consults say the same
+            dose = 0;
             label = 'Xa Inhibitor Reversal (Non-CNS)';
-            description = `Fixed dose: 2,000 units (simplest, best evidence)\nOR weight-based: 25 u/kg × ${weight} kg = ${weightBased} units${capped < weightBased ? ' (max 2,500)' : ''}\n\nMay repeat if hemostasis not achieved\nPCC will NOT change anti-Xa level`;
+            description = `**DOSE PER LOCAL PCC PROTOCOL.** A non-CNS dose is not stated in this calculator.\n\n4F-PCC for factor Xa inhibitor reversal is off-label\nMay repeat if hemostasis not achieved\nPCC will NOT change anti-Xa level`;
         }
         return {
-            value: `${dose.toLocaleString()} units`,
+            value: dose > 0 ? `${dose.toLocaleString()} units` : 'Per local protocol',
             label,
             description,
             colorVar: '--color-danger',
@@ -33360,7 +33358,7 @@ const COAG_DOAC_REVERSAL_CALCULATOR = {
     results: [
         { min: 0, max: 2, label: 'Hold drug + supportive care', risk: 'Minor bleed, agent unknown or remote dose', mortality: 'Hold DOAC, mechanical hemostasis, monitor; specific reversal not indicated', colorVar: '--color-success' },
         { min: 2, max: 4, label: 'Hold + targeted hemostasis', risk: 'Apixaban/Xa class, minor-moderate bleed', mortality: 'Hold DOAC, supportive measures, charcoal if <2h ingestion; reserve specific reversal for major bleed', colorVar: '--color-warning' },
-        { min: 4, max: 6, label: '4F-PCC for Xa inhibitor (andexanet no longer marketed in US)', risk: 'Apixaban / rivaroxaban / edoxaban with major bleed', mortality: 'First-line in the US: 4F-PCC 50 U/kg. Andexanet alfa is no longer marketed in the US (sales ended 12/22/2025); where available outside the US, dose by drug + timing. ANNEXA-I 2024 showed better hemostasis with more thrombotic events.', colorVar: '--color-danger' },
+        { min: 4, max: 6, label: '4F-PCC for Xa inhibitor (andexanet no longer marketed in US)', risk: 'Apixaban / rivaroxaban / edoxaban with major bleed', mortality: 'First-line in the US (off-label for DOACs): 4F-PCC, dose per local PCC protocol. Andexanet alfa is no longer marketed in the US (sales ended 12/22/2025); where available outside the US, dose by drug + timing. ANNEXA-I 2024 showed better hemostasis with more thrombotic events.', colorVar: '--color-danger' },
         { min: 6, max: 8, label: 'Idarucizumab for dabigatran', risk: 'Dabigatran with major or life-threatening bleed', mortality: 'Idarucizumab 5 g IV (two 2.5 g vials, no more than 15 min apart). Confirms reversal within minutes; redose if bleeding recurs and dabigatran detectable.', colorVar: '--color-danger' },
         { min: 8, max: Infinity, label: 'Specific antidote + multimodal hemostasis', risk: 'Life-threatening bleed, recent DOAC dose', mortality: 'Specific antidote (idarucizumab; andexanet alfa not marketed in the US) + TXA + targeted blood product replacement + source control. Hematology + surgical consultation.', colorVar: '--color-danger' },
     ],

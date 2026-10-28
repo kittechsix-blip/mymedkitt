@@ -102,7 +102,7 @@ export const RHABDOMYOLYSIS_NODES = [
         body: '**Statin-induced:**\n• Risk ~0.1% overall, higher with:\n  - High-intensity statins (rosuvastatin, atorvastatin high-dose)\n  - Fibrate combination (avoid gemfibrozil)\n  - CYP3A4 inhibitors (cyclosporine, macrolides, azoles)\n• **Management:** STOP statin immediately. Can rechallenge with different statin after recovery if needed.\n\n**Cocaine/Amphetamines:**\n• Sympathomimetic excess + hyperthermia + vasoconstriction\n• Treat hyperthermia aggressively\n• Avoid pure beta-blockers (unopposed alpha); mixed alpha/beta agents (labetalol, carvedilol): evidence conflicts, not first line\n\n**Alcohol:**\n• Direct myotoxicity + immobilization + electrolyte derangement\n• Check and correct Mg, K, Phos\n\n**NMS/Serotonin Syndrome:**\n• See [Serotonin Syndrome](#/tree/serotonin-syndrome) consult\n• Cooling, benzodiazepines, supportive care\n• Cyproheptadine for serotonin syndrome\n• Dantrolene for NMS with severe rigidity',
         citation: [1, 4],
         next: 'rhabdo-workup',
-        summary: 'Statin-induced: stop immediately (rechallenge later OK), cocaine: treat hyperthermia/avoid beta-blockers, NMS/SS: see specific consults',
+        summary: 'Statin-induced: stop immediately (rechallenge later OK), cocaine: treat hyperthermia/avoid pure beta-blockers, NMS/SS: see specific consults',
         skippable: true,
     },
     {

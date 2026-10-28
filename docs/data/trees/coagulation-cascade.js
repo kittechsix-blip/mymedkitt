@@ -265,7 +265,7 @@ export const COAG_CASCADE_NODES = [
             { id: 'coag-doac-reversal', label: 'DOAC Reversal Selector' },
         ],
         next: 'coag-platelet-transfusion',
-        summary: 'Dabig→idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC→4F-PCC 50 u/kg (andexanet no longer marketed in US); LMWH→protamine partial; UFH→protamine 1mg per 100u',
+        summary: 'Dabig→idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC→4F-PCC per local PCC protocol (off-label for DOACs; andexanet no longer marketed in US); LMWH→protamine partial; UFH→protamine 1mg per 100u',
     },
     {
         id: 'coag-platelet-transfusion',
@@ -409,7 +409,7 @@ export const COAG_CASCADE_CRITICAL_ACTIONS = [
     { text: 'Mixing study splits prolonged PT/PTT: corrects = factor deficiency, doesn\'t correct = inhibitor; incubation distinguishes lupus AC (immediate) vs factor inhibitor (time-dependent)', nodeId: 'coag-mixing-study' },
     { text: 'Mucosal bleeding = platelet or vWF problem; deep tissue/joint bleeding = factor problem (hemophilia)', nodeId: 'coag-mucosal-bleeding-pattern' },
     { text: 'Active warfarin bleed: vitamin K 10 mg IV + 4F-PCC 25-50 u/kg; FFP only if PCC unavailable', nodeId: 'coag-vit-k' },
-    { text: 'Dabigatran reversal: idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC reversal: 4F-PCC 50 u/kg (andexanet no longer marketed in the US)', nodeId: 'coag-doac-reversal' },
+    { text: 'Dabigatran reversal: idarucizumab 5g IV (RE-VERSE AD); FXa-DOAC reversal: 4F-PCC per local PCC protocol (off-label for DOACs; andexanet no longer marketed in the US)', nodeId: 'coag-doac-reversal' },
     { text: 'Cirrhosis has "rebalanced" hemostasis — PT/INR does NOT predict bleeding risk; do not transfuse FFP for labs alone', nodeId: 'coag-liver-disease' },
     { text: 'Pregnancy fibrinogen baseline is 4-6 g/L — treat <2 g/L (not <1) in obstetric DIC/PPH', nodeId: 'coag-pregnancy' },
     { text: 'HIT: 4Ts ≥4 → stop ALL heparin, NO platelet transfusion, start argatroban/bivalirudin/fondaparinux; bridge to warfarin only after platelet recovery', nodeId: 'coag-hit' },

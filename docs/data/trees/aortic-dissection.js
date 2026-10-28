@@ -373,7 +373,7 @@ export const AORTIC_DISSECTION_CRITICAL_ACTIONS = [
     { text: 'Stat CTA chest/abdomen/pelvis (or TEE if unstable) to confirm diagnosis and classify type', nodeId: 'dissect-imaging' },
     { text: 'Cardiothoracic surgery consult immediately for Type A dissection (surgical emergency)', nodeId: 'dissect-type-a' },
     { text: 'Pain control with IV opioids (morphine or fentanyl) to reduce catecholamine surge', nodeId: 'dissect-management' },
-    { text: 'Esmolol is first-line for rate control; only if beta-blockade is contraindicated (severe AR, high-grade AV block, decompensated HF, asthma, cocaine) substitute IV diltiazem', nodeId: 'dissect-beta-blocker' },
+    { text: 'Esmolol is first-line for rate control; only if beta-blockade is contraindicated (severe AR, high-grade AV block, decompensated HF, asthma) or a pure beta-blocker must be avoided in acute cocaine toxicity, substitute IV diltiazem', nodeId: 'dissect-beta-blocker' },
     { text: 'ADD-RS score ≥2: proceed directly to CTA without D-dimer', nodeId: 'dissect-ddimer' },
 ];
 export const AORTIC_DISSECTION_CITATIONS = [

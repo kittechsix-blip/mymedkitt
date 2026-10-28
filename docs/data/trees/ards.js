@@ -372,25 +372,27 @@ This screening list is expert practice, not taken from a cited trial. Confirm it
 
 **Only after protective ventilation, prone (if eligible), and conservative fluids have been tried.**
 
-**EOLIA trial enrollment criteria, despite optimal ventilation (any one):** [13]
+**ELSO 2021 referral trigger, after optimal management including a prone trial (any one):** [15]
+- P/F below 80
+- pH below 7.25 with PaCO2 at least 60 mmHg
+
+**EOLIA trial enrollment criteria, for context (any one, despite optimal ventilation):** [13]
 - P/F below 50 for more than 3 h
 - P/F below 80 for more than 6 h
 - pH below 7.25 with PaCO2 ≥60 mmHg for more than 6 h
 
-These are the trial's enrollment gates, not a complete list of referral indications.
+The trial's enrollment criteria are not the referral rule. The [ECMO consult](#/tree/ecmo) shows both side by side, with sources.
 
-**ECMO referral trigger (commonly used, P/F below 80): see the [ECMO consult](#/tree/ecmo).** The ECMO consult sets out the same two statements side by side, with sources: the EOLIA trial enrollment criteria above, and the referral trigger. They are not the same rule.
-
-**Trial caveat:** EOLIA did not significantly reduce 60-day mortality against conventional management (35% vs 46%, P=0.09), and it stopped for futility. ECMO is a referral decision, not a proven survival step.`,
-        citation: [13],
+**Trial caveat:** EOLIA did not significantly reduce 60-day mortality against conventional management (35% vs 46%, P=0.09). ECMO is a referral decision, not a proven survival step.`,
+        citation: [13, 15],
         options: [
-            { label: 'Meets EOLIA-type gates', description: 'Refer for ECMO evaluation now', next: 'ards-ecmo-referral', urgency: 'critical' },
-            { label: 'Does not meet gates yet', description: 'Continue ICU ventilation and reassess', next: 'ards-icu', urgency: 'urgent' },
+            { label: 'Meets ELSO referral trigger', description: 'Refer for ECMO evaluation now', next: 'ards-ecmo-referral', urgency: 'critical' },
+            { label: 'Does not meet it yet', description: 'Continue ICU ventilation and reassess', next: 'ards-icu', urgency: 'urgent' },
         ],
         calculatorLinks: [
             { id: 'ards-pf-berlin', label: 'P/F Berlin' },
         ],
-        summary: 'Refractory hypoxemia meeting EOLIA-type gates goes to ECMO evaluation.',
+        summary: 'Refractory hypoxemia meeting the ELSO 2021 referral trigger goes to ECMO evaluation.',
         safetyLevel: 'critical',
     },
     {
@@ -400,7 +402,7 @@ These are the trial's enrollment gates, not a complete list of referral indicati
         title: 'Refer for ECMO Evaluation',
         body: `**Call the ECMO center early when P/F is below 80 despite optimal medical management, including a prone trial** (ELSO 2021 referral trigger). [15] The EOLIA trial enrollment criteria are listed in the ECMO consult.
 
-**ECMO referral trigger (commonly used, P/F below 80): see the [ECMO consult](#/tree/ecmo).** That consult sets out the EOLIA trial criteria and the referral trigger side by side, with sources.
+**The [ECMO consult](#/tree/ecmo) sets out the ELSO referral trigger and the EOLIA trial criteria side by side, with sources.**
 
 **Have ready before the call:**
 - Ventilator settings: PEEP, FiO2, plateau pressure, driving pressure, and the ABG time

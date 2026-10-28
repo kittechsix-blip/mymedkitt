@@ -4578,7 +4578,7 @@ const METOPROLOL = {
         'Use cautiously in decompensated HF but safe in compensated HFrEF',
         'May mask hypoglycemia symptoms in diabetic patients',
         'Do NOT combine with IV calcium channel blockers',
-        'Cocaine/methamphetamine-associated ACS — avoid beta-blockers acutely (may worsen coronary vasospasm due to unopposed alpha stimulation). Use benzodiazepines and nitroglycerin instead.',
+        'Avoid pure beta-blockers (propranolol, metoprolol, esmolol) in acute cocaine toxicity; mixed alpha/beta agents (labetalol, carvedilol): evidence conflicts, not first line; benzodiazepine first, then a vasodilator (nitroglycerin)',
         'Intermittent dosing naturally encourages dose-by-dose reassessment \u2014 advantage over continuous infusions in unstable patients',
     ],
     monitoring: 'Heart rate and blood pressure before each IV dose. Hold if SBP <90 or HR <55.',
@@ -11421,7 +11421,7 @@ const ANDEXANET_ALFA = {
         },
         {
             indication: 'Xa-associated intracranial hemorrhage',
-            regimen: '**Dose by the low/high algorithm above.** AHA/ASA 2022 gave a Class 1 recommendation for andexanet in Xa-inhibitor-associated ICH where it was available (historical; not marketed in the US since 12/22/2025).\n\n**ANNEXA-I (NEJM 2024; 263 andexanet vs 267 usual care, mostly 4-factor PCC):**\n• Hemostatic efficacy 67.0% vs 53.1%; trial stopped early for efficacy.\n• Anti-FXa activity reduction 94.5% vs 26.9%.\n• **Thrombotic events 10.3% vs 5.6%; ischemic stroke 6.5% vs 1.5%.**\n• **No significant difference in 30-day mortality or disability.**\n\n**PRACTICAL:** most US centers default to 4-factor PCC (Kcentra) on cost and availability (~$25,000–50,000 vs ~$5,000). Reserve andexanet for ICH with the drug on formulary and no acute thrombotic contraindication.',
+            regimen: '**Dose by the low/high algorithm above.** Historical reference only (not marketed in the US since 12/22/2025).\n\n**ANNEXA-I (NEJM 2024; 263 andexanet vs 267 usual care, mostly 4-factor PCC):**\n• **Thrombotic events 10.3% vs 5.6%; ischemic stroke 6.5% vs 1.5%.**\n• **No appreciable difference in 30-day death.**\n\n**PRACTICAL:** most US centers default to 4-factor PCC (Kcentra) on cost and availability (~$25,000–50,000 vs ~$5,000). Reserve andexanet for ICH with the drug on formulary and no acute thrombotic contraindication.',
         },
         {
             indication: 'Not indicated — do NOT give for these',
@@ -11518,8 +11518,7 @@ const KCENTRA = {
         },
         {
             indication: 'Massive hemoptysis / DOAC reversal (off-label)',
-            regimen: '**50 units/kg** IV (max 5,000 units) for life-threatening DOAC-associated bleed when andexanet unavailable. Andexanet alfa is no longer marketed in the US, so this is a reasonable US alternative for Xa inhibitors.',
-            weightCalc: { dosePerKg: 50, unit: 'units', maxDose: 5000, label: 'DOAC reversal (off-label)' },
+            regimen: 'Dose per local PCC protocol (off-label for DOACs). Andexanet alfa is no longer marketed in the US, so this is a reasonable US alternative for Xa inhibitors.',
         },
     ],
     contraindications: [
