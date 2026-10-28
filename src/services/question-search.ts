@@ -1,5 +1,5 @@
-// @bedside-search-engine 1.4.0
-// @engine-sha256 7816d36307825b1e1a705ef1909f1349e5f5a4b1018081957881f6efd24bd2c5
+// @bedside-search-engine 1.5.0
+// @engine-sha256 0aab6f64033c7814b827e6598dd6a027bd4dd1d773a60c556725c10ffb575cb5
 // Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
@@ -890,6 +890,11 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     const hard = q.tokens.filter((t) => !t.soft);
     const toks = hard.length ? hard : q.tokens;
     if (!toks.length) return results.length > 0;
+    // a dose question in an app with no drug entries, naming a word the app never uses, has no dose to give here
+    // a word is present when the index has it, or a longer form of it ("lido" -> lidocaine, "intub" -> intubation), or a typo of it
+    const present = (word: string) => [...expand(word)].some((w) => (postings.get(w) ?? []).length > 0);
+    // a how-to question about a procedure or exam the app never names ("place a chest tube", "do the HINTS exam") has no procedure here
+    if (q.intents.includes('procedure') && toks.some((t) => !present(t.word))) return false;
     const per = toks.map((t) => ({ e: expand(t.word), alts: alternatives(t.word), exact: stem(t.word), short: t.word.length <= 5, subject: t.subject ? stem(t.word) : '' }));
     let known = 0;
     for (const p of per) {
