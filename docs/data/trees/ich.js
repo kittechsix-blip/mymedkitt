@@ -77,16 +77,16 @@ export const ICH_NODES = [
         type: 'info',
         module: 2,
         title: 'Warfarin Reversal',
-        body: '**Goal: INR <1.4 as rapidly as possible.**\n\n**First-line: [4-Factor PCC](#/drug/pcc-4factor/warfarin ich)**\n• 25–50 IU/kg IV based on INR and weight\n• Onset: 10–15 minutes\n• Superior to FFP — faster correction, less volume\n\n**PLUS [Vitamin K](#/drug/vitamin-k/warfarin ich)**\n• 10 mg IV slow push (over 15–30 min)\n• Prevents INR rebound after PCC wears off (6–8h)\n• IV route preferred — oral takes 12–24h\n\n**FFP** (15 mL/kg) only if PCC unavailable — slower, volume overload risk\n\n**Monitoring:**\n• Recheck INR 15–30 min post-PCC\n• If INR still >1.4 → repeat PCC dose\n• Recheck INR at 6h (Vitamin K sustains correction)\n\n**Basis for these doses:** INR-based 4F-PCC dosing (25–50 IU/kg), the INR <1.4 goal, and concurrent IV vitamin K 10 mg are the Neurocritical Care Society / SCCM antithrombotic reversal guideline recommendations [5], echoed by AHA/ASA 2022 [1], ESO/EANS 2025 [2], and the 2020 ACC bleeding decision pathway [4].',
-        citation: [1, 2, 4, 5],
+        body: '**Goal: INR <1.4 as rapidly as possible.**\n\n**First-line: [4-Factor PCC](#/drug/pcc-4factor/warfarin ich)**\n• Fixed dose **1000 IU** IV (PROPER-3) or per institutional protocol [30]\n• PROPER-3 excluded intracranial hemorrhage; use institutional protocol if unsure.\n• Institutional weight-based protocol (INR-tiered): 25–50 IU/kg IV based on INR and weight\n• Onset: 10–15 minutes\n• Superior to FFP — faster correction, less volume\n\n**PLUS [Vitamin K](#/drug/vitamin-k/warfarin ich)**\n• 10 mg IV slow push (over 15–30 min)\n• Prevents INR rebound after PCC wears off (6–8h)\n• IV route preferred — oral takes 12–24h\n\n**FFP** (15 mL/kg) only if PCC unavailable — slower, volume overload risk\n\n**Monitoring:**\n• Recheck INR 15–30 min post-PCC\n• If INR still >1.4 → repeat PCC dose\n• Recheck INR at 6h (Vitamin K sustains correction)\n\n**Basis for these doses:** INR-based 4F-PCC dosing (25–50 IU/kg), the INR <1.4 goal, and concurrent IV vitamin K 10 mg are the Neurocritical Care Society / SCCM antithrombotic reversal guideline recommendations [5], echoed by AHA/ASA 2022 [1], ESO/EANS 2025 [2], and the 2020 ACC bleeding decision pathway [4].',
+        citation: [1, 2, 4, 5, 30],
         treatment: {
             firstLine: {
                 drug: '4-Factor PCC + Vitamin K',
-                dose: 'PCC 25-50 IU/kg (based on INR) + Vitamin K 10 mg',
+                dose: 'PCC fixed 1000 IU (PROPER-3) or per institutional protocol; institutional weight-based protocol (INR-tiered) 25-50 IU/kg + Vitamin K 10 mg',
                 route: 'IV',
                 frequency: 'Once',
                 duration: 'Single dose',
-                notes: 'Give PCC first. Vitamin K over 15-30 min to prevent anaphylaxis. May repeat PCC if INR >1.4 at 15-30 min.',
+                notes: 'Give PCC first. Vitamin K over 15-30 min to prevent anaphylaxis. May repeat PCC if INR >1.4 at 15-30 min. PROPER-3 excluded intracranial hemorrhage; use institutional protocol if unsure.',
             },
             alternative: {
                 drug: 'FFP',
@@ -99,7 +99,7 @@ export const ICH_NODES = [
             monitoring: 'Recheck INR 15-30 min post-PCC. If still >1.4, repeat PCC. Recheck INR at 6h (Vitamin K sustains correction).',
         },
         next: 'ich-bp',
-        summary: '4-factor PCC 25-50 IU/kg + Vitamin K 10mg IV — target INR <1.4 within 4 hours',
+        summary: '4-factor PCC fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 IU/kg + Vitamin K 10mg IV — target INR <1.4 within 4 hours',
         safetyLevel: 'critical',
     },
     {
@@ -418,7 +418,7 @@ export const ICH_MODULE_LABELS = [
 // -------------------------------------------------------------------
 export const ICH_CRITICAL_ACTIONS = [
     { text: 'Do NOT delay anticoagulant reversal for labs - start empiric reversal immediately', nodeId: 'ich-anticoag' },
-    { text: 'Warfarin ICH: 4-factor PCC 25-50 IU/kg + Vitamin K 10 mg IV - target INR <1.4', nodeId: 'ich-warfarin-rev' },
+    { text: 'Warfarin ICH: 4-factor PCC fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 IU/kg + Vitamin K 10 mg IV - target INR <1.4', nodeId: 'ich-warfarin-rev' },
     { text: 'Dabigatran ICH: Idarucizumab 5g IV (two 2.5g boluses) - immediate complete reversal', nodeId: 'ich-dabi-rev' },
     { text: 'Xa inhibitor ICH: 4-factor PCC 50 IU/kg - most widely available option', nodeId: 'ich-xa-rev' },
     { text: 'Target SBP 130-150 mmHg with nicardipine or clevidipine - avoid drops >70 mmHg first hour', nodeId: 'ich-bp' },
@@ -458,6 +458,7 @@ export const ICH_CITATIONS = [
     { num: 27, text: 'Greer DM, Helbok R, Badjatia N, et al; INTREPID Investigators. Fever Prevention in Patients With Acute Vascular Brain Injury: The INTREPID Randomized Clinical Trial. JAMA. 2024;332(18):1525-1534. doi:10.1001/jama.2024.14745. PMCID: PMC11425189 (free full text). ClinicalTrials.gov NCT02996266.' },
     { num: 28, text: 'Hemphill JC 3rd, Bonovich DC, Besmertis L, Manley GT, Johnston SC. The ICH score: a simple, reliable grading scale for intracerebral hemorrhage. Stroke. 2001;32(4):891-897. doi:10.1161/01.STR.32.4.891. PMID: 11283388.' },
     { num: 29, text: 'Rost NS, Smith EE, Chang Y, et al. Prediction of functional outcome in patients with primary intracerebral hemorrhage: the FUNC score. Stroke. 2008;39(8):2304-2309. doi:10.1161/STROKEAHA.107.512202. PMID: 18556582.' },
+    { num: 30, text: 'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose (weight- and INR-based) 4-factor PCC for vitamin K antagonist-related bleeding. Intracranial hemorrhage excluded from the trial.' },
 ];
 // -------------------------------------------------------------------
 // Clinical Notes (for reference table)

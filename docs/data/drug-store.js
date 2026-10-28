@@ -8150,8 +8150,12 @@ const PCC_4FACTOR = {
     indications: ['Warfarin reversal in life-threatening bleeding', 'DOAC reversal (off-label)', 'Coagulopathy reversal for urgent surgery'],
     dosing: [
         {
-            indication: 'Warfarin reversal — ICH (goal INR <1.4)',
-            regimen: 'INR-based dosing: INR 2\u20133.9 \u2192 25 IU/kg; INR 4\u20136 \u2192 35 IU/kg; INR >6 \u2192 50 IU/kg. Max single dose 5000 IU. Infuse at 0.12 mL/kg/min (max 8.4 mL/min). Onset: 10\u201315 min. Always co-administer Vitamin K 10 mg IV to prevent INR rebound.',
+            indication: 'Warfarin reversal — ICH (goal INR <1.4), fixed dose 1000 IU (PROPER-3) or per institutional protocol',
+            regimen: 'Fixed dose 1000 IU IV (PROPER-3) or per institutional protocol. PROPER-3 excluded intracranial hemorrhage; use institutional protocol if unsure. Always co-administer Vitamin K 10 mg IV.',
+        },
+        {
+            indication: 'Warfarin reversal — ICH (goal INR <1.4), institutional weight-based protocol (INR-tiered)',
+            regimen: 'Institutional weight-based protocol (INR-tiered): INR 2\u20133.9 \u2192 25 IU/kg; INR 4\u20136 \u2192 35 IU/kg; INR >6 \u2192 50 IU/kg. Max single dose 5000 IU. Infuse at 0.12 mL/kg/min (max 8.4 mL/min). Onset: 10\u201315 min. Always co-administer Vitamin K 10 mg IV to prevent INR rebound.',
             weightCalc: [
                 { dosePerKg: 25, unit: 'IU', maxDose: 2500, label: 'INR 2\u20133.9' },
                 { dosePerKg: 35, unit: 'IU', maxDose: 3500, label: 'INR 4\u20136' },
@@ -8185,6 +8189,7 @@ const PCC_4FACTOR = {
     citations: [
         'Sarode R, et al. Efficacy and Safety of a 4-Factor PCC vs Plasma for Urgent Vitamin K Antagonist Reversal (INCH). Lancet. 2013;382(9899):1251-1256.',
         'Tomaselli GF, et al. 2020 ACC Expert Consensus: Management of Bleeding on Oral Anticoagulants. J Am Coll Cardiol. 2020;76(5):594-622.',
+        'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose (weight- and INR-based) 4-factor PCC for vitamin K antagonist-related bleeding. Intracranial hemorrhage excluded from the trial.',
     ],
 };
 const PROTAMINE = {
