@@ -321,10 +321,10 @@ export const DIC_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: '4-Factor PCC in DIC',
-    body: '**Use in DIC is selective and controversial.** [2][14]\n\n**Indications:** [14]\n• Volume-restricted patient with severe coagulopathy and bleeding\n• Reversal of vitamin K antagonist on top of DIC\n• When FFP is not feasible (volume overload, time, immediate need)\n\n**Dosing:** [14]\n• **25-50 units/kg IV** (Kcentra, Beriplex, Octaplex)\n• 25 units/kg if INR 2-4\n• 35 units/kg if INR 4-6\n• 50 units/kg if INR >6 or major bleed\n• Max 5000 units regardless of weight\n\n**Cautions in DIC:** [2][14]\n• Contains procoagulant factors (II, VII, IX, X) and small amounts of C, S, antithrombin\n• Theoretical thrombosis risk in already-procoagulant state\n• Most evidence is in trauma TIC and warfarin reversal, NOT classic septic DIC\n• Discuss with hematology before using as primary DIC therapy\n\n**Vitamin K co-administration:** [14]\n• If VKA reversal: 10 mg IV vitamin K with PCC\n• Effect of PCC fades in 6-24h; vitamin K provides durable reversal\n\n**Alternative:** Activated FVIIa is rarely used in DIC due to thrombosis risk and lack of evidence. [14]',
-    citation: [2, 14],
+    body: '**Use in DIC is selective and controversial.** [2][14]\n\n**Indications:** [14]\n• Volume-restricted patient with severe coagulopathy and bleeding\n• Reversal of vitamin K antagonist on top of DIC\n• When FFP is not feasible (volume overload, time, immediate need)\n\n**Dosing:** [14]\n• **Warfarin (VKA) reversal:** fixed dose 1000 IU (PROPER-3 [15]) or per institutional protocol; INR-tiered weight-based dosing as the institutional protocol: 25 units/kg if INR 2-4, 35 units/kg if INR 4-6, 50 units/kg if INR >6 or major bleed\n• **Non-VKA (volume-restricted):** 25-50 units/kg IV (Kcentra, Beriplex, Octaplex) (off-label for DOACs)\n• Max 5000 units regardless of weight\n\n**Cautions in DIC:** [2][14]\n• Contains procoagulant factors (II, VII, IX, X) and small amounts of C, S, antithrombin\n• Theoretical thrombosis risk in already-procoagulant state\n• Most evidence is in trauma TIC and warfarin reversal, NOT classic septic DIC\n• Discuss with hematology before using as primary DIC therapy\n\n**Vitamin K co-administration:** [14]\n• If VKA reversal: 10 mg IV vitamin K with PCC\n• Effect of PCC fades in 6-24h; vitamin K provides durable reversal\n\n**Alternative:** Activated FVIIa is rarely used in DIC due to thrombosis risk and lack of evidence. [14]',
+    citation: [2, 14, 15],
     next: 'dic-product-overlay',
-    summary: '4F-PCC 25-50 u/kg if volume-restricted or VKA reversal — controversial in pure DIC, theoretic thrombosis risk; discuss with heme',
+    summary: '4F-PCC 25-50 u/kg if volume-restricted; VKA reversal fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 u/kg — controversial in pure DIC, theoretic thrombosis risk; discuss with heme',
   },
 
   {
@@ -332,10 +332,10 @@ export const DIC_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Blood Product Order Reference',
-    body: '[Blood Product Order Sheet](#/info/dic-product-thresholds)\n\nAccess the full blood product order sheet via the toolbar overlay or the link above.\n\n**Quick reference:** [2][12][14]\n\n| Product | When | Dose |\n|---------|------|------|\n| Platelets | Bleeding + plt <50 (or <100 if ICH/neuraxial) | 1 apheresis unit |\n| FFP | PT/aPTT >1.5× ULN + bleeding | 15 mL/kg |\n| Cryoprecipitate | Fibrinogen <1.5 g/L (<2 g/L obstetric) + bleeding | 10 units or 0.06 u/kg |\n| 4F-PCC | Volume-restricted or VKA reversal | 25-50 u/kg |\n| Fibrinogen concentrate | Cryo unavailable or volume-restricted | 25-100 mg/kg |\n\n**Massive transfusion ratio:** 1:1:1 (RBC:FFP:platelets) until viscoelastic-guided. [13]\n\n**Always:** Type & screen, alert blood bank early, recheck labs 30-60 min after each round.',
+    body: '[Blood Product Order Sheet](#/info/dic-product-thresholds)\n\nAccess the full blood product order sheet via the toolbar overlay or the link above.\n\n**Quick reference:** [2][12][14]\n\n| Product | When | Dose |\n|---------|------|------|\n| Platelets | Bleeding + plt <50 (or <100 if ICH/neuraxial) | 1 apheresis unit |\n| FFP | PT/aPTT >1.5× ULN + bleeding | 15 mL/kg |\n| Cryoprecipitate | Fibrinogen <1.5 g/L (<2 g/L obstetric) + bleeding | 10 units or 0.06 u/kg |\n| 4F-PCC | Volume-restricted (non-VKA): 25-50 u/kg; VKA reversal: fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 u/kg |\n| Fibrinogen concentrate | Cryo unavailable or volume-restricted | 25-100 mg/kg |\n\n**Massive transfusion ratio:** 1:1:1 (RBC:FFP:platelets) until viscoelastic-guided. [13]\n\n**Always:** Type & screen, alert blood bank early, recheck labs 30-60 min after each round.',
     citation: [2, 12, 13, 14],
     next: 'dic-heparin',
-    summary: 'Quick ref: plt 1 apheresis (≥50 bleed), FFP 15 mL/kg (PT >1.5x), cryo 10u (fib <1.5/<2 OB), 4F-PCC 25-50 u/kg; MTP 1:1:1',
+    summary: 'Quick ref: plt 1 apheresis (≥50 bleed), FFP 15 mL/kg (PT >1.5x), cryo 10u (fib <1.5/<2 OB), 4F-PCC 25-50 u/kg (VKA: fixed 1000 IU, PROPER-3, or institutional INR-tiered); MTP 1:1:1',
     skippable: true,
   },
 
@@ -452,6 +452,7 @@ export const DIC_CITATIONS: Citation[] = [
   { num: 12, text: 'Sankar A, Bhatti S, Olutoye OA, et al. Disseminated intravascular coagulation in obstetrics: a contemporary clinical review. Am J Obstet Gynecol MFM. 2024;6(2):101230.' },
   { num: 13, text: 'Spahn DR, Bouillon B, Cerny V, et al. The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition. Crit Care. 2023;27(1):80.' },
   { num: 14, text: 'Thachil J, Adelborg K, Connors JM, et al. ISTH SSC subcommittee guidance on prothrombin complex concentrate use in the bleeding patient. J Thromb Haemost. 2023;21(5):1238-1247.' },
+  { num: 15, text: 'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose (weight- and INR-based) 4-factor PCC for vitamin K antagonist-related bleeding. Intracranial hemorrhage excluded from the trial.' },
 ];
 
 export const DIC_NODE_COUNT = DIC_NODES.length;

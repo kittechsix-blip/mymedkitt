@@ -123,3 +123,44 @@ Owner instruction (Andy): (A) warfarin 4F-PCC fixed 1000 IU (PROPER-3) plus inst
 - Other warfarin PCC unit/kg lines not in the edit set: `src/data/trees/massive-transfusion.ts` (~476, MTP anticoagulated, 25-50 units/kg), `src/data/trees/blood-transfusions.ts` (~441 summary), `src/data/trees/dic.ts` (~327, ~338 DIC VKA reversal), `src/data/trees/ich.ts` Xa ICH 50 IU/kg (CNS branch, kept per instruction).
 - Observational context (not used for dosing): a single-center comparison reported fixed 1000 IU reached target INR less often than weight-based dosing in non-CNS INR <=6 bleeds (57.5% vs 86.4%). Andy may want this weighed before the fixed-dose option is used as first line.
 - No PCC calculator test added: `calculator.ts` imports DOM/router modules and cannot load under `node --test`. Manual check: weight 80 kg non-CNS Xa -> "2,000-4,000 units".
+
+## PCC alignment 2026-10-28
+
+Approved by Andy (owner, EM physician). Verified doses: warfarin 4F-PCC fixed 1000 IU (PROPER-3) or per institutional protocol, with the INR-tiered weight-based dosing kept as the institutional protocol; DOAC/factor Xa bleeding (off-label) 25-50 units/kg IV bolus, higher end for life-threatening/intracranial bleeding (NEJM 2026). Citation 23 = PROPER-3; citation 22 = NEJM 2026 (reused wording from anticoag-reversal.ts).
+
+Every edit, old -> new:
+
+1. `src/data/trees/ich.ts` ich-warfarin-rev body: "25–50 IU/kg IV based on INR and weight" -> new first bullet "Fixed dose **1000 IU** IV (PROPER-3) or per institutional protocol [30]", then "PROPER-3 excluded intracranial hemorrhage; use institutional protocol if unsure.", then "Institutional weight-based protocol (INR-tiered): 25–50 IU/kg IV based on INR and weight".
+2. `src/data/trees/ich.ts` ich-warfarin-rev citation: [1, 2, 4, 5] -> [1, 2, 4, 5, 30]; ICH_CITATIONS gained num 30 = PROPER-3 (same text as anticoag-reversal citation 23).
+3. `src/data/trees/ich.ts` ich-warfarin-rev firstLine.dose: "PCC 25-50 IU/kg (based on INR) + Vitamin K 10 mg" -> "PCC fixed 1000 IU (PROPER-3) or per institutional protocol; institutional weight-based protocol (INR-tiered) 25-50 IU/kg + Vitamin K 10 mg".
+4. `src/data/trees/ich.ts` ich-warfarin-rev firstLine.notes: appended "PROPER-3 excluded intracranial hemorrhage; use institutional protocol if unsure."
+5. `src/data/trees/ich.ts` ich-warfarin-rev summary: "4-factor PCC 25-50 IU/kg + Vitamin K 10mg IV — target INR <1.4 within 4 hours" -> "4-factor PCC fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 IU/kg + Vitamin K 10mg IV — target INR <1.4 within 4 hours".
+6. `src/data/trees/ich.ts` ICH quick-reference line: "Warfarin ICH: 4-factor PCC 25-50 IU/kg + Vitamin K 10 mg IV - target INR <1.4" -> "Warfarin ICH: 4-factor PCC fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 IU/kg + Vitamin K 10 mg IV - target INR <1.4".
+7. `src/data/drug-store.ts` PCC_4FACTOR warfarin ICH: one row "Warfarin reversal — ICH (goal INR <1.4)" with INR-based regimen -> two rows. NEW first row "Warfarin reversal — ICH (goal INR <1.4), fixed dose 1000 IU (PROPER-3) or per institutional protocol": "Fixed dose 1000 IU IV (PROPER-3) or per institutional protocol. PROPER-3 excluded intracranial hemorrhage; use institutional protocol if unsure. Always co-administer Vitamin K 10 mg IV." (no weightCalc). Existing row kept with indication "Warfarin reversal — ICH (goal INR <1.4), institutional weight-based protocol (INR-tiered)", regimen prefixed "Institutional weight-based protocol (INR-tiered):", weightCalc unchanged. Drug link hint #/drug/pcc-4factor/warfarin ich still matches the first (fixed-dose) card.
+8. `src/data/drug-store.ts` PCC_4FACTOR citations: added the PROPER-3 citation string (same text as anticoag-reversal citation 23).
+9. `src/data/trees/massive-transfusion.ts` mtp-anticoag warfarin bullet: "4-Factor PCC 25-50 units/kg IV" -> "4-Factor PCC fixed 1000 IU (PROPER-3 [27]) or per institutional protocol; INR-tiered weight-based dosing as the institutional protocol (25-50 units/kg IV)".
+10. `src/data/trees/massive-transfusion.ts` mtp-anticoag DOAC bullet: "4-Factor PCC 50 units/kg" -> "4-Factor PCC 25-50 units/kg (off-label for DOACs)".
+11. `src/data/trees/massive-transfusion.ts` mtp-anticoag dabigatran bullet: "4-Factor PCC 50 units/kg" -> "4-Factor PCC 25-50 units/kg (off-label for DOACs)".
+12. `src/data/trees/massive-transfusion.ts` mtp-anticoag citation: [23, 25] -> [23, 25, 27]; new citation num 27 = PROPER-3.
+13. `src/data/trees/blood-transfusions.ts` bt-pcc dosing: added before the INR 2-3.9 bullet "**Fixed dose 1000 IU** (PROPER-3 [15]) or per institutional protocol; INR-tiered weight-based dosing as the institutional protocol:". INR bullets unchanged.
+14. `src/data/trees/blood-transfusions.ts` bt-pcc summary: "PCC: 4-factor preferred; 25-50 IU/kg for warfarin reversal; faster than FFP, lower volume" -> "PCC: 4-factor preferred; warfarin reversal fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 IU/kg; faster than FFP, lower volume".
+15. `src/data/trees/blood-transfusions.ts` bt-pcc citation: [14] -> [14, 15]; new citation num 15 = PROPER-3.
+16. `src/data/trees/dic.ts` dic-pcc dosing: "25-50 units/kg IV (Kcentra, Beriplex, Octaplex)" bullet -> "Warfarin (VKA) reversal: fixed dose 1000 IU (PROPER-3 [15]) or per institutional protocol; INR-tiered weight-based dosing as the institutional protocol: 25 units/kg if INR 2-4, 35 units/kg if INR 4-6, 50 units/kg if INR >6 or major bleed" and "Non-VKA (volume-restricted): 25-50 units/kg IV (Kcentra, Beriplex, Octaplex) (off-label for DOACs)". The max-5000 bullet is unchanged.
+17. `src/data/trees/dic.ts` dic-pcc summary: "4F-PCC 25-50 u/kg if volume-restricted or VKA reversal" -> "4F-PCC 25-50 u/kg if volume-restricted; VKA reversal fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 u/kg".
+18. `src/data/trees/dic.ts` dic-pcc citation: [2, 14] -> [2, 14, 15]; new citation num 15 = PROPER-3.
+19. `src/data/trees/dic.ts` dic-product-overlay table row: "| 4F-PCC | Volume-restricted or VKA reversal | 25-50 u/kg |" -> "| 4F-PCC | Volume-restricted (non-VKA): 25-50 u/kg; VKA reversal: fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 u/kg |".
+20. `src/data/trees/dic.ts` dic-product-overlay summary: "4F-PCC 25-50 u/kg; MTP 1:1:1" -> "4F-PCC 25-50 u/kg (VKA: fixed 1000 IU, PROPER-3, or institutional INR-tiered); MTP 1:1:1".
+21. `src/data/trees/teg.ts` teg-tx-factors body: "4-factor PCC 25–50 IU/kg (off-label in trauma; thrombotic risk)" -> "25–50 units/kg (off-label for DOACs; off-label in trauma; thrombotic risk)".
+22. `src/data/trees/teg.ts` teg-tx-factors recommendation: "4F-PCC 25–50 IU/kg as a low-volume alternative" -> "4F-PCC 25–50 units/kg (off-label for DOACs) as a low-volume alternative".
+23. `src/data/trees/teg.ts` teg-tx-factors alternative dose: "25–50 IU/kg" -> "25–50 units/kg (off-label for DOACs)".
+24. `src/data/trees/teg.ts` quick-reference line 215: "4F-PCC 25–50 IU/kg; rule out heparin" -> "4F-PCC 25–50 units/kg (off-label for DOACs); rule out heparin".
+
+**Not changed (deliberate, flagged)**
+- ICH Xa-inhibitor rows (50 IU/kg) were left as-is; 50 IU/kg is the verified high-end dose for intracranial bleeding.
+- `src/data/info-pages.ts` (~3259, ICH warfarin quick text still reads 25-50 IU/kg) and `src/components/calculator.ts` us-iv lines were not touched (out of scope; calculator untouched per instruction).
+- The "Basis for these doses" paragraph in ich-warfarin-rev still cites the 25-50 IU/kg INR-based dosing as the guideline basis; left unchanged.
+- The TEG trauma/factor lines now read "off-label for DOACs" per the approved wording, though the indication there is trauma factor replacement, not DOAC reversal; the existing "off-label in trauma" note is kept alongside it.
+- Two-dose 'DOAC' rows in drug-store.ts PCC_4FACTOR (ICH 50 IU/kg; trauma factor support) were not edited.
+- Observational context from the earlier signoff still applies: a single-center comparison found fixed 1000 IU reached target INR less often in non-CNS INR <=6 bleeds (57.5% vs 86.4%).
+
+Gates run 2026-10-28: tsc --noEmit clean (exit 0); lint-citation-refs --gate PASS (no new dangling refs); lint-critical-actions --strict PASS; lint-calculator-refs --gate PASS; bun run test: all pass except the expected 'vendored search engine is the skill's current engine' test (other session's unversioned engine edit).

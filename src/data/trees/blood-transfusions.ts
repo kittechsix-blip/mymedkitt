@@ -432,13 +432,13 @@ export const BLOOD_TRANSFUSIONS_NODES: DecisionNode[] = [
     type: 'info',
     module: 7,
     title: 'PCC (Prothrombin Complex Concentrate)',
-    body: '**PROTHROMBIN COMPLEX CONCENTRATE**\n\n**Contents:**\n- **4-factor PCC (Kcentra):** Factors II, VII, IX, X (preferred)\n- **3-factor PCC:** Factors II, IX, X (± VII)\n\n**FDA Indication:**\n- Warfarin reversal with acute bleeding or urgent procedure\n\n**Off-Label Uses:**\n- DOAC reversal (if specific antidotes unavailable)\n- Bleeding in factor deficiency\n- Trauma coagulopathy (adjunct)\n\n**Dosing (Warfarin Reversal):**\n- Expressed in units of Factor IX\n- **25 IU/kg** for INR 2-3.9 (max 2500 IU)\n- **35 IU/kg** for INR 4-6 (max 3500 IU)\n- **50 IU/kg** for INR >6 (max 5000 IU)\n- **Dose by actual body weight up to 100 kg max** (Kcentra package insert)\n\n**Administration:**\n- IV infusion over 10-15 min\n- Vitamin K 10 mg IV should accompany (sustains effect)\n- Faster than FFP (no thawing)\n\n**Advantages over FFP:**\n- Faster administration\n- Lower volume (no fluid overload)\n- More complete reversal\n\n**Cautions:**\n- Contains heparin (avoid in HIT)\n- Thromboembolism risk with high doses',
-    citation: [14],
+    body: '**PROTHROMBIN COMPLEX CONCENTRATE**\n\n**Contents:**\n- **4-factor PCC (Kcentra):** Factors II, VII, IX, X (preferred)\n- **3-factor PCC:** Factors II, IX, X (± VII)\n\n**FDA Indication:**\n- Warfarin reversal with acute bleeding or urgent procedure\n\n**Off-Label Uses:**\n- DOAC reversal (if specific antidotes unavailable)\n- Bleeding in factor deficiency\n- Trauma coagulopathy (adjunct)\n\n**Dosing (Warfarin Reversal):**\n- Expressed in units of Factor IX\n- **Fixed dose 1000 IU** (PROPER-3 [15]) or per institutional protocol; INR-tiered weight-based dosing as the institutional protocol:\n- **25 IU/kg** for INR 2-3.9 (max 2500 IU)\n- **35 IU/kg** for INR 4-6 (max 3500 IU)\n- **50 IU/kg** for INR >6 (max 5000 IU)\n- **Dose by actual body weight up to 100 kg max** (Kcentra package insert)\n\n**Administration:**\n- IV infusion over 10-15 min\n- Vitamin K 10 mg IV should accompany (sustains effect)\n- Faster than FFP (no thawing)\n\n**Advantages over FFP:**\n- Faster administration\n- Lower volume (no fluid overload)\n- More complete reversal\n\n**Cautions:**\n- Contains heparin (avoid in HIT)\n- Thromboembolism risk with high doses',
+    citation: [14, 15],
     options: [
       { label: 'Back to Adjuncts', next: 'bt-adjuncts-overview' },
       { label: 'FFP Details', next: 'bt-ffp' },
     ],
-    summary: 'PCC: 4-factor preferred; 25-50 IU/kg for warfarin reversal; faster than FFP, lower volume',
+    summary: 'PCC: 4-factor preferred; warfarin reversal fixed 1000 IU (PROPER-3) or institutional INR-tiered 25-50 IU/kg; faster than FFP, lower volume',
   },
 
   // =====================================================================
@@ -475,4 +475,5 @@ export const BLOOD_TRANSFUSIONS_CITATIONS: Citation[] = [
   { num: 12, text: 'Petz LD. Emergency Transfusion in AIHA. Transfusion 2014;54:2948-2952.' },
   { num: 13, text: 'CRASH-2 Trial. TXA in Bleeding Trauma Patients. Lancet 2010;376:23-32.' },
   { num: 14, text: 'Sarode R, et al. PCC for Urgent Warfarin Reversal. Circulation 2013;128:1234-1243.' },
+  { num: 15, text: 'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose (weight- and INR-based) 4-factor PCC for vitamin K antagonist-related bleeding. Intracranial hemorrhage excluded from the trial.' },
 ];

@@ -1,5 +1,5 @@
-// @bedside-search-engine 1.3.0
-// @engine-sha256 ef718132a121b6cb41adeef3af23d35755ce84badfd060f0e4d4a68ef7f314df
+// @bedside-search-engine 1.4.0
+// @engine-sha256 7816d36307825b1e1a705ef1909f1349e5f5a4b1018081957881f6efd24bd2c5
 // Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
@@ -195,6 +195,8 @@ export interface QuestionToken {
   soft: boolean;
   /** set after "in / during / after": scored, never required */
   context?: 'in' | 'after';
+  /** the condition a lab or analyte reading implies ("K 2.1" -> hypokalemia): the subject of the question, weighted like a drug name */
+  subject?: true;
 }
 
 export interface ParsedQuestion {
@@ -233,6 +235,9 @@ const BIGRAMS: Readonly<Record<string, readonly string[]>> = {
   'low calcium': ['hypocalcemia'],
   'high calcium': ['hypercalcemia'],
   'low magnesium': ['hypomagnesemia'],
+  'high magnesium': ['hypermagnesemia'],
+  'low phosphate': ['hypophosphatemia'],
+  'high phosphate': ['hyperphosphatemia'],
   'passed out': ['syncope'],
   'collapsed lung': ['pneumothorax'],
   'water on': ['effusion'],
@@ -273,6 +278,8 @@ function rewriteLabs(raw: string): string {
 export function parseQuestion(raw: string): ParsedQuestion {
   const ws = rewriteBigrams(words(rewriteLabs(raw)));
   const sts = ws.map(stem);
+  // words the rewrite introduced (the condition behind a number or a "low X" / "high X"), not words the asker typed
+  const typed = new Set(words(raw));
   const intents = new Set<IntentId>();
   const tokens: QuestionToken[] = [];
   const sequence: string[] = [];
@@ -280,7 +287,9 @@ export function parseQuestion(raw: string): ParsedQuestion {
   let inContext: 'in' | 'after' | undefined;
   for (let i = 0; i < ws.length; ) {
     const hit = TRIGGERS.find((t) => t.seq.every((s, k) => sts[i + k] === s));
-    if (hit && ws.length > hit.seq.length) {
+    // "mg" alone is the abbreviation for myasthenia gravis as often as a unit: it is a dose only after a number ("5 mg", "2 mg/kg")
+    const bareMg = hit !== undefined && hit.seq.length === 1 && hit.seq[0] === 'mg' && !/^\d/.test(ws[i - 1] ?? '');
+    if (hit && ws.length > hit.seq.length && !bareMg) {
       intents.add(hit.intent);
       sequence.push(...hit.seq);
       i += hit.seq.length;
@@ -292,7 +301,8 @@ export function parseQuestion(raw: string): ParsedQuestion {
       if (CONTEXT_WORDS.has(ws[i]) && tokens.length > 0 && !GENERIC.has(ws[i + 1])) inContext = 'in';
     } else {
       if (ws[i] === 'after' && tokens.length > 0) inContext = 'after';
-      tokens.push({ word: ws[i], soft: SOFT.has(ws[i]) || (ws[i].length < 2 && !/\d/.test(ws[i])), ...(inContext ? { context: inContext } : {}) });
+      const subject = !typed.has(ws[i]) ? { subject: true as const } : {};
+      tokens.push({ word: ws[i], soft: SOFT.has(ws[i]) || (ws[i].length < 2 && !/\d/.test(ws[i])), ...(inContext ? { context: inContext } : {}), ...subject });
       if (!inContext) sequence.push(sts[i]);
     }
     i++;
@@ -674,7 +684,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       for (const w of p.e) df += (postings.get(w) ?? []).length;
       df = Math.min(df, n);
       if (df === 0) for (let i = 0; i < n; i++) if (locArr[ti][i] > 0) df++;
-      const subject = drugWords.has(stem(toks[ti].word)) ? SUBJECT_WEIGHT : 1;
+      const subject = drugWords.has(stem(toks[ti].word)) || toks[ti].subject ? SUBJECT_WEIGHT : 1;
       const w = df === 0 ? 0 : Math.log(1 + n / df) * (toks[ti].context ? 1 : subject);
       // A word no title, heading, parent or keyword in the app ever uses ("doing", "cheapest") is chatter, not a topic:
       // being rare in body text must not make it count for more than an ordinary word, or it sinks every page that lacks it.
@@ -880,11 +890,12 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     const hard = q.tokens.filter((t) => !t.soft);
     const toks = hard.length ? hard : q.tokens;
     if (!toks.length) return results.length > 0;
-    const per = toks.map((t) => ({ e: expand(t.word), alts: alternatives(t.word) }));
+    const per = toks.map((t) => ({ e: expand(t.word), alts: alternatives(t.word), exact: stem(t.word), short: t.word.length <= 5, subject: t.subject ? stem(t.word) : '' }));
     let known = 0;
     for (const p of per) {
       let df = 0;
-      for (const w of p.e) df += (postings.get(w) ?? []).length;
+      // a short word is known only as itself: a typo match ("reset" one edit from "rest") is not knowledge of the word
+      for (const w of p.short ? [p.exact] : p.e) df += (postings.get(w) ?? []).length;
       if (df > 0 || p.alts.length > 0) known++;
     }
     if (known / toks.length < ANSWER_MIN_KNOWN) return false;
@@ -896,13 +907,20 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       const anywhere = new Set<string>([...named, ...x.text, ...x.psub]);
       const hasAlt = (phrases: Set<string>[][], where: Set<string>) => phrases.some((ph) => ph.every((es) => [...es].some((w) => where.has(w))));
       let matched = 0;
+      let exactMatched = 0;
       let names = 0;
       for (const p of per) {
         const inNamed = [...p.e].some((w) => named.has(w)) || hasAlt(p.alts, named);
-        if (inNamed) names++;
-        if (inNamed || [...p.e].some((w) => anywhere.has(w)) || hasAlt(p.alts, anywhere)) matched++;
+        const inText = [...p.e].some((w) => anywhere.has(w)) || hasAlt(p.alts, anywhere);
+        // a lab reading names its condition: a top result that carries that exact condition in its own text is about it ("K 2.1" -> hypokalemia).
+        // Exact stems only: a typo match would name "hypocalcemia" for "high calcium" (two edits apart) and answer the opposite condition.
+        if (inNamed || (p.subject && anywhere.has(p.subject))) names++;
+        if (inNamed || inText) matched++;
+        if (anywhere.has(p.exact) || hasAlt(p.alts, anywhere)) exactMatched++;
       }
       if (matched / toks.length >= ANSWER_MIN_MATCHED && names > 0) return true;
+      // a result whose own text carries every content word of a multi-word question answers it
+      if (toks.length >= 2 && exactMatched === toks.length) return true;
     }
     return false;
   }
