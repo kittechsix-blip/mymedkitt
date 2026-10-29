@@ -1409,6 +1409,16 @@ export const DEFAULT_CATEGORIES = [
         icon: 'gi.png',
         decisionTrees: [
             {
+                id: 'paracentesis',
+                title: 'Diagnostic & Therapeutic Paracentesis',
+                subtitle: 'Spontaneous bacterial peritonitis (SBP), cirrhosis, ascites, ceftriaxone and albumin',
+                categoryId: 'procedures',
+                displayCategoryId: 'gastroenterology',
+                version: '1.1',
+                nodeCount: 13,
+                entryNodeId: 'para-start',
+            },
+            {
                 id: 'hepatitis',
                 title: 'Hepatitis / Elevated Liver Enzymes',
                 subtitle: 'Pattern (R-factor) → Hepatocellular / Cholestatic / Mixed → Acute Liver Failure',

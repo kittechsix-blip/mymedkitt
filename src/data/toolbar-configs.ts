@@ -582,7 +582,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'para-steps' },
     { id: 'us-site', label: 'US Site', icon: '🩻', action: 'overlay', target: 'para-us-site' },
     { id: 'labs', label: 'Labs', icon: '🧪', action: 'overlay', target: 'para-labs' },
-    { id: 'albumin', label: 'Albumin', icon: '💧', action: 'overlay', target: 'para-albumin' },
+    { id: 'albumin', label: 'SBP / Albumin', icon: '💧', action: 'overlay', target: 'para-albumin' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'para-stop' },
   ],
   'occipital-nerve-block': [

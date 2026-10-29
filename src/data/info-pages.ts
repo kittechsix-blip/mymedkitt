@@ -24270,15 +24270,18 @@ const PARA_LABS_PAGE: InfoPage = {
 
 const PARA_ALBUMIN_PAGE: InfoPage = {
   id: 'para-albumin',
-  title: 'Albumin After Paracentesis',
-  subtitle: 'Large-volume and SBP indications',
+  title: 'SBP Treatment & Albumin',
+  subtitle: 'Infected ascites: antibiotics, renal protection, reassessment',
   sections: [
-    {
-      body: '- Large-volume paracentesis: give albumin per guideline/local protocol, commonly when >5 L removed.\n- SBP: albumin is recommended in selected high-risk patients, especially renal dysfunction, high bilirubin, or severe disease criteria.\n- Albumin does not replace antibiotics or source evaluation.\n- Reassess blood pressure, renal function, sodium, and ongoing drainage/leak.',
-    },
+    { heading: "Recognize and treat", body: "Tap admitted or decompensating cirrhotic patients with ascites, even without fever. PMN >=250 cells/mm3: treat presumptive SBP while excluding a secondary source. Negative culture does not exclude SBP. Community-acquired disease without resistance risk: ceftriaxone 2 g IV every 24 hours, typically 5-7 days. Broaden for healthcare-associated infection, shock or resistant-organism risk. Admit; avoid routine aminoglycosides. [1,2]" },
+    { heading: "Albumin: day 1 and day 3", body: "Albumin 1.5 g/kg IV within 6 hours, then 1 g/kg IV on day 3. Classic high-risk criteria: creatinine >1 mg/dL OR BUN >30 mg/dL OR bilirubin >4 mg/dL; do not omit albumin in this group. Current AASLD guidance recommends albumin with antibiotics for SBP more broadly. Confirm dry/dosing weight and local pharmacy protocol. At 80 kg: 120 g today and 80 g on day 3. Monitor respiratory status and fluid overload. [1-3]" },
+    { heading: "Response and secondary peritonitis", body: "Repeat tap at about 48 hours for inadequate response or suspected resistance/secondary peritonitis; PMN decline <25% prompts reassessment. Polymicrobial growth, peritoneal signs, poor response, or at least two of protein >1 g/dL, glucose <50 mg/dL and LDH above serum upper limit raise secondary-source concern. These criteria are not definitive: obtain imaging and surgical input when indicated. [1,2]" },
+    { heading: "Drainage and disposition", body: "Therapeutic drainage does not replace SBP therapy and is not categorically prohibited during SBP. Individualize for tense symptomatic ascites with renal/hemodynamic monitoring. For >5 L removed, albumin 6-8 g/L is the separate drainage regimen; coordinate with SBP albumin to avoid duplicate orders. Consider albumin with smaller taps in high-risk AKI/acute-on-chronic liver failure. Arrange secondary prophylaxis after recovery. [1,2]" },
   ],
   citations: [
-    { num: 1, text: 'Biggins SW, Angeli P, Garcia-Tsao G, et al. Hepatology. 2021;74(2):1014-1048.' },
+    { num: 1, text: 'Biggins SW, et al. AASLD Practice Guidance. Hepatology. 2021;74:1014-1048. doi:10.1002/hep.31884.' },
+    { num: 2, text: 'Aithal GP, et al. Gut. 2021;70:9-29. doi:10.1136/gutjnl-2020-321790.' },
+    { num: 3, text: 'Sort P, et al. N Engl J Med. 1999;341:403-409. doi:10.1056/NEJM199908053410603.' },
   ],
 };
 
