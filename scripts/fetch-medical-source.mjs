@@ -326,7 +326,9 @@ async function main() {
   // Launch browser with persistent profile (keeps login sessions)
   const browser = await chromium.launchPersistentContext(PROFILE_DIR, {
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    // Sandbox ON: this profile holds paywall logins and the script browses the open web.
+    // (--no-sandbox is a Linux/Docker workaround; macOS does not need it.)
+    chromiumSandbox: true,
   });
 
   const page = await browser.newPage();
