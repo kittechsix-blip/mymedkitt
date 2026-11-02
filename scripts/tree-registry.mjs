@@ -319,6 +319,7 @@ export const TREE_REGISTRY = {
   'cervical-spine-nontraumatic': { prefix: 'CERVICAL_SPINE_NONTRAUMATIC', entryNodeId: 'csnt-start', categoryId: 'emergency-medicine' },
   'brain-herniation': { prefix: 'BRAIN_HERNIATION',    entryNodeId: 'hern-start',      categoryId: 'neurology' },
   'necrotizing-fasciitis': { prefix: 'NECROTIZING_FASCIITIS', entryNodeId: 'nf-start',  categoryId: 'infectious-disease' },
+  'staph-tss': { prefix: 'STAPH_TSS', entryNodeId: 'staph-tss-start', categoryId: 'infectious-disease' },
   'fishhook-removal': { prefix: 'FISHHOOK_REMOVAL',    entryNodeId: 'fh-start',           categoryId: 'em' },
   'vafei':            { prefix: 'VAFEI',               entryNodeId: 'vafei-start',        categoryId: 'em' },
   'blood-culture-stewardship': { prefix: 'BLOOD_CULTURE_STEWARDSHIP', entryNodeId: 'bcs-start', categoryId: 'infectious-disease' },

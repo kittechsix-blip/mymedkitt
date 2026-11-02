@@ -39457,6 +39457,108 @@ const SJS_TEN_CLASSIFIER_CALCULATOR = {
         };
     },
 };
+const STAPH_TSS_CDC_CALCULATOR = {
+    id: 'staph-tss-cdc',
+    title: 'Staph TSS: CDC Case Definition',
+    subtitle: 'Toxic Shock Syndrome (Other Than Streptococcal), CDC 2011',
+    description: 'Checks the CDC 2011 surveillance case definition. This is a counting tool for public health, NOT a treatment gate: desquamation appears 1 to 2 weeks after the rash, so most ED patients cannot be "confirmed." Never withhold treatment because criteria are not met.',
+    fields: [
+        { name: 'fever', label: 'Fever ≥ 38.9 °C (102.0 °F)', type: 'toggle', points: 1 },
+        { name: 'rash', label: 'Diffuse macular erythroderma', type: 'toggle', points: 1 },
+        { name: 'hypotension', label: 'Hypotension', description: 'SBP ≤ 90 mmHg (adult) or < 5th percentile for age (under 16)', type: 'toggle', points: 1 },
+        { name: 'desquamation', label: 'Desquamation 1 to 2 weeks after rash onset', type: 'toggle', points: 1 },
+        { name: 'gi', label: 'Organ: GI', description: 'Vomiting or diarrhea at onset of illness', type: 'toggle', points: 1 },
+        { name: 'muscle', label: 'Organ: Muscular', description: 'Severe myalgia, or CK ≥ 2 × upper limit of normal', type: 'toggle', points: 1 },
+        { name: 'mucosa', label: 'Organ: Mucous membranes', description: 'Vaginal, oropharyngeal or conjunctival hyperemia', type: 'toggle', points: 1 },
+        { name: 'renal', label: 'Organ: Renal', description: 'BUN or creatinine ≥ 2 × ULN, or ≥ 5 WBC/hpf without UTI', type: 'toggle', points: 1 },
+        { name: 'hepatic', label: 'Organ: Hepatic', description: 'Total bilirubin, ALT or AST ≥ 2 × ULN', type: 'toggle', points: 1 },
+        { name: 'heme', label: 'Organ: Hematologic', description: 'Platelets < 100,000/mm³', type: 'toggle', points: 1 },
+        { name: 'cns', label: 'Organ: CNS', description: 'Disorientation or altered consciousness without focal signs, when fever and hypotension are absent', type: 'toggle', points: 1 },
+        {
+            name: 'labs',
+            label: 'Laboratory criteria',
+            type: 'select',
+            points: 0,
+            hideOptionPoints: true,
+            selectOptions: [
+                { label: 'Pending / not yet known', points: 0 },
+                { label: 'Met: blood/CSF cultures negative (blood may grow S. aureus); RMSF, leptospirosis, measles serology negative if done', points: 1 },
+                { label: 'Not met: another organism grown, or a positive RMSF, leptospirosis or measles serology', points: 2 },
+            ],
+        },
+        { name: 'died', label: 'Patient died before desquamation could occur', type: 'toggle', points: 1 },
+    ],
+    results: [],
+    thresholdNote: 'Probable = laboratory criteria + 4 of 5 clinical criteria. Confirmed = laboratory criteria + all 5, including desquamation unless the patient dies first. Multisystem criterion = 3 or more organ systems.',
+    citations: [
+        'Centers for Disease Control and Prevention. Toxic Shock Syndrome (Other Than Streptococcal) (TSS) 2011 Case Definition. National Notifiable Diseases Surveillance System. https://ndc.services.cdc.gov/case-definitions/toxic-shock-syndrome-2011/',
+    ],
+    computeResult: (values) => {
+        const on = (k) => (values[k] || 0) > 0;
+        const organs = ['gi', 'muscle', 'mucosa', 'renal', 'hepatic', 'heme', 'cns'].filter(on).length;
+        const multisystem = organs >= 3;
+        const desq = on('desquamation');
+        const died = on('died');
+        const core = [on('fever'), on('rash'), on('hypotension'), multisystem].filter(Boolean).length;
+        const clinical = core + (desq ? 1 : 0);
+        const labs = values['labs'] || 0;
+        const fullClinical = clinical === 5 || (core === 4 && !desq && died);
+        const caveat = '\n\n**Not meeting the definition never means withholding treatment.** It is a surveillance tool; treat suspected TSS now (source control, resuscitation, antibiotics plus clindamycin).';
+        const counts = `Clinical criteria: ${clinical}/5 (organ systems ${organs}/7, need 3).`;
+        const edNote = !desq && core >= 3 ? ' Desquamation is a late sign (1 to 2 weeks), so its absence today is expected.' : '';
+        if (labs === 2) {
+            return {
+                value: 'Not met',
+                label: 'Does not meet criteria (lab)',
+                description: `${counts} Another organism or a positive RMSF, leptospirosis or measles serology excludes the case definition. Treat the diagnosis you have found, and keep TSS on the list if the picture still fits.${caveat}`,
+                colorVar: '--color-text-muted',
+            };
+        }
+        let tier = 'none';
+        if (fullClinical)
+            tier = 'confirmed';
+        else if (clinical === 4)
+            tier = 'probable';
+        if (labs === 0) {
+            if (tier === 'none') {
+                return {
+                    value: `${clinical}/5`,
+                    label: 'Does not meet criteria (labs pending)',
+                    description: `${counts}${edNote} Fewer than 4 clinical criteria.${caveat}`,
+                    colorVar: '--color-warning',
+                };
+            }
+            return {
+                value: tier === 'confirmed' ? 'Confirmed*' : 'Probable*',
+                label: `${tier === 'confirmed' ? 'Confirmed' : 'Probable'} if labs come back negative`,
+                description: `${counts}${edNote} Clinical criteria fit a ${tier} case; classification depends on negative cultures and serologies.${caveat}`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (tier === 'confirmed') {
+            return {
+                value: 'Confirmed',
+                label: 'Confirmed case',
+                description: `${counts}${died && !desq ? ' Counted as confirmed because the patient died before desquamation could occur.' : ''} Laboratory criteria met. Report to public health.${caveat}`,
+                colorVar: '--color-danger',
+            };
+        }
+        if (tier === 'probable') {
+            return {
+                value: 'Probable',
+                label: 'Probable case',
+                description: `${counts}${edNote} Laboratory criteria met. Report to public health.${caveat}`,
+                colorVar: '--color-danger',
+            };
+        }
+        return {
+            value: `${clinical}/5`,
+            label: 'Does not meet criteria',
+            description: `${counts}${edNote} Fewer than 4 clinical criteria.${caveat}`,
+            colorVar: '--color-warning',
+        };
+    },
+};
 const LCC_IOP_CALCULATOR = {
     id: 'lcc-iop',
     title: 'OCS — IOP Action Tier',
@@ -44791,6 +44893,8 @@ const CALCULATORS = {
     'scorten': SCORTEN_CALCULATOR,
     'ten-fluid': TEN_FLUID_CALCULATOR,
     'sjs-ten-classifier': SJS_TEN_CLASSIFIER_CALCULATOR,
+    // Staphylococcal TSS
+    'staph-tss-cdc': STAPH_TSS_CDC_CALCULATOR,
     // Ischemic Limb (Acute Limb Ischemia & PAD)
     'abi-il': ABI_IL_CALCULATOR,
     'rutherford-acute-limb': RUTHERFORD_ALI_CALCULATOR,

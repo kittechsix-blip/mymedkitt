@@ -374,6 +374,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'sepsis-start',
             },
             {
+                id: 'staph-tss',
+                title: 'Staphylococcal Toxic Shock Syndrome',
+                subtitle: 'Recognition → Source control → Resuscitation → Antitoxin antibiotics → Refractory shock → Disposition',
+                categoryId: 'critical-care',
+                version: '1.0',
+                nodeCount: 17,
+                entryNodeId: 'staph-tss-start',
+            },
+            {
                 id: 'excited-delirium',
                 title: 'State of Extreme Agitation with Aggression',
                 subtitle: 'Danger Screen -> Sedation -> Cooling -> Acidosis/Rhabdo -> QT/ECG -> Disposition',
@@ -1886,6 +1895,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 28,
                 entryNodeId: 'nf-start',
+            },
+            {
+                id: 'staph-tss',
+                title: 'Staphylococcal Toxic Shock Syndrome',
+                subtitle: 'Recognition → Source control → Resuscitation → Antitoxin antibiotics → Refractory shock → Disposition',
+                categoryId: 'infectious-disease',
+                version: '1.0',
+                nodeCount: 17,
+                entryNodeId: 'staph-tss-start',
             },
             {
                 id: 'blood-culture-stewardship',

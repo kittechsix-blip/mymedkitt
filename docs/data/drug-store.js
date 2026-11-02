@@ -1407,6 +1407,11 @@ const CEFAZOLIN = {
             indication: 'Surgical Prophylaxis (post-Resuscitative Hysterotomy)',
             regimen: '2 grams IV once (3 g if weight ≥120 kg). Given after ROSC to cover the non-sterile intra-abdominal field. Covers skin and common OR flora. Alternative if beta-lactam allergy: Clindamycin 900 mg IV + Gentamicin 5 mg/kg IV.',
         },
+        {
+            indication: 'MSSA toxic shock syndrome (definitive therapy)',
+            regimen: 'Adult: 2 g IV q8h (IDSA lists 1 g q8h; 2 g q8h is standard for serious or bacteremic MSSA).\nPediatric: 33 mg/kg/dose IV q8h (max 2 g/dose).\n\nAlways combine with clindamycin for toxin suppression until hemodynamically stable. Poor CNS penetration: use nafcillin/oxacillin if CNS infection.',
+            weightCalc: { dosePerKg: 33, unit: 'mg', maxDose: 2000, label: 'Pediatric TSS dose, q8h' },
+        },
     ],
     contraindications: [
         'IgE-mediated cephalosporin allergy',
@@ -1420,6 +1425,7 @@ const CEFAZOLIN = {
         'Dell Children\'s EBOC. First Febrile Urinary Tract Infection Clinical Pathway. May 2017.',
         'Dell Children\'s EBOC. UTI Management Pathway (Neonatal). September 2024.',
         'Roberts KB. Urinary tract infection: clinical practice guideline for febrile infants and children 2 to 24 months. Pediatrics. 2011;128(3):595-610.',
+        'Stevens DL, Bisno AL, Chambers HF, et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by the Infectious Diseases Society of America. Clin Infect Dis. 2014;59(2):e10-e52.',
     ],
 };
 const CEFEPIME = {
@@ -2188,6 +2194,11 @@ const CLINDAMYCIN = {
             indication: 'Hidradenitis suppurativa — inpatient flare with cellulitis or systemic signs',
             regimen: '600–900 mg IV q8h as a short course (typically 3–5 days) for the admitted patient with secondary infection, then step down to the oral HS regimen (clindamycin + rifampin or a tetracycline). Broaden to NSTI coverage (vancomycin + piperacillin-tazobactam + clindamycin) if Fournier gangrene or necrotizing infection is a concern.',
         },
+        {
+            indication: 'Toxic shock syndrome (staphylococcal or streptococcal): toxin suppression',
+            regimen: 'Adult: 900 mg IV q8h (IDSA range 600-900 mg q8h), added to the bactericidal drug (vancomycin, nafcillin/oxacillin or cefazolin).\n\nPediatric: 10-13 mg/kg/dose IV q8h (max 900 mg/dose).\n\nContinue until hemodynamically stable and no further debridement is planned (often about 48-72 h). Check a D-test for inducible resistance in MRSA; if resistant, use linezolid as the antitoxin drug.',
+            weightCalc: { dosePerKg: 13, unit: 'mg', maxDose: 900, label: 'Pediatric TSS dose, q8h (10-13 mg/kg)' },
+        },
     ],
     contraindications: [
         'History of C. difficile colitis',
@@ -2203,6 +2214,7 @@ const CLINDAMYCIN = {
     notes: 'Lincosamide with excellent anaerobic and gram-positive coverage. Key role in aspiration pneumonia and toxin-mediated diseases (strep TSS — suppresses toxin production). C. difficile risk limits routine use.',
     citations: [
         'Brook I. Treatment of anaerobic infection. Expert Rev Anti Infect Ther. 2007;5(6):991-1006.',
+        'Stevens DL, Bisno AL, Chambers HF, et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by the Infectious Diseases Society of America. Clin Infect Dis. 2014;59(2):e10-e52.',
     ],
 };
 const CONJUGATED_ESTROGEN = {
@@ -3425,6 +3437,11 @@ const LINEZOLID = {
             indication: 'MDR-TB — BPaL/BPaLM Regimen',
             regimen: '1200 mg PO daily × 26 weeks. Reduce to 600 mg daily if myelosuppression or neuropathy develops. WHO Group A agent. Monitor CBC weekly and visual acuity monthly.',
         },
+        {
+            indication: 'Toxic shock syndrome (staphylococcal): MRSA coverage + toxin suppression',
+            regimen: 'Adult and child 12 yr or older: 600 mg IV q12h.\nChild under 12 yr: 10 mg/kg IV q8h (max 600 mg/dose).\n\nCovers MRSA and suppresses toxin production. Use in place of vancomycin (not with it), or as the antitoxin drug when clindamycin is resistant. Bacteriostatic against S. aureus: avoid as the only drug for S. aureus bacteremia or endocarditis without ID input.',
+            weightCalc: { dosePerKg: 10, unit: 'mg', maxDose: 600, label: 'Pediatric <12 yr, q8h' },
+        },
     ],
     contraindications: [
         'Concurrent MAOI use or within 14 days',
@@ -3442,6 +3459,46 @@ const LINEZOLID = {
     citations: [
         'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
         'Schmidt GA, et al. Evaluation and Management of Suspected Sepsis and Septic Shock. UpToDate. Jan 2026.',
+        'Liu C, Bayer A, Cosgrove SE, et al. Clinical practice guidelines by the Infectious Diseases Society of America for the treatment of methicillin-resistant Staphylococcus aureus infections in adults and children. Clin Infect Dis. 2011;52(3):e18-e55.',
+    ],
+};
+const IVIG = {
+    id: 'ivig',
+    name: 'IVIG (Intravenous Immune Globulin)',
+    genericName: 'Immune globulin intravenous (human), polyspecific',
+    drugClass: 'Pooled human immunoglobulin G',
+    route: 'IV',
+    indications: ['Toxic shock syndrome, refractory (adjunct; strongest data in streptococcal TSS)'],
+    dosing: [
+        {
+            indication: 'Toxic shock syndrome (refractory shock): adjunct, with ID consultation',
+            regimen: '1 g/kg IV on day 1, then 0.5 g/kg IV on days 2 and 3 (regimen of the Darenberg 2003 streptococcal TSS trial). A single 2 g/kg dose has also been used.\n\n**Consider, not routine.** Evidence comes almost entirely from streptococcal TSS (observational studies and one small RCT stopped early); staphylococcal data are limited to case series where IVIG was given with clindamycin. Reserve for shock that persists despite source control, fluids, vasopressors and antitoxin antibiotics, after discussion with infectious diseases. Dose on ideal or adjusted body weight in obesity per pharmacy.',
+            weightCalc: [
+                { dosePerKg: 1, unit: 'g', label: 'Day 1 (1 g/kg)' },
+                { dosePerKg: 0.5, unit: 'g', label: 'Days 2 and 3 (0.5 g/kg/day)' },
+            ],
+        },
+    ],
+    contraindications: [
+        'Prior anaphylaxis to human immune globulin',
+        'IgA deficiency with anti-IgA antibodies (use an IgA-depleted product)',
+    ],
+    cautions: [
+        'Thrombosis (stroke, MI, VTE): highest with hyperviscosity, immobility, estrogens, older age; ensure adequate hydration and use the minimum practical infusion rate',
+        'Acute kidney injury, especially with sucrose-stabilized products and pre-existing renal impairment',
+        'Hemolysis (particularly blood groups A, B, AB at high doses)',
+        'Volume load: large infusion volumes in a patient with capillary leak',
+        'Aseptic meningitis, infusion reactions (headache, fever, chills); slow the rate',
+        'Product-specific concentrations and infusion rates differ: follow pharmacy and the product label',
+    ],
+    monitoring: 'Vital signs during infusion, urine output and creatinine, hemoglobin (hemolysis), signs of thrombosis and volume overload.',
+    notes: 'Pooled IgG contains antibodies that neutralize staphylococcal and streptococcal superantigens and dampen T-cell activation. Supply is limited and cost is high: confirm availability with pharmacy.',
+    citations: [
+        'Darenberg J, Ihendyane N, Sjölin J, et al. Intravenous immunoglobulin G therapy in streptococcal toxic shock syndrome: a European randomized, double-blind, placebo-controlled trial. Clin Infect Dis. 2003;37(3):333-340.',
+        'Kaul R, McGeer A, Norrby-Teglund A, et al. Intravenous immunoglobulin therapy for streptococcal toxic shock syndrome: a comparative observational study. Clin Infect Dis. 1999;28(4):800-807.',
+        'Parks T, Wilson C, Curtis N, Norrby-Teglund A, Sriskandan S. Polyspecific intravenous immunoglobulin in clindamycin-treated patients with streptococcal toxic shock syndrome: a systematic review and meta-analysis. Clin Infect Dis. 2018;67(9):1434-1436.',
+        'Chen KYH, Cheung M, Burgner DP, Curtis N. Toxic shock syndrome in Australian children. Arch Dis Child. 2016;101(8):736-740.',
+        'Atchade E, et al. Toxic shock syndrome: a literature review. Antibiotics (Basel). 2024;13(1):96.',
     ],
 };
 const LOFEXIDINE = {
@@ -6953,6 +7010,11 @@ const VANCOMYCIN = {
                 { dosePerKg: 20, unit: 'mg', label: 'Higher initial dose (20 mg/kg)' },
             ],
         },
+        {
+            indication: 'Toxic shock syndrome (staphylococcal), pediatric',
+            regimen: '15 mg/kg/dose IV q6h, AUC-guided (pharmacy dosing). Adults: use the Sepsis / MRSA coverage card. Always pair with clindamycin for toxin suppression; switch to a beta-lactam if MSSA.',
+            weightCalc: { dosePerKg: 15, unit: 'mg', label: 'Pediatric, q6h' },
+        },
     ],
     contraindications: [
         'Known hypersensitivity to vancomycin',
@@ -6968,6 +7030,7 @@ const VANCOMYCIN = {
         'Tunkel AR, et al. Practice Guidelines for the Management of Bacterial Meningitis. Clin Infect Dis. 2004;39(9):1267-1284.',
         'Red Book: 2021-2024 Report of the Committee on Infectious Diseases. American Academy of Pediatrics.',
         'Tunkel AR, et al. IDSA Healthcare-Associated Ventriculitis and Meningitis Guideline. Clin Infect Dis. 2017;64(6):e34-e65.',
+        'Stevens DL, Bisno AL, Chambers HF, et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by the Infectious Diseases Society of America. Clin Infect Dis. 2014;59(2):e10-e52.',
     ],
 };
 const VERAPAMIL = {
@@ -12442,6 +12505,11 @@ const NAFCILLIN = {
             regimen: '50 mg/kg IV every 6 hours (200 mg/kg/day divided q6h, max 12 g/day) for 4–6 weeks per AHA/IDSA pediatric IE guidelines.',
             weightCalc: { dosePerKg: 50, unit: 'mg', maxDose: 3000, label: 'Endocarditis dose, q6h' },
         },
+        {
+            indication: 'MSSA toxic shock syndrome (definitive therapy)',
+            regimen: 'Adult: 2 g IV q4h (IDSA range 1-2 g q4h).\nPediatric: 50 mg/kg/dose IV q6h (max 2 g/dose).\n\nOxacillin is dosed the same. Always combine with clindamycin for toxin suppression until hemodynamically stable. Cefazolin is a better-tolerated alternative for non-CNS infection.',
+            weightCalc: { dosePerKg: 50, unit: 'mg', maxDose: 2000, label: 'Pediatric TSS dose, q6h' },
+        },
     ],
     contraindications: [
         'Known severe hypersensitivity (anaphylaxis, SJS/TEN) to penicillins',
@@ -12466,6 +12534,7 @@ const NAFCILLIN = {
         'Liu C, et al. Clinical Practice Guidelines by the Infectious Diseases Society of America for the Treatment of Methicillin-Resistant Staphylococcus aureus Infections in Adults and Children. Clin Infect Dis. 2011;52(3):e18-e55.',
         'Bai AD, et al. Comparative effectiveness of cefazolin versus cloxacillin as definitive antibiotic therapy for MSSA bacteraemia. J Antimicrob Chemother. 2015;70(5):1539-1546.',
         'Loubet P, et al. Cefazolin versus anti-staphylococcal penicillins for treatment of methicillin-susceptible Staphylococcus aureus bacteraemia: a narrative review. Clin Microbiol Infect. 2018;24(2):125-132.',
+        'Stevens DL, Bisno AL, Chambers HF, et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by the Infectious Diseases Society of America. Clin Infect Dis. 2014;59(2):e10-e52.',
     ],
 };
 const OMEPRAZOLE = {
@@ -14221,6 +14290,7 @@ export const ALL_DRUGS = [
     LEVONORGESTREL,
     LEVOTHYROXINE,
     LIDOCAINE,
+    IVIG,
     LINEZOLID,
     LOFEXIDINE,
     LIPID_EMULSION,

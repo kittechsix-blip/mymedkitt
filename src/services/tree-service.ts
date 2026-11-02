@@ -950,6 +950,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/necrotizing-fasciitis.js');
       return { nodes: m.NECROTIZING_FASCIITIS_NODES, entryNodeId: 'nf-start', categoryId: 'infectious-disease', moduleLabels: m.NECROTIZING_FASCIITIS_MODULE_LABELS, citations: m.NECROTIZING_FASCIITIS_CITATIONS, criticalActions: m.NECROTIZING_FASCIITIS_CRITICAL_ACTIONS };
     },
+    'staph-tss': async () => {
+      const m = await import('../data/trees/staph-tss.js');
+      return { nodes: m.STAPH_TSS_NODES, entryNodeId: 'staph-tss-start', categoryId: 'infectious-disease', moduleLabels: m.STAPH_TSS_MODULE_LABELS, citations: m.STAPH_TSS_CITATIONS, criticalActions: m.STAPH_TSS_CRITICAL_ACTIONS };
+    },
     'tuberculosis': async () => {
       const m = await import('../data/trees/tuberculosis.js');
       return { nodes: m.TUBERCULOSIS_NODES, entryNodeId: 'tb-start', categoryId: 'infectious-disease', moduleLabels: m.TUBERCULOSIS_MODULE_LABELS, citations: m.TUBERCULOSIS_CITATIONS, criticalActions: m.TUBERCULOSIS_CRITICAL_ACTIONS };

@@ -22,6 +22,7 @@ export const TOOLBAR_OVERFLOW = new Set([
     'thrombocytopenia',
     'dental-extraction-complications',
     'sjs-ten',
+    'staph-tss',
     'lateral-canthotomy',
     'excited-delirium',
     'sedation-options',
@@ -102,6 +103,14 @@ export const TOOLBAR_CONFIGS = {
         { id: 'em-vs', label: 'EM vs SJS', icon: '🎯', action: 'overlay', target: 'sjs-ten-em-compare', pinned: true },
         { id: 'culprits', label: 'Culprits', icon: '💊', action: 'overlay', target: 'sjs-ten-culprits', pinned: true },
         { id: 'support', label: 'Support', icon: '🩹', action: 'jump', target: 'sjs-ten-supportive' },
+    ],
+    'staph-tss': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'staph-tss-summary', pinned: true },
+        { id: 'cdc', label: 'CDC Criteria', icon: '🧮', action: 'calculator', target: 'staph-tss-cdc', pinned: true },
+        { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'overlay', target: 'staph-tss-antibiotics', pinned: true },
+        { id: 'source', label: 'Source', icon: '🔎', action: 'overlay', target: 'staph-tss-source-control', pinned: true },
+        { id: 'vs-strep', label: 'Staph vs Strep', icon: '🎯', action: 'overlay', target: 'staph-tss-vs-strep', pinned: true },
+        { id: 'mimics', label: 'Mimics', icon: '🩺', action: 'overlay', target: 'staph-tss-mimics' },
     ],
     'ischemic-limb': [
         { id: 'rutherford', label: 'Rutherford', icon: '📊', action: 'calculator', target: 'rutherford-acute-limb' },

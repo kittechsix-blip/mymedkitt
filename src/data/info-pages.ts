@@ -30899,6 +30899,223 @@ const MRI_FOR_DUMMIES_STOP: InfoPage = {
   ],
 };
 
+// -------------------------------------------------------------------
+// Staphylococcal Toxic Shock Syndrome
+// -------------------------------------------------------------------
+
+const STAPH_TSS_SUMMARY_PAGE: InfoPage = {
+  id: 'staph-tss-summary',
+  title: 'Staph TSS: Steps Summary',
+  subtitle: 'Quick Reference',
+  sections: [
+    {
+      body: 'Stepwise approach to suspected staphylococcal toxic shock syndrome. Tap any step to jump to that section of the consult.',
+    },
+    {
+      heading: '1. Recognize',
+      body: '• [Fever + diffuse erythroderma + hypotension; menstrual or non-menstrual source](#/node/staph-tss-start)\n• [CDC definition is for surveillance: treat on suspicion](#/node/staph-tss-criteria)',
+    },
+    {
+      heading: '2. Rule Out Strep/NSTI and Mimics',
+      body: '• [Pain out of proportion: emergent surgery](#/node/staph-tss-nsti)\n• [Petechiae, ticks, meningism: cover the mimics](#/node/staph-tss-mimic-cover)',
+    },
+    {
+      heading: '3. Source Control',
+      body: '• [Speculum exam, remove device or packing, open the wound](#/node/staph-tss-source)',
+    },
+    {
+      heading: '4. Resuscitate',
+      body: '• [Crystalloid, norepinephrine to MAP 65, vasopressin, hydrocortisone](#/node/staph-tss-resus)\n• [Children](#/node/staph-tss-peds)',
+    },
+    {
+      heading: '5. Antibiotics',
+      body: '• [Vancomycin + clindamycin (or linezolid) ± gram-negative cover](#/node/staph-tss-abx-empiric)\n• [Narrow on cultures](#/node/staph-tss-abx-narrow)\n• [Duration](#/node/staph-tss-duration)',
+    },
+    {
+      heading: '6-7. Refractory Shock and Disposition',
+      body: '• [Refractory shock: re-look for the source, consider IVIG with ID](#/node/staph-tss-refractory)\n• [ICU, report to public health, recurrence counseling](#/node/staph-tss-dispo)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Gottlieb M, Long B, Koyfman A. The evaluation and management of toxic shock syndrome in the emergency department: a review of the literature. J Emerg Med. 2018;54(6):807-814.' },
+  ],
+};
+
+const STAPH_TSS_CDC_CRITERIA_PAGE: InfoPage = {
+  id: 'staph-tss-cdc-criteria',
+  title: 'CDC Case Definition (2011)',
+  subtitle: 'Toxic Shock Syndrome (Other Than Streptococcal)',
+  sections: [
+    {
+      body: '**A surveillance definition, not a treatment gate.** It was written so health departments count cases the same way. Desquamation appears 1 to 2 weeks after the rash, so in the ED most patients can only be "probable." Treat on clinical suspicion. [1]',
+    },
+    {
+      heading: 'Clinical criteria',
+      body: '1. **Fever:** 38.9 °C (102.0 °F) or higher\n2. **Rash:** diffuse macular erythroderma\n3. **Desquamation:** 1 to 2 weeks after rash onset\n4. **Hypotension:** SBP 90 mmHg or lower in adults; below the 5th percentile for age in children under 16\n5. **Multisystem involvement:** 3 or more of the organ systems below [1]',
+    },
+    {
+      heading: 'Organ systems (need 3 or more)',
+      body: '• **GI:** vomiting or diarrhea at onset of illness\n• **Muscular:** severe myalgia, or CK at least 2 × upper limit of normal\n• **Mucous membranes:** vaginal, oropharyngeal or conjunctival hyperemia\n• **Renal:** BUN or creatinine at least 2 × upper limit of normal, or 5 or more white cells per high-power field without a urinary tract infection\n• **Hepatic:** total bilirubin, ALT or AST at least 2 × upper limit of normal\n• **Hematologic:** platelets below 100,000/mm³\n• **CNS:** disorientation or altered consciousness without focal neurologic signs, when fever and hypotension are absent [1]',
+    },
+    {
+      heading: 'Laboratory criteria',
+      body: 'Negative results on the following, **if obtained**:\n• Blood or CSF cultures (blood culture **may be positive for S. aureus**)\n• Serology for Rocky Mountain spotted fever, leptospirosis or measles [1]',
+    },
+    {
+      heading: 'Case classification',
+      body: '• **Probable:** laboratory criteria met + 4 of the 5 clinical criteria\n• **Confirmed:** laboratory criteria met + all 5 clinical criteria, including desquamation, unless the patient dies before desquamation occurs [1]\n\nNote: the older 1997 definition also counted orthostatic changes; the 2011 hypotension criterion does not.\n\n[CDC Case-Definition Checker](#/calculator/staph-tss-cdc)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Centers for Disease Control and Prevention. Toxic Shock Syndrome (Other Than Streptococcal) (TSS) 2011 Case Definition. NNDSS. https://ndc.services.cdc.gov/case-definitions/toxic-shock-syndrome-2011/' },
+  ],
+};
+
+const STAPH_TSS_VS_STREP_PAGE: InfoPage = {
+  id: 'staph-tss-vs-strep',
+  title: 'Staph vs Strep TSS',
+  subtitle: 'Same storm, different source',
+  sections: [
+    {
+      body: 'Both are superantigen toxin syndromes. The initial antibiotic regimen covers both, but **strep TSS often hides a necrotizing infection that needs the OR**. [1][2]',
+    },
+    {
+      heading: 'Side by side',
+      body: '',
+      comparisonTable: {
+        columns: [
+          { key: 'feature', label: 'Feature' },
+          { key: 'staph', label: 'Staph TSS' },
+          { key: 'strep', label: 'Strep TSS' },
+        ],
+        rows: [
+          { cells: { feature: 'Organism / toxin', staph: 'S. aureus: TSST-1, enterotoxins', strep: 'Group A strep: pyrogenic exotoxins (SpeA, SpeC), SSA' } },
+          { cells: { feature: 'Typical source', staph: 'Tampon, cup, packing, post-op wound, burn, postpartum', strep: 'Skin and soft tissue, often necrotizing; varicella, minor trauma, postpartum' } },
+          { cells: { feature: 'Local pain', staph: 'Usually mild; wound can look clean', strep: 'Severe, out of proportion to the exam' } },
+          { cells: { feature: 'Rash', staph: 'Diffuse erythroderma common', strep: 'Erythroderma less common' } },
+          { cells: { feature: 'Blood cultures', staph: 'Positive in under 5%', strep: 'Positive in about 60%' } },
+          { cells: { feature: 'Mortality', staph: 'Lower (menstrual lowest)', strep: 'High, roughly 30 to 60%' } },
+          { cells: { feature: 'Definitive therapy', staph: 'Anti-staph drug (by MSSA/MRSA) + clindamycin', strep: 'Penicillin + clindamycin; surgery if NSTI' } },
+          { cells: { feature: 'IVIG evidence', staph: 'Very limited (case series)', strep: 'Observational data + one small, early-stopped RCT' } },
+        ],
+      },
+    },
+    {
+      heading: 'Bottom line',
+      body: 'Pain out of proportion, rapidly spreading skin changes, bullae or crepitus: think **strep TSS with necrotizing fasciitis** and get surgery now. See [Necrotizing Fasciitis](#/tree/necrotizing-fasciitis).',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Lappin E, Ferguson AJ. Gram-positive toxic shock syndromes. Lancet Infect Dis. 2009;9(5):281-290.' },
+    { num: 2, text: 'Atchade E, et al. Toxic shock syndrome: a literature review. Antibiotics (Basel). 2024;13(1):96.' },
+  ],
+};
+
+const STAPH_TSS_MIMICS_PAGE: InfoPage = {
+  id: 'staph-tss-mimics',
+  title: 'TSS Mimics and Differential',
+  subtitle: 'Fever, rash and shock',
+  sections: [
+    {
+      body: 'Fever + rash + shock has a short list of killers. Treat the ones you cannot exclude while you work up TSS. [1][2]',
+    },
+    {
+      heading: 'Infections',
+      body: '• **Septic shock from another source:** no erythroderma; find the source. [Sepsis](#/tree/sepsis)\n• **Streptococcal TSS / necrotizing fasciitis:** pain out of proportion. [Necrotizing Fasciitis](#/tree/necrotizing-fasciitis)\n• **Rocky Mountain spotted fever:** tick exposure, petechiae starting at wrists and ankles, spreading to palms and soles. Start doxycycline empirically; do not wait for serology. [3]\n• **Meningococcemia:** petechiae and purpura, meningism, very rapid course. [Meningitis](#/tree/meningitis)\n• **Leptospirosis:** freshwater or animal exposure, conjunctival suffusion, jaundice, kidney injury.\n• **Measles:** cough, coryza, conjunctivitis, then rash spreading from the face down. [Measles](#/tree/measles)\n• **Scarlet fever:** sandpaper rash, strawberry tongue, pharyngitis; not usually in shock.',
+    },
+    {
+      heading: 'Skin and drug reactions',
+      body: '• **Staphylococcal scalded skin syndrome:** mostly young children or kidney failure; superficial peeling, no mucositis, usually not in shock.\n• **SJS/TEN:** painful dusky skin, mucosal erosions, a recent drug. [SJS / TEN](#/tree/sjs-ten)\n• **DRESS:** rash, facial swelling, eosinophilia and hepatitis 2 to 8 weeks after a new drug.',
+    },
+    {
+      heading: 'Other',
+      body: '• **Kawasaki disease (and MIS-C in children):** at least 5 days of fever, conjunctivitis without discharge, lip and tongue changes, extremity changes; Kawasaki shock syndrome can look identical to TSS.\n• **Heat stroke:** exposure history, CNS dysfunction, no erythroderma. [Heat Stroke](#/tree/heat-stroke)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Gottlieb M, Long B, Koyfman A. The evaluation and management of toxic shock syndrome in the emergency department: a review of the literature. J Emerg Med. 2018;54(6):807-814.' },
+    { num: 2, text: 'Lappin E, Ferguson AJ. Gram-positive toxic shock syndromes. Lancet Infect Dis. 2009;9(5):281-290.' },
+    { num: 3, text: 'Biggs HM, Behravesh CB, Bradley KK, et al. Diagnosis and management of tickborne rickettsial diseases: Rocky Mountain spotted fever and other spotted fever group rickettsioses, ehrlichioses, and anaplasmosis, United States. MMWR Recomm Rep. 2016;65(2):1-44.' },
+  ],
+};
+
+const STAPH_TSS_SOURCE_CONTROL_PAGE: InfoPage = {
+  id: 'staph-tss-source-control',
+  title: 'Source Control Checklist',
+  subtitle: 'Find it, remove it, culture it',
+  sections: [
+    {
+      body: 'The toxin keeps coming as long as the source stays. Check every item; culture what you remove. [1][2]',
+    },
+    {
+      heading: 'Menstrual',
+      body: '☐ Speculum exam in **every** case, even if the patient reports the tampon was removed\n☐ Remove tampon, retained fragments, menstrual cup, contraceptive sponge or diaphragm [3][4]\n☐ Culture the vaginal vault and the device',
+    },
+    {
+      heading: 'Non-menstrual',
+      body: '☐ **Nasal packing or other packing:** remove and culture ([Epistaxis](#/tree/epistaxis))\n☐ **Surgical wound:** open and explore even if it looks clean; post-op TSS often has few local signs\n☐ **Abscess or IV drug use site:** incise and drain\n☐ **Burn:** wound review and debridement with the burn team ([Burns](#/tree/burns))\n☐ **Postpartum or post-abortion:** pelvic exam, ultrasound for retained products, OB consult ([PID](#/tree/pid) for pelvic infection)\n☐ **Lines, implants, devices:** remove or replace when infected',
+    },
+    {
+      heading: 'Get surgery now if',
+      body: 'Pain out of proportion, crepitus, bullae, skin necrosis or rapid spread: a necrotizing infection needs the OR, not imaging first.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Gottlieb M, Long B, Koyfman A. The evaluation and management of toxic shock syndrome in the emergency department: a review of the literature. J Emerg Med. 2018;54(6):807-814.' },
+    { num: 2, text: 'Lappin E, Ferguson AJ. Gram-positive toxic shock syndromes. Lancet Infect Dis. 2009;9(5):281-290.' },
+    { num: 3, text: 'Schlievert PM, Davis CC. Device-associated menstrual toxic shock syndrome. Clin Microbiol Rev. 2020;33(3):e00032-19.' },
+    { num: 4, text: 'Mitchell MA, Bisch S, Arntfield S, Hosseini-Moghaddam SM. A confirmed case of toxic shock syndrome associated with the use of a menstrual cup. Can J Infect Dis Med Microbiol. 2015;26(4):218-220.' },
+  ],
+};
+
+const STAPH_TSS_ANTIBIOTICS_PAGE: InfoPage = {
+  id: 'staph-tss-antibiotics',
+  title: 'Staph TSS Antibiotic Regimens',
+  subtitle: 'Kill the bacteria + switch off the toxin',
+  sections: [
+    {
+      body: 'Every regimen pairs a drug that kills S. aureus with a protein-synthesis inhibitor that stops toxin production. Tap a drug for adult and pediatric doses. [1][2][3]',
+    },
+    {
+      heading: 'Regimens',
+      body: '',
+      comparisonTable: {
+        columns: [
+          { key: 'scenario', label: 'Scenario' },
+          { key: 'kill', label: 'Bactericidal' },
+          { key: 'toxin', label: 'Antitoxin' },
+        ],
+        rows: [
+          { cells: { scenario: 'Empiric (source known, staph likely)', kill: '[Vancomycin](#/drug/vancomycin/sepsis)', toxin: '[Clindamycin](#/drug/clindamycin/toxic-shock)' } },
+          { cells: { scenario: 'Empiric, source unclear or abdominal/pelvic/necrotizing', kill: '[Vancomycin](#/drug/vancomycin/sepsis) + [Piperacillin-tazobactam](#/drug/piperacillin-tazobactam/sepsis) or [Meropenem](#/drug/meropenem/sepsis)', toxin: '[Clindamycin](#/drug/clindamycin/toxic-shock)' } },
+          { cells: { scenario: 'Alternative anti-MRSA + antitoxin', kill: '[Linezolid](#/drug/linezolid/toxic-shock) (replaces vancomycin)', toxin: 'Linezolid itself suppresses toxin' } },
+          { cells: { scenario: 'MSSA', kill: '[Nafcillin](#/drug/nafcillin/toxic-shock) (or oxacillin) or [Cefazolin](#/drug/cefazolin/toxic-shock)', toxin: '[Clindamycin](#/drug/clindamycin/toxic-shock)' } },
+          { cells: { scenario: 'MRSA', kill: '[Vancomycin](#/drug/vancomycin/sepsis)', toxin: '[Clindamycin](#/drug/clindamycin/toxic-shock) (if D-test negative) or [Linezolid](#/drug/linezolid/toxic-shock)' } },
+          { cells: { scenario: 'Pediatric', kill: '[Vancomycin](#/drug/vancomycin/toxic-shock), [Nafcillin](#/drug/nafcillin/toxic-shock), [Cefazolin](#/drug/cefazolin/toxic-shock); [Piperacillin-tazobactam](#/drug/piperacillin-tazobactam/pediatric-sepsis) if broad cover needed', toxin: '[Clindamycin](#/drug/clindamycin/toxic-shock) or [Linezolid](#/drug/linezolid/toxic-shock)' } },
+        ],
+      },
+    },
+    {
+      heading: 'Why the antitoxin drug',
+      body: 'Clindamycin and linezolid block toxin production at the ribosome (shown in the lab for TSST-1 from MSSA and MRSA). Cell-wall drugs alone do not. Staph-specific outcome trials do not exist; the practice rests on this lab evidence and on streptococcal outcome data. [3][4]',
+    },
+    {
+      heading: 'Pitfalls',
+      body: '• Cefazolin penetrates the CNS poorly: use nafcillin/oxacillin if there is CNS infection.\n• Linezolid is bacteriostatic against S. aureus: avoid it as the only drug for S. aureus bacteremia or endocarditis without ID input.',
+    },
+    {
+      heading: 'Duration',
+      body: '[How long to continue each drug](#/node/staph-tss-duration)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Stevens DL, Bisno AL, Chambers HF, et al. Practice guidelines for the diagnosis and management of skin and soft tissue infections: 2014 update by the Infectious Diseases Society of America. Clin Infect Dis. 2014;59(2):e10-e52.' },
+    { num: 2, text: 'Liu C, Bayer A, Cosgrove SE, et al. Clinical practice guidelines by the Infectious Diseases Society of America for the treatment of methicillin-resistant Staphylococcus aureus infections in adults and children. Clin Infect Dis. 2011;52(3):e18-e55.' },
+    { num: 3, text: 'Stevens DL, Ma Y, Salmi DB, McIndoo E, Wallace RJ, Bryant AE. Impact of antibiotics on expression of virulence-associated exotoxin genes in methicillin-sensitive and methicillin-resistant Staphylococcus aureus. J Infect Dis. 2007;195(2):202-211.' },
+    { num: 4, text: 'Lappin E, Ferguson AJ. Gram-positive toxic shock syndromes. Lancet Infect Dis. 2009;9(5):281-290.' },
+  ],
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   ...Object.fromEntries(INH_INFO_PAGES.map(page => [page.id, page])),
   ...INFO_PAGES_HTNE,
@@ -31123,6 +31340,13 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'sjs-ten-images': SJS_TEN_IMAGES_PAGE,
   'sjs-ten-em-compare': SJS_TEN_EM_COMPARE_PAGE,
   'sjs-ten-culprits': SJS_TEN_CULPRITS_PAGE,
+  // Staphylococcal TSS
+  'staph-tss-summary': STAPH_TSS_SUMMARY_PAGE,
+  'staph-tss-cdc-criteria': STAPH_TSS_CDC_CRITERIA_PAGE,
+  'staph-tss-vs-strep': STAPH_TSS_VS_STREP_PAGE,
+  'staph-tss-mimics': STAPH_TSS_MIMICS_PAGE,
+  'staph-tss-source-control': STAPH_TSS_SOURCE_CONTROL_PAGE,
+  'staph-tss-antibiotics': STAPH_TSS_ANTIBIOTICS_PAGE,
   // Ischemic Limb
   'il-six-ps': IL_SIX_PS,
   'il-stop': IL_STOP,

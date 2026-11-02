@@ -132,6 +132,7 @@ const CROSS_LISTINGS = {
   'sickle-cell':      [{ categoryId: 'pediatrics' }],
   'vp-shunt':         [{ categoryId: 'pediatrics', displayTitle: 'VP Shunt Complications', displaySubtitle: 'Recognition → Malfunction vs Infection → Imaging/U/S → ICP Rescue → Shunt Tap → Disposition', entryNodeId: 'vps-start' }],
   'sepsis':           [{ categoryId: 'critical-care' }],
+  'staph-tss':        [{ categoryId: 'critical-care' }],
   'opioid-withdrawal': [{ categoryId: 'toxicology' }],
   'tuberculosis':      [{ categoryId: 'emergency-medicine' }],
   'rhabdomyolysis':   [{ categoryId: 'emergency-medicine' }],
