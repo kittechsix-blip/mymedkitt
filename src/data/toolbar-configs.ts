@@ -133,6 +133,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   ],
   'sjs-ten': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'sjs-ten-summary', pinned: true },
+    { id: 'classify', label: 'Classify', icon: '🔎', action: 'calculator', target: 'sjs-ten-classifier', pinned: true },
     { id: 'scorten', label: 'SCORTEN', icon: '🧮', action: 'calculator', target: 'scorten', pinned: true },
     { id: 'fluid', label: 'Fluids', icon: '💧', action: 'calculator', target: 'ten-fluid', pinned: true },
     { id: 'em-vs', label: 'EM vs SJS', icon: '🎯', action: 'overlay', target: 'sjs-ten-em-compare', pinned: true },

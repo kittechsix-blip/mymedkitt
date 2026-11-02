@@ -40755,6 +40755,121 @@ const TEN_FLUID_CALCULATOR: CalculatorDefinition = {
   },
 };
 
+// -------------------------------------------------------------------
+// SJS / TEN Classifier — Bastuji-Garin consensus classification (1993)
+// Lesion pattern + % BSA detachment → EM / SJS / overlap / TEN
+// -------------------------------------------------------------------
+
+const SJS_TEN_CLASSIFIER_CALCULATOR: CalculatorDefinition = {
+  id: 'sjs-ten-classifier',
+  title: 'SJS / TEN Classifier',
+  subtitle: 'Is this TEN? Bastuji-Garin consensus criteria',
+  description: 'Classifies the eruption from two bedside findings: the lesion pattern and the % body surface area (BSA) of epidermal detachment. Count skin that is already detached PLUS skin that peels with Nikolsky; redness alone does not count. Estimate BSA with the patient\'s palm and fingers (≈1%) or the rule of nines. A clinical classification: confirm with dermatology and skin biopsy.',
+  fields: [
+    {
+      name: 'pattern',
+      label: 'Lesion pattern',
+      type: 'select',
+      points: 0,
+      hideOptionPoints: true,
+      selectOptions: [
+        { label: 'Choose the lesion pattern', points: 0 },
+        { label: 'Typical targets (3 rings) or raised atypical targets, mainly acral', points: 1 },
+        { label: 'Widespread dusky/purpuric macules or flat atypical targets ("spots")', points: 2 },
+        { label: 'Large sheets of red, peeling skin with no spots or targets', points: 3 },
+      ],
+    },
+    { name: 'bsa', label: 'Epidermal detachment', type: 'number', points: 0, unit: '% BSA', description: 'Detached + Nikolsky-positive (detachable) skin. Enter 0 if none.' },
+    { name: 'mucosa', label: '≥ 2 mucosal sites involved', description: 'Eyes, mouth/lips, genitals', type: 'toggle', points: 1 },
+    { name: 'drug', label: 'New drug in the prior 8 weeks', description: 'Typical latency 4–28 days; anticonvulsants up to ~8 weeks', type: 'toggle', points: 1 },
+  ],
+  results: [],
+  thresholdNote: 'Bastuji-Garin criteria: bullous EM <10% with typical/raised targets, acral · SJS <10% with spots · SJS/TEN overlap 10–30% with spots · TEN with spots >30% · TEN without spots >10% on large red sheets with no spots or targets.',
+  citations: [
+    'Bastuji-Garin S, Rzany B, Stern RS, Shear NH, Naldi L, Roujeau JC. Clinical classification of cases of toxic epidermal necrolysis, Stevens-Johnson syndrome, and erythema multiforme. Arch Dermatol. 1993;129(1):92-96.',
+    'Creamer D, Walsh SA, Dziewulski P, et al. U.K. guidelines for the management of Stevens-Johnson syndrome / toxic epidermal necrolysis in adults 2016. Br J Dermatol. 2016;174(6):1194-1227.',
+  ],
+  computeResult: (values: Record<string, number>) => {
+    const pattern = values['pattern'] || 0;
+    const bsa = Math.max(0, values['bsa'] || 0);
+    const mucosa = (values['mucosa'] || 0) > 0;
+    const drug = (values['drug'] || 0) > 0;
+
+    if (pattern === 0) {
+      return {
+        value: '--',
+        label: 'Choose the lesion pattern',
+        description: 'Pick the lesion pattern and enter the % BSA of detached + Nikolsky-positive skin.',
+        colorVar: '--color-text-muted',
+      };
+    }
+
+    const notes: string[] = [];
+    if (!mucosa) notes.push('**Mucosa spared:** unusual for SJS/TEN (≥2 sites in >90%). Reconsider staphylococcal scalded skin syndrome (superficial split, no mucositis, children or renal failure), AGEP (sheets of tiny pustules), DRESS, or generalized bullous fixed drug eruption.');
+    if (!drug) notes.push('**No new drug:** look harder (include OTC, short courses, contrast). If none, consider MIRM/RIME (infection-triggered, mucositis-dominant) or another cause, but keep treating as SJS/TEN if the picture fits.');
+    const act = '**Now:** stop every possible culprit drug, calculate SCORTEN, consult dermatology (biopsy: full-thickness epidermal necrosis) and ophthalmology.';
+    const tail = notes.length ? `\n\n${notes.join('\n\n')}` : '';
+
+    if (pattern === 1) {
+      if (bsa < 10) {
+        return {
+          value: 'EM',
+          label: mucosa ? 'Erythema multiforme (major)' : 'Erythema multiforme',
+          description: `Typical or raised targets, acral, detachment <10% BSA = **erythema multiforme**, a separate disease from SJS/TEN (usually HSV or Mycoplasma, not a drug). ${mucosa ? 'Mucosal involvement makes it EM major. It is still EM, not SJS.' : ''}\n\nIf the targets are flat or dusky, the rash is spreading over the trunk, or the skin starts peeling, re-classify as SJS/TEN.`,
+          colorVar: '--color-primary',
+        };
+      }
+      return {
+        value: `${Math.round(bsa)}%`,
+        label: 'Does not fit EM: treat as SJS/TEN',
+        description: `Erythema multiforme rarely detaches ≥10% BSA. With ${Math.round(bsa)}% detachment, treat as SJS/TEN until dermatology and biopsy say otherwise.\n\n${act}${tail}`,
+        colorVar: '--color-danger',
+      };
+    }
+
+    if (pattern === 3) {
+      if (bsa > 10) {
+        return {
+          value: 'TEN',
+          label: 'TEN without spots',
+          description: `Detachment >10% BSA on large sheets of red skin with no spots or targets = **toxic epidermal necrolysis (without spots)**, the most severe form.\n\n${act} Manage as ICU / burn-center level skin failure.${tail}`,
+          colorVar: '--color-danger',
+        };
+      }
+      return {
+        value: `${Math.round(bsa)}%`,
+        label: 'Not classifiable yet',
+        description: `Red sheets with ≤10% detachment do not meet criteria for TEN without spots. Re-measure detachment (it peaks around day 4) and look for mimics: staphylococcal scalded skin, AGEP, DRESS, burns or phototoxicity.\n\n${act}${tail}`,
+        colorVar: '--color-warning',
+      };
+    }
+
+    // pattern === 2: widespread spots
+    if (bsa < 10) {
+      return {
+        value: 'SJS',
+        label: 'Stevens-Johnson syndrome',
+        description: `Widespread spots with detachment <10% BSA = **SJS**. Detachment can progress for several days: re-measure daily and re-classify.\n\n${act}${tail}`,
+        colorVar: '--color-warning',
+      };
+    }
+    if (bsa <= 30) {
+      return {
+        value: 'Overlap',
+        label: 'SJS/TEN overlap',
+        description: `Widespread spots with detachment 10–30% BSA = **SJS/TEN overlap**. Over 10% detachment needs ICU / specialist unit care.\n\n${act}${tail}`,
+        colorVar: '--color-danger',
+      };
+    }
+    return {
+      value: 'TEN',
+      label: 'Toxic epidermal necrolysis',
+      description: `Widespread spots with detachment >30% BSA = **toxic epidermal necrolysis (with spots)**, the extreme end of the spectrum.\n\n${act} Arrange burn-center transfer.${tail}`,
+      colorVar: '--color-danger',
+    };
+  },
+};
+
 const LCC_IOP_CALCULATOR: CalculatorDefinition = {
   id: 'lcc-iop',
   title: 'OCS — IOP Action Tier',
@@ -46282,6 +46397,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   // SJS/TEN
   'scorten': SCORTEN_CALCULATOR,
   'ten-fluid': TEN_FLUID_CALCULATOR,
+  'sjs-ten-classifier': SJS_TEN_CLASSIFIER_CALCULATOR,
   // Ischemic Limb (Acute Limb Ischemia & PAD)
   'abi-il': ABI_IL_CALCULATOR,
   'rutherford-acute-limb': RUTHERFORD_ALI_CALCULATOR,

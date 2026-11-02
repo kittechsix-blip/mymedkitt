@@ -44,7 +44,7 @@ export const SJS_TEN_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Classify the Eruption',
-    body: 'Classification rests on **maximal % BSA epidermal detachment** plus lesion morphology. **Erythema multiforme is a distinct entity, NOT mild SJS** — it is infection-driven (HSV, Mycoplasma), with *typical* acral target lesions and is Nikolsky-negative.\n\nWhich picture fits?',
+    body: 'Classification rests on **maximal % BSA epidermal detachment** plus lesion morphology. **Erythema multiforme is a distinct entity, NOT mild SJS** — it is infection-driven (HSV, Mycoplasma), with *typical* acral target lesions and is Nikolsky-negative.\n\n**TEN** = detachment >30% BSA with spots, or >10% BSA as large red sheets with no spots. Count detached + Nikolsky-positive skin, not redness. [TEN criteria](#/info/sjs-ten-em-compare).\n\nWhich picture fits?',
     options: [
       { label: 'Acral typical targets, HSV/infection trigger, Nikolsky-neg', next: 'sjs-ten-em' },
       { label: 'Truncal dusky macules, <10% BSA detachment', next: 'sjs-ten-culprit' },
@@ -52,6 +52,7 @@ export const SJS_TEN_NODES: DecisionNode[] = [
       { label: 'Detachment >30% BSA (TEN)', next: 'sjs-ten-culprit', urgency: 'critical' },
       { label: 'Child/young adult, prominent mucositis, minimal skin', next: 'sjs-ten-mirm' },
     ],
+    calculatorLinks: [{ id: 'sjs-ten-classifier', label: 'SJS / TEN Classifier' }],
     citation: [1, 7],
     summary: '<10% = SJS · 10–30% = overlap · >30% = TEN · EM is a separate disease',
   },

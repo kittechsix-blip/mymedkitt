@@ -25270,12 +25270,17 @@ const SJS_TEN_EM_COMPARE_PAGE = {
             body: '• **Trigger:** drugs (4–28 day latency)\n• **Lesions:** dusky/purpuric macules + *flat atypical* targets → detachment\n• **Distribution:** truncal/central, spreading\n• **Nikolsky:** positive\n• **Mucosa:** ≥2 sites in most\n• **Classification:** SJS <10% · overlap 10–30% · TEN >30% BSA detachment',
         },
         {
+            heading: 'TEN: the extreme end',
+            body: 'Toxic epidermal necrolysis is the same disease as SJS, just more skin lost. **Criteria (Bastuji-Garin consensus):**\n• **TEN with spots:** detachment **>30% BSA** + widespread dusky/purpuric macules or flat atypical targets\n• **TEN without spots:** detachment **>10% BSA** on large sheets of red skin, with no spots or targets\n\n**How to measure:** count skin already detached **plus** skin that peels with Nikolsky. Redness alone does not count. Patient\'s palm with fingers ≈ 1% BSA, or rule of nines. Detachment peaks around day 4: re-measure daily.\n\n**What else you see:** mucosa ≥2 sites in >90%, fever, painful skin that slides off in sheets, and often other organs: airway/bronchial sloughing, GI bleeding, hepatitis, AKI, and cytopenias (neutropenia is a bad sign).\n\n**Confirm:** skin biopsy at the blister edge shows full-thickness epidermal necrosis; direct immunofluorescence is negative (rules out autoimmune blistering).\n\n**Mimics to exclude:** staphylococcal scalded skin (superficial split, no mucositis, children or renal failure), AGEP (sheets of tiny pustules), DRESS, generalized bullous fixed drug eruption, linear IgA, pemphigus, acute GVHD.\n\n[SJS / TEN Classifier](#/calculator/sjs-ten-classifier): enter the pattern and % BSA to classify.',
+        },
+        {
             heading: 'Bottom line',
-            body: 'Acral typical targets + HSV history + Nikolsky-negative → **EM** (manage as EM). Truncal dusky macules + flat atypical targets + Nikolsky-positive + recent drug → **SJS/TEN** (stop the drug, burn-style supportive care).',
+            body: 'Acral typical targets + HSV history + Nikolsky-negative → **EM** (manage as EM). Truncal dusky macules + flat atypical targets + Nikolsky-positive + recent drug → **SJS/TEN** (stop the drug, burn-style supportive care). Over 30% detachment, or over 10% as red sheets without spots → **TEN** (burn-center level care).',
         },
     ],
     citations: [
         { num: 1, text: 'Bastuji-Garin S, et al. Clinical classification of TEN, SJS, and erythema multiforme. Arch Dermatol. 1993;129(1):92-96.' },
+        { num: 2, text: 'Creamer D, Walsh SA, Dziewulski P, et al. U.K. guidelines for the management of Stevens-Johnson syndrome / toxic epidermal necrolysis in adults 2016. Br J Dermatol. 2016;174(6):1194-1227.' },
     ],
 };
 const SJS_TEN_CULPRITS_PAGE = {
