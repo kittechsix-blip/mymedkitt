@@ -123,14 +123,14 @@ export const STAPH_TSS_NODES = [
         type: 'question',
         module: 5,
         title: 'Cultures Back: Narrow',
-        body: 'Blood cultures are **usually negative** in staph TSS; the organism usually grows from the site or device ([staph vs strep](#/info/staph-tss-vs-strep)). Keep clindamycin (or linezolid) on board whichever path you take.\n\nWhat grew?',
+        body: 'Blood cultures are **almost always negative in menstrual TSS** but grow S. aureus in up to about half of non-menstrual cases; otherwise the organism grows from the site or device ([staph vs strep](#/info/staph-tss-vs-strep)). Keep clindamycin (or linezolid) on board whichever path you take.\n\nWhat grew?',
         options: [
             { label: 'MSSA', next: 'staph-tss-mssa' },
             { label: 'MRSA', next: 'staph-tss-mrsa' },
             { label: 'No organism (cultures negative)', next: 'staph-tss-culture-neg' },
         ],
         citation: [3, 4],
-        summary: 'Blood cultures usually negative; narrow on the site culture',
+        summary: 'Blood cultures negative in menstrual TSS; narrow on site or blood culture',
     },
     {
         id: 'staph-tss-mssa',

@@ -30993,8 +30993,8 @@ const STAPH_TSS_VS_STREP_PAGE: InfoPage = {
           { cells: { feature: 'Typical source', staph: 'Tampon, cup, packing, post-op wound, burn, postpartum', strep: 'Skin and soft tissue, often necrotizing; varicella, minor trauma, postpartum' } },
           { cells: { feature: 'Local pain', staph: 'Usually mild; wound can look clean', strep: 'Severe, out of proportion to the exam' } },
           { cells: { feature: 'Rash', staph: 'Diffuse erythroderma common', strep: 'Erythroderma less common' } },
-          { cells: { feature: 'Blood cultures', staph: 'Positive in under 5%', strep: 'Positive in about 60%' } },
-          { cells: { feature: 'Mortality', staph: 'Lower (menstrual lowest)', strep: 'High, roughly 30 to 60%' } },
+          { cells: { feature: 'Blood cultures', staph: 'Classically under 5%; menstrual almost always negative, non-menstrual up to about half', strep: 'Positive in about 60 to 86%' } },
+          { cells: { feature: 'Mortality', staph: 'About 5% overall (menstrual 0 to 6%, non-menstrual 4 to 22%)', strep: 'High: 14 to 64% across series' } },
           { cells: { feature: 'Definitive therapy', staph: 'Anti-staph drug (by MSSA/MRSA) + clindamycin', strep: 'Penicillin + clindamycin; surgery if NSTI' } },
           { cells: { feature: 'IVIG evidence', staph: 'Very limited (case series)', strep: 'Observational data + one small, early-stopped RCT' } },
         ],
@@ -31029,7 +31029,7 @@ const STAPH_TSS_MIMICS_PAGE: InfoPage = {
     },
     {
       heading: 'Other',
-      body: '• **Kawasaki disease (and MIS-C in children):** at least 5 days of fever, conjunctivitis without discharge, lip and tongue changes, extremity changes; Kawasaki shock syndrome can look identical to TSS.\n• **Heat stroke:** exposure history, CNS dysfunction, no erythroderma. [Heat Stroke](#/tree/heat-stroke)',
+      body: '• **Kawasaki disease (children):** fever for 5 or more days with bilateral conjunctival injection without exudate, lip and tongue changes, extremity changes, rash or a large cervical node; Kawasaki shock syndrome can look identical to TSS.\n• **MIS-C (children and young adults):** recent SARS-CoV-2 infection or exposure, fever, shock, prominent GI symptoms and cardiac dysfunction; no minimum fever duration.\n• **Heat stroke:** exposure history, CNS dysfunction, no erythroderma. [Heat Stroke](#/tree/heat-stroke)',
     },
   ],
   citations: [
