@@ -1,5 +1,5 @@
-// @bedside-search-engine 1.5.0
-// @engine-sha256 0aab6f64033c7814b827e6598dd6a027bd4dd1d773a60c556725c10ffb575cb5
+// @bedside-search-engine 1.6.0
+// @engine-sha256 ab3d12f1580118fa18bb126823a5eadb58391a7a92aedfcd32eb39629c920242
 // Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
@@ -110,12 +110,16 @@ const ALTS = {
     bleeding: ['hemorrhage'], hemorrhage: ['bleeding'], hematoma: ['bleed'], kids: ['pediatric', 'peds'], child: ['pediatric', 'peds'], children: ['pediatric', 'peds'], infant: ['pediatric', 'neonate'],
     pregnant: ['pregnancy'], pregnancy: ['pregnant'], pediatric: ['peds'], peds: ['pediatric'], paeds: ['pediatric'],
     a1c: ['hemoglobin a1c'], hyperk: ['hyperkalemia'], hypok: ['hypokalemia'], hypona: ['hyponatremia'], hypernatremia: ['sodium'], cabg: ['bypass'],
+    anc: ['absolute neutrophil count', 'neutropenia'],
     naloxone: ['narcan'], narcan: ['naloxone'], flumazenil: ['romazicon'], dilt: ['diltiazem'], dig: ['digoxin'],
 };
 const TRIGGERS = INTENTS.flatMap((d) => d.triggers.map((t) => ({ seq: stems(t), intent: d.id }))).sort((a, b) => b.seq.length - a.seq.length);
 const LONG_QUERY = 2;
 const GENERIC = new Set(['pregnancy', 'pregnant', 'patient', 'patients']);
 const CONTEXT_WORDS = new Set(['in', 'during']);
+/** Treatments a patient is "on": "fever on chemo" is fever in a patient receiving chemo. Drug names are left out on purpose: a drug is the question's
+ *  subject and keeps its weight ("bleeding on apixaban" must still open the factor Xa reversal), and "on ECG", "on standing" say where a finding is seen. */
+const ON_THERAPY = new Set('chemo chemotherapy immunotherapy dialysis hemodialysis steroid anticoagulant anticoagulation immunosuppressant immunosuppression biologic ventilator vent ecmo pressor vasopressor tpn'.split(' '));
 /** Two-word names rewritten to the words the content uses. */
 const BIGRAMS = {
     'blood thinner': ['anticoagulant'],
@@ -132,6 +136,9 @@ const BIGRAMS = {
     'high magnesium': ['hypermagnesemia'],
     'low phosphate': ['hypophosphatemia'],
     'high phosphate': ['hyperphosphatemia'],
+    'low anc': ['neutropenia'],
+    'low neutrophil': ['neutropenia'],
+    'low neutrophils': ['neutropenia'],
     'passed out': ['syncope'],
     'collapsed lung': ['pneumothorax'],
     'water on': ['effusion'],
@@ -139,7 +146,8 @@ const BIGRAMS = {
 function rewriteBigrams(ws) {
     const out = [];
     for (let i = 0; i < ws.length; i++) {
-        const to = BIGRAMS[`${ws[i]} ${ws[i + 1]}`];
+        // "potassium low", "ANC low" say the same as "low potassium", "low ANC"
+        const to = BIGRAMS[`${ws[i]} ${ws[i + 1]}`] ?? (ws[i + 1] === 'low' || ws[i + 1] === 'high' ? BIGRAMS[`${ws[i + 1]} ${ws[i]}`] : undefined);
         if (to) {
             out.push(...to);
             i++;
@@ -156,12 +164,20 @@ function rewriteBigrams(ws) {
 const LABS = [
     { name: /^(k|k\+|potassium)$/, low: [3.5, 'hypokalemia'], high: [5.0, 'hyperkalemia'] },
     { name: /^(na|na\+|sodium)$/, low: [135, 'hyponatremia'], high: [145, 'hypernatremia'] },
+    // ANC is written in cells/mm3 ("ANC 300") or x10^9/L ("ANC 0.3"). `perLiter` [below, from]: a value below 1.5 is low on both scales,
+    // a value from 50 up can only be cells/mm3; 1.5 to 50 is a normal x10^9/L count or an implausible cell count, so it is left alone.
+    { name: /^anc$/, low: [1500, 'neutropenia'], perLiter: [1.5, 50] },
 ];
 function rewriteLabs(raw) {
-    return raw.replace(/\b(k\+?|na\+?|potassium|sodium)\s*(?:of|is|was|at|=|:)?\s*(\d{1,3}(?:\.\d+)?)\b(?!\s*(?:mg|mcg|g|ml|%|mmol\/min))/gi, (all, analyte, num) => {
+    return raw.replace(/\b(k\+?|na\+?|potassium|sodium|anc)\s*(?:of|is|was|at|=|:)?\s*(\d{1,4}(?:\.\d+)?)\b(?!\s*(?:mg|mcg|g|ml|%|mmol\/min))/gi, (all, analyte, num) => {
         const lab = LABS.find((l) => l.name.test(analyte.toLowerCase()));
         const v = Number(num);
         if (!lab || !Number.isFinite(v))
+            return all;
+        // four-digit readings are only cell counts; a four-digit K or Na is not a lab value
+        if (num.split('.')[0].length > 3 && !lab.perLiter)
+            return all;
+        if (lab.perLiter && v >= lab.perLiter[0] && v < lab.perLiter[1])
             return all;
         if (lab.low && v < lab.low[0])
             return lab.low[1];
@@ -195,13 +211,16 @@ export function parseQuestion(raw) {
             dropped++;
             if (CONTEXT_WORDS.has(ws[i]) && tokens.length > 0 && !GENERIC.has(ws[i + 1]))
                 inContext = 'in';
+            // "fever on chemo": a candidate setting, kept only when it names a treatment (ON_THERAPY, checked in match)
+            else if (ws[i] === 'on' && tokens.length > 0 && !inContext)
+                inContext = 'on';
         }
         else {
             if (ws[i] === 'after' && tokens.length > 0)
                 inContext = 'after';
             const subject = !typed.has(ws[i]) ? { subject: true } : {};
             tokens.push({ word: ws[i], soft: SOFT.has(ws[i]) || (ws[i].length < 2 && !/\d/.test(ws[i])), ...(inContext ? { context: inContext } : {}), ...subject });
-            if (!inContext)
+            if (!inContext || inContext === 'on')
                 sequence.push(sts[i]);
         }
         i++;
@@ -297,6 +316,8 @@ const POOL = 400;
 const HOME_BONUS = 0.12;
 /** When the topic has a home consult, a node of another consult is a detour: its heading counts for less. */
 const FOREIGN_PENALTY = 0.08;
+/** "fever after chemo": with a setting in the question, a page whose title does not name the asked-about problem (fever) is about the setting, not the question */
+const OFF_SUBJECT_PENALTY = 0.08;
 const FOREIGN_LIFT_SCALE = 0.5;
 /** A whole info page whose title is the topic beats a section of another page that merely repeats it. */
 const PAGE_TIE_BONUS = 0.01;
@@ -460,6 +481,10 @@ export function createQuestionIndex(docs) {
         if (root !== s)
             for (let i = lowerBound(root); i < vocabSorted.length && vocabSorted[i].startsWith(root); i++)
                 out.add(vocabSorted[i]);
+        // adjective and noun twins: neutropenic / neutropenia, tachycardic / tachycardia, hypoxic / hypoxia (the exact twin only, never its prefixes)
+        const twin = s.length >= 7 ? (s.endsWith('ic') ? s.slice(0, -2) + 'ia' : s.endsWith('ia') ? s.slice(0, -2) + 'ic' : '') : '';
+        if (twin && postings.has(twin))
+            out.add(twin);
         if (k) {
             for (let len = s.length - k; len <= s.length + k; len++) {
                 for (const v of byShape.get(s[0] + len) ?? [])
@@ -569,6 +594,8 @@ export function createQuestionIndex(docs) {
             toks = q.tokens;
         if (!toks.length)
             return [];
+        // a word after "on" is a setting only when it names a treatment; otherwise it is an ordinary topic word, as before
+        toks = toks.map((t) => (t.context === 'on' && !ON_THERAPY.has(stem(t.word)) ? { ...t, context: undefined } : t));
         const required = toks.map((t) => !t.context);
         const exps = toks.map((t) => {
             const e = expand(t.word);
@@ -593,12 +620,20 @@ export function createQuestionIndex(docs) {
             const named = [...p.e].some((x) => byLevel[0].has(x) || byLevel[1].has(x) || byLevel[2].has(x)) || p.alts.length > 0 || p.viaAlias.size > 0 || p.viaAcronym.size > 0;
             return named || subject > 1 ? w : Math.min(w, CHATTER_WEIGHT);
         });
+        // "fever after chemo", "fever on chemotherapy": a rare context names the setting that decides the answer, so it is required,
+        // but it weighs no more than the most-weighted word it qualifies (the asked-about problem), or a page about the setting alone wins
+        const asked = Math.max(0, ...weight.filter((_, ti) => !toks[ti].context));
         toks.forEach((t, ti) => {
-            if (t.context === 'in' && weight[ti] >= RARE_WEIGHT)
+            if (t.context && weight[ti] >= RARE_WEIGHT) {
                 required[ti] = true;
+                if (asked > 0)
+                    weight[ti] = Math.min(weight[ti], asked);
+            }
         });
         if (!required.some(Boolean))
             required.fill(true);
+        // "after" / "on" settings only: after "in" the setting can be the topic itself ("insulin drip in DKA")
+        const hasSetting = toks.some((t) => t.context === 'after' || t.context === 'on') && toks.some((t) => !t.context);
         const total = weight.reduce((a, b, ti) => a + (required[ti] ? b : 0), 0);
         const ctxTotal = weight.reduce((a, b, ti) => a + (required[ti] ? 0 : b), 0);
         if (total === 0)
@@ -638,6 +673,8 @@ export function createQuestionIndex(docs) {
             if (cov < FALLBACK_COVERAGE && !inNamed)
                 continue;
             const hit = { index, base: 0.34 - 0.3 * loc - CONTEXT_BONUS * ctxLoc + COVERAGE_WEIGHT * (1 - cov), loc, cov, extra: 0 };
+            if (hasSetting && toks.some((t, ti) => !t.context && locArr[ti][index] < LOC_TITLE))
+                hit.offSubject = true;
             (cov < MIN_COVERAGE && !inNamed ? weak : out).push(hit);
         }
         if (out.length < FALLBACK_BELOW)
@@ -752,6 +789,8 @@ export function createQuestionIndex(docs) {
                 score -= HOME_BONUS * Math.min(1, Math.max(0, (h.loc - 0.5) / 0.5));
             else if (foreign)
                 score += FOREIGN_PENALTY;
+            if (h.offSubject)
+                score += OFF_SUBJECT_PENALTY;
             if (doc.kind === 'info' && !doc.anchor && h.loc >= CONSULT_IS_TOPIC_LOC)
                 score -= PAGE_TIE_BONUS;
             if (!askedPeds && (PEDS_WORDS.test(fold(doc.title)) || PEDS_CONSULT.test(doc.consultId ?? '')))

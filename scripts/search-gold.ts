@@ -81,4 +81,13 @@ export const GOLD: GoldQuestion[] = [
   { q: 'acs chest pain risk stratification', expect: ['calc:heart-score', 'tree:nstemi'] },
   { q: 'afib rvr diltiazem dose', expect: ['tree:afib-rvr', 'drug:diltiazem'] },
   { q: 'sbp goal in sah', expect: ['tree:sah'] },
+  // Febrile neutropenia (engine 1.6.0: fever after/on a treatment, ANC readings, neutropenic/neutropenia). Pins: the FN steps, never the afebrile card.
+  { q: 'fever after chemo', expect: ['node:oncological-emergencies/onc-fn-recognize', 'node:oncological-emergencies/onc-fn-high-risk'] },
+  { q: 'neutropenic fever', expect: ['node:oncological-emergencies/onc-fn-recognize', 'node:oncological-emergencies/onc-fn-high-risk'] },
+  { q: 'febrile neutropenia', expect: ['node:oncological-emergencies/onc-fn-recognize'] },
+  { q: 'ANC 300 fever', expect: ['node:oncological-emergencies/onc-fn-recognize', 'node:oncological-emergencies/onc-fn-high-risk'] },
+  { q: 'fever ANC low', expect: ['node:oncological-emergencies/onc-fn-recognize', 'node:oncological-emergencies/onc-fn-high-risk'] },
+  { q: 'chemo patient fever what antibiotic', expect: ['node:oncological-emergencies/onc-fn-high-risk', 'node:oncological-emergencies/onc-fn-recognize'] },
+  { q: 'fever low ANC cefepime', expect: ['node:oncological-emergencies/onc-fn-high-risk', 'node:oncological-emergencies/onc-fn-recognize'] },
+  { q: 'fever on chemotherapy', expect: ['node:oncological-emergencies/onc-fn-recognize', 'node:oncological-emergencies/onc-fn-high-risk'] },
 ];
