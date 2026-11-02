@@ -1,5 +1,5 @@
-// @bedside-search-engine 1.3.0
-// @engine-sha256 ef718132a121b6cb41adeef3af23d35755ce84badfd060f0e4d4a68ef7f314df
+// @bedside-search-engine 1.6.0
+// @engine-sha256 ab3d12f1580118fa18bb126823a5eadb58391a7a92aedfcd32eb39629c920242
 // Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
@@ -187,6 +187,7 @@ const ALTS: Readonly<Record<string, readonly string[]>> = {
   bleeding: ['hemorrhage'], hemorrhage: ['bleeding'], hematoma: ['bleed'], kids: ['pediatric', 'peds'], child: ['pediatric', 'peds'], children: ['pediatric', 'peds'], infant: ['pediatric', 'neonate'],
   pregnant: ['pregnancy'], pregnancy: ['pregnant'], pediatric: ['peds'], peds: ['pediatric'], paeds: ['pediatric'],
   a1c: ['hemoglobin a1c'], hyperk: ['hyperkalemia'], hypok: ['hypokalemia'], hypona: ['hyponatremia'], hypernatremia: ['sodium'], cabg: ['bypass'],
+  anc: ['absolute neutrophil count', 'neutropenia'],
   naloxone: ['narcan'], narcan: ['naloxone'], flumazenil: ['romazicon'], dilt: ['diltiazem'], dig: ['digoxin'],
 };
 
@@ -194,7 +195,9 @@ export interface QuestionToken {
   word: string;
   soft: boolean;
   /** set after "in / during / after": scored, never required */
-  context?: 'in' | 'after';
+  context?: 'in' | 'after' | 'on';
+  /** the condition a lab or analyte reading implies ("K 2.1" -> hypokalemia): the subject of the question, weighted like a drug name */
+  subject?: true;
 }
 
 export interface ParsedQuestion {
@@ -219,6 +222,11 @@ const TRIGGERS: Trigger[] = INTENTS.flatMap((d) => d.triggers.map((t) => ({ seq:
 const LONG_QUERY = 2;
 const GENERIC: ReadonlySet<string> = new Set(['pregnancy', 'pregnant', 'patient', 'patients']);
 const CONTEXT_WORDS: ReadonlySet<string> = new Set(['in', 'during']);
+/** Treatments a patient is "on": "fever on chemo" is fever in a patient receiving chemo. Drug names are left out on purpose: a drug is the question's
+ *  subject and keeps its weight ("bleeding on apixaban" must still open the factor Xa reversal), and "on ECG", "on standing" say where a finding is seen. */
+const ON_THERAPY: ReadonlySet<string> = new Set(
+  'chemo chemotherapy immunotherapy dialysis hemodialysis steroid anticoagulant anticoagulation immunosuppressant immunosuppression biologic ventilator vent ecmo pressor vasopressor tpn'.split(' '),
+);
 
 /** Two-word names rewritten to the words the content uses. */
 const BIGRAMS: Readonly<Record<string, readonly string[]>> = {
@@ -233,6 +241,12 @@ const BIGRAMS: Readonly<Record<string, readonly string[]>> = {
   'low calcium': ['hypocalcemia'],
   'high calcium': ['hypercalcemia'],
   'low magnesium': ['hypomagnesemia'],
+  'high magnesium': ['hypermagnesemia'],
+  'low phosphate': ['hypophosphatemia'],
+  'high phosphate': ['hyperphosphatemia'],
+  'low anc': ['neutropenia'],
+  'low neutrophil': ['neutropenia'],
+  'low neutrophils': ['neutropenia'],
   'passed out': ['syncope'],
   'collapsed lung': ['pneumothorax'],
   'water on': ['effusion'],
@@ -241,7 +255,8 @@ const BIGRAMS: Readonly<Record<string, readonly string[]>> = {
 function rewriteBigrams(ws: string[]): string[] {
   const out: string[] = [];
   for (let i = 0; i < ws.length; i++) {
-    const to = BIGRAMS[`${ws[i]} ${ws[i + 1]}`];
+    // "potassium low", "ANC low" say the same as "low potassium", "low ANC"
+    const to = BIGRAMS[`${ws[i]} ${ws[i + 1]}`] ?? (ws[i + 1] === 'low' || ws[i + 1] === 'high' ? BIGRAMS[`${ws[i + 1]} ${ws[i]}`] : undefined);
     if (to) {
       out.push(...to);
       i++;
@@ -254,16 +269,22 @@ function rewriteBigrams(ws: string[]): string[] {
  * Bedside lab shorthand ("K 6.8", "Na 118") names the condition the value implies. The value is a reading, not a topic word,
  * so it is replaced by the condition. Cut-offs are the usual definitions of the condition, used only to read the question.
  */
-const LABS: readonly { name: RegExp; low?: [number, string]; high?: [number, string] }[] = [
+const LABS: readonly { name: RegExp; low?: [number, string]; high?: [number, string]; perLiter?: [number, number] }[] = [
   { name: /^(k|k\+|potassium)$/, low: [3.5, 'hypokalemia'], high: [5.0, 'hyperkalemia'] },
   { name: /^(na|na\+|sodium)$/, low: [135, 'hyponatremia'], high: [145, 'hypernatremia'] },
+  // ANC is written in cells/mm3 ("ANC 300") or x10^9/L ("ANC 0.3"). `perLiter` [below, from]: a value below 1.5 is low on both scales,
+  // a value from 50 up can only be cells/mm3; 1.5 to 50 is a normal x10^9/L count or an implausible cell count, so it is left alone.
+  { name: /^anc$/, low: [1500, 'neutropenia'], perLiter: [1.5, 50] },
 ];
 
 function rewriteLabs(raw: string): string {
-  return raw.replace(/\b(k\+?|na\+?|potassium|sodium)\s*(?:of|is|was|at|=|:)?\s*(\d{1,3}(?:\.\d+)?)\b(?!\s*(?:mg|mcg|g|ml|%|mmol\/min))/gi, (all, analyte: string, num: string) => {
+  return raw.replace(/\b(k\+?|na\+?|potassium|sodium|anc)\s*(?:of|is|was|at|=|:)?\s*(\d{1,4}(?:\.\d+)?)\b(?!\s*(?:mg|mcg|g|ml|%|mmol\/min))/gi, (all, analyte: string, num: string) => {
     const lab = LABS.find((l) => l.name.test(analyte.toLowerCase()));
     const v = Number(num);
     if (!lab || !Number.isFinite(v)) return all;
+    // four-digit readings are only cell counts; a four-digit K or Na is not a lab value
+    if (num.split('.')[0].length > 3 && !lab.perLiter) return all;
+    if (lab.perLiter && v >= lab.perLiter[0] && v < lab.perLiter[1]) return all;
     if (lab.low && v < lab.low[0]) return lab.low[1];
     if (lab.high && v > lab.high[0]) return lab.high[1];
     return all;
@@ -273,14 +294,18 @@ function rewriteLabs(raw: string): string {
 export function parseQuestion(raw: string): ParsedQuestion {
   const ws = rewriteBigrams(words(rewriteLabs(raw)));
   const sts = ws.map(stem);
+  // words the rewrite introduced (the condition behind a number or a "low X" / "high X"), not words the asker typed
+  const typed = new Set(words(raw));
   const intents = new Set<IntentId>();
   const tokens: QuestionToken[] = [];
   const sequence: string[] = [];
   let dropped = 0;
-  let inContext: 'in' | 'after' | undefined;
+  let inContext: 'in' | 'after' | 'on' | undefined;
   for (let i = 0; i < ws.length; ) {
     const hit = TRIGGERS.find((t) => t.seq.every((s, k) => sts[i + k] === s));
-    if (hit && ws.length > hit.seq.length) {
+    // "mg" alone is the abbreviation for myasthenia gravis as often as a unit: it is a dose only after a number ("5 mg", "2 mg/kg")
+    const bareMg = hit !== undefined && hit.seq.length === 1 && hit.seq[0] === 'mg' && !/^\d/.test(ws[i - 1] ?? '');
+    if (hit && ws.length > hit.seq.length && !bareMg) {
       intents.add(hit.intent);
       sequence.push(...hit.seq);
       i += hit.seq.length;
@@ -290,10 +315,13 @@ export function parseQuestion(raw: string): ParsedQuestion {
     if (FILLER.has(ws[i]) && ws.length > 1) {
       dropped++;
       if (CONTEXT_WORDS.has(ws[i]) && tokens.length > 0 && !GENERIC.has(ws[i + 1])) inContext = 'in';
+      // "fever on chemo": a candidate setting, kept only when it names a treatment (ON_THERAPY, checked in match)
+      else if (ws[i] === 'on' && tokens.length > 0 && !inContext) inContext = 'on';
     } else {
       if (ws[i] === 'after' && tokens.length > 0) inContext = 'after';
-      tokens.push({ word: ws[i], soft: SOFT.has(ws[i]) || (ws[i].length < 2 && !/\d/.test(ws[i])), ...(inContext ? { context: inContext } : {}) });
-      if (!inContext) sequence.push(sts[i]);
+      const subject = !typed.has(ws[i]) ? { subject: true as const } : {};
+      tokens.push({ word: ws[i], soft: SOFT.has(ws[i]) || (ws[i].length < 2 && !/\d/.test(ws[i])), ...(inContext ? { context: inContext } : {}), ...subject });
+      if (!inContext || inContext === 'on') sequence.push(sts[i]);
     }
     i++;
   }
@@ -408,6 +436,8 @@ const POOL = 400;
 const HOME_BONUS = 0.12;
 /** When the topic has a home consult, a node of another consult is a detour: its heading counts for less. */
 const FOREIGN_PENALTY = 0.08;
+/** "fever after chemo": with a setting in the question, a page whose title does not name the asked-about problem (fever) is about the setting, not the question */
+const OFF_SUBJECT_PENALTY = 0.08;
 const FOREIGN_LIFT_SCALE = 0.5;
 /** A whole info page whose title is the topic beats a section of another page that merely repeats it. */
 const PAGE_TIE_BONUS = 0.01;
@@ -567,6 +597,9 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     // noun and adjective forms: hyponatremia / hyponatremic, ischemia / ischemic
     const root = s.length >= 8 ? s.replace(/(emia|emic)$/, 'emi') : s;
     if (root !== s) for (let i = lowerBound(root); i < vocabSorted.length && vocabSorted[i].startsWith(root); i++) out.add(vocabSorted[i]);
+    // adjective and noun twins: neutropenic / neutropenia, tachycardic / tachycardia, hypoxic / hypoxia (the exact twin only, never its prefixes)
+    const twin = s.length >= 7 ? (s.endsWith('ic') ? s.slice(0, -2) + 'ia' : s.endsWith('ia') ? s.slice(0, -2) + 'ic' : '') : '';
+    if (twin && postings.has(twin)) out.add(twin);
     if (k) {
       for (let len = s.length - k; len <= s.length + k; len++) {
         for (const v of byShape.get(s[0] + len) ?? []) if (v !== s && withinEdits(s, v, k)) out.add(v);
@@ -655,12 +688,16 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     loc: number;
     cov: number;
     extra: number;
+    /** the question has a setting ("after chemo") and this doc's title lacks the asked-about problem */
+    offSubject?: true;
   }
 
   function match(q: ParsedQuestion, named: ReadonlySet<string>): Hit[] {
     let toks = q.tokens.filter((t) => !t.soft);
     if (!toks.length) toks = q.tokens;
     if (!toks.length) return [];
+    // a word after "on" is a setting only when it names a treatment; otherwise it is an ordinary topic word, as before
+    toks = toks.map((t) => (t.context === 'on' && !ON_THERAPY.has(stem(t.word)) ? { ...t, context: undefined } : t));
     const required = toks.map((t) => !t.context);
     const exps = toks.map((t) => {
       const e = expand(t.word);
@@ -674,17 +711,25 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       for (const w of p.e) df += (postings.get(w) ?? []).length;
       df = Math.min(df, n);
       if (df === 0) for (let i = 0; i < n; i++) if (locArr[ti][i] > 0) df++;
-      const subject = drugWords.has(stem(toks[ti].word)) ? SUBJECT_WEIGHT : 1;
+      const subject = drugWords.has(stem(toks[ti].word)) || toks[ti].subject ? SUBJECT_WEIGHT : 1;
       const w = df === 0 ? 0 : Math.log(1 + n / df) * (toks[ti].context ? 1 : subject);
       // A word no title, heading, parent or keyword in the app ever uses ("doing", "cheapest") is chatter, not a topic:
       // being rare in body text must not make it count for more than an ordinary word, or it sinks every page that lacks it.
       const named = [...p.e].some((x) => byLevel[0].has(x) || byLevel[1].has(x) || byLevel[2].has(x)) || p.alts.length > 0 || p.viaAlias.size > 0 || p.viaAcronym.size > 0;
       return named || subject > 1 ? w : Math.min(w, CHATTER_WEIGHT);
     });
+    // "fever after chemo", "fever on chemotherapy": a rare context names the setting that decides the answer, so it is required,
+    // but it weighs no more than the most-weighted word it qualifies (the asked-about problem), or a page about the setting alone wins
+    const asked = Math.max(0, ...weight.filter((_, ti) => !toks[ti].context));
     toks.forEach((t, ti) => {
-      if (t.context === 'in' && weight[ti] >= RARE_WEIGHT) required[ti] = true;
+      if (t.context && weight[ti] >= RARE_WEIGHT) {
+        required[ti] = true;
+        if (asked > 0) weight[ti] = Math.min(weight[ti], asked);
+      }
     });
     if (!required.some(Boolean)) required.fill(true);
+    // "after" / "on" settings only: after "in" the setting can be the topic itself ("insulin drip in DKA")
+    const hasSetting = toks.some((t) => t.context === 'after' || t.context === 'on') && toks.some((t) => !t.context);
     const total = weight.reduce((a, b, ti) => a + (required[ti] ? b : 0), 0);
     const ctxTotal = weight.reduce((a, b, ti) => a + (required[ti] ? 0 : b), 0);
     if (total === 0) return [];
@@ -717,6 +762,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       const inNamed = docs[index].consultId !== undefined && named.has(docs[index].consultId!);
       if (cov < FALLBACK_COVERAGE && !inNamed) continue;
       const hit: Hit = { index, base: 0.34 - 0.3 * loc - CONTEXT_BONUS * ctxLoc + COVERAGE_WEIGHT * (1 - cov), loc, cov, extra: 0 };
+      if (hasSetting && toks.some((t, ti) => !t.context && locArr[ti][index] < LOC_TITLE)) hit.offSubject = true;
       (cov < MIN_COVERAGE && !inNamed ? weak : out).push(hit);
     }
     if (out.length < FALLBACK_BELOW) out.push(...weak);
@@ -822,6 +868,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       const foreign = !inHome && home.size > 0 && (doc.kind === 'node' || doc.kind === 'info' || doc.kind === 'trick');
       if (inHome) score -= HOME_BONUS * Math.min(1, Math.max(0, (h.loc - 0.5) / 0.5));
       else if (foreign) score += FOREIGN_PENALTY;
+      if (h.offSubject) score += OFF_SUBJECT_PENALTY;
       if (doc.kind === 'info' && !doc.anchor && h.loc >= CONSULT_IS_TOPIC_LOC) score -= PAGE_TIE_BONUS;
       if (!askedPeds && (PEDS_WORDS.test(fold(doc.title)) || PEDS_CONSULT.test(doc.consultId ?? ''))) score += PEDS_PENALTY;
       else if (askedPeds && doc.kind === 'consult' && PEDS_CONSULT.test(doc.consultId ?? '')) score -= PEDS_BONUS;
@@ -880,11 +927,17 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     const hard = q.tokens.filter((t) => !t.soft);
     const toks = hard.length ? hard : q.tokens;
     if (!toks.length) return results.length > 0;
-    const per = toks.map((t) => ({ e: expand(t.word), alts: alternatives(t.word) }));
+    // a dose question in an app with no drug entries, naming a word the app never uses, has no dose to give here
+    // a word is present when the index has it, or a longer form of it ("lido" -> lidocaine, "intub" -> intubation), or a typo of it
+    const present = (word: string) => [...expand(word)].some((w) => (postings.get(w) ?? []).length > 0);
+    // a how-to question about a procedure or exam the app never names ("place a chest tube", "do the HINTS exam") has no procedure here
+    if (q.intents.includes('procedure') && toks.some((t) => !present(t.word))) return false;
+    const per = toks.map((t) => ({ e: expand(t.word), alts: alternatives(t.word), exact: stem(t.word), short: t.word.length <= 5, subject: t.subject ? stem(t.word) : '' }));
     let known = 0;
     for (const p of per) {
       let df = 0;
-      for (const w of p.e) df += (postings.get(w) ?? []).length;
+      // a short word is known only as itself: a typo match ("reset" one edit from "rest") is not knowledge of the word
+      for (const w of p.short ? [p.exact] : p.e) df += (postings.get(w) ?? []).length;
       if (df > 0 || p.alts.length > 0) known++;
     }
     if (known / toks.length < ANSWER_MIN_KNOWN) return false;
@@ -896,13 +949,20 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       const anywhere = new Set<string>([...named, ...x.text, ...x.psub]);
       const hasAlt = (phrases: Set<string>[][], where: Set<string>) => phrases.some((ph) => ph.every((es) => [...es].some((w) => where.has(w))));
       let matched = 0;
+      let exactMatched = 0;
       let names = 0;
       for (const p of per) {
         const inNamed = [...p.e].some((w) => named.has(w)) || hasAlt(p.alts, named);
-        if (inNamed) names++;
-        if (inNamed || [...p.e].some((w) => anywhere.has(w)) || hasAlt(p.alts, anywhere)) matched++;
+        const inText = [...p.e].some((w) => anywhere.has(w)) || hasAlt(p.alts, anywhere);
+        // a lab reading names its condition: a top result that carries that exact condition in its own text is about it ("K 2.1" -> hypokalemia).
+        // Exact stems only: a typo match would name "hypocalcemia" for "high calcium" (two edits apart) and answer the opposite condition.
+        if (inNamed || (p.subject && anywhere.has(p.subject))) names++;
+        if (inNamed || inText) matched++;
+        if (anywhere.has(p.exact) || hasAlt(p.alts, anywhere)) exactMatched++;
       }
       if (matched / toks.length >= ANSWER_MIN_MATCHED && names > 0) return true;
+      // a result whose own text carries every content word of a multi-word question answers it
+      if (toks.length >= 2 && exactMatched === toks.length) return true;
     }
     return false;
   }
