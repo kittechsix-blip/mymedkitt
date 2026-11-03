@@ -7,7 +7,8 @@
       "Disable independent service worker registration",
       "Remove standalone install manifest",
       "Point sharing links and QR code to the integrated myMedKitt consult",
-      "Keep original unfilled photo slots without requesting nonexistent optional photographs"
+      "Keep original unfilled photo slots without requesting nonexistent optional photographs",
+      "Keep original navigation arrows above the measured toolbar height on tablets"
     ],
     "clinicalContentChanged": false
   },
@@ -18,7 +19,8 @@
     "adaptations": [
       "Disable independent service worker registration",
       "Remove standalone install manifest",
-      "Point sharing links and QR code to the integrated myMedKitt consult"
+      "Point sharing links and QR code to the integrated myMedKitt consult",
+      "Keep original navigation arrows above the measured toolbar height on tablets"
     ],
     "clinicalContentChanged": false
   },
@@ -29,7 +31,8 @@
     "adaptations": [
       "Disable independent service worker registration",
       "Remove standalone install manifest",
-      "Point sharing links and QR code to the integrated myMedKitt consult"
+      "Point sharing links and QR code to the integrated myMedKitt consult",
+      "Keep original navigation arrows above the measured toolbar height on tablets"
     ],
     "clinicalContentChanged": false
   }

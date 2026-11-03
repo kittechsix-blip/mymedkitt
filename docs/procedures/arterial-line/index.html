@@ -1145,5 +1145,15 @@ if(false){
   <img id="lbImg" alt="">
   <div class="lightbox-hint">Pinch or scroll to zoom · drag to pan · tap outside to close</div>
 </div>
+<script>
+// Preserve the original controls while keeping arrows above a wrapping toolbar.
+const embeddedToolbar = document.querySelector('.toolbar');
+const embeddedNavigation = document.querySelector('.nav');
+if (embeddedToolbar && embeddedNavigation) {
+  const clearToolbar = () => { embeddedNavigation.style.bottom = (embeddedToolbar.getBoundingClientRect().height + 8) + 'px'; };
+  new ResizeObserver(clearToolbar).observe(embeddedToolbar);
+  clearToolbar();
+}
+</script>
 </body>
 </html>
