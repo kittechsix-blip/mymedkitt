@@ -1,3 +1,5 @@
+import { addRecentConsult } from './dashboard.js';
+import { trackConsultOpen } from '../services/kittmd-analytics.js';
 import { router } from '../services/router.js';
 
 const PROCEDURE_APPS: Record<string, { title: string; entry: string }> = {
@@ -10,6 +12,8 @@ const PROCEDURE_APPS: Record<string, { title: string; entry: string }> = {
 export function renderProcedureApp(main: HTMLElement, id: string): boolean {
   const app = PROCEDURE_APPS[id];
   if (!app) return false;
+  addRecentConsult(id, app.title, 'procedures');
+  trackConsultOpen(id);
   document.querySelector<HTMLElement>('.app-header')?.style.setProperty('display', 'none');
   const shell = document.createElement('section');
   shell.className = 'procedure-app-shell';

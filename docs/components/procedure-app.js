@@ -1,3 +1,5 @@
+import { addRecentConsult } from './dashboard.js';
+import { trackConsultOpen } from '../services/kittmd-analytics.js';
 import { router } from '../services/router.js';
 const PROCEDURE_APPS = {
     'chest-tube': { title: 'Chest Tube', entry: 'ctube-start' },
@@ -9,6 +11,8 @@ export function renderProcedureApp(main, id) {
     const app = PROCEDURE_APPS[id];
     if (!app)
         return false;
+    addRecentConsult(id, app.title, 'procedures');
+    trackConsultOpen(id);
     document.querySelector('.app-header')?.style.setProperty('display', 'none');
     const shell = document.createElement('section');
     shell.className = 'procedure-app-shell';
