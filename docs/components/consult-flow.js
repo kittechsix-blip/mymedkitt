@@ -50,7 +50,11 @@ function scrollCardBelowHeader(card) {
 }
 /** Initialize and render the consult flow for a given tree */
 export async function renderConsultFlow(container, treeId, options) {
+    const requestedRoute = window.location.hash;
     const config = await getTreeConfig(treeId);
+    // A slow reference fetch must not overwrite the procedure screen after Back.
+    if (window.location.hash !== requestedRoute)
+        return;
     if (!config) {
         renderUnavailable(container, treeId);
         return;

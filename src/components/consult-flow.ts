@@ -60,7 +60,10 @@ export async function renderConsultFlow(
   treeId: string,
   options?: { jumpToNodeId?: string }
 ): Promise<void> {
+  const requestedRoute = window.location.hash;
   const config = await getTreeConfig(treeId);
+  // A slow reference fetch must not overwrite the procedure screen after Back.
+  if (window.location.hash !== requestedRoute) return;
   if (!config) {
     renderUnavailable(container, treeId);
     return;
