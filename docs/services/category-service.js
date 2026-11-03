@@ -114,7 +114,10 @@ async function mergeHardcodedConsults() {
             if (idx === -1)
                 continue;
             const cTree = cached.decisionTrees[idx];
-            const stale = cTree.title === cTree.id ||
+            const stale = 
+            // Bundled procedure identities must not inherit legacy database labels.
+            ['chest-tube', 'thoracotomy-procedure', 'arterial-line'].includes(hTree.id) ||
+                cTree.title === cTree.id ||
                 !cTree.title ||
                 (!!hTree.subtitle && !cTree.subtitle) ||
                 (typeof hTree.nodeCount === 'number' &&

@@ -3672,7 +3672,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
       },
       {
         id: 'chest-tube',
-        title: 'Tube Thoracostomy',
+        title: 'Chest Tube · Tube Thoracostomy',
         subtitle: 'Indications \u2192 Preparation \u2192 Insertion \u2192 Management',
         categoryId: 'procedures',
         version: '1.0',
@@ -4150,7 +4150,7 @@ export const DEFAULT_CATEGORIES: Category[] = [
     decisionTrees: [
       {
         id: 'chest-tube',
-        title: 'Pneumothorax Management',
+        title: 'Chest Tube · Tube Thoracostomy',
         subtitle: 'Indications \u2192 Preparation \u2192 Insertion \u2192 Management',
         categoryId: 'trauma-surg',
         version: '1.0',

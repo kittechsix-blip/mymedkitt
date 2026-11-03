@@ -32,7 +32,8 @@
       "Disable independent service worker registration",
       "Remove standalone install manifest",
       "Point sharing links and QR code to the integrated myMedKitt consult",
-      "Keep original navigation arrows above the measured toolbar height on tablets"
+      "Keep original navigation arrows above the measured toolbar height on tablets",
+      "Retain the three original unfilled photo slots without fetching missing files"
     ],
     "clinicalContentChanged": false
   }

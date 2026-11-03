@@ -509,7 +509,8 @@ const deck = document.getElementById('deck');
 function photoHTML(s){
   const tag = `<span class="ph-tag">${s.photoTag||'Photo'}</span>`;
   const fullFallback = `<div class="ph-fallback">${I.camera}<span class="ph-label">${s.photoLabel||'Add image'}</span></div>`;
-  const imgs = s.img ? (Array.isArray(s.img) ? s.img : [s.img]) : [];
+  const availableImages = new Set(["01-position.jpg", "08-confirm.jpg", "05-blunt-dissection.jpg", "IMAGE-MANIFEST.md", "07-tube-insertion-2.jpg", "07-tube-insertion.jpg", "share-qr.png", "tool-drainage-diagram.png", "10-dress.jpg", "rt-01-position.png", "rt-09-crossclamp.png", "03-anesthetize.png", "02-triangle-of-safety.png", "rt-share-qr.png", "09-secure.jpg", "rt-heart-repair.png", "rt-02-incision.png", "rt-hilar-twist.png", "rt-10-defib.png", "rt-anatomy.png", "06-finger-sweep.jpg", "rt-03-intercostals.png", "rt-06-pericardium-2.png", "rt-06-pericardium.png", "rt-hilum-clamp.png", "04-incision.jpg", "08-cut-tube.jpg", "11-confirm-document.png", "00-equipment.jpg", "rt-00-tray.png", "08-confirm-2.jpg", "rt-05-clamshell.png", "rt-04-retractor.png"]);
+  const imgs = (s.img ? (Array.isArray(s.img) ? s.img : [s.img]) : []).filter(f => availableImages.has(f));
   if(imgs.length===0){
     return `<div class="photo">${tag}${fullFallback}</div>`;
   }
