@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" font-family="sans-serif">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <text x="200" y="20" text-anchor="middle" font-size="14" font-weight="bold" fill="#263238">Arterial Pressure-Monitoring Circuit</text>
+
+  <!-- Arterial catheter (left) -->
+  <g>
+    <rect x="14" y="120" width="34" height="10" rx="2" fill="#d2453b"/>
+    <polygon points="14,125 4,125 14,120 14,130" fill="#d2453b"/>
+    <text x="22" y="148" text-anchor="middle" font-size="10" fill="#263238">Arterial</text>
+    <text x="22" y="159" text-anchor="middle" font-size="10" fill="#263238">catheter</text>
+  </g>
+
+  <!-- Stiff tubing from catheter to stopcock -->
+  <line x1="48" y1="125" x2="92" y2="125" stroke="#d2453b" stroke-width="6"/>
+  <text x="70" y="110" text-anchor="middle" font-size="9" fill="#546E7A">stiff non-</text>
+  <text x="70" y="120" text-anchor="middle" font-size="9" fill="#546E7A">compliant tubing</text>
+
+  <!-- 3-way stopcock -->
+  <g>
+    <circle cx="100" cy="125" r="12" fill="#42A5F5" stroke="#1E88E5" stroke-width="1.5"/>
+    <rect x="98" y="113" width="4" height="24" fill="#fff"/>
+    <rect x="88" y="123" width="24" height="4" fill="#fff"/>
+    <text x="100" y="158" text-anchor="middle" font-size="9" fill="#263238">3-way</text>
+    <text x="100" y="169" text-anchor="middle" font-size="9" fill="#263238">stopcock</text>
+  </g>
+
+  <!-- tubing stopcock to transducer -->
+  <line x1="112" y1="125" x2="150" y2="125" stroke="#d2453b" stroke-width="6"/>
+
+  <!-- Pressure transducer -->
+  <g>
+    <rect x="150" y="108" width="44" height="34" rx="4" fill="#1E88E5" stroke="#263238" stroke-width="1"/>
+    <circle cx="172" cy="125" r="9" fill="#E3F2FD"/>
+    <path d="M164 125 q4 -6 8 0 t8 0" fill="none" stroke="#d2453b" stroke-width="1.5"/>
+    <text x="172" y="158" text-anchor="middle" font-size="9" fill="#263238">pressure</text>
+    <text x="172" y="169" text-anchor="middle" font-size="9" fill="#263238">transducer</text>
+  </g>
+
+  <!-- Cable to monitor -->
+  <path d="M194 118 C 230 118, 230 60, 270 60" fill="none" stroke="#263238" stroke-width="2"/>
+  <g>
+    <rect x="270" y="38" width="64" height="44" rx="4" fill="#263238"/>
+    <rect x="276" y="44" width="52" height="32" rx="2" fill="#0b1a26"/>
+    <polyline points="280,68 288,68 292,52 298,72 304,60 312,60 316,68 324,68" fill="none" stroke="#1f9d6b" stroke-width="1.5"/>
+    <text x="302" y="96" text-anchor="middle" font-size="9" fill="#263238">monitor</text>
+  </g>
+
+  <!-- Continuous flush device -->
+  <g>
+    <line x1="172" y1="108" x2="172" y2="92" stroke="#d2453b" stroke-width="5"/>
+    <circle cx="172" cy="86" r="8" fill="#ok" stroke="#1f9d6b" stroke-width="1.5"/>
+    <circle cx="172" cy="86" r="8" fill="#fff" stroke="#1f9d6b" stroke-width="1.5"/>
+    <text x="172" y="89" text-anchor="middle" font-size="9" fill="#1f9d6b">~3</text>
+    <text x="232" y="84" text-anchor="middle" font-size="9" fill="#263238">continuous flush</text>
+    <text x="232" y="95" text-anchor="middle" font-size="9" font-weight="bold" fill="#1f9d6b">~3 mL/hr</text>
+  </g>
+
+  <!-- Tubing flush to saline bag -->
+  <path d="M172 78 C 172 60, 110 60, 110 90" fill="none" stroke="#d2453b" stroke-width="5"/>
+
+  <!-- Pressure bag containing saline bag -->
+  <g>
+    <!-- Pressure bag (outer) -->
+    <rect x="60" y="180" width="100" height="100" rx="8" fill="#42A5F5" fill-opacity="0.35" stroke="#1E88E5" stroke-width="2"/>
+    <!-- inflation bulb -->
+    <ellipse cx="178" cy="210" rx="14" ry="11" fill="#42A5F5" stroke="#1E88E5" stroke-width="1.5"/>
+    <line x1="160" y1="210" x2="164" y2="210" stroke="#1E88E5" stroke-width="3"/>
+    <!-- gauge -->
+    <circle cx="178" cy="245" r="13" fill="#fff" stroke="#263238" stroke-width="1.5"/>
+    <line x1="178" y1="245" x2="186" y2="238" stroke="#d2453b" stroke-width="2"/>
+    <circle cx="178" cy="245" r="2" fill="#263238"/>
+    <text x="178" y="276" text-anchor="middle" font-size="10" font-weight="bold" fill="#d2453b">300 mmHg</text>
+
+    <!-- 500 mL saline bag (inner) -->
+    <rect x="78" y="190" width="62" height="82" rx="5" fill="#E3F2FD" stroke="#1E88E5" stroke-width="1.5"/>
+    <rect x="98" y="184" width="22" height="8" rx="2" fill="#1E88E5"/>
+    <text x="109" y="222" text-anchor="middle" font-size="11" font-weight="bold" fill="#263238">500 mL</text>
+    <text x="109" y="236" text-anchor="middle" font-size="10" fill="#263238">saline</text>
+    <text x="109" y="248" text-anchor="middle" font-size="9" fill="#546E7A">(pressure bag)</text>
+  </g>
+
+  <!-- flush tubing down into bag spike -->
+  <path d="M110 90 L 110 184" fill="none" stroke="#d2453b" stroke-width="5"/>
+  <text x="40" y="300" font-size="8" fill="#546E7A">Pressurized bag drives ~3 mL/hr flush; transducer converts pressure to waveform on monitor.</text>
+</svg>

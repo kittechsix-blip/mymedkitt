@@ -7558,3 +7558,11 @@ a,
 @media (prefers-reduced-motion: reduce) {
   .animate-slide-up { animation: none; }
 }
+
+/* Original procedure apps retain their own design and viewport scrolling. */
+.main-content:has(> .procedure-app-shell) { padding: 0; overflow: hidden; }
+.procedure-app-shell { height: 100%; display: flex; flex-direction: column; min-height: 0; }
+.procedure-app-nav { display: flex; align-items: center; gap: 16px; padding: 8px 12px; flex-shrink: 0; background: #FFF8F2; border-bottom: 1px solid #d8c9bd; }
+.procedure-app-nav a { color: #873e00; font-size: 13px; min-height: 44px; display: inline-flex; align-items: center; }
+.procedure-app-nav button { min-height: 44px; padding: 8px 14px; }
+.procedure-app-shell iframe { display: block; width: 100%; flex: 1; min-height: 0; border: 0; background: #fff; }

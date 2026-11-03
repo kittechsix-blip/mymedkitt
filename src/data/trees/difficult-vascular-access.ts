@@ -10,7 +10,7 @@ export const DIFFICULT_VASCULAR_ACCESS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Difficult Vascular Access: US-PIV + IO',
-    body: 'Use this when peripheral access is delayed, repeated blind attempts are failing, or immediate resuscitation access is needed.\n\nOpen first:\n- [Access Steps](#/info/dva-steps)\n- [US-PIV Technique](#/info/dva-us-piv)\n- [IO Sites](#/info/dva-io-sites)\n- [Confirm / Use](#/info/dva-confirm)\n- [Stop / Complications](#/info/dva-stop)',
+    body: '[A-Line visual procedure](#/tree/arterial-line)\n\nUse this when peripheral access is delayed, repeated blind attempts are failing, or immediate resuscitation access is needed.\n\nOpen first:\n- [Access Steps](#/info/dva-steps)\n- [US-PIV Technique](#/info/dva-us-piv)\n- [IO Sites](#/info/dva-io-sites)\n- [Confirm / Use](#/info/dva-confirm)\n- [Stop / Complications](#/info/dva-stop)',
     citation: [1, 2, 3],
     images: [
       {

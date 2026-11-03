@@ -3677,6 +3677,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'ctube-start',
             },
             {
+                id: 'arterial-line',
+                title: 'A-Line · Arterial Line',
+                subtitle: 'Original visual procedure: preparation, placement, waveform and troubleshooting',
+                categoryId: 'procedures',
+                version: '1.0',
+                nodeCount: 1,
+                entryNodeId: 'aline-start',
+            },
+            {
                 id: 'thoracotomy-procedure',
                 title: 'Thoracotomy Procedure',
                 subtitle: '2-Minute Review: Indication \u2192 Incision \u2192 Pericardium \u2192 Control \u2192 OR',

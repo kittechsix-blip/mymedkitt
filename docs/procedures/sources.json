@@ -1,0 +1,36 @@
+[
+  {
+    "id": "arterial-line",
+    "source": "A-Line-App",
+    "sourceSha256": "022b698fa84c7ab0d8bbee618d5d5564e1a0566f3744f561ebe134e4ea72680f",
+    "adaptations": [
+      "Disable independent service worker registration",
+      "Remove standalone install manifest",
+      "Point sharing links and QR code to the integrated myMedKitt consult",
+      "Keep original unfilled photo slots without requesting nonexistent optional photographs"
+    ],
+    "clinicalContentChanged": false
+  },
+  {
+    "id": "chest-tube",
+    "source": "ChestTube-App",
+    "sourceSha256": "da66330c0e92edd591e3ede320f1755a59ebc4ce94a9d3b00731fe0eda79092c",
+    "adaptations": [
+      "Disable independent service worker registration",
+      "Remove standalone install manifest",
+      "Point sharing links and QR code to the integrated myMedKitt consult"
+    ],
+    "clinicalContentChanged": false
+  },
+  {
+    "id": "thoracotomy-procedure",
+    "source": "ResusThoracotomy-App",
+    "sourceSha256": "bbad6e226aac88c9e380bc8c5faba7e8ba3973c0545f5a1e061440d21c4ad11c",
+    "adaptations": [
+      "Disable independent service worker registration",
+      "Remove standalone install manifest",
+      "Point sharing links and QR code to the integrated myMedKitt consult"
+    ],
+    "clinicalContentChanged": false
+  }
+]

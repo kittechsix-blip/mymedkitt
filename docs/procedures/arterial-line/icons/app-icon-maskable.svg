@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Arterial line app icon (maskable)">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#42A5F5"/>
+      <stop offset="1" stop-color="#1E88E5"/>
+    </linearGradient>
+  </defs>
+  <!-- full-bleed background so platform masks never reveal transparency -->
+  <rect x="0" y="0" width="400" height="400" fill="url(#bg)"/>
+  <!-- content scaled into the central ~80% maskable safe zone -->
+  <g transform="translate(40 40) scale(0.8)">
+    <line x1="56" y1="234" x2="344" y2="234" stroke="#E3F2FD" stroke-opacity="0.30" stroke-width="3" stroke-dasharray="2 12" stroke-linecap="round"/>
+    <path d="M 56 234 L 96 234 L 118 100 C 128 84 146 88 152 118 L 168 176 C 174 196 188 196 196 178 C 202 164 210 168 214 184 C 220 210 236 220 260 224 L 344 234"
+          fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="196" cy="178" r="9" fill="#E3F2FD" stroke="#1E88E5" stroke-width="3"/>
+    <g>
+      <line x1="40" y1="294" x2="120" y2="294" stroke="#E3F2FD" stroke-width="11" stroke-linecap="round"/>
+      <polygon points="120,294 150,294 132,288 132,300" fill="#ffffff"/>
+      <rect x="44" y="288" width="22" height="12" rx="3" fill="#1E88E5" stroke="#ffffff" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

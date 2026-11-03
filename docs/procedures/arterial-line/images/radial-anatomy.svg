@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" font-family="sans-serif">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <text x="200" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#263238">Volar Wrist — Radial Artery Access</text>
+  <text x="200" y="38" text-anchor="middle" font-size="10" fill="#546E7A">Cross-section, just proximal to wrist crease</text>
+
+  <!-- Wrist cross-section (forearm slice) -->
+  <ellipse cx="200" cy="185" rx="120" ry="72" fill="#fbe9e7" stroke="#bcaaa4" stroke-width="2"/>
+  <!-- skin highlight (volar surface at top) -->
+  <path d="M 80 185 A 120 72 0 0 1 320 185" fill="none" stroke="#ffab91" stroke-width="4" opacity="0.6"/>
+
+  <!-- Radius bone (lateral) -->
+  <ellipse cx="150" cy="225" rx="34" ry="22" fill="#fff8e1" stroke="#cbb994" stroke-width="2"/>
+  <text x="150" y="229" text-anchor="middle" font-size="10" fill="#8d6e63">Radius</text>
+  <!-- Ulna bone (medial) -->
+  <ellipse cx="262" cy="222" rx="26" ry="18" fill="#fff8e1" stroke="#cbb994" stroke-width="2"/>
+  <text x="262" y="226" text-anchor="middle" font-size="9" fill="#8d6e63">Ulna</text>
+
+  <!-- FCR tendon -->
+  <circle cx="178" cy="150" r="9" fill="#eceff1" stroke="#546E7A" stroke-width="2"/>
+  <!-- Radial artery (lateral to FCR) -->
+  <circle cx="150" cy="148" r="8" fill="#d2453b" stroke="#7f1d17" stroke-width="1.5"/>
+  <!-- Ulnar artery (medial) -->
+  <circle cx="252" cy="152" r="7" fill="#d2453b" stroke="#7f1d17" stroke-width="1.5"/>
+  <!-- median nerve (context) -->
+  <circle cx="210" cy="158" r="6" fill="#fff59d" stroke="#c0a800" stroke-width="1.5"/>
+
+  <!-- Needle approaching radial artery at ~30-45 deg -->
+  <g>
+    <line x1="78" y1="78" x2="146" y2="142" stroke="#90a4ae" stroke-width="6" stroke-linecap="round"/>
+    <line x1="78" y1="78" x2="146" y2="142" stroke="#cfd8dc" stroke-width="2" stroke-linecap="round"/>
+    <polygon points="146,142 138,138 142,150" fill="#607d8b"/>
+    <!-- hub -->
+    <rect x="58" y="62" width="20" height="14" rx="3" fill="#42A5F5" stroke="#1565c0" transform="rotate(43 68 69)"/>
+  </g>
+  <!-- angle arc -->
+  <path d="M 118 118 A 30 30 0 0 1 110 142" fill="none" stroke="#1E88E5" stroke-width="1.2" stroke-dasharray="3 2"/>
+  <text x="128" y="138" font-size="10" fill="#1E88E5" font-weight="bold">30–45°</text>
+
+  <!-- Wrist crease marker -->
+  <line x1="120" y1="118" x2="160" y2="118" stroke="#1E88E5" stroke-width="1.5" stroke-dasharray="5 3"/>
+
+  <!-- Labels with leader lines -->
+  <!-- Radial artery -->
+  <line x1="150" y1="148" x2="92" y2="180" stroke="#d2453b" stroke-width="1"/>
+  <rect x="20" y="172" width="74" height="18" rx="4" fill="#fff" stroke="#d2453b"/>
+  <text x="57" y="185" text-anchor="middle" font-size="10" font-weight="bold" fill="#d2453b">Radial artery</text>
+
+  <!-- FCR tendon -->
+  <line x1="178" y1="150" x2="195" y2="100" stroke="#546E7A" stroke-width="1"/>
+  <rect x="160" y="84" width="86" height="18" rx="4" fill="#fff" stroke="#546E7A"/>
+  <text x="203" y="97" text-anchor="middle" font-size="10" font-weight="bold" fill="#263238">FCR tendon</text>
+
+  <!-- Ulnar artery -->
+  <line x1="252" y1="152" x2="320" y2="175" stroke="#d2453b" stroke-width="1"/>
+  <rect x="312" y="167" width="76" height="18" rx="4" fill="#fff" stroke="#d2453b"/>
+  <text x="350" y="180" text-anchor="middle" font-size="10" font-weight="bold" fill="#d2453b">Ulnar artery</text>
+
+  <!-- Median nerve -->
+  <line x1="210" y1="158" x2="262" y2="125" stroke="#c0a800" stroke-width="0.8"/>
+  <text x="266" y="124" font-size="9" fill="#9e8600">Median n.</text>
+
+  <!-- Wrist crease label -->
+  <text x="200" y="116" text-anchor="middle" font-size="9" fill="#1E88E5" font-weight="bold">wrist crease</text>
+
+  <!-- Orientation -->
+  <text x="34" y="262" font-size="9" fill="#546E7A">lateral (radial)</text>
+  <text x="312" y="262" font-size="9" fill="#546E7A">medial (ulnar)</text>
+</svg>

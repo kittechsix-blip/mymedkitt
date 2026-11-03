@@ -1,0 +1,1123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#42A5F5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Thoracotomy">
+<title>Resuscitative Thoracotomy — ED Trauma</title>
+
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<style>
+:root{
+  /* Sterile Surgical Suite palette */
+  --bg:#F7FBFF;              /* ultra-light azure */
+  --card:#ffffff;
+  --ink:#263238;            /* dark slate */
+  --ink-soft:#546E7A;       /* slate-grey secondary */
+  --line:#E1ECF4;
+  --accent:#42A5F5;          /* hospital blue */
+  --accent-deep:#1E88E5;     /* pressed / deep blue */
+  --accent-tint:#E3F2FD;     /* azure tint */
+  --accent-2:#90CAF9;        /* secondary / interactive icons */
+  --danger:#d2453b;
+  --danger-tint:#fbeae8;
+  --warn:#c9772a;
+  --ok:#1f9d6b;
+  --shadow:0 6px 24px rgba(38,50,56,.08);
+  --shadow-lg:0 16px 48px rgba(38,50,56,.16);
+  --shadow-card:0 2px 8px rgba(38,50,56,.06),0 0 1px rgba(38,50,56,.10);
+  --r:18px;
+  --r-xl:20px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+#app{height:100dvh;display:flex;flex-direction:column;max-width:520px;margin:0 auto;position:relative;background:var(--bg)}
+
+/* ---------- Top bar / progress ---------- */
+.topbar{
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 18px 6px;
+  display:flex;align-items:center;gap:12px;
+  background:rgba(247,251,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:6;
+}
+.brand{font-weight:740;font-size:15px;letter-spacing:.2px}
+.brand small{color:var(--accent-deep);font-weight:700}
+.step-count{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+/* tappable pill row — jump to any card */
+.pillrow{
+  display:flex;gap:8px;overflow-x:auto;padding:2px 14px 10px;
+  background:rgba(247,251,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  scrollbar-width:none;z-index:6;
+}
+.pillrow::-webkit-scrollbar{display:none}
+.npill{
+  flex:none;display:inline-flex;align-items:center;gap:5px;
+  padding:7px 13px;border-radius:99px;font-size:12.5px;font-weight:650;line-height:1;
+  white-space:nowrap;min-height:34px;cursor:pointer;border:1.5px solid transparent;
+  background:rgba(38,50,56,.05);color:var(--ink-soft);transition:all .2s ease;
+}
+.npill:active{transform:scale(.95)}
+.npill.current{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(66,165,245,.35)}
+.npill.visited{background:var(--accent-tint);color:var(--accent-deep);border-color:var(--accent-2)}
+.npill.danger.current{background:var(--danger);box-shadow:0 2px 8px rgba(210,69,59,.35)}
+
+/* ---------- Deck ---------- */
+.deck{
+  flex:1;display:flex;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.deck::-webkit-scrollbar{display:none}
+.slide{
+  min-width:100%;scroll-snap-align:center;scroll-snap-stop:always;
+  height:100%;overflow-y:auto;padding:4px 18px 140px;scrollbar-width:none;
+}
+.slide::-webkit-scrollbar{display:none}
+
+.kicker{display:flex;align-items:center;gap:8px;margin:2px 0 10px}
+.pill{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-tint);padding:5px 10px;border-radius:99px}
+.pill.danger{color:#9a261d;background:var(--danger-tint)}
+.h1{font-size:25px;font-weight:760;line-height:1.12;letter-spacing:-.3px;margin:0 0 14px}
+
+/* photo slot */
+.photo{
+  position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--r-xl);
+  background:radial-gradient(120% 120% at 30% 20%,#eef6ff 0%,#e3f0fb 60%,#d8e8f6 100%);
+  border:1px solid var(--line);box-shadow:var(--shadow-card);
+  overflow:hidden;
+}
+.photo img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block}
+/* side-by-side photos (e.g. illustration + clinical photo) */
+.photo-row{display:flex;gap:10px}
+.photo-row .photo{flex:1;min-width:0}
+/* 3+ photos: hero on top, pair below */
+.photo-stack{display:flex;flex-direction:column;gap:10px}
+.photo .ph-fallback{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-soft);text-align:center;padding:12px}
+.photo .ph-ic{width:38px;height:38px;opacity:.5}
+.photo .ph-label{font-size:12.5px;font-weight:600;max-width:80%;line-height:1.35}
+.photo .ph-tag{position:absolute;z-index:2;top:10px;left:10px;font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:rgba(66,165,245,.94);padding:4px 8px;border-radius:8px}
+
+/* action + caption */
+.action{font-size:20px;font-weight:720;line-height:1.25;letter-spacing:-.2px;margin:16px 2px 6px}
+.caption{font-size:14.5px;line-height:1.5;color:var(--ink-soft);margin:0 2px}
+.cue{display:inline-flex;align-items:center;gap:6px;margin:12px 2px 0;font-size:13px;font-weight:650;color:var(--danger);background:var(--danger-tint);padding:8px 12px;border-radius:12px}
+.cue.warn{color:var(--warn);background:#fbf1e4}
+
+/* accordion */
+.more{margin:16px 0 0;border-top:1px solid var(--line);padding-top:6px}
+.more details{border-radius:14px;overflow:hidden}
+.more summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;
+  padding:12px 2px;font-size:14px;font-weight:680;color:var(--accent-deep);
+}
+.more summary::-webkit-details-marker{display:none}
+.more summary .chev{margin-left:auto;transition:transform .25s;color:var(--accent)}
+.more details[open] summary .chev{transform:rotate(180deg)}
+.more .body{padding:2px 2px 8px;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.more ul{margin:4px 0 0;padding:0 0 0 18px}
+.more li{font-size:14px;line-height:1.6;color:var(--ink);margin:0 0 7px}
+.more li b{font-weight:680}
+.ref{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin-top:6px}
+
+/* nav arrows */
+.nav{position:absolute;bottom:calc(74px + var(--safe-bottom));left:0;right:0;display:flex;justify-content:space-between;padding:0 16px;pointer-events:none;z-index:5}
+.nav button{
+  pointer-events:auto;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
+  background:rgba(255,255,255,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:var(--shadow);display:grid;place-items:center;color:var(--accent-deep);cursor:pointer;
+  transition:transform .15s, opacity .2s;
+}
+.nav button:active{transform:scale(.92)}
+.nav button[disabled]{opacity:0;pointer-events:none}
+
+/* ---------- Indication gate ---------- */
+.gate{padding-top:8px}
+.gate .lead{font-size:15px;color:var(--ink-soft);line-height:1.5;margin:0 2px 18px}
+.qrow{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-soft);margin:18px 2px 10px}
+.opts{display:grid;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:1px solid var(--line);
+  background:var(--card);box-shadow:var(--shadow);cursor:pointer;transition:transform .12s,border-color .15s;
+}
+.opt:active{transform:scale(.985)}
+.opt.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-tint),var(--shadow)}
+.opt .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--accent-tint);color:var(--accent-deep);flex:none}
+.opt.red .ic{background:var(--danger-tint);color:#9a261d}
+.opt .tt{font-size:16px;font-weight:700}
+.opt .ss{font-size:13px;color:var(--ink-soft);margin-top:2px;line-height:1.4}
+.result{margin-top:18px;border-radius:16px;padding:18px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);animation:fade .3s ease}
+.result.go{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-tint),#fff)}
+.result.stop{border-color:var(--danger);background:linear-gradient(180deg,var(--danger-tint),#fff)}
+.result .verdict{font-size:18px;font-weight:760;margin:0 0 6px}
+.result.go .verdict{color:var(--accent-deep)}
+.result.stop .verdict{color:#9a261d}
+.result p{font-size:14px;line-height:1.55;color:var(--ink);margin:0 0 6px}
+.startbtn{margin-top:14px;width:100%;border:0;border-radius:var(--r);padding:15px;font-size:16px;font-weight:720;color:#fff;
+  background:linear-gradient(180deg,#64B5F6 0%,#42A5F5 45%,#1E88E5 100%);
+  box-shadow:0 4px 12px rgba(66,165,245,.32),inset 0 1px 0 rgba(255,255,255,.25);
+  text-shadow:0 1px 2px rgba(0,0,0,.12);cursor:pointer;transition:all .15s ease}
+.startbtn:active{transform:translateY(1px);box-shadow:0 2px 6px rgba(66,165,245,.28),inset 0 1px 0 rgba(255,255,255,.2)}
+.criteria{margin-top:12px;display:grid;gap:8px}
+.crit{display:flex;gap:10px;font-size:13.5px;line-height:1.45;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.crit b{font-weight:720}
+.crit .dot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--ok)}
+.crit.no .dot{background:var(--ink-soft)}
+.crit.stop .dot{background:var(--danger)}
+
+/* ---------- Bottom toolbar ---------- */
+.toolbar{
+  position:absolute;left:0;right:0;bottom:0;z-index:8;
+  padding:8px 0 calc(8px + var(--safe-bottom));
+  background:rgba(255,255,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+}
+.toolbar .scroll{display:flex;gap:8px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+.toolbar .scroll::-webkit-scrollbar{display:none}
+.tool{
+  flex:none;display:flex;flex-direction:column;align-items:center;gap:5px;width:62px;padding:6px 2px;border:0;background:none;cursor:pointer;color:var(--ink-soft)}
+.tool .tic{width:42px;height:42px;border-radius:14px;background:var(--accent-tint);color:var(--accent-deep);display:grid;place-items:center;transition:transform .12s,background .15s}
+.tool:active .tic{transform:scale(.9)}
+.tool .tl{font-size:10.5px;font-weight:650;line-height:1.1;text-align:center}
+
+/* ---------- Sheet ---------- */
+.scrim{position:fixed;inset:0;background:rgba(13,28,34,.42);opacity:0;pointer-events:none;transition:opacity .28s;z-index:20}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:21;max-width:520px;margin:0 auto;
+  background:var(--card);border-radius:22px 22px 0 0;box-shadow:var(--shadow-lg);
+  transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);
+  max-height:86dvh;display:flex;flex-direction:column;
+}
+.sheet.on{transform:translateY(0)}
+.sheet .grab{width:38px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 4px}
+.sheet .shead{display:flex;align-items:center;gap:12px;padding:6px 20px 12px;border-bottom:1px solid var(--line)}
+.sheet .shead .si{width:40px;height:40px;border-radius:12px;background:var(--accent-tint);color:var(--accent-deep);display:grid;place-items:center;flex:none}
+.sheet .shead h3{margin:0;font-size:18px;font-weight:740}
+.sheet .shead .x{margin-left:auto;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--ink-soft);cursor:pointer}
+.sheet .scont{overflow-y:auto;padding:16px 20px calc(26px + var(--safe-bottom))}
+.sheet h4{font-size:14px;font-weight:740;margin:18px 0 8px;color:var(--accent-deep)}
+.sheet h4:first-child{margin-top:2px}
+.sheet p{font-size:14.5px;line-height:1.58;color:var(--ink);margin:0 0 10px}
+.sheet ul{margin:0 0 12px;padding-left:18px}
+.sheet li{font-size:14.5px;line-height:1.55;margin:0 0 7px}
+.sheet .kv{display:flex;gap:10px;align-items:baseline;padding:11px 13px;background:var(--bg);border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.sheet .kv .k{font-weight:740;font-size:14px;flex:none;min-width:78px;color:var(--accent-deep)}
+.sheet .kv .v{font-size:14px;line-height:1.5}
+.sheet .big{font-size:30px;font-weight:780;letter-spacing:-.5px;color:var(--accent-deep);margin:2px 0 2px}
+.sheet .note{font-size:12.5px;color:var(--ink-soft);font-style:italic;line-height:1.5}
+.sheet .callout{border-left:3px solid var(--danger);background:var(--danger-tint);padding:10px 14px;border-radius:0 12px 12px 0;font-size:13.5px;line-height:1.5;margin:4px 0 12px;color:#7d211a}
+.sheet .callout.warn{border-color:var(--warn);background:#fbf1e4;color:#7a4a16}
+.sheet .img-slot{width:100%;aspect-ratio:16/10;border-radius:14px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-soft);font-size:12.5px;font-weight:600;margin:4px 0 14px;text-align:center;padding:0;overflow:hidden}
+.sheet .img-slot img{width:100%;height:100%;object-fit:contain;display:block;background:#fff}
+.sheet .qr-wrap{display:flex;justify-content:center;margin:6px 0 14px}
+.sheet .qr-wrap img{width:220px;height:220px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:12px}
+.sheet a.calc-link{color:var(--accent-deep);font-weight:700;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.sheet .mergo{margin:8px 0 12px;border:1px solid var(--accent-2);border-radius:14px;background:var(--accent-tint);padding:14px}
+.sheet .mergo .mrow{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.sheet .mergo label{font-size:13.5px;font-weight:680;color:var(--accent-deep);flex:1;line-height:1.3}
+.sheet .mergo input{width:84px;flex:none;font-size:16px;font-weight:700;text-align:center;padding:8px;border:1px solid var(--accent-2);border-radius:10px;background:#fff;color:var(--ink);min-height:44px}
+.sheet .mergo .mout{margin-top:4px;padding:12px 14px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:14px;line-height:1.5}
+.sheet .mergo .mout .mvol{font-size:22px;font-weight:780;letter-spacing:-.5px;display:block;margin-bottom:4px}
+.sheet .mergo .mout.go{border-color:var(--danger);background:var(--danger-tint);color:#7d211a}
+.sheet .mergo .mout.go .mvol{color:var(--danger)}
+.sheet .mergo .mout.obs{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-tint),#fff)}
+.sheet .mergo .mout.obs .mvol{color:var(--accent-deep)}
+.sheet .mergo .mhint{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin:8px 0 0;line-height:1.45}
+
+svg{display:block}
+
+/* ============ tap-to-zoom lightbox ============ */
+.photo img,.img-slot img{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.93);display:none;place-items:center;touch-action:none;overscroll-behavior:contain;user-select:none}
+.lightbox.open{display:grid}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;will-change:transform;-webkit-user-drag:none;user-select:none;touch-action:none}
+.lightbox.zoomed img{cursor:grab}
+.lightbox.zoomed.panning img{cursor:grabbing}
+.lightbox-close{position:absolute;top:calc(10px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.16);color:#fff;font-size:28px;line-height:1;display:grid;place-items:center;cursor:pointer;z-index:1;-webkit-tap-highlight-color:transparent}
+.lightbox-close:active{background:rgba(255,255,255,.3)}
+.lightbox-hint{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:rgba(255,255,255,.7);font-size:12px;font-weight:600;letter-spacing:.3px;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div class="brand">Resus&nbsp;Thoracotomy <small>· ED Trauma</small></div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="pillrow" id="pillRow"><!-- pills injected --></div>
+
+  <div class="deck" id="deck"><!-- slides injected --></div>
+
+  <div class="nav">
+    <button id="prevBtn" aria-label="Previous">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button id="nextBtn" aria-label="Next">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <div class="scroll" id="toolScroll"><!-- tools injected --></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet">
+  <div class="grab"></div>
+  <div class="shead">
+    <div class="si" id="sheetIcon"></div>
+    <h3 id="sheetTitle"></h3>
+    <button class="x" id="sheetClose" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="scont" id="sheetBody"></div>
+</div>
+
+<script>
+/* ============ ICONS ============ */
+const I = {
+  pneumo:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><path d="M12 9c-3 0-5 2-5 6 0 3 1 6 5 6s5-3 5-6c0-4-2-6-5-6z"/></svg>',
+  hemo:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>',
+  bolt:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+  check:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+  ruler:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l13-13 5 5L8 21z"/><path d="M8 9l2 2M11 6l2 2M14 12l2 2"/></svg>',
+  list:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  drain:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10M8 3v4l-2 9a3 3 0 0 0 3 4h6a3 3 0 0 0 3-4l-2-9V3"/><path d="M6.5 14h11"/></svg>',
+  wrench:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.5 2.5-1.6-1.6 2.6-2.5z"/></svg>',
+  pull:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+  pill:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="4"/><path d="M12 8v8"/></svg>',
+  recycle:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4l3-5"/><path d="M4 14l3 5 3-1"/><path d="M17 5l2 3 3-1"/><path d="M14 4l3 1-1 3"/><path d="M10 20h7l-2-3"/></svg>',
+  camera:'<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.5"/></svg>',
+  qr:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M21 21v-4M14 21h3"/></svg>',
+  chev:'<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+  knife:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l7-7"/><path d="M10 14l8-9 3 2-9 9z"/></svg>',
+  blunt:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22M5 5l2.4 2.4M16.6 16.6L19 19M19 5l-2.4 2.4M7.4 16.6L5 19"/></svg>',
+  heart:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 6.6a4.8 4.8 0 0 0-8.8-2.4A4.8 4.8 0 0 0 3.2 6.6c0 4.6 8.8 11 8.8 11s8.8-6.4 8.8-11z"/></svg>',
+  flat:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20"/></svg>',
+  target:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>',
+  outward:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 9V3M9.5 5.5L12 3l2.5 2.5M12 15v6M9.5 18.5L12 21l2.5-2.5M9 12H3M5.5 9.5L3 12l2.5 2.5M15 12h6M18.5 9.5L21 12l-2.5 2.5"/></svg>',
+  anatomy:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M12 6.5c3 0 6.2 1 7.2 3.2M12 6.5c-3 0-6.2 1-7.2 3.2M12 11.2c3 0 6.2 1 7.2 3.2M12 11.2c-3 0-6.2 1-7.2 3.2M12 15.9c2.6 0 5.4.9 6.4 2.8M12 15.9c-2.6 0-5.4.9-6.4 2.8"/></svg>',
+  repair:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 6.6a4.8 4.8 0 0 0-8.8-2.4A4.8 4.8 0 0 0 3.2 6.6c0 4.6 8.8 11 8.8 11s2.4-1.7 4.8-4.2"/><path d="M16 16.5h6M19 13.5v6"/></svg>',
+  lungs:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v7"/><path d="M9 7c0 1.5-.5 2.5-1.8 3.6C5.4 12.3 4 13.7 4 17a3 3 0 0 0 4.6 2.5c.9-.6 1.4-1.6 1.4-2.7V9a2 2 0 0 0-1-2z"/><path d="M15 7c0 1.5.5 2.5 1.8 3.6C18.6 12.3 20 13.7 20 17a3 3 0 0 1-4.6 2.5c-.9-.6-1.4-1.6-1.4-2.7V9a2 2 0 0 1 1-2z"/></svg>'
+};
+
+/* ============ STEP DATA ============ */
+/* photoTag = which of your uploaded photos goes here */
+const STEPS = [
+  {
+    kind:'gate'
+  },
+  {
+    pill:'Before you start', danger:false,
+    title:'Set up — then breathe.',
+    photoTag:'PHOTO — ED thoracotomy tray', photoLabel:'Big table, full thoracotomy tray, bladed scalpels ready',
+    action:'Decompress both sides first, then open the tray and glove up.',
+    caption:'Before you ever cut the chest: bilateral finger/tube thoracostomy rules out a reversible tension pneumo. Everything else runs in parallel.',
+    more:[
+      '<b>Decompress first:</b> bilateral finger or tube thoracostomy — a tension pneumothorax is reversible obstructive shock you can fix without cracking the chest.',
+      '<b>Airway:</b> intubate.',
+      '<b>Access + product:</b> IV/IO, massive transfusion / whole blood, TXA.',
+      '<b>OG/NG tube:</b> place it now — it’s how you’ll tell the esophagus from the aorta when you cross-clamp.',
+      '<b>Tray:</b> bladed scalpels (×2), heavy Mayo scissors, Finochietto, Lebsche knife + mallet, toothed pickups, Satinsky clamps, needle driver (see ED Tray tool).',
+      '<b>You:</b> double glove, face + eye protection — knives and rib edges move fast in this field.'
+    ],
+    ref:'Hilsden — Knife Skills; EAST ED Thoracotomy guideline'
+  },
+  {
+    pill:'Step 1 · Position', danger:false,
+    title:'Arm up, scapula up.',
+    photoTag:'PHOTO — positioning', photoLabel:'Supine, left arm above head, towels under the left scapula',
+    action:'Supine, left arm up and behind the head. Towels under the left scapula. Confirm the OG tube is down.',
+    caption:'Raising the arm and bumping the scapula opens the interspaces and gives you room for the rib spreader.',
+    more:[
+      'Place several towels under the left scapula and raise the arm above the head — this exposes the anterolateral chest and makes room for the Finochietto.',
+      'Patient should already be intubated with an OG/NG tube in the esophagus.',
+      'For a female patient, elevate the breast to expose the 4th/5th interspace.'
+    ],
+    ref:'Live procedure narration — left anterolateral approach'
+  },
+  {
+    pill:'Step 2 · Incision', danger:false,
+    title:'Sternum to the bed.',
+    photoTag:'PHOTO — anterolateral incision', photoLabel:'4th/5th ICS incision, sternum to posterior axillary line',
+    action:'Left anterolateral incision at the 4th–5th intercostal space — from the sternum all the way to the posterior axillary line.',
+    caption:'One or two definitive cuts down to rib. Make it too long rather than too short — a stingy incision costs you time you don’t have.',
+    more:[
+      'Landmark: just below the nipple in men, the inframammary fold in women (elevate the breast).',
+      'The incision must run from the sternum past the posterior axillary line — anything less and you’ll be re-extending it to reach the heart and aorta.',
+      'Cut definitively: skin and muscle in one or two passes down to the ribs.'
+    ],
+    ref:'Live procedure narration; Hilsden — Knife Skills'
+  },
+  {
+    pill:'Step 3 · Intercostals', danger:true,
+    title:'Scissor the top of the rib.',
+    photoTag:'PHOTO — cutting intercostals', photoLabel:'Heavy Mayo scissors cutting muscle along the top of the rib',
+    action:'Open the intercostal muscles with heavy Mayo scissors — cut along the TOP of the lower rib.',
+    caption:'Staying on top of the rib keeps you off the neurovascular bundle that runs under the rib above.',
+    cue:'Cut along the top of the rib — the intercostal artery hugs the underside of the rib above.',
+    more:[
+      'After the scalpel is through skin and muscle, switch to heavy Mayo (or bandage) scissors.',
+      'Run the cut along the superior border of the rib to avoid the intercostal artery and nerve.',
+      'Extend the muscle cut the full length of your skin incision so the spreader seats fully.'
+    ],
+    ref:'Live procedure narration; ED Tray (Mayo scissors)'
+  },
+  {
+    pill:'Step 4 · Retractor', danger:true,
+    title:'Handle toward the bed.',
+    photoTag:'PHOTO — Finochietto placed', photoLabel:'Rib spreader in, ratchet bar/handle posterior (toward the bed)',
+    action:'Place the Finochietto retractor with the ratchet bar and handle POSTERIOR — toward the bed.',
+    caption:'Crank it open. Bar-posterior is non-negotiable: it’s the only way you can extend across to a clamshell if you need to.',
+    cue:'Ratchet bar to the bed. Wrong orientation blocks the clamshell extension.',
+    more:[
+      'Open the ribs by turning the ratchet handle — the chest wall is more mobile than it looks.',
+      '<b>Orientation matters:</b> handle posterior (toward the bed) so the wound can be extended across the sternum for a clamshell.',
+      'A backwards spreader is a classic ED mistake — you physically can’t open it against the bed.'
+    ],
+    ref:'ED Tray build (Finochietto orientation)'
+  },
+  {
+    pill:'Step 5 · Clamshell', danger:false,
+    title:'When in doubt, clamshell.',
+    photoTag:'PHOTO — clamshell extension', photoLabel:'Lebsche knife + mallet across the sternum; bilateral exposure',
+    action:'For the best exposure — and if you’re not doing these often — extend across the sternum to a clamshell.',
+    caption:'Lebsche knife under the sternum, two taps with the mallet, and you’re through. Far easier than working in the dark cave of an anterolateral-only window.',
+    more:[
+      'Recommended for less-experienced operators: the clamshell gives by far the biggest exposure.',
+      'Extend the incision across to the right side, divide the sternum with a Lebsche knife + mallet (or trauma shears).',
+      'Also the move for a right-chest injury or massive right hemothorax (put a chest tube on that side first). See the Clamshell tool.'
+    ],
+    ref:'ED Tray build; Hilsden — Knife Skills (clamshell)'
+  },
+  {
+    pill:'Step 6 · Pericardium', danger:true,
+    title:'Open it — dodge the phrenic.',
+    photoTag:'PHOTO — pericardiotomy', photoLabel:'Pericardium tented with toothed pickups, opened anterior + parallel to phrenic nerve',
+    action:'Get to the heart. Open the pericardium ANTERIOR and PARALLEL to the phrenic nerve, starting near the diaphragm.',
+    caption:'Tent it with toothed pickups, nick with a scalpel or scissors, then run the opening from apex to aortic root.',
+    cue:'Stay anterior and parallel to the phrenic nerve — don’t divide it.',
+    more:[
+      'Release the inferior pulmonary ligament / push the lung aside to reach the heart and (later) the aorta.',
+      'If tamponade has the sac tense and tight, a smooth forceps won’t grip — use toothed pickups and a scalpel nick, then extend with Mayo scissors.',
+      'Incise <b>anterior and parallel to the phrenic nerve</b>, beginning near the diaphragm to avoid the coronary vessels.',
+      'Extend apex → aortic root so you can deliver the heart.'
+    ],
+    ref:'Live procedure narration; Hilsden — Knife Skills'
+  },
+  {
+    pill:'Step 7 · Tamponade', danger:false,
+    title:'Deliver the heart.',
+    photoTag:'PHOTO — delivering the heart', photoLabel:'Pericardium folded back, clot evacuated, heart delivered',
+    action:'Fold the pericardium back, scoop out clot, and deliver the heart. Finger on any hole.',
+    caption:'This is the save you’re hoping for. Releasing a tamponade lets the heart fill and pump again — often the patient responds right here.',
+    more:[
+      'Obstructive shock from tamponade is the highest-yield reason to be in the chest — freeing the heart is the single most helpful thing you can do.',
+      'Evacuate clot from the pericardial sac and deliver the heart.',
+      'A hole in the heart is the next problem, not this one — a fingertip controls most wounds; definitive repair waits for the OR.'
+    ],
+    ref:'Hilsden — Knife Skills (obstructive shock)'
+  },
+  {
+    pill:'Step 8 · Massage', danger:false,
+    title:'Flat palms — no thumbs.',
+    photoTag:'PHOTO — internal cardiac massage', photoLabel:'Two flat hands compressing the heart (no thumbs through the wall)',
+    action:'If it’s not pumping, start internal cardiac massage with flat palms — two hands, or against the sternum.',
+    caption:'Squeeze with the palms, not the fingertips. A thumb or finger poked through the atrium just makes a new hole.',
+    more:[
+      'Use the <b>palms</b> of your hands and compress the heart between them, or against the sternum.',
+      'Keep the thumbs and fingertips off — they perforate the thin atrial wall.',
+      'Keep everything else running: product, TXA, ongoing perfusion.'
+    ],
+    ref:'Hilsden — Knife Skills (cardiac massage)'
+  },
+  {
+    pill:'Step 9 · Cross-clamp', danger:true,
+    title:'Clamp the aorta — not the esophagus.',
+    photoTag:'PHOTO — aortic cross-clamp', photoLabel:'Mediastinal pleura divided, DeBakey/Satinsky across the descending aorta',
+    action:'For persistent hypotension, cross-clamp the descending thoracic aorta. Divide the mediastinal pleura, then clamp.',
+    caption:'The aorta is the most posterior, leftward tube against the vertebral bodies. The OG tube tells you which tube is the esophagus.',
+    cue:'Feel the OG/NG tube (± a TEE probe) to be sure you’re not clamping the esophagus.',
+    more:[
+      'Divide the mediastinal pleura just above the vertebral bodies; the aorta sits most posterior and leftward.',
+      'Redirects what little blood is left to the brain and coronaries, gives the heart something to pump against, and controls hemorrhage below the diaphragm.',
+      'Distinguish it from the esophagus with the OG/NG tube (± a TEE probe) — both are clamp traps.',
+      'Use a DeBakey or Satinsky clamp, or blunt finger dissection to encircle the vessel.'
+    ],
+    ref:'Live procedure narration; Hilsden — Knife Skills'
+  },
+  {
+    pill:'Step 10 · Defib', danger:false,
+    title:'10–50 J, internal paddles.',
+    photoTag:'PHOTO — internal defibrillation', photoLabel:'Internal paddles applied directly to the heart',
+    action:'If the heart is in a shockable rhythm, defibrillate internally at low energy — 10–50 J.',
+    caption:'Internal paddles sit right on the heart, so the energy is a fraction of external dosing.',
+    more:[
+      'Internal defibrillation uses far less energy than transthoracic — start low (10–50 J).',
+      'Pair it with massage, aortic occlusion, and ongoing resuscitation — a shock alone rarely fixes an empty heart.'
+    ],
+    ref:'Hilsden — Knife Skills; data deep-dive'
+  },
+  {
+    pill:'Step 11 · To the OR', danger:false,
+    title:'Stop the bleeding, then move.',
+    photoTag:'PHOTO — hilar clamp / transfer to OR', photoLabel:'Pulmonary hilum clamped; team packaging for the OR',
+    action:'Control the source — hilar clamp for massive lung bleeding, finger/Foley on the cardiac wound — and if you get ROSC, go to the OR.',
+    caption:'Cracking the chest isn’t the end. The injury is still there: definitive repair happens in the OR with the resuscitation running the whole way.',
+    more:[
+      '<b>Lung:</b> clamp the pulmonary hilum for massive bleeding (or twist the hilum).',
+      '<b>Heart:</b> control the wound with a finger, Foley, or staples/sutures for transport — not a definitive repair in the bay.',
+      '<b>Clamshell:</b> if a blood pressure returns, the divided internal mammary arteries will bleed — clamp them.',
+      'ROSC → OR for definitive repair, with MTP/whole blood and TXA continuing.',
+      '<b>Provider safety:</b> sharp rib edges, scalpels, needlesticks — ~1 in 14 procedures has an occupational exposure. Mind the team and debrief after.'
+    ],
+    ref:'Live procedure narration; Hilsden — Knife Skills; data deep-dive (occupational exposure 7.2%)'
+  }
+];
+
+/* ============ TOOLS DATA ============ */
+const TOOLS = [
+  {id:'indic', icon:I.list, label:'Indications', title:'EAST Indications', render: indicTool},
+  {id:'tray', icon:I.ruler, label:'ED Tray', title:'ED Thoracotomy Tray', render: trayTool},
+  {id:'data', icon:I.pull, label:'Survival', title:'Survival & Futility Data', render: dataTool},
+  {id:'clam', icon:I.wrench, label:'Clamshell', title:'Clamshell Extension', render: clamTool},
+  {id:'anat', icon:I.anatomy, label:'Anatomy', title:'Surgical Anatomy', render: anatTool},
+  {id:'crossclamp', icon:I.target, label:'Cross Clamp Aorta', title:'Cross Clamp Aorta', render: crossClampTool},
+  {id:'repair', icon:I.repair, label:'Heart Repair', title:'Cardiac Wound Repair', render: heartTool},
+  {id:'hilum', icon:I.lungs, label:'Hilum', title:'Hilar Clamp / Twist', render: hilumTool},
+  {id:'defib', icon:I.bolt, label:'Defib', title:'Internal Defibrillation', render: defibTool},
+  {id:'share', icon:I.qr, label:'Share', title:'Share this guide', render: shareTool},
+];
+
+/* ============ RENDER STEPS ============ */
+const deck = document.getElementById('deck');
+function photoHTML(s){
+  const tag = `<span class="ph-tag">${s.photoTag||'Photo'}</span>`;
+  const fullFallback = `<div class="ph-fallback">${I.camera}<span class="ph-label">${s.photoLabel||'Add image'}</span></div>`;
+  const imgs = s.img ? (Array.isArray(s.img) ? s.img : [s.img]) : [];
+  if(imgs.length===0){
+    return `<div class="photo">${tag}${fullFallback}</div>`;
+  }
+  const alt=(s.photoLabel||s.photoTag||'').replace(/"/g,'');
+  // real photos: no overlay tag (it would cover the image); tag only labels placeholders
+  const cell = f => `<div class="photo">
+      <div class="ph-fallback">${I.camera}</div>
+      <img src="images/${f}" alt="${alt}" loading="lazy" onerror="this.remove()">
+    </div>`;
+  if(imgs.length===1){
+    return `<div class="photo">${fullFallback}
+      <img src="images/${imgs[0]}" alt="${alt}" loading="lazy" onerror="this.remove()">
+    </div>`;
+  }
+  if(imgs.length===2){
+    return `<div class="photo-row">${imgs.map(cell).join('')}</div>`;
+  }
+  // 3+ images → first full-width (hero), the rest in a row below
+  return `<div class="photo-stack">${cell(imgs[0])}<div class="photo-row">${imgs.slice(1).map(cell).join('')}</div></div>`;
+}
+function stepHTML(s){
+  const cue = s.cue ? `<div class="cue ${s.danger?'':'warn'}">⚠ ${s.cue}</div>` : '';
+  const more = s.more ? `<div class="more"><details><summary>More detail &amp; evidence ${I.chev}</summary>
+      <div class="body"><ul>${s.more.map(m=>`<li>${m}</li>`).join('')}</ul>
+      ${s.ref?`<div class="ref">${s.ref}</div>`:''}</div></details></div>` : '';
+  return `<div class="slide">
+    <div class="kicker"><span class="pill ${s.danger?'danger':''}">${s.pill}</span></div>
+    <h1 class="h1">${s.title}</h1>
+    ${photoHTML(s)}
+    <div class="action">${s.action}</div>
+    <p class="caption">${s.caption}</p>
+    ${cue}
+    ${more}
+  </div>`;
+}
+
+/* ---- Gate slide ---- */
+function gateHTML(){
+  return `<div class="slide gate" id="gateSlide">
+    <div class="kicker"><span class="pill danger">Start here</span></div>
+    <h1 class="h1">Should I open the chest?</h1>
+    <p class="lead">Traumatic arrest, patient pulseless. Three questions decide it — then confirm before you cut.</p>
+
+    <div class="qrow">1 · Mechanism</div>
+    <div class="opts">
+      <div class="opt" data-mech="pen"><div class="ic">${I.knife}</div>
+        <div><div class="tt">Penetrating</div><div class="ss">Stab, gunshot — a localized, repairable hole</div></div></div>
+      <div class="opt" data-mech="blunt"><div class="ic">${I.blunt}</div>
+        <div><div class="tt">Blunt</div><div class="ss">Crash, fall — widespread injury</div></div></div>
+    </div>
+
+    <div id="siteWrap" style="display:none">
+      <div class="qrow">2 · Injury site</div>
+      <div class="opts">
+        <div class="opt" data-site="thoracic"><div class="ic">${I.target}</div>
+          <div><div class="tt">Thoracic</div><div class="ss">Wound to the chest — “the box”</div></div></div>
+        <div class="opt" data-site="extra"><div class="ic">${I.outward}</div>
+          <div><div class="tt">Extra-thoracic</div><div class="ss">Neck, abdomen, limbs</div></div></div>
+      </div>
+    </div>
+
+    <div id="solWrap" style="display:none">
+      <div class="qrow">3 · Signs of life</div>
+      <div class="opts">
+        <div class="opt" data-sol="yes"><div class="ic">${I.heart}</div>
+          <div><div class="tt">Present</div><div class="ss">Any cardiac activity, pupil response, movement, or BP — even intermittent</div></div></div>
+        <div class="opt red" data-sol="no"><div class="ic">${I.flat}</div>
+          <div><div class="tt">Absent</div><div class="ss">No signs of life on arrival</div></div></div>
+      </div>
+    </div>
+
+    <div id="gateResult"></div>
+  </div>`;
+}
+
+/* Wire step images by slide index — a file simply appearing in images/ lights up its card.
+   All slots are empty placeholders for now; drop a matching rt-*.jpg into images/ to fill one. */
+const IMG_BY_INDEX = {
+  1:'rt-00-tray.png',          // Prep — ED thoracotomy tray        [ADDED]
+  2:'rt-01-position.png',      // Step 1 — positioning              [ADDED]
+  3:'rt-02-incision.png',      // Step 2 — anterolateral incision   [ADDED]
+  4:'rt-03-intercostals.png',  // Step 3 — cutting intercostals     [ADDED]
+  5:'rt-04-retractor.png',     // Step 4 — Finochietto placed       [ADDED]
+  6:'rt-05-clamshell.png',     // Step 5 — clamshell extension      [ADDED]
+  7:['rt-06-pericardium.png','rt-06-pericardium-2.png'], // Step 6 — pericardiotomy (illustration + photo)  [ADDED]
+  8:'rt-07-deliver-heart.jpg', // Step 7 — deliver the heart
+  9:'rt-08-massage.jpg',       // Step 8 — internal cardiac massage
+  10:'rt-09-crossclamp.png',   // Step 9 — aortic cross-clamp       [ADDED]
+  11:'rt-10-defib.png',        // Step 10 — internal defibrillation [ADDED]
+  12:'rt-11-to-or.jpg'         // Step 11 — control hemorrhage / OR
+};
+STEPS.forEach((s,i)=>{ if(IMG_BY_INDEX[i]) s.img=IMG_BY_INDEX[i]; });
+
+deck.innerHTML = STEPS.map(s=> s.kind==='gate' ? gateHTML() : stepHTML(s)).join('');
+
+/* ============ GATE LOGIC ============ */
+let mech=null, site=null, sol=null;
+function renderGateResult(){
+  const box = document.getElementById('gateResult');
+  const start = `<button class="startbtn" onclick="goTo(1)">Start the procedure →</button>`;
+  const confirm = `<div class="criteria">
+    <div class="crit stop"><span class="dot"></span><span><b>FAST:</b> no cardiac motion → 0% survival (100% NPV) → stop, it’s futile.</span></div>
+    <div class="crit no"><span class="dot"></span><span><b>Downtime:</b> CPR &gt;15 min (penetrating) or &gt;10 min (blunt) → don’t proceed.</span></div>
+    <div class="crit no"><span class="dot"></span><span><b>Peds, no signs of life:</b> 100% mortality — do not perform.</span></div>
+  </div>`;
+
+  // wait until the active branch is fully answered
+  if(!mech){ box.innerHTML=''; return; }
+  if(mech==='pen' && !site){ box.innerHTML=''; return; }
+  if(!sol){ box.innerHTML=''; return; }
+
+  let cls='go', verdict='', body='', east='';
+  if(mech==='pen' && site==='thoracic' && sol==='yes'){
+    verdict='Go — strongest indication.';
+    body='Penetrating thoracic injury with signs of life is exactly the patient this procedure was designed for. Survival climbs as high as <b>21.3%</b>.';
+    east='EAST PICO 1 — Strong recommendation';
+  } else if(mech==='pen' && site==='thoracic' && sol==='no'){
+    verdict='Reasonable — conditional.';
+    body='Penetrating thoracic injury without signs of life. Lower yield, but a reasonable attempt if downtime is short and FAST shows cardiac motion.';
+    east='EAST PICO 2 — Conditional recommendation';
+  } else if(mech==='pen' && site==='extra' && sol==='yes'){
+    verdict='Consider — conditional.';
+    body='Penetrating extra-thoracic injury with signs of life. The chest isn’t the bleeding source, but aortic cross-clamping can buy time. Reasonable to proceed.';
+    east='EAST PICO 3 — Conditional recommendation';
+  } else if(mech==='pen' && site==='extra' && sol==='no'){
+    verdict='Consider — conditional.';
+    body='Penetrating extra-thoracic injury without signs of life. Low yield; proceed only with short downtime and cardiac motion on FAST.';
+    east='EAST PICO 4 — Conditional recommendation';
+  } else if(mech==='blunt' && sol==='yes'){
+    verdict='Low yield — conditional.';
+    body='Blunt injury with signs of life. Blunt arrest survival is only <b>~1.4%</b> — reasonable to attempt, but temper expectations and lean hard on FAST and downtime.';
+    east='EAST PICO 5 — Conditional recommendation';
+  } else if(mech==='blunt' && sol==='no'){
+    cls='stop';
+    verdict='Stop — don’t proceed.';
+    body='Blunt injury <b>without</b> signs of life is a non-survivable presentation. Guidelines recommend <b>against</b> thoracotomy here — recognize futility and protect the team.';
+    east='EAST PICO 6 — Conditional recommendation against';
+  }
+
+  const tail = cls==='go'
+    ? confirm + start
+    : `<p class="note" style="font-style:italic;color:var(--ink-soft);font-size:12.5px;margin-top:10px">A non-therapeutic thoracotomy consumes the team and exposes everyone to sharps. Recognizing a non-survivable injury — and pivoting those resources — is the right call.</p>`;
+
+  box.innerHTML = `<div class="result ${cls}">
+    <div class="verdict">${verdict}</div>
+    <p>${body}</p>
+    <div class="ref" style="margin:2px 0 0">${east}</div>
+    ${tail}</div>`;
+}
+document.getElementById('gateSlide').addEventListener('click',e=>{
+  const mo=e.target.closest('[data-mech]');
+  const sio=e.target.closest('[data-site]');
+  const so=e.target.closest('[data-sol]');
+  if(mo){
+    mech=mo.dataset.mech;
+    document.querySelectorAll('[data-mech]').forEach(x=>x.classList.toggle('sel',x===mo));
+    const pen = mech==='pen';
+    const siteWrap=document.getElementById('siteWrap');
+    siteWrap.style.display = pen ? 'block':'none';
+    if(!pen){ site=null; document.querySelectorAll('[data-site]').forEach(x=>x.classList.remove('sel')); }
+    document.getElementById('solWrap').style.display='block';
+    renderGateResult();
+  }
+  if(sio){
+    site=sio.dataset.site;
+    document.querySelectorAll('[data-site]').forEach(x=>x.classList.toggle('sel',x===sio));
+    renderGateResult();
+  }
+  if(so){
+    sol=so.dataset.sol;
+    document.querySelectorAll('[data-sol]').forEach(x=>x.classList.toggle('sel',x===so));
+    renderGateResult();
+  }
+});
+
+/* ============ DECK NAV + PILLS ============ */
+const slides=[...deck.children];
+const prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
+const count=document.getElementById('stepCount');
+const pillRow=document.getElementById('pillRow');
+const visited=new Set([0]);
+let idx=0;
+
+const pillLabel = i => {
+  if(i===0) return 'Gate';
+  if(i===1) return 'Prep';
+  const seg = (STEPS[i].pill || '').split('·')[1];   // "Step 5 · Blunt dissection" -> "Blunt dissection"
+  return seg ? seg.trim() : String(i-1);
+};
+pillRow.innerHTML = slides.map((_,i)=>{
+  const dng = STEPS[i] && STEPS[i].danger ? ' danger' : '';
+  return `<button class="npill${dng}" data-i="${i}">${pillLabel(i)}</button>`;
+}).join('');
+const pills=[...pillRow.children];
+pillRow.addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b)goTo(+b.dataset.i)});
+
+function setActive(i){
+  idx=i; visited.add(i);
+  count.textContent = i===0 ? 'Indication gate'
+    : i===1 ? 'Before you start'
+    : `Step ${i-1} / ${slides.length-2}`;
+  prevBtn.disabled = i===0;
+  nextBtn.disabled = i===slides.length-1;
+  pills.forEach((p,k)=>{
+    p.classList.toggle('current', k===i);
+    p.classList.toggle('visited', k!==i && visited.has(k));
+  });
+  if(pills[i]) pills[i].scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+}
+function update(){ setActive(Math.round(deck.scrollLeft/deck.clientWidth)); }
+function goTo(i){ deck.scrollTo({left:i*deck.clientWidth,behavior:'smooth'}); setActive(i); }
+window.goTo=goTo;
+prevBtn.onclick=()=>goTo(Math.max(0,idx-1));
+nextBtn.onclick=()=>goTo(Math.min(slides.length-1,idx+1));
+deck.addEventListener('scroll',()=>{clearTimeout(window._st);window._st=setTimeout(update,60)});
+window.addEventListener('resize',update);
+update();
+
+/* ============ TOOLBAR ============ */
+const toolScroll=document.getElementById('toolScroll');
+toolScroll.innerHTML = TOOLS.map(t=>`<button class="tool" data-tool="${t.id}">
+  <span class="tic">${t.icon}</span><span class="tl">${t.label}</span></button>`).join('');
+
+const scrim=document.getElementById('scrim'), sheet=document.getElementById('sheet');
+const sheetTitle=document.getElementById('sheetTitle'), sheetBody=document.getElementById('sheetBody'), sheetIcon=document.getElementById('sheetIcon');
+function openTool(id){
+  const t=TOOLS.find(x=>x.id===id); if(!t)return;
+  sheetTitle.textContent=t.title; sheetIcon.innerHTML=t.icon; sheetBody.innerHTML=t.render();
+  sheetBody.scrollTop=0;
+  scrim.classList.add('on'); sheet.classList.add('on');
+}
+function closeTool(){scrim.classList.remove('on');sheet.classList.remove('on')}
+toolScroll.addEventListener('click',e=>{const b=e.target.closest('[data-tool]');if(b)openTool(b.dataset.tool)});
+scrim.addEventListener('click',closeTool);
+document.getElementById('sheetClose').addEventListener('click',closeTool);
+
+/* ============ TOOL CONTENT ============ */
+function indicTool(){return `
+  <p>Every candidate presents <b>pulseless</b> in traumatic arrest. “Signs of life” = any cardiac electrical activity, pupillary response, spontaneous movement, or measurable BP — even intermittent.</p>
+  <div class="callout">No cardiac motion on FAST → 0% survival (100% NPV). Stop — it’s futile.</div>
+  <h4>EAST recommendations (Figure 7)</h4>
+  <div class="kv"><span class="k">PICO 1</span><span class="v"><b>Penetrating thoracic, signs of life</b> → strongly recommend. <b>Strong.</b></span></div>
+  <div class="kv"><span class="k">PICO 2</span><span class="v">Penetrating thoracic, no signs of life → recommend. Conditional.</span></div>
+  <div class="kv"><span class="k">PICO 3</span><span class="v">Penetrating extra-thoracic, signs of life → recommend. Conditional.</span></div>
+  <div class="kv"><span class="k">PICO 4</span><span class="v">Penetrating extra-thoracic, no signs of life → recommend. Conditional.</span></div>
+  <div class="kv"><span class="k">PICO 5</span><span class="v">Blunt, signs of life → recommend. Conditional.</span></div>
+  <div class="kv"><span class="k">PICO 6</span><span class="v">Blunt, no signs of life → recommend <b>against</b>. Conditional.</span></div>
+  <h4>Time limits</h4>
+  <ul>
+    <li><b>Penetrating:</b> CPR &gt;15 min before the procedure → likely futile.</li>
+    <li><b>Blunt:</b> CPR &gt;10 min → likely futile.</li>
+    <li><b>Pediatrics, no signs of life:</b> 100% mortality — do not perform.</li>
+  </ul>
+  <p class="note">EAST Practice Management Guideline — Resuscitative Emergency Department Thoracotomy (Seamon et al., J Trauma Acute Care Surg 2015).</p>`;}
+
+function trayTool(){return `
+  <p>An abbreviated, ED-specific tray. Keep it alongside the full surgical set — the surgeon may want more.</p>
+  <h4>Cut & open</h4>
+  <ul>
+    <li><b>Scalpels ×2</b> with blades already mounted (not bare handles) — taped on or sterilized pre-loaded.</li>
+    <li><b>Heavy Mayo scissors</b> (curved + straight) — cut the intercostals along the top of the rib.</li>
+    <li><b>Lebsche knife + mallet</b> — split the sternum for a clamshell (trauma shears also work).</li>
+  </ul>
+  <h4>Expose</h4>
+  <ul>
+    <li><b>Finochietto rib spreader</b> — ratchet bar / handle posterior (toward the bed) so you can extend to a clamshell.</li>
+  </ul>
+  <h4>Heart & vessels</h4>
+  <ul>
+    <li><b>Toothed pickups ×2</b> — a tense pericardium won’t grip in smooth forceps (and they hit the floor).</li>
+    <li><b>Metzenbaum scissors</b> — open the pericardium / inferior pulmonary ligament.</li>
+    <li><b>Satinsky side-biting vascular clamps ×2</b> — aorta or pulmonary hilum without crushing the vessel.</li>
+    <li><b>Standard clamps ×4</b> (curved/straight) — internal mammaries, contralateral chest tube.</li>
+    <li><b>Needle driver</b> with corrugated jaws for large needles.</li>
+  </ul>
+  <div class="callout warn">Know your clamps: a <b>Satinsky</b> is safe on a vessel (side-biting, curved). A long <b>Kelly</b> on the aorta does damage — if it isn’t obviously a vascular clamp, don’t put it on a vessel.</div>
+  <p class="note">EM-specific tray build (shock-trauma / Elmhurst pattern).</p>`;}
+
+function dataTool(){return `
+  <h4>Overall survival</h4>
+  <div class="big">7.4%</div>
+  <p class="note">Pooled across ~4,600 cases over 25 years. Low yield — but meaningful when it works.</p>
+  <h4>By mechanism</h4>
+  <div class="kv"><span class="k">Penetrating</span><span class="v">8.8% survival</span></div>
+  <div class="kv"><span class="k">Blunt</span><span class="v">1.4% survival (≈6× worse)</span></div>
+  <div class="kv"><span class="k">Stab</span><span class="v">16.8% — the most favorable</span></div>
+  <div class="kv"><span class="k">Gunshot</span><span class="v">4.3%</span></div>
+  <div class="kv"><span class="k">Best case</span><span class="v">Up to 21.3% — penetrating chest + signs of life</span></div>
+  <h4>Quality of survival</h4>
+  <p><b>92.4%</b> of survivors had normal neurologic outcomes — discharged home, back to activities of daily living. A low chance of survival, but survive and you’ll likely be okay.</p>
+  <h4>Futility filters</h4>
+  <ul>
+    <li><b>FAST, no cardiac motion → 0% survival</b> (100% NPV). The single most powerful filter.</li>
+    <li>CPR &gt;15 min (penetrating) / &gt;10 min (blunt) → likely futile.</li>
+    <li>Pediatrics with no signs of life → 100% mortality.</li>
+  </ul>
+  <h4>Cost-effectiveness (per QALY)</h4>
+  <div class="kv"><span class="k">Penetrating</span><span class="v">≈ $16,000 — very cost-effective</span></div>
+  <div class="kv"><span class="k">Blunt</span><span class="v">≈ $163,000 — not cost-effective</span></div>
+  <h4>The team (second victims)</h4>
+  <ul>
+    <li>~40% of trauma surgeons report PTSD symptoms; 15% meet full diagnostic criteria.</li>
+    <li>~7.2% occupational exposure rate (~1 in 14 procedures) — scalpels, needlesticks, sharp rib edges.</li>
+  </ul>
+  <p class="note">Pooled ED thoracotomy review; EAST data synthesis.</p>`;}
+
+function clamTool(){return `
+  <p>When in doubt, go bilateral. The clamshell gives by far the best exposure — strongly favored for less-experienced operators.</p>
+  <h4>When</h4>
+  <ul>
+    <li>You want maximal exposure rather than working through a narrow anterolateral window.</li>
+    <li>Right-chest injury or massive right hemothorax (put a chest tube on that side first).</li>
+    <li>You need access to both pleural spaces / the great vessels.</li>
+  </ul>
+  <h4>How</h4>
+  <ul>
+    <li>Start from a left anterolateral thoracotomy with the <b>Finochietto handle posterior</b> (toward the bed).</li>
+    <li>Extend the incision across the sternum to a mirror-image incision on the right.</li>
+    <li>Divide the sternum with a <b>Lebsche knife + mallet</b> (two taps) — or trauma shears.</li>
+    <li>Place a spreader on each side, or one large one, and open the “clamshell.”</li>
+  </ul>
+  <h4>Through the sternum</h4>
+  <p>The sternum is the next structure to get through — you can use <b>heavy scissors</b>, <b>trauma shears</b>, a <b>Lebsche knife</b>, or a <b>Gigli saw</b>. The first two are much more familiar to the emergency physician and pretty effective.</p>
+  <p>You'll also be cutting through the <b>internal mammary (internal thoracic) arteries</b> when you do this — but you can deal with those <i>after</i> you've restored circulation.</p>
+  <div class="callout warn">If the patient regains a blood pressure, the divided <b>internal mammary arteries</b> will bleed briskly — clamp them.</div>
+  <p class="note">EM-specific tray build; Hilsden — Knife Skills.</p>`;}
+
+function anatTool(){return `
+  <div class="img-slot"><img src="images/rt-anatomy.png" alt="Thoracic surgical anatomy" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-anatomy.png for a labeled diagram'"></div>
+  <h4>Chest wall & interspace</h4>
+  <ul>
+    <li>Target the <b>4th–5th intercostal space</b> — just below the nipple in men, the inframammary fold in women.</li>
+    <li>The intercostal <b>neurovascular bundle (vein–artery–nerve)</b> runs in the costal groove on the <b>underside</b> of each rib. Cut along the <b>top of the lower rib</b> to stay off it.</li>
+    <li><b>Internal mammary (thoracic) arteries</b> run ~1–2 cm lateral to each sternal edge — divided in a clamshell, so clamp them if a BP returns.</li>
+  </ul>
+  <h4>Pericardium & phrenic nerve</h4>
+  <ul>
+    <li>The <b>phrenic nerve</b> runs craniocaudally along the lateral surface of the pericardium.</li>
+    <li>Open the pericardium <b>anterior and parallel to the phrenic</b>, caudal → cephalad, starting near the diaphragm — keeps you off the nerve and the coronary vessels.</li>
+    <li>The <b>right ventricle</b> is the most anterior chamber — the first thing you meet on delivering the heart.</li>
+  </ul>
+  <h4>Posterior mediastinum (cross-clamp)</h4>
+  <ul>
+    <li>The <b>descending thoracic aorta</b> is the most <b>posterior and leftward</b> tubular structure, lying against the vertebral bodies.</li>
+    <li>The <b>esophagus</b> sits <b>anterior and slightly medial</b> to the aorta — the OG/NG tube (± a TEE probe) lets you tell them apart.</li>
+    <li>Both are covered by <b>mediastinal pleura</b>, which you divide before encircling the aorta.</li>
+    <li>Release the <b>inferior pulmonary ligament</b> to mobilize the lung and reach the aorta.</li>
+  </ul>
+  <h4>Hilum</h4>
+  <ul>
+    <li>The <b>pulmonary hilum</b> (PA, pulmonary veins, bronchus) can be clamped or twisted to control massive lung hemorrhage.</li>
+  </ul>
+  <p class="note">Surface landmarks + mediastinal relationships per the live-procedure narration and standard thoracic anatomy.</p>`;}
+
+function crossClampTool(){return `
+  <div class="img-slot"><img src="images/rt-09-crossclamp.png" alt="Descending thoracic aortic cross-clamp" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-09-crossclamp.png'"></div>
+  <p><b>Goal:</b> temporary descending thoracic aortic occlusion during ED thoracotomy to preserve coronary/cerebral perfusion and reduce hemorrhage below the diaphragm while definitive control is being arranged.</p>
+  <div class="callout">Start the clock when the clamp goes on. Aim for complete removal or conversion/repositioning below the renal vessels within <b>30 minutes</b>.</div>
+  <h4>When to clamp</h4>
+  <ul>
+    <li>Traumatic arrest or profound hemorrhagic shock after the chest is open, especially with suspected abdominal, pelvic, neck, or extremity hemorrhage.</li>
+    <li>Persistent hypotension after tamponade relief, internal massage, transfusion, and control of visible chest bleeding.</li>
+    <li>No cardiac activity after a brief period of open cardiac massage and ATLS resuscitation, when aortic occlusion may improve coronary filling.</li>
+    <li><b>Do not clamp a normotensive patient</b>: afterload rises and cardiac performance can worsen.</li>
+  </ul>
+  <h4>Best tool</h4>
+  <ul>
+    <li><b>Satinsky vascular clamp:</b> atraumatic, curved, side-biting. Good ED tray choice for aorta or hilum.</li>
+    <li><b>DeBakey aortic clamp:</b> atraumatic vascular clamp, also appropriate.</li>
+    <li><b>Manual/finger occlusion:</b> acceptable temporary bridge if the vascular clamp is not immediately in hand.</li>
+    <li><b>Do not use a Kelly or generic hemostat</b> on the aorta. Crushing clamp equals vessel injury.</li>
+  </ul>
+  <h4>How to find it</h4>
+  <ol>
+    <li>Retract the left lung superior/anterior and release the inferior pulmonary ligament if needed.</li>
+    <li>Use the <b>OG/NG tube</b> or TEE probe to identify the esophagus. The esophagus is anterior/medial to the aorta.</li>
+    <li>Find the descending thoracic aorta: posterior, leftward, tubular, against the vertebral bodies.</li>
+    <li>Divide the mediastinal pleura over the aorta and bluntly free it from the esophagus anteriorly and prevertebral fascia posteriorly.</li>
+    <li>Clamp in an <b>intervertebral space</b> to reduce intercostal vessel injury. Ideal site: just above the diaphragm; acceptable site: below the left pulmonary hilum.</li>
+  </ol>
+  <h4>What the clamp buys</h4>
+  <ul>
+    <li>Redistributes limited central volume toward myocardium and brain.</li>
+    <li>Reduces subdiaphragmatic hemorrhage until the abdomen, pelvis, or extremity source can be controlled.</li>
+    <li>May improve coronary filling during open cardiac massage and resuscitation.</li>
+  </ul>
+  <h4>Clock and release</h4>
+  <ul>
+    <li><b>Target: 30 minutes or less.</b> Warm visceral and spinal ischemia rise fast distal to the clamp.</li>
+    <li>Move to the OR immediately after ROSC or salvage physiology. This is a bridge, not definitive hemorrhage control.</li>
+    <li>Expect reperfusion trouble when it comes off: acidosis, hyperkalemia, hypotension, and recurrent distal bleeding.</li>
+  </ul>
+  <h4>Failure traps</h4>
+  <ul>
+    <li>Clamping the esophagus with the aorta or clamping only the esophagus.</li>
+    <li>Incomplete clamp because the pleura was not opened enough.</li>
+    <li>Putting the clamp through intercostal vessels rather than an intervertebral space.</li>
+    <li>Leaving the clamp on while the team forgets the abdomen/pelvis/external hemorrhage source still needs control.</li>
+  </ul>
+  <p class="note">Sources: Western Trauma Association ERT algorithm and Note I; StatPearls Emergency Room Thoracotomy; Cothren Burlew et al. ED thoracotomy review.</p>`;}
+
+function heartTool(){return `
+  <div class="img-slot"><img src="images/rt-heart-repair.png" alt="Exposed heart with ventricular wound during repair" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-heart-repair.png'"></div>
+  <p>Once the pericardium is open and the heart delivered, <b>control the wound first, then repair</b>. Most ED losses here come from chasing the perfect stitch before the bleeding is controlled — temporize, then sew.</p>
+  <h4>1 · Temporary control</h4>
+  <ul>
+    <li><b>Finger / digital pressure</b> — a fingertip over the hole is the fastest control. Start here.</li>
+    <li><b>Foley catheter:</b> pass a 14–16 Fr Foley through the wound, inflate the balloon with <b>~10–15 mL saline</b>, and apply <b>gentle</b> traction to tamponade. <b>Clamp the catheter</b> so you don't bleed out the lumen — and it doubles as a port for rapid transfusion.</li>
+    <li><b>Skin staples:</b> a fast, evidence-supported temporizing option for ventricular lacerations — hemostasis comparable to suture and quicker in the ED; definitive repair later.</li>
+    <li><b>Satinsky (partial-occlusion) clamp:</b> best for thin-walled <b>atrial</b> and great-vessel wounds — clamp and oversew.</li>
+  </ul>
+  <div class="callout">Don't yank a Foley back out under tension — you'll enlarge the laceration. Inflate gently; over-inflation can tear a friable wound.</div>
+  <h4>2 · Definitive suture repair</h4>
+  <ul>
+    <li><b>Suture:</b> non-absorbable monofilament — <b>2-0 or 3-0 polypropylene (Prolene)</b> on a large needle for the ventricle; <b>3-0/4-0</b> for the thinner atrium.</li>
+    <li><b>Pledgets:</b> buttress ventricular repairs with <b>Teflon/pericardial pledgets</b> in a horizontal-mattress configuration — friable myocardium cheese-wires through unsupported stitches.</li>
+    <li><b>Near a coronary:</b> place <b>horizontal mattress sutures BENEATH the coronary artery</b> so you don't ligate it.</li>
+    <li>Throw each stitch while a finger controls the bleeding; tie just snug, not tight.</li>
+  </ul>
+  <h4>3 · The Foley afterward</h4>
+  <ul>
+    <li>Once sutures are placed around it and hemostasis looks secure, <b>deflate and remove</b> the Foley, then tie down the last suture.</li>
+    <li>Keep it clamped until removed. A staple/Foley temporary repair is fine for transport — definitive cardiorrhaphy belongs in the OR.</li>
+  </ul>
+  <p class="note">Emergency cardiorrhaphy — finger/Foley/skin-staple temporization, pledgeted 2-0/3-0 polypropylene, sutures placed beneath coronaries (ATLS; EAST; Hirshberg &amp; Mattox, <i>Top Knife</i>).</p>`;}
+
+function hilumTool(){return `
+  <p>Two ways to control a bleeding lung at its root — both occlude the pulmonary artery, veins, and bronchus together.</p>
+  <h4>When to do it</h4>
+  <ul>
+    <li><b>Exsanguinating hemorrhage</b> from a major pulmonary / hilar injury not controlled by packing or direct pressure.</li>
+    <li><b>Massive air embolism</b> (or high risk) from a deep lung laceration — occluding the hilum stops air tracking into the pulmonary veins and on to the coronaries/brain.</li>
+    <li>As a <b>damage-control</b> step to buy time before definitive repair (pneumonorrhaphy, wedge, lobectomy, or pneumonectomy in the OR).</li>
+    <li>Release the <b>inferior pulmonary ligament</b> first to mobilize the lung for either maneuver.</li>
+  </ul>
+  <h4>Hilar clamp</h4>
+  <div class="img-slot"><img src="images/rt-hilum-clamp.png" alt="Vascular clamp across the pulmonary hilum" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-hilum-clamp.png'"></div>
+  <ul>
+    <li>Apply a large <b>atraumatic vascular clamp</b> (Satinsky/aortic or long DeBakey) across the <b>entire hilum</b> — PA + pulmonary veins + bronchus.</li>
+    <li>More controlled and secure than the twist; preferred when you have the clamp and the exposure.</li>
+  </ul>
+  <h4>Hilar twist</h4>
+  <div class="img-slot"><img src="images/rt-hilar-twist.png" alt="Hilar twist — rotating the lung 180 degrees" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-hilar-twist.png'"></div>
+  <ul>
+    <li>No clamp needed and <b>faster</b>: divide the inferior pulmonary ligament, then <b>rotate the lung ~180°</b> — bring the lower lobe up and over so the hilum torses on itself, kinking the vessels and bronchus.</li>
+    <li>The move when a clamp isn't at hand or the hilum is hard to encircle.</li>
+  </ul>
+  <div class="callout">Occluding the whole hilum is a <b>functional pneumonectomy</b> — it dumps the entire right-heart output onto one lung and can precipitate <b>acute right-heart failure</b>. It's a salvage maneuver: control, then get to definitive repair fast.</div>
+  <p class="note">Hilar twist (Wilson maneuver); damage-control thoracic surgery — trauma surgical literature.</p>`;}
+
+function defibTool(){return `
+  <div class="img-slot"><img src="images/rt-10-defib.png" alt="Internal defibrillation paddles on the heart" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-10-defib.png'"></div>
+  <h4>Internal defibrillation</h4>
+  <div class="big">10–50 J</div>
+  <p class="note">Internal paddles sit directly on the myocardium, so the energy is a fraction of transthoracic dosing. Start low.</p>
+  <h4>How</h4>
+  <ul>
+    <li>Place the <b>internal paddles</b> on either side of the heart — one behind (over the LV), one in front (over the RV) — sandwiching the ventricles.</li>
+    <li>Saline-moistened pads if available; ensure good contact, charge, and <b>clear</b> before discharge.</li>
+    <li>Start at <b>10–20 J</b> and escalate toward <b>50 J</b> as needed.</li>
+  </ul>
+  <h4>Remember</h4>
+  <ul>
+    <li>A shock rarely restarts an <b>empty</b> heart — pair it with volume/product, internal cardiac massage, and aortic cross-clamping.</li>
+    <li>Fix the reversible cause first: relieve tamponade, control hemorrhage, restore the physiology.</li>
+  </ul>
+  <p class="note">Internal defibrillation energy per ATLS / trauma resuscitation references.</p>`;}
+
+function shareTool(){return `
+  <h4>Share with trusted colleagues</h4>
+  <p class="note">For licensed clinicians and trainees. Scan the code, or send the link.</p>
+  <div class="qr-wrap"><img src="images/rt-share-qr.png" alt="QR code linking to myMedKitt" onerror="this.closest('.qr-wrap').style.display='none'"></div>
+  <div class="kv"><span class="k">Link</span><span class="v"><a href="https://kittechsix-blip.github.io/mymedkitt/app.html#/tree/thoracotomy-procedure" target="_blank" rel="noopener">Open in myMedKitt</a></span></div>
+  <button class="startbtn" onclick="shareLink()">Share link</button>
+  <p class="note" style="margin-top:12px">Clinical decision-support reference — not a substitute for clinical judgment, supervision, or institutional protocol.</p>`;}
+
+function shareLink(){
+  const data={title:'Resuscitative Thoracotomy', text:'Bedside guide for ED resuscitative thoracotomy', url:'https://kittechsix-blip.github.io/mymedkitt/app.html#/tree/thoracotomy-procedure'};
+  if(navigator.share){ navigator.share(data).catch(()=>{}); }
+  else if(navigator.clipboard){ navigator.clipboard.writeText(data.url).then(()=>alert('Link copied: '+data.url)).catch(()=>{}); }
+  else { prompt('Copy this link:', data.url); }
+}
+window.shareLink=shareLink;
+
+/* ============ tap-to-zoom lightbox ============ */
+function initLightbox(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lbImg');
+  const lbClose=document.getElementById('lbClose');
+  if(!lb||!lbImg||!lbClose) return;
+  let scale=1, tx=0, ty=0;
+  const MIN=1, MAX=5;
+  // gesture state
+  let panning=false, startX=0, startY=0, baseTx=0, baseTy=0;
+  let pinchDist=0, pinchScale=1;
+
+  function apply(){
+    lbImg.style.transform='translate('+tx+'px,'+ty+'px) scale('+scale+')';
+    lb.classList.toggle('zoomed', scale>1.01);
+  }
+  function reset(){ scale=1; tx=0; ty=0; apply(); }
+  function clampScale(s){ return Math.max(MIN, Math.min(MAX, s)); }
+
+  function open(src, alt){
+    lbImg.src=src; lbImg.alt=alt||'';
+    reset();
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+    lbImg.src='';
+  }
+
+  // OPEN via event delegation: any img inside .photo or .img-slot, except the QR
+  document.addEventListener('click', function(e){
+    const img=e.target.closest && e.target.closest('.photo img, .img-slot img');
+    if(!img) return;
+    const src=img.getAttribute('src')||'';
+    if(/share-qr\.png$/i.test(src)) return; // skip QR codes
+    e.preventDefault();
+    open(src, img.getAttribute('alt'));
+  });
+
+  // CLOSE
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('open')) close(); });
+
+  // DESKTOP: wheel zoom toward cursor
+  lb.addEventListener('wheel', function(e){
+    if(!lb.classList.contains('open')) return;
+    e.preventDefault();
+    const prev=scale;
+    scale=clampScale(scale * (e.deltaY<0 ? 1.12 : 0.89));
+    const rect=lbImg.getBoundingClientRect();
+    const cx=e.clientX-(rect.left+rect.width/2);
+    const cy=e.clientY-(rect.top+rect.height/2);
+    const f=scale/prev;
+    tx=tx*f - cx*(f-1);
+    ty=ty*f - cy*(f-1);
+    if(scale<=1){ tx=0; ty=0; }
+    apply();
+  }, {passive:false});
+
+  // DESKTOP: double-click toggles 1x / 2.5x
+  lbImg.addEventListener('dblclick', function(e){
+    e.preventDefault();
+    if(scale>1.01){ reset(); }
+    else { scale=2.5; apply(); }
+  });
+
+  // DESKTOP: click-drag pan when zoomed
+  lbImg.addEventListener('mousedown', function(e){
+    if(scale<=1.01) return;
+    e.preventDefault();
+    panning=true; lb.classList.add('panning');
+    startX=e.clientX; startY=e.clientY; baseTx=tx; baseTy=ty;
+  });
+  window.addEventListener('mousemove', function(e){
+    if(!panning) return;
+    tx=baseTx+(e.clientX-startX); ty=baseTy+(e.clientY-startY); apply();
+  });
+  window.addEventListener('mouseup', function(){ panning=false; lb.classList.remove('panning'); });
+
+  // TOUCH: 1-finger pan (when zoomed), 2-finger pinch
+  lbImg.addEventListener('touchstart', function(e){
+    if(e.touches.length===1 && scale>1.01){
+      panning=true; lb.classList.add('panning');
+      startX=e.touches[0].clientX; startY=e.touches[0].clientY; baseTx=tx; baseTy=ty;
+    } else if(e.touches.length===2){
+      panning=false; lb.classList.remove('panning');
+      pinchDist=dist(e.touches); pinchScale=scale;
+    }
+  }, {passive:false});
+  lbImg.addEventListener('touchmove', function(e){
+    if(e.touches.length===2){
+      e.preventDefault();
+      const d=dist(e.touches);
+      if(pinchDist>0){ scale=clampScale(pinchScale * (d/pinchDist)); if(scale<=1){tx=0;ty=0;} apply(); }
+    } else if(panning && e.touches.length===1){
+      e.preventDefault();
+      tx=baseTx+(e.touches[0].clientX-startX); ty=baseTy+(e.touches[0].clientY-startY); apply();
+    }
+  }, {passive:false});
+  lbImg.addEventListener('touchend', function(e){
+    if(e.touches.length===0){ panning=false; lb.classList.remove('panning'); if(scale<=1.01) reset(); }
+  });
+  function dist(t){ const dx=t[0].clientX-t[1].clientX, dy=t[0].clientY-t[1].clientY; return Math.hypot(dx,dy); }
+}
+if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initLightbox); }
+else { initLightbox(); }
+
+/* ============ PWA: service worker ============ */
+// myMedKitt owns offline caching and updates for this integrated copy.
+if(false){
+  window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+  let _reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(_reloaded)return; _reloaded=true; location.reload();
+  });
+}
+</script>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Zoomed image">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+  <img id="lbImg" alt="">
+  <div class="lightbox-hint">Pinch or scroll to zoom · drag to pan · tap outside to close</div>
+</div>
+</body>
+</html>

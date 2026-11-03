@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#1E88E5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="A-Line">
+<title>Arterial Line — Placement, Setup & Troubleshooting</title>
+
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<style>
+:root{
+  /* Hospital-blue clinical palette — matches the diagram + icon set */
+  --bg:#F7FBFF;
+  --card:#ffffff;
+  --ink:#263238;
+  --ink-soft:#546E7A;
+  --line:#E1ECF4;
+  --accent:#42A5F5;
+  --accent-deep:#1E88E5;
+  --accent-tint:#E3F2FD;
+  --accent-2:#90CAF9;
+  --femoral:#5C6BC0;
+  --femoral-deep:#3949AB;
+  --femoral-tint:#E8EAF6;
+  --danger:#d2453b;       /* arterial red — waveforms & hard stops */
+  --danger-tint:#fbeae8;
+  --warn:#c9772a;
+  --warn-tint:#fbf1e4;
+  --ok:#1f9d6b;
+  --shadow:0 6px 24px rgba(38,50,56,.08);
+  --shadow-lg:0 16px 48px rgba(38,50,56,.16);
+  --shadow-card:0 2px 8px rgba(38,50,56,.06),0 0 1px rgba(38,50,56,.10);
+  --r:18px;
+  --r-xl:20px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+#app{height:100dvh;display:flex;flex-direction:column;max-width:520px;margin:0 auto;position:relative;background:var(--bg)}
+
+/* ---------- Top bar / progress ---------- */
+.topbar{
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 18px 6px;
+  display:flex;align-items:center;gap:12px;
+  background:rgba(247,251,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:6;
+}
+.brand{font-weight:740;font-size:15px;letter-spacing:.2px}
+.brand small{color:var(--accent-deep);font-weight:700}
+.step-count{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+/* tappable pill row — jump to any card */
+.pillrow{
+  display:flex;gap:8px;overflow-x:auto;padding:2px 14px 10px;
+  background:rgba(247,251,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  scrollbar-width:none;z-index:6;
+}
+.pillrow::-webkit-scrollbar{display:none}
+.npill{
+  flex:none;display:inline-flex;align-items:center;gap:5px;
+  padding:7px 13px;border-radius:99px;font-size:12.5px;font-weight:650;line-height:1;
+  white-space:nowrap;min-height:34px;cursor:pointer;border:1.5px solid transparent;
+  background:rgba(38,50,56,.05);color:var(--ink-soft);transition:all .2s ease;
+}
+.npill:active{transform:scale(.95)}
+.npill.current{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(66,165,245,.35)}
+.npill.visited{background:var(--accent-tint);color:var(--accent-deep);border-color:var(--accent-2)}
+.npill.danger.current{background:var(--danger);box-shadow:0 2px 8px rgba(210,69,59,.35)}
+
+/* ---------- Deck ---------- */
+.deck{
+  flex:1;display:flex;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.deck::-webkit-scrollbar{display:none}
+.slide{
+  min-width:100%;scroll-snap-align:center;scroll-snap-stop:always;
+  height:100%;overflow-y:auto;padding:4px 18px 140px;scrollbar-width:none;
+}
+.slide::-webkit-scrollbar{display:none}
+
+.kicker{display:flex;align-items:center;gap:8px;margin:2px 0 10px}
+.pill{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-tint);padding:5px 10px;border-radius:99px}
+.pill.danger{color:#9a261d;background:var(--danger-tint)}
+.h1{font-size:25px;font-weight:760;line-height:1.12;letter-spacing:-.3px;margin:0 0 14px}
+
+/* photo / diagram slot */
+.photo{
+  position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--r-xl);
+  background:radial-gradient(120% 120% at 30% 20%,#eef6ff 0%,#e3f0fb 60%,#d8e8f6 100%);
+  border:1px solid var(--line);box-shadow:var(--shadow-card);
+  overflow:hidden;
+}
+.photo img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block}
+/* authored vector diagram: show whole thing on white, natural aspect */
+.photo.diagram{aspect-ratio:auto;background:#fff;display:block}
+.photo.diagram img{position:static;width:100%;height:auto;object-fit:contain;display:block;padding:6px}
+.photo-stack{display:flex;flex-direction:column;gap:10px}
+.photo .ph-fallback{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-soft);text-align:center;padding:12px}
+.photo .ph-ic{width:38px;height:38px;opacity:.5}
+.photo .ph-label{font-size:12.5px;font-weight:600;max-width:80%;line-height:1.35}
+.photo .ph-tag{position:absolute;z-index:2;top:10px;left:10px;font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:rgba(66,165,245,.94);padding:4px 8px;border-radius:8px}
+.cap-fig{font-size:11.5px;color:var(--ink-soft);text-align:center;margin:7px 2px 0;line-height:1.4}
+
+/* action + caption */
+.action{font-size:20px;font-weight:720;line-height:1.25;letter-spacing:-.2px;margin:16px 2px 6px}
+.caption{font-size:14.5px;line-height:1.5;color:var(--ink-soft);margin:0 2px}
+.cue{display:inline-flex;align-items:center;gap:6px;margin:12px 2px 0;font-size:13px;font-weight:650;color:var(--danger);background:var(--danger-tint);padding:8px 12px;border-radius:12px}
+.cue.warn{color:var(--warn);background:var(--warn-tint)}
+
+/* accordion */
+.more{margin:16px 0 0;border-top:1px solid var(--line);padding-top:6px}
+.more details{border-radius:14px;overflow:hidden}
+.more summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;
+  padding:12px 2px;font-size:14px;font-weight:680;color:var(--accent-deep);
+}
+.more summary::-webkit-details-marker{display:none}
+.more summary .chev{margin-left:auto;transition:transform .25s;color:var(--accent)}
+.more details[open] summary .chev{transform:rotate(180deg)}
+.more .body{padding:2px 2px 8px;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.more ul{margin:4px 0 0;padding:0 0 0 18px}
+.more li{font-size:14px;line-height:1.6;color:var(--ink);margin:0 0 7px}
+.more li b{font-weight:680}
+.ref{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin-top:6px}
+
+/* on-card walkthrough (Setup) */
+.walk{margin:18px 0 0;border-top:1px solid var(--line);padding-top:14px}
+.walk .phase{font-size:11px;font-weight:740;letter-spacing:.5px;text-transform:uppercase;color:var(--accent-deep);margin:16px 2px 9px;display:flex;align-items:center;gap:8px}
+.walk .phase:first-child{margin-top:0}
+.walk .phase::before{content:'';flex:none;width:13px;height:13px;border-radius:5px;background:var(--accent-tint);box-shadow:inset 0 0 0 2px var(--accent)}
+.walk ol{margin:0;padding:0 0 0 22px}
+.walk li{font-size:14px;line-height:1.58;color:var(--ink);margin:0 0 10px}
+.walk li::marker{color:var(--accent-deep);font-weight:700}
+.walk li b{font-weight:700}
+
+/* nav arrows */
+.nav{position:absolute;bottom:calc(74px + var(--safe-bottom));left:0;right:0;display:flex;justify-content:space-between;padding:0 16px;pointer-events:none;z-index:5}
+.nav button{
+  pointer-events:auto;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
+  background:rgba(255,255,255,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:var(--shadow);display:grid;place-items:center;color:var(--accent-deep);cursor:pointer;
+  transition:transform .15s, opacity .2s;
+}
+.nav button:active{transform:scale(.92)}
+.nav button[disabled]{opacity:0;pointer-events:none}
+
+/* ---------- Indication gate ---------- */
+.gate{padding-top:8px}
+.gate .lead{font-size:15px;color:var(--ink-soft);line-height:1.5;margin:0 2px 12px}
+.gate .anchor{font-size:12.5px;line-height:1.5;color:#7a4a16;background:var(--warn-tint);border-left:3px solid var(--warn);padding:9px 12px;border-radius:0 12px 12px 0;margin:0 2px 16px}
+.qrow{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-soft);margin:18px 2px 10px}
+.opts{display:grid;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:1px solid var(--line);
+  background:var(--card);box-shadow:var(--shadow);cursor:pointer;transition:transform .12s,border-color .15s;
+}
+.opt:active{transform:scale(.985)}
+.opt.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-tint),var(--shadow)}
+.opt .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--accent-tint);color:var(--accent-deep);flex:none}
+.opt.red .ic{background:var(--danger-tint);color:#9a261d}
+.opt .tt{font-size:16px;font-weight:700}
+.opt .ss{font-size:13px;color:var(--ink-soft);margin-top:2px;line-height:1.4}
+.result{margin-top:18px;border-radius:16px;padding:18px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);animation:fade .3s ease}
+.result.radial{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-tint),#fff)}
+.result.femoral{border-color:var(--femoral);background:linear-gradient(180deg,var(--femoral-tint),#fff)}
+.result.alt{border-color:var(--warn);background:linear-gradient(180deg,var(--warn-tint),#fff)}
+.result .verdict{font-size:18px;font-weight:760;margin:0 0 6px}
+.result.radial .verdict{color:var(--accent-deep)}
+.result.femoral .verdict{color:var(--femoral-deep)}
+.result.alt .verdict{color:#8a531c}
+.result p{font-size:14px;line-height:1.55;color:var(--ink);margin:0 0 6px}
+.startbtn{margin-top:14px;width:100%;border:0;border-radius:var(--r);padding:15px;font-size:16px;font-weight:720;color:#fff;
+  background:linear-gradient(180deg,#64B5F6 0%,#42A5F5 45%,#1E88E5 100%);
+  box-shadow:0 4px 12px rgba(66,165,245,.32),inset 0 1px 0 rgba(255,255,255,.25);
+  text-shadow:0 1px 2px rgba(0,0,0,.12);cursor:pointer;transition:all .15s ease}
+.startbtn:active{transform:translateY(1px);box-shadow:0 2px 6px rgba(66,165,245,.28),inset 0 1px 0 rgba(255,255,255,.2)}
+.criteria{margin-top:12px;display:grid;gap:8px}
+.crit{display:flex;gap:10px;font-size:13.5px;line-height:1.45;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.crit b{font-weight:720}
+.crit .dot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--ok)}
+.crit.no .dot{background:var(--ink-soft)}
+.crit.stop .dot{background:var(--danger)}
+
+/* ---------- Bottom toolbar ---------- */
+.toolbar{
+  position:absolute;left:0;right:0;bottom:0;z-index:8;
+  padding:8px 0 calc(8px + var(--safe-bottom));
+  background:rgba(255,255,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+}
+.toolbar .scroll{display:flex;gap:8px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+.toolbar .scroll::-webkit-scrollbar{display:none}
+.tool{
+  flex:none;display:flex;flex-direction:column;align-items:center;gap:5px;width:62px;padding:6px 2px;border:0;background:none;cursor:pointer;color:var(--ink-soft)}
+.tool .tic{width:42px;height:42px;border-radius:14px;background:var(--accent-tint);color:var(--accent-deep);display:grid;place-items:center;transition:transform .12s,background .15s}
+.tool:active .tic{transform:scale(.9)}
+.tool .tl{font-size:10.5px;font-weight:650;line-height:1.1;text-align:center}
+
+/* ---------- Sheet ---------- */
+.scrim{position:fixed;inset:0;background:rgba(13,28,34,.42);opacity:0;pointer-events:none;transition:opacity .28s;z-index:20}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:21;max-width:520px;margin:0 auto;
+  background:var(--card);border-radius:22px 22px 0 0;box-shadow:var(--shadow-lg);
+  transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);
+  max-height:86dvh;display:flex;flex-direction:column;
+}
+.sheet.on{transform:translateY(0)}
+.sheet .grab{width:38px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 4px}
+.sheet .shead{display:flex;align-items:center;gap:12px;padding:6px 20px 12px;border-bottom:1px solid var(--line)}
+.sheet .shead .si{width:40px;height:40px;border-radius:12px;background:var(--accent-tint);color:var(--accent-deep);display:grid;place-items:center;flex:none}
+.sheet .shead h3{margin:0;font-size:18px;font-weight:740}
+.sheet .shead .x{margin-left:auto;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--ink-soft);cursor:pointer}
+.sheet .scont{overflow-y:auto;padding:16px 20px calc(26px + var(--safe-bottom))}
+.sheet h4{font-size:14px;font-weight:740;margin:18px 0 8px;color:var(--accent-deep)}
+.sheet h4:first-child{margin-top:2px}
+.sheet p{font-size:14.5px;line-height:1.58;color:var(--ink);margin:0 0 10px}
+.sheet ul{margin:0 0 12px;padding-left:18px}
+.sheet li{font-size:14.5px;line-height:1.55;margin:0 0 7px}
+.sheet ol{margin:0 0 12px;padding-left:20px}
+.sheet ol li{font-size:14.5px;line-height:1.55;margin:0 0 7px}
+.sheet .kv{display:flex;gap:10px;align-items:baseline;padding:11px 13px;background:var(--bg);border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.sheet .kv .k{font-weight:740;font-size:14px;flex:none;min-width:84px;color:var(--accent-deep)}
+.sheet .kv .v{font-size:14px;line-height:1.5}
+.sheet .big{font-size:30px;font-weight:780;letter-spacing:-.5px;color:var(--accent-deep);margin:2px 0 2px}
+.sheet .note{font-size:12.5px;color:var(--ink-soft);font-style:italic;line-height:1.5}
+.sheet .callout{border-left:3px solid var(--danger);background:var(--danger-tint);padding:10px 14px;border-radius:0 12px 12px 0;font-size:13.5px;line-height:1.5;margin:4px 0 12px;color:#7d211a}
+.sheet .callout.warn{border-color:var(--warn);background:var(--warn-tint);color:#7a4a16}
+.sheet .callout.ok{border-color:var(--ok);background:#e7f6ef;color:#155e42}
+.sheet .img-slot{width:100%;border-radius:14px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-soft);font-size:12.5px;font-weight:600;margin:4px 0 6px;text-align:center;padding:0;overflow:hidden}
+.sheet .img-slot img{width:100%;height:auto;object-fit:contain;display:block;background:#fff}
+.sheet .img-cap{font-size:11.5px;color:var(--ink-soft);text-align:center;margin:0 0 14px;line-height:1.4}
+.sheet table.tbl{width:100%;border-collapse:collapse;margin:2px 0 12px;font-size:12.5px}
+.sheet table.tbl th,.sheet table.tbl td{border:1px solid var(--line);padding:7px 8px;text-align:left;line-height:1.35;vertical-align:top}
+.sheet table.tbl th{background:var(--accent-tint);color:var(--accent-deep);font-weight:700}
+.sheet table.tbl td b{font-weight:720}
+.sheet .qr-wrap{display:flex;justify-content:center;margin:6px 0 14px}
+.sheet .qr-wrap img{width:220px;height:220px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:12px}
+.sheet a.lnk{color:var(--accent-deep);font-weight:700;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+
+svg{display:block}
+
+/* ============ tap-to-zoom lightbox ============ */
+.photo img,.img-slot img{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.93);display:none;place-items:center;touch-action:none;overscroll-behavior:contain;user-select:none}
+.lightbox.open{display:grid}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;will-change:transform;-webkit-user-drag:none;user-select:none;touch-action:none;background:#fff;border-radius:8px}
+.lightbox.zoomed img{cursor:grab}
+.lightbox.zoomed.panning img{cursor:grabbing}
+.lightbox-close{position:absolute;top:calc(10px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.16);color:#fff;font-size:28px;line-height:1;display:grid;place-items:center;cursor:pointer;z-index:1;-webkit-tap-highlight-color:transparent}
+.lightbox-close:active{background:rgba(255,255,255,.3)}
+.lightbox-hint{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:rgba(255,255,255,.7);font-size:12px;font-weight:600;letter-spacing:.3px;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div class="brand">Arterial&nbsp;Line <small>· Place · Setup · Troubleshoot</small></div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="pillrow" id="pillRow"><!-- pills injected --></div>
+
+  <div class="deck" id="deck"><!-- slides injected --></div>
+
+  <div class="nav">
+    <button id="prevBtn" aria-label="Previous">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button id="nextBtn" aria-label="Next">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <div class="scroll" id="toolScroll"><!-- tools injected --></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet">
+  <div class="grab"></div>
+  <div class="shead">
+    <div class="si" id="sheetIcon"></div>
+    <h3 id="sheetTitle"></h3>
+    <button class="x" id="sheetClose" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="scont" id="sheetBody"></div>
+</div>
+
+<script>
+/* ============ ICONS ============ */
+const I = {
+  monitor:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M5 11h3l1.5-3 2 5 1.5-2h6"/><path d="M9 21h6M12 17v4"/></svg>',
+  drop:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>',
+  flat:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h6l1.5-3.5L12 16l2-4 1.5 0H22"/></svg>',
+  hand:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11V5.5a1.5 1.5 0 0 1 3 0V11M11 11V4.5a1.5 1.5 0 0 1 3 0V11M14 11V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-6 6h-1.2a5 5 0 0 1-3.8-1.8L4 16.2a1.6 1.6 0 0 1 2.4-2.1L8 15.8V8.5a1.5 1.5 0 0 1 3 0"/></svg>',
+  leg:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h7l-1 7-2 5-1 6H8l1-6 1-5z"/><path d="M9 3v0"/></svg>',
+  check:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+  ban:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>',
+  list:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  compare:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/></svg>',
+  kit:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M12 11v5M9.5 13.5h5"/></svg>',
+  probe:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2.5" width="8" height="9" rx="2"/><path d="M8.5 11.5L6 21M15.5 11.5L18 21M9.5 21h5"/><path d="M10 6h4"/></svg>',
+  gauge:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-5"/><circle cx="12" cy="18" r="1.4" fill="currentColor"/></svg>',
+  wave:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16h3l2-9 3 13 2.5-7 1.5 3h2.5a1.5 1.5 0 1 0 0 0H22"/></svg>',
+  square:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18h4V7h6v11h2l1.5-2 1 4 1.2-2H22"/></svg>',
+  wrench:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.5 2.5-1.6-1.6 2.6-2.5z"/></svg>',
+  alert:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.8L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>',
+  bandage:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="10" rx="5" transform="rotate(45 12 12)"/><path d="M10 10h.01M14 14h.01M10.5 13.5h.01M13.5 10.5h.01"/></svg>',
+  needle:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l5-5M7 17l-2-2 8-8 2 2zM13 5l3-3 5 5-3 3M14.5 9.5l-2-2"/></svg>',
+  level:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="9" width="19" height="6" rx="2"/><circle cx="12" cy="12" r="1.4"/><path d="M9 12h-.5M15 12h.5"/></svg>',
+  camera:'<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.5"/></svg>',
+  qr:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M21 21v-4M14 21h3"/></svg>',
+  chev:'<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'
+};
+
+/* ============ STEP DATA ============ */
+const STEPS = [
+  { kind:'gate' },
+  {
+    pill:'Before you start', danger:false,
+    title:'Build, prime, and zero the pressure system.',
+    svg:'transducer-system.svg', diagramAlt:'Arterial pressure-monitoring circuit',
+    photo:{file:'photo-pressure-bag.jpg', label:'PHOTO — primed flush bag in pressure bag at 300 mmHg'},
+    action:'Prime a bubble-free 300 mmHg system, then connect it, level it to the heart, and zero it to air.',
+    caption:'A primed, bubble-free, 300 mmHg system that is correctly leveled and zeroed is the only thing that makes the waveform — and the numbers — trustworthy.',
+    cue:'Evacuate the ~50 mL of air in a fresh saline bag BEFORE you pressurize. Under 300 mmHg that air is a lethal embolism load (~2 mL caused retrograde cerebral air in primates — Chang 1988).',
+    walkthrough:[
+      { phase:'A · Build & prime (off the patient)', steps:[
+        'Gather a <b>500 mL or 1 L normal-saline</b> flush bag, a transducer ("trans-pack") set, and a <b>pressure infuser bag</b>. Keep the set’s <b>yellow closed caps</b> — you need them at the end.',
+        'Open the set, remove the white paper packing tab, unfurl the tubing, and <b>hand-tighten every luer connection</b> — packing routinely loosens them, and a loose junction sprays fluid and entrains air.',
+        '<b>Aseptic from here.</b> Spike the saline bag.',
+        '<b>Evacuate the bag air first.</b> Invert the bag, squeeze the flush-actuator tab to open the line, and milk the ~50 mL of air up out of the bag into the tubing until only a few mL remain.',
+        'Drop the saline bag into the pressure infuser, inflate to <b>300 mmHg</b>, and lock it. 300 mmHg exceeds peak arterial pressure and drives the slow continuous flush. Hang it.',
+        '<b>Prime and de-air the whole line.</b> Squeeze the flush tab — fluid runs out under pressure through the first open stopcock port. A stopcock is <b>OFF toward the direction it points</b>; rotate it through each position in turn, flushing at every port, until <b>no bubbles remain anywhere</b>, including beneath each stopcock.',
+        '<b>Swap the caps.</b> The white priming caps are <b>vented (fenestrated)</b> so fluid escapes while you flush; once bubble-free, replace each with a <b>closed yellow cap</b>. Gloves on; mask if talking over the field.',
+        'A primed, capped system can be set aside and stays ready for <b>~12 hours</b>.'
+      ]},
+      { phase:'B · Connect, level, zero & configure (at the patient)', steps:[
+        'Remove the distal yellow cap and connect the tubing to the <b>arterial catheter hub</b> (or, for CVP, the appropriate central-line port). Flush, then secure (suture the a-line).',
+        '<b>Level to the phlebostatic axis</b> = 4th intercostal space, mid-axillary line (~nipple line; right-atrium / aortic-root level). It is the <b>stopcock air-fluid interface</b> that must sit at this level. In a moving ED patient, taping the transducer to the patient at that point is more reliable than a bedside pole.',
+        '<b>Open the transducer to air.</b> Turn the stopcock <b>OFF to the patient</b> and remove the cap so the open port reads atmosphere. <b>Verify orientation:</b> fluid should still trickle from the open port — if nothing comes out you turned it the wrong way; correct it.',
+        'Connect the transducer cable to the monitor (it clicks in like a phone jack; squeeze the tab to release). Select the correct pressure channel — pressing the wrong one only beeps, so it is safe to try.',
+        '<b>Zero on the monitor:</b> press zero, confirm the prompts (closed to patient ✓, leveled ✓), press zero again, and wait for "zero done." An unzeroed line carries a ~760 mmHg atmospheric offset.',
+        'Return the stopcock to the patient, replace the yellow cap, and keep the port sterile — you are now transducing.',
+        '<b>Set the label AND the scale.</b> Set the channel label (Arterial vs CVP); then set the <b>scale separately</b>, because most monitors don’t rescale on their own: <b>arterial ~120 (or 180 if hypertensive); CVP ~18</b>. Confirm a clean waveform and run a square-wave test (Damping tool).'
+      ]}
+    ],
+    more:[
+      '<b>Continuous flush ~1–3 mL/hr</b> (usually ~3) prevents catheter clotting — distinct from the fast-flush squeeze used for the square-wave test (30–60 mL/min).',
+      '<b>Tubing:</b> short, stiff, non-compliant, lumen ≥1.5 mm, ≤122 cm — preserves the natural frequency and dynamic response.',
+      'Saline 500 mL or 1 L; heparinized or plain are both acceptable.',
+      '<b>Leveling error ≈ 7.4 mmHg per 10 cm</b> — transducer below the axis reads falsely high, above reads falsely low.',
+      '<b>Seated / beach-chair:</b> level to the brain (tragus / external auditory meatus, Circle of Willis), not the chest.'
+    ],
+    ref:'Deranged Physiology Ch.757–758; LITFL — Pressure Transduction; Saugel 2020 (Crit Care).'
+  },
+  {
+    pill:'Step 1 · Position', danger:false,
+    title:'Find the artery, set the wrist.',
+    svg:'radial-anatomy.svg', diagramAlt:'Volar wrist anatomy — radial artery lateral to FCR tendon',
+    action:'Confirm the site (Site Selector), supinate the forearm, roll a towel under the wrist, and extend it 30–45°.',
+    caption:'Good positioning is half the procedure — expose and stabilize the artery before you ever uncap a needle.',
+    cue:'Do NOT hyper-dorsiflex the wrist — it compresses and occludes the radial artery (Roberts & Hedges).',
+    more:[
+      '<b>Radial:</b> supinate, towel/roll under the wrist, dorsiflex/extend ~30–45° (LITFL ~45°); tape the thumb down to fix the artery.',
+      'Target the puncture just proximal to the styloid / distal-radius crease, lateral to the flexor carpi radialis (FCR) tendon.',
+      '<b>Femoral:</b> puncture ~2.5 cm below the inguinal ligament at the mid-inguinal point — see the Femoral tool.',
+      'Palpate and mentally map the vessel course before prepping.'
+    ],
+    ref:'Roberts & Hedges (Medscape); StatPearls NBK499989; NYSORA.'
+  },
+  {
+    pill:'Step 2 · Prep & numb', danger:false,
+    title:'Sterile field, then a wheal.',
+    photo:{file:'photo-prep.jpg', label:'PHOTO — chlorhexidine prep + lidocaine skin wheal'},
+    action:'Chlorhexidine prep, full sterile barrier, then raise a 1–2 mL lidocaine wheal in awake patients.',
+    caption:'Numb the skin without spasming the artery — small wheal, plain lidocaine, give it a moment.',
+    cue:'Use 1% lidocaine WITHOUT epinephrine — epinephrine causes arterial vasospasm. Non-negotiable.',
+    more:[
+      'Prep with <b>2% chlorhexidine in 70% isopropyl alcohol</b>; allow ≥1 min dry time.',
+      'Maximal sterile barrier (cap, mask, sterile gown + gloves, full drape) for every site — CDC HICPAC.',
+      'Anesthetic: <b>1% lidocaine plain</b>, 3–5 mL syringe, 25–27 G needle, raise a 1–2 mL wheal over the entry point.',
+      'For ultrasound, apply a sterile probe cover and sterile gel now.'
+    ],
+    ref:'NYSORA; StatPearls; LITFL; CDC HICPAC 2011.'
+  },
+  {
+    pill:'Step 3 · Cannulate', danger:true,
+    title:'Enter, watch for flash, flatten.',
+    svg:'cannulation-sequence.svg', diagramAlt:'Four-step radial cannulation sequence',
+    photo:{file:'photo-flashback.jpg', label:'PHOTO — pulsatile flashback in the catheter hub'},
+    action:'Enter over the pulse at 30–45°, bevel up. At the flash, lower to ~10° and advance 1–3 mm before threading the catheter.',
+    caption:'Steady pen-grip, slow advance, react to the flash. The catheter only threads once the tip — not just the needle — is in the lumen.',
+    cue:'Flash means the NEEDLE TIP is in the lumen, not the catheter — drop the angle and nudge forward before you thread, or you will back-wall it.',
+    more:[
+      '<b>Insertion angle 30–45°</b> (StatPearls/Medscape). LITFL teaches a shallower 10–20° bevel-down approach — both are valid; pick one.',
+      'After flash, <b>drop to ~10°</b> and advance 1–3 mm (StatPearls 2–3 mm; LITFL 1–2 mm), then slide the catheter off the needle to the hub.',
+      '<b>No-flash salvage:</b> if you back-walled, withdraw slowly 1–2 cm to catch the lumen on the way out.',
+      '<b>Device matters (Armstrong 2023, EMA):</b> long 20 G cannula fails ~24% · integral-guidewire / modified-Seldinger ~17% · full Seldinger set ~7%. Favor a Seldinger kit for difficult sticks.',
+      'Two failed passes at a site → switch technique (ultrasound) or site.'
+    ],
+    ref:'StatPearls NBK499989; LITFL radial a-line; Armstrong 2023 (EMA); Roberts & Hedges.'
+  },
+  {
+    pill:'Step 4 · Ultrasound', danger:false,
+    title:'Weak pulse? Go to ultrasound.',
+    svg:'us-axes.svg', diagramAlt:'Ultrasound short-axis vs long-axis approach',
+    photo:{file:'photo-us-screen.jpg', label:'PHOTO — ultrasound screen, radial artery in short axis'},
+    action:'For a weak pulse, difficult habitus, or after a failed pass, switch to ultrasound and walk the needle tip down to the vessel.',
+    caption:'Dynamic needle-tip positioning beats palpation on first pass and slashes back-wall punctures.',
+    cue:'Keep the probe PROXIMAL to the entry point and lead the needle toward it — track the bright tip, not the shaft.',
+    more:[
+      'High-frequency <b>linear probe 5–13 MHz</b>; centre the vessel in the middle third of the screen.',
+      '<b>Artery vs vein:</b> artery is pulsatile, round, thick-walled, non-compressible; vein collapses with pressure.',
+      'Radial probe position: lateral arm ~3–4 cm proximal to the wrist crease; needle 30–45° bevel-up, then flatten and advance ~2 mm before threading.',
+      '<b>Evidence:</b> adult first-attempt RR <b>1.55 (95% CI 1.02–2.35)</b>; dynamic needle-tip first-pass 83–97.9%; back-wall puncture 5% (DNTP) vs 50% (static short-axis).',
+      'Distal (anatomic snuffbox) access is harder/slower than volar — first-attempt 57% vs 77% — don’t assume it’s easier.'
+    ],
+    ref:'Crit Care 2014 meta-analysis; Kiberenge 2017; Takeshita 2018; Maitra 2023; NYSORA.'
+  },
+  {
+    pill:'Step 5 · Confirm', danger:false,
+    title:'Pulsatile flow, then a waveform.',
+    svg:'normal-waveform.svg', diagramAlt:'Normal arterial pressure waveform with dicrotic notch',
+    action:'Advance the catheter fully to the hub and confirm: pulsatile bright-red backflow, then a clean arterial waveform once transduced.',
+    caption:'Bright pulsatile backflow plus a crisp upstroke and dicrotic notch on the monitor = you are in the artery.',
+    cue:'Pulsatile flow strongly suggests artery — but confirm with the monitor waveform before you commit and secure.',
+    more:[
+      'Seldinger: thread the soft-tip wire, then railroad the catheter over the wire and remove the wire.',
+      'Confirm intra-arterial position by pulsatile flow and the transduced waveform (next step).',
+      'Recognise the waveform parts: systolic upstroke → peak → <b>dicrotic notch</b> (aortic valve closure) → diastolic runoff.',
+      'No flow or no waveform after threading → reassess for kink, back-wall, vasospasm, or clot (see Troubleshooting).'
+    ],
+    ref:'LITFL; Deranged Physiology Ch.760; StatPearls.'
+  },
+  {
+    pill:'Step 6 · Transduce', danger:false,
+    title:'Close the circuit to the transducer.',
+    svg:'transducer-system.svg', diagramAlt:'Connecting the primed transducer to the catheter',
+    photo:{file:'photo-connection.jpg', label:'PHOTO — closed, bubble-free hub-to-transducer connection'},
+    action:'Attach the primed transducer tubing to the catheter hub, tighten all luer connections, and confirm the flush is running.',
+    caption:'A closed, bubble-free path from artery to transducer — every loose junction is a leak, a damping source, and an air-entry point.',
+    cue:'Re-check the hub and stopcocks for bubbles — the connection step is where air sneaks in.',
+    more:[
+      'Tighten every luer connection; <b>minimise stopcocks</b> — each one adds compliance and an air/clot risk.',
+      'Confirm the continuous flush is running (~3 mL/hr) and the pressure bag is still at 300 mmHg.',
+      'Keep the tubing short and supported so it can’t kink or drag on the catheter.'
+    ],
+    ref:'Deranged Physiology Ch.758; LITFL.'
+  },
+  {
+    pill:'Step 7 · Level & zero', danger:true,
+    title:'Level to the heart, zero to air.',
+    svg:'phlebostatic-axis.svg', diagramAlt:'Phlebostatic axis leveling and zeroing',
+    action:'Level the transducer to the phlebostatic axis, open the stopcock to atmosphere, and zero the monitor — then run a square-wave test.',
+    caption:'Leveling fixes accuracy; zeroing references the system to atmosphere. Skip either and every number is wrong.',
+    cue:'Every 10 cm the transducer sits off-axis = ~7.4 mmHg of error. Below the axis reads falsely high; above reads falsely low.',
+    more:[
+      '<b>Phlebostatic axis = 4th intercostal space, mid-axillary line</b> (right-atrium / aortic-root level).',
+      '<b>Zero</b> = open the stopcock to air so the monitor reads 0; if it is never opened to air the reading carries a ~760 mmHg (one-atmosphere) offset.',
+      '<b>Seated / beach-chair patient:</b> level to the brain — operationally the tragus / external auditory meatus (Circle of Willis).',
+      'Re-level and re-zero after any position change or any implausible reading.',
+      'Run a <b>square-wave / fast-flush test</b> now (see the Damping tool) before you trust the numbers.'
+    ],
+    ref:'Deranged Physiology Ch.758; LITFL; StatPearls.'
+  },
+  {
+    pill:'Step 8 · Secure', danger:false,
+    title:'Secure it, dress it, label it.',
+    photo:{file:'photo-dressing.jpg', label:'PHOTO — sutured catheter under a sterile CHG dressing, line labeled'},
+    action:'Suture or secure the catheter, apply a sterile (± chlorhexidine) dressing, label the line with the date, and document.',
+    caption:'A line that moves is a line that fails — and an unlabeled arterial line is a drug-injection trap. Secure well, label clearly.',
+    cue:'Clearly LABEL it as arterial — never inject into an arterial line. A CHG-impregnated dressing reduces catheter-related bloodstream infection.',
+    more:[
+      'Secure the catheter (suture or securement device) and anchor the tubing to prevent traction or dislodgement.',
+      'Sterile transparent dressing ± chlorhexidine disc; date the dressing.',
+      '<b>No routine scheduled replacement</b> — replace only for malfunction or infection (CDC HICPAC 2011).',
+      'Document site, gauge, attempts, ultrasound use, waveform quality, and time.'
+    ],
+    ref:'CDC HICPAC 2011; AACN; LITFL.'
+  }
+];
+
+/* ============ TOOLS DATA ============ */
+const TOOLS = [
+  {id:'indic',  icon:I.list,    label:'Indications', title:'Indications & Contraindications', render: indicTool},
+  {id:'sites',  icon:I.compare, label:'Site Select', title:'Site Selection & Comparison', render: sitesTool},
+  {id:'kit',    icon:I.kit,     label:'Kit',         title:'Equipment / Kit Checklist', render: kitTool},
+  {id:'allen',  icon:I.hand,    label:'Allen Test',  title:'Modified Allen Test', render: allenTool},
+  {id:'us',     icon:I.probe,   label:'Ultrasound',  title:'Ultrasound-Guided Technique', render: usTool},
+  {id:'trans',  icon:I.level,   label:'Transducer',  title:'Transducer: Level & Zero', render: transTool},
+  {id:'wave',   icon:I.wave,    label:'Waveform',    title:'Arterial Waveform Anatomy', render: waveTool},
+  {id:'damp',   icon:I.square,  label:'Damping',     title:'Square-Wave / Dynamic Response', render: dampTool},
+  {id:'trouble',icon:I.wrench,  label:'Troubleshoot',title:'Troubleshooting Algorithm', render: troubleTool},
+  {id:'comp',   icon:I.alert,   label:'Complications',title:'Complications & Management', render: compTool},
+  {id:'fem',    icon:I.leg,     label:'Femoral',     title:'Femoral Arterial Line', render: femTool},
+  {id:'remove', icon:I.bandage, label:'Removal',     title:'Removal & Aftercare', render: removeTool},
+  {id:'share',  icon:I.qr,      label:'Share',       title:'Share this guide', render: shareTool},
+];
+
+/* ============ RENDER STEPS ============ */
+const deck = document.getElementById('deck');
+function diagramCell(s){
+  const alt=(s.diagramAlt||s.title||'diagram').replace(/"/g,'');
+  return `<div class="photo diagram"><img src="images/${s.svg}" alt="${alt}" loading="lazy" onerror="this.closest('.photo').remove()"></div>`;
+}
+const bundledPhotoFiles = new Set(["phlebostatic-axis.svg", "us-axes.svg", "arterial-line-complications.svg", "share-qr.png", "allen-test.svg", "ppv-waveform.svg", "transducer-system.svg", "square-wave-test.svg", "femoral-anatomy.svg", "radial-anatomy.svg", "normal-waveform.svg", "cannulation-sequence.svg", "damping-compare.svg", "kit-types.svg"]);
+function photoCell(p){
+  const alt=(p.label||'').replace(/"/g,'');
+  return `<div class="photo">
+    <span class="ph-tag">Photo slot</span>
+    <div class="ph-fallback">${I.camera}<span class="ph-label">${p.label||'Add clinical photo'}</span></div>
+    ${bundledPhotoFiles.has(p.file) ? `<img src="images/${p.file}" alt="${alt}" loading="lazy" onerror="this.remove()">` : ""}
+  </div>`;
+}
+function photoHTML(s){
+  const blocks=[];
+  if(s.svg) blocks.push(diagramCell(s));
+  if(s.photo) blocks.push(photoCell(s.photo));
+  if(blocks.length===0) return '';
+  if(blocks.length===1) return blocks[0];
+  return `<div class="photo-stack">${blocks.join('')}</div>`;
+}
+function stepHTML(s){
+  const cue = s.cue ? `<div class="cue ${s.danger?'':'warn'}">⚠ ${s.cue}</div>` : '';
+  const walk = s.walkthrough ? `<div class="walk">${s.walkthrough.map(ph=>
+      `<div class="phase">${ph.phase}</div><ol>${ph.steps.map(t=>`<li>${t}</li>`).join('')}</ol>`).join('')}</div>` : '';
+  const more = s.more ? `<div class="more"><details><summary>More detail &amp; evidence ${I.chev}</summary>
+      <div class="body"><ul>${s.more.map(m=>`<li>${m}</li>`).join('')}</ul>
+      ${s.ref?`<div class="ref">${s.ref}</div>`:''}</div></details></div>` : '';
+  return `<div class="slide">
+    <div class="kicker"><span class="pill ${s.danger?'danger':''}">${s.pill}</span></div>
+    <h1 class="h1">${s.title}</h1>
+    ${photoHTML(s)}
+    <div class="action">${s.action}</div>
+    <p class="caption">${s.caption}</p>
+    ${cue}
+    ${walk}
+    ${more}
+  </div>`;
+}
+
+/* ---- Gate slide: SITE SELECTION ---- */
+function gateHTML(){
+  return `<div class="slide gate" id="gateSlide">
+    <div class="kicker"><span class="pill">Start here</span></div>
+    <h1 class="h1">Which artery, and is it the right call?</h1>
+    <p class="lead">Pick the site from the clinical context, the radial site, and the patient’s clotting. Then prep.</p>
+    <div class="anchor"><b>Reality check:</b> no RCT shows arterial lines improve outcomes (Gershengorn 2014; the vasopressor subgroup did worse). An a-line is monitoring/access — indicate it by need, not reflex.</div>
+
+    <div class="qrow">1 · Clinical context</div>
+    <div class="opts">
+      <div class="opt" data-ctx="stable"><div class="ic">${I.monitor}</div>
+        <div><div class="tt">Stable monitoring</div><div class="ss">Beat-to-beat BP, frequent ABGs, titrated drugs</div></div></div>
+      <div class="opt" data-ctx="shock"><div class="ic">${I.drop}</div>
+        <div><div class="tt">Shock / high-dose pressors</div><div class="ss">Profound hypotension, escalating vasopressors</div></div></div>
+      <div class="opt red" data-ctx="arrest"><div class="ic">${I.flat}</div>
+        <div><div class="tt">Cardiac arrest / CPR</div><div class="ss">Need diastolic / CPR-quality feedback</div></div></div>
+    </div>
+
+    <div id="radWrap" style="display:none">
+      <div class="qrow">2 · Radial site</div>
+      <div class="opts">
+        <div class="opt" data-rad="intact"><div class="ic">${I.hand}</div>
+          <div><div class="tt">Accessible</div><div class="ss">Palpable radial pulse, no infection/burn/prior harvest</div></div></div>
+        <div class="opt" data-rad="comp"><div class="ic">${I.ban}</div>
+          <div><div class="tt">Compromised</div><div class="ss">Weak/absent pulse, local infection, burn, or prior radial harvest</div></div></div>
+      </div>
+    </div>
+
+    <div id="coagWrap" style="display:none">
+      <div class="qrow">3 · Coagulopathy <span style="text-transform:none;font-weight:600;color:var(--ink-soft)">(INR &gt;3 / aPTT &gt;100s / plt &lt;50k)</span></div>
+      <div class="opts">
+        <div class="opt" data-coag="no"><div class="ic">${I.check}</div>
+          <div><div class="tt">No significant coagulopathy</div><div class="ss">Within relative thresholds</div></div></div>
+        <div class="opt" data-coag="yes"><div class="ic">${I.drop}</div>
+          <div><div class="tt">Coagulopathic</div><div class="ss">Favor a compressible site</div></div></div>
+      </div>
+    </div>
+
+    <div id="gateResult"></div>
+  </div>`;
+}
+
+deck.innerHTML = STEPS.map(s=> s.kind==='gate' ? gateHTML() : stepHTML(s)).join('');
+
+/* ============ GATE LOGIC ============ */
+let ctx=null, rad=null, coag=null;
+function renderGateResult(){
+  const box = document.getElementById('gateResult');
+  if(!ctx){ box.innerHTML=''; return; }
+  if(ctx!=='arrest' && !rad){ box.innerHTML=''; return; }
+  if(!coag){ box.innerHTML=''; return; }
+
+  let cls='radial', verdict='', body='', tagline='', crits=[];
+
+  if(ctx==='arrest'){
+    cls='femoral';
+    verdict='Femoral — intra-arrest.';
+    body='In arrest you want a <b>central diastolic pressure</b> to gauge coronary perfusion. The femoral artery reads closer to central and is reliably cannulated during CPR; radial is unreliable in low flow.';
+    tagline='Western Trauma / EMCrit — intra-arrest arterial monitoring';
+    crits=[
+      ['ok','<b>Diastolic targets:</b> 25 mmHg guideline floor · ~35 mmHg ROSC-prediction · EMCrit reference line 40 mmHg (MAP &lt;40 → keep doing CPR).'],
+      ['no','<b>Read the trough</b> just before the systolic upstroke for CPR diastolic; CPP goal &gt;20 mmHg, ETCO₂ &gt;20 adjunct.']
+    ];
+  } else if(ctx==='shock'){
+    if(rad==='intact'){
+      cls='radial';
+      verdict='Radial first — with ultrasound, watching the MAP.';
+      body='Reasonable to start radial (lowest serious-complication site), but on high-dose pressors the radial can <b>under-read</b>. Anchor decisions on <b>MAP</b>, and if radial MAP looks implausibly low versus clinical perfusion, switch to femoral.';
+      tagline='Femoral MAP averaged ~15 mmHg &gt; radial on high-dose norepinephrine (Dorman 1998)';
+      crits=[
+        ['no','<b>Radial typically equal-to-lower</b> than femoral (commonly ~3–15 mmHg lower on pressors). MAP is preserved best — trust MAP, not peripheral systolic.'],
+        ['no','Use ultrasound — weak pulse + shock is exactly where it raises first-pass success.']
+      ];
+    } else {
+      cls='femoral';
+      verdict='Femoral — radial is compromised.';
+      body='With shock and a compromised radial, go femoral: more central, more reliable in low flow, and the pressure advantage matters when you’re titrating pressors.';
+      tagline='FAUST: femoral US first-pass 82% vs 58.7% landmark';
+      crits=[
+        ['ok','Puncture ~2.5 cm below the inguinal ligament at the pulse; NAVEL — vein is medial to the artery.'],
+        ['no','See the Femoral tool for kit, depth, and the intra-arrest diastolic numbers.']
+      ];
+    }
+  } else { /* stable */
+    if(rad==='intact'){
+      cls='radial';
+      verdict='Radial — first choice.';
+      body='Stable patient, good radial: this is the default. <b>Lowest serious-complication site</b> — permanent ischemic damage 0.09%, sepsis 0.13% (Scheer 2002), and the most compressible.';
+      tagline='Radial first-line — Scheer 2002; StatPearls';
+      crits=[
+        ['ok','20 G over-needle (or a Seldinger kit if the stick looks difficult — lower failure rate).'],
+        ['no','An abnormal Allen test alone should NOT veto radial — it does not reliably predict ischemia (RADAR).']
+      ];
+    } else {
+      cls='alt';
+      verdict='Alternate — ultrasound-guided radial, else femoral.';
+      body='Radial is compromised but the patient is stable: try <b>ultrasound-guided radial</b> first (other wrist, or brachial), and fall back to femoral. Brachial, axillary, and dorsalis pedis are last-line.';
+      tagline='Brachial/axillary serious-complication <1% pooled, lower-volume evidence (Scheer)';
+      crits=[
+        ['no','<b>Brachial:</b> limited collateral (single forearm conduit). <b>Axillary:</b> non-compressible. <b>DP/PT:</b> large distal systolic amplification — use MAP.'],
+        ['no','Ultrasound strongly favored at any alternate site.']
+      ];
+    }
+  }
+
+  if(coag==='yes'){
+    crits.push(['stop','<b>Coagulopathic:</b> favor a compressible site — radial compresses best; femoral is compressible but hold ≥10 min; <b>avoid the non-compressible axillary</b>. Relative thresholds: INR &gt;3, aPTT &gt;100 s, plt &lt;50×10⁹/L.']);
+  }
+
+  const critHTML = crits.length ? `<div class="criteria">${crits.map(c=>`<div class="crit ${c[0]}"><span class="dot"></span><span>${c[1]}</span></div>`).join('')}</div>` : '';
+  const start = `<button class="startbtn" onclick="goTo(1)">Start the procedure →</button>`;
+
+  box.innerHTML = `<div class="result ${cls}">
+    <div class="verdict">${verdict}</div>
+    <p>${body}</p>
+    <div class="ref" style="margin:2px 0 0">${tagline}</div>
+    ${critHTML}
+    ${start}</div>`;
+}
+document.getElementById('gateSlide').addEventListener('click',e=>{
+  const co=e.target.closest('[data-ctx]');
+  const ro=e.target.closest('[data-rad]');
+  const go=e.target.closest('[data-coag]');
+  if(co){
+    ctx=co.dataset.ctx;
+    document.querySelectorAll('[data-ctx]').forEach(x=>x.classList.toggle('sel',x===co));
+    const needRad = ctx!=='arrest';
+    const radWrap=document.getElementById('radWrap');
+    radWrap.style.display = needRad ? 'block':'none';
+    if(!needRad){ rad=null; document.querySelectorAll('[data-rad]').forEach(x=>x.classList.remove('sel')); }
+    document.getElementById('coagWrap').style.display='block';
+    renderGateResult();
+  }
+  if(ro){
+    rad=ro.dataset.rad;
+    document.querySelectorAll('[data-rad]').forEach(x=>x.classList.toggle('sel',x===ro));
+    renderGateResult();
+  }
+  if(go){
+    coag=go.dataset.coag;
+    document.querySelectorAll('[data-coag]').forEach(x=>x.classList.toggle('sel',x===go));
+    renderGateResult();
+  }
+});
+
+/* ============ DECK NAV + PILLS ============ */
+const slides=[...deck.children];
+const prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
+const count=document.getElementById('stepCount');
+const pillRow=document.getElementById('pillRow');
+const visited=new Set([0]);
+let idx=0;
+
+const pillLabel = i => {
+  if(i===0) return 'Site';
+  if(i===1) return 'Setup';
+  const seg = (STEPS[i].pill || '').split('·')[1];
+  return seg ? seg.trim() : String(i-1);
+};
+pillRow.innerHTML = slides.map((_,i)=>{
+  const dng = STEPS[i] && STEPS[i].danger ? ' danger' : '';
+  return `<button class="npill${dng}" data-i="${i}">${pillLabel(i)}</button>`;
+}).join('');
+const pills=[...pillRow.children];
+pillRow.addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b)goTo(+b.dataset.i)});
+
+function setActive(i){
+  idx=i; visited.add(i);
+  count.textContent = i===0 ? 'Site selection'
+    : i===1 ? 'Before you start'
+    : `Step ${i-1} / ${slides.length-2}`;
+  prevBtn.disabled = i===0;
+  nextBtn.disabled = i===slides.length-1;
+  pills.forEach((p,k)=>{
+    p.classList.toggle('current', k===i);
+    p.classList.toggle('visited', k!==i && visited.has(k));
+  });
+  if(pills[i]) pills[i].scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+}
+function update(){ setActive(Math.round(deck.scrollLeft/deck.clientWidth)); }
+function goTo(i){ deck.scrollTo({left:i*deck.clientWidth,behavior:'smooth'}); setActive(i); }
+window.goTo=goTo;
+prevBtn.onclick=()=>goTo(Math.max(0,idx-1));
+nextBtn.onclick=()=>goTo(Math.min(slides.length-1,idx+1));
+deck.addEventListener('scroll',()=>{clearTimeout(window._st);window._st=setTimeout(update,60)});
+window.addEventListener('resize',update);
+update();
+
+/* ============ TOOLBAR ============ */
+const toolScroll=document.getElementById('toolScroll');
+toolScroll.innerHTML = TOOLS.map(t=>`<button class="tool" data-tool="${t.id}">
+  <span class="tic">${t.icon}</span><span class="tl">${t.label}</span></button>`).join('');
+
+const scrim=document.getElementById('scrim'), sheet=document.getElementById('sheet');
+const sheetTitle=document.getElementById('sheetTitle'), sheetBody=document.getElementById('sheetBody'), sheetIcon=document.getElementById('sheetIcon');
+function openTool(id){
+  const t=TOOLS.find(x=>x.id===id); if(!t)return;
+  sheetTitle.textContent=t.title; sheetIcon.innerHTML=t.icon; sheetBody.innerHTML=t.render();
+  sheetBody.scrollTop=0;
+  scrim.classList.add('on'); sheet.classList.add('on');
+}
+function closeTool(){scrim.classList.remove('on');sheet.classList.remove('on')}
+toolScroll.addEventListener('click',e=>{const b=e.target.closest('[data-tool]');if(b)openTool(b.dataset.tool)});
+scrim.addEventListener('click',closeTool);
+document.getElementById('sheetClose').addEventListener('click',closeTool);
+
+/* ============ TOOL CONTENT ============ */
+function imgSlot(file, alt, cap){
+  return `<div class="img-slot"><img src="images/${file}" alt="${(alt||'').replace(/"/g,'')}" loading="lazy" onerror="this.closest('.img-slot').outerHTML='<div class=&quot;note&quot;>Diagram unavailable</div>'"></div>${cap?`<div class="img-cap">${cap}</div>`:''}`;
+}
+
+function indicTool(){return `
+  <div class="callout warn">No RCT shows arterial lines improve outcomes. Gershengorn 2014 (13,603 propensity-matched pairs): no mortality benefit overall; the vasopressor subgroup had higher odds of death. Indicate by need, not reflex.</div>
+  <h4>Indications</h4>
+  <ul>
+    <li>Continuous beat-to-beat BP — shock, high-dose vasopressors, titrated antihypertensives.</li>
+    <li>Frequent ABGs / blood sampling.</li>
+    <li>Unreliable cuff — severe obesity (NIBP error often ~50 mmHg vs intra-arterial).</li>
+    <li>Hemodynamic instability; intra-arrest perfusion monitoring.</li>
+    <li>Fluid-responsiveness assessment (PPV / SVV).</li>
+  </ul>
+  <h4>Contraindications</h4>
+  <ul>
+    <li><b>Absolute (site):</b> local infection or burn over the site, absent pulse, planned vessel harvest, inadequate collateral (relative).</li>
+    <li><b>Relative (coagulopathy):</b> INR &gt;3.0, aPTT &gt;100 s, platelets &lt;50×10⁹/L — prefer a compressible site.</li>
+    <li>Severe peripheral vascular disease, Raynaud / Buerger, AV fistula in the limb, prior multiple cannulations.</li>
+  </ul>
+  <p class="note">StatPearls NBK499989; UpToDate via Deranged Physiology; Gershengorn 2014 (JAMA Intern Med).</p>`;}
+
+function sitesTool(){return `
+  <p>Radial is first-line; femoral is the workhorse in shock and arrest. Major complications are <b>&lt;1%</b> at all sites (Scheer 2002: 19,617 radial / 3,899 femoral / 1,989 axillary).</p>
+  <table class="tbl">
+    <tr><th>Site</th><th>Catheter</th><th>Serious ischemia</th><th>Sepsis</th><th>Compressible</th></tr>
+    <tr><td><b>Radial</b></td><td>20 G × 1.75 in (4.45 cm)</td><td>0.09%</td><td>0.13%</td><td>Yes (best)</td></tr>
+    <tr><td><b>Femoral</b></td><td>18–20 G, ≥15 cm</td><td>0.18%</td><td>0.44%</td><td>Yes (deep)</td></tr>
+    <tr><td><b>Axillary</b></td><td>—</td><td>&lt;1% pooled</td><td>—</td><td><b>No</b></td></tr>
+    <tr><td><b>Brachial</b></td><td>—</td><td>&lt;1% pooled</td><td>—</td><td>Partial</td></tr>
+    <tr><td><b>DP / PT</b></td><td>—</td><td>low</td><td>—</td><td>Yes</td></tr>
+  </table>
+  <h4>Choosing</h4>
+  <ul>
+    <li><b>Radial</b> — default; temporary occlusion is common (19.7%) but mostly asymptomatic.</li>
+    <li><b>Femoral</b> — shock, arrest, failed radial, need for central pressure. MAP ~15 mmHg &gt; radial on high-dose pressors (Dorman); pseudoaneurysm 0.3%.</li>
+    <li><b>Brachial</b> — single forearm conduit, limited collateral. <b>Axillary</b> — non-compressible; avoid in coagulopathy.</li>
+    <li><b>Dorsalis pedis / posterior tibial</b> — large distal systolic amplification (PT systolic ~25 mmHg &gt; brachial); trust MAP.</li>
+  </ul>
+  <div class="callout">On high-dose pressors the radial under-reads. Anchor on <b>MAP</b> (preserved aorta-vs-radial within ~0.8 mmHg, Pauca 1992), not peripheral systolic.</div>
+  <p class="note">Scheer 2002 (PMC137445); Dorman 1998; Kim 2013; Pauca 1992; StatPearls.</p>`;}
+
+function kitTool(){return `
+  ${imgSlot('kit-types.svg','Three arterial cannulation kit types','Catheter-over-needle vs modified-Seldinger vs integrated-guidewire')}
+  <h4>Radial</h4>
+  <ul>
+    <li><b>Over-needle:</b> 20 G × 1.75 in (4.45 cm) catheter over a 22 G introducer.</li>
+    <li><b>Seldinger / integrated-guidewire:</b> 20 G catheter + 22 G introducer + soft-tip wire (e.g. Arrow AK-04020). Lower failure rate on hard sticks.</li>
+  </ul>
+  <div class="callout warn">The Arrow QuickFlash radial family had an <b>FDA Class I recall (April 2024)</b> — verify your local stock.</div>
+  <h4>Femoral</h4>
+  <ul>
+    <li>Introducer needle 18 G × 3 in (7.6 cm); catheter 18–20 G, ≥15 cm; guidewire 45 cm, 0.64 mm (0.025 in), J-tip (e.g. Arrow UM-04018).</li>
+  </ul>
+  <h4>Pediatric</h4>
+  <ul><li>Infant / neonate 22–24 G angiocatheter — do NOT use the adult 20 G kit (wire too big for the vessel).</li></ul>
+  <h4>Shared</h4>
+  <ul>
+    <li><b>Anesthetic:</b> 1% lidocaine WITHOUT epi, 3–5 mL syringe, 25–27 G needle.</li>
+    <li><b>Ultrasound:</b> 5–13 MHz linear probe + sterile sleeve / gel.</li>
+    <li><b>Pressure system:</b> transducer, short stiff tubing (≤122 cm, lumen ≥1.5 mm), pressure bag, saline (500 mL / 1 L).</li>
+    <li><b>Prep:</b> 2% CHG / 70% alcohol, sterile drape / gown / gloves, CHG dressing, suture.</li>
+  </ul>
+  <p class="note">StatPearls; Roberts & Hedges (Medscape); Teleflex/Arrow catalog; FDA recall April 2024.</p>`;}
+
+function allenTool(){return `
+  ${imgSlot('allen-test.svg','Modified Allen test, three panels','Compress both → release ulnar → time the palmar flush')}
+  <h4>Technique</h4>
+  <p>Patient clenches the fist ~30 s; occlude radial AND ulnar; open the hand pale; release the <b>ulnar</b>; time the color return.</p>
+  <div class="kv"><span class="k">&lt;5 s</span><span class="v">Normal / adequate collateral</span></div>
+  <div class="kv"><span class="k">5–10 s</span><span class="v">Equivocal</span></div>
+  <div class="kv"><span class="k">&gt;10 s</span><span class="v">Inadequate / abnormal (up to ~15 s can be a normothermic variant)</span></div>
+  <h4>Test characteristics</h4>
+  <ul>
+    <li>Meta-analysis <b>sensitivity 93%</b> (not specificity); interobserver agreement 71.5% (Romeu-Bordas 2017).</li>
+    <li>Palmar arch complete: superficial ~80%, deep ~97%; incomplete arch ~3–25%.</li>
+    <li>Keep the 30 s <b>fist clench</b> separate from the 10–15 s <b>occlusion hold</b> — different parameters.</li>
+  </ul>
+  <div class="callout">RADAR (Valgimigli, JACC 2014): an abnormal Allen did <b>NOT</b> predict ischemia — 0 ischemic complications, no patient needed vascular surgery, thumb capillary lactate no different (p=0.59). An abnormal Allen alone should not categorically prohibit radial access.</div>
+  <p class="note">StatPearls NBK507816; Romeu-Bordas 2017; Valgimigli 2014 (RADAR).</p>`;}
+
+function usTool(){return `
+  ${imgSlot('us-axes.svg','Ultrasound short-axis vs long-axis','Out-of-plane (round vessel, tip as a dot) vs in-plane (longitudinal, full needle)')}
+  <h4>Setup</h4>
+  <ul>
+    <li>Linear probe <b>5–13 MHz</b>; vessel in the middle third of the screen.</li>
+    <li><b>Artery vs vein:</b> artery is pulsatile, round, thick-walled, non-compressible; vein collapses.</li>
+    <li>Sterile probe cover + sterile gel; probe <b>proximal</b> to the insertion point.</li>
+  </ul>
+  <h4>Technique</h4>
+  <ul>
+    <li><b>Dynamic needle-tip positioning (DNTP):</b> in short axis, track the bright tip and walk it down to the vessel.</li>
+    <li>Radial probe ~3–4 cm proximal to the wrist crease; needle 30–45° bevel-up, then flatten and advance ~2 mm before threading.</li>
+    <li>Long axis shows the whole shaft — fewer back-wall punctures but a narrower beam to stay in.</li>
+  </ul>
+  <h4>Evidence</h4>
+  <ul>
+    <li>Adult first-attempt <b>RR 1.55 (95% CI 1.02–2.35)</b> (Crit Care 2014). <i>(The 1.78 figure is pediatric / within-two-attempts — don’t conflate.)</i></li>
+    <li>DNTP first-pass 83–97.9%; DNTP vs palpation 83% vs 48% (p&lt;0.001); back-wall puncture 5% (DNTP) vs 50% (static short-axis).</li>
+    <li>Femoral US vs landmark (FAUST): first-pass 82.0% vs 58.7%.</li>
+    <li>Snuffbox is harder/slower than volar (57% vs 77% first-attempt).</li>
+  </ul>
+  <p class="note">Crit Care 2014; Kiberenge 2017; Takeshita 2018; FAUST; Maitra 2023; NYSORA.</p>`;}
+
+function transTool(){return `
+  ${imgSlot('phlebostatic-axis.svg','Phlebostatic axis and transducer leveling','4th ICS, mid-axillary line = right-atrium level')}
+  <h4>Level → Zero → Verify</h4>
+  <ol>
+    <li><b>Level</b> the transducer air-fluid interface to the <b>phlebostatic axis = 4th intercostal space, mid-axillary line</b> (right-atrium / aortic-root level).</li>
+    <li><b>Zero</b> — open the stopcock to atmosphere so the monitor reads 0, then close it. Uncorrected = ~760 mmHg offset.</li>
+    <li><b>Verify</b> with a square-wave test (see Damping) and cross-check against the cuff.</li>
+  </ol>
+  <div class="callout">Leveling error ≈ <b>7.4 mmHg per 10 cm</b> (~0.74 mmHg/cm). Transducer <b>below</b> the axis → falsely high; <b>above</b> → falsely low.</div>
+  <h4>Special positions</h4>
+  <ul>
+    <li><b>Seated / beach-chair:</b> level to the brain — tragus / external auditory meatus (Circle of Willis).</li>
+    <li><b>Supine radial reference</b> ≈ 5 cm below the sternum.</li>
+    <li>Re-level and re-zero after any position change or implausible reading.</li>
+  </ul>
+  <p class="note">Deranged Physiology Ch.758; LITFL — Pressure Transduction; StatPearls.</p>`;}
+
+function waveTool(){return `
+  ${imgSlot('normal-waveform.svg','Normal arterial pressure waveform','Upstroke → peak → dicrotic notch → runoff')}
+  <h4>Components</h4>
+  <ul>
+    <li>Systolic upstroke (anacrotic) → systolic peak → <b>dicrotic notch</b> (aortic valve closure) → diastolic runoff → end-diastole.</li>
+  </ul>
+  <h4>Distal amplification</h4>
+  <ul>
+    <li>Systolic rises peripherally (posterior tibial ~25 mmHg &gt; brachial) but <b>MAP is preserved</b> (aorta vs radial ~0.8 mmHg, mostly &lt;3 mmHg). → trust MAP at distal sites.</li>
+    <li>Radial upstroke ~60 ms later than aortic; the pressure wave travels 6–10 m/s.</li>
+  </ul>
+  ${imgSlot('ppv-waveform.svg','Pulse pressure variation during ventilation','Respiratory swing in pulse pressure = fluid responsiveness')}
+  <h4>Fluid responsiveness (advanced)</h4>
+  <ul>
+    <li><b>PPV &gt;~13%</b> predicts fluid responsiveness (&gt;10% = sensitive screen); grey zone 4–17% (inconclusive in ~62%).</li>
+    <li>Requires controlled ventilation, <b>TV ≥8 mL/kg PBW</b>, sinus rhythm, no spontaneous effort, driving pressure &gt;20 cmH₂O.</li>
+    <li>Responsiveness = SV/CO rise 10–15% after 500 mL over 10–15 min.</li>
+  </ul>
+  <p class="note">Pauca 1992; Murgo 1980; Michard 2000; Biais 2014; Deranged Physiology.</p>`;}
+
+function dampTool(){return `
+  ${imgSlot('square-wave-test.svg','Square-wave / fast-flush dynamic response test','Optimal vs overdamped vs underdamped')}
+  <h4>How</h4>
+  <p>Squeeze the fast-flush (delivers 30–60 mL/min), release sharply, and watch how the trace snaps back.</p>
+  <div class="kv"><span class="k">Optimal</span><span class="v"><b>1–2 oscillations</b> before returning to baseline (one overshoot + one undershoot).</span></div>
+  <div class="kv"><span class="k">Overdamped</span><span class="v">0–1 oscillation / sluggish return / lost dicrotic notch → <b>under</b>estimates systolic, <b>over</b>estimates diastolic.</span></div>
+  <div class="kv"><span class="k">Underdamped</span><span class="v">≥3 oscillations / artifactual spikes → <b>over</b>estimates systolic, <b>under</b>estimates diastolic.</span></div>
+  ${imgSlot('damping-compare.svg','Normal vs overdamped waveform','Crisp upstroke + dicrotic notch vs rounded, blunted trace')}
+  <div class="callout ok"><b>MAP is preserved</b> in both over- and under-damping — it is the single most trustworthy number off any a-line.</div>
+  <h4>The physics</h4>
+  <ul>
+    <li><b>Damping coefficient (ζ):</b> optimal 0.64 (acceptable 0.64–0.7; 0.707 never overshoots) · critical 1.0 · overdamped &gt;1.0 · underdamped ~0.03.</li>
+    <li><b>Natural frequency:</b> target ~30 Hz, minimum &gt;24 Hz to resolve the dicrotic notch; 50 ms between oscillation peaks = 20 Hz (too low). Real assembled systems run ~35–40 Hz.</li>
+  </ul>
+  <p class="note">Deranged Physiology; LITFL; REBEL EM; StatPearls.</p>`;}
+
+function troubleTool(){return `
+  <h4>After the square-wave test</h4>
+  <table class="tbl">
+    <tr><th></th><th>Overdamped</th><th>Underdamped</th></tr>
+    <tr><td><b>Square-wave</b></td><td>0–1 osc, sluggish</td><td>≥2–3 osc, spikes</td></tr>
+    <tr><td><b>Systolic</b></td><td>Under-estimated</td><td>Over-estimated</td></tr>
+    <tr><td><b>Diastolic</b></td><td>Over-estimated</td><td>Under-estimated</td></tr>
+    <tr><td><b>MAP</b></td><td>Preserved</td><td>Preserved</td></tr>
+    <tr><td><b>Causes</b></td><td>air bubbles, clot, kink, long/compliant tubing, loose connection, low flush pressure, vasospasm</td><td>excess stopcocks, catheter whip, tachycardia/hyperdynamic, defective transducer</td></tr>
+    <tr><td><b>Fix</b></td><td>flush, clear bubbles/clot, shorten/stiffen tubing, tighten connections, reposition limb</td><td>add a damping device / resonance filter, shorten tubing, remove excess stopcocks</td></tr>
+  </table>
+  <div class="callout">Cross-check: the a-line MAP should agree with the cuff MAP within <b>~10 mmHg</b>. That, plus the square-wave, is your best bedside sanity test.</div>
+  <h4>No waveform / no draw</h4>
+  <ol>
+    <li>Check monitor scale, transducer leveling/zeroing, and stopcock orientation.</li>
+    <li>Inspect for a kink at the hub or wrist — reposition the limb.</li>
+    <li>Aspirate gently (clot?); flush if it returns.</li>
+    <li>Confirm the pressure bag is still 300 mmHg and the flush is running 1–3 mL/hr.</li>
+    <li>Ultrasound / Doppler the catheter (insonation angle &lt;60° for clot).</li>
+    <li>Positional / too-short catheter: exchange over a micropuncture wire (4.45 cm → 12 cm).</li>
+    <li>Persistent failure → remove and re-site.</li>
+  </ol>
+  <div class="callout warn">Retrograde flush at 300 mmHg can push air centrally — purge all bubbles (~2 mL caused cerebral air in primates, Chang 1988).</div>
+  <p class="note">Deranged Physiology; LITFL; UMEM Pearls #4720.</p>`;}
+
+function compTool(){return `
+  ${imgSlot('arterial-line-complications.svg','Arterial line complications','Thrombosis · hematoma · pseudoaneurysm · distal ischemia')}
+  <h4>Vascular</h4>
+  <ul>
+    <li><b>Temporary radial occlusion 19.7%</b> (range 1.5–35%) — usually asymptomatic; recanalizes over ~1–3 months (~50% by 30 d).</li>
+    <li><b>Permanent ischemia:</b> radial 0.09%, femoral 0.18%. &lt;1% of occlusions need surgery.</li>
+    <li><b>Pseudoaneurysm:</b> radial 0.09%, femoral 0.3%. Also AV fistula, hematoma, distal digital ischemia.</li>
+  </ul>
+  <h4>Infection</h4>
+  <ul>
+    <li>Radial sepsis 0.13% / local 0.72%; femoral sepsis 0.44% / local 0.78%.</li>
+    <li>CRBSI ~3.4 / 1000 catheter-days (vs ~5.9 for CVCs). Infection risk inflects after 96 h; occlusion risk after 72 h.</li>
+  </ul>
+  <h4>Other</h4>
+  <ul>
+    <li><b>Retrograde air / cerebral embolism</b> — flush small volumes, never a high-pressure hand flush (~2 mL threshold, Chang 1988).</li>
+    <li><b>Accidental intra-arterial drug injection</b> — label the line; can cause severe distal ischemia.</li>
+    <li><b>Blood loss</b> from sampling — an a-line raises ICU blood loss (&gt;900 mL vs ~300 mL).</li>
+    <li><b>Hematoma:</b> hold pressure ~10 min or more.</li>
+  </ul>
+  <div class="callout">Red flags for ischemia: persistent distal pallor, pain, dusky/cool digits, absent capillary refill. Remove the line, warm the limb, reassess perfusion, and get vascular involved if it persists.</div>
+  <p class="note">Scheer 2002; Choi 2011; EMCrit/IBCC line infection; Chang 1988.</p>`;}
+
+function femTool(){return `
+  ${imgSlot('femoral-anatomy.svg','Right femoral anatomy below the inguinal ligament','NAVEL, lateral → medial: Nerve, Artery, Vein, Empty, Lymphatics')}
+  <h4>Anatomy</h4>
+  <ul>
+    <li><b>NAVEL (lateral → medial):</b> Nerve, Artery, Vein, Empty space, Lymphatics. The artery is medial to the nerve, lateral to the vein. Cannulate <b>at the pulse</b>; the vein is medial to it.</li>
+    <li>Artery at the <b>mid-inguinal point</b> (midpoint ASIS–pubic tubercle), just below the inguinal ligament, over the femoral head.</li>
+  </ul>
+  <h4>Technique</h4>
+  <ul>
+    <li>Puncture ~2.5 cm below the inguinal ligament (2–3 cm below, 3–4 cm lateral to the pubic tubercle); needle 30–45°; Seldinger.</li>
+    <li>Kit: 18 G × 3 in introducer; 18–20 G ≥15 cm catheter; 45 cm / 0.64 mm J-tip wire.</li>
+    <li>US vs landmark (FAUST): first-pass 82.0% vs 58.7%; complications ~1.4% vs ~3.4%.</li>
+  </ul>
+  <h4>Pressure in shock</h4>
+  <p>Femoral MAP ~15 mmHg &gt; radial on high-dose norepinephrine (Dorman); radial ~5 mmHg &lt; femoral in septic shock (Kim, wide CI). Prefer femoral when radial under-reads.</p>
+  <h4>Intra-arrest diastolic — three distinct numbers</h4>
+  <div class="kv"><span class="k">25 mmHg</span><span class="v">AHA/ERC guideline DBP floor to titrate to with invasive monitoring.</span></div>
+  <div class="kv"><span class="k">35 mmHg</span><span class="v">Retrospective ROSC-prediction threshold (Resuscitation 2024).</span></div>
+  <div class="kv"><span class="k">40 mmHg</span><span class="v">EMCrit visual reference line; if a-line MAP &lt;40 → resume/continue CPR.</span></div>
+  <p>Read the <b>trough just before the systolic upstroke</b> for CPR diastolic. CPP goal &gt;20 mmHg; ETCO₂ &gt;20 adjunct.</p>
+  <h4>Pediatric</h4>
+  <p>Infant/neonate 22–24 G angiocatheter (e.g. 24 G × 2.5 cm neonate, 22 G × 5 cm larger child); ultrasound essential.</p>
+  <p class="note">StatPearls; UCSF/BCEHS procedure refs; FAUST; Dorman 1998; Kim 2013; EMCrit dbp-cpr; Resuscitation 2024.</p>`;}
+
+function removeTool(){return `
+  <h4>Before removal</h4>
+  <ul>
+    <li>Institutional review (LHSC pattern, not CDC): notify MD if INR &gt;1.5 or platelets &lt;50,000.</li>
+    <li>Stop any infusions, gather gauze, and plan to hold pressure with bare fingers (not a clamp).</li>
+  </ul>
+  <h4>Compression</h4>
+  <ul>
+    <li>Radial: hold <b>≥5 min</b>; femoral <b>≥10 min</b>; plus <b>5 min beyond hemostasis</b>; longer if coagulopathic.</li>
+    <li>Post-removal monitoring (LHSC): q5min ×30 min → q30min ×2 → q1h ×4; immobilize the limb ×1 h.</li>
+  </ul>
+  <h4>Dwell & timing</h4>
+  <ul>
+    <li><b>No routine scheduled replacement</b> — remove only for malfunction or infection (CDC HICPAC 2011).</li>
+    <li><b>Dirty / crash line</b> placed without full sterility: remove within &lt;48 h (ideally ~24 h).</li>
+    <li>Inspect the site for hematoma, bleeding, or distal ischemia; document.</li>
+  </ul>
+  <p class="note">CDC HICPAC 2011; LHSC / AACN protocols; EMCrit/IBCC.</p>`;}
+
+function shareTool(){return `
+  <h4>Share with trusted colleagues</h4>
+  <p class="note">For licensed clinicians and trainees. Scan the code, or send the link.</p>
+  <div class="qr-wrap"><img src="images/share-qr.png" alt="QR code linking to the app" onerror="this.closest('.qr-wrap').style.display='none'"></div>
+  <div class="kv"><span class="k">Link</span><span class="v"><a class="lnk" href="https://kittechsix-blip.github.io/mymedkitt/app.html#/tree/arterial-line" target="_blank" rel="noopener">Open in myMedKitt</a></span></div>
+  <button class="startbtn" onclick="shareLink()">Share link</button>
+  <p class="note" style="margin-top:12px">Clinical decision-support reference — not a substitute for clinical judgment, supervision, or institutional protocol.</p>`;}
+
+function shareLink(){
+  const data={title:'Arterial Line', text:'Bedside guide to arterial line placement, setup & troubleshooting', url:'https://kittechsix-blip.github.io/mymedkitt/app.html#/tree/arterial-line'};
+  if(navigator.share){ navigator.share(data).catch(()=>{}); }
+  else if(navigator.clipboard){ navigator.clipboard.writeText(data.url).then(()=>alert('Link copied: '+data.url)).catch(()=>{}); }
+  else { prompt('Copy this link:', data.url); }
+}
+window.shareLink=shareLink;
+
+/* ============ tap-to-zoom lightbox ============ */
+function initLightbox(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lbImg');
+  const lbClose=document.getElementById('lbClose');
+  if(!lb||!lbImg||!lbClose) return;
+  let scale=1, tx=0, ty=0;
+  const MIN=1, MAX=5;
+  let panning=false, startX=0, startY=0, baseTx=0, baseTy=0;
+  let pinchDist=0, pinchScale=1;
+
+  function apply(){
+    lbImg.style.transform='translate('+tx+'px,'+ty+'px) scale('+scale+')';
+    lb.classList.toggle('zoomed', scale>1.01);
+  }
+  function reset(){ scale=1; tx=0; ty=0; apply(); }
+  function clampScale(s){ return Math.max(MIN, Math.min(MAX, s)); }
+
+  function open(src, alt){
+    lbImg.src=src; lbImg.alt=alt||'';
+    reset();
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+    lbImg.src='';
+  }
+
+  document.addEventListener('click', function(e){
+    const img=e.target.closest && e.target.closest('.photo img, .img-slot img');
+    if(!img) return;
+    const src=img.getAttribute('src')||'';
+    if(/share-qr\.png$/i.test(src)) return;
+    e.preventDefault();
+    open(src, img.getAttribute('alt'));
+  });
+
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('open')) close(); });
+
+  lb.addEventListener('wheel', function(e){
+    if(!lb.classList.contains('open')) return;
+    e.preventDefault();
+    const prev=scale;
+    scale=clampScale(scale * (e.deltaY<0 ? 1.12 : 0.89));
+    const rect=lbImg.getBoundingClientRect();
+    const cx=e.clientX-(rect.left+rect.width/2);
+    const cy=e.clientY-(rect.top+rect.height/2);
+    const f=scale/prev;
+    tx=tx*f - cx*(f-1);
+    ty=ty*f - cy*(f-1);
+    if(scale<=1){ tx=0; ty=0; }
+    apply();
+  }, {passive:false});
+
+  lbImg.addEventListener('dblclick', function(e){
+    e.preventDefault();
+    if(scale>1.01){ reset(); }
+    else { scale=2.5; apply(); }
+  });
+
+  lbImg.addEventListener('mousedown', function(e){
+    if(scale<=1.01) return;
+    e.preventDefault();
+    panning=true; lb.classList.add('panning');
+    startX=e.clientX; startY=e.clientY; baseTx=tx; baseTy=ty;
+  });
+  window.addEventListener('mousemove', function(e){
+    if(!panning) return;
+    tx=baseTx+(e.clientX-startX); ty=baseTy+(e.clientY-startY); apply();
+  });
+  window.addEventListener('mouseup', function(){ panning=false; lb.classList.remove('panning'); });
+
+  lbImg.addEventListener('touchstart', function(e){
+    if(e.touches.length===1 && scale>1.01){
+      panning=true; lb.classList.add('panning');
+      startX=e.touches[0].clientX; startY=e.touches[0].clientY; baseTx=tx; baseTy=ty;
+    } else if(e.touches.length===2){
+      panning=false; lb.classList.remove('panning');
+      pinchDist=dist(e.touches); pinchScale=scale;
+    }
+  }, {passive:false});
+  lbImg.addEventListener('touchmove', function(e){
+    if(e.touches.length===2){
+      e.preventDefault();
+      const d=dist(e.touches);
+      if(pinchDist>0){ scale=clampScale(pinchScale * (d/pinchDist)); if(scale<=1){tx=0;ty=0;} apply(); }
+    } else if(panning && e.touches.length===1){
+      e.preventDefault();
+      tx=baseTx+(e.touches[0].clientX-startX); ty=baseTy+(e.touches[0].clientY-startY); apply();
+    }
+  }, {passive:false});
+  lbImg.addEventListener('touchend', function(e){
+    if(e.touches.length===0){ panning=false; lb.classList.remove('panning'); if(scale<=1.01) reset(); }
+  });
+  function dist(t){ const dx=t[0].clientX-t[1].clientX, dy=t[0].clientY-t[1].clientY; return Math.hypot(dx,dy); }
+}
+if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initLightbox); }
+else { initLightbox(); }
+
+/* ============ PWA: service worker ============ */
+// myMedKitt owns offline caching and updates for this integrated copy.
+if(false){
+  window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+  let _reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(_reloaded)return; _reloaded=true; location.reload();
+  });
+}
+</script>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Zoomed image">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+  <img id="lbImg" alt="">
+  <div class="lightbox-hint">Pinch or scroll to zoom · drag to pan · tap outside to close</div>
+</div>
+</body>
+</html>

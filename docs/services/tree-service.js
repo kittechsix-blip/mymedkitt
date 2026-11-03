@@ -183,6 +183,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/traumatic-arrest.js');
             return { nodes: m.TRAUMATIC_ARREST_NODES, entryNodeId: 'ta-start', categoryId: 'trauma-surg', moduleLabels: m.TRAUMATIC_ARREST_MODULE_LABELS, citations: m.TRAUMATIC_ARREST_CITATIONS, criticalActions: m.TRAUMATIC_ARREST_CRITICAL_ACTIONS };
         },
+        'arterial-line': async () => {
+            const m = await import('../data/trees/arterial-line.js');
+            return { nodes: m.ARTERIAL_LINE_NODES, entryNodeId: 'aline-start', categoryId: 'procedures', moduleLabels: m.ARTERIAL_LINE_MODULE_LABELS, citations: m.ARTERIAL_LINE_CITATIONS };
+        },
         'thoracotomy-procedure': async () => {
             const m = await import('../data/trees/thoracotomy-procedure.js');
             return { nodes: m.THORACOTOMY_PROCEDURE_NODES, entryNodeId: 'thorac-start', categoryId: 'procedures', moduleLabels: m.THORACOTOMY_PROCEDURE_MODULE_LABELS, citations: m.THORACOTOMY_PROCEDURE_CITATIONS, criticalActions: m.THORACOTOMY_PROCEDURE_CRITICAL_ACTIONS };

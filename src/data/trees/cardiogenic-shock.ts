@@ -29,7 +29,7 @@ export const CARDIOGENIC_SHOCK_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Cardiogenic Shock',
-    body: '**Definition:** Inadequate tissue perfusion due to primary cardiac dysfunction.\n\n**The SHOCK Spiral (EMCrit):**\n> Hypotension → Coronary hypoperfusion → Worsening ischemia → Further pump failure → More hypotension\n\n**Key Concept:** Every minute in shock = myocardial damage. **Time is myocardium.**\n\n**Mortality:** 40-50% even with modern therapy. Early recognition and aggressive intervention are critical. [1][2]',
+    body: '[A-Line visual procedure](#/tree/arterial-line)\n\n**Definition:** Inadequate tissue perfusion due to primary cardiac dysfunction.\n\n**The SHOCK Spiral (EMCrit):**\n> Hypotension → Coronary hypoperfusion → Worsening ischemia → Further pump failure → More hypotension\n\n**Key Concept:** Every minute in shock = myocardial damage. **Time is myocardium.**\n\n**Mortality:** 40-50% even with modern therapy. Early recognition and aggressive intervention are critical. [1][2]',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'ecmo-scai-stages', label: 'SCAI Shock Stage' },

@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#42A5F5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ChestTube">
+<title>Chest Tube — Tube Thoracostomy</title>
+
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<style>
+:root{
+  /* Sterile Surgical Suite palette */
+  --bg:#F7FBFF;              /* ultra-light azure */
+  --card:#ffffff;
+  --ink:#263238;            /* dark slate */
+  --ink-soft:#546E7A;       /* slate-grey secondary */
+  --line:#E1ECF4;
+  --accent:#42A5F5;          /* hospital blue */
+  --accent-deep:#1E88E5;     /* pressed / deep blue */
+  --accent-tint:#E3F2FD;     /* azure tint */
+  --accent-2:#90CAF9;        /* secondary / interactive icons */
+  --danger:#d2453b;
+  --danger-tint:#fbeae8;
+  --warn:#c9772a;
+  --ok:#1f9d6b;
+  --shadow:0 6px 24px rgba(38,50,56,.08);
+  --shadow-lg:0 16px 48px rgba(38,50,56,.16);
+  --shadow-card:0 2px 8px rgba(38,50,56,.06),0 0 1px rgba(38,50,56,.10);
+  --r:18px;
+  --r-xl:20px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+#app{height:100dvh;display:flex;flex-direction:column;max-width:520px;margin:0 auto;position:relative;background:var(--bg)}
+
+/* ---------- Top bar / progress ---------- */
+.topbar{
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 18px 6px;
+  display:flex;align-items:center;gap:12px;
+  background:rgba(247,251,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:6;
+}
+.brand{font-weight:740;font-size:15px;letter-spacing:.2px}
+.brand small{color:var(--accent-deep);font-weight:700}
+.step-count{margin-left:auto;font-size:12.5px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+
+/* tappable pill row — jump to any card */
+.pillrow{
+  display:flex;gap:8px;overflow-x:auto;padding:2px 14px 10px;
+  background:rgba(247,251,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  scrollbar-width:none;z-index:6;
+}
+.pillrow::-webkit-scrollbar{display:none}
+.npill{
+  flex:none;display:inline-flex;align-items:center;gap:5px;
+  padding:7px 13px;border-radius:99px;font-size:12.5px;font-weight:650;line-height:1;
+  white-space:nowrap;min-height:34px;cursor:pointer;border:1.5px solid transparent;
+  background:rgba(38,50,56,.05);color:var(--ink-soft);transition:all .2s ease;
+}
+.npill:active{transform:scale(.95)}
+.npill.current{background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(66,165,245,.35)}
+.npill.visited{background:var(--accent-tint);color:var(--accent-deep);border-color:var(--accent-2)}
+.npill.danger.current{background:var(--danger);box-shadow:0 2px 8px rgba(210,69,59,.35)}
+
+/* ---------- Deck ---------- */
+.deck{
+  flex:1;display:flex;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.deck::-webkit-scrollbar{display:none}
+.slide{
+  min-width:100%;scroll-snap-align:center;scroll-snap-stop:always;
+  height:100%;overflow-y:auto;padding:4px 18px 140px;scrollbar-width:none;
+}
+.slide::-webkit-scrollbar{display:none}
+
+.kicker{display:flex;align-items:center;gap:8px;margin:2px 0 10px}
+.pill{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-tint);padding:5px 10px;border-radius:99px}
+.pill.danger{color:#9a261d;background:var(--danger-tint)}
+.h1{font-size:25px;font-weight:760;line-height:1.12;letter-spacing:-.3px;margin:0 0 14px}
+
+/* photo slot */
+.photo{
+  position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--r-xl);
+  background:radial-gradient(120% 120% at 30% 20%,#eef6ff 0%,#e3f0fb 60%,#d8e8f6 100%);
+  border:1px solid var(--line);box-shadow:var(--shadow-card);
+  overflow:hidden;
+}
+.photo img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block}
+/* side-by-side photos (e.g. illustration + clinical photo) */
+.photo-row{display:flex;gap:10px}
+.photo-row .photo{flex:1;min-width:0}
+/* 3+ photos: hero on top, pair below */
+.photo-stack{display:flex;flex-direction:column;gap:10px}
+.photo .ph-fallback{position:absolute;inset:0;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-soft);text-align:center;padding:12px}
+.photo .ph-ic{width:38px;height:38px;opacity:.5}
+.photo .ph-label{font-size:12.5px;font-weight:600;max-width:80%;line-height:1.35}
+.photo .ph-tag{position:absolute;z-index:2;top:10px;left:10px;font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:rgba(66,165,245,.94);padding:4px 8px;border-radius:8px}
+
+/* action + caption */
+.action{font-size:20px;font-weight:720;line-height:1.25;letter-spacing:-.2px;margin:16px 2px 6px}
+.caption{font-size:14.5px;line-height:1.5;color:var(--ink-soft);margin:0 2px}
+.cue{display:inline-flex;align-items:center;gap:6px;margin:12px 2px 0;font-size:13px;font-weight:650;color:var(--danger);background:var(--danger-tint);padding:8px 12px;border-radius:12px}
+.cue.warn{color:var(--warn);background:#fbf1e4}
+
+/* accordion */
+.more{margin:16px 0 0;border-top:1px solid var(--line);padding-top:6px}
+.more details{border-radius:14px;overflow:hidden}
+.more summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;
+  padding:12px 2px;font-size:14px;font-weight:680;color:var(--accent-deep);
+}
+.more summary::-webkit-details-marker{display:none}
+.more summary .chev{margin-left:auto;transition:transform .25s;color:var(--accent)}
+.more details[open] summary .chev{transform:rotate(180deg)}
+.more .body{padding:2px 2px 8px;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.more ul{margin:4px 0 0;padding:0 0 0 18px}
+.more li{font-size:14px;line-height:1.6;color:var(--ink);margin:0 0 7px}
+.more li b{font-weight:680}
+.ref{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin-top:6px}
+
+/* nav arrows */
+.nav{position:absolute;bottom:calc(74px + var(--safe-bottom));left:0;right:0;display:flex;justify-content:space-between;padding:0 16px;pointer-events:none;z-index:5}
+.nav button{
+  pointer-events:auto;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
+  background:rgba(255,255,255,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:var(--shadow);display:grid;place-items:center;color:var(--accent-deep);cursor:pointer;
+  transition:transform .15s, opacity .2s;
+}
+.nav button:active{transform:scale(.92)}
+.nav button[disabled]{opacity:0;pointer-events:none}
+
+/* ---------- Indication gate ---------- */
+.gate{padding-top:8px}
+.gate .lead{font-size:15px;color:var(--ink-soft);line-height:1.5;margin:0 2px 18px}
+.qrow{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--ink-soft);margin:18px 2px 10px}
+.opts{display:grid;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;border:1px solid var(--line);
+  background:var(--card);box-shadow:var(--shadow);cursor:pointer;transition:transform .12s,border-color .15s;
+}
+.opt:active{transform:scale(.985)}
+.opt.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-tint),var(--shadow)}
+.opt .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--accent-tint);color:var(--accent-deep);flex:none}
+.opt.red .ic{background:var(--danger-tint);color:#9a261d}
+.opt .tt{font-size:16px;font-weight:700}
+.opt .ss{font-size:13px;color:var(--ink-soft);margin-top:2px;line-height:1.4}
+.result{margin-top:18px;border-radius:16px;padding:18px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);animation:fade .3s ease}
+.result.go{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-tint),#fff)}
+.result.stop{border-color:var(--danger);background:linear-gradient(180deg,var(--danger-tint),#fff)}
+.result .verdict{font-size:18px;font-weight:760;margin:0 0 6px}
+.result.go .verdict{color:var(--accent-deep)}
+.result.stop .verdict{color:#9a261d}
+.result p{font-size:14px;line-height:1.55;color:var(--ink);margin:0 0 6px}
+.startbtn{margin-top:14px;width:100%;border:0;border-radius:var(--r);padding:15px;font-size:16px;font-weight:720;color:#fff;
+  background:linear-gradient(180deg,#64B5F6 0%,#42A5F5 45%,#1E88E5 100%);
+  box-shadow:0 4px 12px rgba(66,165,245,.32),inset 0 1px 0 rgba(255,255,255,.25);
+  text-shadow:0 1px 2px rgba(0,0,0,.12);cursor:pointer;transition:all .15s ease}
+.startbtn:active{transform:translateY(1px);box-shadow:0 2px 6px rgba(66,165,245,.28),inset 0 1px 0 rgba(255,255,255,.2)}
+.criteria{margin-top:12px;display:grid;gap:8px}
+.crit{display:flex;gap:10px;font-size:13.5px;line-height:1.45;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:12px}
+.crit b{font-weight:720}
+.crit .dot{flex:none;width:8px;height:8px;border-radius:50%;margin-top:6px;background:var(--ok)}
+.crit.no .dot{background:var(--ink-soft)}
+.crit.stop .dot{background:var(--danger)}
+
+/* ---------- Bottom toolbar ---------- */
+.toolbar{
+  position:absolute;left:0;right:0;bottom:0;z-index:8;
+  padding:8px 0 calc(8px + var(--safe-bottom));
+  background:rgba(255,255,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+}
+.toolbar .scroll{display:flex;gap:8px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
+.toolbar .scroll::-webkit-scrollbar{display:none}
+.tool{
+  flex:none;display:flex;flex-direction:column;align-items:center;gap:5px;width:62px;padding:6px 2px;border:0;background:none;cursor:pointer;color:var(--ink-soft)}
+.tool .tic{width:42px;height:42px;border-radius:14px;background:var(--accent-tint);color:var(--accent-deep);display:grid;place-items:center;transition:transform .12s,background .15s}
+.tool:active .tic{transform:scale(.9)}
+.tool .tl{font-size:10.5px;font-weight:650;line-height:1.1;text-align:center}
+
+/* ---------- Sheet ---------- */
+.scrim{position:fixed;inset:0;background:rgba(13,28,34,.42);opacity:0;pointer-events:none;transition:opacity .28s;z-index:20}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:21;max-width:520px;margin:0 auto;
+  background:var(--card);border-radius:22px 22px 0 0;box-shadow:var(--shadow-lg);
+  transform:translateY(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);
+  max-height:86dvh;display:flex;flex-direction:column;
+}
+.sheet.on{transform:translateY(0)}
+.sheet .grab{width:38px;height:5px;border-radius:99px;background:var(--line);margin:10px auto 4px}
+.sheet .shead{display:flex;align-items:center;gap:12px;padding:6px 20px 12px;border-bottom:1px solid var(--line)}
+.sheet .shead .si{width:40px;height:40px;border-radius:12px;background:var(--accent-tint);color:var(--accent-deep);display:grid;place-items:center;flex:none}
+.sheet .shead h3{margin:0;font-size:18px;font-weight:740}
+.sheet .shead .x{margin-left:auto;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--ink-soft);cursor:pointer}
+.sheet .scont{overflow-y:auto;padding:16px 20px calc(26px + var(--safe-bottom))}
+.sheet h4{font-size:14px;font-weight:740;margin:18px 0 8px;color:var(--accent-deep)}
+.sheet h4:first-child{margin-top:2px}
+.sheet p{font-size:14.5px;line-height:1.58;color:var(--ink);margin:0 0 10px}
+.sheet ul{margin:0 0 12px;padding-left:18px}
+.sheet li{font-size:14.5px;line-height:1.55;margin:0 0 7px}
+.sheet .kv{display:flex;gap:10px;align-items:baseline;padding:11px 13px;background:var(--bg);border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.sheet .kv .k{font-weight:740;font-size:14px;flex:none;min-width:78px;color:var(--accent-deep)}
+.sheet .kv .v{font-size:14px;line-height:1.5}
+.sheet .big{font-size:30px;font-weight:780;letter-spacing:-.5px;color:var(--accent-deep);margin:2px 0 2px}
+.sheet .note{font-size:12.5px;color:var(--ink-soft);font-style:italic;line-height:1.5}
+.sheet .callout{border-left:3px solid var(--danger);background:var(--danger-tint);padding:10px 14px;border-radius:0 12px 12px 0;font-size:13.5px;line-height:1.5;margin:4px 0 12px;color:#7d211a}
+.sheet .callout.warn{border-color:var(--warn);background:#fbf1e4;color:#7a4a16}
+.sheet .img-slot{width:100%;aspect-ratio:16/10;border-radius:14px;background:var(--bg);border:1px solid var(--line);display:grid;place-items:center;color:var(--ink-soft);font-size:12.5px;font-weight:600;margin:4px 0 14px;text-align:center;padding:0;overflow:hidden}
+.sheet .img-slot img{width:100%;height:100%;object-fit:contain;display:block;background:#fff}
+.sheet .qr-wrap{display:flex;justify-content:center;margin:6px 0 14px}
+.sheet .qr-wrap img{width:220px;height:220px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:12px}
+.sheet a.calc-link{color:var(--accent-deep);font-weight:700;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.sheet .mergo{margin:8px 0 12px;border:1px solid var(--accent-2);border-radius:14px;background:var(--accent-tint);padding:14px}
+.sheet .mergo .mrow{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.sheet .mergo label{font-size:13.5px;font-weight:680;color:var(--accent-deep);flex:1;line-height:1.3}
+.sheet .mergo input{width:84px;flex:none;font-size:16px;font-weight:700;text-align:center;padding:8px;border:1px solid var(--accent-2);border-radius:10px;background:#fff;color:var(--ink);min-height:44px}
+.sheet .mergo .mout{margin-top:4px;padding:12px 14px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:14px;line-height:1.5}
+.sheet .mergo .mout .mvol{font-size:22px;font-weight:780;letter-spacing:-.5px;display:block;margin-bottom:4px}
+.sheet .mergo .mout.go{border-color:var(--danger);background:var(--danger-tint);color:#7d211a}
+.sheet .mergo .mout.go .mvol{color:var(--danger)}
+.sheet .mergo .mout.obs{border-color:var(--accent);background:linear-gradient(180deg,var(--accent-tint),#fff)}
+.sheet .mergo .mout.obs .mvol{color:var(--accent-deep)}
+.sheet .mergo .mhint{font-size:11.5px;color:var(--ink-soft);font-style:italic;margin:8px 0 0;line-height:1.45}
+
+svg{display:block}
+
+/* ============ tap-to-zoom lightbox ============ */
+.photo img,.img-slot img{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.93);display:none;place-items:center;touch-action:none;overscroll-behavior:contain;user-select:none}
+.lightbox.open{display:grid}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;will-change:transform;-webkit-user-drag:none;user-select:none;touch-action:none}
+.lightbox.zoomed img{cursor:grab}
+.lightbox.zoomed.panning img{cursor:grabbing}
+.lightbox-close{position:absolute;top:calc(10px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));width:46px;height:46px;border-radius:50%;border:none;background:rgba(255,255,255,.16);color:#fff;font-size:28px;line-height:1;display:grid;place-items:center;cursor:pointer;z-index:1;-webkit-tap-highlight-color:transparent}
+.lightbox-close:active{background:rgba(255,255,255,.3)}
+.lightbox-hint{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:rgba(255,255,255,.7);font-size:12px;font-weight:600;letter-spacing:.3px;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <div class="brand">Chest&nbsp;Tube <small>· Thoracostomy</small></div>
+    <div class="step-count" id="stepCount"></div>
+  </div>
+  <div class="pillrow" id="pillRow"><!-- pills injected --></div>
+
+  <div class="deck" id="deck"><!-- slides injected --></div>
+
+  <div class="nav">
+    <button id="prevBtn" aria-label="Previous">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button id="nextBtn" aria-label="Next">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="toolbar">
+    <div class="scroll" id="toolScroll"><!-- tools injected --></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet">
+  <div class="grab"></div>
+  <div class="shead">
+    <div class="si" id="sheetIcon"></div>
+    <h3 id="sheetTitle"></h3>
+    <button class="x" id="sheetClose" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="scont" id="sheetBody"></div>
+</div>
+
+<script>
+/* ============ ICONS ============ */
+const I = {
+  pneumo:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6"/><path d="M12 9c-3 0-5 2-5 6 0 3 1 6 5 6s5-3 5-6c0-4-2-6-5-6z"/></svg>',
+  hemo:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>',
+  bolt:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+  check:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+  ruler:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l13-13 5 5L8 21z"/><path d="M8 9l2 2M11 6l2 2M14 12l2 2"/></svg>',
+  list:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  drain:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10M8 3v4l-2 9a3 3 0 0 0 3 4h6a3 3 0 0 0 3-4l-2-9V3"/><path d="M6.5 14h11"/></svg>',
+  wrench:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-2.5 2.5-1.6-1.6 2.6-2.5z"/></svg>',
+  pull:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+  pill:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="4"/><path d="M12 8v8"/></svg>',
+  recycle:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4l3-5"/><path d="M4 14l3 5 3-1"/><path d="M17 5l2 3 3-1"/><path d="M14 4l3 1-1 3"/><path d="M10 20h7l-2-3"/></svg>',
+  camera:'<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L19 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="3.5"/></svg>',
+  qr:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3M21 14v.01M21 21v-4M14 21h3"/></svg>',
+  chev:'<svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'
+};
+
+/* ============ STEP DATA ============ */
+/* photoTag = which of your uploaded photos goes here */
+const STEPS = [
+  {
+    kind:'gate'
+  },
+  {
+    pill:'Before you start', danger:false,
+    title:'Set up — then breathe.',
+    photoTag:'Equipment tray + Pleur-Evac', photoLabel:'Lay-out shot: big table, full tray, Pleur-Evac primed',
+    action:'Gather everything, prep yourself.',
+    caption:'Put your stuff on a big table — not a friggin’ mayo. Then breathe and visualize the steps.',
+    more:[
+      '<b>Tube:</b> 24–28 Fr (see Tube Size tool).',
+      '<b>Anesthetic:</b> 30 mL 2% lidocaine w/ epi, 20 mL syringe, draw + 22 g 1.5″ needle.',
+      '<b>Tray:</b> scalpel, large Kelly clamp, needle driver, toothed pickups.',
+      '<b>Secure/dress:</b> size-2 Ethibond (or 5-0 silk), 2 large Tegaderms, 4×4s, 2–3″ tape.',
+      '<b>Drainage:</b> Pleur-Evac / Atrium primed and ready before you cut.',
+      '<b>You:</b> double glove, face & eye cover, hat + gown if not a crash.'
+    ],
+    ref:'EMCrit 313 — Equipment & Mental Prep'
+  },
+  {
+    pill:'Step 1 · Position', danger:false,
+    title:'Open up the axilla.',
+    photoTag:'PHOTO 1 — patient, arm behind head', photoLabel:'Supine, arm up/behind head, head of bed ~45°',
+    action:'Arm up and behind the head. Sit to 45°. Bring patient to the edge of the bed.',
+    caption:'Exposing and stretching the chest wall opens the interspaces and brings your target to you.',
+    more:[
+      'Use a soft restraint or tuck the hand behind the head to hold the arm out of the field.',
+      'Sitting up to 45° (when possible) drops the diaphragm and improves drainage.',
+      'Edge of the bed = better ergonomics and body mechanics for the dissection.'
+    ],
+    ref:'EMCrit 313 — Patient Positioning'
+  },
+  {
+    pill:'Step 2 · Locate', danger:false,
+    title:'Triangle of Safety.',
+    photoTag:'Triangle of Safety + surface anatomy', photoLabel:'5th interspace, anterior to mid-axillary line',
+    action:'5th intercostal space, anterior to the mid-axillary line — landmark technique.',
+    caption:'Stay inside the triangle: lateral pec major, anterior lat dorsi, base of axilla, above the 5th rib line.',
+    cue:'Mind the breast tissue — don’t tunnel under it.',
+    more:[
+      '<b>Common landmarks for the 5th interspace:</b><ul style="margin:6px 0 0;padding-left:18px"><li>Just below the areola in men, and at the level of the inframammary fold in women.</li><li>At the level of the middle of the upper arm.</li><li>Lateral to the xiphoid process.</li><li>Just below the armpit (base of the axilla).</li></ul>',
+      '<b>Borders:</b> anterior = lateral edge of pec major; posterior = lateral edge of lat dorsi; inferior = 5th ICS line; apex = base of axilla.',
+      'Cut <b>over the top of the rib</b> — the neurovascular bundle runs under the rib above.',
+      'Mid-arm point (MAP) is an alternative surface estimate if landmarks are tough.',
+      'The bundle “runs wherever it damn well pleases” superiorly — hug the rib below to stay safe.'
+    ],
+    ref:'EMCrit 312 — Position for the Cut'
+  },
+  {
+    pill:'Step 3 · Anesthetize', danger:false,
+    title:'March down to pleura.',
+    photoTag:'Sectional view — needle infiltrating', photoLabel:'Local infiltration: skin → tissues → over rib → pleura',
+    action:'Field block with 2% lidocaine + epi. Walk it down skin → periosteum (over the rib) → parietal pleura.',
+    caption:'Aspirate as you go; a flash of air or fluid confirms you’ve reached the space.',
+    more:[
+      'Generous skin wheal first, then infiltrate the track you’ll dissect.',
+      'Anesthetize the <b>periosteum on top of the rib</b> and the sensitive parietal pleura.',
+      'Consider procedural sedation if the patient is awake and stable.',
+      'Epinephrine helps hemostasis at the incision.'
+    ],
+    ref:'EMCrit 313 — Anesthetize / Field Block'
+  },
+  {
+    pill:'Step 4 · The cut', danger:false,
+    title:'2–3 cm over the rib.',
+    photoTag:'PHOTO 2 — incision', photoLabel:'Transverse incision over the rib below the target space',
+    action:'Transverse incision, 2–3 cm, made over the rib just below your target interspace.',
+    caption:'Cut down to the rib. Size the incision to the patient — bigger in obesity. Remember the breast.',
+    more:[
+      'Starting low and tunneling up over the rib creates a soft-tissue flap that helps seal around the tube.',
+      'How to hold the scalpel: controlled, choke up for precision.',
+      'Obesity → longer track, larger incision; plan your angle accordingly.'
+    ],
+    ref:'EMCrit 313 — The Cut'
+  },
+  {
+    pill:'Step 5 · Blunt dissection', danger:false,
+    title:'Push in, spread, check.',
+    photoTag:'PHOTO 3 — Kelly spreading', photoLabel:'Kelly clamp opening the track just above the rib',
+    action:'With the Kelly: push in, spread, check — staying just above the rib.',
+    caption:'Open a track through muscle to the pleura, repeatedly spreading to widen it.',
+    cue:'Hug the top of the rib — the bundle is under the rib above.',
+    more:[
+      'Spread <b>in the plane of the ribs</b>, then re-check depth each pass.',
+      'Develop a track big enough for a gloved finger before you breach the pleura.',
+      'Keep your non-dominant hand controlling depth so you don’t plunge.'
+    ],
+    ref:'EMCrit 313 — Blunt Dissection'
+  },
+  {
+    pill:'Step 6 · The poke + sweep', danger:false,
+    title:'Pop, then sweep.',
+    photoTag:'Finger sweep illustration', photoLabel:'Finger sweep below the diaphragm line, feeling for adhesions',
+    action:'Pop the pleura with the Kelly using body weight, then sweep with your finger.',
+    caption:'A controlled give means you’re in. Sweep to clear adhesions and confirm you’re in the pleural space — not the abdomen.',
+    cue:'Feel for rib fractures — sharp ends = DANGER to your finger and the tube.',
+    more:[
+      'Grab the <b>middle of the Kelly</b> with your non-dominant hand as a depth stop.',
+      'Use controlled body weight for the breach — not a stab.',
+      'Gentle 360° finger sweep: lung down, no adhesions, no diaphragm/abdominal contents.',
+      'If you feel sharp rib fracture ends, redirect to avoid laceration.'
+    ],
+    ref:'EMCrit 313 — The Poke / Finger Thoracostomy'
+  },
+  {
+    pill:'Step 7 · The tube', danger:true,
+    title:'Tube on the Kelly.',
+    photoTag:'PHOTO 4 — tube clamped on Kelly', photoLabel:'Proximal tube clamped, advanced through the track into the pleura',
+    action:'Clamp the proximal tube tip in the Kelly and guide it through your track into the space.',
+    caption:'Advance until all drainage holes are inside. Depth is read from the most proximal hole.',
+    cue:'No trocars. Ever. Angle matters — too steep correlates with complications.',
+    more:[
+      'Finger- or hemostat-guided; some use a bougie/tube exchanger to rail it in.',
+      '<b>Depth:</b> marked from the proximal hole — make sure the last hole clears the chest wall.',
+      '“Resting location” of the tip doesn’t change outcomes — <b>function, not trajectory,</b> drives reintervention.',
+      'Slow down, get clean, and ask for the evacuation device before you connect.'
+    ],
+    ref:'EMCrit 313 — Insert the Tube; J Trauma 2016;81(2):366'
+  },
+  {
+    pill:'Step 8 · Confirm', danger:false,
+    title:'Spin for the win.',
+    photoTag:'Tube + connector / fogging', photoLabel:'Hook-up to drainage; check fogging, drainage, tidaling',
+    action:'Cut the tube end on an angle, hook up the drainage, then confirm: drainage/fogging, and the rotation kink test.',
+    caption:'MAC test: grasp the external tube, turn clockwise 180° and release. Springs back = kinked. Holds = good.',
+    cue:'Cut the tube end on a slant — the angled bevel seats into the connector far more easily.',
+    more:[
+      '<b>Cut at an angle:</b> trim the proximal tube end on a bevel so it slides into and seats snugly in the connector.',
+      'Look for condensation/fogging, blood or fluid return, and respiratory tidaling.',
+      '<b>Spin test (Acad Emerg Med 2006;13:114):</b> rotate 180° and release — return to prior position means it’s kinked.',
+      'Confirm the system bubbles/tidals appropriately before securing.'
+    ],
+    ref:'EMCrit 313 — Spin for the Win'
+  },
+  {
+    pill:'Step 9 · Secure', danger:false,
+    title:'Horizontal mattress &amp; Roman candle.',
+    photoTag:'PHOTO 5 — suture / drain stitch', photoLabel:'Big stitch, ends wrapped around tube and tightly tied',
+    action:'Anchor with a big stitch, then wrap the long ends around the tube and tie them down tight.',
+    caption:'Big stitch, needle driver, toothed pickups. Hold the tube against your hip while you sew.',
+    more:[
+      '<b>Horizontal mattress</b> anchors across the incision; the <b>Roman candle</b> spirals the long tails up the tube and cinches it down.',
+      '<b>Alternative — Modified Jo’burg / Soweto</b> drain stitch: skips the old purse-string, grips well and scars less.',
+      'Place a single anchoring suture, then spiral the tails up the tube and cinch.',
+      'Tie firmly enough to indent the tube slightly so it can’t slide.'
+    ],
+    ref:'EMCrit 313 — Soweto / Modified Jo’burg Technique'
+  },
+  {
+    pill:'Step 10 · Dress', danger:false,
+    title:'Mesentery + Tegaderm.',
+    photoTag:'PHOTO 6 — tape job', photoLabel:'“Mesentery” tape around tube, large Tegaderms, taped connector',
+    action:'Wrap a “mesentery” of tape around the tube, cover with big Tegaderms, then tape the connector.',
+    caption:'Clean, occlusive, and stable. No xeroform / petroleum gauze.',
+    more:[
+      'The mesentery (omental) tape supports the tube and reduces leverage at the skin.',
+      'Two large Tegaderms give an occlusive, see-through seal.',
+      '<b>Tape the connector</b> — most accidental disconnects happen there.'
+    ],
+    ref:'EMCrit 313 — Dressings & the Tape Job'
+  },
+  {
+    pill:'Step 11 · Confirm & document', danger:false,
+    title:'Film it. Mark it. Cover it.',
+    photoTag:'CXR + Pleur-Evac with Sharpie mark', photoLabel:'Post-procedure CXR; Pleur-Evac marked with date/time',
+    action:'Get a post-procedure CXR. Sharpie the Pleur-Evac with date & time. Give trauma prophylaxis.',
+    caption:'Confirm position and lung re-expansion; establish your output baseline.',
+    more:[
+      '<b>CXR</b> confirms placement and rules out a new/expanding problem.',
+      'Mark the drainage column with date/time so trends are obvious to the next person.',
+      '<b>Antibiotics:</b> 24 h of a 1st-gen cephalosporin for <i>trauma</i> thoracostomies (EAST).',
+      'You do <b>not</b> need suction for CT or transport — water seal is fine.'
+    ],
+    ref:'EMCrit 312 — Pulling/Follow-up; EAST abx guideline'
+  }
+];
+
+/* ============ TOOLS DATA ============ */
+const TOOLS = [
+  {id:'size', icon:I.ruler, label:'Tube Size', title:'Tube Size', render: sizeTool},
+  {id:'indic', icon:I.list, label:'Indications', title:'Indications', render: indicTool},
+  {id:'drain', icon:I.drain, label:'Drainage', title:'Drainage & Pleur-Evac', render: drainTool},
+  {id:'trouble', icon:I.wrench, label:'Troubleshoot', title:'Troubleshooting', render: troubleTool},
+  {id:'pull', icon:I.pull, label:'Pulling', title:'Pulling the Tube', render: pullTool},
+  {id:'abx', icon:I.pill, label:'Antibiotics', title:'Antibiotics', render: abxTool},
+  {id:'auto', icon:I.recycle, label:'Auto-Tx', title:'Autotransfusion', render: autoTool},
+  {id:'share', icon:I.qr, label:'Share', title:'Share this guide', render: shareTool},
+];
+
+/* ============ RENDER STEPS ============ */
+const deck = document.getElementById('deck');
+function photoHTML(s){
+  const tag = `<span class="ph-tag">${s.photoTag||'Photo'}</span>`;
+  const fullFallback = `<div class="ph-fallback">${I.camera}<span class="ph-label">${s.photoLabel||'Add image'}</span></div>`;
+  const imgs = s.img ? (Array.isArray(s.img) ? s.img : [s.img]) : [];
+  if(imgs.length===0){
+    return `<div class="photo">${tag}${fullFallback}</div>`;
+  }
+  const alt=(s.photoLabel||s.photoTag||'').replace(/"/g,'');
+  // real photos: no overlay tag (it would cover the image); tag only labels placeholders
+  const cell = f => `<div class="photo">
+      <div class="ph-fallback">${I.camera}</div>
+      <img src="images/${f}" alt="${alt}" loading="lazy" onerror="this.remove()">
+    </div>`;
+  if(imgs.length===1){
+    return `<div class="photo">${fullFallback}
+      <img src="images/${imgs[0]}" alt="${alt}" loading="lazy" onerror="this.remove()">
+    </div>`;
+  }
+  if(imgs.length===2){
+    return `<div class="photo-row">${imgs.map(cell).join('')}</div>`;
+  }
+  // 3+ images → first full-width (hero), the rest in a row below
+  return `<div class="photo-stack">${cell(imgs[0])}<div class="photo-row">${imgs.slice(1).map(cell).join('')}</div></div>`;
+}
+function stepHTML(s){
+  const cue = s.cue ? `<div class="cue ${s.danger?'':'warn'}">⚠ ${s.cue}</div>` : '';
+  const more = s.more ? `<div class="more"><details><summary>More detail &amp; evidence ${I.chev}</summary>
+      <div class="body"><ul>${s.more.map(m=>`<li>${m}</li>`).join('')}</ul>
+      ${s.ref?`<div class="ref">${s.ref}</div>`:''}</div></details></div>` : '';
+  return `<div class="slide">
+    <div class="kicker"><span class="pill ${s.danger?'danger':''}">${s.pill}</span></div>
+    <h1 class="h1">${s.title}</h1>
+    ${photoHTML(s)}
+    <div class="action">${s.action}</div>
+    <p class="caption">${s.caption}</p>
+    ${cue}
+    ${more}
+  </div>`;
+}
+
+/* ---- Gate slide ---- */
+function gateHTML(){
+  return `<div class="slide gate" id="gateSlide">
+    <div class="kicker"><span class="pill">Start here</span></div>
+    <h1 class="h1">Should I place a chest tube?</h1>
+    <p class="lead">A 10-second gate before you commit. Stability first, size second.</p>
+
+    <div class="qrow">1 · Hemodynamics</div>
+    <div class="opts">
+      <div class="opt red" data-stab="unstable">
+        <div class="ic">${I.bolt}</div>
+        <div><div class="tt">Unstable / abnormal</div><div class="ss">Hypotensive, peri-arrest, high suspicion</div></div>
+      </div>
+      <div class="opt" data-stab="stable">
+        <div class="ic">${I.check}</div>
+        <div><div class="tt">Stable</div><div class="ss">Normal vitals — assess size next</div></div>
+      </div>
+    </div>
+
+    <div id="pathWrap" style="display:none">
+      <div class="qrow">2 · Pathology</div>
+      <div class="opts">
+        <div class="opt" data-path="pneumo"><div class="ic">${I.pneumo}</div>
+          <div><div class="tt">Pneumothorax</div><div class="ss">Air in the pleural space</div></div></div>
+        <div class="opt" data-path="hemo"><div class="ic">${I.hemo}</div>
+          <div><div class="tt">Hemothorax</div><div class="ss">Blood in the pleural space</div></div></div>
+      </div>
+    </div>
+
+    <div id="gateResult"></div>
+  </div>`;
+}
+
+/* Wire step images by slide index — file simply appearing in images/ lights up its card.
+   .png = the 4 reused myMedKitt files (already on disk); .jpg = Andy's pasted photos (save into images/). */
+const IMG_BY_INDEX = {
+  1:'00-equipment.jpg',
+  2:'01-position.jpg',
+  3:'02-triangle-of-safety.png',
+  4:'03-anesthetize.png',
+  5:'04-incision.jpg',
+  6:'05-blunt-dissection.jpg',
+  7:'06-finger-sweep.jpg',
+  8:['07-tube-insertion.jpg','07-tube-insertion-2.jpg'],
+  9:['08-cut-tube.jpg','08-confirm-2.jpg'],
+  10:'09-secure.jpg',
+  11:'10-dress.jpg',
+  12:'11-confirm-document.png'
+};
+STEPS.forEach((s,i)=>{ if(IMG_BY_INDEX[i]) s.img=IMG_BY_INDEX[i]; });
+
+deck.innerHTML = STEPS.map(s=> s.kind==='gate' ? gateHTML() : stepHTML(s)).join('');
+
+/* ============ GATE LOGIC ============ */
+let stab=null, path=null;
+function renderGateResult(){
+  const box = document.getElementById('gateResult');
+  const start = `<button class="startbtn" onclick="goTo(1)">Start the procedure →</button>`;
+  if(stab==='unstable'){
+    box.innerHTML = `<div class="result go">
+      <div class="verdict">Decompress now.</div>
+      <p>Hemodynamically abnormal + suspected pneumo/hemothorax → immediate <b>tube thoracostomy</b> (finger or needle if peri-arrest). Don’t debate size — go.</p>
+      ${start}</div>`;
+    return;
+  }
+  if(stab==='stable' && path==='pneumo'){
+    box.innerHTML = `<div class="result go">
+      <div class="verdict">Drain if it’s big enough.</div>
+      <div class="criteria">
+        <div class="crit"><span class="dot"></span><span><b>CXR:</b> &gt;20% of the lung field → drain</span></div>
+        <div class="crit"><span class="dot"></span><span><b>CT:</b> &gt;35 mm (perpendicular to chest wall) → drain</span></div>
+        <div class="crit no"><span class="dot"></span><span><b>Smaller:</b> observe — repeat CXR at 4–6 h &amp; 24 h (~10–13% fail, even on PPV)</span></div>
+      </div>${start}</div>`;
+    return;
+  }
+  if(stab==='stable' && path==='hemo'){
+    box.innerHTML = `<div class="result go">
+      <div class="verdict">300 mL is the line.</div>
+      <div class="criteria">
+        <div class="crit"><span class="dot"></span><span><b>&gt;300 mL</b> (Mergo estimate on CT) → drain</span></div>
+        <div class="crit no"><span class="dot"></span><span><b>&lt;300 mL</b> → observe</span></div>
+        <div class="crit stop"><span class="dot"></span><span><b>OR, not a tube,</b> if: initial &gt;1500 mL, &gt;200 mL/hr ×4 h, or ongoing instability</span></div>
+      </div>${start}</div>`;
+    return;
+  }
+  box.innerHTML='';
+}
+document.getElementById('gateSlide').addEventListener('click',e=>{
+  const so=e.target.closest('[data-stab]');
+  const po=e.target.closest('[data-path]');
+  if(so){
+    stab=so.dataset.stab; path=null;
+    document.querySelectorAll('[data-stab]').forEach(x=>x.classList.toggle('sel',x===so));
+    document.querySelectorAll('[data-path]').forEach(x=>x.classList.remove('sel'));
+    document.getElementById('pathWrap').style.display = stab==='stable' ? 'block':'none';
+    renderGateResult();
+  }
+  if(po){
+    path=po.dataset.path;
+    document.querySelectorAll('[data-path]').forEach(x=>x.classList.toggle('sel',x===po));
+    renderGateResult();
+  }
+});
+
+/* ============ DECK NAV + PILLS ============ */
+const slides=[...deck.children];
+const prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn');
+const count=document.getElementById('stepCount');
+const pillRow=document.getElementById('pillRow');
+const visited=new Set([0]);
+let idx=0;
+
+const pillLabel = i => {
+  if(i===0) return 'Gate';
+  if(i===1) return 'Prep';
+  const seg = (STEPS[i].pill || '').split('·')[1];   // "Step 5 · Blunt dissection" -> "Blunt dissection"
+  return seg ? seg.trim() : String(i-1);
+};
+pillRow.innerHTML = slides.map((_,i)=>{
+  const dng = STEPS[i] && STEPS[i].danger ? ' danger' : '';
+  return `<button class="npill${dng}" data-i="${i}">${pillLabel(i)}</button>`;
+}).join('');
+const pills=[...pillRow.children];
+pillRow.addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b)goTo(+b.dataset.i)});
+
+function setActive(i){
+  idx=i; visited.add(i);
+  count.textContent = i===0 ? 'Indication gate'
+    : i===1 ? 'Before you start'
+    : `Step ${i-1} / ${slides.length-2}`;
+  prevBtn.disabled = i===0;
+  nextBtn.disabled = i===slides.length-1;
+  pills.forEach((p,k)=>{
+    p.classList.toggle('current', k===i);
+    p.classList.toggle('visited', k!==i && visited.has(k));
+  });
+  if(pills[i]) pills[i].scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+}
+function update(){ setActive(Math.round(deck.scrollLeft/deck.clientWidth)); }
+function goTo(i){ deck.scrollTo({left:i*deck.clientWidth,behavior:'smooth'}); setActive(i); }
+window.goTo=goTo;
+prevBtn.onclick=()=>goTo(Math.max(0,idx-1));
+nextBtn.onclick=()=>goTo(Math.min(slides.length-1,idx+1));
+deck.addEventListener('scroll',()=>{clearTimeout(window._st);window._st=setTimeout(update,60)});
+window.addEventListener('resize',update);
+update();
+
+/* ============ TOOLBAR ============ */
+const toolScroll=document.getElementById('toolScroll');
+toolScroll.innerHTML = TOOLS.map(t=>`<button class="tool" data-tool="${t.id}">
+  <span class="tic">${t.icon}</span><span class="tl">${t.label}</span></button>`).join('');
+
+const scrim=document.getElementById('scrim'), sheet=document.getElementById('sheet');
+const sheetTitle=document.getElementById('sheetTitle'), sheetBody=document.getElementById('sheetBody'), sheetIcon=document.getElementById('sheetIcon');
+function openTool(id){
+  const t=TOOLS.find(x=>x.id===id); if(!t)return;
+  sheetTitle.textContent=t.title; sheetIcon.innerHTML=t.icon; sheetBody.innerHTML=t.render();
+  sheetBody.scrollTop=0;
+  scrim.classList.add('on'); sheet.classList.add('on');
+}
+function closeTool(){scrim.classList.remove('on');sheet.classList.remove('on')}
+toolScroll.addEventListener('click',e=>{const b=e.target.closest('[data-tool]');if(b)openTool(b.dataset.tool)});
+scrim.addEventListener('click',closeTool);
+document.getElementById('sheetClose').addEventListener('click',closeTool);
+
+/* ============ TOOL CONTENT ============ */
+function sizeTool(){return `
+  <h4>House default</h4>
+  <div class="big">24–28 Fr</div>
+  <p class="note">Standard open tube thoracostomy. Clamp and cut the slant; mark depth from the proximal hole.</p>
+  <h4>Quick reference</h4>
+  <div class="kv"><span class="k">Percutaneous</span><span class="v">8–14 Fr (small-bore / pigtail)</span></div>
+  <div class="kv"><span class="k">Open tube</span><span class="v">≥16 Fr — most commonly 28–32 Fr</span></div>
+  <div class="kv"><span class="k">Our pick</span><span class="v">24–28 Fr for routine open placement</span></div>
+  <h4>What the evidence says</h4>
+  <ul>
+    <li><b>Size matters less than you think.</b> Animal and human data show small-bore and large-bore tubes drain similar volumes.</li>
+    <li><b>Pneumothorax:</b> small-bore tubes hurt less with no clinically significant difference in function.</li>
+    <li><b>Hemothorax (P-CAT RCT + meta-analysis):</b> no difference in failure, drainage, ICU/vent days, or LOS between ≤14 Fr percutaneous and ≥16 Fr open. Small-bore had shorter duration, less VATS, better tolerance.</li>
+    <li><b>EAST:</b> in hemodynamically <i>stable</i> patients, a percutaneous tube is preferred over an open tube.</li>
+  </ul>
+  <p class="note">Selection bias is real: big tubes go in emergently, small tubes electively. Pick for the situation, not dogma.</p>`;}
+
+function indicTool(){return `
+  <p>Stability first, size second.</p>
+  <div class="callout">Unstable + suspected pneumo/hemothorax → tube thoracostomy <b>now</b> (finger/needle if peri-arrest). Skip the sizing debate.</div>
+  <h4>Pneumothorax — stable patient</h4>
+  <ul>
+    <li><b>CXR &gt;20%</b> of the lung field → decompress.</li>
+    <li><b>CT &gt;35 mm</b> (radial line perpendicular to chest wall) → decompress.</li>
+    <li>Smaller → observe; repeat CXR at <b>4–6 h and 24 h</b>. ~10–13% observation failure, even on positive-pressure ventilation.</li>
+    <li>Becomes symptomatic → emergent CXR, may need a tube.</li>
+  </ul>
+  <p class="note">35 mm rule cut tube rates 28%→18% at a Level I center with no change in failure, LOS, complications, or mortality.</p>
+  <h4>Hemothorax — stable patient</h4>
+  <ul>
+    <li><b>&gt;300 mL</b> (<a class="calc-link" onclick="toggleMergo(this)">Mergo formula</a> estimate on CT) → drain. Every 100 mL ≈ +15% risk of retained hemothorax.</li>
+    <li><b>&lt;300 mL</b> → reasonable to observe.</li>
+  </ul>
+  <div class="mergo" id="mergoCalc" style="display:none">
+    <div class="mrow"><label for="mDepth">Greatest depth on axial cuts <b>d</b> (cm)</label><input id="mDepth" type="number" inputmode="decimal" min="0" step="0.1" placeholder="d" oninput="calcMergo()"></div>
+    <div class="mrow"><label for="mLength">Length on sagittal cuts <b>L</b> (cm)</label><input id="mLength" type="number" inputmode="decimal" min="0" step="0.1" placeholder="L" oninput="calcMergo()"></div>
+    <div class="mout" id="mOut">Enter <b>d</b> and <b>L</b> to estimate volume (V = d² × L).</div>
+    <p class="mhint">Rough estimate only. Recent data show poor accuracy near the 300 mL cutoff (only ~54% of 200–400 mL hemothoraces correctly stratified). Use alongside trajectory, physiology, and clot burden — not in isolation.</p>
+  </div>
+  <div class="callout">Operative thoracotomy — not just a tube — if initial output <b>&gt;1,500 mL</b>, sustained <b>&gt;200 mL/hr ×4 h</b>, or ongoing hemodynamic instability.</div>
+  <p class="note">Western Trauma Association & EAST algorithms. Mergo PJ. J Thorac Imaging 1999;14:122–125.</p>`;}
+
+function toggleMergo(el){
+  const box=document.getElementById('mergoCalc'); if(!box)return;
+  const open=box.style.display!=='none';
+  box.style.display=open?'none':'block';
+  if(!open){ box.scrollIntoView({block:'nearest',behavior:'smooth'}); }
+}
+window.toggleMergo=toggleMergo;
+
+function calcMergo(){
+  const d=parseFloat(document.getElementById('mDepth').value);
+  const L=parseFloat(document.getElementById('mLength').value);
+  const out=document.getElementById('mOut');
+  if(!(d>0)||!(L>0)){
+    out.className='mout';
+    out.innerHTML='Enter <b>d</b> and <b>L</b> to estimate volume (V = d² × L).';
+    return;
+  }
+  const v=Math.round(d*d*L);
+  if(v>300){
+    out.className='mout go';
+    out.innerHTML=`<span class="mvol">≈ ${v} mL</span><b>&gt; 300 mL → drain.</b> Place a chest tube in the stable patient. Each extra 100 mL ≈ +15% risk of retained hemothorax.`;
+  }else{
+    out.className='mout obs';
+    out.innerHTML=`<span class="mvol">≈ ${v} mL</span><b>≤ 300 mL → reasonable to observe.</b> Serial imaging and watch the trajectory; drain if it grows, the patient destabilizes, or symptoms develop.`;
+  }
+}
+window.calcMergo=calcMergo;
+
+function drainTool(){return `
+  <div class="img-slot"><img src="images/tool-drainage-diagram.png" alt="Three-bottle chest drainage system" loading="lazy" onerror="this.parentNode.textContent='3-bottle / Pleur-Evac chamber diagram'"></div>
+  <h4>Suction settings</h4>
+  <div class="kv"><span class="k">Suction</span><span class="v">Wall suction regulated to <b>−20 cm H₂O</b></span></div>
+  <div class="kv"><span class="k">Water seal</span><span class="v">~2 cm — one-way valve; lets air out, not in</span></div>
+  <div class="callout warn">You do <b>not</b> need suction for CT or for transport. Water seal is fine.</div>
+  <h4>The 3 chambers</h4>
+  <ul>
+    <li><b>Collection:</b> blood/fluid from the patient — your output trend.</li>
+    <li><b>Water seal:</b> air escapes the pleural space; watch for tidaling & air-leak bubbles here.</li>
+    <li><b>Suction control:</b> sets the applied negative pressure (height of column / dial), capped so it can’t exceed −20.</li>
+  </ul>
+  <h4>Reading it</h4>
+  <ul>
+    <li><b>Tidaling:</b> turn off suction — the column should rise/fall with respiration if the tube is patent and in the pleural space.</li>
+    <li><b>Air leak grade:</b> numbered chamber grades the leak (higher number = bigger leak).</li>
+    <li><b>Recommended unit:</b> Getinge Atrium Express (dry seal) — neg-pressure relief valve, no evaporation, safe if knocked over.</li>
+    <li>Mark the unit with a <b>Sharpie: date + time</b>. Swap a full unit at the level of the drainage system.</li>
+  </ul>`;}
+
+function troubleTool(){return `
+  <h4>Test for an air leak</h4>
+  <ul>
+    <li>Clamp the vacuum line.</li>
+    <li>Ask the patient to <b>cough</b> (generates negative pressure).</li>
+    <li>Release the vacuum. Bubbles in the water seal = air leak.</li>
+  </ul>
+  <h4>Localize the leak</h4>
+  <ul>
+    <li>Start at the chest wall — a <b>clamp or kink</b> or a drainage hole sitting outside the pleura is the usual culprit.</li>
+    <li>Work distally along the tubing toward the unit.</li>
+  </ul>
+  <div class="callout">Do <b>not</b> strip / milk the chest tube. And never clamp a tube without telling the primary team — you can tension a patient with an active air leak.</div>
+  <h4>Too shallow?</h4>
+  <ul>
+    <li>You can advance a sterile tube further <b>only if you kept it sterile</b> — but it’s far better to avoid this at placement by burying all holes the first time.</li>
+  </ul>
+  <p class="note">EMCrit 312 — Troubleshoot Air Leaks.</p>`;}
+
+function pullTool(){return `
+  <h4>When to pull</h4>
+  <ul>
+    <li>Chest-tube output <b>&lt; ~100 mL/day</b> (some use up to 200) and lung re-expanded.</li>
+    <li>No air leak.</li>
+  </ul>
+  <h4>How</h4>
+  <ul>
+    <li>Timing in the respiratory cycle <b>doesn’t change</b> pneumothorax recurrence (J Trauma 2001;50:674).</li>
+    <li>Occlusive dressing as you remove.</li>
+  </ul>
+  <h4>After</h4>
+  <ul>
+    <li>A normal CXR <b>3 hours</b> after going to water seal effectively excludes a clinically significant pneumothorax (J Trauma 2005;59:92).</li>
+  </ul>`;}
+
+function abxTool(){return `
+  <h4>Trauma thoracostomy</h4>
+  <p>Prophylactic antibiotics are <b>probably beneficial</b> for trauma tube placement.</p>
+  <div class="kv"><span class="k">Regimen</span><span class="v">24 h of a 1st-generation cephalosporin</span></div>
+  <ul>
+    <li>Supported by meta-analysis (J Accid Emerg Med 2002;19:553) and the EAST practice-management guideline (2022).</li>
+    <li>Non-trauma / elective drainage: routine prophylaxis is not clearly indicated.</li>
+  </ul>`;}
+
+function autoTool(){return `
+  <h4>Giving the patient their own blood back</h4>
+  <p>Hemothorax blood can be collected and re-infused (autotransfusion) when banked blood is scarce or the bleeding is brisk.</p>
+  <ul>
+    <li><b>It is not the same as fresh whole blood:</b> it’s defibrinated (lacks clotting factors) and has a slightly lower hematocrit than venous blood.</li>
+    <li>Useful as a bridge, but anticipate the need for clotting-factor replacement with large-volume autotransfusion.</li>
+  </ul>
+  <p class="note">Am J Surg 2011;202(6):817.</p>`;}
+
+function shareTool(){return `
+  <h4>Share with trusted colleagues</h4>
+  <p class="note">For licensed clinicians and trainees. Scan the code, or send the link.</p>
+  <div class="qr-wrap"><img src="images/share-qr.png" alt="QR code linking to myMedKitt"></div>
+  <div class="kv"><span class="k">Link</span><span class="v"><a href="https://kittechsix-blip.github.io/mymedkitt/app.html#/tree/chest-tube" target="_blank" rel="noopener">Open in myMedKitt</a></span></div>
+  <button class="startbtn" onclick="shareLink()">Share link</button>
+  <p class="note" style="margin-top:12px">Clinical decision-support reference — not a substitute for clinical judgment, supervision, or institutional protocol.</p>`;}
+
+function shareLink(){
+  const data={title:'Chest Tube — Tube Thoracostomy', text:'Bedside guide for open tube thoracostomy', url:'https://kittechsix-blip.github.io/mymedkitt/app.html#/tree/chest-tube'};
+  if(navigator.share){ navigator.share(data).catch(()=>{}); }
+  else if(navigator.clipboard){ navigator.clipboard.writeText(data.url).then(()=>alert('Link copied: '+data.url)).catch(()=>{}); }
+  else { prompt('Copy this link:', data.url); }
+}
+window.shareLink=shareLink;
+
+/* ============ tap-to-zoom lightbox ============ */
+function initLightbox(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lbImg');
+  const lbClose=document.getElementById('lbClose');
+  if(!lb||!lbImg||!lbClose) return;
+  let scale=1, tx=0, ty=0;
+  const MIN=1, MAX=5;
+  // gesture state
+  let panning=false, startX=0, startY=0, baseTx=0, baseTy=0;
+  let pinchDist=0, pinchScale=1;
+
+  function apply(){
+    lbImg.style.transform='translate('+tx+'px,'+ty+'px) scale('+scale+')';
+    lb.classList.toggle('zoomed', scale>1.01);
+  }
+  function reset(){ scale=1; tx=0; ty=0; apply(); }
+  function clampScale(s){ return Math.max(MIN, Math.min(MAX, s)); }
+
+  function open(src, alt){
+    lbImg.src=src; lbImg.alt=alt||'';
+    reset();
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    lb.classList.remove('open');
+    document.body.style.overflow='';
+    lbImg.src='';
+  }
+
+  // OPEN via event delegation: any img inside .photo or .img-slot, except the QR
+  document.addEventListener('click', function(e){
+    const img=e.target.closest && e.target.closest('.photo img, .img-slot img');
+    if(!img) return;
+    const src=img.getAttribute('src')||'';
+    if(/share-qr\.png$/i.test(src)) return; // skip QR codes
+    e.preventDefault();
+    open(src, img.getAttribute('alt'));
+  });
+
+  // CLOSE
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('open')) close(); });
+
+  // DESKTOP: wheel zoom toward cursor
+  lb.addEventListener('wheel', function(e){
+    if(!lb.classList.contains('open')) return;
+    e.preventDefault();
+    const prev=scale;
+    scale=clampScale(scale * (e.deltaY<0 ? 1.12 : 0.89));
+    // keep pointer focus roughly stable
+    const rect=lbImg.getBoundingClientRect();
+    const cx=e.clientX-(rect.left+rect.width/2);
+    const cy=e.clientY-(rect.top+rect.height/2);
+    const f=scale/prev;
+    tx=tx*f - cx*(f-1);
+    ty=ty*f - cy*(f-1);
+    if(scale<=1){ tx=0; ty=0; }
+    apply();
+  }, {passive:false});
+
+  // DESKTOP: double-click toggles 1x / 2.5x
+  lbImg.addEventListener('dblclick', function(e){
+    e.preventDefault();
+    if(scale>1.01){ reset(); }
+    else { scale=2.5; apply(); }
+  });
+
+  // DESKTOP: click-drag pan when zoomed
+  lbImg.addEventListener('mousedown', function(e){
+    if(scale<=1.01) return;
+    e.preventDefault();
+    panning=true; lb.classList.add('panning');
+    startX=e.clientX; startY=e.clientY; baseTx=tx; baseTy=ty;
+  });
+  window.addEventListener('mousemove', function(e){
+    if(!panning) return;
+    tx=baseTx+(e.clientX-startX); ty=baseTy+(e.clientY-startY); apply();
+  });
+  window.addEventListener('mouseup', function(){ panning=false; lb.classList.remove('panning'); });
+
+  // TOUCH: 1-finger pan (when zoomed), 2-finger pinch
+  lbImg.addEventListener('touchstart', function(e){
+    if(e.touches.length===1 && scale>1.01){
+      panning=true; lb.classList.add('panning');
+      startX=e.touches[0].clientX; startY=e.touches[0].clientY; baseTx=tx; baseTy=ty;
+    } else if(e.touches.length===2){
+      panning=false; lb.classList.remove('panning');
+      pinchDist=dist(e.touches); pinchScale=scale;
+    }
+  }, {passive:false});
+  lbImg.addEventListener('touchmove', function(e){
+    if(e.touches.length===2){
+      e.preventDefault();
+      const d=dist(e.touches);
+      if(pinchDist>0){ scale=clampScale(pinchScale * (d/pinchDist)); if(scale<=1){tx=0;ty=0;} apply(); }
+    } else if(panning && e.touches.length===1){
+      e.preventDefault();
+      tx=baseTx+(e.touches[0].clientX-startX); ty=baseTy+(e.touches[0].clientY-startY); apply();
+    }
+  }, {passive:false});
+  lbImg.addEventListener('touchend', function(e){
+    if(e.touches.length===0){ panning=false; lb.classList.remove('panning'); if(scale<=1.01) reset(); }
+  });
+  function dist(t){ const dx=t[0].clientX-t[1].clientX, dy=t[0].clientY-t[1].clientY; return Math.hypot(dx,dy); }
+}
+if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initLightbox); }
+else { initLightbox(); }
+
+/* ============ PWA: service worker ============ */
+// myMedKitt owns offline caching and updates for this integrated copy.
+if(false){
+  window.addEventListener('load',()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+  let _reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(_reloaded)return; _reloaded=true; location.reload();
+  });
+}
+</script>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Zoomed image">
+  <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+  <img id="lbImg" alt="">
+  <div class="lightbox-hint">Pinch or scroll to zoom · drag to pan · tap outside to close</div>
+</div>
+</body>
+</html>

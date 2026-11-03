@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" font-family="sans-serif">
+  <rect width="400" height="400" fill="#E3F2FD"/>
+  <text x="200" y="24" font-size="15" font-weight="bold" fill="#263238" text-anchor="middle">Radial Artery Cannulation Sequence</text>
+
+  <!-- 4-panel grid -->
+  <!-- Common artery rendering as a horizontal vessel band per panel -->
+
+  <!-- ===== STEP 1: Approach 30-45 deg ===== -->
+  <g>
+    <rect x="14" y="40" width="178" height="150" rx="8" fill="#ffffff" stroke="#42A5F5" stroke-width="1.5"/>
+    <circle cx="30" cy="56" r="9" fill="#1E88E5"/>
+    <text x="30" y="60" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="bold">1</text>
+    <text x="46" y="60" font-size="11.5" fill="#263238" font-weight="bold">Approach</text>
+
+    <!-- artery -->
+    <rect x="26" y="140" width="154" height="22" rx="11" fill="#f7c3bd"/>
+    <rect x="26" y="146" width="154" height="10" rx="5" fill="#d2453b"/>
+    <text x="103" y="180" font-size="9.5" fill="#546E7A" text-anchor="middle">Radial artery</text>
+
+    <!-- needle at angle -->
+    <g stroke="#546E7A" stroke-width="6" stroke-linecap="round">
+      <line x1="46" y1="86" x2="118" y2="151"/>
+    </g>
+    <line x1="46" y1="86" x2="118" y2="151" stroke="#90A4AE" stroke-width="2"/>
+    <!-- hub -->
+    <rect x="34" y="76" width="22" height="14" rx="3" fill="#1E88E5" transform="rotate(42 45 83)"/>
+
+    <!-- angle arc -->
+    <path d="M150 151 A 36 36 0 0 0 118 151" fill="none" stroke="#1f9d6b" stroke-width="1.5"/>
+    <text x="146" y="138" font-size="9.5" fill="#1f9d6b" font-weight="bold">30–45°</text>
+    <line x1="118" y1="151" x2="180" y2="151" stroke="#1f9d6b" stroke-width="1" stroke-dasharray="3 2"/>
+  </g>
+
+  <!-- ===== STEP 2: Flashback ===== -->
+  <g>
+    <rect x="208" y="40" width="178" height="150" rx="8" fill="#ffffff" stroke="#42A5F5" stroke-width="1.5"/>
+    <circle cx="224" cy="56" r="9" fill="#1E88E5"/>
+    <text x="224" y="60" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="bold">2</text>
+    <text x="240" y="60" font-size="11.5" fill="#263238" font-weight="bold">Flashback</text>
+
+    <rect x="220" y="140" width="154" height="22" rx="11" fill="#f7c3bd"/>
+    <rect x="220" y="146" width="154" height="10" rx="5" fill="#d2453b"/>
+
+    <!-- needle tip in lumen -->
+    <line x1="240" y1="86" x2="306" y2="150" stroke="#90A4AE" stroke-width="2"/>
+    <line x1="240" y1="86" x2="306" y2="150" stroke="#546E7A" stroke-width="6" stroke-linecap="round" opacity="0.0"/>
+    <line x1="240" y1="86" x2="306" y2="150" stroke="#546E7A" stroke-width="5" stroke-linecap="round"/>
+    <!-- hub filled with blood -->
+    <rect x="228" y="76" width="22" height="14" rx="3" fill="#d2453b" transform="rotate(42 239 83)"/>
+    <!-- blood column in needle -->
+    <line x1="240" y1="86" x2="290" y2="135" stroke="#d2453b" stroke-width="2"/>
+
+    <!-- flashback label -->
+    <circle cx="239" cy="83" r="16" fill="none" stroke="#d2453b" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <text x="232" y="120" font-size="9.5" fill="#d2453b" font-weight="bold" text-anchor="middle">Pulsatile</text>
+    <text x="232" y="132" font-size="9.5" fill="#d2453b" font-weight="bold" text-anchor="middle">flashback</text>
+    <text x="297" y="180" font-size="9.5" fill="#546E7A" text-anchor="middle">Tip in lumen</text>
+  </g>
+
+  <!-- ===== STEP 3: Lower angle / advance ===== -->
+  <g>
+    <rect x="14" y="200" width="178" height="150" rx="8" fill="#ffffff" stroke="#42A5F5" stroke-width="1.5"/>
+    <circle cx="30" cy="216" r="9" fill="#1E88E5"/>
+    <text x="30" y="220" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="bold">3</text>
+    <text x="46" y="220" font-size="11.5" fill="#263238" font-weight="bold">Lower &amp; Advance</text>
+
+    <rect x="26" y="300" width="154" height="22" rx="11" fill="#f7c3bd"/>
+    <rect x="26" y="306" width="154" height="10" rx="5" fill="#d2453b"/>
+
+    <!-- needle nearly flat -->
+    <line x1="40" y1="290" x2="138" y2="311" stroke="#546E7A" stroke-width="5" stroke-linecap="round"/>
+    <rect x="30" y="284" width="22" height="13" rx="3" fill="#1E88E5" transform="rotate(12 41 290)"/>
+
+    <!-- low angle arc -->
+    <path d="M120 311 A 30 30 0 0 0 100 305" fill="none" stroke="#1f9d6b" stroke-width="1.5"/>
+    <line x1="100" y1="305" x2="180" y2="311" stroke="#1f9d6b" stroke-width="1" stroke-dasharray="3 2"/>
+    <text x="118" y="298" font-size="9.5" fill="#1f9d6b" font-weight="bold">10–20°</text>
+
+    <!-- advance arrow -->
+    <line x1="140" y1="290" x2="168" y2="290" stroke="#263238" stroke-width="2"/>
+    <polygon points="168,285 178,290 168,295" fill="#263238"/>
+    <text x="155" y="280" font-size="9" fill="#263238" text-anchor="middle">advance</text>
+    <text x="100" y="340" font-size="9.5" fill="#546E7A" text-anchor="middle">Flatten, push 1–2 mm</text>
+  </g>
+
+  <!-- ===== STEP 4: Thread catheter ===== -->
+  <g>
+    <rect x="208" y="200" width="178" height="150" rx="8" fill="#ffffff" stroke="#42A5F5" stroke-width="1.5"/>
+    <circle cx="224" cy="216" r="9" fill="#1E88E5"/>
+    <text x="224" y="220" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="bold">4</text>
+    <text x="240" y="220" font-size="11.5" fill="#263238" font-weight="bold">Thread Catheter</text>
+
+    <rect x="220" y="300" width="154" height="22" rx="11" fill="#f7c3bd"/>
+    <rect x="220" y="306" width="154" height="10" rx="5" fill="#d2453b"/>
+
+    <!-- needle withdrawn (back) -->
+    <line x1="232" y1="284" x2="276" y2="296" stroke="#546E7A" stroke-width="4" stroke-linecap="round" opacity="0.55"/>
+    <rect x="224" y="279" width="20" height="12" rx="3" fill="#90A4AE" transform="rotate(12 234 285)"/>
+    <line x1="246" y1="280" x2="232" y2="280" stroke="#263238" stroke-width="1.5"/>
+    <polygon points="232,277 226,280 232,283" fill="#263238"/>
+    <text x="238" y="270" font-size="8.5" fill="#546E7A" text-anchor="middle">withdraw needle</text>
+
+    <!-- catheter threaded into artery -->
+    <line x1="262" y1="311" x2="355" y2="311" stroke="#1E88E5" stroke-width="6" stroke-linecap="round"/>
+    <line x1="262" y1="311" x2="355" y2="311" stroke="#ffffff" stroke-width="2"/>
+    <text x="320" y="296" font-size="9" fill="#1E88E5" text-anchor="middle" font-weight="bold">catheter in</text>
+    <!-- advance arrow -->
+    <line x1="290" y1="311" x2="345" y2="311" stroke="#263238" stroke-width="0"/>
+    <text x="300" y="340" font-size="9.5" fill="#546E7A" text-anchor="middle">Slide catheter off needle</text>
+  </g>
+
+  <!-- footer legend -->
+  <text x="200" y="392" font-size="9" fill="#546E7A" text-anchor="middle">Arterial blood (red) confirms intraluminal placement before threading</text>
+</svg>

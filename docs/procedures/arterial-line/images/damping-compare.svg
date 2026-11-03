@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" font-family="sans-serif">
+  <rect width="400" height="300" fill="#E3F2FD"/>
+  <rect x="8" y="8" width="384" height="284" rx="10" fill="#ffffff" stroke="#42A5F5" stroke-width="1.5"/>
+  <text x="200" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#263238">Arterial Waveform: Damping Comparison</text>
+
+  <!-- ===== NORMAL panel ===== -->
+  <text x="24" y="52" font-size="12" font-weight="bold" fill="#1f9d6b">NORMAL (optimally damped)</text>
+  <!-- grid -->
+  <rect x="24" y="58" width="352" height="80" fill="#fafcff" stroke="#cfe3f5" stroke-width="1"/>
+  <line x1="24" y1="78" x2="376" y2="78" stroke="#e6f0fa" stroke-width="1"/>
+  <line x1="24" y1="98" x2="376" y2="98" stroke="#e6f0fa" stroke-width="1"/>
+  <line x1="24" y1="118" x2="376" y2="118" stroke="#e6f0fa" stroke-width="1"/>
+  <!-- crisp waveform: sharp upstroke, peak, dicrotic notch -->
+  <path d="M24,130
+           L48,130 L60,64 L72,72
+           L80,80 L84,76 L92,108 L110,128
+           L134,130 L146,64 L158,72
+           L166,80 L170,76 L178,108 L196,128
+           L220,130 L232,64 L244,72
+           L252,80 L256,76 L264,108 L282,128
+           L306,130 L318,64 L330,72
+           L338,80 L342,76 L350,108 L368,128 L376,130"
+        fill="none" stroke="#d2453b" stroke-width="2" stroke-linejoin="round"/>
+  <!-- annotations normal -->
+  <line x1="60" y1="64" x2="60" y2="46" stroke="#546E7A" stroke-width="0.8"/>
+  <text x="60" y="44" text-anchor="middle" font-size="9" fill="#546E7A">sharp upstroke</text>
+  <circle cx="84" cy="76" r="3" fill="none" stroke="#1f9d6b" stroke-width="1.5"/>
+  <text x="120" y="68" font-size="9" fill="#1f9d6b">dicrotic notch</text>
+  <line x1="116" y1="66" x2="88" y2="75" stroke="#1f9d6b" stroke-width="0.8"/>
+
+  <!-- ===== OVERDAMPED panel ===== -->
+  <text x="24" y="172" font-size="12" font-weight="bold" fill="#d2453b">OVERDAMPED</text>
+  <rect x="24" y="178" width="352" height="80" fill="#fafcff" stroke="#cfe3f5" stroke-width="1"/>
+  <line x1="24" y1="198" x2="376" y2="198" stroke="#e6f0fa" stroke-width="1"/>
+  <line x1="24" y1="218" x2="376" y2="218" stroke="#e6f0fa" stroke-width="1"/>
+  <line x1="24" y1="238" x2="376" y2="238" stroke="#e6f0fa" stroke-width="1"/>
+  <!-- rounded, blunted, no notch, narrow pulse pressure -->
+  <path d="M24,250
+           Q40,250 56,232 Q72,214 96,214 Q120,214 140,244 Q150,250 160,250
+           Q176,250 192,232 Q208,214 232,214 Q256,214 276,244 Q286,250 296,250
+           Q312,250 328,234 Q344,218 360,222 Q370,224 376,242"
+        fill="none" stroke="#d2453b" stroke-width="2" stroke-linejoin="round"/>
+  <!-- annotations overdamped -->
+  <line x1="96" y1="214" x2="96" y2="190" stroke="#546E7A" stroke-width="0.8"/>
+  <text x="96" y="188" text-anchor="middle" font-size="9" fill="#546E7A">rounded peak, no notch</text>
+  <!-- pulse pressure brackets -->
+  <line x1="386" y1="214" x2="386" y2="250" stroke="#42A5F5" stroke-width="1"/>
+  <text x="362" y="270" text-anchor="middle" font-size="8.5" fill="#1E88E5">narrow pulse pressure</text>
+
+  <!-- comparison footer -->
+  <line x1="24" y1="278" x2="376" y2="278" stroke="#cfe3f5" stroke-width="1"/>
+  <text x="24" y="289" font-size="9" fill="#546E7A">Overdamping: slurred upstroke, lost dicrotic notch, falsely low SBP / high DBP</text>
+</svg>

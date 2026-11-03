@@ -1,0 +1,71 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <rect x="0" y="0" width="400" height="300" fill="#E3F2FD"/>
+  <rect x="8" y="8" width="384" height="284" rx="10" fill="#ffffff" stroke="#42A5F5" stroke-width="1.5"/>
+
+  <text x="200" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#263238">Pulse Pressure Variation (PPV)</text>
+  <text x="200" y="46" text-anchor="middle" font-size="10.5" fill="#546E7A">Arterial waveform during positive-pressure ventilation</text>
+
+  <!-- Arterial waveform plot area -->
+  <rect x="34" y="58" width="332" height="120" fill="#fbfdff" stroke="#90CAF9" stroke-width="1"/>
+  <text x="22" y="120" text-anchor="middle" font-size="9" fill="#546E7A" transform="rotate(-90 22 120)">Arterial pressure (mmHg)</text>
+
+  <!-- gridlines -->
+  <line x1="34" y1="90" x2="366" y2="90" stroke="#E3F2FD" stroke-width="1"/>
+  <line x1="34" y1="120" x2="366" y2="120" stroke="#E3F2FD" stroke-width="1"/>
+  <line x1="34" y1="150" x2="366" y2="150" stroke="#E3F2FD" stroke-width="1"/>
+
+  <!-- Arterial waveform: pulses with respiratory variation (rise then fall) -->
+  <!-- Each beat: sharp upstroke, dicrotic notch, decay. Systolic peaks modulate. -->
+  <path fill="none" stroke="#d2453b" stroke-width="2" stroke-linejoin="round"
+    d="M34,160
+       L42,160 L48,98 L52,118 L55,110 L62,150
+       L70,150 L76,86 L80,108 L83,100 L90,144
+       L98,144 L104,72 L108,96 L111,88 L118,138
+       L126,138 L132,68 L136,92 L139,84 L146,138
+       L154,138 L160,80 L164,104 L167,96 L174,148
+       L182,148 L188,96 L192,118 L195,110 L202,156
+       L210,156 L216,108 L220,128 L223,120 L230,160
+       L238,160 L244,100 L248,120 L251,112 L258,150
+       L266,150 L272,84 L276,106 L279,98 L286,142
+       L294,142 L300,70 L304,94 L307,86 L314,136
+       L322,136 L328,72 L332,96 L335,88 L342,140
+       L350,140 L356,90 L360,112 L363,104 L366,150"/>
+
+  <!-- PP max reference (highest systolic) -->
+  <line x1="34" y1="68" x2="366" y2="68" stroke="#1f9d6b" stroke-width="1" stroke-dasharray="4 3"/>
+  <!-- PP min reference (lowest systolic during PPV trough) -->
+  <line x1="34" y1="98" x2="366" y2="98" stroke="#1E88E5" stroke-width="1" stroke-dasharray="4 3"/>
+
+  <!-- Bracket: PPmax at inspiration peak (~beat near x=132) -->
+  <line x1="136" y1="68" x2="136" y2="138" stroke="#1f9d6b" stroke-width="1.5"/>
+  <circle cx="136" cy="68" r="2.5" fill="#1f9d6b"/>
+  <text x="142" y="64" font-size="9.5" font-weight="bold" fill="#1f9d6b">PPmax</text>
+
+  <!-- Bracket: PPmin at expiration trough (~beat near x=216) -->
+  <line x1="216" y1="98" x2="216" y2="156" stroke="#1E88E5" stroke-width="1.5"/>
+  <circle cx="216" cy="98" r="2.5" fill="#1E88E5"/>
+  <text x="222" y="112" font-size="9.5" font-weight="bold" fill="#1E88E5">PPmin</text>
+
+  <!-- variation bracket on right margin between the two systolic levels -->
+  <path d="M356,68 L362,68 L362,98 L356,98" fill="none" stroke="#263238" stroke-width="1.2"/>
+  <text x="368" y="86" font-size="9" fill="#263238" transform="rotate(90 368 86)">variation</text>
+
+  <!-- Ventilator waveform underneath -->
+  <rect x="34" y="196" width="332" height="48" fill="#fbfdff" stroke="#90CAF9" stroke-width="1"/>
+  <text x="200" y="208" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#1E88E5">Ventilator (airway pressure)</text>
+  <!-- trapezoidal PPV breaths, aligned: insp raises preload variation -->
+  <path fill="none" stroke="#42A5F5" stroke-width="2" stroke-linejoin="round"
+    d="M34,238 L70,238 L100,218 L150,218 L180,238 L210,238 L240,218 L290,218 L320,238 L366,238"/>
+  <text x="125" y="232" text-anchor="middle" font-size="8" fill="#546E7A">insp.</text>
+  <text x="265" y="232" text-anchor="middle" font-size="8" fill="#546E7A">insp.</text>
+
+  <!-- alignment cue lines -->
+  <line x1="136" y1="178" x2="136" y2="196" stroke="#1f9d6b" stroke-width="0.8" stroke-dasharray="2 2"/>
+  <line x1="216" y1="178" x2="216" y2="196" stroke="#1E88E5" stroke-width="0.8" stroke-dasharray="2 2"/>
+
+  <!-- Formula / interpretation -->
+  <rect x="34" y="252" width="332" height="34" rx="5" fill="#E3F2FD"/>
+  <text x="46" y="266" font-size="10.5" font-weight="bold" fill="#263238">PPV = (PPmax − PPmin) / [(PPmax + PPmin)/2] × 100</text>
+  <text x="46" y="280" font-size="9.5" fill="#1f9d6b">PPV &gt; 13% suggests fluid responsiveness</text>
+  <text x="300" y="280" font-size="9.5" fill="#546E7A">(sinus rhythm, Vt ≥ 8 mL/kg)</text>
+</svg>

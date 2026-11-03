@@ -2,6 +2,7 @@
 // Registers service worker, sets up routes, renders views.
 // Pearl white theme — no dark/light toggle needed.
 
+import { renderProcedureApp } from './components/procedure-app.js';
 import { router } from './services/router.js';
 import type { RouteParams } from './services/router.js';
 import { renderDashboard } from './components/dashboard.js';
@@ -162,6 +163,8 @@ function handleTree(params: RouteParams): void {
   const id = params['id'] ?? 'unknown';
   setCurrentTreeId(id);
   const main = clearMain();
+  removeContextualToolbar();
+  if (renderProcedureApp(main, id)) return;
   void renderConsultFlow(main, id);
 }
 
