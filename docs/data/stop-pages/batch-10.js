@@ -484,6 +484,9 @@ export const STOP_PAGES_10 = {
         title: 'Malaria — Do NOT',
         subtitle: 'Critical pitfalls to avoid',
         sections: [
+            { heading: '🛑 Do NOT use exchange transfusion', body: 'Exchange transfusion has no demonstrated benefit as an adjunct; IV artesunate rapidly reduces parasite burden. [1]' },
+            { heading: '🛑 Do NOT use doxycycline alone as an interim treatment', body: 'Doxycycline, tetracycline and clindamycin alone are too slow-acting for severe malaria, including while awaiting IV artesunate. This does not exclude their use with quinine in an appropriate complete oral follow-on regimen. [1]' },
+            { heading: '🛑 Do NOT stop after dose 3 without reassessment', body: 'Obtain a thin smear at least 4 hours after dose 3. Continue IV artesunate once daily if parasitemia >1% OR the patient cannot tolerate oral medication, up to 7 total IV days. Reassess parasitemia daily. Once ≤1% AND oral therapy is tolerated, start a full oral course 8-24 hours after the last IV dose. [1]' },
             {
                 heading: '🛑 Do NOT assume prophylaxis use rules out malaria',
                 body: 'Prophylaxis failure occurs due to non-adherence, drug-resistant parasites, or stopping too early. Malaria can and does occur in patients on chemoprophylaxis. Always test febrile travelers regardless of reported prophylaxis use. [See prophylaxis failure node](#/node/mal-prophylaxis-failure).',
@@ -497,8 +500,8 @@ export const STOP_PAGES_10 = {
                 body: 'Species identification drives everything: P. falciparum requires urgent treatment and hospitalization; P. vivax and P. ovale require primaquine for radical cure of liver stages; P. malariae can cause nephrotic syndrome. A "malaria positive" result without speciation is incomplete. [See species node](#/node/mal-species).',
             },
             {
-                heading: '🛑 Do NOT treat severe malaria with oral therapy',
-                body: 'Severe malaria (altered consciousness, respiratory distress, renal failure, hyperparasitemia >5%) requires IV artesunate — the only appropriate treatment. IV artesunate must be obtained through the CDC IND protocol (CDC Malaria Hotline: 770-488-7788). [See severe treatment node](#/node/mal-severe-treatment).',
+                heading: '🛑 Do NOT delay IV artesunate for severe malaria',
+                body: 'Parasitemia ≥5% alone, or another severe criterion, requires prompt IV artesunate. The drug is FDA-approved and commercially available through hospital pharmacy/distributors; Amivas emergency locator: 855-526-4827. CDC provides clinical consultation, not drug supply. While urgently obtaining IV artesunate, use effective interim oral treatment such as artemether-lumefantrine, then stop it when IV treatment starts. [1] [See severe treatment node](#/node/mal-severe-treatment).',
             },
             {
                 heading: '🛑 Do NOT forget primaquine for P. vivax and P. ovale',
@@ -513,7 +516,7 @@ export const STOP_PAGES_10 = {
                 body: 'Mixed malaria infections (5–10% of cases) must be treated for the most dangerous species present. If P. falciparum is identified alongside any other species, treat with a falciparum-active regimen. [See species node](#/node/mal-species).',
             },
         ],
-        citations: [],
+        citations: [{ num: 1, text: 'CDC. Treatment of Severe Malaria. August 17, 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html' }],
     },
     'asthma-exacerbation-stop': {
         id: 'asthma-exacerbation-stop',

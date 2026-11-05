@@ -44,3 +44,6 @@ Rules and patterns extracted from mistakes. Review at session start.
 
 ## 2026-09-14: Keep Dell Seton initial rates separate from Rule of 10s
 The Dell Seton starting rate is exactly 10 × numeric %TBSA mL/hr, without the generic Rule of 10s weight adjustment. Below 20% has no protocol-driven resuscitation; 20–<40% gets 1 unit FFP then LR; ≥40% gets FFP only. Test the 20/40 boundaries and weights above 80 kg in both BurnKitt and the myMedKitt port. Preserve separate later titration rules and distinguish starting rates from current infusion rates. Source: Dr. Kitlowski clarification, September 14, 2026.
+
+## 2026-11-05: Clinical corrections must include every toolbar surface
+When updating a consult recommendation, inspect its tree, summaries, critical actions, calculators, drug cards, linked info pages, Stop panel, and embedded Visual infographic. Infographics carry their own text, source spec, calculator expressions/ASTs and test vectors; changing the tree does not update them. Search and verify each reachable surface before the first deploy, including database precedence. Malaria's separate Stop and Visual copies retained CDC IND procurement and old parasitemia/pediatric dosing after tree fixes.

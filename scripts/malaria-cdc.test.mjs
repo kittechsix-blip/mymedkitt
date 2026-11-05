@@ -28,3 +28,18 @@ test('treatment and ICU cards carry the CDC continuation and safety instructions
  }
  assert.doesNotMatch(JSON.stringify([...MALARIA_NODES,...MALARIA_CRITICAL_ACTIONS]),/CDC IND|via CDC IND|Obtain via CDC|exchange transfusion if/);
 });
+test('Stop panel agrees with severe-malaria treatment', async()=>{
+ const {STOP_PAGES_10}=await import('../docs/data/stop-pages/batch-10.js');
+ const text=JSON.stringify(STOP_PAGES_10['malaria-stop']);
+ assert.match(text,/Parasitemia ≥5%/);assert.match(text,/Do NOT use exchange transfusion/);assert.match(text,/7 total IV days/);
+ assert.doesNotMatch(text,/CDC IND|hyperparasitemia >5%/);
+});
+test('visual flowchart uses CDC threshold and pediatric artesunate dose',()=>{
+ const html=readFileSync(new URL('../docs/infographics/malaria.html',import.meta.url),'utf8');
+ const spec=JSON.parse(html.match(/<script type="application\/json" id="ig-spec">([\s\S]*?)<\/script>/)[1]);
+ const calc=spec.calcs.find(c=>c.id==='ivartesunatepeds');
+ assert.equal(calc.expr,'round(2.4*weight,2)');
+ for(const v of calc.testVectors)assert.equal(v.expect,Math.round(v.in.weight*2.4*100)/100);
+ assert.doesNotMatch(html,/CDC IND|Parasitemia (?:>|&gt;)10%|parasitemia (?:>|&gt;)10%/);
+ assert.match(JSON.stringify(spec),/7 total|seven total|total of 7|7 days total/);
+});
