@@ -16,7 +16,7 @@ export const GOUT_CRITICAL_ACTIONS = [
   { text: 'Never delay treatment for joint aspiration - treat based on clinical diagnosis if low suspicion for septic arthritis', nodeId: 'gout-when-aspirate' },
   { text: 'Colchicine 1.2mg × 1, then 0.6mg 1h later (most effective within 36h of onset)', nodeId: 'gout-colchicine-treatment' },
   { text: 'Prednisone 30-40mg daily × 5 days if NSAIDs/colchicine contraindicated', nodeId: 'gout-steroid-treatment' },
-  { text: 'Crystals do NOT rule out septic arthritis - gout/CPPD joints at increased infection risk', nodeId: 'gout-septic-concern' },
+  { text: 'Crystals do NOT exclude infection: persistent concern requires aspiration/cultures, IV antibiotics, urgent orthopedics and admission', nodeId: 'gout-septic-concern' },
   { text: 'Serum urate can be normal during acute flare (up to 40% of cases)', nodeId: 'gout-serum-urate' },
   { text: 'Avoid corticosteroids - risk of rebound pain and stroke', nodeId: 'gout-treatment-assessment' },
 ];
@@ -36,7 +36,7 @@ export const GOUT_NODES: DecisionNode[] = [
     citation: [1, 2],
     calculatorLinks: [
       { id: 'gout-acr-eular', label: 'ACR/EULAR Gout Criteria' },
-      { id: 'gout-vs-septic', label: 'Gout vs Septic Differentiator' },
+      { id: 'gout-vs-septic', label: 'Septic Joint Safety Checklist' },
     ],
     next: 'gout-presentation',
     summary: 'Acute gout: rapid-onset monoarticular pain, MTP1 most common — rule out septic joint',
@@ -92,8 +92,8 @@ export const GOUT_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Joint Aspiration Indications',
-    body: '**Joint aspiration provides:**\n1. Crystal identification (definitive diagnosis)\n2. Gram stain and culture (rule out septic arthritis)\n3. Cell count and differential\n4. Therapeutic relief\n\n**Send for:**\n- Cell count with differential\n- Gram stain\n- Culture (aerobic, consider anaerobic if high risk)\n- Crystal analysis under polarized microscopy\n- Glucose (optional, compare to serum)\n- Lactate (if available)\n\n**Technique considerations:**\n- Use sterile technique\n- Aspirate as much fluid as possible\n- If single joint with significant effusion, can inject corticosteroid after aspiration [1][6]',
-    citation: [1, 6],
+    body: '**Joint aspiration provides:**\n1. Crystal identification (definitive diagnosis)\n2. Gram stain and culture (evaluate infection; negative Gram stain does not exclude it)\n3. Cell count and differential\n4. Therapeutic relief\n\n**Send for:**\n- Cell count with differential\n- Gram stain\n- Culture (aerobic, consider anaerobic if high risk)\n- Crystal analysis under polarized microscopy\n- Glucose (optional, compare to serum)\n- Lactate (if available)\n\n**Technique considerations:**\n- Use sterile technique\n- Aspirate as much fluid as possible\n- Do not inject corticosteroid while infection remains suspected; obtaining fluid or a negative Gram stain alone is insufficient [1][6][11][12]',
+    citation: [1, 6, 11, 12],
     next: 'gout-synovial-interpretation',
     summary: 'Joint aspiration indicated when septic joint cannot be excluded clinically',
     skippable: true,
@@ -104,8 +104,8 @@ export const GOUT_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Synovial Fluid Interpretation',
-    body: '**WBC count classification:**\n\n| Classification | WBC/mm3 | Interpretation |\n|----------------|---------|----------------|\n| Non-inflammatory | <2,000 | OA, trauma |\n| Inflammatory | 2,000-50,000 | Crystal, RA, reactive |\n| Septic | >50,000 | Bacterial infection |\n\n**Crystal arthritis ranges:**\n- Gout: 10,000-70,000/uL (can exceed 100,000)\n- CPPD: Similar range\n- PMN% usually >50% in both\n\n**Key point:** WBC counts in gout can exceed 50,000/uL. Cannot use WBC alone to distinguish from septic arthritis.\n\n**Crystal identification:**\n\n| Crystal | Shape | Birefringence | Parallel Color |\n|---------|-------|---------------|----------------|\n| MSU (Gout) | Needle | Strong negative | Yellow |\n| CPP (CPPD) | Rhomboid | Weak positive | Blue |\n\n**Sensitivity:** ~84% for crystal detection. If negative but high suspicion, repeat on subsequent flare. [6][7]',
-    citation: [6, 7],
+    body: '**WBC count classification:**\n\n| Classification | WBC/mm3 | Interpretation |\n|----------------|---------|----------------|\n| Non-inflammatory | <2,000 | OA, trauma |\n| Inflammatory | 2,000-50,000 | Crystal, RA, reactive |\n| Concerning for infection | >50,000 | Suggestive, not diagnostic; crystals overlap |\n\n**Crystal arthritis ranges:**\n- Gout: 10,000-70,000/uL (can exceed 100,000)\n- CPPD: Similar range\n- PMN% usually >50% in both\n\n**Key point:** WBC counts in gout can exceed 50,000/uL. Cannot use WBC alone to distinguish from septic arthritis. Counts below 50,000 also occur in infection. Crystals and negative Gram stain do not exclude infection. [11][12]\n\n**Crystal identification:**\n\n| Crystal | Shape | Birefringence | Parallel Color |\n|---------|-------|---------------|----------------|\n| MSU (Gout) | Needle | Strong negative | Yellow |\n| CPP (CPPD) | Rhomboid | Weak positive | Blue |\n\n**Sensitivity:** ~84% for crystal detection. If negative but high suspicion, repeat on subsequent flare. [6][7]',
+    citation: [6, 7, 11, 12],
     calculatorLinks: [
       { id: 'gout-synovial-interpreter', label: 'Synovial Fluid Interpreter' },
     ],
@@ -210,16 +210,17 @@ export const GOUT_NODES: DecisionNode[] = [
 
   {
     id: 'gout-septic-concern',
-    type: 'info',
+    type: 'result',
     module: 3,
     title: 'Septic Arthritis Concern',
-    body: '**High-risk features for septic arthritis:**\n\n- Fever >38.5C\n- Immunocompromise (DM, steroids, HIV)\n- Synovial WBC >85,000/mm3 (even with crystals)\n- Recent joint surgery or injection\n- IV drug use\n- Skin infection overlying joint\n- Bacteremia or endocarditis\n- Prosthetic joint\n\n**CRITICAL:** Crystals do NOT exclude infection.\nGout/CPPD joints are at INCREASED risk for septic arthritis.\n\n**If uncertain:**\n1. Aspirate and send for Gram stain AND culture\n2. If toxic-appearing: treat for BOTH (antibiotics + anti-inflammatory)\n3. Hold empiric steroids until cultures obtained if stable\n4. Repeat aspiration in 24-48h if culture pending\n5. Consider orthopedic and rheumatology consultation\n\n**See Septic Arthritis consult** for full management. [6][9]',
-    citation: [6, 9],
+    body: "**Crystals do NOT exclude concomitant infection.** Gout/CPPD can coexist with septic arthritis. Absence of fever or toxic appearance is not reassuring enough to withhold treatment when infection remains suspected.\n\n**WBC is not a rule-out test:** synovial WBC >50,000/mm3 raises concern but is not diagnostic; lower counts also occur in infection. **78,000/mm3 with crystals is concerning, not reassuring because it is below 85,000.** There is no safe 85,000 cutoff.\n\nRisk factors include immunocompromise, recent joint surgery/injection, injection drug use, skin infection, bacteremia and prosthetic joint. Discuss suspected prosthetic-joint infection urgently with orthopedics before aspiration.\n\n**Persistent clinical concern for septic arthritis, even with crystals:**\n1. Urgent arthrocentesis: synovial culture, Gram stain, WBC/differential and crystals; obtain blood cultures. If stable, collect samples before antibiotics when this can be done promptly.\n2. **Start empiric IV antibiotics when septic arthritis remains suspected. Do not wait for toxic appearance, fever, a positive Gram stain or finalized cultures.** In sepsis/shock, do not delay antibiotics for aspiration. Cover likely organisms including S. aureus; add MRSA/Gram-negative coverage according to risks and local guidance.\n3. **Urgent orthopedic consultation, admission and a joint drainage/source-control plan.** Rheumatology may assist but does not replace orthopedics. Do not substitute outpatient observation or repeat aspiration in 24-48 hours for initial treatment.\n4. Defer gout-directed systemic and intra-articular corticosteroids until infection is reasonably excluded. Sampling alone or a negative Gram stain is not clearance for steroids. Analgesia must not delay infection treatment.\n\n[Septic arthritis: empiric antibiotics](#/node/sa-empiric-nongc) · [Full septic arthritis consult](#/tree/septic-arthritis) [11][12]",
+    citation: [6, 9, 11, 12],
     calculatorLinks: [
-      { id: 'gout-vs-septic', label: 'Gout vs Septic Differentiator' },
+      { id: 'gout-vs-septic', label: 'Septic Joint Safety Checklist' },
     ],
-    next: 'gout-treatment-assessment',
-    summary: 'Septic joint is the critical mimicker — aspirate if febrile, immunocompromised, or prosthetic joint',
+    recommendation: 'Treat persistent concern as suspected septic arthritis: prompt aspiration/cultures, empiric IV antibiotics, urgent orthopedics and admission for drainage planning.',
+    confidence: 'recommended',
+    summary: 'Crystals and WBC below 85,000 do not exclude infection: aspirate, give empiric IV antibiotics, consult orthopedics and admit when concern persists',
     safetyLevel: 'critical',
   },
 
@@ -243,8 +244,8 @@ export const GOUT_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Acute Flare Treatment: Overview',
-    body: '**ACR 2020 treatment priority:**\n\n1. **NSAIDs** - First choice if no contraindications\n2. [Colchicine](#/drug/colchicine/acute gout flare) - Best if started within 36 hours of onset\n3. **Glucocorticoids** - Oral, IA, or IM; first choice if NSAID/colchicine contraindicated\n4. **IL-1 inhibitors** - Reserved for refractory cases\n\n**Key principles:**\n- Start treatment within 24 hours for best efficacy\n- Use FULL anti-inflammatory doses\n- Topical ice is helpful as adjuvant\n- Continue any existing ULT (stopping prolongs flare)\n- Combination therapy acceptable for severe/polyarticular flares\n\n**Do NOT use:**\n- Low-dose aspirin (interferes with urate excretion)\n- Allopurinol/febuxostat alone for acute flare (these are preventive)\n\n**Use the Treatment Selector calculator** to choose the appropriate agent based on patient contraindications. [1][2]',
-    citation: [1, 2],
+    body: '**Infection safety gate:** If septic arthritis remains suspected, follow the [infection pathway](#/node/gout-septic-concern): aspiration/cultures, IV antibiotics, urgent orthopedics and admission. Do not use gout-directed steroids until infection is reasonably excluded. [11][12]\n\n**ACR 2020 treatment priority:**\n\n1. **NSAIDs** - First choice if no contraindications\n2. [Colchicine](#/drug/colchicine/acute gout flare) - Best if started within 36 hours of onset\n3. **Glucocorticoids** - Oral, IA, or IM; first choice if NSAID/colchicine contraindicated\n4. **IL-1 inhibitors** - Reserved for refractory cases\n\n**Key principles:**\n- Start treatment within 24 hours for best efficacy\n- Use FULL anti-inflammatory doses\n- Topical ice is helpful as adjuvant\n- Continue any existing ULT (stopping prolongs flare)\n- Combination therapy acceptable for severe/polyarticular flares\n\n**Do NOT use:**\n- Low-dose aspirin (interferes with urate excretion)\n- Allopurinol/febuxostat alone for acute flare (these are preventive)\n\n**Use the Treatment Selector calculator** to choose the appropriate agent based on patient contraindications. [1][2]',
+    citation: [1, 2, 11, 12],
     calculatorLinks: [
       { id: 'gout-treatment-selector', label: 'Treatment Selector' },
     ],
@@ -257,8 +258,8 @@ export const GOUT_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Contraindication Screening',
-    body: '**Screen for contraindications to guide treatment selection.**\n\n**NSAID contraindications:**\n- CKD (CrCl <60 mL/min)\n- Active GI bleed or peptic ulcer\n- Cardiovascular disease (CHF, recent MI, uncontrolled HTN)\n- Anticoagulation\n- NSAID allergy\n\n**Colchicine contraindications:**\n- Severe CKD (CrCl <30) - use with caution\n- Severe hepatic impairment\n- Strong CYP3A4 inhibitors (clarithromycin, ketoconazole, ritonavir)\n- P-gp inhibitors (cyclosporine)\n\n**Steroid relative contraindications:**\n- Diabetes (will cause hyperglycemia)\n- Active infection (relative)\n- Uncontrolled HTN\n\nWhat contraindications are present?',
-    citation: [1, 2],
+    body: '**Before gout steroids:** Defer while joint infection remains suspected; obtain cultures, start empiric IV antibiotics, urgently consult orthopedics and admit via the [infection pathway](#/node/gout-septic-concern). Negative Gram stain alone does not clear steroids. [11][12]\n\n**Screen for contraindications to guide treatment selection.**\n\n**NSAID contraindications:**\n- CKD (CrCl <60 mL/min)\n- Active GI bleed or peptic ulcer\n- Cardiovascular disease (CHF, recent MI, uncontrolled HTN)\n- Anticoagulation\n- NSAID allergy\n\n**Colchicine contraindications:**\n- Severe CKD (CrCl <30) - use with caution\n- Severe hepatic impairment\n- Strong CYP3A4 inhibitors (clarithromycin, ketoconazole, ritonavir)\n- P-gp inhibitors (cyclosporine)\n\n**Steroid relative contraindications:**\n- Diabetes (will cause hyperglycemia)\n- Active infection (relative)\n- Uncontrolled HTN\n\nWhat contraindications are present?',
+    citation: [1, 2, 11, 12],
     options: [
       { label: 'No contraindications', description: 'NSAIDs preferred', next: 'gout-nsaid-treatment' },
       { label: 'NSAID contraindicated, colchicine OK', description: 'Renal disease, CVD, or GI risk', next: 'gout-colchicine-treatment' },
@@ -330,8 +331,8 @@ export const GOUT_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Corticosteroid Treatment',
-    body: '**Corticosteroids are equally effective as NSAIDs.**\n\n**Oral prednisone:**\n\n**Option 1 (Simple taper):**\n- 30-40 mg daily x 5 days, then stop\n\n**Option 2 (Gradual taper):**\n- 40-60 mg x 3 days\n- Then taper 10-15 mg q3 days over 10-14 days\n\n**Option 3 (Weight-based):**\n- 0.5 mg/kg/day x 5-10 days, then taper over 7-10 days\n\n**Intramuscular steroids:**\n- Triamcinolone 60 mg IM x1\n- Methylprednisolone 80-120 mg IM x1\n- Good for polyarticular or unable to take PO\n\n**Counseling:**\n- Will cause hyperglycemia in diabetics (warn, adjust meds)\n- May cause insomnia, mood changes\n- Avoid in active infection if possible [1][2][10]',
-    citation: [1, 2, 10],
+    body: '**Before gout steroids:** Defer while joint infection remains suspected; obtain cultures, start empiric IV antibiotics, urgently consult orthopedics and admit via the [infection pathway](#/node/gout-septic-concern). Negative Gram stain alone does not clear steroids. [11][12]\n\n**Corticosteroids are equally effective as NSAIDs.**\n\n**Oral prednisone:**\n\n**Option 1 (Simple taper):**\n- 30-40 mg daily x 5 days, then stop\n\n**Option 2 (Gradual taper):**\n- 40-60 mg x 3 days\n- Then taper 10-15 mg q3 days over 10-14 days\n\n**Option 3 (Weight-based):**\n- 0.5 mg/kg/day x 5-10 days, then taper over 7-10 days\n\n**Intramuscular steroids:**\n- Triamcinolone 60 mg IM x1\n- Methylprednisolone 80-120 mg IM x1\n- Good for polyarticular or unable to take PO\n\n**Counseling:**\n- Will cause hyperglycemia in diabetics (warn, adjust meds)\n- May cause insomnia, mood changes\n- Avoid in active infection if possible [1][2][10]',
+    citation: [1, 2, 10, 11, 12],
     treatment: {
       firstLine: {
         drug: 'Prednisone',
@@ -360,8 +361,8 @@ export const GOUT_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Intra-articular Corticosteroid',
-    body: '**IA steroids are preferred for single joint with effusion.**\n\n**Technique:**\n1. Aspirate joint first (therapeutic + diagnostic)\n2. Send fluid for crystal analysis and culture\n3. Inject corticosteroid into same joint\n\n**Dosing by joint size:**\n\n| Joint | Triamcinolone | Methylprednisolone |\n|-------|---------------|--------------------|\n| Large (knee) | 40 mg | 40-80 mg |\n| Medium (ankle, wrist) | 20-30 mg | 20-40 mg |\n| Small (MTP, MCP) | 10 mg | 10-20 mg |\n\n**Advantages:**\n- Rapid relief (often within hours)\n- Avoids systemic side effects\n- Diagnostic and therapeutic in one procedure\n\n**Contraindications:**\n- Suspected septic arthritis (aspirate first, wait for Gram stain)\n- Prosthetic joint (relative - ortho consultation)\n- Overlying cellulitis [1][2][10]',
-    citation: [1, 2, 10],
+    body: '**IA steroids are preferred for single joint with effusion.**\n\n**Technique:**\n1. Aspirate joint first (therapeutic + diagnostic)\n2. Send fluid for crystal analysis and culture\n3. Inject only after infection is reasonably excluded\n\n**Dosing by joint size:**\n\n| Joint | Triamcinolone | Methylprednisolone |\n|-------|---------------|--------------------|\n| Large (knee) | 40 mg | 40-80 mg |\n| Medium (ankle, wrist) | 20-30 mg | 20-40 mg |\n| Small (MTP, MCP) | 10 mg | 10-20 mg |\n\n**Advantages:**\n- Rapid relief (often within hours)\n- Avoids systemic side effects\n- Diagnostic and therapeutic in one procedure\n\n**Contraindications:**\n- Suspected septic arthritis: do not inject until infection is reasonably excluded; negative Gram stain alone is insufficient\n- Prosthetic joint (relative - ortho consultation)\n- Overlying cellulitis [1][2][10]',
+    citation: [1, 2, 10, 11, 12],
     treatment: {
       firstLine: {
         drug: 'Triamcinolone Acetonide',
@@ -369,12 +370,12 @@ export const GOUT_NODES: DecisionNode[] = [
         route: 'Intra-articular',
         frequency: 'Single injection',
         duration: 'One-time',
-        notes: 'Aspirate joint first. Provides rapid relief. Wait for Gram stain if septic concern.',
+        notes: 'Aspirate joint first. Provides rapid relief. Do not inject while infection remains suspected, even with negative Gram stain.',
       },
       monitoring: 'Reassess joint in 24-48h. Return if fever or worsening.',
     },
     next: 'gout-treatment-monitoring',
-    summary: 'Intra-articular triamcinolone 20-40mg ideal for monoarticular gout — confirms joint and treats simultaneously',
+    summary: 'Intra-articular steroid only after infection is reasonably excluded; aspiration or negative Gram stain alone does not clear injection',
     skippable: true,
   },
 
@@ -422,11 +423,11 @@ export const GOUT_NODES: DecisionNode[] = [
     type: 'question',
     module: 5,
     title: 'Disposition Assessment',
-    body: '**Most gout flares can be managed outpatient.**\n\n**Consider admission if:**\n- Septic arthritis not excluded\n- Multiple joint involvement with systemic illness\n- Unable to take oral medications\n- Significant comorbidities affecting treatment\n- Unreliable follow-up\n- Refractory pain requiring IV/parenteral medications\n\n**Outpatient management appropriate if:**\n- Diagnosis confident (clinical or crystal-proven)\n- Able to tolerate oral medications\n- Adequate pain control achieved\n- Reliable follow-up available\n- Return precautions understood\n\nWhat is the appropriate disposition?',
-    citation: [1],
+    body: '**Most gout flares can be managed outpatient.**\n\n**Admit with IV antibiotics and urgent orthopedics if septic arthritis remains suspected, even with crystals or no fever.** [11][12]\n\n**Other reasons to consider admission:**\n- Septic arthritis not excluded\n- Multiple joint involvement with systemic illness\n- Unable to take oral medications\n- Significant comorbidities affecting treatment\n- Unreliable follow-up\n- Refractory pain requiring IV/parenteral medications\n\n**Outpatient management appropriate if:**\n- Infection reasonably excluded after clinical assessment; crystals alone are insufficient\n- Able to tolerate oral medications\n- Adequate pain control achieved\n- Reliable follow-up available\n- Return precautions understood\n\nWhat is the appropriate disposition?',
+    citation: [1, 11, 12],
     options: [
       { label: 'Discharge with outpatient follow-up', description: 'Diagnosis confident, able to manage at home', next: 'gout-discharge-instructions' },
-      { label: 'Admission for observation', description: 'Septic arthritis not excluded, pending cultures', next: 'gout-admission-orders', urgency: 'urgent' },
+      { label: 'Suspected septic joint: antibiotics + admission', description: 'Urgent orthopedics and drainage planning; do not wait for finalized cultures', next: 'gout-admission-orders', urgency: 'urgent' },
       { label: 'Rheumatology consultation', description: 'Complex case, refractory, or multiple contraindications', next: 'gout-rheum-consult' },
     ],
     summary: 'Most gout discharges home — admit if septic joint concern, severe renal failure, or unable to take PO',
@@ -446,23 +447,13 @@ export const GOUT_NODES: DecisionNode[] = [
 
   {
     id: 'gout-admission-orders',
-    type: 'info',
+    type: 'result',
     module: 5,
     title: 'Admission Orders',
-    body: '**Indications for admission:**\n- Septic arthritis not excluded (pending cultures)\n- Polyarticular involvement with systemic symptoms\n- Unable to tolerate PO medications\n- Refractory pain\n- Significant comorbidities\n\n**Admission orders:**\n1. NPO or diet as tolerated\n2. IV access for medications/fluids\n3. Anti-inflammatory therapy (IV methylprednisolone if PO not tolerated)\n4. Pain management\n5. Repeat arthrocentesis if cultures pending and clinical concern\n6. Serial exams\n7. Rheumatology consultation\n\n**Discharge criteria:**\n- Pain controlled with oral medications\n- Able to ambulate (if lower extremity)\n- Septic arthritis excluded\n- Reliable follow-up arranged [1]',
-    citation: [1],
-    treatment: {
-      firstLine: {
-        drug: 'Methylprednisolone',
-        dose: '60-125 mg',
-        route: 'IV',
-        frequency: 'Once, then transition to oral',
-        duration: 'Until able to take PO',
-        notes: 'Use if unable to tolerate oral steroids. Transition to oral prednisone when able.',
-      },
-      monitoring: 'Serial exams. Monitor glucose. Transition to PO when tolerating diet.',
-    },
-    next: 'gout-discharge-instructions',
+    body: "**Persistent clinical concern for septic arthritis, even with crystals:**\n1. Urgent arthrocentesis: synovial culture, Gram stain, WBC/differential and crystals; obtain blood cultures. If stable, collect samples before antibiotics when this can be done promptly.\n2. **Start empiric IV antibiotics when septic arthritis remains suspected. Do not wait for toxic appearance, fever, a positive Gram stain or finalized cultures.** In sepsis/shock, do not delay antibiotics for aspiration. Cover likely organisms including S. aureus; add MRSA/Gram-negative coverage according to risks and local guidance.\n3. **Urgent orthopedic consultation, admission and a joint drainage/source-control plan.** Rheumatology may assist but does not replace orthopedics. Do not substitute outpatient observation or repeat aspiration in 24-48 hours for initial treatment.\n4. Defer gout-directed systemic and intra-articular corticosteroids until infection is reasonably excluded. Sampling alone or a negative Gram stain is not clearance for steroids. Analgesia must not delay infection treatment.\n\n[Septic arthritis: empiric antibiotics](#/node/sa-empiric-nongc) · [Full septic arthritis consult](#/tree/septic-arthritis) [11][12]\n\n**Other admission indications when infection is reasonably excluded:** inability to take PO, refractory pain or severe comorbidity. Use appropriate gout therapy only in that separate pathway.\n\n**Before discharge:** reassess for infection, ensure pain control/ambulation, reliable follow-up and an explicit culture-result follow-up plan. A positive crystal result alone does not justify discharge.",
+    citation: [1, 11, 12],
+    recommendation: 'For suspected septic arthritis: empiric IV antibiotics, urgent orthopedics, admission and source control. Avoid gout steroids while infection remains suspected.',
+    confidence: 'recommended',
     summary: 'Admit if septic joint suspected, severe comorbidities, or inability to control pain outpatient',
   },
 
@@ -515,6 +506,8 @@ export const GOUT_MODULE_LABELS = [
 ];
 
 export const GOUT_CITATIONS: Citation[] = [
+  { num: 11, text: 'Long B, Koyfman A, Gottlieb M. Evaluation and Management of Septic Arthritis and its Mimics in the Emergency Department. West J Emerg Med. 2019;20:331-341. https://pmc.ncbi.nlm.nih.gov/articles/PMC6404712/' },
+  { num: 12, text: 'Ravn C, et al. Guideline for management of septic arthritis in native joints (SANJO). J Bone Jt Infect. 2023;8:29-37. https://jbji.copernicus.org/articles/8/29/2023/' },
   { num: 1, text: 'FitzGerald JD, et al. 2020 American College of Rheumatology Guideline for the Management of Gout. Arthritis Care Res. 2020;72(6):744-760. PMID: 32391934' },
   { num: 2, text: 'Richette P, et al. 2016 updated EULAR evidence-based recommendations for the management of gout. Ann Rheum Dis. 2017;76(1):29-42. PMID: 27457514' },
   { num: 3, text: 'Neogi T, et al. 2015 Gout Classification Criteria: An American College of Rheumatology/European League Against Rheumatism Collaborative Initiative. Arthritis Rheumatol. 2015;67(10):2557-2568. PMID: 26352873' },

@@ -26845,7 +26845,7 @@ const GOUT_TREATMENT_SELECTOR_CALCULATOR = {
     ],
     results: [],
     thresholdNote: 'Decision-logic tool. Recommendations based on ACR 2020 guidelines.',
-    citations: ['FitzGerald JD, et al. 2020 ACR Guideline for Management of Gout. Arthritis Care Res. 2020;72(6):744-760.'],
+    citations: ['Long B, et al. West J Emerg Med. 2019;20:331-341. https://pmc.ncbi.nlm.nih.gov/articles/PMC6404712/', 'Ravn C, et al. SANJO guideline. 2023. https://jbji.copernicus.org/articles/8/29/2023/', 'FitzGerald JD, et al. 2020 ACR Guideline for Management of Gout. Arthritis Care Res. 2020;72(6):744-760.'],
     computeResult: (values) => {
         const renal = values['renal'] || 0;
         const gi = values['gi'] || 0;
@@ -26858,8 +26858,10 @@ const GOUT_TREATMENT_SELECTOR_CALCULATOR = {
         const singleJoint = values['single-joint'] || 0;
         const nsaidContraindicated = renal || gi || cvd || anticoag;
         const colchicineContraindicated = cyp3a4 || (renal && onset);
+        if (infection)
+            return { value: 'SUSPECTED INFECTION', label: 'Use septic joint pathway', description: 'Crystals do not exclude infection. Prompt aspiration/cultures, empiric IV antibiotics when concern persists, urgent orthopedics and admission for drainage. In sepsis do not delay antibiotics for aspiration. Defer gout steroids until infection is reasonably excluded.', colorVar: '--color-danger' };
         if (singleJoint === 1) {
-            return { value: 'IA Steroid', label: 'Intra-articular Corticosteroid Preferred', description: '**Single joint with effusion - IA steroid is first choice.**\n\n1. Aspirate joint (diagnostic + therapeutic)\n2. Send fluid for crystals AND culture\n3. Inject steroid after aspiration\n\n**Dosing:**\n• Large joint (knee): Triamcinolone 40mg\n• Medium (ankle, wrist): 20-30mg\n• Small (MTP, MCP): 10mg', colorVar: '--color-decision-active' };
+            return { value: 'IA Steroid', label: 'Intra-articular Corticosteroid Preferred', description: '**Single joint with effusion - IA steroid is first choice.**\n\n1. Aspirate joint (diagnostic + therapeutic)\n2. Send fluid for crystals AND culture\n3. Inject only after infection is reasonably excluded; sampling or a negative Gram stain alone is insufficient\n\n**Dosing:**\n• Large joint (knee): Triamcinolone 40mg\n• Medium (ankle, wrist): 20-30mg\n• Small (MTP, MCP): 10mg', colorVar: '--color-decision-active' };
         }
         if (!nsaidContraindicated) {
             return { value: 'NSAIDs', label: 'NSAIDs Recommended', description: '**NSAIDs are first-line for acute gout.**\n\n**Options (FULL anti-inflammatory doses):**\n• Naproxen 750mg x1, then 250mg q8h\n• Indomethacin 50mg TID x2-3d, then 25mg TID\n• Ibuprofen 800mg TID\n\n**Duration:** Until flare resolves (5-7 days)', colorVar: '--color-decision-active' };
@@ -26869,8 +26871,7 @@ const GOUT_TREATMENT_SELECTOR_CALCULATOR = {
         }
         if (nsaidContraindicated && (colchicineContraindicated || onset === 1)) {
             const diabetesWarning = diabetes ? '\n\n⚠️ DIABETES: Will cause hyperglycemia.' : '';
-            const infectionWarning = infection ? '\n\n⚠️ INFECTION CONCERN: Ensure cultures obtained before steroids.' : '';
-            return { value: 'Steroids', label: 'Corticosteroids Recommended', description: '**Corticosteroids - first choice when NSAID/colchicine contraindicated.**\n\n**Oral prednisone:**\n• 30-40mg daily x 5 days\n\n**IM option:**\n• Triamcinolone 60mg IM x1' + diabetesWarning + infectionWarning, colorVar: '--color-decision-active' };
+            return { value: 'Steroids', label: 'Corticosteroids Recommended', description: '**Corticosteroids - first choice when NSAID/colchicine contraindicated.**\n\n**Oral prednisone:**\n• 30-40mg daily x 5 days\n\n**IM option:**\n• Triamcinolone 60mg IM x1' + diabetesWarning, colorVar: '--color-decision-active' };
         }
         return { value: '—', label: 'Select contraindications', description: 'Check applicable contraindications to generate recommendation.', colorVar: '--color-text-muted' };
     },
@@ -26938,6 +26939,7 @@ const GOUT_SYNOVIAL_INTERPRETER_CALCULATOR = {
     subtitle: 'Joint Aspiration Analysis',
     description: 'Interprets synovial fluid analysis results to guide diagnosis and management.',
     fields: [
+        { name: 'infection-concern', label: 'Clinical concern for infection persists', type: 'toggle', points: 0, description: 'Overrides reassuring crystals, Gram stain or WBC' },
         { name: 'wbc', label: 'Synovial WBC Count', type: 'select', points: 0, description: 'WBC per mm³', selectOptions: [
                 { label: '<2,000/mm³', points: 0 },
                 { label: '2,000 - 25,000/mm³', points: 1 },
@@ -26962,47 +26964,25 @@ const GOUT_SYNOVIAL_INTERPRETER_CALCULATOR = {
     ],
     results: [],
     thresholdNote: 'Crystals do NOT exclude septic arthritis. Infected joints can contain crystals.',
-    citations: ['Swan A, et al. Ann Rheum Dis. 2002;61(6):493-498.', 'Margaretten ME, et al. JAMA. 2007;297(13):1478-1488.'],
+    citations: ['Long B, et al. West J Emerg Med. 2019;20:331-341. https://pmc.ncbi.nlm.nih.gov/articles/PMC6404712/', 'Ravn C, et al. SANJO guideline. 2023. https://jbji.copernicus.org/articles/8/29/2023/', 'Swan A, et al. Ann Rheum Dis. 2002;61(6):493-498.', 'Margaretten ME, et al. JAMA. 2007;297(13):1478-1488.'],
     computeResult: (values) => {
         const wbc = values['wbc'] || 0;
         const crystals = values['crystals'] || 0;
         const gram = values['gram'] || 0;
-        if (gram === 1 || gram === 2) {
-            const organism = gram === 1 ? 'Gram-positive cocci' : 'Gram-negative organisms';
-            return { value: 'SEPTIC ARTHRITIS', label: 'Positive Gram Stain - Treat as Septic', description: `**${organism} identified.**\n\n**Treat as septic arthritis regardless of crystals.**\n\nVancomycin + Ceftriaxone. Ortho consultation for washout.`, colorVar: '--color-danger' };
-        }
-        if (wbc >= 4) {
-            return { value: 'HIGH SUSPICION SEPTIC', label: 'WBC >100,000 - Treat as Septic', description: '**WBC >100,000/mm³ has ~99% sensitivity for septic arthritis.**\n\nEmpric antibiotics, ortho consultation for drainage.', colorVar: '--color-danger' };
-        }
-        if (crystals === 1) {
-            const warningNote = wbc >= 3 ? '\n\n⚠️ WBC 50-100k overlaps with septic range. If infection concern, treat for BOTH.' : '';
-            return { value: 'GOUT', label: 'MSU Crystals - Gout Confirmed', description: '**Monosodium urate crystals identified.**\n\nNeedle-shaped, strong negative birefringence.\n\nTreat with NSAIDs, colchicine, or steroids.' + warningNote, colorVar: '--color-decision-active' };
-        }
-        if (crystals === 2) {
-            const warningNote = wbc >= 3 ? '\n\n⚠️ WBC 50-100k overlaps with septic range. If infection concern, treat for BOTH.' : '';
-            return { value: 'CPPD / PSEUDOGOUT', label: 'CPP Crystals - CPPD Confirmed', description: '**Calcium pyrophosphate crystals identified.**\n\nRhomboid, weak positive birefringence.\n\nTreatment same as gout. Consider secondary cause workup.' + warningNote, colorVar: '--color-decision-active' };
-        }
-        if (crystals === 3) {
-            return { value: 'MIXED CRYSTALS', label: 'Both MSU and CPP Crystals', description: '**Both crystal types identified - can coexist.**\n\nTreat with anti-inflammatory therapy. Rheumatology referral helpful.', colorVar: '--color-decision-active' };
-        }
-        if (wbc === 0) {
-            return { value: 'NON-INFLAMMATORY', label: 'Non-Inflammatory Fluid', description: '**WBC <2,000/mm³ suggests non-inflammatory etiology.**\n\nConsider OA, trauma, avascular necrosis.', colorVar: '--color-primary' };
-        }
-        if (crystals === 0 && wbc >= 1 && wbc <= 2) {
-            return { value: 'INFLAMMATORY', label: 'Inflammatory - No Crystals', description: '**Inflammatory fluid without crystals.**\n\nDDx: Crystal arthritis (crystals missed), RA, reactive, early septic.\n\nAwait cultures before steroids if possible.', colorVar: '--color-warning' };
-        }
-        if (crystals === 0 && wbc === 3) {
-            return { value: 'UNCERTAIN', label: 'WBC 50-100k - Cannot Exclude Septic', description: '**Gray zone between inflammatory and septic.**\n\nAwait Gram stain and culture. Do NOT discharge until septic excluded.', colorVar: '--color-warning' };
-        }
-        return { value: '—', label: 'Enter fluid analysis', description: 'Enter synovial fluid results for interpretation.', colorVar: '--color-text-muted' };
+        const actions = 'Obtain synovial and blood cultures promptly before antibiotics if stable. Start empiric IV antibiotics when infection remains suspected; do not wait for toxicity or finalized cultures. Urgent orthopedics, admission and drainage planning. In sepsis, do not delay antibiotics for aspiration. Defer gout steroids until infection is reasonably excluded.';
+        if (values['infection-concern'] || gram || wbc >= 3)
+            return { value: 'URGENT SEPTIC EVALUATION', label: 'Infection cannot be excluded by crystals', description: 'A positive Gram stain or WBC ≥50,000 is concerning. A count of 78,000 is not reassuring because it is below 85,000. WBC alone is not diagnostic. ' + actions, colorVar: '--color-danger' };
+        const finding = crystals === 1 ? 'MSU CRYSTALS' : crystals === 2 ? 'CPP CRYSTALS' : crystals === 3 ? 'MIXED CRYSTALS' : 'NO CRYSTALS SEEN';
+        return { value: finding, label: 'Crystal result does not establish absence of infection', description: 'Low synovial WBC and negative Gram stain do not exclude septic arthritis. Interpret with the full clinical assessment. If concern persists: ' + actions, colorVar: '--color-warning' };
     },
 };
 const GOUT_VS_SEPTIC_CALCULATOR = {
     id: 'gout-vs-septic',
-    title: 'Gout vs Septic Differentiator',
-    subtitle: 'Risk Assessment for Septic Arthritis',
-    description: 'Assesses clinical features to differentiate crystal arthritis from septic arthritis. Crystals do NOT exclude infection.',
+    title: 'Septic Joint Safety Checklist',
+    subtitle: 'Clinical Checklist, Not a Validated Rule-Out Score',
+    description: 'No combination of absent checklist findings rules out septic arthritis. Crystals do NOT exclude infection; clinical concern overrides this tool.',
     fields: [
+        { name: 'infection-concern', label: 'Clinical concern for infection persists', type: 'toggle', points: 0 },
         { name: 'fever', label: 'Fever ≥38.5°C (101.3°F)', type: 'toggle', points: 1, description: 'Documented temperature elevation' },
         { name: 'rigor', label: 'Rigors/chills', type: 'toggle', points: 1, description: 'Suggests bacteremia' },
         { name: 'wbc', label: 'Serum WBC >10,000', type: 'toggle', points: 1, description: 'Peripheral leukocytosis' },
@@ -27016,34 +26996,12 @@ const GOUT_VS_SEPTIC_CALCULATOR = {
     ],
     results: [],
     thresholdNote: 'High-risk features warrant arthrocentesis regardless of prior gout history.',
-    citations: ['Margaretten ME, et al. JAMA. 2007;297(13):1478-1488.'],
+    citations: ['Long B, et al. West J Emerg Med. 2019;20:331-341. https://pmc.ncbi.nlm.nih.gov/articles/PMC6404712/', 'Ravn C, et al. SANJO guideline. 2023. https://jbji.copernicus.org/articles/8/29/2023/', 'Margaretten ME, et al. JAMA. 2007;297(13):1478-1488.'],
     computeResult: (values) => {
-        const fever = values['fever'] || 0;
-        const rigor = values['rigor'] || 0;
-        const wbc = values['wbc'] || 0;
-        const immunocompromised = values['immunocompromised'] || 0;
-        const ivdu = values['ivdu'] || 0;
-        const prosthetic = values['prosthetic'] || 0;
-        const skinInfection = values['skin-infection'] || 0;
-        const bacteremia = values['bacteremia'] || 0;
-        const podagra = values['podagra'] || 0;
-        const historyGout = values['history-gout'] || 0;
-        const highRiskFeatures = immunocompromised + ivdu + prosthetic + skinInfection + bacteremia;
-        const moderateRiskFeatures = fever + rigor + wbc;
-        const goutFeatures = podagra + historyGout;
-        if (prosthetic === 1 || bacteremia === 1 || skinInfection === 1) {
-            return { value: 'HIGH RISK', label: 'Critical - Must Exclude Septic', description: '**Critical risk factor present.**\n\nAspirate joint, hold steroids until cultures obtained, ortho/ID consultation.\n\nCrystals may coexist with infection.', colorVar: '--color-danger' };
-        }
-        if (highRiskFeatures >= 1 || moderateRiskFeatures >= 3) {
-            return { value: 'ELEVATED RISK', label: 'Elevated Risk - Aspiration Required', description: '**Multiple risk factors present.**\n\nAspiration mandatory even with prior gout history.', colorVar: '--color-warning' };
-        }
-        if (moderateRiskFeatures >= 1) {
-            return { value: 'MODERATE RISK', label: 'Moderate Risk - Consider Aspiration', description: '**Some risk factors present.**\n\nAspiration recommended unless classic podagra with known gout and no fever.', colorVar: '--color-warning' };
-        }
-        if (goutFeatures >= 2 && highRiskFeatures === 0 && moderateRiskFeatures === 0) {
-            return { value: 'LOW RISK', label: 'Low Risk - Empiric Treatment Reasonable', description: '**Low risk for septic arthritis.**\n\nClassic presentation, prior gout, no fever/risk factors.\n\nEmpiric treatment acceptable with reliable follow-up.', colorVar: '--color-decision-active' };
-        }
-        return { value: 'ASSESS', label: 'Complete Assessment', description: '**Select applicable risk factors.**\n\nRemember: Crystals do NOT exclude infection. When in doubt, aspirate.', colorVar: '--color-text-muted' };
+        const concerning = ['infection-concern', 'fever', 'rigor', 'wbc', 'immunocompromised', 'ivdu', 'prosthetic', 'skin-infection', 'bacteremia'].some(key => (values[key] || 0) > 0);
+        if (concerning)
+            return { value: 'ASSESS FOR INFECTION', label: 'Prompt aspiration and clinical reassessment', description: 'Risk factors prompt urgent evaluation, not a numerical diagnosis. If septic arthritis remains suspected: obtain synovial/blood cultures, start empiric IV antibiotics, consult orthopedics urgently and admit for drainage planning. Do not wait for toxic appearance or final cultures. In sepsis, do not delay antibiotics for aspiration. Defer gout steroids until infection is reasonably excluded.', colorVar: '--color-danger' };
+        return { value: 'NOT EXCLUDED', label: 'No rule-out from this checklist', description: 'Absence of fever/risk factors, prior gout or podagra cannot exclude infection. Only use a gout-only treatment pathway after infection is reasonably excluded clinically. Persistent concern requires aspiration/cultures, empiric IV antibiotics, urgent orthopedics and admission.', colorVar: '--color-warning' };
     },
 };
 // -------------------------------------------------------------------

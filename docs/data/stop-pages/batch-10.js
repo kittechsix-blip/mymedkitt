@@ -234,7 +234,7 @@ export const STOP_PAGES_10 = {
         sections: [
             {
                 heading: '🛑 Do NOT assume crystals exclude septic arthritis',
-                body: 'Crystals in synovial fluid do NOT rule out concurrent septic arthritis. Gout and pseudogout joints are at INCREASED risk for bacterial superinfection. If there is any clinical suspicion, send cultures even when crystals are identified. [See septic concern node](#/node/gout-septic-concern).',
+                body: 'Crystals in synovial fluid do NOT rule out concurrent septic arthritis. Gout and pseudogout joints are at INCREASED risk for bacterial superinfection. If infection remains suspected, promptly aspirate and obtain synovial/blood cultures, start empiric IV antibiotics, urgently consult orthopedics and admit for drainage planning. Do not wait for toxic appearance or finalized cultures. In sepsis, do not delay antibiotics for aspiration. Neither a WBC below 85,000 (including 78,000) nor a negative Gram stain excludes infection. Defer gout steroids until infection is reasonably excluded. [Long 2019](https://pmc.ncbi.nlm.nih.gov/articles/PMC6404712/) · [SANJO 2023](https://jbji.copernicus.org/articles/8/29/2023/). [See septic concern node](#/node/gout-septic-concern).',
             },
             {
                 heading: '🛑 Do NOT use NSAIDs when CrCl <60 mL/min',
