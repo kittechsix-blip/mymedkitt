@@ -477,6 +477,10 @@ export const STOP_PAGES_04 = {
         subtitle: 'Critical pitfalls to avoid',
         sections: [
             {
+                heading: '🛑 Do NOT select higher initial CroFab dosing by severity grade alone',
+                body: 'Rapid progression or coagulopathy alone warrants an initial 4-6 vials when antivenom is indicated. Reserve 8-12 initial vials for immediately life-threatening venom effects, such as shock or serious active bleeding. Reassess and repeat antivenom according to response. Anavip initial dosing remains 10 vials. [Lavonas et al., 2011](https://pmc.ncbi.nlm.nih.gov/articles/PMC3042971/). [Antivenom calculator](#/calculator/snake-antivenom).',
+            },
+            {
                 heading: '🛑 Do NOT apply ice, tourniquet, or incise and suction',
                 body: 'These traditional first-aid measures are harmful. Ice causes tissue ischemia, tourniquets concentrate venom and cause compartment syndrome, and incision/suction does not remove significant venom and causes additional tissue damage. Remove jewelry, immobilize, and transport. [See assessment node](#/node/snake-pit-viper-assess).',
             },

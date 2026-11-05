@@ -8056,9 +8056,9 @@ const SNAKE_SEVERITY_CALCULATOR = {
         { min: -Infinity, max: 1, label: 'Score 0', risk: 'Dry Bite / No Envenomation', mortality: 'Observe 8-12h, repeat labs', colorVar: '--color-primary' },
         { min: 1, max: 4, label: 'Score 1-3', risk: 'Mild Envenomation', mortality: 'Consider observation vs antivenom', colorVar: '--color-primary' },
         { min: 4, max: 8, label: 'Score 4-7', risk: 'Moderate Envenomation', mortality: 'Antivenom indicated', colorVar: '--color-warning' },
-        { min: 8, max: Infinity, label: 'Score 8+', risk: 'Severe Envenomation', mortality: 'Aggressive antivenom + ICU', colorVar: '--color-danger' },
+        { min: 8, max: Infinity, label: 'Score 8+', risk: 'Severe Envenomation', mortality: 'Prompt antivenom + ICU assessment; dose by immediate life threats', colorVar: '--color-danger' },
     ],
-    thresholdNote: 'Change of 1 point = clinically significant worsening',
+    thresholdNote: 'Change of 1 point = clinically significant worsening. Score alone does not select 8-12 initial CroFab vials; reserve that dose for immediately life-threatening effects such as shock or serious active bleeding (Lavonas 2011).',
     citations: [
         'Dart RC, et al. A prospective study of Crotalidae polyvalent immune Fab antivenom. Ann Emerg Med. 2001.',
         'EB Medicine. Evidence-Based Management of Snake Envenomations. 2023.',
@@ -8071,7 +8071,7 @@ const SNAKE_ANTIVENOM_CALCULATOR = {
     id: 'snake-antivenom',
     title: 'Antivenom Dosing',
     subtitle: 'CroFab / Anavip for Pit Viper Bites',
-    description: 'Calculates antivenom dosing with reconstitution instructions. Pediatric dose = adult dose.',
+    description: 'Calculates antivenom dosing with reconstitution instructions. Pediatric dose = adult dose. Severity grade alone does not select the higher initial CroFab dose.',
     fields: [
         {
             name: 'antivenom',
@@ -8084,13 +8084,13 @@ const SNAKE_ANTIVENOM_CALCULATOR = {
             ],
         },
         {
-            name: 'severity',
-            label: 'Severity',
+            name: 'lifeThreatening',
+            label: 'Immediately life-threatening venom effects?',
             type: 'select',
             points: 0,
             selectOptions: [
-                { label: 'Moderate (progression, systemic sx, lab abnl)', points: 1 },
-                { label: 'Severe (shock, airway, active bleeding)', points: 2 },
+                { label: 'No: progression or coagulopathy without immediate life threat', points: 1 },
+                { label: 'Yes: e.g., shock or serious active bleeding', points: 2 },
             ],
         },
         { name: 'pediatric', label: 'Pediatric patient', type: 'toggle', points: 0, description: 'Same dose as adults - based on venom amount' },
@@ -8099,19 +8099,20 @@ const SNAKE_ANTIVENOM_CALCULATOR = {
     results: [],
     thresholdNote: '',
     citations: [
+        'Lavonas EJ, et al. Unified treatment algorithm. BMC Emerg Med. 2011;11:2. https://pmc.ncbi.nlm.nih.gov/articles/PMC3042971/',
         'CroFab Prescribing Information. BTG International.',
         'Anavip Prescribing Information. Instituto Bioclon.',
     ],
     computeResult: (values) => {
         const antivenom = values.antivenom || 1;
-        const severity = values.severity || 1;
+        const lifeThreatening = values.lifeThreatening === 2;
         const pediatric = values.pediatric || 0;
         const allergicRisk = values.allergicRisk || 0;
         const pedsNote = pediatric ? '\n\n**Pediatric Note:** Same dose as adults. Adjust dilution volume for small children (100-150 mL for infants).' : '';
         const allergyNote = allergicRisk ? '\n\n**⚠️ Allergy Risk:** Higher reaction risk with papain/papaya/bromelain allergies. Have epinephrine ready. Benefits usually outweigh risks.' : '';
         if (antivenom === 1) {
             // CroFab
-            const initialDose = severity === 2 ? '8-12 vials' : '4-6 vials';
+            const initialDose = lifeThreatening ? '8-12 vials' : '4-6 vials';
             return {
                 value: initialDose,
                 label: 'CroFab Initial Dose',
@@ -8126,6 +8127,8 @@ const SNAKE_ANTIVENOM_CALCULATOR = {
 
 **Initial Dose:** ${initialDose} IV
 
+**Dose selection:** 4-6 vials when indicated for progression or coagulopathy without immediate life threats. Reserve 8-12 vials for immediately life-threatening venom effects such as shock or serious active bleeding. Severity grade alone does not justify the higher initial dose.
+
 **Administration:**
 • Start slow: 25-50 mL/hr × 10 min
 • If no reaction: increase to 250 mL/hr
@@ -8136,7 +8139,7 @@ const SNAKE_ANTIVENOM_CALCULATOR = {
 • Consult Poison Control
 
 **Reassess** 30-60 min post-infusion. Repeat if inadequate.${pedsNote}${allergyNote}`,
-                colorVar: severity === 2 ? '--color-danger' : '--color-warning',
+                colorVar: lifeThreatening ? '--color-danger' : '--color-warning',
             };
         }
         else {
@@ -8165,7 +8168,7 @@ const SNAKE_ANTIVENOM_CALCULATOR = {
 • Longer half-life
 • Lower recurrence rates
 • No maintenance schedule${pedsNote}${allergyNote}`,
-                colorVar: severity === 2 ? '--color-danger' : '--color-warning',
+                colorVar: lifeThreatening ? '--color-danger' : '--color-warning',
             };
         }
     },

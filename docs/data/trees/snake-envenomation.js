@@ -8,7 +8,7 @@ export const SNAKE_ENVENOMATION_CRITICAL_ACTIONS = [
     { text: 'Obtain baseline labs: CBC, PT/INR, PTT, fibrinogen, BMP, CK', nodeId: 'snake-start' },
     { text: 'Do NOT apply ice, tourniquets, or incise/suction bite', nodeId: 'snake-start' },
     { text: 'Grade pit viper envenomation severity (mild/moderate/severe)', nodeId: 'snake-pit-severity-grade' },
-    { text: 'Give CroFab antivenom for moderate-severe envenomation (loading dose 4-6 vials)', nodeId: 'snake-crofab' },
+    { text: 'Initial CroFab: 4-6 vials when indicated; 8-12 only for immediately life-threatening effects such as shock or serious active bleeding', nodeId: 'snake-crofab' },
     { text: 'Monitor for coagulopathy (PT/INR, fibrinogen q6h × 3 days)', nodeId: 'snake-recurrence-counseling' },
     { text: 'Admit all moderate-severe envenomations and coral snake bites', nodeId: 'snake-dispo-decision' },
 ];
@@ -70,8 +70,8 @@ export const SNAKE_ENVENOMATION_NODES = [
         type: 'question',
         module: 3,
         title: 'Severity Grade',
-        body: '**Grade the envenomation:**\n\n| Grade | Local Signs | Systemic | Labs |\n|-------|------------|----------|------|\n| **Dry (0)** | Fang marks only | None | Normal |\n| **Mild (1)** | Local edema, not crossing joint | Minimal | Normal |\n| **Moderate (2)** | Entire extremity | Nausea, paresthesias | Minor abnl |\n| **Severe (3)** | Rapid progression, necrosis | Hypotension, AMS | Severe abnl |\n\n**Copperhead bites** are often mild — many do NOT require antivenom.\n\n**Rattlesnake bites** more likely to cause coagulopathy and systemic toxicity.\n\nWhat is the severity grade?',
-        citation: [1, 3],
+        body: '**Grade the envenomation:**\n\n| Grade | Local Signs | Systemic | Labs |\n|-------|------------|----------|------|\n| **Dry (0)** | Fang marks only | None | Normal |\n| **Mild (1)** | Local edema, not crossing joint | Minimal | Normal |\n| **Moderate (2)** | Entire extremity | Nausea, paresthesias | Minor abnl |\n| **Severe (3)** | Rapid progression, necrosis | Hypotension, AMS | Severe abnl |\n\n**Copperhead bites** are often mild — many do NOT require antivenom.\n\n**Rattlesnake bites** more likely to cause coagulopathy and systemic toxicity.\n\n**Severity grade does not determine the initial CroFab dose.** Rapid progression or coagulopathy alone does not justify 8-12 vials. Use 4-6 vials initially when antivenom is indicated; reserve 8-12 for immediately life-threatening venom effects such as shock or serious active bleeding. [7]\n\nWhat is the severity grade?',
+        citation: [1, 3, 7],
         options: [
             {
                 label: 'Dry Bite (Grade 0)',
@@ -147,15 +147,15 @@ export const SNAKE_ENVENOMATION_NODES = [
         type: 'info',
         module: 3,
         title: 'Severe Envenomation',
-        body: '**Severe envenomation — aggressive management:**\n\n**Immediate priorities:**\n1. Airway assessment — early intubation for head/neck bites\n2. Large-bore IV × 2\n3. Aggressive fluid resuscitation\n4. Blood products if active bleeding (see below)\n5. **HIGH-DOSE ANTIVENOM**\n\n**Antivenom dosing for severe:**\n- CroFab: 8-12 vials initial (vs 4-6 for moderate)\n- Anavip: 10+ vials\n\n**Coagulopathy management:**\n⚠️ **Treat with ANTIVENOM, not blood products first**\n- FFP/platelets/cryo only for ACTIVE SIGNIFICANT BLEEDING\n- Blood products alone only temporarily correct coagulopathy\n- Antivenom addresses the underlying cause\n\n**Hypotension:**\n- IVF resuscitation\n- Vasopressors if refractory\n\n[Antivenom Calculator](#/calculator/snake-antivenom) [1][3][4]',
-        citation: [1, 3, 4],
+        body: '**Severe envenomation — aggressive management:**\n\n**Immediate priorities:**\n1. Airway assessment — early intubation for head/neck bites\n2. Large-bore IV × 2\n3. Aggressive fluid resuscitation\n4. Blood products if active bleeding (see below)\n5. **PROMPT ANTIVENOM**\n\n**Initial antivenom dosing is based on immediate life threats, not severity grade:**\n- CroFab: **4-6 vials** for progressive swelling or coagulopathy without immediately life-threatening effects.\n- Reserve **8-12 vials** for immediately life-threatening venom effects such as **shock or serious active bleeding**. Rapid progression or abnormal coagulation tests alone do not select this higher initial dose.\n- Anavip: **10 vials** initially.\n- Reassess response after infusion; repeat antivenom if initial control is not achieved. Consult Poison Control (1-800-222-1222). [7]\n\n**Coagulopathy management:**\n⚠️ **Treat with ANTIVENOM, not blood products first**\n- FFP/platelets/cryo only for ACTIVE SIGNIFICANT BLEEDING\n- Blood products alone only temporarily correct coagulopathy\n- Antivenom addresses the underlying cause\n\n**Hypotension:**\n- IVF resuscitation\n- Vasopressors if refractory\n\n[Antivenom Calculator](#/calculator/snake-antivenom) [1][3][4]',
+        citation: [1, 3, 4, 7],
         calculatorLinks: [
             { id: 'snake-antivenom', label: 'Antivenom Dosing' },
         ],
         treatment: {
             firstLine: {
-                drug: 'CroFab or Anavip (high-dose)',
-                dose: 'CroFab 8-12 vials or Anavip 10+ vials',
+                drug: 'CroFab or Anavip',
+                dose: 'CroFab 4-6 vials; 8-12 only for immediately life-threatening effects (e.g., shock or serious active bleeding). Anavip 10 vials',
                 route: 'IV',
                 frequency: 'Repeat until control achieved',
                 duration: 'Until initial control, then maintenance per protocol',
@@ -172,7 +172,7 @@ export const SNAKE_ENVENOMATION_NODES = [
             monitoring: 'Continuous hemodynamic monitoring. Serial labs q4-6h. Airway reassessment for head/neck bites. Watch for progression despite treatment.',
         },
         next: 'snake-antivenom-decision',
-        summary: 'High-dose antivenom (8-12 CroFab or 10+ Anavip); treat coagulopathy with antivenom FIRST, blood products only for active bleeding',
+        summary: 'CroFab initially 4-6 vials; 8-12 only for immediately life-threatening effects such as shock or serious active bleeding. Anavip 10 vials. Coagulopathy alone does not justify higher initial dosing',
         safetyLevel: 'critical',
     },
     // =====================================================================
@@ -204,15 +204,15 @@ export const SNAKE_ENVENOMATION_NODES = [
         type: 'info',
         module: 4,
         title: 'CroFab Administration',
-        body: '**CroFab Dosing Protocol:**\n\n**Reconstitution:**\n1. Reconstitute each vial with 18 mL NS\n2. Mix by continuous manual inversion (1-2/sec)\n3. **DO NOT SHAKE** (causes foaming)\n4. Reconstitution should take < 7 min\n5. Dilute total dose to 250 mL NS\n6. Use within 4 hours\n\n**Initial Dose:**\n- Standard: **4-6 vials** IV\n- Severe: **8-12 vials** IV\n- Pediatric = Adult dose\n\n**Administration:**\n- Start slow: 25-50 mL/hr × 10 min\n- If no retext: increase to 250 mL/hr\n- Monitor for anaphylaxis\n\n**Maintenance Dosing (Controversial):**\n- 2 vials at 6, 12, and 18 hours post-initial control\n- Consult poison center for guidance\n\n[CroFab/Anavip Calculator](#/calculator/snake-antivenom) [3][4]',
-        citation: [3, 4],
+        body: '**CroFab Dosing Protocol:**\n\n**Reconstitution:**\n1. Reconstitute each vial with 18 mL NS\n2. Mix by continuous manual inversion (1-2/sec)\n3. **DO NOT SHAKE** (causes foaming)\n4. Reconstitution should take < 7 min\n5. Dilute total dose to 250 mL NS\n6. Use within 4 hours\n\n**Initial Dose:**\n- Standard: **4-6 vials** IV\n- **8-12 vials** IV only for **immediately life-threatening venom effects**, such as **shock or serious active bleeding**.\n- Rapid progression or coagulopathy alone: start with **4-6 vials**, regardless of severity grade. Reassess after infusion and repeat antivenom if initial control is not achieved. [7]\n- Pediatric = Adult dose\n\n**Administration:**\n- Start slow: 25-50 mL/hr × 10 min\n- If no reaction: increase to 250 mL/hr\n- Monitor for anaphylaxis\n\n**Maintenance Dosing (Controversial):**\n- 2 vials at 6, 12, and 18 hours post-initial control\n- Consult poison center for guidance\n\n[CroFab/Anavip Calculator](#/calculator/snake-antivenom) [3][4]',
+        citation: [3, 4, 7],
         calculatorLinks: [
             { id: 'snake-antivenom', label: 'Antivenom Dosing' },
         ],
         treatment: {
             firstLine: {
                 drug: 'CroFab (Crotalidae Polyvalent Immune Fab)',
-                dose: '4-6 vials (standard) or 8-12 vials (severe)',
+                dose: '4-6 vials initially; 8-12 only for immediately life-threatening effects such as shock or serious active bleeding',
                 route: 'IV',
                 frequency: 'Initial dose, then reassess; maintenance 2 vials at 6, 12, 18h if needed',
                 duration: 'Until initial control achieved',
@@ -221,7 +221,7 @@ export const SNAKE_ENVENOMATION_NODES = [
             monitoring: 'Monitor for anaphylaxis during infusion. Serial exams q30-60 min post-infusion. Repeat labs at 6, 12, 24 hours. Watch for recurrence phenomenon days 2-7.',
         },
         next: 'snake-response-assess',
-        summary: 'CroFab 4-6 vials (severe: 8-12) in 250mL NS; start slow 25-50mL/hr x10min then 250mL/hr; maintenance 2 vials at 6/12/18hr',
+        summary: 'CroFab initially 4-6 vials; 8-12 only for immediately life-threatening effects (shock or serious active bleeding); dilute in 250mL NS; start slow 25-50mL/hr x10min then 250mL/hr; maintenance 2 vials at 6/12/18hr',
     },
     {
         id: 'snake-anavip',
@@ -436,10 +436,10 @@ export const SNAKE_ENVENOMATION_NODES = [
         type: 'info',
         module: 5,
         title: 'Head/Neck Bite — Airway Management',
-        body: '**Head, face, or neck bites — high airway risk:**\n\n**Early Intubation Considerations:**\n- Progressive facial/oropharyngeal edema\n- Stridor or voice changes\n- Difficulty managing secretions\n- Concern for rapid progression\n\n**Do NOT wait** for respiratory distress — edema may make later intubation impossible.\n\n**Approach:**\n- Early airway assessment\n- Prepare for difficult airway\n- Have surgical airway available\n- Consider early intubation if ANY airway concerns\n\n**Antivenom:**\n- Give aggressively to reduce swelling\n- Higher initial dose (8-12 vials CroFab)\n\n**Disposition:**\n- ICU admission\n- Close airway monitoring [1][3]',
-        citation: [1, 3],
+        body: '**Head, face, or neck bites — high airway risk:**\n\n**Early Intubation Considerations:**\n- Progressive facial/oropharyngeal edema\n- Stridor or voice changes\n- Difficulty managing secretions\n- Concern for rapid progression\n\n**Do NOT wait** for respiratory distress — edema may make later intubation impossible.\n\n**Approach:**\n- Early airway assessment\n- Prepare for difficult airway\n- Have surgical airway available\n- Consider early intubation if ANY airway concerns\n\n**Antivenom:**\n- Give aggressively to reduce swelling\n- CroFab initially 4-6 vials when indicated. Reserve 8-12 vials for immediately life-threatening venom effects (e.g., shock, serious active bleeding, or impending airway obstruction), not bite location alone. Obtain urgent toxicology guidance. [7]\n\n**Disposition:**\n- ICU admission\n- Close airway monitoring [1][3]',
+        citation: [1, 3, 7],
         next: 'snake-dispo-decision',
-        summary: 'Early intubation for progressive facial/oropharyngeal edema — do NOT wait for respiratory distress; aggressive antivenom 8-12 vials',
+        summary: 'Early intubation for progressive facial/oropharyngeal edema — do NOT wait for respiratory distress; prompt antivenom; CroFab 4-6 initially, 8-12 only for immediately life-threatening effects, not bite location alone',
         safetyLevel: 'critical',
     },
     // =====================================================================
@@ -628,5 +628,6 @@ export const SNAKE_ENVENOMATION_CITATIONS = [
     { num: 3, text: 'CroFab Prescribing Information. BTG International.' },
     { num: 4, text: 'Anavip Prescribing Information. Instituto Bioclon.' },
     { num: 5, text: 'Boyer LV, et al. Recurrence phenomena after immunoglobulin therapy for snake envenomations. Ann Emerg Med. 2001.' },
+    { num: 7, text: 'Lavonas EJ, Ruha AM, Banner W, et al. Unified treatment algorithm for the management of crotaline snakebite in the United States. BMC Emerg Med. 2011;11:2. doi:10.1186/1471-227X-11-2. https://pmc.ncbi.nlm.nih.gov/articles/PMC3042971/' },
     { num: 6, text: 'FDA. Coral Snake Antivenin Lot Extension. 2024.' },
 ];
