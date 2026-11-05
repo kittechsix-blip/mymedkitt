@@ -165,8 +165,8 @@ export const MALARIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Severe Malaria — IV Artesunate',
-    body: '**IV artesunate is the ONLY treatment for severe malaria.** [5][6][8]\n\n**STAT actions:**\n1. **Call CDC Malaria Hotline immediately:** 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7 after hours) [6]\n2. **Request IV artesunate via CDC IND (Investigational New Drug) protocol** — available 24/7, delivered to bedside within hours [6]\n3. **ICU admission** — close monitoring required\n4. **Supportive care:** fluids (avoid overload), correct hypoglycemia, treat seizures, blood transfusion if severe anemia\n\n**IV Artesunate dosing:** [5][6][8]\n• **2.4 mg/kg IV** at 0, 12, and 24 hours (loading doses)\n• Then **2.4 mg/kg IV daily** until patient can tolerate oral therapy (usually 3-7 days)\n• Pediatric <20 kg: use 3 mg/kg dosing [8]\n• [Artesunate Dosing Calculator](#/calculator/artesunate-dosing)\n\n**Switch to oral ACT** once:  \n• Patient can tolerate oral intake  \n• Parasitemia <1% and declining  \n• No severe malaria criteria  \n• Complete total 3-day course of oral ACT (artemether-lumefantrine or atovaquone-proguanil) [5][6]\n\n**If there will be a delay obtaining IV artesunate:** Quinidine gluconate is NO LONGER available in the US (production ended 2017, last stock expired March 2019). Begin **interim oral artemether-lumefantrine** (or another oral ACT) while IV artesunate is en route from the CDC — do not delay treatment. [4][6]\n\n**Complications to monitor:** [5]\n• Post-artesunate delayed hemolysis (occurs 1-4 weeks after treatment — monitor CBC weekly × 4 weeks)\n• Hypoglycemia (q4-6h glucose checks)\n• Cerebral malaria sequelae (neurologic deficits in ~10%)\n• Acute kidney injury, ARDS',
-    citation: [5, 6, 8],
+    body: '**Severe malaria: start IV artesunate promptly.** Parasitemia ≥5% alone qualifies under CDC guidance, regardless of species or other severity findings. [4]\n\n**Emergency acquisition:**\nFDA-approved and commercially available. Hospital pharmacy should urgently contact its distributor or Amivas (855-526-4827, 24/7); obtain stock from a nearby hospital or arrange transfer if faster. CDC provides clinical consultation, not drug supply. [4]\n\n**Initial regimen:**\n• **2.4 mg/kg IV using actual body weight at 0, 12, and 24 hours**, for adults and children of all weights, including pregnancy.\n• Known allergy to IV artemisinins is a contraindication; obtain urgent specialist advice.\n• [Artesunate Dosing Calculator](#/calculator/artesunate-dosing) [4]\n\n**After the third dose:**\nAfter dose 3, obtain a thin smear at least 4 hours later. Continue 2.4 mg/kg IV every 24 hours if parasitemia >1% OR oral medication is not tolerated, for a maximum of 7 total days of IV therapy. Reassess parasitemia daily. [4]\n\n**Full oral follow-on course:**\nOnce parasitemia is ≤1% AND oral medication is tolerated, start a full oral regimen 8-24 hours after the last IV dose, even after 7 days of IV therapy. For P. falciparum, [artemether-lumefantrine follow-on regimen](#/drug/artemether-lumefantrine/follow-on) requires 5 days (10 doses) under CDC August 2026 guidance; atovaquone-proguanil is an alternative 3-day regimen. [4][19]\n\n**If IV artesunate is delayed:**\nWhile obtaining IV artesunate, give interim oral artemether-lumefantrine (preferred); alternatives include atovaquone-proguanil or quinine, with mefloquine reserved for no other options. Consider an antiemetic or nasogastric administration when appropriate. Stop the interim drug and begin IV artesunate immediately when available.\n\nDo not use doxycycline, tetracycline, or clindamycin alone for severe malaria or as interim treatment: parasite clearance is too slow. Their role as a partner with quinine in a complete follow-on regimen is different. [4]\n\n**Avoid exchange transfusion:**\nDo not use exchange transfusion as an adjunct. It has no demonstrated benefit, and IV artesunate rapidly reduces parasite burden. [4]\n\n**Monitoring:**\n• ICU care; infectious disease consultation.\n• Glucose q4-6h; monitor renal function, acidosis, anemia, shock and respiratory status.\n• Blood smears at least daily while hospitalized until no asexual parasites are detected.\n• CBC weekly for 4 weeks from treatment initiation; if abnormal, check reticulocytes, haptoglobin, LDH, bilirubin and a repeat smear for delayed hemolysis. [4]\n\n**CDC consultation:** 770-488-7788 (weekdays 9am-5pm ET), 770-488-7100 (after hours/weekends). [6]',
+    citation: [4, 6, 19],
     calculatorLinks: [
       { id: 'artesunate-dosing', label: 'Artesunate Dosing' },
     ],
@@ -176,21 +176,21 @@ export const MALARIA_NODES: DecisionNode[] = [
         dose: '2.4 mg/kg',
         route: 'IV',
         frequency: 'at 0, 12, 24h, then daily',
-        duration: 'until can tolerate PO, then complete 3d oral ACT',
-        notes: 'Obtain via CDC IND protocol. Call 770-488-7788 or 770-488-7100 (24/7).',
+        duration: 'Maximum 7 total IV days; then a full oral regimen',
+        notes: 'FDA-approved and commercially available. Hospital pharmacy should urgently contact its distributor or Amivas (855-526-4827, 24/7); obtain stock from a nearby hospital or arrange transfer if faster. CDC provides clinical consultation, not drug supply. After dose 3, obtain a thin smear at least 4 hours later. Continue 2.4 mg/kg IV every 24 hours if parasitemia >1% OR oral medication is not tolerated, for a maximum of 7 total days of IV therapy. Reassess parasitemia daily.',
       },
       alternative: {
         drug: 'Oral artemether-lumefantrine (interim bridge)',
         dose: 'Weight-based ACT dosing',
         route: 'PO',
-        frequency: 'standard 3-day ACT schedule',
+        frequency: 'Use CDC species/weight regimen; stop when IV artesunate arrives',
         duration: 'until IV artesunate arrives',
-        notes: 'Quinidine gluconate is NO LONGER available in the US (discontinued 2017, stock expired March 2019). If a delay obtaining IV artesunate is expected, start interim oral ACT — do not delay treatment.',
+        notes: 'Do not use doxycycline, tetracycline, or clindamycin alone for severe malaria or as interim treatment: parasite clearance is too slow. Their role as a partner with quinine in a complete follow-on regimen is different.',
       },
-      monitoring: 'ICU monitoring. Glucose q4-6h. Repeat blood smears q12-24h. Monitor for delayed hemolysis (CBC weekly × 4 weeks post-treatment).',
+      monitoring: 'ICU monitoring. Glucose q4-6h. Repeat blood smears q12-24h. Monitor for delayed hemolysis (CBC weekly for 4 weeks from treatment initiation).',
     },
     next: 'mal-complications',
-    summary: 'IV artesunate is first-line for severe malaria — available from CDC Malaria Hotline 770-488-7788',
+    summary: 'IV artesunate: commercial emergency procurement, daily reassessment after dose 3, maximum 7 total IV days',
     safetyLevel: 'critical',
   },
 
@@ -429,15 +429,15 @@ export const MALARIA_NODES: DecisionNode[] = [
     module: 5,
     title: 'Malaria in Pregnancy',
     body: '**Malaria in pregnancy is life-threatening** to both mother and fetus. Higher risk of severe disease, hypoglycemia, pulmonary edema, and maternal death. [15][16]\n\n[Pregnancy Management Guide](#/info/mal-pregnancy)\n\n**Risk to fetus:** [15][16]\n• Spontaneous abortion, stillbirth\n• Preterm delivery\n• Low birth weight\n• Congenital malaria (rare)\n\n**Treatment by trimester:** [6][15][16]\n\n**First trimester:**\n• **Severe malaria:** IV artesunate (benefits outweigh risks) [6][16]\n• **Uncomplicated *P. falciparum*:** Quinine + clindamycin × 7 days [6][16]\n• **Avoid:** Artemisinin derivatives if possible (teratogenic in animal studies), primaquine (hemolysis risk to fetus), atovaquone-proguanil, doxycycline\n\n**Second and third trimester:**\n• **Severe malaria:** IV artesunate [6][16]\n• **Uncomplicated *P. falciparum*:** Artemether-lumefantrine, quinine + clindamycin, or mefloquine [6][16]\n• **Uncomplicated *P. vivax/ovale*:** Chloroquine for blood stage, **defer primaquine until after delivery** [9][16]\n• Provide chloroquine prophylaxis 300 mg base weekly to suppress relapses until primaquine can be given postpartum [9]\n\n**Monitoring:** [15][16]\n• Glucose q4-6h (hypoglycemia risk higher in pregnancy)\n• Fetal monitoring when feasible\n• Admit all pregnant patients with malaria\n• Obstetrics consultation',
-    citation: [6, 9, 15, 16],
+    citation: [4, 6, 9, 15, 16],
     treatment: {
       firstLine: {
         drug: 'IV Artesunate (if severe, any trimester)',
         dose: '2.4 mg/kg',
         route: 'IV',
         frequency: 'at 0, 12, 24h, then daily',
-        duration: 'until can tolerate PO',
-        notes: 'Benefits outweigh risks in severe malaria. Obtain via CDC IND.',
+        duration: 'After dose 3: daily if >1% parasitemia or unable PO; maximum 7 total IV days',
+        notes: 'Use in all trimesters. Obtain commercially through hospital pharmacy; CDC provides consultation.',
       },
       alternative: {
         drug: 'Quinine + Clindamycin (1st trimester uncomplicated)',
@@ -460,16 +460,16 @@ export const MALARIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Pediatric Malaria Management',
-    body: '**Pediatric patients have higher risk** of severe malaria, hypoglycemia, seizures, and severe anemia. [17]\n\n**Treatment principles:** [6][17]\n• Same species-specific regimens as adults, adjusted for weight\n• Children <5 years have highest mortality from *P. falciparum*\n• Admit all children <5 years with *P. falciparum*\n\n**Severe malaria:** [6][8][17]\n• **IV Artesunate:** 3 mg/kg IV at 0, 12, 24h, then daily (higher dose than adults) [8]\n• Obtain via CDC IND protocol\n• ICU admission, close glucose monitoring\n\n**Uncomplicated *P. falciparum*:** [6][17]\n• **Artemether-lumefantrine:** Weight-based dosing (see pediatric dosing table) [10]\n  - 5-14 kg: 1 tablet BID × 3d\n  - 15-24 kg: 2 tablets BID × 3d\n  - 25-34 kg: 3 tablets BID × 3d\n  - ≥35 kg: 4 tablets BID × 3d (adult dose)\n• **Atovaquone-proguanil:** [11]\n  - 5-8 kg: 2 pediatric tablets daily × 3d\n  - 9-10 kg: 3 pediatric tablets daily × 3d\n  - 11-20 kg: 1 adult tablet daily × 3d\n  - >20 kg: adult dosing\n\n**Uncomplicated *P. vivax/ovale*:** [6][9][17]\n• Chloroquine: 10 mg base/kg (max 600 mg base), then 5 mg base/kg at 6, 24, 48h\n• Primaquine (if G6PD normal): 0.5 mg/kg base daily × 14 days [9]\n• **Infants <6 months:** defer primaquine, use chloroquine prophylaxis [9]\n\n**Monitoring:** [17]\n• Glucose q4-6h (hypoglycemia common)\n• Repeat smears day 3, 7\n• Admit <5 years with falciparum, any age with severe malaria',
-    citation: [6, 8, 9, 10, 11, 17],
+    body: '**Pediatric patients have higher risk** of severe malaria, hypoglycemia, seizures, and severe anemia. [17]\n\n**Treatment principles:** [6][17]\n• Same species-specific regimens as adults, adjusted for weight\n• Children <5 years have highest mortality from *P. falciparum*\n• Admit all children <5 years with *P. falciparum*\n\n**Severe malaria:** [6][8][17]\n• **IV Artesunate (CDC):** 2.4 mg/kg actual body weight IV at 0, 12, 24h for all pediatric weights, including <20 kg. After dose 3, obtain a thin smear at least 4 hours later. Continue 2.4 mg/kg IV every 24 hours if parasitemia >1% OR oral medication is not tolerated, for a maximum of 7 total days of IV therapy. Reassess parasitemia daily. [4]\n• Obtain FDA-approved IV artesunate commercially through hospital pharmacy [4]\n• ICU admission, close glucose monitoring\n\n**Uncomplicated *P. falciparum*:** [6][17]\n• **Artemether-lumefantrine:** Weight-based dosing (see pediatric dosing table) [10]\n  - 5-14 kg: 1 tablet BID × 3d\n  - 15-24 kg: 2 tablets BID × 3d\n  - 25-34 kg: 3 tablets BID × 3d\n  - ≥35 kg: 4 tablets BID × 3d (adult dose)\n• **Atovaquone-proguanil:** [11]\n  - 5-8 kg: 2 pediatric tablets daily × 3d\n  - 9-10 kg: 3 pediatric tablets daily × 3d\n  - 11-20 kg: 1 adult tablet daily × 3d\n  - >20 kg: adult dosing\n\n**Uncomplicated *P. vivax/ovale*:** [6][9][17]\n• Chloroquine: 10 mg base/kg (max 600 mg base), then 5 mg base/kg at 6, 24, 48h\n• Primaquine (if G6PD normal): 0.5 mg/kg base daily × 14 days [9]\n• **Infants <6 months:** defer primaquine, use chloroquine prophylaxis [9]\n\n**Monitoring:** [17]\n• Glucose q4-6h (hypoglycemia common)\n• Repeat smears day 3, 7\n• Admit <5 years with falciparum, any age with severe malaria',
+    citation: [4, 6, 8, 9, 10, 11, 17],
     treatment: {
       firstLine: {
         drug: 'IV Artesunate (severe)',
-        dose: '3 mg/kg',
+        dose: '2.4 mg/kg actual body weight',
         route: 'IV',
         frequency: 'at 0, 12, 24h, then daily',
-        duration: 'until can tolerate PO',
-        notes: 'Higher dose than adults. Obtain via CDC. ICU admission.',
+        duration: 'After dose 3: daily if >1% parasitemia or unable PO; maximum 7 total IV days',
+        notes: 'CDC dosing is 2.4 mg/kg at all weights. Commercial supply through hospital pharmacy. ICU admission.',
       },
       alternative: {
         drug: 'Artemether-Lumefantrine (uncomplicated)',
@@ -536,10 +536,10 @@ export const MALARIA_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'ICU Admission',
-    body: '**ICU admission for severe malaria.** [5][6]\n\n**Critical interventions:**\n• [IV artesunate](#/drug/iv-artesunate/severe malaria) obtained via CDC IND protocol (call 770-488-7788 or 770-488-7100) [6]\n• Close hemodynamic monitoring\n• Glucose monitoring q4-6h (hypoglycemia common)\n• Repeat blood smears q12-24h until parasitemia <1% and declining\n• Fluid management (avoid overload — ARDS risk)\n• Blood transfusion if severe anemia (Hgb <7)\n• Treat complications (seizures, AKI, acidosis, shock)\n\n**Consult:**\n• Infectious disease\n• Critical care\n• Nephrology if AKI/dialysis needed\n• Hematology if severe hemolysis\n\n**Transition to oral therapy when:**\n• Patient can tolerate PO\n• Parasitemia <1% and declining\n• No severe malaria criteria\n• Complete 3-day course of oral ACT (artemether-lumefantrine or atovaquone-proguanil) after IV artesunate [5][6]\n\n**Post-discharge:**\n• CBC weekly × 4 weeks (monitor for post-artesunate delayed hemolysis) [8]\n• Outpatient ID follow-up\n• Blood smears day 7, 14, 28 to confirm clearance',
-    recommendation: 'ICU admission for severe malaria. IV artesunate via CDC IND protocol. Close monitoring for complications. CBC weekly × 4 weeks post-discharge for delayed hemolysis surveillance.',
+    body: '**ICU admission for severe malaria, including parasitemia ≥5% alone.** [4]\n\n**Treatment and acquisition:**\nFDA-approved and commercially available. Hospital pharmacy should urgently contact its distributor or Amivas (855-526-4827, 24/7); obtain stock from a nearby hospital or arrange transfer if faster. CDC provides clinical consultation, not drug supply.\n\n[IV artesunate](#/drug/iv-artesunate/severe malaria): 2.4 mg/kg IV at 0, 12, and 24h for all ages. After dose 3, obtain a thin smear at least 4 hours later. Continue 2.4 mg/kg IV every 24 hours if parasitemia >1% OR oral medication is not tolerated, for a maximum of 7 total days of IV therapy. Reassess parasitemia daily. [4]\n\n**Oral transition:**\nOnce parasitemia is ≤1% AND oral medication is tolerated, start a full oral regimen 8-24 hours after the last IV dose, even after 7 days of IV therapy. For P. falciparum, [artemether-lumefantrine follow-on regimen](#/drug/artemether-lumefantrine/follow-on) requires 5 days (10 doses) under CDC August 2026 guidance; atovaquone-proguanil is an alternative 3-day regimen. [4][19]\n\n**If IV treatment is delayed:**\nWhile obtaining IV artesunate, give interim oral artemether-lumefantrine (preferred); alternatives include atovaquone-proguanil or quinine, with mefloquine reserved for no other options. Consider an antiemetic or nasogastric administration when appropriate. Stop the interim drug and begin IV artesunate immediately when available.\n\nDo not use doxycycline, tetracycline, or clindamycin alone for severe malaria or as interim treatment: parasite clearance is too slow. Their role as a partner with quinine in a complete follow-on regimen is different. [4]\n\n**Exchange transfusion:**\nDo not use exchange transfusion as an adjunct. It has no demonstrated benefit, and IV artesunate rapidly reduces parasite burden. [4]\n\n**Monitoring and consultation:**\n• Hemodynamic, respiratory, renal and glucose monitoring; treat complications.\n• Thick/thin smears at least daily while hospitalized until negative.\n• Infectious disease and critical care; nephrology if dialysis indicated.\n• Monitor CBC weekly for 4 weeks from treatment initiation for delayed hemolysis; obtain reticulocytes, LDH, haptoglobin, bilirubin and repeat smear if abnormal. [4]',
+    recommendation: 'ICU admission; commercial IV artesunate. After dose 3, continue daily if parasitemia >1% or unable PO, maximum 7 total days. Full oral follow-on required. No exchange transfusion.',
     confidence: 'definitive',
-    citation: [5, 6, 8],
+    citation: [4, 6, 19],
     summary: 'ICU for severe malaria: IV artesunate for parasitemia ≥5% or another severe criterion, serial smears',
   },
 
@@ -591,8 +591,9 @@ export const MALARIA_NODE_COUNT = MALARIA_NODES.length;
 export const MALARIA_CRITICAL_ACTIONS = [
   { text: 'STAT thick and thin blood smears - species ID and parasitemia % guide all treatment', nodeId: 'mal-diagnostics' },
   { text: 'Call CDC Malaria Hotline for severe cases - 770-488-7788 (24/7: 770-488-7100)', nodeId: 'mal-severe-treatment' },
-  { text: 'IV artesunate is ONLY treatment for severe malaria - obtain via CDC IND protocol', nodeId: 'mal-severe-treatment' },
+  { text: 'Obtain FDA-approved IV artesunate urgently through hospital pharmacy/distributor; do not wait for CDC drug supply', nodeId: 'mal-severe-treatment' },
   { text: 'Parasitemia ≥5% = severe malaria - requires ICU admission and immediate IV artesunate', nodeId: 'mal-severe-treatment' },
+  { text: 'No exchange transfusion; doxycycline alone is not effective interim treatment for severe malaria', nodeId: 'mal-severe-treatment' },
   { text: 'G6PD testing REQUIRED before primaquine - hemolysis risk if deficient', nodeId: 'mal-primaquine' },
   { text: 'Species identification is critical - P. falciparum can kill in 24-48 hours', nodeId: 'mal-species' },
   { text: 'Monitor glucose q4-6h in severe cases - especially with quinine or pregnancy', nodeId: 'mal-complications' },
@@ -606,6 +607,7 @@ export const MALARIA_CRITICAL_ACTIONS = [
 // =====================================================================
 
 export const MALARIA_CITATIONS: Citation[] = [
+  { num: 19, text: 'CDC. Malaria Treatment Tables, August 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/appendix-a-treatment-tables.html' },
   {
     num: 1,
     text: 'Nadjm B, Behrens RH. Malaria: An Update for Physicians. Infect Dis Clin North Am. 2012;26(2):243-259.',
@@ -620,7 +622,7 @@ export const MALARIA_CITATIONS: Citation[] = [
   },
   {
     num: 4,
-    text: 'CDC. Clinical Guidance: Treatment of Severe Malaria. Parasitemia ≥5% warrants IV artesunate regardless of species. Accessed November 5, 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html',
+    text: 'CDC. Treatment of Severe Malaria. Updated August 17, 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html (accessed November 5, 2026).',
   },
   {
     num: 5,

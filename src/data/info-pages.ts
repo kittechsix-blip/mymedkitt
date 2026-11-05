@@ -12452,7 +12452,7 @@ const MAL_STEPS: InfoPage = {
     },
     {
       heading: '6. Initiate Treatment',
-      body: 'Severe malaria: [IV artesunate](#/drug/iv-artesunate) (preferred) or quinidine + ICU. Uncomplicated malaria: {{drug:artemether-lumefantrine}}, {{drug:atovaquone-proguanil}}, or {{drug:chloroquine}} (only if chloroquine-sensitive). Start empirically while awaiting smear results if high clinical suspicion. [6]',
+      body: 'Severe malaria: [IV artesunate](#/drug/iv-artesunate) + ICU. FDA-approved and commercially available. Hospital pharmacy should urgently contact its distributor or Amivas (855-526-4827, 24/7); obtain stock from a nearby hospital or arrange transfer if faster. CDC provides clinical consultation, not drug supply. While obtaining IV artesunate, give interim oral artemether-lumefantrine (preferred); alternatives include atovaquone-proguanil or quinine, with mefloquine reserved for no other options. Consider an antiemetic or nasogastric administration when appropriate. Stop the interim drug and begin IV artesunate immediately when available. Do not use doxycycline, tetracycline, or clindamycin alone for severe malaria or as interim treatment: parasite clearance is too slow. Their role as a partner with quinine in a complete follow-on regimen is different. Do not use exchange transfusion as an adjunct. It has no demonstrated benefit, and IV artesunate rapidly reduces parasite burden. Uncomplicated malaria: {{drug:artemether-lumefantrine}}, {{drug:atovaquone-proguanil}}, or {{drug:chloroquine}} (only if chloroquine-sensitive). Start empirically while awaiting smear results if high clinical suspicion. [6]',
     },
     {
       heading: '7. Special Populations',
@@ -12525,6 +12525,7 @@ const MAL_SEVERE_CRITERIA: InfoPage = {
   subtitle: 'Any ONE criterion defines severe malaria',
   shareable: false,
   sections: [
+    { heading: 'CDC Treatment and Reassessment', body: 'After dose 3, obtain a thin smear at least 4 hours later. Continue 2.4 mg/kg IV every 24 hours if parasitemia >1% OR oral medication is not tolerated, for a maximum of 7 total days of IV therapy. Reassess parasitemia daily. Once parasitemia is ≤1% AND oral medication is tolerated, start a full oral regimen 8-24 hours after the last IV dose, even after 7 days of IV therapy. For P. falciparum, [artemether-lumefantrine follow-on regimen](#/drug/artemether-lumefantrine/follow-on) requires 5 days (10 doses) under CDC August 2026 guidance; atovaquone-proguanil is an alternative 3-day regimen. Do not use doxycycline, tetracycline, or clindamycin alone for severe malaria or as interim treatment: parasite clearance is too slow. Their role as a partner with quinine in a complete follow-on regimen is different. Do not use exchange transfusion as an adjunct. It has no demonstrated benefit, and IV artesunate rapidly reduces parasite burden. [2]' },
     {
       heading: 'Clinical Criteria (8 Items)',
       body: '1. **Impaired consciousness** — GCS <11, or Blantyre Coma Scale <3 (children)\n2. **Prostration** — generalized weakness, unable to walk/sit without assistance\n3. **Multiple convulsions** — >2 episodes within 24h\n4. **Acidosis** — base deficit >8 mEq/L or bicarbonate <15 mmol/L or venous lactate >5 mmol/L\n5. **Hypoglycemia** — blood glucose <40 mg/dL (<2.2 mmol/L)\n6. **Severe malarial anemia** — Hgb <5 g/dL (children) or <7 g/dL (adults) with parasitemia >10,000/μL\n7. **Acute kidney injury** — Cr >3 mg/dL or urine output <0.5 mL/kg/h\n8. **Acute pulmonary edema / ARDS** — radiographically confirmed with SpO2 <92% on room air',
@@ -12592,11 +12593,11 @@ const MAL_PREGNANCY: InfoPage = {
   sections: [
     {
       heading: 'First Trimester',
-      body: '**Severe malaria:**\n• IV {{drug:artesunate}} (preferred) — benefit outweighs theoretical risk [1]\n• Quinidine + clindamycin (alternative)\n• ICU admission\n\n**Uncomplicated malaria:**\n• **Chloroquine-sensitive:** {{drug:chloroquine}} (safest in pregnancy)\n• **Chloroquine-resistant:** {{drug:artemether-lumefantrine}} OR quinine + clindamycin × 7 days [2]\n• **Avoid {{drug:atovaquone-proguanil}}** in first trimester (limited safety data)\n• **Avoid {{drug:primaquine}}** (hemolytic risk to fetus)\n• **Avoid doxycycline** (teratogenic)',
+      body: '**Severe malaria:**\n• [IV artesunate](#/drug/iv-artesunate) (preferred) — benefit outweighs theoretical risk [1]\n• FDA-approved commercial supply through hospital pharmacy; use the [CDC dosing tool](#/calculator/artesunate-dosing) [8]\n• ICU admission\n\n**Uncomplicated malaria:**\n• **Chloroquine-sensitive:** {{drug:chloroquine}} (safest in pregnancy)\n• **Chloroquine-resistant:** {{drug:artemether-lumefantrine}} OR quinine + clindamycin × 7 days [2]\n• **Avoid {{drug:atovaquone-proguanil}}** in first trimester (limited safety data)\n• **Avoid {{drug:primaquine}}** (hemolytic risk to fetus)\n• **Avoid doxycycline** (teratogenic)',
     },
     {
       heading: 'Second & Third Trimester',
-      body: '**Severe malaria:**\n• IV {{drug:artesunate}} (preferred) [3]\n• Quinidine + clindamycin (alternative)\n• ICU admission\n\n**Uncomplicated malaria:**\n• **Chloroquine-sensitive:** {{drug:chloroquine}}\n• **Chloroquine-resistant:** {{drug:artemether-lumefantrine}} (preferred) OR {{drug:atovaquone-proguanil}} (limited data but likely safe) OR quinine + clindamycin × 7 days [4]\n• **Avoid {{drug:primaquine}}** until after delivery (hemolytic risk)\n• **Avoid doxycycline** (tooth/bone effects)',
+      body: '**Severe malaria:**\n• [IV artesunate](#/drug/iv-artesunate) (preferred) [3]\n• FDA-approved commercial supply through hospital pharmacy; use the [CDC dosing tool](#/calculator/artesunate-dosing) [8]\n• ICU admission\n\n**Uncomplicated malaria:**\n• **Chloroquine-sensitive:** {{drug:chloroquine}}\n• **Chloroquine-resistant:** {{drug:artemether-lumefantrine}} (preferred) OR {{drug:atovaquone-proguanil}} (limited data but likely safe) OR quinine + clindamycin × 7 days [4]\n• **Avoid {{drug:primaquine}}** until after delivery (hemolytic risk)\n• **Avoid doxycycline** (tooth/bone effects)',
     },
     {
       heading: 'Special Considerations in Pregnancy',
@@ -12608,6 +12609,7 @@ const MAL_PREGNANCY: InfoPage = {
     },
   ],
   citations: [
+    { num: 8, text: 'CDC. Treatment of Severe Malaria. Updated August 17, 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html (accessed November 5, 2026).' },
     { num: 1, text: 'WHO. Guidelines for the Treatment of Malaria. 3rd ed. 2023.' },
     { num: 2, text: 'McGready R, et al. Artemisinin antimalarials in pregnancy: a prospective treatment study of 539 episodes of multidrug-resistant Plasmodium falciparum. Clin Infect Dis. 2001;33(12):2009-2016.' },
     { num: 3, text: 'Dondorp A, et al. Artesunate versus quinine for treatment of severe falciparum malaria: a randomised trial. Lancet. 2005;366(9487):717-725.' },

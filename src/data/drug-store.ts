@@ -11420,25 +11420,26 @@ const IV_ARTESUNATE: DrugEntry = {
   dosing: [
     {
       indication: 'Severe malaria (adults and children ≥20 kg)',
-      regimen: '2.4 mg/kg IV at 0, 12, and 24 hours (loading doses), then 2.4 mg/kg IV daily until patient can tolerate oral ACT (usually 3-7 days). Complete total 3-day course of oral ACT after IV therapy (artemether-lumefantrine or atovaquone-proguanil).',
+      regimen: '2.4 mg/kg IV at 0, 12, and 24 hours using actual body weight. After dose 3, obtain a thin smear at least 4 hours later. Continue 2.4 mg/kg IV every 24 hours if parasitemia >1% OR oral medication is not tolerated, for a maximum of 7 total days of IV therapy. Reassess parasitemia daily. Once parasitemia is ≤1% AND oral medication is tolerated, start a full oral regimen 8-24 hours after the last IV dose, even after 7 days of IV therapy. For P. falciparum, artemether-lumefantrine requires 5 days (10 doses) under CDC August 2026 guidance; atovaquone-proguanil is an alternative 3-day regimen.',
       weightCalc: { dosePerKg: 2.4, unit: 'mg' },
     },
     {
       indication: 'Severe malaria (pediatric <20 kg)',
-      regimen: '3 mg/kg IV at 0, 12, and 24 hours (loading doses), then 3 mg/kg IV daily until patient can tolerate oral ACT.',
-      weightCalc: { dosePerKg: 3, unit: 'mg' },
+      regimen: '2.4 mg/kg IV at 0, 12, and 24 hours using actual body weight. After dose 3, obtain a thin smear at least 4 hours later. Continue 2.4 mg/kg IV every 24 hours if parasitemia >1% OR oral medication is not tolerated, for a maximum of 7 total days of IV therapy. Reassess parasitemia daily. Once parasitemia is ≤1% AND oral medication is tolerated, start a full oral regimen 8-24 hours after the last IV dose, even after 7 days of IV therapy. For P. falciparum, artemether-lumefantrine requires 5 days (10 doses) under CDC August 2026 guidance; atovaquone-proguanil is an alternative 3-day regimen.',
+      weightCalc: { dosePerKg: 2.4, unit: 'mg' },
     },
   ],
   contraindications: [
-    'No absolute contraindications — severe malaria is life-threatening and artesunate is ONLY treatment',
+    'Known allergy to IV artemisinins; urgent specialist consultation for alternative management',
   ],
   cautions: [
-    'Post-artesunate delayed hemolysis (PADH) occurs in 10-15% at 1-4 weeks after treatment — monitor CBC weekly × 4 weeks',
+    'Delayed hemolysis can occur; monitor CBC weekly for 4 weeks from treatment initiation',
     'Pregnancy: use in all trimesters for severe malaria (benefits outweigh risks)',
   ],
-  monitoring: 'Glucose q4-6h (hypoglycemia risk). Repeat blood smears q12-24h until parasitemia <1%. CBC weekly × 4 weeks post-treatment (delayed hemolysis surveillance). ICU monitoring for severe malaria complications.',
-  notes: '**Obtain via CDC IND (Investigational New Drug) protocol.** Call CDC Malaria Hotline: 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7 after hours). Artesunate is delivered to bedside within hours. IV artesunate reduced mortality by 35% vs quinine in SEAQUAMAT trial (adults) and 23% in AQUAMAT trial (children). If artesunate unavailable: quinidine gluconate 10 mg/kg IV load over 1-2h, then 0.02 mg/kg/min infusion with cardiac monitoring (QTc prolongation risk).',
+  monitoring: 'ICU monitoring; glucose q4-6h. Smears at least daily while hospitalized until negative. CBC weekly for 4 weeks from treatment initiation; evaluate hemolysis if abnormal.',
+  notes: 'FDA-approved and commercially available. Hospital pharmacy should urgently contact its distributor or Amivas (855-526-4827, 24/7); obtain stock from a nearby hospital or arrange transfer if faster. CDC provides clinical consultation, not drug supply. While obtaining IV artesunate, give interim oral artemether-lumefantrine (preferred); alternatives include atovaquone-proguanil or quinine, with mefloquine reserved for no other options. Consider an antiemetic or nasogastric administration when appropriate. Stop the interim drug and begin IV artesunate immediately when available. Do not use doxycycline, tetracycline, or clindamycin alone for severe malaria or as interim treatment: parasite clearance is too slow. Their role as a partner with quinine in a complete follow-on regimen is different. Do not use exchange transfusion as an adjunct. It has no demonstrated benefit, and IV artesunate rapidly reduces parasite burden.',
   citations: [
+    'CDC. Treatment of Severe Malaria. Updated August 17, 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html (accessed November 5, 2026).',
     'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
     'Rosenthal PJ. Artesunate for the Treatment of Severe Falciparum Malaria. N Engl J Med. 2008;358(17):1829-1836.',
     'CDC. Malaria Hotline and Treatment Information. 770-488-7788 (M-F) / 770-488-7100 (24/7).',
@@ -11453,6 +11454,10 @@ const ARTEMETHER_LUMEFANTRINE: DrugEntry = {
   route: 'PO',
   indications: ['Uncomplicated P. falciparum malaria (chloroquine-resistant)'],
   dosing: [
+    {
+      indication: 'P. falciparum: full oral follow-on after IV artesunate (CDC 2026)',
+      regimen: 'Use the weight-band tablet count below for each dose, but give an extended 5-day course (10 doses), not the older 3-day course. Start 8-24 hours after the last IV artesunate dose when parasitemia is ≤1% and oral medication is tolerated. Give a full course regardless of prior interim treatment. Take with fatty food. Confirm the current CDC schedule with pharmacy.',
+    },
     {
       indication: 'Uncomplicated malaria (≥35 kg)',
       regimen: '4 tablets (20 mg artemether / 120 mg lumefantrine per tablet) PO BID × 3 days (total 6 doses at 0, 8, 24, 36, 48, 60 hours). Take with fatty food or whole milk (enhances absorption 2-3 fold). FDA-approved, most common first-line ACT.',
@@ -11484,6 +11489,7 @@ const ARTEMETHER_LUMEFANTRINE: DrugEntry = {
   monitoring: 'Repeat blood smears day 3 and day 7 (should be negative by day 7). ECG if cardiac risk factors. Admit all P. falciparum cases for observation (can deteriorate rapidly).',
   notes: 'Artemisinin-based combination therapy (ACT) is first-line for uncomplicated chloroquine-resistant P. falciparum (most regions worldwide). NEVER use artemisinin monotherapy — promotes resistance. Fatty food is CRITICAL — absorption is 2-3 times higher when taken with fat. Alternative ACT: atovaquone-proguanil (Malarone).',
   citations: [
+    'CDC. Treatment of Severe Malaria. August 17, 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html',
     'CDC. Malaria: Treatment (United States). Centers for Disease Control and Prevention. 2024.',
     'Artemether-Lumefantrine (Coartem) Prescribing Information. Novartis Pharmaceuticals. 2021.',
   ],

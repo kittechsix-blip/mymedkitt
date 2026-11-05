@@ -31700,7 +31700,7 @@ const TI_ADMISSION_CRITERIA_CALCULATOR = {
             return {
                 value: 'ADMIT-ICU',
                 label: '⚠️ ADMIT - ICU',
-                description: `**MANDATORY ADMISSION**\n\n**P. falciparum malaria = MEDICAL EMERGENCY**\n\n• ICU admission\n• ID consultation\n• CDC Malaria Hotline: 770-488-7788 (business) or 770-488-7100 (after hours)\n• Start treatment immediately\n• Can deteriorate within 24-36 hours\n\n**TREATMENT:**\n• IV artesunate (first-line via CDC)\n• Alternative: IV quinidine + doxycycline`,
+                description: `**MANDATORY ADMISSION**\n\n**P. falciparum malaria = MEDICAL EMERGENCY**\n\n• ICU admission\n• ID consultation\n• CDC Malaria Hotline: 770-488-7788 (business) or 770-488-7100 (after hours)\n• Start treatment immediately\n• Can deteriorate within 24-36 hours\n\n**TREATMENT:**\n• IV artesunate for severe malaria (commercial supply)\n• If delayed: interim oral artemether-lumefantrine; doxycycline alone is not adequate`,
                 colorVar: '--color-critical',
             };
         }
@@ -31867,7 +31867,7 @@ const TI_CDC_RESOURCES_CALCULATOR = {
         const resourceVal = resourceMap[resource] || 'yellow-book';
         const resources = {
             'malaria': {
-                info: '**CDC MALARIA HOTLINE (24/7):**\n\n• **Business Hours (9am-5pm ET Mon-Fri):**\n  - 770-488-7788\n  - Toll-free: 855-856-4713\n\n• **After Hours / Weekends:**\n  - 770-488-7100 (CDC Emergency Operations Center)\n  - Ask for Malaria Branch on-call\n\n**IV ARTESUNATE:**\nAvailable through CDC for severe malaria',
+                info: '**CDC MALARIA HOTLINE (24/7):**\n\n• **Business Hours (9am-5pm ET Mon-Fri):**\n  - 770-488-7788\n  - Toll-free: 855-856-4713\n\n• **After Hours / Weekends:**\n  - 770-488-7100 (CDC Emergency Operations Center)\n  - Ask for Malaria Branch on-call\n\n**IV ARTESUNATE:**\nFDA-approved commercial supply for severe malaria; hospital pharmacy should contact its distributor or Amivas 855-526-4827 (24/7). CDC provides clinical consultation.',
                 links: '**LINKS:**\n• Diagnosis: https://www.cdc.gov/malaria/hcp/diagnosis-testing/\n• Treatment: https://www.cdc.gov/malaria/hcp/clinical-guidance/diagnosis-treatment.html',
             },
             'yellow-book': {
@@ -32032,58 +32032,27 @@ const PARASITEMIA_CALC_CALCULATOR = {
 const ARTESUNATE_DOSING_CALCULATOR = {
     id: 'artesunate-dosing',
     title: 'IV Artesunate Dosing',
-    subtitle: 'Severe Malaria Treatment',
-    description: 'IV artesunate is the ONLY treatment for severe malaria. Obtain via CDC IND protocol: call 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7 after hours).',
+    subtitle: 'CDC Severe Malaria Regimen • All Ages',
+    description: 'IV artesunate is FDA-approved and commercially available. CDC regimen: 2.4 mg/kg IV using actual body weight for all ages. Known allergy to IV artemisinins is a contraindication.',
     fields: [
-        {
-            name: 'weight',
-            label: 'Patient Weight',
-            type: 'number',
-            points: 0,
-            valueIsPoints: true,
-            unit: 'kg',
-            description: 'Body weight for dosing calculation',
-        },
-        {
-            name: 'pediatric',
-            label: 'Pediatric patient (<20 kg)',
-            type: 'toggle',
-            points: 1,
-            description: 'Use 3 mg/kg dosing for children <20 kg',
-        },
+        { name: 'regimen', label: 'Medication / Regimen', type: 'select', points: 0,
+            selectOptions: [{ label: 'IV artesunate • CDC • 2.4 mg/kg (all ages)', points: 0 }] },
+        { name: 'weight', label: 'Patient Weight', type: 'number', points: 0, valueIsPoints: true,
+            unit: 'kg', description: 'Actual body weight; same CDC dose below and above 20 kg' },
     ],
     results: [],
-    thresholdNote: '**Loading doses:** 0, 12, and 24 hours. **Maintenance:** Daily until patient can tolerate oral ACT (usually 3-7 days). Monitor for post-artesunate delayed hemolysis (CBC weekly × 4 weeks post-treatment).',
-    citations: [
-        'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
-        'Rosenthal PJ. Artesunate for the Treatment of Severe Falciparum Malaria. N Engl J Med. 2008;358(17):1829-1836.',
-        'CDC. Malaria Hotline: 770-488-7788 (M-F) / 770-488-7100 (24/7).',
-    ],
+    thresholdNote: 'After dose 3, obtain a thin smear at least 4 hours later. Continue 2.4 mg/kg IV every 24 hours if parasitemia >1% OR oral medication is not tolerated, for a maximum of 7 total days of IV therapy. Reassess parasitemia daily. Once parasitemia is ≤1% AND oral medication is tolerated, start a full oral regimen 8-24 hours after the last IV dose, even after 7 days of IV therapy. For P. falciparum, artemether-lumefantrine requires 5 days (10 doses) under CDC August 2026 guidance; atovaquone-proguanil is an alternative 3-day regimen.',
+    citations: ['CDC. Treatment of Severe Malaria. Updated August 17, 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html (accessed November 5, 2026).'],
     computeResult: (values) => {
-        const weight = values['weight'] || 0;
-        const isPediatric = values['pediatric'] === 1;
-        if (weight <= 0) {
-            return {
-                value: '--',
-                label: 'Enter weight',
-                description: 'Enter patient weight to calculate artesunate dosing.',
-                colorVar: '--color-text-muted',
-            };
+        const weight = values['weight'];
+        if (!Number.isFinite(weight) || weight <= 0) {
+            return { value: '--', label: 'Enter weight', description: 'Enter a positive actual body weight in kg.', colorVar: '--color-text-muted' };
         }
-        const dosePerKg = isPediatric ? 3 : 2.4;
-        const singleDose = weight * dosePerKg;
-        const singleDoseRounded = Math.round(singleDose * 10) / 10;
-        let description;
-        if (isPediatric) {
-            description = `**Pediatric dosing (<20 kg):** ${singleDoseRounded} mg IV at 0, 12, and 24 hours (loading), then ${singleDoseRounded} mg IV daily until can tolerate oral ACT.\n\n**CDC Hotline:** 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7)\n\n**Post-treatment:** CBC weekly × 4 weeks (delayed hemolysis risk).`;
-        }
-        else {
-            description = `**Adult dosing:** ${singleDoseRounded} mg IV at 0, 12, and 24 hours (loading), then ${singleDoseRounded} mg IV daily until can tolerate oral ACT.\n\n**CDC Hotline:** 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7)\n\n**Post-treatment:** CBC weekly × 4 weeks (delayed hemolysis risk).`;
-        }
+        const singleDoseRounded = Math.round(weight * 2.4 * 10) / 10;
         return {
             value: `${singleDoseRounded} mg`,
-            label: isPediatric ? 'Pediatric Dose (3 mg/kg)' : 'Adult Dose (2.4 mg/kg)',
-            description,
+            label: 'IV Dose (2.4 mg/kg; all ages)',
+            description: `**INITIAL DOSES:** ${singleDoseRounded} mg IV at 0, 12, and 24 hours.\n\n**AFTER DOSE 3:** Check a thin smear at least 4 hours later. If parasitemia >1% OR oral medication is not tolerated, give ${singleDoseRounded} mg IV every 24 hours. Check parasitemia daily; maximum 7 total days of IV treatment.\n\n**ORAL TRANSITION:** At parasitemia ≤1% AND oral tolerance, begin a full oral course 8-24 hours after the last IV dose. P. falciparum: artemether-lumefantrine 5 days (10 doses), or another CDC regimen. Full oral treatment is required even after 7 IV days.\n\n**SAFETY:** Known allergy to IV artemisinins is a contraindication. CDC specifies no fixed maximum mg/dose; dose is locked to actual weight. Monitor CBC weekly for 4 weeks from treatment initiation.\n\n**ACCESS:** FDA-approved commercial supply through hospital pharmacy/distributor; Amivas 855-526-4827 (24/7). CDC is for consultation, not drug supply.`,
             colorVar: '--color-primary',
         };
     },
