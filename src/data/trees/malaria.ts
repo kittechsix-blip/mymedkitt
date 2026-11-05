@@ -72,7 +72,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Diagnostic Testing — Blood Smears & RDT',
-    body: '**STAT thick and thin blood smears** — gold standard for diagnosis. [1][2][4]\n\n**Thick smear:**\n• Concentrates parasites — **higher sensitivity** for detection\n• Used to confirm presence of infection\n• Estimates parasitemia density\n\n**Thin smear:**\n• Allows **species identification** and accurate parasitemia count\n• Essential for treatment decisions\n\n**Parasitemia calculation:** [5]\n• % infected RBCs = (infected RBCs / total RBCs counted) × 100\n• [Parasitemia Calculator](#/calculator/parasitemia-calc)\n• **>10% = severe malaria** — ICU admission + IV artesunate [5]\n\n**Rapid Diagnostic Test (RDT):** [4]\n• Detects *Plasmodium* antigens (HRP-2, pLDH)\n• Sensitivity 95% for *P. falciparum*, lower for other species\n• **Cannot replace blood smears** — does not provide species ID or parasitemia %\n• Useful for rapid triage when smear results delayed\n\n**Repeat smears q12-24h if initial negative but high suspicion** — parasitemia may be intermittent. [4]\n\n**Adjunct labs:**\n• CBC (anemia, thrombocytopenia)\n• BMP (renal function, electrolytes)\n• LFTs (hyperbilirubinemia common)\n• Glucose (hypoglycemia risk)\n• Lactate, ABG if severe disease',
+    body: '**STAT thick and thin blood smears** — gold standard for diagnosis. [1][2][4]\n\n**Thick smear:**\n• Concentrates parasites — **higher sensitivity** for detection\n• Used to confirm presence of infection\n• Estimates parasitemia density\n\n**Thin smear:**\n• Allows **species identification** and accurate parasitemia count\n• Essential for treatment decisions\n\n**Parasitemia calculation:** [5]\n• % infected RBCs = (infected RBCs / total RBCs counted) × 100\n• [Parasitemia Calculator](#/calculator/parasitemia-calc)\n• **≥5% = severe malaria (CDC)** — IV artesunate even without other severity criteria; ICU admission [4]\n\n**Rapid Diagnostic Test (RDT):** [4]\n• Detects *Plasmodium* antigens (HRP-2, pLDH)\n• Sensitivity 95% for *P. falciparum*, lower for other species\n• **Cannot replace blood smears** — does not provide species ID or parasitemia %\n• Useful for rapid triage when smear results delayed\n\n**Repeat smears q12-24h if initial negative but high suspicion** — parasitemia may be intermittent. [4]\n\n**Adjunct labs:**\n• CBC (anemia, thrombocytopenia)\n• BMP (renal function, electrolytes)\n• LFTs (hyperbilirubinemia common)\n• Glucose (hypoglycemia risk)\n• Lactate, ABG if severe disease',
     images: [{ src: 'images/malaria/pf-blood-smear.jpg', alt: 'Giemsa-stained thin blood smear showing P. falciparum ring-form trophozoites and banana-shaped gametocyte', caption: 'P. falciparum thin smear — ring forms (multiple per RBC, double chromatin dots) and crescent-shaped gametocyte. (CC BY-SA 3.0)' }],
     citation: [1, 2, 4, 5],
     calculatorLinks: [
@@ -137,8 +137,8 @@ export const MALARIA_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'Severity Classification',
-    body: '**Severe malaria** is defined by WHO 2023 criteria as *Plasmodium* infection PLUS ≥1 of the following: [5]\n\n[Severe Malaria WHO 2023 Criteria](#/info/mal-severe-criteria)\n\n**Clinical criteria:**\n• Impaired consciousness (GCS <11)\n• Prostration (inability to sit/stand without assistance)\n• Multiple convulsions (≥2 in 24h)\n• Respiratory distress (acidotic breathing)\n• Circulatory collapse, shock (SBP <70 mmHg in children, <80 in adults)\n• Acute pulmonary edema (radiographic)\n• Abnormal bleeding\n• Jaundice (bilirubin >3 mg/dL + parasitemia >100,000/mcL)\n\n**Laboratory criteria:**\n• **Parasitemia >10%** (or >250,000/mcL)\n• Severe anemia (Hgb <5 g/dL in children, <7 in adults)\n• Hypoglycemia (glucose <40 mg/dL)\n• Metabolic acidosis (pH <7.25 or HCO₃ <15 mEq/L)\n• Renal impairment (creatinine >3 mg/dL)\n• Hyperlactatemia (lactate >5 mmol/L)\n• Hemoglobinuria (macroscopic black/dark urine)\n\n[Malaria Severity Calculator](#/calculator/malaria-severity)\n\nDoes the patient meet criteria for **severe malaria**?',
-    citation: [5],
+    body: '**CDC severe malaria threshold:** Parasitemia **≥5%** defines severe malaria and warrants **IV artesunate**, even without other severity criteria and regardless of species. WHO uses a higher hyperparasitemia cutoff; use the CDC threshold for US care. [4]\n\nClinical or laboratory severity findings can also define severe malaria at lower parasitemia: [4][5]\n\n[Severe Malaria Criteria (CDC Parasitemia Threshold)](#/info/mal-severe-criteria)\n\n**Clinical criteria:**\n• Impaired consciousness (GCS <11)\n• Prostration (inability to sit/stand without assistance)\n• Multiple convulsions (≥2 in 24h)\n• Respiratory distress (acidotic breathing)\n• Circulatory collapse, shock (SBP <70 mmHg in children, <80 in adults)\n• Acute pulmonary edema (radiographic)\n• Abnormal bleeding\n• Jaundice (bilirubin >3 mg/dL + parasitemia >100,000/mcL)\n\n**Laboratory criteria:**\n• **Parasitemia ≥5% (CDC)** — sufficient alone for IV artesunate [4]\n• Severe anemia (Hgb <5 g/dL in children, <7 in adults)\n• Hypoglycemia (glucose <40 mg/dL)\n• Metabolic acidosis (pH <7.25 or HCO₃ <15 mEq/L)\n• Renal impairment (creatinine >3 mg/dL)\n• Hyperlactatemia (lactate >5 mmol/L)\n• Hemoglobinuria (macroscopic black/dark urine)\n\n[Malaria Severity Calculator](#/calculator/malaria-severity)\n\nDoes the patient meet criteria for **severe malaria**?',
+    citation: [4, 5],
     calculatorLinks: [
       { id: 'malaria-severity', label: 'Severity Score' },
       { id: 'parasitemia-calc', label: 'Parasitemia %' },
@@ -146,7 +146,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     options: [
       {
         label: 'Yes — Severe Malaria',
-        description: 'Meets ≥1 WHO severe malaria criterion',
+        description: 'Parasitemia ≥5% (CDC), or any other severe criterion',
         next: 'mal-severe-treatment',
         urgency: 'critical',
       },
@@ -156,7 +156,7 @@ export const MALARIA_NODES: DecisionNode[] = [
         next: 'mal-uncomplicated',
       },
     ],
-    summary: 'Severe malaria criteria: AMS, seizures, severe anemia, parasitemia >5%, acidosis, renal/hepatic failure',
+    summary: 'Severe malaria criteria: AMS, seizures, severe anemia, parasitemia ≥5%, acidosis, renal/hepatic failure',
     safetyLevel: 'critical',
   },
 
@@ -508,12 +508,12 @@ export const MALARIA_NODES: DecisionNode[] = [
     type: 'question',
     module: 6,
     title: 'Disposition',
-    body: '**Admission criteria:** [1][4][6]\n\n**ICU admission:**\n• Severe malaria (any WHO criterion)\n• Parasitemia >10%\n• Rapidly rising parasitemia\n• IV artesunate required\n\n**Floor admission:**\n• **All *P. falciparum* cases** — even if uncomplicated (risk of rapid deterioration) [3][4]\n• *P. knowlesi* (24-hour replication cycle — can progress rapidly) [14]\n• Pediatric <5 years with any species\n• Pregnancy\n• Significant comorbidities (immunosuppression, elderly, organ dysfunction)\n• Inability to tolerate oral medications\n• Unreliable for outpatient follow-up\n\n**Outpatient management** (rare, must meet ALL criteria): [4]\n• *P. vivax, ovale, or malariae* only (NOT falciparum or knowlesi)\n• Uncomplicated (no severe malaria criteria)\n• Parasitemia <2%\n• Able to tolerate oral medications\n• Reliable for close follow-up (smears day 3, 7)\n• No pregnancy, age >5 years, no comorbidities\n\nWhat is the disposition plan?',
+    body: '**Admission criteria:** [1][4][6]\n\n**ICU admission:**\n• Severe malaria (CDC parasitemia ≥5% or another severe criterion)\n• Parasitemia ≥5%\n• Rapidly rising parasitemia\n• IV artesunate required\n\n**Floor admission:**\n• **All *P. falciparum* cases** — even if uncomplicated (risk of rapid deterioration) [3][4]\n• *P. knowlesi* (24-hour replication cycle — can progress rapidly) [14]\n• Pediatric <5 years with any species\n• Pregnancy\n• Significant comorbidities (immunosuppression, elderly, organ dysfunction)\n• Inability to tolerate oral medications\n• Unreliable for outpatient follow-up\n\n**Outpatient management** (rare, must meet ALL criteria): [4]\n• *P. vivax, ovale, or malariae* only (NOT falciparum or knowlesi)\n• Uncomplicated (no severe malaria criteria)\n• Parasitemia <2%\n• Able to tolerate oral medications\n• Reliable for close follow-up (smears day 3, 7)\n• No pregnancy, age >5 years, no comorbidities\n\nWhat is the disposition plan?',
     citation: [1, 3, 4, 6, 14],
     options: [
       {
         label: 'ICU Admission',
-        description: 'Severe malaria, IV artesunate, parasitemia >10%',
+        description: 'Severe malaria, IV artesunate, parasitemia ≥5%',
         next: 'mal-dispo-icu',
         urgency: 'critical',
       },
@@ -540,7 +540,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     recommendation: 'ICU admission for severe malaria. IV artesunate via CDC IND protocol. Close monitoring for complications. CBC weekly × 4 weeks post-discharge for delayed hemolysis surveillance.',
     confidence: 'definitive',
     citation: [5, 6, 8],
-    summary: 'ICU for severe malaria: IV artesunate, exchange transfusion if parasitemia >10%, serial smears',
+    summary: 'ICU for severe malaria: IV artesunate for parasitemia ≥5% or another severe criterion, serial smears',
   },
 
   {
@@ -560,7 +560,7 @@ export const MALARIA_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'Outpatient Management (Rare)',
-    body: '**Outpatient management is RARELY appropriate** and requires ALL of the following: [4]\n\n**Criteria:**\n• *P. vivax, ovale, or malariae* ONLY (NOT falciparum or knowlesi)\n• Uncomplicated (no WHO severe malaria criteria)\n• Parasitemia <2%\n• Able to tolerate oral medications\n• Reliable for close follow-up (smears day 3, 7)\n• No pregnancy, age >5 years, no comorbidities\n• Lives locally (not traveling far from hospital)\n\n**Discharge instructions:**\n• **Complete full course** of chloroquine (1000 mg, then 500 mg at 6, 24, 48h)\n• [Primaquine](#/drug/primaquine/radical cure g6pd normal) (if vivax/ovale and G6PD normal): 30 mg base daily × 14 days starting after chloroquine [9]\n• **Return immediately if:**\n  - Fever worsens or does not improve within 48h\n  - Difficulty breathing, chest pain\n  - Confusion, severe headache, seizures\n  - Dark urine (hemolysis)\n  - Severe weakness, inability to eat/drink\n  - Vomiting preventing medication absorption\n\n**Mandatory follow-up:**\n• Blood smear **day 3** (parasitemia should be declining)\n• Blood smear **day 7** (should be negative — if positive → treatment failure)\n• Blood smear **day 28** (confirm sustained clearance)\n• If on primaquine: CBC at day 7 (monitor for hemolysis)\n\n**Infectious disease referral** for treatment failure or relapse.\n\n**Prophylaxis counseling** if returning to endemic area: atovaquone-proguanil, doxycycline, or mefloquine + insecticide-treated bed nets. [4]',
+    body: '**Outpatient management is RARELY appropriate** and requires ALL of the following: [4]\n\n**Criteria:**\n• *P. vivax, ovale, or malariae* ONLY (NOT falciparum or knowlesi)\n• Uncomplicated (no severe malaria criteria, including CDC parasitemia ≥5%)\n• Parasitemia <2%\n• Able to tolerate oral medications\n• Reliable for close follow-up (smears day 3, 7)\n• No pregnancy, age >5 years, no comorbidities\n• Lives locally (not traveling far from hospital)\n\n**Discharge instructions:**\n• **Complete full course** of chloroquine (1000 mg, then 500 mg at 6, 24, 48h)\n• [Primaquine](#/drug/primaquine/radical cure g6pd normal) (if vivax/ovale and G6PD normal): 30 mg base daily × 14 days starting after chloroquine [9]\n• **Return immediately if:**\n  - Fever worsens or does not improve within 48h\n  - Difficulty breathing, chest pain\n  - Confusion, severe headache, seizures\n  - Dark urine (hemolysis)\n  - Severe weakness, inability to eat/drink\n  - Vomiting preventing medication absorption\n\n**Mandatory follow-up:**\n• Blood smear **day 3** (parasitemia should be declining)\n• Blood smear **day 7** (should be negative — if positive → treatment failure)\n• Blood smear **day 28** (confirm sustained clearance)\n• If on primaquine: CBC at day 7 (monitor for hemolysis)\n\n**Infectious disease referral** for treatment failure or relapse.\n\n**Prophylaxis counseling** if returning to endemic area: atovaquone-proguanil, doxycycline, or mefloquine + insecticide-treated bed nets. [4]',
     recommendation: 'Outpatient management ONLY for uncomplicated vivax/ovale/malariae with reliable follow-up. Complete chloroquine + primaquine (if G6PD normal). MANDATORY blood smears day 3, 7, 28. Return precautions for fever, dyspnea, confusion, dark urine.',
     confidence: 'recommended',
     citation: [4, 9],
@@ -592,7 +592,7 @@ export const MALARIA_CRITICAL_ACTIONS = [
   { text: 'STAT thick and thin blood smears - species ID and parasitemia % guide all treatment', nodeId: 'mal-diagnostics' },
   { text: 'Call CDC Malaria Hotline for severe cases - 770-488-7788 (24/7: 770-488-7100)', nodeId: 'mal-severe-treatment' },
   { text: 'IV artesunate is ONLY treatment for severe malaria - obtain via CDC IND protocol', nodeId: 'mal-severe-treatment' },
-  { text: 'Parasitemia >10% = severe malaria - requires ICU admission and immediate IV artesunate', nodeId: 'mal-severe-treatment' },
+  { text: 'Parasitemia ≥5% = severe malaria - requires ICU admission and immediate IV artesunate', nodeId: 'mal-severe-treatment' },
   { text: 'G6PD testing REQUIRED before primaquine - hemolysis risk if deficient', nodeId: 'mal-primaquine' },
   { text: 'Species identification is critical - P. falciparum can kill in 24-48 hours', nodeId: 'mal-species' },
   { text: 'Monitor glucose q4-6h in severe cases - especially with quinine or pregnancy', nodeId: 'mal-complications' },
@@ -620,7 +620,7 @@ export const MALARIA_CITATIONS: Citation[] = [
   },
   {
     num: 4,
-    text: 'CDC. Malaria: Treatment (United States). Centers for Disease Control and Prevention. Updated 2024.',
+    text: 'CDC. Clinical Guidance: Treatment of Severe Malaria. Parasitemia ≥5% warrants IV artesunate regardless of species. Accessed November 5, 2026. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html',
   },
   {
     num: 5,

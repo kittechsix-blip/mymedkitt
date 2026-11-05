@@ -33135,8 +33135,8 @@ const TI_CDC_RESOURCES_CALCULATOR: CalculatorDefinition = {
 const MALARIA_SEVERITY_CALCULATOR: CalculatorDefinition = {
   id: 'malaria-severity',
   title: 'Malaria Severity Score',
-  subtitle: 'WHO 2023 Severe Malaria Criteria',
-  description: 'Severe malaria is defined as Plasmodium infection PLUS ≥1 of the following WHO criteria. Any single criterion requires ICU admission and IV artesunate.',
+  subtitle: 'Severe Malaria Criteria • CDC Parasitemia Threshold',
+  description: 'With malaria, parasitemia ≥5% alone defines severe disease under CDC guidance and warrants IV artesunate, even without other severity criteria. Other severe findings can qualify at lower parasitemia. WHO uses a higher parasitemia cutoff.',
   fields: [
     { name: 'impaired-consciousness', label: 'Impaired consciousness (GCS <11)', type: 'toggle', points: 1 },
     { name: 'prostration', label: 'Prostration (inability to sit/stand unassisted)', type: 'toggle', points: 1 },
@@ -33146,7 +33146,7 @@ const MALARIA_SEVERITY_CALCULATOR: CalculatorDefinition = {
     { name: 'pulm-edema', label: 'Acute pulmonary edema (radiographic)', type: 'toggle', points: 1 },
     { name: 'bleeding', label: 'Abnormal bleeding (spontaneous)', type: 'toggle', points: 1 },
     { name: 'jaundice', label: 'Jaundice (bilirubin >3 mg/dL + parasitemia >100,000)', type: 'toggle', points: 1 },
-    { name: 'parasitemia', label: 'Parasitemia >10% (or >250,000/mcL)', type: 'toggle', points: 1 },
+    { name: 'parasitemia', label: 'Parasitemia ≥5% (CDC; sufficient alone)', type: 'toggle', points: 1 },
     { name: 'anemia', label: 'Severe anemia (Hgb <5 g/dL children, <7 adults)', type: 'toggle', points: 1 },
     { name: 'hypoglycemia', label: 'Hypoglycemia (glucose <40 mg/dL)', type: 'toggle', points: 1 },
     { name: 'acidosis', label: 'Metabolic acidosis (pH <7.25 or HCO₃ <15)', type: 'toggle', points: 1 },
@@ -33156,10 +33156,11 @@ const MALARIA_SEVERITY_CALCULATOR: CalculatorDefinition = {
   ],
   results: [
     { min: -Infinity, max: 1, label: 'Uncomplicated Malaria', risk: 'No severe criteria', mortality: 'Oral ACT regimen. Admit all P. falciparum for observation.', colorVar: '--color-primary' },
-    { min: 1, max: Infinity, label: 'SEVERE MALARIA', risk: '≥1 WHO criterion present', mortality: 'ICU admission. IV artesunate via CDC IND (call 770-488-7788 or 770-488-7100). Mortality 10-50% depending on complications.', colorVar: '--color-danger' },
+    { min: 1, max: Infinity, label: 'SEVERE MALARIA', risk: '≥1 severe criterion present (CDC parasitemia ≥5%)', mortality: 'ICU admission. Prompt IV artesunate. CDC consultation: 770-488-7788 or 770-488-7100. Mortality 10-50% depending on complications.', colorVar: '--color-danger' },
   ],
-  thresholdNote: '**ANY single severe criterion = SEVERE MALARIA.** Call CDC Malaria Hotline: 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7 after hours). IV artesunate is ONLY treatment for severe malaria.',
+  thresholdNote: '**Parasitemia ≥5% alone = SEVERE MALARIA (CDC), even without other severity findings.** Any other severe criterion also qualifies. Call CDC Malaria Hotline: 770-488-7788 (M-F 9am-5pm ET) or 770-488-7100 (24/7 after hours). IV artesunate is ONLY treatment for severe malaria.',
   citations: [
+    'CDC. Clinical Guidance: Treatment of Severe Malaria. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html (accessed November 5, 2026).',
     'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
     'Trampuz A, Jereb M, Muzlovic I, Prabhu RM. Clinical Review: Severe Malaria. Crit Care. 2003;7(4):315-323.',
   ],
@@ -33173,7 +33174,7 @@ const PARASITEMIA_CALC_CALCULATOR: CalculatorDefinition = {
   id: 'parasitemia-calc',
   title: 'Parasitemia Calculator',
   subtitle: 'Percent Infected RBCs',
-  description: 'Calculates parasitemia percentage from thin blood smear counts. Parasitemia >10% = severe malaria requiring ICU and IV artesunate.',
+  description: 'Calculates parasitemia percentage from thin blood smear counts. Parasitemia ≥5% defines severe malaria under CDC guidance and warrants IV artesunate even without other severity criteria.',
   fields: [
     {
       name: 'infected-rbcs',
@@ -33195,8 +33196,9 @@ const PARASITEMIA_CALC_CALCULATOR: CalculatorDefinition = {
     },
   ],
   results: [],
-  thresholdNote: '**>10% = severe malaria** — ICU admission + IV artesunate required. Repeat smears q12-24h to monitor treatment response.',
+  thresholdNote: '**≥5% = severe malaria (CDC), even without other severity criteria** — ICU admission + IV artesunate required. Repeat smears q12-24h to monitor treatment response.',
   citations: [
+    'CDC. Clinical Guidance: Treatment of Severe Malaria. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html (accessed November 5, 2026).',
     'WHO. Guidelines for the Treatment of Malaria. 3rd Edition. World Health Organization. 2023.',
     'CDC. Malaria: Diagnosis & Treatment (United States). Centers for Disease Control and Prevention. 2024.',
   ],
@@ -33229,26 +33231,23 @@ const PARASITEMIA_CALC_CALCULATOR: CalculatorDefinition = {
     let description: string;
     let colorVar: string;
 
-    if (parasitemiaRounded < 1) {
+    if (parasitemia < 1) {
       label = 'Low Parasitemia';
       description = '<1% — uncomplicated malaria if no other severe criteria. Admit all P. falciparum cases for observation.';
       colorVar = '--color-primary';
-    } else if (parasitemiaRounded < 5) {
+    } else if (parasitemia < 5) {
       label = 'Moderate Parasitemia';
-      description = '1-5% — monitor closely. Higher mortality risk. Repeat smears q12-24h.';
+      description = '1% to <5% — below the CDC parasitemia threshold. Other severe criteria still require IV artesunate. Monitor closely and repeat smears q12-24h.';
       colorVar = '--color-warning';
-    } else if (parasitemiaRounded < 10) {
-      label = 'High Parasitemia';
-      description = '5-10% — high risk of progression. ICU consultation recommended. Repeat smears q12h.';
-      colorVar = '--color-warning';
+
     } else {
       label = 'SEVERE MALARIA';
-      description = '>10% = WHO severe malaria criterion. ICU admission + IV artesunate via CDC IND protocol. Call 770-488-7788 or 770-488-7100.';
+      description = '≥5% meets the CDC severe malaria criterion, even without other severity findings. Prompt IV artesunate and ICU admission. Applies regardless of species. CDC consultation: 770-488-7788 or 770-488-7100.';
       colorVar = '--color-danger';
     }
 
     return {
-      value: `${parasitemiaRounded}%`,
+      value: parasitemia < 5 && parasitemiaRounded >= 5 ? '<5%' : `${parasitemiaRounded}%`,
       label,
       description,
       colorVar,

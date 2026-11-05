@@ -12436,7 +12436,7 @@ const MAL_STEPS: InfoPage = {
     },
     {
       heading: '2. Calculate Severity',
-      body: 'Use the [Malaria Severity Calculator](calc:malaria-severity) to determine if the patient meets WHO 2023 criteria for severe malaria. Any ONE criterion = severe malaria. Severe disease requires IV artesunate and ICU admission. [2]',
+      body: 'Use the [Malaria Severity Calculator](calc:malaria-severity) to determine if the patient meets severe malaria criteria. Parasitemia ≥5% alone defines severe malaria under CDC guidance, even without other severity criteria. Any other severe criterion also qualifies. Severe disease requires IV artesunate and ICU admission. [2][6]',
     },
     {
       heading: '3. Order Diagnostic Testing',
@@ -12452,7 +12452,7 @@ const MAL_STEPS: InfoPage = {
     },
     {
       heading: '6. Initiate Treatment',
-      body: 'Severe malaria: IV {{drug:artesunate}} (preferred) or quinidine + ICU. Uncomplicated malaria: {{drug:artemether-lumefantrine}}, {{drug:atovaquone-proguanil}}, or {{drug:chloroquine}} (only if chloroquine-sensitive). Start empirically while awaiting smear results if high clinical suspicion. [6]',
+      body: 'Severe malaria: [IV artesunate](#/drug/iv-artesunate) (preferred) or quinidine + ICU. Uncomplicated malaria: {{drug:artemether-lumefantrine}}, {{drug:atovaquone-proguanil}}, or {{drug:chloroquine}} (only if chloroquine-sensitive). Start empirically while awaiting smear results if high clinical suspicion. [6]',
     },
     {
       heading: '7. Special Populations',
@@ -12468,7 +12468,7 @@ const MAL_STEPS: InfoPage = {
     },
     {
       heading: '10. Disposition',
-      body: 'Severe malaria: ICU admission. Uncomplicated malaria: admit for IV therapy if unable to tolerate PO, parasitemia > 5%, comorbidities, or uncertain diagnosis. Low-risk patients may be discharged with close follow-up and daily phone contact. CDC Malaria Hotline available 24/7: 770-488-7788. [10]',
+      body: 'Severe malaria, including parasitemia ≥5% alone (CDC): prompt IV artesunate and ICU admission. [6] Uncomplicated malaria: admit if unable to tolerate PO, comorbidities, or uncertain diagnosis. Low-risk patients may be discharged with close follow-up and daily phone contact. CDC Malaria Hotline available 24/7: 770-488-7788. [10]',
     },
   ],
   citations: [
@@ -12477,7 +12477,7 @@ const MAL_STEPS: InfoPage = {
     { num: 3, text: 'CDC. Malaria Diagnosis (U.S.). 2023.' },
     { num: 4, text: 'White NJ. Plasmodium knowlesi: the fifth human malaria parasite. Clin Infect Dis. 2008;46(2):172-173.' },
     { num: 5, text: 'Ashley EA, et al. Spread of artemisinin resistance in Plasmodium falciparum malaria. NEJM. 2014;371(5):411-423.' },
-    { num: 6, text: 'CDC. Treatment of Malaria: Guidelines for Clinicians (United States). 2023.' },
+    { num: 6, text: 'CDC. Clinical Guidance: Treatment of Severe Malaria. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html (accessed November 5, 2026).' },
     { num: 7, text: 'Desai M, et al. Epidemiology and burden of malaria in pregnancy. Lancet Infect Dis. 2007;7(2):93-104.' },
     { num: 8, text: 'Trampuz A, et al. Clinical review: Severe malaria. Crit Care. 2003;7(4):315-323.' },
     { num: 9, text: 'Schwartz E, et al. Delayed onset of malaria: implications for chemoprophylaxis. NEJM. 2003;349(16):1510-1516.' },
@@ -12493,7 +12493,7 @@ const MAL_SPECIES_TABLE: InfoPage = {
   sections: [
     {
       heading: 'P. falciparum',
-      body: '**Severity:** Most severe — causes cerebral malaria, multi-organ failure, death\n**Incubation:** 7-14 days (occasionally up to 30)\n**Relapse:** No hypnozoite stage — no liver relapse\n**RBC Preference:** All ages of RBCs — high parasitemia possible (>10%)\n**Parasitemia:** Can exceed 10% — marker of severity\n**Geographic:** Sub-Saharan Africa (90% of cases), Southeast Asia, South America\n**Treatment:** {{drug:artemether-lumefantrine}}, {{drug:atovaquone-proguanil}}, IV {{drug:artesunate}} (severe)\n**Resistance:** Widespread chloroquine resistance. Emerging artemisinin resistance in Southeast Asia (Cambodia, Thailand, Myanmar)',
+      body: '**Severity:** Most severe — causes cerebral malaria, multi-organ failure, death\n**Incubation:** 7-14 days (occasionally up to 30)\n**Relapse:** No hypnozoite stage — no liver relapse\n**RBC Preference:** All ages of RBCs — high parasitemia possible (>10%)\n**Parasitemia:** Can exceed 10% — marker of severity\n**Geographic:** Sub-Saharan Africa (90% of cases), Southeast Asia, South America\n**Treatment:** {{drug:artemether-lumefantrine}}, {{drug:atovaquone-proguanil}}, [IV artesunate](#/drug/iv-artesunate) (severe)\n**Resistance:** Widespread chloroquine resistance. Emerging artemisinin resistance in Southeast Asia (Cambodia, Thailand, Myanmar)',
     },
     {
       heading: 'P. vivax',
@@ -12509,7 +12509,7 @@ const MAL_SPECIES_TABLE: InfoPage = {
     },
     {
       heading: 'P. knowlesi',
-      body: '**Severity:** Can be severe — rapid replication (24h cycle) allows high parasitemia\n**Incubation:** 9-12 days\n**Relapse:** No hypnozoite stage\n**RBC Preference:** All ages — parasitemia can rise rapidly\n**Parasitemia:** Can exceed 5% quickly due to 24h cycle\n**Geographic:** Southeast Asia (Malaysia, Thailand, Philippines, Indonesia). Zoonotic — natural host is macaque monkeys\n**Treatment:** {{drug:artemether-lumefantrine}} or {{drug:atovaquone-proguanil}}. IV {{drug:artesunate}} if severe. Do NOT use chloroquine\n**Resistance:** Chloroquine not effective',
+      body: '**Severity:** Can be severe — rapid replication (24h cycle) allows high parasitemia\n**Incubation:** 9-12 days\n**Relapse:** No hypnozoite stage\n**RBC Preference:** All ages — parasitemia can rise rapidly\n**Parasitemia:** Can exceed 5% quickly due to 24h cycle\n**Geographic:** Southeast Asia (Malaysia, Thailand, Philippines, Indonesia). Zoonotic — natural host is macaque monkeys\n**Treatment:** {{drug:artemether-lumefantrine}} or {{drug:atovaquone-proguanil}}. [IV artesunate](#/drug/iv-artesunate) if severe. Do NOT use chloroquine\n**Resistance:** Chloroquine not effective',
     },
   ],
   citations: [
@@ -12521,7 +12521,7 @@ const MAL_SPECIES_TABLE: InfoPage = {
 
 const MAL_SEVERE_CRITERIA: InfoPage = {
   id: 'mal-severe-criteria',
-  title: 'Severe Malaria Criteria (WHO 2023)',
+  title: 'Severe Malaria Criteria (CDC Parasitemia Threshold)',
   subtitle: 'Any ONE criterion defines severe malaria',
   shareable: false,
   sections: [
@@ -12531,16 +12531,16 @@ const MAL_SEVERE_CRITERIA: InfoPage = {
     },
     {
       heading: 'Laboratory Criteria (6 Items)',
-      body: '1. **Hyperparasitemia** — >10% parasitized RBCs (or >500,000/μL)\n2. **Hyperbilirubinemia** — bilirubin >3 mg/dL with parasitemia >100,000/μL\n3. **Hemoglobinuria** — macroscopic black/red urine ("blackwater fever")\n4. **Abnormal bleeding / DIC** — spontaneous bleeding from gums, nose, GI tract; prolonged PT/PTT\n5. **Shock** — SBP <80 mmHg (adults) with cool extremities\n6. **Pulmonary edema** — radiographic evidence',
+      body: '1. **Hyperparasitemia (CDC)** — ≥5% parasitized RBCs defines severe malaria and warrants IV artesunate even without other severity criteria. WHO uses a higher cutoff; use CDC guidance for US care. [2]\n2. **Hyperbilirubinemia** — bilirubin >3 mg/dL with parasitemia >100,000/μL\n3. **Hemoglobinuria** — macroscopic black/red urine ("blackwater fever")\n4. **Abnormal bleeding / DIC** — spontaneous bleeding from gums, nose, GI tract; prolonged PT/PTT\n5. **Shock** — SBP <80 mmHg (adults) with cool extremities\n6. **Pulmonary edema** — radiographic evidence',
     },
     {
       heading: 'Key Points',
-      body: '**Any ONE criterion = Severe Malaria** → requires IV {{drug:artesunate}} and ICU admission. [1]\n\n**Use the [Severity Calculator](calc:malaria-severity)** to systematically evaluate all criteria.\n\n**Do NOT wait for smear confirmation** if clinical suspicion is high and patient meets severity criteria. Start IV artesunate empirically. [2]\n\n**Cerebral malaria** is a subset defined by unarousable coma (GCS ≤9) not attributable to another cause, with P. falciparum parasitemia. Mortality 15-20% even with treatment. [3]',
+      body: '**Any ONE criterion = Severe Malaria** → requires [IV artesunate](#/drug/iv-artesunate) and ICU admission. [1]\n\n**Use the [Severity Calculator](calc:malaria-severity)** to systematically evaluate all criteria.\n\n**Do NOT wait for smear confirmation** if clinical suspicion is high and patient meets severity criteria. Start IV artesunate empirically. [2]\n\n**Cerebral malaria** is a subset defined by unarousable coma (GCS ≤9) not attributable to another cause, with P. falciparum parasitemia. Mortality 15-20% even with treatment. [3]',
     },
   ],
   citations: [
     { num: 1, text: 'WHO. Guidelines for the Treatment of Malaria. 3rd ed. 2023.' },
-    { num: 2, text: 'CDC. Treatment of Malaria: Guidelines for Clinicians (United States). 2023.' },
+    { num: 2, text: 'CDC. Clinical Guidance: Treatment of Severe Malaria. https://www.cdc.gov/malaria/hcp/clinical-guidance/iv-artesunate-us.html (accessed November 5, 2026).' },
     { num: 3, text: 'Idro R, et al. Pathogenesis, clinical features, and neurological outcome of cerebral malaria. Lancet Neurol. 2005;4(12):827-840.' },
   ],
 };
