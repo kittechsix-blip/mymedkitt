@@ -10,7 +10,7 @@ export const DIFFICULT_VASCULAR_ACCESS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Difficult Vascular Access: US-PIV + IO',
-    body: '[A-Line visual procedure](#/tree/arterial-line)\n\nUse this when peripheral access is delayed, repeated blind attempts are failing, or immediate resuscitation access is needed.\n\nOpen first:\n- [Access Steps](#/info/dva-steps)\n- [US-PIV Technique](#/info/dva-us-piv)\n- [IO Sites](#/info/dva-io-sites)\n- [Confirm / Use](#/info/dva-confirm)\n- [Stop / Complications](#/info/dva-stop)',
+    body: '[A-Line visual procedure](#/tree/arterial-line)\n\nUse this when peripheral access is delayed, repeated blind attempts are failing, or immediate resuscitation access is needed.\n\nOpen first:\n- [Access Steps](#/info/dva-steps)\n- [US-PIV Technique](#/info/dva-us-piv)\n- [IO Sites](#/info/dva-io-sites)\n- [Anatomy: IO placement](#/calculator/io-anatomy)\n- [Confirm / Use](#/info/dva-confirm)\n- [Stop / Complications](#/info/dva-stop)',
     citation: [1, 2, 3],
     images: [
       {
@@ -98,15 +98,30 @@ export const DIFFICULT_VASCULAR_ACCESS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'IO Access: Site Selection',
-    body: 'Common ED sites:\n- Proximal tibia\n- Distal tibia\n- Proximal humerus\n- Distal femur in children when appropriate\n\nAvoid fractured bone, infected/burned insertion site, prior IO attempt in same bone, prosthetic limb/joint at target site, or inability to identify landmarks.',
-    citation: [3, 4],
+    body: "[Anatomy: illustrated placement guide](#/calculator/io-anatomy)\n\n[IO Sites: all four visual guides](#/info/dva-io-sites)\n\n**Proximal tibia**\nExtend the leg. Support and stabilize the knee and lower leg. Palpate the tibial tuberosity and flat anteromedial tibial surface. In adults and larger children, target approximately 2 cm medial to the tuberosity. If the tuberosity is not palpable, identify the flat surface approximately 3 cm below the inferior patellar border. Confirm by palpation; these are approximate, size-dependent landmarks. Insert at 90° to the bone surface, through the flat anteromedial cortex. Do not aim toward the knee joint or growth plate.\nPediatric: In neonates and small children, target approximately 1 cm medial to the tibial tuberosity. If it is not palpable, use approximately 1–2 cm below the patella and approximately 1 cm medial, on the flat tibial surface. Identify the proximal tibial growth plate region and remain distal to it; do not use adult distances on a small child.\n\n**Distal tibia**\nSupport the ankle and expose the medial lower leg. Palpate the medial malleolus and both borders of the tibia. Target the flat medial tibial surface approximately 3 cm proximal to the most prominent part of the medial malleolus, centered between the anterior and posterior tibial borders. Insert at 90° to the bone surface. The approach is from the medial side, not from the front of the ankle.\nPediatric: In a neonate or small child, the target is approximately 1–2 cm proximal to the most prominent medial malleolus, centered on the flat medial tibia. Distances depend on child size; identify the bone rather than scaling a diagram.\n\n**Proximal humerus**\nAdduct the arm and internally rotate it. Place the hand over the abdomen, with the elbow close to the body. Keep this position while landmarking and inserting. Palpate the proximal humerus and identify the greater tubercle at the most prominent anterior-lateral aspect. Locate the surgical neck and target the greater tubercle above it. Do not use the acromion as the puncture site. Aim approximately 45° to the anterior plane, posteromedially toward the opposite hip. This is a three-dimensional direction; do not copy a screen angle or use the tibial 90° approach.\nPediatric: Use only when the greater tubercle and surgical neck can be confidently identified and tissue depth permits appropriate needle selection. The proximal humerus is not reliably landmarked in every small child; select another approved site when uncertain.\n\n**Distal femur · pediatric**\nExtend the knee. Stabilize the distal thigh and secure the leg so the knee does not bend during or after placement. Not an adult EZ-IO site. Use an approved tibial or humeral site in adults. Insert at 90° to the bone surface. The intended site is proximal to the distal femoral physis and knee joint; do not aim toward either.\nPediatric: In neonates and young children, palpate the superior patellar border. Target approximately 1–2 cm proximal to it and approximately 1 cm medial to the femoral midline, on the anterior distal femur. These distances are size-dependent young-child landmarks, not a universal rule for every pediatric age. The US IFU lists distal femur for pediatric patients (21 years or younger); age eligibility does not replace suitable anatomy and device-specific training.\n\nEZ-IO-specific guide. Confirm device labeling and local training. Do not use a fractured target bone, infected insertion site, a site with significant prior orthopedic surgery/prosthesis, a bone accessed or attempted within 48 hours, or a site where excessive tissue or unidentifiable landmarks prevent safe placement. Avoid burned skin when an alternative site is available. Distal femur is a pediatric EZ-IO site, not an adult site. Age alone does not establish landmark suitability.",
+    citation: [3, 4, 5, 6, 7],
     images: [
-      {
-        src: 'images/difficult-vascular-access/intraosseous-infusion.png',
-        alt: 'Intraosseous humeral head infusion contrast image',
-        caption: 'Contrast demonstrates humeral IO infusion entering central venous circulation. Wikimedia Commons, CC BY-SA 4.0.',
-      },
-    ],
+  {
+    "src": "images/difficult-vascular-access/io-proximal-tibia-anatomy.svg",
+    "alt": "Proximal tibia landmarks and target; original schematic, not to scale",
+    "caption": "Proximal tibia: confirm target by palpation; see Anatomy for placement details."
+  },
+  {
+    "src": "images/difficult-vascular-access/io-distal-tibia-anatomy.svg",
+    "alt": "Distal tibia landmarks and target; original schematic, not to scale",
+    "caption": "Distal tibia: confirm target by palpation; see Anatomy for placement details."
+  },
+  {
+    "src": "images/difficult-vascular-access/io-proximal-humerus-anatomy.svg",
+    "alt": "Proximal humerus landmarks and target; original schematic, not to scale",
+    "caption": "Proximal humerus: confirm target by palpation; see Anatomy for placement details."
+  },
+  {
+    "src": "images/difficult-vascular-access/io-distal-femur-anatomy.svg",
+    "alt": "Distal femur · pediatric landmarks and target; original schematic, not to scale",
+    "caption": "Distal femur · pediatric: confirm target by palpation; see Anatomy for placement details."
+  }
+],
     next: 'dva-io-technique',
     summary: 'Choose tibial, humeral, or pediatric distal femur site and avoid fractured/infected bones.',
     safetyLevel: 'critical',
@@ -216,6 +231,9 @@ export const DIFFICULT_VASCULAR_ACCESS_CRITICAL_ACTIONS = [
 ];
 
 export const DIFFICULT_VASCULAR_ACCESS_CITATIONS: Citation[] = [
+  {"num": 7, "text": "Teleflex. EZ-IO Proximal Humerus Insertion Site Identification. https://www.teleflex.com/usa/en/product-areas/emergency-medicine/intraosseous-access/arrow-ez-io-system/literature/EM_EZ-IO_Proximal-Humerus-Data-Sheet_MC-000620rev2b.pdf"},
+  {"num":5,"text":"Teleflex. Arrow EZ-IO US Instructions for Use, 8049. https://www.teleflexvascular.com/files/ifu/8049.pdf"},
+  {"num":6,"text":"Teleflex. Arrow EZ-IO Pocket Guide (2023), anatomical landmarks and insertion. https://www.teleflex.com/emea/en/product-areas/emergency-medicine/intraosseous-access/arrow-ez-io-system/literature/MCI-101184-EMS-BR-EZ-IO-PocketGuide-EMEA-2023-LR.pdf"},
   { num: 1, text: 'Egan G, Healy D, ONeill H, Clarke-Moloney M, Grace PA, Walsh SR. Ultrasound guidance for difficult peripheral venous access: systematic review and meta-analysis. Emerg Med J. 2013;30(7):521-526.' },
   { num: 2, text: 'Stolz LA, Cappa AR, Minckler MR, et al. Prospective evaluation of ultrasound-guided peripheral intravenous catheter survival. Am J Emerg Med. 2016;34(6):947-950.' },
   { num: 3, text: 'Petitpas F, Guenezan J, Vendeuvre T, Scepi M, Oriot D, Mimoz O. Use of intra-osseous access in adults: a systematic review. Crit Care. 2016;20:102.' },

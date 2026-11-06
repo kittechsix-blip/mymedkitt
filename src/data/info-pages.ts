@@ -1,3 +1,4 @@
+import { IO_SITES, IO_SAFETY, IO_CONFIRM, IO_SOURCES } from './io-anatomy.js';
 import { INH_INFO_PAGES } from './inh-info-pages.js';
 import { INFO_PAGES_HTNE } from './new-content/hypertensive-emergency-adult-info.js';
 import { INFO_PAGES_ARDS } from './new-content/ards-info.js';
@@ -24172,22 +24173,12 @@ const DVA_US_PIV_PAGE: InfoPage = {
 };
 
 const DVA_IO_SITES_PAGE: InfoPage = {
-  id: 'dva-io-sites',
-  title: 'IO Sites',
-  subtitle: 'Fast access when IV cannot wait',
-  image: {
-    src: 'images/difficult-vascular-access/intraosseous-infusion.png',
-    alt: 'Humeral intraosseous infusion contrast image',
-    caption: 'Humeral IO contrast enters central venous circulation. Wikimedia Commons, CC BY-SA 4.0.',
-  },
+  id: 'dva-io-sites', title: 'IO Sites', subtitle: 'Landmarks, positioning and needle direction',
   sections: [
-    {
-      body: 'Common ED sites:\n- Proximal tibia\n- Distal tibia\n- Proximal humerus\n- Distal femur in children when appropriate\n\nAvoid:\n- Fractured target bone\n- Infection/burn at site\n- Prior IO attempt in same bone\n- Prosthetic limb/joint at target\n- Landmarks not identifiable',
-    },
-  ],
-  citations: [
-    { num: 1, text: 'Petitpas F, Guenezan J, Vendeuvre T, Scepi M, Oriot D, Mimoz O. Use of intra-osseous access in adults: a systematic review. Crit Care. 2016;20:102.' },
-  ],
+    {body: '[Open Anatomy: site-by-site placement tool](#/calculator/io-anatomy)\n\n' + IO_SAFETY},
+    ...IO_SITES.map(site => ({heading: site.title, image: {src: 'images/difficult-vascular-access/' + site.image, alt: site.title + ' anatomical landmarks; original schematic, not to scale', caption: 'Original teaching schematic. Confirm the target by palpation; not an insertion-depth guide.'}, body: '**Position:** ' + site.position + '\n\n**Adult / larger child:** ' + site.adult + '\n\n**Pediatric:** ' + site.pediatric + '\n\n**Needle direction:** ' + site.trajectory + '\n\n**Pitfalls:** ' + site.pitfalls})),
+    {heading: 'Insertion and confirmation', body: IO_CONFIRM},
+  ], citations: IO_SOURCES.map((text,index) => ({num:index+1,text})),
 };
 
 const DVA_CONFIRM_PAGE: InfoPage = {

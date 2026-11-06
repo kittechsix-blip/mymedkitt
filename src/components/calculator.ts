@@ -1,3 +1,4 @@
+import { IO_ANATOMY_TOOL } from './io-anatomy.js';
 import { US_IV_CALCULATOR } from './us-iv.js';
 import { HTNE_BP_TARGET_CALCULATOR } from './htne-bp-target.js';
 import { ARDS_PBW_TIDAL_VOLUME_CALCULATOR } from './ards-pbw-tidal-volume.js';
@@ -46388,6 +46389,7 @@ const HS_COMORBIDITY_SCREEN_CALCULATOR: CalculatorDefinition = {
 };
 
 const CALCULATORS: Record<string, CalculatorDefinition> = {
+  'io-anatomy': IO_ANATOMY_TOOL,
   'us-iv': US_IV_CALCULATOR,
   'htne-bp-target': HTNE_BP_TARGET_CALCULATOR,
   'ards-pbw-tidal-volume': ARDS_PBW_TIDAL_VOLUME_CALCULATOR,
