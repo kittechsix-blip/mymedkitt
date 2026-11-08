@@ -1,5 +1,5 @@
-// @bedside-search-engine 1.6.0
-// @engine-sha256 ab3d12f1580118fa18bb126823a5eadb58391a7a92aedfcd32eb39629c920242
+// @bedside-search-engine 1.7.0
+// @engine-sha256 893ed2857d4de59e81377eaf657a7f87586782e8b44c27634f49bb70c585e6cd
 // Vendored from ~/.claude/skills/bedside-search/engine. Do not edit here: change the canonical copy, then run bin/sync-engine.mjs.
 /**
  * Question-aware search for the Home screen (pure, deterministic, offline).
@@ -476,7 +476,17 @@ function titleStarts(title: string, query: string): boolean {
   return fold(title).split(/[-\s/\\]+/).some((w) => w.startsWith(fold(query)));
 }
 
-export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
+/** A reviewed word pair: either side in a question also finds pages that carry the other side. Two-way unless oneWay (a in the question -> b only). */
+export interface SynonymPair {
+  a: string;
+  b: string;
+  oneWay?: true;
+}
+
+/** A synonym match counts this much of a literal match. One named constant: changing it is a version bump, never a per-pair tweak. */
+export const SYNONYM_WEIGHT = 0.5;
+
+export function createQuestionIndex(docs: readonly QDoc[], opts: { synonyms?: readonly SynonymPair[] } = {}): QuestionIndex {
   const prep: Prep[] = docs.map((d) => {
     const sub = stems(d.subtitle).filter((w) => !KIND_WORDS.has(w));
     const kw = d.keywords.filter((k) => k.length <= 80).flatMap(stems);
@@ -613,6 +623,33 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     return phrases.map((phrase) => stems(phrase).map((w) => expand(w, true)));
   }
 
+  // Reviewed synonym pairs (engine >= 1.7). They get their own lookup and never enter the postings, so no word-frequency weight moves.
+  // A pair with a built-in abbreviation (ALTS) or an ambiguous abbreviation on its single-word side is dropped: the built-in rule wins.
+  const synSingle = new Map<string, string[][]>();
+  const synMulti: { seq: string[]; targets: string[][] }[] = [];
+  for (const p of opts.synonyms ?? []) {
+    const sides = [stems(p.a), stems(p.b)];
+    if (sides.some((s) => !s.length)) continue;
+    if (sides.some((s) => s.length === 1 && (ALTS[s[0]] || AMBIGUOUS_ABBREV.has(s[0])))) continue;
+    for (const [f, t] of (p.oneWay ? [[0, 1]] : [[0, 1], [1, 0]]) as [number, number][]) {
+      const from = sides[f];
+      const to = sides[t];
+      if (from.length === 1) synSingle.set(from[0], [...(synSingle.get(from[0]) ?? []), to]);
+      else synMulti.push({ seq: from, targets: [to] });
+    }
+  }
+  const inSequence = (seq: readonly string[], part: readonly string[]) => {
+    for (let i = 0; i + part.length <= seq.length; i++) if (part.every((w, j) => seq[i + j] === w)) return true;
+    return false;
+  };
+  /** Phrases a typed word also means. A multi-word side counts only when its words are typed in a row, and only on its first word. */
+  function synonymsFor(word: string, seq: readonly string[]): Set<string>[][] {
+    const w = stem(word);
+    const out: string[][] = [...(synSingle.get(w) ?? [])];
+    for (const m of synMulti) if (m.seq[0] === w && inSequence(seq, m.seq)) out.push(...m.targets);
+    return out.map((phrase) => phrase.map((x) => expand(x, true)));
+  }
+
   const LEVEL_LOC = [LOC_TITLE, LOC_PARENT, LOC_CTX, LOC_TEXT];
 
   /** Docs carrying any of the stems at a level (or at any level when k < 0). */
@@ -701,10 +738,12 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     const required = toks.map((t) => !t.context);
     const exps = toks.map((t) => {
       const e = expand(t.word);
-      return { e, alts: alternatives(t.word), viaAlias: consultsOf(e, aliasConsults), viaAcronym: consultsOf(e, acronymConsults) };
+      return { e, alts: alternatives(t.word), syn: synonymsFor(t.word, q.sequence), viaAlias: consultsOf(e, aliasConsults), viaAcronym: consultsOf(e, acronymConsults) };
     });
     const n = docs.length;
     const locArr = exps.map((p) => locations(p.e, p.alts, p.viaAlias, p.viaAcronym));
+    // where a reviewed synonym of the word is found, kept apart from locArr so the word-frequency weights below never see it
+    const synArr = exps.map((p) => (p.syn.length ? locations(new Set<string>(), p.syn, new Set<string>(), new Set<string>()) : null));
     const subArr = exps.map((p) => subtitleLocations(p.e));
     const weight = exps.map((p, ti) => {
       let df = 0;
@@ -717,6 +756,14 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       // being rare in body text must not make it count for more than an ordinary word, or it sinks every page that lacks it.
       const named = [...p.e].some((x) => byLevel[0].has(x) || byLevel[1].has(x) || byLevel[2].has(x)) || p.alts.length > 0 || p.viaAlias.size > 0 || p.viaAcronym.size > 0;
       return named || subject > 1 ? w : Math.min(w, CHATTER_WEIGHT);
+    });
+    // A typed word the app never uses has no weight of its own (the "EVT" case). Its reviewed synonym lends the weight of the pages it
+    // is found on, read from the synonym lookup only: the shared postings and every other word's weight stay untouched.
+    synArr.forEach((sa, ti) => {
+      if (!sa || weight[ti] > 0) return;
+      let df = 0;
+      for (let i = 0; i < n; i++) if (sa[i] > 0) df++;
+      if (df) weight[ti] = Math.log(1 + n / df);
     });
     // "fever after chemo", "fever on chemotherapy": a rare context names the setting that decides the answer, so it is required,
     // but it weighs no more than the most-weighted word it qualifies (the asked-about problem), or a page about the setting alone wins
@@ -741,7 +788,7 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       let titleHit = false;
       for (let ti = 0; ti < locArr.length; ti++) {
         const l = locArr[ti][index];
-        if (l > 0) any = true;
+        if (l > 0 || (synArr[ti] !== null && synArr[ti]![index] > 0)) any = true;
         if (l >= LOC_TITLE) titleHit = true;
       }
       if (!any) continue;
@@ -749,10 +796,12 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
       let loc = 0;
       let ctxLoc = 0;
       for (let ti = 0; ti < locArr.length; ti++) {
-        const v = titleHit ? Math.max(locArr[ti][index], subArr[ti][index]) : locArr[ti][index];
+        const literal = titleHit ? Math.max(locArr[ti][index], subArr[ti][index]) : locArr[ti][index];
+        const viaSyn = synArr[ti] !== null ? synArr[ti]![index] * SYNONYM_WEIGHT : 0;
+        const v = Math.max(literal, viaSyn);
         if (!required[ti]) ctxLoc += weight[ti] * v;
         else {
-          if (v > 0) cov += weight[ti];
+          if (v > 0) cov += weight[ti] * (literal > 0 ? 1 : SYNONYM_WEIGHT);
           loc += weight[ti] * v;
         }
       }
@@ -932,7 +981,8 @@ export function createQuestionIndex(docs: readonly QDoc[]): QuestionIndex {
     const present = (word: string) => [...expand(word)].some((w) => (postings.get(w) ?? []).length > 0);
     // a how-to question about a procedure or exam the app never names ("place a chest tube", "do the HINTS exam") has no procedure here
     if (q.intents.includes('procedure') && toks.some((t) => !present(t.word))) return false;
-    const per = toks.map((t) => ({ e: expand(t.word), alts: alternatives(t.word), exact: stem(t.word), short: t.word.length <= 5, subject: t.subject ? stem(t.word) : '' }));
+    // a reviewed synonym counts like a built-in alternative here: the word is known, and a page carrying the synonym matches it
+    const per = toks.map((t) => ({ e: expand(t.word), alts: [...alternatives(t.word), ...synonymsFor(t.word, q.sequence)], exact: stem(t.word), short: t.word.length <= 5, subject: t.subject ? stem(t.word) : '' }));
     let known = 0;
     for (const p of per) {
       let df = 0;
@@ -1070,6 +1120,8 @@ export interface BuildInput {
   pages?: { p: string; t: string; s: string; x: string }[];
   drugs: { id: string; n: string; g: string; c: string; ind: string[]; dose: { i: string; r: string }[]; contra: string[]; synonyms: string[] }[];
   calcs: { id: string; title: string; subtitle: string }[];
+  /** Reviewed synonym pairs (engine >= 1.7), applied at SYNONYM_WEIGHT. Pass them to createQuestionIndex(docs, { synonyms }). */
+  synonyms?: SynonymPair[];
 }
 
 export function buildQuestionDocs(input: BuildInput): QDoc[] {

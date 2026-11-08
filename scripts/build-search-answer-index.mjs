@@ -93,7 +93,27 @@ for (const f of fs.readdirSync(path.join(DOCS, 'data', 'trees'))) {
   }
 }
 
+// Reviewed synonym pairs (engine >= 1.7): only the rows Andy marked `y` in scripts/synonyms.review.tsv ship. Blank and `n` never do.
+// Separate from the app-side CLINICAL_SYNONYMS (consult/drug aliases). scripts/search-synonyms.test.ts gates this list.
+function readSynonyms() {
+  const lines = fs.readFileSync(path.join(ROOT, 'scripts', 'synonyms.review.tsv'), 'utf8').split('\n').filter((l) => l.trim());
+  const head = lines[0].split('\t');
+  const col = (n) => head.indexOf(n);
+  const out = [];
+  for (const line of lines.slice(1)) {
+    const c = line.split('\t');
+    if ((c[col('accept')] ?? '').trim() !== 'y') continue;
+    const sides = c[col('pair')].split(' = ').map((x) => x.trim());
+    if (sides.length !== 2 || !sides[0] || !sides[1]) throw new Error(`bad synonym pair: ${c[col('pair')]}`);
+    const dir = (c[col('direction')] ?? '').trim();
+    if (dir) throw new Error(`unsupported direction "${dir}" for ${c[col('pair')]}`);
+    out.push({ a: sides[0], b: sides[1] });
+  }
+  return out;
+}
+const synonyms = readSynonyms();
+
 fs.mkdirSync(path.dirname(OUT), { recursive: true });
-fs.writeFileSync(OUT, JSON.stringify({ count: { info: info.length, pages: pages.length, extraNodes: extraNodes.length }, info, pages, extraNodes }));
+fs.writeFileSync(OUT, JSON.stringify({ count: { info: info.length, pages: pages.length, extraNodes: extraNodes.length, synonyms: synonyms.length }, info, pages, extraNodes, synonyms }));
 const kb = (fs.statSync(OUT).size / 1024).toFixed(1);
-console.log(`✅ Wrote ${info.length} info sections + ${pages.length} pages + ${extraNodes.length} extra nodes → ${path.relative(ROOT, OUT)} (${kb} KB)`);
+console.log(`✅ Wrote ${info.length} info sections + ${pages.length} pages + ${extraNodes.length} extra nodes + ${synonyms.length} synonym pairs → ${path.relative(ROOT, OUT)} (${kb} KB)`);

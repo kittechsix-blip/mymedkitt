@@ -121,6 +121,8 @@ interface AnswerIndexFile {
   info: { p: string; a: string; h: string; pt: string; t: string }[];
   pages: { p: string; t: string; s: string; x: string }[];
   extraNodes: NodeIndexEntry[];
+  /** reviewed synonym pairs (scripts/synonyms.review.tsv rows marked y) */
+  synonyms?: { a: string; b: string; oneWay?: true }[];
 }
 
 interface NodeIndexFile {
@@ -243,7 +245,8 @@ function ensureQuestionIndex(): QuestionIndex {
     drugs: getAllDrugs().map(d => drugInput(d, DRUG_SYNONYMS[d.name.toLowerCase()] ?? [])),
     calcs: getAllCalculators().map(c => ({ id: c.id, title: c.title, subtitle: c.subtitle })),
   });
-  questionIndex = createQuestionIndex(docs);
+  // Reviewed pairs baked into the answer index (engine >= 1.7); separate from CLINICAL_SYNONYMS above.
+  questionIndex = createQuestionIndex(docs, { synonyms: answerIndex?.synonyms ?? [] });
   questionIndexStale = false;
   return questionIndex;
 }

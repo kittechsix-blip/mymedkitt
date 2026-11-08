@@ -48,6 +48,7 @@ export async function loadInput(): Promise<BuildInput> {
       pages: ansIdx.pages,
       drugs: drugMod.ALL_DRUGS.map((d: Parameters<typeof drugInput>[0]) => drugInput(d, DRUG_SYNONYMS[d.name.toLowerCase()] ?? [])),
       calcs: calcMod.getAllCalculators().map((c: { id: string; title: string; subtitle: string }) => ({ id: c.id, title: c.title, subtitle: c.subtitle })),
+      synonyms: ansIdx.synonyms ?? [],
     };
     return input;
   }
@@ -68,7 +69,7 @@ export function loadCorpus(): Promise<Corpus> {
     for (const g of input.pages ?? []) keys.add(`info:${g.p}`);
     for (const d of input.drugs) keys.add(`drug:${d.id}`);
     for (const c of input.calcs) keys.add(`calc:${c.id}`);
-    return { docs, index: createQuestionIndex(docs), keys };
+    return { docs, index: createQuestionIndex(docs, { synonyms: input.synonyms ?? [] }), keys };
   })();
   return cached;
 }

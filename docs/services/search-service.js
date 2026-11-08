@@ -150,7 +150,8 @@ function ensureQuestionIndex() {
         drugs: getAllDrugs().map(d => drugInput(d, DRUG_SYNONYMS[d.name.toLowerCase()] ?? [])),
         calcs: getAllCalculators().map(c => ({ id: c.id, title: c.title, subtitle: c.subtitle })),
     });
-    questionIndex = createQuestionIndex(docs);
+    // Reviewed pairs baked into the answer index (engine >= 1.7); separate from CLINICAL_SYNONYMS above.
+    questionIndex = createQuestionIndex(docs, { synonyms: answerIndex?.synonyms ?? [] });
     questionIndexStale = false;
     return questionIndex;
 }
