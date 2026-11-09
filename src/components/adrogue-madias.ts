@@ -102,6 +102,7 @@ export const ADROGUE_MADIAS_CALCULATOR: CalculatorDefinition = {
     },
   ],
   results: [],
+  explainer: { infoPageId: 'learn-adrogue-madias', label: 'How this works: the logic, a worked example and the trap' },
   thresholdNote: 'Estimate only. The formula treats the body as a closed system and ignores urine. The dangerous overcorrections usually come from a water diuresis once the ADH stimulus goes away (volume repletion, stopping a thiazide, treating nausea or pain), so sodium can rise much faster than predicted. Recheck Na+ every 2 hours during active correction and follow urine output.',
   citations: [
     'Adrogué HJ, Madias NE. Hyponatremia. N Engl J Med. 2000;342(21):1581-1589.',

@@ -45707,6 +45707,13 @@ export function renderCalculator(container, calculatorId) {
     desc.className = 'calculator-description';
     desc.textContent = calc.description;
     container.appendChild(desc);
+    if (calc.explainer) {
+        const explain = document.createElement('p');
+        explain.className = 'calculator-explainer';
+        renderBodyText(explain, `[${calc.explainer.label}](#/info/${calc.explainer.infoPageId})`);
+        explain.addEventListener('click', (event) => handleInlineLinkClick(event));
+        container.appendChild(explain);
+    }
     // Feature 1: Scroll sentinel for sticky score detection
     const sentinel = document.createElement('div');
     sentinel.className = 'calculator-scroll-sentinel';

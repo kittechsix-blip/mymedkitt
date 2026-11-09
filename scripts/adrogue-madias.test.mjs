@@ -3,6 +3,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { sodiumChange, litersToLimit, totalBodyWater, FLUIDS, TBW_FACTORS, ADROGUE_MADIAS_CALCULATOR as C } from '../src/components/adrogue-madias.ts';
+import { getAllLearnInfoPages } from '../src/data/info-pages-learn.ts';
+import { existsSync } from 'node:fs';
 
 const near = (a, b, tol = 0.05) => assert.ok(Math.abs(a - b) <= tol, `${a} != ${b}`);
 // 80-year-old, 60 kg woman, Na 112 (Kittech Daily News worked example; Adrogué & Madias NEJM 2000 method).
@@ -40,4 +42,15 @@ test('the calculator view: placeholders, colors and the urine warning', () => {
   assert.equal(C.computeResult({ ...base, volume: 700 }).colorVar, '--color-danger');
   assert.equal(C.computeResult({ ...base, fluid: 0 }).value, '−4 mEq/L per L', 'D5W (0) is not treated as missing');
   assert.equal(C.id, 'adrogue-madias');
+});
+
+test('calculator links to a registered explainer page with a real image', () => {
+  assert.ok(C.explainer, 'explainer link present');
+  const page = getAllLearnInfoPages().find((p) => p.id === C.explainer.infoPageId);
+  assert.ok(page, 'explainer page registered');
+  assert.ok(page.citations.length >= 3);
+  assert.ok(existsSync(new URL(`../docs/${page.image.src}`, import.meta.url)), 'image file shipped');
+  // The page's worked example must agree with the calculator's math.
+  near(sodiumChange(pt, 1), 14.3);
+  assert.match(page.sections.map((s) => s.body).join(' '), /\+14\.3 mEq\/L per liter/);
 });

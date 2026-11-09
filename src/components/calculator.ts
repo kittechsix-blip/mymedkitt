@@ -81,6 +81,8 @@ export interface CalculatorDefinition {
   };
   /** Optional custom renderer for interactive UI (e.g., SVG body diagrams). When present, replaces standard field list. */
   customRender?: (container: HTMLElement, onUpdate: (values: Record<string, number>) => void) => void;
+  /** Optional "how this works" explainer: an info page opened from a link under the description. */
+  explainer?: { infoPageId: string; label: string };
 }
 
 // -------------------------------------------------------------------
@@ -47365,6 +47367,14 @@ export function renderCalculator(container: HTMLElement, calculatorId: string): 
   desc.className = 'calculator-description';
   desc.textContent = calc.description;
   container.appendChild(desc);
+
+  if (calc.explainer) {
+    const explain = document.createElement('p');
+    explain.className = 'calculator-explainer';
+    renderBodyText(explain, `[${calc.explainer.label}](#/info/${calc.explainer.infoPageId})`);
+    explain.addEventListener('click', (event) => handleInlineLinkClick(event));
+    container.appendChild(explain);
+  }
 
   // Feature 1: Scroll sentinel for sticky score detection
   const sentinel = document.createElement('div');
