@@ -203,6 +203,7 @@ export const SODIUM_NODES = [
         citation: [5, 7, 14],
         summary: '3% NaCl 100-150mL bolus over 10-20min (repeat x2); target 4-6 mEq/L rise in 1-2hr; peripheral access OK; give thiamine',
         safetyLevel: 'critical',
+        calculatorLinks: [{ id: 'adrogue-madias', label: 'Sodium Change per Liter' }],
         treatment: {
             firstLine: {
                 drug: '3% Hypertonic Saline',
@@ -233,6 +234,7 @@ export const SODIUM_NODES = [
         citation: [1, 5, 7, 15],
         summary: 'Max 10 mEq/L in 24hr (8 for high-risk); overcorrection causes ODS; K+ repletion counts toward Na+ correction (40 mEq KCl ~= +1 Na)',
         safetyLevel: 'critical',
+        calculatorLinks: [{ id: 'adrogue-madias', label: 'Sodium Change per Liter' }],
         treatment: {
             firstLine: {
                 drug: 'Desmopressin (DDAVP)',
@@ -579,7 +581,7 @@ export const SODIUM_NODES = [
         body: '**Calculate the free water deficit (FWD) to guide replacement volume.**\n\n**Formula:** FWD (liters) = TBW \u00d7 [(Na/140) - 1]\n\u2022 TBW = weight (kg) \u00d7 0.6 (men) or \u00d7 0.5 (women/elderly)\n\u2022 Example: 70 kg male, Na+ 160 \u2192 TBW = 42L, FWD = 42 \u00d7 (160/140 - 1) = **6.0 liters**\n\n**The FWD formula underestimates true deficit** \u2014 it does not account for ongoing losses (insensible, urinary, GI). Add ~1-1.5 L/day for ongoing losses.\n\n**Fluid choice (order of preference):**\n1. **Enteral free water** (PO or NG/OG tube) \u2014 safest, most physiologic\n2. **D5W IV** \u2014 if NPO or insufficient enteral intake (D5W = free water once glucose is metabolized)\n3. **0.45% NaCl** \u2014 only half is free water; use if concurrent volume depletion\n\n**Correction rate:**\n\u2022 **Acute hypernatremia (<48 hours):** Can correct 1 mEq/L/hr safely\n\u2022 **Chronic hypernatremia (>48 hours or unknown):** Maximum **10-12 mEq/L per 24 hours** \u2014 rapid correction risks cerebral edema\n\u2022 Most hypernatremia in hospitalized patients is chronic \u2192 correct slowly\n\n**Replace the deficit over 48-72 hours** \u2014 not in a single bolus. Divide calculated free water evenly.\n\n**Address the underlying cause simultaneously** \u2014 free water alone does not fix DI, ongoing GI losses, or medication causes.',
         citation: [10, 11, 13],
         summary: 'FWD = TBW x (Na/140 - 1); add 1-1.5L/day for ongoing losses; correct chronic over 48-72hr, max 10-12 mEq/L per 24hr',
-        calculatorLinks: [{ id: 'fwd', label: 'Free Water Deficit' }],
+        calculatorLinks: [{ id: 'fwd', label: 'Free Water Deficit' }, { id: 'adrogue-madias', label: 'Sodium Change per Liter' }],
         treatment: {
             firstLine: {
                 drug: 'Enteral Free Water',

@@ -3,6 +3,7 @@ import { US_IV_CALCULATOR } from './us-iv.js';
 import { HTNE_BP_TARGET_CALCULATOR } from './htne-bp-target.js';
 import { ARDS_PBW_TIDAL_VOLUME_CALCULATOR } from './ards-pbw-tidal-volume.js';
 import { ARDS_PF_BERLIN_CALCULATOR } from './ards-pf-berlin.js';
+import { ADROGUE_MADIAS_CALCULATOR } from './adrogue-madias.js';
 import { RIBSCORE_CALCULATOR } from './ribscore.js';
 import { RANSON_CALCULATOR } from './ranson.js';
 import { INH_PYRIDOXINE_CALCULATOR } from '../data/inh-pyridoxine.js';
@@ -46695,6 +46696,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'bas': BAS_CALCULATOR,
   'fwd': FWD_CALCULATOR,
   'corrected-na': CORRECTED_NA_CALCULATOR,
+  'adrogue-madias': ADROGUE_MADIAS_CALCULATOR,
   'tbsa-adult': TBSA_ADULT_CALCULATOR,
   'tbsa-peds': TBSA_PEDS_CALCULATOR,
   'burn-rule-of-10': RULE_OF_10_CALCULATOR,

@@ -231,13 +231,13 @@ export const DIFFICULT_VASCULAR_ACCESS_CRITICAL_ACTIONS = [
 ];
 
 export const DIFFICULT_VASCULAR_ACCESS_CITATIONS: Citation[] = [
-  {"num": 7, "text": "Teleflex. EZ-IO Proximal Humerus Insertion Site Identification. https://www.teleflex.com/usa/en/product-areas/emergency-medicine/intraosseous-access/arrow-ez-io-system/literature/EM_EZ-IO_Proximal-Humerus-Data-Sheet_MC-000620rev2b.pdf"},
-  {"num":5,"text":"Teleflex. Arrow EZ-IO US Instructions for Use, 8049. https://www.teleflexvascular.com/files/ifu/8049.pdf"},
-  {"num":6,"text":"Teleflex. Arrow EZ-IO Pocket Guide (2023), anatomical landmarks and insertion. https://www.teleflex.com/emea/en/product-areas/emergency-medicine/intraosseous-access/arrow-ez-io-system/literature/MCI-101184-EMS-BR-EZ-IO-PocketGuide-EMEA-2023-LR.pdf"},
   { num: 1, text: 'Egan G, Healy D, ONeill H, Clarke-Moloney M, Grace PA, Walsh SR. Ultrasound guidance for difficult peripheral venous access: systematic review and meta-analysis. Emerg Med J. 2013;30(7):521-526.' },
   { num: 2, text: 'Stolz LA, Cappa AR, Minckler MR, et al. Prospective evaluation of ultrasound-guided peripheral intravenous catheter survival. Am J Emerg Med. 2016;34(6):947-950.' },
   { num: 3, text: 'Petitpas F, Guenezan J, Vendeuvre T, Scepi M, Oriot D, Mimoz O. Use of intra-osseous access in adults: a systematic review. Crit Care. 2016;20:102.' },
   { num: 4, text: 'American Heart Association. 2020 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2020;142(16_suppl_2):S366-S468.' },
+  { num: 5, text: 'Teleflex. Arrow EZ-IO US Instructions for Use, 8049. https://www.teleflexvascular.com/files/ifu/8049.pdf' },
+  { num: 6, text: 'Teleflex. Arrow EZ-IO Pocket Guide (2023), anatomical landmarks and insertion. https://www.teleflex.com/emea/en/product-areas/emergency-medicine/intraosseous-access/arrow-ez-io-system/literature/MCI-101184-EMS-BR-EZ-IO-PocketGuide-EMEA-2023-LR.pdf' },
+  { num: 7, text: 'Teleflex. EZ-IO Proximal Humerus Insertion Site Identification. https://www.teleflex.com/usa/en/product-areas/emergency-medicine/intraosseous-access/arrow-ez-io-system/literature/EM_EZ-IO_Proximal-Humerus-Data-Sheet_MC-000620rev2b.pdf' },
 ];
 
 export const DIFFICULT_VASCULAR_ACCESS_NODE_COUNT = DIFFICULT_VASCULAR_ACCESS_NODES.length;

@@ -236,6 +236,7 @@ export const SODIUM_NODES: DecisionNode[] = [
     summary: '3% NaCl 100-150mL bolus over 10-20min (repeat x2); target 4-6 mEq/L rise in 1-2hr; peripheral access OK; give thiamine',
     safetyLevel: 'critical',
 
+    calculatorLinks: [{ id: 'adrogue-madias', label: 'Sodium Change per Liter' }],
     treatment: {
       firstLine: {
         drug: '3% Hypertonic Saline',
@@ -269,6 +270,7 @@ export const SODIUM_NODES: DecisionNode[] = [
     summary: 'Max 10 mEq/L in 24hr (8 for high-risk); overcorrection causes ODS; K+ repletion counts toward Na+ correction (40 mEq KCl ~= +1 Na)',
     safetyLevel: 'critical',
 
+    calculatorLinks: [{ id: 'adrogue-madias', label: 'Sodium Change per Liter' }],
     treatment: {
       firstLine: {
         drug: 'Desmopressin (DDAVP)',
@@ -650,7 +652,7 @@ export const SODIUM_NODES: DecisionNode[] = [
 
     summary: 'FWD = TBW x (Na/140 - 1); add 1-1.5L/day for ongoing losses; correct chronic over 48-72hr, max 10-12 mEq/L per 24hr',
 
-    calculatorLinks: [{ id: 'fwd', label: 'Free Water Deficit' }],
+    calculatorLinks: [{ id: 'fwd', label: 'Free Water Deficit' }, { id: 'adrogue-madias', label: 'Sodium Change per Liter' }],
     treatment: {
       firstLine: {
         drug: 'Enteral Free Water',

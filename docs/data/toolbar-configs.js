@@ -431,6 +431,7 @@ export const TOOLBAR_CONFIGS = {
     'sodium': [
         { id: 'hts', label: 'HTS', icon: '\uD83E\uDDC2', action: 'jump', target: 'na-hypo-emergency' },
         { id: 'fwd', label: 'FWD Calc', icon: '\uD83D\uDCA7', action: 'calculator', target: 'fwd' },
+        { id: 'na-per-liter', label: 'Na/L Calc', icon: '\uD83E\uDDEE', action: 'calculator', target: 'adrogue-madias' },
         { id: 'labs', label: 'Labs', icon: '\uD83E\uDDEA', action: 'jump', target: 'na-hypo-initial' },
         { id: 'discharge', label: 'Discharge', icon: '\uD83C\uDFE0', action: 'overlay', target: 'na-discharge-criteria' },
     ],
