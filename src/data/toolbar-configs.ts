@@ -92,6 +92,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'hyp-chs', label: 'CHS Consult', icon: '🌿', action: 'route', target: 'chs' },
   ],
   'dental-nerve-blocks': [
+    { id: 'dnb-visual', label: 'Visual Guide', icon: '👁️', action: 'overlay', target: 'dnb-visual-guide', pinned: true },
     { id: 'dnb-max-dose', label: 'Max Dose', icon: '🧮', action: 'calculator', target: 'dnb-la-max-dose', pinned: true },
     { id: 'dnb-selector', label: 'Block Selector', icon: '🎯', action: 'calculator', target: 'dnb-block-selector', pinned: true },
     { id: 'dnb-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dnb-steps', pinned: true },
@@ -99,6 +100,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'dnb-stop', label: 'Do NOT', icon: '🛑', action: 'overlay', target: 'dnb-stop', pinned: true },
   ],
   'facial-nerve-block': [
+    { id: 'fnb-visual', label: 'Visual Guide', icon: '👁️', action: 'overlay', target: 'fnb-visual-guide', pinned: true },
     { id: 'fnb-max-dose', label: 'Max Dose', icon: '🧮', action: 'calculator', target: 'fnb-la-max-dose', pinned: true },
     { id: 'fnb-selector', label: 'Block Selector', icon: '🎯', action: 'calculator', target: 'fnb-block-selector', pinned: true },
     { id: 'fnb-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'fnb-steps', pinned: true },

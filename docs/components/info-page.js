@@ -46,7 +46,10 @@ function renderInfoBodyLine(container, line) {
             btn.setAttribute('data-link-id', linkId);
             btn.addEventListener('click', () => {
                 destroyOverlay();
-                if (linkType === 'node') {
+                if (linkType === 'info') {
+                    showInfoModal(linkId);
+                }
+                else if (linkType === 'node') {
                     // Dispatch custom event for tree wizard to handle node jump
                     window.dispatchEvent(new CustomEvent('medkitt-jump-node', { detail: linkId }));
                 }
