@@ -5,6 +5,7 @@ import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import { router } from '../services/router.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
 import { trackDrugView } from '../services/kittmd-analytics.js';
+import { getFreshPatientContext, getContextFieldTime, setPatientContext, formatEnteredTime } from '../services/patient-context.js';
 /**
  * Pharmacy search. Name-prefix matches rank first (keeps "apix", "epi" instant);
  * for queries ≥ 2 chars, also substring-match generic name, drug class, and
@@ -521,6 +522,8 @@ function renderDoseResults(resultsEl, calcs, weightKg, weightSource, drugCtx) {
         resultsEl.appendChild(row);
     }
 }
+const WEIGHT_MIN_KG = 0.1;
+const WEIGHT_MAX_KG = 300;
 /** Build the full weight-based dose calculator panel */
 export function buildWeightCalcPanel(calcs, drugCtx) {
     const panel = document.createElement('div');
@@ -556,8 +559,8 @@ export function buildWeightCalcPanel(calcs, drugCtx) {
     knownInput.placeholder = 'kg';
     knownInput.inputMode = 'decimal';
     knownInput.setAttribute('aria-label', 'Patient weight in kg');
-    knownInput.min = '0.1';
-    knownInput.max = '300';
+    knownInput.min = String(WEIGHT_MIN_KG);
+    knownInput.max = String(WEIGHT_MAX_KG);
     knownInput.step = 'any';
     const knownUnit = document.createElement('span');
     knownUnit.className = 'dose-calc-unit';
@@ -569,10 +572,50 @@ export function buildWeightCalcPanel(calcs, drugCtx) {
     knownRow.appendChild(knownUnit);
     knownRow.appendChild(knownCalcBtn);
     knownPanel.appendChild(knownRow);
+    // Weight carry-over: NEVER pre-filled. A recent weight (<= 30 min) is offered as a chip the
+    // clinician must tap; anything older is not offered at all (could be the previous patient).
+    let carriedValue = false; // true while the input holds an accepted carried weight, untouched
+    let carryChip = null;
+    const carried = getFreshPatientContext();
+    if (carried.weight !== undefined && carried.weight >= WEIGHT_MIN_KG && carried.weight <= WEIGHT_MAX_KG) {
+        const chipWeight = carried.weight;
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'weight-carry-chip';
+        const enteredAt = getContextFieldTime('weight');
+        chip.textContent = enteredAt !== undefined
+            ? `Use ${chipWeight} kg \u00B7 entered ${formatEnteredTime(enteredAt)}`
+            : `Use ${chipWeight} kg`;
+        chip.addEventListener('click', () => {
+            knownInput.value = String(chipWeight);
+            carriedValue = true; // accepting a carried value must not renew its timestamp
+            knownCalcBtn.click();
+        });
+        knownPanel.appendChild(chip);
+        carryChip = chip;
+    }
+    // Typed weights are shared with calculators (same bounds as the input: 0.1-300 kg).
+    const shareWeight = () => {
+        const w = parseFloat(knownInput.value);
+        if (Number.isFinite(w) && w >= WEIGHT_MIN_KG && w <= WEIGHT_MAX_KG)
+            setPatientContext({ weight: w });
+    };
+    knownInput.addEventListener('input', () => {
+        carriedValue = false;
+        // A typed weight supersedes the offer: two different weights must never be in play.
+        carryChip?.remove();
+        carryChip = null;
+    });
+    knownInput.addEventListener('change', () => {
+        if (!carriedValue)
+            shareWeight();
+    });
     knownCalcBtn.addEventListener('click', () => {
         const w = parseFloat(knownInput.value);
         if (!w || w <= 0)
             return;
+        if (!carriedValue)
+            shareWeight();
         renderDoseResults(resultsEl, calcs, w, '', drugCtx);
     });
     knownInput.addEventListener('keydown', (e) => {

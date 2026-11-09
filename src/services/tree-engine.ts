@@ -4,7 +4,7 @@
 import type { DecisionNode, TreeSession } from '../models/types.js';
 import { storageGet, storageSet, storageRemove } from './storage.js';
 
-const SESSION_KEY = 'em-tree-session';
+export const SESSION_KEY = 'em-tree-session';
 
 export class TreeEngine {
   private nodes: Map<string, DecisionNode>;

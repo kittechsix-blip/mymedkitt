@@ -38,7 +38,12 @@ class Router {
 
   /** Start listening for hash changes and handle the current hash */
   start(): void {
-    window.addEventListener('hashchange', () => this.resolve());
+    window.addEventListener('hashchange', (ev) => {
+      // Synthetic hashchange from consult-history.ts: only closes body-level overlays
+      // after a back gesture; the route itself did not change.
+      if ((ev as unknown as Record<string, unknown>)['mkOverlayClose']) return;
+      this.resolve();
+    });
     this.resolve();
   }
 

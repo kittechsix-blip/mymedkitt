@@ -19,6 +19,9 @@ import { showSplashScreen } from './components/splash-screen.js';
 import { removeContextualToolbar, hasContextualToolbar } from './components/contextual-toolbar.js';
 import { showInfoModal } from './components/info-page.js';
 import { resolveNodeTreeId, setCurrentTreeId } from './services/node-resolver.js';
+import { initAppUpdates, scheduleCacheWarm } from './services/app-update.js';
+import { initOfflineBadge } from './components/offline-badge.js';
+import { initOverlayHistory } from './services/consult-history.js';
 // -------------------------------------------------------------------
 // Service Worker Registration
 // -------------------------------------------------------------------
@@ -27,6 +30,7 @@ function registerServiceWorker() {
         navigator.serviceWorker.register('./sw.js', { updateViaCache: 'none' }).then((reg) => {
             console.log('Service worker registered:', reg.scope);
             reg.update();
+            scheduleCacheWarm(reg);
             // iOS PWA quirk: a backgrounded app never re-checks sw.js until
             // something triggers navigation. Kick an update check every time the
             // page becomes visible so a fresh deploy always reaches the user.
@@ -37,9 +41,8 @@ function registerServiceWorker() {
         }).catch((err) => {
             console.error('Service worker registration failed:', err);
         });
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-            window.location.reload();
-        });
+        // Reload on upgrade only at a safe moment (never mid-case); see services/app-update.ts
+        initAppUpdates();
     }
 }
 // -------------------------------------------------------------------
@@ -258,6 +261,8 @@ function handleNotFound() {
 // -------------------------------------------------------------------
 async function init() {
     registerServiceWorker();
+    initOfflineBadge();
+    initOverlayHistory();
     // Show splash screen while data loads
     const splashPromise = showSplashScreen();
     // Initialize data services

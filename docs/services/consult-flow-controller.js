@@ -1,7 +1,8 @@
 // myMedKitt — Consult Flow Controller
 // Thin wrapper around TreeEngine that maintains a cardStack[] for rendering
 // all answered + current cards simultaneously. TreeEngine is UNCHANGED.
-import { TreeEngine } from './tree-engine.js';
+import { TreeEngine, SESSION_KEY } from './tree-engine.js';
+import { storageSet } from './storage.js';
 export class ConsultFlowController {
     constructor(nodes) {
         this.cardStack = [];
@@ -53,6 +54,16 @@ export class ConsultFlowController {
             });
         }
         return true;
+    }
+    /** Deep copy of the live engine session (for Reset -> Undo), or null if none. */
+    snapshotSession() {
+        const session = this.engine.getSession();
+        return session ? JSON.parse(JSON.stringify(session)) : null;
+    }
+    /** Put a snapshot back into the persisted session and rebuild the card stack from it. */
+    restoreSnapshot(treeId, snapshot) {
+        storageSet(SESSION_KEY, snapshot);
+        return this.restoreSession(treeId);
     }
     /** Select an option on the current (active) card */
     selectOption(optionIndex) {

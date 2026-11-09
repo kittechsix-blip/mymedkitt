@@ -14,7 +14,7 @@ import { INH_PYRIDOXINE_CALCULATOR } from '../data/inh-pyridoxine.js';
 
 import { mountTbsa, mountFluids, burnSession } from './burn-tools/tools.js';
 import { router } from '../services/router.js';
-import { getPatientContext, setPatientContext } from '../services/patient-context.js';
+import { getFreshPatientContext, getContextFieldTime, setPatientContext, clearPatientContext, formatEnteredTime } from '../services/patient-context.js';
 import { trackCalcOpen, trackCalcSubmit } from '../services/kittmd-analytics.js';
 import { renderBodyText, handleInlineLinkClick } from './text-renderer.js';
 
@@ -47585,9 +47585,13 @@ function renderNumberField(
   input.placeholder = field.allowNegative ? '' : '0';
   input.setAttribute('aria-label', field.label);
 
+  let carryCaption: HTMLElement | null = null;
+
   input.addEventListener('input', () => {
     const val = field.valueIsPoints ? parseFloat(input.value) : parseInt(input.value, 10);
     values[field.name] = isNaN(val) ? 0 : val;
+    carryCaption?.remove(); // typed over: no longer "from earlier"
+    carryCaption = null;
 
     // Capture weight/age to patient context
     if (field.name === 'weight' && val > 0) {
@@ -47599,14 +47603,17 @@ function renderNumberField(
     onChange();
   });
 
-  // Auto-fill from patient context if available
-  const ctx = getPatientContext();
+  // Auto-fill from patient context only when entered recently (<= 30 min), and say so below.
+  const ctx = getFreshPatientContext();
+  let carryKey: 'weight' | 'age' | null = null;
   if (field.name === 'weight' && ctx.weight && ctx.weight > 0) {
     input.value = String(ctx.weight);
     values[field.name] = ctx.weight;
+    carryKey = 'weight';
   } else if (field.name === 'age' && ctx.age !== undefined && ctx.age >= 0) {
     input.value = String(ctx.age);
     values[field.name] = ctx.age;
+    carryKey = 'age';
   }
 
   inputRow.appendChild(input);
@@ -47619,6 +47626,34 @@ function renderNumberField(
   }
 
   container.appendChild(inputRow);
+
+  if (carryKey) {
+    const key = carryKey;
+    const enteredAt = getContextFieldTime(key);
+    const caption = document.createElement('div');
+    caption.className = 'carry-caption';
+    const text = document.createElement('span');
+    text.textContent = enteredAt !== undefined
+      ? `From earlier entry \u00B7 ${formatEnteredTime(enteredAt)}`
+      : 'From earlier entry';
+    const clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'carry-caption__clear';
+    clearBtn.textContent = 'Clear';
+    clearBtn.setAttribute('aria-label', `Clear earlier ${field.label}`);
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      values[field.name] = 0;
+      clearPatientContext(key);
+      caption.remove();
+      carryCaption = null;
+      onChange();
+    });
+    caption.appendChild(text);
+    caption.appendChild(clearBtn);
+    container.appendChild(caption);
+    carryCaption = caption;
+  }
 
   // Points indicator — only when the helper carries meaning.
   // valueIsPoints is overloaded: true scoring (age contributes 1 pt/year) AND

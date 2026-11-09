@@ -1,7 +1,7 @@
 // MedKitt — Tree Engine
 // Manages tree traversal: start, navigate, go back, record answers, save/restore.
 import { storageGet, storageSet, storageRemove } from './storage.js';
-const SESSION_KEY = 'em-tree-session';
+export const SESSION_KEY = 'em-tree-session';
 export class TreeEngine {
     constructor(nodes) {
         this.session = null;

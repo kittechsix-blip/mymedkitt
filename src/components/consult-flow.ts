@@ -14,6 +14,18 @@ import { router } from '../services/router.js';
 import { getAllCategories } from '../services/category-service.js';
 import { addRecentConsult } from './dashboard.js';
 import { trackConsultOpen, trackNodeVisit } from '../services/kittmd-analytics.js';
+import { isPinned, togglePin } from '../services/pins.js';
+import { recordConsultOpen } from '../services/consult-usage.js';
+import { showToast } from './toast.js';
+import type { ToastHandle } from './toast.js';
+import type { TreeSession } from '../models/types.js';
+import {
+  beginConsultHistory,
+  syncConsultHistory,
+  canStepBackViaHistory,
+  stepBackViaHistory,
+  leaveConsultHistory,
+} from '../services/consult-history.js';
 
 let controller: ConsultFlowController | null = null;
 let currentConfig: TreeConfig | null = null;
@@ -22,6 +34,7 @@ let currentTreeId: string | null = null;
 let delegatedContainer: HTMLElement | null = null;
 let jumpNodeListenerRegistered = false;
 let searchOpen = false;
+let resetUndoToast: ToastHandle | null = null;
 
 const CONSULT_TITLE_OVERRIDES: Record<string, string> = {
   'acute-agitation': 'Acute Agitation',
@@ -77,7 +90,10 @@ export async function renderConsultFlow(
   const consultTitle = getConsultTitle(treeId);
   if (consultTitle) {
     addRecentConsult(treeId, consultTitle, config.categoryId);
+    recordConsultOpen(treeId, consultTitle, config.categoryId || 'emergency-medicine');
   }
+  resetUndoToast?.dismiss();
+  resetUndoToast = null;
 
   // Track consult open for KittMD analytics
   trackConsultOpen(treeId);
@@ -133,6 +149,13 @@ export async function renderConsultFlow(
   if (jumpValid && jumpId) {
     controller.jumpToNode(jumpId);
   }
+
+  // Back gesture = Back button: one history entry per card (see services/consult-history.ts)
+  beginConsultHistory(treeId, (steps) => {
+    if (!controller || !delegatedContainer) return;
+    for (let i = 0; i < steps && controller.canGoBack(); i++) controller.goBack();
+    renderFlow(delegatedContainer);
+  });
 
   renderFlow(container);
 
@@ -263,6 +286,9 @@ function renderFlow(container: HTMLElement): void {
   }
 
   container.appendChild(stackContainer);
+
+  // Keep browser history in step with the cards on screen (back gesture support)
+  syncConsultHistory(cardStack.length);
 
   // Contextual toolbar
   renderContextualToolbar(currentTreeId ?? '', controller, currentEntryNodeId ?? '', currentConfig?.moduleLabels);
@@ -492,7 +518,10 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
   backBtn.textContent = '\u2190';
   backBtn.setAttribute('aria-label', 'Back');
   backBtn.addEventListener('click', () => {
-    if (controller?.canGoBack()) {
+    if (controller?.canGoBack() && canStepBackViaHistory()) {
+      // We own the entry below: let popstate do the step so gesture and button stay in sync.
+      stepBackViaHistory();
+    } else if (controller?.canGoBack()) {
       controller.goBack();
       renderFlow(container);
     } else {
@@ -503,16 +532,45 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
     }
   });
 
-  // Reset button
+  // Reset button — one tap; offers a short Undo when there was progress to lose
   const resetBtn = document.createElement('button');
   resetBtn.className = 'consult-flow-header__reset';
   resetBtn.textContent = '\u21BA';
   resetBtn.setAttribute('aria-label', 'Reset to start');
   resetBtn.addEventListener('click', () => {
-    if (controller && currentEntryNodeId) {
-      controller.reset(currentEntryNodeId);
-      renderFlow(container);
-    }
+    if (!controller || !currentEntryNodeId) return;
+    const hadProgress = controller.getCardStack().length > 0;
+    const snapshot = hadProgress ? controller.snapshotSession() : null;
+    controller.reset(currentEntryNodeId);
+    renderFlow(container);
+    if (snapshot && currentTreeId) offerResetUndo(container, currentTreeId, snapshot);
+  });
+
+  // Pin toggle (star) — pins this consult to Home
+  const pinTreeId = currentTreeId ?? '';
+  const pinTitle = getConsultTitle(pinTreeId) || pinTreeId;
+  const pinBtn = document.createElement('button');
+  pinBtn.type = 'button';
+  pinBtn.className = 'consult-flow-header__pin';
+  const svgNs = 'http://www.w3.org/2000/svg';
+  const star = document.createElementNS(svgNs, 'svg');
+  star.setAttribute('viewBox', '0 0 24 24');
+  star.setAttribute('aria-hidden', 'true');
+  const starPath = document.createElementNS(svgNs, 'path');
+  starPath.setAttribute('d', 'M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 17l-5.2 2.7 1-5.9L3.5 9.7l5.9-.8L12 3.5z');
+  star.appendChild(starPath);
+  pinBtn.appendChild(star);
+  const paintPin = (): void => {
+    const on = isPinned(pinTreeId);
+    pinBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    pinBtn.setAttribute('aria-label', on ? 'Unpin consult' : 'Pin consult');
+  };
+  paintPin();
+  pinBtn.addEventListener('click', () => {
+    if (!pinTreeId) return;
+    const nowPinned = togglePin(pinTreeId, pinTitle, categoryId || 'emergency-medicine');
+    paintPin();
+    showToast(nowPinned ? 'Pinned to Home' : 'Removed from Home');
   });
 
   // Title
@@ -594,11 +652,29 @@ function renderFlowHeader(container: HTMLElement, categoryId: string): void {
 
   header.appendChild(backBtn);
   header.appendChild(resetBtn);
+  header.appendChild(pinBtn);
   header.appendChild(title);
   header.appendChild(progress);
   header.appendChild(shareBtn);
   header.appendChild(homeBtn);
   container.appendChild(header);
+}
+
+/** Toast with Undo after Reset. Undo only applies while the stack is still empty. */
+function offerResetUndo(container: HTMLElement, treeId: string, snapshot: TreeSession): void {
+  resetUndoToast?.dismiss();
+  const hashAtReset = window.location.hash;
+  resetUndoToast = showToast('Consult reset', {
+    actionLabel: 'Undo',
+    durationMs: 6000,
+    onAction: () => {
+      resetUndoToast = null;
+      // The container (#main-content) outlives the consult, so check the route instead.
+      if (!controller || currentTreeId !== treeId || window.location.hash !== hashAtReset) return;
+      if (controller.getCardStack().length > 0) return; // clinician already moved on
+      if (controller.restoreSnapshot(treeId, snapshot)) renderFlow(container);
+    },
+  });
 }
 
 /** Find category ID for a tree */
@@ -638,6 +714,7 @@ function onInlineLinkClick(e: Event): void {
 
 /** Render unavailable state */
 function renderUnavailable(container: HTMLElement, treeId: string): void {
+  leaveConsultHistory();
   removeContextualToolbar(); // Clear any lingering toolbar from previous consult
   container.innerHTML = '';
 

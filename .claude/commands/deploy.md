@@ -274,7 +274,7 @@ Compile TypeScript, sync caches, push to GitHub Pages, and sync Supabase.
 - The three-tier fallback is Supabase → IndexedDB → hardcoded. Supabase WINS. If Supabase is stale, users see stale content.
 - NEVER push without checking `git status docs/` first — forgotten compiled files are silent production bugs
 - ALWAYS sync Supabase when tree/node data changes — this is the #1 cause of "my changes aren't showing" bugs
-- The SW uses network-first for JS/HTML/CSS + auto-reload via `client.navigate()` on upgrade
+- The SW uses network-first for JS/HTML/CSS. On upgrade it posts `sw-activated` and the page reloads itself at a safe moment (immediately on Home, after the case otherwise) — see `src/services/app-update.ts`. It never calls `client.navigate()`.
 - If a user reports stale content despite proper deploy, send them to: `https://kittechsix-blip.github.io/mymedkitt/clear.html`
 - This is the **project-level** deploy skill — it takes priority over the global `/deploy` skill
 - myMedKitt and MedKitt share the same Supabase instance — SQL updates affect both apps

@@ -7,8 +7,15 @@ export interface PatientContext {
   age?: number;         // years
   ageUnit?: 'years' | 'months';  // for peds
   sex?: 'male' | 'female';
-  updatedAt?: number;   // timestamp
+  updatedAt?: number;   // timestamp of the latest write to any field
+  /** Per-field write times, so one fresh field never makes an older one look fresh. */
+  stamps?: Partial<Record<ContextKey, number>>;
 }
+
+export type ContextKey = 'weight' | 'age' | 'ageUnit' | 'sex';
+
+/** How long an entered value may be offered to the next screen (SAFETY: stale = previous patient). */
+export const FRESH_CONTEXT_MS = 30 * 60 * 1000;
 
 type PatientContextListener = (ctx: PatientContext) => void;
 
@@ -31,18 +38,69 @@ export function getPatientContext(): PatientContext {
 
 export function setPatientContext(update: Partial<PatientContext>): void {
   const current = getPatientContext();
+  const now = Date.now();
+  const stamps: PatientContext['stamps'] = { ...(current.stamps ?? {}) };
+  for (const k of Object.keys(update) as (keyof PatientContext)[]) {
+    if (k === 'weight' || k === 'age' || k === 'ageUnit' || k === 'sex') stamps[k] = now;
+  }
   const next: PatientContext = {
     ...current,
     ...update,
-    updatedAt: Date.now(),
+    updatedAt: now,
+    stamps,
   };
   sessionStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   notifyListeners(next);
 }
 
-export function clearPatientContext(): void {
-  sessionStorage.removeItem(STORAGE_KEY);
-  notifyListeners({});
+/** Clear one field (e.g. the user dismissed an auto-filled weight), or everything. */
+export function clearPatientContext(key?: ContextKey): void {
+  if (key === undefined) {
+    sessionStorage.removeItem(STORAGE_KEY);
+    notifyListeners({});
+    return;
+  }
+  const current = getPatientContext();
+  delete current[key];
+  if (current.stamps) delete current.stamps[key];
+  sessionStorage.setItem(STORAGE_KEY, JSON.stringify(current));
+  notifyListeners(current);
+}
+
+/** When a field was last entered (falls back to updatedAt for contexts saved before stamps). */
+export function getContextFieldTime(key: ContextKey): number | undefined {
+  const ctx = getPatientContext();
+  // A context that has stamps is authoritative per field: a field without its own stamp was
+  // entered before stamps existed and must NOT inherit a newer updatedAt from another field.
+  return ctx.stamps ? ctx.stamps[key] : ctx.updatedAt;
+}
+
+/**
+ * The context, but only fields entered within `maxAgeMs`; older fields are dropped and a
+ * fully stale (or timestamp-less) context returns {}. Use this, never getPatientContext(),
+ * for anything that pre-fills or offers a value for the NEXT clinical decision.
+ */
+export function getFreshPatientContext(maxAgeMs: number = FRESH_CONTEXT_MS): PatientContext {
+  const ctx = getPatientContext();
+  const now = Date.now();
+  const fresh = (t: number | undefined): boolean =>
+    typeof t === 'number' && t <= now + 60_000 && now - t <= maxAgeMs;
+  if (!fresh(ctx.updatedAt)) return {};
+  const out: PatientContext = { updatedAt: ctx.updatedAt, stamps: {} };
+  for (const k of ['weight', 'age', 'ageUnit', 'sex'] as ContextKey[]) {
+    const t = ctx.stamps ? ctx.stamps[k] : ctx.updatedAt;
+    if (ctx[k] !== undefined && fresh(t)) {
+      (out as unknown as Record<string, unknown>)[k] = ctx[k];
+      out.stamps![k] = t;
+    }
+  }
+  return out;
+}
+
+/** Clock time a value was entered, e.g. "2:32 PM". A fixed time cannot go stale on a screen
+ *  that stays open, unlike "4 min ago". */
+export function formatEnteredTime(timestamp: number): string {
+  return new Date(timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 }
 
 // ---------------------------------------------------------------------------
