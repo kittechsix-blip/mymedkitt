@@ -140,7 +140,7 @@ const ADDITIONAL_SEARCH_DOCS: SearchDoc[] = [
     title: 'Escharotomy',
     subtitle: 'Burns consult — circumferential burn decompression',
     keywords: ['eschar', 'burn eschar', 'eschar release', 'circumferential burn decompression', 'burn compartment syndrome', 'fasciotomy'],
-    categoryId: 'trauma-surgery',
+    categoryId: 'trauma-surg',
   },
 ];
 

@@ -397,6 +397,8 @@ console.log('\n=== Step 5: Regenerating SW precache asset list ===\n');
       // Skip directories that shouldn't be precached
       if (rel === 'images' || rel.startsWith('images' + '/')) continue;
       if (rel === 'assets/icons/source' || rel.startsWith('assets/icons/source/')) continue;
+      // Draft review output is gitignored and never published — precaching it 404s on Pages
+      if (rel === 'visual-review' || rel.startsWith('visual-review/')) continue;
 
       const stat = statSync(full);
       if (stat.isDirectory()) {

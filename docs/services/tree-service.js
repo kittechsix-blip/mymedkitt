@@ -1601,7 +1601,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'altitude-sickness': async () => {
             const m = await import('../data/trees/altitude-sickness.js');
-            return { nodes: m.ALTITUDE_SICKNESS_NODES, entryNodeId: 'alt-start', categoryId: 'em', moduleLabels: m.ALTITUDE_SICKNESS_MODULE_LABELS, citations: m.ALTITUDE_SICKNESS_CITATIONS };
+            return { nodes: m.ALTITUDE_SICKNESS_NODES, entryNodeId: 'alt-start', categoryId: 'emergency-medicine', moduleLabels: m.ALTITUDE_SICKNESS_MODULE_LABELS, citations: m.ALTITUDE_SICKNESS_CITATIONS };
         },
         'ibd-flare': async () => {
             const m = await import('../data/trees/ibd-flare.js');
@@ -1613,7 +1613,7 @@ async function loadHardcodedFallback(treeId) {
         },
         'mammalian-bite': async () => {
             const m = await import('../data/trees/mammalian-bite.js');
-            return { nodes: m.MAMMALIAN_BITE_NODES, entryNodeId: 'mb-start', categoryId: 'em', moduleLabels: m.MAMMALIAN_BITE_MODULE_LABELS, citations: m.MAMMALIAN_BITE_CITATIONS };
+            return { nodes: m.MAMMALIAN_BITE_NODES, entryNodeId: 'mb-start', categoryId: 'emergency-medicine', moduleLabels: m.MAMMALIAN_BITE_MODULE_LABELS, citations: m.MAMMALIAN_BITE_CITATIONS };
         },
         'febrile-seizure': async () => {
             const m = await import('../data/trees/febrile-seizure.js');

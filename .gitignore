@@ -45,3 +45,7 @@ supabase-*-insert.sql
 # dirty on every run. Tool artifact, not clinical source.
 src/data/trees/.claude/
 **/.claude/claudex/
+
+# Draft visual-review output (image drafts for Andy to approve). Lives under
+# docs/ so it can be opened next to the app, but must never ship to Pages.
+docs/visual-review/
