@@ -28,6 +28,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { writeStableJson } from './lib/write-stable-json.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '..');
@@ -188,7 +189,7 @@ if (fs.existsSync(CONSULTS_DIR)) {
 }
 
 fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
-fs.writeFileSync(OUTPUT_PATH, JSON.stringify({
+writeStableJson(OUTPUT_PATH, {
   generated: new Date().toISOString(),
   count: Object.keys(map).length,
   // Ambiguous ids are reported so a future authoring pass can rename them; the
@@ -196,7 +197,7 @@ fs.writeFileSync(OUTPUT_PATH, JSON.stringify({
   // back to this map, so a collision only matters for cold deep-links.
   collisions,
   map,
-}));
+});
 
 const sizeKB = (fs.statSync(OUTPUT_PATH).size / 1024).toFixed(1);
 const collisionCount = Object.keys(collisions).length;

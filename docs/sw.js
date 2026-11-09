@@ -1013,16 +1013,23 @@ const ASSETS_TO_CACHE = [
 ];
 // AUTO-GENERATED ASSETS END
 
-// Install: pre-cache all static assets.
-// Use per-asset cache.add wrapped in Promise.allSettled so one missing file
-// (typo, stale list entry) only logs a warning instead of aborting the entire
-// install — which would silently disable the SW and the deploy-cache-bump
-// strategy for every user.
+// Stable cache for LAZY_ASSETS (infographics, procedure media, big images). It is NOT tied to
+// CACHE_NAME, so a deploy (which bumps CACHE_NAME) does not throw away ~60 MB of warmed media.
+// Staleness is bounded: lazy HTML is still fetched network-first when opened and re-written.
+const LAZY_CACHE = 'medkitt-lazy-v1';
+
+const SCOPE = self.registration.scope;
+const LAZY_HREFS = new Set(LAZY_ASSETS.map(function(a) { return new URL(a, SCOPE).href; }));
+
+// Install: pre-cache CORE assets only (everything needed to open any consult offline).
+// Per-asset cache.add inside Promise.allSettled so one missing file (typo, stale list entry)
+// only logs a warning instead of aborting the entire install, which would silently disable
+// the SW and the deploy-cache-bump strategy for every user.
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
       return Promise.allSettled(
-        ASSETS_TO_CACHE.map(function(asset) {
+        CORE_ASSETS.map(function(asset) {
           return cache.add(asset).catch(function(err) {
             console.warn('[SW] precache failed for', asset, err && err.message);
             throw err;
@@ -1034,24 +1041,25 @@ self.addEventListener('install', function(event) {
   self.skipWaiting();
 });
 
-// Activate: clean up old caches, then force-reload open tabs on upgrade
-// This solves the chicken-and-egg problem: old app.js may not have
-// controllerchange listener, so the SW forces the reload from its side.
+// Activate: clean up old caches, claim clients, and (on upgrade) TELL open pages.
+// The SW never navigates a window itself: the page decides when it is safe to reload
+// so a clinician is not pulled out of a consult mid-case (see src/services/app-update.ts).
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
-      var oldCaches = cacheNames.filter(function(name) { return name !== CACHE_NAME; });
+      var oldCaches = cacheNames.filter(function(name) {
+        return name !== CACHE_NAME && name !== LAZY_CACHE;
+      });
       var isUpgrade = oldCaches.length > 0;
       return Promise.all(
         oldCaches.map(function(name) { return caches.delete(name); })
       ).then(function() {
         return self.clients.claim();
       }).then(function() {
-        // Force-reload all open tabs so they pick up the new code
         if (isUpgrade) {
           return self.clients.matchAll({ type: 'window' }).then(function(windowClients) {
             windowClients.forEach(function(client) {
-              client.navigate(client.url);
+              client.postMessage({ type: 'sw-activated', cache: CACHE_NAME });
             });
           });
         }
@@ -1060,9 +1068,63 @@ self.addEventListener('activate', function(event) {
   );
 });
 
+// Background warm-up of LAZY_ASSETS. Idempotent + resumable: only fetches what is missing,
+// a few at a time, tolerant of failures (next launch continues). Never blocks fetch handling.
+var WARM_CONCURRENCY = 4;
+var warming = false;
+
+function warmLazyAssets() {
+  return caches.open(LAZY_CACHE).then(function(cache) {
+    return cache.keys().then(function(keys) {
+      var have = new Set(keys.map(function(r) { return r.url; }));
+      // Drop lazy entries for files that no longer exist in the list (deleted infographics).
+      var stale = keys.filter(function(r) { return !LAZY_HREFS.has(r.url); });
+      var missing = LAZY_ASSETS.filter(function(a) { return !have.has(new URL(a, SCOPE).href); });
+      var chain = Promise.all(stale.map(function(r) { return cache.delete(r); }));
+      var offset = 0;
+      function nextBatch() {
+        if (offset >= missing.length) return Promise.resolve();
+        var batch = missing.slice(offset, offset + WARM_CONCURRENCY);
+        offset += WARM_CONCURRENCY;
+        return Promise.all(batch.map(function(asset) {
+          return fetch(asset).then(function(res) {
+            if (res && res.status === 200) return cache.put(asset, res);
+          }).catch(function() { /* offline / 404: retry on next launch */ });
+        })).then(nextBatch);
+      }
+      return chain.then(nextBatch);
+    });
+  });
+}
+
+self.addEventListener('message', function(event) {
+  var data = event.data;
+  if (!data || data.type !== 'warm-cache' || warming) return;
+  warming = true;
+  event.waitUntil(
+    warmLazyAssets().catch(function(err) {
+      console.warn('[SW] warm-cache failed', err && err.message);
+    }).then(function() { warming = false; })
+  );
+});
+
+// Pick the cache a successful response belongs in: lazy assets go to the stable lazy cache.
+function cacheNameFor(url) {
+  return LAZY_HREFS.has(url.origin + url.pathname) ? LAZY_CACHE : CACHE_NAME;
+}
+
+function putInCache(event, url, response) {
+  var copy = response.clone();
+  event.waitUntil(
+    caches.open(cacheNameFor(url)).then(function(cache) {
+      return cache.put(event.request, copy);
+    }).catch(function() { /* quota or private mode: ignore */ })
+  );
+}
+
 // Fetch: network-first for code/data, cache-first for images/assets
 self.addEventListener('fetch', function(event) {
-  // Only handle same-origin GET requests
+  // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
   var url = new URL(event.request.url);
@@ -1073,6 +1135,9 @@ self.addEventListener('fetch', function(event) {
     return;
   }
 
+  // Cross-origin: never cached here; let the browser handle it
+  if (url.origin !== self.location.origin) return;
+
   // Images and icon assets: cache-first (large, rarely change)
   if (url.pathname.match(/\.(png|jpg|jpeg|gif|svg|webp)$/)) {
     event.respondWith(
@@ -1082,10 +1147,7 @@ self.addEventListener('fetch', function(event) {
         }
         return fetch(event.request).then(function(networkResponse) {
           if (networkResponse && networkResponse.status === 200) {
-            var responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then(function(cache) {
-              cache.put(event.request, responseToCache);
-            });
+            putInCache(event, url, networkResponse);
           }
           return networkResponse;
         });
@@ -1094,19 +1156,17 @@ self.addEventListener('fetch', function(event) {
     return;
   }
 
-  // Everything else (JS, HTML, CSS, JSON): network-first
-  // Bypasses browser HTTP cache to guarantee truly fresh code
+  // Everything else (JS, HTML, CSS, JSON): network-first, and every successful
+  // same-origin response is written to the cache so anything opened once works offline.
+  // Bypasses browser HTTP cache to guarantee truly fresh code.
   event.respondWith(
     fetch(new Request(event.request, { cache: 'no-cache' })).then(function(networkResponse) {
       if (networkResponse && networkResponse.status === 200) {
-        var responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, responseToCache);
-        });
+        putInCache(event, url, networkResponse);
       }
       return networkResponse;
     }).catch(function() {
-      // Offline: fall back to cache
+      // Offline: fall back to cache (searches every cache, incl. the lazy one)
       return caches.match(event.request);
     })
   );

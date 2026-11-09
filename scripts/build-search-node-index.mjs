@@ -21,6 +21,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { writeStableJson } from './lib/write-stable-json.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '..');
@@ -316,7 +317,7 @@ for (const file of treeFiles) {
 
 // Ensure docs/data directory exists
 fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
-fs.writeFileSync(OUTPUT_PATH, JSON.stringify({ generated: new Date().toISOString(), count: allDocs.length, nodes: allDocs, tricks: tricksDocs }));
+writeStableJson(OUTPUT_PATH, { generated: new Date().toISOString(), count: allDocs.length, nodes: allDocs, tricks: tricksDocs });
 
 const sizeKB = (fs.statSync(OUTPUT_PATH).size / 1024).toFixed(1);
 console.log(`✅ Wrote ${allDocs.length} node docs across ${treesScanned} trees + ${tricksDocs.length} tricks → ${path.relative(PROJECT_ROOT, OUTPUT_PATH)} (${sizeKB} KB)`);

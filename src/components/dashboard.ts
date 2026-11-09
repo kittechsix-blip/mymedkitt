@@ -56,6 +56,9 @@ export function addRecentConsult(id: string, title: string, categoryId: string =
 // Dashboard Render
 // ===================================================================
 
+/** The single document-level click-outside listener for the home search (see renderDashboard). */
+let dashboardOutsideClick: ((ev: MouseEvent) => void) | null = null;
+
 export function renderDashboard(container: HTMLElement): void {
   container.innerHTML = '';
 
@@ -206,9 +209,20 @@ export function renderDashboard(container: HTMLElement): void {
     resultsList.hidden = false;
   }
 
-  searchInput.addEventListener('input', () => renderResults(searchInput.value));
+  // Debounce keystrokes (~120 ms); Enter and clear/Escape act immediately.
+  let debounceTimer: number | undefined;
+  searchInput.addEventListener('input', () => {
+    if (debounceTimer !== undefined) window.clearTimeout(debounceTimer);
+    if (searchInput.value === '') {
+      renderResults('');
+      return;
+    }
+    debounceTimer = window.setTimeout(() => renderResults(searchInput.value), 120);
+  });
   searchInput.addEventListener('keydown', (ev) => {
     if (ev.key === 'Enter') {
+      if (debounceTimer !== undefined) window.clearTimeout(debounceTimer);
+      renderResults(searchInput.value);
       const first = resultsList.querySelector<HTMLLIElement>('.dashboard-hero-search__result');
       if (first) first.click();
     } else if (ev.key === 'Escape') {
@@ -218,11 +232,20 @@ export function renderDashboard(container: HTMLElement): void {
       searchInput.blur();
     }
   });
-  document.addEventListener('click', (ev) => {
+  // Click-outside closes results. One listener at a time: replaced on every renderDashboard.
+  if (dashboardOutsideClick) document.removeEventListener('click', dashboardOutsideClick);
+  dashboardOutsideClick = (ev: MouseEvent) => {
+    if (!heroSearch.isConnected) {
+      // Dashboard was replaced by another view: self-remove.
+      if (dashboardOutsideClick) document.removeEventListener('click', dashboardOutsideClick);
+      dashboardOutsideClick = null;
+      return;
+    }
     if (!heroSearch.contains(ev.target as Node)) {
       resultsList.hidden = true;
     }
-  });
+  };
+  document.addEventListener('click', dashboardOutsideClick);
 
   // ---- Recents Row ----
   const recents = getRecents();
