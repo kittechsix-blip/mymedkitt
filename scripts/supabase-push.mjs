@@ -272,7 +272,12 @@ function findTreeInCategory(catId, treeId) {
   return cat.decisionTrees?.find(t => t.id === treeId) || null;
 }
 
-const primaryListing = findTreeInCategory(reg.categoryId, consultId);
+// Fall back to ANY category that lists the consult. The registry's categoryId and
+// the app's category lists disagree for ~50 consults; without this the title was
+// silently overwritten with the consult id on --update.
+const primaryListing = findTreeInCategory(reg.categoryId, consultId)
+  || categories.map(c => c.decisionTrees?.find(t => t.id === consultId)).find(Boolean)
+  || null;
 const treeTitle = primaryListing?.title || consultId;
 const treeSubtitle = primaryListing?.subtitle || '';
 const treeVersion = primaryListing?.version || '1.0';

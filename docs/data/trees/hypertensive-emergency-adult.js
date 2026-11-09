@@ -232,7 +232,7 @@ export const HTNE_NODES = [
         type: 'result',
         module: 3,
         title: 'Ischemic Stroke: Stroke-Specific BP Rules',
-        body: '**Ischemic stroke** BP rules are stroke-specific and differ before and after thrombolysis. [Stroke consult](#/tree/stroke)\n\n**Do not apply the general first-hour rule** before the thrombolysis decision. [8]\n\n**Before alteplase:** SBP must be below 185 and DBP below 110 mmHg. [10] [Stroke BP threshold before IVT](#/node/stroke-ivt-check)\n\n**After alteplase:** keep BP below 180/105 mmHg for 24 hours. [10] [Stroke post-treatment BP](#/node/stroke-post-treatment)',
+        body: '**Ischemic stroke** BP rules are stroke-specific and differ before and after thrombolysis. [Stroke consult](#/tree/stroke)\n\n**Do not apply the general first-hour rule** before the thrombolysis decision. [8]\n\n**Before alteplase:** SBP must be below 185 and DBP below 110 mmHg. [10] [Stroke BP threshold before IVT](#/tree/stroke/node/stroke-ivt-check)\n\n**After alteplase:** keep BP below 180/105 mmHg for 24 hours. [10] [Stroke post-treatment BP](#/tree/stroke/node/stroke-post-treatment)',
         recommendation: 'Use the stroke consult for BP thresholds: below 185/110 mmHg before thrombolysis and below 180/105 mmHg for 24 hours after. Do not apply the general first-hour rule before the thrombolysis decision.',
         citation: [8, 10],
         confidence: 'recommended',

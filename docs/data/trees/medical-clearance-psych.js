@@ -18,7 +18,7 @@ export const MEDICAL_CLEARANCE_PSYCH_NODES = [
         type: 'info',
         module: 1,
         title: 'Psych Medical Stability',
-        body: '[Steps Summary](#/info/mcp-steps)\n\n**Use "medical assessment/stability," not a blanket clearance mindset.**\n\n**Why this matters:**\n• Medical mimics are uncommon in low-risk known psychiatric presentations, but high-impact when red flags are present\n• Missed medical diagnoses in psychiatric patients are reported across a wide range because risk depends heavily on age, vitals, exam, delirium, intoxication, and baseline history\n• Psychiatric patients have higher rates of comorbid medical illness\n\n**AAEP Task Force 2017:**\nMedical evaluation is based on clinical assessment, not routine testing.',
+        body: '**Use "medical assessment/stability," not a blanket clearance mindset.**\n\n**Why this matters:**\n• Medical mimics are uncommon in low-risk known psychiatric presentations, but high-impact when red flags are present\n• Missed medical diagnoses in psychiatric patients are reported across a wide range because risk depends heavily on age, vitals, exam, delirium, intoxication, and baseline history\n• Psychiatric patients have higher rates of comorbid medical illness\n\n**AAEP Task Force 2017:**\nMedical evaluation is based on clinical assessment, not routine testing.',
         citation: [1, 2],
         next: 'mcp-vitals',
         summary: 'Psych medical assessment: history, vitals, exam, mentation, and red flags drive testing; routine labs are not automatic.',

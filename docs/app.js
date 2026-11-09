@@ -6,14 +6,8 @@ import { router } from './services/router.js';
 import { renderDashboard } from './components/dashboard.js';
 import { renderSpecialtyView } from './components/specialty-view.js';
 import { renderConsultFlow } from './components/consult-flow.js';
-import { renderLearnHome } from './components/learn-home.js';
 import { renderHubsHome } from './components/hubs-home.js';
 import { renderTricksHome, renderTricksSpecialty } from './components/tricks-home.js';
-import { renderLearnRotation } from './components/learn-rotation.js';
-import { renderLearnCard } from './components/learn-card.js';
-import { renderLearnPreRound } from './components/learn-pre-round.js';
-import { renderLearnShelfSummary } from './components/learn-shelf-summary.js';
-import { renderLearnDrill } from './components/learn-drill.js';
 import { renderReferencePanel } from './components/reference-table.js';
 import { renderCalculator, renderCalculatorList } from './components/calculator.js';
 import { renderDrugList } from './components/drug-store.js';
@@ -229,12 +223,6 @@ function handleShare(params) {
     }
     window.location.replace('#/tree/' + treeId);
 }
-function handleLearnHome(_params) {
-    removeContextualToolbar();
-    hideGlobalTabBar();
-    const main = clearMain();
-    renderLearnHome(main);
-}
 function handleHubsHome(_params) {
     removeContextualToolbar();
     hideGlobalTabBar();
@@ -252,43 +240,6 @@ function handleTricksSpecialty(params) {
     hideGlobalTabBar();
     const main = clearMain();
     renderTricksSpecialty(main, params['specialtyId'] ?? '', params['anchorId']);
-}
-function handleLearnRotation(params) {
-    removeContextualToolbar();
-    hideGlobalTabBar();
-    const rotationId = params['rotationId'] ?? 'unknown';
-    const main = clearMain();
-    renderLearnRotation(main, rotationId);
-}
-function handleLearnCard(params) {
-    removeContextualToolbar();
-    hideGlobalTabBar();
-    const rotationId = params['rotationId'] ?? 'unknown';
-    const cardId = params['cardId'] ?? 'unknown';
-    const main = clearMain();
-    renderLearnCard(main, rotationId, cardId);
-}
-function handleLearnPreRound(params) {
-    removeContextualToolbar();
-    hideGlobalTabBar();
-    const rotationId = params['rotationId'] ?? 'unknown';
-    const main = clearMain();
-    renderLearnPreRound(main, rotationId);
-}
-function handleLearnShelf(params) {
-    removeContextualToolbar();
-    hideGlobalTabBar();
-    const rotationId = params['rotationId'] ?? 'unknown';
-    const main = clearMain();
-    renderLearnShelfSummary(main, rotationId);
-}
-function handleLearnDrill(params) {
-    removeContextualToolbar();
-    hideGlobalTabBar();
-    const rotationId = params['rotationId'] ?? 'unknown';
-    const drillId = params['drillId'] ?? 'unknown';
-    const main = clearMain();
-    renderLearnDrill(main, rotationId, drillId);
 }
 function handleNotFound() {
     removeContextualToolbar();
@@ -374,16 +325,10 @@ async function init() {
         if (!showInfoModal(params.id, params.anchor))
             handleNotFound();
     });
-    router.on('/learn', handleLearnHome);
     router.on('/hubs', handleHubsHome);
     router.on('/tricks', handleTricksHome);
     router.on('/tricks/:specialtyId', handleTricksSpecialty);
     router.on('/tricks/:specialtyId/trick/:anchorId', handleTricksSpecialty);
-    router.on('/learn/:rotationId', handleLearnRotation);
-    router.on('/learn/:rotationId/card/:cardId', handleLearnCard);
-    router.on('/learn/:rotationId/pre-round', handleLearnPreRound);
-    router.on('/learn/:rotationId/shelf', handleLearnShelf);
-    router.on('/learn/:rotationId/drill/:drillId', handleLearnDrill);
     router.onNotFound(handleNotFound);
     // Start routing
     router.start();

@@ -94,14 +94,14 @@ Full rule and recovery steps: `~/Desktop/claude-brain/agent-instructions/agent-r
 
 ### New Consult Build Pipeline (Autonomous)
 1. Create tree file: `src/data/trees/<id>.ts` (use `CONSULT_TEMPLATE.md`)
-2. Register in: `categories.ts`, `tree-service.ts`, `trees/index.ts`
+2. Register in: `categories.ts`, `tree-service.ts`
 3. Register in SQL generator: `scripts/generate-supabase-sql.mjs`
 4. Compile: `bunx tsc --skipLibCheck --noUnusedLocals false`
 5. Copy CSS: `cp src/views/style.css docs/style.css`
 6. Cache sync: `node scripts/deploy-cache-sync.mjs` → recompile after
 7. Add to SW cache: `docs/sw.js` ASSETS_TO_CACHE (alphabetical)
 8. Generate SQL: `node scripts/generate-supabase-sql.mjs <id>`
-9. Push to Supabase via REST API (see "Supabase API Deploy" section below)
+9. Push to Supabase via REST API (`node scripts/supabase-push.mjs <tree-id>`; see "Supabase Push (No Copy-Paste)" below)
 10. Commit and push to GitHub
 
 ### Chief-Complaint Hub Template — Rule-In / Rule-Out Engine (MANDATORY for ALL hubs)
@@ -367,24 +367,19 @@ src/
 │   ├── specialty-view.ts      # List of consults within a specialty
 │   ├── consult-flow.ts        # THE CORE — vertical decision card flow
 │   ├── decision-card.ts       # Individual decision card component
-│   ├── expandable-section.ts  # Inline expand/collapse within cards
-│   ├── overlay-panel.ts       # Sliding overlay for dense info + calculators
-│   ├── search-bar.ts          # Expandable search with context-aware scoping
 │   ├── contextual-toolbar.ts  # Per-consult bottom toolbar
-│   ├── branch-point-list.ts   # "..." overflow scrollable branch menu
 │   ├── button-3d.ts           # Reusable 3D glossy button component
 │   ├── text-renderer.ts       # Shared renderBodyText + appendBoldAware
 │   ├── calculator.ts          # Calculator overlay (carried from MedKitt)
 │   ├── drug-store.ts          # Pharmacy modal (carried from MedKitt)
 │   ├── info-page.ts           # Info page overlays (carried from MedKitt)
-│   ├── reference-table.ts     # Citation rendering (carried from MedKitt)
-│   └── reference-link.ts      # Inline reference links (carried from MedKitt)
+│   └── reference-table.ts     # Citation rendering (carried from MedKitt)
 ├── data/                      # ALL unchanged from MedKitt
 │   ├── categories.ts
 │   ├── drug-store.ts
 │   ├── info-pages.ts
 │   ├── toolbar-configs.ts     # NEW — per-consult toolbar definitions
-│   └── trees/                 # All 28 decision trees
+│   └── trees/                 # One file per consult (370+)
 ├── models/
 │   └── types.ts               # Type definitions (extended for new UX)
 ├── services/
@@ -741,7 +736,7 @@ First run logs in and caches session. Subsequent runs use persistent profile.
 
 - [ ] `bunx tsc` compiles clean
 - [ ] `git status docs/` — compiled output matches source (no stale files)
-- [ ] All 28 consults load and render correctly in card flow
+- [ ] All consults load and render correctly in card flow
 - [ ] Decision card buttons change color correctly (green = yes, black = no)
 - [ ] Auto-scroll-to-center works on new card appearance
 - [ ] Scroll-up reveals answered cards with correct color states
@@ -792,7 +787,7 @@ Content carried from MedKitt (all unchanged):
 
 Implementation phases:
 - [ ] Phase 0: CSS design system migration (dark → pearl white + 3D buttons)
-- [ ] Phase 1: Foundation components (button-3d, splash, overlay-panel, expandable-section, text-renderer)
+- [ ] Phase 1: Foundation components (button-3d, splash, text-renderer)
 - [ ] Phase 2: Core decision flow (consult-flow-controller, decision-card, consult-flow)
 - [ ] Phase 3: Dashboard & navigation (dashboard, specialty-view, contextual-toolbar, search)
 - [ ] Phase 4: Integration & wiring (app.ts routes, reused component adaptation)
@@ -807,7 +802,7 @@ For any queue of 2+ consult builds, deploys, or audits in this repo:
 - Dispatch agents **strictly sequentially** (`Task` with `run_in_background: true`, then `TaskOutput` block before next)
 - Targeted `git add <files>` only — never `git add -A` / `git add .`
 - Verify Pages build for commit N succeeded (`gh run list`) before dispatching commit N+1
-- Known shared-state files (`src/services/cache-db.ts` DATA_VERSION, `docs/service-worker.js` CACHE_VERSION, `src/data/categories.ts`, `src/services/tree-service.ts`, `src/data/index.ts`, `supabase-hotfix-update.sql`) cannot tolerate parallel writers — they auto-bump or auto-regenerate and concurrent agents clobber each other
+- Known shared-state files (`src/services/cache-db.ts` DATA_VERSION, `docs/sw.js` CACHE_NAME, `src/data/categories.ts`, `src/services/tree-service.ts`, `src/data/index.ts`, `supabase-hotfix-update.sql`) cannot tolerate parallel writers — they auto-bump or auto-regenerate and concurrent agents clobber each other
 - Known dead-agent dirty files frequently present: `myasthenia-gravis.ts`, `oncological-emergencies.ts`, `info-pages.ts` and their `docs/` compiled twins. Inspect via `git status --short` first; only stage when they're the explicit deploy target
 
 Full rationale: `~/Desktop/claude-brain/agent-instructions/agent-rules.md` (2026-05-16 entry). Reference clean run: c68ce8c → 6381d10 → badaf0e → e46c9d3 → 054274f → 620f2136 → fb5b155, 0 EDEADLK.

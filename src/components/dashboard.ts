@@ -283,7 +283,7 @@ export function renderDashboard(container: HTMLElement): void {
     dashboard.appendChild(recentsSection);
   }
 
-  // ---- Chief Complaint Hubs hero card (sits ABOVE MedKitt Learn) ----
+  // ---- Chief Complaint Hubs hero card ----
   // Hub list filtering happens inside renderHubsHome — we always show the tile
   // so future hubs auto-appear without a dashboard change. In shared mode the
   // tile still opens, and the hubs-home empty state handles the no-hubs case.
@@ -348,38 +348,6 @@ export function renderDashboard(container: HTMLElement): void {
 
     tricksCard.addEventListener('click', () => router.navigate('/tricks'));
     dashboard.appendChild(tricksCard);
-  }
-
-  // ---- MedKitt Learn hero card (full-access only) ----
-  if (!isSharedMode()) {
-    const learnCard = document.createElement('button');
-    learnCard.className = 'dashboard-learn-card';
-    learnCard.type = 'button';
-    learnCard.setAttribute('aria-label', 'Open MedKitt Learn — student rotation mode');
-
-    const learnBadge = document.createElement('div');
-    learnBadge.className = 'dashboard-learn-card__badge';
-    learnBadge.textContent = 'NEW';
-    learnCard.appendChild(learnBadge);
-
-    const learnTitle = document.createElement('div');
-    learnTitle.className = 'dashboard-learn-card__title';
-    learnTitle.textContent = 'MedKitt Learn';
-    learnCard.appendChild(learnTitle);
-
-    const learnSub = document.createElement('div');
-    learnSub.className = 'dashboard-learn-card__sub';
-    learnSub.textContent = 'Clinical rotation mode for medical students — Psychiatry available now.';
-    learnCard.appendChild(learnSub);
-
-    const learnArrow = document.createElement('div');
-    learnArrow.className = 'dashboard-learn-card__arrow';
-    learnArrow.textContent = '→';
-    learnArrow.setAttribute('aria-hidden', 'true');
-    learnCard.appendChild(learnArrow);
-
-    learnCard.addEventListener('click', () => router.navigate('/learn'));
-    dashboard.appendChild(learnCard);
   }
 
   // ---- Categories ----

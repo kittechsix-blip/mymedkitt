@@ -14,7 +14,6 @@ This document provides attribution for third-party assets and content used in Me
 
 | Package | Version | License | Source |
 |---------|---------|---------|--------|
-| electrobun | latest | BSD-3-Clause | https://electrobun.dev |
 | @types/bun | latest | MIT | https://github.com/oven-sh/bun |
 
 ### Fonts

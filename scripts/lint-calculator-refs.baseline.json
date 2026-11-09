@@ -1,15 +1,4 @@
 {
-  "generated": "2026-08-24",
-  "dangling": [
-    "dni-documentation",
-    "hotline-resources",
-    "ipv-safety-plan",
-    "prognostic-disclosure",
-    "rapid-goc-framework",
-    "safety-assessment",
-    "strangulation-danger",
-    "surprise-question",
-    "trafficking-red-flags",
-    "vera-screen"
-  ]
+  "generated": "2026-11-09",
+  "dangling": []
 }

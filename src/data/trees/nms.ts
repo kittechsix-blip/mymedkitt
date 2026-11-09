@@ -25,7 +25,7 @@ export const NMS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Neuroleptic Malignant Syndrome',
-    body: '[Steps Summary](#/info/nms-steps)\n\n**Definition:** Life-threatening reaction to dopamine antagonists (antipsychotics).\n\n**Classic tetrad:**\n* **Hyperthermia** (often >40 degC)\n* **Lead-pipe rigidity** (severe, generalized)\n* **Autonomic instability** (tachycardia, labile BP, diaphoresis)\n* **Mental status changes** (confusion -> coma)\n\n**Onset:** Usually within 2 weeks of drug initiation/dose change (often 4-14 days)',
+    body: '**Definition:** Life-threatening reaction to dopamine antagonists (antipsychotics).\n\n**Classic tetrad:**\n* **Hyperthermia** (often >40 degC)\n* **Lead-pipe rigidity** (severe, generalized)\n* **Autonomic instability** (tachycardia, labile BP, diaphoresis)\n* **Mental status changes** (confusion -> coma)\n\n**Onset:** Usually within 2 weeks of drug initiation/dose change (often 4-14 days)',
     citation: [1],
     next: 'nms-triggers',
     summary: 'NMS = hyperthermia + lead-pipe rigidity + autonomic instability + AMS. Onset 4-14 days.',

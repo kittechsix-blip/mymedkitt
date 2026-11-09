@@ -22969,7 +22969,7 @@ const RHF_POCUS_CRITERIA_PAGE: InfoPage = {
     },
     {
       heading: 'Pearls',
-      body: '• **Acute vs chronic:** RV wall thickness > 5 mm at end-diastole suggests chronicity (cor pulmonale, PAH). Thin-walled, dilated RV with new strain = acute insult (PE, RVMI, ARDS, sepsis).\n• **TAPSE in chronic PAH:** can be preserved early; use TAPSE/PASP ratio (< 0.36 → poor RV-PA coupling).\n• **Pseudo-McConnell:** RV infarction can mimic — get a 12-lead and right-sided V4R.\n• **Image placeholders:** [TAPSE M-mode reference](#/image/rhf/tapse-mmode.jpg) · [McConnell A4C example](#/image/rhf/mcconnell-a4c.jpg) · [D-sign PSAX](#/image/rhf/d-sign-psax.jpg) · [Plethoric IVC subcostal](#/image/rhf/plethoric-ivc.jpg)',
+      body: '• **Acute vs chronic:** RV wall thickness > 5 mm at end-diastole suggests chronicity (cor pulmonale, PAH). Thin-walled, dilated RV with new strain = acute insult (PE, RVMI, ARDS, sepsis).\n• **TAPSE in chronic PAH:** can be preserved early; use TAPSE/PASP ratio (< 0.36 → poor RV-PA coupling).\n• **Pseudo-McConnell:** RV infarction can mimic — get a 12-lead and right-sided V4R.',
     },
   ],
   citations: [
@@ -23967,7 +23967,7 @@ const PD_DRAIN_PROCEDURE_PAGE: InfoPage = {
     },
     {
       heading: 'Pitfalls + Safety',
-      body: '• **Never re-use a drain bag.** Single-use only.\n• **Never disconnect the transfer set without masking.** ~30% of peritonitis is touch contamination.\n• **Cell count requires ≥2 h dwell** — if patient is on rapid APD cycles (1 h dwells), the WBC will be falsely low. Note dwell time on the lab requisition.\n• **Direct inoculation into blood culture bottles is mandatory** for adequate yield — do NOT just send effluent in a urine cup [1].\n• **If the patient came in mid-exchange:** drain what is in, do not abort an instill in progress (risk of overfill leak + pain).\n• **Hypotension on drain:** rare but possible in volume-depleted patients. Slow the drain by partially clamping; check BP.\n• **Catheter dysfunction during the drain:** if outflow stops at <50% of expected, see [pd-outflow](#/info/pd-outflow) — most likely constipation or fibrin plug.',
+      body: '• **Never re-use a drain bag.** Single-use only.\n• **Never disconnect the transfer set without masking.** ~30% of peritonitis is touch contamination.\n• **Cell count requires ≥2 h dwell** — if patient is on rapid APD cycles (1 h dwells), the WBC will be falsely low. Note dwell time on the lab requisition.\n• **Direct inoculation into blood culture bottles is mandatory** for adequate yield — do NOT just send effluent in a urine cup [1].\n• **If the patient came in mid-exchange:** drain what is in, do not abort an instill in progress (risk of overfill leak + pain).\n• **Hypotension on drain:** rare but possible in volume-depleted patients. Slow the drain by partially clamping; check BP.\n• **Catheter dysfunction during the drain:** if outflow stops at <50% of expected, see [pd-outflow](#/tree/peritoneal-dialysis/node/pd-outflow) — most likely constipation or fibrin plug.',
     },
     {
       heading: 'Hand-Off Note Template',

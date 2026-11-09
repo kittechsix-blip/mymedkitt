@@ -17,7 +17,7 @@ export const GI_FOREIGN_BODY_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'GI Foreign Body — Object Identification',
-    body: '[GI Foreign Body Steps Summary](#/info/gifb-steps)\n\n**Object type determines urgency and management.**\n\n**High-risk objects (emergent/urgent):**\n• **Button batteries** — esophageal = emergent (<2h)\n• **Magnets** — multiple = urgent (can cause fistula)\n• **Sharp objects** — pins, bones, glass\n• **Superabsorbent polymers** — water beads\n\n**Lower-risk objects:**\n• Coins, small blunt objects\n• Small objects <2cm width, <5cm length\n\n**History:**\n• Time of ingestion\n• Object description (size, shape, material)\n• Symptoms: dysphagia, drooling, pain, respiratory distress',
+    body: '**Object type determines urgency and management.**\n\n**High-risk objects (emergent/urgent):**\n• **Button batteries** — esophageal = emergent (<2h)\n• **Magnets** — multiple = urgent (can cause fistula)\n• **Sharp objects** — pins, bones, glass\n• **Superabsorbent polymers** — water beads\n\n**Lower-risk objects:**\n• Coins, small blunt objects\n• Small objects <2cm width, <5cm length\n\n**History:**\n• Time of ingestion\n• Object description (size, shape, material)\n• Symptoms: dysphagia, drooling, pain, respiratory distress',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'gifb-object-risk', label: 'Object Risk Classification' },

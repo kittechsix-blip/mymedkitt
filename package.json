@@ -1,14 +1,10 @@
 {
-  "name": "em-medkitt",
+  "name": "mymedkitt",
   "version": "1.0.0",
-  "description": "Emergency Medicine Medkitt - Fast, offline-first EM workflow tool",
+  "description": "myMedKitt - evidence-based emergency medicine consults (offline-first PWA)",
   "license": "UNLICENSED",
   "private": true,
-  "main": "src/main.ts",
   "scripts": {
-    "start": "electrobun run",
-    "build": "electrobun build",
-    "dev": "electrobun dev",
     "build:skill": "bun scripts/build-skill/build.ts",
     "build:skill:check": "bun scripts/build-skill/check.ts",
     "build:skill:eval": "bun scripts/build-skill/eval.ts",
@@ -16,7 +12,6 @@
     "test": "node --test scripts/adrogue-madias.test.mjs scripts/frostbite.test.mjs scripts/snake-antivenom.test.mjs scripts/new-calculators.test.mjs scripts/gout-infection.test.mjs scripts/us-iv.test.mjs scripts/io-anatomy.test.mjs scripts/procedure-apps.test.mjs scripts/malaria-cdc.test.mjs scripts/inh-pyridoxine.test.ts scripts/telemetry.test.ts scripts/search-gold.test.ts scripts/search-synonyms.test.ts scripts/engine-drift.test.ts"
   },
   "dependencies": {
-    "electrobun": "1.14.4",
     "playwright": "1.58.2"
   },
   "devDependencies": {

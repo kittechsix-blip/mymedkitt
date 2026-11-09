@@ -17,7 +17,7 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Undifferentiated Hypotension — Initial Assessment',
-    body: '[Shock Workup Summary](#/info/shock-steps)\n\n**Shock definitions:**\n• **Absolute hypotension:** SBP <90 mmHg or MAP <65 mmHg\n• **Relative hypotension:** SBP drop >40 mmHg from baseline\n• **Shock Index (SI):** HR/SBP — >1.0 suggests significant instability\n\n**Each hour at MAP <65 increases mortality by ~5%.**\n\n**Immediate actions:**\n1. Two large-bore IVs (18G or larger)\n2. Continuous monitoring\n3. ECG immediately\n4. Labs: CBC, CMP, lactate, VBG, troponin, coags\n5. Blood cultures if infection suspected\n6. Type and screen\n7. Foley for UOP monitoring',
+    body: '**Shock definitions:**\n• **Absolute hypotension:** SBP <90 mmHg or MAP <65 mmHg\n• **Relative hypotension:** SBP drop >40 mmHg from baseline\n• **Shock Index (SI):** HR/SBP — >1.0 suggests significant instability\n\n**Each hour at MAP <65 increases mortality by ~5%.**\n\n**Immediate actions:**\n1. Two large-bore IVs (18G or larger)\n2. Continuous monitoring\n3. ECG immediately\n4. Labs: CBC, CMP, lactate, VBG, troponin, coags\n5. Blood cultures if infection suspected\n6. Type and screen\n7. Foley for UOP monitoring',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'shock-index', label: 'Shock Index' },
@@ -129,7 +129,7 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Septic Shock — Hour-1 Bundle',
-    body: '[SSC 2021 Hour-1 Bundle](#/info/sepsis-bundle)\n\n**Sepsis-3 definition:** Suspected infection + qSOFA ≥2 or SOFA ≥2.\n**Septic shock:** Sepsis + vasopressors required for MAP ≥65 + lactate >2 despite fluids.\n\n**Hour-1 Bundle (do ALL within 1 hour):**\n\n1. **Measure lactate** — repeat if >2 mmol/L\n2. **Blood cultures** before antibiotics\n3. **Broad-spectrum antibiotics** — each hour delay increases mortality\n4. **30 mL/kg crystalloid** for hypotension or lactate ≥4\n5. **Vasopressors** if hypotensive during/after fluids → MAP ≥65\n\n**Antibiotic selection by source:**\n• Unknown: [Vancomycin](#/drug/vancomycin/sepsis) + [Piperacillin-tazobactam](#/drug/piperacillin-tazobactam/sepsis)\n• Intra-abdominal: Pip-tazo or meropenem + metronidazole\n• Pneumonia: Ceftriaxone + azithromycin or respiratory FQ\n• Urosepsis: Ceftriaxone or FQ',
+    body: '**Sepsis-3 definition:** Suspected infection + qSOFA ≥2 or SOFA ≥2.\n**Septic shock:** Sepsis + vasopressors required for MAP ≥65 + lactate >2 despite fluids.\n\n**Hour-1 Bundle (do ALL within 1 hour):**\n\n1. **Measure lactate** — repeat if >2 mmol/L\n2. **Blood cultures** before antibiotics\n3. **Broad-spectrum antibiotics** — each hour delay increases mortality\n4. **30 mL/kg crystalloid** for hypotension or lactate ≥4\n5. **Vasopressors** if hypotensive during/after fluids → MAP ≥65\n\n**Antibiotic selection by source:**\n• Unknown: [Vancomycin](#/drug/vancomycin/sepsis) + [Piperacillin-tazobactam](#/drug/piperacillin-tazobactam/sepsis)\n• Intra-abdominal: Pip-tazo or meropenem + metronidazole\n• Pneumonia: Ceftriaxone + azithromycin or respiratory FQ\n• Urosepsis: Ceftriaxone or FQ',
     citation: [5, 6],
     treatment: {
       firstLine: {
@@ -428,7 +428,7 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Fluid Responsiveness Assessment',
-    body: '[Fluid Responsiveness Guide](#/info/fluid-responsiveness)\n\n**Fluid responsiveness ≠ fluid need.** Just because stroke volume will increase doesn\'t mean fluids are indicated.\n\n**Passive Leg Raise (PLR) — Most Reliable:**\n• 45° head-up → lower torso to flat + raise legs 45°\n• **>10-15% increase in VTI/CO = fluid responder**\n• Sensitivity 89%, Specificity 91%\n• Works in spontaneous breathing and arrhythmias\n\n**IVC Assessment:**\n• IVC <2 cm + >50% collapse → likely fluid responsive\n• IVC >2 cm + <50% collapse → likely fluid-full\n• **Caveat:** Pooled sens/spec only 71%/75%\n\n**VTI (Velocity-Time Integral):**\n• VTI <18 cm suggests low stroke volume\n• Measure at LVOT, calculate change with PLR\n\n**KEY:** After initial resuscitation, use clinical endpoints (UOP, CRT, lactate) rather than chasing normal IVC/VTI.',
+    body: '**Fluid responsiveness ≠ fluid need.** Just because stroke volume will increase doesn\'t mean fluids are indicated.\n\n**Passive Leg Raise (PLR) — Most Reliable:**\n• 45° head-up → lower torso to flat + raise legs 45°\n• **>10-15% increase in VTI/CO = fluid responder**\n• Sensitivity 89%, Specificity 91%\n• Works in spontaneous breathing and arrhythmias\n\n**IVC Assessment:**\n• IVC <2 cm + >50% collapse → likely fluid responsive\n• IVC >2 cm + <50% collapse → likely fluid-full\n• **Caveat:** Pooled sens/spec only 71%/75%\n\n**VTI (Velocity-Time Integral):**\n• VTI <18 cm suggests low stroke volume\n• Measure at LVOT, calculate change with PLR\n\n**KEY:** After initial resuscitation, use clinical endpoints (UOP, CRT, lactate) rather than chasing normal IVC/VTI.',
     citation: [4, 12],
     calculatorLinks: [
       { id: 'vti-calculator', label: 'VTI Calculator' },
@@ -447,7 +447,7 @@ export const HYPOTENSION_WORKUP_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Vasopressor Selection',
-    body: '[Vasopressor Dosing Guide](#/info/vasopressor-dosing)\n\n**First-line: [Norepinephrine](#/drug/norepinephrine/shock)**\n• Start: 0.01-0.05 mcg/kg/min\n• Titrate: every 2-5 min to MAP ≥65\n• Max: ~0.5-1 mcg/kg/min (consider adding second agent)\n• **Can start peripherally** — do NOT delay for central line\n\n**Second-line options:**\n\n**[Vasopressin](#/drug/vasopressin/shock):**\n• Fixed dose: 0.03-0.04 U/min (no titration)\n• Add when NE >0.25-0.5 mcg/kg/min\n• "Decatecholaminization" strategy\n\n**[Epinephrine](#/drug/epinephrine/shock):**\n• 0.01-0.2 mcg/kg/min\n• Low output + bradycardia\n• Causes tachycardia, lactic acidosis at high doses\n\n**[Phenylephrine](#/drug/phenylephrine/shock):**\n• 0.5-1.4 mcg/kg/min\n• Pure alpha — no inotropy\n• Tachycardia with preserved CO',
+    body: '**First-line: [Norepinephrine](#/drug/norepinephrine/shock)**\n• Start: 0.01-0.05 mcg/kg/min\n• Titrate: every 2-5 min to MAP ≥65\n• Max: ~0.5-1 mcg/kg/min (consider adding second agent)\n• **Can start peripherally** — do NOT delay for central line\n\n**Second-line options:**\n\n**[Vasopressin](#/drug/vasopressin/shock):**\n• Fixed dose: 0.03-0.04 U/min (no titration)\n• Add when NE >0.25-0.5 mcg/kg/min\n• "Decatecholaminization" strategy\n\n**[Epinephrine](#/drug/epinephrine/shock):**\n• 0.01-0.2 mcg/kg/min\n• Low output + bradycardia\n• Causes tachycardia, lactic acidosis at high doses\n\n**[Phenylephrine](#/drug/phenylephrine/shock):**\n• 0.5-1.4 mcg/kg/min\n• Pure alpha — no inotropy\n• Tachycardia with preserved CO',
     citation: [1, 5, 13],
     calculatorLinks: [
       { id: 'vasopressor-equivalence', label: 'Vasopressor Equivalence' },

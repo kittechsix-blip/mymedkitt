@@ -23,12 +23,6 @@ export const CODE_STATUS_NODES = [
         title: 'Rapid Code Status Conversation',
         body: '**The "code status" conversation is really a goals-of-care conversation** — not just a checklist of procedures to accept or refuse.\n\n**Key Principles:**\n• Focus on what the patient VALUES, not procedures\n• Make a recommendation when appropriate\n• Avoid asking patients to make medical decisions\n• Be honest about prognosis\n• A conversation, not a form to fill out\n\n**Remember:** This is hard. You\'re doing something important. [1][2]',
         citation: [1, 2],
-        calculatorLinks: [
-            { id: 'surprise-question', label: 'Surprise Question' },
-            { id: 'rapid-goc-framework', label: 'Rapid GOC Framework' },
-            { id: 'prognostic-disclosure', label: 'Prognostic Phrases' },
-            { id: 'dni-documentation', label: 'DNR/DNI Documentation' },
-        ],
         next: 'code-when',
         summary: 'Code status is a goals-of-care conversation — focus on values, make a recommendation',
     },

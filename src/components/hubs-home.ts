@@ -1,7 +1,7 @@
 // myMedKitt — Chief Complaint Hubs home
 //
 // Lists every tree with `type: 'hub'` from the categories registry,
-// rendered as category-colored cards. Mirrors the renderLearnHome pattern.
+// rendered as category-colored cards.
 //
 // COLOR RULE: each hub adopts the color of its `displayCategoryId` if set,
 // else falls back to its canonical `categoryId`. This keeps a hub's

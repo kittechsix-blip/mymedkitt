@@ -36,7 +36,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'SVT Assessment',
-    body: '[SVT Overview](#/info/svt-overview)\n\n**Supraventricular Tachycardia:** Regular, narrow-complex tachycardia originating above the ventricles.\n\n**Common Types:**\n• **AVNRT** (50-60%): Dual AV nodal pathways, pseudo S-wave in II/III/aVF\n• **AVRT** (30%): Accessory pathway (includes WPW), short PR at baseline\n• **Atrial tachycardia** (10%): P-wave before/after QRS\n• **Atrial flutter**: Saw-tooth pattern, typically 150 bpm (2:1 block)\n\n**Typical HR:** 140-250 bpm depending on type\n\n**First Step:** Assess hemodynamic stability.',
+    body: '**Supraventricular Tachycardia:** Regular, narrow-complex tachycardia originating above the ventricles.\n\n**Common Types:**\n• **AVNRT** (50-60%): Dual AV nodal pathways, pseudo S-wave in II/III/aVF\n• **AVRT** (30%): Accessory pathway (includes WPW), short PR at baseline\n• **Atrial tachycardia** (10%): P-wave before/after QRS\n• **Atrial flutter**: Saw-tooth pattern, typically 150 bpm (2:1 block)\n\n**Typical HR:** 140-250 bpm depending on type\n\n**First Step:** Assess hemodynamic stability.',
     citation: [1, 2],
     options: [
       {
@@ -64,7 +64,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Vagal Maneuver Selection',
-    body: '[Modified Valsalva Technique](#/info/svt-valsalva)\n\n**Vagal maneuvers are first-line for stable SVT (Class I, ACC/AHA 2015).**\n\n**Modified Valsalva (REVERT Trial):**\n• 43% conversion vs 17% standard Valsalva\n• NNT = 3.8\n• Zero-cost, no adverse effects\n\n**Carotid Sinus Massage:**\n• 20-40% success for AVNRT\n• Risk: 1 in 1,000 stroke risk\n• Contraindicated: carotid bruits, recent TIA/stroke, MI <3 months\n\n**Which maneuver?**',
+    body: '[Modified Valsalva Technique](#/node/svt-valsalva)\n\n**Vagal maneuvers are first-line for stable SVT (Class I, ACC/AHA 2015).**\n\n**Modified Valsalva (REVERT Trial):**\n• 43% conversion vs 17% standard Valsalva\n• NNT = 3.8\n• Zero-cost, no adverse effects\n\n**Carotid Sinus Massage:**\n• 20-40% success for AVNRT\n• Risk: 1 in 1,000 stroke risk\n• Contraindicated: carotid bruits, recent TIA/stroke, MI <3 months\n\n**Which maneuver?**',
     citation: [3, 4],
     options: [
       {
@@ -88,7 +88,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Modified Valsalva Technique (REVERT)',
-    body: '[REVERT Trial](#/info/svt-revert)\n\n**Technique (REVERT Trial):**\n\n**Step 1:** Patient sitting upright at 45°\n**Step 2:** Blow into 10mL syringe (move plunger) for 15 seconds (~40 mmHg pressure)\n**Step 3:** IMMEDIATELY lie patient flat\n**Step 4:** Elevate legs to 45° for 15 seconds\n**Step 5:** Return to sitting, check rhythm\n\n**Success Rate:** 43% conversion to NSR\n\n**Tips:**\n• Can repeat 2-3 times\n• Works best for AVNRT and AVRT\n• Patient may feel brief chest pressure during maneuver\n\n**Did the rhythm convert?**',
+    body: '**Technique (REVERT Trial):**\n\n**Step 1:** Patient sitting upright at 45°\n**Step 2:** Blow into 10mL syringe (move plunger) for 15 seconds (~40 mmHg pressure)\n**Step 3:** IMMEDIATELY lie patient flat\n**Step 4:** Elevate legs to 45° for 15 seconds\n**Step 5:** Return to sitting, check rhythm\n\n**Success Rate:** 43% conversion to NSR\n\n**Tips:**\n• Can repeat 2-3 times\n• Works best for AVNRT and AVRT\n• Patient may feel brief chest pressure during maneuver\n\n**Did the rhythm convert?**',
     citation: [3],
     options: [
       {
@@ -132,7 +132,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Adenosine Administration',
-    body: '[Adenosine Dosing](#/info/svt-adenosine-info)\n\n**Dosing:**\n• **Initial:** 6mg rapid IV push (1-2 seconds)\n• **Repeat:** 12mg if no response in 1-2 minutes\n• **Max:** 12mg × 2 (some sources allow 18mg)\n\n**Administration Technique (Critical):**\n1. Use proximal IV (antecubital preferred)\n2. Rapid bolus over 1-2 seconds (half-life ~10 seconds)\n3. Immediately follow with 20mL NS flush\n4. Optional: elevate arm to 90° for 10-20 seconds\n\n**Single-Syringe Method:**\n• 6mg adenosine + 18mL NS in one syringe\n• Higher success (100% with up to 3 doses vs 70% two-syringe)\n\n**Dose Modifications:**\n• **Reduce to 3mg:** Central line, transplanted heart, carbamazepine, dipyridamole\n• **Increase to 12mg:** Theophylline, high caffeine intake\n\n**Pediatric:** 0.1 mg/kg initial, 0.2 mg/kg repeat',
+    body: '**Dosing:**\n• **Initial:** 6mg rapid IV push (1-2 seconds)\n• **Repeat:** 12mg if no response in 1-2 minutes\n• **Max:** 12mg × 2 (some sources allow 18mg)\n\n**Administration Technique (Critical):**\n1. Use proximal IV (antecubital preferred)\n2. Rapid bolus over 1-2 seconds (half-life ~10 seconds)\n3. Immediately follow with 20mL NS flush\n4. Optional: elevate arm to 90° for 10-20 seconds\n\n**Single-Syringe Method:**\n• 6mg adenosine + 18mL NS in one syringe\n• Higher success (100% with up to 3 doses vs 70% two-syringe)\n\n**Dose Modifications:**\n• **Reduce to 3mg:** Central line, transplanted heart, carbamazepine, dipyridamole\n• **Increase to 12mg:** Theophylline, high caffeine intake\n\n**Pediatric:** 0.1 mg/kg initial, 0.2 mg/kg repeat',
     citation: [1, 5],
     next: 'svt-adenosine-response',
     summary: '6mg rapid IV push + 20mL flush; repeat 12mg if needed; reduce to 3mg for central line',
@@ -186,7 +186,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Rate Control Options',
-    body: '[Rate Control Agents](#/info/svt-rate-control)\n\n**If adenosine fails or SVT recurs, rate control agents are next.**\n\n**Diltiazem (Preferred):**\n• 15-20mg (0.25 mg/kg) IV over 2 minutes\n• Repeat 20-25mg (0.35 mg/kg) in 15 min if needed\n• Infusion: 5-15 mg/hr\n• **98% reach target HR; 50% at 5 min**\n• Caution: more hypotension than metoprolol (39% vs 24%)\n\n**Metoprolol:**\n• 5mg IV every 5 minutes × 3 doses (max 15mg)\n• Slower onset but less hypotension\n\n**Amiodarone (if above fail):**\n• 150mg IV over 10-15 minutes\n• Infusion: 1 mg/min × 6h, then 0.5 mg/min\n\n**Which agent?**',
+    body: '**If adenosine fails or SVT recurs, rate control agents are next.**\n\n**Diltiazem (Preferred):**\n• 15-20mg (0.25 mg/kg) IV over 2 minutes\n• Repeat 20-25mg (0.35 mg/kg) in 15 min if needed\n• Infusion: 5-15 mg/hr\n• **98% reach target HR; 50% at 5 min**\n• Caution: more hypotension than metoprolol (39% vs 24%)\n\n**Metoprolol:**\n• 5mg IV every 5 minutes × 3 doses (max 15mg)\n• Slower onset but less hypotension\n\n**Amiodarone (if above fail):**\n• 150mg IV over 10-15 minutes\n• Infusion: 1 mg/min × 6h, then 0.5 mg/min\n\n**Which agent?**',
     citation: [1, 6],
     options: [
       {
@@ -210,7 +210,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'result',
     module: 4,
     title: 'Diltiazem for SVT',
-    body: '[Diltiazem Dosing](#/info/svt-diltiazem)\n\n**Initial Bolus:**\n• 15-20mg (0.25 mg/kg) IV over 2 minutes\n• Flush with saline\n\n**Repeat Bolus (if needed):**\n• 20-25mg (0.35 mg/kg) IV in 15 minutes\n\n**Maintenance Infusion:**\n• 5-15 mg/hr (titrate to HR <100)\n• Start at 5 mg/hr, increase as needed\n\n**Response:**\n• 50% reach HR <100 by 5 minutes\n• 95% reach target by 30 minutes\n• 98% overall success\n\n**Monitor For:**\n• Hypotension (39% experience drop)\n• Bradycardia\n• AV block\n\n**Contraindications:**\n• WPW with pre-excited AF\n• Hypotension (SBP <90)\n• Severe LV dysfunction\n• Sick sinus syndrome\n\n**If converted → disposition. If rate controlled → consider admission vs discharge based on context.**',
+    body: '**Initial Bolus:**\n• 15-20mg (0.25 mg/kg) IV over 2 minutes\n• Flush with saline\n\n**Repeat Bolus (if needed):**\n• 20-25mg (0.35 mg/kg) IV in 15 minutes\n\n**Maintenance Infusion:**\n• 5-15 mg/hr (titrate to HR <100)\n• Start at 5 mg/hr, increase as needed\n\n**Response:**\n• 50% reach HR <100 by 5 minutes\n• 95% reach target by 30 minutes\n• 98% overall success\n\n**Monitor For:**\n• Hypotension (39% experience drop)\n• Bradycardia\n• AV block\n\n**Contraindications:**\n• WPW with pre-excited AF\n• Hypotension (SBP <90)\n• Severe LV dysfunction\n• Sick sinus syndrome\n\n**If converted → disposition. If rate controlled → consider admission vs discharge based on context.**',
     citation: [6],
     recommendation: 'Diltiazem 15-20mg IV over 2 min, repeat 20-25mg if needed. Infusion 5-15 mg/hr. 98% success.',
     confidence: 'recommended',
@@ -250,7 +250,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Unstable SVT — Cardioversion',
-    body: '[Cardioversion Protocol](#/info/svt-cardiovert)\n\n**Indications for Immediate Cardioversion:**\n• Hypotension (SBP <90)\n• Altered mental status\n• Chest pain/ischemic ECG changes\n• Pulmonary edema\n• Signs of shock\n\n**Do NOT delay for vagal maneuvers or adenosine if truly unstable.**\n\n**Synchronized Cardioversion Protocol:**\n\n**1. Sedation (if time permits):**\n• Propofol 0.5-1 mg/kg IV, OR\n• Etomidate 0.2-0.3 mg/kg IV, OR\n• Midazolam 0.05-0.1 mg/kg IV + fentanyl\n\n**2. Energy Selection (Narrow Complex):**\n• **Start: 50-100J**\n• Escalate: 100 → 200 → 360J if unsuccessful\n\n**3. Ensure SYNC mode is ON**\n\n**4. Clear patient and deliver shock**\n\n**Pediatric:** 0.5-2 J/kg',
+    body: '**Indications for Immediate Cardioversion:**\n• Hypotension (SBP <90)\n• Altered mental status\n• Chest pain/ischemic ECG changes\n• Pulmonary edema\n• Signs of shock\n\n**Do NOT delay for vagal maneuvers or adenosine if truly unstable.**\n\n**Synchronized Cardioversion Protocol:**\n\n**1. Sedation (if time permits):**\n• Propofol 0.5-1 mg/kg IV, OR\n• Etomidate 0.2-0.3 mg/kg IV, OR\n• Midazolam 0.05-0.1 mg/kg IV + fentanyl\n\n**2. Energy Selection (Narrow Complex):**\n• **Start: 50-100J**\n• Escalate: 100 → 200 → 360J if unsuccessful\n\n**3. Ensure SYNC mode is ON**\n\n**4. Clear patient and deliver shock**\n\n**Pediatric:** 0.5-2 J/kg',
     citation: [1, 8],
     next: 'svt-cardiovert-result',
     summary: 'Unstable = hypotension, AMS, chest pain, pulmonary edema; sedate → synchronized cardioversion 50-100J',
@@ -289,7 +289,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'question',
     module: 6,
     title: 'WPW Assessment',
-    body: '[WPW Overview](#/info/svt-wpw)\n\n**Wolff-Parkinson-White Syndrome:**\nAccessory pathway bypasses AV node → risk of rapid conduction in AF/flutter.\n\n**Baseline ECG Clues:**\n• Short PR interval (<120ms)\n• Delta wave (slurred QRS upstroke)\n• Wide QRS (>120ms)\n\n**WPW + SVT Presentation:**\n\n**Orthodromic AVRT (90%):**\n• Narrow complex (antegrade through AV node)\n• AV nodal blockers may be used cautiously\n\n**Antidromic AVRT (10%):**\n• Wide complex (antegrade through accessory pathway)\n• Avoid AV nodal blockers\n\n**WPW + Atrial Fibrillation:**\n• Irregular, wide complex, very fast (>200 bpm)\n• **MOST DANGEROUS — AV nodal blockers can cause VF**\n\n**What is the presentation?**',
+    body: '**Wolff-Parkinson-White Syndrome:**\nAccessory pathway bypasses AV node → risk of rapid conduction in AF/flutter.\n\n**Baseline ECG Clues:**\n• Short PR interval (<120ms)\n• Delta wave (slurred QRS upstroke)\n• Wide QRS (>120ms)\n\n**WPW + SVT Presentation:**\n\n**Orthodromic AVRT (90%):**\n• Narrow complex (antegrade through AV node)\n• AV nodal blockers may be used cautiously\n\n**Antidromic AVRT (10%):**\n• Wide complex (antegrade through accessory pathway)\n• Avoid AV nodal blockers\n\n**WPW + Atrial Fibrillation:**\n• Irregular, wide complex, very fast (>200 bpm)\n• **MOST DANGEROUS — AV nodal blockers can cause VF**\n\n**What is the presentation?**',
     citation: [9, 10],
     options: [
       {
@@ -321,7 +321,7 @@ export const SVT_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'WPW + Pre-excited AF — DANGER',
-    body: '[WPW + AF Protocol](#/info/svt-wpw-af)\n\n**⚠️ THIS IS A CRITICAL DIAGNOSIS**\n\n**ECG Features:**\n• Irregular rhythm (AF)\n• Very fast (often >200 bpm)\n• Wide QRS (pre-excited)\n• Variable QRS morphology\n\n**🚫 AVOID THESE DRUGS (can cause VF):**\n• Adenosine\n• Diltiazem/Verapamil\n• Beta-blockers\n• Digoxin\n\n**Why dangerous:** AV nodal blockers remove the "brakes" — AF conducts rapidly down accessory pathway → VF\n\n**✅ SAFE TREATMENTS:**\n\n**1. Synchronized Cardioversion (preferred if unstable):**\n• 100-200J synchronized\n\n**2. Procainamide (if stable):**\n• 20-50 mg/min IV (max 17 mg/kg)\n• Slows accessory pathway conduction\n\n**3. Ibutilide:**\n• 1mg IV over 10 min\n• Can repeat once\n\n**Admission:** All WPW + AF requires cardiology consult and admission.',
+    body: '**⚠️ THIS IS A CRITICAL DIAGNOSIS**\n\n**ECG Features:**\n• Irregular rhythm (AF)\n• Very fast (often >200 bpm)\n• Wide QRS (pre-excited)\n• Variable QRS morphology\n\n**🚫 AVOID THESE DRUGS (can cause VF):**\n• Adenosine\n• Diltiazem/Verapamil\n• Beta-blockers\n• Digoxin\n\n**Why dangerous:** AV nodal blockers remove the "brakes" — AF conducts rapidly down accessory pathway → VF\n\n**✅ SAFE TREATMENTS:**\n\n**1. Synchronized Cardioversion (preferred if unstable):**\n• 100-200J synchronized\n\n**2. Procainamide (if stable):**\n• 20-50 mg/min IV (max 17 mg/kg)\n• Slows accessory pathway conduction\n\n**3. Ibutilide:**\n• 1mg IV over 10 min\n• Can repeat once\n\n**Admission:** All WPW + AF requires cardiology consult and admission.',
     citation: [9, 10],
     recommendation: 'WPW + AF: AVOID adenosine/diltiazem/beta-blockers. Cardiovert if unstable. Procainamide if stable.',
     confidence: 'definitive',

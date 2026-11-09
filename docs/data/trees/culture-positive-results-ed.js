@@ -11,7 +11,7 @@ export const CULTURE_POSITIVE_RESULTS_ED_NODES = [
         type: 'question',
         module: 1,
         title: 'Positive Culture Callback — Source Triage',
-        body: 'Lab called with a positive culture on a patient previously seen in the ED. Determine source to drive the decision pathway.\n\n**Universal first questions:** [1][2]\n• What is the source?\n• Is the organism a likely pathogen or contaminant?\n• Is the patient symptomatic now?\n• Are they on adequate antibiotic coverage?\n• Special host factors (pregnant, immunocompromised, indwelling device)?\n\n[Resistance Patterns](#/info/cpr-resistance-2026)\n[Never-Miss Pathogens](#/info/cpr-never-miss)\n\n**Select the culture source:**',
+        body: 'Lab called with a positive culture on a patient previously seen in the ED. Determine source to drive the decision pathway.\n\n**Universal first questions:** [1][2]\n• What is the source?\n• Is the organism a likely pathogen or contaminant?\n• Is the patient symptomatic now?\n• Are they on adequate antibiotic coverage?\n• Special host factors (pregnant, immunocompromised, indwelling device)?\n\n**Select the culture source:**',
         citation: [1, 2],
         options: [
             { label: 'Blood Culture', description: 'Bacteremia workup — most time-sensitive', next: 'cpr-blood-org', urgency: 'critical' },
@@ -33,7 +33,7 @@ export const CULTURE_POSITIVE_RESULTS_ED_NODES = [
         type: 'question',
         module: 2,
         title: 'Blood Culture — Organism Identified',
-        body: '**Almost always TRUE pathogen (>90%):** [3][4]\nS. aureus, S. pneumoniae, GAS, E. coli, Klebsiella, Pseudomonas, Candida, Listeria, N. meningitidis, Salmonella\n\n**Usually contaminant (<10% unless context):** [3][5]\nCoNS, Corynebacterium, Bacillus, Cutibacterium (P. acnes), Micrococcus, single-bottle viridans strep\n\n[Contaminant vs Pathogen Guide](#/info/cpr-blood-contam)\n[ID Consult Triggers](#/info/cpr-id-consult)\n\n**Which organism?**',
+        body: '**Almost always TRUE pathogen (>90%):** [3][4]\nS. aureus, S. pneumoniae, GAS, E. coli, Klebsiella, Pseudomonas, Candida, Listeria, N. meningitidis, Salmonella\n\n**Usually contaminant (<10% unless context):** [3][5]\nCoNS, Corynebacterium, Bacillus, Cutibacterium (P. acnes), Micrococcus, single-bottle viridans strep\n\n**Which organism?**',
         citation: [3, 4, 5],
         options: [
             { label: 'S. aureus (MSSA or MRSA)', description: 'Never a contaminant — recall + admit + TTE', next: 'cpr-sab', urgency: 'critical' },
@@ -233,7 +233,7 @@ export const CULTURE_POSITIVE_RESULTS_ED_NODES = [
         type: 'question',
         module: 3,
         title: 'Urine Culture — Symptomatic Status',
-        body: '**The single most important question for urine culture interpretation.** [15][16]\n\n[CFU Thresholds](#/info/cpr-urine-cfu)\n[Pregnancy Exception](#/info/cpr-preg-asb)\n\n**Patient status:**',
+        body: '**The single most important question for urine culture interpretation.** [15][16]\n\n**Patient status:**',
         citation: [15, 16],
         options: [
             { label: 'Symptomatic (dysuria, frequency, suprapubic pain, fever, flank pain)', description: 'Treat UTI by syndrome', next: 'cpr-urine-symp' },
@@ -248,7 +248,7 @@ export const CULTURE_POSITIVE_RESULTS_ED_NODES = [
         type: 'question',
         module: 3,
         title: 'Symptomatic UTI — Syndrome',
-        body: '**Cystitis vs pyelonephritis drives both treatment and disposition.** [15]\n\n**Cystitis:** dysuria, frequency, suprapubic discomfort, urinary urgency. No flank pain, no fever.\n\n**Pyelonephritis:** flank pain, fever, rigors, nausea/vomiting, costovertebral angle tenderness.\n\n[Treatment Map](#/info/cpr-uti-treat)',
+        body: '**Cystitis vs pyelonephritis drives both treatment and disposition.** [15]\n\n**Cystitis:** dysuria, frequency, suprapubic discomfort, urinary urgency. No flank pain, no fever.\n\n**Pyelonephritis:** flank pain, fever, rigors, nausea/vomiting, costovertebral angle tenderness.',
         citation: [15],
         options: [
             { label: 'Uncomplicated Cystitis', description: 'Dysuria/frequency only, otherwise well', next: 'cpr-cystitis' },
@@ -262,7 +262,7 @@ export const CULTURE_POSITIVE_RESULTS_ED_NODES = [
         type: 'info',
         module: 3,
         title: 'Uncomplicated Cystitis — Treatment',
-        body: '**First-line (any of):** [15][17]\n• **Nitrofurantoin 100 mg PO BID x 5d** (avoid CrCl <30, avoid in pyelonephritis)\n• **TMP-SMX DS PO BID x 3d** (only if local resistance <20%, no use in 3 months)\n• **Fosfomycin 3g PO x 1 dose** (single dose, lower efficacy, OK for ESBL cystitis only)\n\n**Second-line:** [17]\n• Cephalexin 500 mg PO QID x 5-7d\n• Cefpodoxime 100 mg PO BID x 5-7d\n• Augmentin 500/125 mg PO BID x 5-7d\n\n**Avoid for cystitis:** [17]\n• Fluoroquinolones — FDA 2016 black box, reserve for pyelo\n• Ceftriaxone IV — overkill\n\n**ESBL on culture:** [12]\n• Cystitis only: nitrofurantoin or fosfomycin work\n• Pyelo: ertapenem outpatient or meropenem inpatient\n\n[Resistance Patterns](#/info/cpr-resistance-2026)',
+        body: '**First-line (any of):** [15][17]\n• **Nitrofurantoin 100 mg PO BID x 5d** (avoid CrCl <30, avoid in pyelonephritis)\n• **TMP-SMX DS PO BID x 3d** (only if local resistance <20%, no use in 3 months)\n• **Fosfomycin 3g PO x 1 dose** (single dose, lower efficacy, OK for ESBL cystitis only)\n\n**Second-line:** [17]\n• Cephalexin 500 mg PO QID x 5-7d\n• Cefpodoxime 100 mg PO BID x 5-7d\n• Augmentin 500/125 mg PO BID x 5-7d\n\n**Avoid for cystitis:** [17]\n• Fluoroquinolones — FDA 2016 black box, reserve for pyelo\n• Ceftriaxone IV — overkill\n\n**ESBL on culture:** [12]\n• Cystitis only: nitrofurantoin or fosfomycin work\n• Pyelo: ertapenem outpatient or meropenem inpatient',
         citation: [12, 15, 17],
         next: 'cpr-cystitis-action',
         summary: 'Cystitis = nitrofurantoin 5d OR TMP-SMX 3d OR fosfo x1. Avoid FQ for cystitis. ESBL cystitis: nitro/fosfo still work.',
@@ -412,7 +412,7 @@ export const CULTURE_POSITIVE_RESULTS_ED_NODES = [
         type: 'question',
         module: 5,
         title: 'Wound Culture — Context',
-        body: '**Critical principle: surface wound swabs often show colonizers, not pathogens.** [19]\n\n**If patient is improving on empiric therapy + culture shows unexpected organism → continue current therapy.**\n\n**Recall and change ONLY if:** not improving, clearly resistant organism (e.g., MRSA on PCN), unusual pathogen.\n\n[SSTI Treatment Map](#/info/cpr-ssti-treat)\n\n**Wound type?**',
+        body: '**Critical principle: surface wound swabs often show colonizers, not pathogens.** [19]\n\n**If patient is improving on empiric therapy + culture shows unexpected organism → continue current therapy.**\n\n**Recall and change ONLY if:** not improving, clearly resistant organism (e.g., MRSA on PCN), unusual pathogen.\n\n**Wound type?**',
         citation: [19],
         options: [
             { label: 'Cellulitis (non-purulent SSTI)', description: 'Strep more likely; surface swabs misleading', next: 'cpr-cellulitis' },
@@ -577,7 +577,7 @@ export const CULTURE_POSITIVE_RESULTS_ED_NODES = [
         type: 'question',
         module: 7,
         title: 'Stool Culture — Pathogen Type',
-        body: '**Bacterial pathogen identification drives treatment decisions:** [24]\n\n[Stool Pathogen Treatment Map](#/info/cpr-stool-treat)',
+        body: '**Bacterial pathogen identification drives treatment decisions:** [24]',
         citation: [24],
         options: [
             { label: 'Salmonella (non-typhi)', description: 'Most patients do NOT need treatment', next: 'cpr-salmonella' },
@@ -686,7 +686,7 @@ export const CULTURE_POSITIVE_RESULTS_ED_NODES = [
         type: 'question',
         module: 7,
         title: 'C. difficile — Interpret Result',
-        body: '**Diagnostic interpretation:** [25]\n• NAAT alone insufficient — can detect colonizers\n• NAAT + toxin EIA positive = true CDI\n• Symptomatic + both positive = treat\n• NAAT positive / toxin negative + asymptomatic = likely colonizer, do NOT treat\n• Patient with NO diarrhea (≥3 unformed stools/24h) — do NOT test or treat\n\n[CDI Severity Calculator](#/info/cpr-cdiff-severity)',
+        body: '**Diagnostic interpretation:** [25]\n• NAAT alone insufficient — can detect colonizers\n• NAAT + toxin EIA positive = true CDI\n• Symptomatic + both positive = treat\n• NAAT positive / toxin negative + asymptomatic = likely colonizer, do NOT treat\n• Patient with NO diarrhea (≥3 unformed stools/24h) — do NOT test or treat\n\n[CDI Severity Calculator](#/node/cpr-cdiff-severity)',
         citation: [25],
         options: [
             { label: 'CDI confirmed + initial episode', description: 'Severity-based Rx', next: 'cpr-cdiff-severity' },

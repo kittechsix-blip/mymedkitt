@@ -27,7 +27,7 @@ export const PERICARDITIS_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Pericarditis — Diagnostic Criteria',
-    body: '[Pericarditis Steps Summary](#/info/pericarditis-steps)\n\n**Diagnosis requires ≥2 of 4 criteria:** [1][2]\n\n| Criterion | Sensitivity |\n|-----------|-------------|\n| **Chest pain** — sharp, pleuritic, positional (better sitting forward) | ~85-90% |\n| **Pericardial friction rub** — scratchy, 3-component (best at LLSB, leaning forward) | ~30% |\n| **ECG changes** — diffuse ST elevation with PR depression | ~60% |\n| **Pericardial effusion** — new or worsening on echo | ~60% |\n\n**Supporting findings:**\n• Elevated inflammatory markers (CRP, ESR, WBC)\n• Elevated troponin suggests myopericarditis\n• Recent viral illness, post-MI, post-cardiac surgery',
+    body: '**Diagnosis requires ≥2 of 4 criteria:** [1][2]\n\n| Criterion | Sensitivity |\n|-----------|-------------|\n| **Chest pain** — sharp, pleuritic, positional (better sitting forward) | ~85-90% |\n| **Pericardial friction rub** — scratchy, 3-component (best at LLSB, leaning forward) | ~30% |\n| **ECG changes** — diffuse ST elevation with PR depression | ~60% |\n| **Pericardial effusion** — new or worsening on echo | ~60% |\n\n**Supporting findings:**\n• Elevated inflammatory markers (CRP, ESR, WBC)\n• Elevated troponin suggests myopericarditis\n• Recent viral illness, post-MI, post-cardiac surgery',
     citation: [1, 2, 3],
     calculatorLinks: [
       { id: 'pericarditis-diagnostic', label: 'Diagnostic Criteria' },

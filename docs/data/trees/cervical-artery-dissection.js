@@ -25,9 +25,7 @@ export const CERVICAL_ARTERY_DISSECTION_NODES = [
         citation: [1, 2],
         calculatorLinks: [
             { id: 'nihss-calculator', label: 'NIH Stroke Scale' },
-            { id: 'strangulation-danger', label: 'Strangulation Danger Score' },
             { id: 'cervical-artery-dissection', label: 'Neck Injury Assessment', kind: 'tree', node: 'cad-strangulation' },
-            { id: 'ipv-safety-plan', label: 'IPV Safety Planning' },
         ],
         next: 'cad-mechanism',
         summary: 'Non-fatal strangulation is a major risk factor — symptoms may delay 24-72 hours',

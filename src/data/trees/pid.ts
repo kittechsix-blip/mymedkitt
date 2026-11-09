@@ -17,7 +17,7 @@ export const PID_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'PID — Clinical Diagnosis',
-    body: '[PID Steps Summary](#/info/pid-steps)\n\n**Pelvic inflammatory disease** is infection of the upper genital tract (uterus, fallopian tubes, ovaries, peritoneum).\n\n**CDC 2021 Minimum Criteria** — treat if ALL present:\n• Sexually active female\n• Pelvic or lower abdominal pain\n• **Cervical motion tenderness**, OR\n• **Uterine tenderness**, OR\n• **Adnexal tenderness** (unilateral or bilateral)\n\nLow threshold to treat — missed PID leads to serious sequelae (infertility, ectopic pregnancy, chronic pelvic pain).',
+    body: '**Pelvic inflammatory disease** is infection of the upper genital tract (uterus, fallopian tubes, ovaries, peritoneum).\n\n**CDC 2021 Minimum Criteria** — treat if ALL present:\n• Sexually active female\n• Pelvic or lower abdominal pain\n• **Cervical motion tenderness**, OR\n• **Uterine tenderness**, OR\n• **Adnexal tenderness** (unilateral or bilateral)\n\nLow threshold to treat — missed PID leads to serious sequelae (infertility, ectopic pregnancy, chronic pelvic pain).',
     citation: [1, 2],
     calculatorLinks: [
       { id: 'pid-criteria', label: 'CDC PID Criteria' },
@@ -125,7 +125,7 @@ export const PID_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Risk Assessment — Inpatient vs Outpatient',
-    body: '[PID Admission Criteria](#/info/pid-admission)\n\n**CDC criteria for hospitalization:**\n• Surgical emergency cannot be excluded (ectopic, appendicitis)\n• Tubo-ovarian abscess present\n• Pregnancy\n• Severe illness (high fever, nausea/vomiting, severe pain)\n• Unable to tolerate or follow outpatient regimen\n• No clinical response to oral antibiotics within 72 hours\n\n**Additional considerations:**\n• Immunocompromised (HIV with low CD4)\n• IUD in place (consider removal)\n• Adolescent (compliance concerns)',
+    body: '**CDC criteria for hospitalization:**\n• Surgical emergency cannot be excluded (ectopic, appendicitis)\n• Tubo-ovarian abscess present\n• Pregnancy\n• Severe illness (high fever, nausea/vomiting, severe pain)\n• Unable to tolerate or follow outpatient regimen\n• No clinical response to oral antibiotics within 72 hours\n\n**Additional considerations:**\n• Immunocompromised (HIV with low CD4)\n• IUD in place (consider removal)\n• Adolescent (compliance concerns)',
     citation: [1, 2],
     options: [
       {
@@ -153,7 +153,7 @@ export const PID_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Outpatient Treatment — CDC 2021',
-    body: '[CDC PID Treatment Regimens](#/info/pid-treatment)\n\n**Recommended regimen:**\n\n**[Ceftriaxone](#/drug/ceftriaxone/pid) 500 mg IM × 1 dose**\n(If weight ≥150 kg: 1 g IM)\n\n**PLUS**\n\n**[Doxycycline](#/drug/doxycycline/pid) 100 mg PO BID × 14 days**\n\n**PLUS**\n\n**[Metronidazole](#/drug/metronidazole/pid) 500 mg PO BID × 14 days**\n\n---\n\n**Metronidazole rationale:**\n• Covers anaerobes and BV organisms\n• CDC recommends adding for all PID (previously optional)\n• Essential if BV on wet prep or TOA concern',
+    body: '**Recommended regimen:**\n\n**[Ceftriaxone](#/drug/ceftriaxone/pid) 500 mg IM × 1 dose**\n(If weight ≥150 kg: 1 g IM)\n\n**PLUS**\n\n**[Doxycycline](#/drug/doxycycline/pid) 100 mg PO BID × 14 days**\n\n**PLUS**\n\n**[Metronidazole](#/drug/metronidazole/pid) 500 mg PO BID × 14 days**\n\n---\n\n**Metronidazole rationale:**\n• Covers anaerobes and BV organisms\n• CDC recommends adding for all PID (previously optional)\n• Essential if BV on wet prep or TOA concern',
     citation: [1],
     treatment: {
       firstLine: {
@@ -205,7 +205,7 @@ export const PID_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Partner Treatment',
-    body: '[Partner Treatment Card](#/info/pid-partner)\n\n**All sexual partners within past 60 days must be treated.**\n\n**Partner regimen (for GC/CT):**\n• [Ceftriaxone](#/drug/ceftriaxone/gc) 500 mg IM × 1\n• [Doxycycline](#/drug/doxycycline/ct) 100 mg PO BID × 7 days\n\n**Expedited partner therapy (EPT):**\n• Legal in most states\n• Provide prescription or medication for partner(s)\n• Alternative when partner unlikely to seek care\n\n**Counseling:**\n• Partners should be treated even if asymptomatic\n• Abstain until both partners complete treatment\n• Use condoms consistently after treatment\n\n**Reporting:**\n• GC and CT are reportable diseases\n• Health department may assist with partner notification',
+    body: '**All sexual partners within past 60 days must be treated.**\n\n**Partner regimen (for GC/CT):**\n• [Ceftriaxone](#/drug/ceftriaxone/gc) 500 mg IM × 1\n• [Doxycycline](#/drug/doxycycline/ct) 100 mg PO BID × 7 days\n\n**Expedited partner therapy (EPT):**\n• Legal in most states\n• Provide prescription or medication for partner(s)\n• Alternative when partner unlikely to seek care\n\n**Counseling:**\n• Partners should be treated even if asymptomatic\n• Abstain until both partners complete treatment\n• Use condoms consistently after treatment\n\n**Reporting:**\n• GC and CT are reportable diseases\n• Health department may assist with partner notification',
     citation: [1],
     next: 'pid-disposition',
 

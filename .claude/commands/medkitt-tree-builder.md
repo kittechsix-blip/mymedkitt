@@ -124,13 +124,12 @@ Post-build audits must inspect every image:
 
 ## Registration Steps (after creating the tree file)
 
-1. **`src/data/trees/index.ts`** — add export line
-2. **`src/data/categories.ts`** — add to category's `decisionTrees` array (+ cross-listing if needed)
-3. **`src/services/tree-service.ts`** — add to `TREE_IMPORTS` map
-4. **`scripts/generate-supabase-sql.mjs`** — add to `TREE_REGISTRY` and `CROSS_LISTINGS`
-5. **`src/data/drug-store.ts`** — add new drugs, update existing drugs with new dosing
-6. **`src/data/info-pages.ts`** — add info pages, register in `INFO_PAGES` map
-7. **`src/components/calculator.ts`** — add new calculators to `CALCULATORS` map
+1. **`src/data/categories.ts`** — add to category's `decisionTrees` array (+ cross-listing if needed)
+2. **`src/services/tree-service.ts`** — add to `TREE_IMPORTS` map
+3. **`scripts/tree-registry.mjs`** — add to `TREE_REGISTRY` (use the category the consult is listed under in `categories.ts`); cross-listings go in `CROSS_LISTINGS` in both `scripts/supabase-push.mjs` and `scripts/generate-supabase-sql.mjs`
+4. **`src/data/drug-store.ts`** — add new drugs, update existing drugs with new dosing
+5. **`src/data/info-pages.ts`** — add info pages, register in `INFO_PAGES` map
+6. **`src/components/calculator.ts`** — add new calculators to `CALCULATORS` map
 
 ## Deploy After Building
 

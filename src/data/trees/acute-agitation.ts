@@ -26,7 +26,7 @@ export const ACUTE_AGITATION_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Acute Agitation',
-    body: '[Steps Summary](#/info/agit-steps)\n\n**Is patient an IMMEDIATE DANGER to self, staff, or others?**\n\nAssess: Combative? Threatening? Attempting to leave AMA? Unable to cooperate with any care?',
+    body: '**Is patient an IMMEDIATE DANGER to self, staff, or others?**\n\nAssess: Combative? Threatening? Attempting to leave AMA? Unable to cooperate with any care?',
     options: [
       { label: 'Yes — immediate danger', description: 'Combative, violent, cannot de-escalate', next: 'agit-immediate-danger', urgency: 'critical' },
       { label: 'No — agitated but not violent', description: 'Pacing, yelling, but not attacking', next: 'agit-deescalate' },

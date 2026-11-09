@@ -203,7 +203,7 @@ export const SPORTS_INJURIES_NODES = [
         type: 'info',
         module: 4,
         title: 'Knee plain films + targeted exam',
-        body: 'AP, lateral, and skyline patellar views. Add tibial plateau views if posterolateral pain or high-energy mechanism (Lipscomb sign).\n\n**If fracture present:**\n- Tibial plateau / patella displaced → orthopedics\n- Avulsion fragment with knee instability → consider Segond fracture (pathognomonic for ACL tear)\n- Open fracture → see [vascular pathway](#/info/sports-vascular)\n\n**If no fracture but clinically unstable (positive Lachman or pivot shift):** MRI as outpatient within 1 week.[9,10]',
+        body: 'AP, lateral, and skyline patellar views. Add tibial plateau views if posterolateral pain or high-energy mechanism (Lipscomb sign).\n\n**If fracture present:**\n- Tibial plateau / patella displaced → orthopedics\n- Avulsion fragment with knee instability → consider Segond fracture (pathognomonic for ACL tear)\n- Open fracture → see [vascular pathway](#/node/sports-vascular)\n\n**If no fracture but clinically unstable (positive Lachman or pivot shift):** MRI as outpatient within 1 week.[9,10]',
         citation: [9, 10],
         next: 'sports-knee-exam',
         safetyLevel: 'warning',

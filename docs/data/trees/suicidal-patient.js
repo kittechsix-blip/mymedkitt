@@ -18,7 +18,7 @@ export const SUICIDAL_PATIENT_NODES = [
         type: 'info',
         module: 1,
         title: 'Suicidal Patient',
-        body: '[Steps Summary](#/info/sui-steps)\n\n**Why screening matters:**\n• 50% of suicide decedents seen in healthcare within 30 days of death\n• 80% deny suicidal ideation at last visit\n• Universal screening detects at-risk patients\n\n**Joint Commission NPSG 15.01.01:**\nScreen ALL patients using validated tool.',
+        body: '**Why screening matters:**\n• 50% of suicide decedents seen in healthcare within 30 days of death\n• 80% deny suicidal ideation at last visit\n• Universal screening detects at-risk patients\n\n**Joint Commission NPSG 15.01.01:**\nScreen ALL patients using validated tool.',
         citation: [1, 2],
         next: 'sui-safety',
         summary: '50% of suicide decedents seen in healthcare within 30 days. Universal screening required.',

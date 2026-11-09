@@ -870,11 +870,9 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'on-hub-stop' },
   ],
   'optic-neuritis': [
-    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'optic-neuritis-steps-summary' },
     { id: 'atypical', label: 'Red Flags', icon: '🚩', action: 'jump', target: 'on-atypical' },
     { id: 'rescue', label: 'Rescue', icon: '💉', action: 'jump', target: 'on-acute-rx' },
     { id: 'imaging', label: 'Imaging', icon: '🔬', action: 'jump', target: 'on-mri' },
-    { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'optic-neuritis-stop' },
   ],
   'dental-pain-hub': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dp-steps' },
@@ -1667,7 +1665,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'systemic', label: 'Systemic', icon: '💉', action: 'jump', target: 'marine-systemic' },
   ],
   'terrestrial-envenomation': [
-    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'te-steps-summary' },
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'te-steps-summary' },
     { id: 'spider', label: 'Spider', icon: '🕷️', action: 'jump', target: 'te-spider-which' },
     { id: 'scorpion', label: 'Scorpion', icon: '🦂', action: 'jump', target: 'te-scorpion-grade' },
     { id: 'anascorp', label: 'Anascorp', icon: '💉', action: 'jump', target: 'te-scorpion-tx' },
@@ -1728,7 +1726,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'abx-debate', label: 'Abx Debate', icon: '⚖️', action: 'jump', target: 'stec-abx-controversy' },
   ],
   'peds-hypertensive-emergency': [
-    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'phe-steps-summary' },
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'phe-steps-summary' },
     { id: 'map', label: 'MAP Calc', icon: '🧮', action: 'calculator', target: 'map-calculator' },
     { id: '25-rule', label: '25% Rule', icon: '📉', action: 'jump', target: 'phe-bp-reduction-rule' },
     { id: 'iv-tx', label: 'IV Rx', icon: '💉', action: 'jump', target: 'phe-tx-emergency' },
@@ -1736,7 +1734,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'secondary', label: 'Secondary', icon: '🔍', action: 'jump', target: 'phe-secondary-causes' },
   ],
   'peds-appendicitis': [
-    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'pa-steps-summary' },
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'pa-steps-summary' },
     { id: 'pas', label: 'PAS Calc', icon: '🧮', action: 'calculator', target: 'peds-appendicitis-score' },
     { id: 'imaging', label: 'Imaging', icon: '🩻', action: 'jump', target: 'pa-imaging-strategy' },
     { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'jump', target: 'pa-antibiotics' },
@@ -1744,14 +1742,14 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'pitfalls', label: 'Pitfalls', icon: '⚠️', action: 'jump', target: 'pa-pitfalls' },
   ],
   'adult-pharyngitis': [
-    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'ap-steps-summary' },
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'ap-steps-summary' },
     { id: 'centor', label: 'Centor/McIsaac', icon: '🧮', action: 'calculator', target: 'centor-mcisaac-score' },
     { id: 'abx', label: 'Abx', icon: '💊', action: 'jump', target: 'ap-abx-first-line' },
     { id: 'pcn-alt', label: 'PCN Alt', icon: '🚫', action: 'jump', target: 'ap-abx-pcn-allergy' },
     { id: 'mimics', label: 'Mimics', icon: '⚠️', action: 'jump', target: 'ap-mimics-screen' },
   ],
   'peds-electrolyte-emergencies': [
-    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'pee-steps-summary' },
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'pee-steps-summary' },
     { id: 'corr-na', label: 'Corr Na', icon: '🧮', action: 'calculator', target: 'corrected-na' },
     { id: 'fwd', label: 'FW Deficit', icon: '💧', action: 'calculator', target: 'fwd' },
     { id: 'corr-ca', label: 'Corr Ca', icon: '🦴', action: 'calculator', target: 'corrected-calcium' },
@@ -1926,7 +1924,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'catholic', label: 'Catholic', icon: '✝️', action: 'overlay', target: 'ec-catholic-protocol' },
   ],
   'urinary-sphincter': [
-    { id: 'cauda', label: 'CES Flags', icon: '🚩', action: 'overlay', target: 'cauda-equina-red-flags' },
+    { id: 'cauda', label: 'CES Flags', icon: '🚩', action: 'calculator', target: 'cauda-equina-red-flags' },
     { id: 'pvr', label: 'PVR', icon: '📊', action: 'jump', target: 'sphincter-pvr' },
     { id: 'cath', label: 'Catheter', icon: '🔧', action: 'jump', target: 'sphincter-cath-technique' },
     { id: 'neuro', label: 'Neuro Exam', icon: '🔍', action: 'jump', target: 'sphincter-neuro-exam' },
@@ -2544,18 +2542,12 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'dispo', label: 'Dispo', icon: '🏥', action: 'jump', target: 'wct-disposition' },
   ],
   'gallbladder': [
-    { id: 'murphy', label: "Murphy's", icon: '👆', action: 'overlay', target: 'gb-murphy' },
-    { id: 'tokyo', label: 'Tokyo', icon: '📊', action: 'overlay', target: 'gb-tokyo' },
-    { id: 'pocus', label: 'POCUS', icon: '📷', action: 'overlay', target: 'gb-pocus' },
-    { id: 'abx', label: 'Antibiotics', icon: '💊', action: 'overlay', target: 'gb-abx' },
-    { id: 'ercp', label: 'ERCP', icon: '🔬', action: 'overlay', target: 'gb-ercp' },
+    { id: 'ercp', label: 'ERCP', icon: '🔬', action: 'jump', target: 'gb-ercp' },
   ],
   'post-tonsillectomy-bleed': [
-    { id: 'severity', label: 'Severity', icon: '📊', action: 'overlay', target: 'pth-severity' },
-    { id: 'txa', label: 'TXA', icon: '💉', action: 'overlay', target: 'pth-txa' },
-    { id: 'hemostasis', label: 'Hemostasis', icon: '🩹', action: 'overlay', target: 'pth-hemostasis' },
-    { id: 'airway', label: 'Airway', icon: '🫁', action: 'overlay', target: 'pth-airway' },
-    { id: 'transfusion', label: 'Transfuse', icon: '🩸', action: 'overlay', target: 'pth-transfusion' },
+    { id: 'severity', label: 'Severity', icon: '📊', action: 'jump', target: 'pth-severity' },
+    { id: 'txa', label: 'TXA', icon: '💉', action: 'jump', target: 'pth-txa' },
+    { id: 'airway', label: 'Airway', icon: '🫁', action: 'jump', target: 'pth-airway' },
   ],
   'critical-care-drips': [
     { id: 'vasopressors', label: 'Pressors', icon: '💉', action: 'jump', target: 'ccd-vasopressor-overview' },
@@ -2581,7 +2573,6 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'taco-trali', label: 'TACO/TRALI', icon: '🫁', action: 'jump', target: 'bt-taco-trali' },
     { id: 'txa', label: 'TXA', icon: '💉', action: 'jump', target: 'bt-txa' },
     { id: 'calcium', label: 'Calcium', icon: '🦴', action: 'jump', target: 'bt-calcium' },
-    { id: 'consent', label: 'Consent', icon: '📝', action: 'overlay', target: 'bt-consent' },
   ],
   'peripheral-neuropathy': [
     { id: 'fvc-nif', label: 'FVC/NIF', icon: '🫁', action: 'calculator', target: 'gbs-fvc-nif' },

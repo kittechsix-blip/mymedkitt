@@ -30,12 +30,6 @@ export const HUMAN_TRAFFICKING_NODES: DecisionNode[] = [
     title: 'Human Trafficking Screening',
     body: '**Human trafficking occurs in every community** — including yours.\n\n**Definition:** Use of force, fraud, or coercion to exploit a person for labor or commercial sex. For minors, ANY commercial sex is trafficking regardless of force/fraud/coercion.\n\n**Two main types:**\n• **Sex trafficking** — commercial sex acts induced by force, fraud, or coercion\n• **Labor trafficking** — forced labor through similar means\n\n**ED relevance:** 88% of trafficking victims access healthcare while being trafficked, often in EDs. You may be the only person who can help. [4][6][11]',
     citation: [4, 6, 11],
-    calculatorLinks: [
-      { id: 'trafficking-red-flags', label: 'Trafficking Red Flags' },
-      { id: 'vera-screen', label: 'VERA Screening Tool' },
-      { id: 'safety-assessment', label: 'Safety Assessment' },
-      { id: 'hotline-resources', label: 'Hotline & Resources' },
-    ],
     next: 'ht-who',
     summary: 'ED may be the only healthcare contact for trafficking victims — screen with universal protocol',
   },

@@ -27,7 +27,7 @@ export const PTH_NODES = [
         type: 'info',
         module: 1,
         title: 'Post-Tonsillectomy Hemorrhage',
-        body: '[PTH Overview](#/info/pth-overview)\n\n**Definition:** Bleeding from tonsillar fossa following tonsillectomy\n\n**Incidence:**\n• Overall: 0.1-7.5% (average ~4.2%)\n• Primary (<24h): 0.1-1%\n• Secondary (days 5-10): 1.5-4.3% — more common\n• Lethal hemorrhage: 7 per 100,000\n\n**⚠️ CRITICAL CONCEPT:**\n**Primary risk is ASPIRATION, not exsanguination**\n• Most deaths from airway compromise, not blood loss\n• Children compensate until 40% blood loss, then rapid decompensation\n\n**Three-Pronged Approach:**\n1. **Resuscitation** — IV access, fluids, blood products if needed\n2. **Temporizing measures** — Stop further bleeding\n3. **ENT consultation** — Early involvement critical',
+        body: '**Definition:** Bleeding from tonsillar fossa following tonsillectomy\n\n**Incidence:**\n• Overall: 0.1-7.5% (average ~4.2%)\n• Primary (<24h): 0.1-1%\n• Secondary (days 5-10): 1.5-4.3% — more common\n• Lethal hemorrhage: 7 per 100,000\n\n**⚠️ CRITICAL CONCEPT:**\n**Primary risk is ASPIRATION, not exsanguination**\n• Most deaths from airway compromise, not blood loss\n• Children compensate until 40% blood loss, then rapid decompensation\n\n**Three-Pronged Approach:**\n1. **Resuscitation** — IV access, fluids, blood products if needed\n2. **Temporizing measures** — Stop further bleeding\n3. **ENT consultation** — Early involvement critical',
         citation: [1, 2],
         next: 'pth-initial',
         summary: 'PTH: primary <24h (0.1-1%), secondary days 5-10 (1.5-4.3%); main risk is ASPIRATION not exsanguination',
@@ -103,7 +103,7 @@ export const PTH_NODES = [
         type: 'question',
         module: 2,
         title: 'Bleeding Severity Assessment',
-        body: '[Severity Classification](#/info/pth-severity)\n\n**Grade-Based Classification:**\n\n**Grade 0 (Non-hemorrhagic):** 80.8% of cases\n• Concern for bleeding but none visualized\n\n**Grade 1 (Minor):** 11.9%\n• Blood-tinged sputum\n• Small amount of blood in mouth\n• No active oozing\n\n**Grade 2 (Moderate):** 6.0%\n• Active oozing from tonsillar fossa\n• Frank blood in mouth\n• Hemodynamically stable\n\n**Grade 3 (Severe):** 1.3%\n• Brisk, active hemorrhage\n• Fresh clot in tonsillar fossa\n• Hemodynamic instability\n\n**Rebleed Risk:**\n• Blood-tinged sputum: 10.2% rebleed\n• Fresh clot in fossa: **17.3% rebleed**\n\n**What is the severity?**',
+        body: '**Grade-Based Classification:**\n\n**Grade 0 (Non-hemorrhagic):** 80.8% of cases\n• Concern for bleeding but none visualized\n\n**Grade 1 (Minor):** 11.9%\n• Blood-tinged sputum\n• Small amount of blood in mouth\n• No active oozing\n\n**Grade 2 (Moderate):** 6.0%\n• Active oozing from tonsillar fossa\n• Frank blood in mouth\n• Hemodynamically stable\n\n**Grade 3 (Severe):** 1.3%\n• Brisk, active hemorrhage\n• Fresh clot in tonsillar fossa\n• Hemodynamic instability\n\n**Rebleed Risk:**\n• Blood-tinged sputum: 10.2% rebleed\n• Fresh clot in fossa: **17.3% rebleed**\n\n**What is the severity?**',
         citation: [2, 4],
         options: [
             {
@@ -178,7 +178,7 @@ export const PTH_NODES = [
         type: 'question',
         module: 3,
         title: 'Hemostatic Intervention',
-        body: '[Hemostatic Options](#/info/pth-hemostasis)\n\n**Available Interventions:**\n\n**1. Silver Nitrate Cautery:**\n• 81.4% initial control\n• But 19.3% rebleed → still need OR\n• Best for: older cooperative children, non-brisk bleeding\n• NOT for active hemorrhage or fresh clot\n\n**2. Tranexamic Acid (TXA):**\n• Emerging evidence — increasingly used\n• IV or nebulized\n• May reduce need for operative management\n• See TXA protocol\n\n**3. Direct Pressure:**\n• Difficult in children\n• May temporize before OR\n\n**Which approach?**',
+        body: '**Available Interventions:**\n\n**1. Silver Nitrate Cautery:**\n• 81.4% initial control\n• But 19.3% rebleed → still need OR\n• Best for: older cooperative children, non-brisk bleeding\n• NOT for active hemorrhage or fresh clot\n\n**2. Tranexamic Acid (TXA):**\n• Emerging evidence — increasingly used\n• IV or nebulized\n• May reduce need for operative management\n• See TXA protocol\n\n**3. Direct Pressure:**\n• Difficult in children\n• May temporize before OR\n\n**Which approach?**',
         citation: [5, 8, 9],
         options: [
             {
@@ -215,7 +215,7 @@ export const PTH_NODES = [
         type: 'result',
         module: 4,
         title: 'Tranexamic Acid (TXA) Protocol',
-        body: '[TXA Dosing](#/info/pth-txa)\n\n**⚡ EMERGING EVIDENCE — Increasingly Used**\n\n**Mechanism:** Antifibrinolytic — stabilizes clot\n\n**Dosing (Weight-Based):**\n\n**IV Administration:**\n• 10-15 mg/kg IV bolus (max 1000mg)\n• Can repeat q8h (max 30 mg/kg/day or 3000mg/day)\n\n**Nebulized (for active hemorrhage):**\n• 500mg in 5mL NS\n• Nebulize over 15-20 minutes\n• Case reports show effectiveness\n\n**Evidence:**\n• Perioperative TXA reduces intraoperative blood loss\n• Therapeutic use in PTH: growing single-center data shows decreased OR need\n• 2024-2025 scoping reviews support use\n• NOT yet in AAO-HNS guidelines but evidence accumulating\n\n**Safety:**\n• No increase in thromboembolic events in pediatric data\n• Seizure risk is dose-dependent with identifiable risk factors\n\n**Contraindications:**\n• Active thromboembolic disease\n• History of seizures (relative)\n• Subarachnoid hemorrhage',
+        body: '**⚡ EMERGING EVIDENCE — Increasingly Used**\n\n**Mechanism:** Antifibrinolytic — stabilizes clot\n\n**Dosing (Weight-Based):**\n\n**IV Administration:**\n• 10-15 mg/kg IV bolus (max 1000mg)\n• Can repeat q8h (max 30 mg/kg/day or 3000mg/day)\n\n**Nebulized (for active hemorrhage):**\n• 500mg in 5mL NS\n• Nebulize over 15-20 minutes\n• Case reports show effectiveness\n\n**Evidence:**\n• Perioperative TXA reduces intraoperative blood loss\n• Therapeutic use in PTH: growing single-center data shows decreased OR need\n• 2024-2025 scoping reviews support use\n• NOT yet in AAO-HNS guidelines but evidence accumulating\n\n**Safety:**\n• No increase in thromboembolic events in pediatric data\n• Seizure risk is dose-dependent with identifiable risk factors\n\n**Contraindications:**\n• Active thromboembolic disease\n• History of seizures (relative)\n• Subarachnoid hemorrhage',
         citation: [5, 9, 10],
         recommendation: 'TXA 10-15 mg/kg IV (max 1g) or 500mg nebulized. Emerging evidence supports use. May reduce OR need.',
         confidence: 'recommended',
@@ -229,7 +229,7 @@ export const PTH_NODES = [
         type: 'info',
         module: 5,
         title: 'Airway Considerations',
-        body: '[PTH Airway](#/info/pth-airway)\n\n**⚠️ MOST DEATHS FROM ASPIRATION, NOT EXSANGUINATION**\n\nFatality analysis: aspiration contributed to ~50% of deaths.\n\n**Pre-Intubation:**\n• Keep upright if conscious (reduces aspiration)\n• Suction immediately available\n• Avoid manipulation that dislodges clots\n• Senior provider should intubate\n\n**Difficult Intubation Risk:**\n• 2.7% in surgical cohort\n• Usually due to blood in upper airway, not anatomic\n• Hypoxia during induction MORE common than aspiration in peds\n\n**Approach Options:**\n\n**1. RSI with Cricoid Pressure (Traditional):**\n• Standard approach\n• Risk of hypoxia during apnea\n\n**2. Controlled RSI with Gentle Mask Ventilation:**\n• Low-pressure (<12 cmH2O) ventilation before laryngoscopy\n• May be preferred for slow venous bleed\n• Avoids apnea, allows oxygenation\n\n**Equipment Ready:**\n• Video laryngoscope\n• Bougie\n• Suction (working)\n• Difficult airway cart\n• Surgical airway backup (rare but possible)',
+        body: '**⚠️ MOST DEATHS FROM ASPIRATION, NOT EXSANGUINATION**\n\nFatality analysis: aspiration contributed to ~50% of deaths.\n\n**Pre-Intubation:**\n• Keep upright if conscious (reduces aspiration)\n• Suction immediately available\n• Avoid manipulation that dislodges clots\n• Senior provider should intubate\n\n**Difficult Intubation Risk:**\n• 2.7% in surgical cohort\n• Usually due to blood in upper airway, not anatomic\n• Hypoxia during induction MORE common than aspiration in peds\n\n**Approach Options:**\n\n**1. RSI with Cricoid Pressure (Traditional):**\n• Standard approach\n• Risk of hypoxia during apnea\n\n**2. Controlled RSI with Gentle Mask Ventilation:**\n• Low-pressure (<12 cmH2O) ventilation before laryngoscopy\n• May be preferred for slow venous bleed\n• Avoids apnea, allows oxygenation\n\n**Equipment Ready:**\n• Video laryngoscope\n• Bougie\n• Suction (working)\n• Difficult airway cart\n• Surgical airway backup (rare but possible)',
         citation: [6, 11],
         next: 'pth-ent-criteria',
         summary: 'Main risk = aspiration; 2.7% difficult intubation; senior provider; have VL/bougie/suction ready',
@@ -313,7 +313,7 @@ export const PTH_NODES = [
         type: 'info',
         module: 6,
         title: 'Blood Product Considerations',
-        body: '[Pediatric Transfusion](#/info/pth-transfusion)\n\n**Transfusion Thresholds (Pediatric):**\n\n**Standard (Stable, Not Actively Bleeding):**\n• Hemoglobin <7 g/dL\n• Post-transfusion goal: 7.0-9.5 g/dL\n\n**Active Bleeding/Shock:**\n• Hemoglobin <10 g/dL\n• More liberal threshold justified\n\n**Special Populations:**\n• Cyanotic heart disease: maintain >10 g/dL\n• Sickle cell: pre-op transfuse to 9-11.5 g/dL\n\n**Volume:**\n• 10-15 mL/kg pRBCs\n• Should raise Hgb ~2-3 g/dL\n\n**Most PTH patients do NOT require transfusion.**\n\n**Massive Transfusion (Rare):**\n• If >40 mL/kg pRBCs anticipated\n• Activate massive transfusion protocol\n• Consider FFP, platelets in 1:1:1 ratio',
+        body: '**Transfusion Thresholds (Pediatric):**\n\n**Standard (Stable, Not Actively Bleeding):**\n• Hemoglobin <7 g/dL\n• Post-transfusion goal: 7.0-9.5 g/dL\n\n**Active Bleeding/Shock:**\n• Hemoglobin <10 g/dL\n• More liberal threshold justified\n\n**Special Populations:**\n• Cyanotic heart disease: maintain >10 g/dL\n• Sickle cell: pre-op transfuse to 9-11.5 g/dL\n\n**Volume:**\n• 10-15 mL/kg pRBCs\n• Should raise Hgb ~2-3 g/dL\n\n**Most PTH patients do NOT require transfusion.**\n\n**Massive Transfusion (Rare):**\n• If >40 mL/kg pRBCs anticipated\n• Activate massive transfusion protocol\n• Consider FFP, platelets in 1:1:1 ratio',
         citation: [12],
         next: 'pth-observation',
         summary: 'Transfuse if Hgb <7 (stable) or <10 (bleeding); 10-15 mL/kg pRBCs; most PTH do NOT need transfusion',

@@ -18,7 +18,7 @@ export const PE_TREATMENT_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'PE Risk Stratification (2026)',
-    body: '[PE Treatment Summary](#/info/pe-steps)\n\nConfirmed or high-probability acute PE. **2026 AHA/ACC categories** replace old massive/submassive terminology.\n\nAssess **hemodynamic status** first:\n• SBP <90 or drop ≥40 mmHg for >15 min?\n• Signs of shock (altered mental status, cool extremities, oliguria)?\n• **Bradycardia (HR <40) = most ominous finding**\n• Bedside echo for RV strain\n• Troponin, BNP, lactate (>2 mM = 10% absolute mortality increase)\n\nUse [PESI](#/calculator/pesi) or [sPESI](#/calculator/spesi) for normotensive patients.',
+    body: 'Confirmed or high-probability acute PE. **2026 AHA/ACC categories** replace old massive/submassive terminology.\n\nAssess **hemodynamic status** first:\n• SBP <90 or drop ≥40 mmHg for >15 min?\n• Signs of shock (altered mental status, cool extremities, oliguria)?\n• **Bradycardia (HR <40) = most ominous finding**\n• Bedside echo for RV strain\n• Troponin, BNP, lactate (>2 mM = 10% absolute mortality increase)\n\nUse [PESI](#/calculator/pesi) or [sPESI](#/calculator/spesi) for normotensive patients.',
     citation: [1, 6],
     calculatorLinks: [
       { id: 'pesi', label: 'PESI Score' },
