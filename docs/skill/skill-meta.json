@@ -1,8 +1,8 @@
 {
   "skillVersion": "v0.1",
-  "buildVersion": "v0.1+20261109.e8af932",
+  "buildVersion": "v0.1+20261109.3329bca",
   "buildDate": "2026-11-09",
-  "appCommit": "e8af93224f1d2c8223e0c87074fa3cec4fa5bb2f",
+  "appCommit": "3329bcaf53b2fbf9d3d3037972494848788c1b3a",
   "dirty": false,
   "dirtyFiles": [],
   "shape": "coordinator",
