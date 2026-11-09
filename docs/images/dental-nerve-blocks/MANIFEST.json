@@ -115,5 +115,14 @@
     "andy_approval_commit": "approved-in-chat-2026-11-09-nerve-block-visual-guides (Andy reviewed generated images before release)",
     "sha256": "aef6dcbdd116f299b07dba70bcd2e0915d2bb9df348295dd5061ea671a72d5b7",
     "generation_note": "AI-generated: infraorbital landmark sequence. Generator tool not recorded in-repo. Anatomy can be misplaced by image models; each guide image is captioned as an approximate illustration that does not replace the written technique. Re-encoded PNG->JPEG q85 for mobile weight."
+  },
+  "ianb-landmarks-composite.jpg": {
+    "source_url": "Composite. Photo: taken by Andy (Kittech), original file not in repo. Lower plate: Netter, Atlas of Human Anatomy (Elsevier), captured as a screenshot.",
+    "license_tag": "NOT-LICENSED-NETTER-ELSEVIER-ANDY-OVERRIDE",
+    "license_evidence_url": "n/a - no license held for the Netter plate",
+    "retrieval_timestamp": "2026-11-09T00:00:00Z",
+    "andy_approval_commit": "approved-in-chat-2026-11-09 (Andy: \"do not delete the netters photo, add it, this is not being sold\" then \"ship it\")",
+    "sha256": "d9eca0585cbb2166dfaea4297b665f5a0e6bdd3bee00f244615ee73b238c850e",
+    "generation_note": "Photo, anatomy labels, raphe line and foramen dot are Andy's own work. The Netter plate is (c) Elsevier and is included UNLICENSED at Andy's explicit instruction; the app is distributed under an LLC, and a free release does not make it licensed. This entry deliberately uses a non-accepted license tag so validate-image-manifests flags it. Remove the plate if the rights holder objects. Edits to the source composite: Google image-viewer button painted out with surrounding hair texture, one stray 2px Pages artifact removed, white margins trimmed."
   }
 }
