@@ -28,6 +28,7 @@ import { removeContextualToolbar, hasContextualToolbar } from './components/cont
 import { showInfoModal } from './components/info-page.js';
 import { resolveNodeTreeId, setCurrentTreeId } from './services/node-resolver.js';
 import { initAppUpdates, scheduleCacheWarm } from './services/app-update.js';
+import { initOfflineBadge } from './components/offline-badge.js';
 
 // -------------------------------------------------------------------
 // Service Worker Registration
@@ -337,6 +338,7 @@ function handleNotFound(): void {
 
 async function init(): Promise<void> {
   registerServiceWorker();
+  initOfflineBadge();
 
   // Show splash screen while data loads
   const splashPromise = showSplashScreen();

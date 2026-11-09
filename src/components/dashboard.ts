@@ -13,6 +13,8 @@ import { showDrugModal } from './drug-store.js';
 import { showShareModal } from './share-modal.js';
 import { sinkTrack } from '../services/kittmd-analytics.js';
 import { rankBucket, resultBucket } from '../services/telemetry.js';
+import { getPins } from '../services/pins.js';
+import { getMostUsed, type UsedConsult } from '../services/consult-usage.js';
 
 /** Tool categories route to special pages instead of category view */
 const TOOL_ROUTES: Record<string, { route: string; getCount: () => number; unit: string }> = {
@@ -50,6 +52,70 @@ export function addRecentConsult(id: string, title: string, categoryId: string =
   recents.unshift({ id, title, categoryId, timestamp: Date.now() });
   if (recents.length > MAX_RECENTS) recents.length = MAX_RECENTS;
   localStorage.setItem(RECENTS_KEY, JSON.stringify(recents));
+}
+
+interface ConsultRowItem {
+  id: string;
+  title: string;
+  categoryId: string;
+}
+
+/** One consult tile (icon + label) shared by the Pinned, Most used and Recent rows. */
+function buildConsultItem(entry: ConsultRowItem, colors: ReturnType<typeof getCategoryColors>): HTMLElement {
+  const item = document.createElement('div');
+  item.className = 'dashboard-recent-item';
+
+  // Glassmorphic 3D icon with category color
+  const iconBox = document.createElement('div');
+  iconBox.className = 'dashboard-recent-item__icon dashboard-recent-item__icon--glass';
+  const catColor = colors[entry.categoryId || 'emergency-medicine'];
+  iconBox.style.background = buildSpecialtyGradient(catColor?.card || '#4a90d9');
+
+  // Medical cross SVG (static markup, no dynamic strings)
+  iconBox.innerHTML = `
+    <svg viewBox="0 0 24 24" class="dashboard-recent-item__cross">
+      <path d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2z" fill="currentColor"/>
+    </svg>
+  `;
+
+  const label = document.createElement('span');
+  label.className = 'dashboard-recent-item__label';
+  label.textContent = entry.title;
+
+  item.appendChild(iconBox);
+  item.appendChild(label);
+  item.addEventListener('click', () => {
+    router.navigate(`/tree/${entry.id}`);
+  });
+  return item;
+}
+
+/** A titled horizontal row of consult tiles, with an optional one-line hint. */
+function buildConsultRow(title: string, entries: ConsultRowItem[], hint?: string): HTMLElement {
+  const section = document.createElement('div');
+  section.className = 'dashboard-recents';
+
+  const header = document.createElement('div');
+  header.className = 'dashboard-recents__header';
+  const titleEl = document.createElement('span');
+  titleEl.className = 'dashboard-recents__title';
+  titleEl.textContent = title;
+  header.appendChild(titleEl);
+  section.appendChild(header);
+
+  if (hint) {
+    const hintEl = document.createElement('p');
+    hintEl.className = 'dashboard-recents__hint';
+    hintEl.textContent = hint;
+    section.appendChild(hintEl);
+  }
+
+  const scroll = document.createElement('div');
+  scroll.className = 'dashboard-recents__scroll';
+  const colors = getCategoryColors();
+  for (const entry of entries) scroll.appendChild(buildConsultItem(entry, colors));
+  section.appendChild(scroll);
+  return section;
 }
 
 // ===================================================================
@@ -247,63 +313,21 @@ export function renderDashboard(container: HTMLElement): void {
   };
   document.addEventListener('click', dashboardOutsideClick);
 
-  // ---- Recents Row ----
-  const recents = getRecents();
-  if (recents.length > 0) {
-    const recentsSection = document.createElement('div');
-    recentsSection.className = 'dashboard-recents';
-
-    const recentsHeader = document.createElement('div');
-    recentsHeader.className = 'dashboard-recents__header';
-
-    const recentsTitle = document.createElement('span');
-    recentsTitle.className = 'dashboard-recents__title';
-    recentsTitle.textContent = 'Recent';
-
-    recentsHeader.appendChild(recentsTitle);
-    recentsSection.appendChild(recentsHeader);
-
-    const recentsScroll = document.createElement('div');
-    recentsScroll.className = 'dashboard-recents__scroll';
-
-    const colors = getCategoryColors();
-
-    for (const recent of recents) {
-      const item = document.createElement('div');
-      item.className = 'dashboard-recent-item';
-
-      // Glassmorphic 3D icon with category color
-      const iconBox = document.createElement('div');
-      iconBox.className = 'dashboard-recent-item__icon dashboard-recent-item__icon--glass';
-
-      // Get category color and apply gradient
-      const catColor = colors[recent.categoryId || 'emergency-medicine'];
-      const baseColor = catColor?.card || '#4a90d9';
-      iconBox.style.background = buildSpecialtyGradient(baseColor);
-
-      // Medical cross SVG
-      iconBox.innerHTML = `
-        <svg viewBox="0 0 24 24" class="dashboard-recent-item__cross">
-          <path d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2z" fill="currentColor"/>
-        </svg>
-      `;
-
-      const label = document.createElement('span');
-      label.className = 'dashboard-recent-item__label';
-      label.textContent = recent.title;
-
-      item.appendChild(iconBox);
-      item.appendChild(label);
-
-      item.addEventListener('click', () => {
-        router.navigate(`/tree/${recent.id}`);
-      });
-
-      recentsScroll.appendChild(item);
+  // ---- Pinned / Most used / Recents rows ----
+  const pins = getPins();
+  let mostUsed: UsedConsult[] = [];
+  if (pins.length > 0) {
+    dashboard.appendChild(buildConsultRow('Pinned', pins));
+  } else {
+    mostUsed = getMostUsed();
+    if (mostUsed.length > 0) {
+      dashboard.appendChild(buildConsultRow('Most used', mostUsed, 'Pin a consult with the star to keep it here'));
     }
-
-    recentsSection.appendChild(recentsScroll);
-    dashboard.appendChild(recentsSection);
+  }
+  const mostUsedIds = new Set(mostUsed.map(m => m.id));
+  const recents = getRecents().filter(r => !mostUsedIds.has(r.id));
+  if (recents.length > 0) {
+    dashboard.appendChild(buildConsultRow('Recent', recents));
   }
 
   // ---- Chief Complaint Hubs hero card (sits ABOVE MedKitt Learn) ----

@@ -2,8 +2,9 @@
 // Thin wrapper around TreeEngine that maintains a cardStack[] for rendering
 // all answered + current cards simultaneously. TreeEngine is UNCHANGED.
 
-import { TreeEngine } from './tree-engine.js';
-import type { DecisionNode } from '../models/types.js';
+import { TreeEngine, SESSION_KEY } from './tree-engine.js';
+import { storageSet } from './storage.js';
+import type { DecisionNode, TreeSession } from '../models/types.js';
 
 export interface CardEntry {
   nodeId: string;
@@ -70,6 +71,18 @@ export class ConsultFlowController {
     }
 
     return true;
+  }
+
+  /** Deep copy of the live engine session (for Reset -> Undo), or null if none. */
+  snapshotSession(): TreeSession | null {
+    const session = this.engine.getSession();
+    return session ? (JSON.parse(JSON.stringify(session)) as TreeSession) : null;
+  }
+
+  /** Put a snapshot back into the persisted session and rebuild the card stack from it. */
+  restoreSnapshot(treeId: string, snapshot: TreeSession): boolean {
+    storageSet(SESSION_KEY, snapshot);
+    return this.restoreSession(treeId);
   }
 
   /** Select an option on the current (active) card */
