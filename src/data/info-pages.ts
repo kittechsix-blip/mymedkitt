@@ -30917,6 +30917,50 @@ const MRI_FOR_DUMMIES_STOP: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Frostbite (added 2026-11-09)
+// -------------------------------------------------------------------
+
+const FROSTBITE_SUMMARY_PAGE: InfoPage = {
+  id: 'frostbite-summary',
+  title: 'Frostbite: Steps Summary',
+  subtitle: 'Quick Reference',
+  sections: [
+    {
+      body: 'Stepwise approach to frostbite. Tap any step to jump to that section of the consult.',
+    },
+    {
+      heading: '1. Recognize',
+      body: '• [Frostnip vs frostbite; the clock starts at thaw](#/node/frostbite-start)\n• [Moderate or severe hypothermia first](#/node/frostbite-hypothermia-check)',
+    },
+    {
+      heading: '2. Rewarm',
+      body: '• [37-39 °C water until red/purple and pliable (~30 min), analgesia, ibuprofen, tetanus](#/node/frostbite-rewarm)\n• [Already thawed: no re-immersion](#/node/frostbite-thawed)',
+    },
+    {
+      heading: '3. Grade After Rewarming (Cauchy)',
+      body: '• [Grade 0-1 superficial, 2 middle phalanx, 3-5 proximal phalanx or beyond](#/node/frostbite-grade)',
+    },
+    {
+      heading: '4. Reperfusion',
+      body: '• [tPA within 24 h of thaw (best within 12 h) for grade 3+](#/node/frostbite-tpa)\n• [Iloprost (prostacyclin) up to 72 h, or when tPA is contraindicated](#/node/frostbite-iloprost)\n• [No capability here: transfer](#/node/frostbite-transfer)',
+    },
+    {
+      heading: '5-6. Wound Care and Compartments',
+      body: '• [Drain clear blisters, leave hemorrhagic ones; aloe vera](#/node/frostbite-wound)\n• [Compartment syndrome after thaw: fasciotomy](#/node/frostbite-compartment)',
+    },
+    {
+      heading: '7. Surgery and Disposition',
+      body: '• [Delay amputation 1-3 months until demarcation, unless sepsis](#/node/frostbite-surgery)\n• [Admit deep injury; transfer to a burn or frostbite centre](#/node/frostbite-dispo)',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'McIntosh SE, Freer L, Grissom CK, et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Frostbite: 2019 Update. Wilderness Environ Med. 2019;30(4S):S19-S32.' },
+    { num: 2, text: 'McIntosh SE, Freer L, Grissom CK, et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Frostbite: 2024 Update. Wilderness Environ Med. 2024;35(2):183-197.' },
+    { num: 3, text: 'AURLUMYN (iloprost) injection, for intravenous use. Prescribing information. US Food and Drug Administration; 2024.' },
+  ],
+};
+
+// -------------------------------------------------------------------
 // Staphylococcal Toxic Shock Syndrome
 // -------------------------------------------------------------------
 
@@ -31367,6 +31411,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'sjs-ten-em-compare': SJS_TEN_EM_COMPARE_PAGE,
   'sjs-ten-culprits': SJS_TEN_CULPRITS_PAGE,
   // Staphylococcal TSS
+  'frostbite-summary': FROSTBITE_SUMMARY_PAGE,
   'staph-tss-summary': STAPH_TSS_SUMMARY_PAGE,
   'staph-tss-cdc-criteria': STAPH_TSS_CDC_CRITERIA_PAGE,
   'staph-tss-vs-strep': STAPH_TSS_VS_STREP_PAGE,

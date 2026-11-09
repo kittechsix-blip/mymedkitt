@@ -1224,6 +1224,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'hypo-start',
       },
       {
+        id: 'frostbite',
+        title: 'Frostbite',
+        subtitle: 'Rewarming → Cauchy grade → tPA or iloprost → Wound care → Delayed amputation',
+        categoryId: 'emergency-medicine',
+        version: '1.0',
+        nodeCount: 19,
+        entryNodeId: 'frostbite-start',
+      },
+      {
         id: 'suicide-risk-assessment',
         title: 'Suicide Risk Assessment',
         subtitle: 'Screening → Risk Stratification → Safety Planning → Disposition → Special Populations',

@@ -264,6 +264,7 @@ export const TREE_REGISTRY = {
   'mri-for-dummies':  { prefix: 'MRI',                 entryNodeId: 'mri-start',          categoryId: 'us-rads' },
   'dfsa-workup':      { prefix: 'DFSA_WORKUP',         entryNodeId: 'dfsa-start',         categoryId: 'em' },
   'hypothermia':      { prefix: 'HYPOTHERMIA',         entryNodeId: 'hypo-start',         categoryId: 'em' },
+  'frostbite':        { prefix: 'FROSTBITE',           entryNodeId: 'frostbite-start',    categoryId: 'emergency-medicine' },
   'awake-intubation': { prefix: 'AWAKE_INTUBATION',    entryNodeId: 'awake-start',       categoryId: 'anesthesia-airway' },
   'ear-fb':           { prefix: 'EAR_FB',              entryNodeId: 'earfb-start',          categoryId: 'em' },
   'echo-views':       { prefix: 'ECHO_VIEWS',          entryNodeId: 'echo-views-start',           categoryId: 'us-rads' },

@@ -1569,6 +1569,13 @@ export const TOOLBAR_CONFIGS = {
         { id: 'complications', label: 'Complications', icon: '⚠️', action: 'jump', target: 'hs-complications' },
         { id: 'seizure', label: 'Seizure Rx', icon: '⚡', action: 'jump', target: 'hs-seizure-rx' },
     ],
+    'frostbite': [
+        { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'frostbite-summary', pinned: true },
+        { id: 'cauchy', label: 'Cauchy Grade', icon: '✋', action: 'calculator', target: 'frostbite-cauchy', pinned: true },
+        { id: 'reperfusion', label: 'tPA vs Iloprost', icon: '⏱️', action: 'calculator', target: 'frostbite-reperfusion', pinned: true },
+        { id: 'iloprost-rate', label: 'Iloprost Rate', icon: '💉', action: 'calculator', target: 'frostbite-iloprost-rate', pinned: true },
+        { id: 'rewarm', label: 'Rewarm', icon: '🌡️', action: 'jump', target: 'frostbite-rewarm', pinned: true },
+    ],
     'hypothermia': [
         { id: 'hypo-temp', label: 'Temp Convert', icon: '🌡️', action: 'calculator', target: 'hypo-temp-convert' },
         { id: 'hypo-key', label: 'Key Temps', icon: '🎯', action: 'calculator', target: 'hypo-key-temps' },

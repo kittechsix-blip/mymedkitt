@@ -399,7 +399,7 @@ const ALTEPLASE: DrugEntry = {
   genericName: 'Alteplase',
   drugClass: 'Thrombolytic (tissue plasminogen activator)',
   route: 'IV',
-  indications: ['Massive (high-risk) pulmonary embolism', 'PE arrest/peri-arrest', 'Acute ischemic stroke', 'Acute STEMI', 'VAD pump thrombosis'],
+  indications: ['Massive (high-risk) pulmonary embolism', 'PE arrest/peri-arrest', 'Acute ischemic stroke', 'Acute STEMI', 'VAD pump thrombosis', 'Deep frostbite (within 24 h of thaw)'],
   dosing: [
     {
       indication: 'High-risk PE',
@@ -427,6 +427,10 @@ const ALTEPLASE: DrugEntry = {
       indication: 'VAD pump thrombosis',
       regimen: 'VAD team decision ONLY. Protocol option 1: 5 mg IV bolus, then 3 mg/hr x 10h, then 1 mg/hr up to 48h (max 100 mg total). Protocol option 2: 10 mg IV bolus, then 1 mg/min x 20 min, then 1 mg/hr x 24h. Outcomes: 70% hemolysis resolution without device exchange; 10% hemorrhagic stroke risk. Use only when pump exchange surgery is unavailable or patient is peri-arrest.',
     },
+    {
+      indication: 'Frostbite (deep, within 24 h of thaw)',
+      regimen: 'WMS regimen: 3 mg IV or intra-arterial bolus (30 mL of 0.1 mg/mL), then 1 mg/hour (10 mL/hour of 0.1 mg/mL), with heparin 500 units/hour, until specialists recommend stopping. Only for deep injury at or proximal to the PIP joints, within 24 h of thaw (best within 12 h), in a centre with ICU monitoring and angiography or technetium scanning. Risks: bleeding, compartment syndrome. If tPA is contraindicated or the window has passed, use iloprost (up to 72 h).',
+    },
   ],
   contraindications: [
     'Absolute: Haemorrhagic stroke or stroke of unknown origin, Ischaemic stroke within 6 months, CNS neoplasm, Major trauma/surgery/head injury within 3 weeks, Bleeding diathesis, Active bleeding',
@@ -435,6 +439,7 @@ const ALTEPLASE: DrugEntry = {
   monitoring: 'Assess hemodynamic response 1\u20132 hours post-infusion. Check PTT before restarting heparin.',
   notes: 'Fibrinolytic therapy is the first-line reperfusion strategy for high-risk PE with hemodynamic instability (ESC 2019, Class I, Level B).',
   citations: [
+    'McIntosh SE, Freer L, Grissom CK, et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Frostbite: 2019 Update. Wilderness Environ Med. 2019;30(4S):S19-S32.',
     'Konstantinides SV, et al. 2019 ESC Guidelines for Acute Pulmonary Embolism. Eur Heart J. 2020;41(4):543-603.',
   ],
 };
@@ -3581,6 +3586,34 @@ const LINEZOLID: DrugEntry = {
     'Evans L, et al. Surviving Sepsis Campaign Guidelines 2021. Crit Care Med. 2021;49(11):e1063.',
     'Schmidt GA, et al. Evaluation and Management of Suspected Sepsis and Septic Shock. UpToDate. Jan 2026.',
     'Liu C, Bayer A, Cosgrove SE, et al. Clinical practice guidelines by the Infectious Diseases Society of America for the treatment of methicillin-resistant Staphylococcus aureus infections in adults and children. Clin Infect Dis. 2011;52(3):e18-e55.',
+  ],
+};
+
+const ILOPROST: DrugEntry = {
+  id: 'iloprost',
+  name: 'Iloprost IV (AURLUMYN)',
+  genericName: 'Iloprost',
+  drugClass: 'Prostacyclin (PGI2) analogue; vasodilator and platelet inhibitor',
+  route: 'IV',
+  indications: ['Severe frostbite in adults, to reduce the risk of digit amputation (FDA 2024)'],
+  dosing: [
+    {
+      indication: 'Frostbite (severe, Cauchy grade 3-4, within 72 h)',
+      regimen: 'Start 0.5 ng/kg/min IV; increase by 0.5 ng/kg/min every 30 min as tolerated to a maximum of 2 ng/kg/min. Infuse 6 hours each day for up to 8 consecutive days. Each later day, start at the dose tolerated the day before.\n\nIf a dose is not tolerated (symptomatic hypotension, headache, nausea), lower it by 0.5 ng/kg/min; stop for an adverse event and restart at the last tolerated dose once it resolves.\n\nChild-Pugh B or C: start 0.25 ng/kg/min for 30 min, then titrate as above. Kidney failure on dialysis: start 0.5 ng/kg/min; lower to 0.25 if not tolerated.\n\nPreparation (label): 1 mL (100 mcg) into 100 mL 0.9% sodium chloride = 1,000 ng/mL. Rate (mL/h) = dose (ng/kg/min) x weight (kg) x 60 / 1,000. Peripheral line or PICC, infusion pump, 0.2-0.22 micron in-line filter. Do not bolus or flush the line.\n\nWMS: first line for grade 3-4 within 72 h when tPA is contraindicated or not feasible; the 2024 update extends use to grade 2-4.',
+    },
+  ],
+  contraindications: ['None listed on the FDA label'],
+  cautions: [
+    'Symptomatic hypotension: correct hypotension before starting, monitor vital signs, and consider holding other vasodilators or antihypertensives',
+    'Common: headache, flushing, palpitations, tachycardia, nausea, vomiting, dizziness',
+    'Effectiveness was established in young, healthy adults with high-altitude frostbite',
+  ],
+  monitoring: 'Blood pressure and heart rate during every infusion; titrate to tolerability.',
+  notes: 'Prostacyclin analogue: dilates vessels, inhibits platelet aggregation and may have fibrinolytic activity. In the randomized trial behind FDA approval (47 patients with grade 3-4 frostbite, all given aspirin), a day-7 bone-scan defect occurred in 0% with iloprost, 19% with iloprost plus tPA, and 60% with buflomedil.',
+  citations: [
+    'AURLUMYN (iloprost) injection, for intravenous use. Prescribing information. US Food and Drug Administration; 2024.',
+    'Cauchy E, Cheguillaume B, Chetaille E. A controlled trial of a prostacyclin and rt-PA in the treatment of severe frostbite. N Engl J Med. 2011;364(2):189-190.',
+    'McIntosh SE, Freer L, Grissom CK, et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Frostbite: 2019 Update. Wilderness Environ Med. 2019;30(4S):S19-S32.',
   ],
 };
 
@@ -7064,7 +7097,7 @@ const UFH: DrugEntry = {
   genericName: 'Heparin sodium',
   drugClass: 'Unfractionated heparin (indirect thrombin/Xa inhibitor)',
   route: 'IV',
-  indications: ['Pulmonary embolism (all risk levels)', 'DVT', 'ACS', 'Bridge anticoagulation', 'VAD anticoagulation bridge'],
+  indications: ['Pulmonary embolism (all risk levels)', 'DVT', 'ACS', 'Bridge anticoagulation', 'VAD anticoagulation bridge', 'Frostbite thrombolysis (adjunct)'],
   dosing: [
     {
       indication: 'High-risk / Massive PE',
@@ -7095,6 +7128,10 @@ const UFH: DrugEntry = {
         { dosePerKg: 18, unit: 'units/hr', label: 'Infusion (18 units/kg/hr)' },
       ],
     },
+    {
+      indication: 'Frostbite (with tPA)',
+      regimen: 'Heparin 500 units/hour IV, given concurrently with alteplase for deep frostbite, until specialists (vascular, burn, interventional radiology) recommend stopping (WMS regimen). Follow local thrombolysis protocol. Heparin alone is not recommended for frostbite.',
+    },
   ],
   contraindications: [
     'Active major hemorrhage',
@@ -7109,6 +7146,7 @@ const UFH: DrugEntry = {
   monitoring: 'aPTT every 6 hours until therapeutic, then every 12\u201324 hours. Platelet count at baseline and every 2\u20133 days (HIT screening).',
   notes: 'Preferred over LMWH when: CrCl <30 mL/min, high bleeding risk (short half-life, fully reversible with protamine), or thrombolysis anticipated. Fully reversible with protamine sulfate.',
   citations: [
+    'McIntosh SE, Freer L, Grissom CK, et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Frostbite: 2019 Update. Wilderness Environ Med. 2019;30(4S):S19-S32.',
     'Konstantinides SV, et al. 2019 ESC Guidelines for Acute Pulmonary Embolism. Eur Heart J. 2020.',
     'Garcia DA, et al. Parenteral Anticoagulants: ACCP Evidence-Based Clinical Practice Guidelines. Chest. 2012.',
   ],
@@ -7843,7 +7881,7 @@ const IBUPROFEN: DrugEntry = {
   genericName: 'Ibuprofen',
   drugClass: 'NSAID (nonsteroidal anti-inflammatory)',
   route: 'PO',
-  indications: ['Viral myositis pain', 'Benign acute childhood myositis', 'Fever', 'Mild-moderate pain', 'Dysmenorrhea'],
+  indications: ['Viral myositis pain', 'Benign acute childhood myositis', 'Fever', 'Mild-moderate pain', 'Dysmenorrhea', 'Frostbite'],
   dosing: [
     {
       indication: 'Viral myositis / BACM pain (Pediatric)',
@@ -7857,6 +7895,11 @@ const IBUPROFEN: DrugEntry = {
     {
       indication: 'Dysmenorrhea',
       regimen: '400 mg PO q4-6h PRN, starting at onset of menses. Max 3200 mg/day.',
+    },
+    {
+      indication: 'Frostbite',
+      regimen: '12 mg/kg/day PO divided twice daily (about 6 mg/kg per dose), started in the field or on arrival and continued until the wound heals or surgery (often 4 to 6 weeks). Per the Wilderness Medical Society, it blocks harmful prostaglandins while being gentler on the stomach than higher doses. Use standard adult limits.',
+      weightCalc: { dosePerKg: 6, unit: 'mg', label: 'Per dose, twice daily (12 mg/kg/day)' },
     },
   ],
   contraindications: [
@@ -7878,6 +7921,7 @@ const IBUPROFEN: DrugEntry = {
   monitoring: 'Renal function if prolonged use. GI symptoms. Blood pressure in hypertensive patients.',
   notes: 'First-line analgesic for BACM with CK <5,000 U/L. In a large pediatric study, ibuprofen use in the ED decreased hospitalization risk. Ensure adequate oral hydration when using for viral myositis to maintain renal perfusion.',
   citations: [
+    'McIntosh SE, Freer L, Grissom CK, et al. Wilderness Medical Society Clinical Practice Guidelines for the Prevention and Treatment of Frostbite: 2019 Update. Wilderness Environ Med. 2019;30(4S):S19-S32.',
     'Rosenberg T, et al. Management and outcome of benign acute childhood myositis in pediatric emergency department. Ital J Pediatr. 2021;47:54.',
     'Magee CC, et al. Benign acute childhood myositis: a retrospective cohort study. Front Pediatr. 2025;13:1653651.',
     'Ibuprofen tablets, Rx (US Prescribing Information). DailyMed setid 0fa4cd66-66ad-4ec9-b38c-6b5840df39df (dosing and boxed warning; read 2026-10-27).',
@@ -14687,6 +14731,7 @@ export const ALL_DRUGS: DrugEntry[] = [
   LEVOTHYROXINE,
   LIDOCAINE,
   IVIG,
+  ILOPROST,
   LINEZOLID,
   LOFEXIDINE,
   LIPID_EMULSION,
