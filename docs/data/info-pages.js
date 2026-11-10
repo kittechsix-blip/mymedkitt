@@ -23777,7 +23777,7 @@ const UI_TOXIDROMES_TABLE_PAGE = {
         },
         {
             heading: 'Anticholinergic',
-            body: '**Vitals:** tachy, mildly hypertensive, hyperthermic.\n**Pupils:** mydriasis (often poorly reactive).\n**Skin:** dry, red, flushed.\n**Mental status:** delirium, "mad as a hatter", picking at the air, mumbling.\n**Bowel sounds:** absent, urinary retention.\n**Agents:** diphenhydramine, atropine, scopolamine, TCAs (mixed picture), antipsychotics, jimson weed, antiparkinson agents.\n**Treatment:** benzos + cooling + Foley. Physostigmine only with narrow QRS and pure toxidrome.\n**Mnemonic:** hot as a hare, dry as a bone, red as a beet, blind as a bat, mad as a hatter, full as a flask.',
+            body: '**Vitals:** tachy, mildly hypertensive, hyperthermic.\n**Pupils:** mydriasis (often poorly reactive).\n**Skin:** dry, red, flushed.\n**Mental status:** delirium, "mad as a hatter", picking at the air, mumbling.\n**Bowel sounds:** absent, urinary retention.\n**Agents:** diphenhydramine, atropine, scopolamine, TCAs (mixed picture), antipsychotics, jimson weed, antiparkinson agents.\n**Treatment:** benzos + cooling + Foley. Physostigmine only with narrow QRS and pure toxidrome: [Physostigmine](#/drug/physostigmine/anticholinergic delirium) 0.5-1 mg IV slow push over at least 5 min, may repeat every 10-15 min (usual total 1-2 mg); children 0.02 mg/kg IV slowly (max 0.5 mg).\n**Mnemonic:** hot as a hare, dry as a bone, red as a beet, blind as a bat, mad as a hatter, full as a flask.',
         },
         {
             heading: 'Cholinergic',
