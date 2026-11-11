@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 720" role="img" aria-labelledby="t d">
+  <title id="t">Smear clues to the cause of hemolysis</title>
+  <desc id="d">Schematic red cells. Normal cell with central pallor. Spherocyte: small, dense, no central pallor, warm AIHA or hereditary spherocytosis. Schistocyte: helmet-shaped fragment, microangiopathic hemolysis such as TTP, HUS, DIC or a mechanical valve. Bite cell: a bite taken out of the edge, oxidant hemolysis such as G6PD deficiency. Agglutination: clumped cells, cold agglutinin disease. Sickle cell: crescent shape, sickle cell disease.</desc>
+  <rect width="640" height="720" fill="#ffffff"/>
+  <text x="320" y="40" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#222">Smear clues to the cause</text>
+  <text x="320" y="66" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#555">Schematic, not to scale</text>
+
+  <g stroke="#8a3b34" stroke-width="2.5" fill="#e79a8f">
+    <!-- 1 normal -->
+    <circle cx="110" cy="140" r="38"/>
+    <circle cx="110" cy="140" r="15" fill="#f7d8d3" stroke="none"/>
+    <!-- 2 spherocyte -->
+    <circle cx="110" cy="245" r="27" fill="#c9554a"/>
+    <!-- 3 schistocyte (helmet) -->
+    <path d="M72 370 A38 38 0 0 1 148 370 L132 370 L120 352 L100 352 L88 370 Z" fill="#d9776b"/>
+    <!-- 4 bite cell -->
+    <path d="M144.63 454.35 A38 38 0 1 0 144.63 485.65 A16 16 0 0 1 144.63 454.35 Z"/>
+    <circle cx="104" cy="470" r="12" fill="#f7d8d3" stroke="none"/>
+    <!-- 5 agglutination -->
+    <circle cx="88" cy="565" r="20"/><circle cx="118" cy="558" r="20"/><circle cx="104" cy="588" r="20"/><circle cx="134" cy="586" r="20"/><circle cx="76" cy="595" r="20"/>
+    <!-- 6 sickle -->
+    <path d="M70 680 Q110 630 152 662 Q112 650 74 690 Z" fill="#d9776b"/>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif" fill="#222">
+    <text x="190" y="134" font-size="21" font-weight="700">Normal</text>
+    <text x="190" y="158" font-size="16" fill="#444">Pale centre about one third of the cell</text>
+
+    <text x="190" y="240" font-size="21" font-weight="700">Spherocyte</text>
+    <text x="190" y="264" font-size="16" fill="#444">Small, dense, no pale centre</text>
+    <text x="190" y="284" font-size="15" fill="#666">Warm AIHA, hereditary spherocytosis</text>
+
+    <text x="190" y="352" font-size="21" font-weight="700">Schistocyte</text>
+    <text x="190" y="376" font-size="16" fill="#444">Helmet or fragment</text>
+    <text x="190" y="396" font-size="15" fill="#666">MAHA: TTP, HUS, DIC, valve, HELLP</text>
+
+    <text x="190" y="464" font-size="21" font-weight="700">Bite cell</text>
+    <text x="190" y="488" font-size="16" fill="#444">Bite taken out of the edge</text>
+    <text x="190" y="508" font-size="15" fill="#666">Oxidant hemolysis: G6PD deficiency</text>
+
+    <text x="190" y="566" font-size="21" font-weight="700">Agglutination</text>
+    <text x="190" y="590" font-size="16" fill="#444">Clumps that disperse when warmed</text>
+    <text x="190" y="610" font-size="15" fill="#666">Cold agglutinin disease</text>
+
+    <text x="190" y="664" font-size="21" font-weight="700">Sickle cell</text>
+    <text x="190" y="688" font-size="16" fill="#444">Crescent</text>
+    <text x="190" y="708" font-size="15" fill="#666">Sickle cell disease</text>
+  </g>
+</svg>

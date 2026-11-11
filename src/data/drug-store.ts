@@ -3623,7 +3623,7 @@ const IVIG: DrugEntry = {
   genericName: 'Immune globulin intravenous (human), polyspecific',
   drugClass: 'Pooled human immunoglobulin G',
   route: 'IV',
-  indications: ['Toxic shock syndrome, refractory (adjunct; strongest data in streptococcal TSS)'],
+  indications: ['Toxic shock syndrome, refractory (adjunct; strongest data in streptococcal TSS)', 'Warm autoimmune hemolytic anemia (rescue)'],
   dosing: [
     {
       indication: 'Toxic shock syndrome (refractory shock): adjunct, with ID consultation',
@@ -3632,6 +3632,11 @@ const IVIG: DrugEntry = {
         { dosePerKg: 1, unit: 'g', label: 'Day 1 (1 g/kg)' },
         { dosePerKg: 0.5, unit: 'g', label: 'Days 2 and 3 (0.5 g/kg/day)' },
       ],
+    },
+    {
+      indication: 'Warm autoimmune hemolytic anemia (rescue)',
+      regimen: '0.4-0.5 g/kg/day IV for 5 days. About 40% respond, usually for weeks only: a temporary rescue for severe or life-threatening anemia (e.g. Hb under 6 g/dL) while steroids and rituximab take effect.',
+      weightCalc: { dosePerKg: 0.4, unit: 'g', label: 'Warm AIHA, per day for 5 days (0.4 g/kg)' },
     },
   ],
   contraindications: [
@@ -3654,6 +3659,7 @@ const IVIG: DrugEntry = {
     'Parks T, Wilson C, Curtis N, Norrby-Teglund A, Sriskandan S. Polyspecific intravenous immunoglobulin in clindamycin-treated patients with streptococcal toxic shock syndrome: a systematic review and meta-analysis. Clin Infect Dis. 2018;67(9):1434-1436.',
     'Chen KYH, Cheung M, Burgner DP, Curtis N. Toxic shock syndrome in Australian children. Arch Dis Child. 2016;101(8):736-740.',
     'Atchade E, et al. Toxic shock syndrome: a literature review. Antibiotics (Basel). 2024;13(1):96.',
+    'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.',
   ],
 };
 
@@ -4319,7 +4325,7 @@ const METHYLPREDNISOLONE: DrugEntry = {
   genericName: 'Methylprednisolone sodium succinate',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'IV / PO',
-  indications: ['Occipital nerve block (steroid adjunct)', 'Adrenal crisis (alternative to hydrocortisone)', 'Thyroid crisis (alternative)', 'Anaphylaxis (adjunctive, alternative)', 'Anaphylaxis / angioedema (adjunct)', 'Caustic ingestion (stricture prevention)'],
+  indications: ['Occipital nerve block (steroid adjunct)', 'Adrenal crisis (alternative to hydrocortisone)', 'Thyroid crisis (alternative)', 'Anaphylaxis (adjunctive, alternative)', 'Anaphylaxis / angioedema (adjunct)', 'Caustic ingestion (stricture prevention)', 'Warm autoimmune hemolytic anemia (fulminant)'],
   dosing: [
     {
       indication: 'Occipital Nerve Block — steroid adjunct',
@@ -4346,6 +4352,10 @@ const METHYLPREDNISOLONE: DrugEntry = {
       regimen: '1-2 mg/kg/day IV for 3 weeks, then taper over 1-2 weeks. **CONTROVERSIAL** — evidence is mixed. May reduce stricture formation specifically for Zargar grade 2b injuries. NOT indicated for grade 0-2a (no benefit) or grade 3 (necrotic tissue). GI consultation should guide decision. If used, add prophylactic antibiotics.',
       weightCalc: { dosePerKg: 2, unit: 'mg', label: 'Caustic ingestion (max dose)' },
     },
+    {
+      indication: 'Warm autoimmune hemolytic anemia (fulminant)',
+      regimen: 'With hematology: 100-200 mg/day IV for 10-14 days, or 250-1000 mg/day IV for 1-3 days, then oral prednisone. Evidence is limited to case reports and serious infection risk rises; reserve for fulminant hemolysis.',
+    },
   ],
   contraindications: [
     'Systemic fungal infections (relative — do NOT withhold in adrenal crisis)',
@@ -4360,6 +4370,8 @@ const METHYLPREDNISOLONE: DrugEntry = {
   citations: [
     'Rushworth RL, et al. Adrenal Crisis. N Engl J Med. 2019;381(9):852-861.',
     'Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency. JCEM. 2016;101(2):364-389.',
+    'Zanella A, Barcellini W. Treatment of autoimmune hemolytic anemias. Haematologica. 2014;99(10):1547-1554.',
+    'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.',
   ],
 };
 
@@ -5640,7 +5652,7 @@ const PREDNISONE: DrugEntry = {
   genericName: 'Prednisone',
   drugClass: 'Corticosteroid (glucocorticoid)',
   route: 'PO',
-  indications: ['Cluster headache — bridge therapy', 'COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions', 'IRIS in TB/HIV coinfection'],
+  indications: ['Cluster headache — bridge therapy', 'COPD exacerbation', 'Asthma exacerbation', 'Gout flare', 'Rheumatoid arthritis flare', 'SLE flare', 'Allergic reactions', 'Inflammatory conditions', 'IRIS in TB/HIV coinfection', 'Warm autoimmune hemolytic anemia'],
   dosing: [
     {
       indication: 'Cluster Headache — bridge therapy',
@@ -5677,6 +5689,11 @@ const PREDNISONE: DrugEntry = {
       regimen: '1.5 mg/kg/day PO × 2 weeks, then 0.75 mg/kg/day × 2 weeks (Meintjes 2010 RCT). Used for paradoxical TB-IRIS in patients on ART with worsening TB symptoms. Continue ART and TB therapy. Rule out alternative causes (drug resistance, new opportunistic infection) before attributing to IRIS. Coordinate with ID.',
       weightCalc: { dosePerKg: 1.5, unit: 'mg' },
     },
+    {
+      indication: 'Warm autoimmune hemolytic anemia',
+      regimen: '1 mg/kg/day PO (first line). Expect a response within about 3 weeks. Once responding, hematology tapers slowly (e.g. to 20-30 mg/day over 4-6 weeks, then by 5 mg a month), stopping after about 3-6 months. No response by 3 weeks, or relapse on taper: second-line therapy (rituximab). Add folic acid, bone protection and consider a PPI.',
+      weightCalc: { dosePerKg: 1, unit: 'mg', label: 'Warm AIHA, per day' },
+    },
   ],
   contraindications: [
     'Systemic fungal infections',
@@ -5695,6 +5712,8 @@ const PREDNISONE: DrugEntry = {
     'GOLD 2024. Global Strategy for Diagnosis, Management, and Prevention of COPD. goldcopd.org.',
     'Leuppi JD, et al. Short-term vs Conventional Glucocorticoid Therapy in Acute Exacerbations of COPD: The REDUCE Trial. JAMA. 2013;309(21):2223-2231.',
     'Qaseem A, et al. Diagnosis and Management of Stable COPD: ACP Clinical Practice Guideline. Ann Intern Med. 2011;155(3):179-191.',
+    'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.',
+    'Jäger U, Barcellini W, Broome CM, et al. Diagnosis and treatment of autoimmune hemolytic anemia in adults: recommendations from the First International Consensus Meeting. Blood Rev. 2020;41:100648.',
   ],
 };
 
@@ -6664,7 +6683,7 @@ const RITUXIMAB_TTP: DrugEntry = {
   genericName: 'Rituximab',
   drugClass: 'Anti-CD20 monoclonal antibody',
   route: 'IV',
-  indications: ['Refractory TTP', 'Relapsing TTP', 'TTP prophylaxis'],
+  indications: ['Refractory TTP', 'Relapsing TTP', 'TTP prophylaxis', 'Warm autoimmune hemolytic anemia', 'Cold agglutinin disease'],
   dosing: [
     {
       indication: 'TTP (standard)',
@@ -6677,6 +6696,14 @@ const RITUXIMAB_TTP: DrugEntry = {
     {
       indication: 'TTP prophylaxis',
       regimen: 'Consider if ADAMTS13 persistently <20% during remission. Single dose or short course may prevent relapse.',
+    },
+    {
+      indication: 'Warm autoimmune hemolytic anemia',
+      regimen: '375 mg/m2 IV weekly x 4 weeks, or 1,000 mg IV on days 1 and 15. Preferred second line (no response to prednisone by 3 weeks, or relapse); consider first line with prednisone in severe disease. Screen for hepatitis B first.',
+    },
+    {
+      indication: 'Cold agglutinin disease',
+      regimen: 'First line when treatment is needed: 375 mg/m2 IV weekly x 4 weeks (about half respond; relapse common), or rituximab 375 mg/m2 day 1 plus bendamustine 90 mg/m2 days 1-2, every 28 days for 4 cycles (higher, more durable response). Hematology-directed.',
     },
   ],
   cautions: [
@@ -6691,6 +6718,9 @@ const RITUXIMAB_TTP: DrugEntry = {
   citations: [
     'Scully M, et al. Rituximab in TTP. Blood. 2011;118(7):1746-1753.',
     'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.',
+    'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.',
+    'Jäger U, Barcellini W, Broome CM, et al. Diagnosis and treatment of autoimmune hemolytic anemia in adults: recommendations from the First International Consensus Meeting. Blood Rev. 2020;41:100648.',
+    'Berentsen S, Randen U, Oksman M, et al. Bendamustine plus rituximab for chronic cold agglutinin disease: results of a Nordic prospective multicenter trial. Blood. 2017;130(4):537-541.',
   ],
 };
 
@@ -11225,6 +11255,57 @@ const RIVASTIGMINE: DrugEntry = {
   ],
 };
 
+const FOLIC_ACID: DrugEntry = {
+  id: 'folic-acid',
+  name: 'Folic Acid',
+  genericName: 'Folic acid (folate)',
+  drugClass: 'B vitamin',
+  route: 'PO',
+  indications: ['Hemolytic anemia (supplementation)'],
+  dosing: [
+    {
+      indication: 'Hemolytic anemia',
+      regimen: '1 mg PO once daily (UK practice often uses 5 mg daily). Continue while hemolysis is active. Chronic hemolysis uses up folate and can tip the patient into megaloblastic anemia.',
+    },
+  ],
+  cautions: [
+    'Check B12 before long-term use in macrocytic anemia: folate can correct the anemia while B12 neuropathy progresses',
+  ],
+  notes: 'BSH recommends folic acid supplementation for all patients with autoimmune hemolytic anemia (grade 1B).',
+  citations: [
+    'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.',
+  ],
+};
+
+const SUTIMLIMAB: DrugEntry = {
+  id: 'sutimlimab',
+  name: 'Sutimlimab (Enjaymo)',
+  genericName: 'Sutimlimab-jome',
+  drugClass: 'Complement C1s inhibitor (monoclonal antibody)',
+  route: 'IV',
+  indications: ['Cold agglutinin disease'],
+  dosing: [
+    {
+      indication: 'Cold agglutinin disease',
+      regimen: 'Hematology-directed. 6,500 mg IV (39 to under 75 kg) or 7,500 mg IV (75 kg or more) weekly for the first 2 weeks, then every 2 weeks. Hemolysis returns after stopping.',
+    },
+  ],
+  contraindications: [
+    'Hypersensitivity to sutimlimab',
+  ],
+  cautions: [
+    'Serious infections, especially encapsulated bacteria: vaccinate against meningococcus and pneumococcus at least 2 weeks before starting when possible',
+    'Infusion reactions: monitor during and after the infusion',
+    'Possible autoimmune disease (e.g. lupus) with classical complement inhibition',
+  ],
+  monitoring: 'Hemoglobin, bilirubin and LDH for response; infection symptoms.',
+  notes: 'Blocks the classical complement pathway at C1s, which stops complement-mediated destruction of red cells. In the CARDINAL trial it halted hemolysis, raised hemoglobin and reduced fatigue in transfusion-dependent patients. Not an ED-initiated drug.',
+  citations: [
+    'Röth A, Barcellini W, D\u2019Sa S, et al. Sutimlimab in cold agglutinin disease. N Engl J Med. 2021;384(14):1323-1334.',
+    'ENJAYMO (sutimlimab-jome) injection, for intravenous use. Prescribing information. Sanofi; 2023.',
+  ],
+};
+
 const PHYSOSTIGMINE: DrugEntry = {
   id: 'physostigmine',
   name: 'Physostigmine (Antilirium)',
@@ -14825,6 +14906,8 @@ export const ALL_DRUGS: DrugEntry[] = [
   PENTOBARBITAL,
   PHENOBARBITAL,
   PHYSOSTIGMINE,
+  FOLIC_ACID,
+  SUTIMLIMAB,
   RIVASTIGMINE,
   PIPERACILLIN_TAZOBACTAM,
   POTASSIUM_ACETATE,
@@ -15201,6 +15284,8 @@ const NAME_TO_ID: [RegExp, string][] = [
   [/rifampin|rifadin|rifampicin/i, 'rifampin'],
   [/ritonavir|norvir/i, 'ritonavir'],
   [/rituximab|rituxan/i, 'rituximab-ttp'],
+  [/folic\s*acid/i, 'folic-acid'],
+  [/sutimlimab|enjaymo/i, 'sutimlimab'],
   [/rivaroxaban/i, 'rivaroxaban'],
   [/rocuronium|zemuron|roc/i, 'rocuronium'],
   [/ruconest|conestat/i, 'ruconest'],

@@ -1604,6 +1604,13 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'complications', label: 'Complications', icon: '⚠️', action: 'jump', target: 'hs-complications' },
     { id: 'seizure', label: 'Seizure Rx', icon: '⚡', action: 'jump', target: 'hs-seizure-rx' },
   ],
+  'hemolytic-anemia': [
+    { id: 'hemolysis-labs', label: 'Hemolysis Labs', icon: '🧪', action: 'calculator', target: 'hemolysis-labs', pinned: true },
+    { id: 'rpi', label: 'Retic Index', icon: '🩸', action: 'calculator', target: 'reticulocyte-index', pinned: true },
+    { id: 'plasmic', label: 'PLASMIC', icon: '🔬', action: 'calculator', target: 'ttp-plasmic', pinned: true },
+    { id: 'ddx', label: 'Differential', icon: '📋', action: 'overlay', target: 'hemolytic-anemia-ddx', pinned: true },
+    { id: 'treatment', label: 'Warm AIHA Tx', icon: '💊', action: 'jump', target: 'hemolytic-anemia-warm-tx', pinned: true },
+  ],
   'frostbite': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'frostbite-summary', pinned: true },
     { id: 'cauchy', label: 'Cauchy Grade', icon: '✋', action: 'calculator', target: 'frostbite-cauchy', pinned: true },

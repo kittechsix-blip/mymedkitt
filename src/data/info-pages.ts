@@ -30961,6 +30961,79 @@ const FROSTBITE_SUMMARY_PAGE: InfoPage = {
 };
 
 // -------------------------------------------------------------------
+// Hemolytic Anemia (added 2026-11-11)
+// -------------------------------------------------------------------
+
+const HA_CITES = [
+  { num: 1, text: 'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.' },
+  { num: 2, text: 'Phillips J, Henderson AC. Hemolytic anemia: evaluation and differential diagnosis. Am Fam Physician. 2018;98(6):354-361.' },
+  { num: 3, text: 'Hill QA, Stamps R, Massey E, et al. Guidelines on the management of drug-induced immune and secondary autoimmune, haemolytic anaemia. Br J Haematol. 2017;177(2):208-220.' },
+  { num: 4, text: 'Jäger U, Barcellini W, Broome CM, et al. Diagnosis and treatment of autoimmune hemolytic anemia in adults: recommendations from the First International Consensus Meeting. Blood Rev. 2020;41:100648.' },
+  { num: 5, text: 'Luzzatto L, Ally M, Notaro R. Glucose-6-phosphate dehydrogenase deficiency. Blood. 2020;136(11):1225-1240.' },
+];
+
+const HEMOLYTIC_ANEMIA_SUMMARY_PAGE: InfoPage = {
+  id: 'hemolytic-anemia-summary',
+  title: 'Hemolytic Anemia: Steps Summary',
+  subtitle: 'Quick Reference',
+  sections: [
+    {
+      body: 'Stepwise approach to hemolytic anemia. Tap any step to jump to that section of the consult.',
+    },
+    {
+      heading: '1. Confirm Hemolysis',
+      body: '• [LDH high + haptoglobin under 25 mg/dL; smear, DAT, urinalysis](#/node/hemolytic-anemia-start)',
+    },
+    {
+      heading: "2. Can't-Miss Causes",
+      body: '• [Schistocytes + low platelets: TMA, PLASMIC, urgent hematology](#/node/hemolytic-anemia-tma)\n• [During or after transfusion: stop it, send the bag](#/node/hemolytic-anemia-transfusion-rxn)',
+    },
+    {
+      heading: '3. DAT and Smear',
+      body: '• [IgG = warm AIHA; C3 only = cold; negative = smear-guided](#/node/hemolytic-anemia-dat)',
+    },
+    {
+      heading: '4-5. Autoimmune',
+      body: '• [Warm AIHA: prednisone 1 mg/kg/day, early rituximab if severe, folic acid, LMWH](#/node/hemolytic-anemia-warm-tx)\n• [Cold agglutinin: keep warm, blood warmer, steroids rarely help](#/node/hemolytic-anemia-cold-tx)',
+    },
+    {
+      heading: '6. Non-Immune and Drugs',
+      body: '• [G6PD: stop the oxidant trigger, no methylene blue](#/node/hemolytic-anemia-g6pd)\n• [Malaria, babesiosis, Clostridium, PNH, Wilson](#/node/hemolytic-anemia-other)\n• [Drug-induced: stop ceftriaxone, piperacillin](#/node/hemolytic-anemia-drug)',
+    },
+    {
+      heading: '7-8. Transfusion and Disposition',
+      body: '• [Never withhold blood in life-threatening AIHA](#/node/hemolytic-anemia-transfusion)\n• [ICU for TMA or fulminant hemolysis; admit new AIHA or Hb under 8](#/node/hemolytic-anemia-dispo)',
+    },
+  ],
+  citations: HA_CITES,
+};
+
+const HEMOLYTIC_ANEMIA_DDX_PAGE: InfoPage = {
+  id: 'hemolytic-anemia-ddx',
+  title: 'Hemolysis Differential',
+  subtitle: 'DAT result + smear → likely cause',
+  sections: [
+    {
+      heading: 'DAT positive: IgG (± C3)',
+      body: '• **Warm AIHA:** spherocytes. Primary, or secondary to CLL, lymphoma, lupus, immunodeficiency. [1]\n• **Drug-induced:** ceftriaxone, piperacillin, cefotetan. [3]\n• **Delayed hemolytic transfusion reaction:** 3-14 days after transfusion, new alloantibody. [3]',
+    },
+    {
+      heading: 'DAT positive: C3 only',
+      body: '• **Cold agglutinin disease:** agglutination, acrocyanosis; Mycoplasma, EBV, lymphoma. [1][4]\n• **Paroxysmal cold hemoglobinuria (PCH):** child after a viral illness; Donath-Landsteiner test. [1]',
+    },
+    {
+      heading: 'DAT negative',
+      body: '• **Schistocytes:** TTP, HUS, DIC, HELLP, malignant hypertension, mechanical valve. [2]\n• **Bite or blister cells:** G6PD deficiency after an oxidant trigger. [5]\n• **Spherocytes:** hereditary spherocytosis, burns, Clostridium sepsis, DAT-negative AIHA. [2]\n• **Sickle cells:** sickle cell disease. [2]\n• **Parasites:** malaria, babesiosis. [2]\n• **Normal smear with hemoglobinuria:** PNH (flow cytometry). [2]\n• **Young patient with liver failure:** Wilson disease. [2]',
+    },
+    {
+      heading: 'Pitfalls',
+      body: '• Haptoglobin rises with inflammation and is low in cirrhosis or congenital absence. [2]\n• G6PD level can read normal during an acute crisis. [5]\n• A low reticulocyte count does not exclude hemolysis. [2]',
+    },
+  ],
+  citations: HA_CITES,
+};
+
+// -------------------------------------------------------------------
 // Staphylococcal Toxic Shock Syndrome
 // -------------------------------------------------------------------
 
@@ -31412,6 +31485,8 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'sjs-ten-culprits': SJS_TEN_CULPRITS_PAGE,
   // Staphylococcal TSS
   'frostbite-summary': FROSTBITE_SUMMARY_PAGE,
+  'hemolytic-anemia-summary': HEMOLYTIC_ANEMIA_SUMMARY_PAGE,
+  'hemolytic-anemia-ddx': HEMOLYTIC_ANEMIA_DDX_PAGE,
   'staph-tss-summary': STAPH_TSS_SUMMARY_PAGE,
   'staph-tss-cdc-criteria': STAPH_TSS_CDC_CRITERIA_PAGE,
   'staph-tss-vs-strep': STAPH_TSS_VS_STREP_PAGE,

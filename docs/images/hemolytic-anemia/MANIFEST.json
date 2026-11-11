@@ -1,0 +1,21 @@
+{
+  "schistocytes-smear.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Schistocytes.jpg",
+    "license_tag": "CC0",
+    "license_evidence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "author": "Prof. Osaro Erhabor",
+    "retrieval_timestamp": "2026-11-11T18:25:00Z",
+    "andy_approval_commit": "Andy approved hemolytic-anemia outline listing this image, 2026-11-11",
+    "notes": "Cropped from the 2560x2048 original (region x973 y461, 1024x870) to enlarge the fragments; no other edits.",
+    "sha256": "ef8297ef8508591629f6afb2073c675818e42d1f9e00ea2b92466418dfe5b2e4"
+  },
+  "smear-clues.svg": {
+    "source_url": "myMedKitt original schematic",
+    "license_tag": "PD-self",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+    "author": "myMedKitt",
+    "retrieval_timestamp": "2026-11-11T18:30:00Z",
+    "andy_approval_commit": "Andy approved hemolytic-anemia outline (drawn bite-cell diagram), 2026-11-11",
+    "sha256": "4e901bd9f81a5e076776d736b6641982c32de74007a1ffdea5fe9322fb265df6"
+  }
+}

@@ -1700,6 +1700,15 @@ export const DEFAULT_CATEGORIES = [
                 entryNodeId: 'ttp-start',
             },
             {
+                id: 'hemolytic-anemia',
+                title: 'Hemolytic Anemia',
+                subtitle: 'Confirm hemolysis → TMA screen → DAT and smear → Warm AIHA / Cold agglutinin / G6PD → Transfusion',
+                categoryId: 'heme-onc',
+                version: '1.0',
+                nodeCount: 15,
+                entryNodeId: 'hemolytic-anemia-start',
+            },
+            {
                 id: 'dic',
                 title: 'Disseminated Intravascular Coagulation (DIC)',
                 subtitle: 'Recognition \u2192 ISTH/JAAM/SIC \u2192 Etiology \u2192 Hemostatic Resus \u2192 Anticoag \u2192 Disposition',

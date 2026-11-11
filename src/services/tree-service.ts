@@ -1382,6 +1382,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/hypothermia.js');
       return { nodes: m.HYPOTHERMIA_NODES, entryNodeId: 'hypo-start', categoryId: 'emergency-medicine', moduleLabels: m.HYPOTHERMIA_MODULE_LABELS, citations: m.HYPOTHERMIA_CITATIONS, criticalActions: m.HYPOTHERMIA_CRITICAL_ACTIONS };
     },
+    'hemolytic-anemia': async () => {
+      const m = await import('../data/trees/hemolytic-anemia.js');
+      return { nodes: m.HEMOLYTIC_ANEMIA_NODES, entryNodeId: 'hemolytic-anemia-start', categoryId: 'heme-onc', moduleLabels: m.HEMOLYTIC_ANEMIA_MODULE_LABELS, citations: m.HEMOLYTIC_ANEMIA_CITATIONS, criticalActions: m.HEMOLYTIC_ANEMIA_CRITICAL_ACTIONS };
+    },
     'frostbite': async () => {
       const m = await import('../data/trees/frostbite.js');
       return { nodes: m.FROSTBITE_NODES, entryNodeId: 'frostbite-start', categoryId: 'emergency-medicine', moduleLabels: m.FROSTBITE_MODULE_LABELS, citations: m.FROSTBITE_CITATIONS, criticalActions: m.FROSTBITE_CRITICAL_ACTIONS };

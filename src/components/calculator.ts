@@ -5,6 +5,7 @@ import { ARDS_PBW_TIDAL_VOLUME_CALCULATOR } from './ards-pbw-tidal-volume.js';
 import { ARDS_PF_BERLIN_CALCULATOR } from './ards-pf-berlin.js';
 import { ADROGUE_MADIAS_CALCULATOR } from './adrogue-madias.js';
 import { FROSTBITE_CAUCHY_CALCULATOR, FROSTBITE_REPERFUSION_CALCULATOR, FROSTBITE_ILOPROST_RATE_CALCULATOR } from './frostbite-calculators.js';
+import { HEMOLYSIS_LABS_CALCULATOR, RETIC_INDEX_CALCULATOR } from './hemolytic-anemia-calculators.js';
 import { RIBSCORE_CALCULATOR } from './ribscore.js';
 import { RANSON_CALCULATOR } from './ranson.js';
 import { INH_PYRIDOXINE_CALCULATOR } from '../data/inh-pyridoxine.js';
@@ -46703,6 +46704,8 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'frostbite-cauchy': FROSTBITE_CAUCHY_CALCULATOR,
   'frostbite-reperfusion': FROSTBITE_REPERFUSION_CALCULATOR,
   'frostbite-iloprost-rate': FROSTBITE_ILOPROST_RATE_CALCULATOR,
+  'hemolysis-labs': HEMOLYSIS_LABS_CALCULATOR,
+  'reticulocyte-index': RETIC_INDEX_CALCULATOR,
   'tbsa-adult': TBSA_ADULT_CALCULATOR,
   'tbsa-peds': TBSA_PEDS_CALCULATOR,
   'burn-rule-of-10': RULE_OF_10_CALCULATOR,
