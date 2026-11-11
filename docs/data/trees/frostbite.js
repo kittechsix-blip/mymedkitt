@@ -114,11 +114,6 @@ export const FROSTBITE_NODES = [
                 alt: 'Diagram of one finger and the hand bones beside it, divided into bands from the fingertip toward the wrist: distal phalanx is grade 1, middle phalanx grade 2, proximal phalanx grade 3, metacarpal grade 4, carpal bones grade 5.',
                 caption: 'Cauchy grade by the most proximal level of the lesion after rewarming. For the thumb and big toe, the proximal phalanx counts as grade 2. (myMedKitt diagram, after the WMS frostbite guideline.)',
             },
-            {
-                src: 'images/frostbite/frostbitten-hands-aconcagua.jpg',
-                alt: 'Both hands of a climber after descending Aconcagua: the fingers are red and swollen, with small blisters at several fingertips and no dark or blue-grey areas.',
-                caption: 'Frostbitten fingers after an Aconcagua descent: redness, swelling and small blisters. (Winky from Oxford, UK, CC BY 2.0, via Wikimedia Commons.)',
-            },
         ],
         citation: [1, 2],
         calculatorLinks: [
@@ -327,9 +322,9 @@ export const FROSTBITE_NODES = [
         body: '**Do not amputate early.** Complete demarcation (the clear line between living and dead tissue) can take **1 to 3 months**, and early surgery removes tissue that would have survived.\n\n**Operate early only for** sepsis from infected frostbitten tissue (wet gangrene) or compartment syndrome.\n\nAngiography, a technetium bone scan or MRI helps set surgical margins together with the exam. A surgeon experienced in frostbite should make the call, by telemedicine if none is local. Involve rehabilitation early: the limb is often insensate, so footwear and orthotics matter. [1]',
         images: [
             {
-                src: 'images/frostbite/toes-12-days-post-frostbite.jpg',
-                alt: 'Toes of one foot 12 days after frostbite: the second toe has a dark eschar at its tip with red, peeling skin below; the third toe has peeling skin; the big toe has a dark discoloured nail.',
-                caption: 'Toes 12 days after frostbite: tip eschar on the second toe and peeling skin as the injury evolves. (Dr. S. Falz, CC BY-SA 3.0, via Wikimedia Commons.)',
+                src: 'images/frostbite/toes-frostbite-evolving.jpg',
+                alt: 'Top view of a foot with frostbitten toes: the big toe is red and swollen with a purple-grey tip and peeling skin; the smaller toes have dark, dry, crusted tips (eschar) with purple discoloration.',
+                caption: 'Frostbitten toes as the injury evolves: dark dry tips (eschar), purple-grey discoloration and red swelling; cropped. (CC0, Gerardolagunes, via Wikimedia Commons.)',
             },
         ],
         citation: [1],

@@ -1,0 +1,30 @@
+{
+  "cauchy-grade-levels.svg": {
+    "source_url": "myMedKitt original schematic (after the WMS frostbite guideline)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+    "author": "myMedKitt",
+    "retrieval_timestamp": "2026-11-09T21:00:00Z",
+    "andy_approval_commit": "Andy approved frostbite outline 2026-11-09",
+    "sha256": "b68a71ef753d87095ad7ea477b916c803cf3772239b7381062d8c46cee78e2fe"
+  },
+  "frostbitten-hand-blisters.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Dr._Atkinson%27s_Frost-bitten_Hand.jpg",
+    "license_tag": "PD-1923",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-1923",
+    "author": "Herbert Ponting (photographed 1911)",
+    "retrieval_timestamp": "2026-11-09T21:00:00Z",
+    "andy_approval_commit": "Andy approved frostbite outline 2026-11-09",
+    "sha256": "32ad16172b4ed77cfe63058f1b377d4d4a8b53cf0fcdbf72526b4064d2ed9b5d"
+  },
+  "toes-frostbite-evolving.jpg": {
+    "source_url": "https://commons.wikimedia.org/wiki/File:Toes_frost_bite_2024_medical_toe_03.jpg",
+    "license_tag": "CC0",
+    "license_evidence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "author": "Gerardolagunes",
+    "retrieval_timestamp": "2026-11-11T19:00:00Z",
+    "andy_approval_commit": "Andy: 'Whatever you recommend' (replace non-commercial-safe frostbite photos), 2026-11-11",
+    "notes": "Rotated upright (EXIF orientation baked in and reset to 1), cropped to the foot, resized to 1200 px.",
+    "sha256": "59e081bba645ca418292eeb723ab847f7367a63f4bb50268c1513c7c55a46b8e"
+  }
+}
