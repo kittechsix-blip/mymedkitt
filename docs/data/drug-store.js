@@ -10877,6 +10877,37 @@ const PRALIDOXIME = {
         'Buckley NA, Eddleston M, Li Y, Bevan M, Robertson J. Oximes for acute organophosphate pesticide poisoning. Cochrane Database Syst Rev. 2011;(2):CD005085.',
     ],
 };
+const RIVASTIGMINE = {
+    id: 'rivastigmine',
+    name: 'Rivastigmine (Exelon)',
+    genericName: 'Rivastigmine tartrate (capsule) / rivastigmine (transdermal patch)',
+    drugClass: 'Cholinesterase inhibitor (crosses the blood-brain barrier)',
+    route: 'PO / Transdermal',
+    indications: ['Anticholinergic delirium when physostigmine is unavailable (off-label)'],
+    dosing: [
+        {
+            indication: 'Anticholinergic delirium (physostigmine unavailable)',
+            regimen: 'Off-label. **Oral is preferred: 6 mg PO** (the most common dose in published case series). Effect builds over hours rather than minutes, so control severe agitation with benzodiazepines meanwhile.\n\n**Transdermal patch** (most commonly 9.5 mg/24 h) is an option if the patient cannot swallow, but in the largest series it needed rescue sedation or physostigmine more often than oral (73% vs 32%).\n\nSame screening as physostigmine: ECG first, avoid with QRS widening or suspected TCA or other sodium-channel blocker. Discuss dosing and repeat doses with toxicology or the poison center (1-800-222-1222). Pediatric data are single case reports only.',
+        },
+    ],
+    contraindications: [
+        'QRS widening or suspected TCA / sodium-channel blocker ingestion (same rationale as physostigmine)',
+        'Known hypersensitivity to rivastigmine or carbamates',
+    ],
+    cautions: [
+        'Evidence is retrospective case series (about 60 patients) and case reports; not FDA approved for this use',
+        'Slower onset than IV physostigmine; long-acting, so cholinergic excess (bradycardia, vomiting, bronchorrhea, seizures) could be prolonged; keep atropine available',
+        'One seizure reported in a patient with epilepsy after physostigmine plus a rivastigmine patch',
+        'Reactive airway disease, GI or GU obstruction, sick sinus syndrome or heart block',
+    ],
+    monitoring: 'Cardiac monitor, heart rate, mental status, and signs of cholinergic excess for several hours after dosing.',
+    notes: 'Rivastigmine inhibits acetylcholinesterase and butyrylcholinesterase and crosses into the brain like physostigmine, but it is taken by mouth or patch and lasts much longer. It has been used for anticholinergic delirium during US physostigmine shortages. In a 50-patient series (most also given physostigmine first), no patient had bradycardia or GI symptoms; a 12-patient series reported no adverse effects.',
+    citations: [
+        'Chiew AL, Holford AG, Chan BSH, Isoardi KZ. Rivastigmine for the management of anticholinergic delirium. Clin Toxicol (Phila). 2024;62:82-87.',
+        'Berg M, Strand A, Garrett ND, Keric A, Wilkinson J. Rivastigmine as an alternative treatment for anticholinergic toxidrome in light of the physostigmine shortage: a case series. Am J Emerg Med. 2025;94:144-147.',
+        'Greene SC. Rivastigmine use in the treatment of antimuscarinic delirium. J Med Toxicol. 2023;19:284-287.',
+    ],
+};
 const PHYSOSTIGMINE = {
     id: 'physostigmine',
     name: 'Physostigmine (Antilirium)',
@@ -10904,7 +10935,7 @@ const PHYSOSTIGMINE = {
         'Check ECG before administering — QRS must be narrow',
     ],
     monitoring: 'Continuous cardiac monitor. HR, BP q5 min during infusion. Watch for cholinergic excess (bradycardia, bronchospasm, SLUDGE).',
-    notes: 'Definitive antidote for anticholinergic toxicity — crosses blood-brain barrier (unlike neostigmine). Classic toxidrome: "red as a beet, dry as a bone, hot as a hare, blind as a bat, mad as a hatter."',
+    notes: 'Not available? Oral rivastigmine 6 mg PO has been used as an off-label alternative (see the Rivastigmine card). Definitive antidote for anticholinergic toxicity — crosses blood-brain barrier (unlike neostigmine). Classic toxidrome: "red as a beet, dry as a bone, hot as a hare, blind as a bat, mad as a hatter."',
     citations: [
         'Burns MJ, et al. Physostigmine vs benzodiazepines for anticholinergic poisoning. Ann Emerg Med. 2000;35(4):374-381.',
         'Moore MJ, Im D. The acutely agitated or violent adult: Pharmacologic management. UpToDate. 2025.',
@@ -14398,6 +14429,7 @@ export const ALL_DRUGS = [
     PENTOBARBITAL,
     PHENOBARBITAL,
     PHYSOSTIGMINE,
+    RIVASTIGMINE,
     PIPERACILLIN_TAZOBACTAM,
     POTASSIUM_ACETATE,
     POTASSIUM_CHLORIDE_IV,
@@ -14737,6 +14769,7 @@ const NAME_TO_ID = [
     [/phentolamine/i, 'phentolamine'],
     [/phenylephrine/i, 'phenylephrine'],
     [/physostigmine|antilirium/i, 'physostigmine'],
+    [/rivastigmine|exelon/i, 'rivastigmine'],
     [/pralidoxime|2-?PAM\b|protopam|duodote|atnaa/i, 'pralidoxime'],
     [/potassium\s*phosphate|sodium\s*\/\s*potassium\s*phosphate|k-?phos\b|kphos|k2po4|kh2po4/i, 'potassium-phosphate'],
     [/sodium\s*phosphate|na-?phos\b|naphos/i, 'sodium-phosphate'],
