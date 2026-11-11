@@ -10918,8 +10918,12 @@ const PHYSOSTIGMINE = {
     dosing: [
         {
             indication: 'Anticholinergic delirium',
-            regimen: '0.5-2 mg IV slow push over 5 min (max 1 mg/min). Start 0.5-1 mg, may repeat q10-20 min. Max 2 mg/dose. Duration 20-60 min — may need redosing. Pre-treat with glycopyrrolate 0.2 mg IV to prevent cholinergic excess.',
-            weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 2 },
+            regimen: '0.5-1 mg IV slow push over at least 5 min. May repeat q10-15 min to effect (usual total 1-2 mg). Duration 30-60 min, so delirium can return: redose or use benzodiazepines. Routine glycopyrrolate pre-treatment is not needed; keep atropine at the bedside for cholinergic excess.',
+        },
+        {
+            indication: 'Anticholinergic delirium (pediatric)',
+            regimen: '0.02 mg/kg IV slow push over at least 5 min. Max 0.5 mg per dose. May repeat q10-15 min to effect.',
+            weightCalc: { dosePerKg: 0.02, unit: 'mg', maxDose: 0.5, label: 'Pediatric, IV slow push, per dose' },
         },
     ],
     contraindications: [
@@ -10930,7 +10934,7 @@ const PHYSOSTIGMINE = {
     ],
     cautions: [
         'MUST administer slowly — rapid push can cause seizures, bradycardia, asystole',
-        'Short duration (20-60 min) — symptoms may recur',
+        'Short duration (30-60 min) — symptoms may recur',
         'Have atropine at bedside as reversal',
         'Check ECG before administering — QRS must be narrow',
     ],
