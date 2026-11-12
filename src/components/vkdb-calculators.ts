@@ -78,12 +78,12 @@ export const VKDB_TYPE_RISK_CALCULATOR: CalculatorDefinition = {
     { name: 'malabs', label: 'Malabsorption or prolonged antibiotics', description: 'Cystic fibrosis, chronic diarrhea, celiac, alpha-1 antitrypsin deficiency', type: 'toggle', points: 1 },
   ],
   results: [],
-  thresholdNote: 'Without the birth injection, late VKDB is estimated to be 81 times more likely, and 30-60% of late cases present as intracranial hemorrhage. Warning bleeds (umbilical oozing, bruising, blood in stool, oozing after a heel stick) often come first.',
+  thresholdNote: 'Without the birth injection, late VKDB affects about 4.4-7.2 per 100,000 infants (CDC estimate: up to 81 times the risk with the shot), and 30-60% of late cases present as intracranial hemorrhage. Warning bleeds (umbilical oozing, bruising, blood in stool, oozing after a heel stick) often come first.',
   citations: [AAP, SHEARER, CDC],
   computeResult: (values: Record<string, number>) => {
     const input: VkdbRiskInput = {
       age: values['age'] ?? -1,
-      vitK: values['vitk'] ?? 3,
+      vitK: values['vitk'] ?? 3, // select default is the first option ('Unknown'); unknown is treated as no shot on purpose
       breastfed: (values['breastfed'] || 0) > 0,
       maternalDrugs: (values['maternal'] || 0) > 0,
       cholestasis: (values['cholestasis'] || 0) > 0,
@@ -117,6 +117,7 @@ export type BleedPattern = 'incomplete' | 'vkdb' | 'dic' | 'factor-viii-ix' | 'p
 
 export function bleedPattern(l: BleedLabs): BleedPattern {
   if (l.ptLong < 0 || l.pttLong < 0 || l.pltLow < 0) return 'incomplete';
+  // DIC: low platelets plus a prolonged PT or low fibrinogen. Low fibrinogen with normal platelets stays "mixed".
   if (l.pltLow === 1 && (l.ptLong === 1 || l.fibLow === 1)) return 'dic';
   if (l.ptLong === 1 && l.pltLow === 0 && l.fibLow !== 1) return 'vkdb';
   if (l.ptLong === 0 && l.pttLong === 1 && l.pltLow === 0) return 'factor-viii-ix';
@@ -135,7 +136,7 @@ export const VKDB_LAB_PATTERN_CALCULATOR: CalculatorDefinition = {
   id: 'vkdb-lab-pattern',
   title: 'Infant Bleeding Lab Pattern',
   subtitle: 'PT, PTT, platelets, fibrinogen → likely cause',
-  description: 'Reads the basic coagulation screen in a bleeding infant. Use age-specific reference ranges: PT and PTT run longer in newborns. VKDB classically gives a markedly prolonged PT/INR (PTT often prolonged too) with normal platelets and fibrinogen, and the PT corrects within hours of vitamin K.',
+  description: 'Reads the basic coagulation screen in a bleeding infant. Use age-specific reference ranges: PT and PTT run longer in newborns. VKDB classically gives a markedly prolonged PT/INR (PTT often prolonged too) with normal platelets and fibrinogen, and the PT usually shortens within 2-4 hours of vitamin K.',
   fields: [
     { name: 'pt', label: 'PT / INR', type: 'select', points: 0, hideOptionPoints: true, selectOptions: TRI('Prolonged for age', 'Normal for age') },
     { name: 'ptt', label: 'PTT', type: 'select', points: 0, hideOptionPoints: true, selectOptions: TRI('Prolonged for age', 'Normal for age') },
@@ -149,7 +150,7 @@ export const VKDB_LAB_PATTERN_CALCULATOR: CalculatorDefinition = {
     const p = bleedPattern({ ptLong: values['pt'] ?? -1, pttLong: values['ptt'] ?? -1, pltLow: values['plt'] ?? -1, fibLow: values['fib'] ?? -1 });
     const map: Record<BleedPattern, { value: string; label: string; description: string; colorVar: string }> = {
       incomplete: { value: '--', label: 'Enter PT, PTT and platelets', description: 'Fibrinogen is optional but helps separate DIC.', colorVar: '--color-text-muted' },
-      vkdb: { value: 'Fits VKDB', label: 'Prolonged PT, normal platelets', description: 'Vitamin K deficiency (or liver disease). Give vitamin K: a PT that corrects within hours confirms VKDB. If it does not correct, think liver failure. Check conjugated bilirubin for cholestasis.', colorVar: '--color-danger' },
+      vkdb: { value: 'Fits VKDB', label: 'Prolonged PT, normal platelets', description: 'Vitamin K deficiency (or liver disease). Give vitamin K: a PT that shortens within 2-4 hours is usually diagnostic of VKDB. If it does not correct, think liver failure. Check conjugated bilirubin for cholestasis.', colorVar: '--color-danger' },
       dic: { value: 'Think DIC', label: 'Low platelets with prolonged PT or low fibrinogen', description: 'Consumptive coagulopathy: sepsis, asphyxia, necrotizing enterocolitis, severe liver failure. Treat the cause; replace with plasma, cryoprecipitate and platelets as bleeding requires. Vitamin K is still reasonable.', colorVar: '--color-danger' },
       'factor-viii-ix': { value: 'Think hemophilia', label: 'Isolated prolonged PTT', description: 'Factor VIII or IX deficiency (hemophilia A or B; ask about family history in males), or heparin in the sample. Send factor VIII and IX levels and involve hematology. Vitamin K will not correct it.', colorVar: '--color-warning' },
       platelets: { value: 'Thrombocytopenia', label: 'Low platelets only', description: 'Newborn: neonatal alloimmune thrombocytopenia (NAIT), maternal ITP, infection. Older infant: ITP, infection, marrow. Severe NAIT can cause intracranial hemorrhage.', colorVar: '--color-warning' },

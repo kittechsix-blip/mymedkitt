@@ -785,7 +785,7 @@ const ASPIRIN: DrugEntry = {
   genericName: 'Acetylsalicylic acid',
   drugClass: 'Antiplatelet (COX inhibitor)',
   route: 'PO',
-  indications: ['Acute ischemic stroke', 'Acute coronary syndrome', 'Secondary stroke prevention', 'DAPT (dual antiplatelet therapy)', 'Preeclampsia prophylaxis (pregnancy)', 'Kawasaki disease (child)'],
+  indications: ['Acute ischemic stroke', 'Acute coronary syndrome', 'Secondary stroke prevention', 'DAPT (dual antiplatelet therapy)', 'Preeclampsia prophylaxis (pregnancy)', 'Kawasaki disease (child)', 'Frostbite (with iloprost)'],
   dosing: [
     {
       indication: 'ACS / STEMI (loading)',
@@ -809,10 +809,12 @@ const ASPIRIN: DrugEntry = {
     },
     {
       indication: 'Kawasaki disease, acute phase (child)',
-      regimen: '30-50 mg/kg/day PO divided every 6 hours (AHA 2024 dose), with IVIG, until afebrile for 48-72 hours. The older US high dose, 80-100 mg/kg/day, has no proven advantage. Then switch to low dose. No ibuprofen or other NSAIDs. With influenza or recent varicella vaccine, discuss an alternative antiplatelet drug (Reye syndrome).',
+      regimen: 'Moderate 30-50 or high 80-100 mg/kg/day PO divided every 6 hours, with IVIG, until afebrile for 48-72 hours. Either is acceptable: the optimal dose is unclear and high dose has not been shown to protect the coronaries better (ACR 2021). Then switch to low dose. No ibuprofen or other NSAIDs. With influenza or recent varicella vaccine, discuss an alternative antiplatelet drug (Reye syndrome).',
       weightCalc: [
         { dosePerKg: 30, unit: 'mg', dailyDivided: 4, label: 'Acute, 30 mg/kg/day' },
         { dosePerKg: 50, unit: 'mg', dailyDivided: 4, label: 'Acute, 50 mg/kg/day' },
+        { dosePerKg: 80, unit: 'mg', dailyDivided: 4, label: 'Acute high dose, 80 mg/kg/day' },
+        { dosePerKg: 100, unit: 'mg', dailyDivided: 4, label: 'Acute high dose, 100 mg/kg/day' },
       ],
     },
     {
@@ -822,6 +824,10 @@ const ASPIRIN: DrugEntry = {
         { dosePerKg: 3, unit: 'mg', label: 'Low dose, 3 mg/kg once daily' },
         { dosePerKg: 5, unit: 'mg', label: 'Low dose, 5 mg/kg once daily' },
       ],
+    },
+    {
+      indication: 'Frostbite (with iloprost)',
+      regimen: 'In the trial behind the iloprost approval, every patient received aspirin 250 mg IV daily for up to 8 days alongside iloprost (or buflomedil, or tPA). IV aspirin is not marketed in the US: agree an oral regimen with pharmacy. Avoid with active bleeding or with tPA unless the specialist team directs.',
     },
   ],
   contraindications: [
@@ -841,6 +847,7 @@ const ASPIRIN: DrugEntry = {
     'Johnston SC, et al. Clopidogrel and Aspirin in Acute Ischemic Stroke and High-Risk TIA (POINT). N Engl J Med. 2018;379(3):215-225.',
     'Jone PN, Tremoulet A, Choueiter N, et al. Update on diagnosis and management of Kawasaki disease: a scientific statement from the American Heart Association. Circulation. 2024;150(23):e481-e500.',
     'McCrindle BW, Rowley AH, Newburger JW, et al. Diagnosis, treatment, and long-term management of Kawasaki disease: a scientific statement for health professionals from the American Heart Association. Circulation. 2017;135(17):e927-e999.',
+    'AURLUMYN (iloprost) injection. Prescribing information. Eicos Sciences; 2024 (section 14.1, Clinical Studies).',
   ],
 };
 
@@ -3617,7 +3624,7 @@ const ILOPROST: DrugEntry = {
   dosing: [
     {
       indication: 'Frostbite (severe, Cauchy grade 3-4, within 72 h)',
-      regimen: 'Start 0.5 ng/kg/min IV; increase by 0.5 ng/kg/min every 30 min as tolerated to a maximum of 2 ng/kg/min. Infuse 6 hours each day for up to 8 consecutive days. Each later day, start at the dose tolerated the day before.\n\nIf a dose is not tolerated (symptomatic hypotension, headache, nausea), lower it by 0.5 ng/kg/min; stop for an adverse event and restart at the last tolerated dose once it resolves.\n\nChild-Pugh B or C: start 0.25 ng/kg/min for 30 min, then titrate as above. Kidney failure on dialysis: start 0.5 ng/kg/min; lower to 0.25 if not tolerated.\n\nPreparation (label): 1 mL (100 mcg) into 100 mL 0.9% sodium chloride = 1,000 ng/mL. Rate (mL/h) = dose (ng/kg/min) x weight (kg) x 60 / 1,000. Peripheral line or PICC, infusion pump, 0.2-0.22 micron in-line filter. Do not bolus or flush the line.\n\nWMS: first line for grade 3-4 within 72 h when tPA is contraindicated or not feasible; the 2024 update extends use to grade 2-4.',
+      regimen: 'Start 0.5 ng/kg/min IV; increase by 0.5 ng/kg/min every 30 min as tolerated to a maximum of 2 ng/kg/min. Infuse 6 hours each day for up to 8 consecutive days. Repeat the titration from 0.5 ng/kg/min on days 2 and 3; from day 4, start at the highest dose tolerated the day before.\n\nIf a dose is not tolerated (symptomatic hypotension, headache, nausea), lower it by 0.5 ng/kg/min; stop for an adverse event and restart at the last tolerated dose once it resolves.\n\nChild-Pugh B or C: start 0.25 ng/kg/min for 30 min, then titrate as above. eGFR under 30 mL/min: start 0.5 ng/kg/min; lower to 0.25 if not tolerated. Intermittent hemodialysis: give iloprost after the session, or start dialysis at least 1 hour after the infusion ends.\n\nPreparation (label): 1 mL (100 mcg) into 100 mL 0.9% sodium chloride = 1,000 ng/mL. Rate (mL/h) = dose (ng/kg/min) x weight (kg) x 60 / 1,000. Peripheral line or PICC, infusion pump, 0.2-0.22 micron in-line filter. Do not bolus or flush the line.\n\nWMS: first line for grade 3-4 within 72 h when tPA is contraindicated or not feasible; the 2024 update extends use to grade 2-4.',
     },
   ],
   contraindications: ['None listed on the FDA label'],
@@ -6800,7 +6807,7 @@ const RITUXIMAB_TTP: DrugEntry = {
   notes: 'Depletes CD20+ B cells that produce anti-ADAMTS13 autoantibodies. Standard of care for refractory or relapsing TTP. May also be used upfront in severe disease. Timing with TPE is critical - administering immediately after TPE maximizes drug retention.',
   citations: [
     'Scully M, et al. Rituximab in TTP. Blood. 2011;118(7):1746-1753.',
-    'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.',
+    'Zheng XL, Vesely SK, Cataland SR, et al. ISTH guidelines for treatment of thrombotic thrombocytopenic purpura. J Thromb Haemost. 2020;18(10):2496-2502.',
     'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.',
     'Jäger U, Barcellini W, Broome CM, et al. Diagnosis and treatment of autoimmune hemolytic anemia in adults: recommendations from the First International Consensus Meeting. Blood Rev. 2020;41:100648.',
     'Berentsen S, Randen U, Oksman M, et al. Bendamustine plus rituximab for chronic cold agglutinin disease: results of a Nordic prospective multicenter trial. Blood. 2017;130(4):537-541.',
@@ -7731,7 +7738,7 @@ const CAPLACIZUMAB: DrugEntry = {
   notes: 'Humanized nanobody that blocks the A1 domain of vWF, preventing vWF-platelet interaction. HERCULES trial demonstrated 74% reduction in composite outcome (TTP-related death, recurrence, or major thromboembolic event). Approved for acquired TTP in adults.',
   citations: [
     'Scully M, et al. Caplacizumab treatment for acquired TTP. N Engl J Med. 2019;380(4):335-346. (HERCULES trial)',
-    'Cuker A, et al. ISTH guidelines for treatment of TTP. J Thromb Haemost. 2021;19(10):2538-2548.',
+    'Zheng XL, Vesely SK, Cataland SR, et al. ISTH guidelines for treatment of thrombotic thrombocytopenic purpura. J Thromb Haemost. 2020;18(10):2496-2502.',
   ],
 };
 
@@ -8787,7 +8794,7 @@ const VITAMIN_K: DrugEntry = {
     },
     {
       indication: 'Supratherapeutic INR — non-urgent (no active bleeding)',
-      regimen: 'INR 5-9 without bleeding: 1-2.5 mg PO or IV if risk for bleeding. INR >9 without bleeding: 2.5-5 mg PO or IV; repeat in 24h if INR remains elevated. Resume warfarin at lower dose when INR is therapeutic. Small titrated doses are compatible with ongoing warfarin use. A 10 mg IV dose will make resuming warfarin difficult for 1-2 weeks. Anaphylactoid reaction risk with IV is exceedingly rare (~1/30,000) and can be avoided by slow infusion.',
+      regimen: 'INR 5-9 without bleeding: 1-2.5 mg PO or IV if risk for bleeding. INR >9 without bleeding: 2.5-5 mg PO or IV; repeat in 24h if INR remains elevated. Resume warfarin at lower dose when INR is therapeutic. Small titrated doses are compatible with ongoing warfarin use. A 10 mg IV dose will make resuming warfarin difficult for 1-2 weeks. Anaphylactoid reactions with IV occur in about 3 per 10,000 doses and can happen even with slow, diluted infusion (boxed warning); infuse no faster than 1 mg/min.',
     },
     {
       indication: 'VAD warfarin reversal',
@@ -8795,11 +8802,11 @@ const VITAMIN_K: DrugEntry = {
     },
     {
       indication: 'VKDB treatment (infant)',
-      regimen: '1 mg subcutaneously (label-preferred route) or slow IV, no faster than 1 mg/min. Use slow IV for major or intracranial bleeding (SC absorption is unreliable in shock), together with 4-factor PCC or plasma. Avoid IM while coagulopathic (muscle hematoma). PT should improve within hours; repeat if still prolonged. Higher doses may be needed if the mother took a vitamin K antagonist.',
+      regimen: '1 mg subcutaneously (label-preferred route) or IM (label). Use slow IV, no faster than 1 mg/min, only when SC is not feasible, as in major or intracranial bleeding where SC absorption is unreliable, together with 4-factor PCC or plasma. BOXED WARNING: severe and fatal anaphylactoid reactions with IV and IM use, even when diluted and slow, and on the first dose. PT should improve within hours; repeat if still prolonged. Higher doses may be needed if the mother took a vitamin K antagonist.',
     },
     {
       indication: 'VKDB prophylaxis (newborn)',
-      regimen: 'Single IM dose within 6 hours of birth: 1 mg for infants over 1500 g; 0.3-0.5 mg/kg for 1500 g or less (AAP). Oral regimens are less effective against late VKDB and there is no FDA-approved oral neonatal product in the US.',
+      regimen: 'Single IM dose soon after birth (AAP: within 6 hours; label: within 1 hour): 1 mg for infants over 1500 g; 0.3-0.5 mg/kg for 1500 g or less (AAP). Oral regimens are less effective against late VKDB and there is no FDA-approved oral neonatal product in the US.',
     },
   ],
   contraindications: [
@@ -8819,6 +8826,7 @@ const VITAMIN_K: DrugEntry = {
     'Hand I, Noble L, Abrams SA. Vitamin K and the newborn infant. Pediatrics. 2022;149(3):e2021056036.',
     'Shearer MJ. Vitamin K deficiency bleeding (VKDB) in early infancy. Blood Rev. 2009;23(2):49-59.',
     'Phytonadione injectable emulsion (Vitamin K1 Injection). Prescribing information. Pfizer (Hospira).',
+    'Britt RB, Brown JN. Characterizing the severe reactions of parenteral vitamin K1. Clin Appl Thromb Hemost. 2018;24(1):5-12.',
   ],
 };
 

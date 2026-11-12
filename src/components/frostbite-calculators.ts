@@ -71,7 +71,7 @@ export const FROSTBITE_REPERFUSION_CALCULATOR: CalculatorDefinition = {
     { name: 'capable', label: 'ICU and angiography or technetium scan available here', type: 'toggle', points: 1 },
   ],
   results: [],
-  thresholdNote: 'Each hour of delay to thrombolysis lowers salvage by about 28%; best within 12 h of thaw. Iloprost dosing: see the Iloprost Rate calculator.',
+  thresholdNote: 'In a small retrospective series, each hour of delay to thrombolysis lowered the odds of salvage by about 28%: earlier is better. Iloprost dosing (repeat the titration on days 2 and 3): see the Iloprost Rate calculator.',
   citations: [WMS_2019, WMS_2024, LABEL],
   computeResult: (values: Record<string, number>) => {
     const grade = values['grade'] ?? -1;
@@ -81,7 +81,7 @@ export const FROSTBITE_REPERFUSION_CALCULATOR: CalculatorDefinition = {
     const map: Record<Reperfusion, { value: string; label: string; description: string; colorVar: string }> = {
       incomplete: { value: '--', label: 'Enter the grade and hours since thaw', description: 'Grade the injury after rewarming, then enter the hours since the tissue thawed.', colorVar: '--color-text-muted' },
       none: { value: 'No reperfusion drug', label: 'Superficial (grade 0-1)', description: 'Supportive care: ibuprofen, analgesia, elevation, blister care. Re-grade if cyanosis persists or spreads.', colorVar: '--color-primary' },
-      'iloprost-consider': { value: 'Consider iloprost', label: 'Grade 2, within 72 h', description: 'tPA is not indicated at this depth. The WMS 2024 update extends iloprost to grade 2-4 within 72 h of injury; the trial enrolled grade 3-4, so benefit at grade 2 is extrapolated.', colorVar: '--color-warning' },
+      'iloprost-consider': { value: 'Consider iloprost', label: 'Grade 2, within 72 h', description: 'tPA is not indicated at this depth. Iloprost at grade 2 is an expert extension (WMS 2024), not proven: the FDA approval and its trial covered stage 3-4 only. Decide with a frostbite-experienced specialist.', colorVar: '--color-warning' },
       tpa: { value: 'tPA now', label: 'Deep frostbite within 24 h of thaw', description: 'Alteplase 3 mg bolus then 1 mg/h (IV or intra-arterial) with heparin 500 units/h, in an ICU with angiography or technetium scanning. Start as soon as possible.', colorVar: '--color-danger' },
       transfer: { value: 'Transfer for tPA', label: 'Within 24 h, no capability here', description: 'Transfer to a burn, frostbite or vascular centre if tPA can start within 24 h of thaw. If transfer will miss the window, start iloprost here if available.', colorVar: '--color-danger' },
       iloprost: { value: 'Iloprost', label: (values['contra'] || 0) > 0 ? 'tPA contraindicated, within 72 h' : 'Past the 24 h tPA window, within 72 h', description: 'Iloprost IV 0.5 ng/kg/min, up 0.5 every 30 min to a maximum of 2 ng/kg/min, 6 h a day for up to 8 days. Correct hypotension first and monitor blood pressure.', colorVar: '--color-danger' },
@@ -109,7 +109,7 @@ export const FROSTBITE_CAUCHY_CALCULATOR: CalculatorDefinition = {
   computeResult: (values: Record<string, number>) => {
     const g = values['level'] ?? 0;
     if (g <= 1) return { value: `Grade ${g}`, label: g === 0 ? 'No lesion' : 'Distal phalanx', description: 'No reperfusion drug indicated. Supportive and blister care.', colorVar: '--color-primary' };
-    if (g === 2) return { value: 'Grade 2', label: 'Middle phalanx', description: 'Deep injury short of the proximal phalanx. No tPA. Consider iloprost within 72 h of injury (WMS 2024).', colorVar: '--color-warning' };
+    if (g === 2) return { value: 'Grade 2', label: 'Middle phalanx', description: 'Deep injury short of the proximal phalanx. No tPA. Iloprost within 72 h only after specialist discussion (unproven at this depth).', colorVar: '--color-warning' };
     return { value: `Grade ${g}`, label: g === 3 ? 'Proximal phalanx' : g === 4 ? 'Metacarpal / metatarsal' : 'Carpal / tarsal', description: 'Deep frostbite, time-critical: tPA within 24 h of thaw if no contraindication, otherwise iloprost up to 72 h. Use the tPA vs Iloprost calculator.', colorVar: '--color-danger' };
   },
 };
@@ -160,7 +160,7 @@ export const FROSTBITE_ILOPROST_RATE_CALCULATOR: CalculatorDefinition = {
     return {
       value: `${r1(rate)} mL/h`,
       label: `${dose} ng/kg/min at ${w} kg`,
-      description: `**Titration steps (every 30 min as tolerated):**\n${table}\n\nConcentration 1,000 ng/mL. Each later day, start at the dose tolerated the day before.`,
+      description: `**Titration steps (every 30 min as tolerated):**\n${table}\n\nConcentration 1,000 ng/mL. Repeat the titration from 0.5 ng/kg/min on days 2 and 3; from day 4, start at the highest dose tolerated the day before.`,
       colorVar: '--color-primary',
     };
   },

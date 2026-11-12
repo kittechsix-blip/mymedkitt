@@ -24,7 +24,7 @@ test('criteria: complete, incomplete, infant rule, too early', () => {
   assert.equal(c(6, 0, { infant: true }), 'unlikely');
   assert.equal(c(0, 5), 'incomplete-input', 'empty box reads 0');
   assert.equal(CR.computeResult({ fever: 6, lips: 1, eyes: 1, rash: 1, extremities: 1 }).value, 'Complete Kawasaki');
-  assert.match(CR.computeResult({ fever: 6, lips: 1, eyes: 1, alt: 1 }).description, /Another diagnosis/);
+  assert.equal(CR.computeResult({ fever: 6, lips: 1, eyes: 1, rash: 1, extremities: 1, alt: 1 }).value, 'Look for another diagnosis first', 'alternative features override Treat now');
 });
 
 test('incomplete algorithm: when to treat before the echo (AHA 2017 Figure 3)', () => {
@@ -51,8 +51,10 @@ test('Son score and high risk', () => {
   assert.equal(kdHighRisk({ zMax: 2.2, under6mo: false, asian: false, crp: 5, shock: false, mas: false }).steroids, false, 'Son 2 = moderate, no routine steroids');
   assert.equal(kdHighRisk({ zMax: 2.6, under6mo: false, asian: false, crp: 5, shock: false, mas: false }).steroids, true, 'Z 2.5+');
   assert.equal(kdHighRisk({ zMax: 0, under6mo: true, asian: false, crp: 0, shock: false, mas: false }).steroids, true, 'under 6 months');
-  assert.equal(kdHighRisk({ zMax: 0, under6mo: false, asian: false, crp: 0, shock: true, mas: false }).steroids, true, 'shock');
+  assert.equal(kdHighRisk({ zMax: 0, under6mo: false, asian: false, crp: 0, shock: true, mas: false }).steroids, false, 'shock alone: specialist-directed therapy, not the adjunct trigger');
+  assert.match(HR.computeResult({ shock: 1 }).description, /Shock or macrophage activation/);
   assert.match(HR.computeResult({ z: 3, crp: 10 }).description, /prednisolone 2 mg\/kg\/day/);
+  assert.match(HR.computeResult({ z: 3, crp: 10 }).description, /infliximab/);
 });
 
 test('coronary Z classes (AHA)', () => {

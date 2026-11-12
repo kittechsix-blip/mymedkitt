@@ -38,11 +38,12 @@ export const HEMOLYTIC_ANEMIA_NODES: DecisionNode[] = [
     type: 'question',
     module: 2,
     title: 'Danger Screen',
-    body: 'Before working out the cause, rule out the three emergencies.',
+    body: 'Before working out the cause, rule out the emergencies.\n\n**Ask about drugs:** quinine, clopidogrel or ticlopidine, gemcitabine, calcineurin inhibitors (drug-induced TMA); recent ceftriaxone, piperacillin or other antibiotics (drug-induced immune hemolysis, which can be abrupt and severe). Stop the suspect drug. [4][14]',
+    citation: [4, 14],
     options: [
       {
         label: 'Schistocytes with low platelets',
-        description: 'Microangiopathic hemolysis (MAHA): TTP, HUS, DIC, HELLP, malignant hypertension',
+        description: 'Microangiopathic hemolysis (MAHA): TTP, HUS, drug-induced TMA, DIC, HELLP, malignant hypertension',
         next: 'hemolytic-anemia-tma',
         urgency: 'critical',
       },
@@ -66,8 +67,8 @@ export const HEMOLYTIC_ANEMIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Microangiopathic Hemolysis (TMA)',
-    body: '**Schistocytes + thrombocytopenia + hemolysis = thrombotic microangiopathy** until proven otherwise. Untreated TTP is often fatal, so do not wait for ADAMTS13.\n\n• Check the [PLASMIC score](#/calculator/ttp-plasmic), coagulation tests (DIC), creatinine, pregnancy status and blood pressure.\n• **High PLASMIC: urgent hematology for plasma exchange.** Open the [TTP consult](#/tree/ttp).\n• Bloody diarrhea, especially in a child: STEC-HUS.\n• **Avoid platelet transfusion in suspected TTP** unless there is life-threatening bleeding. [1][3]',
-    citation: [1, 3],
+    body: '**Schistocytes + thrombocytopenia + hemolysis = thrombotic microangiopathy** until proven otherwise. Untreated TTP is often fatal, so do not wait for ADAMTS13.\n\n• Check the [PLASMIC score](#/calculator/ttp-plasmic), coagulation tests (DIC), creatinine, pregnancy status and blood pressure.\n• **High PLASMIC: urgent hematology for plasma exchange.** Open the [TTP consult](#/tree/ttp).\n• **Bloody diarrhea, especially in a child: STEC-HUS.** Avoid antibiotics and antimotility drugs (loperamide) in suspected Shiga toxin E. coli (O157) infection: antibiotics are linked to a higher risk of HUS. Fluids, monitor creatinine and platelets. [13][15]\n• **Drug-induced TMA:** quinine, clopidogrel or ticlopidine, gemcitabine, calcineurin inhibitors. Stop the drug. [14]\n• **Avoid platelet transfusion in suspected TTP** unless there is life-threatening bleeding. [12]',
+    citation: [1, 3, 12, 13, 14, 15],
     images: [{
       src: 'images/hemolytic-anemia/schistocytes-smear.jpg',
       alt: 'Peripheral blood smear: mostly round red cells with pale centres, plus several small fragmented and helmet-shaped red cells (schistocytes) scattered among them.',
@@ -78,7 +79,7 @@ export const HEMOLYTIC_ANEMIA_NODES: DecisionNode[] = [
       { id: 'ttp-tma-ddx', label: 'TMA Differential' },
       { id: 'ttp', label: 'TTP Consult', kind: 'tree' },
     ],
-    recommendation: 'Schistocytes with thrombocytopenia: treat as TMA. Calculate PLASMIC and involve hematology urgently for plasma exchange if TTP is likely; avoid platelet transfusion unless life-threatening bleeding.',
+    recommendation: 'Schistocytes with thrombocytopenia: treat as TMA. Calculate PLASMIC and involve hematology urgently for plasma exchange if TTP is likely; avoid platelet transfusion unless life-threatening bleeding. In suspected STEC-HUS avoid antibiotics and antimotility drugs; stop any drug that can cause TMA.',
     confidence: 'recommended',
     summary: 'TMA: PLASMIC, urgent hematology, plasma exchange; no platelets in TTP',
     safetyLevel: 'critical',
@@ -162,9 +163,9 @@ export const HEMOLYTIC_ANEMIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Warm AIHA: Treatment',
-    body: '**First line:** [Prednisone](#/drug/prednisone/warm autoimmune hemolytic anemia) **1 mg/kg/day PO**. Expect a response within about 3 weeks; hematology then tapers slowly over months. [1][6]\n\n**Severe or rapidly falling hemoglobin:**\n• [Methylprednisolone](#/drug/methylprednisolone/warm autoimmune hemolytic anemia) IV for fulminant cases (evidence limited to case reports).\n• [IVIG](#/drug/ivig/warm autoimmune hemolytic anemia) or plasma exchange as a temporary rescue.\n• Consider adding [rituximab](#/drug/rituximab-ttp/warm autoimmune hemolytic anemia) early with the steroid. [1][6][7]\n\n**For everyone:**\n• [Folic acid](#/drug/folic-acid/hemolytic anemia) supplementation.\n• **VTE prophylaxis** with [enoxaparin](#/drug/enoxaparin/vte prophylaxis) for in-patients with active hemolysis; clots are common in AIHA.\n• Stop any suspect drug. [1]\n\n**Transfusion:** do not withhold blood from a patient with life-threatening anemia because the crossmatch is "incompatible". See [Transfusion](#/node/hemolytic-anemia-transfusion).',
+    body: '**First line:** [Prednisone](#/drug/prednisone/warm autoimmune hemolytic anemia) **1 mg/kg/day PO**. Expect a response within about 3 weeks; hematology then tapers slowly over months. [1][6]\n\n**Severe or rapidly falling hemoglobin:**\n• [Methylprednisolone](#/drug/methylprednisolone/warm autoimmune hemolytic anemia) IV for fulminant cases (evidence limited to case reports).\n• [IVIG](#/drug/ivig/warm autoimmune hemolytic anemia) as a temporary rescue (about 40% respond, usually briefly).\n• Consider adding [rituximab](#/drug/rituximab-ttp/warm autoimmune hemolytic anemia) early with the steroid. [1][6][7]\n\n**For everyone:**\n• [Folic acid](#/drug/folic-acid/hemolytic anemia) supplementation.\n• **Consider VTE prophylaxis** with [enoxaparin](#/drug/enoxaparin/vte prophylaxis) for in-patients, per hematology and standard VTE risk assessment: clots occur more often during active hemolysis, but the evidence is observational.\n• Stop any suspect drug. [1]\n\n**Transfusion:** do not withhold blood from a patient with life-threatening anemia because the crossmatch is "incompatible". See [Transfusion](#/node/hemolytic-anemia-transfusion).',
     citation: [1, 6, 7],
-    recommendation: 'Warm AIHA: prednisone 1 mg/kg/day; for severe disease add rescue therapy (IVIG or plasma exchange) and consider early rituximab with hematology. Give folic acid and LMWH prophylaxis to in-patients with active hemolysis.',
+    recommendation: 'Warm AIHA: prednisone 1 mg/kg/day; for severe disease add IVIG as a temporary rescue and consider early rituximab with hematology. Give folic acid, and consider LMWH prophylaxis for in-patients per VTE risk.',
     confidence: 'recommended',
     summary: 'Prednisone 1 mg/kg/day; rituximab early if severe; folic acid and LMWH',
   },
@@ -277,7 +278,7 @@ export const HEMOLYTIC_ANEMIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 7,
     title: 'Transfusion in Hemolysis',
-    body: '**Thresholds:** hemoglobin under 7 g/dL for most stable patients, under 8 g/dL with heart disease. Transfuse for symptoms (chest pain, syncope, heart failure, rapid fall) whatever the number. [11]\n\n**Autoimmune hemolysis:** the autoantibody makes every crossmatch look "incompatible", and full workup can take 4-6 hours. **If anemia is life-threatening in that time, transfuse ABO, Rh and K matched red cells; do not withhold blood.** Call the blood bank early and tell them the diagnosis. Most patients tolerate these units. [1]\n\n**Cold agglutinin disease:** use a **blood warmer** and keep the patient warm. [1]\n\nGive small volumes (1 unit at a time) and recheck: [packed red cells](#/drug/packed-rbcs/adult transfusion).',
+    body: '**Thresholds:** hemoglobin under 7 g/dL for most stable patients, under 8 g/dL with heart disease. [11] Symptoms (chest pain, syncope, heart failure, a rapid fall) may justify transfusion above these numbers: clinical judgment.\n\n**Autoimmune hemolysis:** the autoantibody makes every crossmatch look "incompatible", and full workup can take 4-6 hours. **If anemia is life-threatening in that time, transfuse ABO, Rh and K matched red cells; do not withhold blood.** Call the blood bank early and tell them the diagnosis. Most patients tolerate these units. [1]\n\n**Cold agglutinin disease:** use a **blood warmer** and keep the patient warm. [1]\n\nGive small volumes (1 unit at a time) and recheck: [packed red cells](#/drug/packed-rbcs/adult transfusion).',
     citation: [1, 11],
     calculatorLinks: [
       { id: 'blood-transfusions', label: 'AIHA Transfusion', kind: 'tree', node: 'bt-aiha' },
@@ -330,6 +331,10 @@ export const HEMOLYTIC_ANEMIA_CITATIONS: Citation[] = [
   { num: 9, text: 'Röth A, Barcellini W, D’Sa S, et al. Sutimlimab in cold agglutinin disease. N Engl J Med. 2021;384(14):1323-1334.' },
   { num: 10, text: 'Luzzatto L, Ally M, Notaro R. Glucose-6-phosphate dehydrogenase deficiency. Blood. 2020;136(11):1225-1240.' },
   { num: 11, text: 'Carson JL, Stanworth SJ, Guyatt G, et al. Red blood cell transfusion: 2023 AABB international guidelines. JAMA. 2023;330(19):1892-1902.' },
+  { num: 12, text: 'Scully M, Hunt BJ, Benjamin S, et al. Guidelines on the diagnosis and management of thrombotic thrombocytopenic purpura and other thrombotic microangiopathies. Br J Haematol. 2012;158(3):323-335.' },
+  { num: 13, text: 'Shane AL, Mody RK, Crump JA, et al. 2017 Infectious Diseases Society of America clinical practice guidelines for the diagnosis and management of infectious diarrhea. Clin Infect Dis. 2017;65(12):e45-e80.' },
+  { num: 14, text: 'George JN, Nester CM. Syndromes of thrombotic microangiopathy. N Engl J Med. 2014;371(7):654-666.' },
+  { num: 15, text: 'Freedman SB, Xie J, Neufeld MS, et al. Shiga toxin-producing Escherichia coli infection, antibiotics, and risk of developing hemolytic uremic syndrome: a meta-analysis. Clin Infect Dis. 2016;62(10):1251-1258.' },
 ];
 
 export const HEMOLYTIC_ANEMIA_CRITICAL_ACTIONS = [

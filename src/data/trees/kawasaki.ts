@@ -207,15 +207,15 @@ export const KAWASAKI_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Initial Treatment: IVIG and Aspirin',
-    body: '**Treat as soon as the diagnosis is made**, ideally within 10 days of fever onset. After day 10, still treat if fever persists without another cause, or coronary arteries are abnormal, with ongoing inflammation. **Get the echo at diagnosis, but it never delays treatment.** [1][2][3]\n\n• [IVIG](#/drug/ivig/kawasaki initial) **2 g/kg IV once, over 8-12 hours.** Slower with shock or poor heart function. [2]\n• [Aspirin](#/drug/aspirin/kawasaki acute) **30-50 mg/kg/day PO split every 6 hours** (AHA 2024) until afebrile for 48-72 hours; the older US high dose (80-100 mg/kg/day) has no proven advantage. Then **3-5 mg/kg once daily** until the 4-6 week echo. [1][2]\n\n**Aspirin cautions:**\n• **No ibuprofen** or other NSAIDs: they block aspirin\'s antiplatelet effect. [1]\n• **Influenza or recent varicella vaccine:** Reye syndrome risk. Discuss an alternative antiplatelet drug and use acetaminophen for fever. Give inactivated flu vaccine only. [1]\n\nNext: check for **high risk**, which decides whether steroids are added to this first treatment.',
+    body: '**Treat as soon as the diagnosis is made**, ideally within 10 days of fever onset. After day 10, still treat if fever persists without another cause, or coronary arteries are abnormal, with ongoing inflammation. **Get the echo at diagnosis, but it never delays treatment.** [1][2][3]\n\n• [IVIG](#/drug/ivig/kawasaki initial) **2 g/kg IV once, over 8-12 hours.** Slower with shock or poor heart function. [2]\n• [Aspirin](#/drug/aspirin/kawasaki acute) **moderate 30-50 or high 80-100 mg/kg/day PO split every 6 hours**, until afebrile for 48-72 hours. Either is acceptable: the optimal dose is unclear and high dose has not been shown to protect the coronaries better. Then **3-5 mg/kg once daily** until the 4-6 week echo. [1][2][3]\n\n**Aspirin cautions:**\n• **No ibuprofen** or other NSAIDs: they block aspirin\'s antiplatelet effect. [1]\n• **Influenza or recent varicella vaccine:** Reye syndrome risk. Discuss an alternative antiplatelet drug and use acetaminophen for fever. Give inactivated flu vaccine only. [1]\n\nNext: check for **high risk**, which decides whether steroids are added to this first treatment.',
     citation: [1, 2, 3],
     calculatorLinks: [
       { id: 'kawasaki-doses', label: 'Kawasaki Doses' },
     ],
-    recommendation: 'Kawasaki disease: IVIG 2 g/kg as a single infusion over 8-12 hours plus aspirin (30-50 mg/kg/day until afebrile 48-72 hours, then 3-5 mg/kg/day), given as soon as the diagnosis is made and ideally within 10 days of fever onset; do not delay for the echocardiogram.',
+    recommendation: 'Kawasaki disease: IVIG 2 g/kg as a single infusion over 8-12 hours plus aspirin (moderate 30-50 or high 80-100 mg/kg/day until afebrile 48-72 hours, then 3-5 mg/kg/day), given as soon as the diagnosis is made and ideally within 10 days of fever onset; do not delay for the echocardiogram.',
     confidence: 'recommended',
     next: 'kd-risk',
-    summary: 'IVIG 2 g/kg over 8-12 h + aspirin 30-50 mg/kg/day; no ibuprofen',
+    summary: 'IVIG 2 g/kg over 8-12 h + aspirin 30-100 mg/kg/day; no ibuprofen',
     safetyLevel: 'critical',
   },
 
@@ -228,15 +228,15 @@ export const KAWASAKI_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'High Risk at Diagnosis?',
-    body: '**High risk for coronary aneurysms (AHA 2024):** [2]\n• Coronary **Z-score 2.5 or more** on the first echo\n• **Age under 6 months**\n• **High Son score** (3-5 points): 2 points for a baseline LAD or RCA Z-score of 2.0 or more; 1 each for age under 6 months, Asian race, CRP 13 mg/dL or more [4]\n\n**Also treat as high risk:** shock (Kawasaki shock syndrome) or macrophage activation syndrome (ACR 2021). [3]\n\nJapanese risk scores (Kobayashi, Egami, Sano) perform poorly in North American children. [2]',
-    citation: [2, 3, 4],
+    body: '**High risk for coronary aneurysms (AHA 2024):** [2]\n• Coronary **Z-score 2.5 or more** on the first echo\n• **Age under 6 months**\n• **High Son score** (3-5 points): 2 points for a baseline LAD or RCA Z-score of 2.0 or more; 1 each for age under 6 months, Asian race, CRP 13 mg/dL or more [4]\n\n**Shock or macrophage activation syndrome:** get an echo with coronary measurements (ACR strong recommendation), treat MAS with additional agents alongside IVIG, and involve PICU and rheumatology; these children often resist IVIG. [3][8]\n\nJapanese risk scores (Kobayashi, Egami, Sano) perform poorly in North American children. [3]',
+    citation: [2, 3, 4, 8],
     calculatorLinks: [
       { id: 'kawasaki-high-risk', label: 'High-Risk Screen' },
     ],
     options: [
       {
         label: 'Yes: high risk',
-        description: 'Add steroids to the first IVIG',
+        description: 'Add an adjunct (steroids, or infliximab) to the first IVIG',
         next: 'kd-steroids',
         urgency: 'urgent',
       },
@@ -246,23 +246,23 @@ export const KAWASAKI_NODES: DecisionNode[] = [
         next: 'kd-response',
       },
     ],
-    summary: 'Z 2.5+, age under 6 mo, Son 3+, shock or MAS = high risk',
+    summary: 'Z 2.5+, age under 6 mo, Son 3+ = high risk; shock or MAS = specialist-directed therapy',
   },
 
   {
     id: 'kd-steroids',
     type: 'info',
     module: 4,
-    title: 'High Risk: Add Steroids',
-    body: '**Where steroids fit first-line:** added to IVIG and aspirin for high-risk patients, never instead of IVIG.\n\n• [Prednisolone](#/drug/prednisolone/kawasaki) **2 mg/kg/day split every 8 hours (max 60 mg/day)**, IV first and then oral once afebrile; when CRP has normalized, **taper over 15 days** (RAISE regimen). In the US, where IV prednisolone is not marketed, the IV phase is given as methylprednisolone: agree the dose with pharmacy. [5]\n• **Evidence:** in RAISE (Japan, high-risk children), coronary abnormalities fell from 23% to 3%. [5]\n• **Strength:** ACR 2021 conditionally recommends IVIG plus glucocorticoids over IVIG alone for high-risk patients; AHA 2017 rates a longer steroid course with IVIG in high-risk patients **Class IIb**. [3][1]\n• **Not recommended:** a single pulse of methylprednisolone added to the first IVIG as routine therapy (AHA 2017 Class III). [1]\n\nDiscuss with pediatric cardiology or rheumatology.',
+    title: 'High Risk: Add an Adjunct to the First IVIG',
+    body: '**Adjuncts are added to IVIG and aspirin for high-risk patients, never instead of IVIG.** ACR 2021 conditionally recommends either:\n• **Glucocorticoids** (low certainty; the better-studied option), or\n• **A non-glucocorticoid immunomodulator** such as [infliximab](#/drug/infliximab/kawasaki), anakinra or cyclosporine (very low certainty). [3]\n\n**Steroids:**\n• [Prednisolone](#/drug/prednisolone/kawasaki) **2 mg/kg/day split every 8 hours (max 60 mg/day)**, IV first and then oral once afebrile; when CRP has normalized, **taper over 15 days** (RAISE regimen). In the US, where IV prednisolone is not marketed, the IV phase is given as methylprednisolone: agree the dose with pharmacy. [5]\n• **Evidence:** in RAISE (Japan; high risk defined by the Japanese Kobayashi score, not the North American criteria above), coronary abnormalities fell from 23% to 3%. [5]\n• **Strength:** ACR 2021 conditionally recommends IVIG plus glucocorticoids over IVIG alone for high-risk patients; AHA 2017 rates a longer steroid course with IVIG in high-risk patients **Class IIb**. [3][1]\n• **Not recommended:** a single pulse of methylprednisolone added to the first IVIG as routine therapy (AHA 2017 Class III). [1]\n\nChoose the adjunct with pediatric cardiology or rheumatology.',
     citation: [1, 3, 5],
     calculatorLinks: [
       { id: 'kawasaki-doses', label: 'Kawasaki Doses' },
     ],
-    recommendation: 'High-risk Kawasaki disease (coronary Z-score 2.5 or more, age under 6 months, high Son score, shock or macrophage activation syndrome): consider adding a tapering corticosteroid course (prednisolone 2 mg/kg/day, max 60 mg/day, tapered over 15 days after CRP normalizes) to IVIG and aspirin.',
+    recommendation: 'High-risk Kawasaki disease (coronary Z-score 2.5 or more, age under 6 months, or high Son score): consider adding an adjunct to IVIG and aspirin with the specialist: a tapering corticosteroid course (prednisolone 2 mg/kg/day, max 60 mg/day, tapered over 15 days after CRP normalizes) or a non-glucocorticoid immunomodulator such as infliximab.',
     confidence: 'consider',
     next: 'kd-response',
-    summary: 'Prednisolone 2 mg/kg/day (max 60) with the first IVIG, 15-day taper',
+    summary: 'Steroids (prednisolone 2 mg/kg/day, 15-day taper) or infliximab with the first IVIG',
   },
 
   // =====================================================================
@@ -297,7 +297,7 @@ export const KAWASAKI_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'IVIG-Resistant Kawasaki: Infliximab, Second IVIG or Steroids',
-    body: '**Options** (with pediatric rheumatology or cardiology): [1][2][3][6]\n• **Second** [IVIG](#/drug/ivig/kawasaki resistant) **2 g/kg** over 8-12 hours. ACR 2021 conditionally prefers it over steroids; AHA 2017 Class IIa.\n• [Infliximab](#/drug/infliximab/kawasaki) **10 mg/kg IV once, over 2 hours** (KIDCARE dose; AHA 2024 table). In KIDCARE, infliximab settled fever more often than a second IVIG (77% vs 51% met the primary outcome), with shorter fever and hospital stay. AHA 2017 Class IIb.\n• **Steroids:** [pulse methylprednisolone](#/drug/methylprednisolone/kawasaki) 20-30 mg/kg IV daily for 1-3 days (max 1 g) with or without an oral taper, or a longer prednisolone course (AHA 2017 Class IIb).\n\n**Still not settling:** cyclosporine, anakinra, or other immunomodulators with specialist input (AHA 2017 Class IIb). [1][2]\n\n**Where infliximab does NOT fit:** added to the first IVIG it did not reduce IVIG resistance (11% in both groups), though fever ended a day sooner. [7]',
+    body: '**Options** (with pediatric rheumatology or cardiology): [1][2][3][6]\n• **Second** [IVIG](#/drug/ivig/kawasaki resistant) **2 g/kg** over 8-12 hours. ACR 2021 conditionally prefers it over steroids; AHA 2017 Class IIa.\n• [Infliximab](#/drug/infliximab/kawasaki) **10 mg/kg IV once, over 2 hours** (KIDCARE dose; AHA 2024 table). In KIDCARE, infliximab settled fever more often than a second IVIG (77% vs 51% met the primary outcome), with shorter fever and hospital stay. AHA 2017 Class IIb.\n• **Steroids:** [pulse methylprednisolone](#/drug/methylprednisolone/kawasaki) 20-30 mg/kg IV daily for 1-3 days (max 1 g) with or without an oral taper, or a longer prednisolone course (AHA 2017 Class IIb).\n\n**Still not settling:** cyclosporine, anakinra, or other immunomodulators with specialist input (AHA 2017 Class IIb). [1][2]\n\n**Infliximab with the first IVIG:** in an unselected trial it did not reduce IVIG resistance (11% in both groups), though fever ended a day sooner. [7] ACR 2021 still allows it as a first-line adjunct for high-risk children (conditional, very low certainty): see [High Risk](#/node/kd-steroids). [3]',
     citation: [1, 2, 3, 6, 7],
     calculatorLinks: [
       { id: 'kawasaki-doses', label: 'Kawasaki Doses' },
@@ -352,7 +352,7 @@ export const KAWASAKI_NODES: DecisionNode[] = [
     type: 'info',
     module: 8,
     title: 'Disposition and Follow-Up',
-    body: '• **Admit all children** with Kawasaki disease being treated, or with incomplete Kawasaki under evaluation who need serial labs and echocardiography.\n• **PICU:** shock, myocardial dysfunction, macrophage activation syndrome, or giant aneurysms needing anticoagulation.\n• **Pediatric cardiology** for every patient; rheumatology for high-risk or IVIG-resistant disease.\n• **Discharge** once afebrile on low-dose aspirin, with echo follow-up at 1-2 weeks and 4-6 weeks. [1][2]\n• **Vaccines:** defer measles and varicella vaccines for **11 months** after IVIG; give inactivated influenza vaccine (no live vaccine while on aspirin). [1][2]\n• **Tell families:** return for new fever, and avoid ibuprofen while on aspirin.',
+    body: '• **Admit all children** with Kawasaki disease being treated, or with incomplete Kawasaki under evaluation who need serial labs and echocardiography.\n• **PICU:** shock, myocardial dysfunction, macrophage activation syndrome, or giant aneurysms needing anticoagulation.\n• **Pediatric cardiology** for every patient; rheumatology for high-risk or IVIG-resistant disease.\n• **Discharge** once afebrile on low-dose aspirin, with echo follow-up at 1-2 weeks and 4-6 weeks. [1][2]\n• **Vaccines:** defer measles and varicella vaccines for **11 months** after IVIG (the IVIG blocks them). While on aspirin, give inactivated influenza vaccine, not the live nasal vaccine (Reye syndrome risk). [1][2]\n• **Tell families:** return for new fever, and avoid ibuprofen while on aspirin.',
     citation: [1, 2],
     recommendation: 'Admit children treated for Kawasaki disease with pediatric cardiology involvement; arrange echocardiography at 1-2 and 4-6 weeks and defer measles and varicella vaccines for 11 months after IVIG.',
     confidence: 'recommended',
@@ -388,7 +388,7 @@ export const KAWASAKI_CRITICAL_ACTIONS = [
   { text: 'Fever 5+ days in a child, or 7+ days unexplained in an infant: think Kawasaki', nodeId: 'kd-start' },
   { text: 'Incomplete KD with high CRP/ESR and 3+ supplemental labs: IVIG + aspirin before the echo', nodeId: 'kd-treat-before-echo' },
   { text: 'IVIG 2 g/kg + aspirin as soon as diagnosed; the echo never delays treatment', nodeId: 'kd-initial-tx' },
-  { text: 'High risk (Z 2.5+, under 6 months, shock, MAS): add steroids to the first IVIG', nodeId: 'kd-steroids' },
+  { text: 'High risk (Z 2.5+, under 6 months, Son 3+): add steroids or infliximab to the first IVIG', nodeId: 'kd-steroids' },
   { text: 'Fever 36+ h after IVIG: second IVIG or infliximab 10 mg/kg (or steroids)', nodeId: 'kd-resistant' },
 ];
 

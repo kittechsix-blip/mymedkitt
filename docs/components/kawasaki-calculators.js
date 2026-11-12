@@ -12,6 +12,9 @@ const TREAT = 'IVIG 2 g/kg over 8-12 hours plus aspirin. Do not wait for the ech
 export function kdCriteria(i) {
     if (!Number.isFinite(i.feverDays) || i.feverDays <= 0)
         return 'incomplete-input';
+    // Features that suggest another diagnosis come first: look for it before labeling Kawasaki (AHA 2017).
+    if (i.alternative && (i.features >= 2 || (i.infant && i.feverDays >= 7)))
+        return 'alternative';
     if (i.features >= 4 && i.feverDays >= 4)
         return 'complete';
     if (i.feverDays >= 5 && i.features >= 2)
@@ -51,6 +54,8 @@ export const KAWASAKI_CRITERIA_CALCULATOR = {
         const altNote = alt ? '\n\n**Another diagnosis is more likely** with these features (pus in eyes or throat, ulcers, blisters, widespread nodes, big spleen). Look for it before labeling Kawasaki.' : '';
         if (c === 'incomplete-input')
             return { value: '--', label: 'Enter the days of fever', description: `${features} of 5 features selected.`, colorVar: '--color-text-muted' };
+        if (c === 'alternative')
+            return { value: 'Look for another diagnosis first', label: `${features} of 5 features, fever day ${feverDays}`, description: `Pus in the eyes or throat, mouth ulcers, blisters, widespread nodes or a big spleen point away from Kawasaki: test for the alternative (strep, adenovirus, measles, EBV, drug reaction, toxic shock) first. If no alternative is found and Kawasaki criteria are met, treat as Kawasaki; discuss with pediatrics or cardiology.`, colorVar: '--color-warning' };
         if (c === 'complete')
             return { value: 'Complete Kawasaki', label: `${features} of 5 features, fever day ${feverDays}`, description: `**Treat now:** ${TREAT}${feverDays === 4 ? '\n\nDay 4 diagnosis is for clinicians experienced with Kawasaki disease; discuss with pediatrics or cardiology.' : ''}${altNote}`, colorVar: '--color-danger' };
         if (c === 'incomplete-kd')
@@ -142,10 +147,6 @@ export function kdHighRisk(i) {
         reasons.push('coronary Z-score 2.5 or more at diagnosis');
     if (i.under6mo)
         reasons.push('age under 6 months');
-    if (i.shock)
-        reasons.push('shock (Kawasaki shock syndrome)');
-    if (i.mas)
-        reasons.push('macrophage activation syndrome');
     if (tier === 'high')
         reasons.push(`Son score ${son} (high)`);
     return { son, tier, reasons, steroids: reasons.length > 0 };
@@ -153,8 +154,8 @@ export function kdHighRisk(i) {
 export const KAWASAKI_HIGH_RISK_CALCULATOR = {
     id: 'kawasaki-high-risk',
     title: 'Kawasaki High-Risk Screen',
-    subtitle: 'Son score + high-risk features → add steroids to the first IVIG?',
-    description: 'AHA 2024 lists high risk for coronary aneurysms as a coronary Z-score of 2.5 or more at diagnosis, age under 6 months, or a high Son score. ACR 2021 conditionally recommends adding glucocorticoids to the first IVIG for high-risk patients, and for life-threatening presentations (shock, macrophage activation syndrome). AHA 2017 rates a longer steroid course with IVIG in high-risk patients Class IIb. Japanese scores (Kobayashi, Egami, Sano) perform poorly in North American children and are not used here. Son score: 2 points for a baseline LAD or RCA Z-score of 2.0 or more, 1 point each for age under 6 months, Asian race and CRP 13 mg/dL or more.',
+    subtitle: 'Son score + high-risk features → add an adjunct to the first IVIG?',
+    description: 'AHA 2024 lists high risk for coronary aneurysms as a coronary Z-score of 2.5 or more at diagnosis, age under 6 months, or a high Son score. For high-risk children ACR 2021 conditionally recommends adding glucocorticoids (low certainty) or a non-glucocorticoid immunomodulator such as infliximab (very low certainty) to the first IVIG. Shock and macrophage activation syndrome need an echo and specialist-directed therapy. Japanese scores (Kobayashi, Egami, Sano) perform poorly in North American children and are not used here. Son score: 2 points for a baseline LAD or RCA Z-score of 2.0 or more, 1 point each for age under 6 months, Asian race and CRP 13 mg/dL or more.',
     fields: [
         { name: 'z', label: 'Highest LAD or RCA Z-score on the first echo', type: 'number', points: 0, valueIsPoints: true, unit: 'Z' },
         { name: 'young', label: 'Age under 6 months at fever onset', type: 'toggle', points: 1 },
@@ -164,24 +165,27 @@ export const KAWASAKI_HIGH_RISK_CALCULATOR = {
         { name: 'mas', label: 'Macrophage activation syndrome suspected', description: 'Falling platelets and fibrinogen, very high ferritin, rising AST/ALT, splenomegaly', type: 'toggle', points: 1 },
     ],
     results: [],
-    thresholdNote: 'Son score in its North American derivation cohort: 3-5 points = high risk, with coronary aneurysms in 41% at 2-8 weeks; 2 = moderate; 0-1 = low. Steroids are added to IVIG and aspirin, never instead of IVIG.',
+    thresholdNote: 'Son score: 3-5 points = high risk (coronary aneurysms at 2-8 weeks in 41% of the derivation cohort and 52% of the validation cohort); 2 = moderate; 0-1 = low. Adjuncts are added to IVIG and aspirin, never instead of IVIG.',
     citations: [AHA24, ACR, SON, AHA17, RAISE],
     computeResult: (values) => {
         const num = (k) => (values[k] === undefined || values[k] === null ? NaN : values[k]);
         const r = kdHighRisk({ zMax: num('z'), under6mo: (values['young'] || 0) > 0, asian: (values['asian'] || 0) > 0, crp: num('crp'), shock: (values['shock'] || 0) > 0, mas: (values['mas'] || 0) > 0 });
+        const severe = (values['shock'] || 0) > 0 || (values['mas'] || 0) > 0
+            ? '\n\n**Shock or macrophage activation syndrome:** echo with coronary measurements, PICU, and specialist-directed therapy (MAS needs additional agents alongside IVIG, ACR strong recommendation). These children often resist IVIG.'
+            : '';
         const echoNote = Number.isFinite(num('z')) && num('z') !== 0 ? '' : '\n\nNo Z-score entered yet: the first echo can move the patient into high risk (2 points for Z 2.0 or more).';
         if (r.steroids) {
             return {
-                value: 'High risk: add steroids',
+                value: 'High risk: add an adjunct',
                 label: `Son score ${r.son} (${r.tier})`,
-                description: `**High risk because:** ${r.reasons.join('; ')}.\n\n**Add to IVIG and aspirin:** prednisolone 2 mg/kg/day divided every 8 hours (max 60 mg/day), IV first then oral; once CRP normalizes, taper over 15 days (RAISE regimen). In the US the IV phase is given as methylprednisolone; agree the dose with pharmacy. Discuss with pediatric cardiology or rheumatology.${echoNote}`,
+                description: `**High risk because:** ${r.reasons.join('; ')}.\n\n**Discuss with pediatric cardiology or rheumatology and add to IVIG and aspirin** (ACR 2021, conditional):\n• **Steroids:** prednisolone 2 mg/kg/day divided every 8 hours (max 60 mg/day), IV first then oral; once CRP normalizes, taper over 15 days (RAISE regimen). In the US the IV phase is given as methylprednisolone; agree the dose with pharmacy.\n• **Or a non-glucocorticoid immunomodulator** such as infliximab (very low certainty).${severe}${echoNote}`,
                 colorVar: '--color-danger',
             };
         }
         return {
             value: r.tier === 'moderate' ? 'Moderate risk' : 'Standard risk',
             label: `Son score ${r.son} (${r.tier})`,
-            description: `IVIG and aspirin alone. No routine steroids. Watch for IVIG resistance: fever persisting or returning 36 hours or more after the infusion ends.${echoNote}`,
+            description: `IVIG and aspirin alone. No routine adjunct. Watch for IVIG resistance: fever persisting or returning 36 hours or more after the infusion ends.${severe}${echoNote}`,
             colorVar: r.tier === 'moderate' ? '--color-warning' : '--color-primary',
         };
     },
@@ -268,7 +272,7 @@ export const KAWASAKI_DOSES_CALCULATOR = {
             value: `IVIG ${d.ivigG} g`,
             label: '2 g/kg once over 8-12 hours',
             description: [
-                `**Aspirin, acute phase:** ${d.asaModMg[0]}-${d.asaModMg[1]} mg/day split every 6 hours (30-50 mg/kg/day, AHA 2024). Older US high dose: ${d.asaHighMg[0]}-${d.asaHighMg[1]} mg/day (80-100 mg/kg/day), no proven advantage. Continue until afebrile 48-72 hours.`,
+                `**Aspirin, acute phase (either is acceptable):** moderate ${d.asaModMg[0]}-${d.asaModMg[1]} mg/day (30-50 mg/kg/day) or high ${d.asaHighMg[0]}-${d.asaHighMg[1]} mg/day (80-100 mg/kg/day), split every 6 hours, until afebrile 48-72 hours. The optimal dose is unclear.`,
                 `**Aspirin, low dose:** ${d.asaLowMg[0]}-${d.asaLowMg[1]} mg once daily (3-5 mg/kg) until the 4-6 week echo; longer with aneurysms.`,
                 `**High risk, with the first IVIG (prednisolone, RAISE):** ${d.prednisoloneMgDay} mg/day = ${d.prednisoloneMgDose} mg every 8 hours (2 mg/kg/day, max 60 mg/day); taper over 15 days once CRP is normal.`,
                 `**IVIG-resistant options:** second IVIG ${d.ivigG} g; or infliximab ${d.infliximabMg} mg IV once over 2 hours (10 mg/kg, KIDCARE); or pulse methylprednisolone ${d.mpPulseMg} mg IV daily for 1-3 days (20-30 mg/kg, max 1 g; shown at 30 mg/kg).`,

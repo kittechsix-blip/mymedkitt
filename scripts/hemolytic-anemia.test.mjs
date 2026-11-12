@@ -12,6 +12,8 @@ test('LDH + haptoglobin carry the call', () => {
   assert.equal(hemolysisCall(labs(-1, -1)), 'incomplete');
   assert.equal(hemolysisCall(labs(1, 1)), 'likely');
   assert.equal(hemolysisCall(labs(0, 0)), 'unlikely');
+  assert.equal(hemolysisCall(labs(0, 0, { reticHigh: 1 })), 'possible', 'raised retics keep hemolysis possible');
+  assert.equal(hemolysisCall(labs(0, 0, { biliHigh: 1 })), 'possible', 'raised indirect bilirubin keeps hemolysis possible');
   assert.equal(hemolysisCall(labs(0, 0, { hemoglobinuria: true })), 'possible', 'hemoglobinuria never reads as unlikely');
   assert.equal(hemolysisCall(labs(1, 0)), 'possible');
   assert.equal(hemolysisCall(labs(-1, 1)), 'possible');
@@ -31,12 +33,17 @@ test('reticulocyte production index', () => {
   assert.equal(maturationFactor(35), 1.5);
   assert.equal(maturationFactor(25), 2);
   assert.equal(maturationFactor(15), 2.5);
-  const r = reticIndex(10, 22.5); // corrected 5, factor 2, RPI 2.5
-  assert.equal(r.corrected, 5);
-  assert.equal(r.rpi, 2.5);
+  const r = reticIndex(10, 25); // corrected 5.56, factor 2.0
+  assert.ok(Math.abs(r.corrected - 50 / 9) < 1e-9);
+  assert.equal(r.factor, 2);
+  // Continuous: Hct 39 and 40 give nearly the same factor (no step).
+  assert.ok(Math.abs(maturationFactor(39) - maturationFactor(40)) < 0.051);
+  assert.equal(maturationFactor(60), 1, 'clamped at 1.0');
+  assert.equal(maturationFactor(5), 2.5, 'clamped at 2.5');
+  assert.doesNotMatch(R.computeResult({ retic: 3.2, hct: 30.5 }).value, /^RPI 2\.0$/);
   assert.equal(reticIndex(-1, 30), null);
   assert.equal(reticIndex(3, 0), null);
-  assert.equal(R.computeResult({ retic: 10, hct: 22.5 }).value, 'RPI 2.5');
+  assert.equal(R.computeResult({ retic: 10, hct: 22.5 }).value, 'RPI 2.3');
   assert.match(R.computeResult({ retic: 2, hct: 24 }).label, /Inadequate/);
   assert.equal(R.computeResult({}).value, '--');
 });

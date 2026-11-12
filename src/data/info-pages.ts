@@ -30942,7 +30942,7 @@ const FROSTBITE_SUMMARY_PAGE: InfoPage = {
     },
     {
       heading: '4. Reperfusion',
-      body: '• [tPA within 24 h of thaw (best within 12 h) for grade 3+](#/node/frostbite-tpa)\n• [Iloprost (prostacyclin) up to 72 h, or when tPA is contraindicated](#/node/frostbite-iloprost)\n• [No capability here: transfer](#/node/frostbite-transfer)',
+      body: '• [tPA within 24 h of thaw (earlier is better) for grade 3+](#/node/frostbite-tpa)\n• [Iloprost (prostacyclin) up to 72 h, or when tPA is contraindicated](#/node/frostbite-iloprost)\n• [No capability here: transfer](#/node/frostbite-transfer)',
     },
     {
       heading: '5-6. Wound Care and Compartments',
@@ -30998,7 +30998,7 @@ const VKDB_SUMMARY_PAGE: InfoPage = {
     },
     {
       heading: '4. Treat',
-      body: '• [Major: vitamin K 1 mg slow IV + 4F-PCC (or FFP 15-20 mL/kg)](#/node/vkdb-treat-major)\n• [Minor: vitamin K 1 mg SC or slow IV, recheck INR](#/node/vkdb-treat-minor)',
+      body: '• [Major: vitamin K 1 mg slow IV + 4F-PCC (or FFP 15-20 mL/kg)](#/node/vkdb-treat-major)\n• [Minor: vitamin K 1 mg SC (IV only if SC not feasible), recheck INR](#/node/vkdb-treat-minor)',
     },
     {
       heading: '5-6. Safety and Cause',
@@ -31010,7 +31010,7 @@ const VKDB_SUMMARY_PAGE: InfoPage = {
     },
     {
       heading: 'Talking With Parents Who Decline the Shot',
-      body: '• Babies are born low in vitamin K and breast milk has little, so some bleed without warning.\n• Without the shot, the late form is about 81 times more likely, and it often bleeds into the brain. [2]\n• One injection protects for months; oral drops need repeated doses and protect less. [1]\n• The shot is safe: the old worry about childhood cancer was studied and not confirmed. [1]\n• Bring the baby in right away for any bleeding, bruising, blood in stool, pallor, poor feeding or sleepiness.',
+      body: '• Babies are born low in vitamin K and breast milk has little, so some bleed without warning.\n• Without the shot, about 4 to 7 of every 100,000 babies get the late form, and it often bleeds into the brain. [2]\n• One injection protects for months; oral drops need repeated doses and protect less. [1]\n• The shot is safe: the old worry about childhood cancer was studied and not confirmed. [1]\n• Bring the baby in right away for any bleeding, bruising, blood in stool, pallor, poor feeding or sleepiness.',
     },
   ],
   citations: [
@@ -31042,11 +31042,11 @@ const KAWASAKI_SUMMARY_PAGE: InfoPage = {
     },
     {
       heading: '3. Initial Treatment',
-      body: '• [IVIG 2 g/kg over 8-12 h + aspirin 30-50 mg/kg/day; echo never delays it](#/node/kd-initial-tx)',
+      body: '• [IVIG 2 g/kg over 8-12 h + aspirin 30-100 mg/kg/day; echo never delays it](#/node/kd-initial-tx)',
     },
     {
-      heading: '4. High Risk: Steroids',
-      body: '• [Z 2.5+, under 6 months, Son 3+, shock, MAS](#/node/kd-risk)\n• [Prednisolone 2 mg/kg/day with the first IVIG, 15-day taper](#/node/kd-steroids)',
+      heading: '4. High Risk: Steroids or Infliximab',
+      body: '• [Z 2.5+, under 6 months, Son 3+; shock or MAS needs specialist therapy](#/node/kd-risk)\n• [Steroids (prednisolone 2 mg/kg/day, 15-day taper) or infliximab with the first IVIG](#/node/kd-steroids)',
     },
     {
       heading: '5. IVIG Resistance: Infliximab',
