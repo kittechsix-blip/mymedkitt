@@ -728,7 +728,7 @@ const ASPIRIN = {
     genericName: 'Acetylsalicylic acid',
     drugClass: 'Antiplatelet (COX inhibitor)',
     route: 'PO',
-    indications: ['Acute ischemic stroke', 'Acute coronary syndrome', 'Secondary stroke prevention', 'DAPT (dual antiplatelet therapy)', 'Preeclampsia prophylaxis (pregnancy)'],
+    indications: ['Acute ischemic stroke', 'Acute coronary syndrome', 'Secondary stroke prevention', 'DAPT (dual antiplatelet therapy)', 'Preeclampsia prophylaxis (pregnancy)', 'Kawasaki disease (child)'],
     dosing: [
         {
             indication: 'ACS / STEMI (loading)',
@@ -750,6 +750,22 @@ const ASPIRIN = {
             indication: 'DAPT (minor stroke)',
             regimen: '325 mg loading dose + clopidogrel 300 mg on day 1. Then aspirin 81 mg + clopidogrel 75 mg daily \u00D7 21 days, followed by single antiplatelet.',
         },
+        {
+            indication: 'Kawasaki disease, acute phase (child)',
+            regimen: '30-50 mg/kg/day PO divided every 6 hours (AHA 2024 dose), with IVIG, until afebrile for 48-72 hours. The older US high dose, 80-100 mg/kg/day, has no proven advantage. Then switch to low dose. No ibuprofen or other NSAIDs. With influenza or recent varicella vaccine, discuss an alternative antiplatelet drug (Reye syndrome).',
+            weightCalc: [
+                { dosePerKg: 30, unit: 'mg', dailyDivided: 4, label: 'Acute, 30 mg/kg/day' },
+                { dosePerKg: 50, unit: 'mg', dailyDivided: 4, label: 'Acute, 50 mg/kg/day' },
+            ],
+        },
+        {
+            indication: 'Kawasaki disease, low-dose antiplatelet (child)',
+            regimen: '3-5 mg/kg PO once daily, from 48-72 hours afebrile until the 4-6 week echocardiogram is normal; longer (often lifelong) with coronary aneurysms, per cardiology.',
+            weightCalc: [
+                { dosePerKg: 3, unit: 'mg', label: 'Low dose, 3 mg/kg once daily' },
+                { dosePerKg: 5, unit: 'mg', label: 'Low dose, 5 mg/kg once daily' },
+            ],
+        },
     ],
     contraindications: [
         'Active intracranial hemorrhage',
@@ -766,6 +782,8 @@ const ASPIRIN = {
     citations: [
         'Powers WJ, et al. Guidelines for the Early Management of Acute Ischemic Stroke: 2019 Update. Stroke. 2019;50(12):e344-e418.',
         'Johnston SC, et al. Clopidogrel and Aspirin in Acute Ischemic Stroke and High-Risk TIA (POINT). N Engl J Med. 2018;379(3):215-225.',
+        'Jone PN, Tremoulet A, Choueiter N, et al. Update on diagnosis and management of Kawasaki disease: a scientific statement from the American Heart Association. Circulation. 2024;150(23):e481-e500.',
+        'McCrindle BW, Rowley AH, Newburger JW, et al. Diagnosis, treatment, and long-term management of Kawasaki disease: a scientific statement for health professionals from the American Heart Association. Circulation. 2017;135(17):e927-e999.',
     ],
 };
 const ATAZANAVIR = {
@@ -3500,7 +3518,7 @@ const IVIG = {
     genericName: 'Immune globulin intravenous (human), polyspecific',
     drugClass: 'Pooled human immunoglobulin G',
     route: 'IV',
-    indications: ['Toxic shock syndrome, refractory (adjunct; strongest data in streptococcal TSS)', 'Warm autoimmune hemolytic anemia (rescue)'],
+    indications: ['Toxic shock syndrome, refractory (adjunct; strongest data in streptococcal TSS)', 'Warm autoimmune hemolytic anemia (rescue)', 'Kawasaki disease (initial treatment and IVIG-resistant disease)'],
     dosing: [
         {
             indication: 'Toxic shock syndrome (refractory shock): adjunct, with ID consultation',
@@ -3514,6 +3532,16 @@ const IVIG = {
             indication: 'Warm autoimmune hemolytic anemia (rescue)',
             regimen: '0.4-0.5 g/kg/day IV for 5 days. About 40% respond, usually for weeks only: a temporary rescue for severe or life-threatening anemia (e.g. Hb under 6 g/dL) while steroids and rituximab take effect.',
             weightCalc: { dosePerKg: 0.4, unit: 'g', label: 'Warm AIHA, per day for 5 days (0.4 g/kg)' },
+        },
+        {
+            indication: 'Kawasaki disease (initial treatment)',
+            regimen: '2 g/kg IV as a single infusion over 8-12 hours, with aspirin, as soon as the diagnosis is made and ideally within 10 days of fever onset. After day 10, give it if fever persists without another cause or coronary arteries are abnormal, with ongoing inflammation (raised CRP/ESR). Do not delay it for the echocardiogram. Infuse more slowly with shock or poor heart function. In obesity, agree the dosing weight with pharmacy.',
+            weightCalc: { dosePerKg: 2, unit: 'g', label: 'Kawasaki disease (2 g/kg once)' },
+        },
+        {
+            indication: 'Kawasaki disease, IVIG-resistant (second dose)',
+            regimen: 'Fever persisting or returning 36 hours or more after the first infusion ended: a second 2 g/kg IV over 8-12 hours (AHA 2017 Class IIa; ACR 2021 conditionally prefers it over steroids). Infliximab is the main alternative.',
+            weightCalc: { dosePerKg: 2, unit: 'g', label: 'Second dose (2 g/kg)' },
         },
     ],
     contraindications: [
@@ -3529,7 +3557,7 @@ const IVIG = {
         'Product-specific concentrations and infusion rates differ: follow pharmacy and the product label',
     ],
     monitoring: 'Vital signs during infusion, urine output and creatinine, hemoglobin (hemolysis), signs of thrombosis and volume overload.',
-    notes: 'Pooled IgG contains antibodies that neutralize staphylococcal and streptococcal superantigens and dampen T-cell activation. Supply is limited and cost is high: confirm availability with pharmacy.',
+    notes: 'Pooled IgG contains antibodies that neutralize staphylococcal and streptococcal superantigens and dampen T-cell activation. Supply is limited and cost is high: confirm availability with pharmacy. After high-dose IVIG (Kawasaki), defer measles and varicella vaccines for 11 months.',
     citations: [
         'Darenberg J, Ihendyane N, Sjölin J, et al. Intravenous immunoglobulin G therapy in streptococcal toxic shock syndrome: a European randomized, double-blind, placebo-controlled trial. Clin Infect Dis. 2003;37(3):333-340.',
         'Kaul R, McGeer A, Norrby-Teglund A, et al. Intravenous immunoglobulin therapy for streptococcal toxic shock syndrome: a comparative observational study. Clin Infect Dis. 1999;28(4):800-807.',
@@ -3537,6 +3565,44 @@ const IVIG = {
         'Chen KYH, Cheung M, Burgner DP, Curtis N. Toxic shock syndrome in Australian children. Arch Dis Child. 2016;101(8):736-740.',
         'Atchade E, et al. Toxic shock syndrome: a literature review. Antibiotics (Basel). 2024;13(1):96.',
         'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.',
+        'McCrindle BW, Rowley AH, Newburger JW, et al. Diagnosis, treatment, and long-term management of Kawasaki disease: a scientific statement for health professionals from the American Heart Association. Circulation. 2017;135(17):e927-e999.',
+        'Jone PN, Tremoulet A, Choueiter N, et al. Update on diagnosis and management of Kawasaki disease: a scientific statement from the American Heart Association. Circulation. 2024;150(23):e481-e500.',
+        'Gorelik M, Chung SA, Ardalan K, et al. 2021 American College of Rheumatology/Vasculitis Foundation guideline for the management of Kawasaki disease. Arthritis Rheumatol. 2022;74(4):586-596.',
+        'Burns JC, Roberts SC, Tremoulet AH, et al. Infliximab versus second intravenous immunoglobulin for treatment of resistant Kawasaki disease in the USA (KIDCARE): a randomised, multicentre comparative effectiveness trial. Lancet Child Adolesc Health. 2021;5(12):852-861.',
+    ],
+};
+const INFLIXIMAB = {
+    id: 'infliximab',
+    name: 'Infliximab (Remicade)',
+    genericName: 'Infliximab',
+    drugClass: 'Monoclonal antibody (TNF-alpha inhibitor)',
+    route: 'IV',
+    indications: ['Kawasaki disease, IVIG-resistant (off-label)'],
+    dosing: [
+        {
+            indication: 'Kawasaki disease, IVIG-resistant (off-label)',
+            regimen: '10 mg/kg IV once, over 2 hours (KIDCARE trial dose and AHA 2024 table; earlier studies used 5 mg/kg). For fever persisting or returning 36 hours or more after IVIG. In KIDCARE, fever settled faster and hospital stays were shorter than with a second IVIG. Give with pediatric rheumatology or cardiology.\n\n**Not for routine first-line use:** added to the first IVIG it did not reduce IVIG resistance (Tremoulet, Lancet 2014).',
+            weightCalc: { dosePerKg: 10, unit: 'mg', label: 'IVIG-resistant Kawasaki (10 mg/kg once)' },
+        },
+    ],
+    contraindications: [
+        'Known hypersensitivity to infliximab or murine proteins',
+        'Active serious infection (sepsis, untreated abscess)',
+    ],
+    cautions: [
+        'Boxed warnings (long-term use): serious infections including tuberculosis, and malignancy',
+        'Infusion reactions: monitor during and after the infusion',
+        'Live vaccines: discuss timing with the specialist (and for infants exposed in pregnancy)',
+        'Off-label for Kawasaki disease: specialist decision',
+    ],
+    monitoring: 'Vital signs during the infusion, temperature curve, CRP, and follow-up echocardiography.',
+    notes: 'A single dose in IVIG-resistant Kawasaki disease was well tolerated in the trials. AHA 2017 rated infliximab for resistant disease Class IIb; ACR 2021 accepts non-steroid immunosuppressants such as infliximab as an alternative to a second IVIG.',
+    citations: [
+        'Burns JC, Roberts SC, Tremoulet AH, et al. Infliximab versus second intravenous immunoglobulin for treatment of resistant Kawasaki disease in the USA (KIDCARE): a randomised, multicentre comparative effectiveness trial. Lancet Child Adolesc Health. 2021;5(12):852-861.',
+        'Tremoulet AH, Jain S, Jaggi P, et al. Infliximab for intensification of primary therapy for Kawasaki disease: a phase 3 randomised, double-blind, placebo-controlled trial. Lancet. 2014;383(9930):1731-1738.',
+        'Jone PN, Tremoulet A, Choueiter N, et al. Update on diagnosis and management of Kawasaki disease: a scientific statement from the American Heart Association. Circulation. 2024;150(23):e481-e500.',
+        'McCrindle BW, Rowley AH, Newburger JW, et al. Diagnosis, treatment, and long-term management of Kawasaki disease: a scientific statement for health professionals from the American Heart Association. Circulation. 2017;135(17):e927-e999.',
+        'Gorelik M, Chung SA, Ardalan K, et al. 2021 American College of Rheumatology/Vasculitis Foundation guideline for the management of Kawasaki disease. Arthritis Rheumatol. 2022;74(4):586-596.',
     ],
 };
 const LOFEXIDINE = {
@@ -4216,6 +4282,11 @@ const METHYLPREDNISOLONE = {
             indication: 'Warm autoimmune hemolytic anemia (fulminant)',
             regimen: 'With hematology: 100-200 mg/day IV for 10-14 days, or 250-1000 mg/day IV for 1-3 days, then oral prednisone. Evidence is limited to case reports and serious infection risk rises; reserve for fulminant hemolysis.',
         },
+        {
+            indication: 'Kawasaki disease, IVIG-resistant (pulse)',
+            regimen: '20-30 mg/kg IV once daily for 1-3 days (max 1 g per dose), with or without an oral prednisolone taper (AHA 2017 Class IIb). For fever persisting or returning 36 hours or more after IVIG; a second IVIG or infliximab are the main alternatives. A single pulse given with the FIRST IVIG is not recommended (AHA 2017 Class III).',
+            weightCalc: { dosePerKg: 30, unit: 'mg', maxDose: 1000, label: 'Pulse, 30 mg/kg/day (max 1 g)' },
+        },
     ],
     contraindications: [
         'Systemic fungal infections (relative — do NOT withhold in adrenal crisis)',
@@ -4232,6 +4303,9 @@ const METHYLPREDNISOLONE = {
         'Bornstein SR, et al. Diagnosis and Treatment of Primary Adrenal Insufficiency. JCEM. 2016;101(2):364-389.',
         'Zanella A, Barcellini W. Treatment of autoimmune hemolytic anemias. Haematologica. 2014;99(10):1547-1554.',
         'Hill QA, Stamps R, Massey E, et al. The diagnosis and management of primary autoimmune haemolytic anaemia. Br J Haematol. 2017;176(3):395-411.',
+        'McCrindle BW, Rowley AH, Newburger JW, et al. Diagnosis, treatment, and long-term management of Kawasaki disease: a scientific statement for health professionals from the American Heart Association. Circulation. 2017;135(17):e927-e999.',
+        'Jone PN, Tremoulet A, Choueiter N, et al. Update on diagnosis and management of Kawasaki disease: a scientific statement from the American Heart Association. Circulation. 2024;150(23):e481-e500.',
+        'Gorelik M, Chung SA, Ardalan K, et al. 2021 American College of Rheumatology/Vasculitis Foundation guideline for the management of Kawasaki disease. Arthritis Rheumatol. 2022;74(4):586-596.',
     ],
 };
 const METHYLPREDNISOLONE_IV = {
@@ -5441,7 +5515,7 @@ const PREDNISOLONE = {
     genericName: 'Prednisolone',
     drugClass: 'Corticosteroid (glucocorticoid)',
     route: 'PO',
-    indications: ['Croup (alternative to dexamethasone)', 'Asthma exacerbation', 'Inflammatory conditions', 'Adrenal maintenance (alternative)'],
+    indications: ['Croup (alternative to dexamethasone)', 'Asthma exacerbation', 'Inflammatory conditions', 'Adrenal maintenance (alternative)', 'Kawasaki disease, high risk (with IVIG)'],
     dosing: [
         {
             indication: 'Croup',
@@ -5456,6 +5530,11 @@ const PREDNISOLONE = {
         {
             indication: 'Adrenal maintenance (alternative)',
             regimen: '3-5 mg PO once daily. Alternative to hydrocortisone for adrenal insufficiency maintenance. Advantage: once-daily dosing improves adherence. Available as liquid formulation for children. No mineralocorticoid activity — must add fludrocortisone for primary AI.',
+        },
+        {
+            indication: 'Kawasaki disease, high risk (with IVIG and aspirin)',
+            regimen: '2 mg/kg/day divided every 8 hours (max 60 mg/day), given with the first IVIG (RAISE regimen). IV first (in the US, where IV prednisolone is not marketed, the IV phase is given as methylprednisolone; agree the dose with pharmacy), then PO once afebrile; when CRP has normalized, taper over 15 days. For high risk at diagnosis: coronary Z-score 2.5 or more, age under 6 months, shock, or macrophage activation (AHA 2017 Class IIb; ACR 2021 conditional).',
+            weightCalc: { dosePerKg: 2, unit: 'mg', maxDose: 60, dailyDivided: 3, label: 'Kawasaki, 2 mg/kg/day (max 60 mg/day)' },
         },
     ],
     contraindications: [
@@ -5472,6 +5551,9 @@ const PREDNISOLONE = {
     citations: [
         'Parker CM, Cooper MN. Prednisolone Versus Dexamethasone for Croup: A Randomized Controlled Trial. Pediatrics. 2019;144(3):e20183772.',
         'Aregbesola A, et al. Glucocorticoids for Croup in Children. Cochrane Database Syst Rev. 2023;1:CD001955.',
+        'Kobayashi T, Saji T, Otani T, et al. Efficacy of immunoglobulin plus prednisolone for prevention of coronary artery abnormalities in severe Kawasaki disease (RAISE study): a randomised, open-label, blinded-endpoints trial. Lancet. 2012;379(9826):1613-1620.',
+        'Gorelik M, Chung SA, Ardalan K, et al. 2021 American College of Rheumatology/Vasculitis Foundation guideline for the management of Kawasaki disease. Arthritis Rheumatol. 2022;74(4):586-596.',
+        'McCrindle BW, Rowley AH, Newburger JW, et al. Diagnosis, treatment, and long-term management of Kawasaki disease: a scientific statement for health professionals from the American Heart Association. Circulation. 2017;135(17):e927-e999.',
     ],
 };
 const PREDNISONE = {
@@ -14481,6 +14563,7 @@ export const ALL_DRUGS = [
     LEVOTHYROXINE,
     LIDOCAINE,
     IVIG,
+    INFLIXIMAB,
     ILOPROST,
     LINEZOLID,
     LOFEXIDINE,

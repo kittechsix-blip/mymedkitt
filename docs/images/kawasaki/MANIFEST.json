@@ -1,0 +1,20 @@
+{
+  "kawasaki-criteria.svg": {
+    "source_url": "myMedKitt original schematic (after AHA 2017 principal clinical criteria)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+    "author": "myMedKitt",
+    "retrieval_timestamp": "2026-11-12T14:00:00Z",
+    "andy_approval_commit": "Andy approved kawasaki outline (original diagrams), 2026-11-12",
+    "sha256": "533ccc057a31ea32d534da513f36bd4b2120ed66ac48a708fcd0a4d61c5abebe"
+  },
+  "incomplete-kd-algorithm.svg": {
+    "source_url": "myMedKitt original schematic (after AHA 2017 Figure 3, unchanged in AHA 2024)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+    "author": "myMedKitt",
+    "retrieval_timestamp": "2026-11-12T14:00:00Z",
+    "andy_approval_commit": "Andy approved kawasaki outline (original diagrams), 2026-11-12",
+    "sha256": "5912d65ee9070221907b5f7fe9bb19056374726b9841082be7372688296c559d"
+  }
+}

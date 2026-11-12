@@ -1611,6 +1611,14 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'doses', label: 'VKDB Doses', icon: '💉', action: 'calculator', target: 'vkdb-doses', pinned: true },
     { id: 'ich', label: 'Brain Bleed', icon: '🧠', action: 'jump', target: 'vkdb-ich', pinned: true },
   ],
+  'kawasaki': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'kawasaki-summary', pinned: true },
+    { id: 'criteria', label: 'Criteria', icon: '✅', action: 'calculator', target: 'kawasaki-criteria', pinned: true },
+    { id: 'incomplete', label: 'Incomplete KD', icon: '🧪', action: 'calculator', target: 'kawasaki-incomplete', pinned: true },
+    { id: 'high-risk', label: 'High Risk', icon: '⚠️', action: 'calculator', target: 'kawasaki-high-risk', pinned: true },
+    { id: 'coronary-z', label: 'Coronary Z', icon: '❤️', action: 'calculator', target: 'kawasaki-coronary-z', pinned: true },
+    { id: 'doses', label: 'KD Doses', icon: '💉', action: 'calculator', target: 'kawasaki-doses', pinned: true },
+  ],
   'hemolytic-anemia': [
     { id: 'hemolysis-labs', label: 'Hemolysis Labs', icon: '🧪', action: 'calculator', target: 'hemolysis-labs', pinned: true },
     { id: 'rpi', label: 'Retic Index', icon: '🩸', action: 'calculator', target: 'reticulocyte-index', pinned: true },

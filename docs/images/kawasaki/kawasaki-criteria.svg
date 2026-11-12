@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 700" role="img" aria-labelledby="t d">
+  <title id="t">Kawasaki disease: fever plus the five principal features</title>
+  <desc id="d">A child figure with five labelled features: lips and mouth (red cracked lips, strawberry tongue), eyes (both red, no pus), rash (polymorphous, trunk), hands and feet (red and swollen, later peeling around nails), and neck node (1.5 cm or larger, usually one side). Complete Kawasaki: fever 5 days or more plus 4 of 5. Incomplete: fever 5 days or more with 2 or 3, or an infant with 7 days or more of unexplained fever.</desc>
+  <rect width="640" height="700" fill="#ffffff"/>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="320" y="38" text-anchor="middle" font-size="24" font-weight="700" fill="#222">Fever 5+ days and the 5 features</text>
+    <text x="320" y="64" text-anchor="middle" font-size="15" fill="#555">Features come and go: ask about earlier days</text>
+
+    <!-- child figure -->
+    <g stroke="#555" stroke-width="3" fill="#fdf1e7">
+      <circle cx="320" cy="170" r="62"/>
+      <path d="M262 250 Q320 228 378 250 L392 420 L248 420 Z"/>
+      <path d="M262 258 L198 360" fill="none" stroke-width="22" stroke-linecap="round" stroke="#f3d9c6"/>
+      <path d="M378 258 L442 360" fill="none" stroke-width="22" stroke-linecap="round" stroke="#f3d9c6"/>
+      <path d="M282 420 L272 545" fill="none" stroke-width="26" stroke-linecap="round" stroke="#f3d9c6"/>
+      <path d="M358 420 L368 545" fill="none" stroke-width="26" stroke-linecap="round" stroke="#f3d9c6"/>
+    </g>
+    <!-- eyes red -->
+    <g fill="#ffffff" stroke="#555" stroke-width="2">
+      <ellipse cx="297" cy="160" rx="13" ry="8"/><ellipse cx="343" cy="160" rx="13" ry="8"/>
+    </g>
+    <circle cx="297" cy="160" r="4" fill="#333"/><circle cx="343" cy="160" r="4" fill="#333"/>
+    <g stroke="#d33a2c" stroke-width="1.6"><path d="M285 158 L291 160 M285 163 L291 161 M309 158 L303 160 M331 158 L337 160 M355 158 L349 160 M355 163 L349 161"/></g>
+    <!-- lips -->
+    <path d="M298 196 Q320 214 342 196 Q320 204 298 196 Z" fill="#c62828" stroke="#8e1b1b" stroke-width="2"/>
+    <!-- node -->
+    <circle cx="364" cy="228" r="11" fill="#e8a33d" stroke="#8a5a12" stroke-width="2"/>
+    <!-- rash -->
+    <g fill="#d9534f" opacity="0.8">
+      <circle cx="292" cy="290" r="6"/><circle cx="318" cy="305" r="7"/><circle cx="345" cy="285" r="5"/><circle cx="300" cy="335" r="6"/>
+      <circle cx="338" cy="330" r="7"/><circle cx="322" cy="360" r="5"/><circle cx="290" cy="385" r="6"/><circle cx="352" cy="375" r="6"/>
+    </g>
+    <!-- hands/feet red -->
+    <g fill="#e57373" stroke="#a33" stroke-width="2">
+      <circle cx="194" cy="370" r="17"/><circle cx="446" cy="370" r="17"/>
+      <ellipse cx="266" cy="560" rx="24" ry="13"/><ellipse cx="374" cy="560" rx="24" ry="13"/>
+    </g>
+
+    <!-- callouts -->
+    <g font-size="16" fill="#222">
+      <line x1="295" y1="160" x2="170" y2="118" stroke="#888" stroke-width="1.5"/>
+      <text x="20" y="100" font-weight="700" fill="#b03a2e">1 Eyes</text>
+      <text x="20" y="120">Both red, no pus</text>
+
+      <line x1="300" y1="203" x2="170" y2="215" stroke="#888" stroke-width="1.5"/>
+      <text x="20" y="200" font-weight="700" fill="#b03a2e">2 Lips and mouth</text>
+      <text x="20" y="220">Red, cracked lips;</text>
+      <text x="20" y="240">strawberry tongue</text>
+
+      <line x1="375" y1="228" x2="470" y2="200" stroke="#888" stroke-width="1.5"/>
+      <text x="472" y="190" font-weight="700" fill="#b03a2e">3 Neck node</text>
+      <text x="472" y="210">1.5 cm or larger,</text>
+      <text x="472" y="230">usually one side</text>
+
+      <line x1="352" y1="300" x2="470" y2="300" stroke="#888" stroke-width="1.5"/>
+      <text x="472" y="292" font-weight="700" fill="#b03a2e">4 Rash</text>
+      <text x="472" y="312">Polymorphous;</text>
+      <text x="472" y="332">no blisters</text>
+
+      <line x1="185" y1="385" x2="140" y2="430" stroke="#888" stroke-width="1.5"/>
+      <line x1="250" y1="565" x2="170" y2="500" stroke="#888" stroke-width="1.5"/>
+      <text x="20" y="450" font-weight="700" fill="#b03a2e">5 Hands and feet</text>
+      <text x="20" y="470">Red, swollen early;</text>
+      <text x="20" y="490">peeling at nails later</text>
+    </g>
+
+    <!-- summary boxes -->
+    <rect x="30" y="595" width="285" height="88" rx="10" fill="#fbe9e7" stroke="#b8322a" stroke-width="2"/>
+    <text x="172" y="622" text-anchor="middle" font-size="17" font-weight="700" fill="#b8322a">Complete</text>
+    <text x="172" y="646" text-anchor="middle" font-size="15" fill="#333">Fever 5+ days + 4 of 5</text>
+    <text x="172" y="668" text-anchor="middle" font-size="13" fill="#666">(day 4 for experienced clinicians)</text>
+    <rect x="325" y="595" width="285" height="88" rx="10" fill="#fbf0e3" stroke="#d07a1e" stroke-width="2"/>
+    <text x="467" y="622" text-anchor="middle" font-size="17" font-weight="700" fill="#b0620f">Incomplete</text>
+    <text x="467" y="646" text-anchor="middle" font-size="15" fill="#333">Fever 5+ days + 2 or 3</text>
+    <text x="467" y="668" text-anchor="middle" font-size="13" fill="#666">or infant: 7+ days unexplained fever</text>
+  </g>
+</svg>

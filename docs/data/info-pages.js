@@ -29761,6 +29761,48 @@ const VKDB_SUMMARY_PAGE = {
         { num: 3, text: 'Shearer MJ. Vitamin K deficiency bleeding (VKDB) in early infancy. Blood Rev. 2009;23(2):49-59.' },
     ],
 };
+// -------------------------------------------------------------------
+// Kawasaki disease (added 2026-11-12)
+// -------------------------------------------------------------------
+const KAWASAKI_SUMMARY_PAGE = {
+    id: 'kawasaki-summary',
+    title: 'Kawasaki Disease: Steps Summary',
+    subtitle: 'Quick Reference',
+    sections: [
+        {
+            body: 'Stepwise approach to Kawasaki disease. Tap any step to jump to that section of the consult.',
+        },
+        {
+            heading: '1. Recognize',
+            body: '• [Fever 5+ days (infant 7+ days unexplained) + the 5 features](#/node/kd-start)\n• [Complete (4 or more) vs incomplete (2-3)](#/node/kd-criteria)',
+        },
+        {
+            heading: '2. Incomplete Kawasaki Algorithm',
+            body: '• [CRP 3+ mg/dL or ESR 40+](#/node/kd-incomplete-labs)\n• [3+ supplemental labs: treat before the echo](#/node/kd-treat-before-echo)\n• [Fewer than 3: echo decides](#/node/kd-echo)\n• [Negative echo, fever continues](#/node/kd-echo-negative)',
+        },
+        {
+            heading: '3. Initial Treatment',
+            body: '• [IVIG 2 g/kg over 8-12 h + aspirin 30-50 mg/kg/day; echo never delays it](#/node/kd-initial-tx)',
+        },
+        {
+            heading: '4. High Risk: Steroids',
+            body: '• [Z 2.5+, under 6 months, Son 3+, shock, MAS](#/node/kd-risk)\n• [Prednisolone 2 mg/kg/day with the first IVIG, 15-day taper](#/node/kd-steroids)',
+        },
+        {
+            heading: '5. IVIG Resistance: Infliximab',
+            body: '• [Fever 36+ h after IVIG: second IVIG, infliximab 10 mg/kg, or steroids](#/node/kd-resistant)',
+        },
+        {
+            heading: '6-8. Coronaries, Differential, Disposition',
+            body: '• [Z-score classes and antithrombotic plan](#/node/kd-coronary)\n• [Mimics, KD shock syndrome, MIS-C](#/node/kd-differential)\n• [Admit; echo 1-2 and 4-6 weeks; defer MMR/varicella 11 months](#/node/kd-dispo)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'McCrindle BW, Rowley AH, Newburger JW, et al. Diagnosis, treatment, and long-term management of Kawasaki disease: a scientific statement for health professionals from the American Heart Association. Circulation. 2017;135(17):e927-e999.' },
+        { num: 2, text: 'Jone PN, Tremoulet A, Choueiter N, et al. Update on diagnosis and management of Kawasaki disease: a scientific statement from the American Heart Association. Circulation. 2024;150(23):e481-e500.' },
+        { num: 3, text: 'Gorelik M, Chung SA, Ardalan K, et al. 2021 American College of Rheumatology/Vasculitis Foundation guideline for the management of Kawasaki disease. Arthritis Rheumatol. 2022;74(4):586-596.' },
+    ],
+};
 const HEMOLYTIC_ANEMIA_SUMMARY_PAGE = {
     id: 'hemolytic-anemia-summary',
     title: 'Hemolytic Anemia: Steps Summary',
@@ -30261,6 +30303,7 @@ export const INFO_PAGES = {
     'hemolytic-anemia-summary': HEMOLYTIC_ANEMIA_SUMMARY_PAGE,
     'hemolytic-anemia-ddx': HEMOLYTIC_ANEMIA_DDX_PAGE,
     'vkdb-summary': VKDB_SUMMARY_PAGE,
+    'kawasaki-summary': KAWASAKI_SUMMARY_PAGE,
     'staph-tss-summary': STAPH_TSS_SUMMARY_PAGE,
     'staph-tss-cdc-criteria': STAPH_TSS_CDC_CRITERIA_PAGE,
     'staph-tss-vs-strep': STAPH_TSS_VS_STREP_PAGE,

@@ -265,6 +265,7 @@ export const TREE_REGISTRY = {
   'dfsa-workup':      { prefix: 'DFSA_WORKUP',         entryNodeId: 'dfsa-start',         categoryId: 'emergency-medicine' },
   'hypothermia':      { prefix: 'HYPOTHERMIA',         entryNodeId: 'hypo-start',         categoryId: 'emergency-medicine' },
   'vkdb':             { prefix: 'VKDB',                entryNodeId: 'vkdb-start',         categoryId: 'pediatrics' },
+  'kawasaki':         { prefix: 'KAWASAKI',            entryNodeId: 'kd-start',           categoryId: 'pediatrics' },
   'hemolytic-anemia': { prefix: 'HEMOLYTIC_ANEMIA',    entryNodeId: 'hemolytic-anemia-start', categoryId: 'heme-onc' },
   'frostbite':        { prefix: 'FROSTBITE',           entryNodeId: 'frostbite-start',    categoryId: 'emergency-medicine' },
   'awake-intubation': { prefix: 'AWAKE_INTUBATION',    entryNodeId: 'awake-start',       categoryId: 'anesthesia-airway' },

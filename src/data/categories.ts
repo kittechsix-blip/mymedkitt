@@ -3122,6 +3122,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'vkdb-start',
       },
       {
+        id: 'kawasaki',
+        title: 'Kawasaki Disease',
+        subtitle: 'Criteria → Incomplete KD algorithm (treat before echo) → IVIG + aspirin → Steroids for high risk → Infliximab for IVIG resistance → Coronary Z-score',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 16,
+        entryNodeId: 'kd-start',
+      },
+      {
         id: 'sickle-cell',
         title: 'Sickle Cell Disease',
         subtitle: 'VOC Pain \u2192 Fever \u2192 ACS \u2192 Stroke \u2192 Splenic Sequestration \u2192 SCT',

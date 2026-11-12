@@ -1382,6 +1382,10 @@ async function loadHardcodedFallback(treeId: string): Promise<TreeConfig | null>
       const m = await import('../data/trees/hypothermia.js');
       return { nodes: m.HYPOTHERMIA_NODES, entryNodeId: 'hypo-start', categoryId: 'emergency-medicine', moduleLabels: m.HYPOTHERMIA_MODULE_LABELS, citations: m.HYPOTHERMIA_CITATIONS, criticalActions: m.HYPOTHERMIA_CRITICAL_ACTIONS };
     },
+    'kawasaki': async () => {
+      const m = await import('../data/trees/kawasaki.js');
+      return { nodes: m.KAWASAKI_NODES, entryNodeId: 'kd-start', categoryId: 'pediatrics', moduleLabels: m.KAWASAKI_MODULE_LABELS, citations: m.KAWASAKI_CITATIONS, criticalActions: m.KAWASAKI_CRITICAL_ACTIONS }
+    },
     'vkdb': async () => {
       const m = await import('../data/trees/vkdb.js');
       return { nodes: m.VKDB_NODES, entryNodeId: 'vkdb-start', categoryId: 'pediatrics', moduleLabels: m.VKDB_MODULE_LABELS, citations: m.VKDB_CITATIONS, criticalActions: m.VKDB_CRITICAL_ACTIONS };
