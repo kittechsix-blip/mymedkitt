@@ -29715,6 +29715,52 @@ const HA_CITES = [
     { num: 4, text: 'Jäger U, Barcellini W, Broome CM, et al. Diagnosis and treatment of autoimmune hemolytic anemia in adults: recommendations from the First International Consensus Meeting. Blood Rev. 2020;41:100648.' },
     { num: 5, text: 'Luzzatto L, Ally M, Notaro R. Glucose-6-phosphate dehydrogenase deficiency. Blood. 2020;136(11):1225-1240.' },
 ];
+// -------------------------------------------------------------------
+// VKDB (added 2026-11-11)
+// -------------------------------------------------------------------
+const VKDB_SUMMARY_PAGE = {
+    id: 'vkdb-summary',
+    title: 'VKDB: Steps Summary',
+    subtitle: 'Quick Reference',
+    sections: [
+        {
+            body: 'Stepwise approach to vitamin K deficiency bleeding in infants. Tap any step to jump to that section of the consult.',
+        },
+        {
+            heading: '1. Recognize',
+            body: '• [No vitamin K shot + bleeding infant; warning bleeds; early, classic, late](#/node/vkdb-start)',
+        },
+        {
+            heading: '2. Brain Bleed Screen',
+            body: '• [Lethargy, vomiting, seizure, bulging fontanelle: vitamin K IV + PCC, head CT, PICU](#/node/vkdb-ich)',
+        },
+        {
+            heading: '3. Labs',
+            body: '• [Long PT, normal platelets and fibrinogen; PT corrects with vitamin K](#/node/vkdb-labs)',
+        },
+        {
+            heading: '4. Treat',
+            body: '• [Major: vitamin K 1 mg slow IV + 4F-PCC (or FFP 15-20 mL/kg)](#/node/vkdb-treat-major)\n• [Minor: vitamin K 1 mg SC or slow IV, recheck INR](#/node/vkdb-treat-minor)',
+        },
+        {
+            heading: '5-6. Safety and Cause',
+            body: '• [VKDB does not exclude abuse](#/node/vkdb-abuse)\n• [Conjugated bilirubin: biliary atresia](#/node/vkdb-cause)',
+        },
+        {
+            heading: '7-8. Prevention and Disposition',
+            body: '• [1 mg IM at birth; counsel families who decline](#/node/vkdb-prevention)\n• [Admit all; PICU for ICH](#/node/vkdb-dispo)',
+        },
+        {
+            heading: 'Talking With Parents Who Decline the Shot',
+            body: '• Babies are born low in vitamin K and breast milk has little, so some bleed without warning.\n• Without the shot, the late form is about 81 times more likely, and it often bleeds into the brain. [2]\n• One injection protects for months; oral drops need repeated doses and protect less. [1]\n• The shot is safe: the old worry about childhood cancer was studied and not confirmed. [1]\n• Bring the baby in right away for any bleeding, bruising, blood in stool, pallor, poor feeding or sleepiness.',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Hand I, Noble L, Abrams SA. Vitamin K and the newborn infant. Pediatrics. 2022;149(3):e2021056036.' },
+        { num: 2, text: 'Centers for Disease Control and Prevention. Notes from the field: late vitamin K deficiency bleeding in infants whose parents declined vitamin K prophylaxis — Tennessee, 2013. MMWR Morb Mortal Wkly Rep. 2013;62(45):901-902.' },
+        { num: 3, text: 'Shearer MJ. Vitamin K deficiency bleeding (VKDB) in early infancy. Blood Rev. 2009;23(2):49-59.' },
+    ],
+};
 const HEMOLYTIC_ANEMIA_SUMMARY_PAGE = {
     id: 'hemolytic-anemia-summary',
     title: 'Hemolytic Anemia: Steps Summary',
@@ -30214,6 +30260,7 @@ export const INFO_PAGES = {
     'frostbite-summary': FROSTBITE_SUMMARY_PAGE,
     'hemolytic-anemia-summary': HEMOLYTIC_ANEMIA_SUMMARY_PAGE,
     'hemolytic-anemia-ddx': HEMOLYTIC_ANEMIA_DDX_PAGE,
+    'vkdb-summary': VKDB_SUMMARY_PAGE,
     'staph-tss-summary': STAPH_TSS_SUMMARY_PAGE,
     'staph-tss-cdc-criteria': STAPH_TSS_CDC_CRITERIA_PAGE,
     'staph-tss-vs-strep': STAPH_TSS_VS_STREP_PAGE,

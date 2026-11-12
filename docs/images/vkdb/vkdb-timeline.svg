@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" role="img" aria-labelledby="t d">
+  <title id="t">Vitamin K deficiency bleeding: three types by age at onset</title>
+  <desc id="d">Timeline from birth to 6 months. Early VKDB in the first 24 hours, from maternal drugs, with scalp, intracranial and intra-abdominal bleeding. Classic VKDB on days 2 to 7, in babies who had no vitamin K, with gut, umbilical, circumcision and heel-stick bleeding. Late VKDB from 2 weeks to 6 months, peak 3 to 8 weeks, in exclusively breastfed babies without vitamin K or with cholestasis, presenting with intracranial hemorrhage in 30 to 60 percent.</desc>
+  <rect width="640" height="640" fill="#ffffff"/>
+  <text x="320" y="40" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#222">VKDB: three types by age</text>
+  <text x="320" y="66" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#555">Age at onset of bleeding (not to scale)</text>
+
+  <!-- timeline -->
+  <line x1="40" y1="120" x2="600" y2="120" stroke="#444" stroke-width="3"/>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#444" text-anchor="middle">
+    <line x1="40" y1="110" x2="40" y2="130" stroke="#444" stroke-width="3"/><text x="40" y="100">Birth</text>
+    <line x1="120" y1="110" x2="120" y2="130" stroke="#444" stroke-width="3"/><text x="120" y="100">24 h</text>
+    <line x1="230" y1="110" x2="230" y2="130" stroke="#444" stroke-width="3"/><text x="230" y="100">1 wk</text>
+    <line x1="290" y1="110" x2="290" y2="130" stroke="#444" stroke-width="3"/><text x="290" y="100">2 wk</text>
+    <line x1="600" y1="110" x2="600" y2="130" stroke="#444" stroke-width="3"/><text x="600" y="100">6 mo</text>
+  </g>
+  <rect x="40" y="132" width="80" height="18" fill="#7a3fa0"/>
+  <rect x="120" y="132" width="110" height="18" fill="#d07a1e"/>
+  <rect x="290" y="132" width="310" height="18" fill="#b8322a"/>
+  <rect x="330" y="132" width="110" height="18" fill="#7d1b16"/>
+  <text x="385" y="168" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#7d1b16">peak 3-8 weeks</text>
+
+  <!-- cards -->
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="195" width="580" height="120" rx="12" fill="#f3ebf8" stroke="#7a3fa0" stroke-width="2"/>
+    <text x="50" y="226" font-size="21" font-weight="700" fill="#7a3fa0">Early: first 24 hours</text>
+    <text x="50" y="254" font-size="16" fill="#333">Cause: maternal anticonvulsants, warfarin, rifampin, isoniazid</text>
+    <text x="50" y="280" font-size="16" fill="#333">Bleeds: scalp (cephalohematoma), intracranial, intra-abdominal</text>
+    <text x="50" y="304" font-size="14" fill="#666">Birth vitamin K may not prevent it: mother needs a plan</text>
+
+    <rect x="30" y="330" width="580" height="120" rx="12" fill="#fbf0e3" stroke="#d07a1e" stroke-width="2"/>
+    <text x="50" y="361" font-size="21" font-weight="700" fill="#b0620f">Classic: days 2 to 7</text>
+    <text x="50" y="389" font-size="16" fill="#333">Cause: no vitamin K at birth, low intake in the first days</text>
+    <text x="50" y="415" font-size="16" fill="#333">Bleeds: gut, umbilical stump, circumcision, heel stick</text>
+    <text x="50" y="439" font-size="14" fill="#666">Prevented by vitamin K at birth (IM or oral)</text>
+
+    <rect x="30" y="465" width="580" height="145" rx="12" fill="#fbe9e7" stroke="#b8322a" stroke-width="2"/>
+    <text x="50" y="496" font-size="21" font-weight="700" fill="#b8322a">Late: 2 weeks to 6 months</text>
+    <text x="50" y="524" font-size="16" fill="#333">Cause: exclusively breastfed with no IM vitamin K at birth,</text>
+    <text x="50" y="546" font-size="16" fill="#333">or cholestasis / malabsorption (even after vitamin K)</text>
+    <text x="50" y="572" font-size="16" fill="#333">Bleeds: intracranial in 30-60%; warning bleeds often first</text>
+    <text x="50" y="598" font-size="14" fill="#666">Best prevented by the IM injection; oral regimens protect less</text>
+  </g>
+</svg>

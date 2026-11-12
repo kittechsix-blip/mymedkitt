@@ -1604,6 +1604,13 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'complications', label: 'Complications', icon: '⚠️', action: 'jump', target: 'hs-complications' },
     { id: 'seizure', label: 'Seizure Rx', icon: '⚡', action: 'jump', target: 'hs-seizure-rx' },
   ],
+  'vkdb': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'vkdb-summary', pinned: true },
+    { id: 'type-risk', label: 'VKDB Risk', icon: '👶', action: 'calculator', target: 'vkdb-type-risk', pinned: true },
+    { id: 'lab-pattern', label: 'Lab Pattern', icon: '🧪', action: 'calculator', target: 'vkdb-lab-pattern', pinned: true },
+    { id: 'doses', label: 'VKDB Doses', icon: '💉', action: 'calculator', target: 'vkdb-doses', pinned: true },
+    { id: 'ich', label: 'Brain Bleed', icon: '🧠', action: 'jump', target: 'vkdb-ich', pinned: true },
+  ],
   'hemolytic-anemia': [
     { id: 'hemolysis-labs', label: 'Hemolysis Labs', icon: '🧪', action: 'calculator', target: 'hemolysis-labs', pinned: true },
     { id: 'rpi', label: 'Retic Index', icon: '🩸', action: 'calculator', target: 'reticulocyte-index', pinned: true },

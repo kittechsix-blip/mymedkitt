@@ -8527,7 +8527,7 @@ const PCC_4FACTOR: DrugEntry = {
   genericName: 'Prothrombin complex concentrate (human)',
   drugClass: 'Coagulation factor replacement (Factors II, VII, IX, X, Protein C & S)',
   route: 'IV',
-  indications: ['Warfarin reversal in life-threatening bleeding', 'DOAC reversal (off-label)', 'Coagulopathy reversal for urgent surgery'],
+  indications: ['Warfarin reversal in life-threatening bleeding', 'DOAC reversal (off-label)', 'Coagulopathy reversal for urgent surgery', 'VKDB (infant major bleeding, off-label)'],
   dosing: [
     {
       indication: 'Warfarin reversal — ICH (goal INR <1.4), fixed dose 1000 IU (PROPER-3) or per institutional protocol',
@@ -8552,6 +8552,11 @@ const PCC_4FACTOR: DrugEntry = {
       regimen: 'Off-label, low-volume alternative to plasma for prolonged CK-R on TEG when rapid factor repletion is needed or volume overload is a concern. Typical 25-50 IU/kg IV (cap per institutional protocol; max 5000 IU). Does NOT replace fibrinogen or platelets — correct low CFF-MA with cryoprecipitate and low CRT-MA with platelets separately. Carries thrombotic risk; use only within a goal-directed protocol and reassess TEG in 30-60 min.',
       weightCalc: { dosePerKg: 25, unit: 'IU', maxDose: 5000, label: 'Trauma factor support' },
     },
+    {
+      indication: 'VKDB (infant major or intracranial bleeding)',
+      regimen: 'Off-label. About 30 units/kg IV (20-50 units/kg reported in infant case series); dose with hematology and pharmacy. Preferred over fresh frozen plasma for major VKDB bleeding in the BSH neonatal/pediatric guideline (low-quality evidence). Always give vitamin K 1 mg slow IV as well.',
+      weightCalc: { dosePerKg: 30, unit: 'units', label: 'VKDB infant (30 units/kg)' },
+    },
   ],
   contraindications: [
     'Known anaphylaxis to PCC components',
@@ -8570,6 +8575,8 @@ const PCC_4FACTOR: DrugEntry = {
     'Sarode R, et al. Efficacy and Safety of a 4-Factor PCC vs Plasma for Urgent Vitamin K Antagonist Reversal (INCH). Lancet. 2013;382(9899):1251-1256.',
     'Tomaselli GF, et al. 2020 ACC Expert Consensus: Management of Bleeding on Oral Anticoagulants. J Am Coll Cardiol. 2020;76(5):594-622.',
     'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose (weight- and INR-based) 4-factor PCC for vitamin K antagonist-related bleeding. Intracranial hemorrhage excluded from the trial.',
+    'New HV, Berryman J, Bolton-Maggs PHB, et al. Guidelines on transfusion for fetuses, neonates and older children. Br J Haematol. 2016;175(5):784-828.',
+    'Shearer MJ. Vitamin K deficiency bleeding (VKDB) in early infancy. Blood Rev. 2009;23(2):49-59.',
   ],
 };
 
@@ -8689,7 +8696,7 @@ const VITAMIN_K: DrugEntry = {
   genericName: 'Phytonadione (Vitamin K1)',
   drugClass: 'Vitamin K (coagulation cofactor)',
   route: 'IV',
-  indications: ['Warfarin reversal', 'Coagulopathy due to vitamin K deficiency', 'Supratherapeutic INR management', 'VAD warfarin reversal'],
+  indications: ['Warfarin reversal', 'Coagulopathy due to vitamin K deficiency', 'Supratherapeutic INR management', 'VAD warfarin reversal', 'VKDB treatment (infant)', 'VKDB prophylaxis (newborn)'],
   dosing: [
     {
       indication: 'Warfarin reversal — ICH (always with PCC)',
@@ -8702,6 +8709,14 @@ const VITAMIN_K: DrugEntry = {
     {
       indication: 'VAD warfarin reversal',
       regimen: '2.5-5 mg IV slow infusion (over 10-20 min) for moderate bleeding. 10 mg IV for life-threatening bleeding (combined with 4-factor PCC). Warfarin reversal carries LOW risk for acute pump thrombosis — do not withhold in life-threatening bleeding. Coordinate target INR with VAD team. Onset: 6-12 hours for full effect.',
+    },
+    {
+      indication: 'VKDB treatment (infant)',
+      regimen: '1 mg subcutaneously (label-preferred route) or slow IV, no faster than 1 mg/min. Use slow IV for major or intracranial bleeding (SC absorption is unreliable in shock), together with 4-factor PCC or plasma. Avoid IM while coagulopathic (muscle hematoma). PT should improve within hours; repeat if still prolonged. Higher doses may be needed if the mother took a vitamin K antagonist.',
+    },
+    {
+      indication: 'VKDB prophylaxis (newborn)',
+      regimen: 'Single IM dose within 6 hours of birth: 1 mg for infants over 1500 g; 0.3-0.5 mg/kg for 1500 g or less (AAP). Oral regimens are less effective against late VKDB and there is no FDA-approved oral neonatal product in the US.',
     },
   ],
   contraindications: [
@@ -8718,6 +8733,9 @@ const VITAMIN_K: DrugEntry = {
   citations: [
     'Greenberg SM, et al. 2022 Guideline for Management of Spontaneous ICH. Stroke. 2022;53(7):e282-e361.',
     'Tomaselli GF, et al. 2020 ACC: Management of Bleeding on Oral Anticoagulants. J Am Coll Cardiol. 2020;76(5):594-622.',
+    'Hand I, Noble L, Abrams SA. Vitamin K and the newborn infant. Pediatrics. 2022;149(3):e2021056036.',
+    'Shearer MJ. Vitamin K deficiency bleeding (VKDB) in early infancy. Blood Rev. 2009;23(2):49-59.',
+    'Phytonadione injectable emulsion (Vitamin K1 Injection). Prescribing information. Pfizer (Hospira).',
   ],
 };
 
@@ -10359,7 +10377,7 @@ const FFP: DrugEntry = {
   genericName: 'Fresh frozen plasma',
   drugClass: 'Blood Product',
   route: 'IV',
-  indications: ['Bradykinin-mediated angioedema (second-line)', 'Coagulopathy reversal', 'Warfarin reversal (if PCC unavailable)'],
+  indications: ['Bradykinin-mediated angioedema (second-line)', 'Coagulopathy reversal', 'Warfarin reversal (if PCC unavailable)', 'VKDB (infant), if PCC unavailable'],
   dosing: [
     {
       indication: 'Angioedema (second-line)',
@@ -10379,6 +10397,14 @@ const FFP: DrugEntry = {
         { dosePerKg: 20, unit: 'mL', label: 'INR >6' },
       ],
     },
+    {
+      indication: 'VKDB (infant), if PCC unavailable',
+      regimen: '15-20 mL/kg IV for major or intracranial VKDB bleeding when 4-factor PCC is unavailable, with vitamin K 1 mg slow IV. Watch for volume overload.',
+      weightCalc: [
+        { dosePerKg: 15, unit: 'mL', label: 'VKDB infant, low (15 mL/kg)' },
+        { dosePerKg: 20, unit: 'mL', label: 'VKDB infant, high (20 mL/kg)' },
+      ],
+    },
   ],
   contraindications: ['IgA deficiency with anti-IgA antibodies (risk of anaphylaxis)', 'Volume overload (relative \u2014 consider volume of 2-4 units)'],
   cautions: [
@@ -10394,6 +10420,7 @@ const FFP: DrugEntry = {
   citations: [
     'Saeb A, et al. Using fresh frozen plasma for acute airway angioedema to prevent intubation. Emerg Med Int. 2016;2016:6091510.',
     'Bernstein JA, et al. Angioedema in the emergency department: a practical guide. Int J Emerg Med. 2017;10(1):15.',
+    'New HV, Berryman J, Bolton-Maggs PHB, et al. Guidelines on transfusion for fetuses, neonates and older children. Br J Haematol. 2016;175(5):784-828.',
   ],
 };
 

@@ -3113,6 +3113,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
         entryNodeId: 'nrp-start',
       },
       {
+        id: 'vkdb',
+        title: 'Vitamin K Deficiency Bleeding (Infant)',
+        subtitle: 'No vitamin K shot → ICH screen → Labs → Vitamin K ± PCC → Abuse and cholestasis → Prevention',
+        categoryId: 'pediatrics',
+        version: '1.0',
+        nodeCount: 11,
+        entryNodeId: 'vkdb-start',
+      },
+      {
         id: 'sickle-cell',
         title: 'Sickle Cell Disease',
         subtitle: 'VOC Pain \u2192 Fever \u2192 ACS \u2192 Stroke \u2192 Splenic Sequestration \u2192 SCT',
