@@ -158,83 +158,125 @@ const NIHSS_FAST_LABELS = {
 };
 function renderNihssFastScoreSheet(container, onUpdate) {
     container.classList.add('nihss-fast-sheet');
+    const fields = NIHSS_CALCULATOR.fields;
+    /** Every item counts 0 until tapped; `scored` holds the items the clinician has actually answered. */
     const values = {};
-    const activeButtons = new Map();
-    const resetRow = document.createElement('div');
-    resetRow.className = 'nihss-fast-actions';
-    const resetBtn = document.createElement('button');
-    resetBtn.type = 'button';
-    resetBtn.className = 'nihss-fast-reset';
-    resetBtn.textContent = 'Reset';
-    resetRow.appendChild(resetBtn);
+    const scored = new Set();
+    const optionButtons = new Map();
+    const badges = new Map();
+    const statusRow = document.createElement('div');
+    statusRow.className = 'nihss-fast-actions nihss-row-status';
     const completion = document.createElement('span');
     completion.className = 'nihss-fast-completion';
-    resetRow.appendChild(completion);
-    container.appendChild(resetRow);
+    completion.setAttribute('aria-live', 'polite');
+    statusRow.appendChild(completion);
+    const progress = document.createElement('span');
+    progress.className = 'nihss-row-progress';
+    progress.setAttribute('role', 'progressbar');
+    progress.setAttribute('aria-label', 'Items scored');
+    progress.setAttribute('aria-valuemin', '0');
+    progress.setAttribute('aria-valuemax', String(fields.length));
+    const progressFill = document.createElement('span');
+    progressFill.className = 'nihss-row-progress-fill';
+    progress.appendChild(progressFill);
+    statusRow.appendChild(progress);
+    container.appendChild(statusRow);
+    const note = document.createElement('div');
+    note.className = 'nihss-row-note';
+    note.textContent = 'Items you have not tapped count as 0.';
+    note.hidden = true;
+    container.appendChild(note);
+    const paint = (fieldName) => {
+        const isScored = scored.has(fieldName);
+        for (const btn of optionButtons.get(fieldName) || []) {
+            const active = isScored && Number(btn.dataset.points) === values[fieldName];
+            btn.classList.toggle('active', active);
+            btn.setAttribute('aria-pressed', String(active));
+        }
+        const badge = badges.get(fieldName);
+        if (badge) {
+            badge.textContent = isScored ? String(values[fieldName]) : '\u2013';
+            badge.classList.toggle('scored', isScored);
+        }
+    };
     const updateCompletion = () => {
-        completion.textContent = `${Object.keys(values).length}/${NIHSS_CALCULATOR.fields.length} scored`;
+        completion.textContent = `${scored.size}/${fields.length} scored`;
+        progress.setAttribute('aria-valuenow', String(scored.size));
+        progressFill.style.width = `${(scored.size / fields.length) * 100}%`;
+        note.hidden = scored.size === 0 || scored.size === fields.length;
     };
     const setFieldValue = (fieldName, points) => {
         values[fieldName] = points;
-        const buttons = activeButtons.get(fieldName) || [];
-        for (const btn of buttons) {
-            btn.classList.toggle('active', Number(btn.dataset.points) === points);
-            btn.setAttribute('aria-pressed', String(Number(btn.dataset.points) === points));
-        }
+        scored.add(fieldName);
+        paint(fieldName);
         updateCompletion();
         onUpdate({ ...values });
     };
-    for (const field of NIHSS_CALCULATOR.fields) {
+    for (const field of fields) {
         values[field.name] = 0;
         const item = document.createElement('section');
         item.className = 'nihss-fast-item';
         const meta = NIHSS_FAST_LABELS[field.name] || { title: field.label };
+        const head = document.createElement('div');
+        head.className = 'nihss-row-head';
         const title = document.createElement('h2');
         title.className = 'nihss-fast-title';
         title.textContent = meta.title;
-        item.appendChild(title);
+        head.appendChild(title);
+        const badge = document.createElement('span');
+        badge.className = 'nihss-row-badge';
+        badge.setAttribute('aria-hidden', 'true');
+        badges.set(field.name, badge);
+        head.appendChild(badge);
+        item.appendChild(head);
         if (meta.prompt || field.description) {
             const prompt = document.createElement('div');
             prompt.className = 'nihss-fast-prompt';
             prompt.textContent = meta.prompt || field.description || '';
             item.appendChild(prompt);
         }
-        const buttonRow = document.createElement('div');
-        buttonRow.className = 'nihss-fast-score-row';
-        buttonRow.setAttribute('role', 'group');
-        buttonRow.setAttribute('aria-label', field.label);
+        const optionGroup = document.createElement('div');
+        optionGroup.className = 'nihss-row-options';
+        optionGroup.setAttribute('role', 'group');
+        optionGroup.setAttribute('aria-label', field.label);
         const buttons = [];
         for (const opt of field.selectOptions || []) {
             const btn = document.createElement('button');
             btn.type = 'button';
-            btn.className = 'nihss-fast-score-btn';
-            btn.textContent = String(opt.points);
+            btn.className = 'nihss-row-option';
             btn.dataset.points = String(opt.points);
             btn.setAttribute('aria-label', `${field.label}: ${opt.points}, ${opt.label}`);
-            btn.setAttribute('aria-pressed', String(opt.points === 0));
-            if (opt.points === 0)
-                btn.classList.add('active');
+            const pts = document.createElement('span');
+            pts.className = 'nihss-row-option-pts';
+            pts.textContent = String(opt.points);
+            btn.appendChild(pts);
+            const label = document.createElement('span');
+            label.className = 'nihss-row-option-label';
+            label.textContent = opt.label;
+            btn.appendChild(label);
             btn.addEventListener('click', () => setFieldValue(field.name, opt.points));
             buttons.push(btn);
-            buttonRow.appendChild(btn);
+            optionGroup.appendChild(btn);
         }
-        activeButtons.set(field.name, buttons);
-        item.appendChild(buttonRow);
-        const optionList = document.createElement('div');
-        optionList.className = 'nihss-fast-option-list';
-        for (const opt of field.selectOptions || []) {
-            const line = document.createElement('div');
-            line.textContent = `${opt.points} - ${opt.label}`;
-            optionList.appendChild(line);
-        }
-        item.appendChild(optionList);
+        optionButtons.set(field.name, buttons);
+        item.appendChild(optionGroup);
         container.appendChild(item);
+        paint(field.name);
     }
+    const resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.className = 'nihss-fast-reset nihss-row-reset';
+    resetBtn.textContent = 'Reset all items';
     resetBtn.addEventListener('click', () => {
-        for (const field of NIHSS_CALCULATOR.fields) {
-            setFieldValue(field.name, 0);
+        scored.clear();
+        for (const field of fields) {
+            values[field.name] = 0;
+            paint(field.name);
         }
+        updateCompletion();
+        onUpdate({ ...values });
     });
+    container.appendChild(resetBtn);
     updateCompletion();
     onUpdate({ ...values });
 }
