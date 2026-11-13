@@ -33,8 +33,9 @@
       "Remove standalone install manifest",
       "Point sharing links and QR code to the integrated myMedKitt consult",
       "Keep original navigation arrows above the measured toolbar height on tablets",
-      "Retain the three original unfilled photo slots without fetching missing files"
+      "Retain the three original unfilled photo slots without fetching missing files",
+      "2026-11-13: clinical content updated to Chesters et al., Emerg Med J 2026 (doi:10.1136/emermed-2026-216110): crucifix arms, ventilation pauses, two-clinician roles, Foley de-emphasized, lung-bleeding escalation with hilar twist last resort, aortic compression before clamp, massage 80-100/min, trauma VF priority order, 15 min window, futility"
     ],
-    "clinicalContentChanged": false
+    "clinicalContentChanged": true
   }
 ]

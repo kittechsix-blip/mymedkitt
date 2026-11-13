@@ -6,8 +6,8 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'info',
         module: 1,
         title: 'Resuscitative Thoracotomy: 2-Minute Review',
-        body: 'Use this as a rapid procedural reminder for selected traumatic arrest.\n\nOpen first:\n- [2-Minute Steps](#/info/thorac-steps)\n- [Indications](#/info/thorac-indications)\n- [Incision Landmarks](#/info/thorac-incision)\n\nCore sequence:\n1. Left anterolateral thoracotomy\n2. Enter pleura and spread ribs\n3. Open pericardium anterior to phrenic nerve\n4. Relieve tamponade/control cardiac wound\n5. Open cardiac massage\n6. Cross-clamp descending thoracic aorta when indicated\n7. Move to OR for definitive repair',
-        citation: [1, 2, 3],
+        body: 'Use this as a rapid procedural reminder for selected traumatic arrest.\n\nOpen first:\n- [2-Minute Steps](#/info/thorac-steps)\n- [Indications](#/info/thorac-indications)\n- [Incision Landmarks](#/info/thorac-incision)\n\nCore sequence (2026 EMJ: pericardium, heart, lungs, aorta, massage; a framework, not a rigid script):\n1. Arms out (crucifix); left anterolateral thoracotomy, extended to clamshell (preferred for exposure)\n2. Enter pleura and spread ribs\n3. Open pericardium anterior to phrenic nerve\n4. Relieve tamponade/control cardiac wound (finger, then sutures)\n5. Control lung bleeding\n6. Compress or clamp descending thoracic aorta when indicated\n7. Two-handed open cardiac massage\n8. Move to OR for definitive repair\n\nPause ventilation during chest entry, pericardiotomy, heart inspection and hilar control.',
+        citation: [1, 2, 3, 6],
         images: [
             {
                 src: 'images/thoracotomy/anterolateral-thoracotomy-incision.jpg',
@@ -24,7 +24,7 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'question',
         module: 1,
         title: 'Is Thoracotomy Indicated?',
-        body: 'Proceed only for selected traumatic arrest or profound peri-arrest shock where thoracotomy can correct a survivable physiology.',
+        body: 'Proceed only for selected traumatic arrest or profound peri-arrest shock where thoracotomy can correct a survivable physiology.\n\nWindow: consider within 15 minutes of loss of signs of life (ERC, cited by the 2026 EMJ guide). That window mainly applies to tamponade; after more than about 5 minutes of arrest from exsanguination, thoracotomy may be futile. The best chance can come before full arrest, when progressive tamponade or bleeding is recognized early. [6]',
         options: [
             {
                 label: 'Indicated / reasonable to proceed',
@@ -39,7 +39,7 @@ export const THORACOTOMY_PROCEDURE_NODES = [
                 urgency: 'urgent',
             },
         ],
-        citation: [1, 2],
+        citation: [1, 2, 6],
         summary: 'Confirm indication before committing to an open thoracic resuscitation.',
     },
     {
@@ -58,8 +58,8 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'info',
         module: 2,
         title: 'Setup / Roles',
-        body: 'Roles:\n- Operator at left chest\n- Assistant for exposure/suction\n- Airway/ventilation lead\n- Blood/MTP lead\n- Procedure nurse/tech for instruments\n- Trauma surgery/OR activation\n\nEquipment:\n- Large scalpel, heavy scissors, forceps, clamps\n- Finochietto/rib spreader if available\n- Suction x2 if possible\n- Vascular clamp for aorta\n- Satinsky/vascular clamps, needle driver, cardiac sutures/stapler/Foley\n- Chest tubes and dressings\n\nUse full PPE and sharps discipline.',
-        citation: [3, 4],
+        body: 'Roles (at least two clinicians dedicated to the procedure: one on the field, one on ventilation, instruments, sharps and swab counts):\n- Operator at left chest\n- Assistant for exposure/suction\n- Airway/ventilation lead: pause positive-pressure breaths during chest entry, pericardial opening, heart inspection and hilar control; resume small tidal volumes once massage or cardiac activity starts\n- Blood/MTP lead\n- Procedure nurse/tech for instruments\n- Trauma surgery/OR activation\n\nEquipment:\n- Large scalpel, heavy scissors, forceps, clamps\n- Finochietto/rib spreader if available\n- Suction x2 if possible\n- Vascular clamp for aorta\n- Satinsky/vascular clamps, needle driver, cardiac sutures (non-cutting needle)/stapler\n- Chest tubes and dressings\n\nUse full PPE and sharps discipline. Brief prebrief before, hot debrief after.',
+        citation: [3, 4, 6],
         next: 'thorac-position',
         summary: 'Assign roles and prepare thoracotomy instruments while MTP and airway continue.',
     },
@@ -68,8 +68,8 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'info',
         module: 2,
         title: 'Position / Prep',
-        body: 'Position:\n- Supine\n- Left arm abducted if feasible; do not delay if not feasible\n- Prep wide: neck to groin, bilateral chest, upper abdomen\n\nLandmark:\n- Left 4th or 5th intercostal space, usually inframammary fold/nipple line region\n- Incision from sternum toward posterior axillary line\n- Enter over the superior rib edge\n\nHave the team ready to extend to clamshell if exposure is inadequate or right-sided injury is suspected.',
-        citation: [3, 4],
+        body: 'Position:\n- Supine\n- Both arms abducted to the sides (crucifix); an arm left beside the torso limits posterior extension and aortic control\n- Prep wide: neck to groin, bilateral chest, upper abdomen\n\nLandmark:\n- Left 4th or 5th intercostal space, usually inframammary fold/nipple line region\n- Incision from sternum toward posterior axillary line\n- Enter over the superior rib edge\n\nClamshell is the preferred approach for exposure in the 2026 EMJ guide; have the team ready to extend across the sternum.',
+        citation: [3, 4, 6],
         images: [
             {
                 src: 'images/thoracotomy/anterolateral-thoracotomy-incision.jpg',
@@ -78,7 +78,7 @@ export const THORACOTOMY_PROCEDURE_NODES = [
             },
         ],
         next: 'thorac-incision',
-        summary: 'Supine, wide prep, left 4th/5th interspace, incision sternum to posterior axillary line.',
+        summary: 'Supine, arms out (crucifix), wide prep, left 4th/5th interspace, incision sternum to posterior axillary line.',
     },
     {
         id: 'thorac-incision',
@@ -103,8 +103,8 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'info',
         module: 3,
         title: 'Open Pericardium',
-        body: 'Open the pericardium when tamponade or cardiac injury is possible.\n\nSteps:\n1. Identify phrenic nerve running along the lateral pericardium.\n2. Grasp/tent pericardium anterior to the phrenic nerve.\n3. Make a small opening with scissors or scalpel.\n4. Extend longitudinally from apex toward aortic root, staying anterior to phrenic nerve.\n5. Evacuate clot and deliver heart only as needed for inspection/control.\n\nAvoid injuring the phrenic nerve or myocardium.',
-        citation: [3, 4],
+        body: 'Open the pericardium when tamponade or cardiac injury is possible.\n\nSteps:\n1. Identify phrenic nerve running along the lateral pericardium.\n2. Grasp/tent pericardium anterior to the phrenic nerve.\n3. Make a small opening with scissors or scalpel.\n4. Extend longitudinally from apex toward aortic root, staying anterior to phrenic nerve.\n5. Evacuate clot, deliver the heart and inspect it fully; a small wound can hide significant tamponade.\n\nAvoid injuring the phrenic nerve or myocardium.',
+        citation: [3, 4, 6],
         images: [
             {
                 src: 'images/thoracotomy/pericardium-phrenic-nerve-photo.jpg',
@@ -125,7 +125,7 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         options: [
             {
                 label: 'Cardiac wound present',
-                description: 'Digital pressure, Foley balloon, stapler, or suture control depending on wound',
+                description: 'Digital pressure first, then sutures or staples; routine Foley not recommended',
                 next: 'thorac-cardiac-wound',
                 urgency: 'critical',
             },
@@ -150,10 +150,10 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'info',
         module: 4,
         title: 'Control Cardiac Wound',
-        body: 'Temporary options:\n- Direct digital pressure\n- Foley catheter through wound, balloon inflated gently, traction applied\n- Skin stapler for small linear ventricular wounds if appropriate\n- Horizontal mattress sutures with pledgets if available\n\nAvoid tying sutures through coronary arteries. Continue blood resuscitation and prepare immediate OR transfer.',
-        citation: [3, 4],
+        body: 'Temporary options:\n- Direct digital pressure (often fastest for a small ventricular wound)\n- Sutures on a non-cutting needle, horizontal mattress with pledgets if available; avoid excess tension\n- Skin stapler for small linear ventricular wounds if appropriate\n\nRoutine Foley plugging is discouraged: balloon inflation can enlarge the defect. [6]\n\nAvoid tying sutures through coronary arteries. Continue blood resuscitation and prepare immediate OR transfer.',
+        citation: [3, 4, 6],
         next: 'thorac-massage',
-        summary: 'Use digital pressure, Foley balloon, staples, or suture control as a bridge to OR.',
+        summary: 'Digital pressure, then sutures or staples, as a bridge to OR; avoid routine Foley.',
         safetyLevel: 'critical',
     },
     {
@@ -161,8 +161,8 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'info',
         module: 4,
         title: 'Pulmonary Hilum Control',
-        body: 'For massive unilateral pulmonary hemorrhage or suspected air embolism, obtain temporary hilar control.\n\nOptions:\n- Manual compression of hilum\n- Clamp pulmonary hilum en bloc if experienced and exposure is adequate\n- Consider right mainstem intubation to improve left chest exposure when appropriate\n\nThis is temporizing. Definitive repair requires OR.',
-        citation: [3, 4],
+        body: 'For massive unilateral pulmonary hemorrhage or suspected air embolism, obtain temporary hilar control.\n\nEscalate in order:\n- Swab pressure or non-crushing clamps on the bleeding lung\n- Direct hilar pressure\n- Clamp pulmonary hilum en bloc if experienced and exposure is adequate\n- Hilar twist only as a last resort (major ventilation compromise)\n- Consider right mainstem intubation to improve left chest exposure when appropriate\n\nPause ventilation during hilar control. This is temporizing. Definitive repair requires OR.',
+        citation: [3, 4, 6],
         next: 'thorac-aorta',
         summary: 'Hilar control is temporary for massive lung bleeding or air embolism physiology.',
     },
@@ -170,11 +170,11 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         id: 'thorac-aorta',
         type: 'info',
         module: 4,
-        title: 'Cross-Clamp Descending Thoracic Aorta',
-        body: 'Indications:\n- Exsanguinating subdiaphragmatic hemorrhage\n- Empty heart despite blood resuscitation\n- Need to prioritize coronary/cerebral perfusion during open resuscitation\n\nTechnique reminder:\n1. Retract left lung superiorly/anteriorly.\n2. Identify descending thoracic aorta just anterior/lateral to spine and above diaphragm.\n3. Open pleura over aorta bluntly.\n4. Place vascular clamp across aorta, avoiding esophagus.\n5. Announce clamp time and move to OR/source control.\n\nCross-clamping is a bridge, not definitive care.',
-        citation: [3, 4],
+        title: 'Occlude Descending Thoracic Aorta',
+        body: 'Indications:\n- Exsanguinating subdiaphragmatic hemorrhage\n- Empty heart despite blood resuscitation\n- Need to prioritize coronary/cerebral perfusion during open resuscitation\n\nTechnique reminder:\n1. Retract left lung superiorly/anteriorly.\n2. Identify descending thoracic aorta just anterior/lateral to spine and above diaphragm.\n3. Compress the aorta posteriorly against the vertebral column (do not pinch it between fingers).\n4. Progress to a clamp when appropriate: open pleura over aorta bluntly and place a vascular clamp, avoiding the esophagus (an NG tube helps identify it).\n5. Announce occlusion time and move to OR/source control.\n\nOcclusion buys time; it is not hemorrhage control. Each minute adds distal ischemia, so keep it short. [6]',
+        citation: [3, 4, 6],
         next: 'thorac-massage',
-        summary: 'Clamp descending aorta above diaphragm for exsanguinating lower-body hemorrhage.',
+        summary: 'Compress, then clamp, the descending aorta above the diaphragm for exsanguinating lower-body hemorrhage.',
         safetyLevel: 'critical',
     },
     {
@@ -182,8 +182,8 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'info',
         module: 4,
         title: 'Open Cardiac Massage',
-        body: 'Technique:\n- Use two hands when possible\n- Compress from apex toward base, avoiding ventricular twisting\n- Allow complete filling between compressions\n- Coordinate with blood resuscitation and definitive repair\n- Defibrillate internal paddles if available for VF/VT; external pads may still be used per local practice\n\nIf the heart is empty, massage alone will not restore output; prioritize blood and hemorrhage control.',
-        citation: [3, 4],
+        body: 'Technique:\n- Two hands, ventricles between flat palms; avoid fingertip compression\n- 80-100 compressions per minute\n- Compress from apex toward base, avoiding ventricular twisting\n- Allow complete filling between compressions\n- Rotate operators early (fatigue)\n- Coordinate with blood resuscitation and definitive repair\n- Defibrillate internal paddles if available for VF/VT; external pads may still be used per local practice\n- Epinephrine if given: IV/IO, preferably not intracardiac\n\nVF in trauma usually reflects poor coronary perfusion: control bleeding, occlude the aorta, restore volume, massage. [6]\n\nIf the heart is empty, massage alone will not restore output; prioritize blood and hemorrhage control.',
+        citation: [3, 4, 6],
         next: 'thorac-roscorstop',
         summary: 'Massage supports perfusion only if volume and obstruction are addressed.',
     },
@@ -215,10 +215,10 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'result',
         module: 5,
         title: 'Post-ROSC Thoracotomy Handoff',
-        body: 'Immediate handoff:\n- Trauma surgeon assumes definitive operative plan\n- Maintain airway, oxygenation, normocapnia, warmth\n- Continue balanced blood products and calcium\n- Keep aortic clamp time visible\n- Control open chest bleeding and contamination\n- Expedite OR transfer; CT is rarely appropriate before definitive hemorrhage control\n\nDocument indication, arrest time, CPR duration, incision time, pericardial findings, cardiac wounds, aortic clamp time, products given, and response.',
+        body: 'Immediate handoff:\n- Trauma surgeon assumes definitive operative plan\n- Maintain airway, oxygenation, normocapnia, warmth\n- Continue balanced blood products and calcium, titrated to physiology rather than flooding the circulation\n- Keep aortic occlusion time visible and as short as possible\n- Control internal mammary and other open chest bleeding; preserve thoracic access\n- Prevent hypothermia\n- Expedite OR transfer; CT is rarely appropriate before definitive hemorrhage control\n\nDocument indication, arrest time, CPR duration, incision time, pericardial findings, cardiac wounds, aortic clamp time, products given, and response.',
         recommendation: 'Move directly to OR with surgical team for definitive repair and damage control.',
         confidence: 'definitive',
-        citation: [1, 3, 4],
+        citation: [1, 3, 4, 6],
         summary: 'ROSC after thoracotomy requires immediate OR/source-control handoff.',
     },
     {
@@ -226,19 +226,19 @@ export const THORACOTOMY_PROCEDURE_NODES = [
         type: 'result',
         module: 5,
         title: 'No Response / Stop Decision',
-        body: 'If there is no cardiac activity or perfusion after appropriate correction attempts, further resuscitation is unlikely to benefit.\n\nBefore stopping, confirm:\n- HOTT causes addressed\n- Pericardium opened if tamponade suspected\n- Cardiac wound/hemorrhage control attempted if present\n- Blood resuscitation underway\n- Aortic clamp considered if indicated\n- Rhythm/cardiac motion reassessed\n\nFollow local policy and trauma team consensus.',
+        body: 'If there is no cardiac activity or perfusion after appropriate correction attempts, further resuscitation is unlikely to benefit.\n\nBefore stopping, confirm:\n- HOTT causes addressed\n- Pericardium opened if tamponade suspected\n- Cardiac wound/hemorrhage control attempted if present\n- Blood resuscitation underway\n- Aortic clamp considered if indicated\n- Rhythm/cardiac motion reassessed\n\nRecognize futility when non-survivable injury or persistent standstill is found; the momentum of a dramatic procedure should not drive continuation. Follow local policy and trauma team consensus.',
         recommendation: 'Terminate when thoracotomy does not reveal or correct a survivable cause and there is no physiologic response.',
         confidence: 'recommended',
-        citation: [1, 2, 5],
+        citation: [1, 2, 5, 6],
         summary: 'Stop when no survivable physiology remains after indicated correction attempts.',
     },
 ];
 export const THORACOTOMY_PROCEDURE_CRITICAL_ACTIONS = [
     { text: 'Confirm indication: selected traumatic arrest or profound peri-arrest shock with potentially correctable physiology.', nodeId: 'thorac-indications-check' },
-    { text: 'Use a large left anterolateral incision; inadequate exposure wastes time.', nodeId: 'thorac-incision' },
+    { text: 'Arms out (crucifix) and a large incision; extend to clamshell for exposure. Inadequate exposure wastes time.', nodeId: 'thorac-incision' },
     { text: 'Open pericardium anterior to the phrenic nerve to avoid nerve injury.', nodeId: 'thorac-pericardium' },
-    { text: 'Control cardiac wounds temporarily, restore volume, and move to OR.', nodeId: 'thorac-cardiac-wound' },
-    { text: 'Aortic cross-clamp is a bridge to immediate definitive hemorrhage control.', nodeId: 'thorac-aorta' },
+    { text: 'Control cardiac wounds with a finger, then sutures (no routine Foley); restore volume and move to OR.', nodeId: 'thorac-cardiac-wound' },
+    { text: 'Aortic compression or clamp is a bridge to immediate definitive hemorrhage control; keep occlusion time short.', nodeId: 'thorac-aorta' },
 ];
 export const THORACOTOMY_PROCEDURE_CITATIONS = [
     { num: 1, text: 'Seamon MJ, Haut ER, Van Arendonk K, et al. An evidence-based approach to patient selection for emergency department thoracotomy: EAST practice management guideline. J Trauma Acute Care Surg. 2015;79(1):159-173.' },
@@ -246,6 +246,7 @@ export const THORACOTOMY_PROCEDURE_CITATIONS = [
     { num: 3, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
     { num: 4, text: 'Wall MJ Jr, Soltero E. Damage control for thoracic injuries. Surg Clin North Am. 1997;77(4):863-878.' },
     { num: 5, text: 'Millin MG, Galvagno SM, Khandker SR, et al. Withholding and termination of resuscitation of adult cardiopulmonary arrest secondary to trauma. J Trauma Acute Care Surg. 2013;75(3):459-467.' },
+    { num: 6, text: 'Chesters A, Hughes M, Ley E, O\'Meara M, Davies G, Hormis A. Emergency thoracotomy: how to do it in 2026. Emerg Med J. 2026 Aug 24 (epub ahead of print). doi:10.1136/emermed-2026-216110. PMID: 42637522.' },
 ];
 export const THORACOTOMY_PROCEDURE_NODE_COUNT = THORACOTOMY_PROCEDURE_NODES.length;
 export const THORACOTOMY_PROCEDURE_MODULE_LABELS = ['Indications', 'Setup', 'Open Chest', 'Control', 'Handoff'];

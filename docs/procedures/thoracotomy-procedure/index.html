@@ -334,22 +334,25 @@ const STEPS = [
       '<b>Access + product:</b> IV/IO, massive transfusion / whole blood, TXA.',
       '<b>OG/NG tube:</b> place it now — it’s how you’ll tell the esophagus from the aorta when you cross-clamp.',
       '<b>Tray:</b> bladed scalpels (×2), heavy Mayo scissors, Finochietto, Lebsche knife + mallet, toothed pickups, Satinsky clamps, needle driver (see ED Tray tool).',
-      '<b>You:</b> double glove, face + eye protection — knives and rib edges move fast in this field.'
+      '<b>You:</b> double glove, face + eye protection — knives and rib edges move fast in this field.',
+      '<b>Two dedicated clinicians:</b> one on the field (bleeding control, massage); one on ventilation, instruments, sharps, swab counts and the wider resuscitation. Quick prebrief, clear roles, hot debrief after.',
+      '<b>Ventilation is part of the procedure:</b> pause positive-pressure breaths during chest entry, pericardial opening, heart inspection and hilar control. Once massage or cardiac activity starts, resume with small tidal volumes on clear commands between operator and airway lead.'
     ],
-    ref:'Hilsden — Knife Skills; EAST ED Thoracotomy guideline'
+    ref:'Hilsden — Knife Skills; EAST ED Thoracotomy guideline; Chesters et al., EMJ 2026 (How to do it in 2026)'
   },
   {
     pill:'Step 1 · Position', danger:false,
-    title:'Arm up, scapula up.',
-    photoTag:'PHOTO — positioning', photoLabel:'Supine, left arm above head, towels under the left scapula',
-    action:'Supine, left arm up and behind the head. Towels under the left scapula. Confirm the OG tube is down.',
-    caption:'Raising the arm and bumping the scapula opens the interspaces and gives you room for the rib spreader.',
+    title:'Arms out, crucifix.',
+    photoTag:'PHOTO — positioning', photoLabel:'Supine, both arms abducted out to the sides (crucifix)',
+    action:'Supine, BOTH arms abducted out to the sides (crucifix position). Confirm the OG/NG tube is down.',
+    caption:'Both arms out lets you carry the incision back to the posterior axillary line on either side and convert to a clamshell without repositioning.',
     more:[
-      'Place several towels under the left scapula and raise the arm above the head — this exposes the anterolateral chest and makes room for the Finochietto.',
+      'Abduct both arms into a crucifix position. Leaving an arm beside the torso limits posterior extension of the incision and makes aortic control harder.',
+      'Towels under the left scapula can help open the interspace if they are quick to place; do not delay for them.',
       'Patient should already be intubated with an OG/NG tube in the esophagus.',
       'For a female patient, elevate the breast to expose the 4th/5th interspace.'
     ],
-    ref:'Live procedure narration — left anterolateral approach'
+    ref:'Chesters et al., EMJ 2026 (How to do it in 2026); live procedure narration'
   },
   {
     pill:'Step 2 · Incision', danger:false,
@@ -360,9 +363,10 @@ const STEPS = [
     more:[
       'Landmark: just below the nipple in men, the inframammary fold in women (elevate the breast).',
       'The incision must run from the sternum past the posterior axillary line — anything less and you’ll be re-extending it to reach the heart and aorta.',
-      'Cut definitively: skin and muscle in one or two passes down to the ribs.'
+      'Cut definitively: skin and muscle in one or two passes down to the ribs.',
+      'A technically perfect but inadequate incision wastes time: it must be big enough to show the pathology.'
     ],
-    ref:'Live procedure narration; Hilsden — Knife Skills'
+    ref:'Live procedure narration; Hilsden — Knife Skills; Chesters et al., EMJ 2026 (How to do it in 2026)'
   },
   {
     pill:'Step 3 · Intercostals', danger:true,
@@ -399,11 +403,12 @@ const STEPS = [
     action:'For the best exposure — and if you’re not doing these often — extend across the sternum to a clamshell.',
     caption:'Lebsche knife under the sternum, two taps with the mallet, and you’re through. Far easier than working in the dark cave of an anterolateral-only window.',
     more:[
+      'The 2026 EMJ guide keeps the clamshell as the preferred approach: both pleural spaces, pericardium, heart, both hila and the descending aorta in one view.',
       'Recommended for less-experienced operators: the clamshell gives by far the biggest exposure.',
       'Extend the incision across to the right side, divide the sternum with a Lebsche knife + mallet (or trauma shears).',
       'Also the move for a right-chest injury or massive right hemothorax (put a chest tube on that side first). See the Clamshell tool.'
     ],
-    ref:'ED Tray build; Hilsden — Knife Skills (clamshell)'
+    ref:'ED Tray build; Hilsden — Knife Skills (clamshell); Chesters et al., EMJ 2026 (How to do it in 2026)'
   },
   {
     pill:'Step 6 · Pericardium', danger:true,
@@ -416,9 +421,10 @@ const STEPS = [
       'Release the inferior pulmonary ligament / push the lung aside to reach the heart and (later) the aorta.',
       'If tamponade has the sac tense and tight, a smooth forceps won’t grip — use toothed pickups and a scalpel nick, then extend with Mayo scissors.',
       'Incise <b>anterior and parallel to the phrenic nerve</b>, beginning near the diaphragm to avoid the coronary vessels.',
-      'Extend apex → aortic root so you can deliver the heart.'
+      'Extend apex → aortic root so you can deliver the heart.',
+      'Inspect the whole heart once delivered: a small wound can hide a significant tamponade.'
     ],
-    ref:'Live procedure narration; Hilsden — Knife Skills'
+    ref:'Live procedure narration; Hilsden — Knife Skills; Chesters et al., EMJ 2026 (How to do it in 2026)'
   },
   {
     pill:'Step 7 · Tamponade', danger:false,
@@ -429,7 +435,8 @@ const STEPS = [
     more:[
       'Obstructive shock from tamponade is the highest-yield reason to be in the chest — freeing the heart is the single most helpful thing you can do.',
       'Evacuate clot from the pericardial sac and deliver the heart.',
-      'A hole in the heart is the next problem, not this one — a fingertip controls most wounds; definitive repair waits for the OR.'
+      'A hole in the heart is the next problem, not this one — a fingertip controls most wounds; definitive repair waits for the OR.',
+      'Small ventricular wound: direct digital pressure first, then sutures on a non-cutting needle if needed. The 2026 guide discourages routine Foley plugging (see Heart Repair tool).'
     ],
     ref:'Hilsden — Knife Skills (obstructive shock)'
   },
@@ -437,29 +444,32 @@ const STEPS = [
     pill:'Step 8 · Massage', danger:false,
     title:'Flat palms — no thumbs.',
     photoTag:'PHOTO — internal cardiac massage', photoLabel:'Two flat hands compressing the heart (no thumbs through the wall)',
-    action:'If it’s not pumping, start internal cardiac massage with flat palms — two hands, or against the sternum.',
+    action:'If it’s not pumping, start two-handed internal cardiac massage with flat palms at 80–100 per minute.',
     caption:'Squeeze with the palms, not the fingertips. A thumb or finger poked through the atrium just makes a new hole.',
     more:[
       'Use the <b>palms</b> of your hands and compress the heart between them, or against the sternum.',
       'Keep the thumbs and fingertips off — they perforate the thin atrial wall.',
-      'Keep everything else running: product, TXA, ongoing perfusion.'
+      '<b>Rate 80–100 per minute</b>, letting the heart fill between squeezes.',
+      'It is tiring: plan the swap and rotate operators early.',
+      'Massage cannot fill an empty heart: keep everything else running (product, TXA, bleeding control).'
     ],
-    ref:'Hilsden — Knife Skills (cardiac massage)'
+    ref:'Hilsden — Knife Skills (cardiac massage); Chesters et al., EMJ 2026 (How to do it in 2026)'
   },
   {
     pill:'Step 9 · Cross-clamp', danger:true,
     title:'Clamp the aorta — not the esophagus.',
     photoTag:'PHOTO — aortic cross-clamp', photoLabel:'Mediastinal pleura divided, DeBakey/Satinsky across the descending aorta',
-    action:'For persistent hypotension, cross-clamp the descending thoracic aorta. Divide the mediastinal pleura, then clamp.',
+    action:'For persistent hypotension, occlude the descending thoracic aorta: compress it back against the spine first, then clamp when you can.',
     caption:'The aorta is the most posterior, leftward tube against the vertebral bodies. The OG tube tells you which tube is the esophagus.',
     cue:'Feel the OG/NG tube (± a TEE probe) to be sure you’re not clamping the esophagus.',
     more:[
       'Divide the mediastinal pleura just above the vertebral bodies; the aorta sits most posterior and leftward.',
       'Redirects what little blood is left to the brain and coronaries, gives the heart something to pump against, and controls hemorrhage below the diaphragm.',
       'Distinguish it from the esophagus with the OG/NG tube (± a TEE probe) — both are clamp traps.',
-      'Use a DeBakey or Satinsky clamp, or blunt finger dissection to encircle the vessel.'
+      '<b>Manual first:</b> press the aorta posteriorly against the vertebral column (do not pinch it between your fingers), then progress to a DeBakey or Satinsky clamp after dividing the pleura.',
+      'Occlusion buys time; it is not hemorrhage control. Every minute adds distal ischemia, so keep occlusion time as short as possible.'
     ],
-    ref:'Live procedure narration; Hilsden — Knife Skills'
+    ref:'Live procedure narration; Hilsden — Knife Skills; Chesters et al., EMJ 2026 (How to do it in 2026)'
   },
   {
     pill:'Step 10 · Defib', danger:false,
@@ -469,24 +479,27 @@ const STEPS = [
     caption:'Internal paddles sit right on the heart, so the energy is a fraction of external dosing.',
     more:[
       'Internal defibrillation uses far less energy than transthoracic — start low (10–50 J).',
-      'Pair it with massage, aortic occlusion, and ongoing resuscitation — a shock alone rarely fixes an empty heart.'
+      'Pair it with massage, aortic occlusion, and ongoing resuscitation — a shock alone rarely fixes an empty heart.',
+      '<b>VF in trauma usually means no coronary flow.</b> Priority order: control bleeding → occlude the aorta → restore volume → massage, then shock.',
+      'Epinephrine if given: IV/IO, preferably not intracardiac.'
     ],
-    ref:'Hilsden — Knife Skills; data deep-dive'
+    ref:'Hilsden — Knife Skills; data deep-dive; Chesters et al., EMJ 2026 (How to do it in 2026)'
   },
   {
     pill:'Step 11 · To the OR', danger:false,
     title:'Stop the bleeding, then move.',
     photoTag:'PHOTO — hilar clamp / transfer to OR', photoLabel:'Pulmonary hilum clamped; team packaging for the OR',
-    action:'Control the source — hilar clamp for massive lung bleeding, finger/Foley on the cardiac wound — and if you get ROSC, go to the OR.',
+    action:'Control the source — pressure or clamps for lung bleeding, finger or sutures on the cardiac wound — and if you get ROSC, go to the OR.',
     caption:'Cracking the chest isn’t the end. The injury is still there: definitive repair happens in the OR with the resuscitation running the whole way.',
     more:[
-      '<b>Lung:</b> clamp the pulmonary hilum for massive bleeding (or twist the hilum).',
-      '<b>Heart:</b> control the wound with a finger, Foley, or staples/sutures for transport — not a definitive repair in the bay.',
+      '<b>Lung:</b> swab pressure or non-crushing clamps first; hilar pressure or hilar clamp for uncontrollable bleeding. Hilar twist is a last resort (major ventilation compromise).',
+      '<b>Heart:</b> control the wound with a finger, then sutures (or staples) for transport — not a definitive repair in the bay. Routine Foley plugging is discouraged.',
       '<b>Clamshell:</b> if a blood pressure returns, the divided internal mammary arteries will bleed — clamp them.',
-      'ROSC → OR for definitive repair, with MTP/whole blood and TXA continuing.',
+      'ROSC → OR for definitive repair. Keep the chest accessible, prevent hypothermia, keep aortic occlusion time short, and titrate blood products to physiology rather than flooding the circulation.',
+      '<b>Futility:</b> non-survivable injury or persistent standstill means stop. Do not let the momentum of a dramatic procedure drive continuation.',
       '<b>Provider safety:</b> sharp rib edges, scalpels, needlesticks — ~1 in 14 procedures has an occupational exposure. Mind the team and debrief after.'
     ],
-    ref:'Live procedure narration; Hilsden — Knife Skills; data deep-dive (occupational exposure 7.2%)'
+    ref:'Live procedure narration; Hilsden — Knife Skills; data deep-dive (occupational exposure 7.2%); Chesters et al., EMJ 2026 (How to do it in 2026)'
   }
 ];
 
@@ -763,8 +776,10 @@ function indicTool(){return `
     <li><b>Penetrating:</b> CPR &gt;15 min before the procedure → likely futile.</li>
     <li><b>Blunt:</b> CPR &gt;10 min → likely futile.</li>
     <li><b>Pediatrics, no signs of life:</b> 100% mortality — do not perform.</li>
+    <li><b>Window (2026 EMJ guide, citing ERC):</b> consider thoracotomy within 15 min of losing signs of life. That window mainly applies to tamponade; after more than ~5 min of arrest from exsanguination it may be futile.</li>
+    <li>The best chance can come <b>before</b> full arrest, when progressive tamponade or bleeding is recognized early.</li>
   </ul>
-  <p class="note">EAST Practice Management Guideline — Resuscitative Emergency Department Thoracotomy (Seamon et al., J Trauma Acute Care Surg 2015).</p>`;}
+  <p class="note">Chesters A, et al. Emergency thoracotomy: how to do it in 2026. Emerg Med J 2026 (doi:10.1136/emermed-2026-216110). EAST Practice Management Guideline — Resuscitative Emergency Department Thoracotomy (Seamon et al., J Trauma Acute Care Surg 2015).</p>`;}
 
 function trayTool(){return `
   <p>An abbreviated, ED-specific tray. Keep it alongside the full surgical set — the surgeon may want more.</p>
@@ -806,6 +821,7 @@ function dataTool(){return `
     <li><b>FAST, no cardiac motion → 0% survival</b> (100% NPV). The single most powerful filter.</li>
     <li>CPR &gt;15 min (penetrating) / &gt;10 min (blunt) → likely futile.</li>
     <li>Pediatrics with no signs of life → 100% mortality.</li>
+    <li>Exsanguination arrest beyond ~5 min → likely futile (tamponade is the main exception to the 15 min window).</li>
   </ul>
   <h4>Cost-effectiveness (per QALY)</h4>
   <div class="kv"><span class="k">Penetrating</span><span class="v">≈ $16,000 — very cost-effective</span></div>
@@ -880,7 +896,7 @@ function crossClampTool(){return `
   <ul>
     <li><b>Satinsky vascular clamp:</b> atraumatic, curved, side-biting. Good ED tray choice for aorta or hilum.</li>
     <li><b>DeBakey aortic clamp:</b> atraumatic vascular clamp, also appropriate.</li>
-    <li><b>Manual/finger occlusion:</b> acceptable temporary bridge if the vascular clamp is not immediately in hand.</li>
+    <li><b>Manual compression first:</b> press the aorta posteriorly against the vertebral column (not pinched between fingers), then progress to a clamp when appropriate (2026 EMJ guide).</li>
     <li><b>Do not use a Kelly or generic hemostat</b> on the aorta. Crushing clamp equals vessel injury.</li>
   </ul>
   <h4>How to find it</h4>
@@ -910,7 +926,7 @@ function crossClampTool(){return `
     <li>Putting the clamp through intercostal vessels rather than an intervertebral space.</li>
     <li>Leaving the clamp on while the team forgets the abdomen/pelvis/external hemorrhage source still needs control.</li>
   </ul>
-  <p class="note">Sources: Western Trauma Association ERT algorithm and Note I; StatPearls Emergency Room Thoracotomy; Cothren Burlew et al. ED thoracotomy review.</p>`;}
+  <p class="note">Sources: Western Trauma Association ERT algorithm and Note I; StatPearls Emergency Room Thoracotomy; Cothren Burlew et al. ED thoracotomy review; Chesters et al., Emerg Med J 2026.</p>`;}
 
 function heartTool(){return `
   <div class="img-slot"><img src="images/rt-heart-repair.png" alt="Exposed heart with ventricular wound during repair" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-heart-repair.png'"></div>
@@ -918,11 +934,12 @@ function heartTool(){return `
   <h4>1 · Temporary control</h4>
   <ul>
     <li><b>Finger / digital pressure</b> — a fingertip over the hole is the fastest control. Start here.</li>
-    <li><b>Foley catheter:</b> pass a 14–16 Fr Foley through the wound, inflate the balloon with <b>~10–15 mL saline</b>, and apply <b>gentle</b> traction to tamponade. <b>Clamp the catheter</b> so you don't bleed out the lumen — and it doubles as a port for rapid transfusion.</li>
+    <li><b>Sutures on a non-cutting needle</b> for definitive temporary control once a finger has the bleeding; stay clear of coronaries and avoid excess tension.</li>
+    <li><b>Foley catheter: not routine.</b> The 2026 EMJ guide discourages plugging cardiac wounds with a Foley because balloon inflation can enlarge the defect. If used at all, inflate gently and never pull it out under tension.</li>
     <li><b>Skin staples:</b> a fast, evidence-supported temporizing option for ventricular lacerations — hemostasis comparable to suture and quicker in the ED; definitive repair later.</li>
     <li><b>Satinsky (partial-occlusion) clamp:</b> best for thin-walled <b>atrial</b> and great-vessel wounds — clamp and oversew.</li>
   </ul>
-  <div class="callout">Don't yank a Foley back out under tension — you'll enlarge the laceration. Inflate gently; over-inflation can tear a friable wound.</div>
+  <div class="callout">Finger first, then sutures. A Foley balloon can tear a friable wound larger, which is why routine use is now discouraged.</div>
   <h4>2 · Definitive suture repair</h4>
   <ul>
     <li><b>Suture:</b> non-absorbable monofilament — <b>2-0 or 3-0 polypropylene (Prolene)</b> on a large needle for the ventricle; <b>3-0/4-0</b> for the thinner atrium.</li>
@@ -930,15 +947,16 @@ function heartTool(){return `
     <li><b>Near a coronary:</b> place <b>horizontal mattress sutures BENEATH the coronary artery</b> so you don't ligate it.</li>
     <li>Throw each stitch while a finger controls the bleeding; tie just snug, not tight.</li>
   </ul>
-  <h4>3 · The Foley afterward</h4>
+  <h4>3 · Transport</h4>
   <ul>
-    <li>Once sutures are placed around it and hemostasis looks secure, <b>deflate and remove</b> the Foley, then tie down the last suture.</li>
-    <li>Keep it clamped until removed. A staple/Foley temporary repair is fine for transport — definitive cardiorrhaphy belongs in the OR.</li>
+    <li>If a Foley was already placed, keep it clamped; deflate and remove it only after sutures around it are secure.</li>
+    <li>A finger, suture or staple temporary repair is fine for transport — definitive cardiorrhaphy belongs in the OR.</li>
   </ul>
-  <p class="note">Emergency cardiorrhaphy — finger/Foley/skin-staple temporization, pledgeted 2-0/3-0 polypropylene, sutures placed beneath coronaries (ATLS; EAST; Hirshberg &amp; Mattox, <i>Top Knife</i>).</p>`;}
+  <p class="note">Emergency cardiorrhaphy — finger/Foley/skin-staple temporization, pledgeted 2-0/3-0 polypropylene, sutures placed beneath coronaries (ATLS; EAST; Hirshberg &amp; Mattox, <i>Top Knife</i>). Foley de-emphasized per Chesters et al., Emerg Med J 2026.</p>`;}
 
 function hilumTool(){return `
-  <p>Two ways to control a bleeding lung at its root — both occlude the pulmonary artery, veins, and bronchus together.</p>
+  <p><b>Escalate in order:</b> swab pressure → non-crushing clamp on the bleeding lung → direct hilar pressure → hilar clamp. The hilar twist is a <b>last resort</b> (2026 EMJ guide) because it causes major ventilation compromise.</p>
+  <p>Hilar clamp and twist both occlude the pulmonary artery, veins, and bronchus together.</p>
   <h4>When to do it</h4>
   <ul>
     <li><b>Exsanguinating hemorrhage</b> from a major pulmonary / hilar injury not controlled by packing or direct pressure.</li>
@@ -956,10 +974,10 @@ function hilumTool(){return `
   <div class="img-slot"><img src="images/rt-hilar-twist.png" alt="Hilar twist — rotating the lung 180 degrees" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-hilar-twist.png'"></div>
   <ul>
     <li>No clamp needed and <b>faster</b>: divide the inferior pulmonary ligament, then <b>rotate the lung ~180°</b> — bring the lower lobe up and over so the hilum torses on itself, kinking the vessels and bronchus.</li>
-    <li>The move when a clamp isn't at hand or the hilum is hard to encircle.</li>
+    <li>Last resort only: when pressure and clamping have failed or a clamp is not at hand.</li>
   </ul>
   <div class="callout">Occluding the whole hilum is a <b>functional pneumonectomy</b> — it dumps the entire right-heart output onto one lung and can precipitate <b>acute right-heart failure</b>. It's a salvage maneuver: control, then get to definitive repair fast.</div>
-  <p class="note">Hilar twist (Wilson maneuver); damage-control thoracic surgery — trauma surgical literature.</p>`;}
+  <p class="note">Hilar twist (Wilson maneuver); damage-control thoracic surgery — trauma surgical literature; Chesters et al., Emerg Med J 2026.</p>`;}
 
 function defibTool(){return `
   <div class="img-slot"><img src="images/rt-10-defib.png" alt="Internal defibrillation paddles on the heart" loading="lazy" onerror="this.closest('.img-slot').textContent='Add images/rt-10-defib.png'"></div>
@@ -976,6 +994,7 @@ function defibTool(){return `
   <ul>
     <li>A shock rarely restarts an <b>empty</b> heart — pair it with volume/product, internal cardiac massage, and aortic cross-clamping.</li>
     <li>Fix the reversible cause first: relieve tamponade, control hemorrhage, restore the physiology.</li>
+    <li>VF in trauma: control bleeding → occlude the aorta → restore volume → massage, then shock (2026 EMJ guide).</li>
   </ul>
   <p class="note">Internal defibrillation energy per ATLS / trauma resuscitation references.</p>`;}
 

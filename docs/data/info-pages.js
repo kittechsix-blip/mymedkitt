@@ -22697,16 +22697,17 @@ const THORAC_STEPS_PAGE = {
     sections: [
         {
             heading: 'Procedure sequence',
-            body: '1. Confirm indication and call trauma surgery/OR.\n2. Supine, left arm up if feasible, wide prep.\n3. Large left anterolateral incision at 4th/5th intercostal space from sternum toward posterior axillary line.\n4. Enter pleura over superior rib; finger sweep; spread ribs.\n5. Evacuate hemothorax and suction.\n6. Open pericardium anterior to phrenic nerve from apex toward aortic root.\n7. Relieve tamponade, control cardiac wound, perform open massage.\n8. Cross-clamp descending thoracic aorta above diaphragm if exsanguinating below diaphragm or empty heart.\n9. Continue blood resuscitation and move to OR for definitive control.',
+            body: '1. Confirm indication and call trauma surgery/OR.\n2. Supine, both arms out (crucifix), wide prep.\n3. Large left anterolateral incision at 4th/5th intercostal space from sternum toward posterior axillary line; extend to clamshell (preferred for exposure).\n4. Enter pleura over superior rib; finger sweep; spread ribs.\n5. Evacuate hemothorax and suction.\n6. Open pericardium anterior to phrenic nerve from apex toward aortic root; inspect the whole heart.\n7. Relieve tamponade; control cardiac wound with a finger, then sutures (no routine Foley).\n8. Control lung bleeding: pressure, non-crushing clamps, hilar clamp; hilar twist last resort.\n9. Compress the descending aorta against the spine, then clamp if exsanguinating below diaphragm or empty heart.\n10. Two-handed open massage, flat palms, 80-100/min.\n11. Continue blood resuscitation and move to OR for definitive control.',
         },
         {
             heading: 'Critical reminders',
-            body: '- Large incision saves time\n- Stay anterior to phrenic nerve\n- Cardiac wound control is temporary\n- Aortic clamp time must be announced\n- Thoracotomy is a bridge to OR or a stop decision',
+            body: '- Large incision saves time\n- Pause ventilation during chest entry, pericardiotomy, heart inspection and hilar control\n- Stay anterior to phrenic nerve\n- Cardiac wound control is temporary\n- Aortic occlusion time must be announced and kept short\n- VF in trauma: control bleeding, occlude aorta, restore volume, massage\n- Thoracotomy is a bridge to OR or a stop decision',
         },
     ],
     citations: [
         { num: 1, text: 'Burlew CC, Moore EE, Moore FA, et al. Western Trauma Association Critical Decisions in Trauma: Resuscitative thoracotomy. J Trauma Acute Care Surg. 2012;73(6):1359-1363.' },
         { num: 2, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
+        { num: 3, text: 'Chesters A, Hughes M, Ley E, O\'Meara M, Davies G, Hormis A. Emergency thoracotomy: how to do it in 2026. Emerg Med J. 2026 (epub ahead of print). doi:10.1136/emermed-2026-216110. PMID: 42637522.' },
     ],
 };
 const THORAC_INDICATIONS_PAGE = {
@@ -22722,10 +22723,15 @@ const THORAC_INDICATIONS_PAGE = {
             heading: 'Avoid',
             body: '- Blunt arrest without signs of life\n- Prolonged CPR/downtime without cardiac motion\n- Devastating nonsurvivable injury\n- No pathway to definitive source control',
         },
+        {
+            heading: 'Time window',
+            body: 'Consider within 15 minutes of loss of signs of life (ERC, per the 2026 EMJ guide). This mainly applies to tamponade; after more than about 5 minutes of arrest from exsanguination it may be futile. The best chance can come before full arrest. [3]',
+        },
     ],
     citations: [
         { num: 1, text: 'Seamon MJ, Haut ER, Van Arendonk K, et al. EAST emergency department thoracotomy practice management guideline. J Trauma Acute Care Surg. 2015;79(1):159-173.' },
         { num: 2, text: 'Burlew CC, Moore EE, Moore FA, et al. Western Trauma Association Critical Decisions in Trauma: Resuscitative thoracotomy. J Trauma Acute Care Surg. 2012;73(6):1359-1363.' },
+        { num: 3, text: 'Chesters A, Hughes M, Ley E, O\'Meara M, Davies G, Hormis A. Emergency thoracotomy: how to do it in 2026. Emerg Med J. 2026 (epub ahead of print). doi:10.1136/emermed-2026-216110. PMID: 42637522.' },
     ],
 };
 const THORAC_INCISION_PAGE = {
@@ -22739,11 +22745,12 @@ const THORAC_INCISION_PAGE = {
     },
     sections: [
         {
-            body: 'Use the left 4th or 5th intercostal space. Make a large incision from sternum toward the posterior axillary line, enter pleura over the superior rib edge, finger sweep, evacuate hemothorax, and open with rib spreader if available. Extend to clamshell when exposure is inadequate or right chest/mediastinal access is needed.',
+            body: 'Both arms out (crucifix). Use the left 4th or 5th intercostal space. Make a large incision from sternum toward the posterior axillary line, enter pleura over the superior rib edge, finger sweep, evacuate hemothorax, and open with rib spreader if available. Extend to clamshell when exposure is inadequate or right chest/mediastinal access is needed; the 2026 EMJ guide prefers clamshell for exposure. [2]',
         },
     ],
     citations: [
         { num: 1, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
+        { num: 2, text: 'Chesters A, Hughes M, Ley E, O\'Meara M, Davies G, Hormis A. Emergency thoracotomy: how to do it in 2026. Emerg Med J. 2026 (epub ahead of print). doi:10.1136/emermed-2026-216110. PMID: 42637522.' },
     ],
 };
 const THORAC_PERICARDIUM_PAGE = {
@@ -22766,7 +22773,7 @@ const THORAC_PERICARDIUM_PAGE = {
 };
 const THORAC_AORTA_PAGE = {
     id: 'thorac-aorta',
-    title: 'Aortic Cross-Clamp',
+    title: 'Aortic Occlusion',
     subtitle: 'Bridge to source control',
     sections: [
         {
@@ -22775,12 +22782,13 @@ const THORAC_AORTA_PAGE = {
         },
         {
             heading: 'How',
-            body: 'Retract left lung, identify descending thoracic aorta just anterior/lateral to spine and above diaphragm, open pleura over the aorta, place vascular clamp across aorta while avoiding esophagus, announce clamp time, and move to definitive hemorrhage control.',
+            body: 'Retract left lung, identify descending thoracic aorta just anterior/lateral to spine and above diaphragm, compress it posteriorly against the vertebral column, then progress to a clamp when appropriate: open pleura over the aorta and place a vascular clamp while avoiding the esophagus (NG tube helps). Announce occlusion time, keep it short, and move to definitive hemorrhage control. Occlusion buys time; it is not hemorrhage control. [3]',
         },
     ],
     citations: [
         { num: 1, text: 'Burlew CC, Moore EE, Moore FA, et al. Western Trauma Association Critical Decisions in Trauma: Resuscitative thoracotomy. J Trauma Acute Care Surg. 2012;73(6):1359-1363.' },
         { num: 2, text: 'Aseni P, Rizzetto F, Grande AM, Bini R. Resuscitative thoracotomy. Ann Transl Med. 2016;4(18):302.' },
+        { num: 3, text: 'Chesters A, Hughes M, Ley E, O\'Meara M, Davies G, Hormis A. Emergency thoracotomy: how to do it in 2026. Emerg Med J. 2026 (epub ahead of print). doi:10.1136/emermed-2026-216110. PMID: 42637522.' },
     ],
 };
 // ====================================================================
