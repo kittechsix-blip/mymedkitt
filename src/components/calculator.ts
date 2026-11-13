@@ -7,6 +7,7 @@ import { ADROGUE_MADIAS_CALCULATOR } from './adrogue-madias.js';
 import { FROSTBITE_CAUCHY_CALCULATOR, FROSTBITE_REPERFUSION_CALCULATOR, FROSTBITE_ILOPROST_RATE_CALCULATOR } from './frostbite-calculators.js';
 import { HEMOLYSIS_LABS_CALCULATOR, RETIC_INDEX_CALCULATOR } from './hemolytic-anemia-calculators.js';
 import { VKDB_TYPE_RISK_CALCULATOR, VKDB_LAB_PATTERN_CALCULATOR, VKDB_DOSES_CALCULATOR } from './vkdb-calculators.js';
+import { LA_COMBO_CALCULATOR } from './la-combo-calculators.js';
 import { KAWASAKI_CRITERIA_CALCULATOR, KAWASAKI_INCOMPLETE_CALCULATOR, KAWASAKI_HIGH_RISK_CALCULATOR, KAWASAKI_CORONARY_Z_CALCULATOR, KAWASAKI_DOSES_CALCULATOR } from './kawasaki-calculators.js';
 import { RIBSCORE_CALCULATOR } from './ribscore.js';
 import { RANSON_CALCULATOR } from './ranson.js';
@@ -46711,6 +46712,7 @@ const CALCULATORS: Record<string, CalculatorDefinition> = {
   'vkdb-type-risk': VKDB_TYPE_RISK_CALCULATOR,
   'vkdb-lab-pattern': VKDB_LAB_PATTERN_CALCULATOR,
   'vkdb-doses': VKDB_DOSES_CALCULATOR,
+  'la-combo-max': LA_COMBO_CALCULATOR,
   'kawasaki-criteria': KAWASAKI_CRITERIA_CALCULATOR,
   'kawasaki-incomplete': KAWASAKI_INCOMPLETE_CALCULATOR,
   'kawasaki-high-risk': KAWASAKI_HIGH_RISK_CALCULATOR,

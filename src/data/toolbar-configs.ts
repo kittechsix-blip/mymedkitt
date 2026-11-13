@@ -94,6 +94,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'dental-nerve-blocks': [
     { id: 'dnb-visual', label: 'Visual Guide', icon: '👁️', action: 'overlay', target: 'dnb-visual-guide', pinned: true },
     { id: 'dnb-max-dose', label: 'Max Dose', icon: '🧮', action: 'calculator', target: 'dnb-la-max-dose', pinned: true },
+    { id: 'dnb-combo', label: '2-Drug Max', icon: '⚖️', action: 'calculator', target: 'la-combo-max', pinned: true },
     { id: 'dnb-selector', label: 'Block Selector', icon: '🎯', action: 'calculator', target: 'dnb-block-selector', pinned: true },
     { id: 'dnb-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'dnb-steps', pinned: true },
     { id: 'dnb-last', label: 'LAST Rescue', icon: '💉', action: 'calculator', target: 'dnb-last-lipid', pinned: true },
@@ -102,6 +103,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'facial-nerve-block': [
     { id: 'fnb-visual', label: 'Visual Guide', icon: '👁️', action: 'overlay', target: 'fnb-visual-guide', pinned: true },
     { id: 'fnb-max-dose', label: 'Max Dose', icon: '🧮', action: 'calculator', target: 'fnb-la-max-dose', pinned: true },
+    { id: 'fnb-combo', label: '2-Drug Max', icon: '⚖️', action: 'calculator', target: 'la-combo-max', pinned: true },
     { id: 'fnb-selector', label: 'Block Selector', icon: '🎯', action: 'calculator', target: 'fnb-block-selector', pinned: true },
     { id: 'fnb-steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'fnb-steps', pinned: true },
     { id: 'fnb-last', label: 'LAST Rescue', icon: '💉', action: 'calculator', target: 'fnb-last-lipid', pinned: true },
@@ -602,6 +604,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'occipital-nerve-block': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'onb-steps' },
     { id: 'anatomy', label: 'Anatomy', icon: '🧠', action: 'jump', target: 'onb-anatomy-ref' },
+    { id: 'combo', label: '2-Drug Max', icon: '⚖️', action: 'calculator', target: 'la-combo-max' },
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'onb-stop' },
   ],
   'cluster-headache': [
