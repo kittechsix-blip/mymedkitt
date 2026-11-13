@@ -7,7 +7,7 @@ import { ADROGUE_MADIAS_CALCULATOR } from './adrogue-madias.js';
 import { FROSTBITE_CAUCHY_CALCULATOR, FROSTBITE_REPERFUSION_CALCULATOR, FROSTBITE_ILOPROST_RATE_CALCULATOR } from './frostbite-calculators.js';
 import { HEMOLYSIS_LABS_CALCULATOR, RETIC_INDEX_CALCULATOR } from './hemolytic-anemia-calculators.js';
 import { VKDB_TYPE_RISK_CALCULATOR, VKDB_LAB_PATTERN_CALCULATOR, VKDB_DOSES_CALCULATOR } from './vkdb-calculators.js';
-import { LA_COMBO_CALCULATOR } from './la-combo-calculators.js';
+import { LA_COMBO_CALCULATOR, laCapMg } from './la-combo-calculators.js';
 import { KAWASAKI_CRITERIA_CALCULATOR, KAWASAKI_INCOMPLETE_CALCULATOR, KAWASAKI_HIGH_RISK_CALCULATOR, KAWASAKI_CORONARY_Z_CALCULATOR, KAWASAKI_DOSES_CALCULATOR } from './kawasaki-calculators.js';
 import { RIBSCORE_CALCULATOR } from './ribscore.js';
 import { RANSON_CALCULATOR } from './ranson.js';
@@ -40172,10 +40172,10 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
             hideOptionPoints: true,
             description: 'Max mg/kg encoded in the option value',
             selectOptions: [
-                { label: 'Lidocaine (plain) — 4.5 mg/kg', points: 45 },
-                { label: 'Lidocaine WITH epinephrine — 7 mg/kg', points: 70 },
-                { label: 'Bupivacaine (plain) — 2 mg/kg', points: 20 },
-                { label: 'Bupivacaine WITH epinephrine — 3 mg/kg', points: 30 },
+                { label: 'Lidocaine (plain) — 4.5 mg/kg, max 300 mg', points: 45 },
+                { label: 'Lidocaine WITH epinephrine — 7 mg/kg, max 500 mg', points: 70 },
+                { label: 'Bupivacaine (plain) — 2.5 mg/kg, max 175 mg', points: 25 },
+                { label: 'Bupivacaine WITH epinephrine — 3 mg/kg, max 225 mg', points: 30 },
             ],
         },
         {
@@ -40201,7 +40201,7 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
     ],
     computeResult: (values) => {
         const weight = values['weight'] || 0;
-        const mgPerKg = (values['agent'] || 0) / 10; // 45→4.5, 70→7, 20→2, 30→3
+        const mgPerKg = (values['agent'] || 0) / 10; // 45→4.5, 70→7, 25→2.5, 30→3
         const mgPerMl = (values['conc'] || 0) / 10; // 25→2.5, 50→5, 100→10, 200→20
         if (weight <= 0 || mgPerKg <= 0 || mgPerMl <= 0) {
             return {
@@ -40211,12 +40211,14 @@ const FNB_LA_MAX_DOSE_CALCULATOR = {
                 colorVar: '--color-text-muted',
             };
         }
-        const maxMg = Math.round(weight * mgPerKg);
+        const capMg = laCapMg(values['agent'] || 0);
+        const capped = weight * mgPerKg > capMg;
+        const maxMg = Math.round(Math.min(weight * mgPerKg, capMg));
         const maxMl = Math.round((maxMg / mgPerMl) * 10) / 10;
         return {
             value: `${maxMg} mg`,
             label: 'Maximum Safe Dose',
-            description: `**MAX DOSE:** **${maxMg} mg** (${weight} kg × ${mgPerKg} mg/kg)\n\n**MAX VOLUME at this concentration:** **${maxMl} mL** (${maxMg} mg ÷ ${mgPerMl} mg/mL)\n\n**REMEMBER:** Facial blocks need only 1–3 mL each; ear ring blocks ~6–8 mL. Use the smallest effective volume and ASPIRATE before every injection.`,
+            description: `**MAX DOSE:** **${maxMg} mg** (${capped ? `adult cap; ${weight} kg × ${mgPerKg} mg/kg would be ${Math.round(weight * mgPerKg)} mg` : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**MAX VOLUME at this concentration:** **${maxMl} mL** (${maxMg} mg ÷ ${mgPerMl} mg/mL)\n\n**REMEMBER:** Facial blocks need only 1–3 mL each; ear ring blocks ~6–8 mL. Use the smallest effective volume and ASPIRATE before every injection.`,
             colorVar: '--color-primary',
         };
     },
@@ -40236,10 +40238,10 @@ const FNB_VOLUME_TRACKER_CALCULATOR = {
             points: 0,
             hideOptionPoints: true,
             selectOptions: [
-                { label: 'Lidocaine (plain) — 4.5 mg/kg', points: 45 },
-                { label: 'Lidocaine WITH epinephrine — 7 mg/kg', points: 70 },
-                { label: 'Bupivacaine (plain) — 2 mg/kg', points: 20 },
-                { label: 'Bupivacaine WITH epinephrine — 3 mg/kg', points: 30 },
+                { label: 'Lidocaine (plain) — 4.5 mg/kg, max 300 mg', points: 45 },
+                { label: 'Lidocaine WITH epinephrine — 7 mg/kg, max 500 mg', points: 70 },
+                { label: 'Bupivacaine (plain) — 2.5 mg/kg, max 175 mg', points: 25 },
+                { label: 'Bupivacaine WITH epinephrine — 3 mg/kg, max 225 mg', points: 30 },
             ],
         },
         {
@@ -40276,7 +40278,9 @@ const FNB_VOLUME_TRACKER_CALCULATOR = {
                 colorVar: '--color-text-muted',
             };
         }
-        const maxMg = weight * mgPerKg;
+        const capMg = laCapMg(values['agent'] || 0);
+        const capped = weight * mgPerKg > capMg;
+        const maxMg = Math.min(weight * mgPerKg, capMg);
         const givenMg = volume * mgPerMl;
         const pct = Math.round((givenMg / maxMg) * 100);
         let label;
@@ -40296,7 +40300,7 @@ const FNB_VOLUME_TRACKER_CALCULATOR = {
         return {
             value: `${pct}% of max`,
             label,
-            description: `**GIVEN:** ${Math.round(givenMg)} mg (${volume} mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${weight} kg × ${mgPerKg} mg/kg)\n\n**REMAINING:** ${Math.max(0, Math.round(maxMg - givenMg))} mg\n\n${pct >= 80 ? '**WARNING:** At or over the maximum — do not give more; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
+            description: `**GIVEN:** ${Math.round(givenMg)} mg (${volume} mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${capped ? 'adult cap' : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**REMAINING:** ${Math.max(0, Math.round(maxMg - givenMg))} mg\n\n${pct >= 80 ? '**WARNING:** At or over the maximum — do not give more; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
             colorVar,
         };
     },
@@ -40467,10 +40471,10 @@ const DNB_LA_MAX_DOSE_CALCULATOR = {
             hideOptionPoints: true,
             description: 'Max mg/kg encoded in the option value',
             selectOptions: [
-                { label: 'Lidocaine 2% with epi — 7 mg/kg', points: 70 },
-                { label: 'Lidocaine 2% plain — 4.5 mg/kg', points: 45 },
-                { label: 'Articaine 4% with epi — 7 mg/kg', points: 70 },
-                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg', points: 30 },
+                { label: 'Lidocaine 2% with epi — 7 mg/kg, max 500 mg', points: 70 },
+                { label: 'Lidocaine 2% plain — 4.5 mg/kg, max 300 mg', points: 45 },
+                { label: 'Articaine 4% with epi — 7 mg/kg, max 500 mg', points: 70 },
+                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg, max 225 mg', points: 30 },
             ],
         },
         {
@@ -40506,13 +40510,15 @@ const DNB_LA_MAX_DOSE_CALCULATOR = {
                 colorVar: '--color-text-muted',
             };
         }
-        const maxMg = Math.round(weight * mgPerKg);
+        const capMg = laCapMg(values['agent'] || 0);
+        const capped = weight * mgPerKg > capMg;
+        const maxMg = Math.round(Math.min(weight * mgPerKg, capMg));
         const maxMl = Math.round((maxMg / mgPerMl) * 10) / 10;
         const cartridges = Math.floor(maxMl / 1.8);
         return {
             value: `${cartridges} cartridges`,
             label: 'Maximum Safe Dose',
-            description: `**MAX DOSE:** **${maxMg} mg** (${weight} kg × ${mgPerKg} mg/kg)\n\n**MAX VOLUME at this concentration:** **${maxMl} mL** (${maxMg} mg ÷ ${mgPerMl} mg/mL)\n\n**MAX DENTAL CARTRIDGES (1.8 mL each):** **${cartridges}**\n\n**REMEMBER:** Each intraoral block uses only ~0.3–1.8 mL. Use the smallest effective volume, track cartridge count, and ASPIRATE before every injection.`,
+            description: `**MAX DOSE:** **${maxMg} mg** (${capped ? `adult cap; ${weight} kg × ${mgPerKg} mg/kg would be ${Math.round(weight * mgPerKg)} mg` : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**MAX VOLUME at this concentration:** **${maxMl} mL** (${maxMg} mg ÷ ${mgPerMl} mg/mL)\n\n**MAX DENTAL CARTRIDGES (1.8 mL each):** **${cartridges}**\n\n**REMEMBER:** Each intraoral block uses only ~0.3–1.8 mL. Use the smallest effective volume, track cartridge count, and ASPIRATE before every injection.`,
             colorVar: '--color-primary',
         };
     },
@@ -40532,10 +40538,10 @@ const DNB_VOLUME_TRACKER_CALCULATOR = {
             points: 0,
             hideOptionPoints: true,
             selectOptions: [
-                { label: 'Lidocaine 2% with epi — 7 mg/kg', points: 70 },
-                { label: 'Lidocaine 2% plain — 4.5 mg/kg', points: 45 },
-                { label: 'Articaine 4% with epi — 7 mg/kg', points: 70 },
-                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg', points: 30 },
+                { label: 'Lidocaine 2% with epi — 7 mg/kg, max 500 mg', points: 70 },
+                { label: 'Lidocaine 2% plain — 4.5 mg/kg, max 300 mg', points: 45 },
+                { label: 'Articaine 4% with epi — 7 mg/kg, max 500 mg', points: 70 },
+                { label: 'Bupivacaine 0.5% with epi — 3 mg/kg, max 225 mg', points: 30 },
             ],
         },
         {
@@ -40571,7 +40577,9 @@ const DNB_VOLUME_TRACKER_CALCULATOR = {
                 colorVar: '--color-text-muted',
             };
         }
-        const maxMg = weight * mgPerKg;
+        const capMg = laCapMg(values['agent'] || 0);
+        const capped = weight * mgPerKg > capMg;
+        const maxMg = Math.min(weight * mgPerKg, capMg);
         const givenMg = cartridges * 1.8 * mgPerMl;
         const pct = Math.round((givenMg / maxMg) * 100);
         let label;
@@ -40591,7 +40599,7 @@ const DNB_VOLUME_TRACKER_CALCULATOR = {
         return {
             value: `${pct}% of max`,
             label,
-            description: `**GIVEN:** ${Math.round(givenMg)} mg (${cartridges} cartridges × 1.8 mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${weight} kg × ${mgPerKg} mg/kg)\n\n**REMAINING:** ${Math.max(0, Math.round(maxMg - givenMg))} mg (~${Math.max(0, Math.floor((maxMg - givenMg) / (1.8 * mgPerMl)))} more cartridges)\n\n${pct >= 80 ? '**WARNING:** At or over the maximum — do not give more; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
+            description: `**GIVEN:** ${Math.round(givenMg)} mg (${cartridges} cartridges × 1.8 mL × ${mgPerMl} mg/mL)\n\n**MAXIMUM:** ${Math.round(maxMg)} mg (${capped ? 'adult cap' : `${weight} kg × ${mgPerKg} mg/kg`})\n\n**REMAINING:** ${Math.max(0, Math.round(maxMg - givenMg))} mg (~${Math.max(0, Math.floor((maxMg - givenMg) / (1.8 * mgPerMl)))} more cartridges)\n\n${pct >= 80 ? '**WARNING:** At or over the maximum — do not give more; watch for LAST.' : 'Continue to aspirate before every injection and use the smallest effective volume.'}`,
             colorVar,
         };
     },

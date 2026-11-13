@@ -18,6 +18,11 @@ export const LA_AGENTS: LaAgent[] = [
   { id: 6, name: 'Mepivacaine', mgPerKg: 4.4, capMg: 400 },
   { id: 7, name: 'Articaine with epinephrine (dental)', mgPerKg: 7, capMg: 500 },
 ];
+// Adult cap for the single-drug max calculators (facial and dental blocks), whose agent option value is mg/kg x 10.
+// 70 is lidocaine or articaine with epinephrine: both cap at 500 mg.
+const CAP_BY_MGKG10: Record<number, number> = { 45: 300, 70: 500, 25: 175, 30: 225 };
+export const laCapMg = (mgPerKg10: number): number => CAP_BY_MGKG10[mgPerKg10] ?? Infinity;
+
 export const agentOf = (id: number): LaAgent | null => LA_AGENTS.find((a) => a.id === id) || null;
 
 // Max mg for one agent alone: weight-based, never above the adult cap.

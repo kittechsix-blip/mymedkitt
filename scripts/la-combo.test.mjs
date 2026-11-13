@@ -46,3 +46,15 @@ test('blank weight shows the prompt; defaults are lidocaine 1% + bupivacaine 0.5
   assert.equal(C.fields.find((f) => f.name === 'agent2').selectOptions[0].points, 3);
   assert.equal(C.fields.find((f) => f.name === 'conc2').selectOptions[0].points, 50);
 });
+
+test('single-drug max calculators: caps by option value, and the source carries 2.5 mg/kg plain bupivacaine', async () => {
+  const { laCapMg } = await import('../src/components/la-combo-calculators.ts');
+  assert.equal(laCapMg(45), 300);
+  assert.equal(laCapMg(25), 175);
+  assert.equal(laCapMg(30), 225);
+  assert.equal(laCapMg(70), 500);
+  const { readFileSync } = await import('node:fs');
+  const src = readFileSync(new URL('../src/components/calculator.ts', import.meta.url), 'utf8');
+  assert.ok(!src.includes("Bupivacaine (plain) — 2 mg/kg'"));
+  assert.equal((src.match(/Math\.min\(weight \* mgPerKg, capMg\)/g) || []).length, 4, 'all four single-drug calculators cap');
+});
