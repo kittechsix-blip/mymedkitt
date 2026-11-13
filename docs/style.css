@@ -6588,3 +6588,56 @@ a,
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* Shared calculator views: Obsidian. Specialized custom tools retain their own layouts. */
+.calculator-container--obsidian:has(> .calculator-header) {
+  background: linear-gradient(155deg, #281712 0%, #110b09 42%, #1b0d0a 100%);
+  color: #f8eee8;
+}
+.calculator-container--obsidian > .btn-text { color: #e8c6b9; }
+.calculator-container--obsidian .calculator-header { text-align: left; padding: 20px 4px 6px; }
+.calculator-container--obsidian .calculator-title { color: #fff5ee; font-size: clamp(25px, 5vw, 32px); line-height: 1.15; letter-spacing: -.035em; }
+.calculator-container--obsidian .calculator-subtitle { color: #d5b6a9; line-height: 1.4; }
+.calculator-container--obsidian .calculator-description { color: #d2b7ac; text-align: left; padding: 8px 4px 12px; }
+.calculator-container--obsidian .calculator-explainer a { color: #ffac91; }
+.calculator-container--obsidian .calculator-score-display {
+  max-width: none; margin: 12px 4px 20px; padding: 20px;
+  text-align: left; border: 1px solid #a94430; border-left: 4px solid #e74330;
+  border-radius: 14px; background: linear-gradient(135deg, #321a14, #160b09 65%);
+  box-shadow: 0 12px 28px #0008, inset 0 1px #ffffff20, 0 0 18px #a623161c;
+}
+.calculator-container--obsidian .calculator-score-display::before {
+  content: 'RESULT'; display: block; margin-bottom: 8px; color: #e6aa97;
+  font-size: 11px; font-weight: 800; letter-spacing: .14em;
+}
+.calculator-container--obsidian .calculator-score-number {
+  color: #fff4ea; font-size: clamp(30px, 7vw, 44px); line-height: 1.15;
+  letter-spacing: -.035em; overflow-wrap: anywhere; text-shadow: none;
+}
+.calculator-container--obsidian .calculator-result-label { color: #fff2e9 !important; margin-top: 10px; font-size: 16px; text-transform: none; letter-spacing: 0; }
+.calculator-container--obsidian .calculator-result-risk { color: #ead8cf; font-size: 14px; line-height: 1.55; margin-top: 12px; overflow-wrap: anywhere; }
+.calculator-container--obsidian .calculator-result-risk p { margin-bottom: 7px; }
+.calculator-container--obsidian .calculator-result-risk p > strong:first-child { color: #fff5ee; text-transform: none; font-size: 14px; letter-spacing: 0; margin-top: 14px; }
+.calculator-container--obsidian .calculator-result-risk a { color: #ffb49b; }
+.calculator-container--obsidian .calculator-risk-badge { align-items: flex-start; background: #ffffff0c; border-width: 1px; padding: 8px 12px; }
+.calculator-container--obsidian .calculator-risk-class, .calculator-container--obsidian .calculator-risk-level { color: #fff2e9; }
+.calculator-container--obsidian .calculator-mortality { color: #ead8cf; font-size: 14px; line-height: 1.45; }
+.calculator-container--obsidian .calculator-field { background: linear-gradient(130deg, #42241c, #25130f 75%); border: 1px solid #97523c66; border-radius: 12px; box-shadow: 0 5px 14px #0005, inset 0 1px #ffffff1c; }
+.calculator-container--obsidian .calculator-field-label { color: #fff4ec; }
+.calculator-container--obsidian .calculator-field-desc, .calculator-container--obsidian .calculator-number-unit { color: #d6b9ab; }
+.calculator-container--obsidian .calculator-field-points { color: #ffc2ab; background: #a03c2c38; }
+.calculator-container--obsidian .calculator-toggle-slider { background: #68544b; box-shadow: inset 0 2px 5px #0009; }
+.calculator-container--obsidian .calculator-toggle-input:checked + .calculator-toggle-slider { background: linear-gradient(#e83b2a, #9b1e17); }
+.calculator-container--obsidian .calculator-toggle-input:focus-visible + .calculator-toggle-slider { outline: 3px solid #ffb6a2; outline-offset: 3px; }
+.calculator-container--obsidian .calculator-number-input, .calculator-container--obsidian .calculator-select-input { color: #fff4ec; background-color: #1c100d; border-color: #a36c55; color-scheme: dark; }
+.calculator-container--obsidian .calculator-number-input:focus, .calculator-container--obsidian .calculator-select-input:focus { border-color: #ff987d; box-shadow: 0 0 0 3px #e95a394d; }
+.calculator-container--obsidian .calculator-threshold, .calculator-container--obsidian .calculator-citation-list { color: #d6b9ab; }
+.calculator-container--obsidian .calculator-citations summary { color: #ffb49b; }
+.calculator-container--obsidian .calculator-score-display--stuck { padding: 8px 14px; }
+.calculator-container--obsidian .calculator-score-display--stuck::before { display: none; }
+.calculator-container--obsidian .calculator-score-display--stuck .calculator-score-number { font-size: 22px; }
+.calculator-container--obsidian .calculator-score-display--stuck .calculator-risk-badge { background: #ffffff0c; }
+
+.calculator-container--obsidian .calculator-copy-btn { color: #ffe4d7; background: #5b231a; border-color: #a64c38; }
+.calculator-container--obsidian .carry-caption { color: #e9cbbb; }
+.calculator-container--obsidian .carry-caption__clear { color: #ffb49b; }

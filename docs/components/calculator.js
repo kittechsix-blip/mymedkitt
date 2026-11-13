@@ -45624,7 +45624,7 @@ function rankedCalcSearch(calcs, query) {
 /** Render the calculator list view with search */
 export function renderCalculatorList(container) {
     container.innerHTML = '';
-    container.classList.remove('calculator-container--nihss');
+    container.classList.remove('calculator-container--nihss', 'calculator-container--obsidian');
     // Back button
     const backBtn = document.createElement('button');
     backBtn.className = 'btn-text';
@@ -45749,6 +45749,7 @@ export function renderCalculator(container, calculatorId) {
     container.innerHTML = '';
     const isFastStrokeCalculator = calculatorId === 'nihss' || calculatorId === 'stroke-syndrome-calculator' || calculatorId === 'extubation-readiness-checklist';
     container.classList.toggle('calculator-container--nihss', isFastStrokeCalculator);
+    container.classList.toggle('calculator-container--obsidian', !calc.customRender && !isFastStrokeCalculator);
     // Add custom scroll indicator for TBSA calculators (iOS hides native scrollbar)
     if (calculatorId.startsWith('tbsa')) {
         addScrollIndicator(container);
