@@ -108,6 +108,8 @@ export const DVT_NODES: DecisionNode[] = [
     module: 1,
     title: 'High-Risk DVT Features',
     body: '**Phlegmasia Cerulea Dolens (PCD):**\n• Massive iliofemoral DVT with near-total venous obstruction\n• Triad: severe pain, cyanosis, massive edema\n• Risk of venous gangrene and limb loss\n• May progress to shock and death\n\n**Phlegmasia Alba Dolens:**\n• Less severe, "milk leg" (pale, swollen)\n• Can progress to PCD\n\n**Management:**\n• Immediate anticoagulation\n• Consider catheter-directed thrombolysis (CDT)\n• Urgent vascular surgery/IR consultation\n• Limb elevation\n• May need fasciotomy if compartment syndrome\n\n**Contraindications to CDT:**\n• Active bleeding\n• Recent stroke (<3 months)\n• High bleeding risk\n• Life expectancy <1 year',
+    images: [{"src": "images/phlegmasia/cerulea-heilman.jpg", "alt": "Clinical photograph of phlegmasia cerulea dolens: one leg is markedly swollen and purple compared with the opposite leg.", "caption": "Phlegmasia cerulea dolens. James Heilman, MD, 2016. CC BY-SA 4.0. Original photograph, unmodified."}],
+    calculatorLinks: [{ id: 'phlegmasia-photos', label: 'Cerulea / Alba Photos', kind: 'info' }],
     citation: [11, 12],
     next: 'dvt-imaging',
     summary: 'Phlegmasia = limb-threatening DVT - needs immediate anticoagulation and consider CDT',

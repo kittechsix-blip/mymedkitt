@@ -26,8 +26,8 @@ function infoBoldAware(parent: HTMLElement, text: string): void {
 
 /** Render a line of info page body text with inline links, bold, and citation refs. */
 function renderInfoBodyLine(container: HTMLElement, line: string): void {
-  // Combined pattern: markdown links [text](#/path) OR citation refs [N]
-  const combinedPattern = /\[([^\]]+)\]\((#\/[^)]+)\)|\[(\d+)\](?:\[(\d+)\])*/g;
+  // Combined pattern: internal/external markdown links OR citation refs [N]
+  const combinedPattern = /\[([^\]]+)\]\((#\/[^)]+|https:\/\/[^)]+)\)|\[(\d+)\](?:\[(\d+)\])*/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
@@ -41,6 +41,17 @@ function renderInfoBodyLine(container: HTMLElement, line: string): void {
       // Markdown link: [label](#/type/id)
       const linkLabel = match[1];
       const linkUrl = match[2];
+      if (linkUrl.startsWith('https://')) {
+        const link = document.createElement('a');
+        link.className = 'body-inline-link';
+        link.textContent = linkLabel;
+        link.href = linkUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        container.appendChild(link);
+        lastIndex = match.index + match[0].length;
+        continue;
+      }
       const parts = linkUrl.replace(/^#\//, '').split('/');
       const linkType = parts[0];
       const linkId = parts.slice(1).join('/');

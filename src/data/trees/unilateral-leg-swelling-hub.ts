@@ -106,6 +106,8 @@ export const UNILATERAL_LEG_SWELLING_HUB_NODES: DecisionNode[] = [
       { label: 'Whole-leg tense cyanotic swelling + severe pain', description: 'Treat as phlegmasia \u2014 limb emergency', next: 'uls-phlegmasia-verdict', urgency: 'critical' },
       { label: 'Focal swelling, no cyanosis, limb not threatened', description: 'Not phlegmasia \u2014 assess for ordinary DVT', next: 'uls-phlegmasia-excluded', urgency: 'routine' },
     ],
+    images: [{"src": "images/phlegmasia/cerulea-heilman.jpg", "alt": "Clinical photograph of phlegmasia cerulea dolens: one leg is markedly swollen and purple compared with the opposite leg.", "caption": "Phlegmasia cerulea dolens. James Heilman, MD, 2016. CC BY-SA 4.0. Original photograph, unmodified."}],
+    calculatorLinks: [{ id: 'phlegmasia-photos', label: 'Cerulea / Alba Photos', kind: 'info' }],
     citation: [3],
     summary: 'Tense cyanotic whole-leg swelling + pain = phlegmasia (massive iliofemoral DVT); venous gangrene / limb loss without decompression.',
     safetyLevel: 'critical',

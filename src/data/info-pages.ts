@@ -31351,8 +31351,44 @@ const STAPH_TSS_ANTIBIOTICS_PAGE: InfoPage = {
   ],
 };
 
+const PHLEGMASIA_PHOTOS: InfoPage = {
+  id: 'phlegmasia-photos',
+  "title": "Phlegmasia: Clinical Photos",
+  "subtitle": "Cerulea and alba dolens",
+  "sections": [
+    {
+      "heading": "Cerulea dolens: clinical photograph",
+      "image": {
+        "src": "images/phlegmasia/cerulea-heilman.jpg",
+        "alt": "Clinical photograph of phlegmasia cerulea dolens: one leg is markedly swollen and purple compared with the opposite leg.",
+        "caption": "Phlegmasia cerulea dolens. James Heilman, MD, 2016. CC BY-SA 4.0. Original photograph, unmodified."
+      },
+      "body": "[Original photograph and attribution](https://commons.wikimedia.org/wiki/File:PCD2016.jpg) \u00b7 [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/). Photograph by James Heilman, MD; reproduced unmodified.\n\n[Additional cerulea photograph: before and after thrombectomy](https://pmc.ncbi.nlm.nih.gov/articles/PMC5823088/) (published case report; opens externally). The treated image is not an example of alba dolens."
+    },
+    {
+      "heading": "Alba dolens: reference photograph",
+      "body": "[View phlegmasia alba dolens, Figure 12.43](https://accessmedicine.mhmedical.com/content.aspx?bookid=2969&sectionid=250459495). The Atlas of Emergency Medicine labels this image as pale discoloration of the lower extremity. Opens the publisher website; access may require a subscription.\n\nThis photograph is linked rather than reproduced because republication permission has not been established."
+    }
+  ],
+  "citations": [
+    {
+      "num": 1,
+      "text": "James Heilman, MD. PCD2016.jpg. Wikimedia Commons. CC BY-SA 4.0. https://commons.wikimedia.org/wiki/File:PCD2016.jpg"
+    },
+    {
+      "num": 2,
+      "text": "Ritter K, Fitch RW. Phlegmasia Dolens. The Atlas of Emergency Medicine, 5e. Figure 12.43. McGraw Hill. https://accessmedicine.mhmedical.com/content.aspx?bookid=2969&sectionid=250459495"
+    },
+    {
+      "num": 3,
+      "text": "Vysetti S et al. Phlegmasia Cerulea Dolens: A Rare, Life-Threatening Condition. 2009. https://pmc.ncbi.nlm.nih.gov/articles/PMC5823088/"
+    }
+  ]
+};
+
 export const INFO_PAGES: Record<string, InfoPage> = {
   ...HG_INFO_PAGES,
+  'phlegmasia-photos': PHLEGMASIA_PHOTOS,
   'block-visual-supraorbital': { id: 'block-visual-supraorbital', title: 'Supraorbital + supratrochlear visual guide', subtitle: 'Coverage and landmarks', sections: [{ heading: 'Expected coverage', image: { src: 'images/dental-nerve-blocks/exec-1df82e36-7522-4267-8536-8d748f44a258.jpg', alt: 'Supraorbital + supratrochlear expected sensory coverage', caption: 'Approximate distribution after a successful block; anatomy and response vary. Test before proceeding.' }, body: 'See the procedure for complete technique and safety checks.' }, { heading: 'Landmark orientation', image: { src: 'images/dental-nerve-blocks/exec-529d15ea-6242-4591-9463-8b40671ab176.jpg', alt: 'Supraorbital + supratrochlear landmark orientation', caption: 'Landmark orientation; use the written procedure for detailed technique.' }, body: 'Look straight ahead. Palpate the superior orbital rim for the supraorbital notch, usually near the pupil line; the supratrochlear nerve lies medial. Deposit superficial to the rim adjacent to the notch and extend medially. Keep the needle away from the globe. Aspirate.' }], citations: [{ num: 1, text: 'MSD Manual Professional Edition: regional anesthesia procedure guides; see consult references.' }] },
   'block-visual-infraorbital': { id: 'block-visual-infraorbital', title: 'Infraorbital visual guide', subtitle: 'Coverage and landmarks', sections: [{ heading: 'Expected coverage', image: { src: 'images/dental-nerve-blocks/exec-ccb36f07-179f-4e82-9460-bd0893177e85.jpg', alt: 'Infraorbital expected sensory coverage', caption: 'Approximate distribution after a successful block; anatomy and response vary. Test before proceeding.' }, body: 'See the procedure for complete technique and safety checks.' }, { heading: 'Landmark orientation', image: { src: 'images/dental-nerve-blocks/exec-ebbf1a7e-cf53-45f1-b2c5-492468d2ae96.jpg', alt: 'Infraorbital landmark orientation', caption: 'Landmark orientation; use the written procedure for detailed technique.' }, body: 'Look straight ahead. The foramen is approximately 1 cm below the infraorbital rim near the pupil line. Intraorally identify the mucobuccal fold above the first premolar and keep a finger over the foramen. Aspirate and deposit adjacent to, never into, the foramen.' }], citations: [{ num: 1, text: 'MSD Manual Professional Edition: regional anesthesia procedure guides; see consult references.' }] },
   'block-visual-mental': { id: 'block-visual-mental', title: 'Mental visual guide', subtitle: 'Coverage and landmarks', sections: [{ heading: 'Expected coverage', image: { src: 'images/dental-nerve-blocks/exec-5093735c-348d-42ad-97a7-9b0235258d36.jpg', alt: 'Mental expected sensory coverage', caption: 'Approximate distribution after a successful block; anatomy and response vary. Test before proceeding.' }, body: 'See the procedure for complete technique and safety checks.' }, { heading: 'Landmark orientation', image: { src: 'images/dental-nerve-blocks/exec-25baa7e9-8e41-4480-9c1b-985cd0b59b3e.jpg', alt: 'Mental landmark orientation', caption: 'Landmark orientation; use the written procedure for detailed technique.' }, body: 'The mental foramen is usually below or between the roots of the mandibular first and second premolars. Retract the lower lip and identify the mucobuccal fold near those teeth; palpate externally. Aspirate and deposit adjacent to, never into, the foramen. Mental block alone does not reliably numb teeth.' }], citations: [{ num: 1, text: 'MSD Manual Professional Edition: regional anesthesia procedure guides; see consult references.' }] },
