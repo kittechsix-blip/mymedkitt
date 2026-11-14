@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" role="img" aria-labelledby="t d">
+  <title id="t">Pill picker: diabetes drugs by condition</title>
+  <desc id="d">Grid of five drug groups against seven conditions. Each cell is OK (green), Care (yellow) or Avoid (red).</desc>
+  <style>
+    text{font-family:Arial,sans-serif;fill:#1a1a1a}
+    .h{font-size:11px;font-weight:bold;text-anchor:middle}
+    .r{font-size:12px;font-weight:bold}
+    .c{font-size:11px;font-weight:bold;text-anchor:middle}
+    .g{fill:#c8e6c9;stroke:#2e7d32}.y{fill:#fff3c4;stroke:#b28704}.x{fill:#f8c9c9;stroke:#c62828}
+  </style>
+  <rect width="760" height="440" fill="#fff"/>
+  <text x="380" y="24" text-anchor="middle" style="font-size:17px;font-weight:bold">Pill picker (directional guide)</text>
+  <g class="h">
+    <text x="215" y="58">eGFR</text><text x="215" y="71">under 45</text>
+    <text x="290" y="58">Heart</text><text x="290" y="71">failure</text>
+    <text x="365" y="58">Heart attack</text><text x="365" y="71">or stroke</text>
+    <text x="440" y="58">Fatty liver</text><text x="440" y="71">(no cirrhosis)</text>
+    <text x="515" y="58">Age 65+</text><text x="515" y="71">or frail</text>
+    <text x="590" y="58">Unreliable</text><text x="590" y="71">meals</text>
+    <text x="665" y="58">Heavy</text><text x="665" y="71">alcohol</text>
+  </g>
+  <g class="r">
+    <text x="12" y="118">Metformin</text>
+    <text x="12" y="188">SGLT2 inhibitor</text>
+    <text x="12" y="258">Sitagliptin</text>
+    <text x="12" y="328">Glipizide / glimepiride</text>
+    <text x="12" y="398">Pioglitazone</text>
+  </g>
+  <!-- row 1 metformin -->
+  <g class="c">
+    <rect class="x" x="180" y="90" width="70" height="50"/><text x="215" y="119">Avoid</text><text x="215" y="132" style="font-size:9px">no start</text>
+    <rect class="g" x="255" y="90" width="70" height="50"/><text x="290" y="119">OK</text>
+    <rect class="g" x="330" y="90" width="70" height="50"/><text x="365" y="119">OK</text>
+    <rect class="g" x="405" y="90" width="70" height="50"/><text x="440" y="119">OK</text>
+    <rect class="g" x="480" y="90" width="70" height="50"/><text x="515" y="119">OK</text>
+    <rect class="g" x="555" y="90" width="70" height="50"/><text x="590" y="119">OK</text>
+    <rect class="x" x="630" y="90" width="70" height="50"/><text x="665" y="119">Avoid</text>
+    <!-- row 2 SGLT2 -->
+    <rect class="y" x="180" y="160" width="70" height="50"/><text x="215" y="189">Care</text><text x="215" y="202" style="font-size:9px">weak sugar</text>
+    <rect class="g" x="255" y="160" width="70" height="50"/><text x="290" y="189">OK</text>
+    <rect class="g" x="330" y="160" width="70" height="50"/><text x="365" y="189">OK</text>
+    <rect class="g" x="405" y="160" width="70" height="50"/><text x="440" y="189">OK</text>
+    <rect class="y" x="480" y="160" width="70" height="50"/><text x="515" y="189">Care</text><text x="515" y="202" style="font-size:9px">volume</text>
+    <rect class="y" x="555" y="160" width="70" height="50"/><text x="590" y="189">Care</text><text x="590" y="202" style="font-size:9px">hold if fasting</text>
+    <rect class="y" x="630" y="160" width="70" height="50"/><text x="665" y="189">Care</text><text x="665" y="202" style="font-size:9px">ketoacidosis</text>
+    <!-- row 3 sitagliptin -->
+    <rect class="y" x="180" y="230" width="70" height="50"/><text x="215" y="259">Care</text><text x="215" y="272" style="font-size:9px">lower dose</text>
+    <rect class="y" x="255" y="230" width="70" height="50"/><text x="290" y="259">Care</text><text x="290" y="272" style="font-size:9px">watch HF</text>
+    <rect class="g" x="330" y="230" width="70" height="50"/><text x="365" y="259">OK</text>
+    <rect class="g" x="405" y="230" width="70" height="50"/><text x="440" y="259">OK</text>
+    <rect class="g" x="480" y="230" width="70" height="50"/><text x="515" y="259">OK</text>
+    <rect class="g" x="555" y="230" width="70" height="50"/><text x="590" y="259">OK</text>
+    <rect class="g" x="630" y="230" width="70" height="50"/><text x="665" y="259">OK</text>
+    <!-- row 4 SU -->
+    <rect class="y" x="180" y="300" width="70" height="50"/><text x="215" y="329">Care</text><text x="215" y="342" style="font-size:9px">2.5 mg; no &lt;30</text>
+    <rect class="g" x="255" y="300" width="70" height="50"/><text x="290" y="329">OK</text>
+    <rect class="g" x="330" y="300" width="70" height="50"/><text x="365" y="329">OK</text>
+    <rect class="y" x="405" y="300" width="70" height="50"/><text x="440" y="329">Care</text><text x="440" y="342" style="font-size:9px">lows</text>
+    <rect class="x" x="480" y="300" width="70" height="50"/><text x="515" y="329">Avoid</text><text x="515" y="342" style="font-size:9px">lows</text>
+    <rect class="x" x="555" y="300" width="70" height="50"/><text x="590" y="329">Avoid</text><text x="590" y="342" style="font-size:9px">lows</text>
+    <rect class="x" x="630" y="300" width="70" height="50"/><text x="665" y="329">Avoid</text><text x="665" y="342" style="font-size:9px">lows</text>
+    <!-- row 5 pio -->
+    <rect class="g" x="180" y="370" width="70" height="50"/><text x="215" y="399">OK</text>
+    <rect class="x" x="255" y="370" width="70" height="50"/><text x="290" y="399">Avoid</text><text x="290" y="412" style="font-size:9px">fluid</text>
+    <rect class="g" x="330" y="370" width="70" height="50"/><text x="365" y="399">OK</text>
+    <rect class="g" x="405" y="370" width="70" height="50"/><text x="440" y="399">OK</text><text x="440" y="412" style="font-size:9px">helps</text>
+    <rect class="y" x="480" y="370" width="70" height="50"/><text x="515" y="399">Care</text><text x="515" y="412" style="font-size:9px">fracture, edema</text>
+    <rect class="g" x="555" y="370" width="70" height="50"/><text x="590" y="399">OK</text>
+    <rect class="y" x="630" y="370" width="70" height="50"/><text x="665" y="399">Care</text><text x="665" y="412" style="font-size:9px">check liver</text>
+  </g>
+  <text x="380" y="436" text-anchor="middle" style="font-size:9px;fill:#666">Original diagram. Directional only: see each dose card for exact limits. Sources: ADA 2026, DailyMed labels.</text>
+</svg>

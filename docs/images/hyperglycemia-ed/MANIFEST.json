@@ -1,0 +1,26 @@
+{
+  "insulin-curves.svg": {
+    "source_url": "original work, hand-built SVG for myMedKitt (no third-party source)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+    "retrieval_timestamp": "2026-11-14T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-14 outline approval, section 6 Visuals (docs/reviews/hyperglycemia-ed-v2-outline.html)",
+    "sha256": "2058426fbe47ab38548c1eeced0fb52a00d3d1b6d76d1b4fc7ab0289dd9d7ce0"
+  },
+  "pill-picker.svg": {
+    "source_url": "original work, hand-built SVG for myMedKitt (no third-party source)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+    "retrieval_timestamp": "2026-11-14T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-14 outline approval, section 6 Visuals (docs/reviews/hyperglycemia-ed-v2-outline.html)",
+    "sha256": "63c076ab666c595bf4e9103a4682f3dd7001728c7be2d86cc9a178c32175056b"
+  },
+  "egfr-ladder.svg": {
+    "source_url": "original work, hand-built SVG for myMedKitt (no third-party source)",
+    "license_tag": "PD-self",
+    "license_evidence_url": "https://commons.wikimedia.org/wiki/Template:PD-self",
+    "retrieval_timestamp": "2026-11-14T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-14 outline approval, section 6 Visuals (docs/reviews/hyperglycemia-ed-v2-outline.html)",
+    "sha256": "45138e3e4b396a2e3fd090c6b708c5c7334b73a71cb9718b8d5a2b0b3ec543cd"
+  }
+}

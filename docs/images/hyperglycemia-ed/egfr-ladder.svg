@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" role="img" aria-labelledby="t d">
+  <title id="t">eGFR ladder for diabetes drugs</title>
+  <desc id="d">Six eGFR bands from 60 and above down to under 15 or dialysis, showing for metformin, SGLT2 inhibitors, sitagliptin and glipizide what is allowed.</desc>
+  <style>
+    text{font-family:Arial,sans-serif;fill:#1a1a1a}
+    .h{font-size:12px;font-weight:bold;text-anchor:middle}
+    .b{font-size:13px;font-weight:bold}
+    .c{font-size:11px;text-anchor:middle}
+    .g{fill:#c8e6c9;stroke:#2e7d32}.y{fill:#fff3c4;stroke:#b28704}.x{fill:#f8c9c9;stroke:#c62828}.n{fill:#e0e0e0;stroke:#555}
+  </style>
+  <rect width="720" height="420" fill="#fff"/>
+  <text x="360" y="22" text-anchor="middle" style="font-size:17px;font-weight:bold">eGFR ladder (mL/min/1.73 m2)</text>
+  <g class="h"><text x="215" y="52">Metformin</text><text x="355" y="52">SGLT2 inhibitor</text><text x="495" y="52">Sitagliptin</text><text x="635" y="52">Glipizide</text></g>
+  <g class="b">
+    <text x="14" y="94">60 or more</text><text x="14" y="154">45 to 59</text><text x="14" y="214">30 to 44</text><text x="14" y="274">20 to 29</text><text x="14" y="334">15 to 19</text><text x="14" y="394">Under 15 / dialysis</text>
+  </g>
+  <g class="c">
+    <rect class="g" x="150" y="64" width="130" height="50"/><text x="215" y="93">Allowed</text>
+    <rect class="g" x="290" y="64" width="130" height="50"/><text x="355" y="93">Allowed</text>
+    <rect class="g" x="430" y="64" width="130" height="50"/><text x="495" y="93">100 mg daily</text>
+    <rect class="g" x="570" y="64" width="130" height="50"/><text x="635" y="93">5 mg (2.5 if frail)</text>
+
+    <rect class="g" x="150" y="124" width="130" height="50"/><text x="215" y="153">Allowed</text>
+    <rect class="g" x="290" y="124" width="130" height="50"/><text x="355" y="153">Allowed</text>
+    <rect class="g" x="430" y="124" width="130" height="50"/><text x="495" y="153">100 mg daily</text>
+    <rect class="g" x="570" y="124" width="130" height="50"/><text x="635" y="153">2.5 mg start</text>
+
+    <rect class="y" x="150" y="184" width="130" height="50"/><text x="215" y="206">Do NOT start;</text><text x="215" y="221">max 1000 mg/day</text>
+    <rect class="y" x="290" y="184" width="130" height="50"/><text x="355" y="206">Heart/kidney benefit;</text><text x="355" y="221">weak sugar effect</text>
+    <rect class="y" x="430" y="184" width="130" height="50"/><text x="495" y="213">50 mg daily</text>
+    <rect class="y" x="570" y="184" width="130" height="50"/><text x="635" y="206">2.5 mg;</text><text x="635" y="221">reliable meals only</text>
+
+    <rect class="x" x="150" y="244" width="130" height="50"/><text x="215" y="273">Contraindicated</text>
+    <rect class="y" x="290" y="244" width="130" height="50"/><text x="355" y="266">Start at 20+ (ADA);</text><text x="355" y="281">dapagliflozin label 25+</text>
+    <rect class="y" x="430" y="244" width="130" height="50"/><text x="495" y="273">25 mg daily</text>
+    <rect class="x" x="570" y="244" width="130" height="50"/><text x="635" y="273">Avoid</text>
+
+    <rect class="x" x="150" y="304" width="130" height="50"/><text x="215" y="333">Contraindicated</text>
+    <rect class="x" x="290" y="304" width="130" height="50"/><text x="355" y="333">Do not start</text>
+    <rect class="y" x="430" y="304" width="130" height="50"/><text x="495" y="333">25 mg daily</text>
+    <rect class="x" x="570" y="304" width="130" height="50"/><text x="635" y="333">Avoid</text>
+
+    <rect class="n" x="150" y="364" width="550" height="50"/><text x="425" y="393">Stop here: call nephrology or endocrine. The Bridge Plan Builder withholds a plan.</text>
+  </g>
+  <text x="360" y="416" text-anchor="middle" style="font-size:9px;fill:#666">Original diagram. Sources: ADA Standards of Care 2026 and DailyMed labels (metformin, dapagliflozin, sitagliptin, glipizide).</text>
+</svg>

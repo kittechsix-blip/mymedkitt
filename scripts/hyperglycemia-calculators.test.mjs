@@ -77,7 +77,7 @@ test('invalid numbers and missing or zero ratios never produce a meal dose', () 
 });
 
 test('all tools have unique IDs, sources and empty selection sentinels', () => {
-  assert.deepEqual(HYPERGLYCEMIA_CALCULATORS.map(c => c.id), ['hg-basal-start', 'hg-basal-titrate', 'hg-meal-correction']);
+  assert.deepEqual(HYPERGLYCEMIA_CALCULATORS.map(c => c.id), ['hg-plan-builder', 'hg-basal-start', 'hg-basal-titrate', 'hg-meal-correction']);
   for (const calc of HYPERGLYCEMIA_CALCULATORS) {
     assert.ok(calc.citations.some(c => c.includes('10.2337/dc26-S009')));
     assert.equal(new Set(calc.fields.map(f => f.name)).size, calc.fields.length);

@@ -526,8 +526,8 @@ export const DEFAULT_CATEGORIES: Category[] = [
   "title": "Hyperglycemia: ED Treatment & Bridge Care",
   "subtitle": "Labs \u00b7 Oral therapy \u00b7 Insulin \u00b7 Meals \u00b7 Uninsured access",
   "categoryId": "emergency-medicine",
-  "version": "1.0",
-  "nodeCount": 27,
+  "version": "2.0",
+  "nodeCount": 38,
   "entryNodeId": "hg-start"
 },
 {
@@ -2021,8 +2021,8 @@ export const DEFAULT_CATEGORIES: Category[] = [
   "title": "Hyperglycemia: ED Treatment & Bridge Care",
   "subtitle": "Labs \u00b7 Oral therapy \u00b7 Insulin \u00b7 Meals \u00b7 Uninsured access",
   "categoryId": "emergency-medicine",
-  "version": "1.0",
-  "nodeCount": 27,
+  "version": "2.0",
+  "nodeCount": 38,
   "entryNodeId": "hg-start"
 },
       {

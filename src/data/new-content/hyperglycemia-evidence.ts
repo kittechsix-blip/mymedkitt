@@ -54,5 +54,45 @@ export const HG_CITATIONS = [
   {
     "num": 14,
     "text": "DailyMed. Metformin immediate-release prescribing information. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fb296500-55cb-45ce-be0c-59aa2e3d4624"
+  },
+  {
+    "num": 15,
+    "text": "DailyMed. Glimepiride tablets prescribing information (start 1-2 mg daily with breakfast; 1 mg if elderly or renal impairment; increase 1-2 mg every 1-2 weeks; maximum 8 mg daily). https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=101cdc41-2131-4425-b550-6a0a60b5f4a4"
+  },
+  {
+    "num": 16,
+    "text": "DailyMed. Dapagliflozin tablets prescribing information (glycemic start 5 mg daily, may increase to 10 mg; not for glycemic control at eGFR <45; 10 mg for heart failure and CKD indications; initiation for CKD at eGFR 25 or higher). https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5dc0e9df-3b45-4469-93fe-3d2eddbfe2b7"
+  },
+  {
+    "num": 17,
+    "text": "FDA. Humulin N (isophane insulin human, NPH) prescribing information (individualize dose; median maximum effect about 6.5 hours, range 2.8 to 13 hours). https://www.accessdata.fda.gov/Drugsatfda_Docs/Label/2015/018781s154lbl.Pdf"
+  },
+  {
+    "num": 18,
+    "text": "DailyMed. Humulin R (regular human insulin) prescribing information (inject about 30 minutes before meals). https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b519bd83-038c-4ec5-a231-a51ec5cc291f"
+  },
+  {
+    "num": 19,
+    "text": "FDA. Humulin 70/30 prescribing information (inject about 30 to 45 minutes before a meal; individualize dose). https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/019717s161lbl.pdf"
+  },
+  {
+    "num": 20,
+    "text": "Lilly Insulin Value Program: $35 for a 30-day supply, uninsured eligible, excludes Medicaid/Medicare/VA/TRICARE; covers Basaglar, Rezvoglar, Humalog, Humulin R/N/70-30; card expires 12/31/2026. Verified 2026-11-14. https://insulins.lilly.com/lilly-insulin-value-program "
+  },
+  {
+    "num": 21,
+    "text": "NovoCare MyInsulinRx: $35 per month, up to 3 vials or 2 pen packs, uninsured eligible, excludes government programs; covers Novolin N/R/70-30, NovoLog, Tresiba. Verified 2026-11-14. https://www.novocare.com/eligibility/myinsulinrx.html "
+  },
+  {
+    "num": 22,
+    "text": "Sanofi Insulins Valyou Savings Program: $35 per month for Sanofi insulins including Lantus from 2026-01-01 (medium confidence; confirm eligibility with the program before promising it). https://www.sanofi.us"
+  },
+  {
+    "num": 23,
+    "text": "ClinicalTrials.gov NCT03511521. Randomized trial of weight-based NPH insulin for glucocorticoid-induced hyperglycemia (0.15 units/kg for prednisone 10 to 40 mg; 0.3 units/kg for more than 40 mg, given with the morning steroid). https://clinicaltrials.gov/study/NCT03511521"
+  },
+  {
+    "num": 24,
+    "text": "Price and access notes, verified 2026-11-14 and still to be confirmed at the dispensing pharmacy: Walmart $4 generic list (active 2026); ReliOn human insulin vial about $25 (unverified 2026); first generic dapagliflozin FDA approved 2026-04-07 (price unknown); AstraZeneca AZ&Me closed new Farxiga enrollment 2026-05-01 (secondary source); Boehringer Ingelheim BI Cares for Jardiance (about 200% of the federal poverty level). Walmart: https://www.walmart.com/cp/4-prescriptions/1078664"
   }
 ];
