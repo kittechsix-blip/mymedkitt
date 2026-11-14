@@ -1,0 +1,102 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hyperglycemia v2: outline for approval</title><style>body{margin:0;background:#fff8f2;color:#27221e;font:18px/1.6 system-ui}main{max-width:980px;margin:auto;padding:24px}section{background:white;border:1px solid #d6c7b7;padding:20px;margin:20px 0;border-radius:12px}h1,h2,h3{line-height:1.2;color:#843824}h1{font-size:30px}h2{font-size:23px}h3{font-size:19px;margin-bottom:4px}a{color:#843824}li{margin:7px 0}table{border-collapse:collapse;width:100%}td,th{padding:10px;text-align:left;border-bottom:1px solid #ddd;vertical-align:top}.tools{display:flex;gap:8px;flex-wrap:wrap}.tools span{background:#843824;color:white;padding:9px 12px;border-radius:8px}.do{background:#eef6ee;border-left:5px solid #2f6b3a;padding:10px 14px;margin:8px 0}.why{background:#f4efe8;border-left:5px solid #843824;padding:10px 14px;margin:8px 0}.old{color:#666;text-decoration:line-through}small{color:#555}@media(max-width:600px){main{padding:12px}td,th{padding:7px;font-size:15px}}</style><main>
+<p><strong>Clinical outline for approval • November 14, 2026 • Redesign of the live consult • Not built or deployed</strong></p>
+<h1>Hyperglycemia v2: "Who is this patient, and what exactly do I prescribe?"</h1>
+<p>The current consult tells you what to think about. It doesn't tell you what to do. v2 turns it into prescriptions: pick the patient in front of you, adjust for their kidneys, heart, food, money and prior meds, and get a complete discharge prescription with doses, cash cost and follow-up. Every jargon word links to a plain-English explainer, and every choice has a "Why?" link for a deeper dive.</p>
+
+<section><h2>1. What changes</h2><table>
+<tr><th>Today (v1)</th><th>v2</th></tr>
+<tr><td>"Choose oral or other noninsulin therapy using the selector"</td><td>"Metformin ER 500 mg with dinner for 1 week, then 1000 mg. Disp #60. About $4 at Walmart." Then Why? / Don't if / Recheck when.</td></tr>
+<tr><td>Assumes you know basal, prandial, analog, NPH, TDD, ICR, ISF</td><td>Each term is a tap-to-open explainer: what it is, an analogy, why it matters in the ED, and its key numbers</td></tr>
+<tr><td>Decision tree only</td><td>Tree plus a <strong>Plan Builder</strong> calculator: enter the patient's facts, get the recommended regimen and the reasons for it</td></tr>
+<tr><td>Cost is a checklist item</td><td>Every recipe shows the cheapest safe version first (uninsured column), with the insured upgrade beside it</td></tr>
+<tr><td>8 toolbar buttons, 6 with the same 📋 icon</td><td>Distinct icons; see section 7</td></tr></table></section>
+
+<section><h2>2. The flow (3 taps to a prescription)</h2>
+<ol>
+<li><strong>Safety screen (1 screen).</strong> Red flags for DKA/HHS: vomiting, abdominal pain, Kussmaul breathing, altered mental status, ketones/acidosis, glucose ≥600, or weight loss plus ketosis. If any → DKA/HHS consult. <strong>Not type 2 or not routine:</strong> pregnant, under 18, type 1, pump, or "looks like type 1" (thin, young, rapid weight loss, ketones, autoimmune history) → specialist branch. Plain-English link: <em>How to spot insulin deficiency</em>.</li>
+<li><strong>Who is this patient?</strong> Five buttons:
+ <ul><li>A. <strong>New diagnosis</strong>, never treated</li>
+ <li>B. <strong>Known diabetes, ran out or stopped meds</strong></li>
+ <li>C. <strong>Taking pills, still high</strong></li>
+ <li>D. <strong>Taking insulin</strong>: still high, having lows, or can't afford it</li>
+ <li>E. <strong>Steroid-induced or illness-driven</strong> hyperglycemia</li></ul></li>
+<li><strong>How severe? (for A, B and C)</strong> Uses A1c (or the ED glucose if no A1c) plus symptoms:
+ <ul><li><strong>Mild:</strong> A1c under 8.5 (about 1.5 points above goal), no symptoms → one pill</li>
+ <li><strong>Moderate:</strong> A1c 8.5–10 → two pills</li>
+ <li><strong>Severe:</strong> A1c over 10, glucose ≥300 with symptoms, or weight loss → basal insulin plus metformin. Once the glucose is under control, many of these patients can drop the insulin later; the explainer says why.</li></ul></li>
+<li><strong>Modifier check (one checklist screen).</strong> eGFR band, heart failure, prior heart attack or stroke, liver disease, age 65+ or frail, unreliable meals, heavy alcohol, can't inject or can't see the syringe, uninsured. The modifiers change the recipe; they don't add more screens.</li>
+<li><strong>Prescription card</strong>, then the <strong>discharge bundle</strong> (supplies, teach-back, sick-day rules, follow-up).</li></ol></section>
+
+<section><h2>3. The core prescriptions (proposed doses; the label check happens in the build)</h2>
+<h3>A or B, mild or moderate: start with metformin</h3>
+<div class="do"><strong>Metformin ER 500 mg PO with dinner.</strong> Increase by 500 mg every week as tolerated, up to 2000 mg once daily. IR alternative: 500 mg twice daily with meals, titrated to 1000 mg twice daily. Cash: about $4/month (Walmart list) to verify.</div>
+<div class="why"><strong>Why metformin first:</strong> it's cheap, it doesn't cause lows on its own, its safety record goes back decades, and it's weight-neutral. <strong>Don't use</strong> if eGFR is under 30. <strong>Don't start</strong> if eGFR is under 45 (ADA 2026). Patients already taking it continue at a reduced dose of 1000 mg/day max, or during AKI, dehydration, hypoxia, decompensated liver disease or heavy alcohol use. <strong>GI side effects:</strong> take with food and titrate slowly; ER is gentler.</div>
+<h3>Second pill (moderate disease, or metformin isn't allowed): picked by the modifiers</h3>
+<table><tr><th>Patient has</th><th>Add</th><th>Uninsured version</th></tr>
+<tr><td>Heart failure, CKD (eGFR 20–60 or albuminuria), or ASCVD</td><td>SGLT2 inhibitor (empagliflozin 10 mg or dapagliflozin 10 mg)</td><td>Generic dapagliflozin (FDA approved April 2026; price to confirm). BI Cares for Jardiance (about 200% FPL). AZ&amp;Me closed new Farxiga enrollment in May 2026.</td></tr>
+<tr><td>ASCVD or obesity, follow-up secured</td><td>GLP-1 RA (start at the next visit, not from the ED)</td><td>Manufacturer patient-assistance program (income-based)</td></tr>
+<tr><td>Reliable meals, needs a cheap, strong second agent, eGFR any</td><td>Glipizide 2.5–5 mg before breakfast (2.5 mg if age 65+ or CKD)</td><td>About $4</td></tr>
+<tr><td>Unreliable meals, elderly or frail, alcohol use</td><td><strong>Avoid sulfonylureas</strong> → sitagliptin (renally dosed) or pioglitazone</td><td>Generic sitagliptin or pioglitazone about $4–10; to verify</td></tr>
+<tr><td>Fatty liver (MASLD), no HF</td><td>Pioglitazone 15–30 mg daily</td><td>About $4</td></tr></table>
+<h3>Severe: basal insulin plus metformin</h3>
+<div class="do"><strong>Start 10 units once daily (or 0.1–0.2 units/kg)</strong> plus metformin if eligible. <strong>Patient self-titrates:</strong> +2 units every 3 days while fasting glucose is above 130. If any reading is under 70, cut the dose by 10–20% (often 4 units). Stop titrating and call if the dose passes 0.5 units/kg.</div>
+<table><tr><th>Insurance</th><th>Product</th></tr>
+<tr><td>Uninsured, option 1 (preferred)</td><td>Glargine for $35 a month. Lilly Insulin Value Program (Basaglar/Rezvoglar; uninsured OK, card expires 12/31/2026), Sanofi Insulins Valyou (Lantus), or NovoCare MyInsulinRx (Tresiba, up to 3 vials for $35). Medicaid, Medicare and VA patients can't use these programs.</td></tr>
+<tr><td>Uninsured, option 2</td><td>ReliOn NPH vial plus syringes (about $25 per vial; 2026 price still to confirm), or Novolin N through MyInsulinRx at $35 a month. Give at bedtime, the same unit dose as above. If the dose passes about 20–30 units, split it: 2/3 in the morning, 1/3 at bedtime.</td></tr>
+<tr><td>Insured</td><td>Glargine (or the formulary basal analog)</td></tr></table>
+<div class="why"><strong>Why basal, not a sliding scale:</strong> a discharge sliding scale chases yesterday's number and stacks doses, so lows are the main danger. One background dose that the patient titrates is safer and simpler. <strong>Why bedtime NPH:</strong> NPH peaks 4–12 hours after injection. Given at bedtime, the peak covers the overnight liver glucose release that drives the morning high. A plain-English insulin-curve diagram shows it.</div>
+<h3>D. Already on insulin</h3>
+<ul><li><strong>Can't afford analogs:</strong> a conversion card. Glargine → NPH: same total units, split 2/3 AM and 1/3 bedtime. Lispro → regular insulin: same units, injected 30 minutes before the meal. Or 70/30 premix: 80% of the total daily dose, split 2/3 before breakfast and 1/3 before dinner. Each conversion lists the meal-timing rules and a warning that lows are more likely.</li>
+<li><strong>Lows:</strong> cut the responsible dose 10–20%. Fasting lows point to basal; lows after a meal point to the mealtime dose. Stop sulfonylureas.</li>
+<li><strong>Fasting high:</strong> basal titration (existing calculator).</li>
+<li><strong>Fasting OK but high after meals:</strong> add one mealtime injection at the biggest meal, 4 units or 10% of basal. Don't keep raising basal; the "overbasalization" explainer covers why.</li>
+<li><strong>Missed doses, ran out:</strong> restart the old regimen. If more than a few days were missed and intake is lower, restart at about 80%.</li></ul>
+<h3>E. Steroid-induced</h3>
+<div class="do"><strong>Lower confidence; your call:</strong> no guideline consensus. This rule comes from educational sources; an inpatient RCT used about half the dose (0.15 units/kg for prednisone 10–40 mg). I propose the more conservative RCT dosing for discharge. With once-daily morning prednisone: <strong>NPH given with the steroid dose, 0.1 units/kg per 10 mg prednisone, up to 0.4 units/kg</strong>. Taper the NPH as the steroid tapers, and stop it when the steroid stops. Short burst and A1c normal: often no treatment; check glucose and return if symptoms.</div>
+</section>
+
+<section><h2>4. Plain-English explainers ("What does that mean?")</h2>
+<p>Each one is short: what it is, a real-world analogy, why it matters for the ED decision, and the key numbers. Terms are linked inline wherever they appear, and a 📖 Terms toolbar button lists them all.</p>
+<ul>
+<li><strong>Basal vs mealtime (prandial) vs correction insulin.</strong> The pilot light, the burner you turn up when you cook, and the fix for a pot that's already boiling over.</li>
+<li><strong>Analog vs human insulin.</strong> Glargine and lispro are lab-tuned, more predictable and pricier. NPH and regular are older, cheaper, peak harder and need meal timing. Includes the action-curve diagram.</li>
+<li><strong>NPH, regular and 70/30 premix:</strong> when each one fits the uninsured patient.</li>
+<li><strong>TDD (total daily dose):</strong> why basal alone is not TDD.</li>
+<li><strong>ICR and ISF (carb ratio and correction factor):</strong> the 500 and 1800 rules.</li>
+<li><strong>A1c:</strong> the 3-month average, the 6.5 diagnosis cutoff, and when it misleads (anemia, transfusion, CKD, hemoglobinopathy).</li>
+<li><strong>Spotting insulin deficiency:</strong> type 1, LADA and ketosis-prone type 2.</li>
+<li><strong>eGFR and diabetes drugs:</strong> one table of every drug by eGFR band.</li>
+<li><strong>Sulfonylureas and lows:</strong> why glipizide and not glyburide.</li>
+<li><strong>SGLT2 inhibitors:</strong> heart and kidney benefit, euglycemic DKA, sick-day hold, genital infections.</li>
+<li><strong>GLP-1 drugs:</strong> weight and CV benefit, why not to start them in the ED, cost.</li>
+<li><strong>Why no discharge sliding scale</strong>, and why "overbasalization" happens.</li>
+<li><strong>Fasting vs after-meal pattern:</strong> which dose to change.</li>
+<li><strong>Glucose targets:</strong> fasting 80–130 for most patients, and looser for elderly or frail patients or those with lows.</li></ul></section>
+
+<section><h2>5. New tool: Bridge Plan Builder (calculator)</h2>
+<p><strong>Inputs:</strong> patient type (A–E), A1c or glucose, symptoms or weight loss, eGFR, HF / ASCVD / liver, age 65+ or frail, meals reliable, alcohol, uninsured, weight, and for E the prednisone dose.</p>
+<p><strong>Output:</strong></p>
+<ul><li>The recommended regimen, with exact starting doses and the titration rule</li>
+<li>The cheapest safe version</li>
+<li>One line for each choice ("Glipizide avoided: meals unreliable")</li>
+<li>The supply list and the follow-up interval</li></ul>
+<p><strong>Hard stops:</strong> crisis flags, pregnancy, type 1 clues and eGFR under 15 withhold a regimen and route to the right branch. Unit tests cover every branch and each modifier combination. The existing basal-start, basal-titrate and meal + correction calculators stay, with the same safety gates.</p></section>
+
+<section><h2>6. Visuals</h2><ul>
+<li>Insulin action-curve diagram (hand-built SVG, no image-generation cost): flat glargine, NPH with its peak, regular, and rapid analog.</li>
+<li>A one-glance "pill picker" grid: comorbidity × drug, with green/yellow/red cells.</li>
+<li>eGFR dosing ladder graphic.</li></ul></section>
+
+<section><h2>7. Toolbar refresh</h2><div class="tools"><span>🧭 Plan Builder</span><span>💊 Pills</span><span>💉 Insulin</span><span>📖 Terms</span><span>🍽️ Meal+Corr</span><span>🧪 Labs</span><span>💲 Cost</span><span>🤒 Sick Day</span><span>🏠 Discharge</span></div>
+<p>The first five are pinned. Every icon is different, so you can find a tool at a glance.</p></section>
+
+<section><h2>8. Uninsured cost table (prices to be verified in the build)</h2><p>Cash price and source for every drug and supply: meter, strips, syringes and pen needles. Manufacturer $35 insulin programs and income-based assistance programs, each with a link and its eligibility rule. Local safety-net clinics (HRSA finder; the CommUnityCare bridge link if you want it added).</p></section>
+
+<section><h2>9. Kept from v1, and safety</h2><ul>
+<li>Kept: the DKA/HHS 2024 criteria, the labs card, the hypoglycemia rescue, sick-day rules, the discharge bundle and all three guarded insulin calculators.</li>
+<li>Same consult ID and URL, so existing links keep working.</li>
+<li>Dr. Kitlowski clinical audit of every dose before deploy.</li>
+<li>Browser test of every branch and tool on phone and tablet, then the full deploy.</li></ul></section>
+
+<section><h2>Approval checkpoint</h2><p>Approve to build. Nothing in the live app has changed. These dose numbers would change what the app tells clinicians, so they need your OK first.</p></section>
+</main></html>
