@@ -1,3 +1,4 @@
+import { HG_DRUGS } from './new-content/hyperglycemia-drugs.js';
 // MedKitt — Drug Reference Store
 // Centralized drug data for all medications used across decision trees.
 // Each entry includes class, indications, dosing, contraindications, and citations.
@@ -14834,6 +14835,7 @@ const GADOTERATE: DrugEntry = {
 };
 
 export const ALL_DRUGS: DrugEntry[] = [
+  ...HG_DRUGS,
   ACAMPROSATE,
   ACETAMINOPHEN,
   ACETAZOLAMIDE,

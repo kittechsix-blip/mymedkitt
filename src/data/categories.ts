@@ -522,6 +522,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     icon: 'em.png',
     decisionTrees: [
 {
+  "id": "hyperglycemia-ed",
+  "title": "Hyperglycemia: ED Treatment & Bridge Care",
+  "subtitle": "Labs \u00b7 Oral therapy \u00b7 Insulin \u00b7 Meals \u00b7 Uninsured access",
+  "categoryId": "emergency-medicine",
+  "version": "1.0",
+  "nodeCount": 27,
+  "entryNodeId": "hg-start"
+},
+{
   "id": "asystole",
   "title": "Asystole",
   "subtitle": "Confirm rhythm · Fine VF · LIFEPAK lead/gain · CPR · Reversible causes",
@@ -2007,6 +2016,15 @@ export const DEFAULT_CATEGORIES: Category[] = [
     name: 'Nephrology / Rheumatology / Endocrinology',
     icon: 'nephro-rheum-endo.png',
     decisionTrees: [
+{
+  "id": "hyperglycemia-ed",
+  "title": "Hyperglycemia: ED Treatment & Bridge Care",
+  "subtitle": "Labs \u00b7 Oral therapy \u00b7 Insulin \u00b7 Meals \u00b7 Uninsured access",
+  "categoryId": "emergency-medicine",
+  "version": "1.0",
+  "nodeCount": 27,
+  "entryNodeId": "hg-start"
+},
       {
         id: 'potassium',
         title: 'Potassium Disorders',

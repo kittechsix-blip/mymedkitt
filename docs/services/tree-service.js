@@ -871,6 +871,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/scad-vasospasm.js');
             return { nodes: m.SCADV_NODES, entryNodeId: 'scad-vasospasm-start', categoryId: 'cardiology', moduleLabels: m.SCADV_MODULE_LABELS, citations: m.SCADV_CITATIONS, criticalActions: m.SCADV_CRITICAL_ACTIONS };
         },
+        'hyperglycemia-ed': async () => {
+            const m = await import('../data/trees/hyperglycemia-ed.js');
+            return { nodes: m.HYPERGLYCEMIA_ED_NODES, entryNodeId: 'hg-start', categoryId: 'emergency-medicine', moduleLabels: m.HYPERGLYCEMIA_ED_MODULE_LABELS, citations: m.HYPERGLYCEMIA_ED_CITATIONS, criticalActions: m.HYPERGLYCEMIA_ED_CRITICAL_ACTIONS };
+        },
         'hypoglycemia': async () => {
             const m = await import('../data/trees/hypoglycemia.js');
             return { nodes: m.HYPOGLYCEMIA_NODES, entryNodeId: 'hypoglycemia-start', categoryId: 'nephro-rheum-endo', moduleLabels: m.HYPOGLYCEMIA_MODULE_LABELS, citations: m.HYPOGLYCEMIA_CITATIONS, criticalActions: m.HYPOGLYCEMIA_CRITICAL_ACTIONS };

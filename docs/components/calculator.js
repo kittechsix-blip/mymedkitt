@@ -1,3 +1,4 @@
+import { HG_BASAL_START_CALCULATOR, HG_BASAL_TITRATE_CALCULATOR, HG_MEAL_CORRECTION_CALCULATOR } from './hyperglycemia-calculators.js';
 import { IO_ANATOMY_TOOL } from './io-anatomy.js';
 import { US_IV_CALCULATOR } from './us-iv.js';
 import { HTNE_BP_TARGET_CALCULATOR } from './htne-bp-target.js';
@@ -45112,6 +45113,9 @@ const CALCULATORS = {
     'ecmo-ecpr-criteria': ECMO_ECPR_CRITERIA_CALCULATOR,
     'ecpr-criteria': ECMO_ECPR_CRITERIA_CALCULATOR,
     'insulin-correction-dose': INSULIN_CORRECTION_DOSE_CALCULATOR,
+    'hg-basal-start': HG_BASAL_START_CALCULATOR,
+    'hg-basal-titrate': HG_BASAL_TITRATE_CALCULATOR,
+    'hg-meal-correction': HG_MEAL_CORRECTION_CALCULATOR,
     'tdd-estimator': TDD_ESTIMATOR_CALCULATOR,
     'basal-bolus-calc': BASAL_BOLUS_CALCULATOR,
     'icr-calc': CARB_INSULIN_RATIO_CALCULATOR,

@@ -1255,6 +1255,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'bleed', label: 'Hemorrhage', icon: '🩸', action: 'jump', target: 'lefort-hemorrhage-check' },
     { id: 'consults', label: 'Consults', icon: '📞', action: 'jump', target: 'lefort-consults' },
   ],
+  'hyperglycemia-ed': [{"id": "labs", "label": "Labs", "icon": "\ud83d\udccb", "action": "overlay", "target": "hg-labs", "pinned": true}, {"id": "meds", "label": "Meds", "icon": "\ud83d\udc8a", "action": "overlay", "target": "hg-meds", "pinned": true}, {"id": "insulin", "label": "Insulin", "icon": "\ud83d\udccb", "action": "overlay", "target": "hg-insulin", "pinned": true}, {"id": "meal", "label": "Meal + Corr", "icon": "\ud83d\udccb", "action": "calculator", "target": "hg-meal-correction", "pinned": true}, {"id": "discharge", "label": "Discharge", "icon": "\ud83d\udccb", "action": "overlay", "target": "hg-discharge", "pinned": true}, {"id": "cost", "label": "Costs", "icon": "\ud83d\udccb", "action": "overlay", "target": "hg-access"}, {"id": "sick", "label": "Sick Day", "icon": "\ud83d\udccb", "action": "overlay", "target": "hg-sickday"}, {"id": "steps", "label": "Steps", "icon": "\ud83d\udccb", "action": "overlay", "target": "hg-steps"}],
   'diabetes-management': [
     { id: 'hypo-tx', label: 'Hypo Tx', icon: '💉', action: 'calculator', target: 'hypo-treatment' },
     { id: 'sliding', label: 'Sliding', icon: '📊', action: 'calculator', target: 'sliding-scale-gen' },

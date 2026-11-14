@@ -89,6 +89,7 @@ const infoPageIds = getArgList('--info-pages');
 
 
 const CROSS_LISTINGS = {
+  'hyperglycemia-ed': [{ categoryId: 'nephro-rheum-endo' }],
   'paracentesis': [{ categoryId: 'gastroenterology', displayTitle: null, displaySubtitle: 'Spontaneous bacterial peritonitis (SBP), cirrhosis, ascites, ceftriaxone and albumin', entryNodeId: 'para-start' }],
   // Headache Hub (Phase 7) — canonical EM; cross-list into Neurology per PLAN.md R5.
   'headache-hub':     [{ categoryId: 'neurology', displayTitle: null, displaySubtitle: null, entryNodeId: 'hh-start' }],
