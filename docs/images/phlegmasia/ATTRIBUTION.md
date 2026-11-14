@@ -7,3 +7,5 @@ License: CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/
 Unmodified original file. Attribution and license links are provided in the Phlegmasia Photos tool; caption accompanies each inline use.
 User explicitly requested adding and deploying the photos after receiving their licenses and the alba permission limitation. This specific approval supersedes the repository default against attribution-required assets; no global licensing rule changed.
 The McGraw Hill alba photo is external-link-only, not copied. The additional before/after case image is external-link-only.
+
+Release verification (2026-11-14): TypeScript build, reference gates and 134 automated tests passed. Phone browser verified photo viewer and external alba link. DVT and unilateral-leg-swelling data plus photo info page synced to Supabase before Pages release.
