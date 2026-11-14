@@ -15,4 +15,4 @@
 
 The company-wide brand checker reports 21 existing failures against its newer framed theme, while this repository documents and currently uses the glass theme. This change reuses existing components and modifies no stylesheet, manifest, global token or shell geometry. A whole-app theme migration is outside this clinical consult change. No claim of a clean global brand audit is made.
 
-Browser tool coverage and production verification are recorded in the release completion log.
+Browser: all nine toolbar tools opened; basal start 90 kg at 0.2 units/kg = 18 units, titration 10 to 12 units, meal example 6 units, below-target glucose 80/150 withheld. Phone 390x844 and tablet 820x1180 screenshots inspected with no document overflow. Offline consult and calculator reloads passed. Supabase synchronization completed: 27 nodes, 14 citations, 8 medication cards, 9 info pages, two category listings; existing Diabetes Management entry updated with the new consult link.
