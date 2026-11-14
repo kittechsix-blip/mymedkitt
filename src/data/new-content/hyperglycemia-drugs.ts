@@ -9,10 +9,10 @@ export const HG_DRUGS: DrugEntry[] = [
     "indications": [
       "Adult type 2 diabetes: ED bridge care"
     ],
-    "dosing": 
+    "dosing": [
       {
         "indication": "ED bridge care",
-        "regimen": "Start 500 mg with the evening meal daily. If tolerated and still indicated, increase by 500 mg no more often than weekly; selected formulation maximum 2,000 mg/day. Swallow whole. Do not interchange ER products without checking the label. [Medication selection tool."
+        "regimen": "Start 500 mg with the evening meal daily. If tolerated and still indicated, increase by 500 mg no more often than weekly; selected formulation maximum 2,000 mg/day. Swallow whole. Do not interchange ER products without checking the label. Medication selection tool."
       }
     ],
     "contraindications": [
@@ -181,10 +181,10 @@ export const HG_DRUGS: DrugEntry[] = [
     "indications": [
       "Adult type 2 diabetes: ED bridge care"
     ],
-    "dosing": 
+    "dosing": [
       {
         "indication": "ED bridge care",
-        "regimen": "Stable insulin-naive adult type 2 diabetes: use the [guarded basal starter tool. Label: up to 10 units or 0.2 units/kg once daily; ADA starting range 0.1-0.2 units/kg/day. This is basal insulin, not total daily basal-bolus insulin. Use the selected regimen rather than adding the fixed and weight doses together. Once daily at the same time."
+        "regimen": "Stable insulin-naive adult type 2 diabetes: use the guarded basal starter in the Insulin tool. Label: up to 10 units or 0.2 units/kg once daily; ADA starting range 0.1-0.2 units/kg/day. This is basal insulin, not total daily basal-bolus insulin. Use the selected regimen rather than adding the fixed and weight doses together. Once daily at the same time."
       }
     ],
     "contraindications": [
@@ -211,10 +211,10 @@ export const HG_DRUGS: DrugEntry[] = [
     "indications": [
       "Adult type 2 diabetes: ED bridge care"
     ],
-    "dosing": 
+    "dosing": [
       {
         "indication": "ED bridge care",
-        "regimen": "When adding prandial therapy to basal for stable type 2 diabetes, clinician may start 4 units OR 10% of basal dose at the meal with greatest excursion. Give within 15 minutes before or immediately after the meal per label. Do not give nutritional insulin when not eating. For established individualized ratios use [Meal + Correction tool."
+        "regimen": "When adding prandial therapy to basal for stable type 2 diabetes, clinician may start 4 units OR 10% of basal dose at the meal with greatest excursion. Give within 15 minutes before or immediately after the meal per label. Do not give nutritional insulin when not eating. For established individualized ratios use the Meal + Correction tool."
       }
     ],
     "contraindications": [
