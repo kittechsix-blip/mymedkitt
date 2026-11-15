@@ -29,7 +29,7 @@ export const HYPERGLYCEMIA_ED_NODES: DecisionNode[] = [
   {
     id: 'hg-start', type: 'question', module: 1,
     title: 'Hyperglycemia: what do I prescribe?',
-    body: 'Adult ED hyperglycemia. Rule out a crisis, find the patient type, then get an exact prescription with a cash price. Every underlined term opens a plain-English explainer.\n\n[Roadmap](#/info/hg-steps) • [Terms](#/info/hg-x-terms) • [Do NOT](#/info/hyperglycemia-ed-stop)\n\n**Safety screen.** Any of: vomiting, belly pain, deep or fast breathing, confusion, ketones or acidosis, glucose 600 or more, or weight loss with ketones?',
+    body: 'Adult ED hyperglycemia. Rule out a crisis, find the patient type, then get an exact prescription with a cash price. Underlined terms link to concise clinical references.\n\n[Roadmap](#/info/hg-steps) • [Terms](#/info/hg-x-terms) • [Do NOT](#/info/hyperglycemia-ed-stop)\n\n**Safety screen.** Any of: vomiting, belly pain, deep or fast breathing, confusion, ketones or acidosis, glucose 600 or more, or weight loss with ketones?',
     citation: [2, 3],
     options: [
       { label: 'Yes: possible crisis or insulin deficiency', next: 'hg-crisis', urgency: 'critical' },
