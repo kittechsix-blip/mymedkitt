@@ -2241,6 +2241,7 @@ export const TOOLBAR_CONFIGS = {
         { id: 'ct-criteria', label: 'CT First?', icon: '🧠', action: 'calculator', target: 'lp-ct-criteria-calc' },
         { id: 'midline', label: 'Midline', icon: '📋', action: 'overlay', target: 'lp-midline-steps' },
         { id: 'paramedian', label: 'Paramedian', icon: '↗️', action: 'overlay', target: 'lp-paramedian-steps' },
+        { id: 'ultrasound', label: 'US-Guided', icon: '🔊', action: 'overlay', target: 'lp-ultrasound' },
         { id: 'op-guide', label: 'OP Interp', icon: '📊', action: 'calculator', target: 'lp-op-interpreter' },
     ],
     // ---------------------------------------------------------------

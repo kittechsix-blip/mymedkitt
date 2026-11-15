@@ -13227,6 +13227,71 @@ const LP_PARAMEDIAN_STEPS: InfoPage = {
   ],
 };
 
+const LP_ULTRASOUND: InfoPage = {
+  id: 'lp-ultrasound',
+  title: 'Ultrasound-Guided LP',
+  subtitle: 'Midline, level, and depth before the needle',
+  sections: [
+    {
+      heading: 'When to Use',
+      body: '• Predicted difficult anatomy: obesity, scoliosis, prior spine surgery, nonpalpable landmarks\n• Failed landmark attempts\n• Use ultrasound to define three things: **midline**, **interspace level**, **expected depth to CSF**\n• Meta-analyses favor ultrasound over landmarks for fewer failed and traumatic LPs [1][2][3]',
+    },
+    {
+      heading: 'Prep',
+      body: '• Position the patient as for the LP (lateral decubitus or sitting) and **keep that position unchanged** from scanning through puncture\n• Sterile drape placed **low** so the lumbar and sacral region stays accessible\n• Gel on a sterile-covered transducer',
+    },
+    {
+      heading: 'Step 1: Midline (Transverse View)',
+      body: '• Transducer transverse across the lumbar spine\n• Find the **spinous process**: hyperechoic tip with a dark **acoustic shadow** beneath it\n• Slide the probe until the spinous process is centered on the screen\n• Mark the skin at the **center notch** of the transducer\n• Move **one level caudad**, center the next spinous process, and mark again\n• **Connect the marks**: this line is the midline [4]',
+      image: { src: 'images/lumbar-puncture/lp-us-transverse-midline.jpg', alt: 'Transverse probe position on a lumbar spine phantom with the ultrasound image showing the spinous process, its acoustic shadow, and the midline', caption: 'Transverse view: spinous process with acoustic shadow centered on the midline. Image: Grubman et al., Neurology: Education 2026, CC BY 4.0, via PubMed Central, cropped (phantom).' },
+    },
+    {
+      heading: 'Midsagittal View: Spinous Processes and Spaces',
+      body: '• Optional: rotate the transducer longitudinally over the midline\n• Spinous processes appear as hyperechoic tips with shadows; the gaps between them are the interspinous spaces\n• Use to confirm the spacing seen in the transverse scan before marking the level',
+      image: { src: 'images/lumbar-puncture/lp-us-midsagittal.jpg', alt: 'Midsagittal probe position on a lumbar spine phantom with the ultrasound image showing spinous process, intervertebral space, and acoustic shadow', caption: 'Midsagittal view: spinous process, intervertebral space, acoustic shadow. Image: Grubman et al., Neurology: Education 2026, CC BY 4.0, via PubMed Central, cropped (phantom).' },
+    },
+    {
+      heading: 'Step 2: Level (Paramedian Sagittal Oblique View)',
+      body: '• Transducer **longitudinal, just off midline**, tilted toward the midline\n• Identify the **sacrum**: a continuous hyperechoic line\n• Scan **cephalad**: the first drop in the bony line (gap) is **L5-S1**, the next is **L4-L5**, then **L3-L4**\n• Tilt and gentle pressure improve the window\n• Mark the chosen interspace at the center of the probe; the intersection with the midline line is the puncture site\n• **Palpation of the iliac crest often overestimates the level** (puncture higher than intended). Ultrasound identifies the interspace more accurately than palpation [3]',
+      image: { src: 'images/lumbar-puncture/lp-us-pso-and-transverse.jpg', alt: 'Parasagittal oblique and transverse lumbar ultrasound images with inset probe positions, labeling the posterior and anterior complex', caption: 'A: parasagittal oblique view; B: transverse view (adult lumbar spine; posterior and anterior complex labeled). Image: Zhuang et al., Frontiers in Medicine 2026, CC BY 4.0, via PubMed Central, resized.' },
+    },
+    {
+      heading: 'Reference: Transverse and Parasagittal Windows',
+      body: '• **Transverse median:** transverse process, posterior complex (ligamentum flavum + posterior dura), anterior complex, dural sac between\n• **Parasagittal oblique:** laminae seen as a sawtooth line; the gaps are the interlaminar windows through which the needle passes\n• Posterior complex is the target depth landmark',
+      image: { src: 'images/lumbar-puncture/lp-us-planes-probe-position.jpg', alt: 'Transverse median and parasagittal oblique ultrasound planes with probe position photographs and labeled posterior complex, anterior complex, and dural sac', caption: 'Transverse median and parasagittal oblique planes with probe position (lower thoracic epidural study; same sonoanatomy applies at the lumbar level). Image: Tyagi et al., Cureus 2026, CC BY 4.0, via PubMed Central, resized.' },
+    },
+    {
+      heading: 'Iliac Crest Sonoanatomy',
+      body: '• Lateral probe position over the iliac crest shows the bony crest as a hyperechoic line\n• Use it as an orientation reference only; **do not count levels from the crest**. Count from the sacrum (Step 2)',
+      image: { src: 'images/lumbar-puncture/lp-us-iliac-crest.jpg', alt: 'Lateral probe position on a phantom with the ultrasound image of the iliac crest in a human volunteer', caption: 'Lateral view of the iliac crest. Image: Grubman et al., Neurology: Education 2026, CC BY 4.0, via PubMed Central, cropped.' },
+    },
+    {
+      heading: 'Step 3: Depth',
+      body: '• At the marked interspace, freeze the image and use the caliper to measure from **skin to the posterior complex** (ligamentum flavum and dura)\n• Skin-to-posterior-complex depth correlates closely with needle depth to the intrathecal space; the mean difference was within 3 mm in most studies [3]\n• Anticipate the depth of CSF return and **select a needle long enough**; in obesity the depth can be large (about 6 cm in one example case), and a longer needle may be needed',
+      image: { src: 'images/lumbar-puncture/lp-us-depth-caliper.jpg', alt: 'Transverse lumbar ultrasound with caliper from skin to the posterior complex showing a depth of 3.72 cm, with the intrathecal space between posterior and anterior complex', caption: 'Caliper from skin to posterior complex (3.72 cm in this example), intrathecal space between posterior (PC) and anterior (AC) complex. Image: Ahamed et al., Cureus 2025, CC BY 4.0, via PubMed Central, resized.' },
+    },
+    {
+      heading: 'Then: Static or Real-Time',
+      body: '**Static (mark and puncture):**\n• Puncture at the **intersection of the midline and level marks**\n• Same patient position as during scanning; **do not let the skin shift** over the marks\n• Direct the needle along the angle observed on scan [4]\n\n**Real-time:**\n• Needle placed close to the **center mark of the transducer** while scanning, with the interlaminar window in view (paramedian) [5]\n• Requires sterile probe cover and an assistant or an experienced one-handed operator\n\n**Real-time tip tracking, midline approach:**\n• Transverse view with the spinous process centered; insert at the transducer center mark\n• Watch the local anesthetic needle tip (bright moving dot) to confirm the track is on midline\n• Introduce the spinal needle the same way; if the tip is off center, redirect before advancing deep\n• Once the track is confirmed, set the probe down and finish conventionally: walk off bone if contacted, withdraw the stylet frequently, advance to CSF\n• With CSF return, rotate or gently move the needle to confirm free flow before collection\n\n**Needle tip (operator preference, not from the cited trials):** in patients >65 a 22 or 23 G pencil-point needle can often be redirected without an introducer.',
+    },
+    {
+      heading: 'Pitfalls',
+      body: '• Patient repositioned after marking: marks no longer valid, rescan\n• Counting levels from the iliac crest instead of the sacrum\n• Probe tilted off the true midline: spinous process appears off center and shadow is oblique\n• Poor window (severe obesity, scoliosis, prior fusion): use the paramedian view and consider fluoroscopic LP if unsuccessful\n• Skill decays: practice the scan on easy patients so it works when anatomy is difficult',
+    },
+    {
+      heading: 'Image Credits',
+      body: '\u2022 **Transverse midline, midsagittal and iliac crest views:** Grubman A et al., Neurology: Education 2026 ([article](https://pmc.ncbi.nlm.nih.gov/articles/PMC13644716/)). [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Figure panels A to C, cropped and resized.\n\u2022 **Parasagittal oblique and transverse views:** Zhuang W et al., Frontiers in Medicine 2026 ([article](https://pmc.ncbi.nlm.nih.gov/articles/PMC13581877/)). [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Figure 1, resized.\n\u2022 **Transverse and parasagittal windows with probe position:** Tyagi N et al., Cureus 2026 ([article](https://pmc.ncbi.nlm.nih.gov/articles/PMC13557046/)). [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Figure 1, resized.\n\u2022 **Caliper depth measurement:** Ahamed M T et al., Cureus 2025 ([article](https://pmc.ncbi.nlm.nih.gov/articles/PMC12505778/)). [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Figure 2, resized.',
+    },
+  ],
+  citations: [
+    { num: 1, text: 'Shaikh F, Brzezinski J, Alexander S, et al. Ultrasound imaging for lumbar punctures and epidural catheterisations: systematic review and meta-analysis. BMJ. 2013;346:f1720. PMID 23532866. https://pubmed.ncbi.nlm.nih.gov/23532866/' },
+    { num: 2, text: 'Gottlieb M, Holladay D, Peksa GD. Ultrasound-assisted lumbar punctures: a systematic review and meta-analysis. Acad Emerg Med. 2019;26(1):85-96. PMID 30129102. https://pubmed.ncbi.nlm.nih.gov/30129102/' },
+    { num: 3, text: 'Perlas A, Chaparro LE, Chin KJ. Lumbar neuraxial ultrasound for spinal and epidural anesthesia: a systematic review and meta-analysis. Reg Anesth Pain Med. 2016;41(2):251-260. PMID 25493689. https://pubmed.ncbi.nlm.nih.gov/25493689/' },
+    { num: 4, text: 'Grau T, Leipold RW, Conradi R, Martin E, Motsch J. Efficacy of ultrasound imaging in obstetric epidural anesthesia. J Clin Anesth. 2002;14(3):169-175 (pre-puncture ultrasound: puncture attempts 2.18 to 1.35). PMID 12031746. https://pubmed.ncbi.nlm.nih.gov/12031746/' },
+    { num: 5, text: 'Chong SE, Mohd Nikman A, Saedah A, et al. Real-time ultrasound-guided paramedian spinal anaesthesia: evaluation of the efficacy and the success rate of single needle pass. Br J Anaesth. 2017;118(5):799-801 (correspondence). PMID 28510752. https://pubmed.ncbi.nlm.nih.gov/28510752/' },
+  ],
+};
+
 const LP_OP_GUIDE: InfoPage = {
   id: 'lp-op-guide',
   title: 'Opening Pressure Measurement',
@@ -32307,6 +32372,7 @@ export const INFO_PAGES: Record<string, InfoPage> = {
   'lp-stop': LP_STOP,
   'lp-midline-steps': LP_MIDLINE_STEPS,
   'lp-paramedian-steps': LP_PARAMEDIAN_STEPS,
+  'lp-ultrasound': LP_ULTRASOUND,
   'lp-op-guide': LP_OP_GUIDE,
   // Multiple Sclerosis
   'ms-stop': MS_STOP,

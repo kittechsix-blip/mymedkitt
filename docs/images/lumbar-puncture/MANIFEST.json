@@ -1,0 +1,62 @@
+{
+  "lp-us-transverse-midline.jpg": {
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13644716/",
+    "license_tag": "CC-BY-4.0",
+    "license_evidence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Grubman A et al. (Neurology: Education 2026; doi 10.1212/NE9.0000000000200354)",
+    "description": "Figure panel A, cropped; transverse view, spinous process and acoustic shadow (phantom)",
+    "retrieval_timestamp": "2026-11-15T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-15: use author-credited (CC BY) images, credit the author",
+    "sha256": "2929c864e6595835c48a4f2d1f732d1fcf4f51047ab06ffe8514b64bca03f135"
+  },
+  "lp-us-midsagittal.jpg": {
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13644716/",
+    "license_tag": "CC-BY-4.0",
+    "license_evidence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Grubman A et al. (Neurology: Education 2026; doi 10.1212/NE9.0000000000200354)",
+    "description": "Figure panel B, cropped; midsagittal view (phantom)",
+    "retrieval_timestamp": "2026-11-15T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-15: use author-credited (CC BY) images, credit the author",
+    "sha256": "dceea10db98d477ffb1cad3334f868a1d5ba33bd660a38c63d84d7edbcd38773"
+  },
+  "lp-us-iliac-crest.jpg": {
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13644716/",
+    "license_tag": "CC-BY-4.0",
+    "license_evidence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Grubman A et al. (Neurology: Education 2026; doi 10.1212/NE9.0000000000200354)",
+    "description": "Figure panel C, cropped; iliac crest",
+    "retrieval_timestamp": "2026-11-15T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-15: use author-credited (CC BY) images, credit the author",
+    "sha256": "ca46f88ff6d7353339171d4fc0806af7d949e74d22f35fb9fc350c2943ee2203"
+  },
+  "lp-us-pso-and-transverse.jpg": {
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13581877/",
+    "license_tag": "CC-BY-4.0",
+    "license_evidence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Zhuang W et al. (Front Med 2026; doi 10.3389/fmed.2026.1903864)",
+    "description": "Figure 1, resized; PSO and TM views",
+    "retrieval_timestamp": "2026-11-15T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-15: use author-credited (CC BY) images, credit the author",
+    "sha256": "83269056c7fd59d0e5adb795bb202867e26a7577d81c71428e836f397e7b28a6"
+  },
+  "lp-us-planes-probe-position.jpg": {
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13557046/",
+    "license_tag": "CC-BY-4.0",
+    "license_evidence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Tyagi N et al. (Cureus 2026; doi 10.7759/cureus.114234)",
+    "description": "Figure 1, resized; TM and PSO planes, lower thoracic",
+    "retrieval_timestamp": "2026-11-15T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-15: use author-credited (CC BY) images, credit the author",
+    "sha256": "6d15b7d6433895633a81dd81fc07b6872d1c68502afc07a9b8f4c4b0e06c2fea"
+  },
+  "lp-us-depth-caliper.jpg": {
+    "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12505778/",
+    "license_tag": "CC-BY-4.0",
+    "license_evidence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "author": "Ahamed M T et al. (Cureus 2025; doi 10.7759/cureus.91826)",
+    "description": "Figure 2, resized; caliper depth measurement",
+    "retrieval_timestamp": "2026-11-15T00:00:00Z",
+    "andy_approval_commit": "Andy 2026-11-15: use author-credited (CC BY) images, credit the author",
+    "sha256": "2f0be5c1fb12cdf7901387dc7f063eb671e8d3393d9484eccecdc565e951a613"
+  }
+}

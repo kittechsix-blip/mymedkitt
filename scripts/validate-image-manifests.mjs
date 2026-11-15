@@ -24,11 +24,11 @@
 //   PD-old-100, PD-USGov, PD-USGov-NIH-NIAID, PD-USGov-HHS-CDC, PD-1923, CC0,
 //   PD-self, US-Federal-Work, PD-art, PD-NL-PD.
 //
-// Andy-approved exception (2026-10-18, MRI for Dummies only): a CC-BY-* or
-// CC-BY-SA-* entry passes ONLY if it carries exactly
-//   "attribution_exception": "Andy 2026-10-18: keep with full credit"
-// AND a non-empty `author`. NC/ND licenses never pass. See
-// ~/Desktop/claude-brain/decisions/2026-10-18-mymedkitt-cc-by-image-exception.md
+// Attribution licenses (Andy 2026-11-15, all consults): CC-BY-<v>,
+// CC-BY-SA-<v>, or `Author-permission` pass ONLY with a non-empty `author`,
+// `source_url` and `license_evidence_url`, because the credit has to be shown
+// in the app. NC and ND licenses never pass. See
+// ~/Desktop/claude-brain/decisions/2026-11-15-mymedkitt-image-license-rule.md
 //
 // Usage:
 //   node scripts/validate-image-manifests.mjs            # all tree image dirs
@@ -59,12 +59,11 @@ const ACCEPTABLE_LICENSES = new Set([
   'PD-NL-PD',
 ]);
 
-const ATTRIBUTION_EXCEPTION = 'Andy 2026-10-18: keep with full credit';
-const ATTRIBUTION_LICENSE_RE = /^CC-BY(-SA)?-\d\.\d$/;
-const isAttributionException = entry =>
-  ATTRIBUTION_LICENSE_RE.test(entry.license_tag) &&
-  entry.attribution_exception === ATTRIBUTION_EXCEPTION &&
-  typeof entry.author === 'string' && entry.author.trim() !== '';
+const ATTRIBUTION_LICENSE_RE = /^(CC-BY(-SA)?-\d\.\d|Author-permission)$/;
+const nonEmpty = v => typeof v === 'string' && v.trim() !== '';
+const isAttributionLicense = entry => ATTRIBUTION_LICENSE_RE.test(entry.license_tag);
+const attributionGaps = entry =>
+  ['author', 'source_url', 'license_evidence_url'].filter(k => !nonEmpty(entry[k]));
 
 const IMAGE_EXT_RE = /\.(png|jpe?g|svg|webp|gif)$/i;
 const argTreeId = process.argv.slice(2).find(a => !a.startsWith('--'));
@@ -116,8 +115,13 @@ function validateTreeDir(treeDir) {
     }
     if (!entry.license_tag) {
       errFor(`${treeId}/${f}`, 'Manifest entry missing `license_tag`');
-    } else if (!ACCEPTABLE_LICENSES.has(entry.license_tag) && !isAttributionException(entry)) {
-      errFor(`${treeId}/${f}`, `License "${entry.license_tag}" is NOT in the commercial-safe set. Allowed: ${[...ACCEPTABLE_LICENSES].join(', ')}`);
+    } else if (isAttributionLicense(entry)) {
+      const gaps = attributionGaps(entry);
+      if (gaps.length) {
+        errFor(`${treeId}/${f}`, `License "${entry.license_tag}" requires credit; manifest entry missing: ${gaps.join(', ')}`);
+      }
+    } else if (!ACCEPTABLE_LICENSES.has(entry.license_tag)) {
+      errFor(`${treeId}/${f}`, `License "${entry.license_tag}" is not allowed (NC/ND and unknown licenses never pass). Allowed: ${[...ACCEPTABLE_LICENSES].join(', ')}, CC-BY-<v>, CC-BY-SA-<v>, Author-permission (each with author + source_url + license_evidence_url)`);
     }
     if (!entry.retrieval_timestamp) {
       errFor(`${treeId}/${f}`, 'Manifest entry missing `retrieval_timestamp`');

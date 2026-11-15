@@ -545,45 +545,52 @@ const CONSULT_STOP: InfoPage = {
 
 **Each item MUST link to the relevant node** where this is explained using `[text](#/node/node-id)` format.
 
-### Consult Images (MANDATORY — Commercial-Safe Licensing Only)
+### Consult Images (MANDATORY — Commercial Use, Credit Where Required)
 
-**myMedKitt is a commercial product.** All images MUST be usable in a paid/proprietary app with NO ongoing obligations (no attribution requirement, no ShareAlike requirement, no non-commercial restriction).
+**myMedKitt is a commercial product.** An image is usable if its license (or the author's written permission) lets us publish it in a paid app. If the author's only condition is credit, we use it and credit them. Rule set by Andy 2026-11-15 (supersedes the old "no attribution" rule and the 2026-10-18 MRI-only exception). Decision: `~/Desktop/claude-brain/decisions/2026-11-15-mymedkitt-image-license-rule.md`.
 
-**ACCEPTABLE LICENSES ONLY:**
-- ✅ **Public Domain** (e.g., expired copyright like Gray's Anatomy 1858; historical atlases pre-1930)
-- ✅ **CC0** (Creative Commons Zero — creator waived all rights)
-- ✅ **US Federal Government Works** (17 USC §105 — works by NIH, CDC, NIAID, NLM federal employees are uncopyrightable)
+**ACCEPTABLE LICENSES:**
+- ✅ **Public Domain** (expired copyright, e.g. Gray's Anatomy 1858; pre-1930 atlases)
+- ✅ **CC0** (creator waived all rights)
+- ✅ **US Federal Government Works** (17 USC §105: NIH, CDC, NIAID, NLM employees)
+- ✅ **CC BY** (any version): use it, credit the author
+- ✅ **CC BY-SA** (any version): use it, credit the author. ShareAlike covers the image and our edits of it (crops, labels), not the app code. Any edited version we make stays CC BY-SA.
+- ✅ **Author's written permission to publish with credit** (email, license page, or site terms that allow commercial use with attribution). Save the evidence URL or text in the manifest.
 
-**REJECTED LICENSES — DO NOT USE:**
-- ❌ **CC BY** (attribution required — creates ongoing obligation)
-- ❌ **CC BY-SA** (ShareAlike — forces derivative works to be CC BY-SA, conflicts with proprietary commercial use)
-- ❌ **CC BY-NC** (NonCommercial — explicitly forbids commercial use)
-- ❌ **CC BY-ND** (NoDerivatives — forbids modification)
-- ❌ **Wellcome Collection default license** (CC BY 4.0 — attribution required)
-- ❌ **Any "fair use only" or "educational use only" imagery** — not safe for commercial
+**REJECTED — DO NOT USE:**
+- ❌ **Any NC license** (CC BY-NC, BY-NC-SA, BY-NC-ND): forbids commercial use. This rules out Radiopaedia and WikEM.
+- ❌ **Any ND license** (CC BY-ND): forbids crops, labels and edits, which we routinely make
+- ❌ **No license / all rights reserved** without written permission
+- ❌ **"Educational use only" or "fair use"** imagery
 
-**Preferred sources (in order):**
-1. **NIH BioArt** (bioart.niaid.nih.gov) — NIAID-produced medical illustrations, all US Gov Work / Public Domain
-2. **Wikimedia Commons — filtered to CC0 or Public Domain only** — verify license tag on each file's description page (look for `PD-1923`, `PD-USGov`, `CC0`, `PD-old-100`)
-3. **Gray's Anatomy plates (1858)** — all Public Domain via expired copyright (Henry Vandyke Carter illustrations)
-4. **CDC Public Health Image Library** (phil.cdc.gov) — US Gov Work, Public Domain
-5. **OpenStax Anatomy** — CC BY 4.0 — **REJECTED for commercial use** (attribution required); only acceptable if you have explicit license-compatible workflow. Default: skip.
+**Credit requirements (TASL) for every CC BY / CC BY-SA / permission image:**
+1. **Caption** ends with a short credit: author, source, license, and changes. Example: `Image: Grubman A et al., Neurology: Education 2026, CC BY 4.0, cropped.`
+2. **Credits section** on the same page or consult (an "Image credits" section or info page) with title or figure number, author, a link to the source, the license name with its creativecommons.org deed link, and what we changed ("cropped", "resized", "labels added").
+3. **Manifest entry** carries `license_tag` (e.g. `CC-BY-4.0`, `CC-BY-SA-3.0`, or `Author-permission`), a non-empty `author`, `source_url`, and `license_evidence_url`. `scripts/validate-image-manifests.mjs` enforces this.
 
-**Do NOT use** images from UpToDate, EMCrit, EBMedicine, Radiopaedia (largely CC BY-NC-SA), WikEM (CC BY-NC-SA), Medscape, or any paywalled/restricted source.
+**Preferred sources:**
+1. **NIH BioArt** (bioart.niaid.nih.gov): US Gov Work
+2. **Wikimedia Commons**: check the license template on each file page (PD, CC0, CC BY, CC BY-SA are fine; skip NC/ND)
+3. **Open-access journals on PubMed Central** (many figures are CC BY 4.0; confirm the license on the article page)
+4. **Gray's Anatomy plates (1858)**: Public Domain
+5. **CDC Public Health Image Library** (phil.cdc.gov): US Gov Work
+6. **OpenStax Anatomy**: CC BY 4.0, fine with credit
+
+**Do NOT use** images from UpToDate, EMCrit, EBMedicine, Radiopaedia (CC BY-NC-SA), WikEM (CC BY-NC-SA), Medscape, or any paywalled or restricted source unless the author gives written permission.
 
 **License verification protocol (for every image before commit):**
-1. Read the file's Commons description page — look for explicit license template (`PD-1923`, `PD-USGov-NIH-NIAID`, `CC0`, etc.)
-2. Cross-check the source site if claimed as US Gov Work (e.g., confirm on bioart.niaid.nih.gov, not just Commons claim)
-3. `curl -I` the direct URL — confirm HTTP 200 and correct Content-Type before downloading
-4. **If license has any ambiguity, skip the image and find another.** Err on the side of caution.
+1. Read the license on the file's own page (Commons description page, PMC article license line, or the author's terms). Record the exact license and version.
+2. Cross-check the source if it claims US Gov Work (e.g. confirm on bioart.niaid.nih.gov, not just a Commons claim)
+3. `curl -I` the direct URL: confirm HTTP 200 and correct Content-Type before downloading
+4. **If the license is ambiguous, skip the image and find another.**
 
 **Image sourcing during consult builds:**
-- Delegate image search to a subagent with explicit instruction: "CC0, Public Domain, or US Federal Government Work ONLY — no CC BY, no CC BY-SA, no NC, no ND."
+- Delegate image search to a subagent with explicit instruction: "Public Domain, CC0, US Federal Government Work, CC BY, CC BY-SA, or written author permission with credit. Never NC or ND. Return author, source URL and exact license for every image."
 - Subagent must return direct URL + explicit license tag + verification evidence (curl HEAD + Commons page inspection) for every image
 - **Before build/deploy:** Show Andy the actual image or a clear preview for every new or changed consult image. Include source/license, exact planned placement, and why it improves clinical decision-making. Wait for explicit approval before committing/deploying.
 - Download to `docs/images/<tree-id>/`
 - Add `images` arrays to appropriate nodes with descriptive alt text and clinical captions
-- **Best-practice attribution in caption** even when not legally required (e.g., "NIH BioArt #421, NIAID — Public Domain"; "Gray's Anatomy, 1858 — Public Domain") — good hygiene, shows provenance
+- **Attribution in every caption.** Required for CC BY / CC BY-SA / permission images (see credit requirements above), and good provenance hygiene for the rest (e.g., "NIH BioArt #421, NIAID, Public Domain"; "Gray's Anatomy, 1858, Public Domain")
 - **Audit requirement:** Dr. Kitlowski must inspect images for anatomical correctness, laterality, labeling, clinical appropriateness, source/license, and whether they could mislead. Flow Rider must inspect loading, mobile readability, cropping, caption clarity, and whether the image helps at the exact decision point.
 
 **Image path:** ALL consult images go in `docs/images/<tree-id>/`. **NEVER use `docs/assets/images/`** — that directory is for app icons only. Node `images` arrays use `src: 'images/<tree-id>/filename.png'` which resolves relative to `docs/`. Existing consults (chest-tube, echo-epss, etc.) all follow this pattern.
