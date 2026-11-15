@@ -12586,49 +12586,49 @@ const LP_MIDLINE_STEPS = {
 };
 const LP_PARAMEDIAN_STEPS = {
     id: 'lp-paramedian-steps',
-    title: 'Paramedian LP — Quick Guide',
-    subtitle: '30-40% higher success than midline',
+    title: 'Paramedian LP: Quick Guide',
+    subtitle: 'Hadzic (NYSORA) technique, L4-L5 or L5-S1',
     sections: [
         {
             heading: 'When to Use Paramedian',
-            body: '• Failed midline attempts\n• Age >50 (calcified ligaments)\n• Severe degenerative changes\n• Kyphosis/scoliosis\n• Cannot flex spine adequately\n• **NOT for severely obese** (long path)',
+            body: '• Age >50 or degenerative spine disease (ossified midline ligaments, osteophytes)\n• Failed midline attempts\n• Kyphosis or scoliosis\n• Cannot flex adequately\n• Caution in severe obesity (longer, less predictable path) [1][2]',
         },
         {
             heading: 'Anatomy: Paramedian vs Midline',
-            body: '**MIDLINE** passes through:\n→ Supraspinous ligament → Interspinous ligament → Ligamentum flavum → Dura\n\n**PARAMEDIAN** bypasses the midline ligaments:\n→ Skin → Paraspinal muscles → Ligamentum flavum → Dura\n\nThe needle enters lateral to spinous process and angles medially toward the interlaminar space (the "window" between adjacent laminae). This avoids calcified supraspinous/interspinous ligaments common in elderly.',
+            body: '**MIDLINE:** skin → supraspinous ligament → interspinous ligament → ligamentum flavum → dura\n\n**PARAMEDIAN:** skin → subcutaneous tissue → paraspinal muscle → ligamentum flavum → dura\n\nThe needle enters lateral and caudal to the target interspace and angles cephalomedially into the interlaminar window, bypassing the midline ligaments. L5-S1 is usually the largest interlaminar space. [2]',
         },
         {
-            heading: '1. Position & Prep',
-            body: '• Same as midline (lateral decubitus or sitting)\n• Sterile prep and drape\n• Identify spinous processes',
+            heading: '1. Position and Landmarks',
+            body: '• Lateral decubitus (required for opening pressure) or sitting\n• Straighten the patient; correct lean in scoliosis\n• One hand on the **iliac crest**, thumb on the **midline**, for the whole procedure\n• Intercristal line ≈ L4-L5 in most, not all, patients\n• Stay in the **lower third of the lumbar spine**: target L4-L5 or L5-S1 [2]',
         },
         {
             heading: '2. Entry Point',
-            body: '**Mark two points:**\n1. Midline between spinous processes (L3-L4 or L4-L5)\n2. **1-1.5 cm lateral** to that point\n\nEntry is at the **superior tip of the LOWER spinous process** — not between them.\n\n📍 The entry point is lateral AND slightly caudal to where you\'d enter for midline.',
+            body: 'From the center of the target interspace: **2 cm lateral** and **2 cm caudal**. [2]',
         },
         {
             heading: '3. Anesthesia',
-            body: '• Skin wheal with 1% lidocaine\n• Infiltrate deeper along planned trajectory\n• More depth than midline — use adequate volume',
+            body: '• Skin wheal with 1% lidocaine\n• Infiltrate subcutaneous tissue and paraspinal muscle along the planned 30-45° track',
         },
         {
             heading: '4. Needle Trajectory',
-            body: '**TWO angles to remember:**\n\n**Sagittal plane:** Angle **10-25° CEPHALAD** (toward head)\n**Coronal plane:** Angle **10-15° MEDIALLY** (toward midline)\n\nImagine aiming the needle toward the patient\'s umbilicus (cephalad) and slightly toward the midline. The needle passes through paraspinal muscle → ligamentum flavum → dura.',
+            body: '• **30-45° cephalad and medial**, aimed at the target interspace\n• Track crosses soft tissue only; **no ligamentous loss of resistance**\n• The dural puncture is often the only distinct give [2]',
         },
         {
             heading: '5. Navigate to CSF',
-            body: '• Depth: typically 3-7 cm\n• Feel for **ligamentum flavum "give"**\n• Then dural puncture → CSF\n• If bone (lamina): withdraw, angle more cephalad/medial',
+            body: '• Depth typically 4-8 cm (longer than midline)\n• Check for CSF frequently near expected depth\n• Lamina contact: withdraw to subcutaneous tissue, redirect more cephalad, walk off the superior lamina edge\n• Repeated bone: reassess the medial angle or use ultrasound to mark the window',
         },
         {
-            heading: '6. Collect & Close',
-            body: '• Measure OP if needed\n• Collect CSF (same tubes as midline)\n• **Replace stylet**, remove needle\n• Bandage',
+            heading: '6. Collect and Close',
+            body: '• Measure opening pressure in lateral decubitus if indicated\n• Collect CSF (same tubes as midline)\n• **Replace stylet**, remove needle\n• Bandage',
         },
         {
             heading: 'Advantages',
-            body: '• **30-40% higher first-attempt success**\n• Avoids calcified interspinous ligaments\n• Wider interlaminar space\n• Lower PDPH (oblique track)\n• Does NOT require full spine flexion',
+            body: '• **30-40% higher first-attempt success** [1]\n• Avoids ossified supraspinous/interspinous ligaments\n• Larger target window (interlaminar space)\n• Does not require full flexion',
         },
     ],
     citations: [
         { num: 1, text: 'Seeberger MD et al. Paramedian approach for spinal anesthesia. Anesth Analg. 2002;95(2):379-382.' },
-        { num: 2, text: 'NYSORA. Spinal Anesthesia. https://www.nysora.com/' },
+        { num: 2, text: 'Hadzic A. Become a superstar in the OR with the paramedian technique (video). NYSORA. https://nysora.com/general/become-a-superstar-in-the-or-with-the-paramedian-technique/' },
     ],
 };
 const LP_OP_GUIDE = {
