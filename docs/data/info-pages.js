@@ -12600,10 +12600,12 @@ const LP_PARAMEDIAN_STEPS = {
         {
             heading: '1. Position and Landmarks',
             body: '• Lateral decubitus (required for opening pressure) or sitting\n• Straighten the patient; correct lean in scoliosis\n• One hand on the **iliac crest**, thumb on the **midline**, for the whole procedure\n• Intercristal line ≈ L4-L5 in most, not all, patients\n• Stay in the **lower third of the lumbar spine**: target L4-L5 or L5-S1 [2]',
+            image: { src: 'images/lumbar-puncture/lp-paramedian-step1-landmarks.svg', alt: 'Landmarks: hand on iliac crest, thumb on midline, intercristal line near L4-L5, target L4-L5 or L5-S1', caption: 'Hand on the iliac crest, thumb on the midline. Target L4-L5 or L5-S1.' },
         },
         {
             heading: '2. Entry Point',
             body: 'From the center of the target interspace: **2 cm lateral** and **2 cm caudal**. [2]',
+            image: { src: 'images/lumbar-puncture/lp-paramedian-step2-entry.svg', alt: 'Entry point 2 cm lateral and 2 cm caudal to the center of the L5-S1 interlaminar window', caption: 'Entry 2 cm lateral and 2 cm caudal to the center of the target interspace.' },
         },
         {
             heading: '3. Anesthesia',
@@ -12612,6 +12614,7 @@ const LP_PARAMEDIAN_STEPS = {
         {
             heading: '4. Needle Trajectory',
             body: '• **30-45° cephalad and medial**, aimed at the target interspace\n• Track crosses soft tissue only; **no ligamentous loss of resistance**\n• The dural puncture is often the only distinct give [2]',
+            image: { src: 'images/lumbar-puncture/lp-paramedian-step3-trajectory.svg', alt: 'Needle trajectory 30-45 degrees cephalad and medial, posterior and sagittal views', caption: '30-45° cephalad and medial into the interlaminar window.' },
         },
         {
             heading: '5. Navigate to CSF',
