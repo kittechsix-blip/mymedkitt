@@ -54,7 +54,7 @@ export const NEONATAL_RESUS_NODES = [
         type: 'info',
         module: 1,
         title: 'Cord Management (2025 Update)',
-        body: 'DELAYED CORD CLAMPING (DCC) — 2025 GUIDELINES [1][5]\n\n**Vigorous term/late preterm:**\n• DCC **at least 60 seconds** recommended\n• Improves placental transfusion, iron stores, and hemoglobin\n\n**Non-vigorous ≥35 weeks:**\n• **Intact cord milking (ICM)** may be reasonable (compared to immediate clamping)\n• Milk cord toward baby 3–4 times over 2 seconds\n\n**Preterm 28–34 weeks:**\n• ICM when DCC isn\'t possible\n\n**<28 weeks:**\n• ICM is **NOT recommended** — risk of intraventricular hemorrhage\n\n**Clamp immediately if:**\n• Baby needs resuscitation and can\'t wait\n• Placental abruption, cord avulsion, or other emergency\n\n**Communicate cord management plan to the team before delivery.** [5]',
+        body: 'DELAYED CORD CLAMPING (DCC) — 2025 GUIDELINES [1][5]\n\n**Vigorous term/late preterm:**\n• DCC **at least 60 seconds** recommended\n• Improves placental transfusion, iron stores, and hemoglobin\n\n**Non-vigorous ≥35 weeks:**\n• **Intact cord milking (ICM)** may be reasonable (compared to immediate clamping)\n• Milk cord toward baby 3–4 times over 2 seconds\n\n**Preterm 28+0 to 36+6 weeks:**\n• ICM only when DCC isn\'t possible\n\n**<28 weeks:**\n• ICM is **NOT recommended** — risk of intraventricular hemorrhage\n\n**Clamp immediately if:**\n• Baby needs resuscitation and can\'t wait\n• Placental abruption, cord avulsion, or other emergency\n\n**Communicate cord management plan to the team before delivery.** [5]',
         citation: [1, 5],
         next: 'nrp-preterm',
         summary: 'DCC at least 60 sec for vigorous term; intact cord milking if non-vigorous ≥35wk; NO milking <28wk (IVH risk); clamp immediately if resus needed',
@@ -352,8 +352,8 @@ export const NEONATAL_RESUS_NODES = [
         images: [
             {
                 src: 'images/neonatal-resus/uvc-anatomy.png',
-                alt: 'Umbilical cord cross-section showing 2 arteries and 1 vein, with side view of UVC insertion through umbilical stump — insert only 2 cm deep',
-                caption: 'UVC anatomy: 2 arteries (thick, small) + 1 vein (thin, large). Insert catheter only 2 cm deep.',
+                alt: 'Umbilical cord cross-section showing 2 arteries and 1 vein, with side view of UVC insertion through umbilical stump — emergency insertion 2-4 cm, until free blood return',
+                caption: 'UVC anatomy: 2 arteries (thick, small) + 1 vein (thin, large). Emergency insertion: 2-4 cm, until blood aspirates freely.',
             },
         ],
         next: 'nrp-persistent',
@@ -508,7 +508,7 @@ export const NEONATAL_RESUS_MODULE_LABELS = [
 // Evidence Citations (8 references)
 // -------------------------------------------------------------------
 export const NEONATAL_RESUS_CITATIONS = [
-    { num: 1, text: 'Lee HC, Strand ML, Finan E, et al. Part 5: Neonatal Resuscitation: 2025 American Heart Association and American Academy of Pediatrics Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2025;152(16 suppl 2):S385-S423. PMID 41122887.' },
+    { num: 1, text: 'Lee HC, Strand ML, et al. Part 5: Neonatal Resuscitation. Circulation 2025;152(16 suppl 2):S385-S423. PMID 41122887.' },
     { num: 2, text: 'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 8th ed. AAP; 2021.' },
     { num: 3, text: 'Aziz K, Lee HC, Escobedo MB, et al. Part 5: Neonatal Resuscitation. Circulation. 2020;142(16 suppl 2):S524-S550.' },
     { num: 4, text: 'Wyckoff MH, et al. Neonatal Life Support: 2020 ILCOR Consensus. Circulation. 2020;142(16 suppl 1):S185-S221.' },

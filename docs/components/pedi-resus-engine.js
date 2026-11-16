@@ -530,7 +530,7 @@ export function headerLine(p) {
 // Resuscitation numbers: 2025 AHA/AAP Part 5 [1]. Tube depth: Kempley 2008 [2]. Sizes, blades, catheters: NSW/Safer Care Victoria [3].
 // ===================================================================
 export const NEO_CITATIONS = [
-    'Lee HC, Strand ML, Finan E, et al. Part 5: Neonatal Resuscitation: 2025 American Heart Association and American Academy of Pediatrics Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2025;152(16 suppl 2):S385-S423. PMID 41122887.',
+    'Lee HC, Strand ML, et al. Part 5: Neonatal Resuscitation. Circulation 2025;152(16 suppl 2):S385-S423. PMID 41122887.',
     'Kempley ST, Moreiras JW, Petrone FL. Endotracheal tube length for neonatal intubation. Resuscitation. 2008;77(3):369-373.',
     'NSW Royal Hospital for Women neonatal intubation guideline; Safer Care Victoria neonatal intubation guideline (tube, blade and catheter sizes by weight).',
     'myMedKitt Neonatal Resuscitation (NRP) consult (neonatal-resus), updated to the 2025 AHA/AAP guideline.',
@@ -657,7 +657,7 @@ export const NEO_DRUGS = [
     nd({ id: 'volume', name: 'Volume: normal saline or O-negative PRBC', indication: 'Suspected blood loss with no response to epinephrine', tab: 'drugs', unit: 'mL', perKg: [10, 20], route: 'IV/IO/UVC', notes: 'Repeat if inadequate response.', cite: [1] }),
     nd({ id: 'd10', name: 'Dextrose 10% (D10)', indication: 'Low glucose', tab: 'drugs', unit: 'mL', perKg: 2, route: 'IV', notes: '2 mL/kg of D10 = 0.2 g/kg. Recheck glucose.', cite: [5] }),
     nd({ id: 'ampicillin', name: 'Ampicillin', indication: 'Suspected early-onset sepsis, first dose', tab: 'rosc', unit: 'mg', perKg: 50, route: 'IV', notes: 'Interval per pharmacy/Neofax by gestational age and postnatal age.', cite: [5] }),
-    nd({ id: 'gentamicin', name: 'Gentamicin', indication: 'Suspected early-onset sepsis, first dose', tab: 'rosc', unit: 'mg', perKg: 4, route: 'IV', notes: '4 mg/kg every 24 h applies at 0-7 days. Interval by gestational age and postnatal age per pharmacy/Neofax.', cite: [5] }),
+    nd({ id: 'gentamicin', name: 'Gentamicin', indication: 'Suspected early-onset sepsis, first dose', tab: 'rosc', unit: 'mg', perKg: 4, route: 'IV', notes: '4 mg/kg every 24 h applies at 0-7 days and 35 weeks or more. Interval by gestational age and postnatal age per pharmacy/Neofax.', cite: [5] }),
     nd({ id: 'acyclovir', name: 'Acyclovir', indication: 'Suspected neonatal HSV, first dose', tab: 'rosc', unit: 'mg', perKg: 20, route: 'IV', notes: 'Interval and renal adjustment per pharmacy.', cite: [5] }),
     nd({ id: 'alprostadil', name: 'Alprostadil (PGE1)', indication: 'Suspected duct-dependent lesion', tab: 'rosc', unit: 'mcg/min', perKg: [0.05, 0.1], basisUnit: 'mcg/kg/min', route: 'IV infusion', notes: 'Apnea risk: be ready to intubate. Rate per pharmacy dilution.', cite: [5] }),
     nd({ id: 'phenobarbital', name: 'Phenobarbital', indication: 'Neonatal seizure, loading dose', tab: 'rosc', unit: 'mg', perKg: 20, route: 'IV', notes: 'Per the CHOP neonatal seizure pathway.', cite: [6] }),
@@ -687,8 +687,8 @@ export function neoDrugRows(p, tab) {
             rows.push({ id: 'epi-flush', name: 'NS flush after IV/IO/UVC epinephrine', lines: [{ dose: '3 mL', ml: '3 mL' }], basis: 'Fixed volume regardless of weight', capped: false, cite: [1] });
     }
     if (!tab || tab === 'drugs') {
-        rows.push({ id: 'naloxone', name: 'Naloxone', indication: 'Delivery-room resuscitation', lines: [{ dose: 'Not recommended' }], basis: 'Ventilate; do not give naloxone in the delivery room.', capped: false, cite: [4], warn: 'NOT RECOMMENDED' });
-        rows.push({ id: 'bicarb', name: 'Sodium bicarbonate', indication: 'Delivery-room resuscitation', lines: [{ dose: 'Not recommended' }], basis: 'Not part of routine neonatal resuscitation.', capped: false, cite: [4], warn: 'NOT RECOMMENDED' });
+        rows.push({ id: 'naloxone', name: 'Naloxone', indication: 'Delivery-room resuscitation', lines: [{ dose: 'Not recommended' }], basis: 'Ventilate; do not give naloxone in the delivery room.', capped: false, cite: [1], warn: 'NOT RECOMMENDED' });
+        rows.push({ id: 'bicarb', name: 'Sodium bicarbonate', indication: 'Delivery-room resuscitation', lines: [{ dose: 'Not recommended' }], basis: 'Not part of routine neonatal resuscitation.', capped: false, cite: [1], warn: 'NOT RECOMMENDED' });
     }
     return rows;
 }
@@ -715,10 +715,10 @@ export function neoHeader(p) {
 }
 const SPO2_TARGETS = '1 min 60-65%, 2 min 65-70%, 3 min 70-75%, 4 min 75-80%, 5 min 80-85%, 10 min 85-95%';
 export function neoTabs(p) {
-    const airway = { notes: ['Confirm with exhaled CO2 detector and a rising heart rate. Limit each intubation attempt to 30 seconds.', 'Depth is at the lip.'], rows: neoAirwayRows(p) };
+    const airway = { notes: ['Confirm with exhaled CO2 detector and a rising heart rate. Limit each intubation attempt to 30 seconds. [1]', 'Depth is at the lip. [2]'], rows: neoAirwayRows(p) };
     const uvc = p.weightKg !== undefined ? (p.weightKg < 1.5 ? '3.5 Fr' : '5 Fr') : '3.5 Fr if under 1.5 kg; 5 Fr otherwise';
     const breathe = {
-        notes: ['Ventilation is the priority. Corrective steps: MR SOPA (mask, reposition, suction, open mouth, pressure, alternative airway).'],
+        notes: ['Ventilation is the priority. Corrective steps: MR SOPA (mask, reposition, suction, open mouth, pressure, alternative airway). [1]'],
         rows: [
             nrow('ppv', 'Positive pressure ventilation', '30-60 /min', 'Start if apneic or gasping, or HR below 100 after initial steps.', [1]),
             nrow('pip', 'Initial peak inflation pressure', '20-30 cm H2O', 'Higher only if the heart rate does not rise. PEEP 5 cm H2O.', [1]),
@@ -729,15 +729,15 @@ export function neoTabs(p) {
         ],
     };
     const circulate = {
-        notes: ['Secure the airway first (ETT or laryngeal mask) if compressions are needed.'],
+        notes: ['Secure the airway first (ETT or laryngeal mask) if compressions are needed. [1]'],
         rows: [
             nrow('cpr', 'Chest compressions', '3:1 (90 + 30 /min)', 'If HR is below 60 after 30 s of ventilation that moves the chest. Two-thumb encircling, depth one third of AP diameter.', [1]),
             nrow('cpr-o2', 'Oxygen during compressions', '100%', 'Then titrate down after ROSC.', [1]),
             nrow('access', 'Vascular access', 'UVC (preferred) or IO', 'Emergency low-lying UVC: insert 2-4 cm past the skin until free blood return.', [1, 4]),
-            nrow('uvc', 'UVC size', uvc, 'Catheter size by weight.', [4]),
+            nrow('uvc', 'UVC size', uvc, 'Catheter size by weight.', [3]),
         ],
     };
-    const drugs = { notes: p.weightKg === undefined ? ['Enter a weight for mg and mL doses; per-kg doses are shown until then.'] : ['Concentration for epinephrine: 0.1 mg/mL (1:10,000). Confirm against your stock.'], rows: neoDrugRows(p, 'drugs') };
+    const drugs = { notes: p.weightKg === undefined ? ['Enter a weight for mg and mL doses; per-kg doses are shown until then.'] : ['Concentration for epinephrine: 0.1 mg/mL (1:10,000). Confirm against your stock. [1]'], rows: neoDrugRows(p, 'drugs') };
     const rosc = {
         notes: ['First doses only. Intervals for preterm infants: per pharmacy/Neofax.'],
         rows: [
@@ -797,7 +797,7 @@ function neoCard(p, pieces, tab) {
     const known = p.weightKg !== undefined || p.gaWeeks !== undefined;
     return {
         title: known ? `${h.title} · ${h.line}` : 'Neonate Numbers (<3 kg)',
-        subtitle: pieces.slice(0, 3).join(' · ') || 'Tube, depth, ventilation, epinephrine and first doses by weight and gestational age',
+        subtitle: pieces.length ? `${pieces.slice(0, 3).join(' · ')} [1][3]` : 'Tube, depth, ventilation, epinephrine and first doses by weight and gestational age',
         preview: 'Neonate Numbers: tap for airway, drugs and doses',
         route: neoRoute(p, tab), bgHex: NEO_TEAL, textHex: '#fff', pointer: false,
     };

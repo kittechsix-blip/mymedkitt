@@ -2997,7 +2997,7 @@ const EPINEPHRINE: DrugEntry = {
     },
     {
       indication: 'Neonatal resuscitation (NRP) — IV/IO',
-      regimen: '0.01-0.03 mg/kg of 1:10,000 (0.1-0.3 mL/kg) IV/IO. Repeat every 3-5 minutes. Flush with 1-3 mL NS. IV/IO preferred over ET route.',
+      regimen: '0.01-0.03 mg/kg of 1:10,000 (0.1-0.3 mL/kg) IV/IO. Repeat every 3-5 minutes. Flush with 3 mL NS regardless of weight. IV/IO preferred over ET route.',
       weightCalc: [
         { dosePerKg: 0.01, unit: 'mg', label: 'Low dose (0.01 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
         { dosePerKg: 0.03, unit: 'mg', label: 'High dose (0.03 mg/kg)', concentration: { amount: 0.1, perMl: 1, displayName: '1:10,000 (0.1 mg/mL)' } },
