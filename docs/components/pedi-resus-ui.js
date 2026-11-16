@@ -99,7 +99,7 @@ function bandEl(p) {
     band.style.color = z ? z.textHex : '#000';
     band.appendChild(el('div', 'pz-zone', zoneName(p).toUpperCase() + (z ? ' ZONE' : '')));
     band.appendChild(el('div', 'pz-head', headerLine(p)));
-    band.appendChild(el('div', 'pz-src', `Weight used: ${fmtAmount(p.weightKg)} kg, ${p.sourceLabel}.${z ? ` Zone range ${z.weightMin}-${z.weightMax} kg.` : ''}`));
+    band.appendChild(el('div', 'pz-src', `Weight used: ${fmtAmount(p.weightKg)} kg, ${p.sourceLabel}.${z ? ` Zone range ${z.weightMin}-${z.weightMax} kg [1][2].` : ''}`));
     const flags = el('div', 'pz-flags');
     flags.appendChild(el('span', 'pz-flag', 'Obese: dose by ideal weight (from length or age)'));
     for (const f of p.flags)
@@ -213,7 +213,7 @@ export function mountPedi(container, mode) {
         if (p.zone.kind === 'neonate') {
             const msg = el('div', 'pz-row');
             msg.appendChild(el('div', 'pz-name', 'Neonate or under 3 kg'));
-            msg.appendChild(el('div', 'pz-basis', 'Zone tape sizes do not apply. Use the Neonatal Resuscitation (NRP) consult for tube size by gestational age and doses.'));
+            msg.appendChild(el('div', 'pz-basis', 'Zone tape sizes do not apply. Use the Neonatal Resuscitation (NRP) consult for tube size by gestational age and doses. [1][2]'));
             const go = el('button', 'pz-link', 'Open Neonatal Resuscitation (NRP)');
             go.type = 'button';
             go.addEventListener('click', () => { window.location.hash = '#/tree/neonatal-resus'; });

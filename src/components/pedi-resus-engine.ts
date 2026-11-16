@@ -22,7 +22,7 @@ export const PEDI_CITATIONS: string[] = [
   'Advanced Life Support Group. Advanced Paediatric Life Support: The Practical Approach. 5th ed. Wiley-Blackwell; 2011.',
 ];
 
-export const PEDI_FOOTER = 'Broselow is a trademark of its owner; myMedKitt is not affiliated. Confirm concentrations against your stock.';
+export const PEDI_FOOTER = 'Broselow is a trademark of its owner; myMedKitt is not affiliated. Reference for licensed clinicians: verify against your protocol and the printed card. Confirm concentrations against your stock.';
 export const ZONE_RANGE_NOTE = 'Zone ranges are estimates; the child\'s actual weight can differ.';
 export const PEDI_STOCK = 'common US stock; confirm your vial';
 
@@ -347,7 +347,7 @@ export const PEDI_DRUGS: DrugDef[] = [
 
   // ---- Other
   { id: 'naloxone', name: 'Naloxone', indication: 'Opioid toxicity', tab: 'other', unit: 'mg', perKg: 0.1, max: 2, conc: c(0.4, 1, '0.4 mg/mL'), route: 'IV/IO/IM/IN', cite: [1, 2] },
-  { id: 'epi-im', name: 'Epinephrine IM', indication: 'Anaphylaxis', tab: 'other', unit: 'mg', perKg: 0.01, max: 0.5, conc: c(1, 1, '1 mg/mL'), route: 'IM (anterolateral thigh)', notes: 'Auto-injector 0.3 mg if under 30 kg.', cite: [1, 2] },
+  { id: 'epi-im', name: 'Epinephrine IM', indication: 'Anaphylaxis', tab: 'other', unit: 'mg', perKg: 0.01, max: 0.5, conc: c(1, 1, '1 mg/mL'), route: 'IM (anterolateral thigh)', notes: 'Auto-injector: 0.15 mg for 15-30 kg; 0.3 mg for 30 kg and up.', cite: [1, 2] },
   { id: 'diphenhydramine', name: 'Diphenhydramine', indication: 'Allergic reaction', tab: 'other', unit: 'mg', perKg: 1, max: 50, conc: c(50, 1, '50 mg/mL'), route: 'IV/IM', cite: [2] },
 ];
 

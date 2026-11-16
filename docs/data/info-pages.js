@@ -29850,23 +29850,23 @@ const PEDI_RESUS_SUMMARY_PAGE = {
         },
         {
             heading: '1. Enter the patient',
-            body: '• [Age, weight or length in one box; zone, sizes and doses recompute](#/node/prn-start)',
+            body: '• [Age, weight or length in one box; zone, sizes and doses recompute](#/node/prn-start) [1][2]',
         },
         {
             heading: '2. Check the weight used',
-            body: '• [Measured, then length, then APLS age estimate; obese children by ideal weight](#/node/prn-weight)',
+            body: '• [Measured, then length, then APLS age estimate; obese children by ideal weight](#/node/prn-weight) [1][2][9][10]',
         },
         {
             heading: '3. Airway',
-            body: '• [Cuffed first; half sizes up and down ready](#/node/prn-airway)',
+            body: '• [Cuffed first; half sizes up and down ready](#/node/prn-airway) [2][3][7]',
         },
         {
             heading: '4. Under 3 kg',
-            body: '• [Use the Neonatal Resuscitation consult](#/node/prn-neonate)',
+            body: '• [Use the Neonatal Resuscitation consult](#/node/prn-neonate) [1][2]',
         },
         {
             heading: '5. Safety',
-            body: '• [Verify printed tapes and vial concentrations](#/node/prn-safety)',
+            body: '• [Verify printed tapes and vial concentrations](#/node/prn-safety) [2][6]',
         },
     ],
     citations: [
@@ -29884,7 +29884,7 @@ const PEDI_RESUS_SOURCES_PAGE = {
         },
         {
             heading: 'Where sources disagree (defaults used)',
-            body: '• Cuffed versus uncuffed: cuffed first, uncuffed beside it.\n• Defibrillation: 2 J/kg then 4 J/kg (AHA); ERC/RCUK 2025 uses 4 J/kg first.\n• Fluid bolus: 10-20 mL/kg with reassessment after each (ERC/RCUK 10 mL/kg); 5-10 mL/kg if cardiogenic.\n• Atropine: 0.02 mg/kg, single-dose maximum 0.5 mg.\n• Rocuronium 1.2 mg/kg; succinylcholine 2 mg/kg under 10 kg, 1.5 mg/kg otherwise.\n• Fentanyl 1-2 mcg/kg, maximum 100 mcg; midazolam IM/IN 0.2 mg/kg, maximum 10 mg.\n• Epinephrine IM for anaphylaxis: 0.01 mg/kg, maximum 0.5 mg.',
+            body: '• Cuffed versus uncuffed: cuffed first, uncuffed beside it. [2][3]\n• Defibrillation: 2 J/kg then 4 J/kg (AHA); ERC/RCUK 2025 uses 4 J/kg first. [3][4][5]\n• Fluid bolus: 10-20 mL/kg with reassessment after each (ERC/RCUK 10 mL/kg); 5-10 mL/kg if cardiogenic. [3][4][5]\n• Atropine: 0.02 mg/kg, single-dose maximum 0.5 mg. [1][2][3]\n• Rocuronium 1.2 mg/kg [2]; succinylcholine 2 mg/kg under 10 kg, 1.5 mg/kg otherwise [1][2].\n• Fentanyl 1-2 mcg/kg, maximum 100 mcg [1][2]; midazolam IM/IN 0.2 mg/kg, maximum 10 mg [1][2].\n• Epinephrine IM for anaphylaxis: 0.01 mg/kg, maximum 0.5 mg [1][2].',
         },
         {
             heading: 'Safety alert',

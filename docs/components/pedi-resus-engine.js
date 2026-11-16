@@ -19,7 +19,7 @@ export const PEDI_CITATIONS = [
     'Luscombe M, Owens B. Weight estimation in resuscitation: is the current formula still valid? Arch Dis Child. 2007;92(5):412-415. PMID 17213259.',
     'Advanced Life Support Group. Advanced Paediatric Life Support: The Practical Approach. 5th ed. Wiley-Blackwell; 2011.',
 ];
-export const PEDI_FOOTER = 'Broselow is a trademark of its owner; myMedKitt is not affiliated. Confirm concentrations against your stock.';
+export const PEDI_FOOTER = 'Broselow is a trademark of its owner; myMedKitt is not affiliated. Reference for licensed clinicians: verify against your protocol and the printed card. Confirm concentrations against your stock.';
 export const ZONE_RANGE_NOTE = 'Zone ranges are estimates; the child\'s actual weight can differ.';
 export const PEDI_STOCK = 'common US stock; confirm your vial';
 const TOKEN = /(?<![\w./])(\d+(?:[.,]\d+)?)\s*(years?\s*old|years?|yrs?|y\/o|yo|y|months?\s*old|months?|mos?|m\/o|mths?|m|kgs?|kilograms?|kilos?|lbs?|pounds?|cm)(?![a-z/])/gi;
@@ -244,7 +244,7 @@ export const PEDI_DRUGS = [
     { id: 'mannitol', name: 'Mannitol 20%', indication: 'Raised ICP or herniation', tab: 'shock', unit: 'g', perKg: [0.5, 1], conc: c(0.2, 1, '20% = 0.2 g/mL'), route: 'IV', cite: [2] },
     // ---- Other
     { id: 'naloxone', name: 'Naloxone', indication: 'Opioid toxicity', tab: 'other', unit: 'mg', perKg: 0.1, max: 2, conc: c(0.4, 1, '0.4 mg/mL'), route: 'IV/IO/IM/IN', cite: [1, 2] },
-    { id: 'epi-im', name: 'Epinephrine IM', indication: 'Anaphylaxis', tab: 'other', unit: 'mg', perKg: 0.01, max: 0.5, conc: c(1, 1, '1 mg/mL'), route: 'IM (anterolateral thigh)', notes: 'Auto-injector 0.3 mg if under 30 kg.', cite: [1, 2] },
+    { id: 'epi-im', name: 'Epinephrine IM', indication: 'Anaphylaxis', tab: 'other', unit: 'mg', perKg: 0.01, max: 0.5, conc: c(1, 1, '1 mg/mL'), route: 'IM (anterolateral thigh)', notes: 'Auto-injector: 0.15 mg for 15-30 kg; 0.3 mg for 30 kg and up.', cite: [1, 2] },
     { id: 'diphenhydramine', name: 'Diphenhydramine', indication: 'Allergic reaction', tab: 'other', unit: 'mg', perKg: 1, max: 50, conc: c(50, 1, '50 mg/mL'), route: 'IV/IM', cite: [2] },
 ];
 /** Dose rules that depend on the child (age or weight). */
