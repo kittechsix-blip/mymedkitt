@@ -110,3 +110,13 @@ test('queries answer in under 50 ms (median) on the full corpus', () => {
   assert.ok(p95 < 100, `p95 ${p95} ms`);
 });
 void plain;
+
+test('reported myxedema treatment searches land on the relevant thyroid steps', () => {
+  for (const [query, node] of [
+    ['myxedema coma adrenal insufficiency management', 'thyroid/thyroid-hypo-steroids'],
+    ['myxedema coma steroids', 'thyroid/thyroid-hypo-steroids'],
+    ['myxedema coma levothyroxine elderly coronary disease', 'thyroid/thyroid-hypo-t4'],
+  ]) {
+    assert.equal(index.search(query, 1).results[0]?.doc.id, node, query);
+  }
+});

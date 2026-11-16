@@ -4,6 +4,7 @@
  */
 /** Clinical synonyms for common queries */
 export const CLINICAL_SYNONYMS = {
+    'thyroid': ['myxedema coma', 'myxoedema coma', 'decompensated hypothyroidism'],
     'paracentesis': ['sbp', 'spontaneous bacterial peritonitis', 'infected ascites', 'cirrhosis fever', 'sbp albumin'],
     'oncological-emergencies': ['neutropenia', 'neutropenic', 'chemo', 'chemotherapy', 'anc', 'absolute neutrophil count'],
     'alcohol-withdrawal': ['delirium tremens', 'dts', 'alcohol detox', 'etoh withdrawal', 'ciwa', 'alcohol withdrawal seizure'],

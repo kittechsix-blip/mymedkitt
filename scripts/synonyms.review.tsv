@@ -401,3 +401,4 @@ peaked = temporizing	missed-word	[bedside] rank >40: "K 6.8 with peaked T waves 
 peaked = disorders	missed-word	[bedside] rank >40: "K 6.8 with peaked T waves what do I give" -> Step 1: Temporizing Measures		
 waves = temporizing	missed-word	[bedside] rank >40: "K 6.8 with peaked T waves what do I give" -> Step 1: Temporizing Measures		
 waves = disorders	missed-word	[bedside] rank >40: "K 6.8 with peaked T waves what do I give" -> Step 1: Temporizing Measures	
+myxedema coma = decompensated hypothyroidism	mined	IBCC Decompensated Hypothyroidism (aka Myxedema Coma), https://emcrit.org/ibcc/myxedema/	y
