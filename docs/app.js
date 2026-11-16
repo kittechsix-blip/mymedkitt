@@ -205,7 +205,8 @@ function handleCalculatorList(_params) {
     renderCalculatorList(main);
 }
 function handleCalculator(params) {
-    const id = params['id'] ?? 'unknown';
+    // '#/calculator/<id>?q=2y&tab=airway': the query part prefills the tool (read by the tool itself)
+    const id = (params['id'] ?? 'unknown').split('?')[0];
     // If opened from a consult toolbar, keep consult context (no global tab bar)
     const fromConsult = hasContextualToolbar();
     if (fromConsult) {

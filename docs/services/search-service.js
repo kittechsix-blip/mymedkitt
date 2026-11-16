@@ -6,6 +6,7 @@ import { getAllCategories } from './category-service.js';
 import { getAllDrugs } from './drug-service.js';
 import { getAllCalculators } from '../components/calculator.js';
 import { sanitizeSearchInput } from './sanitize.js';
+import { pediSearchAnswer } from '../components/pedi-resus-engine.js';
 import { CLINICAL_SYNONYMS, DRUG_SYNONYMS } from './search-synonyms.js';
 import { buildQuestionDocs, createQuestionIndex, drugInput, previewFor, routeFor } from './question-search.js';
 // ===================================================================
@@ -254,6 +255,20 @@ export function buildSearchIndex() {
  * prefix match — its synonym "heart attack" was indexed but never queried.
  */
 export function search(query) {
+    const core = searchCore(query);
+    // Pediatric numbers ("age 2 yo ET tube", "20 kg defib"): a zone-colored answer card pinned first.
+    // Pure and synchronous; returns null for every other query, so their ranking is untouched.
+    const ped = query ? pediSearchAnswer(query) : null;
+    if (!ped)
+        return core;
+    const card = {
+        type: ped.route.startsWith('/tree/') ? 'consult' : 'calculator',
+        label: ped.title, sublabel: ped.subtitle, route: ped.route, preview: ped.preview,
+        zone: { bgHex: ped.bgHex, textHex: ped.textHex }, score: 0,
+    };
+    return [card, ...core.filter(r => r.route.split('?')[0] !== ped.route.split('?')[0])];
+}
+function searchCore(query) {
     if (!query || query.trim().length === 0)
         return [];
     // Security: sanitize user input before searching

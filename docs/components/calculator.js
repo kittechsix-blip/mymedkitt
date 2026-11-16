@@ -1,5 +1,6 @@
 import { HG_PLAN_BUILDER_CALCULATOR, HG_BASAL_START_CALCULATOR, HG_BASAL_TITRATE_CALCULATOR, HG_MEAL_CORRECTION_CALCULATOR } from './hyperglycemia-calculators.js';
 import { IO_ANATOMY_TOOL } from './io-anatomy.js';
+import { PEDI_ZONE_CALCULATOR, PEDI_WEIGHT_CALCULATOR, PEDI_AIRWAY_CALCULATOR, PEDI_TUBES_CALCULATOR, PEDI_ARREST_CALCULATOR, PEDI_RSI_CALCULATOR, PEDI_SEIZURE_CALCULATOR, PEDI_SHOCK_CALCULATOR } from './pedi-resus-ui.js';
 import { US_IV_CALCULATOR } from './us-iv.js';
 import { HTNE_BP_TARGET_CALCULATOR } from './htne-bp-target.js';
 import { ARDS_PBW_TIDAL_VOLUME_CALCULATOR } from './ards-pbw-tidal-volume.js';
@@ -44840,6 +44841,14 @@ const HS_COMORBIDITY_SCREEN_CALCULATOR = {
 };
 const CALCULATORS = {
     'io-anatomy': IO_ANATOMY_TOOL,
+    'pedi-zone': PEDI_ZONE_CALCULATOR,
+    'pedi-weight': PEDI_WEIGHT_CALCULATOR,
+    'pedi-airway': PEDI_AIRWAY_CALCULATOR,
+    'pedi-tubes': PEDI_TUBES_CALCULATOR,
+    'pedi-arrest': PEDI_ARREST_CALCULATOR,
+    'pedi-rsi': PEDI_RSI_CALCULATOR,
+    'pedi-seizure': PEDI_SEIZURE_CALCULATOR,
+    'pedi-shock': PEDI_SHOCK_CALCULATOR,
     'us-iv': US_IV_CALCULATOR,
     'htne-bp-target': HTNE_BP_TARGET_CALCULATOR,
     'ards-pbw-tidal-volume': ARDS_PBW_TIDAL_VOLUME_CALCULATOR,

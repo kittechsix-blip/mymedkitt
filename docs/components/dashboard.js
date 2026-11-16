@@ -208,6 +208,22 @@ export function renderDashboard(container) {
             }
             li.appendChild(badge);
             li.appendChild(labelWrap);
+            // Pediatric numbers card: colored by the Broselow-equivalent zone (dark or light text per zone)
+            if (r.zone) {
+                li.style.background = r.zone.bgHex;
+                li.style.color = r.zone.textHex;
+                li.style.borderLeft = '8px solid rgba(0,0,0,0.45)';
+                // Let the answer wrap so the tube depth is never cut off.
+                labelWrap.querySelectorAll('span').forEach(sp => {
+                    sp.style.color = r.zone.textHex;
+                    sp.style.whiteSpace = 'normal';
+                    sp.style.overflow = 'visible';
+                    sp.style.textOverflow = 'clip';
+                    sp.style.webkitLineClamp = 'unset';
+                });
+                badge.style.color = r.zone.textHex;
+                label.style.fontWeight = '800';
+            }
             li.addEventListener('click', () => navigateToResult(r));
             li.addEventListener('keydown', (ev) => {
                 if (ev.key === 'Enter' || ev.key === ' ') {

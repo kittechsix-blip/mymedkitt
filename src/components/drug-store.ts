@@ -5,6 +5,7 @@
 import { getAllDrugs, getDrug } from '../services/drug-service.js';
 import type { WeightCalc } from '../data/drug-store.js';
 import { router } from '../services/router.js';
+import { PEDI_ZONES, findZoneByLength, estimateWeightFromAge, type PediZone } from './pedi-resus-engine.js';
 import { addToDosingList, isDoseInList } from '../services/dosing-list.js';
 import { trackDrugView } from '../services/kittmd-analytics.js';
 import { getFreshPatientContext, getContextFieldTime, setPatientContext, formatEnteredTime } from '../services/patient-context.js';
@@ -490,42 +491,17 @@ function renderRegimenWithCalcLinks(container: HTMLElement, text: string, calcPa
 // Weight-Based Dose Calculator
 // -------------------------------------------------------------------
 
-/** Broselow-Luten 2024/2025 color zone data */
-interface BroselowZone {
-  color: string;
-  bgHex: string;
-  textHex: string;
-  weightMin: number;
-  weightMax: number;
-  midpoint: number;
-  lengthMin: number;
-  lengthMax: number;
-}
-
-const BROSELOW_ZONES: BroselowZone[] = [
-  { color: 'Grey',   bgHex: '#808080', textHex: '#fff', weightMin: 3,  weightMax: 5,  midpoint: 4,    lengthMin: 50,  lengthMax: 67  },
-  { color: 'Pink',   bgHex: '#FF69B4', textHex: '#fff', weightMin: 6,  weightMax: 7,  midpoint: 6.5,  lengthMin: 68,  lengthMax: 76  },
-  { color: 'Red',    bgHex: '#DC3545', textHex: '#fff', weightMin: 8,  weightMax: 9,  midpoint: 8.5,  lengthMin: 77,  lengthMax: 87  },
-  { color: 'Purple', bgHex: '#7B2D8E', textHex: '#fff', weightMin: 10, weightMax: 11, midpoint: 10.5, lengthMin: 88,  lengthMax: 100 },
-  { color: 'Yellow', bgHex: '#FFD700', textHex: '#000', weightMin: 12, weightMax: 14, midpoint: 13,   lengthMin: 101, lengthMax: 114 },
-  { color: 'White',  bgHex: '#FFFFFF', textHex: '#000', weightMin: 15, weightMax: 18, midpoint: 16.5, lengthMin: 115, lengthMax: 128 },
-  { color: 'Blue',   bgHex: '#007BFF', textHex: '#fff', weightMin: 19, weightMax: 23, midpoint: 21,   lengthMin: 129, lengthMax: 141 },
-  { color: 'Orange', bgHex: '#FF8C00', textHex: '#fff', weightMin: 24, weightMax: 29, midpoint: 26.5, lengthMin: 142, lengthMax: 154 },
-  { color: 'Green',  bgHex: '#28A745', textHex: '#fff', weightMin: 30, weightMax: 36, midpoint: 33,   lengthMin: 155, lengthMax: Infinity },
-];
+/** Color zones and the age-to-weight estimate come from the Pedi Resus engine (one weight per age app-wide). */
+const BROSELOW_ZONES = PEDI_ZONES;
 
 /** Find which Broselow zone a patient length (cm) falls into */
-function findBroselowZone(lengthCm: number): BroselowZone | null {
-  return BROSELOW_ZONES.find(z => lengthCm >= z.lengthMin && lengthCm <= z.lengthMax) || null;
+function findBroselowZone(lengthCm: number): PediZone | null {
+  return findZoneByLength(lengthCm);
 }
 
-/** Estimate pediatric weight from age using standard formulas */
+/** Estimate pediatric weight from age: APLS 2011 (engine), age in months (infant) or years. */
 function estimateWeight(ageValue: number, bracket: 'infant' | 'child' | 'adolescent'): number {
-  switch (bracket) {
-    case 'infant':    return (ageValue * 0.5) + 3.5;   // months × 0.5 + 3.5 kg
-    case 'child':     return (ageValue * 2) + 10;       // years × 2 + 10 kg
-    case 'adolescent': return (ageValue * 2) + 20;      // years × 2 + 20 kg
-  }
+  return estimateWeightFromAge(bracket === 'infant' ? ageValue : ageValue * 12).kg;
 }
 
 /** Calculate per-dose amount for a single WeightCalc entry given a weight in kg.

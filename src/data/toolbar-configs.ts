@@ -68,6 +68,7 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
   'hyperemesis',
   'pprom',
   'blood-draw',
+  'pedi-resus-numbers',
   // 'headache-hub' is added in Phase 7 when the consult ships.
 ]);
 
@@ -1625,6 +1626,15 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'lab-pattern', label: 'Lab Pattern', icon: '🧪', action: 'calculator', target: 'vkdb-lab-pattern', pinned: true },
     { id: 'doses', label: 'VKDB Doses', icon: '💉', action: 'calculator', target: 'vkdb-doses', pinned: true },
     { id: 'ich', label: 'Brain Bleed', icon: '🧠', action: 'jump', target: 'vkdb-ich', pinned: true },
+  ],
+  'pedi-resus-numbers': [
+    { id: 'tape', label: 'Color Tape', icon: '🌈', action: 'calculator', target: 'pedi-zone', pinned: true },
+    { id: 'airway', label: 'Airway', icon: '🫁', action: 'calculator', target: 'pedi-airway', pinned: true },
+    { id: 'drugs', label: 'Drugs', icon: '💉', action: 'calculator', target: 'pedi-arrest', pinned: true },
+    { id: 'rsi', label: 'RSI', icon: '⚡', action: 'calculator', target: 'pedi-rsi', pinned: true },
+    { id: 'fluids', label: 'Fluids/Vitals', icon: '💧', action: 'calculator', target: 'pedi-shock', pinned: true },
+    { id: 'seizure', label: 'Seizure', icon: '🧠', action: 'calculator', target: 'pedi-seizure' },
+    { id: 'sources', label: 'Sources', icon: '📚', action: 'overlay', target: 'pedi-resus-sources' },
   ],
   'kawasaki': [
     { id: 'steps', label: 'Steps', icon: '📋', action: 'overlay', target: 'kawasaki-summary', pinned: true },

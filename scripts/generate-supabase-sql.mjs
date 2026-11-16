@@ -119,6 +119,7 @@ const CROSS_LISTINGS = {
   'peds-electrolyte-emergencies': [{ categoryId: 'emergency-medicine' }],
   'terrestrial-envenomation': [{ categoryId: 'toxicology' }],
   'neonatal-resus':   [{ categoryId: 'emergency-medicine' }],
+  'pedi-resus-numbers': [{ categoryId: 'emergency-medicine' }],
   'chest-tube':       [{ categoryId: 'procedures', displayTitle: 'Tube Thoracostomy', displaySubtitle: 'Preparation → Insertion → Management', entryNodeId: 'ctube-anatomy' }],
   'priapism':         [{ categoryId: 'urology' }],
   'lateral-canthotomy': [{ categoryId: 'ophthalmology', displayTitle: null, displaySubtitle: null, entryNodeId: 'lcc-start' }],

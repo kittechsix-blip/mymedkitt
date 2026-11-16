@@ -29838,6 +29838,73 @@ const VKDB_SUMMARY_PAGE = {
     ],
 };
 // -------------------------------------------------------------------
+// Pedi Resus Numbers (added 2026-11-16)
+// -------------------------------------------------------------------
+const PEDI_RESUS_SUMMARY_PAGE = {
+    id: 'pedi-resus-summary',
+    title: 'Pedi Resus Numbers: Steps Summary',
+    subtitle: 'Quick Reference',
+    sections: [
+        {
+            body: 'Stepwise use of the Color Zone Tape. Tap any step to jump to that section of the consult.',
+        },
+        {
+            heading: '1. Enter the patient',
+            body: '• [Age, weight or length in one box; zone, sizes and doses recompute](#/node/prn-start)',
+        },
+        {
+            heading: '2. Check the weight used',
+            body: '• [Measured, then length, then APLS age estimate; obese children by ideal weight](#/node/prn-weight)',
+        },
+        {
+            heading: '3. Airway',
+            body: '• [Cuffed first; half sizes up and down ready](#/node/prn-airway)',
+        },
+        {
+            heading: '4. Under 3 kg',
+            body: '• [Use the Neonatal Resuscitation consult](#/node/prn-neonate)',
+        },
+        {
+            heading: '5. Safety',
+            body: '• [Verify printed tapes and vial concentrations](#/node/prn-safety)',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Randall Children\'s Hospital. Pediatric Emergency Quick Reference (Randall card). Oregon EMS for Children; Oct 2020.' },
+        { num: 2, text: 'Children\'s Minnesota. Pediatric Emergency Reference Card M0055; 06/2025.' },
+    ],
+};
+const PEDI_RESUS_SOURCES_PAGE = {
+    id: 'pedi-resus-sources',
+    title: 'Pedi Resus Numbers: Sources',
+    subtitle: 'Where each number comes from',
+    sections: [
+        {
+            body: 'Zone weights and equipment sizes: Randall card 2020 [1] and Children\'s Minnesota 06/2025 [2]. Doses follow the Children\'s Minnesota card where the cards differ, with AHA 2020 [3], AHA 2025 [4] and ERC/RCUK 2025 [5] for arrest, rhythm and fluids. Weight from age: APLS [10]. Cuffed tube formula: Duracher [7]. Maintenance fluids: Holliday and Segar [8].',
+        },
+        {
+            heading: 'Where sources disagree (defaults used)',
+            body: '• Cuffed versus uncuffed: cuffed first, uncuffed beside it.\n• Defibrillation: 2 J/kg then 4 J/kg (AHA); ERC/RCUK 2025 uses 4 J/kg first.\n• Fluid bolus: 10-20 mL/kg with reassessment after each (ERC/RCUK 10 mL/kg); 5-10 mL/kg if cardiogenic.\n• Atropine: 0.02 mg/kg, single-dose maximum 0.5 mg.\n• Rocuronium 1.2 mg/kg; succinylcholine 2 mg/kg under 10 kg, 1.5 mg/kg otherwise.\n• Fentanyl 1-2 mcg/kg, maximum 100 mcg; midazolam IM/IN 0.2 mg/kg, maximum 10 mg.\n• Epinephrine IM for anaphylaxis: 0.01 mg/kg, maximum 0.5 mg.',
+        },
+        {
+            heading: 'Safety alert',
+            body: 'ECRI and ISMP (rev. Jan 22, 2026) found wrong doses on the 2025 AirLife Broselow Rainbow Tape Rev 3. Check any printed tape against the alert. [6]',
+        },
+    ],
+    citations: [
+        { num: 1, text: 'Randall Children\'s Hospital. Pediatric Emergency Quick Reference (Randall card). Oregon EMS for Children; Oct 2020.' },
+        { num: 2, text: 'Children\'s Minnesota. Pediatric Emergency Reference Card M0055; 06/2025.' },
+        { num: 3, text: 'Topjian AA, et al. Part 4: Pediatric Basic and Advanced Life Support: 2020 AHA Guidelines. Circulation. 2020;142(16 suppl 2):S469-S523.' },
+        { num: 4, text: 'American Heart Association. Part 8: Pediatric Advanced Life Support. 2025 AHA/AAP Guidelines. DOI 10.1161/CIR.0000000000001368. (Checked through secondary summaries.)' },
+        { num: 5, text: 'European Resuscitation Council and Resuscitation Council UK. Paediatric Life Support Guidelines 2025. Resuscitation. 2025.' },
+        { num: 6, text: 'ECRI and ISMP. Joint hazard alert: Broselow Rainbow Tape; rev. Jan 22, 2026. https://home.ecri.org/blogs/ismp-alerts-and-articles-library/joint-hazard-alert-action-needed-to-address-incorrect-information-on-the-broselow-rainbow-tape' },
+        { num: 7, text: 'Duracher C, et al. Evaluation of cuffed tracheal tube size predicted using the Khine formula in children. Paediatr Anaesth. 2008;18(2):113-118. PMID 18184241.' },
+        { num: 8, text: 'Holliday MA, Segar WE. The maintenance need for water in parenteral fluid therapy. Pediatrics. 1957;19(5):823-832. PMID 13431307.' },
+        { num: 9, text: 'Luscombe M, Owens B. Weight estimation in resuscitation: is the current formula still valid? Arch Dis Child. 2007;92(5):412-415. PMID 17213259.' },
+        { num: 10, text: 'Advanced Life Support Group. Advanced Paediatric Life Support. 5th ed. Wiley-Blackwell; 2011.' },
+    ],
+};
+// -------------------------------------------------------------------
 // Kawasaki disease (added 2026-11-12)
 // -------------------------------------------------------------------
 const KAWASAKI_SUMMARY_PAGE = {
@@ -30415,6 +30482,8 @@ export const INFO_PAGES = {
     'hemolytic-anemia-summary': HEMOLYTIC_ANEMIA_SUMMARY_PAGE,
     'hemolytic-anemia-ddx': HEMOLYTIC_ANEMIA_DDX_PAGE,
     'vkdb-summary': VKDB_SUMMARY_PAGE,
+    'pedi-resus-summary': PEDI_RESUS_SUMMARY_PAGE,
+    'pedi-resus-sources': PEDI_RESUS_SOURCES_PAGE,
     'kawasaki-summary': KAWASAKI_SUMMARY_PAGE,
     'staph-tss-summary': STAPH_TSS_SUMMARY_PAGE,
     'staph-tss-cdc-criteria': STAPH_TSS_CDC_CRITERIA_PAGE,

@@ -1319,6 +1319,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/kawasaki.js');
             return { nodes: m.KAWASAKI_NODES, entryNodeId: 'kd-start', categoryId: 'pediatrics', moduleLabels: m.KAWASAKI_MODULE_LABELS, citations: m.KAWASAKI_CITATIONS, criticalActions: m.KAWASAKI_CRITICAL_ACTIONS };
         },
+        'pedi-resus-numbers': async () => {
+            const m = await import('../data/trees/pedi-resus-numbers.js');
+            return { nodes: m.PEDI_RESUS_NUMBERS_NODES, entryNodeId: 'prn-start', categoryId: 'pediatrics', moduleLabels: m.PEDI_RESUS_NUMBERS_MODULE_LABELS, citations: m.PEDI_RESUS_NUMBERS_CITATIONS, criticalActions: m.PEDI_RESUS_NUMBERS_CRITICAL_ACTIONS };
+        },
         'vkdb': async () => {
             const m = await import('../data/trees/vkdb.js');
             return { nodes: m.VKDB_NODES, entryNodeId: 'vkdb-start', categoryId: 'pediatrics', moduleLabels: m.VKDB_MODULE_LABELS, citations: m.VKDB_CITATIONS, criticalActions: m.VKDB_CRITICAL_ACTIONS };

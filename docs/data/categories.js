@@ -519,6 +519,15 @@ export const DEFAULT_CATEGORIES = [
         icon: 'em.png',
         decisionTrees: [
             {
+                id: 'pedi-resus-numbers',
+                title: 'Pedi Resus Numbers (Color Zone Tape)',
+                subtitle: 'Age, weight or length → Zone → Airway sizes → Arrest, RSI and seizure doses → Fluids and vitals',
+                categoryId: 'pediatrics',
+                version: '1.0',
+                nodeCount: 5,
+                entryNodeId: 'prn-start',
+            },
+            {
                 "id": "hyperglycemia-ed",
                 "title": "Hyperglycemia: ED Treatment & Bridge Care",
                 "subtitle": "Labs \u00b7 Oral therapy \u00b7 Insulin \u00b7 Meals \u00b7 Uninsured access",
@@ -3126,6 +3135,15 @@ export const DEFAULT_CATEGORIES = [
                 version: '1.0',
                 nodeCount: 25,
                 entryNodeId: 'nrp-start',
+            },
+            {
+                id: 'pedi-resus-numbers',
+                title: 'Pedi Resus Numbers (Color Zone Tape)',
+                subtitle: 'Age, weight or length → Zone → Airway sizes → Arrest, RSI and seizure doses → Fluids and vitals',
+                categoryId: 'pediatrics',
+                version: '1.0',
+                nodeCount: 5,
+                entryNodeId: 'prn-start',
             },
             {
                 id: 'vkdb',
