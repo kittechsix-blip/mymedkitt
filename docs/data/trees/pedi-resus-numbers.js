@@ -36,7 +36,7 @@ export const PEDI_RESUS_NUMBERS_NODES = [
         type: 'info',
         module: 2,
         title: 'How the Weight Is Chosen',
-        body: '**Priority: measured weight, then length, then age.** A measured weight always wins. Length maps to a zone and uses the zone midpoint. [1][2]\n\n**Age estimate (APLS 2011):** under 12 months, 0.5 x months + 4; 1 to 5 years, 2 x age + 8; 6 to 12 years, 3 x age + 7. Over 12 years the formula is unreliable: use the actual weight. [10][9]\n\n**Obese child:** dose resuscitation drugs by the weight estimated from length or age (ideal weight), not by actual weight.\n\nUnder 3 kg is outside the tape: [Neonatal Resuscitation](#/node/prn-neonate).',
+        body: '**Priority: measured weight, then length, then age.** A measured weight always wins. Length maps to a zone and uses the zone midpoint. [1][2]\n\n**Age estimate (APLS 2011):** under 12 months, 0.5 x months + 4; 1 to 5 years, 2 x age + 8; 6 to 12 years, 3 x age + 7. Over 12 years the formula is unreliable: use the actual weight. [10][9]\n\n**Obese child:** dose resuscitation drugs by the weight estimated from length or age (ideal weight), not by actual weight.\n\nUnder 3 kg, an age under 1 month, or a gestational age is outside the tape: use [Neonate Numbers](#/node/prn-neonate).',
         citation: [1, 2, 9, 10],
         next: 'prn-airway',
         summary: 'Measured weight, then length, then APLS age estimate; obese children by ideal weight',
@@ -63,11 +63,11 @@ export const PEDI_RESUS_NUMBERS_NODES = [
         type: 'info',
         module: 4,
         title: 'Neonate or Under 3 kg',
-        body: 'The zone tape starts at 3 kg. For a newborn or preterm infant use the **Neonatal Resuscitation (NRP)** consult: tube size by gestational age, ventilation, compressions and epinephrine. [1][2]',
+        body: 'The zone tape starts at 3 kg. For a newborn, an infant under 1 month or a preterm infant use **Neonate Numbers (<3 kg)**: tube size and depth by weight and gestational age, ventilation, compressions and epinephrine in mg and mL (2025 AHA/AAP). The pedi tool opens it automatically from the same input. The Neonatal Resuscitation (NRP) consult has the full algorithm. [1][2]',
         citation: [1, 2],
-        calculatorLinks: [{ id: 'neonatal-resus', label: 'Neonatal Resuscitation (NRP)', kind: 'tree' }],
+        calculatorLinks: [{ id: 'neo-numbers', label: 'Neonate Numbers (<3 kg)' }, { id: 'neonatal-resus', label: 'Neonatal Resuscitation (NRP)', kind: 'tree' }],
         next: 'prn-safety',
-        summary: 'Under 3 kg: use the Neonatal Resuscitation consult',
+        summary: 'Under 3 kg or under 1 month: use Neonate Numbers',
     },
     // =====================================================================
     // MODULE 5: SAFETY
@@ -107,7 +107,7 @@ export const PEDI_RESUS_NUMBERS_CITATIONS = [
 export const PEDI_RESUS_NUMBERS_CRITICAL_ACTIONS = [
     { text: 'Open the Color Zone Tape: enter age, weight or length', nodeId: 'prn-start' },
     { text: 'Measured weight first; obese child: dose by ideal weight', nodeId: 'prn-weight' },
-    { text: 'Under 3 kg: use the Neonatal Resuscitation consult', nodeId: 'prn-neonate' },
+    { text: 'Under 3 kg or under 1 month: use Neonate Numbers', nodeId: 'prn-neonate' },
     { text: 'Verify printed tapes against the ECRI/ISMP alert and the vial concentration', nodeId: 'prn-safety' },
 ];
 export const PEDI_RESUS_NUMBERS_NODE_COUNT = PEDI_RESUS_NUMBERS_NODES.length;

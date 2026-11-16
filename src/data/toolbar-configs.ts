@@ -321,6 +321,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'ppv', label: 'PPV', icon: '\uD83E\uDEC1', action: 'jump', target: 'nrp-ppv' },
     { id: 'cpr', label: 'CPR', icon: '\uD83D\uDC93', action: 'jump', target: 'nrp-cpr' },
     { id: 'epi', label: 'Epi', icon: '\uD83D\uDC89', action: 'jump', target: 'nrp-epinephrine' },
+    { id: 'neo', label: 'Neonate', icon: '\uD83D\uDC76', action: 'calculator', target: 'neo-numbers', pinned: true },
   ],
   'peds-fever': [
     { id: 'neonatal', label: '0-21d', icon: '\uD83D\uDC76', action: 'jump', target: 'pf-neo-screen' },
@@ -1633,6 +1634,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
     { id: 'drugs', label: 'Drugs', icon: '💉', action: 'calculator', target: 'pedi-arrest', pinned: true },
     { id: 'rsi', label: 'RSI', icon: '⚡', action: 'calculator', target: 'pedi-rsi', pinned: true },
     { id: 'fluids', label: 'Fluids/Vitals', icon: '💧', action: 'calculator', target: 'pedi-shock', pinned: true },
+    { id: 'neonate', label: 'Neonate', icon: '👶', action: 'calculator', target: 'neo-numbers', pinned: true },
     { id: 'seizure', label: 'Seizure', icon: '🧠', action: 'calculator', target: 'pedi-seizure' },
     { id: 'sources', label: 'Sources', icon: '📚', action: 'overlay', target: 'pedi-resus-sources' },
   ],

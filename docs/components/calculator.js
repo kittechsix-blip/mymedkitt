@@ -1,6 +1,6 @@
 import { HG_PLAN_BUILDER_CALCULATOR, HG_BASAL_START_CALCULATOR, HG_BASAL_TITRATE_CALCULATOR, HG_MEAL_CORRECTION_CALCULATOR } from './hyperglycemia-calculators.js';
 import { IO_ANATOMY_TOOL } from './io-anatomy.js';
-import { PEDI_ZONE_CALCULATOR, PEDI_WEIGHT_CALCULATOR, PEDI_AIRWAY_CALCULATOR, PEDI_TUBES_CALCULATOR, PEDI_ARREST_CALCULATOR, PEDI_RSI_CALCULATOR, PEDI_SEIZURE_CALCULATOR, PEDI_SHOCK_CALCULATOR } from './pedi-resus-ui.js';
+import { PEDI_ZONE_CALCULATOR, PEDI_WEIGHT_CALCULATOR, PEDI_AIRWAY_CALCULATOR, PEDI_TUBES_CALCULATOR, PEDI_ARREST_CALCULATOR, PEDI_RSI_CALCULATOR, PEDI_SEIZURE_CALCULATOR, PEDI_SHOCK_CALCULATOR, NEO_NUMBERS_CALCULATOR } from './pedi-resus-ui.js';
 import { US_IV_CALCULATOR } from './us-iv.js';
 import { HTNE_BP_TARGET_CALCULATOR } from './htne-bp-target.js';
 import { ARDS_PBW_TIDAL_VOLUME_CALCULATOR } from './ards-pbw-tidal-volume.js';
@@ -35508,7 +35508,7 @@ const APGAR_CALCULATOR = {
             max: 10,
             label: '7-10 — Reassuring',
             risk: 'Good transitional newborn condition',
-            mortality: '**ROUTINE NEWBORN CARE:**\n• Warm, dry, stimulate\n• Pulse ox (preductal)\n• Skin-to-skin with mother if mother stable\n• Delayed cord clamping 30-60 sec if vigorous\n• APGAR at 5 min for documentation\n• Monitor temperature — hypothermia is #1 risk in ED deliveries\n• Routine newborn exam and disposition',
+            mortality: '**ROUTINE NEWBORN CARE:**\n• Warm, dry, stimulate\n• Pulse ox (preductal)\n• Skin-to-skin with mother if mother stable\n• Delayed cord clamping at least 60 sec if vigorous\n• APGAR at 5 min for documentation\n• Monitor temperature — hypothermia is #1 risk in ED deliveries\n• Routine newborn exam and disposition',
             colorVar: '--color-primary',
         },
     ],
@@ -41113,7 +41113,7 @@ const PEDS_ETT_SIZE_CALCULATOR = {
     id: 'peds-ett-size',
     title: 'Pediatric ETT Size',
     subtitle: 'Cuffed and uncuffed tube size, depth, and kit',
-    description: 'Age-based endotracheal tube sizing using the PALS cuffed formula (age/4) + 3.5, with insertion depth, suction catheter size, and blade size. Under 1 year the formula does not apply and fixed neonatal/infant sizes are used instead.',
+    description: 'Age-based endotracheal tube sizing using the PALS cuffed formula (age/4) + 3.5, with insertion depth, suction catheter size, and blade size. Under 1 year the formula does not apply and fixed infant sizes are used instead (under 1 month: use Neonate Numbers).',
     fields: [
         { name: 'age-years', label: 'Age', type: 'number', points: 0, valueIsPoints: true, unit: 'years', description: 'Whole years. Use 0 for infants under 12 months and fill in the months field.' },
         { name: 'age-months', label: 'Age if under 1 year', type: 'number', points: 0, valueIsPoints: true, unit: 'months', description: 'Only if under 1 year old. Leave at 0 otherwise.' },
@@ -41149,14 +41149,22 @@ const PEDS_ETT_SIZE_CALCULATOR = {
             };
         }
         if (years < 1) {
-            // Fixed neonatal/infant table — NOT formula-derived.
-            const neonate = months < 1;
-            const cuffed = neonate ? '3.0' : '3.5';
-            const uncuffed = neonate ? '3.0–3.5' : '3.5–4.0';
-            const depth = neonate ? '9–10' : '10–11';
+            // Under 1 month: the NRP neonate sizing (weight and gestational age), not this table.
+            if (months < 1) {
+                return {
+                    value: 'Neonate',
+                    label: 'Under 1 month: use Neonate Numbers',
+                    description: '**Under 1 month: use the [Neonate Numbers (<3 kg)](#/calculator/neo-numbers) tool.** Newborn tubes are uncuffed and sized by weight and gestational age (2.5 mm under 1 kg, 3.0 mm at 1 to under 2 kg, 3.5 mm at 2 to under 3 kg, 3.5-4.0 mm at 3 kg and over), with depth from the Kempley table.\n\nThis calculator\'s infant table starts at 1 month.',
+                    colorVar: '--color-decision-active',
+                };
+            }
+            // Fixed infant table (1-11 months), NOT formula-derived.
+            const cuffed = '3.5';
+            const uncuffed = '3.5–4.0';
+            const depth = '10–11';
             return {
                 value: `${cuffed} mm`,
-                label: neonate ? 'Term neonate — fixed size' : 'Infant 1–11 months — fixed size',
+                label: 'Infant 1–11 months — fixed size',
                 description: `**CUFFED ETT ${cuffed} mm ID** — fixed size, **not** formula-derived.\n\n**UNCUFFED (if cuffed unavailable):** ${uncuffed} mm\n**DEPTH AT THE LIP:** **${depth} cm**\n\n**WHY NO FORMULA:** (age/4) + 3.5 extrapolates to 3.5 mm at birth and is simply wrong below 1 year. Infant sizing comes from a fixed table.\n\n**KIT:**\n• Suction catheter: **6–8 Fr**\n• Laryngoscope blade: **Miller 0–1** (straight blade preferred in infants)\n• Stylet, and one size above and below open at the bedside${commonTail}`,
                 colorVar: '--color-decision-active',
             };
@@ -44849,6 +44857,7 @@ const CALCULATORS = {
     'pedi-rsi': PEDI_RSI_CALCULATOR,
     'pedi-seizure': PEDI_SEIZURE_CALCULATOR,
     'pedi-shock': PEDI_SHOCK_CALCULATOR,
+    'neo-numbers': NEO_NUMBERS_CALCULATOR,
     'us-iv': US_IV_CALCULATOR,
     'htne-bp-target': HTNE_BP_TARGET_CALCULATOR,
     'ards-pbw-tidal-volume': ARDS_PBW_TIDAL_VOLUME_CALCULATOR,

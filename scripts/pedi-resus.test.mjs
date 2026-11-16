@@ -232,7 +232,7 @@ test('search: pediatric numbers answer card', () => {
   assert.equal(pediSearchAnswer('pedi resus').route, '/calculator/pedi-zone');
   assert.equal(pediSearchAnswer('broselow').pointer, true);
   assert.equal(pediSearchAnswer('peds ett').pointer, true);
-  assert.equal(pediSearchAnswer('2.5 kg ett').route, '/tree/neonatal-resus');
+  assert.equal(pediSearchAnswer('2.5 kg ett').route, '/calculator/neo-numbers?q=2.5kg&tab=airway');
 });
 
 test('search: ordinary queries are untouched', () => {

@@ -30,7 +30,7 @@ export const PEDI_STOCK = 'common US stock; confirm your vial';
 // Input parsing
 // ===================================================================
 
-export interface ParsedInput { ageMonths?: number; weightKg?: number; lengthCm?: number }
+export interface ParsedInput { ageMonths?: number; weightKg?: number; lengthCm?: number; gaWeeks?: number; newborn?: boolean }
 export type PediUnit = 'mo' | 'yr' | 'kg' | 'cm' | 'lb';
 
 const TOKEN = /(?<![\w./])(\d+(?:[.,]\d+)?)\s*(years?\s*old|years?|yrs?|y\/o|yo|y|months?\s*old|months?|mos?|m\/o|mths?|m|kgs?|kilograms?|kilos?|lbs?|pounds?|cm)(?![a-z/])/gi;
@@ -62,7 +62,33 @@ export function parseInput(input: string | { value: number | string; unit: PediU
   }
   const s = String(input ?? '');
   for (const m of s.matchAll(TOKEN)) apply(out, Number(m[1].replace(',', '.')), unitOf(m[2]));
+  parseNeonatal(s, out);
   return out;
+}
+
+// Neonate extras (2026-11-16): grams, gestational age ('32wk'), 'newborn', and ages in days or weeks.
+const NEO_WORD = /\b(?:newborn|neonate|neonates|neonatal)\b/i;
+const GRAM_TOKEN = /(?<![\w./])(\d{3,4}(?:[.,]\d+)?)\s*(?:g|gm|gms|grams?)(?![a-z/])/i;
+const WEEK_TOKEN = /(?<![\w./])(\d{1,2})(?:\s*\+\s*[0-6](?:\/7)?)?\s*(?:weeks?|wks?|w)(?![a-z])(\s*old)?/i;
+const DAY_TOKEN = /(?<![\w./])(\d{1,3})\s*(?:days?|d)(?![a-z/])(?:\s*old)?/i;
+
+function parseNeonatal(s: string, out: ParsedInput): void {
+  if (NEO_WORD.test(s)) out.newborn = true;
+  if (out.weightKg === undefined) {
+    const g = GRAM_TOKEN.exec(s);
+    if (g) { const v = Number(g[1].replace(',', '.')); if (v >= 200 && v <= 6000) out.weightKg = v / 1000; }
+  }
+  const w = WEEK_TOKEN.exec(s);
+  if (w) {
+    const v = Number(w[1]);
+    if (v >= 22 && v <= 44 && !w[2]) out.gaWeeks = v;
+    else if (v >= 1 && v <= 21 && out.ageMonths === undefined) out.ageMonths = v / 4.345;
+    else if (v >= 22 && w[2] && out.ageMonths === undefined) out.ageMonths = v / 4.345;
+  }
+  if (out.ageMonths === undefined) {
+    const d = DAY_TOKEN.exec(s);
+    if (d) { const v = Number(d[1]); if (v >= 1 && v <= 365) out.ageMonths = v / 30.4375; }
+  }
 }
 
 // ===================================================================
@@ -196,6 +222,16 @@ export function resolvePatient(input: ParsedInput): Patient | null {
   let useActualWeight = false;
   let zone: ZoneResult | null = null;
 
+  // Newborn keyword, gestational age, or age under 1 month: always the neonate screen (weight may be missing).
+  if (input.newborn || input.gaWeeks !== undefined || (input.ageMonths !== undefined && input.ageMonths < 1)) {
+    const w = input.weightKg !== undefined && input.weightKg > 0 ? input.weightKg : 0;
+    return {
+      input, weightKg: w, weightSource: w > 0 ? 'measured' : 'age', sourceLabel: w > 0 ? 'measured' : 'not entered', zone: { kind: 'neonate' },
+      ageMonths: input.ageMonths, lengthCm: input.lengthCm, vitalsMonths: input.ageMonths ?? 0, vitalsFromZone: false, useActualWeight: false,
+      flags: ['Neonate: use the Neonate Numbers tool (2025 AHA/AAP NRP).'],
+    };
+  }
+
   if (input.weightKg !== undefined && input.weightKg > 0) {
     weightKg = input.weightKg; weightSource = 'measured'; sourceLabel = 'measured'; zone = zoneFor({ weightKg });
   } else if (input.lengthCm !== undefined && input.lengthCm > 0) {
@@ -207,7 +243,6 @@ export function resolvePatient(input: ParsedInput): Patient | null {
     weightKg = est.kg; weightSource = 'age'; sourceLabel = `estimated from age (${est.method})`; useActualWeight = est.useActualWeight;
     zone = zoneFor({ weightKg });
     if (est.useActualWeight) flags.push('Age over 12 yr: weight formula is unreliable. Use the actual measured weight.');
-    if (input.ageMonths < 1) flags.push('Under 1 month: use a measured weight; see the Neonatal Resuscitation consult.');
   }
   if (weightKg === undefined || !weightSource || !zone) return null;
 
@@ -215,7 +250,7 @@ export function resolvePatient(input: ParsedInput): Patient | null {
   const vitalsFromZone = ageMonths === undefined;
   const vitalsMonths = ageMonths ?? (zone.kind === 'zone' ? zone.zone.ageMonthsRep : zone.kind === 'adult' ? 144 : 1);
   if (zone.kind === 'adult') flags.push('Above Green (over 36 kg): use adult sizing; dose by actual weight up to adult maximums.');
-  if (zone.kind === 'neonate') flags.push('Under 3 kg: use the Neonatal Resuscitation (NRP) consult for sizing and doses.');
+  if (zone.kind === 'neonate') flags.push('Under 3 kg: use the Neonate Numbers tool for sizing and doses.');
   return { input, weightKg, weightSource, sourceLabel, zone, ageMonths, lengthCm: input.lengthCm, vitalsMonths, vitalsFromZone, useActualWeight, flags };
 }
 
@@ -588,6 +623,324 @@ export function headerLine(p: Patient): string {
 }
 
 // ===================================================================
+// Neonate Numbers (<3 kg), added 2026-11-16 (outline: docs/reviews/neonate-numbers-outline.md)
+// Resuscitation numbers: 2025 AHA/AAP Part 5 [1]. Tube depth: Kempley 2008 [2]. Sizes, blades, catheters: NSW/Safer Care Victoria [3].
+// ===================================================================
+
+export const NEO_CITATIONS: string[] = [
+  'Lee HC, Strand ML, Finan E, et al. Part 5: Neonatal Resuscitation: 2025 American Heart Association and American Academy of Pediatrics Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2025;152(16 suppl 2):S385-S423. PMID 41122887.',
+  'Kempley ST, Moreiras JW, Petrone FL. Endotracheal tube length for neonatal intubation. Resuscitation. 2008;77(3):369-373.',
+  'NSW Royal Hospital for Women neonatal intubation guideline; Safer Care Victoria neonatal intubation guideline (tube, blade and catheter sizes by weight).',
+  'myMedKitt Neonatal Resuscitation (NRP) consult (neonatal-resus), updated to the 2025 AHA/AAP guideline.',
+  'myMedKitt drug entries (ampicillin, gentamicin, acyclovir, alprostadil, dextrose). First doses only; dosing interval per pharmacy/Neofax by gestational age and postnatal age.',
+  'Children\'s Hospital of Philadelphia. Neonatal seizure and status epilepticus: anti-seizure medications clinical pathway. https://www.chop.edu/clinical-pathway/neonatal-seizure-status-epilepticus-anti-seizure-medications-asm',
+];
+
+export const NEO_FOOTER = 'Reference for licensed clinicians: verify against your NICU protocol and confirm concentrations against your stock. Depth and size are starting points; confirm with CO2 detector, rising heart rate and imaging.';
+
+export type NeoTab = 'airway' | 'breathe' | 'circulate' | 'drugs' | 'rosc';
+export const NEO_TABS: NeoTab[] = ['airway', 'breathe', 'circulate', 'drugs', 'rosc'];
+export const NEO_TAB_LABELS: Record<NeoTab, string> = { airway: 'Airway', breathe: 'Breathe', circulate: 'Circulate', drugs: 'Drugs', rosc: 'After ROSC' };
+
+export interface NeoPatient { weightKg?: number; gaWeeks?: number; ageMonths?: number }
+
+export interface NeoRow {
+  id: string;
+  name: string;
+  indication?: string;
+  route?: string;
+  lines: DoseLine[];
+  basis: string;
+  capped: boolean;
+  conc?: string;
+  notes?: string;
+  cite: number[];
+  /** shown as a red badge, e.g. NOT RECOMMENDED */
+  warn?: string;
+}
+
+export interface NeoTabContent { notes: string[]; rows: NeoRow[] }
+
+/** Build a neonate patient from the shared parser output (weight, GA, age). */
+export function neoPatientFrom(input: ParsedInput): NeoPatient {
+  const out: NeoPatient = {};
+  if (input.weightKg !== undefined && input.weightKg > 0) out.weightKg = input.weightKg;
+  if (input.gaWeeks !== undefined && input.gaWeeks > 0) out.gaWeeks = input.gaWeeks;
+  if (input.ageMonths !== undefined && input.ageMonths > 0) out.ageMonths = input.ageMonths;
+  return out;
+}
+
+/** UI helper: weight text (a bare number takes the chip unit) plus the GA field. */
+export function parseNeo(weightText: string, unit: 'kg' | 'g', gaField?: string | number): NeoPatient {
+  const t = String(weightText ?? '').trim();
+  const bare = /^(\d+(?:[.,]\d+)?)$/.exec(t);
+  const parsed = bare ? parseInput(unit === 'g' ? `${bare[1]}g` : `${bare[1]}kg`) : parseInput(t);
+  const ga = gaField !== undefined && String(gaField).trim() !== '' ? Number(String(gaField).replace(',', '.')) : NaN;
+  if (Number.isFinite(ga) && ga >= 20 && ga <= 45) parsed.gaWeeks = ga;
+  return neoPatientFrom(parsed);
+}
+
+interface NeoBand { label: string; ett: string; blade: string; suction: string; og: string }
+export const NEO_BANDS: NeoBand[] = [
+  { label: 'Under 1 kg', ett: '2.5', blade: '00', suction: '5-6 Fr', og: '5 Fr' },
+  { label: '1 to under 2 kg', ett: '3.0', blade: '0', suction: '6-8 Fr', og: '5-8 Fr' },
+  { label: '2 to under 3 kg', ett: '3.5', blade: '0-1', suction: '8 Fr', og: '8 Fr' },
+  { label: '3 kg and over', ett: '3.5-4.0', blade: '1', suction: '8-10 Fr', og: '8 Fr' },
+];
+
+/** Weight picks the band; gestational age (<28, 28 to <34, 34 to <38, 38+) is the fallback. -1 when neither is known. */
+export function neoBandIndex(p: NeoPatient): number {
+  if (p.weightKg !== undefined) return p.weightKg < 1 ? 0 : p.weightKg < 2 ? 1 : p.weightKg < 3 ? 2 : 3;
+  if (p.gaWeeks !== undefined) return p.gaWeeks < 28 ? 0 : p.gaWeeks < 34 ? 1 : p.gaWeeks < 38 ? 2 : 3;
+  return -1;
+}
+
+/** Kempley 2008 oral tube depth at the lip by gestational age, cm. */
+export function kempleyDepthByGa(ga: number): number {
+  if (ga <= 24) return 5.5;
+  if (ga <= 26) return 6.0;
+  if (ga <= 29) return 6.5;
+  if (ga <= 32) return 7.0;
+  if (ga <= 34) return 7.5;
+  if (ga <= 37) return 8.0;
+  if (ga <= 40) return 8.5;
+  return 9.0;
+}
+
+const KEMPLEY_WEIGHT: [number, number][] = [[500, 5.5], [700, 6.0], [900, 6.5], [1100, 7.0], [1500, 7.5], [1900, 8.0], [2500, 8.5], [3200, 9.0]];
+/** Kempley 2008 pairing by weight in grams (lower bound of each published band; gaps fall to the band below). */
+export function kempleyDepthByWeight(kg: number): number {
+  const g = kg * 1000;
+  let d = KEMPLEY_WEIGHT[0][1];
+  for (const [lo, depth] of KEMPLEY_WEIGHT) if (g >= lo) d = depth;
+  return d;
+}
+
+export const weightPlus6 = (kg: number): number => Math.round((kg + 6) * 10) / 10;
+
+export interface LmaResult { eligible: boolean | null; text: string }
+/** Size 1 LMA: 34 weeks or more AND 2 kg or more. */
+export function neoLma(p: NeoPatient): LmaResult {
+  const wOk = p.weightKg === undefined ? null : p.weightKg >= 2;
+  const gOk = p.gaWeeks === undefined ? null : p.gaWeeks >= 34;
+  if (wOk === false || gOk === false) return { eligible: false, text: 'Size 1 not indicated: needs 34 wk or more and 2 kg or more' };
+  if (wOk === true && gOk === true) return { eligible: true, text: 'Size 1 (34 wk or more and 2 kg or more)' };
+  return { eligible: null, text: 'Size 1 only if 34 wk or more and 2 kg or more; enter both to confirm' };
+}
+
+/** Starting oxygen by gestational age (2025 AHA/AAP). */
+export function neoFio2(ga?: number): string {
+  if (ga === undefined) return '21% if 35 wk or more; 21-30% if 32 to under 35 wk; 30-100% if under 32 wk';
+  if (ga >= 35) return '21%';
+  if (ga >= 32) return '21-30%';
+  return '30-100%';
+}
+
+const one1 = (n: number): string => n.toFixed(1);
+const nrow = (id: string, name: string, dose: string, basis: string, cite: number[], notes?: string, extra?: Partial<NeoRow>): NeoRow =>
+  ({ id, name, lines: [{ dose }], basis, capped: false, cite, notes, ...extra });
+
+export function neoAirwayRows(p: NeoPatient): NeoRow[] {
+  const rows: NeoRow[] = [];
+  const bi = neoBandIndex(p);
+  if (bi >= 0) {
+    const b = NEO_BANDS[bi];
+    const by = p.weightKg !== undefined ? `weight band ${b.label}` : `gestational age (weight not entered)`;
+    rows.push(nrow('ett', 'Endotracheal tube (uncuffed)', `${b.ett} mm`, `Sizing by ${by}.`, [3]));
+    // depth
+    if (p.gaWeeks !== undefined) {
+      const d = kempleyDepthByGa(p.gaWeeks);
+      const check = p.weightKg !== undefined ? ` Weight + 6 check: ${one1(weightPlus6(p.weightKg))} cm.` : '';
+      rows.push(nrow('depth', 'ETT depth at lip', `${one1(d)} cm`, `Kempley table for ${p.gaWeeks} wk.${check}`, [2], 'NRP 9th ed reportedly measures depth at the gum line; lip values shown until confirmed.'));
+    } else if (p.weightKg !== undefined) {
+      rows.push(nrow('depth', 'ETT depth at lip', `${one1(weightPlus6(p.weightKg))} cm`, `Weight + 6 cm. Kempley weight pairing: ${one1(kempleyDepthByWeight(p.weightKg))} cm.`, [2], 'NRP 9th ed reportedly measures depth at the gum line; lip values shown until confirmed. Enter gestational age for the Kempley GA value.'));
+    }
+    rows.push(nrow('blade', 'Laryngoscope blade (straight)', b.blade, `Weight band ${b.label}.`, [3]));
+    rows.push(nrow('suction', 'Suction catheter', b.suction, `Weight band ${b.label}.`, [3]));
+    rows.push(nrow('og', 'OG tube', b.og, `Weight band ${b.label}.`, [3]));
+  }
+  const lma = neoLma(p);
+  rows.push(nrow('lma', 'Laryngeal mask', lma.eligible === false ? 'Not indicated' : 'Size 1', lma.text + '. May be used during compressions.', [1, 3], undefined, lma.eligible === false ? { warn: 'NOT ELIGIBLE' } : undefined));
+  return rows;
+}
+
+interface NeoDrugDef {
+  id: string; name: string; indication: string; tab: 'drugs' | 'rosc'; unit: string;
+  perKg: number | [number, number]; conc?: { perMl: number; label: string }; route: string; notes?: string; cite: number[];
+  basisUnit?: string; whole?: boolean;
+}
+const nd = (d: NeoDrugDef): NeoDrugDef => d;
+
+export const NEO_DRUGS: NeoDrugDef[] = [
+  nd({ id: 'epi-iv', name: 'Epinephrine', indication: 'HR below 60 after 30 s of effective ventilation and compressions', tab: 'drugs', unit: 'mg', perKg: [0.01, 0.03], conc: { perMl: 0.1, label: '0.1 mg/mL' }, route: 'IV/IO/UVC', notes: 'Follow with a 3 mL NS flush regardless of weight. Repeat every 3-5 min.', cite: [1] }),
+  nd({ id: 'epi-ett', name: 'Epinephrine', indication: 'Only while IV/IO access is being placed', tab: 'drugs', unit: 'mg', perKg: [0.05, 0.1], conc: { perMl: 0.1, label: '0.1 mg/mL' }, route: 'ETT', notes: 'IV/IO preferred; switch as soon as access is established.', cite: [1] }),
+  nd({ id: 'volume', name: 'Volume: normal saline or O-negative PRBC', indication: 'Suspected blood loss with no response to epinephrine', tab: 'drugs', unit: 'mL', perKg: [10, 20], route: 'IV/IO/UVC', notes: 'Repeat if inadequate response.', cite: [1] }),
+  nd({ id: 'd10', name: 'Dextrose 10% (D10)', indication: 'Low glucose', tab: 'drugs', unit: 'mL', perKg: 2, route: 'IV', notes: '2 mL/kg of D10 = 0.2 g/kg. Recheck glucose.', cite: [5] }),
+  nd({ id: 'ampicillin', name: 'Ampicillin', indication: 'Suspected early-onset sepsis, first dose', tab: 'rosc', unit: 'mg', perKg: 50, route: 'IV', notes: 'Interval per pharmacy/Neofax by gestational age and postnatal age.', cite: [5] }),
+  nd({ id: 'gentamicin', name: 'Gentamicin', indication: 'Suspected early-onset sepsis, first dose', tab: 'rosc', unit: 'mg', perKg: 4, route: 'IV', notes: '4 mg/kg every 24 h applies at 0-7 days. Interval by gestational age and postnatal age per pharmacy/Neofax.', cite: [5] }),
+  nd({ id: 'acyclovir', name: 'Acyclovir', indication: 'Suspected neonatal HSV, first dose', tab: 'rosc', unit: 'mg', perKg: 20, route: 'IV', notes: 'Interval and renal adjustment per pharmacy.', cite: [5] }),
+  nd({ id: 'alprostadil', name: 'Alprostadil (PGE1)', indication: 'Suspected duct-dependent lesion', tab: 'rosc', unit: 'mcg/min', perKg: [0.05, 0.1], basisUnit: 'mcg/kg/min', route: 'IV infusion', notes: 'Apnea risk: be ready to intubate. Rate per pharmacy dilution.', cite: [5] }),
+  nd({ id: 'phenobarbital', name: 'Phenobarbital', indication: 'Neonatal seizure, loading dose', tab: 'rosc', unit: 'mg', perKg: 20, route: 'IV', notes: 'Per the CHOP neonatal seizure pathway.', cite: [6] }),
+];
+
+function neoDoseLine(d: NeoDrugDef, w: number): DoseLine {
+  const lo = Array.isArray(d.perKg) ? d.perKg[0] : d.perKg;
+  const hi = Array.isArray(d.perKg) ? d.perKg[1] : d.perKg;
+  const out: DoseLine = { dose: `${range(fmtAmount(lo * w, d.whole), fmtAmount(hi * w, d.whole))} ${d.unit}` };
+  if (d.conc) out.ml = `${range(fmtMl((lo * w) / d.conc.perMl), fmtMl((hi * w) / d.conc.perMl))} mL`;
+  return out;
+}
+
+function neoBasis(d: NeoDrugDef): string {
+  const k = Array.isArray(d.perKg) ? `${kgText(d.perKg[0])}-${kgText(d.perKg[1])}` : kgText(d.perKg);
+  return `${k} ${d.basisUnit ?? `${d.unit}/kg`}`;
+}
+
+/** Drug rows for the Drugs tab (resuscitation) and After ROSC tab (first doses). Per-kg text when no weight is entered. */
+export function neoDrugRows(p: NeoPatient, tab?: 'drugs' | 'rosc'): NeoRow[] {
+  const rows: NeoRow[] = [];
+  for (const d of NEO_DRUGS) {
+    if (tab && d.tab !== tab) continue;
+    const basis = neoBasis(d);
+    const lines: DoseLine[] = p.weightKg !== undefined ? [neoDoseLine(d, p.weightKg)] : [{ dose: basis }];
+    rows.push({ id: d.id, name: d.name, indication: d.indication, route: d.route, lines, basis, capped: false, conc: d.conc?.label, notes: d.notes, cite: d.cite });
+    if (d.id === 'epi-iv') rows.push({ id: 'epi-flush', name: 'NS flush after IV/IO/UVC epinephrine', lines: [{ dose: '3 mL', ml: '3 mL' }], basis: 'Fixed volume regardless of weight', capped: false, cite: [1] });
+  }
+  if (!tab || tab === 'drugs') {
+    rows.push({ id: 'naloxone', name: 'Naloxone', indication: 'Delivery-room resuscitation', lines: [{ dose: 'Not recommended' }], basis: 'Ventilate; do not give naloxone in the delivery room.', capped: false, cite: [4], warn: 'NOT RECOMMENDED' });
+    rows.push({ id: 'bicarb', name: 'Sodium bicarbonate', indication: 'Delivery-room resuscitation', lines: [{ dose: 'Not recommended' }], basis: 'Not part of routine neonatal resuscitation.', capped: false, cite: [4], warn: 'NOT RECOMMENDED' });
+  }
+  return rows;
+}
+
+export interface NeoHeader { title: string; line: string; source: string; flags: string[] }
+
+export function neoHeader(p: NeoPatient): NeoHeader {
+  const parts: string[] = ['NEONATE'];
+  if (p.weightKg !== undefined) parts.push(`${fmtAmount(p.weightKg)} kg`);
+  if (p.gaWeeks !== undefined) parts.push(`${p.gaWeeks} wk`);
+  if (p.gaWeeks !== undefined) parts.push(p.gaWeeks < 37 ? 'preterm' : 'term');
+  else if (p.weightKg === undefined) parts.push('weight or GA needed');
+  const flags: string[] = [];
+  if (p.weightKg === undefined) flags.push('Enter a weight for mg and mL doses');
+  if (p.weightKg !== undefined && p.weightKg >= 3) flags.push('3 kg or more: values shown are the 3 kg and over band');
+  if (p.ageMonths !== undefined) flags.push(`Age ${fmtAmount(p.ageMonths * 30.4375)} days`);
+  const bi = neoBandIndex(p);
+  const source = bi >= 0 ? `Sizing band: ${NEO_BANDS[bi].label}${p.weightKg === undefined ? ' (from gestational age)' : ''}.` : 'Enter a weight (1.8kg or 1800g), a gestational age (32wk), or both.';
+  return { title: parts[0], line: parts.slice(1).join(' · '), source, flags };
+}
+
+const SPO2_TARGETS = '1 min 60-65%, 2 min 65-70%, 3 min 70-75%, 4 min 75-80%, 5 min 80-85%, 10 min 85-95%';
+
+export function neoTabs(p: NeoPatient): Record<NeoTab, NeoTabContent> {
+  const airway: NeoTabContent = { notes: ['Confirm with exhaled CO2 detector and a rising heart rate. Limit each intubation attempt to 30 seconds.', 'Depth is at the lip.'], rows: neoAirwayRows(p) };
+  const uvc = p.weightKg !== undefined ? (p.weightKg < 1.5 ? '3.5 Fr' : '5 Fr') : '3.5 Fr if under 1.5 kg; 5 Fr otherwise';
+  const breathe: NeoTabContent = {
+    notes: ['Ventilation is the priority. Corrective steps: MR SOPA (mask, reposition, suction, open mouth, pressure, alternative airway).'],
+    rows: [
+      nrow('ppv', 'Positive pressure ventilation', '30-60 /min', 'Start if apneic or gasping, or HR below 100 after initial steps.', [1]),
+      nrow('pip', 'Initial peak inflation pressure', '20-30 cm H2O', 'Higher only if the heart rate does not rise. PEEP 5 cm H2O.', [1]),
+      nrow('fio2', 'Starting oxygen', neoFio2(p.gaWeeks), 'Titrate to the right-hand (preductal) SpO2.', [1], p.gaWeeks === undefined ? 'Enter gestational age to show one band.' : undefined),
+      nrow('spo2', 'Preductal SpO2 targets', SPO2_TARGETS, 'Right hand or wrist.', [1, 4]),
+      nrow('si', 'Sustained inflation', 'Not recommended', 'Inflations longer than 5 seconds are not recommended in preterm infants.', [1], undefined, { warn: 'NOT RECOMMENDED' }),
+      nrow('cord', 'Cord management', 'Defer clamping 60 s or more', 'Vigorous infants. Intact cord milking only at 28+0 to 36+6 wk when deferral is not possible; not under 28 wk.', [1]),
+    ],
+  };
+  const circulate: NeoTabContent = {
+    notes: ['Secure the airway first (ETT or laryngeal mask) if compressions are needed.'],
+    rows: [
+      nrow('cpr', 'Chest compressions', '3:1 (90 + 30 /min)', 'If HR is below 60 after 30 s of ventilation that moves the chest. Two-thumb encircling, depth one third of AP diameter.', [1]),
+      nrow('cpr-o2', 'Oxygen during compressions', '100%', 'Then titrate down after ROSC.', [1]),
+      nrow('access', 'Vascular access', 'UVC (preferred) or IO', 'Emergency low-lying UVC: insert 2-4 cm past the skin until free blood return.', [1, 4]),
+      nrow('uvc', 'UVC size', uvc, 'Catheter size by weight.', [4]),
+    ],
+  };
+  const drugs: NeoTabContent = { notes: p.weightKg === undefined ? ['Enter a weight for mg and mL doses; per-kg doses are shown until then.'] : ['Concentration for epinephrine: 0.1 mg/mL (1:10,000). Confirm against your stock.'], rows: neoDrugRows(p, 'drugs') };
+  const rosc: NeoTabContent = {
+    notes: ['First doses only. Intervals for preterm infants: per pharmacy/Neofax.'],
+    rows: [
+      nrow('temp', 'Temperature', '36.5-37.5 C', 'Avoid both hypothermia and hyperthermia.', [1]),
+      nrow('glucose', 'Glucose', 'Check early', 'Treat low glucose with D10 (see Drugs).', [1, 4]),
+      nrow('cool', 'Therapeutic hypothermia', 'Refer', '36 wk or more with moderate to severe encephalopathy, within 6 hours, under NICU conditions.', [1, 4]),
+      ...neoDrugRows(p, 'rosc'),
+      nrow('stop', 'Stopping', 'About 20 min', 'If all resuscitation steps are completed and no heart rate is detected by about 20 minutes, redirection of care may be discussed with the team and family.', [1]),
+    ],
+  };
+  return { airway, breathe, circulate, drugs, rosc };
+}
+
+// ---- Neonate search
+
+const NEO_PIECES: Record<string, (p: NeoPatient) => string | null> = {
+  ett: p => { const bi = neoBandIndex(p); return bi >= 0 ? `ETT ${NEO_BANDS[bi].ett} uncuffed` : 'ETT 2.5 (<1 kg), 3.0 (1-<2 kg), 3.5 (2-<3 kg)'; },
+  depth: p => {
+    if (p.gaWeeks !== undefined) return `depth ${one1(kempleyDepthByGa(p.gaWeeks))} cm at lip`;
+    if (p.weightKg !== undefined) return `depth ${one1(weightPlus6(p.weightKg))} cm at lip`;
+    return 'depth by GA (Kempley) or weight + 6 cm';
+  },
+  blade: p => { const bi = neoBandIndex(p); return bi >= 0 ? `blade ${NEO_BANDS[bi].blade}` : 'blade 00 / 0 / 0-1 / 1 by weight'; },
+  lma: p => `LMA ${neoLma(p).text}`,
+  uvc: p => `UVC ${p.weightKg !== undefined ? (p.weightKg < 1.5 ? '3.5 Fr' : '5 Fr') : '3.5 Fr if under 1.5 kg, 5 Fr otherwise'}, 2-4 cm past skin`,
+  epi: p => { const r = neoDrugRows(p, 'drugs').find(x => x.id === 'epi-iv'); return r ? `Epinephrine IV/IO/UVC ${r.lines[0].dose}${r.lines[0].ml ? ` (${r.lines[0].ml} of 0.1 mg/mL)` : ' of 0.1 mg/mL'}, then 3 mL NS flush` : null; },
+  volume: p => { const r = neoDrugRows(p, 'drugs').find(x => x.id === 'volume'); return r ? `Volume ${r.lines[0].dose}` : null; },
+  d10: p => { const r = neoDrugRows(p, 'drugs').find(x => x.id === 'd10'); return r ? `D10 ${r.lines[0].dose}` : null; },
+  ppv: p => `PPV 30-60 /min, PIP 20-30, FiO2 ${neoFio2(p.gaWeeks)}`,
+  cpr: () => 'CPR 3:1, 90 compressions + 30 inflations /min',
+};
+
+interface NeoTarget { re: RegExp; tab: NeoTab; pieces: string[] }
+const NEO_TARGETS: NeoTarget[] = [
+  { re: /\b(?:uvc|umbilical)\b/, tab: 'circulate', pieces: ['uvc', 'epi'] },
+  { re: /\bdepth\b/, tab: 'airway', pieces: ['depth', 'ett'] },
+  { re: /\b(?:ett|et\s*tube|endotracheal|intubat\w*|(?<!chest\s)(?<!ng\s)(?<!og\s)tube)\b/, tab: 'airway', pieces: ['ett', 'depth'] },
+  { re: /\bblade\b|\blaryngoscope\b/, tab: 'airway', pieces: ['blade', 'ett'] },
+  { re: /\blma\b|\blaryngeal\s*mask\b/, tab: 'airway', pieces: ['lma', 'ett'] },
+  { re: /\b(?:epi|epinephrine|adrenaline)\b/, tab: 'drugs', pieces: ['epi'] },
+  { re: /\b(?:volume|bolus|saline)\b/, tab: 'drugs', pieces: ['volume'] },
+  { re: /\b(?:dextrose|d10)\b/, tab: 'drugs', pieces: ['d10'] },
+  { re: /\b(?:ppv|ventilat\w*|fio2|oxygen)\b/, tab: 'breathe', pieces: ['ppv'] },
+  { re: /\b(?:cpr|compressions?)\b/, tab: 'circulate', pieces: ['cpr', 'epi'] },
+  { re: /\b(?:dose|doses|drugs?|numbers|resus\w*)\b/, tab: 'drugs', pieces: ['ett', 'depth', 'epi'] },
+];
+
+const NEO_TEAL = '#0F766E';
+
+function neoRoute(p: NeoPatient, tab: NeoTab): string {
+  const params: string[] = [];
+  if (p.weightKg !== undefined) params.push(`q=${encodeURIComponent(`${kgText(p.weightKg)}kg`)}`);
+  if (p.gaWeeks !== undefined) params.push(`ga=${p.gaWeeks}`);
+  params.push(`tab=${tab}`);
+  return `/calculator/neo-numbers?${params.join('&')}`;
+}
+
+function neoCard(p: NeoPatient, pieces: string[], tab: NeoTab): PediSearchAnswer {
+  const h = neoHeader(p);
+  const known = p.weightKg !== undefined || p.gaWeeks !== undefined;
+  return {
+    title: known ? `${h.title} · ${h.line}` : 'Neonate Numbers (<3 kg)',
+    subtitle: pieces.slice(0, 3).join(' · ') || 'Tube, depth, ventilation, epinephrine and first doses by weight and gestational age',
+    preview: 'Neonate Numbers: tap for airway, drugs and doses',
+    route: neoRoute(p, tab), bgHex: NEO_TEAL, textHex: '#fff', pointer: false,
+  };
+}
+
+/** Teal neonate card for a Home search query, or null (not a neonate-numbers question). */
+export function neoSearchAnswer(query: string): PediSearchAnswer | null {
+  const q = (query ?? '').toLowerCase().trim();
+  if (q.length < 3) return null;
+  const input = parseInput(q);
+  const p = neoPatientFrom(input);
+  const uvc = /\b(?:uvc|umbilical\s*(?:vein|venous|line|catheter))\b/.test(q);
+  const signal = uvc || input.newborn === true || p.gaWeeks !== undefined || (p.weightKg !== undefined && p.weightKg < 3) || (p.ageMonths !== undefined && p.ageMonths < 1);
+  if (!signal) return null;
+  const hits = NEO_TARGETS.map(t => ({ t, i: t.re.exec(q)?.index ?? -1 })).filter(h => h.i >= 0).sort((a, b) => a.i - b.i);
+  if (hits.length === 0) return null;
+  const pieces: string[] = [];
+  for (const h of hits) for (const k of h.t.pieces) { const txt = NEO_PIECES[k](p); if (txt && !pieces.includes(txt)) pieces.push(txt); }
+  return neoCard(p, pieces, hits[0].t.tab);
+}
+
+// ===================================================================
 // Home search: pediatric numbers answer
 // ===================================================================
 
@@ -671,6 +1024,8 @@ function pieceText(p: Patient, key: string): string | null {
 export function pediSearchAnswer(query: string): PediSearchAnswer | null {
   const q = (query ?? '').toLowerCase().trim();
   if (q.length < 3) return null;
+  const neo = neoSearchAnswer(q);
+  if (neo) return neo;
   const hasPointer = POINTER_RE.test(q);
   const tok = PEDI_TOKEN.exec(q);
   let input: ParsedInput = {};
@@ -705,12 +1060,7 @@ export function pediSearchAnswer(query: string): PediSearchAnswer | null {
   const unitToken = compact.weightKg !== undefined ? `${fmtAmount(compact.weightKg)}kg` : compact.lengthCm !== undefined ? `${fmtAmount(compact.lengthCm)}cm`
     : compact.ageMonths !== undefined ? (compact.ageMonths < 24 ? `${fmtAmount(compact.ageMonths)}mo` : `${fmtAmount(compact.ageMonths / 12)}y`) : token;
 
-  if (p.zone.kind === 'neonate') {
-    return {
-      title: headerLine(p), subtitle: 'Under 3 kg: use the Neonatal Resuscitation (NRP) consult', preview: 'Neonatal Resuscitation (NRP)',
-      route: '/tree/neonatal-resus', bgHex: '#808080', textHex: '#fff', pointer: false,
-    };
-  }
+  if (p.zone.kind === 'neonate') return neoCard(neoPatientFrom(input), [], 'airway');
   const pieces: string[] = [];
   for (const h of hits) for (const k of h.t.pieces) { const txt = pieceText(p, k); if (txt && !pieces.includes(txt)) pieces.push(txt); }
   if (pieces.length === 0) for (const k of ['size:ett', 'size:depth', 'drug:epi-ivio']) { const txt = pieceText(p, k); if (txt) pieces.push(txt); }

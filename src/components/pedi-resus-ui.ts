@@ -4,8 +4,9 @@
 import type { CalculatorDefinition } from './calculator.js';
 import {
   PEDI_CITATIONS, PEDI_FOOTER, PEDI_STOCK, PEDI_TABS, PEDI_TAB_LABELS, ZONE_RANGE_NOTE,
-  buildTabs, estimateWeightFromAge, fmtAmount, headerLine, parseInput, resolvePatient, zoneName,
-  type Patient, type PediRow, type PediTab, type PediUnit,
+  NEO_CITATIONS, NEO_FOOTER, NEO_TABS, NEO_TAB_LABELS,
+  buildTabs, estimateWeightFromAge, fmtAmount, headerLine, neoHeader, neoPatientFrom, neoTabs, parseInput, parseNeo, resolvePatient, zoneName,
+  type NeoPatient, type NeoRow, type NeoTab, type Patient, type PediRow, type PediTab, type PediUnit,
 } from './pedi-resus-engine.js';
 
 type Mode = 'zone' | 'weight' | PediTab;
@@ -34,19 +35,29 @@ const CSS = `
 .pz-name{font-size:17px;font-weight:700}
 .pz-route{font-size:13px;font-weight:600;color:var(--color-text-secondary,#5E6A74);margin-left:6px}
 .pz-ind{font-size:14px;color:var(--color-text-secondary,#5E6A74)}
-.pz-doses{text-align:right;flex:0 0 auto}
-.pz-line{display:flex;gap:8px;justify-content:flex-end;align-items:baseline}
+.pz-doses{text-align:right;flex:0 1 auto;min-width:0;max-width:66%}
+.pz-line{display:flex;flex-wrap:wrap;column-gap:8px;justify-content:flex-end;align-items:baseline}
 .pz-lab{font-size:13px;color:var(--color-text-secondary,#5E6A74)}
-.pz-big{font-size:24px;font-weight:800;line-height:1.15}
+.pz-big{font-size:22px;font-weight:800;line-height:1.15;white-space:nowrap}
 .pz-ml{font-size:17px;font-weight:700}
 .pz-basis{font-size:14px;margin-top:4px;color:var(--color-text-secondary,#5E6A74)}
 .pz-cap{display:inline-block;font-size:12px;font-weight:800;padding:2px 8px;border-radius:6px;background:var(--color-danger,#B22222);color:#fff;margin-left:6px}
 .pz-cite{font-size:12px;color:var(--color-text-secondary,#5E6A74);margin-left:6px}
 .pz-foot{margin-top:18px;font-size:13px;line-height:1.45;color:var(--color-text-secondary,#5E6A74)}
+.pz-neo-band{background:#0F766E;color:#fff;border-color:rgba(0,0,0,.35)}
+.pz-neo-in{display:flex;gap:8px;align-items:stretch}
+.pz-neo-in .pz-input{flex:1 1 60%;min-width:0}
+.pz-neo-in .pz-ga-wrap{flex:0 0 34%;position:relative;display:flex}
+.pz-neo-in .pz-ga{flex:1 1 auto;width:100%;font-size:18px;padding-right:40px}
+.pz-ga-wrap::after{content:'wk';position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:16px;font-weight:700;color:var(--color-text-secondary,#5E6A74);pointer-events:none}
+.pz-neo-bar .pz-chips{margin-top:8px}
+.pz-warn{display:inline-block;font-size:12px;font-weight:800;padding:2px 8px;border-radius:6px;background:var(--color-danger,#B22222);color:#fff;margin-left:6px}
+.pz-neo-tab[aria-selected=true]{background:#0F766E;border-color:#0F766E;color:#fff}
 .pz-link{display:inline-block;min-height:44px;line-height:44px;font-weight:700;color:var(--color-primary,#BF5700);cursor:pointer;background:none;border:0;padding:0;font-size:15px}
 `;
 
 let lastInput = '';
+let activeNeoTab: NeoTab = 'airway';
 let lastUnit: PediUnit = 'yr';
 
 function ensureStyle(): void {
@@ -70,7 +81,9 @@ function queryParams(): URLSearchParams {
   return new URLSearchParams(i >= 0 ? h.slice(i + 1) : '');
 }
 
-function rowEl(r: PediRow): HTMLElement {
+type RowLike = Pick<PediRow, 'name' | 'route' | 'indication' | 'lines' | 'basis' | 'capped' | 'conc' | 'notes' | 'cite'> & { warn?: string };
+
+function rowEl(r: RowLike): HTMLElement {
   const row = el('div', 'pz-row');
   const top = el('div', 'pz-top');
   const left = el('div');
@@ -91,6 +104,7 @@ function rowEl(r: PediRow): HTMLElement {
   row.appendChild(top);
   const basis = el('div', 'pz-basis', r.basis);
   if (r.capped) basis.appendChild(el('span', 'pz-cap', 'CAPPED AT MAX'));
+  if (r.warn) basis.appendChild(el('span', 'pz-warn', r.warn));
   basis.appendChild(el('span', 'pz-cite', `[${r.cite.join(', ')}]`));
   row.appendChild(basis);
   if (r.conc) row.appendChild(el('div', 'pz-basis', `mL at ${r.conc} (${PEDI_STOCK})`));
@@ -138,6 +152,136 @@ function tabEl(p: Patient, tab: PediTab, content: ReturnType<typeof buildTabs>):
   for (const r of c.rows) wrap.appendChild(rowEl(r));
   void p;
   return wrap;
+}
+
+// ===================================================================
+// Neonate Numbers (<3 kg): teal band, five tabs. Numbers from neoTabs() in the engine.
+// ===================================================================
+
+function neoHash(p: NeoPatient, tab?: NeoTab): string {
+  const params: string[] = [];
+  if (p.weightKg !== undefined) params.push(`q=${encodeURIComponent(`${fmtAmount(p.weightKg)}kg`)}`);
+  if (p.gaWeeks !== undefined) params.push(`ga=${p.gaWeeks}`);
+  if (tab) params.push(`tab=${tab}`);
+  return `#/calculator/neo-numbers${params.length ? '?' + params.join('&') : ''}`;
+}
+
+/** Teal band plus tabs for one neonate. Shared by the standalone screen and the pedi tool hand-off. */
+function renderNeoPanel(out: HTMLElement, p: NeoPatient, startTab: NeoTab, onTab?: (t: NeoTab) => void): void {
+  const h = neoHeader(p);
+  const band = el('div', 'pz-band pz-neo-band');
+  band.setAttribute('aria-live', 'polite');
+  band.appendChild(el('div', 'pz-zone', h.title));
+  if (h.line) band.appendChild(el('div', 'pz-head', h.line));
+  band.appendChild(el('div', 'pz-src', h.source));
+  if (h.flags.length) {
+    const flags = el('div', 'pz-flags');
+    for (const f of h.flags) flags.appendChild(el('span', 'pz-flag', f));
+    band.appendChild(flags);
+  }
+  out.appendChild(band);
+  const content = neoTabs(p);
+  let active = startTab;
+  const tabs = el('div', 'pz-tabs');
+  tabs.setAttribute('role', 'tablist');
+  const body = el('div');
+  const show = (): void => {
+    body.replaceChildren();
+    for (const n of content[active].notes) body.appendChild(el('div', 'pz-note', n));
+    for (const r of content[active].rows as NeoRow[]) body.appendChild(rowEl(r));
+    buttons.forEach((b, i) => b.setAttribute('aria-selected', String(NEO_TABS[i] === active)));
+  };
+  const buttons: HTMLButtonElement[] = NEO_TABS.map(t => {
+    const b = el('button', 'pz-tab pz-neo-tab', NEO_TAB_LABELS[t]);
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.addEventListener('click', () => { active = t; onTab?.(t); show(); });
+    tabs.appendChild(b);
+    return b;
+  });
+  out.appendChild(tabs);
+  out.appendChild(body);
+  show();
+}
+
+let lastNeoWeight = '';
+let lastNeoGa = '';
+let lastNeoUnit: 'kg' | 'g' = 'kg';
+
+export function mountNeo(container: HTMLElement): void {
+  ensureStyle();
+  const params = queryParams();
+  const q = params.get('q');
+  if (q !== null) {
+    lastNeoWeight = q;
+    lastNeoGa = params.get('ga') ?? '';
+    lastNeoUnit = /\d\s*g(?:m|ms|rams?)?\s*$/i.test(q) && !/kg\s*$/i.test(q) ? 'g' : 'kg';
+  } else if (params.has('ga')) lastNeoGa = params.get('ga') ?? '';
+  let activeTab: NeoTab = (NEO_TABS as string[]).includes(params.get('tab') ?? '') ? (params.get('tab') as NeoTab) : 'airway';
+
+  const root = el('div', 'pz');
+  const bar = el('div', 'pz-bar pz-neo-bar');
+  const row = el('div', 'pz-neo-in');
+  const wIn = el('input', 'pz-input');
+  wIn.type = 'text';
+  wIn.setAttribute('inputmode', 'decimal');
+  wIn.setAttribute('autocomplete', 'off');
+  wIn.setAttribute('aria-label', 'Weight');
+  wIn.placeholder = 'Weight: 1.8kg or 1800g';
+  wIn.value = lastNeoWeight;
+  const gIn = el('input', 'pz-input pz-ga');
+  gIn.type = 'text';
+  gIn.setAttribute('inputmode', 'numeric');
+  gIn.setAttribute('autocomplete', 'off');
+  gIn.setAttribute('aria-label', 'Gestational age in weeks');
+  gIn.placeholder = 'GA wk';
+  gIn.value = lastNeoGa;
+  row.appendChild(wIn);
+  const gWrap = el('div', 'pz-ga-wrap');
+  gWrap.appendChild(gIn);
+  row.appendChild(gWrap);
+  bar.appendChild(row);
+  const chips = el('div', 'pz-chips');
+  const chipEls: HTMLButtonElement[] = [];
+  const units: ('kg' | 'g')[] = ['kg', 'g'];
+  const syncChips = (): void => chipEls.forEach((b, i) => b.setAttribute('aria-pressed', String(units[i] === lastNeoUnit)));
+  for (const u of units) {
+    const b = el('button', 'pz-chip', u);
+    b.type = 'button';
+    b.addEventListener('click', () => {
+      lastNeoUnit = u;
+      const m = /^\s*(\d+(?:[.,]\d+)?)\s*$/.exec(wIn.value);
+      if (m) wIn.value = `${m[1]}${u}`;
+      syncChips();
+      render();
+      wIn.focus();
+    });
+    chipEls.push(b);
+    chips.appendChild(b);
+  }
+  bar.appendChild(chips);
+  root.appendChild(bar);
+  const out = el('div');
+  root.appendChild(out);
+  root.appendChild(el('div', 'pz-foot', NEO_FOOTER));
+  container.appendChild(root);
+
+  function render(): void {
+    lastNeoWeight = wIn.value;
+    lastNeoGa = gIn.value;
+    const p = parseNeo(wIn.value, lastNeoUnit, gIn.value);
+    syncChips();
+    // Keep the teal visible while scrolling: tint the sticky bar like the pedi tool.
+    wIn.style.borderColor = '#0F766E';
+    wIn.style.boxShadow = 'inset 10px 0 0 #0F766E';
+    bar.style.borderBottom = '6px solid #0F766E';
+    out.replaceChildren();
+    renderNeoPanel(out, p, activeTab, (t) => { activeTab = t; });
+  }
+  wIn.addEventListener('input', render);
+  gIn.addEventListener('input', render);
+  syncChips();
+  render();
 }
 
 export function mountPedi(container: HTMLElement, mode: Mode): void {
@@ -203,7 +347,7 @@ export function mountPedi(container: HTMLElement, mode: Mode): void {
     const p = resolvePatient(parse(input.value));
     syncChips();
     // Keep the zone color visible while scrolling the drug lists: tint the sticky input bar.
-    const zc = p && p.zone.kind === 'zone' ? p.zone.zone.bgHex : '';
+    const zc = p && p.zone.kind === 'zone' ? p.zone.zone.bgHex : p && p.zone.kind === 'neonate' ? '#0F766E' : '';
     input.style.borderColor = zc;
     input.style.boxShadow = zc ? `inset 10px 0 0 ${zc}` : '';
     bar.style.borderBottom = zc ? `6px solid ${zc}` : '';
@@ -211,16 +355,15 @@ export function mountPedi(container: HTMLElement, mode: Mode): void {
       out.appendChild(el('div', 'pz-empty', 'Enter an age, a weight or a length. A measured weight beats length, and length beats age.'));
       return;
     }
-    out.appendChild(bandEl(p));
+    if (p.zone.kind !== 'neonate') out.appendChild(bandEl(p));
     if (p.zone.kind === 'neonate') {
-      const msg = el('div', 'pz-row');
-      msg.appendChild(el('div', 'pz-name', 'Neonate or under 3 kg'));
-      msg.appendChild(el('div', 'pz-basis', 'Zone tape sizes do not apply. Use the Neonatal Resuscitation (NRP) consult for tube size by gestational age and doses. [1][2]'));
-      const go = el('button', 'pz-link', 'Open Neonatal Resuscitation (NRP)');
-      go.type = 'button';
-      go.addEventListener('click', () => { window.location.hash = '#/tree/neonatal-resus'; });
-      msg.appendChild(go);
-      out.appendChild(msg);
+      out.replaceChildren();
+      const np = neoPatientFrom(p.input);
+      renderNeoPanel(out, np, activeNeoTab, (t) => { activeNeoTab = t; });
+      const full = el('button', 'pz-link', 'Open Neonate Numbers (<3 kg) as its own screen');
+      full.type = 'button';
+      full.addEventListener('click', () => { window.location.hash = neoHash(np); });
+      out.appendChild(full);
       return;
     }
     const content = buildTabs(p);
@@ -287,3 +430,10 @@ export const PEDI_CALCULATORS: CalculatorDefinition[] = [
   PEDI_ZONE_CALCULATOR, PEDI_WEIGHT_CALCULATOR, PEDI_AIRWAY_CALCULATOR, PEDI_TUBES_CALCULATOR,
   PEDI_ARREST_CALCULATOR, PEDI_RSI_CALCULATOR, PEDI_SEIZURE_CALCULATOR, PEDI_SHOCK_CALCULATOR,
 ];
+
+export const NEO_NUMBERS_CALCULATOR: CalculatorDefinition = {
+  id: 'neo-numbers', title: 'Neonate Numbers (<3 kg)', subtitle: 'Tube, depth, ventilation, epinephrine and first doses by weight and gestational age',
+  description: 'Weight (kg or g) and gestational age give ETT size and depth, blade, suction, OG, LMA eligibility, starting oxygen, compression and drug doses in mg and mL. 2025 AHA/AAP Part 5 numbers; tube depth from Kempley.',
+  fields: [], results: [], thresholdNote: NEO_FOOTER, citations: NEO_CITATIONS,
+  customRender: (container) => mountNeo(container),
+};
