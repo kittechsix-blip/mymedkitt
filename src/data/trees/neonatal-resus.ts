@@ -261,7 +261,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'ETT & Equipment Sizing',
-    body: 'NEONATAL ETT SIZING [1][2]\n\n**ETT size = Gestational Age (weeks) / 10**\n\n**Sizing table:**\n• 23–24 weeks → ETT **2.5**\n• 25–28 weeks → ETT **3.0**\n• 29–34 weeks → ETT **3.5**\n• ≥35 weeks → ETT **3.5–4.0**\n\n**Laryngoscope blade:**\n• **Miller 0** — most neonates\n• **Miller 00** — extreme preterm (<28 weeks)\n\n**ETT depth at lip:**\n• **6 + weight (kg) = cm at lip**\n• Example: 3 kg baby → 6 + 3 = 9 cm at lip\n\n**Securing tips:**\n• Hold tube to roof of mouth during securing\n• Neonatal ETTs are **extremely easy to dislodge** — secure firmly\n• Confirm with CO2 detector + bilateral breath sounds\n• Recheck position after every patient movement',
+    body: 'NEONATAL ETT SIZING [1][2]\n\nSame table as the Neonate Numbers tool (single source). Weight picks the band; use gestational age if weight is unknown.\n\n**Sizing table (uncuffed ETT, straight blade):**\n• <1 kg or <28 wk → ETT **2.5**, blade **00**\n• 1 to <2 kg or 28 to <34 wk → ETT **3.0**, blade **0**\n• 2 to <3 kg or 34 to <38 wk → ETT **3.5**, blade **0-1**\n• ≥3 kg or ≥38 wk → ETT **3.5-4.0**, blade **1**\n\n**ETT depth at lip:**\n• Kempley GA table (e.g. 28-29 wk 6.5 cm, 30-32 wk 7.0 cm, 38-40 wk 8.5 cm) with a check of **weight (kg) + 6 cm**\n• Example: 3 kg baby → 6 + 3 = 9 cm at lip\n• Lip values shown; NRP 9th ed reportedly measures at the gum line, so confirm against your protocol\n\n**Securing tips:**\n• Hold tube to roof of mouth during securing\n• Neonatal ETTs are **extremely easy to dislodge** — secure firmly\n• Confirm with CO2 detector + bilateral breath sounds\n• Recheck position after every patient movement',
     citation: [1, 2],
     images: [
       {
@@ -270,8 +270,9 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
         caption: 'Neonatal Numbers: Term vs Pre-Term equipment sizing and medication dosing.',
       },
     ],
+    calculatorLinks: [{ id: 'neo-numbers', label: 'Neonate Numbers (<3 kg)' }],
     next: 'nrp-hr60-check',
-    summary: 'ETT size = GA(wk)/10; depth at lip = 6 + weight(kg); Miller 0 for most neonates, Miller 00 for extreme preterm',
+    summary: 'ETT 2.5 (<1 kg) / 3.0 (1-<2 kg) / 3.5 (2-<3 kg) / 3.5-4.0 (≥3 kg), same table as Neonate Numbers; depth at lip by Kempley GA table, check weight + 6 cm',
   },
 
   {
@@ -378,7 +379,7 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     type: 'info',
     module: 5,
     title: 'Umbilical Venous Catheter (UVC)',
-    body: 'UVC PROCEDURE [1][2]\n\n**Umbilical cord anatomy:**\n• **2 arteries** — thick-walled, small lumen (at top of cross-section)\n• **1 vein** — thin-walled, large lumen (at bottom of cross-section)\n• **Catheterize the VEIN** — larger, easier to cannulate\n\n**Catheter size:**\n• **5 French** — term\n• **3.5 French** — preterm\n\n**Procedure:**\n1. Tie **umbilical tape** at base of stump — gentle tie to control bleeding\n2. Cut cord 1–2 cm above skin\n3. Identify the single large-lumen vein\n4. **Prime catheter** with NS\n5. Insert gently — **only 2–4 cm** until blood aspirates freely\n6. Do NOT advance further — risk of hepatic injury\n\n**IO access** is an acceptable alternative if UVC cannot be placed quickly.\n\n**Once access is established:** give IV epinephrine (preferred over ET route). [1][2]',
+    body: 'UVC PROCEDURE [1][2]\n\n**Umbilical cord anatomy:**\n• **2 arteries** — thick-walled, small lumen (at top of cross-section)\n• **1 vein** — thin-walled, large lumen (at bottom of cross-section)\n• **Catheterize the VEIN** — larger, easier to cannulate\n\n**Catheter size:**\n• **3.5 French** if <1.5 kg\n• **5 French** if ≥1.5 kg\n\n**Procedure:**\n1. Tie **umbilical tape** at base of stump — gentle tie to control bleeding\n2. Cut cord 1–2 cm above skin\n3. Identify the single large-lumen vein\n4. **Prime catheter** with NS\n5. Insert gently — **only 2–4 cm** until blood aspirates freely\n6. Do NOT advance further — risk of hepatic injury\n\n**IO access** is an acceptable alternative if UVC cannot be placed quickly.\n\n**Once access is established:** give IV epinephrine (preferred over ET route). [1][2]',
     citation: [1, 2],
     images: [
       {
@@ -387,8 +388,9 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
         caption: 'UVC anatomy: 2 arteries (thick, small) + 1 vein (thin, large). Emergency insertion: 2-4 cm, until blood aspirates freely.',
       },
     ],
+    calculatorLinks: [{ id: 'neo-numbers', label: 'Neonate Numbers (<3 kg)' }],
     next: 'nrp-persistent',
-    summary: 'UVC: catheterize the single large VEIN (not arteries), 5Fr term/3.5Fr preterm, insert only 2-4 cm until blood return, prime with NS',
+    summary: 'UVC: catheterize the single large VEIN (not arteries), 3.5 Fr if <1.5 kg, 5 Fr if ≥1.5 kg, insert only 2-4 cm until blood return, prime with NS',
   },
 
   {
@@ -473,8 +475,8 @@ export const NEONATAL_RESUS_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'Post-Resuscitation Care',
-    body: 'POST-RESUSCITATION MONITORING [1][2]\n\n**APGAR scoring:**\n• Assess at **1, 5, and 10 minutes** after birth\n• Appearance, Pulse, Grimace, Activity, Respiration\n\n**Normothermia:**\n• Target **36.5–37.5°C** — monitor continuously\n• Both hypothermia AND hyperthermia worsen outcomes\n• **Therapeutic hypothermia** criteria: ≥36 weeks, moderate-severe HIE, initiated within 6 hours under NICU conditions — NOT during active resuscitation [1]\n\n**Glucose monitoring:**\n• Check within 30–60 minutes of stabilization\n• Treat if <40 mg/dL: D10W 2 mL/kg IV\n\n**NICU transfer:**\n• Any neonate requiring PPV or more should be evaluated by NICU\n• Communicate resuscitation details during handoff\n• Document: all interventions, timing, cord clamping time, APGARs\n\n**Family communication:**\n• Update parents on baby\'s condition and plan\n• Allow skin-to-skin when stable\n\n**Team debrief:**\n• Review what went well and what could improve\n• Address emotional impact on team members [1][2]',
-    recommendation: 'Post-resuscitation: APGAR at 1/5/10 min, maintain normothermia (36.5-37.5°C), check glucose, NICU transfer for any neonate requiring PPV or more. Therapeutic hypothermia eligibility: ≥36 wk, mod-severe HIE, within 6 hours. Team debrief.',
+    body: 'POST-RESUSCITATION MONITORING [1][2]\n\n**APGAR scoring:**\n• Assess at **1, 5, and 10 minutes** after birth\n• Appearance, Pulse, Grimace, Activity, Respiration\n\n**Normothermia:**\n• Target **36.5–37.5°C** — monitor continuously\n• Both hypothermia AND hyperthermia worsen outcomes\n• **Therapeutic hypothermia:** target core temperature 33.5-34.5 °C, started within 6 hours of birth, for 72 hours, for selected infants with neurologic injury (moderate to severe HIE); arrange transfer to a cooling center early. Usual eligibility, per cooling center: ≥36 weeks. Not during active resuscitation. [1]\n\n**Glucose monitoring:**\n• Check within 30–60 minutes of stabilization\n• Treat if <40 mg/dL: D10W 2 mL/kg IV\n\n**NICU transfer:**\n• Any neonate requiring PPV or more should be evaluated by NICU\n• Communicate resuscitation details during handoff\n• Document: all interventions, timing, cord clamping time, APGARs\n\n**Family communication:**\n• Update parents on baby\'s condition and plan\n• Allow skin-to-skin when stable\n\n**Team debrief:**\n• Review what went well and what could improve\n• Address emotional impact on team members [1][2]',
+    recommendation: 'Post-resuscitation: APGAR at 1/5/10 min, maintain normothermia (36.5-37.5°C), check glucose, NICU transfer for any neonate requiring PPV or more. Therapeutic hypothermia: target 33.5-34.5 °C, within 6 hours of birth, for 72 hours, for selected infants with moderate-severe HIE; arrange transfer to a cooling center early (usual eligibility, per cooling center: ≥36 wk). Team debrief.',
     confidence: 'definitive',
     citation: [1, 2],
     calculatorLinks: [{ id: 'weight-dose', label: 'Weight-Based Calculator' }],

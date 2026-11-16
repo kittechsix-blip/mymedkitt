@@ -632,8 +632,10 @@ export const NEO_CITATIONS: string[] = [
   'Kempley ST, Moreiras JW, Petrone FL. Endotracheal tube length for neonatal intubation. Resuscitation. 2008;77(3):369-373.',
   'NSW Royal Hospital for Women neonatal intubation guideline; Safer Care Victoria neonatal intubation guideline (tube, blade and catheter sizes by weight).',
   'myMedKitt Neonatal Resuscitation (NRP) consult (neonatal-resus), updated to the 2025 AHA/AAP guideline.',
-  'myMedKitt drug entries (ampicillin, gentamicin, acyclovir, alprostadil, dextrose). First doses only; dosing interval per pharmacy/Neofax by gestational age and postnatal age.',
+  'American Academy of Pediatrics. Red Book: 2024-2027 Report of the Committee on Infectious Diseases. 33rd ed. Itasca, IL: AAP; 2024 (Antibacterial and antiviral drug dosages for neonates). First doses only; dosing interval per pharmacy/Neofax by gestational age and postnatal age.',
   'Children\'s Hospital of Philadelphia. Neonatal seizure and status epilepticus: anti-seizure medications clinical pathway. https://www.chop.edu/clinical-pathway/neonatal-seizure-status-epilepticus-anti-seizure-medications-asm',
+  'Prostin VR Pediatric (alprostadil injection) prescribing information. Pfizer. DailyMed: https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dea460fa-d05e-4191-8461-f185a711ad89',
+  'Committee on Fetus and Newborn, Adamkin DH. Postnatal glucose homeostasis in late-preterm and term infants. Pediatrics. 2011;127(3):575-579. PMID 21357346.',
 ];
 
 export const NEO_FOOTER = 'Reference for licensed clinicians: verify against your NICU protocol and confirm concentrations against your stock. Depth and size are starting points; confirm with CO2 detector, rising heart rate and imaging.';
@@ -775,11 +777,11 @@ export const NEO_DRUGS: NeoDrugDef[] = [
   nd({ id: 'epi-iv', name: 'Epinephrine', indication: 'HR below 60 after 30 s of effective ventilation and compressions', tab: 'drugs', unit: 'mg', perKg: [0.01, 0.03], conc: { perMl: 0.1, label: '0.1 mg/mL' }, route: 'IV/IO/UVC', notes: 'Follow with a 3 mL NS flush regardless of weight. Repeat every 3-5 min.', cite: [1] }),
   nd({ id: 'epi-ett', name: 'Epinephrine', indication: 'Only while IV/IO access is being placed', tab: 'drugs', unit: 'mg', perKg: [0.05, 0.1], conc: { perMl: 0.1, label: '0.1 mg/mL' }, route: 'ETT', notes: 'IV/IO preferred; switch as soon as access is established.', cite: [1] }),
   nd({ id: 'volume', name: 'Volume: normal saline or O-negative PRBC', indication: 'Suspected blood loss with no response to epinephrine', tab: 'drugs', unit: 'mL', perKg: [10, 20], route: 'IV/IO/UVC', notes: 'Repeat if inadequate response.', cite: [1] }),
-  nd({ id: 'd10', name: 'Dextrose 10% (D10)', indication: 'Low glucose', tab: 'drugs', unit: 'mL', perKg: 2, route: 'IV', notes: '2 mL/kg of D10 = 0.2 g/kg. Recheck glucose.', cite: [5] }),
+  nd({ id: 'd10', name: 'Dextrose 10% (D10)', indication: 'Low glucose', tab: 'drugs', unit: 'mL', perKg: 2, route: 'IV', notes: '2 mL/kg of D10 = 0.2 g/kg. Recheck glucose.', cite: [8] }),
   nd({ id: 'ampicillin', name: 'Ampicillin', indication: 'Suspected early-onset sepsis, first dose', tab: 'rosc', unit: 'mg', perKg: 50, route: 'IV', notes: 'Interval per pharmacy/Neofax by gestational age and postnatal age.', cite: [5] }),
   nd({ id: 'gentamicin', name: 'Gentamicin', indication: 'Suspected early-onset sepsis, first dose', tab: 'rosc', unit: 'mg', perKg: 4, route: 'IV', notes: '4 mg/kg every 24 h applies at 0-7 days and 35 weeks or more. Interval by gestational age and postnatal age per pharmacy/Neofax.', cite: [5] }),
   nd({ id: 'acyclovir', name: 'Acyclovir', indication: 'Suspected neonatal HSV, first dose', tab: 'rosc', unit: 'mg', perKg: 20, route: 'IV', notes: 'Interval and renal adjustment per pharmacy.', cite: [5] }),
-  nd({ id: 'alprostadil', name: 'Alprostadil (PGE1)', indication: 'Suspected duct-dependent lesion', tab: 'rosc', unit: 'mcg/min', perKg: [0.05, 0.1], basisUnit: 'mcg/kg/min', route: 'IV infusion', notes: 'Apnea risk: be ready to intubate. Rate per pharmacy dilution.', cite: [5] }),
+  nd({ id: 'alprostadil', name: 'Alprostadil (PGE1)', indication: 'Suspected duct-dependent lesion', tab: 'rosc', unit: 'mcg/min', perKg: [0.05, 0.1], basisUnit: 'mcg/kg/min', route: 'IV infusion', notes: 'Apnea risk: be ready to intubate. Rate per pharmacy dilution.', cite: [7] }),
   nd({ id: 'phenobarbital', name: 'Phenobarbital', indication: 'Neonatal seizure, loading dose', tab: 'rosc', unit: 'mg', perKg: 20, route: 'IV', notes: 'Per the CHOP neonatal seizure pathway.', cite: [6] }),
 ];
 
@@ -839,7 +841,7 @@ export function neoTabs(p: NeoPatient): Record<NeoTab, NeoTabContent> {
     notes: ['Ventilation is the priority. Corrective steps: MR SOPA (mask, reposition, suction, open mouth, pressure, alternative airway). [1]'],
     rows: [
       nrow('ppv', 'Positive pressure ventilation', '30-60 /min', 'Start if apneic or gasping, or HR below 100 after initial steps.', [1]),
-      nrow('pip', 'Initial peak inflation pressure', '20-30 cm H2O', 'Higher only if the heart rate does not rise. PEEP 5 cm H2O.', [1]),
+      nrow('pip', 'Initial peak inflation pressure', '20-30 cm H2O', 'Higher only if the heart rate does not rise. PEEP 5 cm H2O (NRP standard; 2025 guideline: optimal level undetermined).', [1]),
       nrow('fio2', 'Starting oxygen', neoFio2(p.gaWeeks), 'Titrate to the right-hand (preductal) SpO2.', [1], p.gaWeeks === undefined ? 'Enter gestational age to show one band.' : undefined),
       nrow('spo2', 'Preductal SpO2 targets', SPO2_TARGETS, 'Right hand or wrist.', [1, 4]),
       nrow('si', 'Sustained inflation', 'Not recommended', 'Inflations longer than 5 seconds are not recommended in preterm infants.', [1], undefined, { warn: 'NOT RECOMMENDED' }),
@@ -861,7 +863,7 @@ export function neoTabs(p: NeoPatient): Record<NeoTab, NeoTabContent> {
     rows: [
       nrow('temp', 'Temperature', '36.5-37.5 C', 'Avoid both hypothermia and hyperthermia.', [1]),
       nrow('glucose', 'Glucose', 'Check early', 'Treat low glucose with D10 (see Drugs).', [1, 4]),
-      nrow('cool', 'Therapeutic hypothermia', 'Refer', '36 wk or more with moderate to severe encephalopathy, within 6 hours, under NICU conditions.', [1, 4]),
+      nrow('cool', 'Therapeutic hypothermia', 'Refer', 'Target core temperature 33.5-34.5 C, started within 6 hours of birth, for 72 hours, for selected infants with neurologic injury (moderate to severe HIE); arrange transfer to a cooling center early. Usual eligibility, per cooling center: 36 wk or more. Not during active resuscitation.', [1]),
       ...neoDrugRows(p, 'rosc'),
       nrow('stop', 'Stopping', 'About 20 min', 'If all resuscitation steps are completed and no heart rate is detected by about 20 minutes, redirection of care may be discussed with the team and family.', [1]),
     ],

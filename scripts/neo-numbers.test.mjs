@@ -192,3 +192,23 @@ test('wiring: registered, linked, toolbar, consult fixes', () => {
   assert.ok(!/Delayed cord clamping 30-60/.test(calc));
   assert.ok(!/neonate \? '3\.0'/.test(calc), 'old <1 month ETT branch must be gone');
 });
+
+test('consult nrp-ett-sizing and nrp-uvc match the engine bands (no drift)', () => {
+  const src = fs.readFileSync(new URL('../src/data/trees/neonatal-resus.ts', import.meta.url), 'utf8');
+  const body = (id) => {
+    const i = src.indexOf(`id: '${id}'`);
+    assert.ok(i > 0, id);
+    return src.slice(i, src.indexOf('\n', src.indexOf('body:', i)));
+  };
+  const ett = body('nrp-ett-sizing');
+  NEO_BANDS.forEach((b) => {
+    assert.ok(ett.includes(`ETT **${b.ett}**, blade **${b.blade}**`), `band ${b.label}: ${b.ett} / ${b.blade}`);
+  });
+  assert.ok(!/GA|Gestational Age \(weeks\) \/ 10/.test(ett.replace(/Kempley GA|gestational age|GA table/g, '')), 'old GA/10 rule removed');
+  assert.ok(!/25.28 weeks|29.34 weeks/.test(ett));
+  const uvc = body('nrp-uvc');
+  assert.ok(uvc.includes('**3.5 French** if <1.5 kg') && uvc.includes('**5 French** if ≥1.5 kg'));
+  const tabs = neoTabs({ weightKg: 1.4 });
+  assert.equal(row(tabs.circulate.rows, 'uvc').lines[0].dose, '3.5 Fr');
+  assert.equal(row(neoTabs({ weightKg: 1.5 }).circulate.rows, 'uvc').lines[0].dose, '5 Fr');
+});
