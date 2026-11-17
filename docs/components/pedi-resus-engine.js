@@ -11,7 +11,7 @@ export const PEDI_CITATIONS = [
     'Randall Children\'s Hospital. Pediatric Emergency Quick Reference (Randall card). Oregon EMS for Children; Oct 2020. https://www.oregon.gov/oha/PH/PROVIDERPARTNERRESOURCES/EMS/EMSFORCHILDREN/Documents/Emergency-Quick-Reference-Randall.PDF',
     'Children\'s Minnesota. Pediatric Emergency Reference Card M0055; 06/2025. https://cmn.education.childrensmn.org/sites/default/files/media/2025-06/M0055_CRT_EDT_Ped%20Emergency%20reference%20card.pdf',
     'Topjian AA, Raymond TT, Atkins D, et al. Part 4: Pediatric Basic and Advanced Life Support: 2020 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2020;142(16 suppl 2):S469-S523.',
-    'American Heart Association. Part 8: Pediatric Advanced Life Support. 2025 AHA/AAP Guidelines for CPR and Emergency Cardiovascular Care. DOI 10.1161/CIR.0000000000001368. (Primary text not reviewed; checked through secondary summaries.)',
+    'Lasa JJ, Dhillon GS, Duff JP, et al. Part 8: Pediatric Advanced Life Support: 2025 American Heart Association and American Academy of Pediatrics Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2025;152(16 suppl 2). doi:10.1161/CIR.0000000000001368.',
     'European Resuscitation Council and Resuscitation Council UK. Paediatric Life Support Guidelines 2025. Resuscitation. 2025.',
     'ECRI and ISMP. Joint hazard alert: action needed to address incorrect information on the Broselow Rainbow Tape; rev. Jan 22, 2026. https://home.ecri.org/blogs/ismp-alerts-and-articles-library/joint-hazard-alert-action-needed-to-address-incorrect-information-on-the-broselow-rainbow-tape',
     'Duracher C, Schmautz E, Martinon C, et al. Evaluation of cuffed tracheal tube size predicted using the Khine formula in children. Paediatr Anaesth. 2008;18(2):113-118. PMID 18184241.',
@@ -277,7 +277,7 @@ export const PEDI_DRUGS = [
     { id: 'phenobarbital', name: 'Phenobarbital', indication: 'Second-line, status epilepticus', tab: 'seizure', unit: 'mg', perKg: 20, max: 1000, conc: c(65, 1, '65 mg/mL'), route: 'IV', cite: [1, 2] },
     // ---- Shock, fluids, other infusions
     { id: 'bolus', name: 'Isotonic crystalloid bolus', indication: 'Shock', tab: 'shock', unit: 'mL', perKg: [10, 20], route: 'IV/IO', notes: 'Reassess after each bolus.', cite: [3, 4, 5] },
-    { id: 'bolus-cardiogenic', name: 'Isotonic crystalloid bolus', indication: 'Shock, cardiogenic suspected', tab: 'shock', unit: 'mL', perKg: [5, 10], route: 'IV/IO', notes: 'Smaller aliquots; reassess after each.', cite: [3, 4] },
+    { id: 'bolus-cardiogenic', name: 'Isotonic crystalloid bolus', indication: 'Shock, cardiogenic suspected', tab: 'shock', unit: 'mL', perKg: [5, 10], route: 'IV/IO', notes: 'Smaller aliquots; reassess after each.', cite: [3] },
     { id: 'prbc', name: 'Packed red blood cells', indication: 'Hemorrhagic shock', tab: 'shock', unit: 'mL', perKg: 10, route: 'IV/IO', cite: [2] },
     { id: 'd10', name: 'Dextrose 10% (D10)', indication: 'Hypoglycemia', tab: 'shock', unit: 'g', perKg: 0.5, max: 25, conc: c(0.1, 1, '10% = 0.1 g/mL'), route: 'IV/IO', notes: '5 mL/kg of D10.', cite: [1, 2] },
     { id: 'epi-inf', name: 'Epinephrine infusion', indication: 'Shock', tab: 'shock', unit: 'mcg/min', perKg: [0.1, 1], basisUnit: 'mcg/kg/min', route: 'IV/IO infusion', notes: 'Rate per pharmacy standard concentration.', cite: [2, 3] },

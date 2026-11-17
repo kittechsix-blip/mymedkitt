@@ -31157,7 +31157,7 @@ const PEDI_RESUS_SOURCES_PAGE: InfoPage = {
     { num: 1, text: 'Randall Children\'s Hospital. Pediatric Emergency Quick Reference (Randall card). Oregon EMS for Children; Oct 2020.' },
     { num: 2, text: 'Children\'s Minnesota. Pediatric Emergency Reference Card M0055; 06/2025.' },
     { num: 3, text: 'Topjian AA, et al. Part 4: Pediatric Basic and Advanced Life Support: 2020 AHA Guidelines. Circulation. 2020;142(16 suppl 2):S469-S523.' },
-    { num: 4, text: 'American Heart Association. Part 8: Pediatric Advanced Life Support. 2025 AHA/AAP Guidelines. DOI 10.1161/CIR.0000000000001368. (Checked through secondary summaries.)' },
+    { num: 4, text: 'Lasa JJ, Dhillon GS, Duff JP, et al. Part 8: Pediatric Advanced Life Support: 2025 American Heart Association and American Academy of Pediatrics Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2025;152(16 suppl 2). doi:10.1161/CIR.0000000000001368.' },
     { num: 5, text: 'European Resuscitation Council and Resuscitation Council UK. Paediatric Life Support Guidelines 2025. Resuscitation. 2025.' },
     { num: 6, text: 'ECRI and ISMP. Joint hazard alert: Broselow Rainbow Tape; rev. Jan 22, 2026. https://home.ecri.org/blogs/ismp-alerts-and-articles-library/joint-hazard-alert-action-needed-to-address-incorrect-information-on-the-broselow-rainbow-tape' },
     { num: 7, text: 'Duracher C, et al. Evaluation of cuffed tracheal tube size predicted using the Khine formula in children. Paediatr Anaesth. 2008;18(2):113-118. PMID 18184241.' },
