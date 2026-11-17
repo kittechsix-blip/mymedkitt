@@ -125,7 +125,7 @@ export const ECLAMPSIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Magnesium Maintenance',
-    body: '**After loading dose, start maintenance infusion:** [1,5]\n\n**Standard protocol:**\n- **1-2 g/hour IV continuous infusion**\n- Typical: 40g MgSO4 in 1000mL NS at 50mL/hr (2g/hr)\n- Continue for 24-48 hours postpartum (or after last seizure)\n\n**Therapeutic levels:**\n- Target: 4.8-8.4 mg/dL (4-7 mEq/L)\n- Seizure prophylaxis effective at 4.8-8.4 mg/dL\n\n**Monitoring:**\n- Reflexes (patellar) every 1-2 hours\n- Respiratory rate every hour\n- Urine output (Foley catheter)\n- Magnesium level q6h or if toxicity suspected\n\n**Renal adjustment:**\n- CrCl <30: reduce to 1g/hour\n- Anuria: hold maintenance, check levels frequently\n\n**Signs of toxicity (know these):**\n- Loss of deep tendon reflexes: 9-12 mg/dL\n- Respiratory depression: 12-15 mg/dL\n- Cardiac arrest: >15 mg/dL',
+    body: '**After loading dose, start maintenance infusion:** [1,5]\n\n**Standard protocol:**\n- **1-2 g/hour IV continuous infusion**\n- Typical: 40g MgSO4 in 1000mL NS at 50mL/hr (2g/hr)\n- Continue for 24-48 hours postpartum (or after last seizure)\n\n**Therapeutic levels:**\n- Target: 4.8-8.4 mg/dL (4-7 mEq/L)\n- Seizure prophylaxis effective at 4.8-8.4 mg/dL\n\n**Monitoring:**\n- Reflexes (patellar) every 1-2 hours\n- Respiratory rate every hour\n- Urine output (Foley catheter)\n- Magnesium level q6h or if toxicity suspected\n\n**Renal adjustment:**\n- CrCl <30: reduce to 1g/hour\n- Anuria: hold maintenance, check levels frequently\n\n**Watch for toxicity:**\n- Absent patellar reflexes, respiratory depression or cardiovascular instability require immediate assessment and stopping magnesium. Do not wait for a serum level.\n- See the [Magnesium Toxicity table and rescue treatment](#/node/eclampsia-mag-toxicity) for the ACOG reference concentrations. [1]',
     citation: [1, 5],
     next: 'eclampsia-mag-toxicity',
     summary: 'Magnesium 1-2g/hr continuous — check reflexes q1-2h, RR hourly, UOP >25mL/hr',
@@ -135,7 +135,7 @@ export const ECLAMPSIA_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Magnesium Toxicity',
-    body: '**Recognize and treat magnesium toxicity immediately.** [1,5]\n\n**Toxicity thresholds:**\n| Mag Level | Clinical Finding |\n|-----------|------------------|\n| 4.8-8.4 mg/dL | Therapeutic range |\n| 9-12 mg/dL | Loss of DTRs |\n| 12-15 mg/dL | Respiratory depression |\n| 15-20 mg/dL | Respiratory arrest |\n| >20 mg/dL | Cardiac arrest |\n\n**Management of toxicity:**\n\n**1. Stop magnesium infusion immediately**\n\n**2. Calcium gluconate (antidote):**\n- **1g (10mL of 10% solution) IV over 3-5 minutes**\n- Can repeat in 5 minutes if needed\n- Works within 1-3 minutes\n\n**3. Supportive care:**\n- Ventilatory support (BVM, intubation)\n- Continuous cardiac monitoring\n- IV fluids for diuresis (if renal function adequate)\n\n**Prevention:**\n- Check reflexes before each bolus\n- Never give mag if reflexes absent\n- Ensure UOP >25mL/hr\n- Respiratory rate >12/min',
+    body: '**Recognize and treat magnesium toxicity immediately.** [1,5]\n\n**Serum magnesium and toxicity: ACOG reference concentrations** [1]\n| Serum magnesium (mg/dL) | Associated finding |\n|-----------|------------------|\n| >9 | Loss of patellar reflexes |\n| >12 | Respiratory paralysis |\n| >30 | Cardiac arrest |\n\nThese are approximate associations from ACOG Practice Bulletin 222, Table 2, not guaranteed onset thresholds or safe levels below each cutoff. Toxicity can occur at lower concentrations. **Stop magnesium and treat suspected toxicity based on clinical findings; do not wait for a magnesium result or for the cardiac-arrest concentration.** [1]\n\n**Management of toxicity:**\n\n**1. Stop magnesium infusion immediately**\n\n**2. Calcium gluconate (antidote):**\n- **1g (10mL of 10% solution) IV over 3-5 minutes**\n- Can repeat in 5 minutes if needed\n- Works within 1-3 minutes\n\n**3. Supportive care:**\n- Ventilatory support (BVM, intubation)\n- Continuous cardiac monitoring\n- IV fluids for diuresis (if renal function adequate)\n\n**Prevention:**\n- Check reflexes before each bolus\n- Never give mag if reflexes absent\n- Ensure UOP >25mL/hr\n- Respiratory rate >12/min',
     citation: [1, 5],
     treatment: {
       firstLine: {
@@ -149,7 +149,7 @@ export const ECLAMPSIA_NODES: DecisionNode[] = [
       monitoring: 'Continuous cardiac monitoring. Monitor respiratory status and mental status. Check magnesium level after administration.',
     },
     next: 'eclampsia-refractory',
-    summary: 'Loss of DTRs at 9-12 mg/dL, respiratory arrest at 15 mg/dL — antidote: calcium gluconate 1g IV',
+    summary: 'Absent reflexes or respiratory depression: stop magnesium and treat without waiting for a level; calcium gluconate 1g IV is the antidote',
     safetyLevel: 'critical',
   },
   {
@@ -405,7 +405,7 @@ export const ECLAMPSIA_CRITICAL_ACTIONS = [
 ];
 
 export const ECLAMPSIA_CITATIONS: Citation[] = [
-  { num: 1, text: 'American College of Obstetricians and Gynecologists. Gestational Hypertension and Preeclampsia: ACOG Practice Bulletin No. 222 (Interim Update). Obstet Gynecol. 2020;135(6):e237-e260. doi:10.1097/AOG.0000000000003891. PMID: 32443079. Replaced Practice Bulletin No. 202; current ACOG guidance as of this audit. Focused update: ACOG Clinical Practice Update: Biomarker Prediction of Preeclampsia With Severe Features. Obstet Gynecol. 2024;143(6):e153-e154. doi:10.1097/AOG.0000000000005576.' },
+  { num: 1, text: 'American College of Obstetricians and Gynecologists. Gestational Hypertension and Preeclampsia: ACOG Practice Bulletin No. 222 (Interim Update). Obstet Gynecol. 2020;135(6):e237-e260. doi:10.1097/AOG.0000000000003891. PMID: 32443079. Magnesium toxicity: Table 2, p. e248; clinical monitoring and calcium rescue: pp. e247-e248. Full text: https://kansaspqc.kdhe.ks.gov/wp-content/uploads/2025/09/ACOG-Gestation-HTN-and-Preeclampsia-Practice-Bulletin.pdf . Replaced Practice Bulletin No. 202; current ACOG guidance as of this audit. Focused update: ACOG Clinical Practice Update: Biomarker Prediction of Preeclampsia With Severe Features. Obstet Gynecol. 2024;143(6):e153-e154. doi:10.1097/AOG.0000000000005576.' },
   { num: 2, text: 'Sibai BM. Diagnosis, prevention, and management of eclampsia. Obstet Gynecol. 2005;105(2):402-410. doi:10.1097/01.AOG.0000152351.13671.99. PMID: 15684172.' },
   { num: 3, text: 'Haram K, Svendsen E, Abildgaard U. The HELLP syndrome: clinical issues and management. A review. BMC Pregnancy Childbirth. 2009;9:8. doi:10.1186/1471-2393-9-8. PMID: 19245695. PMCID: PMC2654858 (free full text).' },
   { num: 4, text: 'Duley L, Gulmezoglu AM, Henderson-Smart DJ, Chou D. Magnesium sulphate and other anticonvulsants for women with pre-eclampsia. Cochrane Database Syst Rev. 2010;2010(11):CD000025. doi:10.1002/14651858.CD000025.pub2. PMID: 21069663. PMCID: PMC7061250 (free full text).' },
