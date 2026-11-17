@@ -369,7 +369,7 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Multi-Dose Charcoal / Whole Bowel Irrigation',
-    body: 'For enteric-coated formulations or massive ingestions with suspected bezoar: [1][3]\n\n**Multi-dose activated charcoal (MDAC):** [Activated Charcoal](#/drug/activated-charcoal/salicylate) 25g q2-4h for 3-4 additional doses. Monitor for obstipation. [19]\n\n**Whole bowel irrigation (WBI):** PEG-electrolyte solution (GoLYTELY) via NG at 1.5-2 L/hr (adults). Consider for confirmed bezoar on imaging or persistently rising levels despite charcoal. May require intubation for airway protection (use extreme caution — see airway warning). [20]',
+    body: 'For enteric-coated formulations or massive ingestions with suspected bezoar: [1][3]\n\n**Multi-dose activated charcoal (MDAC):** [Activated Charcoal](#/drug/activated-charcoal/salicylate) 25g q2-4h for 3-4 additional doses. Monitor for obstipation. [19]\n\n**Whole bowel irrigation (WBI):** Polyethylene glycol–electrolyte solution (PEG-ELS) via NG at 1.5-2 L/hr (adults). Consider for confirmed bezoar on imaging or persistently rising levels despite charcoal. May require intubation for airway protection (use extreme caution — see airway warning). [20]',
     citation: [1, 3, 19, 20],
 
     summary: 'MDAC 25g q2-4h or whole bowel irrigation for enteric-coated/bezoar — monitor for obstipation',
@@ -384,7 +384,7 @@ export const SALICYLATE_NODES: DecisionNode[] = [
         notes: 'For enteric-coated tablets or suspected bezoar. Monitor for obstipation.',
       },
       alternative: {
-        drug: 'PEG-electrolyte solution (GoLYTELY)',
+        drug: 'Polyethylene glycol–electrolyte solution (PEG-ELS)',
         dose: '1.5-2 L/hr',
         route: 'NG tube',
         frequency: 'Continuous',
