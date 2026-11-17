@@ -296,13 +296,18 @@ export const ICH_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
       {
+        label: 'Brainstem (pontine)',
+        description: 'Usually non-surgical — supportive care, EVD if hydrocephalus',
+        next: 'ich-seizures',
+      },
+      {
         label: 'Significant Intraventricular Hemorrhage',
         description: 'Blood in ventricles ± hydrocephalus',
         next: 'ich-ivh-evd',
         urgency: 'urgent',
       },
     ],
-    summary: 'Location guides neurosurgical consultation: supratentorial vs cerebellar vs intraventricular',
+    summary: 'Location guides neurosurgical consultation: supratentorial vs cerebellar vs brainstem vs intraventricular',
   },
 
   {
@@ -310,7 +315,7 @@ export const ICH_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Supratentorial Hematoma',
-    body: '**Evidence for surgical evacuation is limited:**\n\n**STITCH-I Trial** (1,033 patients): No benefit from early surgery overall. Possible trend toward benefit for hematomas within 1 cm of cortical surface and lobar hemorrhage with GCS 9–12.\n\n**STITCH-II Trial** (601 patients): Focused on predicted surgical benefit subgroup — still no significant difference vs conservative management.\n\n**Possible indications for craniotomy:**\n• Large hematoma with significant midline shift\n• Elevated ICP refractory to medical management\n• Hemorrhage secondary to resectable lesion (AVM, tumor)\n• Lobar location, no IVH extension, very early presentation\n\n**Emerging:** Minimally invasive surgery (MISTIE III) — may be more promising than traditional craniotomy.\n\n**Decompressive hemicraniectomy:** Consider for massive edema with impending herniation when other options exhausted.\n\nConsult neurosurgery for all supratentorial ICH — even if medical management planned initially.\n\n**Basis for the MISTIE statement:** MISTIE III was an open-label, blinded-endpoint phase 3 trial at 78 hospitals in supratentorial ICH ≥30 mL, randomising image-guided catheter evacuation plus alteplase 1.0 mg q8h (up to 9 doses, targeting residual clot ≤15 mL) vs standard medical care; it did not meet its primary functional-outcome endpoint [25]. **Basis for the craniotomy indications listed above:** AHA/ASA 2022 [1] and ESO/EANS 2025 [2], which grade routine early craniotomy for supratentorial ICH as not beneficial, reserving surgery for deterioration or life-threatening mass effect.',
+    body: '**Evidence for surgical evacuation is limited:**\n\n**STICH Trial** (1,033 patients): No benefit from early surgery overall. Possible trend toward benefit for hematomas within 1 cm of cortical surface and lobar hemorrhage with GCS 9–12.\n\n**STICH II Trial** (601 patients): Focused on predicted surgical benefit subgroup — still no significant difference vs conservative management.\n\n**Possible indications for craniotomy:**\n• Large hematoma with significant midline shift\n• Elevated ICP refractory to medical management\n• Hemorrhage secondary to resectable lesion (AVM, tumor)\n• Lobar location, no IVH extension, very early presentation\n\n**Emerging:** Minimally invasive surgery (MISTIE III) — may be more promising than traditional craniotomy.\n\n**Decompressive hemicraniectomy:** Consider for massive edema with impending herniation when other options exhausted.\n\nConsult neurosurgery for all supratentorial ICH — even if medical management planned initially.\n\n**Basis for the MISTIE statement:** MISTIE III was an open-label, blinded-endpoint phase 3 trial at 78 hospitals in supratentorial ICH ≥30 mL, randomising image-guided catheter evacuation plus alteplase 1.0 mg q8h (up to 9 doses, targeting residual clot ≤15 mL) vs standard medical care; it did not meet its primary functional-outcome endpoint [25]. **Basis for the craniotomy indications listed above:** AHA/ASA 2022 [1] and ESO/EANS 2025 [2], which grade routine early craniotomy for supratentorial ICH as not beneficial, reserving surgery for deterioration or life-threatening mass effect.',
     citation: [1, 2, 9, 10, 11, 25],
     next: 'ich-seizures',
     summary: 'Supratentorial ICH: neurosurgery for large (>30mL), superficial, or deteriorating — deep basal ganglia usually conservative',

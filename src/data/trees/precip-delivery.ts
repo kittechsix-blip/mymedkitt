@@ -340,7 +340,7 @@ export const PRECIP_DELIVERY_NODES: DecisionNode[] = [
         duration: 'max 5 doses',
         notes: 'CONTRAINDICATED in hypertension or preeclampsia. Second-line if oxytocin fails.',
       },
-      pcnAllergy: {
+      otherOption: {
         drug: 'Misoprostol (Cytotec)',
         dose: '800-1000 mcg',
         route: 'PR or SL',

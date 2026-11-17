@@ -556,6 +556,16 @@ function renderTreatment(container, treatment) {
         pcnRow.innerHTML = `<span class="dosing-label">PCN\u2205:</span> <span class="dosing-value"${pcnConfAttr}>${treatment.pcnAllergy.drug} ${treatment.pcnAllergy.dose}</span>`;
         summary.appendChild(pcnRow);
     }
+    if (treatment.otherOption) {
+        const otherRow = document.createElement('div');
+        otherRow.className = 'dosing-summary-row';
+        if (treatment.otherOption.confidence) {
+            otherRow.setAttribute('data-confidence', treatment.otherOption.confidence);
+        }
+        const otherConfAttr = treatment.otherOption.confidence ? ` data-confidence="${treatment.otherOption.confidence}"` : '';
+        otherRow.innerHTML = `<span class="dosing-label">Other:</span> <span class="dosing-value"${otherConfAttr}>${treatment.otherOption.drug} ${treatment.otherOption.dose}</span>`;
+        summary.appendChild(otherRow);
+    }
     section.appendChild(summary);
     section.appendChild(renderDrugCard(treatment.firstLine));
     if (treatment.alternative) {
@@ -575,6 +585,15 @@ function renderTreatment(container, treatment) {
         pcnDetails.appendChild(pcnSummary);
         pcnDetails.appendChild(renderDrugCard(treatment.pcnAllergy));
         section.appendChild(pcnDetails);
+    }
+    if (treatment.otherOption) {
+        const otherDetails = document.createElement('details');
+        otherDetails.className = 'treatment-expandable';
+        const otherSummary = document.createElement('summary');
+        otherSummary.textContent = '\u25B8 Other option';
+        otherDetails.appendChild(otherSummary);
+        otherDetails.appendChild(renderDrugCard(treatment.otherOption));
+        section.appendChild(otherDetails);
     }
     if (treatment.monitoring) {
         const monDetails = document.createElement('details');

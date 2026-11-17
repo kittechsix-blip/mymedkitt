@@ -498,7 +498,7 @@ export const PE_TREATMENT_NODES = [
                 duration: 'Until transition to oral anticoagulation',
                 notes: 'For CrCl 15-30 mL/min; avoid if CrCl <15',
             },
-            pcnAllergy: {
+            otherOption: {
                 drug: 'Fondaparinux',
                 dose: '5-10 mg (weight-based)',
                 route: 'SC',

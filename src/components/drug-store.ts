@@ -410,18 +410,20 @@ export function showDrugModal(drugId: string, indicationHint?: string): boolean 
   // Auto-scroll to matching indication if hint provided
   if (indicationHint) {
     const hint = indicationHint.toLowerCase().replace(/-/g, ' ');
-    const cards = body.querySelectorAll('[data-indication]');
-    for (const card of cards) {
-      const ind = card.getAttribute('data-indication') ?? '';
-      if (ind.includes(hint) || hint.split(' ').every(w => ind.includes(w))) {
-        // Use setTimeout to ensure modal is fully rendered and laid out before scrolling
-        setTimeout(() => {
-          (card as HTMLElement).style.outline = '2px solid var(--color-primary)';
-          (card as HTMLElement).style.outlineOffset = '4px';
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-        break;
-      }
+    const cards = [...body.querySelectorAll('[data-indication]')];
+    // Whole-word matches win ("stemi" must not land on "acs / nstemi"); substring matching is the fallback.
+    const esc = (w: string) => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const words = hint.split(' ').filter(Boolean);
+    const whole = (ind: string) => words.length > 0 && words.every(w => new RegExp(`(^|[^a-z0-9])${esc(w)}([^a-z0-9]|$)`).test(ind));
+    const loose = (ind: string) => ind.includes(hint) || words.every(w => ind.includes(w));
+    const match = cards.find(c => whole(c.getAttribute('data-indication') ?? '')) ?? cards.find(c => loose(c.getAttribute('data-indication') ?? ''));
+    if (match) {
+      // Use setTimeout to ensure modal is fully rendered and laid out before scrolling
+      setTimeout(() => {
+        (match as HTMLElement).style.outline = '2px solid var(--color-primary)';
+        (match as HTMLElement).style.outlineOffset = '4px';
+        match.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
     }
   }
 

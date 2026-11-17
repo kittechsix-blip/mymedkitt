@@ -280,7 +280,7 @@ export const STEMI_NODES: DecisionNode[] = [
         duration: '12 months DAPT',
         notes: 'Higher stroke/ICH risk vs clopidogrel. Fewer stent thromboses than clopidogrel.',
       },
-      pcnAllergy: {
+      otherOption: {
         drug: 'Clopidogrel',
         dose: '600 mg loading, then 75 mg',
         route: 'PO',
@@ -312,7 +312,7 @@ export const STEMI_NODES: DecisionNode[] = [
     type: 'info',
     module: 3,
     title: 'Anticoagulation',
-    body: '**For primary PCI:**\n\u2022 [UFH](#/drug/ufh/stemi) 70\u2013100 units/kg IV bolus (without GP IIb/IIIa) OR 50\u201370 units/kg (with GP IIb/IIIa)\n\u2022 [Bivalirudin](#/drug/bivalirudin/acs) 0.75 mg/kg IV bolus then 1.75 mg/kg/hr \u2014 preferred if high bleeding risk\n\n**For fibrinolytic therapy** (minimum 48 hours):\n\u2022 [UFH](#/drug/ufh/stemi) weight-based bolus + infusion\n\u2022 [Enoxaparin](#/drug/enoxaparin/stemi) \u2014 alternative (age-adjusted dosing)\n\u2022 [Fondaparinux](#/drug/fondaparinux/stemi) 2.5 mg SC daily \u2014 alternative\n\nSee [Anticoagulation Details](#/info/stemi-anticoag-detail)',
+    body: '**For primary PCI:**\n\u2022 [UFH](#/drug/ufh/stemi) 70\u2013100 units/kg IV bolus (without GP IIb/IIIa) OR 50\u201370 units/kg (with GP IIb/IIIa)\n\u2022 [Bivalirudin](#/drug/bivalirudin/pci) 0.75 mg/kg IV bolus then 1.75 mg/kg/hr \u2014 preferred if high bleeding risk\n\n**For fibrinolytic therapy** (minimum 48 hours):\n\u2022 [UFH](#/drug/ufh/stemi) weight-based bolus + infusion\n\u2022 [Enoxaparin](#/drug/enoxaparin/stemi) \u2014 alternative (age-adjusted dosing)\n\u2022 [Fondaparinux](#/drug/fondaparinux/stemi) 2.5 mg SC daily \u2014 alternative\n\nSee [Anticoagulation Details](#/info/stemi-anticoag-detail)',
     citation: [5, 8, 23],
     treatment: {
       firstLine: {
@@ -405,8 +405,8 @@ export const STEMI_NODES: DecisionNode[] = [
     type: 'question',
     module: 4,
     title: 'Fibrinolytic Therapy',
-    body: '**Door-to-needle \u226430 minutes.** Fibrin-specific agents preferred.\n\nCheck [Fibrinolytic Contraindications](#/info/stemi-lytic-contraindications)\n\n**Agents** (see [Fibrinolytic Dosing](#/info/stemi-lytic-agents)):\n\u2022 [Tenecteplase](#/drug/tenecteplase/stemi) \u2014 single weight-based IV bolus (preferred)\n\u2022 [Alteplase](#/drug/alteplase/stemi) \u2014 accelerated 90-min regimen\n\u2022 [Reteplase](#/drug/reteplase/stemi) \u2014 10 + 10 unit double bolus\n\n**Age >75 years:** Consider half-dose tenecteplase (reduced ICH risk) \u2014 basis: STREAM-1 halved the TNK dose after excess ICH in patients \u226575y (3/42 [7.1%] before amendment vs 0/93 after), and STREAM-2 randomized patients \u226560y to half-dose TNK with preserved reperfusion efficacy; ACEP Level C also supports dose reduction in the elderly [21][23][33]\n\n**After fibrinolysis:** Transfer to PCI center. Angiography within 3\u201324 hours (NOT within first 2\u20133 hours). [5][8][23]\n\nAny contraindications to fibrinolysis?',
-    citation: [5, 8, 21, 23, 33],
+    body: '**Door-to-needle \u226430 minutes.** Fibrin-specific agents preferred.\n\nCheck [Fibrinolytic Contraindications](#/info/stemi-lytic-contraindications)\n\n**Agents** (see [Fibrinolytic Dosing](#/info/stemi-lytic-agents)):\n\u2022 [Tenecteplase](#/drug/tenecteplase/stemi) \u2014 single weight-based IV bolus (preferred)\n\u2022 [Alteplase](#/drug/alteplase/stemi) \u2014 accelerated 90-min regimen\n\u2022 [Reteplase](#/drug/reteplase/stemi) \u2014 10 + 10 unit double bolus\n\n**Age >75 years:** Consider half-dose tenecteplase (reduced ICH risk) \u2014 basis: STREAM-1 amended its protocol to half-dose TNK in patients \u226575y after excess ICH [22] (pooled STREAM analysis: ICH 7.1% with full dose vs 0% with half dose in \u226575y [38]); STREAM-2 randomized patients \u226560y to half-dose TNK with preserved reperfusion efficacy [33]; ACEP Level C also supports dose reduction in the elderly [21]\n\n**After fibrinolysis:** Transfer to PCI center. Angiography within 3\u201324 hours (NOT within first 2\u20133 hours). [5][8][23]\n\nAny contraindications to fibrinolysis?',
+    citation: [5, 8, 21, 22, 23, 33, 38],
     treatment: {
       firstLine: {
         drug: 'Tenecteplase',
@@ -674,6 +674,7 @@ export const STEMI_CITATIONS: Citation[] = [
   { num: 35, text: 'Hochman JS, Sleeper LA, Webb JG, et al.; SHOCK Investigators. Early Revascularization in Acute Myocardial Infarction Complicated by Cardiogenic Shock. N Engl J Med. 1999;341(9):625-634. doi:10.1056/NEJM199908263410901. PMID: 10460813.' },
   { num: 36, text: 'Levy B, Clere-Jehl R, Legras A, et al. Epinephrine versus Norepinephrine for Cardiogenic Shock After Acute Myocardial Infarction (OptimaCC). J Am Coll Cardiol. 2018;72(2):173-182. doi:10.1016/j.jacc.2018.04.051. PMID: 29976291.' },
   { num: 37, text: 'Wiviott SD, Braunwald E, McCabe CH, et al.; TRITON-TIMI 38 Investigators. Prasugrel versus Clopidogrel in Patients with Acute Coronary Syndromes. N Engl J Med. 2007;357(20):2001-2015. doi:10.1056/NEJMoa0706482. PMID: 17982182.' },
+  { num: 38, text: 'Bainey KR, Welsh RC, Zheng Y, et al. Pharmaco-Invasive Strategy With Half-Dose Tenecteplase in Patients With STEMI: Prespecified Pooled Analysis of Patients Aged \u226575 Years in STREAM-1 and 2. Circ Cardiovasc Interv. 2024;17(12):e014251. doi:10.1161/CIRCINTERVENTIONS.124.014251. PMID: 39689189.' },
 ];
 
 // -------------------------------------------------------------------

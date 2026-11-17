@@ -304,7 +304,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
         duration: '5-7 days',
         notes: 'Check urinalysis first - contraindicated with hematuria (risk of renal thrombi).',
       },
-      pcnAllergy: {
+      otherOption: {
         drug: 'Tranexamic Acid',
         dose: '10-15 mg/kg',
         route: 'PO or IV',
@@ -776,7 +776,7 @@ export const HEMOPHILIA_NODES: DecisionNode[] = [
         duration: '5-7 days during menses',
         notes: 'Check urinalysis first - contraindicated with hematuria.',
       },
-      pcnAllergy: {
+      otherOption: {
         drug: 'Tranexamic Acid',
         dose: '10-15 mg/kg',
         route: 'PO',

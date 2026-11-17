@@ -686,7 +686,7 @@ export const STATUS_EPILEPTICUS_NODES: DecisionNode[] = [
         duration: 'Immediate',
         notes: 'Use when no IV access. Rectal diazepam 0.2-0.5 mg/kg (max 20 mg) also acceptable.',
       },
-      pcnAllergy: {
+      otherOption: {
         drug: 'Pyridoxine (neonates/infants)',
         dose: '100 mg IV',
         route: 'IV',

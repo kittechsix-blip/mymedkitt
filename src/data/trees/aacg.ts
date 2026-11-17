@@ -272,7 +272,7 @@ export const AACG_NODES: DecisionNode[] = [
         duration: 'Single dose',
         notes: 'Avoid in diabetes (high caloric content). Use if IV not available.',
       },
-      pcnAllergy: {
+      otherOption: {
         drug: 'Isosorbide',
         dose: '1.5 g/kg',
         route: 'PO',

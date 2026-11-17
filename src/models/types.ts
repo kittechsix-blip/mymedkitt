@@ -133,6 +133,8 @@ export interface TreatmentRegimen {
   firstLine: DrugRegimen;
   alternative?: DrugRegimen;
   pcnAllergy?: DrugRegimen;
+  /** A further option that is not a penicillin-allergy alternative (shown as "Other option") */
+  otherOption?: DrugRegimen;
   /** Additional context-specific regimens (e.g., nsaidAllergy, vascularContraindication, adjunct, dischargeMeds) */
   [key: string]: DrugRegimen | string | undefined;
   /** Follow-up monitoring instructions */

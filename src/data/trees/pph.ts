@@ -68,7 +68,7 @@ export const PPH_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Hemodynamic Assessment',
-    body: 'Assess the patient **before** fixating on blood estimation:\n\n• Vital signs — HR, SBP, SpO₂, mental status\n• [Shock Index](#/calculator/shock-index) — HR/SBP ratio (>0.9 abnormal in pregnancy; >1.0 = hemorrhagic shock) [3]\n• Skin: pallor, cold, clammy, mottling\n• Urine output if catheterized\n\n**Pregnancy physiology obscures early shock.** Healthy peripartum patients compensate well — tachycardia and narrowed pulse pressure appear before hypotension. By the time SBP drops, blood loss is often ≥25% of blood volume (~1500 mL).\n\n**Use the shock index — it outperforms HR or SBP alone for detecting occult obstetric hemorrhage.** [3][4]',
+    body: 'Assess the patient **before** fixating on blood estimation:\n\n• Vital signs — HR, SBP, SpO₂, mental status\n• [Shock Index](#/calculator/shock-index) — HR/SBP ratio: ≥0.9 flags need for referral (sensitivity 100%); ≥1.4 urgent need for intervention; ≥1.7 high chance of adverse maternal outcome. Derived in low-resource settings (n=958), not yet prospectively validated [3]\n• Skin: pallor, cold, clammy, mottling\n• Urine output if catheterized\n\n**Pregnancy physiology obscures early shock.** Healthy peripartum patients compensate well — tachycardia and narrowed pulse pressure appear before hypotension. By the time SBP drops, blood loss is often ≥25% of blood volume (~1500 mL).\n\n**Use the shock index — it outperforms HR or SBP alone for detecting occult obstetric hemorrhage.** [3][4]',
     citation: [3, 4],
     options: [
       {
@@ -84,7 +84,7 @@ export const PPH_NODES: DecisionNode[] = [
         urgency: 'urgent',
       },
     ],
-    summary: 'Shock Index >0.9 abnormal in pregnancy; >1.0 = shock. Pregnancy masks early hypotension.',
+    summary: 'Shock Index ≥0.9 refer, ≥1.4 urgent intervention, ≥1.7 high risk (El Ayadi 2016). Pregnancy masks early hypotension.',
   },
 
   {

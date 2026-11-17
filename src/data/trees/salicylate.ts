@@ -56,8 +56,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Acute Ingestion — Dose Estimation',
-    body: 'Estimate the ingested dose (mg/kg) from history. If uncertain, assume worst case.\n\n**Oil of wintergreen warning:** 1 mL of methyl salicylate = ~1,400 mg aspirin. A single teaspoon (~5 mL) = ~7,000 mg — potentially lethal in a child. [1][3][15][22]\n\n**Enteric-coated tablets:** Peak absorption may be delayed 12-24 hours. Extended observation required. [18][22]\n\nEstimated dose:',
-    citation: [1, 3, 9, 15, 18, 22],
+    body: 'Estimate the ingested dose (mg/kg) from history. If uncertain, assume worst case.\n\n**Oil of wintergreen warning:** 1 mL of methyl salicylate = ~1,400 mg aspirin. A single teaspoon (~5 mL) = ~7,000 mg — potentially lethal in a child. [1][3][15][22]\n\n**Enteric-coated tablets:** Peak absorption may be delayed 12-24 hours. Extended observation required. [18][22]\n\nOut-of-hospital consensus: refer for ED evaluation if >150 mg/kg or >6.5 g ingested. [23]\n\nEstimated dose:',
+    citation: [1, 3, 9, 15, 18, 22, 23],
     options: [
       {
         label: '< 150 mg/kg (minimal risk)',
@@ -219,8 +219,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Seizures / Severe Altered Mental Status',
-    body: '**Benzodiazepines first-line for seizures:**\n• [Lorazepam](#/drug/lorazepam/status epilepticus) 0.1 mg/kg IV (max 4 mg)\n• [Midazolam](#/drug/midazolam/status epilepticus) 0.2 mg/kg IM (max 10 mg) if no IV access\n\n**Empiric dextrose:** [Dextrose](#/drug/dextrose/neuroglycopenia) D50W 50 mL IV — even with NORMAL serum glucose. Salicylate uncouples oxidative phosphorylation, causing massive CNS glucose consumption (**neuroglycopenia**). CSF glucose drops before serum glucose. [2][4][17]\n\n**Seizures in salicylate toxicity = severe poisoning.** This patient almost certainly needs hemodialysis. [5][15]',
-    citation: [1, 2, 3, 4, 5, 15, 17, 22],
+    body: '**Benzodiazepines first-line for seizures:**\n• [Lorazepam](#/drug/lorazepam/status epilepticus) 0.1 mg/kg IV (max 4 mg)\n• [Midazolam](#/drug/midazolam/status epilepticus) 0.2 mg/kg IM (max 10 mg) if no IV access [24]\n\n**Empiric dextrose:** [Dextrose](#/drug/dextrose/neuroglycopenia) D50W 50 mL IV — even with NORMAL serum glucose. Salicylate uncouples oxidative phosphorylation, causing massive CNS glucose consumption (**neuroglycopenia**). CSF glucose drops before serum glucose. [2][4][17]\n\n**Seizures in salicylate toxicity = severe poisoning.** This patient almost certainly needs hemodialysis. [5][15]',
+    citation: [1, 2, 3, 4, 5, 15, 17, 22, 24],
 
     summary: 'BZD for seizures, empiric D50W even with normal glucose (neuroglycopenia) — seizures = severe, needs HD',
     safetyLevel: 'critical',
@@ -320,8 +320,8 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'question',
     module: 3,
     title: 'GI Decontamination',
-    body: 'Activated charcoal effectively adsorbs salicylate. Salicylate\'s delayed gastric emptying may extend the window of efficacy. [1][3][7]\n\nDo NOT induce emesis. Gastric lavage is rarely indicated. [7][15][18]\n\nTime since ingestion and formulation:',
-    citation: [1, 3, 7, 15, 18, 19, 20],
+    body: 'Activated charcoal effectively adsorbs salicylate. Salicylate\'s delayed gastric emptying may extend the window of efficacy. [1][3][7]\n\nDo NOT induce emesis. Gastric lavage is rarely indicated. [7][15][18][23]\n\nTime since ingestion and formulation:',
+    citation: [1, 3, 7, 15, 18, 19, 20, 23],
     options: [
       {
         label: 'Within 1-2 Hours, Alert Patient',
@@ -782,4 +782,6 @@ export const SALICYLATE_CITATIONS: Citation[] = [
   { num: 20, text: 'Thanacoody R, Caravati EM, Troutman B, et al. Position Paper Update: Whole Bowel Irrigation for Gastrointestinal Decontamination of Overdose Patients. Clin Toxicol (Phila). 2015;53(1):5-12. doi:10.3109/15563650.2014.989326. PMID 25511637.' },
   { num: 21, text: 'Dugandzic RM, Tierney MG, Dickinson GE, Dolan MC, McKnight DR. Evaluation of the Validity of the Done Nomogram in the Management of Acute Salicylate Intoxication. Ann Emerg Med. 1989;18(11):1186-1190. doi:10.1016/S0196-0644(89)80057-5. PMID 2817562.' },
   { num: 22, text: 'Nelson LS, Howland MA, Lewin NA, Smith SW, Goldfrank LR, Hoffman RS, eds. Goldfrank\'s Toxicologic Emergencies. 11th ed. McGraw-Hill Education; 2019. Ch. 39, Salicylates. ISBN 978-1-259-85961-8.' },
+  { num: 23, text: 'Chyka PA, Erdman AR, Christianson G, et al. Salicylate poisoning: an evidence-based consensus guideline for out-of-hospital management. Clin Toxicol (Phila). 2007;45(2):95-131. doi:10.1080/15563650600907140. PMID 17364628.' },
+  { num: 24, text: 'Glauser T, Shinnar S, Gloss D, et al. Evidence-Based Guideline: Treatment of Convulsive Status Epilepticus in Children and Adults: Report of the Guideline Committee of the American Epilepsy Society. Epilepsy Curr. 2016;16(1):48-61. doi:10.5698/1535-7597-16.1.48. PMID 26900382.' },
 ];

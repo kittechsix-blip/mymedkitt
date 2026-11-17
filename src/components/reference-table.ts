@@ -295,22 +295,32 @@ function renderClinicalNotes(container: HTMLElement, notes: string[]): void {
 // Citations Panel
 // -------------------------------------------------------------------
 
-/** Render citation text with URLs as clickable links. */
+/** Render citation text with URLs, DOIs and PMIDs as clickable links. */
 function renderCitationText(parent: HTMLElement, text: string): void {
-  const urlPattern = /(https?:\/\/[^\s]+)/g;
+  // a bare URL, a "doi:" / "DOI" identifier (linked through doi.org) or a "PMID" (linked to PubMed)
+  const pattern = /(https?:\/\/[^\s]+)|\b(?:doi:?\s*)(10\.\d{4,9}\/[^\s]+)|\bPMID:?\s*(\d{5,9})/gi;
   let last = 0;
   let m: RegExpExecArray | null;
-  while ((m = urlPattern.exec(text)) !== null) {
+  while ((m = pattern.exec(text)) !== null) {
+    let label = m[0];
+    let href: string;
+    if (m[1]) href = m[1];
+    else if (m[2]) {
+      const doi = m[2].replace(/[.,;)\]]+$/, '');
+      label = m[0].slice(0, m[0].length - (m[2].length - doi.length));
+      href = 'https://doi.org/' + doi;
+    } else href = 'https://pubmed.ncbi.nlm.nih.gov/' + m[3] + '/';
     if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
     const a = document.createElement('a');
-    a.href = m[1];
-    a.textContent = m[1];
+    a.href = href;
+    a.textContent = label;
     a.target = '_blank';
     a.rel = 'noopener';
     a.style.color = 'var(--color-primary)';
     a.style.wordBreak = 'break-all';
     parent.appendChild(a);
-    last = m.index + m[0].length;
+    last = m.index + label.length;
+    pattern.lastIndex = last;
   }
   if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
   if (last === 0) parent.textContent = text;

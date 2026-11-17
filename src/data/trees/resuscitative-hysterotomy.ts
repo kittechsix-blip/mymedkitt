@@ -521,7 +521,7 @@ export const RESUSCITATIVE_HYSTEROTOMY_NODES: DecisionNode[] = [
         duration: 'single dose (or 2-dose regimen)',
         notes: 'WOMAN trial — give within 3 hours of delivery. Reduces maternal mortality from bleeding.',
       },
-      pcnAllergy: {
+      otherOption: {
         drug: 'Misoprostol',
         dose: '800-1000 mcg',
         route: 'PR (rectal) or SL',
