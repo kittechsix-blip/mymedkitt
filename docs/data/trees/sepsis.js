@@ -502,7 +502,7 @@ export const SEPSIS_NODES = [
         type: 'info',
         module: 5,
         title: 'Resuscitation Endpoints',
-        body: '**Clinical targets (follow continuously):** [2][24]\n• **MAP ≥65 mmHg** (individualize within 60-70 range)\n• **Urine output ≥0.5 mL/kg/hr** — good UOP is reassuring; low UOP is nonspecific (may be ATN)\n• **Capillary refill time <3 seconds** (ANDROMEDA-SHOCK-2: improved composite outcome) [17]\n• **Perfusion index >1.4-2%** from pulse oximetry (emerging target) [23]\n• **Mentation** improving\n• **Heart rate** — mild tachycardia is appropriate; excessive tachycardia (>140) is harmful\n\n**Laboratory (q6h until improving):** [24]\n• **Serum lactate** — trend toward normalization. Stop checking once clearly falling. [23]\n• Routine labs: platelets, creatinine, LFTs, coagulation\n• Follow-up cultures\n\n**Hemodynamic monitoring:** [24]\n• Dynamic fluid responsiveness preferred over static CVP\n• Arterial line: NOT always necessary (2025 RCT: similar outcomes without arterial catheter) [24]\n• PAC: NOT recommended routinely [24]\n\n**Key insight:** Lactate is NOT an indicator of perfusion or anaerobic metabolism — it is primarily an index of endogenous epinephrine production. Use perfusion targets (CRT, skin, UOP) over lactate targets. [23]',
+        body: '**Clinical targets (follow continuously):** [2][24]\n• **MAP ≥65 mmHg** (individualize within 60-70 range)\n• **Urine output ≥0.5 mL/kg/hr** — good UOP is reassuring; low UOP is nonspecific (may be ATN)\n• **Capillary refill time <3 seconds** (ANDROMEDA-SHOCK-2: improved composite outcome) [17]\n• **Perfusion index >1.4-2%** from pulse oximetry (emerging target) [23]\n• **Mentation** improving\n• **Heart rate** — mild tachycardia is appropriate; excessive tachycardia (>140) is harmful\n\n**Laboratory (q6h until improving):** [24]\n• **Serum lactate** — trend toward normalization. Stop checking once clearly falling. [23]\n• Routine labs: platelets, creatinine, LFTs, coagulation\n• Follow-up cultures\n\n**Hemodynamic monitoring:** [24]\n• Dynamic fluid responsiveness preferred over static CVP\n• Arterial line: NOT always necessary (Muller et al., NEJM 2025: deferred arterial catheterization noninferior for 28-day mortality)\n• PAC: NOT recommended routinely [24]\n\n**Key insight:** Lactate is NOT an indicator of perfusion or anaerobic metabolism — it is primarily an index of endogenous epinephrine production. Use perfusion targets (CRT, skin, UOP) over lactate targets. [23]',
         citation: [2, 17, 23, 24],
         next: 'sepsis-respond',
         summary: 'CRT <3sec, MAP >=65, UOP >=0.5mL/kg/hr, lactate trending down — lactate is epinephrine index, not perfusion marker',
@@ -617,7 +617,7 @@ export const SEPSIS_CRITICAL_ACTIONS = [
     { text: 'Norepinephrine is first-line vasopressor - start 0.05 mcg/kg/min, target MAP ≥65', nodeId: 'sepsis-vp-init' },
     { text: 'Add vasopressin 0.03-0.04 units/min EARLY before escalating NE to high doses', nodeId: 'sepsis-vp-second' },
     { text: 'Hydrocortisone 50 mg IV q6h for vasopressor-dependent shock - reduces shock duration', nodeId: 'sepsis-steroids' },
-    { text: 'Source control within 6-12 hours - undrained foci will not respond to antibiotics alone', nodeId: 'sepsis-source-ctrl' },
+    { text: 'Source control within 6-12 hours - undrained foci may not respond to antibiotics alone', nodeId: 'sepsis-source-ctrl' },
     { text: 'RESTRICT fluids after initial 30 mL/kg - most crystalloid extravasates (95% leaves vasculature)', nodeId: 'sepsis-fluid-assess' },
     { text: 'Transfuse only if Hgb ≤7 g/dL - restrictive strategy safe in septic shock (TRISS trial)', nodeId: 'sepsis-transfusion' },
     { text: 'Discontinue vancomycin if no MRSA cultured within 48 hours', nodeId: 'sepsis-mrsa' },
@@ -629,7 +629,7 @@ export const SEPSIS_CITATIONS = [
     },
     {
         num: 2,
-        text: 'Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021. Crit Care Med. 2021;49(11):e1063-e1143.',
+        text: 'Evans L, Rhodes A, Alhazzani W, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021. Crit Care Med. 2021;49(11):e1063-e1143. https://pmc.ncbi.nlm.nih.gov/articles/PMC8486643/',
     },
     {
         num: 3,
