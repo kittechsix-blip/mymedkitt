@@ -1,7 +1,7 @@
 // MedKitt — STEMI (ST-Elevation Myocardial Infarction) Management
 // Recognition → ECG Pattern → Initial Therapies → Reperfusion → Complications → Disposition
 // 6 modules: Recognition & ECG → ECG Patterns → Initial Therapies → Reperfusion → Complications → Disposition
-// 21 nodes total.
+// 23 nodes total.
 
 import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
