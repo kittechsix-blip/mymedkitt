@@ -164,3 +164,7 @@ Every edit, old -> new:
 - Observational context from the earlier signoff still applies: a single-center comparison found fixed 1000 IU reached target INR less often in non-CNS INR <=6 bleeds (57.5% vs 86.4%).
 
 Gates run 2026-10-28: tsc --noEmit clean (exit 0); lint-citation-refs --gate PASS (no new dangling refs); lint-critical-actions --strict PASS; lint-calculator-refs --gate PASS; bun run test: all pass except the expected 'vendored search engine is the skill's current engine' test (other session's unversioned engine edit).
+
+## Completed 2026-11-17
+
+FDA Safety Communication (12/18/2025) opened directly and confirms the withdrawal. The 8 consults the Oct 27 pass missed, plus 2 PCC drug lines, now carry the withdrawn wording (main a73e5c99). The drafts in this folder are superseded. Remaining: Dr. Kitlowski re-audit.
