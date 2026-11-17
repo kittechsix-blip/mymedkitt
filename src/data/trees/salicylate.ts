@@ -731,7 +731,7 @@ export const SALICYLATE_NODES: DecisionNode[] = [
     type: 'result',
     module: 6,
     title: 'Floor / Monitored Bed Admission',
-    body: 'Symptomatic with improving trajectory. [1][2][15][18]\n\n• Continue serial salicylate levels q4h [18]\n• May need continued alkalinization — transfer to ICU if worsening [6][15]\n• Transition to [KCl PO](#/drug/potassium-chloride-oral/mild) for ongoing K+ repletion [6]\n• Continue D5W-based IV fluids [15][17]\n\n**Psychiatric evaluation** if intentional ingestion.\n\n**Poison Control:** 1-800-222-1222',
+    body: 'Symptomatic with improving trajectory. [1][2][15][18]\n\n• Continue serial salicylate levels q4h [18]\n• May need continued alkalinization — transfer to ICU if worsening [6][15]\n• Transition to [KCl PO](#/drug/potassium-chloride-oral/acute replacement) for ongoing K+ repletion [6]\n• Continue D5W-based IV fluids [15][17]\n\n**Psychiatric evaluation** if intentional ingestion.\n\n**Poison Control:** 1-800-222-1222',
     recommendation: 'Admit to monitored bed. Serial salicylate levels q4h. Continue alkalinization if needed. Psychiatric evaluation for intentional ingestions.',
     citation: [1, 2, 6, 15, 17, 18],
   },
