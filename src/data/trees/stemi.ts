@@ -625,7 +625,7 @@ export const STEMI_MODULE_LABELS = [
 
 export const STEMI_CRITICAL_ACTIONS = [
   { text: '12-lead ECG within 10 minutes of first medical contact - STEMI is an ECG diagnosis', nodeId: 'stemi-start' },
-  { text: 'Activate cath lab immediately for confirmed STEMI - goal door-to-device <90 min', nodeId: 'stemi-confirmed' },
+  { text: 'Activate cath lab immediately for confirmed STEMI - goal FMC-to-device ≤90 min', nodeId: 'stemi-confirmed' },
   { text: 'Aspirin 162-325 mg chewed + P2Y12 inhibitor loading before/during PCI', nodeId: 'stemi-initial-tx' },
   { text: 'Check posterior leads V7-V9 if V1-V3 show ST depression with upright T waves', nodeId: 'stemi-posterior' },
   { text: 'Apply Sgarbossa criteria for STEMI diagnosis in LBBB or paced rhythm', nodeId: 'stemi-lbbb' },
