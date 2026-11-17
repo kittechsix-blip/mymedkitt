@@ -695,7 +695,7 @@ export const SEPSIS_CRITICAL_ACTIONS = [
   { text: 'Norepinephrine is first-line vasopressor - start 0.05 mcg/kg/min, target MAP ≥65', nodeId: 'sepsis-vp-init' },
   { text: 'Add vasopressin 0.03-0.04 units/min EARLY before escalating NE to high doses', nodeId: 'sepsis-vp-second' },
   { text: 'Hydrocortisone 50 mg IV q6h for vasopressor-dependent shock - reduces shock duration', nodeId: 'sepsis-steroids' },
-  { text: 'Source control within 6-12 hours - undrained foci will not respond to antibiotics alone', nodeId: 'sepsis-source-ctrl' },
+  { text: 'Source control within 6-12 hours - undrained foci may not respond to antibiotics alone', nodeId: 'sepsis-source-ctrl' },
   { text: 'RESTRICT fluids after initial 30 mL/kg - most crystalloid extravasates (95% leaves vasculature)', nodeId: 'sepsis-fluid-assess' },
   { text: 'Transfuse only if Hgb ≤7 g/dL - restrictive strategy safe in septic shock (TRISS trial)', nodeId: 'sepsis-transfusion' },
   { text: 'Discontinue vancomycin if no MRSA cultured within 48 hours', nodeId: 'sepsis-mrsa' },
