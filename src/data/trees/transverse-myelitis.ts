@@ -6,7 +6,7 @@ import type { DecisionNode } from '../../models/types.js';
 import type { Citation } from './neurosyphilis.js';
 
 export const TRANSVERSE_MYELITIS_CRITICAL_ACTIONS = [
-  { text: 'EMERGENT MRI (whole spine, with + without gad) to exclude COMPRESSIVE myelopathy FIRST', nodeId: 'tm-mri-gate' },
+  { text: 'Suspected spinal DCI after diving: oxygen + urgent hyperbaric consultation; otherwise emergent MRI for suspected compressive myelopathy', nodeId: 'tm-mri-gate' },
   { text: 'Establish a sensory level — the clinical hallmark of a cord lesion', nodeId: 'tm-presentation' },
   { text: 'Assess for urinary retention (post-void residual) — early autonomic sign', nodeId: 'tm-presentation' },
   { text: 'LP (cells, protein, oligoclonal bands, IgG index) + serum AQP4-IgG and MOG-IgG', nodeId: 'tm-workup' },
@@ -26,7 +26,7 @@ export const TRANSVERSE_MYELITIS_NODES: DecisionNode[] = [
     type: 'info',
     module: 1,
     title: 'Acute Transverse Myelitis',
-    body: '**Transverse myelitis (TM)** is an acute inflammatory disorder of the spinal cord producing a band of motor, sensory, and autonomic dysfunction below the lesion. "Transverse" = across the cord at one or more segments.\n\n**The triad that says "this is the cord":**\n- **Bilateral** motor weakness (para- or quadriparesis)\n- A **sensory level** — a horizontal line below which sensation changes\n- **Sphincter/autonomic** dysfunction (urinary retention is early and common)\n\n**Tempo:** progresses over hours to 21 days, nadir typically 4 hours to a few days. Faster than GBS climbs, but unlike stroke it is not maximal at onset.\n\n**The ED job is NOT to confirm inflammation — it is to EXCLUDE COMPRESSION.** A compressive myelopathy (epidural abscess, hematoma, tumor, disc) looks identical and is a neurosurgical emergency. Get the MRI first.',
+    body: '**Recent diving or rapid ascent?** New myelopathy may represent [spinal decompression illness](#/tree/decompression-sickness). Start high-concentration oxygen and contact hyperbaric/diving medicine immediately. Do not delay indicated recompression for routine spinal MRI. Suspected traumatic or compressive pathology still requires urgent targeted evaluation in parallel. [16]\n\n**Transverse myelitis (TM)** is an acute inflammatory disorder of the spinal cord producing a band of motor, sensory, and autonomic dysfunction below the lesion. "Transverse" = across the cord at one or more segments.\n\n**The triad that says "this is the cord":**\n- **Bilateral** motor weakness (para- or quadriparesis)\n- A **sensory level** — a horizontal line below which sensation changes\n- **Sphincter/autonomic** dysfunction (urinary retention is early and common)\n\n**Tempo:** progresses over hours to 21 days, nadir typically 4 hours to a few days. Faster than GBS climbs, but unlike stroke it is not maximal at onset.\n\n**Outside the diving-related exception above, exclude compression before diagnosing inflammation.** A compressive myelopathy (epidural abscess, hematoma, tumor, disc) looks identical and is a neurosurgical emergency. Get the MRI first.',
     images: [{
       src: 'data:image/svg+xml;utf8,' + encodeURIComponent(
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" font-family="sans-serif">'
@@ -48,9 +48,9 @@ export const TRANSVERSE_MYELITIS_NODES: DecisionNode[] = [
       alt: 'Schematic of a sensory level: normal sensation above a horizontal line on the trunk, impaired below, with an inflamed spinal cord cross-section.',
       caption: 'A sensory level localizes the lesion to the cord. Map it on the trunk and check for urinary retention. (Original schematic, no license restriction.)'
     }],
-    citation: [1, 2],
+    citation: [1, 2, 16],
     next: 'tm-presentation',
-    summary: 'Acute cord inflammation: bilateral weakness + sensory level + sphincter dysfunction. ED job = exclude compression first.',
+    summary: 'Acute cord inflammation: bilateral weakness + sensory level + sphincter dysfunction. Diving-related spinal DCI: urgent recompression evaluation; otherwise exclude compression first.',
   },
 
   {
@@ -58,8 +58,8 @@ export const TRANSVERSE_MYELITIS_NODES: DecisionNode[] = [
     type: 'question',
     module: 1,
     title: 'Clinical Presentation & Localization',
-    body: '**Map the deficit:**\n- **Sensory level** — test pinprick/temperature ascending up the trunk until it normalizes; that dermatome localizes the lesion (thoracic most common).\n- **Weakness** — bilateral, often initially flaccid (spinal shock) then spastic with hyperreflexia + Babinski over days.\n- **Bladder/bowel** — urinary retention or incontinence; **always check a post-void residual.**\n- **Back pain** at the level in ~one third.\n\n**What pushes you toward URGENT structural cause (get MRI now):**\n- Severe focal back pain, fever, immunosuppression, IVDU → epidural **abscess**\n- Anticoagulation, recent procedure → epidural **hematoma**\n- Known cancer, weight loss → **metastatic compression**\n- Saddle anesthesia + retention + areflexia → **cauda equina**\n\nEvery one of these is a neurosurgical clock. The next step is the same for all: image the cord.',
-    citation: [1, 2, 13],
+    body: '**Recent diving or rapid ascent?** New myelopathy may represent [spinal decompression illness](#/tree/decompression-sickness). Start high-concentration oxygen and contact hyperbaric/diving medicine immediately. Do not delay indicated recompression for routine spinal MRI. Suspected traumatic or compressive pathology still requires urgent targeted evaluation in parallel. [16]\n\n**Map the deficit:**\n- **Sensory level** — test pinprick/temperature ascending up the trunk until it normalizes; that dermatome localizes the lesion (thoracic most common).\n- **Weakness** — bilateral, often initially flaccid (spinal shock) then spastic with hyperreflexia + Babinski over days.\n- **Bladder/bowel** — urinary retention or incontinence; **always check a post-void residual.**\n- **Back pain** at the level in ~one third.\n\n**What pushes you toward URGENT structural cause (get MRI now):**\n- Severe focal back pain, fever, immunosuppression, IVDU → epidural **abscess**\n- Anticoagulation, recent procedure → epidural **hematoma**\n- Known cancer, weight loss → **metastatic compression**\n- Saddle anesthesia + retention + areflexia → **cauda equina**\n\nEvery one of these is a neurosurgical clock. The next step is the same for all: image the cord.',
+    citation: [1, 2, 13, 16],
     options: [
       {
         label: 'Bilateral weakness + sensory level ± retention',
@@ -74,7 +74,7 @@ export const TRANSVERSE_MYELITIS_NODES: DecisionNode[] = [
         urgency: 'critical',
       },
     ],
-    summary: 'Establish sensory level + post-void residual. Any compression red flag → MRI now.',
+    summary: 'Establish sensory level + post-void residual. Recent diving: consider spinal DCI without MRI delay; compression red flags → urgent MRI.',
     safetyLevel: 'critical',
   },
 
@@ -86,8 +86,8 @@ export const TRANSVERSE_MYELITIS_NODES: DecisionNode[] = [
     id: 'tm-mri-gate',
     type: 'question',
     module: 2,
-    title: 'ROOT GATE: Emergent MRI to Exclude Compression',
-    body: '**This is the decision the whole consult hinges on.** Transverse myelitis is a diagnosis of exclusion — you cannot call cord dysfunction "inflammatory" until you have ruled out a surgically correctable compressive lesion.\n\n**Order: MRI of the spinal cord, WITH and WITHOUT gadolinium.**\n- Image the clinically suspected level **plus the whole cord** — multifocal disease and skip lesions are common, and a cervical lesion can present with a thoracic-feeling level.\n- If MRI is unavailable, CT myelography is the fallback to exclude compression.\n- Do NOT delay imaging for the LP. Compression first.\n\n**What you are hunting:** epidural abscess, hematoma, tumor/metastasis, herniated disc, or severe stenosis pressing on the cord.',
+    title: 'MRI Gate: Check Diving Exception First',
+    body: '**Recent diving or rapid ascent?** New myelopathy may represent [spinal decompression illness](#/tree/decompression-sickness). Start high-concentration oxygen and contact hyperbaric/diving medicine immediately. Do not delay indicated recompression for routine spinal MRI. Suspected traumatic or compressive pathology still requires urgent targeted evaluation in parallel. [16]\n\n**For suspected inflammatory or compressive myelopathy after considering the diving exception:** Transverse myelitis is a diagnosis of exclusion — you cannot call cord dysfunction "inflammatory" until you have ruled out a surgically correctable compressive lesion.\n\n**Order: MRI of the spinal cord, WITH and WITHOUT gadolinium.**\n- Image the clinically suspected level **plus the whole cord** — multifocal disease and skip lesions are common, and a cervical lesion can present with a thoracic-feeling level.\n- If MRI is unavailable, CT myelography is the fallback to exclude compression.\n- Do NOT delay imaging for the LP. Compression first.\n\n**What you are hunting:** epidural abscess, hematoma, tumor/metastasis, herniated disc, or severe stenosis pressing on the cord.',
     images: [{
       src: 'data:image/svg+xml;utf8,' + encodeURIComponent(
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 240" font-family="sans-serif">'
@@ -108,7 +108,7 @@ export const TRANSVERSE_MYELITIS_NODES: DecisionNode[] = [
       alt: 'Side-by-side schematic: compressive lesion displacing the cord versus intrinsic T2 signal within the cord.',
       caption: 'Compression displaces the cord (surgical); intrinsic inflammation shows signal within the cord (medical). MRI distinguishes them. (Original schematic.)'
     }],
-    citation: [1, 2, 3, 13],
+    citation: [1, 2, 3, 13, 16],
     options: [
       {
         label: 'COMPRESSION found (abscess / hematoma / tumor / disc)',
@@ -122,7 +122,7 @@ export const TRANSVERSE_MYELITIS_NODES: DecisionNode[] = [
         next: 'tm-workup',
       },
     ],
-    summary: 'MRI whole cord with + without gad BEFORE LP. Compression = surgery; intrinsic signal = inflammatory workup.',
+    summary: 'Diving-related spinal DCI: urgent hyperbaric pathway; otherwise MRI whole cord with + without gad BEFORE LP. Compression = surgery; intrinsic signal = inflammatory workup.',
     safetyLevel: 'critical',
   },
 
@@ -286,6 +286,7 @@ export const TRANSVERSE_MYELITIS_MODULE_LABELS = [
 // -------------------------------------------------------------------
 
 export const TRANSVERSE_MYELITIS_CITATIONS: Citation[] = [
+  { num: 16, text: 'Moon RE, Mitchell S. Hyperbaric treatment for decompression sickness: current recommendations. Undersea Hyperb Med. 2019;46(5):685-693. https://www.uhms.org/cs/uhm-search/hyperbaric-treatment-for-decompression-sickness-current-recommendations/download.html ; Jüttner B et al. S2k guideline for diving accidents. 2023. https://doi.org/10.3205/000315' },
   { num: 1, text: 'Beh SC, Greenberg BM, Frohman T, Frohman EM. Transverse Myelitis. Neurol Clin. 2013;31(1):79-138.' },
   { num: 2, text: 'Simone CG, Emmady PD. Transverse Myelitis. StatPearls. Updated 2023.' },
   { num: 3, text: 'Farkas J. Acute Demyelinating Disorders. Internet Book of Critical Care (EMCrit/IBCC). https://emcrit.org/ibcc/myelin/ (see also Spinal Cord: https://emcrit.org/ibcc/cord/)' },

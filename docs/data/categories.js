@@ -518,6 +518,7 @@ export const DEFAULT_CATEGORIES = [
         name: 'EM',
         icon: 'em.png',
         decisionTrees: [
+            { id: 'decompression-sickness', title: 'Decompression Sickness', subtitle: 'Diving injury · Spinal DCS / gas embolism · Oxygen · Definitive recompression · Transfer', categoryId: 'emergency-medicine', version: '1.0', nodeCount: 22, entryNodeId: 'dcs-start' },
             {
                 id: 'pedi-resus-numbers',
                 title: 'Pedi Resus Numbers (Color Zone Tape)',

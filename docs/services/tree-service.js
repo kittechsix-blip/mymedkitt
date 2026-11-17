@@ -1131,6 +1131,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/nail-bed-injuries.js');
             return { nodes: m.NAIL_BED_INJURIES_NODES, entryNodeId: 'nail-start', categoryId: 'procedures', moduleLabels: m.NAIL_BED_INJURIES_MODULE_LABELS, citations: m.NAIL_BED_INJURIES_CITATIONS, criticalActions: m.NAIL_BED_INJURIES_CRITICAL_ACTIONS };
         },
+        'decompression-sickness': async () => {
+            const m = await import('../data/trees/decompression-sickness.js');
+            return { nodes: m.DECOMPRESSION_SICKNESS_NODES, entryNodeId: 'dcs-start', categoryId: 'emergency-medicine', moduleLabels: m.DECOMPRESSION_SICKNESS_MODULE_LABELS, citations: m.DECOMPRESSION_SICKNESS_CITATIONS, criticalActions: m.DECOMPRESSION_SICKNESS_CRITICAL_ACTIONS };
+        },
         'eclampsia': async () => {
             const m = await import('../data/trees/eclampsia.js');
             return { nodes: m.ECLAMPSIA_NODES, entryNodeId: 'eclampsia-start', categoryId: 'ob-gyn', moduleLabels: m.ECLAMPSIA_MODULE_LABELS, citations: m.ECLAMPSIA_CITATIONS, criticalActions: m.ECLAMPSIA_CRITICAL_ACTIONS };

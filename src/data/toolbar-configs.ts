@@ -48,6 +48,7 @@ export interface ToolbarConfig {
  * existing inline-all behavior, no regression. See PLAN.md R2 + Phase 1.2.
  */
 export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
+  'decompression-sickness',
   'burns',
   'mri-for-dummies',
   'anisocoria',
@@ -77,6 +78,14 @@ export const TOOLBAR_OVERFLOW: ReadonlySet<string> = new Set<string>([
 // toolbar validation entirely (the validator warned and skipped ~1,264 targets)
 // and is the root cause of the 2026-07-27 dead-toolbar-button CRITICAL.
 export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
+  'decompression-sickness': [
+    { id: 'steps', label: 'Steps', icon: '📋', action: 'jump', target: 'dcs-start' },
+    { id: 'recompress', label: 'Recompress', icon: '🫧', action: 'jump', target: 'dcs-recompression', pinned: true },
+    { id: 'oxygen', label: 'Oxygen', icon: '🫁', action: 'jump', target: 'dcs-oxygen', pinned: true },
+    { id: 'neuro', label: 'Neuro Exam', icon: '🧠', action: 'jump', target: 'dcs-neuro-exam' },
+    { id: 'transfer', label: 'Transfer', icon: '☎️', action: 'jump', target: 'dcs-transfer', pinned: true },
+    { id: 'stop', label: 'Stop', icon: '🛑', action: 'jump', target: 'dcs-pitfalls' },
+  ],
   'hemoptysis-hub': [
     { id: 'stop', label: 'Stop', icon: '🛑', action: 'overlay', target: 'hemoptysis-hub-stop' },
   ],
