@@ -467,7 +467,7 @@ export const SEPSIS_NODES = [
         type: 'info',
         module: 4,
         title: 'Blood Transfusion Thresholds',
-        body: '**Restrictive transfusion strategy:** Transfuse for **Hgb ≤7 g/dL** [2][22][24]\n\n**Evidence:** [22][24]\n• **TRISS trial** (n=998): No difference in 28-day mortality between restrictive (Hgb ≤7) vs liberal (Hgb ≤9) strategies in septic shock\n• Restrictive strategy resulted in 50% fewer transfusions with no increase in ischemic events [22]\n\n**Exceptions (consider higher threshold):**\n• Active hemorrhagic shock\n• Acute myocardial ischemia\n• Severe hypoxemia not improving with O₂\n\n**Do NOT transfuse to supranormal hematocrit** — the original EGDT protocol targeted Hct >30, but subsequent trials (ProCESS, ARISE, ProMISE) showed no benefit. [4][5][6][7]',
+        body: '**Restrictive transfusion strategy:** Transfuse for **Hgb ≤7 g/dL** [2][22][24]\n\n**Evidence:** [22][24]\n• **TRISS trial** (n=998): No difference in 90-day mortality (43.0% vs 45.0%) between restrictive (Hgb ≤7) vs liberal (Hgb ≤9) strategies in septic shock\n• Restrictive strategy resulted in 50% fewer transfusions with no increase in ischemic events [22]\n\n**Exceptions (consider higher threshold):**\n• Active hemorrhagic shock\n• Acute myocardial ischemia\n• Severe hypoxemia not improving with O₂\n\n**Do NOT transfuse to supranormal hematocrit** — the original EGDT protocol targeted Hct >30, but subsequent trials (ProCESS, ARISE, ProMISE) showed no benefit. [4][5][6][7]',
         citation: [2, 4, 5, 6, 7, 22, 24],
         next: 'sepsis-mimics-node',
         summary: 'Transfuse only for Hgb <=7 g/dL (TRISS) — 50% fewer transfusions with no increased ischemic events',
