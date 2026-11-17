@@ -406,18 +406,18 @@ export const SALICYLATE_NODES = [
         type: 'info',
         module: 4,
         title: 'CRITICAL — Potassium Repletion',
-        body: '**Hypokalemia BLOCKS urinary alkalinization. You CANNOT achieve alkaline urine without adequate K+.** [1][2][3][6]\n\nWhen K+ is low, the distal tubule reabsorbs K+ and excretes H+ instead — producing **acidic urine** despite systemic alkalosis. No amount of bicarbonate will overcome this. [6][22]\n\n[KCl IV](#/drug/potassium-chloride-iv/severe) 20-40 mEq/hr IV (with cardiac monitoring for rates > 20 mEq/hr). [2]\n\n**Add 20-40 mEq KCl per liter** of bicarbonate infusion. [2][6][15]\n\n**Target K+ ≥ 4.0-4.5 mEq/L.** [2][15]\n\nBicarbonate infusion tends to drop K+ further — preemptive repletion is essential. [6]',
-        citation: [1, 2, 3, 6, 15, 22],
+        body: '**Hypokalemia BLOCKS urinary alkalinization. You CANNOT achieve alkaline urine without adequate K+.** [1][2][3][6]\n\nWhen K+ is low, the distal tubule reabsorbs K+ and excretes H+ instead — producing **acidic urine** despite systemic alkalosis. No amount of bicarbonate will overcome this. [6][22]\n\n[KCl IV](#/drug/potassium-chloride-iv/severe) rate per FDA label: **≤10 mEq/hr** if K+ >2.5 mEq/L (max 200 mEq/24 h). Only if K+ <2.0 mEq/L **with ECG changes or muscle paralysis**: up to **40 mEq/hr**, very cautiously, with continuous cardiac monitoring (max 400 mEq/24 h). [25]\n\n**Add 20-40 mEq KCl per liter** of bicarbonate infusion. [2][6][15]\n\n**Target K+ ≥ 4.0-4.5 mEq/L.** [2][15]\n\nBicarbonate infusion tends to drop K+ further — preemptive repletion is essential. [6]',
+        citation: [1, 2, 3, 6, 15, 22, 25],
         summary: 'Hypokalemia BLOCKS urinary alkalinization — replete K+ to 4.0-4.5 mEq/L; add 20-40 mEq KCl per liter of bicarb',
         safetyLevel: 'critical',
         treatment: {
             firstLine: {
                 drug: 'Potassium Chloride (KCl)',
-                dose: '20-40 mEq/hr IV',
+                dose: '≤10 mEq/hr IV if K+ >2.5; up to 40 mEq/hr only if K+ <2.0 with ECG changes or paralysis',
                 route: 'IV',
                 frequency: 'Continuous infusion',
                 duration: 'Until K+ ≥ 4.0-4.5 mEq/L',
-                notes: 'Cardiac monitoring required for rates > 20 mEq/hr. Add 20-40 mEq per liter of bicarb infusion.',
+                notes: 'FDA label: max 200 mEq/24 h (400 mEq/24 h in the urgent case), continuous cardiac monitoring for urgent rates. Add 20-40 mEq per liter of bicarb infusion (label max concentration 40 mEq/L).',
             },
             alternative: {
                 drug: 'Potassium Chloride (KCl) Oral',
@@ -427,7 +427,7 @@ export const SALICYLATE_NODES = [
                 duration: 'Until K+ ≥ 4.0-4.5 mEq/L',
                 notes: 'Use oral if tolerating PO and not severely hypokalemic.',
             },
-            monitoring: 'K+ level q2-4h during active repletion. Continuous cardiac monitoring if infusion > 20 mEq/hr.',
+            monitoring: 'K+ level q2-4h during active repletion. Continuous cardiac monitoring for any rate >10 mEq/hr.',
         },
         next: 'sal-dextrose',
     },
@@ -703,4 +703,5 @@ export const SALICYLATE_CITATIONS = [
     { num: 22, text: 'Nelson LS, Howland MA, Lewin NA, Smith SW, Goldfrank LR, Hoffman RS, eds. Goldfrank\'s Toxicologic Emergencies. 11th ed. McGraw-Hill Education; 2019. Ch. 39, Salicylates. ISBN 978-1-259-85961-8.' },
     { num: 23, text: 'Chyka PA, Erdman AR, Christianson G, et al. Salicylate poisoning: an evidence-based consensus guideline for out-of-hospital management. Clin Toxicol (Phila). 2007;45(2):95-131. doi:10.1080/15563650600907140. PMID 17364628.' },
     { num: 24, text: 'Glauser T, Shinnar S, Gloss D, et al. Evidence-Based Guideline: Treatment of Convulsive Status Epilepticus in Children and Adults: Report of the Guideline Committee of the American Epilepsy Society. Epilepsy Curr. 2016;16(1):48-61. doi:10.5698/1535-7597-16.1.48. PMID 26900382.' },
+    { num: 25, text: 'Potassium Chloride Injection [prescribing information]. DailyMed, U.S. National Library of Medicine. Dosage and Administration. https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8367a2ae-dfd9-4515-838c-529920291ca0' },
 ];
