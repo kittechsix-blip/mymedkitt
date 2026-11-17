@@ -132,7 +132,7 @@ export const UPPER_GI_BLEED_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Transfusion Strategy',
-    body: '**Restrictive Transfusion (Recommended):** [8]\n\n| Threshold | Hgb <7 g/dL |\n|-----------|-------------|\n| Target | 7-8 g/dL |\n| Exception | ACS: target >8 g/dL |\n\n**Why Restrictive?**\n• Excessive transfusion increases portal pressure\n• Worsens variceal bleeding\n• Villanueva: 45% mortality reduction with restrictive approach\n\n**Coagulation Targets:**\n• Platelets >50,000\n• Fibrinogen >150 mg/dL\n• INR: Consider reversal if supratherapeutic\n\n**Special Situations:**\n• **Massive bleeding:** Activate MTP, permissive hypotension\n• **On warfarin:** 4F-PCC if life-threatening; Vitamin K 10mg IV\n• **On DOAC:** Idarucizumab (dabigatran), Andexanet (Xa inhibitors)',
+    body: '**Restrictive Transfusion (Recommended):** [8]\n\n| Threshold | Hgb <7 g/dL |\n|-----------|-------------|\n| Target | 7-8 g/dL |\n| Exception | ACS: target >8 g/dL |\n\n**Why Restrictive?**\n• Excessive transfusion increases portal pressure\n• Worsens variceal bleeding\n• Villanueva: 45% mortality reduction with restrictive approach\n\n**Coagulation Targets:**\n• Platelets >50,000\n• Fibrinogen >150 mg/dL\n• INR: Consider reversal if supratherapeutic\n\n**Special Situations:**\n• **Massive bleeding:** Activate MTP, permissive hypotension\n• **On warfarin:** 4F-PCC if life-threatening; Vitamin K 10mg IV\n• **On DOAC:** Idarucizumab (dabigatran), 4F-PCC (Xa inhibitors; andexanet alfa no longer marketed in the US)',
     citation: [8],
     next: 'ugib-cirrhosis-check',
 

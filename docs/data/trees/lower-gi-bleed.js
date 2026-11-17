@@ -123,7 +123,7 @@ export const LOWER_GI_BLEED_NODES = [
         type: 'info',
         module: 2,
         title: 'High-Risk LGIB',
-        body: '**Oakland Score >16 or high-risk features** — admit for monitoring and intervention.\n\n**Management:**\n• NPO for potential colonoscopy/intervention\n• Continuous telemetry monitoring\n• Serial hemoglobin q6-8h\n• Type and screen (crossmatch if anticipated transfusion)\n• GI consultation for colonoscopy timing\n\n**Assess for anticoagulation reversal** if applicable:\n• [Warfarin](#/drug/warfarin/reversal): Vitamin K + 4-factor PCC\n• [Dabigatran](#/drug/idarucizumab/reversal): Idarucizumab\n• Xa inhibitors: Consider [andexanet alfa](#/drug/andexanet/reversal) or 4F-PCC',
+        body: '**Oakland Score >16 or high-risk features** — admit for monitoring and intervention.\n\n**Management:**\n• NPO for potential colonoscopy/intervention\n• Continuous telemetry monitoring\n• Serial hemoglobin q6-8h\n• Type and screen (crossmatch if anticipated transfusion)\n• GI consultation for colonoscopy timing\n\n**Assess for anticoagulation reversal** if applicable:\n• [Warfarin](#/drug/warfarin/reversal): Vitamin K + 4-factor PCC\n• [Dabigatran](#/drug/idarucizumab/reversal): Idarucizumab\n• Xa inhibitors: 4F-PCC (andexanet alfa is no longer marketed in the US)',
         citation: [1, 2, 5],
         next: 'lgib-resuscitation',
         summary: 'Oakland >16: NPO, telemetry, serial Hgb, GI consult; reverse anticoagulation if present',

@@ -8635,7 +8635,7 @@ const PCC_4FACTOR: DrugEntry = {
     },
     {
       indication: 'DOAC reversal — ICH (Xa inhibitor, off-label)',
-      regimen: '50 IU/kg IV (fixed dose regardless of anti-Xa level). Use when andexanet alfa unavailable. Less targeted than specific reversal but widely available.',
+      regimen: '50 IU/kg IV (fixed dose regardless of anti-Xa level). Andexanet alfa is no longer marketed in the US. Less targeted than specific reversal but widely available.',
       weightCalc: { dosePerKg: 50, unit: 'IU', maxDose: 5000 },
     },
     {
@@ -12188,7 +12188,7 @@ const KCENTRA: DrugEntry = {
   genericName: 'Prothrombin Complex Concentrate (Factors II, VII, IX, X)',
   drugClass: 'Coagulation factor concentrate',
   route: 'IV',
-  indications: ['Warfarin reversal in major bleeding', 'DOAC reversal (off-label, when andexanet unavailable)', 'Massive hemorrhage with coagulopathy'],
+  indications: ['Warfarin reversal in major bleeding', 'DOAC reversal (off-label; andexanet alfa no longer marketed in the US)', 'Massive hemorrhage with coagulopathy'],
   dosing: [
     {
       indication: 'Warfarin reversal — fixed dose (PROPER-3) or per institutional protocol',
