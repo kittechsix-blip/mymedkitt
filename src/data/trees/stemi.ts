@@ -687,7 +687,7 @@ export const STEMI_CLINICAL_NOTES: string[] = [
   'Posterior STEMI (LCx occlusion) accounts for ~3% of acute MIs and is frequently missed. Obtain posterior leads V7-V9 when V1-V3 show ST depression with upright T waves.',
   'In LBBB: Sgarbossa score \u22653 has 98% specificity for STEMI. Modified Sgarbossa (ST/S ratio < -0.25) outperforms the original 3rd criterion.',
   'Routine oxygen in non-hypoxic STEMI patients provides no benefit and may increase infarct size. Administer O2 only if SpO2 <90%.',
-  'Morphine delays absorption of P2Y12 inhibitors (ticagrelor, clopidogrel) and was associated with higher mortality in the CRUSADE trial. Use only for refractory pain.',
+  'Morphine delays absorption of P2Y12 inhibitors (ticagrelor, clopidogrel) and was associated with higher mortality in the observational CRUSADE registry. Use only for refractory pain.',
   'AIVR (accelerated idioventricular rhythm) after reperfusion is benign and self-limited. Treating with antidysrhythmics may cause hemodynamic collapse.',
   '33-50% of inferior STEMIs involve the right ventricle. Get right-sided leads. Avoid nitrates and diuretics \u2014 these patients are volume-dependent.',
   'Age alone is NOT a reason to withhold reperfusion therapy. Consider half-dose tenecteplase for patients >75 years to reduce ICH risk.',
