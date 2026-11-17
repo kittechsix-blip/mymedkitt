@@ -492,7 +492,7 @@ export const ICH_CITATIONS: Citation[] = [
   { num: 27, text: 'Greer DM, Helbok R, Badjatia N, et al; INTREPID Investigators. Fever Prevention in Patients With Acute Vascular Brain Injury: The INTREPID Randomized Clinical Trial. JAMA. 2024;332(18):1525-1534. doi:10.1001/jama.2024.14745. PMCID: PMC11425189 (free full text). ClinicalTrials.gov NCT02996266.' },
   { num: 28, text: 'Hemphill JC 3rd, Bonovich DC, Besmertis L, Manley GT, Johnston SC. The ICH score: a simple, reliable grading scale for intracerebral hemorrhage. Stroke. 2001;32(4):891-897. doi:10.1161/01.STR.32.4.891. PMID: 11283388.' },
   { num: 29, text: 'Rost NS, Smith EE, Chang Y, et al. Prediction of functional outcome in patients with primary intracerebral hemorrhage: the FUNC score. Stroke. 2008;39(8):2304-2309. doi:10.1161/STROKEAHA.107.512202. PMID: 18556582.' },
-  { num: 30, text: 'PROPER-3 trial: fixed-dose (1,000 IU) 4-factor PCC vs variable-dose (weight- and INR-based) 4-factor PCC for vitamin K antagonist-related bleeding. Intracranial hemorrhage excluded from the trial.' },
+  { num: 30, text: 'Abdoellakhan RA, Khorsand N, ter Avest E, et al. Fixed Versus Variable Dosing of Prothrombin Complex Concentrate for Bleeding Complications of Vitamin K Antagonists—The PROPER3 Randomized Clinical Trial. Ann Emerg Med. 2022;79(1):20-30. doi:10.1016/j.annemergmed.2021.06.016. PMID: 34535300. (Non-intracranial bleeds only; noninferiority not demonstrated.)' },
 ];
 
 // -------------------------------------------------------------------
