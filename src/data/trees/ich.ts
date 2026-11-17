@@ -363,7 +363,7 @@ export const ICH_NODES: DecisionNode[] = [
       monitoring: 'Continuous EEG if impaired consciousness disproportionate to CT, unexplained mental status changes, or witnessed seizure.',
     },
     next: 'ich-icp-fever',
-    summary: 'Treat clinical seizures with levetiracetam — prophylactic AEDs controversial (AHA says consider)',
+    summary: 'Treat clinical or EEG seizures with levetiracetam — seizure prophylaxis NOT recommended (AHA/ASA 2022)',
   },
 
   {
