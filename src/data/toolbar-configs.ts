@@ -1950,7 +1950,7 @@ export const TOOLBAR_CONFIGS: Record<string, ToolbarItem[]> = {
   'eating-disorders': [
     { id: 'marsipan', label: 'MARSIPAN', icon: '📊', action: 'calculator', target: 'marsipan-risk' },
     { id: 'qtc', label: 'QTc', icon: '🧮', action: 'calculator', target: 'qtc-calculator' },
-    { id: 'refeeding', label: 'Refeeding', icon: '🍽️', action: 'jump', target: 'ed-refeeding-protocol' },
+    { id: 'refeeding', label: 'Refeed Rx', icon: '🍽️', action: 'jump', target: 'ed-refeeding' },
     { id: 'lytes', label: 'Lytes', icon: '💧', action: 'jump', target: 'ed-electrolyte-replacement' },
   ],
   'peds-trauma': [

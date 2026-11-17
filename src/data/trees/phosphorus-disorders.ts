@@ -58,7 +58,7 @@ export const PHOSPHORUS_DISORDERS_NODES: DecisionNode[] = [
     type: 'info',
     module: 2,
     title: 'Severe Hypophosphatemia',
-    body: 'Use IV phosphate when phos <1 mg/dL, severe symptoms, inability to take PO, respiratory failure, myocardial dysfunction, rhabdomyolysis, hemolysis, or critical illness.\n\nTypical adult IV strategy — dose is elemental phosphorus and is the same for either salt, infused over about 6 hours:\n- Phos 1.7-2.2 mg/dL: 0.2 mmol/kg\n- Phos 1.0-1.7 mg/dL: 0.4 mmol/kg\n- Phos <1.0 mg/dL: 0.6 mmol/kg\nReduce dose by about 50% in renal dysfunction. Do not exceed 45 mmol phosphorus in a single dose.\n\nUse [potassium phosphate](#/drug/potassium-phosphate/Severe hypophosphatemia) only if potassium is low/normal (label threshold: serum K below 4 mEq/L) and renal function allows. It carries a fixed 1.47 mEq of potassium per mmol of phosphorus — 30 mmol P = 44 mEq K, 45 mmol P = 66 mEq K. Count that against every other potassium the patient is receiving.\n\nUse [sodium phosphate](#/drug/sodium-phosphate/Severe hypophosphatemia) when K is high, renal function is impaired, or potassium load is unsafe. It carries 1.33 mEq sodium per mmol phosphorus.\n\nRate for potassium phosphate is limited by the potassium: 6.8 mmol/hr phosphorus peripherally (10 mEq/hr K), 15 mmol/hr centrally (22 mEq/hr K), continuous ECG above 10 mEq/hr K. Do not run phosphate through a line carrying calcium.',
+    body: 'Use IV phosphate when phos <1 mg/dL, severe symptoms, inability to take PO, respiratory failure, myocardial dysfunction, rhabdomyolysis, hemolysis, or critical illness.\n\nTypical adult IV strategy — dose is elemental phosphorus and is the same for either salt, infused over about 6 hours:\n- Phos 1.7-2.2 mg/dL: 0.2 mmol/kg\n- Phos 1.0-1.7 mg/dL: 0.4 mmol/kg\n- Phos <1.0 mg/dL: 0.6 mmol/kg\nReduce dose by about 50% in renal dysfunction. Do not exceed 45 mmol phosphorus in a single dose.\n\nUse [potassium phosphate](#/drug/potassium-phosphate/Severe hypophosphatemia) only if potassium is low/normal (label threshold: serum K below 4 mEq/L) and renal function allows. It carries a fixed 1.47 mEq of potassium per mmol of phosphorus — 30 mmol P = 44 mEq K, 45 mmol P = 66 mEq K. Count that against every other potassium the patient is receiving.\n\nUse [sodium phosphate](#/drug/sodium-phosphate/Severe hypophosphatemia) when K is high, renal function is impaired, or potassium load is unsafe. It carries 1.33 mEq sodium per mmol phosphorus.\n\nRate for potassium phosphate is limited by the potassium: 6.8 mmol/hr phosphorus peripherally (10 mEq/hr K), 15 mmol/hr centrally (22 mEq/hr K), continuous ECG above 10 mEq/hr K. Do not run phosphate through a line carrying calcium.\n\n**After nutrition restarted?** Treat the driver as well as the phosphate: [Established refeeding syndrome treatment](#/tree/eating-disorders/node/ed-refeeding).',
     citation: [1, 2, 7, 8, 9],
     next: 'phos-monitoring',
     summary: 'IV phosphate for phos <1 or symptomatic; choose NaPhos vs KPhos by potassium and renal function.',
@@ -125,8 +125,8 @@ export const PHOSPHORUS_DISORDERS_NODES: DecisionNode[] = [
     type: 'info',
     module: 4,
     title: 'Refeeding / DKA / Shift States',
-    body: 'High-risk settings: malnutrition, alcohol use disorder, eating disorder, bariatric surgery, prolonged poor intake, DKA after insulin, respiratory alkalosis, sepsis, major burns, and post-operative critical illness.\n\nMonitor phosphate with potassium and magnesium. Replace before and during nutrition/insulin escalation when severe or falling rapidly. Consider thiamine and controlled calorie advancement in refeeding-risk patients.',
-    citation: [1, 6],
+    body: 'High-risk settings: malnutrition, alcohol use disorder, eating disorder, bariatric surgery, prolonged poor intake, DKA after insulin, respiratory alkalosis, sepsis, major burns, and post-operative critical illness.\n\nMonitor phosphate with potassium and magnesium. Replace before and during nutrition/insulin escalation when severe or falling rapidly. For established refeeding with precipitous or refractory electrolyte decline, reduce current calories/dextrose by about 50%, replace deficient phosphate/K/Mg, give thiamine and monitor closely [10]. [Open established refeeding treatment](#/tree/eating-disorders/node/ed-refeeding). This calorie-reduction guidance is for refeeding syndrome, not a substitute for DKA insulin/dextrose protocols.',
+    citation: [1, 6, 10],
     next: 'phos-hypo-triage',
     summary: 'Refeeding/DKA states can rapidly shift phosphate intracellularly; monitor and replace phos/K/Mg together.',
     safetyLevel: 'warning',
@@ -151,6 +151,7 @@ export const PHOSPHORUS_DISORDERS_MODULE_LABELS = [
 ];
 
 export const PHOSPHORUS_DISORDERS_CITATIONS: Citation[] = [
+  { num: 10, text: 'da Silva JSV et al. ASPEN Consensus Recommendations for Refeeding Syndrome. Nutr Clin Pract. 2020;35:178-195. https://doi.org/10.1002/ncp.10474' },
   { num: 1, text: 'Farkas J. Hypophosphatemia. Internet Book of Critical Care (IBCC). EMCrit. Updated 2025. https://emcrit.org/ibcc/hypophos/' },
   { num: 2, text: 'Bansal VK, Khammash AJ, Hanoon AH. Hypophosphatemia. StatPearls. Updated 2024. NCBI Bookshelf.' },
   { num: 3, text: 'Reddy P, Mooradian AD. Hyperphosphatemia. StatPearls. Updated 2024. NCBI Bookshelf.' },
