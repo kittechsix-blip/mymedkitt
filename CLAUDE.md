@@ -103,6 +103,7 @@ Full rule and recovery steps: `~/Desktop/claude-brain/agent-instructions/agent-r
 8. Generate SQL: `node scripts/generate-supabase-sql.mjs <id>`
 9. Push to Supabase via REST API (`node scripts/supabase-push.mjs <tree-id>`; see "Supabase Push (No Copy-Paste)" below)
 10. Commit and push to GitHub
+11. **RAPID check (MANDATORY):** if the consult is a time-critical resuscitation (patient can die or lose airway, breathing or circulation within minutes AND the first actions are a fixed memorised sequence), a RAPID strip is part of done. Follow the RAPID section below. Hubs, procedure walkthroughs and workups do not get one.
 
 ### Chief-Complaint Hub Template — Rule-In / Rule-Out Engine (MANDATORY for ALL hubs)
 
@@ -818,6 +819,8 @@ For any queue of 2+ consult builds, deploys, or audits in this repo:
 Full rationale: `~/Desktop/claude-brain/agent-instructions/agent-rules.md` (2026-05-16 entry). Reference clean run: c68ce8c → 6381d10 → badaf0e → e46c9d3 → 054274f → 620f2136 → fb5b155, 0 EDEADLK.
 
 ## RAPID (action-strip card for time-critical consults)
+
+@~/Desktop/claude-brain/agent-instructions/rapid.md
 
 A consult is RAPID iff it has a strip in `src/data/rapid/index.ts` (`RAPID_STRIPS`). The card replaces the Critical button only when the strip is **approved** (hash match in `approvals.ts`) AND holds against live data, or the device is in local preview (`app.html?rapid-preview=1` on a plain-http local/LAN/Tailscale host). Otherwise the old Critical button shows, with one console.warn per tree.
 
