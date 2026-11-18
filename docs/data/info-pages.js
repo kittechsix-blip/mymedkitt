@@ -1477,20 +1477,23 @@ const PRECIP_DELIVERY_SUMMARY = {
         },
         {
             heading: 'Stage 2 — Delivering the Baby',
-            body: '• [Coach pushing: deep breath → bear down 10 sec × 3 per contraction](#/node/precip-coaching)\n• [Support perineum, control occiput — slow, controlled head delivery](#/node/precip-head)\n• [Sweep finger around neck — check for nuchal cord](#/node/precip-nuchal)\n• [If tight cord → double clamp and cut](#/node/precip-nuchal-cut)\n• [Deliver shoulders: gentle downward then upward traction](#/node/precip-shoulders)\n• [If turtle sign → Shoulder Dystocia emergency](#/tree/shoulder-dystocia)',
+            body: '• [Coach pushing: deep breath → bear down 10 sec × 3 per contraction](#/node/precip-coaching)\n• [Support perineum, control occiput — slow, controlled head delivery](#/node/precip-head)\n• [Sweep finger around neck — check for nuchal cord](#/node/precip-nuchal)\n• [If tight cord → somersault with cord intact when feasible; clamp/cut only as last resort](#/node/precip-nuchal-cut)\n• [Deliver shoulders: gentle downward then upward traction](#/node/precip-shoulders)\n• [If turtle sign → Shoulder Dystocia emergency](#/tree/shoulder-dystocia)',
         },
         {
             heading: 'Cord & Baby',
-            body: '• [Clamp cord in two places, cut between — delayed clamping 30–60 sec if vigorous](#/node/precip-cord)\n• [Place baby skin-to-skin, dry and stimulate, APGAR at 1 and 5 min](#/node/precip-baby)\n• [If not breathing or HR <100 → initiate NRP](#/node/precip-baby)',
+            body: "• [Assess newborn immediately; dry, warm and stimulate](#/node/precip-baby)\n• [If not breathing or HR <100 → initiate NRP; do not wait for clamping or APGAR timing](#/node/precip-baby)\n• [Defer cord clamping at least 60 sec if no immediate resuscitation needed](#/node/precip-cord)\n• [In parallel: oxytocin 10 units IM or diluted IV over 1–2 minutes after all babies deliver, preferably within 1 minute; do not wait for placenta](#/node/precip-oxytocin)",
         },
         {
             heading: 'Stage 3 — Placenta & Postpartum',
-            body: '• [Gentle cord traction + counter-pressure on fundus — never force](#/node/precip-placenta)\n• [Inspect placenta for completeness — save for pathology](#/node/precip-placenta-exam)\n• [Start Oxytocin 20 units in 1L NS at 250 mL/hr — bimanual massage](#/node/precip-oxytocin)\n• [Assess lacerations: repair 1st/2nd degree, defer 3rd/4th to OB](#/node/precip-lacerations)\n• [Monitor mom × 1 hour: uterine tone, bleeding, vitals q15 min](#/node/precip-complete)',
+            body: '• [Trained clinician: gentle cord traction + upward uterine counter-traction above pubic symphysis — never force](#/node/precip-placenta)\n• [Inspect placenta for completeness — save for pathology](#/node/precip-placenta-exam)\n• [Assess lacerations: repair 1st/2nd degree, defer 3rd/4th to OB](#/node/precip-lacerations)\n• [Monitor mom × 1 hour: uterine tone, bleeding, vitals q15 min](#/node/precip-complete)',
         },
     ],
     citations: [
+        { num: 3, text: 'WHO. Consolidated guidelines for postpartum haemorrhage. 2025. https://www.ncbi.nlm.nih.gov/books/NBK619233/' },
+        { num: 4, text: 'Mercer JS et al. Nuchal cord management. 2005. doi:10.1016/j.jmwh.2005.04.023' },
+        { num: 5, text: 'WHO. Pregnancy, Childbirth, Postpartum and Newborn Care. 2015. https://www.ncbi.nlm.nih.gov/books/NBK326674/' },
         { num: 1, text: 'Pope KS, Tibbles CD. Precipitous Delivery. In: Walls RM, ed. Rosen\'s Emergency Medicine. 9th ed. Elsevier; 2018.' },
-        { num: 2, text: 'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 8th ed. AAP; 2021.' },
+        { num: 2, text: 'Weiner GM, ed. Textbook of Neonatal Resuscitation (NRP). 9th ed. AAP; 2025.' },
     ],
 };
 const PRECIP_ACTIVE_LABOR = {

@@ -5395,12 +5395,12 @@ const OXYTOCIN = {
     name: 'Oxytocin (Pitocin)',
     genericName: 'Oxytocin',
     drugClass: 'Uterotonic',
-    route: 'IV infusion',
+    route: 'IM, slow IV, or IV infusion (indication-specific)',
     indications: ['Precipitous Delivery — Third Stage (PPH prevention)', 'Postpartum hemorrhage', 'Labor augmentation'],
     dosing: [
         {
             indication: 'Precipitous Delivery — Third Stage',
-            regimen: '20 units in 1L NS (or LR). Infuse at 250 mL/hr. Max 40 units over 4–10 hrs. Start after placental delivery. Do NOT give IV push — can cause profound hypotension.',
+            regimen: '10 units IM once, or 10 units diluted IV over 1–2 minutes if IV access is already available. Give after birth of all babies, preferably within 1 minute; do not wait for placental delivery. Do NOT give a rapid IV bolus — risk of severe hypotension and tachycardia.',
         },
         {
             indication: 'Postpartum Hemorrhage / Resuscitative Hysterotomy',
@@ -5417,11 +5417,12 @@ const OXYTOCIN = {
     cautions: [
         'Water intoxication with prolonged high-dose infusion (antidiuretic effect)',
         'Uterine hyperstimulation — can cause fetal distress if given before delivery',
-        'Do NOT give IV push — risk of severe hypotension, tachycardia, and cardiac arrhythmia',
+        'Do NOT give a rapid IV bolus — risk of severe hypotension, tachycardia, and cardiac arrhythmia',
     ],
     monitoring: 'Uterine tone, vaginal bleeding, vital signs, fluid balance. If prolonged infusion: monitor for signs of water intoxication (hyponatremia, confusion, seizures).',
-    notes: 'First-line uterotonic for PPH prevention and treatment. Uterine atony is the most common cause of postpartum hemorrhage. Empiric use after placental delivery is recommended — do not wait for signs of bleeding. Combine with bimanual uterine massage until uterus is firm.',
+    notes: 'First-line uterotonic for PPH prevention and treatment. Uterine atony is the most common cause of postpartum hemorrhage. For prophylaxis, give after birth of all babies; do not wait for placental delivery or bleeding. Assess uterine tone repeatedly. Massage is indicated for atony/PPH, not routine sustained prophylactic massage after oxytocin.',
     citations: [
+        'WHO. Consolidated guidelines for the prevention, diagnosis and treatment of postpartum haemorrhage. 2025. Recommendations 7.1 and 10. https://www.ncbi.nlm.nih.gov/books/NBK619233/',
         'ACOG Practice Bulletin No. 183: Postpartum Hemorrhage. Obstet Gynecol. 2017;130(4):e168-e186.',
     ],
 };

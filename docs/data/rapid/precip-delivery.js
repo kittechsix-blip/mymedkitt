@@ -1,4 +1,4 @@
-// Draft for physician review. Expansion text is quoted from the existing consult.
+// Expansion text is quoted from the clinically reconciled source nodes.
 export const RAPID_PRECIP_DELIVERY = {
     "treeId": "precip-delivery",
     "variants": [
@@ -80,6 +80,18 @@ export const RAPID_PRECIP_DELIVERY = {
                         {
                             "nodeId": "precip-nuchal",
                             "text": "Immediately after the head delivers, sweep your finger around the baby's neck feeling for the umbilical cord."
+                        },
+                        {
+                            "nodeId": "precip-nuchal",
+                            "text": "If loose, gently slip the cord over the head or shoulder."
+                        },
+                        {
+                            "nodeId": "precip-nuchal",
+                            "text": "If too tight to reduce, use the somersault maneuver with the cord intact when feasible."
+                        },
+                        {
+                            "nodeId": "precip-nuchal",
+                            "text": "Do not routinely clamp and cut a tight cord before the body is delivered."
                         }
                     ]
                 },
@@ -124,6 +136,38 @@ export const RAPID_PRECIP_DELIVERY = {
                     ]
                 },
                 {
+                    "id": "newborn",
+                    "layout": "steps",
+                    "action": "Assess newborn",
+                    "figure": "Not breathing / HR <100",
+                    "condition": "Immediately at birth",
+                    "nodeIds": [
+                        "precip-baby"
+                    ],
+                    "lines": [
+                        {
+                            "nodeId": "precip-baby",
+                            "text": "Assess breathing and tone immediately at birth, including during deferred cord clamping."
+                        },
+                        {
+                            "nodeId": "precip-baby",
+                            "text": "Dry and stimulate the baby with warm towels. Most babies will cry and become pink within the first minute."
+                        },
+                        {
+                            "nodeId": "precip-baby",
+                            "text": "If the baby is not breathing or heart rate is <100 bpm → initiate NRP (Neonatal Resuscitation Program)."
+                        },
+                        {
+                            "nodeId": "precip-baby",
+                            "text": "Ensure the baby stays warm — hypothermia is a significant risk in ED deliveries."
+                        }
+                    ],
+                    "warning": {
+                        "nodeId": "precip-baby",
+                        "text": "Do not delay needed ventilation for cord-clamping timing or APGAR scoring."
+                    }
+                },
+                {
                     "id": "clamp",
                     "layout": "steps",
                     "action": "Defer clamping",
@@ -160,71 +204,11 @@ export const RAPID_PRECIP_DELIVERY = {
                     ]
                 },
                 {
-                    "id": "newborn",
-                    "layout": "steps",
-                    "action": "Assess newborn",
-                    "figure": "Not breathing / HR <100",
-                    "condition": "Initiate neonatal resuscitation",
-                    "nodeIds": [
-                        "precip-baby"
-                    ],
-                    "lines": [
-                        {
-                            "nodeId": "precip-baby",
-                            "text": "Dry and stimulate the baby with warm towels. Most babies will cry and become pink within the first minute."
-                        },
-                        {
-                            "nodeId": "precip-baby",
-                            "text": "If the baby is not breathing or heart rate is <100 bpm → initiate NRP (Neonatal Resuscitation Program)."
-                        },
-                        {
-                            "nodeId": "precip-baby",
-                            "text": "Ensure the baby stays warm — hypothermia is a significant risk in ED deliveries."
-                        }
-                    ]
-                },
-                {
-                    "id": "placenta",
-                    "layout": "steps",
-                    "action": "Deliver placenta",
-                    "figure": "Never force",
-                    "condition": "Guard against inversion",
-                    "nodeIds": [
-                        "precip-placenta"
-                    ],
-                    "warning": {
-                        "nodeId": "precip-placenta",
-                        "text": "Gentle cord traction + fundal counter-pressure — NEVER force, aggressive traction risks uterine inversion"
-                    },
-                    "lines": [
-                        {
-                            "nodeId": "precip-placenta",
-                            "text": "Cord lengthening — the cord appears to get longer as the placenta detaches"
-                        },
-                        {
-                            "nodeId": "precip-placenta",
-                            "text": "Gush of blood — normal separation bleeding"
-                        },
-                        {
-                            "nodeId": "precip-placenta",
-                            "text": "Uterine fundus rises — becomes firm and globular"
-                        },
-                        {
-                            "nodeId": "precip-placenta",
-                            "text": "Apply gentle, steady traction on the cord with one hand"
-                        },
-                        {
-                            "nodeId": "precip-placenta",
-                            "text": "Other hand on the uterine fundus — guard against uterine inversion by applying counter-pressure"
-                        }
-                    ]
-                },
-                {
                     "id": "oxytocin",
                     "layout": "drug",
-                    "action": "Oxytocin infusion",
-                    "figure": "20 units / 1 L",
-                    "condition": "After placental delivery",
+                    "action": "Give oxytocin",
+                    "figure": "10 units IM / slow IV",
+                    "condition": "After birth of all babies",
                     "nodeIds": [
                         "precip-oxytocin"
                     ],
@@ -234,16 +218,48 @@ export const RAPID_PRECIP_DELIVERY = {
                     },
                     "warning": {
                         "nodeId": "precip-oxytocin",
-                        "text": "Do NOT give IV push — can cause profound hypotension."
+                        "text": "Do NOT give a rapid IV bolus — risk of severe hypotension and tachycardia."
                     },
                     "lines": [
                         {
                             "nodeId": "precip-oxytocin",
-                            "text": "No IV access: Oxytocin 10 units IM into the anterolateral thigh — this is the WHO-preferred prophylactic route in low-resource or pre-IV settings."
+                            "text": "Give after birth of all babies, preferably within 1 minute; do not wait for placental delivery."
                         },
                         {
                             "nodeId": "precip-oxytocin",
-                            "text": "Timing: Start after the placenta is delivered. Do not wait to assess bleeding — empiric oxytocin decreases postpartum hemorrhage risk."
+                            "text": "Maternal prophylaxis and neonatal assessment occur in parallel; oxytocin need not interrupt deferred cord clamping."
+                        }
+                    ]
+                },
+                {
+                    "id": "placenta",
+                    "layout": "steps",
+                    "action": "Deliver placenta",
+                    "figure": "Never force",
+                    "condition": "Trained clinician; uterus contracted",
+                    "nodeIds": [
+                        "precip-placenta"
+                    ],
+                    "warning": {
+                        "nodeId": "precip-placenta",
+                        "text": "Never pull on the cord without uterine counter-traction; do not push downward on the fundus."
+                    },
+                    "lines": [
+                        {
+                            "nodeId": "precip-placenta",
+                            "text": "A trained clinician should perform controlled cord traction only with a contracted uterus and signs of placental separation."
+                        },
+                        {
+                            "nodeId": "precip-placenta",
+                            "text": "Place one hand just above the pubic symphysis and support the uterus upward while the other hand applies gentle cord traction."
+                        },
+                        {
+                            "nodeId": "precip-placenta",
+                            "text": "If the placenta does not descend, stop traction and wait for the next contraction."
+                        },
+                        {
+                            "nodeId": "precip-placenta",
+                            "text": "After delivery, inspect the placenta for completeness and assess uterine tone and bleeding."
                         }
                     ]
                 }
