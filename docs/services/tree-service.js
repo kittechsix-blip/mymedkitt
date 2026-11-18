@@ -8,6 +8,7 @@ import { isTreeHidden } from '../data/feature-flags.js';
 const treeCache = new Map();
 const STALE_MS = 60 * 60 * 1000;
 const LOCAL_TREE_OVERRIDES = new Set([
+    'surgical-complications',
     'acute-agitation',
     'acute-psychosis',
     'capacity-assessment',

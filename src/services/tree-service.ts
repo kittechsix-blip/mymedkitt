@@ -38,6 +38,7 @@ const treeCache = new Map<string, TreeConfig>();
 const STALE_MS = 60 * 60 * 1000;
 
 const LOCAL_TREE_OVERRIDES = new Set([
+  'surgical-complications',
   'acute-agitation',
   'acute-psychosis',
   'capacity-assessment',
