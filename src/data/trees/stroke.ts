@@ -643,5 +643,5 @@ export const STROKE_CLINICAL_NOTES: string[] = [
   'EVT extends the treatment window to 24 hours for select patients with LVO and favorable perfusion imaging. HERMES meta-analysis: NNT ~5 for functional independence.',
   'DAPT (aspirin + clopidogrel) for minor stroke/TIA should be limited to 21 days — extending beyond increases bleeding risk without additional stroke reduction benefit.',
   'Do NOT bridge with heparin when initiating anticoagulation for cardioembolic stroke — delayed DOAC initiation based on stroke severity is preferred.',
-  'Emergent CEA (within 2 weeks) for symptomatic carotid stenosis 70-99% provides the greatest benefit when performed early after the index event.',
+  'Early CEA (within 2 weeks) for symptomatic carotid stenosis 70-99% provides the greatest benefit when performed early after the index event.',
 ];
