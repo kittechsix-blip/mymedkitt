@@ -31,6 +31,7 @@ import { RAPID_PEA_ARREST } from './pea-arrest.js';
 import { RAPID_PEDS_SUBMERSION } from './peds-submersion.js';
 import { RAPID_POST_ROSC } from './post-rosc.js';
 import { RAPID_PPH } from './pph.js';
+import { RAPID_PRECIP_DELIVERY } from './precip-delivery.js';
 import { RAPID_REFRACTORY_VFVT } from './refractory-vfvt.js';
 import { RAPID_RESUSCITATIVE_HYSTEROTOMY } from './resuscitative-hysterotomy.js';
 import { RAPID_SEPSIS } from './sepsis.js';
@@ -75,6 +76,7 @@ export const RAPID_STRIPS: Readonly<Record<string, RapidStrip>> = {
   [RAPID_PEDS_SUBMERSION.treeId]: RAPID_PEDS_SUBMERSION,
   [RAPID_POST_ROSC.treeId]: RAPID_POST_ROSC,
   [RAPID_PPH.treeId]: RAPID_PPH,
+  [RAPID_PRECIP_DELIVERY.treeId]: RAPID_PRECIP_DELIVERY,
   [RAPID_REFRACTORY_VFVT.treeId]: RAPID_REFRACTORY_VFVT,
   [RAPID_RESUSCITATIVE_HYSTEROTOMY.treeId]: RAPID_RESUSCITATIVE_HYSTEROTOMY,
   [RAPID_SEPSIS.treeId]: RAPID_SEPSIS,

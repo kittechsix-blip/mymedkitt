@@ -1,0 +1,57 @@
+[
+  {
+    "kind": "conflict",
+    "tileId": "oxytocin",
+    "nodeIds": [
+      "precip-oxytocin"
+    ],
+    "drugId": "oxytocin",
+    "text": "Both consult and drug store defer prophylactic oxytocin until placental delivery. WHO recommends uterotonic prophylaxis promptly after birth; this source timing requires clinical correction before promoting this RAPID card. Sources were not edited to make the strip pass. WHO 2025 source: https://www.ncbi.nlm.nih.gov/books/NBK619233/"
+  },
+  {
+    "kind": "gap",
+    "tileId": "oxytocin",
+    "nodeIds": [
+      "precip-oxytocin"
+    ],
+    "drugId": "oxytocin",
+    "text": "The selected precipitous-delivery drug regimen omits the no-IV IM alternative present in the consult. The expansion quotes that alternative verbatim as context; no weight calculator applies."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "head-cord",
+    "nodeIds": [
+      "precip-nuchal",
+      "precip-nuchal-cut"
+    ],
+    "text": "The precipitous-delivery tight-cord branch directs clamp-and-cut without the cord-emergencies consult's somersault-first alternative. Tight-cord management is not reproduced on this strip; the source branch needs physician reconciliation before approval."
+  },
+  {
+    "kind": "other",
+    "tileId": "placenta",
+    "nodeIds": [
+      "precip-placenta"
+    ],
+    "text": "The source describes counter-pressure at the uterine fundus. Controlled cord traction guidance uses uterine counter-traction above the symphysis to prevent inversion. Source technique requires clarification before approval; quoted source has not been rewritten."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "precip-start",
+      "precip-equipment",
+      "precip-baby",
+      "precip-lacerations",
+      "precip-complete"
+    ],
+    "text": "Seven tiles do not replace assessment of delivery imminence/presentation, equipment preparation, laceration assessment, hemorrhage treatment, or ongoing maternal/newborn observation. This card follows the consult order; neonatal assessment/resuscitation is simultaneous with maternal third-stage care, not delayed until a timer or APGAR."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "precip-oxytocin",
+      "precip-placenta-exam",
+      "precip-nuchal-reduce"
+    ],
+    "text": "Additional omissions for physician review: uterine tone/massage, placental completeness and reduction of a loose nuchal cord are not on the seven-tile strip. Checking for a cord does not complete management if one is found. Independent extraction review identified these omissions."
+  }
+]
