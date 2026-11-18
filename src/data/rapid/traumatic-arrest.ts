@@ -1,0 +1,122 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Traumatic Arrest. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// Single variant; tile order follows the consult's node FLOW. Findings: research/rapid/traumatic-arrest.findings.json
+
+export const RAPID_TRAUMATIC_ARREST: RapidStrip = {
+  treeId: 'traumatic-arrest',
+  variants: [
+    {
+      id: 'pulseless',
+      label: 'Pulseless traumatic arrest',
+      tiles: [
+        {
+          id: 'hott',
+          layout: 'steps',
+          action: 'Run HOTT bundle',
+          figure: 'Simultaneous tasks',
+          condition: 'Do not wait for serial completion',
+          nodeIds: ['ta-hott'],
+          warning: { nodeId: 'ta-hott', text: 'Do not wait for serial completion.' },
+          lines: [
+            { nodeId: 'ta-hott', text: 'Assign simultaneous tasks. Do not wait for serial completion.' },
+            { nodeId: 'ta-hott', text: 'Direct pressure, tourniquets, pelvic binder, MTP, rapid source control' },
+            { nodeId: 'ta-hott', text: 'High-flow oxygen, airway control as needed, confirm ventilation with waveform ETCO2' },
+            { nodeId: 'ta-hott', text: 'Bilateral finger thoracostomies or chest tubes in traumatic arrest with chest trauma or suspected obstructive physiology' },
+            { nodeId: 'ta-hott', text: 'eFAST/subxiphoid cardiac view if it does not delay intervention' },
+            { nodeId: 'ta-hott', text: 'Resuscitative thoracotomy for selected penetrating arrest or selected blunt arrest with signs of life' },
+          ],
+        },
+        {
+          id: 'hysterotomy',
+          layout: 'steps',
+          action: 'Hysterotomy pathway',
+          figure: 'No ROSC by 4 minutes',
+          condition: 'Uterus at/above umbilicus',
+          nodeIds: ['ta-pregnancy'],
+          lines: [
+            { nodeId: 'ta-pregnancy', text: 'Manual left uterine displacement' },
+            { nodeId: 'ta-pregnancy', text: 'Resuscitate mother first' },
+            { nodeId: 'ta-pregnancy', text: 'If uterus is at/above umbilicus and no ROSC by 4 minutes, proceed to resuscitative hysterotomy pathway' },
+          ],
+        },
+        {
+          id: 'thoracotomy',
+          layout: 'steps',
+          action: 'Thoracotomy',
+          figure: '<15 min CPR',
+          condition: 'Penetrating thorax, signs of life',
+          nodeIds: ['ta-penetrating-sol', 'ta-edt-indicated', 'ta-blunt-consider', 'ta-blunt-sol'],
+          warning: { nodeId: 'ta-blunt-consider', text: 'Avoid thoracotomy for blunt arrest without signs of life after HOTT interventions.' },
+          lines: [
+            { nodeId: 'ta-penetrating-sol', text: 'Penetrating thorax generally <15 min CPR; neck/extremity generally <5 min CPR' },
+            { nodeId: 'ta-edt-indicated', text: 'Proceed if local skill, staffing, and surgical backup are available.' },
+            { nodeId: 'ta-blunt-sol', text: 'Witnessed arrest + signs of life + short CPR' },
+            { nodeId: 'ta-blunt-consider', text: 'Reasonable to consider when all are present:' },
+            { nodeId: 'ta-blunt-consider', text: 'Short CPR interval, generally <10 minutes' },
+            { nodeId: 'ta-blunt-consider', text: 'Trauma surgeon/proceduralist and OR pathway immediately available' },
+          ],
+        },
+        {
+          id: 'airway',
+          layout: 'steps',
+          action: 'BVM high-flow O2',
+          figure: 'High-flow oxygen',
+          condition: 'Intubate only if no hemorrhage delay',
+          nodeIds: ['ta-airway'],
+          warning: { nodeId: 'ta-airway', text: 'Oxygenation is a reversible cause, but airway procedures should not delay hemorrhage control, bilateral thoracostomy, or thoracotomy.' },
+          lines: [
+            { nodeId: 'ta-airway', text: 'BVM with high-flow oxygen while other tasks start' },
+            { nodeId: 'ta-airway', text: 'Intubate when it can be done rapidly with minimal interruption' },
+            { nodeId: 'ta-airway', text: 'Confirm with waveform capnography' },
+            { nodeId: 'ta-airway', text: 'Avoid hyperventilation unless herniation is suspected' },
+          ],
+        },
+        {
+          id: 'thoracostomy',
+          layout: 'steps',
+          action: 'Bilateral thoracostomy',
+          figure: 'Decompress both chests',
+          condition: 'Chest trauma or obstructive physiology',
+          nodeIds: ['ta-bilateral-thoracostomy'],
+          lines: [
+            { nodeId: 'ta-bilateral-thoracostomy', text: 'In traumatic arrest with chest trauma, positive pressure ventilation, or suspected obstructive physiology, decompress both chests early.' },
+            { nodeId: 'ta-bilateral-thoracostomy', text: '4th/5th intercostal space, anterior-to-mid axillary line' },
+            { nodeId: 'ta-bilateral-thoracostomy', text: 'Incise, blunt dissect over superior rib, enter pleura, finger sweep' },
+            { nodeId: 'ta-bilateral-thoracostomy', text: 'Convert to chest tubes after immediate decompression when feasible' },
+          ],
+        },
+        {
+          id: 'hemorrhage',
+          layout: 'steps',
+          action: 'Control hemorrhage',
+          figure: 'Most common reversible cause',
+          nodeIds: ['ta-hemorrhage', 'ta-pelvis-reboa'],
+          warning: { nodeId: 'ta-pelvis-reboa', text: 'Avoid crystalloid-heavy resuscitation' },
+          lines: [
+            { nodeId: 'ta-hemorrhage', text: 'Exsanguination is the most common reversible cause of traumatic arrest.' },
+            { nodeId: 'ta-hemorrhage', text: 'Direct pressure, tourniquet, wound packing, junctional pressure device when available' },
+            { nodeId: 'ta-hemorrhage', text: 'Pelvic binder if pelvic injury is possible' },
+            { nodeId: 'ta-hemorrhage', text: 'Activate MTP with balanced RBC/plasma/platelets per local protocol' },
+            { nodeId: 'ta-hemorrhage', text: 'Early OR/IR/REBOA discussion for noncompressible torso hemorrhage' },
+            { nodeId: 'ta-pelvis-reboa', text: 'Consider REBOA only where trained team, equipment, and definitive hemorrhage control are immediately available' },
+          ],
+        },
+        {
+          id: 'rosc',
+          layout: 'steps',
+          action: 'Bridge to OR/IR',
+          figure: 'ROSC is temporary',
+          condition: 'Only when hemodynamically appropriate',
+          nodeIds: ['ta-rosc'],
+          lines: [
+            { nodeId: 'ta-rosc', text: 'ROSC after traumatic arrest is a bridge to definitive source control, not the endpoint.' },
+            { nodeId: 'ta-rosc', text: 'Continue balanced blood-product resuscitation' },
+            { nodeId: 'ta-rosc', text: 'Move to OR/IR/CT only when hemodynamically appropriate' },
+            { nodeId: 'ta-rosc', text: 'If thoracotomy performed, transport open chest only with surgical team and definitive OR plan' },
+          ],
+        },
+      ],
+    },
+  ],
+};

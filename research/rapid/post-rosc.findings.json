@@ -1,0 +1,65 @@
+[
+  {
+    "kind": "other",
+    "tileId": "prognosis",
+    "nodeIds": [
+      "rosc-neuro"
+    ],
+    "text": "Look first at the prognosis tile. The consult's key rule ('Do NOT make a prognostic impression before at least 72 hours from ROSC or achievement of normothermia, and only after sedation, hypothermia, neuromuscular blockade, and other confounders have cleared') is longer than the 160-character excerpt limit, so it cannot be quoted. The tile carries '72 hours' and the confounder condition only on its authored face (the face drops 'or normothermia'); its expansion quotes only 'No single test is sufficient.' and the warning that premature withdrawal of care can cause an avoidable death. Please decide whether that face is acceptable. Fit: this consult is mostly a care bundle of targets (ECG, MAP, oxygen, temperature, EEG, prognosis timing) rather than a memorised resuscitation sequence; it fits seven tiles only loosely."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "rosc-stemi",
+      "rosc-no-stemi",
+      "rosc-angio-consider",
+      "rosc-pressors",
+      "rosc-ttm-check",
+      "rosc-ttm-awake",
+      "rosc-icu-targets",
+      "rosc-disposition",
+      "rosc-start",
+      "rosc-hemo",
+      "rosc-ttm-coma",
+      "rosc-seizure",
+      "rosc-cath",
+      "rosc-neuro"
+    ],
+    "text": "Time-critical content NOT on the strip (the airway line 'intubate if GCS ≤8' and the transfer-if-no-PCI line are now on the ECG and PCI tiles): vasopressor and inotrope choice by shock phenotype (norepinephrine, vasopressin, dobutamine, milrinone) with echo, and the consult's line that no single vasopressor is preferred; the no-STEMI and indeterminate-ECG/new LBBB branches (when to consider angiography); anti-shivering measures (magnesium, sedation, meperidine, neuromuscular blockade) and temperature-probe monitoring; the 'not recommended' line against cold IV fluid; the following-commands branch; seizure treatment (levetiracetam, refractory options) and the myoclonus warning; the ICU bundle (glucose, ventilator settings, labs, urine output, DVT prophylaxis); ICU admission and handoff content; and the multimodal prognostication tests. Critical actions: all six are on the strip (ECG/PCI via rosc-cath, MAP and oxygen via rosc-hemo, temperature, EEG/no prophylaxis, prognosis wait). The vasopressor guidance in the MAP critical action ('guided by shock phenotype') appears on the strip only as the quoted MAP line; the phenotype choices themselves are left off. Also left off: the consult's statement that no single vasopressor is preferred and to avoid reflexive selection of any one agent (the MAP tile quotes only 'use fluids and vasopressor/inotrope support as clinically indicated'), the 'avoid hypoxemia (SpO2 <90%) and hypotension (MAP <65)' line, and the indeterminate-ECG/new LBBB path, so a physician reading only the strip sees STEMI as the sole route to the cath lab."
+  },
+  {
+    "kind": "other",
+    "tileId": "ecg",
+    "nodeIds": [
+      "rosc-start",
+      "rosc-cath",
+      "rosc-stemi"
+    ],
+    "text": "The critical-action list attaches 'ECG immediately, STEMI to emergent PCI' to rosc-cath. On the strip the ECG tile is the first node (rosc-start, quoting '12-lead ECG — STEMI identification is the #1 priority') and the PCI tile is rosc-cath, following the consult's flow. The two ETCO2 and capnography lines on the ECG tile are airway items from the same node. The face 'Immediately after ROSC' is authored from the node title/summary. The tile also carries the airway lines (secure airway, intubate if GCS ≤8, capnography, ETCO2 target) from the same node with their two headings quoted; they are airway items on an ECG-faced tile, so check that placement. In the consult flow airway comes before the ECG."
+  },
+  {
+    "kind": "other",
+    "tileId": "temperature",
+    "nodeIds": [
+      "rosc-ttm-coma",
+      "rosc-ttm-check"
+    ],
+    "text": "The consult forks at rosc-ttm-check (comatose vs following commands), but the following-commands path is standard care, not a different resuscitation path, so this is one variant. The temperature, EEG and prognosis tiles all apply only to patients not following commands (the face says so on the temperature and EEG tiles; the prognosis tile does not carry that condition). The consult's critical-action list also puts the 36-hour duration in the same line; it is quoted in the expansion. The prognosis tile has no 'not following commands' condition, but the consult shows the neuroprognostication node to every patient. The tile order puts prognosis before EEG because that is the consult's flow; the physician may prefer EEG first."
+  },
+  {
+    "kind": "other",
+    "tileId": "oxygen",
+    "nodeIds": [
+      "rosc-hemo"
+    ],
+    "text": "Source lines use subscript characters (SpO₂, PaO₂, ETCO₂); the gate's normalisation turns them into plain digits, so the excerpts are written as SpO2, PaO2, PaCO2 and ETCO2. This is only spelling, not a change in meaning. Hemodynamic targets (MAP, oxygen) were split into two tiles to stay readable; the order of tiles follows the consult's flow, and the critical-action list order differs (it starts with ECG/PCI, then MAP, oxygen, temperature, EEG, prognosis; the consult flow puts prognosis before seizures, and the strip follows the flow)."
+  },
+  {
+    "kind": "gap",
+    "tileId": "pci",
+    "nodeIds": [
+      "rosc-cath"
+    ],
+    "text": "No drug tiles are used. The consult names norepinephrine, vasopressin, dobutamine, milrinone, magnesium sulfate, meperidine and levetiracetam with doses in its text; none is on the strip, so no drug-store comparison was made for them. No conflict between consult and drug store was checked or found on this strip."
+  }
+]

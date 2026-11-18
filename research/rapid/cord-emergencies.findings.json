@@ -1,0 +1,155 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "cord-triage",
+      "cord-prolapse-start"
+    ],
+    "text": "Most important: this consult is four separate emergencies behind one triage question (cord prolapse, acute vasa previa, nuchal cord, unexplained fetal bradycardia), not one memorised sequence. It is drafted as a four-way fork on the triage question, prolapse first. Only the prolapse branch is a true time-critical resuscitation sequence; the nuchal cord branch is a delivery manoeuvre and the bradycardia branch is a checklist of simultaneous in-utero measures. Please judge whether the fork and the order (prolapse, vasa previa, nuchal cord, bradycardia) are right, and whether the last two branches belong on a RAPID card at all. Reviewer note: only the prolapse branch (seven tiles) reads as a memorised sequence; the bradycardia branch is an unordered set of simultaneous measures, and its tiles are shown in the consult's list order, not a priority order."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "cord-prolapse-start",
+      "cord-vaginal-delivery",
+      "cord-nuchal-proceed",
+      "cord-vasa-planned",
+      "cord-vasa-result",
+      "cord-monoamniotic",
+      "cord-accident-recognize",
+      "cord-accident-result",
+      "cord-delivery-timing",
+      "cord-bladder-fill",
+      "cord-position",
+      "cord-prolapse-callhelp",
+      "cord-vasa-acute",
+      "cord-tocolysis",
+      "cord-accident-resus",
+      "cord-nuchal-clamp"
+    ],
+    "text": "Time-critical content NOT on the strip. Prolapse branch: assisted vaginal delivery only if all criteria met (fully dilated, vertex at +2 or lower, experienced provider, under 5 minutes); the 'OR delayed, temporize' route (the consult says bladder fill, elevation and tocolysis can be kept up while arranging transfer, only the bladder-fill step is on the strip); massive transfusion if maternal bleeding; document time of diagnosis; maternal adjuncts (high-flow oxygen, crystalloid bolus) in the tocolysis node; neonatal resuscitation and volume (10 mL/kg) at C-section; 'do not give oxytocin during cord prolapse' (only in the do-not list node, not on the strip). Vasa previa branch: maternal large-bore IV x2 and type and crossmatch are on the neonatal-blood tile, but high-flow oxygen and left lateral tilt are not; known antenatal vasa previa plan (planned C-section 34-37 weeks, steroids, STAT C-section if ROM or labour); delivery outcome node. Nuchal branch: delayed cord clamping and neonatal assessment after delivery, shoulder dystocia plan, cord-handling after delivery. Bradycardia branch: continuous FHR monitoring, the instruction to trial right lateral or knee-chest if left tilt does not help (the source line cannot be quoted), the differential (abruption, uterine rupture, maternal hypotension) that the branch entry says to exclude, monoamniotic twin rule (any sudden bradycardia means STAT C-section), disposition node. Critical-action list items, all on tiles: manual elevation, position, bladder fill, tocolysis, decision-to-delivery target, somersault, acute vasa previa STAT C-section, do not reduce the cord. Choosing what to leave off is a judgment for the physician."
+  },
+  {
+    "kind": "other",
+    "tileId": "position",
+    "nodeIds": [
+      "cord-position",
+      "cord-manual-elevate",
+      "cord-bladder-fill"
+    ],
+    "text": "Tile order follows the consult's flow (page help, position, manual elevation, bladder fill, tocolysis, C-section). The critical-actions list puts manual elevation before position. Flow was followed. Also, the position node is titled Three equivalent options and all three are quoted, but only knee-chest and Trendelenburg appear in the critical-action line."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "terbutaline",
+    "nodeIds": [
+      "cord-tocolysis",
+      "cord-accident-resus"
+    ],
+    "drugId": "terbutaline",
+    "text": "The consult writes terbutaline as 0.25 mg SC (the tocolysis node also says SC or IM); the drug store says SQ or IM and uses the word SQ. Same drug and dose, different route spelling; the strip's drug text comes from the store. The store regimen has no weight-based dosing, so no weight calculator is needed."
+  },
+  {
+    "kind": "other",
+    "tileId": "nitroglycerin",
+    "nodeIds": [
+      "cord-tocolysis"
+    ],
+    "drugId": "nitroglycerin",
+    "text": "The nitroglycerin store entry holds several doses (IV push, repeat to 400 mcg, and a sublingual alternative); the tile figure shows only the first IV range. The consult node matches the IV dose and the repeat limit; the sublingual option exists only in the store. Nothing was changed; this is expected to raise a multi-dose flag."
+  },
+  {
+    "kind": "other",
+    "tileId": "clamp-cut",
+    "nodeIds": [
+      "cord-nuchal-clamp"
+    ],
+    "text": "The consult's key limit on clamp-and-cut, 'only if somersault has failed and delivery cannot otherwise progress', cannot be quoted on the card: the source line is over the length cap and its negation ('no placental circulation') would have to travel with it. The condition is on the tile face in the consult's own meaning instead, and will raise a wording flag. The tile also does not carry the consult's reasoning (shoulder dystocia then leaves no placental circulation). Please check this tile carefully."
+  },
+  {
+    "kind": "other",
+    "tileId": "acc-terbutaline",
+    "nodeIds": [
+      "cord-accident-resus",
+      "cord-tocolysis"
+    ],
+    "drugId": "terbutaline",
+    "text": "On the bradycardia branch, the quoted consult line gives both terbutaline and nitroglycerin as tocolysis; only terbutaline has a tile here (the nitroglycerin tile is on the prolapse branch). The 'avoid if maternal HR >120' line is quoted from the prolapse tocolysis node, which belongs to the other branch, so an outside-branch flag is likely."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "vasa-stat",
+    "nodeIds": [
+      "cord-vasa-acute",
+      "cord-vasa-known"
+    ],
+    "text": "The consult gives no dose, drug or number for the neonatal side beyond blood volume 10 mL/kg; it does not say who gives it or how to give it. Nothing added."
+  },
+  {
+    "kind": "gap",
+    "tileId": "bladder-fill",
+    "nodeIds": [
+      "cord-bladder-fill"
+    ],
+    "text": "Bladder fill (500-750 mL warm saline via Foley) is a steps tile because the drug store has no dose entry for this use. The volume on the tile comes from the consult only."
+  },
+  {
+    "kind": "gap",
+    "tileId": "vasa-blood",
+    "nodeIds": [
+      "cord-vasa-acute"
+    ],
+    "text": "Neonatal O-negative blood 10 mL/kg is a steps tile. The drug store has pediatric packed red cell and whole blood entries but none for fetal exsanguination in vasa previa, so none was used. The 10 mL/kg figure comes from the consult only and has no weight calculator."
+  },
+  {
+    "kind": "gap",
+    "tileId": "acc-o2",
+    "nodeIds": [
+      "cord-accident-resus"
+    ],
+    "text": "Maternal oxygen 10 L/min is a steps tile; the drug store has no oxygen entry. The rate comes from the consult only."
+  },
+  {
+    "kind": "gap",
+    "tileId": "acc-fluid",
+    "nodeIds": [
+      "cord-accident-resus"
+    ],
+    "text": "Crystalloid bolus 500 mL to 1 L is a steps tile; the drug store has no matching crystalloid entry for this use. The volume comes from the consult only."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "cord-accident-resus"
+    ],
+    "text": "The bradycardia branch's first step, 'left lateral tilt 15 degrees or more; trial right lateral or knee-chest if not improving', is NOT on the strip. The gate never accepts a source line containing the word 'trial' (it is treated as a study sentence), so the line cannot be quoted. Please decide whether to add positioning to this branch another way."
+  },
+  {
+    "kind": "other",
+    "tileId": "clamp-cut",
+    "nodeIds": [
+      "cord-nuchal-clamp",
+      "cord-stop-ref"
+    ],
+    "text": "Reviewer: the clamp-and-cut node is not reachable by any option in the consult (the somersault option leads to somersault, and the clamp node has no incoming link), so the strip's clamp-and-cut tile cannot be reached by following the consult. The warning on that tile is quoted from the do-not list node (first-line wording), because the clamp node's own 'only if somersault has failed and delivery cannot otherwise progress' line cannot be quoted whole. The tile face says only 'if somersault has failed'; the consult adds 'and delivery cannot otherwise progress'. Physician to decide whether this tile belongs on the card at all."
+  },
+  {
+    "kind": "other",
+    "tileId": "acc-tilt",
+    "nodeIds": [
+      "cord-accident-resus",
+      "cord-tocolysis"
+    ],
+    "text": "Reviewer added a left lateral tilt tile on the bradycardia branch because positioning is the consult's first in-utero resuscitation step. Its quoted line comes from the prolapse tocolysis node (Maternal adjuncts) since the branch's own line cannot be quoted, so it will raise an outside-branch flag. The consult's 'try right lateral or knee-chest if not improving' is NOT on the tile. Keep or drop is the physician's call."
+  },
+  {
+    "kind": "other",
+    "tileId": "csection",
+    "nodeIds": [
+      "cord-csection",
+      "cord-prolapse-callhelp",
+      "cord-position"
+    ],
+    "text": "Reviewer: the call-for-help node says manual elevation is the 'next node' but the consult's next node is positioning; the strip follows the actual flow. The csection tile quotes 'remove manual elevation' under the heading 'At delivery:' (now quoted) while the elevate tile says never remove your hand until delivered; read together they are consistent only because of that heading."
+  }
+]

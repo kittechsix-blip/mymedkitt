@@ -1,0 +1,118 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Resuscitative Hysterotomy. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// Single variant, 7 tiles in node FLOW order. Findings: research/rapid/resuscitative-hysterotomy.findings.json
+
+export const RAPID_RESUSCITATIVE_HYSTEROTOMY: RapidStrip = {
+  treeId: 'resuscitative-hysterotomy',
+  variants: [
+    {
+      id: 'resuscitative-hysterotomy',
+      label: 'Resuscitative Hysterotomy',
+      tiles: [
+        {
+          id: 'check-fundus',
+          layout: 'steps',
+          action: 'Check fundus',
+          figure: 'at or above umbilicus',
+          condition: 'If unsure, assume ≥20 weeks',
+          nodeIds: ['rh-fundal-check'],
+          lines: [
+            { nodeId: 'rh-fundal-check', text: 'Palpate the uterine fundus.' },
+            { nodeId: 'rh-fundal-check', text: 'At umbilicus → ~20 weeks → threshold for RH' },
+            { nodeId: 'rh-fundal-check', text: 'Above umbilicus → >20 weeks → RH strongly indicated if arrest occurs' },
+            { nodeId: 'rh-fundal-check', text: 'Assume ≥20 weeks and proceed' },
+          ],
+        },
+        {
+          id: 'manual-lud',
+          layout: 'steps',
+          action: 'Manual LUD',
+          figure: 'up and to the left',
+          condition: 'Dedicated provider, continuous',
+          nodeIds: ['rh-lud'],
+          warning: { nodeId: 'rh-lud', text: 'AVOID tilted-board / 30° tilt during arrest.' },
+          lines: [
+            { nodeId: 'rh-lud', text: 'Two-handed grip on the uterus from the patient\'s left' },
+            { nodeId: 'rh-lud', text: 'Pull the uterus up and to the left (toward the patient\'s left shoulder)' },
+            { nodeId: 'rh-lud', text: 'Maintain continuously — this is a dedicated role, not a periodic maneuver' },
+          ],
+        },
+        {
+          id: 'start-clock',
+          layout: 'steps',
+          action: 'Start clock',
+          figure: 'Call out every 30 seconds',
+          condition: 'Timer starts at moment of arrest',
+          nodeIds: ['rh-start-timer'],
+          lines: [
+            { nodeId: 'rh-start-timer', text: 'DESIGNATE A TIMEKEEPER IMMEDIATELY.' },
+            { nodeId: 'rh-start-timer', text: 'The timer starts at the moment of arrest (or loss of pulse), not when you remember to start it.' },
+            { nodeId: 'rh-start-timer', text: 'Every 30 seconds — "30 seconds into arrest"' },
+            { nodeId: 'rh-start-timer', text: 'At 4 minutes — "4 MINUTES — DECISION POINT" — loud, clear' },
+            { nodeId: 'rh-start-timer', text: 'At 5 minutes — "5 minutes — if no ROSC, incision now"' },
+          ],
+        },
+        {
+          id: 'decide-4-min',
+          layout: 'steps',
+          action: '4-min decision',
+          figure: 'No ROSC at ~4 minutes',
+          condition: 'Past 4 min: start now',
+          nodeIds: ['rh-decision-point'],
+          lines: [
+            { nodeId: 'rh-decision-point', text: 'If NO ROSC at ~4 minutes → begin incision' },
+            { nodeId: 'rh-decision-point', text: 'Goal: fetus delivered by 5 minutes after arrest' },
+            { nodeId: 'rh-decision-point', text: 'Start now — later is still better than never' },
+          ],
+        },
+        {
+          id: 'bedside-scalpel',
+          layout: 'steps',
+          action: 'Cut at bedside',
+          figure: 'Scalpel is all you need',
+          condition: 'No OR move, no prep, no consent',
+          nodeIds: ['rh-proceed', 'rh-equipment'],
+          warning: { nodeId: 'rh-proceed', text: 'Bedside now. No OR move, no prep, no consent needed, no anesthesia, continue CPR. No absolute contraindications.' },
+          lines: [
+            { nodeId: 'rh-equipment', text: '#10 or #20 scalpel — the ONLY essential tool' },
+            { nodeId: 'rh-equipment', text: 'Everything else is optional' },
+          ],
+        },
+        {
+          id: 'vertical-incisions',
+          layout: 'steps',
+          action: 'Vertical incisions',
+          figure: 'Vertical skin and uterus',
+          condition: 'LUD released at uterine incision',
+          nodeIds: ['rh-skin-incision', 'rh-uterine-incision'],
+          warning: { nodeId: 'rh-skin-incision', text: 'Do NOT make repeated small strokes' },
+          lines: [
+            { nodeId: 'rh-skin-incision', text: 'From: just below the xiphoid' },
+            { nodeId: 'rh-skin-incision', text: 'To: symphysis pubis' },
+            { nodeId: 'rh-skin-incision', text: 'One deliberate, firm, deep stroke with the scalpel' },
+            { nodeId: 'rh-uterine-incision', text: 'LUD provider releases the uterus now.' },
+            { nodeId: 'rh-uterine-incision', text: 'Start: mid-fundus' },
+            { nodeId: 'rh-uterine-incision', text: 'Direction: vertical, midline' },
+            { nodeId: 'rh-uterine-incision', text: 'Shallow initial cut — 1-2 cm deep only — to avoid lacerating the fetus' },
+          ],
+        },
+        {
+          id: 'continue-cpr',
+          layout: 'steps',
+          action: 'Continue CPR',
+          figure: '100-120/min',
+          condition: 'Throughout; no closure until ROSC',
+          nodeIds: ['rh-continue-cpr'],
+          warning: { nodeId: 'rh-continue-cpr', text: 'DO NOT CLOSE YET.' },
+          lines: [
+            { nodeId: 'rh-continue-cpr', text: 'Continue chest compressions at 100-120/min' },
+            { nodeId: 'rh-continue-cpr', text: 'Continue ACLS medications per protocol' },
+            { nodeId: 'rh-continue-cpr', text: 'Pack with clean towels or saline-soaked gauze to control bleeding' },
+            { nodeId: 'rh-continue-cpr', text: 'No formal closure until ROSC is achieved' },
+          ],
+        },
+      ],
+    },
+  ],
+};

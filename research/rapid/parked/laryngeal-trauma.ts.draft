@@ -1,0 +1,110 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Laryngeal Trauma. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// One variant (the consult does not fork into different resuscitation paths). Findings: research/rapid/laryngeal-trauma.findings.json
+
+export const RAPID_LARYNGEAL_TRAUMA: RapidStrip = {
+  treeId: 'laryngeal-trauma',
+  variants: [
+    {
+      id: 'laryngeal-trauma',
+      label: 'Laryngeal trauma',
+      tiles: [
+        {
+          id: 'no-paralysis',
+          layout: 'steps',
+          action: 'Do not paralyze',
+          figure: 'No RSI',
+          condition: 'Suspected laryngeal trauma',
+          nodeIds: ['larynx-start', 'larynx-unstable-airway'],
+          warning: { nodeId: 'larynx-unstable-airway', text: 'If intubation fails → no backup (can\'t mask, can\'t wake)' },
+          lines: [
+            { nodeId: 'larynx-unstable-airway', text: 'CRITICAL: DO NOT PARALYZE' },
+            { nodeId: 'larynx-unstable-airway', text: 'RSI is contraindicated:' },
+            { nodeId: 'larynx-unstable-airway', text: 'Paralysis removes spontaneous ventilation' },
+            { nodeId: 'larynx-unstable-airway', text: 'Laryngeal manipulation can create false passage or complete obstruction' },
+          ],
+        },
+        {
+          id: 'awake-trach',
+          layout: 'steps',
+          action: 'Awake tracheostomy',
+          figure: 'Preferred airway',
+          condition: 'ENT/anesthesia available',
+          nodeIds: ['larynx-unstable-airway', 'larynx-awake-trach'],
+          lines: [
+            { nodeId: 'larynx-unstable-airway', text: 'Awake tracheostomy (surgical airway of choice)' },
+            { nodeId: 'larynx-awake-trach', text: 'Local anesthesia to anterior neck' },
+            { nodeId: 'larynx-awake-trach', text: 'Patient maintains spontaneous ventilation' },
+            { nodeId: 'larynx-awake-trach', text: 'Confirm placement with ETCO2, breath sounds' },
+          ],
+        },
+        {
+          id: 'call-team',
+          layout: 'steps',
+          action: 'Call surgeons',
+          figure: 'ENT, anesthesia, trauma',
+          condition: 'Unstable airway, now',
+          nodeIds: ['larynx-unstable-airway'],
+          lines: [
+            { nodeId: 'larynx-unstable-airway', text: 'Call anesthesia, ENT, trauma surgery NOW' },
+            { nodeId: 'larynx-unstable-airway', text: 'Prepare surgical airway kit at bedside' },
+          ],
+        },
+        {
+          id: 'cric-decision',
+          layout: 'steps',
+          action: 'Cric or trach?',
+          figure: 'Fracture: tracheostomy below',
+          condition: 'Emergent CICO, no time for trach',
+          nodeIds: ['larynx-crico-decision'],
+          lines: [
+            { nodeId: 'larynx-crico-decision', text: 'CRICOTHYROTOMY CONTRAINDICATIONS:' },
+            { nodeId: 'larynx-crico-decision', text: 'Laryngeal fracture' },
+            { nodeId: 'larynx-crico-decision', text: 'Laryngotracheal disruption' },
+            { nodeId: 'larynx-crico-decision', text: 'Tracheal transection' },
+            { nodeId: 'larynx-crico-decision', text: 'In these cases → proceed directly to tracheostomy BELOW the injury' },
+          ],
+        },
+        {
+          id: 'emergent-trach',
+          layout: 'steps',
+          action: 'Trach below injury',
+          figure: 'Confirm with ETCO2',
+          condition: 'Cric contraindicated',
+          nodeIds: ['larynx-emergent-trach'],
+          lines: [
+            { nodeId: 'larynx-emergent-trach', text: 'Proceed directly to tracheostomy below the level of injury.' },
+            { nodeId: 'larynx-emergent-trach', text: 'Vertical midline incision from cricoid to sternal notch' },
+            { nodeId: 'larynx-emergent-trach', text: 'Identify intact trachea below injury' },
+            { nodeId: 'larynx-emergent-trach', text: 'Insert trach tube, confirm with ETCO2' },
+          ],
+        },
+        {
+          id: 'flex-scope',
+          layout: 'steps',
+          action: 'Flexible laryngoscopy',
+          figure: 'Performed early',
+          condition: 'Stable airway',
+          nodeIds: ['larynx-flex-laryngoscopy'],
+          lines: [
+            { nodeId: 'larynx-flex-laryngoscopy', text: 'Performed early in stable patients:' },
+            { nodeId: 'larynx-flex-laryngoscopy', text: 'Assesses mucosal integrity, hematoma, vocal cord mobility' },
+          ],
+        },
+        {
+          id: 'ct-neck',
+          layout: 'steps',
+          action: 'CT neck, contrast',
+          figure: 'Airway stable or secured',
+          condition: 'Only if airway stable or secured',
+          nodeIds: ['larynx-imaging'],
+          lines: [
+            { nodeId: 'larynx-imaging', text: 'Only perform if airway is stable or secured' },
+            { nodeId: 'larynx-imaging', text: 'Add for penetrating trauma or suspected vascular injury' },
+          ],
+        },
+      ],
+    },
+  ],
+};

@@ -1,0 +1,111 @@
+[
+  {
+    "kind": "conflict",
+    "tileId": "calcium-chloride",
+    "nodeIds": [
+      "brady-causes"
+    ],
+    "drugId": "calcium-chloride",
+    "text": "Most important: the consult says calcium chloride 1 g IV is 'preferred in arrest, even peripherally'. The drug store entry for calcium chloride says central line only, lists peripheral IV administration as a contraindication (severe tissue necrosis) and cautions that rapid infusion can cause bradycardia and cardiac arrest. The tile shows the drug store text under Dosing and quotes the consult line unchanged, so both are on the card and they disagree. The same applies to the second calcium chloride tile (calcium-chloride-brady). Not resolved here. The consult also lists calcium gluconate 3 g IV as the alternative; that is only in the quoted line, not its own tile. The drug store indication used is 'Hyperkalemia (central access)'. The drug store also has a calcium gluconate entry 'Hyperkalemia (peripheral access)' (3 grams IV over 10 minutes) matching the consult's gluconate alternative; it is not a tile, so the strip shows the chloride-peripherally conflict but not a store-matched peripheral-safe option. Physician to decide whether calcium gluconate should replace or sit beside the chloride tile."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "brady-rosc-check",
+      "brady-rosc",
+      "brady-rearrest",
+      "brady-code-called",
+      "brady-treat-cause",
+      "brady-cause-check",
+      "brady-post-capture",
+      "brady-confirm",
+      "brady-asystole-mgmt",
+      "brady-tvp",
+      "brady-epi-infusion",
+      "brady-atropine",
+      "brady-tcp",
+      "brady-no-capture",
+      "brady-capture"
+    ],
+    "text": "Time-critical content NOT on the strip. Both variants: re-arrest pathway (return to CPR, reassess capture, increase mA, consider ECPR, continue epinephrine 1mg IV/IO q3-5 min); ROSC and post-ROSC care; post-capture management (monitor for lost capture, keep TCP pads as backup, prepare transvenous pacing, cardiology consult); the reversible-cause check and 'treat empirically' guidance for hyperkalemia; the code-called documentation checklist; bicarbonate and insulin/dextrose for hyperkalemia as separate steps (only inside the quoted calcium line); drug-toxicity antidotes (beta blocker: glucagon 3-10mg IV; Ca channel blocker: calcium plus high-dose insulin; digoxin: DigiFab) - left off the reversible-causes tile entirely, because quoting that line makes the steps tile name several drugs with doses. Asystole variant only: atropine, epinephrine infusion, dopamine, isoproterenol for transplanted hearts, transcutaneous pacing details and sedation drugs, failure-to-capture steps, transvenous pacing. Extreme bradycardia variant only: epinephrine 1mg IV/IO for arrest, CPR, the H's and T's search, hypothermia rewarming as its own tile (hypothermia is on the pacing tile condition and quoted line), termination of resuscitation (ETCO2 and futility signals). Sedation for the conscious patient (ketamine, fentanyl, with doses in node brady-no-capture) is left off because the drug store entries were not matched to this use; only 'If conscious patient \u2192 sedation required (TCP is extremely painful)' is quoted. Isoproterenol for denervated (transplanted) hearts is left off and has no drug store entry checked here."
+  },
+  {
+    "kind": "other",
+    "tileId": "calcium-chloride",
+    "nodeIds": [
+      "brady-causes",
+      "brady-treat-cause"
+    ],
+    "text": "Inside the consult, the brady-causes node body says calcium chloride 1 g IV (or gluconate 3 g IV) but its one-line summary says 'calcium gluconate 1-3g IV stat', and the brady-treat-cause node says calcium gluconate has 'minimal downside' when treating hyperkalemia empirically. The strip quotes only the body line. Not resolved here."
+  },
+  {
+    "kind": "gap",
+    "tileId": "epinephrine-arrest",
+    "nodeIds": [
+      "brady-asystole-mgmt"
+    ],
+    "drugId": "epinephrine",
+    "text": "The drug store has no cardiac-arrest epinephrine entry for adult ACLS (the only arrest entry is for VAD patients, with its own indication), so epinephrine 1mg IV/IO for asystole is a steps tile built from the node, with no drug store text or weight box."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "atropine",
+    "nodeIds": [
+      "brady-atropine"
+    ],
+    "drugId": "atropine",
+    "text": "The drug store atropine entry 'Symptomatic bradycardia (ACLS)' ends 'First-line for symptomatic bradycardia with pulse.' The consult places atropine in a bradycardic arrest consult, as an adjunct after pacing, 'often ineffective in infranodal block'. The tile shows the store text under Dosing and quotes the consult's limited-efficacy lines. The store also cautions to avoid atropine in suspected acute MI with bradycardia and to avoid transcutaneous pacing in digoxin toxicity until DigiFab is given; the consult says pacing first and does not mention the digoxin caution. Physician to decide whether either belongs on the card."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "tcp",
+    "nodeIds": [
+      "brady-tcp",
+      "brady-causes",
+      "brady-atropine"
+    ],
+    "drugId": "atropine",
+    "text": "The consult says pace immediately and do not wait for medications, but also says to defer pacing in hypothermia until the patient is above 30 C. The pacing tile carries both (warning line plus the hypothermia condition on its face and the quoted hypothermia line); the physician should check that the hypothermia exception reads clearly enough, since it is the one condition that reverses the first instruction."
+  },
+  {
+    "kind": "other",
+    "tileId": "epinephrine-infusion",
+    "nodeIds": [
+      "brady-epi-infusion",
+      "brady-tcp"
+    ],
+    "drugId": "epinephrine",
+    "text": "The drug store regimen for epinephrine in symptomatic bradycardia (ACLS infusion) holds several dose figures, including a push-dose of 10-20 mcg IV every 2-3 min; the consult also mentions push-dose epi 10-20 mcg IV as a temporizing measure, which is not on this tile. Dopamine has a drug store entry for bradycardia but appears only as a quoted alternative line, not a tile (7-tile cap)."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "epinephrine-infusion",
+    "nodeIds": [
+      "brady-epi-infusion"
+    ],
+    "drugId": "dopamine",
+    "text": "Dopamine 5-20 mcg/kg/min is a per-kg dose quoted on the epinephrine-infusion tile (as the consult's alternative if epinephrine is unavailable). The dopamine drug store entry for bradycardia has no weight calculator, and dopamine has no tile of its own (7-tile cap), so no weight box appears for it. The drug store entry also says it is an alternative 'when pacing unavailable', which is not the consult's wording ('if epi unavailable')."
+  },
+  {
+    "kind": "other",
+    "tileId": "cpr",
+    "nodeIds": [
+      "brady-start",
+      "brady-asystole-mgmt",
+      "brady-tcp",
+      "brady-atropine",
+      "brady-causes",
+      "brady-tor",
+      "brady-rosc-check"
+    ],
+    "text": "Fork: the consult forks at brady-confirm into Asystole (CPR, epinephrine, causes, termination) and Extreme bradycardia with QRS (pace first, atropine, epinephrine infusion). Labels equal the option labels. Asystole is shown first because the consult lists it first and it is pulseless arrest; the physician may prefer the pacing branch first. Tile order follows each branch's flow, not the critical-actions list order: that list has pacing first and the hypothermia exception last."
+  },
+  {
+    "kind": "other",
+    "tileId": "confirm-asystole",
+    "nodeIds": [
+      "brady-start"
+    ],
+    "text": "The consult defines bradycardic arrest as extreme bradycardia (<20 bpm) or asystole causing pulselessness, but it forks by rhythm, not by pulse. The Extreme bradycardia branch has no CPR instruction anywhere in the consult, so none is on that strip. The confirm-asystole tile cites the consult's first node (brady-start), which sits before the fork, so the order and outside-branch flags on it are expected."
+  }
+]

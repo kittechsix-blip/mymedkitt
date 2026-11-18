@@ -1,0 +1,72 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "sd-initial",
+      "sd-mcroberts",
+      "sd-rotational",
+      "sd-posterior-arm",
+      "sd-last-resort"
+    ],
+    "text": "Most important: this consult is a rehearsed maneuver sequence, so a strip suits it, but the strip has no yes/no check between maneuvers. The consult asks 'Did it resolve?' after McRoberts plus suprapubic, and again after rotational maneuvers and/or posterior arm; the strip does not show those checks, so the reader must decide when to move to the next tile. The consult also says that if McRoberts plus suprapubic fails, consider going directly to posterior arm delivery rather than attempting multiple rotational maneuvers first (and cites papers arguing posterior arm should be earlier). The strip follows the consult's node flow (Wood's screw before posterior arm), not that suggestion. Physician to decide whether tile order should change or Wood's screw should be dropped to make room. The strip order also differs from the critical-actions list, which puts pediatrics/NICU last; here it is inside the first tile with the other calls."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "sd-start",
+      "sd-traction",
+      "sd-first-check",
+      "sd-second-check",
+      "sd-protocols",
+      "sd-resolved",
+      "sd-initial",
+      "sd-rotational",
+      "sd-posterior-arm",
+      "sd-last-resort"
+    ],
+    "text": "Time-critical content NOT on the strip: recognition (failure to deliver, turtle sign); call for extra personnel and a note taker; the traction note (axial traction; accepting injury risk to save the baby); Rubin's maneuver; the posterior arm steps to locate the arm and rotate the baby 180 degrees if the anterior shoulder is still impacted; the Menticoglou axillary traction modification when the posterior arm cannot be reached; the two resolution-check questions; all-fours maneuver, deliberate clavicle fracture, symphysiotomy and abdominal rescue; the episiotomy note; post-delivery neonatal and maternal assessment and documentation. Critical-action items all have a tile: call for help, timekeeper and pediatrics/NICU (all in the first tile, sd-initial), McRoberts plus suprapubic, Wood's screw, posterior arm, Zavanelli plus emergency cesarean (the cesarean set-up and surgery lines are quoted on the Zavanelli tile)."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "terbutaline",
+    "drugId": "terbutaline",
+    "nodeIds": [
+      "sd-last-resort"
+    ],
+    "text": "Consult says terbutaline 0.25 mg SQ. The drug store entry says 0.25 mg SQ or IM as a single dose, and adds a heart-rate caution (avoid if above 120) and glucose and K+ monitoring. The consult's treatment block also says contraindicated in maternal cardiac disease and onset 5-15 minutes SQ; the store says onset 1-5 minutes and duration 15-30 minutes. The store's contraindication list does NOT include maternal cardiac disease (it lists baseline tachycardia, risk of tachyarrhythmia and active MI as relative). The consult's contraindication sits in a structured field that cannot be quoted on the strip, so the terbutaline tile does not show the consult's cardiac-disease contraindication. Not reconciled here; physician to decide."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "nitroglycerin",
+    "drugId": "nitroglycerin",
+    "nodeIds": [
+      "sd-last-resort"
+    ],
+    "text": "Consult gives nitroglycerin only as 0.4 mg SL. The drug store entry for this use lists IV push first (50 to 100 mcg, repeatable) and SL 0.4 mg as the alternative when IV access is limited. The consult's treatment block says it may be repeated once; the store gives a different repeat schedule for IV. Store also says to have phenylephrine and IV fluids ready for maternal hypotension; the consult's hypotension warning is in a structured field and is not quoted on the strip. Physician to decide which route and repeat guidance the strip should lead with."
+  },
+  {
+    "kind": "other",
+    "tileId": "nitroglycerin",
+    "nodeIds": [
+      "sd-last-resort"
+    ],
+    "text": "Terbutaline and nitroglycerin are two drug tiles but are alternatives (the consult's line says 'or'). Both tiles quote the same consult line and the nitroglycerin face says 'Alternative to terbutaline'. Fills the seventh tile; physician may prefer to merge or drop one."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "terbutaline",
+    "drugId": "terbutaline",
+    "nodeIds": [
+      "sd-last-resort"
+    ],
+    "text": "The consult's tocolytic line does not say when in the Zavanelli sequence to give it, only that it is part of the set-up; it sits between 'Rotate the head' and 'Flex the head' in the node list. Strip does not say more than the quoted line."
+  },
+  {
+    "kind": "other",
+    "tileId": "posterior-arm",
+    "nodeIds": [
+      "sd-posterior-arm"
+    ],
+    "text": "Posterior arm tile quotes the key steps and the one 'do not pull the upper arm' warning. The consult's humeral fracture rates and evidence numbers (84.4% single-maneuver success) are not on the strip."
+  }
+]

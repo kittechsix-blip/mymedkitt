@@ -1,0 +1,89 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hern-emergency",
+      "hern-osmolar",
+      "hern-hypervent"
+    ],
+    "text": "Most important: this consult is a parallel 'do these together' list, not a strict sequence, and the strip shows it as seven consecutive tiles. The strip's order follows the consult's own emergency node (airway, osmolar therapy, head position, hyperventilation, neurosurgery, blood pressure). Mannitol and hypertonic saline are alternatives ('choose one'); they are two adjacent tiles and the HTS tile says 'Alternative to mannitol'. Please check that this reads as parallel and not as step-by-step. Consult flow does not fork into different resuscitation paths, so there is one variant. Two of the consult's six critical actions are off the strip for space: Cushing triad as imminent herniation, and CT midline shift above 5 mm as the surgical threshold. Whether either deserves a tile in place of another is your call; I did not decide it."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "mannitol",
+    "drugId": "mannitol",
+    "nodeIds": [
+      "hern-osmolar",
+      "hern-mannitol",
+      "hern-emergency"
+    ],
+    "text": "Mannitol dose disagrees. The consult says 1 g/kg IV over 15-20 min in the emergency node and 0.5-1 g/kg in the osmolar node, may repeat 0.25-0.5 g/kg q6h; onset 15-30 min, duration about 90 min. The drug store (Brain herniation entry) says 0.5-1.5 g/kg over 10-15 min via in-line filter, onset 5-10 min, duration about 6 hr, redose q6-8h with osmolality below 320 and SBP above 100. The tile figure (1 g/kg) matches the store's weight box and the consult's emergency node; the Dosing text shown is the store's. Not resolved."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "hts",
+    "drugId": "hypertonic-saline",
+    "nodeIds": [
+      "hern-osmolar",
+      "hern-hts",
+      "hern-emergency"
+    ],
+    "text": "Hypertonic saline bolus volume disagrees. The consult says 250-500 mL (or 2-5 mL/kg) in the emergency and HTS nodes, but the critical-action line says 250 mL. The drug store says 2-5 mL/kg, often 150-250 mL, over 10-20 min, plus 23.4% 30 mL via central line; the store also says that if hypernatremic and herniating it is specialist-directed rescue only. The tile figure uses the 2-5 mL/kg range that both sources share, because the volume in mL differs. The store's per-kg box uses 3 mL/kg as the midpoint. The consult's own target sodium and 23.4% option are not on the strip."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "mannitol",
+    "drugId": "mannitol",
+    "nodeIds": [
+      "hern-mannitol",
+      "hern-osmolar"
+    ],
+    "text": "Hold rules: the consult says to hold mannitol if serum osmolarity is above 320 and to avoid it in hypovolemia; the store says confirm osmolality below 320 and SBP above 100 before redose and lists anuria, severe pulmonary edema/CHF, and active intracranial bleeding (relative) as contraindications. The store's list is shown automatically on the tile; the consult is silent on those contraindications. The consult's own treatment note also says 'Hold if hypotensive', which is not on the tile face or lines."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "hern-tonsillar",
+      "hern-start",
+      "hern-imaging-findings",
+      "hern-imaging",
+      "hern-uncal",
+      "hern-central",
+      "hern-bp-targets",
+      "hern-surgery",
+      "hern-monitoring",
+      "hern-reassess",
+      "hern-hts",
+      "hern-mannitol"
+    ],
+    "text": "Time-critical content NOT on the strip, or only partly: (1) Cushing triad as imminent herniation (critical action, node hern-tonsillar): only the words 'Cushing triad' appear in the neurosurgery tile as a surgical indication; the triad's three parts and 'act NOW' are not on the strip. (2) CT midline shift above 5 mm as the surgical threshold (critical action, node hern-imaging-findings) appears only as a line in the neurosurgery tile quoted from the surgery node; the other CT surgical criteria are left off. (3) Left off for space: the other clinical herniation signs (posturing, declining GCS), the age-based minimum SBP table, norepinephrine as the preferred pressor, reassessment of pupils and motor every 15-30 min, ICP monitoring and treatment thresholds, 23.4% saline, repeat mannitol dosing, sedation/normothermia, decompressive craniectomy criteria, and goals of care. Tile order follows the consult's emergency node, not the critical-actions list (which puts the osmolar therapy second, positioning third, hyperventilation fourth, then CT and Cushing). Positioning tile quotes the positioning node; the emergency node's own three lines are the same content. Hyperventilation 'Maximum 2 hours' line is quoted from the emergency node because the hyperventilation node's duration line sits under a Duration header not quoted. Physician to decide what else deserves a tile. Also off the strip: the full list of CT surgical criteria (epidural with mass effect, subdural thickness, cerebellar hemorrhage size, obstructive hydrocephalus), depressed skull fracture, 'when NOT to use' hyperventilation (prophylactic, first 24 h), and the consult's norepinephrine preference. Other critical-action nodes not shown on a tile: hern-imaging-findings, hern-tonsillar."
+  },
+  {
+    "kind": "other",
+    "tileId": "bp",
+    "nodeIds": [
+      "hern-bp-targets",
+      "hern-emergency"
+    ],
+    "text": "The blood-pressure tile gives SBP above 100-110 from the emergency node. The consult's own age table differs by age band (15-49 above 110, 50-69 above 100, over 70 above 110), and the warning that hypertension may be a Cushing response sits under a 'Caution:' header not quoted on the tile. The tile does not say to avoid treating the hypertension, only quotes the consult's line."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "hts",
+    "drugId": "hypertonic-saline",
+    "nodeIds": [
+      "hern-hts",
+      "hern-osmolar"
+    ],
+    "text": "The consult says hypertonic saline may be preferred if hypotensive and is peripheral-OK at 3%. It says nothing about its contraindications; the store lists routine correction of hypernatremia and volume overload without severe symptomatic hyponatremia as contraindications, which the tile shows from the store."
+  },
+  {
+    "kind": "other",
+    "tileId": "airway",
+    "nodeIds": [
+      "hern-start",
+      "hern-emergency"
+    ],
+    "text": "The 'do not wait for CT' warning is quoted from the recognition node (hern-start); the tile's drug-free steps are quoted from the emergency node. No induction or RSI drug is given in the consult, so none is on the strip."
+  }
+]

@@ -1,0 +1,130 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Undifferentiated Hypotension. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// Single variant (the consult's only fork, the POCUS pattern, leads to four different workups, not four resuscitation strips).
+// Findings: research/rapid/hypotension-workup.findings.json
+
+export const RAPID_HYPOTENSION_WORKUP: RapidStrip = {
+  treeId: 'hypotension-workup',
+  variants: [
+    {
+      id: 'shock',
+      label: 'Hypotension',
+      tiles: [
+        {
+          id: 'access-monitor',
+          layout: 'steps',
+          action: 'IVs, monitor, ECG',
+          figure: 'MAP <65 or SBP <90',
+          nodeIds: ['hypotension-start'],
+          lines: [
+            { nodeId: 'hypotension-start', text: 'Absolute hypotension: SBP <90 mmHg or MAP <65 mmHg' },
+            { nodeId: 'hypotension-start', text: 'Each hour at MAP <65 increases mortality by ~5%.' },
+            { nodeId: 'hypotension-start', text: 'Two large-bore IVs (18G or larger)' },
+            { nodeId: 'hypotension-start', text: 'Continuous monitoring' },
+            { nodeId: 'hypotension-start', text: 'ECG immediately' },
+          ],
+        },
+        {
+          id: 'rush',
+          layout: 'steps',
+          action: 'RUSH exam',
+          figure: '2-5 minutes',
+          nodeIds: ['hypotension-pocus'],
+          lines: [
+            { nodeId: 'hypotension-pocus', text: 'RUSH (Rapid Ultrasound in Shock) — HI-MAP:' },
+            { nodeId: 'hypotension-pocus', text: 'Pericardial effusion / tamponade' },
+            { nodeId: 'hypotension-pocus', text: 'RV dilatation (D-sign) → PE' },
+            { nodeId: 'hypotension-pocus', text: 'Free fluid → hemorrhage, rupture' },
+            { nodeId: 'hypotension-pocus', text: 'AAA (>3 cm), dissection flap' },
+            { nodeId: 'hypotension-pocus', text: 'Absent lung slide → tension PTX' },
+            { nodeId: 'hypotension-pocus', text: 'Complete RUSH exam in 2-5 minutes. Improves diagnostic accuracy from 60% to 85%.' },
+          ],
+        },
+        {
+          id: 'sepsis-bundle',
+          layout: 'steps',
+          action: 'Sepsis bundle',
+          figure: 'do ALL within 1 hour',
+          condition: 'septic shock',
+          nodeIds: ['shock-septic'],
+          lines: [
+            { nodeId: 'shock-septic', text: 'Hour-1 Bundle (do ALL within 1 hour):' },
+            { nodeId: 'shock-septic', text: 'Measure lactate — repeat if >2 mmol/L' },
+            { nodeId: 'shock-septic', text: 'Blood cultures before antibiotics' },
+            { nodeId: 'shock-septic', text: 'Broad-spectrum antibiotics — each hour delay increases mortality' },
+            { nodeId: 'shock-septic', text: '30 mL/kg crystalloid for hypotension or lactate ≥4' },
+            { nodeId: 'shock-septic', text: 'Vasopressors if hypotensive during/after fluids → MAP ≥65' },
+          ],
+        },
+        {
+          id: 'epinephrine-im',
+          layout: 'drug',
+          action: 'IM epinephrine',
+          figure: '0.5 mg',
+          condition: 'Anaphylactic shock',
+          nodeIds: ['shock-anaphylaxis'],
+          warning: { nodeId: 'shock-anaphylaxis', text: 'Do NOT rely on antihistamines/steroids — EPINEPHRINE IS THE TREATMENT.' },
+          drug: {
+            id: 'epinephrine',
+            indication: 'Anaphylaxis — IM (first-line)',
+            weightCalcs: [
+              { dosePerKg: 0.01, unit: 'mg', maxDose: 0.5, label: 'Pediatric IM', concentration: { amount: 1, perMl: 1, displayName: '1:1,000 (1 mg/mL)' } },
+            ],
+          },
+          lines: [
+            { nodeId: 'shock-anaphylaxis', text: 'Adults: 0.3-0.5 mg IM (1:1000) anterolateral thigh' },
+            { nodeId: 'shock-anaphylaxis', text: 'Repeat q5-15 min if needed' },
+          ],
+        },
+        {
+          id: 'hydrocortisone',
+          layout: 'drug',
+          action: 'IV hydrocortisone',
+          figure: '100 mg',
+          condition: 'refractory to fluids, vasopressors',
+          nodeIds: ['shock-adrenal'],
+          warning: { nodeId: 'shock-adrenal', text: 'Draw cortisol/ACTH before steroids if possible — but do NOT delay treatment.' },
+          drug: { id: 'hydrocortisone', indication: 'Adrenal crisis (adult)' },
+          lines: [
+            { nodeId: 'shock-adrenal', text: 'Consider adrenal crisis if shock refractory to fluids and vasopressors.' },
+            { nodeId: 'shock-adrenal', text: 'Chronic steroid use (≥pred 5 mg/day × 3 weeks)' },
+            { nodeId: 'shock-adrenal', text: 'Known adrenal insufficiency' },
+          ],
+        },
+        {
+          id: 'needle-decompress',
+          layout: 'steps',
+          action: 'Needle decompress',
+          figure: '5th ICS, ant. axillary',
+          condition: 'Tension pneumothorax',
+          nodeIds: ['shock-tension-ptx'],
+          warning: { nodeId: 'shock-tension-ptx', text: 'Clinical diagnosis — do NOT wait for imaging:' },
+          lines: [
+            { nodeId: 'shock-tension-ptx', text: 'Tension pneumothorax = immediate needle decompression.' },
+            { nodeId: 'shock-tension-ptx', text: 'Needle decompression:' },
+            { nodeId: 'shock-tension-ptx', text: '14-16G needle/angiocath' },
+            { nodeId: 'shock-tension-ptx', text: '5th intercostal space, anterior axillary line (preferred)' },
+            { nodeId: 'shock-tension-ptx', text: 'Chest tube:' },
+            { nodeId: 'shock-tension-ptx', text: 'Follow needle decompression immediately' },
+          ],
+        },
+        {
+          id: 'norepinephrine',
+          layout: 'drug',
+          action: 'Norepinephrine',
+          figure: 'MAP ≥65',
+          condition: 'Can start peripherally',
+          nodeIds: ['hypotension-vasopressors'],
+          warning: { nodeId: 'hypotension-vasopressors', text: 'Can start peripherally — do NOT delay for central line' },
+          drug: { id: 'norepinephrine', indication: 'Septic / Vasodilatory Shock' },
+          lines: [
+            { nodeId: 'hypotension-vasopressors', text: 'Start: 0.01-0.05 mcg/kg/min' },
+            { nodeId: 'hypotension-vasopressors', text: 'Titrate: every 2-5 min to MAP ≥65' },
+            { nodeId: 'hypotension-vasopressors', text: 'Max: ~0.5-1 mcg/kg/min (consider adding second agent)' },
+          ],
+        },
+      ],
+    },
+  ],
+};

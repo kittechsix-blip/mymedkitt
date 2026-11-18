@@ -1,0 +1,130 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "pph-initial-assess",
+      "pph-unstable",
+      "pph-call-team",
+      "pph-four-ts-q",
+      "pph-bakri"
+    ],
+    "text": "Most important: PPH is a stepwise, cause-driven consult (call, resuscitate, massage, TXA, find the cause among Tone/Trauma/Tissue/Thrombin, climb the uterotonic ladder, then balloon/OR). It is only partly a memorised sequence: after the first four actions it branches by cause (inversion, laceration, retained tissue, coagulopathy, rupture), so a 7-tile strip cannot carry the whole consult. The strip follows the consult's own critical-actions list; the physician should judge whether the uterotonic ladder and bimanual compression deserve slots instead of the 4 T's tile or the Bakri tile. Nothing on the strip is a drug from outside the consult."
+  },
+  {
+    "kind": "other",
+    "tileId": "oxytocin",
+    "drugId": "oxytocin",
+    "nodeIds": [
+      "pph-oxytocin",
+      "pph-uterine-inversion",
+      "pph-atony-intro",
+      "pph-four-ts-q"
+    ],
+    "text": "The oxytocin tile has no cause condition. In the consult, oxytocin sits on the Tone (boggy uterus) branch after the 4 T's question, and the uterine inversion node says to STOP ALL UTEROTONICS first. A clinician reading the strip top to bottom could start oxytocin in an inversion. The face carries only the NEVER IV push condition (face limit); the physician should decide whether the tile needs a Tone-only condition or an inversion caution. Also, the consult says to run uterotonics in parallel with TXA and mechanical measures, while the strip follows node order (oxytocin after the 4 T's)."
+  },
+  {
+    "kind": "other",
+    "tileId": "access-labs",
+    "nodeIds": [
+      "pph-access-labs"
+    ],
+    "text": "Reviewer changed the access-labs figure from '2 IVs, 4-6 units pRBC' to '2 IVs, T&C 4-6 units': the 4-6 units are a type and crossmatch order, not units to transfuse. The emergency-release amount (2 units pRBC) is in the quoted lines."
+  },
+  {
+    "kind": "other",
+    "tileId": "bakri",
+    "nodeIds": [
+      "pph-bakri"
+    ],
+    "text": "Reviewer widened the Bakri face condition to name all three contraindications the consult lists (rupture, infection, anomaly preventing placement). The Bakri node is reached from the reassess node when bleeding is ongoing, and the consult pairs it with MTP activation, which is not on the strip."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "pph-bimanual-compression",
+      "pph-methergine-check",
+      "pph-methergine",
+      "pph-carboprost-check",
+      "pph-carboprost",
+      "pph-misoprostol",
+      "pph-mtp",
+      "pph-uterine-inversion",
+      "pph-trauma-assess",
+      "pph-laceration",
+      "pph-tissue",
+      "pph-thrombin",
+      "pph-rupture",
+      "pph-hematoma",
+      "pph-surgical",
+      "pph-massive-reassess",
+      "pph-hysterectomy",
+      "pph-uncontrolled",
+      "pph-atony-intro",
+      "pph-bleeding-check",
+      "pph-initial-assess",
+      "pph-unstable",
+      "pph-call-team",
+      "pph-access-labs",
+      "pph-massage-fundus",
+      "pph-txa",
+      "pph-oxytocin",
+      "pph-four-ts",
+      "pph-bakri"
+    ],
+    "text": "Time-critical content NOT on the strip (all seven critical actions ARE on tiles): bimanual uterine compression (the consult calls it the most effective mechanical maneuver for atony); the second- and third-line uterotonics methylergonovine, carboprost and misoprostol with their screens (HTN/preeclampsia/CAD, asthma/pulmonary HTN) and the escalate-every-5-10-minutes rule; Massive Transfusion Protocol activation criteria, the 1:1:1 ratio and calcium; the unstable-patient measures in the unstable node (Trendelenburg, high-flow oxygen, warmed crystalloid, O-negative blood, keep warm); the cause-specific branches (inversion: stop uterotonics and reposition; laceration repair; retained tissue exploration; coagulopathy correction; hematoma; rupture); the surgical/IR options and hysterectomy; cryoprecipitate 10 units if fibrinogen <200 (left off because the drug store has no cryoprecipitate entry for this use, see below); the bleeding-controlled versus ongoing reassessment. The Bakri critical action is paired in the consult with MTP activation; MTP is not on the strip. Tile order follows the consult's node flow (call, access, massage, TXA, 4 T's, oxytocin, Bakri), not the critical-actions list order (which puts oxytocin before the 4 T's)."
+  },
+  {
+    "kind": "gap",
+    "tileId": "bakri",
+    "nodeIds": [
+      "pph-bakri"
+    ],
+    "text": "The Bakri tile's figure (300-500 mL saline) is a balloon inflation volume, not a drug dose, so it is a steps tile. The rule that flags a dose-like figure on a steps tile was cleared with this finding, not by changing the wording."
+  },
+  {
+    "kind": "gap",
+    "tileId": "access-labs",
+    "drugId": "cryoprecipitate",
+    "nodeIds": [
+      "pph-access-labs",
+      "pph-mtp"
+    ],
+    "text": "The consult orders cryoprecipitate 10 units if fibrinogen <200 mg/dL (target >200). The drug store has no cryoprecipitate entry for this use, so the line was not put on the strip. Fibrinogen is on the labs tile only as a lab to send."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "txa",
+    "drugId": "tranexamic-acid",
+    "nodeIds": [
+      "pph-txa"
+    ],
+    "text": "Contraindications differ. The consult lists active thromboembolic disease as 'rare to be true CI in active hemorrhage'; the drug store lists active thromboembolic disease (DVT, PE, stroke) as a plain contraindication and does not carry that softening. Not resolved. Also, the consult's title and the store both give the 3-hour window; the 'NO BENEFIT if given >3 hours' face condition comes from the consult."
+  },
+  {
+    "kind": "other",
+    "tileId": "oxytocin",
+    "drugId": "oxytocin",
+    "nodeIds": [
+      "pph-oxytocin"
+    ],
+    "text": "The consult states 'MAX 40 units / 500 mL'. The store's PPH entry gives no maximum; its separate third-stage entry says 'Max 40 units over 4-10 hrs'. These are different limits (concentration versus total over time) and are quoted as written in the consult. Not resolved. The store's PPH regimen also holds two dose tokens (20 units infusion and 10 U IM), so the figure raises the multi-dose flag."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "oxytocin",
+    "nodeIds": [
+      "pph-oxytocin",
+      "pph-methergine-check"
+    ],
+    "text": "The oxytocin node ends with 'escalate to Methylergonovine' without the HTN/preeclampsia/CAD screen, which lives in the next node. That line was NOT quoted on the strip so the strip does not read as a go-ahead for methylergonovine in a hypertensive patient."
+  },
+  {
+    "kind": "other",
+    "tileId": "call-help",
+    "nodeIds": [
+      "pph-unstable",
+      "pph-call-team"
+    ],
+    "text": "The call-for-help tile has no condition on its face; the unstable node is marked critical, which raises a flag. The consult forks at pph-initial-assess (Unstable versus Stable but actively bleeding), but both options lead to the same sequence, so the strip is one variant."
+  }
+]

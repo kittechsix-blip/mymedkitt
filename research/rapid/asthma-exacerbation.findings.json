@@ -1,0 +1,109 @@
+[
+  {
+    "kind": "conflict",
+    "tileId": "ketamine-bronchodilator",
+    "drugId": "ketamine-asthma",
+    "nodeIds": [
+      "asthma-ketamine"
+    ],
+    "text": "Most important: the ketamine bronchodilator tile's Dosing box shows the drug store's dose (0.2-0.5 mg/kg IV, repeat q10-20 min), but the consult itself says 0.1-0.2 mg/kg IV, repeat q10-15 min, and 0.5 mg/kg/hr infusion (store: 0.5-2 mg/kg/hr). Both sit on the same tile. The reviewer replaced the tile's numeric figure with 'Sub-dissociative bolus' so the glance face does not pick either number. Not resolved here; physician to decide which dose is right."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "asthma-start",
+      "asthma-severity",
+      "asthma-critical",
+      "asthma-continuous-nebs"
+    ],
+    "text": "This consult is partly a memorised sequence (adjuncts for severe asthma, BiPAP, DSI, crash airway, vent) but it also contains a severity classification, a mild-moderate pathway, PEF-based disposition and ICU orders that do not reduce to 7 actions. The strip covers the severe / life-threatening escalation only, and leaves out the first-hour basics (see the omission finding). Tiles follow the consult's node flow (nebs, Mg, ketamine, BiPAP, DSI, crash airway, vent), not the critical-actions list order. The consult forks by severity at asthma-severity but the paths are escalation levels, not different resuscitation paths, so one variant is used."
+  },
+  {
+    "kind": "other",
+    "tileId": "bipap-low-peep",
+    "nodeIds": [
+      "asthma-bipap-indications"
+    ],
+    "text": "BiPAP contraindications in the consult (altered mental status unless from hypercapnia, inability to protect airway, facial trauma/burns, uncooperative patient, hemodynamic instability) are not on the tile; only 'Patient still alert and cooperative' is. Also the consult's life-threatening path (asthma-critical-decision) forks into Still conscious (BiPAP + ketamine) versus Agonal/arresting (crash airway); the strip keeps one variant, so a physician may prefer a two-variant fork there."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "asthma-severity",
+      "asthma-severe-immediate",
+      "asthma-mild-moderate",
+      "asthma-critical",
+      "asthma-epinephrine",
+      "asthma-bipap-sedation",
+      "asthma-permissive-hypercapnia",
+      "asthma-vent-troubleshoot",
+      "asthma-vent-ongoing",
+      "asthma-disposition-criteria",
+      "asthma-disposition-icu",
+      "asthma-intubation-indications"
+    ],
+    "text": "Time-critical content NOT on the strip: (1) severity classification, including silent chest as a dire sign (critical action on asthma-severity); (2) high-flow O2, IV steroids (methylprednisolone) and VBG/labs in the first minutes, and ipratropium with the first nebs; (3) epinephrine IM/IV for severe asthma failing SABA; (4) ketamine sedation for BiPAP tolerance (critical action on asthma-bipap-sedation) with its avoid list (propofol, high-dose benzodiazepines, opioids); (5) BiPAP contraindications beyond alert and cooperative, and inline nebulizer through the circuit; (6) DSI tube size (7.5-8.0 women, 8.0-8.5 men), the reasons for ketamine induction, and crash-airway steps before intubation (bag-mask slow breaths, intubate immediately, skip paralytic if truly agonal, largest ETT); (7) permissive hypercapnia targets (the 'do not increase rate to fix pCO2' line is quoted as the vent tile warning; the targets and the contraindications to permissive hypercapnia are not; critical action on asthma-permissive-hypercapnia); (8) vent troubleshooting (plateau >30, auto-PEEP, pneumothorax); (9) post-intubation sedation and paralysis; (10) PEF disposition thresholds (critical action on asthma-disposition-criteria) and ICU criteria. Left off to stay within 7 tiles; physician to review the choice. The reviewer notes epinephrine (IM 0.3-0.5 mg, push-dose for impending arrest) has a drug-store entry and would be a drug tile if room is made; steroids and high-flow O2 are in the consult's 'immediate simultaneous actions' list. The strip spends three of seven tiles on the intubated phase (DSI, crash airway, ventilator) and none on first-hour steroids or epinephrine: physician judgment. Tile order note: the consult's own entry points reach the crash airway (life-threatening, agonal) before DSI, but the strip keeps node-file order."
+  },
+  {
+    "kind": "gap",
+    "tileId": "continuous-nebs",
+    "drugId": "albuterol-neb",
+    "nodeIds": [
+      "asthma-continuous-nebs"
+    ],
+    "text": "The drug store's albuterol nebulizer bronchospasm dose is 2.5 mg q20 min x 3 doses, then q1-4h PRN. It has no continuous-nebulization entry, so this is a steps tile quoting the consult's own 10-15mg/hr. The consult and the store describe different regimens for the same use; not resolved."
+  },
+  {
+    "kind": "gap",
+    "tileId": "disconnect-ett",
+    "nodeIds": [
+      "asthma-crash-airway",
+      "asthma-intubation-indications"
+    ],
+    "text": "Crash-airway tile quotes only the already-intubated arrest steps (disconnect ETT, compress chest). The pre-intubation crash steps (bag-mask with slow breaths, ketamine 1.5-2 mg/kg, skip paralytic, largest ETT) and push-dose epinephrine are not on the strip."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "magnesium",
+    "drugId": "magnesium-sulfate-asthma",
+    "nodeIds": [
+      "asthma-magnesium"
+    ],
+    "text": "Consult and store agree on 2 g IV over 20 minutes. The consult allows a repeat x1 if severe; the store says single dose. This disagreement is shown on the tile (store Dosing says single dose, 'In this consult' says can repeat x1). Not resolved."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "dsi-ketamine",
+    "drugId": "ketamine-asthma",
+    "nodeIds": [
+      "asthma-dsi"
+    ],
+    "text": "DSI ketamine: the consult gives 1-1.5 mg/kg IV to dissociate the patient, then a separate 1-2 mg/kg IV induction dose with rocuronium 1.2 mg/kg; the store gives 1-2 mg/kg IV push once (shown as the tile figure and in Dosing). The tile now quotes the consult's four sequence lines (dissociate, BiPAP/NRB 3-5 min, induction, rocuronium) so both consult doses are visible beside the store dose; the avoid-list is the tile warning. The consult's crash-airway node gives a third ketamine dose (1.5-2 mg/kg). Not resolved."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "ketamine-bronchodilator",
+    "drugId": "ketamine-asthma",
+    "nodeIds": [
+      "asthma-ketamine"
+    ],
+    "text": "Ketamine is dosed per kg. The store's single weight calculator for bronchodilation shows one fixed per-kg value; it does not show the consult's range or the infusion per hour."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "bipap-low-peep",
+    "nodeIds": [
+      "asthma-bipap-settings",
+      "asthma-bipap-indications"
+    ],
+    "text": "The consult does not say how long to try BiPAP before declaring failure; it only lists tolerance routes (continue, sedate, or consider intubation)."
+  },
+  {
+    "kind": "gap",
+    "tileId": "vent-low-rate",
+    "nodeIds": [
+      "asthma-vent-settings"
+    ],
+    "text": "The vent tile's figure carries a rate (8-12 breaths/min) but there is no drug-store entry for ventilator settings, so it is a steps tile. The consult gives its settings (rate, I:E, tidal volume 6-8 mL/kg IBW, PEEP, FiO2) in a table whose rows cannot be quoted line by line, so tidal volume, FiO2 and the plateau/auto-PEEP limits are not on the tile. The rate, I:E and PEEP are quoted from the node's own summary line instead."
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": ["tif-hyperinflate", "tif-finger-tamponade", "tif-utley-technique", "tif-donts"],
+    "text": "Most important: this consult is mostly a procedure walkthrough (cuff hyperinflation, then the Utley finger maneuver) plus a call-surgery and transfusion path, with no drugs. It does reduce to 7 actions, but the strip is a sequence of manoeuvres, not a drug sequence. Please check that the Utley tile (8 quoted steps, with the do-not-release warning) is enough, and that the order I used (follow the consult's flow, not the critical-actions list) suits you. The consult's own flow puts the two time-critical bleed manoeuvres after the sentinel-bleed and surgical-call tile."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": ["tif-surgical-options", "tif-sentinel-bleed", "tif-hyperinflate-result", "tif-cuff-success", "tif-partial-control", "tif-utley-considerations", "tif-stabilize", "tif-early-bleeding", "tif-late-bleeding", "tif-low-risk", "tif-disposition"],
+    "text": "Time-critical consult content NOT on the strip. Critical action left off: 'Surgical ligation must include DIVISION of artery - ligation alone risks re-fistulization' (tif-surgical-options; it is an operating-room step, and the do-not is not otherwise carried here). Critical action 'DO NOT delay treatment for imaging - CTA/bronchoscopy only 20-30% sensitive' is carried only through the imaging do-not lines on the sentinel and do-not tiles, not the sensitivity figure (tif-sentinel-bleed is not cited). Also not on the strip: the sentinel-bleed triad and red flags, the cuff result check (continuing bleeding means the fistula may be proximal to the cuff), the 'do not move the tube / do not deflate the cuff / do not suction through the trach' list after cuff success, partial-control options (deep oral ETT or cuffed ETT through the stoma), what to do if the stoma is too small, external sternal-notch pressure as an alternative, TXA and vasopressors, central line, endovascular stent-graft and occlusion balloon, and the low-risk and early/late bleeding branches. Only 7 tiles allowed."
+  },
+  {
+    "kind": "gap",
+    "tileId": "hyperinflate-cuff",
+    "nodeIds": ["tif-hyperinflate"],
+    "text": "The cuff target '~50 mL' is air volume, not a drug dose. It is a steps tile because there is no drug entry; the rule that flags a unit figure on a steps tile needs this note."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "finger-tamponade",
+    "nodeIds": ["tif-utley-technique", "tif-finger-tamponade"],
+    "text": "The Utley steps are quoted from step lines whose step headings are not on the tile (flags). The tile drops the headings to stay within 8 lines, and the 'do not release' rule is also in the warning box. The consult's technique starts by deflating the trach cuff, which comes after hyperinflation; the consult does not say how long this window may be."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "activate-mtp",
+    "nodeIds": ["tif-stabilize"],
+    "text": "The consult lists TXA only as 'if institutional protocol' and gives no dose; no drug tile was made for it. The 'Large-bore IV x2 minimum' line sits under the heading 'IV Access:', which is not quoted (flag)."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "critical-donts",
+    "nodeIds": ["tif-donts", "tif-partial-control", "tif-utley-technique"],
+    "text": "Inside the consult: the do-not list says never remove the trach tube unless going to finger tamponade, but the partial-control node offers 'replace trach with cuffed ETT through stoma' (remove the tube) without finger tamponade. Also the Utley steps deflate the trach cuff before the oral ETT is in and confirmed, which gives up the cuff tamponade; the consult does not say how to cover that moment. Not changed; physician to decide."
+  },
+  {
+    "kind": "other",
+    "tileId": "hyperinflate-cuff",
+    "nodeIds": ["tif-hyperinflate", "tif-sentinel-bleed", "tif-cuff-success"],
+    "text": "The face condition 'Active massive hemorrhage' follows the consult's route from the sentinel-bleed question, but the consult also sends a sentinel bleed that has stopped on to cuff hyperinflation (tif-sentinel-management leads to tif-hyperinflate). Please check the condition does not read as 'only if bleeding now'. The strip also does not show the do-nots after cuff success (do not move the tube, deflate the cuff, or suction through the trach); they sit under a DO NOT heading in tif-cuff-success and would be misleading if quoted alone. The only cuff warning shown is 'temporizing measure only'."
+  },
+  {
+    "kind": "other",
+    "tileId": "surgical-activation",
+    "nodeIds": ["tif-surgical-alert", "tif-sentinel-management"],
+    "text": "Call-surgery appears twice (tile 2 for a sentinel bleed, tile 5 for activation of the full team and OR). They are two different nodes in the consult, but a physician may prefer to merge them and use the freed tile for the 'bleeding continues past the cuff, go to finger tamponade' or 'partial control, add oral ETT' step. Left as drafted."
+  }
+]

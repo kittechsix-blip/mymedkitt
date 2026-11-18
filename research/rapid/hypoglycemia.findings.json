@@ -1,0 +1,104 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "hypoglycemia-start",
+      "hypoglycemia-iv-im-treatment"
+    ],
+    "text": "Most important: this consult is a short treatment step (dextrose or glucagon) followed by a recheck, then a cause-and-disposition workup (differential, critical sample, medication risk, discharge criteria). Only the first two tiles are a memorised resuscitation sequence; the remaining tiles are recurrence and disposition decisions. The strip is a faithful best effort, but the physician should decide whether this consult belongs on a RAPID card at all, or only the first treatment tiles."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "hypoglycemia-start",
+      "hypoglycemia-oral-treatment",
+      "hypoglycemia-iv-im-treatment",
+      "hypoglycemia-recurrent",
+      "hypoglycemia-critical-illness",
+      "hypoglycemia-critical-sample",
+      "hypoglycemia-differential",
+      "hypoglycemia-medication-risk",
+      "hypoglycemia-discharge"
+    ],
+    "text": "Time-critical consult content NOT on the strip: the oral carbohydrate route for an alert patient who can swallow (15-20 g, recheck in 15 minutes; left off because the strip follows the severe path); thiamine before or with dextrose (time-critical, given with the first dextrose dose; the dextrose tile is at its 4-line maximum so it was left off) for severe malnutrition, alcohol use disorder or high Wernicke risk; airway positioning, aspiration precautions and seizure management; drawing a plasma glucose and critical sample before dextrose only if it does not delay treatment, and the whole Whipple triad / critical sample list; the recurrent-hypoglycemia lab checks (potassium, magnesium, phosphate, renal, liver, lactate, ethanol); adrenal crisis and do not delay hydrocortisone for cortisol testing, and the critical illness branch; calling the poison center; the rule that dextrose infusion may need central access; the discharge criteria and discharge bundle. All four critical actions are on the strip: treat immediately (iv-dextrose, glucagon), recheck every 15 minutes (recheck), dextrose plus octreotide for recurrent sulfonylurea or meglitinide (octreotide), and do not discharge (admit). Also off the strip: the consult's note that D10W is often smoother peripherally and avoids a large osmotic bolus when time allows; the sulfonylurea node's step 1 (correct the initial low with oral carbohydrate or IV dextrose) and call poison center; the Level 1/2/3 definitions."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "octreotide",
+    "nodeIds": [
+      "hypoglycemia-sulfonylurea"
+    ],
+    "drugId": "octreotide",
+    "text": "The consult says octreotide 50-100 mcg SC or IV every 6 hours; the drug store says every 6-8 hours. The tile Dosing text is the drug store's; the consult's own interval is quoted under 'In this consult'. Not resolved."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "glucagon",
+    "nodeIds": [
+      "hypoglycemia-iv-im-treatment"
+    ],
+    "drugId": "glucagon",
+    "text": "The consult offers intranasal glucagon 3 mg as an alternative and gives routes IM/SC; the drug store's hypoglycemia entry is 1 mg IM/SQ/IV, repeat once at 15 minutes, with no intranasal form. The store's repeat-at-15-minutes is not in the consult node. Not resolved."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "iv-dextrose",
+    "nodeIds": [
+      "hypoglycemia-iv-im-treatment",
+      "hypoglycemia-recheck"
+    ],
+    "drugId": "dextrose",
+    "text": "The consult gives D50W 25 g as the first IV option and D10W 100-250 mL as an alternative; the drug store's adult hypoglycemia entry has only D50W 50 mL (25 g) IV push and no D10W bolus. The store entry also repeats if glucose is under 70 mg/dL at 15 minutes while the consult says to repeat therapy until glucose is above 70 mg/dL. Adult dextrose has no weight calculator, which is expected for a fixed dose; the pediatric entry is not used."
+  },
+  {
+    "kind": "other",
+    "tileId": "infusion",
+    "nodeIds": [
+      "hypoglycemia-recheck",
+      "hypoglycemia-recurrent"
+    ],
+    "drugId": "dextrose",
+    "text": "The D10W infusion is a steps tile because the drug store has no infusion-rate dose entry for adult hypoglycemia (its adult entry only says to follow with D10W infusion if recurrent). The consult gives no rate, only titration to a glucose target. The glucose target on the face is quoted from the recheck node."
+  },
+  {
+    "kind": "other",
+    "tileId": "iv-dextrose",
+    "nodeIds": [
+      "hypoglycemia-start",
+      "hypoglycemia-iv-im-treatment",
+      "hypoglycemia-recheck",
+      "hypoglycemia-recurrent",
+      "hypoglycemia-sulfonylurea",
+      "hypoglycemia-insulin-overdose",
+      "hypoglycemia-disposition",
+      "hypoglycemia-admit"
+    ],
+    "text": "Tile order follows the consult's node flow (start, IV/IM treatment, recheck, recurrent, sulfonylurea, insulin overdose, disposition/admit), which matches the critical-actions list except that the critical-action list has the sulfonylurea and disposition items as items 3 and 4 and the insulin overdose tile is an addition. The consult itself forks at the start node into IV/IM, oral and already-corrected paths; these are not different resuscitation paths, so a single variant was used. The insulin overdose tile was added as the 6th tile; the physician may drop it. The admit tile quotes several trigger lines (limit of 8 lines) and omits the rest of the node's triggers (Level 3 event, seizure, renal or hepatic failure, sepsis, adrenal crisis, hypothermia, pregnancy, frailty, poor oral intake, unsafe home setting)."
+  },
+  {
+    "kind": "other",
+    "tileId": "octreotide",
+    "nodeIds": [
+      "hypoglycemia-sulfonylurea",
+      "hypoglycemia-medication-risk"
+    ],
+    "text": "The octreotide condition says 'Recurrent sulfonylurea/meglitinide', but the consult triggers octreotide for recurrent OR high-risk exposure ('If recurrent or high-risk exposure, give octreotide'). The face is narrower than the consult because the full wording does not fit 40 characters; the quoted line carries the full trigger. Physician to confirm the face wording."
+  },
+  {
+    "kind": "other",
+    "tileId": "infusion",
+    "nodeIds": [
+      "hypoglycemia-recurrent",
+      "hypoglycemia-sulfonylurea"
+    ],
+    "text": "For sulfonylurea or meglitinide hypoglycemia the consult says 'Start D10W infusion only as needed to maintain safe glucose' and 'Avoid chasing recurrence with repeated D50 alone', whereas the recurrent node says to start a D10W infusion. The infusion tile follows the recurrent node; the sulfonylurea qualifier is not on this tile. Also the consult uses two different glucose targets: >70 mg/dL on the recheck tile and generally >100 mg/dL for the infusion. Not resolved."
+  },
+  {
+    "kind": "other",
+    "tileId": "insulin-overdose",
+    "nodeIds": [
+      "hypoglycemia-insulin-overdose"
+    ],
+    "text": "The insulin overdose tile is a decision-branch tile added for completeness (dextrose support and electrolyte monitoring for long-acting insulin, pump or overdose); it is a steps tile because the consult gives no dextrose rate and the drug store has no infusion entry. Its face was rewritten to match the quoted management lines (D10W titration, K/Mg/phosphate monitoring). Physician may drop it."
+  }
+]

@@ -1,0 +1,88 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "bh-start",
+      "bh-indications",
+      "bh-drill-technique",
+      "bh-evacuate-edh",
+      "bh-wound-closure"
+    ],
+    "text": "Most important: this consult is mostly a procedure walkthrough (indications, anatomy, equipment, 6 modules, 30 nodes), not a memorised resuscitation sequence. The strip is a best-effort 7-step summary of the decision to drill and the do-not-do lines, not a substitute for the step-by-step technique, which does not reduce to 7 actions. The physician should decide whether this consult belongs on a RAPID card at all."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "bh-start",
+      "bh-no-blood",
+      "bh-post-procedure",
+      "bh-anatomy-landmarks",
+      "bh-pre-procedure",
+      "bh-equipment-check",
+      "bh-clutch-importance",
+      "bh-no-clutch-technique",
+      "bh-austere-equipment",
+      "bh-incision",
+      "bh-exposure",
+      "bh-sdh-drainage",
+      "bh-dural-tear",
+      "bh-second-hole",
+      "bh-hemostasis",
+      "bh-extend-craniotomy",
+      "bh-craniectomy-technique",
+      "bh-complications",
+      "bh-monitoring",
+      "bh-medical-management",
+      "bh-transfer"
+    ],
+    "text": "Left off the strip (7-tile cap): critical actions bh-no-blood (if no blood found do not explore further, close and transport), bh-post-procedure (this is a bridge, not a cure; transport, antibiotics, neuroprotection bundle, seizure prophylaxis) and bh-start (the time-critical anisocoria-to-decompression latency caveat, decompress as fast as possible). Also not on the strip: airway/intubation, positioning and midline marking before draping, pre-procedure antibiotics, equipment check and the no-clutch/austere options, incision and skull exposure steps, subdural drainage technique (tent and cruciate incision; only 'Must open dura to drain.' is quoted), dural tear, second burr hole limits (maximum 2 holes), hemostasis, extension to craniectomy, complications, and the medical-management and transfer branches. The evacuate tile is mostly epidural drainage lines, and its site tile quotes the temporal point only (not the frontal and parietal points). The drug-store hypertonic saline entry is not on the strip; the consult's hypertonic saline line is quoted only inside the mannitol tile. The indications tile face figure lists the criteria that must all be present (CT-confirmed hematoma, midline shift, GCS < 8 or rapidly deteriorating, unilateral fixed/dilated pupil); the consult's no-CT austere indications (severe head trauma with unilateral fixed/dilated pupil, obvious skull fracture) are not on the strip."
+  },
+  {
+    "kind": "other",
+    "tileId": "osmotherapy",
+    "nodeIds": [
+      "bh-pre-procedure",
+      "bh-medical-management"
+    ],
+    "drugId": "mannitol",
+    "text": "The strip uses the drug store's 'Brain herniation' mannitol entry. The consult's own mannitol link (bh-medical-management) points at the 'icp' indication, the store's 'Elevated ICP' entry (0.25-1 g/kg), whose upper end matches the consult's 0.5-1 g/kg better than the herniation entry (0.5-1.5 g/kg). Which entry belongs on this card is the physician's call; not changed. The face shows only mannitol; hypertonic saline 23.4% is the consult's alternative and appears only in the quoted lines."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "osmotherapy",
+    "nodeIds": [
+      "bh-pre-procedure"
+    ],
+    "drugId": "mannitol",
+    "text": "The consult says mannitol 0.5-1 g/kg IV, OR hypertonic saline 23.4% 30 mL. The drug store 'Brain herniation' entry says 0.5-1.5 g/kg. The upper end differs. The face figure and Dosing text come from the drug store; the consult's own wording is quoted under 'In this consult'. Not resolved. The store also lists 'Active intracranial bleeding (relative)' as a contraindication for mannitol, which sits awkwardly with an intracranial hematoma; flagged for the physician, not changed."
+  },
+  {
+    "kind": "other",
+    "tileId": "osmotherapy",
+    "nodeIds": [
+      "bh-pre-procedure",
+      "bh-contraindications"
+    ],
+    "drugId": "mannitol",
+    "text": "The consult presents mannitol or hypertonic saline as a pre-procedure checklist item ('Start Now'), with no stated hypotension or hypovolemia caveat; the drug store says hypertonic saline is preferred when hypotensive or hypovolemic. The consult is silent on this."
+  },
+  {
+    "kind": "other",
+    "tileId": "site-side",
+    "nodeIds": [
+      "bh-side-selection",
+      "bh-anatomy-landmarks"
+    ],
+    "text": "Tile order follows the consult's flow (indications, contraindications, side and site, pre-procedure osmotherapy, drilling, evacuation, closure), not the critical-actions list order. The site tile cites bh-side-selection as primary, with the sagittal sinus line from bh-anatomy-landmarks; its quoted lines do not include the critical action's pupil statistics (about 79% ipsilateral, positive predictive value about 30%), only the line 'Do not open a head on pupil alone if CT is obtainable.'. The consult's pre-procedure node also holds intubation, positioning and antibiotics, which are not on the strip."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "evacuate",
+    "nodeIds": [
+      "bh-edh-drainage",
+      "bh-evacuate-edh",
+      "bh-sdh-drainage"
+    ],
+    "text": "The evacuate tile is epidural-first (its condition says Epidural). For subdural it quotes only 'Must open dura to drain.'; the tent and cruciate-incision technique and its do-not list are not on the strip. The brain-visible stop line is quoted under its heading 'D. Brain Tissue Visible'. Two quoted lines sit under headers the tile cannot quote in full (flags for the physician). Emoji markers at the start of source lines are part of the quoted text because the excerpt rule requires a clause-complete line start."
+  }
+]

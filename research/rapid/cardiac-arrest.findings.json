@@ -1,0 +1,98 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "ca-start",
+      "ca-rhythm-check",
+      "ca-shockable-branch",
+      "ca-nonshockable-branch",
+      "ca-vf-link",
+      "ca-pvt-link",
+      "ca-tdp-link",
+      "ca-pea-link",
+      "ca-brady-link"
+    ],
+    "text": "Most important: this consult is a hub, not a self-contained memorised sequence. It forks at the rhythm check into shockable and non-shockable paths and hands each rhythm to its own protocol (VF/VT, VT, Torsades, PEA, Bradycardic arrest). So this strip holds only the universal steps the hub itself teaches (CPR, rhythm check, ETCO2, access, epinephrine, reversible causes, termination) and carries no shock energies, antiarrhythmics or rhythm-specific actions. I used one variant because the hub's own content is the same for both rhythm paths; the physician should decide whether it should instead be a two-variant fork at ca-rhythm-check (labels would have to equal 'Shockable (VF/pVT)' and 'Non-shockable (PEA/Asystole)')."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "ca-airway",
+      "ca-brady-link",
+      "ca-code-called",
+      "ca-confirm",
+      "ca-hs-ts",
+      "ca-no-cpr",
+      "ca-nonshockable-branch",
+      "ca-pea-link",
+      "ca-pvt-link",
+      "ca-rosc",
+      "ca-shockable-branch",
+      "ca-special-meds",
+      "ca-start",
+      "ca-tdp-link",
+      "ca-tor-criteria",
+      "ca-vf-link"
+    ],
+    "text": "Time-critical content NOT on the strip (7-tile cap): AIRWAY (BVM first, defer intubation early, continuous compressions once an advanced airway is in, ventilate every 6 seconds, avoid hyperventilation, supraglottic airway acceptable) is a time-critical step in the consult's flow between CPR and the rhythm check and has no tile; the physician should decide whether it displaces the termination tile. Also off: the obvious-death check before starting CPR; the team activation and role assignment; all rhythm-specific routing (shock-first VF/VT protocol, pulseless VT and Torsades protocols, PEA protocol, pacing first for bradycardic arrest/asystole); situation-specific medications (bicarbonate, calcium, magnesium, lipid emulsion, with doses); the H's and T's not quoted (H+ acidosis, hypo/hyperkalemia treatment, hypothermia, PE and MI thrombosis, toxins; the consult's own priority note is hyperK and tension PTX); the BLS/ALS termination rules; ROSC priorities and post-ROSC care; documentation after the code is called. Critical actions only partly quoted: reversible causes (4 of 10 causes) and termination (ETCO2 line plus the adequate-CPR and causes-treated lines)."
+  },
+  {
+    "kind": "gap",
+    "tileId": "epinephrine",
+    "nodeIds": [
+      "ca-epi"
+    ],
+    "drugId": "epinephrine",
+    "text": "The drug store has no ACLS cardiac-arrest entry for epinephrine (only VAD arrest and anaphylaxis entries), so this is a steps tile built from the node with no store dosing text or weight box. The consult's rhythm-by-rhythm timing (non-shockable after 1st cycle, shockable after 2nd shock) is in a table the tile cannot quote cleanly; it is on the face only, so the physician should check the face wording against the table. The condition on the face is shortened to fit 40 characters ('Non-shock: 1st cycle; VF/pVT: 2nd shock'); the consult says 'after 1st cycle' and 'after 2nd shock', and the two table rows are quoted in the tile so the physician can check."
+  },
+  {
+    "kind": "other",
+    "tileId": "cpr",
+    "nodeIds": [
+      "ca-confirm",
+      "ca-cpr-start",
+      "ca-universal",
+      "ca-access",
+      "ca-epi",
+      "ca-hs-ts",
+      "ca-rhythm-check",
+      "ca-pocus-arrest",
+      "ca-tor-criteria"
+    ],
+    "text": "Tile order follows the consult's node flow (confirm and CPR, rhythm check, ETCO2 targets, access, epinephrine, reversible causes with POCUS, termination). The critical-actions list order differs (it puts ETCO2 second, reversible causes fourth and epinephrine sixth). Confirm and CPR quality are merged into one tile to stay within 7."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "rhythm-check",
+    "nodeIds": [
+      "ca-shockable-branch",
+      "ca-tdp-link"
+    ],
+    "text": "The only warning on the rhythm tile is 'Do NOT give amiodarone.', which the consult applies to polymorphic VT/Torsades; the tile does not quote the Torsades heading on that line, so the warning could be misread as applying to all shockable rhythms. The consult states no defibrillation energy or shock sequence in this hub."
+  },
+  {
+    "kind": "other",
+    "tileId": "termination",
+    "nodeIds": [
+      "ca-tor-criteria",
+      "ca-no-activity"
+    ],
+    "text": "The termination tile is a judgment call: it is a decision point rather than an action, and it is on the strip only because the critical-actions list names it. The consult's own full criteria (all-must-be-present BLS rule, ETCO2 with adequate CPR and no reversible cause) are not all quoted. The face names ETCO2 <10 at 20 min; the consult's critical action also requires adequate CPR and no reversible cause, so the condition says causes treated and CPR adequate and those lines are quoted."
+  },
+  {
+    "kind": "other",
+    "tileId": "access",
+    "nodeIds": [
+      "ca-access"
+    ],
+    "text": "The consult puts a large-bore peripheral IV first, then external jugular if that fails, and IO only if no IV within 60 seconds. The face reads 'IV, else IO' to avoid implying IO first; the external jugular option is quoted only in the consult, not on the tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "reversible-causes",
+    "nodeIds": [
+      "ca-hs-ts"
+    ],
+    "text": "The face names the whole 5 H's and 5 T's list but only four causes are quoted. Hyperkalemia, which the consult flags as a priority in its summary, is not quoted because its line names drugs (calcium, insulin/dextrose)."
+  }
+]

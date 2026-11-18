@@ -1,0 +1,120 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "tca-start",
+      "tca-ecg",
+      "tca-bicarb",
+      "tca-bicarb-aggressive"
+    ],
+    "text": "Most important: this consult is partly a memorised sequence and partly a workup. The core (ECG, bicarbonate, airway, seizure, pressor, lipid) fits a 7-tile strip, but the order is not one fixed chain. The consult branches by QRS width (under 100, 100-160, over 160 ms), then by seizure and hypotension, so the strip is a priority list, not a sequence to run top to bottom. The first-line tile is bicarbonate for QRS over 100 ms; the consult's own entry for QRS over 160 ms is the same bicarbonate with early lidocaine, which is not on the strip. Please judge whether the tile order and the left-off items are right."
+  },
+  {
+    "kind": "other",
+    "tileId": "bicarb-bolus",
+    "nodeIds": [
+      "tca-critical",
+      "tca-intubation",
+      "tca-bicarb"
+    ],
+    "drugId": "sodium-bicarbonate",
+    "text": "Sequence to judge: the consult says to give bicarbonate immediately if the QRS is already wide (tca-critical) and before intubation if QRS is wide (tca-intubation). On the strip bicarbonate is the third tile, after ECG and Intubate, because the strip follows node order. A reader who goes strictly left to right could intubate before giving bicarbonate in a wide-QRS patient. Please decide whether bicarbonate should come before Intubate. The bicarbonate tile face now reads 'QRS >100 ms or arrhythmia' because the consult lists ventricular arrhythmias as an indication too; hypotension refractory to fluids and seizures (adjunct) are also listed in tca-bicarb and are not on the face."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "tca-seizure",
+      "tca-decon",
+      "tca-bicarb-aggressive",
+      "tca-bicarb-refractory",
+      "tca-seizure-refractory",
+      "tca-seizure-avoid",
+      "tca-fluids",
+      "tca-ecmo",
+      "tca-ecg",
+      "tca-disposition",
+      "tca-critical",
+      "tca-intubation",
+      "tca-vasopressors",
+      "tca-vtach",
+      "tca-lipid",
+      "tca-bicarb-infusion",
+      "tca-bicarb-goals",
+      "tca-seizure-bzd"
+    ],
+    "text": "Time-critical content NOT on the strip. Critical action 'Benzodiazepines for seizures (lorazepam 0.1 mg/kg IV)' is on the lorazepam tile; its seizure-assessment node (tca-seizure) is listed here only because the tile cites the later treatment node. Left off: lidocaine 1-1.5 mg/kg for QRS not responding or ventricular arrhythmia (store has an entry), magnesium 2 g for torsades, cardioversion if unstable; the alternative benzodiazepines (midazolam IM, diazepam) listed under 'choose one'; second-line seizure drugs (propofol, phenobarbital) and the DO NOT use phenytoin/fosphenytoin warning plus the other contraindicated antiepileptics; hypertonic saline 3% and hyperventilation for bicarbonate-refractory QRS; the QRS thresholds and aVR criteria (over 100 ms seizure risk, over 160 ms arrhythmia risk); the extra QRS over 160 ms branch; fluid bolus 1-2 L and the advice to avoid large-volume saline; the other pressors (epinephrine, phenylephrine, vasopressin); activated charcoal 1 g/kg and no emesis; the lipid repeat and infusion; VA-ECMO as last rescue; repeat-ECG timing; sodium (keep at or under 155) and potassium monitoring; disposition. The critical action to use propofol if stable and ketamine or benzodiazepine if unstable for intubation (avoid propofol push-dose with hypotension) is not in the airway node, which says propofol if stable or benzodiazepine if unstable, so it is not on the strip. The intubation tile follows tca-critical and tca-intubation; the consult's own flow reaches the ECG node after intubation, so the strip order (ECG, airway, bicarbonate) differs from the critical-actions list order. Also left off: from tca-critical, 'If QRS already widened: give bicarbonate 1-2 mEq/kg IV push immediately while continuing assessment'; from tca-intubation, 'Before intubation: give bicarbonate if QRS wide, allow minutes for CO2 to blow off' and 'Start vasopressor if hypotensive' (these name drugs so they cannot be quoted on a steps tile); from tca-fluids, the advice not to delay vasopressors waiting for fluid response and to give a bicarbonate bolus for hypotension not due to hypovolemia; from tca-bicarb, 'if QRS doesn't respond despite 100-200 mEq, question the diagnosis'; central line preferred for large-volume 8.4% bicarbonate and the isotonic-bicarbonate-is-maintenance-only point; TCA levels are not useful (tca-critical)."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "bicarb-bolus",
+    "nodeIds": [
+      "tca-bicarb",
+      "tca-bicarb-goals"
+    ],
+    "drugId": "sodium-bicarbonate",
+    "text": "Most important conflict: repeat interval. The consult says repeat every 3-5 minutes until QRS narrows; the drug store TCA entry says repeat every 5-10 minutes for QRS widening over 100 ms. The Dosing box shows the store text; the consult line is quoted under 'In this consult'. Also: the consult's serum pH goal is 7.50-7.55, the store says 7.45-7.55. The store says over 1-2 minutes; the consult says IV push. Not resolved."
+  },
+  {
+    "kind": "other",
+    "tileId": "bicarb-bolus",
+    "nodeIds": [
+      "tca-bicarb",
+      "tca-bicarb-infusion",
+      "tca-bicarb-goals"
+    ],
+    "drugId": "sodium-bicarbonate",
+    "text": "The critical action 'bicarbonate 1-2 mEq/kg (50-100 mEq)' for 'QRS over 100 ms or arrhythmia': the 50-100 mEq range is in no node, so it is not on the tile. The store weight box is the midpoint 1.5 mEq/kg with a 150 mEq cap, not the consult's 1-2 mEq/kg range."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "norepinephrine",
+    "nodeIds": [
+      "tca-vasopressors"
+    ],
+    "drugId": "norepinephrine",
+    "text": "The per-kg norepinephrine dose (0.1-0.5 mcg/kg/min) has no weight calculator in the drug store TCA hypotension entry, so the tile has no weight box."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "lipid-rescue",
+    "nodeIds": [
+      "tca-lipid"
+    ],
+    "drugId": "lipid-emulsion",
+    "text": "The drug store adds a maximum total of about 10 mL/kg in the first 30 minutes and 'reserve for cardiac arrest or hemodynamic collapse refractory to bicarbonate plus vasopressors'; the consult says rescue for cardiac arrest or refractory toxicity and does not give a cap. The consult's critical action also adds 'refractory arrhythmias'. Not resolved."
+  },
+  {
+    "kind": "other",
+    "tileId": "wide-rhythm",
+    "nodeIds": [
+      "tca-vtach"
+    ],
+    "text": "The wide-rhythm tile is an avoid-list tile (amiodarone, procainamide, flecainide, and all Class IA/IC agents) plus the point that a wide complex is often sinus tachycardia, not VT. It names no dose. Bicarbonate is first for all wide-complex rhythms in this consult, but that line is not on this tile because the bicarbonate tile already carries the dose."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "benzo-seizure",
+    "nodeIds": [
+      "tca-seizure-bzd"
+    ],
+    "drugId": "lorazepam",
+    "text": "The store entry matches the consult (0.1 mg/kg, max 4 mg, repeat every 5 minutes) and adds 'IV push over 2 min', which the consult does not say. The 'choose one' header is quoted with only lorazepam under it; midazolam and diazepam are the other options in the consult and are left off the tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "wide-rhythm",
+    "nodeIds": [
+      "tca-vtach",
+      "tca-vasopressors"
+    ],
+    "text": "Tile order is ambiguous: the consult reaches the wide-complex branch from the hemodynamic question (tca-hypotension) as a sibling of the fluids/pressor path, and again from the pressor node, so the checker flags the wide-rhythm tile as out of traversal order after norepinephrine. Left in place; the physician should decide whether wide-complex rhythm belongs before the pressor tile. Its face says Avoid IA/IC agents, but the quoted warning also names amiodarone, which the face does not."
+  },
+  {
+    "kind": "other",
+    "tileId": "norepinephrine",
+    "nodeIds": [
+      "tca-vasopressors"
+    ],
+    "text": "The quoted heading 'Choose vasopressor based on heart rate:' sits over only norepinephrine on this tile; the consult's other choices (epinephrine if bradycardic or norepinephrine-refractory, phenylephrine if markedly tachycardic, vasopressin for refractory cases) are left off, so the tile can look like the only option rather than the first-line one."
+  }
+]

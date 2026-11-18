@@ -1,0 +1,192 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "pea-activity",
+      "pea-no-activity",
+      "pea-pseudopea",
+      "pea-shock-mgmt",
+      "pea-qrs-width",
+      "pea-cpr",
+      "pea-epi"
+    ],
+    "text": "Look first at how the strip mixes the consult's two paths. In the consult, a PRES (standstill) patient goes pea-no-activity, then CPR, then epinephrine; it never reaches the QRS-width or cause nodes. Wide or narrow QRS, bicarbonate, fluids, pericardiocentesis, decompression and alteplase are reached only from the PREM (motion present) side, via 'No signs of perfusion despite motion' or the shock node, yet the epinephrine warning on this strip says do NOT give 1 mg epinephrine in PREM. So the cause tiles sit on the path the consult tells you not to give 1 mg epinephrine on, and a PRES patient is never sent to them. The consult itself should be checked for this. This is a single variant; a PREM/PRES fork (labels 'PREM — cardiac motion present' / 'PRES — cardiac standstill') is the physician's call. Also not on the strip: the PREM instruction to stop compressions and the norepinephrine, push-dose epinephrine and vasopressin options."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "pea-acidosis",
+      "pea-autopeep",
+      "pea-causes-wide",
+      "pea-continue",
+      "pea-cpr",
+      "pea-hyperK",
+      "pea-hypovolemia",
+      "pea-massive-pe",
+      "pea-no-activity",
+      "pea-pseudopea",
+      "pea-qrs-width",
+      "pea-rosc",
+      "pea-rosc-check",
+      "pea-shock-mgmt",
+      "pea-start",
+      "pea-tca",
+      "pea-tension",
+      "pea-tor",
+      "pea-wide"
+    ],
+    "text": "Time-critical consult content NOT on the strip: the PREM / pseudo-PEA path (stop compressions, norepinephrine, push-dose epinephrine, vasopressin, wide-open fluids, MAP target); check for fine VF and defibrillate, and the prolonged-standstill futility marker (critical action 'No cardiac activity on POCUS after adequate resus = futility marker', node pea-no-activity, left off); calcium chloride or gluconate and lipid emulsion in wide complex PEA; hyperkalemia insulin, dextrose, albuterol; TCA bicarbonate repeat and target pH; mechanical hyperinflation (disconnect ventilator); hemorrhage and non-hemorrhagic hypovolemia treatments (massive transfusion, TXA, antibiotics, anaphylaxis epinephrine, hydrocortisone); CPR quality and ETCO2 targets; rhythm change to VF/VT; ROSC care; termination of resuscitation criteria. The hypovolemia fluid line is quoted but its sub-branches are not. Also left off: the consult's caveat that QRS width is an imperfect discriminator (Bergman 2016), so wide versus narrow is a first-move guide only (node pea-qrs-width); the calcium and lipid items sit in the same 'give immediately' list as bicarbonate on the wide-complex tile, so the strip shows only one of three listed items under that heading; the 'No formal cumulative-dose ceiling' epinephrine line (too long to quote); needle device size and follow-up thoracostomy; ECPR alternative for PE."
+  },
+  {
+    "kind": "gap",
+    "tileId": "epinephrine",
+    "drugId": "epinephrine",
+    "nodeIds": [
+      "pea-epi",
+      "pea-no-activity"
+    ],
+    "text": "The drug store has no epinephrine dose entry for general cardiac arrest (only VAD cardiac arrest, which is a different use). The epinephrine tile is a steps tile carrying a dose in its figure, taken from the consult."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wide-bicarb",
+    "drugId": "sodium-bicarbonate",
+    "nodeIds": [
+      "pea-wide",
+      "pea-tca",
+      "pea-acidosis"
+    ],
+    "text": "The drug store's sodium bicarbonate entries are for TCA overdose, hyperkalemia with acidosis, infusions and others; none is for empiric use in wide complex PEA arrest. The tile is a steps tile with the consult's own dose. Also the consult itself gives 1-2 mEq/kg here, 1-2 mEq/kg for TCA, 1 mEq/kg for severe acidosis and 50-100 mEq for hyperkalemia; physician to confirm which applies."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "wide-bicarb",
+    "drugId": "sodium-bicarbonate",
+    "nodeIds": [
+      "pea-wide"
+    ],
+    "text": "The strip gives a per-kg bicarbonate dose (1-2 mEq/kg) but a steps tile has no weight calculator. The store's TCA entry has one (1.5 mEq/kg midpoint, max 150 mEq); it is not used because the use is different."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "wide-bicarb",
+    "drugId": "calcium-chloride",
+    "nodeIds": [
+      "pea-wide",
+      "pea-hyperK"
+    ],
+    "text": "Calcium is left off the strip. The consult says calcium chloride 1 g IV is preferred in arrest even peripherally; the store's calcium chloride hyperkalemia entry is labelled central access, 1 g over 10 minutes. The two disagree on access and speed. Physician to decide whether calcium belongs on the wide complex tile."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "pea-cpr",
+      "pea-epi",
+      "pea-wide",
+      "pea-narrow",
+      "pea-tamponade",
+      "pea-tension",
+      "pea-massive-pe"
+    ],
+    "text": "Tile order follows the consult's flow: POCUS, epinephrine, wide complex, narrow complex fluids, then the POCUS-guided causes in the order the options are listed (tamponade, tension pneumothorax, massive PE). The critical-actions list puts wide complex bicarbonate before the cause tiles and epinephrine last. In the consult itself epinephrine sits in module 5 after the cause nodes, so its tile may raise an order flag. Hypovolemia and collapsed IVC share the fluids tile; auto-PEEP, the other POCUS branch, was left off."
+  },
+  {
+    "kind": "other",
+    "tileId": "alteplase",
+    "drugId": "alteplase",
+    "nodeIds": [
+      "pea-massive-pe"
+    ],
+    "text": "Alteplase drug tile: the store entry 'PE arrest/peri-arrest' says 50 mg IV push, matching the consult. The store also says consider a repeat 50 mg and PERT/ECMO pathway; the consult mentions ECPR as an alternative, not on the strip. That entry has no weight calculator, correctly, since the dose is fixed."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "pocus",
+    "nodeIds": [
+      "pea-pocus"
+    ],
+    "text": "The consult gives no explicit instruction to start or continue CPR on the POCUS tile itself beyond 'do not delay CPR for prolonged imaging'; the ETCO2 and compression quality steps live in pea-start and pea-cpr and are not on the strip."
+  },
+  {
+    "kind": "gap",
+    "tileId": "epinephrine",
+    "drugId": "vasopressin",
+    "nodeIds": [
+      "pea-epi",
+      "pea-shock-mgmt"
+    ],
+    "text": "The epinephrine warning names vasopressin as a titratable vasopressor for pseudo-PEA. The store's vasopressin entries are post-ROSC, not for this use; the warning is quoted as the consult words it and the strip gives no vasopressin dose."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wide-bicarb",
+    "drugId": "hypertonic-saline",
+    "nodeIds": [
+      "pea-wide"
+    ],
+    "text": "The checker matched this drug store entry to the bicarbonate tile's quoted line (NaHCO3 dose). It is a name match, not a drug the consult gives here; the store has no entry for the consult's use (empiric bicarbonate in wide complex PEA arrest), and the strip names no other drug on this tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wide-bicarb",
+    "drugId": "sodium-zirconium-cyclosilicate",
+    "nodeIds": [
+      "pea-wide"
+    ],
+    "text": "The checker matched this drug store entry to the bicarbonate tile's quoted line (NaHCO3 dose). It is a name match, not a drug the consult gives here; the store has no entry for the consult's use (empiric bicarbonate in wide complex PEA arrest), and the strip names no other drug on this tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wide-bicarb",
+    "drugId": "nacl-tablets",
+    "nodeIds": [
+      "pea-wide"
+    ],
+    "text": "The checker matched this drug store entry to the bicarbonate tile's quoted line (NaHCO3 dose). It is a name match, not a drug the consult gives here; the store has no entry for the consult's use (empiric bicarbonate in wide complex PEA arrest), and the strip names no other drug on this tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wide-bicarb",
+    "drugId": "sodium-phosphate",
+    "nodeIds": [
+      "pea-wide"
+    ],
+    "text": "The checker matched this drug store entry to the bicarbonate tile's quoted line (NaHCO3 dose). It is a name match, not a drug the consult gives here; the store has no entry for the consult's use (empiric bicarbonate in wide complex PEA arrest), and the strip names no other drug on this tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wide-bicarb",
+    "drugId": "nitroprusside",
+    "nodeIds": [
+      "pea-wide"
+    ],
+    "text": "The checker matched this drug store entry to the bicarbonate tile's quoted line (NaHCO3 dose). It is a name match, not a drug the consult gives here; the store has no entry for the consult's use (empiric bicarbonate in wide complex PEA arrest), and the strip names no other drug on this tile."
+  },
+  {
+    "kind": "gap",
+    "tileId": "wide-bicarb",
+    "drugId": "sodium-polystyrene-sulfonate",
+    "nodeIds": [
+      "pea-wide"
+    ],
+    "text": "The checker matched this drug store entry to the bicarbonate tile's quoted line (NaHCO3 dose). It is a name match, not a drug the consult gives here; the store has no entry for the consult's use (empiric bicarbonate in wide complex PEA arrest), and the strip names no other drug on this tile."
+  },
+  {
+    "kind": "other",
+    "tileId": "tension",
+    "nodeIds": [
+      "pea-tension",
+      "pea-causes-narrow"
+    ],
+    "text": "The needle decompression face shows 2nd ICS midclavicular line, which the consult labels traditional; it also offers 4th/5th ICS anterior axillary line as newer guidance with higher success. Both are quoted; physician to decide which the face should lead with."
+  },
+  {
+    "kind": "other",
+    "tileId": "narrow-fluids",
+    "nodeIds": [
+      "pea-narrow",
+      "pea-hypovolemia"
+    ],
+    "text": "Two separate consult nodes share this tile: narrow-complex PEA wide-open fluids (any narrow QRS) and a collapsed IVC on POCUS (1-2 L crystalloid). They are alternatives for reaching fluids, not both required; the face now reads 'or'. Hemorrhagic and non-hemorrhagic sub-branches are not on the strip."
+  }
+]

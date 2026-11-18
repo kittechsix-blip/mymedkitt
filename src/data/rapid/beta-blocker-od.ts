@@ -1,0 +1,133 @@
+import type { RapidStrip } from './types.js';
+
+// RAPID strip (format v3), Beta-Blocker Overdose. Faces authored; every expansion line is a verbatim node excerpt. Not approved.
+// One variant: the consult does not fork into different resuscitation paths. Tile order follows the consult's node FLOW.
+// Findings: research/rapid/beta-blocker-od.findings.json
+
+export const RAPID_BETA_BLOCKER_OD: RapidStrip = {
+  treeId: 'beta-blocker-od',
+  variants: [
+    {
+      id: 'main',
+      label: 'Beta-blocker overdose',
+      tiles: [
+        {
+          id: 'atropine',
+          layout: 'drug',
+          action: 'IV atropine',
+          figure: '0.5-1 mg',
+          condition: 'try first, usually ineffective',
+          nodeIds: ['bb-atropine'],
+          warning: { nodeId: 'bb-atropine', text: 'Usually ineffective in beta-blocker toxicity because it acts on muscarinic receptors, NOT beta receptors' },
+          drug: { id: 'atropine', indication: 'Beta-blocker toxicity' },
+          lines: [
+            { nodeId: 'bb-atropine', text: 'Atropine 0.5-1mg IV' },
+            { nodeId: 'bb-atropine', text: 'May repeat q3-5 min to max 3mg total' },
+            { nodeId: 'bb-atropine', text: 'Worth trying as first step — occasionally helps' },
+          ],
+        },
+        {
+          id: 'glucagon',
+          layout: 'drug',
+          action: 'IV glucagon',
+          figure: '3-10 mg',
+          nodeIds: ['bb-glucagon'],
+          warning: { nodeId: 'bb-glucagon', text: 'Nausea/vomiting common — pretreat with Ondansetron if patient is alert' },
+          drug: { id: 'glucagon', indication: 'Beta-blocker overdose' },
+          lines: [
+            { nodeId: 'bb-glucagon', text: 'Bolus: 3-5 mg IV over 1-2 minutes' },
+            { nodeId: 'bb-glucagon', text: 'May repeat bolus up to 10 mg total if no response' },
+            { nodeId: 'bb-glucagon', text: 'Infusion: 2-10 mg/hr once response achieved' },
+            { nodeId: 'bb-glucagon', text: 'Calcium should be given simultaneously for additional inotropic support.' },
+          ],
+        },
+        {
+          id: 'calcium',
+          layout: 'steps',
+          action: 'IV calcium',
+          figure: 'gluconate 3g / chloride 1g',
+          condition: 'choose one',
+          nodeIds: ['bb-calcium'],
+          warning: { nodeId: 'bb-calcium', text: '3x more elemental Ca2+ but caustic (central line preferred)' },
+          lines: [
+            { nodeId: 'bb-calcium', text: 'Dosing (choose one):' },
+            { nodeId: 'bb-calcium', text: 'Calcium Gluconate 3g (30 mL of 10%) IV over 10-20 min' },
+            { nodeId: 'bb-calcium', text: 'Calcium Chloride 1g (10 mL of 10%) IV over 10-20 min — 3x more elemental Ca2+ but caustic (central line preferred)' },
+            { nodeId: 'bb-calcium', text: 'May repeat q10-20 min as needed' },
+          ],
+        },
+        {
+          id: 'hiet',
+          layout: 'drug',
+          action: 'High-dose insulin',
+          figure: '1 unit/kg',
+          condition: 'hypotensive despite glucagon/calcium',
+          nodeIds: ['bb-hiet-dosing', 'bb-hiet'],
+          warning: { nodeId: 'bb-hiet', text: 'This is NOT DKA dosing — doses are much higher!' },
+          drug: {
+            id: 'regular-insulin',
+            indication: 'High-dose insulin euglycemia therapy',
+            weightCalcs: [
+              { dosePerKg: 1, unit: 'units', label: 'HDI bolus' },
+              { dosePerKg: 1, unit: 'units/hr', label: 'HDI starting infusion' },
+              { dosePerKg: 10, unit: 'units/hr', label: 'HDI common upper target' },
+            ],
+          },
+          lines: [
+            { nodeId: 'bb-hiet-dosing', text: 'Bolus: 1 unit/kg IV push' },
+            { nodeId: 'bb-hiet-dosing', text: 'Infusion: Start at 1 unit/kg/hr' },
+            { nodeId: 'bb-hiet-dosing', text: 'MUST co-administer:' },
+            { nodeId: 'bb-hiet-dosing', text: 'D25 or D50 bolus to achieve glucose 150-250 mg/dL' },
+          ],
+        },
+        {
+          id: 'pressors',
+          layout: 'steps',
+          action: 'High-dose norepinephrine',
+          figure: 'start 0.1; may need 0.5-3',
+          condition: 'MAP ≥65',
+          nodeIds: ['bb-pressors'],
+          lines: [
+            { nodeId: 'bb-pressors', text: 'Beta receptors are blocked → standard doses may be insufficient. HIGH DOSES often required' },
+            { nodeId: 'bb-pressors', text: 'Start at 0.1 mcg/kg/min, titrate to MAP ≥65' },
+            { nodeId: 'bb-pressors', text: 'May need 0.5-3 mcg/kg/min — much higher than sepsis dosing' },
+            { nodeId: 'bb-pressors', text: 'If cardiogenic component: Epinephrine' },
+          ],
+        },
+        {
+          id: 'lipid',
+          layout: 'drug',
+          action: 'Lipid emulsion',
+          figure: '1.5 mL/kg',
+          condition: 'refractory shock',
+          nodeIds: ['bb-lipid-dosing', 'bb-lipid'],
+          drug: {
+            id: 'intralipid-20',
+            indication: 'Cardiotoxic overdose (CCB, beta-blocker, TCA — refractory)',
+            weightCalcs: [{ dosePerKg: 1.5, unit: 'mL', label: 'Bolus' }],
+          },
+          lines: [
+            { nodeId: 'bb-lipid', text: 'When to use:' },
+            { nodeId: 'bb-lipid', text: 'Cardiac arrest' },
+            { nodeId: 'bb-lipid', text: 'Refractory shock despite glucagon + calcium + HIET + vasopressors' },
+            { nodeId: 'bb-lipid-dosing', text: 'May repeat bolus x2 if needed (q5 min)' },
+          ],
+        },
+        {
+          id: 'bicarb',
+          layout: 'steps',
+          action: 'Sodium bicarbonate',
+          figure: 'QRS >100 ms',
+          condition: 'propranolol with QRS widening',
+          nodeIds: ['bb-propranolol'],
+          lines: [
+            { nodeId: 'bb-propranolol', text: 'If QRS > 100 ms:' },
+            { nodeId: 'bb-propranolol', text: 'Sodium Bicarbonate 1-2 mEq/kg IV push' },
+            { nodeId: 'bb-propranolol', text: 'Repeat q3-5 min until QRS narrows' },
+            { nodeId: 'bb-propranolol', text: 'Target pH 7.50-7.55' },
+          ],
+        },
+      ],
+    },
+  ],
+};

@@ -1,0 +1,97 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "larynx-start",
+      "larynx-unstable-airway",
+      "larynx-airway-options",
+      "larynx-crico-decision"
+    ],
+    "text": "Most important: this consult is mostly an airway-decision tree plus a workup (imaging, grading, repair timing, disposition), not one memorised resuscitation sequence. Only the first-minutes airway core (no RSI, call surgeons, awake trach, cric-or-trach by fracture, trach below injury) reduces to a strip; the rest of the strip is stable-patient workup. The strip has no number on any face, so the gate's numeric canary fails and cannot be cleared faithfully (the consult's only numbers are repair timing, grades and observation hours, none a bedside airway action). Reviewer judgment: probably not a good RAPID card; physician to decide. Also: the three airway tiles (awake trach / cric-or-trach / emergent trach) are alternatives chosen by resources and fracture, not consecutive steps; their conditions say so, but the consult's order puts awake trach first and the call-for-help line second, so check that order is what you want when the airway is failing now."
+  },
+  {
+    "kind": "other",
+    "tileId": "cric-decision",
+    "nodeIds": [
+      "larynx-crico-decision",
+      "larynx-airway-options",
+      "larynx-cric-proceed"
+    ],
+    "text": "Reviewer change: the cric tile face was rewritten so it cannot be read as 'do a cric'. The consult's cric-proceed branch (no fracture or disruption, cric may be appropriate) and its technique are not on the strip; the airway-options table calls cric the choice for emergent CICO but says it is contraindicated with laryngeal fracture or cricotracheal separation. The face condition 'Emergent CICO, no time for trach' is the option label from larynx-airway-options, which is not a cited node. Physician to confirm."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "larynx-start",
+      "larynx-unstable-airway",
+      "larynx-imaging",
+      "larynx-flex-laryngoscopy"
+    ],
+    "text": "Tile order follows the consult's node order, not the critical-actions list. The list puts CT neck (stable patients) before flexible laryngoscopy; the consult's nodes put flexible laryngoscopy (module 2, the soft-signs branch) before imaging, so the strip does too. Flexible laryngoscopy applies only to the soft-signs-only stable branch, which the tile's condition says. Physician to confirm."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "larynx-classification",
+      "larynx-management-by-grade",
+      "larynx-grade1",
+      "larynx-grade2",
+      "larynx-grade34",
+      "larynx-grade5",
+      "larynx-awake-foi",
+      "larynx-cric-proceed",
+      "larynx-observation",
+      "larynx-associated",
+      "larynx-consults",
+      "larynx-signs",
+      "larynx-mechanism"
+    ],
+    "text": "Time-critical content NOT on the strip: Schaefer-Fuhrman grading (critical action, left off because it is a reference table that guides surgical timing, not a bedside action); management by grade including repair timing within 24-48 h and Grade V emergent trach; the hard-signs list that defines an unstable airway (stridor, distress, subcutaneous emphysema, expanding hematoma); the awake fiberoptic option for a stable airway; cricothyrotomy technique when cric is appropriate (bougie, 6.0 tube); the 'double setup' of awake FOI plus awake trach; CT angiography; associated injuries and c-spine precautions; observation and discharge rules for the asymptomatic patient; steroids and other grade I-II medicines (dexamethasone has no drug tile; the consult dose is not shown); the ENT consult for all suspected injuries is on the strip only for hard signs ('Call anesthesia, ENT, trauma surgery NOW'). Critical actions left off the strip as their own tile: Schaefer-Fuhrman grading guides surgical timing (larynx-classification)."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "larynx-grade1",
+      "larynx-grade2"
+    ],
+    "drugId": "dexamethasone",
+    "text": "Dexamethasone 10 mg IV with nebulized steroids is in the consult for grades I-II but is not on the strip (not a time-critical airway action). Not checked against the drug store for this use."
+  },
+  {
+    "kind": "other",
+    "tileId": "cric-decision",
+    "nodeIds": [
+      "larynx-crico-decision",
+      "larynx-airway-options",
+      "larynx-cric-proceed",
+      "larynx-airway-options"
+    ],
+    "text": "The cric tile quotes only the contraindications. The consult's 'cric may be appropriate' branch and its technique are not on the strip. The airway-options table lists cric as the choice for emergent can't-intubate-can't-oxygenate, but the wording says to avoid it with laryngeal fracture; the physician should check the face reads correctly for a crashing airway where fracture cannot be excluded."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "awake-trach",
+    "nodeIds": [
+      "larynx-awake-trach",
+      "larynx-unstable-airway"
+    ],
+    "text": "The consult does not say how to choose between awake trach (needs time, OR access) and emergent trach below the injury when the airway is failing now; the strip shows both as separate tiles in the consult's order. The no-RSI warning excerpt on the first tile is quoted from the unstable-airway node."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "larynx-unstable-airway",
+      "larynx-start"
+    ],
+    "tileId": "no-paralysis",
+    "text": "The consult's headline no-RSI sentence ('RSI is CONTRAINDICATED in suspected laryngeal trauma') sits in a blockquote line that the excerpt rule cannot quote (leading '>' is not stripped). The tile quotes the unstable-airway node's own headings and bullets instead. Also: the strip has no number on any face, so the gate canary (needs a numeric face token to mutate) fails; left as is rather than inventing a number."
+  },
+  {
+    "kind": "other",
+    "tileId": "cric-decision",
+    "nodeIds": [
+      "larynx-airway-options"
+    ],
+    "text": "The airway-options table row 'Cricothyrotomy ... CONTRAINDICATED if laryngeal fracture or cricotracheal separation' could not be quoted as the danger box because table cells are not clause-complete under the excerpt rule. The tile quotes the cric-decision node's contraindication list instead, and the card has no danger box on this tile."
+  }
+]

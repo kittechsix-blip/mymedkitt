@@ -1,0 +1,93 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "k-start",
+      "k-hyper-severity",
+      "k-hyper-step1"
+    ],
+    "text": "Most important: this consult is a two-sided electrolyte workup (hyperkalemia, hypokalemia, periodic paralysis), not one memorised sequence, so a strip would replace a Critical button that also covers three hypokalemia and periodic-paralysis actions (KCl IV, correct magnesium, HypoPP oral KCl). Only the SEVERE HYPERKALEMIA path reduces to a strip; it is built for that path alone and is silent on severity criteria, hypokalemia and periodic paralysis. Physician to decide whether this strip should exist for this consult at all, or whether the Critical button should stay."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "k-hyper-mod",
+      "k-hyper-monitor",
+      "k-hyper-severity",
+      "k-hyper-step1",
+      "k-hyper-step2",
+      "k-hyper-step3-response",
+      "k-hyper-step4",
+      "k-hypo-assess",
+      "k-hypo-severe",
+      "k-hypopp-acute",
+      "k-pseudo"
+    ],
+    "text": "Time-critical consult content NOT on the strip. Three critical actions left off because they belong to other topics: severe hypokalemia IV KCl with cardiac monitoring (k-hypo-severe), always check and correct magnesium (k-hypo-severe), and hypokalemic periodic paralysis oral KCl and avoiding aggressive IV (k-hypopp-acute). Also left off: severity criteria for severe hyperkalemia (k-hyper-severity); 'start ALL temporizing measures simultaneously' and 'do NOT give temporizing measures without definitive therapy' (k-hyper-step1); replace urine losses with crystalloid, and the nephron-bomb add-ons beyond furosemide (k-hyper-step3 quotes only the loop diuretic lines); the diuretic response check (k-hyper-step3-response); potassium binders and avoid Kayexalate (k-hyper-step4); monitoring, recheck K+ every 1-2 hours and insulin redosing (k-hyper-monitor); moderate hyperkalemia (k-hyper-mod); pseudohyperkalemia (k-pseudo); the step 2 branch for bicarb 22 or higher or euvolemic (use LR or Plasmalyte if fluid needed, k-hyper-step2) is not on the strip; the optional furosemide add-ons acetazolamide and fludrocortisone (k-hyper-step3) are not on the strip."
+  },
+  {
+    "kind": "other",
+    "tileId": "furosemide",
+    "nodeIds": [
+      "k-hyper-step3"
+    ],
+    "drugId": "furosemide",
+    "text": "Physician judgment: the furosemide tile leads with 40-80 mg for normal renal function, while the consult's 'nephron bomb' for moderate-severe renal dysfunction (furosemide 160-250 mg plus chlorothiazide) is shown only in the quoted lines. Many severe hyperkalemia patients have renal dysfunction; decide which dose the face should lead with. The normal-renal-function heading line is not quoted (4-line limit), so the 40-80 line carries a context flag."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "k-hyper-step3",
+      "k-hyper-step5",
+      "k-hyper-step2",
+      "k-hyper-bicarb"
+    ],
+    "text": "Tile order follows the consult's node chain (ECG, calcium, insulin, beta-2 agonist, fluid, diuretic, dialysis). The critical-actions list puts the fluid item after the diuretic item in a different order than the nodes; the strip follows the nodes. The gate's traversal puts the diuretic and dialysis nodes later because they sit on branches, so those tiles carry order flags."
+  },
+  {
+    "kind": "conflict",
+    "tileId": "insulin",
+    "nodeIds": [
+      "k-hyper-insulin"
+    ],
+    "drugId": "regular-insulin",
+    "text": "The insulin tile face shows 5 units, the lower of the consult's two branch doses. The consult gives 5 or 10 units by hypoglycemia risk; the face cannot show both, so the 5-unit versus 10-unit rule is carried by the quoted lines and the drug store text. Physician to confirm the face figure is the right one to lead with. The drug store dextrose co-administration entry (D10W 250 mL) differs from the consult's alternative of D10W 500 mL over 4 hours; not on the tile, not resolved."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "terbutaline",
+    "nodeIds": [
+      "k-hyper-beta2"
+    ],
+    "drugId": "terbutaline",
+    "text": "The drug store hyperkalemia regimen for terbutaline gives '7 mcg/kg SQ' as an alternative to the flat 0.5 mg, but the dose entry has no weight calculator, so no weight box is shown. The consult itself gives only the flat 0.5 mg."
+  },
+  {
+    "kind": "gap",
+    "tileId": "calcium",
+    "nodeIds": [
+      "k-hyper-calcium"
+    ],
+    "drugId": "calcium-gluconate",
+    "text": "The critical-action line says calcium onset is under 5 minutes; that figure is in no node, so it is not on the tile. The consult also gives calcium chloride 1 gram for central access, which is quoted on the calcium tile but is a different drug from the calcium gluconate the tile is built on."
+  },
+  {
+    "kind": "gap",
+    "tileId": "isotonic-bicarb",
+    "nodeIds": [
+      "k-hyper-step2",
+      "k-hyper-bicarb"
+    ],
+    "drugId": "sodium-bicarbonate",
+    "text": "The isotonic bicarbonate fluid is a steps tile built from the nodes. The drug store has a sodium bicarbonate entry for hyperkalemia with metabolic acidosis, but its wording is a bolus-or-infusion regimen with several rates, so no single drug tile was made. The quoted preparation line names the bicarbonate product and a dose, so this gap is recorded here."
+  },
+  {
+    "kind": "gap",
+    "tileId": "furosemide",
+    "nodeIds": [
+      "k-hyper-step3"
+    ],
+    "drugId": "furosemide",
+    "text": "The furosemide tile is built on the normal-renal-function dose (40-80 mg) because that is the entry the consult gives first. For moderate-severe renal dysfunction the consult gives 160-250 mg furosemide plus a thiazide (and optional acetazolamide and fludrocortisone); only the furosemide and bumetanide dose lines are quoted, the add-on drugs are not on the strip. The drug store has a separate 160-250 mg furosemide entry whose weight is not shown on the face."
+  }
+]

@@ -1,0 +1,75 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "se-bao-check",
+      "se-iv-bzd"
+    ],
+    "text": "Most important: this consult is partly a memorised sequence (check eyes, glucose, lorazepam or IM midazolam, levetiracetam, intubate with EEG, midazolam infusion), but the strip puts the BAO eye check first because the consult does. Please confirm you want that ahead of the first benzodiazepine on a convulsing patient; the consult itself says to treat as SE and re-examine between seizures if the patient cannot be examined. The strip is one variant, not a fork: the consult only splits IV vs no IV for the first benzodiazepine, so IM midazolam sits as an alternative tile (only if no IV access)."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "se-bao-check",
+      "se-bao-mimicker"
+    ],
+    "tileId": "bao-eyes",
+    "text": "Reviewer change to the eye tile: the first draft face read 'Dysconjugate gaze = BAO' and listed CTA and neuro-IR as unconditional steps. In the consult these apply only if any red flag is present (dysconjugate, skew, vertical palsy, bobbing, fixed pupils, absent doll's eyes) and the consult says a convulsing patient who cannot be examined is treated as SE and re-examined. The face now says that. The tile is a conditional pivot, not a first step for every patient. Physician to confirm it should stay first. Also added the consult's 'hold further antiseizure escalation' line. Not on the tile: permissive hypertension, locked-in test, and the 2+ red-flag checklist."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "se-abcs",
+      "se-bzd-response",
+      "se-special-pop",
+      "se-valproate",
+      "se-fosphenytoin",
+      "se-phenobarbital",
+      "se-2nd-line-response",
+      "se-rse-monitoring",
+      "se-pregnancy",
+      "se-substance",
+      "se-peds",
+      "se-ncse",
+      "se-bao-mimicker"
+    ],
+    "text": "Time-critical content NOT on the strip: ABCs (left lateral position, high-flow O2, dual IV, no bite block, no restraints, start the clock); the 5 minute reassessment after the benzodiazepine; the second-line alternatives valproate, fosphenytoin and phenobarbital and the rule to choose by comorbidity or pregnancy; the 20 minute reassessment after the second-line agent; lacosamide as adjunct; propofol, pentobarbital and ketamine infusions; the rest of the BAO pivot (permissive hypertension, do not intubate-and-paralyze the exam away, locked-in test); magnesium 4-6 g IV for eclampsia before other ASMs (se-pregnancy); pyridoxine 5 g IV for suspected INH toxicity (se-substance); peds dosing; NCSE. Critical actions left off or reduced: the BZD repeat is a line in the lorazepam tile only; the midazolam infusion maintenance rate (0.05-2 mg/kg/hr) is only in the store regimen; magnesium and pyridoxine are off. Physician to judge whether eclampsia and INH belong on a 7-tile strip."
+  },
+  {
+    "kind": "other",
+    "nodeIds": [
+      "se-bao-check",
+      "se-glucose-labs",
+      "se-iv-bzd"
+    ],
+    "text": "Tile order follows the consult's own flow (eyes, glucose, IV vs no IV, second line, refractory), not the critical-actions list order, which puts the BAO CTA second and the benzodiazepines before glucose."
+  },
+  {
+    "kind": "gap",
+    "tileId": "glucose",
+    "nodeIds": [
+      "se-glucose-labs"
+    ],
+    "drugId": "dextrose",
+    "text": "The glucose tile is a steps tile because the consult gives D50W 25 g IV in its own text and the strip quotes that line; there may be no drug-store dose entry for this use. The tile figure carries no dose, only the glucose threshold."
+  },
+  {
+    "kind": "other",
+    "tileId": "levetiracetam",
+    "nodeIds": [
+      "se-2nd-line-choice",
+      "se-levetiracetam"
+    ],
+    "drugId": "levetiracetam",
+    "text": "The strip shows only levetiracetam as second line. The consult says ESETT found levetiracetam, fosphenytoin and valproate equivalent and to tailor to the patient; the choice of agent is a physician call and is not on the strip."
+  },
+  {
+    "kind": "other",
+    "tileId": "midazolam-infusion",
+    "nodeIds": [
+      "se-rse-infusion"
+    ],
+    "drugId": "midazolam",
+    "text": "The consult offers four infusion agents at one node (midazolam, propofol, pentobarbital, ketamine) with no single preferred one; the strip shows midazolam only, which is a selection the physician should review. The infusion rate is shown only in the drug store regimen, not in a quoted consult line."
+  }
+]

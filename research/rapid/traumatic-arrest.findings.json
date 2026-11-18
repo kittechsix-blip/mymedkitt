@@ -1,0 +1,37 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": ["ta-hott", "ta-penetrating-sol", "ta-blunt-sol", "ta-edt-indicated", "ta-blunt-consider"],
+    "text": "Most important: this consult is a parallel-task bundle plus a thoracotomy decision, not a single memorised sequence, and the nodes after the thoracotomy decision (airway, thoracostomy, hemorrhage, ROSC) are not reachable by following the consult's own pulseless path; the strip is a best-effort summary. One thoracotomy tile covers both mechanisms. Its face figure '<15 min CPR' and condition apply to penetrating thorax only (neck/extremity is <5 min, in the first line). The blunt rule is quoted below it: the 'highly selected' line, the heading 'Reasonable to consider when all are present:', the <10 minute CPR line and the surgeon/OR line, with the red box 'Avoid thoracotomy for blunt arrest without signs of life'. The blunt list on the strip is partial (witnessed arrest, signs of life and a correctable thoracic cause are not each quoted). Please check this one tile reads safely for both, or decide it should be two tiles (that would cost another tile)."
+  },
+  {
+    "kind": "gap",
+    "tileId": "hemorrhage",
+    "drugId": "tranexamic-acid",
+    "nodeIds": ["ta-hemorrhage"],
+    "text": "TXA ('if major hemorrhage and within 3 hours of injury per local protocol') is in the consult's hemorrhage node and the drug store HAS a dose entry 'Pelvic fracture / trauma hemorrhage' for tranexamic-acid, so under the rules it would be a drug tile. It is not on the strip only because all 7 tile slots are used; adding it means dropping or merging a tile, which is the physician's call. The store entry carries its own 3-hour limit. Calcium replacement during high-volume transfusion is also named in that node; the store's calcium entries are for hyperkalemia, hypocalcemia and HF burns, none for transfusion, so there is no matching entry."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": ["ta-recognize", "ta-periarrest", "ta-medical-arrest", "ta-mechanism", "ta-ultrasound", "ta-tor", "ta-pelvis-reboa", "ta-hemorrhage", "ta-edt-indicated", "ta-blunt-sol", "ta-penetrating-sol"],
+    "text": "Time-critical consult content NOT on the strip: (1) the peri-arrest traumatic shock pathway and the primary medical arrest pathway (the strip is the pulseless path only); (2) TXA with its 3-hour window and calcium replacement (see the TXA finding); (3) pregnancy: only the uterus/4-minute rule, displacement and mother-first are quoted, not 'Activate OB, trauma, anesthesia, neonatology' or 'Continue HOTT treatment simultaneously'; (4) thoracotomy: the goals (relieve tamponade, control hemorrhage, open cardiac massage, aortic cross-clamp), the 'potentially correctable thoracic cause' and 'witnessed arrest' criteria for blunt, and the 'no signs of life or prolonged CPR' branch to termination; (5) pelvic binder site (greater trochanters), packing open pelvic wounds, 'Avoid crystalloid-heavy resuscitation' is only a red box on the hemorrhage tile; (6) POCUS targets and 'Do not let ultrasound replace empiric bilateral decompression or indicated thoracotomy'; (7) termination and withholding criteria; (8) post-ROSC oxygenation/normocapnia, calcium, temperature, acidosis and coagulopathy correction; (9) thoracostomy: large hemothorax or massive air leak should trigger operative planning. All five critical actions are on the strip (nodes ta-hott, ta-edt-indicated, ta-blunt-sol, ta-rosc)."
+  },
+  {
+    "kind": "other",
+    "tileId": "airway",
+    "nodeIds": ["ta-airway"],
+    "text": "Tile order. The consult's own node chain is HOTT, mechanism, (pregnancy), thoracotomy decision, then airway, thoracostomy, hemorrhage, ROSC, which is the strip's order. But the hott node says all tasks run at once and the airway node says airway must not delay hemorrhage control, thoracostomy or thoracotomy, so a physician may want hemorrhage and thoracostomy before airway. The airway face was reworded so BVM is the default and intubation is conditional; the face condition names only hemorrhage, the full list (thoracostomy, thoracotomy) is in the red box. The critical-action list order differs only in not listing airway. Pregnancy applies to a subset only. Rapid-check also flags the later nodes as outside the traversal from the start node; that comes from the consult's structure, not from the strip."
+  },
+  {
+    "kind": "other",
+    "tileId": "hott",
+    "nodeIds": ["ta-hott"],
+    "text": "The HOTT tile quotes one line per task; the thoracotomy, thoracostomy and hemorrhage details repeat as their own tiles, so the strip says some things twice by design. The H/O/T/T letter headings are not quoted (face uses 'HOTT' as the consult does)."
+  },
+  {
+    "kind": "node-silent",
+    "tileId": "thoracotomy",
+    "nodeIds": ["ta-edt-indicated", "ta-penetrating-sol"],
+    "text": "The consult gives no CPR-time limit for penetrating abdominal, pelvic or groin arrest; only 'thorax generally <15 min' and 'neck/extremity generally <5 min'."
+  }
+]

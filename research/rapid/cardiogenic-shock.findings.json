@@ -1,0 +1,84 @@
+[
+  {
+    "kind": "other",
+    "nodeIds": [
+      "cs-crash",
+      "cs-pressors"
+    ],
+    "tileId": "push-dose",
+    "text": "Look first at the doses and at an internal contradiction. (a) The consult's crash node offers phenylephrine 100-200 mcg push-dose for pure vasodilation, while its pressor node says to avoid pure vasoconstrictors (phenylephrine, vasopressin) as monotherapy; the strip shows both (that warning now sits on the norepinephrine tile) and does not reconcile them. (b) The norepinephrine tile's figure is the drug store's 0.05-1 mcg/kg/min range, but the quoted consult line says start 5-10 mcg/min; at a glance the figure is not the consult's starting dose. Physician to decide which leads. Original note follows. The push-dose tile quotes the consult's epinephrine 10-20 mcg push and phenylephrine 100-200 mcg lines for a crashing patient; the drug store's only push-dose epinephrine entry is for anaphylaxis (peri-arrest), and the store has no cardiogenic-shock push-dose entry. Also, the consult's norepinephrine doses (5-10 mcg/min start, 5-30 mcg/min in the treatment box) are in mcg/min while the store's cardiogenic-shock entry is per kg per minute; the physician must decide which the strip should lead with. Nothing was reconciled. Note the strip's tile order follows the consult's flow (crash, cath lab, echo, lines, norepinephrine, dobutamine, MCS), not the critical-actions list order."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "cs-crash"
+    ],
+    "tileId": "push-dose",
+    "drugId": "epinephrine",
+    "text": "Drug store has no cardiogenic-shock push-dose entry for epinephrine (its push-dose entry is for anaphylaxis peri-arrest), so the consult's push-dose epinephrine line is shown as a steps tile."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "cs-crash"
+    ],
+    "tileId": "push-dose",
+    "drugId": "phenylephrine",
+    "text": "The consult offers phenylephrine push-dose for pure vasodilation as an alternative; shown as a quoted line on the push-dose steps tile, not checked against the drug store for this use."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "cs-pressors",
+      "cs-pressor-choice"
+    ],
+    "tileId": "dobutamine",
+    "drugId": "dobutamine",
+    "text": "The drug store's dobutamine entries are for septic shock inotrope and VAD RV failure; there is no cardiogenic-shock entry, so dobutamine is a steps tile quoting the consult. The consult's range (2.5-20 mcg/kg/min) is quoted, not store dosing. The dobutamine store entry also has no weight calculator for the septic entry."
+  },
+  {
+    "kind": "conflict",
+    "nodeIds": [
+      "cs-pressors",
+      "cs-pressor-choice"
+    ],
+    "tileId": "norepinephrine",
+    "drugId": "norepinephrine",
+    "text": "Consult and drug store disagree on norepinephrine: the consult starts 5-10 mcg/min (treatment box 5-30 mcg/min) and the store's cardiogenic-shock entry is 0.05-1 mcg/kg/min, with a statement not to escalate above 0.5 mcg/kg/min without inotrope or MCS escalation that the consult does not make. The store entry also holds other dose tokens in its regimen (adds dobutamine 2.5-10 mcg/kg/min, whereas the consult says 2.5-20). Not resolved. No weight calculator exists for this indication."
+  },
+  {
+    "kind": "node-silent",
+    "nodeIds": [
+      "cs-hemodynamics",
+      "cs-ami",
+      "cs-rv-failure",
+      "cs-cold-dry"
+    ],
+    "text": "The critical action 'Avoid fluid boluses if POCUS shows B-lines or hyperdynamic LV' is not stated in cs-hemodynamics (it lists B-lines only as a POCUS finding). The fluid cautions live elsewhere: cs-ami (excess fluids, they are NOT dry), cs-rv-failure (no aggressive fluids), cs-cold-dry (small 250 mL challenge only). The echo tile cites cs-hemodynamics only; the fluid caution is not on the strip."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": [
+      "cs-start",
+      "cs-ecmo",
+      "cs-mcs-decision",
+      "cs-initial-rx",
+      "cs-ami",
+      "cs-crash",
+      "cs-disposition",
+      "cs-mcs",
+      "cs-recognize",
+      "cs-etiology",
+      "cs-adhf",
+      "cs-rv-failure",
+      "cs-wet-dry",
+      "cs-cold-dry",
+      "cs-warm-wet",
+      "cs-optimization",
+      "cs-admit",
+      "cs-transfer",
+      "cs-cath"
+    ],
+    "text": "Time-critical content NOT on the strip. Critical actions left off: recognize the SHOCK spiral (cs-start); ICU admission for all patients (cs-disposition); MCS device options IABP, Impella, ECMO and the VA-ECMO indications (cs-mcs, cs-ecmo; the MCS tile quotes only the failure warning signs and 'do not wait'). Other omissions: the RV failure pathway (no aggressive fluids, small 250 mL boluses, no nitrates in RV MI, avoid milrinone); the cath-lab pre-medications (aspirin, P2Y12, heparin); milrinone and epinephrine as inotrope options; the wet/dry-warm/cold classification; intubation advice (ketamine, avoid propofol); transfer criteria; PA catheter and CPO. The cath tile cites cs-cath only for its title line. The SCAI D-E versus B-C fork at cs-recognize is a severity staging with the same drugs, so only one variant was made. Also left off: the crash node's 'Consider VA-ECMO if refractory to pressors' and 'If must intubate: ketamine + push-dose epi ready'; culprit-only PCI and consider MCS before or during PCI (cs-ami); the early-MCS indicators (lactate not clearing, SCAI C-D despite medical therapy, CPO <0.6 W, need for PCI but too unstable) in cs-mcs-decision; high-flow nasal cannula preferred over intubation, Foley, labs (cs-initial-rx). Tile order note: the cath-lab tile precedes the pressor tiles because cs-ami precedes cs-pressors in the flow, but cs-ami's own Critical Path lists stabilising hemodynamics (pressors/inotropes) first; physician to judge order. Physician to choose what else earns a tile."
+  }
+]

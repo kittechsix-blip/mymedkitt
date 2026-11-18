@@ -1,0 +1,40 @@
+[
+  {
+    "kind": "conflict",
+    "tileId": "lipid-bolus",
+    "drugId": "lipid-emulsion",
+    "nodeIds": ["ile-dosing-protocol", "ile-admin-details"],
+    "text": "Most important: the consult and the drug store disagree on how fast to give the bolus. The consult says over 2-3 minutes (lean body mass, push it); the drug store regimen for LAST says over 1 minute. Both show on the tile. Physician to decide which is right. Also the drug store regimen says infusion x 30-60 min, while the consult says continue at least 10-15 minutes after stability; and the store puts no weight basis (lean body mass) on the bolus while the consult does. Also: the store LAST regimen carries no maximum total dose, so the ~10 mL/kg in the first 30 minutes cap (consult) is not visible anywhere on this tile; a clinician reading only the strip has no stop limit. Physician to decide whether the cap deserves a tile line."
+  },
+  {
+    "kind": "gap",
+    "nodeIds": ["ile-indications-question", "ile-start", "ile-ccb", "ile-bb", "ile-tca", "ile-other", "ile-dosing-protocol", "ile-admin-details", "ile-endpoints", "ile-monitoring", "ile-last", "ile-dispo-stable", "ile-dispo-icu"],
+    "text": "Time-critical content NOT on the strip: the critical action naming LAST as best-evidence indication and the lipophilic-drug (BB/CCB/TCA) uses with their first-line-therapy-first conditions (the strip is LAST-only); the maximum dose of about 10 mL/kg in the first 30 minutes (and the stop-and-consider-ECMO line at that limit); the 0.25 mL/kg/min infusion lines (shown only via the drug store regimen); ASRA checklist items call for help, airway with 100% O2 and midazolam for seizures (avoid propofol initially); ASRA checklist item call for help and ILE; IV access (peripheral acceptable, do not delay for access) and large-syringe administration details; monitoring targets; recurrence-restart guidance; lab interference; disposition. The critical-action list order differs from consult flow (it starts with dosing); the strip follows the consult flow, with stopping the anesthetic first."
+  },
+  {
+    "kind": "gap",
+    "tileId": "small-epi",
+    "drugId": "epinephrine",
+    "nodeIds": ["ile-cpr-modifications"],
+    "text": "Epinephrine has no drug store entry for this reduced-dose use, so this is a steps tile with a dose figure (<1 mcg/kg). The consult gives both '<1 mcg/kg' and '10-100 mcg IV' in different lines; a physician should check the two agree."
+  },
+  {
+    "kind": "gap",
+    "tileId": "avoid-drugs",
+    "drugId": "vasopressin",
+    "nodeIds": ["ile-cpr-modifications"],
+    "text": "The vasopressin line is quoted from the consult; the drug store has no entry for this avoid-use. The consult also says to avoid propofol for seizures initially; that line (with a drug link) is not on the strip."
+  },
+  {
+    "kind": "other",
+    "nodeIds": ["ile-indications-question"],
+    "text": "This consult is a drug protocol with a LAST resuscitation core, not a pure memorised sequence. The strip is LAST-only; the indication question does not fork the resuscitation path (all indications go to the same dosing node), so one variant."
+  },
+  {
+    "kind": "missing-weightcalc",
+    "tileId": "lipid-bolus",
+    "drugId": "lipid-emulsion",
+    "nodeIds": ["ile-dosing-protocol"],
+    "text": "The store weight calculator covers only the 1.5 mL/kg bolus. The infusion (0.25 mL/kg/min, doubled to 0.5) and the ~10 mL/kg maximum have no weight calculator."
+  }
+]
