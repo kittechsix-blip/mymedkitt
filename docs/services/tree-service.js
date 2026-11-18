@@ -687,6 +687,10 @@ async function loadHardcodedFallback(treeId) {
             const m = await import('../data/trees/svt.js');
             return { nodes: m.SVT_NODES, entryNodeId: 'svt-start', categoryId: 'cardiology', moduleLabels: m.SVT_MODULE_LABELS, citations: m.SVT_CITATIONS, criticalActions: m.SVT_CRITICAL_ACTIONS };
         },
+        'surgical-complications': async () => {
+            const m = await import('../data/trees/surgical-complications.js');
+            return { nodes: m.SURGICAL_COMPLICATIONS_NODES, entryNodeId: 'sc-start', categoryId: 'trauma-surg', moduleLabels: m.SURGICAL_COMPLICATIONS_MODULE_LABELS, citations: m.SURGICAL_COMPLICATIONS_CITATIONS, criticalActions: m.SURGICAL_COMPLICATIONS_CRITICAL_ACTIONS };
+        },
         'gallbladder': async () => {
             const m = await import('../data/trees/gallbladder.js');
             return { nodes: m.GALLBLADDER_NODES, entryNodeId: 'gb-start', categoryId: 'gastroenterology', moduleLabels: m.GALLBLADDER_MODULE_LABELS, citations: m.GALLBLADDER_CITATIONS, criticalActions: m.GALLBLADDER_CRITICAL_ACTIONS };

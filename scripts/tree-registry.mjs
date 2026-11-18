@@ -342,6 +342,7 @@ export const TREE_REGISTRY = {
   'iih':              { prefix: 'IIH',                 entryNodeId: 'iih-start',          categoryId: 'neurology' },
   'chd-peds':         { prefix: 'CHD_PEDS',            entryNodeId: 'chd-start',          categoryId: 'pediatrics' },
   'misfits-peds':     { prefix: 'MISFITS_PEDS',        entryNodeId: 'misfits-start',      categoryId: 'pediatrics' },
+  'surgical-complications': { prefix: 'SURGICAL_COMPLICATIONS', entryNodeId: 'sc-start', categoryId: 'trauma-surg' },
   'gallbladder':      { prefix: 'GALLBLADDER',         entryNodeId: 'gb-start',           categoryId: 'gastroenterology' },
   'intussusception':  { prefix: 'INTUSSUSCEPTION',     entryNodeId: 'intuss-start',       categoryId: 'pediatrics' },
   'organic-vs-psych': { prefix: 'ORGANIC_PSYCH',       entryNodeId: 'ovp-start',           categoryId: 'neurology' },

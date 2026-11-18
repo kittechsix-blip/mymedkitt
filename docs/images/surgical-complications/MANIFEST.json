@@ -1,0 +1,159 @@
+{
+  "breast-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/breast-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.053643+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "ec25879d4ab39c67f695e371e81b412e79bb41195275b10baa20befce1b9f499",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "bypass-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/bypass-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.038266+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "497d9398f1a61957c63e11ae265b0997399212d368d4a39a4c0ab6033f384843",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "cabg-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/cabg-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.029334+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "0f790ce0695392012dadf0bbb46f2878f50f268e463bd91918cc78290a34fd4a",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "chole-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/chole-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T15:16:36.332095+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "f604e9af1dcd125e1111d74f627840fa1b243d1a187c5dfbc0b94d8703fce9d5",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "colectomy-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/colectomy-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.024726+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "7858272e7ecf1febe7746144264718577c69b4b7251a9846fdd113d0dfa62714",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "evar-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/evar-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.034885+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "63852911ed2d826be066d60186f520d6a3bdd28b6cedc4481c1427ec275d0201",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "hyst-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/hyst-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.049907+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "97ab97fe04a37542dbe3edba617a0f71f6a9bbaee9ebf8c5fe4adaeeebd676a9",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "ileostomy-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/ileostomy-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.026835+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "d8b0ed9934fc74500fbd5d651ec11b84384638cb7831bd0e7362efcfe6c93b16",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "savr-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/savr-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.032121+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "b1f170924c31a0dd99eaaf6b9c24befdbd1aa09e2e0f210b6448762c55957581",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "thyroid-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/thyroid-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.045915+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "dd05c030c1a0d5f9766faeb407459e737fed2cfca1db3175ffe8a767dd8e12bd",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "tonsil-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/tonsil-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.041887+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "304fd8ec01df808408ee6283d0b8c650a8bc0d3ba38043248a098d99b22b2c64",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "turp-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/turp-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.057424+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "def577e101a11c7d9c0915d2618f8ed741829f634f484ab94832a663778ffa6f",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "urs-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/urs-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T16:02:18.061794+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "22f6d269c21d33b0c3373bc1f12f71e6b52e53d10c88fd1c2094e327b3b05475",
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  },
+  "whipple-atlas.jpg": {
+    "origin": "AI-assisted original",
+    "author": "myMedKitt",
+    "source_url": "original://myMedKitt/surgical-complications/whipple-atlas",
+    "license_tag": "Author-permission",
+    "rights_note": "First-party AI-assisted illustration. Andy reviewed all plates and explicitly authorized publication to live myMedKitt on 2026-11-18.",
+    "retrieval_timestamp": "2026-11-18T15:44:43.974901+00:00",
+    "andy_approval_commit": "Complications review thread 01a1ef20-3631-7432-b9b1-f5df26c19746, 2026-11-18: approved live publication after reviewing every plate.",
+    "sha256": "8d32cf6324841c4b940501f7f9d60faf6966e23a2137ff986f35be52773f4f42",
+    "clinical_source_urls": [
+      "https://www.mskcc.org/cancer-care/patient-education/about-your-whipple-procedure"
+    ],
+    "license_evidence_url": "https://github.com/kittechsix-blip/mymedkitt/blob/main/docs/images/surgical-complications/MANIFEST.json"
+  }
+}
