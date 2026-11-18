@@ -23,7 +23,7 @@ export const STROKE_NODES: DecisionNode[] = [
       { id: 'nihss', label: 'NIHSS Calculator' },
       { id: 'stroke-syndrome-calculator', label: 'Syndrome Calculator' },
     ],
-    images: [{ src: 'images/stroke/stroke-ct-hemorrhage.jpg', alt: 'CT head showing intracerebral hemorrhage', caption: 'Hemorrhagic stroke on CT: hyperdense blood in cerebellum — MUST rule out before thrombolytics. IVtPA and EVT contraindicated if ICH present (Wikimedia Commons, CC BY-SA 4.0)' }],
+    images: [{ src: 'images/stroke/stroke-ct-hemorrhage.jpg', alt: 'CT head showing intracerebral hemorrhage', caption: 'Hemorrhagic stroke on CT: hyperdense blood in cerebellum — MUST rule out before thrombolytics. IVtPA and EVT contraindicated if ICH present Bobjgalindo, Wikimedia Commons, CC BY-SA 4.0 (link to the confirmed file page and licence; add to ATTRIBUTION.md)' }],
     next: 'stroke-deficit',
     summary: 'Establish last-known-well time, get NIHSS, fingerstick glucose — CT to rule out hemorrhage before thrombolytics',
     skippable: true,
